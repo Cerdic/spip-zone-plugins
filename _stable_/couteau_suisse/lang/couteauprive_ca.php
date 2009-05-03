@@ -38,7 +38,7 @@ _ Enlla&ccedil; de test: [->test@test.com] (recarregueu la p&agrave;gina complet
 	// B
 	'basique' => 'B&agrave;sic',
 	'blocs:aide' => 'Blocs Desplegables: <b>&lt;bloc&gt;&lt;/bloc&gt;</b> (&agrave;lies: <b>&lt;invisible&gt;&lt;/invisible&gt;</b>) i <b>&lt;visible&gt;&lt;/visible&gt;</b>',
-	'blocs:description' => '<MODIF>Us permet crear blocs que, amb el t&iacute;tol clicable, els pot tornar visibles o invisibles.
+	'blocs:description' => 'Us permet crear blocs que, amb el t&iacute;tol clicable, els pot tornar visibles o invisibles.
 
 @puce@ {{En els textos SPIP}}: els redactors tenen disponibles les noves etiquetes &lt;bloc&gt; (o &lt;invisible&gt;) i &lt;visible&gt; per utilitzar en el seus textos d\'aquesta manera: 
 
@@ -61,6 +61,8 @@ _ Enlla&ccedil; de test: [->test@test.com] (recarregueu la p&agrave;gina complet
  
 @puce@ Marcant amb una creu &laquo;si&raquo; m&eacute;s avall, l\'obertura d\'un bloc provocar&agrave; el tancament de tots els altres blocs de la p&agrave;gina, per tal de tenir-ne nom&eacute;s un d\'obert a la vegada.[[%bloc_unique%]]
 
+@puce@ Marcant amb una creu &laquo;si&raquo; m&eacute;s avall, l\'estat dels blocs enumerats ser&agrave; emmagatzemat a una galeta el temps de la sessi&oacute;, per tal de conservar l\'aspecte de la p&agrave;gina en cas de retorn.[[%blocs_cookie%]]
+
 @puce@ El Ganivet Su&iacute;s utilitza, per defecte, l\'etiqueta HTML &lt;h4&gt; pel t&iacute;tol dels blocs desplegables. Escolliu aqu&iacute; una altra etiqueta &lt;hN&gt;&nbsp;:[[%bloc_h4%]]',
 	'blocs:nom' => 'Blocs Desplegables',
 	'boites_privees:description' => 'Tots els quadres descrits m&eacute;s avall apareixen aqu&iacute; o a la part privada.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]][[->%qui_webmasters%]][[->%bp_urls_propres%]][[->%bp_tri_auteurs%]]
@@ -72,6 +74,8 @@ _ Enlla&ccedil; de test: [->test@test.com] (recarregueu la p&agrave;gina complet
 	'boites_privees:nom' => 'Requadres privats',
 	'bp_tri_auteurs' => 'Les classificacions d\'autors',
 	'bp_urls_propres' => 'Els URLs propis',
+	'brouteur:description' => 'Utilitzar el selector de secci&oacute; a AJAX a partir de %rubrique_brouteur% secci&oacute;(seccions)',
+	'brouteur:nom' => 'Regulaci&oacute; del selector de secci&oacute;',
 
 	// C
 	'cache_controle' => 'Control de la mem&ograve;ria cau',
@@ -87,8 +91,8 @@ _ Enlla&ccedil; de test: [->test@test.com] (recarregueu la p&agrave;gina complet
 	'categ:typo-racc' => '30. Dreceres tipogr&agrave;fiques',
 	'certaines_couleurs' => 'Nom&eacute;s les etiquetes definides m&eacute;s avall@_CS_ASTER@ :',
 	'chatons:aide' => 'Emoticones: @liste@',
-	'chatons:description' => '<MODIF>Insereix imatges (o emoticones pels {xats}) en tots els textos on apareix una cadena del tipus <code>:nom</code>.
-_ Aquesta eina substitueix aquestes dreceres per les imatges del mateix nom que troba a dins del directori  plugins/couteau_suisse/img/emoticones.',
+	'chatons:description' => 'Insereix imatges (o emoticones pels {xats}) en tots els textos on apareix una cadena del tipus <code>:nom</code>.
+_ Aquesta eina substitueix aquestes dreceres per les imatges del mateix nom que troba a dins de la vostra carpeta <code>mon_squelette_toto/img/chatons/</code>, o per defecte, la carpeta <code>couteau_suisse/img/chatons/</code>.',
 	'chatons:nom' => 'Emoticones',
 	'class_spip:description1' => 'Aqu&iacute; podeu definir algunes dreceres d\'SPIP. Un valor buit equival a utilitzar el valor per defecte.[[%racc_hr%]]',
 	'class_spip:description2' => '@puce@ {{Les dreceres d\'SPIP}}.
@@ -99,11 +103,15 @@ Aqu&iacute; podeu definir algunes dreceres d\'SPIP. Un valor buit equival a fer 
 {Atenci&oacute;: si l\'eina &laquo;&nbsp;[.->pucesli]&nbsp;&raquo; est&agrave; activada, la substituci&oacute; del guionet &laquo;&nbsp;-&nbsp;&raquo; no es far&agrave;; al seu lloc s\'utilitzar&agrave; una llista del tipus &lt;ul>&lt;li>.}
 
 SPIP utilitza habitualment l\'etiqueta &lt;h3&gt; pels subt&iacute;tols. Escolliu aqu&iacute; un altre empla&ccedil;ament:[[%racc_h1%]][[->%racc_h2%]]',
-	'class_spip:description4' => '<MODIF>
+	'class_spip:description4' => '
 
 SPIP ha escollit utilitzar l\'etiqueta &lt;strong> per transcriure les negretes. Per&ograve; &lt;b> tamb&eacute; hauria pogut anar b&eacute;, amb o sense estil. Vosaltres decidiu:[[%racc_g1%]][[->%racc_g2%]]
 
 SPIP ha escollit utilitzar l\'etiqueta &lt;i> per transcriure les it&agrave;liques. Per&ograve; &lt;em> tamb&eacute; hauria pogut anar b&eacute;, amb o sense estil. Vosaltres decidiu: [[%racc_i1%]][[->%racc_i2%]]
+
+ Podeu tamb&eacute; definir el codi obrint i tancant per les crides de notas a peu de p&agrave;gina (Atenci&oacute;! Les modificacions nom&eacute;s seran visibles a l\'espai p&uacute;blic: [[%ouvre_ref%]][[->%ferme_ref%]]
+ 
+ Podeu definir el codi obrint i tancant per les notes de peu de p&agrave;gina: [[%ouvre_note%]][[->%ferme_note%]]
 
 @puce@ {{Els estils d\'SPIP per defecte}}. Fins a la versi&oacute; 1.92 d\'SPIP, les dreceres tipogr&agrave;fiques produeixen etiquetes sistem&agrave;ticament vestides de l\'estil "spip". Per exemple: <code><p class="spip"></code>. Aqu&iacute; podeu definir l\'estil d\'aquestes etiquetes en funci&oacute; dels vostres fulls d\'estil. Una caixa buida significa que no s\'aplicar&agrave; cap estil en particular.
 
@@ -151,6 +159,7 @@ Dos exemples id&egrave;ntics per canviar el color del text:@_CS_EXEMPLE_COULEURS
 	'cs_distant_off' => 'Les verificacions de versions distants',
 	'cs_log_couteau_suisse' => 'Els logs detallats del Ganivet Su&iacute;s',
 	'cs_reset' => 'Est&agrave; segur de voler reinicialitzar totalment el Gavinet Su&iacute;s?',
+	'cs_reset2' => 'Totes les eines actives actualment seran desactivades i els seus par&agrave;metres reinicialitzats.',
 	'cs_spip_options_on' => 'Les opcions SPIP a &laquo;@_CS_FILE_OPTIONS@&raquo;',
 
 	// D
@@ -310,6 +319,7 @@ Atenci&oacute;, aquesta eina necessita per funcionar el plugin {jQuery}: {Round 
 	'label:balise_sommaire' => 'Activar l\'etiqueta #CS_SOMMAIRE :',
 	'label:bloc_h4' => 'Etiqueta pels t&iacute;tols:',
 	'label:bloc_unique' => 'Nom&eacute;s un bloc obert a la p&agrave;gina:',
+	'label:blocs_cookie' => 'Utilitzaci&oacute; de galetes:',
 	'label:couleurs_fonds' => 'Permetre els fons:',
 	'label:cs_rss' => 'Activar:',
 	'label:debut_urls_libres' => '<:label:debut_urls_propres:>',
@@ -328,7 +338,7 @@ Atenci&oacute;, aquesta eina necessita per funcionar el plugin {jQuery}: {Round 
 	'label:glossaire_js' => 'T&egrave;cnica utilitzada:',
 	'label:glossaire_limite' => 'N&uacute;mero m&agrave;xim d\'enlla&ccedil;os creats:',
 	'label:insertions' => 'Correccions autom&agrave;tiques:',
-	'label:jcorner_classes' => '<MODIF>Millorar les cantonades dels seg&uuml;ents selectors:',
+	'label:jcorner_classes' => 'Millorar les cantonades dels seg&uuml;ents selectors:',
 	'label:jcorner_plugin' => 'Instal&middot;lar el plugin {jQuery} seg&uuml;ent:',
 	'label:lgr_introduction' => 'Llargada del resum:',
 	'label:lgr_sommaire' => 'Llargada del sumari (9 a 99):',
@@ -342,6 +352,8 @@ Atenci&oacute;, aquesta eina necessita per funcionar el plugin {jQuery}: {Round 
 	'label:max_auteurs_page' => 'Autors per p&agrave;gina:',
 	'label:message_travaux' => 'El vostre missatge de manteniment:',
 	'label:moderation_admin' => 'Validar autom&agrave;ticament els missatges de: ',
+	'label:ouvre_note' => 'Obertura i tancament de les notes a peu de p&agrave;gina',
+	'label:ouvre_ref' => 'Obertura i tancament de les crides de les notes a peu de p&agrave;gina',
 	'label:paragrapher' => 'Sempre par&agrave;grafs:',
 	'label:prive_travaux' => 'Accessibilitat de l\'espai privat per:',
 	'label:puce' => 'Car&agrave;cter p&uacute;blic &laquo;<html>-</html>&raquo; :',
@@ -383,7 +395,7 @@ Atenci&oacute;, aquesta eina necessita per funcionar el plugin {jQuery}: {Round 
 	'label:webmestres' => 'Llista dels webmestres del lloc:',
 	'liens_en_clair:description' => 'Posa a la vostra disposici&oacute; el filtre: \'liens_en_clair\'. El vostre text cont&eacute; probablement enlla&ccedil;os que no s&oacute;n visibles durant la impressi&oacute;. Aquest filtre afegeix entre claud&agrave;tors el dest&iacute; de cada enlla&ccedil; clicable (enlla&ccedil;os externs o correus electr&ograve;nics). Atenci&oacute;: en mode impressi&oacute; (par&agrave;metre \'cs=print\' o \'page=print\' al url de la p&agrave;gina), aquesta funcionalitat s\'aplica autom&agrave;ticament.',
 	'liens_en_clair:nom' => 'Enlla&ccedil;os visibles',
-	'liens_orphelins:description' => '<MODIF>Aquesta eina t&eacute; dues funcions:
+	'liens_orphelins:description' => 'Aquesta eina t&eacute; dues funcions:
 
 @puce@ {{Enlla&ccedil;os correctes}}.
 
@@ -396,6 +408,7 @@ Substitueix sistem&agrave;ticament tots els URLs deixats en text pels usuaris (s
 Podeu escollir el tipus de substituci&oacute;:
 _ • {B&agrave;sic}: s&oacute;n substitu&iuml;ts els enlla&ccedil;os del tipus {<html>http://spip.net</html>} (tot protocol) o {<html>www.spip.net</html>}.
 _ • {Extens}: s&oacute;n substitu&iuml;ts a m&eacute;s els enlla&ccedil;os del tipus {<html>moi@spip.net</html>}, {<html>mailto:monmail</html>} o {<html>news:mesnews</html>}.
+[[%liens_orphelins%]]_ • {Par defecte): substituci&oacute; autom&agrave;tica d\'origen (a partir de la versi&oacute; 2.0 d\'SPIP).
 [[%liens_orphelins%]]',
 	'liens_orphelins:nom' => 'URLs bonics',
 
@@ -437,6 +450,7 @@ _ • {Extens}: s&oacute;n substitu&iuml;ts a m&eacute;s els enlla&ccedil;os del
 	'outils_cliquez' => 'Feu un clic sobre el nom de les eines que hi ha m&eacute;s amunt per mostrar aqu&iacute; la seva descripci&oacute;. ',
 	'outils_inactifs' => 'Eines inactives:',
 	'outils_liste' => 'Llista d\'eines del Ganivet Su&iacute;s',
+	'outils_non_parametrables' => 'No paarametrable:',
 	'outils_permuter_gras1' => 'Intercanviar les eines en negreta',
 	'outils_permuter_gras2' => 'Intercanviar les @nb@ eines en negreta?',
 	'outils_resetselection' => 'Reiniciar la selecci&oacute;',
@@ -594,12 +608,14 @@ Les propostes que hi han m&eacute;s avall estan basades en la funcionalitat SQL 
 	'tri_perso' => 'Tria SQL personalitzada, ORDER BY seguit de:',
 	'tri_publi' => 'Tria sobre la data de publicaci&oacute; (ORDER BY date DESC)',
 	'tri_titre' => 'Tria sobre el t&iacute;tol (ORDER BY 0+titre,titre)',
-	'trousse_balises:description' => '<MODIF>Eina en curs de desenvolupament. Us ofereix algunes etiquetes molt simples i pr&agrave;ctiques pels vostres esquelets.
+	'trousse_balises:description' => 'Eina en curs de desenvolupament. Us ofereix algunes etiquetes molt simples i pr&agrave;ctiques per millorar la llegibilitat dels vostres esquelets.
 
 @puce@ {{#BOLO}}: genere un text fals d\'uns 3000 car&agrave;cters ("bolo" ou "lorem ipsum") a l\'esquelet mentre el posem a punt. L\'argument opcional d\'aquesta funci&oacute; especifica la llargada que volem del text. Exemple: <code>#BOLO{300}</code>. Aquesta etiqueta accepta tots els filtres d\'SPIP. Exemple : <code>[(#BOLO|majuscules)]</code>.
 _ Tamb&eacute; teniu un model disponible pels vostres continguts: situeu <code><bolo300></code> a qualsevol zona del text (cap&ccedil;alera, descripci&oacute;, text, etc.) per obtenir 300 car&agrave;cters de text fals.
 
 @puce@ {{#MAINTENANT}} (o {{#NOW}}): torna simplement la data del moment, com: <code>#EVAL{date(\'Y-m-d H:i:s\')}</code>. L\'argument opcional d\'aquesta funci&oacute; especifica el format. Exemple : <code>#MAINTENANT{Y-m-d}</code>. Tal i com amb #DATE, personalitzeu la publicaci&oacute; gr&agrave;cies als filtres d\'SPIP. Exemple: <code>[(#MAINTENANT|affdate)]</code>.
+
+- {{#CHR<html>{XX}</html>}}: etiqueta equivalent a <code>#EVAL{"chr(XX)"}</code> i pr&agrave;ctica per codificar car&agrave;cters especials (el canvi de l&iacute;nia, per exemple) o dels car&agrave;cters reservats pel compilador d\'SPIP (els claud&agrave;tors o les claus).
 
 @puce@ {{#LESMOTS}}: ',
 	'trousse_balises:nom' => 'Joc d\'etiquetes',
@@ -717,7 +733,7 @@ Afegiu simplement <code><INCLURE{fond=fonds/visiteurs_connectes}></code> a les v
 	'votre_choix' => 'La vostre elecci&oacute;:',
 
 	// W
-	'webmestres:description' => '<MODIF>Un {{webmestre}} en el sentit d\'SPIP &eacute;s un {{administrador}} que t&eacute; acc&eacute;s a l\'espai FTP. Per defecte i a partir d\'SPIP 2.0, &eacute;s l\'administrador <code>id_auteur=1</code> del lloc. Els webmestres definitis aqu&iacute; tenen el privilegi de no estar obligats a passar pel FTP per validar les operacions sensibles del lloc, com l\'actualitzaci&oacute; de la base de dades o la restauraci&oacute; d\'un dump.
+	'webmestres:description' => 'Un {{webmestre}} en el sentit d\'SPIP &eacute;s un {{administrador}} que t&eacute; acc&eacute;s a l\'espai FTP. Per defecte i a partir d\'SPIP 2.0, &eacute;s l\'administrador <code>id_auteur=1</code> del lloc. Els webmestres definitis aqu&iacute; tenen el privilegi de no estar obligats a passar pel FTP per validar les operacions sensibles del lloc, com l\'actualitzaci&oacute; de la base de dades o la restauraci&oacute; d\'un dump.
 
 Webmestre(s) actual(s): {@_CS_LISTE_WEBMESTRES@}.
 _ Administrador(s) elegible(s): {@_CS_LISTE_ADMINS@}.

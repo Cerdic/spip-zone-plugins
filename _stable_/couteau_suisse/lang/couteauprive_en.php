@@ -38,7 +38,7 @@ _ Test link:[->test@test.com] (Reload the page to test.)[[%enveloppe_mails%]]',
 	// B
 	'basique' => 'Basic',
 	'blocs:aide' => 'Folding blocks: <b>&lt;bloc&gt;&lt;/bloc&gt;</b> (alias: <b>&lt;invisible&gt;&lt;/invisible&gt;</b>) and <b>&lt;visible&gt;&lt;/visible&gt;</b>',
-	'blocs:description' => '<MODIF>Allows you to create blocks which show/hide when you click on the title.
+	'blocs:description' => 'Allows you to create blocks which show/hide when you click on the title.
 
 @puce@ {{In SPIP texts}}: authors can use the tags &lt;bloc&gt; (or &lt;invisible&gt;) and &lt;visible&gt; in this way: 
 
@@ -61,6 +61,8 @@ _ Test link:[->test@test.com] (Reload the page to test.)[[%enveloppe_mails%]]',
 
 @puce@ If you tick "yes" below, opening one block will cause all other blocks on the page to close. i.e. only one block is open at a time.[[%bloc_unique%]]
 
+@puce@ If you tick "yes" below, the state of the numbered blocks will be kept in a session cookie, in order to maintain the page\'s appearance as long as the session lasts.[[%blocs_cookie%]]
+
 @puce@ By default, the Penknife uses the HTML tag &lt;h4&gt; for the titles of the collapsible blocks. You can specify another tag here &lt;hN&gt;:[[%bloc_h4%]]',
 	'blocs:nom' => 'Folding Blocks',
 	'boites_privees:description' => 'All the boxes described below appear somewhere in the editing area.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]][[->%qui_webmasters%]][[->%bp_urls_propres%]][[->%bp_tri_auteurs%]]
@@ -72,6 +74,8 @@ _ Test link:[->test@test.com] (Reload the page to test.)[[%enveloppe_mails%]]',
 	'boites_privees:nom' => 'Private boxes',
 	'bp_tri_auteurs' => 'Order of authors',
 	'bp_urls_propres' => 'See clean URLs',
+	'brouteur:description' => 'Use the AJAX section selector when there are more than %rubrique_brouteur% section(s)',
+	'brouteur:nom' => 'Configuration of the section selector',
 
 	// C
 	'cache_controle' => 'Cache control',
@@ -87,8 +91,8 @@ _ Test link:[->test@test.com] (Reload the page to test.)[[%enveloppe_mails%]]',
 	'categ:typo-racc' => '30. Typographical shortcuts',
 	'certaines_couleurs' => 'Only the tags defined below @_CS_ASTER@:',
 	'chatons:aide' => 'Smileys: @liste@',
-	'chatons:description' => '<MODIF>Replace <code>:name</code> with smiley images in the text.
-_ This tool will replace the shortcuts by the images of the same name found in the directory plugins/couteau_suisse/img/chatons.',
+	'chatons:description' => 'Replace <code>:name</code> with smiley images in the text.
+_ This tool will replace the shortcuts by the images of the same name found in the directory <code>mon_squelette_toto/img/chatons/</code>, or else, by default, in <code>couteau_suisse/img/chatons/</code>.',
 	'chatons:nom' => 'Smileys',
 	'class_spip:description1' => 'Here you can define some SPIP shortcuts. An empty value is equivalent to using the default.[[%racc_hr%]]',
 	'class_spip:description2' => '@puce@ {{SPIP shortcuts}}.
@@ -99,11 +103,15 @@ Here you can define some SPIP shortcuts. An empty value is equivalent to using t
 {N.B. If the tool "[.->pucesli]" is active, then the replacing of the hyphen "-" will no longer take place; a list &lt;ul>&lt;li> will be used instead.}
 
 SPIP normally uses the &lt;h3&gt; tag for subtitles. Here you can choose a different tag: [[%racc_h1%]][[->%racc_h2%]]',
-	'class_spip:description4' => '<MODIF>
+	'class_spip:description4' => '
 
 SPIP normally uses &lt;strong> for marking boldface type. But &lt;b> could also be used. You can choose: [[%racc_g1%]][[->%racc_g2%]]
 
 SPIP normally uses &lt;i> for marking italics. But &lt;em> could also be used. You can choose: [[%racc_i1%]][[->%racc_i2%]]
+
+ You can also define the code used to open and close the calls to footnotes (N.B. These changes will only be visible on the public site.): [[%ouvre_ref%]][[->%ferme_ref%]]
+ 
+ You can define the code used to open and close footnotes: [[%ouvre_note%]][[->%ferme_note%]]
 
 @puce@ {{SPIP styles}}. Up to version 1.92 of SPIP, typographical shortcuts produced HTML tags all marked with the class "spip". For exeample, <code><p class="spip"></code>. Here you can define the style of these tags to link them to your stylesheet. An empty box means that no particular style will be applied.
 
@@ -151,6 +159,7 @@ In the same way, to change the font if the following option allows:@_CS_EXEMPLE_
 	'cs_distant_off' => 'Checks of remote versions',
 	'cs_log_couteau_suisse' => 'Detailed logs of the Penknife',
 	'cs_reset' => 'Are you sure you wish to completely reset the Penknife?',
+	'cs_reset2' => 'All activated tools will be deactivated and their options reset.',
 	'cs_spip_options_on' => 'SPIP options in "@_CS_FILE_OPTIONS@"',
 
 	// D
@@ -310,6 +319,7 @@ N.B. This tool requires the {Round Corners} jQuery plugin in order to function. 
 	'label:balise_sommaire' => 'Activate the tag #CS_SOMMAIRE :',
 	'label:bloc_h4' => 'Tag for the titles:',
 	'label:bloc_unique' => 'Only one block open on the page:',
+	'label:blocs_cookie' => 'Cookie usage:',
 	'label:couleurs_fonds' => 'Allow backgrounds:',
 	'label:cs_rss' => 'Activate:',
 	'label:debut_urls_libres' => '<:label:debut_urls_propres:>',
@@ -328,7 +338,7 @@ N.B. This tool requires the {Round Corners} jQuery plugin in order to function. 
 	'label:glossaire_js' => 'Technique used:',
 	'label:glossaire_limite' => 'Maximum number of links created:',
 	'label:insertions' => 'Auto-correct:',
-	'label:jcorner_classes' => '<MODIF>Improve the corners of elements with the following CSS selectors',
+	'label:jcorner_classes' => 'Improve the corners of the following CSS selectors:',
 	'label:jcorner_plugin' => 'Install the following {jQuery} plugin:',
 	'label:lgr_introduction' => 'Length of summary:',
 	'label:lgr_sommaire' => 'Length of summary (9 to 99):',
@@ -342,6 +352,8 @@ N.B. This tool requires the {Round Corners} jQuery plugin in order to function. 
 	'label:max_auteurs_page' => 'Authors per page:',
 	'label:message_travaux' => 'Your maintenance message:',
 	'label:moderation_admin' => 'Automatically validate messages from:',
+	'label:ouvre_note' => 'Opening and closing markers of footnotes',
+	'label:ouvre_ref' => 'Opening and closing markers of footnote links',
 	'label:paragrapher' => 'Always insert paragraphs:',
 	'label:prive_travaux' => 'Access to the editing area for:',
 	'label:puce' => 'Public bullet &laquo;<html>-</html>&raquo;:',
@@ -383,19 +395,20 @@ N.B. This tool requires the {Round Corners} jQuery plugin in order to function. 
 	'label:webmestres' => 'List of the website managers:',
 	'liens_en_clair:description' => 'Makes the filter: \'liens_en_clair\' available to you. Your text probably contains hyperlinks which are not visible when the page is printed. This filter adds the link code between square brackets for every clickabel link (external links and email addresses). N.B: in printing mode (when using the parameter \'cs=print\' or \'page=print\' in the URL), this treatment is automatically applied.',
 	'liens_en_clair:nom' => 'Visible hyperlinks',
-	'liens_orphelins:description' => '<MODIF>This tool has two functions:
+	'liens_orphelins:description' => 'This tool has two functions:
 
 @puce@ {{Correct Links}}.
 
 In French texts, SPIP follows the rules of French typography and inserts a space before question and exclamation marks. This tool prevents this from happening in URLs.[[%liens_interrogation%]]
 
-@puce@ {{Orhan links}}.
+@puce@ {{Orphan links}}.
 
 Systematically replaces all URLs which authors have placed in texts (especially often in forums) and which are thus not clickable, by links in the SPIP format. For example, {<html>www.spip.net</html>} will be replaced by: [->www.spip.net].
 
 You can choose the manner of replacement:
 _ • {Basic}: links such as {<html>http://spip.net</html>} (whatever protocol) and {<html>www.spip.net</html>} are replaced.
 _ • {Extended}: additionally links such as these are also replaced:  {<html>me@spip.net</html>}, {<html>mailto:myaddress</html>} ou {<html>news:mynews</html>}.
+_ • {By default}: automatic replacement (from SPIP version 2.0).
 [[%liens_orphelins%]]',
 	'liens_orphelins:nom' => 'Fine URLs',
 
@@ -437,6 +450,7 @@ _ • {Extended}: additionally links such as these are also replaced:  {<html>me
 	'outils_cliquez' => 'Click the names of the tools above to show their description.',
 	'outils_inactifs' => 'Inactive tools:',
 	'outils_liste' => 'List of tools of the Penknife',
+	'outils_non_parametrables' => 'Cannot be configured:',
 	'outils_permuter_gras1' => 'Switch the tools in bold type',
 	'outils_permuter_gras2' => 'Switch the @nb@ tools in bold type?',
 	'outils_resetselection' => 'Reset the selection',
@@ -592,12 +606,14 @@ The options below use the SQL function \'ORDER BY\'. Only use the customised opt
 	'tri_perso' => 'Sort by customised SQL, ORDER BY:',
 	'tri_publi' => 'Sort by publication date (ORDER BY date DESC)',
 	'tri_titre' => 'Sort by title (ORDER BY 0+titre,titre)',
-	'trousse_balises:description' => '<MODIF>Tool in development. It offers a few simple tags for templates.
+	'trousse_balises:description' => 'Tool in development. It offers a few simple tags for templates.
 
 @puce@ {{#BOLO}}: generates a dummy text of about 3000 characters ("bolo" ou "lorem ipsum") for use with templates in development. An optional argument specifies the length of the text, e.g. <code>#BOLO{300}</code>. The tag accepts all SPIP\'s filters. For example, <code>[(#BOLO|majuscules)]</code>.
 _ It can also be used as a model in content. Place <code><bolo300></code> in any text zone in order to obtain 300 characters of dummy text.
 
 @puce@ {{#MAINTENANT}} (or {{#NOW}}): renders the current date, just like: <code>#EVAL{date(\'Y-m-d H:i:s\')}</code>. An optional argument specifies the format. For example, <code>#MAINTENANT{Y-m-d}</code>. As with <code>#DATE</code> the display can be customised using filters: <code>[(#MAINTENANT|affdate)]</code>.
+
+- {{#CHR<html>{XX}</html>}}: a tag equivalent to <code>#EVAL{"chr(XX)"}</code> which is useful for inserting special characters (such as a line feed) or characters which are reserved for special use by the SPIP compiler (e.g. square and curly brackets).
 
 @puce@ {{#LESMOTS}}: ',
 	'trousse_balises:nom' => 'Box of tags',
@@ -712,7 +728,7 @@ Simply add <code><INCLURE{fond=fonds/visiteurs_connectes}></code> in the templat
 	'votre_choix' => 'Your choice:',
 
 	// W
-	'webmestres:description' => '<MODIF>For SPIP, a {{webmaster}} means an {{administrator}} who has an FTP access to the site. By default, from SPIP 2.0 on, this is assumed to be the administrator whose <code>id_auteur=1</code>. Webmasters defined here have the privelege of no longer needing to use FTP to validate important actions on the site, such as upgrading the database format or restoring a backup.
+	'webmestres:description' => 'For SPIP, a {{webmaster}} means an {{administrator}} who has an FTP access to the site. By default, from SPIP 2.0 on, this is assumed to be the administrator whose <code>id_auteur=1</code>. Webmasters defined here have the privelege of no longer needing to use FTP to validate important actions on the site, such as upgrading the database format or restoring a backup.
 
 Current webmasters: {@_CS_LISTE_WEBMESTRES@}.
 _ Eligible administrators: {@_CS_LISTE_ADMINS@}.

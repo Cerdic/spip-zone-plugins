@@ -38,7 +38,7 @@ _ Enllaz de preba: [->test@test.com] (recarga la p&aacute;xina pa prebar).[[%env
 	// B
 	'basique' => 'B&aacute;sica',
 	'blocs:aide' => 'Bloques Desplegables: <b>&lt;bloc&gt;&lt;/bloc&gt;</b> (alias: <b>&lt;invisible&gt;&lt;/invisible&gt;</b>) y <b>&lt;visible&gt;&lt;/visible&gt;</b>',
-	'blocs:description' => '<MODIF>Te permite crear bloques que puen facese visibles o invisibles al calcar nel so t&iacute;tulu.
+	'blocs:description' => 'Te permite crear bloques que puen facese visibles o invisibles al calcar nel so t&iacute;tulu.
 
 @puce@ {{Nos testos SPIP}}: los redactores disponen de les nueves balices &lt;bloc&gt; (o &lt;invisible&gt;) y &lt;visible&gt; pa utilizar nos testos as&iacute;: 
 
@@ -46,7 +46,7 @@ _ Enllaz de preba: [->test@test.com] (recarga la p&aacute;xina pa prebar).[[%env
 <bloc>
  Un t&iacute;tulu nel que podr&aacute; calcase
  
- El testu a esconder/amosar, tres dos saltos de llinia...
+ El testu a anubrir/amosar, tres dos saltos de llinia...
  </bloc>
 </code></quote>
 
@@ -59,7 +59,9 @@ _ Enllaz de preba: [->test@test.com] (recarga la p&aacute;xina pa prebar).[[%env
  El mio bloque estenderexable (que contendr&aacute; la URL a la que apunta si fai falta)
  #BLOC_FIN</code></quote>
 
-@puce@ Si marques &laquo;si&raquo; embaxo, l\'apertura d\'un bloque provocar&aacute; que se pesllen tolos dem&aacute;s bloques de la p&aacute;xina, col env&iacute;s de nun tener m&aacute;s que uno solu abiertu a la vez.[[%bloc_unique%]]
+@puce@ Si marques &laquo;si&raquo; embaxo, l\'apertura d\'un bloque provocar&aacute; que se zarren tolos dem&aacute;s bloques de la p&aacute;xina, col env&iacute;s de nun tener m&aacute;s qu\'un solu abiertu a la vez.[[%bloc_unique%]]
+
+@puce@ si marques &laquo;s&iacute;&raquo; embaxo, l\'est&aacute;u de los bloques numberaos atroxarase nuna cookie demientres la sesion, pa conservar l\'aspeutu de la p&aacute;xina en casu de volver.[[%blocs_cookie%]]
 
 @puce@ La Navaya Suiza utiliza por omisi&oacute;n la etiqueta HTML &lt;h4&gt; pal t&iacute;tulu de los bloques estenderexables. Equ&iacute; pue escoyese otra etiqueta &lt;hN&gt;:&nbsp;[[%bloc_h4%]]',
 	'blocs:nom' => 'Bloques Desplegables',
@@ -73,6 +75,8 @@ _ Enllaz de preba: [->test@test.com] (recarga la p&aacute;xina pa prebar).[[%env
 	'boites_privees:nom' => 'Caxes privaes',
 	'bp_tri_auteurs' => 'Ordenaciones d\'autores',
 	'bp_urls_propres' => 'Les URLs propies',
+	'brouteur:description' => 'Utilizar el selector d\'estaya n\'AJAX a partir de %rubrique_brouteur% estaya(es)',
+	'brouteur:nom' => 'Axuste del selector d\'estaya',
 
 	// C
 	'cache_controle' => 'Control de la cach&eacute;',
@@ -88,8 +92,8 @@ _ Enllaz de preba: [->test@test.com] (recarga la p&aacute;xina pa prebar).[[%env
 	'categ:typo-racc' => '30. Atayos tipogr&aacute;ficos',
 	'certaines_couleurs' => 'S&oacute;lo les balices definies embaxo@_CS_ASTER@ :',
 	'chatons:aide' => 'Emoticonos: @liste@',
-	'chatons:description' => '<MODIF>Enxerta imaxes (o emoticonos pa los {chats}) en tolos testos nos que apaeza una cadena de tipu <code>:nome</code>.
-_ Esta ferramienta camuda esos atayos poles imaxes del mesmu nome que alcuentre nel direutoriu plugins/couteau_suisse/img/chatons.',
+	'chatons:description' => 'Inxerta imaxes (o emoticonos pa los {chats}) en tolos testos nos que apaeza una cadena de tipu <code>:nome</code>.
+_ Esta ferramienta camuda esos atayos poles imaxes del mesmu nome qu\'alcuentre nel direutoriu <code>mon_squelette_toto/img/chatons/</code> o, por omisi&oacute;n, nel direutoriu <code>couteau_suisse/img/chatons/</code>.',
 	'chatons:nom' => 'Emoticonos',
 	'class_spip:description1' => 'Equ&iacute; vas poder definir dellos atayos de SPIP. Un valor vac&iacute;u ye lo mesmo que utilizar el valor por omisi&oacute;n.[[%racc_hr%]]',
 	'class_spip:description2' => '@puce@ {{Los atayos de SPIP}}.
@@ -100,11 +104,15 @@ Equ&iacute; vas poder definir dellos atayos de SPIP. Un valor vac&iacute;u ye ig
 {Atenci&oacute;n: si la ferramienta &laquo;[.->pucesli]&raquo; ta activada, el remplazu del gui&oacute;n &laquo;&nbsp;-&nbsp;&raquo; nun s\'efeutua; nel so llugar se utilizar&aacute; una llista &lt;ul>&lt;li>.}
 
 SPIP utiliza habitualmente la etiqueta &lt;h3&gt; pa los intert&iacute;tulos. Escueye equ&iacute; otra si qui&eacute;s cambeala:[[%racc_h1%]][[->%racc_h2%]]',
-	'class_spip:description4' => '<MODIF>
+	'class_spip:description4' => '
 
 SPIP escueye utilizar la marca&lt;strong> pa trescribir les negrines. Pero &lt;b> podr&iacute;a convenir lo mesmo, con o ensin estilu. Como t&uacute; lo veas: [[%racc_g1%]][[->%racc_g2%]]
 
 SPIP escueye utilizar la marca &lt;i> pa trescribir les it&aacute;liques. Pero &lt;em> podr&iacute;a convenir lo mesmo, con o ensin estilu. Como t&uacute; lo veas: [[%racc_i1%]][[->%racc_i2%]]
+
+ Lo mesmo puedes definir el c&oacute;digu d\'apertura y zarre pa les llam&aacute;es a notes de pie de p&aacute;xina (&iexcl;Atenci&oacute;n! Les modificaciones nun van vese m&aacute;s que nel espaciu p&uacute;blicu.): [[%ouvre_ref%]][[->%ferme_ref%]]
+ 
+ Puedes definir el c&oacute;digu d\'apertura y zarre pa les notes de pie de p&aacute;xina: [[%ouvre_note%]][[->%ferme_note%]]
 
 @puce@ {{Los estilos por omisi&oacute;n de SPIP}}. Hasta la versi&oacute;n 1.92 de SPIP, los atayos tipogr&aacute;ficos produc&iacute;en balices col estilu "spip" conse&ntilde;&aacute;u por sistema. Por exemplu: <code><p class="spip"></code>. Equ&iacute; pues definir l\'estilu d\'estes balices en funci&oacute;n de les tos fueyes d\'estilu. Una caxa vac&iacute;a significa que nun va aplicase deng&uacute;n estilu en particular.
 
@@ -152,6 +160,7 @@ Idem pa camudar el fondu, si la opci&oacute;n d\'embaxo lo permite:@_CS_EXEMPLE_
 	'cs_distant_off' => 'Les comprebaciones de versiones distintes',
 	'cs_log_couteau_suisse' => 'Los rexistros detallaos de la Navaya Suiza',
 	'cs_reset' => '&iquest;Confirmes que qui&eacute;s reaniciar dafechu la Navaya Suiza?',
+	'cs_reset2' => 'Toles ferramientes actualmente actives van desactivase y van reaniciase sos par&aacute;metros.',
 	'cs_spip_options_on' => 'Les opciones de SPIP en &laquo;@_CS_FILE_OPTIONS@&raquo;',
 
 	// D
@@ -311,6 +320,7 @@ Atenci&oacute;n, esta ferramienta necesita pa funcionar el plugin {jQuery} : {Ro
 	'label:balise_sommaire' => 'Activar la baliza #CS_SOMMAIRE:',
 	'label:bloc_h4' => 'Etiqueta HTML pa los t&iacute;tulos:',
 	'label:bloc_unique' => 'Solo un bloque abiertu na p&aacute;xina:',
+	'label:blocs_cookie' => 'Utilizaci&oacute;n de cookies:',
 	'label:couleurs_fonds' => 'Permitir los fondos:',
 	'label:cs_rss' => 'Activar:',
 	'label:debut_urls_libres' => '<:label:debut_urls_propres:>',
@@ -329,7 +339,7 @@ Atenci&oacute;n, esta ferramienta necesita pa funcionar el plugin {jQuery} : {Ro
 	'label:glossaire_js' => 'T&eacute;unica utilizada:',
 	'label:glossaire_limite' => 'N&uacute;mberu m&aacute;simu d\'enllaces creaos:',
 	'label:insertions' => 'Correiciones autom&aacute;tiques:',
-	'label:jcorner_classes' => '<MODIF>Meyorar les esquines de les seleiciones siguientes:',
+	'label:jcorner_classes' => 'Meyorar los requexos de les seleiciones siguientes:',
 	'label:jcorner_plugin' => 'Instalar el plugin {jQuery} siguiente:',
 	'label:lgr_introduction' => 'Estensi&oacute;n del resume:',
 	'label:lgr_sommaire' => 'Estensi&oacute;n del sumariu (9 a 99):',
@@ -343,6 +353,8 @@ Atenci&oacute;n, esta ferramienta necesita pa funcionar el plugin {jQuery} : {Ro
 	'label:max_auteurs_page' => 'Autores por p&aacute;xina:',
 	'label:message_travaux' => 'El mensaxe de mantenimientu:',
 	'label:moderation_admin' => 'Validar autom&aacute;ticamente los mensaxes de los: ',
+	'label:ouvre_note' => 'Apertura y zarre de les notes de pie de p&aacute;xina',
+	'label:ouvre_ref' => 'Apertura y zarre de les llam&aacute;es a notes de pie de p&aacute;xina',
 	'label:paragrapher' => 'Facer p&aacute;rrafos siempre:',
 	'label:prive_travaux' => 'Accesibilid&aacute; de l\'espaciu priv&aacute;u por:',
 	'label:puce' => 'Marca p&uacute;blica &laquo;<html>-</html>&raquo;:',
@@ -384,11 +396,11 @@ Atenci&oacute;n, esta ferramienta necesita pa funcionar el plugin {jQuery} : {Ro
 	'label:webmestres' => 'Llista de los webmasters del sitiu:',
 	'liens_en_clair:description' => 'Ponte a disposici&oacute;n el filtru: \'liens_en_clair\'. El testu probablemente tien enllaces d\'hipertestu que nun son visibles al imprentar. Esti filtru amesta ente corchetes el dest&iacute;n de cada enllaz calcable (enllaces esternos o mails). Atenci&oacute;n: nel mou impresi&oacute;n (par&aacute;metru \'cs=print\' o \'page=print\' na URL de la p&aacute;xina), esti funcionamientu apl&iacute;case autom&aacute;ticamente.',
 	'liens_en_clair:nom' => 'Enllaces en claro',
-	'liens_orphelins:description' => '<MODIF>Esta ferramienta tien do funciones:
+	'liens_orphelins:description' => 'Esta ferramienta tien dos funciones:
 
 @puce@ {{Enllaces correutos}}.
 
-SPIP tien el vezu d\'enxertar un espaciu enantes de los signos d\'interrogaci&oacute;n o d\'esclamaci&oacute;n, como manda la tipograf&iacute;a francesa. Esta ferramienta protexe el signu d\'interrogaci&oacute;n nes URLs de los testos.[[%liens_interrogation%]]
+SPIP tien el vezu d\'inxertar un espaciu enantes de los signos d\'interrogaci&oacute;n o d\'esclamaci&oacute;n y camudar el gui&oacute;n doble en cuadr&aacute;u, como manda la tipograf&iacute;a francesa. Pero esto afeuta a les URL de los testos. Esta ferramienta permite protexeles.[[%liens_interrogation%]]
 
 @puce@ {{Enllaces g&uuml;&eacute;rfanos}}.
 
@@ -397,6 +409,7 @@ Camuda sistem&aacute;ticamente toles URLs puestes como testu polos usuarios (esp
 Pues escoyer el tipu de reemplazu:
 _ • {B&aacute;sicu}: cam&uacute;dense los enllaces del tipu {<html>http://spip.net</html>} (tolos protocolos) o {<html>www.spip.net</html>}.
 _ • {Estend&iacute;u} : cam&uacute;dense am&aacute;s los enllaces del tipu {<html>usuariu@spip.net</html>}, {<html>mailto:miomail</html>} o {<html>news:miosnews</html>}.
+_ • {Predetermin&aacute;u}: reemplazu autom&aacute;ticu d\'orixe (a partir de la versi&oacute;n 2.0 de SPIP).
 [[%liens_orphelins%]]',
 	'liens_orphelins:nom' => 'URLs guapes',
 
@@ -438,6 +451,7 @@ _ • {Estend&iacute;u} : cam&uacute;dense am&aacute;s los enllaces del tipu {<h
 	'outils_cliquez' => 'Calca nel nome de les ferramientes d\'embaxo pa amosar equ&iacute; la descripci&oacute;n.',
 	'outils_inactifs' => 'Ferramientes inactives:',
 	'outils_liste' => 'Llista de ferramientes de la Navaya Suiza',
+	'outils_non_parametrables' => 'Ensin variables:',
 	'outils_permuter_gras1' => 'Camudar les ferramientes en negrines',
 	'outils_permuter_gras2' => '&iquest;Camudar les @nb@ ferramientes en negrines?',
 	'outils_resetselection' => 'Reaniciar la seleici&oacute;n',
@@ -595,14 +609,16 @@ Les propuestes d\'embaxo b&aacute;sense na funci&oacute;n SQL \'ORDER BY\': nun 
 	'tri_perso' => 'Gueta SQL personalizada, ORDER BY sigu&iacute;o por:',
 	'tri_publi' => 'Guetar pola fecha d\'espublizamientu (ORDER BY date DESC)',
 	'tri_titre' => 'Guetar pol t&iacute;tulu (ORDER BY 0+titre,titre)',
-	'trousse_balises:description' => '<MODIF>Ferramienta en cursu de desendolcu. Ufre delles balices mui cencielles y enforma pr&aacute;ctiques pa les cadarmes.
+	'trousse_balises:description' => 'Ferramienta en cursu de desendolcu. Ufre delles balices mui cencielles y enforma pr&aacute;ctiques pa les cadarmes.
 
-@puce@ {{#BOLO}}: xenera un testu falsu d\'unos 3000 carauteres ("bolo" o "lorem ipsum") nes cadarmes enantes de poneles nel so llugar. L\'argumentu opcional d\'esta funci&oacute;n conse&ntilde;a el llargor que se quier pal testu. Exemplu: <code>#BOLO{300}</code>. Esta baliza acepta toles pe&ntilde;eres de SPIP. Exemplu: <code>[(#BOLO|majuscules)]</code>.
+@puce@ {{#BOLO}}: xenera un testu falsu d\'unos 3000 carauteres ("bolo" o "[?lorem ipsum]") nes cadarmes enantes de poneles nel so llugar. L\'argumentu opcional d\'esta funci&oacute;n conse&ntilde;a el llargor que se quier pal testu. Exemplu: <code>#BOLO{300}</code>. Esta baliza acepta toles pe&ntilde;eres de SPIP. Exemplu: <code>[(#BOLO|majuscules)]</code>.
 _ Tami&eacute;n hai disponible un modelu pa los conten&iacute;os: pon <code><bolo300></code> en cualquier zona de testu (cabecera, descripci&oacute;n, testu, etc.) pa tener 300 carauteres de testu falsu.
 
 @puce@ {{#MAINTENANT}} (o {{#NOW}}): devuelve simplemente la data del momentu, igual que: <code>#EVAL{date(\'Y-m-d H:i:s\')}</code>. L\'argumentu opcional d\'esta funci&oacute;n afita\'l formatu. Exemplu: <code>#MAINTENANT{Y-m-d}</code>. Como con #DATE, personaliza l\'aspeutu gracies a les pe&ntilde;eres de SPIP. Exemplu: <code>[(#MAINTENANT|affdate)]</code>.
 
-@puce@ {{#LESMOTS}} : ',
+- {{#CHR<html>{XX}</html>}}: baliza equivalente a <code>#EVAL{"chr(XX)"}</code> ye afayadiza pa conse&ntilde;ar carauteres especiales (el saltu de llinia por exemplu) o carauteres reservaoss pol compilador de SPIP (los corchetes o les llaves).
+
+@puce@ {{#LESMOTS}}: ',
 	'trousse_balises:nom' => 'Cax&oacute;n de balices',
 	'type_urls:description' => '@puce@ SPIP ufre una esbilla de xuegos d\'URLs pa fabricar los enllaces d\'accesu a les p&aacute;xines del sitiu Web.
 
@@ -718,7 +734,7 @@ Amesta-yos simplemente <code><INCLURE{fond=fonds/visiteurs_connectes}></code> a 
 	'votre_choix' => 'Seleici&oacute;n:',
 
 	// W
-	'webmestres:description' => '<MODIF>Un {{webmaster}} nel sen SPIP ye un {{alministrador}} que tien accesu a l\'espaciu FTP. Por omisi&oacute;n y a partir de SPIP 2.0, ye l’alministrador <code>id_auteur=1</code> del sitiu. Los webmasters conse&ntilde;&aacute;os equ&iacute; tienen el privilexu de nun tar oblig&aacute;os a pasar pol FTP pa validar les operaciones sensibles del sitiu, como poner al d&iacute;a la base de datos o la restauraci&oacute;n d’un volc&aacute;u.
+	'webmestres:description' => 'Un {{webmaster}} nel sen SPIP ye un {{alministrador}} que tien accesu a l\'espaciu FTP. Por omisi&oacute;n y dende SPIP 2.0, ye l’alministrador <code>id_auteur=1</code> del sitiu. Los webmasters conse&ntilde;&aacute;os equ&iacute;, tienen el privilexu de nun tar oblig&aacute;os a pasar pol FTP pa validar les operaciones sensibles del sitiu, como poner al d&iacute;a la base de datos o la restauraci&oacute;n d’un volc&aacute;u.
 
 Webmaster(s) actual(es): {@_CS_LISTE_WEBMESTRES@}.
 _ Alministrador(es) elexible(s): {@_CS_LISTE_ADMINS@}.
