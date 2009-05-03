@@ -32,7 +32,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'chainenombre' => '(besteht aus Buchstaben und/oder Zahlen)',
 	'champ_obligatoire' => 'Pflichtfeld',
 	'choisir_categories' => 'Bitte hier ausw&auml;hlen:',
-	'choisir_listes' => 'Unten w&auml;hlen Sie die den neuen Mitgliedern vorzuschlagenden Mailinglisten:',
 	'choisir_nouveau_password' => 'Klicken Sie auf den folgenden Link, um ein neues Passwort zu w&auml;hlen.',
 	'choisir_zones' => 'Bitte w&auml;hlen Sie die Bereiche, zu denen neue Mitglieder geh&ouml;ren sollen.',
 	'choix_domaine' => 'Bitte w&auml;hlen Sie ihre Domain',
@@ -55,7 +54,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'decembre' => 'Dezember',
 	'demande_password' => 'Ihr Passwort:',
 	'description_page' => 'Hier k&ouml;nnen Sie Ihre gespeicherten Einstellungen &uuml;berpr&uuml;fen.',
-	'deselect_listes' => '> alles abw&auml;hlen',
 	'divers' => 'Verschiedenes',
 	'domaine' => 'Domaine',
 	'domaines' => 'Domain',
@@ -70,7 +68,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'exp_divers' => 'Dieses Feld steht den Besuchern f&uuml;r Kommentare zur Verf&uuml;gung.',
 	'exp_domaines' => 'Zugang nur f&uuml;r bestimmte Domains gestatten',
 	'exp_domaines2' => 'Bitte folgen Sie beim Eintragen der Domains in die Datei inc/domaines.php dem Beispieleintrag.',
-	'exp_newsletter' => 'Bitte w&auml;hlen Sie hier die Mailing-Listen, die Sie beziehen m&ouml;chten.',
 	'exp_publication' => 'Genehmigung der Ver&ouml;ffentlichung der pers&ouml;nlichen Daten',
 	'exp_statut' => 'W&auml;hlen Sie den Status f&uuml;r neue Mitglieder',
 	'exp_statut_rel' => 'Das Feld enth&auml;lt einen anderen Status als den von SPIP, damit eine Institution eigene Berechtigungen vergeben kann.',
@@ -149,7 +146,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// N
 	'naissance' => 'Geburtstag',
 	'nettoyer_tables' => 'Tabellen aufr&auml;umen',
-	'newsletter' => 'Mailinglisten',
 	'nom' => 'Pseudonym',
 	'nom_explication' => 'Ihr Name oder Pseudonym',
 	'nom_famille' => 'Name',
@@ -160,7 +156,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// O
 	'octobre' => 'Oktober',
-	'optout' => 'Voreinstellung: K&auml;stchen nicht abgehakt  (Opt-Out)',
 
 	// P
 	'page_confirmation' => 'Seite zur Best&auml;tigung Ihrer Anmeldung',
@@ -195,7 +190,6 @@ um Ihre Zugangsdaten zu &auml;ndern.',
 
 	// S
 	'secteur' => 'Sektor',
-	'select_listes' => '(Sie k&ouml;nnen mehrere Bereiche ausw&auml;hlen, indem Sie die Umschalttaste festhalten.)',
 	'septembre' => 'September',
 	'sexe' => 'Anrede/Geschlecht',
 	'societe' => 'Firma / Verein ...',

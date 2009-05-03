@@ -11,14 +11,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'a_confirmer' => 'To be confirmed',
 	'accesrestreint' => 'Restricted access',
 	'aconfirmer' => 'To be confirmed',
-	'action_adherent' => '<MODIF>Member action',
+	'action_adherent' => '<MODIF><- Operations ->',
 	'activation_compte' => 'Activate your account',
 	'adherents' => 'Members',
 	'admin' => 'Admin',
 	'admin_modifier_auteur_supp' => 'Extra information',
 	'adresse' => 'Address',
 	'adresse_pro' => 'Professionnal address',
-	'ajouter_adherent' => '<MODIF>Add a member',
+	'ajouter_adherent' => 'Add a member',
 	'aout' => 'August',
 	'auteur' => 'Author',
 	'autre' => 'Other',
@@ -32,7 +32,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'chainenombre' => '(composed of letters and/or digits)',
 	'champ_obligatoire' => 'This field is required',
 	'choisir_categories' => 'Select them in the following list:',
-	'choisir_listes' => 'Choose the newsletters that will be offered to new members:',
 	'choisir_nouveau_password' => 'You will be able to choose a new password by clicking on the following link',
 	'choisir_zones' => 'Choose the areas to which new members will be assigned',
 	'choix_domaine' => 'Choose your domain',
@@ -41,6 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'code_postal_pro' => 'Postcode',
 	'commentaire' => 'Comments',
 	'compte_active' => 'Your account on @nom_site@',
+	'compte_efface' => 'Your account has been deleted.',
 	'conf_plugin' => 'Inscription2 settings',
 	'conf_plugin_page' => 'Saved settings of the Inscription2 plugin',
 	'configs' => 'Configurations',
@@ -55,13 +55,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'decembre' => 'December',
 	'demande_password' => 'Your password:',
 	'description_page' => 'Here you can check your saved settings',
-	'deselect_listes' => '> deselect all',
 	'divers' => 'any other business',
 	'domaine' => 'Domain',
 	'domaines' => 'Domain',
 
 	// E
 	'editer_adherent' => 'Edit member',
+	'effacement_auto_impossible' => 'The account cannot be traced automatically. Please contact us.',
 	'email' => 'Email',
 	'email_bonjour' => 'Hello @nom@,',
 	'email_obligatoire' => 'An email address is required',
@@ -70,7 +70,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'exp_divers' => 'Field which will be offered to the visitors with the name Comments',
 	'exp_domaines' => 'Restrict access to a predefined list of domains',
 	'exp_domaines2' => 'Please define your domains in the  inc/domaines.php file, following the example given.',
-	'exp_newsletter' => 'Choose the newsletters to wich you want to subscribe',
 	'exp_publication' => 'Authorization for publication of personal data',
 	'exp_statut' => 'Choose the status to be given to new members',
 	'exp_statut_rel' => 'This field is different from the SPIP status, this one is used for the internal control of an institution',
@@ -101,6 +100,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'general_infos' => 'General Information',
 	'geoloc' => 'Geographical positioning',
 	'geomap_obligatoire' => 'To use the geographical positioning data for people, you need to install the GoogleMapApi plugin',
+	'gerent' => 'Member',
 	'gestion_adherent' => 'Manage members',
 
 	// H
@@ -131,7 +131,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'latitude' => 'Latitude',
 	'legende' => 'Caption',
 	'lisez_mail' => 'An email has been just sent to the address provided. To activate your account please follow the instructions.',
-	'liste_adherents' => '<MODIF>List of members',
+	'liste_adherents' => '<MODIF>Show members',
 	'login' => 'Username (login)',
 	'longitude' => 'Longitude',
 
@@ -145,11 +145,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mobile' => 'Mobile',
 	'mobile_pro' => 'Work mobile',
 	'modif_pass_titre' => 'Change your password',
+	'mot_passe_reste_identique' => 'Your password has not been changed.',
 
 	// N
 	'naissance' => 'Date of birth',
 	'nettoyer_tables' => 'Clean the tables',
-	'newsletter' => 'Newsletters',
 	'nom' => 'Signature',
 	'nom_explication' => 'your name or nickname',
 	'nom_famille' => 'Family Name',
@@ -160,7 +160,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// O
 	'octobre' => 'October',
-	'optout' => 'Tick boxes unticked in advance (opt out)',
 
 	// P
 	'page_confirmation' => 'Confirmation of your registration',
@@ -192,7 +191,6 @@ You will receive and email telling you how to change your login.',
 
 	// S
 	'secteur' => 'Sector of activity',
-	'select_listes' => '(you may select a group by holding down the shift key)',
 	'septembre' => 'September',
 	'sexe' => 'Title',
 	'societe' => 'Company / Association ...',
@@ -210,25 +208,32 @@ You will receive and email telling you how to change your login.',
 	'telephone' => 'Phone',
 	'telephone_pro' => 'Work phone',
 	'texte' => 'Text',
-	'texte_email_confirmation' => '<MODIF>Your account has been activated. From now on you can access the site using your login.\\n
+	'texte_email_confirmation' => 'Your account has been activated. From now on you can access the site using your login.n
 
-Your login is&nbsp;: @login@
+Your login is: @login@
 and you have just chosen your password.
 
 Thank you for your trust
 
-The @nom_site@ Team',
-	'texte_email_inscription' => '<MODIF>You have asked to participate on @nom_site@. 
-You are about to finish your registration. You just need to click the link below to activate your account and choose your password.
+The @nom_site@ Team 
+@url_site@',
+	'texte_email_inscription' => 'You have asked to participate on @nom_site@. 
+You are about to finish your registration for @nom_site@. 
+
+You just need to click the link below to activate your account and choose your password.
 
 @link_activation@
 
-Your login is&nbsp;: @login@
-
-If you did not ask for this registration or do not want to take part in the site anymore, click the link below.\\n
-@link_suppresion@
 
 Thank you for your trust.
+
+The @nom_site@ Team 
+@url_site@
+
+If you did not ask for this registration or do not want to take part in the site anymore, click the link below.
+@link_suppresion@
+
+
 
 The @nom_site@ Team',
 	'titre_confirmation' => 'Confirmation',
@@ -244,6 +249,7 @@ The @nom_site@ Team',
 	'vos_contacts_personnels' => 'Your personal contacts',
 	'votre_adresse' => 'Your home address',
 	'votre_adresse_pro' => 'Your professionnal address',
+	'votre_mail' => 'Your email:',
 	'votre_nom_complet' => 'Your full name',
 	'votre_profil' => 'Your profile',
 

@@ -32,7 +32,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'chainenombre' => '(composta de letras e/ou cifras)',
 	'champ_obligatoire' => 'Este campo &eacute; obrigado',
 	'choisir_categories' => 'Escolla a seguir:',
-	'choisir_listes' => 'Escolla a seguir as listas de distribuci&oacute;n que se propor&aacute;n aos novos adherentes: ',
 	'choisir_nouveau_password' => 'Pode escoller un novo contrasinal premendo a ligaz&oacute;n seguinte',
 	'choisir_zones' => 'Escolla as zonas &aacute;s que os novos adherentes ser&aacute;n afectados',
 	'choix_domaine' => 'Escolla o seu dominio',
@@ -55,7 +54,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'decembre' => 'decembro',
 	'demande_password' => 'O seu contrasinal:',
 	'description_page' => 'Aqu&iacute; pode comprobar as s&uacute;as elecci&oacute;ns de configuraci&oacute;n tal e como est&aacute; gardada',
-	'deselect_listes' => 'Deseleccionar todo',
 	'divers' => 'Diversos',
 	'domaine' => 'Dominio',
 	'domaines' => 'Dominio',
@@ -70,7 +68,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'exp_divers' => 'Campo que ser&aacute; proposto aos visitantes co nome de comentario',
 	'exp_domaines' => 'Restrinxir o acceso a unha lista predefinida de dominios',
 	'exp_domaines2' => 'Quere definir os dominios no ficheiro inc/domaines.php seguindo o modelo.',
-	'exp_newsletter' => 'Escolla a seguir as listas de distribuci&oacute;n &aacute;s cales se quere subscribir',
 	'exp_publication' => 'Autorizaci&oacute;n para publicaci&oacute;n de datos persoais',
 	'exp_statut' => 'Escolla o estatuto que quere atribu&iacute;rlles aos novos adherentes',
 	'exp_statut_rel' => 'Campo diferente ao do estatuto de SPIP, este serve para o control interno dunha instituci&oacute;n',
@@ -149,7 +146,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// N
 	'naissance' => 'Data de nacemento',
 	'nettoyer_tables' => 'Limpar as t&aacute;boas',
-	'newsletter' => 'Listas de distribuci&oacute;n',
 	'nom' => 'Sinatura',
 	'nom_explication' => 'O seu nome ou alcume',
 	'nom_famille' => 'Apelido',
@@ -160,7 +156,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// O
 	'octobre' => 'outubro',
-	'optout' => 'Caixas de elecci&oacute;n non premarcadas (optout)',
 
 	// P
 	'page_confirmation' => 'P&aacute;xina de confirmaci&oacute;n da s&uacute;a inscrici&oacute;n',
@@ -193,7 +188,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'secteur' => 'Sector',
-	'select_listes' => '(pode seleccionar varios sectores coa tecla Mai&uacute;s)',
 	'septembre' => 'setembro',
 	'sexe' => 'Estado civil',
 	'societe' => 'Sociedade / Asociaci&oacute;n ...',

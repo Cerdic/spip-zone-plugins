@@ -32,7 +32,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'chainenombre' => '<NEW>(compos&eacute;e de lettres et/ou de chiffres)',
 	'champ_obligatoire' => '<NEW>Ce champ est obligatoire',
 	'choisir_categories' => 'Elijalas en la siguiente lista:',
-	'choisir_listes' => 'Elija las listas de difusion (Spip-listes) que seran propuestas a los nuevos adherentes del sitio: ',
 	'choisir_nouveau_password' => '<NEW>Vous pourrez choisir un nouveau mot de passe en cliquant le lien suivant',
 	'choisir_zones' => 'Elija las zonas a las que ser&aacute;n afectados los nuevos adherentes del sitio',
 	'choix_domaine' => 'Elija su dominio',
@@ -55,7 +54,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'decembre' => 'Diciembre',
 	'demande_password' => '<NEW>Votre mot de passe&nbsp;:',
 	'description_page' => 'En esta p&aacute;gina usted puede verificar la configuraci&oacute;n del plugin tal como est&aacute; guardada en la base de datos',
-	'deselect_listes' => '> deseleccionar todo',
 	'divers' => 'Varios',
 	'domaine' => 'Dominio',
 	'domaines' => 'Restringir las inscripciones a ciertos dominios',
@@ -70,7 +68,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'exp_divers' => 'Campo que sera propuesto con el nombre de comentario',
 	'exp_domaines' => 'Defina sus dominios en el archivo inc/dominios.php siguiendo el modelo',
 	'exp_domaines2' => '<NEW>Veuillez d&eacute;finir vos domaines dans le fichier inc/domaines.php en suivant le mod&egrave;le.',
-	'exp_newsletter' => 'Elija las listas de difusi&oacute;n a las que se quiere abonar',
 	'exp_publication' => 'Autorisaci&oacute;n de publicaci&oacute;n de los datos personales en un eventual anuario',
 	'exp_statut' => '<NEW>Choisissez le statut que vous voulez attribuer aux nouveaux adh&eacute;rents',
 	'exp_statut_rel' => 'Campo diferente del \'statut\' de SPIP_auteurs, este sirve para el control interno de una instituci&oacute;n',
@@ -149,7 +146,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// N
 	'naissance' => 'Fecha de nacimiento',
 	'nettoyer_tables' => '<NEW>Nettoyer tables',
-	'newsletter' => 'Listas de difusi&oacute;n',
 	'nom' => '<MODIF>Pseudo',
 	'nom_explication' => '<NEW>votre nom ou votre&nbsp;pseudo',
 	'nom_famille' => 'Apellido',
@@ -160,7 +156,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// O
 	'octobre' => 'Octubre',
-	'optout' => 'Cases &agrave; coch&#233;es non pr&#233;coch&#233;es (optout)',
 
 	// P
 	'page_confirmation' => '<NEW>Page de confirmation de votre inscription',
@@ -194,7 +189,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'secteur' => 'Sector',
-	'select_listes' => '(puede seleccionar varias presionando la tecla shift)',
 	'septembre' => 'Septiembre',
 	'sexe' => 'Sexo',
 	'societe' => 'Sociedad',

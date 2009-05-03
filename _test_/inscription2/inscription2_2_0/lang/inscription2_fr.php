@@ -22,7 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'auteur' => 'Auteur',
 	'autre' => 'Autre',
 	'avril' => 'avril',
-	
+
 	// B
 	'bio' => 'Biographie',
 
@@ -56,11 +56,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// D
 	'decembre' => 'd&eacute;cembre',
 	'demande_password' => 'Votre mot de passe&nbsp;:',
+	'description_cfg' => 'Ce plugin permet d\'&eacute;tendre les informations sur les auteurs sur votre site, vous pouvez choisir ici les champs suppl&eacute;mentaires',
 	'description_page' => 'Ici vous pouvez v&eacute;rifier vos choix de configuration tels qu\'ils sont stock&eacute;s',
 	'divers' => 'Divers',
 	'domaine' => 'Domaine',
 	'domaines' => 'Domaine',
-	'description_cfg' => 'Ce plugin permet d\'&eacute;tendre les informations sur les auteurs sur votre site, vous pouvez choisir ici les champs suppl&eacute;mentaires',
 
 	// E
 	'editer_adherent' => '&Eacute;diter adh&eacute;rent',
@@ -184,8 +184,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'password_retaper' => 'Confirmez le mot de passe',
 	'pays' => 'Pays',
 	'pays_pro' => 'Pays (Pro.)',
-	'prenom' => 'Pr&eacute;nom',
 	'pgp' => 'Cl&eacute; PGP',
+	'prenom' => 'Pr&eacute;nom',
 	'probleme_email' => 'Probl&egrave;me de mail&nbsp;: l\'email d\'activation ne peut pas &ecirc;tre envoy&eacute;.',
 	'profession' => 'Profession',
 	'profil_droits_insuffisants' => 'Desol&eacute; vous n\'avez pas le droit de modifier cet auteur<br/>',
@@ -196,10 +196,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'raccourcis' => 'Raccourcis',
 	'rappel_login' => 'Rappel : votre identifiant est : ',
 	'rappel_password' => 'Votre mot de passe',
-	'redemande_password' => 'R&eacute;inserez votre mot de passe&nbsp;:',
 	'recherche_case' => 'Champs de la recherche',
 	'recherche_utilisateurs' => 'Recherche dans les utilisateurs',
 	'recherche_valeur' => 'Contenu recherch&eacute;',
+	'redemande_password' => 'R&eacute;inserez votre mot de passe&nbsp;:',
 	'rien_a_faire' => 'Rien &agrave; faire',
 
 	// S

@@ -11,14 +11,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'a_confirmer' => 'Por confirmar',
 	'accesrestreint' => 'Accesu Torg&aacute;u',
 	'aconfirmer' => 'Por confirmar',
-	'action_adherent' => '<MODIF>Aici&oacute;n d\'asoci&aacute;u',
+	'action_adherent' => '<MODIF><- Operaciones ->',
 	'activation_compte' => 'Activa la to cuenta',
 	'adherents' => 'Asociaos',
 	'admin' => 'Almin',
 	'admin_modifier_auteur_supp' => 'Informaci&oacute;n suplementaria',
 	'adresse' => 'Se&ntilde;es',
 	'adresse_pro' => 'Se&ntilde;es profesionales (Pro.)',
-	'ajouter_adherent' => '<MODIF>Amestar asoci&aacute;u',
+	'ajouter_adherent' => 'Crear <br />un visitante nuevu',
 	'aout' => 'agostu',
 	'auteur' => 'Autor',
 	'autre' => 'Otru',
@@ -32,7 +32,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'chainenombre' => '(compuesta por lletres y/o n&uacute;mberos)',
 	'champ_obligatoire' => 'Esti campu ye obligatoriu',
 	'choisir_categories' => 'Esb&iacute;llales embaxo:',
-	'choisir_listes' => 'Esbilla embaxo les llistes de distribuci&oacute;n a ofrecer a los nuevos asociaos: ',
 	'choisir_nouveau_password' => 'Pues escoyer una clave nueva calcando nel enllaz siguiente',
 	'choisir_zones' => 'Tienes qu\'escoyer les zones a les que quies que s\'amesten los nuevos asociaos',
 	'choix_domaine' => 'Tienes qu\'escoyer el to dominiu',
@@ -41,6 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'code_postal_pro' => 'C&oacute;digu Postal (Pro.)',
 	'commentaire' => 'Comentariu',
 	'compte_active' => 'La to cuenta en @nom_site@',
+	'compte_efface' => 'To cuenta esborrose.',
 	'conf_plugin' => 'Configuraci&oacute;n d\'Inscription2',
 	'conf_plugin_page' => 'Configuraci&oacute;n guardada del plugin Inscription2',
 	'configs' => 'Configuraciones',
@@ -55,13 +55,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'decembre' => 'avientu',
 	'demande_password' => 'La to clave:',
 	'description_page' => 'Equ&iacute; pues verificar los valores de configuraci&oacute;n tal como tan guardaos',
-	'deselect_listes' => '> deseleicionalo too',
 	'divers' => 'Diversos',
 	'domaine' => 'Dominiu',
 	'domaines' => 'Dominiu',
 
 	// E
 	'editer_adherent' => 'Editar asoci&aacute;u',
+	'effacement_auto_impossible' => 'La cuenta nun puede esborrase autom&aacute;ticamente, contauta non nos.',
 	'email' => 'E-Mail',
 	'email_bonjour' => 'Bones @nom@,',
 	'email_obligatoire' => 'El campu email ye obligatoriu',
@@ -70,7 +70,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'exp_divers' => 'Campu que va ofrecese a les visites col nome de comentariu',
 	'exp_domaines' => 'Llendar l\'accesu a una llista predefinida de dominios',
 	'exp_domaines2' => 'Tienes que definir los dominios nel ficheru inc/domaines.php siguiendo el modelu.',
-	'exp_newsletter' => 'Esbilla equ&iacute; embaxo les llistes de difusi&oacute;n a les que quies abonate',
 	'exp_publication' => 'Autorizaci&oacute;n pa espublizar los datos personales',
 	'exp_statut' => 'Escueye l\'estatutu que quies da-yos a los asociaos nuevos',
 	'exp_statut_rel' => 'Campu diferente del estatutu de SPIP, esti sirve pa llevar el control internu d\'una instituci&oacute;n',
@@ -101,6 +100,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'general_infos' => 'Informaci&oacute;n Xeneral',
 	'geoloc' => 'Xeoallugamientu',
 	'geomap_obligatoire' => 'Pa utilizar los datos de xeoallugamientu de les persones, ye necesario instalar el plugin GoogleMapApi...',
+	'gerent' => 'Asoci&aacute;u',
 	'gestion_adherent' => 'Xesti&oacute;n d\'asociaos',
 
 	// H
@@ -131,7 +131,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'latitude' => 'Llatit&uacute;',
 	'legende' => 'Lleenda',
 	'lisez_mail' => 'Vi&eacute;n d\'unviase un email a les se&ntilde;es qu\'apurriste. Pa activar la to cuenta has de siguir les instrucciones.',
-	'liste_adherents' => '<MODIF>Llista d\'asociaos',
+	'liste_adherents' => '<MODIF>Amosar les visites',
 	'login' => 'Nome d\'usuariu (login)',
 	'longitude' => 'Llonxit&uacute;',
 
@@ -145,11 +145,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mobile' => 'M&oacute;vil',
 	'mobile_pro' => 'M&oacute;vil profesional',
 	'modif_pass_titre' => 'Camudar la to clave',
+	'mot_passe_reste_identique' => 'La to clave nun camud&oacute;.',
 
 	// N
 	'naissance' => 'Fecha de nacimientu',
 	'nettoyer_tables' => 'Llimpiar tables',
-	'newsletter' => 'Llistes de difusi&oacute;n',
 	'nom' => 'Alcu&ntilde;u',
 	'nom_explication' => 'el to nome o nomatu',
 	'nom_famille' => 'Apell&iacute;os',
@@ -160,7 +160,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// O
 	'octobre' => 'ochobre',
-	'optout' => 'Cuadros de marca ensin premarcar (optout)',
 
 	// P
 	'page_confirmation' => 'P&aacute;xina de confirmaci&oacute;n de la inscripci&oacute;n',
@@ -194,7 +193,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'secteur' => 'Sector',
-	'select_listes' => '(pues seleicionar dellos sectores calcando la tecla may&uacute;scules)',
 	'septembre' => 'setiembre',
 	'sexe' => 'Tratamientu',
 	'societe' => 'Socied&aacute; / Asociaci&oacute;n ...',
@@ -212,28 +210,33 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'telephone' => 'Tel&eacute;fonu',
 	'telephone_pro' => 'Tel&eacute;fonu profesional',
 	'texte' => 'Testu',
-	'texte_email_confirmation' => '<MODIF>La to ccuenta ta activa, darr&eacute;u pues coneutate al sitiu usando la to identificaci&oacute;n personal.
+	'texte_email_confirmation' => 'La to cuenta ta activa, darr&eacute;u puedes coneutate al sitiu usando la to identificaci&oacute;n personal.
 
 El nome d\'usuariu ye: @login@
 y vienes d\'escoyer la to clave.
 
 Gracies pola confianza
 
-L\'equipu de @nom_site@',
-	'texte_email_inscription' => '<MODIF>Vienes de pidir participar nel nuestru sitiu @nom_site@. 
-Agora tas a puntu de finar la to inscripci&oacute;n. Val que calques nel enllaz d\'embaxo p\'activar la to cuenta y escoyer to clave.
+L\'equipu de @nom_site@ 
+@url_site@',
+	'texte_email_inscription' => 'Tas a piques de confirmar la to inscripci&oacute;n nel sitiu @nom_site@. 
+
+Calca nel enllaz d\'embaxo p\'activar la to cuenta y escoyer to clave.
 
 @link_activation@
 
-El nome d\'usuariu ye: @login@
-
-Si nun pidiste esta inscripci&oacute;n o y&aacute; nun quies ser parte del nuestru sitiu, calca nel enllaz d\'embaxo.
-
-@link_suppresion@
 
 Gracies pola to confianza.
 
-L\'equipu de @nom_site@',
+L\'equipu de @nom_site@.
+@url_site@
+
+Si nun pidiste esta inscripci&oacute;n o si y&aacute; nun quies formar parte del nuestru sitiu, calca nel enllaz d\'embaxo.
+
+@link_suppresion@
+
+
+',
 	'titre_confirmation' => 'Confirmaci&oacute;n',
 
 	// U
@@ -247,6 +250,7 @@ L\'equipu de @nom_site@',
 	'vos_contacts_personnels' => 'Tos contautos personales',
 	'votre_adresse' => 'Les tos se&ntilde;es personales',
 	'votre_adresse_pro' => 'Les tos se&ntilde;es (profesionales)',
+	'votre_mail' => 'Tos se&ntilde;es de corr&eacute;u:',
 	'votre_nom_complet' => 'El to nome completu',
 	'votre_profil' => 'El to perfil',
 
