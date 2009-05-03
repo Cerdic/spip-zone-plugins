@@ -227,7 +227,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forum_ouvrir' => 'Open this Forum',
 	'forums_categories' => 'Miscellaneous',
 	'forums_spipbb' => 'SpipBB forums',
-	'forums_titre' => '<MODIF>My first forum',
+	'forums_titre' => 'My first forum',
 	'fromphpbb_erreur_db_phpbb_config' => 'Impossible to read config value in phpBB database',
 	'fromphpbb_migre_categories' => 'Categories migration',
 	'fromphpbb_migre_categories_dans_rub_dpt' => 'Implanting the forums into the sector:',
@@ -329,7 +329,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
  -* when an article-forum uses this keyword, only moderators can post messages.
  -* when a forum topic is closed, only the moderators will be able to post messages.',
 	'mot_groupe_moderation' => 'Keywords group used for SpipBB moderation',
-	'mot_postit' => '<MODIF>Post-it
+	'mot_postit' => 'Post-it
  _ A post-it is placed underneath announcements, before ordinary messages. It only appears once in the list.',
 
 	// N

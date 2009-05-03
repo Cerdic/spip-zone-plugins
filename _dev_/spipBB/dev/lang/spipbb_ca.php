@@ -227,7 +227,7 @@ Consulteu la [documentaci&oacute; a Spip-Contrib->http://www.spip-contrib.net/Sp
 	'forum_ouvrir' => 'Obrir aquest F&ograve;rum',
 	'forums_categories' => 'Divers',
 	'forums_spipbb' => 'F&ograve;rums SpipBB',
-	'forums_titre' => '<MODIF>El meu primer f&ograve;rum creat',
+	'forums_titre' => 'El meu primer f&ograve;rum creat',
 	'fromphpbb_erreur_db_phpbb_config' => 'Impossible llegir la configuraci&oacute; a la base phpBB',
 	'fromphpbb_migre_categories' => 'Importar categories',
 	'fromphpbb_migre_categories_dans_rub_dpt' => 'Implantar f&ograve;rums a la secci&oacute;:',
@@ -329,7 +329,7 @@ _ Un av&iacute;s est&agrave; situat a sobre del f&ograve;rum a totes les p&agrav
 -* Quan un article-f&ograve;rum t&eacute; la seva paraula clau, nom&eacute;s els moderadors poden afegir-hi missatges.
 -* Quan un assumpte del f&ograve;rum est&agrave; tancat, nom&eacute;s els moderadors poden afegir-hi respostes.',
 	'mot_groupe_moderation' => 'Grup de paraules clau utilitzat per la moderaci&oacute; d\'SpipBB',
-	'mot_postit' => '<MODIF>Post-it
+	'mot_postit' => 'Post-it
 _ Un post-it est&agrave; situat a sota dels anuncis, abans dels missatges ordinaris. Apareix nom&eacute;s una vegada a la llista.',
 
 	// N
