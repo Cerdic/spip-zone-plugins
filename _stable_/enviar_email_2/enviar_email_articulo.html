@@ -182,7 +182,7 @@ $texto_html .="<div style='margin:1.2em;background: #fff;font-family:\'Trebuchet
 	if (!$_POST["coment"]) { $comentario=""._T('enviarmail:documento')." <a href='#URL_SITE_SPIP' style='text-decoration: none'>#NOM_SITE_SPIP</a> "._T('enviarmail:interesar').""; } else { $comentario=$_POST["coment"]; }
 $texto_html .="<p>".$comentario."</p>";
 $texto_html .="<div style='border: 1px solid #ccc;padding: .5em;'>";
-$texto_html .="[<div style='font-size:1.1em;'><a href='#URL_SITE_SPIP/#URL_BREVE' style='text-decoration: none'>(#TITRE|supprimer_numero)</a></div>]";
+$texto_html .="[<div style='font-size:1.1em;'><a href='#URL_SITE_SPIP/#URL_ARTICLE' style='text-decoration: none'>(#TITRE|supprimer_numero)</a></div>]";
 ?>
 
 <B_autores_html>
@@ -195,7 +195,7 @@ $texto_html .="[<div style='font-size:1.1em;'><a href='#URL_SITE_SPIP/#URL_BREVE
 <?php
 $texto_html .="<div style='color:#666666; font-size:90%;padding-bottom:.3em'>[(#SURTITRE|attribut_html) / ][(#SOUSTITRE|attribut_html) / ][(#DATE|affdate)]".$autores."</div>";
 $texto_html .="<div style='font-size:96%'>[(#INTRODUCTION|attribut_html|textebrut)]</div>";
-$texto_html .=" <div style='color:#999999; font-size:90%;'>[<a href='#URL_SITE_SPIP/#URL_BREVE' style='text-decoration: none'>"._T('enviarmail:leer')."</a>]</div>";
+$texto_html .=" <div style='color:#999999; font-size:90%;'>[<a href='#URL_SITE_SPIP/#URL_ARTICLE' style='text-decoration: none'>"._T('enviarmail:leer')."</a>]</div>";
 ?>
 <B_documents>
 <?php 
@@ -243,7 +243,7 @@ $mail->Body    = $texto_html; //Cuerpo en HTML
     ?>
 
 <?php
-	$texto_plano.= "*"._T('enviarmail:leer')." #URL_SITE_SPIP/#URL_BREVE".$un_salto;
+	$texto_plano.= "*"._T('enviarmail:leer')." #URL_SITE_SPIP/#URL_ARTICLE".$un_salto;
     $texto_plano .= $un_salto."-------------------------------".$un_salto.""._T('enviarmail:enviado_por')."".$remite." <".$replica.">".$un_salto;
     $texto_plano .= ""._T('enviarmail:source').": #NOM_SITE_SPIP (#URL_SITE_SPIP)";
     $texto_plano .= $un_salto."-------------------------------".$un_salto;
