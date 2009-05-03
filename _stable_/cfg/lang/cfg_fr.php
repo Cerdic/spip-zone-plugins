@@ -36,7 +36,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_activer' => 'Activer',
 	'label_obligatoire' => 'Saisie obligatoire',
-	
+
 	// N
 	'nom_table_manquant' => 'Nom de la table SQL manquant',
 	'nouveau' => 'Nouveau',

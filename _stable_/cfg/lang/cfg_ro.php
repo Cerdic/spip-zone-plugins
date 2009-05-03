@@ -47,6 +47,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'pas_de_changement' => 'Nici o schimbare &icirc;n <b>@nom@</b>',
 
 	// R
+	'refus_configuration_administrateur' => 'Doar administratorii site-ului sunt autoriza&#355;i s&#259; modifice ace&#351;ti parametrii.',
+	'refus_configuration_webmestre' => 'Doar webmaster-ii acestui site sunt autorizati s&#259; modifice ace&#351;ti parametrii.',
 	'reset' => '&#350;terge&#355;i',
 
 	// S
