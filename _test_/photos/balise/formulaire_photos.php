@@ -45,8 +45,13 @@ if(!empty($_POST['posted'])) {
 $tab= split("[.]",$nom_file);
 $nom_file_thumb= $tab[0];
 $dateheure=date('Y-m-d H:i:s'); 
-spip_query ( "INSERT into spip_photos (nom_photo,nom_vignette,dateheure,id_auteur,alt_photo) VALUES ("._q($nom_file).","._q($nom_file).","._q($dateheure).","._q($id_auteur).","._q($alt_photo)." ) ");
-
+sql_insertq('spip_photos', array('nom_photo' => $nom_file ,
+								 'nom_vignette' => $nom_file,
+	                    		 'dateheure' => $dateheure,
+	                    		 'id_auteur' => $id_auteur,
+	                    		 'alt_photo' => $alt_photo
+	                
+));
 }
 					                } else { 
                                        echo '<b>Problème lors de l\'upload !</b><br /><br /><b>',$chemin, '', $_FILES['fichier']['error'], '</b><br /><br />'; 
