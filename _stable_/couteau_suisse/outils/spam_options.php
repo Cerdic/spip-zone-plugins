@@ -48,8 +48,8 @@ function spam_liste_mots($texte) {
 			// on touche pas au texte entre deux ""
 			$split2[] = $s;
 		} else {
-			// on rassemble tous les separateurs : ,;.|\s\t\n
-			$temp = preg_replace("/[,;\.\|\s\t\n\r]+/", "\t", $s);
+			// on rassemble tous les separateurs : \s\t\n
+			$temp = preg_replace("/[\s\t\n\r]+/", "\t", $s);
 			$temp = str_replace("+"," ", $temp);
 			$split2 = array_merge($split2, explode("\t", $temp));
 		}
