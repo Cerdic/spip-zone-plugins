@@ -8,7 +8,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'accents_pas_pris' => 'Accents are not taken into account ("d&#233;j&#224;" or "deja", will return the same results, including "d&#233;j&#224;", "dej&#224;", "d&#233;ja"...)',
+	'accents_pas_pris' => 'Accents are not taken into account ("d&eacute;j&agrave;" or "deja", will return the same results, including "d&eacute;j&agrave;", "dej&agrave;", "d&eacute;ja"...)',
 	'asterisque_terminale' => 'will return no results: the asterisk must be final',
 	'aussi' => 'also',
 
@@ -29,7 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'il_faut_myisam' => 'MyISAM is required',
-	'incoherence_charset' => 'There is an inconsistency between the character set of your site and that of the database. This may lead to bad results being given for searches which contain accentuated characters:',
+	'incoherence_charset' => 'There is an inconsistency between the character set of your site and that of the database. This may lead to bad results being given for searches which contain accented letters:',
 	'index_regenere' => 'table index regenerated',
 	'index_supprime' => 'index deleted',
 
@@ -52,7 +52,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'sequence_exacte' => 'the exact phrase',
-	'soit' => 'AS',
+	'soit' => '/',
 	'supprimer' => 'Delete',
 
 	// T
