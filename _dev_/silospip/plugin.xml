@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<plugin>
+	<!--  
+	// Primera version
+	 -->
+	<nom><multi>Silo sites SPIP[fr]Silo sites SPIP[en]SPIP sites silo[es]Silo de sitios SPIP</multi></nom>
+	<auteur>dani@boliviaos.org</auteur>
+	<version>0.1</version>
+	<version_base>0.1</version_base>
+	<etat>dev</etat>
+	<icon>spip-silo.png</icon>
+	<description><multi>Creation de sites SPIP en self-service[en]SPIP sites self provisionning[es]Creaci&oacute;n de sitios SPIP en auto-servicio</multi></description>
+	<options>silospip_mes_options.php</options>
+	<fonctions>silospip_mes_fonctions.php</fonctions>
+	<prefix>silospip</prefix>
+	<install>base/silospip_init.php</install>
+
+<!-- on verra peu a peu 
+	<lien>[Documentation->/ecrire/?exec=silospip_aide]</lien>
+
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/silospip.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/silospip.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<inclure>inc/silospip_pipeline_affiche_milieu.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<action>ajouterBoutons</action>
+		<inclure>inc/silospip_pipeline_ajouter_boutons.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>ajouter_onglets</nom>
+		<inclure>inc/silospip_pipeline_ajouter_onglets.php</inclure>
+	</pipeline>
+
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>inc/silospip_pipeline_insert_head.php</inclure>
+	</pipeline>
+	
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>inc/silospip_pipeline_header_prive.php</inclure>
+	</pipeline>
+--->
+
+	<pipeline>
+		<nom>I2_cfg_form</nom>
+		<inclure>inc/silospip_pipeline_I2_cfg_form.php</inclure>
+	</pipeline>
+	
+<!--
+	<pipeline>
+		<nom>taches_generales_cron</nom>
+		<inclure>genie/silospip_cron.php</inclure>
+	</pipeline>
+--->
+	<chemin dir='' />
+	<necessite id="SPIP" version="[2.0.6;]" />
+	<necessite id="cfg" version="[1.10.5;]" />
+	<necessite id="inscription2" version='[0.65;]' />
+
+</plugin>
