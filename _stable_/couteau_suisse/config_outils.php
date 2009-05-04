@@ -637,12 +637,16 @@ span.cs_pagination_off {color: lightgrey; font-weight: bold; text-decoration: un
 	// construction des onglets
 	'code:jq_init' => "onglets_init.apply(this);",
 	// pour les balises #TEXTE : $table_des_traitements['TEXTE'] = 'cs_decoupe(propre(%s))';
-	// pour les articles et rubriques : $table_des_traitements['TEXTE']['articles'] = 'cs_decoupe(propre(%s))';
+	// pour les articles, breves et rubriques : $table_des_traitements['TEXTE']['articles'] = 'cs_decoupe(propre(%s))';
 	'traitement:TEXTE:post_propre,
 	 traitement:TEXTE/articles:post_propre,
+	 traitement:TEXTE/breves:post_propre,
 	 traitement:TEXTE/rubriques:post_propre' => 'cs_decoupe',
+	// pour les balises #TEXTE : $table_des_traitements['TEXTE'] = 'propre(cs_onglets(%s))';
+	// pour les articles, breves et rubriques : $table_des_traitements['TEXTE']['articles'] = 'propre(cs_onglets(%s))';
 	'traitement:TEXTE:pre_propre,
 	 traitement:TEXTE/articles:pre_propre,
+	 traitement:TEXTE/breves:pre_propre,
 	 traitement:TEXTE/rubriques:pre_propre' => 'cs_onglets',
 	'categorie' => 'typo-racc',
 	'pipeline:bt_toolbox' => 'decoupe_BarreTypo',
@@ -683,8 +687,10 @@ add_outil( array(
 		jQuery.getScript(cs_CookiePlugin, cs_sommaire_cookie);
 	}',
 	'code:jq_init' => 'cs_sommaire_init.apply(this);',
-	// inserer : $table_des_traitements['TEXTE']['article']= 'sommaire_d_article(propre(%s))';
+	// inserer : $table_des_traitements['TEXTE']['articles']= 'sommaire_d_article(propre(%s))';
+	// idem pour les breves et les rubriques
 	'traitement:TEXTE/articles:post_propre,
+	 traitement:TEXTE/breves:post_propre,
 	 traitement:TEXTE/rubriques:post_propre' => 'sommaire_d_article',
 	'traitement:CS_SOMMAIRE:post_propre' => 'sommaire_d_article_balise',
 	'categorie' => 'typo-corr',
@@ -942,11 +948,12 @@ add_outil( array(
 	'contrib'	=> 2206,
 	'code:options' => "@define('_CS_SANS_GLOSSAIRE', '[!glossaire]');\n%%glossaire_limite%%%%glossaire_groupes%%%%glossaire_js%%",
 //	'traitement:LIEU:post_propre' => 'cs_glossaire',
-	// sans oublier les articles et les rubriques :
+	// sans oublier les articles, les breves et les rubriques :
 	// SPIP ne considere pas que la definition precedente est un tronc commun...
-	// et le chapo des articles...
+	// meme traitement au chapo des articles...
 	'traitement:TEXTE:post_propre,
 	 traitement:TEXTE/articles:post_propre,
+	 traitement:TEXTE/breves:post_propre,
 	 traitement:TEXTE/rubriques:post_propre,
 	 traitement:CHAPO:post_propre' => 'cs_glossaire',
 	// Precaution pour les articles virtuels
@@ -1110,9 +1117,10 @@ add_outil( array(
 	'categorie'	 => 'typo-corr',
 	'code:options' => "%%insertions%%",
 	'traitement:TEXTE:pre_propre' => 'insertions_pre_propre',
-	// sans oublier les articles et les rubriques :
+	// sans oublier les articles, les breves et les rubriques :
 	// SPIP ne considere pas que la definition precedente est un tronc commun...
 	'traitement:TEXTE/articles:pre_propre,
+	 traitement:TEXTE/breves:pre_propre,
 	 traitement:TEXTE/rubriques:pre_propre' => 'insertions_pre_propre',
 ));
 
