@@ -65,6 +65,7 @@
 								'maj' => 'NOW()'
 								);
 				$this->id_sondage = sql_insertq('spip_sondages', $champs);
+				$this->existe = true;
 				sql_updateq("spip_documents_liens", array("id_objet" => $this->id_sondage), 'id_objet='.(0 - $GLOBALS['visiteur_session']['id_auteur']).' AND objet="sondage"');
 				sondages_trig_propager_les_secteurs($dummy);
 				sondages_calculer_langues_rubriques($dummy);

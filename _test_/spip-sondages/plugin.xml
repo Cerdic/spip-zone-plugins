@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <plugin>
-	<nom>Plugin SPIP-Sondages</nom>
+	<nom>SPIP-Sondages</nom>
 	<auteur>[Artégo->http://www.artego.fr]</auteur>
 	<version>2.0</version>
 	<etat>stable</etat>
@@ -10,7 +10,7 @@
 	<necessite id="surcharges" version="[2.0;]" />
 	<install>base/sondages.php</install>
 	<lien>[Site officiel du plugin->http://www.artego.fr/-Sondages-]</lien>
-	<icon>prive/images/sondage-24.png</icon>
+	<icon>prive/images/sondage-48.png</icon>
 	<options>sondages_options.php</options>
 	<fonctions>sondages_fonctions.php</fonctions>
 	<prefix>sondages</prefix>
