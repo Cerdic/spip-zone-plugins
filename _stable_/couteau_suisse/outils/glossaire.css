@@ -15,7 +15,10 @@ a.cs_glossaire:hover {
 }
 */
 
-/* L'effet de survol est obtenu grace aux proprietes display */
+/* Mode JS : des span discrets */
+a.cs_glossaire span.gl_js,
+a.cs_glossaire span.gl_jst,
+/* Mode CSS : l'effet de survol est obtenu grace aux proprietes display */
 a.cs_glossaire span.gl_dl,
 a.cs_glossaire span.gl_dt,
 a.cs_glossaire span.gl_dd {
