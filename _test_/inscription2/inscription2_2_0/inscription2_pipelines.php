@@ -77,6 +77,16 @@ function inscription2_post_edition($flux){
 	return $flux;
 }
 
+/**
+ * 
+ * Insertion dans le pipeline i2_exceptions_des_champs_auteurs_elargis
+ * qui empêche la création de certains champs dans la table 
+ * après les avoir configuré
+ * 
+ * @return array Un tableau des champs correspondant au "name" de son input de configuration dans le CFG 
+ * @param array $array Prend un tableau en argument qui doit être complété en fonction des besoins
+ */
+
 function inscription2_i2_exceptions_des_champs_auteurs_elargis($array){
 	// liste des champs pour lesquels on ne doit pas créer de champs dans la table spip_auteurs_elargis
 	
@@ -135,5 +145,26 @@ function inscription2_i2_verifications_specifiques($array){
 	$array['mobile_pro'] = 'valide_numero';
 	
 	return $array;
+}
+
+/**
+ * 
+ * Insertion dans le pipeline affiche_droite
+ * Dans certaines pages définies, afficher le lien d'accès à la page des comptes utilisateurs
+ * 
+ * @return array Le même tableau qu'il reçoit en argument 
+ * @param array $flux Un tableau donnant des informations sur le contenu passé au pipeline
+ */
+
+function inscription2_affiche_droite($flux){
+	if(((preg_match('/^inscription2/',$flux['args']['exec']))
+		 || (preg_match('/^auteurs/',$flux['args']['exec']))
+		 || (preg_match('/^i2_/',$flux['args']['exec']))
+		 || (($flux['args']['exec'] == 'cfg') && ((_request('cfg') == 'inscription2') || preg_match('/^i2_/',_request('cfg'))))
+		)
+		 && ($flux['args']['exec'] != 'inscription2_adherents')){
+    	$flux['data'] .= recuperer_fond('prive/inscription2_affiche_droite');
+	}
+	return $flux;
 }
 ?>
