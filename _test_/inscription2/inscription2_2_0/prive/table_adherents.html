@@ -44,51 +44,8 @@ $().ready(function() {
 		<div class="entete-formulaire">
 			<h1><:inscription2:liste_comptes_titre:></h1>
 		</div>
-		<div class="formulaire_spip">
-			<form method="post" action="#SELF"><div>
-				[(#SELF|form_hidden)]
-				<ul>
-					<li class="fieldset">
-						<fieldset>
-							<h3 class="legend"><:inscription2:recherche_utilisateurs:></h3>
-							<ul>
-								<li>
-									<label for="case"><:inscription2:recherche_valeur:></label>
-									<input class="text" type="text" name="valeur" onfocus='this.value=""' value="[(#ENV{valeur}|?{#ENV{valeur},<:info_rechercher:>})]" />
-								</li>
-								<li>
-									<label for="case"><:inscription2:recherche_case:></label>
-									<select name="case" id="case">
-										#SET{case,#ENV{case}}
-										<BOUCLE_recherchefields(POUR){tableau #CONFIG{inscription2}}{valeur = 'on'}>
-										[(#CLE|match{_table}|oui)
-											[(#SET{cle,[(#CLE|replace{'_table',''})]})]
-											[(#GET{cle}|=={#GET{case}}|oui)
-												<option value='#GET{cle}' selected="selected">[(#VAL{inscription2:}|concat{#GET{cle}}|_T)]</option>
-											]
-											[(#GET{cle}|=={#GET{case}}|non)
-												<option value='#GET{cle}'>[(#VAL{inscription2:}|concat{#GET{cle}}|_T)]</option>
-											]
-										]
-										</BOUCLE_recherchefields>
-									</select>
-								</li>
-							</ul>
-						</fieldset>
-					</li>
-				</ul>
-				<p class="boutons">
-				<input type="submit" class="submit" value="<:info_rechercher:>" />
-				</p>
-			</div>
-			[(#SET{ordre,[(#SELF|parametre_url{'ordre'})]})]
-			[(#ENV{desc}|=={'-1'}|?{[(#SET{desc,1})],[(#SET{desc,-1})]})]
-			[(#ENV{case}|oui)
-			<INCLURE{fond=prive/table_adherent_auteur_recherche}{id_auteur}{ajax}{ordre=#GET{ordre}}{env}>]
-			[(#ENV{case}|non)
-			<INCLURE{fond=prive/table_adherent_auteur}{id_auteur}{ajax}{ordre=#GET{ordre}}{env}>]
-		</form>
-			<a href='[(#SELF|parametre_url{debut,''}|parametre_url{ordre,''}|parametre_url{desc,''})]'> tous</a>
+		#FORMULAIRE_INSCRIPTION2_RECHERCHE
+		
 		<?php
 		include_spip('base/abstract_sql');
 		
@@ -125,7 +82,6 @@ $().ready(function() {
 			}
 		}
 		?>
-		</div>
 		
 		[(#PIPELINE{affiche_milieu,[(#ARRAY{args,[(#ARRAY{exec,#ENV{exec}})],data,''})]})]
 		

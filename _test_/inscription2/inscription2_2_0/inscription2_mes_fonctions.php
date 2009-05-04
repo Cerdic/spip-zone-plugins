@@ -37,54 +37,35 @@ function i2_recherche($quoi=NULL,$ou=NULL,$table=NULL){
 	if(isset($quoi) && isset($ou)){
 		$quoi = texte_script(trim($quoi));
 		global $tables_principales;
-	
-		$auteurs = array();
-		$nb_aut = 0;
+
 		if(isset($tables_principales[table_objet_sql($table)]['field'][$ou])){
 			spip_log("champs dans $table");
-			$id_auteurs = sql_select('id_auteur',table_objet_sql($table),"$ou LIKE '%$quoi%'");
-			while ($auteur= sql_fetch($id_auteurs)){
-				$auteurs[] = $auteur['id_auteur'];
-				$nb_aut ++;
-			}
+			$auteurs = sql_get_select('id_auteur',table_objet_sql($table),"$ou LIKE '%$quoi%'");
 		}
 		else{
 			spip_log("pas dans la table principale");
 			global $tables_jointures;
 			if(isset($tables_jointures[table_objet_sql($table)]) && ($jointures=$tables_jointures[table_objet_sql($table)])){
 				foreach($jointures as $jointure=>$val){
-					spip_log($val);
 					if(isset($tables_principales[table_objet_sql($val)]['field'][$ou])){
-						$id_auteurs = sql_select('id_auteur',table_objet_sql($table)." AS $table LEFT JOIN ".table_objet_sql($val)." AS $val USING(id_auteur)","$val.$ou LIKE '%$quoi%'");
-						while ($auteur= sql_fetch($id_auteurs)){
-							$auteurs[] = $auteur['id_auteur'];
-							$nb_aut ++;
-						}
+						$auteurs = sql_get_select('id_auteur',table_objet_sql($table)." AS $table LEFT JOIN ".table_objet_sql($val)." AS $val USING(id_auteur)","$val.$ou LIKE '%$quoi%'");
 					}
 				}
 			}
-		}	
-	}
-	spip_log($ou.' '.$quoi);
-	if(count($auteurs)>0){
-		$auteurs = implode($auteurs,',');
-		return "($auteurs)";
-	}else{
-		return '(0)';
+		}
+		return "($auteurs)";	
 	}
 }
 
 function critere_i2_recherche_dist($idb, &$boucles, $param){
-	$boucle = $boucles[$idb];
+	$boucle = &$boucles[$idb];
 	$primary = $boucle->primary;
 	$ou = '@$Pile[0]["case"]';
-	$table = $boucle->id_table;
 	$quoi = '@$Pile[0]["valeur"]';
-	$boucle->hash .= '
-	// RECHERCHE
-	$auteurs = i2_recherche('.$quoi.','.$ou.','.$table.');
-	';
-	$where_complement = array("'IN'","'$boucle->id_table." . "$primary'",'$auteurs');
-	$boucle->where[] = $where_complement;
+	$table = $boucle->type_requete;
+	$boucle->hash .= "
+	\$auteurs = i2_recherche($quoi,$ou,$table);
+	";
+	$boucle->where[] = array("'IN'","'$boucle->id_table." . "$primary'",'$auteurs');
 }
 ?>
