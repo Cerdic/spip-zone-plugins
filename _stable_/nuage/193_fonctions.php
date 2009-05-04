@@ -4,13 +4,13 @@ function nuage($id_mot, $titre = '', $url = '', $poids = -1, $expose = array()){
 	return filtre_nuage_dist($id_mot, $titre, $url, $poids, $expose);
 }
 
-function push($array, $val) {
+function filtre_push($array, $val) {
 	if($array == '' OR !array_push($array, $val)) return '';
-	return $array;
+	return $array;	
 }
 
-function find($array, $val) {
-	return ($array != '' AND in_array($val, $array));
+function filtre_find($array, $val) {
+	    return (is_array($array) AND in_array($val, $array));
 }
 
 
