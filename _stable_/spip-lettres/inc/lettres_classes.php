@@ -132,6 +132,7 @@
 					sql_insertq('spip_abonnes_statistiques', array('periode' => date('Y-m')));
 				sql_update('spip_abonnes_statistiques', array('nb_inscriptions' => 'nb_inscriptions+1'), 'periode="'.date('Y-m').'"');
 			}
+			$this->existe = true;
 			$this->enregistrer_champs_extra();
 			$this->enregistrer_maj();
 		}
@@ -566,6 +567,7 @@
 				if ($this->extra)
 					$champs['extra'] = $this->extra;
 				$this->id_lettre = sql_insertq('spip_lettres', $champs);
+				$this->existe = true;
 				sql_updateq("spip_documents_liens", array("id_objet" => $this->id_lettre), 'id_objet='.(0 - $GLOBALS['visiteur_session']['id_auteur']).' AND objet="lettre"');
 				calculer_rubriques();
 				lettres_trig_propager_les_secteurs($dummy);
@@ -750,12 +752,8 @@
 		
 		
 		function enregistrer_squelettes($vidange = true) {
-			$spip_lettres_fond_lettre_html	= $GLOBALS['meta']['spip_lettres_fond_lettre_html'];
-			$spip_lettres_fond_lettre_texte	= $GLOBALS['meta']['spip_lettres_fond_lettre_texte'];
-			$url_message_html = generer_url_public($spip_lettres_fond_lettre_html, 'id_lettre='.$this->id_lettre.'&lang='.$this->lang, true);
-			$url_message_texte = generer_url_public($spip_lettres_fond_lettre_texte, 'id_lettre='.$this->id_lettre.'&lang='.$this->lang, true);
-			$this->message_html	= recuperer_page($url_message_html);
-			$this->message_texte = recuperer_page($url_message_texte);
+			$this->message_html	= recuperer_fond($GLOBALS['meta']['spip_lettres_fond_lettre_html'], array('id_lettre' => $this->id_lettre, 'lang' => $this->lang));
+			$this->message_texte = recuperer_fond($GLOBALS['meta']['spip_lettres_fond_lettre_texte'], array('id_lettre' => $this->id_lettre, 'lang' => $this->lang));
 			
 			if ($vidange) {
 				// petite vidange due à l'envoi de test

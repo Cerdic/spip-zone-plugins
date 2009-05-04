@@ -13,9 +13,6 @@
 	 **/
 
 
-	include_spip('lettres_fonctions');
-
-
 	function lettres_autoriser() {}
 	
 	
