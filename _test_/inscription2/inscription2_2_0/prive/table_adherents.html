@@ -33,17 +33,14 @@ $().ready(function() {
 <br />
 <br />
 <br />
-<div id="conteneur">
 
-	<div id="navigation">
+	[(#EVAL{''}|debut_gauche{true})]
 		#INCLURE{fond=prive/menu_inscription2}
 		[(#PIPELINE{affiche_gauche,[(#ARRAY{args,[(#ARRAY{exec,#ENV{exec}})],data,''})]})]	
-	</div>
-	[<div id="extra">
-		(#PIPELINE{affiche_droite,[(#ARRAY{args,[(#ARRAY{exec,#ENV{exec}})],data,''})]})	
-	</div>]
 	
-	<div id="contenu" class="serif">
+	[(#EVAL{''}|creer_colonne_droite{true})]
+		[(#PIPELINE{affiche_droite,[(#ARRAY{args,[(#ARRAY{exec,#ENV{exec}})],data,''})]})]
+	[(#EVAL{''}|debut_droite{true})]
 		<div class="entete-formulaire">
 			<h1><:inscription2:liste_comptes_titre:></h1>
 		</div>
@@ -132,8 +129,6 @@ $().ready(function() {
 		
 		[(#PIPELINE{affiche_milieu,[(#ARRAY{args,[(#ARRAY{exec,#ENV{exec}})],data,''})]})]
 		
-	</div>
-</div>
 <br class="nettoyeur"/>
 <!-- Confirm Dialog -->
 <div class="jqmConfirm" id="confirm">
@@ -149,3 +144,6 @@ $().ready(function() {
 		<input type="submit" value="yes" /> 
 	</div>
 </div>
+
+[(#EVAL{''}|fin_gauche)]
+[(#EVAL{''}|fin_page)]

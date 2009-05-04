@@ -34,7 +34,5 @@ function exec_inscription2_adherents() {
 	echo $commencer_page(_T('inscription2:gestion_adherents'), "", "", "");
 	
 	echo recuperer_fond('prive/table_adherents',$contexte);
-	
-	echo fin_page();
 }
 ?>
