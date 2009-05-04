@@ -1,7 +1,15 @@
 <?php
 
-// http://doc.spip.org/@test_login
-function inscription2_test_login($nom, $mail) {
+/**
+ * 
+ * Création d'un login si absent à partir du nom et du mail
+ * 
+ * @return String Le login final 
+ * @param String $nom Le nom de l'utilisateur
+ * @param String $mail L'email de l'utilisateur
+ */
+
+function inc_inscription2_definir_login_dist($nom, $mail) {
 	include_spip('inc/charsets');
 	$nom = strtolower(translitteration($nom));
 	$login_base = preg_replace("/[^\w\d_]/", "_", $nom);
@@ -28,5 +36,6 @@ function inscription2_test_login($nom, $mail) {
 			return $login;
 		$login = $login_base.$i;
 	}
+	return $login;
 }
 ?>

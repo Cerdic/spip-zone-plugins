@@ -4,8 +4,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // charger cfg
 include_spip('cfg_options');
-// charger les fonctions de formulaires
-include_spip('inc/inscription2_form_fonctions');
 
 /**
  * 
@@ -227,7 +225,8 @@ function formulaires_inscription2_traiter_dist($id_auteur = NULL){
 			}
 		}
 		if(!$valeurs['login']){
-			$valeurs['login'] = inscription2_test_login($valeurs['nom'], $valeurs['email']);
+			$definir_login = charger_fonction('inscription2_definir_login','inc');
+			$valeurs['login'] = $definir_login($valeurs['nom'], $valeurs['email']);
 		}
 	}
 	
