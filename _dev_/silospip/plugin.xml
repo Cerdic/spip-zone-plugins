@@ -49,7 +49,7 @@
 		<nom>header_prive</nom>
 		<inclure>inc/silospip_pipeline_header_prive.php</inclure>
 	</pipeline>
---->
+-->
 
 	<pipeline>
 		<nom>I2_cfg_form</nom>
@@ -61,7 +61,7 @@
 		<nom>taches_generales_cron</nom>
 		<inclure>genie/silospip_cron.php</inclure>
 	</pipeline>
---->
+-->
 	<chemin dir='' />
 	<necessite id="SPIP" version="[2.0.6;]" />
 	<necessite id="cfg" version="[1.10.5;]" />
