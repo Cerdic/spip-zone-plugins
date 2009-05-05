@@ -32,7 +32,7 @@ function acs_set_default_values() {
     spip_log('ACS init failed : unable to read composants/def.php');  
   if (is_array($def)) {
     foreach($def as $var=>$value) {
-      if (!isset($GLOBALS['meta'][$var])
+      if (!isset($GLOBALS['meta'][$var]))
 	      ecrire_meta($var, $value);
     }
     ecrire_meta('acsInstalled', 'oui');
