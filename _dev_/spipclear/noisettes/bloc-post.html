@@ -10,13 +10,8 @@
 <BOUCLE_categorie(RUBRIQUES){id_rubrique}><a href="#URL_RUBRIQUE">#TITRE</a></BOUCLE_categorie>
 </p>
 
-<B_mots>
-<ul class="post-tags">
-	<BOUCLE_mots(MOTS){id_article}>
-	<li><a href="[(#URL_PAGE{tag}|parametre_url{id_mot,#ID_MOT}|parametre_url{id_secteur,#ID_SECTEUR})]">#TITRE</a></li>
-	</BOUCLE_mots>
-</ul>
-</B_mots>
+[(#CONFIG{spipclear/bloc_post_tags}|=={on}|oui)
+<INCLURE{fond=noisettes/post-tags}{id_article}>]
 
 [(#LOGO_ARTICLE|#URL_ARTICLE|liens_absolus|image_reduire{150}|inserer_attribut{class,logo})]
 

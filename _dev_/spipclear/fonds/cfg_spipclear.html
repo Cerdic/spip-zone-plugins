@@ -22,6 +22,10 @@
 				<input type="checkbox" name="articles_entiers" id="articles_entiers"[ (#ENV{articles_entiers}|=={on}|?{checked="checked",''})] />
 				<label for="articles_entiers"><:spipclear:sommaire_articles_entiers:></label>
 			</div>
+			<div class="choix">
+				<input type="checkbox" name="bloc_post_tags" id="bloc_post_tags"[ (#ENV{bloc_post_tags}|=={on}|?{checked="checked",''})] />
+				<label for="bloc_post_tags"><:spipclear:sommaire_afficher_tags:></label>
+			</div>
 		</li>
 		<li class="editer_spipclear_navigation">
 			<label>Navigation</label>

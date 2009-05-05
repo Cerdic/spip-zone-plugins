@@ -9,13 +9,7 @@
 	<span>::</span><a href="#URL_SITE_SPIP/#URL_ARTICLE" title="<:spipclear:permalink_pour:> : [(#TITRE|textebrut|entites_html)]" class="surlignable">##ID_ARTICLE</a>
 	</p>
 
-	<B_mots>
-	<ul class="post-tags">
-		<BOUCLE_mots(MOTS){id_article}>
-		<li><a href="[(#URL_PAGE{tag}|parametre_url{id_mot,#ID_MOT}|parametre_url{id_secteur,#ID_SECTEUR})]">#TITRE</a></li>
-		</BOUCLE_mots>
-	</ul>
-	</B_mots>
+	<INCLURE{fond=noisettes/post-tags}{id_article}>
 	
 	[(#LOGO_ARTICLE||image_reduire{150}|inserer_attribut{class,#EDIT{logo}}|inserer_attribut{class,logo})]
 	
