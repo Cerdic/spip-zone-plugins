@@ -6,7 +6,7 @@ function crayon_affiche_submit(me,id){
 	// Si aucune erreur
 	if(id.find('label.error:visible').length == 0){
 		// On (re)active les combinaisons de touches par defaut des crayons
-		jQuery(id).find("textarea.crayon-active,input.crayon-active[@type=text]").unbind('keypress').keypress(function(e){
+		jQuery(id).find("textarea.crayon-active,input.crayon-active[type=text]").unbind('keypress').keypress(function(e){
 			// Clavier pour sortir, annuler (esc)
 			if (e.keyCode == 27) {
 				me
@@ -35,7 +35,7 @@ function crayon_affiche_submit(me,id){
 	}
 	else{
 		// desactiver les raccourcis clavier des crayons (sauf le ESC pour annuler)
-		id.find("textarea.crayon-active,input.crayon-active[@type=text]").unbind('keypress').keypress(function(e){
+		id.find("textarea.crayon-active,input.crayon-active[type=text]").unbind('keypress').keypress(function(e){
 			if (e.keyCode == 27) {
 				me
 				.cancelcrayon();
