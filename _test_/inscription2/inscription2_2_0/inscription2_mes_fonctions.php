@@ -36,6 +36,7 @@ function inscription2_recuperer_champs($champs,$id_auteur){
 function i2_recherche($quoi=NULL,$ou=NULL,$table=NULL){
 	if(isset($quoi) && isset($ou)){
 		$quoi = texte_script(trim($quoi));
+		include_spip('base/serial'); // aucazou !
 		global $tables_principales;
 
 		if(isset($tables_principales[table_objet_sql($table)]['field'][$ou])){
