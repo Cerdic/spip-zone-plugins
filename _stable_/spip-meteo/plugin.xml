@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <plugin>
-	<nom>Plugin SPIP-Météo</nom>
+	<nom>SPIP-Météo</nom>
 	<auteur>[Artégo->http://www.artego.fr]</auteur>
 	<version>2.0</version>
 	<etat>stable</etat>
