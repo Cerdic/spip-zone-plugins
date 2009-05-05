@@ -99,6 +99,7 @@
 				sql_updateq('spip_applicants', array('email' => $this->email, 'nom' => ucwords($this->nom), 'mdp' => $this->mdp), 'id_applicant='.intval($this->id_applicant));
 			}
 			$this->enregistrer_maj();
+			$this->existe = true;
 		}
 
 
@@ -232,6 +233,7 @@
 																			'maj' => "NOW()"
 																		));
 				$this->ajouter_auteur($GLOBALS['auteur_session']['id_auteur']);
+				$this->existe = true;
 			} else {
 				$t = sql_fetsel('limiter_applicant, limiter_invitation', 'spip_formulaires', 'id_formulaire='.intval($this->id_formulaire));
 				$limiter_applicant_vieux = $t['limiter_applicant'];
