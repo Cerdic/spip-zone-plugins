@@ -33,7 +33,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_auteurs(AUTEURS){i2_recherche}{tri '#ENV{ordre,id_auteur}',#ENV{desc,-1}}{pagination 20}{tout}>
+	<BOUCLE_auteurs(AUTEURS){i2_recherche}{tri #ENV{ordre,id_auteur},#ENV{desc,-1}}{pagination 20}{tout}>
 
 	[(#STATUT|=={0minirezo}|oui)
 		#SET{url_logo,#CHEMIN{images/admin-12.gif}}
