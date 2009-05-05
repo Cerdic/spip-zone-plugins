@@ -97,6 +97,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'site_comment' => 'site',
 'syndication' => 'Syndication',
 'selectionner_theme' => 'Cliquez pour s&eacute;lectionner ce th&ecirc;me',
+'sommaire_afficher_tags' => 'Ne pas afficher les tags dans les listes d\'articles (page d\'accueil, r&eacute;sultats de recherche, etc).',
 'sommaire_articles_entiers' => 'Afficher les articles en entier (par d&eacute;faut, seule une introduction est affich&eacute;e)',
 'sommaire_spipclear' => 'Appliquer SpipClear sur la page d\'accueil du site (ne fonctionne que pour un secteur).',
 

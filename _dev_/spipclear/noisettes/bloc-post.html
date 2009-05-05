@@ -10,7 +10,7 @@
 <BOUCLE_categorie(RUBRIQUES){id_rubrique}><a href="#URL_RUBRIQUE">#TITRE</a></BOUCLE_categorie>
 </p>
 
-[(#CONFIG{spipclear/bloc_post_tags}|=={on}|oui)
+[(#CONFIG{spipclear/bloc_post_tags}|=={on}|non)
 <INCLURE{fond=noisettes/post-tags}{id_article}>]
 
 [(#LOGO_ARTICLE|#URL_ARTICLE|liens_absolus|image_reduire{150}|inserer_attribut{class,logo})]
