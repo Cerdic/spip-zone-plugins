@@ -275,10 +275,10 @@ function OpenTag($tag,$e,$LineFeedHeight)
 //		$this->Write(5,"<code>\n");
 		$this->SetFont('courier','', 8);
 		$this->SetTextColor(0, 0, 255);
-		$this->ProcessingCadre=true;
-		$this->ProcessingBloc++;
-		$this->BlocTags[$this->ProcessingBloc-1]=array("CODE");
-		$this->BlocContent[$this->ProcessingBloc-1]="";
+		#$this->ProcessingCadre=true;
+		#$this->ProcessingBloc++;
+		#$this->BlocTags[$this->ProcessingBloc-1]=array("CODE");
+		#$this->BlocContent[$this->ProcessingBloc-1]="";
 	}
 	
 	if($tag=='H2')
