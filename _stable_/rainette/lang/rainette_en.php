@@ -1,10 +1,7 @@
 <?php
 /**
- * SPIP-M&eacute;t&eacute;o : pr&eacute;visions m&eacute;t&eacute;o dans vos squelettes
+ * Rainette - Anglais
  *
- * Copyright (c) 2006
- * Agence Art&eacute;go http://www.artego.fr
- *  
  * Ce programme est un logiciel libre distribue sous licence GNU/GPL.
  * Pour plus de details voir le fichier COPYING.txt.
  *  
