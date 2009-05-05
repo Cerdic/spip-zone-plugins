@@ -5,7 +5,7 @@
 	<version>2.0</version>
 	<etat>stable</etat>
 	<licence>[GPLv3->http://www.gnu.org/licenses/gpl-3.0.html]</licence>
-	<description>Liens de traduction entre rubriques, voir <code>spip-trad/langues.html</code> pour un exemple.</description>
+	<description>Liens de traduction entre rubriques.</description>
 	<necessite id="SPIP" version="[2.0.3;]" />
 	<necessite id="surcharges" version="[2.0;]" />
 	<install>base/trad.php</install>
