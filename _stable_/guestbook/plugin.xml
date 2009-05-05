@@ -4,7 +4,7 @@
 	<version>2.0</version>
 	<version_base>2.0</version_base>
 	<etat>stable</etat>
-	<description>Guestbook vous procure un Livre d'or pour votre site Spip. Passez la souris sur le bouton Forum pour voir apparaitre l'interface de modération</description>
+	<description>Guestbook vous procure un Livre d'or pour votre site Spip. Passez la souris sur le bouton Forum pour voir apparaitre l'interface de mod&eacute;ration</description>
 	<lien>[Documentation->http://www.spip-contrib.net/Guestbook]</lien>
 	<prefix>guestbook</prefix>
 	<install>base/guestbook.php</install>
