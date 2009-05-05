@@ -2,14 +2,12 @@
 	/**
 	 * GuestBook
 	 *
-	 * Copyright (c) 2008
-	 * Yohann Prigent (potter64) repris des travaux de Bernard Blazin (http://www.plugandspip.com )
+	 * Copyright (c) 2008 - 2009
+	 * Yohann Prigent (potter64)
 	 * Ce programme est un logiciel libre distribue sous licence GNU/GPL.
 	 * Pour plus de details voir le fichier COPYING.txt.
 	 *  
 	 **/
-
-
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function guestbook_declarer_tables_interfaces($interface){
@@ -17,13 +15,14 @@ function guestbook_declarer_tables_interfaces($interface){
 	$interface['table_des_tables']['guestbook_reponses']='guestbook_reponses';
 	return $interface;
 }
-
 function guestbook_declarer_tables_principales($tables_principales){
 	$spip_guestbook = array(
 		"id_message" 	=> "bigint(21) NOT NULL auto_increment",
 		"message" 	=> "text NOT NULL",
 		"email" 	=> "text NOT NULL",
 		"nom" => "VARCHAR(255) NOT NULL DEFAULT '0'",
+		"prenom" => "text NOT NULL",
+		"pseudo" => "text NOT NULL",
 		"ville" => "text NOT NULL",
 		"statut" => "VARCHAR(8) NOT NULL",
 		"ip" => "VARCHAR(255) NOT NULL",
@@ -39,12 +38,11 @@ function guestbook_declarer_tables_principales($tables_principales){
 		
 	return $tables_principales;
 }
-
 function guestbook_declarer_tables_auxiliaires($tables_auxiliaires){
 	$spip_guestbook_reponses = array(
-		"id_reponse" => "BIGINT(21) NOT NULL auto_increment",
-		"id_message" => "BIGINT(21) NOT NULL",
-		"id_auteur" => "BIGINT(21) NOT NULL",
+		"id_reponse" => "MEDIUMINT( 5 ) NOT NULL auto_increment",
+		"id_message" => "MEDIUMINT( 5 ) NOT NULL",
+		"id_auteur" => "MEDIUMINT( 5 ) NOT NULL",
 		"message" =>  "TEXT",
 		"statut" => "VARCHAR(8) NOT NULL",
 		"date"	=> "DATETIME");
@@ -59,5 +57,4 @@ function guestbook_declarer_tables_auxiliaires($tables_auxiliaires){
 
 	return $tables_auxiliaires;
 }
-
 ?>

@@ -1,11 +1,10 @@
 <plugin>
 	<nom>GuestBook</nom>
-	<auteur>Yohann Prigent - Decembre 2008 repris des travaux de Bernard Blazin</auteur>
-	<version>1.1</version>
-	<version_base>1.0</version_base>
+	<auteur>Yohann Prigent (potter64) - Avril-Mai 2009</auteur>
+	<version>2.0</version>
+	<version_base>2.0</version_base>
 	<etat>stable</etat>
-	<description>Un Livre d'or pour votre site Spip. Ce livre d'or fonctionne avec une table &#13;
-		diff&eacute;rente des tables de SPIP, ce qui en fais un syst&egrave;me &agrave; part.</description>
+	<description>Guestbook vous procure un Livre d'or pour votre site Spip. Passez la souris sur le bouton Forum pour voir apparaitre l'interface de modération</description>
 	<lien>[Documentation->http://www.spip-contrib.net/Guestbook]</lien>
 	<prefix>guestbook</prefix>
 	<install>base/guestbook.php</install>
@@ -20,6 +19,10 @@
 	<pipeline>
 		<nom>declarer_tables_interfaces</nom>
 		<inclure>base/guestbook_install.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>guestbook_fonctions.php</inclure>
 	</pipeline>
 	<necessite id="SPIP" version='[2.0.0;]' />
 	<bouton id='livredor' parent='forum'>

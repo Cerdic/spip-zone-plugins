@@ -1,41 +1,67 @@
 #CACHE{200} 
-<div class="formulaire_guestbook ajax">
-[<p style="font-size: 20px;text-align: center;" class="formulaire_message">(#ENV*{message_ok})</p>]
+<div class="guestform formulaire_guestbook ajax">
 <form action='#SELF' method='post'>
 	#ACTION_FORMULAIRE{#SELF}
-	<fieldset class="spip_encadrer"> 
-<legend>Signer le livre d'or</legend>
-  <table width="76%" border="0" cellspacing="0" cellpadding="2">
-        <p style="color: red;">Champ en rouge = Champ obligatoire !</p>
-    <tr> 
-      <td width="20%" style="color: red;">Votre nom</td>
-      <td width="80%"><input type="text" name="nom"></td>
-    </tr>
-    <tr> 
-      <td>Votre email</td>
-      <td><input type="text" name="email"></td>
-    </tr>
-    <tr> 
-      <td>Votre ville</td>
-      <td><input type="text" name="ville"> </td>
-    </tr>
-    <tr> 
-      <td style="color: red;">Notez le site de 1 &agrave; 10</td>
-      <td><input type="text" name="note" size="2"></td>
-    </tr>
-    <tr> 
-      <td style="color: red;">Votre texte (minimum 10 caractères)</td>
-      <td><textarea name="texte" cols="60" rows="5" ></textarea></td>
-    </tr>
-    <tr> 
-      <td>&nbsp;</td>
-      <td><input type="submit" name="ok" value="Envoyer"></td>
-    </tr>
-  </table></fieldset>
+	[<p class="message_erreur">(#ENV*{message_erreur})</p>]
+	<fieldset>
+		<legend><:guestbook:infos_perso:></legend>
+		<p><:guestbook:rentrez_infos_perso:></p>
+		<ul>
+			<li class="courriel[ (#ENV**{erreurs}|table_valeur{email-erreur})]">
+				<label for="courriel"><:guestbook:courriel:>[ (#ENV**{erreurs}|table_valeur{email-ob}|sinon{ <em>(<:guestbook:obligatoire:>)</em>})]</label>
+				<input type="text" class="text" name="email" id="courriel" value="#ENV{email}" />
+				[<p>(#ENV**{erreurs}|table_valeur{email})</p>]
+			</li>
+			<li class="ville[ (#ENV**{erreurs}|table_valeur{ville-erreur})]">
+				<label for="ville"><:guestbook:ville:>[ (#ENV**{erreurs}|table_valeur{ville-ob}|sinon{ <em>(<:guestbook:obligatoire:>)</em>})]</label>
+				<input type="text" class="text" name="ville" id="ville" value="#ENV{ville}" />
+			</li>
+			<li class="pseudo[ (#ENV**{erreurs}|table_valeur{pseudo-erreur})]">
+				<label for="pseudo"><:guestbook:pseudo:>[ (#ENV**{erreurs}|table_valeur{pseudo-ob}|sinon{ <em>(<:guestbook:obligatoire:>)</em>})]</label>
+				<input type="text" class="text" name="pseudo" id="pseudo" value="#ENV{pseudo}" />
+			</li>
+			<li class="nom[ (#ENV**{erreurs}|table_valeur{nom-erreur})]">
+				<label for="nom"><:ecrire:info_nom:></label>
+				<input type="text" class="text" name="nom" id="nom" value="#ENV{nom}" />
+				[<p class='erreur_message'>(#ENV**{erreurs}|table_valeur{nom})</p>]
+			</li>
+			<li class="prenom[ (#ENV**{erreurs}|table_valeur{prenom-erreur})]">
+				<label for="prenom"><:guestbook:prenom:></label>
+				<input type="text" class="text" name="prenom" id="prenom" value="#ENV{prenom}" />
+				[<p class='erreur_message'>(#ENV**{erreurs}|table_valeur{prenom})</p>]
+			</li>
+			</ul>
+			</fieldset>
+			<fieldset>
+		<legend><:guestbook:note_message:></legend>
+		<ul>
+			<li class="note [(#ENV**{erreurs}|table_valeur{note-erreur})]">
+				<label for="note"><:guestbook:note:> <em>(<:guestbook:obligatoire:>)</em></label>
+				<select id="note" name="note">
+					<option value="10"[ (#ENV{note}|=={10}|oui)selected="selected"]>10</option>
+					<option value="9"[ (#ENV{note}|=={9}|oui)selected="selected"]>9</option>
+					<option value="8"[ (#ENV{note}|=={8}|oui)selected="selected"]>8</option>
+					<option value="7"[ (#ENV{note}|=={7}|oui)selected="selected"]>7</option>
+					<option value="6"[ (#ENV{note}|=={6}|oui)selected="selected"]>6</option>
+					<option value="5"[ (#ENV{note}|=={5}|oui)selected="selected"]>5</option>
+					<option value="4"[ (#ENV{note}|=={4}|oui)selected="selected"]>4</option>
+					<option value="3"[ (#ENV{note}|=={3}|oui)selected="selected"]>3</option>
+					<option value="2"[ (#ENV{note}|=={2}|oui)selected="selected"]>2</option>
+					<option value="1"[ (#ENV{note}|=={1}|oui)selected="selected"]>1</option>
+					<option value="0"[ (#ENV{note}|=={0}|oui)selected="selected"]>0</option>
+				</select>
+			</li>
+			<li class="message [(#ENV**{erreurs}|table_valeur{message-erreur})]">
+				<label for="message"><:guestbook:message:>[ (#ENV**{erreurs}|table_valeur{message}|sinon{ <em>(<:guestbook:obligatoire:>)</em>})]</label>
+				<textarea id="message" name="message" cols="60" rows="5">#ENV{message}</textarea>
+			</li>
+		</ul>
+	</fieldset>
+	<p class="boutons">
+		<input type="submit" class="submit" value="<:guestbook:poster:>" />
+	</p>
 </form>
 
-[<p style="font-size: 20px;text-align: center;" class="formulaire_message">(#ENV*{message_ok})</p>]
-[<span class='erreur'>(#ENV**{erreurs}|table_valeur{annee})</span>]
-[<p class="formulaire_message">(#ENV*{message_erreur})</p>]
+[<p class="message_ok">(#ENV*{message_ok})</p>]
 
 </div>

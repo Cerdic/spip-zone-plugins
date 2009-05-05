@@ -2,78 +2,29 @@
 	/**
 	 * GuestBook
 	 *
-	 * Copyright (c) 2008
-	 * Yohann Prigent (potter64) repris des travaux de Bernard Blazin (http://www.plugandspip.com )
+	 * Copyright (c) 2008 - 2009
+	 * Yohann Prigent (potter64)
 	 * Ce programme est un logiciel libre distribue sous licence GNU/GPL.
 	 * Pour plus de details voir le fichier COPYING.txt.
 	 *  
 	 **/
-	include_spip('inc/presentation');
-	function exec_repondre(){
+function exec_repondre(){
 	global $connect_statut, $connect_toutes_rubriques;
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo $commencer_page(_T('guestbook:lelivre'), "", "");
-	if (isset($_GET['id_message'])) {
-		echo "<br /><br />";
-	echo '<div style="margin:auto; width :50%;">';
-	$date = date('Y-m-d H:i:s');
-	echo"<br />";
-		$rep=$_GET['id_message'];
-		
-		
-		$sqlask = sql_select('nom, message', 'spip_guestbook', 'id_message='.$rep);
-		$ask= spip_fetch_array($sqlask);
-		$asp= $ask['nom'];
-		$tex=$ask['message'];
-
-$texte='';
-$nom='';
-
-		
-	$texte=$_POST['message'];
-	$nom=$_POST['nom'];
-	$texte = addslashes($texte);
-	$texte=nl2br($texte); 
-		
-		if($nom == '' OR $texte=''){
-			
-		echo "<form action='?exec=repondre&id_message=".$rep."' method='post'>";
-		echo '<input type="hidden" name="id_rep" value="'.$rep.'" />';
-	echo $asp.' a &eacute;crit :<br /> <i>"'.$tex.'"</i><br /><br />';
-	$sql2= spip_query("SELECT auteur, message FROM  spip_guestbook_reponses WHERE id_message='".$rep."'");
-	while ($ask2= mysql_fetch_array($sql2))
-	{
-		$name= $ask2['auteur'];
-		$repons=$ask2['message'];
-	echo $name.' a répondu  : <i>"'.$repons.'"</i><br />';
+	echo $commencer_page(_T('guestbook:titre'), "", "");
+	if (strlen(_request('reponse'))<=1) {
+		if (_request('reponse') AND strlen(_request('reponse'))<=1) {
+			$message_err = _T('guestbook:erreur_champ_remplir');
+		}
+		else {
+			$message_err = 'none';
+		}
+		echo recuperer_fond('prive/repondre_guestbook',array('stat_page' => 'rien', 'no_message' => $message_err, 'id_message' => _request('id_message')));
 	}
-	echo 'R&eacute;ponse: <textarea name="reponses" cols="50" rows="5" >'.$texte.'</textarea><br />';
-	$nom=$GLOBALS['visiteur_session']['login'];
-	echo 'Votre nom:  '.$nom.' <input name="nom" type="hidden" value="'.$nom.'"><br /><br />';
-	echo "Remplissez tous les champs! <br /><br />";
-	echo ' <input name="submit" type="submit" value="Envoyer"><br />';
-	echo '</form>';
-		
+	if (strlen(_request('reponse'))>1) {
+		sql_insertq('spip_guestbook_reponses', array('id_reponse' => '','id_message' => _request('id_message'), 'date' => date('Y-m-d H:i:s'), 'message' => _request('reponse') , 'statut' => 'publie', 'id_auteur' => _request('id_auteur')));
+		echo "<p style='color: green; font-size: 24px;'>"._T('guestbook:reponse_ok')."</p>";
+		echo "<p style='color: gray; font-size: 20px;'><a href='".generer_url_ecrire('livre')."'>"._T('guestbook:continuer_moderation')."</a></p>";
 	}
-	
-	else {
-
-$text=$_POST['reponses'];
-		sql_insertq('spip_guestbook_reponses', array('id_message' => $rep, 'date' => $date, 'message' => $text, 'auteur' => $nom));     
-		echo $asp.' a &eacute;crit : <i>"'.$tex.'"</i><br />';
-		echo $nom.' a r&eacute;pondu : <i>"'.$text.'"</i><br />';
-		
-	}
-	echo '</div>';
-	}
-	else{ 
-		echo '<br /><br /> '.gros_titre(Warning);
-				debut_boite_info();
-				
-				echo '<a href="?exec=livre">Vous n\'avez pas s&eacute;l&eacute;ctionn&eacute; d\'utilisateur. Retourner &agrave; la page des commenatires</a>'; }
-	
-		fin_cadre_relief();
-	fin_page();
-	exit;
-	}
+}
 ?>

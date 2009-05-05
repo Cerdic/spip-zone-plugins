@@ -2,46 +2,54 @@
 	/**
 	 * GuestBook
 	 *
-	 * Copyright (c) 2008
-	 * Yohann Prigent (potter64) repris des travaux de Bernard Blazin (http://www.plugandspip.com )
+	 * Copyright (c) 2008 - 2009
+	 * Yohann Prigent (potter64)
 	 * Ce programme est un logiciel libre distribue sous licence GNU/GPL.
 	 * Pour plus de details voir le fichier COPYING.txt.
 	 *  
 	 **/
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+//A
+	'aucun_message_livre' => 'Aucun message dans le livre',
 // C
-	'creation_des_tables_mysql' => 'Cr&acute;ation des tables MySQL',
-	'creer_tables_mysql' => 'Cr&eacute;er les tables MySQL',
-	'confirm' => 'Confirmer !',
+	'champs_obligatoires' => 'Vous n\'avez pas rempli des champs obligatoires et/ou votre saisie contient des erreurs',
+	'continuer_moderation' => 'Vous pouvez continuer la mod&eacute;ration des messages',
+	'courriel' => 'Courriel',
 // D
-	'date' => '<td>Date</td>',
-	'destroy' => 'Destruction des tables',
+	'dont' => 'dont',
 // E
-	'email' => 'E-mail',
-// I
-	'installhd' => 'Vos nouvelles tables sont cr&eacute;&eacute;es !',
-// L
-	'livre_dor' => 'Livre d\'or',
-	'lelivre' => 'Le livre d\'or',
-	"avertdestroy" => "La suppression des tables supprimera toutes les donn&eacute;es du livre d'or<br />",
+	'erreur_champ_remplir' => 'Vous devez remplir le champ &ccedil;i-dessus',
+//I
+	'infos_perso' => 'Informations personnelles',
 // M
-	"mercivp" => "Merci de votre participation! Le message apparaitra dès que le webmaster aura r&eacute;pondu.",
+	'message' => 'Message',
+	'message_poste' => 'Le message a bien &eacute;t&eacute; post&eacute;, merci !',
+	'moyenne_publie' => 'Moyenne des messages publi&eacute;s',
+	'moyenne_tous' => 'Moyenne de tous les messages',
 // N
-	'numero' => "<td>N&deg;</td>",
-	'note' => 'Note sur 10',
-	'nom' => '<td>Nom</td>',
+	'nombre_messages_livre' => 'messages dans le livre',
+	'nom_chiffres' => 'Ce nom contient des chiffres',
+	'note' => 'Note',
+	'note_message' => 'Note &amp; Message',
+	'numero' => 'N&deg;',
+//P
+	'poster' => 'Poster',
+	'prenom' => 'Pr&eacute;nom',
+	'prenom_chiffres' => 'Ce pr&eacute;nom contient des chiffres',
+	'pseudo' => 'Pseudo',
 // R
-	"repondre" => "<td>R&eacute;pondre</td>",
-	"repondremdl" => "R&eacute;pondre aux messages du livre d'or",
-	"rienmis" => "Vous n'avez pas d&eacute;fini le nom ou le contenu du message. Veuillez r&eacute;&eacute;ssayer.",
+	"repondre" => "R&eacute;pondre",
+	'repondu' => 'a r&eacute;pondu',
+	'rentrez_infos_perso' => 'Rentrez vos informations personnelles',
+	'repasser_validation' => 'Repasser ce message en validation',
+	'reponse_ok' => 'R&eacute;ponse post&eacute; !',
+//S
+	'statut' => 'Statut',
 // T
-	'message' => 'Votre message',
-	'texte' => '<td>Texte</td>',
+	'titre' => 'Le livre d\'or',
+//U
+	'un_message_livre' => 'Un seul message',
 // V
-	'valider' => 'Valider',
-	"pascoch" => "Vous n'avez rien coch&eacute; !",
-	'ville' => 'Ville',
-// Z
-	'Z' => 'ZZzZZzzz'
+	'ville' => 'Ville'
 );
 ?>

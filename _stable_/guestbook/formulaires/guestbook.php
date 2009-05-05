@@ -1,51 +1,79 @@
 <?php
-
 	/**
 	 * GuestBook
 	 *
-	 * Copyright (c) 2008
-	 * Yohann Prigent (potter64) repris des travaux de Bernard Blazin (http://www.plugandspip.com )
+	 * Copyright (c) 2008 - 2009
+	 * Yohann Prigent (potter64)
 	 * Ce programme est un logiciel libre distribue sous licence GNU/GPL.
 	 * Pour plus de details voir le fichier COPYING.txt.
 	 *  
 	 **/
-
 function formulaires_guestbook_charger_dist() {
 	$valeurs = array(
-		'name'=>$nom,
-		'ville'=>$ville,
 		'email'=>$email,
+		'pseudo'=>$pseudo,
+		'nom'=>$nom,
+		'prenom'=>$prenom,
+		'ville'=>$ville,
 		'note'=>$note,
-		'texte'=>$texte,
+		'message'=>$message
 	);
+	if (_request('note'))
+		$valeurs['note'] = _request('note');
 	return $valeurs;
 }
 function formulaires_guestbook_verifier_dist(){
 	$erreurs = array();
+	// verifier que les champs obligatoires sont bien la :
+	foreach(array('email','pseudo','ville','message','note') as $obligatoire)
+	if (!_request($obligatoire)) { 
+		$erreurs[$obligatoire.'-ob'] = "<p class='erreur_message'>"._T('info_obligatoire_02')."</p>";
+		$erreurs[$obligatoire.'-erreur'] = 'obligatoire';
+	}
+	// verifier que si un email a été saisi, il est bien valide :
+	include_spip('inc/filtres');
+	if (_request('email') AND !email_valide(_request('email'))) {
+		$erreurs['email'] = _T('spip:form_email_non_valide');
+		$erreurs['email-erreur'] = 'obligatoire';
+	}
+	if (preg_match(',\d,', _request('prenom'))) {
+		$erreurs['prenom'] = _T('guestbook:prenom_chiffres');
+		$erreurs['prenom-erreur'] = 'obligatoire';
+	}
+	if (preg_match(',\d,', _request('nom'))) {
+		$erreurs['nom'] = _T('guestbook:nom_chiffres');
+		$erreurs['nom-erreur'] = 'obligatoire';
+	}
+	if (count($erreurs))
+		$erreurs['message_erreur'] = _T('guestbook:champs_obligatoires');
 	return $erreurs;
 }
-
-
 function formulaires_guestbook_traiter_dist() {
 	include_spip('base/abstract_sql');
 	$ip = $GLOBALS['ip'];
-	$texte	= _request('texte');
 	$email	= _request('email');
+	$pseudo	= _request('pseudo');
 	$nom	= _request('nom');
+	$prenom	= _request('prenom');
 	$ville	= _request('ville');
-	$post_stat = 'prop';
 	$note	= _request('note');
+	$message	= _request('message');
+	$post_stat = 'prop';
 	$date = date('Y-m-d H:i:s');
-	if(strlen($texte) > 9 AND strlen($nom) > 1 AND intval($note) >= 0) {
-	sql_insertq("spip_guestbook", array('id_message' => "", 'message' => $texte, 'email' => $email, 'nom' => $nom, 'ville' => $ville, 'statut' => $post_stat, 'ip' => $ip, 'note' => $note, 'date' => $date));
-	$message = 'Message post&eacute;, Merci !';
+	sql_insertq("spip_guestbook", array(
+		'id_message' => "",
+		'message' => $message,
+		'email' => $email,
+		'nom' => $nom,
+		'prenom' => $prenom,
+		'pseudo' => $pseudo,
+		'ville' => $ville,
+		'statut' => $post_stat,
+		'ip' => $ip,
+		'note' => $note,
+		'date' => $date
+	));
+	$message = _T('guestbook:message_poste');
 	return $message;
-	}
-	else {
-	$error = "Les champs obligatoires n'ont pas &eacute;t&eacute; remplis...";
-	return $error;
-	}
-	}
-
-
+}
 ?>
