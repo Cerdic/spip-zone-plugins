@@ -64,15 +64,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'email_bonjour' => 'Hallo @nom@,',
 	'email_obligatoire' => 'Email ist Pflichtfeld',
 	'email_valide' => 'Bitte geben Sie eine g&uuml;ltige Mailadresse ein',
-	'exp_categorie' => 'Kategorien der Tabelle \'spip_asso_categories\' die neuen Mitgliedern angeboten werden.',
 	'exp_divers' => 'Dieses Feld steht den Besuchern f&uuml;r Kommentare zur Verf&uuml;gung.',
-	'exp_domaines' => 'Zugang nur f&uuml;r bestimmte Domains gestatten',
-	'exp_domaines2' => 'Bitte folgen Sie beim Eintragen der Domains in die Datei inc/domaines.php dem Beispieleintrag.',
 	'exp_publication' => 'Genehmigung der Ver&ouml;ffentlichung der pers&ouml;nlichen Daten',
 	'exp_statut' => 'W&auml;hlen Sie den Status f&uuml;r neue Mitglieder',
 	'exp_statut_rel' => 'Das Feld enth&auml;lt einen anderen Status als den von SPIP, damit eine Institution eigene Berechtigungen vergeben kann.',
-	'exp_validite' => 'Dieses Feld unterst&uuml;tzt das Plugin <strong>ABONNEMENT</strong>. Bitte markieren, falls dieses Plugin installiert ist.',
-	'expl_format' => 'Bitte w&auml;h&ouml;len Sie das Format, in dem Sie die Beitr&auml;ge der Mailinglisten erhalten m&ouml;chten.',
 
 	// F
 	'fax' => 'Fax',

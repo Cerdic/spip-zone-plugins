@@ -66,15 +66,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'email_bonjour' => 'Bon dia @nom@,',
 	'email_obligatoire' => 'El camp correu electr&ograve;nic &eacute;s obligatori',
 	'email_valide' => 'Vulgueu introduir un correu electr&ograve;nic v&agrave;lid',
-	'exp_categorie' => 'Llista desplegable de les categories de la taula \'spip_asso_categories\' a proposar als nous adherents.',
 	'exp_divers' => 'Camp que ser&agrave; proposat als visitants amb el nom de comentari',
-	'exp_domaines' => 'Restringir l\'acc&eacute;s a una llista de dominis definida pr&egrave;viament',
-	'exp_domaines2' => 'Vulgueu definir, seguint el model, els vostres dominis al fitxer inc/domaines.php.',
 	'exp_publication' => 'Autoritzaci&oacute; de publicaci&oacute; de les dades personals',
 	'exp_statut' => 'Escolliu l\'estat que voleu atribuir als nous adherents',
 	'exp_statut_rel' => 'Camp diferent del estat d\'SPIP, aquest serveix pel control intern d\'una instituci&oacute;',
-	'exp_validite' => 'Camp &uacute;til amb el plugin <strong>ABONNEMENT</strong>, que heu de marcar si est&agrave; instal&middot;lat ',
-	'expl_format' => 'Format de recepci&oacute; pels correus de les llistes de difusi&oacute;',
 
 	// F
 	'fax' => 'Fax',

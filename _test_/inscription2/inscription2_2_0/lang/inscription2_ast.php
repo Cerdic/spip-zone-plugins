@@ -66,15 +66,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'email_bonjour' => 'Bones @nom@,',
 	'email_obligatoire' => 'El campu email ye obligatoriu',
 	'email_valide' => 'Tienes qu\'inxertar un email v&aacute;lidu',
-	'exp_categorie' => 'Llista estenderexable de les categories de la tabla \'spip_asso_categories\' que s\'ofrecer&aacute;n a los nuevos asociaos.',
 	'exp_divers' => 'Campu que va ofrecese a les visites col nome de comentariu',
-	'exp_domaines' => 'Llendar l\'accesu a una llista predefinida de dominios',
-	'exp_domaines2' => 'Tienes que definir los dominios nel ficheru inc/domaines.php siguiendo el modelu.',
 	'exp_publication' => 'Autorizaci&oacute;n pa espublizar los datos personales',
 	'exp_statut' => 'Escueye l\'estatutu que quies da-yos a los asociaos nuevos',
 	'exp_statut_rel' => 'Campu diferente del estatutu de SPIP, esti sirve pa llevar el control internu d\'una instituci&oacute;n',
-	'exp_validite' => 'Campu afayadizu col plugin <strong>ABONNEMENT</strong>, m&aacute;rcalu si ta instal&aacute;u',
-	'expl_format' => 'Formatu de receici&oacute;n pa los emails de les llistes de difusi&oacute;n',
 
 	// F
 	'fax' => 'Fax',

@@ -70,15 +70,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'email_bonjour' => 'Bonjour @nom@,',
 	'email_obligatoire' => 'Le champ email est obligatoire',
 	'email_valide' => 'Veuillez ins&eacute;rer un email valide',
-	'exp_categorie' => 'Liste d&eacute;roulante des cat&eacute;gories de la table \'spip_asso_categories\' &agrave; proposer aux nouveaux adherents.',
 	'exp_divers' => 'Champ qui sera propos&eacute; aux visiteurs avec le nom de commentaire',
-	'exp_domaines' => 'Restreindre l\'acc&egrave;s &agrave; une liste pr&eacute;d&eacute;finie de domaines',
-	'exp_domaines2' => 'Veuillez d&eacute;finir vos domaines dans le fichier inc/domaines.php en suivant le mod&egrave;le.',
 	'exp_publication' => 'Autorisation de publication des donn&eacute;es personnelles',
 	'exp_statut' => 'Choisissez le statut que vous voulez attribuer aux nouveaux adh&eacute;rents',
 	'exp_statut_rel' => 'Champ diff&eacute;rent du statut de SPIP, celui-ci sert pour le controle interne d\'une institution',
-	'exp_validite' => 'Champ utile avec le plugin <strong>ABONNEMENT</strong>, &agrave; cocher s\'il est install&eacute;',
-	'expl_format' => 'Format de reception pour les emails des listes de diffusion',
 
 	// F
 	'fax' => 'Fax',

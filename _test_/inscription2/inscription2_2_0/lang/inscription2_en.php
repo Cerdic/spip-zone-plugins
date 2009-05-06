@@ -66,15 +66,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'email_bonjour' => 'Hello @nom@,',
 	'email_obligatoire' => 'An email address is required',
 	'email_valide' => 'Please insert a valid e-mail address',
-	'exp_categorie' => 'Drop-down list of the categories from the table \'spip_asso_categories\' for the new user to choose one.',
 	'exp_divers' => 'Field which will be offered to the visitors with the name Comments',
-	'exp_domaines' => 'Restrict access to a predefined list of domains',
-	'exp_domaines2' => 'Please define your domains in the  inc/domaines.php file, following the example given.',
 	'exp_publication' => 'Authorization for publication of personal data',
 	'exp_statut' => 'Choose the status to be given to new members',
 	'exp_statut_rel' => 'This field is different from the SPIP status, this one is used for the internal control of an institution',
-	'exp_validite' => 'Field used with the <strong>ABONNEMENT</strong> plugin: tick the box if it is installed',
-	'expl_format' => 'Choose the format in which you prefer to receive the newsletter emails',
 
 	// F
 	'fax' => 'Fax',

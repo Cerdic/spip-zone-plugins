@@ -39,16 +39,12 @@
         <fieldset class="info_publication">
 	        <legend><:inscription2:publication:></legend>
 			<ul>
-		        <li class="editer_publication"">
+		        <li class="editer_publication">
 	                <label for="publication"><:inscription2:publication:></label>
 		            <input type="checkbox" class="checkbox" name="publication" id="publication" [(#ENV{publication}|?{'checked="checked"'})] value="on" />
 		        </li>
 			</ul>	        
         </fieldset>]
-
-        [(#CONFIG{inscription2/domaines}|=={on}|oui)
-	        [(#INCLURE{fond=formulaires/inscription2_form_domaines}{env})]
-        ]
 
 	    <p class="boutons">
 		    <input type="submit" class="submit" value="<:bouton_valider:>" />
