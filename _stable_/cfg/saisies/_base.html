@@ -31,7 +31,7 @@
 #SET{obligatoire,#ENV{obligatoire}|et{#ENV{obligatoire}|!={non}}|?{obligatoire,''}}
 <li class="editer_[(#ENV{nom})][ (#GET{obligatoire})][ (#GET{erreurs}|oui)erreur]">
 	<label for="champ_#ENV{nom}">
-		[(#ENV{label}|sinon{#ENV{nom}})]
+		[(#ENV*{label}|sinon{#ENV{nom}})]
 		[<span class='obligatoire'>(#GET{obligatoire}|et{#ENV{info_obligatoire}})#ENV*{info_obligatoire}</span>]
 	</label>
 		[<span class='erreur_message'>(#GET{erreurs})</span>]
