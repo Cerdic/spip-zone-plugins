@@ -135,14 +135,7 @@
 				[(#SAISIE{case,divers}
 					{label=<:inscription2:publication:>}
 					{explication=<:inscription2:exp_publication:>})]
-
-				<li>
-					<label>
-						<:inscription2:exp_domaines:>
-					</label>
-					<input type="checkbox" name="domaines" onclick="showhide(this, '#expl')" [(#ENV{domaines}|?{checked="checked"})] id="domaines" />
-					<span id="expl" style="[(#ENV{domaines}|=={on}|?{display: block;, display:none;})]"><:inscription2:exp_domaines2:></span>
-				</li>
+				
 			</ul>
 			</fieldset>
 		</li>
