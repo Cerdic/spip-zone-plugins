@@ -83,7 +83,7 @@ function add_outil($tableau) {
 	if (!isset($tableau['id'])) { $tableau['id']='erreur'.count($outils); $tableau['nom'] = _T('couteauprive:erreur_id'); }
 	$tableau['index'] = $index;
 	$perso = $tableau['id'] . '_perso';
-	$outils[$tableau['id']] = is_array($GLOBALS['mes_outils'][$perso])
+	$outils[$tableau['id']] = isset($GLOBALS['mes_outils'][$perso]) && is_array($GLOBALS['mes_outils'][$perso])
 		?array_merge($tableau, $GLOBALS['mes_outils'][$perso])
 		:$tableau;
 }

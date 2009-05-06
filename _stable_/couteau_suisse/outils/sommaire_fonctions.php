@@ -108,7 +108,7 @@ function sommaire_d_article($texte) {
 	// s'il n'y a aucun intertitre, on ne fait rien
 	// si la balise est utilisee, il faut quand meme inserer les ancres de retour
 	if((strpos($texte, '<h')===false)) return $texte;
-		else return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite|onglets|table', 'sommaire_d_article_rempl', $texte, false);
+	return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite|onglets|table', 'sommaire_d_article_rempl', $texte, false);
 }
 
 // fonction appelee par le traitement post_propre de #CS_SOMMAIRE
