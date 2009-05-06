@@ -5,11 +5,20 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	// C
 	'clave_engadida' => 'Added key: ',
-	'conseguir' => '(obtain)',
-	'default_geoloc' => 'Default maps position:',
 	'configuration' => 'Configuration',
+	'conseguir' => '(obtain)',
+	
+	// E
+	'erreur_api_browser' => 'Sorry, the Google Maps API is not compatible with this browser',
+	
+	// D
+	'default_geoloc' => 'Default maps position:',
+	
+	// M
 	'miseajour' => 'Update'
+	
 
 );
 

@@ -25,6 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_cle' => 'Google Map API Key : <a href="http://www.google.com/apis/maps/signup.html" class="spip_out">Obtenir une cl&eacute;</a>',
 	'explication_compacte' => '&Eacute;viter le compactage du javascript',
 	'explication_custom_control' => 'D&eacute;sactiver les contr&ocirc;les personnalis&eacute;s :',
+	'erreur_api_browser' => 'D&eacute;sol&eacute;, l\'API Google Maps n\'est pas compatible avec votre navigateur',
 	
 	// L
 	'latitude' => 'Latitude',

@@ -72,7 +72,7 @@ function inc_geomap_append_moveend_map_dist($target_id,$target_lat_id,$target_lo
 				jQuery("#'.$target_zoom_id.'").val(newlevel);}
 			);':'')
 	.'		} else {
-				alert("Sorry, the Google Maps API is not compatible with this browser");
+				alert("'._T('geomap:geomap:erreur_api_browser').'");
 			}
 		/*]]>*/
 	</script>';
