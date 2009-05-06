@@ -1,8 +1,7 @@
 <?php
 
-// This is a SPIP language file  --  Ceci est un fichier langue de SPIP nomme admin_lang genere le NOW()
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 // langue / language = fr
-// Traduction -- Pierre FICHES <pierre.fiches@free.fr>
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
