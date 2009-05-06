@@ -28,6 +28,16 @@ function guestbook_verifier_tables(){
 			sql_alter("TABLE `spip_guestbook_reponses` CHANGE `id_auteur` `id_auteur` MEDIUMINT( 5 ) NOT NULL");
 			ecrire_meta($nom_meta_plug,$current_version='2.0');
 		}
+		if (version_compare($current_version,'2.1','<')){
+			sql_alter("TABLE `spip_guestbook` CHANGE `id_message` `id_message` INT(10) NOT NULL AUTO_INCREMENT");
+			sql_alter("TABLE `spip_guestbook` CHANGE `ip` `ip` VARCHAR(15) NOT NULL");
+			sql_alter("TABLE `spip_guestbook` CHANGE `note` `note` INT(2) NOT NULL");
+			sql_alter("TABLE `spip_guestbook` CHANGE `nom` `nom` VARCHAR(100) NOT NULL");
+			sql_alter("TABLE `spip_guestbook_reponses` CHANGE `id_reponse` `id_reponse` INT(10) NOT NULL AUTO_INCREMENT");
+			sql_alter("TABLE `spip_guestbook_reponses` CHANGE `id_message` `id_message` INT(10) NOT NULL");
+			sql_alter("TABLE `spip_guestbook_reponses` CHANGE `id_auteur` `id_auteur` INT(10) NOT NULL");
+			ecrire_meta($nom_meta_plug,$current_version='2.1');
+		}
 		ecrire_metas();
 	}
 }

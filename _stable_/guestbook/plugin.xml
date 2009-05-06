@@ -1,8 +1,8 @@
 <plugin>
 	<nom>GuestBook</nom>
 	<auteur>Yohann Prigent (potter64) - Avril-Mai 2009</auteur>
-	<version>2.0</version>
-	<version_base>2.0</version_base>
+	<version>2.1</version>
+	<version_base>2.1</version_base>
 	<etat>stable</etat>
 	<description>Guestbook vous procure un Livre d'or pour votre site Spip. Passez la souris sur le bouton Forum pour voir apparaitre l'interface de mod&eacute;ration</description>
 	<lien>[Documentation->http://www.spip-contrib.net/Guestbook]</lien>

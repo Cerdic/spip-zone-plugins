@@ -17,16 +17,16 @@ function guestbook_declarer_tables_interfaces($interface){
 }
 function guestbook_declarer_tables_principales($tables_principales){
 	$spip_guestbook = array(
-		"id_message" 	=> "bigint(21) NOT NULL auto_increment",
+		"id_message" 	=> "INT(10) NOT NULL AUTO_INCREMENT",
 		"message" 	=> "text NOT NULL",
 		"email" 	=> "text NOT NULL",
-		"nom" => "VARCHAR(255) NOT NULL DEFAULT '0'",
+		"nom" => "VARCHAR(100) NOT NULL DEFAULT '0'",
 		"prenom" => "text NOT NULL",
 		"pseudo" => "text NOT NULL",
 		"ville" => "text NOT NULL",
 		"statut" => "VARCHAR(8) NOT NULL",
-		"ip" => "VARCHAR(255) NOT NULL",
-		"note" => "VARCHAR(255) NOT NULL",
+		"ip" => "VARCHAR(15) NOT NULL",
+		"note" => "INT(2) NOT NULL",
 		"date"	=> "DATETIME");
 	
 	$spip_guestbook_key = array(
@@ -40,9 +40,9 @@ function guestbook_declarer_tables_principales($tables_principales){
 }
 function guestbook_declarer_tables_auxiliaires($tables_auxiliaires){
 	$spip_guestbook_reponses = array(
-		"id_reponse" => "MEDIUMINT( 5 ) NOT NULL auto_increment",
-		"id_message" => "MEDIUMINT( 5 ) NOT NULL",
-		"id_auteur" => "MEDIUMINT( 5 ) NOT NULL",
+		"id_reponse" => "INT(10) NOT NULL AUTO_INCREMENT",
+		"id_message" => "INT(10) NOT NULL",
+		"id_auteur" => "INT(10) NOT NULL",
 		"message" =>  "TEXT",
 		"statut" => "VARCHAR(8) NOT NULL",
 		"date"	=> "DATETIME");
