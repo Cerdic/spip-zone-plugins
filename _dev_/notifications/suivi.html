@@ -26,9 +26,9 @@
             <h1><:notifications:Notifications:></h1>
 
 			<div class="chapo">
-			<p>Ceci est votre page personnalis&#233;e de suivi du site #NOM_SITE_SPIP.</p>
+			<p><:suivis_public_votre_page:></p>
 			
-			<p>Vous pourrez (quand ce sera fonctionnel...) y retrouver tous vos messages de forum, obtenir un fil RSS des r&#233;ponses qui y seront apport&#233;es, choisir votre mode de notification, etc.</p>
+			<p><:suivis_public_description:></p>
 
 			</div>
 
@@ -51,15 +51,15 @@
         <div class="menu articles">
             <h2>Options :</h2>
 
-			<p>TODO: case à cocher pour ne plus recevoir de notifications</p>
-			<p>TODO: case à cocher sur chaque article/thread</p>
-			<p>TODO: changer d'email</p>
+			<p><:suivis_public_notif_desactiver:></p>
+			<p><:suivis_public_article_thread:></p>
+			<p><:suivis_public_changer_email:></p>
 
 			#SESSION{nom}
 
 			<B_forums>
 			#ANCRE_PAGINATION
-            <h2>Vos forums</h2>
+            <h2><:suivis_public_vos_forums:></h2>
 			[<p class="pagination">(#PAGINATION)</p>]
 			<ul>
             <BOUCLE_forums(FORUMS) {id_auteur=#SESSION{id_auteur}}
