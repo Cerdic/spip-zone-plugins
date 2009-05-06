@@ -197,6 +197,11 @@
 						ecrire_meta('spip_sondages_version', $version_base = 2.0);
 						ecrire_metas();
 					}
+					if ($version_base < 2.1) {
+						// modeles
+						ecrire_meta('spip_sondages_version', $version_base = 2.1);
+						ecrire_metas();
+					}
 				}
 				break;
 			case 'uninstall':
