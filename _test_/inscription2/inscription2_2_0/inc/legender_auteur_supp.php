@@ -79,8 +79,6 @@ function legender_auteur_supp_voir($id_auteur){
 
 	$res .= "<div class='nettoyeur'></div>";
 	$res .= "<div id='auteur_infos_voir_supp'>";
-
-	$id_auteur = _request('id_auteur');
 	
 	$var_user[] = 'a.id_auteur';
 	foreach(lire_config('inscription2',array()) as $cle => $val){
