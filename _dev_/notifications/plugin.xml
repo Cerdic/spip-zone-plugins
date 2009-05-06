@@ -20,7 +20,7 @@
 				[Documentation sur Spip-Contrib->http://www.spip-contrib.net/Le-plugin-notifications]
 				
 			[en]
-				Sends mail notifications for certain actions : forums posts & answers notified to users, private messages notified to redactors or articles publication notified to their authors.
+				Sends mail notifications for certain actions : forums posts and answers notified to users, private messages notified to redactors or articles publication notified to their authors.
 
 				[Configure with CFG->./index.php?exec=cfg&amp;cfg=notifications]
 				[Documentation sur Spip-Contrib->http://www.spip-contrib.net/Le-plugin-notifications] (Fr. not yet available in English)
