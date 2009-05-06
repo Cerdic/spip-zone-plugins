@@ -44,9 +44,4 @@ function geomap_insert_head_prive($flux){
 	return $flux;
 }
 
-function geomap_I2_cfg_form($flux) {
-	$flux .= recuperer_fond('fonds/inscription2_geoloc');
-	return ($flux);
-}
-
 ?>

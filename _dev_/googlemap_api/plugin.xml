@@ -22,12 +22,7 @@ _ Help to use the API in several plugins (Gis, Geoforms...).
  <fonctions>public/geomap_balises.php</fonctions>
  <prefix>geomap</prefix>
  <chemin dir='' />
- 
-<pipeline>
-	<nom>I2_cfg_form</nom>
-	<action>I2_cfg_form</action>
-	<inclure>geomap_pipeline.php</inclure>
-</pipeline>
+
 <pipeline>
 	<nom>header_prive</nom>
 	<action>insert_head_prive</action>
