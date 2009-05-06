@@ -1,0 +1,12 @@
+#CACHE{0} 
+<!---Noisette à Inclure dans une page  avec INSERT_HEAD--->
+#FORMULAIRE_PHOTOS 
+      <div class="hidden-container"> <BOUCLE_photo1(SPIP_PHOTOS){0,1}{doublons}><a id="thumb1" class='highslide' href='plugins/photos/vignettes/#NOM_PHOTO'
+			onclick="return hs.expand(this, inPageOptions)"> <img src='plugins/photos/vignettes/#NOM_VIGNETTE' alt="#ALT_PHOTO envoyé par: <BOUCLE_envoi1(AUTEURS){id_auteur=#ID_AUTEUR}>#NOM</BOUCLE_envoi1>  [le:(#DATEHEURE|affdate)]"/></a></BOUCLE_photo1> 
+        <BOUCLE_photo(SPIP_PHOTOS){tout}{par id_photo}{inverse}{doublons}>
+        <a class='highslide' href='./plugins/photos/vignettes/#NOM_PHOTO'
+			onclick="return hs.expand(this, inPageOptions)"> <img src='./plugins/photos/vignettes/#NOM_VIGNETTE' alt="#ALT_PHOTO envoyé par: <BOUCLE_envoi(AUTEURS){id_auteur=#ID_AUTEUR}>#NOM</BOUCLE_envoi>  [le:(#DATEHEURE|affdate)]"/></a> 
+        </BOUCLE_photo>
+      </div>
+      <div id="gallery-area" style="width: 520px; height: 820px; margin: 0 auto; border: 1px solid silver"></div>
+      <div id="inpage_ad"> </div>
