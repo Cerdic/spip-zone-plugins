@@ -87,7 +87,10 @@ function abo_traiter_activer_article($id_article, $id_auteur, $hash='') {
 			),
 			$where);
 	}
-
+	
+	// signaler un changement
+	spip_log("abonnement: activation article n°$id_article pour auteur $id_auteur","abonnement");
+	
 	return true;
 }
 

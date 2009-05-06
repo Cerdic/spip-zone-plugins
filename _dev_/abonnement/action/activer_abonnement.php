@@ -102,6 +102,10 @@ function abo_traiter_activer_abonnement($id_abonnement, $id_auteur, $hash = fals
 			),
 			$where);
 	}
+	
+	// signaler un changement
+	spip_log("abonnement: activation abo n°$id_abonnement pour auteur $id_auteur","abonnement");
+	
 	return true;
 }
 
