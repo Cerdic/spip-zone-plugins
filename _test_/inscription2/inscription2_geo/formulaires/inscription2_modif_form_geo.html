@@ -1,0 +1,83 @@
+[(#REM) Ne pas prendre les latitude/longitude dans le #ENV, 
+des fois qu'elles ne soient pas valides et feraient planter la carte]
+
+<BOUCLE_auteurs(AUTEURS){id_auteur}>
+	[(#SET{latitude,[(#LATITUDE|sinon{#CONFIG{geomap/latitude,0.0}})]})]
+	[(#SET{longitude,[(#LONGITUDE|sinon{#CONFIG{geomap/longitude,0.0}})]})]
+</BOUCLE_auteurs>
+</B_auteurs>
+	[(#SET{latitude,#CONFIG{geomap/latitude,0.0}})]
+	[(#SET{longitude,#CONFIG{geomap/longitude,0.0}})]
+<//B_auteurs>
+
+[(#REM) On verifie que l'on a bien un des champs à afficher]
+[(#CONFIG{inscription2/latitude}|=={on}|oui) #SET{afficher_geo,true}]
+[(#CONFIG{inscription2/longitude}|=={on}|oui) #SET{afficher_geo,true}]
+
+[(#GET{afficher_geo}|oui)
+<fieldset class="info_geo">
+    <legend>
+        <:i2_geo:geolocalisation:>
+    </legend>
+	<ul>
+		<li style="padding:5px 0;">
+			<div id="formMap" style="width:100%;height:350px"></div>
+		</li>
+		[(#CONFIG{inscription2/latitude_fiche_mod}|oui)
+		<li class="editer_latitude[ (#CONFIG{inscription2/latitude_obligatoire}|=={on}|oui)obligatoire][ (#ENV**{erreurs}|table_valeur{latitude}|oui)erreur]">
+			<label for="latitude"><:i2_geo:latitude:></label>
+			<input type="text" class="text" name="latitude" id="latitude" value="#ENV{latitude}" />
+			[<p class='erreur'>(#ENV**{erreurs}|table_valeur{latitude})</p>]
+		</li>]
+		[(#CONFIG{inscription2/latitude_fiche_mod}|non)
+		<li class="editer_longitude[ (#CONFIG{inscription2/longitude_obligatoire}|=={on}|oui)obligatoire][ (#ENV**{erreurs}|table_valeur{longitude}|oui)erreur]">
+			<label for="longitude"><:i2_geo:longitude:></label>
+			<input type="text" class="text" name="longitude" id="longitude" value="#ENV{longitude}" />
+			[<p class='erreur'>(#ENV**{erreurs}|table_valeur{longitude})</p>]
+		</li>]
+	</ul>
+</fieldset>
+
+<script type="text/javascript">
+	var loadmap = function(){
+		if (GBrowserIsCompatible()) {
+		    // create the map
+		    var map = new GMap2(jQuery("#formMap")[0]);
+		    map.addControl(new GLargeMapControl());
+		    map.addControl(new GMapTypeControl());
+			pointM = new GLatLng([(#GET{latitude})],[(#GET{longitude})]);
+			marker = new GMarker(pointM,{draggable:true});
+			map.setCenter(pointM, [(#CONFIG{geomap/zoom,0.0})], G_NORMAL_MAP);
+			map.addOverlay(marker);
+		    // creamos el evento para crear nuevos marcadores
+		    GEvent.addListener(map, "click", function(overlay, point){
+				map.clearOverlays();
+				zoom = map.getZoom();
+				if (point) {
+					console.log(point);
+					markerM = new GMarker(point,{draggable:true});
+					map.addOverlay(markerM);
+					map.panTo(point);
+					jQuery('#formMap').parents('form').find('input[name=latitude]').val(point.y);
+					jQuery('#formMap').parents('form').find('input[name=longitude]').val(point.x);
+					GEvent.addListener(markerM, "dragend", function(){
+						var pointM = markerM.getPoint();
+						zoom = map.getZoom();
+						jQuery('#formMap').parents('form').find('input[name=latitude]').val(pointM.y);
+						jQuery('#formMap').parents('form').find('input[name=longitude]').val(pointM.x);
+				    });
+				}
+		    });
+			GEvent.addListener(marker, "dragend", function(){
+				var pointM = marker.getPoint();
+				zoom = map.getZoom();
+				jQuery('#formMap').parents('form').find('input[name=latitude]').val(pointM.y);
+				jQuery('#formMap').parents('form').find('input[name=longitude]').val(pointM.x);
+		    });
+		} else{
+		    alert("<:geomap:erreur_api_browser:>");
+		}
+	}
+	loadmap();
+	onAjaxLoad(loadmap);
+</script>]

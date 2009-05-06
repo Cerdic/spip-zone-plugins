@@ -1,0 +1,48 @@
+<BOUCLE_long(AUTEURS_ELARGIS){id_auteur}>
+[(#SET{lng,[(#LONGITUDE|?{#LONGITUDE,#CONFIG{geomap/longitude,0.0}})]})]
+</BOUCLE_long>
+[(#SET{lng,#CONFIG{geomap/longitude,0.0}})]
+<//B_long>
+
+[(#CONFIG{geomap/cle_api}|oui)
+<li style="padding:0">
+<div id="formMap" style="width: 470px; height: 350px;margin:10px auto;overflow:hidden"></div>
+<script type="text/javascript">
+	var formMap = null;
+	if (GBrowserIsCompatible()) {
+		var lat= #ENV{val,#CONFIG{geomap/latitude,0.0}};
+		var long= #GET{lng};
+		var map = new GMap2(jQuery("#formMap")[0]);
+		formMap.addControl(new GLargeMapControl());
+		formMap.addControl(new GMapTypeControl());
+		formMap.setCenter(new GLatLng(lat,long), #CONFIG{geomap/zoom,0});
+		geocoder = new GClientGeocoder();
+		point = new GPoint(parseFloat(long),parseFloat(lat));
+		marker = new GMarker(point,{draggable:true});
+		formMap.addOverlay(marker);
+		GEvent.addListener(marker, 'dragend', function(){
+			var point = marker.getPoint();
+			jQuery("#latitude").val(point.lat());
+			jQuery("#longitude").val(point.lng());
+		});
+		GEvent.addListener(formMap, 'moveend', function() {
+			formMap.clearOverlays();
+			var center = formMap.getCenter();
+			jQuery("#latitude").val(center.lat());
+			jQuery("#longitude").val(center.lng());
+			var point = new GLatLng(parseFloat(center.lat()), parseFloat(center.lng()));
+			marker = new GMarker(point,{draggable:true}); 
+			formMap.addOverlay(marker);
+			GEvent.addListener(marker, 'dragend', function(){
+				var point = marker.getPoint();
+			jQuery("#latitude").val(point.lat());
+			jQuery("#longitude").val(point.lng());
+			});
+		});
+	} else {
+		alert("<:geomap:erreur_api_browser:>");
+	}
+</script>
+</li>]
+<li><label><:inscription2:latitude:></label>
+<input type='text' id='#ENV{cle}' name='#ENV{cle}' class='text' value='#ENV{val}' /></li>
