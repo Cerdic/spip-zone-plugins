@@ -15,6 +15,8 @@
 	
 	function validation(){
 		var validator = cQuery(id).validate({
+			errorElement:"p",
+			errorClass: "erreur",
 			onkeyup:function(){
 				validation();
 			},
@@ -31,45 +33,27 @@
 			},
 			rules: {
 				#ENV{name_adresse}: { 
-					[(#CONFIG{inscription2/adresse_obligatoire}|=={on}|?{required: true}),]
-					rangelength:[5,1000],
-				},
-				#ENV{name_code_postal}:{
-					[(#CONFIG{inscription2/code_postal_obligatoire}|=={on}|?{required: true}),]
-					postal:true, 
-					rangelength:[3,20],
+					rangelength:[5,1000]
 				},
 				#ENV{name_ville}: {
-					[(#CONFIG{inscription2/ville_obligatoire}|=={on}|?{required: true}),]
 					chaine:true,
 					rangelength:[2,30]
 				},
 				#ENV{name_pays}:{[(#CONFIG{inscription2/pays_obligatoire}|=={on}|?{required: true})]}
 			},
 			messages: {
-				#ENV{name_adresse}: {
-					required:"<:inscription2:champ_obligatoire:>"
-				},
-				#ENV{name_code_postal}: {
-					required:"<:inscription2:champ_obligatoire:>",
-					postal:"<:inscription2:cp_valide:>"
-				},
 				#ENV{name_ville}: {
-					required:"<:inscription2:champ_obligatoire:>",
 					chaine:"<:inscription2:chaine_valide:> <:inscription2:chainelettre:>"
-				},
-				#ENV{name_pays}: {
-					required:"<:inscription2:champ_obligatoire:>"
-				},
+				}
 			}
 		});
 		id.find('.obligatoire input').each(function(){
 			if(cQuery(this).val() == ""){
 				cQuery(this).addClass('error');
 				var id_label = cQuery(this).attr('name');
-				var label = '<label class="error" generated="true"><:inscription2:champ_obligatoire:></label>';
-				cQuery(this).parent("div").append(label);
-				cQuery(this).parent("div").find("label.error").show();
+				var erreur = '<p class="error" generated="true"><:inscription2:champ_obligatoire:></p>';
+				cQuery(this).parent("div").append(erreur);
+				cQuery(this).parent("div").find("p.error").show();
 				id.find('.crayon-submit').hide();
 			}
 		});
@@ -86,37 +70,33 @@
 <fieldset[ style="(#ENV{style})"]>
 	<legend><:inscription2:votre_adresse:></legend>
 	<ul>
-		[(#CONFIG{inscription2/adresse_fiche_mod}|?{' ',''})
-		#SET{adresse_obl, false}
-		[(#CONFIG{inscription2/adresse_obligatoire}|=={on}|?{' ',''})#SET{adresse_obl, true}]
-		[(#GET{adresse_obl}|=={true}|?{<li class="obligatoire">,<li>})]
+		[(#CONFIG{inscription2/adresse_fiche_mod}|oui)
+		[(#CONFIG{inscription2/adresse_obligatoire}|=={on}|oui)#SET{adresse_obl, true}]
+		[(#GET{adresse_obl}|?{<li class="obligatoire">,<li>})]
 			<label><:inscription2:adresse:></label> 
-			<textarea class="crayon-active" name="#ENV{name_adresse}" style="width:#ENV{largeur}px;">[(#ADRESSE**|entites_html)]</textarea><br />
+			<textarea class="crayon-active text[(#GET{adresse_obl}|oui) obligatoire]" name="#ENV{name_adresse}" style="width:#ENV{largeur}px;">[(#ADRESSE**|entites_html)]</textarea><br />
 		</li>]
 	
-		[(#CONFIG{inscription2/code_postal_fiche_mod}|?{' ',''})
-		#SET{code_postal_obl, false}
-		[(#CONFIG{inscription2/code_postal_obligatoire}|=={on}|?{' ',''})#SET{code_postal_obl, true}]
-		[(#GET{code_postal_obl}|=={true}|?{<li class="obligatoire">,<li>})]
+		[(#CONFIG{inscription2/code_postal_fiche_mod}|oui)
+		[(#CONFIG{inscription2/code_postal_obligatoire}|=={on}|oui)#SET{code_postal_obl,true}]
+		[(#GET{code_postal_obl}|?{<li class="obligatoire">,<li>})]
 			<label><:inscription2:code_postal:></label>
-			<input class="crayon-active" name="#ENV{name_code_postal}" style="width:#ENV{largeur}px;" value="[(#CODE_POSTAL**|entites_html)]" />
+			<input class="crayon-active text cp[(#GET{code_postal_obl}|oui) obligatoire]" name="#ENV{name_code_postal}" style="width:#ENV{largeur}px;" value="[(#CODE_POSTAL**|entites_html)]" />
 		</li>]
 
-		[(#CONFIG{inscription2/ville_fiche_mod}|?{' ',''})
-		#SET{ville_obligatoire, false}
-		[(#CONFIG{inscription2/ville_obligatoire}|=={on}|?{' ',''}) #SET{ville_obligatoire, true}]
-		[(#GET{ville_obligatoire}|=={true}|?{<li class="obligatoire">,<li>})]
+		[(#CONFIG{inscription2/ville_fiche_mod}|oui)
+		[(#CONFIG{inscription2/ville_obligatoire}|=={on}|oui)#SET{ville_obl,true}]
+		[(#GET{ville_obl}|=={true}|?{<li class="obligatoire">,<li>})]
 			<label><:inscription2:ville:></label> 
-			<input class="crayon-active" name="#ENV{name_ville}" style="width:#ENV{largeur}px;" value="[(#VILLE**|entites_html)]" />
+			<input class="crayon-active text[(#GET{ville_obl}|oui) obligatoire]" name="#ENV{name_ville}" style="width:#ENV{largeur}px;" value="[(#VILLE**|entites_html)]" />
 		</li>]
 
-		[(#CONFIG{inscription2/pays_fiche_mod}|?{' ',''})
-		#SET{pays_obligatoire, false}
-		[(#CONFIG{inscription2/pays_obligatoire}|=={on}|?{' ',''}) #SET{pays_obligatoire, true}]
-		[(#GET{pays_obligatoire}|=={true}|?{<li class="obligatoire">,<li>})]
+		[(#CONFIG{inscription2/pays_fiche_mod}|oui)
+		[(#CONFIG{inscription2/pays_obligatoire}|=={on}|oui)#SET{pays_obl,true}]
+		[(#GET{pays_obl}|?{<li class="obligatoire">,<li>})]
 			<label><:inscription2:pays:></label> 
 			#SET{id,#PAYS}
-			<select class="crayon-active" name="#ENV{name_pays}" style="width:#ENV{largeur}px;" onchange="validation()">
+			<select class="crayon-active text[(#GET{pays_obl}|oui) obligatoire]" name="#ENV{name_pays}" style="width:#ENV{largeur}px;" onchange="validation()">
 				<INCLURE{fond=controleurs/pays}{id=#GET{id}}>
 			</select>
 		</li>]

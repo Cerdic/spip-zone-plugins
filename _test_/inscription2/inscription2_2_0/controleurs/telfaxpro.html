@@ -1,6 +1,6 @@
 [(#REM)
 
-	Controleur pour le crayon 'telfax', uniquement html
+	Controleur pour le crayon 'telfaxpro', uniquement html
 	Validation JS pour les champs spécifiés obligatoires
 	Si les champs ne sont pas activés dans le CFG, ils n'apparaissent pas...
 ]
@@ -15,6 +15,8 @@
 	
 	function validation(){
 		var validator = cQuery(id).validate({
+			errorElement:"p",
+			errorClass:"erreur",
 			onkeyup:function(){
 				validation();
 			},
@@ -28,44 +30,12 @@
 			success: function(label){
 				label.remove();
 				crayon_affiche_submit(me,id);
-			},
-			rules: {
-				#ENV{name_telephone_pro}: {
-					[(#CONFIG{inscription2/telephone_pro_obligatoire}|=={on}|?{required: true,}),]
-					numero:true,
-					rangelength:[6,20],
-				},
-				#ENV{name_mobile_pro}: {
-					[(#CONFIG{inscription2/mobile_pro_obligatoire}|=={on}|?{required: true,}),]
-					numero:true,
-					rangelength:[6,20]
-				},
-				#ENV{name_fax_pro}: {
-					[(#CONFIG{inscription2/fax_pro_obligatoire}|=={on}|?{required: true,}),]
-					numero:true,
-					rangelength:[6,20]
-				},
-			},
-			messages: {
-				#ENV{name_telephone_pro}: {
-					required:"<:inscription2:champ_obligatoire:>",
-					numero:"<:inscription2:numero_valide:>"
-				},
-				#ENV{name_mobile_pro}: {
-					required:"<:inscription2:champ_obligatoire:>",
-					numero:"<:inscription2:numero_valide:>"
-				},
-				#ENV{name_fax_pro}: {
-					required:"<:inscription2:champ_obligatoire:>",
-					numero:"<:inscription2:numero_valide:>"
-				}
 			}
 		});
 		//On ajoute l'asterisque qui signale qu'un champ est obligatoire
-		id.find('.obligatoire input').each(function(){
+		id.find('input .obligatoire').each(function(){
 			if(cQuery(this).val() == ""){
-				cQuery(this).addClass('error');
-				var id_label = cQuery(this).attr('name');
+				cQuery(this).parent().addClass('error');
 				var label = '<label class="error" generated="true"><:inscription2:champ_obligatoire:></label>';
 				cQuery(this).parent("div").append(label);
 				cQuery(this).parent("div").find("label.error").show();
@@ -83,30 +53,27 @@
 </script>
 <div class="formulaire_spip">
 <fieldset[ style="(#ENV{style})"]>
-	<legend><:inscription2:vos_contacts_personnels:></legend>
+	<legend><:inscription2:vos_contacts_professionnels:></legend>
 	<ul>
-		[(#CONFIG{inscription2/telephone_pro_fiche_mod}|?{' ',''})
-		#SET{telephone_pro_obl, false}
-		[(#CONFIG{inscription2/telephone_pro_obligatoire}|=={on}|?{' ',''})#SET{telephone_pro_obl, true}]
-		[(#GET{telephone_pro_obl}|=={true}|?{<li class="obligatoire">,<li>})]
+		[(#CONFIG{inscription2/telephone_pro_fiche_mod}|oui)
+		[(#CONFIG{inscription2/telephone_pro_obligatoire}|=={on}|oui)#SET{telephone_pro_obl,true}]
+		[(#GET{telephone_pro_obl}|?{<li class="obligatoire">,<li>})]
 		<label><:inscription2:telephone:> : </label>
-		<input class="crayon-active text" name="#ENV{name_telephone_pro}" style="width:#ENV{largeur}px;" value="[(#TELEPHONE_PRO**|entites_html)]" />
+		<input class="crayon-active text numero[(#GET{telephone_pro_obl}|oui) obligatoire]" name="#ENV{name_telephone_pro}" style="width:#ENV{largeur}px;" value="[(#TELEPHONE_PRO**|entites_html)]" />
 		</li>]
 	
-		[(#CONFIG{inscription2/mobile_pro_fiche_mod}|?{' ',''})
-		#SET{mobile_obl, false}
-		[(#CONFIG{inscription2/mobile_pro_obligatoire}|=={on}|?{' ',''})#SET{mobile_pro_obl, true}]
-		[(#GET{mobile_pro_obl}|=={true}|?{<li class="obligatoire">,<li>})]
+		[(#CONFIG{inscription2/mobile_pro_fiche_mod}|oui)
+		[(#CONFIG{inscription2/mobile_pro_obligatoire}|=={on}|oui)#SET{mobile_pro_obl,true}]
+		[(#GET{mobile_pro_obl}|?{<li class="obligatoire">,<li>})]
 		<label><:inscription2:mobile:> : </label>
-		<input class="crayon-active text" name="#ENV{name_mobile_pro}" style="width:#ENV{largeur}px;" value="[(#MOBILE_PRO**|entites_html)]" />
+		<input class="crayon-active text numero[(#GET{mobile_pro_obl}|oui) obligatoire]" name="#ENV{name_mobile_pro}" style="width:#ENV{largeur}px;" value="[(#MOBILE_PRO**|entites_html)]" />
 		</li>]
 	
-		[(#CONFIG{inscription2/fax_pro_fiche_mod}|?{' ',''})
-		#SET{fax_obl, false}
-		[(#CONFIG{inscription2/fax_pro_obligatoire}|=={on}|?{' ',''})#SET{fax_pro_obl, true}]
-		[(#GET{fax_pro_obl}|=={true}|?{<li class="obligatoire">,<li>})]
+		[(#CONFIG{inscription2/fax_pro_fiche_mod}|oui)
+		[(#CONFIG{inscription2/fax_pro_obligatoire}|=={on}|oui)#SET{fax_pro_obl,true}]
+		[(#GET{fax_pro_obl}|?{<li class="obligatoire">,<li>})]
 		<label><:inscription2:fax:> : </label>
-		<input class="crayon-active text" name="#ENV{name_fax_pro}" style="width:#ENV{largeur}px;" value="[(#FAX_PRO**|entites_html)]" />
+		<input class="crayon-active text numero[(#GET{fax_pro_obl}|oui) obligatoire]" name="#ENV{name_fax_pro}" style="width:#ENV{largeur}px;" value="[(#FAX_PRO**|entites_html)]" />
 		</li>]
 	</ul>
 </fieldset>

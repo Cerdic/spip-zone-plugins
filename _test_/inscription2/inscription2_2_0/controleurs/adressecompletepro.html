@@ -31,37 +31,16 @@
 			},
 			rules: {
 				#ENV{name_adresse_pro}: { 
-					[(#CONFIG{inscription2/adresse_pro_obligatoire}|=={on}|?{required: true,}),]
 					rangelength:[5,1000]
-				},
-				#ENV{name_code_postal_pro}:{
-					[(#CONFIG{inscription2/code_postal_pro_obligatoire}|=={on}|?{required: true,}),]
-					postal:true, 
-					rangelength:[3,20]
-				},
+				}
 				#ENV{name_ville_pro}: {
-					[(#CONFIG{inscription2/ville_pro_obligatoire}|=={on}|?{required: true,}),]
 					chaine:true,
 					rangelength:[2,30]
-				},
-				#ENV{name_pays_pro}:{
-					[(#CONFIG{inscription2/pays_pro_obligatoire}|=={on}|?{required: true,''})]
 				}
 			},
 			messages: {
-				#ENV{name_adresse_pro}: {
-					required:"<:inscription2:champ_obligatoire:>",
-				},
-				#ENV{name_code_postal_pro}: {
-					required:"<:inscription2:champ_obligatoire:>",
-					postal:"<:inscription2:cp_valide:>"
-				},
 				#ENV{name_ville_pro}: {
-					required:"<:inscription2:champ_obligatoire:>",
 					chaine:"<:inscription2:chaine_valide:> <:inscription2:chainelettre:>",
-				},
-				#ENV{name_pays_pro}: {
-					required:"<:inscription2:champ_obligatoire:>"
 				}
 			}
 		});
@@ -87,37 +66,33 @@
 	<fieldset[ style="(#ENV{style})"]>
 		<legend><:inscription2:votre_adresse_pro:></legend>
 		<ul>
-			[(#CONFIG{inscription2/adresse_pro}|?{' ',''})	
-			#SET{adresse_pro_obl, false}
-			[(#CONFIG{inscription2/adresse_pro_obligatoire}|=={on}|?{' ',''})#SET{adresse_pro_obl, true}]
-			[(#GET{adresse_pro_obl}|=={true}|?{<li class="obligatoire">,<li>})]
+			[(#CONFIG{inscription2/adresse_pro_fiche_mod}|oui)	
+			[(#CONFIG{inscription2/adresse_pro_obligatoire}|=={on}|oui)#SET{adresse_pro_obl,true}]
+			[(#GET{adresse_pro_obl}|?{<li class="obligatoire">,<li>})]
 			<label><:inscription2:adresse_pro:></label> 
-			<textarea class="crayon-active" name="#ENV{name_adresse_pro}" style="width:#ENV{largeur}px;">[(#ADRESSE_PRO**|entites_html)]</textarea><br />
+			<textarea class="crayon-active text[(#GET{adresse_pro_obl}|oui) obligatoire]" name="#ENV{name_adresse_pro}" style="width:#ENV{largeur}px;">[(#ADRESSE_PRO**|entites_html)]</textarea><br />
 			</li>]
 	
-			[(#CONFIG{inscription2/code_postal_pro}|?{' ',''})
-			#SET{code_postal_pro_obl, false}
-			[(#CONFIG{inscription2/code_postal_pro_obligatoire}|=={on}|?{' ',''})#SET{code_postal_pro_obl, true}]
-			[(#GET{code_postal_pro_obl}|=={true}|?{<li class="obligatoire">,<li>})]
+			[(#CONFIG{inscription2/code_postal_pro_fiche_mod}|oui)
+			[(#CONFIG{inscription2/code_postal_pro_obligatoire}|=={on}|oui)#SET{code_postal_pro_obl,true}]
+			[(#GET{code_postal_pro_obl}|?{<li class="obligatoire">,<li>})]
 			<label><:inscription2:code_postal_pro:></label>
-			<input class="crayon-active" name="#ENV{name_code_postal_pro}" style="width:#ENV{largeur}px;" value="[(#CODE_POSTAL_PRO**|entites_html)]" />
+			<input class="crayon-active text cp[(#GET{code_postal_pro_obl}|oui) obligatoire]" name="#ENV{name_code_postal_pro}" style="width:#ENV{largeur}px;" value="[(#CODE_POSTAL_PRO**|entites_html)]" />
 			</li>]
 	
-			[(#CONFIG{inscription2/ville_pro}|?{' ',''})
-			#SET{ville_pro_obligatoire, false}
-			[(#CONFIG{inscription2/ville_pro_obligatoire}|=={on}|?{' ',''}) #SET{ville_pro_obligatoire, true}]
-			[(#GET{ville_pro_obligatoire}|=={true}|?{<li class="obligatoire">,<li>})]
+			[(#CONFIG{inscription2/ville_pro_fiche_mod}|oui)
+			[(#CONFIG{inscription2/ville_pro_obligatoire}|=={on}|oui)#SET{ville_pro_obl,true}]
+			[(#GET{ville_pro_obligatoire}|?{<li class="obligatoire">,<li>})]
 			<label><:inscription2:ville_pro:></label>
-			<input class="crayon-active" name="#ENV{name_ville_pro}" style="width:#ENV{largeur}px;" value="[(#VILLE_PRO**|entites_html)]" />
+			<input class="crayon-active text[(#GET{ville_pro_obligatoire}|oui) obligatoire]" name="#ENV{name_ville_pro}" style="width:#ENV{largeur}px;" value="[(#VILLE_PRO**|entites_html)]" />
 			</li>]
 	
-			[(#CONFIG{inscription2/pays_pro}|?{' ',''})
-			#SET{pays_pro_obligatoire, false}
-			[(#CONFIG{inscription2/pays_pro_obligatoire}|=={on}|?{' ',''}) #SET{pays_pro_obligatoire, true}]
-			[(#GET{pays_pro_obligatoire}|=={true}|?{<li class="obligatoire">,<li>})]
+			[(#CONFIG{inscription2/pays_pro_fiche_mod}|oui)
+			[(#CONFIG{inscription2/pays_pro_obl}|=={on}|oui) #SET{pays_pro_obl,true}]
+			[(#GET{pays_pro_obligatoire}|?{<li class="obligatoire">,<li>})]
 			<label><:inscription2:pays_pro:></label>
 			#SET{id,#PAYS_PRO}
-			<select class="crayon-active" name="#ENV{name_pays_pro}" onchange="validation()">
+			<select class="crayon-active text[(#GET{pays_pro_obligatoire}|oui) obligatoire]" name="#ENV{name_pays_pro}" onchange="validation()">
 				[(#INCLURE{fond=controleurs/pays}{id=#GET{id}})]
 			</select>
 			</li>]

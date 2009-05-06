@@ -15,6 +15,8 @@
 	
 	function validation(){
 		var validator = cQuery(id).validate({
+			errorElement:"p",
+			errorClass: "erreur",
 			onkeyup:function(){
 				validation();
 			},
@@ -31,23 +33,19 @@
 			},
 			rules: {
 				#ENV{name_nom_famille}: {
-					[(#CONFIG{inscription2/nom_famille_obligatoire}|=={on}|?{required: true,}),]
 					chaine:true,
 					rangelength:[2,30]
 				},
 				#ENV{name_prenom}: {
-					[(#CONFIG{inscription2/prenom_obligatoire}|=={on}|?{required: true,}),]
 					chaine:true,
 					rangelength:[2,20]
 				}
 			},
 			messages: {
 				#ENV{name_nom_famille}: {
-					required:"<:inscription2:champ_obligatoire:>",
 					chaine:"<:inscription2:chaine_valide:> <:inscription2:chainelettre:>"
 				},
 				#ENV{name_prenom}: {
-					required:"<:inscription2:champ_obligatoire:>",
 					chaine:"<:inscription2:chaine_valide:> <:inscription2:chainelettre:>"
 				}
 			}
@@ -75,20 +73,18 @@
 	<fieldset[ style="(#ENV{style})"]>
 		<legend><:inscription2:votre_nom_complet:></legend>
 		<ul>
-			[(#CONFIG{inscription2/nom_famille}|?{' ',''})
-			#SET{nom_famille_obligatoire, false}
-			[(#CONFIG{inscription2/nom_famille_obligatoire}|=={on}|?{' ',''})#SET{nom_famille_obligatoire, true}]
-			[(#GET{nom_famille_obligatoire}|=={true}|?{<li class="obligatoire">,<li>})]
+			[(#CONFIG{inscription2/nom_famille_fiche_mod}|oui)
+			[(#CONFIG{inscription2/nom_famille_obligatoire}|=={on}|oui)#SET{nom_famille_obl,true}]
+			[(#GET{nom_famille_obl}|?{<li class="obligatoire">,<li>})]
 				<label><:inscription2:nom_famille:></label>
-				<input class="crayon-active" name="#ENV{name_nom_famille}" style="width:#ENV{largeur}px;" value="[(#NOM_FAMILLE**|entites_html)]" />
+				<input class="crayon-active text[(#GET{nom_famille_obl}|oui) obligatoire]" name="#ENV{name_nom_famille}" style="width:#ENV{largeur}px;" value="[(#NOM_FAMILLE**|entites_html)]" />
 			</li>]
 		
-			[(#CONFIG{inscription2/prenom}|?{' ',''})
-			#SET{prenom_obligatoire, false}
-			[(#CONFIG{inscription2/prenom_obligatoire}|=={on}|?{' ',''})#SET{prenom_obligatoire, true}]
-			[(#GET{prenom_obligatoire}|=={true}|?{<li class="obligatoire">,<li>})]
+			[(#CONFIG{inscription2/prenom_fiche_mod}|oui)
+			[(#CONFIG{inscription2/prenom_obligatoire}|=={on}|oui)#SET{prenom_obl,true}]
+			[(#GET{prenom_obl}|=={true}|?{<li class="obligatoire">,<li>})]
 				<label><:inscription2:prenom:></label>
-				&nbsp;<input class="crayon-active" name="#ENV{name_prenom}" style="width:#ENV{largeur}px;" value="[(#PRENOM**|entites_html)]" />
+				<input class="crayon-active text[(#GET{prenom_obl}|oui) obligatoire]" name="#ENV{name_prenom}" style="width:#ENV{largeur}px;" value="[(#PRENOM**|entites_html)]" />
 			</li>]
 		</ul>
 	</fieldset>
