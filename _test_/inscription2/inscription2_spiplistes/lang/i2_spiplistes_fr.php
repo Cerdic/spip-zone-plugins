@@ -16,6 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 			
 	// N
 	'newsletter' => 'Listes de diffusion',
+	'newsletter_label' => 'Abonnement aux listes de diffusion',
 	
 	// O
 	'optout' => 'Cases &agrave; coch&#233;es non pr&#233;coch&#233;es (optout)',
