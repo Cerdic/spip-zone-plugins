@@ -89,6 +89,7 @@ $logo_libelles = array(
 		       'id_lettre' => _T('lettresprive:logo_lettre'),
 		       'id_formulaire' => _T('formulairesprive:logo_formulaire'),
 		       'id_sondage' => _T('sondagesprive:logo_sondage'),
+		       'id_plan' => _T('plans:logo_plan'),
 		       'id_notification' => _T('facteur:logo_notifications')
 		       );
 
