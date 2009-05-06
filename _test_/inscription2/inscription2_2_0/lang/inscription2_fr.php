@@ -55,6 +55,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'decembre' => 'd&eacute;cembre',
+	'delete_user_select' => 'Supprimer les utilisateurs s&eacute;lectionn&eacute;s',
 	'demande_password' => 'Votre mot de passe&nbsp;:',
 	'description_cfg' => 'Ce plugin permet d\'&eacute;tendre les informations sur les auteurs sur votre site, vous pouvez choisir ici les champs suppl&eacute;mentaires',
 	'description_page' => 'Ici vous pouvez v&eacute;rifier vos choix de configuration tels qu\'ils sont stock&eacute;s',
@@ -155,7 +156,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'naissance' => 'Date de naissance',
+	'nb_users_supprimes' => '@nb@ utilisateurs ont &eacute;t&eacute; supprim&eacute;s.',
 	'nettoyer_tables' => 'Nettoyer tables',
+	'no_user_selected' => 'Vous n\'avez s&eacute;lectionn&eacute; aucun utilisateur.',
 	'nom' => 'Signature',
 	'nom_explication' => 'votre nom ou votre&nbsp;pseudo',
 	'nom_famille' => 'Nom de famille',
