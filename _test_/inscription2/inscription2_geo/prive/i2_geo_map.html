@@ -1,7 +1,6 @@
 [(#REM) Ne pas prendre les latitude/longitude dans le #ENV, 
 des fois qu'elles ne soient pas valides et feraient planter la carte]
-
-<BOUCLE_auteurs(AUTEURS){id_auteur}{tout}>
+<BOUCLE_auteurs(AUTEURS_ELARGIS){id_auteur}{tout}>
 	[(#SET{latitude,[(#LATITUDE|sinon{#CONFIG{geomap/latitude,0.0}})]})]
 	[(#SET{longitude,[(#LONGITUDE|sinon{#CONFIG{geomap/longitude,0.0}})]})]
 </BOUCLE_auteurs>
