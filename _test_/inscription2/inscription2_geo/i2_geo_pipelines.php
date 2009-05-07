@@ -40,7 +40,8 @@ function i2_geo_i2_form_fin($flux){
  * @param array $flux Paramètres passés dans l'environnement du pipeline
  */	
 function i2_geo_i2_validation_methods($flux){
-	$flux['data'] .= recuperer_fond('prive/javascript/i2_validation_methods_geo.js',$flux['args']);
+	include_spip('crayons.js_fonctions');
+	$flux['data'] .= pack_cQuery(generer_url_public('i2_validation_methods_geo.js','lang='.$flux['args']['lang']));
 	return $flux;
 }
 
