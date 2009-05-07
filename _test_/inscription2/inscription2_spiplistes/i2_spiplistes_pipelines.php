@@ -1,5 +1,5 @@
 <?php
-	function i2_spiplistes_I2_cfg_form($flux){
+	function i2_spiplistes_i2_cfg_form($flux){
 		//Le pavé de configuration dans le CFG d'inscription2
 		$flux .= recuperer_fond('fonds/inscription2_spiplistes');
 		return $flux;

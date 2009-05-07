@@ -2,13 +2,13 @@
 
 /**
  * 
- * Pipeline I2_cfg_form
+ * Pipeline i2_cfg_form
  * Ajoute la partie de configuration dans le formulaire CFG d'inscription2
  * 
  * @return array Retourne le $flux de départ complété
  * @param array $flux Paramètres passés dans l'environnement du pipeline
  */
-function i2_geo_I2_cfg_form($flux){
+function i2_geo_i2_cfg_form($flux){
 	$flux .= recuperer_fond('fonds/inscription2_geo');
 	return $flux;
 }
