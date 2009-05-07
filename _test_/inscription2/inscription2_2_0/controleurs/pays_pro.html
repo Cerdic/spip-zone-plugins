@@ -1,6 +1,6 @@
 [(#REM)
 
-	Controleur pour le crayon 'pays', uniquement html
+	Controleur pour le crayon 'pays_pro', uniquement html
 	Validation JS pour les champs specifies obligatoires
 	Si les champs ne sont pas actifs dans le CFG, ils n'apparaissent pas...
 
@@ -8,13 +8,13 @@
 #CACHE{0}
 <BOUCLE_a(AUTEURS_ELARGIS){id_auteur=#ENV{id_auteurs_elargi}}{tout}>
 
-[(#CONFIG{inscription2/pays_obligatoire}|=={on}|oui)#SET{pays_obl,true}]
+[(#CONFIG{inscription2/pays_pro_obligatoire}|=={on}|oui)#SET{pays_pro_obl,true}]
 
-[(#GET{pays_obl}|oui)
+[(#GET{pays_pro_obl}|oui)
 [<script type="text/javascript" src="(#URL_PAGE{crayons_validation.js}|parametre_url{lang,#ENV{lang}})"></script>]
 
 <script type="text/javascript">
-	var me = cQuery(".auteurs_elargi-pays-#ID_AUTEUR");
+	var me = cQuery(".auteurs_elargi-pays_pro-#ID_AUTEUR");
 	var id = me.crayon().find('form');
 	
 	function validation(){
@@ -58,11 +58,11 @@
 <div class="formulaire_spip">
 <fieldset[ style="(#ENV{style})"]>
 	<ul>
-		[(#CONFIG{inscription2/pays_fiche_mod}|oui)
-		[(#GET{pays_obl}|?{<li class="obligatoire">,<li>})]
-			<label><:inscription2:pays:></label> 
-			#SET{id,#PAYS}
-			<select class="crayon-active text[(#GET{pays_obl}|oui) obligatoire]" name="#ENV{name_pays}" style="width:#ENV{largeur}px;"[(#GET{pays_obl}|oui) onchange="validation()"]>
+		[(#CONFIG{inscription2/pays_pro_fiche_mod}|oui)
+		[(#GET{pays_pro_obl}|?{<li class="obligatoire">,<li>})]
+			<label><:inscription2:pays_pro:></label> 
+			#SET{id,#PAYS_PRO}
+			<select class="crayon-active text[(#GET{pays_pro_obl}|oui) obligatoire]" name="#ENV{name_pays_pro}" style="width:#ENV{largeur}px;"[(#GET{pays_pro_obl}|oui) onchange="validation()"]>
 				<INCLURE{fond=prive/listes/select_pays}{id=#GET{id}}>
 			</select>
 		</li>]

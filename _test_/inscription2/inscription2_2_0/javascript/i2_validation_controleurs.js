@@ -4,7 +4,7 @@
 
 function crayon_affiche_submit(me,id){
 	// Si aucune erreur
-	if(id.find('label.error:visible').length == 0){
+	if(id.find('p.erreur:visible').length == 0){
 		// On (re)active les combinaisons de touches par defaut des crayons
 		jQuery(id).find("textarea.crayon-active,input.crayon-active[type=text]").unbind('keypress').keypress(function(e){
 			// Clavier pour sortir, annuler (esc)

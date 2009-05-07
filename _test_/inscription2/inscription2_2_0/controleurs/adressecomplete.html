@@ -2,7 +2,7 @@
 
 	Controleur pour le crayon 'adressecomplete', uniquement html
 	Validation JS pour les champs specifies obligatoires
-	Si les champs ne sont pas activs dans le CFG, ils n'apparaissent pas...
+	Si les champs ne sont pas actifs dans le CFG, ils n'apparaissent pas...
 
 ]
 #CACHE{0}
@@ -97,7 +97,7 @@
 			<label><:inscription2:pays:></label> 
 			#SET{id,#PAYS}
 			<select class="crayon-active text[(#GET{pays_obl}|oui) obligatoire]" name="#ENV{name_pays}" style="width:#ENV{largeur}px;" onchange="validation()">
-				<INCLURE{fond=controleurs/pays}{id=#GET{id}}>
+				<INCLURE{fond=prive/listes/select_pays}{id=#GET{id}}>
 			</select>
 		</li>]
 	</ul>
