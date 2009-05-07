@@ -1,8 +1,15 @@
 <?php
 
-// Modifie le bouton afficher les visiteurs aux webmestres
-
 if (!defined("_ECRIRE_INC_VERSION")) return;
+
+/**
+ * 
+ * Insertion dans le pipeline ajouter_boutons
+ * Modifie le bouton afficher les visiteurs aux webmestres
+ * 
+ * @return 
+ * @param object $boutons_admin
+ */
 function inscription2_ajouter_boutons($boutons_admin){
 	if ($GLOBALS['connect_statut'] == "0minirezo" && $GLOBALS["connect_toutes_rubriques"]) {
 		//$boutons_admin['auteurs']->sousmenu['auteurs']= '';
@@ -11,36 +18,64 @@ function inscription2_ajouter_boutons($boutons_admin){
 	return $boutons_admin;
 }
 
+/**
+ * 
+ * Insertion dans le pipeline affiche_milieu
+ * Dans la page auteur_infos, insertion des champs spécifiques d'Inscription2
+ * 
+ * @return array Le $flux modifié
+ * @param array $flux
+ */
 function inscription2_affiche_milieu($flux){
-	if($flux['args']['exec'] == 'auteur_infos') {	
-		include_spip('public/assembler');
-		include_spip('inc/legender_auteur_supp');
-		$legender_auteur_supp = charger_fonction('legender_auteur_supp','exec');
-		$id_auteur = $flux['args']['id_auteur'];
-		$flux['data'] .= $legender_auteur_supp($id_auteur);
+	if($flux['args']['exec'] == 'auteur_infos') {
+		$exceptions_des_champs_auteurs_elargis = pipeline('i2_exceptions_des_champs_auteurs_elargis',array());
+		$legender_auteur_supp = recuperer_fond('prive/inscription2_fiche',array('id_auteur'=>$flux['args']['id_auteur'],'exceptions'=>$exceptions_des_champs_auteurs_elargis));
+		$flux['data'] .= $legender_auteur_supp;
 	}
 	return $flux;
 }
 
-// ajouter les champs I2 sur le formulaire CVT editer_auteur
+/**
+ * 
+ * Insertion dans le pipeline editer_contenu_objet
+ * Ajoute les champs I2 sur le formulaire CVT editer_auteur
+ * 
+ * @return array Le $flux complété 
+ * @param array $flux
+ */
 function inscription2_editer_contenu_objet($flux){
 	if ($flux['args']['type']=='auteur') {
-		spip_log('INSCRIPTION 2 : inscription2_editer_contenu_objet','inscription2');
 		include_spip('public/assembler');
 		include_spip('inc/legender_auteur_supp');
-		// ici on verifies que l'entree dans spip_auteurs_elargis existe ...
-		// il y a des cas ou elle n'existe pas ...
-		// Donc on la cree si on n'est pas dans le cas de la creation d'un nouvel auteur
+		/**
+		 * 
+		 * Si on est dans la modification d'un auteur :
+		 * vérification de l'existence d'une entrée correspondante dans spip_auteurs_elargis
+		 * Quelquefois elle n'existe pas.
+		 *  
+		 */
 		if((is_numeric($flux['args']['contexte']['id_auteur'])) && (!sql_getfetsel('id_auteur','spip_auteurs_elargis','id_auteur='.$flux['args']['contexte']['id_auteur']))){
 			sql_insertq('spip_auteurs_elargis',array('id_auteur'=>$flux['args']['contexte']['id_auteur']));
 		}
+		/**
+		 * 
+		 * Insertion des champs dans le formulaire aprs le textarea PGP
+		 * 
+		 */
 		$inscription2 = legender_auteur_supp_saisir($flux['args']['contexte']['id_auteur']);
 		$flux['data'] = preg_replace('%(<li class="editer_pgp(.*?)</li>)%is', '$1'."\n".$inscription2, $flux['data']);
 	}
 	return $flux;
 }
 
-// ajouter les champs inscription2 soumis lors de la soumission du formulaire CVT editer_auteur
+
+/**
+ *
+ * Insertion dans le pipeline post_edition
+ * ajouter les champs inscription2 soumis lors de la soumission du formulaire CVT editer_auteur
+ * @return 
+ * @param object $flux
+ */
 function inscription2_post_edition($flux){
 	if ($flux['args']['table']=='spip_auteurs') {
 		spip_log('INSCRIPTION 2 : inscription2_post_edition','inscription2');
@@ -65,7 +100,7 @@ function inscription2_post_edition($flux){
 			
 		// Notifications, gestion des revisions, reindexation...
 		pipeline('post_edition',
-			array(
+			array(	
 				'args' => array(
 					'table' => 'spip_auteurs_elargis',
 					'id_objet' => $id_auteur

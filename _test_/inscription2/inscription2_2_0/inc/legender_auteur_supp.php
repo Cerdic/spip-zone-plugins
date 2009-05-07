@@ -12,23 +12,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function inc_legender_auteur_supp_dist($id_auteur){
-	if (!$id_auteur) {
-		if (_request('new') == 'oui') {
-			$new = true;
-		} else {
-			include_spip('inc/headers');
-			redirige_par_entete(generer_url_ecrire('auteurs'));
-		}
-	}
-   
-	if (!$new) {
-		if (autoriser('modifier', 'auteur', $id_auteur)) {
-			$auteur_infos_voir_supp = legender_auteur_supp_voir($id_auteur);
-		}
-	}
-	return $auteur_infos_voir_supp;
-}
 // La partie affichage du formulaire...
 function legender_auteur_supp_saisir($id_auteur){
 	$exceptions_des_champs_auteurs_elargis = pipeline('i2_exceptions_des_champs_auteurs_elargis',array());
@@ -71,44 +54,4 @@ function legender_auteur_supp_saisir($id_auteur){
 	return $corps_supp;
 }
 
-// L'affichage des infos supplémentaires...
-function legender_auteur_supp_voir($id_auteur){
-	$exceptions_des_champs_auteurs_elargis = pipeline('i2_exceptions_des_champs_auteurs_elargis',array());
-	
-	$res = "<h2 class='titrem'>Inscription2</h2>";
-
-	$res .= "<div class='nettoyeur'></div>";
-	$res .= "<div id='auteur_infos_voir_supp'>";
-	
-	$var_user[] = 'a.id_auteur';
-	foreach(lire_config('inscription2',array()) as $cle => $val){
-		$cle = ereg_replace("_(obligatoire|fiche|table).*$", "", $cle);
-		if($val == 'on' AND !in_array($cle,$exceptions_des_champs_auteurs_elargis) and !ereg("^(categories|zone|newsletter).*$", $cle) ){
-			$var_user[] = 'b.'.$cle;
-		}
-	}
-
-	$query = sql_fetsel($var_user,"spip_auteurs a left join spip_auteurs_elargis b USING(id_auteur)","a.id_auteur= $id_auteur");
-	
-	if($query['id_auteur'] == NULL){
-		$id_elargi = sql_insertq("spip_auteurs_elargis",array('id_auteur'=>$id_auteur));
-		$query = sql_fetsel($var_user,"spip_auteurs a left join spip_auteurs_elargis b USING(id_auteur)","a.id_auteur= $id_auteur");
-	}
-	
-	if(is_array($query)){
-		//Debut de l'affichage des données...
-		foreach ($query as $cle => $val){
-			if (!in_array($cle,$exceptions_des_champs_auteurs_elargis) AND (strlen($val) >= 1)){
-				if(find_in_path('prive/inscription2_vue_'.$cle.'.html')){
-					$res .= recuperer_fond('prive/inscription2_vue_'.$cle,array('cle'=>$cle,'val'=>$val,'id_auteur' => $id_auteur));
-				}else{
-					$res .= "<p><strong>"._T('inscription2:'.$cle)." : </strong>" . typo($val) . "</p>";	
-				}
-			}
-		}
-	}
-	$res .= "</div>\n";
-
-	return $res;
-}
 ?>
