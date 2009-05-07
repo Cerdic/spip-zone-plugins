@@ -85,7 +85,7 @@
 	<tr class="[(#ENV{media}|non)[ media-(#MEDIA)]]">
 	#SET{missing,''}
 		[(#EXTENSION|in_any{#ARRAY{0,gif,1,png,2,jpg}}|oui)
-		#SET{logo,#URL_DOCUMENT|image_reduire{250,100}}
+		#SET{logo,#FICHIER|image_reduire{250,100}}
 		[(#GET{logo}|match{'^<img'}|non)#SET{logo,#LOGO_DOCUMENT||image_reduire{250,100}}#SET{missing,' '}]
 		][(#EXTENSION|in_any{#ARRAY{0,gif,1,png,2,jpg}}|non)
 		#SET{logo,#LOGO_DOCUMENT||image_reduire{250,100}}

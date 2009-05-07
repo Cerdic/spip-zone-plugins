@@ -10,7 +10,7 @@
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{fichier})</span>
 				]
 				[
-				<img src='(#ENV*{vignette})' width='#ENV{largeur}' height='#ENV{hauteur}' alt='#ENV*{vignette}'/>
+				(#ENV*{vignette}|image_reduire{#CONFIG{taille_preview}})
 				][(#ENV*{vignette}|non)<:gestdoc:aucune_vignette:>]
 				<p class='actions'>
 				[(#ENV{id_vignette}|oui)  <input type='submit' class='submit' name='supprimer' value='<:gestdoc:bouton_supprimer|attribut_html:>' />]
