@@ -6,6 +6,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // Configuration page in CFG
+'evenement_notification' => 'Following events may generate email notifications.',
 'article_prive' => 'Articles in private area',
 'article_prive_auteurs' => '<strong>Authors</strong>&nbsp;: Authors get notified when their article(s) is(are) published',
 'forums_public' => 'Public forums',

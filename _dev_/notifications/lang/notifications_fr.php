@@ -6,6 +6,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // Page de configuration dans CFG
+'evenement_notification' => 'Les &#233;v&#233;nements suivants peuvent d&#233;clencher une notification par email.',
 'article_prive' => 'Articles espace priv&eacute;',
 'article_prive_auteurs' => '<strong>Auteurs</strong>&nbsp;: les auteurs re&#231;oivent les notifications lors de la publication de leur(s) article(s)',
 'forums_public' => 'Forums publics',
