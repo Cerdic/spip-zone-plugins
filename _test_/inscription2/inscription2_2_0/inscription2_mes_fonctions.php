@@ -1,20 +1,40 @@
 <?php
 include_spip('base/abstract_sql');
 
-// Filtres
+/**
+ * 
+ * Transforme les /n en <br />
+ * 
+ */
 function n_to_br($texte){
 	$texte = str_replace("\n", "<br />", $texte);
 	return $texte;
 }
 
+/**
+ * 
+ * Donne le nom d'un pays en fonction de son id
+ * 
+ * @return false|string false dans le cas ou il ne reçoit pas de paramètres ou si le paramètre n'est pas bon 
+ * @param int $id_pays L'id_pays de la table spip_geo_pays
+ */
 function id_pays_to_pays($id_pays){
-	if($id_pays != 0){
-		$pays = sql_getfetsel('nom', 'spip_geo_pays', 'id_pays ='.$id_pays) ;
+	if((is_numeric($id_pays)) && ($id_pays != 0)){
+		$pays = sql_getfetsel('nom', 'spip_geo_pays', 'id_pays ='.$id_pays);
 		return typo($pays);
 	}
 	else return;
 }
 
+/**
+ * 
+ * Récupère la valeur d'un champs d'un auteur si on ne possède que le nom du champs
+ * Dans le cas de la boucle FOR par exemple
+ * 
+ * @return 
+ * @param object $champs
+ * @param object $id_auteur
+ */
 function inscription2_recuperer_champs($champs,$id_auteur){
 	if($champs == 'login'){
 		$champs = 'spip_auteurs.login';
@@ -22,17 +42,26 @@ function inscription2_recuperer_champs($champs,$id_auteur){
 	if($champs == 'pays'){
 		spip_log('champs = pays');
 		$resultat = sql_getfetsel("b.nom","spip_auteurs_elargis a LEFT JOIN spip_geo_pays b on a.pays = b.id_pays","a.id_auteur=$id_auteur");
-		return propre($resultat);
+		return typo($resultat);
 	}
 	if($champs == 'pays_pro'){
 		spip_log('champs = pays_pro');
 		$resultat = sql_getfetsel("b.nom","spip_auteurs_elargis a LEFT JOIN spip_geo_pays b on a.pays_pro = b.id_pays","a.id_auteur=$id_auteur");
-		return propre($resultat);
+		return typo($resultat);
 	}
 	$resultat = sql_getfetsel($champs,"spip_auteurs_elargis LEFT JOIN spip_auteurs USING(id_auteur)","spip_auteurs_elargis.id_auteur=$id_auteur");
-	return propre($resultat);
+	return typo($resultat);
 }
 
+/**
+ * 
+ * Fonction utilisée par le critère i2_recherche
+ * 
+ * @return array Le tableau des auteurs correspondants aux critères de recherche
+ * @param string $quoi[optional] Le contenu textuel recherché 
+ * @param object $ou[optional] Le champs dans lequel on recherche
+ * @param object $table[optional]
+ */
 function i2_recherche($quoi=NULL,$ou=NULL,$table=NULL){
 	if(isset($quoi) && isset($ou)){
 		$quoi = texte_script(trim($quoi));
@@ -40,11 +69,9 @@ function i2_recherche($quoi=NULL,$ou=NULL,$table=NULL){
 		global $tables_principales;
 
 		if(isset($tables_principales[table_objet_sql($table)]['field'][$ou])){
-			spip_log("champs dans $table");
 			$auteurs = sql_get_select('id_auteur',table_objet_sql($table),"$ou LIKE '%$quoi%'");
 		}
 		else{
-			spip_log("pas dans la table principale");
 			global $tables_jointures;
 			if(isset($tables_jointures[table_objet_sql($table)]) && ($jointures=$tables_jointures[table_objet_sql($table)])){
 				foreach($jointures as $jointure=>$val){
@@ -58,7 +85,12 @@ function i2_recherche($quoi=NULL,$ou=NULL,$table=NULL){
 	}
 }
 
-function critere_i2_recherche_dist($idb, &$boucles, $param){
+/**
+ * 
+ * Critère utilisé pour rechercher dans les utilisateurs (page ?exec=inscription2_adherents)
+ * 
+ */
+function critere_i2_recherche_dist($idb, &$boucles){
 	$boucle = &$boucles[$idb];
 	$primary = $boucle->primary;
 	$ou = '@$Pile[0]["case"]';

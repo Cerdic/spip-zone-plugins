@@ -2,17 +2,31 @@
 
 include_spip('base/abstract_sql');
 
+/**
+ * 
+ * Déclaration des pipelines introduits par le plugin inscription2
+ * 
+ */
 $GLOBALS['spip_pipeline']['i2_exceptions_des_champs_auteurs_elargis'] = '';
 $GLOBALS['spip_pipeline']['i2_verifications_specifiques'] = '';
 $GLOBALS['spip_pipeline']['i2_charger_formulaire'] = '';
 $GLOBALS['spip_pipeline']['i2_verifier_formulaire'] = '';
 $GLOBALS['spip_pipeline']['i2_traiter_formulaire'] = '';
 $GLOBALS['spip_pipeline']['i2_confirmation'] = '';
-
-//
-// <BOUCLE(AUTEURS)>
-//
-// http://doc.spip.org/@boucle_AUTEURS_dist
+$GLOBALS['spip_pipeline']['i2_cfg_form'] = '';
+$GLOBALS['spip_pipeline']['i2_form_debut'] = '';
+$GLOBALS['spip_pipeline']['i2_form_fin'] = '';
+ 
+/**
+ * 
+ * Surcharge de la boucle auteurs (à l'origine: http://doc.spip.org/@boucle_AUTEURS_dist)
+ * <BOUCLE(AUTEURS)>
+ * Création d'une jointure automatique avec spip_auteurs_elargis
+ * 
+ * @return 
+ * @param object $id_boucle
+ * @param object $boucles
+ */
 function boucle_AUTEURS($id_boucle, &$boucles) {
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table;
@@ -41,8 +55,18 @@ function boucle_AUTEURS($id_boucle, &$boucles) {
 	return calculer_boucle($id_boucle, $boucles); 
 }
 
-# autoriser les visiteurs a modifier leurs infos
-# define ('_DEBUG_AUTORISER', true);
+/**
+ * 
+ * Autorisation pour la table spip_auteurs_elargis
+ * Autorise les visiteurs a modifier leurs infos dans cette table
+ * 
+ * @return 
+ * @param object $faire
+ * @param object $type
+ * @param object $id
+ * @param object $qui
+ * @param object $opt
+ */
 if (!function_exists('autoriser_spip_auteurs_elargis')) {
 	function autoriser_auteurs_elargi($faire, $type, $id, $qui, $opt) {
 		$query = sql_getfetsel("id_auteur","spip_auteurs_elargis","id_auteur=".$id);
@@ -52,9 +76,20 @@ if (!function_exists('autoriser_spip_auteurs_elargis')) {
 	}
 }
 
+/**
+ * 
+ * Autorisation de modification pour la table spip_auteurs
+ * Autorise les visiteurs a modifier leurs infos dans cette table
+ * 
+ * @return 
+ * @param object $faire
+ * @param object $type
+ * @param object $id
+ * @param object $qui
+ * @param object $opt
+ */
 if (!function_exists('autoriser_auteur_modifier')) {
 function autoriser_auteur_modifier($faire, $type, $id, $qui, $opt) {
-
 	// Ni admin ni redacteur => non
 	if (in_array($qui['statut'], array('0minirezo', '1comite')))
 		return autoriser_auteur_modifier_dist($faire, $type, $id, $qui, $opt);
