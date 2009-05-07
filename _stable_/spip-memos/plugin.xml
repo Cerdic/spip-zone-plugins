@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin>
+	<nom>SPIP-Mémos</nom>
+	<auteur>[Artégo->http://www.artego.fr]</auteur>
+	<version>2.0</version>
+	<etat>stable</etat>
+	<licence>[GPLv3->http://www.gnu.org/licenses/gpl-3.0.html]</licence>
+	<description>Mémos dans l'espace privé de SPIP</description>
+	<necessite id="SPIP" version="[2.0.3;]" />
+	<lien>[Site officiel du plugin->http://www.artego.fr/-Memorandum-]</lien>
+	<icon>prive/images/memo-48.png</icon>
+	<options>memos_options.php</options>
+	<fonctions>memos_fonctions.php</fonctions>
+	<install>memos_fonctions.php</install>
+	<prefix>memos</prefix>
+	<pipeline>
+		<nom>affiche_droite</nom>
+		<inclure>memos_fonctions.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>memos_fonctions.php</inclure>
+	</pipeline>
+	<onglet id="memos" parent="configuration">
+		<icone>prive/images/memo-24.png</icone>
+		<titre>memos:memos</titre>
+	</onglet>
+</plugin>
