@@ -1,4 +1,6 @@
-[(#REM) Charge les informations minimale d'un auteur]
+[(#REM) Charge les informations minimale d'un auteur
+On teste la présence d'au moins un des champs pour l'afficher]
+
 [(#CONFIG{inscription2/nom_fiche_mod}|=={on}|ou{
 	[(#CONFIG{inscription2/login_fiche_mod}|=={on})]}|ou{
 		[(#CONFIG{inscription2/email_fiche_mod}|=={on})]}|ou{

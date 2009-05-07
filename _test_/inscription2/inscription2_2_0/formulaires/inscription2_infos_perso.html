@@ -1,4 +1,23 @@
-[(#REM) information générales]
+[(#REM) information générales
+On teste la présence d'au moins un des champs pour l'afficher]
+
+[(#CONFIG{inscription2/sexe}|=={on}|ou{
+[(#CONFIG{inscription2/nom_famille}|=={on})]}|ou{
+[(#CONFIG{inscription2/prenom}|=={on})]}|ou{
+[(#CONFIG{inscription2/surnom}|=={on})]}|ou{
+[(#CONFIG{inscription2/naissance}|=={on})]}|ou{
+[(#CONFIG{inscription2/bio}|=={on})]}|ou{
+[(#CONFIG{inscription2/nom_site}|=={on})]}|ou{
+[(#CONFIG{inscription2/url_site}|=={on})]}|ou{
+[(#CONFIG{inscription2/pgp}|=={on})]}|ou{
+[(#CONFIG{inscription2/commentaire}|=={on})]}|ou{
+[(#CONFIG{inscription2/adresse}|=={on})]}|ou{
+[(#CONFIG{inscription2/code_postal}|=={on})]}|ou{
+[(#CONFIG{inscription2/ville}|=={on})]}|ou{
+[(#CONFIG{inscription2/pays}|=={on})]}|ou{
+[(#CONFIG{inscription2/telephone}|=={on})]}|ou{
+[(#CONFIG{inscription2/mobile}|=={on})]}|ou{
+[(#CONFIG{inscription2/fax}|=={on})]}|oui)
 <fieldset class="info_perso">
     <legend>
         <:inscription2:info_perso:>
@@ -137,4 +156,4 @@
         </li>]
     </ul>
 	<br class="nettoyeur" />
-</fieldset>
+</fieldset>]

@@ -1,18 +1,17 @@
-[(#REM) Afficher les coordonnées profesionnelles]
-#SET{afficher_plus, false}
-[(#CONFIG{inscription2/profession_fiche_mod}|=={on}|oui) #SET{afficher_plus, true} ]
-[(#CONFIG{inscription2/societe_fiche_mod}|=={on}|oui) #SET{afficher_plus, true} ]
-[(#CONFIG{inscription2/secteur_fiche_mod}|=={on}|oui) #SET{afficher_plus, true} ]
-[(#CONFIG{inscription2/fonction_fiche_mod}|=={on}|oui) #SET{afficher_plus, true} ]
-[(#CONFIG{inscription2/adresse_pro_fiche_mod}|=={on}|oui) #SET{afficher_plus, true} ]
-[(#CONFIG{inscription2/code_postal_pro_fiche_mod}|=={on}|oui) #SET{afficher_plus, true} ]
-[(#CONFIG{inscription2/ville_pro_fiche_mod}|=={on}|oui) #SET{afficher_plus, true} ]
-[(#CONFIG{inscription2/pays_pro_fiche_mod}|=={on}|oui) #SET{afficher_plus, true} ]
-[(#CONFIG{inscription2/telephone_pro_fiche_mod}|=={on}|oui) #SET{afficher_plus, true} ]
-[(#CONFIG{inscription2/mobile_pro_fiche_mod}|=={on}|oui) #SET{afficher_plus, true} ]
-[(#CONFIG{inscription2/fax_pro_fiche_mod}|=={on}|oui) #SET{afficher_plus, true} ]
+[(#REM) Afficher les coordonnées profesionnelles
+On teste la présence d'au moins un des champs de coordonnées professionnelles pour l'afficher]
 
-[(#GET{afficher_plus}|=={true}|oui)
+[(#CONFIG{inscription2/profession_fiche_mod}|=={on}|ou{
+[(#CONFIG{inscription2/societe_fiche_mod}|=={on})]}|ou{
+[(#CONFIG{inscription2/secteur_fiche_mod}|=={on})]}|ou{
+[(#CONFIG{inscription2/fonction_fiche_mod}|=={on})]}|ou{
+[(#CONFIG{inscription2/adresse_pro_fiche_mod}|=={on})]}|ou{
+[(#CONFIG{inscription2/code_postal_pro_fiche_mod}|=={on})]}|ou{
+[(#CONFIG{inscription2/ville_pro_fiche_mod}|=={on})]}|ou{
+[(#CONFIG{inscription2/pays_pro_fiche_mod}|=={on})]}|ou{
+[(#CONFIG{inscription2/telephone_pro_fiche_mod}|=={on})]}|ou{
+[(#CONFIG{inscription2/mobile_pro_fiche_mod}|=={on})]}|ou{
+[(#CONFIG{inscription2/fax_pro_fiche_mod}|=={on})]}|oui)`
 <fieldset class="info_pro">
     <legend>
         <:inscription2:info_pro:>
@@ -23,12 +22,6 @@
             <label for="profession"><:inscription2:profession:></label>
             <input type="text" class="text" name="profession" id="profession" value="#ENV{profession}"/>
             [<p class='erreur'>(#ENV**{erreurs}|table_valeur{profession})</p>]
-        </li>]
-        [(#CONFIG{inscription2/id_societe_fiche_mod}|=={on}|oui)
-        <li class="editer_societe[ (#CONFIG{inscription2/id_societe_obligatoire}|=={on}|oui)obligatoire][ (#ENV**{erreurs}|table_valeur{id_societe}|oui)erreur]">
-            <label for="id_societe"><:inscription2:id_societe:></label>
-	        [(#INCLURE{fond=formulaires/inscription2_form_societes}{env})]
-            [<p class='erreur'>(#ENV**{erreurs}|table_valeur{id_societe})</p>]
         </li>]
         [(#CONFIG{inscription2/societe_fiche_mod}|=={on}|oui)
         <li class="editer_societe[ (#CONFIG{inscription2/societe_obligatoire}|=={on}|oui)obligatoire][ (#ENV**{erreurs}|table_valeur{societe}|oui)erreur]">
@@ -91,5 +84,4 @@
             [<p class='erreur'>(#ENV**{erreurs}|table_valeur{fax_pro})</p>]
         </li>]
 	</ul>
-</fieldset>
-]
+</fieldset>]
