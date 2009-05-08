@@ -35,15 +35,15 @@ if (!$debug || $debug == '_' || $debug == '') $debug = "false" ;
 $flux .= '<!-- swfupload -->
 	<link href="'._DIR_PLUGIN_SWFUPLOAD.'css/default.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="'._DIR_PLUGIN_SWFUPLOAD.'swfupload/swfupload.js"></script>
-	<script type="text/javascript" src="'._DIR_PLUGIN_SWFUPLOAD.'js/swfupload.queue.js"></script>
-	<script type="text/javascript" src="'._DIR_PLUGIN_SWFUPLOAD.'js/fileprogress.js"></script>
-	<script type="text/javascript" src="'._DIR_PLUGIN_SWFUPLOAD.'js/handlers.js"></script>
+	<script type="text/javascript" src="'._DIR_PLUGIN_SWFUPLOAD.'swfupload/js/swfupload.queue.js"></script>
+	<script type="text/javascript" src="'._DIR_PLUGIN_SWFUPLOAD.'swfupload/js/fileprogress.js"></script>
+	<script type="text/javascript" src="'._DIR_PLUGIN_SWFUPLOAD.'swfupload/js/handlers.js"></script>
 	<script type="text/javascript">
 		var swfu;
 		window.onload = function () {
 			swfu = new SWFUpload({
 				// Flash Settings '._DIR_PLUGIN_SWFUPLOAD.'
-				flash_url : "'.url_absolue(_DIR_PLUGIN_SWFUPLOAD).'swfupload/swfupload_f9.swf",	// Relative to this file
+				flash_url : "'.url_absolue(_DIR_PLUGIN_SWFUPLOAD).'swfupload/swfupload.swf",	// Relative to this file
 				// Backend Settings - Relative to the SWF file, utiliser url absolue cest mieux					
 				upload_url: "'.$GLOBALS['meta']["adresse_site"].'/?page=swfupload",
 
@@ -53,10 +53,15 @@ $flux .= '<!-- swfupload -->
 				file_types : "'.$file_types.'",
 				file_types_description : "Allowed Files",
 				file_upload_limit : "'.$file_upload_limit.'",
-
-				// Event Handler Settings - these functions as defined in Handlers.js
-				//  The handlers are not part of SWFUpload but are part of my website and control how
-				//  my website reacts to the SWFUpload events.
+	
+				// Button Settings
+				button_image_url : "'._DIR_PLUGIN_SWFUPLOAD.'images/XPButtonUploadText_61x22.png",
+				button_placeholder_id : "spanButtonPlaceholder",
+				button_width: 61,
+				button_height: 22,
+				
+				// Event Handler Settings (all my handlers are in the Handler.js file)
+				file_dialog_start_handler : fileDialogStart,
 				file_queued_handler : fileQueued,
 				file_queue_error_handler : fileQueueError,
 				file_dialog_complete_handler : fileDialogComplete,
@@ -65,8 +70,8 @@ $flux .= '<!-- swfupload -->
 				upload_error_handler : uploadError,
 				upload_success_handler : uploadSuccess,
 				upload_complete_handler : uploadComplete,
-				queue_complete_handler : queueComplete,
-
+				queue_complete_handler : queueComplete,	// Queue plugin event
+				
 				custom_settings : {
 					progressTarget : "fsUploadProgress",
 					cancelButtonId : "btnCancel"

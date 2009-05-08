@@ -35,8 +35,7 @@ fin_boite_info(true);
 
 echo debut_droite('',true);
 echo gros_titre(_T('swfupload:titre_swfupload'),'',false);
-echo '
-<form id="form1" action="index.php" method="post" enctype="multipart/form-data">
+echo '<form id="form1" action="index.php" method="post" enctype="multipart/form-data">
 		<div>'._T('swfupload:texte_swfupload').'</div>
 
 		<div class="content">
@@ -44,9 +43,9 @@ echo '
 				<legend>'._T('swfupload:texte_uploadqueue').'</legend>
 			</fieldset>
 			<div id="divStatus">0 '._T('swfupload:texte_filesupload').'</div>
-			<div>
-				<input type="button" value="'._T('swfupload:texte_boutonupload').'" onclick="swfu.selectFiles()" style="font-size: 8pt;" />
-				<input id="btnCancel" type="button" value="'._T('swfupload:texte_cancelupload').'" onclick="swfu.cancelQueue();" disabled="disabled" style="font-size: 8pt;" /><br />
+			<div style="padding-left: 5px;">
+				<span id="spanButtonPlaceholder"></span>
+				<input id="btnCancel" type="button" value="'._T('swfupload:texte_cancelupload').'" onclick="cancelQueue(swfu);" disabled="disabled"  style="margin-left: 2px; height: 22px; font-size: 8pt;" /><br />
 
 			</div>
 		</div>

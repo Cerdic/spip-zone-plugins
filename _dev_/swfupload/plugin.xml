@@ -1,7 +1,7 @@
 <plugin>
 	<nom>SWFupload</nom>
 	<auteur>Phil 2008, [erational->http://www.erational.org]</auteur>
-	<version>0.4</version>
+	<version>0.5</version>
 	<etat>dev</etat>
 	<description>Permet de t&eacute;l&eacute;charger des images dans le dossier upload sans acc&egrave;s FTP
 _ si vous avez cfg: [configuration->index.php?exec=cfg&amp;cfg=swfupload]
@@ -18,5 +18,9 @@ _ si vous avez cfg: [configuration->index.php?exec=cfg&amp;cfg=swfupload]
 		<nom>header_prive</nom>
 		<inclure>swfupload_pipelines.php</inclure>
 	</pipeline>
+	<pipeline>
+    	<nom>affiche_milieu</nom>
+        <inclure>swfupload_pipelines.php</inclure>
+    </pipeline>
 	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>
