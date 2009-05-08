@@ -2,7 +2,7 @@
   <nom>No Cache - Désactiver les caches de SPIP</nom>
   <prefix>nocache</prefix>
 
-  <version>1.0rc2</version>
+  <version>1.0</version>
   <etat>stable</etat>
   <necessite id="SPIP" version='[1.9.2;]' />
 
