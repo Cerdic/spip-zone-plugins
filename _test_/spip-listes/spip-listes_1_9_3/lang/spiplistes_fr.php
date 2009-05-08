@@ -311,7 +311,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'Attention_suppression_liste' => "Attention ! Vous demandez la suppression d'une liste de diffusion. 
 	Les abonn&eacute;s seront retir&eacute;s de cette liste de diffusion automatiquement. "
 , 'Abonner_tous_les_invites_public' => "Abonner tous les membres invit&eacute;s &agrave; cette liste publique."
-, 'Abonner_tous_les_inscrits_prives' => "Abonner tous les membres &agrave; cette liste priv&eacute;e, sauf les invit&eacute;s."
+, 'Abonner_tous_les_inscrits_prives' => "Abonner tous les membres &agrave; cette liste priv&eacute;e, sauf les visiteurs."
 , 'boite_confirmez_envoi_liste' => "Vous avez demand&eacute; l'envoi imm&eacute;diat de cette liste 
 	de diffusion.<br />
 	Svp, veuillez confirmer votre demande."
