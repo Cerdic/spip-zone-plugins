@@ -32,6 +32,24 @@ v2.0.0
 
 // ---------------------------------------
 
+v1.12.3 (04 05 2009)
+  * (en test) introduction de deux nouvelles saisies : 'selection' et 'radio'
+
+v1.12.1 (26 04 2009)
+  * (en test) introduction d'une syntaxe raccourcie pour #SAISIE :
+  #SAISIE{type,name,obligatoire} ce qui donne :
+  #SAISIE{input,ville} ou
+  #SAISIE{input,ville,oui}. Ce dernier est equivalent a :
+  #SAISIE{input}{nom=ville}{obligatoire=oui}, lui meme equivalent a
+  #INCLURE{fond=saisies/_base}{type_saisie=input}{erreurs}{nom=ville}{valeur=#ENV{ville}}
+  
+v1.12 (25 04 2009)
+  * (en test) les saisies/ sont modifies, elles passent toutes par le fichier saisies/_base
+  et sont appelees par #SAISIE{input}{nom=ville} qui passe automatiquement les
+  parametre : {erreurs}, {valeur=#ENV{ville}}, {fond=saisies/_base} et {type_saisie=input}
+  puis charge la balise #INCLURE
+
+
 v1.11 (15 04 2009)
   * (en test) Ajout d'un dossier saisies/ pour faciliter l'ajout de champ
   facon SPIP 2.0 dans CFG. Les inclusions disposent de parametres pour les utiliser
