@@ -197,13 +197,14 @@ function array_query($query){
 				asort($res);
 		}
 		// (POUR) {par XXX} : on considere que la valeur est un array,
-		// et on trie nos array sur leur valeur XXX
+		// et on trie nos array sur leur valeur XXX ; si ce sont des objets
+		// on les caste en array
 		else {
 			preg_match(',^(.*)( DESC)?$,Ui', $sort, $tri);
 			$sens = $tri[2] ? '<' : '>';
 			usort($res,
 				create_function('$a, $b',
-					'return ($a["'.$tri[1].'"] '.$sens.' $b["'.$tri[1].'"]) ? 1 : -1;'
+					'return ((array)$a["'.$tri[1].'"] '.$sens.' (array) $b["'.$tri[1].'"]) ? 1 : -1;'
 				)
 			);
 		}
