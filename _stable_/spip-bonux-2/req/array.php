@@ -181,17 +181,31 @@ function array_query($query){
 		$sort = str_replace($query['from'].".","",$sort);
 		$sort = explode(',',$sort);
 		$sort = reset($sort);
+
+		// (POUR){par cle}
 		if (preg_match(',^cle,',$sort)){
 			if (preg_match(',DESC$,i',$sort))
 				krsort($res);
 			else
 				ksort($res);
 		}
-		if (preg_match(',^valeur,',$sort)){
+		// (POUR){par valeur}
+		else if (preg_match(',^valeur,',$sort)){
 			if (preg_match(',DESC$,i',$sort))
 				arsort($res);
 			else
 				asort($res);
+		}
+		// (POUR) {par XXX} : on considere que la valeur est un array,
+		// et on trie nos array sur leur valeur XXX
+		else {
+			preg_match(',^(.*)( DESC)?$,Ui', $sort, $tri);
+			$sens = $tri[2] ? '<' : '>';
+			usort($res,
+				create_function('$a, $b',
+					'return ($a["'.$tri[1].'"] '.$sens.' $b["'.$tri[1].'"]) ? 1 : -1;'
+				)
+			);
 		}
 	}
 	if ($query['limit']){
