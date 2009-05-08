@@ -365,25 +365,47 @@ span.cs_BTg {font-size:140%; padding:0 0.3em;}';
 	}
 	// join final...
 	if(is_array($cs_metas_pipelines['header']))	$cs_metas_pipelines['header'] = join("\n", $cs_metas_pipelines['header']);
+	// SPIP 2.0 ajoute les parametres "TYPO" et $connect aux fonctions typo() et propre()
+	$liste_pivots = defined('_SPIP19300')
+		?array(
+			// Fonctions pivots : on peut en avoir plusieurs pour un meme traitement
+			// Exception : 'typo' et 'propre' ne cohabitent pas ensemble
+			'typo' => 'typo(%s,"TYPO",$connect)',
+			'propre' => 'propre(%s,$connect)',
+		):array(
+			'typo' => 'typo(%s)',
+			'propre' => 'propre(%s)',
+		);
 	// mise en code des traitements trouves
-	foreach($traitements_utilises as $b=>$balise) {
-		foreach($balise as $p=>$precision) {
+	foreach($traitements_utilises as $bal=>$balise) {
+		foreach($balise as $obj=>$type_objet) {
 			// ici, on fait attention de ne pas melanger propre et typo
-			if(array_key_exists('typo', $precision) && array_key_exists('propre', $precision)) die(_T('couteauprive:erreur:traitements'));
-			foreach($precision as $f=>$fonction)  {
+			if(array_key_exists('typo', $type_objet) && array_key_exists('propre', $type_objet)) die(_T('couteauprive:erreur:traitements'));
+			$traitements_type_objet = &$traitements_utilises[$bal][$obj];
+			foreach($type_objet as $f=>$fonction)  {
 				// pas d'objet precis
-				if ($f===0)	$traitements_utilises[$b][$p][$f] = join("(", array_reverse($fonction)).'(';
+				if ($f===0)	$traitements_type_objet[$f] = cs_fermer_parentheses(join("(", array_reverse($fonction)).'(%s');
 				// un objet precis
 				else {
-					$pre = isset($fonction['pre'])?join('(', $fonction['pre']).'(':'';
-					$post = isset($fonction['post'])?join('(', $fonction['post']).'(':'';
-					$traitements_utilises[$b][$p][$f] = $post.$f.'('.$pre;
+					if(!isset($liste_pivots[$f])) $liste_pivots[$f] = $f . '(%s)';
+					$traitements_type_objet[$f] = !isset($fonction['pre'])?$liste_pivots[$f]
+						:str_replace('%s',
+						 	cs_fermer_parentheses(join('(', $fonction['pre']) . '(%s'), 
+							$liste_pivots[$f]
+						);
+					if(isset($fonction['post']))
+						$traitements_type_objet[$f] = cs_fermer_parentheses(join('(', $fonction['post']) . '(' . $traitements_type_objet[$f]);
 				}
 			}
-			$temp = "\$GLOBALS['table_des_traitements']['$b'][" . ($p=='0'?'':"'$p'") . "]='" . join('(', $traitements_utilises[$b][$p]).'%s';
-			$traitements_utilises[$b][$p] = $temp . str_repeat(')', substr_count($temp, '(')) . "';";
+			if(count($traitements_type_objet)===1) $temp = join('', $traitements_type_objet);
+			else {
+				$temp = '%s';
+				foreach($traitements_type_objet as $t)	
+					$temp = str_replace('%s', $t, $temp);
+			}
+			$traitements_type_objet = "\$GLOBALS['table_des_traitements']['$bal'][" . ($obj=='0'?'':"'$obj'") . "]='" . $temp . "';";
 		}
-		$traitements_utilises[$b] = join("\n", $traitements_utilises[$b]);		
+		$traitements_utilises[$bal] = join("\n", $traitements_utilises[$bal]);		
 	}
 	// mes_options.php : ajout des traitements
 	if(count($traitements_utilises))
@@ -400,6 +422,10 @@ span.cs_BTg {font-size:140%; padding:0 0.3em;}';
 	ecrire_fichier_en_tmp($infos_fichiers, 'fonctions');
 	// installation de cs_metas_pipelines[] et ecriture du fichier de controle
 	set_cs_metas_pipelines($infos_pipelines);
+}
+
+function cs_fermer_parentheses($expr) { 
+	return $expr . str_repeat(')', substr_count($expr, '(') - substr_count($expr, ')'));
 }
 
 define('_CS_SPIP_OPTIONS_A', "// Partie reservee au Couteau Suisse. Ne pas modifier, merci");
