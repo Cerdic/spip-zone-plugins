@@ -7,7 +7,7 @@ $javascript_centrar_enviar = "<script type=\"text/javascript\">
 
 	/*
 	Open Centered Popup Window Script-
-	© DHTMLShock (www.dhtmlshock.com)
+	ï¿½ DHTMLShock (www.dhtmlshock.com)
 	To add more shock to your site, visit www.DHTMLShock.com
 	*/
 	function centrarVentana(theURL,winName,features, myWidth, myHeight, isCenter) { //v3.0
@@ -27,7 +27,7 @@ $javascript_centrar_enviar = "<script type=\"text/javascript\">
 		
 // prepara el enlace completo
 		$enlace = $javascript_centrar_enviar."<a href=\"javascript:;\"
-onclick=\"centrarVentana('$url','Enviar_documento','scrollbars=yes,resizable=yes','580','500','true')\" title=\""._T('enviarmail:enviar_title')."\" style=\"border:none\"><img src=\"$logo\" style=\"border:none\" alt=\""._T('enviarmail:enviar_title')." title=\""._T('enviarmail:enviar_title')."\" /> "._T('enviarmail:enviar_por_email')."</a>";
+onclick=\"centrarVentana('$url','Enviar_documento','scrollbars=yes,resizable=yes','580','500','true')\" title=\""._T('enviarmail:enviar_title')."\" style=\"border:none\"><img src=\"$logo\" style=\"border:none\" alt=\""._T('enviarmail:enviar_title')."\" title=\""._T('enviarmail:enviar_title')."\" /> "._T('enviarmail:enviar_por_email')."</a>";
 		return $enlace;
 
 }
