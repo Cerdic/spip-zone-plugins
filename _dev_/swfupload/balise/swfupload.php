@@ -3,7 +3,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
 function balise_SWFUPLOAD ($p) {
-	$p = calculer_balise_dynamique($p,'SWFUPLOAD', array(''));
+	$p = calculer_balise_dynamique($p,'SWFUPLOAD', array());
 	return $p;
 }
 
@@ -42,9 +42,7 @@ function balise_SWFUPLOAD_dyn($str="")
 	@move_uploaded_file($_FILES['Filedata']['tmp_name'],$nom);	
 	spip_log("swfupload: $nom");  
 
-	$file_id = md5($_FILES["Filedata"]["tmp_name"] + rand()*100000);
-
-	
+	$file_id = md5($_FILES["Filedata"]["tmp_name"] + rand()*100000);	
   
     $id_article=intval(_request('id_article'));
 	
@@ -57,8 +55,8 @@ function balise_SWFUPLOAD_dyn($str="")
 	$mode = 'document';
 	include_spip('action/joindre');
 	joindre_documents($files, $mode, $type, $id_article, 0, $hash, $redirect, $actifs, $iframe_redirect);
-
 					}
+	return $file_id;			
 	}
 }
 
