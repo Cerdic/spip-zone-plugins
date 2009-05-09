@@ -1,0 +1,11 @@
+<B_article>
+<div class="accueil">
+<BOUCLE_article(ARTICLES){id_article=#ENV{type}|=={article}|?{#ENV{id},0}}><BOUCLE_rub(RUBRIQUES){id_rubrique}>[
+		(#ID_ARTICLE_ACCUEIL|=={#ID_ARTICLE}|non
+		|et{#REM|compositions_utiliser_article_accueil}
+		|et{#AUTORISER{styliser,rubrique,#ID_RUBRIQUE}}
+		|oui)
+		[(#BOUTON_ACTION{<:compositions:choisir_article_accueil:>,#URL_ACTION_AUTEUR{accueillir_rubrique,#ID_RUBRIQUE-#ID_ARTICLE,#SELF},ajax})] 
+		][(#ID_ARTICLE_ACCUEIL|=={#ID_ARTICLE}|oui)<:compositions:article_en_accueil:>
+]</BOUCLE_rub></BOUCLE_article></div></B_article>[
+(#FORMULAIRE_EDITER_COMPOSITION_OBJET{#ENV{type},#ENV{id}})]

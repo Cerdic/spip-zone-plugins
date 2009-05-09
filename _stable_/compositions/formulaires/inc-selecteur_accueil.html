@@ -1,0 +1,8 @@
+<BOUCLE_rub(RUBRIQUES){id_rubrique}>
+<select[ name='(#ENV{name})'][ id='(#ENV{id})']>
+<option value='0'><:compositions:aucun_article_accueil:></option>
+<BOUCLE_art(ARTICLES){id_rubrique}>
+<option value='#ID_ARTICLE'[ (#ID_ARTICLE|=={#ENV{selected}}|oui)selected="selected"]>#TITRE</option>
+</BOUCLE_art>
+</select>
+</BOUCLE_rub>
