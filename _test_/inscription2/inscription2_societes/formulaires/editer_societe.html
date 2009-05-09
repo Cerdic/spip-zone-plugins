@@ -1,6 +1,6 @@
 <div class="ajax formulaire_spip formulaire_creer_societeinscription2" id="formulaire_creer_societe">
 
-	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
 [(#ENV{editable}|oui)
@@ -52,7 +52,7 @@
 			</li>
 		</ul>
 	    <p class="boutons">
-		    <input type="submit" class="submit" value="[(#ENV{id_societe}|?{<:bouton_enregistrer:>,<:bouton_ajouter:>})]" />
+		    <input type="submit" class="submit" name="save" value="[(#ENV{id_societe}|?{<:bouton_enregistrer:>,<:bouton_ajouter:>})]" />
 	    </p>
 	</div></form>]
 </div>
