@@ -24,8 +24,9 @@ function balise_URL_ACTION_AUTEUR($p) {
 
 	$p->code = interprete_argument_balise(1,$p);
 	$args = interprete_argument_balise(2,$p);
-	if ($args != "''" && $args!==NULL)
-		$p->code .= ",".$args;
+	if (!$args)
+		$args = "''";
+	$p->code .= ",".$args;
 	$redirect = interprete_argument_balise(3,$p);
 	if ($redirect != "''" && $redirect!==NULL)
 		$p->code .= ",".$redirect;
@@ -300,7 +301,7 @@ function balise_BOUTON_ACTION($p){
 	$_class = interprete_argument_balise(3,$p);
 	if (!$_class) $_class="''";
 
-	$p->code = "'<form class=\'bouton_action_post '.$_class.'\' method=\'post\' action=\''.$_url.'\'><span>'.form_hidden($_url).'<input type=\'submit\' class=\'submit\' value=\''.attribut_html($_label).'\' /></span></form>'";
+	$p->code = "'<form class=\'bouton_action_post '.$_class.'\' method=\'post\' action=\''.(\$u=$_url).'\'><span>'.form_hidden(\$u).'<input type=\'submit\' class=\'submit\' value=\''.attribut_html($_label).'\' /></span></form>'";
 	$p->interdire_scripts = false;
 	return $p;
 }
