@@ -8,9 +8,10 @@
 	 * Pour plus de details voir le fichier COPYING.txt.
 	 *  
 	 **/
-function exec_livre() {
+function exec_controle_guestbook() {
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('guestbook:titre'), "", "");
 	echo recuperer_fond('prive/controle_guestbook','', array('ajax'=>true));
+	echo fin_page();
 }
 ?>

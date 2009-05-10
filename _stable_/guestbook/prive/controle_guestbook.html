@@ -1,6 +1,6 @@
 <div style="padding-bottom: 50px;">
 	#SET{couleurs,#ARRAY{'publie', '#cce7b9', 'off', '#e7a1a1', 'prop', '#f1dec0'}}
-	<table width="20%" style="margin:auto;" border="" cellspacing="0" cellpadding="2">
+	<table width="20%" style="margin: 10px auto;" border="" cellspacing="0" cellpadding="2">
 		<tr>
 			<td[ style="background:(#GET{couleurs}|table_valeur{publie});text-align:center;"]>
 				<:ecrire:texte_statut_publies:>
@@ -60,7 +60,7 @@
 					<BOUCLE_rep(GUESTBOOK_REPONSES auteurs){id_message}>
 						[<i>(#NOM)</i>] <:guestbook:repondu:> : [<em>(#MESSAGE)</em>]
 					</BOUCLE_rep>
-					<a href="#URL_ECRIRE{'repondre', 'id_message='#ID_MESSAGE}">
+					<a href="#URL_ECRIRE{'repondre_guestbook', 'id_message='#ID_MESSAGE}">
 						<:spip:lien_repondre_message:>
 					</a>
 				</td>
@@ -94,4 +94,6 @@
 		</BOUCLE_messages>
 	</table>
 </B_messages>
+	<div style='margin-top: 20px;font-size: 18px; color: #8A2BE2;'><:guestbook:aucun_message_livre:></div>
+<//B_messages>
 </div>
