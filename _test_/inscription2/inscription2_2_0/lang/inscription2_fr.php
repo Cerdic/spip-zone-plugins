@@ -229,7 +229,7 @@ Merci de votre confiance
 
 L\'&eacute;quipe de @nom_site@ 
 @url_site@',
-	'texte_email_inscription' => 'vous &ecirc; sur le point de confirmer votre inscription au site @nom_site@. 
+	'texte_email_inscription' => 'vous &ecirc;tes sur le point de confirmer votre inscription au site @nom_site@. 
 
 Cliquer le lien ci-dessous pour activer votre compte et choisir votre mot de passe.
 
