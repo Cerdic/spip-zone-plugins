@@ -3,9 +3,7 @@
 	<auteur>Phil</auteur>
 	<version>0.1</version>
 	<etat>dev</etat>
-	<description>Permet de t&eacute;l&eacute;charger des images par lot dans le dossier upload sans acc&egrave;s FTP
-_ Permet de t&eacute;l&eacute;charger des images par dans un article.
-_ si vous avez cfg: [configuration->index.php?exec=cfg&amp;cfg=uploadify]
+	<description>Permet de t&eacute;l&eacute;charger des documents par lots dans un article.
   </description>
 	<icon>images/uploadify-24.png</icon>
 	<lien>http://www.spip-contrib.net/uploadify</lien>
