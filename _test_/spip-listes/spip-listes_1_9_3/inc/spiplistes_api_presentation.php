@@ -1090,6 +1090,7 @@ function spiplistes_boite_meta_info_liste($array, $recursive = false) {
  */
 function spiplistes_plugin_aide ($fichier_exec_aide, $aide='', $return=true) {
 	include_spip('inc/minipres');
+	include_spip('inc/aider');
 	global $spip_lang
 		, $spip_lang_rtl
 		, $spip_display
