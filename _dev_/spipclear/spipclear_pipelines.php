@@ -26,7 +26,7 @@ function spipclear_styliser($flux){
 		// uniquement si configuration de spipClear pour le secteur en question
 		elseif ($id_rubrique = $flux['args']['id_rubrique']) {
 			$id_secteur = sql_getfetsel('id_secteur', 'spip_rubriques', 'id_rubrique=' . intval($id_rubrique));
-			if (in_array($id_secteur, lire_config('spipclear/secteurs', 1))) {
+			if (in_array($id_secteur, lire_config('spipclear/secteurs', array(0,1)))) {
 				if ($squelette = test_squelette_spipclear($fond, $ext)) {
 					$flux['data'] = $squelette;
 				}
