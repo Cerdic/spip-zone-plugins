@@ -869,11 +869,11 @@ function spiplistes_patron_find_in_path ($path_patron, $lang, $chercher_texte = 
  * @param $contexte array
  */
 function spiplistes_assembler_patron ($path_patron, $contexte) {
-	
-	include_spip('public/assembler');
+
+	include_spip('inc/distant');
 	
 	$patron_html = spiplistes_patron_find_in_path($path_patron, $contexte['lang'], false);
-
+	
 	// le resultat assemble' au format html
 	$result_html = 
 		$patron_html
