@@ -273,6 +273,9 @@ function spiplistes_courrier_version_texte($in) {
 	//saut de lignes en debut ou fin de texte
 	$out = preg_replace("/(\r\n|\n|\r)+$/", "\n\n", $out);
 	
+	// Faire des lignes de 75 caracteres maximum
+	$out = wordwrap($out);
+	
 	return $out;
 
 } // end spiplistes_courrier_version_texte()

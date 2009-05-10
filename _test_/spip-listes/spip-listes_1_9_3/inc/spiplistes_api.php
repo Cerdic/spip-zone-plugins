@@ -38,6 +38,45 @@ include_spip('base/abstract_sql');
 include_spip('inc/spiplistes_api_abstract_sql');
 include_spip('inc/spiplistes_api_globales');
 
+/**
+ * Fonction de compatibilite de php4 / php5 pour http_build_query
+ * 
+ * @return un query string a passer a une url 
+ * @param object $data un array de contexte
+ * @param object $prefix[optional]
+ * @param object $sep[optional]
+ * @param object $key[optional]
+ */
+function spiplistes_http_build_query($data,$prefix=null,$sep='',$key=''){
+	if(!function_exists('http_build_query')) {
+	    function http_build_query($data,$prefix=null,$sep='',$key='') {
+	        $ret = array();
+	            foreach((array)$data as $k => $v) {
+	                $k    = urlencode($k);
+	                if(is_int($k) && $prefix != null) {
+	                    $k    = $prefix.$k;
+	                };
+	                if(!empty($key)) {
+	                    $k    = $key."[".$k."]";
+	                };
+	
+	                if(is_array($v) || is_object($v)) {
+	                    array_push($ret,http_build_query($v,"",$sep,$k));
+	                }
+	                else {
+	                    array_push($ret,$k."=".urlencode($v));
+	                };
+	            };
+	
+	        if(empty($sep)) {
+	            $sep = ini_get("arg_separator.output");
+	        };
+	        return implode($sep, $ret);
+	    };
+	};
+	return http_build_query($data);
+}
+
 /* function privee
  * multi_queries mysql n'est pas en mesure de le faire en natif :-(
  * A tranformer le jour ou mysql gerera correctement le multi_query
@@ -838,21 +877,21 @@ function spiplistes_assembler_patron ($path_patron, $contexte) {
 	// le resultat assemble' au format html
 	$result_html = 
 		$patron_html
-		? recuperer_fond($patron_html, $contexte)
+		// ? recuperer_fond($patron_html, $contexte)
+		? recuperer_page(generer_url_public('patron_switch')."&".spiplistes_http_build_query($contexte,"","&"),true)
 		: ""
 		;
-	
+		
 	// chercher si un patron version texte existe
 	$patron_texte = spiplistes_patron_find_in_path($path_patron, $contexte['lang'], true);
-	
-	// si oui, assembler a partir du patron version tete
-	// si non, traduire la version texte a partir de la version html
+
 	$result_texte = 
 		($patron_texte && ($patron_html != $patron_texte))
-		? recuperer_fond($patron_texte, $contexte) . "\n"
-		: spiplistes_courrier_version_texte($result_html) . "\n"
+		// ? recuperer_fond($patron_texte, $contexte) . "\n"
+		? recuperer_page(generer_url_public('patron_switch')."&".spiplistes_http_build_query($contexte,"","&"),true)
+		: spiplistes_courrier_version_texte($message_html) . "\n"
 		;
-
+		
 	$result = array($result_html, $result_texte);
 	
 	return($result);
