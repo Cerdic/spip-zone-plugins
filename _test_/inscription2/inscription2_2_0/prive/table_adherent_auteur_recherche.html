@@ -64,7 +64,7 @@
 		</td>
 		<BOUCLE_champscorps(POUR){tableau #CONFIG{inscription2}}{valeur = 'on'}>
 			[(#CLE|match{_table}|oui)
-			<td[ class="(#_auteur:EDIT{[(#CLE|replace{'_table',''})]})"]>
+			<td[ class="(#_auteurs:EDIT{[(#CLE|replace{'_table',''})]})"]>
 				[(#CLE|replace{'_table',''}|inscription2_recuperer_champs{#_auteurs:ID_AUTEUR})]
 			</td>]
 		</BOUCLE_champscorps>
