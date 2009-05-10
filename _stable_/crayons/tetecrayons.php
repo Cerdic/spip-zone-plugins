@@ -130,8 +130,8 @@ EOH;
 	// Est-ce que PortePlume est la ?
 	$meta_crayon = unserialize($GLOBALS['meta']['crayons']);
 	if ($meta_crayon['barretypo']) {
-		$f = chercher_filtre('info_plugin');
-		if ($f('PORTE_PLUME','est_actif')) {
+		if ($f = chercher_filtre('info_plugin')
+		AND $f('PORTE_PLUME','est_actif')) {
 			$lang = $GLOBALS['spip_lang'];
 			$incHead .= <<<EOF
 <script type="text/javascript">
@@ -167,6 +167,9 @@ EOF;
 // si cette fonction est absente, balise_EDIT_dist() met a vide
 function balise_EDIT($p) {
 
+	// le code compile de ce qui se trouve entre les {} de la balise
+	$label = interprete_argument_balise(1,$p);
+
 	$i_boucle = $p->nom_boucle ? $p->nom_boucle : $p->id_boucle;
 	// #EDIT hors boucle ? ne rien faire
 	if (!$type = $p->boucles[$i_boucle]->type_requete) {
@@ -196,7 +199,7 @@ function balise_EDIT($p) {
 	$p->code = "classe_boucle_crayon('"
 		. $type
 		."',"
-		.sinon(interprete_argument_balise(1,$p),"''")
+		.sinon($label,"''")
 		.","
 		. $primary
 		.").' '";
