@@ -11,16 +11,16 @@
 	
     <B_listes>
     <ul>
-	<BOUCLE_listes(LISTES){statut IN '.*pub.*','liste'}>
+	<BOUCLE_listes(LISTES){id_liste IN #GET{selected}}{statut IN '.*pub.*','liste'}>
 	    <li class="editer_newsletters">
 			<label for="newsletters-#ID_LISTE">
             #TITRE
             </label>
             <input type="checkbox" class="checkbox" name="newsletters[]" id="newsletters-#ID_LISTE" value="#ID_LISTE" 
             [(#CONFIG{inscription2/optout}|=={on}|?{
-				[(#ID_LISTE|in_any{#ENV{listes}}|?{' ',''}) checked="checked"]
+				[(#ID_LISTE|in_any{#ENV{listes}}|oui) checked="checked"]
 				,
-				[(#ID_LISTE|in_array{#GET{selected}}|?{' ',''}) checked="checked"]
+				[(#ID_LISTE|in_array{#GET{selected}}|oui) checked="checked"]
             })] 
 			/>
             [<p class='erreur'>(#ENV**{erreurs}|table_valeur{newsletters-#ID_LISTE})</p>]
