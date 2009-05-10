@@ -14,10 +14,12 @@
 <select name="#ENV{nom}[(#ENV{multiple}|?{[(#VAL{&#91;&#93;}|html_entity_decode)]})]" id="champ_#ENV{nom}"[ class="(#ENV{class})"][(#ENV{multiple}|oui) multiple="multiple"]>
 	[(#ENV{multiple}|non)
 	<option value="O"></option>]
-<BOUCLE_secteurs(RUBRIQUES){racine}{par num titre, titre}>
-	[(#ENV{multiple}|oui)
-	<option value="#ID_RUBRIQUE"[(#ID_RUBRIQUE|in_array{#ENV{valeur}|sinon{#ENV{defaut,#ARRAY}}}|oui) selected="selected"]>#TITRE</option>]
-	[(#ENV{multiple}|non)
-	<option value="#ID_RUBRIQUE"[(#ID_RUBRIQUE|=={#ENV{valeur}|sinon{#ENV{defaut}}}|oui) selected="selected"]>#TITRE</option>]
-</BOUCLE_secteurs>
+	<BOUCLE_secteurs(RUBRIQUES){racine}{par num titre, titre}{tout}>
+		[(#ENV{multiple}|oui)
+		<option value="#ID_RUBRIQUE"[(#ID_RUBRIQUE|in_array{#ENV{valeur}|sinon{#ENV{defaut,#ARRAY}}}|oui) selected="selected"]>#TITRE</option>]
+		[(#ENV{multiple}|non)
+		<option value="#ID_RUBRIQUE"[(#ID_RUBRIQUE|=={#ENV{valeur}|sinon{#ENV{defaut}}}|oui) selected="selected"]>#TITRE</option>]
+		[(#ENV{recursif}|oui)
+		<INCLURE{fond=prive/listes/rubriques_recursives}{valeur=#ENV{valeur}}{id_rubrique=#ID_RUBRIQUE}{multiple}>]
+	</BOUCLE_secteurs>
 </select>
