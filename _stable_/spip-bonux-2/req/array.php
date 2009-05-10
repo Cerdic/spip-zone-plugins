@@ -404,7 +404,7 @@ function spip_array_fetch($r, $t='', $serveur='') {
 }
 
 function spip_array_seek($r, $row_number, $serveur='',$requeter=true) {
-	return array_results($hash,'seek',$row_number);
+	return array_results($r,'seek',$row_number);
 }
 
 
