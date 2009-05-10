@@ -209,7 +209,7 @@ function mutu_etape_creer_base($e, $options){
 							$mail = charger_fonction('envoyer_mail', 'inc');
 							$mail($options['mail'],
 								_T('mutu:install_creation_bd', array('nombase' => _INSTALL_NAME_DB)),
-								_T('mutu:install_creation_bd_site_2', array('base' => _INSTALL_NAME_DB.'@'._INSTALL_HOST_DB.' ('._INSTALL_USER_DB.':'._INSTALL_PASS_DB.')', 'site' => $e)),
+								_T('mutu:install_creation_bd_site_2', array('base' => _INSTALL_NAME_DB.'@'._INSTALL_HOST_DB.' ('._INSTALL_USER_DB.')', 'site' => $e)),
 								$options['mail']
 							);
 						}
