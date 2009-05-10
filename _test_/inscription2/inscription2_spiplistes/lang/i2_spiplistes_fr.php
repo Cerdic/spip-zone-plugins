@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'choisir_listes' => 'Choisissez ci-dessous les listes de diffusion &#224; proposer aux nouveaux adh&eacute;rents&nbsp;: ',
 	
 	// E
-	'exp_newsletter' => 'Choisissez ci-dessous les listes de diffusion auxquelles vous voulez vous abonner',
+	'exp_newsletter' => 'Choisissez ci-dessous les listes de diffusion auxquelles vous souhaitez vous abonner',
 	
 	// D
 	'deselect_listes' => '> tout d&#233;s&eacute;lectionner',
