@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+
+	<!--  
+
+	// mon_diplome plugin.xml
+
+	// $LastChangedRevision$
+	// $LastChangedBy$
+	// $LastChangedDate$
+	
+	 -->
+	 	
+	<nom>Mon diplôme</nom>
+	<auteur>
+		cpaulus@quesaco.org
+		<br />avec l'aide de :
+		<ul>
+			<li><em>html2pdf</em> de Laurent Minguet</li>
+			<li><em>fpdf</em> de de Olivier Plathey</li>
+		</ul>
+	</auteur>
+
+	<description>
+		Balise SPIP de génération de diplôme en ligne.
+	</description>
+	
+	<version>1.00.00</version>
+	<etat>stable</etat>
+	<icon>images/mon_diplome-64.png</icon>
+	
+	<!-- espace de nommage -->
+	<prefix>plom</prefix>
+	
+	<options>mon_diplome_options.php</options>
+	
+	<necessite id="SPIP" version="[1.9.2;]" />
+	
+</plugin>
