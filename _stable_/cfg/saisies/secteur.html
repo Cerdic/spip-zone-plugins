@@ -8,7 +8,7 @@
 		{nom=secteur_region}
 		{label=<:plugin:secteur_region:>})] 
 ]
-<select name="#ENV{nom}" id="champ_#ENV{nom}"[ value="(#ENV{valeur})"]>
+<select name="#ENV{nom}" id="champ_#ENV{nom}">
 <option value="O"></option>
 <BOUCLE_secteurs(RUBRIQUES){racine}{par num titre, titre}>
 	<option value="#ID_RUBRIQUE" [(#ID_RUBRIQUE|=={#ENV{valeur}|sinon{#ENV{defaut}}}|oui) selected="selected"]>#TITRE</option>
