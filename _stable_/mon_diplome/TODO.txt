@@ -1,0 +1,10 @@
+// TODO.txt
+
+ 
+// $LastChangedRevision$
+// $LastChangedBy$
+// $LastChangedDate$
+
++ page de configuration en espace privé
++ ajouter quelques fontes pour l'exemple (condensées ?)
++ faire un fond de diplôme digne de ce nom
