@@ -51,6 +51,7 @@ function array_where_sql2php($where){
 	$where = preg_replace(",(^|\()([\w.]+)\s*REGEXP\s*(.+)($|\)),Uims","\\1preg_match('/'.preg_quote(\\3).'/Uims',\\2)\\4",$where); // == -> preg_match
 	$where = preg_replace(",([\w.]+)\s*=,Uims","\\1==",$where); // = -> ==
 	$where = preg_replace(";^FIELD\(([^,]+),(.*)$;Uims","in_array(\\1,array(\\2)",$where); // IN -> FIELD -> in_array()
+	$where = preg_replace(";(^|\(|\(\()([\w.]+)\s*IN\s*(.+)($|\)|\)\));Uims","in_array(\\2,array\\3",$where); // IN  -> in_array()
 	return $where;
 }
 
@@ -109,7 +110,7 @@ function array_query_filter($cle,$valeur,$table,$where){
 	return array_where_teste($cle,$valeur,$table,$wherec[$hash]);
 }
 
-function array_results($hash,$store='get'){
+function array_results($hash,$store='get',$arg=null){
 	static $array_results = array();
 	if($store=='get'){
 		if (isset($array_results[$hash]['res'])){
@@ -122,6 +123,21 @@ function array_results($hash,$store='get'){
 			 OR ($valeur<$array_results[$hash]['iter']['fin'] AND $pas<0)) 
 				return false;
 			return array(++$array_results[$hash]['iter']['i'],$valeur);
+		}
+		return false;
+	}
+	elseif($store=='seek'){
+		if (isset($array_results[$hash]['res'])){
+			// pas de seek sur les tableaux, on emule avec reset+n each
+			reset($array_results[$hash]['res']);
+			$i=0;
+			while ($i++<intval($arg))
+				each($array_results[$hash]['res']);
+			return true;
+		}
+		if (isset($array_results[$hash]['iter'])) {
+			$array_results[$hash]['iter']['i'] = intval($arg);
+			return true;
 		}
 		return false;
 	}
@@ -147,6 +163,7 @@ function array_results($hash,$store='get'){
 		}
 	}
 }
+
 // emulations array
 function array_query($query){
 	// pas de jointure, que des requetes simples
@@ -238,6 +255,7 @@ $GLOBALS['spip_array_functions_1'] = array(
 		'error' => 'spip_array_error',
 		'explain' => 'spip_array_explain',
 		'fetch' => 'spip_array_fetch',
+		'seek' => 'spip_array_seek',
 		'free' => 'spip_array_free',
 		'hex' => 'spip_array_hex',
 		'in' => 'spip_array_in', 
@@ -254,7 +272,6 @@ $GLOBALS['spip_array_functions_1'] = array(
 		'showtable' => 'spip_array_showtable',
 
 		);
-
 
 function spip_array_set_charset($charset, $serveur=''){
 	#spip_log("changement de charset sql : "."SET NAMES "._q($charset));
@@ -385,6 +402,11 @@ function spip_array_fetch($r, $t='', $serveur='') {
 	}
 	return false;
 }
+
+function spip_array_seek($r, $row_number, $serveur='',$requeter=true) {
+	return array_results($hash,'seek',$row_number);
+}
+
 
 function spip_array_error($query='') {
 	spip_log("Erreur - $query", 'array');
