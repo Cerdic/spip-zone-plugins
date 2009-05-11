@@ -6,7 +6,7 @@
 	<description>Permet de t&eacute;l&eacute;charger des documents par lots dans un article.
   </description>
 	<icon>uploadify-24.png</icon>
-	<lien>http://www.spip-contrib.net/uploadify</lien>
+	<lien>http://www.spip-contrib.net/article3045</lien>
 	<prefix>uploadify</prefix>
 	<pipeline>
 		<nom>ajouter_boutons</nom>
