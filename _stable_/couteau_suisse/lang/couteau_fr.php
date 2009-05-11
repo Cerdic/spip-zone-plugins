@@ -27,6 +27,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'nom_forum' => 'Merci de sp&eacute;cifier votre nom !',
+	'nom_email_forum' => 'Merci de sp&eacute;cifier votre nom ou votre email !',
+	'email_forum' => 'Merci de sp&eacute;cifier votre email !',
 	'non_confirmes' => 'Non confirm&eacute;s :',
 
 	// O

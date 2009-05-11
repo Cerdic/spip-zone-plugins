@@ -45,7 +45,8 @@ switch($contexte) {
 		));
 		break;
 	case 'auteur_forum':
-		@define('_CS_FORUM_NOM', _T('forum_votre_nom'));
+		@define('_CS_FORUM_NOM', preg_replace(',:$,','',_T('forum_votre_nom')));
+		@define('_CS_FORUM_EMAIL', preg_replace(',:$,','',_T('forum_votre_email')));
 		break;
 	case 'en_travaux':
 		@define('_CS_TRAVAUX_TITRE', '<i>'._T('info_travaux_titre').'</i>');

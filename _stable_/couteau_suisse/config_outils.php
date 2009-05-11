@@ -284,11 +284,27 @@ add_outil( array(
 	'version-min' => '1.9200',
 ));
 
+add_variable( array(
+	'nom' => 'auteur_forum_nom',
+	'check' => 'couteauprive:auteur_forum_nom',
+	'defaut' => 1,
+));
+add_variable( array(
+	'nom' => 'auteur_forum_email',
+	'check' => 'couteauprive:auteur_forum_email',
+	'defaut' => 0,
+));
+add_variable( array(
+	'nom' => 'auteur_forum_deux',
+	'check' => 'couteauprive:auteur_forum_deux',
+	'defaut' => 0,
+));
 add_outil( array(
 	'id' => 'auteur_forum',
 	'categorie'	 => 'admin',
 	'jquery'	=> 'oui',
 	'code:jq_init' => 'cs_auteur_forum.apply(this);',
+	'code:js' => "var cs_verif_email = %%auteur_forum_email%%;\nvar cs_verif_nom = %%auteur_forum_nom%%;\nvar cs_verif_deux = %%auteur_forum_deux%%;",
 ));
 
 	// ici on a besoin de trois boutons radio : _T('couteauprive:par_defaut'), _T('couteauprive:sf_amont') et _T('couteauprive:sf_tous')
