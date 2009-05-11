@@ -53,6 +53,7 @@ function autoriser_styliser_dist($faire, $type='', $id=0, $qui = NULL, $opt = NU
  * @return array
  */
 function compositions_styliser($flux){
+	include_spip('compositions_fonctions');
 	if (compositions_styliser_auto()){
 		$type = $flux['args']['fond']; // on fait l'approximation fond=type
 		// si le type n'est pas l'objet d'une composition, ne rien faire
