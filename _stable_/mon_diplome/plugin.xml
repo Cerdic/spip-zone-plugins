@@ -11,18 +11,18 @@
 	
 	 -->
 	 	
-	<nom>Mon diplôme</nom>
+	<nom>Mon dipl&#244;me</nom>
 	<auteur>
 		cpaulus@quesaco.org
 		<br />avec l'aide de :
 		<ul>
 			<li><em>html2pdf</em> de Laurent Minguet</li>
-			<li><em>fpdf</em> de de Olivier Plathey</li>
+			<li><em>fpdf</em> d'Olivier Plathey</li>
 		</ul>
 	</auteur>
 
 	<description>
-		Balise SPIP de génération de diplôme en ligne.
+		Balise SPIP de g&#233;n&#233;ration de dipl&#244;me en ligne.
 	</description>
 	
 	<version>1.00.00</version>
