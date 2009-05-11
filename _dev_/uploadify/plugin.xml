@@ -5,7 +5,7 @@
 	<etat>dev</etat>
 	<description>Permet de t&eacute;l&eacute;charger des documents par lots dans un article.
   </description>
-	<icon>images/uploadify-24.png</icon>
+	<icon>uploadify-24.png</icon>
 	<lien>http://www.spip-contrib.net/uploadify</lien>
 	<prefix>uploadify</prefix>
 	<pipeline>

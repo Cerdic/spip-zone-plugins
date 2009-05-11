@@ -5,7 +5,7 @@ function uploadify_ajouterBoutons($boutons_admin) {
 		//AND $GLOBALS["options"]=="avancees") {
 		  // on voit le bouton dans la barre "naviguer"
 			$boutons_admin['naviguer']->sousmenu['uploadify_admin']= new Bouton(
-			"../"._DIR_PLUGIN_UPLOADIFY."/images/uploadify-24.png",  // icone
+			"../"._DIR_PLUGIN_UPLOADIFY."/uploadify-24.png",  // icone
 			_T('uploadify:uploadify')	// titre
 			);
 		}
@@ -90,7 +90,7 @@ if  ($GLOBALS['meta']["documents_$type"]=='non'
 		$out = '';
 	else {
 	$bouton = _T('uploadify:titre_uploadify');
-	$out .= debut_cadre_enfonce(_DIR_PLUGIN_UPLOADIFY.'images/uploadify-24.png', true, "", 
+	$out .= debut_cadre_enfonce(_DIR_PLUGIN_UPLOADIFY.'uploadify-24.png', true, "", 
 			bouton_block_depliable($bouton,$flag === 'ajax','uploadify'))
 			. debut_block_depliable($flag === 'ajax','uploadify');
 	$out .= '<div>'._T('uploadify:texte_uploadify_article').'</div>';
