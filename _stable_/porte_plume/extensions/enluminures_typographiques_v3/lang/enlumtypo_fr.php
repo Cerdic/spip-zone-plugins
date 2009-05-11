@@ -40,7 +40,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'cfg_puces' => 'Traitement des puces',
 'cfg_titraille' => 'Titraille',
-'cfg_insertcss' => 'Insertion CSS'
+'cfg_insertcss' => 'Insertion CSS',
+
+'tableau_enregistrer' => 'Enregistrer',
+'tableau_prem_ligne' => 'Premi&egrave;re ligne',
+'tableau_resume' => 'R&eacute;sum&eacute;',
+'tableau_titre' => 'Titre'
 
 );
 ?>
