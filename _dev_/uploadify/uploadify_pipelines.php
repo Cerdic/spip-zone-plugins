@@ -53,7 +53,6 @@ if  ($GLOBALS['meta']["documents_$type"]=='non'
 		'uploader':'$dir_plugin"."uploader.swf',
 		'script':'$url_upload',
 		'cancelImg':'$dir_plugin"."cancel.png',
-		'scriptAccess':'always',
 		'scriptData':{'exec':'uploadify_upload','id_article':$id_article},
 		'multi':true,
 		'displayData': 'speed',
