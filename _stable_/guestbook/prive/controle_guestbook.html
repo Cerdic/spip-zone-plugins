@@ -46,7 +46,7 @@
 			<td><:guestbook:repondre:></td>
 			<td><:guestbook:statut:></td>
 		</tr>
-		<BOUCLE_messages(GUESTBOOK)>
+		<BOUCLE_messages(GUESTBOOK){!par date}>
 			<tr[ style="background:(#GET{couleurs}|table_valeur{#STATUT})"]>
 				<td>#ID_MESSAGE</td>
 				<td>#NOTE</td>
