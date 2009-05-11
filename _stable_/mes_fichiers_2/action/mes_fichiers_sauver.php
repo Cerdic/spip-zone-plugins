@@ -16,13 +16,16 @@ function action_mes_fichiers_sauver() {
 	include_spip('inc/pclzip');
 	include_spip('inc/mes_fichiers_utils');
 	$liste = _request('a_sauver');
-	spip_log('*** mes_fichiers ***');
+	spip_log('*** MES_FICHIERS (action_mes_fichiers_sauver) :');
 	spip_log($liste);
 
 	// Archivage du contenu
-	$mes_fichiers = new PclZip(_DIR_TMP . 'mes_fichiers_'.date("Ymd_Hi").'.zip');
-	$erreur = $mes_fichiers->create($liste, PCLZIP_OPT_ADD_PATH, "spip");
+	if (!@is_dir(_DIR_MES_FICHIERS))
+		$dir = sous_repertoire(_DIR_TMP,"mes_fichiers");
+	$mes_fichiers = new PclZip(_DIR_MES_FICHIERS . 'mf2_'.date("Ymd_His").'.zip');
+	$erreur = $mes_fichiers->create($liste, PCLZIP_OPT_COMMENT, serialize($liste));
 	if ($erreur == 0) {
+		spip_log('*** MES_FICHIERS (action_mes_fichiers_sauver) : erreur '.$mes_fichiers->errorInfo(true));
 		redirige_par_entete(generer_url_ecrire('mes_fichiers', 'etat=nok_sauve', true));
 	}
 

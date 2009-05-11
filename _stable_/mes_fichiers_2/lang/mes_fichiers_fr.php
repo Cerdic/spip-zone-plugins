@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // I
 'info_sauver' => 'Cette option fabrique un fichier d\'archives contenant les personnalisations effectu&eacute;es sur le site comme le dernier dump de sauvegarde de la base, le(s) dossier(s) des squelettes nomm&eacute;s, le dossier images... 
-	Le fichier d\'archives est cr&eacute;&eacute; dans <code>tmp/</code> et se nomme <code>mes_fichiers_aaaammjj_hhmm.zip</code>.
+	Le fichier d\'archives est cr&eacute;&eacute; dans <code>tmp/mes_fichiers/</code> et se nomme <code>mf2_aaaammjj_hhmmss.zip</code>.
 	La liste exhaustive des fichiers et dossiers pouvant &ecirc;tre sauvegard&eacute;s est affich&eacute;e ci-dessous:',
 'info_telecharger' => 'Cette option permet de t&eacute;l&eacute;charger un des fichiers d\'archives disponibles parmi la liste affich&eacute;e ci-dessous:',
 
@@ -32,9 +32,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'message_sauvegarde_nok' => 'Erreur lors de la sauvegarde. Le fichier d\'archives n\'a pas &eacute;t&eacute; cr&eacute;&eacute;.',
 'message_telechargement_ok' => 'Le fichier d\'archives a bien &eacute;t&eacute; t&eacute;l&eacute;charg&eacute;.',
 'message_telechargement_nok' => 'Erreur lors du t&eacute;l&eacute;chargement.',
+'message_zip_propriete_nok' => 'Aucune propri&eacute;t&eacute; n\'est disponible sur cette archive.',
+'message_zip_sans_contenu' => 'Aucune information n\'est disponible sur le contenu de cette archive.',
 
 // R
 'resume_table_telecharger' => 'Liste des archives disponibles au t&eacute;l&eacute;chargement',
+'resume_zip_statut' => 'Statut',
+'resume_zip_compteur' => 'Fichiers / dossiers archiv&eacute;s',
+'resume_zip_contenu' => 'Contenu r&eacute;sum&eacute;',
 
 
 // T

@@ -1,5 +1,4 @@
 <?php
-
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function action_mes_fichiers_telecharger() {
@@ -8,7 +7,7 @@ function action_mes_fichiers_telecharger() {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 	if (!@is_readable($arg)) {
-		spip_log("action_telecharger_mes_fichiers $arg pas accessible en lecture");
+		spip_log("*** MES_FICHIERS (action_telecharger_mes_fichiers) : $arg pas accessible en lecture");
 		redirige_par_entete(generer_url_ecrire('mes_fichiers', 'etat=nok_tele', true));
 	}
 
@@ -30,5 +29,4 @@ function action_mes_fichiers_telecharger() {
 	readfile($arg);
 	redirige_par_entete(generer_url_ecrire('mes_fichiers', 'etat=ok_tele', true));
 }
-
 ?>

@@ -52,12 +52,57 @@ function mes_fichiers_a_sauver() {
 
 // Renvoie la liste des fichiers et repertoires a sauver classee par date inverse
 function mes_fichiers_a_telecharger() {
-	$liste = preg_files(_DIR_TMP . 'mes_fichiers_');
+	$liste = preg_files(_DIR_MES_FICHIERS . 'mf2_');
 	return array_reverse($liste);
 }
 
-// Renvoie la liste des fichiers et repertoires a sauver
+// Convertit un mtime en date
 function filemtime_2_date($mtime) {
 	return date('Y-m-d H:i:s',$mtime);
+}
+
+// Renvoie la liste des repertoires et fichiers de base archives (la liste de choix)
+function mes_fichiers_resumer_zip($zip) {
+	include_spip('inc/pclzip');
+	$fichier_zip = new PclZip($zip);
+	$proprietes = $fichier_zip->properties();
+	
+	$resume = NULL;
+	if ($proprietes == 0) {
+		$resume .= _T('mes_fichiers:message_zip_propriete_nok');
+		spip_log('*** MES_FICHIERS (mes_fichiers_resumer_zip) : erreur '.$fichier_zip->errorInfo(true));
+	}
+	else {
+		$resume .= _T('mes_fichiers:resume_zip_statut').' : '.$proprietes['status'].'<br />';
+		$resume .= _T('mes_fichiers:resume_zip_compteur').' : '.$proprietes['nb'].'<br />';
+		$resume .= _T('mes_fichiers:resume_zip_contenu').' : '.'<br />';
+		$resume .= '<ul>';
+		$liste = unserialize($proprietes['comment']);
+		if ($liste)
+			foreach ($liste as $_fichier) {
+				$resume .= '<li>' . joli_repertoire($_fichier) . '</li>';
+			}
+		else
+			$resume .= '<li>' . _T('mes_fichiers:message_zip_sans_contenu') . '</li>';
+		$resume .= '</ul>';
+	}
+	return $resume;	
+}
+
+// Renvoie la liste des fichiers et repertoires a sauver
+function mes_fichiers_voir_zip($zip) {
+	include_spip('inc/pclzip');
+	$fichier_zip = new PclZip($zip);
+  
+	if (($list = $fichier_zip->listContent()) == 0) {
+		spip_log('*** MES_FICHIERS (mes_fichiers_voir_zip) : erreur '.$fichier_zip->errorInfo(true));
+	}
+
+	for ($i=0; $i<sizeof($list); $i++) {
+		for(reset($list[$i]); $key = key($list[$i]); next($list[$i])) {
+			echo "File $i / [$key] = ".$list[$i][$key]."<br>";
+		}
+		echo "<br>";
+	}
 }
 ?>

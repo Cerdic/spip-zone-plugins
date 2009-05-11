@@ -40,7 +40,7 @@ function exec_mes_fichiers_dist(){
 	// contenu
 	include_spip('inc/mes_fichiers_utils');
  	echo recuperer_fond('prive/contenu/mes_fichiers_sauver',  array('fichiers' => mes_fichiers_a_sauver(), 'a_sauver'=> _request('a_sauver'), 'etat' => _request('etat')));
- 	echo recuperer_fond('prive/contenu/mes_fichiers_telecharger', array('fichiers' => mes_fichiers_a_telecharger(), 'etat' => _request('etat')));
+ 	echo recuperer_fond('prive/contenu/mes_fichiers_telecharger', array('fichiers' => mes_fichiers_a_telecharger(), 'a_voir' => _request('a_voir'), 'etat' => _request('etat')));
 
 	// fin contenu
 	echo pipeline('affiche_milieu', array('args'=>array('exec'=>'mes_fichiers'),'data'=>''));
