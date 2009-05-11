@@ -112,7 +112,7 @@
 				//xml almacena en un objeto xml los datos recogidos del documento leido
     				jQuery("item", xml[(#GET{id_carte_gis})]).each(function(item[(#GET{id_carte_gis})]){
     					var xmlItem[(#GET{id_carte_gis})] = xml[(#GET{id_carte_gis})].documentElement.getElementsByTagName("item")[item[(#GET{id_carte_gis})]];
-    					agregarMarcador(xmlItem[(#GET{id_carte_gis})],'[(#GET{id_carte_gis})]',0,17,markerManager[(#GET{id_carte_gis})]);
+    					agregarMarcador(xmlItem[(#GET{id_carte_gis})],'[(#GET{id_carte_gis})]',0,17,markerManager[(#GET{id_carte_gis})][(#ENV{ombre}|=={0}|non),'ombre']);
 					});
 					markerManager[(#GET{id_carte_gis})].refresh();
 					[(#ENV{attente}|=={1}|oui) $('#attente[(#GET{id_carte_gis})]').hide('normal'); ]

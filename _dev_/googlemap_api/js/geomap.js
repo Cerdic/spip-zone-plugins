@@ -58,7 +58,7 @@ function creaMarcador(point, html, icon, son, idmap) {
 	return marcador;
 }
 
-function agregarMarcador (xmlItem, idmap, minZoom, maxZoom) {
+function agregarMarcador (xmlItem, idmap, minZoom, maxZoom, markerMngerXD, ombre) {
 	//almacenamos en distintas variables la informacion contenida nen los chilNodes de cada item-marcador do xml
 	var xmlLat = $("geo_lat",xmlItem);
 	var xmlLng = $("geo_long",xmlItem);
@@ -81,7 +81,9 @@ function agregarMarcador (xmlItem, idmap, minZoom, maxZoom) {
 		//creamos un icono para o marcador
 		var icono_categoria = new GIcon();
 		icono_categoria.image = (icon != "" ? icon : MarkerImgBase);
-		icono_categoria.shadow = URLbase + "img_pack/shadow.png";
+		if(ombre){
+			icono_categoria.shadow = URLbase + "img_pack/shadow.png";
+		}
 		icono_categoria.iconSize = new GSize(MarkerBaseWidth, MarkerBaseHeight);
 		icono_categoria.shadowSize = new GSize(37, 34);	
 		icono_categoria.iconAnchor = new GPoint((MarkerBaseWidth/2), MarkerBaseHeight);
