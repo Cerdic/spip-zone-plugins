@@ -11,9 +11,9 @@
 include_spip('base/abstract_sql');
 include_spip('inc/vieilles_defs');
  
+ 
 function gis_cambiar_coord($id,$table,$exec) {
 	global $spip_lang_left, $spip_lang_right;
-	
 	
 	$pkey = id_table_objet($table);
 	
@@ -42,80 +42,17 @@ function gis_cambiar_coord($id,$table,$exec) {
 		sql_delete("spip_gis", array("$pkey = " . sql_quote($id)));
 	}
 	if ($glat!==NULL){
-		// on cherche un mot clé pour cet(te) article/rubrique
-		$nbMots = sql_countsel("spip_mots_{$table}s smt, spip_mots sm","smt.$pkey=".intval($id)." and smt.id_mot=sm.id_mot and sm.type='marker_icon'");
-		//echo "nbMots : ", $nbMots,"<br>";
-		if ($nbMots > 0) {
-			// il existe un mot-clé pour cet(te) article/rubrique du groupe de mots 'marker_icon'
-			// on recherche son identifiant
-			$id_mot = sql_getfetsel("smt.id_mot","spip_mots_{$table}s smt, spip_mots sm","smt.$pkey=".intval($id)." and smt.id_mot=sm.id_mot and sm.type='marker_icon'");
-			if ($id_mot != '') {
-				if (file_exists(_DIR_IMG."/moton$id_mot.png")) {
-				  	$gicon = "moton$id_mot.png";
-				} else if (file_exists(_DIR_IMG."/moton$id_mot.gif")) {
-					$gicon = "moton$id_mot.gif";
+		$resultMots = spip_query("SELECT * FROM spip_mots_{$table}s WHERE $pkey = ".intval($id));
+		while ($rowMot = spip_fetch_array($resultMots)) {
+			$resultMotIcon = spip_query("SELECT * FROM spip_mots WHERE type ='marker_icon' AND id_mot=".$rowMot['id_mot']);
+			if ($rowMotIcon = spip_fetch_array($resultMotIcon)){
+				if (file_exists("../IMG/"."moton".$rowMot['id_mot'].".png")) {
+  				  	$gicon = "moton".$rowMot['id_mot'].".png";
+				} else if (file_exists("../IMG/"."moton".$rowMot['id_mot'].".gif")) {
+					$gicon = "moton".$rowMot['id_mot'].".gif";
 				}
 			}
-		} else {
-			// l'article/ rubrique n'a pas de puce associé --> on cherche dans sa hiérarchie
-			$nomTable = table_objet($table);
-			$parents = array();
-			$id_parent = 0;
-			if ($nomTable == 'articles') {
-				// table articles
-				$id_parent = sql_getfetsel("id_rubrique","spip_articles","id_article=".intval($id));
-				$parents[] = $id_parent;
-			} else if ($nomTable == 'rubriques') {
-				// table rubriques
-				$id_parent = sql_getfetsel("id_parent","spip_rubriques","id_rubrique=".intval($id));
-				$parents[] = $id_parent;
-			}
-			
-			// ensuite on cherche toutes les rubriques parent de cet objet
-			while ($id_parent != 0) {
-				$id_parent = sql_getfetsel("id_parent","spip_rubriques","id_rubrique=".intval($id_parent));
-				if ($id_parent != 0) {
-					$parents[] = $id_parent;
-				}
-			} 
-			
-			if (count($parents) > 0) {
-				// on a donc des rubriques parents, on en cherche une qui a un mot clé de type 'marker_icon'
-				foreach ($parents as $id_parent) {
-					$nbMots = sql_countsel("spip_mots_rubriques smr, spip_mots sm","smr.id_rubrique=".intval($id_parent)." and smr.id_mot=sm.id_mot and sm.type='marker_icon'");
-					if ($nbMots > 0) {
-						// il existe un mot-clé pour cette rubrique du groupe de mots 'marker_icon'
-						// on recherche son identifiant
-						$id_mot = sql_getfetsel("smr.id_mot","spip_mots_rubriques smr, spip_mots sm","smr.id_rubrique=".intval($id_parent)." and smr.id_mot=sm.id_mot and sm.type='marker_icon'");
-						if ($id_mot != '') {
-							if (file_exists(_DIR_IMG."/moton$id_mot.png")) {
-				  				$gicon = "moton$id_mot.png";
-				  				break;
-							} else if (file_exists(_DIR_IMG."/moton$id_mot.gif")) {
-								$gicon = "moton$id_mot.gif";
-								break;
-							}
-						}
-					}
-				}
-			}
-			
-			if ($gicon == '') {
-				// pas d'icone trouvé
-				// on recherche le mot clé 'default' de type 'marker_icon'
-				$id_mot = sql_getfetsel("id_mot","spip_mots","titre='default' and sm.type='marker_icon'");
-				if ($id_mot != '') {
-					if (file_exists(_DIR_IMG."/moton$id_mot.png")) {
-				  		$gicon = "moton$id_mot.png";
-					} else if (file_exists(_DIR_IMG."/moton$id_mot.gif")) {
-						$gicon = "moton$id_mot.gif";
-					}
-				}
-			}
-			
-			// si pas d'icone, on laisse google la gérer
 		}
-		
 		if ($api_carte) {
 			$gis_append_view_map = charger_fonction($api_carte.'_append_view_map','inc');
 			$mapa = '<div id="viewMap" style="width: 477px; height: 100px; border:1px solid #000"></div>';
@@ -132,11 +69,11 @@ function gis_cambiar_coord($id,$table,$exec) {
 	
 	// On teste la version de SPIP utilisee 2 ou 1.9
 	if(function_exists('bouton_block_depliable')){
-		$s .= debut_cadre('e', _DIR_PLUGIN_GIS."img_pack/correxir.png",'',bouton_block_depliable('&nbsp;&nbsp;&nbsp;<span>'._T('gis:cambiar').'</span>', false, "cadroFormulario"));
+		$s .= debut_cadre('e', _DIR_PLUGIN_GIS."img_pack/correxir.png",'',bouton_block_depliable('&nbsp;&nbsp;&nbsp;<span style="text-transform: uppercase;">'._T('gis:cambiar').'</span>', false, "cadroFormulario"));
 	}else{
 		$s .= debut_cadre('r', _DIR_PLUGIN_GIS."img_pack/correxir.png"); 
 		$s .= bouton_block_invisible("ajouter_form"); 
-		$s .= '&nbsp;&nbsp;&nbsp;<strong class="verdana3">' . _T('gis:cambiar') . ' <a onclick="$(\'#cadroFormulario\').slideToggle(\'slow\')">(' . _T('gis:clic_desplegar') . ')</a></strong>';
+		$s .= '&nbsp;&nbsp;&nbsp;<strong class="verdana3" style="text-transform: uppercase;">' . _T('gis:cambiar') . ' <a onclick="$(\'#cadroFormulario\').slideToggle(\'slow\')">(' . _T('gis:clic_desplegar') . ')</a></strong>';
 	}
 	
 	$s .= debut_block_visible("ajouter_form");
@@ -200,7 +137,7 @@ function gis_mots($id_mot) {
 	
 	$s .= debut_cadre('r', _DIR_PLUGIN_GIS."img_pack/correxir.png");
 	$s .= bouton_block_invisible("ajouter_form");
-	$s .= '&nbsp;&nbsp;&nbsp;<strong class="verdana3">'. _T("gis:cambiar") .' '. $id_mot .' <a onclick="$(\'#cadroFormulario\').slideToggle(\'slow\')">('. _T('gis:clic_desplegar') .')</a></strong>';
+	$s .= '&nbsp;&nbsp;&nbsp;<strong class="verdana3" style="text-transform: uppercase;">'. _T("gis:cambiar") .' '. $id_mot .' <a onclick="$(\'#cadroFormulario\').slideToggle(\'slow\')">('. _T('gis:clic_desplegar') .')</a></strong>';
 	$s .= debut_block_visible("ajouter_form");
 	$s .= '<div class="verdana2">'. _T("gis:clic_mapa") .'</div>';
 	$s .= debut_block_visible("ajouter_form");
