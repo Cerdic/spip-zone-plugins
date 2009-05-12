@@ -16,7 +16,7 @@ _ &#169; 2007-2009
 	Les rubriques peuvent aussi se voir attribue un article d'accueil via un select.
 _ Les champs id_article_accueil et composition peuvent ensuite etre utilis&eacute; par les squelettes.
 	</description>
-	<lien></lien> <!-- URI de documentation -->
+	<lien>http://www.spip-contrib.net/Compositions</lien> <!-- URI de documentation -->
 	<install>base/compositions.php</install>
 	<prefix>compositions</prefix>
 	<fonctions>compositions_fonctions.php</fonctions>
