@@ -1,9 +1,42 @@
 <?php
-	
-	include_spip('inc/vieilles_defs');
-	
-	// fichier mes options
-	// force une action en travaux si on n'est pas en zone ecrire ni admin
+/*
+ * Plugin En Travaux
+ * (c) 2006-2009 Arnaud Ventre, Cedric Morin
+ * Distribue sous licence GPL
+ *
+ */
+
+if (isset($GLOBALS['meta']['entravaux_id_auteur']) AND $GLOBALS['meta']['entravaux_id_auteur']){
+	// desactiver le cache
+	define('_NO_CACHE',1);
+
+	// au cas ou, placer tout nouveau calcul dans le cache
+	$GLOBALS['marqueur'].= ":en_travaux";
+}
+
+/**
+ * Pipeline styliser pour rerouter tous les fonds vers en_travaux
+ * sauf si l'auteur connecte est celui qui a active le plugin
+ *
+ * @param array $flux
+ * @return array
+ */
+function entravaux_styliser($flux){
+	if (isset($GLOBALS['meta']['entravaux_id_auteur']) AND $GLOBALS['meta']['entravaux_id_auteur']){
+		if (!$GLOBALS['visiteur_session']['id_auteur']
+			OR $GLOBALS['meta']['entravaux_id_auteur']!=$GLOBALS['visiteur_session']['id_auteur']){
+			$ext = $flux['args']['ext'];
+			$fond = find_in_path('en_travaux.html');
+			$flux['data'] = substr($fond, 0, - strlen(".$ext"));
+		}
+	}
+	return $flux;
+}
+
+
+
+/*
+ *
 if ($GLOBALS['meta']['en_travaux']=='true')
 {
 	// tentative pour prendre en compte tous les cas possibles
@@ -36,4 +69,6 @@ function action_en_travaux(){
 	if (version_compare($GLOBALS['spip_version_code'],'1.9200','>=')) echo $page;
 	return true;
 }
+
+ */
 ?>
