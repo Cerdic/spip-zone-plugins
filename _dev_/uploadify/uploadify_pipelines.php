@@ -1,4 +1,5 @@
 <?php
+/*
 function uploadify_ajouterBoutons($boutons_admin) {
 		// si on est admin ou admin restreint
 		if ($GLOBALS['connect_statut'] == "0minirezo" || $GLOBALS["connect_toutes_rubriques"]) {
@@ -11,7 +12,7 @@ function uploadify_ajouterBoutons($boutons_admin) {
 		}
 		return $boutons_admin;
 }
-
+*/
 
 function uploadify_header_prive($flux) {
 global $connect_statut,$connect_toutes_rubriques;

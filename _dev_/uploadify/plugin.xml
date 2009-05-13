@@ -8,11 +8,7 @@
 	<icon>uploadify-24.png</icon>
 	<lien>http://www.spip-contrib.net/article3045</lien>
 	<prefix>uploadify</prefix>
-	<pipeline>
-		<nom>ajouter_boutons</nom>
-		<action>ajouterBoutons</action>
-		<inclure>uploadify_pipelines.php</inclure>
-	</pipeline>	
+
   <pipeline>
 		<nom>header_prive</nom>
 		<inclure>uploadify_pipelines.php</inclure>
