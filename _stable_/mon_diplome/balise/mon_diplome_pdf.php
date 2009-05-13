@@ -123,6 +123,8 @@ function balise_MON_DIPLOME_PDF_dyn ($args)
 		$contexte = array(
 			'msg' => "Un message a faire passer "
 			, 'fond' => "modeles/mon_diplome"
+			, 'titre_document' => $queries['id_auteur']
+			, 'id_auteur' => $queries['id_auteur']
 			, 'nom' => $queries['nom']
 			, 'diplome_ligne_1' => _T('plom:diplome_ligne_1')
 			, 'diplome_etudes_sup' => _T('plom:diplome_etudes_sup')
@@ -137,7 +139,7 @@ function balise_MON_DIPLOME_PDF_dyn ($args)
 		include_spip("html2pdf/html2pdf.class");
 		include_spip('inc/texte');
 		
-foreach($queries as $key => $val) { spip_log("B: $key = $val"); }		
+//foreach($queries as $key => $val) { spip_log("B: $key = $val"); }		
 		
 		$html2pdf = new HTML2PDF(
 								 (($queries['orientation'] == "portrait") ? 'P' : 'L')
