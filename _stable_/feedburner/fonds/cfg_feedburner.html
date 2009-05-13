@@ -19,7 +19,7 @@
 			<li class="feedburner_url">
 				<label for="url">URL de redirection du flux RSS</label>
 				<input type="text" name="url" value="#ENV{url}" id="url" style="width: 24em;" />
-				<p class="explication">L'adresse de votre flux feedburner commence par&nbsp;: http://feeds2.feedburner.com/ ... Indiquez-la ici si vous souhaitez que les visiteurs de votre RSS soient redirig&#233;s vers le flux feedburner.</p>
+				<p class="explication">L'adresse de votre flux feedburner est de la forme <tt>http://feeds2.feedburner.com/[(#ENV{feedId}|sinon{...})]</tt>. Indiquez-la ici si vous souhaitez que les visiteurs de votre RSS soient redirig&#233;s vers le flux feedburner.</p>
 			</li>
 		</ul>
 	</fieldset>
