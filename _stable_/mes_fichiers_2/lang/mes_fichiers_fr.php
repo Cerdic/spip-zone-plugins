@@ -16,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'colonne_date' => 'Date',
 'colonne_nom' => 'Nom',
 'colonne_taille_octets' => 'Taille',
-'colonne_actions' => 'Actions',
+'colonne_actions' => '&nbsp;',
 
 // I
 'info_sauver' => 'Cette option fabrique un fichier d\'archives contenant les personnalisations effectu&eacute;es sur le site comme le dernier dump de sauvegarde de la base, le(s) dossier(s) des squelettes nomm&eacute;s, le dossier images... 
