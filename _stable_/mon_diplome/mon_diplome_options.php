@@ -59,11 +59,15 @@ if(!defined('_DIR_PLUGIN_PLOM')) {
 
 define("_DIR_IMAGES_PLOM", _DIR_PLUGIN_PLOM."images/");
 
+define("_PLOM_PAGE_DEFAUT", "mon_diplome");
 define("_PLOM_MODELE_DEFAUT", "mon_diplome");
 
 $plom_options = array(
 	
 	'id_auteur' => null // # de celui identifié
+	
+	// titre du document
+	, 'titre_document' => ""
 	
 	// le fond du diplome peut être un PDF
 	, 'appliquer_fond' => "oui"
@@ -72,11 +76,26 @@ $plom_options = array(
 	// le modèle par défaut (texte)
 	, 'modele_texte' => 'mon_diplome'
 	
-	// format sortie, etc...
+	// format sortie, proprietes PDF, etc...
 	, 'format' => "A4"
 	, 'orientation' => "landscape"
 	, 'creator' => "mon_diplome+html2pdf+fpdf/SPIP"
 	, 'author' => $GLOBALS['meta']['nom_site']
+	, 'subject' => _T('plom:pdf_sujet_defaut')
+	, 'title' => _T('plom:pdf_titre_defaut')
+	
+	// squelette de sortie
+	// doit se trouver a la racine du plug ou squelettes
+	// ici, 'mon_diplome.html'
+	, 'page' => "mon_diplome"
+	
+	// prefs complémentaires
+	, 'SetAutoPageBreak' => false
+	, 'SetAutoPageBreakMargin' => 0
+	, 'MarginLeft' => 0
+	, 'MarginTop' => 0
+	, 'SetDisplayMode' => "real" // 'fullpage' || 'fullwidth' || 'real' || 'default'
+	
 );
 
 ?>

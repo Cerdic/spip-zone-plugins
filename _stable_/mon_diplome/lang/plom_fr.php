@@ -19,6 +19,9 @@ $GLOBALS['i18n_plom_fr'] = array(
 	, 'diplome_ligne_3' => "Fait &#224; Spip-ville le "
 	, 'diplome_ligne_4' => "pour en jouir avec les droits et pr&#233;rogatives qui y sont attach&#233;s."
 	
+	, 'pdf_sujet_defaut' => "Mon dipl&#244;me"
+	, 'pdf_titre_defaut' => "Mon dipl&#244;me"
+	
 	, 'erreur_diplome_manquant_i' => "Votre dipl&#244;me est introuvable (code erreur #ID_@i@)"
 	, 'erreur_fichier_s_manquant' => "Le fichier @s@ est introuvable."
 	

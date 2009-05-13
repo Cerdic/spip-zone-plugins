@@ -60,10 +60,15 @@ function balise_LIEN_MON_DIPLOME_dyn ($args)
 		$params = "";
 		
 		foreach($queries as $key=>$val) {
+			if($key == 'page') continue;
 			$params .= "&amp;$key=$val";
 		}
 		
-		$result = generer_url_public(_PLOM_MODELE_DEFAUT, $args) . $params;
+		$queries['page'] = trim($queries['page']);
+		
+		if(empty($queries['page'])) $queries['page'] = _PLOM_PAGE_DEFAUT;
+		
+		$result = generer_url_public($queries['page'], $args) . $params;
 				
 		return ("<a href=\"$result\">" . _T('plom:obtenir_mon_diplome') . "</a>");
 	}

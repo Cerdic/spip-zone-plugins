@@ -67,8 +67,7 @@ function balise_MON_DIPLOME_PDF_dyn ($args)
 				list($key, $val) = explode("=", $query);
 				if(array_key_exists($key, $plom_options))
 				{
-					$val = trim($val, "\"'");
-					$result[$key] = $val;
+					$result[$key] = trim(trim($val, "\"'"));
 				}
 			}
 		}
@@ -107,13 +106,16 @@ function balise_MON_DIPLOME_PDF_dyn ($args)
 				: plom_alert_and_die (_T('plom:erreur_fichier_s_manquant', array('s' => $queries[$calque].$ext)))
 				;
 		}
-		
+		else {
+			$queries['modele_fond'] = null;
+		}
+
 		$calque = 'modele_texte';
 		$ext = ".html";
 			
 		$queries[$calque] =
 				($f = plom_chemin_calque ($calque, $ext, $queries))
-				? $f
+				? $queries[$calque]
 				: plom_alert_and_die (_T('plom:erreur_fichier_s_manquant', array('s' => $queries[$calque].$ext)))
 				;
 		
@@ -130,12 +132,15 @@ function balise_MON_DIPLOME_PDF_dyn ($args)
 		);
 				
 		// construction à partir du squelette
-		$content = recuperer_fond("modeles/mon_diplome", $contexte);
+		$content = recuperer_fond("modeles/" . $queries['modele_texte'], $contexte);
 		
 		include_spip("html2pdf/html2pdf.class");
+		include_spip('inc/texte');
+		
+foreach($queries as $key => $val) { spip_log("B: $key = $val"); }		
 		
 		$html2pdf = new HTML2PDF(
-								 (($queries['orientation'] == "paysage") ? 'P' : 'L')
+								 (($queries['orientation'] == "portrait") ? 'P' : 'L')
 								 , $queries['format']
 								 , $GLOBALS['auteur_session']['lang']
 								 , array(0, 0, 0, 0) // marges
@@ -143,21 +148,20 @@ function balise_MON_DIPLOME_PDF_dyn ($args)
 		
 		
 		// afficher la page en entier
-		$html2pdf->pdf->SetDisplayMode('fullpage');
-		$html2pdf->pdf->SetAutoPageBreak(false, 0);
+		$html2pdf->pdf->SetDisplayMode($queries['SetDisplayMode']);
+		$html2pdf->pdf->SetAutoPageBreak($queries['SetAutoPageBreak'], $queries['SetAutoPageBreakMargin']);
 		$html2pdf->pdf->SetAuthor($queries['author'], true); // titre du site
 		$html2pdf->pdf->SetCreator($queries['creator'], true);
-		$html2pdf->pdf->SetMargins(0, 0);
-		$html2pdf->pdf->SetSubject("Votre diplôme", true);
-		$html2pdf->pdf->SetTitle("Votre diplôme", true);
+		$html2pdf->pdf->SetMargins($queries['MarginLeft'], $queries['MarginTop']);
+		$html2pdf->pdf->SetSubject(html_entity_decode($queries['subject']), false);
+		$html2pdf->pdf->SetTitle(html_entity_decode($queries['title']), false);
 		
-		$fond = find_in_path('modeles/mon_diplome.png');
-		
-		// fond de page 
-		$html2pdf->background = array('img' => $fond, 'posX' => 0, 'posY' => 0
-									, 'width' => 297 // en mm !
+		// fond de page
+		if($queries['modele_fond']) {
+			$html2pdf->background = array('img' => $queries['modele_fond'], 'posX' => 0, 'posY' => 0
+									, 'width' => "100%" // ou int en mm
 									);  
-	
+		}
 		
 		// conversion
 		$html2pdf->WriteHTML($content, false);
@@ -167,7 +171,7 @@ function balise_MON_DIPLOME_PDF_dyn ($args)
 		
 		// Envoyer
 		header("Content-type: application/pdf");
-		header('Content-Disposition: attachment; filename=mon_diplome.pdf');
+		header("Content-Disposition: attachment; filename=" . $queries['modele_texte'] . ".pdf");
 		echo ($result);
 		
 		// Fin

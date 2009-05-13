@@ -13,7 +13,7 @@
 	 	
 	<nom>Mon dipl&#244;me</nom>
 	<auteur>
-		cpaulus@quesaco.org
+		[Christian Paulus->cpaulus@quesaco.org]
 		<br />avec l'aide de :
 		<ul>
 			<li><em>html2pdf</em> de Laurent Minguet</li>
@@ -25,7 +25,10 @@
 		Balise SPIP de g&#233;n&#233;ration de dipl&#244;me en ligne.
 	</description>
 	
-	<version>1.00.01</version>
+	<!-- documentation -->
+	<lien>http://www.quesaco.org/Mon-diplome-SPIP</lien>
+	
+	<version>1.01.00</version>
 	<etat>stable</etat>
 	<icon>images/mon_diplome-64.png</icon>
 	
