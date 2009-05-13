@@ -9,11 +9,12 @@ function pack_cQuery($chemin) {
 	$flux = spip_file_get_contents($chemin);
 	$flux = str_replace('jQuery', 'cQuery', $flux);
 
-// On ne compacte PAS deux fois (c'est inutile et en plus ça bugge)
+	// On ne compacte PAS deux fois (c'est inutile et en plus ca bugge)
 	if (!strlen($flux)
 	OR _request('debug_crayons')
 	OR ($GLOBALS['meta']['auto_compress_js'] == 'oui')
-	OR (test_espace_prive()))
+	OR !function_exists('test_espace_prive')
+	OR test_espace_prive())
 		return $flux;
 
 	include_spip('lib/JavaScriptPacker/class.JavaScriptPacker');
