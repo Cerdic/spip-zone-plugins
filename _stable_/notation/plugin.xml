@@ -16,6 +16,7 @@
 	<lien>[Documentation->http://www.spip-contrib.net/Notation-d-articles-SPIP]</lien>
 	<licence>GPL</licence>
 	<necessite id="spip" version="[2.0.0;]" />
+	<necessite id="cfg" version="[1.10.4;]" />
 
 	<icon>img_pack/note.gif</icon>
 
