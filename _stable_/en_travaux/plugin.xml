@@ -2,10 +2,10 @@
 	<nom> <!-- Nom du plugin -->
 	<multi>[fr]En travaux 2.0[en]Under construction 2.0[it]In manutenzione 2.0</multi>
 	</nom>
-	<icon>spip_mecano_48.png</icon>
+	<icon>en_travaux.png</icon>
 	<auteur><multi>
 		[fr][Arnaud Ventre->ventrea@gmail.com]
-_	[C&eacute;dric Morin->http://www.yterium.com]
+_ [C&eacute;dric Morin->http://www.yterium.com]
 _ &#169; 2006-2009 - Distribue sous licence GPL
 		[en][Arnaud Ventre->ventrea@gmail.com]
 _	[C&eacute;dric Morin->http://www.yterium.com]
@@ -30,7 +30,9 @@ _ &#169; 2006-2009 - Distribuito sotto Licenza GPL
 	<options>en_travaux_options.php</options>
 	<pipeline>
 		<nom>styliser</nom>
-		<inclure>en_travaux_options.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affichage_final</nom>
 	</pipeline>
 
 	<necessite id="SPIP" version="[2.0.7;]" />

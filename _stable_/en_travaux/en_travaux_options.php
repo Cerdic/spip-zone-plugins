@@ -62,4 +62,32 @@ function entravaux_styliser($flux){
 	return $flux;
 }
 
+
+/**
+ * Afficher une icone de travaux sur tout le site pour que le webmestre n'oublie pas
+ * de retablir le site
+ * 
+ * @param <type> $flux 
+ */
+function entravaux_affichage_final($flux){
+	$image = find_in_path("en_travaux.png");
+	if ($GLOBALS['html']){
+		include_spip('inc/minipres'); // pour http_img_pack
+		$x = '<div id="icone_travaux" style="
+		padding-right: 5px;
+		padding-top: 2px;
+		padding-bottom: 5px;
+		top: 0px;
+		left: 0px;
+		position: absolute;
+		">'
+		. http_img_pack(find_in_path('en_travaux-64.png'), _T('entravaux:en_travaux'), '')
+		. '</div>';
+		if (!$pos = strpos($flux, '</body>'))
+			$pos = strlen($flux);
+		$flux = substr_replace($flux, $x, $pos, 0);
+	}
+	return $flux;
+}
+
 ?>
