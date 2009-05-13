@@ -118,6 +118,13 @@ function FPDF($orientation='P', $unit='mm', $format='A4')
 		$this->Error('Incorrect unit: '.$unit);
 	//Page format
 	$this->PageFormats=array('a3'=>array(841.89,1190.55), 'a4'=>array(595.28,841.89), 'a5'=>array(420.94,595.28),
+		// CP-20090513 : ajout formats manquants
+		// @see: pour les formats papier -> http://fr.wikipedia.org/wiki/Format_de_papier
+		// Valeurs à donner en points (avec des points).
+		'a6'=>array(297.64,419.53), 
+		'a8'=>array(153.07,229.61), 
+		'cb'=>array(161.57,240.94), // carte bancaire (cartes de visite)
+		// CP fin ajout
 		'letter'=>array(612,792), 'legal'=>array(612,1008));
 	if(is_string($format))
 		$format=$this->_getpageformat($format);
