@@ -6,12 +6,40 @@
  *
  */
 
+#var_dump($GLOBALS['meta']['entravaux_id_auteur']);
+
+function autoriser_travaux_dist(){
+	return autoriser('webmestre');
+}
+
 if (isset($GLOBALS['meta']['entravaux_id_auteur']) AND $GLOBALS['meta']['entravaux_id_auteur']){
 	// desactiver le cache
 	define('_NO_CACHE',1);
 
 	// au cas ou, placer tout nouveau calcul dans le cache
 	$GLOBALS['marqueur'].= ":en_travaux";
+
+	if (test_espace_prive() AND (_request('exec')!='admin_plugin'
+	//		OR _request('action')!='activer_plugins'
+	)){
+		include_spip('inc/autoriser');
+		if (!autoriser('travaux')){
+			echo recuperer_fond("en_travaux",array());
+			die();
+		}
+	}
+
+}
+else {
+		include_spip('inc/autoriser');
+		if (!autoriser('travaux')){
+			// se desactiver tout seul car on ne sert a rien
+			// sauf a ralentir le site !
+			include_spip('inc/plugin');
+			ecrire_plugin_actifs(array('ENTRAVAUX'=>trim(substr(_DIR_PLUGIN_ENTRAVAUX,strlen(_DIR_PLUGINS)),'/')),false,'enleve');
+			// avec un message d'erreur smart
+			ecrire_meta('plugin_erreur_activation',_T('entravaux:erreur_droit'));
+		}
 }
 
 /**
@@ -23,8 +51,9 @@ if (isset($GLOBALS['meta']['entravaux_id_auteur']) AND $GLOBALS['meta']['entrava
  */
 function entravaux_styliser($flux){
 	if (isset($GLOBALS['meta']['entravaux_id_auteur']) AND $GLOBALS['meta']['entravaux_id_auteur']){
-		if (!$GLOBALS['visiteur_session']['id_auteur']
-			OR $GLOBALS['meta']['entravaux_id_auteur']!=$GLOBALS['visiteur_session']['id_auteur']){
+		include_spip('inc/autoriser');
+		if (!autoriser('travaux')
+			AND !in_array($flux['args']['fond'],array('login_secours','formulaires/login','formulaires/menu_lang','formulaires/inc-logo_auteur','formulaires/administration'))){
 			$ext = $flux['args']['ext'];
 			$fond = find_in_path('en_travaux.html');
 			$flux['data'] = substr($fond, 0, - strlen(".$ext"));
@@ -33,42 +62,4 @@ function entravaux_styliser($flux){
 	return $flux;
 }
 
-
-
-/*
- *
-if ($GLOBALS['meta']['en_travaux']=='true')
-{
-	// tentative pour prendre en compte tous les cas possibles
-	// penser a ajouter le test qui verifie si on est un admin pour faire propre voir ou le caser 
-	$en_travaux_mode_admin = false;
-	$en_travaux_mode_admin |= strlen(strstr($_SERVER["PHP_SELF"],'/ecrire'))>0;
-	$en_travaux_mode_admin |= isset($page) && ($page == 'login');
-	$en_travaux_mode_admin |= isset($_GET['action']);
-	$en_travaux_mode_admin |= isset($_POST['action']);
-	$en_travaux_mode_admin |= $_GET['page'] == 'style_prive'; // filtrage de la feuille de style admin mise en squelette
-	$en_travaux_mode_admin |= $_GET['page'] == 'style_prive_ie'; // idem IE
-	$en_travaux_mode_admin |= $_GET['page'] == 'jquery.js';   // filtrage de jquery qui sert pour la partie admin
-	
-	if ($en_travaux_mode_admin) {
-		// ne rien faire si zone ecrire 
-	}
-	else {
-		// dans tous les autres cas on force l'execution de l'affichage
-		$_GET['action']="en_travaux";
-	}
-}
-
-function action_en_travaux(){
-	include_spip('inc/minipres');
-	include_spip('inc/charsets');
-	include_spip('inc/texte');
-	$corps = charset2unicode(propre($GLOBALS['meta']['en_travaux_message']));
-	$page = minipres(_T('info_travaux_titre'), $corps);
-	// a partir de spip 1.9.2 ces fonctions ne font plus l'echo directement
-	if (version_compare($GLOBALS['spip_version_code'],'1.9200','>=')) echo $page;
-	return true;
-}
-
- */
 ?>

@@ -9,9 +9,9 @@
 function entravaux_install($action){
 	switch ($action){
 			case 'test':
-					include_spip('meta');
-					if ($GLOBALS['visiteur_session']['id_auteur']
-					 AND $GLOBALS['visiteur_session']['statut']=='0minirezo'){
+					include_spip('inc/meta');
+					include_spip('inc/autoriser');
+					if (autoriser('webmestre')){
 						ecrire_meta('entravaux_id_auteur',$GLOBALS['visiteur_session']['id_auteur']);
 					}
 					else{
