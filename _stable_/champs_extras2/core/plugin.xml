@@ -8,6 +8,7 @@
 	</description>
 	<etat>test</etat>
 	<prefix>cextras</prefix>
+	<options>cextras_options.php</options>
 	<necessite id="SPIP" version="[2.0;]" />
  	<pipeline>
 		<nom>autoriser</nom>
