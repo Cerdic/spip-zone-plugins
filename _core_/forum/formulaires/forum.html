@@ -130,31 +130,14 @@
 </form>
 
 [(#REM)
-	Sauver les donnees du formulaire dans un cookie, si on quitte la page,
-	et les remettre quand on revient (dans les limites de 4ko etc)
+	Sauver les donnees du formulaire dans la session, si on quitte la page,
+	et proposer de les remettre quand on revient
 ]
 <script type="text/javascript">/*<!#EVAL{chr(91)}CDATA#EVAL{chr(91)}*/
 if (window.jQuery)(function($){
-	$.getScript('[(#CHEMIN{javascript/jquery.cookie.js}|url_absolue)]',
-	function(){
-		var a = $.cookie('spip_contenu_formulaire_#ENV{_sign}');
-		var saveauto = true;
-		if (a) {
-			$('#formulaire_forum textarea#EVAL{chr(91)}name=texte#EVAL{chr(93)}')
-			.val(a);
-			$.cookie('spip_contenu_formulaire_#ENV{_sign}', null);
-		}
+	$(function(){
 		$('#formulaire_forum form')
-		.bind('submit', function() {
-			saveauto = false;
-		});
-		$(window)
-		.bind('unload', function(){
-			if (saveauto)
-			$.cookie('spip_contenu_formulaire_#ENV{_sign}',
-				$('#formulaire_forum textarea#EVAL{chr(91)}name=texte#EVAL{chr(93)}').val()
-			);
-		});
+		.autosave();
 	});
 }(jQuery));
 /*#EVAL{chr(93)}[(#EVAL{chr(93)})]>*/</script>

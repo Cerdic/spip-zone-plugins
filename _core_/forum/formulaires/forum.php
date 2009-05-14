@@ -84,16 +84,37 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour) {
 	include_spip('inc/securiser_action');
 	$cle = calculer_cle_action('ajouter-document-'.join('-',array_map('intval',$ids)));
 
-	return array(
-		'modere' => (($type != 'pri') ? '' : ' '),
-		'nom_site' => '',
-		'table' => $table,
-		'texte' => '',
-		'config' => array('afficher_barre' => ($GLOBALS['meta']['forums_afficher_barre']!='non'?' ':'')),
+	// Valeurs par defaut du formulaire
+	// si le formulaire a ete sauvegarde, restituer les valeurs de session
+	$vals = array(
 		'titre' => str_replace('~', ' ', extraire_multi($titre)),
+		'texte' => '',
+		'nom_site' => '',
+		'url_site' => 'http://'
+	);
+	$cle_autosave = 'forum-'. join('-',array_map('intval',$ids));
+	$script_hidden .= "<input type='hidden' name='autosave' value='$cle_autosave' />";
+	if (isset($GLOBALS['visiteur_session']['session_autosave_'.$cle_autosave])) {
+		// si on poste 'autosave' c'est qu'on n'a pas besoin de sauvegarder :
+		// on elimine les donnees de la session
+		if (_request('autosave') == $cle_autosave)
+			session_set('session_autosave_'.$cle_autosave, null);
+	
+		// sinon on restitue les donnees
+		else
+		foreach (explode('&', $GLOBALS['visiteur_session']['session_autosave_'.$cle_autosave]) as $l) {
+			if (list($key, $val) = explode('=', $l, 2)
+			AND isset($vals[$key]))
+				$vals[$key] = urldecode($val);
+		}
+	}
+
+	return array_merge($vals, array(
+		'modere' => (($type != 'pri') ? '' : ' '),
+		'table' => $table,
+		'config' => array('afficher_barre' => ($GLOBALS['meta']['forums_afficher_barre']!='non'?' ':'')),
 		'action' => $script, # ce sur quoi on fait le action='...'
 		'_hidden' => $script_hidden, # pour les variables hidden
-		'url_site' => "http://",
 		'cle_ajouter_document' => $cle,
 		'formats_documents_forum' => forum_documents_acceptes(),
 		'ajouter_document' => $_FILES['ajouter_document']['name'],
@@ -102,7 +123,7 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour) {
 		'ajouter_mot' => (is_array($ajouter_mot) ? $ajouter_mot : array($ajouter_mot)),
 		'id_forum' => $id_forum, // passer id_forum au formulaire pour lui permettre d'afficher a quoi l'internaute repond
 		'_sign'=>implode('_',$ids)
-	);
+	));
 }
 
 
