@@ -77,9 +77,9 @@ function entravaux_affichage_final($flux){
 		padding-right: 5px;
 		padding-top: 2px;
 		padding-bottom: 5px;
-		top: 0px;
-		left: 0px;
 		position: absolute;
+		left: 26px;
+		top: 26px;
 		">'
 		. http_img_pack(find_in_path('en_travaux-64.png'), _T('entravaux:en_travaux'), '')
 		. '</div>';
