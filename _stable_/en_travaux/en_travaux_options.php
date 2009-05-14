@@ -53,7 +53,7 @@ function entravaux_styliser($flux){
 	if (isset($GLOBALS['meta']['entravaux_id_auteur']) AND $GLOBALS['meta']['entravaux_id_auteur']){
 		include_spip('inc/autoriser');
 		if (!autoriser('travaux')
-			AND !in_array($flux['args']['fond'],array('login_secours','formulaires/login','formulaires/menu_lang','formulaires/inc-logo_auteur','formulaires/administration'))){
+			AND !in_array($flux['args']['fond'],array('login_sos','formulaires/login','formulaires/menu_lang','formulaires/inc-logo_auteur','formulaires/administration'))){
 			$ext = $flux['args']['ext'];
 			$fond = find_in_path('en_travaux.html');
 			$flux['data'] = substr($fond, 0, - strlen(".$ext"));
