@@ -21,7 +21,7 @@ html, body {
 }
 body {
 	font: normal 62.5% "Helvetica Neue",Helvetica,Arial,sans-serif;
-	background: #7B7867 url(img/body-bg_essai02.png) repeat-x fixed top left;
+	background: #7B7867 url(img/body-bg.png) repeat-x fixed top left;
 	color: #bfbfbf;
 }
 h1, h2, h3, h4, h5, h6, p, pre, blockquote, ul, ol, dl, address {
@@ -158,7 +158,7 @@ a:hover, a:focus, a:active {
 	padding: 0 0;
 	overflow: hidden;
 	font-size: 1.3em;
-	background: #000 url(img/wrapper-bg02.png) repeat-y top left;
+	background: #000 url(img/wrapper-bg.png) repeat-y top left;
 	color: inherit;
 }
 #main {
@@ -178,7 +178,7 @@ a:hover, a:focus, a:active {
 #sidebar {
 	width: 329px;
 	float: right;
-	background: transparent url(img/sidebar-bg03.png) no-repeat top right;
+	background: transparent url(img/sidebar-bg.png) no-repeat top right;
 }
 #blognav, #blogextra {
 	padding: 0 10px;
