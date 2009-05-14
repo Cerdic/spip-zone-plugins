@@ -71,6 +71,17 @@ function compat_crayons_defs_dist() {
 	$defs['sql_fetch'] = '($res, $serveur=\'\') {
 		return spip_fetch_array($res);
 	}';
+	
+	$defs['table_objet_sql'] = '($type) {
+		global $table_des_tables;
+		$nom = table_objet($type);
+		include_spip(\'public/interfaces\');
+		if (isset($table_des_tables[$nom])) {
+			$t = $table_des_tables[$nom];
+			$nom = \'spip_\' . $t;
+		}
+		return $nom ;
+	}';
 
 	// Contourner un bug du plugin CFG
 	include_spip('base/abstract_sql');
