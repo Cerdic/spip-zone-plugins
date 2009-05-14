@@ -14,6 +14,7 @@
 
 
 	include_spip('formulaires_fonctions');
+	include_spip('inc/filtres');
 
 
 	function balise_FORMULAIRE_OUBLI_FORMULAIRE($p) {

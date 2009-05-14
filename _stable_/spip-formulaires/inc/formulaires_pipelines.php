@@ -207,7 +207,7 @@
 
 
 	function formulaires_calculer_rubriques($flux) {
-		$r = sql_select("rub.id_rubrique AS id, max(fille.date) AS date_h", "spip_rubriques AS rub, spip_formulaires AS fille", "rub.id_rubrique = fille.id_rubrique AND rub.date_tmp <= fille.date AND fille.statut='envoyee' ", "rub.id_rubrique");
+		$r = sql_select("rub.id_rubrique AS id, max(fille.date) AS date_h", "spip_rubriques AS rub, spip_formulaires AS fille", "rub.id_rubrique = fille.id_rubrique AND rub.date_tmp <= fille.date AND fille.statut='en_ligne' ", "rub.id_rubrique");
 		while ($row = sql_fetch($r))
 		  sql_updateq('spip_rubriques', array('statut_tmp'=>'publie', 'date_tmp'=>$row['date_h']), "id_rubrique=".$row['id']);
 		return $flux;

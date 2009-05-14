@@ -13,15 +13,13 @@
 	 **/
 
 
-	if (!defined('_DIR_PLUGIN_FORMULAIRES')) {
-		$p = explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
-		define('_DIR_PLUGIN_FORMULAIRES', (_DIR_PLUGINS.end($p)));
-		define('_NOM_PLUGIN_FORMULAIRES', (end($p)));
-		define('_NB_HEURES_VALIDITE_COOKIE_FORMULAIRES', 4);
-		define('_DUREE_VALIDITE_COOKIE_FORMULAIRES', (60 * 60 * _NB_HEURES_VALIDITE_COOKIE_FORMULAIRES)); // 4 heures
-		define('_REGEXP_EMAIL', "^[[:alnum:]]([-_.]?[[:alnum:]])*@[[:alnum:]]([-.]?[[:alnum:]])*\.([a-z]{2,4})$");
-		define('_DIR_FORMULAIRES', _DIR_IMG.'formulaires/');
-	}
+	$p = explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
+	define('_DIR_PLUGIN_FORMULAIRES', (_DIR_PLUGINS.end($p)));
+	define('_NOM_PLUGIN_FORMULAIRES', (end($p)));
+	define('_NB_HEURES_VALIDITE_COOKIE_FORMULAIRES', 4);
+	define('_DUREE_VALIDITE_COOKIE_FORMULAIRES', (60 * 60 * _NB_HEURES_VALIDITE_COOKIE_FORMULAIRES)); // 4 heures
+	define('_REGEXP_EMAIL', "^[[:alnum:]]([-_.]?[[:alnum:]])*@[[:alnum:]]([-.]?[[:alnum:]])*\.([a-z]{2,4})$");
+	define('_DIR_FORMULAIRES', _DIR_IMG.'formulaires/');
 
 	// pose du cookie de test pour savoir si l'internaute accepte les cookies
 	include_spip('inc/cookie');
