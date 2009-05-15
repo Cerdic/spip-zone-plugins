@@ -2,21 +2,18 @@
 	<nom>Compositions</nom>
 	<icon>images/compositions-64.png</icon>
 	<auteur>	<!-- Auteur du plugin -->
- 	[Cedric Morin->http://www.yterium.com]
-_ &#169; 2007-2009
+ 	[Cedric Morin->http://www.yterium.com] &#169; 2007-2009
 	</auteur>
 	<licence>GPL</licence>
 	<version>0.9</version>
 	<version_base>0.3.0</version_base>
 	<etat>stable</etat>
 	<description>
-	Plugin permettant de definir la type de composition des objets de spip (article, rubrique...) depuis la page de chaque objet.
-	(un champ composition est ajoute et sa valeur peut etre definie par l'admin en choisissant une des pr&eacute;sentations)
+	Ce plugin vous permet de d&eacute;finir plusieurs variantes de compositions pour chaque type objet&nbsp;SPIP (article, rubrique, etc.) et de les appliquer simplement, cas par cas, depuis l'espace priv&eacute;.
 
-	Les rubriques peuvent aussi se voir attribue un article d'accueil via un select.
-_ Les champs id_article_accueil et composition peuvent ensuite etre utilis&eacute; par les squelettes.
+Les rubriques peuvent aussi se voir attribuer un article d'accueil. Les champs id_article_accueil et composition peuvent ensuite etre utilis&eacute; par les squelettes.
 	</description>
-	<lien>http://www.spip-contrib.net/Compositions</lien> <!-- URI de documentation -->
+	<lien>http://www.spip-contrib.net/compositions</lien> <!-- URI de documentation -->
 	<install>base/compositions.php</install>
 	<prefix>compositions</prefix>
 	<fonctions>compositions_fonctions.php</fonctions>
