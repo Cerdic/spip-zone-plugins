@@ -79,7 +79,7 @@
 			]
 			
 			[(#ENV{aide_nuage}|?{' '})
-				<INCLURE{fond=fonds/etiquettes_aide_nuage}{type=#ENV{groupe}}{type_objet}{id_objet}{identifiant}{name}>
+				<INCLURE{fond=fonds/#ENV{squelette_nuage}}{type=#ENV{groupe}}{type_objet}{id_objet}{identifiant}{name}>
 			]
 			
 			[(#ENV{aide_liste}|?{' '})
