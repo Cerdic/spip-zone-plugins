@@ -74,7 +74,7 @@ function compositions_styliser($flux){
 				AND isset($contexte[$_id_table])
 				AND $id = $contexte[$_id_table]
 				AND $composition = sql_getfetsel('composition',$table_sql,"$_id_table=".intval($id))
-				AND $fond = compositions_selectionner($composition, $type, '', $ext, true)){
+				AND $fond = compositions_selectionner($composition, $type, '', $ext, true, "")){
 				$flux['data'] = substr($fond, 0, - strlen(".$ext"));
 			}
 		}

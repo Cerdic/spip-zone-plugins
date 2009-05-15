@@ -109,9 +109,12 @@ function compositions_lister_utilisations($type,$composition){
  * @param string $composition
  * @param string $type
  * @param string $defaut
+ * @param string $ext
+ * @param bool $fullpath
+ * @param string $vide
  * @return string
  */
-function compositions_selectionner($composition,$type,$defaut="",$ext="html",$fullpath = false){
+function compositions_selectionner($composition,$type,$defaut="",$ext="html",$fullpath = false, $vide="composition-vide"){
 	if ($type=='syndic') $type='site'; //grml
 	$fond = compositions_chemin() . $type;
 
@@ -126,10 +129,14 @@ function compositions_selectionner($composition,$type,$defaut="",$ext="html",$fu
 			return $fullpath ? $f : $fond . "-$defaut";
 
 	// se rabattre sur compositions/article si disponible
-	if ($f = find_in_path($fond))
+	if ($f = find_in_path("$fond.$ext"))
 		return $fullpath ? $f : $fond;
 
-	// sinon rien .. ?
+	// sinon une composition vide pour ne pas generer d'erreur
+	if ($vide AND $f = find_in_path("$vide.$ext"))
+		return $fullpath ? $f : $vide;
+
+	// rien mais ca fera une erreur dans le squelette si appele en filtre
 	return '';
 }
 
