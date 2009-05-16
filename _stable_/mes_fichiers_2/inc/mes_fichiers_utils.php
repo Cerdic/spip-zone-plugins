@@ -50,9 +50,9 @@ function mes_fichiers_a_sauver() {
 	return $liste;
 }
 
-// Renvoie la liste des fichiers et repertoires a sauver classee par date inverse
+// Renvoie la liste des fichiers et repertoires a sauver classee par date inverse (max 20)
 function mes_fichiers_a_telecharger() {
-	$liste = preg_files(_DIR_MES_FICHIERS . 'mf2_');
+	$liste = preg_files(_DIR_MES_FICHIERS . 'mf2_', 20);
 	return array_reverse($liste);
 }
 
@@ -70,7 +70,7 @@ function mes_fichiers_resumer_zip($zip) {
 	$resume = NULL;
 	if ($proprietes == 0) {
 		$resume .= _T('mes_fichiers:message_zip_propriete_nok');
-		spip_log('*** MES_FICHIERS (mes_fichiers_resumer_zip) : erreur '.$fichier_zip->errorInfo(true));
+		spip_log('*** MES_FICHIERS (mes_fichiers_resumer_zip) ERREUR '.$fichier_zip->errorInfo(true));
 	}
 	else {
 		$resume .= _T('mes_fichiers:resume_zip_statut').' : '.$proprietes['status'].'<br />';
@@ -95,7 +95,7 @@ function mes_fichiers_voir_zip($zip) {
 	$fichier_zip = new PclZip($zip);
   
 	if (($list = $fichier_zip->listContent()) == 0) {
-		spip_log('*** MES_FICHIERS (mes_fichiers_voir_zip) : erreur '.$fichier_zip->errorInfo(true));
+		spip_log('*** MES_FICHIERS (mes_fichiers_voir_zip) ERREUR '.$fichier_zip->errorInfo(true));
 	}
 
 	for ($i=0; $i<sizeof($list); $i++) {

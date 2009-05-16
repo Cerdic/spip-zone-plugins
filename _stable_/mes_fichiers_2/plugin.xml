@@ -6,10 +6,12 @@
 	<licence>GPL 3</licence>
 	<icon>images/mes_fichiers-64.png</icon>
 	<description>
-Cette option fabrique un fichier d'archives contenant les personnalisations effectu&eacute;es sur le site comme le dernier dump de sauvegarde de la base, le(s) dossier(s) des squelettes nomm&eacute;s, le dossier images... 
+Ce plugin fabrique un fichier d'archives contenant les donn&eacute;es de personnalisation du site comme le dernier dump de sauvegarde de la base, le(s) dossier(s) des squelettes nomm&eacute;s, le dossier images... 
 Le fichier d'archives est cr&eacute;&eacute; dans <code>tmp/mes_fichiers/</code> et se nomme <code>mf2_aaaammjj_hhmmss.zip</code>.
+
+Le plugin rajoute un onglet dans la page de maintenance du site.
 	</description>
-	<lien>http://www.spip-contrib.net/Mes-fichiers</lien>
+	<lien>http://www.spip-contrib.net/</lien>
 
 	<prefix>mes_fichiers</prefix>
 	<options>mes_fichiers_options.php</options>

@@ -16,7 +16,7 @@ function action_mes_fichiers_sauver() {
 	include_spip('inc/pclzip');
 	include_spip('inc/mes_fichiers_utils');
 	$liste = _request('a_sauver');
-	spip_log('*** MES_FICHIERS (action_mes_fichiers_sauver) :');
+	spip_log('*** MES_FICHIERS (action_mes_fichiers_sauver) INFORMATION:');
 	spip_log($liste);
 
 	// Archivage du contenu
@@ -25,7 +25,7 @@ function action_mes_fichiers_sauver() {
 	$mes_fichiers = new PclZip(_DIR_MES_FICHIERS . 'mf2_'.date("Ymd_His").'.zip');
 	$erreur = $mes_fichiers->create($liste, PCLZIP_OPT_COMMENT, serialize($liste));
 	if ($erreur == 0) {
-		spip_log('*** MES_FICHIERS (action_mes_fichiers_sauver) : erreur '.$mes_fichiers->errorInfo(true));
+		spip_log('*** MES_FICHIERS (action_mes_fichiers_sauver) ERREUR '.$mes_fichiers->errorInfo(true));
 		redirige_par_entete(generer_url_ecrire('mes_fichiers', 'etat=nok_sauve', true));
 	}
 

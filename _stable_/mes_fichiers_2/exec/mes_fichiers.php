@@ -21,7 +21,7 @@ function exec_mes_fichiers_dist(){
 	
 	// titre
 	echo "<br /><br /><br />\n"; // outch que c'est vilain !
-	echo gros_titre(_T('mes_fichiers:titre_page_exec'),'', false);
+	echo gros_titre(_T('titre_admin_tech'),'', false);
 	
 	// barre d'onglets
 	echo barre_onglets("administration", "mes_fichiers");
