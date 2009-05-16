@@ -30,9 +30,9 @@ function blocs_callback($matches) {
 	if(preg_match(',<resume>(.*)</resume>\s?(.*)$,ms', $corps, $res))
 		{ $corps = $res[2]; $res = $res[1]; } else $res = '';
 	// types de blocs : bloc|invisible|visible
-	if ($matches[1]=='visible') {
+	if ($matches[1]=='visible' || defined('_CS_PRINT')) {
 		$h = $d = '';
-		$r = ' blocs_invisible';
+		$r = ' blocs_invisible ';
 	} else {
 		$h = ' blocs_replie';
 		$d = ' blocs_invisible';
