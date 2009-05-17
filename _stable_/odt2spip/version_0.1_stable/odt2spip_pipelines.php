@@ -30,9 +30,14 @@ function odt2spip_affiche_droite($flux){
     $out .= "<input type='radio' name='mode_image' value='image' id='mode_image' checked='checked'/>";
     $out .= "<input type='radio' name='mode_image' value='document' id='mode_document'/>";
     $out .= "<label for='mode_document'>"._T("odtspip:mode_document")."</label>";    
+    $out .= "<br /><br /><strong>"._T("odtspip:langue_publication").": </strong>";
+    $out .= "<select name='lang_publi' id='lang_publi' style='font-size:1em;'>";
+    $Tlangs = explode(',',$GLOBALS['meta']['langues_proposees']);
+    foreach($Tlangs as $lang) $out .= "<option value='".$lang."'".($lang==$GLOBALS['meta']['langue_site']?" selected='selected'":"").">".$lang."</option>";   
+    $out .= "</select>";
     $out .= "</small><br />";
     $out .= "<div style='text-align:$spip_lang_right'>";
-    $out .= "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo'>";
+    $out .= "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo' />";
     $out .= "</div>";
     $out .= "</form>\n";
 	  $out .= fin_cadre_relief(true)."</div>";

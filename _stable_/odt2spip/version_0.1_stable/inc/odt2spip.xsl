@@ -46,6 +46,8 @@
 <xsl:param name="IntertitresRiches"/>
 <!-- ModeImages = img|doc pour la balise a utiliser pour integrer les images -->
 <xsl:param name="ModeImages"/>
+<!-- LanguePublication = code de la langue de publication de l'article -->
+<xsl:param name="LanguePublication"/>
 
 <!-- gestion des titres de façon la plus generique possible -->
 <!-- si @text:style-name='Heading' est utilise, recuperer 'Heading' dans $STyleTitreGeneral -->
@@ -247,7 +249,7 @@ ModeImages= <xsl:value-of select="$ModeImages" />
 		<date_redac></date_redac>
 		<accepter_forum></accepter_forum>
 		<date_modif></date_modif>
-		<lang></lang>
+		<lang><xsl:value-of select="$LanguePublication" /></lang>
 		<langue_choisie></langue_choisie>
 		<id_trad></id_trad>
 		<extra></extra>

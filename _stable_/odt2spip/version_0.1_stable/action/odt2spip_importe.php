@@ -67,6 +67,11 @@ function action_odt2spip_importe() {
     $type = (_request('mode_image') AND _request('mode_image') == 'document') ? 'document' : ($spip_version_code > 2 ? 'image' : 'vignette');
     $ModeImages = ($type == 'document' ? 'doc' : 'img');
     
+  // récupérer la langue de publication + verifier la valeur envoyée
+    $Tlangues = explode(',', $GLOBALS['meta']['langues_proposees']);
+    $LanguePublication = (in_array(_request('lang_publi'), $Tlangues) ? _request('lang_publi') : $GLOBALS['meta']['langue_site']);
+    
+    
   // appliquer la transformation XSLT sur le fichier content.xml
     // déterminer les fonctions xslt à utiliser (php 4 ou php 5)
     if (!class_exists('XSLTProcessor')) {
@@ -81,7 +86,10 @@ function action_odt2spip_importe() {
 //        else xslt_set_base($xh, getcwd () . '/');
       
       // definition de l'array des parametres a passer a la xslt
-        $params = array('IntertitresRiches' => $intertitres_riches, 'ModeImages' => $ModeImages);
+        $params = array('IntertitresRiches' => $intertitres_riches, 
+                        'ModeImages' => $ModeImages,
+                        'LanguePublication' => $LanguePublication
+                        );
         
       // lancer le parseur
         $xml_sortie = xslt_process($xh, $xml_entre, $xslt_texte, NULL, array(), $params);
@@ -94,9 +102,10 @@ function action_odt2spip_importe() {
       // on est php5: utiliser les fonctions de la classe XSLTProcessor
         $proc = new XSLTProcessor();
 
-      // passage d'un parametre a la xslt
+      // passage des parametres a la xslt
         $proc->setParameter(null, 'IntertitresRiches', $intertitres_riches);
         $proc->setParameter(null, 'ModeImages', $ModeImages);
+        $proc->setParameter(null, 'LanguePublication', $LanguePublication);
         
         $xml = new DOMDocument();
         $xml->load($xml_entre);

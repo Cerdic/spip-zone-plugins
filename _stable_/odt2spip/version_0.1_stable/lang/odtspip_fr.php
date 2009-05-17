@@ -32,6 +32,9 @@
         'mode_image' => 'images',
         'importer_fichier' => 'Cr&eacute;er un article &agrave; partir d\'un fichier OOo Writer',
         
+    // L
+        'langue_publication' => 'Langue de l\'article', 
+    
     // N
         'non' => 'non',
         
