@@ -4,22 +4,22 @@
 	</nom>
 	<icon>en_travaux.png</icon>
 	<auteur><multi>
-		[fr][Arnaud Ventre->ventrea@gmail.com]
-_ [C&eacute;dric Morin->http://www.yterium.com]
-_ &#169; 2006-2009 - Distribue sous licence GPL
-		[en][Arnaud Ventre->ventrea@gmail.com]
-_	[C&eacute;dric Morin->http://www.yterium.com]
-_ &#169; 2006-2009 - Distributed under GPL Licence
+		[fr][Arnaud Ventre->ventrea@gmail.com], [C&eacute;dric Morin->http://www.yterium.com]
+		[en][Arnaud Ventre->ventrea@gmail.com], [C&eacute;dric Morin->http://www.yterium.com]
 _ Translated from French by Etienne B. [->http://www.loiseau2nuit.net]
-    [it][Arnaud Ventre->ventrea@gmail.com]
-_	[C&eacute;dric Morin->http://www.yterium.com]
-_ &#169; 2006-2009 - Distribuito sotto Licenza GPL
+		[it][Arnaud Ventre->ventrea@gmail.com], [C&eacute;dric Morin->http://www.yterium.com]
 		</multi>
 	</auteur>
+	<licence><multi>
+		[fr] &#169; 2006-2009 - Distribue sous licence GPL
+		[en] &#169; 2006-2009 - Distributed under GPL Licence
+		[it] &#169; 2006-2009 - Distribuito sotto Licenza GPL
+		</multi></licence>
 	<version>2.0</version>
 	<etat>stable</etat>
 	<description><multi>
-		[fr] A utiliser pendant une phase de maintenance, ce plugin affiche une page d'avertissement, &agrave; la place du site public.
+		[fr] &Agrave; activer avant une phase de maintenance, ce plugin affiche aussit&ocirc;t une page d'avertissement, &agrave; la place du site public.
+_ Attention : seul le webmestre accede encore &agrave; l'espace prive et au site public.
 		[en] Displays a defined page during maintenance period on all your public pages.
 		[it] Consente di visualizzare un messaggio personalizzabile durante una sessione di manutenzione su tutte le pagine del sito pubblico.
 		</multi>
