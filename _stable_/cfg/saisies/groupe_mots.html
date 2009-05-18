@@ -1,0 +1,23 @@
+[(#REM) 
+
+  Parametres :
+  - class : classe(s) css ajoutes au select
+  - multiple : si quelquechose est passé, le select est multiple, sinon, c'est un select simple
+  	Dans le cas multiple, defaut et valeur doivent être un array, sinon un int
+  
+  Exemple d'appel :
+	[(#SAISIE{secteur}{erreurs}
+		{nom=secteur_region}
+		{label=<:plugin:secteur_region:>}
+		{multiple=oui})] 
+]
+<select name="#ENV{nom}[(#ENV{multiple}|?{[(#VAL{&#91;&#93;}|html_entity_decode)]})]" id="champ_#ENV{nom}"[ class="(#ENV{class})"][(#ENV{multiple}|oui) multiple="multiple"]>
+	[(#ENV{multiple}|non)
+	<option value="O"></option>]
+	<BOUCLE_groupes(GROUPES_MOTS){par num titre, titre}{tout}>
+		[(#ENV{multiple}|oui)
+		<option value="#ID_GROUPE"[(#ID_GROUPE|in_array{#ENV{valeur}|sinon{#ENV{defaut,#ARRAY}}}|oui) selected="selected"]>#TITRE</option>]
+		[(#ENV{multiple}|non)
+		<option value="#ID_GROUPE"[(#ID_RUBRIQUE|=={#ENV{valeur}|sinon{#ENV{defaut}}}|oui) selected="selected"]>#TITRE</option>]
+	</BOUCLE_groupes>
+</select>
