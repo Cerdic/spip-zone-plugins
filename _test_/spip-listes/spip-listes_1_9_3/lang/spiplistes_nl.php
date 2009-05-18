@@ -217,7 +217,7 @@ $GLOBALS['i18n_spiplistes_nl'] = array(
 	<tt style='display:block;margin:0.75em 0;background-color:#ccc;border:1px solid #999;padding:1ex;'>adresse@mail<span style='color:#f66'>[separateur]</span>login<span style='color:#f66'>[separateur]</span>nom</tt>
 	<tt style='color:#f66'>[separateur]</tt> est un caract&egrave;re de tabulation ou un point-virgule.<br /><br />
 	L'adresse email doit &ecirc;tre unique, ainsi que le login. Si cette adresse 
-   email ou se login existe dans la base du site, la ligne sera rejet&eacute;e.<br />
+   email ou ce login existent dans la base du site, la ligne sera rejet&eacute;e.<br />
 	Le premier champ adresse@mail est obligatoire. Les deux autres champs peuvent 
    &ecirc;tre ignor&eacute;s (vous pouvez importer des listes issues des anciennes versions de SPIP-Listes)."
 , 'annuler_envoi' => "Het versturen annuleren" // + _gerer
