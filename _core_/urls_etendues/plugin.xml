@@ -1,0 +1,33 @@
+<plugin>
+	<nom>Urls Etendues</nom>
+	<auteur>Collectif SPIP</auteur>
+	<version>1.0</version>
+	<version_base>1.0</version_base>
+	<etat>test</etat>
+	<description>Gestion des variantes d'URL Signifiantes ou non</description>
+	<prefix>urls</prefix>
+
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<inclure>urls_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>boite_infos</nom>
+		<inclure>urls_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>arbo_creer_chaine_url</nom>
+		<action>arbo_creer_chaine_url</action>
+		<inclure>urls/arbo.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>propres_creer_chaine_url</nom>
+		<action>propres_creer_chaine_url</action>
+		<inclure>urls/propres.php</inclure>
+	</pipeline>
+
+
+	<bouton id='controler_urls' parent='bando_publication' position="-1">
+		<titre>urls:icone_controler_urls</titre>
+	</bouton>
+</plugin>

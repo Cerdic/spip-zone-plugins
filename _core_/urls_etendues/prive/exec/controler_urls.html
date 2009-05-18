@@ -1,0 +1,40 @@
+[(#REM)
+
+  Squelette
+  (c) xxx
+  Distribue sous licence GPL
+
+]
+#SET{self,#SELF|parametre_url{debut_urls,''}}
+#SET{recherche,#ENV{recherche}|?{#VAL{%}|concat{#ENV{recherche},%},'%'}}
+<h1 class="grostitre"><:urls:liste_des_urls:></h1>
+[<h2><:resultats_recherche:> &#171;&nbsp;(#ENV{recherche})&nbsp;&#187;</h2>]
+[<h2>(#TYPE|ucfirst) <:info_numero_abbreviation:>#ID_OBJET
+<a class='annule_filtre ajax' href="[(#GET{self}|parametre_url{id_objet|type,''})]" title="<:forum:tout_voir|attribut_html:>">[(#CHEMIN{images/annuler-recherche.png}|balise_img|inserer_attribut{alt,<:urls:tout_voir:>})]</a>
+</h2>]
+<B_urls>
+	[<p class="pagination">(#PAGINATION)</p>]
+	<p class="tri">[ (#TRI{<,#CHEMIN{img_pack/tri_asc-16.png}|balise_img})][ | (#TRI{>,#CHEMIN{img_pack/tri_desc-16.png}|balise_img})][ | (#TRI{date,<:urls:label_tri_date:>})][ | (#TRI{url,<:urls:label_tri_url:>})][ | (#TRI{id_objet,<:urls:label_tri_id:>})]</p>
+	<ul class="liste_items urls">
+	<BOUCLE_urls(URLS){tri date,#ARRAY{0,direct,date,inverse}}{pagination}{type?}{id_objet?}{url like #GET{recherche}}>
+	<li class="item">
+		<h3 class="url"><a href="[(#ID_OBJET|generer_url_entite{#TYPE})]" title="[(#TYPE) ]#ID_OBJET">#URL</a></h3>
+		<span class="date">[(#DATE|affdate)]</span>
+		- <span class="objet"><a href="[(#GET{self}|parametre_url{id_objet,#ID_OBJET}|parametre_url{type,#TYPE})]">[(#TYPE|ucfirst) ]<:info_numero_abbreviation:>#ID_OBJET</a></span>
+		[(#AUTORISER{modifier,#TYPE,#ID_OBJET})
+		<div class="actions">
+			[(#DATE|strtotime|<={#REM|time}|oui)
+			[(#BOUTON_ACTION{<:urls:verrouiller_url:>,#URL_ACTION_AUTEUR{urls_verrouiller,#TYPE-#ID_OBJET-#URL,#SELF},ajax})]
+			]
+			[(#BOUTON_ACTION{<:urls:liberer_url:>,#URL_ACTION_AUTEUR{urls_liberer,#TYPE-#ID_OBJET-#URL,#SELF},ajax})]
+		</div>]
+	</li>
+	</BOUCLE_urls>
+	</ul>
+</B_urls>
+[(#TYPE|et{#ID_OBJET}|et{#AUTORISER{modifier,#TYPE,#ID_OBJET}}|oui)
+#FORMULAIRE_EDITER_URL_OBJET{#TYPE,#ID_OBJET}
+]
+<!--#navigation-->
+#FORMULAIRE_RECHERCHE_ECRIRE{#GET{self}}
+<!--/#navigation-->
