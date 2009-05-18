@@ -10,7 +10,7 @@
 <h1 class="grostitre"><:urls:liste_des_urls:></h1>
 [<h2><:resultats_recherche:> &#171;&nbsp;(#ENV{recherche})&nbsp;&#187;</h2>]
 [<h2>(#TYPE|ucfirst) <:info_numero_abbreviation:>#ID_OBJET
-<a class='annule_filtre ajax' href="[(#GET{self}|parametre_url{id_objet|type,''})]" title="<:forum:tout_voir|attribut_html:>">[(#CHEMIN{images/annuler-recherche.png}|balise_img|inserer_attribut{alt,<:urls:tout_voir:>})]</a>
+<a class='annule_filtre ajax' href="[(#GET{self}|parametre_url{id_objet|type,''})]" title="<:urls:tout_voir|attribut_html:>">[(#CHEMIN{images/annuler-recherche.png}|balise_img|inserer_attribut{alt,<:urls:tout_voir:>})]</a>
 </h2>]
 <B_urls>
 	[<p class="pagination">(#PAGINATION)</p>]
