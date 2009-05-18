@@ -24,7 +24,7 @@ version="1.0"[ encoding="(#CHARSET)"]?>
 	<BOUCLE_evenement(EVENEMENTS) {branche ?}{id_article ?} {statut=publie}{par date_fin}{age<7} {0,60}>
 	<item>
 		[<title>(#TITRE|texte_backend)</title>]
-		<link>[(##URL_ARTICLE|parametre_url{id_evenement,#ID_EVENEMENT}|url_absolue)]</link>
+		<link>[(#URL_ARTICLE|parametre_url{id_evenement,#ID_EVENEMENT}|url_absolue)]</link>
 		[<guid isPermaLink="true">(#URL_ARTICLE|parametre_url{id_evenement,#ID_EVENEMENT}|url_absolue)</guid>]
 		<date>#DATE_DEBUT</date>
 		[<dc:date>(#DATE_DEBUT|date_iso)</dc:date>]
