@@ -270,7 +270,7 @@
 								else
 									$iv = formulaires_generer_vecteur_initialisation();
 								$res2 = sql_select('id_applicant', 'spip_applicants', 'iv="'.base64_encode($iv).'"');
-								if (spip_num_rows($res2) == 0)
+								if (sql_count($res2) == 0)
 									$verification = true;
 								$i++;
 							}
