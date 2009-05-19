@@ -317,7 +317,7 @@ class cfg
 		if (!$formulaire = $this->form->formulaire()) {
 			// Page appellee sans formulaire valable
 			$retour .= "<img src='"._DIR_PLUGIN_CFG.'cfg.png'."' style='float:right' alt='' />\n";
-			$retour .=  "<h3>" . _T("cfg:choisir_module_a_configurer") . "</h3>";
+			$retour .=  "<h3>" . _T("cfg_interface:choisir_module_a_configurer") . "</h3>";
 		} else {
 			$retour .= $formulaire;
 		}

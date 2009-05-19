@@ -2,11 +2,11 @@
 	Pas de CFG defini : on affiche une belle liste
 ]
 [(#ENV{cfg}|non)
-	<h1><:cfg:configuration_cfg:></h1>
+	<h1><:cfg_interface:configuration_cfg:></h1>
 
 	<!--#navigation-->
 	<div class="cadre cadre-info">
-		<:cfg:description_cfg:>
+		<:cfg_interface:description_cfg:>
 	</div>	
 	<!--/#navigation-->
 
@@ -26,7 +26,7 @@
 	]
 	
 	[(#CHEMIN{[fonds/cfg_(#ENV{cfg}).html]}|oui)
-		[(#CFG_EXEC|sinon{<:cfg:erreur_compatibilite:>})]
+		[(#CFG_EXEC|sinon{<:cfg_interface:erreur_compatibilite:>})]
 	]
 	
 	[(#CHEMIN{[fonds/cfg_(#ENV{cfg}).html]}|non)
