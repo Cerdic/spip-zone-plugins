@@ -10,37 +10,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'cfg' => 'CFG',
-	'configuration_cfg' => 'Configuration des extensions',
-	'description_cfg' => 'CFG facilite la cr&eacute;ation d\'interface de configuration pour les extensions de SPIP.',
-	
-	'choisir_module_a_configurer' => 'Choisissez le module &agrave; configurer.',
 	'config_enregistree' => 'Enregistrement de <b>@nom@</b> effectu&eacute;',
 	'config_supprimee' => 'Suppression de <b>@nom@</b> effectu&eacute;',
-	'configuration_modules' => 'Configuration des modules',
 
 	// E
-	'erreur_compatibilite' => 'Installez le plugin de compatibilite pour lire cet ancien fond.',
-	
-	'erreur_copie_fichier' => 'Impossible de copier le fichier @fichier@ &agrave; son emplacement d&eacute;finitif',
 	'erreur_enregistrement' => 'Une erreur est survenue lors de l\'enregistrement de <b>@nom@</b>',
 	'erreur_lecture' => 'Impossible de lire @nom@',
-	'erreur_open_w_fichier' => 'Impossible d\'ouvrir le fichier @fichier@ en &eacute;criture',
 	'erreur_suppression' => 'Une erreur est survenue lors de la suppression de <b>@nom@</b>',
-	'erreur_suppression_fichier' => 'Impossible de supprimer le fichier @fichier@.',
-	'erreur_type_id' => 'Le champ @champ@ doit commencer par une lettre ou un soulign&eacute;',
-	'erreur_type_idnum' => 'Le champ @champ@ doit &ecirc;tre numerique',
-	'erreur_type_pwd' => 'Le champ @champ@ doit avoir plus de 5 caract&egrave;res',
 
 	// I
 	'id_manquant' => 'Identifiant manquant',
-	'installation_librairies' => 'T&eacute;l&eacute;chargement de librairies',
-	'installation_liste_libs' => 'Liste des librairies',
-	'installer_dossier_lib' => 'Vous devez creer un dossier @dir@ &agrave; la racine de votre SPIP ayant des permissions d\'ecriture.',
-	'installer_lib_192' => 'Pour installer une librairie, d&eacute;compressez manuellement le zip et copiez son contenu dans le dossier @dir@.',
 
 	// N
 	'nom_table_manquant' => 'Nom de la table SQL manquant',
-	'nouveau' => 'Nouveau',
 
 	// O
 	'ok' => 'OK',

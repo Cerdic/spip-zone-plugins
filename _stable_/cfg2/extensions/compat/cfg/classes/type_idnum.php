@@ -9,7 +9,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function cfg_verifier_type_idnum($champ, &$cfg){
 	if (!is_numeric($cfg->val[$champ])){
-		$cfg->ajouter_erreur(_T('cfg:erreur_type_idnum', array('champ'=>$champ)));
+		$cfg->ajouter_erreur(_T('cfg_compat:erreur_type_idnum', array('champ'=>$champ)));
 	}
 	return true;
 }

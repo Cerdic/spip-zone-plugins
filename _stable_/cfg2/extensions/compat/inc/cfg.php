@@ -214,7 +214,7 @@ class cfg
 				. "<h4>$nom</h4>\n"
 				. "<input type='hidden' name='exec' value='cfg' />\n"
 				. "<input type='hidden' name='cfg' value='$lien' />\n"
-				. "<label for='$lien" . "_'>" . _T('cfg:nouveau') . "</label>\n"
+				. "<label for='$lien" . "_'>" . _T('cfg_compat:nouveau') . "</label>\n"
 				. "<input type='image' id='$lien" . "_' name='nouveau' value='1' "
 				. "src='../dist/images/creer.gif' style='vertical-align: text-top;'/></p>\n" 
 				. $dedans
