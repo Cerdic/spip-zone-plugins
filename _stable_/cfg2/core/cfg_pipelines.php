@@ -50,9 +50,7 @@ function cfg_formulaire_charger($flux){
 		// il faut passer les noms des champs (input et consoeurs) de CFG dans l'environnement
 		// pour pouvoir faire #ENV{nom_du_champ}
 		if (is_array($config->val)){
-			foreach($config->val as $nom=>$val){
-				$contexte[$nom] = $val;	
-			}
+			$contexte = array_merge($contexte, $config->val);
 		}
 
 		if (!$config->autoriser()) {

@@ -12,19 +12,20 @@ v2.0.0
 
   * Suppression de la gestion des fonds non CVT (cf. extension compat)
 
-  * Utilisation du l'ecriture simplifiee prive/exec/cfg.html (SPIP 2.0.6+)
+  * Suppression de la gestion de ?exec=cfg (cf. extension interface)
   
   Consequences:
   * les CFG doivent maintenant respecter la syntaxe d'ecriture
   des formulaires CVT et etre places dans le dossier formulaires/
   en les nommant formulaires/config_$nom.html
 
-  * exec=cfg&cfg=nom cherche une page fonds/cfg_nom.html et la charge
-  sinon appelle directement #FORMULAIRE_CONFIG_$NOM
+  * Ce plugin ne gere plus que 3 choses :
+    - #FORMULAIRE_XX avec des parametres CFG (+extensibilité)
+	- fonctions (lire|ecrire|effacer)_config() et balise #CONFIG
+	- des #SAISIE
 
-  * Les sous éléments de configuration peuvent s'appeler par
-  exec=cfg&cfg=nom&onglet=element et cherchera une page fonds/cfg_config_nom_element.html,
-  sinon fonds/cfg_config_nom.html, sinon appelle directement #FORMULAIRE_CONFIG_$NOM_$ELEMENT
+  * Ce plugin ne permet d'écrire que dans spip_meta (dépot meta et metapack (=donnees serialisees))
+  * Ce plugin ne fournit plus d'interface (cf. extension interface)
 
   * chaque formulaire de configuration peut être appelé en ajax et depuis l'espace public
   <div class="ajax">#FORMULAIRE_CONFIG_NOM</div>

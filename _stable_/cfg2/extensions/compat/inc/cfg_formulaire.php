@@ -173,7 +173,7 @@ class cfg_formulaire extends cfg_formulaire_dist {
 		if (!preg_match_all(_CFG_REGEXP_CHAMP, $this->fond_compile, $matches, PREG_SET_ORDER)) {
 			return _T('cfg:pas_de_champs_dans', array('nom' => $this->vue));
 		}
-		
+
 		foreach ($matches as $regs) {
 			$name = $regs[3];
 			if (substr($name, 0, 5) == '_cfg_') continue;
