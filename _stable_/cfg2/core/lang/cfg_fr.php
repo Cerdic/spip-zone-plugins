@@ -18,12 +18,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_lecture' => 'Impossible de lire @nom@',
 	'erreur_suppression' => 'Une erreur est survenue lors de la suppression de <b>@nom@</b>',
 
-	// I
-	'id_manquant' => 'Identifiant manquant',
-
-	// N
-	'nom_table_manquant' => 'Nom de la table SQL manquant',
-
 	// O
 	'ok' => 'OK',
 

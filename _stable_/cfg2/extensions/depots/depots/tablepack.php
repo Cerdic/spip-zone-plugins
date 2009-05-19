@@ -82,7 +82,7 @@ class cfg_depot_tablepack
 		}
 		
 		if (!$this->param['cfg_id']) {
-			$this->messages['message_erreur'][] = _T('cfg:id_manquant');
+			$this->messages['message_erreur'][] = _T('cfg_depots:id_manquant');
 			return false;
 		}
 		

@@ -47,7 +47,7 @@ class cfg_depot_table
 	function charger($creer = false){
 		
 		if (!$this->param['table']) {
-			$this->messages['message_erreur'][] = _T('cfg:nom_table_manquant');
+			$this->messages['message_erreur'][] = _T('cfg_depots:nom_table_manquant');
 			return false;
 		}
 		
@@ -63,7 +63,7 @@ class cfg_depot_table
 		}
 		
 		if (!$this->param['cfg_id'] AND !($this->param['autoriser_absence_id'] == 'oui')) {
-			$this->messages['message_erreur'][] = _T('cfg:id_manquant');
+			$this->messages['message_erreur'][] = _T('cfg_depots:id_manquant');
 			return false;
 		}
 
