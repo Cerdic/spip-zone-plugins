@@ -7,13 +7,10 @@
   - size : taille du champ
   
   Exemple d'appel :
-	[(#INCLURE{fond=saisies/_base}{type_saisie=input}
-		{nom=couleur_foncee}
-		{valeur=#ENV{couleur_foncee}}
+	[(#SAISIE{input,couleur_foncee}
 		{label=<:spa:couleur_foncee:>}
-		{size=7}
-		{obligatoire=non}
-		{erreurs})] 
+		{size=7})]
+		
 ]
 
 
