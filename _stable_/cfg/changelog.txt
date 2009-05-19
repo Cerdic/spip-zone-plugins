@@ -1,3 +1,6 @@
+v1.12.4 (19 05 2009)
+  * (en test) introduction d'une saisie : 'groupe_mots' 
+  
 v1.12.3 (04 05 2009)
   * (en test) introduction de deux nouvelles saisies : 'selection' et 'radio'
 
