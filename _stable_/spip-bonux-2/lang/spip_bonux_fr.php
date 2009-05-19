@@ -4,11 +4,18 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-'pages' => 'Pages',
+'afficher_calendrier' => 'Afficher le calendrier',
+'annee_precedente' => 'An&eacute;e pr&eacute;c&eacute;dente',
+'annee_suivante' => 'Ann&eacute;e suivante',
+'annuler_recherche' => 'Annuler la recherche',
 
 'bouton_fermer' => "Fermer",
 
-'annuler_recherche' => 'Annuler la recherche',
+'mois_precedent' => 'Mois pr&eacute;c&eacute;dent',
+'mois_suivant' => 'Mois suivant',
+
+'pages' => 'Pages',
+
 
 );
 
