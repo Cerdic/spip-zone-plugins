@@ -25,4 +25,12 @@
 	<icon>fulltext.png</icon>
 	<chemin dir='' />
 	<necessite id="SPIP" version="[2.0.0;]" />
+  <pipeline>
+    <nom>ajouter_boutons</nom>
+    <inclure>fulltext_pipeline.php</inclure>
+  </pipeline>
+	<onglet id="fulltext" parent="configuration">
+		<icone>fulltext-22.png</icone>
+		<titre>Fulltext</titre>
+	</onglet>  
 </plugin>
