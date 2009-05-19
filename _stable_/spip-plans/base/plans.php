@@ -121,7 +121,7 @@
 						$points = sql_select('DISTINCT(id_plan), id_point', 'spip_points', '', 'id_plan');
 						while ($arr = sql_fetch($points)) {
 							$point = new point($arr['id_plan'], $arr['id_point']);
-							$point->enregistrer_position(0); // ordonnera les autres points
+							$point->enregistrer_z_index(0); // ordonnera les autres points
 						}
 						ecrire_meta('spip_plans_version', $version_base = 2.0);
 						ecrire_metas();
