@@ -13,7 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'mois_precedent' => 'Mois pr&eacute;c&eacute;dent',
 'mois_suivant' => 'Mois suivant',
-
+'id_rapide' => 'Ajout rapide',
 'pages' => 'Pages',
 
 

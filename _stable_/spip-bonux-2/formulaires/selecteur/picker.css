@@ -8,3 +8,6 @@
 .item_picker .frame ul li.article {background:url(prive/images/article-24.gif) no-repeat top left;}
 
 .item_picker .frame ul li:hover {background-color:#999;}
+
+.browser .choix_rapide {font-size:0.9em;}
+.browser #picker_id {padding:0;margin:0 5px;border:1px solid;}
