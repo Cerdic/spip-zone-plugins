@@ -8,24 +8,33 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'accents_pas_pris' => 'Accents are not taken into account ("d&eacute;j&agrave;" or "deja", will return the same results, including "d&eacute;j&agrave;", "dej&agrave;", "d&eacute;ja"...)',
-	'asterisque_terminale' => 'will return no results: the asterisk must be final',
+	'accents_pas_pris' => 'Accents are ignored ("d&eacute;j&agrave;" or "deja", will return the same results, including "d&eacute;j&agrave;", "dej&agrave;", "d&eacute;ja"...)',
+	'asie' => 'asia',
+	'asterisque_terminale' => 'will return no results: the asterisk must be at the end',
 	'aussi' => 'also',
 
 	// C
 	'casse_indifferente' => 'The case (lowercase/uppercase) of letters in the words is without effect.',
 	'convertir_myisam' => 'Convert to MyISAM',
 	'convertir_toutes' => 'Convert all tables to MyISAM',
-	'convertir_utf8' => 'convert to UTF-8 to restore coherency',
+	'convertir_utf8' => 'convert to UTF-8 to restore consistency',
 	'creer_tous' => 'Create all the suggested FULLTEXT indexes',
 
 	// E
+	'enfant' => 'posture',
+	'enfan' => 'postur',
+	'enfants' => 'postures',
+	'enfance' => 'postural',
+	'enfanter' => 'posturepedic',
+	'enfantillage' => 'posturite',
 	'et' => 'AND',
+	'etranger' => 'exposed',
 	'exemples' => 'Usage examples',
 
 	// F
-	'fonctionnement_recherche' => 'How the search mechanism works on this site',
+	'fonctionnement_recherche' => 'How the search engine works on this site',
 	'fulltext_cree' => 'FULLTEXT created',
+	'fant' => 'ture',
 
 	// I
 	'il_faut_myisam' => 'MyISAM is required',
@@ -52,14 +61,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'sequence_exacte' => 'the exact phrase',
-	'soit' => '/',
+	'premier_soit' => 'EITHER',
+	'soit' => 'OR',
 	'supprimer' => 'Delete',
 
 	// T
 	'table_convertie' => 'table converted to MyISAM',
 	'table_format' => 'This table\'s format is',
 	'table_non_reconnue' => 'unrecognised table',
-	'textes_premier' => 'but presents first the texts which contain',
+	'textes_premier' => 'but shows first the texts which contain',
 
 	// U
 	'utiliser_operateurs_logiques' => 'The search uses standard logical operators.'

@@ -7,6 +7,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'accents_pas_pris' => 'Les accents ne sont pas pris en compte (&laquo;&nbsp;d&#233;j&#224;&nbsp;&raquo; ou &laquo;&nbsp;deja&nbsp;&raquo;, retourneront &#224; l\'identique &laquo;&nbsp;d&#233;j&#224;&nbsp;&raquo;, &laquo;&nbsp;dej&#224;&nbsp;&raquo;, &laquo;&nbsp;d&#233;ja&nbsp;&raquo;...)',
+	'asie' => 'asie',
 	'asterisque_terminale' => 'ne retournera rien: l\'ast&#233;risque * doit &#234;tre terminale',
 	'aussi' => 'aussi',
 
@@ -18,12 +19,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'creer_tous' => 'Cr&#233;er tous les index FULLTEXT sugg&#233;r&#233;s',
 
 	// E
+	'enfant' => 'enfant',
+	'enfan' => 'enfan',
+	'enfants' => 'enfants',
+	'enfance' => 'enfance',
+	'enfanter' => 'enfanter',
+	'enfantillage' => 'enfantillage',
 	'et' => 'ET',
+	'etranger' => '&eacute;tranger',
 	'exemples' => 'Exemples d\'utilisation',
 
 	// F
 	'fonctionnement_recherche' => 'Fonctionnement du moteur de recherche de ce site',
 	'fulltext_cree' => 'FULLTEXT cr&#233;&#233;',
+	'fant' => 'fant',
 
 	// I
 	'il_faut_myisam' => 'il faut MyISAM',
@@ -50,6 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'sequence_exacte' => 'exactement la s&#233;quence de mots',
+	'premier_soit' => 'SOIT',
 	'soit' => 'SOIT',
 	'supprimer' => 'Supprimer',
 
