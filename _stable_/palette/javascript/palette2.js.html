@@ -1,4 +1,3 @@
-;
 (function($){
 	$(document).ready(
 	  function() {
@@ -12,15 +11,19 @@
 		function(i, palette){
 		  $(palette).css("background-color", $(palette).attr("value"));
 		  palette.id = palid(palette);
-		  palette.onclick = function(e) {
-			$(".colorpicker").empty().remove();
-			$(palette)
-			  .after('<div class="colorpicker"><div class="colorpicker_close" title="<:palette:fermer:>">&nbsp;x&nbsp;</div><div class="colorpicker_bar"><:palette:palette:></div><div id="colorpicker"></div></div>');
-			$.farbtastic('#colorpicker', palette);
-			$(".colorpicker_close")
-			  .hover(function() {$(this).addClass("hover");}, function(){ $(this).removeClass("hover");})
-			  .click(function() {$(".colorpicker").empty().remove();});
-		  };
+			$(this).focus(function(){
+				$(".colorpicker").empty().remove();
+				$(palette)
+			  		.after('<div class="colorpicker"><div class="colorpicker_close" title="<:palette:fermer:>">&nbsp;x&nbsp;</div><div class="colorpicker_bar"><:palette:palette:></div><div id="colorpicker"></div></div>');
+				$.farbtastic('#colorpicker', palette);
+				$(".colorpicker_close")
+			  		.hover(function() {$(this).addClass("hover");}, function(){ $(this).removeClass("hover");})
+			  		.click(function() {$(".colorpicker").empty().remove();
+				});
+		  	});
+			$(this).blur(function(){
+				$(".colorpicker").empty().remove();
+			});
 		}
 	  );
 	};
