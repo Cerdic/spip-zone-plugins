@@ -7,6 +7,9 @@
  * 
  */
 
+$GLOBALS['exception_des_connect'][] = 'pour';
+$GLOBALS['exception_des_connect'][] = 'condition';
+
 /* le critere {tableau ...} des boucles pour:POUR */
 function critere_POUR_tableau_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
