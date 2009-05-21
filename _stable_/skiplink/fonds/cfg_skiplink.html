@@ -20,9 +20,9 @@ Mais vous pouvez, pour chacun de ces raccourcis, indiquer une autre ancre, parmi
 				<label for="go_content"><:skiplink:go_content:></label>
 				<input type="text" name="go_content" value="[(#ENV{go_content}|sinon{#contenu})]" id="go_content" style="width: 12em;" />
 			</li>
-			<li class="skiplink_go_navbar">
-				<label for="go_navbar"><:skiplink:go_navbar:></label>
-				<input type="text" name="go_navbar" value="[(#ENV{go_navbar}|sinon{#navigation})]" id="go_navbar" style="width: 12em;" />
+			<li class="skiplink_go_nav">
+				<label for="go_nav"><:skiplink:go_nav:></label>
+				<input type="text" name="go_nav" value="[(#ENV{go_nav}|sinon{#navigation})]" id="go_nav" style="width: 12em;" />
 			</li>
 			<li class="skiplink_go_search">
 				<label for="go_search"><:skiplink:go_search:></label>
@@ -32,7 +32,7 @@ Mais vous pouvez, pour chacun de ces raccourcis, indiquer une autre ancre, parmi
 	</fieldset>
 	<div class="boutons">
 		<input type="submit" name="_cfg_ok" value="<:OK:>" />
-		<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
+		<input type="submit" name="_cfg_delete" value="<:reset:>" />
 	</div>
 </form>
 </div>

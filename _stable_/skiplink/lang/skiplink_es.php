@@ -5,7 +5,7 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'go_content' => 'Ir al contenido',
-'go_navbar' => 'Ir al men&uacute;',
+'go_nav' => 'Ir al men&uacute;',
 'go_search' => 'Ir a Buscar',
 
 );
