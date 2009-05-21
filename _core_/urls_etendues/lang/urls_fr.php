@@ -4,6 +4,8 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+'actualiser_toutes' => 'Mettre &agrave; jour toutes les urls',
+
 'icone_controler_urls' => 'URLs signifiantes',
 
 'liberer_url' => 'Liberer',
