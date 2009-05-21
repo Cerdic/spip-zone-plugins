@@ -16,6 +16,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bas' => 'Bas',
 'descendre' => 'Bas de page',
 
+// Configuration CFG
+'go_plus_label' => 'Ajouter un lien vers l\'article num&eacute;ro&nbsp;:'
+
 );
 
 ?>
