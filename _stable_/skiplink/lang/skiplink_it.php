@@ -4,8 +4,8 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-'go_main' => 'Vai ai messaggi',
-'go_sidebar' => 'Vai al menu',
+'go_content' => 'Vai ai messaggi',
+'go_navbar' => 'Vai al menu',
 'go_search' => 'Vai  a ricerca',
 
 );
