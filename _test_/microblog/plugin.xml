@@ -21,5 +21,6 @@
 	images/microblog.png
 	</icon>
 	<chemin dir='' />
-	<necessite id="SPIP" version="[2.1.0;]" />
+	<necessite id="SPIP" version="[2.0;]" />
+	<!-- en vrai http://trac.rezo.net/trac/spip/changeset/14036 -->
 </plugin>

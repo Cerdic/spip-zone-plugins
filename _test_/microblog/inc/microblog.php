@@ -25,7 +25,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  */
 function microblog($status, $user=null, $pass=null, $service=null, $api=null){
 
-	define('_MBLOG_DEFAULT_SERVICE', 'spipo');
+	$cfg = @unserialize($GLOBALS['meta']['microblog']);
 
 	// services connus
 	$apis = array(
@@ -37,11 +37,16 @@ function microblog($status, $user=null, $pass=null, $service=null, $api=null){
 	// Choix de l'API
 	if (!isset($api)) {
 		if (!isset($service))
-			$service = _MBLOG_DEFAULT_SERVICE;
+			$service = $cfg['service'];
 		if (!isset($apis[$service]))
 			return false;
 		$api = $apis[$service];
 	}
+
+	if (!isset($user))
+		$user = $cfg['user'];
+	if (!isset($pass))
+		$pass = $cfg['pass'];
 
 	// Inserer les credits d'authentification
 	$api = str_replace(array('%user%','%pass%'), array(urlencode($user),urlencode($pass)), $api);
