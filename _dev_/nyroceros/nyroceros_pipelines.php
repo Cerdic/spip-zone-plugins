@@ -18,7 +18,7 @@ function Nyro_insert_head($flux){
 
 	
 	$flux .='
-<script src="'.url_absolue(find_in_path('js/jquery.nyroModal-1.3.0.js')).'" type="text/javascript"></script>
+<script src="'.url_absolue(find_in_path('js/jquery.nyroModal-1.5.0.js')).'" type="text/javascript"></script>
 <script src="'.url_absolue(find_in_path('js/nyromodal.js')).'" type="text/javascript"></script>';
 	
 	if ($config['installer_diapo_auto'] == 'oui'){

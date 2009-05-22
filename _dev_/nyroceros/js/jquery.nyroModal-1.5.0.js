@@ -5,8 +5,8 @@
  * Copyright (c) 2008 Cedric Nirousset (nyrodev.com)
  * Licensed under the MIT license
  *
- * $Date: 2008-10-22 (Wed, 22 Oct 2008) $
- * $version: 1.2.8
+ * $Date: 2009-05-14 (Thu, 14 May 2009) $
+ * $version: 1.5.0
  */
 jQuery(function($) {
 
@@ -14,10 +14,18 @@ jQuery(function($) {
 	// Private Variables
 	// -------------------------------------------------------
 
-	var isIE6 = ($.browser.msie && parseInt($.browser.version.substr(0,1)) < 7);
+	var userAgent = navigator.userAgent.toLowerCase();
+	//var browserVersion = (userAgent.match( /.+(?:rv|it|ra|ie)[\/: ]([\d.]+)/ ) || [0,'0'])[1];
+	var browserVersion = (userAgent.match(/.+(?:rv|webkit|khtml|opera|msie)[\/: ]([\d.]+)/ ) || [0,'0'])[1];
+
+	var isIE6 = (/msie/.test(userAgent) && !/opera/.test(userAgent) && parseInt(browserVersion) < 7 && !window.XMLHttpRequest);
 	var body = $('body');
 
 	var currentSettings;
+
+	var shouldResize = false;
+	
+	var gallery = {};
 
 	// To know if the fix for the Issue 10 should be applied (or has been applied)
 	var fixFF = false;
@@ -32,25 +40,39 @@ jQuery(function($) {
 		ready: false,
 		dataReady: false,
 		anim: false,
+		animContent: false,
 		loadingShown: false,
 		transition: false,
+		resizing: false,
+		closing: false,
 		error: false,
+		blocker: null,
+		blockerVars: null,
 		full: null,
 		bg: null,
 		loading: null,
 		tmp: null,
 		content: null,
 		wrapper: null,
-		closing: false,
 		contentWrapper: null,
-		scripts: new Array()
+		scripts: new Array(),
+		scriptsShown: new Array()
 	};
 
 	// Indicate of the height or the width was resized, to reinit the currentsettings related to null
 	var resized = {
 		width: false,
-		height: false
+		height: false,
+		windowResizing: false
 	};
+	
+	var initSettingsSize = {
+		width: null,
+		height: null,
+		windowResizing: true
+	};
+	
+	var windowResizeTimeout;
 
 
 	// -------------------------------------------------------
@@ -61,9 +83,14 @@ jQuery(function($) {
 	$.fn.nyroModal = function(settings) {
 		if (!this)
 			return false;
-		return this.each(function(){
+		return this.each(function() {
+			var me = $(this);
 			if (this.nodeName.toLowerCase() == 'form') {
-				$(this).submit(function(e) {
+				me
+				.unbind('submit.nyroModal')
+				.bind('submit.nyroModal', function(e) {
+					if (me.data('nyroModalprocessing'))
+						return true;
 					if (this.enctype == 'multipart/form-data') {
 						processModal($.extend(settings, {
 							from: this
@@ -77,7 +104,9 @@ jQuery(function($) {
 					return false;
 				});
 			} else {
-				$(this).click(function(e) {
+				me
+				.unbind('click.nyroModal')
+				.bind('click.nyroModal', function(e) {
 					e.preventDefault();
 					processModal($.extend(settings, {
 						from: this
@@ -109,21 +138,29 @@ jQuery(function($) {
 	// string deep2 second key where overwrite the settings
 	$.nyroModalSettings = function(settings, deep1, deep2) {
 		setCurrentSettings(settings, deep1, deep2);
-		if (!deep1 && modal.ready) {
-			if (settings.bgColor)
+		if (!deep1 && modal.started) {
+			if (modal.bg && settings.bgColor)
 				currentSettings.updateBgColor(modal, currentSettings, function(){});
 
-			if ((modal.dataReady && !modal.anim && !modal.transition) && (settings.width || settings.height)) {
-				calculateSize(true);
+			if (modal.contentWrapper && settings.title)
+				setTitle();
 
-				if (fixFF)
-					modal.content.css({position: ''});
-				currentSettings.resize(modal, currentSettings, function() {
+			if (!modal.error && (settings.windowResizing || (!modal.resizing && (('width' in settings && settings.width == currentSettings.width) || ('height' in settings && settings.height == currentSettings.height))))) {
+				modal.resizing = true;
+				if (modal.contentWrapper)
+					calculateSize(true);
+				if (modal.contentWrapper && modal.contentWrapper.is(':visible') && !modal.animContent) {
 					if (fixFF)
-						modal.content.css({position: 'fixed'});
-					if ($.isFunction(currentSettings.endResize))
-						currentSettings.endResize(modal, currentSettings);
-				});
+						modal.content.css({position: ''});
+					currentSettings.resize(modal, currentSettings, function() {
+						currentSettings.windowResizing = false;
+						modal.resizing = false;
+						if (fixFF)
+							modal.content.css({position: 'fixed'});
+						if ($.isFunction(currentSettings.endResize))
+							currentSettings.endResize(modal, currentSettings);
+					});
+				}
 			}
 		}
 	};
@@ -138,7 +175,7 @@ jQuery(function($) {
 	$.nyroModalNext = function() {
 		var link = getGalleryLink(1);
 		if (link)
-			return link.nyroModalManual(currentSettings);
+			return link.nyroModalManual(getCurrentSettingsNew());
 		return false;
 	};
 
@@ -147,7 +184,7 @@ jQuery(function($) {
 	$.nyroModalPrev = function() {
 		var link = getGalleryLink(-1);
 		if (link)
-			return link.nyroModalManual(currentSettings);
+			return link.nyroModalManual(getCurrentSettingsNew());
 		return false;
 	};
 
@@ -158,6 +195,8 @@ jQuery(function($) {
 
 	$.fn.nyroModal.settings = {
 		debug: false, // Show the debug in the background
+
+		blocker: false, // Element which will be blocked by the modal
 
 		modal: false, // Esc key or click backgrdound enabling or not
 
@@ -187,28 +226,34 @@ jQuery(function($) {
 		minWidth: 400, // Minimum width
 		minHeight: 300, // Minimum height
 
-		resizeable: true, // Indicate if the content is resizable. Will be set to false for swf
+		resizable: true, // Indicate if the content is resizable. Will be set to false for swf
 		autoSizable: true, // Indicate if the content is auto sizable. If not, the min size will be used
 
-		padding: 20, // padding for the max modal size
+		padding: 25, // padding for the max modal size
 
 		regexImg: '[^\.]\.(jpg|jpeg|png|tiff|gif|bmp)\s*$', // Regex to find images
+		addImageDivTitle: true, // Indicate if the div title should be inserted
 		defaultImgAlt: 'Image', // Default alt attribute for the images
 		setWidthImgTitle: true, // Set the width to the image title
-		rtl: true, // Right to left by default. Put to false for Hebrew or Left to Right language
+		ltr: true, // Left to Right by default. Put to false for Hebrew or Right to Left language
+
+		gallery: null, // Gallery name if provided
+		galleryLinks: '<a href="#" class="nyroModalPrev">Prev</a><a href="#"  class="nyroModalNext">Next</a>', // Use .nyroModalPrev and .nyroModalNext to set the navigation link
+		galleryCounts: galleryCounts, // Callback to show the gallery count
+		
+		zIndexStart: 100,
 
 		css: { // Default CSS option for the nyroModal Div. Some will be overwritten or updated when using IE6
 			bg: {
-				zIndex: 100,
-				position: 'fixed',
+				position: 'absolute',
+				overflow: 'hidden',
 				top: 0,
 				left: 0,
 				height: '100%',
 				width: '100%'
 			},
 			wrapper: {
-				zIndex: 101,
-				position: 'fixed',
+				position: 'absolute',
 				top: '50%',
 				left: '50%'
 			},
@@ -218,8 +263,7 @@ jQuery(function($) {
 				overflow: 'auto'
 			},
 			loading: {
-				zIndex: 102,
-				position: 'fixed',
+				position: 'absolute',
 				top: '50%',
 				left: '50%',
 				marginTop: '-50px',
@@ -233,13 +277,16 @@ jQuery(function($) {
 			form: '<div class="wrapper"></div>',
 			formData: '<div class="wrapper"></div>',
 			image: '<div class="wrapperImg"></div>',
-			gallery: '<div class="wrapperImg"><a href="#" class="nyroModalPrev">Prev</a><a href="#"  class="nyroModalNext">Next</a></div>', // Use .nyroModalPrev and .nyroModalNext to set the navigation link
 			swf: '<div class="wrapperSwf"></div>',
 			iframe: '<div class="wrapperIframe"></div>',
+			iframeForm: '<div class="wrapperIframe"></div>',
 			manual: '<div class="wrapper"></div>'
 		},
 
 		closeButton: '<a href="#" class="nyroModalClose" id="closeBut" title="close">Close</a>', // Adding automaticly as the first child of #nyroModalWrapper
+
+		title: null, // Modal title
+		titleFromIframe: true, // When using iframe in the same domain, try to get the title from it
 
 		openSelector: '.nyroModal', // selector for open a new modal. will be used to parse automaticly at page loading
 		closeSelector: '.nyroModalClose', // selector to close the modal
@@ -274,7 +321,6 @@ jQuery(function($) {
 		endRemove: null // Will be called once the modal is totally gone
 	};
 
-
 	// -------------------------------------------------------
 	// Private function
 	// -------------------------------------------------------
@@ -286,10 +332,13 @@ jQuery(function($) {
 		debug('processModal');
 		modal.started = true;
 		setDefaultCurrentSettings(settings);
+		if (!modal.full)
+			modal.blockerVars = modal.blocker = null;
 		modal.error = false;
 		modal.closing = false;
 		modal.dataReady = false;
 		modal.scripts = new Array();
+		modal.scriptsShown = new Array();
 
 		currentSettings.type = fileType();
 
@@ -299,9 +348,11 @@ jQuery(function($) {
 		from = currentSettings.from;
 		url = currentSettings.url;
 
+		initSettingsSize.width = currentSettings.width;
+		initSettingsSize.height = currentSettings.height;
+
 		if (currentSettings.type == 'swf') {
 			// Swf is transforming as a raw content
-			currentSettings.resizable = false;
 			setCurrentSettings({overflow: 'hidden'}, 'css', 'content');
 			currentSettings.content = '<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="'+currentSettings.width+'" height="'+currentSettings.height+'"><param name="movie" value="'+url+'"></param>';
 			var tmp = '';
@@ -313,6 +364,7 @@ jQuery(function($) {
 		}
 
 		if (from) {
+			var jFrom = $(from);
 			if (currentSettings.type == 'form') {
 				var data = $(from).serializeArray();
 				data.push({name: currentSettings.formIndicator, value: 1});
@@ -321,21 +373,21 @@ jQuery(function($) {
 				$.ajax($.extend({}, currentSettings.ajax, {
 						url: url,
 						data: data,
-						type: from.method,
+						type: jFrom.attr('method') ? jFrom.attr('method') : 'get',
 						success: ajaxLoaded,
 						error: loadingError
 					}));
-				debug('Form Ajax Load: '+from.action);
+				debug('Form Ajax Load: '+jFrom.attr('action'));
 				showModal();
 			} else if (currentSettings.type == 'formData') {
 				// Form with data. We're using a hidden iframe
 				initModal();
-				from.target = 'nyroModalIframe';
-				from.action = url;
-				$(from).prepend('<input type="hidden" name="'+currentSettings.formIndicator+'" value="1" />');
+				jFrom.attr('target', 'nyroModalIframe');
+				jFrom.attr('action', url);
+				jFrom.prepend('<input type="hidden" name="'+currentSettings.formIndicator+'" value="1" />');
 				if (currentSettings.selector)
-					$(from).prepend('<input type="hidden" name="'+currentSettings.selIndicator+'" value="'+currentSettings.selector.substring(1)+'" />');
-				modal.tmp.html('<iframe frameborder="0" hspace="0" name="nyroModalIframe"></iframe>');
+					jFrom.prepend('<input type="hidden" name="'+currentSettings.selIndicator+'" value="'+currentSettings.selector.substring(1)+'" />');
+				modal.tmp.html('<iframe frameborder="0" hspace="0" name="nyroModalIframe" src="javascript:false;"></iframe>');
 				$('iframe', modal.tmp)
 					.css({
 						width: currentSettings.width,
@@ -343,14 +395,15 @@ jQuery(function($) {
 					})
 					.error(loadingError)
 					.load(formDataLoaded);
-				debug('Form Data Load: '+from.action);
+				debug('Form Data Load: '+jFrom.attr('action'));
 				showModal();
 				showContentOrLoading();
-			} else if (currentSettings.type == 'image' || currentSettings.type == 'gallery') {
-				var title = from.title || currentSettings.defaultImgAlt;
+			} else if (currentSettings.type == 'image') {
+				debug('Image Load: '+url);
+				var title = jFrom.attr('title') || currentSettings.defaultImgAlt;
 				initModal();
 				modal.tmp.html('<img id="nyroModalImg" />').find('img').attr('alt', title);
-				debug('Image Load: '+url);
+				modal.tmp.css({lineHeight: 0});
 				$('img', modal.tmp)
 					.error(loadingError)
 					.load(function() {
@@ -358,12 +411,17 @@ jQuery(function($) {
 						$(this).unbind('load');
 						var w = modal.tmp.width();
 						var h = modal.tmp.height();
+						modal.tmp.css({lineHeight: ''});
+						resized.width = w;
+						resized.height = h;
 						setCurrentSettings({
 							width: w,
 							height: h,
 							imgWidth: w,
 							imgHeight: h
 						});
+						initSettingsSize.width = w;
+						initSettingsSize.height = h;
 						setCurrentSettings({overflow: 'hidden'}, 'css', 'content');
 						modal.dataReady = true;
 						if (modal.loadingShown || modal.transition)
@@ -371,16 +429,34 @@ jQuery(function($) {
 					})
 					.attr('src', url);
 				showModal();
+			} else if (currentSettings.type == 'iframeForm') {
+				initModal();
+				modal.tmp.html('<iframe frameborder="0" hspace="0" src="javascript:false;" name="nyroModalIframe" id="nyroModalIframe"></iframe>');
+				debug('Iframe Form Load: '+url);
+				$('iframe', modal.tmp).eq(0)
+					.css({
+						width: '100%',
+						height: $.support.boxModel? '99%' : '100%'
+					})
+					.load(function(e) {
+						if (currentSettings.titleFromIframe && url.indexOf(window.location.hostname) > -1)
+							$.nyroModalSettings({title: $('iframe', modal.full).contents().find('title').text()});
+					});
+				modal.dataReady = true;
+				showModal();
 			} else if (currentSettings.type == 'iframe') {
 				initModal();
-				modal.tmp.html('<iframe frameborder="0" hspace="0" src="'+url+'" name="nyroModalIframe"></iframe>');
+				modal.tmp.html('<iframe frameborder="0" hspace="0" src="'+url+'" name="nyroModalIframe" id="nyroModalIframe"></iframe>');
 				debug('Iframe Load: '+url);
 				$('iframe', modal.tmp).eq(0)
 					.css({
 						width: '100%',
-						height: '100%'
+						height: $.support.boxModel? '99%' : '100%'
+					})
+					.load(function(e) {
+						if (currentSettings.titleFromIframe && url.indexOf(window.location.hostname) > -1)
+							$.nyroModalSettings({title: $('iframe', modal.full).contents().find('title').text()});
 					});
-				currentSettings.autoSizable = false;
 				modal.dataReady = true;
 				showModal();
 			} else if (currentSettings.type) {
@@ -400,6 +476,8 @@ jQuery(function($) {
 					contentElt = div;
 					modal.tmp.append(div.contents());
 				}
+				initSettingsSize.width = w;
+				initSettingsSize.height = h;
 				setCurrentSettings({
 					width: w,
 					height: h
@@ -408,17 +486,22 @@ jQuery(function($) {
 					modal.dataReady = true;
 				else
 					loadingError();
-				showModal();
-				showContentOrLoading();
+				if (!modal.ready)
+					showModal();
+				else
+					endHideContent();
 			} else {
 				debug('Ajax Load: '+url);
 				setCurrentSettings({type: 'ajax'});
-				var data = {};
+				var data = currentSettings.ajax.data || {};
 				if (currentSettings.selector) {
-					data = currentSettings.ajax.data || {};
-					data[currentSettings.selIndicator] = currentSettings.selector.substring(1);
+					if (typeof data == "string") {
+						data+= '&'+currentSettings.selIndicator+'='+currentSettings.selector.substring(1);
+					} else {
+						data[currentSettings.selIndicator] = currentSettings.selector.substring(1);
+					}
 				}
-				$.ajax($.extend({}, currentSettings.ajax, {
+				$.ajax($.extend(true, currentSettings.ajax, {
 					url: url,
 					success: ajaxLoaded,
 					error: loadingError,
@@ -448,7 +531,7 @@ jQuery(function($) {
 	// string deep2 second key where overwrite the settings
 	function setDefaultCurrentSettings(settings) {
 		debug('setDefaultCurrentSettings');
-		currentSettings = $.extend({}, $.fn.nyroModal.settings, settings);
+		currentSettings = $.extend(true, {}, $.fn.nyroModal.settings, settings);
 		currentSettings.selector = '';
 		currentSettings.borderW = 0;
 		currentSettings.borderH = 0;
@@ -459,26 +542,42 @@ jQuery(function($) {
 	function setCurrentSettings(settings, deep1, deep2) {
 		if (modal.started) {
 			if (deep1 && deep2) {
-				$.extend(currentSettings[deep1][deep2], settings);
+				$.extend(true, currentSettings[deep1][deep2], settings);
 			} else if (deep1) {
-				$.extend(currentSettings[deep1], settings);
+				$.extend(true, currentSettings[deep1], settings);
 			} else {
-				$.extend(currentSettings, settings);
+				if (modal.animContent) {
+					if ('width' in settings) {
+						if (!modal.resizing) {
+							settings.setWidth = settings.width;
+							shouldResize = true;
+						}
+						delete settings['width'];
+					}
+					if ('height' in settings) {
+						if (!modal.resizing) {
+							settings.setHeight = settings.height;
+							shouldResize = true;
+						}
+						delete settings['height'];
+					}
+				}
+				$.extend(true, currentSettings, settings);
 			}
 		} else {
 			if (deep1 && deep2) {
-				$.extend($.fn.nyroModal.settings[deep1][deep2], settings);
+				$.extend(true, $.fn.nyroModal.settings[deep1][deep2], settings);
 			} else if (deep1) {
-				$.extend($.fn.nyroModal.settings[deep1], settings);
+				$.extend(true, $.fn.nyroModal.settings[deep1], settings);
 			} else {
-				$.extend($.fn.nyroModal.settings, settings);
+				$.extend(true, $.fn.nyroModal.settings, settings);
 			}
 		}
 	}
 
 	// Set the margin for postionning the element. Useful for IE6
 	function setMarginScroll() {
-		if (isIE6) {
+		if (isIE6 && !modal.blocker) {
 			if (document.documentElement) {
 				currentSettings.marginScrollLeft = document.documentElement.scrollLeft;
 				currentSettings.marginScrollTop = document.documentElement.scrollTop;
@@ -495,16 +594,33 @@ jQuery(function($) {
 	// Set the margin for the content
 	function setMargin() {
 		setMarginScroll();
-		currentSettings.marginLeft = -(currentSettings.width+currentSettings.borderW)/2 + currentSettings.marginScrollLeft;
-		currentSettings.marginTop = -(currentSettings.height+currentSettings.borderH)/2 + currentSettings.marginScrollTop;
+		currentSettings.marginLeft = -(currentSettings.width+currentSettings.borderW)/2;
+		currentSettings.marginTop = -(currentSettings.height+currentSettings.borderH)/2;
+		if (!modal.blocker) {
+			currentSettings.marginLeft+= currentSettings.marginScrollLeft;
+			currentSettings.marginTop+= currentSettings.marginScrollTop;
+		}
 	}
 
 	// Set the margin for the current loading
-	function setMarginloading() {
+	function setMarginLoading() {
 		setMarginScroll();
 		var outer = getOuter(modal.loading);
-		currentSettings.marginTopLoading = -(modal.loading.height() + outer.h.border + outer.h.padding)/2 + currentSettings.marginScrollTop;
-		currentSettings.marginLeftLoading = -(modal.loading.width() + outer.w.border + outer.w.padding)/2 + currentSettings.marginScrollLeft;
+		currentSettings.marginTopLoading = -(modal.loading.height() + outer.h.border + outer.h.padding)/2;
+		currentSettings.marginLeftLoading = -(modal.loading.width() + outer.w.border + outer.w.padding)/2;
+		if (!modal.blocker) {
+			currentSettings.marginLefttLoading+= currentSettings.marginScrollLeft;
+			currentSettings.marginTopLoading+= currentSettings.marginScrollTop;
+		}
+	}
+
+	// Set the modal Title
+	function setTitle() {
+		var title = $('h1#nyroModalTitle', modal.contentWrapper);
+		if (title.length)
+			title.text(currentSettings.title);
+		else
+			modal.contentWrapper.prepend('<h1 id="nyroModalTitle">'+currentSettings.title+'</h1>');
 	}
 
 	// Init the nyroModal div by settings the CSS elements and hide needed elements
@@ -514,8 +630,46 @@ jQuery(function($) {
 			if (currentSettings.debug)
 				setCurrentSettings({color: 'white'}, 'css', 'bg');
 
+			var full = {
+				zIndex: currentSettings.zIndexStart,
+				position: 'fixed',
+				top: 0,
+				left: 0,
+				width: '100%',
+				height: '100%'
+			};
+
+			var contain = body;
 			var iframeHideIE = '';
-			if (isIE6) {
+			if (currentSettings.blocker) {
+				modal.blocker = contain = $(currentSettings.blocker);
+				var pos = modal.blocker.offset();
+				var w = modal.blocker.outerWidth();
+				var h = modal.blocker.outerHeight();
+				if (isIE6) {
+					setCurrentSettings({
+						height: '100%',
+						width: '100%',
+						top: 0,
+						left: 0
+					}, 'css', 'bg');
+				}
+				modal.blockerVars = {
+					top: pos.top,
+					left: pos.left,
+					width: w,
+					height: h
+				};
+				var plusTop = (/msie/.test(userAgent) ?0:getCurCSS(body.get(0), 'borderTopWidth'));
+				var plusLeft = (/msie/.test(userAgent) ?0:getCurCSS(body.get(0), 'borderLeftWidth'));
+				full = {
+					position: 'absolute',
+					top: pos.top + plusTop,
+					left: pos.left + plusLeft,
+					width: w,
+					height: h
+				};
+			} else if (isIE6) {
 				body.css({
 					height: body.height()+'px',
 					width: body.width()+'px',
@@ -524,15 +678,19 @@ jQuery(function($) {
 				});
 				$('html').css({overflow: 'hidden'});
 				setCurrentSettings({
-					position: 'absolute',
-					height: '110%',
-					width: '110%',
-					top: currentSettings.marginScrollTop+'px',
-					left: currentSettings.marginScrollLeft+'px'
-				}, 'css', 'bg');
-
-				setCurrentSettings({position: 'absolute'}, 'css', 'loading');
-				setCurrentSettings({position: 'absolute'}, 'css', 'wrapper');
+					css: {
+						bg: {
+							position: 'absolute',
+							zIndex: currentSettings.zIndexStart+1,
+							height: '110%',
+							width: '110%',
+							top: currentSettings.marginScrollTop+'px',
+							left: currentSettings.marginScrollLeft+'px'
+						},
+						wrapper: { zIndex: currentSettings.zIndexStart+2 },
+						loading: { zIndex: currentSettings.zIndexStart+3 }
+					}
+				});
 
 				iframeHideIE = $('<iframe id="nyroModalIframeHideIe"></iframe>')
 								.css($.extend({},
@@ -543,9 +701,11 @@ jQuery(function($) {
 									}));
 			}
 
-			body.append($('<div id="nyroModalFull"><div id="nyroModalBg"></div><div id="nyroModalWrapper"><div id="nyroModalContent"></div></div><div id="nyrModalTmp"></div><div id="nyroModalLoading"></div></div>').hide());
+			contain.append($('<div id="nyroModalFull"><div id="nyroModalBg"></div><div id="nyroModalWrapper"><div id="nyroModalContent"></div></div><div id="nyrModalTmp"></div><div id="nyroModalLoading"></div></div>').hide());
 
-			modal.full = $('#nyroModalFull').show();
+			modal.full = $('#nyroModalFull')
+				.css(full)
+				.show();
 			modal.bg = $('#nyroModalBg')
 				.css($.extend({
 						backgroundColor: currentSettings.bgColor
@@ -574,10 +734,21 @@ jQuery(function($) {
 				});
 			}
 
-			$(document).keydown(keyHandler);
+			$(document).bind('keydown.nyroModal', keyHandler);
 			modal.content.css({width: 'auto', height: 'auto'});
 			modal.contentWrapper.css({width: 'auto', height: 'auto'});
+			
+			if (!currentSettings.blocker) {
+				$(window).bind('resize.nyroModal', function() {
+					window.clearTimeout(windowResizeTimeout);
+					windowResizeTimeout = window.setTimeout(windowResizeHandler, 200);
+				});
+			}
 		}
+	}
+	
+	function windowResizeHandler() {
+		$.nyroModalSettings(initSettingsSize);
 	}
 
 	// Show the modal (ie: the background and then the loading if needed or the content directly)
@@ -599,14 +770,14 @@ jQuery(function($) {
 		if (e.keyCode == 27) {
 			if (!currentSettings.modal)
 				removeModal();
-		} else if (currentSettings.type == 'gallery' && modal.ready && modal.dataReady && !modal.anim && !modal.transition) {
+		} else if (currentSettings.gallery && modal.ready && modal.dataReady && !modal.anim && !modal.transition) {
 			if (e.keyCode == 39 || e.keyCode == 40) {
 				e.preventDefault();
-				$('.nyroModalNext', modal.content).eq(0).trigger('click');
+				$.nyroModalNext();
 				return false;
 			} else if (e.keyCode == 37 || e.keyCode == 38) {
 				e.preventDefault();
-				$('.nyroModalPrev', modal.content).eq(0).trigger('click');
+				$.nyroModalPrev();
 				return false;
 			}
 		}
@@ -627,19 +798,42 @@ jQuery(function($) {
 		var url;
 
 		if (from && from.nodeName) {
-			currentSettings.url = url = from.nodeName.toLowerCase() == 'form'? from.action : from.href;
+			var jFrom = $(from);
+			
+			url = jFrom.attr(from.nodeName.toLowerCase() == 'form' ? 'action' : 'href');
+			if (!url)
+				url = location.href.substring(window.location.host.length+7);
+			currentSettings.url = url;
 
-			if (from.rev == 'modal')
+			if (jFrom.attr('rev') == 'modal')
 				currentSettings.modal = true;
 
+			currentSettings.title = jFrom.attr('title');
+
+			if (from && from.rel && from.rel.toLowerCase() != 'nofollow')
+				currentSettings.gallery = from.rel;
+
+			var imgType = imageType(url, from);
+			if (imgType)
+				return imgType;
+			
+			if (isSwf(url))
+				return 'swf';
+
+			var iframe = false;
 			if (from.target && from.target.toLowerCase() == '_blank' || (from.hostname && from.hostname.replace(/:\d*$/,'') != window.location.hostname.replace(/:\d*$/,''))) {
-				return 'iframe';
-			} else if (from.nodeName.toLowerCase() == 'form') {
+				iframe = true;
+			}
+			if (from.nodeName.toLowerCase() == 'form') {
+				if (iframe)
+					return 'iframeForm';
 				setCurrentSettings(extractUrlSel(url));
-				if (from.enctype == 'multipart/form-data')
+				if (jFrom.attr('enctype') == 'multipart/form-data')
 					return 'formData';
 				return 'form';
 			}
+			if (iframe)
+				return 'iframe';
 		} else {
 			url = currentSettings.url;
 			if (!currentSettings.content)
@@ -647,29 +841,36 @@ jQuery(function($) {
 
 			if (!url)
 				return null;
+				
+			if (isSwf(url))
+				return 'swf';
 
 			var reg1 = new RegExp("^http://", "g");
 			if (url.match(reg1))
 				return 'iframe';
 		}
 
-		var image = new RegExp(currentSettings.regexImg, 'i');
-		if (image.test(url)) {
-			if (from && from.rel)
-				return 'gallery';
-			else
-				return 'image';
-		}
-
-		var swf = new RegExp('[^\.]\.(swf)\s*$', 'i');
-		if (swf.test(url))
-			return 'swf';
+		var imgType = imageType(url, from);
+		if (imgType)
+			return imgType;
 
 		var tmp = extractUrlSel(url);
 		setCurrentSettings(tmp);
 
 		if (!tmp.url)
 			return tmp.selector;
+	}
+
+	function imageType(url, from) {
+		var image = new RegExp(currentSettings.regexImg, 'i');
+		if (image.test(url)) {
+			return 'image';
+		}
+	}
+	
+	function isSwf(url) {
+		var swf = new RegExp('[^\.]\.(swf)\s*$', 'i');
+		return swf.test(url);
 	}
 
 	function extractUrlSel(url) {
@@ -709,8 +910,10 @@ jQuery(function($) {
 		modal.loading
 			.addClass(currentSettings.errorClass)
 			.html(currentSettings.contentError);
-		$(currentSettings.closeSelector, modal.loading).click(removeModal);
-		setMarginloading();
+		$(currentSettings.closeSelector, modal.loading)
+			.unbind('click.nyroModal')
+			.bind('click.nyroModal', removeModal);
+		setMarginLoading();
 		modal.loading
 			.css({
 				marginTop: currentSettings.marginTopLoading+'px',
@@ -728,18 +931,42 @@ jQuery(function($) {
 		modal.tmp.empty();
 		wrapContent();
 
+		if (currentSettings.type == 'iframeForm') {
+			$(currentSettings.from)
+				.attr('target', 'nyroModalIframe')
+				.data('nyroModalprocessing', 1)
+				.submit()
+				.attr('target', '_blank')
+				.removeData('nyroModalprocessing');
+		}
+		
+		if (!currentSettings.modal)
+			modal.wrapper.prepend(currentSettings.closeButton);
+				
 		if ($.isFunction(currentSettings.endFillContent))
 			currentSettings.endFillContent(modal, currentSettings);
 
 		modal.content.append(modal.scripts);
 
-		var currentSettingsNew = $.extend({}, currentSettings);
+		$(currentSettings.closeSelector, modal.contentWrapper)
+			.unbind('click.nyroModal')
+			.bind('click.nyroModal', removeModal);
+		$(currentSettings.openSelector, modal.contentWrapper).nyroModal(getCurrentSettingsNew());
+	}
+
+	// Get the current settings to be used in new links
+	function getCurrentSettingsNew() {
+		var currentSettingsNew = $.extend(true, {}, currentSettings);
 		if (resized.width)
 			currentSettingsNew.width = null;
+		else
+			currentSettingsNew.width = initSettingsSize.width;
 		if (resized.height)
 			currentSettingsNew.height = null;
-		$(currentSettings.closeSelector, modal.contentWrapper).click(removeModal);
-		$(currentSettings.openSelector, modal.contentWrapper).nyroModal(currentSettingsNew);
+		else
+			currentSettingsNew.height = initSettingsSize.height;
+		currentSettingsNew.css.content.overflow = 'auto';
+		return currentSettingsNew;
 	}
 
 	// Wrap the content and update the modal size if needed
@@ -750,48 +977,77 @@ jQuery(function($) {
 		modal.content.append(wrap.children().remove());
 		modal.contentWrapper.wrapInner(wrap);
 
-		if (currentSettings.type == 'gallery') {
+		if (currentSettings.gallery) {
 			// Set the action for the next and prev button (or remove them)
+			modal.content.append(currentSettings.galleryLinks);
+			
+			gallery.links = $('[rel="'+currentSettings.gallery+'"]');
+			gallery.index = gallery.links.index(currentSettings.from);
+			
+			if (currentSettings.galleryCounts && $.isFunction(currentSettings.galleryCounts))
+				currentSettings.galleryCounts(gallery.index + 1, gallery.links.length, modal, currentSettings);
+
+			var currentSettingsNew = getCurrentSettingsNew();
 
 			var linkPrev = getGalleryLink(-1);
 			if (linkPrev) {
-				$('.nyroModalPrev', modal.contentWrapper)
+				var prev = $('.nyroModalPrev', modal.contentWrapper)
 					.attr('href', linkPrev.attr('href'))
 					.click(function(e) {
 						e.preventDefault();
-						linkPrev.nyroModalManual(currentSettings);
+						$.nyroModalPrev();
 						return false;
 					});
+				if (isIE6 && currentSettings.type == 'swf') {
+					prev.before($('<iframe id="nyroModalIframeHideIeGalleryPrev"></iframe>').css({
+											position: prev.css('position'),
+											top: prev.css('top'),
+											left: prev.css('left'),
+											width: prev.width(),
+											height: prev.height(),
+											opacity: 0,
+											border: 'none'
+										}));
+				}
 			} else {
 				$('.nyroModalPrev', modal.contentWrapper).remove();
 			}
 			var linkNext = getGalleryLink(1);
 			if (linkNext) {
-				$('.nyroModalNext', modal.contentWrapper)
+				var next = $('.nyroModalNext', modal.contentWrapper)
 					.attr('href', linkNext.attr('href'))
 					.click(function(e) {
 						e.preventDefault();
-						linkNext.nyroModalManual(currentSettings);
+						$.nyroModalNext();
 						return false;
 					});
+				if (isIE6 && currentSettings.type == 'swf') {
+					next.before($('<iframe id="nyroModalIframeHideIeGalleryNext"></iframe>')
+									.css($.extend({}, {
+											position: next.css('position'),
+											top: next.css('top'),
+											left: next.css('left'),
+											width: next.width(),
+											height: next.height(),
+											opacity: 0,
+											border: 'none'
+										})));
+				}
 			} else {
 				$('.nyroModalNext', modal.contentWrapper).remove();
 			}
 		}
-
+		
 		calculateSize();
 	}
-
+	
 	function getGalleryLink(dir) {
-		if (currentSettings.type == 'gallery') {
-			if (!currentSettings.rtl)
+		if (currentSettings.gallery) {
+			if (!currentSettings.ltr)
 				dir *= -1;
-			// next
-			var gallery = $('[rel="'+currentSettings.from.rel+'"]');
-			var currentIndex = gallery.index(currentSettings.from);
-			var index = currentIndex + dir;
-			if (index >= 0 && index < gallery.length)
-				return gallery.eq(index);
+			var index = gallery.index + dir;
+			if (index >= 0 && index < gallery.links.length)
+				return gallery.links.eq(index);
 		}
 		return false;
 	}
@@ -800,35 +1056,57 @@ jQuery(function($) {
 	function calculateSize(resizing) {
 		debug('calculateSize');
 
-		if (!modal.wrapper)
-			modal.wrapper = modal.contentWrapper.children(':first');
+		modal.wrapper = modal.contentWrapper.children('div:first');
 
 		resized.width = false;
 		resized.height = false;
+		if (false && !currentSettings.windowResizing) {
+			initSettingsSize.width = currentSettings.width;
+			initSettingsSize.height = currentSettings.height;
+		}
+		
 		if (currentSettings.autoSizable && (!currentSettings.width || !currentSettings.height)) {
-			modal.contentWrapper.css({opacity: 0}).show();
+			modal.contentWrapper
+				.css({
+					opacity: 0,
+					width: 'auto',
+					height: 'auto'
+				})
+				.show();
 			var tmp = {
 				width: 'auto',
 				height: 'auto'
 			};
-			if (currentSettings.width)
+			if (currentSettings.width) {
 				tmp.width = currentSettings.width;
-			if (currentSettings.height)
-				tmp.height = currentSettings.height;
+			} else if (currentSettings.type == 'iframe') {
+				tmp.width = currentSettings.minWidth;
+			}
+				
+			if (currentSettings.height) {
+				tmp.height = currentSettings.height
+			} else if (currentSettings.type == 'iframe') {
+				tmp.height = currentSettings.minHeight;
+			}
+			
 			modal.content.css(tmp);
 			if (!currentSettings.width) {
-				currentSettings.width = modal.content.width();
+				currentSettings.width = modal.content.outerWidth(true);
 				resized.width = true;
 			}
 			if (!currentSettings.height) {
-				currentSettings.height = modal.content.height();
+				currentSettings.height = modal.content.outerHeight(true);
 				resized.height = true;
 			}
-			modal.contentWrapper.hide().css({opacity: 1});
+			modal.contentWrapper.css({opacity: 1});
+			if (!resizing)
+				modal.contentWrapper.hide();
 		}
 
-		currentSettings.width = Math.max(currentSettings.width, currentSettings.minWidth);
-		currentSettings.height = Math.max(currentSettings.height, currentSettings.minHeight);
+		if (currentSettings.type != 'image' && currentSettings.type != 'swf') {
+			currentSettings.width = Math.max(currentSettings.width, currentSettings.minWidth);
+			currentSettings.height = Math.max(currentSettings.height, currentSettings.minHeight);
+		}
 
 		var outerWrapper = getOuter(modal.contentWrapper);
 		var outerWrapper2 = getOuter(modal.wrapper);
@@ -850,33 +1128,30 @@ jQuery(function($) {
 		};
 
 		if (currentSettings.resizable) {
-			var maxHeight = $(window).height()
-					- currentSettings.padding*2
-					- outerWrapper.h.border
-					- (tmp.wrapper.height - currentSettings.height);
-			var maxWidth = $(window).width()
-					- currentSettings.padding*2
-					- outerWrapper.w.border
-					- (tmp.wrapper.width - currentSettings.width);
+			var maxHeight = modal.blockerVars? modal.blockerVars.height : $(window).height()
+								- outerWrapper.h.border
+								- (tmp.wrapper.height - currentSettings.height);
+			var maxWidth = modal.blockerVars? modal.blockerVars.width : $(window).width()
+								- outerWrapper.w.border
+								- (tmp.wrapper.width - currentSettings.width);
+			maxHeight-= currentSettings.padding*2;
+			maxWidth-= currentSettings.padding*2;
 
 			if (tmp.content.height > maxHeight || tmp.content.width > maxWidth) {
 				// We're gonna resize the modal as it will goes outside the view port
-				if (currentSettings.type == 'image' || currentSettings.type == 'gallery') {
+				if (currentSettings.type == 'image' || currentSettings.type == 'swf') {
 					// An image is resized proportionnaly
-					var diffW = tmp.content.width - currentSettings.imgWidth;
-					var diffH = tmp.content.height - currentSettings.imgHeight;
+					var useW = currentSettings.imgWidth?currentSettings.imgWidth : currentSettings.width;
+					var useH = currentSettings.imgHeight?currentSettings.imgHeight : currentSettings.height;
+					var diffW = tmp.content.width - useW;
+					var diffH = tmp.content.height - useH;
 						if (diffH < 0) diffH = 0;
 						if (diffW < 0) diffW = 0;
 					var calcH = maxHeight - diffH;
 					var calcW = maxWidth - diffW;
-					var ratio = Math.min(calcH/currentSettings.imgHeight, calcW/currentSettings.imgWidth);
-
-					calcH = Math.floor(currentSettings.imgHeight*ratio);
-					calcW = Math.floor(currentSettings.imgWidth*ratio);
-					$('img#nyroModalImg', modal.content).css({
-						height: calcH+'px',
-						width: calcW+'px'
-					});
+					var ratio = Math.min(calcH/useH, calcW/useW);
+					calcW = Math.floor(useW*ratio);
+					calcH = Math.floor(useH*ratio);
 					tmp.content.height = calcH + diffH;
 					tmp.content.width = calcW + diffW;
 				} else {
@@ -894,29 +1169,45 @@ jQuery(function($) {
 					};
 			}
 		}
+		
+		if (currentSettings.type == 'swf') {
+			$('object, embed', modal.content)
+				.attr('width', tmp.content.width)
+				.attr('height', tmp.content.height);
+		} else if (currentSettings.type == 'image') {
+			$('img', modal.content).css({
+				width: tmp.content.width,
+				height: tmp.content.height
+			});
+		}
 
 		modal.content.css($.extend({}, tmp.content, currentSettings.css.content));
 		modal.wrapper.css($.extend({}, tmp.wrapper2, currentSettings.css.wrapper2));
 
-		if (!resizing) {
+		if (!resizing)
 			modal.contentWrapper.css($.extend({}, tmp.wrapper, currentSettings.css.wrapper));
-			if (currentSettings.type == 'image' || currentSettings.type == 'gallery') {
-				// Adding the title for the image
-				var title = $('img', modal.content).attr('alt');
-				$('img', modal.content).removeAttr('alt');
-				if (title != currentSettings.defaultImgAlt) {
-					var divTitle = $('<div>'+title+'</div>');
-					modal.content.append(divTitle);
-					if (currentSettings.setWidthImgTitle) {
-						var outerDivTitle = getOuter(divTitle);
-						divTitle.css({width: (tmp.content.width + outerContent.w.padding - outerDivTitle.w.total)+'px'});
-					}
-				}
-			}
 
-			if (!currentSettings.modal)
-				modal.contentWrapper.prepend(currentSettings.closeButton);
+		if (currentSettings.type == 'image' && currentSettings.addImageDivTitle) {
+			// Adding the title for the image
+			$('img', modal.content).removeAttr('alt');
+			var divTitle = $('div', modal.content);
+			if (currentSettings.title != currentSettings.defaultImgAlt && currentSettings.title) {
+				if (divTitle.length == 0) {
+					divTitle = $('<div>'+currentSettings.title+'</div>');
+					modal.content.append(divTitle);
+				}
+				if (currentSettings.setWidthImgTitle) {
+					var outerDivTitle = getOuter(divTitle);
+					divTitle.css({width: (tmp.content.width + outerContent.w.padding - outerDivTitle.w.total)+'px'});
+				}
+			} else if (divTitle.length = 0) {
+				divTitle.remove();
+			}
 		}
+
+		if (currentSettings.title)
+			setTitle();
+
 		tmp.wrapper.borderW = outerWrapper.w.border;
 		tmp.wrapper.borderH = outerWrapper.h.border;
 
@@ -929,6 +1220,9 @@ jQuery(function($) {
 		if (e)
 			e.preventDefault();
 		if (modal.full && modal.ready) {
+			$(document).unbind('keydown.nyroModal');
+			if (!currentSettings.blocker)
+				$(window).unbind('resize.nyroModal');
 			modal.ready = false;
 			modal.anim = true;
 			modal.closing = true;
@@ -971,6 +1265,7 @@ jQuery(function($) {
 					modal.anim = true;
 					if (modal.transition) {
 						fillContent();
+						modal.animContent = true;
 						currentSettings.hideTransition(modal, currentSettings, function() {
 							modal.loading.hide();
 							modal.transition = false;
@@ -982,8 +1277,10 @@ jQuery(function($) {
 								modal.loading.hide();
 								modal.loadingShown = false;
 								fillContent();
-								setMarginloading();
-								currentSettings.showContent(modal, $.extend({}, currentSettings), endShowContent);
+								setMarginLoading();
+								setMargin();
+								modal.animContent = true;
+								currentSettings.showContent(modal, currentSettings, endShowContent);
 							});
 					}
 				}
@@ -994,8 +1291,10 @@ jQuery(function($) {
 					loadingError();
 				else
 					modal.loading.html(currentSettings.contentLoading);
-				$(currentSettings.closeSelector, modal.loading).click(removeModal);
-				setMarginloading();
+				$(currentSettings.closeSelector, modal.loading)
+					.unbind('click.nyroModal')
+					.bind('click.nyroModal', removeModal);
+				setMarginLoading();
 				currentSettings.showLoading(modal, currentSettings, function(){modal.anim=false;showContentOrLoading();});
 			}
 		}
@@ -1020,8 +1319,9 @@ jQuery(function($) {
 
 	function formDataLoaded() {
 		debug('formDataLoaded');
-		currentSettings.from.action += currentSettings.selector;
-		currentSettings.from.target = '';
+		var jFrom = $(currentSettings.from);
+		jFrom.attr('action', jFrom.attr('action')+currentSettings.selector);
+		jFrom.attr('target', '');
 		$('input[name='+currentSettings.formIndicator+']', currentSettings.from).remove();
 		var iframe = modal.tmp.children('iframe');
 		var iframeContent = iframe.unbind('load').contents().find(currentSettings.selector || 'body').not('script[src]');
@@ -1032,6 +1332,10 @@ jQuery(function($) {
 			showContentOrLoading();
 		} else
 			loadingError();
+	}
+	
+	function galleryCounts(nb, total, elts, settings) {
+		settings.title+= (settings.title?' - ':'') +nb+'/'+total;
 	}
 
 
@@ -1044,15 +1348,16 @@ jQuery(function($) {
 		modal.anim = false;
 		if (contentEltLast) {
 			contentEltLast.append(modal.content.contents());
-			contentEltLast= null;
+			contentEltLast = null;
 		} else if (contentElt) {
 			contentElt.append(modal.content.contents());
 			contentElt= null;
 		}
 		modal.content.empty();
-		modal.contentWrapper
-			.empty()
-			.removeAttr('style');
+		
+		gallery = {};
+		
+		modal.contentWrapper.hide().children().remove().empty().attr('style', '').hide();
 
 		if (modal.closing || modal.transition)
 			modal.contentWrapper.hide();
@@ -1087,12 +1392,49 @@ jQuery(function($) {
 	function endShowContent() {
 		debug('endShowContent');
 		modal.anim = false;
+		modal.animContent = false;
 		modal.contentWrapper.css({opacity: ''}); // for the close button in IE
-		fixFF = $.browser.mozilla && parseFloat($.browser.version) < 1.9 && currentSettings.type != 'gallery' && currentSettings.type != 'image';
+		fixFF = /mozilla/.test(userAgent) && !/(compatible|webkit)/.test(userAgent) && parseFloat(browserVersion) < 1.9 && currentSettings.type != 'image';
 		if (fixFF)
 			modal.content.css({position: 'fixed'}); // Fix Issue #10
+		modal.content.append(modal.scriptsShown);
+		if (currentSettings.autoSizable && currentSettings.type == 'iframe') {
+		//*
+			var iframe = modal.content.find('iframe');
+			if (iframe.length && iframe.attr('src').indexOf(window.location.hostname) !== -1) {
+				var body = iframe.contents().find('body');
+			
+				if (body.height() > 0) {
+					var h = body.outerHeight(true)+1;
+					var w = body.outerWidth(true)+1;
+					$.nyroModalSettings({
+						height: h,
+						width: w
+					});
+				} else {
+					iframe.bind('load', function() {
+						var body = iframe.contents().find('body');
+						if (body.length && body.height() > 0) {
+							var h = body.outerHeight(true)+1;
+							var w = body.outerWidth(true)+1;
+							$.nyroModalSettings({
+								height: h,
+								width: w
+							});
+						}
+					});
+				}
+			}
+		// */
+		}
 		if ($.isFunction(currentSettings.endShowContent))
 			currentSettings.endShowContent(modal, currentSettings);
+		if (shouldResize) {
+			shouldResize = false;
+			$.nyroModalSettings({width: currentSettings.setWidth, height: currentSettings.setHeight});
+			delete currentSettings['setWidth'];
+			delete currentSettings['setHeight'];
+		}
 		if (resized.width)
 			setCurrentSettings({width: null});
 		if (resized.height)
@@ -1122,8 +1464,12 @@ jQuery(function($) {
 		var tmp = new Array();
 		$.each($.clean({0:data}, this.ownerDocument), function() {
 			if ($.nodeName(this, "script")) {
-				if (!this.src || $(this).attr('rel') == 'forceLoad')
-					modal.scripts.push(this);
+				if (!this.src || $(this).attr('rel') == 'forceLoad') {
+					if ($(this).attr('rev') == 'shown')
+						modal.scriptsShown.push(this);
+					else
+						modal.scripts.push(this);
+				}
 			} else
 				tmp.push(this);
 		});
@@ -1165,11 +1511,10 @@ jQuery(function($) {
 		return ret;
 	}
 
-	// Show the message in the background if possible.
+	// Proxy Debug function
 	function debug(msg) {
-		//alert(msg);
-		if (currentSettings && currentSettings.debug && modal.full)
-			modal.bg.prepend(msg+'<br />');
+		if ($.fn.nyroModal.settings.debug || currentSettings && currentSettings.debug)
+			nyroModalDebug(msg, modal, currentSettings || {});
 	}
 
 	// -------------------------------------------------------
@@ -1211,15 +1556,15 @@ jQuery(function($) {
 			.animate({
 				width: settings.width+'px',
 				height: settings.height+'px',
-				marginTop: (settings.marginTop)+'px',
-				marginLeft: (settings.marginLeft)+'px'
+				marginTop: settings.marginTop+'px',
+				marginLeft: settings.marginLeft+'px'
 			}, {duration: 350, complete: function() {
 				elts.contentWrapper
 					.css({
 						width: settings.width+'px',
 						height: settings.height+'px',
-						marginTop: (settings.marginTop)+'px',
-						marginLeft: (settings.marginLeft)+'px'
+						marginTop: settings.marginTop+'px',
+						marginLeft: settings.marginLeft+'px'
 					})
 					.show();
 					elts.loading.fadeOut(200, callback);
@@ -1232,8 +1577,8 @@ jQuery(function($) {
 			.animate({
 				height: '50px',
 				width: '50px',
-				marginTop: (-(25+currentSettings.borderH)/2 + currentSettings.marginScrollTop)+'px',
-				marginLeft: (-(25+currentSettings.borderW)/2 + currentSettings.marginScrollLeft)+'px'
+				marginTop: (-(25+settings.borderH)/2 + settings.marginScrollTop)+'px',
+				marginLeft: (-(25+settings.borderW)/2 + settings.marginScrollLeft)+'px'
 			}, {duration: 350, complete: function() {
 				elts.contentWrapper.hide();
 				callback();
@@ -1263,16 +1608,16 @@ jQuery(function($) {
 			.hide()
 			.css({
 				width: settings.width+'px',
-				marginLeft: settings.marginLeft+'px',
 				height: settings.height+'px',
+				marginLeft: settings.marginLeft+'px',
 				marginTop: settings.marginTop+'px',
 				opacity: 1
 			});
 		elts.loading
 			.animate({
 				width: settings.width+'px',
-				marginLeft: settings.marginLeft+'px',
 				height: settings.height+'px',
+				marginLeft: settings.marginLeft+'px',
 				marginTop: settings.marginTop+'px'
 			}, {complete: function() {
 					elts.contentWrapper.show();
@@ -1287,8 +1632,8 @@ jQuery(function($) {
 		elts.contentWrapper
 			.animate({
 				width: settings.width+'px',
-				marginLeft: settings.marginLeft+'px',
 				height: settings.height+'px',
+				marginLeft: settings.marginLeft+'px',
 				marginTop: settings.marginTop+'px'
 			}, {complete: callback, duration: 400});
 	}
@@ -1311,3 +1656,10 @@ jQuery(function($) {
 	$($.fn.nyroModal.settings.openSelector).nyroModal();
 
 });
+
+// Default debug function, to be overwritten if needed
+//      Be aware that the settings parameter could be empty
+function nyroModalDebug(msg, elts, settings) {
+	if (elts.full)
+		elts.bg.prepend(msg+'<br />');
+}
