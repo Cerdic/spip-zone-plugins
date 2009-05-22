@@ -58,6 +58,22 @@ Password: <input type="password" name="pass" value="[(#ENV{pass})]" id="pass" />
 </fieldset>
 
 
+
+<fieldset>
+<legend>
+	Notifications publiques
+</legend>
+
+<p><small>Elements à signaler sur le flux public ci-dessus :</small></p>
+
+<p>
+<label>
+<input type="checkbox" name="evt_forumposte"[
+	(#ENV{evt_forumposte}|?{checked="checked"})] /> Forums post&#233;s.
+</label>
+</p>
+
+
 [(#REM) ------------------------ BOUTON OK ------------------------ ]
 <div>
 <input style="float:#LANG_RIGHT;" type="submit" name="_cfg_ok" value="<:OK:>" class="fondo" />

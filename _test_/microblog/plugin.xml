@@ -20,6 +20,12 @@
 	<icon>
 	images/microblog.png
 	</icon>
+
+	<pipeline>
+		<nom>notifications</nom>
+		<inclure>inc/microblog.php</inclure>
+	</pipeline>
+
 	<chemin dir='' />
 	<necessite id="SPIP" version="[2.0;]" />
 	<!-- en vrai http://trac.rezo.net/trac/spip/changeset/14036 -->

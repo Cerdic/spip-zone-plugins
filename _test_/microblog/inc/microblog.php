@@ -78,3 +78,34 @@ function microblog($status, $user=null, $pass=null, $service=null, $api=null){
 }
 
 
+
+
+/*
+ * Buzzer les notifications
+ */
+
+function Microblog_notifications($x) {
+	$status = null;
+	$cfg = @unserialize($GLOBALS['meta']['microblog']);
+
+	switch($x['args']['quoi']) {
+		case 'forumposte':
+			if ($cfg['evt_forumposte']
+			AND $id = intval($x['args']['id'])) {
+				$url = url_absolue(generer_url_entite($id, 'forum'));
+				$t = sql_fetsel('titre,texte', 'spip_forum', 'id_forum='.$id);
+				$titre = couper(typo($t['titre'].' | '.$t['texte']),
+					140 - strlen('#forum  ') - strlen($url));
+				$status = "#forum $titre $url";
+			}
+			break;
+	}
+
+	if (!is_null($status))
+		microblog($status);
+
+	if (!is_null($status_prive))
+		microblog($status_prive, $user_prive, $pass_prive, $service_prive);
+
+	return $x;
+}
