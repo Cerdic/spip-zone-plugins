@@ -16,7 +16,7 @@
 */
 
 function spip2spip_respecte_ln($texte) {
-	$texte = preg_replace("/\s\s+/$u", "__LN__", $texte); 
+  $texte = preg_replace("/\n/$u", "__LN__", $texte); 
 	return $texte;
 }
 

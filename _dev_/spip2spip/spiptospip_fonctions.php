@@ -293,7 +293,7 @@ function spip2spip_convert_img($texte,$documents) {
 //
 // restaure le formatage des ln
 function spip2spip_convert_ln($texte) {
-	$texte = str_replace("__LN__","\n\n",$texte); 
+	$texte = str_replace("__LN__","\n",$texte); 
 	return $texte;
 }
 
