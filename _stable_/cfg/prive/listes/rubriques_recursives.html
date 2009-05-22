@@ -5,5 +5,5 @@
 	<option value="#ID_RUBRIQUE"[(#ID_RUBRIQUE|in_array{#ENV{valeur}|sinon{#ENV{defaut,#ARRAY}}}|oui) selected="selected"]>#GET{separateur}#TITRE</option>]
 	[(#ENV{multiple}|non)
 	<option value="#ID_RUBRIQUE"[(#ID_RUBRIQUE|=={#ENV{valeur}|sinon{#ENV{defaut}}}|oui) selected="selected"]>#GET{separateur}#TITRE</option>]
-	<INCLURE{fond=prive/listes/rubriques_recursives}{valeur=#ENV{valeur}}{id_rubrique=#ID_RUBRIQUE}{iteration=[(#GET{iteration}|plus{1})]}{separateur=#GET{separateur}}>
+	<INCLURE{fond=prive/listes/rubriques_recursives}{valeur=#ENV{valeur}}{id_rubrique=#ID_RUBRIQUE}{iteration=(#GET{iteration}|plus{1})}{separateur=#GET{separateur}}{multiple}>
 </BOUCLE_rubriques>
