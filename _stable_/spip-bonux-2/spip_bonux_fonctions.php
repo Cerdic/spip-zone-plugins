@@ -65,7 +65,7 @@ function picker_selected($selected,$type){
 	if (is_array($selected))
 		foreach($selected as $value)
 			if (preg_match(",".$type."[|]([0-9]+),",$value,$match)
-			  AND $v=intval($match[1]))
+			  AND strlen($v=intval($match[1])))
 			  $select[] = $v;
 	return $select;
 }
