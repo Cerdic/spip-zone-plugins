@@ -1,0 +1,25 @@
+<plugin>
+	<nom>Microblog</nom>
+	<auteur>
+	Fil
+	&#169; 2009 - GNU/LGPL
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	test
+	</etat>
+	<description>
+	Envoyer des micromessages vers les plateformes laconica, twitter, spip.org etc. Fournit une fonction <code>microblog($statut, $user, $pass, $service);</code>.
+	</description>
+	<lien>http://www.spip-contrib.net/Microblog</lien>
+	<prefix>
+	Microblog
+	</prefix>
+	<icon>
+	images/microblog.png
+	</icon>
+	<chemin dir='' />
+	<necessite id="SPIP" version="[2.1.0;]" />
+</plugin>
