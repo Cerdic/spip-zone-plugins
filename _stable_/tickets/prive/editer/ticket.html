@@ -1,68 +1,13 @@
 [(#REM) Squelette du formulaire de la page d'edition d'un ticket (exec=ticket_editer)]
 <div class="entete-formulaire">
-[(#ID_TICKET|!={new}|oui)
-	[(#ID_TICKET|tickets_bouton_retour{#CHEMIN{imgs/bugs.png}, #LANG_LEFT})]
-	<span class="arial1 spip_small"><b>Ticket ##ID_TICKET</b></span>
-]
+[(#ENV{id_ticket}|intval|oui)
+	[(#ENV{id_ticket}|tickets_bouton_retour{#CHEMIN{imgs/bugs.png}, #LANG_LEFT})]
+	<span class="arial1 spip_small"><strong><:tickets:ticket:> ##ENV{id_ticket}</strong></span>
 	<h1>[(#ENV{titre}|typo)]</h1>
+]
+[(#ENV{id_ticket}|intval|non)
+	<h1><:tickets:creer_nouveau_ticket:></h1>
+]
 </div>
 
-<div class="formulaire_spip formulaire_editer formulaire_editer_ticket formulaire_editer_ticket-#ENV{id_ticket,nouveau}">
-	<form method="post" action="?exec=ticket_afficher&amp;id_ticket=#ENV**{id_ticket}"><div>
-		<input type='hidden' name='modifier_ticket' value='#ENV**{id_ticket}' />
-		<ul>
-			<li class="editer_titre obligatoire " >
-				<label for="titre">Titre du ticket</label><input type='text' class='text' name='titre' id='titre' value="[(#ENV**{titre,#REM|concat{info_nouvel_article}|_T})]" />
-			</li>
-			<li>
-				<label for="type">Type</label><select name="type" id="type">
-					<option value="1" [(#ENV**{type}|=={1}|?{" selected='selected'",""})]>[(#VAL{1}|tickets_texte_type)]</option>
-					<option value="2" [(#ENV**{type}|=={2}|?{" selected='selected'",""})]>[(#VAL{2}|tickets_texte_type)]</option>
-					<option value="3" [(#ENV**{type}|=={3}|?{" selected='selected'",""})]>[(#VAL{3}|tickets_texte_type)]</option>
-				</select>
-			</li>
-			<li>
-				<label for="severite">S&eacute;v&eacute;rit&eacute;</label><select name="severite" id="severite">
-					<option value="1" [(#ENV**{severite}|=={1}|?{" selected='selected'",""})]>[(#VAL{1}|tickets_texte_severite)]</option>
-					<option value="2" [(#ENV**{severite}|=={2}|?{" selected='selected'",""})]>[(#VAL{2}|tickets_texte_severite)]</option>
-					<option value="3" [(#ENV**{severite}|=={3}|?{" selected='selected'",""})]>[(#VAL{3}|tickets_texte_severite)]</option>
-					<option value="4" [(#ENV**{severite}|=={4}|?{" selected='selected'",""})]>[(#VAL{4}|tickets_texte_severite)]</option>
-				</select>
-			</li>
-
-			[<li>
-				<label for="projet">Projet</label>
-				<select name="projet" id="projet">(#VAL{projet}|tickets_select_champ_optionnel{#ENV**{projet}})</select>
-			</li>]
-			[<li>
-				<label for="composant">Composant</label>
-				<select name="composant" id="composant">(#VAL{composant}|tickets_select_champ_optionnel{#ENV**{composant}})</select>
-			</li>]
-			[<li>
-				<label for="version">Version</label>
-				<select name="version" id="version">(#VAL{version}|tickets_select_champ_optionnel{#ENV**{version}})</select>
-			</li>]
-			[<li>
-				<label for="jalon">Jalon</label>
-				<select name="jalon" id="jalon">(#VAL{jalon}|tickets_select_champ_optionnel{#ENV**{jalon}})</select>
-			</li>]
-		
-			<li class="editer_texte editer_parent">
-				<label for="text_area">Description du ticket</label>
-				<div class="explication">
-				D&eacute;crivez aussi pr&eacute;cis&eacute;ment que possible le besoin ou le probl&egrave;me rencontr&eacute;. 
-				Indiquez en particulier s&rsquo;il se produit syst&eacute;matiquement ou occasionnellement. 
-				S&rsquo;il s&rsquo;agit d&rsquo;un probl&egrave;me d'affichage, pr&eacute;cisez avec quel navigateur vous le rencontrez.
-				</div>
-				[(#VAL{text_area}|barre_typo{#LANGUE})]
-				<textarea name='texte' id='text_area' class='barre_inserer' rows='20' cols='50'[(#ENV**{browser_caret,''})]>[(#ENV**{texte})]</textarea>
-			</li>
-			<li>
-				<label for="exemple">URL d&rsquo;exemple</label>
-				<div class="explication">Indiquez ici l&rsquo;URL d&rsquo;une page concern&eacute;e par ce ticket.</div>
-				<input type='text' class='text' name='exemple' id='exemple' value="[(#ENV**{exemple})]" />
-			</li>
-		</ul>
-		<p class='boutons'><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
-	</div></form>
-</div>
+#FORMULAIRE_EDITER_TICKET{#ENV{id_ticket}}

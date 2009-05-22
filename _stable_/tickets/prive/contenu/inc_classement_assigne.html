@@ -3,7 +3,7 @@
 ]
 #CACHE{0}
 
-<BOUCLE_assigne(spip_tickets){statut = ouvert}{!par id_assigne}{fusion id_assigne}>
+<BOUCLE_assigne(TICKETS){statut = ouvert}{!par id_assigne}{fusion id_assigne}>
 	[(#SET{no_bloc, [_bloc(#ID_ASSIGNE)]})]
 	<BOUCLE_auteur(AUTEURS){id_auteur=#ID_ASSIGNE}>
 		[(#SET{assigne_a, [<:tickets:assignes_a:> (#NOM)]})]

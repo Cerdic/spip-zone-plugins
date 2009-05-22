@@ -14,8 +14,7 @@ Il est con&ccedil;u pour faciliter la phase de d&eacute;veloppement du site (not
 	<etat>stable</etat>
 	
 	<prefix>tickets</prefix>
-	
-	<options>tickets_options.php</options>
+
 	<fonctions>tickets_fonctions.php</fonctions>
 	<install>base/tickets_upgrade.php</install>
 	
@@ -45,7 +44,7 @@ Il est con&ccedil;u pour faciliter la phase de d&eacute;veloppement du site (not
 	<pipeline>
 		<nom>autoriser</nom>
 		<inclure>inc/tickets_autoriser.php</inclure>
-      </pipeline>
+	</pipeline>
 	
 	<necessite id="SPIP" version="[2.0.0;]" />
 </plugin>
