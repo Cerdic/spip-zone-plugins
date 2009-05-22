@@ -442,7 +442,7 @@ function spip2spip_syndiquer($id_site, $mode='cron') {
                   		
                   		// on cite la source originale ds le champs ps et la licence
                   		if ($citer_source)
-                  		      $_ps .= _T('spiptospip:origin_url')." [".$_link."->".$_link."]";
+                  		      $_ps .= _T('spiptospip:origin_url')." [->".$_link."]";
                   		
                       // licence ?                
                       if ($_licence !="" && !isLicenceInstalled)                               		
