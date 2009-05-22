@@ -2,6 +2,7 @@
 
 function fancybox_insert_head($flux){
 	include_spip("inc/filtres");
+	// Initialisation des valeurs de config
 	$config = @unserialize($GLOBALS['meta']['fancybox']);
 	if (!is_array($config))
 		$config = array();
@@ -17,40 +18,28 @@ function fancybox_insert_head($flux){
 		'framewidth' => '600',
 		'frameheight' => '700'		
 	), $config);
-
+	// Insertion des librairies js
 	$flux .='<script src="'.url_absolue(find_in_path('javascript/jquery.fancybox-1.2.1.js')).'" type="text/javascript"></script>';
-	
+	$flux .='<script src="'.url_absolue(find_in_path('javascript/fancybox.js')).'" type="text/javascript"></script>';
+	// Init de la fancybox suivant la configuration
 	$flux .='
 <script type="text/javascript">/* <![CDATA[ */
-(function($){
-	$(function(){
-		$("a[type=\'image/jpeg\'],a[type=\'image/png\'],a[type=\'image/gif\']")
-			.addClass("fancybox")
-			.attr("onclick","")
-			.fancybox();
-		$("'.$config['selecteur_galerie'].'").attr("rel","galerie-portfolio");
-		$("'.$config['selecteur_commun'].'")
-			.fancybox({
-				"padding": '.$config['padding'].',
-				"imageScale": '.$config['imagescale'].',
-				"overlayShow": '.$config['overlayshow'].',
-				"overlayOpacity": '.$config['overlayopacity'].',
-				"hideOnContentClick": '.$config['hideoncontentclick'].'
-			});
-		$("'.$config['selecteur_frame'].'")
-			.fancybox({
-				"frameWidth": '.$config['framewidth'].',
-				"frameHeight": '.$config['frameheight'].',
-				"padding": '.$config['padding'].',
-				"imageScale": '.$config['imagescale'].',
-				"overlayShow": '.$config['overlayshow'].',
-				"overlayOpacity": '.$config['overlayopacity'].',
-				"hideOnContentClick": '.$config['hideoncontentclick'].'
-			});
-	});
-})(jQuery);
+var fb_selecteur_galerie="'.$config['selecteur_galerie'].'";
+var fb_selecteur_commun="'.$config['selecteur_commun'].'";
+var fb_selecteur_frame="'.$config['selecteur_frame'].'";
+var fb_framewidth='.$config['framewidth'].';
+var fb_frameheight='.$config['frameheight'].';
+var fb_padding='.$config['padding'].';
+var fb_imagescale='.$config['imagescale'].';
+var fb_overlayshow='.$config['overlayshow'].';
+var fb_overlayopacity='.$config['overlayopacity'].';
+var fb_hideoncontentclick='.$config['hideoncontentclick'].';
+if (window.jQuery)
+(function($){if(typeof onAjaxLoad == "function") onAjaxLoad(fancy_init);
+	$(fancy_init);
+ })(jQuery);
 /* ]]> */</script>';
-
+	// Inclusion des styles propres a fancybox
 	$flux .='<link rel="stylesheet" href="'.url_absolue(find_in_path('styles/jquery.fancybox.css')).'" type="text/css" />';
 
 	return $flux;
