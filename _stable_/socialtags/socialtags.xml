@@ -155,7 +155,6 @@
 
 <!-- M -->
 <item>
-<item>
 <title>Menéame</title>
 <author>meneame</author>
 <link>http://meneame.net/submit.php?url=%u&amp;title=%t</link>
@@ -168,6 +167,7 @@
 <link>http://www.mister-wong.com/addurl/?bm_url=%u&amp;bm_description=%t</link>
 </item>
 
+<item>
 <title>Mixx</title>
 <author>mixx</author>
 <link>http://www.mixx.com/submit?page_url=%u</link>
