@@ -4,7 +4,7 @@
 	Nyromodal par [Nyrodev->http://www.nyrodev.com/]
 _ Mis en plugin par SmeL, b_b et mis en marche par Fil :-)
 	</auteur>
-	<version>0.1.1</version>
+	<version>0.1.2</version>
 	<icon>nyroceros-64.png</icon>
 	<etat>dev</etat>
 	<description>
@@ -18,6 +18,6 @@ _ Ce plugin fonctionne sur les squelettes disposant de la balise <code>#INSERT_H
 	<utilise id="palette" version="[1.0;]" />
 	<pipeline>
 		<nom>insert_head</nom>
-		<inclure>head.php</inclure>
+		<inclure>nyroceros_pipelines.php</inclure>
 	</pipeline>
 </plugin>

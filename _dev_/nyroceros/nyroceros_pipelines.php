@@ -22,7 +22,7 @@ function Nyro_insert_head($flux){
 <script src="'.url_absolue(find_in_path('js/nyromodal.js')).'" type="text/javascript"></script>';
 	
 	if ($config['installer_diapo_auto'] == 'oui'){
-$flux .='<script src="'.url_absolue(find_in_path('js/nyrodiapo.js')).'" type="text/javascript"></script>';
+		$flux .='<script src="'.url_absolue(find_in_path('js/nyrodiapo.js')).'" type="text/javascript"></script>';
 	}	
 	
 	$flux .='
