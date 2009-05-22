@@ -92,7 +92,7 @@ function pb_getpagerank($url, $racine=false) {
 
 		$fichier_pagerank = sous_repertoire(_DIR_VAR, 'cache-pagerank') . md5($url).".php";
 
-		$date_init = time() -  60 * 60 * 24;
+		$date_init = time() -  60 * 60 * 24 * 30;
 
 		// Systeme de cache pour les variables exif								
 		if (file_exists($fichier_pagerank) && @filemtime($fichier_pagerank) > $date_init) {
