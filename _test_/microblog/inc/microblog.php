@@ -64,10 +64,11 @@ function microblog($status, $user=null, $pass=null, $service=null, $api=null){
 
 	// anti-begaiment
 	$begaie = md5("$service $user $status");
-	if ($md5 == $GLOBALS['meta']['microblog_begaie']) {
+	if ($begaie == $GLOBALS['meta']['microblog_begaie']) {
 		spip_log("begaie $service $user $status", 'microblog');
 		return false;
-	}
+	} else
+		ecrire_meta('microblog_begaie', $begaie);
 
 	// ping et renvoyer la reponse xml
 	include_spip('inc/distant');
