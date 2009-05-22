@@ -16,7 +16,7 @@
 */
 
 function spip2spip_respecte_ln($texte) {
-  $texte = preg_replace("/\n/$u", "__LN__", $texte); 
+  $texte = preg_replace("/\n/$u", "__LN__", $texte);  // version pour flux v1.5
 	return $texte;
 }
 

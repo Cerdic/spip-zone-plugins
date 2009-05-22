@@ -101,7 +101,11 @@ function analyser_backend_spip2spip($rss){
   // supprimer les commentaires
 	$rss = preg_replace(',<!--\s+.*\s-->,Ums', '', $rss);
 	
+	// version du flux
+	$version_flux = 0;
+  // FIXME version du flux
 	
+	// analyse de chaque item
 	$items = array();
 	if (preg_match_all($syndic_regexp['item'],$rss,$r, PREG_SET_ORDER))
 	foreach ($r as $regs) {
@@ -292,8 +296,9 @@ function spip2spip_convert_img($texte,$documents) {
 
 //
 // restaure le formatage des ln
-function spip2spip_convert_ln($texte) {
-	$texte = str_replace("__LN__","\n",$texte); 
+function spip2spip_convert_ln($texte,$version_flux=1.6) {
+  if ($version_flux<1.7)	$texte = str_replace("__LN__","\n\n",$texte);
+                          $texte = str_replace("__LN__","\n",$texte); 
 	return $texte;
 }
 
