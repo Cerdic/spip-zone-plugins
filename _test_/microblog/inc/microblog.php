@@ -62,10 +62,18 @@ function microblog($status, $user=null, $pass=null, $service=null, $api=null){
 
 	$datas = array('status' => $status);
 
+	// anti-begaiment
+	$begaie = md5("$service $user $status");
+	if ($md5 == $GLOBALS['meta']['microblog_begaie']) {
+		spip_log("begaie $service $user $status", 'microblog');
+		return false;
+	}
+
 	// ping et renvoyer la reponse xml
 	include_spip('inc/distant');
-	return recuperer_page($api, false, false, null, $datas);
-
+	$ret = recuperer_page($api, false, false, null, $datas);
+	spip_log("$service $user $status ".strlen($ret), 'microblog');
+	return $ret;
 }
 
 
