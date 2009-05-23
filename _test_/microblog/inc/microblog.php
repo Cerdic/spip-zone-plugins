@@ -119,7 +119,7 @@ function Microblog_notifications($x) {
                     .' | '._T('microblog:article').' '.$etat
                     .' | '.($t['descriptif'] != '' ? $t['descriptif'].' | ' : '')
                     .$t['texte']),
-					140 - strlen($url));
+					120 - strlen($url));
 				$status = "$titre $url";
 			}        
 			break;
