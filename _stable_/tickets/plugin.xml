@@ -45,7 +45,10 @@ Il est con&ccedil;u pour faciliter la phase de d&eacute;veloppement du site (not
 		<nom>autoriser</nom>
 		<inclure>inc/tickets_autoriser.php</inclure>
 	</pipeline>
-	
+	<pipeline>
+		<nom>notifications</nom>
+		<inclure>tickets_notifications.php</inclure>
+	</pipeline>
 	<necessite id="SPIP" version="[2.0.0;]" />
 </plugin>
 
