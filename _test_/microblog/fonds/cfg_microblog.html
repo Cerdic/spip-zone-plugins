@@ -26,15 +26,15 @@
 [(#REM) ------------------------ COMPTE PAR DEFAUT ------------------------ ]
 <fieldset>
 <legend>
-	Compte par d&#233;faut pour la fonction <code><tt>microblog()</tt></code>
+	<:microblog:compte_defaut:> <code><tt>microblog()</tt></code>
 </legend>
 
-<p><small>Vous pouvez cr&#233;er un compte pour votre site SPIP sur l'un des services suivants&nbsp;:</small></p>
+<p><small><:microblog:creer_compte_services:>&nbsp;:</small></p>
 
 <h4>laconi.ca</h4>
 <ul>
-<li><a href="http://spip.org/main/register">http://spip.org/main/register</a>, le site de la communaut&#233; SPIP</li>
-<li><a href="http://identi.ca/main/register">http://identi.ca/main/register</a>, le site public du logiciel laconi.ca</li>
+<li><a href="http://spip.org/main/register">http://spip.org/main/register</a>, <:microblog:presentation_spipo:></li>
+<li><a href="http://identi.ca/main/register">http://identi.ca/main/register</a>, <:microblog:presentation_laconica:></li>
 </ul>
 
 <h4>Twitter</h4>
@@ -46,8 +46,8 @@
 
 <p>
 <label>
-Service: <select name="service" id="service">
-<option value="">(choisir)</option>
+<:microblog:service:>: <select name="service" id="service">
+<option value="">(<:microblog:choisir:>)</option>
 <option value="" disabled="disabled">- laconica -</option>
 <option value="spipo"[
 	(#ENV{service}|=={spipo}|?{selected="selected"})]>SPIP.org (spipo)</option>
@@ -70,22 +70,36 @@ Password: <input type="password" name="pass" value="[(#ENV{pass})]" id="pass" />
 </label>
 </p>
 
-<p><small>Compte de tests : twitter | spipotest spipotest1</small></p>
+<p><small><:microblog:compte_tests:> : twitter | spipotest spipotest1</small></p>
 </fieldset>
 
 
 
 <fieldset>
 <legend>
-	Notifications publiques
+	<:microblog:notifications_publiques:>
 </legend>
 
-<p><small>Elements &#224; signaler sur le flux public ci-dessus :</small></p>
+<p><small><:microblog:elements_signaler:> :</small></p>
 
 <p>
 <label>
 <input type="checkbox" name="evt_forumposte"[
-	(#ENV{evt_forumposte}|?{checked="checked"})] /> Forums post&#233;s.
+	(#ENV{evt_forumposte}|?{checked="checked"})] /> <:microblog:poster_forums:>.
+</label>
+</p>
+
+<p>
+<label>
+<input type="checkbox" name="evt_proposerarticles"[
+	(#ENV{evt_proposerarticles}|?{checked="checked"})] /> <:microblog:proposer_articles:>.
+</label>
+</p>
+
+<p>
+<label>
+<input type="checkbox" name="evt_publierarticles"[
+	(#ENV{evt_publierarticles}|?{checked="checked"})] /> <:microblog:publier_articles:>.
 </label>
 </p>
 
