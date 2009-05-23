@@ -95,7 +95,7 @@ function Microblog_notifications($x) {
 				$url = url_absolue(generer_url_entite($id, 'forum'));
 				$t = sql_fetsel('titre,texte', 'spip_forum', 'id_forum='.$id);
 				$titre = couper(typo($t['titre'].' | '.$t['texte']),
-					140 - strlen('#forum  ') - strlen($url));
+					120 - strlen('#forum  ') - strlen($url));
 				$status = "$titre #forum $url";
 			}
 			break;
