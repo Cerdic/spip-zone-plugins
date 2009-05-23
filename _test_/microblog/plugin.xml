@@ -23,7 +23,7 @@
 
 	<pipeline>
 		<nom>notifications</nom>
-		<inclure>inc/microblog.php</inclure>
+		<inclure>inc/micro_notifications.php</inclure>
 	</pipeline>
 
 	<chemin dir='' />
