@@ -31,7 +31,7 @@ function microblog($status, $user=null, $pass=null, $service=null, $api=null){
 	$apis = array(
 		'spipo' => 'http://%user%:%pass%@spip.org/api/statuses/update.xml',
 		'identica' => 'http://%user%:%pass%@identi.ca/api/statuses/update.xml',
-		'twitter' => 'https://%user%:%pass%@twitter.com/statuses/update.xml'
+		'twitter' => 'http://%user%:%pass%@twitter.com/statuses/update.xml'
 	);
 
 	// Choix de l'API
@@ -96,7 +96,7 @@ function Microblog_notifications($x) {
 				$t = sql_fetsel('titre,texte', 'spip_forum', 'id_forum='.$id);
 				$titre = couper(typo($t['titre'].' | '.$t['texte']),
 					140 - strlen('#forum  ') - strlen($url));
-				$status = "#forum $titre $url";
+				$status = "$titre #forum $url";
 			}
 			break;
 	}
