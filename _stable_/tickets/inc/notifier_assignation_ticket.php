@@ -5,8 +5,7 @@
 		$row = sql_select("*","spip_tickets","id_ticket=$id_ticket");
 		$datas = sql_fetch($row);
 		
-		$nom = sql_select("nom","spip_auteurs","id_auteur=".intval($datas['id_assigne']));
-		$nom_auteur = sql_fetch($nom);
+		$nom_auteur = sql_getfetsel("nom","spip_auteurs","id_auteur=".intval($datas['id_assigne']));
 		
 		include_spip('inc/tickets_filtres');
 		$envoyer_mail = charger_fonction('envoyer_mail','inc');
@@ -24,8 +23,8 @@
 		------------------------------------------\n"
 		._T('tickets:mail_texte_message_auto')."\n\n";
 		
-		if($nom_auteur['nom']){
-			$message .= _T('tickets:assignation_attribuee_a',array('nom'=>$nom_auteur['nom']))."\n\n";	
+		if($nom_auteur){
+			$message .= _T('tickets:assignation_attribuee_a',array('nom'=>$nom_auteur))."\n\n";	
 		}else{
 			$message .= _T('tickets:assignation_supprimee')."\n\n";
 		}
