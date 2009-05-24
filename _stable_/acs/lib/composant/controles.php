@@ -16,7 +16,7 @@ function ctlColor($composant, $nic, $nom, $couleur, $param, $wid) {
 function ctlImg($composant, $nic, $nom, $image, $param, $wid) {
   $var =  nomvar($composant, $nic, $nom);
   $path = $GLOBALS['ACS_CHEMIN'].'/'.$param['chemin'];
-  acs_creer_chemin($path);
+  mkdir_recursive(_DIR_RACINE.$path);
   $s = @getimagesize('../'.$path.'/'.$image);
   $r = '<div align="'.$GLOBALS['spip_lang_right'].'"><table><tr>';
   if ($param['label'] != 'non')
@@ -88,13 +88,13 @@ function ctlNombre($composant, $nic, $nom, $nombre=0, $param, $wid) {
 // Saisie d'un texte
 function ctlText($composant, $nic, $nom, $txt, $param = array('taille' => 30), $wid) {
   $var =  nomvar($composant, $nic, $nom);
-  return '<table width="100%"><tr><td align="'.$GLOBALS['spip_lang_right'].'"><label for "'.$var.'_'.$wid.'" title="'.$var.'"  class="label">'.$nom.'</label></td><td><input type="text" name="'.$var.'_'.$wid.'" size="'.$param['taille'].'" maxlength="'.$param['taille'].'" class="forml" value="'.$txt.'" /></td></tr></table>';
+  return '<table width="100%"><tr><td align="'.$GLOBALS['spip_lang_right'].'"><label for "'.$var.'_'.$wid.'" title="'.$var.'"  class="label">'._TC($composant, $nom).'</label></td><td><input type="text" name="'.$var.'_'.$wid.'" size="'.$param['taille'].'" maxlength="'.$param['taille'].'" class="forml" value="'.$txt.'" /></td></tr></table>';
 }
 
 // Saisie d'un texte long
 function ctlTextarea($composant, $nic, $nom, $txt, $param, $wid) {
   $var =  nomvar($composant, $nic, $nom);
-  return '<div align="'.$GLOBALS['spip_lang_left'].'"><label for "'.$var.'_'.$wid.'" title="'.$var.'">'.$nom.'</label><textarea name="'.$var.'_'.$wid.'" class="forml" rows="'.(isset($param['lines']) ? $param['lines']-1 : 2).'">'.$txt.'</textarea></div>';
+  return '<div align="'.$GLOBALS['spip_lang_left'].'"><label for "'.$var.'_'.$wid.'" title="'.$var.'">'._TC($composant, $nom).'</label><textarea name="'.$var.'_'.$wid.'" class="forml" rows="'.(isset($param['lines']) ? $param['lines']-1 : 2).'">'.$txt.'</textarea></div>';
 }
 
 // Choix oui / non
@@ -177,15 +177,6 @@ function _TC($composant, $texte) {
 
 function nomvar($composant, $nic, $nom) {
 	return 'acs'.ucfirst($composant).$nic.$nom;
-}
-
-function acs_creer_chemin($c) {
-  $dir = _DIR_RACINE.$c;
-
-  if (is_readable($dir))
-    return true;
-  else
-    return mkdir_recursive($dir);
 }
 
 // http://doc.spip.org/@bouton_radio

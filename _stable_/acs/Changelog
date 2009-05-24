@@ -1,3 +1,17 @@
+ACS version 0.5
+- installation simplifiée et améliorée. Installation des images par défaut des composants.
+- nombre d'instances de chaque composant affiché en info-bulle sur les widgets de l'onglet "Composants".
+
+
+Modèle Cat pour ACS vesion 0.5:
+ - Composant Ours : tous les liens prédéfinis deviennent optionnels. Pied de page totalement personnalisable. Ajout des statistiques globales du site.
+ - Composant Articles : meilleure intégration avec plugin notation (0.6.3) et composant Democratie
+ - Composant Edito : mise à jour pour plugin notation 0.6.3
+ - Composant Fond : debug du javascript
+ - Composant Onglets  : installation automatique des images par defaut.
+
+_______________________________________
+
 ACS version 0.4
 - tous les composants deviennent instanciables
 - utilisation plus confortable et plus intuitive avec les plugins optionnels crayons et palette.
@@ -18,4 +32,4 @@ Modèle Cat pour ACS vesion 0.4:
 - composant Acces inclut au composant Articles (simplification).
 - création du composant Pied, utilisant Module.
 - intégration gestion des tags meta au composant fond/entete, Usage de Module.
-- creation du composant Module, adaptation des pages, et suppression des composants numérotés.
+- creation du composant Module, adaptation des pages, et suppression des composants numérotés tels que "Col1".

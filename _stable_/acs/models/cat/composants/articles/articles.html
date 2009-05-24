@@ -1,7 +1,7 @@
 <li>
 <div class="entete">
   <div class="infos_article">
-  [(#NOTE|?{' '})<div style="float:right; text-align: left">#NOTATION_ETOILE{#NOTE}</div>]
+  [(#NOTE|?{' '})<div style="float:#LANG_RIGHT; text-align: #LANG_LEFT; margin-left: 0.5em; margin-right:0.5em">#NOTATION_ETOILE{#NOTE}</div>]
 [(#CONFIG{acsArticlesDates}|=={oui}|?{[(#DATE_REDAC|?{[(#DATE_REDAC|affdate)],[(#DATE|affdate)]})]})]
 [(#CONFIG{acsArticlesAut}|=={oui}|?{' '})[((#AUTEURS))]]
 <BOUCLE_Rubb2(RUBRIQUES){id_rubrique}>[(#ENV{masquer_rubrique}|!={oui}|?{' '})[(#CONFIG{acsArticlesDates}|=={oui}|?{ - })]<i><a href="#URL_RUBRIQUE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>[(#TITRE|supprimer_numero)]</a></i>]</BOUCLE_Rubb2>

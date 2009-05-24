@@ -19,7 +19,8 @@ function pages_liste() {
 
   if (!count($liste)) {
     include_spip('inc/acs_cache');
-    $liste =  cache('pages_du_site', 'a_'.$GLOBALS['meta']['acsModel'].'_pages_liste');
+    $model = (isset($GLOBALS['meta']['acsModel']) ? $GLOBALS['meta']['acsModel'] : 'cat');
+    $liste =  cache('pages_du_site', 'a_'.$model.'_pages_liste');
   }
   return $liste[0];
 }
@@ -35,7 +36,8 @@ function pages_du_site() {
     $squelettes['over'.$numover] = _DIR_RACINE.$dir;
     $numover += 1;
   }
-  $squelettes['acs'] = _DIR_PLUGIN_ACS.'models/'.$GLOBALS['meta']['acsModel'];
+  // Squelettes du modele ACS actif:
+  $squelettes['acs'] = _DIR_PLUGIN_ACS.'models/'.(isset($GLOBALS['meta']['acsModel']) ? $GLOBALS['meta']['acsModel'] : 'cat');
   // On ajoute les squelettes de plugins actifs - Add skeletons from active plugins
   $plugins = unserialize($GLOBALS['meta']['plugin']);
   foreach ($plugins as $NAME=>$plugin) {
@@ -90,8 +92,11 @@ function pages_du_dossier($dir, $dossier) {
         if (is_file($p)) {
           if (preg_match(";.*[.]html$;iS", $f)) {
             $pagename = substr($f, 0, -5);
-            if ($pagename == 'wrap') continue;
-            if ($pagename == 'acs_style_prive.css') continue;
+            if (($pagename == 'wrap') ||
+            		($pagename == 'acs.js') ||
+            		($pagename == 'acs_style_prive.css') ||
+            		((substr($pagename, -8) == '_preview') && (!$GLOBALS['meta']['acsVoirPagesPreviewComposants'])) )
+            	continue;
             $pages[$pagename] = true;
           }
         }

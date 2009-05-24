@@ -13,7 +13,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'derniers_textes' => 'Derniers textes publi&eacute;s',
 'redige' => 'r&eacute;dig&eacute; le',
 'publie' => 'publi&eacute; le',
-'maj' => 'mis à jour le'
+'maj' => 'mis à jour le',
 
+'aucun_article_note' => 'Aucun article not&eacute;'
 );
 ?>

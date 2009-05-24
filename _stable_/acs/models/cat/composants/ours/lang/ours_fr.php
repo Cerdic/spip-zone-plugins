@@ -16,7 +16,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 <li> - proposés dans une rubrique erronée,</li>
 <li> - non conformes aux règles de publication du site</li>
 </ul>
-Un article peut également avoir été refusé par erreur.'
+Un article peut également avoir été refusé par erreur.',
+
+'visites' => ', c\'est @nb_articles@ textes de @nb_auteurs@ auteur-e-s lus @visites_articles@ fois par @total_visites@ personnes.'
 
 );
 ?>

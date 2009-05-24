@@ -17,6 +17,7 @@ function liste_widgets($composants, $islink=false) {
     $widget_icon = find_in_path('composants/'.$widget.'/images/'.$widget.'_icon.gif');
     if (!file_exists($widget_icon))
       $widget_icon = _DIR_PLUGIN_ACS.'images/composant-24.gif';
+    $nb = count(composant_instances($widget));
     $link = '<a href="'._DIR_RESTREINT.'?exec=acs&amp;onglet=composants&amp;composant='.$widget.'" title="'._T('composant').'">';
     $r .= '<div id="'.$widget.'" class="'.get_widget_class($widget, 'widget').'">'.
       ($islink ? $link : '').
@@ -24,7 +25,7 @@ function liste_widgets($composants, $islink=false) {
       ($islink ? '' : $link).
       '<img src="'.$widget_icon.'" style="width:20px;height:20px;vertical-align:middle" />'.
       ($islink ? '' : '</a>').
-      '</td><td title="'.ucfirst($widget).'" style="padding-left: 5px; padding-right: 5px; width: 95%;"><div style="overflow:hidden; text-align:center">'.ucfirst(str_replace('_', ' ', $widget)).'</div></td></tr></table>'.
+      '</td><td title="'.ucfirst($widget).($nb ? ' ('.$nb.')' : '').'" style="padding-left: 5px; padding-right: 5px; width: 95%;"><div style="overflow:hidden; text-align:center">'.ucfirst(str_replace('_', ' ', $widget)).'</div></td></tr></table>'.
       ($islink ? '</a>' : '').
     '</div>';
   }

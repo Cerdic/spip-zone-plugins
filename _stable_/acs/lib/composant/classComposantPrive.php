@@ -329,17 +329,4 @@ class AdminComposant {
   }
 }
 
-/**
- * Makes directory, returns TRUE if exists or made
- *
- * @param string $pathname The directory path.
- * @return boolean returns TRUE if exists or made or FALSE on failure.
- */
-
-function mkdir_recursive($pathname)
-{
-    is_dir(dirname($pathname)) || mkdir_recursive(dirname($pathname));
-    return is_dir($pathname) || @mkdir($pathname);
-}
-
 ?>

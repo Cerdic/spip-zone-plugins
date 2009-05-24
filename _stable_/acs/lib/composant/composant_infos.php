@@ -91,8 +91,7 @@ function liste_pages_composant($p, $singulier, $pluriel) {
 function show_override($chemin, $page) {
 	if ($chemin)
 		$chemin .= '/';
-  if (!isset($GLOBALS['meta']['acsSqueletteOverACS'])) return $page;
-  if (is_readable('../'.$GLOBALS['meta']['acsSqueletteOverACS'].'/'.$page.'.html'))
+  if (isset($GLOBALS['meta']['acsSqueletteOverACS']) && is_readable('../'.$GLOBALS['meta']['acsSqueletteOverACS'].'/'.$page.'.html'))
     $r = '<u>'.$page.'</u>';
   else
     $r = $page;

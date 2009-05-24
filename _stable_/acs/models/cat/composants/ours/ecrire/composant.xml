@@ -3,12 +3,12 @@
   <nom>Ours</nom>
   <!-- Auteur du composant -->
   <auteur>Daniel FAIVRE &copy; 2008-2009 - licence GPL</auteur>
-  <version>0.4</version>
-  <necessite id='acs' version='[0.4;]' />
+  <version>0.5</version>
+  <necessite id='acs' version='[0.5;]' />
 
   <param>
     <nom>preview</nom>
-    <valeur>50</valeur>
+    <valeur>100</valeur>
   </param>
 
   <variable>
@@ -24,6 +24,27 @@
     <type>color</type>
   </variable>
   <variable>
+    <nom>LienCopyright</nom>
+    <type>choix</type>
+    <option>oui</option>
+    <option>non</option>
+    <valeur>oui</valeur>
+  </variable>
+  <variable>
+    <nom>LienRSS</nom>
+    <type>choix</type>
+    <option>oui</option>
+    <option>non</option>
+    <valeur>oui</valeur>
+  </variable>
+  <variable>
+    <nom>LienResume</nom>
+    <type>choix</type>
+    <option>oui</option>
+    <option>non</option>
+    <valeur>oui</valeur>
+  </variable>
+  <variable>
     <nom>LienRefus</nom>
     <type>choix</type>
     <option>oui</option>
@@ -36,5 +57,23 @@
     <option>oui</option>
     <option>non</option>
     <valeur>oui</valeur>
+  </variable>
+  <variable>
+    <nom>LienSPIP</nom>
+    <type>choix</type>
+    <option>oui</option>
+    <option>non</option>
+    <valeur>oui</valeur>
+  </variable>
+  <variable>
+    <nom>Stats</nom>
+    <type>choix</type>
+    <option>oui</option>
+    <option>non</option>
+    <valeur>oui</valeur>
+  </variable>
+  <variable>
+    <nom>Custom</nom>
+    <type>textarea</type>
   </variable>
 </composant>

@@ -68,7 +68,7 @@ function mouseOutBulle()
 {
    chrono = setTimeout("cacheBulleT()",delai);
 }
-
+/*
 function init_agenda() {
   jQuery("#agenda_prev").each(
     function(i, obj) {
@@ -96,4 +96,4 @@ jQuery(document).ready(
   function() {
     init_agenda()
   }
-);
+);*/

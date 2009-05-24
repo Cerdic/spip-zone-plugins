@@ -42,28 +42,28 @@ html { font-size: 100%; } /* Cf.: http://pompage.net/pompe/definir-des-tailles-d
 [(#HEADER_COMPOSANTS{css}|compacte_css)]
 
 [(#EVAL{defined('_DIR_PLUGIN_NOTATION')}|?{'', ' '})
-.notation {}
-.notation .topten {
-  border: thin dotted #CONFIG{acsFondBordColor,#AAE};
-  [background: #CONFIG{acsFondColor};]
-  padding: 2px;
-  margin: 5px;
-}
-.notation thead tr {
-  background-color: #CONFIG{acsRubnavTitreFondColor, #CONFIG{acsFondColor,#AAE}};
-  text-align:center;
-  color: #CONFIG{acsFondText, #004f8f};
-}
-.notation .ligne_paire {
-  background-color: ##CONFIG{acsRubnavFondColorHover,#EEF};
-}
-.notation small {
-  color: #CONFIG{acsFondText, #004f8f};
-  font-weight:normal;
-}
-.formulaire_notation small {
-  color: #CONFIG{acsFondText, #004f8f};
-}
+  .notation {}
+  .notation .topten {
+    border: thin dotted #CONFIG{acsFondBordColor,#AAE};
+    background: #CONFIG{acsFondColor};
+    padding: 2px;
+    margin: 5px;
+  }
+  .notation thead tr {
+    background-color: #CONFIG{acsRubnavTitreFondColor, #CONFIG{acsFondColor,#AAE}};
+    text-align:center;
+    color: #CONFIG{acsFondText, #004f8f};
+  }
+  .notation .ligne_paire {
+    background-color: #CONFIG{acsRubnavFondColorHover,#EEF};
+  }
+  .notation small {
+    color: #CONFIG{acsFondText, #004f8f};
+    font-weight:normal;
+  }
+  .formulaire_notation small {
+    color: #CONFIG{acsFondText, #004f8f};
+  }
 ]
 
 .widget {}
@@ -338,10 +338,10 @@ fieldset.reponse_formulaire { border: 1px dotted; font-weight: normal; }
 
 .form_inscription {
   width: 80%;
-  [border-color: #(#CONFIG{acsFondBordColor, afdfaf});]
+  [border-color: (#CONFIG{acsFondBordColor, afdfaf});]
   [border-width:(#CONFIG{acsFondBordLargeur, thin});]
   border-style: #CONFIG{acsFondBordStyle, dotted};
-  [background-color: #(#CONFIG{acsFondColor, #efffef});]
+  [background-color: (#CONFIG{acsFondColor, #efffef});]
   padding: 4px;
   -moz-border-radius: 8px;
 }

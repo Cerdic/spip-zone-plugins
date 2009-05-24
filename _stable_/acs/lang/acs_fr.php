@@ -52,11 +52,11 @@ else {
   'onglet_pages_info' => 'Dans la liste des pages, les pages soulign&eacute;es sont lues dans le dossier de squelettes en <span style="color: darkgreen; font-weight: normal; font-style: normal; text-decoration: underline">surcharge</span> d\'ACS, les pages du <span style="color: darkgreen; font-weight: bold; font-style: normal; text-decoration: none">mod&egrave;le ACS</span> sont en gras, celles des <span style="color: darkgreen; font-weight: normal; font-style: italic; text-decoration: none">plugins</span> en italique, et celles de la <span style="color: darkgreen; font-weight: normal; font-style: normal; text-decoration: none">distribution spip</span> sans d&eacute;coration.',
   'onglet_pages_help' => 'ACS ajoute à spip des mod&egrave;les de pages personnalisables par assemblage de composants eux-même personnalisables.
  <br /><br />
- Le sch&eacute;ma de la page pr&eacute;sente les boucles spip et les &eacute;l&eacute;ments inclus.
- <br /><br />
- Cliquer sur le petit triangle noir permet d\'afficher un sch&eacute;ma plus d&eacute;taill&eacute;, avec en particulier les param&egrave;tres des inclusions et des boucles et les commentaires spip de la page.
+ Le <b>sch&eacute;ma</b> de la page pr&eacute;sente les boucles spip et les &eacute;l&eacute;ments inclus. Cliquer sur le petit triangle noir permet d\'afficher un sch&eacute;ma plus d&eacute;taill&eacute;.
 <br /><br />
-Pour personnaliser votre site, configurez ses composants.<br />Une nouvelle instance num&eacute;rot&eacute;e d\'un composant est cr&eacute;e la première fois que l\'on clique sur ce composant depuis la page qui le contient.<br /><br />La liste des variables affiche les param&egrave;tres de tous les composants instanciés du mod&egrave;le ACS actif, utilis&eacute;s ou non.
+<b>Source</b> affiche le code source coloris&eacute; de la page.
+<br /><br />
+Pour personnaliser votre site, configurez ses composants.<br />Une nouvelle instance num&eacute;rot&eacute;e d\'un composant est cr&eacute;e la première fois que l\'on clique sur ce composant depuis la page qui le contient.
 ',
 
   'page' => 'Page',
@@ -89,7 +89,7 @@ Pour personnaliser votre site, configurez ses composants.<br />Une nouvelle inst
 
   'onglet_adm_description' => 'Configuration d\'ACS',
   'onglet_adm_info' => 'Choix du mod&egrave;le, gestion des droits, ..',
-  'onglet_adm_help' => '<b>Mod&egrave;le</b>:<br>Le mod&egrave;le est un jeu de squelettes Spip basés sur des composants ACS. Squelette(s) est optionnel, et sert à surcharger le mod&egrave;le et/ou ses composants. Pour avoir plusieurs niveaux d\'override, on sépare les chemins par deux points (<b>:</b>).<br /><br /><b>Administrateurs ACS</b>:<br />Seuls les administrateurs ACS sont autoris&eacute;s à configurer le site. Les pages de configuration du site et de certains plugins ne sont plus accessibles aux autres administrateurs.<br /><br /><b>Administration avec ACS</b>:<br />ACS permet &eacute;galement de verrouiller séparément l\'acc&egrave;s à d\'autres pages de l\'espace "ecrire" de spip: Pour celà, créer un nouveau groupe, rep&eacute;rez dans l\'url de la page à contrôler le param&egrave;tre exec=truc, ajoutez "truc" aux pages protégées du groupe (s&eacute;par&eacute;es par des virgules), puis choisssez leurs administrateurs.<br />',
+  'onglet_adm_help' => '<b>Mod&egrave;le</b>:<br>Le mod&egrave;le est un jeu de squelettes Spip basés sur des composants ACS. Squelette(s) est optionnel, et sert à surcharger le mod&egrave;le et/ou ses composants. Pour avoir plusieurs niveaux d\'override, on sépare les chemins par deux points (<b>:</b>).<br /><br /><b>Administrateurs ACS</b>:<br />Seuls les administrateurs ACS sont autoris&eacute;s à configurer le site. Les pages de configuration du site et de certains plugins ne sont plus accessibles aux autres administrateurs.<br /><br /><b>Administration avec ACS</b>:<br />ACS permet &eacute;galement de verrouiller séparément l\'acc&egrave;s à d\'autres pages de l\'espace "ecrire" de spip: Pour celà, créer un nouveau groupe, rep&eacute;rez dans l\'url de la page à contrôler le param&egrave;tre exec=truc, ajoutez "truc" aux pages protégées du groupe (s&eacute;par&eacute;es par des virgules), puis choisssez leurs administrateurs.<br /><br /><b>Afficher l\'onglet variables</b>:<br /> La liste des variables affiche toutes les variables de tous les composants instanciés du mod&egrave;le ACS actif, utilis&eacute;s ou non.<br /><br /><b>Afficher les pages des composants</b>:<br />Affiche les pages des composants dans l\'onglet "Pages".',
 
   'admins' => 'Administrateurs',
   'groupes' => 'Groupes',
@@ -98,6 +98,7 @@ Pour personnaliser votre site, configurez ses composants.<br />Une nouvelle inst
   'model' => 'Mod&egrave;le',
   'squelette' => 'Squelette(s)',
   'voir_pages_composants' => 'Afficher les pages des composants',
+  'voir_pages_preview_composants' => 'Pages de pr&eacute;visualisation des composants',
   'voir_onglet_vars' => 'Afficher l\'onglet Variables',
 
   'acsDerniereModif' => 'Mis &agrave; jour le',

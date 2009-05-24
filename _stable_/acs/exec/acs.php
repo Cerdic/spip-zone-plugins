@@ -18,10 +18,6 @@ function exec_acs() {
   if (isset($GLOBALS['meta']['ACS_ADMINS']) && (!acs_autorise()))
     acs_exit();
 
-  //pipeline('exec_init',array('args'=>array('exec'=>'acs'),'data'=>'')); // non utilisé
-
-  define('_DIR_COMPOSANTS', find_in_path('composants'));
-
   // Modifications
   $changer_config = $_POST['changer_config'];
   if ($changer_config=='oui') {
@@ -78,14 +74,7 @@ function exec_acs() {
       // Crée l'interface d'administration du composant
       $col1 = composants_gauche($$c);
       $col2 = composants($$c);
-
-      include_spip('lib/composant/composants_liste');
-      $choixComposants = array_keys(composants_liste());
-      if (is_array($choixComposants))
-        $l = liste_widgets($choixComposants, true);
-      else
-        $l = '&nbsp;';  
-      $col3 .= acs_box(count($choixComposants).' '.((count($choixComposants)==1) ? strtolower(_T('composant')) : strtolower(_T('composants'))), $l, _DIR_PLUGIN_ACS."/images/composant-24.gif", 'acs_box_composants');
+      $col3 = composants_droite($$c);
       break;
   }
   $si_premiere_fois = isset($GLOBALS['meta']['ACS_ADMINS']) ? '' : avertissement_config();

@@ -10,7 +10,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'home' => 'back to home',
 'acs_powered_tip' => 'Community website for Site Configuration Wizard',
 
-'articles_refuses' => 'Refused articles are visible here.'
+'articles_refuses' => 'Refused articles are visible here.',
+
+'visites' => ' contain @nb_articles@ texts from @nb_auteurs@ authors read @visites_articles@ times by @total_visites@ persons.'
 
 );
 ?>

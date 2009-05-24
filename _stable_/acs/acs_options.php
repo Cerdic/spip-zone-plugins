@@ -10,16 +10,16 @@
 // Les administrateurs sont ceux d'ACS
 $GLOBALS['ACS_ACCES'] = array('mots_type');
 // Contrôle d'accès ACS aux pages d'administration de certains plugins, s'ils sont installés
-// Deux tests, en raison de changements dans SPIP : à suivre
-$plugs = isset($GLOBALS['meta']['plugin']) ? $GLOBALS['meta']['plugin'] : $GLOBALS['plugins'];
+// Deux tests, en raison de changements dans SPIP : à suivre (ok avec spip 2.0.8)
+$plugs = isset($GLOBALS['meta']['plugin']) ? unserialize($GLOBALS['meta']['plugin']) : $GLOBALS['plugins'];
 if (is_array($plugs)) {
-	if(isset($plugs['cfg']))
+	if(isset($plugs['CFG']))
 		$GLOBALS['ACS_ACCES'][] = 'cfg';
-	if(isset($plugs['notation']))
+	if(isset($plugs['NOTATION']))
 		$GLOBALS['ACS_ACCES'][] = 'notation_param';
-	if(isset($plugs['w3c_go_home']))
+	if(isset($plugs['W3C_GO_HOME']))
 		$GLOBALS['ACS_ACCES'][] = 'w3c_go_home';
-	if(isset($plugs['openPublishing'])) {
+	if(isset($plugs['OPENPUBLISHING'])) {
 		$GLOBALS['ACS_ACCES'][] = 'op';
 		$GLOBALS['ACS_ACCES'][] = 'op_effacer';
 	}
@@ -34,7 +34,7 @@ if (is_array($plugs)) {
 // User images and parameters
 // compatible mutualisation (_DIR_SITE defini)
 if (_DIR_SITE == '_DIR_SITE') {
-	$dir_site ='';
+	$dir_site = '';
 }
 else {
 	$dir_site = _DIR_RACINE ? substr(_DIR_SITE, 3) : _DIR_SITE ;

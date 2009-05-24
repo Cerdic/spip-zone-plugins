@@ -1,6 +1,6 @@
 [(#REM)
 Les 3 derniers articles de la ou des rubriques
-avec le mot-clé liste_articles_keyword (Communiques)
+avec le mot-clé articles_keyword (Communiques)
 par date, sans doublons, pour la langue en cours
 ]
 [(#SET{acsKeyword,<:acs:articles_keyword:>})]
@@ -10,7 +10,7 @@ par date, sans doublons, pour la langue en cours
   [(#ANCRE_PAGINATION)][<p class="pagination"><:acs:articles_derniers_communiques:> : (#PAGINATION)</p>]
   <div class="liste-articles">
       [(#ENV{debut_articles}|?{'',' '})]
-      <ul>{moyenne_ponderee}  {moyenne_ponderee>=#CONFIG{acsDemocratieSeuilPublic,0}}
+      <ul>
         <BOUCLE_communiques(ARTICLES notations_objets) {id_objet=id_article} {objet=='article'} {id_rubrique} {par date}{inverse} {doublons} {pagination 3} {statut==#DEMOCRATIE_STATUT} {lang=#LANG}>
             <INCLURE{fond=composants/articles/articles}{id_article}{titre}{surtitre}{soustitre}{texte=#INTRODUCTION}{auteurs=#LESAUTEURS}{date}{date_redac}{date_modif}{coupe=#EVAL{2*#CONFIG{acsArticlesNbLettres,200}}}{note=#MOYENNE_PONDEREE}>
         </BOUCLE_communiques>
@@ -38,3 +38,5 @@ Les articles dotés d'une date de publication future ne sont donc pas affichés.
       </ul>
   </div>
 </B_articles>
+<div class="extrait"><:acs:articles_aucun_article_note:></div>
+<//B_articles>

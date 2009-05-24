@@ -19,10 +19,8 @@ function composants_liste(){
   if (count($cl) > 0)
     return $cl; // Return result if done once
 
-  if (!isset($GLOBALS['meta']['acsModel']))
-    return $cl; // Return empty array if ACS not initialized
-
   require_once _DIR_ACS.'inc/acs_cache.php';
+  $model = (isset($GLOBALS['meta']['acsModel']) ? $GLOBALS['meta']['acsModel'] : 'cat');  
   $cl = cache('lecture_composants_liste', 'a_'.$GLOBALS['meta']['acsModel'].'_cl');
   $cl = $cl[0];
   return $cl;

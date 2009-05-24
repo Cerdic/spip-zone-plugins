@@ -8,9 +8,11 @@ $gouvernance = array(
   'adm' => 'Seuls les administrateurs peuvent voter'
 );
 
+$pnp = unserialize($GLOBALS['meta']['notation']);
+
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-'gouvernance' => $gouvernance[$GLOBALS['meta']['notation_acces']],
+'gouvernance' => $gouvernance[$pnp['acces']],
 
 'articles_non_publies' => 'Les articles proposés ne sont publiés que lorsque leur note dépasse <b>'.$GLOBALS['meta']['acsDemocratieSeuilPublic'].'</b>.<br />Voici les articles les plus proches de ce seuil et les derniers articles proposés à la publication: évaluez-les pour décider s\'ils doivent être publiés.',
 

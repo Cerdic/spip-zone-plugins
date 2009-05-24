@@ -1,5 +1,5 @@
 <?php
-// This is a SPIP-ACS language file  --  Ceci est un fichier langue de SPIP-ACS
+// Ceci est un fichier langue de SPIP-ACS
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -11,8 +11,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'Text' => 'Texte',
 'Link' => 'Liens',
 'LinkHover' => 'Au survol',
+'Custom' => 'Pied de page personnalis&eacute; : ',
 
-'LienRefus' => 'Lien vers articles refus&eacute;s',
-'LienACS' => 'Lien ACS'
+'liens' => 'Liens affich&eacute;s : ',
+'LienCopyright' => 'Copyright',
+'LienResume' => 'R&eacute;sum&eacute; en mode texte',
+'LienRefus' => 'Articles refus&eacute;s',
+'LienACS' => 'ACS',
+'LienSPIP' => 'SPIP',
+'LienRSS' => 'RSS',
+'Stats' => 'Statistiques du site'
 );
 ?>

@@ -31,6 +31,7 @@ function acs_adm() {
     acs_group_update_pages(acs_grid($_POST['group']), $_POST['pages']);
   if (isset($_POST['changer_config']) && ($_POST['changer_config'] == 'oui')) {
     ecrire_meta('acsVoirPagesComposants', $_POST['acsVoirPagesComposants']);
+    ecrire_meta('acsVoirPagesPreviewComposants', $_POST['acsVoirPagesPreviewComposants']);
     ecrire_meta('acsVoirOngletVars', $_POST['acsVoirOngletVars']);
     ecrire_metas();
   }
@@ -90,18 +91,16 @@ function acs_adm_gauche() {
 }
 
 function acs_adm_droite() {
-  return acs_info_box(
-  _T('acs:acs'),
-    '<form name="acs_config" action="?exec=acs&onglet=adm" method="post"><input type="hidden" name="changer_config" value="oui"><div style="text-align: right">'._T('acs:voir_onglet_vars').'<input name="acsVoirOngletVars" type="checkbox"'.($GLOBALS['meta']['acsVoirOngletVars'] ? ' checked' : '').' /><br /><div style="text-align: right">'._T('acs:voir_pages_composants').'<input name="acsVoirPagesComposants" type="checkbox"'.($GLOBALS['meta']['acsVoirPagesComposants'] ? ' checked' : '').' /><br /><br /><input type="submit" name="'._T('bouton_valider').
-  '" value="'._T('bouton_valider').'" class="fondo" /></div></form>',
-    null,
+  return acs_box(
+  	_T('acs:acs'),
+    '<div style="text-align: right"><form name="acs_config" action="?exec=acs&onglet=adm" method="post"><input type="hidden" name="changer_config" value="oui">'._T('acs:voir_onglet_vars').'<input name="acsVoirOngletVars" type="checkbox"'.($GLOBALS['meta']['acsVoirOngletVars'] ? ' checked' : '').' /><br />'._T('acs:voir_pages_composants').'<input name="acsVoirPagesComposants" type="checkbox"'.($GLOBALS['meta']['acsVoirPagesComposants'] ? ' checked' : '').' /><br />'._T('acs:voir_pages_preview_composants').'<input name="acsVoirPagesPreviewComposants" type="checkbox"'.($GLOBALS['meta']['acsVoirPagesPreviewComposants'] ? ' checked' : '').' /><br /><br /><input type="submit" name="'._T('bouton_valider').
+  '" value="'._T('bouton_valider').'" class="fondo" /></form></div><br />'.
     _T('acs:acsDerniereModif').' '.date("Y-m-d H:i:s", $GLOBALS['meta']['acsDerniereModif']).
     '<hr /><br />'.
     _T('version').' <a style="color: black">ACS '.ACS_VERSION.' ('.ACS_RELEASE.')</a>'.
     '<br /><br />'.
     _T('acs:documentation').': <a href="http://acs.geomaticien.org" target="_new"><img src="'._DIR_PLUGIN_ACS.'images/acs_32x32_help.gif" alt="?" style="vertical-align: middle"/></a>',
-    _DIR_PLUGIN_ACS."images/acs_32x32.gif",
-    '<br />'
+    _DIR_PLUGIN_ACS."images/acs_32x32.gif"
     );
 }
 
@@ -138,7 +137,7 @@ function list_models(){
   $squelettes = array();
   if ($d = @opendir(_DIR_PLUGIN_ACS.'models')) {
     while (false !== ($file = @readdir($d))) {
-      if ($file != "." && $file != ".." && is_dir(_DIR_PLUGIN_ACS.'models/'.$file)) {
+      if ($file != "." && $file != ".." && substr($file, 0, 1) != '.' && is_dir(_DIR_PLUGIN_ACS.'models/'.$file)) {
         $squelettes[] = $file;
       }
     }

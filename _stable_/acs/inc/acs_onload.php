@@ -37,6 +37,9 @@ if (isset($GLOBALS['meta']['acsSqueletteOverACS']) && $GLOBALS['meta']['acsSquel
 }
 $GLOBALS['dossier_squelettes'] .= 'plugins/'.acs_get_from_active_plugin('ACS', 'dir').'/'.'models/'.$GLOBALS['meta']['acsModel'];
 
+// dossier des composants :
+define('_DIR_COMPOSANTS', find_in_path('composants'));
+
 // dispatch public / privé
 if ((_DIR_RESTREINT != '') && ($_POST['action'] != 'poster_forum_prive')) {
   include_spip('balise/acs_balises');
@@ -72,5 +75,16 @@ function acs_autorise() {
   else  // A défaut, le créateur ET administrateur du site (auteur n°1) est toujours autorisé à configurer ACS
     return ($id_admin == 1);
   return false;
+}
+
+/**
+ * Makes directory, returns TRUE if exists or made
+ *
+ * @param string $pathname The directory path.
+ * @return boolean returns TRUE if exists or made or FALSE on failure.
+ */
+function mkdir_recursive($pathname) {
+    is_dir(dirname($pathname)) || mkdir_recursive(dirname($pathname));
+    return is_dir($pathname) || @mkdir($pathname);
 }
 ?>

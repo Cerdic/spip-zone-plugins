@@ -84,7 +84,7 @@
 
 .plan-secteur h1 {
   border: 0;
-  border-top: [(#CONFIG{acsArticlesBordLargeur,1px})][( #CONFIG{acsArticlesBordStyle, solid})][ (#CONFIG{acsArticlesBordCouleur})];
+  border-top: [(#CONFIG{acsArticlesBordLargeur,1px})][ (#CONFIG{acsArticlesBordStyle,solid})][ (#CONFIG{acsArticlesBordCouleur})];
   margin: 0;
   font-size: 110%;
   font-weight: bold;
@@ -140,23 +140,23 @@ span.plan-article {
 /* Eclaircissement ou assombrissement progressif des rubriques en fonction de la profondeur */
 
 ul .plan-rubrique {
-  background: [(#CONFIG{acsArticlesRubFond2, fafffa})];
+  background: [(#CONFIG{acsArticlesRubFond2, #fafffa})];
   margin-left: 2%;
 }
 
 ul ul .plan-rubrique {
-  background: [(#CONFIG{acsArticlesRubFond3, f5fff5})];
+  background: [(#CONFIG{acsArticlesRubFond3, #f5fff5})];
   margin-left: 3%;
 }
 ul ul ul .plan-rubrique {
-  background: [(#CONFIG{acsArticlesRubFond4, efffef})];
+  background: [(#CONFIG{acsArticlesRubFond4, #efffef})];
   margin-left: 4%;
 }
 ul ul ul ul .plan-rubrique {
-  background: [(#CONFIG{acsArticlesRubFond5, dfffdf})];
+  background: [(#CONFIG{acsArticlesRubFond5, #dfffdf})];
   margin-left: 5%;
 }
 ul ul ul ul ul .plan-rubrique {
-  background: [(#CONFIG{acsArticlesRubFond6, d0ffd0})];
+  background: [(#CONFIG{acsArticlesRubFond6, #d0ffd0})];
   margin-left: 6%;
 }

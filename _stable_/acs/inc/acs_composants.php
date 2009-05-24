@@ -39,6 +39,15 @@ function composants($c) {
 	return $r;
 }
 
+function composants_droite($c) {
+  $choixComposants = array_keys(composants_liste());
+  if (is_array($choixComposants))
+    $l = liste_widgets($choixComposants, true);
+  else
+    $l = '&nbsp;';
+  return acs_box(count($choixComposants).' '.((count($choixComposants)==1) ? strtolower(_T('composant')) : strtolower(_T('composants'))), $l, _DIR_PLUGIN_ACS."/images/composant-24.gif", 'acs_box_composants');
+}
+
 function composant_instances_select($c, $nic) {
   include_spip('lib/composant/composants_variables');
   $instances = composant_instances($c);

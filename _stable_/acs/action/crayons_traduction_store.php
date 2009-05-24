@@ -48,15 +48,14 @@ function action_crayons_traduction_store_dist() {
 	$lang = $_POST['lang_'.$wid];
 	
 	// On récupère le fichier de langue que trouve SPIP par find_in_path()
-	$langfile = 'composants/'.$c.(($module != '') ? '/'.$module : '').'/lang/'.$c.(($module != '') ? '_'.$module : '').'_'.$lang.'.php';
-  $f = find_in_path($langfile);
-  if (!is_file($f)){
+	$langfile = _DIR_COMPOSANTS.'/'.$c.(($module != '') ? '/'.$module : '').'/lang/'.$c.(($module != '') ? '_'.$module : '').'_'.$lang.'.php';
+  if (!is_file($langfile)){
 		echo var2js(array('$erreur' => _U('acs:err_fichier_absent', array('file' => $langfile))));
 		exit;
 	}
-	$file = file_get_contents($f);
+	$file = file_get_contents($langfile);
 	$file = str_replace("'$var' => '$oldval'" , "'$var' => '$newval'", $file);
-	if (!@file_put_contents($f, $file)) {
+	if (!@file_put_contents($langfile, $file)) {
 		echo var2js(array('$erreur' => _U('acs:err_fichier_ecrire', array('file' => $langfile))));
 		exit;		
 	}

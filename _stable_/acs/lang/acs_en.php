@@ -50,9 +50,11 @@ else {
 
   'onglet_pages_description' => 'Schema and source.',
   'onglet_pages_info' => 'In pages list, underlined ones are read in the <span style="color: darkgreen; font-weight: normal; font-style: normal; text-decoration: underline">override</span> directory, bolded in current <span style="color: darkgreen; font-weight: bold; font-style: normal; text-decoration: none">ACS model</span>, italicized from <span style="color: darkgreen; font-weight: normal; font-style: underline; text-decoration: none">plugins</span>, and thoses without any font decoration from <span style="color: darkgreen; font-weight: normal; font-style: normal; text-decoration: none">spip distribution</span>.',
-  'onglet_pages_help' => 'ACS add to spip customizables pages made with customizables components.<br /><br />Click on the little black triangle to display a more detailed schema, including parameters and spip comments.
+  'onglet_pages_help' => 'ACS add to spip customizables pages made with customizables components.<br /><br />Click on the little black triangle to display a more detailed schema.
 <br /><br />
-To setup your website, customize components.<br/>A new instance of a component is created the first time you click on this component from the page which contain it.<br /><br />These page display customizable ACS plugin elements: pages, components, spip models and forms available in active ACS model, and default pages from spip distribution and installed plugins (even not used pages).<br /><br />ACS model elements may be eventually overriden by equivalents from skeleton directory optionnaly defined (Administration pane).<br /><br />All variables display created components variables, whenever components are used or not.',
+<b>Source</b> display colorized source code of the page.
+<br /><br />
+To setup your website, customize components.<br/>A new instance of a component is created the first time you click on this component from the page which contain it.<br /><br />These page display customizable ACS plugin elements: pages, components, spip models and forms available in active ACS model, and default pages from spip distribution and installed plugins (even not used pages).<br /><br />ACS model elements may be eventually overriden by equivalents from skeleton directory optionnaly defined (Administration pane).',
 
   'page' => 'Page',
   'pages' => 'Pages',
@@ -84,7 +86,7 @@ To setup your website, customize components.<br/>A new instance of a component i
 
   'onglet_adm_description' => 'Configuration',
   'onglet_adm_info' => 'ACS model choice and administration.',
-  'onglet_adm_help' => '<b>Model</b>:<br />Model is a set of ACS components-based spip skeletons (templates). Skeleton(s) is optionnal. It override the model and/or its components. If more than one is needed, separator is ":"  between paths.<br /><br /><b>ACS administrators</b>:<br />ACS administrators only are authorized to configure the website. Configuration pages are no more accessible to other administrators.<br /><br /><b>ACS access control</b>:<br />You can lock access to other spip "ecrire" area pages: creat a new group, look for the exec=dosomething parameter in the page-to-control url, add "something" in the "ACS administrated" list (separated by comma), validate, and add the page-to-control administrator(s).<br />',
+  'onglet_adm_help' => '<b>Model</b>:<br />Model is a set of ACS components-based spip skeletons (templates). Skeleton(s) is optionnal. It override the model and/or its components. If more than one is needed, separator is ":"  between paths.<br /><br /><b>ACS administrators</b>:<br />ACS administrators only are authorized to configure the website. Configuration pages are no more accessible to other administrators.<br /><br /><b>ACS access control</b>:<br />You can lock access to other spip "ecrire" area pages: creat a new group, look for the exec=dosomething parameter in the page-to-control url, add "something" in the "ACS administrated" list (separated by comma), validate, and add the page-to-control administrator(s).<br /><br /><b>Display all variables</b>:<br /> All variables display created components variables, whenever components are used or not.<br /><br /><b>Display component\'s pages</b>:<br />Display component\'s pages in "Pages" pane.',
 
   'admins' => 'Administrators',
   'groupes' => 'Groups',
@@ -93,6 +95,7 @@ To setup your website, customize components.<br/>A new instance of a component i
   'model' => 'Model',
   'squelette' => 'Skeleton(s)',
   'voir_pages_composants' => 'Display components pages',
+  'voir_pages_preview_composants' => 'Components preview pages',
   'voir_onglet_vars' => 'Show Variables pane.',
 
   'acsDerniereModif' => 'Updated',

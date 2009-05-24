@@ -13,7 +13,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'derniers_textes' => 'Last texts published',
 'redige' => 'written',
 'publie' => 'published',
-'maj' => 'updated'
+'maj' => 'updated',
+
+'aucun_article_note' => 'No article rated'
 
 );
 ?>

@@ -8,9 +8,11 @@ $gouvernance = array(
   'adm' => 'Only administrators vote'
 );
 
+$pnp = unserialize($GLOBALS['meta']['notation']);
+
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-'gouvernance' => $gouvernance[$GLOBALS['meta']['notation_acces']],
+'gouvernance' => $gouvernance[$pnp['acces']],
 
 'articles_non_publies' => 'Articles are published only when rated more than <b>'.$GLOBALS['meta']['acsDemocratieSeuilPublic'].
 													'</b>.<br />Here are articles near this level and last proposed articles: evaluate its to make the publication decision.',

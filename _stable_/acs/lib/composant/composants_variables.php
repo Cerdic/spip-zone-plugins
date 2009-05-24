@@ -18,7 +18,8 @@ function composants_variables() {
     return $cv;
 
   include_spip('inc/acs_cache');
-  $cv = cache('lecture_composants_variables', 'a_'.$GLOBALS['meta']['acsModel'].'_cv');
+  $model = (isset($GLOBALS['meta']['acsModel']) ? $GLOBALS['meta']['acsModel'] : 'cat');
+  $cv = cache('lecture_composants_variables', 'a_'.$model.'_cv');
   $cv = $cv[0];
 
   return $cv;
@@ -57,6 +58,9 @@ function lecture_composants_variables() {
   return $r;
 }
 
+/**
+ * Retourne le nombre d'instances d'un composant
+ */
 function composant_instances($c) {
   $r = array();
   $metas = $GLOBALS['meta'];
