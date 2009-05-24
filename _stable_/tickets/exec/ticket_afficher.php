@@ -7,15 +7,6 @@ function exec_ticket_afficher () {
 	
 	include_spip('inc/presentation');
 	
-	// Ajout d'un message au ticket
-	if (_request("poster_message_ticket")) {
-		$id_ticket = _request("poster_message_ticket");
-		$texte = _request("texte");
-		
-		sql_insertq("spip_tickets_forum", 
-			array("id_ticket" => $id_ticket, "texte" => $texte, "id_auteur" => $connect_id_auteur,  "date" => "NOW()"));
-	}
-	
 	$titre_page = _T('tickets:page_titre');
 	
 	// Permet entre autres d'ajouter les classes à la page : <body class='$rubrique $sous_rubrique'>
@@ -23,7 +14,7 @@ function exec_ticket_afficher () {
 	$sous_rubrique = "tickets";
 	
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo($commencer_page($titre_page, $rubrique, $sous_rubrique));
+	echo $commencer_page($titre_page, $rubrique, $sous_rubrique);
 	
 	echo "<br /><br />";
 	

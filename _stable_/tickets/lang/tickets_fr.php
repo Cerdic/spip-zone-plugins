@@ -37,11 +37,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_creation_auteur' => 'Ticket cr&eacute;&eacute; le <strong>@date@</strong> par <strong>@nom@</strong>',
 	
 	// E
+	'erreur_texte_longueur_mini' => 'La longueur minimale du texte est de @nb@ caract&egrave;res.',
+	'erreur_verifier_formulaire' => 'V&eacute;rifiez votre formulaire',
 	'explication_description_ticket' => 'D&eacute;crivez aussi pr&eacute;cis&eacute;ment que possible le besoin ou le probl&egrave;me rencontr&eacute;. 
 	Indiquez en particulier s&rsquo;il se produit syst&eacute;matiquement ou occasionnellement. 
 	S&rsquo;il s&rsquo;agit d&rsquo;un probl&egrave;me d\'affichage, pr&eacute;cisez avec quel navigateur vous le rencontrez.',
 	'explication_url_exemple' => 'Indiquez ici l&rsquo;URL d&rsquo;une page concern&eacute;e par ce ticket.',
 	'explication_redaction' => 'Quand vous avez termin&eacute; la r&eacute;daction de votre ticket, s&eacute;lectionnez le statut &laquo;ouvert et discut&eacute;&raquo;.',
+	
+	// F
+	'forum_message' => 'Votre message',
+	'forum_sans_previsu' => 'Attention&nbsp;: pas de pr&eacute;visualisation&nbsp;; votre message est publi&eacute; imm&eacute;diatement.',
+	
+	// M
+	'message_poste_par' => 'Message post&eacute; par',
+	'message_le' => 'le @date@',
+	'message_publie' => 'Votre message est publi&eacute;',
 	
 	// N
 	'no_assignation' => 'Personne',
