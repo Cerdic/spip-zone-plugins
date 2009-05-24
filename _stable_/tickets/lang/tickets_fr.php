@@ -74,6 +74,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'statut_mis_a_jour' => 'Statut mis &agrave; jour',
 	'statut_ferme' => 'Ferm&eacute;',
 	'statut_ferme_long' => 'Tous les tickets ferm&eacute;s',
+	'statut_inchange' => 'Le statut n\'a pas &eacute;t&eacute; modifi&eacute;.',
 	'statut_ouvert' => 'Ouvert et discut&eacute;',
 	'statut_redac' => 'En cours de r&eacute;daction',
 	'statut_resolu' => 'R&eacute;solu',

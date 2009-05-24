@@ -45,6 +45,11 @@ function formulaires_statut_ticket_charger($id_ticket='', $retour='', $config_fo
  * @param object $row[optional]
  */
 function formulaires_statut_ticket_verifier($id_ticket='', $retour='', $config_fonc='tickets_statut_config', $row=array(), $hidden=''){
+	$ancien_statut = sql_getfetsel("statut","spip_tickets","id_ticket=".intval($id_ticket));
+	$nouveau_statut = _request('statut');
+	if($ancien_statut == $nouveau_statut){
+		$erreurs['message_erreur'] = _T('tickets:statut_inchange');
+	}
 	return $erreurs;
 }
 
@@ -68,6 +73,7 @@ function formulaires_statut_ticket_traiter($id_ticket='',$retour='', $config_fon
 	$c = array('statut'=>_request('statut'));
 	instituer_ticket($id_ticket, $c);
 	$message['message_ok'] = _T('tickets:statut_mis_a_jour');
+	$message['redirect'] = self();
 
 	return $message;
 }
