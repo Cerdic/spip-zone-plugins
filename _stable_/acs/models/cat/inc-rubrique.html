@@ -58,14 +58,6 @@ Page d'une rubrique
 </div>[(#REM) fin colonne2]
 <div id="colonne3"><div class="spacer"></div>
   <div class="encart">
-    [(#REM) mini calendrier (composant Agenda ]
-    [(#CONFIG{acsAgendaUse}|=={oui}|?{' '})
-      <INCLURE{fond=composants/agenda/agenda}>
-    ]
-    <div class="spacer"></div>
-
-    <INCLURE{fond=composants/breves/breves}{env=#ENV}{id_secteur}{debut_breves}>[(#REM) Breves du secteur ]
-    <INCLURE{fond=composants/syndic/syndic-rub}{env=#ENV}{id_rubrique}>[(#REM) Sites de la rubrique ]
     <INCLURE{fond=composants/module/module}{nic=26}{self=#SELF}{env=#ENV}{id_rubrique}>
   </div>[(#REM) fin encart]
 </div>[(#REM) fin colonne 3]

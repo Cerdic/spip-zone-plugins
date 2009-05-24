@@ -1,7 +1,7 @@
 <B_syndsit>
 <div class="syndic #PINCEAU{syndic}">
-<div class="menu-titre">Sur le Web</div>
-<BOUCLE_syndsit(SYNDICATION) {syndication==(oui)|(sus)} {par date} {par nom_site} {0,#CONFIG{acsSyndicNbSites,5}}>
+<div class="menu-titre"><:sur_web:></div>
+<BOUCLE_syndsit(SITES) {id_rubrique ?} {par date} {par nom_site} {0,#CONFIG{acsSyndicNbSites,5}}>
   <ul>
     <li><div class="menu-titre"><a href="#URL_SITE" target="synd" [ title="(#NOM_SITE|texte_backend)"] class="spip_out">#NOM_SITE</a></div>
     <B_syndic>
