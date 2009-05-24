@@ -51,6 +51,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// P
 	'page_titre' => 'Tickets, syst&egrave;me de suivi de bugs',
 	
+	// R
+	'revenir_gestion' => 'Revenir &agrave; la gestion des tickets',
+	
 	// S
 	'statut_mis_a_jour' => 'Statut mis &agrave; jour',
 	'statut_ferme' => 'Ferm&eacute;',

@@ -7,6 +7,7 @@
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input type='hidden' name='id_ticket' value='#ID_TICKET' />
+		<fieldset>
 		<ul>
 			<li class="editer_titre obligatoire">
 				<label for="titre"><:tickets:champ_titre_ticket:></label>
@@ -58,7 +59,9 @@
 				<div class="explication">
 					<:tickets:explication_description_ticket:>
 				</div>
-				[(#VAL{text_area}|barre_typo{#LANGUE})]
+				[(#SPIP_VERSION|<{2.1}|oui)
+					[(#VAL{text_area}|barre_typo{#LANGUE})]
+				]
 				<textarea name='texte' id='text_area' class='barre_inserer' rows='20' cols='50'[(#ENV**{browser_caret,''})]>[(#ENV**{texte})]</textarea>
 			</li>
 			<li>
@@ -67,6 +70,7 @@
 				<input type='text' class='text' name='exemple' id='exemple' value="[(#ENV**{exemple})]" />
 			</li>
 		</ul>
+		</fieldset>
 		<p class='boutons'><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
 	</div></form>]
 </div>

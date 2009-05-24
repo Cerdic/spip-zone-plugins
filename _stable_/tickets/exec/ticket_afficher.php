@@ -34,6 +34,7 @@ function exec_ticket_afficher () {
 	
 	$contexte = array("id_ticket"=>$id_ticket);
 	$page = recuperer_fond("prive/contenu/ticket_afficher", $contexte);
+	
 	echo $page;
 	
 	echo fin_gauche(), fin_page();

@@ -14,7 +14,7 @@ function exec_ticket_editer() {
 	if(intval($id_ticket)){
 		$contexte['titre'] = sql_getfetsel("titre","spip_tickets","id_ticket=$id_ticket");
 	}else{
-		$contexte['titre'] = _T('tickets:creer_nouveau_ticket');
+		$contexte['titre'] = _T('tickets:creer_ticket');
 	}
 	
 	$titre_page = _T('tickets:page_titre');
