@@ -27,13 +27,23 @@ function fancybox_insert_head($flux){
 var fb_selecteur_galerie="'.$config['selecteur_galerie'].'";
 var fb_selecteur_commun="'.$config['selecteur_commun'].'";
 var fb_selecteur_frame="'.$config['selecteur_frame'].'";
-var fb_framewidth='.$config['framewidth'].';
-var fb_frameheight='.$config['frameheight'].';
-var fb_padding='.$config['padding'].';
-var fb_imagescale='.$config['imagescale'].';
-var fb_overlayshow='.$config['overlayshow'].';
-var fb_overlayopacity='.$config['overlayopacity'].';
-var fb_hideoncontentclick='.$config['hideoncontentclick'].';
+var fb_commun_options = {
+	"padding": '.$config['padding'].',
+	"imageScale": '.$config['imagescale'].',
+	"overlayShow": '.$config['overlayshow'].',
+	"overlayOpacity": '.$config['overlayopacity'].',
+	"hideOnContentClick": '.$config['hideoncontentclick'].',
+	"callbackOnShow": showlongdesc
+};
+var fb_frame_options = {
+	"frameWidth": '.$config['framewidth'].',
+	"frameHeight": '.$config['frameheight'].',
+	"padding": '.$config['padding'].',
+	"imageScale": '.$config['imagescale'].',
+	"overlayShow": '.$config['overlayshow'].',
+	"overlayOpacity": '.$config['overlayopacity'].',
+	"hideOnContentClick": '.$config['hideoncontentclick'].'
+};
 if (window.jQuery)
 (function($){if(typeof onAjaxLoad == "function") onAjaxLoad(fancy_init);
 	$(fancy_init);

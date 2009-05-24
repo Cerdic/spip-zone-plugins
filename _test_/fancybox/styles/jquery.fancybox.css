@@ -313,3 +313,18 @@ td#fancy_title_right {
 	width: 15px;
 	background: transparent url(../images/fancy_title_right.png) repeat-x;
 }
+
+
+#fancy_legend {
+	z-index: 101;
+	position: absolute;
+	bottom:0;
+	width: 100%;
+	background: #ccc;
+	padding: 0;
+	text-align: center;
+}
+#fancy_legend p {
+	margin-top: 3px;
+	margin-bottom: 3px;
+}
