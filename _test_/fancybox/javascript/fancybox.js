@@ -24,7 +24,11 @@ var displaylongdesc=function(l) {
 }
 // Gestion du longdesc : chargement de la legende
 var showlongdesc=function() {
-	var l=$(this.itemArray[this.itemCurrent].orig[0]).attr("longdesc");
+	var l=this.itemArray[this.itemCurrent]
+	if (l && l.orig && l.orig[0])
+		l = $(l.orig[0]).attr("longdesc");
+	else
+		l = null;
 	if (l) {
 		// la legende est dans un div de la page
 		if (l.match(/^#/)) {
