@@ -7,7 +7,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'assignes_a' => 'Assign&eacute;s &agrave;',
 	'assigne_a' => 'Assign&eacute; &agrave;',
+	'assignation_attribuee_a' => 'Le ticket a &eacute;t&eacute; assign&eacute; &agrave; @nom@.',
+	'assignation_mail_titre' => 'Changement d\'assignation du ticket',
 	'assignation_modifiee' => 'Assignation mise &agrave; jour',
+	'assignation_non_modifiee' => 'Assignation non mise &agrave; jour',
+	'assignation_supprimee' => 'L\'assignation de ce ticket a &eacute;t&eacute; supprim&eacute;e.',
 	
 	// C 
 	'champ_assigner' => 'Assigner &agrave;',
@@ -53,6 +57,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_poste_par' => 'Message post&eacute; par',
 	'message_le' => 'le @date@',
 	'message_publie' => 'Votre message est publi&eacute;',
+	'mail_texte_message_auto' => 'Ceci est un message automatique : n\'y repondez pas.',
 	
 	// N
 	'no_assignation' => 'Personne',

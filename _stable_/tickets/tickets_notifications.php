@@ -23,4 +23,10 @@ function notifications_instituerticket_dist($quoi, $id_ticket, $options) {
 	$notifier_publication_ticket($id_ticket);
 }
 
+function notifications_assignerticket_dist($quoi, $id_ticket, $options) {
+	spip_log('notification assigner ticket');
+	
+	$notifier_assignation_ticket = charger_fonction('notifier_assignation_ticket','inc');
+	$notifier_assignation_ticket($id_ticket,$options);
+}
 ?>

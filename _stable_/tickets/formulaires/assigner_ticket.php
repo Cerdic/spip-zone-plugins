@@ -67,51 +67,22 @@ function ticket_assigner_config(){
  */
 function formulaires_assigner_ticket_traiter($id_ticket='',$retour='', $config_fonc='ticket_assigner_config', $row=array(), $hidden=''){
 	$message = "";
+	$id_assigne_ancien = sql_getfetsel("id_assigne","spip_tickets","id_ticket=".intval($id_ticket));
 	$id_assigne = _request('id_assigne');
-	sql_updateq("spip_tickets",array('id_assigne' => $id_assigne),"id_ticket=$id_ticket");
-	
-	$message['message_ok'] = _T('tickets:assignation_modifiee');
-	
-	if($retour){
-		include_spip('inc/headers');
-		$retour = parametre_url($retour,'id_ticket',$id);
-		$message .= redirige_formulaire($retour);
-	}
-	/**
-	 * 
-	// Envoyer mail annoncant le bug
-	if (($statut != $ancien_statut) AND ($statut != "redac")) {
-		include_spip('inc/tickets_filtres');
-		$nom_site = $GLOBALS["meta"]["nom_site"];
-		$url_site = $GLOBALS["meta"]["adresse_site"];
-		$url_ticket = "$url_site/ecrire/?exec=ticket_afficher&id_ticket=$id_ticket";
-		$email_webmestre = $GLOBALS["meta"]["email_webmaster"];
-		$titre = trim($titre);
-		$titre_message = "[Ticket - $nom_site] $titre - statut:".tickets_texte_statut($statut); 
-		$header = "From: ". $nom_site . " <" . $email_webmestre . ">\r\n";
-		$message = "$titre_message\n
-		------------------------------------------\n
-		Ceci est un message automatique : n'y repondez pas.\n\n
-		$texte\n\n
-		$url_ticket";
+	if($id_assigne != $id_assigne_ancien){
+		sql_updateq("spip_tickets",array('id_assigne' => $id_assigne),"id_ticket=$id_ticket");
+		$message['message_ok'] = _T('tickets:assignation_modifiee');
+		$message['redirect'] = self();
 		
-		// Determiner la liste des auteurs a notifier
-		include_spip('inc/tickets_autoriser');
-		$select = array('email');
-		$from = array('spip_auteurs AS t1');
-		$autorises = definir_autorisations_tickets('notifier');
-		if ($autorises['statut']) 
-			$where = array(sql_in('t1.statut', $autorises['statut']), 't1.email LIKE '.sql_quote('%@%'));
-		else
-			$where = array(sql_in('t1.id_auteur', $autorises['auteur']), 't1.email LIKE '.sql_quote('%@%'));
-		$query_auteurs = sql_select($select, $from, $where);
-		// Envoi des mails
-		while ($row_auteur = sql_fetch($query_auteurs)) {
-			$recipient = $row_auteur["email"];
-			mail($recipient, $titre_message, $message, $header);
+		if ($notifications = charger_fonction('notifications', 'inc')) {
+			$notifications('assignerticket', $id_ticket,
+				array('id_auteur' => id_assigne)
+			);
 		}
+	}else{
+		$message['message_ok'] = _T('tickets:assignation_non_modifiee');
 	}
-	*/
+	
 	return $message;
 }
 ?>
