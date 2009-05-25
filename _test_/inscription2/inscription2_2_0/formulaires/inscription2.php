@@ -13,7 +13,7 @@ include_spip('cfg_options');
  * @param int $id_auteur[optional] Si cette valeur est utilisée, on entre dans le cadre de
  * la modification d'un auteur, et plus dans la création
  */
-function formulaires_inscription2_charger_dist($id_auteur = NULL){
+function formulaires_inscription2_charger_dist($id_auteur = NULL,$redirect = null){
    
 	//initialise les variables d'environnement pas défaut
 	$valeurs = array();
@@ -69,7 +69,7 @@ function formulaires_inscription2_charger_dist($id_auteur = NULL){
 	return $champs;
 }
 
-function formulaires_inscription2_verifier_dist($id_auteur = NULL){
+function formulaires_inscription2_verifier_dist($id_auteur = NULL,$redirect = null){
     
 	//charge la fonction de controle du login et mail
 	//$test_inscription = charger_fonction('test_inscription');
@@ -173,9 +173,10 @@ function formulaires_inscription2_verifier_dist($id_auteur = NULL){
     return $erreurs; // si c'est vide, traiter sera appele, sinon le formulaire sera resoumis
 }
 
-function formulaires_inscription2_traiter_dist($id_auteur = NULL){
-	spip_log('traiter','inscription2');
+function formulaires_inscription2_traiter_dist($id_auteur = NULL,$redirect = null){
 	global $tables_principales;
+	
+	$retour = array();
 	
 	if((is_numeric($id_auteur) && (lire_config('inscription2/pass_fiche_mod') != 'on'))
 		OR (is_numeric($id_auteur) && (lire_config('inscription2/pass_fiche_mod') == 'on')) && (strlen(_request('password')) == 0)){
@@ -354,6 +355,13 @@ function formulaires_inscription2_traiter_dist($id_auteur = NULL){
 		$editable = false;
     }
 	
-    return array('editable'=>$editable,'message' => $message);
+	$retour['editable'] = $editable;
+	$retour['message_ok'] = $message;
+	
+	if($redirect){
+		$retour['redirect'] = $redirect;
+	}
+	
+    return $retour;
 }
 ?>
