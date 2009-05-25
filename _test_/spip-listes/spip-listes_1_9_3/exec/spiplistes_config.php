@@ -339,6 +339,11 @@ function exec_spiplistes_config () {
 		. "<input type='text' name='email_defaut' value='".$adresse_defaut."' size='30' class='forml' />\n"
 		. fin_cadre_relief(true)
 		//
+		// adresse email du smtp sender
+		. debut_cadre_relief("", true, "", _T('spiplistes:adresse_smtp'))
+		. "<input type='text' name='smtp_sender' value='".$smtp_sender."' size='30' class='forml' />\n"
+		. fin_cadre_relief(true)
+		//
 		// adresse return-path de retour (on-error reply-to)
 		. debut_cadre_relief("", true, "", _T('spiplistes:adresse_on_error_defaut'))
 		. "<input type='text' name='email_return_path_defaut' value='".$email_return_path_defaut."' size='30' class='forml' />\n"
@@ -358,10 +363,6 @@ function exec_spiplistes_config () {
 		. "<ul id='smtp' class='verdana2' style='list-style: none;display:".(($mailer_smtp == "oui") ? "block" : "none")."'>\n"
 		. "<li>"._T('spiplistes:smtp_hote')." : <input type='text' name='smtp_server' value='$smtp_server' size='30' class='forml' /></li>\n"
 		. "<li>"._T('spiplistes:smtp_port')." : <input type='text' name='smtp_port' value='$smtp_port' size='4' class='fondl' /></li>\n"
-		. "<li>"
-			. "<label for='smtp_sender'>"._T('spiplistes:adresse_smtp')." : </label>\n"
-			. "<input type='text' id='smtp_sender' name='smtp_sender' value=\"$smtp_sender\" class='formo' />"
-		. "</li>\n"
 		. "<li>"._T('spiplistes:requiert_identification')." : "
 		. bouton_radio("smtp_identification", "oui", _T('item_oui'), ($smtp_identification == "oui"), "changeVisible(this.checked, 'smtp-auth', 'block', 'none');")
 		. "&nbsp;"

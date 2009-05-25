@@ -258,11 +258,9 @@ function spiplistes_email_from_default () {
 	static $default;
 	if(!$default) {
 		if(
-			// prendre d'abord celui du sender SMTP
-			($result = email_valide($ii = trim($GLOBALS['meta']['smtp_sender'])))
-			// sinon celui par defaut de SPIP-Listes
-			|| ($result = email_valide($ii = trim($GLOBALS['meta']['email_defaut'])))
-			// au pire, celui du webmaster
+			// prendre d'abord celui par defaut de SPIP-Listes
+			($result = email_valide($ii = trim($GLOBALS['meta']['email_defaut'])))
+			// sinon celui du webmaster
 			|| ($result = email_valide($ii = trim($GLOBALS['meta']['email_webmaster'])))
 		) {
 			if($result == $ii) {
