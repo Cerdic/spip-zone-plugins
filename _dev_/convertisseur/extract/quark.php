@@ -121,7 +121,7 @@ function nettoyage_xtag($c) {
 	$c = preg_replace(',([ ~])[}],', '}\1', $c);
 	$c = preg_replace(',[{]([ ~]),', '\1{', $c);
 	$c = preg_replace(',[ ~]?([{]»),', '{»', $c);
-
+	$c = preg_replace(',[{][}]|[}][{],', '', $c);
 
 	// espaces multiples
 	$c = preg_replace(",  +,", " ", $c);
