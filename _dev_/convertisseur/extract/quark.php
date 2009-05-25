@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 
 function ligne_xtag($style, $contenu) {
@@ -113,8 +113,24 @@ function nettoyage_xtag($c) {
 	// insecables zarbis
 	$c = str_replace (' >', '~', $c);
 
+	// espaces en italique ou en romain
+	$c = preg_replace(',[{] *~ *[}],', '~', $c);
+	$c = preg_replace(',[}] *~ *[{],', '~', $c);
+	$c = preg_replace(',[{] +[}],', ' ', $c);
+	$c = preg_replace(',[}] +[{],', ' ', $c);
+	$c = preg_replace(',([ ~])[}],', '}\1', $c);
+	$c = preg_replace(',[{]([ ~]),', '\1{', $c);
+	$c = preg_replace(',[ ~]?([{]»),', '{»', $c);
+
+
 	// espaces multiples
 	$c = preg_replace(",  +,", " ", $c);
+
+	// fin d'italique ponctuation
+	$c = preg_replace('/([{}])([.,] *)/', '\2\1', $c);
+
+
+	#echo "<pre>".htmlspecialchars($c).'</pre>';
 
 	return $c;
 }
