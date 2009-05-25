@@ -51,7 +51,7 @@
 		<inclure>inscription2_pipelines.php</inclure>
 	</pipeline>
 	
-	 <pipeline>
+	<pipeline>
 		<nom>editer_contenu_objet</nom>
 		<inclure>inscription2_pipelines.php</inclure>
 	</pipeline>	

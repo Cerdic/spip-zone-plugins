@@ -7,7 +7,15 @@ include_spip('base/abstract_sql');
  * Déclaration des pipelines introduits par le plugin inscription2
  * 
  */
+
+// Sélectionne les champs qui ne doivent pas être créés dans la tables auteurs_elargis
+// Notamment l'ensemble de la table spip_auteurs
 $GLOBALS['spip_pipeline']['i2_exceptions_des_champs_auteurs_elargis'] = '';
+
+// Sélectionne les champs qui ne doivent pas être chargés dans le formulaire
+// Garde les champs de spip_auteurs et ne prends pas en compte les autres
+$GLOBALS['spip_pipeline']['i2_exceptions_chargement_champs_auteurs_elargis'] = '';
+
 $GLOBALS['spip_pipeline']['i2_verifications_specifiques'] = '';
 $GLOBALS['spip_pipeline']['i2_charger_formulaire'] = '';
 $GLOBALS['spip_pipeline']['i2_verifier_formulaire'] = '';

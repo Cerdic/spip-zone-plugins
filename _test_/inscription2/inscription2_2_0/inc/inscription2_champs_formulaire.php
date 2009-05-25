@@ -11,6 +11,9 @@ function inc_inscription2_champs_formulaire_dist($id_auteur=NULL) {
 	if(is_numeric($id_auteur)){
 		$suffixe = '_fiche_mod';
 	}
+	
+	$exceptions_des_champs_auteurs_elargis = pipeline('i2_exceptions_chargement_champs_auteurs_elargis',array());
+	
 	//charge les valeurs de chaque champs proposés dans le formulaire   
 	foreach (lire_config('inscription2/') as $clef => $valeur) {
 		/* Il faut retrouver les noms des champ, 
@@ -23,7 +26,7 @@ function inc_inscription2_champs_formulaire_dist($id_auteur=NULL) {
 		//?: permet de rechercher la chaine sans etre retournée dans les résultats
 		preg_match('/^(.*)(?:_obligatoire)/i', $clef, $resultat);
 	
-		if ((!empty($resultat[1])) && (lire_config('inscription2/'.$resultat[1].$suffixe) == 'on') && ($resultat[1] != 'password')) {
+		if ((!empty($resultat[1])) && (lire_config('inscription2/'.$resultat[1].$suffixe) == 'on') && (!in_array($resultat[1],$exceptions_des_champs_auteurs_elargis)) && ($resultat[1] != 'password')) {
 			$valeurs[] = $resultat[1];
 		}
 	}
