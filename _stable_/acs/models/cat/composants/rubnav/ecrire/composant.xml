@@ -28,6 +28,18 @@
     <type>color</type>
   </variable>
   <variable>
+    <nom>Fond4</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>Fond5</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>Fond6</nom>
+    <type>color</type>
+  </variable>
+  <variable>
     <nom>FondHover</nom>
     <type>color</type>
   </variable>

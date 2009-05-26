@@ -5,6 +5,7 @@
   [border-style: (#CONFIG{acsRubnavBordStyle,#CONFIG{acsFondBordStyle}});]
   [border-color: (#CONFIG{acsRubnavBord,#CONFIG{acsFondBordColor}});]
   [background: (#CONFIG{acsRubnavFond});]
+  position: static;
 }
 
 .rubriques .menu-titre, .divers .menu-titre, .breves .menu-titre {
@@ -44,6 +45,7 @@
 }
 
 .rubriques .menu-item , .mg .menu-item {
+  position: relative;
   [text-align: (#CONFIG{acsRubnavAlign});]
   [background: (#CONFIG{acsRubnavFond});]
   padding-left: 5px;
@@ -55,9 +57,11 @@
 }
 
 .rubriques li .menu-item {
+  position: relative;
   [background: (#CONFIG{acsRubnavFond2});]
   border: 1px solid [(#CONFIG{acsRubnavSep})];
   border-right:0;
+  border-bottom: 0;
   padding-bottom: 2px;
 }
 
@@ -65,6 +69,7 @@
   [background: (#CONFIG{acsRubnavFond3});]
   border: 1px solid [(#CONFIG{acsRubnavSep})];
   border-right:0;
+  border-bottom: 0;
 }
 
 .rubriques .menu-item .on {
@@ -73,3 +78,15 @@
 }
 
 [.rubriques .menu-item:hover { background: (#CONFIG{acsRubnavFondHover});}]
+
+.rubriques ul.hidden {
+  display: none;
+  position: absolute;
+  left: 100%;
+  width: 100%;
+  top:-1px;
+  [border: 1px solid (#CONFIG{acsRubnavBord});]
+}
+.rubriques .menu-item:hover>ul.hidden {
+  display: block;
+}

@@ -10,8 +10,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'Bord' => 'Bord',
 'Fond' => 'Fond',
-'Fond2' => 'Fond niveau 2',
-'Fond3' => 'Fond niveau 3',
+'Fond2' => 'niveau 2',
+'Fond3' => 'niveau 3',
+'Fond4' => 'niveau 4',
+'Fond5' => 'niveau 5',
+'Fond6' => 'niveau 6',
 'FondHover' => 'Fond, au survol',
 'TitreFond' => 'Titre',
 'Sep' => 'S&eacute;parateur',
