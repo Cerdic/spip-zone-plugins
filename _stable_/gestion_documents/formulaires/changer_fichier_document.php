@@ -44,6 +44,11 @@ function formulaires_changer_fichier_document_traiter_dist($id_document){
 			$res['message_erreur'] = $err;
 	}
 	else {
+		// liberer le nom de l'ancien fichier pour permettre le remplacement par un fichier du meme nom
+		if ($ancien_fichier = sql_getfetsel('fichier','spip_documents','id_document='.intval($id_document))
+		  AND @file_exists($f = get_spip_doc($ancien_fichier))){
+			spip_unlink($f);
+		}
 		$traiter = charger_fonction('traiter','formulaires/joindre_document');
 		$res = $traiter($id_document);
 	}
