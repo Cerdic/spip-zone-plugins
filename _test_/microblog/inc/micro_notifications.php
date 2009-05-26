@@ -43,7 +43,7 @@ function Microblog_notifications($x) {
 				AND $x['args']['options']['statut'] == 'prop' 
 				AND $x['args']['options']['statut_ancien'] != 'publie') )  // proposer
 		) {
-			$url = str_replace('amp;','',url_absolue(generer_url_entite($id, 'article')));
+			$url = str_replace('amp;','',url_absolue(generer_url_entite($id, 'article', '', '', true /* public */)));
 			$t = sql_fetsel('titre,descriptif,texte', 'spip_articles', 'id_article='.$id);
 			$etat = str_replace(array('prop','publie'),
 				array(_T('microblog:propose'),_T('microblog:publie')),
