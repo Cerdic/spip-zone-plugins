@@ -18,6 +18,8 @@
 		  	[<span class='type'>(#ENV{type_document}) - </span>]
 				<span class='taille'>[(#LARGEUR|ou{#HAUTEUR}|oui)[(#VAL{info_largeur_vignette}|_T{#ARRAY{largeur_vignette,#LARGEUR,hauteur_vignette,#HAUTEUR}})] - 
 				][(#TAILLE|taille_en_octets|texte_backend)]</span>
+				[(#ENV{_taille_modif}|oui)<div class='taille_modifiee'><:gestdoc:fichier_modifie:><br />[(#ENV{_largeur_modif}|ou{#ENV{_hauteur_modif}}|oui)[(#VAL{info_largeur_vignette}|_T{#ARRAY{largeur_vignette,#ENV{_largeur_modif},hauteur_vignette,#ENV{_hauteur_modif}}})] -
+				][(#ENV{_taille_modif}|taille_en_octets|texte_backend)]</div>]
 	  	</li>
 	    <li class="editer_titre[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur]">
 		    <label for="titre">[(#ENV{mode}|=={document}|?{<:entree_titre_document:>,<:entree_titre_image:>})]</label>[

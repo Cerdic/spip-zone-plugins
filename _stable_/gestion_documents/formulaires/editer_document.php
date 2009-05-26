@@ -39,6 +39,25 @@ function formulaires_editer_document_charger_dist($id_document='new', $id_parent
 	if (in_array($valeurs['extension'],array('jpg','gif','png'))){
 		$valeurs['apercu'] = get_spip_doc($valeurs['fichier']);
 	}
+
+	// verifier les infos de taille et dimensions sur les fichiers locaux
+	// cas des maj de fichier directes par ftp
+	if ($valeurs['distant']!=='oui'){
+		include_spip('inc/renseigner_document');
+		$infos = renseigner_taille_dimension_image(get_spip_doc($valeurs['fichier']),$valeurs['extension']);
+		if ($infos['taille']!=$valeurs['taille']
+			OR $infos['largeur']!=$valeurs['largeur']
+			OR $infos['hauteur']!=$valeurs['hauteur']){
+			$valeurs['_taille_modif'] = $infos['taille'];
+			$valeurs['_largeur_modif'] = $infos['largeur'];
+			$valeurs['_hauteur_modif'] = $infos['hauteur'];
+			$valeurs['_hidden'].=
+			"<input type='hidden' name='_taille_modif' value='".$infos['taille']."' />"
+			. "<input type='hidden' name='_largeur_modif' value='".$infos['largeur']."' />"
+			. "<input type='hidden' name='_hauteur_modif' value='".$infos['hauteur']."' />";
+		}
+	}
+
 	return $valeurs;
 }
 
@@ -75,6 +94,14 @@ function formulaires_editer_document_verifier_dist($id_document='new', $id_paren
 function formulaires_editer_document_traiter_dist($id_document='new', $id_parent='', $retour='', $lier_trad=0, $config_fonc='documents_edit_config', $row=array(), $hidden=''){
 	if (is_null(_request('id_parents')))
 		set_request('id_parents',array());
+
+	// verifier les infos de taille et dimensions sur les fichiers locaux
+	// cas des maj de fichier directes par ftp
+	foreach(array('taille','largeur','hauteur') as $c)
+	if (($v=_request("_{$c}_modif")) AND !_request($c)){
+		set_request($c,$v);
+	}
+
 	$res = formulaires_editer_objet_traiter('document',$id_document,$id_parent,$lier_trad,$retour,$config_fonc,$row,$hidden);
 	if (!isset($res['redirect']))
 		$res['editable'] = true;
