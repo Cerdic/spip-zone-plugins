@@ -35,11 +35,14 @@
   [border-width: (#CONFIG{acsRechercheBordLargeur,#CONFIG{acsFondBordLargeur}});]
   [border-style: (#CONFIG{acsRechercheBordStyle,#CONFIG{acsFondBordStyle}});]
   [border-color: (#CONFIG{acsRechercheBord,#CONFIG{acsFondBordColor}});]
-  border-bottom: 0px;
+  border-bottom: 0;
   -moz-border-radius-topright: 8px;
   -moz-border-radius-topleft: 8px;
-  top: 1px;
   z-index: 1;
+}
+
+* html .formulaire_recherche label {
+  top: 2px;
 }
 
 [(#REM) Mask dist submit]
