@@ -161,7 +161,7 @@ function cs_echappe_balises($balises, $fonction, $texte, $arg=NULL){
 		$texte = preg_replace_callback(',<!-- htmlA -->(.*?)(?=<!-- htmlB -->),s', 'cs_echappe_html_callback', $texte);
 
 	// protection du texte
-	if($balise!==false) {
+	if($balises!==false) {
 		if(!strlen($balises)) $balises = 'html|code|cadre|frame|script';
 		$balises = ',<('.$balises.')(\s[^>]*)?>(.*)</\1>,UimsS';
 		include_spip('inc/texte');

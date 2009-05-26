@@ -86,7 +86,7 @@ cs_log(" -- appel de charger_fonction('description_outil', 'inc') et de descript
 	if(!strlen($outil['id']) || !cout_autoriser('outiller', $outil) || cs_version_erreur($outil))
 		return $s . _T('info_acces_interdit') . '</div>';
 
-	$s .= "<h3 class='titrem'><img src='"._DIR_IMG_PACK."$puce' name='puce_$id_input' width='9' height='9' alt=\"$titre_etat\" title=\"$titre_etat\" />&nbsp;" . $outil['nom'] . '</h3>';
+	$s .= "<h3 class='titrem'><img src='"._DIR_IMG_PACK."$puce' width='9' height='9' alt=\"$titre_etat\" title=\"$titre_etat\" />&nbsp;" . $outil['nom'] . '</h3>';
 	$s .= '<div class="cs_menu_outil">';
 	if ($nb_var)
 		$s .= '<a href="'.generer_url_ecrire(_request('source'),'cmd=reset&outil='.$outil_id).'" title="' . _T('couteauprive:par_defaut') . '">' . _T('couteauprive:par_defaut') . '</a>&nbsp;|&nbsp;';
@@ -99,15 +99,17 @@ cs_log(" -- appel de charger_fonction('description_outil', 'inc') et de descript
 	$s .= propre($descrip);
 
 	$serial = serialize(array_keys($outil));
+	$p = '';
 	if (preg_match_all(',traitement:([A-Z_]+),', $serial, $regs, PREG_PATTERN_ORDER))
 		$p .=  _T('couteauprive:detail_balise_etoilee', array('bal' => '#'.join('*, #', array_unique($regs[1])).'*'));	
-	if (isset($outil['jquery']) && $outil['jquery']=='oui') $p .= '<p>' . _T(defined('_SPIP19100')?'couteauprive:detail_jquery1':'couteauprive:detail_jquery2') . '</p>';
-	if (isset($outil['auteur']) && strlen($outil['auteur'])) $p .= '<p>' . _T('auteur') .' '. ($outil['auteur']) . '</p>';
-	if (isset($outil['contrib']) && strlen($outil['contrib'])) $p .= '<p>' . _T('couteauprive:contrib', array('url'=>'[->'._URL_CONTRIB.$outil['contrib'].']')) . '</p>';
-	$s .= propre($p);
-	$s .= detail_outil($outil_id);
+	if (isset($outil['jquery']) && $outil['jquery']=='oui')
+		$p .= '<p>' . _T(defined('_SPIP19100')?'couteauprive:detail_jquery1':'couteauprive:detail_jquery2') . '</p>';
+	if (isset($outil['auteur']) && strlen($outil['auteur']))
+		$p .= '<p>' . _T('auteur') .' '. ($outil['auteur']) . '</p>';
+	if (isset($outil['contrib']) && strlen($outil['contrib']))
+		$p .= '<p>' . _T('couteauprive:contrib', array('url'=>'[->'._URL_CONTRIB.$outil['contrib'].']')) . '</p>';
 
-	return $s . '</div>';
+	return $s . propre($p) . detail_outil($outil_id) . '</div>';
 }
 
 // renvoie simplement deux liste des outils actifs/inactifs
@@ -116,7 +118,7 @@ function liste_outils() {
 	$id = $nb_actifs = 0;
 	$metas_caches = isset($GLOBALS['meta']['tweaks_caches'])?unserialize($GLOBALS['meta']['tweaks_caches']):array();
 	foreach($outils as $outil) $categ[_T('couteauprive:categ:'.$outil['categorie'])] = $outil['categorie']; ksort($categ);
-	$result_actifs = $result_inactifs = '';
+	$results_actifs = $results_inactifs = '';
 	foreach($categ as $c=>$i) {
 		$s_actifs = $s_inactifs = array();
 		foreach($outils as $outil) if ($outil['categorie']==$i) {
@@ -167,9 +169,7 @@ function detail_outil($outil_id) {
 	$outil = &$outils[$outil_id];
 	$div = '<div class="cs_details_outil">';
 	if (cs_version_erreur($outil)) return $div . _T('couteauprive:erreur:version') . '</div>';
-	$details = array();
-	if ($erreur_version) $details[] = _T('couteauprive:erreur:version');
-	$a = array();
+	$details = $a = array();
 	foreach(array('spip_options', 'options', 'fonctions', 'js', 'jq', 'css') as $in)
 		if(isset($outil['code:'.$in])) $a[] = _T('couteauprive:code_'.$in);
 	if(count($a)) $details[] = _T('couteauprive:detail_inline') . ' ' . join(', ', $a);

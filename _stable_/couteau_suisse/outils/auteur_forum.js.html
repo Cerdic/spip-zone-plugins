@@ -10,6 +10,7 @@ function cs_auteur_forum() {
 	// SPIP 2.0 remplace 'auteur' par 'session_nom'
 	var auteur = jQuery('#session_nom', this);
 	if(!auteur.length) auteur = jQuery('#auteur', this);
+	// SPIP 2.0 remplace 'email_auteur' par 'session_email'
 	var email = jQuery('#session_email', this);
 	if(!email.length) email = jQuery('#email_auteur', this);
 	if(auteur.length || email.length)
