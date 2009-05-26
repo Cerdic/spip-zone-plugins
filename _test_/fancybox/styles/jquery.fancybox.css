@@ -275,7 +275,7 @@ div.fancy_bg_nw {
 
 div#fancy_title {
 	position: absolute;
-	bottom: -33px;
+	bottom: -32px;
 	left: 0;
 	width: 100%;
 	z-index: 100;
@@ -304,17 +304,15 @@ td#fancy_title_left {
 }
 
 td#fancy_title_main {
-	height: 32px;
+	height: 33px;
 	background: transparent url(../images/fancy_title_main.png) repeat-x;
 }
 
 td#fancy_title_right {
 	height: 32px;
 	width: 15px;
-	background: transparent url(../images/fancy_title_right.png) repeat-x;
+	background: transparent url(../images/fancy_title_right.png) repeat-x right;
 }
-
-
 #fancy_legend {
 	z-index: 101;
 	position: absolute;
