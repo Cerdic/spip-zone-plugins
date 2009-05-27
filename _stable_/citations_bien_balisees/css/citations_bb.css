@@ -1,0 +1,11 @@
+/*
+Regles CSS pour la balise <q> rajoutee par le plugin
+Citations bien balisees
+CopyLeft 2009 Bertrand Marne citations_bb à sciencesnat point org
+GPL v3
+*/
+
+q {
+		quotes: "«" "»";
+		font-style: oblique;
+}
