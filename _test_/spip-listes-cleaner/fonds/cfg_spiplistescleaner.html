@@ -74,21 +74,46 @@
         </li>
     </ul>
     </fieldset>
-	    <fieldset>
+	<fieldset>
+    <legend><:spiplistescleaner:export:></legend>
+	<ul>
+		<li>
+			<label style='width:100%'><:spiplistescleaner:export_download:></label>
+			<input type="button" onClick="location.href='?action=spiplistescleaner_export'" value="<:spiplistescleaner:export_download_button:>">
+        </li>
+    </ul>
+	<ul>
+		<li>
+			<label style='width:100%'><:spiplistescleaner:export_reset:></label>
+			<input type="button" onClick="location.href='?action=spiplistescleaner_export_delete'" value="<:spiplistescleaner:export_reset_button:>">
+        </li>
+    </ul>
+    </fieldset>
+	<fieldset>
         <legend><:spiplistescleaner:statistics:></legend>
     <ul>
 		<li>
 			<label style='width:100%'><:spiplistescleaner:nb_deleted_mails:> #ENV{nb_deleted_mails, #CONFIG{nb_deleted_mails}}</label>
         </li>
     </ul>
-    </fieldset>
+	<ul>
+		<li>
+			<label style='width:100%'><:spiplistescleaner:nb_deleted_mails_last_export:> #ENV{nb_deleted_mails_last_export, #CONFIG{nb_deleted_mails_last_export}}</label>
+        </li>
+    </ul>
+	</fieldset>
     <p class="boutons">
         <input class="submit" type="submit" name="_cfg_ok" value="<:cfg:ok:>" />
         <input class="submit" type="submit" name="_cfg_delete" value="<:cfg:supprimer:>" />
     </p>
 
 </form>
+
+<!-- BEGIN : Hidden input to be able to use the values 'nb_deleted_mails' in statistics label 'nb_deleted_mails' -->
 <input type="hidden" name="nb_deleted_mails" id="nb_deleted_mails"
 value="#ENV{nb_deleted_mails, #CONFIG{nb_deleted_mails}}" class="text" />
+<input type="hidden" name="nb_deleted_mails_last_export" id="nb_deleted_mails_last_export"
+value="#ENV{nb_deleted_mails_last_export, #CONFIG{nb_deleted_mails_last_export}}" class="text" />
+<!-- END : Hidden input -->
 </div>
 #CFG_ARBO{spiplistescleaner}

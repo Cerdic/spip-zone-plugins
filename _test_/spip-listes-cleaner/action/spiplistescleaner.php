@@ -1,8 +1,8 @@
 <?php
 
-include_spip('base/abstract_sql');
-
 function action_spiplistescleaner_dist() {
+	include_spip('base/abstract_sql');
+
 	// Get the configuration
 	$config = lire_config('spiplistescleaner');
 
@@ -13,6 +13,11 @@ function action_spiplistescleaner_dist() {
 	$nb_deleted_mails = $config['nb_deleted_mails'];
 	if ($nb_deleted_mails == "") {
 		$nb_deleted_mails = 0;
+	}
+	
+	$nb_deleted_mails_last_export = $config['nb_deleted_mails_last_export'];
+	if ($nb_deleted_mails_last_export == "") {
+		$nb_deleted_mails_last_export = 0;
 	}
 	
 	// Connection configuration
@@ -88,11 +93,15 @@ function action_spiplistescleaner_dist() {
 					
 					// If something has been deleted we delete the mail
 					if ($something_deleted) {
+						// Save the email adress for an future export
+						sql_insertq('spiplistescleaner_deleted_emails', array('email' => $email, 'date' => date('Y-m-d H:m:s')));
+						
 						// Mark the mail "deleted" in the mailbox
 						imap_delete($mbox, $id_msg);
 						
-						// Increment deleted email value
-						$nb_deleted_mails++;				
+						// Increment deleted email values
+						$nb_deleted_mails++;
+						$nb_deleted_mails_last_export++;						
 					}
 		
 				} else {
@@ -102,8 +111,9 @@ function action_spiplistescleaner_dist() {
 		}
 	}
 
-	// Update the number of deleted email
+	// Update the number of deleted emails
 	ecrire_config('spiplistescleaner/nb_deleted_mails', $nb_deleted_mails);
+	ecrire_config('spiplistescleaner/nb_deleted_mails_last_export', $nb_deleted_mails_last_export);
 	
 	// Delete all mails marked as deleted
 	imap_expunge($mbox);

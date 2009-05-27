@@ -2,13 +2,15 @@
 <plugin>
 	<nom><multi>[fr]SPIP-Listes Cleaner[en]SPIP-Lists Cleaner</multi></nom>
 	<auteur>Pierre ROUSSET: p.rousset@gmail.com for Bouncing Orange: http://www.bouncingorange.com/</auteur>
-	<version>1.0</version>
+	<version>1.1</version>
 	<licence>(c) 2009 [GPL v2 Licence->http://www.opensource.org/licenses/gpl-2.0.php]</licence>
 	<etat>test</etat>
 	<icon>spip-listes-cleaner.png</icon>
 	<description><multi>[fr]Récupere les emails failure delivery à partir d'un compte pop ou imap (nécessite php-imap) et nettoie la base de donnée de la liste spip pour les mails qui ne sont plus valide et supprime les emails failure delivery du compte mail.[en]Get failure delivery emails from a pop or imap account (need php-imap) and clean the spip-liste database of all emails that are not valid and delete failure delivery emails in the mail account.</multi></description>
 	<prefix>spiplistescleaner</prefix>
 	<lien>http://www.spip-contrib.net/SPIP-Listes-Cleaner</lien>
+	
+	<install>base/spiplistescleaner_update.php</install>
 	
 	<pipeline>
 		<nom>taches_generales_cron</nom>

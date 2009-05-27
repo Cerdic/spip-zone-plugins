@@ -5,6 +5,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	'installed' => 'SPIP-Listes-Cleaner a bien été installé! ',
+	'uninstalled' => 'SPIP-Listes-Cleaner a bien été déinstallé! ',
+
 	'spip_listes_cleaner_name' => 'Spip Listes Cleaner',
 	'spip_listes_cleaner_dsc' => 'Configuration de Spip Listes Cleaner',
 	'config_email_server' => 'Configuration du serveur de mail :',
@@ -19,8 +22,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'server_address_help' => 'exemple : pop.monserveur.com:110',
 	'server_mailbox_help' => 'habituellement \'INBOX\'',
 	
-	'statistics' => 'Statistiques',
-	'nb_deleted_mails' => 'Nombre de mails supprim&eacute; dans la BDD :'
+	'statistics' => 'Statistiques (nombre de mails supprim&eacute;) :',
+	'nb_deleted_mails' => 'Au total :',
+	'nb_deleted_mails_last_export' => 'Depuis le dernier export supprim&eacute; :',
+	
+	'export' => 'Export :',
+	'export_download' => 'Exporter les mails supprim&eacute; au format CSV :',
+	'export_reset' => 'Supprimer tous les mails de l\'export :',
+	'export_download_button' => 'Exporter',
+	'export_reset_button' => 'Supprimer',
 );
 
 ?>
