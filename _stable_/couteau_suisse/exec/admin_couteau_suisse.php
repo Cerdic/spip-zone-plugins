@@ -11,10 +11,6 @@ include_spip('inc/texte');
 include_spip('inc/layer');
 include_spip("inc/presentation");
 
-// compatibilite spip 1.9
-if(defined('_SPIP19100') && !function_exists('fin_gauche')) { function fin_gauche(){return '';} }
-function cs_compat_boite($b) {if(defined('_SPIP19200')) echo $b('', true); else $b(); }
-
 function cs_admin_styles_et_js($cs_version) {
 	global $afficher_outil;
 	$a = !defined('_SPIP19300')
@@ -129,14 +125,6 @@ div.cs_sobre, input.cs_sobre {
 </style>
 EOF;
 	$force = in_array(_request('var_mode'), array('calcul', 'recalcul'));
-	$spip191 = !defined('_SPIP19100')?'':
-"	// cadeau pour SPIP 1.91 !
-	jQuery(\"div.cs_aide a\").each( function() {
-		var t=jQuery(this).text();
-		var ar=t.split(/\|/);
-		if (ar.length==2)
-			jQuery(this).attr('title', ar[1]).html(ar[0]);
-	});";
 	$cs_reset2 = cs_javascript('couteauprive:cs_reset2');
 	echo "<script type=\"text/javascript\"><!--
 
@@ -201,7 +189,6 @@ if (window.jQuery) jQuery(function(){
 		msg=\"".cs_javascript('couteauprive:cs_reset').'\n\n'.$cs_reset2."\";
 		return window.confirm(msg); 
 	});
-$spip191
 
 	jQuery('div.cs_liste script').remove();
 	// clic sur un titre de categorie
@@ -469,12 +456,9 @@ cs_log("INIT : exec_admin_couteau_suisse()");
 //	else
 //		verif_outils();
 
-	if(defined('_SPIP19100'))
-  		debut_page(_T('couteauprive:titre'), 'configuration', 'couteau_suisse');
-  	else {
-		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('couteauprive:titre'), "configuration", 'couteau_suisse');
-	}
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo $commencer_page(_T('couteauprive:titre'), "configuration", 'couteau_suisse');
+
 	// pour la  version du plugin
 	include_spip('inc/plugin');
 	if(isset($GLOBALS['meta']['plugin'])) {
@@ -514,7 +498,7 @@ if (!window.jQuery) document.write('".str_replace('/','\/',addslashes(propre('<p
 	include_spip('inc/cs_outils'); 
 	list($outils_affiches_actifs, $liste_outils) = liste_outils();
 	// cadre de gauche
-	cs_compat_boite('debut_gauche');
+	echo debut_gauche('', true);
 	// pour la liste des docs sur spip-contrib
 	$contribs = isset($GLOBALS['meta']['tweaks_contribs'])?unserialize($GLOBALS['meta']['tweaks_contribs']):array();
 	foreach($contribs as $i=>$v) $contribs[$i] = preg_replace_callback('/@@(.*?)@@/', 'cs_couper_25', $v);
@@ -555,13 +539,12 @@ if (!window.jQuery) document.write('".str_replace('/','\/',addslashes(propre('<p
 		echo debut_boite_info(true), $aide, fin_boite_info(true);
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>$exec),'data'=>''));
 
-	cs_compat_boite('creer_colonne_droite');
+	echo creer_colonne_droite('', true);
 	// on telecharge les news...
 	if (defined('boites_privees_CS')) cs_boite_rss();
-	echo pipeline('affiche_droite',array('args'=>array('exec'=>$exec),'data'=>''));
-	cs_compat_boite('debut_droite');
-
-	echo debut_cadre_trait_couleur(find_in_path('img/couteau-24.gif'),true,'','&nbsp;'._T('couteauprive:outils_liste')),
+	echo pipeline('affiche_droite',array('args'=>array('exec'=>$exec),'data'=>'')),
+		debut_droite('', true),
+		debut_cadre_trait_couleur(find_in_path('img/couteau-24.gif'),true,'','&nbsp;'._T('couteauprive:outils_liste')),
 		_T('couteauprive:outil_intro'),
 		"\n<table border='0' cellspacing='0' cellpadding='5' style='width:100%;'><tr><td class='sansserif'>";
 

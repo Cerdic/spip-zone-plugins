@@ -7,16 +7,6 @@
 #-----------------------------------------------------#
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// compatibilite pour SPIP 1.91
-if(defined('_SPIP19100')) {
-	function ajax_retour($corps) {
-		$c = $GLOBALS['meta']["charset"];
-		header('Content-Type: text/html; charset='. $c);
-		echo '<' . "?xml version='1.0' encoding='$c'?" . ">\n$corps";
-		exit;
-	}
-}
-
 function exec_description_outil_dist() {
 cs_log("INIT : exec_description_outil_dist() - Preparation du retour par Ajax (donnees transmises par GET)");
 	$script = _request('script');

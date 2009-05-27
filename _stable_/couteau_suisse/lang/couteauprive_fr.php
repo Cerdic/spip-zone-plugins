@@ -200,7 +200,6 @@ Cet outil peut &ecirc;tre coupl&eacute; avec &laquo;&nbsp;[.->sommaire]&nbsp;&ra
 	'detail_balise_etoilee' => '{{Attention}} : V&eacute;rifiez bien l\'utilisation faite par vos squelettes des balises &eacute;toil&eacute;es. Les traitements de cet outil ne s\'appliqueront pas sur : @bal@.',
 	'detail_fichiers' => 'Fichiers :',
 	'detail_inline' => 'Code inline :',
-	'detail_jquery1' => '{{Attention}} : cet outil n&eacute;cessite le plugin {jQuery} pour fonctionner avec cette version de SPIP.',
 	'detail_jquery2' => 'Cet outil utilise la librairie {jQuery}.',
 	'detail_jquery3' => '{{Attention}} : cet outil n&eacute;cessite le plugin [jQuery pour SPIP 1.92->http://files.spip.org/spip-zone/jquery_192.zip] pour fonctionner correctement avec cette version de SPIP.',
 	'detail_pipelines' => 'Pipelines :',

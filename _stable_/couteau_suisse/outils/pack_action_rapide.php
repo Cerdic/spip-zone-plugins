@@ -48,7 +48,7 @@ function action_rapide_sauve_pack() {
 		if(strlen($t)) return;
 	}
 	// creation
-	$fo = defined('_SPIP19100')?_DIR_RESTREINT.'mes_options.php':_DIR_RACINE._NOM_PERMANENTS_INACCESSIBLES._NOM_CONFIG.'.php';
+	$fo = _DIR_RACINE._NOM_PERMANENTS_INACCESSIBLES._NOM_CONFIG.'.php';
 	$ok = ecrire_fichier($fo, '<?'."php\n".$pack."\n?".'>');
 cs_log(" -- fichier $fo absent ".($ok?'mais cree avec l\'inclusion':' et impossible a creer'));
 }

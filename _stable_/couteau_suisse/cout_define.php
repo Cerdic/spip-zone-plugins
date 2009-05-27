@@ -40,8 +40,9 @@ switch($contexte) {
 		break;
 	case 'cs_comportement':
 		@define('_CS_DIR_TMP', cs_canonicalize(_DIR_RESTREINT_ABS._DIR_TMP));
-		@define('_CS_FILE_OPTIONS', str_replace('../','',(defined('_FILE_OPTION') && strlen(_FILE_OPTION))?_FILE_OPTION:
-			(defined('_SPIP19100')?_DIR_RESTREINT.'mes_options.php':_DIR_RACINE._NOM_PERMANENTS_INACCESSIBLES._NOM_CONFIG.'.php')
+		@define('_CS_FILE_OPTIONS', str_replace('../','',(defined('_FILE_OPTION') && strlen(_FILE_OPTION))
+			?_FILE_OPTION
+			:_DIR_RACINE._NOM_PERMANENTS_INACCESSIBLES._NOM_CONFIG.'.php'
 		));
 		break;
 	case 'auteur_forum':
@@ -53,8 +54,7 @@ switch($contexte) {
 		@define('_CS_NOM_SITE', '<i>'.$GLOBALS['meta']['nom_site'].'</i>');
 		break;
 	case 'webmestres':
-		if(defined('_SPIP19200'))
-			def_liste_adminsitrateurs();
+		def_liste_adminsitrateurs();
 		break;
 	case 'boites_privees':
 		// RSS de trac
@@ -65,11 +65,6 @@ switch($contexte) {
 
 // Qui sont les webmestres et les administrateurs ?
 function def_liste_adminsitrateurs() {
-	if(defined('_SPIP19100')) {
-		@define('_CS_LISTE_WEBMESTRES', 'SPIP >= 1.92');
-		@define('_CS_LISTE_ADMINS', 'SPIP >= 1.92');
-		return;
-	}
 	include_spip('inc/autoriser');
 	include_spip('inc/texte');
 	$webmestres = array();

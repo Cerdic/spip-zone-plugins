@@ -59,7 +59,7 @@ Ontdekt in dit plugin uw lievelingswerktuigen: {Typografische Inzenders}, {typog
 
 Aarzelt niet om de gepubliceerde artikelen van documentatie van plugin over te raadplegen : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
-De verenigbaarheid: SPIP iedereen betaalden 1.9x en v2.0',
+De verenigbaarheid: SPIP iedereen betaalden 1.92x en v2.0',
 
 	// S
 	'smileys_dispos' => 'Beschikbare smylies :',

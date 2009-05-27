@@ -16,7 +16,7 @@ include_spip('inc/layer');
 include_spip("inc/presentation");
 
 function exec_test_couteau_suisse() {
-cs_log("D&eacute;but : exec_test_couteau_suisse()");
+cs_log("DEDUT : exec_test_couteau_suisse()");
 	global $connect_statut, $connect_toutes_rubriques;
 
 	cs_minipres();
@@ -24,12 +24,8 @@ cs_log("D&eacute;but : exec_test_couteau_suisse()");
 	// initialisation generale forcee : recuperation de $outils;
 	cs_initialisation(true);
 
-	if(defined('_SPIP19100'))
-  		debut_page(_T('couteauprive:titre_tests'), 'configuration', 'couteau_suisse');
-  	else {
-		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('couteauprive:titre_tests'), "configuration", 'couteau_suisse');
-	}
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo $commencer_page(_T('couteauprive:titre_tests'), "configuration", 'couteau_suisse');
 
 	echo '<br /><br /><br />', gros_titre(_T('couteauprive:titre_tests'), '', false), 
 		'<div style="width:98%; text-align:left; margin:0 auto">';

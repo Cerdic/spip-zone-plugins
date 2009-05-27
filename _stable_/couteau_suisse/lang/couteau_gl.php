@@ -63,7 +63,7 @@ Descubra neste m&oacute;dulos as s&uacute;as ferramentas favoritas : {Suprimir o
 
 Non dubide en consultar os artigos de documentaci&oacute;n do m&oacute;dulo publicados en  : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
-Compatibilidade : SPIP todas as versi&oacute;ns 1.9x e v2.0',
+Compatibilidade : SPIP todas as versi&oacute;ns 1.92x e v2.0',
 
 	// S
 	'smileys_dispos' => 'Cari&ntilde;as (emoticon) dispo&ntilde;ibles :',

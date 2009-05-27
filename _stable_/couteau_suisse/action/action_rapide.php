@@ -8,11 +8,6 @@
 #-----------------------------------------------------#
 if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
 
-// compatibilite SPIP < 1.92
-if(defined('_SPIP19100')) {
-	if(!function_exists('_q')) { function _q($t) {return spip_abstract_quote($t);} }
-}
-
 function action_action_rapide_dist() {
 cs_log("INIT : action_action_rapide_dist() - Une action rapide a ete demandee !");
 	if (defined('_SPIP19200')) {
