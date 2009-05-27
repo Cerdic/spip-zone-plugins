@@ -1,3 +1,6 @@
+v1.12.5 (27 05 2009)
+  * (en test) introduction d'une saisie : 'checkbox' 
+
 v1.12.4 (19 05 2009)
   * (en test) introduction d'une saisie : 'groupe_mots' 
   
