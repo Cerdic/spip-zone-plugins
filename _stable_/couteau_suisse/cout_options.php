@@ -167,7 +167,7 @@ function cs_minipres($exit=-1) {
 	if($exit===-1) $exit=!cout_autoriser();
 	if($exit) {
 		include_spip('inc/minipres');
-		echo defined('_SPIP19100')?minipres( _T('avis_non_acces_page')):minipres();
+		echo minipres();
 		exit;
 	}
 }

@@ -2,36 +2,6 @@
 // Ce fichier contient des fonctions toujours compilees dans tmp/couteau-suisse/mes_fonctions.php
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// compatibilite SPIP < 1.92
-if(defined('_SPIP19100')) {
-	if (!function_exists('stripos')) {
-		function stripos($botte, $aiguille) {
-			if (preg_match('@^(.*)' . preg_quote($aiguille, '@') . '@isU', $botte, $regs)) return strlen($regs[1]);
-			return false;
-		}
-	}
-	if (!function_exists('interprete_argument_balise')){
-		function interprete_argument_balise($n,$p) {
-			if (($p->param) && (!$p->param[0][0]) && (count($p->param[0])>$n))
-				return calculer_liste($p->param[0][$n],	$p->descr, $p->boucles,	$p->id_boucle);	
-			else return NULL;
-		}
-	}
-	function f_insert_head($texte) {
-		if (!$GLOBALS['html']) return $texte;
-		//include_spip('public/admin'); // pour strripos
-		($pos = stripos($texte, '</head>'))	|| ($pos = stripos($texte, '<body>'))|| ($pos = 0);
-		if (false === strpos(substr($texte, 0,$pos), '<!-- insert_head -->')) {
-			$insert = "\n".pipeline('insert_head','<!-- f_insert_head -->')."\n";
-			$texte = substr_replace($texte, $insert, $pos, 0);
-		}
-		return $texte;
-	}
-	if(!function_exists('_q')) { 
-		function _q($t) {return spip_abstract_quote($t);}
-	}
-}
-
 // compatibilite SPIP < 2.00
 if(!defined('_SPIP19300')) {
 	// #VAL{x} renvoie 'x' (permet d'appliquer un filtre a une chaine)

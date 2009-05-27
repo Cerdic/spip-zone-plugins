@@ -52,7 +52,7 @@ cs_log("$rand -- cs_metas_pipelines = ".(is_array($cs_metas_pipelines)?join(', '
 
 		// liste des actifs & definition des constantes attestant qu'un outil est bien actif : define('_CS_monoutil', 'oui');
 		$liste = array();
-		foreach($metas_outils as $nom=>$o) if($o['actif']) { $liste[]=$nom; @define('_CS_'.$nom, 'oui'); }
+		foreach($metas_outils as $nom=>$o) if(isset($o['actif']) && $o['actif']) { $liste[]=$nom; @define('_CS_'.$nom, 'oui'); }
 		$liste2 = join(', ', $liste);
 cs_log("$rand -- ".count($liste).' outil(s) actif(s)'.(strlen($liste2)?" = ".$liste2:''));
 		// Vanter notre art de la compilation...
@@ -71,7 +71,8 @@ cs_log($rand.($forcer?"\$forcer = true":"cs_initialisation($forcer) : Sortie car
 	// remplir $outils (et aussi $cs_variables qu'on n'utilise pas ici);
 	include_spip('config_outils');
 	// verifier que tous les outils actives sont bien presents
- 	foreach($metas_outils as $nom=>$o) if($o['actif']) { if(!isset($outils[$nom])) unset($metas_outils[$nom]); }
+ 	foreach($metas_outils as $nom=>$o) if(isset($o['actif']) && $o['actif']) 
+		{ if(!isset($outils[$nom])) unset($metas_outils[$nom]); }
 	ecrire_meta('tweaks_actifs', serialize($metas_outils));
 	ecrire_metas();
 	// nettoyage des versions anterieures

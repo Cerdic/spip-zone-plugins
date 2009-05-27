@@ -42,7 +42,7 @@ function description_outil_une_variable($index, $outil, $variable, $label) {
 				. $label . (strlen($valeur)?ucfirst($code):'&nbsp;-');
 		}
 		$res = "$label <ul>";
-		$i = 0; $nb = intval($cs_variable['radio/ligne']);
+		$i = 0; $nb = isset($cs_variable['radio/ligne'])?intval($cs_variable['radio/ligne']):0;
 		foreach($radios as $code=>$traduc) {
 			$br = (($nb>0) && ( ++$i % $nb == 0))?'</ul><ul>':''; 
 			$res .=
@@ -66,7 +66,7 @@ function description_outil_une_variable($index, $outil, $variable, $label) {
 		return $label.'<html>'.(strlen($valeur)?nl2br(echapper_tags($valeur)):'&nbsp;'._T('couteauprive:variable_vide')).'</html>';
 	$len = $cs_variable['format']==_format_NOMBRE?4:0;
 	$width = $len?'':'style="width:100%;" ';
-	$lignes = $cs_variable['format']==_format_NOMBRE?0:strval($cs_variable['lignes']);
+	$lignes = !isset($cs_variable['lignes']) || ($cs_variable['format']==_format_NOMBRE)?0:strval($cs_variable['lignes']);
 	return $label .
 		( $lignes < 2
 			// <html></html> empechera SPIP de modifier le contenu des <input> ou <textarea>

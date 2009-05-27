@@ -103,6 +103,8 @@ function add_variable($tableau) {
 	if($tableau['format']==_format_NOMBRE) $cs_variables['_nombres'][] = $nom;
 		elseif($tableau['format']==_format_CHAINE) $cs_variables['_chaines'][] = $nom;
 }
+// idem, arguments variables
+function add_variables() { foreach(func_get_args() as $t) add_variable($t); }
 
 // retourne la valeur 'defaut' (format php) de la variable apres compilation du code
 // le resultat comporte des guillemets si c'est une chaine
@@ -114,7 +116,7 @@ function cs_get_defaut($variable) {
 		return false;
 	}
 	$variable = &$cs_variables[$variable];
-	$defaut = $variable['defaut'];
+	$defaut = !isset($variable['defaut'])?'':$variable['defaut'];
 	if(!strlen($defaut)) $defaut = "''";
 	if($variable['format']==_format_NOMBRE) $defaut = "intval($defaut)";
 		elseif($variable['format']==_format_CHAINE) $defaut = "strval($defaut)";
@@ -221,7 +223,7 @@ function cs_aide_pipelines($outils_affiches_actifs) {
 		if ($nb) $aide[] = _T('couteauprive:outil_nb'.($nb>1?'s':''), array('pipe'=>$pipe, 'nb'=>$nb));
 	}
 	// nombre d'outils actifs
-	$nb=0; foreach($metas_outils as $o) if($o['actif']) $nb++;
+	$nb=0; foreach($metas_outils as $o) if(isset($o['actif']) && $o['actif']) $nb++;
 	// nombre d'outils caches de la configuration par l'utilisateur
 	$ca1 = isset($GLOBALS['meta']['tweaks_caches'])?count(unserialize($GLOBALS['meta']['tweaks_caches'])):0;
 	// nombre d'outils caches par les autorisations
@@ -458,7 +460,7 @@ cs_log(" -- fichier $fo present. Inclusion " . ($ok?" trouvee".($ecriture?" et r
 			return;
 		} else cs_log(" -- fichier $fo illisible. Inclusion non permise");
 	} else 
-		$fo = defined('_SPIP19100')?_DIR_RESTREINT.'mes_options.php':_DIR_RACINE._NOM_PERMANENTS_INACCESSIBLES._NOM_CONFIG.'.php';
+		$fo = _DIR_RACINE._NOM_PERMANENTS_INACCESSIBLES._NOM_CONFIG.'.php';
 	// creation
 	if($activer) {
 		if($ecriture) $ok=ecrire_fichier($fo, '<?'."php\n".$inclusion."\n\n?".'>');
@@ -582,7 +584,7 @@ function cs_optimise_if($code, $root=true) {
 // dans le fichier outils/monoutil.php
 function cs_installe_outils() {
 	global $metas_outils;
-	foreach($metas_outils as $nom=>$o) if($o['actif']) {
+	foreach($metas_outils as $nom=>$o) if(isset($o['actif']) && $o['actif']) {
 		include_spip('outils/'.$nom);
 		if (function_exists($f = $nom.'_installe')) {
 			$f();

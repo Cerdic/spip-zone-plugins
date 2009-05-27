@@ -43,33 +43,29 @@ pour SPIP 2.0 :
  La fonction cache_valide() retourne :
 	'1' si il faut mettre le cache a jour, '0' si le cache est valide, '-1' s'il faut calculer sans stocker en cache
 */
-add_variable( array(
+add_variables( array(
 	'nom' => 'radio_desactive_cache4',
 	'format' => _format_NOMBRE,
 	'radio' => array(2 => 'couteauprive:cache_nornal', 0 => 'couteauprive:cache_permanent', -1 => 'couteauprive:cache_sans', 1 => 'couteauprive:cache_controle'),
 	'radio/ligne' => 2,
 	'defaut' => 2,
 	'code:%s!=2' => "define('_NO_CACHE',%s);\n",
-));
-add_variable( array(
+), array(
 	'nom' => 'duree_cache',
 	'format' => _format_NOMBRE,
 	'defaut' => "24", // 1 jour
 	'code' => "\$GLOBALS['delais']=%s*3600;\n",
-));
-add_variable( array(
+), array(
 	'nom' => 'duree_cache_mutu',
 	'format' => _format_NOMBRE,
 	'defaut' => "24", // 1 jour
 	'code' => "define('_DUREE_CACHE_DEFAUT', %s*3600);\n",
-));
-add_variable( array(
+), array(
 	'nom' => 'quota_cache',
 	'format' => _format_NOMBRE,
 	'defaut' => 10, // 10 Mo
 	'code' => "\$GLOBALS['quota_cache']=%s;\n",
-));
-add_variable( array(
+), array(
 	'nom' => 'derniere_modif_invalide',
 	'format' => _format_NOMBRE,
 	'radio' => array(0 => 'item_oui', 1 => 'item_non'),
@@ -125,7 +121,7 @@ add_outil( array(
 	'categorie' => 'public',
 ));
 
-add_variable( array(
+add_variables( array(
 	'nom' => 'paragrapher',
 	'format' => _format_NOMBRE,
 	'radio' => array(1 => 'item_oui', 0 => 'item_non', -1 => 'couteauprive:par_defaut'),
@@ -144,7 +140,7 @@ add_outil( array(
 	'categorie' => 'public',
 ));
 
-add_variable( array(
+add_variables( array(
 	'nom' => 'webmestres',
 	'format' => _format_CHAINE,
 	'defaut' => '"1"',
@@ -168,19 +164,17 @@ add_outil( array(
 
 	// ici on a besoin d'une case input. La variable est : suite_introduction
 	// a la toute premiere activation de l'outil, la valeur sera : '&nbsp;(...)'
-add_variable( array(
+add_variables( array(
 	'nom' => 'suite_introduction',
 	'format' => _format_CHAINE,
 	'defaut' => '"&nbsp;(...)"',
 	'code' => "define('_INTRODUCTION_SUITE', %s);\n",
-));
-add_variable( array(
+), array(
 	'nom' => 'lgr_introduction',
 	'format' => _format_NOMBRE,
 	'defaut' => 100,
 	'code:%s && %s!=100' => "define('_INTRODUCTION_LGR', %s);\n",
-));
-add_variable( array(
+), array(
 	'nom' => 'lien_introduction',
 	'format' => _format_NOMBRE,
 	'radio' => array(1 => 'item_oui', 0 => 'item_non'),
@@ -225,7 +219,7 @@ add_outil( array(
 	'pipeline:header_prive' => 'icone_visiter_header_prive',
 ));
 
-add_variable( array(
+add_variables( array(
 	'nom' => 'tri_articles',
 	'format' => _format_CHAINE,
 	'radio' => array(
@@ -236,8 +230,7 @@ add_variable( array(
 	'radio/ligne' => 1,
 	'defaut' => "'date DESC'", //"'0+titre,titre'",
 	'code:%s!="perso"' => "define('_TRI_ARTICLES_RUBRIQUE', %s);\n",
-));
-add_variable( array(
+), array(
 	'nom' => 'tri_perso',
 	'format' => _format_CHAINE,
 	'defaut' => '',
@@ -249,9 +242,6 @@ add_outil( array(
 	'categorie' => 'interface',
 	'version-min' => '1.9300',
 ));
-
-// inclusion de l'outil gerant le format des urls
-include_spip('config_outils_urls');
 
 	// ici on a besoin de trois boutons radio : _T('couteauprive:js_jamais'), _T('couteauprive:js_defaut') et _T('couteauprive:js_toujours')
 add_variable( array(
@@ -284,17 +274,15 @@ add_outil( array(
 	'version-min' => '1.9200',
 ));
 
-add_variable( array(
+add_variables( array(
 	'nom' => 'auteur_forum_nom',
 	'check' => 'couteauprive:auteur_forum_nom',
 	'defaut' => 1,
-));
-add_variable( array(
+), array(
 	'nom' => 'auteur_forum_email',
 	'check' => 'couteauprive:auteur_forum_email',
 	'defaut' => 0,
-));
-add_variable( array(
+), array(
 	'nom' => 'auteur_forum_deux',
 	'check' => 'couteauprive:auteur_forum_deux',
 	'defaut' => 0,
@@ -351,17 +339,15 @@ add_outil( array(
 	'version-min' => '1.9300',
 ));
 
-add_variable( array(
+add_variables( array(
 	'nom' => 'log_couteau_suisse',
 	'check' => 'couteauprive:cs_log_couteau_suisse',
 	'defaut' => 0,
-));
-add_variable( array(
+), array(
 	'nom' => 'spip_options_on',
 	'check' => 'couteauprive:cs_spip_options_on',
 	'defaut' => 0,
-));
-add_variable( array(
+), array(
 	'nom' => 'distant_off',
 	'check' => 'couteauprive:cs_distant_off',
 	'defaut' => 0,
@@ -389,92 +375,79 @@ add_outil( array(
 	'version-min' => '1.9200',
 ));
 
-add_variable( array(
+add_variables( array(
 	'nom' => 'style_p',
 	'format' => _format_CHAINE,
 	'defaut' =>  "''",
 	'code:strlen(%s)' => ' class=%s',
-));
-add_variable( array(
+), array(
 	'nom' => 'style_h',
 	'format' => _format_CHAINE,
 	'defaut' =>  '"spip"',
 	'code:strlen(%s)' => ' class=%s',
-));
-add_variable( array(
+), array(
 	'nom' => 'racc_hr',
 	'format' => _format_CHAINE,
 	'defaut' => defined('_SPIP19300')?"''":"'<hr class=\"spip\" />'",
 	'code:strlen(%s)' => "\$GLOBALS['ligne_horizontale']=%s;\n",
 	'code:!strlen(%s)' => defined('_SPIP19300')?"\$GLOBALS['ligne_horizontale']=\"<hr\$GLOBALS[class_spip_plus] />\";\n":"",
-));
-add_variable( array(
+), array(
 	'nom' => 'racc_h1',
 	'format' => _format_CHAINE,
 	'defaut' => defined('_SPIP19300')?"''":"'<h3 class=\"spip\">'",
 	'code:strlen(%s)' => "\$GLOBALS['debut_intertitre']=%s;\n",
 	'code:!strlen(%s)' => "\$GLOBALS['debut_intertitre']=\"<h3\$GLOBALS[class_spip_plus]>\";\n",
-));
-add_variable( array(
+), array(
 	'nom' => 'racc_h2',
 	'format' => _format_CHAINE,
 	'defaut' => defined('_SPIP19300')?"''":"'</h3>'",
 	'code:strlen(%s)' => "\$GLOBALS['fin_intertitre']=%s;\n",
 	'code:!strlen(%s)' => "\$GLOBALS['fin_intertitre']='</h3>';\n",
-));
-add_variable( array(
+), array(
 	'nom' => 'racc_i1',
 	'format' => _format_CHAINE,
 	'defaut' => '',
 	'code:strlen(%s)' => "\$GLOBALS['debut_italique']=%s;\n",
 	'code:!strlen(%s)' => "\$GLOBALS['debut_italique']=\"<i\$GLOBALS[class_spip]>\";\n",
-));
-add_variable( array(
+), array(
 	'nom' => 'racc_i2',
 	'format' => _format_CHAINE,
 	'defaut' => '',
 	'code:strlen(%s)' => "\$GLOBALS['fin_italique']=%s;\n",
 	'code:!strlen(%s)' => "\$GLOBALS['fin_italique']='</i>';\n",
-));
-add_variable( array(
+), array(
 	'nom' => 'racc_g1',
 	'format' => _format_CHAINE,
 	'defaut' => '',
 	'code:strlen(%s)' => "\$GLOBALS['debut_gras']=%s;\n",
 	'code:!strlen(%s)' => "\$GLOBALS['debut_gras']=\"<strong\$GLOBALS[class_spip]>\";\n",
-));
-add_variable( array(
+), array(
 	'nom' => 'racc_g2',
 	'format' => _format_CHAINE,
 	'defaut' => '',
 	'code:strlen(%s)' => "\$GLOBALS['fin_gras']=%s;\n",
 	'code:!strlen(%s)' => "\$GLOBALS['fin_gras']='</strong>';\n",
-));
-add_variable( array(
+), array(
 	'nom'	=>	'ouvre_ref',
 	'format'=>	_format_CHAINE,
 	'code:!strlen(%s)'=>"\$GLOBALS['ouvre_ref']='&nbsp;[';\n",
 	'code:strlen(%s)'=>"\$GLOBALS['ouvre_ref']=%s;\n"
-));
-add_variable( array(
+), array(
 	'nom'	=>	'ferme_ref',
 	'format'=>	_format_CHAINE,
 	'code:!strlen(%s)'=>"\$GLOBALS['ferme_ref']=']';\n",
 	'code:strlen(%s)'=>"\$GLOBALS['ferme_ref']=%s;\n"
-));
-add_variable( array(
+), array(
 	'nom'	=>	'ouvre_note',
 	'format'=>	_format_CHAINE,
 	'code:!strlen(%s)'=>"\$GLOBALS['ouvre_note']='[';\n",
 	'code:strlen(%s)'=>"\$GLOBALS['ouvre_note']=%s;\n"
-));
-add_variable( array(
+), array(
 	'nom'	=>	'ferme_note',
 	'format'=>	_format_CHAINE,
 	'code:!strlen(%s)'=>	"\$GLOBALS['ferme_note']=']';\n",
 	'code:strlen(%s)'=> "\$GLOBALS['ferme_note']=%s;\n"
-));
-add_variable( array(
+), array(
 	'nom' => 'puce',
 	'format' => _format_CHAINE,
 	'defaut' => defined('_SPIP19300')?"''":'"AUTO"',
@@ -495,28 +468,25 @@ add_outil( array(
 		(!defined('_SPIP19300')?'':'<:class_spip:4:>'),
 ));
 
-add_variable( array(
+add_variables( array(
 	'nom' => 'prive_travaux',
 	'format' => _format_NOMBRE,
 	'radio' => array(0 => 'couteauprive:tous', 1 => 'couteauprive:admins_seuls'),
 	'defaut' => 0,
 	'code:%s' => "define('_en_travaux_PRIVE', %s);\n",
-));
-add_variable( array(
+), array(
 	'nom' => 'admin_travaux',
 	'format' => _format_NOMBRE,
 	'radio' => array(0 => 'couteauprive:tous', 1 => 'couteauprive:sauf_admin'),
 	'defaut' => 0,
 	'code:%s' => "define('_en_travaux_ADMIN', %s);\n",
-));
-add_variable( array(
+), array(
 	'nom' => 'message_travaux',
 	'format' => _format_CHAINE,
 	'defaut' => "_T('couteauprive:travaux_prochainement')",
 	'lignes' => 3,
 	'code' => "\$tr_message=%s;\n",
-));
-add_variable( array(
+), array(
 	'nom' => 'titre_travaux',
 	'format' => _format_NOMBRE,
 	'radio' => array(1 => 'couteauprive:travaux_titre', 0 => 'couteauprive:travaux_nom_site'),
@@ -530,37 +500,32 @@ add_outil( array(
 	'auteur' => "Arnaud Ventre pour l'id&eacute;e originale",
 ));
 
-add_variable( array(
+add_variables( array(
 	'nom' => 'bp_tri_auteurs',
 	'check' => 'couteauprive:bp_tri_auteurs',
 	'defaut' => 1,
 	'code:%s' => "define('boites_privees_TRI_AUTEURS', %s);\n",
-));
-add_variable( array(
+), array(
 	'nom' => 'bp_urls_propres',
 	'check' => 'couteauprive:bp_urls_propres',
 	'defaut' => 1,
 	'code:%s' => "define('boites_privees_URLS_PROPRES', %s);\n",
-));
-add_variable( array(
+), array(
 	'nom' => 'cs_rss',
 	'check' => 'couteauprive:rss_var',
 	'defaut' => 1,
 	'code:%s' => "define('boites_privees_CS', %s);\n",
-));
-add_variable( array(
+), array(
 	'nom' => 'format_spip',
 	'check' => 'couteauprive:format_spip',
 	'defaut' => 1,
 	'code:%s' => "define('boites_privees_ARTICLES', %s);\n",
-));
-add_variable( array(
+), array(
 	'nom' => 'stat_auteurs',
 	'check' => 'couteauprive:stat_auteurs',
 	'defaut' => 1,
 	'code:%s' => "define('boites_privees_AUTEURS', %s);\n",
-));
-add_variable( array(
+), array(
 	'nom' => 'qui_webmasters',
 	'check' => 'couteauprive:qui_webmestres',
 	'defaut' => 1,
@@ -577,28 +542,22 @@ add_outil( array(
 	'pipeline:affiche_gauche' => 'boites_privees_affiche_gauche',
 ));
 
-add_variable( array(
+add_variables( array(
 	'nom' => 'max_auteurs_page',
 	'format' => _format_NOMBRE,
 	'defaut' => 30,
 	'code:%s' => "@define('MAX_AUTEURS_PAR_PAGE', %s);\n",
-));
-add_variable( array(
+), array(
 	'nom' => 'auteurs_0',	'check' => 'info_administrateurs',	'defaut' => 1,	'code:%s' => "'0minirezo',",
-));
-add_variable( array(
+), array(
 	'nom' => 'auteurs_1',	'check' => 'info_redacteurs',	'defaut' => 1,	'code:%s' => "'1comite',",
-));
-add_variable( array(
+), array(
 	'nom' => 'auteurs_5',	'check' => 'info_statut_site_4',	'defaut' => 1,	'code:%s' => "'5poubelle',",
-));
-add_variable( array(
+), array(
 	'nom' => 'auteurs_6',	'check' => 'info_visiteurs',	'defaut' => 0,	'code:%s' => "'6forum',",
-));
-add_variable( array(
+), array(
 	'nom' => 'auteurs_n',	'check' => 'couteauprive:nouveaux',	'defaut' => 0,	'code:%s' => "'nouveau',",
-));
-add_variable( array(
+), array(
 	'nom' => 'auteurs_tout_voir',
 	'format' => _format_NOMBRE,
 	'radio' => array(1 => 'couteauprive:statuts_tous', 0 => 'couteauprive:statuts_spip'),
@@ -671,20 +630,18 @@ span.cs_pagination_off {color: lightgrey; font-weight: bold; text-decoration: un
 
 // couplage avec l'outil 'decoupe', donc 'sommaire' doit etre place juste apres :
 // il faut inserer le sommaire dans l'article et ensuite seulement choisir la page
-add_variable( array(
+add_variables( array(
 	'nom' => 'lgr_sommaire',
 	'format' => _format_NOMBRE,
 	'defaut' => 30,
 	'code:%s>=9 && %s<=99' => "define('_sommaire_NB_CARACTERES', %s);\n",
-));
-add_variable( array(
+), array(
 	'nom' => 'auto_sommaire',
 	'format' => _format_NOMBRE,
 	'radio' => array(1 => 'item_oui', 0 => 'item_non'),
 	'defaut' => 1,
 	'code:%s' => "define('_sommaire_AUTOMATIQUE', %s);\n",
-));
-add_variable( array(
+), array(
 	'nom' => 'balise_sommaire',
 	'format' => _format_NOMBRE,
 	'radio' => array(1 => 'item_oui', 0 => 'item_non'),
@@ -727,20 +684,18 @@ add_outil( array(
 	'code:jq_init' => 'InhibeFlash_init.apply(this);',
 ));
 
-add_variable( array(
+add_variables( array(
 	'nom' => 'radio_target_blank3',
 	'format' => _format_NOMBRE,
 	'radio' => array(1 => 'item_oui', 0 => 'item_non'),
 	'defaut' => 0,
 	'code' => '$GLOBALS["tweak_target_blank"]=%s;',
-));
-add_variable( array(
+), array(
 	'nom' => 'url_glossaire_externe2',
 	'format' => _format_CHAINE,
 	'defaut' => '""',
 	'code:strlen(%s)' => '$GLOBALS["url_glossaire_externe"]=%s;',
-));
-add_variable( array(
+), array(
 	'nom' => 'enveloppe_mails',
 	'format' => _format_NOMBRE,
 	'radio' => array(1 => 'item_oui', 0 => 'item_non', -1 => 'couteauprive:par_defaut'),
@@ -822,22 +777,20 @@ add_outil( array(
 	'pipeline:bt_toolbox' => 'decoration_BarreTypo',
 ));
 
-add_variable( array(
+add_variables( array(
 	'nom' => 'couleurs_fonds',
 	'format' => _format_NOMBRE,
 	'radio' => array(1 => 'item_oui', 0 => 'item_non' ),
 	'defaut' => 1,
 	'code' => "define('_COULEURS_FONDS', %s);\n",
-));
-add_variable( array(
+), array(
 	'nom' => 'set_couleurs',
 	'format' => _format_NOMBRE,
 	'radio' => array(0 => 'couteauprive:toutes_couleurs', 1 => 'couteauprive:certaines_couleurs'),
 	'radio/ligne' => 1,
 	'defaut' => 0,
 	'code' => "define('_COULEURS_SET', %s);\n",
-));
-add_variable( array(
+), array(
 	'nom' => 'couleurs_perso',
 	'format' => _format_CHAINE,
 	'lignes' => 3,
@@ -884,14 +837,13 @@ add_outil( array(
 	'pipeline:post_typo' => 'typo_guillemets',
 ));
 
-add_variable( array(
+add_variables( array(
 	'nom' => 'liens_interrogation',
 	'format' => _format_NOMBRE,
 	'radio' => array(1 => 'item_oui', 0 => 'item_non'),
 	'defaut' => 1,
 	'code:%s' => "\$GLOBALS['liens_interrogation']=true;\n",
-));
-add_variable( array(
+), array(
 	'nom' => 'liens_orphelins',
 	'format' => _format_NOMBRE,
 	'radio' => array(-1 => 'item_non', 0 => 'couteauprive:basique', 1 => 'couteauprive:etendu', -2 => 'couteauprive:par_defaut'),
@@ -939,19 +891,17 @@ add_outil( array(
 	'pipeline:bt_toolbox' => 'chatons_BarreTypo',
 ));
 
-add_variable( array(
+add_variables( array(
 	'nom' => 'glossaire_groupes',
 	'format' => _format_CHAINE,
 	'defaut' => "'Glossaire'",
 	'code' => "\$GLOBALS['glossaire_groupes']=%s;\n",
-));
-add_variable( array(
+), array(
 	'nom' => 'glossaire_limite',
 	'format' => _format_NOMBRE,
 	'defaut' => 0,
 	'code:%s>0' => "define('_GLOSSAIRE_LIMITE', %s);\n",
-));
-add_variable( array(
+), array(
 	'nom' => 'glossaire_js',
 	'radio' => array(0 => 'couteauprive:glossaire_css', 1 => 'couteauprive:glossaire_js'),
 	'format' => _format_NOMBRE,
@@ -1012,19 +962,17 @@ add_outil( array(
 	'code:css' => 'a.spip_out:after {display:none;}',
 )); 
 
-add_variable( array(
+add_variables( array(
 	'nom' => 'bloc_h4',
 	'format' => _format_CHAINE,
-	'defaut' => 'h4',
+	'defaut' => '"h4"',
 	'code:preg_match(\',^h\d$,i\', trim(%s))' => "define('_BLOC_TITRE_H', %s);\n",
-));
-add_variable( array(
+), array(
 	'nom' => 'bloc_unique',
 	'format' => _format_NOMBRE,
 	'radio' => array(1 => 'item_oui', 0 => 'item_non'),
 	'defaut' => 0,
-));
-add_variable( array(
+), array(
 	'nom' => 'blocs_cookie',
 	'format' => _format_NOMBRE,
 	'radio' => array(1 => 'item_oui', 0 => 'item_non'),
@@ -1044,15 +992,14 @@ add_outil( array(
 	'jquery' => 'oui',
 	'pipeline:pre_typo' => 'blocs_pre_typo',
 	'pipeline:bt_toolbox' => 'blocs_BarreTypo',
-));
+)); 
 
-add_variable( array(	// variable utilisee par 'pipelinecode:insert_head'
+add_variables( array(	// variable utilisee par 'pipelinecode:insert_head'
 	'nom' => 'scrollTo',
 	'check' => 'couteauprive:jq_scrollTo',
 	'defaut' => 1,
 	'format' => _format_NOMBRE,
-));
-add_variable( array(	// variable utilisee par 'pipelinecode:insert_head'
+), array(	// variable utilisee par 'pipelinecode:insert_head'
 	'nom' => 'LocalScroll',
 	'check' => 'couteauprive:jq_localScroll',
 	'defaut' => 1,
@@ -1069,7 +1016,7 @@ if(%%LocalScroll%%) {$flux.=\'<script src="'.url_absolue(find_in_path("outils/jq
 ));
 
 // http://www.malsup.com/jquery/corner/
-add_variable( array(
+add_variables( array(
 	'nom' => 'jcorner_classes',
 	'format' => _format_CHAINE,
 	'lignes' => 10,
@@ -1094,8 +1041,7 @@ add_variable( array(
 // coins ronds aux parents !
 .jc_parent"',
 	'code' => "define('_jcorner_CLASSES', %s);",
-));
-add_variable( array(	// variable utilisee par 'pipelinecode:insert_head'
+), array(	// variable utilisee par 'pipelinecode:insert_head'
 	'nom' => 'jcorner_plugin',
 	'check' => 'couteauprive:jcorner_plugin',
 	'defaut' => 1,
@@ -1113,8 +1059,7 @@ add_outil( array(
 	'code:jq_init' => 'if(typeof jcorner_init=="function") jcorner_init.apply(this);',
 ));
 
-
-add_variable( array(
+add_variables( array(
 	'nom' => 'insertions',
 	'format' => _format_CHAINE,
 	'lignes' => 8,
@@ -1151,19 +1096,17 @@ add_outil( array(
 	'code:jq_init' => 'if (window.location.search.match(/page=forum/)!=null) jQuery("legend:contains(\''.addslashes(unicode2charset(html2unicode(_T('bouton_radio_modere_priori')))).'\')", this).next().html(\''.addslashes(_T('couteauprive:moderation_message')).'\');',
 	'pipeline:pre_edition' => 'moderation_vip',
 ));
-add_variable( array(
+add_variables( array(
 	'nom' => 'moderation_admin',
 	'check' => 'couteauprive:moderation_admins',
 	'defaut' => 1,
 	'code:%s' => "define('_MOD_MOD_0minirezo',%s);",
-));
-add_variable( array(
+), array(
 	'nom' => 'moderation_redac',
 	'check' => 'couteauprive:moderation_redacs',
 	'defaut' => 0,
 	'code:%s' => "define('_MOD_MOD_1comite',%s);",
-));
-add_variable( array(
+), array(
 	'nom' => 'moderation_visit',
 	'check' => 'couteauprive:moderation_visits',
 	'defaut' => 0,
@@ -1222,21 +1165,32 @@ add_outil( array(
 add_outil( array(
 	'id' => 'brouteur',
 	'categorie' => 'interface',
-	
 	'code:options' => "%%rubrique_brouteur%%"
 ));
-
 add_variable( array(
 	'nom' => 'rubrique_brouteur',
 	'format' => _format_NOMBRE,
 	'defaut' => 20,
-	'code:%s' => "define('_SPIP_SELECT_RUBRIQUES', %s);
-"
+	'code:%s' => "define('_SPIP_SELECT_RUBRIQUES', %s);"
 ));
+
+// Recuperer tous les outils de la forme outils/monoutil_config.php
+foreach (find_all_in_path('outils/', '\w+_config\.php$') as $f) 
+if (preg_match(',^([^.]*)_config$,',basename($f,'.php'),$regs)){
+	include $f;
+	if(function_exists($cs_temp=$regs[1].'_add_outil')) {
+		$cs_temp = $cs_temp();
+		$cs_temp['id'] = $regs[1];
+		add_outil($cs_temp);
+	}
+	if(function_exists($cs_temp='add_variable_'.$regs[1])) add_variable($cs_temp());
+	if(function_exists($cs_temp='add_variables_'.$regs[1])) add_variables($cs_temp());
+}
 
 // Nettoyage
 unset($cs_temp);
-// Ajout des outils personnalises
+
+// Ajout des outils personnalises sous forme globale
 if(isset($GLOBALS['mes_outils'])) {
 	foreach($GLOBALS['mes_outils'] as $id=>$outil) {
 		$outil['id'] = $id;
