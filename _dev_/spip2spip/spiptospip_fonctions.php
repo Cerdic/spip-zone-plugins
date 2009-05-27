@@ -103,7 +103,11 @@ function analyser_backend_spip2spip($rss){
 	
 	// version du flux
 	$version_flux = 0;
-  // FIXME version du flux
+	if (preg_match_all(',<spip2spip version="(.*?)">,Uims',$rss,$r, PREG_SET_ORDER)) 
+	foreach ($r as $regs) {
+	   $version_flux  = (float) $regs[1];
+  }
+  spip_log("spip2spip - version flux: $version_flux");
 	
 	// analyse de chaque item
 	$items = array();
@@ -131,6 +135,9 @@ function analyser_backend_spip2spip($rss){
 		if ($la_date)  		$la_date = my_strtotime($la_date);
 		if ($la_date < time() - 365 * 24 * 3600	OR $la_date > time() + 48 * 3600)		$la_date = time();
 		$data['date'] = $la_date;
+		
+		// version du flux
+		$data['version_flux'] = $version_flux;
 			
 		// Recuperer les autres tags du xml
 		foreach ($xml_tags as $xml_tag) {		  
@@ -267,8 +274,8 @@ function spip2spip_get_id_auteur($name) {
 
 //
 // restaure le formatage des extra
-function spip2spip_convert_extra($texte,$documents) {
-	$texte = spip2spip_convert_ln($texte); 
+function spip2spip_convert_extra($texte,$documents,$version_flux=1.6) {
+	$texte = spip2spip_convert_ln($texte,$version_flux); 
 	$texte = spip2spip_convert_img($texte,$documents);
 	return $texte;
 }
@@ -298,7 +305,7 @@ function spip2spip_convert_img($texte,$documents) {
 // restaure le formatage des ln
 function spip2spip_convert_ln($texte,$version_flux=1.6) {
   if ($version_flux<1.7)	$texte = str_replace("__LN__","\n\n",$texte);
-                          $texte = str_replace("__LN__","\n",$texte); 
+                  else    $texte = str_replace("__LN__","\n",$texte); 
 	return $texte;
 }
 
@@ -375,6 +382,7 @@ function spip2spip_syndiquer($id_site, $mode='cron') {
               if (isset($article['titre'])) {    		  	    
                 $documents_current_article = array();
                 $current_titre = $article['titre'];
+                $version_flux = $article['version_flux'];
                               
                 // Est que l'article n'a pas été déjà importé ?
                 $nb_reponses = sql_countsel("spip_articles","titre=".sql_quote($current_titre));                               
@@ -432,10 +440,10 @@ function spip2spip_syndiquer($id_site, $mode='cron') {
                       $_surtitre = $article['surtitre'];
                   		$_titre = $article['titre'];
                   		$_soustitre = $article['soustitre'];
-                  		$_descriptif = spip2spip_convert_extra($article['descriptif'],$documents_current_article);
-                  		$_chapo = spip2spip_convert_extra($article['chapo'],$documents_current_article);
-                  		$_texte = spip2spip_convert_extra($article['texte'],$documents_current_article);
-                  		$_ps = spip2spip_convert_extra($article['ps'],$documents_current_article);
+                  		$_descriptif = spip2spip_convert_extra($article['descriptif'],$documents_current_article,$version_flux);
+                  		$_chapo = spip2spip_convert_extra($article['chapo'],$documents_current_article,$version_flux);
+                  		$_texte = spip2spip_convert_extra($article['texte'],$documents_current_article,$version_flux);
+                  		$_ps = spip2spip_convert_extra($article['ps'],$documents_current_article,$version_flux);
                   		$_date =  date('Y-m-d H:i:s',time()); // $article['date'];  // date de la syndication ou date de l'article ?
                   		$_lang =  $article['lang'];
                   		$_id_rubrique = $target; 
