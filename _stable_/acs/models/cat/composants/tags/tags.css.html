@@ -4,7 +4,7 @@
   [border-width: (#CONFIG{acsTagsBordLargeur,#CONFIG{acsFondBordLargeur}});]
   [border-style: (#CONFIG{acsTagsBordStyle,#CONFIG{acsFondBordStyle}});]
   [border-color: (#CONFIG{acsTagsBord,#CONFIG{acsFondBordColor}});]
-  [background: (#CONFIG{acsTagsFond});]
+  [background: (#CONFIG{acsTagsFond,#CONFIG{acsRubnavFond}});]
   -moz-border-radius: 5px;
 }
 
@@ -17,7 +17,7 @@
 .tags .titre {
   text-align: center;
   font-weight: bold;[
-  background: (#CONFIG{acsTagsTitreFond})[ url([(#ACS_CHEMIN)]img/trame/(#CONFIG{acsTagsTitreFondImage})) repeat top left];][
+  background: (#CONFIG{acsTagsTitreFond,#CONFIG{acsRubnavTitreFond}})[ url([(#ACS_CHEMIN)]img/trame/(#CONFIG{acsTagsTitreFondImage})) repeat top left];][
   border-bottom: (#CONFIG{acsTagsSep}) [(#CONFIG{acsTagsBordLargeur,#CONFIG{acsFondBordLargeur}})] [(#CONFIG{acsTagsBordStyle,#CONFIG{acsFondBordStyle}})];]
   -moz-border-radius: 5px;
   -moz-border-radius-bottomleft: 0;

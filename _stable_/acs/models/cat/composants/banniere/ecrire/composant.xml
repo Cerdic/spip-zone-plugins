@@ -23,15 +23,31 @@
     <chemin>img/banniere</chemin>
   </variable>
   <variable>
-    <nom>Hauteur</nom>
-    <type>nombre</type>
-    <valeur>60</valeur>
+    <nom>Align</nom>
+    <type>choix</type>
+    <option>left</option>
+    <option>center</option>
+    <option>right</option>
+    <valeur>left</valeur>
   </variable>
   <variable>
-    <nom>UseLogo</nom>
+    <nom>Hauteur</nom>
+    <type>nombre</type>
+    <valeur>60px</valeur>
+  </variable>
+  <variable>
+    <nom>Logo</nom>
     <type>choix</type>
     <option>oui</option>
     <option>non</option>
+    <valeur>non</valeur>
+  </variable>
+  <variable>
+    <nom>LogoAlign</nom>
+    <type>choix</type>
+    <option>left</option>
+    <option>right</option>
+    <valeur>left</valeur>
   </variable>
   <variable>
     <nom>TextColor</nom>
@@ -42,4 +58,7 @@
     <type>fontFamily</type>
 		<valeur>sans-serif</valeur>
   </variable>
-</composant>
+  <variable>
+    <nom>Font</nom>
+    <type>text</type>
+  </variable></composant>

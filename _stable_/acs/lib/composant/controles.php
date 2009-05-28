@@ -112,6 +112,9 @@ function ctlChoix($composant, $nic, $nom, $value, $param, $wid) {
         break;
       default:
         $label = _TC($composant, $nom.ucfirst($option));
+        // S'il n'existe pas de traduction propre au composant pour ce choix, on cherche une traduction ACS generique
+        if ($label == strtolower(str_replace('_', ' ', $nom.$option)))
+        	$label = _T('acs:'.strtolower($option));
     }
     $r .= acs_bouton_radio(
       $var.'_'.$wid,
@@ -161,15 +164,19 @@ function ctlHidden($composant, $nic, $nom, $value, $param, $wid) {
 }
 /**
  * Retourne la traduction spécifique au composant,
- * une traduction par défaut,
- * ou le texte 
+ * une traduction par défaut, ou le texte 
  */
 function _TC($composant, $texte) {
+	// traduction ACS propre au composant
 	$t = _T('acs:'.$composant.'_'.$texte);
 	if ($t != str_replace('_', ' ', $composant.'_'.$texte))
 		return $t;
-	// retourne une traduction ACS generique 
+	// traduction ACS generique 
 	$t = _T('acs:'.strtolower($texte));
+	if ($t != str_replace('_', ' ', $texte))
+		return $t;
+	// traduction SPIP generique 
+	$t = _T(strtolower($texte));
 	if ($t != str_replace('_', ' ', $texte))
 		return $t;
 	return $texte;

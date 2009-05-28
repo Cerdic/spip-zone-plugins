@@ -4,10 +4,13 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'nom' => 'Forums',
-'description' => 'Messages de forum et bloc des derniers messages publiés.',
-'info' => 'La prévisualisation affiche les messages des forums de l\'article 1, et le bloc des derniers messages publiés.',
+'description' => 'Messages de forum et bloc des derniers messages publi&eacute;s.',
+'help' => 'Utilise également des valeurs définies par le composant Rubnav.',
+'info' => 'La pr&eacute;visualisation affiche les messages des forums de l\'article 1, et le bloc des derniers messages publi&eacute;s sur le site.',
 
-'Bord' => 'Bord',
+'bloc' => 'Bloc des derniers messages',
+
+'messages' => 'Forum d\'un objet (article ...)',
 'Fond1' => 'Fond 1',
 'Fond2' => 'Fond 2',
 'Fond3' => 'Fond 3',

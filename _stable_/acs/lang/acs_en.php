@@ -6,6 +6,7 @@
 $traductions_acs = array(
   'use' => 'Use',
 
+  'bord' => 'Border',
   'bordlargeur' => 'border width',
   'bordstyle' => 'border style',
   'parent' => 'default value',
@@ -17,7 +18,15 @@ $traductions_acs = array(
   'groove' => 'groove',
   'ridge' => 'ridge',
   'inset' => 'inset',
-  'outset' => 'outset'
+  'outset' => 'outset',
+
+  'align' => 'Alignment',
+	'left' => 'left',
+	'center' => 'center',
+	'right' => 'right',
+
+	'font' => 'Font(s)',
+	'fontfamily' => 'Font family'
 );
 
 // Lang file is build with components public lang files

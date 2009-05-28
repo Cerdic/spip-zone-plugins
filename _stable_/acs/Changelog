@@ -1,7 +1,7 @@
 ACS version 0.5
-- installation simplifiée et améliorée. Installation des images par défaut des composants.
-- nombre d'instances de chaque composant affiché en info-bulle sur les widgets de l'onglet "Composants".
-
+ - installation simplifiée et améliorée. Installation des images par défaut des composants.
+ - nombre d'instances de chaque composant affiché en info-bulle sur les widgets de l'onglet "Composants".
+ - nouvelles traductions génériques.
 
 Modèle Cat pour ACS vesion 0.5:
  - Composant Ours : tous les liens prédéfinis deviennent optionnels. Pied de page totalement personnalisable. Ajout des statistiques globales du site.
@@ -9,6 +9,10 @@ Modèle Cat pour ACS vesion 0.5:
  - Composant Edito : mise à jour pour plugin notation 0.6.3
  - Composant Fond : debug du javascript
  - Composant Onglets  : installation automatique des images par defaut.
+ - Composant Rubnav : menus déroulants. Utilisation des traductions génériques.
+ - Composant Banniere : nouvelles variables. 
+ - Comopsant Forums : amélioration de la css pour ses deux "noisettes", et nouvelle mise en page dans l'espace privé.
+ - Composant Tags : valeur par défaut de la couleur de fond et du fond du titre = celle de Rubnav
 
 _______________________________________
 

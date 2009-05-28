@@ -4,14 +4,14 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'nom' => 'Banni&egrave;re',
-'description' => 'Banni&egrave;re 468x60 qui change au survol, et logo du site en haut à gauche en option.',
-'help' => 'En l\'absence de banni&egrave;re, le nom du site est affiché en 60 pixels de haut.',
+'description' => 'Banni&egrave;re qui change au survol, et logo du site, en option.',
+'help' => 'Une banni&egrave;re mesure normalement 468x60 pixels. Au survol du pointeur, la bannière affiche alatoirement l\'une des images disponibles. Le nom du site est affiçh&eacute;  si aucune image n\'a &eacute;t&eacute; t&eacute;l&eacute;charg&eacute;e sur le serveur.',
 
 'Image' => 'Banni&egrave;re',
 'ImageFond' => 'Arri&egrave;re-plan',
 'Hauteur' => 'Hauteur',
-'UseLogo' => 'Afficher le logo du site',
-'FontFamily' => 'Famille de fonte de caractères',
+'Logo' => 'Afficher le logo du site',
+'LogoAlign' => _T('acs:align'),
 'TextColor'=>'Couleur texte'
 );
 ?>

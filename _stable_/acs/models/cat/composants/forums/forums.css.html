@@ -40,10 +40,15 @@ ul ul ul ul ul ul .forum-chapo { background: #CONFIG{acsForumsFond6,#FFF};}
   [background: (#CONFIG{acsRubnavFondColor});]
 }
 .blocForums .menu-titre {
-  [background: (#CONFIG{acsRubnavTitreFondColor})[ url([(#ACS_CHEMIN)]img/trame/(#CONFIG{acsRubnavTitreFondImage})) repeat top left];]
+  text-align: center;
+  [background: (#CONFIG{acsRubnavTitreFond})[ url([(#ACS_CHEMIN)]img/trame/(#CONFIG{acsRubnavTitreFondImage})) repeat top left];]
 }
 .blocForums .menu-item {
-  [background: (#CONFIG{acsRubnavFondColor});]
-  border-top: 1px solid [(#CONFIG{acsRubnavSepColor,#CONFIG{acsFondBordColor}})];
+  [background: (#CONFIG{acsRubnavFond});]
+  border-top: 1px solid [(#CONFIG{acsRubnavSep,#CONFIG{acsFondBordColor}})];
   text-align: #LANG_LEFT;
+}
+.blocForums .pagination {
+  [background: (#CONFIG{acsRubnavTitreFond,#CONFIG{acsFondColor}});]
+  border-top: 1px solid [(#CONFIG{acsRubnavSep,#CONFIG{acsFondBordColor}})];
 }

@@ -4,14 +4,14 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'nom' => 'Banner',
-'description' => 'Banner 468x60 pixels, changing on mouse over, plus optionnal website logo upper left.',
-'help' => 'Without banner image, website name is displayed, 60 pixels height.',
+'description' => 'Banner changing on mouse over, plus optionnal website logo.',
+'help' => 'A banner measure normally 468x60 pixels. On mouse over, Banner randomly display one of the available image uploaded. Without banner image, website name is displayed instead.',
 
 'Image' => 'Banner',
 'ImageFond' => 'Background',
 'Hauteur' => 'Height',
-'UseLogo' => 'Display website logo',
-'FontFamily' => 'Font family',
+'Logo' => 'Display website logo',
+'LogoAlign' => _T('acs:align'),
 'TextColor'=>'Text color'
 );
 ?>

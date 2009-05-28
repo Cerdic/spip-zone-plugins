@@ -6,6 +6,7 @@
 $traductions_acs = array(
   'use' => 'Utiliser',
 
+  'bord' => 'Bordure',
   'bordlargeur' => 'largeur de bordure',
   'bordstyle' => 'style de bordure',
   'parent' => 'valeur par d&eacute;faut',
@@ -18,6 +19,14 @@ $traductions_acs = array(
   'ridge' => 'sort de la page (inverse de groove)',
   'inset' => 'incrust&eacute; dans la page (inverse de outset)',
   'outset' => 'extrud&eacute; de la page (inverse de inset)',
+
+  'align' => 'Alignement',
+	'left' => 'gauche',
+	'center' => 'centr&eacute;',
+	'right' => 'droit',
+
+	'font' => 'Fonte(s)',
+	'fontfamily' => 'Famille de fonte'
 );
 
 
