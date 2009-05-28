@@ -1,0 +1,24 @@
+[(#REM)
+
+  Squelette
+  (c) xxx
+  Distribue sous licence GPL
+
+]
+#CACHE{3600*100}
+<BOUCLE_docslies(DOCUMENTS){id_document}>
+	<li class="item #ENV{mode,document}" id="document#DOCUMENT">
+		[<div class="fichier">[(#CHEMIN{#ENV{mode,document}|=={image}|?{images/image-24.gif,images/doc-24.gif}}|balise_img{'',cadre-icone})](#FICHIER*|basename)</div>]
+		<div class="infos">
+		[(#LOGO_DOCUMENT|#URL_DOCUMENT)]
+		<BOUCLE_type_doc(TYPES_DOCUMENTS){extension}>
+		[(#ENV{mode,document}|=={document}|oui)<div class="type">
+		[(#TITRE|sinon{#VAL{<:info_document:>}|concat{' ',#EXTENSION|majuscules}})]
+			</div>
+		]
+		[(#ID_DOCUMENT|gestdoc_raccourcis_doc{#_docslies:TITRE,#_docslies:DESCRIPTIF,#INCLUS,#LARGEUR,#HAUTEUR,#ENV{mode,document},#ENV{vu}})]
+		</BOUCLE_type_doc>
+		[<h3 class="titrem">(#TITRE|sinon{#FICHIER*|basename})</h3>]
+		</div>
+	</li>
+</BOUCLE_docslies>
