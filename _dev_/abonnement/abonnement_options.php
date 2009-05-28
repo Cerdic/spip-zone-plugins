@@ -97,15 +97,15 @@ function abonnement_envoyer_mails_confirmation($validation_paiement,$abonne,$lib
 	
 	$expediteur = $nom_expediteur.'<'.$adresse_expediteur.'>';
 					
-	$entete .= "Reply-To: ".$adresse_expediteur."\n";     					 // réponse
+	$entete .= "Reply-To: ".$adresse_expediteur."\n";     					 // rÃ©ponse
 	$entete .= "MIME-Version: 1.0\n";
 	$entete .= "Content-Type: text/plain; charset=$charset\n";	// Type Mime pour un message au format HTML
 	$entete .= "Content-Transfer-Encoding: 8bit\n";
 	$entete .= "X-Mailer: PHP/" . phpversion();         			// mailer
 	//$entetes .= "Return-Path: < webmaster@ >\n"; 					// En cas d' erreurs 
 	//$entetes .= "Errors-To: < webmaster@ >\n";    					// En cas d' erreurs 
-	//$entetes .= "cc:  \n"; 											// envoi en copie à 
-	//$entetes .= "bcc: \n";          										// envoi en copie cachée à …
+	//$entetes .= "cc:  \n"; 											// envoi en copie Ã  
+	//$entetes .= "bcc: \n";          										// envoi en copie cachÃ©e Ã  Â…
 
 
 	if($validation_paiement == "ok"){
@@ -182,5 +182,13 @@ function abonnement_envoyer_mails_confirmation($validation_paiement,$abonne,$lib
 		envoyer_mail ('booz@rezo.net', $sujet, $message, $from = $expediteur, $headers = $entetes );
 	}
 }
+
+//utiliser le cron pour gerer les dates de validite des abonnements et envoyer les messages de relance
+function abonnement_taches_generales_cron($taches_generales){
+	// toutes les 24 heures car verification sur le jour - passer a deux fois par jour car il peut y en avoir beaucoup
+	$taches_generales['abonnement_cron'] = 60*60*24 ;
+	return $taches_generales;
+}
+
 
 ?>

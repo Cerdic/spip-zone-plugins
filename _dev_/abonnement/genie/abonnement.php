@@ -11,88 +11,177 @@ function genie_abonnement_dist($t){
 		
 	// fermer les zones aux echus
 	// attention s'il y en a beaucoup
-	$result = sql_select(
-		"a.id_auteur",
-		array(
-			"spip_auteurs_elargis AS a",
-			"spip_zones_auteurs AS b",
-			"spip_auteurs_elargis_abonnements AS c"
-		),
-		array(
-			"a.id_auteur = b.id_auteur",
-			"a.id = c.id_auteur_elargi",
-			"c.validite <> '0000-00-00 00:00:00'",
-			"c.validite < " . date('Y-m-d H:i:s')
-		),
-	);
 		
-	while ($row = sql_fetch($result)){
+	$result = sql_query("
+	SELECT a.id_auteur FROM spip_auteurs_elargis a, spip_zones_auteurs b, spip_auteurs_elargis_abonnements c
+	WHERE
+	a.id_auteur = b.id_auteur
+	and a.id = c.id_auteur_elargi
+	and c.validite <> '0000-00-00 00:00:00' 
+	and c.validite < NOW()
+	");
+		
+		while($row = sql_fetch($result)){
 		$id_auteur = $row['id_auteur'] ;
-		spip_log("$id_auteur est echu (salo), il perd sa (ses) zone(s)", "abonnement");		
-		sql_delete("spip_zones_auteurs", "id_auteur = " . sql_quote($id_auteur));
-	}
-		
-	
+		spip_log("$id_auteur est echu (salo), il perd sa (ses) zone(s)", "abonnement_coupures");		
+		spip_query("DELETE FROM `spip_zones_auteurs` WHERE id_auteur='$id_auteur'");
+		// enlever le statut abonnÃ© ?
+		// passer en echu puis sorti ?
+		}
+			
 	// relancer les abonnes
 	// le cycle de relance comporte plusieurs phases
-	// avant l'echeance (1 à 3 messages) , à mettre en relation avec un compte pre-approvisionné.
-	// 1 après l'échéance traité ici.
-	// ne pas envoyer plusieurs fois le meme message (flaguer un peu)
+	// avant et apres l'echeance (4 messages) , Ã  mettre en relation avec un compte pre-approvisionnÃ©.
+	// ne pas envoyer plusieurs fois le meme message en utilisant le champs stade relance	
 	
-	$result = sql_select(array("libelle", "id_abonnement", "periode"),"spip_abonnements");
+	include_spip('inc/filtres'); // pour email_valide(), sinon pas d'envoi...
+	include_spip('inc/mail'); 
 	
-	while ($row = sql_fetch($result)){
-		$libelle = $row['libelle'] ;
-		$id_abonnement = $row['id_abonnement'] ;
-		$periode = $row['periode'] ;
-		
-		// a décliner sur les 4 phases de relance
-		
-		if ($periode == "jours"){
-			$validite = "DATE_ADD(CURRENT_DATE, INTERVAL 0 DAY)" ;
-		} elseif ($periode == "mois") {
-			$validite = "DATE_ADD(CURRENT_DATE, INTERVAL 0 DAY)" ;
-		}
-	
-		$sujet_relance = lire_config("abonnement_relances/sujet_relance4") ;
-		$texte_relance = lire_config("abonnement_relances/texte_relance4") ;
-		$adresse_expediteur = lire_config("abonnement_relances/email_envoi") ;
+	$monitor = array();
+	$adresse_expediteur = lire_config("abonnement_relances/email_envoi") ;
+	$expediteur = '"'.lire_config("abonnement_relances/nom_envoi").'"<'.$adresse_expediteur.'>';
+	$entetes = "bcc: booz@rezo.net\n" ;
 
-		$result_abo = sql_select(
-			array("a.id_auteur", "a.id", "c.email"),
-			array(
-				"spip_auteurs_elargis AS a",
-				"spip_auteurs_elargis_abonnements AS b",
-				"spip_auteurs AS c"
-			),
-			array(
-				"a.id = b.id_auteur_elargi",
-				"a.id_auteur = c.id_auteur",
-				"b.id_abonnement = " . sql_quote($id_abonnement),
-				"b.validite <> '0000-00-00 00:00:00'",
-				"b.validite < " . $validite,
-				"b.stade_relance < 4"
-			),
-		);
-
-		while($row_abo = sql_fetch($result_abo)){
+	// relance 1
+	$sujet_relance = lire_config("abonnement_relances/sujet_relance1") ;
+	$texte_relance = lire_config("abonnement_relances/texte_relance1") ;
+	
+	// trouver les abonnes en relance 1
+	
+	$result = sql_query("
+	SELECT a.id_auteur, a.email, ae.id, c.validite FROM spip_auteurs a, spip_auteurs_elargis ae, spip_auteurs_elargis_abonnements c WHERE 	a.id_auteur = ae.id_auteur
+	and ae.id = c.id_auteur_elargi	and ae.statut_abonnement='abonne'	and c.validite <> '0000-00-00 00:00:00' 	and c.validite > DATE_ADD(CURRENT_DATE, INTERVAL 6 DAY) 	and c.validite < DATE_ADD(CURRENT_DATE, INTERVAL 8 DAY) 
+	and c.stade_relance < 1	order by c.validite desc 
+	");
+	
+	spip_log($sujet_relance." (stade 1) ","abonnement_relance") ;
+	
+	while($row_abo = sql_fetch($result)){
 			$id_auteur = $row_abo['id_auteur'] ;
 			$email_abonne = $row_abo['email'] ;
+			$validite = $row_abo['validite'] ;
 			$id_auteur_elargi = $row_abo['id'] ;
-	
-			spip_log($email_abonne."(".$id_auteur.") est a relancer\n","abonnement");
-			spip_log($sujet_relance,"abonnement") ;
-			
-			include_spip('inc/filtres'); // pour email_valide(), sinon pas d'envoi...
-			include_spip('inc/mail'); 
-						
-			if(envoyer_mail($email_abonne, $sujet_relance, $texte_relance, $adresse_expediteur)){
-				sql_updateq("spip_auteurs_elargis_abonnements", array("stade_relance"=>4), "id_auteur_elargi = " . sql_quote($id_auteur_elargi));
-				spip_log("relance faite","abonnement") ;
+				
+			spip_log($email_abonne."(".$id_auteur.") est a relancer (stade 1)\n","abonnement_relance");
+				
+			if(envoyer_mail($email_abonne, $sujet_relance, $texte_relance, $expediteur, $entetes)){
+				sql_query("
+				UPDATE `spip_auteurs_elargis_abonnements` SET stade_relance = '1' WHERE id_auteur_elargi = '$id_auteur_elargi'");
+				spip_log("relance faite","abonnement_relance") ;
 			}
-		}
+			$monitor['relance_1'][] = "$email_abonne ($id_auteur / $id_auteur_elargi) - Ã©chu le : $validite" ;
+
 	}
 	
-	return 1; 
+	// relance 2
+	$sujet_relance = lire_config("abonnement_relances/sujet_relance2") ;
+	$texte_relance = lire_config("abonnement_relances/texte_relance2") ;
+
+	
+	// trouver les abonnes en relance 2
+	
+	$result = sql_query("
+	SELECT a.id_auteur, a.email, ae.id, c.validite FROM spip_auteurs a, spip_auteurs_elargis ae, spip_auteurs_elargis_abonnements c WHERE 	a.id_auteur = ae.id_auteur
+	and ae.id = c.id_auteur_elargi	and ae.statut_abonnement='abonne'	and c.validite <> '0000-00-00 00:00:00' 	and NOW() < DATE_ADD(c.validite, INTERVAL 1 DAY) 	and NOW() > DATE_ADD(c.validite, INTERVAL 0 DAY) 
+	and c.stade_relance < 2	order by c.validite desc 
+	");
+	
+	spip_log($sujet_relance." (stade 2) ","abonnement_relance") ;
+	
+	while($row_abo = sql_fetch($result)){
+			$id_auteur = $row_abo['id_auteur'] ;
+			$email_abonne = $row_abo['email'] ;
+			$validite = $row_abo['validite'] ;
+			$id_auteur_elargi = $row_abo['id'] ;
+				
+			spip_log($email_abonne."(".$id_auteur.") est a relancer (stade 2)\n","abonnement_relance");
+			
+			if(envoyer_mail($email_abonne, $sujet_relance, $texte_relance, $expediteur, $entetes)){
+				sql_query("
+				UPDATE `spip_auteurs_elargis_abonnements` SET stade_relance = '2' WHERE id_auteur_elargi = '$id_auteur_elargi'");
+				spip_log("relance faite","abonnement") ;
+			}
+			$monitor['relance_2'][] = "$email_abonne ($id_auteur / $id_auteur_elargi) - Ã©chu le : $validite" ;
+
+	}	
+	
+	// relance 3
+	$sujet_relance = lire_config("abonnement_relances/sujet_relance3") ;
+	$texte_relance = lire_config("abonnement_relances/texte_relance3") ;
+
+	
+	// trouver les abonnes en relance 3
+	
+	$result = sql_query("
+	SELECT a.id_auteur, a.email, ae.id, c.validite FROM spip_auteurs a, spip_auteurs_elargis ae, spip_auteurs_elargis_abonnements c WHERE 	a.id_auteur = ae.id_auteur
+	and ae.id = c.id_auteur_elargi	and ae.statut_abonnement='abonne'	and c.validite <> '0000-00-00 00:00:00' 	and NOW() < DATE_ADD(c.validite, INTERVAL 9 DAY) 	and NOW() > DATE_ADD(c.validite, INTERVAL 8 DAY) 
+	and c.stade_relance < 3	order by c.validite desc 
+	");
+	
+	spip_log($sujet_relance." (stade 3) ","abonnement_relance") ;
+		
+	while($row_abo = sql_fetch($result)){
+			$id_auteur = $row_abo['id_auteur'] ;
+			$email_abonne = $row_abo['email'] ;
+			$validite = $row_abo['validite'] ;
+			$id_auteur_elargi = $row_abo['id'] ;
+				
+			spip_log($email_abonne."(".$id_auteur.") est a relancer (stade 3)\n","abonnement");
+			
+			if(envoyer_mail($email_abonne, $sujet_relance, $texte_relance, $expediteur, $entetes)){
+				sql_query("
+				UPDATE `spip_auteurs_elargis_abonnements` SET stade_relance = '3' WHERE id_auteur_elargi = '$id_auteur_elargi'");
+				spip_log("relance faite","abonnement") ;
+			}
+			
+			$monitor['relance_3'][] = "$email_abonne ($id_auteur / $id_auteur_elargi) - Ã©chu le : $validite" ;
+
+	}
+	
+	// relance 4
+	$sujet_relance = lire_config("abonnement_relances/sujet_relance4") ;
+	$texte_relance = lire_config("abonnement_relances/texte_relance4") ;
+
+	
+	// trouver les abonnes en relance 4
+	
+	$result = sql_query("
+	SELECT a.id_auteur, a.email, ae.id, c.validite FROM spip_auteurs a, spip_auteurs_elargis ae, spip_auteurs_elargis_abonnements c WHERE 	a.id_auteur = ae.id_auteur
+	and ae.id = c.id_auteur_elargi	and ae.statut_abonnement='abonne'	and c.validite <> '0000-00-00 00:00:00' 	and NOW() < DATE_ADD(c.validite, INTERVAL 30 DAY) 	and NOW() > DATE_ADD(c.validite, INTERVAL 29 DAY) 
+	and c.stade_relance < 4	order by c.validite desc 
+	");
+
+	spip_log($sujet_relance." (stade 4) ","abonnement_relance") ;
+		
+	while($row_abo = sql_fetch($result)){
+			$id_auteur = $row_abo['id_auteur'] ;
+			$email_abonne = $row_abo['email'] ;
+			$validite = $row_abo['validite'] ;
+			$id_auteur_elargi = $row_abo['id'] ;
+				
+			spip_log($email_abonne."(".$id_auteur.") est a relancer (stade 4)\n","abonnement_relance");
+			
+			if(envoyer_mail($email_abonne, $sujet_relance, $texte_relance, $expediteur, $entetes)){
+				sql_query("
+				UPDATE `spip_auteurs_elargis_abonnements` SET stade_relance = '4' WHERE id_auteur_elargi = '$id_auteur_elargi'");
+				spip_log("relance faite","abonnement") ;
+			}
+			$monitor['relance_4'][] = "$email_abonne ($id_auteur / $id_auteur_elargi) - Ã©chu le : $validite" ;
+
+	}	
+	
+	$sujet_recap = "[opÃ©rateur de nuit] - relances effectuÃ©es" ;
+	$recap = "Voici le dÃ©tail des relances effectuÃ©es le ".date("Y-m-d H:i:s") ;
+	foreach($monitor as $k => $v){
+	$recap .= "\n\n$k :\n" ;
+		foreach($v as $abo){
+			$recap .= "\n- $abo";
+		}
+	}
+	// mail de monitoring
+	envoyer_mail($adresse_expediteur, $sujet_recap, $recap, $expediteur, $entetes);
+	
+		
+	return 1;
 }
 ?>
