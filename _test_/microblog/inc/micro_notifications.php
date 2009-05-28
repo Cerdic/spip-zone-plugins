@@ -43,14 +43,15 @@ function Microblog_notifications($x) {
 				AND $x['args']['options']['statut'] == 'prop' 
 				AND $x['args']['options']['statut_ancien'] != 'publie') )  // proposer
 		) {
-			$url = str_replace('amp;','',url_absolue(generer_url_entite($id, 'article', '', '', true /* public */)));
+			$espace_lien = ($x['args']['options']['statut'] == 'publie' ? true : false);  // lien notifié vers public | privé
+        $url = str_replace('amp;','',url_absolue(generer_url_entite($id, 'article', '', '', $espace_lien)));
 			$t = sql_fetsel('titre,descriptif,texte', 'spip_articles', 'id_article='.$id);
 			$etat = str_replace(array('prop','publie'),
 				array(_T('microblog:propose'),_T('microblog:publie')),
 				$x['args']['options']['statut']
 			);
 			$titre = couper(typo($t['titre']
-				.' | '._T('microblog:article').' '.$etat
+				.' | '.$etat
 				.' | '.($t['descriptif'] != '' ? $t['descriptif'].' | ' : '')
 				.$t['texte']),
 				120 - strlen($url));
@@ -61,6 +62,8 @@ function Microblog_notifications($x) {
 
 	if (!is_null($status)) {
 		include_spip('inc/microblog');
+echo $status;
+die;    
 		microblog($status);
 	}
 
