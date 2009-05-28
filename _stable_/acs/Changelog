@@ -11,9 +11,11 @@ Modèle Cat pour ACS vesion 0.5:
  - Composant Onglets  : installation automatique des images par defaut.
  - Composant Rubnav : menus déroulants. Utilisation des traductions génériques.
  - Composant Banniere : nouvelles variables. 
- - Comopsant Forums : amélioration de la css pour ses deux "noisettes", et nouvelle mise en page dans l'espace privé.
+ - Comopsant Forums : amélioration de la css pour ses deux "noisettes", et nouvelle mise en page dans l'espace privé.Suppression des fichiers de langue publics, devenus inutiles.
  - Composant Tags : valeur par défaut de la couleur de fond et du fond du titre = celle de Rubnav
-
+ - Composant Syndic : intégration du formulaire site.
+  - habillage.css : override des styles de formulaires de la dist SPIP remis à jour.
+ - formulaire_ecrire_auteur.html & formulaire_forum.html supprimés : on utilise la dist SPIP.
 _______________________________________
 
 ACS version 0.4

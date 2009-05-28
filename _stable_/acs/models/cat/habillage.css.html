@@ -36,11 +36,6 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 html { font-size: 100%; } /* Cf.: http://pompage.net/pompe/definir-des-tailles-de-polices-en-CSS */
 * {margin:0;padding:0} /* pour tous les éléments - for every element */
 
-/**
- * css de composants - components css
- */
-[(#HEADER_COMPOSANTS{css}|compacte_css)]
-
 [(#EVAL{defined('_DIR_PLUGIN_NOTATION')}|?{'', ' '})
   .notation {}
   .notation .topten {
@@ -284,7 +279,47 @@ table.petition {
 	background: #ECF4F4;
 }
 
-/* Styles des formulaires de Spip */
+[(#REM) Override des styles de la dist SPIP pour ses formulaires integres dans le modele Cat]
+.formulaire_spip {
+  text-align: #LANG_LEFT;
+  font-size: 0.77em;
+}
+.formulaire_spip fieldset {
+  display: block;
+  margin-top: 0;
+  padding: 0.77em;
+  padding-top: 0;
+  border: 1px dotted #CONFIG{acsFondBordColor,#004F8F};
+ }
+ .formulaire_spip legend {
+  font-weight: bold;
+  padding: 3px;
+  background-color: #CONFIG{acsFondColor, #FFF}; /* Sinon, superposition dans MSIE */
+}
+.formulaire_spip .boutons {
+  text-align : #LANG_RIGHT;
+  padding[-(#LANG_RIGHT|=={right}|?{right,left})]: 10px;
+}
+.formulaire_spip .erreur_message {
+  color : red;
+}
+.formulaire_spip .explication {
+  font-style : italic;
+}
+.formulaire_spip .reponse_formulaire {
+  font-weight: bold;
+  color: #F00;
+  padding: 10px;
+}
+.formulaire_spip input.text, .formulaire_spip textarea, .formulaire_spip select {
+  width: 100%;
+  background: #CONFIG{acsOngletsFondColor,#CONFIG{acsFondColor}};
+  border: thin groove #CONFIG{acsFondBordColor};
+  color: #CONFIG{acsFondText};
+}
+.formulaire_spip label {
+  line-height: 1.5em;
+}
 
 .formulaire_spip .forml {
    padding: 1px;
@@ -293,48 +328,19 @@ table.petition {
    font-size: inherit;
 }
 
-.formulaire_spip textarea, .formulaire_spip input, .formulaire_spip select {
-   background-color: #fff;
-   border: 0;
-}
-
-.formulaire_spip {
-	text-align: left;
-	font-size: 0.77em;
-}
-
 .formulaire_spip p {
 	margin: 0.5em 0;
 	padding: 0; }
-
-.formulaire_spip fieldset {
-   display: block;
-	margin: 0.77em 0;
-	padding: 0.77em;
-   border: 1px dotted #004F8F;
- }
-
-.formulaire_spip legend {
-  font-weight: bold;
-  padding: 3px;
-  background-color: #CONFIG{acsFondColor, #FFF}; /* Sinon, superposition dans MSIE */
-}
-
-.formulaire_spip label {}
 
 .spip_bouton { text-align: right; }
 .spip_bouton input {
 	margin: 3px 0;
 	padding: 1px 2px;
 	border: 0;
-   background: #2F2F8F;
-   color: #FFEFDF;
+  background: #2F2F8F;
+  color: #FFEFDF;
 	font-weight: bold;
 	float: right; }
-
-/* Reponse du formulaire */
-.reponse_formulaire { font-weight: bold; color: #F00; }
-fieldset.reponse_formulaire { border: 1px dotted; font-weight: normal; }
 
 .form_inscription {
   width: 80%;
@@ -426,46 +432,6 @@ fieldset.reponse_formulaire { border: 1px dotted; font-weight: normal; }
 }
 
 /*************
- * page auteur
- *************/
-
-.page_auteur .formulaire_ecrire_auteur {
-	margin-top: -10px;
-	width: 100%;
-}
-
-.page_auteur .formulaire_ecrire_auteur .reponse_formulaire {
-	background: #dfdfdf;
-	border: 1px solid #444488;
-	margin: 0;
-	margin-bottom: 10px;
-	-moz-border-radius: 8px;
-}
-
-.page_auteur .formulaire_ecrire_auteur .reponse_formulaire legend{
-	background: #efefef;
-	border: 1px solid #8888aa;
-	-moz-border-radius: 8px;
-}
-
-.page_auteur .formulaire_ecrire_auteur .forml {
-	width: 100%;
-}
-
-/*************
- * page forum repondre
- *************/
-
-.formulaire_forum {
-	clear: both;
-	margin-right: 10px;
-}
-
-.formulaire_forum textarea {
-	width: 100%;
-}
-
-/*************
  * forumalire recommander
  *************/
 
@@ -505,3 +471,5 @@ fieldset.reponse_formulaire { border: 1px dotted; font-weight: normal; }
 	border: 1px inset #00e;
 	color: #048;
 }
+
+[(#HEADER_COMPOSANTS{css}|compacte_css)]
