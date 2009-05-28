@@ -1,11 +1,7 @@
 <plugin>
-	<nom>
-	Citations bien balis&eacute;es
-	</nom>
-	<auteur>
- 	Bertrand Marne d'après ([Romy T&ecirc;tue->http://romy.tetue.net/des-citations-bien-balisees]) 
-_ &#169; 2009 - Distribu&eacute; sous licence GPL v3
-	</auteur>
+	<nom>Citations bien balis&eacute;es</nom>
+	<auteur>Bertrand Marne (d'apres [romy.tetue.net->http://romy.tetue.net/des-citations-bien-balisees]) &#169; 2009</auteur>
+	<licence>GPL v3</licence>
 	<version>
 	0.1
 	</version>
@@ -15,16 +11,10 @@ _ &#169; 2009 - Distribu&eacute; sous licence GPL v3
 	<description>
 	Ce plugin transforme automatiquement le raccourci {&lt;quote&gt;} en {&lt;q&gt;} (et {&lt;/quote&gt;} en {&lt;/q&gt;}) si la citation ne contient pas de retour &agrave; la ligne.
 
-
 	L'objectif est de respecter les usages en HTML (les citations courtes doivent être entour&eacute;es par &lt;q&gt;, les citations contenant des paragraphes doivent &ecirc;tre entour&eacute;es des &lt;blockquote&gt;).
-
-
-	Voir [->http://romy.tetue.net/des-citations-bien-balisees]
 	</description>
 	<lien>http://www.spip-contrib.net/Plugin-Citations-bien-balisees</lien>
-	<prefix> 
-	citations_bb
-	</prefix>
+	<prefix>citations_bb</prefix>
 	<icon>
 	images/citations_bb.png
 	</icon>		
