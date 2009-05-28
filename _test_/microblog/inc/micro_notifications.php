@@ -62,8 +62,6 @@ function Microblog_notifications($x) {
 
 	if (!is_null($status)) {
 		include_spip('inc/microblog');
-echo $status;
-die;    
 		microblog($status);
 	}
 
