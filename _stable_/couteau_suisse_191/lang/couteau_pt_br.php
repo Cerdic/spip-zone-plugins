@@ -59,7 +59,7 @@ Descobra neste plugin as suas ferramentas favoritas: {Suprime o n&uacute;mero}, 
 
 N&atilde;o deixe de consultar os artigos de documenta&ccedil;&atilde;o do plugin, publicados em: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
-Compatibilidade: SPIP v1.9x e v2.0',
+Compatibilidade: SPIP v1.91',
 
 	// S
 	'smileys_dispos' => 'Caricaturas dispon&iacute;veis:',

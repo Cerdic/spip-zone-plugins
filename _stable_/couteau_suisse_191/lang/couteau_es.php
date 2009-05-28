@@ -59,7 +59,7 @@ Encuentra en este plugin tus herramientas favoritas: {Suprimir el n&uacute;mero}
 
 No dudes en consultar los art&iacute;culos de documentaci&oacute;n del plugin publicados en: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
-Compatibilidad: SPIP v1.9x y v2.0',
+Compatibilidad: SPIP v1.91',
 
 	// S
 	'smileys_dispos' => 'Caritas disponibles:',

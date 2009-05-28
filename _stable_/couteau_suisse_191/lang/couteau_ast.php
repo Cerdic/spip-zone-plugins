@@ -63,7 +63,7 @@ Descubre nesti plugin les tos ferramientes favorites: {Suprime\'l n&uacute;mberu
 
 Si quies consultar los art&iacute;culos de la documentaci&oacute;n del plugin, tan espublizaos en: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
-Compatibilid&aacute;: SPIP v1.9x y v2.0',
+Compatibilid&aacute;: SPIP v1.91',
 
 	// S
 	'smileys_dispos' => 'Caruques disponibles:',

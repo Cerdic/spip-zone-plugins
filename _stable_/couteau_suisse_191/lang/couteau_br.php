@@ -39,7 +39,7 @@ Kavit en astenn-ma&ntilde; un nebeud binviji :  {gallouterien}, {klochedigo&ugra
 
 Gallout a rit teurel ur sell war ar pennado&ugrave;-titouri&ntilde; diwar-benn an astenno&ugrave; war : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
-Heglot gant SPIP holl stummo&ugrave; adalek 1.9x',
+Heglot gant SPIP holl stummo&ugrave; adalek 1.91',
 
 	// S
 	'smileys_dispos' => 'Skeudennigo&ugrave;-imor da gaout :',

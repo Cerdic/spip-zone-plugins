@@ -63,7 +63,7 @@ Find your favourite tools in this plugin: {Delete the number}, {URL formats},{Su
 
 See the documentation articles at: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
-Compatibility: SPIP 1.9x and v2.0',
+Compatibility: SPIP 1.91',
 
 	// S
 	'smileys_dispos' => 'Available smileys:',

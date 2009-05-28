@@ -63,7 +63,7 @@ D&#233;couvrez dans ce plugin vos outils favoris : {Supprime le num&#233;ro}, {F
 
 N\'h&#233;sitez pas &#224; consulter les articles de documentation du plugin publi&#233;s sur : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
-Compatibilit&#233; : SPIP v1.9x et v2.0.x',
+Compatibilit&#233; : SPIP v1.91',
 
 	// S
 	'smileys_dispos' => 'Frimousses disponibles :',

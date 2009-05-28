@@ -63,7 +63,7 @@ Descobriu en aquest plugin les vostres eines utilitats favorites: {Suprimir el n
 
 No dubteu a consultar els articles de la documentaci&oacute; del plugin publicats a: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
-Compatibilitat: SPIP v1.9x i v2.0',
+Compatibilitat: SPIP v1.91',
 
 	// S
 	'smileys_dispos' => 'Cares atractives disponibles:',

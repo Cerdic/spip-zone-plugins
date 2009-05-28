@@ -39,7 +39,7 @@ Descoperi&#355;i &icirc;n aces plug-in tool-urile dumneavoastr&#259; favorite: {
 
 Nu ezita&#355;i s&#259; consulta&#355;i articolele de documenta&#355;ie publicate la : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
-Compatibilitate : SPIP toate versiunile 1.9x',
+Compatibilitate : SPIP toate versiunile 1.91',
 
 	// S
 	'smileys_dispos' => 'Emoticon-uri disponibile',

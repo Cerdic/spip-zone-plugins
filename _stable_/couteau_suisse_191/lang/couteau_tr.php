@@ -59,7 +59,7 @@ Bu eklentide favori gere&ccedil;lerinizi bulacaks&#305;n&#305;z : {Numaray&#305;
 
 Eklentinin belgeleme makalelerini inceleyiniz : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
-Uyumluluk : SPIP 1.9x ve 2.0 ',
+Uyumluluk : SPIP 1.91',
 
 	// S
 	'smileys_dispos' => 'Sunulan g&uuml;len suratlar (smileys) :',
