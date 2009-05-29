@@ -17,10 +17,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'forum_qui_etes_vous' => 'Qui &ecirc;tes-vous&nbsp;?',
 'forum_votre_nom' => 'Nom',
-'forum_votre_email' => 'Courriel',
+'forum_votre_email' => 'Courriel (non&nbsp;publi&eacute;)',
 'forum_url' => 'Votre site web',
 
-'info_creation_paragraphe' => 'Ce formulaire accepte les <a rel="external nofollow" href="http://www.spip.net/fr_article1578.html" class="spip_out">raccourcis&nbsp;SPIP</a> et le code HTML. Pour cr&eacute;er des paragraphes, laissez simplement des lignes vides.',
+'info_creation_paragraphe' => 'Ce formulaire accepte les raccourcis&nbsp;SPIP et le code HTML. Pour cr&eacute;er des paragraphes, laissez simplement des lignes vides.',
 
 'forum_voir_avant' => 'Pr&eacute;visualiser',
 'forum_message_definitif' => 'Confirmer l\'envoi',
