@@ -71,16 +71,21 @@
 
 <script type="text/javascript">
 // <![CDATA[
-	var s_slim_[(#GET{objet_spip})]#ENV{id} = new SWFObject("#CHEMIN{swf/xspf_player_slim.swf}","slimplayer_[(#GET{objet_spip})]#ENV{id}","#GET{width}","#GET{height}","7");
-	s_slim_[(#GET{objet_spip})]#ENV{id}.addParam("wmode","#GET{wmode}");
-	s_slim_[(#GET{objet_spip})]#ENV{id}.addVariable("playlist_url",encodeURIComponent("[(#URL_PAGE{xspf}|url_absolue|parametre_url{type,mp3,'&'}|parametre_url{[(#GET{objet_spip})],[(#GET{objet_val})],'&'})]"));
-	s_slim_[(#GET{objet_spip})]#ENV{id}.addVariable("autoload","#GET{autoload}");
-	[(#GET{autoplay}|=={true}|oui)s_slim_[(#GET{objet_spip})]#ENV{id}.addVariable("autoplay","#GET{autoplay}");]
-	s_slim_[(#GET{objet_spip})]#ENV{id}.addVariable("repeat_playlist","#GET{repeat}");
+	var flashvars[(#GET{objet_spip})]#ENV{id} = {};
+		flashvars[(#GET{objet_spip})]#ENV{id}.playlist_url = encodeURIComponent("[(#URL_PAGE{xspf}|url_absolue|parametre_url{type,mp3,'&'}|parametre_url{[(#GET{objet_spip})],[(#GET{objet_val})],'&'})]");
+		[(#GET{autoplay}|=={true}|oui)flashvars[(#GET{objet_spip})]#ENV{id}.autoplay ="#GET{autoplay}";]
+		flashvars[(#GET{objet_spip})]#ENV{id}.repeat_playlist = "#GET{repeat}";
+		flashvars[(#GET{objet_spip})]#ENV{id}.autoload = "#GET{autoload}";
 	
+	var params[(#GET{objet_spip})]#ENV{id} = {};
+		params[(#GET{objet_spip})]#ENV{id}T{objet_val})].wmode = "#GET{wmode}";
+	
+	var attributes[(#GET{objet_spip})]#ENV{id} = {};
+  		attributes[(#GET{objet_spip})]#ENV{id}.id= "xspf_player_[(#GET{objet_spip})]#ENV{id}";
+  		attributes[(#GET{objet_spip})]#ENV{id}.name= "xspf_player_[(#GET{objet_spip})]#ENV{id}";
+		
 	$(document).ready(function() {
-		s_slim_[(#GET{objet_spip})]#ENV{id}.write("slimplayer_container_[(#GET{objet_spip})]#ENV{id}");
+		swfobject.embedSWF("#CHEMIN{swf/xspf_player_slim.swf}", "slimplayer_container_[(#GET{objet_spip})]#ENV{id}", "#GET{width}", "#GET{height}", "9.0.0","#CHEMIN{lib/swfobject/expressInstall.swf}", flashvars[(#GET{objet_spip})]#ENV{id}, params[(#GET{objet_spip})]#ENV{id}, attributes[(#GET{objet_spip})]#ENV{id});
 	});
-
 // ]]>
 </script>

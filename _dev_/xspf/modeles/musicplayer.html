@@ -70,8 +70,6 @@
 
 <script type="text/javascript">
 // <![CDATA[
-	var s_music[(#GET{objet_spip})]#ENV{id} = new SWFObject("#CHEMIN{swf/xspf_player.swf}","musicplayer_[(#GET{objet_spip})]#ENV{id}","#GET{width}","#GET{height}","7");
-
 	var flashvars[(#GET{objet_spip})]#ENV{id} = {};
 		flashvars[(#GET{objet_spip})]#ENV{id}.playlist_url = encodeURIComponent("[(#URL_PAGE{xspf}|url_absolue|parametre_url{type,mp3|m3u,'&'}|parametre_url{[(#GET{objet_spip})],[(#GET{objet_val})],'&'})]");
 		[(#GET{autoplay}|=={true}|oui)flashvars[(#GET{objet_spip})]#ENV{id}.autoplay ="#GET{autoplay}";]
