@@ -885,7 +885,8 @@ function spiplistes_assembler_patron ($path_patron, $contexte) {
 		
 	// chercher si un patron version texte existe
 	$patron_texte = spiplistes_patron_find_in_path($path_patron, $contexte['lang'], true);
-	$contexte['patron_texte'] = $patron_html;
+	unset($contexte['patron_html']);
+	$contexte['patron_texte'] = $patron_texte;
 	$result_texte = 
 		($patron_texte && ($patron_html != $patron_texte))
 		// ? recuperer_fond($patron_texte, $contexte) . "\n"
