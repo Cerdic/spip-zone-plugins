@@ -139,43 +139,52 @@
 
 <script type="text/javascript">
 // <![CDATA[
-	var s_[(#ENV{id})]_[(#GET{objet_val})] = new SWFObject("#CHEMIN{lib/imagerotator/imagerotator.swf}","rotator_[(#GET{objet_spip})]_[(#GET{objet_val})][_(#ENV{id})]","#GET{width}","#GET{height}","7");
-	s_[(#ENV{id})]_[(#GET{objet_val})].addParam("wmode","#GET{wmode}");
-	s_[(#ENV{id})]_[(#GET{objet_val})].addParam("allowfullscreen","#GET{usefullscreen}");
-	s_[(#ENV{id})]_[(#GET{objet_val})].addParam('menu','#GET{menu}');
 
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("file",encodeURIComponent("[(#URL_PAGE{xspf}|parametre_url{type,'jpg|png|gif','&'}|parametre_url{[(#GET{objet_spip})],[(#GET{objet_val})],'&'}|url_absolue)]"));
+	var params[_(#ENV{id})][_(#GET{objet_val})] = {};
+  		params[_(#ENV{id})][_(#GET{objet_val})].menu= "#GET{menu}";
+		params[_(#ENV{id})][_(#GET{objet_val})].wmode = "#GET{wmode}";
+		params[_(#ENV{id})][_(#GET{objet_val})].allowfullscreen = "#GET{usefullscreen}";
 
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("height","#GET{height}");
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("width","#GET{width}");
-
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("backcolor","#GET{backcolor}");
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("frontcolor","#GET{frontcolor}");
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("lightcolor","#GET{lightcolor}");
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("screencolor","#GET{screencolor}");
-
-	[(#GET{jwlogo}|!={''}|oui)s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("logo","#GET{jwlogo}");]
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("overstretch","#GET{overstretch}");
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("showeq","#GET{showeq}");
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("showicons","#GET{showicons}");
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("transition","#GET{transition}");
-
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("shownavigation","#GET{shownavigation}");
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("usefullscreen","#GET{usefullscreen}");
-
-	[(#GET{audio}|!={''}|oui)s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("audio","#GET{audio}");]
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("autostart","#GET{autostart}");
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("repeat","#GET{repeat}");
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("rotatetime","#GET{rotatetime}");
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("shuffle","#GET{shuffle}");
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("volume","#GET{volume}");
-
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("enablejs","#GET{enablejs}");
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("linktarget","#GET{linktarget}");
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("linkfromdisplay","#GET{linkfromdisplay}");	
+	var attributes[_(#ENV{id})][_(#GET{objet_val})] = {};
+  		attributes[_(#ENV{id})][_(#GET{objet_val})].id= "rotator_[(#GET{objet_spip})]_[(#GET{objet_val})][_(#ENV{id})]";
+  		attributes[_(#ENV{id})][_(#GET{objet_val})].name= "rotator_[(#GET{objet_spip})]_[(#GET{objet_val})][_(#ENV{id})]";
+		
+		
+	var flashvars[_(#ENV{id})][_(#GET{objet_val})] = {};
+		flashvars[_(#ENV{id})][_(#GET{objet_val})].file = encodeURIComponent("[(#URL_PAGE{xspf}|parametre_url{type,'jpg|png|gif','&'}|parametre_url{[(#GET{objet_spip})],[(#GET{objet_val})],'&'}|url_absolue)]");
+	
+		// Layout
+		flashvars[_(#ENV{id})][_(#GET{objet_val})].height = "#GET{height}";
+		flashvars[_(#ENV{id})][_(#GET{objet_val})].width = "#GET{width}";
+	
+		// Colors
+		flashvars[_(#ENV{id})][_(#GET{objet_val})].backcolor = "#GET{backcolor}";
+		flashvars[_(#ENV{id})][_(#GET{objet_val})].frontcolor = "#GET{frontcolor}";
+		flashvars[_(#ENV{id})][_(#GET{objet_val})].lightcolor = "#GET{lightcolor}";
+		flashvars[_(#ENV{id})][_(#GET{objet_val})].screencolor = "#GET{screencolor}";
+		
+		[(#GET{jwlogo}|!={''}|oui)flashvars[_(#ENV{id})][_(#GET{objet_val})].logo = "#GET{jwlogo}";]
+		flashvars[_(#ENV{id})][_(#GET{objet_val})].overstretch = "#GET{overstretch}";
+		flashvars[_(#ENV{id})][_(#GET{objet_val})].showeq = "#GET{showeq}";
+		flashvars[_(#ENV{id})][_(#GET{objet_val})].showicons = "#GET{showicons}";
+		flashvars[_(#ENV{id})][_(#GET{objet_val})].transition = "#GET{transition}";
+	
+		flashvars[_(#ENV{id})][_(#GET{objet_val})].shownavigation = "#GET{shownavigation}";
+		flashvars[_(#ENV{id})][_(#GET{objet_val})].usefullscreen = "#GET{usefullscreen}";
+	
+		[(#GET{audio}|!={''}|oui)flashvars[_(#ENV{id})][_(#GET{objet_val})].audio = "#GET{audio}";]
+		flashvars[_(#ENV{id})][_(#GET{objet_val})].autostart = "#GET{autostart}";
+		flashvars[_(#ENV{id})][_(#GET{objet_val})].repeat = "#GET{repeat}";
+		flashvars[_(#ENV{id})][_(#GET{objet_val})].rotatetime = "#GET{rotatetime}";
+		flashvars[_(#ENV{id})][_(#GET{objet_val})].shuffle = "#GET{shuffle}";
+		flashvars[_(#ENV{id})][_(#GET{objet_val})].volume = "#GET{volume}";
+	
+		flashvars[_(#ENV{id})][_(#GET{objet_val})].enablejs = "#GET{enablejs}";
+		flashvars[_(#ENV{id})][_(#GET{objet_val})].linktarget = "#GET{linktarget}";
+		flashvars[_(#ENV{id})][_(#GET{objet_val})].linkfromdisplay = "#GET{linkfromdisplay}";	
 	
 	$(document).ready(function() {
-		s_[(#ENV{id})]_[(#GET{objet_val})].write("rotator_container_[(#GET{objet_spip})]_[(#GET{objet_val})][_(#ENV{id})]");
+		swfobject.embedSWF("#CHEMIN{lib/imagerotator/imagerotator.swf}", "rotator_container_[(#GET{objet_spip})]_[(#GET{objet_val})][_(#ENV{id})]", "#GET{width}", "#GET{height}", "9.0.0","#CHEMIN{lib/swfobject/expressInstall.swf}", flashvars[_(#ENV{id})][_(#GET{objet_val})], params[_(#ENV{id})][_(#GET{objet_val})], attributes[_(#ENV{id})][_(#GET{objet_val})]);
 	});
 // ]]>
 </script>
