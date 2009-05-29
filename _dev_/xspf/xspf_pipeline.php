@@ -39,7 +39,7 @@ function xspf_affichage_final($page) {
         return $page;
 
     // Si oui on ajoute le js de swfobject
-    $jsFile = find_in_path('javascript/swfobject.js');
+    $jsFile = find_in_path('lib/swfobject/swfobject.js');
 	$head = "<script src='$jsFile' type='text/javascript'></script>";
 	$pos_head = strpos($page, '</head>');
 

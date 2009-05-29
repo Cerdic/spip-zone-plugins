@@ -156,43 +156,49 @@ Plusieurs methodes d'insertion :
 
 <script type="text/javascript">
 // <![CDATA[
-	var s[_(#ENV{id})][_(#GET{objet_val})] = new SWFObject("#CHEMIN{lib/mediaplayer/player.swf}","[(#GET{javascriptid,mediaplayer})]_[(#GET{objet_spip})][_(#GET{objet_val})]","#GET{width}","#GET{height}","7");
-	s[_(#ENV{id})][_(#GET{objet_val})].addParam("allowfullscreen","#GET{allowfullscreen}");
-	s[_(#ENV{id})][_(#GET{objet_val})].addParam("wmode","#GET{wmode}");
-	s[_(#ENV{id})][_(#GET{objet_val})].addParam('menu','#GET{menu}');
 	
-	s[_(#ENV{id})][_(#GET{objet_val})].addVariable("file",encodeURIComponent("[(#ENV{domaine,#URL_PAGE{xspf}}|parametre_url{type,#GET{type}}|parametre_url{prerolllocation,[(#GET{prerolllocation})],'&'}|parametre_url{postrolllocation,[(#GET{postrolllocation})],'&'}|parametre_url{objet,#GET{objet},'&'}|parametre_url{prerolllink,[(#GET{prerolllink})],'&'}|parametre_url{postrolllink,[(#GET{postrolllink})],'&'}|parametre_url{creator,[(#ENV{creator})],'&'}|parametre_url{[(#GET{objet_spip,x})],[(#GET{objet_val,x})],'&'}|url_absolue)]"));
+	var flashvars[_(#ENV{id})][_(#GET{objet_val})] = {};
+		flashvars[_(#ENV{id})][_(#GET{objet_val})].file = encodeURIComponent("[(#ENV{domaine,#URL_PAGE{xspf}}|parametre_url{type,#GET{type}}|parametre_url{prerolllocation,[(#GET{prerolllocation})],'&'}|parametre_url{postrolllocation,[(#GET{postrolllocation})],'&'}|parametre_url{objet,#GET{objet},'&'}|parametre_url{prerolllink,[(#GET{prerolllink})],'&'}|parametre_url{postrolllink,[(#GET{postrolllink})],'&'}|parametre_url{creator,[(#ENV{creator})],'&'}|parametre_url{[(#GET{objet_spip,x})],[(#GET{objet_val,x})],'&'}|url_absolue)]");
+		
+		// Layout
+		flashvars[_(#ENV{id})][_(#GET{objet_val})].controlbar ="#GET{controlbar}";
+		flashvars[_(#ENV{id})][_(#GET{objet_val})].height = "#GET{height}";
+		flashvars[_(#ENV{id})][_(#GET{objet_val})].width = "#GET{width}";
+		flashvars[_(#ENV{id})][_(#GET{objet_val})].playlist = "#GET{playliste}";
+		flashvars[_(#ENV{id})][_(#GET{objet_val})].playlistsize = "#GET{playlistesize}";
+		
+		// Colors
+		flashvars[_(#ENV{id})][_(#GET{objet_val})].backcolor = "#GET{backcolor}";
+		flashvars[_(#ENV{id})][_(#GET{objet_val})].frontcolor = "#GET{frontcolor}";
+		flashvars[_(#ENV{id})][_(#GET{objet_val})].lightcolor = "#GET{lightcolor}";
+		flashvars[_(#ENV{id})][_(#GET{objet_val})].screencolor = "#GET{screencolor}";
+		
+		//Behaviour
+		flashvars[_(#ENV{id})][_(#GET{objet_val})].autostart = "#GET{autostart}";
+		flashvars[_(#ENV{id})][_(#GET{objet_val})].bufferlength = "#GET{bufferlength}";
+		flashvars[_(#ENV{id})][_(#GET{objet_val})].displayclick = "#GET{displayclick}";
+		flashvars[_(#ENV{id})][_(#GET{objet_val})].fullscreen = "#GET{allowfullscreen}";
+		flashvars[_(#ENV{id})][_(#GET{objet_val})].icons = "#GET{icons}";
+		flashvars[_(#ENV{id})][_(#GET{objet_val})].linktarget = "#GET{linktarget}";
+		[(#GET{jwlogo}|!={''}|oui)flashvars[_(#ENV{id})][_(#GET{objet_val})].logo = "#GET{jwlogo}";]
+		flashvars[_(#ENV{id})][_(#GET{objet_val})].mute = "#GET{mute}";
+		flashvars[_(#ENV{id})][_(#GET{objet_val})].quality = "#GET{quality}";
+		flashvars[_(#ENV{id})][_(#GET{objet_val})].repeat = "#GET{repeat}";
+		flashvars[_(#ENV{id})][_(#GET{objet_val})].shuffle = "#GET{shuffle}";
+		flashvars[_(#ENV{id})][_(#GET{objet_val})].stretching = "#GET{stretching}";
+		flashvars[_(#ENV{id})][_(#GET{objet_val})].volume = "#GET{volume}";
+	
+	var params[_(#ENV{id})][_(#GET{objet_val})] = {};
+  		params[_(#ENV{id})][_(#GET{objet_val})].menu= "#GET{menu}";
+		params[_(#ENV{id})][_(#GET{objet_val})].wmode = "#GET{wmode}";
+		params[_(#ENV{id})][_(#GET{objet_val})].allowfullscreen = "#GET{allowfullscreen}";
 
-	// Layout
-	s[_(#ENV{id})][_(#GET{objet_val})].addVariable("controlbar","#GET{controlbar}");
-	s[_(#ENV{id})][_(#GET{objet_val})].addVariable("height","#GET{height}");
-	s[_(#ENV{id})][_(#GET{objet_val})].addVariable("width","#GET{width}");
-	s[_(#ENV{id})][_(#GET{objet_val})].addVariable("playlist","#GET{playliste}");
-	s[_(#ENV{id})][_(#GET{objet_val})].addVariable("playlistsize","#GET{playlistesize}");
-	
-	// Colors
-	s[_(#ENV{id})][_(#GET{objet_val})].addVariable("backcolor","#GET{backcolor}");
-	s[_(#ENV{id})][_(#GET{objet_val})].addVariable("frontcolor","#GET{frontcolor}");
-	s[_(#ENV{id})][_(#GET{objet_val})].addVariable("lightcolor","#GET{lightcolor}");
-	s[_(#ENV{id})][_(#GET{objet_val})].addVariable("screencolor","#GET{screencolor}");
+	var attributes[_(#ENV{id})][_(#GET{objet_val})] = {};
+  		attributes[_(#ENV{id})][_(#GET{objet_val})].id= "[(#GET{javascriptid,mediaplayer})]_[(#GET{objet_spip})][_(#GET{objet_val})]";
+  		attributes[_(#ENV{id})][_(#GET{objet_val})].name= "[(#GET{javascriptid,mediaplayer})]_[(#GET{objet_spip})][_(#GET{objet_val})]";
 
-	//Behaviour
-	s[_(#ENV{id})][_(#GET{objet_val})].addVariable("autostart","#GET{autostart}");
-	s[_(#ENV{id})][_(#GET{objet_val})].addVariable("bufferlength","#GET{bufferlength}");
-	s[_(#ENV{id})][_(#GET{objet_val})].addVariable("displayclick","#GET{displayclick}");
-	s[_(#ENV{id})][_(#GET{objet_val})].addVariable("fullscreen","#GET{allowfullscreen}");
-	s[_(#ENV{id})][_(#GET{objet_val})].addVariable("icons","#GET{icons}");
-	s[_(#ENV{id})][_(#GET{objet_val})].addVariable("linktarget","#GET{linktarget}");
-	[(#GET{jwlogo}|!={''}|oui)s[_(#ENV{id})][_(#GET{objet_val})].addVariable("logo","#GET{jwlogo}");]
-	s[_(#ENV{id})][_(#GET{objet_val})].addVariable("mute","#GET{mute}");
-	s[_(#ENV{id})][_(#GET{objet_val})].addVariable("quality","#GET{quality}");
-	s[_(#ENV{id})][_(#GET{objet_val})].addVariable("repeat","#GET{repeat}");
-	s[_(#ENV{id})][_(#GET{objet_val})].addVariable("shuffle","#GET{shuffle}");
-	s[_(#ENV{id})][_(#GET{objet_val})].addVariable("stretching","#GET{stretching}");
-	s[_(#ENV{id})][_(#GET{objet_val})].addVariable("volume","#GET{volume}");
-	
 	$(document).ready(function() {
-		s[_(#ENV{id})][_(#GET{objet_val})].write("mediaplayer_container[_(#ENV{id})]_[(#GET{objet_spip})][_(#GET{objet_val})]");
+		swfobject.embedSWF("#CHEMIN{lib/mediaplayer/player.swf}", "mediaplayer_container[_(#ENV{id})]_[(#GET{objet_spip})][_(#GET{objet_val})]", "#GET{width}", "#GET{height}", "9.0.0","#CHEMIN{lib/swfobject/expressInstall.swf}", flashvars[_(#ENV{id})][_(#GET{objet_val})], params[_(#ENV{id})][_(#GET{objet_val})], attributes[_(#ENV{id})][_(#GET{objet_val})]);
 	});
 // ]]>
 </script>
