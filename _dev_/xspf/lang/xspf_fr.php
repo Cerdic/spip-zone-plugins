@@ -14,6 +14,9 @@ En attendant la documentation sur <a href="http://www.spip-contrib.net">Spip-Con
 'false' => 'Faux',
 'repeat' => 'R&eacute;p&eacute;tition',
 
+// Tous les modeles 
+'get_player' => 'Vous devez installer le <a href="@url@">module flash correspondant &agrave; votre navigateur</a> pour voir ce contenu.',
+
 // fonds/cfg_xspf
 'description_xspf_lecteurs' => '
 Lecteurs de <a href="http://musicplayer.sourceforge.net/">XSPF Web Music Player</a>
@@ -152,7 +155,7 @@ En attendant la documentation sur <a href="http://www.spip-contrib.net">Spip-Con
 'menu' => 'Menu flash',
 'desc_menu' => 'Affichage du menu falsh au clic droit sur le lecteur.',
 
-//page d\'affichage de la configuration du plugin
+//page d'affichage de la configuration du plugin
 
 'allowfullscreen' => 'Plein &eacute;cran',
 'desc_allowfullscreen' => 'Permettre l&rsquo;affichage en plein &eacute;cran.',
