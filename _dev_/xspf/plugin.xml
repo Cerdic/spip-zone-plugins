@@ -43,6 +43,7 @@ _ Attention, la licence de ces trois derniers lecteurs est semi-commerciale, c&r
 	<necessite id='cfg' version='[1.10.0;]' />
 	<necessite id='palette' version='[1.1;]' />
 	<necessite id="lib:jquery-tooltip" src="http://plugins.jquery.com/files/jquery.tooltip_1.zip" />
+	<necessite id="lib:swfobject" src="http://swfobject.googlecode.com/files/swfobject_2_1.zip" />
 	<pipeline>
 		<nom>affichage_final</nom>
 		<inclure>xspf_pipeline.php</inclure>

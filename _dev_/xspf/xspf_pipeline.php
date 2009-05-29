@@ -9,7 +9,7 @@ function xspf_header_prive($texte) {
 	AND (substr(_request('cfg'),0,4) == 'xspf')) {
 		$bgiframejs = find_in_path('lib/jquery-tooltip/lib/jquery.bgiframe.js');
 		$tooltipjs = find_in_path('lib/jquery-tooltip/jquery.tooltip.js');
-		$swfobject = find_in_path('javascript/swfobject.js');
+		$swfobject = find_in_path('lib/swfobject/swfobject.js');
 				
 		$texte.= "
 			<script type='text/javascript' src='$swfobject'></script>\n
