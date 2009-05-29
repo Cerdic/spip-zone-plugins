@@ -1,7 +1,7 @@
 <fieldset class="previsu">
 	<legend><:previsualisation:></legend>
 	<div class="message">
-        <p class="auteur">[<:par_auteur:> [<a href="(#ENV{url_site}|attribut_html)"[ title="(#NOM_SITE|attribut_html)"] class="spip_out">]<strong>(#SESSION{session_nom}|safehtml|sinon{[(#SESSION{nom}|typo|sinon{<span class="reponse_formulaire" style="text-decoration: blink;">???</span>})]})</strong>[</a>(#ENV{url_site}|oui)]]</p>
+        <p class="auteur">[<:par_auteur:> [<a href="(#ENV{url_site}|attribut_html)" class="spip_out">]<strong>(#SESSION{session_nom}|safehtml|sinon{[(#SESSION{nom}|typo|sinon{<span class="reponse_formulaire" style="text-decoration: blink;">???</span>})]})</strong>[</a>(#ENV{url_site}|oui)]]</p>
         [<div class="forum-texte">(#ENV*{texte}|lignes_longues)</div>]
     </div>
 	[<div class="reponse_formulaire">(#ENV*{erreur})</div>]
