@@ -80,17 +80,30 @@ function nospam_pre_edition($flux){
 	  		$flux['data']['statut']='spam';
 	  	elseif (count($liens)>=4)
 	  		$flux['data']['statut']='prop';
-	  }
-	  // verifier qu'un message identique n'a pas ete publie il y a peu
-	  if ($flux['data']['statut'] == 'publie'){
-	  	if (sql_countsel('spip_forum','texte='.sql_quote($flux['data']['texte'])." AND statut IN ('publie','off','spam')")>0)
-	  		$flux['data']['statut']='spam';
-	  }
-	  // verifier que cette ip n'en est pas a son N-ieme post en peu de temps
-	  // plus de 5 messages en 5 minutes c'est suspect ...
-	  if ($flux['data']['statut'] == 'publie'){
-	  	if (sql_countsel('spip_forum','ip='.sql_quote($GLOBALS['ip']).' AND maj>DATE_SUB(NOW(),INTERVAL 5 minute)')>5)
-	  		$flux['data']['statut']='spam';
+
+			// verifier que cette ip et/ou cet email n'a pas deja envoye du spam
+			// auquel cas on modere des qu'il y a un lien
+			if ($flux['data']['statut'] == 'publie'){
+				$email = $flux['data']['email_auteur'] ? " OR email_auteur=".sql_quote($flux['data']['email_auteur']):"";
+				if (sql_countsel('spip_forum','(ip='.sql_quote($GLOBALS['ip'])."$email) AND statut='spam'")>0){
+					if (count($liens)>10)
+						$flux['data']['statut']='spam';
+					elseif (count($liens)>=1)
+						$flux['data']['statut']='prop';
+				}
+			}
+
+			// verifier qu'un message identique n'a pas ete publie il y a peu
+			if ($flux['data']['statut'] == 'publie'){
+				if (sql_countsel('spip_forum','texte='.sql_quote($flux['data']['texte'])." AND statut IN ('publie','off','spam')")>0)
+					$flux['data']['statut']='spam';
+			}
+			// verifier que cette ip n'en est pas a son N-ieme post en peu de temps
+			// plus de 5 messages en 5 minutes c'est suspect ...
+			if ($flux['data']['statut'] == 'publie'){
+				if (sql_countsel('spip_forum','ip='.sql_quote($GLOBALS['ip']).' AND maj>DATE_SUB(NOW(),INTERVAL 5 minute)')>5)
+					$flux['data']['statut']='spam';
+			}
 	  }
 	}
 	return $flux;
