@@ -1,7 +1,0 @@
-<BOUCLE_semaine(EVENEMENTS)
-	{agendafull date_debut, date_fin, semaine, #ENV{annee}, #ENV{mois}, #ENV{jour}}
->[(#DATE_DEBUT|Agenda_memo_full{#DATE_FIN,#TITRE,#DESCRIPTIF,#LIEU,#URL_ARTICLE,
-	[(#COMPTEUR_BOUCLE|
-		alterner{'calendrier-couleur2', 'calendrier-couleur4'})]})]</BOUCLE_semaine>[(#DATE|
-		Agenda_affiche_full{<:aucun_article:>, 'semaine', 'calendrier-couleur2','calendrier-couleur4'}
-)]<//B_semaine>

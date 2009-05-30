@@ -1,3 +1,0 @@
-<select name='#ENV{name}'[ id="(#ENV{id,''})"]>
-<BOUCLE_pays(GEO_PAYS){par id_pays}><option value='#ID_PAYS'[(#ID_PAYS|=={#ENV{id_pays}}|?{' '})selected="selected"]>#NOM</option>
-</BOUCLE_pays></select>

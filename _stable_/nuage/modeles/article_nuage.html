@@ -1,4 +1,0 @@
-#SET{expose,#ARRAY}<BOUCLE_expose(MOTS){id_article}>[
-	(#SET{expose,[(#GET{expose}|push{#ID_MOT})]})
-]</BOUCLE_expose>[
-(#INCLURE{fond=modeles/nuage}{id_article}{id}{notid}{type}{tri}{expose=#GET{expose}})]
