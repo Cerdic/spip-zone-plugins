@@ -1,0 +1,17 @@
+#CACHE{0}
+
+[(#ENV**{editable}|?{' '})
+<form action='#SELF' method='post'>
+#ACTION_FORMULAIRE{#SELF}
+<label>annee</label>
+<input type='text' name='annee' value='#ENV{annee}' />
+<input type='submit' name='ok' value='ok' />
+</form>
+]
+
+[<p class="formulaire_message">(#ENV*{message_ok})</p>]
+[<span class='erreur'>(#ENV**{erreurs}|table_valeur{annee})</span>]
+[<p class="formulaire_message">(#ENV*{message_erreur})</p>]
+
+<p class="formulaire_message">id_objet depuis annee.php : #ENV*{id_objet}</p>
+<p class="formulaire_message">type depuis annee.php : #ENV*{type}</p>

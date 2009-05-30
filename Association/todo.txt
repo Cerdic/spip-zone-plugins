@@ -1,0 +1,55 @@
+*** Mise en forme ***
+
+==Compatibilite XHTML==
+A faire
+- supprimer les tableaux de presentation ?
+- mettre les libelles des TD en white-space:nowrap en attendant
+
+== Charset ==
+Passer tout le code en UTF-8 plutot qu'en entites HTML ?
+
+== Indenter le code ==
+- Il serait plus propre d'homogeneiser l'indentation du code.
+- Utiliser l'indentation de SPIP serait le mieux selon moi.
+
+== Visualisation de source ==
+- Mettre des \n en fin de ligne dans les echo, ou sortir le code HTML du code
+source PHP, afin d'avoir un code lisible en sortie.
+
+*** Gestion comptable  ***
+
+== Gestion des droits==
+- Declarer le comptable et lui donner l'acces exclusif en validation des ecritures
+
+== Comptes ==
+- Ajouter une fonction de transfert de compte à compte (opération diverse)
+- Actions combinees (ventes, dons, activites + compte): prevoir l'operation inverse en suppression
+
+*** Gros Travaux ***
+
+== Internationalisation ==
+En cours.
+- Activites OK
+- Adherents OK
+- Prêts OK
+
+== Templates==
+- Formulaires Don, Achat
+- Module de paiement
+
+*** Architecture ***
+
+
+*** Suggestions ***
+
+== Logos ==
+A changer
+
+== Format des dates ==
+Il serait vraiment excellent que les francais puissent saisir une date en francais
+et que les anglais puissent saisir une date en anglais
+(avec widget calendar ?)
+
+== Devises ==
+Il serait pratique aussi que l'on puisse utiliser la devise de chaque pays
+dans l'internationalisation. (euro, dollar, livre, etc).

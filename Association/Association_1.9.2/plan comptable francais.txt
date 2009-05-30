@@ -1,0 +1,78 @@
+Plan Comptable Normalisé Français
+
+    * 1 Classe 1 - Capitaux
+          o 1.1 10. Capital social et réserves
+          o 1.2 11. Report à nouveau (solde créditeur ou débiteur)
+          o 1.3 12. Résultat de l'exercice (bénéfice ou perte)
+          o 1.4 13. Subventions d'investissement
+          o 1.5 14. Provisions réglementées
+          o 1.6 15. Provisions pour risques et charges
+          o 1.7 16. Emprunts et dettes assimilées
+          o 1.8 17. Dettes rattachées à des participations
+          o 1.9 18. Comptes de liaison des établissements et sociétés en participation
+    * 2 Classe 2 - Immobilisations
+          o 2.1 20. Immobilisations incorporelles
+          o 2.2 21. Immobilisations corporelles
+          o 2.3 22. Immobilisations mises en concession
+          o 2.4 23. Immobilisations en cours
+          o 2.5 25. Parts dans des entreprises liées et créances sur des entreprises liées
+          o 2.6 26. Participations et créances rattachées à des participations
+          o 2.7 27. Autres immobilisations financières
+          o 2.8 28. Amortissement des immobilisations
+          o 2.9 29. Dépréciations des immobilisations
+    * 3 Classe 3 - Stocks et en-cours
+          o 3.1 31. Matières premières et fournitures
+          o 3.2 32. Autres approvisionnements
+          o 3.3 33. En-cours de Production de biens
+          o 3.4 34. En-cours de Production de services
+          o 3.5 35. Stocks de produits
+          o 3.6 36. Stocks provenant d'immobilisations
+          o 3.7 37. Stocks de marchandises
+          o 3.8 39. Provisions pour dépréciation des stocks et en-cours
+    * 4 Classe 4 - Tiers
+          o 4.1 40. Comptes de tiers Fournisseurs
+          o 4.2 41. Comptes de tiers Clients
+          o 4.3 42. Personnel et Comptes rattachés
+          o 4.4 43. Sécurité Sociale et autres organismes sociaux
+          o 4.5 44. Etat et autres collectivitées publique
+          o 4.6 45. Groupe et associés
+          o 4.7 46. Débiteurs divers et créditeurs divers
+          o 4.8 47. Comptes transitoires ou d'attente
+          o 4.9 48. Comptes de régularisation
+          o 4.10 49. Provisions pour dépréciation des comptes de tiers
+    * 5 Classe 5 - Comptes financiers
+          o 5.1 50. Valeurs mobilières de placement
+          o 5.2 51. Banques, établissements financiers et assimilés
+          o 5.3 52. Instruments de trésorerie
+          o 5.4 53. Caisse
+          o 5.5 54. Régies d'avance et accréditifs
+          o 5.6 58. Virements internes
+          o 5.7 59. Provisions pour dépréciation des comptes financiers
+    * 6 Classe 6 - Charges
+          o 6.1 60. Achats (sauf 603)
+          o 6.2 61. Services extérieurs
+          o 6.3 62. Autres services extérieurs
+          o 6.4 63. Impôts, taxes et versements assimilés
+          o 6.5 64. Charges de personnel
+          o 6.6 65. Autres charges de gestion courante
+          o 6.7 66. Charges financières
+          o 6.8 67. Charges exceptionnelles
+          o 6.9 68. Dotations aux amortissements et aux provisions
+          o 6.10 69. Participation des salariés - impôts sur les bénéfices et assimilés
+    * 7 Classe 7 - Produits
+          o 7.1 70. Ventes de produits fabriqués, prestations de services, marchandises
+          o 7.2 71. Production stockée (ou déstockage)
+          o 7.3 72. Production immobilisée
+          o 7.4 74. Subventions d'exploitation
+          o 7.5 75. Autres produits de gestion courante
+          o 7.6 76. Produits financiers
+          o 7.7 77. Produits exceptionnels
+          o 7.8 78. Reprises sur amortissements et provisions
+          o 7.9 79. Transferts de charges
+    * 8 Classe 8 - Comptes spéciaux
+          o 8.1 80. Engagements
+          o 8.2 88. Résultat en instance d'affectation
+          o 8.3 89. Bilan
+    * 9 Classe 9 - Comptabilité analytique
+    * 10 Voir aussi
+          o 10.1 Liens externes
