@@ -25,7 +25,7 @@ function sommaire_d_une_page(&$texte, &$nbh3, $page=0, $num_pages=0) {
 	$nbh3 += count($regs[0]);
 	$pos = 0; $sommaire = '';
 	// calcul de la page
-	$p = $page?_T('couteau:sommaire_page', array('page'=>$page)):'';
+	$suffixe = $page?_T('couteau:sommaire_page', array('page'=>$page)):'';
 	for($i=0;$i<count($regs[0]);$i++,$index++){
 		$ancre = " id=\"outil_sommaire_$index\">";
 		if (($pos2 = strpos($texte, $regs[0][$i], $pos))!==false) {
@@ -42,12 +42,13 @@ function sommaire_d_une_page(&$texte, &$nbh3, $page=0, $num_pages=0) {
 			// texte brut
 			$brut = preg_replace(',[\n\r]+,',' ',textebrut($brut));
 			$lien = cs_propre(couper($brut, _sommaire_NB_CARACTERES));
-			$lien = preg_replace('/(&nbsp;|\s)*[!?,;.:]+$/', '', $lien); // eviter une ponctuation a la fin
+			// eviter une ponctuation a la fin, surtout si la page est precisee
+			$lien = preg_replace('/(&nbsp;|\s)*'.($page?'[!?,;.:]+$/':'[,;.:]+$/'), '', $lien);
 			$titre = attribut_html(couper($brut, 100));
 			// si la decoupe en page est active...
 			$artpage = (function_exists('decoupe_url') && (strlen(_request('artpage')) || $page>1) )
 				?decoupe_url($self, $page, $num_pages):$self;
-			$sommaire .= "<li><a $st title=\"$titre\" href=\"{$artpage}#outil_sommaire_$index\">$lien</a>$p</li>";
+			$sommaire .= "<li><a $st title=\"$titre\" href=\"{$artpage}#outil_sommaire_$index\">$lien</a>$suffixe</li>";
 		}
 	}
 	return $sommaire;
