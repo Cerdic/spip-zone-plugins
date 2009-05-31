@@ -1,0 +1,61 @@
+<style>
+    ul.items {list-style:none;padding:0;margin:0.25em 0;border-bottom:1px solid #F8F7F3;}
+    ul.items li.item {clear:both;border-top:1px solid #F8F7F3;padding:0.2em 0;}
+    ul.items li.item:hover {background:#F8F7F3;}
+    ul.items li.item .action {display:block;float:right;}
+    ul.items li.item .statut {float:left;width:15px;}
+    ul.items li.item .titre {float:left;width:220px;}
+    ul.items li.item .logo {float:right;width:40px;}
+    ul.items li.item .auteurs {float:left;width:120px;font-size:0.9em;}
+    ul.items li.item .date {float:left;width:75px;font-size:0.9em;}
+    ul.items li.item .numero {float:right;width:50px;font-size:0.9em;font-weight:bold;}
+    .pagination {background:#EEEEEE;text-align:right;padding:2px 0;}
+    .pagination .tri {display:block;float:left;}
+    
+    /* reprise du style presenter_liste_dist() */
+    ul.items li.item {background-color: #eeefee;}
+    ul.items li.item {border-bottom-color: #cccccc; border-bottom-width: 1px; border-bottom-style: solid;}
+    .presenter_liste {margin-top: 20px; }
+</style>
+
+---------------------------------------
+
+<INCLURE{fond=prive/contenu/mot_objets_lies}{id_mot=#ENV{id}}{statuts=#ENV{statuts}}{ajax}>
+
+----------------
+
+<div class="formfx recherche" id="formulaire_recherche#ENV{id}">
+    <br class='spacer' />
+    [<p class="formulaire_message">(#ENV*{message_ok})</p>]
+    [<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
+    [(#ENV{editable}|oui)
+        <form method='post' action='#ENV{action}'>
+            [(#REM) declarer les hidden qui declencheront le service du formulaire 
+            parametre : url d'action ]
+            #ACTION_FORMULAIRE{#ENV{action}}
+            [(#REM) les champs de saisie]
+            <fieldset>
+                <ol>
+                    <li class="text champ_recherche obligatoire">
+                        <label for='recherche' class='nocmx'><:bouton_ajouter:></label>
+                        <input type="text" name='recherche' id='recherche' value="#ENV*{recherche}" class='text' size='30' />
+                        [<span class='erreur'>(#ENV**{erreur}|table_valeur{recherche})</span>]
+                    </li>
+                </ol>
+            </fieldset>
+            <div style='text-align: right'><input class='fondo' type='submit' value='<:info_rechercher:>' /></div>
+
+            [(#REM) les recherches, type par type]
+            [(#INCLURE{fond=formulaires/selecteur_mot_associer_articles}{env}{ajax})
+                <div class='nettoyeur'></div>
+                <div style='text-align: right'><input class='fondo' type='submit' value='<:bouton_ajouter:>' /></div>
+            ]
+
+            [(#INCLURE{fond=formulaires/selecteur_mot_associer_rubriques}{env}{ajax})
+                <div class='nettoyeur'></div>
+                <div style='text-align: right'><input class='fondo' type='submit' value='<:bouton_ajouter:>' /></div>
+            ]
+        </form>
+    ]
+</div>
+<div class='spacer'></div>

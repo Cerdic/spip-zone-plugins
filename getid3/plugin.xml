@@ -1,0 +1,29 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	  GetId3
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	  BoOz
+	</auteur>
+	<version>
+	  0.1
+	</version>
+	<etat>
+	  dev
+	</etat>
+	<description>
+	  Librairies pour g&#233;rerer un formulaire d'&#233;dition d'un document
+	  Distribu&#233; sans garantie sous licence GPL.
+	  Bricolage (sale) &#224; partir du code SPIP
+
+	  voir formulaires/inc_formulaire_document.php
+
+	  necessite le plugin tag-machine.
+	</description>
+	<lien></lien> <!-- URI de documentation -->
+	<prefix>
+	  getid3
+	</prefix>
+	<necessite id="SPIP" version="[1.9.0;]" />
+	<utilise id="tag-machine" version="[0.1;]" />
+</plugin>

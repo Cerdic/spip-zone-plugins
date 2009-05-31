@@ -1,0 +1,4 @@
+Ne pas commiter svp.
+
+Spoodle est un projet de spip-be.
+Nous travaillons en groupe sur ce projet à Bruxelles. L'idée est d'apprendre à créer un plugin en faisant. Si vous voulez participez, venez à notre prochain rencontre. RDV sur spip-be@listes.agora.eu.org ;-)

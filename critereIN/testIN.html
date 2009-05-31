@@ -1,0 +1,26 @@
+<html>
+<head>
+<title>test IN</title>
+</head>
+<body>
+<h1>test IN</h1>
+
+<B_l1><ul>
+<BOUCLE_l1(MOTS){id_mot IN 3,2}>
+	<li>#ID_MOT = #TITRE</li>
+</BOUCLE_l1>
+</ul></B_l1>
+
+<B_l2><ul>
+<BOUCLE_l2(MOTS){id_mot IN* 3,2}>
+	<li>#ID_MOT = #TITRE</li>
+</BOUCLE_l2>
+</ul></B_l2>
+
+<B_l3><ul>
+<BOUCLE_l3(MOTS){id_mot IN* #ENV*{liste}}>
+	<li>#ID_MOT = #TITRE</li>
+</BOUCLE_l3>
+</ul></B_l3>
+</body>
+</html>

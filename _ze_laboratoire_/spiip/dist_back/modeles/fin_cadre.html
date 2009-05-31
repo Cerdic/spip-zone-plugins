@@ -1,0 +1,6 @@
+</div>
+</div>
+[(#ENV{style}|=={e}|?{' ',''})</div>]
+<BOUCLE_style(IF){condition (#ENV{style}|!={forum}|sinon{false}) && (#ENV{style}|!={thread-forum}|sinon{false})}>
+	<div style='height: 5px;'></div>
+</BOUCLE_style>

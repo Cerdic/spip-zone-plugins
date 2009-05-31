@@ -1,0 +1,48 @@
+#CACHE{3*60}
+[
+(#REM)Affichage des dernières entrées dans le cahier de texte en fonction du contexte (dans le GET)
+][
+
+(#REM) On se place dans le contexte de la rubrique du cahier de texte de l'année
+]
+<BOUCLE_Contexte_RubriqueCDT_affichage(RUBRIQUES){titre=="Cahier de texte en-ligne"}{0,1}{tout}>[
+(#REM) On détermine quelle est l'année scolaire que l'on veut afficher
+][	(#SET{annee_rubrique,[(#ENV{date}|bonbon_annee_scolaire)]})
+	]<BOUCLE_AnneeScol(RUBRIQUES){id_parent}{titre=#GET{annee_rubrique}}{!par titre}{0,1}>[
+
+(#REM) On prépare une liste des artciles parmis lesquels faire la requête. Cette liste sera «stockée» dans {!doublons requete}. Ceci atomise les requêtes avec des Regexp et évite les trop grosses requêtes SQL. Merci à Cédric Morin pour l'idée.
+
+][
+(#REM) on selectionne ceux qui ont la bonne classes, bon auteur et bonne rubrique
+]<BOUCLE_PrepaClasses(ARTICLES){id_rubrique}{id_auteur ?}{id_mot=#ENV*{id_classe0}}{doublons Prepa_Classes_auteur}></BOUCLE_PrepaClasses>[
+(#REM) on selectionne ceux qui ont la bonne matière
+]<BOUCLE_Prepa_Matiere(ARTICLES){id_mot=#ENV*{id_matiere}}
+{!doublons Prepa_Classes_auteur}{doublons Prepa_Matiere}></BOUCLE_Prepa_Matiere>[
+(#REM) on choisi les articles qui sont du bon groupe
+]<BOUCLE_Prepa_Groupes(ARTICLES){id_mot?}{!doublons Prepa_Matiere}{doublons requete}></BOUCLE_Prepa_Groupes>[
+
+(#REM) {!doublons requete} est donc un critère qui sélectionne tous les articles qui correspondent aux restrictions de groupe, date, matière et même auteur s'il y a. Sans reitérer les commandes SQL.
+
+][
+(#REM)On restrient la requête aux descriptions de séances
+]<BOUCLE_QueSeances(ARTICLES){titre_mot="Description de séance"}{!doublons requete}{doublons QueSeances}></BOUCLE_QueSeances>[
+(#REM) {!doublons QueSeances} est donc un critère qui sélectionne toutes les Descriptions de séances qui correspondent aux restrictions de groupe, date, matière et même auteur s'il y a. Sans reitérer les commandes SQL.
+]<B_Seances>
+<div class="bloc">
+<h2>Dernières entrées du même type dans le cahier de textes&nbsp;:</h2>
+<BOUCLE_Seances(ARTICLES){!doublons QueSeances}{!par date}{0,10}{'
+<br clear="left">
+<hr>'}>
+		<INCLURE(session.php){fond=cahier-de-texte-une-seance}{id_article=#ID_ARTICLE}{admin_fiche=non}>
+</BOUCLE_Seances>
+<br clear="all">
+</div>
+</B_Seances>
+<p>Pas encore d'entrées du même type trouvées dans le cahier de texte...</p>
+<//B_Seances>
+	</BOUCLE_AnneeScol>
+</BOUCLE_Contexte_RubriqueCDT_affichage>
+<?php
+	if (!($_POST['enregistrer_fiche'])) {
+
+	}//fin du if not enregistrer_fiche?>

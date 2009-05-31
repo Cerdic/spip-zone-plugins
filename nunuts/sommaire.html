@@ -1,0 +1,118 @@
+[(#REM)
+	Un cache plus court, pour la boucle syndic_articles
+]#CACHE{3600}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+<title>[(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)" />]
+<INCLURE{fond=inc-head}>
+</head>
+
+<body>
+
+<INCLURE{fond=inc-entete}>
+
+<h1 class="invisible">#NOM_SITE_SPIP</h1>
+[(#DESCRIPTIF_SITE_SPIP)]
+
+		
+<div id="columns">
+	[(#REM) Menu de navigation ]
+	<ul id="column1" class="column">
+					<INCLURE{fond=inc-rubriques}>
+       <!--  -->
+		
+		[(#REM) Sur le Web ]
+      <B_syndic>      
+            <li class="widget color-violet">  
+                <div class="widget-head">
+                    <h3><:nouveautes_web:></h3>
+                </div>
+                <div class="widget-content">
+						<BOUCLE_syndic(SYNDIC_ARTICLES) {age<180} {par date}{inverse} {0,6}>
+							<p>[(#DATE|affdate_jourcourt) &ndash; ]<a href="#URL_ARTICLE"[ title="(#NOM_SITE|attribut_html|couper{80})"] class="spip_out">#TITRE</a></p>
+						</BOUCLE_syndic>
+                </div>
+            </li>
+      </B_syndic>
+	</ul>
+
+<!--  -->        
+	<ul id="column2" class="column">
+		[(#REM) Derniers articles ]
+		<B_articles_recents>
+		<li class="widget color-orange">  
+			<div class="widget-head">
+				<h3><:derniers_articles:></h3>
+			</div>
+			<div class="widget-content">
+			[<p class="pagination">(#PAGINATION)</p>]
+				<BOUCLE_articles_recents(ARTICLES) {par date}{inverse} {pagination 5}>
+					<p>
+						[(#LOGO_ARTICLE_RUBRIQUE|#URL_ARTICLE|image_reduire{150,100})]
+						<h3 class="entry-title"><a href="#URL_ARTICLE" rel="bookmark">#TITRE</a></h3>
+						<small><abbr class="published"[ title="(#DATE|date_iso)"]>[(#DATE|affdate_jourcourt)]</abbr>[, <:par_auteur:> (#LESAUTEURS)]</small>
+						[<div class="#EDIT{intro} introduction entry-content">(#INTRODUCTION|couper{100})</div>]
+					</p>
+				</BOUCLE_articles_recents>
+				
+			</div>
+		</li>
+		</B_articles_recents>
+	<!--  -->
+		[(#REM) formulaire d'inscription ]
+      <li class="widget color-white">  
+          <div class="widget-head">
+              <h3>formulaire d'inscription</h3>
+          </div>
+          <div class="widget-content">
+					[(#REM) Inscription au site ]
+					#FORMULAIRE_INSCRIPTION
+          </div>
+      </li>
+            
+	</ul>		
+<!--  -->
+	<ul id="column3" class="column">
+			[(#REM) Breves ]
+			<B_breves>
+            <li class="widget color-blue">  
+                <div class="widget-head">
+                    <h3><:dernieres_breves:></h3>
+                </div>
+                <div class="widget-content">
+						<BOUCLE_breves(BREVES) {par date}{inverse} {0,5}>
+						<p>[(#DATE|affdate_jourcourt) &ndash; ]<a href="#URL_BREVE">#TITRE</a></p>
+						</BOUCLE_breves>
+                </div>
+            </li>
+			</B_breves>      
+      <!--  -->
+			[(#REM) Liens des forums ]
+			<B_forums_liens>
+	         <li class="widget color-yellow">  
+	             <div class="widget-head">
+	                 <h3><:derniers_commentaires:></h3>
+	             </div>
+	             <div class="widget-content">
+						<BOUCLE_forums_liens(FORUMS) {plat} {par date}{inverse} {0,8}>
+							<p>[(#DATE|affdate_jourcourt) &ndash; ]<a href="#URL_FORUM"[ title="(#TITRE|attribut_html|couper{80})"]>[(#TEXTE|couper{80})]</a></p>
+						</BOUCLE_forums_liens>
+	             </div>
+	         </li>
+	      </B_forums_liens>
+	</ul>
+
+
+	
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+	
+
+</div><!-- columns -->
+
+<INCLURE{fond=inc-inettuts}>		
+
+</body>
+</html>

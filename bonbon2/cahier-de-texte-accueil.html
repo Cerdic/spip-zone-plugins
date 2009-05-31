@@ -1,0 +1,115 @@
+#CACHE{30*24*60*60}
+<!--
+*****Cahier de texte pour Spip: Bonbon !
+*****Réalisé par Bertrand MARNE (bmarne à ac-creteil.fr)
+*****Sous licence GPL (enfin bon, c'est bonbonware...)
+*****CopyLeft en juin 2007
+***Page d'accueil du cahier de texte.
+-->[
+
+(#REM) On se place dans le contexte de la rubrique du cahier de texte de l'année
+]
+<BOUCLE_Contexte_RubriqueCDT(RUBRIQUES){titre=="Cahier de texte en-ligne"}{0,1}{tout}>[
+(#REM) On détermine quelle est l'année scolaire que l'on veut afficher
+][	(#SET{annee_rubrique,[(#ENV{date}|bonbon_annee_scolaire)]})
+][	(#ENV{annee_scolaire}|?{' ',''})
+		#SET{annee_rubrique,#ENV{annee_scolaire}}
+	]<BOUCLE_AnneeScol(RUBRIQUES){id_parent}{titre=#GET{annee_rubrique}}{!par titre}{0,1}>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<title>#NOM_SITE_SPIP: Accueil du cahier de texte</title>
+
+[(#REM)Inclusion du pied de page]
+[(#INCLURE{fond=cahier-de-texte-en-tete})]
+
+</head>
+<body>
+<div id="NoMenu">
+	<div id="EntetePage">
+			<ul class="boutons">
+				<li><a href="#URL_SITE_SPIP"><img src="#CHEMIN{images/dialog-ok-upside-down.png}" alt="icône" vspace="2" align="middle">Retourner &agrave; l'accueil du site</a></li>
+				<li><a href="#requete" title="Faire une requ&ecirc;te pr&eacute;cise sur le contenu du cahier de texte"><img src="#CHEMIN{images/edit-find-replace.png}" alt="icône" vspace="2" align="middle">Faire une requ&ecirc;te pr&eacute;cise</a>
+			</ul>
+			<h1>Accueil du cahier de texte (#NOM_SITE_SPIP)</h1>
+			<br class="clear" />	
+	</div>
+	<div id="Contenu">
+		<div class="bloc"><center>
+			<h3 class="titre"><img src="#CHEMIN{images/dialog-information.png}" alt="icône" vspace="2" align="top">Acc&egrave;s public</h3>
+			<form name="choisir_devoir" method="get" action="spip.php">
+				<input type="hidden" name="page" value="cahier-de-texte-affichage">
+				<select id="classe" name="classe" size="1">
+					<option value="" selected="selected">Classes</option>
+[(#REM)On extrait toutes les classes de Spip, que pour,les devoirs]
+<BOUCLE_ToutesLesClasses_devoirs(MOTS){id_rubrique}{type="Classes"}{par titre}>
+	<BOUCLE_Que_devoirs(MOTS){titre="Devoirs à faire"}>
+		<BOUCLE_Que_les_classes_avec_devoir(ARTICLES){id_mot=#_ToutesLesClasses_devoirs:ID_MOT}{id_mot=#_Que_devoirs:ID_MOT}{0,1}>
+					<option value="#_ToutesLesClasses_devoirs:TITRE">#_ToutesLesClasses_devoirs:TITRE</option>
+		</BOUCLE_Que_les_classes_avec_devoir>
+	</BOUCLE_Que_devoirs>
+</BOUCLE_ToutesLesClasses_devoirs>
+				</select>
+				<input type="hidden" name="nb" value="10">
+				<input type="Submit" value="Consulter le travail à faire" name="devoirs_seuls">
+			</form>
+			<br>
+			<hr>
+			<br>
+[(#REM) Que pour les Descriptions de séances:]
+<BOUCLE_CDT_entier(MOTS){titre="Description de séance"}>
+#SET{id_mot_description_seance,#ID_MOT}
+			<form name="choisir_simple" method="get" action="spip.php">
+				<input type="hidden" name="page" value="cahier-de-texte-affichage">
+				<select id="classe" name="classe" size="1">
+					<option value="" selected="selected">Classes</option>
+[(#REM)On extrait toutes les classes de Spip]
+	<BOUCLE_ToutesLesClasses_simple(MOTS){id_rubrique}{type="Classes"}{par titre}>
+					<option value="#_ToutesLesClasses_simple:TITRE">#_ToutesLesClasses_simple:TITRE</option>
+	</BOUCLE_ToutesLesClasses_simple>
+				</select> et/ou 
+				<select id="matiere" name="matiere" size="1">
+					<option value="" selected="selected">Mati&egrave;res</option>
+[(#REM)On extrait toutes les matières de Spip]
+	<BOUCLE_ToutesLesMatieres_simple(MOTS){id_rubrique}{type="Matières"}{par num titre}{par titre}>
+					<option value="#_ToutesLesMatieres_simple:TITRE">#_ToutesLesMatieres_simple:TITRE</option>
+	</BOUCLE_ToutesLesMatieres_simple>
+				</select>
+				<input type="hidden" name="nb" value="10">
+				<input type="Submit" value="Consulter le cahier de texte" name="afficher">
+			</form>
+</BOUCLE_CDT_entier>
+		</center></div>
+		<div class="bloc"><center>
+			<h3 class="titre"><img src="plugins/bonbon/images/dialog-password.png" alt="icône" vspace="2" align="top">Acc&egrave;s enseignant</h3>
+<?php if ($auteur_session) {
+	//paramètres de session utilisés:
+	$auteur=$auteur_session['nom'];
+	$id_auteur=$auteur_session['id_auteur'];
+	echo "<p class='spip'>$auteur (si vous n'&ecirc;tes pas $auteur, <a href=\"";
+?>#URL_LOGOUT<?php
+	echo "\" title=\"d&eacute;connexion imm&eacute;diate !\">cliquez ici</a>)</p>\n";?>
+			<a href="#URL_PAGE{cahier-de-texte-saisie}&id_auteur=<?php echo $id_auteur; ?>" title="&Eacute;crire le contenu d\'une s&eacute;ance et ses devoirs &eacute;ventuels"><img src="#CHEMIN{images/accessories-text-editor.png}" alt="icône" vspace="2" align="middle">Saisir une s&eacute;ance</a>&nbsp;|
+			 <a href="[(#URL_PAGE{cahier-de-texte-affichage,senschrono=1}|parametre_url{var_mode,"calcul"})]&id_auteur=<?php echo $auteur_session['id_auteur']; ?>" title="Aller voir ses propres entr&eacute;es du cahier de texte"><img src="#CHEMIN{images/edit-find.png}" alt="icône" vspace="2" align="middle">Afficher ses s&eacute;ances</a>
+<INCLURE(session.php){fond=cahier-de-texte-tableau-de-bord}>
+<?php } else {?>
+			#LOGIN_PUBLIC
+<?php }
+?>
+		</center></div>
+<br clear="All">
+	<hr>
+[(#REM)Inclusion de la noisette de selection]
+<INCLURE{fond=cahier-de-texte-selection}>
+	</div>
+
+[(#REM)Inclusion du pied de page]
+[(#INCLURE{fond=cahier-de-texte-pied})]
+
+</div>
+
+</body>
+</html>
+	</BOUCLE_AnneeScol>
+</BOUCLE_Contexte_RubriqueCDT>
+				

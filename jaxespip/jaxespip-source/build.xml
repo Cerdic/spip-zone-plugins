@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<project name="jaxespipapplet" default="build" basedir=".">
+
+	<property name="src" value="src"/>
+	<property name="build.root" value="construction"/>
+	<property name="build.classes" value="construction/classes"/>
+	<property name="lib" value="lib"/>
+	<property name="dist" value="dist"/>
+	<property name="test" value="test"/>
+	
+	<path id="compile.classpath">
+		<pathelement path="${classpath}"/>
+		<fileset dir="lib">
+			<include name="**/*.jar"/>
+		</fileset>
+	</path>
+
+	<target name="compile" description="compilation">
+		<mkdir dir="${build.classes}"/>
+		<javac source="1.4" target="1.4" encoding="ISO-8859-1" srcdir="${src}" destdir="${build.classes}" debug="true">
+			<classpath refid="compile.classpath"/>
+		</javac>
+	</target>
+
+	<target name="copy-resources" description="copie des fichiers de ressources">
+        <copy todir="${build.classes}">
+            <fileset dir="${src}">
+                <patternset id="props">
+                    <include name="**/*.properties"/>
+                    <include name="**/*.gif"/>
+                    <include name="**/*.png"/>
+                </patternset>	
+            </fileset>
+        </copy>
+	</target>
+    
+	<target name="build" depends="compile,copy-resources" description="construit JaxeSPIPApplet.jar">
+		<unjar src="${lib}/jakarta-oro-2.0.8.jar" dest="${build.classes}"/>
+		<mkdir dir="${dist}/installer"/>
+		<jar jarfile="${dist}/installer/JaxeSPIPApplet.jar" basedir="${build.classes}"/>
+	</target>
+
+	<target name="dist" depends="build" description="fichier de distrib avec le source">
+		<copy file="build.xml" todir="${dist}/source"/>
+		<copy file="LISEZ_MOI.html" todir="${dist}"/>
+		<copy file="copie_ecran.png" todir="${dist}"/>
+		<copy todir="${dist}/source/src">
+			<fileset dir="${src}"/>
+		</copy>
+		<copy todir="${dist}/source/lib">
+			<fileset dir="${lib}"/>
+		</copy>
+		<copy todir="${dist}/source/config">
+			<fileset dir="config"/>
+		</copy>
+		<copy todir="${dist}/source/exemple">
+			<fileset dir="exemple"/>
+		</copy>
+		<copy todir="${dist}/installer">
+			<fileset dir="config"/>
+		</copy>
+		<copy file="exemple/edition.html" todir="${dist}/installer"/>
+		<tar tarfile="${dist}/jaxespipapplet.tar.gz" basedir="${dist}" compression="gzip" excludes="jaxespipapplet.tar.gz, **/.DS_Store"/>
+	</target>
+
+	<target name="test" depends="build" description="copie des fichiers pour le test">
+		<copy file="${dist}/installer/JaxeSPIPApplet.jar" todir="${test}"/>
+		<copy todir="${test}">
+			<fileset dir="config"/>
+		</copy>
+		<copy todir="${test}">
+			<fileset dir="exemple"/>
+		</copy>
+	</target>
+
+	<target name="clean" description="nettoyage">
+		<delete dir="${build.root}"/>
+		<delete includeEmptyDirs="true">
+			<fileset dir="${dist}" excludes="gpl_french.html"/>
+		</delete>
+		<delete file="${test}/JaxeSPIPApplet.jar"/>
+	</target>
+
+</project>

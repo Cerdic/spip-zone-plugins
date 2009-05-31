@@ -1,0 +1,73 @@
+<div id="formMap" name="formMap" style="width: 780px; height: 350px"></div>
+<div id="adress" style="position:relative; top:-30px; left: 10px; display:none;">
+    <form action="#" onsubmit="showAddress(this.address.value); return false">
+		<nobr><input size="40" name="address" value="calle, ciudad, pais" type="text"> <input value="Go!" type="submit"></nobr>
+	</form>
+</div>
+<script type="text/javascript">
+
+//<![CDATA[
+
+var letraNH = String.fromCharCode(241);
+var letraNHNH = String.fromCharCode(209);
+var letraAacute = String.fromCharCode(225);
+var letraAAacute = String.fromCharCode(193);
+var letraEacute = String.fromCharCode(233);
+var letraEEacute = String.fromCharCode(201);
+var letraIacute = String.fromCharCode(237);
+var letraIIacute = String.fromCharCode(205);
+var letraOacute = String.fromCharCode(243);
+var letraOOacute = String.fromCharCode(211);
+var letraUacute = String.fromCharCode(250);
+var letraUUacute = String.fromCharCode(218);
+
+fecha = new Date();
+if (GBrowserIsCompatible()) {
+    // create the map
+    var map = new GMap2(document.getElementById("formMap"));
+    map.addControl(new GLargeMapControl());
+    map.addControl(new GMapTypeControl());
+    map.setCenter(new GLatLng([(#CONFIG**{gis_default_lat,0})],[(#CONFIG**{gis_default_lonx,0})]), [(#CONFIG**{gis_default_zoom,0})], G_NORMAL_MAP);
+
+    // creamos el evento para crear nuevos marcadores
+    GEvent.addListener(map, "click", function(overlay, point){
+	map.clearOverlays();
+	if (point) {
+		map.addOverlay(new GMarker(point));
+		map.panTo(point);
+		document.forms.formulaire_gis.lat.value = point.y;
+		document.forms.formulaire_gis.lonx.value = point.x;
+	}
+    });
+} else {
+    alert("Sorry, the Google Maps API is not compatible with this browser");
+}
+
+//]]>
+
+</script>            
+<form action="[(#ENV{url})]" method="post" name="formulaire_gis" id="Formulaire_gis" enctype="multipart/form-data">
+	[(#ENV*{previsu})	]
+	<fieldset>
+		<input type="text" name="lat" size="20">Latitude</br>
+		<input type="text" name="lonx" size="20">Lonxitude
+	</fieldset>
+	
+	<div><input type="file" accept="image/*" id="commentimg" name="commentimg"></input>Imaxe</div>
+	<div><input type="file" accept="audio/*" id="commentsound" name="commentsound">Son</input></div>
+	<input type="hidden" name="auteur" size="20" value="#SESSION{id_auteur}"><br>
+	
+	<fieldset>
+		<input class="id_rubrique" type="hidden" name="titre" value="[(#ENV*{id_rubrique})]"  size="50">
+		<input class="id_rubrique" type="hidden" name="statut" value="publie" >
+		<label><:texte_titre_obligatoire:></label>
+		<input  type="text" name="titre" value="[(#ENV**{titre})]"  size="50"><br>
+		<label>#CHAPO</label>
+		<textarea class="chapo" name="chapo" cols="25" rows="5">[(#ENV*{chapo})]</textarea>
+	   <label>#TEXTO</label>
+		[(#ENV*{texte})]
+	</fieldset>
+
+	<div align="right"><input type="submit" name="valider" class="spip_bouton" value="<:valider:>" /></div>
+  </fieldset>
+</form>

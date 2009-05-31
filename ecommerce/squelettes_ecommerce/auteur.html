@@ -1,0 +1,262 @@
+<BOUCLE_auteur_principal(AUTEURS) {id_auteur}>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+<title>Garage GMV</title>
+<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
+
+<!-- Ceci est la feuille de style par defaut pour les types internes a SPIP -->
+<link rel="stylesheet" href="spip_style.css" type="text/css" />
+
+<!-- Les feuilles de style specifiques aux presents squelettes -->
+<link rel="stylesheet" href="#DOSSIER_SQUELETTE/typographie.css" type="text/css" />
+
+<!-- media="..." permet de ne pas utiliser ce style sous Netscape 4 (sinon plantage) -->
+<link rel="stylesheet" href="#DOSSIER_SQUELETTE/habillage.css" type="text/css" media="print, projection, screen, tv" />
+
+<!-- Lien vers le backend pour navigateurs eclaires -->
+<link rel="alternate" type="application/rss+xml" title="<:syndiquer_site:>" href="backend.php3" />
+</head>
+
+<!-- Entete de page html -->
+	<body bgcolor="#fffff0">
+	<table border="0" " cellspacing="0" cellpadding="0">
+	<tr bgcolor="2f4f4f">
+		<td colspan="5"><img src="squelettes/mm_spacer.gif" alt="" width="1" height="1" border="0" /></td>
+	</tr>
+	<tr bgcolor="#f5f5f5">
+ 		<td colspan="5"><img src="squelettes/mm_spacer.gif" alt="" width="1" height="2" border="0" /></td>
+	</tr>
+	<tr bgcolor="#2f4f4f">
+ 		<td colspan="5"><img src="squelettes/mm_spacer.gif" alt="" width="1" height="1" border="0" /></td>
+	</tr>
+	<tr bgcolor="#6788B1">
+		<td colspan="5">
+			<div align="center" valign="center">
+			<img src="squelettes/enseignegmv.jpg">
+		</div>
+		</td>
+	</tr>
+	<tr bgcolor="#2f4f4f">
+ 		<td colspan="5"><img src="squelettes/mm_spacer.gif" alt="" width="1" height="1" border="0" /></td>
+	</tr>
+	<tr bgcolor="#f5f5f5">
+ 		<td colspan="5"><img src="squelettes/mm_spacer.gif" alt="" width="1" height="2" border="0" /></td>
+	</tr>
+	<tr bgcolor="#2f4f4f">
+ 		<td colspan="5"><img src="squelettes/mm_spacer.gif" alt="" width="1" height="1" border="0" /></td>
+	</tr>
+	<tr bgcolor="#FFFFCC">
+ 		<td colspan="1"><img src="squelettes/mm_spacer.gif" alt="" width="1" height="1" border="0" /></td>
+		<td colspan="3">
+			<div id="navigation">
+			<div class="menu_principal">
+				<B_menu_principal>
+					<BOUCLE_menu_principal(RUBRIQUES) {id_rubrique=3} {par titre}>
+						<B_selection_menu_principal>
+							<BOUCLE_selection_menu_principal(RUBRIQUES) {id_secteur} {id_rubrique!==[3,4]} {tout} {par titre}>	
+								<div class="encart_menu_principal">
+<!--
+									[<div style="clear: both;"><b>(#TITRE)</b></div>]
+									[<a href="#URL_RUBRIQUE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>(#LOGO_RUBRIQUE|center||reduire_image{50,50})</a>]
+-->
+									<div class="menu-titre">
+									[<div style="clear: both;"><a href="#URL_RUBRIQUE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>(#TITRE)</a></div>]
+									</div>
+<!--
+									<div style="clear: both;"></div>
+-->
+<!--
+									[<a href="#URL_RUBRIQUE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>(#LOGO_RUBRIQUE|center||reduire_image{75,75})</a>]
+-->
+
+								</div>
+							</BOUCLE_selection_menu_principal>
+						</B_selection_menu_principal>
+					</BOUCLE_menu_principal>
+				</B_menu_principal>
+			</div>
+			</div>
+		</td>
+ 		<td colspan="1"><img src="squelettes/mm_spacer.gif" alt="" width="1" height="1" border="0" /></td>
+	</tr>
+	<tr bgcolor="#2f4f4f">
+		<td colspan="5"><img src="squelettes/mm_spacer.gif" alt="" width="1" height="1" border="0" /></td>
+	</tr>
+	<tr bgcolor="#f5f5f5">
+ 		<td colspan="5"><img src="squelettes/mm_spacer.gif" alt="" width="1" height="2" border="0" /></td>
+	</tr>
+	<tr bgcolor="#2f4f4f">
+ 		<td colspan="5"><img src="squelettes/mm_spacer.gif" alt="" width="1" height="1" border="0" /></td>
+	</tr>
+	<tr bgcolor="#6788B1">
+		<td valign="top"  colspan="5"><img src="squelettes/mm_spacer.gif" alt="" width="1" height="10" border="0" />
+		</td>
+	</tr>
+	<tr bgcolor="#2f4f4f">
+ 		<td colspan="5"><img src="squelettes/mm_spacer.gif" alt="" width="1" height="1" border="0" /></td>
+	</tr>
+	<tr bgcolor="#f5f5f5">
+ 		<td colspan="5"><img src="squelettes/mm_spacer.gif" alt="" width="1" height="2" border="0" /></td>
+	</tr>
+	<tr bgcolor="#2f4f4f">
+ 		<td colspan="5"><img src="squelettes/mm_spacer.gif" alt="" width="1" height="1" border="0" /></td>
+	</tr>
+<!-- Fin Entete de page html -->
+<!-- colonne de gauche -->
+		<td valign="top"  colspan="1" align="left" width="0">
+		<table width="300">
+		<td>
+		<!-- Menu de navigation rubriques -->
+			<div id="navigation">
+			<div class="menu_secondaire">
+			<ul class="menu_secondaire">
+			<B_rubriques_menu>
+				<BOUCLE_rubriques_menu(RUBRIQUES) {racine} {par titre}>
+					<li>
+					<div class="menu-titre"><a href="#URL_RUBRIQUE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>#TITRE</a></div>
+					<B_sous_rubriques_menu>
+						<BOUCLE_sous_rubriques_menu(RUBRIQUES) {id_rubrique!=10} {id_parent} {par titre}>
+							<div class="menu-item">
+								<a href="#URL_RUBRIQUE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>#TITRE</a>
+							      <BOUCLE_recursive(BOUCLE_sous_rubriques_menu)>
+							      </BOUCLE_recursive>
+							</div>
+						</BOUCLE_sous_rubriques_menu>
+					</B_sous_rubriques_menu>
+					</li>
+				</BOUCLE_rubriques_menu>
+			</B_rubriques_menu>
+			</ul>
+			</div>
+		<!-- Fin Menu de navigation rubriques -->
+		</td>
+		</table>
+		</td>
+<!-- Fin colonne de gauche -->
+		<td> </td>
+<!-- Colonne principale -->
+		<td valign="top" colspan="1">
+		<table border="0" cellspacing="0" cellpadding="0" width="500px">
+		<td>
+				<div id="principal">
+	<!-- Corps de l'article -->
+		<!-- Une : affichage de l'auteur -->
+				<div class="contenu">
+				<div class="cartouche">
+				[(#LOGO_AUTEUR|left)]
+				<h1 class="titre-texte">#NOM</h1>
+				[<div class="chapo">(#BIO)</div>]
+				[<br />#NOM_SITE : <a href="(#URL_SITE)">#URL_SITE</a><br />]
+				[<div class="notes">(#NOTES)</div>]
+				</div>
+				</div>
+				</div>
+				[<p><b><:envoyer_message:></b></p>
+				<div class='spip_encadrer'>(#FORMULAIRE_ECRIRE_AUTEUR)</div>]
+		<!-- Fin Une : affichage de l'auteur -->
+	<!-- Fin Corps de l'article -->
+				</td>
+			</table>
+		</td>
+<!-- Fin Colonne principale -->
+		<td> </td>
+<!-- Colonne de droite -->
+	<td valign="top" bgcolor="#FFFFCC" width="0">
+	<table border="0" width="250px" cellspacing="1" cellpadding="1">
+	<td>
+		<div id="information">
+		<!-- Formulaire de recherche -->
+			<div class="recherche">		
+				<div class="menu-titre">
+					<h1>Recherche</h1>
+				</div>
+		   		[(#FORMULAIRE_RECHERCHE)]
+			</div>
+		<!-- Fin Formulaire de recherche -->
+		<!-- Articles de l'auteur -->
+			<B_articles>
+				<div class="articles">
+					<div class="menu-titre">
+						<:articles_auteur:>
+					</div>
+					<ul>
+				<!-- Articles de l'auteur -->
+					<BOUCLE_articles(ARTICLES) {id_auteur} {par titre}>
+						<div class="menu-item">
+							<i>[(#DATE|nom_jour)] [(#DATE|affdate)]</i>:
+							<a href="#URL_ARTICLE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>#TITRE</a>
+							<B_auteurs>
+								<:par_auteur:>
+								<BOUCLE_auteurs(AUTEURS) {id_article} {", "}>#NOM</BOUCLE_auteurs>
+							</B_auteurs>
+						</div>
+					</BOUCLE_articles>
+					</ul>
+				</div>
+			</B_articles>
+		<!-- Fin Articles de l'auteur -->
+		</div>
+	</td>
+	</table>
+	</td>  
+<!-- Fin Colonne de droite -->
+		<td> </td>
+	<tr bgcolor="#2f4f4f">
+		<td colspan="6"><img src="squelettes/mm_spacer.gif" alt="" width="1" height="1" border="0" /></td>
+	</tr>
+	<tr bgcolor="#f5f5f5">
+ 		<td colspan="6"><img src="squelettes/mm_spacer.gif" alt="" width="1" height="2" border="0" /></td>
+	</tr>
+	<tr bgcolor="#2f4f4f">
+ 		<td colspan="6"><img src="squelettes/mm_spacer.gif" alt="" width="1" height="1" border="0" /></td>
+	</tr>
+	<tr bgcolor="#6788B1">
+		<td colspan="6"><img src="squelettes/mm_spacer.gif" alt="" width="1" height="10" border="0" /></td>
+	</tr>
+	<tr bgcolor="#2f4f4f">
+ 		<td colspan="6"><img src="squelettes/mm_spacer.gif" alt="" width="1" height="1" border="0" /></td>
+	</tr>
+	<tr bgcolor="#f5f5f5">
+ 		<td colspan="6"><img src="squelettes/mm_spacer.gif" alt="" width="1" height="2" border="0" /></td>
+	</tr>
+	<tr bgcolor="#2f4f4f">
+ 		<td colspan="6"><img src="squelettes/mm_spacer.gif" alt="" width="1" height="1" border="0" /></td>
+	</tr>
+		<!-- Pied de page html -->
+		<tr>
+	     	<td width="300">
+			<div id="navigation">
+<!--
+			<h1><:navigation:></h1>
+-->
+		<!-- Menu de navigation general -->
+			<div class="private">
+				<ul class="private">
+				<li class="menu-titre">
+				[<a href="(#URL_SITE_SPIP)" title="<:accueil_site:>"><b>Garage GMV</b></a>]
+				</li>
+				<li class="menu-item">
+				<a href="rubrique.php3?id_rubrique=10" title="Informations légales">Informations légales</a>
+				</li>
+				<li class="menu-item">
+				<a href="plan.php3"><:plan_site:></a>
+				</li>
+				<li class="menu-item">
+				<a href="resume.php3" title="<:articles_populaires:>"><:en_resume:></a>
+				</li>
+				<li class="menu-item">
+				<a href="ecrire/"><:espace_prive:></a>
+				</li>
+				</ul>
+			</div>
+			</div>
+		</td>
+		<td width="50" colspan="5"></td>
+		</tr>
+	<!-- Fin Pied de page html -->
+</table>
+</div>
+</body>
+</html>
+</BOUCLE_auteur_principal>

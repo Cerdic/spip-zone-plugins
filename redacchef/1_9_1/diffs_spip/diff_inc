@@ -1,0 +1,52 @@
+diff -aburN spip191ref/ecrire/inc/auth.php spip191redac/ecrire/inc/auth.php
+--- spip191ref/ecrire/inc/auth.php	2006-09-23 13:51:13.000000000 +0200
++++ spip191redac/ecrire/inc/auth.php	2006-11-14 14:02:06.000000000 +0100
+@@ -22,7 +22,12 @@
+ 	global $connect_toutes_rubriques;
+ 	global $connect_id_rubrique;
+ 
+-	return ($connect_toutes_rubriques OR isset($connect_id_rubrique[$id_rubrique]));
++	//FJ
++	global $auteur_session;
++	$acc_redac_chef = pipeline('redacchef_ok',array('id_auteur'=>$auteur_session['id_auteur']));
++	//return ($connect_toutes_rubriques OR isset($connect_id_rubrique[$id_rubrique]));
++	return ($acc_redac_chef OR $connect_toutes_rubriques OR isset($connect_id_rubrique[$id_rubrique]));
++	//FJ
+ }
+ 
+ // http://doc.spip.org/@acces_restreint_rubrique
+diff -aburN spip191ref/ecrire/inc/presentation.php spip191redac/ecrire/inc/presentation.php
+--- spip191ref/ecrire/inc/presentation.php	2006-09-29 17:46:08.000000000 +0200
++++ spip191redac/ecrire/inc/presentation.php	2006-11-14 14:02:41.000000000 +0100
+@@ -636,7 +636,13 @@
+ 	}
+ 	$puce = "puce-$puce.gif";
+ 	
+-	if ($connect_statut == '0minirezo' AND $options == 'avancees' AND acces_rubrique($id_rubrique)) {
++	// FJ	
++	global $auteur_session;
++	$test = pipeline('redacchef_affpubli', array('connect_statut'=>$connect_statut, 'options'=>$options, 'id_auteur'=>$auteur_session['id_auteur']));
++	//if ($connect_statut == '0minirezo' AND $options == 'avancees' AND acces_rubrique($id_rubrique)) {
++	if ($test AND acces_rubrique($id_rubrique)) { 
++	  //FJ
++
+ 	  // les versions de MSIE ne font pas toutes pareil sur alt/title
+ 	  // la combinaison suivante semble ok pour tout le monde.
+ 	  $titles = array(
+@@ -1332,7 +1338,16 @@
+ 			if ($connect_statut == '0minirezo' AND ($row['source'] == 'spip' AND !($row['pass'] AND $row['login'])))
+ 			  return http_img_pack("visit-12.gif",'', "", _T('titre_image_redacteur'));
+ 			else
++			  //FJ
++			  {
++			    $test_redac_chef = pipeline('redacchef_ok',array('id_auteur'=>$row['id_auteur']));
++			    if (!$test_redac_chef)
+ 			  return http_img_pack("redac-12.gif",'', "", _T('titre_image_redacteur_02'));
++			    else
++			      return http_img_pack(_DIR_PLUGIN_REDACCHEF."/IMG/redac-12-orange.gif",'', "", _T('redacchef:titreimageredacchef'));
++			  }
++			    //return http_img_pack("redac-12.gif",'', "", _T('titre_image_redacteur_02'));
++			  //finFJ
+ 			break;
+ 		case "5poubelle":
+ 		  return http_img_pack("poubelle.gif", '', "",_T('titre_image_auteur_supprime'));

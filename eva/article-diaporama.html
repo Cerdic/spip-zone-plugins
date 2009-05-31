@@ -1,0 +1,124 @@
+#CACHE{24*3600}
+<BOUCLE_principale(ARTICLES) {id_article}>
+<?php $actuel = "#ID_ARTICLE"; ?>
+<INCLURE{fond=entete_meta}>
+	<!--affichage du titre de la page -->
+	<title>[#NOM_SITE_SPIP]  [(#TITRE|supprimer_numero)]</title>
+	<!-- description et mots-clés de la page -->
+	[<meta name="Description" content="(#DESCRIPTIF|supprimer_tags|texte_script)" />]
+	<meta name="Keywords" content="<BOUCLE_keywords(MOTS){id_article}{", "}>#TITRE</BOUCLE_keywords>" />
+</head>
+<body>
+	<div id="NoMenu">		
+		<div id="EnteteArticle">
+			
+			<div id="TitreSite">
+				<!--affichage du logo et titre du site -->
+				<h1>
+					<BOUCLE_logo_accueil(SITES){id_syndic=7}>
+					[(#LOGO_SITE)]
+					</BOUCLE_logo_accueil>
+					#NOM_SITE_SPIP
+				</h1>
+			</div>
+
+			<B_premier_art>
+			<!-- affichage des bouton précédents -->	
+			<div class="BoutonsPrecedents">		
+				<BOUCLE_premier_art(ARTICLES){id_rubrique}{par num titre}{0,1}>
+					<?php if ("#ID_ARTICLE" != "$actuel"){ ?>
+					<a href="#URL_ARTICLE" title="[(#TITRE|supprimer_numero)]"><img src="plugins/eva/images/prec_rapid.gif" alt="<:premier_article:>" /></a> 
+					<?php } ?>
+				</BOUCLE_premier_art>
+				
+				<BOUCLE_precedent_art(ARTICLES){id_rubrique}{par num titre}>
+					<?php if ($actuel == #ID_ARTICLE) {
+					echo stripslashes("$art_prec");
+					} $art_prec = "
+					<a href=\"#URL_ARTICLE\" title=\"[(#TITRE|supprimer_numero)]\"><img src=\"images/prec.gif\" alt=\"<:article_precedent:>\" /></a> 
+					"; ?>
+				</BOUCLE_precedent_art>
+			</div>
+			</B_precedent_art>
+			
+			<B_suivant_art>
+			<!-- affichage des bouton suivants -->	
+			<div class="BoutonsSuivants">
+				<BOUCLE_suivant_art(ARTICLES){id_rubrique}{par num titre}>
+					<?php $texte_suiv = "
+					<a href=\"#URL_ARTICLE\" title=\"[(#TITRE|supprimer_numero)]\"><img src=\"images/suiv.gif\" alt=\"<:article_suivant:>\" /></a> 
+					";
+					if ($actuel == $article_prec) {
+					echo stripslashes("$texte_suiv");
+					} $article_prec = #ID_ARTICLE; ?>
+				</BOUCLE_suivant_art>
+				
+				<BOUCLE_dernier_art(ARTICLES){id_rubrique}{par num titre}{inverse}{0,1}>
+					<?php if ("#ID_ARTICLE" != "$actuel"){ ?>
+					<a href="#URL_ARTICLE" title="[(#TITRE|supprimer_numero)]"><img src="plugins/eva/images/suiv_rapid.gif" alt="<:dernier_article:>" /></a> 
+					<?php } ?>
+				</BOUCLE_dernier_art>
+			</div>
+			</B_suivant_art>
+			<!--affichage du (sur et sous) titre et logo de l'article -->
+			#LOGO_ARTICLE_RUBRIQUE
+			<div class="letitre">
+				[<div class="surtitre">(#SURTITRE)</div>]
+				<h2>[(#TITRE|supprimer_numero)]</h2>
+				[<div class="soustitre">(#SOUSTITRE)</div>]
+			</div>
+			<div class="clear">&nbsp;</div>
+		</div>
+
+		<!-- début du contenu -->
+		<div id="Contenu">
+			
+			<!-- chapeau, texte, post-scriptum de l'article -->
+			[<div class="#EDIT{chapo} chapo">(#CHAPO)</div>]
+			[<div class="#EDIT{texte} texte">(#TEXTE)</div>]
+			[<div class="lien"><strong><:voir_en_ligne:> </strong><a href="#URL_SITE">(#NOM_SITE)</a></div>]
+			[<div class="#EDIT{ps} ps">
+			<h4><:post_scriptum:></h4>
+			<div>(#PS)</div>
+			</div>]
+			<br class="clear" />
+
+			<B_documents>
+			<!-- Documents liés -->
+				<div id="documents">
+					<h3 class="titre"><:documents:></h3>
+					<dl>
+					<BOUCLE_documents(DOCUMENTS){id_article}{par num titre}{mode=document}{doublons}>
+						<dt><a href="#URL_DOCUMENT">[(#LOGO_DOCUMENT)][<strong>(#TITRE|supprimer_numero)</strong>]</a><em>[, (#DATE|jour)][ (#DATE|nom_mois)][ (#DATE|annee)][, (#TYPE_DOCUMENT)][ (#TAILLE|taille_en_octets)][, (#LARGEUR) x #HAUTEUR pixels]</em></dt>
+						[<dd>(#DESCRIPTIF)</dd>]
+						<br class="clear" />
+					</BOUCLE_documents>
+					</dl>
+					<br class="clear" />
+				</div>
+			</B_documents>
+			
+			[<!-- Notes de bas de page -->
+			<div class="notes">
+			<h4><:notes_bas_page:></h4>
+			<div>(#NOTES)</div>
+			</div>]
+			
+			<div class="arborescence">
+				<:vous_etes_ici:> <a href="#URL_SITE_SPIP"><:accueil_site:></a>
+				<BOUCLE_hier(HIERARCHIE){id_article}>
+				<span>&nbsp;</span>
+				<a href="#URL_RUBRIQUE" [title="(#DESCRIPTIF|supprimer_tags)"]>[(#TITRE|supprimer_numero)]</a> 
+				</BOUCLE_hier>
+				<span>&nbsp;</span>
+				[(#TITRE|supprimer_numero)]
+			</div>
+
+		</div>
+		<br class="clear" />
+	</div>
+</body>
+</html>
+</BOUCLE_principale>
+<INCLURE{fond=page-404}>
+<//B_principale>

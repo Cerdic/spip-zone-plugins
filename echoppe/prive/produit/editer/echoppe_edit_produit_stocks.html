@@ -1,0 +1,28 @@
+#CACHE{0}
+<div class="cadre-formulaire echoppe">
+	<h3><:echoppe:etat_des_stocks:></h3>[(#SET{total_stock,0})]
+	<strong><:echoppe:stock_total:>&nbsp;:&nbsp;#TOTAL_STOCK</strong><br />
+	<form action="[(#EVAL{echoppe_modifier_stock}|generer_url_action{onglet=stocks})]" method="post" >
+		<input type="hidden" name="ref_produit" value="#REF_PRODUIT" />
+		<input type="hidden" name="id_produit" value="#ID_PRODUIT" />
+		<input type="submit" name="plus" value="+" />/<input type="submit" name="moins" value="-" />&nbsp;<input type="text" name="modif_stock" size="2" value="1" />&nbsp;<:echoppe:unite_dans_le_depot:>
+		<select name="id_depot">
+		<B_LesDepots>	
+		<BOUCLE_LesDepots(ECHOPPE_DEPOTS)>
+			<option value="#ID_DEPOT">#TITRE</option>
+		</BOUCLE_LesDepots>
+		</B_LesDepots>
+			[(#CONFIG{echoppe/utiliser_depot_fournisseur,non}|=={non}|?{'',' '})<option value="-1"><:echoppe:chez_le_fournisseur:></option>]
+		</select>
+	</form>
+	<br />
+	<B_EtatDesStock>
+	<table width="100%" cellspacing="0" cellpadding="2" border="0">
+	<BOUCLE_EtatDesStock(ECHOPPE_STOCKS){ref_produit} {<br />}>
+		<tr class="tr_liste">
+			<td class="arial2"><BOUCLE_LeDepot(ECHOPPE_DEPOTS){id_depot}>#TITRE</BOUCLE_LeDepot>[(#ID_DEPOT|<{0}|?{<:echoppe:chez_le_fournisseur:>,''})]<//B_LeDepot></td><td>#QUANTITE</td>
+		</tr>
+	</BOUCLE_EtatDesStock>
+	</table>
+	</B_EtatDesStock>
+</div>

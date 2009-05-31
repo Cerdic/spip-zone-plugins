@@ -1,0 +1,35 @@
+#SET{checked,#CONFIG{inscription2/silospip,'',''}}
+#SET{selected,#CONFIG{inscription2/silospip,'',''}}
+<div>
+<label>
+	<input type="checkbox" name="silospip" onclick="showhide(this, '#silo')" [(#GET{checked}|=={on}|?{checked="checked"})] id="silospip" />
+	<strong><:silospip:activer_silo:></strong> 
+</label>
+
+<div id="silo" style="[(#GET{checked}|=={on}|?{display: block;, display:none;})]">
+	<:silospip:explication_silo:><br />
+	<ul>
+		<li>
+			<label><:inscription2:nom_site:></label>
+			<input type="checkbox" name="nom_site" [checked="(#CONFIG{inscription2/nom_site}?{checked})"]  id="nom_site" />
+		</li>
+		<li>
+			<label><:inscription2:domaine_site:></label>
+			<input type="checkbox" name="domaine_site" [checked="(#CONFIG{inscription2/domaine_site}?{checked})"]  id="domaine_site" />
+		</li>
+		<li>
+			<label><:inscription2:titre_site:></label>
+			<input type="checkbox" name="titre_site" [checked="(#CONFIG{inscription2/titre_site}?{checked})"]  id="titre_site" />
+		</li>
+		<li>
+			<label><:inscription2:descriptif_site:></label>
+			<input type="checkbox" name="descritif_site" [checked="(#CONFIG{inscription2/descritif_site}?{checked})"]  id="descritif_site" />
+		</li>
+		<li>
+			<label><:inscription2:lang_site:></label>
+			<input type="checkbox" name="lang_site" [checked="(#CONFIG{inscription2/lang_site}?{checked})"]  id="lang_site" />
+		</li>
+	</ul>
+</div>
+</div>
+<hr />

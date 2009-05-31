@@ -1,0 +1,91 @@
+#CACHE{24*3600}
+<BOUCLE_principale(AUTEURS){id_auteur}>
+<INCLURE{fond=entete_meta}>
+	<!--affichage du titre de la page -->
+	<title>[#NOM_SITE_SPIP]  [(#NOM)]</title>
+	<!-- description et mots-clés de la page -->
+	[<meta name="Description" content="(#BIO|supprimer_tags)" />]
+</head>
+<body>
+	<div id="Page">		
+		<div id="EntetePage">
+			
+			<div id="TitreSite">
+				<!--affichage du logo et titre du site -->
+				<h1>
+					<BOUCLE_logo_accueil(SITES){id_syndic=7}>
+					[(#LOGO_SITE)]
+					</BOUCLE_logo_accueil>
+					#NOM_SITE_SPIP
+				</h1>
+			</div>
+			<!--affichage du logo et nom de l'auteur -->
+			[<h2>#LOGO_AUTEUR (#NOM)</h2>]
+			<div class="clear"> </div>
+
+		</div>
+					<B_auteurs>
+			<!--affichage des auteurs -->
+			<div id="barre_droite">
+				<div id="auteurs">
+				<h4 class="center"><a href="/?page=auteurs">Tous les auteurs</a></h4>
+				<ul>
+					<BOUCLE_auteurs(AUTEURS)>
+					<li[ class="(#EXPOSER|on,off)"]><a href="#URL_AUTEUR">[<strong>(#NOM)</strong>]</a></li>
+					</BOUCLE_auteurs>
+				</ul>
+				</div>
+			</div>
+			</B_auteurs>			
+		
+		<!-- début du menu -->
+		<div id="Menu">
+			<INCLURE{fond=menu}{id_rubrique=102}>
+		</div>
+		<!-- fin du menu -->
+		
+
+		<!-- début du contenu -->
+		<div id="Contenu">
+			
+			<!-- chapeau, texte, post-scriptum de l'article -->
+			[<div class="#EDIT{bio} texte">(#BIO)</div>]
+			[<div class="lien"><strong><:voir_en_ligne:> </strong><a href="#URL_SITE">(#NOM_SITE)</a></div>]
+			
+			<B_articles>
+			<!-- Articles du même auteur -->
+				<div id="articles">
+					<h3 class="titre"><:articles_auteur:></h3>
+					<dl>
+[<div style="text-align:center">(#PAGINATION)[ ─ (#GRAND_TOTAL) résultats]</div>]
+					<BOUCLE_articles(ARTICLES){id_secteur != 1}{id_auteur}{par date}{inverse}{pagination}>
+						<dt><a href="#URL_ARTICLE">[<strong>(#TITRE|supprimer_numero)</strong>]</a><em>[, (#DATE|jour)][ (#DATE|nom_mois)][ (#DATE|annee)]</em></dt>
+						[<dd>(#INTRODUCTION)</dd>]
+					</BOUCLE_articles>
+					</dl>
+				</div>
+			</B_articles>
+
+			[<h3 class="titre"><:envoyer_message:></h3>
+			<div class="texte">(#FORMULAIRE_ECRIRE_AUTEUR)</div>]			
+
+			[<!-- Notes de bas de page -->
+			<div class="notes">
+			<h4><:notes_bas_page:></h4>
+			<div>(#NOTES)</div>
+			</div>]
+
+		</div>
+		<!-- fin du contenu -->
+		
+		
+		<br class="clear" />
+		
+		
+		<INCLURE{fond=pied}{skel=#SQUELETTE}>
+	</div>
+</body>
+</html>
+</BOUCLE_principale>
+<INCLURE{fond=page-404}>
+<//B_principale>

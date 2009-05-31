@@ -1,0 +1,194 @@
+<?php
+
+//Fonction a appeller dans le script de retour de la banque
+//si ce script n'est aps dans le spip on peut utiliser les commandes suivantes pour demmarer spip
+
+# ou est l'espace prive de spip ?
+//chdir('..');
+//include('ecrire/inc_version.php');
+
+// la banque renvoie l'identifiant de la transaction (l'id de l'abonne) et un statut de validation pour dire si le paiement est ok ou pas.
+
+// $id_abonne est l'id dans spip_auteurs_elargis
+// $validation_paiement est soit "ok", soit "erreur_bank"
+
+
+// prevoir une table transactions, qui permettra d'avoir de bon id_transaction incrementes
+
+/**
+ *
+ * Fonction en partie desuete
+ * (voir les fonctions dans actions/)
+ * (reste a envoyer le mail tout de meme !)
+ */
+/*
+function traiter_message_banque($produit,$id_abonne,$validation_paiement,$hash_article){
+	$abonne_res = sql_query("SELECT a.nom_famille, a.prenom, a.adresse, a.code_postal, a.ville, a.pays, a.telephone, a.commentaire, b.email, b.id_auteur, b.login , b.pass FROM `spip_auteurs_elargis` a, `spip_auteurs` b WHERE a.id_auteur='$id_abonne' AND a.id_auteur = b.id_auteur") ;
+
+	while($row = sql_fetch($abonne_res)){
+		$abonne = $row ;
+	}
+
+
+	if($produit == "abonnement"){
+		$abonnement_res = sql_query("SELECT a.duree, a.periode, a.montant, a.libelle FROM `spip_abonnements` a, `spip_auteurs_elargis_abonnements` b WHERE b.id_auteur = '$id_abonne' AND a.id_abonnement = b.id_abonnement") ;
+
+		while($abonnement = sql_fetch($abonnement_res)){
+			$libelle = $abonnement['libelle'];
+			$duree = $abonnement['duree'] ;
+			$periode = $abonnement['periode'] ;
+			$montant = $abonnement['montant'] ;
+		}
+
+		$statut_abonnement = ($validation_paiement == "ok")? 'abonne' : 'prospect' ;
+
+		if($periode == "jours"){
+			$validite = ($validation_paiement == "ok") ? "DATE_ADD(CURRENT_DATE, INTERVAL ".$duree." DAY)" : "" ;
+		}elseif($periode == "mois"){
+			$validite = ($validation_paiement == "ok") ? "DATE_ADD(CURRENT_DATE, INTERVAL ".$duree." MONTH)" : "" ;
+		}
+
+		// fixer la date de validite et le statut de paiement, (et des zones acces restreint selon l'abonnement a l'occasion)
+		sql_query("UPDATE `spip_auteurs_elargis` SET statut_abonnement='$statut_abonnement', statut_paiement='$validation_paiement'  WHERE id_auteur='$id_abonne'") ;
+		sql_query("UPDATE `spip_auteurs_elargis_abonnements` SET validite = $validite, montant = '$montant', statut_paiement = '$validation_paiement'  WHERE id_auteur='$id_abonne' and hash='$hash_article'") ;
+
+	}
+
+	if($produit == "article"){
+		$article = sql_fetch(sql_query("SELECT a.titre, a.id_article FROM `spip_articles` a, `spip_auteurs_elargis_articles` b WHERE b.hash = '$hash_article' AND a.id_article = b.id_article") );
+		$libelle = $article['titre'];
+		sql_query("UPDATE `spip_auteurs_elargis_articles` SET statut_paiement='$validation_paiement' WHERE hash='$hash_article'") ;
+	}
+
+	//envoyer un mail a l'admin et a l'abonne
+	abonnement_envoyer_mails_confirmation($validation_paiement,$abonne,$libelle,$produit,$article);
+
+	if($validation_paiement == "ok")
+		return true ;
+	else
+		return false ;
+}
+*/
+
+function abonnement_envoyer_mails_confirmation($validation_paiement,$abonne,$libelle,$produit,$article=''){
+
+	include_spip('inc/charsets');
+	include_spip('inc/filtres'); // pour email_valide(), sinon pas d'envoi...
+	include_spip('inc/mail');
+	
+	$nom_expediteur = lire_config('abonnement/nom_envoi');
+	$adresse_expediteur = lire_config('abonnement/email_envoi');
+	
+	if($produit == "abonnement"){				
+		$sujet= "[".$nom_expediteur."-abo] Nouvel abonn&eacute; : ".$abonne['nom_famille'] ;
+		$sujet_message_ok = lire_config('abonnement/sujet_ok');
+		$sujet_message_ko = lire_config('abonnement/sujet_ko');
+		$message_ok = lire_config('abonnement/texte_ok');
+		$message_ko = lire_config('abonnement/texte_ko');
+	}
+	
+	if($produit == "article"){				
+		$sujet= "[".$nom_expediteur."-abo] Nouvel achat d'article : ".$abonne['nom_famille'] ;
+		$sujet_message_ok = "Bravo pour votre article" ;
+		$sujet_message_ko = "Pas de chance pour votre article" ;
+		$message_ok = "Votre paiement est accepte" ;
+		$message_ko = "Votre paiement est refuse" ;
+	}
+	
+	$expediteur = $nom_expediteur.'<'.$adresse_expediteur.'>';
+					
+	$entete .= "Reply-To: ".$adresse_expediteur."\n";     					 // réponse
+	$entete .= "MIME-Version: 1.0\n";
+	$entete .= "Content-Type: text/plain; charset=$charset\n";	// Type Mime pour un message au format HTML
+	$entete .= "Content-Transfer-Encoding: 8bit\n";
+	$entete .= "X-Mailer: PHP/" . phpversion();         			// mailer
+	//$entetes .= "Return-Path: < webmaster@ >\n"; 					// En cas d' erreurs 
+	//$entetes .= "Errors-To: < webmaster@ >\n";    					// En cas d' erreurs 
+	//$entetes .= "cc:  \n"; 											// envoi en copie à 
+	//$entetes .= "bcc: \n";          										// envoi en copie cachée à 
+
+
+	if($validation_paiement == "ok"){
+	
+		//au webmaster
+		$message = "Une nouvelle transaction a eu lieu :\n\nNom : ".$abonne['nom_famille']."\nPr&eacute;nom : ".$abonne['prenom']."\n\nAdresse: \n".$abonne['adresse']."\n".$abonne['code_postal']." ".$abonne['ville']." ".$abonne['pays']
+		."\n\nEmail : ".$abonne['email']
+		."\nT&eacute;l&eacute;phone: ".$abonne['telephone']
+		."\n\nCommentaire: ".$abonne['commentaire'];
+		
+		if($produit == "abonnement")				
+		$message .= "\n\nAbonnement : ".$libelle ;
+
+		if($produit == "article")				
+		$message .= "\n\narticle : ".$libelle ;
+		
+		envoyer_mail ( $adresse_expediteur, $sujet, $message, $from = $expediteur, $headers = $entetes );
+		
+		// au demandeur
+		$adresse_site = $GLOBALS['meta']["adresse_site"];
+		$adresse= $abonne['email'];
+		$sujet = $sujet_message_ok ;
+		$message= $message_ok."\n\n";
+		
+		// envoyer un lien pour choisir son mdp le cas echeant
+		if($abonne['pass'] == ""){
+	 	include_spip('inc/acces'); # pour creer_uniqid
+		$cookie = creer_uniqid();
+		sql_updateq("spip_auteurs", array("cookie_oubli" => $cookie), "id_auteur=" . $abonne['id_auteur']);
+		$message .=  "Votre identifiant de connexion au site est : ".$abonne['login']
+		."\n\nCliquez le lien suivant pour choisir votre mot de passe"
+		."\n".generer_url_public('spip_pass','p='.$cookie, true);
+		}
+		
+		if($article['titre'] && $abonne['pass'] == "")
+			$message .= "\n\n Vous pourrez ensuite vous connecter et acceder a votre article en suivant ce lien \n\n"
+			.$article['titre']." (".$adresse_site."/?page=article&id_article=".$article['id_article'].")";
+		
+		if($article['titre'] && $abonne['pass'] != "")
+			$message .= "\n\n Vous pouvez acceder a votre article en suivant ce lien \n\n"
+			.$article['titre']." (".$adresse_site."/?page=article&id_article=".$article['id_article'].")";
+		
+			
+		$message .= "\n\n".$nom_expediteur."\r\n";
+		
+		envoyer_mail ( $adresse, $sujet, $message, $from = $expediteur, $headers = $entetes );
+		envoyer_mail ('booz@rezo.net', $sujet, $message, $from = $expediteur, $headers = $entetes );
+	
+	}
+
+	elseif ($validation_paiement == "erreur_bank") {
+	
+		$sujet= "[".$nom_expediteur."-abo] Echec abonnement : ".$abonne['nom_famille'] ;
+		//au webmaster
+		$message = "Un abonn&eacute; n'a pas pu valider son abonnement (refus du paiement par la banque) :\n\nNom : ".$abonne['nom_famille']."\nPr&eacute;nom : ".$abonne['prenom']."\n\nAdresse : \n".$abonne['adresse']."\n".$abonne['code_postal']." ".$abonne['ville']." ".$abonne['pays']
+		."\n\nEmail : ".$abonne['email']
+		."\nT&eacute;l&eacute;phone : ".$abonne['telephone']
+		."\n\nCommentaire : ".$abonne['commentaire'];
+		
+		if($produit == "abonnement")				
+		$message .= "\n\nAbonnement : ".$libelle ;
+
+		if($produit == "article")				
+		$message .= "\n\narticle : ".$libelle ;
+		
+		
+		envoyer_mail ( $adresse_expediteur, $sujet, $message, $from = $expediteur, $headers = $entetes );
+		
+		// au demandeur
+		$adresse= $abonne['email'];
+		$sujet = $sujet_message_ko ;
+		$message= $message_ko."\n\n\n".$nom_expediteur."\r\n";
+		envoyer_mail ( $adresse, $sujet, $message, $from = $expediteur, $headers = $entetes );
+		envoyer_mail ('booz@rezo.net', $sujet, $message, $from = $expediteur, $headers = $entetes );
+	}
+}
+
+//utiliser le cron pour gerer les dates de validite des abonnements et envoyer les messages de relance
+function abonnement_taches_generales_cron($taches_generales){
+	// toutes les 24 heures car verification sur le jour - passer a deux fois par jour car il peut y en avoir beaucoup
+	$taches_generales['abonnement_cron'] = 60*60*24 ;
+	return $taches_generales;
+}
+
+
+?>

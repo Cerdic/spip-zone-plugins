@@ -1,0 +1,34 @@
+[(#REM)
+
+	Controleur pour le crayon 'auteur_listes' (spip-listes), uniquement html ... pour l'instant
+
+]
+#CACHE{0}
+
+[(#ENV**|htmlentities)]
+
+<BOUCLE_a(AUTEURS){id_auteur}{tous}>
+	<fieldset><legend>General</legend>
+	<label><:ecrire:info_nom:> :</label> <input class="crayon-active" name="#ENV{name_nom}"
+	 style="width:#ENV{largeur}px;" value="[(#NOM**|entites_html)]" />
+	 <br />
+	 <label><:ecrire:email_2:></label> <input class="crayon-active" name="#ENV{name_email}"
+	 style="width:#ENV{largeur}px;" value="[(#EMAIL**|entites_html)]" />
+	</fieldset>
+	<B_l>
+		<fieldset><legend>Abonn&eacute;e? &agrave;</legend>
+		<select class="crayon-active" name="#ENV{name_listes[]}" multiple="multiple" >
+	<BOUCLE_l(LISTES)>
+		<option
+		 style="width:#ENV{largeur}px;" value="#ID_LISTE"
+		<BOUCLE_al(SPIP_AUTEURS_LISTES){id_auteur}{id_liste}{tous}>
+			selected="selected"
+		</BOUCLE_al>
+		>
+		#TITRE
+		</option>
+	</BOUCLE_l>
+		</select>
+		</fieldset>
+	</B_l>
+</BOUCLE_a>

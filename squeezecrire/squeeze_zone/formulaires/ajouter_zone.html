@@ -1,0 +1,82 @@
+<script  type="text/javascript"><!--
+	
+	var appliquer_selecteur_cherche_auteur = function() {
+
+		// chercher l'input de saisie
+		var inp = jQuery('input[@name=add_user]', this);
+		var id_article = '#ENV{article}';
+		<BOUCLE_rub(ARTICLES){id_article=#ENV{article}}>
+		var id_rubrique = '#ID_RUBRIQUE';
+		</BOUCLE_rub>
+		
+		// ne pas reappliquer si on vient seulement de charger les suggestions
+		if (!inp[0] || inp[0].autoCFG) return;
+
+		// attacher l'autocompleter
+		inp.each(function() {
+			var me = this;
+			jQuery(this)
+			.Autocomplete({
+				'source': '#URL_PAGE{selecteur_people}\x26id_article='+id_article+'\x26id_rubrique='+id_rubrique,
+				'delay': 200,
+				'autofill': false,
+				'helperClass': "autocompleter",
+				'selectClass': "selectAutocompleter",
+				'minchars': 2,
+				'mustMatch': true,
+				'inputWidth': false,
+				'cacheLength': 20,
+				'multiple' : false,
+				'multipleSeparator' : ";",
+				fx : {type: "fade", duration: 400},
+				'onShow' : function(suggestionBox, suggestionIframe) {
+					jQuery('.autocompleter, .selectAutocompleter').fadeTo(300,1);
+				},
+				'onSelect': 
+				function(li) {
+					if (li.id > 0) {
+						var id = li.id;
+						jQuery('#add_id_auteur').val(id);
+						jQuery('#formulaire_ajouter_zone input[type="submit"]').focus();
+						jQuery(me)
+						.end();
+					}
+				}
+			});
+		});
+	}
+	jQuery(document).ready(appliquer_selecteur_cherche_auteur);
+	onAjaxLoad(function(){setTimeout(appliquer_selecteur_cherche_auteur, 200);});
+// --></script>
+
+<div class="formulaire_spip formulaire_ajouter_zone" id="formulaire_ajouter_zone">
+<form action="#ENV{url}#formulaire_ajouter_zone" method="post">
+<BOUCLE_zone(ZONES_RUBRIQUES){id_rubrique=#ENV{rubrique}}>
+	<p>
+	<label for="supprimer_zone"><img src="#CHEMIN{images/squeeze_lock_open.png}" alt="<:squeezezone:rendre_public:>" /> <:squeezezone:rendre_public:></label>
+	<input type="checkbox" name="supprimer_zone" id="supprimer_zone" title="<:squeezezone:supprimer_zone:>" />
+	</p>
+	
+	<div>
+	<p><:squeezezone:add_user_zone:></p>
+	<input name="add_user" class="forml" id="add_user" onclick="jQuery(this).val('');jQuery('#add_id_auteur').val('');" />
+	<input type="hidden" name="add_id_auteur" id="add_id_auteur" value="" />
+	</div>
+
+	<p>
+	<label for="add_as_auteur"><:squeezezone:add_as_auteur:> </label>
+	<input type="checkbox" name="add_as_auteur" id="add_as_auteur" title="<:squeezezone:add_as_auteur:>" />
+	</p>
+</BOUCLE_zone>
+
+</B_zone>
+<p>
+	<label for="creer_zone"><img src="#CHEMIN{images/squeeze_lock_add.png}" alt="<:squeezezone:rendre_prive:>" /> <:squeezezone:rendre_prive:> </label>
+	<input type="checkbox" name="creer_zone" id="creer_zone" title="<:squeezezone:creer_zone:>" />
+</p>
+<//B_zone>
+	<p class="spip_bouton">
+		<input type="submit" name="valider" class="valider" value="<:squeezezone:bouton_valider:>" />
+	</p>
+</form>
+</div>

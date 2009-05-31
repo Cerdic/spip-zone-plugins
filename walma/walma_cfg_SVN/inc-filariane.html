@@ -1,0 +1,11 @@
+[(#REM) Fil d'Ariane ]
+<BOUCLE_ariane_article(ARTICLES){id_article}>
+<div id="wariane"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_arianeart(HIERARCHIE){id_article}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_arianeart>[ &gt; (#TITRE|couper{80})]</div>
+</BOUCLE_ariane_article>
+</B_ariane_article>
+
+	<BOUCLE_ariane_rubrique(RUBRIQUES){id_rubrique}>
+	<div id="wariane"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_arianerub(HIERARCHIE){id_rubrique}>&gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_arianerub>[ &gt; (#TITRE|couper{80})]</div>
+	</BOUCLE_ariane_rubrique>
+	
+<//B_ariane_article>

@@ -1,0 +1,21 @@
+<form action='#ENV{url}' method='post' style='margin:0px; padding:0px;'>
+	[<input type='hidden' name='url' value='(#ENV{cible})' />]
+	#ENV{texte}
+	<select name='#ENV{nom}' 
+		  [(#EVAL{_DIR_RESTREINT}|?{' ',''})
+		  class='forml' style='vertical-align: top; max-height: 24px; margin-bottom: 5px; width: 120px;'
+			]
+			[(#EVAL{_DIR_RESTREINT}|?{'',' '})
+				[(#ENV{nom}|=={var_lang_ecrire}|?{' ',''})
+				class='verdana1' style='background-color: #ENV{couleur_foncee}; max-height: 24px; border: 1px solid white; color: white; width: 100px;'
+				]
+				[(#ENV{nom}|=={var_lang_ecrire}|?{'',' '})
+				class='fondl'
+				]
+			]
+	  onchange="document.location.href='[(#ENV**{url}|parametre_url{url,[(#ENV{cible}|replace{&amp,&})]})]&amp;#ENV{nom}='+this.options[this.selectedIndex].value">
+	  #ENV**{langues}
+	</select>
+	<noscript><div style='display:inline;'><input type='submit' name='Valider' value='&gt;&gt;' class='spip_bouton' /></div></noscript>
+</form>
+

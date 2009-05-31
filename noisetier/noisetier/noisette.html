@@ -1,0 +1,15 @@
+<BOUCLE_noisette(NOISETTES){id_noisette}>
+<?php
+	$contexte_noisette = array();
+	$contexte_noisette['fond'] = 'noisettes/#FOND';
+	$contexte_noisette['id_noisette'] = '#ID_NOISETTE';
+	<BOUCLE_env(PARAMS_NOISETTES){id_noisette}{type=env}>
+		$contexte_noisette['#TITRE'] = $contexte_inclus['#TITRE'];
+	</BOUCLE_env>
+	<BOUCLE_param(PARAMS_NOISETTES){id_noisette}{type=param}>
+		$contexte_noisette['#TITRE'] = '[(#VALEUR|addslashes)]';
+	</BOUCLE_param>
+	$contexte_inclus = $contexte_noisette;
+	include (_DIR_RESTREINT_ABS.'public.php');
+?>
+</BOUCLE_noisette>

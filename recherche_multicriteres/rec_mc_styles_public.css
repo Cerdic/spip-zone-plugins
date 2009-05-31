@@ -1,0 +1,157 @@
+/* 
+######################################################################
+# RECHERCHE MULTI-CRITERES -                                         #
+# 		STYLES POUR FORMULAIRE DE RECHERCHE & PAGE RESULTATS         #
+#                                                                    #
+# Auteurs : Dominique (Dom) Lepaisant                                #
+# www.etab.ac-caen.fr/bureaudestests/TiSpip/                         #
+# Stéphanie De Nadaï - www.webdesigneuse.net                         #
+#  - Fev 2008                                                        #
+#                                                                    #
+# Adaptation de la contrib de Paul Sanchez - www.Netdeveloppeur.com  #
+#                                                                    #
+# Ce programme est un logiciel libre distribue sous licence GNU/GPL. #
+# Pour plus de details voir le fichier COPYING.txt                   #
+######################################################################]
+*/
+#form_mc {
+clear:both; /* a commenter suivant le squelette */
+text-align:center;
+padding:.3em;
+border:1px solid #ccc;
+background:#f4f4f4;
+margin:.5em;
+}
+#form_mc label {
+font-weight:bold;
+}
+/* titre */
+.multicriteres {
+margin:.6em 0;
+width:100%;
+}
+.multicriteres h2 {
+font-weight:bold;
+font-size:1.2em;
+margin-bottom:0;
+text-align:left;
+}
+fieldset {
+border-top:1px solid #ccc;
+border-left:1px solid #ccc;
+border-right:2px solid #fff;
+border-bottom:2px solid #fff;
+background:#dedede;
+}
+legend {
+font-weight:bold;
+}
+fieldset p {
+margin:0;
+}
+fieldset em {
+display:block;
+font-size:small;
+font-weight:normal;
+border-bottom:1px dotted #666;
+margin:.3em;
+}
+/* container des listes de mots-cles */
+.liste_mc {
+width:100%;
+}
+/* liste de mots-cles */
+.liste_mc div {
+float:left;
+text-align:center;
+margin:.6em .3em 0;
+}
+/* titre de liste de mots-cles */
+.liste_mc div p {
+margin:0;
+}
+/* titre de liste de mots-cles - cases a cocher*/
+.liste_mc div p.check{
+margin:0 .7em;
+text-align:left;
+}
+/* les mots-cles */
+.liste_mc div select {
+width:10em;
+}
+.sel_mc {
+height:5em;
+}
+/* bloc d'options de recherche */
+fieldset.options_mc {
+clear:both;  /* a commenter suivant le squelette */
+text-align:left;
+margin-top:.8em;
+}
+.button_mc {
+background-color:#fff;
+border:1px solid #2e5035; 
+font-size:small; 
+font-family:Arial, sans-serif; 
+font-weight:normal;
+}
+.copyleft_mc {
+text-align:right;
+font-size:x-small; 
+font-family:Verdana, Arial, Helvetica, sans-serif;
+margin-bottom:0;
+}
+.copyleft_mc a {
+color:#CCC; 
+}
+
+/* 
+ * -------------------------------
+ *  PAGE DE RESULTATS
+ * ------------------------------- 
+ */
+/* container des résultats */
+.page_result_mc .contre-encart {
+background:#f4f4f4;
+border:1px solid #ccc;
+padding:.5em;
+margin-bottom:1em;
+}
+.page_result_mc h1 {
+font-size:1.3em;
+border-bottom:1px dotted #ccc;
+margin-bottom:.5em;
+}
+/* liste des mots recherchés */
+.mots_mc {
+text-align:center; 
+font-weight:bold;
+}
+.mots_mc a {
+font-size:smaller; 
+font-weight:normal;
+}
+.page_result_mc .liste-articles h2 {
+font-size:.9em;
+font-weight:bold;
+background: url(img_pack/key_go.png) no-repeat 0 0;
+padding-left : 20px;
+}
+/* liste des résultats <ul> */
+.result_mc {
+list-style:none;
+margin-left:0;
+padding-left:0;
+}
+.result_mc li {
+background: url(img_pack/page_key.png) no-repeat 0 0;
+padding-left: 20px;
+margin:.6em 0 .6em 1em;
+}
+.result_mc li small {
+display:block;
+}
+.result_mc li em {
+font-size:.8em;
+}
+

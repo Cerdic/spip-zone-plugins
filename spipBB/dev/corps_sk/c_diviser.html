@@ -1,0 +1,192 @@
+#CACHE{0}
+[(#REM) Plugin SpipBB - Licence GPL]
+[(#REM) SpipBB - Affichage des elements d'information sur une adresse et un auteur dans un forum ]
+[(#REM) (c) 2008 - chryjs ]
+
+<BOUCLE_recap(FORUMS){id_forum}{doublons}>
+
+	<INCLURE{fond=inc_teteforum}{id_article}>
+
+	#SET{secteur,#CONFIG{spipbb/id_secteur}}
+
+	[(#REM) c: 11/1/8 on determine si on est admin (pour l'affichage)]
+	[(#REM) Probleme des admin restreints a revoir... #SESSION{statut} ? ]
+	#SET{admin,#SESSION{id_auteur}|is_modo{#ID_ARTICLE}}
+
+	<?php if ( "#GET{admin}"=="oui" ) { ?>
+
+	<p class="space_20"></p>
+
+	<div class="chemin">
+		<a href="#ENV{retour}"><:retour:></a>
+	</div>
+
+	<p class="space_10"></p>
+
+	<B_art_secteur>
+	#SET{nomform,'formdiviser'}
+	<form method="post" action="#URL_ACTION_AUTEUR{spipbb_agir_forum,#ID_FORUM-diviser,#ID_ARTICLE|generer_url_entite{article}}" name="#GET{nomform}">
+	<table class="spipforum" id="profile">
+		<tr>
+			<th colspan="3"><:spipbb:diviser_confirmer:></th>
+		</tr>
+
+		<tr class="ligne_sujet">
+			<td colspan="3"><:spipbb:diviser_expliquer:></td>
+		</tr>
+
+		<tr class="ligne_sujet">
+			<td colspan="3">
+			<:spipbb:diviser_dans_dpt:>
+			<select name='nouveau_forum' style='width:80%'>
+	<BOUCLE_art_secteur(ARTICLES){id_secteur=#GET{secteur}}{tout}>
+				<option value='#ID_ARTICLE'>#TITRE</option>
+	</BOUCLE_art_secteur>
+			</select>
+		</tr>
+		<tr>
+			<td colspan="3" style='text-align:center'>
+			<:spipbb:diviser_confirmer:>
+			<input type="submit" name="liste" value="<:spipbb:diviser_separer_choisis:>" class='fondo' />
+			&nbsp;
+			<input type="submit" name="suite" value="<:spipbb:diviser_separer_suite:>" class='fondo' />
+			</td>
+		</tr>
+
+		[(#REM) Il faut qu'il y ait au moins un autre forum sinon ce n'est pas la peine ]
+
+		<B_posts>
+		<tr>
+			<th><:auteur:></th>
+			<th><:spipbb:message_s_dpt:></th>
+			<th><:spipbb:diviser_selection_dpt:></th>
+		</tr>
+
+		<tr class="inter entete_sujet">
+			<td id="forum#ID_FORUM" colspan="3">
+				<span class="text_nom">
+				<B_auteurp>
+				[(#REM) c.23/12/7 on passe par la page profile]
+				<BOUCLE_auteurp(AUTEURS){id_auteur}{tout}>
+					<a
+					[(#SPIPBB{annuaire_forum}|!={'non'}|?{' ',''})
+					 href="[(#URL_PAGE{profile}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_article,#ID_ARTICLE})]"
+					]
+					>#NOM</a>
+				</BOUCLE_auteurp>
+
+				</B_auteurp>
+					[(#NOM|sinon{<:spipbb:anonyme:>})]
+				<//B_auteurp>
+				</span>
+				<span class="text_titre"><:spipbb:en_rep_sujet_:>#TITRE</span>
+			</td>
+		</tr>
+		<tr class="ligne_sujet">
+			<td class="aff_avatar" rowspan="2">
+				[(#AFFICHE_AVATAR|image_reduire{#CONFIG{'spipbb/taille_avatar_suj'}})]
+			</td>
+			<td class="date_sujet">
+				<span><:spipbb:poster_date_:>[(#DATE|nom_jour)] [(#DATE|affdate)][ - (#DATE|heures)]:[(#DATE|minutes)]</span>
+			</td>
+		</tr>
+		<tr class="ligne_sujet">
+			<td>
+				[(#TEXTE|lignes_longues|smileys)]
+
+				[(#REM) signature auteur ]
+				[<p class="signature">(#SIGNATURE_POST)</p>]
+
+				[
+				<p class="space_10"></p>
+				<a class="lien_propose" href="#URL_SITE">(#NOM_SITE)</a>
+				]
+			</td>
+		</tr>
+		<tr class="inter">
+			<td colspan="3">&nbsp;</td>
+		</tr>
+
+		<BOUCLE_posts(FORUMS){id_thread}{plat}{par date}{doublons}{"<tr><th colspan='3'></th></tr>"}>
+		<tr class="ligne_sujet row[(#COMPTEUR_BOUCLE|alterner{2,1})]">
+			<td  id="forum#ID_FORUM" colspan="2" class="ligne_nom">
+				<span class="text_nom">
+				<B_auteurpr>
+				[(#REM) c.23/12/7 on passe par la page profile]
+				<BOUCLE_auteurpr(AUTEURS){id_auteur}{tout}>
+					<a
+					[(#SPIPBB{annuaire_forum}|!={'non'}|?{' ',''})
+					 href="[(#URL_PAGE{profile}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_article,#ID_ARTICLE})]"
+					]
+					>#NOM</a>
+				</BOUCLE_auteurpr>
+
+				</B_auteurpr>
+					[(#NOM|sinon{<:spipbb:anonyme:>})]
+				<//B_auteurpr>
+				</span>
+				<span class="text_titre"><:spipbb:post_titre:>#TITRE</span>
+			</td>
+			<td rowspan='3' style='text-align:center;'>
+			<input type='checkbox' name='sel_id[]' value='#ID_FORUM' />
+			</td>
+		</tr>
+		<tr class="ligne_sujet row[(#COMPTEUR_BOUCLE|alterner{2,1})]">
+			<td class="aff_avatar" rowspan="2">
+				[(#AFFICHE_AVATAR|image_reduire{#CONFIG{'spipbb/taille_avatar_suj'}})]
+			</td>
+			<td class="date_sujet">
+				<span><:spipbb:poster_date_:>[(#DATE|nom_jour)] [(#DATE|affdate)][ - (#DATE|heures)]:[(#DATE|minutes)]</span>
+			</td>
+		</tr>
+		<tr class="ligne_sujet row[(#COMPTEUR_BOUCLE|alterner{2,1})]">
+			<td>
+				[(#TEXTE|lignes_longues|smileys)]
+
+				[(#REM) signature auteur ]
+				[<p class="signature">(#SIGNATURE_POST)</p>]
+
+				[
+				<p class="space_10"></p>
+				<a class="lien_propose" href="#URL_SITE">(#NOM_SITE)</a>
+				]
+			</td>
+		</tr>
+		</BOUCLE_posts>
+		<tr class="ligne_sujet"><td colspan='3'>[(#GET{nomform}|tout_de_selectionner)]</td></tr>
+		<tr>
+			<th colspan="3" style='text-align:center'>
+			<:spipbb:diviser_confirmer:>
+			<input type="submit" name="liste" value="<:spipbb:diviser_separer_choisis:>" class='fondo' />
+			&nbsp;
+			<input type="submit" name="suite" value="<:spipbb:diviser_separer_suite:>" class='fondo' />
+			</th>
+		</tr>
+	</table>
+	</form>
+
+	</B_art_secteur>
+	<table class="spipforum" id="profile">
+		<tr class="ligne_sujet">
+			<td colspan="3">
+			<:spipbb:diviser_vide:>
+			</td>
+		</tr>
+	</table>
+	<//B_art_secteur>
+
+
+	<?php } ?>
+
+	<INCLURE{fond=inc_piedforum}{id_article}>
+
+</BOUCLE_recap>
+</B_recap>
+	[(#REM) si visiteur non identifie : form login ]
+	[(#SESSION{id_auteur}|=={''}|?{' ',''})<div class="login"><p class="login"><:spipbb:login:></p>]
+	#FORMULAIRE_LOGIN{#SELF}
+	[(#SESSION{id_auteur}|=={''}|?{' ',''})
+	&#91;<a[ href="(#URL_PAGE{spip_pass})"] target="spip_pass" onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=280'); return false;"><:login_motpasseoublie:></a>&#93;
+	</div>
+	]
+<//B_recap>

@@ -1,0 +1,354 @@
+[(#REM)
+
+	Ce squelette definit les styles de l'espace prive
+
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
+]
+#CACHE{360*1000}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+.nav_logo_rub{
+	float:left;
+}
+#bandeautoutsite,#bandeautoutsite ul {
+	float: left;
+	list-style: none;
+	line-height: 1;
+	background-color:	##ENV{couleur_claire,edf3fe};
+	color: #606060;
+	font-weight: bold;
+	padding: 0;
+	border: solid ##ENV{couleur_claire,edf3fe};
+	border-width: 1px;
+	margin: 0 0 0 0;
+	text-align:left;
+	width:16em;
+} 
+#bandeautoutsite ul {
+	border-width: 1px 0;
+}
+
+#bandeautoutsite a {
+	display: block;
+	width: 13em;
+	w\idth: 9em;
+	text-decoration: none;
+	padding: 0.25em 2em;
+}
+
+#bandeautoutsite a.daddy {
+	background: url([(#ENV{ltr}|choixsiegal{left,triangle-droite.gif,triangle-droite_rtl.gif})]) center [(#ENV{ltr}|choixsiegal{left,right,left})] no-repeat;
+}
+
+#bandeautoutsite li {
+float:left;
+	padding-right: 1em;
+	width: 14em
+}
+
+#bandeautoutsite li ul {
+	position: absolute;
+	left: -999em;
+	top: -999em;
+	height: auto;
+	width: 14.4em;
+	w\idth: 13.9em;
+	font-weight: normal;
+	border-width: 1px;
+	border: solid ##ENV{couleur_foncee,edf3fe};
+	margin: 0;
+	margin-top: -1.75em;
+	margin-left: 10em;
+}
+
+#bandeautoutsite li li {
+	padding-right: 1em;
+	width: 13em
+}
+
+#bandeautoutsite li ul a {
+	width: 13em;
+	w\idth: 9em;
+}
+
+#bandeautoutsite li ul ul {
+	margin-top: -1.75em;
+	margin-left: 10em;
+}
+
+#bandeautoutsite li:hover ul ul, #bandeautoutsite li:hover ul ul ul, #bandeautoutsite li:hover ul ul ul ul,
+#bandeautoutsite li.sfhover ul ul, #bandeautoutsite li.sfhover ul ul ul, #bandeautoutsite li.sfhover ul ul ul ul
+{
+	left: -999em;
+	top: -999em;
+}
+
+
+#bandeautoutsite li:hover ul, 
+#bandeautoutsite li li:hover ul, 
+#bandeautoutsite li li li:hover ul,
+#bandeautoutsite li li li li:hover ul
+{
+	left: auto;
+	top:auto;
+}
+
+#bandeautoutsite li.sfhover ul{
+	left:auto;
+	top:auto;
+}
+#bandeautoutsite li li.sfhover ul,
+#bandeautoutsite li li li.sfhover ul,
+#bandeautoutsite li li li li.sfhover ul,
+{
+	left: auto;
+	top:auto;
+}
+
+#bandeautoutsite li:hover, #bandeautoutsite li.sfhover,
+#bandeautoutsite li:hover>a {
+	background-color: #85909A;
+	color: #fff;
+}
+#bandeautoutsite li a:hover, #bandeautoutsite li.sfhover a {
+	color: #fff;
+}
+
+
+
+.ahah_searching_left{
+	float:left;
+	width:13;
+	height:13;
+	background: url(searching.gif) center center no-repeat;
+}
+.ahah_searching_right{
+	float:right;
+	width:13;
+	height:13;
+	background: url(searching.gif) center center no-repeat;
+}
+.bandeau_boite2_icone{
+	position: absolute;
+	top: -12px;
+	[(#ENV{ltr}|choixsiegal{left,left,right})]: 3px;
+}
+.bandeau_boite2{
+	background-color: ##ENV{couleur_foncee};
+	color: #fff;
+	padding: 3px;
+	padding-[(#ENV{ltr}|choixsiegal{left,left,right})]: 30px;
+	border-bottom: 1px solid #444444;
+}
+
+/*style for horizontal list <div class='h-list'><ul ><li><tag class='menu-item'></tag></li></ul></div>*/
+/*for IE item list must be specified in .menu-item*/
+/*possible added classes lefted centered righted vcentered*/  
+
+.h-list {display:table}
+.h-list ul {
+	display:table-row;
+	list-style:none;
+	padding:0;
+	margin:0;
+}
+/*clear without markup*/
+*  html .h-list ul {height:1%}
+/*end clear without markup*/
+
+.h-list li {display:table-cell;padding:0;margin:0}
+* html .h-list li {display:inline}
+
+* html .h-list li .menu-item {float:[(#ENV{ltr}|choixsiegal{left,left,right})];margin:0 -2px}
+.h-list ul>li .menu-item {width:auto !important}
+
+.vcentered li {vertical-align:middle}
+.lefted {margin:0 auto 0 0;}
+.centered {margin:0 auto;}
+.righted {margin:0 0 0 auto;}
+
+/*style for bandeau-principal*/
+#bandeau-principal {padding-top:5px;border-bottom: 1px solid #000;position:relative;z-index:90;background:#fff}
+#bandeau-principal .h-list .menu-item {margin:0 auto}
+* html #bandeau-principal li * {word-wrap:break-word}
+
+#bandeau-principal a .icon_fond {
+	background:##ENV{couleur_claire,edf3fe};
+	height:48px;
+	width:48px;
+	margin:auto;
+}
+#bandeau-principal a.selection .icon_fond {
+	width:48px;
+	margin:auto
+}
+#bandeau-principal a:hover span.icon_fond {
+	background:url(#EVAL{_DIR_IMG_PACK}fond-gris-anim.gif);
+	height:48px;
+	width:48px;
+	margin:auto;
+}
+#bandeau-principal li.boutons_admin:hover .bandeau_sec,
+#bandeau-principal li.boutons_admin.sfhover .bandeau_sec
+ {
+	display:block;
+}
+#bandeau-principal span.icon_fond span {
+	behavior: url(../win_back_png.htc);
+	background:center top no-repeat;
+	height:48px;
+	display:block;
+	width:48px;
+	margin:0
+}
+/*style for #bandeau_couleur*/
+* html #bandeau_couleur ul {padding:2px 0}
+.bandeau_couleur {text-align: [(#ENV{ltr}|choixsiegal{left,left,right})];padding:0px;margin:0px}
+
+* html #bandeau_couleur .menu-item {height:22px}
+
+#bandeau_couleur {min-height:20px;padding:2px 0}
+#bandeau_couleur1 .menu-item {width:230px}
+#bandeau_couleur3 .menu-item {width:150px;text-align:[(#ENV{ltr}|choixsiegal{left,right,left})]}
+#bandeau_couleur4 .menu-item {width:68px;text-align:center;margin:0 5px}
+* html #bandeau_couleur4 .menu-item{margin:0 11px} 
+#bandeau_couleur5 .menu-item {width:114px;}
+#bandeau_couleur6 .menu-item {width:32px}
+* html #bandeau_couleur6 .menu-item {margin-[(#ENV{ltr}|choixsiegal{left,left,right})]:-3px;margin-[(#ENV{ltr}|choixsiegal{left,right,left})]:-6px}
+/*style for submenus*/
+.bandeau_sec {
+	margin-top: 0;
+	padding: 2px;
+	padding-top: 0;
+	background-color: #fff;
+	border-bottom: 1px solid #000;
+	border-left: 1px solid #000;
+	border-right: 1px solid #000;
+	-moz-border-radius-bottomleft: 5px;
+	-moz-border-radius-bottomright: 5px;
+	z-index: 100;
+	display:none;
+	position:absolute;
+}
+* html .bandeau_sec {float:none}
+* html .bandeau_sec ul {display:inline}
+/*style for gadgets*/ 
+#bandeau-gadgets {margin:0 auto;position: relative; z-index: 80;top:2px}
+* html #bandeau-gadgets {text-align:center;height:1%}
+#bandeau-gadgets .bandeau_couleur_sous {visibility:visible;display:none}
+
+/*
+ * Icones horizontales
+ */
+ 
+.icone_horizontale_gadget{
+	float:left;
+	width:48%;
+	margin:3px;
+}
+
+a.icone-h {
+	display: block;
+clear:left;
+	float:left;
+}
+a.icone-h {
+	font-family: Verdana, Arial, Sans, sans-serif;
+	font-weight: bold;
+	font-size: 10px;
+	text-align: left;
+	text-decoration: none; 
+	color: #666;
+}
+a.icone-h:hover, a.icone-h:hover a.icone-h, a.icone-h a.icone-h:hover {
+	font-family: Verdana, Arial, Sans, sans-serif;
+	font-weight: bold;
+	font-size: 10px;
+	text-align: left;
+	text-decoration: none; 
+	color: #000;
+}
+a.icone-h{
+	padding: 0;
+	border: 1px solid #fff;
+	-moz-border-radius: 5px;
+	margin: 0;
+	margin-right: 3px;
+margin-right:5px;
+}
+a.icone-h:hover{
+	padding: 0;
+	border: 1px solid #9DBA00;
+	background: url(ecrire/img_pack/fond-gris-anim.gif);
+	-moz-border-radius: 5px;
+	margin: 0;
+	margin-right: 3px;
+}
+a.icone-h img {
+	width: 24px;
+	height: 24px;
+	border: none;
+	margin: 3px;
+	background-color: transparent;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+a.icone-h a.aide img {
+	width: 12px; height: 12px;
+}
+
+
+a.icone-h-texte {
+	text-align: left;
+	font-family: Trebuchet Sans MS, Arial, Sans, sans-serif;
+	font-weight: bold;
+	font-size: 11px;
+	color: #606060;
+	padding: 4px;
+	margin: 3px;
+}
+.danger a.icone-h-texte {
+	border: 1px dashed #000;
+	background: url(ecrire/img_pack/rayures-sup.gif);
+}
+a.icone-h-texte:hover {
+	text-decoration: none;
+	color: #000;
+}
+
+/*icone orizzontali centrate verticalmente*/
+a.h-icon {display:table;height:30px}
+* html a.h-icon {cursor:pointer}
+.h-icon-row {display:table-row;min-height:30px;}
+* html .h-icon-row {display:block;height:100%}
+.h-icon-cell {
+	display:table-cell;
+	vertical-align:middle;
+	min-height:30px;
+}
+* html .h-icon-cell {display:inline-block;padding-left:30px;}
+.h-icon-cell-ie {display:table-cell;vertical-align:middle;width:28px;height:28px;border: 1px solid transparent}
+* html .h-icon-cell-ie {display:inline-block;vertical-align:middle;height:100%;width:28px;margin-[(#ENV{ltr}|choixsiegal{right,left,right})]:-28px}
+a.h-icon .h-icon-cell-fond {
+	background: 2px center no-repeat;
+	height:30px;width:30px;
+	display:block;
+}
+* html a.h-icon .h-icon-cell-fond {display:inline-block;margin-[(#ENV{ltr}|choixsiegal{right,left,right})]:-30px;}
+a.h-icon:hover .h-icon-cell-ie {
+	background:url(#EVAL{_DIR_IMG_PACK}fond-gris-anim.gif);
+	border: 1px solid ##ENV{couleur_foncee,edf3fe};
+	-moz-border-radius:5px;
+	/*width:28px;height:28px*/
+}
+
+/*fine icone orizzontali*/
+

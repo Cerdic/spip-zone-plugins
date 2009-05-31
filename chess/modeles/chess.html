@@ -1,0 +1,127 @@
+[(#REM) Modèle pour l'affichage d'une partie à partir d'un fichier attaché à l'article]
+
+[(#REM) Test pour savoir si la configuration a été validée à un moment et sinon, ça appelle le plugins de configuration avec la page de configuration de chess]
+[(#CONFIG{chess/vitesse}|choixsivide{<:chess:erreur_config:> , ""})]
+
+<div id="mainContainer">
+
+<B_documents>
+[(#REM) début du container principal]
+
+	
+[(#REM) début du container de l'échiquier]	
+	<div id="players"></div>
+	<div id="boardContainer">
+		<div id="board"></div>
+			<div id="buttons">
+					<input class="fleche" type="button" value="&lt;&lt;" onclick="chessObj.moveToStart()" />
+					<input class="fleche" type="button" value="&lt;" onclick="chessObj.move('-1')" />
+					<input class="fleche" type="button" value="&gt;" onclick="chessObj.move(1)" />
+					<input class="fleche" type="button" value="&gt;&gt;" onclick="chessObj.moveToEnd(1)" />
+					<input class="jouer" type="button" value="<:chess:details_jouer:>" onclick="chessObj.autoPlay()" />
+					<input class="jouer" type="button" value="<:chess:details_stop:>" onclick="chessObj.stopAutoPlay()" />
+					<input class="flip" type="button" value="<:chess:details_options_inverser:>" onclick="chessObj.flip();return false" />
+				</div>
+				
+  
+[(#REM) options, ne restent plus que les infos sur l'évènement, joueurs etc...]
+  			
+<div class="infos">
+<:chess:details_info_blanc:>
+<span id="details_white"> </span> <span id="details_white_elo">	</span> <br />
+<:chess:details_info_noir:>			
+<span id="details_black"> </span> <span id="details_black_elo">	</span>	<br />
+<:chess:details_info_resultat:>
+<span id="details_result"> </span> <br />
+<:chess:details_info_evennement:>
+<span id="details_event">	</span><br />
+<:chess:details_info_date:>
+<span id="details_date"> </span>
+<:chess:details_info_round:>
+<span id="details_round"> </span>
+</div>
+					
+	</div>  [(#REM) fin du container de l'échiquier]
+	
+[(#REM) début de la colonne de droite]	
+	
+	<div id="rightColumn">
+		<div id="tabs">
+			<div id="tabDetails" onclick="showDetails()" class="tabInactive"><span><:chess:liste_details:></span></div>
+			<div id="tabGames" onclick="showGames()" class="tabActive"><span><:chess:liste_parties:></span></div>
+			<div id="tabPgns" onclick="showPgns()" class="tabInactive"><span><:chess:liste_fichiers_pgn:></span></div>
+			
+		</div>	
+		<div id="gameListContainer">
+			<div id="pgnList">
+				<div id="divListOfPgns">
+					<table id="listOfPgnFiles" cellspacing="0" cellpadding="2">
+						<thead>
+							<tr>
+								<td><b><:chess:pgn_dispo:></b></td>
+							</tr>
+						</thead>
+						<tbody>
+<BOUCLE_documents(DOCUMENTS){id_article=#ENV{id}}{par date}{inverse}{extension==pgn}>
+<tr>
+		<td><a href="#" onclick="chessObj.setPgn('../../[(#URL_DOCUMENT)]');chessObj.displayGameListInTable('gameListTable');return false">[(#TITRE)]</a></td>
+							</tr>
+</BOUCLE_documents>
+</tbody>
+					</table>
+				</div>			
+			</div>
+			<div id="gameList">
+				<table id="gameListTable" cellspacing="0" cellpadding="2">
+				  		<thead>
+						<tr>
+							<td><:chess:parties_voir:></td>
+							<td><:chess:parties_blanc:></td>
+							<td><:chess:parties_noir:></td>
+							<td><:chess:parties_resultat:></td>
+						</tr>
+						</thead>
+						<tbody>	<tr> <td></td>	</tr></tbody>
+					</table>
+
+			</div>
+			<!-- This div displays move - it will be made visible by a callback sent to the constructor of the chessObj -->
+			<div id="moveTab">
+				<div id="divMoves">
+				</div>		
+	
+				
+			</div>
+		</div>
+	</div>
+
+<script type="text/javascript">
+
+var chess_languageCode = '[(#ENV{lang})]';
+
+var chessObj = new DHTMLGoodies.Chess({ bgImageDarkSquares:'[(#CHEMIN{images/piece_bg_[(#CONFIG{chess/taille})]_dark5.png})]',
+bgImageLightSquares:'[(#CHEMIN{images/piece_bg_[(#CONFIG{chess/taille})]_light.png})]',
+animationSpeed:[(#CONFIG{chess/vitesse})],
+autoplayDelayBeforeComments:[(#CONFIG{chess/delai})],
+stopAutoplayBeforeComments:[(#CONFIG{chess/arreter})],
+callbackOnSwitchPgn:'showGames',
+callbackOnGameLoaded:'showDetails',
+parentRef:'board',
+pgnFile:<BOUCLE_documentseul(DOCUMENTS){id_article=#ENV{id}}{par date}{inverse}{0,1}{extension==pgn}>'../../[(#URL_DOCUMENT)]'</BOUCLE_documentseul>,
+chessSet:'[(#CONFIG{chess/pieces})]',
+squareSize:[(#CONFIG{chess/taille})],
+serverFile:'[(#CHEMIN{chess.php})]',
+elMovesInline:'divMoves',
+elPlayerNames:'players',
+elActiveMove:'activeMove',
+elGameAttributes:{ round:'details_round',white:'details_white',black:'details_black',event:'details_event',result:'details_result', WhiteElo:'details_white_elo', BlackElo:'details_black_elo',date:'details_date' } } );
+chessObj.__createDefaultPieces();
+chessObj.displayGameListInTable('gameListTable','view,white,black,result',{ jsObject:"chessObj",viewGameLink:'<:chess:parties_voir:>' });
+createScrollTable('gameListTable','290','[(#EVAL{20+ 8*[(#CONFIG{chess/taille})]})]');
+createScrollTable('listOfPgnFiles','290','[(#EVAL{20+ 8*[(#CONFIG{chess/taille})]})]');
+</script>
+<div id="debug"></div>
+<hr class="nettoyeur" />
+
+</B_documents>
+</div>

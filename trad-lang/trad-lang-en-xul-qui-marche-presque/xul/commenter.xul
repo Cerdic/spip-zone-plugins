@@ -1,0 +1,40 @@
+
+<window
+    id="commenter"
+    title="Trad-Lang-Comment"
+    orient="vertical"
+    debug="false"
+    onload="load_commenter();"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+<script>
+const SERVER_URL = "<? echo URLAPP; ?>/scripts/int.php";
+</script>
+
+<? echo '<script src="'.URLAPP.'/js/header.js" type="application/x-javascript" />'; ?>
+<? echo '<script src="'.URLAPP.'/js/commenter.js" type="application/x-javascript" />'; ?>
+
+    <description id="lgi" value="<? echo $this->app->lgi; ?>" hidden="true" />
+    <description id="lgc" value="<? echo $this->app->lgc; ?>" hidden="true" />
+    <description id="lt" value="<? echo $this->lt; ?>" hidden="true" />
+    <description id="mod" value="<? echo $this->mod; ?>" hidden="true" />
+
+<groupbox flex="1">
+  <caption label="xxx:Commentaire : <? echo $this->lt; ?>" />
+
+ <textbox flex="2" id="comm" multiline="true" ontextentered="comm_commenter('commenter','','');" value="<? echo xmlc($this->comm); ?>" />
+
+
+</groupbox>
+
+  <hbox>
+    <spacer flex="5" />
+    <button id="annuler" oncommand="comm_commenter('commenter', 'annuler','');" label="xxx:Annuler" image="<? echo URLAPP; ?>/images/stop2.gif" />
+    <button id="valider" oncommand="comm_commenter('commenter', 'valider', '<? echo $this->cmd2; ?>');" label="xxx:Valider" image="<? echo URLAPP; ?>/images/vert.gif" />
+  </hbox>
+
+
+<script src="<? echo URLAPP; ?>/js/footer.js" type="application/x-javascript" />
+
+</window>

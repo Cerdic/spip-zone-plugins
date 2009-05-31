@@ -1,0 +1,10 @@
+<plugin>
+	<nom>Archives mensuelles</nom>
+	<version>1.5</version>
+	<prefix>dtarch</prefix>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>dtarch.php</inclure>
+	</pipeline>
+	<necessite id="SPIP" version="[1.9.0;]" />
+</plugin>

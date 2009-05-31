@@ -1,0 +1,104 @@
+#CACHE{0}
+[(#REM) Plugin SpipBB - Licence GPL]
+[(#REM) SpipBB admin - Page de gestion des forums]
+
+<form method="post" action="#ENV{lien_action}">
+<input type='hidden' id="exec" value="#ENV{exec_script}" />
+
+[(#ENV{lien_action}|form_hidden)]
+
+[(#REM|debut_cadre_trait_couleur{1,'xxx',#ENV{import_titre}})]
+[(#REM) ------------------------ Configuration generale ------------------------ ]
+
+<fieldset>
+<legend>#ENV{import_parametres_rubrique}</legend>
+#ENV*{choix_rubrique}
+</fieldset>
+
+<fieldset>
+<legend>#ENV{import_parametres_titre}</legend>
+#ENV{import_parametres_base}
+<div><table border='1' cellspacing='1' cellpadding='3' width="100%">
+#ENV*{phorum_liste_fichiers}
+</table>
+<div style='border:1px solid black'>
+<table border='0' cellspacing='1' cellpadding='3' width="100%">
+<tr style='border:none'>
+	<td style='text-align:right'>
+		<label for='phorum_host'><:spipbb:import_host:></label>
+	</td>
+	<td>
+		<input type='text' id='phorum_host' name='phorum_host' value='localhost' />
+	</td>
+	<td rowspan='6'>
+		<input type='radio' name='fromphorum_source' value='#ENV{radio_checked}'
+		id='fromphorum_source_#ENV{radio_checked}'
+		[checked='(#ENV{radio_checked}|=={0}|?{checked})'] />
+	</td>
+</tr>
+<tr>
+	<td style='text-align:right'>
+		<label for='phorum_login'><:spipbb:fromphorum_login:></label>
+	</td>
+	<td>
+		<input type='text' id='phorum_login' name='phorum_login' value='' />
+	</td>
+</tr>
+<tr>
+	<td style='text-align:right'>
+		<label for='phorum_pass'><:spipbb:import_login:></label>
+	</td>
+	<td>
+		<input type='password' id='phorum_pass' name='phorum_pass' value='' /><br />
+	</td>
+</tr>
+<tr>
+	<td style='text-align:right'>
+		<label for='phorum_base'><:spipbb:fromphorum_base:></label>
+	</td>
+	<td>
+		<input type='text' id='phorum_base' name='phorum_base' value='' /><br />
+	</td>
+</tr>
+<tr>
+	<td style='text-align:right'>
+		<label for='phorum_prefix'><:spipbb:import_prefix:></label>
+	</td>
+	<td>
+		<input type='text' id='phorum_prefix' name='phorum_prefix' value='phorum_' /><br />
+	</td>
+</tr>
+<tr>
+	<td style='text-align:right'>
+		<label for='phorum_root'><:spipbb:import_password:></label>
+	</td>
+	<td>
+		<input type='text' id='phorum_root' name='phorum_root' value='' />
+	</td>
+</tr>
+</table>
+</div>
+</fieldset>
+
+<fieldset>
+<legend><:spipbb:import_choix_test_titre:></legend>
+<div><table border='0' cellspacing='1' cellpadding='3' width="100%">
+<tr>
+	<td align='left' class='verdana2'><:spipbb:import_choix_test:></td>
+	<td align='left' class='verdana2'>
+		<input type='radio' name='phorum_test' value='oui' id='phorum_test_1' [ checked="(#ENV{phorum_test}|=={'oui'}|?{checked})"] /> <label for='phorum_test_1'><:oui:></label>
+		&nbsp;
+		<input type='radio' name='phorum_test' value='non' id='phorum_test_0' [ checked="(#ENV{phorum_test}|=={'non'}|?{checked})"] /> <label for='phorum_test_0'><:non:></label>
+	</td>
+</tr>
+</table></div>
+</fieldset>
+
+[(#REM) ------------------------ BOUTON OK ------------------------ ]
+<div>
+<input style="float:#LANG_RIGHT;" type="submit" name="_spipbb_ok" value="<:OK:>" class="fondo" />
+</div>
+
+[(#REM|sinon{1}|fin_cadre_trait_couleur)]
+
+</form>

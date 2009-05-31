@@ -1,0 +1,161 @@
+
+    <description id="mod" value="<? echo $this->app->mref->nom; ?>" hidden="true" />
+    <description id="lgo" value="<? echo $this->app->lgo; ?>" hidden="true" />
+    <description id="lgc" value="<? echo $this->app->lgc; ?>" hidden="true" />
+    <description id="idxf" value="<? echo $this->idxf; ?>" hidden="true" />
+
+<groupbox flex="1" >
+  <caption label="Criteres de selection" />
+
+<grid>
+
+<columns>
+ <column flex="1" />
+ <column flex="1" />
+ <column flex="1" />
+ <column flex="1" />
+</columns>
+
+<rows>
+  <row>  
+	<description>
+	 <? echo _TT('ts:type_messages'); ?>
+	</description>
+	
+	<spacer  />
+
+      <menulist id="dt" flex="1">
+        <menupopup>
+	<?
+	  echo "<menuitem value='' oncommand='comm_traduire(\"traduire\",\"\");' label='xxx:Toutes dates' />";
+	  $dts = $this->get_date();
+	  while(list(,$dti)=each($dts))
+	    {
+	      if ($dti)
+		{	
+		  //$sdt = substr($dti, 8, 2)."/".substr($dti, 5, 2)."/".substr($dti, 0, 4);
+	          $sdt = $dti;
+		  if ($sdt == $this->dt)
+		    $opt = " selected='true'";
+		  echo "<menuitem value='".$sdt."'".$opt." oncommand='comm_traduire(\"traduire\",\"\");' label='".$sdt."' />\n";
+		}
+	    }
+	?>
+	 </menupopup>
+      </menulist>
+
+    <menulist id="tm" >
+      <menupopup>
+	<?	
+	  echo "<menuitem value='revise' selected='".($this->tm=='revise'?"true":"false")."' label='"._TT('ts:item_revise')."' oncommand=\"comm_traduire('traduire','');\"  />\n"; 
+	  echo "<menuitem value='tous' selected='".($this->tm=='tous'?"true":"false")."' label='"._TT('ts:item_tous')."' oncommand=\"comm_traduire('traduire','');\"  />\n"; 
+	  echo "<menuitem value='traduit' selected='".($this->tm=='traduit'?"true":"false")."' label='"._TT('ts:item_traduit')."' oncommand=\"comm_traduire('traduire','');\" />\n"; 
+	  echo "<menuitem value='non_traduit' selected='".($this->tm=='non_traduit'?"true":"false")."' label='"._TT('ts:item_non_traduit')."' oncommand=\"comm_traduire('traduire','');\" />\n"; 
+	  echo "<menuitem value='conflit' selected='".($this->tm=='conflit'?"true":"false")."' label='"._TT('ts:item_conflit')."' oncommand=\"comm_traduire('traduire','');\" />\n"; 
+	  echo "<menuitem value='modifie' selected='".($this->tm=='modifie'?"true":"false")."' label='"._TT('ts:item_modifie')."' oncommand=\"comm_traduire('traduire','');\" />\n"; 
+	?>
+      </menupopup>
+    </menulist>
+    
+    </row>
+    <row>
+	<description>
+	 <? echo _TT('ts:texte_filtre'); ?>
+	</description>
+
+	<spacer />
+
+ 	  <textbox id="flt" value="<? echo $this->flt; ?>" onchange="comm_traduire('traduire','');" />
+
+    <menulist id="cr">
+      <menupopup>
+	<?
+	  echo "<menuitem label='"._TT("ts:sel_langue_origine")."' value='".$this->app->lgo."' selected='".($this->cr==$this->app->lgo?'true':'false')."' oncommand='comm_traduire(\"traduire\",\"\");' />";
+	  echo "<menuitem label='"._TT("ts:sel_langue_cible")."' value='".$this->app->lgc."' selected='".($this->cr==$this->app->lgc?'true':'false')."' oncommand='comm_traduire(\"traduire\",\"\");' />";
+	?>
+      </menupopup>
+    </menulist>
+
+    </row>
+
+    <row>
+	<description>
+	 <? echo _TT('ts:texte_type_operation'); ?>
+	</description>
+
+	<spacer />
+
+      <checkbox id="ts" checked="<? echo ($this->ts=="on"?"true":"false"); ?>" label="xxx:Tout selectionner"/>
+
+    <menulist id="to">
+      <menupopup>
+	<?
+          echo "<menuitem label='"._TT("ts:texte_modifier")."' value='modifier' selected='".($this->to=='modifier'?'true':'false')."' />";
+          echo "<menuitem label='"._TT("ts:texte_consulter")."' value='consulter' selected='".($this->to=='consulter'?'true':'false')."' />";
+          echo "<menuitem label='"._TT("ts:texte_consulter_brut")."' value='consulter_brut' selected='".($this->to=='consulter_brut'?'true':'false')."' />";
+	?>
+      </menupopup>
+    </menulist>
+
+    </row>
+
+
+  </rows>
+</grid>
+
+</groupbox>
+  
+<separator flex="10" />
+
+<groupbox flex="10" >
+  <caption label="Traductions" />
+
+    <listbox width="670px" rows="13" id="lt">
+
+<?
+        if (count($this->rech))
+         {
+	   while(list(,$row) = each($this->rech))
+	   {
+	    $dt = "";
+	    if ($row[1] != "")
+              $dt = " - ".$row[1];
+	    if ($row[2] != "")
+	      $dt .= " - ".$row[2];
+	    $opt = "";
+            if ($this->lt == $row[0]) 
+ 	      $opt = " selected='true' ";
+	    $st = "";
+	    switch ($row[3])
+      	      {	
+	      case "":
+		$st = " - "._TT("ts:item_traduit")." - ";
+		break;
+	      case "NOUV":
+		$st = " - "._TT("ts:item_non_traduit")." - ";
+		break;
+	      case "CONFLIT":
+		$st = " - "._TT("ts:item_conflit")." - ";
+		break;
+	      case "MODIF":
+		$st = " - "._TT("ts:item_modifie")." - ";
+		break;
+	      }
+	    echo " <listitem value='".$row[0]."' ".$opt." label='".$row[0].$st.$dt.
+		"' ondblclick='comm_traduire(\"traduction\",\"traduction\");' />";
+	    }
+ 	 }
+	else
+	  echo "<listitem label='' />";
+?>
+
+    </listbox>
+
+
+</groupbox>
+
+<separator flex="10" />
+
+<script src="<? echo URLAPP; ?>/js/footer.js" type="application/x-javascript" />
+
+</window>

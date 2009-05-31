@@ -1,0 +1,5 @@
+div#top{height:80px;line-height:80px;margin:0;padding-left:10px;}
+div#page{width:700px;margin:0 auto}
+div#navigation{float:right;width:350px}
+div#extra{float:left;width:350px}
+div#pied{clear:both;width:100%}

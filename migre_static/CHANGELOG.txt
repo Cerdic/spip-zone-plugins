@@ -1,0 +1,85 @@
+2008-01-21  chryjs  <chryjs!@!free!.!fr>
+
+ * Ajout de l'import a partir d'une liste decrite dans un fichier XML + fournit la DTD
+ * Correction de la reecriture des liens un URL peut contenir des ; ! Utilisation de / et de \/
+ * Passage en 0.90 : evolution majeure
+
+
+2008-01-19  chryjs  <chryjs!@!free!.!fr>
+
+ * Ajout de l'import a partir d'un fichier texte composé de blocs avec <rubrique> et url articles
+
+
+2008-01-06  chryjs  <chryjs!@!free!.!fr>
+
+ * Correction : la lecture des URLs filtre les liens A HREF et valide chaque ligne pour s'assurer qu'il s'agit bien d'une URL bien formée (sans plus)
+ * On log les erreurs (juste au cas où)
+ * migre_static (0.85)
+
+
+2007-12-29  chryjs  <chryjs!@!free!.!fr>
+
+ * Mise a jour des liens externes en liens internes type artxxx
+ * migre_static (0.84)
+
+migre_static (0.83)
+ * Improved output actions
+ * Created step by step operations and allowed to check the page list just in case
+ * Corrected many bugs : cfg does not like _, removed forgotten local specific parameters, metas cleanup, release check,...
+ * Added release check
+ 
+ -- Chryjs <chryjs@free.fr>  Mon,  29 Oct 2007 18:30:00 +0200
+
+migre_static (0.7)
+ * Add links to imported articles
+ * Add usage of cs_decoupe and set it optionnal
+ * Limit test import to first 5 pages (useless to go far away ?)
+
+ -- Chryjs <chryjs@free.fr>  Sat,  22 Sep 2007 16:00:00 +0200
+
+migre_static (0.6)
+ * Many corrected bugs
+ * Simplified forms
+ * Added CFG config page
+ * Use of spip metas
+ * Reduced the size of the displayed result
+ * Drop dead code
+
+ -- Chryjs <chryjs@free.fr>  Fri,  21 Sep 2007 16:30:00 +0200
+
+
+migre_static (0.5)
+ * Few improvements from http://www.spip-contrib.net/Le-bouton-memo
+ * More copyright checks : you _must_ own the site to import the pages !
+ * Corrected few bugs
+ * simplified the code
+
+ -- Chryjs <chryjs@free.fr>  Fri,  14 Sep 2007 20:00:00 +0200
+
+migre_static (0.4)
+ * Added pipelines
+ * More internationalization [english language added]
+ * Added headers
+ * Checked links
+ * introduced cfg compatibility
+
+ -- Chryjs <chryjs@free.fr>  Wed,  5 Sep 2007 15:00:00 +0200
+
+migre_static (0.3)
+ * Created lang structure
+ * severe bugs corrections
+ * Added secondary form for HTML marks
+
+ -- Chryjs <chryjs@free.fr>  Wed,  5 Sep 2007 14:00:00 +0200
+
+migre_static (0.2)
+ * Created plugin structure : exec, action, inc
+ * Splitted into 2 steps: 1st the form, 2nd the action
+
+ -- Chryjs <chryjs@free.fr>  Tue,  4 Sep 2007 13:45:00 +0200
+
+migre_static (0.1)
+ * initial release
+ * Create the plugin structure based on Beurk contribution. See :
+
+ -- Chryjs <chryjs@free.fr>  Mon,  3 Sep 2007 13:00:00 +0200

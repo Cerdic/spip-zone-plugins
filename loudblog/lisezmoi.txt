@@ -1,0 +1,11 @@
+Installer loudblog et configurer le plugin spip
+
+0)Télécharger loudblog sur 
+
+1) Installez loudblog dans le répertoires de vos rêves (/loudblog/ dans spip ou par exemple plugins/audio/loudblog/)
+
+2) Modifiez dans le plugin le fichier loudblog.php (plugin/audio/loudblog.php) les paramètres $loudblog_path et ini_set (lignes 16 et 21). Faudrait le paramétrer dans l'interface privée de spip mais encore faudrait que cela intéresse quelqu'un. 8-)
+
+3) bug loudblog : lorsqu'on poste un commentaire (pouvant éventuellement être audio), la fonction  deleteorphans() de loudblog\inc\functions.php (ligne 885) spécifie le répertoire en dur introduit un warning. 2 solutions, changer le chemin dans le code où créer un lien suymbolique /audio à la racine du site spip vers le répertoire correspondant de loudblog
+
+

@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+    <title>Jaxe pour SPIP</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <style type="text/css">
+        h1 { text-align: center; font-size: 150%; font-family: Textile, Arial Black, sans-serif; color: rgb(50,50,150); }
+        h2 { font-size: 110%; font-style: italic; font-family: serif; }
+        p { text-indent: 1em; }
+        div.center { text-align: center; }
+        pre { background-color: #F0FFF0; }
+    </style>
+</head>
+<body>
+
+<h1>Jaxe pour SPIP</h1>
+
+<div class="center"><img src="copie_ecran.png" width="683" height="564" alt="copie d'écran"></div>
+
+<h2>Qu'est-ce que l'applet Jaxe pour SPIP ?</h2>
+
+	<p>C'est une applet Java permettant d'éditer des articles de SPIP avec une interface graphique, sans avoir à connaître les raccourcis SPIP.</p>
+
+
+<h2>Quel est l'avantage par rapport à d'autres solutions ?</h2>
+
+	<p>L'applet nécessite seulement d'avoir Java 1.4 ou ultérieur d'installé pour pouvoir l'utiliser. Elle peut donc marcher sur tous les navigateurs, y compris Safari, et sur tous les systèmes d'exploitation (du moment que Java  est installé). De plus, il n'y a pas de bidouille javascript pour que cela fonctionne sur un navigateur ou sur un autre. L'applet devrait donc continuer à marcher avec les versions futures des navigateurs, sans modification (enfin, c'est la théorie, en pratique il y a quelques problèmes avec Firefox - voir plus bas).</p>
+	<p>D'autre part, le code SPIP généré par l'applet utilise au maximum les raccourcis SPIP. On peut donc créer un texte avec, et le modifier directement avec les raccourcis SPIP, puis plus tard l'éditer à nouveau avec l'applet. Il n'y a de HTML généré que dans deux cas: quand on fait des tableaux avec des cellules s'étalant sur plusieurs cases, et quand on met du texte en indice ou exposant.</p>
+	<p>Un autre avantage est que l'applet est distribuée sous licence GPL, donc que le code source est disponible et qu'on a le droit de le modifier.</p>
+	<p>Comme SPIP, Jaxe est WYSIWYM (What You See Is What You Mean). On code le sens du texte par opposition à la forme. Cela permet d'éviter que les rédacteurs ne sabotent vos beaux squelettes en utilisant des couleurs ou des styles qui ne vont pas bien avec.</p>
+
+
+<h2>Comment l'installer ?</h2>
+
+    <p>Avec SPIP 1.9, il suffit de placer le dossier jaxespip dans le dossier plugins qui se trouve &agrave; la racine du site, et d'activer le plugin dans le menu Configuration de l'administration (il faut l'interface compl&egrave;te).</p>
+
+
+<h2>Comment l'utiliser ?</h2>
+
+	<p>Il suffit de cliquer sur le bouton &quot;Editer avec Jaxe&quot; en haut de la zone de l'article, de faire les modifications souhaitées, de cliquer sur le bouton Enregistrer dans la fenêtre qui s'est ouverte pour faire la transformation vers SPIP, et de <b>ne pas oublier</b> de cliquer sur l'autre bouton Enregistrer pour que SPIP enregistre les modifs.</p>
+	<p>L'applet a une barre de menus en haut de la fenêtre qui permet d'insérer un élément dans le texte (on peut aussi le faire avec un clic droit). On peut obtenir une aide au sujet d'un élément en cliquant sur le menu, en relâchant la souris, et en attendant un peu avec la souris sur le menu de l'élement. Certains éléments ont des attributs, que l'on peut éditer quand on insère l'élément ou quand on clique dessus (par exemple, l'élément LIEN a les attributs &quot;type&quot; et &quot;numéro&quot;). Les éléments s'affichent en général sous la forme d'une balise de début et d'une balise de fin qui délimitent une zone de texte, ou juste d'une balise &quot;vide&quot;. Les tableaux s'affichent (et c'est là que c'est agréable par rapport à SPIP) sous forme de tableaux.</p>
+	<p>On change de paragraphe comme en SPIP classique, en laissant une ligne vide. Un autre truc venant de SPIP à connaître: utiliser &quot;~&quot; pour faire un espace insécable.</p>
+	<p>On peut faire des copier-coller dans la fenêtre, mais souvent les raccourcis clavier ne marchent pas parce-qu'ils sont interprétés par le navigateur et l'information n'arrive pas jusqu'à l'applet (le &quot;coller&quot; du navigateur ne fait pas la même chose que le &quot;coller&quot; de l'applet).</p>
+	<p>Il n'est pas possible de coller dans l'applet un texte venant d'un autre programme (c'est interdit pour des raisons de sécurité), mais on peut par contre faire des glisser-déposer. Ca revient au même, cela demande juste un peu d'adresse :)</p>
+	<p>Pour utiliser un style: taper le texte d'abord, puis le sélectionner, et choisir le style. On ne peut utiliser qu'un style à la fois. Pour revenir à un texte sans style, on utilise le menu Style-Normal.</p>
+
+
+<h2>Quelle est la différence avec <a href="http://jaxe.sourceforge.net/Jaxe.html">Jaxe</a> ?</h2>
+
+	<p>L'applet a été créée à partir de Jaxe, une application Java permettant d'éditer des fichiers XML. Comme Jaxe ne comprend que le XML, l'applet transforme automatiquement les raccourcis SPIP en XML avant l'édition, et retransforme le résultat de XML vers SPIP quand on enregistre. Il y a de nombreuses différences avec l'application Jaxe, étant donné que l'applet est spécialisée pour SPIP, et qu'une applet n'a pas les mêmes droits qu'une application Java. Par exemple, une applet n'a pas le droit de lire ou d'écrire un fichier sur le disque (il est donc impossible de lire des images, il faut le faire indépendamment, avec l'interface de SPIP). Une applet n'a pas le droit de lire le contenu du presse-papier (donc on ne peut pas copier dans l'applet un texte issu d'un autre programme). Une applet doit être chargée par internet avant l'exécution (donc le chargement peut être un peu long, et il n'est pas raisonable d'inclure un dictionnaire de français avec pour permettre la correction de l'orthographe).</p>
+
+
+<h2>Quels sont les problèmes connus ?</h2>
+
+<ul>
+<li> Certains navigateurs Mac (iCab, IE, Firefox version &lt; 1.5) ne gèrent pas Java 1.4 et 1.5, même si c'est installé sur le système. Il faut donc utiliser Safari ou une version récente de Firefox à la place. (au passage, ce n'est pas la faute des développeurs des navigateurs alternatifs, c'est Apple qui ne fourni pas d'API pour utiliser Java sur un navigateur qui n'est pas basé sur Webkit comme Safari)</li>
+
+<li> Il existait deux bugs de Firefox 1.5 pour Mac qui empêchaient l'applet de fonctionner avec Firefox :<br>
+	<a href="http://sourceforge.net/tracker/index.php?func=detail&amp;aid=1433659&amp;group_id=107955&amp;atid=649116"> Java Embedding Plugin - bug 649116</a><br>
+	(ils ont été corrigés, il suffit d'installer la dernière version du Java Embedding Plugin ou d'attendre
+	la prochaine version de Firefox)
+</li>
+<li> Il existe peut-être des bugs de Firefox et/ou de Java sur Windows XP qui empêchent l'applet de fonctionner avec Firefox :<br>
+	<a href="https://bugzilla.mozilla.org/show_bug.cgi?id=172129">bugzilla - bug 172129</a> (si vous rencontrez ce bug essayez de d&eacute;sactiver l'extension browseimages)<br>
+	<a href="https://bugzilla.mozilla.org/show_bug.cgi?id=275783">bugzilla - bug 275783</a><br>
+	<a href="http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=5075590">Java Bug Parade - bug 5075590</a><br>
+	<a href="http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=6255782">Java Bug Parade - bug 6255782</a><br>
+Il est corrigé avec Java 1.6, mais cette version (encore beta) de Java ajoute un autre bug :<br>
+	<a href="http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=6350682">Java Bug Parade - bug 6350682</a><br>
+(au passage, vous pouvez voter pour ces bugs pour attirer l'attention des développeurs)
+</li>
+<!--
+pour SPIP 1.8
+<li>Un problème peut se poser avec l'affichage des images si PHP n'a pas été configuré avec l'option - -with-mime-magic (on peut le vérifier avec <tt>ecrire/info.php3</tt>). Le fichier de SPIP <tt>spip_acces_doc.php3</tt> ne marche pas dans ce cas, parce-que la fonction mime_content_type n'est pas définie. Un moyen de contourner le problème, si on ne peut pas reconfigurer PHP, est de définir cette fonction dans <tt>spip_acces_doc.php3</tt> :
+<form action="/" method="get"><textarea readonly='readonly' cols='100' rows='6'>
+if (!function_exists('mime_content_type')) {
+   function mime_content_type($f) {
+       $f = escapeshellarg($f);
+       return trim( `file -bi $f` );
+   }
+}
+</textarea></form>
+</li>
+-->
+</ul>
+<p>Si vous constatez d'autres problèmes, merci de me prévenir.</p>
+
+
+<h2>Qui est l'auteur ?</h2>
+
+<p>
+	Damien Guillaume / Observatoire de Paris / U.F.E. / C.E.T.I.<br>
+	mail : Damien.Guillaume à obspm.fr
+</p>
+	<p>Avec l'utilisation de <a href="http://jaxe.sourceforge.net/Jaxe.html">Jaxe</a> et
+		<a href="http://jakarta.apache.org/oro/index.html">Jakarta Oro</a></p>
+
+
+<h2>Comment SPIP pourrait évoluer pour prendre avantage de Jaxe ?</h2>
+    <p>Un problème majeur dans l'installation d'un éditeur comme Jaxe est qu'il faut toucher au c&oelig;ur de SPIP. Cela signifie qu'il faut recommencer à chaque nouvelle version, et on peut donc abandonner cette solution pour des raisons pratiques. SPIP devrait avoir un mécanisme permettant de choisir un éditeur externe sans toucher au code.</p>
+    <p>Une autre amélioration intéressante serait que SPIP utilise XML en interne pour stocker les articles. Cela permettrait&nbsp;:</p>
+    <ul>
+        <li>De valider les articles automatiquement pour obtenir au final un code HTML propre et éviter les catastrophes.</li>
+        <li>De pouvoir ajouter des éléments XML facilement (ça revient à ajouter des raccourcis SPIP, sauf qu'on resterait parfaitement compatible avec SPIP en utilisant les espaces de noms, et que l'ensemble serait vraiment stable).</li>
+        <li>De simplifier le code de cette applet Jaxe !</li>
+    </ul>
+</body>
+</html>

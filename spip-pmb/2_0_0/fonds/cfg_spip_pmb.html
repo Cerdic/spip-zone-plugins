@@ -1,0 +1,20 @@
+#CACHE{0}
+[(#REM) titre=SPIP-PMB]
+[(#REM) icone=img_pack/logo_pmb.png]
+<!-- descriptif=
+<p>
+<:pmb:parametrage_plugin:>
+</p>
+-->
+<form method="post" action="#SELF">[(#ENV{_cfg_}|form_hidden)]
+	<fieldset>
+		<legend><:pmb:parametrage_catalogue:></legend>
+		<label for="url"><:pmb:url:> :</label>	
+		<input type="text" name="url" id="url" value="[(#ENV{url,http://demo.bibli.fr/opac/})]" />
+	</fieldset>
+	<div>
+		<input type="submit" name="_cfg_ok" value="<:oK:>" class="fondo" />
+		<input type="reset" value="<:reset:>" class="fondo" />
+		<input type="submit" name="_cfg_delete" value="<:supprimer:>" class="fondo" />
+	</div>
+</form>

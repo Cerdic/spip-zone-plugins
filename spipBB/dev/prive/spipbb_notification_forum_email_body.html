@@ -1,0 +1,20 @@
+[(#REM) Formatage des messages email envoyés par notification SPIPBB ]
+<:form_forum_message_auto:>
+
+#ENV{forum_poste_par}
+#ENV{reponse}
+#ENV{url_consultation}
+
+[(#REM) Cette balise ne sert qu'au saut de ligne ]
+
+** #ENV{titre}
+
+[(#REM) Cette balise ne sert qu'au saut de ligne ]
+
+* #ENV{texte}
+
+[(#REM) Cette balise ne sert qu'au saut de ligne ]
+
+--[(#REM) Cette balise ne sert qu'au saut de ligne ]
+#NOM_SITE_SPIP #URL_SITE_SPIP
+SpipBB [(#PLUGIN{SPIPBB,version})]

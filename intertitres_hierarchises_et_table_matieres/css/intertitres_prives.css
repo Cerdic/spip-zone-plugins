@@ -1,0 +1,30 @@
+/*  ------------------------------------------
+/*  surcharge typographique pour les intertitres
+/*  ------------------------------------------ */
+
+h3.spip {
+	font-size: 1.15em;
+	font-weight: bold;
+}
+h4.spip {
+	padding-left: 1.5em;
+	font-size: 1.15em;
+	font-weight: bold;
+	font-style: italic;
+}
+h5.spip {
+	padding-left: 3em;
+	font-size: 1em;
+	font-weight: bold;
+}
+h6.spip {
+	padding-left: 4.5em;
+	font-size: 1em;
+	font-weight: bold;
+	font-style: italic;
+}
+h3.spip, h4.spip, h5.spip, h6.spip, {
+	margin: 2em 0 1.4em 0;
+	text-align: left;
+	font-family: Verdana,Arial,Sans,sans-serif;
+}

@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+	<head>
+		<INCLURE{fond=noisettes/head}{env}>
+	</head>
+
+	<body>
+		<div id="page">
+			<div id="top">
+				<BOUCLE_titre(RUBRIQUES){id_secteur}{id_parent=0}>
+				[<h1>(#LOGO_RUBRIQUE|#URL_RUBRIQUE|inserer_attribut{alt,#TITRE}|inserer_attribut{title,#TITRE}|sinon{<a href="#URL_RUBRIQUE">#TITRE</a>})</h1>]
+				</BOUCLE_titre>
+				[(#FORMULAIRE_ADMIN)]
+				[(#SPIP_CRON)]
+			</div>
+			
+			<p id="prelude">
+				<a href="#main"><:spipclear:go_main:></a> |
+				<a href="#sidebar"><:spipclear:go_sidebar:></a> |
+				<a href="#search"><:spipclear:go_search:></a>
+			</p>
+
+			<div id="wrapper">
+				<div id="main">
+					<div id="content">
+						[(#RECHERCHE|non)
+							[(#ENV{id_article}|non)
+								[(#ENV{id_mot}|non)
+								<INCLURE{fond=noisettes/list}{id_rubrique=#ID_RUBRIQUE}{archives}{debut_liste}{env}{ajax}>
+								]
+							]
+						]
+						[(#RECHERCHE|oui)
+							<INCLURE{fond=noisettes/search}{env}{ajax}>]
+						[(#ENV{id_article}|oui)
+							<INCLURE{fond=noisettes/post}{id_article}{env}>]
+						[(#ENV{id_mot}|oui)
+							<INCLURE{fond=noisettes/list-tag}{id_mot}{env}{ajax}>]
+					</div>
+				</div>
+
+				[(#SET{url,[(#ENV{id_secteur}|generer_url_rubrique)]})]
+				<INCLURE{fond=noisettes/sidebar}{env}{self=#GET{url}}{date=#ENV{archives,#ENV{date}}}{archives=#ENV{archives,#ENV{date}}}>
+			</div>
+			
+			<div id="footer">
+				<p><:spipclear:credits:>, <a href="#URL_SITE_SPIP/"><:spipclear:hebergement:> #NOM_SITE_SPIP</a></p>
+			</div>
+			
+		</div>
+
+	</body>
+</html>

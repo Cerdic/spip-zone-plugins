@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+<title>FaLaHuMa publication</title>
+<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
+
+<!-- Ceci est la feuille de style par defaut pour les types internes a SPIP -->
+<link rel="stylesheet" href="spip_style.css" type="text/css" />
+
+<!-- Les feuilles de style specifiques aux presents squelettes -->
+<link rel="stylesheet" href="#DOSSIER_SQUELETTE/typographie.css" type="text/css" />
+
+<!-- media="..." permet de ne pas utiliser ce style sous Netscape 4 (sinon plantage) -->
+<link rel="stylesheet" href="#DOSSIER_SQUELETTE/habillage.css" type="text/css" media="print, projection, screen, tv" />
+
+<!-- Lien vers le backend pour navigateurs eclaires -->
+<link rel="alternate" type="application/rss+xml" title="<:syndiquer_site:>" href="backend.php3" />
+</head>
+
+<!-- Entete de page html -->
+<body bgcolor="#fffff0">
+<tt>
+	<table bgcolor="#007080" width="1000" border="0" cellspacing="0" cellpadding="0">
+		<tr>
+			<td colspan="4">
+				<div id="pub">
+					<B_articles_rubrique_trois>
+						<BOUCLE_articles_rubrique_trois(ARTICLES) {id_rubrique=3} {par hasard} {0,5}>
+							<div class="ligne">
+							<div class="un-article">
+								<div class="titre"><a href="#URL_ARTICLE">#TITRE</a></div>
+								[<div class="surtitre">(#SURTITRE)</div>]
+								[(#LOGO_ARTICLE_RUBRIQUE|center||reduire_image{150,150})]
+								[<div class="soustitre">(#SOUSTITRE)</div>]
+<!-- Supression de l'intro de l'article
+								[<div class="texte"><div class="extrait">(#INTRODUCTION)</div></div>]
+-->
+							</div>
+							</div>
+						</BOUCLE_articles_rubrique_trois>
+					</B_articles_rubrique_trois>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="1">
+			<table width="250"  border="0" cellspacing="0" cellpadding="0">
+				<tr>
+				<td>
+				<div id="pub">
+					<B_articles_rubrique_deux>
+						<BOUCLE_articles_rubrique_deux(ARTICLES) {id_article>1} {id_rubrique=2} {par hasard} {0,5}>
+							<div class="colonne">
+							<div class="un-article">
+								<div class="titre"><a href="#URL_ARTICLE">#TITRE</a></div>
+								[<div class="surtitre">(#SURTITRE)</div>]
+								[(#LOGO_ARTICLE_RUBRIQUE|center||reduire_image{150,150})]
+								[<div class="soustitre">(#SOUSTITRE)</div>]
+<!-- Supression de l'intro de l'article
+								[<div class="texte"><div class="extrait">(#INTRODUCTION)</div></div>]
+-->
+							</div>
+							</div>
+					</BOUCLE_articles_rubrique_deux>
+				</B_articles_rubrique_deux>
+				</div>
+				</td>
+				</tr>
+			</table>
+			</td>
+			<td colspan="2">
+			<table width="500"  border="0" cellspacing="0" cellpadding="0">
+<!--
+				<tr>
+					<td colspan="2">
+					<table width="500" border="0" cellspacing="0" cellpadding="0">
+						<td>
+							<div id="article" class="plein">
+								680
+							</div>
+						</td>
+					</table>
+					</td>
+				</tr>
+-->
+				<tr>
+					<td colspan="2">
+					<table width="506" border="0" cellspacing="0" cellpadding="0">
+						<td>
+						<div id="principal">
+							<div class="une-rubrique">ICI1</div>
+							<div class="une-rubrique">ICI2</div>
+							<div class="une-rubrique">ICI3</div>
+						</div>
+						</td>
+					</table>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+					<table width="500"  border="0" cellspacing="0" cellpadding="0">
+						<td>
+						<div id="pub">
+							<B_articles_rubrique_une>
+								<BOUCLE_articles_rubrique_une(ARTICLES) {id_rubrique=1} {par hasard} {0,5}>
+									<div class="ligne">
+									<div class="un-article">
+										<div class="titre"><a href="#URL_ARTICLE">#TITRE</a></div>
+										[<div class="surtitre">(#SURTITRE)</div>]
+										[(#LOGO_ARTICLE_RUBRIQUE|center||reduire_image{150,150})]
+										[<div class="soustitre">(#SOUSTITRE)</div>]
+<!-- Supression de l'intro de l'article
+										[<div class="texte"><div class="extrait">(#INTRODUCTION)</div></div>]
+-->
+									</div>
+									</div>
+								</BOUCLE_articles_rubrique_une>
+							</B_articles_rubrique_une>
+						</div>
+						</td>
+					</table>
+					</td>
+				</tr>
+				</div>
+				</td>
+			</table>
+			</div>
+			<td colspan="1">
+			<table width="250" >
+				<td >
+				<div id="pub">
+					<B_articles_rubrique_quatre>
+						<BOUCLE_articles_rubrique_quatre(ARTICLES) {id_article>1} {id_rubrique=4} {par hasard} {0,5}>
+							<div class="colonne">
+							<div class="un-article">
+								<div class="titre"><a href="#URL_ARTICLE">#TITRE</a></div>
+								[<div class="surtitre">(#SURTITRE)</div>]
+								[(#LOGO_ARTICLE_RUBRIQUE|center||reduire_image{150,150})]
+								[<div class="soustitre">(#SOUSTITRE)</div>]
+<!-- Supression de l'intro de l'article
+								[<div class="texte"><div class="extrait">(#INTRODUCTION)</div></div>]
+-->
+							</div>
+							</div>
+					</BOUCLE_articles_rubrique_quatre>
+				</B_articles_rubrique_quatre>
+				</div>
+				</td>
+			</table>
+			</td>
+		</tr>
+	</table>
+</tt>
+</body>
+</html>
+

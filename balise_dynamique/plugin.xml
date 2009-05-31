@@ -1,0 +1,14 @@
+<plugin>
+        <nom>Shoutbox : un mod&#232;le de balise dynamique</nom>
+        <version>
+          0.1
+        </version>
+        <etat>
+          dev
+        </etat>
+        <prefix>shoutbox</prefix>
+        <description>
+        Un exemple de plugin pour apprendre &#223; faire des balises dynamiques
+        </description>
+	<necessite id="SPIP" version="[1.9.0;]" />
+</plugin>

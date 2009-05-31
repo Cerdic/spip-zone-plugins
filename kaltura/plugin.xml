@@ -1,0 +1,12 @@
+<plugin>
+  <nom>Kaltura</nom>
+  <auteur>Cedric Morin [->www.yterium.com]</auteur>
+  <icon>images/logo.png</icon>
+  <version>0.1</version>
+  <etat>dev</etat>
+  <description>La video en ligne facile avec [->http://corp.kaltura.com/]</description>
+  <prefix>kaltura</prefix>
+  <fonctions>inc/kaltura.php</fonctions>
+  <necessite id='SPIP' version='[2.0.0;]' />
+  <necessite id='cfg' version='[1.0;]' />
+</plugin>

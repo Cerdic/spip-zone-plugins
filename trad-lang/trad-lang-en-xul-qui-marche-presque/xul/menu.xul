@@ -1,0 +1,106 @@
+
+<window
+    id="<? echo $this->nom; /*le nom de la classe etape*/ ?>"
+    title="Trad-Lang"
+    orient="vertical"
+    debug="false"
+    onload="load_<? echo $this->nom; ?>();"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+<script>
+const SERVER_URL = "<? echo URLAPP; ?>/scripts/int.php";
+</script>
+
+  <script src="<? echo URLAPP; ?>/js/header.js" type="application/x-javascript" />
+  <script src="<? echo URLAPP; ?>/js/<? echo $this->nom; ?>.js" type="application/x-javascript" />
+
+<toolbox >
+ <menubar id="sample-menubar">
+
+    <menu id="appli" label="xxx:Appl." <? echo 'disabled='.($this->menu_app?'"false"':'"true"'); ?> >
+      <menupopup id="file-popup">
+        <menuitem label="xxx:Accueil" oncommand="commApp('page_garde');" />
+        <menuitem label="xxx:Administrer" <? echo 'disabled='.($app->menu_adm?'"false"':'"true"'); ?> oncommand="commApp('administrer');" />
+        <menuitem label="xxx:Traduire" <? echo 'disabled='.($app->menu_trad?'"false"':'"true"'); ?> oncommand="commApp('traduire');" />
+        <menuseparator/>
+        <menuitem label="xxx:Exporter" disabled="true" />
+        <menuseparator/>
+        <menuitem label="Exit" oncommand="window.close();" />
+      </menupopup>
+    </menu>
+
+    <menu id="mod-menu" label="xxx:Module" <? echo 'disabled='.($this->menu_mod?'"false"':'"true"'); ?> >
+      <menupopup id="mod">
+	<?
+	  asort($app->mods);
+	  while (list($nom,$def) = each($app->mods))
+	    {
+	      $option = "";
+	      if ($nom == $app->mref->nom)
+		$option = 'checked="true" ';
+		echo '<menuitem type="radio" name="mod-it" value="'.$nom.'" '.
+			'oncommand="chMod(\''.$nom.'\'); comm_'.$this->nom.'(\''.$this->comm_mod.'\',\'\'); " '.
+			'label="'.$def->nom_module.' ('.$def->type_module.')" '.$option.'/>';
+	    }
+	?>
+      </menupopup>
+    </menu>
+
+    <menu id="lgo-menu" label="xxx:Depuis..." <? echo 'disabled='.($this->menu_lgo?'"false"':'"true"'); ?> >
+      <menupopup id="lgo">
+	<?
+	  asort($app->lgos);
+	  while (list(,$lg) = each($app->lgos))
+	    {
+	      $option = "";
+	      if ($lg == $app->lgo)
+		$option = 'checked="true" ';
+ 	      echo '<menuitem value="'.$lg.'" type="radio" name="lgo-it" '.
+		'oncommand="chLgo(\''.$lg.'\'); comm_'.$this->nom.'(\''.$this->comm_lgo.'\',\'\'); " '.
+		'label="'.xmlc(traduire_nom_langue($lg)).' ('.$lg.')" '.$option.'/>';
+	    }
+	?>
+      </menupopup>
+    </menu>
+
+    <menu id="lgc-menu" label="xxx:Vers..." <? echo 'disabled='.($this->menu_lgc?'"false"':'"true"'); ?> >
+      <menupopup id="lgc">
+	<?
+	  asort($app->lgcs);
+	  while (list(,$lg) = each($app->lgcs))
+	    {
+	      $option = "";
+	      if ($lg == $app->lgc)
+		$option = 'checked="true" ';
+	      echo '<menuitem value="'.$lg.'" type="radio" name="lgc-it" '.
+		'oncommand="chLgc(\''.$lg.'\'); comm_'.$this->nom.'(\''.$this->comm_lgc.'\',\'\'); " '.
+		'label="'.xmlc(traduire_nom_langue($lg)).' ('.$lg.')" '.$option.'/>';
+	    }
+	?>
+           <menuseparator />
+	   <menuitem value="creer" oncommand="" label="xxx:nouveau" />
+      </menupopup>
+    </menu>
+
+    <spacer flex="20" />
+
+    <menu id="langue" label="<? echo _TT("ts:texte_langue"); ?>">
+      <menupopup id="lgi">
+	<?
+	  asort($app->lgis);
+	  while (list(,$lg) = each($app->lgis))
+	    {
+	      $option = "";
+	      if ($lg == $app->lgi)
+		$option = 'checked="true" ';
+	      echo '<menuitem type="radio" name="lgi-it" value="'.$lg.'" '.
+		'oncommand="chLg(\''.$lg.'\'); comm_'.$this->nom.'(\''.$this->nom.'\',\'\'); " '.
+		'label="'.xmlc(traduire_nom_langue($lg)).' ('.$lg.')" '.$option.'/>';
+	    }  
+	?>
+      </menupopup>
+    </menu>
+
+  </menubar>
+</toolbox>

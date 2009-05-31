@@ -1,0 +1,92 @@
+/* ***** BEGIN LICENSE BLOCK *****
+#
+# This is part of Aorakits, a set of themes for DotClear. 
+# Copyright (c) 2006 Kozlika and contributors. All rights
+# reserved.
+#
+ * ***** END LICENSE BLOCK *****
+ 
+ 
+ STRUCTURE POUR TROIS COLONNES, BLOGNAV ET BLOGEXTRA A GAUCHE, LARGEUR FLUIDE
+ 
+ 
+ --------------------------------------------------------------
+	AVANT TOUTE CHOSE
+	remise à zéro de toutes les marges des grands blocs pour que 
+	tous les navigateurs calculent depuis le même point de départ 
+--------------------------------------------------------------- */
+html, body, #page, #top, #prelude, #wrapper, #footer,
+#main, #content,
+#sidebar, #blognav, #blogextra {
+	margin : 0;
+	padding : 0;
+	}
+
+/* --------------------------------------------------------------
+	CENTRAGE DE LA PAGE DANS LA FENETRE DU NAVIGATEUR.
+	(supprimer ces lignes si on ne veut pas centrer)
+	Note : on peut remplacer la valeur (ici 0) des marges au-dessus 
+	et en dessous de la page par la valeur de son choix (px ou em).
+--------------------------------------------------------------- */
+body {
+	text-align : center;
+	}
+#page {
+	margin : 85px auto 20px auto;
+	text-align : left;
+	padding: 10px 45px;
+	}
+
+/* -------------------------------------------------------------
+	STRUCTURE FLUIDE - 3 COLONNES - BLOGNAV ET BLOGEXTRA A GAUCHE
+	Vous pouvez modifier 100% par la valeur de votre choix.
+	Vous pouvez modifier 320px par la valeur de votre choix
+	et 330px par votre nouvelle valeur + 10
+--------------------------------------------------------------- */
+#page {
+	width : 785px;
+    }
+#top { height:160px; }
+
+#top h1 {
+	margin : 0;
+	}
+#wrapper {
+	margin : 10px 0;
+	}
+#main {
+	width : 100%;
+	margin : 0 0 0 -240px;
+	float : right;
+	}
+#content {
+	margin : 0 0 0 240px;
+	padding : 0;
+	}
+#footer {
+	clear : both;
+	text-align:center;
+	height : 30px;
+	}
+#sidebar {
+	width : 220px;
+	float : left;
+	overflow: visible;
+	}
+	
+/* Attention au calcul si vous modifiez ces valeurs. 
+Le total doit Ãªtre infÃ©rieur Ã  la largeur du sidebar.
+Ici, 6 + 146 + 6 + 6 + 146 + 6 = 316 < 320 */
+
+#blognav, #blogextra {
+	margin : 0;
+	padding : 10px;
+}
+#blognav {
+	width : 200px;
+	float : left;
+  }
+#blogextra {
+	width : 200px;
+	float : left;
+	}	

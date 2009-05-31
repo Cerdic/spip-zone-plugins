@@ -1,0 +1,53 @@
+#HTTP_HEADER{"Cache-Control: no-store, no-cache, must-revalidate"}
+#HTTP_HEADER{Pragma: no-cache}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+<title>Abonnement - [(#NOM_SITE_SPIP|textebrut)]</title>
+<INCLURE{fond=inc-head}>
+<meta name="robots" content="none" />
+</head>
+<body>
+	<div id="page">
+
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}>
+
+	<div id="conteneur">
+    <div id="contenu">
+
+        [(#SESSION{id_auteur}|oui)		
+        	<h2>Informations personnelles</h2>
+			<INCLURE{fond=modeles/id_card_complete}{id_auteur=#SESSION{id_auteur}}>
+			<INCLURE{fond=fonds/mes_abonnements}>
+		]			
+
+		[(#SESSION{id_auteur}|non)			
+			#FORMULAIRE_INSCRIPTION2
+		]
+
+
+	</div><!--#contenu-->
+	</div><!--#conteneur-->
+
+    [(#REM) Menu de navigation laterale ]
+    <div id="navigation">
+
+        [(#REM) Menu de navigation par rubriques ]
+        <INCLURE{fond=inc-rubriques}>
+		
+		#FORMULAIRE_RECHERCHE
+
+    </div><!--#navigation-->
+	
+	[(#REM) Menu de navigation laterale ]
+	<div id="extra">
+	&nbsp;
+	</div><!--#extra-->
+
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
+	</div><!--#page-->
+</body>
+</html>

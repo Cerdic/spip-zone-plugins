@@ -1,0 +1,21 @@
+#CACHE{24*3600}
+[noisetier(#REM)
+<titre>Noisette de test</titre>
+<description>
+	<multi>
+		<fr>Noisette de test pour le développement du noisetier</fr>
+		<en>Testing nut to develop the nuts tree (I know it's not good english).</en>
+	</multi>
+</description>
+<env>id_rubrique</env>
+<param>
+	<titre>nb_art</titre>
+	<descriptif>Nombre d'articles par page</descriptif>
+	<valeur>10</valeur>
+</param>
+]
+
+<h1>Noisette de test</h1>
+<b>id_article :</b> [(#ENV{id_article,'non récupéré'})] - Normalement on ne le récupère pas<p />
+<b>id_rubrique :</b> [(#ENV{id_rubrique,'non récupéré'})] - Normalement on le récupère<p />
+<b>nb_art :</b> [(#ENV{nb_art,'non récupéré'})] - Normalement on le récupère<p />

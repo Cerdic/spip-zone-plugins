@@ -1,0 +1,47 @@
+#CACHE{25*3600}
+<INCLURE{fond=entete_meta}>
+	<!--affichage du titre de la page -->
+	<title>[#NOM_SITE_SPIP]  <:plan_site:></title>
+	<!-- Lien vers le backend pour navigateurs eclaires -->
+	<link rel="alternate" type="application/rss+xml" title="<:syndiquer_site:>" href="spip.php?page=backend" />
+	<link rel="alternate" type="application/rss+xml" title="<:syndiquer_breves:>" href="spip.php?page=backend-breves" />
+</head>
+<body>
+	<div id="NoMenu">		
+		<div id="EntetePage">
+			
+			<div id="TitreSite">
+				<!--affichage du logo et titre du site -->
+				<h1>
+					<BOUCLE_logo_accueil(SITES){id_syndic=7}>
+					[(#LOGO_SITE)]
+					</BOUCLE_logo_accueil>
+					#NOM_SITE_SPIP
+				</h1>
+			</div>
+			
+			<!--affichage du logo et titre de la page -->
+			<h2>
+				<img src="IMG/siteon3.png" class="spip_logos" alt="<:plan_site:>" />
+				<:plan_site:>
+			</h2>
+			<div class="arborescence">
+				<:vous_etes_ici:> <a href="#URL_SITE_SPIP"><:accueil_site:></a>
+				<span>&nbsp;</span>
+				<:plan_site:>
+			</div>
+			<br class="clear" />
+		#FORMULAIRE_RECHERCHE
+		</div>
+
+		<!-- début du contenu -->
+
+		<div id="Contenu">
+			<INCLURE{fond=menu}{tout="oui"}>
+		</div>
+		<br class="clear" />
+		<!-- fin du contenu -->
+		<INCLURE{fond=pied}{skel=#SQUELETTE}>
+	</div>
+</body>
+</html>

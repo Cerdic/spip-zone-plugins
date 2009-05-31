@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- DTD minimale pour les fichiers de description pour la migration -->
+
+<!-- de quoi accepter les entetes html -->
+<!ENTITY % HTML PUBLIC
+   "-//W3C//ENTITIES Latin 1 for XHTML//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+%HTML;
+
+<!ELEMENT migre_desc
+  (rubrique|article)*> <!-- un article non rattache a une rubrique est greffé à la racine -->
+
+<!ELEMENT rubrique 
+  (id_parent|titre|id|lang|article*)>
+<!ELEMENT id (#PCDATA)> <!-- id_souhaite pour la rubrique -->
+<!ELEMENT titre (#PCDATA)> <!-- titre de la rubrique si pas deja existante -->
+<!ELEMENT id_parent (#PCDATA)> <!-- id_souhaite de la rubrique parente -->
+<!ELEMENT lang (#PCDATA)> <!-- Forcer la langue -->
+
+<!ELEMENT article
+  (titre|url|lang)> 
+
+<!ELEMENT titre (#PCDATA)>
+<!ELEMENT url (#PCDATA)>
+<!ELEMENT lang (#PCDATA)> <!-- Forcer la langue Pour l'instant non utilise -->

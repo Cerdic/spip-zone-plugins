@@ -1,0 +1,47 @@
+#CACHE{24*3600}
+<INCLURE{fond=entete_meta}>
+	<!--affichage du titre de la page -->
+	<title>[#NOM_SITE_SPIP]  <:page_indisponible:></title>
+</head>
+<body>
+	<div id="Page">
+		<div id="EntetePage">
+			
+			<div id="TitreSite">
+				<!--affichage du logo et titre du site -->
+				<h1>
+					<a href="#URL_SITE_SPIP"><BOUCLE_logo_accueil(SITES){id_syndic=7}>
+					#LOGO_SITE</BOUCLE_logo_accueil>	#NOM_SITE_SPIP</a>
+				</h1>
+			</div>
+			
+			<!--affichage du logo et titre de la page -->
+			<h2><:page_indisponible:></h2>
+			<br class="clear" />
+		</div>
+		
+
+		<!-- menu-->
+		<div id="Menu">
+			<INCLURE{fond=menu}>            
+		</div>
+		
+
+		<!-- début du contenu-->
+		<div id="Contenu">
+			
+			<!-- texte de la rubrique -->
+			<div class="erreur" style="text-align:center"><:desole_page_indisponible:></div>
+
+		</div>
+		<!-- fin du contenu -->
+		
+		
+		<br class="clear" />
+		
+
+		<INCLURE{fond=pied}{skel=#SQUELETTE}>
+		
+	</div>
+</body>
+</html>

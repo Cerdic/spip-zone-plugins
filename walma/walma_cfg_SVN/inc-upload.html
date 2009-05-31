@@ -1,0 +1,8 @@
+[(#REM)
+boite upload de documents dans walma
+fichier noisette inc-walma_upload.html 
+voir walma_fonctions
+balise INCLURE{fond=inc-walma_upload}{id_article}
+]
+ 
+[<div id="telecharge">(#ENV{id_article}|upload_documents_walma)</div>]

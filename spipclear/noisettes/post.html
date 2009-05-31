@@ -1,0 +1,72 @@
+<BOUCLE_article(ARTICLES){id_article}>
+<div class="post">
+	[<p class="surtitre #EDIT{soustitre}">(#SURTITRE)</p>]
+	<h2 class="post-title #EDIT{titre}">#TITRE</h2>
+	[<p class="soustitre #EDIT{surtitre}">(#SOUSTITRE)</p>]
+	<p class="post-info"><B_auteurs><:par_auteur|ucfirst:> <BOUCLE_auteurs(AUTEURS){id_article}{", "}><span[ title="(#BIO|couper{60}|texte_backend)"]>#NOM</span></BOUCLE_auteurs>,</B_auteurs>
+	[(#DATE|affdate_long)] <:spipclear:attime:> [(#DATE|heures)]:[(#DATE|minutes)]
+	<span>::</span> <BOUCLE_categorie(RUBRIQUES){id_rubrique}><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></BOUCLE_categorie>
+	<span>::</span><a href="#URL_SITE_SPIP/#URL_ARTICLE" title="<:spipclear:permalink_pour:> : [(#TITRE|textebrut|entites_html)]" class="surlignable">##ID_ARTICLE</a>
+	</p>
+
+	<INCLURE{fond=noisettes/post-tags}{id_article}>
+	
+	[(#LOGO_ARTICLE||image_reduire{150}|inserer_attribut{class,#EDIT{logo}}|inserer_attribut{class,logo})]
+	
+	[<div class="post-excerpt #EDIT{chapo} surlignable">
+		(#CHAPO)
+	</div>]
+	[<div class="post-content #EDIT{texte} surlignable" lang="#LANG">
+		(#TEXTE|image_reduire{450})
+		<br style="clear: both;" />
+		[<div class="#EDIT{ps}">(#PS)</div>]
+		[<div class="footnotes">(#NOTES)</div>]
+		[<div><strong><:voir_en_ligne:></strong> : <a href="(#URL_SITE)">#NOM_SITE</a></div>]
+		[<div id="attachments">(#INCLURE{fond=noisettes/documents}{id_article}{env})</div>]
+	</div>]
+</div>
+
+<div id="comments">
+	<h3 id="co"><:spipclear:commentaires|ucfirst:></h3>
+	<B_commentaires_article>
+	<dl>
+	<BOUCLE_commentaires_article(FORUMS){id_article}{par date}>
+		<dt id="forum#ID_FORUM" class="[(#ID_ARTICLE|me{#ID_AUTEUR}|oui) me][(#COMPTEUR_BOUCLE|alterner{' odd',''})][ (#COMPTEUR_BOUCLE|=={1}|oui)first]">
+			<a href="#URL_FORUM" class="comment-number">#COMPTEUR_BOUCLE.</a>
+			[(#DATE|nom_jour)] [(#DATE|affdate)] <:spipclear:attime:>
+			[(#DATE|heures)]:[(#DATE|minutes)],
+			[<:par_auteur:>
+			<strong>(#NOM)</strong>]<BOUCLE_le_boss(AUTEURS){id_auteur}{statut=0minirezo}>
+			[(#REM) Feuilles de styles spipclear indexees par le theme choisie ]
+			[(#CONFIG{spipclear/choix_theme}|?{' ',''})
+				[(#SET{chemin_theme, [themes/(#CONFIG{spipclear/nom_theme})/]})]
+			]
+			[
+			<img src="(#CHEMIN{[(#GET{chemin_theme})]images/boss.gif})"
+			alt="<:spipclear:boss:>"
+			title="<:spipclear:boss:>" />
+			]</BOUCLE_le_boss>[ <span>::</span> <a href="(#URL_SITE)">[(#NOM_SITE|sinon{<:spipclear:site_comment:>})]</a>]
+		</dt>
+								
+		<dd class="[(#ID_ARTICLE|me{#ID_AUTEUR}|oui)me][(#COMPTEUR_BOUCLE|alterner{' odd',''})][ (#COMPTEUR_BOUCLE|=={1}|oui)first]">
+			[<strong>(#TITRE)</strong><br />]
+			[(#TEXTE|liens_absolus)]
+		</dd>
+	</BOUCLE_commentaires_article>
+	</dl>
+	</B_commentaires_article>
+	<:spipclear:aucun_commentaire:>
+	<//B_commentaires_article>
+</div>
+
+<div id="comment-form">
+	<h3 id="reponse"><:spipclear:ajouter_commentaire:></h3>
+	[(#FORMULAIRE_FORUM)][(#PARAMETRES_FORUM|?{'',<:spipclear:commentaires_fermes:>})]
+</div>
+
+<p id="comments-feed">
+	<a href="[(#URL_PAGE{rss}|parametre_url{id_article,#ID_ARTICLE}|parametre_url{type,co})]" class="feed" title="<:spipclear:rss_pour:> : [(#TITRE|textebrut|entites_html)]">
+	<:spipclear:rss_commentaire_article:>
+	</a>
+</p>
+</BOUCLE_article>

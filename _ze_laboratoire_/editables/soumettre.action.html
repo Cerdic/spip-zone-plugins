@@ -1,0 +1,87 @@
+#CACHE{0}
+<actions>
+<!-- "#E_VALEUR{id}" -->
+<BOUCLE_moi(SESSION){!anonymous}>
+<BOUCLE_art(ARTICLES){id_article=(#E_VALEUR{id})}{statut==.*}>
+<!-- modif de l'article #ID_ARTICLE -->
+<BOUCLE_art2(ARTICLES){id_article}{tous}{id_auteur=#ID_AUTEUR}{statut=prepa}>
+<!-- qu'on a le droit de toucher -->
+<update type='articles'>
+	<where name='id_article' value='#ID_ARTICLE'/>
+
+[(#E_MODIFIE{titre}|?{' ',''})
+	<set name='titre'>[(#E_VALEUR{titre}|sinon{sans titre}|htmlspecialchars)]</set>
+]
+[(#E_MODIFIE{texte}|?{' ',''})
+	<set name='texte'>[(#E_VALEUR{texte}|htmlspecialchars)]</set>
+]
+
+<!-- rub #E_VALEUR{rub} -->
+<BOUCLE_rubu(RUBRIQUES){racine}{tous}{id_rubrique=(#E_VALEUR{rub})}>
+	<!-- dans une rubrique autorisee -->
+	<set name='id_rubrique' value='#E_VALEUR{rub}'/>
+	<set name='id_secteur' value='#E_VALEUR{rub}'/>
+</BOUCLE_rubu>
+	<!-- dans la rubrique par defaut -->
+	<set name='id_rubrique' value='1'/>
+	<set name='id_secteur' value='1'/>
+<//B_rubu>
+
+[(#E_MODIFIE{submit}|?{' ',''})
+<!-- passer au statut "proposé" -->
+	<set name='statut' value='prop' />
+]
+
+</update>
+</BOUCLE_art2>
+<!-- qu'on n'a PAS le droit de toucher -->
+NAN !
+<//B_art2>
+</BOUCLE_art>
+<!-- creation d'un article -->
+<insert type='articles' id='art'>
+	<set name='titre'>[(#E_VALEUR{titre}|sinon{sans titre}|htmlspecialchars)]</set>
+
+[(#E_VALEUR{texte}|?{' ',''})
+	<set name='texte'>[(#E_VALEUR{texte}|htmlspecialchars)]</set>
+]
+
+	<set name='statut' value='prepa'/>
+	<set name='date' value='#DATE'/>
+
+<!-- rub #E_VALEUR{rub} -->
+<BOUCLE_rubi(RUBRIQUES){racine}{tous}{id_rubrique=(#E_VALEUR{rub})}>
+	<!-- dans une rubrique autorisee -->
+	<set name='id_rubrique' value='#E_VALEUR{rub}'/>
+	<set name='id_secteur' value='#E_VALEUR{rub}'/>
+</BOUCLE_rubi>
+	<!-- dans la rubrique par defaut -->
+	<set name='id_rubrique' value='1'/>
+	<set name='id_secteur' value='1'/>
+<//B_rubi>
+</insert>
+<!-- et rattachement a son auteur -->
+<insert type='spip_auteurs_articles'>
+	<set name='id_auteur' value='#ID_AUTEUR'/>
+	<set name='id_article' ref='art'/>
+</insert>
+<!-- modifier le titre en passant, pour montrer que c'est possible ;-) -->
+<update type='articles'>
+	<where name='id_article' ref='art'/>
+	<set name='surtitre'>surtitre id<value ref='art'/>.</set>
+</update>
+
+[(#E_MODIFIE{submit}|?{' ',''})
+<!-- passer au statut "proposé" -->
+<update type='articles'>
+	<where name='id_article' ref='art'/>
+	<set name='statut' value='prop' />
+</update>
+]
+
+<!-- fixer l'url de retour vers ce nouvel id -->
+<url>[(#SELF|parametre_url{id_article,})]&amp;id_article=<value ref='art'/></url>
+
+<//B_art>
+</BOUCLE_moi>
+</actions>

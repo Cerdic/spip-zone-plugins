@@ -1,0 +1,599 @@
+/* 
+	Theme Woof par Kozlika http://www.kozlika.org/kozeries/
+	Version: 1.0
+	Licence GNU/GPL
+	
+	Plan de la CSS
+		1. layout
+		2. balises html
+		3. page
+		4. haut de page
+		5. wrapper, main, content et constantes
+		6. billets
+		7. commentaires, pings
+		8. sidebar
+		9. footer
+		10. classes communes
+		11. pages spéciales
+		12. clearers
+*/
+
+/* ------------------------------------------------------------
+	1. IMPORT LAYOUT
+------------------------------------------------------------- */
+	@import url(layout.css);
+
+/* ------------------------------------------------------------
+	2. BALISES HTML
+------------------------------------------------------------- */
+body {
+	background: #f8f9e7 url(images/bg-body.png) repeat-y;
+	font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	}
+h2, h3, h4, h5, h6 {
+	margin: 1em 0;
+	color: #6eac25;
+	}
+h2 {
+	font-size: 1.6em;
+	}
+h3 {
+	font-size: 1.33em;
+	}
+h4 {
+	font-size: 1.2em;
+	}
+h5 {
+	font-size: 1.1em;
+	}
+h6 {
+	font-size: 1.5em;
+	}
+p {
+	margin: .66em 0;
+	}
+img a {
+	border: none;
+	}
+sup, sub {
+	font-size: .7em;
+	line-height: .7em;
+	}
+abbr, acronym {
+	border-bottom: 1px dotted;
+	}
+strong {
+	font-size: 92%;
+	}
+blockquote, q {
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-style: italic;
+	}
+blockquote em, q em {
+	font-style: normal;
+	}
+blockquote {
+	background: transparent url(images/quotef.png) no-repeat 99% 99%;
+	margin: .5em 2em;
+	padding: 1px 8px;
+	-moz-border-radius: 8px;
+	-moz-border-radius-bottomright: 0;
+	-webkit-border-radius: 8px;
+	-webkit-border-radius-bottomright: 0;
+	border: 1px solid #e90818;
+	}
+cite {
+	font-size: .9em;
+	}
+ul, ol, dd {
+	margin-left: 2.5em;
+	}
+form {
+	border: none;
+	}
+fieldset {
+	border: none;
+	}
+input {
+	border: 1px solid #e90818;	
+	}
+input[type=submit]:hover {
+	background: #e90818;
+	color: #fff;
+	}
+code, pre {
+	font-family: "Courier New", Courier, mono;
+	background: #f0f0f5;
+	}
+pre {
+	margin: 1em;
+	overflow: auto;
+	padding: 1px 8px;
+	line-height: 120%;
+	}
+hr {
+	height: 1px;
+	border: 0;
+	border-top: 1px dashed #999;
+	width: 50%;
+	height: 1px;
+	}
+
+/* les liens en general... */
+a {
+	text-decoration: none;
+	padding: 0 1px;
+	}
+a:link, a:visited {
+	color: #F76414;
+	}
+a[hreflang]:after {
+	font-size: .9em;
+	color: #999;
+	}
+a img {
+	border: none;
+	}
+/* ... et en particulier */
+#top h1 a:link, #top h1 a:visited {
+	color: #db3283;
+	}
+#prelude, #prelude a {
+	color: #fff;
+	}
+#content a:link, #content a:visited {
+	color: #e20816;
+	}
+.post-content a {
+	text-decoration: underline;
+	}
+#content .read-it a:link, #content .read-it a:visited {
+	color: #F76414;
+	}
+#content .post-tags a:link, #content .post-tags a:visited,
+#content .post-info-co a:link, #content .post-info-co a:visited,
+#sidebar a:link, #sidebar a:visited {
+	color: #78570a;
+	}
+#content .arch-info a:link, content .arch-info:visited {
+	color: #999;
+	}
+/* tous les liens sont roses au survol */
+a:hover, a:focus,
+#top h1 a:hover, #top h1 a:focus,
+#content a:hover, #content a:focus,
+#content .post-info-co a:hover, #content .post-info-co a:focus,
+.read-it a:hover, .read-it a:focus,
+#sidebar a:hover, #sidebar a:focus,
+#content .arch-info a:hover, content .arch-info:focus,
+	{
+	color: #db3283;
+	background: #fff;
+	}
+#top h1 a:hover, #top h1 a:focus {
+	background: transparent;
+	}
+
+/* ------------------------------------------------------------
+	3. PAGE
+------------------------------------------------------------- */
+#page {
+	background: #f8f9e7 url(images/tree.jpg) no-repeat 20px top;
+	}
+
+/* ------------------------------------------------------------
+	4. HAUT DE PAGE
+------------------------------------------------------------- */
+#top h1 {
+	background: transparent url(images/ico-title.png) no-repeat right center;
+	padding-right: 50px;
+	font-size: 2.66em;
+	text-align: right;
+	font-weight: normal;
+	}
+#top h1 a {
+	display: block;
+	padding: 14px 0;
+	background: transparent;
+	}
+
+/* ------------------------------------------------------------
+	5. WRAPPER MAIN CONTENT
+------------------------------------------------------------- */
+#wrapper {
+	background: transparent url(images/vertical.png) repeat-y right top;
+	}
+#content-info {
+	margin: 0 36px;
+	text-align: center;
+	color: #6eac25;
+	line-height: 130%;
+	}
+#content-info h2 {
+	margin-bottom: .5em;
+	font-size: 1.33em;
+	}
+#content-info p {
+	margin: .5em 0;
+	}
+#subcategories {
+	margin: 0;
+	text-align: center;
+	}
+#subcategories h3 {
+	font-size: 1.1em;
+	margin-bottom: 0;
+	}
+#subcategories ul {
+	margin: 0;
+	list-style-type: none;
+	}
+.content-inner {
+	background: #fff;
+	-moz-opacity: 0.8;
+	opacity: 0.8;
+	filter: alpha(opacity=80);
+	padding: 12px 36px;
+	-moz-border-radius: 12px;
+	-webkit-border-radius: 12px;
+	border: 2px solid #beb707;
+	color: #000;
+	}
+#navlinks, .navlinks, .pagination {
+	margin: 0 36px;
+	text-align: right;
+	}
+
+/* ------------------------------------------------------------
+	6. BILLETS
+------------------------------------------------------------- */
+.post {
+	margin: 4em 0;
+	padding: 0 12px;
+	border: 1px solid #beb707;
+	background-color: #fff;
+	-khtml-opacity: 0.8;
+	-moz-opacity: 0.8;
+	opacity: 0.8;
+	filter: alpha(opacity=80);
+	-moz-border-radius-topleft: 12px;
+	-moz-border-radius-topright: 12px;
+	-webkit-border-top-left-radius: 12px;
+	-webkit-border-top-right-radius: 12px;
+	color: #000;
+	text-align: justify;
+	}
+.post .opaque {
+	-moz-opacity: 1;
+	opacity: 1;
+	filter: alpha(opacity=100);
+	position: relative;
+	}
+.day-date {
+	display: none;
+	}
+h2.post-title {
+	margin: 1em 0 .2em 0;
+	text-align: center;
+	}
+.post-excerpt ul, .post-content ul,
+.post-excerpt ol, .post-content ol {
+	margin: 1em 0 1em 2.5em;
+	}
+.post-excerpt ul li, .post-content ul li,
+.post-excerpt ol li, .post-content ol li {
+	margin-bottom: .3em;
+	}
+.post-info {
+	margin: 0;
+	font-size: .85em;
+	text-align: center;
+	}
+.post-info-co {
+	margin: 1em -12px 0 -12px;
+	background: #c0dd8d;
+	text-align: center;
+	font-size: .85em;
+	}
+.post-tags {
+	margin: 0;
+	padding: 0;
+	font-size: .86em;
+	text-align: center;
+	}
+.post-tags li {
+	display: inline;
+	}
+.post-tags li a {
+	padding: 0 4px;
+	}
+.dc-home .post-tags {
+	display: none;
+	}
+.read-it {
+	color: #F76414;
+	text-align: right;
+	margin-bottom: 0;
+	}
+.footnotes {
+	font-size: .9em;
+	}
+.footnotes h4 {
+	font-size: 1em;
+	text-transform: uppercase;
+	}
+.comment_count {}
+.pings_count {}
+.attach_count {}
+#attachments {}
+#attachments h3 {}
+#attachments ul {}
+#attachments ul li {}
+#attachments li.audio {}
+#attachments li.package {}
+#attachments li.text {}
+
+/* ------------------------------------------------------------
+	7. COMMENTAIRES, PINGS
+------------------------------------------------------------- */
+#comments, #pings, #pr {
+	color: #777;
+	}
+#pr {
+	background: #f8f9e7;
+	padding: 4px 8px;
+	margin-top: 1em;
+	}
+#comments h3, #pings h3, #comment-form h3 {
+	color: #fff;
+	}
+#pr h3 {
+	color: #888;
+	}
+#comments dt, #pings dt {
+	margin: 0;
+	padding: 2px 1em;
+	background: #EDF2C0;
+	}
+#comments dd, #pings dd {
+	margin: 0 0 1.5em 0;
+	padding: 2px 1em 0.5em 1em;
+	background: #fff;
+	}
+#comments dt.me, #comments dd.me {
+	color: #000;
+	}
+#comments dd.me {
+	background: #fff url(images/icopost.png) no-repeat 0 0;
+	text-indent: 32px;
+	}
+
+/* formulaire des commentaires */
+#comment-form {
+	background: #f7b322;
+	color: #fff;
+	padding: 2px 12px;
+	}
+.field label {
+	clear: left;
+	display: block;
+	width: 10em;
+	float: left;
+	}
+.field #c_content {
+	clear: both;
+	display: block;
+	width: 90%;
+	margin-top: 1em;
+	}
+.form-help {
+	font-size: .9em;
+	}
+#ping-url {
+	padding-left: 12px;
+	background: #c0dd8d;
+	}
+#comments-feed {
+	padding-left: 12px;
+	}
+
+/* ------------------------------------------------------------
+	8. SIDEBAR
+------------------------------------------------------------- */
+#sidebar {
+	background: #EDF2C0 url(images/tige.png) repeat-y 49% bottom;
+	font-size: .95em;
+	line-height: 130%;
+	color: #6eac25;
+	}
+#sidebar h2 {
+	font-size: 1.1em;
+	}
+#sidebar h3 {
+	font-size: 1em;
+	}
+#sidebar ul {
+	margin-left: .5em;
+	padding-left: .5em;
+	}
+#sidebar li {
+	margin-left: .5em;
+	padding: 2px 0;
+	}
+#search form {
+	width: 140px;
+	padding: 0;
+	}
+#search fieldset {
+	padding: 0;
+	margin: 0;
+	}
+#search p {
+	margin: 0;
+	}
+#search input[type=text], #search q {
+	width: 90px;
+	margin: 0;
+	}
+#search input[type=submit], #search .submit {
+	font-size: x-small;
+	}
+#topnav span {
+	display: none;
+	}
+.topnav-arch {	
+	}
+.topnav-home {
+	}
+#sidebar .syndicate ul {
+	list-style-type: none;
+	margin-left: 0;
+	padding-left: 0;
+	}
+#sidebar .syndicate ul li {
+	margin: 0 0 0 .5em;
+	}
+
+/* ------------------------------------------------------------
+	9. FOOTER
+------------------------------------------------------------- */
+#footer {
+	margin-top: 40px;
+	background: transparent url(images/combi.jpg) no-repeat 60px top;
+	}
+#footer p {
+	padding-left: 240px;
+	padding-top: 86px;
+	font-size: 1.3em;
+	color: #6eac25;
+	}
+
+/* ------------------------------------------------------------
+	10. CLASSES COMMUNES
+------------------------------------------------------------- */
+/* class sur les liens rss (on peut y placer l'icone
+feed.png a piocher dans le theme par defaut par ex.) */
+.feed {
+	padding-left: 20px;
+	background: transparent url(images/rss.png) no-repeat left bottom;
+	}
+/* tags dans le sidebar et dans la page les regroupant
+(exemple ici pour un nuage) */
+.dc-tags #content ul li, .dc-tags #content ul li a {
+	display: inline;
+	width: auto;
+	padding-left: 0;
+	padding-right: 4px;
+	background: transparent;
+	line-height: 1.5em;
+	}
+.tags ul li a:hover {
+	background-image: none;
+	}
+.dc-tags .tag0, .tags .tag0 {
+	font-size: 85%;
+	}
+.dc-tags .tag10, .tags .tag10 {
+	font-size: 90%;
+	}
+.dc-tags .tag20, .tags .tag20 {
+	font-size: 95%;
+	}
+.dc-tags .tag30, .tags .tag30 {
+	font-size: 100%;
+	}
+.dc-tags .tag40, .tags .tag40 {
+	font-size: 105%;
+	}
+.dc-tags .tag50, .tags .tag50 {
+	font-size: 110%;
+	}
+.dc-tags .tag60, .tags .tag60 {
+	font-size: 115%;
+	}
+.dc-tags .tag70, .tags .tag70 {
+	font-size: 120%;
+	}
+.dc-tags .tag80, .tags .tag80 {
+	font-size: 125%;
+	}
+.dc-tags .tag90, .tags .tag90 {
+	font-size: 130%;
+	}
+.dc-tags .tag100, .tags .tag100 {
+	font-size: 135%;
+	}
+
+/* messages d'erreur */
+.error {
+	border: 1px solid #c44;
+	background: #df0;
+	padding: 0.5em;
+	}
+.error ul {
+	padding-left: 20px;
+	}
+.error li {
+	list-style: square;
+	}
+
+/* exemples de ceux que j'ajoute souvent */
+.left {
+	float: left;
+	margin-right: 1em;
+	}
+.right {
+	float: right;
+	margin-left: 1em;
+	}
+.center {
+	margin-left: auto;
+	margin-right: auto;
+	}
+.left-text {
+	text-align: left;
+	}
+.right-text {
+	text-align: right;
+	}
+.center-text {
+	text-align: center;
+	}
+.little-text {
+	font-size: .8em;
+	}
+.little-upper-text {
+	font-size: .8em;
+	text-transform: uppercase;
+	}
+
+/* ------------------------------------------------------------
+	11. PAGES SPECIFIQUES
+------------------------------------------------------------- */
+.dc-post .post {
+	background: #fff;
+	-khtml-opacity: 1;
+	-moz-opacity: 1;
+	opacity: 1;
+	filter: alpha(opacity=100);
+}
+.dc-archive-month .post-title {
+	font-size: 1.2em;
+	}
+.dc-archive-month .post-title span.day {
+	font-size: 1.5em;
+	font-weight: bold;
+	color: #6eac25;
+	}
+.dc-tags .content-inner {
+	font-size: 1.66em;
+	}
+	
+/* ---------------------------------------------------
+  12. ET POUR FINIR NE PAS OUBLIER LES CLEARERS
+	ici ceux le plus souvent necessaires
+--------------------------------------------------- */
+.post, .post-content, .footnotes, .attachments, 
+.post-info-co, #comments, #footer, .post h3, .post h4 {
+	clear: both;
+	}

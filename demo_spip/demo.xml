@@ -1,0 +1,92 @@
+<demos>
+<demo name="test">
+  <step num="1">
+    <title>Demo step 1</title>
+    <content><![CDATA[
+      <p>
+      Testo dello step <strong>1</strong>
+      </p>
+      <p>
+      Highlight del testo crea rubrica
+      </p>          
+    ]]>
+    </content>
+    <actions>
+      <highlight selector="table.cellule-h-table[a[@href*='?exec=rubriques_edit&amp;new=oui']]" color="red" />
+      <highlight selector="table.cellule-h-table[a[@href*='?exec=articles_edit&amp;new=oui']]" />
+    </actions>
+  </step>
+  <step num="2">
+    <title>Demo step 2</title>
+    <content><![CDATA[
+      <p>
+      Testo dello step <strong>2</strong>
+      </p>          
+    ]]>
+    </content>
+    <actions>
+      <reversehighlight selector="table.cellule-h-table[a[@href*='?exec=rubriques_edit&amp;new=oui']]" />    
+    </actions>
+  </step>
+  <step num="3">
+    <title>Demo step 3</title>  
+    <content><![CDATA[
+      <p>
+      Testo dello step <strong>3</strong>
+      </p>          
+    ]]>
+    </content>
+    <actions>
+      <!-- the loop attribute enable looping of mouse actions -->
+      <mouse loop="true">
+        <!-- set the mouse image to the offset of the element selected by selector -->
+        <set selector="div.jqmWindow" />
+        <!-- time is in seconds -->
+        <pause time="1"/>
+        <!-- speed is in px/s -->
+        <move selector="table.cellule-h-table[a[@href*='?exec=rubriques_edit&amp;new=oui']]" speed="200" />
+        <!-- when using "set" or "move", the targeted element is stored, 
+             enabling to show a click image on the last selected element.
+             Optionally a delayEvent="seconds" attribute will fire a real 
+             click event on the element itself after n seconds from the
+             moment the "click" image is displayed. 
+        -->
+        <click />
+      </mouse>
+    </actions>
+  </step>
+  <step num="4">
+    <window>
+      <!-- styling of the window 
+           each rule defines a name property and its value
+      -->
+      <css>
+        <rule name="top" val="10px" />
+        <rule name="left" val="10px" />
+        <rule name="marginLeft" val="0" />
+        <rule name="width" val="200px" />
+        <rule name="height" val="100px" />
+        <rule name="overflow" val="auto" />
+      </css>
+    </window>
+    <title>Demo step 4</title>  
+    <content><![CDATA[
+      <p>
+      Testo dello step <strong>4</strong>
+      </p>          
+    ]]>
+    </content>
+    <actions>
+      <mouse loop="true">
+        <set selector="div.jqmWindow" />
+        <pause time="1" />
+        <move selector="div.titrem[a[@href*=articles_page]]" />
+        <pause time="1" />
+        <click delayEvent="1" />
+      </mouse>
+    </actions>
+  </step>
+</demo>
+<demo name="test2">
+</demo>
+</demos>

@@ -1,0 +1,26 @@
+#CACHE{3600}
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+<title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#INTRODUCTION|couper{150}|textebrut)" />]
+<INCLURE{fond=inc-head}>
+<link rel="stylesheet" href="[(#CHEMIN{outliner.css})]" type="text/css" media="all" />
+<script type='text/javascript' src='#CHEMIN{javascript/dimensions.js}'></script>
+<script type='text/javascript' src='#CHEMIN{javascript/outliner.js}'></script>
+<script type='text/javascript'><!--
+var crayons_init_dynamique = true;
+//-->
+</script>
+<style type='text/css'><!--
+div.ouvert{background:url(#EVAL{_DIR_IMG_PACK}noeud_moins.gif) no-repeat top left;padding-left:15px;}
+div.ferme{background:url(#EVAL{_DIR_IMG_PACK}noeud_plus.gif) no-repeat top left;padding-left:15px;}
+//--></style>
+</head>
+
+<body class="outliner">
+[(#INCLUDE{fond=outline_toolbar}{id_table=#ENV{id_table}})]
+<INCLURE{fond=outline_table}{id_table}>
+#FORMULAIRE_ADMIN
+</body>
+</html>

@@ -1,0 +1,131 @@
+#CACHE{24*3600}
+
+<?php
+$hierarchie = array();
+<BOUCLE_recup_rub(RUBRIQUES){id_rubrique}>
+	<BOUCLE_recup_hierarchie(HIERARCHIE){id_rubrique}>
+		$hierarchie[] = #ID_RUBRIQUE;
+	</BOUCLE_recup_hierarchie>
+	$hierarchie[] = #ID_RUBRIQUE;
+</BOUCLE_recup_rub>
+?>
+
+<script language="JavaScript" type="text/javascript" src="plugins/eva/javascript/fonction_alterner_visibilite.js">
+</script>
+
+<div class="sommaire">
+<ul id="en_cours">
+		<li>
+			<img src='/dist/images/searching.gif' class="absmiddle" alt='Chargement en cours...'/>&nbsp;
+			<span class='en_cours'>
+				Chargement du menu...
+			</span>
+		</li>
+</ul>
+<ul style="display:none" id="liste_complete">
+	<li[ class="(#ENV{accueil}|=={'1'}|?{'on','off'})"]>
+		<img src="plugins/eva/images/[(#ENV{accueil}|=={'1'}|?{'ledlightblue.png','ledblue.png'})]" class="absmiddle" alt="O" title="Retour à l’accueil" />
+		<a href="#URL_SITE_SPIP" class="[(#ENV{accueil}|=={'1'}|?{'on','off'})]">
+			<:accueil_site:>
+		</a>
+	</li>
+
+<?php /* Boucles */ ?>
+<BOUCLE_secteurs(RUBRIQUES){id_parent=0}{id_secteur!=1}{par num titre}>
+	<li class="liste_secteurs[ (#EXPOSE)]" id="item_#ID_RUBRIQUE">
+<script language="JavaScript" type="text/javascript">
+	var position_initiale = document.getElementById("item_"+#ID_RUBRIQUE).style.position.left;
+</script>
+			<img style="cursor:pointer" onclick="javascript:alterner_visibilite(#ID_RUBRIQUE, 'non')" src="plugins/eva/images/[(#EXPOSE{folder_blue_open.png,folder_blue.png})]" name="puce_#ID_RUBRIQUE" alt="Déplier/Refermer la rubrique" class="absmiddle" />
+		<script type="text/javascript">
+			liste_cache.push("#ID_RUBRIQUE");
+			liste_cache_secteurs.push("#ID_RUBRIQUE");
+		</script>
+			<a href="#URL_RUBRIQUE"[ title="(#DESCRIPTIF|supprimer_tags)"] class="liens_secteur[ (#ENV{id_rubrique}|=={#ID_RUBRIQUE}|?{'on', ''})]">
+				[(#TITRE|supprimer_numero)] <?php /* Titres des secteurs */ ?>
+			</a>
+	<B_articles>
+		<ul class="liste_articles_menu">
+		<BOUCLE_articles(ARTICLES){id_rubrique}{par num titre}>
+				<li class="articles_menu">
+					<a class="liens_articles[ (#EXPOSE)]" href="#URL_ARTICLE"[ title="(#DESCRIPTIF|supprimer_tags)"] name="art_#ID_ARTICLE">
+						[(#TITRE|supprimer_numero)] <?php /*Titres des articles*/ ?>
+					</a>
+				</li> <?php /* A : ferme B */ ?>
+		</BOUCLE_articles>
+			</ul>
+	</B_articles>
+
+	<B_rubriques>
+		<ul class="liste_rubriques_ul">
+		<BOUCLE_rubriques(RUBRIQUES){id_parent}{par num titre}>
+  			<li class="liste_rubriques_li [ (#ENV{id_rubrique}|=={#ID_RUBRIQUE}|?{'on', ''})]" id="item_#ID_RUBRIQUE"> <?php /* B : ouvre A */ ?>
+					<img style="cursor:pointer" onclick="javascript:alterner_visibilite(#ID_RUBRIQUE, 'non')" src="plugins/eva/images/[(#EXPOSE{folder_blue_open.png,folder_blue.png})]" alt="Déplier/Refermer la rubrique" name="puce_#ID_RUBRIQUE" class="absmiddle" />
+					<a class="liens_rubriques[ (#ENV{id_rubrique}|=={#ID_RUBRIQUE}|?{'on', ''})]" href="#URL_RUBRIQUE"[ title="(#DESCRIPTIF|supprimer_tags)"]>
+						<strong>[(#TITRE|supprimer_numero)]</strong>
+					</a> <?php /* Titres des rubriques */ ?>
+					<script type="text/javascript">
+						liste_cache.push("#ID_RUBRIQUE");
+					</script>
+			<BOUCLE_articles_rubriques(BOUCLE_articles)>
+			</BOUCLE_articles_rubriques>
+
+			<BOUCLE_sous_rubriques(BOUCLE_rubriques)>
+				<BOUCLE_articles_sous_rubriques(BOUCLE_articles)>
+				</BOUCLE_articles_sous_rubriques>
+			</BOUCLE_sous_rubriques>
+		</li>
+		</BOUCLE_rubriques>
+			</ul>
+	</B_rubriques>
+
+	</li>
+</BOUCLE_secteurs>
+</ul>
+<script type="text/javascript">
+	deplier(liste_cache);
+</script>
+<?php
+for($i=0; $i < count($hierarchie); $i++){
+echo "
+	<script type='text/javascript'>
+		alterner_visibilite($hierarchie[$i], 'oui');
+	</script>
+";
+}
+?>
+[(#ENV{tout}|=={'oui'}|?{'<script type="text/javascript">tout_ouvrir()</script>',''})]
+</div>
+<div class="sommaire[ (#ENV{tout}|=={'oui'}|?{'invisible',''})]" id="bloc_navigation">
+	<ul>
+		<li><img src="plugins/eva/images/[(#ENV{plan_mots}|=={'oui'}|?{'ledlightblue.png','ledblue.png'})]" class="absmiddle" alt="O" title="Navigation par mots-clés" />
+			<a class="navigation[ (#ENV{plan_mots}|=={'oui'}|?{'on', ''})]" href="?page=plan-mots" title="Navigation par mots-clés">
+				<:mots_clefs:>
+			</a>
+		</li>
+	</ul>
+	<ul>
+		<li><img src="plugins/eva/images/[(#ENV{tout}|=={'oui'}|?{'ledlightblue.png','ledblue.png'})]" class="absmiddle" alt="O" title="Plan du site" />
+			<a class="navigation[ (#ENV{tout}|=={'oui'}|?{'on', ''})]" href="?page=plan" title="Plan du site">
+				<:plan_site:>
+			</a>
+		</li>
+	</ul>
+	<ul>
+		<li><img src="plugins/eva/images/ledblue.png" title="Afficher les articles les plus consultés" alt="O" class="absmiddle" />
+			<a class="navigation" href="javascript:afficher_populaires()" title="Afficher les articles les plus consultés">
+				Articles populaires
+			</a>
+				<div class="populaires_menu" id="populaires_menu">[(#MODELE{total}{type=popularite}{accueil=1})]</div>
+		</li>
+	</ul>
+</div>
+<div class="bloc[ (#ENV{tout}|=={'oui'}|?{'invisible',''})]">
+	<h4 class="center">Chercher dans le site</h4>
+	<div class="center">#FORMULAIRE_RECHERCHE</div>
+</div>
+<div class="clear"></div>
+
+<script language="JavaScript" type="text/javascript">
+cacher_en_cours();
+</script>

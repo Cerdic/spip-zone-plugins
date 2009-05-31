@@ -1,0 +1,61 @@
+label {
+	display: block;
+	clear: both;
+	font-style: italic;
+}
+
+#docs li {
+	display: block;
+	clear: both;
+}
+
+.fn {
+	font-wight: bold;
+}
+
+.orig {
+	float: left;
+	width: 49%;
+	margin-top: 5px;
+
+	border: solid 1px green;
+}
+
+.trad {
+	float: left;
+	width: 49%;
+	margin-top: 5px;
+	margin-bottom: 15px;
+	margin-left: 5px;
+
+	border: solid 1px red;
+}
+
+.xml {
+	display: none;
+}
+
+.editable {
+	border: solid 2px red;
+/*	min-height: 5px;*/
+}
+
+.etat {
+	float: right;
+	border: solid 1px red;
+	border-top: 0px;
+	border-right: 0px;
+}
+
+img {
+	margin: 2px;
+	border: 0;
+}
+
+.resizehandle {
+	background:transparent url("http://www.jquery.info/images/resizer.png") no-repeat scroll 45%;
+	cursor:s-resize;
+	font-size:0.1em;
+	height:16px;
+	width:100%;
+}

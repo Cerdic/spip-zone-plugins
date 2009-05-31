@@ -1,0 +1,48 @@
+#CACHE{0}
+[(#HTTP_HEADER{Content-type: text/xml[; charset=(#CHARSET)]})]
+<?php echo '<' ?>?xml version="1.0"[ encoding="(#CHARSET)"]?>
+
+<rss  version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" 
+xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" 
+xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd">
+
+<channel>
+	<title>[(#NOM_SITE_SPIP|texte_backend)]</title>
+	<link>#URL_SITE_SPIP/</link>
+	<description></description>
+    <itunes:category text="Music"/>
+    <itunes:owner>
+		<itunes:name>[(#NOM_SITE_SPIP|texte_backend)]</itunes:name>
+		<itunes:email>#EMAIL_WEBMASTER</itunes:email>
+	</itunes:owner>
+	<itunes:explicit>no</itunes:explicit>
+	<language>#LANG</language>
+	<BOUCLE_un_article(ARTICLES){id_rubrique ?}{id_mot ?}{id_auteur ?}{recherche ?}{id_article ?}{par date}{inverse}><item>
+	<title>[(#TITRE|supprimer_numero|texte_backend|couper{80})]</title>[<guid isPermaLink="true">(#URL_ARTICLE|url_absolue)</guid>][<link>(#URL_ARTICLE|url_absolue)</link>]<description>&lt;div style='width:230px;float:left;'&gt;
+			&lt;div id='player'&gt;&lt;/div&gt;
+			&lt;div style='font-size:10px; text-align:left;float:left;width:110px;'&gt;[(#CHAPO|texte_backend)] &lt;/div&gt;
+			<BOUCLE_imaxe(DOCUMENTS){id_article}{titre=plan-google-map}{extension==jpg|png|gif}{0,1}>&lt;a href='[(#URL_DOCUMENT|url_absolue)]' title='#TITRE' width='#LARGEUR' style='float:right;' height='#HAUTEUR'&gt;&lt;img src='[(#URL_DOCUMENT|url_absolue)]' border='0' height='90' alt='Single Image'&gt;&lt;/a&gt;</BOUCLE_imaxe>
+&lt;br&gt;&lt;a href='#' style='clear:both;font-size:10px;' onclick='showpanel();return false;' &gt;Calculer un itinéraire&lt;/a&gt;&lt;/div&gt;</description>[<dc:date>(#DATE|date_iso)</dc:date>]
+<B_mymap>
+<geo_points>
+<BOUCLE_mymap(SPIP_MYMAP){id_article}>
+	<geo_point>
+	<geo_mmark>#MARKER</geo_mmark>
+		<geo_lat>#LAT</geo_lat>
+		<geo_long>#LONX</geo_long>
+		<geo_desc>
+			&lt;div style='font-size:10px; text-align:left;float:left;width:230px;'&gt;[(#DESCRIPTIF|texte_backend)]&lt;br&gt;&lt;a href='#' style='clear:both;font-size:10px;' onclick='showpanel(#LAT,#LONX);return false;' &gt;Calculer un itinéraire&lt;/a&gt;&lt;/div&gt;					
+		</geo_desc>
+		<geo_descrapide>[(#DESCRIPTIF|firstLine|textebrut)]</geo_descrapide>
+	</geo_point>
+</BOUCLE_mymap>
+</geo_points>
+</B_mymap>
+<BOUCLE_kml(DOCUMENTS){id_article}{extension==kml|kmz}{0,1}>
+<mymap_kml>
+[(#URL_DOCUMENT|url_absolue)]
+</mymap_kml>
+</BOUCLE_kml>
+<geo_to>#TOTAL_BOUCLE</geo_to><BOUCLE_mp3(DOCUMENTS){id_article}{mode=document}{extension=mp3}{0,1}><enclosure url="[(#URL_DOCUMENT|url_absolue)]" length="#TAILLE" type="audio/mpeg" /></BOUCLE_mp3><B_tags1><geo_icon><BOUCLE_tags1(MOTS){id_article}{type=marker_icon}>[#CHEMIN{IMG}/(#LOGO_MOT|fichier)]</BOUCLE_tags1></geo_icon></B_tags1><B_tags><dc:subject><BOUCLE_tags(MOTS){id_article}>#TITRE</BOUCLE_tags></dc:subject></B_tags>[<itunes:author>(#LESAUTEURS|supprimer_tags|texte_backend)</itunes:author>][<itunes:summary>(#DESCRIPTIF|couper{80}|texte_backend)</itunes:summary>]<itunes:duration>00:00:00</itunes:duration>[<dc:language>(#LANG)</dc:language>][<dc:creator>(#LESAUTEURS|supprimer_tags|texte_backend)</dc:creator>]</item></BOUCLE_un_article>
+</channel>
+</rss>

@@ -1,0 +1,32 @@
+a.affgloss {
+color: #000;
+text-decoration: none;
+border-bottom: 1px dotted #666;
+}
+a.affgloss:hover {
+cursor: help;
+text-decoration: none;
+color:#000;
+}
+.texte_gloss {
+font-family: Verdana, Arial, Helvetica, sans-serif;
+font-size: 0.7em;
+text-align: justify;
+}
+h2 .texte_gloss {
+font-family: Verdana, Arial, Helvetica, sans-serif;
+font-size: 0.7em;
+}
+.navgloss {
+color: #666666;
+font-family: verdana, arial, sans-serif;
+font-size: 0.6em;
+}
+.navgloss a {
+color: #666666;
+text-decoration: none;
+}
+.navgloss a:hover {
+color: #000;
+text-decoration: none;
+}

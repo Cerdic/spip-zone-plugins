@@ -1,0 +1,154 @@
+#CACHE{0}
+
+<BOUCLE_rubrique_principal(RUBRIQUES) {id_rubrique=41}>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+	<title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+	[<meta name="description" content="(#INTRODUCTION|couper{150}|textebrut)" />]
+	<INCLURE{fond=inc-head}>
+
+	[(#REM) Lien vers le flux RSS de la rubrique ]
+	<link rel="alternate" type="application/rss+xml" title="<:syndiquer_rubrique:>" href="[(#URL_PAGE{backend}|parametre_url{id_rubrique,#ID_RUBRIQUE})]" />
+
+
+	<link rel="stylesheet" href="[(#CHEMIN{mag_maj.css})]">
+	<link rel="stylesheet" href="[(#CHEMIN{jwindow.css})]">
+	
+<!--	<script language="JavaScript" type="text/javascript" src="#CHEMIN{jquery.js}"></script> 
+	<script language="JavaScript" type="text/javascript" src="#CHEMIN{jquery.js}"></script>-->
+	
+	<script language="JavaScript" type="text/javascript" src="#CHEMIN{ifx.js}"></script>
+	<script language="JavaScript" type="text/javascript" src="#CHEMIN{iutil.js}"></script>
+	<script language="JavaScript" type="text/javascript" src="#CHEMIN{ifxtransfer.js}"></script>
+	<script language="JavaScript" type="text/javascript" src="#CHEMIN{idrag.js}"></script>
+	<script language="JavaScript" type="text/javascript" src="#CHEMIN{jwindow.js}"></script>
+</head>
+<body class="page_rubrique">
+	
+
+
+<div id="page pageS">
+
+<div id="entete">
+    
+    [(#REM) Afficher le logo ou le titre du site ]
+    <a rel="start" href="#URL_SITE">
+    [(#LOGO_RUBRIQUE)] <span id="nom_site_spip">#TITRE<img src="[(#CHEMIN{/img_pack/zone.png})]"></span>
+    </a>
+    <a class="feedTotal" href="[(#URL_PAGE{backend}|parametre_url{id_rubrique,#ID_RUBRIQUE})]"><img src="dist/images/feed.png"></a>
+		 			#FORMULAIRE_RECHERCHE
+<br class="nettoyeur" />
+</div>
+
+	<div id="hierarchie">
+
+ [(#REM) la noisette form_ahah : jQuery lave plus blanc et protège l'accés de vos formulaires dans les squelettes]
+    <a href="#jwindow_plugin_upload?250,400" class="window_link feedTotal blocUpload version" title="Saisie d'un fichier plugin.xml" style="background-image: url(#CHEMIN{/img_pack/mag_maj_upload-24.png});">[Ajouter un fichier plugin.xml]</a>
+    <div class="window_content" id="jwindow_plugin_upload">
+ 			<div class="window_main">
+					 <INCLURE{fond=form_ahah}{id_form=mag_maj}{prefix_traitement=editer_mag_maj}{form_public=1}>
+			</div> <!-- fin window_main -->
+    </div>  <!-- fin window_content -->
+
+	[(#REM) Fil d'Ariane ]
+	<a class="ariane" href="#URL_SITE_SPIP"><:accueil_site:></a>
+<!--	</div> <br class="nettoyeur" /> -->
+
+</div>		<!-- fin hierarchie  -->
+</div>   <!-- fin entete  -->
+
+
+	<div id="conteneur">
+		#SET{txt_info,#TEXTE}  
+		#SET{desc_info,#DESCRIPTIF}
+
+	  <BOUCLE_rub_petiteliste(RUBRIQUES){id_parent}>
+		<div class="intro#COMPTEUR_BOUCLE">
+		<ul class="petiteListe">
+			 <BOUCLE_petite_liste(RUBRIQUES){id_parent}{par date}{inverse}>
+						<li><a href="#[(#TITRE)]">[(#LOGO_RUBRIQUE||image_reduire{16,16})] [(#TITRE)]</a></li>
+			 </BOUCLE_petite_liste>
+		</ul>
+			[(#COMPTEUR_BOUCLE|=={1}|?{[<div class="introGenerale"><img src="#URL_SITE_SPIP/dist/images/fiche-perso-24.gif"> (#GET{txt_info})</div>],
+		  												 [<div class="introGenerale"><img src="#URL_SITE_SPIP/dist/images/aide.gif"> (#GET{desc_info})</div>] 
+		 })]
+		</div>
+		</BOUCLE_rub_petiteliste>
+			 
+		<B_type_plugin>
+		<BOUCLE_type_plugin(RUBRIQUES){id_parent}>
+		[(#REM) Contenu principal : contenu de la rubrique ]
+		
+		
+		<div class="contenu" id="type_#COMPTEUR_BOUCLE">
+
+			<div class="cartouche">
+				<h1 class="titreP">[(#LOGO_RUBRIQUE||image_reduire{200,200})] [(#TITRE)] </h1>
+				   [<div class="titre_type">(#DESCRIPTIF)</div>]
+				   [(#REM)<div class="texte_type">(#TEXTE)</div>]
+				#SET{type,#TITRE}
+			</div>
+
+			[<div class="chapo">(#TEXTE)</div>]
+
+			<BOUCLE_liste_plugins(RUBRIQUES){id_parent}>
+						
+			<div class="contre-encart">
+			
+					 <a name="[(#TITRE)]" id="#[(#TITRE)]"></a>
+    			<div class="cartouche">
+    				#SET{titre_plugin,#TITRE}
+						#SET{logo_plugin,#LOGO_RUBRIQUE||image_reduire{200,200}}
+  			 		 <BOUCLE_presentation(ARTICLES){id_rubrique = #ID_RUBRIQUE}{par date} {inverse} {0, 1} {doublons}>
+										<div class="urls"> 
+   						 		  [<div class="lien_plugin"> <a href="(#URL_SITE|mag_maj_url_plugin{svn})">svn<br><img src="[(#CHEMIN{/img_pack/zone.png})]"></a> </div>]
+    								[<div class="lien_plugin"><a href="(#URL_SITE|mag_maj_url_plugin{zip})">zip<br><img src="dist/images/synchro-24.gif"></a></div>]
+    								[<div class="lien_plugin"><a href="(#URL_PAGE{backend}|parametre_url{id_rubrique,#ID_RUBRIQUE})">rss<br><img src="dist/images/feed.png"></a></div>]
+										</div>
+            				<h1 class="tPlugin"><a href="spip.php?article#ID_ARTICLE">[(#GET{logo_plugin})] [(#GET{titre_plugin})]</a></h1>
+										<br class="nettoyeur" />										
+  					 				[<div class="itemDescription"><span class="titreItem">Nom :</span><span class="tPlugin">(#TITRE|propre)</span></div>]
+										<div class="itemDescription">[<span class="titreItem">Version en cours :</span> <span class="version">(#SURTITRE|propre)</span><br />]
+            				<small class="noWrap">maj du [(#DATE)]</small></div>
+										[<div class="itemDescription"><span class="titreItem ">La documentation :<br></span> <a class="lienDoc" href="[(#URL_SITE|mag_maj_url_plugin{doc})]">(#URL_SITE|mag_maj_url_plugin{doc}|couper{25})</a></div>]
+										[<div class="itemDescription"><span class="titreItem">Auteur :</span><span class="descPluginSommaire"> (#CHAPO|propre)</span></div>]
+										[<div class="itemDescription"><span class="titreItem ">Description :</span><span class="descPluginSommaire"> (#DESCRIPTIF|propre)</span></div>]
+										[<div class="itemDescription"><span class="titreItem">Fichier options :</span> (#NOM_SITE|propre)</div>]
+										[<div class="itemDescription"><span class="titreItem">Fichier fonctions :</span> (#EXTRA|propre)</div>]
+										[<div class="itemDescription"><code><span class="titreItem">Pipelines :</span> (#TEXTE|propre)</code></div>]
+  					 </BOUCLE_presentation>
+    			[<div class="chapo">(#TEXTE)</div>]
+    
+    
+    				[(#REM) Articles de la rubrique ]
+    				<B_articles>
+    				<div class="liste-articles debutVersions">
+    					#ANCRE_PAGINATION
+    					<span class="titreItem">Versions pr&eacute;c&eacute;dentes :</span>
+							<ul class="listeVersions">
+    						<BOUCLE_articles(ARTICLES) {id_rubrique} {par date}{inverse} {pagination} {doublons}>
+    						<li>
+    							<h3 class="titre"><a href="#URL_ARTICLE"><span class="version">[[v. (#SURTITRE|propre)]]</span>  [(#GET{titre_plugin})]</a></h3>
+    							<small>[(#DATE)][, <:par_auteur:> (#LESAUTEURS)]</small>
+    						</li>
+    						</BOUCLE_articles>
+    					</ul>
+    					[<p class="pagination">(#PAGINATION)</p>]
+    				</div>
+    				</B_articles>
+    			</div>  <!-- fin du div cartouche -->
+			</div> <!-- fin div contre-encart -->
+			</BOUCLE_liste_plugins>
+		</div>   <!-- fin de div contenu -->
+		</BOUCLE_type_plugin>
+
+	</div><!-- fin conteneur -->
+
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
+</div><!-- fin page -->
+</body>
+</html>
+</BOUCLE_rubrique_principal>

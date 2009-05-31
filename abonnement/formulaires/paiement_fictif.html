@@ -1,0 +1,22 @@
+
+<div class="formulaire_spip formulaire_paiement_fictif">
+	
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form action="#URL_ACTION_AUTEUR{valider_paiement_fictif,test_paiement,#SELF}" method="post"><div>
+		<p class="attention"><:abo:simulation_paiement:></p>	
+
+		<input type="hidden" name="reference" value="#ENV{id_auteur}" />
+		<input type="hidden" name="args" value="#ENV{args}" />
+		<input type="hidden" name="devise" value="EUR" />
+		<input type="hidden" name="montant" value="#ENV{montant}" />
+		<input type="hidden" name="redirect" value="#SELF" />
+
+		<p class="boutons">
+			<input type="submit" name="reponse_banque" class="spip_bouton" value="ok" />
+			<input type="submit" name="reponse_banque" class="spip_bouton" value="erreur_bank" />
+		</p>
+	</div>
+	</form>
+</div>

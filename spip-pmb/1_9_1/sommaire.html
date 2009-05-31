@@ -1,0 +1,152 @@
+#CACHE{7200}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+	<title>[(#NOM_SITE_SPIP|textebrut)]</title>
+	[<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)" />]
+	<INCLURE{fond=inc-head}>
+</head>
+
+<body class="page_sommaire">
+<div id="page">
+
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}>
+
+	[(#REM) Fil d'Ariane ]
+	<div id="hierarchie"><:accueil_site:></div>
+
+	<div id="conteneur">
+
+		[(#REM) Contenu principal : derniers articles publies ]
+		<div id="contenu">
+
+			<h1 class="invisible">#NOM_SITE_SPIP</h1>
+			[<div class="chapo">(#DESCRIPTIF_SITE_SPIP)</div>]
+
+			[(#REM) Les deux derniers articles ]
+			<B_articles_recents>
+			<div class="liste-articles">
+				<h2 class="invisible"><:derniers_articles:></h2>
+				<ul>
+					<BOUCLE_articles_recents(ARTICLES) {par date}{inverse} {0,2} {doublons}>
+					<li>
+						[(#LOGO_ARTICLE_RUBRIQUE|#URL_ARTICLE|image_reduire{150,100})]
+						[<p class="surtitre">(#SURTITRE)</p>]
+						<h3 class="titre"><a href="#URL_ARTICLE">#TITRE</a></h3>
+						[<p class="soustitre">(#SOUSTITRE)</p>]
+						<small>[(#DATE|affdate)][, <:par_auteur:> (#LESAUTEURS)]</small>
+						[<div class="texte">(#INTRODUCTION)</div>]
+						<br class="nettoyeur" />
+					</li>
+					</BOUCLE_articles_recents>
+				</ul>
+			</div>
+			</B_articles_recents>
+
+			<br class="nettoyeur" />
+
+			[(#REM) Articles suivants ]
+			<B_articles>
+			<div class="contre-encart">
+
+				<div class="liste-articles">
+					[(#ANCRE_PAGINATION)]
+					[(#ENV{debut_articles}|?{'',' '})<h2 class="invisible"><:articles_recents:></h2>]
+					<ul>
+						<BOUCLE_articles(ARTICLES) {par date}{inverse} {doublons} {pagination}>
+						<li>
+							<h3 class="titre"><a href="#URL_ARTICLE">#TITRE</a></h3>
+							<small>[(#DATE|affdate)][, <:par_auteur:> (#LESAUTEURS)]</small>
+						</li>
+						</BOUCLE_articles>
+					</ul>
+					[<p class="pagination">(#PAGINATION)</p>]
+				</div>
+
+			</div><!-- fin contre-encart -->
+			</B_articles>
+
+
+			<div class="encart">
+				[(#REM) Breves ]
+				<B_breves>
+				<div class="breves">
+					<h2 class="menu-titre"><:dernieres_breves:></h2>
+					<ul>
+						<BOUCLE_breves(BREVES) {par date}{inverse} {0,5}>
+						<li>[(#DATE|affdate_court) &ndash; ]<a href="#URL_BREVE">#TITRE</a></li>
+						</BOUCLE_breves>
+					</ul>
+				</div>
+				</B_breves>
+
+				[(#REM) Liens des forums ]
+				<B_forums_liens>
+				<div class="forums">
+					<h2 class="menu-titre"><:derniers_commentaires:></h2>
+					<p><:messages_recents:></p>
+					<ul>
+						<BOUCLE_forums_liens(FORUMS) {plat} {par date}{inverse} {0,8}>
+						<li>#SET{titre_tmp, #TITRE}[(#DATE|affdate_court) &ndash; ]<B_pmb><BOUCLE_pmb(SYNDIC_ARTICLES_PMB) {id_syndic}>[(#TITRE|md5|=={#GET{titre_tmp}}|?{<a href="spip.php?page=article-syndic-pmb&id_syndic_article=#ID_SYNDIC_ARTICLE#forum">, })]</BOUCLE_pmb></B_pmb><a href="#URL_FORUM"><//B_pmb>[(#ID_SYNDIC|?{[(#TEXTE|couper{30})],#TITRE})]</a></li>
+						</BOUCLE_forums_liens>
+					</ul>
+				</div>
+				</B_forums_liens>
+
+				[(#REM) Sur le Web ]
+				<B_syndic>
+				<div class="syndic">
+					<h2 class="menu-titre"><:nouveautes_web:></h2>
+					<ul>
+					<BOUCLE_syndic(SYNDIC_ARTICLES) {age<180} {par date}{inverse} {0,6}>
+						<li>[(#DATE|affdate_court) &ndash; ]<a href="#URL_ARTICLE"[ title="(#NOM_SITE|texte_backend)"] class="spip_out">#TITRE</a></li>
+					</BOUCLE_syndic>
+					</ul>
+				</div>
+				</B_syndic>
+				
+				
+
+			</div><!-- fin encart -->
+
+		</div><!-- fin contenu -->
+
+		[(#REM) Menu de navigation laterale ]
+		<div id="navigation">
+
+			[(#REM) Menu de navigation par rubriques ]
+			<INCLURE{fond=inc-rubriques}>
+
+			<BOUCLE_fluxpmb_rubrique(SITES){syndication="oui"}>
+				<B_syndic_pmb>
+				<div class="divers">
+					<h2 class="menu-titre">Au hasard du catalogue...</h2>
+					<ul>
+					<BOUCLE_syndic_pmb(SYNDIC_ARTICLES_PMB){id_syndic=#ID_SYNDIC}{pmb_photo_src!=""}{par hasard} {0,2}>
+					<li><img src=#PMB_PHOTO_SRC class="spip_logos" alt="[ pas de photo ]" />
+						<br/><a href="spip.php?page=article-syndic-pmb&id_syndic_article=#ID_SYNDIC_ARTICLE"[ title="(#NOM_SITE|texte_backend)"] class="spip_out">[(#TITRE)]</a> par #LESAUTEURS. 
+						[(#DESCRIPTIF|couper{150})]
+					</li>
+					</BOUCLE_syndic_pmb>
+					</ul>
+				</div>
+				</B_syndic_pmb>
+			</BOUCLE_fluxpmb_rubrique>
+
+			<INCLURE{fond=inc-pmb-login}>
+
+			[(#REM) Inscription au site ]
+			#FORMULAIRE_INSCRIPTION
+
+		</div><!-- fin navigation -->
+
+	</div><!-- fin conteneur -->
+
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
+</div><!-- fin page -->
+#SPIP_CRON
+</body>
+</html>

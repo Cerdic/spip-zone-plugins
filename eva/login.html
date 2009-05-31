@@ -1,0 +1,40 @@
+#CACHE{24*3600}
+<INCLURE{fond=entete_meta}>
+	<!--affichage du titre de la page -->
+	<title>[#NOM_SITE_SPIP]  <:espace_prive:></title>
+</head>
+<body>
+	<div id="Login">
+		<div id="EntetePage">			
+			<!--affichage du logo et titre de la page -->
+			<h1>
+				<a href="#URL_SITE_SPIP"><BOUCLE_logo_accueil(SITES){id_syndic=7}>
+				#LOGO_SITE</BOUCLE_logo_accueil>	#NOM_SITE_SPIP</a>
+			</h1>
+			<h2 style="text-align:center;"><:espace_prive:></h2>
+		</div>
+		
+		[<!--affichage du formulaire de saisie des codes d'accès -->
+		(#LOGIN_PRIVE)]
+
+		<B_message_connexion>
+		<!-- début du contenu -->
+		<div id="Contenu">
+			<!--affichage du message aux rédacteurs du site (article) -->
+			<BOUCLE_message_connexion(ARTICLES){id_article=23}>
+			[(#LOGO_ARTICLE)]
+			[<div class="#EDIT{chapo} chapo">(#CHAPO)</div>]
+			[<div class="#EDIT{texte} texte">(#TEXTE)</div>]
+			</BOUCLE_message_connexion>
+		</div>
+		<br class="clear" />
+		</B_message_connexion>
+			
+		[<!--formulaire d'inscription-->
+		<div class="formulaires">
+			<h3 class="spip">Inscription</h3>
+			<div>(#FORMULAIRE_INSCRIPTION)</div>
+		</div>]
+	</div>
+</body>
+</html>

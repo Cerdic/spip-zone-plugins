@@ -1,0 +1,108 @@
+<!-- titre=caroussel d'image-->
+<!-- icone= -->
+<!-- descriptif= repose sur le script carousel -->
+<!-- nom=interface -->
+
+
+<!-- onglet=interface -->
+<!-- liens*=interface -->
+<!-- liens*=interfacecarousel -->
+<!-- liens*=interfacefisheye -->
+#CACHE{0}
+
+#CACHE{0}
+
+<form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
+
+<fieldset><legend><:interface:origineimage:></legend>
+
+<p>
+<label><input type="checkbox" name="aleatoire" [checked="(#ENV{aleatoire})"] /><:interface:aleatoire:></label>
+</p>
+
+<p>
+<label><input type="checkbox" name="article" [checked="(#ENV{article})"] /><:interface:article:></label>
+</p>
+
+<p>
+<label><:interface:idarticle:> :</label>
+   <select name="idarticle" style="width:250px;">
+     <option value="" style="width:250px;">Racine</option>
+  	 <BOUCLE_secteurs(RUBRIQUES) {racine} {par titre}>
+  	    <option value="" style="font-weight: bold; width:250px;"><strong>rubrique : #TITRE</strong></option>
+  			<BOUCLE_articles_racine(ARTICLES) {id_rubrique} {par titre}>
+  	        <option value="#ID_ARTICLE" [(#CONFIG{interface/idarticle}|=={#ID_ARTICLE}|?{selected="selected",''})]>&nbsp;&nbsp;#ID_ARTICLE . #TITRE</option>
+  			</BOUCLE_articles_racine>
+  			<BOUCLE_rubriques(RUBRIQUES) {id_parent} {par titre}>
+  			   <option value="" style="font-weight: bold; width:250px;">&nbsp;&nbsp;rubrique #ID_RUBRIQUE : #TITRE</option>
+  				 <BOUCLE_articles(ARTICLES) {id_rubrique} {par titre}>
+  				    <option value="#ID_ARTICLE" [(#CONFIG{interface/idarticle}|=={#ID_ARTICLE}|?{selected="selected",''})]>&nbsp;&nbsp;&nbsp;&nbsp;#ID_ARTICLE . #TITRE</option>
+  				 </BOUCLE_articles>
+  				 <BOUCLE_sous_rubriques(BOUCLE_rubriques)></BOUCLE_sous_rubriques>
+  			</BOUCLE_rubriques>
+  	 </BOUCLE_secteurs>
+   </select>
+</p>
+
+<p>
+	<label><input type="checkbox" name="renvart" [checked="(#ENV{renvart})"] /><:interface:renvart:></label>
+</p>
+
+<p>
+	<label><input type="checkbox" name="renvdoc" [checked="(#ENV{renvdoc})"] /><:interface:renvdoc:></label>
+</p>
+
+<p>
+<label for="nombre"><:interface:nombre:></label>
+<input type="text" name="nombre"  id="nombre"  value="[(#CONFIG{interface/nombre}|sinon{5})]" class="forml" style="width:4em;display:inline"/>&nbsp;<i>px</i>&nbsp;&nbsp;
+</p>
+
+   
+</fieldset>   
+   
+
+<fieldset><legend><:interface:paraimage:></legend>
+<p><strong><:interface:tailleimage:></strong></p>
+<label for="largeur"><:interface:largeur:></label>
+<input type="text" name="largeur"  id="largeur"  value="[(#CONFIG{interface/largeur}|sinon{150})]" class="forml" style="width:4em;display:inline"/>&nbsp;<i>px</i>&nbsp;&nbsp;
+<label for="hauteurbis"><:interface:hauteur:></label>
+<input type="text" name="hauteur"  	id="hauteur" value="[(#CONFIG{interface/hauteur}|sinon{150})]" class="forml" style="width:4em;display:inline"/>&nbsp;<i>px</i>&nbsp;&nbsp;
+
+
+<p><strong><:interface:taillecadre:></strong></p>
+<label for="largeurcadre"><:interface:largeurcadre:></label>
+<input type="text" name="largeurcadre"  id="largeurcadre"  value="[(#CONFIG{interface/largeurcadre}|sinon{500})]" class="forml" style="width:4em;display:inline"/>&nbsp;<i>px</i>&nbsp;&nbsp;
+<label for="hauteurcadrebis"><:interface:hauteurcadre:></label>
+<input type="text" name="hauteurcadre" 	id="hauteurcadre" value="[(#CONFIG{interface/hauteurcadre}|sinon{200})]" class="forml" style="width:4em;display:inline"/>&nbsp;<i>px</i>&nbsp;&nbsp;
+
+
+</fieldset>
+
+<fieldset><legend><:interface:paraanim:></legend>
+
+<p>
+<label for="reflection"><:interface:reflection:></label>
+<input type="text" name="reflection" 	id="reflection"  value="[(#CONFIG{interface/reflection})]" class="forml" style="width:4em;display:inline"/>&nbsp;<i>ms</i>&nbsp;&nbsp;
+</p>
+
+<p>
+<label for="rotation"><:interface:rotation:></label>
+<input type="text" name="rotation"  	id="rotation"  value="[(#CONFIG{interface/rotation})]" class="forml" style="width:4em;display:inline"/>&nbsp;<i>ms</i>&nbsp;&nbsp;
+</p>
+
+<p><strong><:interface:tailleanim:></strong></p>
+<label for="largeurcadre"><:interface:largeurref:></label>
+<input type="text" name="largeurcadre"  id="largeurcadre"  value="[(#CONFIG{interface/largeurcadre}|sinon{500})]" class="forml" style="width:4em;display:inline"/>&nbsp;<i>px</i>&nbsp;&nbsp;
+<label for="hauteurcadrebis"><:interface:hauteurref:></label>
+<input type="text" name="hauteurcadre" 	id="hauteurcadre" value="[(#CONFIG{interface/hauteurcadre}|sinon{200})]" class="forml" style="width:4em;display:inline"/>&nbsp;<i>px</i>&nbsp;&nbsp;
+
+
+</fieldset>
+
+<div>
+<input type="submit" name="_cfg_ok" value="<:ok:>"  />
+<input type="reset" value="<:reset:>"  />
+<input type="submit" name="_cfg_delete" value="<:supprimer:>"  />
+</div>
+</form>
+

@@ -1,0 +1,16 @@
+<B_listes>
+<li class="abomailman_listes[ (#ENV**{erreurs}|table_valeur{listes}|oui)erreur]">
+	[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{listes})</span>]
+	<ul>
+	<BOUCLE_listes(ABOMAILMANS){id_abomailman ?}{desactive=0}>
+		<li>
+			<label>#TITRE</label>
+			<input name="listes[]" type="checkbox" value="#ID_ABOMAILMAN"[(#GRAND_TOTAL|=={1}|oui) checked="checked"] />
+			[<p class="explications">
+			(#DESCRIPTIF|PtoBR)
+			</p>]
+		</li>
+	</BOUCLE_listes>
+	</ul>
+</li>
+</B_listes>

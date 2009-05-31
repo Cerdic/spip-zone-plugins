@@ -1,0 +1,17 @@
+<!-- titre=Silo SPIP -->
+<!-- icone=images/silospip_icone.png-->
+[(#SET{logo, <img src='[(#CHEMIN{images/silospip.png})]' width='64' height='64' alt='Silo sites SPIP' style="float:#LANG_RIGHT;" /> })]
+<!-- descriptif= [(#GET{logo})] Ce plugin offre une interface en libre service d'inscription et de cr&eacute;tion de sites SPIP mutualis&eacute;s 
+
+<a href="#URL_ECRIRE{silosite}"><:silospip:liste_sites:></a> 
+
+	<ul>
+		<li><a href="#domaines"><span>Domaines</span></a></li>
+		<li><a href="#base"><span>Base</span></a></li>
+	</ul>
+-->
+
+#CACHE{0}
+<div class="formulaire_spip formulaire_editer ajax">
+#FORMULAIRE_CONFIG_SILOSPIP
+</div>

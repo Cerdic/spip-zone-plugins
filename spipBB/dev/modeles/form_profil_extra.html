@@ -1,0 +1,48 @@
+[(#REM) champs additionel formulaire_gaf_profil, mode support: extra
+	si besoin : env: id_auteur, statut
+]
+
+#SET{aff_localisation,#CONFIG{'spipbb/affiche_localisation'}}
+[(#GET{aff_localisation}|=={oui}|?{' ',''})
+	<p><label for="localisation"><:spipbb:extra_localisation:></label><br />
+	<input type="text" name="localisation" id="localisation" class="forml" value="#SPIPBB{localisation}" size="40" />
+	</p>
+]
+
+#SET{aff_emploi,#CONFIG{'spipbb/affiche_emploi'}}
+[(#GET{aff_emploi}|=={oui}|?{' ',''})
+	<p><label for="emploi"><:spipbb:extra_emploi:></label><br />
+	<input type="text" name="emploi" id="emploi" class="forml" value="#SPIPBB{emploi}" size="40" />
+	</p>
+]
+
+#SET{aff_loisirs,#CONFIG{'spipbb/affiche_loisirs'}}
+[(#GET{aff_loisirs}|=={oui}|?{' ',''})
+	<p><label for="loisirs"><:spipbb:extra_loisirs:></label><br />
+	<input type="text" name="loisirs" id="loisirs" class="forml" value="#SPIPBB{loisirs}" size="40" />
+	</p>
+]
+#SET{aff_numero_icq,#CONFIG{'spipbb/affiche_numero_icq'}}
+[(#GET{aff_numero_icq}|=={oui}|?{' ',''})
+	<p><label for="numero_icq"><:spipbb:extra_numero_icq:></label><br />
+	<input type="text" name="numero_icq" id="numero_icq" class="forml" value="#SPIPBB{numero_icq}" size="40" />
+	</p>
+]
+#SET{aff_nom_aim,#CONFIG{'spipbb/affiche_nom_aim'}}
+[(#GET{aff_nom_aim}|=={oui}|?{' ',''})
+	<p><label for="nom_aim"><:spipbb:extra_nom_aim:></label><br />
+	<input type="text" name="nom_aim" id="nom_aim" class="forml" value="#SPIPBB{nom_aim}" size="40" />
+	</p>
+]
+#SET{aff_nom_yahoo,#CONFIG{'spipbb/affiche_nom_yahoo'}}
+[(#GET{aff_nom_yahoo}|=={oui}|?{' ',''})
+	<p><label for="emploi"><:spipbb:extra_nom_yahoo:></label><br />
+	<input type="text" name="nom_yahoo" id="nom_yahoo" class="forml" value="#SPIPBB{nom_yahoo}" size="40" />
+	</p>
+]
+#SET{aff_nom_msnm,#CONFIG{'spipbb/affiche_nom_msnm'}}
+[(#GET{aff_nom_msnm}|=={oui}|?{' ',''})
+	<p><label for="emploi"><:spipbb:extra_nom_msnm:></label><br />
+	<input type="text" name="nom_msnm" id="nom_msnm" class="forml" value="#SPIPBB{nom_msnm}" size="40" />
+	</p>
+]

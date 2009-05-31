@@ -1,0 +1,586 @@
+/* ************************************************
+  13'sportif
+- design & code : Julien Guille <13sportif.free.fr>
+- icônes : http://www.famfamfam.com/
+************************************************ */
+
+* { margin: 0; padding: 0; border: 0; }
+
+body {
+	color: #FFF;
+	font: 85% "Trebuchet MS",Lucida,Arial,sans-serif;
+	background: #222 url(img/fond.png) fixed center top no-repeat;
+	text-align: center;
+}
+
+/* Common styles
+-------------------------------------------------------- */
+ul { list-style: none; }
+ul li { list-style: none; }
+
+a:link, a:visited { color: #67AE3B; text-decoration: none;}
+a:hover, a:active { color: #F93; }
+
+pre { overflow: auto; width: 100%; height: auto; background-color: #333;}
+.left { float: left; }
+.right { float: right; }
+
+
+/* Page
+-------------------------------------------------------- */
+#page{
+	position: relative;
+	width: 780px !important;
+	width /**/: 776px;
+	padding: 0 2px;
+	margin: 0 auto;
+	text-align: left;
+}
+
+
+/* Header
+-------------------------------------------------------- */
+#top {
+	background: url(img/top.png) no-repeat center top;
+	padding: 25px 45px;
+}
+	#top h1 { font-size: 3em; }
+
+
+/* Prelude
+-------------------------------------------------------- */
+#prelude {
+	font-size: 0.8em;
+	width: 366px;
+	position: absolute;
+	top: 0;
+	right: 18px;
+	padding: 10px 0 0 0;
+	color: #555;
+	text-align: center;
+}
+	#prelude a:link, #prelude a:visited {
+		font-weight: bold;
+		color: #393939;
+		text-decoration: none;
+	}
+	#prelude a:hover { color: #555; text-decoration: underline;}
+	#prelude a:focus, #prelude a:active { color: red;}
+
+input,textarea{
+	border: 2px solid #555;
+	background: #E5E5E5 url(img/input.png) left top repeat-x;
+}
+input:hover,textarea:hover,
+input:focus,textarea:focus{
+	border-color: #67AE3B;
+	background: #FFF;
+}
+.submit, .preview {
+font-weight: bold;
+border: 2px solid #555;
+background: #444;
+color: #67AE3B;
+cursor: pointer;
+}
+.submit:hover, .preview:hover {
+background: #333;
+color: #F93;
+border-color: #444;
+}
+
+/* Wrapper
+-------------------------------------------------------- */
+#wrapper {
+	margin: 0 auto 10px auto;
+}
+#main {
+	width: 570px;
+	float: left;
+}
+#content {
+	margin-left: 25px;
+}
+#sidebar {
+	position: relative;
+	bottom: 60px;
+	float: right;
+	width: 195px;
+	padding-bottom: 1em;
+	padding-right: 14px;
+}
+
+
+/* Sidebar
+-------------------------------------------------------- */
+#sidebar h2 {
+	font-weight: bold;
+	padding: 5px 8px;
+	margin: 0 0 10px 0;
+	text-align: center;
+}
+#sidebar h3 { padding: 4px 8px 0 8px; }
+
+#sidebar ul, #blogextra li { padding: 0 0 4px 0; }
+#sidebar li, #blogextra li {
+	background: transparent url(img/sidebar_li.png) 1px center no-repeat;
+	padding: 3px 4px 3px 20px;
+}
+#sidebar p, #blogextra p { padding: 0 0 4px 10px; }
+
+	#search fieldset p { padding-left: 8px; }
+	#search #q {
+		width: 120px;
+		padding: 1px 2px;
+		font-size: 1em;
+	}
+
+#search, #sidebar .selected, #sidebar .categories, #sidebar .syndicate,
+#sidebar .langs, #sidebar .tags, #sidebar .links, #sidebar .text { padding: 0 0 10px 0; }
+
+#sidebar .selected li, #sidebar .categories li, #sidebar .links li { background: none; padding: 0; }
+#sidebar .selected li a, #sidebar .categories li a, #sidebar .links li a { display: block; background: url(img/post-title2.png) 2px center no-repeat; padding: 2px 0px 2px 25px; border-bottom: 1px solid #080808;}
+#sidebar .selected li a:hover, #sidebar .categories li a:hover, #sidebar .links li a:hover { background-image: url(img/post-title1.png); background-color: #080808; border-bottom: 1px solid #346A19;}
+
+* html #sidebar .selected li, * html #sidebar .categories li, * html #sidebar .links li { float: left; height: 1%;}
+* html #sidebar .selected li a, * html #sidebar .categories li a, * html #sidebar .links li a { height: 1%;}
+
+#topnav {
+	font: 0.9em Arial,Lucida,sans-serif;
+	border: 1px solid #101010;
+	border-width: 1px 0;
+	background: #080808;
+	padding: 5px 5px 5px 8px;
+	margin: 0 0 20px 0;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+	#sidebar #topnav ul { margin: 0; padding: 0; }
+	#sidebar #topnav li {
+		display: inline;
+		background: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	#sidebar .syndicate ul {
+		background: transparent url(img/rss2.png) no-repeat 0px 50%;
+	}
+	#sidebar .syndicate li {
+		background: none; 
+		margin: 0 0 0 15px;
+		padding: 2px 0 2px 22px;
+	}
+
+	#sidebar .tags ul {
+		margin: 5px 5px 10px 10px;
+		padding: 0;
+		font-size: 110%;
+		text-align: center;
+	}
+		#sidebar .tags ul li {
+			display: inline;
+			background: none;
+			margin: 0;
+			padding: 0;
+			font-size: 0.9em;
+		}
+
+		#sidebar .tags p strong a:link, #sidebar .tags p strong a:visited { padding: 0 0 0 18px; background: transparent url(img/tags.png) no-repeat 0 -2px; }
+		#sidebar .tags p strong a:hover {}
+
+
+.tag0 { font-size: 75%; }
+.tag10 { font-size: 80%; }
+.tag20 { font-size: 90%; }
+.tag30 { font-size: 100%; }
+.tag40 { font-size: 110%; }
+.tag50 { font-size: 120%; }
+.tag60 { font-size: 140%; }
+.tag70 { font-size: 150%; }
+.tag80 { font-size: 160%; }
+.tag90 { font-size: 170%; }
+.tag100 { font-size: 180%; }
+
+#sidebar #calendar table{ font-size: 0.9em; text-align: center; margin: 0 auto; border-collapse: collapse;}
+#sidebar #calendar table caption{ margin: 0 auto;}
+#sidebar #calendar table th{ color: #666; background: transparent;}
+#sidebar #calendar table td{ width: 14%; line-height: 2em; border: 1px solid #333;}
+#sidebar #calendar table td a{ display: block; background: #333; font-weight: bold;}
+#sidebar #calendar table td a:hover{ background: #666;}
+
+/* Post-content
+-------------------------------------------------------- */
+.post-content, .post-excerpt {
+	padding: 4px 0 0 0;
+}
+.post-content img { border: 1px solid #84C139; padding: 4px; background-color: #555; }
+.post-content a:hover img,
+.post-content a:active img { border-color: #F93; }
+.post-content img.smiley { border: none; padding: 0; background-color: transparent; }
+
+.post-content p, .post-excerpt p { padding: 4px 0; }
+
+.post-content acronym, .post-excerpt acronym { cursor: help; border-bottom: 1px dashed #666; }
+
+.post-content pre, .post-excerpt pre {
+	font: .9em 'courier new', courier, monospace;
+	padding: 10px 5px;
+	margin: 6px 0;
+}
+
+.post-content ul, .post-excerpt ul { padding: 6px 0; margin: 0; }
+	.post-content ul li, .post-excerpt ul li {
+		padding: 2px 0 2px 22px;
+		background: transparent url(img/li.png) no-repeat 0 0;
+	}
+.post-content ol, .post-excerpt ol { padding: 4px 0; margin: 0 0 0 28px; }
+	.post-content ol li, .post-excerpt ol li { padding: 1px 0; }
+
+.post-content blockquote, .post-excerpt blockquote { background: #333 url(img/blockquote1.png) no-repeat; margin: 0.5em 0; padding: 0.3em 1em 0.3em 3em; }
+.post-content blockquote p:first-child, .post-excerpt blockquote p:first-child { text-indent: 6px; }
+.post-content blockquote em, .post-excerpt blockquote em {}
+
+/* Classes
+-------------------------------------------------------- */
+.day-date {
+	position: relative;
+	margin: 8px -10px 0 5px;
+	width: 50px;
+	background: transparent url(img/post-date.png) center center no-repeat;
+	text-align: center;
+	float: right;
+	padding: 2px 5px;
+}
+	.date_month { /* mois */
+		display: block;
+		font-weight: bold;
+		text-transform: uppercase;
+	}
+	.date_day { /* jour */
+		display: block;
+		position: relative;
+		margin-top: -10px;
+		font: 2.8em Georgia, Arial, Helvetica, sans-serif;
+		font-style: italic;
+		line-height: 1.1em;
+	}
+
+a.feed {}
+
+.post { background: #222 url(img/post-bottom.png) bottom left no-repeat; width: 495px; margin-bottom: 18px; padding: 0 20px; }
+
+.post-title { font-size: 1.7em; background: transparent url(img/post-top.png) top left no-repeat; margin: 0 -20px; padding: 10px 20px 0 20px;}
+	.post-title a:link, .post-title a:visited { text-indent: 1em; display: block; background: url(img/post-title1.png) left top no-repeat; }
+	.post-title a:hover { background-image: url(img/post-title2.png); }
+
+.post-info { font-style: italic; font-size: 0.9em; }
+
+.post-tags {
+	position: relative;
+	border: 0;
+	padding: 5px;
+	margin: 8px 0 0 0;
+	overflow: hidden;
+	height: 1%;
+}
+	.post-tags:after{
+		content:'[DO NOT LEAVE IT IS NOT REAL]';
+		display: block;
+		height: 0;
+		clear: both;
+		visibility: hidden;
+	}
+	.post-tags li { display: inline; }
+		.post-tags li a:link, .post-tags li a:visited {
+			display: block;
+			float: left;
+			background: transparent url(img/tag.png) no-repeat 0 0;
+			padding: 2px 8px 2px 18px;
+			white-space: nowrap;
+		}
+
+.post-info-co {
+	clear: left;
+	text-align: right;
+	border: 0;
+	padding: 10px 0;
+}
+	.post-info-co a:link, .post-info-co a:visited {
+		padding: 2px 10px 2px 18px;
+	}
+	.comment_count {
+		background: transparent url(img/commentaire.png) no-repeat 0 50%;
+	}
+	.ping_count {
+		background: transparent url(img/retrolien.png) no-repeat 0 50%;
+	}
+	.attach_count {
+		background: transparent url(img/attach.png) no-repeat 0 50%;
+	}
+
+.read-it {
+	font-weight: bold;
+	padding: 0 0 10px 0;
+	clear: left;
+}
+
+#attachments {
+	clear: left;
+	border-width: 1px 0;
+	padding: 5px;
+	margin: 4px 0 6px 0;
+}
+	#attachments h3 { font-size: 1.2em; }
+	#attachments ul { padding: 4px 0; }
+	#attachments li {
+		margin: 0 0 0.6em 0;
+		padding: 2px 10px 2px 18px;
+		background: transparent url(img/attach.png) no-repeat 0 50%;
+	}
+	#attachments li em {}
+	#attachments li div {}
+	#attachments li object {
+	   display: inline;
+	   margin: 0;
+	   padding: 0;
+	   vertical-align: bottom;
+	}
+
+.footnotes {
+	padding: 5px 0;
+	margin: 6px 0 25px 0;
+}
+	.footnotes h4 {
+		background: transparent url(img/report.png) no-repeat 4px 3px;
+		padding: 2px 10px 2px 25px;
+		margin: 0 0 6px 0;
+		font-style: italic;
+	}
+	.footnotes p { padding: 4px 10px; }
+
+
+/* Archives
+-------------------------------------------------------- */
+#content-info {
+	border-width: 1px 0;
+	padding: 5px 10px;
+	margin: 0 0 20px 0;
+	font-size: 1em;
+	line-height: 1.4;
+}
+.content-inner { padding-bottom: 20px; }
+
+.content-inner h3 {
+	font-size: 1em;
+	border-width: 1px 0;
+	padding: 5px 10px;
+	margin: 10px 0;
+}
+
+#content-info h2 { font-size: 1.4em; }
+#content-info p { padding: 4px 0; font-size: 1em; }
+
+#content-info p a.feed:link, #content-info p a.feed:visited {
+	padding: 4px 0 4px 22px;
+	background: transparent url(img/rss.png) no-repeat 1px 3px;
+}
+#content-info p a.feed:hover {}
+
+.content-inner .day-date { width: 90px; padding: 5px 8px; margin: 0 10px; border-color: #222; background-color: #111;}
+.content-inner .post-title { background: none; }
+.content-inner .post-info { margin: 4px 0 20px 10px; }
+
+.content-inner ul { padding: 4px 0; margin: 0 0 0 10px; }
+	.content-inner ul li {
+		padding: 2px 0 2px 22px;
+		background: transparent url(img/li.png) no-repeat 0 0;
+		line-height: 1.5em;
+	}
+
+/* Tags - Page des tags
+-------------------------------------------------------- */
+
+.content-inner ul.tags {
+	position: relative;
+	border-width: 1px 0;
+	padding: 5px;
+	margin: 8px 0 20px 0;
+	overflow: hidden;
+	height: 1%;
+	font-size: 120%;
+}
+	.content-inner ul.tags:after{
+		content:'[DO NOT LEAVE IT IS NOT REAL]';
+		display: block;
+		height: 0;
+		clear: both;
+		visibility: hidden;
+	}
+	.content-inner ul.tags li {
+		/* display: inline; */
+		display: block;
+		float: left;
+		margin: 4px;
+		height: 18px;
+		line-height: 18px;
+		background: none;
+	}
+		.content-inner ul.tags li a:link, .content-inner ul.tags li a:visited {
+			white-space: nowrap;
+		}
+
+
+/* Commentaires
+-------------------------------------------------------- */
+#comments, #pings { padding-top: 10px; }
+	#comments h3, #pings h3, #comments-feed, #pr h3 {
+		clear: left;
+		border-width: 1px 0;
+		padding: 5px;
+		margin: 20px 0 8px 0;
+		font-size: 1.2em;
+	}
+	#pr h3 { margin: 30px 0 8px 0; }
+	
+	#comments-feed { text-align: right; font-weight: bold; margin: 14px 0 8px 0; }
+		#comments-feed a:link, #comments-feed a:visited {
+			font-size: 0.8em;
+			background: transparent url(img/rss.png) no-repeat 0px 50%;
+			padding: 3px 0 3px 22px;
+		}
+
+#comments dl{}
+
+#comments dt, #pings dt {
+	position: relative;
+	top: 1px;
+	display: block;
+	padding: 10px 0 30px 0;
+	background: transparent url(img/commentaire_bulle2.png) no-repeat 50% 100%;
+}
+	#comments dd, #pings dd, dd.comment-preview {
+		border: 1px solid #282828;
+		border-width: 1px 0;
+		background: #181818;
+		padding: 10px;
+		margin: 0 0 8px 0;
+		line-height: 1.4;
+	}
+	#comments dd *, #pings dd *, dd.comment-preview * { padding: 5px 0; }
+	#comments dd img, #pings dd img, dd.comment-preview img { padding: 0; }
+
+	#comments dt.me a:link, #comments dt.me a:visited, #comments dt.me a:hover { color: #5E9E14; }
+	#comments dd.me { border-left: 4px solid #5E9E14; }
+
+	.comment-number, .ping-number {
+		font: 2em Georgia, Arial, Helvetica, sans-serif;
+		float: right;
+		padding: 0;
+		margin: -0.6em 0.4em 0 0;
+		font-style: italic;
+	}
+
+#ping-url {
+	border-width: 1px 0;
+	padding: 5px;
+	margin: 30px 0;
+	font-weight: bold;
+	text-align: right;
+}
+
+
+.error {
+	border: 2px solid red;
+	padding: 10px 5px;
+	margin: 20px 0 0 0;
+	font-weight: bold;
+}
+
+.message {}
+
+.pagination {
+	clear: left;
+	border-width: 1px 0;
+	padding: 5px;
+	margin: 0 0 30px 0;
+	text-align: center;
+	font-weight: bold;
+}
+
+#navlinks {
+	border-width: 1px 0;
+	padding: 5px;
+	margin: 0 0 10px 0;
+	text-align: center;
+	font-weight: bold;
+}
+
+/* Forms
+-------------------------------------------------------- */
+#comment-form { padding-top: 10px; }
+
+#comment-form h3 {
+	border-width: 1px 0;
+	padding: 5px;
+	margin: 20px 0 8px 0;
+	font-size: 1.2em;
+}
+
+#comment-form fieldset p { padding: 5px 0; /*margin: 0 0 0 30%;*/ }
+#comment-form fieldset p.field { padding: 5px 0; width: auto; margin: 0; clear: left; }
+#comment-form p.form-help { width: 60%; margin: 0 0 0 30%; font-style: italic; font-size: 0.8em; }
+
+#comment-form p label { width: auto; }
+#comment-form p.field label {
+	font-weight: bold;
+	display: block;
+	padding: 0 4px 4px 0;
+	width: 29%;
+	float: left;
+	text-align: right;
+}
+#comment-form input, #comment-form textarea {
+	font: 1em "Trebuchet MS",Lucida,Arial,sans-serif;
+	padding: 1px 2px;
+	width: 60%;
+}
+
+#comment-form input#c_remember {
+	width: auto;
+	border: 0;
+	margin: 0 5px 0 140px;
+}
+#comment-form input.preview { margin-left: 134px; }
+#comment-form input.preview, #comment-form input.submit {
+	width: auto;
+}
+
+
+/* Footer
+-------------------------------------------------------- */
+#footer {
+	padding: 8px 2em;
+	height: 30px;
+	text-align: center;
+	background: url(img/footer.png) center bottom no-repeat;  
+	clear: both;
+}
+
+/* Image CSS
+-------------------------------------------------------- */
+#block1, #block2, #block3, #block4 {
+  position: absolute;
+  width: 45px;
+  height: 57px;  
+}
+#block1, #block3 {
+  background: url(img/bg-left.png) left top no-repeat; 
+}
+#block2, #block4 {
+  background: url(img/bg-right.png) left top no-repeat; 
+}
+#block1 { top: 20%; left: 3px; }
+#block2 { top: 5%;  right: 3px;}
+#block3 { top: 60%; left: 3px; }
+#block4 { top: 85%; right: 3px;}

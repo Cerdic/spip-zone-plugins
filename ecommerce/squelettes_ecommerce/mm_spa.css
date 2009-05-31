@@ -1,0 +1,160 @@
+/* Global Styles */
+
+body {
+	margin:0px;
+	}
+	
+td {
+	font:11px Arial, Helvetica, sans-serif;
+	color:#FFFF00;
+	}
+	
+a {
+	color: #FF080E;
+	}
+	
+a:hover {
+	color: #FF9900;
+	}
+
+/* ID Styles */
+
+#navigation td {
+	border-bottom: 1px solid #FF9900
+	}
+
+#navigation a {
+	font:11px Arial, Helvetica, sans-serif;
+	color: #FF9900;
+	line-height:16px;
+	letter-spacing:.1em;
+	text-decoration: none;
+	display:block;
+	padding:8px 6px 8px 22px;
+	line-height:22px;
+	font-size: 14px;
+	}
+	
+#navigation a:hover {
+	color:#FFFFCC;
+	font-weight:bold;
+	background: url("mm_bullet_yellow.gif") 10px 50% no-repeat;
+	}
+	
+#navheader {
+	font:24px georgia;
+	color: #1F2669;
+	letter-spacing:.4em;
+	padding:10px;
+	line-height:30px;
+	font-size: 14px;
+	}
+	
+#logo 	{
+	font:14px Arial, Helvetica, sans-serif;
+	color: #FF9900;
+	letter-spacing:.5em;
+	line-height:30px;
+	font-size: 14px;
+	}
+
+#tagline 	{	
+	font:11px Arial, Helvetica, sans-serif;
+	color: #FF9900;
+	letter-spacing:.2em;
+	line-height:14px;
+	font-size: 14px;
+	}
+	
+#monthformat td {
+	 border-bottom: 1px solid #FFFFCC;
+	 }
+	 
+#dateformat {
+	font:11px Arial, Helvetica, sans-serif;
+	color: #FFFF00;
+	letter-spacing:.4em;
+	font-size: 14px;
+	}
+	
+#dateformat a {
+	font: 11px Arial, Helvetica, sans-serif;
+	color: #FFFF00;
+	letter-spacing:.1em;
+	text-decoration: none;
+	font-size: 14px;
+	}
+	
+#dateformat a:hover {
+	color: #FFFFCC;
+	}
+
+/* Class Styles */
+	
+.bodyText {
+	font:11px Arial, Helvetica, sans-serif;
+	color:#FFFF00;
+	line-height:22px;
+	margin-top:0px;
+	letter-spacing:.1em;
+	font-size: 14px;
+	}
+	
+.pageName{
+	font:18px Arial, Helvetica, sans-serif;
+	color: #FFFF00;
+	line-height:24px;
+	letter-spacing:.3em;
+	}
+	
+.columnHeader {
+	font: 11px Arial, Helvetica, sans-serif;
+	color: #FF080E;
+	line-height:18px;
+	letter-spacing:.05em;
+	font-size: 14px;
+	}
+	
+.subHeader {
+	font:bold 11px Arial, Helvetica, sans-serif;
+	color: #FF080E;
+	line-height:18px;
+	letter-spacing:.1em;
+	font-size: 14px;
+	}
+
+.smallText {
+	font:11px Arial, Helvetica, sans-serif;
+	color:#333333;
+	font-size: 14px;
+	line-height:22px;
+	margin-top:0px;
+	letter-spacing:.1em;
+	font-size: 14px;
+
+	}
+	
+.navText {
+	font:11px Georgia, Times New Roman, Times, serif;
+	color: #1F2669;
+	line-height:16px;
+	letter-spacing:.1em;
+	text-decoration: none;
+	font-size: 14px;
+	}
+
+#logo div {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	color: #FF9933;
+	font-size: 14px;
+	}
+
+#left_column {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	font-style: normal;
+	color: #FFFFFF;
+	font-size: 14px;
+}

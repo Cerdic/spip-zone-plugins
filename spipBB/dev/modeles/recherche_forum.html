@@ -1,0 +1,16 @@
+<div id="rech_for">
+<form action="[(#URL_PAGE{resultats_forum})]" method="post"><div>
+	<span><:spipbb:chercher:></span>&nbsp;
+	<input type="text" style="width: 100px" class="forml" name="recherche" size="30" />
+	<input type="image" src="#CHEMIN{rien.gif}" style='border: 0; vertical-align: middle; width: 22px; height:23px' class="bouton_rech" />
+	<B_forum>
+		<select class="forml" name="id_article">
+			<option value="0"><:spipbb:tous_forums:></option>
+			<BOUCLE_forum(ARTICLES){branche}{par num titre}>
+				<option value="#ID_ARTICLE">[(#TITRE|supprimer_numero|couper{32})]</option>
+			</BOUCLE_forum>
+		</select>
+	</B_forum>
+	<input type="hidden" value="#ENV{id_rubrique}" name="id_rubrique" />
+</div></form>
+</div>

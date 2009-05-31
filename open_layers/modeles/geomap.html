@@ -1,0 +1,39 @@
+<div id="[(#ENV{id,'geomap'}|?{[(#ENV{id,'geomap'})],#ENV{'Spip','geomap'}})]" class='geomap'></div>
+#GEOMAP_INIT
+<script type="text/javascript">
+	//<![CDATA[
+	URLbase = "#URL_SITE_SPIP/";
+	var map;
+	var markerManager;
+	var url_rss = '[(#ENV{georss,''}|parametre_url{zzzzz,'',&})]';
+	#SET{latitude,#ENV{view_lat,#CONFIG{geomap_default_lat,42.94}}}
+	#SET{lonxitude,#ENV{view_long,#CONFIG{geomap_default_lonx,-8.228}}}
+	#SET{zoom,#ENV{view_zoom,#CONFIG{geomap_default_zoom,7}}}
+	$(document).ready(
+		function() {
+    		if (GBrowserIsCompatible()) {
+    			// facelo mapa
+    			map = new GMap2(document.getElementById("[(#ENV{id,'geomap'}|?{[(#ENV{id,'geomap'})],#ENV{'Spip','geomap'}})]"));
+    			map.addControl(new GLargeMapControl());
+    			map.addControl(new GMapTypeControl());
+    			map.setCenter(new GLatLng(#GET{latitude}, #GET{lonxitude}), #GET{zoom}, G_MAP_TYPE);
+    			map.enableDoubleClickZoom();
+    			map.enableContinuousZoom();
+    			markerManager = new GMarkerManager(map);
+  				//leemo-lo documento dos marcadores
+     			$.get(url_rss, function(xml){
+    				//xml almacena en un objeto xml los datos recogidos del documento leido
+    				$("item", xml).each(function(item){
+    					/*primero buscamos dentro del objeto xml almacenado en xml todos los nodos "item", el contenido de cada nodo "item" del documento xml
+    					se almacena en la variable xmlItem (*en la variable item se almacena la posicion del "item" actual en el array de items y asi podemos
+    					recorrerlos con facilidad)*/
+    					var xmlItem = xml.documentElement.getElementsByTagName("item")[item];
+   						agregarMarcador(xmlItem, 0);
+						});
+						markerManager.refresh();
+   				});
+   			}
+		}
+	);
+	//]]>
+	</script>

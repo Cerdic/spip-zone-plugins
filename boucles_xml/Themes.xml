@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml-stylesheet type="text/xsl" href="../Stylesheets/Themes.xsl"?>
+<Noeud xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../Schemas/Noeud.xsd" ID="N0" racine="0" version="01.07.02">
+  <TitreLong>Liste des thèmes</TitreLong>
+  <Coproducteur>La Documentation française</Coproducteur>
+  <Type>
+    <Nom>Noeud</Nom>
+  </Type>
+  <TypeCatégorie nom="Rubrique">
+    <Catégorie nom="Particuliers" />
+  </TypeCatégorie>
+  <CouvertureGéographique>
+    <Nom>France métropolitaine</Nom>
+  </CouvertureGéographique>
+  <Descendance>
+    <Fils lien="N1" positionPrésentation="1" nature="Noeud" type="Noeud">
+      <TitreContextuel>Achat, argent</TitreContextuel>
+    </Fils>
+    <Fils lien="N2" positionPrésentation="2" nature="Noeud" type="Noeud">
+      <TitreContextuel>Armée</TitreContextuel>
+    </Fils>
+    <Fils lien="N3" positionPrésentation="3" nature="Noeud" type="Noeud">
+      <TitreContextuel>Assurance</TitreContextuel>
+    </Fils>
+    <Fils lien="N10001" positionPrésentation="4" nature="Noeud" type="Noeud">
+      <TitreContextuel>Consommation</TitreContextuel>
+    </Fils>
+    <Fils lien="N23" positionPrésentation="5" nature="Noeud" type="Noeud">
+      <TitreContextuel>Couples</TitreContextuel>
+    </Fils>
+    <Fils lien="N4" positionPrésentation="6" nature="Noeud" type="Noeud">
+      <TitreContextuel>Elections</TitreContextuel>
+    </Fils>
+    <Fils lien="N5" positionPrésentation="7" nature="Noeud" type="Noeud">
+      <TitreContextuel>Emploi, travail</TitreContextuel>
+    </Fils>
+    <Fils lien="N6" positionPrésentation="8" nature="Noeud" type="Noeud">
+      <TitreContextuel>Enseignement</TitreContextuel>
+    </Fils>
+    <Fils lien="N7" positionPrésentation="9" nature="Noeud" type="Noeud">
+      <TitreContextuel>Environnement</TitreContextuel>
+    </Fils>
+    <Fils lien="N8" positionPrésentation="10" nature="Noeud" type="Noeud">
+      <TitreContextuel>Etrangers en France</TitreContextuel>
+    </Fils>
+    <Fils lien="N9" positionPrésentation="11" nature="Noeud" type="Noeud">
+      <TitreContextuel>Europe</TitreContextuel>
+    </Fils>
+    <Fils lien="N10" positionPrésentation="12" nature="Noeud" type="Noeud">
+      <TitreContextuel>Famille</TitreContextuel>
+    </Fils>
+    <Fils lien="N11" positionPrésentation="13" nature="Noeud" type="Noeud">
+      <TitreContextuel>Formation</TitreContextuel>
+    </Fils>
+    <Fils lien="N13" positionPrésentation="14" nature="Noeud" type="Noeud">
+      <TitreContextuel>Impôt, taxe et douane</TitreContextuel>
+    </Fils>
+    <Fils lien="N14" positionPrésentation="15" nature="Noeud" type="Noeud">
+      <TitreContextuel>Justice</TitreContextuel>
+    </Fils>
+    <Fils lien="N15" positionPrésentation="16" nature="Noeud" type="Noeud">
+      <TitreContextuel>Logement</TitreContextuel>
+    </Fils>
+    <Fils lien="N21" positionPrésentation="17" nature="Noeud" type="Noeud">
+      <TitreContextuel>Papiers</TitreContextuel>
+    </Fils>
+    <Fils lien="N12" positionPrésentation="18" nature="Noeud" type="Noeud">
+      <TitreContextuel>Personnes handicapées</TitreContextuel>
+    </Fils>
+    <Fils lien="N22" positionPrésentation="19" nature="Noeud" type="Noeud">
+      <TitreContextuel>Relations avec l'administration</TitreContextuel>
+    </Fils>
+    <Fils lien="N16" positionPrésentation="20" nature="Noeud" type="Noeud">
+      <TitreContextuel>Retraite</TitreContextuel>
+    </Fils>
+    <Fils lien="N17" positionPrésentation="21" nature="Noeud" type="Noeud">
+      <TitreContextuel>Santé</TitreContextuel>
+    </Fils>
+    <Fils lien="N18" positionPrésentation="22" nature="Noeud" type="Noeud">
+      <TitreContextuel>Transports</TitreContextuel>
+    </Fils>
+    <Fils lien="N19" positionPrésentation="23" nature="Noeud" type="Noeud">
+      <TitreContextuel>Vacances, loisirs</TitreContextuel>
+    </Fils>
+    <Fils lien="N20" positionPrésentation="24" nature="Noeud" type="Noeud">
+      <TitreContextuel>Vie associative</TitreContextuel>
+    </Fils>
+  </Descendance>
+</Noeud>

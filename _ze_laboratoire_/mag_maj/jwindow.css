@@ -1,0 +1,38 @@
+.window_content {
+	width:500px;
+	padding:5px;
+	background:#D7D7D7;
+}
+
+.window_drag {
+	padding:4px;
+	background:#F6F6F6;
+	display:block;
+	cursor:move;
+	height:20px;
+}
+
+.window_drag b {float:left; font-weight:normal; margin-top:1px;}
+
+.window_drag a {
+	text-decoration:none;
+	padding:0 2px;
+	float:right;
+	color:#A8A8A8;
+}
+
+.window_drag a:hover {
+	color: #00B61A;
+}
+
+.window_main {
+	margin-top:5px;
+	padding:5px;
+	height:250px;
+	overflow:auto;
+	background:#FEFEFE;
+}
+
+.window_transfer {
+	border:1px solid #000;
+}

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Interface PMB pour SPIP 2.0
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	Arnault PACHOT 
+ 	[OpenStudio->http://www.openstudio.fr]
+_ Renaud Aioutz 
+	[Biblioth&egrave;ques de Tence, Saint-Jeures et Le Mazet-Saint-Voy->http://www.3bm.fr]
+_ &#169; 2008 - Licence GPL
+	</auteur>
+	<version>
+	0.4 BETA
+	</version>
+	<etat>
+	test
+	</etat>
+	<description>
+	Ce plugin permet d'interfacer SPIP avec un catalogue en ligne sous PMB. Il fournit des boucles, balises et crit&egrave;res pour parcourir le catalogue depuis
+	vos squelettes. <br />
+	[acc&egrave;s au panneau de configuration pour param&eacute;trer le plugin->.?exec=cfg&amp;cfg=spip_pmb] 
+	</description>
+	<lien>http://www.spip-contrib.net/Interface-PMB-pour-SPIP</lien> <!-- URI de documentation -->
+	<options> <!-- fichier charge a chaque hit -->
+	</options>
+	
+	<fonctions> <!-- fichier charge a chaque recalcul -->
+	pmb_mes_fonctions.php</fonctions>
+	
+	<pipeline>
+  		<nom>post_syndication</nom>
+  		<action>traitement_flux</action>
+  		<inclure>pmb_parsing.php</inclure>
+ 	</pipeline>
+	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
+	sur le mode Rien::
+	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
+	ce parametre est obligatoire et doit etre non vide
+	-->
+	<prefix> 
+	pmb
+	</prefix>
+
+ 	<necessite id="CFG" version="[1.0;]" />
+	<necessite id="spip_bonux" version="[1.2;]" />
+	<necessite id='spip' version='[2.0.0 dev;]' />
+
+</plugin>

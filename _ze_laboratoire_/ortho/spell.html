@@ -1,0 +1,233 @@
+<?php
+/**
+ * GSpellerServer - XML based spelling service.
+ *
+ * More details at http://it.extension.org/wiki/GSpellerServer
+ *
+ * Developed with funding by the National eXtension Initiative.
+ *
+ * For the latest version, please see:
+ * https://sourcecode.extension.org/ex/GSpellServer/
+ *
+ * @package GSpellerServer 
+ * @version 1.1
+ * @author James E. Robinson, III <james.robinson@extension.org>
+ * @copyright North Carolina State University 2006
+
+ * version modifiee par Pif pour adapter au cas de spip, et pour que
+ *  ca marche en utf, car selon moi, ca marchait pas ...
+*/
+
+/*
+
+ &copy; Copyright 2006        North Carolina State University
+
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are met:
+
+ 1. Redistributions of source code must retain the above copyright notice,
+ this list of conditions and the following disclaimer.
+
+ 2. Redistributions in binary form must reproduce the above copyright notice,
+ this list of conditions and the following disclaimer in the documentation
+ and/or other materials provided with the distribution.
+
+ 3. The name of the author may not be used to endorse or promote products
+ derived from this software without specific prior written permission.
+
+ THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR IMPLIED
+ WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+ MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
+ EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+ OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+ OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+*/
+
+/**
+ * Find misspelled words for the provided text.
+ *
+ * @param string &$string Reference to text to check.
+ * @param string $lang Two character language code.
+ * @return array Keys are misspelled words, value is array of suggestions.
+ */
+function checkSpelling (&$string, $lang="en") {
+	// Make word list based word boundries
+	// result is array of words and non-words
+//	$wordlist = preg_split('/\b/',$string);
+//
+//	// Filter to find real words
+//	$words = array();
+//	foreach($wordlist as $word) {
+//		// is it a word?
+//	   if(preg_match('/[A-Za-z]/', $word)) {
+//			// add to word list, index by word to prevent dupes
+//			$words[$word] = $word;
+//		}
+//	}
+
+// on fait un split sur les separateurs, sans chercher plus loin,
+// car l'utf fait de droles de trucs sinon
+	$words = preg_split('/\s+/',$string);
+//error_log(var_export($wordlist, 1));
+
+	$sp = pspell_new($lang, '', '', 'utf-8');
+
+	$misspelled = array();
+	// word check
+	foreach ($words as $word) {
+	   if (!pspell_check($sp, $word)) {
+	       $misspelled[] = $word;
+		}
+	}
+
+	$result = array();
+	// get suggestions for the misspellings
+	foreach ($misspelled as $word) {
+	   $result[$word] = pspell_suggest($sp, $word);
+	}
+
+	return $result;
+}
+
+/**
+ * Format XML spellresult to spellrequest.
+ *
+ * @param string &$text Reference to original text.
+ * @param array $suggest Reference to array where keys are 
+ *        misspelled words, value is array of suggestions..
+ * @return string XML format of change list
+ */
+function formatResult(&$text, &$suggest) {
+	$corrections = array();
+
+	// c - correction
+	// o - offset
+	// l - length
+	// s - confidence level
+	// suggestions tab seperated
+	foreach ($suggest as $key => $value) {
+		$matches = array();
+		$len = utf_strlen($key);
+		// only return 6 suggestions MAX
+		$suggestions = implode("\t", array_slice($value, 0, 5));
+		$pat = '/\b' . preg_quote($key, '/') . '\b/';
+		$total = preg_match_all($pat, $text, $matches, PREG_OFFSET_CAPTURE);
+		if ( $total ) {
+			foreach ($matches as $idx ) {
+				foreach ($idx as $dat) {
+					// les offsets retournes par preg, meme en /u, sont en octets
+					// pas en caracteres => tambouille : la longueur utf de la
+					// chaine avant correspond a un offset utf
+					$offset = utf_strlen(substr($text, 0, $dat[1]));
+					$c = '<c o="' . $offset . '" l="' . $len . '" s="1">';
+					$c .= $suggestions . '</c>';
+					$corrections[$offset] = $c;
+				}
+			}
+		}
+		unset($matches);
+	}
+
+	$len = strlen($text);
+	$output = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
+	$output .= '<spellresult error="0" clipped="0" charschecked="'
+	         . $len . '">';
+	$output .= "\n";
+
+	// must be sorted for GoogieSpell to handle output
+	ksort($corrections);
+	$output .= implode("\n", $corrections);
+
+	$output .= "\n" . '</spellresult>' . "\n";
+
+	return $output;
+}
+
+/**
+ * A preg_replace_callback function to replace matched text with spaces.
+ *
+ * @param array &$matches Reference to preg matches array.
+ * @return string Of spaces.
+ */
+function fill(&$matches) {
+	$len = strlen($matches[0]);
+	return str_repeat(' ', $len);
+//	$out = "";
+//	for ( $x = 0; $x < $len; $x++ ) {
+//		$out .= " ";
+//	}
+//	return $out;
+}
+
+/**
+ * Find misspelled words for the provided text.
+ *
+ * @param string &$string Reference to text to check - will modify.
+ */
+function cleanupInput(&$text) {
+	// skip html/xml
+	// skip urls
+	// skip words that start with numbers
+	// ignore TLDs
+	// ignore color codes
+	// ignore color code short-hand
+	$search = array('@<[\/\!]*?[^<>]*?>@si',
+						 '@(ftp|https?):\/\/[^<> \n\r]+@si',
+						 '@\b[0-9]\w+\b@i',
+						 '@\.(net|edu|com|org)\W@i',
+						 '@\#[0-9A-Fa-f]{6}@',
+						 '@\#[0-9A-Fa-f]{3}@');
+
+	if ($GLOBALS['IGNORE_ALL_CAPS']) {
+		$search[] = '@\b[A-Z]+\b@';
+	}
+
+	$text = preg_replace_callback($search, 'fill', $text);
+
+	return;
+}
+
+function utf_strlen($s) {
+	if(function_exists('mb_strlen')) {
+		return mb_strlen($s);
+	}
+	// solution maison si on n'a pas mb_strlen
+	return strlen(preg_replace("/[\300-\377][\200-\277]*/", " ", $s));
+}
+
+if (is_string($_GET['lang'])) {
+   $lang = $_GET['lang'];
+} else {
+   $lang = 'en';
+}
+
+$data = file_get_contents('php://input');
+
+//error_log("SPELL '$lang' '$data' (".strlen($data).")");
+
+$request = simplexml_load_string($data);
+$text = $request->text;
+//utf8_decode($request->text);
+
+//error_log("SPELL => texte='$text'");
+
+$IGNORE_ALL_CAPS = false;
+if ( $request['ignoreallcaps'] ) {
+	$IGNORE_ALL_CAPS = true;
+}
+
+//spip l'a deja fait.
+//cleanupInput($text);
+
+$help = checkSpelling($text, $lang);
+$output = formatResult($text, $help);
+
+header('Content-type: text/xml');
+echo $output;
+
+// vim: ts=3 sw=3 ai
+?>

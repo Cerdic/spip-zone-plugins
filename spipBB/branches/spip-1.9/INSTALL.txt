@@ -1,0 +1,14 @@
+Ceci n'est pas une documentation finalisee.
+
+*forum-monstyle.css*
+Personnaliser l'aspect de votre forum dans le dossier themes/forum-monstyle/forum-monstyle.css (exemple avec forum de teleplaisance)
+
+*inc-forum-head.html*
+Un seul fichier d'inclusion d'entete (comme dans /dist) qui regroupe les css
+
+
+Utiliser CFG pour :
+-* regler le numéro de la rubrique qui contient les forums (et les sous-rubriques) a priori un secteur (a verifier)
+-* eventuellement il est possible de creer ses propres squelettes pour gerer l'affichage d'un forum ou d'un thread
+
+

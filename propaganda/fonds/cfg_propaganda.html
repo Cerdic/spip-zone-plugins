@@ -1,0 +1,29 @@
+[(#REM) descriptif=
+<h4>
+Configuration du plugin Propaganda.
+</h4>
+<a href="#" class="spip_out">Documentation sur contrib</a>
+]
+
+[(#REM) titre=Propaganda]
+[(#REM) icone=]
+
+#CACHE{0}
+
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+
+<fieldset>
+<p>
+<label for="droits_envoi"><strong><:propaganda:droit_envoi:></strong></label><br />
+<input type="radio" name="droit_envoi" value="oui" [(#ENV{droit_envoi}|=={oui}|?{' '})checked="checked"] />
+<:propaganda:autoriser_tout_le_monde:><br />
+<input type="radio" name="droit_envoi" value="non" [(#ENV{droit_envoi}|=={non}|?{' '})checked="checked"] />
+<:propaganda:autoriser_uniquement_inscrits:><br />
+</p>
+</fieldset>
+
+<input type="submit" name="_cfg_ok" value="<:OK:>" />
+<input type="reset" value="<:Reset:>" />
+<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
+</form>
+

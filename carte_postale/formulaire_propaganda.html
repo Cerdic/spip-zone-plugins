@@ -1,0 +1,42 @@
+<div class="formulaire_spip formulaire_propaganda" id="formulaire">
+
+<form action="[(#SELF|parametre_url{url_carte})]#formulaire" method='post'>
+[(#ENV*{previsu})]
+<div>
+<BOUCLE_articles_cartes(ARTICLES){id_mot=45}{par date}>
+
+<div class="propagandacarte">
+	<BOUCLE_articles_auteurs(AUTEURS){id_article}>
+	<:delapart:> #NOM
+	</BOUCLE_articles_auteurs>
+	#SURTITRE
+	<BOUCLE_articles_docs(DOCUMENTS){id_article}>
+	<br /><input type="radio" value="[(#URL_SITE_SPIP)]?page=carte&amp;id_document=#ID_DOCUMENT" name="url_carte"></input><br />
+	<a href="[(#FICHIER)]" title="<:delapart:> <BOUCLE_auteurs_legend(AUTEURS){id_article}>#NOM</BOUCLE_auteurs_legend>" class="thickbox">[(#FICHIER|image_reduire{120,0}|inserer_attribut{style,""}|inserer_attribut{alt,#TITRE}|inserer_attribut{title,#TITRE}|inserer_attribut{class,propagandalogo}|image_masque{#CHEMIN{masques/vignettes_propaganda.png}})]</a>
+	</BOUCLE_articles_docs>
+</div>
+</BOUCLE_articles_cartes>
+<br style="clear:both" />
+</div>
+
+<fieldset>
+<legend><:votre_mail:></legend>
+<p><label><:emmetteur_nom:><br />
+<input type="text" class="fondl" name="nom_expediteur" value="[(#ENV{nom_expediteur})]" size="30" /></label></p>
+
+<p><label><:form_pet_votre_email:><br />
+<input type="text" class="fondl" name="email_message_auteur" value="[(#ENV{mail})]" size="30" /></label></p>
+
+<p><label><:destinataire_email:><br />
+<input type="text" class="fondl" name="email_destinataire" value="[(#ENV{destinataire})]" size="30" /></label></p>
+
+<p><label><:form_prop_sujet:><br />
+<input type="text" class="forml" name="sujet_message_auteur" value="[(#ENV{sujet})]" size="30" />
+</label></p>
+
+<p><textarea name="texte_message_auteur[(#ENV{id})]" rows='10' class='forml' cols='40'>[(#ENV{texte})]</textarea></p>
+
+<input type="submit" src="#CHEMIN{images/formulaires/previsualise_mail.png}" name="previsualiser" value="<:previsualiser:>" alt="<:previsualiser:>" />
+</fieldset>
+</form>
+</div>

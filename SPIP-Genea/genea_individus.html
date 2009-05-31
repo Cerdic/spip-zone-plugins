@@ -1,0 +1,125 @@
+[(#REM)
+	*********************************************************************
+	*
+	* Copyright (c) 2007-2008
+	* Xavier Burot
+	* fichier : genea_individu.html
+	*
+	* Ce programme est un logiciel libre distribue sous licence GNU/GPL.
+	*
+	*********************************************************************
+]#CACHE{86400}
+<BOUCLE_genea(GENEA_INDIVIDUS){id_individu}>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+	<title>[(#PATRONYME) ][(#PRENOMS)] - [(#NOM_SITE_SPIP|textebrut)]</title>
+	<meta name="description" content="<:genea:desc_liste_des_individus:>" />
+	<INCLURE{fond=inc-head}>
+</head>
+
+<body class="page_genea">
+<div id="page">
+
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}>
+
+	[(#REM) Fil d'Ariane ]
+	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_fil(GENEA){id_genea}><BOUCLE_ariane(HIERARCHIE){id_rubrique}{tout}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80}|supprimer_numero)]</a></BOUCLE_ariane>[ &gt; <a href="#URL_RUBRIQUE">(#TITRE|couper{80}|supprimer_numero)</a>]</BOUCLE_fil> &gt; [(#PATRONYME) ][(#PRENOMS)]</div>
+
+	<div id="conteneur">
+
+		[(#REM) Contenu principal : contenu de l'article ]
+		<div id="contenu">
+
+			<div class="cartouche">
+				#DEBUT_SURLIGNE
+				[(#LOGO_INDIVIDU||image_reduire{200,200}|inserer_attribut{class,'spip_logos genea_photos'})]
+				[<p class="surtitre">(#TITRE_GENEA)</p>]
+				<h1 class="titre">[<img src="(#CHEMIN{/vignettes/#SEXE.gif})" width='17' height='17' />][(#CIVILITE|gtraduc) ][(#PATRONYME) ][(#PRENOMS)]</h1>
+				[<p class="soustitre">[(#SEXE|!={f}|?{<:genea:aliasm:>,<:genea:aliasf:>' '})] &#34;(#SURNOM)&#34;</p>]
+				#FIN_SURLIGNE
+			</div>
+
+			#DEBUT_SURLIGNE
+			<div class="chapo">
+				<table>
+					[<tr><td valign="top" nowrap><:genea:sosa:></td><td valign="top">&nbsp;:&nbsp;</td><td colspan="2" class="genea_sosa">(#SOSA)</td></tr>]
+					[<tr><td valign="top" nowrap><:genea:sexe:></td><td valign="top">&nbsp;:&nbsp;</td><td colspan="2">(#SEXE|gtraduc)</td></tr>]
+					[<tr><td valign="top" nowrap><:genea:filiation:></td><td valign="top">&nbsp;:&nbsp;</td><td colspan="2">(#TYPE_FILIATION|gtraduc)</td></tr>]
+					[<tr><td valign="top" nowrap><:genea:birt:></td><td valign="top">&nbsp;:&nbsp;</td><td colspan="2">(#DATE_NAISSANCE|affdate) [(#LIEU)]</td></tr>]
+					[<tr><td valign="top" nowrap><:genea:deat:></td><td valign="top">&nbsp;:&nbsp;</td><td colspan="2">(#DATE_DECES|affdate) [(#LIEU)]</td></tr>]
+				</table>
+
+				<br class="nettoyeur" />
+
+			</div>
+
+			<INCLUDE{fond=include/inc-menu_individu}{pg=#ENV{pg,general}}>
+
+			<br class="nettoyeur" />
+
+			[(#REM) Affichage des informations generales sur l'individu]
+			[(#ENV{pg,general}|=={general}|?{' '})
+			<div class="contre-encart">
+
+				<div class="texte">
+
+					<INCLUDE{fond=include/inc-ascendant}{id_famille}>
+					<INCLUDE{fond=include/inc-descendant}{id_individu}>
+
+				</div>
+				#FIN_SURLIGNE
+
+			</div><!-- fin contre-encart -->
+
+			<div class="encart">
+				[(#REM) Liste des collateraux (freres et soeurs) ]
+				<INCLUDE{fond=include/inc-encart-fratrie}{id_famille}{id_individu}{id_genea}>
+			</div><!-- fin encart -->
+
+			[<div class="notes"><h2><:info_notes:></h2>#DEBUT_SURLIGNE(#NOTES)#FIN_SURLIGNE</div>]
+			]
+
+			[(#ENV{pg,general}|!={general}|?{' '})
+			<div class="contre-encart">
+
+				<div class="texte">
+					<h3 class="spip">#ENV{pg,general}</h3>
+
+				</div>
+				#FIN_SURLIGNE
+
+			</div><!-- fin contre-encart -->
+
+			<div class="encart">
+			</div><!-- fin encart -->
+
+			[<div class="notes"><h2><:info_notes:></h2>#DEBUT_SURLIGNE(#GENEA_NOTES)#FIN_SURLIGNE</div>]
+			]
+
+		</div><!-- fin contenu -->
+
+		[(#REM) Menu de navigation laterale ]
+		<div id="navigation">
+
+			[(#REM) Menu de navigation par rubriques ]
+			<INCLURE{fond=inc-rubriques}{id_rubrique=#ID_RUBRIQUE_GENEA}>
+
+			[(#REM) Articles dans la meme rubrique ]
+			<INCLURE{fond=include/inc-genealogie}{id_genea}{small=oui}>
+
+		</div><!-- fin navigation -->
+
+	</div><!-- fin conteneur -->
+
+   [(#REM) Pied de page SPIP-Genea ]
+   <INCLURE{fond=include/inc-genea-pied}{id_genea}>
+
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
+</div><!-- fin page -->
+</body>
+</html>
+</BOUCLE_genea>

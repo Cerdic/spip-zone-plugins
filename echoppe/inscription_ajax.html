@@ -1,0 +1,26 @@
+#HTTP_HEADER{Content-type: text/html;}
+#CACHE{0}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<INCLURE{fond=inclusion/head_rubrique}>
+		<INCLURE{fond=inclusion/head}>
+	</head>
+	<body>
+		<h3><:echoppe:modification_de_vos_donnees:></h3>
+		<form action="spip.php" method="post" enctype="multipart/form-data"> 
+			<input type="hidden" name="action" value="crayons" /> 
+			<input type="hidden" name="redirect" value="[(#CONFIG{echoppe/squelette_panier, echoppe_panier}|generer_url_public{valider_panier=oui,&})]" /> 
+			<BOUCLE_Lauteur(SPIP_AUTEURS_ELARGIS){id_auteur = #SESSION{id_auteur}}>
+				<:nom_famille:>[(#CRAYON{nom_famille})]<br />
+				<:prenom:>[(#CRAYON{prenom})]<br />
+				<:adresse:>[(#CRAYON{adresse})]<br />
+				<:code_postal:>[(#CRAYON{code_postal})]<br />
+				<:ville:>[(#CRAYON{ville})]<br />
+			</BOUCLE_Lauteur>
+			
+			
+			<input type='submit' /> 
+		</form>
+	</body>
+</html>

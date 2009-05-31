@@ -1,0 +1,40 @@
+#calendar {
+    }
+#calendar h2 {
+	text-align : center;
+    }
+#calendar * {
+    border-collapse : collapse;
+    margin-bottom : 0.5em;
+    }
+#calendar table {
+    margin : 0 auto;
+    }
+#calendar caption {
+    text-align : center;
+    }
+#calendar abbr {
+    font-weight : normal;
+    text-align : center;
+    border-bottom : none;
+    }
+#calendar th {
+	background : gainsboro;
+	}
+#calendar td, #calendar th {
+    margin:0;
+    padding:0;
+    text-align : center;
+    border : 1px solid lightsteelblue;
+    width : 2em;
+    }
+#calendar tr a {
+    display:block;
+    margin:0;
+    padding:0;
+    text-align : center;
+    background : lightsteelblue;
+    }
+#calendar tr a:hover {
+    border : none;
+    }

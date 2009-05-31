@@ -1,0 +1,27 @@
+<plugin>
+	<nom>
+	SMS
+	</nom>
+	<auteur>
+bertrand Gugger [->http://toggg.com/]
+_ &#169; 2007 - Distribu&#233; sous licence GNU/LGPL
+	</auteur>
+	<version>
+	0.2.0
+	</version>
+	<etat>
+	test
+	</etat>
+	<description>
+Ce plugin permet d'envoyer des SMS, il n&#233;cessite d'avoir un compte chez un prestataire comme Clickatell, sms2email ou autres.
+_ Il fournit la partie technique n&eacute;cessaire à la transmission.
+_ Il est bas&eacute; sur Net_SMS de Horde/PEAR
+	</description>
+	<lien>
+	</lien>
+	<prefix>
+	SMS
+	</prefix>
+	<chemin dir='' type='prive' />
+	<necessite id="SPIP" version="[1.9.0;]" />
+</plugin>

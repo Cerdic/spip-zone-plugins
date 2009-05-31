@@ -1,0 +1,42 @@
+<plugin>
+	<version>0.1.1</version>
+	<nom>publications HAL avec RSS</nom>
+	<prefix>
+	publiHAL
+	</prefix>
+	<auteur>Bollon Jean-Marc
+_ &#169; 2007 - Distribu&#233; sous licence GNU</auteur>
+	<etat>experimental</etat>
+	<description>
+	publications prises sur HAL via les flux rss
+	</description>
+	<fonctions> <!-- fichier charge a chaque recalul de page -->
+    mes_fonctions_publiHALRSS.php
+    </fonctions>
+	<options> <!-- fichier charge a chaque recalul de page -->
+    mes_options_publiHALRSS.php
+    </options>
+   	<pipeline>
+		<nom>pre_syndication</nom>
+		<inclure>pipelines_publiHALRSS.php</inclure>
+	</pipeline>
+   	<pipeline>
+		<nom>post_syndication</nom>
+		<inclure>pipelines_publiHALRSS.php</inclure>
+	</pipeline>
+   	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>pipelines_publiHALRSS.php</inclure>
+	</pipeline>
+	<pipeline>
+       <nom>ajouter_boutons</nom>
+       <action>ajouterBoutons</action>
+       <inclure>boutons_publiHALRSS.php</inclure>
+	</pipeline>
+	<pipeline>
+       <nom>affiche_gauche</nom>
+       <action>afficheGauche</action>
+       <inclure>boutons_publiHALRSS.php</inclure>
+	</pipeline>
+	<necessite id="SPIP" version="[1.9.0;]" />
+</plugin>

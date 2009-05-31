@@ -1,0 +1,28 @@
+#CACHE{0}
+
+[(#REM) titre= Gestion de bonbon]
+[(#REM) icone=images/bonbon.png]
+[(#REM) descriptif= <h4>Gestion des paramètres de bonbon</h4>
+Ici vous pouvez saisir les classes, les groupes et les matières qui seront utilis&eacute;s dans bonbon.<br />
+<br /><a href="http://www.spip-contrib.net/Bonbon-un-cahier-de-texte-pour" class="spip_out">Documentation officielle</a>]
+
+
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+<fieldset><legend>Personnalisation des classes, sous groupes et matières</legend>
+Insérer vos classes, groupes et matières séparés par des virgules et sans espaces.<br />
+<label>Liste des classes : </label><input type="text" name="classes" size="50" value="#ENV{classes, '6A,6B,6C,5A,5B,5C,4A,4B,4C,3A,3B,3C'}" /><br /><br />
+<label>Liste des groupes : </label><input type="text" name="groupes" size="50" value="#ENV{groupes, 'groupe A,groupe B,groupe C'}" /><br /><br />
+<label>Liste des matières : </label><input type="text" name="matieres" size="50" value="#ENV{matieres, 'Allemand-LV1,Anglais-LV1,Anglais-LV2,Arts Plastiques,Education musicale,Histoire-Géographie,Français,Mathématiques,Physique-Chimie,SVT,Technologie,Vie-de-classe'}" /><br /><br />
+</fieldset>
+
+<input type="submit" name="_cfg_ok" value="<:valider:>" />
+<input type="submit" name="_cfg_delete" value="<:reset:>" />
+<input type="reset" value="<:annuler:>" />
+<br /><br />
+</form>
+
+<form method="post" action="?exec=bonbon_admin">
+<input type="submit" value="Retour à la page de configuration de bonbon" />
+</form>
+
+#CFG_ARBO{bonbon}

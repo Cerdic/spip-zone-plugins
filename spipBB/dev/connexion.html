@@ -1,0 +1,21 @@
+#CACHE{0}
+<BOUCLE_rubrique(RUBRIQUES){id_rubrique}>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="#LANG">
+<head>
+
+<title>[#NOM_SITE_SPIP] <:spipbb:login:></title>
+
+<INCLURE{fond=inc-head}>
+<INCLURE{fond=inc-forum-head}>
+
+</head>
+<body id='connexion'>
+<div id='principal_forum'>
+
+<INCLURE{fond=corps_sk/c_connexion}{id_rubrique}>
+
+</div> <!-- /principal_forum -->
+</body>
+</html>
+</BOUCLE_rubrique>

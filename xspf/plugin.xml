@@ -1,0 +1,55 @@
+<plugin>
+	<nom><multi>
+		[en]XSPF : XSPF documents lists and multimedia players models
+		[fr]XSPF : Liste de documents XSPF et mod&egrave;les de lecteurs multim&eacute;dia
+	</multi></nom>
+	<auteur>collectif spip [->http://spip.net/]
+_ &copy; 2007-2009 - Distribu&#233; sous licence GNU/LGPL pour la partie spip
+_ 
+_ Le logo xifish.gif est la propri&eacute;t&eacute; de [->http://www.xiph.org/], tout droit r&eacute;serv&eacute;
+_ Utilisation [swfobject.js->http://blog.deconcept.com/swfobject/] pour faciliter l&rsquo;inclusion des contenus Flash.
+_ Utilisation de [jquery.tooltips de Bassistance.de->http://bassistance.de/jquery-plugins/jquery-plugin-tooltip/] pour la configuration.
+	</auteur>
+	<version>
+	0.4
+	</version>
+	<etat>
+	stable
+	</etat>
+	<icon>
+	images/xifish.gif
+	</icon>
+	<description><multi>
+[en]This plugin provides a template which generate a [XSPF->http://www.xspf.org/] format documents list.
+_  
+_ It proposes multimedia players models such as:
+_ {{&lt;buttonplayer123&gt;}}  where 123 is an id article providing mp3, {{&lt;slimplayer123&gt;}} and {{&lt;musicplayer123&gt;}}. [Musicplayer->http://musicplayer.sourceforge.net/]
+_ {{&lt;rotator123&gt;}} where 123 is an id article providing images and {{&lt;mediaplayer123&gt;}}. [Jeroen Wijering->http://www.longtailvideo.com/players/]
+_  
+_ Beware that the three last players licence is half-commerciale, this is why they are not included in this distribution. 
+[fr]Ce plugin fournit un squelette produisant des listes de documents au format [XSPF->http://www.xspf.org/].
+_ 
+_ Il est actuellement accompagn&eacute; de cinq mod&eacute;les pour agr&eacute;menter votre site:
+_ {{&lt;buttonplayer123&gt;}}  o&ugrave; 123 est un id article fournissant les mp3, {{&lt;slimplayer123&gt;}} et {{&lt;musicplayer123&gt;}}. [Musicplayer->http://musicplayer.sourceforge.net/]
+_ {{&lt;rotator123&gt;}} o&ugrave; 123 est un id article fournissant les images et {{&lt;mediaplayer123&gt;}}. [Jeroen Wijering->http://www.longtailvideo.com/players/]
+_ 
+_ Attention, la licence de ces trois derniers lecteurs est semi-commerciale, c&rsquo;est pourquoi ils ne sont pas inclus dans cette contribution.
+	</multi></description>
+	<lien>http://kent1.sklunk.net/spip.php?article96</lien>
+	<prefix>
+	xspf
+	</prefix>
+	<necessite id='SPIP' version='[2.0.0;]' />
+	<necessite id='cfg' version='[1.10.0;]' />
+	<necessite id='palette' version='[1.1;]' />
+	<necessite id="lib:jquery-tooltip" src="http://plugins.jquery.com/files/jquery.tooltip_1.zip" />
+	<necessite id="lib:swfobject" src="http://swfobject.googlecode.com/files/swfobject_2_1.zip" />
+	<pipeline>
+		<nom>affichage_final</nom>
+		<inclure>xspf_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>xspf_pipeline.php</inclure>
+	</pipeline>
+</plugin>

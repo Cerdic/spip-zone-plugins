@@ -1,0 +1,43 @@
+#CACHE{3600}
+[(#REM)
+conservez au moins ces elements pour recup du secteur,
+si vous souhaitez reafficher les menu "fonctions" (voir inc_teteforum - div id 'action_for'
+]
+<p class="space_20"></p>
+
+<div id="pied_forum">
+<BOUCLE_article(ARTICLES){id_article}>
+	<BOUCLE_secteur(HIERARCHIE){id_article}>
+		[(#REM) on prend la derniere rubrique ]
+		#SET{sector,#ID_RUBRIQUE}
+	</BOUCLE_secteur>
+</BOUCLE_article>
+<BOUCLE_rubrique(RUBRIQUES){id_rubrique}>
+		#SET{sector,#ID_RUBRIQUE}
+</BOUCLE_rubrique>
+
+</div>
+[(#REM) c: 17/4/8 il vaut mieux choisir où on le place...]
+[(#FORMULAIRE_ADMIN)]
+
+[(#REM) bouton RSS : non/un/tout ]
+#SET{aff_rss,#CONFIG{'spipbb/affiche_bouton_rss'}}
+[(#GET{aff_rss}|=={non}|?{'',' '})
+	[(#GET{aff_rss}|=={un}|?{
+		[(#MODELE{bouton_rss}{id_rubrique=#GET{sector}}{id_article}{id_thread})]
+	,
+		[(#MODELE{bouton_rss_tout}{id_rubrique=#GET{sector}}{id_article}{id_thread})]
+	})]
+]
+
+
+[(#REM) Signature de spipBB. Merci de la laisser telle quelle apparente dans votre forum ]
+<div id="action_for_pied" >
+
+	<:spipbb:sign_tempo:> [(#PLUGIN{SPIPBB,version})]
+
+</div>
+
+
+[(#REM) lignes suivantes à conserver !]
+<div style="clear:both;"></div>

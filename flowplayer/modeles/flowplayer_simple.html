@@ -1,0 +1,84 @@
+[(#REM)Mod&#232;le SPIP pour le FlowPlayer, lecteur video en Flash OpenSource
+Flowplayer simple sans playliste : mod&#232;le pour une seule video
+Home Page : http://www.flowplayer.org
+A minimal setup to get you started. This configuration is the same as in our Quick Start documentation:
+http://flowplayer.org/player/quick-start.html
+]
+
+[(#REM)<flowplayer_simple|id_rubrique=1>, <flowplayer_simple|id_article=2|> etc... ]
+
+<script type="text/javascript" src="#CHEMIN{js/flashembed.min.js}"></script>
+
+<!-- include flashembed - which is a general purpose tool for inserting Flash on your page. Following line is required. -->
+
+<!--Il faudra trouver un moyen d'inclure la css dans le plugin je sais pas comment on fait pour que ca charge dans le head
+<link rel="stylesheet" type="text/css" href="css/common.css"/>
+-->
+
+
+
+
+<noscript>
+<p>
+D&#233;sol&#233;, mais le javascript est n&#233;ecessaire dans la version actuelle. Merci de le r&#233;activer pour afficher le contenu multimedia
+</p>
+</noscript>
+<!-- alternetive texte pour ceux qui ont le js desactive -->
+
+<div id="flowplayer_simple">
+
+
+<p>You need to have the <a href="http://www.macromedia.com/go/getflashplayer">Flash Player</a> installed and
+		a browser with JavaScript support.</p>
+
+	
+	
+<script type="text/javascript"> 
+// <![CDATA[
+
+	/*
+	 * window.onload event occurs after all HTML elements have been loaded
+	 * this is a good place to setup your Flash elements
+	 */
+	window.onload = function() {  
+		
+		 /*
+			use flashembed to place flowplayer into HTML element 
+			whose id is "example" (below this script tag)
+		 */
+		 flashembed("flowplayer_simple", 
+		
+			/* 
+				first argument supplies standard Flash parameters. See full list:
+				http://kb.adobe.com/selfservice/viewContent.do?externalId=tn_12701
+			*/
+			{
+				src:'#CHEMIN{players/FlowPlayerDark.swf}',
+				width: 420, 
+				height: 240
+			},
+			
+			/*
+				second argument is Flowplayer specific configuration. See full list:
+				http://flowplayer.org/player/configuration.html
+			*/
+			{config: {   
+				autoPlay:false,
+				controlBarBackgroundColor:'0x2e8860',
+				initialScale: 'scale',
+				videoFile:'<BOUCLE_doc(DOCUMENTS){id_article?}{id_rubrique?}{id_document?}{id_breve ?}{id_mot ?}{mode=document}{extension==(jpg|flv|swf|mp4|mp3|png|h.264)$}{0,1}>[(#URL_DOCUMENT|url_absolue)]</BOUCLE_doc>'
+
+
+			}} 
+		);
+	}
+		// ]]>
+	</script>	
+	
+	
+	
+
+	
+
+</div>
+

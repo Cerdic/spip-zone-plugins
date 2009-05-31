@@ -1,0 +1,79 @@
+#SET{champhelp,"document.getElementById('barre_"(#ENV{num_barre})"')"}
+[(#ENV{num_barre}|>{1}|?{'',' '})<script type="text/javascript" src="#EVAL{_DIR_IMG_PACK}spip_barre.js"></script>]
+<div class='spip_barre'>
+	<div class='spip_barre_boutons'>
+		<div class='spip_barre_row'>
+			<span style='text-align:#ENV{spip_lang_left};'>
+				#SET{js,"barre_raccourci('{','}',"(#ENV{champ})")"}
+				[(#MODELE{barre_bouton}{champhelp=#GET{champhelp}}{js=#GET{js}}{help=barre_italic}{img=italique.png})][(#REM)
+				]#SET{js,"barre_raccourci('{{','}}',"(#ENV{champ})")"}[(#REM)
+				][(#MODELE{barre_bouton}{champhelp=#GET{champhelp}}{js=#GET{js}}{help=barre_gras}{img=gras.png})][
+				(#REM)it won't work if I put #SET inside #ENV{forum}
+				]#SET{js,"barre_raccourci('\n\n{{{','}}}\n\n',"(#ENV{champ})")"}[(#REM)
+					the spaces are not good with inline elements as they put....spaces
+				]<BOUCLE_forum(IF){condition (#ENV{forum}|=={''})}>[(#REM)
+				][(#MODELE{barre_bouton}{champhelp=#GET{champhelp}}{js=#GET{js}}{help=barre_intertitre}{img=intertitre.png})][(#REM)
+				]</BOUCLE_forum>
+			</span>
+			<span>
+				#SET{js,"barre_demande('[','->',']', '"(#REM|sinon{barre_lien_input}|_T|addslashes)"', "(#ENV{champ})")"}
+				#SET{js2,"barre_raccourci('[[',']]',"(#ENV{champ})")"}
+				#SET{js3,"barre_raccourci('\n\n&lt;quote&gt;','&lt;/quote&gt;\n\n',"(#ENV{champ})")"}
+				[(#MODELE{barre_bouton}{champhelp=#GET{champhelp}}{js=#GET{js}}{help=barre_lien}{img=lien.png})][(#REM)
+				]<BOUCLE_forum2(IF){condition (#ENV{forum}|=={''})}>[(#REM)
+				][(#MODELE{barre_bouton}{champhelp=#GET{champhelp}}{js=#GET{js2}}{help=barre_note}{img=notes.png})][(#REM)
+				]</BOUCLE_forum2>[(#REM)
+				]</span>
+				 <span>[(#MODELE{barre_bouton}{champhelp=#GET{champhelp}}{js=#GET{js3}}{help=barre_quote}{img=quote.png})][(#REM)
+				]<//B_forum2>
+			</span>
+			<span style='text-align:#ENV{spip_lang_left};'>
+				#SET{js,"barre_raccourci('&laquo;','&raquo;',"(#ENV{champ})")"}
+				#SET{js2,"barre_raccourci('&ldquo;','&rdquo;',"(#ENV{champ})")"}
+				<BOUCLE_quot(IF){condition (#ENV{quot}|=={laquo})}>[(#REM)
+				][(#MODELE{barre_bouton}{champhelp=#GET{champhelp}}{js=#GET{js}}{help=barre_guillemets}{img=guillemets.png})][(#REM)
+				][(#MODELE{barre_bouton}{champhelp=#GET{champhelp}}{js=#GET{js2}}{help=barre_guillemets_simples}{img=guillemets-simples.png})][(#REM)
+				]</BOUCLE_quot>[(#REM)
+				]#SET{js,"barre_raccourci('&bdquo;','&ldquo;',"(#ENV{champ})")"}[(#REM)
+				]#SET{js2,"barre_raccourci('&sbquo;','&lsquo;',"(#ENV{champ})")"}[(#REM)
+				]<BOUCLE_quot2(IF){condition (#ENV{quot}|=={bdquo})}>[(#REM)
+				][(#MODELE{barre_bouton}{champhelp=#GET{champhelp}}{js=#GET{js}}{help=barre_guillemets}{img=guillemets-de.png})][(#REM)
+				][(#MODELE{barre_bouton}{champhelp=#GET{champhelp}}{js=#GET{js2}}{help=barre_guillemets_simples}{img=guillemets-uniques-de.png})][(#REM)
+				]</BOUCLE_quot2>[(#REM)
+				]#SET{js,"barre_raccourci('&ldquo;','&rdquo;',"(#ENV{champ})")"}[(#REM)
+				]#SET{js2,"barre_raccourci('&lsquo;','&rsquo;',"(#ENV{champ})")"}[(#REM)
+				]<BOUCLE_quot3(IF){condition (#ENV{quot}|=={ldquo})}>[(#REM)
+				][(#MODELE{barre_bouton}{champhelp=#GET{champhelp}}{js=#GET{js}}{help=barre_guillemets}{img=guillemets-simples.png})][(#REM)
+				][(#MODELE{barre_bouton}{champhelp=#GET{champhelp}}{js=#GET{js2}}{help=barre_guillemets_simples}{img=guillemets-uniques.png})][(#REM)		
+				]</BOUCLE_quot3>[(#REM)
+				]#SET{js,"barre_inserer('&Agrave;',"(#ENV{champ})")"}[(#REM)
+				]#SET{js2,"barre_inserer('&Eacute;',"(#ENV{champ})")"}[(#REM)
+				]#SET{js3,"barre_inserer('&oelig;',"(#ENV{champ})")"}[(#REM)
+				]#SET{js4,"barre_inserer('&OElig;',"(#ENV{champ})")"}[(#REM)
+				]<BOUCLE_schar(IF){condition (#ENV{schar}|=={fr})}>[(#REM)
+				][(#MODELE{barre_bouton}{champhelp=#GET{champhelp}}{js=#GET{js}}{help=barre_a_accent_grave}{img=agrave-maj.png})][(#REM)
+				][(#MODELE{barre_bouton}{champhelp=#GET{champhelp}}{js=#GET{js2}}{help=barre_e_accent_aigu}{img=eacute-maj.png})][(#REM)
+				][(#MODELE{barre_bouton}{champhelp=#GET{champhelp}}{js=#GET{js3}}{help=barre_eo}{img=oelig.png})][(#REM)
+				][(#MODELE{barre_bouton}{champhelp=#GET{champhelp}}{js=#GET{js4}}{help=barre_eo_maj}{img=oelig-maj.png})][(#REM)			
+				]</BOUCLE_schar>[(#REM)
+				]<BOUCLE_schar2(IF){condition (#ENV{schar}|=={eo-cpf})}>[(#REM)
+				][(#MODELE{barre_bouton}{champhelp=#GET{champhelp}}{js=#GET{js}}{help=barre_a_accent_grave}{img=agrave-maj.png})][(#REM)
+				][(#MODELE{barre_bouton}{champhelp=#GET{champhelp}}{js=#GET{js2}}{help=barre_e_accent_aigu}{img=eacute-maj.png})][(#REM)			
+				]</BOUCLE_schar2>[(#REM)
+				]#SET{js,"barre_inserer('&euro;',"(#ENV{champ})")"}[(#REM)
+				][(#MODELE{barre_bouton}{champhelp=#GET{champhelp}}{js=#GET{js}}{help=barre_euro}{img=euro.png})]
+			</span>
+			[(#EVAL{_DIR_RESTREINT}|?{'',' '})
+			<span style='text-align:#ENV{spip_lang_right};'>
+				[(#REM|sinon{raccourcis}|aide)&nbsp;]
+			</span>
+			]
+		</div>[(#REM)
+			Sur les forums publics, petite barre d'aide en survol des icones
+		]
+	</div>
+	[(#EVAL{_DIR_RESTREINT}|?{' ',''})
+	<div class='spip_barre_aide'>
+			<input disabled='disabled' type='text' class='barre' id='barre_#ENV{num_barre}' maxlength='100' value="<:barre_aide:>" />
+	</div>
+]</div>

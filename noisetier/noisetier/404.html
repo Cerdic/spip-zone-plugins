@@ -1,0 +1,16 @@
+#CACHE{86400}
+#HTTP_HEADER{"Cache-Control: no-store, no-cache, must-revalidate"}
+#HTTP_HEADER{Pragma: no-cache}
+[(#REM) Déclaration du type de document, indispensable pour le navigateur web ]
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+[(#REM) Appel du modèle d'en-tête du plugin de thème]
+<INCLURE{fond=noisetier-head}{env}{page=404}>
+</head>
+<body id="404" class="page_404">
+[(#REM) Appel du modèle de corps du plugin de thème ]
+<INCLURE{fond=noisetier-body}{env}{page=404}>
+[(#REM) Balises html de fermeture de la page]
+</body>
+</html>

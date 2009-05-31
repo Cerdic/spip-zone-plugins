@@ -1,0 +1,71 @@
+/*
+ * #FF9900 : jaune
+ * #FFFFCC : creme
+*/
+
+
+/*
+ * Correction des styles HTML par defaut
+ */
+
+.structure {
+	display: none;
+}
+
+h1,h2,h3,h4 {
+	margin-top: 0em;
+	margin-bottom: 0em;
+	font-size: 100%;
+	font-weight: normal;
+}
+
+/*
+ * Styles generaux
+ */
+
+/* bien regler la marge (bugs IE) */
+body 	{
+	bgcolor="#ffffff" ;
+	background="squelettes/mm_bg_red.gif";
+	margin: 0px; 
+	}
+
+a { text-decoration: none; color: #FF9900; }
+a:hover { text-decoration: none; color: #FFFFCC; background: #ff0000; }
+a.spip_out { text-decoration: none; color: #a02020; }
+a.spip_in, a.spip_url { text-decoration: none; color: #2020a0; }
+a.spip_glossaire { text-decoration: none; color: #20a020; }
+
+.chapo {
+	font-family: "Trebuchet MS", Tahoma, Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	text-align: justify;
+	font-size: 105%;
+}
+.texte, .texte p.spip {
+	font-family: Georgia, Garamond, Times, serif;
+	text-align: justify;
+}
+.ps {
+	font-family: Georgia, Garamond, Times, serif;
+	text-align: justify;
+	font-size: 85%;
+}
+.notes {
+	font-family: Georgia, Garamond, Times, serif;
+	text-align: left;
+	font-size: 80%;
+}
+
+
+.extrait {
+	border: groove 2px #ff0000;
+	padding: 1em;
+	font-size: 85%;
+}
+
+
+.encart {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+

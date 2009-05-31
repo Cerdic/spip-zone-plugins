@@ -1,0 +1,4 @@
+- la fleche gauche (ou toutes touches "sp√©ciales") affiche le menu complet, c'est pas cool, le menu apparait tout le tmeps, pour rien
+mais peut être c'est bien... va savoir
+- le menu est mal placé sur IE6
+- si le textfield est en bas de la fenêtre, le menu dépace (on n'y peut pas grand chose) mais le scroll interfère avec le navigateur (avec Safari et Opera mais pas Firefox) qui essai de scroller toute la page.

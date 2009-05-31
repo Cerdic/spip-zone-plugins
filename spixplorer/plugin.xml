@@ -1,0 +1,25 @@
+<plugin>
+	<version>0.0.1</version>
+	<nom>spixplorer, quixplorer pour spip</nom>
+	<prefix>spixplorer</prefix>
+	<description>
+G&eacute;rer ses fichiers comme le serveur et si besoin par FTP.
+
+Un fork, adapt&eacute;n s&eacute;curis&eacute; et &eacute;tendu de [quixplorer->http://quixplorer.sourceforge.net/]
+
+Utilisation: bouton sous l'accueil ou [spip.php?action=spx_list->../?action=spx_list]
+
+
+	</description>
+		<icon>spixplorer.png</icon>
+
+	<pipeline>
+    	<nom>ajouter_boutons</nom>
+        <inclure>spx_pipelines.php</inclure>
+    </pipeline>
+	<!-- install>
+	spixplorer_install.php
+	</install>
+	<necessite id='chargeur' version='[0.1.0;]' / -->
+	<necessite id="SPIP" version="[1.9.0;]" />
+</plugin>

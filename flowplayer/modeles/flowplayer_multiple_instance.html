@@ -1,0 +1,61 @@
+[(#REM)Mod&#232;le SPIP pour le FlowPlayer, lecteur video en Flash OpenSource
+Flowplayer simple sans playliste : mod&#232;le pour une seule video
+Home Page : http://www.flowplayer.org
+A minimal setup to get you started. This configuration is the same as in our Quick Start documentation:
+http://flowplayer.org/player/quick-start.html
+]
+
+[(#REM)<flowplayer_multiple_instance|id_article=2>]
+
+<!-- <script language="javascript" type="text/javascript" src="#CHEMIN{js/jquery.pack.js}"></script> on en en sans doute pas besoin du jquery puisque c'est dans SPIP -->
+
+<script type="text/javascript" src="#CHEMIN{js/flashembed.min.js}"></script>
+
+<script type="text/javascript" src="#CHEMIN{js/flow.embed.js}"></script>
+
+
+
+<!-- etrange le no script apparait y a un soucis, plus une erreur js dans ecrire et conflit crayons encore -->
+
+<noscript>
+<p>
+D&#233;sol&#233;, mais le javascript est n&#233;ecessaire dans la version actuelle. Merci de le r&#233;activer pour afficher le contenu multimedia
+</p>
+</noscript>
+ 
+ 
+ 
+ 
+<script type="text/javascript"> 
+// <![CDATA[	
+		// this simple call does the magic
+		$(function() {
+			$("a.flowplayer").flowembed("#CHEMIN{players/FlowPlayerDark.swf}",  {initialScale:'scale'});		
+		});  
+	// ]]>	
+	</script> 
+	
+
+
+<div id="flowplayer_multiple_instance">
+
+<B_docjoints>
+
+<BOUCLE_docjoints(DOCUMENTS){id_article?}{id_rubrique?}{id_document ?}{id_breve ?}{id_mot ?}{mode=document}{extension IN jpg,flv,swf,mp3,mp4,png,h.264}{par num titre}{par id_document}>
+
+<p>
+<a class="flowplayer" href="[(#URL_DOCUMENT|url_absolue)]"> [(#TITRE)]<br />[(#DESCRIPTIF|PtoBR)]
+<img src="#CHEMIN{css/flowplayer.png}" alt="<:videos:>" width="309" height="249" />
+</a>
+
+<!-- la il faudrait plutot mettre <img src="[(#LOGO_DOCUMENT||extraire_attribut{src})]" /> mais la css est a reprendre l image empietant sur le titre et descriptif -->
+
+</p>
+
+</BOUCLE_docjoints>
+
+</B_docjoints>
+
+	
+</div>
+

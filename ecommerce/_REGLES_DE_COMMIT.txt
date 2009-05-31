@@ -1,0 +1,24 @@
+*
+* Contact : mailto:laurent.rieffel@laposte.net
+*
+
+Fonctionnalité de cette version 1.0 :
+
+- suppression/création des tables propre à la boutique en ligne.
+  ne necessitant pas le compte administrateur de la base de données.
+
+- affichage avant suppression d'un boutique, et de toutes les autres 
+  n'ayant pas abouties à l'achat, avec un delais de 24h.
+
+
+Beaucoup de choses sont à implémenter :
+
+- parfaire l'affichage qui pour le moment à des "echo"
+
+- voir la possibilité de modifier l'abonnement à la newsletter
+
+- parfaire l'affichage du formulaire de saisie des informations 
+  (sous forme de balise)
+
+- (...)
+

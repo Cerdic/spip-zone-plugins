@@ -1,0 +1,170 @@
+div.transition {
+	margin: 0 auto;
+	font: 11px/1 Verdana, Arial, Helvetica, sans-serif;
+	color: white;
+	background: white;
+	}
+div.transition a,
+div.transition a:hover,
+div.transition a:focus,
+div.transition a:active {
+	text-decoration: none;
+	outline: none;
+	border: none;
+	}
+div.transition a span {
+	display: none;
+	}
+div.transition a img {
+	border: 0;
+	}
+div.transition p {
+	position: absolute;
+	width: 100%;
+	padding: 0 10px;
+	line-height: 2.5em;
+	background: url(img/background.png);
+	z-index: 2;
+	}
+* html div.transition p { /* Plain black background for IE6 */
+	background: black;
+	}
+	
+/* MAIN VIEW
+--------------------------------------*/
+div.transition-view {
+	position: relative;
+	overflow: hidden;
+	margin-bottom: 5px;
+	}
+div.transition-view img {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	}
+p.transition-title {
+	top: 0;
+	margin: -3em 0 0;
+	text-align: center;
+	text-transform: uppercase;
+	}
+p.transition-caption {
+	bottom: 0;
+	margin: 0 0 -3em;
+	}
+div.transition-view a {
+	display: block;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 76px;
+	height: 76px;
+	margin-top: -38px;
+	background-image: url(img/controls.png);
+	background-repeat: no-repeat;
+	z-index: 2;
+	cursor: pointer;
+	}
+* html div.transition-view a { /* Poor gif replacement for IE6 */
+	background-image: url(img/controls.gif);
+	}
+a.transition-prev {
+	margin-left: -124px;
+	background-position: 0 0;
+	}
+a.transition-prev:hover {
+	background-position: 0 -76px;
+	}
+a.transition-slideshow {
+	margin-left: -38px;
+	background-position: -76px 0;
+	}
+a.transition-slideshow:hover {
+	background-position: -76px -76px;
+	}
+a.transition-stop {
+	background-position: -152px 0;
+	}
+a.transition-stop:hover {
+	background-position: -152px -76px;
+	}
+a.transition-next {
+	margin-left: 48px;
+	background-position: -228px 0;
+	}
+a.transition-next:hover {
+	background-position: -228px -76px;
+	}
+div.transition a.transition-disabled {
+	width: 0;
+	height: 0;
+	}
+
+/* THUMBNAIL STRIP
+--------------------------------------*/
+div.transition-thumbstrip {
+	position: relative;
+	overflow: hidden;
+	}
+div.transition-thumbstrip ul,
+div.transition-thumbstrip ol {
+	width: 9999px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	}
+div.transition-thumbstrip li {
+	float: left;
+	position: relative;
+	padding-right: 5px;
+	}
+div.transition-thumbstrip li a {
+	display: block;
+	}
+div.transition-thumbstrip li img {
+	display: block;
+	}
+	
+/* CURRENT THUMB OUTLINE
+--------------------------------------*/
+span.transition-current,
+span.transition-current span {
+	position: absolute;
+	display: block;
+	left: 0;
+	top: 0;
+	border: 2px solid #444;
+	}
+span.transition-current span {
+	background-position: right bottom;
+	border: 2px solid white;
+	}
+
+/* THUMBSTRIP CONTROLS
+--------------------------------------*/
+a.transition-backward {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 30px;
+	background: url(img/stripcontrols.png) no-repeat 0 50%;
+	}
+a.transition-backward:hover {
+	background-position: -30px 50%;
+	}
+a.transition-forward {
+	position: absolute;
+	top: 0;
+	right: 0;
+	height: 100%;
+	width: 30px;
+	background: url(img/stripcontrols.png) no-repeat -60px 50%;
+	}
+a.transition-forward:hover {
+	background-position: -90px 50%;
+	}
+* html a.transition-backward,
+* html a.transition-forward {
+	background-image: url(img/stripcontrols.gif);
+	}

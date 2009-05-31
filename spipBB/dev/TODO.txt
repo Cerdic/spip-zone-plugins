@@ -1,0 +1,49 @@
+Todo-list pour spipbb
+======================
+
+Interface Privée - Administration générale :
+-* 0.5 Contrôle du spam : les mots pics ou conn* par exemple ont un spectre trop large : soit modifier la regexp (et ne prendre que des mots) soit utiliser un calcul sur la répétition (minimum de tant de mots marqués pour assimiler à du spam)
+
+Interface Privée - Membres:
+-* 0.5 Meilleure gestion des champs extras cf http://www.spip-contrib.net/Plugin-SpipBB#forum400496
+
+Interface Privée - Import PhpBB :
+-* 0.5 Import phpBB : test mot de passe / authentification d'un auteur importe non. phpbb2 : php.md5($pass) spip: php.md5($alea.$pass) donc ?creer? un inc/auth_phpbb.php avec un login qui fait update au premier login (pour la conversion) + mettre ident avec 'source'=phpbb avant
+-> table spécifique import auteurs
+-* 0.5 Import phpBB : import des Messages Perso ? Option de depart ? A priori pas compatibles
+-* 0.5 Import phpBB : Si pas Iniset, realisation par etapes de la partie 2 et 3 ? Precalcul a l'avance
+-* 0.5 Import phpBB : Mettre en option l'import des auteurs (remplacer l'id par le nom dans les messages)
+-* 0.6 Lors de l'arret de la migration en cours en cas de retour sur la page config afficher etape+ situation + bouton reinit
+
+Interface publique - Générale :
+-* 0.5 Manque icone postit interface publique (TODO scoty ?)
+-* 0.5 L’idéal serait de pouvoir ajouter une photo ou un document dans un post ou réponse à celui-ci et ce serait parfait
+-* 0.5 Parametres et donnees specifiques à renseigner lors de l'inscription (possible avec le formulaire dédié)
+-* 0.5 Reporte : Gestion avatar : a ameliorer + téléchargement (droits ?) : c'est possible en 1.9.3 voir balise SPIPBB_AVATAR mais pas simple en 192
+
+Bugs et autres elements non finis :
+-* 0.5 Bug dans le move (ordre de priorites) d'un forum des fois ça ne fonctionne pas... (valider les cas et corriger)
+-* 0.5 mot cles ferme, postit, annonce : bug -> ils ne doivent s'appliquer qu'au message principal du thread
+-* 0.5 Pouvoir configurer l'ordre de presentation des menus d'admins (par le webmaster)
+-* 0.5 Que fait test_inscriptions dans spipbb_options ? Revoir l'arborescence des fonctions (schéma ?)
+-* 0.5 Envisager de controler l'etat de la config régulierement ? a chaque passsage dans un menu d'admin ?
+-* 0.5 Gestion + règles d'affichage public (à vérifier) des annonces / postits / Fermes a tester /controler
+
+Voir l'intéret de :
+-* http://www.spip-contrib.net/Les-fenetres-flottantes
+-* http://www.spip-contrib.net/Notation-d-articles-SPIP
+-* http://www.spip-contrib.net/reCAPTCHA
+-* http://www.spip-contrib.net/Plugin-Champs-homonymes
+-* http://www.spip-contrib.net/Plugin-Captcha2
+-* http://www.spip-contrib.net/Exemple-d-utilisation-de-la-boucle
+-* http://www.spip-contrib.net/Plugin-Suivi-des-forums
+-* http://www.spip-contrib.net/Squelettes-par-profil
+-* http://www.spip-contrib.net/Personnalisation-par-profils-avec
+-* http://www.spip-contrib.net/Les-crayons
+-* http://www.spip-contrib.net/Une-arborescence-a-la-phorum-en
+
+Documentation
+==============
+
+-* Chaque fonctionnalité est soumise a config
+-* documenter pourquoi membre_liste peut etre vide si les auteurs n ont pas demande la parution

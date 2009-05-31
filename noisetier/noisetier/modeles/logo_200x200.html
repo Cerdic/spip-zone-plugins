@@ -1,0 +1,22 @@
+#CACHE{24*3600}
+[description(#REM)<multi>
+<lg-fr>Affiche un logo r&eacute;duit en 200x200 pixels selon l'id pass&eacute; (article, rubrique, br&egrave; site, auteur et mot).
+</multi>]
+<BOUCLE_article(ARTICLES){id_article}>
+	[(#LOGO_ARTICLE|image_reduire{200,200})]
+</BOUCLE_article>
+<BOUCLE_breve(BREVES){id_breve}>
+	[(#LOGO_BREVE|image_reduire{200,200})]
+</BOUCLE_breve>
+<BOUCLE_site(SITES){id_syndic}>
+	[(#LOGO_SITE|image_reduire{200,200})]
+</BOUCLE_site>
+<BOUCLE_auteur(AUTEURS){id_auteur}>
+	[(#LOGO_AUTEUR|image_reduire{200,200})]
+</BOUCLE_auteur>
+<BOUCLE_rubrique(RUBRIQUES){id_rubrique}>
+	[(#LOGO_RUBRIQUE|image_reduire{200,200})]
+</BOUCLE_rubrique>
+<BOUCLE_mot(MOTS){id_mot}>
+	[(#LOGO_MOT|image_reduire{200,200})]
+</BOUCLE_mot>

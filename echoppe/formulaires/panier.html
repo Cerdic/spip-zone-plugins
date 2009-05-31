@@ -1,0 +1,47 @@
+#CACHE{0}
+<div id="formulaire_spip formulaire_panier">
+	[<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
+	[<p class='formulaire_ok'>(#ENV*{message_ok})</p>]
+	<form action='#ENV{action}' method='post'>
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<B_LePanier>
+		<table class="panier spip" summary="<:echoppe:panier_du_client:>">
+        <tbody>
+			<tr class="titre_panier">
+				<th class = "panier_titre"><:echoppe:titre_produit:></th>
+				<th class = "panier_prix_ttc"><:echoppe:prix_ttc:></th>
+				<th class = "panier_quantite"><:echoppe:quantite:></th>
+				<th class = "panier_modifier">
+					[(#EDITER_PANIER|=={oui}|?{'',' '})<a href="[(#SELF|parametre_url{editer_panier,oui})]"><:echoppe:modifier_mon_panier:></a></th>]
+					[(#EDITER_PANIER|=={oui}|?{' ',''})<a href="[(#SELF|parametre_url{id_panier,''}|parametre_url{editer_panier,''})]"><:echoppe:annuler:></a></th>]
+			</tr>
+	<BOUCLE_LePanier(ECHOPPE_PANIERS){id_panier?}{token_panier = #SESSION{echoppe_token_panier}}>
+			<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+				<BOUCLE_LeProduit(ECHOPPE_PRODUITS){id_produit}>
+					<td class = "panier_titre"><a href="?page=produit&id_produit=#ID_PRODUIT">#TITRE</a></td>
+					<td class = "panier_prix_ttc">#PRIX_TVAC&nbsp;&euro;</td>
+					<td class = "panier_quantite">
+						[(#EDITER_PANIER|=={oui}|?{'',' '})#QUANTITE]
+						[(#EDITER_PANIER|=={oui}|?{' ',''})<input type="text" value="#QUANTITE" name="quantite&#91;#ID_PRODUIT&#93;" />]
+					</td>
+					<td class = "panier_modifier">
+						[(#EDITER_PANIER|=={oui}|?{'',' '})<a href="[(#SELF|parametre_url{id_panier,#ID_PANIER}|parametre_url{editer_panier,oui})]">Edit</a>]
+						[(#EDITER_PANIER|=={oui}|?{' ',''})<a href="[(#SELF|parametre_url{id_panier,''}|parametre_url{editer_panier,''})]">Cancel</a>]
+					</td>
+				</BOUCLE_LeProduit>
+			</tr>
+	</BOUCLE_LePanier>
+               <tr class="titre_panier">
+                <th>Total</th>
+                <th>#TOTAL_PANIER_TVAC&nbsp;&euro; TTC<br /><small>#TOTAL_PANIER_HTVA&nbsp;&euro; HTVA</small></td>
+                <th></th>
+                <th></th>
+            </tr>
+         </tbody>
+		</table>
+		[(#ENV{editer_panier}|=={oui}|?{' ',''})<input type="submit" value="<:echoppe:valider_les_modifications:>" class="valider" name="valider_modification"/>]
+	</form>
+	</B_LePanier>
+		<:echoppe:le_panier_est_vide:>
+	<//B_LePanier>
+</div>

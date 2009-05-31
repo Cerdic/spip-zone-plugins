@@ -1,0 +1,13 @@
+#HTTP_HEADER{Content-Type: text/html; charset=(#CONFIG{charset}|sinon{utf-8})}
+#HTTP_HEADER{Expires: 0}
+#HTTP_HEADER{Last-Modified: (#DATE|affdate{D, d M Y H:i:s}) GMT}
+#HTTP_HEADER{Cache-Control: no-store, no-cache, must-revalidate}
+#HTTP_HEADER{Pragma: no-cache}
+#EVAL{_DOCTYPE_ECRIRE}
+<html lang='#LANG' dir='#LANG_DIR'>
+<head>
+[(#REM) $css and $onLoad arguments of debut_page still not supported]
+#INSERT_HEAD_PRIVE
+</head>
+#EVAL**{'init_body("'(#ENV{rubrique})')", "'(#ENV{sous_rubrique})'", "", "'(#ENV{id_rubrique})'",false)'}
+#EVAL{'debut_corps_page("'(#ENV{rubrique})'",false)'}

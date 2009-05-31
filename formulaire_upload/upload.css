@@ -1,0 +1,10 @@
+/*pour plugin SPIP formulaire_upload*/
+
+.formulaire_upload .bord_formup{border:1px solid #ccc; margin-top:8px; margin-bottom:8px; padding:3px}
+.formulaire_upload .spip_doc_logo{ width:80px; margin-bottom:8px; text-align:center;}
+.formulaire_upload .floatright{float:right;}
+.formulaire_upload .floatleft{float:left;}
+.formulaire_upload .decrire_doc{width:57%;}
+.formulaire_upload .checkbox{width:10px;}
+.formulaire_upload .strong{font-weight:bold;}
+.formulaire_upload .pagination {width:90%}

@@ -1,0 +1,86 @@
+
+Traduction de pages en site multilingue "non sectorisé"
+De : Suske <suske@brubel.net>
+À : spip-zone@rezo.net
+Date : vendredi 2/11/2007 22:51:27
+
+
+Hello, bonjour, bonsoir, goedenavond,
+
+Je donne un coup de main pour un site qui sera intégralement et uniquement 
+bilingue (Fr/Nl). Le choix tactique qui est fait:
+- langue et liens de traduction sur les articles uniquement
+- rubriques, auteurs, etc. seront donc en champs multi
+- pas de brèves
+
+Justification: comme toute page doit être traduite dès sa publication, cette 
+disposition permet de suivre plus facilement les choses dans la "salle de 
+rédaction" (une seule structure et les articles et leur traductions seront 
+toujours quasi simultanés => sinon pas de publication !)
+
+Dans cette configuration, pas de problème particulier pour l'application du 
+contexte de langue (merci spip !): les lang_select et variables "lang" dans 
+l'URL permettent de s'y retrouver. On n'emploie pas le cookie de lang car il 
+entraînerait des affichages bilingues ou... une certaine complication dans le 
+squelette (que j'espère mettre sur spip-contrib  au début 2008).
+
+La seule "difficulté", c'est la demande de trouver sur chaque page des liens 
+de traductions identiques à ceux fournis en standard dans la dist pour les 
+articles ! 
+
+Heureusement pour moi, Natalia a publié "Formulaire menu_lang plat sans URL 
+sur la langue sélectionnée" sur contrib et cy_altern a donné en forum les 
+codes nécessaires pour un fonctionnement sur 193SVN. Il m'a suffi de 
+remplacer l'appel de cookie par une variable lang dans l'URL.
+
+J'en suis donc à un résultat satisfaisant basé sur une noisette et un passage 
+par mes_fonctions;php:
+
+- noisette:
+
+<div class="traductions">
+<p><:trad_page_traduction:></p> // et le fichier local_fr/nl.php qui va bien
+<ul>
+[(#CONFIG{langues_utilisees}|lang_plat)]
+</ul>
+</div>
+
+- mes_fonctions:
+
+// menu_lang plat sans URL sur la langue en cours
+// Voir http://www.spip-contrib.net/Formulaire-menu-lang-plat-sans-URL et 
+FORUM
+function lang_plat ($langues) {
+    include_spip('inc/charsets');
+    $list_lang = '';
+    $tab_langues = explode(",",$langues);
+    while ( list($clef, $valeur) = each($tab_langues) ) 
+        if ($valeur == $GLOBALS['spip_lang']) { 
+        $list_lang .='<li lang="'.$valeur.'" xml:lang="'.$valeur.'" dir="ltr" 
+class="on"><span>['.traduire_nom_langue($valeur).']</span></li> '; 
+}       else { 
+        $list_lang .='<li lang="'.$valeur.'" xml:lang="'.$valeur.'" dir="ltr" 
+class="off"><a href="'.parametre_url(self(true), 'lang', ''.
+$valeur.'').'"><span>['.traduire_nom_langue($valeur).']</span></a></li> '; 
+        }
+    return $list_lang;
+}
+//fin
+
+Depuis quelques jours, je regarde les plugins... Mais c'est trop dur pour moi. 
+S'il se trouvait quelqu'un pour me coacher sur les pipelines et astuces à 
+utiliser pour faire ça proprement... Sinon, je propose à un as inconnu de 
+faire ça: je suis sûr que cette "tactique" a beaucoup d'avenir dans les sites 
+belges, sauf explosion interne-nationale :-)
+
+Voilà, voilà. J'essaye d'apporter ma petite pierre mais c'est vraiment dur, le 
+niveau est haut et ma courte et ancienne approche de php 4.0 ne m'est déjà 
+plus d'une grande utilité :-)
+
+A plus,
+
+
+
+-- 
+Suske
++32-476-764629

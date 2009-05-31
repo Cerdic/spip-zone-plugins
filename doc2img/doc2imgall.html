@@ -1,0 +1,111 @@
+#CACHE{0}
+#SET{total,0}
+
+<html>
+<head>
+#INSERT_HEAD
+
+<script>
+
+    function convert(doc,index) {
+        frame = $(doc).eq(index);
+        id_document = frame.text();
+                
+        frame.html(
+            '<img src="#CHEMIN{images/loader.gif}" />'
+        );
+
+        $.ajax({
+          url: "?page=doc2img_convert",
+          data: {id_document : id_document},
+          async: false,
+          complete : function(request,status) {
+            frame.html('<p>'+request.responseText+'</p>');
+            if ($(doc).eq(index+1).text())
+                convert(doc,index+1);
+          }
+        });    
+    }
+
+    $('document').ready( function() {
+        doc = 'td.frame';
+        convert(doc,0);
+    });
+
+</script>
+
+<style>
+    table {
+        margin-left : auto;
+        margin-right : auto;
+        border : 1px solid black;
+    }
+    
+    thead {
+        font-weight : bold;
+        text-align: center;
+    }
+    
+    tr {
+        border-bottom : 1px solid black;
+    }
+    
+</style>
+
+</head>
+
+<body>
+    <B_DOC>
+        <div>
+        Liste de #TOTAL_BOUCLE sur les #GRAND_TOTAL documents
+        <p class="pagination">#PAGINATION</p>
+        </div>
+        <table rules="groups">
+        <thead>
+        <tr>
+            <td>id_document</td>
+            <td>extension</td>
+            <td>convertible</td>
+            <td>converti</td>        
+            <td> voir </td>
+            <td> fichier </td> 
+            <td> nb pages</td>
+            <td> statut </td>
+            <td> TOTAL </td>            
+        </tr>
+        </thead>
+    <BOUCLE_DOC(DOCUMENTS) {id_document?} {extension == (.*|pdf)} {par id_document} {pagination 50} {tout}>
+    <tr>
+        <td>#ID_DOCUMENT</td>
+        <td>#EXTENSION</td>
+        [(#ID_DOCUMENT|d2c_can_convert|?{
+            <td bgcolor="#00FF00">oui</td>,
+            <td bgcolor="#FF0000">non</td>}
+        )]
+        
+        [(#ID_DOCUMENT|d2c_is_convert|?{
+            <td bgcolor="#FF0000">oui</td>,
+            <td bgcolor="#00FF00">non</td>}
+        )]
+        <td class="frame">#ID_DOCUMENT</td>
+        <td>
+            <a href="#URL_SITE_SPIP/#FICHIER" target="_blank">#FICHIER</a>
+        </td>
+        <td>
+            [(#CONFIG{php::doc2img/#ID_DOCUMENT/pages})]
+        </td>
+        <td>
+            [(#CONFIG{php::doc2img/#ID_DOCUMENT/statut})]
+        </td>
+        <td>
+            [(#EXTENSION|=={pdf}|?{' '})
+                [(#SET{total,#GET{total}|plus{1}})]
+                #GET{total}    
+            ]
+        </td>
+    </tr>
+    </BOUCLE_DOC>
+    </table>
+</body>
+
+</html>

@@ -1,0 +1,8 @@
+Migre_static todolist
+---------------------
+
+-* performance improvement
+-* amelioration des filtres
+-* better ul/ol filters
+-* presenter les filtres sous forme dynamique
+-* ajouter les filtres dans la DTD + migration ?

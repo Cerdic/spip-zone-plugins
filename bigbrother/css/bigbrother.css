@@ -1,0 +1,20 @@
+
+table.bigbrother{
+	margin:1em 0;
+	width:100%;
+	border-spacing:0;
+}
+
+table.bigbrother th, table.bigbrother td{
+	margin:0;
+	padding:2px;
+}
+
+table.bigbrother .temps{
+	text-align:right;
+}
+
+div.pagination_bigbrother{
+	border-top:none;
+	text-align:center;
+}

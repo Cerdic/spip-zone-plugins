@@ -1,0 +1,43 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	SPIP2SPIP
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	erational - [erational.org->http://www.erational.org]
+_ &#169; 2006-2009 - Licence GPL version 3
+	</auteur>
+	<version>2.1</version>
+	<etat>dev</etat>
+	<description>
+Permet d'importer et d'exporter des articles avec d'autres sites SPIP en conservant le formatage spip
+-* {{importer des articles:}} attribuer les mots-cl&#233;s du groupe d&#233;di&#233; {- spip2spip -} &#224; vos rubriques et inscrire les flux spip2spip de vos sites partenaires 
+-* {{diffuser vos articles:}} attribuer les mots-cl&#233;s du groupe d&#233;di&#233; {- spip2spip -} &#224; vos articles et donner [votre adresse de flux spip2spip (simple)->../spip.php?page=backend-spip2spip]  
+
+_ Les articles recopi&#233;s tentent de r&#233;cuperer le maximum de donn&#233;es: 
+-* formatage original SPIP de l'article
+-* images, documents attach&#233;s recopi&#233;s en documents distants, licence
+-* essayer de faire correspondre les auteurs
+-* &#233;v&#233;nements plugin agenda avec le [flux spip2spip (agenda)->../spip.php?page=backend-spip2spip-agenda])
+
+
+	</description>
+	<lien>http://www.spip-contrib.net/SPIP2SPIP</lien> <!-- URI de documentation --> 
+	<fonctions>spiptospip_filtre.php</fonctions>
+	<install>base/spip2spip_upgrade.php</install>
+	<prefix>spip2spip</prefix>
+	<icon>img_pack/icon.png</icon>
+	<options>spiptospip_options.php</options>
+	<fonctions>spiptospip_fonctions.php</fonctions>
+	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<action>ajouterBoutons</action>
+    <inclure>spiptospip_fonctions.php</inclure>		
+	</pipeline>
+	<pipeline>
+		<nom>taches_generales_cron</nom>
+		<inclure>spiptospip_fonctions.php</inclure>
+	</pipeline>
+	<necessite id="SPIP" version="[2.0.0;]" />
+	<utilise id="cfg" version="[1.0;]" />
+</plugin>

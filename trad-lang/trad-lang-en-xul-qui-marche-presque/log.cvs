@@ -1,0 +1,65 @@
+$Id: log.cvs,v 1.1.1.1 2004/04/15 06:54:10 florent Exp $
+$Log: log.cvs,v $
+Revision 1.1.1.1  2004/04/15 06:54:10  florent
+creation du projet sur labs
+
+Revision 1.2  2003/11/17 21:51:51  root
+test
+
+Revision 1.1.1.1  2003/11/17 21:19:36  root
+Initial CVS Import, V0.2
+
+Revision 1.15  2003/11/08 11:06:50  florent
+remise de iso-8859-1 (pb. avec utf-8)
+
+Revision 1.14  2003/11/06 20:42:45  florent
+plus de lien symboliques
+
+Revision 1.13  2003/11/06 20:36:10  florent
+effacement de ts_fr2.php3
+
+Revision 1.12  2003/11/05 21:14:37  florent
+augmenter la taille des caracteres en consultation
+
+Revision 1.11  2003/11/05 21:02:59  florent
+dans la fenetre d'administration, les noms des chaines
+sont forces en minuscule.
+
+Revision 1.10  2003/11/05 20:46:12  florent
+lors d'une multi-modification, enregistre seulement les items
+qui ont ete rellement modifies
+
+Revision 1.9  2003/11/05 20:16:36  florent
+tri du tableau date
+
+Revision 1.8  2003/11/05 20:06:10  florent
+ajout bidouille pour pouvoir recuperer l'euro
+
+Revision 1.7  2003/11/05 19:58:16  florent
+passage utf-8
+
+Revision 1.6  2003/11/05 19:12:29  florent
+CONFLIT->PLUS_UTILISE
+
+Revision 1.5  2003/11/05 19:04:26  florent
+*** empty log message ***
+
+
+Revision 1.1.1.1  2003/11/05 18:28:03  florent
+import trad-lang
+
+
+
+Wed Nov  5 19:57:44 CET 2003
+Wed Nov  5 20:03:42 CET 2003
+Wed Nov  5 20:04:23 CET 2003
+Wed Nov  5 20:12:15 CET 2003
+Wed Nov  5 20:58:05 CET 2003
+Wed Nov  5 21:05:43 CET 2003
+Wed Nov  5 21:16:26 CET 2003
+Wed Nov  5 21:45:39 CET 2003
+Wed Nov  5 22:02:37 CET 2003
+Wed Nov  5 22:14:18 CET 2003
+jeu nov  6 21:35:50 CET 2003
+jeu nov  6 21:42:29 CET 2003
+sam nov  8 12:06:32 CET 2003

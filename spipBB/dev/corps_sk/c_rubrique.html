@@ -1,0 +1,80 @@
+#CACHE{86400}
+[(#REM) Plugin SpipBB - Licence GPL]
+[(#REM) Squelette : SpipBB Team + scoty]
+
+[
+(#REM) Ajouts : chryjs : CONFIG id_mot_ferme
+]
+#SET{id_mot_ferme,#CONFIG{spipbb/id_mot_ferme}}
+
+<BOUCLE_primale(RUBRIQUES){id_rubrique}>
+
+<INCLURE{fond=inc_teteforum}{id_rubrique}>
+
+	<BOUCLE_rubrique_principal(RUBRIQUES){id_secteur}{racine}>
+
+	#SET{secteur,#ID_SECTEUR}
+
+	[(#REM) ligne chemin ]
+	[(#ID_RUBRIQUE|=={#CONFIG{spipbb/id_secteur}}|?{'',' '})
+	[(#MODELE{chemin_rubrique}{id_rubrique})]
+	]
+
+	<!-- boucles tableau -->
+
+	<table class="spipforum" id="rubrique_forum">
+		<tr>
+			<th colspan="2" class='tforum'><:spipbb:forum:></th>
+			<th class='tsujet'><:spipbb:sujet_s:></th>
+			<th class='tmessage'><:spipbb:reponse_s_:></th>
+			<th class='tdern'><:spipbb:messages_derniers:></th>
+		</tr>
+
+	[(#REM) essai h.12/11/07 .. forums du secteur (racine) c:15/4/8 a condition qu'on soit dans le secteur non ? ]
+	[(#REM) c: 12/7/8 ... oui mais pas nécessaire d'avoir des sous rubriques pour qu'ils s'affichent dans ce cas ]
+
+	<BOUCLE_forum_secteur(ARTICLES){id_rubrique}{par num titre}>
+	[(#_primale:ID_RUBRIQUE|=={#CONFIG{spipbb/id_secteur}}|?{' ',''})
+		<tr class="ligne_forum">
+		[(#MODELE{ligne_voir_forum}{id_article}{id_rub_primale=#_primale:ID_RUBRIQUE})]
+		</tr>
+	]
+	</BOUCLE_forum_secteur>
+
+	<B_categories>
+	<!-- sous-rubrique -->
+	[(#REM) chryjs 19/12/7 supprime doublon : B_categories ]
+	<BOUCLE_categories(RUBRIQUES){id_parent}{par num titre}>
+		<tr class="inter salon">
+			<td colspan="5"[ class="(#EDIT{titre})"]><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></td>
+		</tr>
+
+		[(#REM) Afficher table par rubrique ou toute si racine ]
+		#SET{display,#ENV{id_rubrique}|=={#ID_RUBRIQUE}|?{'display',#ENV{id_rubrique}|=={#GET{secteur}}|?{'display','none'}}}
+
+		<BOUCLE_forums(ARTICLES){id_rubrique}{par num titre}>
+		<tr class="ligne_forum" style="display:#GET{display};">
+[(#MODELE{ligne_voir_forum}{id_article}{id_rub_primale=#_primale:ID_RUBRIQUE})]
+		</tr>
+		</BOUCLE_forums>
+	</BOUCLE_categories>
+
+	</B_categories>
+
+	</table>
+
+	</BOUCLE_rubrique_principal>
+
+[(#MODELE{bloc_informations}{id_rubrique})]
+
+<INCLURE{fond=inc_piedforum}{id_rubrique=#ENV{id_rubrique}}>
+
+	[(#REM) si visiteur non identifie : form login ]
+	[(#SESSION{id_auteur}|=={''}|?{' ',''})<div class="login"><p class="login"><:spipbb:login:></p>]
+	#FORMULAIRE_LOGIN{#SELF}
+	[(#SESSION{id_auteur}|=={''}|?{' ',''})
+	&#91;<a[ href="(#URL_PAGE{spip_pass})"] target="spip_pass" onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=280'); return false;"><:login_motpasseoublie:></a>&#93;
+	</div>
+	]
+
+</BOUCLE_primale>

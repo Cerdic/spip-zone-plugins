@@ -1,0 +1,139 @@
+#CACHE{86400}
+<BOUCLE_article_principal(SYNDIC_ARTICLES_PMB) {id_syndic_article}>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+	<title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+	[<meta name="description" content="(#INTRODUCTION|couper{150}|textebrut)" />]
+	<INCLURE{fond=inc-head}>
+</head>
+
+<body class="page_article">
+<div id="page">
+
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}>
+
+	[(#REM) Fil d'Ariane ]
+	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_article}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; (#TITRE|couper{80})]</div>
+
+
+	<div id="conteneur">
+
+		[(#REM) Contenu principal : contenu de l'article ]
+		<div id="contenu">
+
+			<div class="cartouche">
+				#DEBUT_SURLIGNE
+				<img src=#PMB_PHOTO_SRC alt="[ pas de photo ]" />
+				<h1 class="titre">#TITRE</h1>
+				#FIN_SURLIGNE
+
+				<p><small>[(#DATE|nom_jour) ][(#DATE|affdate)]</small></p>
+
+				[(#REM) Inclure le modele des liens de traductions ]
+				#MODELE{article_traductions}
+
+			</div>
+			
+			#DEBUT_SURLIGNE
+			<div class="chapo">Auteur : #LESAUTEURS[<br/>Série : (#PMB_SERIE)]</div>
+			
+			<table class="pmb-infos-ouvrage">
+				[<tr><td class="pmb-infos-ouvrage-titre">Type :</td><td>(#PMB_TYPE)</td></tr>]
+				[<tr><td class="pmb-infos-ouvrage-titre">Editeur :</td><td>(#PMB_EDITEUR) [((#PMB_EDITEUR_LIEU))]</td></tr>]
+				[<tr><td class="pmb-infos-ouvrage-titre">Format :</td><td>(#PMB_FORMAT)</td></tr>]
+				[<tr><td class="pmb-infos-ouvrage-titre">Année de publication :</td><td>(#PMB_ANNEE_DE_PUBLICATION)</td></tr>]
+				[<tr><td class="pmb-infos-ouvrage-titre">Importance :</td><td>(#PMB_IMPORTANCE)</td></tr>]
+				[<tr><td class="pmb-infos-ouvrage-titre">Présentation :</td><td>(#PMB_PRESENTATION)</td></tr>]
+				[<tr><td class="pmb-infos-ouvrage-titre">ISBN :</td><td>(#PMB_ISBN)</td></tr>]
+			</table>
+			[<p class="lien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+			[<div class="texte">(#DESCRIPTIF|image_reduire{520,0})</div>]
+			
+			<div style="text-align: right;margin-right: 2em;"><a href="#" onclick="w=window.open('#PMB_URL_BASEdo_resa.php?lvl=resa&id_notice=#PMB_ID_NOTICE&$id_empr=&oresa=popup','doresa','scrollbars=yes,width=500,height=600,menubar=0,resizable=yes'); w.focus(); return false;">> Réserver l'ouvrage</a></div>
+			<div style="text-align: right;margin-right: 2em;"><a href="#" onclick="open('#PMB_URL_BASEaddtags.php?noticeid=#PMB_ID_NOTICE','ajouter_un_tag','width=350,height=600,scrollbars=yes,resizable=yes'); return false;">> Ajouter un tag&nbsp;<img src="#PMB_URL_BASEimages/tag.png" title=">" alt="Ajouter un tag" align="absmiddle" border="0"></a></div>
+			<div style="text-align: right;margin-right: 2em;"><a href="#" title="Consulter ou donner son avis" onclick="open('#PMB_URL_BASEavis.php?todo=liste&noticeid=#PMB_ID_NOTICE','avis','width=600,height=290,scrollbars=yes,resizable=yes'); return false;"></a></div>
+			#FIN_SURLIGNE
+
+			[(#REM) Portfolio : album d'images ]
+			<B_documents_portfolio>
+			<div id="documents_portfolio">
+				<h2><:info_portfolio:></h2>
+				<BOUCLE_documents_portfolio(DOCUMENTS) {id_article} {mode=document} {extension IN png,jpg,gif} {par num titre, date} {doublons}>
+				[<a href="#URL_DOCUMENT" type="#MIME_TYPE" onclick="location.href='[(#URL_ARTICLE|parametre_url{id_document,#ID_DOCUMENT})]#documents_portfolio';return false;"[ title="(#TITRE|couper{80}|texte_backend)"]>(#LOGO_DOCUMENT||image_reduire{0,60}|inserer_attribut{alt,[(#TITRE|couper{80}|texte_backend)]})</a>]
+				</BOUCLE_documents_portfolio>
+			</div>
+			</B_documents_portfolio>
+			<BOUCLE_afficher_document(DOCUMENTS) {id_document} {id_article} {mode=document}{extension IN png,jpg,gif}>
+			<div class="spip_documents spip_documents_center" id="document_actif">
+				#EMBED_DOCUMENT
+				[<div class="spip_doc_titre">(#TITRE)</div>]
+				[<div class="spip_doc_descriptif">(#DESCRIPTIF)</div>]
+			</div>
+			</BOUCLE_afficher_document>
+
+			[<div class="ps"><h2><:info_ps:></h2>#DEBUT_SURLIGNE(#PS)#FIN_SURLIGNE</div>]
+
+			[(#REM) Documents joints a l'ouvrage pmb]
+			[<div id="documents_joints">
+				<h2 class="menu-titre"><:titre_documents_joints:></h2>
+					(#TAGS|lignes_longues{10})
+			</div>]
+			
+			
+			[<div class="notes"><h2><:info_notes:></h2>#DEBUT_SURLIGNE(#NOTES)#FIN_SURLIGNE</div>]
+
+			[(#REM) Forum de l'ouvrage]
+			<a href="#forum" name="forum" id="forum"></a>
+			[<h2 class="forum-repondre"><a href="spip.php?page=forum-pmb&(#PARAMETRES_FORUM{#SELF})&id_syndic_article=#ID_SYNDIC_ARTICLE[&titre=(#TITRE|md5)]"><:repondre_article:></a></h2>]
+			<INCLURE{fond=inc-forum-pmb}{id_syndic}{id_syndic_article}{titre=#TITRE}>
+			
+
+
+		</div><!-- fin contenu -->
+
+
+		[(#REM) Menu de navigation laterale ]
+		<div id="navigation">
+
+			[(#REM) Menu de navigation par rubriques ]
+			<INCLURE{fond=inc-rubriques}>
+
+			[(#REM) Ouvrages du même auteur ]
+			<B_ouvrages_auteur>
+			<div class="divers">
+				<h2 class="menu-titre"><:meme_auteur:></h2>
+				<ul>
+					<BOUCLE_ouvrages_auteur(SYNDIC_ARTICLES_PMB) {lesauteurs=#LESAUTEURS}{lesauteurs!=""}{id_syndic_article!=#ID_SYNDIC_ARTICLE}>
+					<li><a href="#URL_PAGE{article-syndic-pmb,id_syndic_article=#ID_SYNDIC_ARTICLE}"[ class="(#EXPOSE)"]>#TITRE</a></li>
+					</BOUCLE_ouvrages_auteur>
+				</ul>
+			</div>
+			</B_ouvrages_auteur>
+
+			[(#REM) Ouvrages dans la même série ]
+			<B_ouvrages_serie>
+			<div class="divers">
+				<h2 class="menu-titre">Dans la même série</h2>
+				<ul>
+					<BOUCLE_ouvrages_serie(SYNDIC_ARTICLES_PMB) {pmb_serie=#PMB_SERIE}{pmb_serie!=""}{id_syndic_article!=#ID_SYNDIC_ARTICLE}>
+					<li><a href="#URL_PAGE{article-syndic-pmb,id_syndic_article=#ID_SYNDIC_ARTICLE}"[ class="(#EXPOSE)"]>#TITRE</a></li>
+					</BOUCLE_ouvrages_serie>
+				</ul>
+			</div>
+			</B_ouvrages_serie>
+
+			<INCLURE{fond=inc-pmb-login}>
+
+		</div><!-- fin navigation -->
+
+	</div><!-- fin conteneur -->
+
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
+</div><!-- fin page -->
+</body>
+</html>
+</BOUCLE_article_principal>

@@ -1,0 +1,511 @@
+<BOUCLE_session_principale(SPIP_ECOMMERCE_SESSIONS) {id_session}>
+<html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
+<meta http-equiv="expires" content="0"> 
+<meta http-equiv="pragma" content="no-cache"> 
+<meta http-equiv="cache-control" content="no-cache, must-revalidate"> 
+
+<!-- 
+Ceci est la feuille de style par defaut pour les types internes a SPIP 
+-->
+<link rel="stylesheet" href="spip_style.css" type="text/css" media="print, projection, screen, tv"/>
+<!-- 
+Les feuilles de style specifiques aux presents squelettes 
+-->
+<link rel="stylesheet" href="#DOSSIER_SQUELETTE/typographie.css" type="text/css" media="print, projection, screen, tv" />
+
+<!-- 
+media="..." permet de ne pas utiliser ce style sous Netscape 4 (sinon plantage)
+-->
+<link rel="stylesheet" href="#DOSSIER_SQUELETTE/habillage.css" type="text/css" media="print, projection, screen, tv" />
+
+
+<!-- Lien vers le backend pour navigateurs eclaires -->
+<link rel="alternate" type="application/rss+xml" title="<:syndiquer_site:>" href="backend.php3" />
+
+<title>la boutique</title>
+
+<SCRIPT language=Javascript1.2>
+	am = "      www.ilsalone.com";
+	bV  = parseInt(navigator.appVersion)
+	bNS = navigator.appName=="Netscape"
+	bIE = navigator.appName=="Microsoft Internet Explorer"
+
+	function nrc(e) 
+		{
+		if (bNS && e.which > 1)
+			{
+			alert(am)
+			return false	
+			}
+		else
+			if (bIE && (event.button >1))
+				{
+				alert(am)
+				return false;
+				}
+		}
+
+	document.onmousedown = nrc;
+	if (document.layers) window.captureEvents(Event.MOUSEDOWN);
+	if (bNS && bV<5) window.onmousedown = nrc;
+
+
+function DataCheck()
+{ 
+  if (document.CMCICPaymentTesting.reference.value.length == 0)
+  {
+   alert("Order Reference is a mandatory field, numeric maxlength 12 ");
+   document.CMCICPaymentTesting.reference.focus();
+   return false;
+  }  
+  if (document.CMCICPaymentTesting.reference.value.length > 12)
+  {
+   alert("Order Reference is a mandatory field, , numeric maxlength 12 !");
+   document.CMCICPaymentTesting.reference.focus();
+   return false;
+  } 
+ return true;
+}
+
+</script>
+
+
+</head>
+<body bgcolor="#57181B" leftmargin="0" topmargin="0" rightmargin="0" bottommargin="0" vlink="#57181B" alink="#57181B">
+<table bgcolor="#57181B" width="800px" border="0" cellspacing="0" cellpadding="0">
+	<tr>
+		<td rowspan="6"><img src="/IMG/boutique/frise_gauche.jpg"></td>
+		<td valign="top">
+			[(#LOGO_SITE)]
+			<br>
+			<table style="text-align: left; width="655px"; border="0" cellpadding="0" cellspacing="0">
+				<tbody>
+					<B_bandeau_principal_images>
+						<BOUCLE_bandeau_principal_images(RUBRIQUES) {id_rubrique>1} {racine} {par titre}>
+							<div class ="principal">
+								[(#LOGO_RUBRIQUE_NORMAL|center||reduire_image{300,300})]
+								<B_bandeau_secondaire_images>
+									<BOUCLE_bandeau_secondaire_images(RUBRIQUES) {id_parent} {par titre}>
+										<BOUCLE_premier_article (ARTICLES) {id_rubrique} {0,1}>
+											<div class ="secondaire">
+											<a href="[(#URL_RUBRIQUE|parametre_url{id_article,#ID_ARTICLE}|parametre_url{id_session,#ID_SESSION})]" title="[(#_bandeau_secondaire_images:TITRE)]/[(#_bandeau_principal_images:TITRE)]">
+												#_bandeau_secondaire_images:TITRE
+											</a>
+											</div>
+										</BOUCLE_premier_article>
+									</BOUCLE_bandeau_secondaire_images>
+								</B_bandeau_secondaire_images>
+							</div>
+						</BOUCLE_bandeau_principal_images>
+					</B_bandeau_principal_images>
+				</tbody>
+			</table>
+		</td>	
+		<td rowspan="6" align="center"; valign="top" bgcolor="DFF1FC">
+			<table width="145px" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td><img src="/IMG/boutique/panier_haut.jpg" border="0"></td>
+				</tr>
+			</table>
+			<table width="145px" border="0" cellspacing="0" cellpadding="0">
+				<div class="panier">
+				<B_une_session>
+					<BOUCLE_une_session(SPIP_ECOMMERCE_SESSIONS) {id_session} >
+						<B_tous_les_articles>
+							<BOUCLE_tous_les_articles (SPIP_ECOMMERCE_PANIERS) {id_session} >
+								<span class="Style5">Article #_tous_les_articles:COMPTEUR_BOUCLE</span>
+								<span class="Style1"><br>
+									<B_ref_article>
+										<BOUCLE_ref_article (ARTICLES) {id_article}>
+											Modèle n° #TITRE <br>
+										</BOUCLE_ref_article>
+									</B_ref_article>
+									Pointure : #POINTURE <br>
+									Nombre : #QUANTITE <br>
+									<B_prix_article>
+										<BOUCLE_prix_article (ARTICLES) {id_article}>
+											Prix unitaire : #CHAPO €
+											<span class="Style5">
+												Sous total : [(#CHAPO|somme{#QUANTITE})] €
+											</span>
+										</BOUCLE_prix_article>
+									</B_prix_article>
+								</span>
+									[(#STATUT|=={create}|?{
+										<a class="Style2" href="panier.php?id_article=#ID_ARTICLE&id_session=#ID_SESSION&delete=1&pointure=#POINTURE&quantite=#QUANTITE" title="Retier">Retirer l'article</a>
+									})]
+									[(#STATUT|=={open}|?{
+										<a class="Style2" href="panier.php?id_article=#ID_ARTICLE&id_session=#ID_SESSION&delete=1&pointure=#POINTURE&quantite=#QUANTITE" title="Retier">Retirer l'article</a>
+									})]
+								<br><br>
+							</BOUCLE_tous_les_articles>
+						</B_tous_les_articles>
+								<span class="Style5">
+									<center>
+										Le panier est vide <br>
+									</center>
+								</span>
+						<//B_tous_les_articles>
+					</BOUCLE_une_session>
+				</B_une_session>
+					<span class="Style5">
+						<center>
+							Vous debutez votre achat. Le panier est vide <br>
+						</center>
+					</span>
+				<//B_une_session>
+				</div>
+			</table>
+			<table width="145px" height="230px" border="0" cellspacing="0" cellpadding="0" valign="bottom">
+				<tr>
+					<td align="center" valign="bottom">
+						<span class="Style5">
+							<strong>
+								<?php 
+									$pu=0; $qte=0; $total_session=0;
+								?>
+								<B_montant_session>
+									<BOUCLE_montant_session(SPIP_ECOMMERCE_SESSIONS) {id_session} >
+										<B_montant_tous_les_articles>
+											<BOUCLE_montant_tous_les_articles (SPIP_ECOMMERCE_PANIERS) {id_session}>
+												<B_montant_article>
+													<BOUCLE_montant_article (ARTICLES) {id_article}>
+														<?php 
+															$pu = '#CHAPO';
+															settype($pu, "integer"); 
+															$qte = '#QUANTITE' ;
+															settype($qte, "integer"); 
+															$total_session = $qte*$pu+$total_session ;
+															$qte_article_session=$qte_article_session+$qte ;
+														?>
+													</BOUCLE_montant_article>
+												</B_montant_article>
+											</BOUCLE_montant_tous_les_articles>
+										</B_montant_tous_les_articles>
+										<?php 
+											echo "<br>TOTAL : ".$total_session." €<br>" ;
+										?>
+									</BOUCLE_montant_session>
+								</B_montant_session>
+									<br>TOTAL : 0 €<br>
+								<//B_montant_session>
+								<B_conditions_generale_de_vente>
+									<BOUCLE_conditions_generale_de_vente(SPIP_ARTICLES) {id_article=86}>
+									<B_format_pdf>
+										<BOUCLE_format_pdf(DOCUMENTS) {id_article} {extension = pdf}>
+											<span class="Style8">
+												<a href="[(#URL_DOCUMENT)]" title="#_conditions_generale_de_vente:TITRE">
+													Conditions G&eacute;n&eacute;rales de Vente
+												</a>
+												<br><br>
+											</span>
+										</BOUCLE_format_pdf>
+									</B_format_pdf>
+									</BOUCLE_conditions_generale_de_vente>
+								</B_conditions_generale_de_vente>
+							</strong>
+						</span>
+						<center>
+							<img src="/IMG/boutique/cb.jpg">
+						</center>
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<B_information_session>
+				<BOUCLE_information_session(SPIP_ECOMMERCE_SESSIONS) {id_session} {statut IN 'open', 'create'} >
+					<form method="post" action="#SELF"> 
+						<table width="100%" border="0" cellspacing="0" cellpadding="3">
+							<tr align="left" valign="bottom" >
+								<td height="280px" width="250">
+									<span class="Style2">Nom(*)</span>
+									<br>
+									<input name="nom" type="text" value="" size="25" maxlength="50" style="text-align:left;" />
+									<br>
+									<span class="Style2">Prenom(*)</span>
+									<br>
+									<input name="prenom" type="text" value="" size="25" maxlength="50" style="text-align:left;" />
+									<br>
+									<span class="Style2">Email(*)</span>
+									<br>
+									<input name="email" type="text" value="prenom.nom@fournisseur.domaine" size="25" maxlength="50" style="text-align:left;" />
+									<br>
+									<INPUT type="checkbox" name="news" value="1" checked > <span class="Style2">Abonnement à la news letter</span>
+									<br>
+									<span class="Style2">Adresse(*)</span>
+									<br>
+									<TEXTAREA rows="4" cols="25" value="" name="adresse_facturation"></TEXTAREA>
+									<br>
+									<span class="Style2">Code Postal(*)</span>
+									<br>
+									<input name="code_postal_facturation" type="text" value="" size="25" maxlength="50" style="text-align:left;" />
+									<br>
+									<span class="Style2">Ville(*)</span>
+									<br>
+									<input name="ville_facturation" type="text" value="" size="25" maxlength="50" style="text-align:left;" />
+									<br>
+									<span class="Style2">Pays(*)</span>
+									<br>
+									<input name="pays_facturation" type="text" value="" size="25" maxlength="50" style="text-align:left;" />
+								</td>
+								<td width="250">
+									<span class="Style2">Mme</span><INPUT type="radio" name="categorie" value=3>
+									<span class="Style2">Melle</span><INPUT type="radio" name="categorie" value=2>
+									<span class="Style2">Mr</span><INPUT type="radio" name="categorie" value=1>
+									<br>
+									<span class="Style2">Zone geographique(*)</span>
+									<br>
+									<SELECT name="zone">
+										<OPTION value="France" selected>France</option> 
+										<OPTION value="UE">Pays de l'Union EU</option> 
+										<OPTION value="autres">Reste du monde</option>  
+									</SELECT>
+									<br>
+									<span class="Style2">Telephone</span>
+									<br>
+									<input name="telephone" type="text" value="" size="25" maxlength="50" style="text-align:left;" />
+									<br>
+									<br>
+									<br>
+									<br>
+									<br>
+									<span class="Style2">Adresse de livraison (si différente)</span>
+									<br>
+									<TEXTAREA rows="4" cols="25" value="" name="adresse_livraison"></TEXTAREA>
+									<br>
+									<span class="Style2">Code Postal</span>
+									<br>
+									<input name="code_postal_livraison" type="text" value="" size="25" maxlength="50" style="text-align:left;" />
+									<br>
+									<span class="Style2">Ville</span>
+									<br>
+									<input name="ville_livraison" type="text" value="" size="25" maxlength="50" style="text-align:left;" />
+									<br>
+									<span class="Style2">Pays</span>
+									<br>
+									<input name="pays_livraison" type="text" value="" size="25" maxlength="50" style="text-align:left;" />
+								</td>
+							</tr>
+							<td colspan="6" align="center"; valign="top" >
+								<form name="boutique-[(#ID_SESSION)]" id="boutique-[(#ID_SESSION)]" method="post" 
+									action="boutique.php?id_session=#ID_SESSION" > 
+									<input type="submit" name="annuler" value="Annuler" />
+									<input type="submit" name="payer" value="Payer" />
+								</form>
+								<span class="Style2">(*) Champs obligatoires</span>
+							</td>
+						</table>
+					</form> 
+				</BOUCLE_information_session>
+			</B_information_session>
+			<B_affiche_information_session>
+				<BOUCLE_affiche_information_session(SPIP_ECOMMERCE_SESSIONS) {id_session} {statut IN 'submit'}>
+
+
+<?php
+// MySQL Connection to Merchant database Server  
+// Please custom Your's before tests beginning
+// Personnalisez avec votre connexion avant test
+function MyLinkToDataBaseCMCIC()   
+	{
+	if (!defined('_INCLUDE_ECOMMERCE')) 
+		{
+		# include necessaire a la boutique?	
+		@define('_DIR_INCLUDE', 'include/');
+		include_once _DIR_INCLUDE.'ecommerce_mysql_engine.php'; 
+		}
+
+	if (!defined('_ECRIRE_INC_VERSION')) 
+		{
+		# ou est l'espace prive ?
+		@define('_DIR_RESTREINT_ABS', 'ecrire/');
+		include_once _DIR_RESTREINT_ABS.'inc_version.php';
+		}
+
+	if (!$link = boutique_mysql_connect ())
+		{
+		echo 'Traitement mysql interrompu';
+		exit;
+		}
+	return $link;    
+	}
+
+// Rien à changer ci-dessous avant un premier paiement réussi avec A/R
+// correct.
+
+function CMCIC_exec($query, $link)        // Execute query returning result 
+	{
+	@$do_query = mysql_query($query, $link);
+	if (!$do_query) 
+		{
+		echo mysql_errno().": ".mysql_error()."\n";
+// Please implement your error logging disposal <<<--- 
+// Implementez vos standards de gestion des erreurs
+		return FALSE;
+		}
+	$result_row = mysql_fetch_array($do_query);
+//	echo "\n<BR \>$result_row $do_query\n<BR \>" ;
+	if ($result_row) 
+		{
+		$result = $result_row[0];
+		return $result;
+		}
+	return FALSE;
+	}
+
+function CMCIC_creerFormulaire($CMCIC_link,
+                               $Order_Reference, // unique, alphaNum (A-Z a-z 0-9), maxlength 12
+                               $Language,        // "FR","EN","DE","IT","ES" limited to suscribed options  
+                               $Merchant_Code,   //
+                               $Amount,          // "199.95" "xxx.yy" "xxxxx.yy" (no blanks allowed)
+                               $Currency,        // "EUR", "USD", "GBP", ... limited to suscribed options
+                               $Order_Comment)   // some text usefull for you to visualize 
+                                                 //in the Merchant's Admin User Interface
+	{
+// Prepare the return link. Context will be added to return Url
+	$Return_Context = "?order_ref=".$Order_Reference; 
+//---------------------------------------------------------------------------
+// Build the payment button with underlying payment form
+// Creer le bouton et le formulaire sous-jacent
+	require("CMCIC_MySQL_Engine_1.inc.php"); // -- a full MySQL implementation of RFC2104 --
+	$PaymentForm = CMCIC_exec("SELECT formulaire FROM CMCICPaiement WHERE sauvePaiement=@sauveCMCIC;",$CMCIC_link);
+// Debug Log to execute CMCIC MySQL engine step by step within your MySqlAdmin
+	@include("CMCIC_Debug_1.inc.php");  // if usefull -- si utile
+//---------------------------------------------------------------------------
+	return $PaymentForm;
+	}
+
+?>
+
+
+
+
+					<table width="100%" border="0" cellspacing="0" cellpadding="3">
+						<tr valign="top">
+							<td width="150"><span class="Style2">Numero facture :</span></td>
+							<td width="250"><span class="Style3">[(#CODE_SESSION)]</span></td>
+						</tr>
+						<tr valign="top">
+							<td width="150"><span class="Style2">Client :</span></td>
+							<td width="250"><span class="Style3">[(#NOM|urldecode)] [(#PRENOM|urldecode)]</span></td>
+						</tr>
+						<tr valign="top">
+							<td width="150"><span class="Style2">Adresse :</span></td>
+							<td width="250"><span class="Style3">[(#ADRESSE_LIVRAISON|?{[(#ADRESSE_LIVRAISON|urldecode)],[(#ADRESSE_FACTURATION|urldecode)]})]<br>
+								[(#CODE_POSTAL_LIVRAISON|urldecode)] [(#VILLE_LIVRAISON|urldecode)] [(#PAYS_LIVRAISON|?{[(#PAYS_LIVRAISON|urldecode)],""})]</span></td>
+						</tr>
+<!--
+						<tr valign="top">
+							<td width="150"><span class="Style2">Facture a :</span></td>
+							<td width="250"><span class="Style3">[(#ADRESSE_FACTURATION|urldecode)]<br>
+								[(#CODE_POSTAL_FACTURATION|urldecode)] [(#VILLE_FACTURATION|urldecode)] [(#PAYS_FACTURATION|?{[(#PAYS_FACTURATION|urldecode)],""})]</span></td>
+						</tr>
+-->
+						<tr valign="top">
+							<td width="150"><span class="Style2">Contact :</span></td>
+							<td width="250"><span class="Style3">[(#TELEPHONE|?{[(#TELEPHONE|urldecode)],""})] [(#EMAIL|?{[(#EMAIL|urldecode)],""})]</span></td>
+						</tr>
+						<tr valign="top">
+							<td width="150"><span class="Style2">Total des achats :</span></td>
+							<td width="250"><span class="Style3"><?php
+										echo $total_session." €uros";
+									?>
+								</span></td>
+						</tr>
+						<tr valign="top">
+							<td width="150"><span class="Style2">Zone tarifaire :</span></td>
+							<td width="250"><span class="Style3">[(#ZONE)]</span></td>
+						<tr valign="top">
+							<td width="150"><span class="Style2">Frais de port appliqués :</span></td>
+							<td width="250"><span class="Style3"><?php
+										if (!strcmp("#ZONE", "France"))
+											$frais_port=8+(($qte_article_session - 1) * 2) ;
+										if (!strcmp("#ZONE", "UE"))
+											$frais_port=15+(($qte_article_session - 1) * 5) ;
+										if (!strcmp("#ZONE", "Autres"))
+											$frais_port=25+(($qte_article_session - 1) * 15) ;
+										echo $frais_port." €uros";
+									?>
+								</span></td>
+						</tr>
+						<tr valign="top">
+							<td width="150"><span class="Style2">Total de la facture :</span></td>
+							<td width="250">
+								<span class="Style3"><?php
+		$total_cb=$total_session+$frais_port ;
+		echo $total_cb." €uros";
+	?>
+								</span></td>
+						</tr>
+						<tr valign="top">
+							<td width="150"><span class="Style2">Dont TVA (19.6%):</span></td>
+							<td width="250"><span class="Style3"><?php
+											$tva=round(($total_cb/119.6*19.6), 2) ;
+										echo $tva." €uros";
+									?>
+								</span></td>
+						</tr>
+						<tr align="center"> <td colspan="2">
+							<?php
+$CMCIC_link = MyLinkToDataBaseCMCIC ();  // MySQL Connection
+
+@$Reference_12 = '#CODE_SESSION' ;
+$Reference_Cde = urlencode(substr($Reference_12, 0, 12));
+
+$Language_2   = "FR";   
+$Code_Langue   = urlencode(substr($Language_2 , 0, 2));
+
+// Code société: fourni par CM-CIC
+@$Code_Societe = CMCIC_exec("SELECT codeSite FROM CMCICSite where codeLangue='$Code_Langue' limit 1;",$CMCIC_link);
+
+// Montant: format  "xxxxx.yy" (pas de blancs))
+$Montant       = $total_cb;
+
+// Devise: norme ISO 4217 
+$Devise        = "EUR";
+
+// texte libre: une référence longue, des contextes de session pour le retour.
+$Texte_Libre   = "bla bla";
+
+$Formulaire_Paiement = CMCIC_creerFormulaire($CMCIC_link, $Reference_Cde, $Code_Langue, $Code_Societe, $Montant, $Devise, $Texte_Libre);
+mysql_close($CMCIC_link); // Close connection
+
+
+// Dont erase this line! Ne pas effacer cette ligne !
+								echo $Formulaire_Paiement;
+							?>
+    <?php echo $CtlHmac;                // test and debug only 
+    ?>
+    <BR><XMP>
+    <?php //echo $Formulaire_Paiement;    // test and debug only 
+    ?></XMP>
+							<center>
+								<a href="javascript:window.print()">
+									<img src="/IMG/boutique/imprimante.gif" name="imprimante" alt="" height=32 width=48 border=0>
+								</a>
+							</center>
+						</td></tr>
+					</table>
+				</BOUCLE_affiche_information_session>
+			</B_affiche_information_session>
+		</td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td align="center" height="35"><span class="Style1">
+		4e Etage - 1, Place Broglie - Strasbourg - T&eacute;l. 33 (0)3 88 32 55 07 - <a href="mailto:boutique@ilsalone.com">boutique@ilsalone.com</a>
+		</span>
+		</td>
+	</tr>
+</table>
+</body>
+</html>
+</BOUCLE_session_principale>

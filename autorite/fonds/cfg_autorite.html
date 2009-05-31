@@ -1,0 +1,493 @@
+<!-- titre=&laquo;&nbsp;Autorit&#233;&nbsp;&raquo;-->
+<!-- icone=illuminati-24.gif-->
+<!-- presentation= -->
+<!-- rediriger=1-->
+<!-- autoriser=webmestre -->
+
+
+[(#SET{logo,
+<img src='#DOSSIER_SQUELETTE/../illuminati.png' width='64' height='64' alt='Logo rigolo' style="float:#LANG_RIGHT;" />
+})]
+
+<!-- refus=#GET{logo}<p>
+Seuls les webmestres du site [(<b>(#REM|liste_webmestres)</b>)] sont autoris&#233;s &#224; modifier ces param&#232;tres.</p>
+<p>Pour en savoir plus, voir <a href="http://www.spip-contrib.net/-Autorite-">la documentation</a>.</p>
+-->
+
+<!-- descriptif=
+
+#GET{logo}
+Cette page de configuration est r&#233;serv&#233;e au webmestre du site&nbsp;: &nbsp;
+ <b>[(#REM|liste_webmestres)]</b>
+<hr />
+<p><small>Si vous souhaitez modifier cette liste, veuillez éditer le fichier <tt>config/mes_options.php</tt> (le cr&#233;er le cas &#233;ch&#233;ant) et y indiquer la liste des identifiants des auteurs webmestres, sous la forme suivante&nbsp;:</small></p>
+<html><pre>&lt;?php
+  define ('_ID_WEBMESTRES',
+  '1:5:8');
+?&gt;</pre></html>
+
+<p><small>A noter&nbsp;: les webmestres d&#233;finis de cette mani&#232;re n'ont plus besoin de proc&#233;der &#224; l'authentification par FTP pour les op&#233;rations d&#233;licates (mise &#224; niveau de la base de donn&#233;es, par exemple).</small></p>
+
+<a href="http://www.spip-contrib.net/-Autorite-" class="spip_out">Cf. documentation</a>
+-->
+
+#CACHE{0}
+
+
+<form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
+
+
+
+[(#REM) ------------------------ AFFICHER LES ERREURS ------------------------ ]
+[(#CONFIG{autorite_erreurs}|?{#CONFIG{autorite_erreurs}|unserialize|count|>{0}|?{' '}})
+
+	[(#REM|debut_boite_alerte)]
+	<strong><:avis_attention:></strong> Les autorisations suivantes sont d&#233;j&#224; d&#233;finies par ailleurs&nbsp;:
+	<ul><li>
+	<tt>
+	[(#CONFIG{autorite_erreurs}|unserialize|join{'</tt></li><li><tt>'})]
+	</tt>
+	</li></ul>
+	Le plugin &#171;&nbsp;Autorit&#233;&nbsp;&#187; ne peut pas les modifier&nbsp;; certains des r&#233;glages ci-dessous risquent par cons&#233;quent de ne pas fonctionner.
+	<br />Pour r&#233;gler ce probl&#232;me, vous devrez v&#233;rifier si votre fichier <tt>mes_options.php</tt> (ou un autre plugin actif) a d&#233;fini ces fonctions.
+
+	[(#REM|fin_boite_alerte)]
+
+	<br />
+
+]
+
+[
+	[(#REM|debut_boite_alerte)]
+		Attention les choix suivants peuvent ne pas fonctionner
+		avec votre version de SPIP&nbsp;:
+			<ul><li>(#REM|autorite_erreurs_version)</li></ul>
+	[(#REM|fin_boite_alerte)]
+
+
+	<br />
+]
+
+[(#REM|debut_cadre_trait_couleur{1,'xxx','R&#233;glage des autorisations'})]
+
+
+[(#REM) ------------------------ DROITS DES AUTEURS ------------------------ ]
+<fieldset>
+<legend>
+	Droits des auteurs
+</legend>
+<p>
+
+<label><input type="checkbox" name="auteur_mod_article" [checked="(#ENV{auteur_mod_article}?{checked})"] id="auteur_mod_article" /> 
+	<strong>Auteur modifie article</strong>&nbsp;: chaque r&#233;dacteur peut modifier les articles publi&#233;s dont il est l'auteur (et, par cons&#233;quent, mod&#233;rer le forum et la p&#233;tition associ&#233;s).
+	<br />
+	<i>N.&nbsp;B.&nbsp;: cette option s'applique aussi aux visiteurs enregistr&#233;s, s'ils sont auteurs et si une interface sp&#233;cifique est pr&#233;vue.</i>
+</label>
+
+<br />
+
+<br />
+
+
+<small>
+<label><input type="checkbox" name="auteur_modere_forum" [checked="(#ENV{auteur_modere_forum}|?{checked})"] [(#ENV{auteur_mod_article}|?{' disabled="disabled"'})]
+/>
+	<strong>Auteur mod&#232;re forum</strong>&nbsp;: chaque r&#233;dacteur peut mod&#233;rer le forum des articles dont il est l'auteur.
+</label>
+
+<br />
+
+<label><input type="checkbox" name="auteur_modere_petition" [checked="(#ENV{auteur_modere_petition}|?{checked})"] [(#ENV{auteur_mod_article}|?{' disabled="disabled"'})]
+/>
+	<strong>Auteur mod&#232;re p&#233;tition</strong>&nbsp;: chaque r&#233;dacteur peut mod&#233;rer la p&#233;tition des articles dont il est l'auteur.
+</label>
+</small>
+
+</fieldset>
+[(#REM) Code jQuery de l'espace auteurs ; activer/desactiver le choix secondaire ]
+<script type="text/javascript"><!--
+	$('#auteur_mod_article')
+	.bind('change', function() {
+		var on = $(this).is(':checked');
+		$(this)
+		.parents('fieldset')
+		.find('input')
+			.not(this)
+			.attr('disabled', on ? 'disabled' : '')
+		.end();
+	})
+// --></script>
+
+
+
+[(#REM) ---------------------- DROITS DES REDACTEURS -------------------- ]
+
+<fieldset>
+<legend>
+	Droits des r&#233;dacteurs
+</legend>
+<p>
+
+<label><input type="checkbox" name="auteur_mod_email" [checked="(#ENV{auteur_mod_email}|?{checked})"] />
+	<strong>R&#233;dacteur modifie email</strong>&nbsp;: chaque r&#233;dacteur peut modifier son email sur sa fiche d'informations personnelles.
+</label>
+
+<br />
+
+<label><input type="checkbox" name="redacteur_mod_article" [checked="(#ENV{redacteur_mod_article}|?{checked})"] />
+	<strong>R&#233;dacteur modifie propos&#233;s</strong>&nbsp;: chaque r&#233;dacteur peut modifier un article propos&eacute; &#224; la publication, m&ecirc;me s'il n'en est pas auteur.
+</label>
+
+
+</p>
+
+
+<p>
+<label><strong>Mots-cl&#233;s&nbsp;:</strong> qui peut cr&#233;er et &#233;diter les mots-cl&#233;s&nbsp;:
+<br />
+<select name="editer_mots">
+	<option value="0">Les administrateurs complets</option>
+	<option value="1"[ selected="(#ENV{editer_mots}|=={1}|?{selected})"]>Tous les administrateurs (y compris restreints)</option>
+	<option value="2"[ selected="(#ENV{editer_mots}|=={2}|?{selected})"]>Tous les r&#233;dacteurs</option>
+</select>
+</label>
+</p>
+
+
+<p>
+<label><input type="checkbox" name="redacteurs_lire_stats" [checked="(#ENV{redacteurs_lire_stats}?{checked})"] />
+	<strong>R&#233;dacteur voit stats</strong>&nbsp;: les r&#233;dacteurs peuvent visualiser les statistiques.
+</label>
+
+</p>
+
+</fieldset>
+
+
+[(#REM) -------------------- CRAYONS -------------------------]
+<fieldset>
+	<legend>Crayons</legend>
+	<small><strong>Attention.</strong> Les r&#233;glages ci-dessous ne peuvent fonctionner que si vous utilisez un plugin proposant une interface d'&#233;dition (comme par exemple <a href="http://www.spip-contrib.net/Les-Crayons">les Crayons</a>).
+	</small>
+
+[(#REM)
+	L'auteur d'un forum caracterise par son id_auteur, c'est deja pas mal ;
+	pour des auteurs anonymes, il faudrait leur poser un cookie qui leur
+	ouvrirait ce droit tant que le cookie vit (donc, TODO).
+]
+	<p>
+	<label><strong>Forums&nbsp;:</strong> qui peut modifier le contenu des forums&nbsp;:
+	<br />
+	<select name="editer_forums">
+	<option value="0">Personne (valeur par d&#233;faut)</option>
+	<option value="1"[ selected="(#ENV{editer_forums}|=={1}|?{selected})"]>Le webmestre</option>
+	<option value="2"[ selected="(#ENV{editer_forums}|=={2}|?{selected})"]>Les administrateurs</option>
+	<option value="3"[ selected="(#ENV{editer_forums}|=={3}|?{selected})"]>L'auteur du message, pendant une heure</option>
+	<option value="4"[ selected="(#ENV{editer_forums}|=={4}|?{selected})"]>L'auteur du message, ad vitam</option>
+	</select>
+
+	<small><br />Pour le moment, l'option &#171;&#160;auteur&#160;&#187; ne fonctionne que pour les auteurs enregistr&#233;s (forums sur abonnement, par exemple). Et, si elle est activ&#233;e, les administrateurs du site ont aussi la capacit&#233; d'&#233;diter les forums.
+	</small>
+	</p>
+
+[(#REM)
+	Pour les signataires c'est plus dur, car a priori pas d'id_auteur :
+	il faudra absolument un cookie specialise
+]
+	<p>
+	<label><strong>Signatures&nbsp;:</strong> qui peut modifier les signatures des p&#233;titions&nbsp;:
+	<br />
+	<select name="editer_signatures">
+	<option value="0">Personne (valeur par d&#233;faut)</option>
+	<option value="1"[ selected="(#ENV{editer_signatures}|=={1}|?{selected})"]>Le webmestre</option>
+	<option value="2"[ selected="(#ENV{editer_signatures}|=={2}|?{selected})"]>Les administrateurs</option>
+<!--
+	<option value="2"[ selected="(#ENV{editer_signatures}|=={2}|?{selected})"]>Le signataire, pendant une heure [s'il s'est enregistr&#233;]</option>
+	<option value="3"[ selected="(#ENV{editer_signatures}|=={3}|?{selected})"]>le signataire, ad vitam</option>
+-->
+	</select>
+	</label>
+	</p>
+
+</fieldset>
+
+
+[(#REM) ------------------------ ESPACE WIKI ------------------------ ]
+<fieldset>
+<legend>
+	Espace wiki
+</legend>
+
+<p>
+<label>
+Choisissez ci-dessous un secteur &#224; traiter comme un wiki, c'est-&#224;-dire &#233;ditable par tous depuis l'espace public (&#224; condition d'avoir une interface, par exemple les crayons)&nbsp;:
+
+<br />
+
+
+#SET{selected,#CONFIG{autorite/espace_wiki,#ARRAY}}
+<select name="espace_wiki[]" multiple="multiple" size="5" id="espace_wiki">
+<BOUCLE_rmul(RUBRIQUES){racine}{tout}{par num titre, titre}>
+	<option value="#ID_RUBRIQUE"[(#ID_RUBRIQUE|in_array{#GET{selected}}|?{' selected="selected"'})]>
+	#TITRE
+	</option>
+</BOUCLE_rmul>
+</select>
+
+<small><br />(vous pouvez s&#233;lectionner plusieurs secteurs avec la touche shift)
+<br /><a onclick="$('#espace_wiki').find('option').attr('selected', false).end().trigger('change');">x</a> tout d&#233;selectionner</small>
+
+</label>
+</p>
+
+<p id="espace_wiki_qui">
+Voulez-vous ouvrir ce wiki &mdash; au-del&#224; des administrateurs&nbsp;:
+<br />
+<label><input type="checkbox" name="espace_wiki_redacteurs" [checked="(#ENV{espace_wiki_redacteurs}|?{checked})"] /> aux r&#233;dacteurs du site&nbsp;;
+</label>
+<br />
+<label><input type="checkbox" name="espace_wiki_visiteurs" [checked="(#ENV{espace_wiki_visiteurs}|?{checked})"] /> aux visiteurs enregistr&#233;s&nbsp;;
+</label>
+<br />
+
+<label><input type="checkbox" name="espace_wiki_anonyme" [checked="(#ENV{espace_wiki_anonyme}|?{checked})"] /> &#224; tous les visiteurs du site.
+</label>
+
+<label><small><br />&nbsp; &nbsp; <input type="checkbox" name="espace_wiki_rubrique_anonyme" [checked="(#ENV{espace_wiki_anonyme}|?{#ENV{espace_wiki_rubrique_anonyme}|?{checked}})"] /> les visiteurs anonymes peuvent cr&#233;er de nouvelles pages.
+</small></label>
+
+</p>
+
+</fieldset>
+
+[(#REM) Code jQuery de l'espace wiki ; plier/deplier la moderation ]
+<script type="text/javascript"><!--
+	$('#espace_wiki')
+	.bind('change', function() {
+		if (parseInt(this.value))
+			$('#espace_wiki_qui:hidden').slideDown('slow');
+		else
+			$('#espace_wiki_qui:visible').slideUp('slow');
+	})
+	if ($('#espace_wiki option[@selected]').length == 0)
+		$('#espace_wiki_qui').hide();
+// --></script>
+
+
+[(#REM) ------------------------ ESPACE WIKI MOTS CLEF------------------------ ]
+<fieldset>
+    <legend>
+	    Espace wiki par mots clef
+    </legend>
+
+    <p><label>
+            Choisissez ci-dessous les mots clef qui activeront le mode wiki, c'est-&#224;-dire &#233;ditable par tous depuis l'espace public (&#224; condition d'avoir une interface, par exemple les crayons)&nbsp;<br/>
+            <input type="checkbox" name="espace_wiki_motsclef" id="espace_wiki_motsclef"  [checked="(#ENV{espace_wiki_motsclef})"] /> Activer la gestion par mots clef
+    </label></p>
+
+    <p id="espace_wiki_motsclef_qui">
+        Voulez-vous ouvrir ce wiki au-del&#224; des administrateurs&nbsp;:
+        <br />
+        <label>Ouvrir aux r&#233;dacteurs du site&nbsp; :
+            #SET{selected,#CONFIG{autorite/espace_wiki_motsclef_redacteurs,#ARRAY}}
+            <select name="espace_wiki_motsclef_redacteurs" id="espace_wiki_motsclef_redacteurs">
+                [(#REM) Mots clef Wiki Redacteurs]
+                <BOUCLE_gwr(GROUPES_MOTS){par num titre, titre}>
+                <BOUCLE_mwr(MOTS){tout}{id_groupe}{par num titre, titre}{0,40}>
+	                <option value="#ID_MOT"[(#ENV{espace_wiki_motsclef_redacteurs}|=={#ID_MOT}|?{' selected="selected"'})]>
+	                #TITRE
+	                </option>
+                </BOUCLE_mwr>
+                </BOUCLE_gwr>
+            </select>
+        </label>
+
+        <br />
+        <label>Ouvrir aux visiteurs enregistr&#233;s&nbsp; :
+            #SET{selected,#CONFIG{autorite/espace_wiki_motsclef_visiteurs,#ARRAY}}
+            <select name="espace_wiki_motsclef_visiteurs" id="espace_wiki_motsclef_visiteurs">
+                [(#REM) Mots clef Wiki Visiteurs]
+                <BOUCLE_gwv(GROUPES_MOTS){par num titre, titre}>
+                <BOUCLE_mwv(MOTS){tout}{id_groupe}{par num titre, titre}{0,40}>
+	                <option value="#ID_MOT" [(#ENV{espace_wiki_motsclef_visiteurs}|=={#ID_MOT}|?{' selected="selected"'})]>
+	                #TITRE
+	                </option>
+                </BOUCLE_mwv>
+                </BOUCLE_gwv>
+            </select>
+        </label>
+
+        <br />
+
+        <label>Ouvrir à tous les visiteurs du site :
+            #SET{selected,#CONFIG{autorite/espace_wiki_motsclef_anonyme,#ARRAY}}
+            <select name="espace_wiki_motsclef_anonyme" id="espace_wiki_motsclef_anonyme">
+                [(#REM) Mots clef Wiki Anonyme]
+                <BOUCLE_gwa(GROUPES_MOTS){par num titre, titre}>
+                <BOUCLE_mwa(MOTS){tout}{id_groupe}{par num titre, titre}{0,40}>
+	                <option value="#ID_MOT"[(#ENV{espace_wiki_motsclef_anonyme}|=={#ID_MOT}|?{' selected="selected"'})]>
+	                #TITRE
+	                </option>
+                </BOUCLE_mwa>
+                </BOUCLE_gwa>
+            </select>
+        </label>
+    </p>
+</fieldset>
+
+[(#REM) Code jQuery de l'espace wiki par mots clef; plier/deplier la moderation ]
+<script type="text/javascript"><!--
+	$('#espace_wiki_motsclef')
+	.bind('change', function() {
+            $('#espace_wiki_motsclef_qui').slideToggle('slow');
+	})
+	if ($('#espace_wiki_motsclef:checked').length == 0)
+		$('#espace_wiki_motsclef_qui').hide();
+// --></script>
+
+
+[(#REM) ---------------------- CONFIGURATION DU SITE -------------------- ]
+
+<fieldset>
+<legend>
+	Configuration du site
+</legend>
+<p>
+<label>Qui peut <strong>modifier la configuration</strong> du site&nbsp;?
+<br />
+<select name="configurer">
+	<option value=""[ selected="(#ENV{configurer}|?{'',selected})"]>Tous les administrateurs</option>
+	<option value="webmestre"[ selected="(#ENV{configurer}|=={webmestre}|?{selected})"]>Le webmestre</option>
+</select>
+</label>
+</p>
+
+
+<p>
+<label>Qui peut effectuer des <strong>sauvegardes</strong>&nbsp;?
+<br />
+<select name="sauvegarder">
+	<option value=""[ selected="(#ENV{sauvegarder}|=={''}|?{selected})"]>Les administrateurs</option>
+	<option value="admin"[ selected="(#ENV{sauvegarder}|=={minirezo}|?{selected})"]>admins... y compris restreints</option>
+	<option value="webmestre"[ selected="(#ENV{sauvegarder}|=={webmestre}|?{selected})"]>Le webmestre</option>
+	<option value="non"[ selected="(#ENV{sauvegarder}|=={non}|?{selected})"]>Personne</option>
+</select>
+</p>
+
+<p>
+<label>Qui peut <strong>effacer</strong> la base de donn&#233;es du site&nbsp;?
+<br />
+<select name="detruire">
+	<option value=""[ selected="(#ENV{detruire}|?{'',selected})"]>Les administrateurs</option>
+	<option value="webmestre"[ selected="(#ENV{detruire}|=={webmestre}|?{selected})"]>Le webmestre</option>
+	<option value="non"[ selected="(#ENV{detruire}|=={non}|?{selected})"]>Personne</option>
+</select>
+<small><br />L'option recommand&#233;e est &#171;&nbsp;personne&nbsp;&#187;, l'option standard de SPIP est &#171;&nbsp;les administrateurs&nbsp;&#187; (mais toujours avec une v&#233;rification par FTP).</small>
+</p>
+
+
+<p>
+<strong>Rubriques&nbsp;:</strong>
+<br />Cochez les cases ci-dessous pour interdire aux administrateurs de cr&#233;er
+<br />
+<label><input type="checkbox" name="interdire_creer_secteur" [checked="(#ENV{interdire_creer_secteur}|?{checked})"] /> de nouvelles rubriques &#224; la racine du site&nbsp;;
+</label>
+<br />
+<label><input type="checkbox" name="interdire_creer_sousrub" [checked="(#ENV{interdire_creer_sousrub}|?{checked})"] /> de nouvelles sous-rubriques dans l'arborescence.
+</label>
+<br />
+<small><label>&nbsp; &nbsp; <input type="checkbox" name="interdire_creer_rub_sauf_webmestre" [checked="(#ENV{interdire_creer_rub_sauf_webmestre}|?{checked})"] /> Ce r&#233;glage ne s'applique pas aux webmestres.
+</label></small>
+
+<small><br />
+(Notez que seuls les administrateurs peuvent créer des rubriques, et, pour les administrateurs restreints, cela ne peut se faire que dans leurs rubriques.)
+</small>
+</p>
+
+</fieldset>
+
+
+[(#REM) ---------------------- CONFIGURATION DES AUTEURS ----------------- ]
+
+<fieldset>
+<legend>
+	Configuration des auteurs
+</legend>
+<p>
+<label>A la cr&#233;ation d'un auteur, quel est le <b>statut par d&#233;faut</b>&nbsp;?
+<br />
+<select name="statut_auteur_creation">
+	<option value="visiteur"[ selected="(#ENV{statut_auteur_creation}|=={visiteur}|?{selected})"]>visiteur</option>
+	<option value=""[ selected="(#ENV{statut_auteur_creation}|?{'',selected})"]>r&#233;dacteur</option>
+	<option value="admin"[ selected="(#ENV{statut_auteur_creation}|=={minirezo}|?{selected})"]>administrateur</option>
+</select>
+</label>
+</p>
+
+<label>Quels types d'auteurs peut-on <b>associer &#224; des rubriques</b>&nbsp;?
+<br />
+<select name="statut_auteur_rubrique">
+	<option value=""[ selected="(#ENV{statut_auteur_rubrique}|?{'',selected})"]>les administrateurs</option>
+	<option value="1"[ selected="(#ENV{statut_auteur_rubrique}|=={1}|?{selected})"]>administrateurs et r&#233;dacteurs</option>
+	<option value="2"[ selected="(#ENV{statut_auteur_rubrique}|=={2}|?{selected})"]>tous</option>
+	<option value="-1"[ selected="(#ENV{statut_auteur_rubrique}|=={-1}|?{selected})"]>personne</option>
+</select>
+</label>
+
+<p>
+<label><b>Administrateurs restreints&nbsp;?</b>
+<br />les administrateurs associ&#233;s &#224; des rubriques ont&nbsp;:
+<br />
+<select name="statut_ignorer_admins_restreints">
+	<option value=""[ selected="(#ENV{statut_ignorer_admins_restreints}|?{'',selected})"]>des droits limit&#233;s &#224; ces rubriques</option>
+	<option value="oui"[ selected="(#ENV{statut_ignorer_admins_restreints}|=={oui}|?{selected})"]>les m&#234;mes droits que tous les administrateurs</option>
+</select>
+</label>
+</p>
+</fieldset>
+
+
+[(#REM)
+	Publication :
+	1 : webmestre
+	2 : admin complet
+	4 : admin restreint
+#	8 : redacteur
+	15: tous...
+]
+<fieldset>
+<legend>
+	Publication
+</legend>
+<p>
+
+<p>
+<label>Qui peut publier sur le site :
+<br />
+<select name="publierdans">
+	<option value="1"[ selected="(#ENV{publierdans}|=={1}|?{selected})"]>Les webmestres</option>
+	<option value="3"[ selected="(#ENV{publierdans}|=={3}|?{selected})"]>Les administrateurs complets</option>
+	<option value="7"[ selected="(#ENV{publierdans,7}|=={7}|?{selected})"]>Les administrateurs (y compris restreints)</option>
+[(#REM)
+	<option value="15"[ selected="(#ENV{publierdans}|=={15}|?{selected})"]>Les r&#233;dacteurs</option>
+]
+</select>
+</label>
+</p>
+
+
+</fieldset>
+
+[(#REM) ------------------------ BOUTON OK ------------------------ ]
+<div>
+<input style="float:#LANG_RIGHT;" type="submit" name="_cfg_ok" value="<:OK:>" class="fondo" />
+<!--
+<input type="reset" value="<:Reset:>" class="fondo" />
+<input type="submit" name="_cfg_delete" value="<:Supprimer:>" class="fondo" />
+-->
+</div>
+
+
+[(#REM|sinon{1}|fin_cadre_trait_couleur)]
+
+</form>

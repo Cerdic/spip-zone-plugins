@@ -1,0 +1,119 @@
+<h1><img src="images/ecrire.gif" />Les raccourcis typographiques</h1>
+<br class="clear" />
+<div class="chapo"><p>Pour faciliter la mise en page des documents publi&eacute;s avec SPIP, le syst&egrave;me 
+  propose un certain nombre de &laquo; raccourcis typographiques &raquo; destin&eacute;s 
+  &agrave; :</p>
+<ul>
+  <li>simplifier l'utilisation par des utilisateurs ne connaissant pas le code 
+    HTML</li>
+  <li>faciliter le traitement automatique de la mise en page. </li>
+</ul></div>
+<div class="texte"><h3 class="spip">Paragraphes et retours &agrave; la ligne </h3>
+<p>Pour cr&eacute;er des paragraphes, il suffit de sauter une ligne.</p>
+<p>Pour faire un simple retour &agrave; la ligne, il faut mettre un<br>
+    _ (underscore) suivi d'un espace au d&eacute;but de la ligne suivante.</p>
+<h3 class="spip">
+  Gras et italique</h3>
+  <p>On indique simplement <em>du texte en italique</em> en le pla&ccedil;ant 
+    entre des accolades simples : ...{du texte en italique}... .<br>
+    On indique <strong>du texte en gras</strong> en le pla&ccedil;ant entre des 
+    accolades doubles : ...{{du texte en gras}}... .</p>
+<h3 class="spip">
+  Intertitres</h3>
+<p>Les intertitres sont des titres &agrave; l'int&eacute;rieur d'un texte permettant 
+  d'en indiquer la structure (comme ceux pr&eacute;sents sur cette page). Dans 
+  SPIP, on les indique tr&egrave;s simplement en les pla&ccedil;ant entre des 
+  accolades triples : {{{Un titre de partie}}} .</p>
+<h3 class="spip">
+  Trait de s&eacute;paration horizontal</h3>
+<p>Il est tr&egrave;s simple d'ins&eacute;rer un trait de s&eacute;paration horizontal 
+  sur toute la largeur du texte : il suffit de placer une ligne ne contenant qu'une 
+  succession d'au moins quatre tirets, ainsi :<br>
+  ----<br>
+  donnera : </p>
+<hr class="spip">
+
+<h3 class="spip">Listes </h3>
+<p>On peut fabriquer des listes dans SPIP : il suffit de revenir &agrave; la ligne 
+  et de commencer la nouvelle ligne avec un tiret (&laquo; - &raquo;).<br>
+  Notez : ici un simple retour &agrave; la ligne suffit (on peut faire des &eacute;num&eacute;rations 
+  dans le m&ecirc;me paragraphe) ; mais si l'on &laquo; saute &raquo; une ligne 
+  avant la ligne commen&ccedil;ant par un tiret, une ligne vide est affich&eacute;e 
+  avant l'&eacute;num&eacute;ration. Exemple :</p>
+<p> <img src="../puce.gif">bla bla<br>
+  <img src="../puce.gif">bla bla</p>
+<p> <img src="../puce.gif">bla bla</p>
+<h3 class="spip">
+  Les liens hypertextes</h3>
+<p>On fabriquera facilement un lien hypertexte avec le code suivant : [texte du 
+  lien-&gt;URL]<br>
+  SPIP est une initiative d'[uZine-&gt;http://www.uzine.net/].<br>
+  devient :<br>
+  SPIP est une initiative d'<a href="http://www.uzine.net/">uZine</a>.</p>
+<p>L'URL peut &ecirc;tre une adresse absolue (commen&ccedil;ant, comme ici, par 
+  http://), une adresse relative (vers une autre page du m&ecirc;me site), un 
+  lien vers un document utilisant un protocole de l'internet (ftp://...), une 
+  adresse email (mailto:minirezo@rezo.net)...</p>
+<p><strong>Liens hypertextes &agrave; l'int&eacute;rieur du site</strong><br>
+  Ce m&ecirc;me syst&egrave;me de liens hypertextes facilite, de plus, la cr&eacute;ation 
+  de liens &agrave; l'int&eacute;rieur de votre site sous SPIP. La seule subtilit&eacute; 
+  consiste &agrave; rep&eacute;rer le num&eacute;ro de l'article, de la rubrique, 
+  ou de la br&egrave;ve vers laquelle vous voulez mener votre lien hypertexte 
+  : lorsque vous &laquo; visitez &raquo;, dans l'espace priv&eacute;, un article, 
+  une br&egrave;ve ou une rubrique, la colonne de gauche contient un pav&eacute; 
+  indiquant, en gros caract&egrave;res, ce num&eacute;ro. C'est ce num&eacute;ro 
+  que vous allez indiquer dans le lien hypertexte :</p>
+<ul>
+  <li> Lien vers l'article 342 : [l'article-&gt;art342]<br>
+    pour sa part, [-&gt;art342] affichera le titre de l'article 342 avec un lien 
+    vers cet article.<br>
+  </li>
+  <li> Rubriques : [-&gt;rub12]</li>
+  <li>Br&egrave;ves : [-&gt;br65]</li>
+  <li>Auteurs : [-&gt;aut13]</li>
+  <li>Mots-cl&eacute;s : [-&gt;mot32]</li>
+  <li>Sites : [-&gt;site1]</li>
+</ul>
+<h3 class="spip">
+  Notes de bas de page</h3>
+<p>Une note de bas de page est, habituellement, signal&eacute;e par un num&eacute;ro 
+  plac&eacute; &agrave; l'int&eacute;rieur du texte, num&eacute;ro repris en bas 
+  de page et proposant un compl&eacute;ment d'information.</p>
+<p>Dans SPIP, cette fonctionnalit&eacute; (assez lourde &agrave; g&eacute;rer 
+  manuellement en HTML) est automatis&eacute;e : les notes sont num&eacute;rot&eacute;es 
+  par SPIP, qui g&egrave;re &eacute;galement des liens hypertextes &agrave; l'int&eacute;rieur 
+  du document pour passer directement de l'appel de note au texte de la note correspondante, 
+  et vice-versa. Une note de bas de page est indiqu&eacute;e, dans SPIP, entre 
+  doubles crochets :<br>
+  Une note [[Voici un compl&eacute;ment d'information.]] de bas de page.<br>
+  donnera :<br>
+  Une note <a name="nh1"></a>[<a href="#nb1">1</a>] de bas de page. (le num&eacute;ro 
+  1 sera incr&eacute;ment&eacute; automatiquement pour chaque nouvelle note).</p>
+<h3 class="spip">
+  Tableaux</h3>
+<p>Pour r&eacute;aliser des tableaux dans SPIP, il suffit de faire des lignes 
+  dont les &laquo; cases &raquo; sont s&eacute;par&eacute;es par le symbole &laquo; 
+  | &raquo; (pipe ou trait vertical), lignes commen&ccedil;ant et se terminant 
+  par des traits verticaux. <strong>Il est imp&eacute;ratif de laisser des lignes 
+  vides avant et apr&egrave;s ce tableau.</strong><br>
+  Par exemple :</p>
+<p>| {{Nom}} | {{Pr&eacute;nom}} | {{Age}} |<br>
+  | Marso | Ben | 23 ans |<br>
+  | Capitaine | | non connu |<br>
+  | Philant | Philippe | 46 ans |<br>
+  | Cadoc | B&eacute;b&eacute; | 4 mois |</p>
+<p>donnera :</p>
+<table class="spip"><tbody><tr class="row_first"><td> <b class="spip">Nom</b> </td><td> <b class="spip">Pr&eacute;nom</b> </td><td> <b class="spip">Age</b> </td></tr><tr class="row_even"><td> Marso </td><td> Ben </td><td> 23 ans </td></tr><tr class="row_odd"><td> Capitaine </td><td> </td><td> non connu </td></tr><tr class="row_even"><td> Philant </td><td> Philippe </td><td> 46 ans </td></tr><tr class="row_odd"><td> Cadoc </td><td> B&eacute;b&eacute; </td><td> 4 mois </td></tr></tbody></table>
+</div>
+
+
+
+
+
+
+
+<div class="ps">Voil&agrave; tous les raccourcis qu'il vous faudra connaitre, 
+  pour &quot;bien&quot; d&eacute;buter avec SPIP. Mais il en existe d'autres que 
+  vous retrouverez dans l'interface d'administration : <strong>l'aide en ligne</strong>.</div>
+<div class="notes"><a name="nb1"></a>[<a href="#nh1">1</a>] Voici un compl&eacute;ment 
+  d'information.</div>

@@ -1,0 +1,20 @@
+#CACHE{0}
+<form method="post" action="#SELF">[(#ENV{_cfg_}|form_hidden)]
+
+[(#REM) descriptif=
+<h4>Param&eacute; du captcha : </h4> 
+]
+[(#REM) titre=Param&eacute;trage du captcha]
+[(#REM) icone=securite-24.gif]
+<fieldset><legend>Valeur num&eacute;rique d'accessibilité du captcha.</legend>
+	<p>Veuillez s&eacute;lectionnez la valeur num&eacute;rique d'accessibilit&eacute; du captcha suivant le niveau d'accessibilit&eacute; voulu pour votre site.
+	<br /><input type="radio" name="captcha_niveau_access" value="0"  [(#CONFIG{ftcaptcha/captcha_niveau_access}|=={0}|?{checked="checked",''})] />Captcha sous forme de texte accessible
+	<br /><input type="radio" name="captcha_niveau_access" value="1"  [(#CONFIG{ftcaptcha/captcha_niveau_access}|=={1}|?{checked="checked",''})] />Chiffres sous forme d'images PNG
+	<br /><input type="radio" name="captcha_niveau_access" value="2"  [(#CONFIG{ftcaptcha/captcha_niveau_access}|=={2}|?{checked="checked",''})] />Image GD brouill&eacute;e
+	</p>
+</fieldset>
+<input type="submit" name="_cfg_ok" value="<:oK:>" class="fondo" />
+<input type="reset" value="<:reset:>" class="fondo" />
+<input type="submit" name="_cfg_delete" value="<:supprimer:>" class="fondo" />
+</form>
+

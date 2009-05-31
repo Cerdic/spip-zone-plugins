@@ -1,0 +1,23 @@
+<form action="#formulaire_playtaliste" method="post" id="formulaire_playtaliste" class="formulaire_spip">
+[(#ENV{doublon}|!={oui}|?{' '})
+<p style="display:none">
+	<input type="hidden" name="id_document" value="#ENV{id_document}" />
+</p>
+<div class="spip_bouton">
+	<input type="submit" id="ajouter" name="ajouter" value="Ajouter à votre playliste" alt="Ajouter à votre playliste" />
+</div>
+]
+[(#ENV{doublon}|=={oui}|?{' '})
+<p style="display:none">
+	<input type="hidden" name="id_document" value="#ENV{id_document}" />
+</p>
+<div class="spip_bouton">
+	<input type="submit" id="supprimer" name="supprimer" value="Supprimer de votre playliste" alt="Supprimer de votre playliste" />
+</div>
+]
+[(#ENV{cookie_vide}|=={non}|?{' '})
+<div class="spip_bouton">
+	<input type="submit" id="vider" name="vider" value="Vider votre playliste" alt="Vider votre playliste" />
+</div>
+]
+</form>

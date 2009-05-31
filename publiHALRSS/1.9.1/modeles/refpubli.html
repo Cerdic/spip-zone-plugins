@@ -1,0 +1,25 @@
+[(#REM)
+
+Réferences d'une liste des publis
+
+]<B_refpubli><BOUCLE_refpubli(SYNDIC_ARTICLES)
+{id_syndic_article IN #LISTE_IDS{id}}
+{', '}><a href="[(#URL_ARTICLE)]" class="spip_out">#SET{aut,#EVAL{substr('#LESAUTEURS',0,3)}} #SET{dtaut,(#DATE|annee)} &#91;#GET{aut}<?php
+echo substr(strval(#GET{dtaut}),2,2); 
+?>[(#REM)
+
+Traite le cas où les publications ont le même auteur,année et titre ... les quasi doublons
+
+]<B_auteurMT><BOUCLE_auteurMT(SYNDIC_ARTICLES){annee=(#_refpubli:DATE|annee)}
+{lesauteurs==^#GET{aut}}{titre=#_refpubli:TITRE}{id_syndic_article<#ID_SYNDIC_ARTICLE}></BOUCLE_auteurMT><?php
+$posquasidoublon=(0+#TOTAL_BOUCLE); ?><//B_auteurMT>[(#REM)
+
+Numerote (a,b,c,...) les publications du même auteur d'un année donnée
+
+]<B_auteur><BOUCLE_auteur(SYNDIC_ARTICLES){annee=(#_refpubli:DATE|annee)}
+{lesauteurs==^#GET{aut}}{titre<#_refpubli:TITRE}></BOUCLE_auteur><?php
+if((#TOTAL_BOUCLE+$posquasidoublon)>0) echo base_convert(9+#TOTAL_BOUCLE+$posquasidoublon,10,36);
+?><//B_auteur>&#93;<?php
+if($posquasidoublon>0) echo "'"; 
+?></a></BOUCLE_refpubli></B_refpubli>
+(rien)<//B_refpubli>

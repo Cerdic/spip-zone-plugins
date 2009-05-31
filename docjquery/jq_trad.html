@@ -1,0 +1,40 @@
+<BOUCLE_parse(XML){texte=#XML**}{racine}>
+	<label>prototype :</label>
+	<span class="fn">[(#ATTRIBUTS|extraire{name})]
+		<B_params>(
+		<BOUCLE_params(XML){xml}{id_parent}{noeud=params}>
+			<span class="arg-type tooltip">[(#ATTRIBUTS|extraire{type})]</span>
+			<span id='desc:#ID:arg:#COMPTEUR_BOUCLE' class="arg-name tooltip" title="<BOUCLE_paramdesc(XML){xml}{id_parent}{noeud=desc}>#TEXTE*</BOUCLE_paramdesc>">[(#ATTRIBUTS|extraire{name})]</span>
+				[(#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|?{'',' '}) [(#ATTRIBUTS|extraire{any}|?{' or ',', '})]]
+		</BOUCLE_params>
+		)</B_params>
+	</span> returns <span class="tooltip">[(#ATTRIBUTS|extraire{type})]</span>
+	<label>short description :</label>
+	<div class="short" id='desc:#ID:short'>[(#ATTRIBUTS|extraire{short})]</div>
+	<label>long description :</label>
+	<div class="more">
+		<div class="desc" id='desc:#ID:long'>
+		<BOUCLE_desc(XML){xml}{id_parent}{noeud=desc}>#TEXTE*</BOUCLE_desc>
+		</div>
+		<BOUCLE_expl(XML){xml}{id_parent}{noeud=examples}>
+		<div class="example">
+			<h5>Example:</h5>
+			<B_expldesc>
+			<p id='desc:#ID:ex:#_expl:COMPTEUR_BOUCLE'><BOUCLE_expldesc(XML){xml}{id_parent}{noeud=desc}>#TEXTE*</BOUCLE_expldesc>
+			</p>
+			</B_expldesc>
+			<B_explcode>
+			<pre><BOUCLE_explcode(XML){xml}{id_parent}{noeud=code}>#TEXTE*</BOUCLE_explcode></pre>
+			</B_explcode>
+			<B_explbefore>
+			<b>HTML:</b>
+			<pre><BOUCLE_explbefore(XML){xml}{id_parent}{noeud=before}>#TEXTE*</BOUCLE_explbefore></pre>
+			</B_explbefore>
+			<B_explres>
+			<b>Result:</b>
+			<pre><BOUCLE_explres(XML){xml}{id_parent}{noeud=result}>#TEXTE*</BOUCLE_explres></pre>
+			</B_explres>
+		</div>
+		</BOUCLE_expl>
+	</div>
+</BOUCLE_parse>

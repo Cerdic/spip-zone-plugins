@@ -1,0 +1,84 @@
+<div class="formulaire_spip">
+	
+	[<p class='formulaire_ok'>(#ENV*{message_ok})</p>]
+	<form action="#ENV{action}" method="post" >
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<div class="echoppe_edit_produit">
+			[<input type="hidden" name="new" value="(#NEW)" />]
+			[<input type="hidden" name="id_produit" value="(#ID_PRODUIT)" />]
+			[<input type="hidden" name="id_trad" value="(#ID_TRAD)" />]
+			<ul>
+				[<li class="erreur" >
+					<span class='erreur_message'>(#ENV*{message_erreur})</span>
+				</li>]
+				<li class="editer_titre obligatoire [(#ENV**{erreurs}|table_valeur{titre}|?{'erreur',''})]" >
+					<label for="titre_produit" ><:echoppe:titre_produit:></label>
+					[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>]
+					<input type="text" class="forml text" id="titre_produit" name="titre" value="#TITRE"/><br />
+					
+				</li>
+				
+				[<li class="editer_lang [(#ENV**{erreurs}|table_valeur{lang}|?{'erreur',''})]" >
+					<label for="lang_produit" ><:echoppe:langue_du_produit:></label>
+					[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{lang})</span>]
+					(#CONFIG{langues_multilingue}|select_lang{lang,#LANG,forml})
+					
+				</li>]
+				[(#CONFIG{langues_multilingue}|=={''}|?{<input type="hidden" name="lang" value="[(#CONFIG{langue_site})]" />,''})]
+				<li class="editer_ref_produit obligatoire [(#ENV**{erreurs}|table_valeur{ref_produit}|?{'erreur',''})]" >
+					<label for="[(#REF_PRODUIT|?{ref_produit_fake,ref_produit})]" ><:echoppe:reference_interne:></label>
+					[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{ref_produit})</span>]
+					<input type="text" class="forml text" id="[(#REF_PRODUIT|?{ref_produit_fake,ref_produit})]" name="[(#REF_PRODUIT|?{ref_produit_fake,ref_produit})]" value="#REF_PRODUIT" [(#REF_PRODUIT|?{disabled="disabled",''})]/><br />
+					[(#REF_PRODUIT|?{<input type="hidden" name="ref_produit" value="#REF_PRODUIT" />,''})]
+					
+				</li>
+				
+				<li>
+					<label for="descriptif_produit" ><:echoppe:descriptif:></label>
+					[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{descriptif})</span>]
+					<textarea id="descriptif_produit" name="descriptif" class="forml" >[(#DESCRIPTIF**)]</textarea><br />
+					
+				</li>
+				
+				<li>
+					<label for="text_area" ><:echoppe:texte:></label>
+					[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{texte})</span>]<br />
+					[(#EVAL{text_area}|barre_typo)]
+					<textarea name='texte' id='text_area' class='barre_inserer forml' rows='20' cols='40'[(#ENV**{browser_caret,''})]>[(#TEXTE**)]</textarea>
+					
+				</li>
+				[(#SET{'parent',#ID_CATEGORIE})]
+				<B_les_categ>
+					<li>
+						<label for="id_categorie"><:echoppe:dans_la_categorie:></label>
+						[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{id_categorie})</span>]
+						<select name="id_categorie" class="forml" id="id_categorie" >
+							<option value="0"><:echoppe:a_la_racine:></option>
+						<BOUCLE_les_categ(ECHOPPE_CATEGORIES)>
+							<option value="#ID_CATEGORIE" [(#ID_CATEGORIE|=={#GET{'parent'}}|?{'selected="selected"',''})] >#TITRE</option>
+						</BOUCLE_les_categ>
+						</select>
+					</li>
+				</B_les_categ>
+					
+				<li>
+					<label for="ps_produit" ><:echoppe:ps:></label>
+					[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{ps})</span>]
+					<textarea id="ps_produit" name="ps" class="forml" >[(#PS*)]</textarea><br />
+					
+				</li>
+				<li>
+					<label for="quantite_mini" ><:echoppe:quantite_minimum:></label>&nbsp;[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{quantite_mini})</span>]<input type="text" id="quantite_mini" name="quantite_mini" value="[(#QUANTITE_MINI|sinon{1})]" />&nbsp;<:echoppe:unites:><br /><br />
+					
+				</li>
+				<li>
+					<label for="tva" ><:echoppe:tva:></label>&nbsp;[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{tva})</span>]<input type="text" id="tva" name="tva" value="[(#TVA|sinon{#CONFIG{echoppe/taux_de_tva_par_defaut, 6}})]" />&nbsp;%<br />
+					
+				</li>
+				<li>
+					<input type="submit" class="fondo" name="ok" value="ok" />
+				</li>
+			</ul>
+		</div>
+	</form>
+</div>

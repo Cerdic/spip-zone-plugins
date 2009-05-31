@@ -1,0 +1,57 @@
+<h1><:abo:abonnements:></h1>
+
+<!--#navigation-->
+<INCLURE{fond=inc/menu_abonnement} />
+<!--/#navigation-->
+
+<style type="text/css">
+table.liste {width:100%;}
+</style>
+
+<B_liste_abo>
+<div class="cadre cadre-liste">
+<div class="titrem"><:abo:liste_des_abonnements:></div>
+<table class="liste">
+<thead>
+<tr>
+	<th><:abo:label_libelle:></th>
+	<th ><:abo:label_duree:></th>
+	<th><:abo:label_tarif:></th>
+	<th><:abo:label_action:></th>
+</tr>
+</thead>
+<tbody>
+<BOUCLE_liste_abo(ABONNEMENTS) {pagination 10}>
+<tr class="tr_liste">
+	<td class="#EDIT{libelle}">#LIBELLE</td>
+	<td>#DUREE #PERIODE</td>
+	<td>#MONTANT</td>
+	<td>
+		[(#AUTORISER{modifier,abonnement}|oui)
+			<a href="[(#URL_ECRIRE{abonnement_edit}|parametre_url{id_abonnement,#ID_ABONNEMENT}|parametre_url{redirect,#SELF})]">
+				<:abo:action_editer:>
+			</a> | 
+			[(#BOUTON_ACTION{
+				<:abo:action_supprimer:>,
+				#URL_ACTION_AUTEUR{supprimer_abonnement,-#ID_ABONNEMENT,#SELF}}
+			)]			
+		]
+	</td>
+</tr>
+</BOUCLE_liste_abo>
+</tbody>
+</table>
+[<p class="pagination">(#PAGINATION)</p>]
+</div>
+</B_liste_abo>
+
+[(#AUTORISER{modifier,abonnement}|oui)
+	[(#URL_ECRIRE{abonnement_edit}
+		|parametre_url{id_abonnement,new}
+		|parametre_url{redirect,#SELF}
+		|icone{
+			<:abo:action_creer_nouvel_abonnement:>,
+			[(#CHEMIN{img/abonnement_22.png})],
+			right,creer.gif}
+	)]
+]

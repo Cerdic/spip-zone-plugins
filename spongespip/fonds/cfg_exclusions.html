@@ -1,0 +1,25 @@
+[(#REM) titre=Spongespip : exclusions]
+[(#REM) descriptif=SPS : exclusions]
+[(#REM) nom=spongespip]
+[(#REM) onglet=non]
+[(#REM) casier=exclusions]
+[(#REM) liens*=exclusions]
+[(#REM) liens*=interface_et_affichage]
+<!-- <style>
+.spongespip p {float:left;}
+</style> -->
+<form method="post" class="spongespip">[(#ENV{_cfg_}|form_hidden)]
+<label for="ip_exclues">IP exclues :</label><br />
+<textarea name="ip_exclues">[(#ENV{ip_exclues})]</textarea>
+
+
+<p><label for="hotes_exclus">H&ocirc;tes exclus :</label><br />
+<textarea name="hotes_exclus">[(#ENV{hotes_exclus})]</textarea></p>
+<p><label for="referents_exclus">R&eacute;f&eacute;rents exclus :</label><br />
+<textarea name="referents_exclus">[(#ENV{referents_exclus})]</textarea></p>
+<p><label for="logiciels_exclus">Logiciels exclus :</label><br />
+<textarea name="logiciels_exclus">[(#ENV{logiciels_exclus})]</textarea></p>
+
+<!-- <p> --><input type="submit" name="_cfg_ok" value="<:OK:>" />	
+<input type="submit" name="_cfg_delete" value="<:Supprimer:>" /><!-- </p> -->
+</form>

@@ -1,0 +1,13 @@
+#CACHE{0}
+<?php
+include_spip('inc/spipoasis');
+
+$template = find_in_path('templates/article.odt');
+$unzip = spipoasis_unzip($template);
+
+// styliser
+$spip2odt_styliser = charger_fonction('spip2odt_styliser', 'inc');
+$spip2odt_styliser($unzip,array('id_article'=>'#ID_ARTICLE'));
+$odt = spipoasis_zip($unzip,_DIR_TMP . 'test.odt');
+spipoasis_envoyer($odt);
+?>

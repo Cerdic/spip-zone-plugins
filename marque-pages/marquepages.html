@@ -1,0 +1,69 @@
+#CACHE{7200}
+
+[(#REM) On teste si on a passé un auteur ]
+<BOUCLE_auteur_principal(AUTEURS){login?}{id_auteur?}{0,2}>
+	#SET{auteur,#ID_AUTEUR}
+</BOUCLE_auteur_principal>
+	[(#REM) Si ça sort plus d'un auteur c'est qu'il n'y a ni login ni id_auteur ]
+	[(#TOTAL_BOUCLE|>{1}|?{' '})
+		#SET{auteur,""}
+	]
+</B_auteur_principal>
+	#SET{auteur,""}
+<//B_auteur_principal>
+
+<BOUCLE_rubrique_principale(RUBRIQUES){id_rubrique}>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+<title><:marquepages:titre_marquepages:>[(#GET{auteur}|?{' '})<:marquepages:de:> [(#MODELE{auteur_nomcomplet}{id=#GET{auteur}})]][ - (#NOM_SITE_SPIP|textebrut)]</title>
+<meta name="description" content="<:marquepages:ajouter:>" />
+<INCLURE{fond=inc-head}>
+</head>
+
+<body class="page_marquepages">
+<div id="page">
+
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}>
+
+	[(#REM) Fil d'Ariane ]
+	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a>[ &gt; <a href="#URL_RUBRIQUE">(#TITRE|supprimer_numero)</a>] &gt; <a href="[(#URL_PAGE{marquepages}|parametre_url{id_rubrique,#ID_RUBRIQUE})]"><:marquepages:titre_marquepages:></a></div>
+
+	<div id="conteneur">
+
+		[(#REM) Contenu principal : le formulaire d'ajout de marque-pages ]
+		<div id="contenu">
+
+			<div class="cartouche">
+				<h1 class="titre"><:marquepages:titre_marquepages:>[(#GET{auteur}|?{' '})<:marquepages:de:> [(#MODELE{auteur_nomcomplet}{id=#GET{auteur}})]]</h1>
+			</div>
+			
+			<p class="spip_bouton"><a href="[(#URL_PAGE{marquepages_ajouter}|parametre_url{id_rubrique,1}|parametre_url{retour,#SELF})]"><:marquepages:ajouter:></a> #PUCE</p>
+			<INCLURE{fond=fonds/marquepages}{self=#SELF}{id_rubrique}{id_auteur=#GET{auteur}}{pagination=#ENV{pagination}}{tri=#ENV{tri}}{senstri=#ENV{senstri}}>
+
+		</div><!-- fin contenu -->
+
+		[(#REM) Menu de navigation laterale ]
+		<div id="navigation">
+
+			[(#REM) Menu de navigation par rubriques ]
+			<INCLURE{fond=inc-rubriques}{id_rubrique}>
+			
+			[(#REM) Tags ]
+			[<div class="divers">
+				<h2 class="menu-titre"><:etiquettes:etiquettes_populaires:></h2>
+				(#MODELE{nuage2_forum}{type=tags})
+			</div>]
+
+		</div><!-- fin navigation -->
+
+	</div><!-- fin conteneur -->
+
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
+</div><!-- fin page -->
+</body>
+</html>
+</BOUCLE_rubrique_principale>

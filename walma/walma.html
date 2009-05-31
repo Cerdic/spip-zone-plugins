@@ -1,0 +1,83 @@
+#CACHE{86400}
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html dir="#LANG_DIR" lang="#LANG">
+<!--version walma3.4  pour spip 1.9.2 CopID libre non marchand (c) février 2007 Alm & Walk Galerie WALMA -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
+[<meta name="description" content="(#INTRODUCTION|couper{150}|attribut_html)" />]
+<title>[(#NOM_SITE_SPIP|textebrut)] [<:resultats_recherche|textebrut:> (#RECHERCHE|textebrut)] <BOUCLE_article_title(ARTICLES){id_article}{lang_select=non}>[(#TITRE|supprimer_numero|textebrut)] </BOUCLE_article_title> walma.html</title>
+
+[(#REM) modification options walma]
+[<!--(#REM) si vous voulez un menu à insérer à gauche ou à droite, mettre oui dans le SET correspondant-->]
+#SET{menugauche,non}
+#SET{menudroite,oui}
+[<!--(#REM) L'affichage des menus sera par defaut en fonction de l'article affiché sinon de la rubrique 1  -->]
+<BOUCLE_rubrique_menu(ARTICLES){id_article}>
+#SET{rubrique_menu,#ID_RUBRIQUE}
+</BOUCLE_rubrique_menu>
+</B_rubrique_menu>
+#SET{rubrique_menu,1}
+<//B_rubrique_menu>
+[<!--(#REM) si vous souhaitez avoir le texte et le forum de l'article lookés pour walma, mettre oui dans le SET-->]
+#SET{texteforum,non}
+[<!--(#REM) L'affichage est par defaut avec l'image principale à gauche, il est possible de changer gauche pour droite ou vignettes-->]
+#SET{mode,#ENV{mode,gauche}}
+
+
+[(#REM) fin des options pour walma]
+
+[(#REM) inclusion dynamique du css et du js, ne pas modifier]
+[(#INCLURE{fond=inc-walma_head}{mode=#GET{mode}}{menugauche=#GET{menugauche}}{menudroite=#GET{menudroite}})]
+</head>
+
+<body>
+[<!--(#REM) Galerie Walma3 plaçé en haut à droite, ce bloc peut être remplacé, voire effaçé-->]
+	<div style="font-size:4em; text-align:left;">
+	<BOUCLE_article_rubrique(ARTICLES){id_article}{lang_select=non}>
+	<a href="#URL_RUBRIQUE" style="color:#000000; text-decoration:none;">
+	</BOUCLE_article_rubrique>
+	<!-- si pas d'appel à un article-->
+			</B_article_rubrique>
+			<a href="[(#URL_SITE_SPIP)]" style="color:#000000; text-decoration:none;">
+			<//B_article_rubrique>
+	  Galerie Walma</a>
+	</div>
+
+	
+[<!--(#REM) permet retour sur la page sans parametres d'url -->]	
+<div class="titredelagalerie">
+<a href="[(#URL_PAGE{#PAGE})][(#PAGE|=={''}|?{[?article(#ENV{id_article,''})],[&amp;id_article=(#ENV{id_article,''})]})][&amp;recherche=(#RECHERCHE)]">
+<BOUCLE_article_retour(ARTICLES){id_article}{lang_select=non}>[(#TITRE|supprimer_numero|textebrut)]</BOUCLE_article_retour>
+</B_article_retour><br />
+[<:icone_retour:> <:resultats_recherche:> (#RECHERCHE|textebrut)]
+<//B_article_retour>
+</a>
+</div>
+
+[<!--(#REM) insertion des menus -->]	
+[<div class="insertionmenu">(#GET{menugauche}|=={'oui'}|?{
+[(#INCLURE{fond=inc-walma_menus}{id_article}{id_rubrique=#GET{rubrique_menu}})]
+,
+	[(#GET{menudroite}|=={'oui'}|?{
+	[(#INCLURE{fond=inc-walma_menus}{id_article}{id_rubrique=#GET{rubrique_menu}})]
+	})]
+})</div>]
+
+[<!--(#REM) ici on inclut le modele walma, on peut donc s'en servir de façon autonome ailleurs !! conserver l'inclusion du head special avec les SET >-->]
+[(#MODELE{walma_modele}{mode=#GET{mode}}{id_article}{diapo}{pas}{textforum}{grande}{debut_img}{page}{large})]
+
+[<!--(#REM) permet aux auteurs autorisés de télécharger une image ou un zip-->]
+[<div id="telecharge" >(#ID_ARTICLE|afficher_documents_walma)</div>]
+
+[<!--(#REM) ajoute le texte et le forum de l'article-->]
+[(#GET{texteforum}|=={'oui'}|?{
+[(#INCLURE{fond=inc-walma_txtforum}{id_article}{textforum}{lang})]
+})]
+ 
+[<!--(#REM) le validateur xhtml-->]
+ <p><a href="http://validator.w3.org/check?uri=referer">
+ <img src="http://www.w3.org/Icons/valid-xhtml10"
+        alt="Valid HTML 4.01 Transitional" height="31" width="88" style="float:right; margin-right:60px; border:0;" /></a></p>
+		
+</body>
+</html>

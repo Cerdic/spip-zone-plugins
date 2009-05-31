@@ -1,0 +1,57 @@
+#CACHE{86400}
+<div class="formulaire_document">
+	<fieldset>
+	<legend><:formulairearticle:document_joint:></legend>
+
+	<B_docs>
+		#ANCRE_PAGINATION
+	<BOUCLE_docs(DOCUMENTS){id_article=#ENV{id_article}}{!par id_document}{tout}{pagination 3}>
+		<div style="border:1px solid #ccc;margin-top:8px;margin-bottom:8px;padding:3px">
+			<div class="spip_doc_descriptif" style='float:#LANG_LEFT;width:80px; margin-bottom: 8px; text-align:center;'>
+				[(#SET{logo,[(#LOGO_DOCUMENT|#URL_DOCUMENT|inserer_attribut{title,#TYPE_DOCUMENT[ - (#TAILLE|taille_en_octets)]})]})]
+				[(#GET{logo}|extraire_attribut{width}|>{78}|?{[(#SET{logo,[(#GET{logo}|image_reduire{140,140}|image_recadre{78,78})]})]})]
+				#GET{logo}
+				[<br />(#DATE|affdate_court)]
+			</div>
+			
+			<div style='float:#LANG_RIGHT;width:57%;'>
+				<div style='float:#LANG_RIGHT;width:10px;'>
+					<input type="checkbox" name="supprimer[]" value="#ID_DOCUMENT" title="<:formulairearticle:doc_delete:>" />
+				</div>
+			
+				<h4 class="#EDIT{titre}">[(#TITRE|sinon{[(#FICHIER|basename|couper{20})]})]</h4>
+				[<div class="spip_doc_descriptif #EDIT{descriptif}">(#DESCRIPTIF|sinon{<:info_descriptif:>})</div>]
+			</div>
+			
+			<br class='nettoyeur' />
+			<div id="insert_code">
+				<strong><:formulairearticle:insert_code:></strong><br />
+				[(#TYPE_DOCUMENT|match{jpg|gif|png}|?{' ',''})
+				<abbr title="<:formulairearticle:img_left:>">&lt;img#ID_DOCUMENT|left&gt;</abbr> <abbr title="<:formulairearticle:img_center:>">&lt;img#ID_DOCUMENT|center&gt;</abbr> <abbr title="<:formulairearticle:img_right:>">&lt;img#ID_DOCUMENT|right&gt;]
+				[(#TYPE_DOCUMENT|match{jpg|gif|png}|?{'',' '})
+				<abbr title="<:formulairearticle:doc_left:>">&lt;doc#ID_DOCUMENT|left&gt;</abbr> <abbr title="<:formulairearticle:doc_center:>">&lt;doc#ID_DOCUMENT|center&gt;</abbr> <abbr title="<:formulairearticle:doc_right:>">&lt;doc#ID_DOCUMENT|right&gt;</abbr>]
+			</div>
+		</div>
+	</BOUCLE_docs>
+		[<p class="pagination">(#PAGINATION)</p>]
+	</B_docs>
+		[<p class="pagination">(#PAGINATION)</p>]
+	<//B_docs>
+	
+	<p><strong><:formulairearticle:choosefiles:></strong></p>
+	<small>
+	<p>
+		<input name='doc' type='file' class='fondl' style='width: 100%;' /><br />
+		<input type=radio name="type" value="vignette" checked />&nbsp;<:formulairearticle:image_inclusion:><br />
+		<input type=radio name="type" value="document" />&nbsp;<:formulairearticle:document_inclusion:><br />
+	</p>
+
+	<p class="spip_bouton">
+		<input name='media' type='submit' value='#ENV*{bouton}' class='spip_bouton' />
+		<input type="hidden" name="id_article" value="#ENV*{id_article}" />
+	</p>
+	</small>
+	<br />
+	
+	</fieldset>
+</div>

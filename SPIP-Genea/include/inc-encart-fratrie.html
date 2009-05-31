@@ -1,0 +1,21 @@
+[(#REM)
+	*********************************************************************
+	*
+	* Copyright (c) 2007-2008
+	* Xavier Burot
+	* fichier : inc-encart-fratrie.html
+	*
+	* Ce programme est un logiciel libre distribue sous licence GNU/GPL.
+	*
+	*********************************************************************
+]
+<B_collateraux>
+<div class="forums">
+	<h2 class="menu-titre"><:genea:freres_soeurs:></h2>
+		<ul>
+		<BOUCLE_collateraux(GENEA_INDIVIDUS){id_famille}{id_individu!=#ENV{id_individu}}{id_genea}{par position}>
+			<li><INCLUDE{fond=include/inc-individu}{id_individu}{format_prenom=court}{format_date='Y'}></li>
+		</BOUCLE_collateraux>
+	</ul>
+</div>
+</B_collateraux>

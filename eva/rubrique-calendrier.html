@@ -1,0 +1,151 @@
+#CACHE{24*3600}
+<BOUCLE_principale(RUBRIQUES) {id_rubrique}>
+<?php $la_rubrique=#ID_RUBRIQUE; ?>
+<INCLURE{fond=entete_meta}>
+	<!--affichage du titre de la page -->
+	<title>[#NOM_SITE_SPIP]  [(#TITRE|supprimer_numero)]</title>
+	<!-- description et mots-clés de la page -->
+	[<meta name="Description" content="(#DESCRIPTIF|supprimer_tags|texte_script)" />]
+	<meta name="Keywords" content="<BOUCLE_keywords(MOTS){id_rubrique}{", "}>#TITRE</BOUCLE_keywords>" />
+	<!-- Lien vers le backend pour navigateurs eclaires -->
+	<link rel="alternate" type="application/rss+xml" title="<:syndiquer_rubrique:>" href="spip.php?page=backend&id_rubrique=#ID_RUBRIQUE" />
+	<link rel="alternate" type="application/rss+xml" title="<:syndiquer_breves_rubrique:>" href="spip.php?page=backend-breves&id_rubrique=#ID_RUBRIQUE" />
+</head>
+<body>
+	
+<div id="NoMenu">
+		
+	<div id="EntetePage">
+			
+		<div id="TitreSite">
+			<!--affichage du logo et titre du site -->
+			<h1>
+				<BOUCLE_logo_accueil(SITES){id_syndic=7}>
+				[(#LOGO_SITE)]
+				</BOUCLE_logo_accueil>
+				#NOM_SITE_SPIP
+			</h1>
+		</div>
+		
+		<!--affichage du logo et titre de la rubrique -->
+		<h2>[#LOGO_RUBRIQUE(#TITRE|supprimer_numero)]</h2>
+		<br class="clear" />
+			
+		<!-- affichage arborescence -->
+		<div class="arborescence">
+			<:vous_etes_ici:> <a href="#URL_SITE_SPIP"><:accueil_site:></a>
+			<span>&nbsp;</span>
+			<BOUCLE_hier(HIERARCHIE)>
+			<a href="#URL_RUBRIQUE" [title="(#DESCRIPTIF|supprimer_tags)"]>[(#TITRE|supprimer_numero)]</a> 
+			<span>&nbsp;</span>
+			</BOUCLE_hier>
+			[<em>(#TITRE|supprimer_numero)</em>]
+		</div>
+	</div>
+	<!-- début du contenu-->
+		
+	<div id="Contenu">
+			
+		<!-- tableau Agenda -->
+		<table class="agenda">
+			<tr>
+				<th colspan="7" class="agendaNav">
+			   	<form action="spip.php?page=rubrique&id_rubrique=#ID_RUBRIQUE" method="get"  name="navigation">
+					<a href="spip.php?page=rubrique&id_rubrique=#ID_RUBRIQUE&amp;date=<?php echo (($M - 1 > 0) ? $Y : ($Y - 1)); ?>-<?php printf('%02d', ($M - 1) > 0 ? ($M - 1) : 12); ?>-01">&lt;&lt;</a>
+					&nbsp;&nbsp;&nbsp;
+					<select name="var_nav_month">
+					<?php
+					for($i = 1; $i < 13; $i++) {
+						echo '<option value="'.sprintf('%02d', $i).'"'.($i == $M ? ' selected="selected" style="font-weight: bolder;"' : '').'>'.$months[$i].'</option>';
+					}
+					?>
+					</select>
+					<select name="var_nav_year">
+										<?php
+					for($i = 2000; $i < 2011; $i++) {
+						echo '<option value="'.$i.'"'.($i == $Y ? ' selected="selected" style="font-weight: bolder;"' : '').'>'.$i.'</option>';
+					}
+					?>
+					</select>
+					<input type="submit" value="Go" onclick="document.location.href='spip.php?page=rubrique&id_rubrique=#ID_RUBRIQUE&amp;date=' + window.document.navigation.var_nav_year.value + '-' + window.document.navigation.var_nav_month.value + '-01'; return false;" class="spip_bouton" />
+					&nbsp;&nbsp;&nbsp;
+					<a href="spip.php?page=rubrique&id_rubrique=#ID_RUBRIQUE&amp;date=<?php echo (($M + 1 < 13) ? $Y : ($Y + 1)); ?>-<?php printf('%02d', ($M + 1) < 13 ? ($M + 1) : 1); ?>-01">&gt;&gt;</a>
+			
+					&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+					<a href="spip.php?page=rubrique&id_rubrique=#ID_RUBRIQUE&amp;date=<?php echo (date('Y-m-d')); ?>"><:aujourd_hui:></a>
+					
+					<!-- inclusion liste déroulante des thèmes -->
+					&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+<?php if (isset($AgendaRub)) { ?>
+	<INCLURE{fond=rubrique-calendrier-themes}{id_rubrique=$AgendaRub}>
+<?php } else { ?>
+	<INCLURE{fond=rubrique-calendrier-themes}{id_rubrique}>
+<?php } ?>
+							</form>
+						</th>
+					</tr>
+					<tr> 
+							<?php
+				for($i = 1; $i < 8; $i++) {
+					echo '<th class="agendaHead">'.$days[$i%7].'</th>';
+				}
+				$TempD = 1;
+				if(date('w', mktime(0, 0, 0, $M, 1, $Y)) != 1) {
+					echo '</tr><tr>';
+					$tmp = '';
+					while(date('w', mktime(0, 0, 0, $M, $TempD, $Y)) != 1) {
+						$TempD--;
+						$case = '<td class="agendaNotThisMonth">';
+						$case .= date('j', mktime(0, 0, 0, $M, $TempD, $Y));
+						$date = date('Ymd', mktime(0, 0, 0, $M, $TempD, $Y));
+						if (isset($events[$date])) {
+							while (list(, $event) = each($events[$date])) {
+								$case .= '<br />'.$event['logo'].'<a href="'.$event['link'].'" title="'.$event['descriptif'].'">'.$event['title'].'</a>';
+							}
+						}
+						$case .= '</td>';
+						$tmp = $case.$tmp;
+					}
+					echo $tmp;
+				}
+				$TempD = 1;
+				while((date('m', mktime(0, 0, 0, $M, $TempD, $Y)) == $M) || (date('w', mktime(0, 0, 0, $M, $TempD, $Y)) != 1)) {
+					if(date('w', mktime(0, 0, 0, $M, $TempD, $Y)) == 1) {
+						echo '</tr><tr>';
+					}
+					echo '<td class="agenda'.(date('m', mktime(0, 0, 0, $M, $TempD, $Y)) != $M ? 'Not' : '').'This'.(date('Ymd', mktime(0, 0, 0, $M, $TempD, $Y)) == date('Ymd') ? 'Day' : 'Month').'">';
+					echo date('j', mktime(0, 0, 0, $M, $TempD, $Y));
+					$date = date('Ymd', mktime(0, 0, 0, $M, $TempD, $Y));
+					if (isset($events[$date])) {
+						while (list(, $event) = each($events[$date])) {
+							echo '<br />'.$event['logo'].'<a href="'.$event['link'].'" title="'.$event['descriptif'].'">'.$event['title'].'</a>';
+						}
+					}
+					echo '</td>';
+					$TempD++;
+				}
+				?>
+			</tr>
+		</table>
+		<!-- fin Agenda -->
+			
+		[<!-- texte de la rubrique -->
+		<div class="#EDIT{texte} texte">(#TEXTE)</div>]
+
+		[<!-- Notes de bas de page -->
+		<div class="notes">
+			<h4><:notes_bas_page:></h4>
+			(#NOTES)
+		</div>]
+
+	</div>
+	<br class="clear" />
+	<!-- fin du contenu -->
+		
+	<INCLURE{fond=pied}{skel=#SQUELETTE}>
+	</div>
+</body>
+</html>
+</BOUCLE_principale>
+<INCLURE{fond=page-404}>
+<//B_principale>

@@ -1,0 +1,17 @@
+#mots_cles div div {
+	border-left: solid #000 1px;
+	margin-left: 20px;
+}
+#mots_cles div {
+	margin-left: 30px;
+}
+
+.selectionDrag {
+	background-color: #ccc;
+}
+.attenteOK {
+	background-color: #eee;
+}
+#mots_cles span {
+	cursor: move;
+}

@@ -1,0 +1,171 @@
+#CACHE{24*3600}
+<BOUCLE_principale(RUBRIQUES) {id_rubrique}>
+<?php $la_rubrique=#ID_RUBRIQUE; ?>
+<INCLURE{fond=entete_meta}>
+	<!--affichage du titre de la page -->
+	<title>[#NOM_SITE_SPIP]  [(#TITRE|supprimer_numero)]</title>
+	<!-- description et mots-clés de la page -->
+	[<meta name="Description" content="(#DESCRIPTIF|supprimer_tags|texte_script)" />]
+	<meta name="Keywords" content="<BOUCLE_keywords(MOTS){id_rubrique}{", "}>#TITRE</BOUCLE_keywords>" />
+	<!-- Lien vers le backend pour navigateurs eclaires -->
+	<link rel="alternate" type="application/rss+xml" title="<:syndiquer_rubrique:>" href="spip.php?page=backend&id_rubrique=#ID_RUBRIQUE" />
+	<link rel="alternate" type="application/rss+xml" title="<:syndiquer_breves_rubrique:>" href="spip.php?page=backend-breves&id_rubrique=#ID_RUBRIQUE" />
+</head>
+<body>
+	
+<div id="Page">
+	<div id="EntetePage">
+		
+		<!--affichage du formulaire de recherche sur le site -->
+		<div id="TitreSite">
+			<!--affichage du logo et titre du site -->
+			<h1>
+				<BOUCLE_logo_accueil(SITES){id_syndic=7}>
+				[(#LOGO_SITE)]
+				</BOUCLE_logo_accueil>
+				#NOM_SITE_SPIP
+			</h1>
+		</div>
+		
+		<!--affichage du logo et titre de la rubrique -->
+		<h2>#LOGO_RUBRIQUE[(#TITRE|supprimer_numero)]</h2>
+        #FORMULAIRE_RECHERCHE
+	</div>
+		
+	
+	<!-- début du menu-->
+	<div id="Menu">
+			
+		<INCLURE{fond=menu}{id_rubrique}>
+			
+		<B_breves_secteur>
+		<!--affichage des brèves -->
+		<div class="bloc">
+			<h4><:breves:></h4>
+			<ul>
+				<BOUCLE_breves_secteur(BREVES) {id_secteur} {par date} {inverse} {0,5}>
+				<li><a href="#URL_BREVE">[<strong>(#TITRE|supprimer_numero)</strong>]</a><em>[, (#DATE|jour)][ (#DATE|nom_mois)]</em></li>
+				</BOUCLE_breves_secteur>
+			</ul>
+		</div>
+		</B_breves_secteur>
+			
+			
+		<BOUCLE_mots_exclure(MOTS){id_rubrique}{titre=bouton}{doublons}>
+		</BOUCLE_mots_exclure>
+		<B_mots>
+		<!--affichage des mots-clés -->
+		<div class="bloc">
+			<h4><:mots_clefs:></h4>
+			<ul>
+				<BOUCLE_mots(MOTS){id_rubrique}{doublons}>
+				<li><a href="#URL_MOT">[<strong>(#TITRE|supprimer_numero)</strong>]</a></li>
+				</BOUCLE_mots>
+			</ul>
+		</div>
+		</B_mots>
+			
+		<!-- Affichage formulaire de proposition de site web -->
+		[<div class="formulaires">
+				
+			<h4><:referencer_site:></h4>
+			<div>(#FORMULAIRE_SITE)</div>
+		</div>]
+            
+	</div>
+	<!-- fin du menu-->
+	
+	
+	
+	<BOUCLE_premiere_rubrique(RUBRIQUES){id_parent}{par num titre}{0,1}>
+	<!-- début du contenu-->
+	<div id="Contenu">
+			
+		[<!-- texte de la rubrique -->
+		<div class="#EDIT{texte} texte">(#TEXTE)</div>]
+
+			
+		<B_sites_web>
+		<!-- Sites référencés -->
+		<div id="sites_web">
+			<h3 class="titre"><:sites_web:></h3>
+			<dl>
+				<BOUCLE_sites_web(SITES){id_rubrique}{par nom_site}{syndication=non}>
+				<dt[ class="(#EDIT{nom_site})"]><a href="#URL_SITE">[(#LOGO_SITE)][<strong>(#NOM_SITE|supprimer_numero)</strong>]</a><em>[, (#DATE|jour)][ (#DATE|nom_mois)][ (#DATE|annee)]</em></dt>
+				<dd[ class="(#EDIT{descriptif})"]>[(#DESCRIPTIF)]
+				<br class="clear" /></dd>
+				</BOUCLE_sites_web>
+			</dl>
+		</div>
+		</B_sites_web>
+
+			
+		<BOUCLE_sites_syndiques(SITES){id_rubrique}{par nom_site}{syndication=oui}>
+		<!-- Sites syndiqués -->
+		<div id="sites_syndiques">
+			<h3 class="titre">
+				<a href="#URL_SITE">[(#LOGO_SITE)]
+				[<strong>(#NOM_SITE|supprimer_numero)</strong>]</a>
+			</h3>
+			<B_articles_syndiques>
+			<dl>
+				<BOUCLE_articles_syndiques(SYNDIC_ARTICLES){id_syndic}{par date}{inverse}{0,5}>
+				<dt><a href="#URL_ARTICLE">[<strong>(#TITRE|supprimer_numero)</strong>]</a><em>[, (#DATE|jour)][ (#DATE|nom_mois)][ (#DATE|annee)]</em></dt>
+				<dd>[(#DESCRIPTIF|couper{200})]</dd>
+				</BOUCLE_articles_syndiques>
+			</dl>
+			</B_articles_syndiques>
+		</div>
+		</BOUCLE_sites_syndiques>
+			
+			
+		<B_articles>
+		<!-- Articles publiés -->
+		<div id="articles">
+			<h3 class="titre">articles</h3>
+			<dl>
+				<BOUCLE_articles(ARTICLES){id_rubrique}{par num titre}>
+				<dt><a href="#URL_ARTICLE">[<strong>(#TITRE|supprimer_numero)</strong>]</a><em>[, (#DATE|jour)][ (#DATE|nom_mois)][ (#DATE|annee)]</em></dt>
+				<dd>[(#DESCRIPTIF)]
+				<br class="clear" /></dd>
+				</BOUCLE_articles>
+			</dl>
+		</div>
+		</B_articles>
+
+			
+		<B_documents>
+		<!-- Documents liés -->
+		<div id="documents">
+			<h3 class="titre">Documents</h3>
+			<dl>
+				<BOUCLE_documents(DOCUMENTS){id_rubrique}{par num titre}>
+				<dt><a href="#URL_DOCUMENT">[(#LOGO_DOCUMENT)][<strong>(#TITRE|supprimer_numero)</strong>]</a><em>[, (#DATE|jour)][ (#DATE|nom_mois)][ (#DATE|annee)][, (#TYPE_DOCUMENT)][ (#TAILLE|taille_en_octets)][, (#LARGEUR) x #HAUTEUR pixels]</em></dt>
+				<dd>[(#DESCRIPTIF)]
+				<br class="clear" /></dd>
+				</BOUCLE_documents>
+			</dl>
+			<br class="clear" />
+		</div>
+		</B_documents>
+
+		[<!-- Notes de bas de page -->
+		<div class="notes">
+			<h4><:notes_bas_page:></h4>
+			(#NOTES)
+		</div>]
+
+	</div>
+	<!-- fin du contenu -->
+	
+	</BOUCLE_premiere_rubrique>
+	<br class="clear" />
+	
+		
+	<INCLURE{fond=pied}{skel=#SQUELETTE}>
+	</div>
+</body>
+</html>
+</BOUCLE_principale>
+<INCLURE{fond=page-404}>
+<//B_principale>

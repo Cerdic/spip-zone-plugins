@@ -1,0 +1,15 @@
+
+[(#REM)<!-- fichier de squelette pour les formulaires à passer en ahah : 
+		    . chaque formulaire DOIT avoir un id UNIQUE 
+				. comme d'hab' c'est l'auberge espagnole : on est prié d'amener sa/ses css et ses js avec soit...
+				.ce fichier sera lancé soit par spip.php?page=inc_form_ahah soit < inclure{fond=inc_form_ahah}{delai=0}>   -->
+]
+				
+    	<link rel="stylesheet" href="[(#CHEMIN{jwindow.css})]">
+			<link rel="stylesheet" href="[(#CHEMIN{mag_maj.css})]">
+      <form class="mag_maj" id="mag_maj" name="mag_maj" enctype="multipart/form-data" action="spip.php?page=form_ahah" method="post">
+			 <!-- onsubmit="return (verifSaisie());" -->
+			 Sélectionnez votre fichier plugin.xml puis envoyez<br />
+   			 <input name="userfile" type="file" classe="telech" >
+        <input type="submit" name="valide_generateur" id="valide_generateur" value="envoyer">
+     </form>

@@ -1,0 +1,22 @@
+[(#REM) Modele pour l'affichage d'un album photo Picasa Web Album]
+
+<script type="text/javascript">
+	    var user = '[(#ENV{picasa_utilisateur}|?{#ENV{picasa_utilisateur},#CONFIG{picasa/username}})]';
+	    var album = '[(#ENV{picasa_album}|?{#ENV{picasa_album},#ENV{class}})]';
+	    var maxres = [(#ENV{picasa_nombre}|?{#ENV{picasa_nombre},0})]; // 0 - for all;
+	    var authkey = '[(#ENV{picasa_authkey})]';
+	    
+	    var url = 'http://picasaweb.google.com/data/feed/api/user/' + user + '/album/' + album + '?kind=photo&alt=json-in-script&callback=renderer&access=public&start-index=1';
+	    
+	    if (maxres && maxres != 0) {
+	        url = url + '&max-results=' + maxres;
+	    }
+	    
+	    
+	    if (authkey && authkey != '') {
+	        url = url + '&authkey=' + authkey;
+	    }
+	    loadJS(url);
+</script>
+
+<div id="myGallery">&nbsp;</div>

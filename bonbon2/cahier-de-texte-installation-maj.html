@@ -1,0 +1,354 @@
+#CACHE{0}
+#SET{virgule,","} [(#REM) utile pour les explodes]
+<!--
+*****Cahier de texte pour Spip: Bonbon !
+*****Réalisé par Bertrand MARNE (bmarne à ac-creteil.fr)
+*****Adapté par Samuel BOCHAREL "PoongalOO"
+*****Sous licence GPL (enfin bon, c'est bonbonware...)
+*****CopyLeft en juin 2007
+***Page d'installation des mots-clés dans Spip
+-->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG">
+<head>
+	[(#CONFIG{plugin}|match{EVA-WEB31}|?{' ',''})<INCLURE{fond=noisettes/headers/entete-meta}{env}>]
+	[(#CONFIG{plugin}|match{EVA-WEB31}|?{'',' '})]
+
+
+	
+	</head>
+	
+<body>
+<div id="Page">
+	
+[(#REM) Entete de la page]
+	[(#CONFIG{plugin}|match{EVA-WEB31}|?{' ',''})<INCLURE {fond=noisettes/entete/inc_entete-page} >]
+	[(#CONFIG{plugin}|match{EVA-WEB31}|?{'',' '})<INCLURE{fond=cahier-de-texte-en-tete}{env}>]
+
+
+<h1>Préparation ou mise à jour du cahier de texte sous Spip</h1>[
+
+	(#REM) Hack pour conditionner une boucle
+	- On commence par mettre de coté un id_rubrique
+	- Ceux qui sont pas 0minirezo n'ont le droit qu'au texte...
+	- Et que le bouton n'a pas été pressé
+	- On fait la boucle conditionnelle
+]
+
+[Vous avez saisi les classes suivantes : (#CONFIG{bonbon/classes})]
+<br />
+[Vous avez saisi les groupes suivants : (#CONFIG{bonbon/groupes})]
+<br />
+[Vous avez saisi les matières suivantes : (#CONFIG{bonbon/matieres})]
+<br />
+<BOUCLE_Nimportequelle_rubrique(RUBRIQUES){0,1}>#SET{une_rubrique,#ID_RUBRIQUE}</BOUCLE_Nimportequelle_rubrique>[
+(#SET{condition_boucle,''})
+][(#ENV{bouton}|?{'',' '})
+	[(#SET{condition_boucle,#GET{une_rubrique}})]
+
+][
+(#SESSION{statut}|=={'0minirezo'}|?{'',' '})
+	[(#SET{condition_boucle,''})]
+
+]<BOUCLE_CONDITIONNELLE_Bouton_presse_ou_non(RUBRIQUES){id_rubrique=#GET{condition_boucle}}>
+</BOUCLE_CONDITIONNELLE_Bouton_presse_ou_non>
+
+<form name="form" method="get">
+	<input type="Hidden" value="#ENV{page}" name="page">[
+
+	(#REM) On affiche le bouton, si et seulement si on est 0minirezo
+
+][
+(#SESSION{statut}|=={'0minirezo'}|?{' ',''})<input type="Submit" value="Installer les mots-clés du cahier de texte dans Spip" name="bouton">]
+</form>
+</B_CONDITIONNELLE_Bouton_presse_ou_non>
+
+
+[(#REM) Définition des paramètres à personnaliser: Les classes, les groupes et les matières.
+***************************Zone à ne plus personnaliser !!!*****************************]
+
+[(#SET{les_classes,#CONFIG{bonbon/classes}})]
+[(#SET{les_groupes,#CONFIG{bonbon/groupes}})]
+[(#SET{les_matieres,#CONFIG{bonbon/matieres}})]
+
+[(#REM) **************************Fin de la zone*********************]
+
+
+[(#SET{les_specifiques,"Description de séance,Devoirs à faire"})]
+
+[(#SET{tableau_classes,[(#GET{virgule}|explode{#GET{les_classes}})]})]
+[(#SET{tableau_matieres,[(#GET{virgule}|explode{#GET{les_matieres}})]})]
+[(#SET{tableau_groupes,[(#GET{virgule}|explode{#GET{les_groupes}})]})]
+[(#SET{tableau_specifiques,[(#GET{virgule}|explode{#GET{les_specifiques}})]})]
+[(#SET{les_groupes_mots,"Classes,Sous groupes de classes,Matières,Cahier de texte en-ligne"})]
+[(#SET{tableau_groupes_mots,[(#GET{virgule}|explode{#GET{les_groupes_mots}})]})]
+
+[(#REM) On vérifie qu'une rubrique pour le cahier de texte existe.
+Si elle existe, on vérifie que les sous rubriques aussi.
+Si la sous rubrique "Professeurs-classes-matières" n'existe pas, on la crée.
+On détermine quelle est l'année scolaire que l'on veut afficher]
+
+[(#SET{annee_rubrique,[(#ENV{date}|bonbon_annee_scolaire)]})]
+
+[(#ENV{annee_scolaire}|?{' ',''})
+		#SET{annee_rubrique,#ENV{annee_scolaire}}
+	]
+	<BOUCLE_Contexte_RubriqueCDT(RUBRIQUES){titre=="Cahier de texte en-ligne"}{0,1}>
+	
+[(#SET{id_rubrique_globale,#ID_RUBRIQUE})
+]<BOUCLE_AnneeScol(RUBRIQUES){id_parent}{titre=#GET{annee_rubrique}}{!par titre}{0,1}>
+	<p>La rubrique pour le cahier de texte de l'année #TITRE existe déjà.</p>
+		[(#SET{id_rubrique,#ID_RUBRIQUE})][(#SET{cdt_existe,'oui'})]
+		<BOUCLE_Rubrique_profs_classes_matieres(RUBRIQUES){id_parent}{titre="Professeurs-classes-matières"}>
+	<p>La rubrique pour ranger les fiches des classes et des profs existe déjà</p>[(#SET{id_rubrique_pcm,#ID_RUBRIQUE})]
+		</BOUCLE_Rubrique_profs_classes_matieres>
+		</B_Rubrique_profs_classes_matieres>
+<h2>Création d'une sous rubrique pour les fiches des profs et des classes</h2>
+		[		<p>(#ID_RUBRIQUE|bonbon_creer_sous_rubrique{"Professeurs-classes-matières","Cette rubrique contient des données necessaires au fonctionnement du cahier de texte en ligne.
+
+		  {{Ne l'effacez pas}}. {{Ne la renommez pas}}. {{Ne modifiez pas son contenu}} sinon il ne fonctionnera plus correctement !"}|?{"La rubrique «Professeurs-classes-matières» pour l'année est créée.","Un problème technique est survenu lors de la création de la rubrique «Professeurs-classes-matières» !"})</p>]
+			<BOUCLE_Rubrique_profs_classes_matieres_naissante(RUBRIQUES){id_parent}{titre="Professeurs-classes-matières"}>[(#SET{id_rubrique_pcm,#ID_RUBRIQUE})]
+			</BOUCLE_Rubrique_profs_classes_matieres_naissante>	
+		<//B_Rubrique_profs_classes_matieres>
+	</BOUCLE_AnneeScol>
+</BOUCLE_Contexte_RubriqueCDT>
+<h2>Les groupes de mots du cahier de texte&nbsp;:</h2>
+
+[(#REM) On vérifie les groupes de mots et on les crée s'ils n'existent pas. On les faits un par uns car SPIP ne propose pas encore de solution permettant de parcourir un tableau de valeurs qui ne sont pas dans la base (sauf la balise #FOREACH qui necessite un plugin pour SPIP<1.9.3)]
+
+<BOUCLE_Verifie_Groupe_Classes(GROUPES_MOTS){titre="Classes"}>
+	<p>Le groupe de mots-clés #TITRE existe déjà avec le n°#ID_GROUPE.</p>
+</BOUCLE_Verifie_Groupe_Classes>
+
+	[(#SET{titre_groupe,"Classes"})]
+	[<p>Ajout du groupe de mots nommé «&nbsp;#GET{titre_groupe}&nbsp;» (de n° (#GET{titre_groupe}|bonbon_ajoute_groupe|sinon{"erreur lors de la création du groupe"})).</p>]
+<//B_Verifie_Groupe_Classes>
+<BOUCLE_Verifie_Groupe_SousGroupes(GROUPES_MOTS){titre="Sous groupes de classes"}>
+	<p>Le groupe de mots-clés #TITRE existe déjà avec le n°#ID_GROUPE.</p>
+</BOUCLE_Verifie_Groupe_SousGroupes>
+	[(#SET{titre_groupe,"Sous groupes de classes"})]
+	[<p>Ajout du groupe de mots nommé «&nbsp;#GET{titre_groupe}&nbsp;» (de n° (#GET{titre_groupe}|bonbon_ajoute_groupe|sinon{"erreur lors de la création du groupe"})).</p>]
+<//B_Verifie_Groupe_SousGroupes>
+<BOUCLE_Verifie_Groupe_Matieres(GROUPES_MOTS){titre="Matières"}>
+	<p>Le groupe de mots-clés #TITRE existe déjà avec le n°#ID_GROUPE.</p>
+</BOUCLE_Verifie_Groupe_Matieres>
+	[(#SET{titre_groupe,"Matières"})]
+	[<p>Ajout du groupe de mots nommé «&nbsp;#GET{titre_groupe}&nbsp;» (de n° (#GET{titre_groupe}|bonbon_ajoute_groupe|sinon{"erreur lors de la création du groupe"})).</p>]
+<//B_Verifie_Groupe_Matieres>
+<BOUCLE_Verifie_Groupe_CDT(GROUPES_MOTS){titre="Cahier de texte en-ligne"}>
+	<p>Le groupe de mots-clés #TITRE existe déjà avec le n°#ID_GROUPE.</p>
+</BOUCLE_Verifie_Groupe_CDT>
+	[(#SET{titre_groupe,"Cahier de texte en-ligne"})]
+	[<p>Ajout du groupe de mots nommé «&nbsp;#GET{titre_groupe}&nbsp;» (de n° (#GET{titre_groupe}|bonbon_ajoute_groupe|sinon{"erreur lors de la création du groupe"})).</p>]
+<//B_Verifie_Groupe_CDT>
+<h2>Les mots-clés du cahier de texte&nbsp;:[
+
+	(#REM) Pour chaque groupe de mot-clé, on va vérifier les mots...
+
+
+]<BOUCLE_Pour_Chaque_Groupe(GROUPES_MOTS){titre IN #GET{tableau_groupes_mots}}>
+[(#SET{tableau_mots,''})]
+[(#TITRE|=={'Classes'}
+	|?{#SET{tableau_mots,#GET{tableau_classes}}})]
+[(#TITRE|=={'Sous groupes de classes'}
+	|?{#SET{tableau_mots,#GET{tableau_groupes}}})]
+[(#TITRE|=={'Matières'}
+	|?{#SET{tableau_mots,#GET{tableau_matieres}}})]
+[(#TITRE|=={'Cahier de texte en-ligne'}
+	|?{#SET{tableau_mots,#GET{tableau_specifiques}}})]
+[(#SET{liste_des_mots_qui_existent,#ARRAY})]
+<h3>Les mots-clés du groupe «&nbsp;#TITRE&nbsp;»&nbsp;:</h3>
+<BOUCLE_Verifie_Mot(MOTS){id_groupe}{titre IN #GET{tableau_mots}}>
+	<p>Le mot-clé «&nbsp;#TITRE&nbsp;» existe déjà avec le n°#ID_MOT. Il ne sera pas rajouté.</p>[
+
+	(#REM)Pour les classes et les matières, on regarde si le mot clé est lié à la rubrique, si oui, on passe, sinon, on regarde s'il y a un contenu lié au mot-clé et on colle le mot à la rurbrique 
+
+][
+
+	(#REM) Hack de la boucle conditionnelle
+
+][(#SET{condition_boucle,''})]
+[(#GET{id_rubrique_pcm}|?{' ',''})
+	[(#TYPE|=={'Classes'}|?{' ',''})
+		[(#SET{condition_boucle,#GET{id_rubrique_pcm}})]
+	][(#TYPE|=={'Matières'}|?{' ',''})
+		[(#SET{condition_boucle,#GET{id_rubrique_pcm}})]
+	]
+]<BOUCLE_CONDITIONNELLE_Mise_a_jour_classe_ou_matiere(RUBRIQUES){id_rubrique=#GET{condition_boucle}}{0,1}>
+
+		<BOUCLE_On_verifie_si_une_classe_est_liee(RUBRIQUES){id_rubrique=#GET{id_rubrique}}{id_mot}>
+		<p>#_Verifie_Mot:TITRE est déjà lié au cahier de texte de l'année #TITRE</p>
+		</BOUCLE_On_verifie_si_une_classe_est_liee>
+			<BOUCLE_Y_a_t_il_du_contenu_lie(ARTICLES){id_rubrique=#GET{id_rubrique}}{id_mot}{0,1}>
+				[
+		<p>(#ID_MOT|bonbon_lier_mot{#ID_RUBRIQUE,"rubrique"}|?{' ',''})#_Verifie_Mot:TITRE a été rattaché au cahier de texte de l'année</p>]
+			</BOUCLE_Y_a_t_il_du_contenu_lie>
+		<p>Pas de contenu lié à #_Verifie_Mot:TITRE dans le cahier de texte de l'année.</p>
+			<//B_Y_a_t_il_du_contenu_lie>
+		<//B_On_verifie_si_une_classe_est_liee>[
+
+	(#REM) Hack de la boucle conditionnelle
+
+	][(#SET{condition_boucle,''})]
+	[(#TYPE|=={'Classes'}|?{' ',''})
+		[(#SET{condition_boucle,#ID_RUBRIQUE})]
+	]<BOUCLE_CONDITIONNELLE_Mise_a_jour_classe_seulement(RUBRIQUES){id_rubrique=#GET{condition_boucle}}{0,1}>[
+	
+
+(#REM) Pour chaque classe on va vérifier grâce aux mots-clés de la rubrique de l'année s'il y a du contenu. S'il y en a on regarde s'il existe un article qui décrit la classe
+	
+
+		]<BOUCLE_Le_Contenu_existe-t-il(MOTS){id_rubrique=#GET{id_rubrique}}{id_mot}>
+			<BOUCLE_Article_Description_Classe(ARTICLES){id_rubrique=#GET{id_rubrique_pcm}}{titre=#_Verifie_Mot:TITRE}>
+		<p>La classe de #_Verifie_Mot:TITRE est décrite par l'article n°#ID_ARTICLE</p>
+			</BOUCLE_Article_Description_Classe>
+			</B_Article_Description_Classe>
+		[<p>(#_Verifie_Mot:TITRE|bonbon_creer_fiche_classe{#GET{id_rubrique_pcm},#_Verifie_Mot:ID_MOT}|?{' ',''})La fiche qui décrit la #_Verifie_Mot:TITRE est créée</p>
+]
+			<//B_Article_Description_Classe>
+		</BOUCLE_Le_Contenu_existe-t-il>
+	</BOUCLE_CONDITIONNELLE_Mise_a_jour_classe_seulement>[
+
+	(#REM) Hack de la boucle conditionnelle
+
+	][(#SET{condition_boucle,''})]
+	[(#TYPE|=={'Matières'}|?{' ',''})
+		[(#SET{condition_boucle,#ID_RUBRIQUE})]
+	]<BOUCLE_CONDITIONNELLE_Mise_a_jour_matiere_seulement(RUBRIQUES){id_rubrique=#GET{condition_boucle}}{0,1}>[
+
+
+(#REM) Pour chaque matière on regarde pour chacune des classes (peut donc être long) qui a un contenu de cette matière que le mot-clé lui est associé
+
+
+		]<BOUCLE_Toutes_les_classes(MOTS){type="Classes"}>
+			<BOUCLE_Pour_Chaque_Classe_Avec_Article(ARTICLES){id_rubrique=#GET{id_rubrique_pcm}}{titre_mot=#TITRE}>
+				<BOUCLE_Les_deux_mots_attaches(ARTICLES){id_article}{id_mot=#_Verifie_Mot:ID_MOT}{titre_mot=#_Pour_Chaque_Classe_Avec_Article:TITRE}>
+					<p>La matière #_Verifie_Mot:TITRE est enseignée en #TITRE (présente dans la fiche de la classe).</p>
+				</BOUCLE_Les_deux_mots_attaches>
+					<BOUCLE_Article_de_cette_matiere_et_classe(ARTICLES){id_rubrique=#GET{id_rubrique}}{id_mot=#_Verifie_Mot:ID_MOT}{titre_mot=#_Pour_Chaque_Classe_Avec_Article:TITRE}{0,1}>
+		[<p>(#_Verifie_Mot:ID_MOT|bonbon_lier_mot{#_Pour_Chaque_Classe_Avec_Article:ID_ARTICLE}|?{' ',''})La matière #_Verifie_Mot:TITRE a été mise dans la fiche de la #_Pour_Chaque_Classe_Avec_Article:TITRE car cette classe a au moins une séance dans cette matière.</p>
+]
+					</BOUCLE_Article_de_cette_matiere_et_classe>
+				<//B_Les_deux_mots_attaches>
+			</BOUCLE_Pour_Chaque_Classe_Avec_Article>
+		</BOUCLE_Toutes_les_classes>
+	</BOUCLE_CONDITIONNELLE_Mise_a_jour_matiere_seulement>
+</BOUCLE_CONDITIONNELLE_Mise_a_jour_classe_ou_matiere>
+[(#SET{liste_des_mots_qui_existent,#GET{liste_des_mots_qui_existent}|bonbon_fusion_tableau{#ARRAY{#_Verifie_Mot:COMPTEUR_BOUCLE,#_Verifie_Mot:TITRE}}})]
+</BOUCLE_Verifie_Mot>
+[
+	(#REM) On prend les mots qui restent (qui n'existent pas encore) et on les crée
+
+][(#ID_GROUPE
+	|bonbon_remplit_groupe_mots{
+		#_Pour_Chaque_Groupe:TITRE,
+		[(#GET{virgule}|implode{[(#GET{tableau_mots}|array_diff{#GET{liste_des_mots_qui_existent}})]})]}
+)]
+<?php
+//On prend les mots qui restent (qui n'existent pas encore) et on les crée (pas trouvé comment faire le while en BOUCLES/BALISES...
+
+//$mots_qui_restent='[(#GET{virgule}|implode{[(#GET{tableau_mots}|array_diff{#GET{liste_des_mots_qui_existent}})]})]';
+//$id_groupe='[(#ID_GROUPE)]';
+//$type='[(#_Pour_Chaque_Groupe:TITRE)]';
+//$tab_mots_restants=explode(",",$mots_qui_restent);
+//while (list($key2,$val2)=each($tab_mots_restants)) {
+//	if ($val2) {
+//		$id_mot=bonbon_ajoute_mot ($val2,$id_groupe,$type);
+//		echo "<p><i>$val2</i> est le mot-clé numéro $id_mot</p>";
+//	}
+//}
+?>
+</BOUCLE_Pour_Chaque_Groupe>
+
+
+
+[(#REM) Gestion des fiches des profs]
+
+[(#REM) Hack de la boucle conditionnelle
+	-> si la cahier de texte existe]
+	
+[(#SET{condition_boucle,''})]
+
+[(#GET{cdt_existe}|=={oui}|?{' ',''})
+	[(#SET{condition_boucle,#GET{id_rubrique}})]
+]
+
+<BOUCLE_CONDITIONNELLE_Traiter_les_auteurs_ou_non(RUBRIQUES){id_rubrique=#GET{condition_boucle}}>
+<h2>Création/Mise à jour des fiches des professeurs</h2>[
+
+	(#REM) Si le CDT de l'année existe, on teste pour chaque auteur s'il a une fiche descriptive. S'il n'en a pas: on regarde s'il a décrit des séances, et si c'est le cas on lui crée la fiche descriptive.
+	Ensuite on regarde pour chaque classe et matière s'il a écrit une fiche, si c'est le cas, on associe ces classes et matières à sa fiche.
+
+]
+	<BOUCLE_Tous_les_Auteurs(AUTEURS)>
+		<BOUCLE_Article_jointure(ARTICLES){id_rubrique=#GET{id_rubrique_pcm}}{id_auteur}{ps=#ID_AUTEUR}{0,1}>
+			<p>Le prof <strong>#NOM</strong> a bien un descriptif de ses classes et matières</p>
+		</BOUCLE_Article_jointure>
+		</B_Article_jointure>
+			<BOUCLE_A_t_il_du_contenu(ARTICLES){titre_mot="Description de séance"}{id_auteur}{id_rubrique}{0,1}>
+		[<p>#NOM a déjà entré des séances dans le cahier de texte, (#NOM|bonbon_creer_fiche_prof{#ID_AUTEUR,#GET{id_rubrique_pcm}}|?{"sa fiche a été créée.","mais sa fiche n'a pu être créée (problème technique)."})</p>]
+			</BOUCLE_A_t_il_du_contenu>
+		<//B_Article_jointure>
+		<BOUCLE_Les_Classes_et_les_matieres(MOTS){type IN "Classes","Matières"}>
+			<BOUCLE_Article_auteur_et_matiere(ARTICLES){id_rubrique}{id_auteur}{id_mot}{0,1}>
+				<BOUCLE_Article_fiche(ARTICLES){id_rubrique=#GET{id_rubrique_pcm}}{id_auteur}{ps=#ID_AUTEUR}{0,1}>
+[(#REM) {surtitre="À propos d'un professeur"} a été viré car posait des soucis d'encodage]
+					<BOUCLE_Mot_lie_a_fiche(MOTS){id_article}{id_mot}>
+						<p>La #TYPE #TITRE est associée à #NOM</p>
+					</BOUCLE_Mot_lie_a_fiche>
+		[<p>#NOM a au moins une séance décrite pour la #TYPE #_Les_Classes_et_les_matieres:TITRE, (#ID_MOT|bonbon_lier_mot{#ID_ARTICLE}|?{"elle est donc associée à sa fiche.","mais elle n'a pu être associée à sa fiche (problème technique)."})]
+					<//B_Mot_lie_a_fiche>
+				</BOUCLE_Article_fiche>
+				<//B_Article_fiche>
+			</BOUCLE_Article_auteur_et_matiere>
+		</BOUCLE_Les_Classes_et_les_matieres>
+	</BOUCLE_Tous_les_Auteurs>
+</BOUCLE_CONDITIONNELLE_Traiter_les_auteurs_ou_non>
+<h2>Rubrique racine du cahier de texte&nbsp;:</h2>[
+
+	(#REM) Si la rubrique du CDT n'existe pas, on la créee...
+
+][(#GET{id_rubrique_globale}|?{'',' '})
+	[(#SET{titre,"Cahier de texte en-ligne"})]
+	[(#SET{descriptif,"Cette rubrique contient le cahier de texte géré par Spip
+
+Son {titre} doit {{toujours}} contenir l'expression «{Cahier de texte en-ligne}». Si vous souhaitez changer son nom gardez cette expression dedans."})
+
+	][<p name="FIN">La rubrique «Cahier de texte en-ligne» a été créée, c'est la rubrique n°(#GET{titre}|bonbon_creer_rubrique{#GET{descriptif}}).]
+][(#GET{id_rubrique_globale}|?{' ',''})
+	<p name="FIN">La rubrique «Cahier de texte en-ligne» existe déjà avec le n°#GET{id_rubrique_globale}. Elle ne sera pas ajoutée.
+]
+	<br>Son <em>titre</em> doit <strong>toujours</strong> contenir l'expression «<em>Cahier de texte en-ligne</em>». Si vous souhaitez changer son nom gardez cette expression dedans.</p>
+<BOUCLE_RubriqueCDT(RUBRIQUES){titre=="Cahier de texte en-ligne"}{0,1}>[(#SET{id_rubrique_globale,#ID_RUBRIQUE})]</BOUCLE_RubriqueCDT>[
+
+	(#REM) Si la sous-rubrique de l'année scolaire n'existait pas, on la crée
+
+][(#GET{cdt_existe}|=={'oui'}|?{'',' '})
+	[
+	
+	(#SET{descriptif_rubrique,"Cahier de texte de l'année scolaire "})
+	][
+	(#SET{descriptif_rubrique,[(#GET{descriptif_rubrique}|concat{#GET{annee_rubrique},"
+
+	{{Cette rubrique ne doit pas être renommée}}. Sinon, les enregistrements du cahier de texte de l'année en cours seront perdus"})]})
+	][
+	(#SET{id_rub_annee_scolaire,#GET{id_rubrique_globale}|bonbon_creer_sous_rubrique{#GET{annee_rubrique},#GET{descriptif_rubrique}}})
+	][<p name="FIN">La sous-rubrique de l'année scolaire #GET{annee_rubrique} &nbsp;a été créée, c'est la rubrique n°(#GET{id_rub_annee_scolaire}).][ Elle contient une sous rubrique	n°(#GET{id_rub_annee_scolaire}|bonbon_creer_sous_rubrique{"Professeurs-classes-matières","Cette rubrique contient des données necessaires au fonctionnement du cahier de texte en ligne.
+
+
+	  {{Ne l'effacez pas}}. {{Ne la renommez pas}}. {{Ne modifiez pas son contenu}} sinon il ne fonctionnera plus correctement !"})&nbsp;nommée «Professeurs-classes-matières».] <strong>Ces sous-rubriques ont été créées pour gérer le cahier de texte de cette année scolaire. Ne les effacez pas, ne les renommez pas et laissez les dans la rubrique «Cahier de texte en-ligne» !</strong></p>
+
+]	
+	<p><strong>Pour améliorer l'intégration du cahier de texte à votre site sous Spip vous pouvez renommer le fichier «cahier-de-texte-rubrique.html» livré dans le dossier /plugins/bonbon/ en «rubrique-#GET{id_rubrique_globale}.html»</strong></p>
+	<p><b>Ne rechargez pas la page</b>.<br/><br/>
+		<a href="./ecrire/?exec=mots_tous" title="Aller vérifier l'installation des groupes">Passez dans l'espace privé de SPIP</a> pour vérifier que les mots-clés et les rubriques sont bien installés.
+		<ul>
+			<li>En cas de problème, réutilisez votre sauvegarde de la base.</li>
+	<p>
+<//B_CONDITIONNELLE_Bouton_presse_ou_non>
+
+	[(#CONFIG{plugin}|match{EVA-WEB31}|?{' ',''})<INCLURE{fond=noisettes/pied/inc_pied}{env}>]
+	[(#CONFIG{plugin}|match{EVA-WEB31}|?{'',' '})<INCLURE{fond=cahier-de-texte-pied}{env}>]
+</div>

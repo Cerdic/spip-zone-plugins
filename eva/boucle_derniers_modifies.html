@@ -1,0 +1,23 @@
+<?php
+$derniers_modifies = '
+			<B_derniers_modifies>
+			<div id="articles">
+			<h3 class="titre">Derni&egrave;res mises &agrave; jour</h3>
+			<dl class="suivants">
+			<div class="suite">
+				<a href="/">Masquer les derni&egrave;res mises &agrave; jour</a>
+			</div>
+				<BOUCLE_derniers_modifies(ARTICLES){id_secteur != 1}{par date_modif}{inverse}{0,10}{doublons}>
+				<dt>#COMPTEUR_BOUCLE.&nbsp;<a href="#URL_ARTICLE">[<strong>(#TITRE|supprimer_numero)</strong>]</a><em>[, (#DATE_MODIF|jour)][ (#DATE_MODIF|nom_mois)][ (#DATE_MODIF|annee)]</em></dt>
+				[<dd>(#INTRODUCTION)
+					<div class="suite"><a href="#URL_ARTICLE"><:lire_suite:></a></div>
+				</dd>]
+				</BOUCLE_derniers_modifies>
+			</dl>
+			</div>
+			</B_derniers_modifies>
+';
+if($_GET['modifies']=='oui'){
+echo $derniers_modifies;
+}
+?>

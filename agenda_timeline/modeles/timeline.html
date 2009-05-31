@@ -1,0 +1,29 @@
+<script type="text/javascript">
+var tl;
+
+$(document).ready(function (){
+	var theme = Timeline.ClassicTheme.create();
+/*	theme.event.label.width = 150*/; // px
+// 	theme.event.bubble.width = 200;
+	theme.event.bubble.height = 160;
+
+	var eventSource = new Timeline.DefaultEventSource();
+	var bandInfos = [
+		Timeline.createBandInfo({
+			eventSource: eventSource,
+			date: "[(#ENV{date_debut}|?{#ENV{date_debut},[(#ENV{date}|affdate{M d Y H:00:00}) GMT]})]",
+			width: "100%",
+			intervalUnit: Timeline.DateTime.MONTH,
+			intervalPixels: 400
+		})
+	];
+
+	Timeline.loadXML("[(#URL_PAGE{backend_agenda_timeline})]", function(xml, url) { eventSource.loadXML(xml, url); });
+	tl = Timeline.create(document.getElementById("my-timeline"), bandInfos);
+});
+
+</script>
+<div style="margin:30px 0 0 0">
+<p><:timelineinfos:></p>
+<div id="my-timeline" style="height:[(#ENV{hauteur}|?{#ENV{hauteur},'250'})]px;[width:(#ENV{largeur})];border:1px solid #ccc;font-size:0.8em;"></div>
+</div>

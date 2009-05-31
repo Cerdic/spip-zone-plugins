@@ -1,0 +1,27 @@
+[(#REM)
+	Documents en innerfade diaporama
+	Modele SPIP d'apres InnerFade with JQuery http://medienfreunde.com/lab/innerfade/
+	http://medienfreunde.com/stats/getfile.php?id=3 pour recuper le zip le jquery.innerfade.zip
+	<template><article1|innerfade></template>]
+	
+[(#REM)
+	Modele <article1|innerfade> : diaporama avec les images en portfolio
+	#MODELE{article_innerfade}]
+
+<B_PORFOLIO2>	
+    <script type="text/javascript">
+        $(document).ready(
+	        function(){					
+		        $('.slideshow').slideshow({
+			        [type: '(#ENV{type})',]
+        		    timeout: #GET{timeout,2000}
+		        });
+        });	
+    </script>
+
+    <div class="slideshow">
+        <BOUCLE_PORFOLIO2(DOCUMENTS){id_article?}{id_rubrique?}{mode=document}{extension==jpg|gif|png} {par num titre, date}>
+            [(#URL_DOCUMENT||image_reduire{400,400}|inserer_attribut{'alt',#TITRE})]
+        </BOUCLE_PORFOLIO2>	
+    </div>	
+</B_PORFOLIO2>

@@ -1,0 +1,126 @@
+/* 
+	Layout pour le theme Woof 
+	par Kozlika http://www.kozlika.org/kozeries/
+	Version: 1.0
+	Licence GNU/GPL
+*/
+
+/* -----------------------------------------------
+	Reset (melting-pot a ma sauce)
+------------------------------------------------- */
+html { overflow-y: scroll; }
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
+	}
+body { line-height: 1; position: relative; }
+blockquote:before, blockquote:after,
+:focus { outline: 1; }
+ins { text-decoration: underline; }
+del { text-decoration: line-through; }
+table { border-collapse: collapse; border-spacing: 0; }
+sub, sup { vertical-align : baseline; position : relative; } 
+sup {top : -0.5em;}
+sub {bottom : -0.25em;}
+
+/* -----------------------------------------------
+	Structure proprement dite
+------------------------------------------------- */
+body {
+	text-align : center;
+	font-size : small;
+	}	
+#page {
+	width : 940px;
+	line-height : 140%;
+	text-align : left;
+	margin : 0 auto;
+	padding-top: 10px;
+	}
+#top {
+	position: absolute;
+	top: 20px;
+	right: 12px;
+	}
+#top h1 {
+	margin : 0;
+	padding : 0;
+	}
+#prelude { 
+	position : absolute; 
+	top:0;
+	right:6px;
+	}
+#wrapper {
+	margin : 120px 0 0 20px;
+	}
+#main {
+	width : 100%;
+	margin : 0 0 0 -340px;
+	float : right;
+	}
+#content {
+	margin : 0 0 0 380px;
+	padding : 10px 30px 0 0;
+	}
+#footer {
+	clear : both;
+	text-align:left;
+	height: 160px;
+	}
+#sidebar {
+	width : 340px;
+	float : left;
+	overflow:hidden;
+	margin-top : 480px;
+	}
+#blognav, #blogextra {
+	margin : 0;
+	padding : 0 6px;
+	}
+#blognav {
+	width : 150px;
+	float : right;
+	}
+#blogextra {
+	width : 146px;
+	float : left;
+	}
+	
+/* Hack pour prise en compte de la hauteur du wrapper,
+	qui ne contient que des blocs flottants.
+	Merci http://www.fu2k.org/alex/css/onetruelayout/ */
+#wrapper:after {
+    content : '[ne pas supprimer]';
+    display : block;
+    height : 1px;
+    clear : both;
+    visibility : hidden;
+	font-size : 1px;
+    }
+#wrapper {
+    display:inline-block;
+    }
+/*\*/
+* html #wrapper
+	{
+	height: 1%;
+	}
+#wrapper
+	{
+	display: block;
+	}
+/* */

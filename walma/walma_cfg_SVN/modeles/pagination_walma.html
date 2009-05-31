@@ -1,0 +1,23 @@
+[(#REM) walma pour faire tourner ensemble la boucle image et vignettes, ajout du parametre debut_image |parametre_url{mode,#ENV{url}|match{ajaxdoc}|?{image,''}}]
+#SET{bornes,#ENV{page_courante}|bornes_pagination{#ENV{nombre_pages},400}}
+#SET{premiere, #GET{bornes}|reset}
+#SET{derniere, #GET{bornes}|end}
+#SET{separateur,''}
+
+#SET{i,#ENV{page_courante}|moins{1}}
+[(#GET{i}|>{0}|?{' ',' '})[
+	(#SET{item, #GET{i}|moins{1}|mult{#ENV{pas}} })
+	][(#INCLURE{fond=modeles/paginationitemw}{num=#GET{i}}{sens=back}{texte=&lt;}{url=#ENV{url}|parametre_url{debut_image,#ENV{page_courante}|=={#GET{premiere}}|?{#GET{derniere}|moins{1}|mult{#ENV{pas}},#GET{item}}}|parametre_url{grande,''}|parametre_url{#ENV{debut},#ENV{page_courante}|=={#GET{premiere}}|?{#GET{derniere}|moins{1}|mult{#ENV{pas}},#GET{item}}}}{page_courante=#ENV{page_courante}}{derniere=#ENV{derniere}})]
+	#SET{i,#GET{i}|plus{2}}
+	[(#GET{i}|<{#ENV{nombre_pages}}|?{' ',''})]
+]
+[(#GET{i}|<={#ENV{nombre_pages}}|?{' ',' '})
+[(#SET{item, #GET{i}|moins{1}|mult{#ENV{pas}} })]
+]
+		<a id="centrecompt" href="[(#SELF|parametre_url{id_document,''}|parametre_url{debut_vignettes,''}|parametre_url{debut_image,''}|parametre_url{#ENV{debut},''}|parametre_url{grande,''}|parametre_url{pas,''}|parametre_url{recherche,#RECHERCHE})][(#ENV{url}|match{ajaxdoc}|?{&amp;mode=image})]">
+		[(#ENV{pas}|=={1}|?{[(#GET{item})],[(#ENV{page_courante}|=={1}|?{[(#ENV{page_courante})],[(#EVAL{[(#GET{item})]-[(#ENV{pas})]+1})]}) ]-[ (#GET{item}|>={[(#TOTAL)]}|?{[(#TOTAL)],[(#GET{item})]})] })][ / (#TOTAL)]
+		</a>
+
+
+		[(#INCLURE{fond=modeles/paginationitemw}{num=#GET{i}}{sens=go}{texte=&gt;}{url=#ENV{url}|parametre_url{debut_image,#ENV{page_courante}|=={#GET{derniere}}|?{'',#GET{item}}}|parametre_url{grande,''}|parametre_url{#ENV{debut},#ENV{page_courante}|=={#GET{derniere}}|?{'',#GET{item}}}}{page_courante=#ENV{page_courante}}{derniere=#ENV{derniere}})]		
+		

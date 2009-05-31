@@ -1,0 +1,105 @@
+#CACHE{3600}
+[(#REM) Donne la liste de tous les messages postes par un membre]
+<BOUCLE_aut(AUTEURS){id_auteur}{tout}>
+
+	#SET{statmem,#STATUT}
+
+	<INCLURE{fond=inc_teteforum}{id_rubrique}{id_article}>
+
+		<p class="space_20"></p>
+
+		[(#REM) bouton retour forum ]
+		[(#ENV{orig}|?{' ',''})
+		#SET{idforum,#ENV*{orig}|replace{-.*$,''}}
+		#SET{msg,#ENV*{orig}|replace{.*-,''}}
+		<div id="bouton_retour">
+			<a href="[(#URL_PAGE{voirsujet}|parametre_url{id_forum,[(#GET{idforum})]})]#forum#GET{msg}">
+			<span><:spipbb:retour_forum:></span>
+			</a>
+		</div>
+		<p class="space_5"></p>
+		]
+
+		<table class="spipforum" id="article_forum">
+		<tr>
+	  		<th colspan="2"><:spipbb:message_s:></th>
+		</tr>
+		[(#REM) c: 1/12/8 report b_b : un peu lourd mais le critère {plat} déconne avec {id_secteur}]
+		<BOUCLE_s(ARTICLES){id_secteur=#ID_RUBRIQUE}>
+		<BOUCLE_a(FORUMS){doublons messages}{plat}{id_article} /> 
+		</BOUCLE_s>
+
+		<BOUCLE_liste_mess(FORUMS){id_auteur}{!doublons messages}{plat}{!par date}{pagination #CONFIG{spipbb/fixlimit}}>
+
+		<tr class="inter entete_sujet">
+			<td id="forum#ID_FORUM" colspan="2">
+				<span class="text_nom">
+				<B_auteurp>
+				[(#REM) c.23/12/7 on passe par la page profile]
+				<BOUCLE_auteurp(AUTEURS){id_auteur}{tout}>
+					<a
+					[(#SPIPBB{annuaire_forum}|!={'non'}|?{' ',''})
+					 href="[(#URL_PAGE{profile}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_article,#ID_ARTICLE})]"
+					]
+					>#NOM</a>
+				</BOUCLE_auteurp>
+
+				<BOUCLE_modo2(AUTEURS){id_article}{id_auteur}>
+					[(#REM) set id_auteur modo , en attendant requete sur admin restreint ]
+					#SET{modo,#ID_AUTEUR}
+				</BOUCLE_modo2>
+
+				</B_auteurp>
+					[(#NOM|sinon{<:spipbb:anonyme:>})]
+				<//B_auteurp>
+				</span>
+				<span class="text_titre"><:spipbb:en_rep_sujet_:><a href="[(#URL_PAGE{voirsujet}|parametre_url{id_forum,#ID_FORUM})]">#TITRE</a></span>
+			</td>
+		</tr>
+		<tr class="ligne_sujet">
+			<td class="aff_avatar" rowspan="2">
+				[(#AFFICHE_AVATAR|image_reduire{#CONFIG{'spipbb/taille_avatar_suj'}})]
+
+				[(#ID_AUTEUR|=={#GET{modo}}|?{' ',''})<p class="modo" title="<:spipbb:moderateur:>"></p>]
+
+				[(#REM) bouton alerter abus ... !]
+				[(#CONFIG{'spipbb/affiche_bouton_abus'}|=={'oui'}|?{' ',''})
+				<div class="bouton_alerter">
+					<a href="[(#URL_PAGE{contact_auteur}|parametre_url{id_auteur,1}|parametre_url{id_article,#ID_ARTICLE}|parametre_url{alerter,oui}|parametre_url{orig,#ID_THREAD-#ID_FORUM})]" title="<:spipbb:alerter_abus:>">&nbsp;</a>
+				</div>
+				]
+			</td>
+			<td class="date_sujet">
+
+       			<span><:spipbb:poster_date_:>[(#DATE|nom_jour)] [(#DATE|affdate)][ - (#DATE|heures)]:[(#DATE|minutes)]</span>
+        	</td>
+        </tr>
+		<tr class="ligne_sujet">
+        	<td>
+				[(#TEXTE|lignes_longues|smileys)]
+
+				[(#REM) signature auteur ]
+				[<p class="signature">(#SIGNATURE_POST)</p>]
+
+				[
+				<p class="space_10"></p>
+				<a class="lien_propose" href="#URL_SITE">(#NOM_SITE)</a>
+				]
+			</td>
+		</tr>
+
+		</BOUCLE_liste_mess>
+		<tr class="pagination">
+			<td colspan="2">
+			#GRAND_TOTAL
+			[(#GRAND_TOTAL|>{1}|?{<:spipbb:pagine_post_s:>,<:spipbb:pagine_post_:>})]
+			[<:spipbb:pagine_page_:>(#PAGINATION{page_forum})]
+			</td>
+		</tr>
+		</B_liste_mess>
+
+		</table>
+
+	<INCLURE{fond=inc_piedforum}{id_rubrique}{id_article}>
+
+</BOUCLE_aut>

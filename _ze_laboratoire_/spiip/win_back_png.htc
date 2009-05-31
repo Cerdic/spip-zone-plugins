@@ -1,0 +1,28 @@
+<public:component>
+<public:attach event="onpropertychange" onevent="propertyChanged()" />
+<script>
+
+var supported = /MSIE (5\.5)|[6789]/.test(navigator.userAgent) && navigator.platform == "Win32";
+
+if (supported) fnFixPng();
+
+function PropertyChanged() {
+	if (event.propertyName == "style.backgroundImage") {
+		if (!element.currentStyle.backgroundImage.match(/x\.gif/i)) {
+			var bg	= element.currentStyle.backgroundImage;
+			var src = bg.substring(5,bg.length-2);
+			element.filters.item(0).src = src;
+			element.style.backgroundImage = "url(x.gif)";
+		}
+	}
+}
+	
+function fnFixPng() {
+	var bg	= element.currentStyle.backgroundImage;
+	var src = bg.substring(5,bg.length-2);
+	element.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='" + src + "',sizingMethod='crop')";
+	element.style.backgroundImage = "url(x.gif)";
+}
+
+</script>
+</public:component>

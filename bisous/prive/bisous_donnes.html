@@ -1,0 +1,15 @@
+<B_donneur>
+
+<BOUCLE_donneur(BISOUS){id_donneur=#ENV{id_auteur}}{tout}{"<br />"}{par id_receveur}>
+
+	
+	<BOUCLE_receveurs(AUTEURS){id_auteur=#ID_RECEVEUR}{tout}>
+            [<a href="./?exec=auteur_infos&id_auteur=#ID_AUTEUR">(#NOM|unique)</a>
+            [((#INCLURE{fond=noisettes/total_bisous}{id_donneur=#ENV{id_auteur}}{id_receveur=#ID_RECEVEUR}))]
+            ]
+	</BOUCLE_receveurs>
+
+
+</BOUCLE_donneur>
+<:bisous:aucun_bisou_donne:>
+<//B_donneur>

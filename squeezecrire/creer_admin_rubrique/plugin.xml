@@ -1,0 +1,24 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	creer admin rubrique
+	</nom>
+	<auteur><!-- Auteur du plugin -->
+	Bruno Bergot
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	dev
+	</etat>
+	<description>
+		<p>Formulaire qui permet de cr&eacute;er de l'espace public : 1 rubrique, 1 auteur admininstrateur de la rubrique et un article dans la rubrique.</p>
+		<p>S'ins&egrave;re dans les squelettes &agrave; l'aide de la balise #CREER_ADMIN_RUBRIQUE</p>
+	</description>
+	<prefix>
+	creer_admin_rubrique
+	</prefix>
+	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id='cfg' version='[1.0.6;]' />
+	<chemin dir='' />
+</plugin>

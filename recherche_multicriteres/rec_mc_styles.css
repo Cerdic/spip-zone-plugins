@@ -1,0 +1,67 @@
+div.conf form {
+	padding: 10px 20px;background: lavender;color: midnightblue;
+}
+div.conf form p{
+	margin: 1em 0;
+}
+div.conf form p.double {
+	/* Empêcher le dépassement des flottants */
+	overflow: hidden;
+	width: 100%;
+}
+div.conf form p.double label {
+	overflow: hidden;
+	float: left;
+	width: 30%;
+	text-align: right;
+	font-weight: bold;
+	cursor: pointer;
+}
+div.conf form p.double label span.info {
+	display: block;
+	margin-top: .2em;
+	font-size: .8em;
+	font-weight: normal;
+	cursor: default;
+}
+div.conf form p.double input,
+div.conf form p.double textarea {
+	display: block;
+	margin-left: 32%;
+	width: 50%;
+	border: solid 1px midnightblue;
+	padding: 2px 4px;
+}
+div.conf form p.double textarea {
+	padding: 2px 0 0 4px;
+	width: 65%;
+	height: 6em;
+}
+div.conf form p.simple {
+	margin-left: 32%;
+}
+#form_cfg_rec_mc fieldset {
+-moz-border-radius:8px;
+margin-bottom:.5em;
+background-color:#f4f4f4;
+}
+#form_cfg_rec_mc legend {
+font-weight:bold;
+}
+#form_cfg_rec_mc ul {
+margin-left:0;
+padding-left:0;
+list-style:none;
+}
+#form_cfg_rec_mc li {
+border-bottom:1px solid #ccc;
+margin:.1em .5em .5em;
+padding:.3em;
+}
+#form_cfg_rec_mc ul .labels_cfg_rec_mc {
+margin:.3em 0 .3em 3em;
+}
+#form_cfg_rec_mc ul .labels_cfg_rec_mc label {
+cursor:pointer;
+padding-left:.5em;
+}

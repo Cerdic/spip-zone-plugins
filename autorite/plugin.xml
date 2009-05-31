@@ -1,0 +1,42 @@
+<plugin>
+	<nom>
+		<multi>
+      Autorit&#233;
+      [it]Autorit&#224;
+    </multi>
+	</nom>
+	<auteur>
+		<multi>
+    &#169; Fil &#38; James 2007 - Distribu&#233; sous licence GNU/LGPL
+    [it] &#169; Fil &#38; James 2007 - Distribuito sotto licenza GNU/LGPL
+    </multi>
+	</auteur>
+	<version>
+		0.9.2
+	</version>
+	<etat>
+		test
+	</etat>
+	<description>
+		<multi>
+    Quelques r&#233;glages d'autorisations (ajoutez les v&#244;tres !)
+		<h4><a href="?exec=cfg&amp;cfg=autorite">Configuration</a></h4>
+		[it]
+		Qualche esempio di impostazioni d'autorizzazione (aggiungete le vostre!)
+		<h4><a href="?exec=cfg&amp;cfg=autorite">Configurazione</a></h4>
+		</multi>
+	</description>
+	<lien>
+    [<multi>Documentation sur SPIP Contrib'[it]Documentazione su SPIP Contrib'</multi>->http://www.spip-contrib.net/-Autorite-],
+	</lien>
+	<icon>illuminati-128.png</icon>
+	<prefix>
+		  Autorite
+	</prefix>
+	<options>
+	    illuminati_options.php
+	</options>
+	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id='cfg' version='[1.5.0;]' />
+
+</plugin>

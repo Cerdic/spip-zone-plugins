@@ -1,0 +1,56 @@
+DIV.corps_calendrier{
+
+}
+
+DIV.boite_hors_mois{
+	
+}
+
+DIV.boite_dans_mois{
+
+}
+
+SPAN.mois_precedent{
+
+}
+
+SPAN.mois_courant{
+
+}
+
+SPAN.mois_suivant{
+
+}
+
+DIV.titre_calendrier{
+	text-align: center;
+}
+
+DIV.titre_colone{
+	margin-top: 5px;
+	font-size: 11px;
+	float: left;
+	width: 14%;
+	font-weight: bold;
+	text-align: center;
+}
+
+DIV.boite_jour{
+	height: 20px;
+	width: 14%;
+	float: left;
+	text-align: center;
+	
+}
+
+DIV.case_remplie{
+	background-color: #ccc;
+}
+
+DIV.case_pas_remplie{
+	
+}
+
+DIV.info_evenement{
+	display: none;
+}

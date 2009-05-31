@@ -1,0 +1,9 @@
+#CACHE{0}
+#ZIP_INIT{zezetest.zip}
+<BOUCLE_docrub(DOCUMENTS) {id_rubrique}>
+[(#URL_DOCUMENT|zip_ajout)]
+</BOUCLE_docrub>
+<BOUCLE_docart(DOCUMENTS) {id_article}>
+[(#URL_DOCUMENT|zip_ajout)]
+</BOUCLE_docart>
+#HTTP_HEADER{Location:#URL_SPIP/#ZIP_EXPORT}

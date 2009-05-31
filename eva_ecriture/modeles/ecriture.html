@@ -1,0 +1,25 @@
+[(#REM)modele pour spip par corrobori & kent1]
+[(#REM)insérer une image typo
+	<template><ecriture1|texte></template>
+]
+[(#REM)
+	Modele <ecriture1|texte> : insérer une image typo
+	#MODELE{ecriture}
+
+	Pour la notation rel="tag" voir
+	<http://microformats.org/wiki/rel-tag-fr>
+]
+
+<div [ style='float:(#ENV{align}|match{left|right});']>
+
+			[(#ENV{texte}|image_typo{
+				[police=(#ENV**{police})],
+				[taille=(#ENV**{taille})],
+				[couleur=(#ENV**{couleur})],
+				[largeur=(#ENV**{largeur})],
+				[align=(#ENV**{align})],
+				[hauteur_ligne=(#ENV**{hauteur_ligne})],
+				[padding=(#ENV**{padding})]
+			)}]
+
+</div>

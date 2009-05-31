@@ -1,0 +1,246 @@
+#CACHE{0}
+<BOUCLE_proposer (RUBRIQUES) {id_rubrique=#ENV{id_formappel}}>
+<script type="text/javascript">
+//<![CDATA[
+var formes = new Array();
+var continentes = new Array();
+var countries = new Array();
+var towns = new Array();
+var structures = new Array();
+var mastertoutesformes = new Array();
+var mastertouscontinents = new Array();
+var mastertouspays = new Array();
+var mastertoutesvilles = new Array();
+var mastertoutesstructures = new Array();
+
+function forme(id_forme, nom){
+	this.id_forme = id_forme;
+	this.nom = nom;
+}
+
+function continente(id_continent, nom, touscontinents){
+	this.id_continent = id_continent;
+	this.nom = nom;
+	this.touscontinents = touscontinents;
+}
+
+function countrie(id_pays, nom, id_continent, continent, touspays){
+	this.id_pays = id_pays;
+	this.nom = nom;
+	this.id_continent = id_continent;
+	this.continent = continent;
+	this.touspays = touspays;
+}
+
+function town(id_ville, nom, id_pays, pays, toutesvilles){
+	this.id_ville = id_ville;
+	this.nom = nom;
+	this.id_pays = id_pays;
+	this.pays = pays;
+	this.toutesvilles = toutesvilles;
+}
+
+function structure(id_structure, nom, id_ville, ville, toutesstructures){
+	this.id_structure = id_structure;
+	this.nom = nom;
+	this.id_ville =id_ville,
+	this.ville = ville;
+	this.toutesstructures = toutesstructures;
+}
+
+function arrayContains(array, string) {
+	var toReturn = false;
+	for(var i=0; i < array.length; i++){
+		if(array[i].nom == string){
+			toReturn = true;
+			break;
+		}
+	}
+	return toReturn;
+}
+
+function setforme(){
+	$("#formes").empty().append('<option><:formulairearticle:forme:><\/option>');
+	for (var i=0; i < formes.length; i++){
+		new_option = "<option value="+formes[i].id_forme+">"+formes[i].nom+"<\/option>";
+		$("#formes").append(new_option);
+	}
+	$("#formes option").eq(0).attr({selected : "selected"}).val("");
+}
+
+function setcontinent(){
+	$("#pays,#villes,#structures").hide();
+	$("#lespays, #lesvilles, #lesstructures").empty();
+	$("#lescontinents").empty().append('<option><:continents:><\/option>');
+	for (var i=0; i < continentes.length; i++){
+		new_option = "<option value="+continentes[i].id_continent+">"+continentes[i].nom+"<\/option>";
+		$("#lescontinents").append(new_option);
+	}
+	$("#lescontinents option").eq(0).attr({selected : "selected"}).val("");
+}
+
+function showpaysByContinent(continent){
+	$("#lesvilles, #lesstructures").empty();
+	$("#villes, #structures").fadeOut();
+	$("#lespays").empty().append('<option><:payss:><\/option>');
+	for(var i = 0; i < countries.length; i++){
+	if (countries[i].id_continent == continent) {
+		new_option = "<option value="+countries[i].id_pays+">"+countries[i].nom+"<\/option>";
+		$("#lespays").append(new_option);
+	}
+	}
+	$("#lespays option").eq(0).attr({selected : "selected"}).val("");
+	$("#pays").fadeIn();
+}
+
+function showvillesByPays(pays){
+	$("#lesstructures").empty();
+	$("#structures").hide();
+	$("#lesvilles").empty().append('<option><:villes:><\/option>');
+	for(var i = 0; i < towns.length; i++){
+	if (towns[i].id_pays == pays) {
+		new_option = "<option value="+towns[i].id_ville+">"+towns[i].nom+"<\/option>";
+		$("#lesvilles").append(new_option);
+	}
+	}
+	$("#lesvilles option").eq(0).attr({selected : "selected"}).val("");
+	$("#villes").fadeIn();
+}
+
+function showstructuresByVille(ville){
+	$("#lesstructures").empty().append('<option><:structures:><\/option>');
+	for(var i = 0; i < structures.length; i++){
+	if (structures[i].id_ville == ville) {
+		new_option = "<option value="+structures[i].id_structure+">"+structures[i].nom+"<\/option>";
+		$("#lesstructures").append(new_option);
+	}
+	}
+	$("#lesstructures option").eq(0).attr({selected : "selected"}).val("");
+	$("#structures").fadeIn();
+}
+
+function showcontinents(){
+	var html = "";
+		for(var i = 0; i < continentes.length; i++){
+		html += "<option value=\""+continentes[i].id_continent+"\">"+continentes[i].nom+"<\/option>";
+		}
+	return html;
+}
+
+function showpays(){
+	var html = "";
+		for(var i = 0; i < countries.length; i++){
+		html += "<option value=\""+countries[i].id_pays+"\">"+countries[i].nom+"<\/option>";
+		}
+	return html;
+}
+
+function showvilles(pays){
+	if (pays == "Choisir") {
+	var aucun = "<option>Aucun<\/option>";
+	set_div_text("ville", aucun);
+	}
+	else {
+		var deschtml = "<option>Aucune<\/option>";
+		for(var i = 0; i < towns.length; i++){
+		if (arrayContains(towns[i].toutesvilles, pays)) {
+		deschtml += "<option value=\""+villes[i].id_ville+"\">"+villes[i].nom+"<\/option>";
+		}
+	}
+	set_div_text("toutesville", deschtml);
+	}
+}
+
+function whichContinent(){
+	return $("#lescontinents option:selected").val();
+}
+
+function whichPays(){
+	return $("#lespays option:selected").val();
+}
+
+function whichVille(){
+	return $("#lesvilles option:selected").val();
+}
+
+function agenda(){
+	var touscontinents = showcontinents();
+	set_div_text("touscontinents", touscontinents);
+}
+
+function loadarrays(){
+$.get("[(#URL_PAGE{backend_mots_appels})]", function(data) {
+
+	var xmlformes = data.documentElement.getElementsByTagName("forme");
+	for (var i = 0; i < xmlformes.length; i++) {
+		var id_forme = xmlformes[i].getAttribute("id_forme");
+		var nom = xmlformes[i].getAttribute("nom");
+		var newforme = new forme(id_forme, nom);
+		if( !arrayContains(formes, nom) ){
+			formes.push(newforme);
+		}
+		
+	}
+	var xmlcontinentes = data.documentElement.getElementsByTagName("continent");
+	for (var i = 0; i < xmlcontinentes.length; i++) {
+		var id_continent = xmlcontinentes[i].getAttribute("id_continent");
+		var nom = xmlcontinentes[i].getAttribute("nom");
+		var newcontinente = new continente(id_continent, nom);
+		if( !arrayContains(continentes, nom) ){
+			continentes.push(newcontinente);
+		}
+	}
+	var xmlcountries = data.documentElement.getElementsByTagName("pays");
+	for (var i = 0; i < xmlcountries.length; i++) {
+		var id_pays = xmlcountries[i].getAttribute("id_pays");
+		var nom = xmlcountries[i].getAttribute("nom");
+		var id_continent = xmlcountries[i].getAttribute("id_continent");
+		var continent = xmlcountries[i].getAttribute("continent");
+		var newcountrie = new countrie(id_pays, nom, id_continent, continent);
+		if( !arrayContains(countries, nom) ){
+			countries.push(newcountrie);
+		}
+	}
+	var xmltowns = data.documentElement.getElementsByTagName("ville");
+	for (var i = 0; i < xmltowns.length; i++) {
+		var id_ville = xmltowns[i].getAttribute("id_ville");
+		var nom = xmltowns[i].getAttribute("nom");
+		var id_pays = xmltowns[i].getAttribute("id_pays");
+		var pays = xmltowns[i].getAttribute("pays");
+		var newville = new town(id_ville, nom, id_pays, pays);
+		if( !arrayContains(towns, nom) ){
+			towns.push(newville);
+		}
+	}
+	var xmlstructures = data.documentElement.getElementsByTagName("structure");
+	for (var i = 0; i < xmlstructures.length; i++) {
+		var id_structure = xmlstructures[i].getAttribute("id_structure");
+		var nom = xmlstructures[i].getAttribute("nom");
+		var id_ville = xmlstructures[i].getAttribute("id_ville");
+		var ville = xmlstructures[i].getAttribute("ville");
+		var toutesstructures = (xmlstructures[i].getAttribute("nom")).split(", ");
+		var newstructure = new structure(id_structure, nom, id_ville, ville);
+		if( !arrayContains(structures, nom) ){
+			structures.push(newstructure);
+		}
+	}
+});
+}
+//]]>
+</script>
+
+<script type="text/javascript">//<![CDATA[
+	$(document).ready(function() {
+	loadarrays();
+	if ($('#structure option:selected').val() == null){
+		$('#pays,#villes,#structures').hide();
+	}
+	else if ($('#structure option:selected').val() != null){
+		$('#pays,#villes,#structures').show();
+	}
+	});
+//]]>/*
+</script>
+
+<div>#FORMULAIRE_APPEL</div>
+</BOUCLE_proposer>

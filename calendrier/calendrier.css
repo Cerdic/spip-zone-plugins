@@ -1,0 +1,51 @@
+table.calendrier{
+	width: 100%;
+	font-size: 0.8em;
+	text-align: center;
+	margin: 0 auto;
+	border-collapse: collapse;
+}
+
+table.calendrier caption{
+	margin: 0 auto;
+}
+
+table.calendrier th{
+	color: #493;
+	background: transparent;
+}
+
+table.calendrier td{
+	width: 14%;
+	line-height: 2em;
+	border: 1px solid #EEE;
+}
+
+table.calendrier td a{
+	display: block;
+	background: #EFA;
+	color: #493;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+table.calendrier td a:hover{
+	background: #DBB8DC;
+	color: #636;
+}
+
+table.calendrier td.aujourdhui{
+	border: 1px solid #493;
+}
+
+table.calendrier td.mois_precedent{
+	color: #EFA;
+}
+
+table.calendrier td.mois_suivant{
+	color: #EFA;
+}
+
+table.calendrier td small{
+	font-size: 100%;
+}

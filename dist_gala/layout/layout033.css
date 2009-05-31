@@ -1,0 +1,6 @@
+div#top h1{height:80px;line-height:80px;margin:0;padding-left:10px;}
+div#page{width:700px;margin:0 auto}
+div#contenu{float:left;width:500px}
+div#navigation{float:right;width:200px}
+div#extra{float:right;clear:right;width:200px}
+div#pied{clear:both;width:100%}

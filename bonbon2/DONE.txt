@@ -1,0 +1,55 @@
+Ce qui a été fait avec «Bonbon !»
+
+1.9 Passage préliminaire à Spip 1.9
+-----------------------------------
+- Passage à la version 1.9 de Spip
+- Mise en plug-in
+- Utilisation de ui.datepicker (qui utilise jquery) à la place de calendar popup (=élimination d'un blob non GPL: calendar popup n'était pas redistribuable, ui.datepicker est GPL).
+- Quelques corrections (les classes, matières, profs ne sont affichés que s'ils mènent vers des entrées du CDT)
+- «Bonbon !» est sur la zone (svn) en test.
+- La pagination est désormais celle de Spip>1.9 (à la place de la pagination nulle qui avait été mise en place)
+- Optimisations:
+		-* utilisation de {id_auteur ?} à la place de {id_auteur==#ENV{prof,.}} (merci BoOz).
+		-* utilisation de {titre_mot ?} pour les groupes ce qui élimine la dernière REGEXP. Donc il n'y a plus de REGEXP MySQL!
+		-* Une erreur de design dans le mélange du PHP et des boucles faisait que toutes la requêtes (même les inutiles) étaient exécutées quelque soit le contexte (en effet, le phraseur de SPIP transforme toutes les boucles de la page en html AVANT que le code php avec des if ne s'exécute.). C'est résolu soit grâce à l'utilisation de noisettes dont l'inculsion est conditionnée par une balise filtrée par un test. Soit par l'utilisation de boucles "fictives" conditionnelles. L'utilisation intensives de BOUCLES_CONDITIONNELLES évitent le php et donc permettent de mieux gérer le cache.
+		-* Début de déPHPisation (remplacement du PHP dans les squelettes au maxi, par des boucles/balises et éventuellement des fonctions définies dans le fichier idoine). Exemple: 0% de php dans le squelette d'installation du plugin ! :-)
+		-* Révision de toutes les valeurs de #CACHE (les pages rares sont mises en cache pour 30 jours, les listes de fiches pour 12h, les fiches pour une semaine) -> moins d'accès à la base de donnée.
+		-* Rajout des var_mode=calcul pour que l'affichage des profs soit rafraichi
+		-* Rajouts de fiches pour les classes et les profs qui servent grâce à des mots-clés de pseudo-jointures. Elles permettent d'éviter des requêtes sur l'ensemble des séances qui peuvent devenir grosses quand le nombre d'article est élevé.
+		-* par défaut seules 10 fiches sont affichées (il faut changer le paramètre GET pour que ça change, sachant que le formulaire ne contient plus ce choix) -> allègement de la durée d'affichage des pages.
+- Gros bug des guillemets (corrigé ?)
+- Des corrections de bugs -très- divers... (voir SVN)
+- Un nouveau filtre donne l'année scolaire et simplifie pas mal les choses.
+- Utilisation de #SESSION{id_auteur} plus souvent que {id_auteur} ou #ENV{id_auteur}
+- Des améliorations dans l'interface de saisie:
+						-*Seules les matières et classes du prof sont affichées dans l'interface de saisie.
+					 	-* matière et classes sont préslecetionnés.
+						-* la classe est -plus ou moins- préremplie quand on clique sur saisir une séance depuis l'accueil ou l'en-tête (ça devrait quand même fonctionner dans la plupart des cas)
+						-* au dessus du formulaire de saisie il y a un rappel du contexte...
+						-* après la saisie, une fois qu'on a confirmé l'enregistrement, on peut voir la séance et mettre des pièces jointes dans une pop-up. (on peut même la modifier via les crayons).
+						-* c'est plus joli avec des icônes !
+						-* vérification que les dates en sont à la phase de prévisualisation
+						-* etc...
+- Fonctionnalité fondamentale: les documents joints sont implémentés dans les séances et les devoirs !!!. On peut définir à partir de quelle date ils seront visibles (pratique pour les contrôles donnés à plusieurs classes).
+- Fonctionalité majeure: On peut dupliquer une séance déjà saisie ! (pour copier coller ce qui a été fait avec une classe sur une autre)... Les doucments sont dupliqués aussi avec (comme docs liés, c'est à dire sans prendre de place sur le disque dur). D'ailleurs ça a pas été facile :-)
+- Fonctionnalité majeure: intégrations des «crayons». Quand le plugin «Les crayons» est présent on peut modifier le contenu des séances et des devoirs directement comme dans un Wiki.
+- Fonctionnalité importante: possibilité de supprimer des séances.
+- Pour éviter de surcharger le serveur avec des doublons de documents (du genre poly distribué à 10 classes), il est possible (et vivement conseillé) d'associer un doc - joint d'un séance/devoir à une autre fiche (en fait l'ID_DOCUMENT est copié dans le SURTITRE, et Bonbon sait l'y retrouver).
+- Mise en place d'un pop-up qui permet de modifier les docs joints aux séances et devoirs (changer le fichier, le titre, la date et même le désassocier à la fiche quand il a été copié (s'il est dans le surtitre)).
+- Les devoirs sont désormais affichés in-extenso avec les séances (et plus simplement pour quand ils sont à faire).
+- Les séances peuvent être affichées dans l'ordre chronologique et chronologique inverse.
+- petites corrections autour des sens chronologiques
+- Externalisation de la gestion de l'affichage d'une séance dans une noisette. Ce qui permet: de préparer les changements d'aspect, d'afficher la séance juste après sa saisie, d'avoir un affichage correct de la séance depuis la liste des devoirs.
+- Abandon de l'affichage des séances seules (sans les devoirs)... Quel est l'intérêt ?
+- Gros changements dans l'affichage: le cahier de texte s'affiche désormais plus comme un cahier (avec des onglet pour les classes et les matières). Par contre on ne peut plus avoir différentes matières et/ou classes sur la même page/requête (quel intérêt ?). Celà optimise un peu les requêtes SQL (moins de REGXP) et rend je l'espère l'affichage plus pratique pour les élèves/parents. Des astcuces CSS permettent un bon affichage sous IE...
+- Bonbon utilise la barre typographique de Spip (qui peut être la v2 si le plugin est installé) ! (merci Stephane)
+- Un tableau de bord sur la page d'accueil permet à chaque prof de savoir en un clin d'½il où il en est (dernières fiches publiées pour chaque classe et lien direct vers la saisie pour la classe concernée)... Très pratique pour savoir où on en est quand on a beaucoup de classes (et du retard... :-)). Ce tableau de bord affiche aussi les séances qui ont un problème de date.
+- limitation des la selection des séances à l'année en cours, à moins que ce ne soit explictement mentionné dans les paramètres GET.
+- réécriture complète de la page d'installation et de mise à jour qui était vraiment nulle. Désormais elle ne contient plus de PHP.
+- lors de la saisie, le premier devoir vide est le dernier (évite l'existance des dévoirs vides,évite aussi l'affichage des devoirs vides...). On peut aussi retirer le dernier devoir entré.
+
+
+1.0 Première sortie de Bonbon
+-----------------------------
+Ça marche et c'est publié là: http://www.spip-contrib.net/spip.php?id_article=2301
+ 

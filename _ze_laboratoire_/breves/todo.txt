@@ -1,0 +1,124 @@
+Todo : tout est à faire :)
+
+
+Quelques problèmes :
+
+- les forums qui ont de nombreuses utilisations de id_breve
+  Il faut pour réaliser le plugin Breves refaire totalement la gestion des 
+  forums, avec des forums portant sur des couples (objet, id_objet)
+  
+- les documents qui font des jointures sur les brèves dans la boucle DOCUMENTS
+  qu'il semble difficile à prendre en compte en dehors de la boucle, le pipeline
+  pre_boucle arrivant avant l'ajout de ces jointures (avant les appels aux fonctions boucle_)
+  
+- le nommage 'id_rubrique' des brèves qui indiquent uniquement un secteur semble poser des problèmes au core
+  qui contient pas mal d'exceptions pour gérer cette chose
+  il faudrait certainement avoir "id_rubrique"+"id_secteur" séparés
+  
+- des appels aux breves sont présent dans les paramètrages et la compilation de SPIP;
+  il faut voir comment les rendre génériques en douceur.
+  
+- les jeux d'URL qu'il faut pouvoir étendre à des objets non écrit en dur...
+
+- et plein d'autres chose que j'ai pas encore regardé !
+
+
+
+Quelques éléments à effacer du core et à prendre en compte dans ce plugin (comment?) :
+Voir aussi les fichiers 
+public/parametrer, 
+public/compiler, 
+public/quete, 
+public/criteres, 
+urls/*
+
+
+------------------------------
+forum.html
+--------------
+
+Dans la hierarchie, pour indiquer que c'est une breve :
+
+            <BOUCLE_contexte_breve(BREVES) {id_breve}>
+            <BOUCLE_ariane_breve(RUBRIQUES) {id_rubrique}>
+            &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a>
+            </BOUCLE_ariane_breve>
+            &gt; <a href="#URL_BREVE">[(#TITRE|couper{80})]</a>
+            </BOUCLE_contexte_breve>
+			
+			...
+			
+			<//B_contexte_breve>
+			
+			
+Dans div menu-article pour afficher la breve
+
+            <BOUCLE_breve(BREVES) {id_breve}>
+            [(#LOGO_BREVE|image_reduire{150,100})]
+            <h3><a href="#URL_BREVE">#TITRE</a></h3>
+            <small>[(#DATE|affdate_jourcourt)]</small>
+            [<div class="introduction">(#INTRODUCTION)</div>]
+            </BOUCLE_breve>
+			
+
+-----------------------------
+inc-forum.html
+----------------
+
+Les critères {id_breve?} dans les boucles decompte et forum.
+
+
+-------------------------------
+formulaires/administration.html
+-----------------
+
+Le lien vers la breve (après le lien vers l'article) :
+
+[
+	<a href="[(#ENV{voir_breve})]" class="spip-admin-boutons"
+		id="voir_breve"><:admin_modifier_breve:>
+			((#ENV{id_breve}))</a>]
+
+
+----------------------------------
+base/serial.php
+-----------------
+
+clé optimal sur spip_forum : en moins :  "id_breve,"
+
+
+----------------------------------
+base/convert_utf8.php
+--------------------
+
+Dans les tables à convertir  ($tables_a_convertir) :
+		'spip_breves' => 'titre',
+
+
+----------------------------------
+public/assembler.php
+----------------------
+
+Dans la fonction message_erreur_404, 
+		else if (isset($GLOBALS['id_breve']))
+		$erreur = 'public:aucune_breve';
+		
+		
+		
+---------------------------------
+public/balises.php
+-----------------
+
+Dans balise_INTRODUCTION_dist, le switch qui indique la taille :
+			case 'breves':
+				$longueur = '300';
+				break;
+				
+Dans balise_PARAMETRES_FORUM_dist :
+		case 'breves':
+			$c = '"id_breve=".' . champ_sql('id_breve', $p);
+			if ($lang) $lang = champ_sql('lang', $p);
+			break;
+
++Retrait de breve dans $liste_table
+			$liste_table = array ("article","breve","rubrique","syndic","forum");

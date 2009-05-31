@@ -1,0 +1,14 @@
+
+<form action=”https://www.paypal.com/fr/cgi-bin/webscr” method=”post”>
+	<input type=”hidden” name=”cmd” value=”_cart”>
+	<input type=”hidden” name=”upload” value=”1”>
+	<input type=”hidden” name=”currency_code” value=”1”>
+	<input type=”hidden” name=”business” value=”seller@designerfotos.com”>
+	<BOUCLE_LePanier(SPIP_ECHOPPE_PANIERS){token_panier = #SESSION{echoppe_token_panier}}>
+		<BOUCLE_LeProduit(SPIP_ECHOPPE_PRODUITS_DESCRIPTIONS spip_echoppe_produits){statut = publie}{id_produit}>
+		<input type=”hidden” name=”#_LePanier:COMPTEUR_BOUCLE” value=”#TITRE”>
+		<input type=”hidden” name=”amount_1” value=”#PRIX_HTVA”>
+		</BOUCLE_LeProduit>
+	</BOUCLE_LePanier>
+	<input type=”submit” value=”PayPal”>
+</form>

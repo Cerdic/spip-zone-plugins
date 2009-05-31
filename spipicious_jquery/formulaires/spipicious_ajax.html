@@ -1,0 +1,40 @@
+<div class="formulaire_spip ajax" id="formulaire_spipicious[_(#ENV{type})][_(#ENV{id_objet})]">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'>
+		<div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<fieldset>
+			<legend><:spipicious:vos_tags:></legend>
+			<ul>
+				<li id="mesmots">
+				[(#ENV{id_document}|oui)<INCLURE{fond=spipicious_del_document}{id_document=#ENV{id_document}}>]
+				[(#ENV{id_article}|oui)<INCLURE{fond=spipicious_del_article}{id_article=#ENV{id_article}}>]
+				[(#ENV{id_rubrique}|oui)<INCLURE{fond=spipicious_del_rubrique}{id_rubrique=#ENV{id_rubrique}}>]
+				[(#ENV{id_syndic}|oui)<INCLURE{fond=spipicious_del_syndic}{id_syndic=#ENV{id_syndic}}>]
+				[(#ENV{id_evenement}|oui)<INCLURE{fond=spipicious_del_evenement}{id_evenement=#ENV{id_evenement}}>]
+				</li>
+			</ul>
+		</fieldset>
+		<fieldset>
+		<legend><:spipicious:add_tags:></legend>
+		<ul>
+			<li>
+				<label for="spipicious_tags"><:spipicious:tags:></label>
+				<input type="text" class="text" id="spipicious_tags" name="spipicious_tags" size="25" value="" /><br />
+			</li>
+		</ul>
+		</fieldset>
+		<p class="boutons">
+			<input type="hidden" name="spipicious_id" id="spipicious_id" value="#ENV{id_objet}" />
+			<input type="hidden" name="spipicious_type" id="spipicious_type" value="#ENV{type}" />
+			<input type="hidden" name="remove_tag" id="remove_tag" value="" />
+			<input type="submit" name="add_tags" value="<:bouton_valider:>" class="submit" />
+		</p>
+		</div>
+	</form>]
+</div>

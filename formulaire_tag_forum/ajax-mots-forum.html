@@ -1,0 +1,47 @@
+#HTTP_HEADER{Content-Type:text/x-json}
+#CACHE{3600}
+//DEBUG
+//titre: '[(#ENV{titre}|dernier_quote)]'<br>
+//debut: '[(#ENV{titre}|tout_debut{#ENV{id_groupe,1}})]'<br>
+//fin: '[(#ENV{titre}|titre_fin{#ENV{id_groupe,1}})]'<br>
+//cnt: [(#ENV{titre}|compte_having)]<br>
+//id_groupe: [(#ENV{id_groupe,1})]
+
+//tout ça est tres beta
+//retourne un tableau de mots qui sont associés aux mêmes forums que les mots déjà tappé: suggest<BR>
+<BOUCLE_forum(FORUMS)  {titre_mot == ^(#ENV{titre}|titre_debut{#ENV{id_groupe,1}}|tags_enregexp{#ENV{id_groupe,1}})$} {id_groupe} {having (#ENV{titre}|titre_debut{#ENV{id_groupe,1}}|compte_having)}>[(#REM)
+]<BOUCLE_mots2(MOTS) {id_forum} {titre == ^(#ENV{titre}|titre_fin{#ENV{id_groupe,1}})} {titre !== ^(#ENV{titre}|titre_debut{#ENV{id_groupe,1}}|tags_enregexp{#ENV{id_groupe,1}})$} {doublons} {id_groupe}>
+</BOUCLE_mots2>[(#REM)
+]</BOUCLE_forum>
+
+<B_trouve>
+{"propositions":[
+<BOUCLE_trouve(MOTS) {!doublons} {id_groupe} {par hasard} {0,10}>
+                {"PropositionPair":{
+                                   "label":"[[(#ENV{titre}|tout_debut{#ENV{id_groupe,1}}|texte_script|tags_escape_quote) ](#TITRE|unique|seulement_tout|texte_script|tags_escape_quote)]",
+<BOUCLE_compte(FORUMS) {titre_mot == ^(#ENV{titre}|titre_debut{#ENV{id_groupe,1}}|tags_enregexp{#ENV{id_groupe,1}})$} {id_groupe} {having (#ENV{titre}|titre_debut{#ENV{id_groupe,1}}|compte_having)}> </BOUCLE_compte>
+                                   "info":"#TOTAL_BOUCLE forum"}</B_compte>
+<BOUCLE_compte_trouve(FORUMS) {id_mot}></BOUCLE_compte_trouve>"info":"#TOTAL_BOUCLE forum"}<//B_compte_trouve>
+<//B_compte>
+}
+[(#TOTAL_BOUCLE|>{#COMPTEUR_BOUCLE}|?{' ',''}}),]
+</BOUCLE_trouve>
+]}
+</B_trouve>
+</B_forum>
+
+<B_defaut>
+{"propositions":[
+<BOUCLE_defaut(MOTS) {titre == ^(#ENV{titre}|titre_fin{#ENV{id_groupe,1}}|tags_enregexp{#ENV{id_groupe,1}})} {id_groupe}  {par hasard} {0,10}>
+{"PropositionPair":{
+                   "label":"[[(#ENV{titre}|tout_debut{#ENV{id_groupe,1}}|texte_script|tags_escape_quote) ](#TITRE|unique|seulement_tout|texte_script|tags_escape_quote)]",
+<BOUCLE_compte_defaut(FORUMS) {id_mot} ></BOUCLE_compte_defaut>"info":"#TOTAL_BOUCLE forum"}<//B_compte_defaut>
+}
+[(#TOTAL_BOUCLE|>{#COMPTEUR_BOUCLE}|?{' ',''}),]
+</BOUCLE_defaut>
+]}
+</B_defaut>
+{"propositions":null}
+<//B_defaut>
+
+<//B_forum>

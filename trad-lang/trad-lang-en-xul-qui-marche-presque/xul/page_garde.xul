@@ -1,0 +1,10 @@
+
+<groupbox flex="1"> 
+  <caption label="trad-lang" />
+
+<iframe id="content-body" src="<? echo URLAPP; ?>/html/page_garde.html" flex="1" />
+
+</groupbox> 
+
+
+</window>

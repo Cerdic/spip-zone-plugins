@@ -1,0 +1,82 @@
+<B_t>
+le tableau 'tables_principales' ( #TOTAL_BOUCLE ) :
+<UL>
+<BOUCLE_t(TABLEAU){var=tables_principales}>
+	<LI> #COMPTEUR_BOUCLE #CLE => #VALEUR
+[(#AFFECTER{+PAGE,tables})#CLE]
+	<B_tt>
+	<UL>
+	<BOUCLE_tt(TABLEAU){valeur}>
+		<LI> #COMPTEUR_BOUCLE #CLE => #VALEUR
+		<B_ttt>
+		<UL>
+		<BOUCLE_ttt(TABLEAU){valeur}>
+			<LI> #COMPTEUR_BOUCLE #CLE => #VALEUR
+		</BOUCLE_ttt>
+		</UL>
+		</B_ttt>
+	</BOUCLE_tt>
+	</UL>
+	</B_tt>
+</BOUCLE_t>
+</UL>
+</B_t>
+
+<B_tables>
+extrait de tableau PAGE[tables] ( #TOTAL_BOUCLE )
+<BOUCLE_tables(TABLEAU){var=PAGE}{cle=tables}{0,15}{3/4}>
+<br>- #CLE => #VALEUR
+</BOUCLE_tables>
+
+<br><br>le tableau 'toto' :
+<B_t2>
+( #TOTAL_BOUCLE )
+<BOUCLE_t2(TABLEAU){var=toto}>
+oui
+</BOUCLE_t2>
+non
+<//B_t2>
+
+<br><br>l'entrée tables_principales['spip_tableau']['field'] :
+<B_t3>
+( #TOTAL_BOUCLE )
+<BOUCLE_t3(TABLEAU){var=tables_principales}{cle=spip_tableau}{cle=field}>
+<br>- #COMPTEUR_BOUCLE #CLE => #VALEUR
+</BOUCLE_t3>
+
+<br><br>le tableau retournée parla fonction 'toto' :
+<BOUCLE_t4(TABLEAU){fonction=toto()}>
+<br>- #COMPTEUR_BOUCLE #CLE => #VALEUR
+</BOUCLE_t4>
+
+<br><br>liste d'articles mise dans PAGE['articles']
+<br>la boucle interne n'affiche rien.
+<B_a>
+( #TOTAL_BOUCLE )
+<BOUCLE_a(ARTICLES){0,5}{","}>
+#ID_ARTICLE<BOUCLE_aff(AFFECTER){var=PAGE}{cle=articles}>#ID_ARTICLE</BOUCLE_aff>
+</BOUCLE_a>
+
+<br><br>afficher le contenu du tableau qu'on vient de générer :
+<B_res>
+( #TOTAL_BOUCLE )
+<BOUCLE_res(TABLEAU){var=PAGE}{cle=articles}{","}>
+<br> -> #VALEUR
+</BOUCLE_res>
+
+<br><br>une affectation unitaire, qui n'affiche rien :
+[des trucs avant #URL_SITE_SPIP (#AFFECTER{PAGE,bidule}) des trucs après]
+
+<br><br>et le résultat de cette affectation :
+#TABLEAU{PAGE,bidule}
+
+<br><br>une autre
+[à la place (#AFFECTER{+PAGE,machin})]
+<br><br>une dernière
+[en plus (#AFFECTER{+PAGE,machin})]
+
+<br><br>et son résultat :
+<BOUCLE_machin(TABLEAU){var=PAGE}{cle=machin}>
+<br>- #CLE : #VALEUR
+</BOUCLE_machin>
+<br>Fin.

@@ -1,0 +1,10 @@
+.editSurtitre {
+	font-size: 3;
+	font: arial,helvetica;
+	font-weight: bold;
+	display: inline;
+}
+
+.editTitre {
+	display: inline;
+}

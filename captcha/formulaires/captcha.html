@@ -1,0 +1,11 @@
+<fieldset>
+	<legend>Antispam</legend>
+<form action="#SELF" method="post">
+
+<input name="id_article" type="hidden" value="<? $id_article= substr ('#SELF', 16); echo $id_article; ?>">
+
+	<input id="txtCaptcha" type="text" name="txtCaptcha" value="" maxlength="10" size="32" /></p> 
+   
+      <p><img id="imgCaptcha" src="plugins/captcha/create_image.php" /></p><input name="submit" type="submit" value="vérifiez">
+</form>
+</fieldset>

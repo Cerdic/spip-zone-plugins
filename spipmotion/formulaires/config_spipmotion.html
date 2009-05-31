@@ -1,0 +1,65 @@
+<!-- nom=spipmotion -->
+<!-- autoriser=configurer -->
+<!-- refus=<:cfg:refus_configuration_configurer:> -->
+
+
+<div class="formulaire_spip formulaire_configurer_spipmotion">
+	
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+[(#REM) un mot pour dire que le script doit etre executable ... ]
+<?php
+	$f = substr(sprintf('%o', fileperms(_DIR_PLUGIN_SPIPMOTION.'script_bash/spipmotion.sh')), -4);
+	if ($f == 777) {}
+	else{
+		?><p class="reponse_formulaire reponse_formulaire_erreur"><:spipmotion:verifier_droits:></p><?php
+	}
+?>
+
+<form method="post" action="#ENV{action}">
+<div>
+#ACTION_FORMULAIRE{#ENV{action}}
+<ul>
+	<li class="fieldset">
+		<fieldset>
+			<h3 class="legend"><:spipmotion:options_config:></h3>
+			<ul>
+				[(#SAISIE{input,chemin}
+					{label=<:spipmotion:chemin_executable:>}
+					{defaut=/usr/local/bin/ffmpeg})]
+					
+				[(#SAISIE{input,width}
+					{label=<:spipmotion:width_video:>}
+					{defaut=480}{size=4})]
+					
+				[(#SAISIE{input,height}
+					{label=<:spipmotion:height_video:>}
+					{defaut=320}{size=4})]
+					
+				[(#SAISIE{input,bitrate}
+					{label=<:spipmotion:bitrate:>}
+					{defaut=418}{size=4})]
+					
+				[(#SAISIE{input,fps}
+					{label=<:spipmotion:framerate:>}
+					{defaut=15}{size=4})]
+					
+				[(#SAISIE{input,frequence_audio}
+					{label=<:spipmotion:frequence_audio:>}
+					{defaut=22050}{size=6})]
+					
+				[(#SAISIE{input,bitrate_audio}
+					{label=<:spipmotion:bitrate_audio:>}
+					{defaut=64}{size=4})]
+			</ul>
+		</fieldset>
+	</li>
+</ul>
+<p class="boutons">
+	<input type="submit" name="_cfg_ok" value="<:cfg:ok:>" class="submit" />
+	<input type="reset" value="<:reset:>" class="reset" />
+</p>
+</div>
+</form>
+</div>

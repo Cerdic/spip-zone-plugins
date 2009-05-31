@@ -1,0 +1,22 @@
+#CACHE{0}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG">
+<head>
+
+<title>[(#NOM_SITE_SPIP|textebrut)] <:spipbb:profil:></title>
+
+<INCLURE{fond=inc-head}>
+<INCLURE{fond=inc-forum-head}>
+
+</head>
+<body id='profile'>
+
+[(#REM) c: 2/5/8 Pour permettre le chargement de c_profile dans tous les cas !]
+#SET{id_auteur,#ENV{id_auteur}|sinon{0}}
+#SET{id_rubrique,#ENV{id_rubrique}|sinon{0}}
+#SET{id_article,#ENV{id_article}|sinon{0}}
+
+<INCLURE{fond=corps_sk/c_profile}{id_auteur=#GET{id_auteur}}{id_rubrique=#GET{id_rubrique}}{id_article=#GET{id_article}}>
+
+</body>
+</html>

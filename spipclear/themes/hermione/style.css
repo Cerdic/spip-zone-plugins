@@ -1,0 +1,612 @@
+/* ***** BEGIN LICENSE BLOCK *****
+ * This file is part of DotClear.
+ * Copyright (c) 2006 Olivier Meunier and contributors. All rights
+ * reserved.
+ *
+ * DotClear is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ * 
+ * DotClear is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with DotClear; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ *
+ * ***** END LICENSE BLOCK *****
+ /* Author : Kozlika - http://www.kozlika.org
+ 
+/* ------------------------------------------------------------------
+    PERSONNALISATIONS
+------------------------------------------------------------------- */
+@import "custom.css";
+@import "calendar.css";
+ 
+/* ------------------------------------------------------------------
+    REGLES HTML PAR DEFAUT
+------------------------------------------------------------------- */
+body {
+	margin : 0;
+	padding : 0;
+	background : lightslategray;
+	font-family: Arial, sans-serif; 
+	font-size : 78%;
+	color : #42425C;
+	line-height : 1.3em;
+}
+
+* {
+    margin : 0;
+    padding : 0;
+}
+
+hr { 
+    color: lightslategray;    background-color: lightslategray;    height: 1px;    border: 0;
+    margin-bottom : 1em;
+    }
+
+/* Hierarchie des titres */
+h2, h3 { font-weight : normal ; margin : 0 0 0.33em 0;}
+h3, h4, h5, h6 { font-weight : bold; }
+h1 { font-size : 1.66em; margin : 0; }
+h2 { font-size : 1.5em; }
+h3 { font-size : 1.2em; margin : 0.8em 0; }
+h4 { font-size : 1em; margin : 1em 0; }
+h5 { font-size : 0.9em; margin : 1.25em 0; }
+h6 { font-size : 0.8em; margin : 1.75em 0; }
+
+/* Comportement des liens */
+
+a { color : royalblue; }
+a:link { color : slategray; }
+a:visited { color : slategray; }
+a:hover, a:active, a:focus { color : steelblue; }
+
+/* Mention de la langue d'un lien */
+a[hreflang]:after {
+	content: "\0000a0[" attr(hreflang) "]";
+	color : lightslategray;
+	background : transparent;
+	font-size : 0.9em;
+}
+/* liens rss */
+a.feed {
+    padding-left : 16px;
+    background : transparent url(images/feed.gif) no-repeat;
+    }
+
+/* Regles des balises courantes */
+
+p { margin : 0 0 1em 0; } /* paragraphes */
+img { border : none; } /* images */
+form { display : block; margin : 0; padding : 0; } /* formulaires */
+q {  /* citations */
+    font-style : italic; 
+    margin : 1em; 
+}
+cite {
+    font-style : italic; 
+}
+ul, ol { margin-left : 1em; padding-left : 1em; margin-bottom : 1em; }
+sup { padding-left : 0.15em; font-size : 80%; }
+
+abbr, acronym {	border-bottom: 1px dashed lightslategray;	cursor: help;}
+blockquote {
+    margin : 1em 2em;
+    padding : 1em 1em 0 1em;
+    border : 1px dotted lightslategray;
+    background : #eeeef9;
+}
+
+/* Presentation des lignes de code */
+
+code, pre { font-family : "Courier New",monospace; font-size : 1em; color: darkslateblue;
+ }
+pre {
+    background : lavender;	margin : 0.33em auto;
+	margin-bottom : 1em;	padding : 1em;	text-align:left;
+	white-space:normal;
+	width : 90%;		/* caché pour IE 5 Mac qui sait pas faire - Ne pas supprimer cette ligne  \*/		white-space:pre;		width: 90%;		overflow : auto;		/* Fin hack Ne pas supprimer cette ligne */}
+
+/* --------------------------------------------------------
+STRUCTURE
+-------------------------------------------------------- */
+#page {
+    text-align :left;
+	width:800px;
+	margin : 0 auto;
+	background : snow url(images/top.png) no-repeat center top;
+	z-index : 100;
+	position : relative;
+    }
+#top {
+    margin : 0;
+    }
+#top h1 {
+    padding : 0;
+    margin : 0;
+    }
+#prelude {
+    margin : 0;
+    padding : 0;
+    }
+#wrapper {
+    margin : 0;
+    padding : 0;
+    }
+#main {
+    width : 100%;
+    float : right;
+    margin: 0 0 0 -214px;
+    }
+#content {
+    margin : 0 0 0 214px;
+    padding : 0 30px 0 0;
+    }
+#sidebar {
+    width : 200px;
+    float : left;
+    margin : 0;
+    padding : 0;
+    }
+#blognav, #blogextra {
+    margin : 0;
+    padding : 0 8px;
+    }
+#footer {
+    height : 2.5em;
+    clear : both;
+    text-align : center;
+    margin : 0;
+    background : lightsteelblue;
+}
+#sidebar div div {
+    background : #E9EBEF url(images/flocon.gif) no-repeat 164px 4px;
+    margin-bottom : 8px;
+}
+/* --------------------------------------------------------
+    HAUT DE PAGE (+ footer)
+-------------------------------------------------------- */
+#top {
+	position : relative;
+	height : 260px;
+    }
+#top h1 {
+    background : transparent;
+    text-align : right;
+    padding : 0;
+    position : absolute;
+    top : 210px;
+    width : 800px;
+    }
+#top h1 a {
+	display:block;
+	height : 30px
+    color : steelblue;
+    font-weight : normal;
+    text-decoration : none;
+    padding-right : 40px;
+    }
+#top a:visited {
+	color : steelblue;
+	}
+#top a:hover {
+    background : transparent;
+	color : darkslateblue; 
+	}
+#prelude {
+	position : absolute;
+	top : 204px;
+	left : 10px;
+	font-size : 0.9em;
+	}
+#prelude, #prelude a, #prelude a:hover {
+    background : transparent;
+    color : darkgray;
+    }
+#prelude p {
+    margin : 0 0 0 10px;
+    padding : 0;
+    }
+#footer {
+}
+#footer p {
+    padding : 6px 30px;
+    }
+#footer a {
+	color : white;
+	}
+    
+/* ---------------------------------------------------------
+    MAIN - BILLETS
+---------------------------------------------------------- */
+
+/* règles communes au content */
+#content ul {
+    list-style-type : none;
+    }
+#content ul li {
+    padding-left : 8px;
+    background : transparent url(images/li.png) no-repeat 0 0.2em;
+    }
+#content ul li ul li {
+    padding-left : 8px;
+    background : transparent url(images/li.png) no-repeat 0 0.2em;
+    }
+
+/* billets */
+.post {
+    margin-top : 1em;
+    margin-bottom : 3em;
+    padding : 3px 15px 0 15px;
+    background : #EEEEF2;
+    }
+.day-date {
+    color : steelblue;
+    }
+.post-title {
+    color : slateblue;
+    padding-left : 20px;
+    background : transparent url(images/flocon.gif) no-repeat;
+	line-height : 110%;
+    }
+.post-title a:link, .post-title a:visited {
+	color : darkslateblue;
+	text-decoration : none;
+    }
+.post-title a:hover {
+	color : steelblue;
+	}
+.read-it, .post-info {
+    margin-bottom : 0;
+    }
+.post-info-co {
+    text-align : right;
+    }
+.read-it a, .post-info a, .post-info-co a, .post-tags a {
+    color : dimgray;
+    text-decoration : none;
+    }
+.post-excerpt, .post-content {
+    text-align : justify;
+    font-size : 1.05em;
+}
+.post h3, .post h4, .post h5, .post h6 {
+    text-transform : uppercase;
+    color : gray;
+    margin-top : 1.5em;
+    }
+.post-info, .post-info-co {
+    font-size : 0.9em;
+}
+.post-info {
+    margin : 0;
+}
+.footnotes h4 {
+    width : 200px;
+    padding-top : 4px;
+    border-top : 1px solid slateblue;
+    text-transform : capitalize;
+    font-weight : bold;
+    margin-top : 2em;
+    color : dimgray;
+}
+
+/* --------------------------------------------------------
+    COMMENTAIRES ET PINGS
+-------------------------------------------------------- */
+#pings, #comments {
+    font-size : 1em;
+    color : #222;
+    }
+#pr {
+    background : darkslateblue;
+    font-weight : bold;
+    color : #fff;
+    padding : 6px 20px;
+    }
+#comments h3, form h3, #pings h3 {
+    margin-top : 2.5em;
+    margin-bottom : 1em;
+    color : darkslateblue;
+}
+#comments dt, #pings dt {
+    margin-top : 2em;
+    margin-bottom : 1em;
+    font-weight : bold;
+    color : gray;
+}
+#comments dt a:link, #pings dt a:link, 
+#comments dt a:visited, #pings dt a:visited {
+    color : dimgray;
+    }
+.comment-number, .ping-number {
+    font-size : 1.1em;
+    padding : 1px 10px 1px 0;
+    background : transparent url(images/flocon.gif) no-repeat right top;
+}
+.odd .comment-number, .odd .ping-number {
+    background : transparent url(images/flocon.gif) no-repeat right top;
+    }
+#ping-url {
+    color : darkslateblue;
+    margin-bottom : 2em;
+    }
+#comments-feed {
+    margin-top : 1.5em;
+    text-align : left;
+    }
+#comments form {
+    padding : 1em;
+    border : 1px solid #ddd;
+}
+#comments dt.me, #comments dd.me, #comments dt.me a:link, #comments dt.me a:visited,
+#comments dt.me.odd, #comments dd.me.odd, #comments dt.me.odd a:link, #comments dt.me.odd a:visited {
+    color : darkslateblue;
+    }
+#comments dd {
+    background : transparent url(images/flocon.gif) no-repeat 40%;
+    color : dimgray;
+}
+#comments dd.odd {
+    background : transparent url(images/flocon.gif) no-repeat 80%;
+    color : slategray;
+}
+#comments dd.me {
+    background : transparent url(images/flocon.gif) no-repeat 100% 100%;
+}
+/*----------------------------------------------------------- */
+/* Formulaires
+-------------------------------------------------------- */
+fieldset {	display : block;	border : none;	margin : 0 0 0.5em 0;	padding : 0;	}fieldset p {	margin-bottom : 1em;	}.form-help {	margin : 1em 0;	}input, textarea {	font-size : 1.1em;
+	font-family : verdana, sans-serif;	border : 1px solid silver;	}input[type], textarea[name] {	background : whitesmoke;	}input[type=submit], input[type=reset] {	background : darkslateblue;
+	color : #fff;	}input[type=submit]:hover {	background : darkslateblue;
+	color : white;
+	}textarea {	width : 95%;	}p.field {	margin : 1em 0 0 0;	}p.field label {    clear:left;	display : block;	font-weight : bold;	font-size : 1em;	width : 11em;	float : left;	}.form-help {	}#comment-form {	}input.preview {	background : steelblue;	color : #fff;	}input.submit {	background : steelblue;	color : #fff;	}
+#comment-form input#c_remember { border: 0; } 
+/* ---------------------------------------------------------
+MENU
+---------------------------------------------------------- */
+#sidebar {
+    padding-top : 0.5em;
+    font-size : 0.92em;
+    }
+#sidebar a {
+	color : dimgray;
+	text-decoration : none;
+	}
+#sidebar a:hover {
+	color : steelblue;
+	}
+#blognav, #blogextra {
+	margin : 0;
+	}
+#blognav div, #blogextra div {
+    margin : 0;
+    padding : 4px 8px;
+    }
+#sidebar h2 {
+    font-size : 1.1em;
+    color : slategray;
+    padding-top : 0.5em;
+    margin-top : 1em;
+    font-weight : bold;
+}
+#sidebar h3 {
+    font-size : 1em;
+    font-weight : bold;
+    color : slategray;
+}
+#sidebar ul { 
+    margin : 0; 
+    padding : 0; 
+    list-style : none; 
+}
+#sidebar li {
+	padding-left : 10px;
+	background : transparent url(images/libis.png) no-repeat left 0.4em;
+	}
+#topnav {
+    font-size : 1.15em;
+    padding : 0.25em 0 0 0;
+    margin-top : 0;
+    font-weight : bold;
+}
+#topnav span {
+    display:none;
+    }
+#topnav li {
+    padding-top : 5px;
+    padding-left : 0;
+    background : none;
+    }
+#q {
+	width : 130px;
+	}
+/* -----------------------------------------------------
+    TAGS
+-------------------------------------------------------- */
+
+#toptags {
+	position : absolute;
+	top : 30px;
+	left : 50%;
+	width : 800px;
+	margin : 0;
+	margin-left : -400px;
+	background-color : lightsteelblue;
+	background : transparent;
+	height : 130px;
+	overflow : hidden;
+	line-height : 170%;
+    }
+#toptags ul {
+	list-style-type: none;
+	padding : 12px 30px 12px 200px;
+	margin : 0;
+	text-align : left;
+	text-align : center;
+}
+#toptags ul li {
+	margin: 0;
+	padding: 0 36px 0 0;
+	display:inline;
+}
+#toptags ul li a {
+    padding : 0;
+    margin : 0;
+    color : lightslategray;
+    text-decoration : none;
+    }
+#toptags ul li a:hover {
+	color : darkslategray;
+	}
+#toptags .tag0 { font-size: 75%; }
+#toptags .tag10 { font-size: 80%; }
+#toptags .tag20 { font-size: 90%; }
+#toptags .tag30 { font-size: 100%; }
+#toptags .tag40 { font-size: 110%; }
+#toptags .tag50 { font-size: 120%; }
+#toptags .tag60 { font-size: 130%; }
+#toptags .tag70 { font-size: 140%; }
+#toptags .tag80 { font-size: 150%; }
+#toptags .tag90 { font-size: 160%; }
+#toptags .tag100 { font-size: 170%; }
+
+
+#syndicate ul {
+    list-style-type : none;
+    }
+#syndicate ul li {
+	background-image : none;
+	padding-left : 0;
+	}
+
+/* dans les billets */
+#content ul.post-tags * {
+    margin : 0;
+    padding : 0;
+    }
+#content ul.post-tags {
+	list-style: none;
+	display: block;
+	padding: 0;
+	margin-left : 0;
+}
+#content ul.post-tags li, span.arch-tag {
+	display: inline;
+	margin: 0 0.6em 0 0;
+	padding: 0 0 0 14px;
+	background: transparent url(images/tag.gif) no-repeat left center;
+}
+#content ul.post-tags li:after {
+	content: ',';
+}
+#content ul.post-tags li:last-child:after {
+	content: '';
+}
+#content ul.post-tags li a {
+    color : dimgray;
+    border : none;
+    }
+    
+/* Les pages tags et tag */
+.dc-tags .content-inner ul {
+    list-style-type : none;
+    line-height : 200%;
+    font-size : 110%;
+    }
+.dc-tags .content-inner ul li, .dc-tags #content .content-inner ul li a {
+text-decoration : none;
+    }
+.dc-tags #content ul li { background : none;}
+.dc-tags #content .tag0 { font-size: 100%; }
+.dc-tags #content .tag10 { font-size: 110%; }
+.dc-tags #content .tag20 { font-size: 120%; }
+.dc-tags #content .tag30 { font-size: 130%; }
+.dc-tags #content .tag40 { font-size: 140%; }
+.dc-tags #content .tag50 { font-size: 150%; }
+.dc-tags #content .tag60 { font-size: 160%; }
+.dc-tags #content .tag70 { font-size: 170%; }
+.dc-tags #content .tag80 { font-size: 180%; }
+.dc-tags #content .tag90 { font-size: 190%; }
+.dc-tags #content .tag100 { font-size: 200%; }
+
+/* --------------------------------------------------------
+    BLOCS COMMUNS DANS PAGES SPECIFIQUES
+-------------------------------------------------------- */
+#navlinks {
+    margin-bottom : 3em;
+    }
+#content-info {
+    padding : 1em 4em 1px 3em;
+    color : #555;
+    margin-bottom : 2em;
+    }
+/* Error messages-------------------------------------------------------- */.error {	border : 1px solid #333;	background : #ccc;	padding : 0.5em;}.error ul {	padding-left : 20px;}.error li {	list-style : square;}
+.center {
+	text-align : center;
+}
+.right {
+	text-align : right;
+}
+.petites-cap {
+	font-size : 0.82em;
+	text-transform : uppercase;
+}
+.petit {
+    font-size : x-small;
+}
+
+
+/* ---------------------------------------------------
+    PAGES SPECIFIQUES
+-------------------------------------------------------*/
+
+    
+/* présentation pages archives */        
+.dc-archive .content-inner {
+    font-size : medium;
+    line-height : 140%;
+    }
+.dc-archive .content-inner h3 {
+    clear : both;
+    float : left;
+    width : 200px;
+    font-size : 4em;
+    margin : 0;
+    padding : 0;
+    color : #ddd;
+    line-height : 100%;
+    }    
+.dc-archive .content-inner ul {
+    margin : 0 0 60px 200px;
+    padding : 0;
+    border-left : 8px solid #ddd;
+    }
+.dc-archive #content .content-inner ul li, .dc-archive-month #content li, .dc-archive #content .content-inner ul li a, .dc-archive-month #content li a  {
+    background-image : none;
+    color : dimgray;
+    text-decoration : none;
+    }
+.dc-archive-month #content li.arch-title a {
+    padding-bottom : 4px;
+    margin-top : 1em;
+    color : darkslateblue;
+    }
+.dc-archive-month #content li.arch-title span {
+    font-size : 1.25em;
+    background : transparent url(images/flocon.gif) no-repeat 0 4px;
+    padding-left : 8px;
+    }    
+/* ---------------------------------------------------
+    NE PAS OUBLIER
+--------------------------------------------------- */
+/* les clearers */
+.post, .post-content, .footnotes, .attachments, .post-info-co, #comments {
+    clear:both;
+    }

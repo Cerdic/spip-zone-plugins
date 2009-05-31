@@ -1,0 +1,23 @@
+<plugin>
+	<nom>Nyroceros</nom>
+	<auteur>
+	Nyromodal par [Nyrodev->http://www.nyrodev.com/]
+_ Mis en plugin par SmeL, b_b et mis en marche par Fil :-)
+	</auteur>
+	<version>0.2</version>
+	<icon>nyroceros-64.png</icon>
+	<etat>dev</etat>
+	<description>
+Fen&#234;tre de dialogue ou de galerie photo
+_ Ce plugin fonctionne sur les squelettes disposant de la balise <code>#INSERT_HEAD</code>
+	</description>
+	<lien>http://nyromodal.nyrodev.com/indexFr.php</lien>
+	<prefix>Nyro</prefix>
+	<necessite id="SPIP" version="[1.9.0;]" />
+	<utilise id="cfg" version="[1.9.4;]" />
+	<utilise id="palette" version="[1.0;]" />
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>nyroceros_pipelines.php</inclure>
+	</pipeline>
+</plugin>

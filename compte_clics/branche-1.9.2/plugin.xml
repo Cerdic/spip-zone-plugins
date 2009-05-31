@@ -1,0 +1,37 @@
+<plugin>
+	<nom>
+		<multi>
+		[fr]Compteur de clics
+		[en]Clicks counter
+		</multi>
+	</nom>
+	<auteur>
+		<multi>
+		[fr]Chryjs (chryjs.at.free.fr)
+_ &#169; 2007 - Licence GNU/GPL
+		[en]Chryjs (chryjs.at.free.fr)
+_ &#169; 2007 - Licence GNU/GPL
+		</multi>
+	</auteur>
+	<version>
+		0.6
+	</version>
+	<etat>
+		dev
+	</etat>
+	<description>
+		<multi>
+		[fr]Permet de compter les clics effectu&eacute;s sur un site syndiqu&eacute;, ainsi que ses articles et rajoute une balise #TOTAL_CLICS.
+_ [D&eacute;monstration sur votre site->../spip.php?page=clic_demo]
+		[en]Makes available click counting related to syndicated websites and its related articles and provides #TOTAL_CLICS balise.
+_ [Preview on your website->../spip.php?page=clic_demo]
+		</multi>
+	</description>
+	<lien>http://www.spip-contrib.net/spip.php?article2410</lien> <!-- URI de documentation -->
+	<icon>img/compte_clics_icone_48.png</icon> <!-- icone du plugin -->
+
+	<fonctions>compteclics_fonctions.php</fonctions>
+	<prefix>compteclics</prefix>
+	<install>base/compteclics_init.php</install>
+	<necessite id="SPIP" version="[1.9.2;]" />
+</plugin>

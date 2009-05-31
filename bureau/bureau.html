@@ -1,0 +1,21 @@
+#CACHE{0}
+#HTTP_HEADER{Content-Type: text/html; charset=#CHARSET}
+<html>
+<head>
+<title>Bureau Démonstration</title>
+#INSERT_HEAD
+<script type="text/javascript" src="#CHEMIN{javascript/bureau.js}"></script>
+<link  type="text/css" rel="stylesheet" href="#CHEMIN{css/bureau.css}"/>
+</head>
+<body>
+
+
+[(#SESSION|?{
+#INCLURE{fond=noisettes/bureau}
+,
+#INCLURE{fond=noisettes/login}
+})]
+
+
+</body>
+</html>

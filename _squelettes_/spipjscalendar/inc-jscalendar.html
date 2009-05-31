@@ -1,0 +1,63 @@
+[(#REM) sortie du calendrier pour un article donné
+à insérer avec un INCLURE -> fond=inc-jscalendar ]
+<div style="float:right;" id="calendar-container"></div>
+<script type="text/javascript">
+	var dateInfo = [];
+	// création d'un tableau d'événements sous la forme dateInfo[20061231]=true
+<BOUCLE_evt(EVENEMENTS){agendafull date_fin,date_debut,periode,#ENV{dannee},#ENV{dmois},#ENV{djour},#ENV{fannee},#ENV{fmois},#ENV{fjour}}{par date_debut}>
+<BOUCLE_article(ARTICLES){id_article}{doublons}>
+<BOUCLE_lesevenements(EVENEMENTS){id_article}{agendafull date_fin,date_debut,periode,#ENV{dannee},#ENV{dmois},#ENV{djour},#ENV{fannee},#ENV{fmois},#ENV{fjour}}{par date_debut}>
+	var key=0;
+	//if(parseInt([(#DATE_DEBUT|jour)])<10){
+	//key="[(#DATE_DEBUT|annee)][(#DATE_DEBUT|mois)]"+"0"+"[(#DATE_DEBUT|jour)]";
+	//} else {
+	key="[(#DATE_DEBUT|annee)][(#DATE_DEBUT|mois)][(#DATE_DEBUT|jour)]";
+	//}
+	dateInfo[key]=true;
+</BOUCLE_lesevenements>
+</BOUCLE_article>
+</BOUCLE_evt>
+	function getDateText(date, d) {
+		var inf = dateInfo[date.print("%Y%m%d")];
+		if (!inf) {
+			// ACTION
+			// sur les dates du jscalendar quand elles sont repérées comme NE contenant PAS des événements
+			// pour du formatage par ex.
+			return d ;
+			} else {
+			// ACTION
+			// sur les dates du jscalendar quand elles sont repérées comme CONTENANT des événements
+			// pour du formatage par ex.
+			return "<font color=red>-></font>"+d ;
+		}
+	};
+	
+	function dateChanged(calendar) { // ACTION sur un changement de date
+		if (calendar.dateClicked) { // si le changement de date est dû à un click sur une date
+			var y = calendar.date.getFullYear();
+			var m = calendar.date.getMonth();     // integer, 0..11
+			var d = calendar.date.getDate();      // integer, 1..31
+			var inf = dateInfo[calendar.date.print("%Y%m%d")]; // test du tableau des événements
+			if (inf) { // si il y a un événements - ci-dessous vous adaptez en fonction de votre interface et de vos besoins
+				m=m+1; // jscalendar note janvier 0 et pas 01 !
+				var str='spip.php?page=exemple';
+				str = str + '&date_debut='+calendar.date.print("%Y%m%d");
+				str = str + '&date_fin='+calendar.date.print("%Y%m%d");
+				str = str + '&djour='+#ENV{djour}+'&dmois='+#ENV{dmois}+'&dannee='+#ENV{dannee};
+				str = str + '&fjour='+#ENV{fjour}+'&fmois='+#ENV{fmois}+'&fannee='+#ENV{fannee};
+				str = str + '&jselect='+d+'&mselect='+m+'&aselect='+y;
+			// action !
+				window.location="/"+str;
+			} else { // si le chnagement de date est dû à un changement de mois ou d'année
+			}
+		}
+	};
+
+	Calendar.setup(
+		{
+			flat         	: "calendar-container", // ID of the parent element
+			dateText		: getDateText,			// fonction appelée à la construction du calendrier
+			flatCallback 	: dateChanged          //callback function
+		}
+	);
+</script>

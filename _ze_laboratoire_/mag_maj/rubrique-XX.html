@@ -1,0 +1,11 @@
+
+<BOUCLE_dernier_article_plugin(ARTICLES){id_rubrique}{par date}{inverse}{0,1}>
+       #SET{id_article_plugin, #ID_ARTICLE}
+			 id_article = #ID_ARTICLE
+			 <INCLURE{fond=mag_maj_article}{id_article=(#GET{id_article_plugin})}>
+</BOUCLE_dernier_article_plugin>
+id_article_plugin = [(#GET{id_article_plugin})]
+
+
+<INCLURE{fond=mag_maj_sommaire}{id_parent}>
+</B_dernier_article_plugin>

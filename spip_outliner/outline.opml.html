@@ -1,0 +1,14 @@
+#CACHE{0}
+[(#HTTP_HEADER{Content-type: text/xml[; charset=(#CHARSET)]})]
+<?php echo '<'.'?';?>xml version="1.0" encoding="#CHARSET"?>
+<opml version="1.0"><BOUCLE_outline(FORMS){id_form=#ENV{id_table}}>
+	<head>
+		<title>[(#TITRE|entites_html)]</title>
+		[<description>(#DESCRIPTIF|entites_html)</description>]
+	</head>
+	<body>#SET{nivcur,0}
+<BOUCLE_donnees(FORMS_DONNEES){id_form}{id_mot?}{par rang}{statut!=poubelle}>
+<BOUCLE_niveau(FORMS_CHAMPS){id_form}{champ=select_1}>[(#LESVALEURS|indente{#GET{nivcur}})]#SET{nivcur,#LESVALEURS}</BOUCLE_niveau><outline<BOUCLE_titre(FORMS_CHAMPS){id_form}{champ=ligne_1}>[ text="(#LESVALEURS*{' '}|attribut_opml)"]</BOUCLE_titre><BOUCLE_body(FORMS_CHAMPS){id_form}{type !IN (separateur,textestatique)}{par rang}{champ !IN (select_1,ligne_1)}>[ [(#TITRE|nom_attribut_opml)]="(#LESVALEURS{' '}|attribut_opml)"]</BOUCLE_body> ></BOUCLE_donnees>
+[(#REM|?{'',1}|indente{#GET{nivcur}}|rtrim)]
+	</body>
+</BOUCLE_outline></opml>

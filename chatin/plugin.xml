@@ -1,0 +1,30 @@
+<plugin>
+	<nom>ChaTiN</nom>
+    <auteur>Martín Gaitán &#169; 2009 </auteur>
+	<version>0.2</version>
+	<etat>dev</etat>
+	<description>
+	<multi>
+
+	<p>A chat window for the private area inspired in Gmail chat.</p>
+	<p>Based on <a href="http://anantgarg.com/2009/05/13/gmail-facebook-style-jquery-chat/">a jquery Gmail chat style</a> by Anant Garg. </p>
+	[es]<p> Un chat para la interf&aacute;z privada inspirado en Gmail Talk</p>
+	<p>Basado en <a href="http://anantgarg.com/2009/05/13/gmail-facebook-style-jquery-chat/">a jquery Gmail chat style</a> de Anant Garg. </p>
+	</multi>
+	</description>
+	<icon>chatin_logo.png</icon>
+	<lien>http://nqnwebs.com/</lien>
+	<licence>GPLv3</licence>
+
+	<prefix>chatin</prefix>
+
+<!--    <install>chatin_install<er.php</install> -->
+	
+	
+       <pipeline>
+		<nom>header_prive</nom>
+		<action>insert_head</action>
+		<inclure>head.php</inclure>
+	</pipeline>
+</plugin>
+

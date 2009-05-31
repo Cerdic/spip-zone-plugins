@@ -1,0 +1,81 @@
+#CACHE{30*24*60*60}
+[(#REM)
+<!--
+*****Cahier de texte pour Spip: Bonbon !
+*****Réalisé par Bertrand MARNE (bmarne à ac-creteil.fr)
+*****Sous licence GPL (enfin bon, c'est bonbonware...)
+*****CopyLeft en juin 2007
+***Selection des éléments à faire afficher par cahier-de-texte-affichage
+-->][
+
+(#REM) On se place dans le contexte de la rubrique du cahier de texte de l'année
+]
+<BOUCLE_Contexte_RubriqueCDT(RUBRIQUES){titre=="Cahier de texte en-ligne"}{0,1}{tout}>[
+(#REM) On détermine quelle est l'année scolaire que l'on veut afficher
+][	(#SET{annee_rubrique,[(#ENV{date}|bonbon_annee_scolaire)]})
+][	(#ENV{annee_scolaire}|?{' ',''})
+		#SET{annee_rubrique,#ENV{annee_scolaire}}
+	]<BOUCLE_AnneeScol(RUBRIQUES){id_parent}{titre=#GET{annee_rubrique}}{!par titre}{0,1}>
+<!--Formulaire pour les requêtes précises-->
+<a name="requete"></a>
+<div class="bloc">
+	<h3 class="titre"><img src="#CHEMIN{images/edit-find-replace.png}" alt="icône" vspace="2" align="top">Faire une requête précise dans le cahier de texte&nbsp;:</h3>
+	<form name="choisir" method="get" action="spip.php">
+		<input type="hidden" name="page" value="cahier-de-texte-affichage">
+		<center><div class="moyen-bloc">
+			<p>(Choisir en détail les élements que l'on veut afficher. Chaque élément est optionnel.)
+			</p>
+			<fieldset>
+				<legend>Classe</legend>
+				<select id="classe" name="classe" size="1">
+					<option value="" selected="selected">Classes</option>
+[(#REM)On extrait toutes les classes de Spip]
+<BOUCLE_ToutesLesClasses_affichage(MOTS){id_rubrique}{type="Classes"}{par titre}>
+					<option value="#_ToutesLesClasses_affichage:TITRE">#_ToutesLesClasses_affichage:TITRE</option>
+</BOUCLE_ToutesLesClasses_affichage>
+				</select>
+				<select id="groupe" name="titre_mot" size="1">
+				<option value="" selected="selected">Pas de groupe</option>
+[(#REM)On extrait tous les groupes de Spip]
+<BOUCLE_ToutesLesGroupes_affichage(MOTS){type="Sous groupes de classes"}{par titre}>
+					<option value="#TITRE">#TITRE</option>
+</BOUCLE_ToutesLesGroupes_affichage>
+				</select>
+			</fieldset>
+[(#REM)Pour les mots clés attachés à une description de séance existante seulement]
+<BOUCLE_CDT_entier(MOTS){titre="Description de séance"}>
+			<fieldset>
+				<legend>Matière</legend>
+				<select id="matiere" name="matiere" size="1">
+					<option value="" selected="selected">Matières</option>
+[(#REM)On extrait toutes les matières de Spip]
+	<BOUCLE_ToutesLesMatieres_affichage(MOTS){id_rubrique}{type="Matières"}{par num titre}{par titre}>
+					<option value="#_ToutesLesMatieres_affichage:TITRE">#_ToutesLesMatieres_affichage:TITRE</option>
+	</BOUCLE_ToutesLesMatieres_affichage>
+				</select>
+<?php if ($auteur_session) { ?>
+				<select id="id_auteur" name="id_auteur" size="1">
+					<option value="" selected="selected">Liste des enseignants</option>
+[(#REM)On extrait toutes les profs (auteurs) de Spip]
+<BOUCLE_Rurbrique_pcm(RUBRIQUES){id_parent}{titre="Professeurs-classes-matières"}>
+
+		<BOUCLE_Fiches_Professeur(ARTICLES){id_rubrique}{surtitre="À propos d'un professeur"}{par num titre}>
+					<option value="#PS">#TITRE</option>
+		</BOUCLE_Fiches_Professeur>
+</BOUCLE_Rurbrique_pcm>
+				</select>
+<?php } ?>
+			</fieldset>
+			<fieldset>
+				<legend>Dates (jj/mm/aaaa)</legend>
+				<p>choisir le début de la période à consulter <INPUT TYPE="text" class="date_calendrier" NAME="date_debut" VALUE="" SIZE=12><br /> choisir la fin de la période à consulter <INPUT TYPE="text" class="date_calendrier" NAME="date_fin" VALUE="" SIZE=12></p>
+			</fieldset>
+</BOUCLE_CDT_entier>
+		</div>
+			<input type="Submit" value="Afficher les séances" name="afficher"> <input type='Submit' value="N'afficher que les devoirs" name='devoirs_seuls'>
+		</center>
+	</form>
+
+</div>
+	</BOUCLE_AnneeScol>
+</BOUCLE_Contexte_RubriqueCDT>

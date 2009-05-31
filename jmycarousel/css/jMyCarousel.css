@@ -1,0 +1,47 @@
+/*************************
+******** Arrows **********
+**************************/	
+div.jMyCarousel .prev{
+	background: url(left.png) center center no-repeat;
+	width:47px;
+	height:61px;
+	border:0px;
+}
+div.jMyCarousel .next{
+	background: url(right.png) center center no-repeat;
+	width:40px;
+	height:61px;
+	border:0px;
+}
+div.jMyCarousel .up{
+	background: url(up.png) center center no-repeat;
+	width:61px;
+	height:40px;
+	border:0px;
+}
+
+div.jMyCarousel .down{
+	background: url(down.png) center center no-repeat;
+	width:47px;
+	height:61px;
+	border:0px;
+}
+
+
+/** carousel 1 **/
+#exempleun div.jMyCarousel ul li{
+	border:1px solid #fff;
+	line-height:0px;
+}
+
+#exempleun div.jMyCarousel ul li a{ /* in case of link */
+	display:block;
+	border:0px;
+}
+
+#exempleun div.jMyCarousel ul li a img{
+	display:block;
+	border:0px;
+}
+
+#exempletrois div.jMyCarousel .up{	background: url(up.png) center center no-repeat;	width:16px;	height:16px;	border:0px;}#exempletrois div.jMyCarousel .down{	background: url(down.png) center center no-repeat;	width:16px;	height:16px;	border:0px;}/** Carousel 3 **/#exempletrois div.jMyCarousel{	border:2px solid #aaa;}#exempletrois div.jMyCarousel ul{	background-color:#000;	}#exempletrois div.jMyCarousel ul li{	margin:5px;	border:1px solid #aaa;	line-height:0px;	padding:3px;}#exempletrois div.jMyCarousel ul li a{ /* in case of link */	display:block;}#exempletrois div.jMyCarousel ul li a img{	display:block;	border:0px;}

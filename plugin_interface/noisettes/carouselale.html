@@ -1,0 +1,29 @@
+<B_carousel_ale>
+
+
+
+
+	
+		
+		<div id="carousel">	
+		<BOUCLE_carousel_ale(DOCUMENTS){id_article>0}{par hasard}{extension==jpg|png|gif}{0,(#CONFIG{interface/nombre})}>
+		
+		
+			<BOUCLE_chercheLienArticleAle(SPIP_DOCUMENTS_ARTICLES){id_document}>
+			#SET{current_id_art, #ID_ARTICLE}
+			</BOUCLE_chercheLienArticleAle>
+			<BOUCLE_lienArticleAle(ARTICLES){id_article=#GET{current_id_art}}{0,(#CONFIG{interface/nombre})}>
+			
+			[(#CONFIG{interface/renvart}|?{' ',''})
+				[<a href="#URL_ARTICLE">(#LOGO_DOCUMENT||image_reduire{[(#CONFIG{interface/largeur})],0})</a>]
+				]
+				
+				[(#CONFIG{interface/renvdoc}|?{' ',''})
+				[<a href="#URL_DOCUMENT" type="#MIME_TYPE">(#LOGO_DOCUMENT||image_reduire{[(#CONFIG{interface/largeur})],0})</a>]
+				]
+			
+			</BOUCLE_lienArticleAle>    
+		
+		</BOUCLE_carousel_ale>
+		</div>
+</B_carousel_ale>

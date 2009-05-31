@@ -1,0 +1,39 @@
+<plugin>
+	<nom>spip-Genea</nom>
+	<auteur>[Xavier BUROT->mailto:xebiaut@free.fr]
+_ &#169; 2006-2008 - <multi>[fr]Distribu&#233; sous licence GNU/GPL[en]Distributed under the GPL Licence</multi></auteur>
+	<lien>[Documentation->http://xebiaut.free.fr/?rubrique89]</lien>
+	<version>0.2</version>
+	<version_base>1.02</version_base>
+	<etat>dev</etat>
+	<description><multi>[fr]Plugin de g&#233;n&#233;alogie pour SPIP.[en]Plugin genealogy for SPIP.</multi></description>
+	<prefix>genea</prefix>
+	<icon>img_pack/arbre-24.png</icon>
+	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id='geographie' version='[0.1;]' />
+	<fonctions>inc/genea_fonctions.php</fonctions>
+	<options>inc/genea_options.php</options>
+	<install>base/genea_install.php</install>
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<inclure>genea_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>calculer_rubriques</nom>
+		<inclure>genea_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_droite</nom>
+		<action>affiche_droite</action>
+		<inclure>genea_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<inclure>genea_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>genea_pipeline.php</inclure>
+	</pipeline>
+	<chemin dir='' />
+</plugin>

@@ -1,0 +1,8 @@
+Une fois activé, ce plugin ajoute un lecteur flash à la fin d'un texte comportatnt un lien vers un fichier mp3
+
+Pour utiliser ce plugin, il vous faut également installer le repertoire /audio_player à la racine de votre spip.
+
+Vous trouverez ce repertoire dans _contribs_/_audio_
+
+Amusez-vous bien
+BoOz

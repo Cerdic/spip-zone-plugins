@@ -1,0 +1,7 @@
+<BOUCLE_site(SITES) {id_syndic}>
+        <span class='spip_site_#ID_SYNDIC spip_documents[ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
+            [<a href="(#URL_SITE)"[ class="(#ENV{lien_class})"]>]
+                <img src='[(#URL_SITE|thumbsite)]' alt="[(#NOM_SITE|texte_backend)]"[ title="(#NOM_SITE|texte_backend)"] />
+            [(#URL_SITE|?{</a>})]
+        </span>
+</BOUCLE_site>

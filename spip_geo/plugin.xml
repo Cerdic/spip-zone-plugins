@@ -1,0 +1,35 @@
+<plugin>
+	<nom>
+	SPIP (Geo)localisation
+	</nom>
+	<auteur>
+ 	Quentin Drouet
+_ &#169; 2007 - Distribu&eacute; sous licence GPL
+	</auteur>
+	<version>
+	0.01
+	</version>
+	<etat>
+	experimental
+	</etat>
+	<description>
+	Avoir a disposition dans spip une liste de continent / pays / ville utilisable par les autres plugins facilement...
+	</description>
+	<lien>http://www.spip-contrib.net/Un-plugin-spip-geo-localisation</lien> <!-- URI de documentation -->
+	<prefix>
+	spip_geo
+	</prefix>
+	<options>
+	spip_geo_options.php
+	</options>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/spip_geo.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/spip_geo.php</inclure>
+	</pipeline>
+	<install>base/spip_geo_upgrade.php</install>
+	<necessite id="SPIP" version='[2.0.0;]' />
+</plugin>

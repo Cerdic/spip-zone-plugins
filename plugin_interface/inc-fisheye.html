@@ -1,0 +1,83 @@
+<script language="javascript" src="plugins/plugin_interface/js/fisheye.js" type="text/javascript"></script>
+<script language="javascript" src="plugins/plugin_interface/js/iutil.js" type="text/javascript"></script>
+<script language="javascript" src="plugins/plugin_interface/js/interface.js" type="text/javascript"></script>
+
+<style type="text/css" media="all">
+
+
+.fisheye{
+	text-align: center;
+	height: 50px;
+	position: relative;
+}
+a.fisheyeItem
+{
+	text-align: center;
+	color: #000;
+	font-weight: bold;
+	text-decoration: none;
+	width: 40px;
+	position: absolute;
+	display: block;
+	top: 0;
+}
+
+.fisheyeItem img
+{
+	
+	border: none;
+	margin: 0 auto 5px auto;
+	width: 100%;
+}
+
+.fisheyeItem span
+{
+	display: none;
+	positon: absolute;
+}
+
+.fisheyeContainter
+{
+	
+	height: 50px;
+	width: 200px;
+	left: 500px;
+	position: absolute;
+}
+#fisheye2
+{
+	position: absolute;
+	width: 100%;
+	bottom: 0px;
+}
+</style>
+
+<script type="text/javascript">
+	
+	$(document).ready(
+		function()
+		{
+			$('#fisheye').Fisheye(
+				{
+					maxWidth: 40,
+					items: 'a',
+					itemsText: 'span',
+					container: '.fisheyeContainter',
+					itemWidth: 50,
+					proximity: 60,
+					halign : 'center'
+				}
+			)
+		}	
+	);
+
+</script>			
+
+<div id="fisheye" class="fisheye">
+		<div class="fisheyeContainter">
+			<a href="http://www.cemea-haute-normandie.org" class="fisheyeItem"><img src="plugins/plugin_interface/css/[(#CONFIG{interface/theme})]/region.png" width="30" alt="Site régional" /><span>Site régional</span></a>
+			<a href="http://www.cemea-haute-normandie.org/stagiaire" class="fisheyeItem"><img src="#CHEMIN{plugins/plugin_interface/css/images/stagiaires.png}" width="30" alt="Site anciens stagaires" /><span>Anciens stagiaires</span></a> 
+			<a href="http://www.cemea-haute-normandie.org/militant" class="fisheyeItem"><img src="#CHEMIN{plugins/plugin_interface/css/images/militant.png}" width="30" alt="Site interne" /><span>Site interne</span></a>
+			<a href="http://www.cemea.asso.fr" class="fisheyeItem"><img src="#CHEMIN{plugins/plugin_interface/css/images/national.png}" width="30" alt="Site national" /><span>Site national</span></a>
+		</div>
+</div>

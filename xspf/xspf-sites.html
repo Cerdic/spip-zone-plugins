@@ -1,0 +1,34 @@
+[(#REM) -------------------- Il faut tout laisser sur une ligne, sinon VLC ne parvient pas à tout lire s'il y a un saut  de ligne ----------------]
+	<title>[(#NOM_SITE_SPIP|translitteration)]<BOUCLE_art(ARTICLES){id_article}>[: (#TITRE|supprimer_numero|texte_backend)]</BOUCLE_art><BOUCLE_rub(RUBRIQUES){id_rubrique}>[: (#TITRE|supprimer_numero|texte_backend)]</BOUCLE_rub><BOUCLE_doc(DOCUMENTS){id_document}>[: (#TITRE|supprimer_numero|propre|texte_backend)]</BOUCLE_doc><BOUCLE_SEC(RUBRIQUES){id_secteur=[(#ENV{id_secteur}|sinon{-1})]}>[: (#TITRE|translitteration)]</BOUCLE_SEC>
+	</title>
+[(#REM) -------------------- Cette boucle est fonctionnelle. Elle accepte des id's d'articles, de rubriques, de documents, de breves ou de mots-cles----------------]
+	<B_docs>
+	<trackList>
+[(#REM) -------------------- Pour jw uniquement ----------------]		
+		[(#ENV{prerolllocation}|!={''}|?{' ',''})
+		<track>
+			<location>#ENV{prerolllocation}.flv</location>
+			<info>#ENV{prerolllink}</info>
+			<album>preroll</album>
+		</track>]
+[(#REM) -------------------- Boucle generale de generation des listes de lecture xspf ----------------]
+	<BOUCLE_docs(SITES){id_rubrique ?}{id_mot ?}{par num nom_site,nom_site}>
+		<track>
+			<location>[(#URL_SITE|url_absolue)]</location>
+			[<image>(#LOGO_SITE||extraire_attribut{src})</image>]
+	[(#REM) -------------------- Pour jw ----------------]
+			<title>[(#NOM_SITE)]</title>
+	[(#REM) -------------------- Pour musicplayer ----------------]
+			<annotation>[(#NOM_SITE|supprimer_numero|supprimer_tags|translitteration|propre)]</annotation>
+			[(#ENV{creator}|!={''}|?{' ',''})<creator>#ENV{creator}</creator>]
+		</track>
+	</BOUCLE_docs>
+[(#REM) -------------------- Pour jw uniquement ----------------]	
+		[(#ENV{postrolllocation}|!={''}|?{' ',''})
+		<track>
+			<location>#ENV{postrolllocation}.flv</location>
+			<info>#ENV{postrolllink}</info>
+			<album>postroll</album>
+		</track>]
+	</trackList>
+	</B_docs>

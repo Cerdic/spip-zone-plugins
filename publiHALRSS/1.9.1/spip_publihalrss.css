@@ -1,0 +1,32 @@
+/*
+ * Pulications
+ */
+ .publi li{
+ 	font-size: smaller;
+ 	margin-bottom: 0.4em;
+ 	margin-left: 1em;
+ }
+ .publi_prenom{
+ 	font-style: italic;
+ }
+ .publi_nom{
+ }
+.publi_refediteur{
+	font-weight: bold;
+}
+h2.publi_type, h2.publi_annee{
+	 margin-bottom: 0.2em; margin-top: 0.4em; font-size: 1.19em; font-weight: bold; 
+}
+h3.publi_type, h3.publi_annee{
+	 margin-bottom: 0.2em; margin-top: 0.4em; font-size: 0.88em; font-weight: bold; 
+}
+.cartouche .publi_refediteur{
+	font-weight: normal;
+	color: grey;
+}
+.publi_keywords{
+	margin-bottom: 0.2em; margin-top: 0.4em;  font-size: 0.96em; 
+}
+.publi_keywords .titre{
+	font-weight: bold;  font-size: 1em; 
+}

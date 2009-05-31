@@ -1,0 +1,101 @@
+[(#CHEMIN{images/panier.png}|debut_cadre_trait_couleur{0,"",<:echoppe:visualisation_d_un_panier:>,"",panier})]
+	[(#SET{'total_panier_prive',0})]
+	<B_LePanier>
+	<table style="width: 100%;">
+		<tr>
+			<td colspan="6" ><:echoppe:token_panier:> : #TOKEN_PANIER</td>
+		</tr>
+		<tr class="tableau_panier">
+			<td><:echoppe:titre_produit:></td>
+			<td><:echoppe:prix_produit:></td>
+			<td><:echoppe:quantite:></td>
+			<td><:echoppe:total_produit:></td>
+		</tr>
+	<BOUCLE_LePanier(spip_echoppe_paniers){token_panier = #TOKEN_PANIER}>
+		<tr>
+			
+			<BOUCLE_Leproduit(SPIP_ECHOPPE_PRODUITS_DESCRIPTIONS spip_echoppe_produits){id_produit = #ID_PRODUIT}>
+			<td>#TITRE</td><td>#PRIX_BASE_HTVA</td><td>#QUANTITE</td><td>#PRIX_TVAC</td>
+			
+			[(#SET{'total_panier_prive',#GET{'total_panier_prive'}|plus{#PRIX_TVAC|mult{#QUANTITE}}})]
+			</BOUCLE_Leproduit>
+			
+			#SET{'statut_panier',#STATUT}
+			#SET{'token_client',#TOKEN_CLIENT}
+		</tr>
+	</BOUCLE_LePanier>
+	</table>
+	<dl>
+		<dt><h3><:echoppe:informations_client:></h3></dt>
+		<dd>
+			<BOUCLE_leclientenvoye(SPIP_ECHOPPE_CLIENT){token_client = #GET{'token_client'}}>
+				<BOUCLE_auteurenvoye(SPIP_AUTEURS_ELARGIS){id_auteur=#ID_AUTEUR}>
+			
+				<strong><:echoppe:informations_personnelles:></strong><br />
+				#PRENOM #NOM_FAMILLE<br />
+				[(#ADRESSE)<br />]
+				[(#CODE_POSTAL) ]
+				[(#VILLE)<br />]
+				<BOUCLE_Pays(SPIP_GEO_PAYS){id_pays = #PAYS}>
+					[(#PAYS)<br />]
+				</BOUCLE_Pays>
+				[(#TELEPHONE)<br />]
+				[(#FAX)<br />]
+				[(#MOBILE)<br />]
+				[(#COMMENTAIRE)<br />]
+				[<:echoppe:ne_le:> (#NAISSANCE)<br />]
+
+				<br />
+				<strong><:echoppe:coordonnees_societe:></strong><br />
+				[(#SOCIETE)<br />]
+				[(#ADRESSE_PRO)<br />]
+				[(#CODE_POSTAL_PRO) ]
+				[(#VILLE_PRO)<br />]
+				<BOUCLE_Pays_Pro(SPIP_GEO_PAYS){id_pays = #PAYS_PRO}>
+					[(#PAYS)<br />]
+				</BOUCLE_Pays_Pro>
+				[(#TELEPHONE_PRO)<br />]
+				[(#FAX_PRO)<br />]
+				[(#MOBILE_PRO)<br />]
+                #ID_SOCIETE  [<a href="(#URL_SOCIETE)" >#URL_SOCIETE</a><br />]
+				[(#SECTEUR)<br />]
+				[(#FONCTION)<br />]
+                [(#NUMERO_TVA_LIVRAISON)<br />]
+				<br />
+				<strong><:echoppe:coordonnees_livraison:></strong><br />
+				#PRENOM_LIVRAISON #NOM_LIVRAISON<br />
+				[(#SOCIETE_LIVRAISON)<br />]
+				[(#ADRESSE_LIVRAISON)<br />]
+				[(#CODE_POSTAL_LIVRAISON) ]
+				[(#VILLE_LIVRAISON)<br />]
+				<BOUCLE_Pays_Livr(SPIP_GEO_PAYS){id_pays = #PAYS_LIVRAISON}>
+					[(#PAYS)<br />]
+				</BOUCLE_Pays_Livr>
+				[(#TELEPHONE_LIVRAISON)<br />]
+				[(#FAX_LIVRAISON)<br />]
+				[(#MOBILE_LIVRAISON)<br />]
+			
+				</BOUCLE_auteurenvoye>
+			</BOUCLE_leclientenvoye>
+		</dd>
+	</dl>
+	</B_LePanier>
+	<hr />
+	<:echoppe:produit_dans_ce_panier:>: <strong>#_LePanier:TOTAL_BOUCLE</strong> <br />
+	<:echoppe:montant_total_du_panier:>: <strong>#GET{'total_panier_prive'} &euro;</strong>
+	<form action="[(#EVAL{echoppe_upgrd_panier}|generer_url_action)]" method="post">
+		<:echoppe:statut_du_panier:>: 
+		<select name="echoppe_statut_panier">
+			<option value="temp" [(#GET{'statut_panier'}|=={temp}|?{selected='selected',})] ><:echoppe:statut_temporaire:></option>
+			<option value="reserve" [(#GET{'statut_panier'}|=={reserve}|?{selected='selected',})] ><:echoppe:statut_reserve:></option>
+			<option value="valide" [(#GET{'statut_panier'}|=={valide}|?{selected='selected',})] ><:echoppe:statut_valide:></option>
+			<option value="paye" [(#GET{'statut_panier'}|=={paye}|?{selected='selected',})] ><:echoppe:statut_paye:></option>
+			<option value="traite" [(#GET{'statut_panier'}|=={traite}|?{selected='selected',})] ><:echoppe:statut_traite:></option>
+			<option value="evnoye" [(#GET{'statut_panier'}|=={evnoye}|?{selected='selected',})] ><:echoppe:statut_envoye:></option>
+		</select>
+		<input type="hidden" name="redirect" value="[(#EVAL{echoppe_edit_panier}|generer_url_ecrire{token_panier=#TOKEN_PANIER})]" />
+		<input type="hidden" name="token_panier" value="#TOKEN_PANIER" />
+		<input type="submit" value="<:echoppe:mettre_le_panier_a_jour:>" />
+	</form>
+	</B_LePanier>
+[(#EVAL{1}|fin_cadre_trait_couleur)]

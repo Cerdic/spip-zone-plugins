@@ -1,0 +1,25 @@
+#ctn_sps {font-size:80%}
+#ctn_sps {width:100%;}
+#ctn_sps img {font-size:1em}
+#ctn_sps .ligne-pair {background-color:#66CC66;clear:both;padding:0.4em 0;}
+#ctn_sps .ligne-impair {background-color:#CCFF99;clear:both; padding:0.4em 0;}
+#ctn_sps .span-gauche img {margin:0;padding:0;border:0;display:inline;vertical-align:middle;}
+#ctn_sps .donnees {padding-left:5px;}
+
+#ctn_sps  .span-gauche {width:85%;display:block;float:left;}
+#ctn_sps .span-droite {font-weight:bold;width:15%;}
+#ctn_sps .ligne-pair,#hotes .ligne-impair {}
+#ctn_sps .details {clear:both;display:none;}
+
+.barre-hits-mois {background-color:#66FF99}
+.barre-visiteurs-mois {background-color:#3399CC}
+.barre-horaire{background-color:#66FF99;margin:0 2px;width:10px;}
+#chargement
+{
+	display: none;
+	width:100%;
+	text-align:center;
+	height:80px;
+	background: url(../img/chargement.GIF) no-repeat center center;
+	padding:10px;
+}

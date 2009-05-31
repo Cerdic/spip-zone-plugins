@@ -1,0 +1,37 @@
+/* CSS gafospip prive - scoty v.0.6 071005 */
+
+
+/*
+fonctions jquery (spipbb_inscrits)
+*/
+a.load {}
+a.afftxt{}
+p.hidesign { display:none; }
+#code, #code_sign {
+	margin:5px;
+	padding:5px;
+	border:dotted #000 1px;
+	background-color: #eee;
+	overflow: auto;
+	display: none;
+	text-align:center;
+}
+#code { height:100px; }
+#code_sign { height:50px; }
+/* *************************** */
+
+
+/* 
+class affichage
+*/
+
+p.signature {
+	clear:both;
+	padding:3px;
+	margin:5px 120px 0px 0px;
+	border-top:2px dotted #000;
+	font-family: Arial;
+	font-size:11px;
+	font-style:italic;
+}
+

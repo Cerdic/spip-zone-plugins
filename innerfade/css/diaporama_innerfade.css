@@ -1,0 +1,19 @@
+/*Ceci est pour s'appliquer au modele innerfade, afin de n'afficher qu une seule image quand js desactive, essayer de le faire charger par le plugin, ou le mettre en dur dans le modele */
+
+ul#portfolio{
+list-style-type: none;
+position: relative;
+width: 433px;
+height:161px;
+overflow: hidden;
+border: 1px solid #fff;
+margin:0 auto 1em;
+}
+
+ul#portfolio img{
+position:absolute;
+left:0;
+top:0;
+width:433px;
+height:161px;
+}

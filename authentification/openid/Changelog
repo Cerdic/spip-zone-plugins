@@ -1,0 +1,53 @@
+0.8.8 (10 12 2008)
+- Suivre le core (http://trac.rezo.net/trac/spip/changeset/13435)
+
+0.8.7 (08 11 2008)
+- Ne pas inscrire un openid si les donnees requises ne sont pas transmises
+
+0.8.6 (31 10 2008)
+- Permettre les redirections vers les serveurs openid meme si l'on des dans un bloc ajax
+
+0.8.5 (17 10 2008)
+- Ne plus surcharger action/editer_auteur, ni formulaires/login.html (il reste formulaires/login.php)
+
+0.8.4 (24 07 2008)
+- suivre la svn : changement de syntaxe de CVT sur charger()
+
+0.8.3 (15 07 2008)
+- edition privee de l'openid passe uniquement par des pipelines
+- ne pas inscrire systematiquement au login un openid inconnu meme s'il s'autorise
+- formulaire d'inscription #FORMULAIRE_INSCRIPTION_OPENID
+
+0.8.2 (25 06 2008)
+- pouvoir editer l'openid dans le prive
+- ne pas inscrire si les inscriptions sont interdites
+
+0.8 (02 06 2008)
+- Mise a jour avec le nouveau formulaire CVT de login (interface a retravailler)
+- Permettre OpenID 2.0 et 1.0
+- Creer les auteurs s'ils n'existent pas dans la base (todo: ne pas le faire si inscriptions non autorisees)
+- L'OpenID est maintenant stocke dans un champ "openid" de la table spip_auteurs
+
+0.7 (10 04 2008)
+- Utiliser la librairie 2.0.1, et la faire telecharger dans /lib
+
+0.6: 20080409
+- Mise a jour librairie en version 1.2.3 (je n'ai pas reussi a faire fonctionner la 2.0.1)
+- Version uniquement pour 1.9.3 dev svn
+
+0.5: 20070408:
+ - Mise à jour, compatibilité Spip 1.9.2a
+0.4: 20070326
+ - clean up de Fil@rezo.net
+ - Inclusion des librairies OpenID en natif
+ - include de ces librairies uniquement en cas d'authent (moins de
+ pénalisation)
+0.3: 20070326
+ - Utilise les fonctions utilitaires spip dans inc/utils.php pour generer
+   les urls de retour pour OpenID.
+ - Plus de chaines dans le fichier langue en vue de traduction du plugin
+0.2: 20070325
+ - Utilise "#CHEMIN" pour la stylesheet du formulaire (icone OpenID)
+ - utilise la fonction "sous-repertoire" pour créer le répertoire auth_openid
+ - Passage du parametre url pour le login
+0.1: Version Initiale
