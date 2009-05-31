@@ -1,9 +1,0 @@
-<B_liste>
-[(#ENV{debut_liste}|?{[<p class="pagination">(#PAGINATION)</p>],#ANCRE_PAGINATION})]
-<BOUCLE_liste(ARTICLES){branche ?}{lang ?}{archives ?}{par date}{inverse}{pagination 15}>
-<div class="post[(#COMPTEUR_BOUCLE|alterner{' odd',''})][ (#COMPTEUR_BOUCLE|=={1}|oui)first]" lang="#LANG" xml:lang="#LANG">
-	<INCLURE{fond=noisettes/bloc-post}{id_article} />
-</div>
-</BOUCLE_liste>
-[<p class="pagination">(#PAGINATION)</p>]
-</B_liste>

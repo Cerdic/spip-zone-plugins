@@ -1,9 +1,0 @@
-<div class="entete-formulaire">
-	<a class="icone36 secteur-24" href="[(#ID_PRODUIT|>{0}|?{[(#EVAL{echoppe_produit}|generer_url_ecrire{id_produit=#ID_PRODUIT})],[(#EVAL{echoppe_categorie}|generer_url_ecrire{id_categorie=#ID_CATEGORIE})]})]" style="float: left;">
-	[<img width="24" height="24" alt="Retour" src="(#CHEMIN{images/produit-24.png})"/>]
-	<span><:retour:></span>
-	</a>
-	<:echoppe:edition_de_produit:> :
-	[<h1>(#TITRE|sinon{#NEW|=={oui}|?{<:echoppe:nouveau_produit:>,<:echoppe:pas_de_titre:>}})</h1>]
-</div>
-#FORMULAIRE_EDITER_PRESENTATION_PRODUIT

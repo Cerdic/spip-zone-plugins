@@ -1,7 +1,0 @@
-<?
-header("Content-Type: application/vnd.mozilla.xul+xml");
-echo '<?xml version="1.0"?>
-<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
-<?xml-stylesheet href="'.URLAPP.'/css/app.css" type="text/css"?>
-';
-?>

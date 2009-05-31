@@ -1,8 +1,0 @@
-[(#REM)
-
-	Charger la carte demandee
-
-]#CACHE{7*24*3600,cache-client}
-#HTTP_HEADER{'Content-Type: text/javascript'}
-#SET{cache,http://maps.google.com/mapfiles/#ENV**{map}}
-[(#GET{cache}|recuperer_page|compacte_js)]

@@ -1,1 +1,0 @@
-- Niveau minimum d'accès : administrateur ou rédacteur
