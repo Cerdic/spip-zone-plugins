@@ -1,0 +1,119 @@
+/* 
+
+	// exec/barrac_prive.css
+	
+	// $LastChangedRevision: 16668 $
+	// $LastChangedBy: paladin@quesaco.org $
+	// $LastChangedDate: 2007-11-07 10:33:02 +0100 (mer., 07 nov. 2007) $
+
+*/
+
+#form_configuration {
+	margin:0;
+}
+
+#form_configuration fieldset {
+	margin-top:0.75em;border:1px solid gray;
+}
+#form_configuration .text-center {
+	text-align:center;
+}
+
+.barrac-boutons-actifs {
+	margin:0.5em 0;
+	padding:0 0.5ex;
+}
+.barrac-boutons-actifs li {
+	margin:0;
+	padding:0;
+}
+.barrac-boutons-actifs li {
+	width:54px;
+	height:24px;
+	display:block;
+	float:left;
+	list-style: none;
+	margin-right:1ex;
+}
+.barrac-boutons-actifs li .input {
+	/*width:2ex;/**/
+	height:1em;
+	display:block;
+	float:left;
+}
+.barrac-boutons-actifs li .label {
+	width:24px;
+	height:24px;
+	display:block;
+	float:left;
+	background: url(none) no-repeat center center;
+}
+.barrac-boutons-actifs li .label label {
+	width:24px;
+	height:24px;
+	display:block;
+	background: url(none) no-repeat center center;
+}
+
+.barrac-boutons-actifs label span {
+	display:none;
+}
+
+.barrac-table-ecran {
+	border:3px solid black;width:80px;height:60px;
+	margin:0.5em auto 0.75em;
+	display:table;
+}
+.barrac-table-ecran label {
+	display:none;
+}
+.barrac-table-ecran .row {
+	text-align:left;width:80px;height:30px;display:table-row;
+}
+.barrac-table-ecran .cell {
+	width:40px;height:30px;display:table-cell;
+}
+.barrac-table-ecran .text-bottom {
+	vertical-align:bottom;
+}
+.barrac-table-ecran .text-right {
+	text-align:right;
+}
+
+.presentations {
+	margin:0.5em auto;
+	width:192px;
+	height:26px;
+}
+.presentations .label {
+	display:none;
+}
+.presentation-h, .presentation-v {
+	width:96px;
+	height:22px;
+	float:left;
+	text-align:left;
+}
+.presentation-h .input, .presentation-v .input {
+	margin-right:0.5ex;
+	float:left;
+	width:22px;
+	height:22px;
+	padding-top:5px;
+	display:block;
+}
+.presentation-h .icon {
+	padding-left:2px;
+}
+.presentation-h .icon, .presentation-v .icon {
+	width:24px;
+	height:24px;
+	float:left;
+	display:block;
+}
+.presentation-h .icon {
+	background: url(images/barrac_position-h-24.png) no-repeat center center;
+}
+.presentation-v .icon {
+	background: url(images/barrac_position-v-24.png) no-repeat center center;
+}

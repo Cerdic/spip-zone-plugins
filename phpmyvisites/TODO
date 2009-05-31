@@ -1,0 +1,37 @@
+before new release
+==================
+maj version.php
+maj template d'accueil
+maj changelog
+voir constantes (SMARTY_DEBUG INTERNAL_STATS GRAPH_TIMING SAVE_STAT LOOK FOR COOKIE et autres)
+voir FONT seule tuffy indispensable
+chgts DB ? ds updates/ ET ds installSql.php
+regénérer fichiers de langues !!!
+test install et test maj
+ul/news/nl
+
+BUGS
+====
+- quand switch de 1 à 2 sur une période sur laquelle 2 est inexistant, les dates d'affichage ne sont
+pas offsetées
+  mais les bonnes dates sont utilisées par le calcul
+- jour fin de mois > sélectionne année > revient mois actuel > select semaine > bug data ok mais date
+printée non.
+Prob d'offset date.
+- le print d'une semaine à mi cheval entre 2 mois bug. Affiche à partir du début du mois OU jusqu'a
+la fin du mois.
+- idem le print d'une semaine a cheval sur le début des stats ou a cheval sur la seamine actuelle non
+ terminée va jusqu'a le début des stats OU jusqu'a la fin de la semaine nonterminée alors qu'il
+ devrait aller jusqu'a TODAY
+- quand la page ref n'appartient pas au site, tjs new visit?
+
+APRES
+==========
+* frequency : new graph visits returns.. when ? several times per day,once a day, several per week,
+once a week...
+* mettre toutes les fonctions ds une classe avec que des méthodes statiques
+* changer échelle mapemonde par logarithmique
+* abstraction base de données via ADODB
+* exportation de donnnées CSV, etc.
+* feuille de style special impression
+* gérer les records jour/semaine... visites/pages...

@@ -1,0 +1,117 @@
+#CACHE{48*3600}
+[(#REM)
+
+	// $LastChangedRevision$
+	// $LastChangedBy$
+	// $LastChangedDate$
+
+	Rubrique Livre d'or, squelette d'exemple
+	
+]<BOUCLE_rubrique_principal(RUBRIQUES) {id_rubrique}>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+<title>[(#INTRODUCTION|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#INTRODUCTION|couper{200}|textebrut)" />]
+<INCLURE{fond=inc-head}>
+<style type="text/css">
+<!--
+.page_dor { 
+	list-style: none; 
+	border:1ex solid gray;
+	margin:0;
+	padding:1em;
+}
+.formulaire_livre_dor { 
+	font-size:100%;
+}
+.formulaire_livre_dor fieldset { 
+	border: 2px solid #ccc; 
+	padding:1em; 
+}
+.formulaire_livre_dor legend { 
+	margin:0; 
+	padding:0 1em; 
+}
+.formulaire_livre_dor fieldset p { 
+	margin:0; 
+	padding:0; 
+}
+.formulaire_livre_dor fieldset p.spip_bouton input { 
+	font-size:90%; 
+	font-weight:bold; 
+	margin-top:0.5em; 
+	background-color:#fcc;
+}
+.formulaire_livre_dor .commentaire {}
+.formulaire_livre_dor .signature { 
+	font-style: italic; 
+}
+-->
+</style>
+</head>
+
+<body id="page_livre_dor">
+<div id="page">
+
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}>
+
+	<div id="conteneur">
+
+		[(#REM) Contenu principal : contenu de la rubrique ]
+		<div id="contenu">
+
+	[(#REM) Fil d'Ariane ]
+	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_rubrique}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero|couper{80})]</a></BOUCLE_ariane>[ &gt; (#TITRE|supprimer_numero|couper{80})]</div>
+
+			<div class="cartouche">
+				[(#LOGO_RUBRIQUE||image_reduire{200,200})]
+				<h1 class="titre">#DESCRIPTIF</h1>
+			</div>
+
+			[<div class="#EDIT{texte} chapo">(#TEXTE)</div>]
+
+			<ul class='page_dor'>
+				[(#REM) Articles du secteur ]
+				<B_articles>
+				<BOUCLE_articles(ARTICLES) {id_secteur} {par date}{inverse}>
+					[<li class="feuille_dor">
+					(#TEXTE|lido_inserer_date{#DATE})
+					</li>]
+				</BOUCLE_articles>
+				</B_articles>
+
+				[(#REM) Breves du secteur ]
+				<B_breves>
+				<BOUCLE_breves(BREVES) {id_secteur} {par date}{inverse}>
+					[<li class="feuille_dor">
+					(#TEXTE|lido_inserer_date{#DATE})
+					</span></li>]
+				</BOUCLE_breves>
+				</B_breves>
+			</ul>
+
+<h2>Laissez moi quelques mots </h2>
+
+				#FORMULAIRE_ECRIRE_LIVRE_DOR
+
+		</div><!-- fin contenu -->
+
+		[(#REM) Menu de navigation laterale ]
+		<div id="navigation">
+
+			[(#REM) Menu de navigation par rubriques ]
+			<INCLURE{fond=inc-rubriques}{id_rubrique}>
+
+		</div><!-- fin navigation -->
+
+	</div><!-- fin conteneur -->
+
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}>
+
+</div><!-- fin page -->
+</body>
+</html>
+</BOUCLE_rubrique_principal>

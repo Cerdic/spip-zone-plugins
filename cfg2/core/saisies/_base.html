@@ -1,0 +1,42 @@
+[(#REM) 
+
+  Parametres :
+  ** : obligatoire
+  * : fortement conseille
+  
+  - ** nom : nom du parametre
+  - * label : nom joli
+  (- * erreurs : tableau des erreurs) (transmis par defaut avec SAISIE)
+  (- * valeur : valeur actuelle du parametre) (transmis par defaut avec SAISIE : valeur=#ENV{nom du parametre}})
+  - defaut : valeur par defaut du parametre
+  - obligatoire : est-ce un parametre obligatoire ? (defaut: non, valeurs : null/"non"/autre=oui )
+  - info_obligatoire : si obligatoire, ajoute ce contenu apres le label (defaut : "")
+  - explication : texte d'explication suppplementaire
+  - attention : texte pourles cas graves !
+
+  
+  Exemples d'appels :
+    Raccourcis (type, name, obligatoire)
+    [(#SAISIE{input, couleur_foncee, oui}
+		{label=<:spa:couleur_foncee:>}
+		{size=7})]
+	
+	[(#SAISIE{input}{nom=couleur_foncee}{obligatoire=oui}
+		{label=<:spa:couleur_foncee:>}
+		{size=7})] 
+]
+
+[(#ENV{nom}|oui)
+#SET{erreurs,#ENV**{erreurs}|table_valeur{#ENV{nom}}}
+#SET{obligatoire,#ENV{obligatoire}|et{#ENV{obligatoire}|!={non}}|?{obligatoire,''}}
+<li class="editer_[(#ENV{nom})][ (#GET{obligatoire})][ (#GET{erreurs}|oui)erreur]">
+	<label for="champ_#ENV{nom}">
+		[(#ENV*{label}|sinon{#ENV{nom}})]
+		[<span class='obligatoire'>(#GET{obligatoire}|et{#ENV{info_obligatoire}})#ENV*{info_obligatoire}</span>]
+	</label>
+		[<span class='erreur_message'>(#GET{erreurs})</span>]
+		[<p class='explication'>(#ENV*{explication})</p>]
+		[<p class='attention'>(#ENV*{attention})</p>]
+		[(#INCLURE{fond=saisies/#ENV{type_saisie}}{env})]
+</li>
+]

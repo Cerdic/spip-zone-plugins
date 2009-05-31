@@ -1,0 +1,19 @@
+[(#REM) 
+
+  ### /!\ table GEO_PAYS (geographie) ###
+	
+  Parametres :
+  - class : classe(s) css ajoutes au select
+  - option_intro : chaine de langue de la premiere ligne vide ? (defaut:"")
+  
+  Exemple d'appel :
+	[(#SAISIE{pays}
+		{nom=pays}
+		{label=<:plugin:info_pays:>})] 
+]
+<select name="#ENV{nom}" id="champ_#ENV{nom}"[ class="(#ENV{class})"]>
+<option>[(#ENV{option_intro})]</option>
+<BOUCLE_pays(GEO_PAYS){par multi nom}>
+	<option value="#ID_PAYS"[(#ID_PAYS|=={#ENV{valeur}|sinon{#ENV{defaut}}}|oui) selected="selected"]>#NOM</option>
+</BOUCLE_pays>
+</select>

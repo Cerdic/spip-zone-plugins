@@ -1,0 +1,17 @@
+<BOUCLE_photoset(FLICKR_PHOTOSETS_GETINFO) {id_photoset=#ENV{id}}>
+<dl class="spip_document_#ENV{ID} spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok fpiprsetinfo" [ style="float:(#ENV{align}|match{left|right});"]>
+<dt>
+<a href="[(#ENV{lien}|sinon{#URL_PHOTOSET})]" [ class="(#ENV{lien_class})"] title="Flickr Photoset[ (#TITLE) ]">
+[(#LOGO_PHOTOSET{#ENV{taille}}|inserer_attribut{alt,Flickr Photoset[ (#TITLE) ]})]</a>
+</dt>[
+<dt class="fpipr_photoset_titre spip_doc_titre"[ style="width:(#WIDTH_PHOTO{#ENV{taille}}|min{350}|max{120})px;"]>
+<strong>(#TITLE)</strong>
+</dt>][
+<dd class="fpipr_photoset_descriptif spip_doc_descriptif"[ style="width:(#WIDTH_PHOTO{#ENV{taille}}|min{350}|max{120})px;"]>
+(#DESCRIPTION)
+</dd>][
+<dd class="fpipr_photoset_photos spip_doc_descriptif"[ style="width:(#WIDTH_PHOTO{#ENV{taille}}|min{350}|max{120})px;"]>
+(#PHOTOS) <:fpipr:photos:>
+</dd>]
+</dl>
+</BOUCLE_photoset>

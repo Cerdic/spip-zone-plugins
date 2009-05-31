@@ -1,0 +1,544 @@
+###  LISEZMOI --- 
+## Copyright 2006 Pierre Andrews
+##
+## Author: mortimer.pa@free.fr
+## Licence: GPL, non commercial use
+
+-----------------
+
+Ce plugin permet d'associer des images de votre compte flickr a vos articles et rubriques.
+
+= Ajout de photos flickr à vos articles =
+
+Depuis la version 0.1, on peut utiliser ce plugin pour associer des photos flickr à ses articles comme des documents distant "standarts".
+
+On peut utiliser cette fonction pour faire un article à propos d'une photo, ou d'un set de photos, etc...
+
+== Utilisation: == 
+ 1. aller sur la page de gestion de votre profil SPIP
+ 1. suivez les instructions pour vous identifier sur Flickr
+ 1. vous pouvez ensuite aller sur un de vos articles/rubriques et cliquer sur le liens dans la colonne de gauche pour choisir des images de flickr.
+
+= Configuration =
+
+Le plugin ne marchera pas tant que vous ne l'aurez pas configuré. Pour cela, il vous faut installer le plugin config, ensuite rendez vous sur:
+ecrire/?exec=cfg&cfg=fpipr
+
+= Telechargement =
+
+la version 0.1 est dispo en '''TEST''' ici:
+http://trac.rezo.net/files/spip-zone/FpipR_svn.zip
+
+----------------
+
+= Ajout de nouvelles Boucles =
+
+Depuis la version 0.2, le plugin offre la possibilité d'acceder aux methodes de l'API flickr (voir http://www.flickr.com/services/api) à travers le système de BOUCLE de SPIP.
+
+On peut ainsi faire ses propres squelettes pour faire des diaporamas Flickr, etc.. etc..
+
+== Telechargement ==
+
+la version 0.2 est en '''TEST''' et disponible sur la zone (Ne fonctionne qu'avec la SVN de SPIP):
+http://trac.rezo.net/files/spip-zone/FpipR_svn.zip
+
+
+== Boucles '''AUTEURS''' ==
+
+Le plugin ajout deux nouvelles balises à cette boucle:
+
+* {{{#FLICKR_NSID}}}  retournera (pour les auteurs authentifié sur Flickr) l'id flickr unique (nsid) de cet auteur.
+On peut ensuite l'utiliser dans les boucles Flickr pour limiter les recherches à cet utilisateur.
+
+* {{{ #FLICKR_TOKEN }}} si l'utilisateur est logué dans spip et authentifié à SPIP, alors on a accés au token d'authentification. Attention, cette information est privée!!
+[br] Cette balise ne devrait être utilisée que pour tester que l'utilisateur est loguée:
+{{{ [(#FLICKR_TOKEN|?{'','pas logué'}Vos photos:}}}
+[br] Quand cette balise est disponible, alors toutes les boucles Flickr utilisent des appels authentifiés à l'API flickr. Le cache de la page html genérée est alors protégée et seulement accessible à cet utilisateur.
+
+
+== Boucle '''FLICKR_PHOTOS_SEARCH''' ==
+
+Cette boucle implemente la méthode: http://www.flickr.com/services/api/flickr.photos.search.html
+On peut l'utiliser pour chercher des photos.
+ATTENTION, il faut absolument specifier au moins un critere precisant la recherche si on veut que la boucle retourne des resultats.
+
+
+=== Criteres ===
+
+Les criteres correspondent aux parametres de la methode Flickr.
+
+Les criteres suivant peuvent être utilisés comme les criteres standard de SPIP: {{{ {user_id=#FLICKR_NSID} }}} ou {{{ {upload_date < #DATE} }}} par exemple. Ils peuvent aussi être utiliser dans des tris
+
+ * {{{ {user_id} }}}
+ * {{{ {license} }}}
+ * {{{ {upload_date} }}}
+ * {{{ {taken_date} }}}
+
+Les criteres suivant sont "special" et prennent leur parametre directement: {{{ {tags spip,gateau} }}} par exemple
+
+ * {{{ {tags} }}}
+ * {{{ {tag_mode} }}}
+ * {{{ {text} }}}
+ * {{{ {privacy_filter} }}} 
+    * 1 public photos
+    * 2 private photos visible to friends
+    * 3 private photos visible to family
+    * 4 private photos visible to friends & family
+    * 5 completely private photos
+ * {{{ {safe_search} }}} 
+ * {{{ {content_type} }}} 
+ * {{{ {machine_tags} }}} voir http://www.flickr.com/groups/api/discuss/72157594497877875/
+ * {{{ {machine_tag_mode} }}} par defaut 'any'
+ * {{{ {bbox} }}} limitation geographique de la recherche, separé par des :, longitude minimum, latitude minimum, longitude max, latitude max
+ * {{{ {accuracy} }}}
+
+Les criteres suivant peuvent être specifié pour les tri:
+{{{ {par date_posted} }}},{{{ {par date_taken} }}},{{{ {par interestingness} }}},{{{ {par relevance} }}} (dans le cas d'une recherche).
+
+=== Balises ===
+
+ * {{{ #ID_PHOTO }}} id de la photo
+ * {{{ #USER_ID }}} nsid de l'utilisateur
+ * {{{ #SECRET }}} secret de la photo pour construire l'url et obtenir plus d'info
+ * {{{ #SERVER }}} le server où la photo se trouve
+ * {{{ #TITLE }}} le titre de la photo
+ * {{{ #ISPUBLIC }}} 1 si la photo est publique, 0 sinon
+ * {{{ #ISFRIEND }}} 1 si la photo est accessible aux amis, 0 sinon
+ * {{{ #ISFAMILY }}} 1 si la photo est accessible à la famille, 0 sinon
+ * {{{ #ORIGINALFORMAT }}} l'extension du fichier original
+ * {{{ #LICENSE }}} la license (voir les valeurs là http://www.flickr.com/services/api/flickr.photos.licenses.getInfo.html)
+ * {{{ #UPLOAD_DATE }}} quand la photo a été postée sur Flickr
+ * {{{ #TAKEN_DATE }}} quand la photo a été prise, si dispo dans les infos EXIF
+ * {{{ #ONWER_NAME }}} le nom de l'utilisateur
+ * {{{ #ICON_SERVER }}} le serveur où trouver l'icone de l'utilisateur
+ * {{{ #LAST_UPDATE }}} date de derniere modification des donnees de la photo
+ * {{{ #LONGITUDE }}} 
+ * {{{ #LATITUDE }}} 
+ * {{{ #ACCURACY }}} la precision de l'info geographique:
+    * 1 niveau global
+    * ~3 niveau d'un pays
+    * ~6 niveau d'une region
+    * ~11 niveau d'une ville
+    * ~16 niveau de la rue
+
+=== Balises Calculées ===
+
+(c.f. http://www.flickr.com/services/api/misc.urls.html
+et http://www.flickr.com/services/api/misc.buddyicons.html)
+
+ * {{{ #URL_PHOTO }}} l'url de la photo
+ * {{{ #URL_OWNER }}} l'url du photographe
+ * {{{ #LOGO_PHOTO }}} retourne l'image taille moyenne (500px sur le côté le plus long), sauf si on lui passe un parametre:
+    * s	petit carre 75x75
+    * t	vignette, 100px sur le côté le plus long 
+    * m	petite, 240px sur le côté le plus long 
+    * b	large, 1024px sur le côté le plus long (seulement si o est tres large)
+    * o	image originale, jpg, png ou gif en fonction de #ORIGINALFORMAT
+ * {{{ #LOGO_OWNER }}} le logo du photographe
+
+== Boucle FLICKR_PHOTOS_GETINFO ==
+
+retourne des informations complementaires sur une photo.
+(voir: http://www.flickr.com/services/api/flickr.photos.getInfo.html)
+
+== Criteres ==
+
+ * On doit absolument specifier le critere {{{ {id_photo} }}}
+ * On peut aussi specifier le critere {{{ {secret} }}}
+
+== Balises ==
+
+ * {{{ #ID_PHOTO }}}
+ * {{{ #SECRET }}}
+ * {{{ #SERVER }}}
+ * {{{ #ISFAVORITE }}}
+ * {{{ #LICENSE }}}
+ * {{{ #ROTATION }}} la rotation effectue automatiquement sur l'image
+ * {{{ #ORIGINALFORMAT }}}
+ * {{{ #USER_ID }}}
+ * {{{ #OWNER_USERNAME }}} le username flickr du photographe
+ * {{{ #OWNER_REALNAME }}} le nom réel du photographe
+ * {{{ #OWNER_LOCATION }}} où le photographe vit
+ * {{{ #TITLE }}}
+ * {{{ #DESCRIPTION }}}
+ * {{{ #ISPUBLIC }}}
+ * {{{ #ISFRIEND }}}
+ * {{{ #ISFAMILY }}}
+ * {{{ #DATE_POSTED }}}
+ * {{{ #DATE_TAKEN }}}
+ * {{{ #DATE_LASTUPDATE }}}
+ * {{{ #COMMENTS }}} Le nombre de commentaires sur la photo
+ * {{{ #LATITUDE }}}
+ * {{{ #LONGITUDE }}}
+ * {{{ #ACCURACY }}}
+
+
+=== Balises Calculées ===
+
+identiques à la boucle precedente
+
+== Boucle FLICKR_PHOTO_TAGS ==
+
+CETTE BOUCLE N'EST DISPONIBLE QUE DANS UNE BOUCLE FLICKR_PHOTOS_GETINFO
+
+Retourne la liste de tag d'une photo
+
+=== Critere ===
+
+pas de criteres specifique
+
+=== Balises ===
+
+ * {{{ #ID_TAG }}}
+ * {{{ #AUTHOR }}} le nsid de l'auteur qui a ajouté le tag sur la photo
+ * {{{ #RAW }}} la version normale du tag (avec espace, caractères speciaux etc.)
+ * {{{ #SAFE }}} une version "sûre" du tag, qu'on peut utiliser dans des urls, etc.
+ * {{{ #ID_PHOTO }}}
+
+== Boucle FLICKR_PHOTO_NOTES ==
+
+CETTE BOUCLE N'EST DISPONIBLE QUE DANS UNE BOUCLE FLICKR_PHOTOS_GETINFO
+
+Retourne la liste des notes sur une photo
+
+=== Critere ===
+
+pas de criteres specifique
+
+=== Balises ===
+
+ * {{{ #ID_NOTE }}}
+ * {{{ #AUTHOR }}} le nsid de l'auteur qui a ajouté la note sur la photo
+ * {{{ #AUTHOR_NAME }}} le username de l'auteur qui a ajouté la note sur la photo
+ * {{{ #X #Y }}} les coordonnées du coint en haut à gauche
+ * {{{ #WIDTH #HEIGHT }}} Les dimensions de la not
+ * {{{ #TEXTE }}} le texte de la note
+ * {{{ #ID_PHOTO }}}
+
+== Boucle FLICKR_PHOTO_URLS ==
+
+CETTE BOUCLE N'EST DISPONIBLE QUE DANS UNE BOUCLE FLICKR_PHOTOS_GETINFO
+
+Retourne la liste des urls d'une photo
+
+=== Critere ===
+
+pas de criteres specifique
+
+=== Balises ===
+
+ * {{{ #TYPE }}} le type de l'url
+ * {{{ #URL }}} l'url
+ * {{{ #ID_PHOTO }}}
+
+
+== Boucle FLICKR_PHOTOSETS_GETLIST ==
+
+Retourne la liste des sets d'un utilisateur
+
+=== Critere ===
+
+ * {{{ {user_id} }}} l'identifiant flickr (nsid) de l'utilisateur
+
+=== Balises ===
+
+ * {{{ #ID_PHOTOSET }}}
+ * {{{ #USER_ID }}} le nsid de l'auteur qui a ajouté le tag sur la photo
+ * {{{ #PRIMARY_PHOTO }}} l'id de la photo illustrant le set
+ * {{{ #SECRET }}} le secret de cette photo
+ * {{{ #SERVER }}} le serveur de cette photo
+ * {{{ #PHOTOS }}} le nombre de photos dans le set
+ * {{{ #TITLE }}}
+ * {{{ #DESCRIPTION }}}
+
+=== Balises calculées ===
+
+ * {{{ #LOGO_PHOTOSET }}} le logo du photoset (la "primary" image, prend les mm paramètre que la balise {{{ #LOGO_PHOTO }}} sauf 'o')
+ * {{{ #URL_PHOTOSET }}} 
+
+== Boucle FLICKR_PHOTOSETS_GETPHOTOS == 
+
+retourne les photos dans un set
+
+=== Criteres ===
+
+ * {{{ {id_photoset} }}} l'id du photoset
+ * {{{ {privacy_filter} }}} pas testé
+
+=== Balises ===
+
+un sous set des balises de FLICKR_PHOTOS_SEARCH, mais on peut imbriquer une boucle FLICKR_PHOTOS_GETINFO à l'interieur pour avoir plus de details.
+
+ * {{{ #ID_PHOTO }}}
+ * {{{ #SECRET }}}
+ * {{{ #SERVER }}}
+ * {{{ #LICENSE }}}
+ * {{{ #DATE_UPLOAD }}}
+ * {{{ #DATE_TAKEN }}}
+ * {{{ #OWNER_NAME }}}
+ * {{{ #ICON_SERVER }}}
+ * {{{ #ORIGINAL_FORMAT }}}
+ * {{{ #LAST_UPDATE }}}
+
+=== Balises Calculées ===
+
+ * {{{ #URL_PHOTO }}} l'url de la photo
+ * {{{ #LOGO_PHOTO }}} retourne l'image taille moyenne (500px sur le côté le plus long), sauf si on lui passe un parametre:
+    * s	petit carre 75x75
+    * t	vignette, 100px sur le côté le plus long 
+    * m	petite, 240px sur le côté le plus long 
+    * b	large, 1024px sur le côté le plus long (seulement si o est tres large)
+    * o	image originale, jpg, png ou gif en fonction de #ORIGINALFORMAT
+
+== Balises a utiliser quand #ID_PHOTO est disponible ==
+
+Voici des balises, correspondantes aux informations fournis par la methode: 
+http://www.flickr.com/services/api/flickr.photos.getContext.html
+Elles peuvent être utilisées dans n'importe quelle boucle qui fournit un {{{ #ID_PHOTO }}}
+
+ * {{{ #PHOTOS_COUNT }}} le total de photos de l'utilisateur possedant cette photo
+ * {{{ #PREVPHOTO_ID }}} l'id de la photo precedente dans le photostream
+ * {{{ #PREVPHOTO_SERVER }}} le serveur de la photo precedente dans le photostream
+ * {{{ #PREVPHOTO_SECRET }}} le secret de la photo precedente dans le photostream
+ * {{{ #PREVPHOTO_TITLE }}} le titre de la photo precedente dans le photostream
+ * {{{ #URL_PREVPHOTO }}} l'url de la page de la photo precedente dans le photostream
+ * {{{ #PREVPHOTO_THUMB }}} l'url de la vignette de la photo precedente dans le photostream
+ * {{{ #LOGO_PREVPHOTO }}} le logo de la photo precedente dans le photostream (prend un parametre comme les autres balises logo, sauf 'o')
+ * {{{ #NEXTPHOTO_ID }}} l'id de la photo suivante dans le photostream
+ * {{{ #NEXTPHOTO_SERVER }}} le serveur de la photo suivante dans le photostream
+ * {{{ #NEXTPHOTO_SECRET }}} le secret de la photo suivante dans le photostream
+ * {{{ #NEXTPHOTO_TITLE }}} le titre de la photo suivante dans le photostream
+ * {{{ #URL_NEXTPHOTO }}} l'url de la page de la photo suivante dans le photostream
+ * {{{ #NEXTPHOTO_THUMB }}} l'url de la vignette de la photo suivante dans le photostream
+ * {{{ #LOGO_NEXTPHOTO }}} le logo de la photo suivante dans le photostream (prend un parametre comme les autres balises logo, sauf 'o')
+
+= Toutes les boucles =
+
+Voir http://www.flickr.com/services/api/ pour les details. La plupart des boucles prennent les mm criteres que les methodes decrites dans ces pages.
+
+ * {{{ FLICKR_CONTACTS_GETLIST}}}
+ * {{{ FLICKR_CONTACTS_GETPUBLICLIST}}}
+ * {{{ FLICKR_FAVORITES_GETLIST}}}
+ * {{{ FLICKR_FAVORITES_GETPUBLICLIST}}}
+ * {{{ FLICKR_GROUPS_GETINFO}}}
+ * {{{ FLICKR_GROUPS_POOLS_GETGROUPS}}}
+ * {{{ FLICKR_GROUPS_POOLS_GETPHOTOS}}}
+ * {{{ FLICKR_INTERESTINGNESS_GETLIST}}}
+ * {{{ FLICKR_PEOPLE_GETINFO}}}
+ * {{{ FLICKR_PEOPLE_GETPUBLICGROUPS}}}
+ * {{{ FLICKR_PHOTO_NOTES}}}
+ * {{{ FLICKR_PHOTO_TAG}}}
+ * {{{ FLICKR_PHOTO_URLS}}}
+ * {{{ FLICKR_PHOTOS_COMMENTS_GETLIST}}}
+ * {{{ FLICKR_PHOTOS_GETALLCONTEXTS}}}
+ * {{{ FLICKR_PHOTOS_GETCONTACTSPHOTOS}}}
+ * {{{ FLICKR_PHOTOS_GETCONTACTSPUBLICPHOTOS}}}
+ * {{{ FLICKR_PHOTOS_GETEXIF}}}
+ * {{{ FLICKR_PHOTOS_GETINFO}}}
+ * {{{ FLICKR_PHOTOS_GETNOTINSET}}}
+ * {{{ FLICKR_PHOTOS_GETRECENT}}}
+ * {{{ FLICKR_PHOTOS_GETUNTAGGED}}}
+ * {{{ FLICKR_PHOTOS_GETWITHGEODATA}}}
+ * {{{ FLICKR_PHOTOS_GETWITHOUTGEODATA}}}
+ * {{{ FLICKR_PHOTOS_RECENTLYUPDATED}}}
+ * {{{ FLICKR_PHOTOS_SEARCH}}}
+ * {{{ FLICKR_PHOTOSETS_COMMENTS_GETLIST}}}
+ * {{{ FLICKR_PHOTOSETS_GETLIST}}}
+ * {{{ FLICKR_PHOTOSETS_GETPHOTOS}}}
+ * {{{ FLICKR_TAGS_GETHOTLIST}}}
+ * {{{ FLICKR_TAGS_GETLISTPHOTO}}}
+ * {{{ FLICKR_TAGS_GETLISTUSER}}}
+ * {{{ FLICKR_TAGS_GETLISTUSERPOPULAR}}}
+ * {{{ FLICKR_TAGS_GETLISTUSERRAW}}}
+ * {{{ FLICKR_TAGS_GETRELATED}}}
+ * {{{ FLICKR_URLS_LOOKUPGROUP}}}
+ * {{{ FLICKR_URLS_LOOKUPUSER }}}
+
+= Toutes les balises calculées =
+
+TODO: Il faut encore trier ces balises pour les associer aux bonnes boucles dans la doc
+
+ * {{{ #ACCURACY }}}
+ * {{{ #FLICKR_PHOTO_ID }}}
+ * {{{ #FLICKR_PHOTO_SECRET }}}
+ * {{{ #ID_GROUP }}}
+ * {{{ #ID_PHOTOSET }}}
+ * {{{ #ISFAMILY }}}
+ * {{{ #ISFRIEND }}}
+ * {{{ #ISPUBLIC }}}
+ * {{{ #LATITUDE }}}
+ * {{{ #LOGO_CONTACT }}}
+ * {{{ #LOGO_GROUP }}}
+ * {{{ #LOGO_NEXTPHOTO }}}
+ * {{{ #LOGO_OWNER }}}
+ * {{{ #LOGO_PHOTO }}}
+ * {{{ #LOGO_PHOTOSET }}}
+ * {{{ #LOGO_PREVPHOTO }}}
+ * {{{ #LONGITUDE }}}
+ * {{{ #NEXTPHOTO_ID }}}
+ * {{{ #NEXTPHOTO_SECRET }}}
+ * {{{ #NEXTPHOTO_SERVER }}}
+ * {{{ #NEXTPHOTO_THUMB }}}
+ * {{{ #NEXTPHOTO_TITLE }}}
+ * {{{ #PHOTOS_COUNT }}}
+ * {{{ #PREVPHOTO_ID }}}
+ * {{{ #PREVPHOTO_SECRET }}}
+ * {{{ #PREVPHOTO_SERVER }}}
+ * {{{ #PREVPHOTO_THUMB }}}
+ * {{{ #PREVPHOTO_TITLE }}}
+ * {{{ #URL_GROUP }}}
+ * {{{ #URL_NEXTPHOTO }}}
+ * {{{ #URL_OWNER }}}
+ * {{{ #URL_PHOTO }}}
+ * {{{ #URL_PHOTOSET }}}
+ * {{{ #URL_PREVPHOTO }}}
+ * {{{ #URL_USERPHOTOS }}}
+ * {{{ #URL_USERPROFILE }}}
+
+= Toutes les balises/criteres pour limiter dans les tables =
+
+TODO trier, expliquer
+
+ * {{{  {id_photo} / #ID_PHOTO }}}
+ * {{{ {user_id} / #USER_ID }}}
+ * {{{ {secret} / #SECRET }}}
+ * {{{ {server} / #SERVER }}}
+ * {{{ {title} / #TITLE }}}
+ * {{{ {ispublic} / #ISPUBLIC }}}
+ * {{{ {isfriend} / #ISFRIEND }}}
+ * {{{ {isfamily} / #ISFAMILY }}}
+ * {{{ {originalformat} / #ORIGINALFORMAT }}}
+ * {{{ {license} / #LICENSE }}}
+ * {{{ {upload_date} / #UPLOAD_DATE }}}
+ * {{{ {taken_date} / #TAKEN_DATE }}}
+ * {{{ {owner_name} / #OWNER_NAME }}}
+ * {{{ {icon_server} / #ICON_SERVER }}}
+ * {{{ {last_update} / #LAST_UPDATE }}}
+ * {{{ {latitude} / #LATITUDE }}}
+ * {{{ {longitude} / #LONGITUDE }}}
+ * {{{ {accuracy} / #ACCURACY }}}
+ * {{{ {rang} / #RANG }}}
+ * {{{ {id_photoset} / #ID_PHOTOSET }}}
+ * {{{ {id_group} / #ID_GROUP }}}
+ * {{{ {added_date} / #ADDED_DATE }}}
+ * {{{ {field} / #FIELD }}}
+ * {{{ {id_photo} / #ID_PHOTO }}}
+ * {{{ {secret} / #SECRET }}}
+ * {{{ {server} / #SERVER }}}
+ * {{{ {isfavorite} / #ISFAVORITE }}}
+ * {{{ {license} / #LICENSE }}}
+ * {{{ {rotation} / #ROTATION }}}
+ * {{{ {originalformat} / #ORIGINALFORMAT }}}
+ * {{{ {user_id} / #USER_ID }}}
+ * {{{ {owner_username} / #OWNER_USERNAME }}}
+ * {{{ {owner_realname} / #OWNER_REALNAME }}}
+ * {{{ {owner_location} / #OWNER_LOCATION }}}
+ * {{{ {title} / #TITLE }}}
+ * {{{ {description} / #DESCRIPTION }}}
+ * {{{ {ispublic} / #ISPUBLIC }}}
+ * {{{ {isfriend} / #ISFRIEND }}}
+ * {{{ {isfamily} / #ISFAMILY }}}
+ * {{{ {date_posted} / #DATE_POSTED }}}
+ * {{{ {date_taken} / #DATE_TAKEN }}}
+ * {{{ {date_lastupdate} / #DATE_LASTUPDATE }}}
+ * {{{ {comments} / #COMMENTS }}}
+ * {{{ {latitude} / #LATITUDE }}}
+ * {{{ {longitude} / #LONGITUDE }}}
+ * {{{ {accuracy} / #ACCURACY }}}
+ * {{{ {field} / #FIELD }}}
+ * {{{ {id_tag} / #ID_TAG }}}
+ * {{{ {author} / #AUTHOR }}}
+ * {{{ {raw} / #RAW }}}
+ * {{{ {safe} / #SAFE }}}
+ * {{{ {id_photo} / #ID_PHOTO }}}
+ * {{{ {score} / #SCORE }}}
+ * {{{ {count} / #COUNT }}}
+ * {{{ {field} / #FIELD }}}
+ * {{{ {id_note} / #ID_NOTE }}}
+ * {{{ {id_photo} / #ID_PHOTO }}}
+ * {{{ {author} / #AUTHOR }}}
+ * {{{ {authorname} / #AUTHORNAME }}}
+ * {{{ {x} / #X }}}
+ * {{{ {y} / #Y }}}
+ * {{{ {width} / #WIDTH }}}
+ * {{{ {height} / #HEIGHT }}}
+ * {{{ {texte} / #TEXTE }}}
+ * {{{ {field} / #FIELD }}}
+ * {{{ {type} / #TYPE }}}
+ * {{{ {id_photo} / #ID_PHOTO }}}
+ * {{{ {url} / #URL }}}
+ * {{{ {field} / #FIELD }}}
+ * {{{ {id_photoset} / #ID_PHOTOSET }}}
+ * {{{ {user_id} / #USER_ID }}}
+ * {{{ {primary_photo} / #PRIMARY_PHOTO }}}
+ * {{{ {secret} / #SECRET }}}
+ * {{{ {server} / #SERVER }}}
+ * {{{ {photos} / #PHOTOS }}}
+ * {{{ {title} / #TITLE }}}
+ * {{{ {description} / #DESCRIPTION }}}
+ * {{{ {field} / #FIELD }}}
+ * {{{ {id_contexte} / #ID_CONTEXTE }}}
+ * {{{ {title} / #TITLE }}}
+ * {{{ {type} / #TYPE }}}
+ * {{{ {id_photo} / #ID_PHOTO }}}
+ * {{{ {field} / #FIELD }}}
+ * {{{ {id_comment} / #ID_COMMENT }}}
+ * {{{ {user_id} / #USER_ID }}}
+ * {{{ {authorname} / #AUTHORNAME }}}
+ * {{{ {date_create} / #DATE_CREATE }}}
+ * {{{ {permalink} / #PERMALINK }}}
+ * {{{ {texte} / #TEXTE }}}
+ * {{{ {id_photo} / #ID_PHOTO }}}
+ * {{{ {id_photoset} / #ID_PHOTOSET }}}
+ * {{{ {field} / #FIELD }}}
+ * {{{ {id_group} / #ID_GROUP }}}
+ * {{{ {user_id} / #USER_ID }}}
+ * {{{ {admin} / #ADMIN }}}
+ * {{{ {eighteenplus} / #EIGHTEENPLUS }}}
+ * {{{ {iconserver} / #ICONSERVER }}}
+ * {{{ {name} / #NAME }}}
+ * {{{ {description} / #DESCRIPTION }}}
+ * {{{ {members} / #MEMBERS }}}
+ * {{{ {privacy} / #PRIVACY }}}
+ * {{{ {throttle_count} / #THROTTLE_COUNT }}}
+ * {{{ {throttle_mode} / #THROTTLE_MODE }}}
+ * {{{ {throttle_remaining} / #THROTTLE_REMAINING }}}
+ * {{{ {photos} / #PHOTOS }}}
+ * {{{ {field} / #FIELD }}}
+ * {{{ {user_id} / #USER_ID }}}
+ * {{{ {isadmin} / #ISADMIN }}}
+ * {{{ {ispro} / #ISPRO }}}
+ * {{{ {iconserver} / #ICONSERVER }}}
+ * {{{ {username} / #USERNAME }}}
+ * {{{ {realname} / #REALNAME }}}
+ * {{{ {location} / #LOCATION }}}
+ * {{{ {url_photos} / #URL_PHOTOS }}}
+ * {{{ {url_profile} / #URL_PROFILE }}}
+ * {{{ {date_firstphoto} / #DATE_FIRSTPHOTO }}}
+ * {{{ {date_taken_firstphoto} / #DATE_TAKEN_FIRSTPHOTO }}}
+ * {{{ {photos_count} / #PHOTOS_COUNT }}}
+ * {{{ {ignored} / #IGNORED }}}
+ * {{{ {family} / #FAMILY }}}
+ * {{{ {friend} / #FRIEND }}}
+ * {{{ {field} / #FIELD }}}
+ * {{{ {id_photo} / #ID_PHOTO }}}
+ * {{{ {secret} / #SECRET }}}
+ * {{{ {server} / #SERVER }}}
+ * {{{ {tagspace} / #TAGSPACE }}}
+ * {{{ {tagspaceid} / #TAGSPACEID }}}
+ * {{{ {tag} / #TAG }}}
+ * {{{ {label} / #LABEL }}}
+ * {{{ {raw} / #RAW }}}
+ * {{{ {clean} / #CLEAN }}}
+ * {{{ {field} / #FIELD }}}
+
+
+ 
+-------------
+ 
+= Les Modeles =
+ 
+ * {{{ <fpiprbox|nsid=XXX> }}} ou {{{ <fpiprbox|tags=spip,gateau> }}} affiche 12 vignettes dans un tableau qui peut être "animé" si le plugin splickrbox est aussi activé (pour un effet similaire à le boite fournis par Flickr) (au moin un des deux paramètres doit être fournis)
+ * {{{ <fpiprboxXXXXX> }}} affiche le logo de la photo XXXXX et sa liste de tags. Ce modele est différent du fonctionement cité précedemment. En effet, l'image n'est jamais attaché à l'article ou stocké sur le site. Le logo et à chaque fois récupéré depuis Flickr (prend un parametre |taille=t pour specifier la taille du logo)
+ * {{{ <fpiprsetboxXXXX> }}} affiche 12 vignettes de photos dans le set XXXXXXX qui peuvent être "animées" si le plugin splickrbox est aussi activé.
+

@@ -1,0 +1,38 @@
+#CACHE{2*24*3600}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <title>Demo simple pour FpipR</title>
+    <meta name="author" content="Pierre Andrews">
+	#INSERT_HEAD
+  </head>
+
+  <body>
+    <h1>Demo simple pour FpipR</h1>
+
+    
+<BOUCLE_auteur(AUTEURS) {flickr_nsid!=''}{"<hr/>"}>
+<h2>Photos pour #NOM</h2>
+<BOUCLE_photos(FLICKR_PHOTOS_SEARCH) {user_id=#FLICKR_NSID} {0,10}>
+<a href="#URL_PHOTO">#LOGO_PHOTO{m}</a>
+</BOUCLE_photos>
+Pas de photos pour #NOM
+<//B_photos>
+
+</BOUCLE_auteur>
+    <h2>Pas d'utilisateurs authentifié sur le site</h2>
+<strong>Les photos de Renatof</strong>
+<BOUCLE_photos2(FLICKR_PHOTOS_SEARCH) {user_id=71408536@N00} {0,10}>
+#LOGO_PHOTO{m}
+</BOUCLE_photos2>
+Pas de photos pour #NOM
+<//B_photos2>
+<//B_auteur>
+    <hr>
+	<h2>Un modele qui tourne avec splickrbox</h2>
+	[(#MODELE{fpiprbox}{tags=spip})]
+
+<div id="statusMsg"></div>
+
+  </body>
+</html>

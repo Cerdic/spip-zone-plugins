@@ -1,0 +1,138 @@
+#CACHE{86400}
+[(#REM)
+<!--
+	// $LastChangedRevision$
+	// $LastChangedBy$
+	// $LastChangedDate$
+
+	Exemple avec utilisation du modele imagereflet
+	pour insertion du portfolio *dans* l'article, 
+	via la boite edition en espace prive'
+
+	Identique a html/article.html
+	sauf 
+	- insertion de la balise IMAGEFLOW_INSERT_HEAD avant le head
+	- ajout de styles complementaires en fin de head
+	- retrait du portfolio dist de bas de page
+	- retrait de la liste des documents joints
+	
+	Documentation : http://www.quesaco.org/Portfolio-ImageFlow-pour-SPIP	
+-->
+]<BOUCLE_article_principal(ARTICLES) {id_article}>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+<title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#INTRODUCTION|couper{150}|textebrut)" />]
+[(#REM)
+<!--
+	Insertion du inc-head (contient la balise INSERT-HEAD)
+-->	
+]<INCLURE{fond=inc-head}>
+[(#REM)
+<!--
+	Ajout de la balise IMAGEFLOW_INSERT_HEAD pour charger le javascrpt du plugin
+-->	
+]#IMAGEFLOW_INSERT_HEAD
+[(#REM)
+<!--
+	Optimisez le style du portfolio ici (toujours en fin de head pour ecraser les reglages par defaut)
+	Exemple:
+-->	
+]<style type="text/css">
+<!--
+#imageflow {margin-top:0; margin-right:135px;} /* la boite complete imageflow */
+#imageflow #captions {color:#003} /* petit titre sous les vignettes */
+#imageflow #slider {margin-left:180px} /* boite conteneur ascenseur */
+-->
+</style>
+</head>
+
+<body class="page_article">
+<div id="page">
+
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}>
+
+	[(#REM) Fil d'Ariane ]
+	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_article}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; (#TITRE|couper{80})]</div>
+
+
+	<div id="conteneur">
+
+		[(#REM) Contenu principal : contenu de l'article ]
+		<div id="contenu">
+
+			<div class="cartouche">
+				#DEBUT_SURLIGNE
+				[(#LOGO_ARTICLE||image_reduire{200,200})]
+				[<p class="#EDIT{surtitre} surtitre">(#SURTITRE)</p>]
+				<h1 class="#EDIT{titre} titre">#TITRE</h1>
+				[<p class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</p>]
+				#FIN_SURLIGNE
+
+				<p><small>[(#DATE|nom_jour) ][(#DATE|affdate)][, <:par_auteur:> (#LESAUTEURS)]</small></p>
+
+				[(#REM) Inclure le modele des liens de traductions ]
+				#MODELE{article_traductions}
+
+			</div>
+
+			#DEBUT_SURLIGNE
+			[<div class="#EDIT{chapo} chapo">(#CHAPO)</div>]
+			<br class="nettoyeur" />
+			[<p class="#EDIT{hyperlien} lien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+			[<div class="#EDIT{texte} texte">(#TEXTE|image_reduire{520,0})</div>]
+			#FIN_SURLIGNE
+
+			[<div class="ps"><h2><:info_ps:></h2>#DEBUT_SURLIGNE<div class="#EDIT{ps}">(#PS)</div>#FIN_SURLIGNE</div>]
+
+					
+			[(#REM) Petition :
+			La petition ayant une PAGINATION il faut absolument lui passer SELF]
+			[(#PETITION|?{' '})
+				<INCLURE{fond=inc-petition}{id_article}{self=#SELF}>
+			]
+
+			[<div class="notes"><h2><:info_notes:></h2>#DEBUT_SURLIGNE(#NOTES)#FIN_SURLIGNE</div>]
+
+			[(#REM) Forum de l'article ]
+			<a href="#forum" name="forum" id="forum"></a>
+			[<h2 class="forum-repondre"><a href="(#PARAMETRES_FORUM|url_reponse_forum)"><:repondre_article:></a></h2>]
+			<INCLURE{fond=inc-forum}{id_article}>
+
+		</div><!-- fin contenu -->
+
+
+		[(#REM) Menu de navigation laterale ]
+		<div id="navigation">
+
+			[(#REM) Menu de navigation par rubriques ]
+			<INCLURE{fond=inc-rubriques}{id_rubrique}>
+
+			[(#REM) Articles dans la meme rubrique ]
+			<B_articles_rubrique>
+			<div class="breves">
+				<h2 class="menu-titre"><a href="#URL_RUBRIQUE"><:meme_rubrique:></a></h2>
+				<ul>
+					<BOUCLE_articles_rubrique(ARTICLES) {id_rubrique} {par date}{inverse} {0,10}>
+					<li><a href="#URL_ARTICLE"[ class="(#EXPOSE)"]>#TITRE</a></li>
+					</BOUCLE_articles_rubrique>
+				</ul>
+			</div>
+			</B_articles_rubrique>
+
+			[(#REM) Menu de navigation mots-cles ]
+			#MODELE{article_mots}
+
+		</div><!-- fin navigation -->
+
+	</div><!-- fin conteneur -->
+
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
+</div><!-- fin page -->
+</body>
+</html>
+</BOUCLE_article_principal>

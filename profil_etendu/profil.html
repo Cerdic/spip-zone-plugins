@@ -1,0 +1,65 @@
+#CACHE{5}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+	<title><:monprofil:>[(#NOM_SITE_SPIP|textebrut)]</title>
+	[<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)" />]
+	<INCLURE{fond=inc-head}>
+<script type="text/javascript"><!--
+
+var ajax_image_searching = '<div style="float: right;"><img src="ecrire/img_pack/searching.gif" /><\/div>';
+var admin = 1
+var stat = 1
+var largeur_icone = 84
+var  bug_offsetwidth = 1
+var confirm_changer_statut = 'Attention, vous avez demand\u00e9 \u00e0 changer le statut de cet \u00e9l\u00e9ment. Souhaitez-vous continuer?';
+
+//--></script>
+
+<script type="text/javascript" src="ecrire/img_pack/layer.js"></script>
+<script type="text/javascript" src="ecrire/img_pack/presentation.js"></script>
+<style>
+#conteneur label{
+	display:block;
+}
+</style>
+</head>
+
+<body class="page_article">
+<div id="page">
+
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}>
+
+	[(#REM) Fil d'Ariane ]
+	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_article}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; (#TITRE|couper{80})]</div>
+
+	<div id="conteneur">
+
+[(#BOUTON_LOGOUT)]
+<hr/>
+[(#LIEN_STATUT{'page1.html','lien non authentifie','page2.html','lien authentifie'})]
+<BOUCLE_RUBRIQUE(RUBRIQUES){id_parent=0}>
+<br/>[(#LIEN_STATUT{spip.php?page=profil&url=spip.php%3fpage%3darticle_new%26id_rubrique%3d#ID_RUBRIQUE,<:profil:proposer_article:>,spip.php?page=article_new&id_rubrique=#ID_RUBRIQUE,<:profil:proposer_article:>})]
+</BOUCLE_RUBRIQUE>
+<hr/>
+LOGIN_INSCRIPTION
+<hr/>
+[(#LOGIN_INSCRIPTION)]
+<hr/>
+FORMULAIRE_PROFIL_ETENDU
+<hr/>
+[(#FORMULAIRE_PROFIL_ETENDU)]
+<hr/>
+FORMULAIRE_ARTICLES_AUTEUR
+<hr/>
+[(#FORMULAIRE_ARTICLES_AUTEUR)]
+
+	</div><!-- fin conteneur -->
+
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
+</div><!-- fin page -->
+</body>
+</html>

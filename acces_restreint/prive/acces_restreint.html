@@ -1,0 +1,33 @@
+[(#REM)
+/**
+ * Plugin Acces Restreint 3.0 pour Spip 2.0
+ * Licence GPL (c) 2006-2008 Cedric Morin
+ *
+ */
+]#SET{self,#SELF|parametre_url{debut_zones|tri,''}}
+<B_zones><p class='pagination'>[(#PAGINATION) | ]<a href='[(#GET{self}|parametre_url{tri,titre})]'><:accesrestreint:par_titre:></a> 
+[(#ENV{publique}|non)| <a href='[(#GET{self}|parametre_url{publique,oui})]'><:accesrestreint:publique:></a>]
+[(#ENV{publique}|ou{#ENV{privee}}|oui)| <a href='[(#GET{self}|parametre_url{publique|privee,''})]'><:accesrestreint:toutes:></a>]
+[(#ENV{privee}|non)| <a href='[(#GET{self}|parametre_url{privee,oui})]'><:accesrestreint:privee:></a>]
+</p>
+<ul class='liste_items'>
+<BOUCLE_zones(ZONES){par #ENV{tri,id_zone}}{publique==#ENV{publique,.*}}{privee==#ENV{privee,.*}}{pagination 10}>
+<li class='item zone[ (#ID_ZONE|accesrestreint_acces_zone|?{ok,interdit})]'><h3>#TITRE</h3>
+<span class='contenu'>[(#ID_ZONE|accesrestreint_liste_contenu_zone_rub|count) <:accesrestreint:rubriques:>, ]
+[(#ID_ZONE|accesrestreint_liste_contenu_zone_auteur|count) <:accesrestreint:auteurs:>]
+</span>
+<span class='descriptif'>#DESCRIPTIF</span>
+<span class='quoi'>[(#PUBLIQUE|=={oui}|oui)<:accesrestreint:publique:>[, (#PRIVEE|=={oui}|oui)]][ (#PRIVEE|=={oui}|oui)<:accesrestreint:privee:>]</span>
+<p class='actions'>
+	[(#AUTORISER{modifier,zone,#ID_ZONE})	<span class='lien_modifier'>&#91;<a href='[(#URL_ECRIRE{zones_edit,id_zone=#ID_ZONE}|parametre_url{retour,#SELF})]'><:bouton_modifier:></a>&#93;</span>]
+	[(#AUTORISER{supprimer,zone,#ID_ZONE})<span class='lien_supprimer'>&#91;<a href='#URL_ACTION_AUTEUR{supprimer_zone,#ID_ZONE,#SELF}' onclick="return confirm('<:accesrestreint:confirmer_supprimer_zone:>');"><:accesrestreint:icone_supprimer_zone:></a>&#93;</span>]
+</p>
+</li>
+</BOUCLE_zones>
+</ul>
+</B_zones>
+<p class='pagination'>[(#ENV{publique}|non)| <a href='[(#GET{self}|parametre_url{publique,oui})]'><:accesrestreint:publique:></a>]
+[(#ENV{publique}|ou{#ENV{privee}}|oui)| <a href='[(#GET{self}|parametre_url{publique|privee,''})]'><:accesrestreint:toutes:></a>]</p>
+[(#ENV{privee}|non)| <a href='[(#GET{self}|parametre_url{privee,oui})]'><:accesrestreint:privee:></a>]
+<:accesrestreint:info_aucune_zone:>
+<//B_zones>

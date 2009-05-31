@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin>
+	<nom>SPIP-Météo</nom>
+	<auteur>[Artégo->http://www.artego.fr]</auteur>
+	<version>2.0</version>
+	<etat>stable</etat>
+	<licence>[GPLv3->http://www.gnu.org/licenses/gpl-3.0.html]</licence>
+	<description>Prévisions météo dans vos squelettes</description>
+ 	<necessite id="SPIP" version="[2.0.3;]" />
+	<install>base/meteo.php</install>
+	<lien>[Site officiel du plugin->http://www.artego.fr/-Previsions-meteo-]</lien>
+	<icon>prive/images/meteo-48.png</icon>
+	<options>meteo_options.php</options>
+	<fonctions>meteo_fonctions.php</fonctions>
+	<prefix>meteo</prefix>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/meteo.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/meteo.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>taches_generales_cron</nom>
+		<inclure>genie/meteo.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>inc/meteo_autorisations.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_objets_surnoms</nom>
+		<inclure>inc/meteo_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>rechercher_liste_des_champs</nom>
+		<inclure>inc/meteo_pipelines.php</inclure>
+	</pipeline>
+	<bouton id="meteo_tous" parent="naviguer">
+		<icone>prive/images/meteo-24.png</icone>
+		<titre>meteo:meteo</titre>       
+	</bouton>
+</plugin>

@@ -1,0 +1,24 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Interface mnoGoSearch
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->	
+	Cedric MORIN [notre-ville.net->http://www.notre-ville.net]
+_ ce plugin est fourni tel quel sous licence GPL
+	</auteur>
+	<version>0.10</version>
+	<etat>stable</etat>
+	<description>
+Interfacage du moteur mnoGoSearch avec l'API SPIP
+_ Ce plugin prend en charge l'interrogation de monogosearch 
+et la mise &#224; disposition des r&#233;sultats de recherche dans des balises et une boucle MNOGOSEARCH
+_ Copier le fichier etc/search.html dans le repertoire etc de votre serveur mnogosearch
+_ aller dans la page d'admin ?exec=admin_mnogo et indiquez l'url d'interrogation de votre serveur mnogosearch
+_ allez sur le site sur la page ?page=recherche_mnogo&amp;var_recherche=votre_mot
+	</description>
+	<lien></lien> <!-- URI de documentation -->
+	<prefix>monogo</prefix>
+	<fonctions>mnogo_mes_fonctions.php</fonctions>
+	<options>mnogo_mes_options.php</options>
+	<necessite id="SPIP" version="[1.9.0;]" />
+</plugin>

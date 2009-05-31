@@ -1,0 +1,37 @@
+Plugin: Tri Mots
+Auteur: Pierre Andrews (mortimer.pa@free.fr)
+Licence: GPL
+
+Le plugin Tri Mots permet de trier une série d'articles entre eux.
+
+Le principe est assez complexe, mais un fois qu'on l'a compris, il offre beaucoup de possibilités.
+
+Quand l'on veut trier des articles, il faut décider la liste de tous les articles que l'on veut trier. Actuellement, avec la méthode d'un numéros dans le titre, on tri tous les articles du site ensemble. Il est difficile de faire une distinction entre les articles d'une certaine rubrique, des articles sur un certain thème, etc...
+
+Ce plugin permet de faire des tris relatifs à un mot clef. Ainsi, si on associe des mots clefs ainsi:
+
+    * article1 mot1,mot2,mot3
+    * article2 mot1
+    * article3 mot2
+    * article4 mot3
+    * article5 mot2, mot3
+    * article6 mot1, mot2 
+
+On pourra trier trois listes d'articles différentes:
+
+    * article1, article2, article6
+    * article1, article3, article5, article6
+    * article1, article4, article5 
+
+Ainsi, si l'on associe un mot (par exemple) "Documentation" à tous les articles de thème documentation, n'importe où dans le site, on pourra définir un tri seulement pour ses articles. Indépendant de tous les autres articles du site.
+
+Utilisation
+
+L'utilisation est très simple: 1. activer le plugin 1. choisir un mot clef sur lequel on veut faire le tri (ou le créer) 1. associer ce mot à tous les articles que l'on veut trier ensemble 1. sur la gauche de la page de l'article (dans l'espace privé) apparaîtra une boite avec la liste des mots clefs associés à l'article et le rang (à quel position il se trouve dans le tri) de cet article 1. en cliquant sur le mot auquel on s'interesse, on arrive à une liste des tous les articles associés à ce mot 1. il suffit alors de faire des glisser déposer des articles pour les ordonner 1. une fois que les articles sont triés correctement, il suffit de "valider" pour sauvegarder les modifications.
+
+Dans les squelettes
+
+Pour utiliser un tri spécifique dans le squelette, il suffit alors de faire une boucle avec le critère {par rang} et un critère de limitation par mot clef: {id_mot=XX} ou {titre_mot=...} :
+
+<BOUCLE_tri(ARTICLES) {par rang} {id_mot=18}>
+

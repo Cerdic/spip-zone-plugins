@@ -1,0 +1,24 @@
+#CACHE{3600}
+<BOUCLE_une_donnee(FORMS_DONNEES){id_donnee}>
+	<item>
+		<title>[(#TITRE|supprimer_numero|texte_backend)]</title>
+		<link>[(#URL_PAGE{donnee,#ID_DONNEE}|url_absolue)]</link>
+		<dc:format>text/html</dc:format>
+		[<dc:language>(#LANG)</dc:language>]
+		<BOUCLE_table_rss(FORMS){id_form}>[<category[ domain="(#URL_PAGE{table,#ID_FORM}|url_absolue)"]>(#TITRE|supprimer_numero|texte_backend)</category>]</BOUCLE_table_rss>
+<BOUCLE_mots_rss(FORMS_DONNEES_CHAMPS){id_donnee}{type=mot}>
+		[<dc:subject>(#LESVALEURS|texte_backend)</dc:subject>]</BOUCLE_mots_rss>
+		<description>[(#MODELE{donnee,id_donnee=#ID_DONNEE}|texte_backend)]
+		</description>
+		[(#REM) geolocalisation ]
+		[<geo_lat>(#LATITUDE)</geo_lat>]
+		[<geo_long>(#LONGITUDE)</geo_long>]
+		[<geo_icon>(#GEOICONE)</geo_icon>]
+[(#REM)
+	Le bloc qui suit diffuse l'adresse des documents associes a une donnee ;
+	ajouter par ex. {extension=mp3} pour limiter a un certain type de document.
+]		<BOUCLE_documents(DOCUMENTS){id_donnee}{extension=mp3}>[
+		<enclosure url="(#URL_DOCUMENT|url_absolue|unique)"[ length="(#TAILLE)"][ type="(#MIME_TYPE)"] />]
+		</BOUCLE_documents>
+	</item>
+</BOUCLE_une_donnee>

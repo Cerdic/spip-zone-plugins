@@ -1,0 +1,55 @@
+
+Projet : Plugin FCKEditor
+Auteur : Frank SAURET - 
+Contact : http://electropol.free.fr
+
+Voici les régles à suivre avant de commiter des modifications sur
+cette branche.
+
+A. Obligation de n'intervenir que dans le planning de travail (fichier TaF.txt). Pour le modifier
+contactez moi à vincevg@free.fr.
+                   
+B. Obligation de commenter les commits
+
+   Si vous envoyez des modifications, il faut toujours les commenter
+   de façon "descriptive" et "complète" avec l'option -m ou -F du
+   commit SVN.
+   
+C.  Modification du code
+
+       
+    Vous pouvez néanmoins apporter des modifications mineures. Incrémentez à 
+    chaque fois le N° de version mineure. Ex : passer de la 1.9 à 1.10. 
+  
+      Aucune modification profonde du code n'est attendu pour cette version.
+      Seules les corrections de bug sont autorisées.
+	
+      Tout le monde à le droit de faire des modifications.
+	
+      Toutefois, dans un premier temps, il est souhaitable d'avertir  
+      l'auteur principal du projet. Il faut alors, dans le mail, 
+      envoyer un patch au format "diff -pu", donner une description 
+      défendable du bug corrigé et la manière choisit pour le corriger.
+		
+       En particulier, il faut bien penser à:
+      - décrire le bug que l'on corrige, 
+        comment on a choisit de le  corriger,
+      - décrire la modification que l'on a faite et pourquoi le
+        nouveau code est meilleur que l'ancien (qui n'est certainement pas
+        un code parfait de toute façon)
+      - décrire la nouvelle fonction, ce quelle apporte à
+        l'utilisateur, les dépendances qu'elle apporte.
+	
+  
+  
+A. Clarté du code.
+
+Il n'y a actuellement pas de règles précises d'écriture correct du
+code. Il faut juste garder du code indenter (i.e indenter chaque
+fermeture sur une nouvelle ligne pour les gros blocs), en général,
+suivre la façon dont c'est fait dans les fichiers de bases.
+
+Il faut toujours mettre une chaîne de documentation quand c'est
+possible et quand on le peut documenter le processus/l'algorithme que
+l'on implémente.
+

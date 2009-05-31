@@ -1,0 +1,87 @@
+<composant>
+  <!-- Nom du composant -->
+  <nom>Rubnav</nom>
+  <!-- Auteur du composant -->
+  <auteur>Daniel FAIVRE &copy; 2008-2009 - licence GPL</auteur>
+  <version>0.5</version>
+  <necessite id='acs' version='[0.5;]' />
+
+  <param>
+    <nom>optionnel</nom>
+    <valeur>no</valeur>
+  </param>
+  <param>
+    <nom>preview</nom>
+    <valeur>180</valeur>
+  </param>
+
+  <variable>
+    <nom>Fond</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>Fond2</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>Fond3</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>Fond4</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>Fond5</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>Fond6</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>FondHover</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>Titre</nom>
+    <type>choix</type>
+    <option>oui</option>
+    <option>non</option>
+    <valeur>oui</valeur>
+  </variable>
+  <variable>
+    <nom>TitreFond</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>TitreFondImage</nom>
+    <type>img</type>
+    <chemin>img/trame</chemin>
+    <label>non</label>
+  </variable>
+  <variable>
+    <nom>Bord</nom>
+    <type>color</type>
+    <valeur>acsFondBordColor</valeur>
+  </variable>
+  <variable>
+    <nom>Sep</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>Align</nom>
+    <type>choix</type>
+    <option>left</option>
+    <option>center</option>
+    <option>right</option>
+    <valeur>left</valeur>
+  </variable>
+  <variable>
+    <nom>MaJ</nom>
+    <type>choix</type>
+    <option>oui</option>
+    <option>non</option>
+    <valeur>oui</valeur>
+  </variable>
+</composant>

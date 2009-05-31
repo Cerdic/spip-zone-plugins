@@ -1,0 +1,13 @@
+[(#REM)
+
+	Un petit descriptif ne serait pas superflu
+
+]
+<div class='cadre-formulaire-editer'>
+<div class="entete-formulaire">
+	#ENV**{icone_retour}
+	[<p>(#ENV{new}|intval|?{<:accesrestreint:modifier_zone:>,<:accesrestreint:creer_zone:>})</p>]
+	[<h1>(#ENV{new}|intval|?{##ENV{new}})</h1>]
+</div>
+#FORMULAIRE_EDITER_ZONE{#ENV{new},#ENV{redirect}}
+</div>

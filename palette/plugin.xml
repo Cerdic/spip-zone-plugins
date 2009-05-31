@@ -1,0 +1,36 @@
+<plugin>
+    <nom>Palette</nom>
+    <auteur>Daniel FAIVRE (à partir de travaux de Marcimat)
+_ &#169; 2008 - <multi>[fr]Distribu&#233; sous licence[en]Released under license[de]Vertrieb unter Lizenz</multi> GNU/LGPL
+    </auteur>
+    <version>
+    1.2.1
+    </version>
+    <etat>
+    stable
+    </etat>
+    <install>palette_install.php</install>
+    <description>
+		<multi>[fr]S&#233;lecteur de couleurs<br />Donnez la classe palette &agrave; un input pour lui ajouter un s&#233;lecteur de couleurs:<br />&lt;input <b>class="palette"</b> name="couleur" value="#dfdfdf" /&gt;[en]Color picker<br />Set class palette to an input to add a color picker:<br />&lt;input <b>class="palette"</b> name="color" value="#dfdfdf" /&gt;</multi>
+    </description>
+    <prefix>
+    palette
+    </prefix>
+    <icon>
+    images/palette.png
+    </icon>
+	<options>palette_options.php</options>
+    <pipeline>
+        <nom>insert_head</nom>
+        <action>insert_head</action>
+        <inclure>palette_pipeline.php</inclure>
+    </pipeline>
+    <pipeline>
+        <nom>header_prive</nom>
+        <action>header_prive</action>
+        <inclure>palette_pipeline.php</inclure>
+    </pipeline>
+	<necessite id="SPIP" version="[2.0.0;]" />
+	<necessite id="lib:farbtastic_1_3_1" src="http://kent1.sklunk.net/IMG/zip/farbtastic_1_3_1.zip" />
+	<utilise id="cfg" version="[1.10.4;]" />
+</plugin>

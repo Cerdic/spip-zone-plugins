@@ -1,0 +1,19 @@
+/*
+Regles CSS pour la balise <q> rajoutee par le plugin
+Citations bien balisees
+CopyLeft 2009 Bertrand Marne citations_bb à sciencesnat point org
+et romy.tetue.net
+GPL v3
+*/
+
+/* fr */
+q:lang(fr):before { content: "\00AB\A0"; }
+q:lang(fr):after { content: "\A0\00BB"; }
+q:lang(fr) q:before { content: "\201C"; }
+q:lang(fr) q:after { content: "\201D"; }
+q:lang(fr) q q:before { content: "\2018"; }
+q:lang(fr) q q:after { content: "\2019"; }
+
+/* IE */
+* html q { font-style: italic; }
+*+html q { font-style: italic; }

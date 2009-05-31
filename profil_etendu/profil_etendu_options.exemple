@@ -1,0 +1,50 @@
+<?php
+
+$GLOBALS['enum_conf']=array(
+	"xxx" => array(	
+		"a" => "A",
+		"b" => "B",
+		"c" => "C"
+	),
+	"yyy" => array(	
+		"x" => "X",
+		"y" => "Y",
+		"z" => "Z"
+   )
+  
+);
+
+
+$GLOBALS['champs_etendus']=array(
+'profil_etendu' => array (
+"un_textarea" => "bloc|propre|"._T('un_textarea'),
+"un_multiple" => "multiple|brut|"._T('un_multiple')."|".join(array_values($enum_conf["xxx"]),",")."|".join(array_keys($enum_conf["xxx"]),","),
+"un_select" => "select|brut|"._T('un_select')."|".join(array_values($enum_conf["yyy"]),",")."|".join(array_keys($enum_conf["yyy"]),","),
+"une_checkbox" => "checkbox|brut|"._T('une_checkbox')
+));
+
+$spip_profil_etendu = array(
+"un_textarea" => "text default NULL",
+"un_multiple" => "varchar(255) default NULL",
+"un_select" => "varchar(255) default NULL",
+"une_checkbox" => "enum('oui','non') NOT NULL default 'non'",
+"id_auteur" => "int(11) NOT NULL default '0'",
+"maj" => "datetime default NULL");
+  
+$spip_profil_etendu_key = array(
+	"PRIMARY KEY" => "id_auteur");
+
+$tables_principales['spip_profil_etendu'] =
+	array('field' => &$spip_profil_etendu, 'key' => &$spip_profil_etendu_key);
+
+$table_primary['profil_etendu']="id_auteur";
+$table_des_tables['profil_etendu']="profil_etendu";
+
+function boucle_profil_etendu($id_boucle, &$boucles) {
+	$boucle = &$boucles[$id_boucle];
+	$boucle->from[] =  "spip_profil_etendu AS " . $boucle->type_requete;
+	return calculer_boucle($id_boucle, $boucles); 
+}
+
+
+?>

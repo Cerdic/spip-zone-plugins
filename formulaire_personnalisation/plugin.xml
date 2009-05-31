@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Panneau de personnalisation 
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	Aurelien Levy
+ 	[Fairytells->http://www.fairytells.net] - Licence GPL
+	</auteur>
+	<version>
+	0.7
+	</version>
+	<etat>
+	stable
+	</etat>
+	<description>
+	Panneau de personnalisation
+	
+	Ce plugin met &#224; disposition du webmaster une balise #FORMULAIRE_PERSONNALISATION.
+    
+	Une fois int&#233;gr&#233;e dans vos squelettes elle g&#233;n&#232;re un formulaire proposant &#224; vos visiteurs de choisir
+	parmis diff&#233;rent mode d'affichage (zoomer, inverse, etc) et parmis diff&#233;rent mode de navigation. 
+	Par d&#233;faut allez sur la partie publique de votre site &#224; l'adresse ?page=panneau_perso pour tester tout cela.
+    
+	&Agrave; noter, par d&#233;faut ce plugin est li&#233; &#224; l'utilisation du squelette standard livr&#233;e avec spip 1.9.
+    Un lien d'acc&#233;s au panneau de personnalisation est notamment accessible en bas de page dans ce cas l&#224;.
+
+	Si vous avez un squelette personnalis&#233;, vous devrez modifier les css zoom.css et inverse.css
+	dans le repertoire css de ce plugin ainsi qu'adapter votre inc-head pour que #INSERT_HEAD soit
+	dans un environnement en cache &#224; z&#233;ro.
+	</description>
+	<lien></lien> <!-- URI de documentation -->
+	<options> <!-- fichier charge a chaque hit -->
+	personnalisation_mes_options.php
+	</options>
+	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
+	sur le mode Rien::
+	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
+	ce parametre est obligatoire et doit etre non vide
+	-->
+	<prefix> 
+	personnalisation
+	</prefix>
+	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+	
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>personnalisation.php</inclure>
+	</pipeline>
+
+	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
+
+	<necessite id="SPIP" version="[1.9.0;]" />
+</plugin>

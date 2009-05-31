@@ -1,0 +1,55 @@
+[(#REM)
+/**
+ * Plugin Acces Restreint 3.0 pour Spip 2.0
+ * Licence GPL (c) 2006-2008 Cedric Morin
+ *
+ */
+]<B_auteurs>
+<h3>#GRAND_TOTAL auteurs selectionn&eacute;</h3>
+[(#GRAND_TOTAL|>{3}|oui)
+<span class='actions'><a href='#URL_ACTION_AUTEUR{retirer_zone,#ID_ZONE-auteur--1,#SELF}'
+onclick="return confirm('<:accesrestreint:confirmer_retirer_auteurs|texte_script:>');"><:accesrestreint:info_retirer_auteurs:></a></span>
+]
+[<p class="pagination">(#PAGINATION{page})</p>]
+<ul class='liste_items liste_auteurs'>
+	<BOUCLE_auteurs(AUTEURS){id_zone ?}{pagination 12}{par nom}{tout}>
+	<li class='item'>[(#ENV{editable}|et{#ID_ZONE}|oui)
+	[(#AUTORISER{affecterzones,auteur,#ID_AUTEUR}|oui)
+	<span class='actions'><a class='ajax' 
+href='#URL_ACTION_AUTEUR{retirer_zone,#ID_ZONE|concat{'-auteur-',#ID_AUTEUR},#SELF}'
+onclick="return confirm('<:accesrestreint:confirmer_retirer_auteur_zone|texte_script:>');"
+title='<:accesrestreint:info_retirer_zone|attribut_html:>'><img src='#EVAL{_DIR_IMG_PACK}croix-rouge.gif' alt='<:accesrestreint:info_retirer_zone|attribut_html:>' /></a></span>
+	]
+	]
+	<a href="[(#URL_ECRIRE{auteur_infos,id_auteur=#ID_AUTEUR}|parametre_url{retour,#SELF})]"><img
+	 src="[(#STATUT|icone_auteur_12)]" alt="" height="12" width="12" /> #NOM</a>
+	</li>
+	</BOUCLE_auteurs>
+</ul>
+</B_auteurs>
+<h3><:accesrestreint:info_aucun_auteur:></h3>
+<//B_auteurs>
+
+<B_autres_auteurs>
+<h3>Ajouter des auteurs</h3>
+[(#GRAND_TOTAL|>{3}|oui)
+<span class='actions'><a href='#URL_ACTION_AUTEUR{affecter_zone,#ID_ZONE-auteur--1,#SELF}'
+onclick="return confirm('<:accesrestreint:confirmer_ajouter_auteurs|texte_script:>');"><:accesrestreint:info_ajouter_auteurs:></a></span>
+]
+[<p class="pagination">(#PAGINATION{page})</p>]
+<ul class='liste_items liste_autres_auteurs'>
+	<BOUCLE_autres_auteurs(AUTEURS){!id_zone=#ENV{id_zone}}{pagination 12}{par nom}{tout}>
+	<li class='item'>[(#ENV{editable}|et{#ID_ZONE}|oui)
+	[(#AUTORISER{affecterzones,auteur,#ID_AUTEUR}|oui)
+	<span class='actions'><a class='ajax' 
+href='#URL_ACTION_AUTEUR{affecter_zone,#ID_ZONE|concat{'-auteur-',#ID_AUTEUR},#SELF}'
+title='<:accesrestreint:info_ajouter_auteur|attribut_html:>'><img src='#CHEMIN{img_pack/list-add-12.png}' alt='<:accesrestreint:info_ajouter_auteur|attribut_html:>' /></a></span>
+	]
+	]
+	<a href="[(#URL_ECRIRE{auteur_infos,id_auteur=#ID_AUTEUR}|parametre_url{retour,#SELF})]"><img
+	 src="[(#STATUT|icone_auteur_12)]" alt="" height="12" width="12" /> #NOM</a>
+	</li>
+	</BOUCLE_autres_auteurs>
+</ul>
+</B_autres_auteurs>
+<//B_autres_auteurs>

@@ -1,0 +1,111 @@
+
+.spip_forms, .spip_sondage {
+	color: black;
+	margin: 0px;
+	margin-bottom: 16px;
+	padding: 4px;
+	border: 1px solid #a0a0a0;
+	background-color: #f6f6f6;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size:small;
+	font-weight: normal;
+}
+.spip_form_champ {
+	margin-bottom:1em;
+}
+.spip_form_label {
+	display:block;
+	text-align:left;
+  font-weight: bold;
+}
+.spip_form_label_obligatoire{
+  font-weight: normal;
+}
+.spip_form_label_details{
+	display:block;
+	font-style:italic;
+	text-align:left;
+}
+
+.spip_form_choix_unique{
+	/* display:block; *//* decommenter pour avoir des bouton radio verticaux*/
+}
+
+.spip_form_choix_multiple{
+	/* display:block; *//* decommenter pour avoir des bouton radio verticaux*/
+}
+
+.spip_sondage {
+	margin: auto;
+}
+
+.spip_form_erreur {
+	float:right;
+  font-weight: bold;
+	color: red;
+	background-color:#cccccc;
+	margin: 1px;
+	padding: 1px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+.spip_form_ok {
+  font-weight: bold;
+	/* border: 1px solid #808080;*/
+	background-color:#ffdd11;
+	margin: 0px;
+	padding: 0px;
+	padding-left:5px;
+	padding-bottom:2px;
+	padding-top:15px;
+}
+.spip_form_ok_confirmation{
+	display:block;
+}
+
+.spip_sondage .ligne_barre {
+	height: 8px;
+	background: #B0A0FF;
+	border: 1px solid black;
+}
+.spip_sondage .sondage_table {
+	display: table;
+}
+.spip_sondage .sondage_ligne {
+	display: table-row;
+}
+.spip_sondage .sondage_ligne > div {
+	display: table-cell;
+	vertical-align: middle;
+	padding: 2px;
+	white-space: nowrap;
+}
+.forml, .formo, .fondl, .fondo {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 90%;
+}
+.forml, .formo {
+	margin: 4px;
+	margin-bottom: 1px;
+	padding: 1px;
+	width:90% ;
+}
+.forml, .fondl {
+	border: dashed 1px #909090;
+	background-color: #ffdd88;
+}
+.formo, .fondo {
+	border: dashed 1px #C0C0C0;
+	background-color: white;
+}
+
+.spip_bouton {
+	border: 2px solid #ddaa00;
+	padding: 3px;
+	background-color: #ffcc00;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight:bold;
+	font-size:small;
+	width:100px ;
+}
+

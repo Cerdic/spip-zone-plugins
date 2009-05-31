@@ -1,0 +1,38 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	W3C Go Home ! Mon site est valide...
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+ 	C&#233;dric MORIN [notre-ville.net->http://www.notre-ville.net]
+&#169; 2006 - Licence GPL
+	</auteur>
+	<version>0.1</version>
+	<version_base>0.1</version_base>
+	<etat>
+	stable
+	</etat>
+	<description>
+	Tableau de bord de validation xhtml et accessibilit&#233; du site
+	</description>
+	<lien></lien> <!-- URI de documentation -->
+	<prefix> 
+	w3cgh
+	</prefix>
+	<install>w3cgh_upgrade.php</install>
+	<options>w3cgh_options.php</options>
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<inclure>w3cgh_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_droite</nom>
+		<inclure>w3cgh_pipeline.php</inclure>
+	</pipeline>
+	<chemin dir='' />
+	<bouton id='w3c_go_home' parent='configuration'>
+		<icone>images/xml-valid-24.png</icone>
+		<titre>Valider le site</titre>
+		<url>w3c_go_home</url> <!-- facultatif, par defaut prendre l'id comme nom d'exec pour faire ?exec=xx -->
+	</bouton>
+	<necessite id="SPIP" version="[1.9.0;]" />
+</plugin>

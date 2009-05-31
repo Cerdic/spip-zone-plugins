@@ -1,0 +1,16 @@
+#CACHE{0}
+[(#HTTP_HEADER{Content-type: text/html[; charset=(#CHARSET)]})]
+<div style='text-align:left;font-size:small;'>
+<BOUCLE_rdv(PIM_AGENDA){id_agenda}>
+<div class='type'>#TYPE [(#PRIVE|=={oui}|?{(priv&eacute;)})]</div>
+<div class='date'>[(#DATE_DEBUT|Agenda_affdate_debut_fin{#DATE_FIN})]</div>
+<h3 class='spip' style='margin:5px 0 0;'>#TITRE</h3>
+[<div class='descriptif'>(#DESCRIPTIF)</div>]
+[<div class='lieu'>(#LIEU)</div>]
+<div class='modifier' style='text-align:right;'>
+<a href='[(#ENV{edit}|urldecode|parametre_url{id_agenda,#ID_AGENDA})]'
+onclick="$('#formulaire_agenda').load('[(#URL_PAGE{pim_agenda_formulaire,id_agenda=#ID_AGENDA}|parametre_url{script,#ENV{edit}|urldecode})]');return false;"
+>Modifier</a>
+</div>
+</BOUCLE_rdv>
+</div>

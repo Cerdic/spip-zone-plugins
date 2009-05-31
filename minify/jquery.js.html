@@ -1,0 +1,21 @@
+[(#REM)
+
+	Charger la librairie jQuery et ses plugins
+
+]#CACHE{7*24*3600,cache-client}
+#HTTP_HEADER{'Content-Type: text/javascript'}
+/*
+ * jQuery 1.1.3.1 - New Wave Javascript
+ *
+ * Copyright (c) 2007 John Resig (jquery.com)
+ * Dual licensed under the MIT (MIT-LICENSE.txt)
+ * and GPL (GPL-LICENSE.txt) licenses.
+ *
+ * + form.js (plugins @ jQuery.com)
+ * + ajaxCallback.js (www.spip.net)
+ */
+[(#ARRAY{
+1,javascript/jquery.js,
+2,javascript/form.js,
+3,javascript/ajaxCallback.js,
+4,javascript/jquery.tabs.js}|minify_compacte)]

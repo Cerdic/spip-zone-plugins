@@ -1,0 +1,9 @@
+<BOUCLE_vevent(EVENEMENTS){id_evenement=#ENV{id,#ENV{id_evenement}}}{tout}>
+<div class="vevent id_#ID_EVENEMENT">
+<h3 class="summary">#TITRE</h3>
+[<p class="date">(#DATE_DEBUT|agenda_affdate_debut_fin{#DATE_FIN,#HORAIRE,'hcal'})</p>]
+[<div class="description">(#DESCRIPTIF)</div>]
+[<p class="lieu"><span class="location">(#LIEU)</span>[<span class="adresse">(#ADRESSE|PtoBR)</span>]</p>]
+<B_mots><p class='category'><BOUCLE_mots(MOTS){id_evenement}{par num titre,titre}{', '}>#TITRE</BOUCLE_mots></p></B_mots>
+</div>
+</BOUCLE_vevent>

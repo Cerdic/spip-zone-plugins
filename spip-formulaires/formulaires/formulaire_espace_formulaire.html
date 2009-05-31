@@ -1,0 +1,18 @@
+<BOUCLE_espace_formulaire(APPLICANTS) {id_applicant=#ENV{id_applicant}}>
+<a class="spacer" name="formulaire">&nbsp;</a>
+
+<h3 class="legend"><:formulairespublic:bienvenue:> <span>[(#NOM) ]#EMAIL</span></h3>
+
+<B_applications>
+<br class="nettoyeur" />
+<table class="spip" width="100%">
+<BOUCLE_applications(APPLICATIONS) {id_applicant}>
+<BOUCLE_formulaire(FORMULAIRES) {id_formulaire}>
+<tr><td width="50%"><a href="#URL_FORMULAIRE">#TITRE</a></td><td><a href="#URL_FORMULAIRE"><:formulairespublic:editer:></a></td><td><a href="#URL_ACTION_SUPPRESSION_APPLICATION"><:formulairespublic:supprimer:></a></td></tr></BOUCLE_formulaire>
+</BOUCLE_applications>
+</table>
+</B_applications>
+
+[<p class="boutons"><a href="(#URL_ACTION_LOGOUT_FORMULAIRE)"><:formulairespublic:deconnexion:></a></p>]
+
+</BOUCLE_espace_formulaire>

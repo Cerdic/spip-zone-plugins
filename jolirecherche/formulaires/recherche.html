@@ -1,0 +1,40 @@
+<div id="recherche-style"><form action="spip.php?page=recherche" id="re" method="get" class="noajax">
+<label for="recherche"><:info_rechercher:></label>
+	<img src="#CHEMIN{images/rere.gif}" alt="" style="width:18px;height:18px;border:0;vertical-align:bottom;" class="refond" /><input name="recherche"  type="text" id="recherche" value="#RECHERCHE" class="rech" /><img src="#CHEMIN{images/rerien.gif}" id="rerien" alt="" style="width:18px;height:18px;border:0;vertical-align:bottom;" class="refond"
+/>
+	<input value='recherche' name='page' type='hidden' />
+	<button><span><:bouton_valider:></span></button>
+
+<script type='text/javascript'><!-- //
+	if (jQuery) (function($){
+		var mod = $('#recherche-style label').remove().text();
+		if (!$('#recherche').attr('value').length) {
+			$('#recherche')
+			.attr('title', mod)
+			.attr('value', mod)
+			.focus(function(){
+				if(mod) $('#recherche').attr('value','');
+			})
+			.blur(function(){
+				if(mod) $('#recherche').attr('value', mod);
+			})
+			.bind('change keydown keyup', function(){
+				mod='';
+				if ($('#recherche').attr('value').length)
+					$('#rerien')
+					.attr('src', '#CHEMIN{images/reok.gif}')
+					.click(function(){
+						$('#recherche')
+						.attr('value','')
+						.change();
+					});
+				else
+					$('#rerien')
+					.attr('src', '#CHEMIN{images/rerien.gif}')
+					.unbind('click');
+			});
+		}
+	})(jQuery);
+// --></script>
+
+</form></div>

@@ -1,0 +1,85 @@
+[(#REM) descriptif=
+<h4>Configuration du plugin Social tags</h4>
+Ici vous pouvez choisir les sites de partages de vos articles.<br /><br />
+<a href="http://www.spip-contrib.net/Social-tags" class="spip_out">Documentation</a>
+]
+
+[(#REM) titre=Social tags]
+#CACHE{0}
+
+<form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]
+<fieldset id="sc_list"><legend>Social tags</legend>
+
+<input type="hidden" name="tags[]" value="" />
+
+<?php
+
+	include_spip('socialtags_fonctions');
+	global $couleur_fonce;
+	$cfg = is_array($cfg = lire_config('socialtags/tags'))
+		? $cfg : array();
+
+	foreach (socialtags_liste() as $service) {
+		$t = $service['titre'];
+		$u = $service['url'];
+		$a = $service['lesauteurs'];
+		$d = $service['descriptif'];
+
+		$image = find_in_path('images/'.$a.'.png');
+		$checked = in_array($a, $cfg)
+			? ' checked="checked"' : '';
+
+		echo "
+<label>
+<img src='{$image}' title='{$t}' alt='' />
+<input type='checkbox' name='tags[]' value='{$a}'{$checked} />
+" . ($checked ? "<strong>$t</strong>" : $t) 
+	. ($d ? "&nbsp;<span style='color:$couleur_fonce;font-size:90%'>$d</span>" : "") . "
+</label>
+<br />
+";
+
+	}
+?>
+
+<script type='text/javascript'>
+//<![CDATA[ 
+	jQuery.extend({
+		sc_cocher_decocher_tout: function(b) {
+			$((jQuery.fn.jquery < '1.2.6') ? '#sc_list input[@type=checkbox]' : '#sc_list input[type=checkbox]').attr('checked', b);
+		}
+	});
+//]]>
+</script>
+<noscript>
+Svp, veuillez activer Javascript.
+</noscript>
+
+<p style="font-size:90%">
+	<a href="#sc_list" onclick="$.sc_cocher_decocher_tout(true);">Tout cocher</a> / 
+	<a  href="#sc_list" onclick="$.sc_cocher_decocher_tout(false);">Tout d&#233;cocher</a></p>
+</fieldset>
+
+<fieldset><legend>Insertion dans les pages :</legend>
+
+<br />Ins&#233;rer le bloc social-tags en-dessous du bloc suivant :
+<br />
+<label>S&#233;lecteur : <input type="text" name="jsselector" value="[(#ENV{jsselector}|sinon{'#contenu'})]" size="50" /></label>
+<p><small><b>Exemples (sur les squelettes dist) :</b>
+<dl>
+<dt><tt>#contenu</tt></dt>
+<dd>En bas de chaque page</dd>
+<dt><tt>.page_article .cartouche:first</tt></dt>
+<dd>Sous le bloc de titre des pages article</dd>
+<dt><tt>#socialtags</tt></dt>
+<dd>Sous la div nomm&#233;e id=socialtags</dd>
+</dl>
+</fieldset>
+
+</div>
+
+<div style="text-align:#LANG_RIGHT;">
+<input type="submit" name="_cfg_ok" value="<:bouton_valider:>" class="fondo" />
+</div>
+</form>
+

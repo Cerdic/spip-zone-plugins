@@ -1,0 +1,17 @@
+[(#REM)
+Necessite le plugin splikrbox et d'etre inclus dans un squelette avec la balise #INSERT_HEAD
+]			<B_flickr>
+  <div style="position:relative;[float:(#ENV{align}|match{left|right});]" class="splikrbox fpiprsetbox [fpiprsetbox_(#ENV{align})]">
+			<table cellpadding="0" cellspacing="0" style="margin:0;padding:0;"><tr style="margin:0;padding:0;">
+			<BOUCLE_flickr(FLICKR_PHOTOSETS_GETPHOTOS){id_photoset=#ENV{id}}{0,12}>
+			<td class="image" style="margin:0;padding:0;">
+				<a href="#URL_PHOTO" rel="lightbox[diap]"[ title="(#TITLE)"]>
+				  [(#LOGO_PHOTO{s}|inserer_attribut{alt,#TITLE})]
+				</a>
+			 </td>
+			[(#COMPTEUR_BOUCLE|Splickr_juste_a_x{#ENV{colonnes,3},</tr><tr style="margin:0;padding:0;">})]
+			</BOUCLE_flickr>
+			<td></td>
+			</tr></table>
+</div>
+			</B_flickr>

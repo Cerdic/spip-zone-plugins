@@ -1,0 +1,13 @@
+[(#CONFIG{multi_articles}|=={oui}|?{' '})#SET{lang,#ENV{lang}}]
+#SET{expose,#ARRAY}<BOUCLE_expose(MOTS){id_article ?}>[(#SET{expose,[(#GET{expose}|push{#ID_MOT})]})]</BOUCLE_expose>
+<B_mots>
+<ul class="nuage">
+	<BOUCLE_mots(MOTS){frequence}{type ?}{id_groupe==^((#ENV{id,.*}))$}{id_groupe!==^((#ENV{notid,-1}))$}{par #ENV{tri,titre}}>
+	[(#SET{score,[(#FREQUENCE|div{#MAX_FREQUENCE})]})]
+	[(#GET{score}|>{0.05}|?{' '})[(#SET{score,[(#GET{score}|plus{0.900001})]})][(#SET{unite,[(#GET{score}|floor)]})][(#SET{decimale,[(#GET{score}|moins{#GET{unite}}|mult{10}|floor)]})]<li>
+			<a rel="tag" href="[(#URL_MOT|parametre_url{lang,#GET{lang}})]"[ class="(#GET{expose}|find{#ID_MOT}|?{on})"] style="font-size: #GET{unite}[.(#GET{decimale})]em;">#TITRE</a>
+			<span class="frequence">([(#FREQUENCE)]/[(#MAX_FREQUENCE)])</span>
+		</li>
+	]</BOUCLE_mots>
+</ul>
+</B_mots>

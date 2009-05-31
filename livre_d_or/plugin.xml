@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<plugin>
+	<!--  
+
+	// lido plugin.xml
+
+	// $LastChangedRevision$
+	// $LastChangedBy$
+	// $LastChangedDate$
+	
+	 -->
+	<nom>Livre d'or (LiDo)</nom>
+	<auteur>cpaulus@quesaco.org</auteur>
+	<version>1.02</version>
+	<version_base>0.01</version_base>
+	<icon>images/lido-64.png</icon>
+	<etat>stable</etat>
+
+	<description><strong>Livre d'or</strong> (Lido)<br />
+		<strong>LiDo</strong> est principalement un formulaire de saisie pour l'espace public. 
+		Ce formulaire propose au visiteur de laisser quelques mots sur le Livre d’or, 
+		optionnellement de signer son commentaire.</description>
+
+	<lien>[Documentation sur www.quesaco.org->http://www.quesaco.org/Livre-d-or-en-rubrique]</lien>
+	
+	<prefix>lido</prefix>
+
+	<options>lido_mes_options.php</options>
+	<fonctions>lido_mes_fonctions.php</fonctions>
+	
+	<install>base/lido_install.php</install>
+
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>inc/lido_pipeline_header_prive.php</inclure>
+	</pipeline>
+
+	<pipeline>
+		<nom>ajouter_onglets</nom>
+		<inclure>inc/lido_pipeline_ajouter_onglets.php</inclure>
+	</pipeline>
+
+	<necessite id="SPIP" version="[1.9.2;]" />
+</plugin>

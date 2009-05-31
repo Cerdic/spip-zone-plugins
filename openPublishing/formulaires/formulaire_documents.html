@@ -1,0 +1,32 @@
+#CACHE{0}
+
+<fieldset><legend><b><:opconfig:document_joint:></b></legend>
+	<p><:opconfig:document_explique:></p>
+
+	<p><b><:opconfig:telecharger_document:></b></p>
+		<p>
+		<input name='doc' type='file' class='fondl' style='width: 100%;'>
+		</p>
+
+		[(#CONFIG{op/DocDistant,''}|=={yes}?{<p><b><:opconfig:document_distant:></b></p>
+			<p><:opconfig:expliq_document_distant:></p>
+			<p>URL : <input type="text" name="url_doc" size="45" /><br /></p>
+		})]
+
+		<p><b><:opconfig:description_document:></b></p>
+		<p>
+		<:opconfig:titre_doc:> : <br /><input type="text" name="titre_doc"  size="70" /><br />
+		<:opconfig:descriptif_doc:> : <br /><textarea name="description_doc" rows="5" cols="62"></textarea><br />
+		</p>
+
+		[(#CONFIG{op/DocIncAuto,''}|!=={'yes'}?{
+			<p><b><:opconfig:type_document:></b></p>
+			[(#CONFIG{op/DocImage,''}|=={yes}?{<input type="radio" class="radio" name="type_doc" value="image" checked>&nbsp;<:opconfig:image_inclusion:><br>})]
+			[(#CONFIG{op/DocDocument,''}|=={yes}?{<input type="radio" class="radio" name="type_doc" value="document">&nbsp;<:opconfig:document_inclusion:><br>})]
+			[(#CONFIG{op/Logo,''}|=={yes}?{<input type="radio" class="radio" name="type_doc" value="logo">&nbsp;<:opconfig:logo_inclusion:><br />})]
+		})]
+		<p>
+		<input name='media' type='submit' VALUE='#ENV*{bouton}' CLASS='spip_bouton'>
+		</p>
+	<br />
+</fieldset>

@@ -1,0 +1,52 @@
+#CACHE{0}
+
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+ 
+      	 
+     
+	<p>Hauteur de la fenêtre(en pixels) <br/>
+	<input type="text" name="hauteur_FenFlo" value="[(#CONFIG{FenFlo/hauteur_FenFlo}|sinon{300})]"></p>
+
+	<p>Largeur de la fenêtre(en pixels) <br/>
+	<input type="text" name="largeur_FenFlo" value="[(#CONFIG{FenFlo/largeur_FenFlo}|sinon{400})]"></p>
+
+	<p>position de la fenêtre en x par rapport au bord haut gauche <br/>
+	<input type="text" name="posx_FenFlo" value="[(#CONFIG{FenFlo/posx_FenFlo}|sinon{100})]"></p>
+
+	<p>position de la fenêtre en y par rapport au bord haut gauche<br>
+	<input type="text" name="posy_FenFlo" value="[(#CONFIG{FenFlo/posy_FenFlo}|sinon{100})]"></p>
+
+	<p>couleur de la fenetre, valeurs possibles : antracite, bleu, gris, orange, rose ou vert<br/>
+	<input type="text" name="couleur_FenFlo" value="[(#CONFIG{FenFlo/couleur_FenFlo}|sinon{vert})]"></p>
+
+	<p>couleur de la bordure (au format CSS)<br>
+	<input type="text" name="couleurbordure_FenFlo" value="[(#CONFIG{FenFlo/couleurbordure_FenFlo}|sinon{#6caf00})]"></p>
+
+	<p>hauteur de l'ent&ecirc;te de la fen&ecirc;tre en pixels <br/>
+	<input type="text" name="hauteurentete_FenFlo" value="[(#CONFIG{FenFlo/hauteurentete_FenFlo}|sinon{30})]"></p>
+
+
+	<p>élément au format jQuery sur lequel sera utilis&eacute; la fenêtre. 
+	exemple : #contenu (pour le div de id=contenu), .rubriques (pour le div de class=rubriques)...voir : http://docs.jquery.com <br/>
+	<input type="text" name="attribut_FenFlo" value="[(#CONFIG{FenFlo/attribut_FenFlo}|sinon{contenu})]"></p>
+
+	<p>autoriser la fermeture de la fen&ecirc;tre<br/>
+	<input type="checkbox" name="close_FenFlo" [checked="(#CONFIG{FenFlo/close_FenFlo})"]>
+	</p>
+	
+	<p>autoriser le redimensionnement de la fen&ecirc;tre<br/>
+	<input type="checkbox" name="redimensionne_FenFlo" [checked="(#CONFIG{FenFlo/redimensionne_FenFlo})"]>
+	</p>
+
+	<p>effet de zoom en ouverture<br/>
+	<input type="checkbox" name="zoom_ouverture_FenFlo" [checked="(#CONFIG{FenFlo/zoom_ouverture_FenFlo})"]>
+	</p>
+
+	<p>effet de zoom en fermeture<br/>
+	<input type="checkbox" name="zoom_fermeture_FenFlo" [checked="(#CONFIG{FenFlo/zoom_fermeture_FenFlo})"]>
+	</p>
+	
+	<input type="submit" name="_cfg_ok" value="<:OK:>" />
+	<input type="reset" value="<:Reset:>" />
+	<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
+</form>

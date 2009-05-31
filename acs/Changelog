@@ -1,0 +1,41 @@
+ACS version 0.5
+ - installation simplifiée et améliorée. Installation des images par défaut des composants.
+ - nombre d'instances de chaque composant affiché en info-bulle sur les widgets de l'onglet "Composants".
+ - nouvelles traductions génériques.
+
+Modèle Cat pour ACS vesion 0.5:
+ - Composant Ours : tous les liens prédéfinis deviennent optionnels. Pied de page totalement personnalisable. Ajout des statistiques globales du site.
+ - Composant Articles : meilleure intégration avec plugin notation (0.6.3) et composant Democratie
+ - Composant Edito : mise à jour pour plugin notation 0.6.3
+ - Composant Fond : debug du javascript
+ - Composant Onglets  : installation automatique des images par defaut.
+ - Composant Rubnav : menus déroulants. Utilisation des traductions génériques.
+ - Composant Banniere : nouvelles variables. 
+ - Comopsant Forums : amélioration de la css pour ses deux "noisettes", et nouvelle mise en page dans l'espace privé.Suppression des fichiers de langue publics, devenus inutiles.
+ - Composant Tags : valeur par défaut de la couleur de fond et du fond du titre = celle de Rubnav
+ - Composant Syndic : intégration du formulaire site.
+  - habillage.css : override des styles de formulaires de la dist SPIP remis à jour.
+ - formulaire_ecrire_auteur.html & formulaire_forum.html supprimés : on utilise la dist SPIP.
+_______________________________________
+
+ACS version 0.4
+- tous les composants deviennent instanciables
+- utilisation plus confortable et plus intuitive avec les plugins optionnels crayons et palette.
+- simplification des insertions css et javascripts des composants
+- simplification de la gestion des traductions.
+- valeurs par défaut pour l'initialisation (composants/def.php)
+- nouvelles options de config ACS : affichage des pages et des inclusions des composants, affichage de toutes les variables.
+- crayons sur les variables
+- interface d'administration d'ACS refaite, acceuil sur l'explorateur Ajax
+- suppression du fichier models/mymodel/composants/config.php, remplacé par une
+  lecture directe des composants présents dans le dossier des composants du modèle actif.
+- creation de ce fichier Changelog.
+
+Modèle Cat pour ACS vesion 0.4:
+- fusion du composant Repimages (playlist vidéo) avec le composant Video.
+- fusion des composants Forum et Derniers_commentaires en un seul composant: Forums.
+- composant Liste_articles devient Articles.
+- composant Acces inclut au composant Articles (simplification).
+- création du composant Pied, utilisant Module.
+- intégration gestion des tags meta au composant fond/entete, Usage de Module.
+- creation du composant Module, adaptation des pages, et suppression des composants numérotés tels que "Col1".

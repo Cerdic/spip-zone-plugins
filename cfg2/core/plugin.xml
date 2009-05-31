@@ -1,0 +1,60 @@
+<plugin>
+    <nom>
+    <multi>
+    [fr]cfg: moteur de configuration
+    [de]cfg: Konfigurationsmotor
+    </multi>
+    </nom>
+    <auteur>bertrand Gugger [->http://toggg.com/], Matthieu Marcillaud
+_ &#169; 2008 - <multi>[fr]Distribu&#233; sous licence[en]License[de]Vertrieb unter Lizenz</multi> GNU/LGPL
+    </auteur>
+    <version>1.99.6</version>
+    <etat>dev</etat>
+    <description>
+    <multi>
+[fr]Ce plugin permet de g&#233;rer tr&#232;s simplement des interfaces de configuration pour diff&#233;rents modules.
+
+Il est utilis&#233; par de nombreux plugins, mais il peut aussi avoir d'autres usages comme le param&#233;trage de squelettes.
+[en]This plugin manage some configuration graphic user interfaces for some modules.
+[de]Dieses Plugin erm&#246;glicht es, in sehr einfacher Weise die Konfigurationsschnittstellen verschiedener Module zu verwalten.
+
+Es wird von vielen Plugins verwendet, kann aber auch anderen Nutzen finden wie die Parametereinstellung von Skeletten.
+    </multi>
+    </description>
+    <lien>
+    [<multi>[fr]Documentation[de]Dokumentation</multi>->http://www.spip-contrib.net/?rubrique575]
+    </lien>
+    <prefix>cfg</prefix>
+    <icon>cfg.png</icon>
+    <chemin dir='' />
+    <options>cfg_options.php</options>
+    <fonctions>cfg_fonctions.php</fonctions>
+
+	<bouton id='cfg' parent="configuration">
+		<icone>cfg-22.png</icone>
+		<titre>cfg:CFG</titre>		
+	</bouton>
+	
+     <pipeline>
+        <nom>formulaire_charger</nom>
+        <inclure>cfg_pipelines.php</inclure>
+    </pipeline>
+     <pipeline>
+        <nom>formulaire_verifier</nom>
+        <inclure>cfg_pipelines.php</inclure>
+    </pipeline>
+    <pipeline>
+        <nom>formulaire_traiter</nom>
+        <inclure>cfg_pipelines.php</inclure>
+    </pipeline>
+    <pipeline>
+        <nom>editer_contenu_formulaire_cfg</nom>
+        <inclure>cfg_pipelines.php</inclure>
+    </pipeline> 
+	   
+    <pipeline>
+        <nom>autoriser</nom>
+        <inclure>cfg_autorisations.php</inclure>
+    </pipeline>    
+	<necessite id="SPIP" version="[2.0.6;]" />
+</plugin>

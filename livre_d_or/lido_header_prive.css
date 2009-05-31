@@ -1,0 +1,10 @@
+/* lido_header_prive.css */
+.liste_choix {
+	list-style:none;margin:0;padding:0;
+}
+optgroup {
+	background-color: #C5E41C;
+}
+optgroup option {
+	background-color: #fff;
+}

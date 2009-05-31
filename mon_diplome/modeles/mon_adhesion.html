@@ -1,0 +1,23 @@
+[<!--(#REM)
+
+
+// modeles/mon_adhesion.html
+	
+// $LastChangedRevision$
+// $LastChangedBy$
+// $LastChangedDate$
+
+
+
+Nota CSS:
+- padding: ne fonctionne pas
+-->]
+<BOUCLE_cartes(AUTEURS){id_auteur=#ENV{id_auteur}}>
+	<div style="margin:3mm 5mm;width:79mm;">
+		[<p style="font-size:110%;">(#ENV{titre_document})</p>]
+		[<div style='margin-left:10mm'>(#LOGO_AUTEUR||image_reduire{30})</div>]
+		<p style="font-size:120%;margin-left:50mm;">[(#ENV{nom})]</p>
+		<br />
+		<p style="font-size:70%;margin-left:50mm;">[(#DATE|jour)] [(#DATE|nom_mois)] [(#DATE|annee)]</p>
+	</div>
+</BOUCLE_cartes>

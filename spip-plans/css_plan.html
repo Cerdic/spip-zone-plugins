@@ -1,0 +1,86 @@
+[(#HTTP_HEADER{Content-type: text/css})]
+
+dl.plan.on {
+	position: relative;
+	text-align: left;
+	padding: 0px;
+}
+
+dl.plan.on  * {
+	padding: 0;
+	margin: 0;
+}
+
+dl.plan.on dt {
+	list-style: none;
+	display: inline;
+}
+
+dl.plan.on dd {
+	position: absolute;
+	left: -9999px;
+	width: 150px;
+	padding: 4px;
+	border: #000 2px solid;
+	background: #fff;
+	color: #000;
+	font-family: arial, sans-serif;
+	z-index: 100;
+	font-size: 1em;
+}
+
+dl.plan.on dd img {
+	position: relative;
+	float: right;
+	border: #000 1px solid;
+	margin: 2px;
+}
+
+dl.plan.on a.point {
+	display: block;
+	position: absolute;
+	text-indent: -9999px;
+	background: url([(#CHEMIN{prive/images/aide.gif})]) no-repeat;
+	width: 12px;
+	height: 12px;
+	outline: none;
+	z-index: 10;
+	text-decoration: none;
+}
+
+dl.plan.on a.point:hover {
+}
+
+dl.plan.on dd a {
+	text-decoration: none;
+	color: #000;
+}
+
+<BOUCLE_plans(PLANS) {tout}>
+dl.plan.on#plan_#ID_PLAN {
+	width: [(#LOGO_PLAN_NORMAL||extraire_attribut{width})]px;
+	height: [(#LOGO_PLAN_NORMAL||extraire_attribut{height})]px;
+	background: url("[(#LOGO_PLAN_NORMAL||extraire_attribut{src})]") no-repeat;
+}
+
+[dl.plan.on#plan_#ID_PLAN a.point {
+	background: url("(#LOGO_PLAN_SURVOL||extraire_attribut{src})") no-repeat;
+	width: [(#LOGO_PLAN_SURVOL||extraire_attribut{width})]px;
+	height: [(#LOGO_PLAN_SURVOL||extraire_attribut{height})]px;
+}
+
+]<BOUCLE_points(POINTS) {id_plan}>
+dl.plan.on a.point#point_#ID_POINT {
+	z-index: [(#Z_INDEX|plus{10})];
+	top: #ORDONNEEpx;
+	left: #ABSCISSEpx;
+[	background: url((#LOGO_POINT_NORMAL||extraire_attribut{src})) no-repeat;
+	width: [(#LOGO_POINT_NORMAL||extraire_attribut{width})]px;
+	height: [(#LOGO_POINT_NORMAL||extraire_attribut{height})]px;
+]}
+[
+dl.plan.on a.point#point_#ID_POINT:hover {
+	background: url((#LOGO_POINT_SURVOL||extraire_attribut{src})) no-repeat;
+}
+]</BOUCLE_points>
+</BOUCLE_plans>

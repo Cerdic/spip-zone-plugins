@@ -1,0 +1,54 @@
+<!-- titre=Configuration de svn update -->
+<!-- autoriser=webmestre -->
+<!-- boite=Informations -->
+<!-- descriptif=<p>
+    Un utilisateur (par defaut, l’administrateur numero 1) est autorisé à faire une mise à jour SVN du site ou de tout autre répertoire.</p>
+    <p> Pour cela il doit se rendre sur la page [svn update->?exec=svn_update] et sélectionner les éléments à mettre à jour. </p>
+-->
+<!-- head= [(#INCLURE{fond=/fonds/svn_update.css})] -->
+<form id="svn_update" name="svn_update" method="post" action="#SELF">
+
+    [(#ENV{_cfg_}|form_hidden)]
+
+    <fieldset>
+        <legend> Administrateur SVN</legend>
+        <p>
+            #SET{selected,#ENV*|table_valeur{administrateurs}|sinon{#ARRAY}}
+            <label for="administrateurs">Selectionnez parmi les comptes suivants ceux qui seront autorisés à gérer les mises à jour SVN</label>        
+
+            <p class="information"> Si aucun compte n'est selectionné, seul le compte d'identifiant 1 est autorisé</p>
+            
+            <select name="administrateurs[]" id="administrateurs" multiple="multiple"/>
+                <BOUCLE_administrateurs(AUTEURS) {statut=0minirezo} {tout}>
+                    <option value="#ID_AUTEUR" [(#ID_AUTEUR|in_array{#GET{selected}}|?{' selected="selected"'})]>#NOM</option>
+                </BOUCLE_administrateurs>
+            </select>
+        </p>
+
+    </fieldset>
+
+    <fieldset>
+        <legend> Répertoires à administrer</legend>
+        <p>
+            <label for="file">Saisissez les repertoires à traiter</label>        
+	        <pre>
+                source destination [revision] [user]
+                Par exemple :
+                svn://zone.spip.org/spip-zone/_squelettes_/sedna squelettes/sedna
+                svn://zone.spip.org/spip-zone/_plugins_/_stable_/cfg plugins/cfg
+	        </pre>
+	        <ul>
+	            <li>Source : chemin du dépot (svn://zone.spip.org/spip-zone/_squelettes_/sedna) </li>
+	            <li>destination : chemin local par rapport à la racine du site (squelettes/sedna) </li>
+	            <li>[revision] : version à telecharger (optionnel)</li>
+	            <li>[user] : nom d'utilisateur (optionnel) depends si une authentification coté depot svn est requis</li>
+	        </ul>
+            <textarea name="file" id="file" class="formo" rows='10'>#ENV{file}</textarea>
+        </p>
+    </fieldset>
+
+    <p class="soumettre">
+    	<input type="submit" name="_cfg_ok" value="<:OK:>" />
+    	<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
+    </p>
+</form>

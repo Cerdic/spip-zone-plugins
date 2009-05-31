@@ -1,0 +1,37 @@
+/* 
+
+	// exec/barrac_prive_ie.css
+	
+	// $LastChangedRevision: 16668 $
+	// $LastChangedBy: paladin@quesaco.org $
+	// $LastChangedDate: 2007-11-07 10:33:02 +0100 (mer., 07 nov. 2007) $
+
+*/
+
+.barrac-table-ecran {
+	display:block;
+}
+.barrac-table-ecran .row {
+	display:block;
+}
+.barrac-table-ecran .cell {
+	display:block;
+}
+.barrac-table-ecran .block-left {
+	float:left;
+}
+.barrac-table-ecran .text-right {
+}
+.barrac-table-ecran input {
+	height:16px;
+	line-height:16px;
+}
+.barrac-table-ecran .text-right input {
+}
+.barrac-table-ecran .text-bottom {
+	padding-top:14px;
+	overflow:hidden;
+	max-height:30px;
+}
+.barrac-table-ecran .text-bottom input {
+}

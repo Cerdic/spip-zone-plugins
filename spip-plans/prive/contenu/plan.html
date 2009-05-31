@@ -1,0 +1,19 @@
+#CACHE{0}
+<BOUCLE_plan(PLANS) {id_plan=#ENV{id}} {statut?}>
+<div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
+<div class='label'><:info_descriptif:></div>
+<div dir='#LANG_DIR' class='#EDIT{descriptif} descriptif'>#DESCRIPTIF</div>
+</div>
+<div class="champ contenu_texte">
+<div class='label'><:info_texte:></div>
+<div dir='#LANG_DIR' class='texte'>
+<dl class="plan" id="plan_#ID_PLAN">
+<BOUCLE_points(POINTS) {id_plan}><dt class="plan"><a href="index.php?exec=points_edit&amp;id_plan=#ID_PLAN&amp;id_point=#ID_POINT" class="point" id="point_#ID_POINT">#TITRE</a></dt>
+<dd>
+<a href="#URL_POINT">#TITRE</a> #DESCRIPTIF
+</dd>
+</BOUCLE_points>
+</dl>
+</div>
+</div>
+</BOUCLE_plan>

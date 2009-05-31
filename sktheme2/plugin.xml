@@ -1,0 +1,31 @@
+<plugin>
+ <nom>SkTheme2</nom>
+ <version>0.1</version>
+ <etat>stable</etat>
+ <auteur>Skedus - Phil pour spip2
+<multi>
+_ &copy; January 2007 - distributed under GNU/GPL licence.
+[fr]_ &copy; January 2007 - distribu&eacute; sous license GNU/GPL.
+</multi>
+</auteur>
+<description>
+<multi>
+Small theme manager for SPIP
+_ Activate this plugin and manage themes in the {{Configuration}} menu.
+_ Notes that sktheme use theme.xml files to detect 'squelette' distribution and 'habillage' distribution
+_ This version do not add switcher
+[fr]
+Gestion des th&egrave;mes de SPIP
+_ Activez ce plugin et g&eacute;rez les th&egrave;mes dans le menu {{Configuration}}.
+_ Notez que sktheme utilise les fichiers theme.xml pour detecter les disdribution de 'squelette' et d''habillage'
+_ Cette version ne contient pas de switcher
+</multi>
+</description>
+	<lien>[->http://www.spip-contrib.net/Plugin-Sktheme]</lien> <!-- URI de documentation -->
+ <prefix>sktheme</prefix>
+ <options>sktheme_options.php</options>
+ <pipeline>
+    <nom>ajouter_boutons</nom>
+    <inclure>sktheme_fonctions.php</inclure>
+ </pipeline>
+ </plugin>

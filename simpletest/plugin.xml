@@ -1,0 +1,20 @@
+<plugin>
+	<nom>Tests Unitaires avec Simple Test pour SPIP</nom>
+	<auteur>
+	Matthieu Marcillaud [magraine.net->http://magraine.net]
+	</auteur>
+	<licence>GNU/GLP</licence>
+	<version>0.4.2</version>
+	<description>
+	Fourni la bibliotheque [Simple Test->http://simpletest.org/] 1.0.1 
+	pour effectuer des tests unitaires,
+	ainsi qu'une API pour faciliter les tests avec SPIP.
+	</description>
+	<documentation>[->http://www.spip-contrib.net/Les-tests-unitaires]</documentation>
+	
+	<etat>test</etat>
+	<prefix>simpletest</prefix>
+  	
+	<options>simpletest_options.php</options>
+	<necessite id="SPIP" version="[2.0;]" />
+</plugin>

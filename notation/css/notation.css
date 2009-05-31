@@ -1,0 +1,116 @@
+/**
+* Plugin Notation
+* par JEM (jean-marc.viglino@ign.fr) et b_b
+* 
+* Copyright (c) 2008
+* Logiciel libre distribue sous licence GNU/GPL.
+*  
+* Styles utilises par le plugin
+*  
+**/
+
+.formulaire_notation .notation_note { display: inline; }
+.formulaire_notation .note { padding:0; margin:0 5px; }
+
+/* Pour affichage dans les modeles
+*/
+
+.notation .note
+{	color:Purple;
+	font-weight:normal;
+}
+
+.notation .topten
+{	border:1px solid #AAE;
+	padding:1px;
+}
+.notation td
+{	padding: 0 5px 0 5px;
+}
+
+.notation .ligne_paire
+{	background-color:#EEF;
+}
+
+.notation thead tr
+{	background-color:#AAE;
+	text-align:center;
+	color:#005;
+}
+
+.notation .auteurs
+{ border:1px solid #AAE;
+  border-bottom:0;
+  border-right:0;
+}
+
+.notation .auteurs .nom
+{ border-bottom:1px solid #AAE;
+}
+.notation .auteurs .note
+{ border:1px solid #AAE;
+	border-left:0;
+	border-top:0;
+}
+.notation .auteurs img
+{  /* width:16px; /* pour afficher la note en plus petit */
+}
+
+.notation .stat
+{ font-size:0.81em;
+  border:1px solid #AAE;
+}
+.notation .barre
+{ background-color:#AAE;
+  height:10px;
+  line-height:5px;
+  font-size:0.4em;
+  display:block;
+  float:left;
+  margin-top:1em;
+  margin-right:1em;
+}
+/* Affichage des critiques */
+.critique
+{ font-size:0.9em;
+  border:1px solid Purple;
+  padding:0;
+}
+.critique .titre-note a
+{	font-weight:bold;
+	color:white;
+	background-color:purple ;
+	padding:0 5px 0 5px;
+	margin:0;
+}
+.critique .spip
+{ margin:0 0 0 5px;
+}
+.critique small
+{ color:Purple;
+  font-size:0.8em;
+  font-weight:normal;
+}
+.critique .grosse_note
+{ float:right;
+  border:2px solid Purple;
+  padding: 0 10px 0 10px;
+  margin-left:3px;
+  color:Purple;
+  font-size:3em;
+  font-weight:bold;
+}
+
+.formulaire_notation button {
+	border: none;
+	background-color: transparent;
+	display: inline;
+	padding: 0;
+	margin: 0;
+	cursor: pointer;
+}
+.formulaire_notation button img {
+	vertical-align:middle;
+	padding: 0 !important;
+	margin: 0;
+}

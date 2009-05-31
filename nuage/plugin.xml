@@ -1,0 +1,17 @@
+<plugin>
+	<version>1.4</version>
+	<nom>Nuage</nom>
+	<prefix>nuage</prefix>
+	<auteur>(c)2005-2007 Booz, Fil, James, St&#233;phane. Licence GNU/GPL</auteur>
+	<etat>test</etat>
+	<lien>[Nuage (de mots-cl&#233;s)->http://www.spip-contrib.net/Nuage-de-mots-cles]</lien>
+	<description>Version plugin avec mod&#232;les et filtres de la contrib nuage de tags.</description>
+	<icon>nuage-64.png</icon>
+	<fonctions>nuage_fonctions.php</fonctions>
+	<pipeline>
+		<nom>insert_head</nom> 
+		<inclure>nuage_pipelines_public.php</inclure>
+	</pipeline>
+	<noisette>modeles/nuage.html</noisette>
+	<necessite id="SPIP" version="[1.9.0;]" />
+</plugin>

@@ -1,0 +1,22 @@
+<plugin>
+	<nom>Affichage d'une fen&ecirc;tre flottante</nom>
+ 	<version>1.5</version>
+ 	<prefix>FenFlo</prefix>
+ 	<auteur>[Mathieu Imbert->mailto:mathieu_imbert@hotmail.fr], Arnault Pachot - [OpenStudio->http://www.openstudio.fr], Cyrille Kazis [Kazis &amp; Co->http://www.screencom.com]</auteur>
+ 	<description>Plugin permettant d'ouvrir une fen&ecirc;tre flottante,
+	 et si vous avez cfg: [Configuration->.?exec=cfg&amp;cfg=FenFlo]</description>
+ 	<etat>stable</etat>
+ 	<fonctions></fonctions>
+ 	<pipeline>
+  		<nom>insert_head</nom>
+  		<action>insertion_in_head</action>
+  		<inclure>fenetre_flottante_define_head.php</inclure>
+ 	</pipeline>
+	<pipeline>
+  		<nom>affichage_final</nom>
+  		<action>affichage_final</action>
+  		<inclure>fenetre_flottante_define_head.php</inclure>
+ 	</pipeline>
+ 	<necessite id="CFG" version="[1.0;]" />
+	<necessite id='spip' version='[1.9.2;]' />
+</plugin>

@@ -1,0 +1,21 @@
+/* public_style_encadrer.css  */
+
+h1, h2, h3 { border: 12px solid; padding: 12px; }
+
+.titre, .texte { border: 12px solid; padding: 12px; }
+
+blockquote.spip { border: 12px solid; padding: 12px; }
+
+div.spip_poesie { border: 12px solid; padding: 12px; }
+
+.spip_code, .spip_cadre { border: 12px solid; padding: 12px; }
+.spip_cadre { border: 12px solid; padding: 12px; }
+
+/* Tableaux */
+table { border: 12px solid; padding: 12px; }
+table th, td { border: 12px solid; padding: 12px; }
+
+.spip_documents_left { float: none; }
+.spip_documents_right { float: none; }
+.spip_modele { float: none; }
+table.spip_barre { border: 12px solid; padding: 12px; }

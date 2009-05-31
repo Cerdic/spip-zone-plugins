@@ -1,0 +1,31 @@
+<form action="[(#ENV{url})#formulaire]" method="post"  name="formulaire_article" id="Formulaire_article" enctype="multipart/form-data" >
+	[(#ENV*{previsu})	]
+ <div class="spip_encadrer important">
+   <div class="legend">
+  	<label><:forms:article_accueil:></label>
+   </div>
+	<input class="id_rubrique" type="hidden" name="titre" value="[(#ENV*{id_rubrique})]"  size="50">
+		
+  <fieldset>
+	<label><:forms:article_titre:></label>
+	<input class="forml" type="text" name="titre" value="[(#ENV*{titre})]"  size="50"><br>
+	<br/><label><:forms:article_texte:></label><br/>
+	[(#ENV**{texte}|barre_article{texte})]
+	</fieldset>
+	
+	<fieldset>
+	<div class="legend"><:entree_infos_perso:></div>
+	[<div style="float: #LANG_RIGHT; padding-#LANG_LEFT: 10px;"><img src="(#ENV{id_auteur_session}|logoauteur)"
+	width="75"
+	/></div>]
+		<label><:form_pet_votre_nom:></label>
+		<input class="nom_auteur_session" type="text" name="nom_auteur_session" value="[(#ENV{nom_auteur_session})]" readonly="readonly" size="50"><br>
+
+		<label><:form_pet_votre_email:></label>
+		<input class="email_auteur_session" type="text" name="email_auteur_session" value="[(#ENV{email_auteur_session})]" readonly="readonly" size="50"><br>
+	</fieldset>
+
+	<div align="right"><input type="submit" name="previsualiser" class="spip_bouton" value="<:previsualiser:>" /></div>
+      </fieldset>
+ </div>
+</form>

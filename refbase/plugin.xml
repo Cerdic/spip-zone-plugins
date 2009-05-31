@@ -1,0 +1,38 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	<multi>Refbase</multi>
+	</nom>
+	<icon>img_pack/refbase-48.png</icon>
+	<auteur>[Joseph->http://joseph.larmarange.net]</auteur>
+	<licence>GPL</licence>
+	<version>0.1</version>
+	<etat>stable</etat>
+	<description>
+	<multi>
+	[fr] Ce plugin permet d'importer des r&eacute;f&eacute;rences bibliographiques contenues dans une ou 
+plusieurs bases de donn&eacute;es [refbase->http://www.refbase.net] et des les afficher simplement dans SPIP 
+&agrave; l'aide du mod&egrave;le &lt;refbase&gt;.
+_ Voir la [documentation->http://www.spip-contrib.net/spip.php?article3036] du plugin pour les diff&eacute;rents param&egrave;tres d'appel
+du mod&egrave;le <code>refbase</code>.
+_ Les param&egrave;tres par d&eacute;faut du plugin peut-&ecirc;tre configur&eacute; &agrave; l'aide de [cfg->http://www.spip-contrib.net/Config-cfg] : [./?exec=cfg&amp;cfg=refbase->./?exec=cfg&amp;cfg=refbase]. 
+_ (L'installation de [cfg->http://www.spip-contrib.net/Config-cfg] n'est pas obligatoire mais est fortement conseill&eacute;e.)
+	[en] This plugin allows to import bibliographic references from a [refbase->http://www.refbase.net] database and to display them 
+in SPIP with a model called &lt;refbase&gt;.
+_ Show plugin [documentation->http://www.spip-contrib.net/spip.php?article3036] for the parameters of the model.
+_ Default parameters can be configured with [cfg->http://www.spip-contrib.net/Config-cfg] : [./?exec=cfg&amp;cfg=refbase->./?exec=cfg&amp;cfg=refbase]. 
+_ (Use of [cfg->http://www.spip-contrib.net/Config-cfg] is facultative but highly recommended.)
+	</multi>
+	</description>
+	<lien>http://www.spip-contrib.net/spip.php?article3036</lien> <!-- URI de documentation -->
+	<prefix>refbase</prefix>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>refbase_pipeline.php</inclure>
+	</pipeline>	
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>refbase_pipeline.php</inclure>
+	</pipeline>
+	<necessite id="SPIP" version='[1.9.2;]' />
+	<utilise id="cfg" />
+</plugin>

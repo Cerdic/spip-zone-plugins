@@ -1,0 +1,9 @@
+[(#CONFIG{multi_articles}|=={oui}|?{' '})#SET{lang,#ENV{lang}}]
+#SET{expose,#ARRAY}<BOUCLE_expose(MOTS){id_article ?}>[(#SET{expose,[(#GET{expose}|push{#ID_MOT})]})]</BOUCLE_expose>
+<BOUCLE_tags(MOTS){type ?}{id_groupe==^((#ENV{id,.*}))$}{id_groupe!==^((#ENV{notid,-1}))$}{par #ENV{tri,titre}}>[
+(#ID_MOT|nuage{#TITRE,[(#URL_MOT|parametre_url{lang,#GET{lang}})]})
+]<BOUCLE_pop(ARTICLES){id_mot}{par popularite}{inverse}{0,200}>[
+(#ID_MOT|nuage{'','',#POPULARITE_ABSOLUE})
+]</BOUCLE_pop></BOUCLE_tags>[<ul class="nuage">
+	(#FOREACH{NUAGE,foreach_nuage_pop})
+</ul>]

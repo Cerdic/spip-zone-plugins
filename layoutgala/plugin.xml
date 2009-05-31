@@ -1,0 +1,51 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	<multi>
+	[fr]Layout Gala pour la dist de SPIP 2.0
+	[es]Dise&ntilde;o Gala para la dist de SPIP 2.0
+	[en]Gala layout for SPIP 2.0 dist
+	</multi>
+	</nom>
+	<auteur><!-- Auteur du plugin -->
+[Jacques->http://www.pyrat.net/] &#169; 2008 - 	
+	<multi>
+	[fr]Distribu&#233; sous licence GNU/GPL
+	[es]Distribuci&oacute;n bajo licencia GNU/GPL
+	[en]Distributed under GNU/GPL licence
+	</multi>
+	</auteur>
+	<version>
+	0.9.2
+	</version>
+	<etat>
+	test
+	</etat>
+	<description>
+	<multi>
+	[fr]Permet de choisir un agencement parmis les 40 de 
+	[es]Permite elegir un dise&ntilde;o entre los 40 de 
+	[en]To choose a layout between the 40 in 
+	</multi>
+[LayoutGala->http://blog.html.it/layoutgala/].
+	</description>
+	<lien></lien> <!-- URI de documentation -->
+	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
+	sur le mode Rien::
+	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
+	ce parametre est obligatoire et doit etre non vide
+	-->
+	<prefix> 
+	layoutgala
+	</prefix>
+	<options>layoutgala_options.php</options>
+	<icon>
+	img_pack/layoutgala.png
+	</icon>
+	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>layoutgala_pipelines.php</inclure>
+	</pipeline>
+	<necessite id='SPIP' version='[2.0.0;]' />
+	<necessite id="cfg" version="[1.10.3;]" />
+</plugin>

@@ -1,0 +1,21 @@
+[
+===============================================
+	(#REM)				langues
+===============================================
+]<ul id="langues">
+<BOUCLE_langues(LANGUES)>#SET{url_langue,#URL_LANG}
+	<BOUCLE_rubrique(RUBRIQUES) {id_rubrique}>
+		<BOUCLE_traduction_rubrique(RUBRIQUES){id_trad}{lang=#_langues:LANG}>
+			#SET{url_langue,#URL_RUBRIQUE}
+		</BOUCLE_traduction_rubrique>
+	</BOUCLE_rubrique>
+
+	<BOUCLE_article(ARTICLES){id_article}>
+		<BOUCLE_traduction_article(ARTICLES){traduction}{lang=#_langues:LANG}>
+			#SET{url_langue,#URL_ARTICLE}
+		</BOUCLE_traduction_article>
+	</BOUCLE_article>
+
+	<li><a href="#GET{url_langue}">#LANG</a></li>
+</BOUCLE_langues>
+</ul><!-- fin langues -->

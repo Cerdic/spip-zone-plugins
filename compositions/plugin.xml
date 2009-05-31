@@ -1,0 +1,38 @@
+<plugin>
+	<nom>Compositions</nom>
+	<icon>images/compositions-64.png</icon>
+	<auteur>	<!-- Auteur du plugin -->
+ 	[Cedric Morin->http://www.yterium.com] &#169; 2007-2009
+	</auteur>
+	<licence>GPL</licence>
+	<version>0.9.1</version>
+	<version_base>0.3.0</version_base>
+	<etat>stable</etat>
+	<description>
+	Ce plugin vous permet de d&eacute;finir plusieurs variantes de compositions pour chaque type objet&nbsp;SPIP (article, rubrique, etc.) et de les appliquer simplement, cas par cas, depuis l'espace priv&eacute;.
+
+Les rubriques peuvent aussi se voir attribuer un article d'accueil. Les champs id_article_accueil et composition peuvent ensuite etre utilis&eacute; par les squelettes.
+	</description>
+	<lien>http://www.spip-contrib.net/compositions</lien> <!-- URI de documentation -->
+	<install>base/compositions.php</install>
+	<prefix>compositions</prefix>
+	<fonctions>compositions_fonctions.php</fonctions>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/compositions.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_droite</nom>
+		<inclure>compositions_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>compositions_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>styliser</nom>
+		<inclure>compositions_pipeline.php</inclure>
+	</pipeline>
+ 	<necessite id='SPIP' version='[2.0.6;]' />
+	<necessite id='spip_bonux' version='[1.3;]' />
+</plugin>

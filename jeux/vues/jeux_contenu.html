@@ -1,0 +1,21 @@
+#CACHE{0}
+[(#REM)
+
+	Vue pour le crayon jeux:contenu
+	Ca buggue serieux sous SPIP 1.92 : le type est 'jeux' et non 'jeu' !
+
+	Juste pour le bonheur de tester les limites : la classe
+	imagereduire_NNN associee a #EDIT{contenu} provoque l'application
+	du filtre |image_reduire{NNN,0}
+
+]
+[(#REM) met dans la variable r la valeur de la class ]
+[(#SET{r,[(#ENV{class}|match{\bimagereduire_\d+\b}|match{\b\d+\b})]})]
+
+<BOUCLE_j(JEUX){id_jeu=#ENV{id_jeux}}{statut==.}>
+[(#GET{r}|?{
+	[(#CONTENU*|traite_contenu_jeu{#ID_JEU}|image_reduire{#GET{r},0})]
+,
+	[(#CONTENU*|traite_contenu_jeu{#ID_JEU})]
+})]
+</BOUCLE_j>

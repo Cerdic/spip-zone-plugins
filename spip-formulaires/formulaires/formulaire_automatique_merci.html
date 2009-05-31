@@ -1,0 +1,20 @@
+<BOUCLE_application(APPLICATIONS) {id_application=#ENV{id_application}}>
+<BOUCLE_formulaire(FORMULAIRES) {id_formulaire}>
+<a class="spacer" name="formulaire">&nbsp;</a>
+
+<div class="formulaire_spip formulaire_automatique formulaire_automatique_message_envoye">
+
+<div class="reponse_formulaire reponse_formulaire_ok">
+[(#MERCI|sinon{<:formulairespublic:merci:>})]
+</div>
+
+<p class="boutons"><a href="#URL_FORMULAIRE"><:formulairespublic:retour:></a></p>
+<BOUCLE_deconnexion(FORMULAIRES) {id_formulaire} {limiter_invitation=oui}>
+<p class="boutons"><a href="#URL_ACTION_LOGOUT_FORMULAIRE"><:formulairespublic:deconnexion:></a></p>
+<p class="boutons"><a href="#URL_FORMULAIRE_ESPACE_FORMULAIRE"><:formulairespublic:espace_formulaire:></a></p>
+</BOUCLE_deconnexion>
+
+</div>
+
+</BOUCLE_formulaire>
+</BOUCLE_application>

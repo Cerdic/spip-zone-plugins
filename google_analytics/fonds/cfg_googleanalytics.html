@@ -1,0 +1,30 @@
+[(#REM) descriptif=
+<h4>Configuration du plugin Google analytics</h4>
+Ici vous pouvez indiquer votre identifiant google analytics.<br />
+<br />
+]
+
+[(#REM) titre=Google analytics]
+[(#REM) icone=images/ga-22.png]
+#CACHE{0}
+
+<form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
+
+<fieldset><legend><:googleanalytics:textes_id_google:></legend>
+<p>
+<label for="_google_id"><:googleanalytics:texte_votre_identifiant:></label>
+<input type="text" name="idGoogle" class="type_txt" id="_google_id" size="60"
+	value="#ENV{idGoogle,UA-xxxxxx}" />
+</p>
+
+<p>* si <b>_</b> ou vide, supprime la fonctionnalit&eacute; (vide reviendra au d&eacute;faut)</p>
+</fieldset>
+
+
+<div>
+<input type="submit" name="_cfg_ok" value="<:ok:>" class="fondo" />
+<input type="reset" value="<:reset:>" class="fondo" />
+<input type="submit" name="_cfg_delete" value="<:supprimer:>" class="fondo" />
+</div>
+</form>
+

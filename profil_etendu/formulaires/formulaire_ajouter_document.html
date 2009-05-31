@@ -1,0 +1,40 @@
+<div style='position: relative;border: 1px solid #666666;background: #fff;'>
+ <img style='position: absolute; top: -16px; left: 10px;' src='ecrire/img_pack/image-24.gif' alt="image-24" />
+ <div style='font-weight: bold;padding: 3px;background: #aaaaaa;border-bottom: 1px solid #666666;margin: 0px; padding-left: 38px;'>
+  [(#NOOP**|str_cat{ajouter_document}|md5|bouton_block_invisible)]<:titre_joindre_document:>
+ </div>
+  [(#NOOP**|str_cat{ajouter_document}|md5|debut_block_invisible)]
+   <form method='POST' action='spip.php' enctype='multipart/form-data' style='border: 0px; margin: 0px;'>
+
+
+<form action='spip.php' method='post' enctype='multipart/form-data' style='border: 0px; margin: 0px;'>
+	<div>
+	<input type="hidden" name="id_auteur" value="[(#ENV{id_auteur_session})]" />
+	<input type="hidden" name="hash" value="[(#ENV{id_auteur_session}|calculer_hash{joindre-document})]" />
+	<input name='action' type='hidden' value='joindre' />
+	<input name='arg' type='hidden' value='document' />
+	<input type="hidden" name="redirect" value="[(#ENV{redirect_url})]" />
+	<input type="hidden" name="id" value="[(#ENV{id_chose})]" />
+	<input type="hidden" name="type" value="[(#ENV{type})]" />
+		<input type='hidden' name='id_document' value='0' />
+
+	<div>T&eacute;l&eacute;charger depuis votre ordinateur&nbsp;:</div>
+	<div><input name='fichier1' type='File' style='font-size: 10px;' class='forml' size='20'></div><div align='right'>
+	<input name='sousaction1' type='submit' value='T&eacute;l&eacute;charger' class='fondo' /></div>
+	<div>
+	 <div style='display: block;'>
+      <div style='color: #505050;'>
+       <input type="hidden" name="forcer_document" value="oui">
+	   <div style='border: 1px #303030 solid; padding: 4px; color: #505050;'>
+	    <img src='img_pack/attachment.gif' style='float: right;' alt="" />
+	    R&eacute;f&eacute;rencer un document sur l'internet&nbsp;:<br />
+	    <input name='image_url' size='25' class='fondo' value='http://' />
+        <div align='right'><input name='sousaction2' type='Submit' value='Choisir' class='fondo'></div>
+       </div>
+      </div>
+      <div style='clear: both;'></div>
+     </div>
+    </div>
+   </form>
+ </div>
+</div>

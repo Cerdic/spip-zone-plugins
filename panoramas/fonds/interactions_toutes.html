@@ -1,0 +1,34 @@
+#CACHE{0}
+<B_interactions>
+<div class='liste'>
+<div style='position: relative;'>
+	<div style='position: absolute; top: -12px; left: 3px;'><img src='#CHEMIN{img_pack/panoramas.png}' alt="" /></div>
+	<div style='background-color: #ENV{couleur_claire}; color: black; padding: 3px; padding-left: 30px; border-bottom: 1px solid #444444;' class='verdana2'>
+	<b><:panoramas:toutes_interactions:></b>
+	</div>
+</div>
+<table width='100%' cellpadding='5' cellspacing='0' border='0'>
+[<tr style='background-color: #dddddd;'>
+<td class="arial1" style='border-bottom: 1px solid #444444;' colspan="10">
+<div class='pagination'>(#PAGINATION)</div>
+</td>
+</tr>]
+<BOUCLE_interactions(VISITES_VIRTUELLES_INTERACTIONS){id_lieu}{pagination 10}>
+<tr class='tr_liste'>
+<td class="arial12">
+<B_interactions>
+	<img src='#CHEMIN{images/puce-verte-breve.gif}' width='7' height='7' border='0' alt='puce'>&nbsp;&nbsp;
+</td>
+<td class="arial12">
+	<span class='#EDIT{titre}'>#TITRE</span>
+</td>
+<td class="arial12">
+<a href="?exec=interactions_edit&id_interaction=#ID_INTERACTION&id_visite=#ID_VISITE&id_lieu=#ID_LIEU&retour=#SELF"><:panoramas:parametres:></a>
+</td>
+</tr>
+</BOUCLE_interactions>
+</table></div>
+</B_interactions>
+<p><:panoramas:pas_d_interaction:></p>
+<//B_interactions>
+&nbsp;<br/>

@@ -1,0 +1,38 @@
+<composant>
+  <!-- Nom du composant -->
+  <nom>Module</nom>
+  <!-- Auteur du composant -->
+  <auteur>Daniel FAIVRE &copy; 2008-2009 - licence GPL</auteur>
+  <version>0.5</version>
+  <necessite id='acs' version='[0.5;]' />
+
+  <param>
+    <nom>optionnel</nom>
+    <valeur>no</valeur>
+  </param>
+
+  <variable>
+    <nom>1</nom>
+    <type>widget</type>
+  </variable>
+  <variable>
+    <nom>2</nom>
+    <type>widget</type>
+  </variable>
+  <variable>
+    <nom>3</nom>
+    <type>widget</type>
+  </variable>
+  <variable>
+    <nom>4</nom>
+    <type>widget</type>
+  </variable>
+  <variable>
+    <nom>5</nom>
+    <type>widget</type>
+  </variable>
+  <variable>
+    <nom>6</nom>
+    <type>widget</type>
+  </variable>
+</composant>

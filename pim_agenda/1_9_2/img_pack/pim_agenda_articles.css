@@ -1,0 +1,84 @@
+.agenda_invisible_au_chargement {
+	visibility: hidden;
+}
+.agenda_visible_au_chargement {
+	visibility: visible;
+}
+.agenda-visu-evenement-bouton-fermer{
+display:none;
+}
+#container_debut{
+left:0px;
+top:0px;
+z-index:120;
+}
+#container_fin{
+left:0px;
+top:0px;
+z-index:120;
+}
+.agenda_mot_cle_select{
+float:left;
+width:32%;
+margin-right:0.5em;
+}
+.titre-titre {
+float:left;
+	width : 13%;
+	height : 2em;
+	font-weight: bold;
+ }
+.titre-visu {
+float:left;
+	width : 85%;
+	height : 2em;
+	font-weight: bold;
+ }
+.lieu-titre {
+float:left;
+	width : 13%;
+	height : 2em;
+	font-weight: bold;
+ }
+.lieu-visu {
+float:left;
+	width : 85%;
+	height : 2em;
+	font-weight: bold;
+}
+.horaire-titre {
+float:right;
+	width : 40%;
+	height : 2em;
+	font-weight: bold;
+ }
+.date-titre {
+float:left;
+	width : 58%;
+	height : 2em;
+	font-weight: bold;
+ }
+.date-visu {
+float:left;
+	width : 98%;
+	height : 5em;
+	font-weight: bold;
+}
+.descriptif-titre {
+float:left;
+	left :0px;
+	width : 98%;
+	height : 2em;
+	font-weight: bold;
+ }
+.descriptif-visu {
+float:left;
+	left :0%;
+	width : 98%;
+	height : 6em;
+	font-weight: bold;
+}
+.edition-bouton{
+float:right;
+margin-top:0.5em;
+}

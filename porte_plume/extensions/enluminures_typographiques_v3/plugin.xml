@@ -1,0 +1,112 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Enluminures typographiques pour SPIP 2 &amp; Porte plume
+	</nom>
+	<auteur><!-- Auteur du plugin -->
+[Jacques->http://www.spip-contrib.net/_Jacques-PYRAT_] &#224; partir des raccourcis mis en place par [Fran&#231;ois->http://www.spip-contrib.net/_Francois-Schreuer_]
+
+&#169; 2009 - Distribu&#233; sous licence GNU/GPL
+	</auteur>
+	<lien>[Exemple d'utilisation->http://www.pyrat.net/Raccourcis-Typographiques-de-SPIP.html]</lien>
+	<version>
+	3.0.0
+	</version>
+	<etat>
+	test
+	</etat>
+	<description>
+Rajoute des raccourcis typographiques et des boutons &#224; au porte plume.
+
+-* Paragraphes :
+-** {{Sous-titres}} <code>{n{</code>Texte du titre<code>}n}</code>, n variant de 2 &#224; 5, la barre de raccourcis ne proposant que 2 et 3
+-** {{Centrer}} <code>[|</code>Paragraphe centr&#233;<code>|]</code>
+-** {{Aligner &#224; droite}} <code>[/</code>Paragraphe align&#233; &#224; droite<code>/]</code>
+-** {{Encadrer}} <code>[(</code>Paragraphe &#224; encadrer<code>)]</code>
+-* Caract&#232;res :
+-** {{Mise en &#233;vidence}} <code>[*</code>texte en &#233;vidence<code>*]</code>
+-** {{Mise en &#233;vidence variante}} <code>[**</code>texte en &#233;vidence (autre couleur)<code>*]</code>
+-** {{Mise en exposant}} {&lt;sup&gt;}texte en exposant{&lt;/sup&gt;}
+-** {{Petites capitales}} {&lt;sc&gt;}texte en petite capitales{&lt;/sc&gt;}
+-** {{Biff&#233;}} {&lt;del&gt;}texte biff&#233;{&lt;/del&gt;}
+-** {{Ancre et retour &#224; l'ancre}} {[}definition_ancre&lt;-{]} et {[}retour &#224; l'ancre-&gt;#definition_ancre{]}
+
+{{Param&#233;trage}} : vous pouvez modifier le fonctionnement du plugin par votre fichier ecrire/mes_options.php :
+
+{{Attention}} : le plugin incorpore automatiquement dans vos pages les nouveaux styles (si #INSERT_HEAD est pr&eacute;sent) !
+_ Si vous n'en voulez pas :
+<code>$GLOBALS['BarreTypoEnrichie_Preserve_Header'] = true;</code>
+
+Exemple :
+<code>
+// Pour que les fausses puces soient transformees en vraie listes a puces
+$GLOBALS['barre_typo_pas_de_fausses_puces'] = true;
+
+// Pour commencer la titraille a h2 (et non h3 comme par defaut dans SPIP -- pour des raisons historiques)
+$GLOBALS['debut_intertitre'] = '<h2 class="spip">';
+$GLOBALS['fin_intertitre'] = '</h2>';
+$GLOBALS['debut_intertitre_2'] = '<h3 class="spip">';
+$GLOBALS['fin_intertitre_2'] = '</h3>';
+$GLOBALS['debut_intertitre_3'] = '<h4 class="spip">';
+$GLOBALS['fin_intertitre_3'] = '</h4>';
+$GLOBALS['debut_intertitre_4'] = '<h5 class="spip">';
+$GLOBALS['fin_intertitre_4'] = '</h5>';
+$GLOBALS['debut_intertitre_5'] = '<h6 class="spip">';
+$GLOBALS['fin_intertitre_5'] = '</h6>';
+</code>
+
+Vous pouvez aussi installer le plugin cfg et utiliser [ecrire/?exec=cfg&amp;cfg=bte->./?exec=cfg&amp;cfg=bte] pour configurer ces options (les options de cfg sont priortitaires par rapport &#224; celles de mes_options.php !)
+
+{Certaines icones proviennent de [FamFamFam->http://www.famfamfam.com/lab/icons/silk/].}
+	</description>
+	<lien>http://zone.spip.org/trac/spip-zone/wiki/BarreTypoEnrichie</lien> <!-- URI de documentation -->
+	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
+	sur le mode Rien::
+	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
+	ce parametre est obligatoire et doit etre non vide
+	-->
+	<prefix> 
+	typoenluminee
+	</prefix>
+	<icon>
+	img_pack/moinecopiste.gif
+	</icon>
+	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+	<pipeline>
+		<nom>pre_propre</nom>
+		<inclure>typoenluminee.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>post_propre</nom>
+		<inclure>typoenluminee.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>pre_typo</nom>
+		<inclure>typoenluminee.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>post_typo</nom>
+		<inclure>typoenluminee.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>nettoyer_raccourcis_typo</nom>
+		<inclure>typoenluminee.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>typoenluminee_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>typoenluminee_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>porte_plume_barre_pre_charger</nom>
+		<inclure>enluminures_typo_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>porte_plume_lien_classe_vers_icone</nom>
+		<inclure>enluminures_typo_pipelines.php</inclure>
+	</pipeline>
+	<necessite id="SPIP" version="[2.0.3;]" />
+	<necessite id="porte_plume" version="[1.2.2;]" />
+</plugin>

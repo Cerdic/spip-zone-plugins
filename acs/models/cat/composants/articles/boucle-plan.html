@@ -1,0 +1,31 @@
+[(#REM)
+Boucle plan du site
+]
+<BOUCLE_secteurs(RUBRIQUES) {racine} {par num titre, titre}>
+<div class="plan-secteur">
+  <h1>
+    [<div style="float:left"><a href="#URL_RUBRIQUE">(#LOGO_RUBRIQUE||image_reduire{#CONFIG{acsArticlesLogoTailleMax,50},#CONFIG{acsArticlesLogoTailleMax,50}})</a></div>]
+    [<a href="#URL_RUBRIQUE" [title="(#DESCRIPTIF|textebrut|entites_html)"] >(#TITRE|supprimer_numero)</a>]
+  </h1>
+
+  <!-- Articles et sous-rubriques -->
+  [(#CONFIG{acsDemocratieUse}|=={oui}|?{' '}) <INCLURE{fond=composants/articles/la_plan_democratie}{id_rubrique}{lang}{mode}>][(#REM) Si composant democratie activé]
+  [(#CONFIG{acsDemocratieUse}|!={oui}|?{' '}) <INCLURE{fond=composants/articles/la_plan}{id_rubrique}{lang}{mode}>][(#REM) Si composant democratie inactif]
+
+
+  <B_rubriques>
+    <ul class="plan-rubriques">
+    <BOUCLE_rubriques(RUBRIQUES) {id_parent} {par num titre, titre}>
+      <li class="plan-rubrique">
+      [<div style="float:left"><a href="#URL_RUBRIQUE">(#LOGO_RUBRIQUE||image_reduire{#CONFIG{acsArticlesLogoTailleMax,50},#CONFIG{acsArticlesLogoTailleMax,50}})</a></div>]
+      [<a href="#URL_RUBRIQUE" [title="(#DESCRIPTIF|textebrut|entites_html)"] style="float: left;">(#TITRE|supprimer_numero)</a>  &nbsp;]
+      [(#CONFIG{acsDemocratieUse}|=={oui}|?{' '}) <INCLURE{fond=composants/articles/la_plan_democratie}{id_rubrique}{lang}{mode}>][(#REM) Si composant democratie activé]
+      [(#CONFIG{acsDemocratieUse}|!={oui}|?{' '}) <INCLURE{fond=composants/articles/la_plan}{id_rubrique}{lang}{mode}>][(#REM) Si composant democratie inactif]
+      <BOUCLE_sous_rubriques(BOUCLE_rubriques)></BOUCLE_sous_rubriques>
+      </li>
+    </BOUCLE_rubriques>
+    </ul>
+  </B_rubriques>
+</div>
+<br class="nettoyeur" /><br />
+</BOUCLE_secteurs>

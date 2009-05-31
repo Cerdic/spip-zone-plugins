@@ -1,0 +1,14 @@
+= Clef Flickr =
+
+'''ATTENTION''' avant de pouvoir utiliser ce plugin, vous devez obtenir une clef chez flickr pour votre site. Pour cela:
+ 1. rendez vous sur:
+http://www.flickr.com/services/api/keys/
+ 1. demandez une clef de type: Desktop application.
+ 1. copiez la clef et le secret que Flickr vous donne
+ 1. dans votre fichier ecrire/mes_options.php, ajoutez:
+{{{
+<?php
+$GLOBALS['FLICKR_API_KEY'] = "VOTRE_CLEF_FLICKR";
+$GLOBALS['FLICKR_SECRET'] = "VOTRE_SECRET";
+?>
+}}}

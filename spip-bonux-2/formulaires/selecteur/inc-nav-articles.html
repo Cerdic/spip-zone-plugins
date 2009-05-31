@@ -1,0 +1,9 @@
+#SET{p,pa_#ID_RUBRIQUE}<B_articles>
+[<p class='pagination'>(#PAGINATION)</p>]
+<ul>
+<BOUCLE_articles(ARTICLES){id_rubrique}{statut?}{pagination 10 #GET{p}}>
+<li class='article[ (#EXPOSE)]'><a href='#' onclick="jQuery(this).item_pick('article|#ID_ARTICLE','#ENV{name,id_item}','[(#TITRE*|texte_script|attribut_html)]','article');return false;"
+><img class='add' src='#CHEMIN{img_pack/item-add.png}' />#TITRE</a></li>
+</BOUCLE_articles>
+</ul>
+</B_articles>

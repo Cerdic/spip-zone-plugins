@@ -1,0 +1,20 @@
+#CACHE{0}
+[(#FORMULAIRE_RECHERCHE_ETENDUE|spip.php?page=testmnogo)]
+
+<B_test>
+Recherche ::#RECHERCHE::<br/>
+Resume ::#MNOGO_RESUME_RESULTATS::<br/>
+Nb Resultats ::#MNOGO_TOTAL::<br/>
+<p class='pagination'>#PAGINATION</p>
+<BOUCLE_test(MNOGOSEARCH){recherche}{pagination}>
+#NUMERO - <a href='#URL'>#TITRE</a><br/>
+#POINTS<br/>
+#POPULARITE<br/>
+#DESCRIPTIF<br/>
+#TAILLE<br/>
+#MIME_TYPE<br/>
+#DATE<br/>
+<a href='#CONFIG{mnogo_url_search}#CACHE_URL'>Copie en cache</a>
+<hr/>
+</BOUCLE_test>
+</B_test>

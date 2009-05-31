@@ -1,0 +1,26 @@
+#CACHE{0}
+
+<p>
+<fieldset><legend><:opconfig:previsualisation:></legend>
+
+[<p><b>&nbsp;&nbsp;(#ENV*{surtitre})</b></p>>]
+[<p><b>&nbsp;&nbsp;(#ENV*{titre})</b></p>]
+[<p><b>&nbsp;&nbsp;(#ENV*{soustitre})</b></p>]
+[<p>(#ENV*{descriptif})</p>]
+[<p>(#ENV*{chapo})</p>]
+
+<p>
+	[(#TEXTE|image_reduire{400,0}|replace{<br>,<br />})]
+</p>
+<br style="clear:both;">
+
+[<p>(#ENV*{ps})</p>]
+
+<p>
+	le&nbsp;[(#ENV*{date_redac}|affdate)][, <:par_auteur:> (#LESAUTEURS)]
+		[, &nbsp;Auteur : (#ENV*{nom_inscription})]
+		[, &nbsp;Mail : (#ENV*{mail_inscription})]
+</p>
+
+</fieldset>
+</p>

@@ -1,0 +1,8 @@
+[(#REM)
+	TABLE_MATIERES page avec appel implicite
+]
+<BOUCLE_a(ARTICLES){texte==({{{)}{0,1}>
+[(#TEXTE|match{<div class="encart">}|?{OK,Erreur: pas de table affichée})]
+</BOUCLE_a>
+Il faut au moins un article avec des intertitres
+<//B_a>

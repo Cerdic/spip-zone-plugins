@@ -1,0 +1,37 @@
+Todo ou idées :
+
+- Ne plus gérer la page ?exec=cfg mais proposer uniquement de passer par des fonds CVT
+en mettant des #FORMULAIRE_CONFIG_LENOM et utiliser la nouvelle api simplifiée des pages exec
+de SPIP 2.0.6+ qui permet de mettre des contenus dans prive/exec/nom.html
+Chaque plugin gèrerait alors ses propres affichages.
+
+. Il faudrait alors proposer un moyen de creer facilement des menus
+dans la colonne de gauche, mais une inclusion peut suffire.
+
+
+Fonctionnement souhaite
+-----------------------
+
+* ?exec=cfg
+
+lecture de prive/exec/cfg qui charge un menu des différentes configurations trouvees
+- mais trouvées où ?
+- via pipeline onglets (ça serait le plus simple...) ?
+
+
+* ?exec=cfg&cfg=sarka
+
+lecture de prive/exec/cfg qui charge la page
+- sinon fonds/cfg_sarka (si presente) (qui n'est qu'une inclusion - pas de calculs par CFG)
+- sinon
+	+ titre : <:$cfg:config_titre_$cfg:> sinon $cfg
+	+ description : <:$cfg:config_description_$cfg:> sinon rien.
+	+ formulaires/config_sarka.html directement
+	+ navigation : fonds/nav-config_sarka.html (si present)
+
+
+* ?exec=cfg&cfg=sarka&onglet=layout
+
+lecture de prive/exec/cfg qui charge la page
+- sinon fonds/cfg_sarka_layout (si presente)
+- sinon formulaires/config_sarka_layout.html directement

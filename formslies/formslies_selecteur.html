@@ -1,0 +1,11 @@
+#HTTP_HEADER{Content-Type: text/html}
+<B_F>
+<select class="fondo verdana2" id="[(#ENV{id})]" name="[(#ENV{champ})]">
+<option value="">-----</option>
+<BOUCLE_F(FORMS_DONNEES){id_donnee}>
+<BOUCLE_champs(FORMS_CHAMPS){0,1}{listable=oui}{id_form}{par rang}>
+<option value="#_F:ID_DONNEE"[(#ENV{value}|=={#_F:ID_DONNEE}|?{' ',''})selected="selected"]>[(#LESVALEURS{','})]</option>
+</BOUCLE_champs>
+</BOUCLE_F>
+</select>
+</B_F>

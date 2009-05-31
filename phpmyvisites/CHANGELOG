@@ -1,0 +1,77 @@
+13 December - 2.1
+=================
+- Added Taiwanese language
+- Added Arabic language
+- Added Czech search engines
+- Updated Slovenian, French, Italian, Czech language files
+- Fixed automatic archiving process + sending mail : it should work now!
+- Fixed p_pmv_sum index error
+- Fixed JS bug in IE (IE is bad!)
+- Fixed pages viewed named 'default' in some case
+- Fixed bad path during install for IIS server (IIS is bad!)
+- Fixed when not counted in stats, file download now redirects well
+- Fixed RSS feed links
+- Fixed RSS permission : now RSS feed displays even if there are no site allowed for anonymous
+- Fixed cookie too long for server headers ?
+
+24 December - 2.0
+=================
+- Added support for chinese/japanese/russian/etc graphs
+- Added Visitors interest per referer (access type)
+- Did XHTML review
+- Added for period not finished, possibility to have a simpler archiving process
+- Added data compression before database recording
+- Optimized all database calls for visitors logs (difference is HUGE!)
+- Added Serbian language
+- Fixed many bugs
+
+6 December - 2.0 RC1
+====================
+- fixed 20 bugs 
+- backported 22 languages from the 1.x versions
+
+21 November - 2.0 beta 5
+========================
+- added mail feature: each user can receive stats by email for the sites they
+are authorized to see
+- added CronTab task that will archive automatically all finished days, 
+and that will send emails to registered users (if they asked for)
+- added logo selection feature during install
+- added new graphic: all days' visits for days in the month, last 18 months visits
+- added logo to distinguish "Files" from normal "Pages" in the "Pages views" table
+- cleaned Administration page (translation done)
+- fixed a bug (again and again this bug!) in newsletter count (now It's sure it works)
+- fixed a bug that didn't record variables in URLs
+- fixed a bug in URls alias (random order)
+- fixed english/french translations
+
+14 November - 2.0 beta 4
+========================
+- added "variables per page" display in the page views table
+- added file downloaded in the page views table
+- added option in admin : exclude webmaster from statistics with a cookie
+- added literal date in RSS feed and mail contents
+- optimized Javascript code (its size is now 2.6kb instead of 5.8kb)
+- fixed many bugs for PHP 5 compatibility
+- fixed in the javascript code for javascript menu compatibility (renamed variables)
+- fixed in the newsletter data archiving : now it works
+- fixed in the RSS feed and in the mail bodies
+- fixed month archiving : now it deletes records in table phpmv_visit
+- fixed PHP SAFE MOD compatibility
+- fixed the cache during current day archiving
+- fixed for MySQL 5 compatibility
+
+6 November - 2.0 beta 3
+=======================
+- added all graphics, using artichow library
+- fixed a bug with the calendar in PHP5
+- fixed many bugs
+
+29 october - 2.0 beta 2
+=======================
+- added 1 graph (using the new Artichow library)
+- fixed more than 15 bugs in beta1
+
+11 october - 2.0 beta 1 
+=======================
+First public release

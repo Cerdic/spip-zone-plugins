@@ -1,0 +1,132 @@
+[(#HTTP_HEADER{Content-type: application/download; Content-Length: 500; Content-Disposition: attachment; filename: plan_du_site.mm [; charset=(#CHARSET)]})]
+<map version="0.8.1">
+	<node TEXT="[(#NOM_SITE_SPIP)]" STYLE="fork">
+		<edge STYLE="bezier" WIDTH="2"/>
+		<font BOLD="true" NAME="SansSerif" SIZE="21"/>
+		<icon BUILTIN="gohome"/>
+		<BOUCLE_secteur(RUBRIQUES){racine}{par num titre}{par titre}>
+		[<node[ LINK="(#URL_RUBRIQUE)"] COLOR="#003366" TEXT="(#TITRE|supprimer_tags|texte_backend)" STYLE="bubble" FOLDED="true" POSITION="right">]
+			[<richcontent TYPE="NOTE"><html><head/><body><p align="left" style="width:200px">(#DESCRIPTIF|supprimer_tags|texte_backend)</p></body></html></richcontent>]
+			<edge COLOR="#0066ff"/>
+			<icon BUILTIN="desktop_new"/>
+			<BOUCLE_a(ARTICLES){id_rubrique}{par date}{inverse}{0,25}>
+			[<node[ LINK="(#URL_ARTICLE)"] COLOR="#339966" TEXT="(#TITRE|supprimer_tags|texte_backend|couper{50})">]
+				[<richcontent TYPE="NOTE"><html><head/><body><p align="right" width="200">(#INTRODUCTION|supprimer_tags|texte_backend|couper{150})</p></body></html></richcontent>]
+				<edge COLOR="#339966"/>
+				<icon BUILTIN="pencil"/>
+				<font BOLD="false" NAME="SansSerif" SIZE="12"/>
+				<BOUCLE_a_doc(DOCUMENTS){id_article}{mode=document}{par num titre, date}{extension!=jpg}{extension!=gif}{extension!=png}>
+				[<node LINK="#URL_SITE_SPIP/#URL_DOCUMENT" COLOR="#666666" TEXT="[(#TITRE|supprimer_tags|texte_backend|sinon{<:info_document:>}) - ](#TYPE_DOCUMENT)[ - (#TAILLE|taille_en_octets)]">]
+					<edge COLOR="#666666"/>
+				</node>
+				</BOUCLE_a_doc>
+			</node>
+			</BOUCLE_a>
+			<BOUCLE_sr(RUBRIQUES){id_parent}>
+			[<node FOLDED="true" LINK="[(#URL_RUBRIQUE)]" TEXT="(#TITRE|supprimer_tags|texte_backend|couper{50})">]
+				[<richcontent TYPE="NOTE"><html><head/><body><p align="left" style="width:200px">(#DESCRIPTIF|supprimer_tags|texte_backend)</p></body></html></richcontent>]
+				<edge COLOR="#0066ff"/>
+				<icon BUILTIN="desktop_new"/>
+				<BOUCLE_sr_a(ARTICLES){id_rubrique}{par date}{inverse}{0,25}>
+				[<node LINK="[(#URL_ARTICLE)]" COLOR="#339966" TEXT="(#TITRE|supprimer_tags|texte_backend|couper{50})">]
+					[<richcontent TYPE="NOTE"><html><head/><body><p align="right" width="200">(#INTRODUCTION|texte_backend|supprimer_tags|couper{150})</p></body></html></richcontent>]
+					<edge COLOR="#339966"/>
+					<icon BUILTIN="pencil"/>
+					<font BOLD="false" NAME="SansSerif" SIZE="12"/>
+					<BOUCLE_sr_a_doc(DOCUMENTS){id_article}{mode=document}{par num titre, date}{extension!=jpg}{extension!=gif}{extension!=png}>
+					[<node LINK="[(#URL_DOCUMENT|texte_backend)]" COLOR="#666666" TEXT="[(#TITRE|supprimer_tags|texte_backend|sinon{<:info_document:>}) - ](#TYPE_DOCUMENT)[ - (#TAILLE|taille_en_octets)]">]
+						<edge COLOR="#666666"/>
+					</node>
+					</BOUCLE_sr_a_doc>
+				</node>
+				</BOUCLE_sr_a>
+				<BOUCLE_sr_s(SITES){id_rubrique}{par nom_site}{inverse}>
+				[<node LINK="[(#URL_SITE)]" COLOR="#666666" FOLDED="true" TEXT="(#NOM_SITE|texte_backend|supprimer_tags|couper{50})">]
+					[<richcontent TYPE="NOTE"><html><head/><body><p align="left" style="width:200px">(#DESCRIPTIF|texte_backend|supprimer_tags)</p></body></html></richcontent>]
+					<icon BUILTIN="ksmiletris"/>
+					<BOUCLE_sr_s_a(SYNDIC_ARTICLES){id_syndic}{par date}{inverse}{0,10}>
+					[<node LINK="[(#URL_ARTICLE)]" COLOR="#339966" TEXT="(#TITRE|texte_backend|supprimer_tags|couper{50})">]
+						[<richcontent TYPE="NOTE"><html><head/><body><p align="right" width="200">(#DESCRIPTIF|texte_backend|supprimer_tags|couper{150})</p></body></html></richcontent>]
+						<edge COLOR="#339966"/>
+						<icon BUILTIN="pencil"/>
+					</node>
+					</BOUCLE_sr_s_a>
+				</node>
+				</BOUCLE_sr_s>
+				<BOUCLE_sr_doc(DOCUMENTS){id_rubrique}{mode=document}{par num titre, date}{extension!=jpg}{extension!=gif}{extension!=png}>
+				[<node LINK="[(#URL_DOCUMENT|texte_backend)]" COLOR="#666666" TEXT="[(#TITRE|texte_backend|sinon{<:info_document:>}) - ](#TYPE_DOCUMENT)[ - (#TAILLE|taille_en_octets)]">
+					<edge COLOR="#666666"/>
+				</node>]
+				</BOUCLE_sr_doc>
+				<BOUCLE_sssr(BOUCLE_sr)> </BOUCLE_sssr>
+			</node>
+			</BOUCLE_sr>
+			<BOUCLE_b(BREVES){id_rubrique}>
+			[<node LINK="[(#URL_BREVE)]" COLOR="#ff6600" TEXT="(#TITRE|texte_backend|supprimer_tags|couper{50})">]
+				[<richcontent TYPE="NOTE"><html><head/><body><p align="right" width="200">(#DESCRIPTIF|texte_backend|supprimer_tags|couper{150})</p></body></html></richcontent>]
+				<edge COLOR="#ff6600"/>
+				<icon BUILTIN="bell"/>
+			</node>
+			</BOUCLE_b>
+			<BOUCLE_s(SITES){id_rubrique}{par nom_site}>
+			[<node LINK="[(#URL_SITE|supprimer_tags|texte_backend)]" COLOR="#666666" FOLDED="true" TEXT="(#NOM_SITE|texte_backend|supprimer_tags|couper{50})">
+				[<richcontent TYPE="NOTE"><html><head/><body style="width:200px"><p align="left" style="width:200px">(#DESCRIPTIF|texte_backend|supprimer_tags|couper{150})</p></body></html></richcontent>]
+				<icon BUILTIN="ksmiletris"/>]
+				<BOUCLE_s_a(SYNDIC_ARTICLES){id_syndic}{par date}{inverse}{0,10}>
+				[<node LINK="[(#URL_ARTICLE|texte_backend)]" COLOR="#339966" TEXT="(#TITRE|texte_backend|supprimer_tags|couper{50})">]
+					[<richcontent TYPE="NOTE"><html><head/><body><p align="right" width="200">(#DESCRIPTIF|couper{150}|supprimer_tags|texte_backend)</p></body></html></richcontent>]
+					<edge COLOR="#339966"/>
+					<icon BUILTIN="pencil"/>
+				</node>
+				</BOUCLE_s_a>
+			</node>
+			</BOUCLE_s>
+			<BOUCLE_secteur_doc(DOCUMENTS){id_rubrique}{mode=document}{par num titre, date}>
+			[<node LINK="[(#URL_DOCUMENT|texte_backend)]" COLOR="#666666" TEXT="[(#TITRE|texte_backend|sinon{<:info_document:>}) - ](#TYPE_DOCUMENT)[ - (#TAILLE|taille_en_octets)]">
+				<edge COLOR="#666666"/>
+			</node>]
+			</BOUCLE_secteur_doc>
+		</node>
+		</BOUCLE_secteur>
+		<BOUCLE_groupes(GROUPES_MOTS){par titre}>
+		[<node COLOR="#993366" TEXT="(#TITRE|texte_backend)" STYLE="bubble" FOLDED="true" POSITION="left">]
+			[<richcontent TYPE="NOTE"><html><head/><body><p align="left" style="width:200px">(#DESCRIPTIF|texte_backend|supprimer_tags)</p></body></html></richcontent>]
+			<edge COLOR="#993366"/>
+			<icon BUILTIN="xmag"/>
+			<BOUCLE_mots(MOTS){id_groupe}{par titre}>
+			[<node COLOR="#993300" TEXT="(#TITRE|texte_backend)" STYLE="bubble" FOLDED="true">]
+				[<richcontent TYPE="NOTE"><html><head/><body><p align="left" style="width:200px">(#DESCRIPTIF|texte_backend|supprimer_tags)</p></body></html></richcontent>]
+				<edge COLOR="#993300"/>
+				<icon BUILTIN="password"/>
+				<BOUCLE_mots_a(ARTICLES){id_mot}{par date}{0,25}>
+				[<node LINK="[(#URL_ARTICLE)]" COLOR="#339966" TEXT="(#TITRE|texte_backend|supprimer_tags|couper{50})">]
+					[<richcontent TYPE="NOTE"><html><head/><body><p align="right" width="200">(#INTRODUCTION|texte_backend|supprimer_tags|couper{150})</p></body></html></richcontent>]
+					<edge COLOR="#339966"/>
+					<icon BUILTIN="pencil"/>
+					<font BOLD="false" NAME="SansSerif" SIZE="12"/>
+					<BOUCLE_mots_a_doc(DOCUMENTS){id_article}{mode=document}{par num titre, date}{extension!=jpg}{extension!=gif}{extension!=png}>
+					[<node LINK="[(#URL_DOCUMENT|texte_backend)]" COLOR="#666666" TEXT="[(#TITRE|texte_backend|sinon{<:info_document:>}) - ](#TYPE_DOCUMENT)[ - (#TAILLE|taille_en_octets)]">]
+						<edge COLOR="#666666"/>
+					</node>
+					</BOUCLE_mots_a_doc>
+				</node>
+				</BOUCLE_mots_a>
+				<BOUCLE_mots_s(SITES){id_mot}{par nom_site}>
+				[<node LINK="[(#URL_SITE)]" COLOR="#666666" FOLDED="true" TEXT="(#NOM_SITE|texte_backend|supprimer_tags|couper{50})">]
+					[<richcontent TYPE="NOTE"><html><head/><body><p align="left" style="width:200px">(#DESCRIPTIF|texte_backend|supprimer_tags)</p></body></html></richcontent>]
+					<icon BUILTIN="ksmiletris"/>
+					<BOUCLE_mots_s_a(SYNDIC_ARTICLES){id_syndic}{par date}{inverse}{0,10}>
+					[<node LINK="[(#URL_ARTICLE)]" COLOR="#339966" TEXT="(#TITRE|texte_backend|supprimer_tags|couper{50})">]
+						[<richcontent TYPE="NOTE"><html><head/><body><p align="right" width="200">(#DESCRIPTIF|texte_backend|supprimer_tags|couper{150})</p></body></html></richcontent>]
+						<edge COLOR="#339966"/>
+						<icon BUILTIN="pencil"/>
+					</node>
+					</BOUCLE_mots_s_a>
+				</node>
+				</BOUCLE_mots_s>
+			</node>
+			</BOUCLE_mots>
+		</node>
+		</BOUCLE_groupes>
+	</node>
+</map>

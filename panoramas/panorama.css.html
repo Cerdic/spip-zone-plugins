@@ -1,0 +1,108 @@
+[(#REM)
+
+	Charger les css de panoramas
+
+]#CACHE{7*24*3600,cache-client}
+#HTTP_HEADER{'Content-Type: text/css'}
+[(#INCLURE{css/jquery.panorama.css}|compacte_css)]
+.type-jeu {
+	background-image: url(#CHEMIN{img_pack/interactions/type-jeu.gif});
+	background-repeat: no-repeat;
+	background-position: right bottom;
+}
+.type-document {
+	background-image: url(#CHEMIN{img_pack/interactions/type-document.gif});
+	background-repeat: no-repeat;
+	background-position: right bottom;
+}
+.type-url {
+	background-image: url(#CHEMIN{img_pack/interactions/type-url.gif});
+	background-repeat: no-repeat;
+	background-position: right bottom;
+}
+.type-descriptif {
+	background-image: url(#CHEMIN{img_pack/interactions/type-descriptif.gif});
+	background-repeat: no-repeat;
+	background-position: right bottom;
+}
+.type-article, .type-lieu, .type-rubrique, .type-visite {
+	background-image: url(#CHEMIN{img_pack/interactions/type-article.gif});
+	background-repeat: no-repeat;
+	background-position: right bottom;
+}
+.type-video {
+	background-image: url(#CHEMIN{img_pack/interactions/type-video.gif});
+	background-repeat: no-repeat;
+	background-position: right bottom;
+}
+.type-audio {
+	background-image: url(#CHEMIN{img_pack/interactions/type-audio.gif});
+	background-repeat: no-repeat;
+	background-position: right bottom;
+}
+div.panorama-carte .lien-plan {
+	position: absolute;
+	color: white;
+	font-size: 13px;
+	padding: 0;
+	margin: 0;
+	background-image: url(#CHEMIN{img_pack/bg_fleche_plan.png});
+	background-repeat: no-repeat;
+	background-position: left bottom;
+	filter: alpha(opacity=90);
+	opacity: .9;
+	padding: 0;
+	padding-bottom: 19px;
+	
+}
+div.panorama-carte .lien-plan a {
+	background: #ff3f00;
+	color: white;
+	padding: 5px;
+	padding-top: 1px;
+	padding-bottom: 1px;
+	border-top: 1px solid white;
+	border-left: 1px solid white;
+}
+div.panorama-carte .lien-plan a:hover {
+	text-decoration: none;
+}
+div.panorama-fond-demarrer {
+	position: absolute; 
+	top: 0; 
+	left: 0;
+	width: 100%; 
+	height: 100%; 
+	background: #000; 
+	opacity: .8;
+	filter: alpha(opacity=80);
+}
+div.panorama-bouton-demarrer {
+	position: absolute; 
+	top: 50%; 
+	left: 0; 
+	width: 100%; 
+	text-align: left;
+}
+div.panorama-bouton-demarrer {
+	position: absolute;
+	left: 50%;
+	top: 50%; 
+	margin-left: -15%;
+	margin-top: -3em;
+	background: white; 
+	padding: 1em;
+	color: #666;
+	text-decoration: none;
+	width: 30%;
+}
+div.panorama-bouton-demarrer label { font-size: .9em; }
+div.panorama-bouton-demarrer a { color: #f60; padding: .2em; float: right; margin-top: 1em; border: 1px dotted #f60; font-size: .95em }
+div.panorama-bouton-demarrer a:hover {
+	text-decoration: none;
+	color: white;
+	background: #f60;
+}
+div.panorama-viewport .panorama-container a, div.panorama-viewport .panorama-container a:hover {
+	text-decoration: none;
+}

@@ -1,0 +1,27 @@
+#CACHE{0}
+
+#banniere {
+  width: 100%;
+  text-align: #CONFIG{acsBanniereAlign,center};
+  height: #CONFIG{acsBanniereHauteur,60px};
+  [background: url('[(#ACS_CHEMIN)]img/fond/(#CONFIG{acsBanniereImageFond})') repeat-x;]
+  font-family: [(#CONFIG{acsBanniereFont}), ]#CONFIG{acsBanniereFontFamily};
+}
+
+#banniere .logo {
+  position: absolute;
+  border: 0;
+  top: 0;
+  [(#CONFIG{acsBanniereLogoAlign,left}|=={left}|?{left: 0,right: 0});]
+}
+
+#banniere .banniere {
+  position: relative;
+  left: 60px;
+}
+
+#banniere .nom_site {
+  position: relative;
+  font-size: 40px;
+  [color: (#CONFIG{acsBanniereTextColor});]
+}

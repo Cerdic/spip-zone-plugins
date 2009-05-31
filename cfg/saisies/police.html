@@ -1,0 +1,19 @@
+[(#REM) 
+
+  ### /!\ boucle POUR ###
+  
+  Parametres :
+  - class : classe(s) css ajoutes au select
+  
+  Exemple d'appel :
+	[(#SAISIE{police}
+		{nom=couleur_foncee}
+		{label=<:spa:couleur_foncee:>}
+		{obligatoire=non})] 
+]
+<select name="police"[ class=" (#ENV{class})"]>
+	<option></option>
+	<BOUCLE_police(POUR){tableau #VAL{polices/}|find_all_in_path{\w+\.ttf}}{par cle}>
+		<option value="#CLE"[ (#ENV{valeur}|=={#CLE}|oui)selected="selected"]>#CLE</option>
+	</BOUCLE_police>
+</select>

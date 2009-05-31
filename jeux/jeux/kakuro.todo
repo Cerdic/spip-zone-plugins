@@ -1,0 +1,43 @@
+<?php
+
+# le code de ce fichier php reste encore à ecrire...
+
+#---------------------------------------------------#
+#  Plugin  : jeux                                   #
+#  Auteur  : Patrice Vanneufville, 2006             #
+#  Contact : patrice¡.!vanneufville¡@!laposte¡.!net #
+#  Licence : GPL                                    #
+#--------------------------------------------------------------------------#
+#  Documentation : http://www.spip-contrib.net/Des-jeux-dans-vos-articles  #
+#--------------------------------------------------------------------------#
+/*
+
+Insere un kakuro dans vos articles !
+------------------------------------
+
+separateurs obligatoires : [kakuro], [solution]
+separateurs optionnels   : [titre]
+
+Exemple de syntaxe dans l'article :
+-----------------------------------
+
+<jeux>
+	[kakuro]
+	--(19)(9)(25)
+	-(22\14)---
+	(\29)-----
+	(\7)--(9\13)--
+	(\25)-----
+	-(\10)---
+	
+	[solution]
+	*743*
+	96581
+	61*94
+	72349
+	*361*
+</jeux>
+
+*/
+
+?>

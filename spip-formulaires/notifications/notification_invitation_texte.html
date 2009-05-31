@@ -1,0 +1,11 @@
+<:formulairespublic:invitation_formulaire:>
+++++++++++++++++++++++++++++++++++++++++++++++
+
+<BOUCLE_invitation(FORMULAIRES) {id_formulaire=#ENV{id_formulaire}}>
+<:formulairespublic:vous_avez_ete_invites_a_repondre_au_formulaire:> 
+[(#TITRE)] [(#URL_FORMULAIRE|htmlspecialchars_decode)]
+</BOUCLE_invitation>
+
+<:formulairespublic:voici_vos_identifiants:>
+[(#ENV{email})] | [(#ENV{mdp})]
+

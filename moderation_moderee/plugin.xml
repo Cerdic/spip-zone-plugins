@@ -1,0 +1,45 @@
+<plugin>
+	<nom>	<!-- Nom du plugin -->
+		Mod&eacute;ration Mod&eacute;r&eacute;e
+	</nom>
+	<icon>
+		img_pack/icone.png
+	</icon>
+	<auteur>	<!-- Auteur du plugin -->
+		Yohann
+	</auteur>
+	<version>
+		1
+	</version>
+	<etat>
+		stable
+	</etat>
+	<description>
+		Ce plugin permet aux utilisateurs des forums publics configur&eacute;s {apriori}, 
+		qui sont enregsitr&eacute;s et logu&eacute;s en tant que visiteur r&eacute;dacteur ou admin, 
+		de ne pas subir ce type de mod&eacute;ration. Leur commentaire est automatiquement 
+		valid&eacute; sans qu'il y ait une action de la part d'un 
+		mod&eacute;rateur des forums depuis l'espace priv&eacute;e.<br />
+		Ceci ne fonctionne que pour les forums publics {{a priori}}.<br />
+		On peut choisir quels types de commentateur auront 
+		droit &agrave; la mod&eacute;ration mod&eacute;r&eacute;e 
+		(visiteur / r&eacute;dacteur / admin) mais ils 
+		doivent tous &ecirc;tre logu&eacute;s.
+	</description>
+	<lien>
+		[Site de l'&eacute;diteur->http://www.chambredesecrets.net]
+	</lien>
+	<prefix>
+		moderation
+	</prefix>
+    <pipeline>
+        <nom>pre_edition</nom>
+        <action>vip</action>
+        <inclure>fonctions_mod.php</inclure>
+    </pipeline>
+	<necessite id='SPIP' version='[2.0.0;]' />
+	<bouton id='moderation' parent='forum'>
+      <icone>img_pack/icone.png</icone>
+      <titre>Mod&eacute;ration Mod&eacute;r&eacute;e</titre>
+    </bouton>
+</plugin>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+	<!--  
+	// $LastChangedRevision$
+	// $LastChangedBy$
+	// $LastChangedDate$
+	 -->
+	
+	<nom>Raccourci texte perso</nom>
+	
+	<auteur>paladin@quesaco.org</auteur>
+	
+	<version>1.0.01</version>
+	
+	<etat>stable</etat>
+	
+	<description>
+		Permet de personnaliser les raccourcis &#147;texte&#148; des squelettes via
+		l&#39;espace priv&#233;.<br />
+		Vous pouvez d&#233;l&#233;guer la gestion de ces raccourcis
+		&#224; un administrateur restreint.
+	</description>
+	
+	<prefix>raper</prefix>
+	
+	<icon>images/raper-64.png</icon>
+	
+	<options>raper_options.php</options>
+	<install>base/raper_init.php</install>
+	
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>inc/raper_pipeline_insert_head.php</inclure>
+	</pipeline>
+	
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>inc/raper_pipeline_header_prive.php</inclure>
+	</pipeline>
+	
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<inclure>inc/raper_pipeline_ajouter_boutons.php</inclure>
+	</pipeline>
+	
+	<pipeline>
+		<nom>ajouter_onglets</nom>
+		<inclure>inc/raper_pipeline_ajouter_onglets.php</inclure>
+	</pipeline>
+	
+	<pipeline>
+		<nom>affiche_gauche</nom>
+		<inclure>inc/raper_pipeline_affiche_gauche.php</inclure>
+	</pipeline>
+	
+	<necessite id='spip' version='[1.9.2;]' />
+	
+</plugin>

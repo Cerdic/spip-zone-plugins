@@ -1,0 +1,85 @@
+#CACHE{0}
+#HTTP_HEADER{Content-Type: text/html}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+#INSERT_HEAD
+<title>[(#NOM_SITE_SPIP|texte_backend)]</title>
+<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET">
+<style>
+body {font-family:courier,arial,serif;}
+#bandeau{  position: fixed;  }
+#bandeau {padding:10px;height:15px;width:100%;bottom:0;left:0;background:#000;color:#00CC00;opacity: 0.7;-moz-opacity: 0.7;-khtml-opacity: 0.7;filter: alpha(opacity=70);}
+#infos {width:80%;overflow:hidden;}
+#select {float:right;font-weight:bold;list-style-type:none;width:15%;}
+#select a {text-decoration:none;color:#00CC00;}
+</style>	
+
+
+<?php
+if(!($auteur_session['statut'] == "0minirezo")) {echo "reservé aux admins"; return ;}
+
+include_spip("console_options"); // Pour Spip 1.9.2 ?
+
+function menu_log(){
+$menu ="" ;
+$files = preg_files(_DIR_LOG ,"\\" . _FILE_LOG_SUFFIX . "$");
+
+
+foreach($files as $log){
+$tab = split("/",$log);
+$log = array_pop($tab);
+$log_cible = str_replace(_FILE_LOG_SUFFIX,"",$log);
+
+$menu .= "<li><a href='#$log_cible'>$log</a></li>" ;
+}
+return $menu ;
+}
+?>
+
+<script>
+$(document).ready(function() {
+
+var fichier_log = "spip" ; 
+  
+  $("#select li a").click(
+  function(e){
+  var log = $(this).attr("href");	
+  log = log.replace('#','') ;
+  clearTimeout(t);
+  callServer(log);
+  }
+  );
+  
+  $("#infos").hide();
+  $("#bandeau").css("height","100%");
+  $("#infos").show();
+  callServer(fichier_log);
+
+  
+});
+
+function updatePage(fichier) {
+	t = setTimeout("callServer('"+ fichier +"')",10000);
+}
+
+function callServer(fichier) {
+ $.get("spip.php?page=console&log=" + fichier , function(data){
+ 	 $("#infos").html(data);
+	});
+	updatePage(fichier);
+}
+</script>
+</head>
+ 
+
+ 
+<body>
+<div id="bandeau">
+<ul id="select">
+<?php echo menu_log(); ?>
+</ul>
+<div id="infos"></div>
+</div>
+</body>
+</html>

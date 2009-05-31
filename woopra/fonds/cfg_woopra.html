@@ -1,0 +1,35 @@
+<!-- titre=Woopra-->
+<!-- icone=chart.png-->
+<!-- autoriser=webmestre -->
+
+[(#SET{logo,
+<img src='#DOSSIER_SQUELETTE/../chart.png' width='16' height='16' alt='Logo plugin Woopra' style="float:#LANG_RIGHT;" />
+})]
+
+<!-- refus=#GET{logo}<p>
+Seuls les webmestres du site sont autoris&#233;s &#224; modifier ces param&#232;tres.</p>
+<p>Pour en savoir plus, voir <a href="http://www.spip-contrib.net/-Autorite-">la documentation</a>.</p>
+-->
+
+<!-- descriptif=
+#GET{logo}
+<h4>Configuration de Woopra</h4>
+-->
+
+<!-- onglet=Woopra -->
+
+#CACHE{0}
+
+<form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
+
+<fieldset><legend>Woopra</legend>
+	<label for="woopra_id">Code pour les stats avec Woopra&nbsp;:</label>
+	<input type="text" name="woopra_id" id="woopra_id" value="[(#ENV{woopra_id})]" size="10" class="forml" />
+</fieldset>
+
+<div>
+<input type="submit" name="_cfg_ok" value="<:oK:>" class="fondo" />
+<input type="reset" value="<:reset:>" class="fondo" />
+<input type="submit" name="_cfg_delete" value="<:supprimer:>" class="fondo" />
+</div>
+</form>

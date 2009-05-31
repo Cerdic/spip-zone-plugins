@@ -1,0 +1,89 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	<multi>[ar]&#1575;&#1604;&#1575;&#1587;&#1578;&#1605;&#1575;&#1585;&#1575;&#1578;[en]Forms[fr]Formulaires&amp;Tables[it] Forms[es] Formularios</multi> (SPIP 2.0.0+)
+	</nom>
+	<icon>img_pack/form-24.png</icon>
+	<auteur>	<!-- Auteur du plugin -->
+		<multi>[ar]&#1575;&#1606;&#1591;&#1608;&#1575;&#1606; &#1576;&#1578;&#1585;&#1608;&#1548; &#1587;&#1610;&#1583;&#1585;&#1610;&#1603; &#1605;&#1608;&#1585;&#1575;&#1606;&#1548; &#1585;&#1610;&#1606;&#1575;&#1578;&#1608;
+		[fr]Antoine Pitrou, Cedric Morin, Renato Formato
+		[it]Antoine Pitrou, Cedric Morin, Renato Formato
+	  [es]Antoine Pitrou, Cedric Morin, Renato Formato
+		</multi>
+	</auteur>
+	<version>2.0.0</version>
+	<version_base>0.41</version_base>
+	<etat>dev</etat>
+	<description>
+	<multi>
+	[ar]&#1573;&#1583;&#1575;&#1585;&#1577; &#1575;&#1604;&#1575;&#1587;&#1578;&#1605;&#1575;&#1585;&#1575;&#1578; &#1608;&#1578;&#1581;&#1585;&#1610;&#1585;&#1607;&#1575;.
+&#1610;&#1578;&#1610;&#1581; &#1607;&#1584;&#1575; &#1575;&#1604;&#1605;&#1604;&#1581;&#1602; &#1571;&#1610;&#1590;&#1575;&#1611; &#1606;&#1588;&#1585; &#1575;&#1604;&#1575;&#1587;&#1578;&#1591;&#1604;&#1575;&#1593;&#1575;&#1578; &#1608;&#1575;&#1604;&#1578;&#1581;&#1602;&#1610;&#1602;&#1575;&#1578; &#1608;&#1581;&#1601;&#1592; &#1575;&#1604;&#1585;&#1583;&#1608;&#1583; &#1593;&#1604;&#1610;&#1607;&#1575; &#1601;&#1610; &#1602;&#1575;&#1593;&#1585;&#1583; &#1575;&#1604;&#1576;&#1610;&#1575;&#1606;&#1575;&#1578; &#1608;&#1578;&#1581;&#1605;&#1610;&#1604;&#1607;&#1575; &#1576;&#1578;&#1606;&#1587;&#1610;&#1602; CSV
+	[en]editable forms management an administration.
+	This plugin can also publish polls and surveys, store the replies in the database and upload them in CSV format
+      [fr]Gestion et administration de formulaires &#233;ditables.
+	Ce plugin permet &#233;galement la publication de sondages et enqu&#232;tes, la collecte des reponses dans la base de donn&#233;es et le t&#233;l&#233;chargement au format csv
+	[it]Gestione ed amministrazione di form modificabili.
+	Questo plugin consente anche la publicazione di sondaggi ed inchieste, la raccolta delle risposte all'interno della base dati e le mette a disposizione per lo scaricamento in formato csv
+      [es]Gesti&oacute;n y administraci&oacute;n de formularios editables.
+	Este plugin tambi&#233;n permite la publicaci&oacute;n de sondeos y encuestas, la colecta de las respuestas en la base de datos y su descarga en formato CSV (Comma Sepparated Variables).
+	</multi>
+	</description>
+	<lien>http://zone.spip.org/trac/spip-zone/wiki/SpipForms</lien> <!-- URI de documentation -->
+	<options>forms_options.php</options> <!-- fichier charge a chaque hit -->
+	<fonctions>forms_fonctions.php</fonctions>  <!-- fichier charge a chaque recalul de page -->
+	<fonctions>core/public/forms_boucles.php</fonctions>
+	<fonctions>core/public/forms_balises.php</fonctions>
+	<prefix>forms</prefix>
+	<install>core/base/forms_upgrade.php</install>
+	<pipeline>
+		<nom>definir_session</nom>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>core/base/forms.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>core/base/forms.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_auxiliaires</nom>
+		<inclure>core/base/forms.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>core/forms_autoriser.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>core/forms_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>post_edition</nom>
+		<inclure>core/forms_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_droite</nom>
+		<action>affiche_droite</action>
+		<inclure>core/forms_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>core/forms_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<inclure>core/forms_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<inclure>core/forms_pipeline.php</inclure>
+	</pipeline>
+	<chemin dir="" />
+	<chemin dir="core/" />
+	<chemin dir="forms/" />
+	<chemin dir="sondages/" />
+	<chemin dir="tables/" />
+	<chemin dir="crayons/" />
+	<chemin dir="snippets/" />
+	<necessite id="SPIP" version="[2.0.0;]" />
+</plugin>

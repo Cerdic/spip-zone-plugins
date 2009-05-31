@@ -1,0 +1,29 @@
+[(#REM)
+Afficher les details d'une photo flickr.
+
+On peut passer un parametre taille, align, class, lien
+]
+<BOUCLE_photo(FLICKR_PHOTOS_GETINFO) {id_photo=#ENV{id}}>
+<dl class="spip_document_#ENV{ID} spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok fpiprinfo" [ style="float:(#ENV{align}|match{left|right});"]>
+<dt>
+<a href="[(#ENV{lien}|sinon{#URL_PHOTO})]" [ class="(#ENV{lien_class})"] title="Flickr Photo[ (#TITLE) ][- <:fpipr:by:> (#OWNER_REALNAME|sinon{#OWNER_USERNAME})]">
+[(#LOGO_PHOTO{#ENV{taille}}|inserer_attribut{alt,Flickr Photo[ (#TITLE) ][- by (#OWNER_REALNAME|sinon{#OWNER_USERNAME})]})]</a>
+</dt>[
+<dt class="fpipr_photo_titre spip_doc_titre"[ style="width:(#WIDTH_PHOTO{#ENV{taille}}|min{350}|max{120})px;"]>
+<strong>(#TITLE)</strong>
+</dt>][
+<dd class="fpipr_photo_auteur"[ style="width:(#WIDTH_PHOTO{#ENV{taille}}|min{350}|max{120})px;"]>
+&mdash; <:fpipr:by:> (#OWNER_REALNAME|sinon{#OWNER_USERNAME})
+</dt>][
+<dd class="fpipr_photo_descriptif spip_doc_descriptif"[ style="width:(#WIDTH_PHOTO{#ENV{taille}}|min{350}|max{120})px;"]>
+(#DESCRIPTION)
+</dd>]<B_tags>
+<dd class="fpipr_photo_tags"[ style="width:(#WIDTH_PHOTO{#ENV{taille}}|min{350}|max{120})px;"]>
+<strong><:fpipr:tags:>:</strong>
+			<BOUCLE_tags(FLICKR_PHOTO_TAGS){","}>
+			  [(#RAW|sinon{#SAFE})]
+			</BOUCLE_tags>
+</dd>
+</B_tags>
+</dl>
+</BOUCLE_photo>

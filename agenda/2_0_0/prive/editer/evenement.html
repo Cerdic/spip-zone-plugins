@@ -1,0 +1,13 @@
+[(#REM)
+
+	Un petit descriptif ne serait pas superflu
+
+]
+<div class='cadre-formulaire-editer'>
+<div class="entete-formulaire">
+	#ENV**{icone_retour}
+	[<p>(#ENV{new}|intval|?{<:agenda:titre_cadre_modifier_evenement:>,<:agenda:titre_cadre_ajouter_evenement:>})</p>]
+	[<h1>(#ENV{new}|intval|?{##ENV{new}})</h1>]
+</div>
+#FORMULAIRE_EDITER_EVENEMENT{#ENV{new},#ENV{id_article},#ENV{redirect},#ENV{lier_trad},#ENV{config_fonc},#ENV{row}}
+</div>

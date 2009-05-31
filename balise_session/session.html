@@ -1,0 +1,178 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+	<title>Balise #[(#REM)]SESSION</title>
+	<INCLURE{fond=inc-head}>
+</head>
+<body class="page_sommaire">
+<div id="page">
+
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}>
+
+	[(#REM) Fil d'Ariane ]
+	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; Balise #[(#REM)]SESSION</div>
+
+	<div id="conteneur">
+
+		<div id="contenu">
+
+			<div class="cartouche">
+				<h1 class="titre">Balise #[(#REM)]SESSION</h1>
+				<dl class='spip_document_0 spip_documents spip_documents_right'  style='float:right;'>
+					<dt><a href="http://files.spip.org/spip-zone/balise_session.zip" type="application/zip" title='Zip - 9.2 ko'><img src='#CHEMIN{vignettes/zip.png}' width='47' height='48' alt='Zip - 9.2 ko' /></a></dt>
+					<dt class='spip_doc_titre' style='width:120px;'><strong>plugin balise_session</strong></dt>
+					<dd class='spip_doc_descriptif' style='width:120px;'>T&eacute;l&eacute;chargez, d&eacute;zippez &agrave; la racine de votre site et activez le plugin Balise Session</dd>
+				</dl>
+				<div class="chapo">La balise #[(#REM)]SESSION fonctionne comme
+				<a href="http://www.spip.net/fr_article3368.html#config" class="spip_out">
+				#[(#REM)]CONFIG
+				</a>
+				&agrave; ceci pr&egrave;s qu'elle s'appuie sur le tableau associatif <tt>$auteur_session</tt>. Le param&egrave;tre pass&eacute; en argument d&eacute;termine la valeur de session &agrave; afficher. Pour avoir une liste exhaustive des valeurs possible, consultez la doc de la fonction
+				<a href="http://doc.spip.org/@ajouter_session" class="spip_out">
+				ajouter_session
+				</a>
+				</div>
+			</div>
+			
+			<div class="liste-articles">
+				<h2 class="invisible">Exemples</h2>
+				<ul>
+
+					<li>
+						<p class=" texte spip_logos" style="background: #fff; border: 1px dashed #ccc;"><code>
+							&lt;p>id_auteur = &#35;SESSION{id_auteur}&lt;/p><br />
+							&lt;p>nom = &#35;SESSION{nom}&lt;/p><br />
+							&lt;p>statut = &#35;SESSION{statut}&lt;/p><br />
+						</code></p>
+						<h3 class="titre">Afficher des informations</h3>
+						<div class="texte">
+							<INCLURE(session.php){fond=affiche_donnees}>
+						</div>
+						<br class="nettoyeur" />
+					</li>
+
+					<li>
+						<p class=" texte spip_logos" style="background: #fff; border: 1px dashed #ccc;"><code>
+							[(&#35;SESSION{id_auteur}|?{<br />
+							Je suis connect&eacute;<br />
+							})]<br />
+						</code></p>
+						<h3 class="titre">Conditionner un affichage</h3>
+						<div class="texte">
+							<INCLURE(session.php){fond=affiche_condition}>
+						</div>
+						<br class="nettoyeur" />
+					</li>
+
+					<li>
+						<p class=" texte spip_logos" style="background: #fff; border: 1px dashed #ccc;"><code>
+							[(&#35;SESSION{statut}|=={0minirezo}?{<br />
+							Je suis administrateur<br />
+							})]<br />
+						</code></p>
+						<h3 class="titre">Conditionner un affichage selon le satut</h3>
+						<div class="texte">
+							<INCLURE(session.php){fond=affiche_condition_statut}>
+						</div>
+						<br class="nettoyeur" />
+					</li>
+
+				</ul>
+			</div>
+	
+			<div class="texte">
+				<h3 class="spip">Installation</h3>
+				<ul class="spip">
+					<li class="spip"> T&eacute;l&eacute;chargez l&#8217;archive ci-avant,</li>
+					<li class="spip"> d&eacute;compressez l&agrave; &agrave; la racine de votre site,</li>
+					<li class="spip"> dans la page de gestion des plugin de votre site, activez le plugin Balise Session</li>
+				</ul>
+				<p class="spip">Vous pourrez acc&eacute;der &agrave; cette même documentation sur <a class="spip_in" href="#URL_PAGE{session}">votre propre site</a></p>
+				<h3 class="spip">Principe</h3>
+				<p class="spip">Pour reconnaître le visiteur authentifi&eacute;,
+				on s'appuie sur le m&eacute;canisme de session de SPIP.
+				Toutefois, comme cette valeur est affich&eacute;e
+				dans un squelette, on doit aussi tenir compte du cache et
+				empêcher que les donn&eacute;es d'un visiteur
+				soient utilis&eacute;e par les suivants, le temps de la dur&eacute;e de vie de
+				la page.
+				</p>
+				<p class="spip">Deux moyens peuvent être employ&eacute;s&nbsp;:</p>
+				<ul class="spip">
+					<li class="spip"> D&eacute;finir &agrave; 0 la dur&eacute;e de vie du cache de 
+					chaque page o&ugrave; on affichera ou testera le contenu de la 
+					balise #[(#REM)]SESSION. C&#8217;est une mauvaise id&eacute;e en mati&egrave;re de 
+					performance globale pour le site</li>
+					<li class="spip"> Cr&eacute;er une page de cache de chaque page 
+					pour chaque visiteur authentifi&eacute;. Ainsi, les visiteur 
+					acc&egrave;dent &agrave; des pages distinctes calcul&eacute;es moins souvent.
+					C&#8217;est le principe retenu dans cette page.</li>
+				</ul>
+				<p class="spip">On introduit donc, en plus de la balise, un 
+				script <code class='spip_code' dir='ltr'>session.php</code>, 
+				appelable par la balise standard <code class='spip_code' dir='ltr'>&lt;INCLURE()&gt;</code>.
+				Ce script est un clone du script standard de spip 
+				(<code class='spip_code' dir='ltr'>spip.php</code>) &agrave; ceci-pr&egrave;s 
+				qu'il d&eacute;fini un <a href="http://doc.spip.org/@marqueur-de-squelette" class="spip_out">marqueur de squelette</a>
+				bas&eacute; sur l'identifiant du visiteur, s'il est d&eacute;fini. </p>
+				<h3 class="spip">Appel sp&eacute;cifique des noisettes</h3>
+				<p class="spip">On fera appel &agrave; la balise #[(#REM)]SESSION dans 
+				des squelettes inclus (qu'on appelle aussi noisettes...)</p>
+				<p class="spip">
+				<code class='spip_code' dir='ltr'>&lt;INCLURE(session.php){fond=page_speciale}&gt;</code>
+				</p>
+				<p class="spip">o&ugrave; <code class='spip_code' dir='ltr'>page_speciale.html</code> contiendra l'un au l'autre 
+				des exemples ci-dessus, ou de leurs combinaisons, ou d'autres 
+				&eacute;l&eacute;ments issus de cette page de d&eacute;monstration, ou bien encore, 
+				de votre propre cru !
+				<code class='spip_code' dir='ltr'>:D</code></p>
+				<h3 class="spip">Gestion de valeurs suppl&eacute;mentaires</h3>
+				<p class="spip">Il est possible de g&eacute;rer des valeurs suppl&eacute;mentaires à celles contenues dans le tableau <tt>$auteur_session</tt>.
+				Pour cela, il faut ajouter le paramètre <code class='spip_code' dir='ltr'>{session}</code> à l'appel de squelettes inclus.
+				Dès lors, la balise #[(#REM)]SESSION s'appuiera aussi sur le tableau associatif <tt>$_SESSION</tt> php standard.</p>
+				<p class="spip">Exemple : <code class='spip_code' dir='ltr'>&lt;INCLURE(session.php){session}{fond=boite_session}&gt;</code></p>
+				<p class="spip">Ce plugin introduit pour ces valeurs, une action permettant de cr&eacute;er/affecter une valeur en lui pr&eacute;cisant un nom,
+				ou de vider cette valeur. Pour faire appel à cette action, on utlisera soit un formulaire ad hoc, soit, dans ce type pr&eacute;cis de noisettes, la balise #[(#REM)]URL_ACTION_AUTEUR de la manière suivante:</p>
+				<p class="spip"><code class='spip_code' dir='ltr'>&lt;a href="[(#[(#REM)]URL_ACTION_AUTEUR{session,[(#[(#REM)]ENV{session})]-affecter-nom-valeur,url})]"&gt;<br />texte du lien<br />&lt;/a&gt;</code><br />
+				ou nom sera le code employé pour restituer la valeur via la notation #[(#REM)]SESSION{nom},<br />
+				valeur pourra être une balise spip ou une constante,<br />
+				url, l'adresse de destination du lien, #[(#REM)]SELF ou tout autre adresse imaginable.</p>
+				<p class="spip">ou bien</p>
+				<p class="spip"><code class='spip_code' dir='ltr'>&lt;a href="[(#[(#REM)]URL_ACTION_AUTEUR{session,[(#[(#REM)]ENV{session})]-vider-nom,url})]"&gt;<br />texte du lien<br />&lt;/a&gt;</code></p>
+			</div>
+
+		</div><!-- fin contenu -->
+
+		[(#REM) Menu de navigation laterale ]
+		<div id="navigation">
+			<div class="divers">
+				<INCLURE(session.php){fond=boite_connexion}>
+			</div>
+
+			<INCLURE(session.php){fond=boite_session}{session}>
+
+			<INCLURE(session.php){fond=boite_donnees}{session}>
+			
+			<div class="breves">
+				<h2 class="menu-titre">Pour plus d'informations</h2>
+				<ul>
+					<li>Auteur&nbsp;: James (c) 2006-2007</li>
+					<li>Licence&nbsp;: GNU/GPL (code &amp; doc)</li>
+					<li>Sugg&eacute;rer des am&eacute;liorations&nbsp;: <a href="http://listes.rezo.net/mailman/listinfo/spip-zone">spip-zone</a></li>
+					<li>Conseils d'utilisation&nbsp;: <a href="http://listes.rezo.net/mailman/listinfo/spip">liste utilisateurs</a></li>
+					<li>Int&eacute;gration dans un squelette sans passer par l'installation du plugin <a href="http://sarka-spip.com/spip.php?article278">sarka-spip.com</a></li>
+				</ul>
+			</div>
+		</div>
+
+	</div><!-- fin conteneur -->
+
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
+</div><!-- fin page -->
+#SPIP_CRON
+</body>
+</html>

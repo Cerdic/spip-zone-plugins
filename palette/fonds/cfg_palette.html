@@ -1,0 +1,33 @@
+#CACHE{0}
+<!-- titre=<:palette:palette:>-->
+<!-- icone=images/palette.png-->
+<!-- descriptif=
+<:palette:config_titre:>
+<:palette:config_desc:>
+<:palette:config_exemple:>
+<p><input class="palette" name="couleur" value="#dfdfdf" style="width:5em" /><br />
+&lt;input <b>class="palette"</b> name="couleur" value="#dfdfdf" /&gt;</p>
+
+<a href="http://www.spip-contrib.net/Palette" class="spip_out">Documentation sur contrib</a>
+-->
+<div class="formulaire_spip">
+	<form method="post" action="#SELF">
+		<div>
+			[(#ENV{_cfg_}|form_hidden)]
+			<ul>
+				<li>
+					<label for="palette_public"><:palette:palette_public:></label>
+					<input type="checkbox" name="palette_public" id="palette_public"[ checked="(#ENV{palette_public}|=={'on'}|?{'checked'})"] class="text" value="on" />
+				</li>
+				<li>
+					<label for="palette_ecrire"><:palette:palette_ecrire:></label>
+					<input type="checkbox" name="palette_ecrire" id="palette_ecrire"[ checked="(#ENV{palette_ecrire}|!={''}|?{'checked'})"] class="text" value="on" />
+				</li>
+			</ul>
+			<div class="boutons">
+				<input type="submit" class="submit" name="_cfg_ok" value="<:oK:>" />
+				<input type="submit" class="submit" name="_cfg_delete" value="<:supprimer:>" />
+			</div>
+		</div>
+	</form>
+</div>

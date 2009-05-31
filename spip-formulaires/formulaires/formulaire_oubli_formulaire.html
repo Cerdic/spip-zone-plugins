@@ -1,0 +1,34 @@
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{email_inexistant}|?{<:formulairespublic:email_inexistant:>})</p>]
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{succes}|?{<:formulairespublic:mdp_envoye:>})</p>]
+
+<div class="formulaire_spip formulaire_automatique formulaire_oubli_formulaire">
+<form name="formulaire_oubli_formulaire" action="#SELF" method="post">
+<div>
+
+<ul>
+
+<li class="fieldset">
+
+<fieldset>
+<h3 class="legend"><:formulairespublic:oubli_mdp:></h3>
+<ul>
+
+<li class="obligatoire">
+<label for="email"><:formulairespublic:email:></label>
+<input type="text" class="text" name="email" id="email" value="[(#ENV{email})]" size="30" />
+</li>
+
+</ul>
+</fieldset>
+
+</li>
+
+</ul>
+
+</div>
+
+<p class="boutons"><input type="submit" class="submit" name="bouton_valider" value="<:formulairespublic:valider:>" /></p>
+<p class="boutons"><a href="#URL_FORMULAIRE_ESPACE_FORMULAIRE"><:formulairespublic:espace_formulaire:></a></p>
+
+</form>
+</div>

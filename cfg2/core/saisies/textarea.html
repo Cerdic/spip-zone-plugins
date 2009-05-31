@@ -1,0 +1,14 @@
+[(#REM) 
+
+  Parametres :
+  - class : classe(s) css ajoutes au textarea
+  - rows : nombre de ligne
+  - cols : nombre de caracteres de large
+  
+  Exemple d'appel :
+	[(#SAISIE{textarea}
+		{nom=couleur_foncee}
+		{label=<:spa:couleur_foncee:>}
+		{obligatoire=non})] 
+]
+<textarea name="#ENV{nom}"[ class=" (#ENV{class})"] id="champ_#ENV{nom}" [ rows="(#ENV{rows})"][ cols="(#ENV{cols})"]>[(#ENV{valeur}|sinon{#ENV{defaut}})]</textarea>

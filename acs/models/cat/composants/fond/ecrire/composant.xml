@@ -1,0 +1,95 @@
+<composant>
+  <!-- Nom du composant -->
+  <nom>Fond</nom>
+  <!-- Auteur du composant -->
+  <auteur>Daniel FAIVRE &copy; 2008-2009 - licence GPL</auteur>
+  <version>0.5</version>
+  <necessite id='acs' version='[0.5;]' />
+
+  <param>
+    <nom>preview</nom>
+    <valeur>280</valeur>
+  </param>
+  <param>
+    <nom>optionnel</nom>
+    <valeur>non</valeur>
+  </param>
+  
+	<variable>
+    <nom>Favicon</nom>
+    <type>img</type>
+		<chemin>img/favicon</chemin>
+  </variable>
+  <variable>
+    <nom>Color</nom>
+    <type>color</type>
+    <valeur>#ffffff</valeur>
+  </variable>
+  <variable>
+    <nom>Text</nom>
+    <type>color</type>
+    <valeur>#000000</valeur>
+  </variable>
+  <variable>
+    <nom>Link</nom>
+    <type>color</type>
+    <valeur>#00008d</valeur>
+  </variable>
+  <variable>
+    <nom>LinkHover</nom>
+    <type>color</type>
+    <valeur>#0000ff</valeur>
+  </variable>
+  <variable>
+    <nom>Image</nom>
+    <type>img</type>
+    <chemin>img/fond</chemin>
+    <label>non</label>
+  </variable>
+  <variable>
+    <nom>BordColor</nom>
+    <type>color</type>
+  </variable>
+  
+  <variable>
+    <nom>TabFirst</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>TabOdd</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>TabEven</nom>
+    <type>color</type>
+  </variable>
+  
+  <variable>
+    <nom>BordLargeur</nom>
+    <type>largeurbord</type>
+    <label>non</label>
+  </variable>
+  <variable>
+    <nom>BordStyle</nom>
+    <type>stylebord</type>
+    <label>non</label>
+  </variable>
+  <variable>
+    <nom>DeplierHaut</nom>
+    <type>img</type>
+    <chemin>img/triangles</chemin>
+    <valeur>deplierhaut.gif</valeur>
+  </variable>
+  <variable>
+    <nom>DeplierHaut_rtl</nom>
+    <type>img</type>
+    <chemin>img/triangles</chemin>
+    <valeur>deplierhaut_rtl.gif</valeur>
+  </variable>
+  <variable>
+    <nom>DeplierBas</nom>
+    <type>img</type>
+    <chemin>img/triangles</chemin>
+    <valeur>deplierbas.gif</valeur>
+  </variable>
+</composant>

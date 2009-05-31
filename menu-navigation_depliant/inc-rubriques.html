@@ -1,0 +1,59 @@
+[(#REM)
+	Barre de navigation, ouverte sur la hierarchie courante
+
+	On fait un plan, et, quand on avance vers une rubrique,
+	on l'affiche si son parent est expose ou est la racine du site. ]
+
+<B_rubriques>
+<div class="rubriques">
+	<h2 class="menu-titre"><:rubriques:></h2>
+	<ul>
+	<BOUCLE_rubriques(RUBRIQUES) {racine} {par num titre, titre}>
+		<li><a href="#URL_RUBRIQUE"[ class="(#EXPOSE)"]>[(#TITRE|supprimer_numero|couper{80})]</a>
+
+			[(#REM)
+				=====================
+				Les sous-rubriques
+				=====================
+			]
+			<B_sous_rubriques>
+			<ul>
+				<BOUCLE_sous_rubriques(RUBRIQUES) {id_parent} {par num titre, titre}>
+				<li><a href="#URL_RUBRIQUE"[ class="(#EXPOSE)"]>[(#TITRE|supprimer_numero|couper{80})]</a>
+					<BOUCLE_re(BOUCLE_sous_rubriques)></BOUCLE_re>
+						<B_sous_rubriques_articles>
+						<ul>
+							[(#REM)
+								=====================
+								Les articles second niveau de la rubrique
+								=====================
+							]
+							<BOUCLE_sous_rubriques_articles(ARTICLES){id_rubrique}{par num titre, titre}>
+							<li><#EXPOSE{span,a href="#URL_ARTICLE"}[ class="(#EXPOSE)"]>[(#TITRE|supprimer_numero|couper{80})]</#EXPOSE{span,a}></li>
+							</BOUCLE_sous_rubriques_articles>
+						</ul>
+						</B_sous_rubriques_articles>
+					</li>
+				</BOUCLE_sous_rubriques>
+			</ul>
+			</B_sous_rubriques>
+
+			[(#REM)
+				=====================
+				Les articles premier niveau de la rubrique
+				=====================
+			]
+			<B_sous_articles>
+			<ul>
+				<BOUCLE_sous_articles(ARTICLES){id_rubrique}{par num titre, titre}>
+				<li><#EXPOSE{span,a href="#URL_ARTICLE"}[ class="(#EXPOSE)"]>[(#TITRE|supprimer_numero|couper{80})]</#EXPOSE{span,a}></li>
+				</BOUCLE_sous_articles>
+			</ul>
+			</B_sous_articles>
+
+		</li>
+	</BOUCLE_rubriques>
+
+	</ul>
+</div>
+</B_rubriques>

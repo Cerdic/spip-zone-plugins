@@ -1,0 +1,128 @@
+#CACHE{3600}
+
+	<!--[if IE]><table><th></th><tr><td><![endif]-->
+	[(#REM) Affichage de l'entete : nombre de resultats trouves]
+	<BOUCLE_compte_marecherche(INDEX){recherche}{type_table IN articles,documents}></BOUCLE_compte_marecherche>
+		[(#TOTAL_BOUCLE|?{' ',''})
+			<h1 class='recherche_chapo'>
+			#TOTAL_BOUCLE r&eacute;sultat[s(#TOTAL_BOUCLE|>{1}|?{' ',''})]
+			pour <span class='recherche_quoi'>#RECHERCHE</span>
+			</h1>
+			[	<div class='recherche_chapo'>
+				Vous pouvez aussi essayer 
+				<a href='[(#SELF|parametre_url{'recherche',[(#RECHERCHE|RechercheEtendue_recherche_semblable)]})]'>
+				(#RECHERCHE|RechercheEtendue_recherche_semblable)
+				</a><br/></div>]
+			<br />
+		]
+		[(#TOTAL_BOUCLE|?{'',' '})
+			<h1 class='recherche_chapo'>
+			Aucun r&eacute;sultats pour <span class='recherche_quoi'>#RECHERCHE</span>
+			</h1>
+			[	<div class='recherche_chapo'>
+				Vous devriez peut-&ecirc;tre essayer
+				<a href='[(#SELF|parametre_url{'recherche',[(#RECHERCHE|RechercheEtendue_recherche_semblable)]})]'>
+				(#RECHERCHE|RechercheEtendue_recherche_semblable)
+				</a><br/></div>]
+		]
+	<//B_compte_marecherche>
+	
+	<BOUCLE_init_jauge(INDEX){recherche}{!par points}{type_table IN articles,documents} {0,1}>
+	[(#POINTS|RechercheEtendue_jauge_init{50})]
+	</BOUCLE_init_jauge>
+	
+	<table id='recherche_tableau'>
+  <tr id='recherche_tableau_head'>
+  <th>Num&eacute;ro</th>
+  <th>Document</th>
+  <th>Pertinence</th>
+  </tr>
+
+	[(#REM) Resultats de la recherche pour la page concernee]
+	<B_marecherche>
+	#PAGINATION
+	<BOUCLE_marecherche(INDEX){recherche}{!par points}{type_table IN articles,documents} {pagination}>
+		<!-- Articles trouves -->
+		<BOUCLE_articles(ARTICLES) {id_article}>
+			<tr>
+				<td width='30px' class='recherche_titre' style='text-align:center;' valign='bottom'>[(#_marecherche:COMPTEUR_BOUCLE|plus{#ENV{debut}})]</td>
+				<td class='recherche_titre'>
+					<h2 class='recherche_titre'>
+					<a href="[(#URL_ARTICLE|parametre_url{'var_recherche',[(#RECHERCHE)]})]">[(#TITRE|supprimer_numero)]</a>
+					</h2>
+				</td>
+				<td class='recherche_titre' style='text-align:right;' width='70'>
+					[(#_marecherche:POINTS|RechercheEtendue_jauge{'barre_bleu'})]
+				</td>
+			</tr>
+			<tr>
+				<td width='30px' valign='top' rowspan='3' class='recherche_logo'>
+				[(#LOGO_ARTICLE)]
+				</td>
+ 	  		<td colspan='2' class='recherche_soustitre'>
+ 	  		<BOUCLE_cheminarticle(HIERARCHIE){id_article}{" > "}>[<a href="#URL_RUBRIQUE">(#TITRE|supprimer_numero)</a>]</BOUCLE_cheminarticle>
+	 			</td>
+	 		</tr>
+	 		<tr>
+				<td colspan='2' class='recherche_descriptif'>
+					[(#REM) concatenation du texte complet, pour creer le resume type google]
+					[(#REM|RechercheEtendue_google_like_string_raz)]
+					[(#TITRE|supprimer_numero|RechercheEtendue_google_like_string)]
+					[(#SOUSTITRE|supprimer_numero|RechercheEtendue_google_like_string)]
+					[(#DESCRIPTIF|supprimer_numero|RechercheEtendue_google_like_string)]
+					[(#TEXTE|supprimer_numero|RechercheEtendue_google_like_string)]
+					[(#REM) affichage, avec chapeau en alternative si rien de trouve]
+					[(#RECHERCHE|RechercheEtendue_google_like{[(#CHAPO|attribut_html)]})]
+				</td>
+			</tr>
+			<tr>
+				<td colspan='2' class='recherche_url'>
+					[(#DATE_MODIF|affdate{'d-m-Y'})]
+					[ - (#URL_ARTICLE)]
+				</td>
+			</tr>
+		</BOUCLE_articles>
+		<BOUCLE_documents(DOCUMENTS) {id_document}>
+			<tr>
+				<td width='30px' class='recherche_titre' style='text-align:center;' valign='bottom'>[(#_marecherche:COMPTEUR_BOUCLE|plus{#ENV{debut}})]</td>
+				<td class='recherche_titre'>
+					<h2 class='recherche_titre'>
+					<a href="[(#URL_DOCUMENT|parametre_url{'var_recherche',[(#RECHERCHE)]})]">[(#TITRE|supprimer_numero)]</a>
+					</h2>
+				</td>
+				<td class='recherche_titre' style='text-align:right;' width='70'>
+					[(#_marecherche:POINTS|RechercheEtendue_jauge{'barre_bleu'})]
+				</td>
+			</tr>
+			<tr>
+				<td width='30px' valign='top' rowspan='3' class='recherche_logo'>
+				[<a href="[(#URL_DOCUMENT|parametre_url{"var_recherche",""})]">
+					(#FICHIER|reduire_image{60}|inserer_attribut{'alt',[(#TITRE|attribut_html)]}|inserer_attribut{'title',[(#TITRE|attribut_html)]})
+				</a>]
+				</td>
+ 	  		<td colspan='2' class='recherche_soustitre'>
+ 	  			<BOUCLE_article_source(ARTICLES){id_document}>
+ 	  				<BOUCLE_chemindoc(HIERARCHIE){id_article}{" > "}>[<a href="#URL_RUBRIQUE">(#TITRE|supprimer_numero)</a>]</BOUCLE_chemindoc>
+					</BOUCLE_article_source>
+	 			</td>
+	 		</tr>
+	 		<tr>
+				<td colspan='2' class='recherche_descriptif'>
+					[(#REM) concatenation du texte complet, pour creer le resume type google]
+					[(#TITRE|supprimer_numero|RechercheEtendue_google_like_string)]
+					[(#DESCRIPTIF|supprimer_numero|RechercheEtendue_google_like_string)]
+					[(#REM) affichage, avec chapeau en alternative si rien de trouve]
+					[(#RECHERCHE|RechercheEtendue_google_like)]
+				</td>
+			</tr>
+			<tr>
+				<td colspan='2' class='recherche_url'>
+					[(#TAILLE|taille_en_octets) - ]
+					[(#DATE_MODIF|affdate{'d-m-Y'})]
+					[ - (#URL_DOCUMENT)]
+				</td>
+			</tr>
+		</BOUCLE_documents>
+	</BOUCLE_marecherche>
+	</table>
+	<!--[if IE]></td></tr></table><![endif]-->

@@ -1,0 +1,73 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	<multi>[fr]Acces Restreint 3.0[es]Acceso restringido 3.0[en]Restricted Access</multi>
+	</nom>
+	<icon>img_pack/zones-acces-48.png</icon>
+	<auteur>[cedric.morin@yterium.com->http://www.yterium.net]</auteur>
+	<licence>GPL &#169; 2007-2008</licence>
+	<version>0.3.0.3</version>
+	<version_base>0.3.0.2</version_base>
+	<etat>stable</etat>
+	<description>
+	<multi>
+	[fr] Gestion de zones d'acces restreint.
+_ Chaque zone contient des rubriques.
+_ Les auteurs peuvent etre associes a des zones pour avoir le droit d'y acceder.
+_ Toutes les boucles natives de SPIP sont surchargees pour en filtrer les resultats en fonction des droits du visiteur.
+	[es] Gesti&oacute;n de zonas de acceso restringido.
+_ Cada zona contiene secciones.
+_ Los autores podr&aacute;n ser asociados a ciertas zonas restringidas para tener derechos de acceso a ellas.
+_ Todos los bucles nativos de SPIP quedan modificados para filtrar los resultados en funci&oacute;n de los derechos del visitante.
+	[en]Restricted access management.
+_ Each area contains sections.
+_ Authors can be associated with these areas to gain access to them.
+_ All SPIP's loops are loaded with the necessary tools to filter the results according to the visitors' access priviliges.
+	</multi>
+	</description>
+	<lien>http://www.spip-contrib.net/Acces-restreint-V1</lien> <!-- URI de documentation -->
+	<options>acces_restreint_options.php</options>
+	<fonctions>acces_restreint_fonctions.php</fonctions>
+	<fonctions>public/acces_restreint.php</fonctions>
+	<fonctions>inc/acces_restreint.php</fonctions>
+	<install>base/acces_restreint_install.php</install>
+	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+	<prefix>accesrestreint</prefix>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/acces_restreint.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/acces_restreint.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_auxiliaires</nom>
+		<inclure>base/acces_restreint.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>pre_boucle</nom>
+		<inclure>public/acces_restreint.php</inclure>
+	</pipeline>
+
+	<pipeline>
+		<nom>accesrestreint_liste_zones_autorisees</nom>
+		<action>liste_zones_autorisees</action>
+		<inclure>inc/acces_restreint.php</inclure>
+	</pipeline>
+
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<inclure>acces_restreint_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<inclure>acces_restreint_pipelines.php</inclure>
+	</pipeline>
+	
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>inc/acces_restreint_autoriser.php</inclure>
+	</pipeline>
+	<necessite id="SPIP" version='[2.0.0;]' />
+	<necessite id='spip_bonux' version='[1.0;]' />
+</plugin>

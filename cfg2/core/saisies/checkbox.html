@@ -1,0 +1,24 @@
+[(#REM) 
+
+  ### /!\ boucle POUR (spip Bonux) ###
+  
+  Parametres :
+  - ** datas : tableau de donnees cle=>valeur
+  
+  Exemple d'appel :
+	[(#SAISIE{checkbox, criteres}
+		{label=<:plugin:choisir_criteres:>}
+		{defaut=#ARRAY{0,cle1,1,cle3}} {defaut=cle2}
+		{datas=#ARRAY{
+			cle1,valeur1,
+			cle2,valeur2,
+			cle3,valeur3,
+	}})]
+]
+[(#SET{defaut,[(#ENV{defaut}|is_array|?{#ENV{defaut},#ARRAY{0,#ENV{defaut}}})]})]
+<BOUCLE_radio(POUR){tableau #ENV{datas}}>
+<div class="choix">
+	<input type="checkbox" name="#ENV{nom}[]" class="checkbox" id='champ_#ENV{nom}_#COMPTEUR_BOUCLE'[ (#CLE|in_any{[(#ENV{valeur}|sinon{#GET{defaut}})]}|oui)checked='checked'] value='#CLE' />
+	<label for="champ_#ENV{nom}_#COMPTEUR_BOUCLE">#VALEUR</label>
+</div>
+</BOUCLE_radio>

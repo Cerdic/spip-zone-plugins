@@ -1,0 +1,27 @@
+<div class="formulaire_spip formulaire_dynamique" id="formulaire_dynamique#ENV{id}">
+
+[<p class="erreur">(#ENV*{erreur})</p>]
+
+<form action="#SELF#formulaire_dynamique#ENV{id}" method="post">
+
+<fieldset>
+<legend><:Titre_du_formulaire:></legend>
+<p><label for="texte_message_auteur#ENV{id}"><:info_texte_message:></label>
+<textarea class="forml" name="texte_message_auteur#ENV{id}" id="texte_message_auteur#ENV{id}" rows="10" cols="40">#ENV{texte}</textarea></p>
+
+
+
+
+[<p class="spip_bouton"><input type="submit" name="valide" value="(#ENV{bouton})" /></p>]
+</fieldset>
+
+
+
+[(#REM) Antispam "nobot" ]
+<p style='display: none;'><label for="nobot"><:antispam_champ_vide:></label>
+<input type="text" name="nobot" id="nobot" value="" size="10" /></p>
+
+</form>
+
+
+</div>

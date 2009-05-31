@@ -1,0 +1,31 @@
+/*
+	www.merzok.com
+	jolie saisie de recherche
+	Copyleft - all rights reversed.
+*/
+
+#recherche-style { margin-bottom: 15px; }
+#recherche-style input.rech { color: #7c7c7c; height: 12px; padding: 3px; margin: 0; width: 110px; border: 0; font-size: 10px; background-color: white; background-image: url(images/refond.gif); background-repeat: repeat-x; background-position: left top; vertical-align:bottom; }
+
+#recherche-style .refond { margin-bottom: 0px; }
+
+/* Styler le bouton submit */
+#recherche-style button {
+	height:17px; width:17px;
+	border:0;
+	background: transparent url(images/jolirecherche_ok.gif) no-repeat;
+}
+
+/* Masquer le texte du bouton submit */
+#recherche-style button span {
+	display:none; /* display:inline */
+}
+
+/* Masquer le bouton submit */
+#recherche-style button {
+	display:inline; /* display:none */
+}
+
+/* hack IE pour decaler d'un pixel vers le bas */
+* html #recherche-style input.rech { position: relative; top:1px; }
+

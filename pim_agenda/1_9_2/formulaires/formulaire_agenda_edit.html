@@ -1,0 +1,156 @@
+<div class='agenda-visu-evenement' id='agenda-visu-evenement'>
+	<BOUCLE_article_lie(ARTICLES){id_article=#ENV{ajouter_id_article}}>
+		<div class='article-evenement'>
+		<a href='#URL_ARTICLE'>#TITRE</a>
+		</div>
+	</BOUCLE_article_lie>
+	
+	<div class='agenda-visu-evenement-bouton-fermer'>
+<a href='[(#ENV{self}|parametre_url{id_evenement,''})]'
+onclick="$('#agenda-visu-evenement').hide();$('#afficher_horaire_debut_evenement').hide();
+$('#afficher_horaire_fin_evenement').hide();$('#container_repetitions').hide();cal_repetitions.hide();
+return false;">
+	
+	<a href='#ENV{retour_agenda}'
+onclick="$('#agenda-visu-evenement').hide();
+$('#afficher_horaire_debut_evenement').hide();
+$('#afficher_horaire_fin_evenement').hide();
+return false;"><img src='#CHEMIN{'img_pack/croix.png'}' width='12' height='12' style='border:none;'></a>
+  </div>
+
+	<form name='edition_evenement' action='#ENV{url}' method='post'>
+	<input type='hidden' name='redirect' value='#ENV{$script}' />
+	[<input type='hidden' name='id_agenda' value='(#ENV{id_agenda})' />]
+	<input type='hidden' name='#ENV{evenement_action}' value='1' />
+
+	[(#REM) TYPE]
+	<div class='type-evenement'>
+		<select name='type_eve' class='fondl verdana1 agenda_type_select'
+	onChange="var choix = options[selectedIndex].value;
+	if ((choix=='reunion') || (choix=='rendez-vous')){	setvisibility('afficher_horaire_debut_evenement', 'visible');setvisibility('afficher_horaire_fin_evenement', 'visible');}
+	else{setvisibility('afficher_horaire_debut_evenement', 'hidden');setvisibility('afficher_horaire_fin_evenement', 'hidden');}"			
+		>
+		<option value='reunion'[(#ENV{type}|=={reunion}?{' ',''}) selected='selected']><:pimagenda:libele_type_reunion:></option>
+		<option value='rendez-vous'[(#ENV{type}|=={rendez-vous}?{' ',''}) selected='selected']><:pimagenda:libele_type_rendez_vous:></option>
+		<option value='evenement'[(#ENV{type}|=={evenement}?{' ',''}) selected='selected']><:pimagenda:libele_type_evenement:></option>
+		<option value='anniversaire'[(#ENV{type}|=={anniversaire}?{' ',''}) selected='selected']><:pimagenda:libele_type_anniversaire:></option>
+		<option value='rappel'[(#ENV{type}|=={rappel}?{' ',''}) selected='selected']><:pimagenda:libele_type_rappel:></option>
+	  </select>
+
+		[(#REM) PRIVE]
+	  <input type='checkbox' name='prive' [(#ENV{prive}|=={oui}|?{' ',''}) checked='checked'] value='oui' />&nbsp;<:pimagenda:libele_prive:>
+
+		[(#REM) CRAYON]
+	  <input type='checkbox' name='crayon' [(#ENV{crayon}|=={oui}|?{' ',''}) checked='checked'] value='oui' />&nbsp;<:pimagenda:libele_crayon:>
+	</div>
+	
+	[(#REM) TITRE]
+	<div class='champ champ_titre'><label for='evenement_titre'><:pimagenda:evenement_titre:></label>
+		<div class='input'><input type='text' name='evenement_titre' id='evenement_titre' value="#ENV{titre}" /></div>
+	</div>
+
+	[(#REM) LIEU]
+	<div class='champ champ_lieu'><label for='evenement_lieu'><:pimagenda:evenement_lieu:></label>
+		<div class='input'><input type='text' name='evenement_lieu' id='evenement_lieu' value="#ENV{lieu}" /></div>
+	</div>
+
+	[(#REM) DATES]
+	<div class='champ champ_date_debut'>
+		<div class='label'><:pimagenda:evenement_date:></div>
+		<label for='afficher_horaire_debut_evenement'><:pimagenda:evenement_date_de:></label>
+		[(#ENV{date_debut}|WCalendar_controller{'_evenement_debut'})]
+		<span class='agenda_[(#ENV{type}|match{(evenement|anniversaire|rappel)}?{'in',''}]visible_au_chargement' id='afficher_horaire_debut_evenement'>
+		<label><:pimagenda:evenement_date_a:></label>
+		[(#ENV{date_debut}|PIMAgenda_heure_selector{'_debut'})]
+		</span>
+	</div>
+	<div class='champ champ_date_fin'>
+		<label for='afficher_horaire_debut_evenement'><:pimagenda:evenement_date_au:></label>
+		[(#ENV{date_fin}|WCalendar_controller{'_evenement_fin'})]
+		<span class='agenda_[(#ENV{type}|match{(evenement|anniversaire|rappel)}?{'in',''}]visible_au_chargement' id='afficher_horaire_fin_evenement'>
+		<label><:pimagenda:evenement_date_a:></label>
+		[(#ENV{date_fin}|PIMAgenda_heure_selector{'_fin'})]
+		</span>
+	</div>
+	
+	[(#REM) DESCRIPTIF]
+	<div class='champ champ_descriptif'>
+		<label for=''><:pimagenda:evenement_descriptif:></label>
+		<div class='input'>
+			<textarea name='evenement_descriptif' rows='4'>#ENV{descriptif}</textarea>
+		</div>
+	</div>
+
+	[(#REM) MOTS CLES : chaque groupe de mot cle attribuable a un evenement agenda
+		donne un select ]
+	<div class='agenda_mots_cles'>
+	<BOUCLE_groupes(GROUPES_MOTS){pim_agenda=oui}>
+		<select name='evenement_groupe_mot_select_#ID_GROUPE[]' class='fondl verdana1 agenda_mot_cle_select'[
+		(#UNSEUL|=={'oui'}|?{'',' '}) multiple='multiple' size='4']>
+		[<option value='x' style='font-variant: small-caps;' [
+		(#UNSEUL|=={'oui'}|?{'',' '}) disabled='disabled']>(#TITRE|supprimer_numero)</option>]
+		<BOUCLE_mots(MOTS){id_groupe}>
+			<option value='#ID_MOT'
+			<BOUCLE_selected(PIM_AGENDA){id_agenda=#ENV{id_agenda}}{id_mot}{0,1}>selected='selected'
+			</BOUCLE_selected> >#TITRE</option>
+		</BOUCLE_mots>
+		</select>
+	</BOUCLE_groupes>
+	</div>
+	[(#REM) ORGANISATEUR ]
+	<div class='champ champ_organisateur'>
+		<label for='auteur-titre'><a href='#' 
+		onclick="$(this).parent().siblings('.selecteur_auteur').toggle();return false;"
+		><img src='#EVAL{_DIR_IMG_PACK}/noeud_plus.gif' width='16' height='16' /></a><:pimagenda:organisateur_descriptif:> :</label>
+		<div class='liste_elts'>
+		<BOUCLE_orga(AUTEURS spip_pim_agenda_auteurs){tout}{id_agenda=#ENV{id_agenda}}><span 
+		class='elt' id='orga_A#ID_AUTEUR'><input type='hidden' name='orga_A[]' value='#ID_AUTEUR' 
+			/>[(#COMPTEUR_BOUCLE|>{1}|?{'<span class="virgule">, </span>'})]#NOM<a href='#' onclick="return remove_auteur(this);"><img class='remove' src='#EVAL{_DIR_IMG_PACK}croix-rouge.gif' width='7' height='7' 
+			/></a></span></BOUCLE_orga>
+			[(#REM) mettre l'auteur en cours comme orga par defaut si aucun orga ...]
+			<BOUCLE_orgabis(AUTEURS){tout}{id_auteur=#ENV{id_auteur}}><span 
+			class='elt' id='orga_A#ID_AUTEUR'><input type='hidden' name='orga_A[]' value='#ID_AUTEUR' 
+				/>#NOM<a href='#' onclick="return remove_auteur(this);"><img class='remove' src='#EVAL{_DIR_IMG_PACK}croix-rouge.gif' width='7' height='7' 
+				/></a></span></BOUCLE_orgabis>
+		<//B_orga></div>
+		<div class='selecteur_auteur'>[(#INCLURE{fond=formulaires/selecteur_auteurs_groupes}{categorie=orga})]</div>
+	</div>
+
+	[(#REM) INVITES ]
+	<div class='champ champ_invite'>
+		<label for='invite-titre'><a href='#' 
+		onclick="$(this).parent().siblings('.selecteur_auteur').toggle();return false;"
+		><img src='#EVAL{_DIR_IMG_PACK}/noeud_plus.gif' width='16' height='16' /></a><:pimagenda:invites_descriptif:> :</label>
+		<div class='liste_elts'>#SET{cpt,0}
+			<BOUCLE_invit(AUTEURS spip_pim_agenda_invites){tout}{id_agenda=#ENV{id_agenda}}><span #SET{cpt,#GET{cpt}|plus{1}} 
+			class='elt' id='invite_A#ID_AUTEUR'><input type='hidden' name='invite_A[]' value='#ID_AUTEUR' 
+				/>[(#GET{cpt}|>{1}|?{'<span class="virgule">, </span>'})]#NOM<a href='#' onclick="return remove_auteur(this);"><img class='remove' src='#EVAL{_DIR_IMG_PACK}croix-rouge.gif' width='7' height='7' 
+				/></a></span></BOUCLE_invit><BOUCLE_invitg(GROUPES){id_agenda=#ENV{id_agenda}}><span #SET{cpt,#GET{cpt}|plus{1}} 
+			class='elt' id='invite_G#ID_GROUPE'><input type='hidden' name='invite_G[]' value='#ID_GROUPE' 
+				/>[(#GET{cpt}|>{1}|?{'<span class="virgule">, </span>'})][#TITRE]<a href='#' onclick="return remove_auteur(this);"><img class='remove' src='#EVAL{_DIR_IMG_PACK}croix-rouge.gif' width='7' height='7' 
+				/></a></span></BOUCLE_invitg></div>
+		<div class='selecteur_auteur'>[(#INCLURE{fond=formulaires/selecteur_auteurs_groupes}{categorie=invite})]</div>
+	</div>
+	
+	[(#REM) Tables ]
+	[(#INCLURE{fond=formulaires/agenda_connexions_tables}{id_agenda=#ENV{id_agenda}})]
+	
+	<div class='nettoyeur'></div>
+  <div class='edition-bouton' style='text-align:#LANG_RIGHT'>
+  [(#ENV{modif_auth}|?{' '})
+	  [(#ENV{evenement_action}|=={'evenement_modif'}|?{' ',''})
+	  <div style='float:#LANG_LEFT'>
+	  <input type='submit' name='supp_evenement' value='<:pimagenda:bouton_supprimer:>' class="fondl" 
+		onclick="return confirm('&Ecirc;tes vous s&ucirc;r de vouloir supprimer cet ev&egrave;nement ?');"
+		/>
+	  </div>
+	  ]
+  ]
+  <input type='submit' name='cancel' value='<:pimagenda:bouton_annuler:>' class="fondl" />
+  [(#ENV{modif_auth}|?{' '})
+		<input type='submit' name='ajouter' value='[(#ENV{evenement_action}|=={'evenement_modif'}|?{<:bouton_enregistrer:>,<:bouton_ajouter:>})]' class='fondo spip_boutons'>
+  ]
+  </div>
+	</form>
+</div>
+<script type='text/javascript' src='#CHEMIN{javascript/selecteur_auteurs_groupes.js}'></script>

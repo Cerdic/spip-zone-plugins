@@ -1,0 +1,42 @@
+
+.reset-btn {
+	color:gray;
+	font-weight:700;
+}
+
+.titre-boite-son {
+	font-variant: normal;
+	text-transform: uppercase;
+	font-weight: 700;
+	font-size:1.0em;
+}
+
+#swap_couche-son {
+	margin:0; padding:0;
+}
+#hiddeniframe { 
+	height:1.2em;
+	width:100%;
+	font-size:100%;
+	font-family:"MS Sans Serif", Geneva, sans-serif;
+	text-align: center;
+	border:0;
+	margin:0;padding:0;
+}
+#son-loader {
+	position:absolute;
+	top:0;
+	right:0;
+	display:block;
+	border:0;
+	visibility: hidden;
+}
+.loader-visible {
+	visibility: visible;
+}
+.mp3 {
+	display:block;
+	margin:0.5em 0;
+}
+.son-pied {margin:0; padding:0}
+.input_configure { display:block;margin:0.75em 0; padding:0 }

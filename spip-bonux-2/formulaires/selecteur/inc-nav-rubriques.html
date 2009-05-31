@@ -1,0 +1,9 @@
+#SET{p,pr_#ID_RUBRIQUE}<B_enfants>
+[<p class='pagination'>(#PAGINATION)</p>]
+<ul class='items'>
+<BOUCLE_enfants(RUBRIQUES){id_parent=#ID_RUBRIQUE}{statut?}{pagination 10 #GET{p}}>
+<li class='rubrique'>[(#ENV{rubriques,0}|oui)<a href='#' onclick="jQuery(this).item_pick('rubrique|#ID_RUBRIQUE','#ENV{name,id_item}','[(#TITRE*|extraire_multi|texte_script|attribut_html)]','rubrique');return false;"
+><img class='add' src='#CHEMIN{img_pack/item-add.png}' /></a>#TITRE]<a class='ajax' href='[(#SELF|parametre_url{id_r,#ID_RUBRIQUE})]'>[#TITRE(#ENV{rubriques,0}|non)]<img class='ouvrir' src='#CHEMIN{img_pack/deplier-droite.png}' /></a></li>
+</BOUCLE_enfants>
+</ul>
+</B_enfants>

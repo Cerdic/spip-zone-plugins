@@ -1,0 +1,15 @@
+#CACHE{0}
+[(#HTTP_HEADER{Content-type: text/css})]
+
+<BOUCLE_plans(PLANS) {tout}>
+<BOUCLE_points(POINTS) {id_plan}>
+[dl.plan.on a.point#point_#ID_POINT {	
+	background-image: none;
+	filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true,src='[(#LOGO_POINT_NORMAL||extraire_attribut{src})]', sizingMethod='crop');
+}(#LOGO_POINT_NORMAL||extraire_attribut{src}||filtre_png)]
+[dl.plan.on a.point#point_#ID_POINT:hover {
+	background-image: none;
+	filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true,src='[(#LOGO_POINT_SURVOL||extraire_attribut{src})]', sizingMethod='crop');
+}(#LOGO_POINT_SURVOL||extraire_attribut{src}||filtre_png)]
+</BOUCLE_points>
+</BOUCLE_plans>

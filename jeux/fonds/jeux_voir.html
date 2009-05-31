@@ -1,0 +1,13 @@
+#CACHE{0}
+<BOUCLE_jeu(JEUX){id_jeu}>
+[(#SET{grand_titre,[(#REM|sinon{<:jeux:jeu_numero:>}|replace{@id@,#ID_JEU}|replace{@nom@,#TYPE_JEU})]})]
+[(#SET{contenu,[(#CONTENU*|replace{</?jeux>,}|entites_html)]})]
+[(#SET{titre_public,#TITRE_PUBLIC})]
+[(#SET{titre_prive,[(#TITRE_PRIVE|sinon{<:jeux:sans_titre_prive:>})]})]
+#SET{type_jeu,#TYPE_JEU}
+#SET{type_resultat,#TYPE_RESULTAT}
+</BOUCLE_jeu>
+<//B_jeu>
+
+<h2>[(#GET{grand_titre,<:jeux:pas_de_jeu:>})]</h2><hr/><br/>
+<!-- TODO la suite ! -->

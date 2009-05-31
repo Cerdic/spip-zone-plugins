@@ -1,0 +1,26 @@
+#HTTP_HEADER{Content-type:text/calendar}
+#CACHE{3600}
+BEGIN:VCALENDAR
+VERSION:2.0
+X-WR-TIMEZONE:Europe/Paris
+CALSCALE:GREGORIAN
+X-WR-CALNAME;VALUE=TEXT:[(#NOM_SITE_SPIP|filtrer_ical)]
+[X-WR-CALDESC:(#DESCRIPTIF_SITE_SPIP|supprimer_tags|filtrer_ical)]
+X-WR-RELCALID:[(#URL_SITE_SPIP|filtrer_ical)]
+
+<BOUCLE_evenement(EVENEMENTS) {branche ?}{id_article ?} {statut=publie}{par date_fin} {0,100}>
+BEGIN:VEVENT
+SUMMARY:[(#TITRE|filtrer_ical)]
+UID:evenement#ID_EVENEMENT @ [(#URL_SITE_SPIP|filtrer_ical)]
+[DTSTAMP:(#DATE_DEBUT|date_ical)]
+[DTSTART:(#DATE_DEBUT|date_ical)]
+[DTEND:(#DATE_FIN|date_ical)]
+[LOCATION:(#LIEU|PtoBR|filtrer_ical)]
+[DESCRIPTION:(#DESCRIPTIF|supprimer_tags|filtrer_ical)]
+CATEGORIES:<BOUCLE_article(ARTICLES) {id_article=#ID_ARTICLE}>[(#TITRE|filtrer_ical)]</BOUCLE_article>
+URL:[(#URL_ARTICLE|parametre_url{id_evenement,#ID_EVENEMENT}|url_absolue|filtrer_ical)]
+STATUS:CONFIRMED
+END:VEVENT
+</BOUCLE_evenement>
+
+END:VCALENDAR

@@ -1,0 +1,29 @@
+#CACHE{0}
+<?php
+/**
+ * page de test du login FB
+ * enlever le die pour utiliser
+ */
+die('acces interdit');
+
+session_start();
+include_spip('inc/fb_lib');
+
+if (!isset($_SESSION['fb_session'])&&!_request('auth_token')){
+	include_spip('inc/headers');
+	redirige_par_entete('#URL_PAGE{fblogin}');
+}
+if ($auth_token = _request('auth_token')){
+	$api_client = new FacebookRestClient(lire_config('face_boucle/api_key'), lire_config('face_boucle/secret'));
+	$_SESSION['fb_session'] = $api_client->auth_getSession($auth_token);
+}
+var_dump($_SESSION['fb_session']);
+$api_client = new FacebookRestClient(lire_config('face_boucle/api_key'), lire_config('face_boucle/secret'),$_SESSION['fb_session']['session_key']);
+$uid = $api_client->users_getLoggedInUser();
+
+$friends = $api_client->friends_get();
+
+var_dump($api_client->fql_query("SELECT uid, first_name, last_name, name, pic_small, pic_big, pic_square, pic, affiliations, profile_update_time, timezone, religion, birthday, sex, hometown_location, meeting_sex, meeting_for, relationship_status, significant_other_id, political, current_location, activities, interests, is_app_user, music, tv, movies, books, quotes, about_me, hs_info, education_history, work_history, notes_count, wall_count, status, has_added_app FROM user WHERE uid=$uid"))
+
+
+?>

@@ -1,0 +1,118 @@
+/* Mise en forme des QCM
+ */
+
+.spip_qcm
+{  
+  text-align:left;
+  font-size: 80%;
+  font-family            : arial, helvetica, sans-serif;
+  color :  #3F5264;
+  font-size : 12;
+  border: 1px solid #F78C54;
+  padding: 3px; 
+  background-color : #FFEADE;
+  width:100%;
+}
+
+.spip_qcm_question{ 
+  font-size : 12;
+  font-weight : bold;
+  color :  #3F5264;
+ }
+
+.spip_qcm_proposition{ 
+  font-size : 10;
+  color :  #3F5264;
+ }
+
+.spip_qcm_reponse{ 
+  font-size : 10;
+  color :  #3F5264;
+ }
+
+.spip_qcm_precision{
+  margin-left: 0;
+  margin-top: 5;
+  margin-bottom: 1em;  
+  margin-right: 0;
+  text-align:left;
+  font-size: 80%;
+  width:90%;
+  font-family            : arial, helvetica, sans-serif;
+  color :  #3F5264;
+  font-size : 12;
+  border: 1px dotted #3F5264;
+  padding: 3px; 
+}
+
+.spip_qcm_correction_faux{ 
+  font-size : 10;
+  text-align:center;
+  background-color : red;
+  color : #FFEADE;
+  font-weight : bold; 
+  padding-right: 1px;
+  padding-left: 1px;
+  width:12em;
+}
+
+.spip_qcm_correction_juste{ 
+  font-size : 10;
+  text-align:center;
+  background-color : green;
+  color : #FFEADE;
+  font-weight : bold;
+  padding-right: 1px;
+  padding-left: 1px;
+  width:11em;
+}
+
+.spip_qcm_correction_null{ 
+  font-size : 10;  
+  font-weight : bold;
+}
+
+
+.spip_qcm_bouton_corriger{ 
+ color :  #3F5264;
+  font-size : 10;  
+  font-weight : bold;
+ background-color : #FFEADE;
+}
+
+.spip_qcm_select{ 
+  color :  #3F5264;
+  font-size : 10;  
+  background-color : #F3EEEA;
+}
+
+
+.spip_qcm_titre{ 
+  text-align : center;
+  font-size : 14;
+  font-weight : bold;
+  color :  #3F5264;
+}
+
+.spip_qcm_point{ 
+  font-size : 10;
+  font-weight : normal;
+  color :  #3F5264;
+}
+
+.spip_qcm_score{   
+  text-align:center;
+  width:20%;
+  font-family : arial, helvetica, sans-serif;
+  color :  red;
+  font-size : 12;
+  font-weight : bold;
+  border: 2px solid green;
+  padding: 3px; 
+}
+
+.spip_qcm_erreur{ 
+  font-family : arial, helvetica, sans-serif;
+  color :  red;
+  font-size : 14;
+}

@@ -1,0 +1,19 @@
+#CACHE{0}
+<form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
+
+[(#REM) descriptif=
+<h4>Configuration des Mots Importants du site</h4>
+]
+[(#REM) titre=Gestion Metas]
+<fieldset>
+<legend>Mots Importants</legend>
+<p>Ecrivez les mots cl&eacute;s importants &agrave; mettre en &eacute;vidence dans le site, s&eacute;par&eacute;s par une virgule</p>
+<textarea name="motsimportants" cols="50" rows="10">[(#ENV{motsimportants})]</textarea>
+</fieldset>
+
+<div>
+<input type="submit" name="_cfg_ok" value="<:oK:>" class="fondo" />
+<input type="reset" value="<:reset:>" class="fondo" />
+<input type="submit" name="_cfg_delete" value="<:supprimer:>" class="fondo" />
+</div>
+</form>
