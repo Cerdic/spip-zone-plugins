@@ -19,7 +19,7 @@ _ &#169; 2007 - 2008 - Distribue sous licence GNU/GPL
 	<multi>
 	[it]
 	Attivare il plugin barre typo v2 e poi questo plugin.
-	Nella barra tipografica apparir‡ una icona per aprire la barra delle formule
+	Nella barra tipografica apparir√† una icona per aprire la barra delle formule
 	
 	TO DO
 
@@ -34,7 +34,7 @@ _ &#169; 2007 - 2008 - Distribue sous licence GNU/GPL
 	
 	che eventualmnete si crea la funzione e scrive il file all'attivazione del plugin?
 	[fr]
-	Activer le plugin barres typo v2 et ensuite ceci plugin. Dans la barre typographique apparaÓtra une icon pour ouvrir la barre des formules
+	Activer le plugin {Barre Typographique V2} et ensuite ce plugin. Dans la barre typographique appara√Ætra alors un bouton pour ouvrir la barre des formules math√©matiques.
 	</multi>
 	</description>
 	<prefix> 
@@ -57,5 +57,5 @@ _ &#169; 2007 - 2008 - Distribue sous licence GNU/GPL
 	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
 
 	<necessite id="SPIP" version="[1.9.0;]" />
-	<necessite id="BarreTypoEnrichie" version="[2.4.0;]" />
+	<necessite id="BarreTypoEnrichie" version="[2.5.3;]" />
 </plugin>
