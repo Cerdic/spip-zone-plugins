@@ -24,8 +24,8 @@
 	</B_moyenne_publie>
 	<B_messages>
 	[(#GET{nombre_publie}|>={1}|oui)
-	[<:guestbook:moyenne_publie:> : <b>(#GET{moyenne_publie})</b><br />]]
-	[<:guestbook:moyenne_tous:> : <b>(#GET{moyenne_tous})</b>]
+	[<:guestbook:moyenne_publie:> : <b>(#GET{moyenne_publie}|round{2})</b><br />]]
+	[<:guestbook:moyenne_tous:> : <b>(#GET{moyenne_tous}|round{2})</b>]
 	[(#GET{nombre_publie}|<{#GRAND_TOTAL}|oui) #SET{total_publie, #GET{nombre_publie}}]
 	[<h2>(#GRAND_TOTAL|=={0}|oui) 
 	<:guestbook:aucun_message_livre:></h2>]
