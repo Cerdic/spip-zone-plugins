@@ -127,6 +127,7 @@ function exec_fulltext()
     $data =  sql_fetch(sql_query("SHOW CREATE TABLE ".table_objet_sql($table)));
     preg_match(',DEFAULT CHARSET=([^\s]+),', $data["Create Table"], $match);
     $charset_table = strtolower(str_replace('-','',$match[1]));
+    $charset_table = preg_replace(',^latin1$,', 'iso88591', $charset_table);
     if ($charset_table != '' AND $charset != $charset_table) $necessite_conversion = true;
     $keys = fulltext_keys($table);
 
@@ -153,9 +154,8 @@ function exec_fulltext()
 				echo "<p>"._T('fulltext:table_non_reconnue').".</p>";
 			}
 		} else {
-
 			if ($keys) {
-				foreach($keys as $key=>$def)
+				foreach($keys as $key=>$def) {
 					echo "<dt>$key".'<a href="'.generer_url_ecrire(_request('exec'), 'supprimer='.$table.'&index='.$key).'" title="'._T('fulltext:supprimer').'">
                             <img src="'.(find_in_path('images/croix-rouge.gif')).'" alt="'._T('fulltext:supprimer').'"></a>';
                 if (_request('supprimer') == $table AND _request('index') == $key) {
@@ -163,6 +163,7 @@ function exec_fulltext()
                     continue;
                 } 
                 echo "</dt><dd>$def</dd>\n";
+			}
 			} else
 				if (!(_request('creer') == 'tous'))
 					echo "<p>"._T('fulltext:pas_index')."</p>\n";
