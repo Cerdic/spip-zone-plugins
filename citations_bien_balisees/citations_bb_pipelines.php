@@ -4,9 +4,14 @@
 // GPL v3
 
 // Modification du flux pour remplacer <quote> par <q> quand
-// il n'y a pas de retour à la ligne (preg sans l'option s !)
+// il n'y a pas de retour à la ligne (sur 3 niveaux, preg sans l'option s !)
 function citations_bb_pre_propre($flux){
-$flux=preg_replace("/(<quote>)(.*?)(<\/quote>)/","<q>\$2</q>",$flux);
+	if (strpos($flux, "<qu")===false) return $flux;
+	$flux = preg_replace($a="/<quote>(.*?)<\/quote>/", $b="<q>\$1</q>", $flux);
+	if (strpos($texte, "<qu")!==false) {
+		$flux = preg_replace($a, $b, $flux);
+		if (strpos($flux, "<qu")!==false) $flux = preg_replace($a, $b, $flux);
+	}
 	return $flux;
 }
 // Modification du flux pour ajouter des CSS pour les <q>
