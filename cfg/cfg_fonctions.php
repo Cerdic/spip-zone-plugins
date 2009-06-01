@@ -208,9 +208,9 @@ function cfg_affiche_sous_arborescence($nom, $tableau){
 		ksort($tableau);
 		foreach ($tableau as $tab=>$val){
 			if (is_array($val)) 
-				$sortie .= cfg_affiche_sous_arborescence($tab, $val);
+				$sortie .= "<li>" . cfg_affiche_sous_arborescence($tab, $val) . "</li>";
 			elseif (false !== $v = @unserialize($val))
-				$sortie .= cfg_affiche_sous_arborescence($tab, $v);
+				$sortie .= "<li>" . cfg_affiche_sous_arborescence($tab, $v) . "</li>";
 			else
 				$sortie .= "<li>$tab = " . htmlentities($val) ."</li>\n";
 			
