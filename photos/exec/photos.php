@@ -93,8 +93,8 @@ $query = spip_query( "SELECT * FROM spip_photos");
 					echo '<strong>'.$position.' </strong>';
 				}
 				else {
-					echo '<a href="?exec=photos&debut='.$position.'">'.$position.'</a> ';
-					echo' <a href="'._DIR_PLUGIN_PHOTOS.'vignettes/'.$data['nom_photo'].' "class="thickbox"><img src="'._DIR_PLUGIN_PHOTOS.'vignettes/'.$data['nom_photo'].'" width="24%"></a>';
+					echo '<a href="?exec=photos&amp;debut='.$position.'">'.$position.'</a> ';
+					
 				}
 			}	
 		}
