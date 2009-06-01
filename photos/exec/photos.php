@@ -54,8 +54,11 @@ echo '<span style="color:red"><strong>';echo $i; echo " photo(s) sur le site.</s
 	<td>Action</td>
     
   </tr>';
-   
-  $query="SELECT * FROM spip_photos, spip_auteurs WHERE spip_photos.id_auteur= spip_auteurs.id_auteur";
+  $max_par_page="20";
+$debut=$_GET['debut'];
+		
+		if (empty($debut)) { $debut=0; } 
+  $query="SELECT * FROM spip_photos, spip_auteurs WHERE spip_photos.id_auteur= spip_auteurs.id_auteur LIMIT $debut,$max_par_page";
   $val = spip_query (${query}) ;
   while ($data = mysql_fetch_assoc($val))
     {
@@ -67,6 +70,7 @@ echo '<span style="color:red"><strong>';echo $i; echo " photo(s) sur le site.</s
   echo"<td>".$data['alt_photo']."</td>";
   echo"<td>".$mydate."</td>";
   echo'<td> 
+ 
 <a href="'._DIR_PLUGIN_PHOTOS.'vignettes/'.$data['nom_photo'].'" onClick="window.open(this.href, \'exemple\', \'height=600, width=600, top=100, left=100, toolbar=no, menubar=no, location=no, resizable=yes, scrollbars=yes, status=no\'); return false;"/><img src="'._DIR_PLUGIN_PHOTOS.'vignettes/'.$data['nom_photo'].'" width="24%"></a></td>';
  echo "<td><table width='100%' border='0'><tr>"; 
 
@@ -76,11 +80,28 @@ echo '<span style="color:red"><strong>';echo $i; echo " photo(s) sur le site.</s
 echo'</td></tr>';
 }
 echo "</table>";
+// paginer
+ echo fin_cadre_relief(false);
+$query = spip_query( "SELECT * FROM spip_photos");
+		$nombre_selection=sql_count($query); 
+		$pages=intval($nombre_selection/$max_par_page) + 1;
+		
+		if ($pages != 1)	{
+			for ($i=0;$i<$pages;$i++)	{ 
+				$position= $i * $max_par_page;
+				if ($position == $debut)	{
+					echo '<strong>'.$position.' </strong>';
+				}
+				else {
+					echo '<a href="?exec=photos&debut='.$position.'">'.$position.'</a> ';
+					echo' <a href="'._DIR_PLUGIN_PHOTOS.'vignettes/'.$data['nom_photo'].' "class="thickbox"><img src="'._DIR_PLUGIN_PHOTOS.'vignettes/'.$data['nom_photo'].'" width="24%"></a>';
+				}
+			}	
+		}
 
 
 
-
-		  echo fin_cadre_relief(false);
+		 
 		 echo fin_cadre_trait_couleur(true); 
 		 echo debut_boite_info(true);
 	echo propre(_T('photo:signature'));	
