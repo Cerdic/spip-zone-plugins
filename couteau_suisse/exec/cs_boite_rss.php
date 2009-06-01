@@ -30,6 +30,7 @@ function exec_cs_boite_rss_dist() {
 		if (time()-$lastmodified < _CS_RSS_UPDATE) lire_fichier(_DIR_RSS_TMP, $p);
 	}
 	if(strlen($p)) { ajax_retour($p); return; }
+	include_spip('inc/filtres');
 	include_spip('action/editer_site');
 	include_spip('inc/xml');
 	$r = spip_xml_load(_CS_RSS_SOURCE);
@@ -43,9 +44,10 @@ function exec_cs_boite_rss_dist() {
 		$c = count($r3); $p='';
 		for($i=0; $i<min($c, _CS_RSS_COUNT); $i++) {
 		 $l = $r3[$i]['link'][0];
+		 $d = affdate_court(date('Y-m-d', strtotime($r3[$i]['pubDate'][0])));
 		 $t = str_replace('&amp;', '&', htmlentities($r3[$i]['title'][0], ENT_NOQUOTES, "UTF-8"));
 		 $t = preg_replace(',\s*&#8364;(&brvbar;)?,', '&nbsp;(&hellip;)', $t);
-		 $t = preg_replace(',^(.*?):,', "&bull; <a href='$l' class='spip_out' target='_cout'>$1</a>:", $t);
+		 $t = preg_replace(',^(.*?):,', "&bull; <a href='$l' class='spip_out' target='_cout'>$1</a> <i>($d)</i><br/>", $t);
 			 $p .= "<li style='padding-top:0.6em;'>$t</li>";
 		}
 	} else {
@@ -53,7 +55,6 @@ function exec_cs_boite_rss_dist() {
 		include_spip('cout_fonctions');
 		$p = '<span style="color: red;">'._T('couteauprive:erreur:probleme', array('pb'=>cs_lien(_CS_RSS_SOURCE,_T('couteauprive:erreur:distant')))).'</span>';
 	}
-	include_spip('inc/filtres');
 	$du = affdate_heure(date('Y-m-d H:i:s',time()));
 	$p = '<ul style="list-style-type:none; padding:0; margin:0; ">'.$p
 		.'</ul><p class="spip_xx-small" style="border-top:solid gray thin;"><b>'
