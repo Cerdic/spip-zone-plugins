@@ -602,8 +602,35 @@ add_outil( array(
 	'id' => 'pucesli',
 	'auteur' 	 => "J&eacute;r&ocirc;me Combaz pour l'id&eacute;e originale",
 	'categorie'	 => 'typo-corr',
-	'pipeline:pre_typo' => 'pucesli_pre_typo',
+	'pipelinecode:pre_typo' => 'if (strpos($flux, "-")!==false) $flux = cs_echappe_balises("", "pucesli_remplace", $flux);',
+	'code:options' => 'function pucesli_remplace($texte) {	return preg_replace(\'/^-\s*(?![-*#])/m\', \'-* \', $texte); }',
 ));
+
+add_outil( array(
+    'id' => 'citations_bb',
+    'auteur'	=> 'Bertrand Marne, Romy T&ecirc;tue',
+    'categorie'	=> 'typo-corr',
+	'code:css'	=> '/* fr */
+	q:lang(fr):before { content: "\00AB\A0"; }
+	q:lang(fr):after { content: "\A0\00BB"; }
+	q:lang(fr) q:before { content: "\201C"; }
+	q:lang(fr) q:after { content: "\201D"; }
+	q:lang(fr) q q:before { content: "\2018"; }
+	q:lang(fr) q q:after { content: "\2019"; }
+	/* IE */
+	* html q { font-style: italic; }
+	*+html q { font-style: italic; }', 
+    'pipelinecode:pre_propre' => 'if (strpos($flux, "<qu")!==false) $flux=cs_echappe_balises("", "citations_bb_rempl", $flux);',
+	// Remplacer <quote> par <q> quand il n'y a pas de retour a la ligne (3 niveaux, preg sans l'option s) 
+    'code:options' => 'function citations_bb_rempl($texte){
+	$texte = preg_replace($a="/<quote>(.*?)<\/quote>/", $b="<q>\$1</q>", $texte);
+	if (strpos($texte, "<qu")!==false) {
+		$texte = preg_replace($a, $b, $texte);
+		if (strpos($texte, "<qu")!==false) $texte = preg_replace($a, $b, $texte);
+	}
+	return $texte;
+}',
+)); 
 
 add_variable( array(
 	'nom' => 'decoration_styles',
@@ -704,7 +731,7 @@ add_variables( array(
 		// empeche SPIP de convertir les URLs orphelines (URLs brutes)
 	'code:%s<>-2' => defined('_SPIP19300')?"\$GLOBALS['spip_pipeline']['pre_liens']=str_replace('|traiter_raccourci_liens','',\$GLOBALS['spip_pipeline']['pre_liens']);":'',
 ));
-// attention : liens_orphelins doit etre place avant mailcrypt
+// attention : liens_orphelins doit etre place avant mailcrypt ou liens_en_clair
 add_outil( array(
 	'id' => 'liens_orphelins',
 	'categorie'	 => 'typo-corr',
