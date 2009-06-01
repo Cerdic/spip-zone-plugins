@@ -8,7 +8,7 @@
 function citations_bb_pre_propre($flux){
 	if (strpos($flux, "<qu")===false) return $flux;
 	$flux = preg_replace($a="/<quote>(.*?)<\/quote>/", $b="<q>\$1</q>", $flux);
-	if (strpos($texte, "<qu")!==false) {
+	if (strpos($flux, "<qu")!==false) {
 		$flux = preg_replace($a, $b, $flux);
 		if (strpos($flux, "<qu")!==false) $flux = preg_replace($a, $b, $flux);
 	}
