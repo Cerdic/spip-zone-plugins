@@ -14,8 +14,7 @@
 		<input value="<:geomap:rechercher:>" type="submit" />
 	</p>
 </form>]
-<script type="text/javascript">
-/*<![CDATA[*/
+<script type="text/javascript">/*<!#EVAL{chr(91)}CDATA#EVAL{chr(91)}*/
 [(#CONFIG{geomap/cle_api}|?{' '})
 	var geocoder = null;
 	var formMap = null;
@@ -92,8 +91,7 @@
 		});
 	});
 })(jQuery);
-/*]]>*/
-</script>
+/*#EVAL{chr(93)}[(#EVAL{chr(93)})]>*/</script>
 <form method="post" action="#SELF"><div>
 	[(#ENV{_cfg_}|form_hidden)]
 	<ul>
