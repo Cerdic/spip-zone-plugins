@@ -9,8 +9,6 @@
  *
  */
 
-include_spip('exec/gis');
-
 
 function gis_gismot($flux){
 	if (_request('exec')=='mots_edit'){
