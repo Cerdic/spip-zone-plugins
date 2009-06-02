@@ -3,8 +3,11 @@
 		Marque-pages
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
- 		RastaPopoulos - Distribu&eacute; sous licence GPL
+ 		RastaPopoulos
 	</auteur>
+	<licence>
+		GPL v3
+	</licence>
 	<version> <!-- Version du plugin -->
 		0.2
 	</version>
@@ -14,26 +17,46 @@
 	<description>
 Des outils pour d&eacute;velopper un syst&egrave;me de marque-pages en ligne, du style Scuttle.
 
-N&eacute;cessite les plugins crayons et tag-machine.
+N&eacute;cessite le plugin Étiquettes et CFG.
 	</description>
-	<lien></lien> <!-- URI de documentation -->
+	<lien>http://www.spip-contrib.net/Plugin-Marque-pages</lien> <!-- URI de documentation -->
 	<prefix> 
 		marquepages
 	</prefix>
 	<icon>
 		images/marquepages.png
 	</icon>
-	<options> 
-		marquepages_options.php
-	</options>
-	<fonctions>
-		marquepages_fonctions.php
-	</fonctions>
+	
+	<options>marquepages_options.php</options>
+	<fonctions>marquepages_fonctions.php</fonctions>
 	<pipeline>
 		<nom>insert_head</nom> 
 		<inclure>marquepages_pipelines.php</inclure>
 	</pipeline>
+	<pipeline>
+		<nom>jquery_plugins</nom> 
+		<inclure>marquepages_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom> 
+		<inclure>marquepages_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_objets_surnoms</nom> 
+		<inclure>marquepages_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>pre_boucle</nom> 
+		<inclure>marquepages_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>autoriser</nom> 
+		<inclure>inc/marquepages_autoriser.php</inclure>
+	</pipeline>
 	
-	<necessite id="SPIP" version="[1.9.0;]" />
-	<necessite id='etiquettes' version='[0.2;]' />
+	<necessite id="SPIP" version="[2.0.0;]" />
+	<necessite id='cfg' version='[1.10;]' />
+	<necessite id='etiquettes' version='[0.6.5;]' />
+	<necessite id='nuage' version='[1.4;]' />
+	<utilise id='crayons' />
 </plugin>

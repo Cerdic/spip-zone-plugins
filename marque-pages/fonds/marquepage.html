@@ -1,15 +1,5 @@
-[(#REM)
-
-	Vue d'un marque-page
-	Reproduit l'affichage comme dans le fond
-
-]
-#CACHE{0}
-
-[(#REM) on ajoute les mots-clés]
-[(#ENV*{tags}|ajouter_etiquettes{#ENV{id_marquepage},tags,forum,id_forum,true})]
-
-<BOUCLE_marquepage(MARQUEPAGES){id_forum=#ENV{id_marquepage}}>
+<BOUCLE_marquepage(MARQUEPAGES){id_forum}>
+<div class="marquepage #EDIT{marquepage}">
 <dl class="xfolkentry">
 	<dt>
 		<a href="#URL_SITE" class="taggedlink" rel="nofollow">#TITRE</a>
@@ -59,4 +49,5 @@
 		</BOUCLE_tags>
 	</dd>
 </dl>
+</div>
 </BOUCLE_marquepage>

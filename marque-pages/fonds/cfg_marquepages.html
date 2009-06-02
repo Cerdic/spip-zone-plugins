@@ -1,0 +1,37 @@
+<!-- titre=<:marquepages:titre_marquepages:> -->
+<!-- icone=images/marquepages-24.png -->
+
+<div class="formulaire_spip formulaire_editer">
+<form method="post" action="#SELF">
+	[(#ENV{_cfg_}|form_hidden)]
+	
+	<fieldset>
+		<legend><:marquepages:configuration_titre:></legend>
+		<ul>
+			<li>
+				<label for="qui"><:marquepages:configuration_qui:></label>
+				<select name="qui" id="qui">
+					<option value="0"[ (#ENV{qui}|=={0}|oui)selected="selected"]><:item_choix_administrateurs:></option>
+					<option value="1"[ (#ENV{qui}|=={1}|oui)selected="selected"]><:item_choix_redacteurs:></option>
+					<option value="2"[ (#ENV{qui}|=={2}|oui)selected="selected"]><:item_choix_visiteurs:></option>
+				</select>
+			</li>
+			<li>
+				<label for="rubrique"><:marquepages:configuration_rubrique:></label>
+				<div class="explication"><:marquepages:configuration_rubrique_explication:></div>
+				[(#VAL{rien}|marquepages_chercher_rubrique{#ENV{rubrique,0},rubrique})]
+			</li>
+			<li>
+				<label for="titremp"><:marquepages:configuration_titremp:></label>
+				<div class="explication"><:marquepages:configuration_titremp_explication:></div>
+				<input type="text" name="titremp" class="text" id="titremp" value="#ENV{titremp}" />
+			</li>
+		</ul>
+	</fieldset>
+	
+	<div class="boutons">
+		<input type="submit" name="_cfg_ok" value="<:oK:>" />
+		<input type="submit" name="_cfg_delete" value="<:supprimer:>" />
+	</div>
+</form>
+</div>

@@ -1,51 +1,90 @@
+/* Dans le formulaire */
+#formulaire_marquepage input.text, #formulaire_marquepage select{
+	width:90%;
+}
+
 /* Le bloc du marque-page */
-dl.xfolkentry{
+.marquepage{
 	clear:both;
 	margin:1em 0 0 0;
 	padding:0 0 1em 0;
 	border-bottom:1px solid #ddd;
 }
 
-/* Le titre du marque-page */
-dl.xfolkentry dt{
+.marquepage dl{
 	margin:0;
 	padding:0;
-	font-size:1em;
-	font-weight:bold;
 }
-dl.xfolkentry dt a{
-	color:#cc6;
+/* Le titre du marque-page */
+.marquepage dt{
+	margin:0;
+	padding:0;
+	font-size:1.2em;
+	font-weight:bold;
 }
 
 /* Les infos du marque-page */
-dl.xfolkentry dd{
+.marquepage dd{
 	margin:0;
 	padding:0;
-	font-size:0.8em;
 }
-dl.xfolkentry dd.meta{
+.marquepage dd.meta{
 	color:#aaa;
+	font-size:0.8em;
 }
 
 /* Les boutons d'actions */
-dl.xfolkentry ul.actions{
+.marquepage .actions{
 	float:right;
-	width:auto;
-	list-style:none;
+	width:32px;
+	padding:0;
+	margin:-1.2em 0 0 2em;
 	text-align:right;
 }
-dl.xfolkentry ul.actions li{
-	margin:0 0 0 1em;
-	display:inline;
+.marquepage .actions ul{
+	margin:0;
+	padding:0;
 }
-dl.xfolkentry ul.actions a{
-	color:#cc6;
-	padding:0.1em;
-	font-weight:bold;
-	text-transform:lowercase;
+.marquepage .actions li{
+	float:right;
+	width:16px;
+	list-style:none;
+}
+.marquepage .actions a{
+	display:block;
+	width:16px;
+	height:16px;
+	opacity:0.5;
+}
+.marquepage .actions a span{
+	position: absolute;
+	top:-10000px;
+}
+.marquepage .actions a:hover{
+	opacity:1;
+}
+.marquepage .actions li.copier a{
+	background:transparent url(../images/marquepage_copier_gris.png) center center no-repeat;
+}
+.marquepage .actions li.supprimer a{
+	background:transparent url(../images/marquepage_supprimer_gris.png) center center no-repeat;
+}
+.marquepage .actions li.copier a:hover{
+	background-image:url(../images/marquepage_copier.png);
+}
+.marquepage .actions li.supprimer a:hover{
+	background-image:url(../images/marquepage_supprimer.png);
 }
 
-/* Demande de confirmation */
-dl.xfolkentry ul.actions span.confirmation{ color:red; }
-dl.xfolkentry ul.actions span.confirmation a{ color:#444; }
-dl.xfolkentry ul.actions span.confirmation a:hover{ color:green; }
+
+/* Pour le crayon */
+.marquepage .crayon-icones span, .marquepage .crayon-icones em{
+	top:1em;
+}
+
+.formulaire_crayon .formulaire_marquepage{
+	padding:1em;
+	background:white;
+	border:1px solid black;
+}
+

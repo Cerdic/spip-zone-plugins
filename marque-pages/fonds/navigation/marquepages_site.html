@@ -1,0 +1,44 @@
+
+
+<BOUCLE_site(SITES){id_syndic}>
+
+#SET{frequences,#ARRAY}
+<BOUCLE_marquepages(MARQUEPAGES){id_syndic}>
+	<BOUCLE_mots_calcul(MOTS){id_forum}>
+		#SET{frequences,#GET{frequences}|array_merge{#ARRAY{#TITRE*,#GET{frequences}|table_valeur{#TITRE*,0}|plus{1}}}}
+	</BOUCLE_mots_calcul>
+</BOUCLE_marquepages>
+#SET{frequences,#GET{frequences}|marquepages_trier}
+#SET{mots,#GET{frequences}|array_keys}
+
+<B_popu>
+<div class="pliable">
+	<h2><:etiquettes:etiquettes_populaires:></h2>
+	<ul>
+	<BOUCLE_popu(MOTS){titre IN #GET{mots}}{0,10}>
+		<li>
+			<a href="[(#TITRE|url_mp_tag)]">#TITRE <span class="frequence">[(#GET{frequences}|table_valeur{#TITRE*})]</span></a>
+		</li>
+	</BOUCLE_popu>
+	</ul>
+</div>
+</B_popu>
+
+<B_tout>
+<div class="pliable plier">
+	#ANCRE_PAGINATION
+	<h2><:etiquettes:toutes_les_etiquettes:></h2>
+	<ul>
+	<BOUCLE_tout(MOTS){titre IN #GET{mots}}{par titre}{pagination 50}>
+		<li>
+			<a href="[(#TITRE|url_mp_tag)]">#TITRE <span class="frequence">[(#GET{frequences}|table_valeur{#TITRE*})]</span></a>
+		</li>
+	</BOUCLE_tout>
+		[<li class="pagination">
+			(#PAGINATION{page_precedent_suivant})
+		</li>]
+	</ul>
+</div>
+</B_tout>
+
+</BOUCLE_site>

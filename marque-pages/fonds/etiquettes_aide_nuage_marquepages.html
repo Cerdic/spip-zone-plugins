@@ -1,0 +1,32 @@
+<B_mots>
+<ul id="popular_tags_#ENV{identifiant}" class="popular_tags nuage">
+	<BOUCLE_mots(MOTS){tous}{type ?}{frequence forum}{!par frequence_mots}{0,30}>
+	#SET{score,#FREQUENCE|div{#MAX_FREQUENCE}}
+	[(#GET{score}|>={0}|?{' '})
+		[(#SET{score,[(#GET{score}|plus{0.900001})]})]
+		[(#SET{unite,[(#GET{score}|floor)]})]
+		[(#SET{decimale,[(#GET{score}|moins{#GET{unite}}|mult{10}|floor)]})]
+		<li><span style="font-size: #GET{unite}[.(#GET{decimale})]em;">#TITRE*</span></li>
+	]</BOUCLE_mots>
+</ul>
+</B_mots>
+
+[(#REM) On utilise le javascript pour ce nuage prÃ©cis ]
+<script  type="text/javascript">
+<!--
+var appliquer_etiquettes_aide_nuage_#ENV{identifiant} = function(){
+	appliquer_etiquettes_aide_nuage(
+		'##ENV{name}',
+		'#popular_tags_#ENV{identifiant}'
+	);
+}
+// on applique avec un timeout pour laisser la page s'afficher
+$(function(){
+	setTimeout(appliquer_etiquettes_aide_nuage_#ENV{identifiant}, 200);
+});
+onAjaxLoad(function(){
+	setTimeout(appliquer_etiquettes_aide_nuage_#ENV{identifiant}, 200);
+});
+// -->
+</script>
+

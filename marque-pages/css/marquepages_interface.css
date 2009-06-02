@@ -1,0 +1,215 @@
+*{
+	margin:0;
+	padding:0;
+	border:0;
+}
+
+/* Styles généraux */
+body{
+	font-family:"trebuchet ms",tahoma,sans-serif;
+	font-size:0.9em;
+	color:#36393d;
+}
+a{
+	color:#0fadd9;/*#d90fad;*/
+	text-decoration:none;
+}
+a:hover{
+	color:#d90fad;
+	text-decoration:underline;
+}
+.nettoyeur{
+	clear : both ;
+	margin : 0 ;
+	padding : 0 ;
+	border : 0 ;
+	height : 0 ;
+	line-height : 1px ;
+	font-size : 1px ;
+	overflow : hidden ; 
+}
+
+/* Placement des blocs */
+#page{
+	margin:0 auto;
+	padding:0 20px;
+	min-width:960px;
+	max-width:1240px;
+}
+#bloc-haut{
+	margin-bottom:2em;
+	padding:0.5em;
+	background:#add90f;/*#0fadd9;*/
+	-moz-border-radius:0 0 10px 10px;
+	-webkit-border-radius:0 0 10px 10px;
+}
+#bloc-central{
+	background:white;
+}
+#conteneur{
+	float:left;
+	width:100%;
+	margin-right:-18em;
+}
+#contenu{
+	position:relative;
+	margin-right:18em;
+}
+#navigation{
+	float:right;
+	width:17em;
+	font-size:0.9em;
+}
+#bloc-bas{
+	background:white;
+}
+
+/* Pour le bloc du haut */
+h1{
+	float:left;
+	width;auto;
+	margin-right:0.5em;
+	padding-left:70px;
+	height:70px;
+	line-height:70px;
+	background:transparent url('../images/marquepages.png') left center no-repeat;
+}
+h1 a{
+	color:#36393d;
+	text-decoration:none;
+	font-variant:small-caps;
+}
+h1 a:hover{
+	color:#36393d;
+	text-decoration:underline;
+}
+#barre-nav{
+	height:70px;
+	line-height:70px;
+	font-size:1.1em;
+}
+#barre-nav ul{
+	list-style:none;
+}
+#barre-nav li{
+	float:left;
+	width:auto;
+	margin:0 0.25em;
+}
+#barre-nav li.quitter, #barre-nav li.inscrire, #barre-nav li.connecter{
+	float:right;
+	text-align:right;
+}
+#barre-nav li.connecter div{
+	line-height:1em;
+}
+#barre-nav li.connecter div legend{
+	display:none;
+}
+#barre-nav a{
+	padding:0.1em 0.5em;
+	font-weight:bold;
+	color:white;
+	text-decoration:none;
+	text-transform:lowercase;
+}
+#barre-nav a:hover, #barre-nav a.hover{
+	color:#d90fad;
+	background:white;
+	-moz-border-radius:3px;
+	-webkit-border-radius:3px;
+}
+
+/* Pour la navigation */
+#navigation h2{
+	position:relative;
+	margin-top:0.2em;
+	padding:0.2em 0;
+	font-size:1em;
+	font-weight:bold;
+	background:#eee;
+}
+#navigation .pliable h2{
+	padding-left:20px;
+	background:transparent url('../images/marquepage_fleche_bas.png') 5px center no-repeat;
+	cursor:pointer;
+}
+#navigation .plier h2{
+	background:transparent url('../images/marquepage_fleche.png') 7.5px center no-repeat;
+}
+#navigation ul{
+	list-style:none;
+}
+#navigation .plier ul{
+	display:none;
+}
+#navigation a{
+	display:block;
+	position:relative;
+	padding:0.2em 1em;
+	color:#666;
+	font-size:0.9em;
+}
+#navigation a:hover{
+	color:white;
+	text-decoration:none;
+	background:#6C6C6C;
+	-moz-border-radius:3px 0 0 3px;
+	-webkit-border-radius:3px 0 0 3px;
+}
+#navigation .pagination{
+	text-align:center;
+}
+#navigation .pagination a{
+	display:inline;
+	-moz-border-radius:0;
+	-webkit-border-radius:0;
+}
+#navigation .frequence{
+	position:absolute;
+	right:4px;
+	top:4px;
+}
+
+/* Pour le contenu */
+#contenu h2{
+	border-bottom:1px solid #DDDDDD;
+	font-size:1.2em;
+	padding-bottom:0.2em;
+}
+#contenu h3{
+	font-size:1em;
+	font-weight:bold;
+}
+#contenu ul.infos-liste{
+	list-style:none;
+	position:absolute;
+	top:1.2em;
+	right:0;
+	padding:0.1em 0.3em;
+	background:#ddd;
+}
+#contenu ul.infos-liste li{
+	display:inline;
+}
+#contenu ul.etiquettes {
+	color:#666666;
+	font-size:0.9em;
+	list-style:none;
+	margin:0.5em 0;
+}
+#contenu ul.etiquettes li {
+	display:inline;
+}
+#contenu ul.etiquettes a {
+	color:white;
+	font-weight:bold;
+	padding:0.1em 0.3em;
+	background:#9C9C9C;
+	-moz-border-radius:3px;
+	-webkit-border-radius:3px;
+}
+#contenu ul.etiquettes a:hover {
+	text-decoration:none;
+	background:#6C6C6C;
+}

@@ -1,0 +1,18 @@
+
+<BOUCLE_auteur(AUTEURS){login}>
+<h2>[(#SESSION{id_auteur}|=={#ID_AUTEUR}|?{<:marquepages:mes_marquepages:>,<:marquepages:titre_marquepages_de{auteur=#NOM}:>})]</h2>
+
+<B_etiquettes>
+<ul class="etiquettes">
+	<li><:marquepages:avec_etiquettes:></li>
+<BOUCLE_etiquettes(MOTS){titre=#ENV{titre_mot}}>
+	<li>
+		<a href="[(#TITRE|url_mp_tag{#LOGIN})]">#TITRE</a>
+		<a href="[(#SELF|url_mp_supprimer_tag{#TITRE})]" title="<:marquepages:enlever:>">-</a>
+	</li>
+</BOUCLE_etiquettes>
+</ul>
+</B_etiquettes>
+
+<INCLURE{fond=fonds/marquepages}{ajax}{self=#SELF}{id_rubrique}{id_auteur}{titre_mot}{pagination=#ENV{pagination}}{tri=#ENV{tri}}{senstri=#ENV{senstri}}>
+</BOUCLE_auteur>

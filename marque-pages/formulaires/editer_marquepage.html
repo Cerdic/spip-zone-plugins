@@ -1,0 +1,89 @@
+#CACHE{0}
+
+<div class="formulaire_spip"  id="formulaire_marquepage">	
+	
+	<br class='bugajaxie' />
+	
+	[<p class="reponse_formulaire reponse_formulaire_ok">
+		(#ENV*{message_ok})
+	</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">
+		(#ENV*{message_erreur})
+		[(#ENV*{proposer_login}|oui)
+			[(#REM) Si la personne est déjà connectée mais avec un compte non-autorisé, on propose la déconnexion]
+			[(#SESSION{id_auteur}|oui)
+				<br /><a href="#URL_LOGOUT"><:marquepages:se_deconnecter:></a>
+			]
+		]
+	</p>]
+	
+	[(#ENV*{proposer_login}|non)
+	<form action="#ENV{action}#formulaire_marquepage" method="post">
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type="hidden" name="id_rubrique" value="#ENV{id_rubrique}" />
+		<input type="hidden" name="id_forum" value="#ENV{id_forum}" />
+		<fieldset>
+			<legend>[(#ENV{creation}|?{<:marquepages:ajouter:>,<:marquepages:modifier:>})]</legend>
+			<ul>
+				<li class="obligatoire[ (#ENV*{erreurs}|table_valeur{mp_url}|oui)erreur]">
+					<label for="mp_url"><:marquepages:url:></label>
+					[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{mp_url})</span>]
+					[(#ENV{creation}|oui)
+					<input type="text" class="text" id="mp_url" name="mp_url" value="#ENV{mp_url}" size="60" />
+					]
+					[(#ENV{creation}|non)
+					[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{mp_url})</span>]
+					<input type="hidden" id="mp_url" name="mp_url" value="#ENV{mp_url}" />
+					<span class="url">#ENV{mp_url}</span>
+					]
+				</li>
+				<li class="obligatoire[ (#ENV*{erreurs}|table_valeur{mp_titre}|oui)impose]">
+					<label for="mp_titre"><:marquepages:titre:></label>
+					<input type="text" class="text" id="mp_titre" name="mp_titre" value="[(#ENV{mp_titre}|sinon{#ENV*{erreurs}|table_valeur{mp_titre}})]" size="60" />
+				</li>
+				<li>
+					<label for="mp_description"><:marquepages:description:></label>
+					[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{mp_description})</span>]
+					<input type="text" class="text" id="mp_description" name="mp_description" value="#ENV{mp_description}" size="60" />
+				</li>
+				<li>
+					<label for="mp_visibilite"><:marquepages:visibilite:></label>
+					[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{mp_visibilite})</span>]
+					<select name="mp_visibilite" id="mp_visibilite">
+						<option value="mppublic"[ (#ENV{mp_visibilite}|=={mppublic}|oui)selected="selected"]><:marquepages:visibilite_public:></option>
+						<option value="mpprive"[ (#ENV{mp_visibilite}|=={mpprive}|oui)selected="selected"]><:marquepages:visibilite_prive:></option>
+					</select>
+				</li>
+				<li>
+					<label for="mp_etiquettes"><:etiquettes:etiquettes:></label>
+					#FORMULAIRE_ETIQUETTES{uniquement_champ=true, objet=#ENV{objet,aucun}, name=mp_etiquettes, explication=false, nuage=marquepages}
+				</li>
+				<li class="boutons">
+					<input type="submit" name="mp_valider" value="<:bouton_valider:>" />
+				</li>
+			</ul>
+		</fieldset>
+	</form>
+	]
+	
+	[(#ENV{redirect}|oui)<p class="spip_bouton"><a href="#URL_SITE_SPIP/[(#ENV{redirect}|parametre_url{var_mode,recalcul})]"><:marquepages:revenir:></a> #PUCE</p>]
+	
+	[(#REM) Si c'est une erreur d'autorisation, on propose de s'identifier]
+	[(#ENV*{proposer_login}|oui)
+		#LOGIN_PUBLIC
+	]
+</div>
+
+<script type="text/javascript">
+	$('#formulaire_marquepage input#mp_titre')
+		.focus(function(){
+			var me = $(this);
+			var valeur = $.trim(me.val());
+			
+			// Si c'est vide ET qu'on est dans un formulaire ajax !
+			if (valeur == '' && me.parents('.ajax').length == 1)
+				me
+					.parents('form')
+						.submit();
+		});
+</script>

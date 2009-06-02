@@ -1,0 +1,154 @@
+#CACHE{7200}
+
+[(#REM)
+	Propre : 
+	/mp/
+	/mp/vincent/
+	/mp/vincent/une%20machination
+	/mp/tags/
+	/mp/tag/une%20machination
+	/mp/ajouter
+	/mp/editer/268
+	/mp/site/56
+	
+	Pas propre :
+	/spip.php?page=mp
+	/spip.php?page=mp&login=vincent
+	/spip.php?page=mp&login=vincent&titre_mot=une%20machination
+	/spip.php?page=mp&special=tags
+	/spip.php?page=mp&id_forum=nouveau
+	/spip.php?page=mp&id_forum=268
+	/spip.php?page=mp&id_syndic=56
+	
+]
+
+[(#REM) On initialise un certain nombre de choses ]
+#SET{type,tout}
+	
+[(#REM) On teste si on a passé un auteur ]
+[(#ENV{login}|oui)
+	#SET{type,auteur}
+]
+
+[(#REM) On teste si on demande l'historique d'un site ]
+[(#ENV{id_syndic}|oui)
+	#SET{type,site}
+]
+
+[(#REM) On teste si on demande une édition ]
+[(#ENV{id_forum}|oui)
+	#SET{type,editer}
+]
+
+<BOUCLE_rubrique_principale(RUBRIQUES){tout}{id_rubrique=#ENV{id_rubrique,#CONFIG{marquepages/rubrique}}}>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html dir="#LANG_DIR" lang="#LANG">
+	<head>
+		<title><:marquepages:titre_marquepages:>[(#GET{auteur}|?{' '})<:marquepages:de:> #ENV{login}][ - (#NOM_SITE_SPIP|textebrut)]</title>
+		<meta name="description" content="<:marquepages:ajouter:>" />
+		[<link rel="stylesheet" href="(#CHEMIN{spip_formulaires.css})" type="text/css" media="all" />]
+		[<link rel="stylesheet" href="(#CHEMIN{css/marquepages_interface.css})" type="text/css" media="all" />]
+		#INSERT_HEAD
+		<script type="text/javascript">
+			$(function(){
+				$('li.connecter a')
+					.click(
+						function(){
+							$(this)
+								.toggleClass('hover')
+								.siblings('div')
+									.slideToggle();
+							return false;
+						}
+					)
+					.siblings('div')
+						.hide();
+				
+				$('.pliable h2')
+					.click(function(){
+						$(this).parent('.pliable')
+							.toggleClass('plier');
+					});
+			});
+		</script>
+	</head>
+	
+	<body class="page_marquepages">
+		<div id="page">
+			[(#REM) Entete de la page + titre du site ]
+			<div id='bloc-haut'>
+				<div id="entete">
+					<h1><a href="[(#VAL|url_mp)]">[(#CONFIG{marquepages/titremp}|sinon{#NOM_SITE_SPIP : <:marquepages:titre_marquepages:>})]</a></h1>
+				</div>
+				<div id="barre-nav">
+					<ul>
+						[(#SESSION{statut}|oui|et{#SESSION{staut}|<={#CONFIG{marquepages/qui}}}|oui)
+						<li class="moi"><a href="[(#SESSION{login}|url_mp_auteur)]"><:marquepages:mes_marquepages:></a></li>
+						]
+						[(#AUTORISER{creermarquepagedans,rubrique,#ID_RUBRIQUE}|oui)
+						<li class="ajouter"><a href="[(#VAL{nouveau}|url_mp_editer)]"><:marquepages:ajouter:></a></li>
+						]
+						[(#SESSION{id_auteur}|oui)
+						<li class="quitter"><a href="#URL_LOGOUT"><:icone_deconnecter:></a></li>
+						]
+						[(#SESSION{id_auteur}|non)
+						[(#CONFIG{accepter_visiteurs}|=={oui}|ou{#CONFIG{accepter_inscriptions}|=={oui}}|oui)
+						<li class="inscrire">
+							<a href="[(#SELF|parametre_url{inscription,oui})]"><:pass_vousinscrire:></a>
+						</li>]
+						[<li class="connecter">
+							<a href="#"><:lien_connecter:></a>
+							<div>
+								(#LOGIN_PUBLIC)
+							</div>
+						</li>]
+						]
+					</ul>
+				</div>
+				<div class='nettoyeur'></div>
+			</div>
+		
+			<div id='bloc-central'>
+				[(#REM) Contenu principal]
+				<div class="hfeed" id="conteneur">
+					<div class="hentry" id="contenu">
+						[(#ENV{inscription}|oui)
+							<h2><:pass_vousinscrire:></h2>
+							#FORMULAIRE_INSCRIPTION
+						]
+						[(#ENV{inscription}|non)
+						<INCLURE{fond=fonds/contenu/marquepages_#GET{type}}{env}{id_rubrique}{self=#SELF}>
+						]
+					</div><!--#contenu-->
+				</div><!--#conteneur-->
+			
+				[(#REM) Menu de navigation laterale ]
+				<div id="navigation">
+					[(#GET{type}|!={editer}|oui)
+					<INCLURE{fond=fonds/navigation/marquepages_#GET{type}}{env}{id_rubrique}{self=#SELF}>
+					]
+				</div><!--#navigation-->
+			
+				[(#REM) Choses en plus ]
+				<div id="extra">
+					
+				</div><!--#extra-->
+			
+				<div class='nettoyeur'></div>
+			</div><!-- #bloc-central-->
+		
+			[(#REM) Pied de page ]
+			<div id="bloc-bas">
+				<div id="pied">
+					
+				</div>
+			</div>
+		
+			[(#REM)
+			Cette balise sert à activer les tâches de fond
+			]
+			#SPIP_CRON
+		</div><!-- #page-->
+	</body>
+</html>
+</BOUCLE_rubrique_principale>
