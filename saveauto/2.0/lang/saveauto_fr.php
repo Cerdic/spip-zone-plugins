@@ -12,6 +12,7 @@
 			    // inc_saveauto.php
 						 'saveauto' => 'Sauvegarde automatique',
 						 'sauvegarde_ok' => 'Sauvegarde de la base effectu&eacute;e avec succ&egrave;s !',
+                     'sauvegarde_ok_mail' => 'Sauvegarde de la base effectuee avec succes !',
 						 'maintenance' => 'Maintenance',
 						 'probleme_sauve_base' => 'Probl&egrave;me de sauvegarde de la base ',
 					
