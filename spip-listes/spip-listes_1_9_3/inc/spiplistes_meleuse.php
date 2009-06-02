@@ -400,13 +400,21 @@ spiplistes_log("spiplistes_meleuse()", _SPIPLISTES_LOG_DEBUG);
 								$_url = preg_replace(',(&amp;),','&', $_url);
 								switch($format_abo) {
 									case 'html':
-										$email_a_envoyer[$format_abo]->Body =
-											"<html>\n\n<body>\n\n"
-											. $ventre_html
-											. $pied_html
-											. "<a href=\"$_url\">".$pied_rappel_html."</a>\n\n</body></html>"
-											. $tampon_html
-											;
+										// Si on ne trouve pas les tags HTML lors on les ajoutes
+										if (FALSE === strpos($ventre_html, '</html>')) {
+											$email_a_envoyer[$format_abo]->Body =
+												"<html>\n\n<body>\n\n"
+												. $ventre_html
+												. $pied_html
+												. "<a href=\"$_url\">".$pied_rappel_html."</a>\n\n</body></html>"
+												. $tampon_html
+												;										
+										} else {
+											// Si on trouve les tags HTML cela veut dire que l'auteur veut pouvoir gérer lui même la partie <head> ainsi que le lien de désabonnement
+											// donc on ne prend en compte que la partie ventre_html.
+											$tags_perso = array('http://%URL_ABONNEMENT%' => generer_url_public('abonnement','d='.$cookie),);
+											$email_a_envoyer[$format_abo]->Body = str_replace(array_keys($tags_perso), array_values($tags_perso), $ventre_html);
+										}
 										/* la version alternative texte */
 										$email_a_envoyer[$format_abo]->AltBody = 
 											$ventre_texte ."\n\n"
