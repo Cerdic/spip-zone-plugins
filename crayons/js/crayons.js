@@ -131,7 +131,11 @@ $.fn.opencrayon = function(evt, percent) {
 			$.post(configCrayons.url_crayons_html,
 				params,
 				function (c) {
-					eval('c = '+c); // JSON
+					try {
+						eval('c = '+c); // JSON
+					} catch(e) {
+						c = {'$erreur': 'erreur de communication :' + '  ' + e.message, '$html':''};
+					}
 					$(me)
 					.find("em.crayon-searching")
 						.remove();

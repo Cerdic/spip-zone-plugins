@@ -368,6 +368,7 @@ function var2js($var) {
         case is_null($var) :
             return 'null';
         case is_string($var) :
+	    $var = str_replace(chr(226).chr(128).chr(168), "\n", $var);
             return '"' . str_replace('&', '\x26', addcslashes($var, "\"\\\n\r")) . '"';
         case is_bool($var) :
             return $var ? 'true' : 'false';
