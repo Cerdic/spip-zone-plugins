@@ -7,6 +7,11 @@ $.fn.slideshow = function(options) {
 		$.extend(settings, options);
 	
 	this.css('position', 'relative');
+	/**
+	 * Donner le layout pour avoir une bonne gestion des absolute, relative pour Internet explorer > 5.5
+	 * @see http://www.positioniseverything.net/articles/haslayout.html
+	 */
+	this.css('zoom','1');	
 	var slides = this.find('img').get();
 	for ( var i = 0; i < slides.length; i++ ) {
 		$(slides[i]).css('zIndex', slides.length - i).css('position', 'absolute').css('top', '0').css('left', '0');
