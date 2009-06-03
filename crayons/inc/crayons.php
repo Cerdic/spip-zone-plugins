@@ -368,6 +368,7 @@ function var2js($var) {
         case is_null($var) :
             return 'null';
         case is_string($var) :
+	    // saut de ligne unicode http://www.fileformat.info/info/unicode/char/2028/index.htm
 	    $var = str_replace(chr(226).chr(128).chr(168), "\n", $var);
             return '"' . str_replace('&', '\x26', addcslashes($var, "\"\\\n\r")) . '"';
         case is_bool($var) :
