@@ -22,6 +22,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'server_address_help' => 'exemple : pop.monserveur.com:110',
 	'server_mailbox_help' => 'habituellement \'INBOX\'',
 	
+	'options' => 'Options :',
+	'option_delete_bounce' => 'Supprimer les bounces mails du serveur mail :',
+	'option_delete_bounce_yes' => 'Oui',
+	'option_delete_bounce_no' => 'Non',
+	'option_delete_row' => 'Methode de supression des auteurs :',
+	'option_delete_row_definitive' => 'Compl&ecirc;te et d&eacute;finitive',
+	'option_delete_row_5poubelle' => 'Marquer les auteurs "&agrave; la poubelle"',
+	
 	'statistics' => 'Statistiques (nombre de mails supprim&eacute;) :',
 	'nb_deleted_mails' => 'Au total :',
 	'nb_deleted_mails_last_export' => 'Depuis le dernier export supprim&eacute; :',

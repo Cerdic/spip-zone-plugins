@@ -75,20 +75,43 @@ function action_spiplistescleaner_dist() {
 				if ($id_auteur != "") {
 					$something_deleted = false;
 					
-					// Delete the auteur in the spip_auteur_listes tables
-					if(sql_countsel('spip_auteurs_listes', 'id_auteur = ' . $id_auteur)) {
+					// Delete the autor in the spip_auteur_listes tables
+					if (sql_countsel('spip_auteurs_listes', 'id_auteur = ' . $id_auteur)) {
 						if (sql_delete('spip_auteurs_listes', 'id_auteur = ' . $id_auteur)) {
 							$something_deleted = true;
 							spip_log($prefix_spiplog . "Auteur id : " . $id_auteur . " has been deleted from all list!");
 						}
 					}
 					
-					// Delete the auteur in the spip_auteur table if it's a status 6forum
-					if(sql_countsel('spip_auteurs', 'id_auteur = ' . $id_auteur . " AND statut = '6forum'")) {
-						if(sql_delete('spip_auteurs', 'id_auteur = ' . $id_auteur . " AND statut = '6forum'")) {
+					// Delete the autor in the spip_auteurs_elargis tables
+					if (sql_countsel('spip_auteurs_elargis', 'id_auteur = ' . $id_auteur)) {
+						if (sql_delete('spip_auteurs_elargis', 'id_auteur = ' . $id_auteur)) {
 							$something_deleted = true;
-							spip_log($prefix_spiplog . "Auteur id : " . $id_auteur . " has been deleted from spip!");
+							spip_log($prefix_spiplog . "Auteur id : " . $id_auteur . " has been deleted from 'spip_auteurs_elargis'");
 						}
+					}					
+					
+					// Look the autor delete method option and choose which one to use
+					if ($config['option_delete_row'] == 'definitive') {
+											
+						// Delete the autor in the spip_auteur table if it's a status 6forum
+						if (sql_countsel('spip_auteurs', 'id_auteur = ' . $id_auteur . " AND statut = '6forum'")) {
+							if(sql_delete('spip_auteurs', 'id_auteur = ' . $id_auteur . " AND statut = '6forum'")) {
+								$something_deleted = true;
+								spip_log($prefix_spiplog . "Auteur id : " . $id_auteur . " has been deleted from spip!");
+							}
+						}
+						
+					} else {
+										
+						// Mark the autor deleted if it's a status 6forum
+						if (sql_countsel('spip_auteurs', 'id_auteur = ' . $id_auteur . " AND statut = '6forum'")) {
+							if(sql_updateq('spip_auteurs', array('statut' => '5poubelle'), 'id_auteur = ' . $id_auteur . " AND statut = '6forum'")) {
+								$something_deleted = true;
+								spip_log($prefix_spiplog . "Auteur id : " . $id_auteur . " has been marked deleted (5poubelle) from spip!");
+							}
+						}
+			
 					}
 					
 					// If something has been deleted we delete the mail
@@ -96,8 +119,10 @@ function action_spiplistescleaner_dist() {
 						// Save the email adress for an future export
 						sql_insertq('spiplistescleaner_deleted_emails', array('email' => $email, 'date' => date('Y-m-d H:m:s')));
 						
-						// Mark the mail "deleted" in the mailbox
-						imap_delete($mbox, $id_msg);
+						// Mark the mail "deleted" in the mailbox if the option has been selected
+						if ($config['option_delete_bounce'] == 'yes') {
+							imap_delete($mbox, $id_msg);
+						}
 						
 						// Increment deleted email values
 						$nb_deleted_mails++;

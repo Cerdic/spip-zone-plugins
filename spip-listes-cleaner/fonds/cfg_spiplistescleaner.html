@@ -75,6 +75,23 @@
     </ul>
     </fieldset>
 	<fieldset>
+    <legend><:spiplistescleaner:options:></legend>
+	<ul>
+		<li>
+			<label style='width:100%'><:spiplistescleaner:option_delete_bounce:></label>
+			<input type="radio" name="option_delete_bounce" value="yes" [(#ENV{option_delete_bounce, #CONFIG{option_delete_bounce}}|=={yes}|?{'checked'})]><:spiplistescleaner:option_delete_bounce_yes:>
+			<input type="radio" name="option_delete_bounce" value="no" [(#ENV{option_delete_bounce, #CONFIG{option_delete_bounce}}|=={no}|?{'checked'})]><:spiplistescleaner:option_delete_bounce_no:>
+        </li>
+    </ul>
+	<ul>
+		<li>
+			<label style='width:250px; height:40px;'><:spiplistescleaner:option_delete_row:></label>
+			<input type="radio" name="option_delete_row" value="definitive" [(#ENV{option_delete_row, #CONFIG{option_delete_rows}}|=={definitive}|?{'checked'})]><:spiplistescleaner:option_delete_row_definitive:><br/>
+			<input type="radio" name="option_delete_row" value="5poubelle" [(#ENV{option_delete_row, #CONFIG{option_delete_row}}|=={5poubelle}|?{'checked'})]><:spiplistescleaner:option_delete_row_5poubelle:>
+        </li>
+    </ul>
+    </fieldset>
+	<fieldset>
     <legend><:spiplistescleaner:export:></legend>
 	<ul>
 		<li>
@@ -93,12 +110,12 @@
         <legend><:spiplistescleaner:statistics:></legend>
     <ul>
 		<li>
-			<label style='width:100%'><:spiplistescleaner:nb_deleted_mails:> #ENV{nb_deleted_mails, #CONFIG{nb_deleted_mails}}</label>
+			<label style='width:100%'><:spiplistescleaner:nb_deleted_mails:> <?php echo lire_config('spiplistescleaner/nb_deleted_mails'); ?></label>
         </li>
     </ul>
 	<ul>
 		<li>
-			<label style='width:100%'><:spiplistescleaner:nb_deleted_mails_last_export:> #ENV{nb_deleted_mails_last_export, #CONFIG{nb_deleted_mails_last_export}}</label>
+			<label style='width:100%'><:spiplistescleaner:nb_deleted_mails_last_export:> <?php echo lire_config('spiplistescleaner/nb_deleted_mails_last_export'); ?></label>
         </li>
     </ul>
 	</fieldset>
@@ -108,12 +125,5 @@
     </p>
 
 </form>
-
-<!-- BEGIN : Hidden input to be able to use the values 'nb_deleted_mails' in statistics label 'nb_deleted_mails' -->
-<input type="hidden" name="nb_deleted_mails" id="nb_deleted_mails"
-value="#ENV{nb_deleted_mails, #CONFIG{nb_deleted_mails}}" class="text" />
-<input type="hidden" name="nb_deleted_mails_last_export" id="nb_deleted_mails_last_export"
-value="#ENV{nb_deleted_mails_last_export, #CONFIG{nb_deleted_mails_last_export}}" class="text" />
-<!-- END : Hidden input -->
 </div>
 #CFG_ARBO{spiplistescleaner}

@@ -2,7 +2,7 @@
 <plugin>
 	<nom><multi>[fr]SPIP-Listes Cleaner[en]SPIP-Lists Cleaner</multi></nom>
 	<auteur>Pierre ROUSSET: p.rousset@gmail.com for Bouncing Orange: http://www.bouncingorange.com/</auteur>
-	<version>1.1</version>
+	<version>1.2</version>
 	<licence>(c) 2009 [GPL v2 Licence->http://www.opensource.org/licenses/gpl-2.0.php]</licence>
 	<etat>test</etat>
 	<icon>spip-listes-cleaner.png</icon>
@@ -18,7 +18,7 @@
 	</pipeline>
 
 	<chemin dir='' />
-	<necessite id="SPIP" version="[1.9.2;]" />    
+	<necessite id="SPIP" version="[2.0.0;]" />    
 	<necessite id='spiplistes' version='[2.0081;]' />
 	<necessite id='cfg' version='[1.2.0;]' />
 </plugin>
