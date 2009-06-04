@@ -183,12 +183,5 @@ function abonnement_envoyer_mails_confirmation($validation_paiement,$abonne,$lib
 	}
 }
 
-//utiliser le cron pour gerer les dates de validite des abonnements et envoyer les messages de relance
-function abonnement_taches_generales_cron($taches_generales){
-	// toutes les 24 heures car verification sur le jour - passer a deux fois par jour car il peut y en avoir beaucoup
-	$taches_generales['abonnement_cron'] = 60*60*24 ;
-	return $taches_generales;
-}
-
 
 ?>
