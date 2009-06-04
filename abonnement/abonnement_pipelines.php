@@ -3,7 +3,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
-function abonnement_I2_cfg_form($flux) {
+function abonnement_i2_cfg_form($flux) {
     $flux .= recuperer_fond('fonds/inscription2_abonnement');
 	return $flux;
 }
