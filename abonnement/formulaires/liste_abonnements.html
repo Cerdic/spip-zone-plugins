@@ -1,9 +1,8 @@
 
 <BOUCLE_abo(ABONNEMENTS){0,1}>
     <fieldset class="abonnement_liste">
-    <h3 class="legend"><:abo:choisir_son_abonnement:></h3>
     <ul>
-		[(#SAISIE{abonnement,abonnement,oui}{label=<:abo:choisir_son_abonnement:>})]
+		[(#SAISIE{abonnement,abonnement,oui}{label=<:abo:choisir_son_abonnement:>,class=legend}{valeur=1})]
 		[<input type="hidden" name="hash"  value="(#ENV{hash})"/>]
 	</ul>
     </fieldset>
