@@ -119,7 +119,7 @@ function joindre_trouver_fichier_envoye(){
 		if (_tmp_dir == _DIR_IMG)
 			return _T('avis_operation_impossible');
 		
-		$files = joindre_deballer_lister_zip();
+		$files = joindre_deballer_lister_zip($path,_tmp_dir);
 	  
 		// si le zip doit aussi etre conserve, l'ajouter
 		if (_request('options_deballe_zip_conserver')){
@@ -256,9 +256,9 @@ function joindre_deballer_lister_zip($path,$tmp_dir) {
 	);
 	if ($contenu = joindre_decrire_contenu_zip($archive)){
 		$files = array();
-		$fichiers = reset($contenu);
+		$fichiers = reset($contenu);		
 		foreach($fichiers as $fichier){
-			$f = basename($fichier);
+			$f = basename($fichier['filename']);
 			$files[] = array('tmp_name'=>$tmp_dir. $f,'name'=>$f,'titrer'=>_request('options_deballe_zip_titrer'));
 		}
 		return $files;
