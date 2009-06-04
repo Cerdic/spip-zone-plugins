@@ -17,10 +17,9 @@ function action_odt2spip_importe() {
 		
   // les chemins à utiliser
     $rep_IMG = "../"._NOM_PERMANENTS_ACCESSIBLES;
-		$p = explode(basename(_DIR_PLUGINS)."/", str_replace('\\','/',realpath(dirname(__FILE__))));
     
   // ss-rep temporaire specifique de l'auteur en cours: tmp/odt2spip/id_auteur/ => le creer si il n'existe pas
-    $base_dezip = $p[0]._NOM_TEMPORAIRES_INACCESSIBLES."odt2spip/";   // avec / final
+    $base_dezip = _DIR_TMP."odt2spip/";   // avec / final
     if (!is_dir($base_dezip)) if (!mkdir($base_dezip,0777)) die (_T('odtspip:err_repertoire_tmp'));  
     $rep_dezip = $base_dezip.$id_auteur.'/';
     if (!is_dir($rep_dezip)) if (!mkdir($rep_dezip,0777)) die (_T('odtspip:err_repertoire_tmp'));  
@@ -49,7 +48,7 @@ function action_odt2spip_importe() {
 		    spip_log('charger_decompresser erreur zip ' . $zip->error_code .' pour fichier ' . $rep_dezip.$fichier_zip);
 		    die($zip->errorName(true));  //$zip->error_code
 	  }
-    
+//die();    
   // variables en dur pour xml en entrée et xslt utilisée
 //    $xml_entre = $rep_dezip.'content.xml';  // chemin du fichier xml à lire  !!! ce chemin absolu ne fonctionne pas pour PHP4 !!!
     $xml_entre = _DIR_TMP.'odt2spip/'.$id_auteur.'/content.xml';  // chemin du fichier xml à lire
