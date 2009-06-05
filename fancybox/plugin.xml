@@ -4,7 +4,7 @@
 	FancyBox par [klade.lv->http://fancy.klade.lv]
 _ Mis en plugin par b_b
 	</auteur>
-	<version>0.1</version>
+	<version>0.2</version>
 	<icon></icon>
 	<etat>test</etat>
 	<description>
@@ -17,6 +17,11 @@ _ Ce plugin fonctionne sur les squelettes disposant de la balise <code>#INSERT_H
 	<utilise id="cfg" version="[1.9.4;]" />
 	<pipeline>
 		<nom>insert_head</nom>
+		<inclure>fancybox_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<action>insert_head</action>
 		<inclure>fancybox_pipelines.php</inclure>
 	</pipeline>
 </plugin>
