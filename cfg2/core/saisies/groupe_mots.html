@@ -19,6 +19,6 @@
 		[(#ENV{multiple}|oui)
 		<option value="#ID_GROUPE"[(#ID_GROUPE|in_array{#ENV{valeur}|sinon{#ENV{defaut,#ARRAY}}}|oui) selected="selected"]>#TITRE</option>]
 		[(#ENV{multiple}|non)
-		<option value="#ID_GROUPE"[(#ID_RUBRIQUE|=={#ENV{valeur}|sinon{#ENV{defaut}}}|oui) selected="selected"]>#TITRE</option>]
+		<option value="#ID_GROUPE"[(#ID_GROUPE|=={#ENV{valeur}|sinon{#ENV{defaut}}}|oui) selected="selected"]>#TITRE</option>]
 	</BOUCLE_groupes>
 </select>
