@@ -1,7 +1,7 @@
 /*!
  * jQuery corner plugin: simple corner rounding
  * Examples and documentation at: http://jquery.malsup.com/corner/
- * version 1.95 (02/26/2009)
+ * version 1.98 (02-JUN-2009)
  * Dual licensed under the MIT and GPL licenses:
  * http://www.opensource.org/licenses/mit-license.php
  * http://www.gnu.org/licenses/gpl.html
@@ -27,6 +27,7 @@
 ;(function($) { 
 
 var jc_expr = (function() {
+	if (! $.browser.msie) return false;
     var div = document.createElement('div');
     try { div.style.setExpression('width','0+0'); }
     catch(e) { return false; }
@@ -43,9 +44,9 @@ function jc_hex2(s) {
 function jc_gpc(node) {
     for ( ; node && node.nodeName.toLowerCase() != 'html'; node = node.parentNode ) {
         var v = $.css(node,'backgroundColor');
-        if ( v.indexOf('rgb') >= 0 ) { 
-            if ($.browser.safari && v == 'rgba(0, 0, 0, 0)')
-                continue;
+        if (v == 'rgba(0, 0, 0, 0)')
+            continue; // webkit
+        if (v.indexOf('rgb') >= 0) { 
             var rgb = v.match(/\d+/g); 
             return '#'+ jc_hex2(rgb[0]) + jc_hex2(rgb[1]) + jc_hex2(rgb[2]);
         }
@@ -170,6 +171,9 @@ $.fn.corner = function(o) {
     });
 };
 
-$.fn.uncorner = function() { return $('.jquery-corner', this).remove(); };
+$.fn.uncorner = function() { 
+	$('div.jquery-corner', this).remove();
+	return this;
+};
     
 })(jQuery);
