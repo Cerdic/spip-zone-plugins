@@ -6,6 +6,8 @@
  *
  */
 
+/* pour que le pipeline ne rale pas ! */
+function agenda_autoriser(){}
 
 /**
  * Autorisation d'ajout d'un evenement a un article
