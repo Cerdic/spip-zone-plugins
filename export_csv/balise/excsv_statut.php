@@ -24,12 +24,7 @@ function balise_EXCSV_STATUT_dyn($id_rubrique) {
 	$q = "SELECT statut FROM spip_rubriques WHERE id_rubrique='".$id_rubrique."'";
 	$r = spip_fetch_array(spip_query($q));
 
-	switch($r['statut']) {
-		case 'publie' : $return = _T('exportcsv:statut_publie');
-		break;
-		case 'prive' : $return = _T('exportcsv:statut_prive');
-		break;
-	}
-	echo $return;
+	$txt = 'exportcsv:'.$r['statut'];
+	return _T($txt);
 }
 ?>

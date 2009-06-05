@@ -11,10 +11,11 @@
 ##############################################################*/
 
 include_spip("inc/exportcsv");
+include_spip("inc/exportcsv_petition");
 include_spip("inc/presentation");
 
 function exec_exportcsv_tous() {
-	global 	$connect_statut, $couleur_claire, $couleur_foncee;
+	global 	$connect_statut, $couleur_claire, $couleur_foncee,$prefix_t;
 	
 
 	// vérifier les droits
@@ -26,7 +27,7 @@ function exec_exportcsv_tous() {
 	}
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo $commencer_page(_T('exportcsv:extract_data'), "documents", _PLUGIN_NAME_EXPORTCSV);
+	echo $commencer_page(_T('exportcsv:extract_data'), _PLUGIN_NAME_EXPORTCSV);
 
 	echo "<br />";
 	gros_titre(_T('exportcsv:titre_page').' : '._T('exportcsv:extract_data'));
@@ -41,10 +42,15 @@ function exec_exportcsv_tous() {
 		}
 		fin_raccourcis();
 		
-		debut_boite_info();
-			echo '<p><h3 style="color:'.$couleur_foncee.';">'._T('exportcsv:extraction_data').' :</h3></p>'
-			._T('exportcsv:explications');
-		fin_boite_info();
+# v2
+		echo exportcsv_afficher_petition();
+# fin v2		
+		
+		debut_cadre_relief(_DIR_IMG_EXPORTCSV.'help-24.png');
+			echo '<div class="verdana1 spip_xx-small"><h3 style="color:'.$couleur_foncee.';">'._T('exportcsv:extraction_data').' :</h3></p>'
+			._T('exportcsv:explications')
+			.'</div>';
+		fin_cadre_relief();
 		
 		echo "<br />";
 		debut_cadre_relief();

@@ -23,7 +23,7 @@ if (!defined("_PLUGIN_NAME_EXPORTCSV")) {
 	define('_PLUGIN_NAME_EXPORTCSV', 'exportcsv');
 }
 
-function exportcsv_ajouterBoutons($boutons_admin) {
+function exportcsv_ajouter_boutons($boutons_admin) {
 	// si on est admin ou admin-restreint
 	if ($GLOBALS['connect_statut'] == "0minirezo" 
 	AND $GLOBALS["options"]=="avancees" AND 
@@ -37,11 +37,20 @@ function exportcsv_ajouterBoutons($boutons_admin) {
 	}
 	return $boutons_admin;
 }
-// css privé
-function exportcsv_header_prive($flux) {
-	$flux.= "\n".'<link rel="stylesheet" type="text/css" href="'._DIR_PLUGIN_EXPORTCSV.'exportcsv_styles.css" />'."\n";
+function exportcsv_affiche_gauche($flux){
+	if (_request('exec') == 'articles' OR _request('exec') == 'controle_petition') {
+		if ($GLOBALS['connect_statut'] == "0minirezo" 
+		AND $GLOBALS["options"] == "avancees" AND 
+		(!isset($GLOBALS['meta']["activer_exportcsv"]) OR $GLOBALS['meta']["activer_exportcsv"]!="non")) {
+			include_spip('inc/exportcsv_petition');
+			$flux['data'] .= exportcsv_afficher_petition($flux['args']['id_article']);
+		}
+	}
 	return $flux;
 }
-
-
+// css privé
+function exportcsv_header_prive($flux) {
+	$flux .= "\n".'<link rel="stylesheet" type="text/css" href="'._DIR_PLUGIN_EXPORTCSV.'exportcsv_styles.css" />'."\n";
+	return $flux;
+}
 ?>

@@ -32,6 +32,13 @@ background:#cde3f1;
 text-align:center;
 }
 /*
+ * /exec/exportcsv_tous > extration pétitions
+ */
+body.exportcsv ul {
+	margin-left: 0;
+	padding-left: 1em;
+}
+/*
  * /exec/exportcsv_tous > cadre d'aide
  */
 .exportcsv_ol {

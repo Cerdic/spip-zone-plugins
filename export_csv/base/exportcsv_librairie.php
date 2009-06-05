@@ -10,7 +10,11 @@
  *
 ##############################################################*/
 
-global $debug; $debug = 0; 
+# $debug = 1 : affichage des messages 'ecco_pre' et 'sdn_debug'
+global $debug, $prefix_t; 
+$debug = 0;  $prefix_t = $GLOBALS['table_prefix'].'_';
+
+
 
 if (!defined('_DIR_PLUGIN_EXPORTCSV')){
 	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(dirname(__FILE__)))));
@@ -20,7 +24,7 @@ if (!defined('_DIR_PLUGIN_EXPORTCSV')){
 if (!defined("_DIR_IMG_EXPORTCSV")) {
 	define('_DIR_IMG_EXPORTCSV', _DIR_PLUGIN_EXPORTCSV.'img_pack/');
 }
-// prefixe du plugin
+# prefixe du plugin
 if (!defined("_PLUGIN_NAME_EXPORTCSV")) {
 	define('_PLUGIN_NAME_EXPORTCSV', 'exportcsv');
 }
@@ -30,6 +34,14 @@ function acces_interdit() {
 	debut_gauche();
 	debut_droite();
 	echo "<strong>"._T('avis_acces_interdit')."</strong>"
+	.fin_gauche().fin_page();
+	exit;
+}
+function acces_probleme($msg) {
+	debut_page(_T($msg), "documents", _PLUGIN_NAME_EXPORTCSV);
+	debut_gauche();
+	debut_droite();
+	echo "<strong>"._T($msg)."</strong>"
 	.fin_gauche().fin_page();
 	exit;
 }

@@ -21,7 +21,7 @@ function exec_exportcsv() {
 		acces_interdit();
 	}
 
-	$out = unicode2charset(charset2unicode(exportcsv_make()), 'iso-8859-1');
+	$out = unicode2charset(charset2unicode(exportcsv_make()), 'utf-8');
 
 	$nom_fich = _PLUGIN_NAME_EXPORTCSV."_".date("Y-m-d").".csv";
 

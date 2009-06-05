@@ -88,7 +88,7 @@ icone_horizontale (_T('exportcsv:extraction_data_back'), generer_url_ecrire('exp
 	<ul id="listerub">
 	<BOUCLE_racine(RUBRIQUES) {tout} {racine}{par titre}>
 	
-		<li class="racine"><label class="racine" id="r#ID_RUBRIQUE" title="Toutes les sous-rubriques seront s&eacute;lectionn&eacute;es">
+		<li class="racine" title="<:exportcsv:toutes_selectionnees:>"><label class="racine" id="r#ID_RUBRIQUE">
 			<input type="checkbox" name="secteur[]" value="#ID_RUBRIQUE" <?php is_checked('secteur', '#ID_RUBRIQUE'); ?>/>
 			[(#TITRE|supprimer_numero)] <small>(#EXCSV_STATUT{id_rubrique})</small></label>
 		<B_rub><ul>
@@ -124,13 +124,13 @@ icone_horizontale (_T('exportcsv:extraction_data_back'), generer_url_ecrire('exp
 			<ul class="racine">
 				<li><label>
 				<input type="checkbox" name="rubriques_a_titre" [checked="(#ENV{rubriques_a_titre})"] />
-				Titre</label></li>
+				<:exportcsv:titre:></label></li>
 				<li><label>
 				<input type="checkbox" name="rubriques_b_descriptif" [checked="(#ENV{rubriques_b_descriptif})"] />
-				Descriptif</label></li>      
+				<:exportcsv:descriptif:></label></li>      
 				<li><label>
 				<input type="checkbox" name="rubriques_c_texte" [checked="(#ENV{rubriques_c_texte})"] />
-				Texte</label></li>
+				<:ecrire:info_texte:></label></li>
 			</ul>		
 		</fieldset>
 	
@@ -138,56 +138,58 @@ icone_horizontale (_T('exportcsv:extraction_data_back'), generer_url_ecrire('exp
 
 			<ul class="racine">
 				<li><label>
-				<input type="checkbox" name="articles_a_titre" [checked="(#ENV{articles_a_titre})"] />
-				Titre</label></li>
+				<input type="checkbox" name="articlestitre" checked="checked" disabled="disabled" />
+				<:exportcsv:titre:></label>
+				<input type="hidden" name="articles_a_titre" value="1" /></li>
 				
 				<li><label>
 				<input type="checkbox" name="articles_f_texte" [checked="(#ENV{articles_f_texte})"] />
-				Texte</label></li>
+				<:ecrire:info_texte:></label></li>
 
 				<li><label>
-				<input type="checkbox" name="articles_j_date" [checked="(#ENV{articles_i_date})"] />
-				Date</label></li>
+				<input type="checkbox" name="articles_j_date" [checked="(#ENV{articles_j_date})"] />
+				<:exportcsv:date:></label></li>
+				
 [(#REM) on verra plus tard
 				<li><label>
-				<input type="checkbox" name="articles_k_auteur" [checked="(#ENV{articles_j_auteur})"] />
-				Auteur</label></li>
+				<input type="checkbox" name="articles_k_auteurs" [checked="(#ENV{articles_k_auteurs})"] />
+				<:exportcsv:auteurs:></label></li>
 ]
 <?php   if($GLOBALS['meta']['articles_surtitre'] == 'oui') { ?>
 				<li><label>
 				<input type="checkbox" name="articles_b_surtitre" [checked="(#ENV{articles_b_surtitre})"] />
-				Sur-titre</label></li>
+				<:ecrire:texte_sur_titre:></label></li>
 
 <?php } 
 		if($GLOBALS['meta']['articles_soustitre'] == 'oui') { ?>
 				<li><label>
 				<input type="checkbox" name="articles_c_soustitre" [checked="(#ENV{articles_c_soustitre})"] />
-				Sous-titre</label></li>
+				<:ecrire:texte_sous_titre:></label></li>
 
 <?php }
 		if($GLOBALS['meta']['articles_descriptif'] == 'oui') { ?>
 				<li><label>
 				<input type="checkbox" name="articles_d_descriptif" [checked="(#ENV{articles_d_descriptif})"] />
-				Descriptif</label></li>
+				<:exportcsv:descriptif:></label></li>
 
 <?php } 
 		if($GLOBALS['meta']['articles_chapeau'] == 'oui') { ?>
 				<li><label>
 				<input type="checkbox" name="articles_e_chapo" [checked="(#ENV{articles_e_chapo})"] />
-				Chapeau</label></li>
+				<:ecrire:info_chapeau:></label></li>
 <?php }
 		if($GLOBALS['meta']['articles_ps'] == 'oui') { ?>
 				<li><label>
 				<input type="checkbox" name="articles_g_ps" [checked="(#ENV{articles_g_ps})"] />
-				Post-Scriptum</label></li>
+				<:ecrire:info_post_scriptum:></label></li>
 <?php }
 		if($GLOBALS['meta']['articles_urlref'] == 'oui') { ?>
 				<li><label>
-				<input type="checkbox" name="articles_h_nomsite" [checked="(#ENV{articles_h_urlref})"] />
-				Lien : nom</label></li>
+				<input type="checkbox" name="articles_h_nom_site" [checked="(#ENV{articles_h_nom_site})"] />
+				<:exportcsv:lien_nom:></label></li>
 				<li><label>
-				<input type="checkbox" name="articles_i_urlsite" [checked="(#ENV{articles_h_urlref})"] />
-				Lien : U.R.L</label></li>
+				<input type="checkbox" name="articles_i_url_site" [checked="(#ENV{articles_i_url_site})"] />
+				<:exportcsv:lien_url:></label></li>
 				
 <?php } ?>
 			</ul>

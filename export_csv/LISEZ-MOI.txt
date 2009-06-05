@@ -5,9 +5,22 @@
 	License GNU/GPL
 -----------------------------------------
 -----------------------------------------
-	version 0.2 en test pour SPIP 1.9.2d
+	version 0.2 en test pour SPIP 1.9.2
 -----------------------------------------
 
+-----------------------------------------
+	PRÉSENTATION
+-----------------------------------------
+	Export au format tableur CSV des articles pour publication papier
+	Extrait certaines données saisies dans SPIP à des fins de publication papier et/ou de publipostage
+	Ce plugin est axé sur les articles SPIP. Il exporte au choix de l’utilisateur les éléments les composants (titre, sous-titre, texte, p.s...) ainsi que :
+    * leur rubrique (et ses éléments la composant)
+    * les mots-clés associés (titre et nom du groupe) :
+          o aux rubriques
+          o aux articles
+    * les pétitions
+    
+    voir http://www.spip-contrib.net/Export-CSV-des-articles-pour
 
 -----------------------------------------
 	INSTALLATION :
