@@ -313,18 +313,8 @@ function exportcsv_make($return = true) {
 function exportcsv_make_petition($id_article) {
 	# éléments d'écriture des lignes CSV
 	global $tr, $l, $g, $gg, $gd, $th, $ht,	$d, $s, $g, $d, $g, $prefix_t;
-/*
-$tr = "";
-$l = chr(13).chr(10);
-$g = $gg = $gd = $th = $ht = '"';
-$d = ';';
-$s = $g.$d.$g;
-*/	
-	
-	# spécifique FAPT
-	$titre_col = array('nom_email', 'ad_email', 'message', 'metier', 'ville', 'dept');
-# base 
-#	$titre_col = array('nom_email', 'ad_email', 'nom_site', 'url_site', 'message');
+
+	$titre_col = array('nom_email', 'ad_email', 'nom_site', 'url_site', 'message');
 
 	$nb_col = count($titre_col);
 	
@@ -334,11 +324,7 @@ $s = $g.$d.$g;
 	
 	if(is_numeric($id_article)) {
 
-		# spécifique FAPT
-		$sql = "SELECT nom_email, ad_email, message, metier, ville, dept 
-		FROM ".$prefix_t."signatures WHERE id_article=".$id_article." AND statut='publie'";
-		# base
-#		$sql = "SELECT * FROM spip_signatures WHERE id_article=".$id_article." AND statut='publie'";
+		$sql = "SELECT * FROM spip_signatures WHERE id_article=".$id_article." AND statut='publie'";
 		
 		$req = spip_query($sql);
 		$num = spip_num_rows($req);
