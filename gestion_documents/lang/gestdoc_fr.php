@@ -18,10 +18,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_copier_local'=>'Copier dans le site',
 	'bouton_download_depuis'=>'depuis&nbsp:',
 	'bouton_download_local' => 'mon ordinateur',
+	'bouton_dowload_par_mediatheque' => 'la mediath&egrave;que',
 	'bouton_dowload_par_ftp' => 'le serveur',
 	'bouton_dowload_sur_le_web' => 'internet',
-	'bouton_enlever_document' => 'Enlever ce document',
-	'bouton_enlever_supprimer_document' => 'Supprimer ce document',
+	'bouton_enlever_document' => 'Detacher',
+	'bouton_enlever_supprimer_document' => 'Supprimer',
+	'bouton_modifier_document' => 'Modifier',
+	'bouton_parcourir' => 'Parcourir...',
 	'bouton_remplacer_image' => 'Remplacer cette image',
 	'bouton_remplacer_document' => 'Remplacer ce document',
 	'bouton_remplacer_image_document' => 'Remplacer par une image ou un document',
@@ -48,9 +51,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'document_copie_locale_succes' => 'Le fichier a bien &eacute;t&eacute; copi&eacute; dans le site',
 	'nb_documents_installe_succes' => '@nb@ fichiers charg&eacute;s avec succ&egrave;s',
 	'document_vu' => 'Ins&eacute;r&eacute; dans le texte',
+	'document_attache_succes' => 'Le document a bien &eacute;t&eacute; ajout&eacute;',
 	
 	// E
 	'erreur_indiquez_un_fichier'=>'Indiquez un fichier !',
+	'erreur_aucun_document'=>'Ce document n\'existe pas dans la mediath&egrave;que',
 	'erreur_aucun_fichier'=>'Aucun fichier n\'a &eacute;t&eacute; trouv&eacute;',
 	'erreur_upload_type_interdit'=> "Le telechargement des fichiers du type de @nom@ n'est pas autoris&eacute;",
 	'erreur_chemin_ftp'=>'Le fichier indiqu&eacute; n\'a pas &eacute;t&eacute; trouv&eacute; sur le serveur',
@@ -76,6 +81,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	// L
 	'logo' => 'Logo',
+	'label_id_joindre' => 'Document',
 	'label_id_parents' => 'Ce document est li&eacute; &agrave;',
 	'label_fichier' => 'Fichier',
 	'label_fichier_vignette' => 'Vignette',
@@ -107,6 +113,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'un_audio'=>'1 bande son',
 	'un_video'=>'1 s&eacute;quence',
 	'une_utilisation'=>'1 utilisation',
+	'upload_info_mode_document' => 'Deposer dans le portfolio',
+	'upload_info_mode_image' => 'Retirer du portfolio',
 	
 	//
 	'verifier_documents_brises' => 'V&eacute;rifier les fichiers manquants',

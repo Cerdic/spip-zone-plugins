@@ -26,7 +26,7 @@ function joindre_determiner_mode($mode,$id_document,$objet){
 }
 
 
-function formulaires_joindre_document_charger_dist($id_document='new',$id_objet=0,$objet='',$mode = 'auto'){
+function formulaires_joindre_document_charger_dist($id_document='new',$id_objet=0,$objet='',$mode = 'auto',$colonne = false){
 	$valeurs = array();
 	$mode = joindre_determiner_mode($mode,$id_document,$objet);
 	
@@ -34,7 +34,7 @@ function formulaires_joindre_document_charger_dist($id_document='new',$id_objet=
 	$valeurs['mode'] = $mode;
 	
 	$valeurs['url'] = 'http://';
-	$valeurs['fichier'] = '';
+	$valeurs['fichier_upload'] = '';
 	
 	$valeurs['_options_upload_ftp'] = '';
 	$valeurs['_dir_upload_ftp'] = '';
@@ -42,6 +42,7 @@ function formulaires_joindre_document_charger_dist($id_document='new',$id_objet=
 	$valeurs['joindre_upload']=''; 
 	$valeurs['joindre_distant']=''; 
 	$valeurs['joindre_ftp']='';
+	$valeurs['joindre_mediatheque']='';
 	
 	# regarder si un choix d'upload FTP est possible
 	if (
@@ -60,6 +61,15 @@ function formulaires_joindre_document_charger_dist($id_document='new',$id_objet=
 				$valeurs['_dir_upload_ftp'] = "<b>".joli_repertoire($dir)."</b>";
 		}
 	}
+
+	if ($colonne){
+		# colonne documents ?
+		$valeurs['id_objet'] = $id_objet;
+		$valeurs['objet'] = $objet;
+		$valeurs['_colonne'] = ' ';
+		$valeurs['id_joindre'] = '';
+	}
+
 	
 	return $valeurs;
 }
@@ -69,76 +79,95 @@ function formulaires_joindre_document_verifier_dist($id_document='new',$id_objet
 	include_spip('inc/joindre_document');
 	
 	$erreurs = array();
-	$files = joindre_trouver_fichier_envoye();
-	if (is_string($files)){
-		$erreurs['message_erreur'] = $files;
+	// on joint un document deja dans le site
+	if (_request('joindre_mediatheque')){
+		$id_joindre = intval(preg_replace(',^(doc|document|img),','',_request('id_joindre')));
+		if (!sql_getfetsel('id_document','spip_documents','id_document='.intval($id_joindre)))
+			$erreurs['message_erreur'] = _T('gestdoc:erreur_aucun_document');
 	}
-	elseif(is_array($files)){
-		// erreur si on a pas trouve de fichier
-		if (!count($files))
-			$erreurs['message_erreur'] = _T('gestdoc:erreur_aucun_fichier');
-		
-		else{
-			// regarder si on a eu une erreur sur l'upload d'un fichier
-			foreach($files as $file){
-				if (isset($file['error'])
-				  AND $test = joindre_upload_error($file['error'])){
-				  	if (is_string($test))
-				  		$erreurs['message_erreur'] = $test;
-				  	else
-							$erreurs['message_erreur'] = _T('gestdoc:erreur_aucun_fichier');
+	// sinon c'est un upload
+	else {
+		$files = joindre_trouver_fichier_envoye();
+		if (is_string($files)){
+			$erreurs['message_erreur'] = $files;
+		}
+		elseif(is_array($files)){
+			// erreur si on a pas trouve de fichier
+			if (!count($files))
+				$erreurs['message_erreur'] = _T('gestdoc:erreur_aucun_fichier');
+
+			else{
+				// regarder si on a eu une erreur sur l'upload d'un fichier
+				foreach($files as $file){
+					if (isset($file['error'])
+						AND $test = joindre_upload_error($file['error'])){
+							if (is_string($test))
+								$erreurs['message_erreur'] = $test;
+							else
+								$erreurs['message_erreur'] = _T('gestdoc:erreur_aucun_fichier');
+					}
+				}
+
+				// si ce n'est pas deja un post de zip confirme
+				// regarder si il faut lister le contenu du zip et le presenter
+				if (!count($erreurs)
+				 AND !_request('joindre_zip')
+				 AND $contenu_zip = joindre_verifier_zip($files)){
+					list($fichiers,$erreurs,$tmp_zip) = $contenu_zip;
+					$erreurs['lister_contenu_archive'] = recuperer_fond("formulaires/inc-lister_archive_jointe",array('chemin_zip'=>$tmp_zip,'liste_fichiers_zip'=>$fichiers,'erreurs_fichier_zip'=>$erreurs));
 				}
 			}
-			
-			// si ce n'est pas deja un post de zip confirme
-			// regarder si il faut lister le contenu du zip et le presenter
-			if (!count($erreurs)
-			 AND !_request('joindre_zip') 
-			 AND $contenu_zip = joindre_verifier_zip($files)){
-				list($fichiers,$erreurs,$tmp_zip) = $contenu_zip;
-				$erreurs['lister_contenu_archive'] = recuperer_fond("formulaires/inc-lister_archive_jointe",array('chemin_zip'=>$tmp_zip,'liste_fichiers_zip'=>$fichiers,'erreurs_fichier_zip'=>$erreurs));
-			}
 		}
+
+		if (count($erreurs) AND defined('_tmp_dir'))
+			effacer_repertoire_temporaire(_tmp_dir);
 	}
-	
-	if (count($erreurs) AND defined('_tmp_dir'))
-		effacer_repertoire_temporaire(_tmp_dir);
 	
 	return $erreurs;
 }
 
 
 function formulaires_joindre_document_traiter_dist($id_document='new',$id_objet=0,$objet='',$mode = 'auto'){
-	$ajouter_documents = charger_fonction('ajouter_documents', 'action');
+	$res = array('editable'=>true);
+	// on joint un document deja dans le site
+	if (_request('joindre_mediatheque')){
+		if ($id_joindre = intval(preg_replace(',^(doc|document|img),','',_request('id_joindre')))){
+			// lier le parent
+			$champs = array('id_parents' => array("$objet|$id_objet"));
+			include_spip('action/editer_document');
+			document_set($id_joindre,$champs);
+			set_request('id_joindre',''); // vider la saisie
+			$res['message_ok'] = _T('gestdoc:document_attache_succes');
+		}
+	}
+	// sinon c'est un upload
+	else {
+		$ajouter_documents = charger_fonction('ajouter_documents', 'action');
 
-	$mode = joindre_determiner_mode($mode,$id_document,$objet);
-	include_spip('inc/joindre_document');
-	$files = joindre_trouver_fichier_envoye();
+		$mode = joindre_determiner_mode($mode,$id_document,$objet);
+		include_spip('inc/joindre_document');
+		$files = joindre_trouver_fichier_envoye();
 
-	$nouveaux_doc = action_ajouter_documents_dist($id_document,$files,$objet,$id_objet,$mode);
+		$nouveaux_doc = action_ajouter_documents_dist($id_document,$files,$objet,$id_objet,$mode);
 
-	if (defined('_tmp_dir'))
-		effacer_repertoire_temporaire(_tmp_dir);
-	
-	// checker les erreurs eventuelles
-	$messages_erreur = array();
-	$nb_docs = 0;
-	foreach ($nouveaux_doc as $doc) {
-		if (!is_numeric($doc))
-			$messages_erreur[] = $doc;
-		else 
-			$nb_docs++;
+		if (defined('_tmp_dir'))
+			effacer_repertoire_temporaire(_tmp_dir);
+
+		// checker les erreurs eventuelles
+		$messages_erreur = array();
+		$nb_docs = 0;
+		foreach ($nouveaux_doc as $doc) {
+			if (!is_numeric($doc))
+				$messages_erreur[] = $doc;
+			else
+				$nb_docs++;
+		}
+		if (count($messages_erreur))
+			$res['message_erreur'] = implode('<br />',$messages_erreur);
+		if ($nb_docs)
+			$res['message_ok'] = $nb_docs==1? _T('gestdoc:document_installe_succes'):_T('gestdoc:nb_documents_installe_succes',array('nb'=>$nb_docs));
 	}
 	
-	$res = array('editable'=>true);
-	if (count($messages_erreur))
-		$res['message_erreur'] = implode('<br />',$messages_erreur);
-	if ($nb_docs)
-		$res['message_ok'] = $nb_docs==1? _T('gestdoc:document_installe_succes'):_T('gestdoc:nb_documents_installe_succes',array('nb'=>$nb_docs));
-	
-	// todo : 
-	// generer les case docs si c'est necessaire
-	// rediriger sinon
 	return $res;
 }
 

@@ -46,6 +46,21 @@ function exec_documents_edit_args($id_document, $id_parent, $new){
 
 function documents_edit_ok($row, $id_document, $id_parent, $new)
 {
+
+	if (defined('_AJAX') AND _AJAX){
+		$contexte = array(
+		'redirect'=>'',//generer_url_ecrire("portfolio"),
+		'new'=>$new == "oui"?$new:$id_document,
+		'id_parent'=>$id_parent,
+		'config_fonc'=>'documents_edit_config',
+		'fichier'=>$row['fichier']
+		);
+
+		include_spip('inc/actions');
+		ajax_retour(recuperer_fond("prive/editer/document_popup", $contexte));
+		return;
+	}
+
 	if ($new != 'oui') {
 		$id_document=$row['id_document'];
 		$titre=$row['titre']?$row['titre']:$row['fichier'];

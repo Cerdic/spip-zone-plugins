@@ -40,6 +40,11 @@
 		<nom>affiche_gauche</nom>
 		<inclure>gestdoc_pipelines.php</inclure>
 	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<action>modalbox_insert_head</action>
+		<inclure>modalbox/modalbox_pipelines.php</inclure>
+	</pipeline>
 
 	<pipeline>
 		<nom>autoriser</nom>
@@ -52,4 +57,5 @@
 	</bouton>	
 	<necessite id="SPIP" version="[2.0.0;]" />
 	<necessite id="spip_bonux" version="[1.6;]" />
+	<utilise id="fancybox" version="[0.2;]" />
 </plugin>

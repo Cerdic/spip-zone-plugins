@@ -1,5 +1,6 @@
 #SET{self,#SELF|parametre_url{debut_galerie,''}}
 #SET{self,#GET{self}|parametre_url{extension,''}}
+#SET{editable,#ENV{editable,' '}|oui}
 
 <div class='onglets_simple'>
 <ul class='medias'>
@@ -36,7 +37,7 @@
 <div class='nettoyeur'></div>
 </div>
 
-
+[(#GET{editable})
 <div class='actions'>
 [(#ENV{brise,0}|oui)
 [(#URL_ACTION_AUTEUR{verifier_documents_brises,'1',#GET{self}}|aoustrong{<:gestdoc:verifier_documents_brises:>,0,ajax})]
@@ -44,8 +45,7 @@
 [
 (#INCLURE{fond=prive/inc-ajouter-documents}{env}{ajax})
 ]
-
-</div>
+</div>]
 
 <B_types>
 <ul class='choix-type'>
@@ -127,8 +127,12 @@
 			[<div class="descriptif #EDIT{descriptif}">(#DESCRIPTIF)</div>]
 			[<p class="credits #EDIT{credits}">(#CREDITS)</p>]
 		</td>
-		<td>[(#AUTORISER{modifier,document,#ID_DOCUMENT})&#91;<a href='#URL_ECRIRE{documents_edit,id_document=#ID_DOCUMENT}'><:bouton_modifier:></a>&#93;]
+		<td>
+		[(#GET{editable})
+		[(#AUTORISER{modifier,document,#ID_DOCUMENT})&#91;<a href='#URL_ECRIRE{documents_edit,id_document=#ID_DOCUMENT}'><:bouton_modifier:></a>&#93;]
 		[<span class='supprimer'>(#GET{supprimer}|et{#AUTORISER{supprimer,document,#ID_DOCUMENT}})[(#BOUTON_ACTION{<:gestdoc:bouton_supprimer:>,#URL_ACTION_AUTEUR{supprimer_document,#ID_DOCUMENT,#SELF},ajax})]</span>]
+		]
+		[<span class="choisir"><a href="#" onclick="(#ENV{selectfunc,''})([(#ID_DOCUMENT)]);return false;"><:bouton_choisir:></a></span>]
 		</td>
 	</tr>
 	</BOUCLE_galerie>

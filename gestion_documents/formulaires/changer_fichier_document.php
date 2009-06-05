@@ -16,9 +16,11 @@ function formulaires_changer_fichier_document_charger_dist($id_document){
 	$valeurs = sql_fetsel('id_document,fichier,distant','spip_documents','id_document='.intval($id_document));
 	if (!$valeurs)
 		return array('editable'=>false);
-		
-	$valeurs['_hidden'] = "<input name='id_document' value='$id_document' type='hidden' />";
-	$valeurs['mode'] = 'choix';
+
+	$charger = charger_fonction('charger','formulaires/joindre_document');
+	$valeurs = array_merge($valeurs,$charger($id_document,0,'','choix'));
+
+	$valeurs['_hidden'] .= "<input name='id_document' value='$id_document' type='hidden' />";
 	
 	return $valeurs;
 }

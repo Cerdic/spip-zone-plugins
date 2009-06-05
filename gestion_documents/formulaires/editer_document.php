@@ -14,6 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/actions');
 include_spip('inc/editer');
+include_spip('inc/documents');
 
 function formulaires_editer_document_charger_dist($id_document='new', $id_parent='', $retour='', $lier_trad=0, $config_fonc='documents_edit_config', $row=array(), $hidden=''){
 	$valeurs = formulaires_editer_objet_charger('document',$id_document,$id_parent,$lier_trad,$retour,$config_fonc,$row,$hidden);
@@ -58,6 +59,14 @@ function formulaires_editer_document_charger_dist($id_document='new', $id_parent
 		}
 	}
 
+
+	// pour l'upload d'un nouveau doc
+	if ($valeurs['fichier']){
+		$charger = charger_fonction('charger','formulaires/joindre_document');
+		$valeurs = array_merge($valeurs,$charger($id_document,0,'','choix'));
+		$valeurs['_hidden'] .= "<input name='id_document' value='$id_document' type='hidden' />";
+	}
+
 	return $valeurs;
 }
 
@@ -75,8 +84,17 @@ function documents_edit_config($row)
 }
 
 function formulaires_editer_document_verifier_dist($id_document='new', $id_parent='', $retour='', $lier_trad=0, $config_fonc='documents_edit_config', $row=array(), $hidden=''){
-	
 	$erreurs = formulaires_editer_objet_verifier('document',$id_document,is_numeric($id_document)?array():array('titre'));
+
+	// verifier l'upload si on a demande a changer le document
+	if (_request('joindre_upload') OR _request('joindre_ftp') OR _request('joindre_distant')){
+		if (_request('copier_local')){
+		}
+		else {
+			$verifier = charger_fonction('verifier','formulaires/joindre_document');
+			$erreurs = array_merge($erreurs,$verifier($id_document));
+		}
+	}
 
 	if (!$date = recup_date(_request('saisie_date').' '._request('saisie_heure').':00')
 	  OR !($date = mktime($date[3],$date[4],0,$date[1],$date[2],$date[0])))
@@ -94,7 +112,7 @@ function formulaires_editer_document_verifier_dist($id_document='new', $id_paren
 function formulaires_editer_document_traiter_dist($id_document='new', $id_parent='', $retour='', $lier_trad=0, $config_fonc='documents_edit_config', $row=array(), $hidden=''){
 	if (is_null(_request('id_parents')))
 		set_request('id_parents',array());
-
+	
 	// verifier les infos de taille et dimensions sur les fichiers locaux
 	// cas des maj de fichier directes par ftp
 	foreach(array('taille','largeur','hauteur') as $c)
@@ -103,10 +121,32 @@ function formulaires_editer_document_traiter_dist($id_document='new', $id_parent
 	}
 
 	$res = formulaires_editer_objet_traiter('document',$id_document,$id_parent,$lier_trad,$retour,$config_fonc,$row,$hidden);
+
+	if (_request('joindre_upload') OR _request('joindre_ftp') OR _request('joindre_distant')){
+		if (_request('copier_local')){
+			$copier_local = charger_fonction('copier_local','action');
+			$res = array('editable'=>true);
+			if (($err=$copier_local($id_document))===true)
+				$res['message_ok'] = (isset($res['message_ok'])?$res['message_ok'].'<br />':'')._T('gestdoc:document_copie_locale_succes');
+			else
+				$res['message_erreur'] = (isset($res['message_erreur'])?$res['message_erreur'].'<br />':'').$err;
+		}
+		else {
+			// liberer le nom de l'ancien fichier pour permettre le remplacement par un fichier du meme nom
+			if ($ancien_fichier = sql_getfetsel('fichier','spip_documents','id_document='.intval($id_document))
+				AND @file_exists($f = get_spip_doc($ancien_fichier))){
+				spip_unlink($f);
+			}
+			$traiter = charger_fonction('traiter','formulaires/joindre_document');
+			$res2 = $traiter($id_document);
+		}
+	}
+
 	if (!isset($res['redirect']))
 		$res['editable'] = true;
 	if (!isset($res['message_erreur']))
 		$res['message_ok'] = _L('Votre modification a &eacute;t&eacute; enregistr&eacute;e');
+
 	return $res;
 }
 

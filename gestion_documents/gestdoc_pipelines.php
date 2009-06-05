@@ -31,13 +31,15 @@ function gestdoc_post_edition($flux){
 }
 
 function gestdoc_affiche_gauche($flux){
-	/*
-	if ($flux['args']['exec']=='articles_edit'){
-		if (!$id_article=intval($flux['args']['id_article'])){
-			$id_article = 0-$GLOBALS['visiteur_session']['id_auteur'];
-		}
-		$flux['data'] .= recuperer_fond('prive/editer/colonne_document',array('objet'=>'article','id_objet'=>$id_article));
+	
+	if (in_array($flux['args']['exec'],array('articles_edit','breves_edit','rubriques_edit'))
+		AND $table = preg_replace(",_edit$,","",$flux['args']['exec'])
+		AND $type = objet_type($table)
+		AND $id_table_objet = id_table_objet($type)
+		AND ($id = intval($flux['args'][$id_table_objet]) OR $id = 0-$GLOBALS['visiteur_session']['id_auteur'])
+	  AND (autoriser('joindredocument',$type,$id))){
+		$flux['data'] .= recuperer_fond('prive/editer/colonne_document',array('objet'=>$type,'id_objet'=>$id));
 	}
-	*/
+	
 	return $flux;
 }

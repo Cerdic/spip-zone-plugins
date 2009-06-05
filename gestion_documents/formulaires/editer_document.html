@@ -7,11 +7,25 @@
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 	  <input type='hidden' name='id_document' value='#ENV{id_document}' />
+	  <div style="display:none;"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></div>
 	  <ul>
+			[<li class="editer_fichier[ (#ENV**{erreurs}|table_valeur{fichier}|oui)erreur]">
+				<label for="fichier"><:gestdoc:label_fichier:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{fichier})</span>
+				]
+				(#ENV{fichier})
+				<p class='actions'>
+				[(#ENV{distant}|=={oui}|oui)  <input type='submit' class='submit' name='copier_local' value='<:gestdoc:bouton_copier_local|attribut_html:>' />]
+				&#91;<a href='#' onclick='jQuery("#changer_fichier_document").toggle("fast");return false;'><:bouton_changer:></a>&#93;
+				</p>
+				<div id='changer_fichier_document' style='display:none;'>
+				[(#INCLURE{fond=formulaires/inc-upload_document}{env})]
+				</div>
+	    </li>]
 	  	<li>
 		  	<label><:gestdoc:label_apercu:></label>
 		  	[(#ENV{apercu}|oui)[<a href='#ENV{apercu}'>(#ENV{apercu}|image_reduire{300,200})</a>]]
-		  	[(#ENV{apercu}|non)[(#MODELE{doc,id_document,hauteur=200,largeur=300}|extraire_balise{a})]]
+		  	[(#ENV{apercu}|non)[(#MODELE{doc,id_document=#ENV{id_document,''},hauteur=200,largeur=300}|extraire_balise{a})]]
 	  	</li>
 	  	<li>
 		  	<label><:gestdoc:label_caracteristiques:></label>

@@ -99,16 +99,19 @@ a.bouton_fermer {display:block;text-align:#GET{right};}
 
 p.actions {clear:both;}
 
-#documents_joints li.item {text-align:center;margin-bottom:10px;padding:15px 0 0;border-top:1px solid #ddd;}
+#documents_joints {margin-top:25px;}
+#documents_joints li.item {text-align:center;margin-bottom:25px;padding:0;border:1px solid #GET{foncee};overflow:visible;}
 #documents_joints li.item.image {background:#fff;}
 #documents_joints li.item.document {background:#ddd;}
 #documents_joints li.item .infos {padding:6px;}
-#documents_joints li.item .titrem {text-align:left;background:#GET{foncee};padding:5px;padding-left:16px;font-weight:bold;margin-bottom:5px;position:relative;font-size:x-small;}
+#documents_joints li.item span.mode {display:block;float:right;}
+#documents_joints li.item .titrem {margin-top:0px;text-align:left;background:#GET{foncee};padding:5px;padding-left:16px;font-weight:bold;margin-bottom:5px;position:relative;font-size:x-small;}
 #documents_joints li.item .titrem .fichier {color:#fff;}
 #documents_joints li.item .titrem .titre {display:block;color:#000;}
-#documents_joints li.item .titrem .cadre-icone {}
+#documents_joints li.item .titrem .image_loading {position:absolute;bottom:-20px;right:0;}
 #documents_joints li.item .type {font-size:x-small;}
 #documents_joints li.item .raccourcis {font-size:x-small;padding:2px;}
 #documents_joints li.item .raccourcis span {display:block;font-weight:bold;text-align:left;}
 
+[(#INCLURE{fond=modalbox/style_prive_plugin_modalbox}{env})]
 [(#REM)</style>]
