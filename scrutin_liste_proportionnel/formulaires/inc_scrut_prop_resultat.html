@@ -1,0 +1,26 @@
+<ul>
+    <li>Inscrits : [(#ENV{message_ok}|table_valeur{inscrits})]</li>
+    <li>Participation : [(#ENV{message_ok}|table_valeur{votants_pc})] % ([(#ENV{message_ok}|table_valeur{votants}) votants])</li>
+    <li>Blancs ou nuls : [(#ENV{message_ok}|table_valeur{blancs_pc}) % ] ([(#ENV{message_ok}|table_valeur{blancs}) blancs ou nuls])</li>
+    <li>Exprimés : [(#ENV{message_ok}|table_valeur{exprimes})] </li> 
+    <li>Seuil pour avoir des élus : [(#ENV{message_ok}|table_valeur{quota})] voix (arrondis au nombre inférieur)  [((#ENV{message_ok}|table_valeur{quota_pc}) % des exprimés)]</li>
+    <li>Sièges : [(#ENV{message_ok}|table_valeur{sieges})]</li>
+    <li>[(#ENV{message_ok}|table_valeur{restants})]</li>
+</ul>
+
+<B_pour>
+<table class="spip">
+<caption>Résultats</caption>
+<thead><tr class="row_first"><td>Liste</td><td>Voix</td><td>%</td><td>Sièges</td></tr></thead>
+<tbody>
+<BOUCLE_pour(POUR){tableau #ENV**{message_ok}|table_valeur{voix_pc}}>
+<tr [class="(#COMPTEUR_BOUCLE|alterner{row_even,row_odd})"]>
+    <td>#CLE</td>
+    <td>[(#ENV{message_ok}|table_valeur{voix_par_liste}|table_valeur{#CLE})]</td>
+    <td>#VALEUR</td>
+    <td>[(#ENV{message_ok}|table_valeur{sieges_par_liste}|table_valeur{#CLE})]</td>
+</tr>
+</BOUCLE_pour>
+</tbody>
+</table>
+</B_pour>

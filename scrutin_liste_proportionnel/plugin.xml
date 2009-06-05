@@ -1,0 +1,29 @@
+<plugin>
+	<nom>Scrutin de liste à la proportionnelle</nom>
+	<etat>test</etat>
+	<version>1.0</version>
+	<auteur>Ma&iuml;eul Rouquette
+GPL
+	</auteur>
+	<description>
+	Vous pouvez ins&eacute;rer dans un article un formulaire de la mani&egrave;re suivante.
+	<code><formulaire|scrut_prop|liste=A,B,C,...|></code>
+	ou A,B,C,... sont des noms de liste.
+	
+	Un formulaire apparait. Il propose :
+-* de remplir les voix pour chaque liste.
+-* de remplir le nombre de blanc ou nul.
+-* de remplir le nombre d'inscrits.
+-* de dire le nombre de si&egrave;ges &agrave; pourvoir.
+-* de dire si le scrutin se fait au plus fort reste ou &agrave; la plus forte moyenne.
+-* de fixer un seuil de voix (en pourcentage) &agrave; pour obtenir des si&egrave;ges (le nombre de voix est arrondis &agrave; l'inf&eacute;rieur.)
+	
+	Un fois rempli, le formulaire test si les valeurs sont coh&eacute;rentes (pas plus de votants que d'inscrits par exemple !). Puis il calcul la r&eacute;partition de si&egrave;ges.
+	
+	Necessite Spip-Bonux
+	</description>
+
+	<prefix>scrut_prop</prefix>
+	<necessite id="spip_bonux" />
+
+</plugin>

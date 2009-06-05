@@ -1,0 +1,78 @@
+  
+        <B_test>
+        <fieldset>
+        <legend>Résultats des listes</legend>
+        <ul>
+        [<li class='erreur'><span class="erreur_message">(#ENV**{erreurs}|table_valeur{pas_entiers})</span></li>]
+        [<li class='erreur'><span class="erreur_message">(#ENV**{erreurs}|table_valeur{voix_plus_inscrits})</span></li>]
+        [<li class='erreur'><span class="erreur_message">(#ENV**{erreurs}|table_valeur{quota_pas_nombre})</span></li>]
+        [<li class="erreur"><span class="erreur_message">(#ENV**{erreurs}|table_valeur{siege_pas_entier})</span></li>]
+        [<li class="erreur"><span class="erreur_message">(#ENV**{erreurs}|table_valeur{inscrits_nuls})</span></li>]
+        </ul>
+        <ul>
+        <BOUCLE_test(POUR){tableau #ENV*{liste}}>
+        
+        <li[(#ENV**{erreurs}|table_valeur{liste_fausse}|table_valeur{#VALEUR}|oui) class="erreur"]>
+        
+        <label[(#ENV**{erreurs}|table_valeur{liste_fausse}|table_valeur{#VALEUR}|oui) class="erreur_message"] for="#VALEUR">#VALEUR</label>
+        
+        <input[(#ENV**{erreurs}|table_valeur{liste_fausse}|table_valeur{#VALEUR}|oui) class="erreur_message"]  size="10" type="text" name="resultat[#VALEUR]" id="#VALEUR" [value="(#ENV**{erreurs}|table_valeur{resultats}|table_valeur{#VALEUR})"]  />
+        
+        </li>
+        </BOUCLE_test>
+        
+        
+        </ul>
+        </fieldset>
+        </B_test>
+        
+        <fieldset>
+        <legend>Participation</legend>
+        <ul>
+                <li[(#ENV**{erreurs}|table_valeur{liste_fausse}|table_valeur{blancs}|oui) class="erreur"]>
+            
+                    <label[(#ENV**{erreurs}|table_valeur{liste_fausse}|table_valeur{blancs}|oui) class="erreur_message"]  for="blancs">Blancs ou Nuls</label>
+                    
+                    <input[(#ENV**{erreurs}|table_valeur{liste_fausse}|table_valeur{blancs}|oui) class="erreur_message"]  size="10" type="text" name="resultat[blancs]" id="blancs" [value="(#ENV**{erreurs}|table_valeur{resultats}|table_valeur{blancs})"]  />
+                    
+                </li>
+                
+                <li[(#ENV**{erreurs}|table_valeur{liste_fausse}|table_valeur{inscrits}|ou{#ENV**{erreurs}|table_valeur{voix_plus_inscrits}}|ou{#ENV**{erreurs}|table_valeur{inscrits_nuls}}) class="erreur"]>
+            
+                    <label[(#ENV**{erreurs}|table_valeur{liste_fausse}|table_valeur{inscrits}|ou{#ENV**{erreurs}|table_valeur{voix_plus_inscrits}}|ou{#ENV**{erreurs}|table_valeur{inscrits_nuls}}) class="erreur_message"] for="inscrits">Inscrits</label>
+                    
+                    <input[(#ENV**{erreurs}|table_valeur{liste_fausse}|table_valeur{inscrits}|ou{#ENV**{erreurs}|table_valeur{voix_plus_inscrits}}|ou{#ENV**{erreurs}|table_valeur{inscrits_nuls}}) class="erreur_message"]  size="10" type="text" name="resultat[inscrits]" id="inscrits" [value="(#ENV**{erreurs}|table_valeur{resultats}|table_valeur{inscrits})"]  />
+                    
+</li>
+        </ul>
+        </fieldset>
+        
+        <fieldset>
+            <legend>Informations sur le scrutin</legend>
+            
+            <ul>
+                <li[(#ENV**{erreurs}|table_valeur{siege_pas_entier}|oui)  class="erreur"]>
+                <label[(#ENV**{erreurs}|table_valeur{siege_pas_entier}|oui) class="erreur_message"] for="siege">Nombre de sièges</label>
+                    <input[(#ENV**{erreurs}|table_valeur{siege_pas_entier}|oui) class="erreur_message"]  size="10" type="text" name="siege" id="siege" [value="(#ENV**{erreurs}|table_valeur{sieges})"]  />
+
+                </li>
+                
+                <li[(#ENV**{erreurs}|table_valeur{quota_pas_nombre}|oui)  class="erreur"]>
+                <label[(#ENV**{erreurs}|table_valeur{quota_pas_nombre}|oui) class="erreur_message"] for="quota">Seuil pour avoir des élus</label>
+                    <input[(#ENV**{erreurs}|table_valeur{quota_pas_nombre}|oui) class="erreur_message"]  size="10" type="text" name="quota" id="quota" [value="(#ENV**{erreurs}|table_valeur{quota})"]  /> % des exprimés
+
+                </li>
+                
+                <li>
+                <div class="choix">
+                    <label for="moyenne">Scrutin à la plus forte moyenne</label><input type="radio" name="repartition" value="moyenne" id="moyenne"  [(#ENV**{erreurs}|table_valeur{repartition}|=={moyenne}|or{#ENV**{erreurs}|table_valeur{repartition}|=={''}}|oui) checked="checked"] />
+                </div>
+                
+                 <div class="choix">
+                        <label for="reste">Scrutin au plus fort reste</label><input type="radio" name="repartition" value="reste" id="reste"  [(#ENV**{erreurs}|table_valeur{repartition}|=={reste}|oui) checked="checked"] />
+                </div>
+                
+                </li>
+            </ul>
+        </fieldset>
+        

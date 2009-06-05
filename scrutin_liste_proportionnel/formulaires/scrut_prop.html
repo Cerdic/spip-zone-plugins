@@ -1,0 +1,9 @@
+<div class="formulaire_spip">
+[(#ENV{message_ok}|non)<form action='#ENV{action}' method='post'>
+	#ACTION_FORMULAIRE{#ENV{action}}
+        <INCLURE{fond=formulaires/inc_scrut_prop}{env}>
+        
+        	<input type='submit' name='ok' value='ok' />
+</form>]
+[(#ENV{message_ok}|oui)<INCLURE{fond=formulaires/inc_scrut_prop_resultat}{env}>]
+</div>
