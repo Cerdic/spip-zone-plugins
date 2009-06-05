@@ -12,7 +12,7 @@
 		{obligatoire=non})] 
 ]
 <select name="police"[ class=" (#ENV{class})"]>
-	<option></option>
+	<option value="">[(#ENV{option_intro})]</option>
 	<BOUCLE_police(POUR){tableau #VAL{polices/}|find_all_in_path{\w+\.ttf}}{par cle}>
 		<option value="#CLE"[ (#ENV{valeur}|=={#CLE}|oui)selected="selected"]>#CLE</option>
 	</BOUCLE_police>
