@@ -15,6 +15,7 @@ if (lire_config("abonnement/environnement") != "test") {
  *
  */
 
+/*
 echo "Cette page simule la reponse de la banque et son traitement<hr />";
 // attention ne gardez pas ca en prod, c pour tester
 
@@ -26,13 +27,18 @@ $reponse_banque = "#ENV{reponse_banque}";
 
 list($produit,$id_auteur,$hash_article) = split("-",$texte_libre) ;
 
+
+
 if(traiter_message_banque($produit,$id_auteur, $reponse_banque, $hash_article)){
 echo "Merci, votre paiement &agrave &eacute;t&eacute; valid&eacute; <br /> Vous allez recevoir un email de confirmation";
 }
 else{
 echo "Ah, pas de chance, votre paiement n'&agrave pas &eacute;t&eacute; valid&eacute; <br /> contactez-nous pour r&eacute;gler ca";
 }
+*/
 ?>
+echo "Merci, votre paiement &agrave &eacute;t&eacute; valid&eacute; <br /> Vous allez recevoir un email de confirmation";
+echo "Ah, pas de chance, votre paiement n'&agrave pas &eacute;t&eacute; valid&eacute; <br /> contactez-nous pour r&eacute;gler ca";
 <p>
 
 <a href="#ENV{redirect}|sinon{#URL_SITE_SPIP/}">Retour</a>
