@@ -69,9 +69,11 @@ function formulaires_spip_listes_inscription_traiter_dist(){
 	$envoyer_mail = charger_fonction('envoyer_mail','inc');
 	$email_to = _request('email');
 	$email_from = _request('email');
-	$sujet = "Confirmation d'inscription";
-	$message = "coucou" ;
+	$sujet = _T('spiplistes:confirmation_inscription') ;
+	$message = _T('spiplistes:inscription_reponses_s', array('s' => $GLOBALS['meta']["nom_site"])) ;
+
 	$envoyer_mail($email_to,$sujet,$message,$email_from);
+	
 	return array('message_ok'=>'Votre demande a bien été prise en compte. Vous recevrez prochainement une confirmation.','editable' => false,);
 }
 
