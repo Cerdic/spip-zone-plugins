@@ -5,10 +5,11 @@
 	<auteur>Ma&iuml;eul Rouquette
 GPL
 	</auteur>
+	<lien>[->http://www.spip-contrib.net/Plugin-scrutin-de-liste-a-la]</lien>
 	<description>
 	Vous pouvez ins&eacute;rer dans un article un formulaire de la mani&egrave;re suivante.
-	&lt;formulaire|scrut_prop|liste=A,B,C,...|&gt;
-	ou A,B,C,... sont des noms de liste.
+	&lt;formulaire|scrut_prop|liste=A;B;C;...|&gt;
+	ou A;B;C,... sont des noms de liste.
 	
 	Un formulaire apparait. Il propose :
 -* de remplir les voix pour chaque liste.
@@ -20,7 +21,9 @@ GPL
 	
 	Un fois rempli, le formulaire test si les valeurs sont coh&eacute;rentes (pas plus de votants que d'inscrits par exemple !). Puis il calcul la r&eacute;partition de si&egrave;ges.
 	
-	Necessite Spip-Bonux
+	N&acute;c&acute;ssite Spip-Bonux
+	
+	Documentation compl&egrave;te sur [Contrib->http://www.spip-contrib.net/Plugin-scrutin-de-liste-a-la].
 	</description>
 
 	<prefix>scrut_prop</prefix>
