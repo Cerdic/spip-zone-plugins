@@ -73,11 +73,28 @@ function mes_fichiers_resumer_zip($zip) {
 		spip_log('*** MES_FICHIERS (mes_fichiers_resumer_zip) ERREUR '.$fichier_zip->errorInfo(true));
 	}
 	else {
+		$comment = unserialize($proprietes['comment']);
+		$liste = $comment['contenu'];
+		$id_auteur = $comment['auteur']; 
+
+		// On gere la compatibilite avec la structure des commentaires des versions < 0.2
+		$auteur = _T('mes_fichiers:message_zip_auteur_indetermine');
+		if ((!id_auteur) && (!$liste))
+			$liste = $comment;
+		else
+			if ($id_auteur) {
+				$select = array('nom');
+				$from = array('spip_auteurs AS t1');
+				$where = array('t1.id_auteur='.sql_quote($id_auteur));
+				$query_auteur = sql_select($select, $from, $where);
+				if ($row = sql_fetch($query_auteur))
+					$auteur = $row['nom'];
+			}
 		$resume .= _T('mes_fichiers:resume_zip_statut').' : '.$proprietes['status'].'<br />';
+		$resume .= _T('mes_fichiers:resume_zip_auteur').' : '.$auteur.'<br />';
 		$resume .= _T('mes_fichiers:resume_zip_compteur').' : '.$proprietes['nb'].'<br />';
 		$resume .= _T('mes_fichiers:resume_zip_contenu').' : '.'<br />';
 		$resume .= '<ul>';
-		$liste = unserialize($proprietes['comment']);
 		if ($liste)
 			foreach ($liste as $_fichier) {
 				$resume .= '<li>' . joli_repertoire($_fichier) . '</li>';

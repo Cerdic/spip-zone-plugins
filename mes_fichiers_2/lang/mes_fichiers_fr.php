@@ -34,9 +34,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'message_telechargement_nok' => 'Erreur lors du t&eacute;l&eacute;chargement.',
 'message_zip_propriete_nok' => 'Aucune propri&eacute;t&eacute; n\'est disponible sur cette archive.',
 'message_zip_sans_contenu' => 'Aucune information n\'est disponible sur le contenu de cette archive.',
+'message_zip_auteur_indetermine' => 'Non d&eacute;termin&eacute;',
+'message_zip_auteur_cron' => 'Tache automatique',
 
 // R
 'resume_table_telecharger' => 'Liste des archives disponibles au t&eacute;l&eacute;chargement',
+'resume_zip_auteur' => 'Cr&eacute;&eacute; par',
 'resume_zip_statut' => 'Statut',
 'resume_zip_compteur' => 'Fichiers / dossiers archiv&eacute;s',
 'resume_zip_contenu' => 'Contenu r&eacute;sum&eacute;',

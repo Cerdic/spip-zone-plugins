@@ -23,7 +23,8 @@ function action_mes_fichiers_sauver() {
 	if (!@is_dir(_DIR_MES_FICHIERS))
 		$dir = sous_repertoire(_DIR_TMP,"mes_fichiers");
 	$mes_fichiers = new PclZip(_DIR_MES_FICHIERS . 'mf2_'.date("Ymd_His").'.zip');
-	$erreur = $mes_fichiers->create($liste, PCLZIP_OPT_COMMENT, serialize($liste));
+	$comment = array('auteur' => $GLOBALS['visiteur_session']['id_auteur'], 'contenu' => $liste);
+	$erreur = $mes_fichiers->create($liste, PCLZIP_OPT_COMMENT, serialize($comment));
 	if ($erreur == 0) {
 		spip_log('*** MES_FICHIERS (action_mes_fichiers_sauver) ERREUR '.$mes_fichiers->errorInfo(true));
 		redirige_par_entete(generer_url_ecrire('mes_fichiers', 'etat=nok_sauve', true));

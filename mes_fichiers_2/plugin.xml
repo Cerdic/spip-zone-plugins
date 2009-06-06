@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Mes fichiers 2</nom>
 	<auteur>SarkASmeL, d'apr&egrave;s la version initiale de James</auteur>
-	<version>0.1</version>
+	<version>0.2</version>
 	<etat>dev</etat>
 	<licence>GPL 3</licence>
 	<icon>images/mes_fichiers-64.png</icon>
