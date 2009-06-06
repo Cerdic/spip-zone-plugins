@@ -48,20 +48,29 @@ function Player_affichage_final($flux){
 
 /**
  * enclosures
+ * ajout d'un rel="enclosure" sur les liens mp3
+ *
  */
 
-// Contrairement au plugin original (http://zone.spip.org/trac/spip-zone/browser/_plugins_branche_stable_/_spip_1_9_0_/dewplayer)
-// Cette version pour la version 1.9.1 utilisera la modification du modele doc pour traiter les adresses relatives 
-// qu'on retrouverait si on placerait un lien dans le texte par une balise <docXX>
-// ajout d'un rel="enclosure" simple sur les liens mp3
 function Player_post_propre($texte) {
 
 	$reg_formats="mp3";
-
-	//trouver des liens complets 
+	
+	/**
+	 * Ne pas traiter les liens relatifs possibles avec l'utilisation du modele doc 
+	 * pour traiter les adresses relatives d'une balise <docXX>)
+	 */ 
+	$url_absolue = "http:\/\/" ;
+	
+	/**
+	 * sinon traiter tous les liens - les relatifs et les absolus
+	 */
+	// $url_absolue = "" ;
+	
+	// trouver des liens mp3 dans la page et ajouter rel="enclosure"
 	$texte = preg_replace(
-		",<a(\s[^>]*href=['\"]?(http:\/\/[a-zA-Z0-9\s()\/\:\._%\?+'=~-]*\.($reg_formats))['\"]?[^>]*)>(.*)</a>,Uims",
-		'<a$1 rel="enclosure">$4</a>', 
+		",<a(\s[^>]*href=['\"]?(($url_absolue)[a-zA-Z0-9\s()\/\:\._%\?+'=~-]*\.($reg_formats))['\"]?[^>]*)>(.*)</a>,Uims",
+		'<a$1 rel="enclosure">$5</a>', 
 		$texte);
 	
 	return $texte;
