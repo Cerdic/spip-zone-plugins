@@ -2,7 +2,7 @@
 
 function formulaires_scrut_prop_charger_dist($liste){
     
-    $liste = explode(',',$liste);
+    $liste = explode(';',$liste);
 	
 	return array('liste'=>$liste);
 }
