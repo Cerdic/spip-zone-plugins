@@ -89,7 +89,7 @@ while($article = sql_fetch($r)) {
 			'type' => 'article',
 			'heure' => $heure,
 			'id' => $article['id_article'],
-			'title' => $date.' '.$datedebut.' '.$datefin.' '.$article['titre']);
+			'title' => $article['titre']);
 	}
 }
 
