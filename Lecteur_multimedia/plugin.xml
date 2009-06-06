@@ -13,8 +13,8 @@
 	Lecteur Multim&eacute;dia en Flash (MP3,flv)
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
-	<a href="http://trac.spip.org/trac/spip-zone/browser/_plugins_">BoOz</a>, <a href="http://trac.spip.org/trac/spip-zone/browser/_plugins_branche_stable_/_spip_1_9_0_/dewplayer">C&#233;dric</a>,  <a href="http://monsitespip.com/spip.php?article12">Iago (francois.vachon@iago.ca)</a>, erational.
-		</auteur>
+	<a href="http://www.spip-contrib.net/BoOz,502">BoOz</a>,C&#233;dric, erational, CP.
+	</auteur>
 	<version>
 	0.67
 	</version>
@@ -22,9 +22,9 @@
 	dev
 	</etat>
 	<description>
-	- <docXX|player> affiche un lecteur flash audio ou video.<br />
-	- Le plugin ajoute un rel="enclosure" et un lecteur aux liens absolus vers un fichier mp3 dans la page.
-	ex : <code> [mon son->http://mon_site/mon_son.mp3] ou <a href ="http://mon_site/mon_son.mp3">mon son</a></code><br />
+	- <docXX|player> affiche un lecteur flash audio ou video. (plusieurs lecteurs au choix)<br />
+	- Le plugin ajoute un lecteur aux liens <a href ="http://mon_site/mon_son.mp3" rel="enclosure">mon son</a> dans la page
+	- Le plugin ajoute un rel="enclosure" et un lecteur aux liens absolus vers un fichier mp3 <code> [mon son->http://mon_site/mon_son.mp3].</code> dans un texte SPIP<br />
 	- Avec <code>#MODELE{playliste}</code> vous pouvez afficher une playliste des derniers mp3 
 	- Avec <code>[(#MODELE{playliste_video}{id_article=XX})]</code> vous pouvez afficher une playliste video.
 _ <a href="?exec=player_admin">configurer le plugin</a> || 
