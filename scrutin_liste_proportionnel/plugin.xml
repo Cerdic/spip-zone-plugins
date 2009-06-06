@@ -7,7 +7,7 @@ GPL
 	</auteur>
 	<description>
 	Vous pouvez ins&eacute;rer dans un article un formulaire de la mani&egrave;re suivante.
-	<code><formulaire|scrut_prop|liste=A,B,C,...|></code>
+	&lt;formulaire|scrut_prop|liste=A,B,C,...|&gt;
 	ou A,B,C,... sont des noms de liste.
 	
 	Un formulaire apparait. Il propose :
