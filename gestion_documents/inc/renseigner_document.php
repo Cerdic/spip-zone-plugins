@@ -12,6 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('inc/ajouter_documents'); // a enlever apres nettoyage du core
 
 /**
  * recuperer les infos distantes d'une url,
