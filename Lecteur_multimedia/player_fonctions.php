@@ -48,29 +48,18 @@ function Player_affichage_final($flux){
 
 /**
  * enclosures
- * ajout d'un rel="enclosure" sur les liens mp3
- *
+ * ajout d'un rel="enclosure" sur les liens mp3 absolus
+ * appele en pipeline apres propre pour traiter les [mon son->http://monsite/mon_son.mp3]
+ * peut etre appele dans un squelette apres |liens_absolus
  */
-
-function Player_post_propre($texte) {
+ 
+ function Player_post_propre($texte) {
 
 	$reg_formats="mp3";
-	
-	/**
-	 * Ne pas traiter les liens relatifs possibles avec l'utilisation du modele doc 
-	 * pour traiter les adresses relatives d'une balise <docXX>)
-	 */ 
-	$url_absolue = "http:\/\/" ;
-	
-	/**
-	 * sinon traiter tous les liens - les relatifs et les absolus
-	 */
-	// $url_absolue = "" ;
-	
-	// trouver des liens mp3 dans la page et ajouter rel="enclosure"
+
 	$texte = preg_replace(
-		",<a(\s[^>]*href=['\"]?(($url_absolue)[a-zA-Z0-9\s()\/\:\._%\?+'=~-]*\.($reg_formats))['\"]?[^>]*)>(.*)</a>,Uims",
-		'<a$1 rel="enclosure">$5</a>', 
+		",<a(\s[^>]*href=['\"]?(http:\/\/[a-zA-Z0-9\s()\/\:\._%\?+'=~-]*\.($reg_formats))['\"]?[^>]*)>(.*)</a>,Uims",
+		'<a$1 rel="enclosure">$4</a>', 
 		$texte);
 	
 	return $texte;
