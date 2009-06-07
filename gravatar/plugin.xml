@@ -3,8 +3,8 @@
 	<auteur>Thomas Beaumanoir - [Clever Age->http://www.clever-age.com] pour <code>#GRAVATAR</code>
 	<br /> Fil - [SPIP->www.spip.net] pour <code>#LOGO_AUTEUR</code>
 	</auteur>
-	<icon>gravatar-64.png</icon>
-	<version>0.5</version>
+	<icon>images/gravatar-64.png</icon>
+	<version>0.6</version>
 	<etat>stable</etat>
 	<description>
 Permet d'utiliser un cache pour stocker les gravatars
@@ -23,7 +23,7 @@ Fournit le filtre <code>|gravatar</code>, &agrave; utiliser par exemple comme
 	<pipeline>
 		<nom>affiche_gauche</nom>
 		<action>affiche_gauche</action>
-		<inclure>GravatarPrive.php</inclure>
+		<inclure>gravatar_pipelines.php</inclure>
 	</pipeline>
 	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

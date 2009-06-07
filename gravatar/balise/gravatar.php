@@ -21,4 +21,5 @@ function balise_GRAVATAR_dyn($email, $size, $gravatar_default) {
 	include_spip('inc/gravatar');
 	return image_reduire(sinon(gravatar($email),$gravatar_default), $size ? $size : 80);
 }
+
 ?>

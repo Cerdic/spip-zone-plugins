@@ -84,3 +84,5 @@ function gravatar($email) {
 	else
 		return '';
 }
+
+?>

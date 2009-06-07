@@ -17,3 +17,4 @@ function balise_LOGO_AUTEUR($p) {
 	return $p;
 }
 
+?>

@@ -6,7 +6,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // Formulaire de forum
-'gravatar_info_forum' => 'Pour afficher votre trombine avec votre message, enregistrez-la d\'abord sur <a href="http://www.gravatar.com" class="spip_out">gravatar.com</a> (gratuit et indolore). Postez ensuite votre message ici sans oublier d\'indiquer votre adresse e-mail (non publi&eacute;e).'
+'gravatar_info_forum' => 'Pour afficher votre trombine avec votre message, enregistrez-la d\'abord sur <a href="http://www.gravatar.com" class="spip_out">gravatar.com</a> (gratuit et indolore). Postez ensuite votre message ici sans oublier d\'indiquer votre adresse e-mail (non publi&eacute;e).',
+'titre_gravatar_auteur' => 'GRAVATAR DE L\'AUTEUR',
 
 );
 
