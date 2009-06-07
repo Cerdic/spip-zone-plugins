@@ -7,7 +7,7 @@
 ]
 #CACHE{3600*100}
 <BOUCLE_docslies(DOCUMENTS spip_documents_liens){id_document}{id_objet}{objet}>
-	<li class="item #MODE" id="doc#ID_DOCUMENT">
+	<div class="item #MODE" id="doc#ID_DOCUMENT">
 		<h3 class="titrem">[<span class="fichier">(#FICHIER*|basename)</span>]
 			<span class="image_loading"></span>
 			[<span class="titre">(#TITRE)</span>]
@@ -38,5 +38,5 @@
 				<//B_compte>
 			</div>
 		</div>
-	</li>
+	</div>
 </BOUCLE_docslies>
