@@ -18,7 +18,7 @@ function exec_portfolio(){
 
 	if (defined('_AJAX') AND _AJAX){
 		$contexte = array_merge(array('editable'=>0),$_GET);
-		$res = formulaire_recherche('portfolio').recuperer_fond('prive/galerie',$contexte);
+		$res = /*formulaire_recherche('portfolio').*/recuperer_fond('prive/galerie',$contexte);
 
 		include_spip('inc/actions');
 		ajax_retour($res);

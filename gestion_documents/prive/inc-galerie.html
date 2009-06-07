@@ -83,14 +83,8 @@
 	</thead>
 	<BOUCLE_galerie(DOCUMENTS) {id_rubrique ?}{id_article ?}{id_breve ?}{id_document ?}{recherche ?} {tri id_document,inverse}{media?}{extension?}{distant?}{brise?}{statut==#ENV{statut,.*}}{orphelins?}{pagination 10}>
 	<tr class="[(#ENV{media}|non)[ media-(#MEDIA)]]">
-	#SET{missing,''}
-		[(#EXTENSION|in_any{#ARRAY{0,gif,1,png,2,jpg}}|oui)
-		#SET{logo,#FICHIER|image_reduire{250,100}}
-		[(#GET{logo}|match{'^<img'}|non)#SET{logo,#LOGO_DOCUMENT||image_reduire{250,100}}#SET{missing,' '}]
-		][(#EXTENSION|in_any{#ARRAY{0,gif,1,png,2,jpg}}|non)
-		#SET{logo,#LOGO_DOCUMENT||image_reduire{250,100}}
+		#SET{logo,#LOGO_DOCUMENT{apercu,250,100}}
 		[(#DISTANT|=={oui}|non)#SET{missing,#FICHIER|file_exists|non}]
-		]
 		<td class='infos'>
 		[(#ENV{media}|non|et{#MEDIA|!={file}})[(#CHEMIN{images/media-#MEDIA|concat{-32.png}}|tag_img|inserer_attribut{alt,#VAL{gestdoc:media_#MEDIA}|_T}|inserer_attribut{title,#VAL{gestdoc:media_#MEDIA}|_T})]]
 		[(#GET{missing}|oui)<img src='#CHEMIN{images/document-manquant-24.png}' width='22' height='22' alt='<:gestdoc:fichier_manquant:>' />]
