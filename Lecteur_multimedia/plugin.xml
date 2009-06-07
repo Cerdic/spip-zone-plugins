@@ -22,7 +22,7 @@
 	dev
 	</etat>
 	<description>
-	- <docXX|player> affiche un lecteur flash audio ou video. (plusieurs lecteurs au choix)<br />
+	- &lt;docXX|player&gt; affiche un lecteur flash audio ou video. (plusieurs lecteurs au choix)<br />
 	- Le plugin ajoute un lecteur aux liens <a href ="http://mon_site/mon_son.mp3" rel="enclosure">mon son</a> dans la page
 	- Le plugin ajoute un rel="enclosure" et un lecteur aux liens absolus vers un fichier mp3 <code> [mon son->http://mon_site/mon_son.mp3].</code> dans un texte SPIP<br />
 	- Avec <code>#MODELE{playliste}</code> vous pouvez afficher une playliste des derniers mp3 
