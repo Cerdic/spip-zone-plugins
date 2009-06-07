@@ -15,7 +15,7 @@ global $couleur_foncee;
 ?>
 <!-- icone=img_pack/exportcsv-24.png -->
 <!-- titre=Export CSV -->
-<!-- boite=Configuation de l'extraction -->
+<!-- boite=<:exportcsv:config_extraction:> -->
 <!-- descriptif=
 <p><img src="<?php echo _DIR_IMG_EXPORTCSV.'cfg-22.png'; ?>" alt="" /> <:exportcsv:description_cfg:></p><p> 
 <?php
@@ -86,9 +86,10 @@ icone_horizontale (_T('exportcsv:extraction_data_back'), generer_url_ecrire('exp
 	
 	<fieldset><legend style="color:<?php echo $couleur_foncee; ?>;"><:exportcsv:rub_a_extraire:></legend>
 	<ul id="listerub">
+	[(#SET{title_label,<:exportcsv:toutes_selectionnees:>})]
 	<BOUCLE_racine(RUBRIQUES) {tout} {racine}{par titre}>
 	
-		<li class="racine" title="<:exportcsv:toutes_selectionnees:>"><label class="racine" id="r#ID_RUBRIQUE">
+		<li class="racine"><label class="racine" id="r#ID_RUBRIQUE" title="#GET{title_label}">
 			<input type="checkbox" name="secteur[]" value="#ID_RUBRIQUE" <?php is_checked('secteur', '#ID_RUBRIQUE'); ?>/>
 			[(#TITRE|supprimer_numero)] <small>(#EXCSV_STATUT{id_rubrique})</small></label>
 		<B_rub><ul>
