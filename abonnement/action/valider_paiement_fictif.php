@@ -40,10 +40,12 @@ function action_valider_paiement_fictif_dist() {
 	else {
 		spip_log("Erreur banque", 'abonnement');
 		$message = "erreur_banque";
+		// passer l'abo en "erreur_bank"
 	}
 
-
 	include_spip('inc/headers');
+	// on redirige sur la page de fin de transaction 
+	$redirect = generer_url_public("validation_banque","","",true,"");
 	$redirect = parametre_url($redirect,'message',$message,'&');
 	redirige_par_entete($redirect);
 	//redirige_par_entete(urldecode($redirect));

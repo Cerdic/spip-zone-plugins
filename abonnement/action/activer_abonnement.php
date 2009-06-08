@@ -101,7 +101,11 @@ function abo_traiter_activer_abonnement($id_abonnement, $id_auteur, $hash = fals
 				'stade_relance' => '',
 			),
 			$where);
+	
 	}
+	
+	// ouvir des zones pour acces restreint selon l'abonnement (a faire)
+	// envoyer le mail de confirmation (a faire)		
 	
 	// signaler un changement
 	spip_log("abonnement: activation abo n°$id_abonnement pour auteur $id_auteur","abonnement");
