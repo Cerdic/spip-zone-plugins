@@ -16,7 +16,7 @@
 			]
 			[(#AUTORISER{supprimer, marquepage, #ID_FORUM}|oui)
 				<li class="supprimer">
-					<a title="<:marquepages:supprimer:>" class="confirmer" href="#URL_ACTION_AUTEUR{supprimer_marquepage,#ID_FORUM,#ENV{self}}">
+					<a title="<:marquepages:supprimer:>" class="confirmer" href="#URL_ACTION_AUTEUR{supprimer_marquepage,#ID_FORUM,#ENV{self}|parametre_url{var_mode,recalcul}|rawurlencode}">
 						<span><:marquepages:supprimer:></span>
 					</a>
 				</li>
@@ -45,7 +45,7 @@
 		<B_tags>
 			<br /><:marquepages:avec_etiquettes:> :
 		<BOUCLE_tags(MOTS){type=tags}{id_forum}{", "}{par titre}>
-			<a rel="tag" href="[(#TITRE|url_mp_tag{#GET{login}})]">#TITRE</a>
+			<a [class="(#TITRE|=={#ENV{titre_mot}}|?{on})"] rel="tag" href="[(#TITRE|url_mp_tag{#GET{login}})]">#TITRE</a>
 		</BOUCLE_tags>
 	</dd>
 </dl>

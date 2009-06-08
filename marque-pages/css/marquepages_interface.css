@@ -131,11 +131,11 @@ h1 a:hover{
 }
 #navigation .pliable h2{
 	padding-left:20px;
-	background:transparent url('../images/marquepage_fleche_bas.png') 5px center no-repeat;
+	background:#eee url('../images/marquepage_fleche_bas.png') 5px center no-repeat;
 	cursor:pointer;
 }
 #navigation .plier h2{
-	background:transparent url('../images/marquepage_fleche.png') 7.5px center no-repeat;
+	background:#eee url('../images/marquepage_fleche.png') 7.5px center no-repeat;
 }
 #navigation ul{
 	list-style:none;
@@ -156,6 +156,13 @@ h1 a:hover{
 	background:#6C6C6C;
 	-moz-border-radius:3px 0 0 3px;
 	-webkit-border-radius:3px 0 0 3px;
+}
+#navigation a.bookmarklet{
+	margin:1em;
+	padding-left:30px;
+	background:#0fadd9 url('../images/marquepages-24.png') 3px center no-repeat;
+	-moz-border-radius:3px;
+	-webkit-border-radius:3px;
 }
 #navigation .pagination{
 	text-align:center;
@@ -212,4 +219,20 @@ h1 a:hover{
 #contenu ul.etiquettes a:hover {
 	text-decoration:none;
 	background:#6C6C6C;
+}
+
+/* Pour les formulaires */
+.formulaire_spip input.text, .formulaire_spip select, .formulaire_spip #password{
+	padding:0.2em 0.5em;
+	border:1px solid #0fadd9;
+}
+.formulaire_spip input.text:focus, .formulaire_spip select:focus, .formulaire_spip #password:focus{
+	border:1px solid #d90fad;
+}
+.formulaire_spip .popular_tags span.selected{
+	color:white;
+	background:#6C6C6C;
+}
+.formulaire_marquepage .formulaire_login legend{
+	display:none;
 }

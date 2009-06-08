@@ -78,7 +78,7 @@ function formulaires_editer_marquepage_traiter_dist($id_forum, $id_rubrique){
 	else $retours['message_erreur'] = $message;
 	
 	if ($redirect = _request('redirect')){
-		$retours['redirect'] = $redirect;
+		$retours['redirect'] = str_replace('&amp;', '&', $redirect);
 	}
 	
 	return $retours;

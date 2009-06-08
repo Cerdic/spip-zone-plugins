@@ -45,7 +45,16 @@
 <html dir="#LANG_DIR" lang="#LANG">
 	<head>
 		<title><:marquepages:titre_marquepages:>[(#GET{auteur}|?{' '})<:marquepages:de:> #ENV{login}][ - (#NOM_SITE_SPIP|textebrut)]</title>
+		
 		<meta name="description" content="<:marquepages:ajouter:>" />
+		[(#REM) Preciser le charset ]
+		<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
+		[(#REM) Fierement fabrique avec SPIP ]
+		<meta name="generator" content="SPIP[ (#SPIP_VERSION)]" />
+		[(#REM) La petite icône ]
+		[<link rel="shortcut icon" href="(#CHEMIN{images/marquepages-24.png})" type='image/x-icon' />]
+
+		
 		[<link rel="stylesheet" href="(#CHEMIN{spip_formulaires.css})" type="text/css" media="all" />]
 		[<link rel="stylesheet" href="(#CHEMIN{css/marquepages_interface.css})" type="text/css" media="all" />]
 		#INSERT_HEAD
@@ -69,6 +78,10 @@
 						$(this).parent('.pliable')
 							.toggleClass('plier');
 					});
+				
+				[(#ENV{popup}|=={close}|oui)
+					window.close();
+				]
 			});
 		</script>
 	</head>
@@ -80,6 +93,7 @@
 				<div id="entete">
 					<h1><a href="[(#VAL|url_mp)]">[(#CONFIG{marquepages/titremp}|sinon{#NOM_SITE_SPIP : <:marquepages:titre_marquepages:>})]</a></h1>
 				</div>
+				[(#ENV{popup}|!={oui}|oui)
 				<div id="barre-nav">
 					<ul>
 						[(#SESSION{statut}|oui|et{#SESSION{staut}|<={#CONFIG{marquepages/qui}}}|oui)
@@ -105,6 +119,7 @@
 						]
 					</ul>
 				</div>
+				]
 				<div class='nettoyeur'></div>
 			</div>
 		
@@ -124,9 +139,7 @@
 			
 				[(#REM) Menu de navigation laterale ]
 				<div id="navigation">
-					[(#GET{type}|!={editer}|oui)
 					<INCLURE{fond=fonds/navigation/marquepages_#GET{type}}{env}{id_rubrique}{self=#SELF}>
-					]
 				</div><!--#navigation-->
 			
 				[(#REM) Choses en plus ]

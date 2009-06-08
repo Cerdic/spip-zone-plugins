@@ -1,6 +1,6 @@
 #CACHE{0}
 
-<div class="formulaire_spip"  id="formulaire_marquepage">	
+<div class="formulaire_spip formulaire_marquepage"  id="formulaire_marquepage">	
 	
 	<br class='bugajaxie' />
 	
@@ -22,8 +22,7 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input type="hidden" name="id_rubrique" value="#ENV{id_rubrique}" />
 		<input type="hidden" name="id_forum" value="#ENV{id_forum}" />
-		<fieldset>
-			<legend>[(#ENV{creation}|?{<:marquepages:ajouter:>,<:marquepages:modifier:>})]</legend>
+		<div>
 			<ul>
 				<li class="obligatoire[ (#ENV*{erreurs}|table_valeur{mp_url}|oui)erreur]">
 					<label for="mp_url"><:marquepages:url:></label>
@@ -62,7 +61,7 @@
 					<input type="submit" name="mp_valider" value="<:bouton_valider:>" />
 				</li>
 			</ul>
-		</fieldset>
+		</div>
 	</form>
 	]
 	

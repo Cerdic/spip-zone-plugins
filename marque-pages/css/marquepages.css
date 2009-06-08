@@ -1,6 +1,6 @@
 /* Dans le formulaire */
-#formulaire_marquepage input.text, #formulaire_marquepage select{
-	width:90%;
+.formulaire_marquepage input.text, .formulaire_marquepage select, .formulaire_marquepage #password{
+	width:95%;
 }
 
 /* Le bloc du marque-page */

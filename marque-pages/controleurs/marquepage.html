@@ -7,17 +7,17 @@
 
 <BOUCLE_marquepage(MARQUEPAGES){id_forum=#ENV{id_marquepage}}>
 <div class="formulaire_marquepage">
-<fieldset style="width:#ENV{largeur}px;">
+<fieldset>
 	<legend><:marquepages:modifier:></legend>
 	
 	<ul>
 		<li>
 			<label for="titre"><:marquepages:titre:></label>
-			<input type="text" class="crayon-active" id="titre" name="#ENV{name_titre}" style="width:#ENV{largeur}px;" value="[(#TITRE**|entites_html)]" size="60" />
+			<input type="text" class="text crayon-active" id="titre" name="#ENV{name_titre}" value="[(#TITRE**|entites_html)]" size="60" />
 		</li>
 		<li>
 			<label for="texte"><:marquepages:description:></label>
-			<input type="text" class="text crayon-active" id="texte" name="#ENV{name_texte}" style="width:#ENV{largeur}px;" value="[(#TEXTE**|entites_html)]" size="60" />
+			<input type="text" class="text crayon-active" id="texte" name="#ENV{name_texte}" value="[(#TEXTE**|entites_html)]" size="60" />
 		</li>
 		<li>
 			<label for="visibilite"><:marquepages:visibilite:></label>

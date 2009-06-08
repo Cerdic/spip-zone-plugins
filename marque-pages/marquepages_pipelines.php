@@ -49,4 +49,12 @@ function marquepages_declarer_tables_objets_surnoms($surnoms) {
 	return $surnoms;
 }
 
+// Ajouter les mots-clés pour la recherche
+function marquepages_rechercher_liste_des_jointures($jointures){
+	$jointures['forum'] = array(
+		'mot' => array('titre' => 3)
+	);
+	return $jointures;
+}
+
 ?>

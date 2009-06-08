@@ -55,7 +55,7 @@
 #ANCRE_PAGINATION
 <BOUCLE_marquepages(MARQUEPAGES syndic mots_forum mots){syndic.id_rubrique?}{titre_mot?}{id_forum?}{id_syndic?}{id_auteur?}{recherche?}{pagination #ENV{pagination,10}}{par #GET{tri}}{inverse #GET{sens}}>
 [(#AUTORISER{voir,marquepage,#ID_FORUM}|oui)
-	[(#INCLURE{fond=fonds/marquepage}{id_forum}{id_rubrique=#ENV{id_rubrique}}{self})]
+	[(#INCLURE{fond=fonds/marquepage}{id_forum}{id_rubrique=#ENV{id_rubrique}}{titre_mot}{self})]
 ]
 </BOUCLE_marquepages>
 [<p class="pagination">(#PAGINATION{page_precedent_suivant})</p>]
@@ -71,7 +71,3 @@
 </B_marquepages>
 <p><:marquepages:aucun_marquepages:></p>
 <//B_marquepages>
-
-<BOUCLE_test(FORUMS){statut=mppublic}{recherche}>
-	<h3>#TITRE</h3>
-</BOUCLE_test>

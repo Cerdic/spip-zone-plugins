@@ -20,6 +20,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'enlever' => 'Remove',
 'confirmer' => 'Are you really want to delete this bookmark ?',
 'de' => 'of',
+'bookmarklet' => 'Bookmarklet',
+'bookmarklet_lien' => 'Add to @site@',
+'bookmarklet_explication' => 'Move this bookmarklet in your browser\'s bookmarks and click on it every time you want to add a bookmark on @site@.',
 
 // Pour la configuration
 'configuration_titre' => 'Bookmarks configuration',

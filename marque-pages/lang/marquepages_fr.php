@@ -20,6 +20,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'enlever' => 'Enlever',
 'confirmer' => '&Ecirc;tes-vous s&ucirc;r de vouloir supprimer ce marque-page ?',
 'de' => 'de',
+'bookmarklet' => 'Bookmarklet',
+'bookmarklet_lien' => 'Ajouter &agrave; @site@',
+'bookmarklet_explication' => 'D&eacute;placez ce bookmarklet dans les marques-pages de votre navigateur et cliquez dessus chaque fois que vous souhaitez ajouter un signet pour la page courante dans @site@.',
 
 // Pour la configuration
 'configuration_titre' => 'Configuration des marque-pages',
