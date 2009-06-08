@@ -20,14 +20,14 @@ function formulaires_editer_document_charger_dist($id_document='new', $id_parent
 	$valeurs = formulaires_editer_objet_charger('document',$id_document,$id_parent,$lier_trad,$retour,$config_fonc,$row,$hidden);
 	
 	// relier les parents
-	$valeurs['id_parents'] = array();
+	$valeurs['parents'] = array();
 	$valeurs['_hidden'] = "";
 	$parents = sql_allfetsel('objet,id_objet','spip_documents_liens','id_document='.intval($id_document));
 	foreach($parents as $p){
 		if (in_array($p['objet'],array('article','rubrique')))
-			$valeurs['id_parents'][] = $p['objet'].'|'.$p['id_objet'];
+			$valeurs['parents'][] = $p['objet'].'|'.$p['id_objet'];
 		else 
-			$valeurs['_hidden'] .= "<input type='hidden' name='id_parents[]' value='".$p['objet'].'|'.$p['id_objet']."' />";
+			$valeurs['_hidden'] .= "<input type='hidden' name='parents[]' value='".$p['objet'].'|'.$p['id_objet']."' />";
 	}
 
 	$valeurs['saisie_date'] = affdate($valeurs['date'],'d/m/Y');
@@ -110,8 +110,8 @@ function formulaires_editer_document_verifier_dist($id_document='new', $id_paren
 
 // http://doc.spip.org/@inc_editer_article_dist
 function formulaires_editer_document_traiter_dist($id_document='new', $id_parent='', $retour='', $lier_trad=0, $config_fonc='documents_edit_config', $row=array(), $hidden=''){
-	if (is_null(_request('id_parents')))
-		set_request('id_parents',array());
+	if (is_null(_request('parents')))
+		set_request('parents',array());
 	
 	// verifier les infos de taille et dimensions sur les fichiers locaux
 	// cas des maj de fichier directes par ftp

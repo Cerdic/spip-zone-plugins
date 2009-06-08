@@ -82,7 +82,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'logo' => 'Logo',
 	'label_id_joindre' => 'Document',
-	'label_id_parents' => 'Ce document est li&eacute; &agrave;',
+	'label_parents' => 'Ce document est li&eacute; &agrave;',
 	'label_fichier' => 'Fichier',
 	'label_fichier_vignette' => 'Vignette',
 	'label_caracteristiques' => 'Caract&eacute;ristiques',

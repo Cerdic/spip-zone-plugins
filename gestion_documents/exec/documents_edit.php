@@ -16,18 +16,18 @@ include_spip('inc/presentation');
 
 function exec_documents_edit_dist()
 {
-	exec_documents_edit_args(intval(_request('id_document')),_request('id_parent'),_request('new'));
+	exec_documents_edit_args(intval(_request('id_document')),_request('parent'),_request('new'));
 }
 
 /**
  * Edition d'un document
- * id_parent est de la forme id_objet|objet (ex : 123|article)
+ * parent est de la forme id_objet|objet (ex : 123|article)
  *
  * @param int $id_document
- * @param string $id_parent
+ * @param string $parent
  * @param string $new
  */
-function exec_documents_edit_args($id_document, $id_parent, $new){
+function exec_documents_edit_args($id_document, $parent, $new){
 
 	$row = false;
 	if (!( ($new!='oui' AND (!autoriser('voir','document',$id_document) OR !autoriser('modifier','document', $id_document)))
@@ -41,17 +41,17 @@ function exec_documents_edit_args($id_document, $id_parent, $new){
 		echo minipres();
 	}
 	else
-		documents_edit_ok($row, $id_document, $id_parent, $new);
+		documents_edit_ok($row, $id_document, $parent, $new);
 }
 
-function documents_edit_ok($row, $id_document, $id_parent, $new)
+function documents_edit_ok($row, $id_document, $parent, $new)
 {
 
 	if (defined('_AJAX') AND _AJAX){
 		$contexte = array(
 		'redirect'=>'',//generer_url_ecrire("portfolio"),
 		'new'=>$new == "oui"?$new:$id_document,
-		'id_parent'=>$id_parent,
+		'parent'=>$parent,
 		'config_fonc'=>'documents_edit_config',
 		'fichier'=>$row['fichier']
 		);
@@ -98,7 +98,7 @@ function documents_edit_ok($row, $id_document, $id_parent, $new)
 	'redirect'=>'',//generer_url_ecrire("portfolio"),
 	'titre'=>$titre,
 	'new'=>$new == "oui"?$new:$id_document,
-	'id_parent'=>$id_parent,
+	'parent'=>$parent,
 	'config_fonc'=>'documents_edit_config'
 	);
 

@@ -40,10 +40,10 @@
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>
 				]<input type='text' class='text' name='titre' id='titre' value="[(#ENV**{titre,''})]" />
 	    </li>
-	  	<li class='editer_parent[ (#ENV**{erreurs}|table_valeur{id_parent}|oui)erreur]'>
-	    	<label for="id_parent"><:gestdoc:label_id_parents:></label>[
-	    	<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{id_parent})</span>
-	    	]<INCLURE{fond=formulaires/selecteur/articles}{selected=#ENV{id_parents}}{name=id_parents}{rubriques=1}{articles=1}>
+	  	<li class='editer_parent[ (#ENV**{erreurs}|table_valeur{parents}|oui)erreur]'>
+	    	<label for="parents"><:gestdoc:label_parents:></label>[
+	    	<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{parents})</span>
+	    	]<INCLURE{fond=formulaires/selecteur/articles}{selected=#ENV{parents}}{name=parents}{rubriques=1}{articles=1}>
 	  	</li>
 			<li class="editer_descriptif[ (#ENV**{erreurs}|table_valeur{descriptif}|oui)erreur]">
 				<label for="descriptif"><:info_description:></label>[

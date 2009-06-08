@@ -137,7 +137,7 @@ function action_ajouter_un_document_dist($id_document, $file, $objet, $id_objet,
 	
 	// lier le parent si necessaire
 	if ($id_objet=intval($id_objet) AND $objet)
-		$champs['id_parents'][] = "$objet|$id_objet";
+		$champs['parents'][] = "$objet|$id_objet";
 
 	// "mettre a jour un document" si on lui
 	// passe un id_document

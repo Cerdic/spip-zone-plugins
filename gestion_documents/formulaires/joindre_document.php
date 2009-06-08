@@ -133,7 +133,7 @@ function formulaires_joindre_document_traiter_dist($id_document='new',$id_objet=
 	if (_request('joindre_mediatheque')){
 		if ($id_joindre = intval(preg_replace(',^(doc|document|img),','',_request('id_joindre')))){
 			// lier le parent
-			$champs = array('id_parents' => array("$objet|$id_objet"));
+			$champs = array('parents' => array("$objet|$id_objet"));
 			include_spip('action/editer_document');
 			document_set($id_joindre,$champs);
 			set_request('id_joindre',''); // vider la saisie

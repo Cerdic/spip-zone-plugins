@@ -117,7 +117,7 @@ function document_set ($id_document, $c=false) {
 
 	// Changer le statut du document ?
 	// le statut n'est jamais fixe manuellement mais decoule de celui des objets lies
-	if(instituer_document($id_document,array('id_parents'=>_request('id_parents',$c)))) {
+	if(instituer_document($id_document,array('parents'=>_request('parents',$c)))) {
 
 		//
 		// Post-modifications
@@ -139,8 +139,8 @@ function instituer_document($id_document,$champs=array()){
 	
 	$statut=isset($champs['statut'])?$champs['statut']:null;
 	$date_publication = isset($champs['date_publication'])?$champs['date_publication']:null;
-	if (isset($champs['id_parents']))
-		gestdoc_revision_document_parents($id_document,$champs['id_parents']);
+	if (isset($champs['parents']))
+		gestdoc_revision_document_parents($id_document,$champs['parents']);
 	
 	$row = sql_fetsel("statut,date_publication", "spip_documents", "id_document=$id_document");
 	$statut_ancien = $row['statut'];
@@ -196,16 +196,16 @@ function instituer_document($id_document,$champs=array()){
  * chaque parent est liste au format objet|id_objet
  *
  * @param unknown_type $id_document
- * @param unknown_type $id_parents
+ * @param unknown_type $parents
  */
-function gestdoc_revision_document_parents($id_document,$id_parents=null){
-	if (!is_array($id_parents))
+function gestdoc_revision_document_parents($id_document,$parents=null){
+	if (!is_array($parents))
 		return;
 	
 	$insertions = array();
 	$cond = array();
 	// au format objet|id_objet
-	foreach($id_parents as $p){
+	foreach($parents as $p){
 		$p = explode('|',$p);
 		if (preg_match('/^[a-z0-9_]+$/i', $objet=$p[0])){ // securite
 			$insertions[] = array('id_document'=>$id_document,'objet'=>$p[0],'id_objet'=>$p[1]);
