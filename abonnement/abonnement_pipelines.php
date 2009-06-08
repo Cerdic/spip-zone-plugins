@@ -34,19 +34,22 @@ function abonnement_i2_verifier_formulaire($flux) {
 	return $flux;
 }
 
-function abonnement_i2_traiter_formulaire($flux) {
-	// afficher un formulaire de paiement uniquement si la config le permet
+// inscrire l'abonnement dans la base, statut "a confirmer"
+// et afficher un formulaire de paiement (uniquement si la config le permet)
+	
+function abonnement_i2_traiter_formulaire($flux) {	
 	if (lire_config('abonnement/proposer_paiement')) {
 		if($id_abonnement = intval(_request('abonnement'))){	
 			$id_auteur = $flux['args']['id_auteur'] ;
 			$hash = _request('hash');
 
-			// verfifier que ca emplile pas en mode edition
+			// (verififier si ca emplile pas en mode edition)
 			sql_insertq('spip_auteurs_elargis_abonnements', array(
 				'id_auteur' => $id_auteur,
 				'id_abonnement' => $id_abonnement,
 				'date' => date("Y-m-d H:i:s"),
-				'hash'=>$hash )
+				'hash'=>$hash,
+				'statut_paiement' => 'a_confirmer')
 			);
 		}
 		$flux['data']['ne_pas_confirmer_par_mail'] = true ;
@@ -57,7 +60,7 @@ function abonnement_i2_traiter_formulaire($flux) {
 }
 
 function abonnement_i2_confirmation($flux) {
-	// afficher un formulaire de paiement uniquement si la config le permet
+	// afficher un formulaire de paiement pour l'utilisateur (uniquement si la config le permet)
 	if (lire_config('abonnement/proposer_paiement')) {
 		$env = $flux['args'];
 		$row = sql_fetsel(array('id_auteur'), 'spip_auteurs', 'email='.sql_quote($env['email']));		$env['id_auteur'] = $row['id_auteur'] ;

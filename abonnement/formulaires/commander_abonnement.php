@@ -66,20 +66,13 @@ function formulaires_commander_abonnement_traiter_dist(){
 	$id_abonnement = _request('abonnement');
 	$id_auteur = $GLOBALS['auteur_session']['id_auteur'];
 	
-	// après validation de la banque
-	// enregistrer l'abonnement 
-	// todo :
-	// - enregistrer la date de validite
-	// - fixer le statut de paiement
-	// - (ouvrir zones acces restreint selon l'abonnement)
-	// - envoyer un mail de confirmation à l'abonné
 	// [attention aux doublons...]
 	sql_insertq("spip_auteurs_elargis_abonnements", array(
 		"id_auteur" => $id_auteur,
 		"id_abonnement" => $id_abonnement,
 		"hash" => $hash,
 		"date" => date("Y-m-d H:i:s"),
-		"statut_paiement" => 'a_confirmer',
+		"statut_paiement" => 'a_confirmer'
 	));
 
 	return array('editable'=>false,'message_ok' => $message);
