@@ -30,6 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_statut' => 'Statut',
 	'champ_url_exemple' => 'URL d&rsquo;exemple',
 	'champ_version' => 'Version',
+	'changement_statut_mail' => 'Le statut de ce ticket a &eacute;t&eacute; modifi&eacute; de "@ancien@" &agrave; "@nouveau@".',
 	'classement_assigne' => 'Tickets par assignation',
 	'classement_asuivre' => 'Vos tickets &agrave; suivre',
 	'classement_jalon' => 'Tickets par jalon',
@@ -55,6 +56,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forum_sans_previsu' => 'Attention&nbsp;: pas de pr&eacute;visualisation&nbsp;; votre message est publi&eacute; imm&eacute;diatement.',
 	
 	// M
+	'message_automatique' => 'Ceci est un message automatique : n\'y repondez pas.',
 	'message_poste_par' => 'Message post&eacute; par',
 	'message_le' => 'le @date@',
 	'message_publie' => 'Votre message est publi&eacute;',

@@ -1,5 +1,5 @@
 <?php
-    function inc_notifier_publication_ticket($id_ticket){
+    function inc_notifier_publication_ticket($id_ticket,$statut_nouveau='',$statut_ancien=''){
     	
 		$row = sql_select("*","spip_tickets","id_ticket=$id_ticket");
 		$datas = sql_fetch($row);
@@ -16,9 +16,10 @@
 		$titre_message = "[Ticket - $nom_site] $titre - "._T('tickets:champ_statut')." : ".tickets_texte_statut($datas['statut']);
 		$titre_message = nettoyer_titre_email($titre_message);
 		 
-		$message = "$titre_message\n
-		------------------------------------------\n
-		Ceci est un message automatique : n'y repondez pas.\n\n";
+		$message = "$titre_message\n\n";
+		$message .= _T('tickets:changement_statut_mail',array('ancien'=>_T('tickets:statut_'.$statut_ancien),'nouveau'=>_T('tickets:statut_'.$statut_nouveau)))."\n\n";
+		$message .= "------------------------------------------\n";
+		$message .= _T('tickets:message_automatique')."\n\n";
 		$message .= $datas['texte']."\n\n";
 		$message .= $url_ticket;
 		
