@@ -1,10 +1,11 @@
 <ul>
-    <li>Inscrits : [(#ENV{message_ok}|table_valeur{inscrits})]</li>
-    <li>Participation : [(#ENV{message_ok}|table_valeur{votants_pc})] % ([(#ENV{message_ok}|table_valeur{votants}) votants])</li>
-    <li>Blancs ou nuls : [(#ENV{message_ok}|table_valeur{blancs_pc}) % ] ([(#ENV{message_ok}|table_valeur{blancs}) blancs ou nuls])</li>
-    <li>Exprimés : [(#ENV{message_ok}|table_valeur{exprimes})] </li> 
-    <li>Seuil pour avoir des élus : [(#ENV{message_ok}|table_valeur{quota})] voix (arrondis au nombre inférieur)  [((#ENV{message_ok}|table_valeur{quota_pc}) % des exprimés)]</li>
-    <li>Sièges : [(#ENV{message_ok}|table_valeur{sieges})]</li>
+    <li><strong>Inscrits :</strong> [(#ENV{message_ok}|table_valeur{inscrits})]</li>
+    <li><strong>Participation :</strong> [(#ENV{message_ok}|table_valeur{votants_pc})] % ([(#ENV{message_ok}|table_valeur{votants}) votants])</li>
+    <li><strong>Blancs ou nuls :</strong> [(#ENV{message_ok}|table_valeur{blancs_pc}) % ] ([(#ENV{message_ok}|table_valeur{blancs}) blancs ou nuls])</li>
+    <li><strong>Exprimés :</strong> [(#ENV{message_ok}|table_valeur{exprimes})] </li> 
+    <li><strong>Seuil pour avoir des élus :</strong> [(#ENV{message_ok}|table_valeur{quota})] voix (arrondis au nombre inférieur)  [((#ENV{message_ok}|table_valeur{quota_pc}) % des exprimés)]</li>
+    <li><strong>Sièges :</strong> [(#ENV{message_ok}|table_valeur{sieges})]</li>
+    <li><strong>Dont prime majoritaire pour “[(#ENV{message_ok}|table_valeur{liste_primee})]” :</strong> [(#ENV{message_ok}|table_valeur{prime})]</li>
     <li>[(#ENV{message_ok}|table_valeur{restants})]</li>
 </ul>
 

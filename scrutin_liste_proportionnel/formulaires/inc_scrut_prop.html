@@ -7,6 +7,7 @@
         [<li class='erreur'><span class="erreur_message">(#ENV**{erreurs}|table_valeur{voix_plus_inscrits})</span></li>]
         [<li class='erreur'><span class="erreur_message">(#ENV**{erreurs}|table_valeur{quota_pas_nombre})</span></li>]
         [<li class="erreur"><span class="erreur_message">(#ENV**{erreurs}|table_valeur{siege_pas_entier})</span></li>]
+        [<li class="erreur"><span class="erreur_message">(#ENV**{erreurs}|table_valeur{prime_pas_entier})</span></li>]
         [<li class="erreur"><span class="erreur_message">(#ENV**{erreurs}|table_valeur{inscrits_nuls})</span></li>]
         </ul>
         <ul>
@@ -54,6 +55,11 @@
                 <li[(#ENV**{erreurs}|table_valeur{siege_pas_entier}|oui)  class="erreur"]>
                 <label[(#ENV**{erreurs}|table_valeur{siege_pas_entier}|oui) class="erreur_message"] for="siege">Nombre de sièges</label>
                     <input[(#ENV**{erreurs}|table_valeur{siege_pas_entier}|oui) class="erreur_message"]  size="10" type="text" name="siege" id="siege" [value="(#ENV**{erreurs}|table_valeur{sieges})"]  />
+
+                </li>
+                <li[(#ENV**{erreurs}|table_valeur{prime_pas_entier}|oui)  class="erreur"]>
+                <label[(#ENV**{erreurs}|table_valeur{prime_pas_entier}|oui) class="erreur_message"] for="prime">Dont prime majoritaire</label>
+                    <input[(#ENV**{erreurs}|table_valeur{prime_pas_entier}|oui) class="erreur_message"]  size="10" type="text" name="prime" id="prime" [value="(#ENV**{erreurs}|table_valeur{prime})"]  />
 
                 </li>
                 

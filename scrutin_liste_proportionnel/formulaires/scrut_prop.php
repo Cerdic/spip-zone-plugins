@@ -76,6 +76,15 @@ function formulaires_scrut_prop_verifier_dist(){
     
     }
     
+    //vérification de la prime
+    $prime = nb_fr_to_en(_request('prime'));
+    $prime2 = $prime;
+    settype($prime,'int');
+
+    if (!($prime==$prime2) or $prime>$siege){
+        $il_y_a_erreur = true;
+        $erreurs['prime_pas_entier'] = "La prime majoritaire n'est pas un nombre entier de siège, ou bien elle est supérieure au nombre de sièges à pourvoir";
+    }
     //renvoi des résultats
     $erreurs['resultats'] = $resultats;
     
@@ -83,6 +92,7 @@ function formulaires_scrut_prop_verifier_dist(){
         $erreurs['repartition'] = _request('repartition');
         $erreurs['sieges'] = nb_en_to_fr($siege2);
         $erreurs['quota'] = $quota2;
+        $erreurs['prime'] = $prime2;
 	   return $erreurs;
     }
     else
@@ -99,7 +109,8 @@ function formulaires_scrut_prop_traiter_dist(){
     $sieges     = _request('siege');
     $quota      = nb_fr_to_en(_request('quota'));
     $repartition = _request('repartition');
-    
+    $prime =    _request('prime');
+    settype($prime,'int');      //la prime est un entier pouvant être nul
     
     
     //participation
@@ -121,6 +132,8 @@ function formulaires_scrut_prop_traiter_dist(){
     $return['quota']    = floor($quota * $return['exprimes'] / 100) ;      // faut-il arrondir au dessus ou au dessous ?
     
     $return['sieges']   = $sieges;
+    $return['prime']    = $prime;
+    $sieges = $sieges - $prime ;    // on ne distribue pas à la prop la prime majoritaire, par déf !
     
     //on ne prend que les listes qui font plus du seuil
     $listes_repartis = array();
@@ -162,9 +175,17 @@ function formulaires_scrut_prop_traiter_dist(){
     
     
     $liste_sieges = array_merge($liste_sieges,$sieges_par_listes);
+    
+    
+    //prime majoritaire
+    $max = max($resultats);
+    $return['liste_primee'] = array_search($max,$resultats);
+    
+    $liste_sieges[$return['liste_prime']] = $liste_sieges[$return['liste_prime']] + $prime;
+    
     $return['sieges_par_liste'] = $liste_sieges;
     $return['voix_par_liste']   = $resultats;
- 
+    
     return array('message_ok'=>$return);
 }
 
