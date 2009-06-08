@@ -29,7 +29,7 @@
 
 /* Partie pour le nuage d'aide */
 
-.popular_tags {
+.popular_tags, .formulaire_spip ul.popular_tags{
 	margin:1em 0;
 	line-height:1.2em ;
 }
