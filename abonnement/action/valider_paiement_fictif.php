@@ -8,6 +8,14 @@ function action_valider_paiement_fictif_dist() {
 		die("Page prot&eacute;g&eacute;e");
 	}
 
+
+	/*/
+	/* Fonction a appeller dans le script de retour de la banque
+	/* si ce script n'est pas dans le spip on peut utiliser les commandes suivantes pour demmarer spip
+		# ou est l'espace prive de spip ?
+		//chdir('..');
+		//include('ecrire/inc_version.php');
+	**/
 	spip_log("Reception de paiement", 'abonnement');
 	
 	// on recupere les petites variables :

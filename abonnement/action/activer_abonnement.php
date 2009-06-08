@@ -104,8 +104,8 @@ function abo_traiter_activer_abonnement($id_abonnement, $id_auteur, $hash = fals
 	
 	}
 	
-	// ouvir des zones pour acces restreint selon l'abonnement (a faire)
-	// envoyer le mail de confirmation (a faire)		
+	// ouvir des zones pour acces restreint selon l'abonnement (action a faire)
+	// envoyer le mail de confirmation (action a faire)		
 	
 	// signaler un changement
 	spip_log("abonnement: activation abo n°$id_abonnement pour auteur $id_auteur","abonnement");
