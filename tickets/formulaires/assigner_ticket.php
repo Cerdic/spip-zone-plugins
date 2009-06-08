@@ -71,7 +71,7 @@ function ticket_assigner_config(){
  */
 function formulaires_assigner_ticket_traiter($id_ticket='',$retour='', $config_fonc='ticket_assigner_config', $row=array(), $hidden=''){
 	$message = "";
-	
+	$id_assigne = _request('id_assigne');
 	sql_updateq("spip_tickets",array('id_assigne' => $id_assigne),"id_ticket=$id_ticket");
 	$message['message_ok'] = _T('tickets:assignation_modifiee');
 	if($retour){
