@@ -73,7 +73,9 @@ function formulaires_statut_ticket_traiter($id_ticket='',$retour='', $config_fon
 	$c = array('statut'=>_request('statut'));
 	instituer_ticket($id_ticket, $c);
 	$message['message_ok'] = _T('tickets:statut_mis_a_jour');
-	$message['redirect'] = self();
+	if($retour){
+		$message['redirect'] = $retour;
+	}
 
 	return $message;
 }

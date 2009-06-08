@@ -74,7 +74,9 @@ function formulaires_assigner_ticket_traiter($id_ticket='',$retour='', $config_f
 	
 	sql_updateq("spip_tickets",array('id_assigne' => $id_assigne),"id_ticket=$id_ticket");
 	$message['message_ok'] = _T('tickets:assignation_modifiee');
-	$message['redirect'] = self();
+	if($retour){
+		$message['redirect'] = $retour;
+	}
 	
 	if ($notifications = charger_fonction('notifications', 'inc')) {
 		$notifications('assignerticket', $id_ticket,
