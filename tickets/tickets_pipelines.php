@@ -12,22 +12,22 @@ function tickets_ajouterBoutons($boutons_admin) {
 
 // Menu des tickets presente a droite ou a gauche de la page
 function menu_colonne () {
-	$ret .= "<div class='cadre cadre-e'><div class='cadre_padding'>";
-	$ret .= icone_horizontale(_L('Afficher les tickets'), generer_url_ecrire("tickets"), _DIR_PLUGIN_TICKETS."imgs/bugs.png", "", false);
+	$ret = "<div class='cadre cadre-e'><div class='cadre_padding'>";
+	$ret .= icone_horizontale(_T('tickets:afficher_tickets'), generer_url_ecrire("tickets"), _DIR_PLUGIN_TICKETS."imgs/bugs.png", "", false);
 
-	$contexte = array("titre"=>"Vos tickets en cours de r&eacute;daction", "id_auteur"=>$connect_id_auteur, "statut"=>"redac", "bloc"=>"_bloc1");
+	$contexte = array("titre"=>_T('tickets:vos_tickets_en_cours'), "id_auteur"=>$connect_id_auteur, "statut"=>"redac", "bloc"=>"_bloc1");
 	$options = array("ajax"=>true);
 	$page = recuperer_fond("prive/contenu/inc_liste_simple", $contexte, $options);
 	$ret .= $page;
 	
-	$contexte = array("titre"=>"Tous les tickets ouverts", "statut"=>"ouvert", "bloc"=>"_bloc2");
+	$contexte = array("titre"=>_T('tickets:tous_tickets_ouverts'), "statut"=>"ouvert", "bloc"=>"_bloc2");
 	$options = array("ajax"=>true);
 	$page = recuperer_fond("prive/contenu/inc_liste_simple", $contexte, $options);
 	$ret .= $page;
 
 	include_spip('inc/tickets_autoriser');
 	if (autoriser('ecrire', 'ticket')) {
-		$ret .= icone_horizontale(_L('Cr&eacute;er un ticket'), generer_url_ecrire("ticket_editer","id_ticket=new"), _DIR_PLUGIN_TICKETS."imgs/bugs.png", "creer.gif", false);
+		$ret .= icone_horizontale(_T('tickets:creer_ticket'), generer_url_ecrire("ticket_editer","id_ticket=new"), _DIR_PLUGIN_TICKETS."imgs/bugs.png", "creer.gif", false);
 	}
 	$ret .= "</div></div>";
 
@@ -52,7 +52,7 @@ function tickets_droite ($flux) {
 function tickets_gauche ($flux) {
 	$exec = $flux["args"]["exec"];
 	
-	if ($exec == "ticket_afficher") {
+	if (($exec == "ticket_afficher") OR ($exec == "ticket_editer")) {
 		$data = $flux["data"];
 		
 		$ret = menu_colonne();

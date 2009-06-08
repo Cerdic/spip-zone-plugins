@@ -5,6 +5,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
+	'afficher_tickets' => 'Afficher les tickets',
 	'assignes_a' => 'Assign&eacute;s &agrave;',
 	'assigne_a' => 'Assign&eacute; &agrave;',
 	'assignation_attribuee_a' => 'Le ticket a &eacute;t&eacute; assign&eacute; &agrave; @nom@.',
