@@ -62,16 +62,16 @@ function tickets_edit_config(){
  * @param object $row[optional]
  */
 function formulaires_editer_ticket_traiter($id_ticket='new',$retour='', $config_fonc='tickets_edit_config', $row=array(), $hidden=''){
-	$message = "";
 	$action_editer = charger_fonction("editer_ticket",'action');
 	list($id,$err) = $action_editer();
-	if ($err){
-		$message .= $err;
-	}
-	elseif ($retour) {
+	
+	$message['message_ok'] = _T('tickets:ticket_enregistre');
+	if ($retour) {
 		include_spip('inc/headers');
 		$retour = parametre_url($retour,'id_ticket',$id);
-		$message .= redirige_formulaire($retour);
+		$message['redirect'] = redirige_formulaire($retour);
+	}else{
+		$message['redirect'] = parametre_url(self(),'id_ticket',$id);
 	}
 	return $message;
 }
