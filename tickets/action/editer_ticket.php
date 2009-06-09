@@ -138,7 +138,7 @@ function instituer_ticket($id_ticket, $c) {
 
 		// En cas de publication, fixer la date a "maintenant"
 		// sauf si $c commande autre chose
-		// En cas de proposition d'un article (mais pas de publication), idem
+		
 		if ($champs['statut'] == 'ouvert'
 		OR ($champs['statut'] == 'ouvert'
 			AND !in_array($statut_ancien, array('ouvert'))
@@ -148,6 +148,8 @@ function instituer_ticket($id_ticket, $c) {
 			else
 				$champs['date'] = date('Y-m-d H:i:s');
 		}
+		// On met à jour la date_modif à chaque mise à jour de statut
+		$champs['date_modif'] = date('Y-m-d H:i:s');
 	}
 
 
