@@ -21,6 +21,7 @@
 					<option value="resolu" [(#ENV{statut}|=={resolu}|?{" selected='selected'",""})]>[(#VAL{resolu}|tickets_texte_statut)]</option>
 					<option value="ferme" [(#ENV{statut}|=={ferme}|?{" selected='selected'",""})]>[(#VAL{ferme}|tickets_texte_statut)]</option>
 				</select>
+			</li>
 			<li>
 				<label for="type"><:tickets:champ_type:></label><select name="type" id="type">
 					<option value="1" [(#ENV**{type}|=={1}|?{" selected='selected'",""})]>[(#VAL{1}|tickets_texte_type)]</option>
