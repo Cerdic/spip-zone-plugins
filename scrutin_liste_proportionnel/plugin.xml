@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Scrutin de liste à la proportionnelle</nom>
-	<etat>test</etat>
-	<version>1.1</version>
+	<etat>stable</etat>
+	<version>1.2</version>
 	<auteur>Ma&iuml;eul Rouquette
 GPL
 	</auteur>

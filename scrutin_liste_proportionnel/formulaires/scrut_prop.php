@@ -1,10 +1,65 @@
 <?php
 
-function formulaires_scrut_prop_charger_dist($liste){
+function formulaires_scrut_prop_charger_dist($liste,$sieges='',$quota='',$prime='',$repartition='',$inscrits=''){
+    $return = array();
+    $tab_des_obligatoires = array();
+    $return['liste'] = explode(';',$liste);
     
-    $liste = explode(';',$liste);
-	
-	return array('liste'=>$liste);
+    //verifier que les sièges soient bien un entier
+    $sieges2 = $sieges;
+    settype($sieges,'int');
+    
+    if ($sieges2 != '' and !$sieges2==$sieges){
+        return array('editable'=>false);
+    }
+    else{
+        $return['sieges'] = $sieges2;
+        $table_des_obligatoires[] = 'sieges';
+    }
+    //verifier que les quota soient bien un entier
+    $quota2 = $quota;
+    settype($quota,'int');
+
+    if ($quota2 != '' and !$quota2==$quota){
+        return array('editable'=>false);
+
+    }
+    else{
+        $return['quota'] = $quota2;
+        $table_des_obligatoires[] = 'quota';
+    }
+	//verifier que les prime soient bien un flottant
+    $prime2 = $prime;
+    settype($prime,'float');
+    
+    if ($prime2 != '' and !$prime2==$prime){
+        return array('editable'=>false);
+    }
+    else{
+        $return['prime'] = $prime2;
+        $table_des_obligatoires[] = 'prime';
+    }
+	//verifier que les inscrits soient bien un entier
+    $inscrits2 = $inscrits;
+    settype($inscrits,'int');
+
+    if ($inscrits2 != '' and !$inscrits2==$inscrits){
+        return array('editable'=>false);
+    }
+    else{
+        $return['inscrits'] = $inscrits2;
+        $table_des_obligatoires[] = 'inscrits';
+    }
+	//verifier que la repartition est bien reste ou moyenne
+	if($repartition != '' and $repartition!='reste' and $repartition!='moyenne'){
+        return array('editable'=>false);
+	}
+	else{
+	   $return['repartition'] = $repartition;
+	   $table_des_obligatoires[] = 'repartition';
+	}
+	$return['obligatoires'] = serialize($table_des_obligatoires);
+	return $return;
 }
 
 function formulaires_scrut_prop_verifier_dist(){
@@ -88,11 +143,26 @@ function formulaires_scrut_prop_verifier_dist(){
     //renvoi des résultats
     $erreurs['resultats'] = $resultats;
     
+    
     if ($il_y_a_erreur){
         $erreurs['repartition'] = _request('repartition');
         $erreurs['sieges'] = nb_en_to_fr($siege2);
         $erreurs['quota'] = $quota2;
         $erreurs['prime'] = $prime2;
+        
+        //les obligatoires
+        $obligatoires = unserialize(_request('obligatoires'));
+        $valeur_champs_obligatoire = array();
+        foreach ($obligatoires as $champ){
+            if ($champ == 'inscrits'){
+                $valeur_champs_obligatoire['inscrits'] = $resultats['inscrits'];
+            }
+            else{
+                $valeur_champs_obligatoire[$champ] = str_replace(' ','',$erreurs[$champ]);
+            }
+    
+        }
+       $erreurs['valeurs_champs_obligatoire'] =  $valeur_champs_obligatoire;
 	   return $erreurs;
     }
     else

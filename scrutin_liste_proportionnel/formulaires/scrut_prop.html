@@ -1,5 +1,5 @@
 <div class="formulaire_spip">
-[(#ENV{message_ok}|non)<form action='#ENV{action}' method='post'>
+[(#EDITABLE|oui)<form action='#ENV{action}' method='post'>
 	#ACTION_FORMULAIRE{#ENV{action}}
         <INCLURE{fond=formulaires/inc_scrut_prop}{env}>
         

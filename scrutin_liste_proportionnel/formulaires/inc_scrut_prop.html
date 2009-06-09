@@ -1,4 +1,9 @@
-  
+#SET{prime,#ENV{prime,#ENV{valeurs_champs_obligatoire}|table_valeur{prime}}}
+#SET{sieges,#ENV{sieges,#ENV{valeurs_champs_obligatoire}|table_valeur{sieges}}}
+#SET{quota,#ENV{quota,#ENV{valeurs_champs_obligatoire}|table_valeur{quota}}}
+#SET{repartition,#ENV{repartition,#ENV{valeurs_champs_obligatoire}|table_valeur{repartition}}}
+#SET{inscrits,#ENV{inscrits,#ENV{valeurs_champs_obligatoire}|table_valeur{inscrits}}}
+[(#REM)attention, pour les test, 0 est considérés comme nul)] 
         <B_test>
         <fieldset>
         <legend>Résultats des listes</legend>
@@ -10,6 +15,9 @@
         [<li class="erreur"><span class="erreur_message">(#ENV**{erreurs}|table_valeur{prime_pas_entier})</span></li>]
         [<li class="erreur"><span class="erreur_message">(#ENV**{erreurs}|table_valeur{inscrits_nuls})</span></li>]
         </ul>
+        [(#REM)ceux qui sont obligés par l'intégrateur du formulaire)
+        ] 
+        <input name="obligatoires" value="#ENV{obligatoires}" type="hidden" />
         <ul>
         <BOUCLE_test(POUR){tableau #ENV*{liste}}>
         
@@ -40,9 +48,9 @@
                 
                 <li[(#ENV**{erreurs}|table_valeur{liste_fausse}|table_valeur{inscrits}|ou{#ENV**{erreurs}|table_valeur{voix_plus_inscrits}}|ou{#ENV**{erreurs}|table_valeur{inscrits_nuls}}) class="erreur"]>
             
-                    <label[(#ENV**{erreurs}|table_valeur{liste_fausse}|table_valeur{inscrits}|ou{#ENV**{erreurs}|table_valeur{voix_plus_inscrits}}|ou{#ENV**{erreurs}|table_valeur{inscrits_nuls}}) class="erreur_message"] for="inscrits">Inscrits</label>
+                    <label[(#ENV**{erreurs}|table_valeur{liste_fausse}|table_valeur{inscrits}|ou{#ENV**{erreurs}|table_valeur{voix_plus_inscrits}}|ou{#ENV**{erreurs}|table_valeur{inscrits_nuls}}) class="erreur_message"] for="inscrits">Inscrits [(#GET{inscrits}|>{0}|oui)(Non modifiable)]</label>
                     
-                    <input[(#ENV**{erreurs}|table_valeur{liste_fausse}|table_valeur{inscrits}|ou{#ENV**{erreurs}|table_valeur{voix_plus_inscrits}}|ou{#ENV**{erreurs}|table_valeur{inscrits_nuls}}) class="erreur_message"]  size="10" type="text" name="resultat[inscrits]" id="inscrits" [value="(#ENV**{erreurs}|table_valeur{resultats}|table_valeur{inscrits})"]  />
+                    <input[(#ENV**{erreurs}|table_valeur{liste_fausse}|table_valeur{inscrits}|ou{#ENV**{erreurs}|table_valeur{voix_plus_inscrits}}|ou{#ENV**{erreurs}|table_valeur{inscrits_nuls}}) class="erreur_message"]  size="10" type="text" name="resultat[inscrits]" id="inscrits" [value="(#GET{inscrits})" readonly="true"][value="(#ENV**{erreurs}|table_valeur{resultats}|table_valeur{inscrits})"]  />
                     
 </li>
         </ul>
@@ -53,30 +61,35 @@
             
             <ul>
                 <li[(#ENV**{erreurs}|table_valeur{siege_pas_entier}|oui)  class="erreur"]>
-                <label[(#ENV**{erreurs}|table_valeur{siege_pas_entier}|oui) class="erreur_message"] for="siege">Nombre de sièges</label>
-                    <input[(#ENV**{erreurs}|table_valeur{siege_pas_entier}|oui) class="erreur_message"]  size="10" type="text" name="siege" id="siege" [value="(#ENV**{erreurs}|table_valeur{sieges})"]  />
+                <label[(#ENV**{erreurs}|table_valeur{siege_pas_entier}|oui) class="erreur_message"] for="siege">Nombre de sièges [(#GET{sieges}|>={0}|oui)(Non modifiable)]</label>
+                    <input[(#ENV**{erreurs}|table_valeur{siege_pas_entier}|oui) class="erreur_message"]  size="10" type="text" name="siege" id="siege" [value="(#GET{sieges})" readonly="true"][value="(#ENV**{erreurs}|table_valeur{sieges})"]  />
+                    
 
                 </li>
                 <li[(#ENV**{erreurs}|table_valeur{prime_pas_entier}|oui)  class="erreur"]>
-                <label[(#ENV**{erreurs}|table_valeur{prime_pas_entier}|oui) class="erreur_message"] for="prime">Dont prime majoritaire</label>
-                    <input[(#ENV**{erreurs}|table_valeur{prime_pas_entier}|oui) class="erreur_message"]  size="10" type="text" name="prime" id="prime" [value="(#ENV**{erreurs}|table_valeur{prime})"]  />
+                <label[(#ENV**{erreurs}|table_valeur{prime_pas_entier}|oui) class="erreur_message"] for="prime">Dont prime majoritaire [(#GET{prime}|>={0}|oui)(Non modifiable)]</label>
+                    <input[(#ENV**{erreurs}|table_valeur{prime_pas_entier}|oui) class="erreur_message"]  size="10" type="text" name="prime" id="prime" [value="(#GET{prime})" readonly="true"][value="(#ENV**{erreurs}|table_valeur{prime})"]  />
 
                 </li>
                 
                 <li[(#ENV**{erreurs}|table_valeur{quota_pas_nombre}|oui)  class="erreur"]>
-                <label[(#ENV**{erreurs}|table_valeur{quota_pas_nombre}|oui) class="erreur_message"] for="quota">Seuil pour avoir des élus</label>
-                    <input[(#ENV**{erreurs}|table_valeur{quota_pas_nombre}|oui) class="erreur_message"]  size="10" type="text" name="quota" id="quota" [value="(#ENV**{erreurs}|table_valeur{quota})"]  /> % des exprimés
+                <label[(#ENV**{erreurs}|table_valeur{quota_pas_nombre}|oui) class="erreur_message"] for="quota">Seuil pour avoir des élus[(#GET{quota}|>={0}|oui) (Non modifiable)]</label>
+                    <input[(#ENV**{erreurs}|table_valeur{quota_pas_nombre}|oui) class="erreur_message"]  size="10" type="text" name="quota" id="quota" [value="(#GET{quota})" readonly="true"][value="(#ENV**{erreurs}|table_valeur{quota})"]  /> % des exprimés
 
                 </li>
                 
                 <li>
-                <div class="choix">
-                    <label for="moyenne">Scrutin à la plus forte moyenne</label><input type="radio" name="repartition" value="moyenne" id="moyenne"  [(#ENV**{erreurs}|table_valeur{repartition}|=={moyenne}|or{#ENV**{erreurs}|table_valeur{repartition}|=={''}}|oui) checked="checked"] />
+                [(#GET{repartition}|non)<div class="choix">
+                    <label for="moyenne">Scrutin à la plus forte moyenne[(#GET{repartition}|oui) (Non modifiable)]</label><input type="radio" name="repartition" value="moyenne" id="moyenne"  [(#ENV**{erreurs}|table_valeur{repartition}|=={moyenne}|or{#ENV**{erreurs}|table_valeur{repartition}|=={''}}|oui) checked="checked"] />
                 </div>
                 
                  <div class="choix">
-                        <label for="reste">Scrutin au plus fort reste</label><input type="radio" name="repartition" value="reste" id="reste"  [(#ENV**{erreurs}|table_valeur{repartition}|=={reste}|oui) checked="checked"] />
+                        <label for="reste">Scrutin au plus fort reste[(#GET{repartition}|oui) (Non modifiable)]</label><input type="radio" name="repartition" value="reste" id="reste" [(#GET{repartition}|=={reste}|oui)] [(#ENV**{erreurs}|table_valeur{repartition}|=={reste}|oui) checked="checked"] />
                 </div>
+                ]
+                [(#GET{repartition}|=={moyenne}|oui)Scrutin à la plus forte moyenne.<input type="hidden" name="repartition" value="moyenne" />]
+                [(#GET{repartition}|=={reste}|oui)Scrutin au plus fort reste.<input type="hidden" name="repartition" value="reste" />]
+
                 
                 </li>
             </ul>
