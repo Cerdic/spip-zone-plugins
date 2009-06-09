@@ -8,6 +8,12 @@
 *	Toutes les infos sur : http://www.spip-contrib.net/?article1564
 */
 
+// Constantes surchargeables
+//@define ('_FILETS_SEP_BALISE_DEBUT', '<hr');
+//@define ('_FILETS_SEP_BALISE_FIN', '/>');
+@define ('_FILETS_SEP_BALISE_DEBUT', '<p');
+@define ('_FILETS_SEP_BALISE_FIN', '></p>');
+
 // cette fonction est appelee automatiquement a chaque affichage de la page privee du Couteau Suisse
 function filets_sep_installe() {
 //cs_log('filets_sep_installe()');
@@ -22,7 +28,7 @@ function filets_sep_installe() {
 			list(,$haut) = @getimagesize("$path/$reg[1]");
 			if ($haut) $haut="height:{$haut}px;";
 			$f = url_absolue($path).'/'.$reg[1];
-			$filets[1][] = code_echappement("<p class=\"filet_sep filet_sep_image\" style=\"$haut background-image: url($f);\"></p>");
+			$filets[1][] = code_echappement(_FILETS_SEP_BALISE_DEBUT." class=\"filet_sep filet_sep_image\" style=\"$haut background-image: url($f);\""._FILETS_SEP_BALISE_FIN);
 		}
 	}
 	ecrire_meta('cs_filets_sep_racc', join(', ', $liste));
@@ -49,7 +55,7 @@ function filets_sep_rempl($texte) {
 	// le resultat est protege pour eviter que la typo de SPIP y touche
 	while (preg_match($modele_nombre, $texte))
 		$texte = preg_replace_callback($modele_nombre, 
-			create_function('$matches', 'return code_echappement("<p class=\'filet_sep filet_sep_$matches[1]\'></p>");'), $texte); 
+			create_function('$matches', 'return code_echappement("'._FILETS_SEP_BALISE_DEBUT.' class=\'filet_sep filet_sep_$matches[1]\''._FILETS_SEP_BALISE_FIN.'");'), $texte); 
 	if (strpos($texte, '__')===false) return $texte;
 
 	// On remplace les balises filets images dans le texte par le code HTML correspondant.
@@ -70,7 +76,8 @@ function filets_sep_BarreTypo($tr) {
 	// le tableau des filets est present dans les metas
 	$filets = unserialize($GLOBALS['meta']['cs_filets_sep']);
 	$res = array();
-	for ($i=0; $i<=7; $i++)
+	@define ('_FILETS_SEP_MAX_CSS', 7);
+	for ($i=0; $i<=_FILETS_SEP_MAX_CSS; $i++)
 		$res[] = "<a title=\"__{$i}__\" href=\"javascript:barre_inserer('\\n\\n__{$i}__\\n\\n',@@champ@@)\"><span class=\"cs_BT\">CSS {$i}</span></a>";
 	$max = count($filets[0]);
 	for ($i=0; $i<$max; $i++)

@@ -19,22 +19,24 @@
 .filet_sep {
 	font-size:1px;
 	text-align:center;
+	padding:0; 
+	margin:0;
 }
 
 /******************************************/
 /** Filets **/
 
 /* Filet plein long epais 4px gris pale */
-.filet_sep_0 {border-bottom: 4px solid #ccc; padding: 0; margin: 0;}
+.filet_sep_0 {border-bottom: 4px solid #ccc;}
 
 /* Filet plein long fin 1px gris clair */
-.filet_sep_1 {border-bottom: 1px solid #999; padding: 0; margin: 0;}
+.filet_sep_1 {border-bottom: 1px solid #999;}
 
 /* Filet tirets moyen fin 1px gris moyen */
-.filet_sep_2 {border-bottom: 1px dashed #666; padding: 0; margin: 0px 80px;}
+.filet_sep_2 {border-bottom: 1px dashed #666; margin: 0px 80px;}
 
 /* Filet pointille court fin 1px gris fonce */
-.filet_sep_3 {border-bottom: 1px dotted #333; padding: 0; margin: 0 33%;}
+.filet_sep_3 {border-bottom: 1px dotted #333; margin: 0 33%;}
 
 
 /******************************************/
@@ -42,8 +44,6 @@
 
 /* Bloc long fond jaune pale avec filet pointille rouge */
 .filet_sep_4 { 
-	padding: 0; 
-	margin: 0;
 	height: 4px;
 	background-color: lemonchiffon; /* #FFFACD */
 	border: 1px dotted maroon; /* #800000 */
@@ -51,7 +51,6 @@
 
 /* Bloc moyen fond gris clair avec filets gauche-droite bleu */
 .filet_sep_5 { 
-	padding: 0; 
 	margin: 0px 100px;
 	height: 5px;
 	background-color: silver; /* #C0C0C0 */
@@ -61,7 +60,6 @@
 
 /* Bloc court fond bleu, filet haut rouge, filet bas orange */
 .filet_sep_6 { 
-	padding: 0; 
 	margin: 0 42%;
 	height: 6px;
 	background-color: blue; /* #0000FF */
@@ -69,13 +67,15 @@
 	border-bottom: 6px solid darkorange; /* #FF8C00 */
 }
 
+/* Exemple de filet pour surcharge */
+.filet_sep_7 {
+	border-bottom: 1px solid #999;
+}
 
 /******************************************/
 /** Images **/
 
 .filet_sep_image {
-	padding: 0; 
-	margin: 0;
 	height: 10px; /* hauteur par defaut */
 	background-position: center;
 	background-repeat: no-repeat;
