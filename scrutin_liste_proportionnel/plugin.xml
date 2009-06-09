@@ -28,6 +28,10 @@ GPL
 	</description>
 
 	<prefix>scrut_prop</prefix>
+	<pipeline>
+	   <nom>insert_head</nom>
+	   <inclure>scrut_prop_pip.php</inclure>
+	</pipeline>
 	<necessite id="spip_bonux" />
 
 </plugin>
