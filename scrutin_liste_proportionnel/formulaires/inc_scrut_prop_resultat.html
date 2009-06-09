@@ -6,6 +6,7 @@
     <li><strong>Seuil pour avoir des élus :</strong> [(#ENV{message_ok}|table_valeur{quota})] voix (arrondis au nombre inférieur)  [((#ENV{message_ok}|table_valeur{quota_pc}) % des exprimés)]</li>
     <li><strong>Sièges :</strong> [(#ENV{message_ok}|table_valeur{sieges})]</li>
     <li><strong>Dont prime majoritaire pour “[(#ENV{message_ok}|table_valeur{liste_primee})]” :</strong> [(#ENV{message_ok}|table_valeur{prime})]</li>
+    <li><strong>Quotient élèctoral :</strong> [(#ENV{message_ok}|table_valeur{quotient})]...</li>
     <li>[(#ENV{message_ok}|table_valeur{restants})]</li>
 </ul>
 
@@ -17,9 +18,9 @@
 <BOUCLE_pour(POUR){tableau #ENV**{message_ok}|table_valeur{voix_pc}}>
 <tr [class="(#COMPTEUR_BOUCLE|alterner{row_even,row_odd})"]>
     <td>#CLE</td>
-    <td>[(#ENV{message_ok}|table_valeur{voix_par_liste}|table_valeur{#CLE})]</td>
-    <td>#VALEUR</td>
-    <td>[(#ENV{message_ok}|table_valeur{sieges_par_liste}|table_valeur{#CLE})]</td>
+    <td style="text-align:right;">[(#ENV{message_ok}|table_valeur{voix_par_liste}|table_valeur{#CLE})]</td>
+    <td style="text-align:right;">#VALEUR</td>
+    <td style="text-align:right;">[(#ENV{message_ok}|table_valeur{sieges_par_liste}|table_valeur{#CLE})]</td>
 </tr>
 </BOUCLE_pour>
 </tbody>

@@ -116,12 +116,12 @@ function formulaires_scrut_prop_traiter_dist(){
     //participation
     $votants = array_sum($resultats) - $resultats['inscrits'];
     $return['votants_pc'] = nb_en_to_fr(round($votants * 100 /$resultats['inscrits'],2));
-    $return['votants']    = $votants;
-    $return['inscrits'] = $resultats['inscrits'];
+    $return['votants']    = nb_en_to_fr($votants);
+    $return['inscrits'] = nb_en_to_fr($resultats['inscrits']);
     
     //exprimes
     $return['blancs']  = (int) $resultats['blancs'];
-    $return['blancs_pc'] = nb_en_to_fr(round($resultats['blancs'] * 100 / $votants,2));
+    $return['blancs_pc'] = nb_en_to_fr($resultats['blancs'] * 100 / $votants,2);
     $return['exprimes'] = $votants - $return['blancs'];
     
     //quota
@@ -131,8 +131,8 @@ function formulaires_scrut_prop_traiter_dist(){
     $return['quota_pc'] = nb_en_to_fr($quota);
     $return['quota']    = floor($quota * $return['exprimes'] / 100) ;      // faut-il arrondir au dessus ou au dessous ?
     
-    $return['sieges']   = $sieges;
-    $return['prime']    = $prime;
+    $return['sieges']   = nb_en_to_fr($sieges);
+    $return['prime']    = nb_en_to_fr($prime);
     $sieges = $sieges - $prime ;    // on ne distribue pas à la prop la prime majoritaire, par déf !
     
     //on ne prend que les listes qui font plus du seuil
@@ -144,18 +144,20 @@ function formulaires_scrut_prop_traiter_dist(){
     
     foreach($resultats as $liste => $voix){
         $voix < $return['quota'] ? $liste_sieges[$liste] = 0 : $liste_reparti[$liste] = $voix;
-        $listes_pc[$liste] =  nb_en_to_fr(round($voix * 100 /$return['exprimes'],2));
+        $listes_pc[$liste] =  nb_en_to_fr($voix * 100 /$return['exprimes'],2);
     
     }
     $return['voix_pc'] =  $listes_pc;
     //calcul du quotient
     $voix_utiles = array_sum($liste_reparti);
     $quotient    = $voix_utiles / $sieges;
+    $return['quotient'] = nb_en_to_fr($quotient,2);
     
     $siege_par_listes = array();
-    
+
     //repartition des premiers sièges
     foreach($liste_reparti as $liste=>$voix){
+
         $sieges_par_listes[$liste] = floor($voix/$quotient);
         $restes[$liste] = $voix % $quotient;
         
@@ -184,8 +186,14 @@ function formulaires_scrut_prop_traiter_dist(){
     $liste_sieges[$return['liste_prime']] = $liste_sieges[$return['liste_prime']] + $prime;
     
     $return['sieges_par_liste'] = $liste_sieges;
-    $return['voix_par_liste']   = $resultats;
+    //appliquer un peu de typo
+    foreach ($resultats as $liste=>$voix){
+        $resultats[$liste] = nb_en_to_fr($voix);
     
+    }
+    $return['quota'] = nb_en_to_fr($return['quota']);
+    //returner ce qu'il faut
+    $return['voix_par_liste']   = $resultats;
     return array('message_ok'=>$return);
 }
 
@@ -196,8 +204,8 @@ function nb_fr_to_en($nb){
     return str_replace(',', '.' ,$nb);
 }
 
-function nb_en_to_fr($nb){
-    return str_replace('.', ',',$nb);
+function nb_en_to_fr($nb,$dec=0){
+    return number_format($nb,$dec,','," ");
 }
 
 //repartition des sièges non attribués
@@ -216,8 +224,8 @@ function sieges_restants_moyenne($sieges_par_listes,$sieges,$voix){
             
             if ($moy == $plus_forte){
             
-                $sieges_par_listes[$liste] == $sieges_par_listes[$liste]++;
-            
+                $sieges_par_listes[$liste] = $sieges_par_listes[$liste]+1;
+                break;
             }
         }
     
@@ -226,11 +234,13 @@ function sieges_restants_moyenne($sieges_par_listes,$sieges,$voix){
 
     return $sieges_par_listes;
 }
+
+
 function sieges_restants_reste($sieges_par_listes,$restes,$sieges){
     arsort($restes);
     
     while(array_sum($sieges_par_listes) < $sieges){
-    
+        
         $clef = key($restes);
         $sieges_par_listes[$clef] =  $sieges_par_listes[$clef]+1;
         
