@@ -23,12 +23,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bookmarklet' => 'Bookmarklet',
 'bookmarklet_lien' => 'Ajouter &agrave; @site@',
 'bookmarklet_explication' => 'D&eacute;placez ce bookmarklet dans les marques-pages de votre navigateur et cliquez dessus chaque fois que vous souhaitez ajouter un signet pour la page courante dans @site@.',
+'importer' => 'Importer',
+'importer_explication' => 'Exportez vos marque-pages d\'où ils sont stock&eacute;s actuellement (Firefox, IE, delicious, etc), puis t&eacute;l&eacute;chargez le fichier ici.',
 
 // Pour la configuration
 'configuration_titre' => 'Configuration des marque-pages',
 'configuration_qui' => 'Qui peut ajouter des marque-pages ?',
 'configuration_rubrique' => 'Rubrique des marque-pages',
 'configuration_rubrique_explication' => 'Choisissez la rubrique dans laquelle les marque-pages seront enregistr&eacute;s par d&eacute;faut.',
+
+// Erreurs
+'erreur_importation' => 'Erreur lors du chargement du fichier.',
+'erreur_importation_mal_passee' => 'L\'importation a &eacute;chou&eacute;e. Veuillez r&eacute;essayer.',
+'erreur_importation_ok' => 'Tous les marque-pages ont &eacute;t&eacute; import&eacute;s.',
+'erreur_type_inconnu' => 'Impossible de trouver le type du fichier import&eacute;.',
 
 // Pour le formulaire de saisi
 'ajouter' => 'Ajouter un marque-page',

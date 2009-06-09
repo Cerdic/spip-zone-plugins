@@ -5,4 +5,10 @@
 	href="javascript:x=document;a=encodeURIComponent(x.location.href);t=encodeURIComponent(x.title);d=encodeURIComponent(window.getSelection());r=encodeURIComponent('[(#VAL|url_mp|parametre_url{popup,close})]');open('[(#VAL{nouveau}|url_mp_editer)]&popup=oui&mp_url='+a+'&mp_titre='+t+'&mp_description='+d+'&redirect='+r,'#CONFIG{marquepages/titremp}','modal=1,status=0,scrollbars=1,toolbar=0,resizable=1,width=1000,height=750,left='+(screen.width-1000)/2+',top='+(screen.height-750)/2);void%200;">
 	<:marquepages:bookmarklet_lien{site=#CONFIG{marquepages/titremp}}:>
 </a>
-<p><:marquepages:bookmarklet_explication{site=#CONFIG{marquepages/titremp}}:></p>
+<p class="explication"><:marquepages:bookmarklet_explication{site=#CONFIG{marquepages/titremp}}:></p>
+
+[(#AUTORISER{creermarquepagedans, rubrique, #ENV{id_rubrique}}|oui)
+<h2><:marquepages:importer:></h2>
+#FORMULAIRE_IMPORTER_MARQUEPAGES
+<p class="explication"><:marquepages:importer_explication:></p>
+]

@@ -1,8 +1,8 @@
 
 <h2><:marquepages:tous_les_marquepages:></h2>
 
-<B_etiquettes>
 <ul class="etiquettes">
+<B_etiquettes>
 	<li><:marquepages:avec_etiquettes:></li>
 <BOUCLE_etiquettes(MOTS){titre=#ENV{titre_mot}}>
 	<li>
@@ -10,7 +10,7 @@
 		<a href="[(#SELF|url_mp_supprimer_tag{#TITRE})]" title="<:marquepages:enlever:>">-</a>
 	</li>
 </BOUCLE_etiquettes>
+	<li>&nbsp;</li>
 </ul>
-</B_etiquettes>
 
 <INCLURE{fond=fonds/marquepages}{ajax}{self=#SELF}{id_rubrique}{titre_mot}{pagination=#ENV{pagination}}{tri=#ENV{tri}}{senstri=#ENV{senstri}}>

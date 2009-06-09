@@ -58,7 +58,7 @@ N&eacute;cessite le plugin Étiquettes et CFG.
 		<inclure>inc/marquepages_autoriser.php</inclure>
 	</pipeline>
 	
-	<necessite id="SPIP" version="[2.0.0;]" />
+	<necessite id="SPIP" version="[2.0.8;]" />
 	<necessite id='cfg' version='[1.10;]' />
 	<necessite id='etiquettes' version='[0.6.5;]' />
 	<necessite id='nuage' version='[1.4;]' />

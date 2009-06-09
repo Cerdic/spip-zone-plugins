@@ -164,6 +164,12 @@ function marquepages_modifier($id_forum, $titre, $description, $statut, $tags){
 // Retourne true si c'est bon, false sinon
 function marquepages_supprimer($id_forum){
 	
+	// On commence par retirer tous les mots-clés
+	sql_delete(
+		'spip_mots_forum',
+		'id_forum=' . intval($id_forum)
+	);
+	
 	$r = sql_fetsel(
 		'id_syndic',
 		'spip_forum',
@@ -201,6 +207,51 @@ function marquepages_supprimer($id_forum){
 	
 	return $tout_va_bien;
 	
+}
+
+// Importer des marque-pages depuis un fichier d'export HTML de navigateur
+function marquepages_importer_netscape($chemin, $id_rubrique){
+	$retours = array();
+	
+	$html = file_get_contents($chemin);
+	
+	// On cree un tableau de tous les liens
+    preg_match_all('/<a\s+(.*?)\s*\/*>([^<]*)/si', $html, $matches);
+    $liens = $matches[1];
+    $titres = $matches[2];
+    
+    foreach($liens as $i => $lien){
+        $attributs = preg_split('/\s+/s', $lien);
+        foreach ($attributs as $attribut) {
+            $attribut = preg_split('/\s*=\s*/s', $attribut, 2);
+            $attrTitre = $attribut[0];
+            $attrValeur = eregi_replace('"', '&quot;', preg_replace('/([\'"]?)(.*)\1/', '$2', $attribut[1]));
+            switch (strtolower($attrTitre)) {
+                case "href":
+                    $url = $attrValeur;
+                    break;
+                case "add_date":
+                    $date = date('Y-m-d H:i:s', $attrValeur);
+                    if (strtotime($date) > time())
+                    	$date = date('Y-m-d H:i:s');
+                    break;
+            }
+        }
+        $titre = eregi_replace('"', '&quot;', trim($titre[$i]));
+		
+        marquepages_ajouter($id_rubrique, $url, $titre, $description, 'mppublic', '');
+    }
+    
+   	$retours['message_ok'] = _T('marquepages:erreur_importation_ok');
+	
+	return $retours;
+}
+
+// Importer des marque-pages depuis un fichier d'export de delicious
+function marquepages_importer_delicious($chemin, $id_rubrique){
+	$retours = array();
+	$retours['message_ok'] = 'Importation delicious';
+	return $retours;
 }
 
 ?>

@@ -23,12 +23,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bookmarklet' => 'Bookmarklet',
 'bookmarklet_lien' => 'Add to @site@',
 'bookmarklet_explication' => 'Move this bookmarklet in your browser\'s bookmarks and click on it every time you want to add a bookmark on @site@.',
+'importer' => 'Import',
+'importer_explication' => 'Export your bookmarks from where they are saved now (Firefox, IE, delicious, etc), then upload the file here.',
 
 // Pour la configuration
 'configuration_titre' => 'Bookmarks configuration',
 'configuration_qui' => 'Who can add bookmarks ?',
 'configuration_rubrique' => 'Bookmarks section',
 'configuration_rubrique_explication' => 'Choose a section where bookmarks will be saved by default.',
+
+// Erreurs
+'erreur_importation' => 'Error on file upload.',
+'erreur_importation_mal_passee' => 'Importation failed. Please retry.',
+'erreur_importation_ok' => 'All bookmarks have been imported.',
+'erreur_type_inconnu' => 'Impossible to find the type of uploaded file.',
 
 // Pour le formulaire de saisi
 'ajouter' => 'Add a bookmark',

@@ -40,7 +40,7 @@ function filtre_url_mp_tag_dist($tag, $login=''){
 }
 function filtre_url_mp_supprimer_tag_dist($url, $tag){
 	$url = parametre_url($url, 'titre_mot', '');
-	return $rurl;
+	return $url;
 }
 
 ?>

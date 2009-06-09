@@ -58,6 +58,7 @@ a:hover{
 #navigation{
 	float:right;
 	width:17em;
+	padding-top:1.1em;
 	font-size:0.9em;
 }
 #bloc-bas{
@@ -123,7 +124,7 @@ h1 a:hover{
 /* Pour la navigation */
 #navigation h2{
 	position:relative;
-	margin-top:0.2em;
+	margin:0.2em 0;
 	padding:0.2em 0;
 	font-size:1em;
 	font-weight:bold;
@@ -177,6 +178,10 @@ h1 a:hover{
 	right:4px;
 	top:4px;
 }
+#navigation .explication{
+	margin:1em 0;
+	text-align:center;
+}
 
 /* Pour le contenu */
 #contenu h2{
@@ -220,6 +225,11 @@ h1 a:hover{
 	text-decoration:none;
 	background:#6C6C6C;
 }
+#contenu .pagination{
+	margin:1em;
+	text-align:center;
+	font-size:1.2em;
+}
 
 /* Pour les formulaires */
 .formulaire_spip input.text, .formulaire_spip select, .formulaire_spip #password{
@@ -229,10 +239,29 @@ h1 a:hover{
 .formulaire_spip input.text:focus, .formulaire_spip select:focus, .formulaire_spip #password:focus{
 	border:1px solid #d90fad;
 }
+.formulaire_spip input.submit, .formulaire_spip button, .formulaire_spip .boutons input{
+	padding:0.2em 0.5em;
+	font-weight:bold;
+	color:white;
+	background:#d90fad;
+	-moz-border-radius:3px;
+	-webkit-border-radius:3px;
+}
 .formulaire_spip .popular_tags span.selected{
 	color:white;
 	background:#6C6C6C;
 }
-.formulaire_marquepage .formulaire_login legend{
+.formulaire_recherche{
+	margin-bottom:1em;
+	text-align:center;
+}
+.formulaire_recherche input.text{
+	padding-left:25px;
+}
+.formulaire_importer_marquepages, .formulaire_importer_marquepages .boutons{
+	margin:0;
+	text-align:center;
+}
+.formulaire_marquepage .formulaire_login legend, .formulaire_recherche label{
 	display:none;
 }
