@@ -1,0 +1,26 @@
+#CACHE{0}
+
+<div class="formulaire_spip formulaire_importer_marquepages"  id="formulaire_importer_marquepages">	
+	
+	<br class='bugajaxie' />
+	
+	[<p class="reponse_formulaire reponse_formulaire_ok">
+		(#ENV*{message_ok})
+	</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">
+		(#ENV*{message_erreur})
+	</p>]
+	
+	<form action="#ENV{action}#formulaire_importer_marquepages" enctype="multipart/form-data" method="post">
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type="hidden" name="id_rubrique" value="#ENV{id_rubrique}" />
+		<ul>
+			<li>
+				<input type="file" class="file text" name="fichier" size="10" />
+			</li>
+			<li class="boutons">
+				<input type="submit" class="submit" value="<:marquepages:importer:>" />	
+			</li>
+		</ul>
+	</form>
+</div>
