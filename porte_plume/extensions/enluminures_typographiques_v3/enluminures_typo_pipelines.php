@@ -124,7 +124,7 @@ function typoenluminee_porte_plume_barre_pre_charger($barres){
 		"selectionType" => "line",
 	));
 	
-	$barre->ajouterApres('desindenter', array(
+	$barre->ajouterApres('liste_ul', array(
 		// groupe code et bouton <code>
 		"id"          => 'speciaux',
 		"name"        => _T('enlumtypo:barre_formatages_speciaux'),
