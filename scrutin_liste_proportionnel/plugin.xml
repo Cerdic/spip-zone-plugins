@@ -22,7 +22,7 @@ GPL
 	
 	Un fois rempli, le formulaire test si les valeurs sont coh&eacute;rentes (pas plus de votants que d'inscrits par exemple !). Puis il calcul la r&eacute;partition de si&egrave;ges.
 	
-	N&acute;c&acute;ssite Spip-Bonux
+	N&eacute;c&eacute;ssite Spip-Bonux
 	
 	Documentation compl&egrave;te sur [Contrib->http://www.spip-contrib.net/Plugin-scrutin-de-liste-a-la].
 	</description>
