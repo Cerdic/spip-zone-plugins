@@ -126,10 +126,10 @@ function formulaires_article_gis_verifier_dist(){
 				// supprimer des documents ?
 				if (is_array(_request('supprimer')))
 				foreach (_request('supprimer') as $supprimer) {
-					include_spip('base/abstract_sql');
 					if ($supprimer = intval($supprimer)) {
-						include_spip('action/documenter');
-						supprimer_document($supprimer);
+						include_spip('inc/autoriser');
+						$supprimer_document = charger_fonction('supprimer_document','action');
+						$supprimer_document($supprimer);
 						$erreurs['document'] = _T('gis:document_supprime');
 					}
 				}
