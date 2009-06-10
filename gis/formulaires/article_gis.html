@@ -21,9 +21,12 @@ fecha = new Date();
 if (GBrowserIsCompatible()) {
     // create the map
     var map = new GMap2(document.getElementById("formMap"));
+	var default_lat = [(#CONFIG**{[(#CONFIG**{gis/api_carte})]/latitude,0})];
+	var default_lonx = [(#CONFIG**{[(#CONFIG**{gis/api_carte})]/longitude,0})];
+	var default_zoom = [(#CONFIG**{[(#CONFIG**{gis/api_carte})]/zoom,0})];
     map.addControl(new GLargeMapControl());
     map.addControl(new GMapTypeControl());
-    map.setCenter(new GLatLng([(#CONFIG**{gis_default_lat,0})],[(#CONFIG**{gis_default_lonx,0})]), [(#CONFIG**{gis_default_zoom,0})], G_NORMAL_MAP);
+    map.setCenter(new GLatLng(default_lat,default_lonx), default_zoom, G_NORMAL_MAP);
 
     // creamos el evento para crear nuevos marcadores
     GEvent.addListener(map, "click", function(overlay, point){
