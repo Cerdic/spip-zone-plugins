@@ -64,7 +64,7 @@ function formulaires_scrut_prop_charger_dist($liste,$sieges='',$quota='',$prime=
 
 function formulaires_scrut_prop_verifier_dist(){
     
-    $resultats = _request('resultat');
+    $resultats = array_map('supprime_espaces',_request('resultat'));
     
     $erreurs = array();
     $liste_fausse = array();
@@ -175,7 +175,7 @@ function formulaires_scrut_prop_traiter_dist(){
     
     //resultat du formulaire
     
-    $resultats  = _request('resultat');
+    $resultats = array_map('supprime_espaces',_request('resultat'));
     $sieges     = _request('siege');
     $quota      = nb_fr_to_en(_request('quota'));
     $repartition = _request('repartition');
@@ -305,7 +305,9 @@ function sieges_restants_moyenne($sieges_par_listes,$sieges,$voix){
     return $sieges_par_listes;
 }
 
-
+function supprime_espaces($i){
+    return str_replace(' ','',$i);
+}
 function sieges_restants_reste($sieges_par_listes,$restes,$sieges){
     arsort($restes);
     
