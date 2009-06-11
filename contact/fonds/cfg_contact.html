@@ -12,12 +12,10 @@
 				<p class="explication"><:contact:configuration_destinataires_explication:></p>
 					<B_auteurs>
 					<select name="choix_destinataires[]" id="choix_destinataires" multiple="multiple" size="5">
-					<BOUCLE_auteurs(AUTEURS){tous}>
-					[(#EMAIL|?{' '})
+					<BOUCLE_auteurs(AUTEURS){tous}{email!=''}>
 						<option value="#ID_AUTEUR" [(#ID_AUTEUR|in_array{#ENV{choix_destinataires,#ARRAY}}|oui)selected="selected"]>
 							#NOM (##ID_AUTEUR)
 						</option>
-					]
 					</BOUCLE_auteurs>
 				</select>
 				</B_auteurs>
