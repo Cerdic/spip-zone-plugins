@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+	<nom>Tablesorter</nom>
+	<auteur>Chistian Bach http://lovepeacenukes.com/
+	Portabe sous SPIP par Cyril Marion</auteur>
+	<version>0.0</version>
+	<etat>test</etat>
+	<description>
+	Ajoute une class "tablesorter" &agrave; tous les tableaux ayant d&eacute;j&agrave la class table.spip, permettant de trier les donn&eacute;es sur un simple clic sur une colonne.
+	</description>
+	
+	<prefix>tablesorter</prefix>
+	
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>inc-head.php</inclure>
+	</pipeline>
+	
+</plugin>
