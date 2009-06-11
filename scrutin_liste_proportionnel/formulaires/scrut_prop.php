@@ -3,6 +3,7 @@
 function formulaires_scrut_prop_charger_dist($liste,$sieges='',$quota='',$prime='',$repartition='',$inscrits=''){
     $return = array();
     $tab_des_obligatoires = array();
+    include_spip('scrut_prop_fonctions');
     $return['liste'] = array_map("scrut_prop_mettre_underscore",explode(';',$liste));
     
     //verifier que les sièges soient bien un entier
