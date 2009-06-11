@@ -50,7 +50,7 @@
             
                     <label[(#ENV**{erreurs}|table_valeur{liste_fausse}|table_valeur{inscrits}|ou{#ENV**{erreurs}|table_valeur{voix_plus_inscrits}}|ou{#ENV**{erreurs}|table_valeur{inscrits_nuls}}) class="erreur_message"] for="inscrits">Inscrits [(#GET{inscrits}|>{0}|oui)(Non modifiable)]</label>
                     
-                    <input[(#ENV**{erreurs}|table_valeur{liste_fausse}|table_valeur{inscrits}|ou{#ENV**{erreurs}|table_valeur{voix_plus_inscrits}}|ou{#ENV**{erreurs}|table_valeur{inscrits_nuls}}) class="erreur_message"]  size="10" type="text" name="resultat[inscrits]" id="inscrits" [value="(#GET{inscrits})" readonly="true"][value="(#ENV**{erreurs}|table_valeur{resultats}|table_valeur{inscrits})"]  />
+                    <input[(#ENV**{erreurs}|table_valeur{liste_fausse}|table_valeur{inscrits}|ou{#ENV**{erreurs}|table_valeur{voix_plus_inscrits}}|ou{#ENV**{erreurs}|table_valeur{inscrits_nuls}}) class="erreur_message"]  size="10" type="text" name="resultat[inscrits]" id="inscrits" [value="(#GET{inscrits})" readonly="readonly"][value="(#ENV**{erreurs}|table_valeur{resultats}|table_valeur{inscrits})"]  />
                     
 </li>
         </ul>
@@ -62,19 +62,19 @@
             <ul>
                 <li[(#ENV**{erreurs}|table_valeur{siege_pas_entier}|oui)  class="erreur"]>
                 <label[(#ENV**{erreurs}|table_valeur{siege_pas_entier}|oui) class="erreur_message"] for="siege">Nombre de sièges [(#GET{sieges}|>={0}|oui)(Non modifiable)]</label>
-                    <input[(#ENV**{erreurs}|table_valeur{siege_pas_entier}|oui) class="erreur_message"]  size="10" type="text" name="siege" id="siege" [value="(#GET{sieges})" readonly="true"][value="(#ENV**{erreurs}|table_valeur{sieges})"]  />
+                    <input[(#ENV**{erreurs}|table_valeur{siege_pas_entier}|oui) class="erreur_message"]  size="10" type="text" name="siege" id="siege" [value="(#GET{sieges})" readonly="readonly"][value="(#ENV**{erreurs}|table_valeur{sieges})"]  />
                     
 
                 </li>
                 <li[(#ENV**{erreurs}|table_valeur{prime_pas_entier}|oui)  class="erreur"]>
                 <label[(#ENV**{erreurs}|table_valeur{prime_pas_entier}|oui) class="erreur_message"] for="prime">Dont prime majoritaire [(#GET{prime}|>={0}|oui)(Non modifiable)]</label>
-                    <input[(#ENV**{erreurs}|table_valeur{prime_pas_entier}|oui) class="erreur_message"]  size="10" type="text" name="prime" id="prime" [value="(#GET{prime})" readonly="true"][value="(#ENV**{erreurs}|table_valeur{prime})"]  />
+                    <input[(#ENV**{erreurs}|table_valeur{prime_pas_entier}|oui) class="erreur_message"]  size="10" type="text" name="prime" id="prime" [value="(#GET{prime})" readonly="readonly"][value="(#ENV**{erreurs}|table_valeur{prime})"]  />
 
                 </li>
                 
                 <li[(#ENV**{erreurs}|table_valeur{quota_pas_nombre}|oui)  class="erreur"]>
                 <label[(#ENV**{erreurs}|table_valeur{quota_pas_nombre}|oui) class="erreur_message"] for="quota">Seuil pour avoir des élus[(#GET{quota}|>={0}|oui) (Non modifiable)]</label>
-                    <input[(#ENV**{erreurs}|table_valeur{quota_pas_nombre}|oui) class="erreur_message"]  size="10" type="text" name="quota" id="quota" [value="(#GET{quota})" readonly="true"][value="(#ENV**{erreurs}|table_valeur{quota})"]  /> % des exprimés
+                    <input[(#ENV**{erreurs}|table_valeur{quota_pas_nombre}|oui) class="erreur_message"]  size="10" type="text" name="quota" id="quota" [value="(#GET{quota})" readonly="readonly"][value="(#ENV**{erreurs}|table_valeur{quota})"]  /> % des exprimés
 
                 </li>
                 
