@@ -262,6 +262,7 @@ function formulaires_scrut_prop_traiter_dist(){
     
     }
     $return['quota'] = nb_en_to_fr($return['quota']);
+    $return['exprimes'] = nb_en_to_fr($return['exprimes']);
     //returner ce qu'il faut
     $return['voix_par_liste']   = $resultats;
     return array('message_ok'=>$return);
