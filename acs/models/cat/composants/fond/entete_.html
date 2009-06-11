@@ -18,7 +18,7 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
   <meta name="distribution" content="Global" />
   <meta name="audience" content="General" />
   [<title>(#ENV{title})</title>]
-  [<meta name="robots" content="(#ENV{mrobots,all})">]
+  <meta name="robots" content="#ENV{mrobots,#ENV{calendrier_mois}|=={""}|?{all,none}}">
   [<meta name="expires" content="(#ENV{mexpires,3600})" />]
   [<meta name="description" content="(#ENV{mdescription,[(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)]})" />]
   [<meta name="keywords" lang="#LANG" content="(#ENV{mkeywords,<:acs:entete_meta_keywords:>})" />]
