@@ -17,7 +17,7 @@
 <tbody>
 <BOUCLE_pour(POUR){tableau #ENV**{message_ok}|table_valeur{voix_pc}}>
 <tr[ class="(#COMPTEUR_BOUCLE|alterner{row_even,row_odd})[(#ENV{message_ok}|table_valeur{sieges_par_liste}|table_valeur{#CLE}|>{0}|oui) avec_elus]"]>
-    <td>#CLE</td>
+    <td>[(#CLE|scrut_prop_enlever_underscore)]</td>
     <td style="text-align:right;">[(#ENV{message_ok}|table_valeur{voix_par_liste}|table_valeur{#CLE})]</td>
     <td style="text-align:right;">#VALEUR</td>
     <td style="text-align:right;">[(#ENV{message_ok}|table_valeur{sieges_par_liste}|table_valeur{#CLE})]</td>

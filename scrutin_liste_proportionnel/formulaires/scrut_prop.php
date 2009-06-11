@@ -3,7 +3,7 @@
 function formulaires_scrut_prop_charger_dist($liste,$sieges='',$quota='',$prime='',$repartition='',$inscrits=''){
     $return = array();
     $tab_des_obligatoires = array();
-    $return['liste'] = explode(';',$liste);
+    $return['liste'] = array_map("scrut_prop_mettre_underscore",explode(';',$liste));
     
     //verifier que les sièges soient bien un entier
     $sieges2 = $sieges;

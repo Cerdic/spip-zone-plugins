@@ -23,7 +23,7 @@
         
         <li[(#ENV**{erreurs}|table_valeur{liste_fausse}|table_valeur{#VALEUR}|oui) class="erreur"]>
         
-        <label[(#ENV**{erreurs}|table_valeur{liste_fausse}|table_valeur{#VALEUR}|oui) class="erreur_message"] for="#VALEUR">#VALEUR</label>
+        <label[(#ENV**{erreurs}|table_valeur{liste_fausse}|table_valeur{#VALEUR}|oui) class="erreur_message"] for="#VALEUR">[(#VALEUR|scrut_prop_enlever_underscore)]</label>
         
         <input[(#ENV**{erreurs}|table_valeur{liste_fausse}|table_valeur{#VALEUR}|oui) class="erreur_message"]  size="10" type="text" name="resultat[#VALEUR]" id="#VALEUR" [value="(#ENV**{erreurs}|table_valeur{resultats}|table_valeur{#VALEUR})"]  />
         

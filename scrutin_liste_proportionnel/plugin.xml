@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Scrutin de liste à la proportionnelle</nom>
 	<etat>stable</etat>
-	<version>1.2</version>
+	<version>1.2.1</version>
 	<auteur>Ma&iuml;eul Rouquette
 GPL
 	</auteur>
@@ -32,6 +32,7 @@ GPL
 	   <nom>insert_head</nom>
 	   <inclure>scrut_prop_pip.php</inclure>
 	</pipeline>
+	<fonctions>scrut_prop_fonctions.php</fonctions>
 	<necessite id="spip_bonux" />
 
 </plugin>
