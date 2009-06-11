@@ -181,4 +181,16 @@ if (!function_exists('filtre_implode_dist')){
 function filtre_implode_dist($a,$b){return implode($b,$a);}
 }
 
+if (!function_exists('bando_images_background')){
+function bando_images_background(){
+	return '';
+}
+}
+
+if (!function_exists('bando_style_prive_skin')){
+function bando_style_prive_skin() {
+	return '';
+}
+}
+
 ?>
