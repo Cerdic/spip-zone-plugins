@@ -26,7 +26,7 @@ td.fiche {
 /*ici on règle le rouge du table header */
 table.tablesorter thead tr .header {
 	background-color: #DA0000; 
-	background-image: url("../images/gif/bg.gif");
+	background-image: url("./plugins/auto/tablesorter/images/bg.png");
 	background-repeat: no-repeat;
 	background-position: center right;
 	cursor: pointer;
@@ -57,10 +57,10 @@ table.tablesorter thead tr .headerSortUp {
 	color: #FFFFFF;
 }
 table.tablesorter thead tr .headerSortUp {
-	background-image: url("../images/gif/asc.gif");
+	background-image: url("./plugins/auto/tablesorter/images/asc.png");
 }
 table.tablesorter thead tr .headerSortDown {
-	background-image: url("../images/gif/desc.gif");
+	background-image: url("./plugins/auto/tablesorter/images/desc.png");
 }
 .pager {
 	clear:both;
