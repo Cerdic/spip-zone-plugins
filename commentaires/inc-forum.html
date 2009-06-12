@@ -1,5 +1,4 @@
-[(#REM) Cette balise (invisible) provoque le recalcul du forum
-la premiere fois qu'un message est poste (cf. inc/invalideur). ]
+[(#REM) Cette balise (invisible) provoque le recalcul du forum la premiere fois qu'un message est poste (cf. inc/invalideur). ]
 [(#PARAMETRES_FORUM|?{''})]
 
 <B_commentaires>
@@ -8,7 +7,7 @@ la premiere fois qu'un message est poste (cf. inc/invalideur). ]
 
 <B_commentaires>
 <ul class="commentaires">
-	<BOUCLE_commentaires(FORUMS) {id_rubrique ?}{id_article ?}{id_breve ?}{id_syndic ?} {plat} {par date}>
+	<BOUCLE_commentaires(FORUMS) {statut !IN prive} {id_rubrique ?}{id_article ?}{id_breve ?}{id_syndic ?} {plat} {par date}>
     <li class="message[ (#COMPTEUR_BOUCLE|alterner{'impair','pair'})][ (#COMPTEUR_BOUCLE|=={1}|oui)first]" id="forum#ID_FORUM">
     	<a href="#forum#ID_FORUM" title="<:commentaire:> #ID_FORUM" class="ancre">#</a>
         [<span class="date">Le (#DATE|affdate_jourcourt)[ &agrave;&nbsp;(#DATE|heures)][:(#DATE|minutes)]</span>]
