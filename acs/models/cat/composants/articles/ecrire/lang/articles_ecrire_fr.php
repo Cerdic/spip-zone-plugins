@@ -25,6 +25,12 @@ _ide, _aut, ou _adm aux visiteurs enregistrés, aux rédacteurs, et aux administ
 'RubFond6' => '6',
 'Puce' => 'Puce',
 
+'table' => 'Tableaux',
+'TabBordColor' => 'Bordure',
+'TabFirst' => 'Premi&egrave;re ligne',
+'TabOdd' => 'Ligne paire',
+'TabEven' => 'Ligne impaire',
+
 'Dates' => 'Affiche les dates des articles',
 'Aut' => 'Affiche les auteurs des articles',
 'Stats' => 'Affiche les statistiques de visites',

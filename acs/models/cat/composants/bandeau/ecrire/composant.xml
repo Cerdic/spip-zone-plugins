@@ -49,7 +49,7 @@
     <option>left</option>
     <option>center</option>
     <option>right</option>
-    <defaut>center</defaut>
+    <valeur>center</valeur>
   </variable>
   <variable>
     <nom>Contenu</nom>

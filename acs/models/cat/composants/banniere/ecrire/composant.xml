@@ -53,6 +53,7 @@
     <nom>TextColor</nom>
     <type>color</type>
   </variable>
+
   <variable>
     <nom>FontFamily</nom>
     <type>fontFamily</type>

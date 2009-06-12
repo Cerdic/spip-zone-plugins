@@ -6,7 +6,7 @@
 $traductions_acs = array(
   'use' => 'Use',
 
-  'bord' => 'Border',
+  'bordcolor' => 'Border',
   'bordlargeur' => 'border width',
   'bordstyle' => 'border style',
   'parent' => 'default value',
@@ -26,6 +26,7 @@ $traductions_acs = array(
 	'right' => 'right',
 
 	'font' => 'Font(s)',
+	'fontsize' => 'Size',
 	'fontfamily' => 'Font family'
 );
 

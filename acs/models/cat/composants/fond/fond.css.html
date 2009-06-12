@@ -7,10 +7,9 @@
 body {
   margin: 0;
   padding: 0;
-
-  font: 1em Verdana, 'Trebuchet MS', Arial, 'Lucida Sans', sans-serif;
-  /*font: 1.5em Edwardian Script ITC, Monotype Corsiva, URW Chancery L, French Script MT, Comic Sans MS, Cursive;*/
-
+  font: [(#CONFIG{acsFondFontSize,1em})][ (#CONFIG{acsFondFont,Verdana, 'Trebuchet MS', Arial, 'Lucida Sans'})][, (#CONFIG{acsFondFontFamily,sans-serif})];[(#REM) exemples : 
+    font: 1.5em Edwardian Script ITC, Monotype Corsiva, URW Chancery L, French Script MT, Comic Sans MS, Cursive;
+    font: 1em Verdana, 'Trebuchet MS', Arial, 'Lucida Sans', serif;]
   [background: (#CONFIG{acsFondColor})[ url('[(#ACS_CHEMIN)]img/fond/(#CONFIG{acsFondImage})') repeat];]
   [color: (#CONFIG{acsFondText});]
 }
@@ -37,22 +36,17 @@ div.spip_poesie {
   font-size: 140%;
 }
 
-/*************
- * tableaux
- *************/
+[(#REM) composants de type blocs, titres ]
+.cbloc {
+  font-size: 0.82em;
+}
+.menu-titre {
+  text-align : center;
+  font-weight: bold;
+}
 
-table.spip {
-  margin: auto;
-  margin-bottom: 1em;
-  border: 1px solid #CONFIG{acsFondBordColor};
-  border-collapse: collapse; }
-table.spip caption {
-  caption-side: top; /* bottom pas pris en compte par IE */
-  text-align: center;
-  margin: auto;
-  padding: 3px;
-  font-weight: bold; }
-[table.spip tr.row_first { background: (#CONFIG{acsFondTabFirst});}]
-[table.spip tr.row_odd { background: (#CONFIG{acsFondTabOdd});}]
-[table.spip tr.row_even { background: (#CONFIG{acsFondTabEven});}]
-table.spip th, table.spip td { padding: 3px; text-align: left; vertical-align: middle; }
+.menu-item a.menu-link {
+  width: 100%;
+  padding-left:5px;
+  padding-right: 5px;
+}

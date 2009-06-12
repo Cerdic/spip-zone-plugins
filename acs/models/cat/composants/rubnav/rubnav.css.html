@@ -1,20 +1,20 @@
 #CACHE{0}
 
-.rubriques, .divers, .breves {
-  [border-width: (#CONFIG{acsRubnavBordLargeur,#CONFIG{acsFondBordLargeur}});]
-  [border-style: (#CONFIG{acsRubnavBordStyle,#CONFIG{acsFondBordStyle}});]
-  [border-color: (#CONFIG{acsRubnavBord,#CONFIG{acsFondBordColor}});]
+.rubriques, .divers, .breves, .keys {
+  [border-width: (#CONFIG{acsRubnavBordLargeur});]
+  [border-style: (#CONFIG{acsRubnavBordStyle});]
+  [border-color: (#CONFIG{acsRubnavBordColor});]
   [background: (#CONFIG{acsRubnavFond});]
   position: static;
 }
 
-.rubriques .menu-titre, .divers .menu-titre, .breves .menu-titre {
+.rubriques .menu-titre, .keys .menu-titre, .blocForums .menu-titre, .divers .menu-titre, .breves .menu-titre, .tags .menu-titre {
   [background: (#CONFIG{acsRubnavTitreFond})[ url([(#ACS_CHEMIN)]img/trame/(#CONFIG{acsRubnavTitreFondImage})) repeat top left];]
 }
 
 .rubriques .menu-item, .divers .menu-item, .breves .menu-item {
   [background: (#CONFIG{acsRubnavFond});]
-  border-top: 1px solid [(#CONFIG{acsRubnavSep})];
+  [border-top: 1px solid (#CONFIG{acsRubnavSep});]
 }
 
 /* Rubriques dépliables: icônes plus */
@@ -24,60 +24,36 @@
   vertical-align: middle;
 }
 
-/*
- * Menus de navigation
- */
-
-.mg, .breves {
-  margin: 0;
-  font-size: 0.82em;
-}
-
-.mg {
-  margin-left: 10px;
-  margin-right: 10px;
-}
-
-.mg .menu-titre, .breves .menu-titre {
-  text-align: center;
-  font-size: 1.03em;
-  font-weight: bold;
-}
-
-.rubriques .menu-item , .mg .menu-item {
+.rubriques .menu-item {
   position: relative;
   [text-align: (#CONFIG{acsRubnavAlign});]
   [background: (#CONFIG{acsRubnavFond});]
   padding-left: 5px;
+  padding-bottom: 1px;
 }
 
 .rubriques .menu-item a {
+  display: block;
   [text-align: (#CONFIG{acsRubnavAlign});]
-  padding-left: 2px;
+  width: 100%;
 }
 
 .rubriques li .menu-item {
   position: relative;
   [background: (#CONFIG{acsRubnavFond2});]
-  border: 1px solid [(#CONFIG{acsRubnavSep})];
-  border-right:0;
-  border-bottom: 0;
-  padding-bottom: 2px;
+  z-index: 999;
 }
-
-.rubriques li li .menu-item {
-  [background: (#CONFIG{acsRubnavFond3});]
-  border: 1px solid [(#CONFIG{acsRubnavSep})];
-  border-right:0;
-  border-bottom: 0;
-}
+[.rubriques li li .menu-item {background: (#CONFIG{acsRubnavFond3});}]
+[.rubriques li li li .menu-item {background: (#CONFIG{acsRubnavFond4});}]
+[.rubriques li li li li .menu-item {background: (#CONFIG{acsRubnavFond5});}]
+[.rubriques li li li li li.menu-item {background: (#CONFIG{acsRubnavFond6});}]
 
 .rubriques .menu-item .on {
   font-weight: bold;
   width: 100%;
 }
 
-[.rubriques .menu-item:hover { background: (#CONFIG{acsRubnavFondHover});}]
+[.rubriques .menu-item:hover, .rubriques .menu-item a:hover { background: (#CONFIG{acsRubnavFondHover});}]
 
 .rubriques ul.hidden {
   display: none;
@@ -85,7 +61,9 @@
   left: 100%;
   width: 100%;
   top:-1px;
-  [border: 1px solid (#CONFIG{acsRubnavBord});]
+  [border-width: (#CONFIG{acsRubnavBordLargeur});]
+  [border-style: (#CONFIG{acsRubnavBordStyle});]
+  [border-color: (#CONFIG{acsRubnavBord});]  
 }
 .rubriques .menu-item:hover>ul.hidden {
   display: block;

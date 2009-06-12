@@ -10,7 +10,11 @@
     <nom>preview</nom>
     <valeur>200</valeur>
   </param>
-
+  <param>
+    <nom>optionnel</nom>
+    <valeur>articles_mots</valeur>
+  </param>
+  
   <variable>
     <nom>Fond</nom>
     <type>color</type>
@@ -33,22 +37,25 @@
     <label>non</label>
   </variable>
   <variable>
-    <nom>Bord</nom>
+    <nom>BordColor</nom>
     <type>color</type>
-    <valeur>acsFondBordColor</valeur>
+    <valeur>acsRubnavBordColor</valeur>
   </variable>
   <variable>
     <nom>Sep</nom>
     <type>color</type>
+    <valeur>acsRubnavSep</valeur>
   </variable>
   <variable>
     <nom>BordLargeur</nom>
     <type>largeurbord</type>
+    <valeur>acsRubnavBordLargeur</valeur>
     <label>non</label>
   </variable>
   <variable>
     <nom>BordStyle</nom>
     <type>stylebord</type>
+    <valeur>acsRubnavBordStyle</valeur>
     <label>non</label>
   </variable>
   <variable>

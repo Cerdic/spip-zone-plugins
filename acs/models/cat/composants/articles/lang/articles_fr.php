@@ -14,6 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'redige' => 'r&eacute;dig&eacute; le',
 'publie' => 'publi&eacute; le',
 'maj' => 'mis à jour le',
+'table' => 'Tableau',
 
 'aucun_article_note' => 'Aucun article not&eacute;'
 );

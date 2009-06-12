@@ -1,0 +1,11 @@
+<B_mots>[(#REM) Mots-cles trouves ]
+<div class="cbloc keys rubriques">#ANCRE_PAGINATION
+  <h2 class="menu-titre"><:mots_clefs:></h2>
+  [<p class="pagination">(#PAGINATION)</p>]
+  <ul>
+    <BOUCLE_mots(MOTS) {id_article ?} {titre!==(_.*)} {pagination 5}>
+    <li class="menu-item"><a href="#URL_MOT">#TITRE</a></li>
+    </BOUCLE_mots>
+  </ul>
+</div>
+</B_mots>

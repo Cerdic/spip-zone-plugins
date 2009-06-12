@@ -1,36 +1,24 @@
 #CACHE{0}[(#REM)
 Feuille de style Agenda, par Daniel Faivre, 2007-2009
 ]
-
-.small_mini a:link {
-  color: #af0000;
-}
-
-.small_mini a:hover {
-  color: #df0000;
-}
-
-/* Calendrier */
-.small_mini {
-  font-family:V erdana, Arial, Helvetica, sans-serif;
+.agenda-mini {
   font-size: 11px;
   color: #CONFIG{acsFondText,#000};
   [background: (#CONFIG{acsAgendaThisMonth, #CONFIG{acsFondColor}});]
-  [border-width: (#CONFIG{acsAgendaBordLargeur,#CONFIG{acsFondBordLargeur}});]
-  [border-style: (#CONFIG{acsAgendaBordStyle,#CONFIG{acsFondBordStyle}});]
-  [border-color: (#CONFIG{acsAgendaBordColor,#CONFIG{acsFondBordColor}});]
+  [border-width: (#CONFIG{acsAgendaBordLargeur,#CONFIG{acsRubnavBordLargeur}});]
+  [border-style: (#CONFIG{acsAgendaBordStyle,#CONFIG{acsRubnavBordStyle}});]
+  [border-color: (#CONFIG{acsAgendaBordColor,#CONFIG{acsRubnavBordColor}});]
   text-align:center;
   font-style:normal;
 }
 
-.small_mini td {
+.agenda-mini td {
   padding: 2px;
 }
 
-.calendar_header {
-  [background: (#CONFIG{acsAgendaTitreFondColor}) [ url('[(#ACS_CHEMIN)]img/trame/(#CONFIG{acsAgendaTitreFondImage})')] repeat top right;] /* agenda_titre.png */
-  text-align: center;
-  color: #CONFIG{acsFondText,#000};
+.agenda-mini .menu-titre {
+  [background: (#CONFIG{acsAgendaTitreFondColor})[ url([(#ACS_CHEMIN)]img/trame/(#CONFIG{acsAgendaTitreFondImage,#CONFIG{acsRubnavTitreFondImage}})) repeat top right];]
+  [border-bottom: 1px solid (#CONFIG{acsRubnavSep});]
 }
 
 .calendar_head_mini {
@@ -64,11 +52,10 @@ Feuille de style Agenda, par Daniel Faivre, 2007-2009
   padding-bottom: 0;
 }
 
+[(#REM) info-bulle ]
 * html div.bulle {
   width: 250px; [(#REM) Hack IE : IE exige une largeur définie ]
 }
-
-[(#REM) info-bulle ]
 .bulle{
 position: absolute;
 min-width: 200px;

@@ -6,7 +6,7 @@
   <div class="menu-titre">
     <a style="align: left" href="spip.php?page=wrap&c=composants/audio/inc-playlist" target="_playlist" title="Ouvre la playlist dans une nouvelle fenêtre"><:acs:audio_audio:></a>
   </div>
-  [<div class="track_info">(#PAGINATION)</div>]
+  [<p class="pagination">(#PAGINATION)</p>]
   <INCLURE{fond=composants/audio/player}{autostart=#AUTOSTART}{hp=#GET{hp}}{lp=#GET{lp}}{mmfile=#URL_DOCUMENT}>
   <ul class="playliste">
   <BOUCLE_doc (DOCUMENTS) {extension==mp3}{!par date}{pagination #CONFIG{acsPlaylistNbMp3, 20}}>[(#EVAL{$NB++}|?{'',''})]

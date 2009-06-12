@@ -23,6 +23,12 @@ Access control limit access to articles tagged with keyword _ide, _aut, or _adm 
 'RubFond6' => '6',
 'Puce' => 'Puce',
 
+'table' => 'Tables',
+'TabBordColor' => 'Border',
+'TabFirst' => 'First line',
+'TabOdd' => 'Odd',
+'TabEven' => 'Even',
+
 'Dates' => 'Display articles dates',
 'Aut' => 'Display articles authors',
 'Stats' => 'Display visits',

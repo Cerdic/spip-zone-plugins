@@ -12,6 +12,14 @@
   </param>
 
   <variable>
+    <nom>Left</nom>
+    <type>nombre</type>
+  </variable>
+  <variable>
+    <nom>Right</nom>
+    <type>nombre</type>
+  </variable>
+  <variable>
     <nom>1</nom>
     <type>widget</type>
   </variable>

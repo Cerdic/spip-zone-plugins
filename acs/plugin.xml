@@ -21,7 +21,7 @@
 	<auteur>	<!-- Auteur du plugin -->
  	Daniel FAIVRE &copy; 2008-2009 - <multi>[fr]licence GPL[en]GPL license</multi>
 	</auteur>
-  <version>0.4.2 (20090528)</version>
+  <version>0.4.3 (20090611)</version>
 	<etat>stable</etat>
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
 	ainsi les fonctions hors espace de nommage ne peuvent etre appelees

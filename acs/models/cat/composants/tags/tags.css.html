@@ -1,9 +1,9 @@
 #CACHE{0}
 
 .tags {
-  [border-width: (#CONFIG{acsTagsBordLargeur,#CONFIG{acsFondBordLargeur}});]
-  [border-style: (#CONFIG{acsTagsBordStyle,#CONFIG{acsFondBordStyle}});]
-  [border-color: (#CONFIG{acsTagsBord,#CONFIG{acsFondBordColor}});]
+  [border-width: (#CONFIG{acsTagsBordLargeur,#CONFIG{acsRubnavBordLargeur}});]
+  [border-style: (#CONFIG{acsTagsBordStyle,#CONFIG{acsRubnavBordStyle}});]
+  [border-color: (#CONFIG{acsTagsBordColor,#CONFIG{acsRubnavBordColor}});]
   [background: (#CONFIG{acsTagsFond,#CONFIG{acsRubnavFond}});]
   -moz-border-radius: 5px;
 }
@@ -14,11 +14,10 @@
   overflow: hidden;
 }
 
-.tags .titre {
-  text-align: center;
-  font-weight: bold;[
-  background: (#CONFIG{acsTagsTitreFond,#CONFIG{acsRubnavTitreFond}})[ url([(#ACS_CHEMIN)]img/trame/(#CONFIG{acsTagsTitreFondImage})) repeat top left];][
-  border-bottom: (#CONFIG{acsTagsSep}) [(#CONFIG{acsTagsBordLargeur,#CONFIG{acsFondBordLargeur}})] [(#CONFIG{acsTagsBordStyle,#CONFIG{acsFondBordStyle}})];]
+.tags .menu-titre {
+  [background: (#CONFIG{acsTagsTitreFond})[ url([(#ACS_CHEMIN)]img/trame/(#CONFIG{acsTagsTitreFondImage})) repeat top left];]
+  [border-bottom: 1px solid (#CONFIG{acsTagsSep});]
+
   -moz-border-radius: 5px;
   -moz-border-radius-bottomleft: 0;
   -moz-border-radius-bottomright: 0;

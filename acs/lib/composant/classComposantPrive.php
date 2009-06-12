@@ -259,7 +259,10 @@ class AdminComposant {
       else
         $this->display = "display: none;";
 			$varname .= '_'.md5($this->fullname);
-      $r .= '<div align="'.$GLOBALS['spip_lang_right'].'" style ="font-weight: normal"><label>'._T('acs:use').' '.$this->T('nom').' '.$this->nic.' : </label>';
+			$nc = $this->T('nom');
+			if ($nc==str_replace('_', ' ', $this->T('nom')))
+				$nc = ucfirst($this->nom);
+      $r .= '<div align="'.$GLOBALS['spip_lang_right'].'" style ="font-weight: normal"><label>'._T('acs:use').' '.$nc.' '.$this->nic.' : </label>';
       // acs_bouton_radio($nom, $valeur, $titre, $actif = false, $onClick="", $enable=true)
       $r .= acs_bouton_radio($varname, "oui", _T('item_oui'), $var == "oui", "changeVisible(this.checked, '$varconf', 'block', 'none');",$this->enable);
       $r .= acs_bouton_radio($varname, "non", _T('item_non'), $var == "non", "changeVisible(this.checked, '$varconf', 'none', 'block');",$this->enable);
@@ -296,14 +299,14 @@ class AdminComposant {
     // Recherche une mise en page et y remplace les variables par des contrôles
     $mis_en_page = array();
     if (is_readable($this->rootDir.'/ecrire/'.$this->type.'_mep.html')) {
-      //$mep = file_get_contents($this->rootDir.'/ecrire/'.$this->type.'_mep.html');
-      //$r.= $mep.'<hr/><hr/><hr/>'; 
       $mep .= recuperer_fond($this->rootDir.'/ecrire/'.$this->type.'_mep', array('lang' => $GLOBALS['spip_lang']));
       foreach ($controls as $nom=>$html) {
         $tag = '&'.$nom.'&';
         if (strpos($mep, $tag) !== false) $mis_en_page[] = $nom;
         $mep = str_replace($tag, $html, $mep);
       }
+      if ($mode=='controleur')
+      	$mep = preg_replace('%<admin>(.*?)</admin>%s', '', $mep);
     }
     // Ajoute les contrôles non mis en page
     foreach ($controls as $nom=>$html) {

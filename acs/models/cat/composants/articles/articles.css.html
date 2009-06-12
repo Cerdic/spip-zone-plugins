@@ -76,10 +76,26 @@
   font-size: 0.65em;
 }
 
-/*  ------------------------------------------
-/*  Habillage specifique du plan du site
-/*  ------------------------------------------ */
+[(#REM) tableaux ]
+table.spip {
+  margin: auto;
+  margin-bottom: 1em;
+  border: [(#CONFIG{acsArticlesTabBordLargeur,1px})][ (#CONFIG{acsArticlesTabBordStyle,solid})][ (#CONFIG{acsArticlesTabBordColor})];
+  border-collapse: collapse;
+}
+table.spip caption {
+  caption-side: top; /* bottom pas pris en compte par IE */
+  text-align: center;
+  margin: auto;
+  padding: 3px;
+  font-weight: bold;
+}
+[table.spip tr.row_first { background: (#CONFIG{acsArticlesTabFirst});}]
+[table.spip tr.row_odd { background: (#CONFIG{acsArticlesTabOdd});}]
+[table.spip tr.row_even { background: (#CONFIG{acsArticlesTabEven});}]
+table.spip th, table.spip td { padding: 3px; text-align: left; vertical-align: middle;}
 
+[(#REM) Habillage specifique du plan du site ]
 .plan-secteur {position: relative; display: block; z-index: 1;} /* IE */
 
 .plan-secteur h1 {

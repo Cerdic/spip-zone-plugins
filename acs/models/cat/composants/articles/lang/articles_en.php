@@ -14,6 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'redige' => 'written',
 'publie' => 'published',
 'maj' => 'updated',
+'table' => 'Table',
 
 'aucun_article_note' => 'No article rated'
 

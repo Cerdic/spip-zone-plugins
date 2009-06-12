@@ -34,7 +34,7 @@
   <variable>
     <nom>BordLargeur</nom>
     <type>largeurbord</type>
-    <valeur>acsFondBordLargeur</valeur>
+    <valeur>acsRubnavBordLargeur</valeur>
     <label>non</label>
   </variable>
   <variable>
@@ -51,27 +51,27 @@
   <variable>
     <nom>RubFond2</nom>
     <type>color</type>
-    <valeur>fafffa</valeur>
+    <valeur>#fafffa</valeur>
   </variable>
   <variable>
     <nom>RubFond3</nom>
     <type>color</type>
-    <valeur>f5fff5</valeur>
+    <valeur>#f5fff5</valeur>
   </variable>
   <variable>
     <nom>RubFond4</nom>
     <type>color</type>
-    <valeur>efffef</valeur>
+    <valeur>#efffef</valeur>
   </variable>
   <variable>
     <nom>RubFond5</nom>
     <type>color</type>
-    <valeur>dfffdf</valeur>
+    <valeur>#dfffdf</valeur>
   </variable>
   <variable>
     <nom>RubFond6</nom>
     <type>color</type>
-    <valeur>d0ffd0</valeur>
+    <valeur>#d0ffd0</valeur>
   </variable>
   <variable>
     <nom>Puce</nom>
@@ -120,5 +120,34 @@
     <nom>LogoTailleMax</nom>
     <type>nombre</type>
     <valeur>50</valeur>
+  </variable>
+
+  <variable>
+    <nom>TabBordColor</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>TabBordLargeur</nom>
+    <type>largeurbord</type>
+    <label>non</label>
+    <valeur>thin</valeur>
+  </variable>
+  <variable>
+    <nom>TabBordStyle</nom>
+    <type>stylebord</type>
+    <label>non</label>
+    <valeur>solid</valeur>
+  </variable>
+  <variable>
+    <nom>TabFirst</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>TabOdd</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>TabEven</nom>
+    <type>color</type>
   </variable>
 </composant>

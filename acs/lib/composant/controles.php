@@ -9,7 +9,7 @@
 // Choix de couleur
 function ctlColor($composant, $nic, $nom, $couleur, $param, $wid) {
   $var =  nomvar($composant, $nic, $nom);
-  return '<div align="'.$GLOBALS['spip_lang_right'].'"><table><tr><td align="'.$GLOBALS['spip_lang_right'].'"><label for "'.$var.'_'.$wid.'" title="'.$var.'" class="label">'._TC($composant, $nom).'</label></td><td><input type="text" class="palette" id="'.$var.'" name="'.$var.'_'.$wid.'" size="8" maxlength="8" value="'.$couleur.'"></td></tr></table></div>';
+  return '<div align="'.$GLOBALS['spip_lang_right'].'"><table><tr><td align="'.$GLOBALS['spip_lang_right'].'">&nbsp;<label for "'.$var.'_'.$wid.'" title="'.$var.'" class="label">'._TC($composant, $nom).'</label>&nbsp;</td><td><input type="text" class="palette" id="'.$var.'" name="'.$var.'_'.$wid.'" size="8" maxlength="8" value="'.$couleur.'"></td></tr></table></div>';
 }
 
 // Choix d'image
@@ -20,9 +20,9 @@ function ctlImg($composant, $nic, $nom, $image, $param, $wid) {
   $s = @getimagesize('../'.$path.'/'.$image);
   $r = '<div align="'.$GLOBALS['spip_lang_right'].'"><table><tr>';
   if ($param['label'] != 'non')
-    $r .= '<td align="'.$GLOBALS['spip_lang_right'].'"><label for "'.$var.'_'.$wid.'" title="'.$var.'"  class="label">'._TC($composant, $nom).'</label></td>';
+    $r .= '<td align="'.$GLOBALS['spip_lang_right'].'">&nbsp;<label for "'.$var.'_'.$wid.'" title="'.$var.'"  class="label">'._TC($composant, $nom).'</label>&nbsp;</td>';
   $r .= '<td><input type="text" name="'.$var.'_'.$wid.'"'.(is_array($s) ? ' title="'.$s[0].'x'.$s[1].'"' : '').' value="'.$image.'" size="40" class="forml"></td>';
-  $r .= '<td><a href="javascript:TFP.popup(document.forms[\'acs\'].elements[\''.$var.'_'.$wid.'\'], document.forms[\'acs\'].elements[\''.$var.'_'.$wid.'\'].value, \''.$path.'\', \''._DIR_RACINE.'\');" title="'._T('acs:choix_image').'"><img src="'._DIR_ACS.'images/folder_image.png" class="icon" alt="'._T('acs:choix_image').'" /></a></td></tr></table></div>';
+  $r .= '<td>&nbsp;<a href="javascript:TFP.popup(document.forms[\'acs\'].elements[\''.$var.'_'.$wid.'\'], document.forms[\'acs\'].elements[\''.$var.'_'.$wid.'\'].value, \''.$path.'\', \''._DIR_RACINE.'\');" title="'._T('acs:choix_image').'"><img src="'._DIR_ACS.'images/folder_image.png" class="icon" alt="'._T('acs:choix_image').'" /></a></td></tr></table></div>';
   return $r;
 }
 
@@ -68,7 +68,7 @@ function ctlStyleBord($composant, $nic, $nom, $style='solid', $param, $wid) {
 function ctlFontFamily($composant, $nic, $nom, $style='sans-serif', $param, $wid) {
   $var =  nomvar($composant, $nic, $nom);
   $r = '<div align="'.$GLOBALS['spip_lang_right'].'"><table><tr>';
-  if ($param['label'] != 'non') $r .= '<td align="'.$GLOBALS['spip_lang_right'].'"><label for "'.$var.'_'.$wid.'" title="'.$var.'" class="label">'._TC($composant, $nom).'</label></td>';
+  if ($param['label'] != 'non') $r .= '<td align="'.$GLOBALS['spip_lang_right'].'"><label for "'.$var.'_'.$wid.'" title="'.$var.'" class="label">'._TC($composant, $nom).'</label>&nbsp;</td>';
   $r .= '<td><select name="'.$var.'_'.$wid.'" title="'._T('acs:bordstyle').'" class="forml" style="width: auto">'.
     '<option value="serif"'.($style=="serif" ? ' selected' : '').' title="'._T('acs:serif').'">serif</option>'.
     '<option value="sans-serif"'.($style=="sans-serif" ? ' selected' : '').' title="'._T('acs:sans-serif').'">sans-serif</option>'.
@@ -82,13 +82,13 @@ function ctlFontFamily($composant, $nic, $nom, $style='sans-serif', $param, $wid
 // Choix de valeur, avec + / - (todo)
 function ctlNombre($composant, $nic, $nom, $nombre=0, $param, $wid) {
   $var =  nomvar($composant, $nic, $nom);
-  return '<table><tr><td align="'.$GLOBALS['spip_lang_right'].'"><label for "'.$var.'_'.$wid.'" title="'.$var.'"  class="label">'._TC($composant, $nom).'</label></td><td><input type="text" name="'.$var.'_'.$wid.'" size="8" maxlength="6" class="forml" value="'.$nombre.'" style="text-align:'.$GLOBALS['spip_lang_right'].'" /></td></tr></table>';
+  return '<table><tr><td align="'.$GLOBALS['spip_lang_right'].'"><label for "'.$var.'_'.$wid.'" title="'.$var.'"  class="label">'._TC($composant, $nom).'</label>&nbsp;</td><td><input type="text" name="'.$var.'_'.$wid.'" size="8" maxlength="6" class="forml" value="'.$nombre.'" style="text-align:'.$GLOBALS['spip_lang_right'].'" /></td></tr></table>';
 }
 
 // Saisie d'un texte
 function ctlText($composant, $nic, $nom, $txt, $param = array('taille' => 30), $wid) {
   $var =  nomvar($composant, $nic, $nom);
-  return '<table width="100%"><tr><td align="'.$GLOBALS['spip_lang_right'].'"><label for "'.$var.'_'.$wid.'" title="'.$var.'"  class="label">'._TC($composant, $nom).'</label></td><td><input type="text" name="'.$var.'_'.$wid.'" size="'.$param['taille'].'" maxlength="'.$param['taille'].'" class="forml" value="'.$txt.'" /></td></tr></table>';
+  return '<table width="100%"><tr><td align="'.$GLOBALS['spip_lang_right'].'"><label for "'.$var.'_'.$wid.'" title="'.$var.'"  class="label">'._TC($composant, $nom).'</label>&nbsp;</td><td><input type="text" name="'.$var.'_'.$wid.'" size="'.$param['taille'].'" maxlength="'.$param['taille'].'" class="forml" value="'.$txt.'" /></td></tr></table>';
 }
 
 // Saisie d'un texte long
@@ -101,7 +101,7 @@ function ctlTextarea($composant, $nic, $nom, $txt, $param, $wid) {
 function ctlChoix($composant, $nic, $nom, $value, $param, $wid) {
   $var =  nomvar($composant, $nic, $nom);
   if (!is_array($param['option'])) return 'Pas d\'options pour '.$nom;
-  $r = '<table><tr valign="bottom"><td align="'.$GLOBALS['spip_lang_right'].'"><label for "'.$var.'_'.$wid.'" title="'.$var.'" class="label">'._TC($composant, $nom).'</label></td><td>';
+  $r = '<table><tr valign="middle"><td align="'.$GLOBALS['spip_lang_right'].'"><label for "'.$var.'_'.$wid.'" title="'.$var.'" class="label">'._TC($composant, $nom).'</label></td>';
   foreach($param['option'] as $option) {
     switch($option) {
       case 'oui';
@@ -112,18 +112,18 @@ function ctlChoix($composant, $nic, $nom, $value, $param, $wid) {
         break;
       default:
         $label = _TC($composant, $nom.ucfirst($option));
-        // S'il n'existe pas de traduction propre au composant pour ce choix, on cherche une traduction ACS generique
+        // S'il n'existe pas de traduction propre au composant, on cherche une traduction ACS generique pour cette option
         if ($label == strtolower(str_replace('_', ' ', $nom.$option)))
         	$label = _T('acs:'.strtolower($option));
     }
-    $r .= acs_bouton_radio(
+    $r .= '<td>&nbsp;'.acs_bouton_radio(
       $var.'_'.$wid,
       $option,
-      '<label for "'.$var.'_'.$wid.'" title="'.$var.ucfirst($option).'" class="label">'.$label.'</label>',
+      $label,
       $value == $option
-    );
+    ).'&nbsp;<td>';
   }
-  $r .= '</td></tr></table>';
+  $r .= '</tr></table>';
   return $r;
 }
 
@@ -170,15 +170,15 @@ function _TC($composant, $texte) {
 	// traduction ACS propre au composant
 	$t = _T('acs:'.$composant.'_'.$texte);
 	if ($t != str_replace('_', ' ', $composant.'_'.$texte))
-		return $t;
+		return str_replace(' ', '&nbsp;', $t);
 	// traduction ACS generique 
 	$t = _T('acs:'.strtolower($texte));
 	if ($t != str_replace('_', ' ', $texte))
-		return $t;
+		return str_replace(' ', '&nbsp;', $t);
 	// traduction SPIP generique 
 	$t = _T(strtolower($texte));
 	if ($t != str_replace('_', ' ', $texte))
-		return $t;
+		return str_replace(' ', '&nbsp;', $t);
 	return $texte;
 }
 
@@ -196,7 +196,7 @@ function acs_bouton_radio($nom, $valeur, $titre, $actif = false, $onClick="", $e
     $texte .= ' checked="checked"';
     $titre = '<b>'.$titre.'</b>';
   }
-  $texte .= ($enable ? '' : ' disabled')." />&nbsp;<label for='radio_$id_label'>$titre</label>\n";
+  $texte .= ($enable ? '' : ' disabled')." />&nbsp;<label for='radio_$id_label'>$titre</label>";
   $id_label++;
   return $texte;
 }

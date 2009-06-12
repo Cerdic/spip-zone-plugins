@@ -1,7 +1,5 @@
-<div class="rubnav #PINCEAU{rubnav}">
-[(#REM) Menu deroulant de navigation par rubriques, ouvert sur la hierarchie courante ]
 <B_rubriques1>
-	<div class="rubriques">
+	<div class="cbloc rubriques">
 		<ul>
 			<BOUCLE_rubriques1(RUBRIQUES) {racine} {par num titre, titre}{titre_mot=_Group1}{doublons}>
 				<li class="menu-item" [id="rubmenu(#EXPOSE)"]>
@@ -23,7 +21,7 @@
 </B_rubriques1>
 
 <B_rubriques2>
-  <div class="rubriques">
+  <div class="cbloc rubriques">
     [(#CONFIG{acsRubnavTitre}|=={oui}|?{' '})<div class="menu-titre"><:rubriques:></div>]
     <ul>
       <BOUCLE_rubriques2(RUBRIQUES) {racine} {par num titre, titre}{titre_mot=_Group2}{doublons}>
@@ -49,8 +47,8 @@
 
 <BOUCLE_rubriques_ours(RUBRIQUES) {racine} {titre_mot=_Ours} {doublons}></BOUCLE_rubriques_ours>[(#REM) On exclut les rubriques ayant le mot-clé "_Ours" ]
 <B_rubriques>
-	<div class="rubriques">
-		[(#CONFIG{acsRubnavTitre}|=={oui}|?{' '})<div class="menu-titre"><:rubriques:></div>]
+	<div class="cbloc rubriques">
+		[(#CONFIG{acsRubnavTitre}|=={oui}|?{' '})<div class="menu-titre"><a href="?page=plan" title="<:acs:onglets__plan:>"><:rubriques:></a></div>]
 		<ul>
 			<BOUCLE_rubriques(RUBRIQUES) {racine} {par num titre, titre}{doublons}>
 				<li class="menu-item" [id="rubmenu(#EXPOSE)"]><BOUCLE_test_sousrub(RUBRIQUES){id_parent}{0,1}>[(#SET{AFILLES,oui})]</BOUCLE_test_sousrub>
@@ -71,4 +69,3 @@
 		</ul>
 	</div>[(#REM) fin rubriques]
 </B_rubriques>
-</div>[(#REM) fin rubnav]

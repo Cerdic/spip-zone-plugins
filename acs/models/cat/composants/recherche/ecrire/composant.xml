@@ -9,7 +9,7 @@
 
   <param>
     <nom>optionnel</nom>
-    <valeur>oui</valeur>
+    <valeur>activer_moteur</valeur>
   </param>
   <param>
     <nom>preview</nom>
@@ -19,7 +19,7 @@
   <variable>
     <nom>Bord</nom>
     <type>color</type>
-    <valeur>acsFondBordColor</valeur>
+    <valeur>acsRubnavColor</valeur>
   </variable>
   <variable>
     <nom>Onglet</nom>

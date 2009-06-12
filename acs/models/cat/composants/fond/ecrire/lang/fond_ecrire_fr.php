@@ -14,14 +14,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'Text' => 'Texte',
 'Link' => 'Liens',
 'LinkHover' => 'Au survol',
-'BordColor' => 'Bordure par d&eacute;faut',
 'DeplierHaut' => 'Déplier haut',
 'DeplierHaut_rtl' => 'Déplier haut droite &agrave; gauche',
 'DeplierBas' => 'Déplier bas',
 
-'table' => 'Tableaux',
-'TabFirst' => 'Premi&egrave;re ligne',
-'TabOdd' => 'Ligne paire',
-'TabEven' => 'Ligne impaire',
 );
 ?>

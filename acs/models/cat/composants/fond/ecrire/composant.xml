@@ -8,7 +8,7 @@
 
   <param>
     <nom>preview</nom>
-    <valeur>280</valeur>
+    <valeur>150</valeur>
   </param>
   <param>
     <nom>optionnel</nom>
@@ -46,34 +46,23 @@
     <chemin>img/fond</chemin>
     <label>non</label>
   </variable>
+
   <variable>
-    <nom>BordColor</nom>
-    <type>color</type>
-  </variable>
-  
-  <variable>
-    <nom>TabFirst</nom>
-    <type>color</type>
+    <nom>FontSize</nom>
+    <type>nombre</type>
+		<valeur>1em</valeur>
   </variable>
   <variable>
-    <nom>TabOdd</nom>
-    <type>color</type>
+    <nom>FontFamily</nom>
+    <type>fontFamily</type>
+		<valeur>sans-serif</valeur>
   </variable>
   <variable>
-    <nom>TabEven</nom>
-    <type>color</type>
+    <nom>Font</nom>
+    <type>text</type>
+		<valeur>Verdana, 'Trebuchet MS', Arial, 'Lucida Sans'</valeur>
   </variable>
-  
-  <variable>
-    <nom>BordLargeur</nom>
-    <type>largeurbord</type>
-    <label>non</label>
-  </variable>
-  <variable>
-    <nom>BordStyle</nom>
-    <type>stylebord</type>
-    <label>non</label>
-  </variable>
+
   <variable>
     <nom>DeplierHaut</nom>
     <type>img</type>

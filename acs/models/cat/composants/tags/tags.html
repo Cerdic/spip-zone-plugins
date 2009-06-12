@@ -1,5 +1,5 @@
-<div class="tags #PINCEAU{tags}">
-  [(#CONFIG{acsTagsTitre}|=={oui}|?{' '})<div class="titre"><:acs:tags_mots_cles:></div>]
+<div class="cbloc tags #PINCEAU{tags}">
+  [(#CONFIG{acsTagsTitre}|=={oui}|?{' '})<div class="menu-titre"><:acs:tags_mots_cles:></div>]
   <div class="text">
 <B_mots><BOUCLE_mots(MOTS) {titre==(_.*)} {doublons}></BOUCLE_mots></B_mots>
 <BOUCLE_popul(MOTS){par hasard} {doublons}>

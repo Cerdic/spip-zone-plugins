@@ -5,7 +5,7 @@
     [(#ENV{debut_articles}|?{'',' '})]
     <ul>
     <BOUCLE_articles(ARTICLES) {par popularite} {inverse} {doublons} {pagination #CONFIG{acsArticlesPagination,10}} {lang=#LANG}>
-      <INCLURE{fond=composants/articles/articles}{id_article}{id_rubrique}{titre}{surtitre}{soustitre}{texte=#INTRODUCTION}{auteurs=#LESAUTEURS}{date}{date_redac}{date_modif}>
+      <INCLURE{fond=composants/articles/articles}{id_article}{id_rubrique}{titre}{surtitre}{soustitre}{texte=#INTRODUCTION}{auteurs=#LESAUTEURS}{date}{date_redac}{date_modif}{coupe=#CONFIG{acsArticlesNbLettres,200}}>
     </BOUCLE_articles>
     </ul>
   </div>

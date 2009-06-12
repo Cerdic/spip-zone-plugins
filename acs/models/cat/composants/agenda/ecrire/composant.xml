@@ -14,7 +14,7 @@
   <variable>
     <nom>TitreFondColor</nom>
     <type>color</type>
-    <valeur>acsRubnavFond</valeur>
+    <valeur>acsRubnavTitreFond</valeur>
   </variable>
   <variable>
     <nom>TitreFondImage</nom>
@@ -30,7 +30,7 @@
   <variable>
     <nom>BordColor</nom>
     <type>color</type>
-    <valeur>acsRubnavBord</valeur>
+    <valeur>acsRubnavBordColor</valeur>
   </variable>
   <variable>
     <nom>BordLargeur</nom>

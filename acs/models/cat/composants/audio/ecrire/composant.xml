@@ -19,7 +19,7 @@
   <variable>
     <nom>BtnOn</nom>
     <type>color</type>
-    <valeur>acsRubnavBord</valeur>
+    <valeur>acsRubnavBordColor</valeur>
   </variable>
 
   <variable>
@@ -52,7 +52,7 @@
   <variable>
     <nom>TitreColor</nom>
     <type>color</type>
-    <valeur>acsRubnavTitreFondColor</valeur>
+    <valeur>acsRubnavTitreFond</valeur>
   </variable>
   <variable>
     <nom>TitreImage</nom>
@@ -69,30 +69,30 @@
   <variable>
     <nom>BordLargeur</nom>
     <type>largeurbord</type>
-    <valeur>acsFondBordLargeur</valeur>
+    <valeur>acsRubnavBordLargeur</valeur>
     <label>non</label>
   </variable>
   <variable>
     <nom>BordStyle</nom>
     <type>stylebord</type>
-    <valeur>acsFondBordStyle</valeur>
+    <valeur>acsRubnavBordStyle</valeur>
     <label>non</label>
   </variable>
   <variable>
     <nom>SepColor</nom>
     <type>color</type>
-    <valeur>acsRubnavSepColor</valeur>
+    <valeur>acsRubnavSep</valeur>
   </variable>
   <variable>
     <nom>SepLargeur</nom>
     <type>largeurbord</type>
-    <valeur>acsFondBordLargeur</valeur>
+    <valeur>acsRubnavBordLargeur</valeur>
     <label>non</label>
   </variable>
   <variable>
     <nom>SepStyle</nom>
     <type>stylebord</type>
-    <valeur>acsFondBordStyle</valeur>
+    <valeur>acsRubnavBordStyle</valeur>
     <label>non</label>
   </variable>
   <variable>

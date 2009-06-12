@@ -6,7 +6,7 @@
 
 .mp3player .track_info, .mp3player .track_id3, .playlist .track_info {
   border: thin solid;
-  [border-color: (#CONFIG{acsAudioSepColor,#CONFIG{acsRubnavSepColor,#CONFIG{acsFondBordColor}}});]
+  [border-color: (#CONFIG{acsAudioSepColor,#CONFIG{acsRubnavSepColor,#CONFIG{acsRubnavColor}}});]
   -moz-border-radius: 1em;
   margin: 2px;
   margin-right: 5px;
@@ -116,23 +116,16 @@
 }
 
 .playlist {
-  font-size: 0.79em;
   text-align: left;
   [background: (#CONFIG{acsAudioFondColor});]
-  [border-width: (#CONFIG{acsAudioBordLargeur,#CONFIG{acsRubnavBordLargeur,#CONFIG{acsFondBordLargeur}}});]
-  [border-style: (#CONFIG{acsAudioBordStyle,#CONFIG{acsRubnavBordStyle,#CONFIG{acsFondBordStyle}}});]
-  [border-color: (#CONFIG{acsAudioBordColor,#CONFIG{acsRubnavBordColor,#CONFIG{acsFondBordColor}}});]
+  [border-width: (#CONFIG{acsAudioBordLargeur,#CONFIG{acsRubnavBordLargeur}});]
+  [border-style: (#CONFIG{acsAudioBordStyle,#CONFIG{acsRubnavBordStyle}});]
+  [border-color: (#CONFIG{acsAudioBordColor,#CONFIG{acsRubnavBordColor}});]
 }
 
 .playlist .menu-titre {
-  [background-color: (#CONFIG{acsAudioTitreColor,#CONFIG{acsRubnavTitreFondColor}});]
-  [background-image: url([(#ACS_CHEMIN)]img/trame/(#CONFIG{acsAudioTitreImage, #CONFIG{acsRubnavTitreFondImage}}));]
-  background-repeat: repeat;
-  background-position: top left;
-  border-bottom: [(#CONFIG{acsAudioSepLargeur,#CONFIG{acsAudioBordLargeur,#CONFIG{acsRubnavBordLargeur,#CONFIG{acsFondBordLargeur,1px}}}})][ (#CONFIG{acsAudioSepStyle,#CONFIG{acsRubnavBordStyle,#CONFIG{acsFondBordStyle,solid}}})][ (#CONFIG{acsAudioSepColor,#CONFIG{acsRubnavSepColor,#efefef}})];
-  text-align: center;
-  font-weight: bold;
-  font-size: 0.88em;
+  [background: (#CONFIG{acsAudioTitreColor,#CONFIG{acsRubnavTitreFond}})[ url([(#ACS_CHEMIN)]img/trame/(#CONFIG{acsAudioTitreImage,#CONFIG{acsRubnavTitreFondImage}})) repeat top left];]
+  border-bottom: [(#CONFIG{acsAudioSepLargeur,#CONFIG{acsAudioBordLargeur,#CONFIG{acsRubnavBordLargeur,1px}}})][ (#CONFIG{acsAudioSepStyle,#CONFIG{acsRubnavBordStyle,solid}})][ (#CONFIG{acsAudioSepColor,#CONFIG{acsRubnavSepColor,#efefef}})];
   margin-bottom: 4px;
 }
 
@@ -146,7 +139,7 @@
 }
 
 .playlist .playliste li, .playlist .playliste li .play_ {
-  border-top: [(#CONFIG{acsAudioSepLargeur,#CONFIG{acsAudioBordLargeur,#CONFIG{acsRubnavBordLargeur,#CONFIG{acsFondBordLargeur,1px}}}})][ (#CONFIG{acsAudioSepStyle,#CONFIG{acsRubnavBordStyle,#CONFIG{acsFondBordStyle,solid}}})][ (#CONFIG{acsAudioSepColor,#CONFIG{acsRubnavSepColor,#efefef}})];
+  border-top: [(#CONFIG{acsAudioSepLargeur,#CONFIG{acsAudioBordLargeur,#CONFIG{acsRubnavBordLargeur,#CONFIG{acsFondBordLargeur,1px}}}})][ (#CONFIG{acsAudioSepStyle,#CONFIG{acsRubnavBordStyle,solid}})][ (#CONFIG{acsAudioSepColor,#CONFIG{acsRubnavSepColor,#efefef}})];
 }
 
 .playlist .playliste li.over {
@@ -166,7 +159,7 @@
 }
 
 .playlist .playliste a.podcast {
-  font-size: 0.68em;
+  font-size: 0.65em;
   padding:2px;
   color: #CONFIG{acsAudioPodcastColor,#f40};
 }

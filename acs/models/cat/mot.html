@@ -11,39 +11,7 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 ][(#SET{title,<:acs:fond_meta_page_mot:>[ (#TITRE|textebrut|texte_backend)]})][(#SET{mdescription,[(#DESCRIPTIF|couper{150}|textebrut)]})][(#SET{mkeywords,[(#TITRE|textebrut|texte_backend),]<:acs:fond_meta_keywords:>})][(#SET{mrsstitle,[(#TITRE|textebrut|texte_backend)]})][(#SET{mrssurl,[(#URL_PAGE{backend}|parametre_url{id_mot,#ID_MOT})]})]
 <INCLURE{fond=composants/fond/entete}{self=#SELF}{env=#ENV}{page=mot}{title=#GET{title}}{mrobots=all}{mkeywords=#GET{mkeywords}}{mdescription=#GET{mdescription}}{rsstitle=#GET{rsstitle}}{rssurl=#GET{rssurl}}{mexpires=86400}>
 <div id="colonne1"><div class="spacer"></div>[(#REM) Menu de navigation laterale (colonne 1)]
-	<div class="mg">
-    [(#REM) Colonne 1 - Menu de navigation par rubriques ]
-    <INCLURE{fond=composants/module/module}{self=#SELF}{env=#ENV}{nic=21}>
-
-	[(#REM) Menu de navigation mots-cles : les autres mots cles du meme groupe ]
-	<B_mots_freres>
-	<div class="divers">
-		#ANCRE_PAGINATION
-		[<p class="pagination">(#PAGINATION)</p>]
-		<div class="menu-titre"><:mots_clefs_meme_groupe:></div>
-		<ul>
-		<BOUCLE_mots_freres(MOTS) {type} {par titre} {pagination 20}>
-			<li class="menu-item"><a href="#URL_MOT"[ class="(#EXPOSE)"]>#TITRE</a></li>
-		</BOUCLE_mots_freres>
-		</ul>
-	</div>
-  <div class="spacer"></div>
-	</B_mots_freres>
-
-	[(#REM) Menu de navigation mots-cles : les autres groupes avec un lien sur le premier mot du groupe ]
-	<B_groupes_freres>
-	<div class="divers">
-		<h2 class="menu-titre"><:autres_groupes_mots_clefs:></h2>
-		<ul>
-		<BOUCLE_groupes_freres(GROUPES_MOTS) {par titre} {titre!==(_rubs)} {doublons}>
-		<BOUCLE_mot_cousin(MOTS) {id_groupe} {par titre} {0,1}>
-			<li class="menu-item"><a href="#URL_MOT">#TYPE</a></li>
-		</BOUCLE_mot_cousin>
-		</BOUCLE_groupes_freres>
-		</ul>
-	</div>
-	</B_groupes_freres>
-	</div><!-- fin mg -->
+  <INCLURE{fond=composants/module/module}{self=#SELF}{env=#ENV}{nic=21}{type}>
 </div><!-- fin colonne1 (navigation) -->
 
 [(#REM) Colonne 2 ]

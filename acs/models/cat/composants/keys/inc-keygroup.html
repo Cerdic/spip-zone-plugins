@@ -1,0 +1,28 @@
+[(#REM) Menu de navigation mots-cles : les autres mots cles du meme groupe ]
+<B_mots_freres>
+<div class="cbloc keys">
+  #ANCRE_PAGINATION
+  [<p class="pagination">(#PAGINATION)</p>]
+  <div class="menu-titre"><:mots_clefs_meme_groupe:></div>
+  <ul>
+  <BOUCLE_mots_freres(MOTS) {type} {par titre} {pagination 20}>
+    <li class="menu-item"><a href="#URL_MOT"[ class="(#EXPOSE)"]>#TITRE</a></li>
+  </BOUCLE_mots_freres>
+  </ul>
+</div>
+<div class="spacer"></div>
+</B_mots_freres>
+
+[(#REM) Menu de navigation mots-cles : les autres groupes avec un lien sur le premier mot du groupe ]
+<B_groupes_freres>
+<div class="cbloc keys">
+  <h2 class="menu-titre"><:autres_groupes_mots_clefs:></h2>
+  <ul>
+  <BOUCLE_groupes_freres(GROUPES_MOTS) {par titre} {titre!==(_.*)} {doublons}>
+  <BOUCLE_mot_cousin(MOTS) {id_groupe} {par titre} {!type} {0,1}>
+    <li class="menu-item"><a href="#URL_MOT">#TYPE</a></li>
+  </BOUCLE_mot_cousin>
+  </BOUCLE_groupes_freres>
+  </ul>
+</div>
+</B_groupes_freres>

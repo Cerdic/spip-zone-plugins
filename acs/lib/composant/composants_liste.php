@@ -39,6 +39,7 @@ function lecture_composants_liste() {
       $cl = array_merge($cl, lit_liste_composants($dirc, $dir));
     }
   }
+  ksort($cl);
   return $cl;
 }
 

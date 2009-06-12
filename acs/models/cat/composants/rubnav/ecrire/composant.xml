@@ -61,10 +61,22 @@
     <label>non</label>
   </variable>
   <variable>
-    <nom>Bord</nom>
+    <nom>BordColor</nom>
     <type>color</type>
     <valeur>acsFondBordColor</valeur>
   </variable>
+  <variable>
+    <nom>BordLargeur</nom>
+    <type>largeurbord</type>
+    <valeur>acsFondBordLargeur</valeur>
+    <label>non</label>
+  </variable>
+  <variable>
+    <nom>BordStyle</nom>
+    <type>stylebord</type>
+    <valeur>acsFondBordStyle</valeur>
+    <label>non</label>
+  </variable>  
   <variable>
     <nom>Sep</nom>
     <type>color</type>

@@ -39,7 +39,7 @@ html { font-size: 100%; } /* Cf.: http://pompage.net/pompe/definir-des-tailles-d
 [(#EVAL{defined('_DIR_PLUGIN_NOTATION')}|?{'', ' '})
   .notation {}
   .notation .topten {
-    border: thin dotted #CONFIG{acsFondBordColor,#AAE};
+    border: thin dotted #CONFIG{acsRubnavBordColor,#AAE};
     background: #CONFIG{acsFondColor};
     padding: 2px;
     margin: 5px;
@@ -81,7 +81,7 @@ ul.spip {
 /* Espaceur de blocs */
 br.nettoyeur { clear: both; line-height: 0;}
 
-.pagination {margin: 0; padding-left: 5px; font-size: 0.79em; font-weight: normal;}
+.pagination {margin: 0; padding-left: 5px; font-size: 0.71em; font-weight: normal;}
 
 .texte, .extrait {
 	padding-left: 4px;
@@ -118,14 +118,9 @@ br.nettoyeur { clear: both; line-height: 0;}
   filter:alpha(opacity=70);
 }
 
-/*
- * disposition des blocs de la page - page blocs
- */
-
 #colonne1 {
   float:left;
 	width: 20%;
-/*  background: #dfffdf;*/
 }
 
 * html #colonne1 {
@@ -165,7 +160,7 @@ br.nettoyeur { clear: both; line-height: 0;}
 /****************************
  * Contenu de la colonne 3
  ****************************/
-
+/*
 #colonne3 .encart {
 	margin: 10px;
 }
@@ -173,7 +168,7 @@ br.nettoyeur { clear: both; line-height: 0;}
 #colonne3 .divers, #colonne3 .syndic, #colonne3 .rubriques {
 	margin-top: 10px;
 }
-
+*/
 
 /*  ------------------------------------------
 /*  Habillage des petitions
@@ -289,7 +284,7 @@ table.petition {
   margin-top: 0;
   padding: 0.77em;
   padding-top: 0;
-  border: 1px dotted #CONFIG{acsFondBordColor,#004F8F};
+  border: 1px dotted #CONFIG{acsRubnavBordColor,#004F8F};
  }
  .formulaire_spip legend {
   font-weight: bold;
@@ -314,7 +309,7 @@ table.petition {
 .formulaire_spip input.text, .formulaire_spip textarea, .formulaire_spip select {
   width: 100%;
   background: #CONFIG{acsOngletsFondColor,#CONFIG{acsFondColor}};
-  border: thin groove #CONFIG{acsFondBordColor};
+  border: thin groove #CONFIG{acsRubnavBordColor};
   color: #CONFIG{acsFondText};
 }
 .formulaire_spip label {
@@ -344,9 +339,9 @@ table.petition {
 
 .form_inscription {
   width: 80%;
-  [border-color: (#CONFIG{acsFondBordColor, afdfaf});]
-  [border-width:(#CONFIG{acsFondBordLargeur, thin});]
-  border-style: #CONFIG{acsFondBordStyle, dotted};
+  [border-color: (#CONFIG{acsRubnavBordColor, afdfaf});]
+  [border-width:(#CONFIG{acsRubnavBordLargeur, thin});]
+  border-style: #CONFIG{acsRubnavBordStyle, dotted};
   [background-color: (#CONFIG{acsFondColor, #efffef});]
   padding: 4px;
   -moz-border-radius: 8px;

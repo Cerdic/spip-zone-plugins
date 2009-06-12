@@ -14,14 +14,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'Text' => 'Text',
 'Link' => 'Links',
 'LinkHover' => 'Links hover',
-'BordColor' => 'Default border',
 'DeplierHaut' => 'Wrap',
 'DeplierHaut_rtl' => 'Wrap, right to left',
 'DeplierBas' => 'Unwrap',
 
-'table' => 'Tables',
-'TabFirst' => 'First line',
-'TabOdd' => 'Odd',
-'TabEven' => 'Even',
 );
 ?>

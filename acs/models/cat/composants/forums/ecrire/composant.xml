@@ -12,21 +12,26 @@
   </param>
 
   <variable>
-    <nom>Bord</nom>
+    <nom>Nb</nom>
+    <type>nombre</type>
+    <valeur>10</valeur>
+  </variable>
+  <variable>
+    <nom>BordColor</nom>
     <type>color</type>
-    <valeur>acsOngletsBordColor</valeur>
+    <valeur>acsRubnavBordColor</valeur>
   </variable>
   <variable>
     <nom>BordLargeur</nom>
     <type>largeurbord</type>
-    <valeur>acsFondBordLargeur</valeur>
+    <valeur>acsRubnavBordLargeur</valeur>
     <label>non</label>
   </variable>
   <variable>
     <nom>BordStyle</nom>
     <type>stylebord</type>
     <label>non</label>
-    <valeur>acsFondBordStyle</valeur>
+    <valeur>acsRubnavBordStyle</valeur>
   </variable>
 
   <variable>
