@@ -31,7 +31,7 @@ function controleurs_composant_dist($regs) {
   );
   $html = '<style>'.recuperer_fond('acs_style_prive.css').'</style>';
   $html .= '<div  style="width:'.$crayon->w.'px; height:'.$crayon->h.'px">'.
-    '<div id="'."composant-$ctype-$id".'" style="position: absolute; border: 2px outset #fddf00; opacity: 0.99; width:'.$crayon->w.'px; height:'.$crayon->h.'px; font-size:'._request('em').'">'.
+    '<div id="'."composant-$ctype-$id".'" style="position: absolute; border: 2px outset #fddf00; top: -1px;left: -1px;opacity: 0.99; width:'.$crayon->w.'px; height:'.$crayon->h.'px; font-size:'._request('em').'">'.
       recuperer_fond('vues/composant', $contexte).
     '</div>'.
     '<div style="position: relative; opacity: 1;">'.
