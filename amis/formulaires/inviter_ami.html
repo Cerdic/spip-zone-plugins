@@ -1,0 +1,45 @@
+<div class="ajax formulaire_spip formulaire_#ENV{form}" id="formulaire_#ENV{form}#ENV{id}">
+[<p class="formulaire_message">(#ENV*{message_ok})</p>]
+[<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
+[(#ENV{editable})
+<form method='post' action='#ENV{action}#formulaire_#ENV{form}#ENV{id}' class='ajax'>
+
+[(#REM) declarer les hidden qui declencheront le service du formulaire 
+parametre : url d'action ]
+#ACTION_FORMULAIRE{#ENV{action}}
+
+[(#REM) les champs de saisie]
+<fieldset><ol>
+
+#SET{name,email}#SET{obli,obligatoire}
+#SET{erreur,#ENV**{erreurs}|table_valeur{#GET{name}}}
+<li class="text [champ_(#GET{name})] [(#GET{obli}|sinon{facultatif})] [ (#GET{erreur}|?{'erreur'})]">
+<label for='#GET{name}'>[(#ENV{form}|concat{':label_',#GET{name}}|_T)]
+[(#GET{obli}|?{' '})<em><:formulaires:info_obligatoire:></em>]
+</label>
+<input type="text" name='#GET{name}' id='#GET{name}' value="#ENV*{#GET{name}}" class='text' size='40' />
+[<span class='erreur'>(#GET{erreur})</span>]
+</li>
+
+#SET{name,message}#SET{obli,''}
+#SET{erreur,#ENV**{erreurs}|table_valeur{#GET{name}}}
+#SET{valeur,#ENV*{#GET{name}}}
+<li class="textarea [champ_(#GET{name})] [(#GET{obli}|sinon{facultatif})][ (#GET{erreur}|?{'erreur'})]">
+<label for='#GET{name}'>[(#ENV{form}|concat{':label_',#GET{name}}|_T)]
+[(#GET{obli}|?{' '})<em><:formulaires:info_obligatoire:></em>]
+</label>
+<textarea name='#GET{name}' id='#GET{name}' class=''>#ENV*{#GET{name}}</textarea>
+[<span class='erreur'>(#GET{erreur})</span>]
+</li>
+
+[(#REM) Piege a robots spammeurs ]
+<li class='antispam' style='display:none;'><label for="nobotnobot-#ID"><:antispam_champ_vide:></label>
+<input type="text" name="nobotnobot" id="nobotnobot-#ID" value="#ENV{nobotnobot}" size="10" />
+</li>
+</ol></fieldset>
+
+<div class='bouton'><input type="submit" name='inviter' value="[(#ENV{form}|concat{:label_inviter}|_T)]" /></div>
+<div class='legende_obligatoire'><em><:formulaires:info_obligatoire:></em> <:formulaires:info_obligatoire_legende:></div>
+
+</form>
+</div>
