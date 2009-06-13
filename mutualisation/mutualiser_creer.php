@@ -13,7 +13,8 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 define('_PRIVILEGES_MYSQL_USER_BASE','Alter, Select, Insert, Update, Delete, Create, Drop');
-define('_DIRMUT','mutualisation/');
+#define('_DIRMUT','mutualisation/');
+define('_DIRMUT', dirname(__FILE__) . '/');
 _chemin(_DIRMUT);
 
 include_spip('inc/minipres');
