@@ -1,0 +1,46 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+<title>[(#NOM_SITE_SPIP|textebrut) - ] <:jeux:resultats:></title>
+[<meta name="description" content="(#INTRODUCTION{150}|attribut_html)" />]
+<INCLURE{fond=inc-head}>
+</head>
+
+<body class="page_jeu">
+<div id="page">
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}>
+	<h1 class="entry-title"><:jeux:resultats:></h1>
+    
+	<B_jeux>
+	<table class="spip">
+	[<caption>(#PAGINATION)</caption>]
+    <thead>
+    <tr class="row_first">
+	<td><strong><:jeux:auteur:></strong></td>
+	<BOUCLE_jeux(JEUX){pagination}>
+    <td><strong>[(#TITRE_PUBLIC|sinon{#TYPE_JEU})] (#ID_JEU)</strong></td>    
+    </BOUCLE_jeux>
+    </tr></thead>
+    
+        <B_auteurs>
+        <tbody>
+        <BOUCLE_auteurs (AUTEURS){tout}{par nom}>
+            <tr [class="(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})"]><td>#NOM</td>
+            <BOUCLE_auteur_jeux(JEUX_RESULTATS){id_auteur}{par id_jeu}{! par date}>
+            [(#REM) faire un get-rem pour vérifier qu'on a un couple auteur/jeu unique)]
+            #SET{couple,#ID_JEU-#ID_AUTEUR}
+            [<td>(#GET{couple}|unique|oui)#RESULTAT_COURT / #TOTAL</td>]
+            </BOUCLE_auteur_jeux>
+            </tr>
+        </BOUCLE_auteurs>
+        </tbody>
+        </B_auteurs>
+    </table>
+    </B_jeux>
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
+</div>
+</body></html>
