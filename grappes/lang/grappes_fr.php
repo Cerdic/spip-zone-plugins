@@ -31,6 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_lier_rubriques' => 'Rubriques',
 'info_lier_sites' => 'Sites',
 'info_lier_syndic' => 'Sites',
+'info_nom_grappe' => 'Nom de la grappe',
 'info_qui_peut_lier' => 'Qui peut lier les objets à la grappe ?',
 'info_rechercher' => 'Chercher', // chercher de nouveaux objets a lier
 
