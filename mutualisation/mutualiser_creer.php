@@ -77,8 +77,9 @@ function mutu_etape_code_activation($e, $options){
 
 				"<form method='post' action='".self()."'><div>
 				<input type='password' name='code_activation' size='10' />
-				<input type='submit' value='ok' />
-				</div></form>
+				<input type='submit' value='ok' />"
+				.($options['branding']?'<h3>'.$options['branding'].'</h3><p>'.$options['branding_logo'].'</p>':'').
+				"</div></form>
 				"
 			);
 			exit;
