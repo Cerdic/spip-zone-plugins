@@ -14,12 +14,12 @@
 function editbox_init(){
 	jQuery('a.editbox:not(.nobox)')
 	.attr("onclick","").addClass('nobox').click(function(){
-		var li = jQuery(this).parents('li').eq(0);
-		jQuery(li).animeajax();
+		var casedoc = jQuery(this).parents('div.document').eq(0);
+		jQuery(casedoc).animeajax();
 		jQuery.modalboxload(jQuery(this).attr('href'),{
 			maxWidth: 500,
 			minHeight: 600,
-			onClose: function (dialog) {var a = jQuery(li).find('a.refresh');if (a.length) a.click();}
+			onClose: function (dialog) {var a = jQuery(casedoc).find('a.refresh');if (a.length) a.click();}
 		});
 		return false;
 	});

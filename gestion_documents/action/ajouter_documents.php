@@ -159,6 +159,25 @@ function action_ajouter_un_document_dist($id_document, $file, $objet, $id_objet,
 	
 	document_set($id_document,$champs);
 
+	// permettre aux plugins de faire des modifs a l'ajout initial
+	// ex EXIF qui tourne les images si necessaire
+	pipeline('post_edition',
+		array(
+			'args' => array(
+				'table' => 'spip_documents', // compatibilite
+				'table_objet' => 'documents',
+				'spip_table_objet' => 'spip_documents',
+				'type' =>'document',
+				'id_objet' => $id_document,
+				'champs' => array_keys($champs),
+				'serveur' => '', // serveur par defaut, on ne sait pas faire mieux pour le moment
+				'action' => 'ajouter_document',
+				'operation' => 'ajouter_document', // compat <= v2.0
+			),
+			'data' => $champs
+		)
+	);
+
 	return $id_document ;
 }
 

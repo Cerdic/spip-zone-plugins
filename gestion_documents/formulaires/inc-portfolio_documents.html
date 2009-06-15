@@ -1,0 +1,56 @@
+[(#REM)
+
+  Squelette
+  (c) xxx
+  Distribue sous licence GPL
+
+]
+<div class="liste_items documents" id="illustrations">
+<h3><:gestoc:illustrations:></h3>
+[(#REM) D'abord les images illustration]
+<B_illustrations>
+[<p class="pagination">(#PAGINATION)</p>]
+<BOUCLE_illustrations(DOCUMENTS spip_documents_liens){extension IN jpg,png,gif}{mode=image}{id_objet}{objet}{par id_document}{pagination 50}>
+	#MODELE{document_desc,id_document,id_objet,objet,ajax}
+</BOUCLE_illustrations>
+</div>
+
+<div class="liste_items documents" id="portfolio">
+<h3><:gestoc:portfolio:></h3>
+[(#REM) puis les images du portfolio]
+<B_portfolio>
+[<p class="pagination">(#PAGINATION)</p>]
+<BOUCLE_portfolio(DOCUMENTS spip_documents_liens){extension IN jpg,png,gif}{mode=document}{id_objet}{objet}{par id_document}{pagination 50}>
+	#MODELE{document_desc,id_document,id_objet,objet,ajax}
+</BOUCLE_portfolio>
+</div>
+
+<div class="liste_items documents" id="documents">
+<h3><:gestoc:documents:></h3>
+[(#REM) puis les documents]
+<B_documents>
+[<p class="pagination">(#PAGINATION)</p>]
+<BOUCLE_documents(DOCUMENTS spip_documents_liens){extension !IN jpg,png,gif}{mode=document}{id_objet}{objet}{par id_document}{pagination 50}>
+	#MODELE{document_desc,id_document,id_objet,objet,ajax}
+</BOUCLE_documents>
+</div>
+
+<script type="text/javascript">
+function editbox_init(){
+	jQuery('a.editbox:not(.nobox)')
+	.attr("onclick","").addClass('nobox').click(function(){
+		var casedoc = jQuery(this).parents('div.document').eq(0);
+		jQuery(casedoc).animeajax();
+		jQuery.modalboxload(jQuery(this).attr('href'),{
+			maxWidth: 500,
+			minHeight: 600,
+			onClose: function (dialog) {var a = jQuery(casedoc).find('a.refresh');if (a.length) a.click();}
+		});
+		return false;
+	});
+}
+if (window.jQuery)
+(function($){if(typeof onAjaxLoad == "function") onAjaxLoad(editbox_init);
+	$(editbox_init);
+ })(jQuery);
+</script>

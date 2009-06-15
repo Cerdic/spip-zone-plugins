@@ -22,12 +22,19 @@
 				[(#INCLURE{fond=formulaires/inc-upload_document}{env})]
 				</div>
 	    </li>]
-	  	<li>
+	  	<li class="editer_apercu">
 		  	<label><:gestdoc:label_apercu:></label>
-		  	[(#ENV{apercu}|oui)[<a href='#ENV{apercu}'>(#ENV{apercu}|image_reduire{300,200})</a>]]
+		  	[(#ENV{apercu}|oui)
+				<div class="tourner">
+					<input class="image" type="image" name="tournerL90" src="#CHEMIN{img_pack/tourner-gauche.gif}" alt="<:gestdoc:tourner_90L:>" />
+					<input class="image" type="image" name="tournerR90" src="#CHEMIN{img_pack/tourner-droite.gif}" alt="<:gestdoc:tourner_90R:>" />
+					<input class="image" type="image" name="tourner180" src="#CHEMIN{img_pack/tourner-180.gif}" alt="<:gestdoc:tourner_180:>" />
+				</div>
+				[<a href='#ENV{apercu}'>(#ENV{apercu}|image_reduire{300,200})</a>]
+				]
 		  	[(#ENV{apercu}|non)[(#MODELE{doc,id_document=#ENV{id_document,''},hauteur=200,largeur=300}|extraire_balise{a})]]
 	  	</li>
-	  	<li>
+	  	<li class="editer_infos">
 		  	<label><:gestdoc:label_caracteristiques:></label>
 		  	[<span class='type'>(#ENV{type_document}) - </span>]
 				<span class='taille'>[(#LARGEUR|ou{#HAUTEUR}|oui)[(#VAL{info_largeur_vignette}|_T{#ARRAY{largeur_vignette,#LARGEUR,hauteur_vignette,#HAUTEUR}})] - 

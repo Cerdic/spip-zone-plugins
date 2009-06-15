@@ -83,9 +83,8 @@
 	</thead>
 	<BOUCLE_galerie(DOCUMENTS) {id_rubrique ?}{id_article ?}{id_breve ?}{id_document ?}{recherche ?} {tri id_document,inverse}{media?}{extension?}{distant?}{brise?}{statut==#ENV{statut,.*}}{orphelins?}{pagination 10}>
 	<tr class="[(#ENV{media}|non)[ media-(#MEDIA)]]">
-		#SET{logo,#LOGO_DOCUMENT{apercu,250,100}}
-		[(#DISTANT|=={oui}|non)#SET{missing,#FICHIER|file_exists|non}]
 		<td class='infos'>
+		[(#DISTANT|=={oui}|non)#SET{missing,#FICHIER|file_exists|non}]
 		[(#ENV{media}|non|et{#MEDIA|!={file}})[(#CHEMIN{images/media-#MEDIA|concat{-32.png}}|tag_img|inserer_attribut{alt,#VAL{gestdoc:media_#MEDIA}|_T}|inserer_attribut{title,#VAL{gestdoc:media_#MEDIA}|_T})]]
 		[(#GET{missing}|oui)<img src='#CHEMIN{images/document-manquant-24.png}' width='22' height='22' alt='<:gestdoc:fichier_manquant:>' />]
 		[(#DISTANT|=={oui}|oui)<img src='#CHEMIN{images/document-distant-24.png}' width='22' height='22' alt='<:gestdoc:fichier_distant:>' />]
@@ -97,7 +96,9 @@
 		[(#ID_DOCUMENT|gestdoc_puce_statut_document{#STATUT})]
 		</td>
 		<td class="logo">
-		[<a href="#URL_DOCUMENT" type="#MIME_TYPE"[ title="(#FICHIER)"]>(#GET{logo}||inserer_attribut{alt,[(#TITRE|couper{60}|texte_backend)]})</a>]
+		#SET{fichier,#DISTANT|=={oui}|?{#FICHIER,#FICHIER|basename}}
+		[<a href="#URL_DOCUMENT" type="#MIME_TYPE"[ title="(#GET{fichier})"]>(#LOGO_DOCUMENT{apercu,250,100}||inserer_attribut{alt,[(#TITRE|couper{60}|texte_backend)]})</a>]
+		<div class="fichier">#GET{fichier}</div>
 		</td>
 		<td class="exif">
 			[<strong class="extension">(#EXTENSION)</strong>]
@@ -122,10 +123,12 @@
 			[<p class="credits #EDIT{credits}">(#CREDITS)</p>]
 		</td>
 		<td>
+		[(#REM) Utilisation de la galerie en mode portfolio, avec renvoi vers l'edition]
 		[(#GET{editable})
 		[(#AUTORISER{modifier,document,#ID_DOCUMENT})&#91;<a href='#URL_ECRIRE{documents_edit,id_document=#ID_DOCUMENT}'><:bouton_modifier:></a>&#93;]
 		[<span class='supprimer'>(#GET{supprimer}|et{#AUTORISER{supprimer,document,#ID_DOCUMENT}})[(#BOUTON_ACTION{<:gestdoc:bouton_supprimer:>,#URL_ACTION_AUTEUR{supprimer_document,#ID_DOCUMENT,#SELF},ajax})]</span>]
 		]
+		[(#REM) Utilisation de la galerie en mode selecteur, avec un bouton choix qui appelle une fonction js passee en argument]
 		[<span class="choisir"><a href="#" onclick="(#ENV{selectfunc,''})([(#ID_DOCUMENT)]);return false;"><:bouton_choisir:></a></span>]
 		</td>
 	</tr>

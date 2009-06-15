@@ -20,21 +20,14 @@
 				[(#BOUTON_ACTION{<:gestdoc:tourner_90R:>,#URL_ACTION_AUTEUR{tourner,#GET{id}|concat{',90'},#SELF},ajax,#CHEMIN{img_pack/tourner-droite.gif}})]
 				[(#BOUTON_ACTION{<:gestdoc:tourner_180:>,#URL_ACTION_AUTEUR{tourner,#GET{id}|concat{',180'},#SELF},ajax,#CHEMIN{img_pack/tourner-180.gif}})]
 			</div>]
-			[(#LOGO_DOCUMENT|#URL_DOCUMENT)]
-			<BOUCLE_type_doc(TYPES_DOCUMENTS){extension}>
-			[(#MODE|=={document}|oui)<div class="type">
-			[(#TITRE|sinon{#VAL{<:info_document:>}|concat{' ',#EXTENSION|majuscules}})]
-				</div>
-			]
-			[(#ID_DOCUMENT|gestdoc_raccourcis_doc{#_docslies:TITRE,#_docslies:DESCRIPTIF,#INCLUS,#LARGEUR,#HAUTEUR,#MODE,#VU})]
-			</BOUCLE_type_doc>
-				[<span class="mode">(#EXTENSION|match{^(jpg|gif|png)$}|et{#EVAL{_BOUTON_MODE_IMAGE}}|oui)
-					[(#MODE|=={image}|oui)
-					[(#BOUTON_ACTION{<:gestdoc:upload_info_mode_document:>,#URL_ACTION_AUTEUR{changer_mode_document,#ID_DOCUMENT-document,#SELF},ajax})]
-					][(#MODE|=={image}|non)
-					[(#BOUTON_ACTION{<:gestdoc:upload_info_mode_image:>,#URL_ACTION_AUTEUR{changer_mode_document,#ID_DOCUMENT-image,#SELF},ajax})]
-					]
-				</span>]
+			[(#LOGO_DOCUMENT{50,50}|#URL_DOCUMENT)]
+			[<span class="mode">(#EXTENSION|match{^(jpg|gif|png)$}|et{#EVAL{_BOUTON_MODE_IMAGE}}|oui)
+				[(#MODE|=={image}|oui)
+				[(#BOUTON_ACTION{<:gestdoc:upload_info_mode_document:>,#URL_ACTION_AUTEUR{changer_mode_document,#ID_DOCUMENT-document,#SELF}})]
+				][(#MODE|=={image}|non)
+				[(#BOUTON_ACTION{<:gestdoc:upload_info_mode_image:>,#URL_ACTION_AUTEUR{changer_mode_document,#ID_DOCUMENT-image,#SELF}})]
+				]
+			</span>]
 			<div class="actions">
 				<a href="[(#SELF|parametre_url{timestamp,#REM|time})]" class="refresh none ajax"><:gestdoc:bouton_refresh_document:></a>
 				<BOUCLE_compte(DOCUMENTS_LIENS){id_document}{0,2} />

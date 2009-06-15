@@ -1,3 +1,4 @@
+[(#ENV{editable})
 <div class='formulaire_spip formulaire_joindre formulaire_joindre_document' id='formulaire_joindre_document-#ENV{id,new}'>
 	[(#ENV{mode}|=={image}|oui)
 	<h3 class='titrem'>[(#CHEMIN{images/image-24.gif}|balise_img{'',cadre-icone})][(#ENV{id,new}|intval|?{<:gestdoc:bouton_remplacer_image:>,<:bouton_ajouter_image:>}) #AIDER{ins_img}]</h3>
@@ -17,7 +18,7 @@
 		
 	</div></form>
 
-</div>
-[(#ENV{_colonne,''})
-		[(#INCLURE{fond=formulaires/inc-colonne_documents}{env}{ajax})]
+</div>]
+[(#ENV{_galerie,''})
+		[(#INCLURE{fond=#ENV{_galerie}}{env}{ajax})]
 ]

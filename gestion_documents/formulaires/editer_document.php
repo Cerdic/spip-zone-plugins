@@ -112,7 +112,7 @@ function formulaires_editer_document_verifier_dist($id_document='new', $id_paren
 function formulaires_editer_document_traiter_dist($id_document='new', $id_parent='', $retour='', $lier_trad=0, $config_fonc='documents_edit_config', $row=array(), $hidden=''){
 	if (is_null(_request('parents')))
 		set_request('parents',array());
-	
+
 	// verifier les infos de taille et dimensions sur les fichiers locaux
 	// cas des maj de fichier directes par ftp
 	foreach(array('taille','largeur','hauteur') as $c)
@@ -139,6 +139,21 @@ function formulaires_editer_document_traiter_dist($id_document='new', $id_parent
 			}
 			$traiter = charger_fonction('traiter','formulaires/joindre_document');
 			$res2 = $traiter($id_document);
+		}
+	}
+	else{
+		// regarder si une demande de rotation a eu lieu
+		// c'est un bouton image, dont on a pas toujours le name en request, on fait avec
+		$angle = 0;
+		if (_request('tournerL90') OR _request('tournerL90_x'))
+			$angle = -90;
+		if (_request('tournerR90') OR _request('tournerR90_x'))
+			$angle = 90;
+		if (_request('tourner180') OR _request('tourner180_x'))
+			$angle = 180;
+		if ($angle){
+			$tourner = charger_fonction('tourner','action');
+			action_tourner_post($id_document,$angle);
 		}
 	}
 

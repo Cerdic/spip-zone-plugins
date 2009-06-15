@@ -26,7 +26,7 @@ function joindre_determiner_mode($mode,$id_document,$objet){
 }
 
 
-function formulaires_joindre_document_charger_dist($id_document='new',$id_objet=0,$objet='',$mode = 'auto',$colonne = false){
+function formulaires_joindre_document_charger_dist($id_document='new',$id_objet=0,$objet='',$mode = 'auto',$galerie = false){
 	$valeurs = array();
 	$mode = joindre_determiner_mode($mode,$id_document,$objet);
 	
@@ -43,7 +43,12 @@ function formulaires_joindre_document_charger_dist($id_document='new',$id_objet=
 	$valeurs['joindre_distant']=''; 
 	$valeurs['joindre_ftp']='';
 	$valeurs['joindre_mediatheque']='';
-	
+
+	$valeurs['editable'] = ' ';
+	if (intval($id_document)){
+		$valeurs['editable'] = autoriser('modifier','document',$id_document)?' ':'';
+	}
+
 	# regarder si un choix d'upload FTP est possible
 	if (
 	 test_espace_prive() # ??
@@ -62,20 +67,22 @@ function formulaires_joindre_document_charger_dist($id_document='new',$id_objet=
 		}
 	}
 
-	if ($colonne){
-		# colonne documents ?
+	if ($galerie){
+		# colonne documents ou portfolio ?
 		$valeurs['id_objet'] = $id_objet;
 		$valeurs['objet'] = $objet;
-		$valeurs['_colonne'] = ' ';
+		$valeurs['_galerie'] = $galerie;
 		$valeurs['id_joindre'] = '';
+		if ($valeurs['editable']){
+			$valeurs['editable'] = autoriser('modifier',$objet,$id_objet)?' ':'';
+		}
 	}
-
 	
 	return $valeurs;
 }
 
 
-function formulaires_joindre_document_verifier_dist($id_document='new',$id_objet=0,$objet='',$mode = 'auto'){
+function formulaires_joindre_document_verifier_dist($id_document='new',$id_objet=0,$objet='',$mode = 'auto',$galerie = false){
 	include_spip('inc/joindre_document');
 	
 	$erreurs = array();
@@ -127,7 +134,7 @@ function formulaires_joindre_document_verifier_dist($id_document='new',$id_objet
 }
 
 
-function formulaires_joindre_document_traiter_dist($id_document='new',$id_objet=0,$objet='',$mode = 'auto'){
+function formulaires_joindre_document_traiter_dist($id_document='new',$id_objet=0,$objet='',$mode = 'auto',$galerie = false){
 	$res = array('editable'=>true);
 	// on joint un document deja dans le site
 	if (_request('joindre_mediatheque')){

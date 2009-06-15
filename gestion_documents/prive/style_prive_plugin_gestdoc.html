@@ -26,6 +26,9 @@
 
 .formulaire_editer_document .taille_modifiee {display:block;color: red;}
 
+.formulaire_editer_document .editer_apercu .tourner {display:block;float:#GET{right};}
+.formulaire_editer_document .editer_apercu .tourner input.image {padding:5px;border:1px solid #eee;}
+
 .formulaire_joindre_document .sourceup {padding:0 5px;}
 .formulaire_joindre_document .infos {padding:0 5px;}
 #navigation .formulaire_joindre_document .sourceup, #extra .formulaire_joindre_document .sourceup {font-size:0.9em;}
@@ -70,6 +73,8 @@ a.bouton_fermer {display:block;text-align:#GET{right};}
 .galerie table td.statut { width: 9px; }
 .galerie table td.logo { width: 250px; overflow: hidden; }
 .galerie table td.logo img { /*border: 1px solid #666;*/ }
+.galerie table .fichier {font-size:0.8em;width:250px;overflow:hidden;font-style:italic;}
+
 .galerie table td.exif { width: 140px;  }
 .galerie table td.exif small { display: inline; }
 .galerie table td.exif .extension {}
@@ -113,6 +118,10 @@ p.actions {clear:both;}
 #documents_joints .item .raccourcis span {display:block;font-weight:bold;text-align:left;}
 #documents_joints .item span.mode {display:block;text-align:right;}
 #documents_joints .item .actions {display:block;text-align:right;font-size:x-small;}
+
+#documents_joints .item .tourner {display:block;float:#GET{right};}
+#documents_joints .item .tourner input.image {padding:3px;border:1px solid #eee;display:block;}
+
 
 [(#INCLURE{fond=modalbox/style_prive_plugin_modalbox}{env})]
 [(#REM)</style>]
