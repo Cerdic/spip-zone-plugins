@@ -102,6 +102,8 @@
 			'repertoire' => 'sites',     // Nom du repertoire contenant les sites mutualises ('sites')
 			'url_img_courtes' => true,   // Utiliser la redirection des URL d'images courtes dans la partie publique (false)
 			# 'utiliser_panel' => false, // Utiliser une table externe pour recuperer des identifiants ... (code, user, pass) permettant a un utilisateur d'installer le site (false) 
+			# 'branding' => 'Un service propos&eacute; par <a href="http://www.spip.net/">la communaut&eacute; SPIP</a>', // Texte a afficher en bas du formulaire d'activation de la mutualisation
+			# 'branding_logo' => '<a href="http://www.spip.net/"><img src="/prive/images/logo-spip2.gif" alt="" /></a>' // Logo a afficher en bas du formulaire d'activation de la mutualisation
 			'url_creer_base' => ''       // Creer la base de donnees via une URL (methode AlternC)
 		)
 	);
