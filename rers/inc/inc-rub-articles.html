@@ -1,0 +1,45 @@
+		<B_articles_rubrique>
+		<h2 class="structure"><:articles_rubrique:></h2>
+		 #ANCRE_PAGINATION
+		<BOUCLE_articles_rubrique(ARTICLES) {branche} {par num titre} {!par date} {pagination}>
+			<br class="nettoyeur" />
+			[<div class="logo-liste-art">
+				(#LOGO_ARTICLE|#URL_ARTICLE||image_reduire{120,0})
+			</div>]
+			[<div class="surtitre">(#SURTITRE)</div>]
+			<h3>
+			<a href="#URL_SITE_SPIP/#URL_ARTICLE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>[(#TITRE|supprimer_numero)]</a>
+[(#REM) rers :   j'ai supprimé la parenthèse présentant le titre de la rubrique de l'article]
+			</h3>
+      	[<div class="sous-titre">(#SOUSTITRE)</div>]
+			<div class="detail">
+				[(#DATE|nom_jour)] [(#DATE|affdate)]
+				<B_auteurs_recents><:par_auteur:> <BOUCLE_auteurs_recents(AUTEURS) {id_article} {", "}><a href="#URL_SITE_SPIP/#URL_AUTEUR">#NOM</a></BOUCLE_auteurs_recents>
+			</div><!-- detail -->
+      <div class="texte">
+	[<div class="extrait">(#DESCRIPTIF|?{
+		[<div class="#EDIT{descriptif}">(#DESCRIPTIF)</div>
+		<div class="suite"><a href="#URL_ARTICLE" title="...<:suite:>" ><:suite:></a></div>]
+		,
+      	[(#CHAPO|?{
+      	[<div class="#EDIT{chapo}">(#CHAPO)</div>
+      	<div class="suite"><a href="#URL_ARTICLE" title="...<:suite:>" ><:suite:></a></div>]
+      		,
+      	[<div class="#EDIT{texte}">(#TEXTE|couper{300})</div>
+      	<div class="suite"><a href="#URL_ARTICLE" title="...<:suite:>" ><:suite:></a></div>]
+		})]
+	})</div><!-- fin extrait -->]
+      </div><!-- fin texte -->
+      <br class="nettoyeur" />
+		</BOUCLE_articles_rubrique>
+		
+		[<div class="pagination">
+			<div class="ligne1">
+				<div dir="#LANG_DIR">#TOTAL_BOUCLE/#GRAND_TOTAL <:articles:></div>
+			</div>
+			<div class="ligne2">
+        (#PAGINATION)
+			</div>
+		</div>]
+
+		</B_articles_rubrique>

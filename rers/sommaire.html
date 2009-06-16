@@ -1,0 +1,81 @@
+[(#CACHE{7200})]
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+	<title>[[(#NOM_SITE_SPIP|textebrut)]]</title>
+	<INCLURE{fond=inc/inc-meta}{lang}>
+	<INCLURE{fond=styles}{lang}>
+
+	[<script type="text/javascript">
+function iPhoneAlert() {
+if((navigator.userAgent.match(/iPhone/i))||(navigator.userAgent.
+match(/iPod/i))){
+var question = confirm("Souhaitez-vous naviguer sur le site optimisé pour iPhone?")
+if (question){
+window.location = "(#URL_PAGE{ispip})";
+}else{
+
+}
+}
+}
+</script><!-- fin script -->]
+
+</head>
+<body dir="#LANG_DIR" class="#LANG sommaire"[ (#PLUGIN{ispip}|=={1}|?{ onload="iPhoneAlert();"})]>
+<div id="page" class="sommaire">
+
+<!-- *****************************************************************
+	Bandeau, titre du site et menu langue
+	Header and main menu (top and right) 
+    ************************************************************* -->
+
+  <INCLURE{fond=inc/inc-bandeau}{lang}>
+
+<!-- *****************************************************************
+	Contenu principal (centre)
+	Main content (center) 
+    ************************************************************* -->
+  <div id="bloc-contenu">
+
+
+
+[(#REM) rers : le contenu de la page d'accueil]
+<BOUCLE_accueil(ARTICLES) {titre_mot=rers_accueil}>
+		<h1 class="#EDIT{titre} titre-article">[(#TITRE|supprimer_numero)]</h1>
+	        [<div class="#EDIT{soustitre} sous-titre">(#SOUSTITRE)</div>]
+		[<div class="#EDIT{chapo} chapo">(#CHAPO|image_reduire{440,0})</div>]
+		[<div class="#EDIT{texte} texte">(#TEXTE|image_reduire{440,0})</div>]
+
+</BOUCLE_accueil>
+
+
+
+	<h2 class="structure"><:articles_recents:></h2>
+	<INCLURE{fond=inc/inc-sommaire-articles}{lang}{self=#SELF}>
+     
+  </div><!-- bloc-contenu-->
+
+<!-- *****************************************************************
+	Menus contextuels (droite)
+	Contextual menus (right) 
+    ************************************************************* -->
+  <div id="encart">  
+
+<INCLURE{fond=inc/inc-trad}{lang}>
+
+<INCLURE{fond=inc/inc-annonces}{lang}>
+
+<INCLURE{fond=inc/inc-breves}{lang}>
+
+<INCLURE{fond=inc/inc-syndic}{lang}>
+
+[(#REM) rers : pas de formulaire d'inscription ici ]
+
+  </div><!-- encart -->
+<INCLURE{fond=inc/inc-menu}{lang}>
+<INCLURE{fond=inc/inc-bas} {lang}>
+
+</div><!-- page-->
+</body>
+</html>

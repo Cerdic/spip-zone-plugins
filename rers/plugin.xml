@@ -1,0 +1,32 @@
+<plugin>
+	<nom>RERS</nom>
+	<version>0.2</version>
+	<prefix>rers</prefix>
+	<etat>dev</etat>
+	<auteur>Jean-Charles C [contact->mailto:jccdkct-dev@yahoo.fr]</auteur>
+	<icon>img/logo_plugin_rers.png</icon>
+	<description>Plugin d&eacute;velopp&eacute; initialement pour le r&eacute;seau 
+         d'&eacute;changes de savoirs RERS du sud de l'aisne en 2009.
+         Distribu&eacute; sous licence GNU/GPL. 
+_        [Documentation->http://www.spip-contrib.net/?article3059] /
+         [Configuragion->.?exec=cfg&amp;cfg=rers]
+        </description>
+	<necessite id='SPIP' version='[2.0.0;]' />
+	<necessite id='AHUNTSIC' version='[1.0.0;]' />
+	<necessite id='AGENDA' version='[2.0.0;]' />
+	<necessite id="cfg" version="[1.0.0;]" />
+	<options>rers_options.php</options>
+	<pipeline>
+		<nom>affiche_droite</nom>
+        	<inclure>rers_options.php</inclure>
+		<action>affiche_aide</action>
+	</pipeline>
+        <pipeline>
+        	<nom>ajouter_boutons</nom>
+            	<inclure>rers_options.php</inclure>
+        </pipeline>	
+
+
+
+
+</plugin>

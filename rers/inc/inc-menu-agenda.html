@@ -1,0 +1,53 @@
+[(#REM) boucle d'affichage d'un agenda ou calendrier d'evenements. 
+rers : On va utiliser le plugin Agenda2, plutôt que la méthode ahuntsic présentée ici :
+Pour s'afficher dans ce menu, un article doit se voir attribuer le mot-cle "Agenda". Pour s'afficher dans l'agenda, les articles doivent, en plus du mot-cle, se voir attribuer une "Date de publication anterieure" qui constituera la date de l'evenement.
+ ]
+
+[(#REM) rers : Evenements de l'agenda        
+	rers : Trois lieux pour ça : article.html, agenda.html, inc-menu-agenda.html
+] 
+
+
+<div class="menu" id="menu-agenda">
+[(#REM) rers :  déplacer le 	<br />    en bas ]
+	<h3 class="structure"><:icone_agenda:></h3>
+	<ul>
+		<li>
+			<a class="lien" href="#URL_PAGE{agenda}" title="<:icone_agenda:>"><:icone_agenda:></a>
+			<ul>
+
+
+
+[(#REM) rers : la boucle  n'est plus basée sur le mot clé Agenda mais sur le plugin agenda2;
+       rers  : Ainsi la boucle ARTICLES devient EVENEMENT
+]
+
+		<BOUCLE_agenda(EVENEMENTS){age<0}{par date}{statut=publie}{0,6}{lang}{doublons}>
+				<li>[<span>(#DATE_DEBUT|Agenda_affdate_debut_fin{#DATE_FIN,#HORAIRE})</span>]
+					<a class="lien[(#EXPOSER)] article" href="#URL_ARTICLE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>#TITRE [((#LIEU|supprimer_tags))]</a>
+
+				</li>
+		</BOUCLE_agenda>
+		<BOUCLE_agenda_suite(EVENEMENTS){age<0}{par date}{statut=publie}{6,1}{lang}{doublons}>
+				<li><span>encore plus tard :</span>
+					<a class="lien[(#EXPOSER)] article" 
+                                       href="#URL_PAGE{agenda}" title="<:icone_agenda:>">
+                                      Autres évènements prévus</a>
+
+				</li>
+		</BOUCLE_agenda_suite>
+		</B_agenda>
+		
+
+				<li><span>Aucun évènement n'est prévu</span></li>
+
+		<//B_agenda>
+
+			</ul>
+		</li>
+	</ul>
+<br />
+</div>
+
+
+

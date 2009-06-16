@@ -1,0 +1,65 @@
+﻿	<br class="nettoyeur" />
+	<div class="edito">
+		<h3 class="edito-titre"><:articles_recents:></h3>
+	</div>
+
+    <BOUCLE_article_edito(ARTICLES) {lang} {titre_mot=Editorial} {doublons}></BOUCLE_article_edito>
+
+
+
+
+[(#REM) rers : ne pas afficher les articles des rubriques ayant le mot_clé exclu_menu_rub  ]
+	<BOUCLE_art_rers_exclu(ARTICLES){titre_mot=exclu_menu_rub}{doublons}></BOUCLE_art_rers_exclu>
+	<BOUCLE_rub_rers_exclu(RUBRIQUES){titre_mot=exclu_menu_rub}{doublons}>
+		<BOUCLE_art_rersexclu2(ARTICLES){id_rubrique}{doublons}></BOUCLE_art_rersexclu2>
+	</BOUCLE_rub_rers_exclu>
+
+
+
+
+
+
+
+    <B_article_langue>
+    #ANCRE_PAGINATION
+    <BOUCLE_article_langue(ARTICLES) {lang} {par date} {inverse} {pagination 10} {doublons}>
+	  <br class="nettoyeur" />
+	  [<div class="logo-liste-art">
+		(#LOGO_ARTICLE_RUBRIQUE|#URL_ARTICLE||image_reduire{150,0})
+	  </div>]
+	  [<div class="#EDIT{surtitre} surtitre">(#SURTITRE)</div>]
+      <h3><a href="#URL_ARTICLE" class="#EDIT{titre} titre-article">[(#TITRE|supprimer_numero)]</a></h3>
+      [<div class="#EDIT{soustitre} sous-titre">(#SOUSTITRE)</div>]
+      <div class="detail">
+        <span class="#EDIT{date}">[(#DATE|nom_jour)] [(#DATE|affdate)]</span>
+        <B_auteurs_langue><span class="auteur-article"><:par_auteur:> <BOUCLE_auteurs_langue(AUTEURS) {id_article} {", "}><a href="#URL_AUTEUR">#NOM</a></BOUCLE_auteurs_langue></span></B_auteurs_langue>
+      </div><!-- detail -->
+
+      <div class="texte">
+	[<div class="extrait">(#DESCRIPTIF|?{
+		[<div class="#EDIT{descriptif}">(#DESCRIPTIF)</div>
+		<div class="suite"><a href="#URL_ARTICLE" title="...<:suite:>" ><:suite:></a></div>]
+		,
+      	[(#CHAPO|?{
+      	[<div class="#EDIT{chapo}">(#CHAPO)</div>
+      	<div class="suite"><a href="#URL_ARTICLE" title="...<:suite:>" ><:suite:></a></div>]
+      		,
+      	[<div class="#EDIT{texte}">(#TEXTE|couper{300})</div>
+      	<div class="suite"><a href="#URL_ARTICLE" title="...<:suite:>" ><:suite:></a></div>]
+		})]
+	})</div><!-- fin extrait -->]
+      </div><!-- fin texte -->
+      <br class="nettoyeur" />
+    </BOUCLE_article_langue>
+
+    [<div class="pagination">
+      <div class="ligne1">
+        <div dir="#LANG_DIR">#TOTAL_BOUCLE/#GRAND_TOTAL <:articles:></div>
+      </div>
+      <div class="ligne2">
+        (#PAGINATION{page_precedent_suivant})
+      </div>
+    </div>]
+
+    </B_article_langue>
+    <//B_article_langue>

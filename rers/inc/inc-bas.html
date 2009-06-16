@@ -1,0 +1,87 @@
+[(#REM) *****************************************************************
+	Pied-de-page (bas)
+	Footer (bottom) 
+    ************************************************************* ]
+<div id="bas">
+
+	<p>
+
+
+
+
+
+
+
+		<a href="http://www.spip.net" title="<:site_realise_avec_spip:> #SPIP_VERSION"> <:site_realise_avec_spip:> #VERSION_SPIP_AFFICHEE</a> + 
+		<a href="http://edu.ca.edu/rubrique43.html" title="<:spip:squelette:> AHUNTSIC - #VERSION_SQUELETTE">AHUNTSIC</a>
+
+
+
+
+[(#REM) rers :    lien vers l'article d'explication de ma personnalisation de squelette ]
+<BOUCLE_rerscesite(ARTICLES){titre_mot=rers_ce_site}>
++
+<a href="#URL_ARTICLE" title="adaptation des squelettes pour les RERS">personnalisation</a>
+</BOUCLE_rerscesite>
+
+
+
+&nbsp;|&nbsp;
+
+
+
+[(#REM)  rers : *  site unilingue,   j'enlève l'indication FR 
+	rers  : *  Un seul bouton de syndication : tout le site
+	rers  : *  Point d'interrogation :  explication sous la souris
+]
+		&nbsp;<a href="#URL_PAGE{backend}" rel="nofollow" 
+		   title="syndication au format RSS">
+		<img src="#CHEMIN{feed.png}" alt="<:icone_suivi_activite:>"
+		   style="position:relative;bottom:-0.3em;" width="16" height="16" class="format_png" />
+		 </a>
+	<big>&nbsp;
+		<b><a title="Qu'est le RSS?" 
+ 		href="ttp://fr.wikipedia.org/wiki/RSS_(format)">?</a></b>
+	</big>
+
+
+&nbsp;|&nbsp;
+
+
+[(#REM)  rers :  explication du format ical. 
+RQ : Icone prise sur wikimedia :  http://commons.wikimedia.org/wiki/File:Config-date.png ]
+		&nbsp;<a href="[(#URL_SITE_SPIP|replace{http,webcal})]/spip.php?page=ical-agenda" 
+		   rel="nofollow" title="Abonnement au calendrier : format ICalendar">
+		<img src="#CHEMIN{img/agenda.png}" alt="<:icone_suivi_activite:>"
+		   style="position:relative;bottom:-0.6em;" width="22" height="22" class="format_png" />
+		 </a>
+	<big>&nbsp;
+		<b><a title="Qu'est le format de calendrier ICALENDAR ?" 
+ 		href="http://fr.wikipedia.org/wiki/ICalendar">?</a></b>
+	</big>
+
+<BOUCLE_syndic_test(SITES){tout}{syndication=oui} {0,1}>
+	&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+		<a href="#URL_PAGE{opml}" rel="nofollow" title="OPML : <:ecrire:titre_sites_syndiques:>"><img src="#CHEMIN{styles/img/opml-icon.png}" alt="<:ecrire:titre_sites_syndiques:>" style="position:relative;bottom:-0.3em;" width="16" height="16" class="format_png" /><span>&nbsp;OPML</span></a>
+	<big>&nbsp;
+		<b><a href="http://#LANG.wikipedia.org/wiki/OPML">?</a></b>
+	</big>
+</BOUCLE_syndic_test>
+
+
+
+
+</p>
+[(#REM) rers : aucun contenu à protéger pour l'instant : 	
+<INCLURE{fond=inc/inc-bas_cc}{lang}>
+]
+
+</div><!-- fin bas -->
+
+<INCLURE{fond=inc/inc-bas_menu-lang}{lang}>
+
+[(#REM)
+	La balise SPIP_CRON permet de deporter les calculs lourds (indexation, etc)
+	dans une image cachee, ce qui evite de ralentir l'affichage des pages.
+]	#SPIP_CRON
+

@@ -1,0 +1,75 @@
+Squelettes RERS (sous forme de plugin)
+
+
+______ version 0.2 - juin 2009
+
+Utilisation du plugin CFG pour indiquer les rubriques OFFRES et DEMANDES par exemple et utiliser ces
+  données dans les squelettes.
+
+
+______ version 0.1 - mai 2009
+
+
+
+Ce plugin contient, mélangés : 
+- des squelettes surchargeant le plugin Ahuntsic 1.0
+- des surcharges du noyau spip 2.0.5
+
+Liste des surcharges du noyau spip : 
+
+ecrire/
+   exec/
+	accueil.php
+		* ne pas afficher les articles à valider, mais les dernières propositions de savoirs
+		  (pour les rédacteurs)
+		* enlever plein de cadres (pour les rédacteurs)
+			(pour les rédacteurs) supprimer le cadre Cookie de correspondance
+			(pour les rédacteurs) supprimer le cartouche
+			(pour les rédacteurs) supprimer le cadre articles récents
+			(pour les redacteurs) ne pas afficher les raccourcis "ecrire un 
+				nouvel article"   "mots cle"
+		* (pour les redacteurs) afficher le raccourci  "Navigation par domaine de savoir" (mot cle)
+		* (pour les rédacteurs) afficher les dernières propositions de savoirs,   
+		* (pour les administrateurs) afficher les dernières propositions de savoirs,   
+
+	articles.php
+		* cacher le cadre "forum, pétition" dans l'espace privé de rédaction d'un 
+		  article (pour les rédacteurs)
+		* (redacteurs) pour les rubriques autres que OFFRES et DEMANDES, cacher 
+			l'attribution de mots clé
+	articles_page.php
+		* (pour rédacteur)  supprimer le bloc    "raccourci   : nouvel article"
+
+	mots_edit.php
+		* enlever cette Boite "voir en ligne" pour les mots clé
+	mots_tous.php
+		* modification cacher le groupe _config_
+	message_edit.php
+		* pas de lien mailto:  $email
+	naviguer.php
+		* supprimer le cadre "rubrique numéro : 10" en haut à gauche  (pour les rédacteurs) 
+		*  (pour redacteurs) Ne pas afficher les mots clé de la rubrique.
+		*  (redacteurs) : supprimer le raccourci  "tous vos articles"
+    inc/
+	auteur_infos.php
+		* cacher l'email des auteurs dans la fiche d'auteur de l'espace privé, pour les rédacteurs
+		* ne pas afficher PGP
+prive/
+    formulaires/
+	editer_auteur.html 
+		* Suppression de la saisie du PGP
+
+copier_dans_plugins/
+    agenda2/
+	agenda_pipelines.php
+		* (pour rédacteur) ne pas afficher d'info agenda dans le cas d'une rubrique
+    acces_restreint_3/
+	acces_restreint_pipelines.php
+		* suppression du gros cadre "acces restreint" sur la page auteur (pour les rédacteurs)
+
+
+
+
+
+
+

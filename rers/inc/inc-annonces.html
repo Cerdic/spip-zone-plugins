@@ -1,0 +1,47 @@
+[(#REM)   rers  pas de inc-menu-agenda dans la colonne de gauche : 1 ligne déplacée de inc-menu vers inc-annonces, de gauche à droite ! ]
+<INCLURE{fond=inc/inc-menu-agenda}{lang}>
+
+
+
+
+
+
+
+    <B_annonces_art>
+
+    <!-- Annonces -->
+    <div class="menu">
+    <h2 class="structure"><:info_annonces_generales:></h2>
+      <ul>
+        <li><b class="titre-annonce"><:bouton_annonce:></b>
+[(#REM)   rers  le titre ici car on ne se sert pas des annonces sur rubriques ni sur images ]
+          <ul><BOUCLE_annonces_art(ARTICLES) {lang} {par date} {inverse} {titre_mot=Annonce}>
+            <li class="annonce">
+            [(#LOGO_ARTICLE||?{
+				<a href="#URL_ARTICLE"[ title="(#DESCRIPTIF|supprimer_tags)"] style="text-align:center;">
+
+				[(#LOGO_ARTICLE
+					||image_reduire{150,0}
+					|inserer_attribut{alt,[(#TITRE|textebrut)]}
+					|inserer_attribut{title,[(#TITRE|textebrut)]}
+				)]
+				</a>
+
+			,
+
+                <p>
+                [<small style="text-transform:uppercase">(#SURTITRE)</small>]
+                [<big style="text-align:center;"><a href="#URL_ARTICLE"[ title="(#DESCRIPTIF|supprimer_tags)"] style="text-align:center;">(#TITRE)</a></big>]
+                [<span>(#SOUSTITRE)</span>]
+                <br />
+                </p>
+
+			})]
+          	</li>
+            </BOUCLE_annonces_art>
+          </ul>
+        </li>
+      </ul>
+    </div><!-- menu -->
+    </B_annonces_art>
+

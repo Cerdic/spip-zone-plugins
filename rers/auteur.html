@@ -1,0 +1,68 @@
+<BOUCLE_auteur_principal(AUTEURS) {id_auteur}{tous}>
+#CACHE{7200}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+	<title>[[(#NOM_SITE_SPIP|textebrut)]] : [(#NOM|textebrut)]</title>
+	<INCLURE{fond=inc/inc-meta}{lang}{id_auteur}>
+	<link rel="alternate" type="application/rss+xml" title="[(#NOM|textebrut)]" href="[(#URL_PAGE{backend}|parametre_url{id_auteur,#ID_AUTEUR})]" />
+	<INCLURE{fond=page}{fond=styles}{lang}{id_auteur}>
+</head>
+<body dir="#LANG_DIR" class="#LANG auteur aut#ID_AUTEUR">
+<div id="page" class="auteur">
+
+<!-- *****************************************************************
+	Bandeau, titre du site et menu langue
+	Header and main menu (top and right) 
+    ************************************************************* -->
+	
+<INCLURE{fond=inc/inc-bandeau}{lang}{id_auteur}>
+
+<!-- *****************************************************************
+	Contenu principal (centre)
+	Main content (center) 
+    ************************************************************* -->
+	<div id="bloc-contenu">
+		<div class="cartouche">
+		[<span style="float:right;">(#LOGO_AUTEUR||image_reduire{120,0})</span>]
+			<h1 class="#EDIT{nom}">#NOM</h1>
+			<div class="texte">
+
+[(#REM)rers  :   ne pas divulguer sur le site public la biographie et l'email de l'auteur]
+
+
+				[<h2 id="message"><:info_envoyer_message_prive:></h2>(#FORMULAIRE_ECRIRE_AUTEUR)]
+			</div><!-- texte -->
+		</div><!-- cartouche -->
+		<!-- Articles de l'auteur -->
+		<h2><:articles_auteur:></h2>
+		<BOUCLE_articles(ARTICLES) {id_auteur} {par titre} {"<br />"}>
+			<h3><a href="#URL_SITE_SPIP/spip.php?action=converser&amp;redirect=#URL_SITE_SPIP%2F#URL_ARTICLE&amp;var_lang=#LANG" hreflang="#LANG" [title="(#INTRODUCTION|textebrut|entites_html)"]>[(#TITRE|supprimer_numero)]</a></h3>
+			<div class="detail">
+				[(#DATE|nom_jour)] [(#DATE|affdate)]
+			</div>
+		</BOUCLE_articles>
+		<//B_articles>
+	</div><!-- bloc-contenu -->
+
+<!-- *****************************************************************
+	Menus contextuels (droite)
+	Contextual menus (right) 
+    ************************************************************* -->
+	<div id="encart">
+	<INCLURE{fond=inc/inc-annonces}{lang}>
+
+[(#REM) rers : pas de liste des auteurs sur la partie publique ]
+
+	</div><!-- encart -->
+<INCLURE{fond=inc/inc-menu}{lang}>
+<INCLURE{fond=inc/inc-bas} {lang}{id_auteur}>
+</div><!-- page -->
+
+</body>
+</html>
+</BOUCLE_auteur_principal>
+<INCLURE{fond=404}{lang}{id_auteur}>
+<//B_auteur_principal>
+ 

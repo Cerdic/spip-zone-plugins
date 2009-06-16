@@ -1,0 +1,506 @@
+/*Ce fichier css est en VERT-BLANC. 
+
+Créé en 2009 pour le RERS réseau d'échanges de savoirs du sud de l'aisne
+par JCC
+
+Il surcharge alter.css   et perso.css     du plugin Ahuntsic pour SPIP 2.0
+
+Autre solution a creuser.. ROUGE-GRIS    :  FOND = gris 444444  , BACKGROUND MENU = rouge bordeau  882913 
+*/
+
+
+body {
+font-size: 95%;
+}
+
+
+body {
+/*	background-image: url(../img/body_bg.gif);*/
+        background-image: none;
+}
+#entete, 
+#entete a.nom-site, 
+#entete a.nom-site:link, 
+#entete a.nom-site:visited {
+	background-image: none;
+}
+
+#entete
+{
+	background-image: url(../img/platanthere.jpg);
+	background-repeat: no-repeat;
+	background-position: left bottom;
+	text-align: right;
+}
+#entete a.nom-site, 
+#entete a.nom-site:link,  
+#entete a.nom-site:visited
+{
+	background-image: url(../img/logoreseau_2__100px.gif);
+	background-repeat: no-repeat;
+	background-position: right top;
+}
+
+.menu ul li a, 
+.menu ul li b,
+.edito h3,
+.signatures td 
+{	
+	background-image: url(../img/titre-coin.gif);
+	background-repeat: no-repeat;
+	background-position: top left;
+}
+
+/* a deplacer dans styles.html */
+.separateur
+{
+	background-repeat: no-repeat;
+	background-position: left center;
+	background-image: url(img/puce.gif);
+}
+.formulaire_recherche input.forml {
+	background-image: url(img/loupe.png);
+	background-repeat: no-repeat;
+	background-position: right center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* -------------------- Couleurs vertes
+456c13   vert foncé         devient b3cc92  vert pâle pour le fond 
+d5ddcb   vert pâle
+ebf2e1   vert très pâle
+82a620    vert clair
+d8ddb5   beige
+*/
+
+
+
+
+
+/* -------------------------------------------------------
+ 	1. LIENS base
+ ------------------------------------------------------- */
+a, a:link, a:visited,
+a:hover,
+a.spip_out,
+a.spip_in,
+a.spip_url,
+a.spip_glossaire 
+{
+	color: #82a620;    				/*  liens : vert clair */
+}
+
+/* -------------------------------------------------------
+ 	2. MISE EN PAGE - BLOCS PRINCIPAUX
+ ------------------------------------------------------- */
+body {
+	color: #444;       				/* écriture : gris */
+	background-color: #ffffff;			/* Fond de page : blanc */
+}
+
+#entete		
+{
+	height: 100px;
+	text-align: right;				/* utile ? */
+	background-color: #b3cc92;         /* fond en attendant que l'image se charge : vert pâle */
+}
+
+
+
+
+
+#bloc-contenu
+{
+	border: solid 1px #DEDEDE;			/* contour texte : gris */
+	background: transparent;			/* fond : blanc */
+}
+
+#encart
+{
+	top: 110px;
+}
+
+/* -------------------------------------------------------
+ 	3. BANDEAU - ENTETE (inc/inc-bandeau.html)
+ ------------------------------------------------------- */
+
+#entete a.nom-site, 
+#entete a.nom-site:link,  
+#entete a.nom-site:visited
+{
+	color:#ffffff;
+	font-size: 2em;
+	font-weight: bold;
+}
+
+#entete a.nom-site:hover
+{
+	color:#ffffff;
+	font-style: normal;
+	text-shadow: none;
+}
+
+#entete .nom-site span /* position du nom du site  */
+{
+	display: block;
+	position: absolute;
+	bottom: 30px;
+	right: 150px;
+}
+
+
+
+/* -------------------------------------------------------
+ 	4. ELEMENTS HTML DE BASE
+ ------------------------------------------------------- */
+
+
+/* Intertitres insérés dans un article  */
+h3.spip {
+	background-color: transparent;
+}
+
+
+/* ------------------------------------------------------------------
+ 	5. NAVIGATION et MENUS
+ -------------------------------------------------------------------- */
+/* COULEURS des menus */
+.menu ul li {	border-top: 1px solid #ffffff; }         /* separateur : meme couleur que fond de BODY */
+/* text : color */
+.menu ul li a, 
+.menu ul li a:visited,
+.menu ul li b 				
+{ 
+	color: white;                                  /* premier niveau : blanc sur foncé */
+}
+.menu ul li li a, 
+.menu ul li li a:visited 			
+{ 
+	color: #82a620;					/* second niveau : vert clair */
+}
+.menu li span 		
+{ 
+	color: #456c13;   				/* pas cliquable (date agenda) : vert foncé */
+}
+.menu ul li a:hover,
+.menu ul li li a:hover,
+.menu ul li li a.lienon 	
+{ 
+		color: maroon;             		/* lien sous souris : marron */
+}
+/* background */
+.menu ul li a,
+.menu ul li b 				
+{ 
+		background-color: #456c13;          	/* fond premier niveau : vert foncé */
+}
+.menu ul li a:hover
+{ 
+	/*	color: #d5ddcb;*/  
+		background-color: #88ac59;    /* 456c13fond premier niveau sous souris : vert foncé attenue */
+}
+.menu ul li li a, 
+.menu ul li li a:visited,
+.menu li span,		
+.menu ul li li a:hover,                			/* pas de différence */
+.menu ul li li a.lienon 				/* pas de différence */
+{ 
+		background-color: #d5ddcb; 		/* fond second niveau : vert  pâle */
+}
+
+.menu ul li li a.article ,
+.menu ul li li a.article:hover
+{ 
+		background-color: #ebf2e1; 		/* fond articles : vert très pâle */
+}
+
+
+
+
+
+
+
+/*  ANNONCE dans #encart */
+.annonce
+{
+	background-color: #ebf2e1;				/* fond : vert très pâle */
+	text-align: center;
+}
+
+#menu-rubriques { 
+	top: 110px;						/* rers */
+}
+.menu-item,
+.menu-titre-special, 
+.menu-titre { background-color: yellow } 
+
+
+
+
+/* -------------------------------------------------------
+ 	6. ARTICLE
+ ------------------------------------------------------- */
+
+.chapo
+{
+	background-color: transparent;
+}
+
+/* -------------------------------------------------------
+ 	7. GENERAL
+ ------------------------------------------------------- */
+
+/* mot recherche dans page resultats de recherche */
+.mot-precis
+{
+	font-style: inherit;
+	font-size:inherit;
+	color: yellow;
+}
+
+.lang
+{
+	color: red;
+	text-transform: uppercase;
+}
+
+
+/* -------------------------------------------------------
+ 8. EDITO (sur page sommaire.html)
+------------------------------------------------------- */
+
+.edito .bandeau {
+	border-color: #BBB;
+}
+
+.edito h3 {
+	color: white;
+	background-color: #456c13;
+}
+.edito h3 a, 
+.edito h3 a:link, 
+.edito h3 a:visited,
+.edito h3 a:hover {
+	color: white;
+}
+.edito .chapo { 
+	background-color: #ebf2e1;
+/*        border:solid 1px #456c13;*/
+}
+/* -------------------------------------------------------
+ 9. PETITION
+------------------------------------------------------- */
+.signature-date
+{
+	white-space: nowrap;
+	background: #DDDDDD;
+}
+.signature-nom
+{
+	background: #EEEEEE;
+}
+.signature-message
+{
+	background: #f4f8f8;
+}
+
+
+
+/* -------------------------------------------------------
+ 	10. FORUM
+ ------------------------------------------------------- */
+
+a.spip_barre img
+{
+	border-color:#bbb;
+	background-color: #eee;
+}
+a.spip_barre:hover img
+{
+	border-color: #aaa;
+	background-color: white;
+}
+.reponse_formulaire
+{
+	color: red;
+}
+/* Format des champs d'entrée pour le forum*/
+.forml
+{
+	color: #444444;
+}
+/* -------------------------------------------------------
+ 11. FORMULAIRE (PETITION, INSCRIPTION, FORUM)
+------------------------------------------------------- */
+
+.formulaire
+{
+	color: #777;
+}
+
+/* -------------------------------------------------------
+ 	12. ADMIN, LOGIN, BOUTONS ADMIN
+ ------------------------------------------------------- */
+
+.spip_bouton { color: #444; }
+
+/* -------------------------------------------------------
+ 	13. STYLE DÉSACTIVÉ
+ ------------------------------------------------------- */
+
+/* -------------------------------------------------------
+ 	14. FORMATS DE TEXTE
+ ------------------------------------------------------- */
+
+.extrait
+{
+	background-color: transparent;
+	border-left:solid 2px  #82a620;
+}
+
+.suite a,
+.suite a:link,
+.suite a:visited
+{
+	color: #82a620;					/* lien : vert clair */
+}
+
+.suite a:hover
+{
+	color: #82a620;					/* lien : vert clair */
+	text-decoration: underline;
+}
+.bouton
+{
+	background: #EEEEEE;
+	border-color: #BBBBBB;
+}
+.ps
+{
+	border-top: 1px dashed #AAAAAA;
+}
+.ligne-debut
+{
+	border-top: 1px dashed #AAAAAA;
+}
+
+.notes
+{
+	border-top: 1px solid #a0a0a0;
+}
+
+
+/* -------------------------------------------------------
+ 	15. PLAN DE SITE
+ ------------------------------------------------------- */
+
+/* -------------------------------------------------------
+ 	16. FORUM
+ ------------------------------------------------------- */
+/* Boite d'un forum : eclaircissement progressif des bords */
+ul .forum
+{
+	border: 1px solid #909090;
+}
+
+ul ul .forum { border: 1px solid #a4a4a4; }
+ul ul ul .forum { border: 1px solid #b8b8b8; }
+ul ul ul ul .forum { border: 1px solid #cccccc; }
+ul ul ul ul ul .forum { border: 1px solid #e0e0e0; }
+ul ul ul ul ul ul .forum { border: 1px solid #e0e0e0; }
+
+/* Boite de titre d'un forum : mise en couleur selon la profondeur du forum */
+ul .forum-chapo
+{
+	border-bottom: 1px dashed #b8b8b8;
+	background: #EEEEEE;
+}
+
+ul ul .forum-chapo { background: #EEEEEE; }
+ul ul ul .forum-chapo { background: #EEEEEE; }
+ul ul ul ul .forum-chapo { background: #EEEEEE; }
+ul ul ul ul ul .forum-chapo { background: #EEEEEE; }
+
+/* -------------------------------------------------------
+ 	17. FORMULAIRES    (pas repris)
+ ------------------------------------------------------- */
+/* -------------------------------------------------------
+ 	18. AUTRES ELEMENTS PRODUITS PAR SPIP (pas repris)
+ ------------------------------------------------------- */
+
+/*------------------------------------------------
+	19. AGENDA  (pas utilisé)
+ ------------------------------------------------*/
+
+
+/*------------------------------------------------
+	20. PAGINATION
+ ------------------------------------------------*/
+.pagination .ligne2 
+{
+	background-color: transparent; 
+}
+/*------------------------------------------------
+	21. SOMMAIRE ARTICLE - PLAN
+		MODELES (voir : /alternatives/modeles)
+ ------------------------------------------------*/
+#sommaire {
+	border: 1px gray solid;
+	background-color: white;
+}
+
+.spip_modele {
+	border: 1px gray solid;
+	background-color: white;
+}
+
+#sommaire h4,
+.spip_modele h4 {
+	border-bottom: 1px silver dotted;
+}
+
+/*////////////////////////////////////////////////*/
+/*         SURCHARGE DE PLUGINS POPULAIRES        */
+/*////////////////////////////////////////////////*/
+
+/*------------------------------------------------
+   100. SURCHARGE DES STYLES DU COUTEAU SUISSE
+ ------------------------------------------------*/
+
+/* Decoupe d'un article en page */
+#decoupe_bas  {background-color:#eee !important}
+
+/*------------------------------------------------
+   210. COLORATION CODE - MODELES (voir : /alternatives/modeles)
+ ------------------------------------------------*/
+
+.coloration_code ol { background-color: #ccc; border: 1px solid #ccc;}
+.coloration_code ol li { background-color: #eee;padding-left: .5em;}
+
+/*------------------------------------------------
+   220. JEUX
+ ------------------------------------------------*/
+
+.jeux_question
+{
+	color: maroon !important;
+}
+

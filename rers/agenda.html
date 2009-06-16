@@ -1,0 +1,119 @@
+#CACHE{7200}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+	<title>[[(#NOM_SITE_SPIP|textebrut)]] : <:icone_agenda:></title>
+	<INCLURE{fond=inc/inc-meta}{lang}>
+	<INCLURE{fond=page}{fond=styles}>
+</head>
+<body dir="#LANG_DIR" class="#LANG plan">
+<div id="page">
+
+<!-- *****************************************************************
+	Bandeau, titre du site et menu langue
+	Header and main menu (top and right) 
+    ************************************************************* -->
+	
+<INCLURE{fond=inc/inc-bandeau}{lang}>
+
+<!-- *****************************************************************
+	Contenu principal (centre)
+	Main content (center) 
+    ************************************************************* -->
+
+	<div id="bloc-contenu">
+		<BOUCLE_langue_contexte_exclus(ARTICLES){tout}{doublons contexte}{lang}></BOUCLE_langue_contexte_exclus>
+		<B_langues>
+		<div id="sommaire">
+			<h4><:info_langues:></h4>
+			<ul>
+			<BOUCLE_langues(ARTICLES){tout}{doublons contexte}{par lang}>[
+				<li lang="#LANG" xml:lang="#LANG" dir="#LANG_DIR">
+					<a href="spip.php?action=converser&amp;redirect=[(#SELF)]&amp;var_lang=#LANG" hreflang="#LANG">(#LANG|unique|traduire_nom_langue{lang})</a>
+				</li>
+			]</BOUCLE_langues>
+			</ul>
+		</div>
+		</B_langues>
+
+
+
+
+
+		<h2><:icone_agenda:></h2>
+
+
+
+
+[(#REM) rers : Evenements de l'agenda        
+	rers : Trois lieux pour ça : article.html, agenda.html, inc-menu-agenda.html
+] 
+    <B_article_langue>
+    <BOUCLE_article_langue(EVENEMENTS) {lang} {pagination}{age<0}{par date}{statut=publie}{doublons archives}>
+    <hr />
+        <h3>[(#DATE_DEBUT|Agenda_affdate_debut_fin{#DATE_FIN,#HORAIRE})]</h3>
+      <h3><a href="#URL_SITE_SPIP/#URL_ARTICLE">[(#TITRE|supprimer_numero)]</a></h3>
+      <div class="detail">
+      </div><!-- detail -->
+      <div class="texte">
+	<ul>
+      	 [<li>Descriptif : (#DESCRIPTIF|textebrut|entites_html)</li>]
+      	 [<li>Lieu : (#LIEU|textebrut)</li>]
+      	 [<li>Adresse : (#ADRESSE)</li>]
+        </ul>
+      </div>
+      <br />
+    </BOUCLE_article_langue>
+    </B_article_langue>
+    <//B_article_langue>
+
+    <hr />
+		
+	[(#REM) ARCHIVES : 
+	Boucle tiré de "Usage du filtre 'unique' pour classer des articles"
+	sur SPIP-Contrib : http://www.spip-contrib.net/Usage-du-filtre-unique-pour]
+		<h3><:info_visites_par_mois:></h3>
+	<BOUCLE_archive(ARTICLES){titre_mot=Agenda}{lang}{doublons archives}{!par date_redac}>
+		[
+			[(#COMPTEUR_BOUCLE|>{1}|?{'</ul></li></ul></div>',''})]
+			<div id="plan">
+			<h3>(#DATE_REDAC|annee|unique)</h3>
+
+			<ul>
+		]
+		[
+			[(#DATE_REDAC|annee|unique{nouvelle}|?{'','</ul></li>'})]
+			  <li>(#DATE_REDAC|affdate{'Y-m'}|unique|nom_mois)
+  				<ul>
+		]
+				  <li><a href="#URL_ARTICLE">[(#TITRE|supprimer_numero)]</a></li>
+	</BOUCLE_archive>
+				</ul>
+			  </li>
+			</ul>
+			</div><!-- plan -->
+	</B_archive>
+	</div><!-- bloc-contenu -->
+
+	[(#REM) Fin de l'archive]
+        
+
+<!-- *****************************************************************
+	Menus contextuels (droite)
+	Contextual menus (right) 
+    ************************************************************* -->
+	<div id="encart">
+    <INCLURE{fond=inc/inc-annonces}{lang}>
+    <INCLURE{fond=inc/inc-breves}{lang}>
+    <INCLURE{fond=inc/inc-syndic}{lang}>
+
+	</div><!-- encart -->
+<INCLURE{fond=inc/inc-menu}{lang}>
+<INCLURE{fond=inc/inc-bas} {lang}>
+</div><!-- page -->
+
+</body>
+</html>
+
+

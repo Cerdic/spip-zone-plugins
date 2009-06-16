@@ -1,0 +1,67 @@
+	<div class="menu" id="menu-principal">
+		<ul>
+
+[(#REM) rers : beaucoup de choses enlevées ]
+
+
+
+			<BOUCLE_article(ARTICLES){titre_mot=inclu_menu_principal} {lang} {par num titre} {par titre}>
+			[<li class="menu-principal-rubriques"><a href="[(#URL_ARTICLE)]">(#TITRE|supprimer_numero)</a></li>]
+			</BOUCLE_article>
+			<BOUCLE_rubrique(RUBRIQUES){titre_mot=inclu_menu_principal}{lang} {par num titre} {par titre}>
+			[<li class="menu-principal-rubriques"><a href="[(#URL_SITE_SPIP)/][(#URL_RUBRIQUE)]">(#TITRE|supprimer_numero)</a></li>]
+			</BOUCLE_rubrique>
+
+
+
+
+			<li id="menu-principal-accueil"><a href="#URL_SITE_SPIP" title="<:accueil_site:> : #NOM_SITE_SPIP" accesskey="0"><:accueil_site:></a></li>
+
+
+
+<BOUCLE_rerscontact(ARTICLES){titre_mot=rers_contact}>
+
+			<li id="menu-principal-contact"><a href="[(#URL_ARTICLE)]" title="<:info_contact:>"  accesskey="7"><:info_contact:></a></li>
+</BOUCLE_rerscontact>
+
+
+
+
+
+
+[(#REM) rers     : se connecter  ...]
+
+[(#SESSION{id_auteur}|?{' '})<li> <a 
+href="#URL_LOGOUT" ><:icone_deconnecter:></a></li>]
+[(#SESSION{id_auteur}|?{'',' '})<li><a
+href="[(#URL_PAGE{login}|parametre_url{url,ecrire})]" 
+class='login_modal'><:lien_connecter:></a></li>]
+
+
+
+
+			
+	[(#REM) *********************************************************
+	Formulaire de recherche
+	Search form 
+    ************************************************************* ]
+			[<li id="menu-principal-recherche">
+			<div class="menu" id="menu-recherche">
+				<h3 class="structure"><:info_rechercher:></h3>
+					<ul>
+						<li>
+					(#FORMULAIRE_RECHERCHE)			
+						</li>			
+					</ul>
+			</div>[(#REM) fin menu-recherche ]<!-- menu-recherche -->
+			</li>]
+
+
+[(#AUTORISER{ecrire})<li><a 
+href="#EVAL{_DIR_RESTREINT_ABS}">Basculer vers l'espace privé</a></li>]
+
+
+
+
+		</ul>
+	</div>[(#REM) fin menu-principal ]

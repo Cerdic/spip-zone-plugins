@@ -1,0 +1,208 @@
+#CACHE{0}
+
+<!-- descriptif=
+<h4>Configuration du plugin RERS</h4>
+<a href="http://www.spip-contrib.net/?article3059">Documentation du plugin RERS</a>
+-->
+<!-- titre=plugin RERS -->
+
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+
+<fieldset><legend>Indications des rubriques spéciales</legend>
+   <label>Choix de la rubrique &agrave; utiliser comme rubrique des OFFRES :</label>
+   <select name="rers_rub_offres">
+     <option value="">Choisir...</option>
+  	 <BOUCLE_secteurs(RUBRIQUES) {racine}{tout} {par num titre}>
+	    <option value="#ID_RUBRIQUE" 
+		[(#CONFIG{rers/rers_rub_offres}|=={#ID_RUBRIQUE}|?{selected="selected",''})]>
+		#TITRE</option>
+  			<BOUCLE_rubriques(RUBRIQUES) {tout}{id_parent} {par num titre}>
+		    <option value="#ID_RUBRIQUE" 
+			[(#CONFIG{rers/rers_rub_offres}|=={#ID_RUBRIQUE}|?{selected="selected",''})]>
+			&nbsp;&nbsp;#TITRE</option>
+  				 <BOUCLE_sous_rubriques(BOUCLE_rubriques)></BOUCLE_sous_rubriques>
+  			</BOUCLE_rubriques>
+  	 </BOUCLE_secteurs>
+   </select>
+
+<br />   
+   <label>Choix de la rubrique &agrave; utiliser comme rubrique des DEMANDES :</label>
+   <select name="rers_rub_demandes">
+     <option value="">Choisir...</option>
+  	 <BOUCLE_secteurs2(RUBRIQUES) {racine}{tout} {par num titre}>
+	    <option value="#ID_RUBRIQUE" 
+		[(#CONFIG{rers/rers_rub_demandes}|=={#ID_RUBRIQUE}|?{selected="selected",''})]>
+		#TITRE</option>
+  			<BOUCLE_rubriques2(RUBRIQUES) {tout}{id_parent} {par num titre}>
+		    <option value="#ID_RUBRIQUE" 
+			[(#CONFIG{rers/rers_rub_demandes}|=={#ID_RUBRIQUE}|?{selected="selected",''})]>
+			&nbsp;&nbsp;#TITRE</option>
+  				 <BOUCLE_sous_rubriques2(BOUCLE_rubriques)></BOUCLE_sous_rubriques2>
+  			</BOUCLE_rubriques2>
+  	 </BOUCLE_secteurs2>
+   </select>
+
+<br />   
+   <label>Choix de la rubrique &agrave; utiliser comme rubrique VIE du RERS :</label>
+   <select name="rers_rub_vie">
+     <option value="">Choisir...</option>
+  	 <BOUCLE_secteurs3(RUBRIQUES) {racine}{tout} {par num titre}>
+	    <option value="#ID_RUBRIQUE" 
+		[(#CONFIG{rers/rers_rub_vie}|=={#ID_RUBRIQUE}|?{selected="selected",''})]>
+		#TITRE</option>
+  			<BOUCLE_rubriques3(RUBRIQUES) {tout}{id_parent} {par num titre}>
+		    <option value="#ID_RUBRIQUE" 
+			[(#CONFIG{rers/rers_rub_vie}|=={#ID_RUBRIQUE}|?{selected="selected",''})]>
+			&nbsp;&nbsp;#TITRE</option>
+  				 <BOUCLE_sous_rubriques3(BOUCLE_rubriques)></BOUCLE_sous_rubriques3>
+  			</BOUCLE_rubriques3>
+  	 </BOUCLE_secteurs3>
+   </select>
+
+
+</fieldset>
+
+
+
+
+
+
+
+<fieldset><legend>Choix des destinataires de messages</legend>
+
+
+   <label>Choix de l'auteur "responsable des inscriptions" :</label>
+   <select name="rers_auteur_resp_inscription">
+     <option value="">Choisir...</option>
+
+
+  	 <BOUCLE_auteurs(AUTEURS){tout} {par id_auteur}>
+	    <option value="#ID_AUTEUR" 
+		[(#CONFIG{rers/rers_auteur_resp_inscription}|=={#ID_AUTEUR}|?{selected="selected",''})]>
+		#ID_AUTEUR . #NOM</option>
+  	 </BOUCLE_auteurs>
+   </select>
+
+
+<br />
+   <label>Choix de l'auteur recevant le message de la page CONTACT :</label>
+   <select name="rers_auteur_contact">
+     <option value="">Choisir...</option>
+
+
+  	 <BOUCLE_auteurs2(AUTEURS){tout} {par id_auteur}>
+	    <option value="#ID_AUTEUR" 
+		[(#CONFIG{rers/rers_auteur_contact}|=={#ID_AUTEUR}|?{selected="selected",''})]>
+		#ID_AUTEUR . #NOM</option>
+  	 </BOUCLE_auteurs2>
+   </select>
+
+<br />
+   <label>Choix du webmestre répondant aux questions d'adhérents depuis l'espace privé 
+         "une question au webmestre" :</label>
+   <select name="rers_auteur_webmestre">
+     <option value="">Choisir...</option>
+
+
+  	 <BOUCLE_auteurs3(AUTEURS){tout} {par id_auteur}>
+	    <option value="#ID_AUTEUR" 
+		[(#CONFIG{rers/rers_auteur_webmestre}|=={#ID_AUTEUR}|?{selected="selected",''})]>
+		#ID_AUTEUR . #NOM</option>
+  	 </BOUCLE_auteurs3>
+   </select>
+
+
+</fieldset>
+
+
+
+
+
+
+
+
+
+
+
+
+<input type="submit" name="_cfg_ok" value="<:OK:>" />
+<input type="reset" value="<:Reset:>" />
+<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
+</form>
+
+
+
+
+
+
+
+
+<br />
+<h2>Temporaire : extractions de la base</h2>
+
+
+
+
+<h3>Liste des offres et demandes par domaines de savoirs</h3>
+
+
+
+
+<h4> Offres</h4>
+<ul>
+<BOUCLE_jccdom(MOTS){tous}{type_mot='Domaine de savoirs'}>
+	<li>#TITRE
+	<ul>
+<BOUCLE_jccmot(ARTICLES){statut=prop}{id_mot}{id_rubrique=#CONFIG{rers/rers_rub_offres}}>
+		<li><b>#TITRE</b>
+<BOUCLE_jccaut(AUTEURS){id_article}>
+[(#REM)  indiquer le nom ?
+		, par #NOM
+]
+		</li>
+</BOUCLE_jccaut>
+</BOUCLE_jccmot>
+	</ul></li>
+</BOUCLE_jccdom>
+</ul>
+
+<h4> Demandes</h4>
+<ul>
+<BOUCLE_jccdom2(MOTS){tous}{type_mot='Domaine de savoirs'}>
+	<li>#TITRE
+	<ul>
+<BOUCLE_jccmot2(ARTICLES){statut=prop}{id_mot}{id_rubrique=#CONFIG{rers/rers_rub_demandes}}>
+		<li><b>#TITRE</b>
+<BOUCLE_jccaut2(AUTEURS){id_article}>
+[(#REM)  indiquer le nom ?
+		, par #NOM
+]
+		</li>
+</BOUCLE_jccaut2>
+</BOUCLE_jccmot2>
+	</ul></li>
+</BOUCLE_jccdom2>
+</ul>
+
+
+<h3>Coordonnées email des auteurs (qui ont un email)</h3>
+
+Administrateurs :<br />
+<BOUCLE_jccemail(AUTEURS){tous}{statut=0minirezo}{par nom}>
+["#NOM" <(#EMAIL)>,]
+</BOUCLE_jccemail>
+<br />
+<br />
+
+Rédacteurs : <br />
+<BOUCLE_jccemail2(AUTEURS){tous}{statut=1comite}{par nom}>
+["#NOM" <(#EMAIL)>,]
+</BOUCLE_jccemail2>
+
+
+
+
+
+
+
+

@@ -1,0 +1,249 @@
+#CACHE{7200}
+<BOUCLE_article_principal(ARTICLES) {id_article} {lang_select} {doublons} >
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+	<title>[(#TITRE|supprimer_numero|textebrut)] - [[(#NOM_SITE_SPIP|textebrut)]]</title>
+		<INCLURE{fond=inc/inc-meta}{lang}{id_article}>
+		<INCLURE{fond=styles}{lang}>
+	
+</head>
+<body dir="#LANG_DIR" class="#LANG article sect#ID_SECTEUR <BOUCLE_rubriques_body(HIERARCHIE){id_article}{" "}>rub#ID_RUBRIQUE</BOUCLE_rubriques_body> art#ID_ARTICLE">
+<div id="page" class="article art#ID_ARTICLE">
+<!-- *****************************************************************
+	Bandeau, titre du site et menu langue
+	Header and main menu (top and right) 
+    ************************************************************* -->
+	
+<INCLURE{fond=inc/inc-bandeau}{lang}{id_article}>
+
+
+<!-- *****************************************************************
+	Contenu principal (centre)
+	Main content (center) 
+    ************************************************************* -->
+
+    <div id="bloc-contenu">
+      <div class="article-info-rubrique">
+        <h5>
+        <a href="#URL_SITE_SPIP" title="<:accueil_site:> : #NOM_SITE_SPIP"><:accueil_site:></a>
+
+[(#REM) rers  : pas de hiérarchie quand article d'une rubrique exclue par mot clé exclu_menu_rub]
+<BOUCLE_rers_exc_rub(RUBRIQUES){id_rubrique}{titre_mot=exclu_menu_rub}>
+</BOUCLE_rers_exc_rub>
+
+        <B_rubriques_chemin>
+            <BOUCLE_rubriques_chemin(HIERARCHIE){id_article}>
+              <b class='separateur'>&gt;</b> 
+              <a href="#URL_SITE_SPIP/#URL_RUBRIQUE">[(#TITRE|supprimer_numero|couper{60})]</a>
+            </BOUCLE_rubriques_chemin>
+
+
+<//B_rers_exc_rub>
+
+
+
+        </h5>
+
+        <B_traductions>
+            <div class="petit-info" style="text-align:right"><:titre_langue_trad_article:> 
+            <BOUCLE_traductions(ARTICLES){traduction}{exclus}{"<br />"}>
+              [<div dir="#LANG_DIR">(#LANG|traduire_nom_langue) : <a href="#URL_SITE_SPIP/spip.php?action=converser&amp;redirect=#URL_SITE_SPIP%2F#URL_ARTICLE&amp;var_lang=#LANG" dir="#LANG_DIR">][(#TITRE|supprimer_numero)</a></div>]
+            </BOUCLE_traductions>
+            </div>
+        </B_traductions>
+        
+<!--        <div class="ligne-debut"></div> ligne-debut -->
+      </div><!-- article-info-rubrique -->
+      
+      <div class="cartouche">
+			[<span style="float:right;">(#LOGO_ARTICLE||image_reduire{160,0})</span>]
+			[<div  class="#EDIT{surtitre} surtitre">(#SURTITRE)</div>]
+			<h1 class="#EDIT{titre} titre-article">[(#TITRE|supprimer_numero)]</h1>
+            [<div class="#EDIT{soustitre} sous-titre">(#SOUSTITRE)</div>]
+
+
+[(#REM) rers  : pas de détail quand article d'une rubrique exclue par mot clé exclu_menu_rub]
+<BOUCLE_rers_exc_rub2(RUBRIQUES){id_rubrique}{titre_mot=exclu_menu_rub}>
+</BOUCLE_rers_exc_rub2>
+
+				<p class="detail">
+				[(#DATE|nom_jour)] [(#DATE|affdate)]
+				<B_auteurs_recents><:par_auteur:>
+				<BOUCLE_auteurs_recents(AUTEURS) {id_article} {", "}><a href="#URL_SITE_SPIP/#URL_AUTEUR">#NOM</a>
+				</BOUCLE_auteurs_recents>
+				</p>
+<//B_rers_exc_rub2>
+				
+      </div><!-- cartouche -->
+
+
+		[<div class="#EDIT{chapo} chapo">(#CHAPO|image_reduire{440,0})</div>]
+		[<div class="#EDIT{texte} texte">(#TEXTE|image_reduire{440,0})</div>]
+
+
+
+
+
+[(#REM) rers : L'inscription  à l'association se passe sur un article ayant pour mot clé inscription]
+<BOUCLE_rersinscription(ARTICLES){id_article}{titre_mot=rers_inscription}>
+<BOUCLE_auteur_principal(AUTEURS){tous}{id_auteur = #CONFIG{rers/rers_auteur_resp_inscription}}>
+#FORMULAIRE_ECRIRE_AUTEUR
+</BOUCLE_auteur_principal>
+</BOUCLE_rersinscription>
+
+
+[(#REM) rers :   Page "contact" de l'espace public ]
+<BOUCLE_rerscontact(ARTICLES){id_article}{titre_mot=rers_contact}>
+<BOUCLE_auteur_principal2(AUTEURS){tous}{id_auteur = #CONFIG{rers/rers_auteur_contact}}>
+#FORMULAIRE_ECRIRE_AUTEUR
+</BOUCLE_auteur_principal2>
+</BOUCLE_rerscontact>
+
+
+
+
+
+
+[(#REM) rers : Evenements de l'agenda        
+	rers : Trois lieux pour ça : article.html, agenda.html, inc-menu-agenda.html
+] 
+<B_rersevenements>
+	<div class="ps">
+	<h3>Evènement(s) dans l'agenda lié(s) à cet article</h3>            
+	<ul>
+<BOUCLE_rersevenements(EVENEMENTS){id_article}{par date}>
+	<li> 
+		<dl>
+		<dt><b>[(#DATE_DEBUT|Agenda_affdate_debut_fin{#DATE_FIN,#HORAIRE})] : 
+		[(#TITRE|supprimer_numero)]</b></dt>
+	      	[<dd>Descriptif : (#DESCRIPTIF|textebrut|entites_html)</dd>]
+	      	[<dd>Lieu : (#LIEU|textebrut)</dd>]
+	      	[<dd>Adresse : (#ADRESSE)</dd>]
+		</dl>
+	</li>	
+</BOUCLE_rersevenements>
+         </ul>
+	</div>
+</B_rersevenements>
+
+
+
+
+
+
+
+
+
+
+
+
+
+		[<div class="#EDIT{ps} ps">(#PS)</div>]
+		[<div class="notes">(#NOTES)</div>]
+		[<div class="chapo"><:voir_en_ligne:> : <a href="(#URL_SITE)">[(#NOM_SITE|sinon{#URL_SITE})]</a></div>]
+		<br class="nettoyeur" />
+
+[(#REM) Gestion du portfolio et des documents
+			Le critere {env} permet de passer d'autres arguments de la page
+			par exemple l'id_document choisi pour un affichage complet
+		]
+		[(#INCLURE{fond=inc/inc-art-documents}{id_article}{env})]
+
+[(#REM) Petition :
+		La petition ayant une PAGINATION il faut absolument lui passer SELF en argument. ]
+		[ #REM Conserver cet invalideur : (#PETITION|?{'',''}) ]
+			<INCLURE{fond=inc-petition}{id_article}{self=#SELF}>
+		
+
+[(#REM) rers : enlever   la boucle "Derniers articles des auteurs de l'article" ]
+[(#REM) rers : enlever   la boucle  mots clé dans l'espace public]
+
+
+
+
+
+
+
+		<!-- Forums -->
+		[<div class="forum-repondre">
+			<h5><a href="(#PARAMETRES_FORUM|url_reponse_forum)"><:repondre_article:></a></h5>
+		</div>]
+		<B_forums>
+		<h2 class="structure"><:Forum:></h2>
+			#ANCRE_PAGINATION
+		<ul class="forum-total">
+			<BOUCLE_forums(FORUMS){id_article}{par date}{inverse}{pagination 20}>
+				<li>
+					<div class="forum-fil">
+						<div class="forum">
+							<a name="forum#ID_FORUM"></a>
+							<div class="forum-chapo">
+								<div class="[(#EDIT{titre})] forum-titre">[(#TITRE|supprimer_numero)]</div>
+								[(#DATE|affdate)][, <:par_auteur:> <strong>(#NOM)</strong>]
+							</div><!-- forum-chapo -->
+							<div class="[(#EDIT{texte})] forum-item" style="background-color: #ffe;">
+								#TEXTE
+								[<div class="forum-titre"><a href="(#URL_SITE)" class="spip_out">#NOM_SITE</a></div>]
+								[<div class="forum-repondre-message"><a href="(#PARAMETRES_FORUM|url_reponse_forum)"><:repondre_message:></a></div>]
+							</div><!-- forum-item -->
+						</div><!-- forum -->
+						<B_forums_fils>
+						<BOUCLE_forums_fils(FORUMS){id_parent}{par date}>
+						<ul>
+							<li>
+								<div class="forum">
+									<a name="forum#ID_FORUM"></a>
+									<div class="forum-chapo">
+										<div class="[(#EDIT{titre})] forum-titre">[(#TITRE|supprimer_numero)]</div>
+										[(#DATE|affdate)][, <:par_auteur:> <strong>(#NOM)</strong>]
+									</div><!-- forum-chapo -->
+									<div class="[(#EDIT{texte})] forum-item">
+										#TEXTE
+										[<div class="forum-titre"><a href="(#URL_SITE)" class="spip_out">#NOM_SITE</a></div>]
+										[<div class="forum-repondre-message"><a href="(#PARAMETRES_FORUM|url_reponse_forum)"><:repondre_message:></a></div>]
+									</div><!-- forum-item -->
+								</div><!-- forum -->
+							</li>
+						</ul>
+							<BOUCLE_Forums_Boucle(boucle_forums_fils)></BOUCLE_Forums_Boucle>
+						</BOUCLE_forums_fils>
+						</B_forums_fils>
+					</div><!-- forum-fil -->
+				</li>
+			</BOUCLE_forums>
+		</ul><!-- forum-total -->
+		
+		[<div class="pagination">
+			<div class="ligne1">
+				<div dir="#LANG_DIR">#TOTAL_BOUCLE/#GRAND_TOTAL <:messages_forum:></div>
+			</div>
+			<div class="ligne2">
+        		(#PAGINATION)
+			</div>
+		</div><!-- pagination -->]
+
+		</B_forums>
+	</div><!-- bloc-contenu -->
+	
+<!-- *****************************************************************
+	Menus contextuels (droite)
+	Contextual menus (right) 
+    ************************************************************* -->
+    <div id="encart"> 
+      <INCLURE{fond=inc/inc-annonces}{lang}>
+
+	</div><!-- encart -->
+	
+<BOUCLE_rub_en_cours(ARTICLES){id_article}{lang_select}>
+<INCLURE{fond=inc/inc-menu}{lang}{id_rubrique}>
+</BOUCLE_rub_en_cours>
+<INCLURE{fond=inc/inc-bas}{lang}{id_article}{id_rubrique}{id_secteur}>
+</div><!-- page -->
+
+</body>
+</html>
+</BOUCLE_article_principal>
+<INCLURE{fond=404}{lang}{id_article}>
+<//B_article_principal>
