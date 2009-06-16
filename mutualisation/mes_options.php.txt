@@ -101,6 +101,8 @@
 			'cookie_prefix' => true,     // Definir automatiquement le prefixe de cookie (false)
 			'repertoire' => 'sites',     // Nom du repertoire contenant les sites mutualises ('sites')
 			'url_img_courtes' => true,   // Utiliser la redirection des URL d'images courtes dans la partie publique (false)
+										 // /!\ il faut qu'apache ait le droit d'ecrire dans les dossiers IMG/ et local/ a la racine du site !
+										 // C'est la que la mutualisation va ecrire les regles de redirection automatiques pour les images de chaque site
 			# 'utiliser_panel' => false, // Utiliser une table externe pour recuperer des identifiants ... (code, user, pass) permettant a un utilisateur d'installer le site (false) 
 			# 'branding' => 'Un service propos&eacute; par <a href="http://www.spip.net/">la communaut&eacute; SPIP</a>', // Texte a afficher en bas du formulaire d'activation de la mutualisation
 			# 'branding_logo' => '<a href="http://www.spip.net/"><img src="/prive/images/logo-spip2.gif" alt="" /></a>' // Logo a afficher en bas du formulaire d'activation de la mutualisation
