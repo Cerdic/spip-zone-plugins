@@ -5,7 +5,7 @@
   <version_base>0.1</version_base>
 	<etat>dev</etat>
 	<description>
-{{ATTENTION, plugin en cours de refonte complète pour SPIP 2, pas stable du tout !}}}
+{{ATTENTION, plugin en cours de refonte complète pour SPIP 2, pas stable du tout !}}
 
 Gestion de lettres d'information reprenant les fonctionnalités du logiciel libre CleverMail :
 -* Gestion de lettres multiples
