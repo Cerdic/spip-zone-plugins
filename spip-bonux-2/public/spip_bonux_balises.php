@@ -301,7 +301,12 @@ function balise_BOUTON_ACTION($p){
 	$_class = interprete_argument_balise(3,$p);
 	if (!$_class) $_class="''";
 
-	$p->code = "'<form class=\'bouton_action_post '.$_class.'\' method=\'post\' action=\''.(\$u=$_url).'\'><span>'.form_hidden(\$u).'<input type=\'submit\' class=\'submit\' value=\''.attribut_html($_label).'\' /></span></form>'";
+	$_img = interprete_argument_balise(4,$p);
+	if (!$_img) $_img="''";
+
+	$p->code = "'<form class=\'bouton_action_post '.$_class.'\' method=\'post\' action=\''.(\$u=$_url).'\'><span>'.form_hidden(\$u)
+.($_img?'<input type=\'image\' class=\'image\' alt=\''.attribut_html($_label).'\' src=\''.attribut_html($_img).'\' />':'<input type=\'submit\' class=\'submit\' value=\''.attribut_html($_label).'\' />')
+.'</span></form>'";
 	$p->interdire_scripts = false;
 	return $p;
 }
