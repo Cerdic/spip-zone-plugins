@@ -1,0 +1,49 @@
+<h1 class="grostitre"><:clevermail:administration:></h1>
+
+<ul>
+<BOUCLE_lists(SPIP_CM_LISTS){par lst_name}>
+  <BOUCLE_subscribers(SPIP_CM_LISTS_SUBSCRIBERS){lst_id} />#SET{nbSubs,#TOTAL_BOUCLE}<//B_subscribers>
+  <BOUCLE_posts(SPIP_CM_POSTS){lst_id} />#SET{nbPosts,#TOTAL_BOUCLE}<//B_posts>
+  <li>
+    <p><strong>#LST_NAME</strong></p>
+    <p><:clevermail:statistiques:> :
+    [(#GET{nbSubs}|>{0}|?{' ',''})
+      <a href="[(#URL_ECRIRE{clevermail_lists_subscribers}|parametre_url{lst_id,#LST_ID})]">#GET{nbSubs} [ (#GET{nbSubs}|>{1}|?{<:clevermail:abonnes:>,<:clevermail:abonne:>})]</a> 
+    ]
+    [(#GET{nbSubs}|>{0}|?{'',' '})
+      <:clevermail:aucun_abonne:>
+    ]
+    |
+    [(#GET{nbPosts}|>{0}|?{' ',''})
+      <a href="[(#URL_ECRIRE{clevermail_posts}|parametre_url{lst_id,#LST_ID})]">#GET{nbPosts} [ (#GET{nbPosts}|>{1}|?{<:clevermail:messages:>,<:clevermail:message:>})]</a>
+    ]
+    [(#GET{nbPosts}|>{0}|?{'',' '})
+      <:clevermail:aucun_message:>
+    ]
+    </p>
+    <p><:clevermail:actions:> :
+    <a href="[(#URL_ECRIRE{clevermail_lists_edit}|parametre_url{lst_id,#LST_ID})]"><:clevermail:modifier:></a>
+    |
+    [(#GET{nbSubs}|>{0}|?{' ',''})
+      <:clevermail:supprimer:> 
+    ]
+    [(#GET{nbSubs}|>{0}|?{'',' '})
+      <a href="[(#URL_ECRIRE{clevermail_lists_remove}|parametre_url{lst_id,#LST_ID})]"><:clevermail:supprimer:></a>
+    ]
+    |
+    <a href="[(#URL_ECRIRE{clevermail_post_edit}|parametre_url{pst_id,-1}|parametre_url{lst_id,#LST_ID})]"><:clevermail:nouveau_message:></a>
+    </p>
+  </li>
+</BOUCLE_lists>
+</ul>
+<div class='actions'>
+[(#URL_ECRIRE{clevermail_lists_edit}|parametre_url{id,-1}|icone{<:clevermail:creer_lettre:>,#CHEMIN{img_pack/lettre-24.png},#LANG_RIGHT,creer.gif})]
+</div>
+
+<!--#navigation-->
+<INCLURE{fond=prive/menu}>
+<!--/#navigation-->
+
+<!--#extra-->
+Extra...
+<!--/#extra-->
