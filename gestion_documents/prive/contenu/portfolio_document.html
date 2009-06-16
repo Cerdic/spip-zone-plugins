@@ -1,3 +1,13 @@
-<div class='ajax'>
-#FORMULAIRE_JOINDRE_DOCUMENT{new,#ENV{id_objet},#ENV{objet},'auto','formulaires/inc-portfolio_documents'}
-</div>
+[(#REM)
+
+  Squelette
+  (c) xxx
+  Distribue sous licence GPL
+
+]
+[
+(#INCLURE{fond=formulaires/inc-portfolio_documents}{env}{ajax})
+]
+[
+(#INCLURE{fond=prive/inc-ajouter-documents}{env}{ajax})
+]

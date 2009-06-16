@@ -69,9 +69,11 @@ function formulaires_joindre_document_charger_dist($id_document='new',$id_objet=
 
 	if ($galerie){
 		# colonne documents ou portfolio ?
+		$valeurs['_galerie'] = $galerie;
+	}
+	if ($objet AND $id_objet){
 		$valeurs['id_objet'] = $id_objet;
 		$valeurs['objet'] = $objet;
-		$valeurs['_galerie'] = $galerie;
 		$valeurs['id_joindre'] = '';
 		if ($valeurs['editable']){
 			$valeurs['editable'] = autoriser('modifier',$objet,$id_objet)?' ':'';

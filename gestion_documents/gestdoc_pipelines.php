@@ -14,18 +14,27 @@ function gestdoc_post_edition($flux){
 		instituer_document($flux['args']['id_objet']);
 	}
 	// si on institue un objet, mettre ses documents lies a jour
-	if(
-	  ($flux['args']['operation']=='instituer'
-	  OR isset($flux['data']['statut']))
-	  AND $flux['args']['table']!=='spip_documents'){
-	  include_spip('base/abstract_sql');
-	  $type = objet_type($flux['args']['table']);
-	  $id = $flux['args']['id_objet'];
-	  $docs = array_map('reset',sql_allfetsel('id_document','spip_documents_liens','id_objet='.intval($id).' AND objet='.sql_quote($type)));
-		include_spip('action/editer_document');
-	  foreach($docs as $id_document)
-			// mettre a jour le statut si necessaire
-			instituer_document($id_document);
+	elseif($flux['args']['operation']=='instituer' OR isset($flux['data']['statut'])){
+		if ($flux['args']['table']!=='spip_documents'){
+			// verifier d'abord les doublons !
+			$marquer_doublons_doc = charger_fonction('marquer_doublons_doc','inc');
+			$marquer_doublons_doc($flux['data'],$flux['args']['id_objet'],$flux['args']['type'],id_table_objet($flux['args']['type'], $flux['args']['serveur']),$flux['args']['table_objet'],$flux['args']['spip_table_objet'], '', $flux['args']['serveur']);
+			include_spip('base/abstract_sql');
+			$type = objet_type($flux['args']['table']);
+			$id = $flux['args']['id_objet'];
+			$docs = array_map('reset',sql_allfetsel('id_document','spip_documents_liens','id_objet='.intval($id).' AND objet='.sql_quote($type)));
+			include_spip('action/editer_document');
+			foreach($docs as $id_document)
+				// mettre a jour le statut si necessaire
+				instituer_document($id_document);
+		}
+	}
+	else {
+		if ($flux['args']['table']!=='spip_documents'){
+			// verifier les doublons !
+			$marquer_doublons_doc = charger_fonction('marquer_doublons_doc','inc');
+			$marquer_doublons_doc($flux['data'],$flux['args']['id_objet'],$flux['args']['type'],id_table_objet($flux['args']['type'], $flux['args']['serveur']),$flux['args']['table_objet'],$flux['args']['spip_table_objet'], '', $flux['args']['serveur']);
+		}
 	}
 	return $flux;
 }

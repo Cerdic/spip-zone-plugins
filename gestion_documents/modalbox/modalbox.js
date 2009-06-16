@@ -20,7 +20,7 @@
 	$.modalboxload = function (url, options) {
 		$.get(url,function(data){
 			$.modalbox(data,options);
-		});
+		},"html");
 	};
 
 	$.modalboxclose = function () {

@@ -120,9 +120,7 @@
 (#REM) Formulaire pour deballer un zip
 ][<ul><li class='fieldset deballer_zip'>(#ENV**{erreurs}|table_valeur{lister_contenu_archive})</li></ul>]
 
-
-
-<script type='text/javascript'>
+<script type='text/javascript'>/*<!#EVAL{chr(91)}CDATA#EVAL{chr(91)}*/
 if (window.jQuery){
 jQuery(document).ready(function(){
 	[(#ENV{joindre_upload}|oui) 
@@ -141,4 +139,4 @@ jQuery(document).ready(function(){
 		jQuery('.joindre_mode#GET{domid}:not(#joindre_upload#GET{domid})').hide();
 });
 }
-</script>
+/*#EVAL{chr(93)}[(#EVAL{chr(93)})]>*/</script>

@@ -82,7 +82,6 @@ function lien_objet($id,$type,$longueur=80,$connect=NULL){
 	return "<a href='$url' class='$type'>".couper($titre,$longueur)."</a>";
 }
 
-
 function critere_DOCUMENTS_orphelins_dist($idb, &$boucles, $crit) {
 
 	$boucle = &$boucles[$idb];

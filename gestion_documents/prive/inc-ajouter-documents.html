@@ -1,7 +1,7 @@
 [(#ENV{ajouter}|=={oui}|oui)
 <div class='nettoyeur'></div>
 <a href='[(#SELF|parametre_url{ajouter,non})]' class='ajax bouton_fermer'>[(#CHEMIN{img_pack/frame-close.png}|tag_img)]</a>
-#FORMULAIRE_JOINDRE_DOCUMENT
+#FORMULAIRE_JOINDRE_DOCUMENT{new,#ENV{id_objet,0},#ENV{objet,''}}
 <script type='text/javascript'>jQuery.MultiFile();</script>
 <div class='nettoyeur'></div>
 ]

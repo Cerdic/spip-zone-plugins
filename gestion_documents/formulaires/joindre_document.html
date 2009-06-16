@@ -19,6 +19,6 @@
 	</div></form>
 
 </div>]
-[(#ENV{_galerie,''})
+[(#ENV{_galerie,''}|oui)
 		[(#INCLURE{fond=#ENV{_galerie}}{env}{ajax})]
 ]

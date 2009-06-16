@@ -78,6 +78,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_hauteur' => 'Hauteur',
 	'info_gauche_numero_document'=>'DOCUMENT NUM&Eacute;RO',
 	'info_statut_document'=> 'Ce document est&nbsp;:',
+	'info_illustrations' => 'Illustrations',
 	
 	// L
 	'logo' => 'Logo',
@@ -88,6 +89,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_caracteristiques' => 'Caract&eacute;ristiques',
 	'label_apercu' => 'Aper&ccedil;u',
 	'label_credits' => 'Cr&eacute;dits',
+	'lien_tout_enlever' => 'Tout enlever',
 	
 	// M
 	'media_audio' => 'Bandes sons',

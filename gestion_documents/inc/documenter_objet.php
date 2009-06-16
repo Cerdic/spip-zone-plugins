@@ -14,48 +14,20 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // http://doc.spip.org/@naviguer_doc
 function inc_documenter_objet_dist($id, $type = "article", $script, $flag_editable=true) {
-	global $spip_lang_left;
+	$serveur = '';
+	// avant de documenter un objet, on verifie que ses documents vus sont bien lies !
+	$spip_table_objet = table_objet_sql($type);
+	$table_objet = table_objet($type);
+	$id_table_objet = id_table_objet($type,$serveur);
+	$champs = sql_fetsel('*',$spip_table_objet,addslashes($id_table_objet)."=".intval($id));
 
-	// Joindre ?
-	if  ($GLOBALS['meta']["documents_$type"]=='non'
-	OR !autoriser('joindredocument', $type, $id)
-	OR !$flag_editable)
-		$res = '';
-	else {
-		$joindre = charger_fonction('joindre', 'inc');
-		$res = $joindre(array(
-			'cadre' => 'relief',
-			'icone' => 'image-24.gif',
-			'fonction' => 'creer.gif',
-			'titre' => _T('titre_joindre_document'),
-			'script' => $script,
-			'args' => "id_$type=$id",
-			'id' => $id,
-			'intitule' => _T('info_telecharger_ordinateur'),
-			'mode' => 'document',
-			'type' => $type,
-			'ancre' => '',
-			'id_document' => 0,
-			'iframe_script' => generer_url_ecrire("documenter","id_$type=$id&type=$type",true)
-		));
+	$marquer_doublons_doc = charger_fonction('marquer_doublons_doc','inc');
+	$marquer_doublons_doc($champs,$id,$type,$id_table_objet,$table_objet,$spip_table_objet, '', $serveur);
 
-	// eviter le formulaire upload qui se promene sur la page
-	// a cause des position:relative incompris de MSIE
+	$contexte = array('objet'=>$type,'id_objet'=>$id);
+	return recuperer_fond('prive/contenu/portfolio_document',array_merge($_GET,$contexte));
 
-	  if ($GLOBALS['browser_name']!="MSIE") {
-		$res = "\n<table width='100%' cellpadding='0' cellspacing='0' border='0'>\n<tr><td>&nbsp;</td><td style='text-align: $spip_lang_left;width: 50%;'>\n$res</td></tr></table>";
-	  }
 
-	  $res .= http_script('',"async_upload.js")
-	 . http_script('$("form.form_upload").async_upload(async_upload_portfolio_documents);');
-
-	}
-
-	$documenter = charger_fonction('documenter', 'inc');
-
-	return "<div id='portfolio'>".$documenter($id, $type, 'portfolio', $flag_editable)."</div><br />"
-	."<div id='documents'>". $documenter($id, $type, 'documents', $flag_editable)."</div>"
-	. $res;
 }
 
 

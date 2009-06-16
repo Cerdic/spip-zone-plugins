@@ -21,23 +21,35 @@ function action_dissocier_document_dist(){
 
 	list($id_objet, $objet, $document) = $arg;
 	$suppr=false;
-	if (count($arg)>3 AND end($arg)=='suppr')
+	if (count($arg)>3 AND $arg[3]=='suppr')
 		$suppr = true;
+	if (count($arg)>4 AND $arg[4]=='safe')
+		$check = true;
 	if ($id_objet=intval($id_objet)	AND autoriser('modifier',$objet,$id_objet))
-		dissocier_document($document, $objet, $id_objet, $suppr);
+		dissocier_document($document, $objet, $id_objet, $suppr, $check);
 }
 
 // http://doc.spip.org/@supprimer_lien_document
-function supprimer_lien_document($id_document, $objet, $id_objet, $supprime = false) {
+function supprimer_lien_document($id_document, $objet, $id_objet, $supprime = false, $check = false) {
 	if (!$id_document = intval($id_document))
 		return false;
 
 	// D'abord on ne supprime pas, on dissocie
-	sql_delete("spip_documents_liens",
-		$z = "id_objet=".intval($id_objet)." AND objet=".sql_quote($objet)." AND id_document=".$id_document);
+	sql_delete("spip_documents_liens", "id_objet=".intval($id_objet)." AND objet=".sql_quote($objet)." AND id_document=".$id_document);
 
 	// Si c'est une vignette, l'eliminer du document auquel elle appartient
 	sql_updateq("spip_documents", array('id_vignette' => 0), "id_vignette=".$id_document);
+
+	if ($check) {
+		// si demande, on verifie que ses documents vus sont bien lies !
+		$spip_table_objet = table_objet_sql($objet);
+		$table_objet = table_objet($objet);
+		$id_table_objet = id_table_objet($objet,$serveur);
+		$champs = sql_fetsel('*',$spip_table_objet,addslashes($id_table_objet)."=".intval($id_objet));
+
+		$marquer_doublons_doc = charger_fonction('marquer_doublons_doc','inc');
+		$marquer_doublons_doc($champs,$id_objet,$objet,$id_table_objet,$table_objet,$spip_table_objet, '', $serveur);
+	}
 
 	// On supprime ensuite s'il est orphelin
 	// et si demande
@@ -47,19 +59,22 @@ function supprimer_lien_document($id_document, $objet, $id_objet, $supprime = fa
 	}
 }
 
-function dissocier_document($document, $objet, $id_objet, $supprime = false){
+function dissocier_document($document, $objet, $id_objet, $supprime = false, $check = false){
 	if ($id_document=intval($document)) {
-		supprimer_lien_document($id_document, $objet, $id_objet, $supprime);
+		supprimer_lien_document($id_document, $objet, $id_objet, $supprime, $check);
 	}
 	else {
-		$obj = "id_objet=".intval($id_objet)." AND objet=".sql_quote($objet);
-		$typdoc = sql_in('docs.extension', array('gif', 'jpg', 'png'), $sign  ? '' : 'NOT');
+		list($image,$mode) = explode('/',$document);
+		$image = ($image=='I');
+		$typdoc = sql_in('docs.extension', array('gif', 'jpg', 'png'), $image  ? '' : 'NOT');
 
-		$s = sql_select('docs.id_document AS id_doc', 
+		$obj = "id_objet=".intval($id_objet)." AND objet=".sql_quote($objet);
+
+		$s = sql_select('docs.id_document', 
 			"spip_documents AS docs LEFT JOIN spip_documents_liens AS l ON l.id_document=docs.id_document",
-			"$obj AND docs.mode=".sql_quote($document)." AND $typdoc");
+			"$obj AND vu='non' AND docs.mode=".sql_quote($mode)." AND $typdoc");
 		while ($t = sql_fetch($s)) {
-			supprimer_lien_document($t['id_doc'], $objet, $id_objet, $supprime);
+			supprimer_lien_document($t['id_document'], $objet, $id_objet, $supprime, $check);
 		}
 	}
 
