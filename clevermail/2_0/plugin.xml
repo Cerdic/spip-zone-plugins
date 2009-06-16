@@ -1,16 +1,32 @@
 <plugin>
-	<nom>CleverMail pour 1.9.3 (pas encore compatible)</nom>
-	<auteur>Thomas Beaumanoir - [Clever Age->http://www.clever-age.com]</auteur>
-	<version>1.0.4</version>
+	<nom>CleverMail pour SPIP 2.0</nom>
+	<auteur>Thomas Beaumanoir, Nicolas Hoizey ([Clever Age->http://www.clever-age.com/])</auteur>
+	<version>2.0.0</version>
+  <version_base>0.1</version_base>
 	<etat>dev</etat>
-	<description>Gestion de lettres d'information bas&#233; sur CleverMail</description>
+	<description>
+{{ATTENTION, plugin en cours de refonte complète pour SPIP 2, pas stable du tout !}}}
+
+Gestion de lettres d'information reprenant les fonctionnalités du logiciel libre CleverMail :
+-* Gestion de lettres multiples
+-* Récupération du contenu à partir d'une URL, donc utilisation possible d'un squelette SPIP dédié
+-* Envois en HTML ou texte brut
+-* Gestion des inscriptions/désinscription, les abonnés étant distincts des utilisateurs de SPIP
+-* Etc.
+	</description>
 	<lien>[Documentation->http://www.clever-age.com/veille/blog/plugin-clevermail-pour-spip-pour-une-gestion-simple-de-lettres-d-informations.html]</lien>
-	<install>base/clevermail_init.php</install>
+	<icon>img_pack/lettre-24.png</icon>
+	<install>base/clevermail.php</install>
 	<options>clevermail_options.php</options>
 	<prefix>clevermail</prefix>
-	<pipeline>
-		<nom>ajouter_boutons</nom>
-	</pipeline>
+  <pipeline>
+    <nom>declarer_tables_principales</nom>
+    <inclure>base/clevermail.php</inclure>
+  </pipeline>
+  <pipeline>
+    <nom>autoriser</nom>
+    <inclure>clevermail_autoriser.php</inclure>
+  </pipeline>
 	<pipeline>
 		<nom>header_prive</nom>
 	</pipeline>
@@ -18,5 +34,11 @@
 		<nom>taches_generales_cron</nom>
 	</pipeline>
 	<chemin dir='' />
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[2.0.8;]" />
+	<necessite id="facteur" version="[1.0;]" />
+  <bouton id='clevermail' parent='configuration'>
+    <titre>CleverMail</titre>
+    <icone>img_pack/enveloppe.png</icone>
+    <url>clevermail</url>
+  </bouton> 
 </plugin>
