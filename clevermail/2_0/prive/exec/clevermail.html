@@ -6,27 +6,27 @@
   <li class="item">
     <p><strong>#LST_NAME</strong></p>
     <p><:clevermail:statistiques:> :
-    [(#GET{nbSubs}|>{0}|?{' ',''})
+    [(#GET{nbSubs}|>{0}|oui)
       <a href="[(#URL_ECRIRE{clevermail_lists_subscribers}|parametre_url{lst_id,#LST_ID})]">#GET{nbSubs} [ (#GET{nbSubs}|singulier_ou_pluriel{clevermail:abonne,clevermail:abonnes})]</a> 
     ]
-    [(#GET{nbSubs}|>{0}|?{'',' '})
+    [(#GET{nbSubs}|>{0}|non)
       <:clevermail:aucun_abonne:>
     ]
     |
-    [(#GET{nbPosts}|>{0}|?{' ',''})
+    [(#GET{nbPosts}|>{0}|oui)
       <a href="[(#URL_ECRIRE{clevermail_posts}|parametre_url{lst_id,#LST_ID})]">#GET{nbPosts} [ (#GET{nbPosts}|singulier_ou_pluriel{clevermail:message,clevermail:messages})]</a>
     ]
-    [(#GET{nbPosts}|>{0}|?{'',' '})
+    [(#GET{nbPosts}|>{0}|non)
       <:clevermail:aucun_message:>
     ]
     </p>
     <p><:clevermail:actions:> :
     <a href="[(#URL_ECRIRE{clevermail_lists_edit}|parametre_url{lst_id,#LST_ID})]"><:clevermail:modifier:></a>
     |
-    [(#GET{nbSubs}|>{0}|?{' ',''})
+    [(#GET{nbSubs}|>{0}|oui)
       <:clevermail:supprimer:> 
     ]
-    [(#GET{nbSubs}|>{0}|?{'',' '})
+    [(#GET{nbSubs}|>{0}|non)
       <a href="[(#URL_ECRIRE{clevermail_lists_remove}|parametre_url{lst_id,#LST_ID})]"><:clevermail:supprimer:></a>
     ]
     |
