@@ -1,5 +1,5 @@
 <div id="banniere" class="#PINCEAU{banniere}">
-  [(#CONFIG{acsBanniereLogo}|=={oui}|?{' '})
+  [(#VAR{acsBanniereLogo}|=={oui}|?{' '})
     [(#REM) Afficher le logo ou le titre du site ]
     <a rel="start" href="#URL_SITE_SPIP/">
     [(#LOGO_SITE_SPIP||?{
@@ -14,6 +14,6 @@
     })]
     </a>
   ]
-  [(#CONFIG{acsBanniereImage}|=={''}|?{' '}) <a href="#URL_SITE_SPIP" class="nom_site">#NOM_SITE_SPIP</a>]
-  [(#CONFIG{acsBanniereImage}|!={''}|?{' '}) <a href="#URL_SITE_SPIP" class="nom_site"><img class="banniere" src="[(#ACS_CHEMIN)]img/banniere/#CONFIG{acsBanniereImage}" height="60px" width="468px" border="0" title="#NOM_SITE_SPIP" onmouseover="this.src='spip.php?action=wrap&amp;module=#CHEMIN{composants/banniere/bnr/banner.php}&amp;exclut=#CONFIG{acsBanniereImage}';" onmouseout="this.src='[(#ACS_CHEMIN)]img/banniere/#CONFIG{acsBanniereImage}';" alt="#NOM_SITE_SPIP" /></a>]
+  [(#VAR{acsBanniereImage}|=={''}|?{' '}) <a href="#URL_SITE_SPIP" class="nom_site">#NOM_SITE_SPIP</a>]
+  [(#VAR{acsBanniereImage}|!={''}|?{' '}) <a href="#URL_SITE_SPIP" class="nom_site"><img class="banniere" src="[(#ACS_CHEMIN)]img/banniere/#VAR{acsBanniereImage}" height="60px" width="468px" border="0" title="#NOM_SITE_SPIP" onmouseover="this.src='spip.php?action=wrap&amp;module=#CHEMIN{composants/banniere/bnr/banner.php}&amp;exclut=#VAR{acsBanniereImage}';" onmouseout="this.src='[(#ACS_CHEMIN)]img/banniere/#VAR{acsBanniereImage}';" alt="#NOM_SITE_SPIP" /></a>]
 </div>

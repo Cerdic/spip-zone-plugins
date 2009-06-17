@@ -61,22 +61,9 @@
     <label>non</label>
   </variable>
   <variable>
-    <nom>BordColor</nom>
-    <type>color</type>
-    <valeur>acsFondBordColor</valeur>
+    <nom>Bord</nom>
+    <type>bord</type>
   </variable>
-  <variable>
-    <nom>BordLargeur</nom>
-    <type>largeurbord</type>
-    <valeur>acsFondBordLargeur</valeur>
-    <label>non</label>
-  </variable>
-  <variable>
-    <nom>BordStyle</nom>
-    <type>stylebord</type>
-    <valeur>acsFondBordStyle</valeur>
-    <label>non</label>
-  </variable>  
   <variable>
     <nom>Sep</nom>
     <type>color</type>

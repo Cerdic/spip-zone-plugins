@@ -3,7 +3,7 @@
 #          (Plugin Spip)
 #     http://acs.geomaticien.org
 #
-# Copyright Daniel FAIVRE, 2007-2008
+# Copyright Daniel FAIVRE, 2007-2009
 # Copyleft: licence GPL - Cf. LICENCES.txt
 #
 /**
@@ -12,6 +12,12 @@
  */
 $def = array(
 	'acsAgendaUse' => 'oui',
+	'acsAgendaTitreFondColor' => '=acsRubnavTitreFond',
+	'acsAgendaTitreFondImage' => '=acsRubnavTitreFondImage',
+	'acsAgendaBordColor' => '=acsRubnavBordColor',
+	'acsAgendaBordWidth' => '=acsRubnavBordWidth',
+	'acsAgendaBordStyle' => '=acsRubnavBordStyle',
+	'acsAgendaThisMonth' => '=acsRubnavFond', 
 	'acsArticlesUse' => 'oui',
 	'acsArticlesTabBordColor' => '#cfcfcf',
 	'acsArticlesTabBordLargeur' => 'thin',
@@ -20,11 +26,15 @@ $def = array(
 	'acsArticlesTabOdd' => '#e4dfef',
 	'acsArticlesTabEven' => '#dfdfef',
 	'acsAudioUse' => 'oui',
+	'acsAudioTitreImage' => '=acsRubnavTitreFondImage',
+	'acsAudioBord' => 'acsRubnavBordColor',
+ 	'acsAudioBordWidth' => '=acsRubnavBordWidth',
+	'acsAudioBordStyle' => '=acsRubnavBordStyle', 
 	'acsAuteursUse' => 'oui',
 	'acsBanniereUse' => 'oui',
 	'acsBanniereUseLogo' => 'non',
 	'acsBandeauUse' => 'oui',
-	'acsBandeauContenu' => '<a href="http://acs.geomaticien.org">ACS</a>: pour configurer ce site, <a href="ecrire/?exec=acs&onglet=composants&composant=fond">cliquez ici</a>.',
+	'acsBandeauContenu' => '<a href="http://acs.geomaticien.org">ACS</a>: pour configurer ce site, <a href="ecrire/?exec=acs&amp;onglet=composants&amp;composant=fond">cliquez ici</a>.',
 	'acsFondUse' => 'oui',
 	'acsFondFavicon' => 'favicon.ico',
 	'acsFondColor' => '#f4f4f4',

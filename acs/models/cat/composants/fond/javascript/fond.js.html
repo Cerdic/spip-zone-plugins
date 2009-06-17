@@ -12,14 +12,14 @@ function swap_couche(couche, rtl, dir, no_swap) {
   var triangle = document.getElementById('triangle' + couche);
   if (!(layer = findObj('Layer' + couche))) return;
   if (layer.style.display == "none"){
-    if (!no_swap && triangle) triangle.src = dir + "#CONFIG{acsFondDeplierBas,deplierbas.gif}";
+    if (!no_swap && triangle) triangle.src = dir + "#VAR{acsFondDeplierBas,deplierbas.gif}";
     layer.style.display = 'block';
   } else {
     if (!no_swap && triangle) {
       if (rtl)
-        triangle.src = dir + "#CONFIG{acsFondDeplierHaut_rtl,deplierhaut_rtl.gif}";
+        triangle.src = dir + "#VAR{acsFondDeplierHaut_rtl,deplierhaut_rtl.gif}";
       else
-        triangle.src = dir + "#CONFIG{acsFondDeplierHaut,deplierhaut.gif}";
+        triangle.src = dir + "#VAR{acsFondDeplierHaut,deplierhaut.gif}";
     }
     layer.style.display = 'none';
   }

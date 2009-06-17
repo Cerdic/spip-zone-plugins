@@ -19,11 +19,11 @@
   <variable>
     <nom>Bord</nom>
     <type>color</type>
-    <valeur>acsRubnavColor</valeur>
+    <valeur>acsRubnavBordColor</valeur>
   </variable>
   <variable>
     <nom>Onglet</nom>
     <type>color</type>
-    <valeur>acsFondColor</valeur>
+    <valeur>acsRubnavFond</valeur>
   </variable>
 </composant>

@@ -8,8 +8,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info' => 'Affiche un nuage de mots-clés de tailles variables selon leurs fréquences d\'utilisation.',
 'help' => 'Les mots-cl&eacute;s commençant par "_" ne sont pas affich&eacute;s.',
 
-'Bord' => 'Bord',
-'Fond' => 'Fond',
 'TitreFond' => 'Titre',
 'Align' => 'Alignement',
 'AlignCenter' => 'centr&eacute;',

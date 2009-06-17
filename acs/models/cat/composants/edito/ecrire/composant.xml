@@ -17,31 +17,11 @@
   </variable>
   <variable>
     <nom>Bord</nom>
-    <type>color</type>
-  </variable>
-  <variable>
-    <nom>BordLargeur</nom>
-    <type>largeurbord</type>
-    <label>non</label>
-  </variable>
-  <variable>
-    <nom>BordStyle</nom>
-    <type>stylebord</type>
-    <label>non</label>
+    <type>bord</type>
   </variable>
   <variable>
     <nom>LegendBord</nom>
-    <type>color</type>
-  </variable>
-  <variable>
-    <nom>LegendBordLargeur</nom>
-    <type>largeurbord</type>
-    <label>non</label>
-  </variable>
-  <variable>
-    <nom>LegendBordStyle</nom>
-    <type>stylebord</type>
-    <label>non</label>
+    <type>bord</type>
   </variable>
   <variable>
     <nom>NbLettres</nom>

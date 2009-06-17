@@ -1,29 +1,29 @@
 #CACHE{0}
 
 .syndic {
-  [border-width: (#CONFIG{acsEncartBordLargeur,#CONFIG{acsRubnavBordLargeur}});]
-  [border-style: (#CONFIG{acsEncartBordStyle,#CONFIG{acsRubnavBordStyle}});]
-  [border-color: (#CONFIG{acsEncartBordColor,#CONFIG{acsRubnavBordColor}});]
-  [background: (#CONFIG{acsRubnavFond});]
+  [border-width: (#VAR{acsSyndicBordWidth});]
+  [border-style: (#VAR{acsSyndicBordStyle});]
+  [border-color: (#VAR{acsSyndicBordColor});]
+  [background: (#VAR{acsSyndicFond});]
 }
 
-.syndic .titre-bloc {
-  [background: (#CONFIG{acsRubnavTitreFond})[ url([(#ACS_CHEMIN)]img/trame/(#CONFIG{acsRubnavTitreFondImage})) repeat top left];]
+.syndic .menu-titre {
+  [background: (#VAR{acsSyndicTitreFond})[ url("(#ACS_CHEMIN{img/trame/#VAR{acsSyndicTitreFondImage}})") repeat top left];]
 }
 
 .syndic .article{
-  [background: (#CONFIG{acsRubnavFond});]
+  [background: (#VAR{acsSyndicFond});]
   padding-left: 5px;
   font-size: 80%;
 }
 
 .syndic .site {
-  border-top: 1px solid[ (#CONFIG{acsRubnavSep})];
+  border-top: 1px solid[ (#VAR{acsRubnavSep})];
   text-align: center;
 }
 
 .syndic .menu-item a {
-  [text-align: (#CONFIG{acsRubnavAlign});]
+  [text-align: (#VAR{acsRubnavAlign});]
 }
 
 [(#REM) Override des styles de la dist SPIP pour le formulaire ]

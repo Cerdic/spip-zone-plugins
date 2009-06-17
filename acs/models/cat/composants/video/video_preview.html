@@ -10,7 +10,7 @@
     <INCLURE{fond=composants/video/flv}{autostart=#AUTOSTART}{hauteur=#GET{hauteur}}{largeur=#GET{largeur}}{url_document=#CHEMIN{composants/video/images/demo.flv}}{titre=#GET{titre}}>
     </td>
   </tr>    
-  [<tr style="vertical-align: top; text-align: center;"><td>(#CONFIG{acsMultimediaDownload,oui}|=={oui}|?{' '})<a href="#CHEMIN{composants/video/images/demo.flv}"><:acs:video_download:></a></td></tr>]
+  [<tr style="vertical-align: top; text-align: center;"><td>(#VAR{acsMultimediaDownload,oui}|=={oui}|?{' '})<a href="#CHEMIN{composants/video/images/demo.flv}"><:acs:video_download:></a></td></tr>]
 </table>
 
 <hr />

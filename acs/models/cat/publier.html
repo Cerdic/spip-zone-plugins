@@ -17,10 +17,10 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
     <INCLURE{fond=composants/module/module}{self=#SELF}{env=#ENV}{nic=21}>
 </div>[(#REM) fin colonne1 (navigation) ]
 <div id="colonne2"><div class="spacer"></div>[(#REM) Colonne 2 ]
-  [(#CONFIG{acsOngletsUse}|!={non}|?{' '}) <INCLURE{fond=composants/onglets/onglets}{current=login}{env=#ENV}>
+  [(#VAR{acsOngletsUse}|!={non}|?{' '}) <INCLURE{fond=composants/onglets/onglets}{current=login}{env=#ENV}>
   <div id="onglet" style="background: #ffffff">]
     <div id="acs_op">[(#FORMULAIRE_ARTICLE{#SELF})]</div>
-	[(#CONFIG{acsOngletsUse}|!={non}|?{' '}) </div>][(#REM) fin onglet]
+	[(#VAR{acsOngletsUse}|!={non}|?{' '}) </div>][(#REM) fin onglet]
 </div>[(#REM) fin colonne2]
 <div id="colonne3"><div class="spacer"></div>
   <div class="acs_op_cartouche">

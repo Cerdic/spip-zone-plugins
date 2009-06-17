@@ -18,12 +18,12 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 
 [(#REM) Colonne 2 ]
 <div id="colonne2"><div class="spacer"></div>
- [(#CONFIG{acsOngletsUse}|!={non}|?{' '}) <INCLURE{fond=composants/onglets/onglets}{current=plan}{env=#ENV}>
+ [(#VAR{acsOngletsUse}|!={non}|?{' '}) <INCLURE{fond=composants/onglets/onglets}{current=plan}{env=#ENV}>
   <div id="onglet">]
 		[(#REM) Fil d'Ariane ]
 		<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:plan_site:></div>
     <INCLURE{fond=composants/articles/boucle-plan}{lang ?}{env=#ENV}>
-	[(#CONFIG{acsOngletsUse}|!={non}|?{' '}) </div>][(#REM) fin onglet]
+	[(#VAR{acsOngletsUse}|!={non}|?{' '}) </div>][(#REM) fin onglet]
 </div>[(#REM) fin colonne2]
 <INCLURE{fond=composants/fond/pied}{self=#SELF}{env=#ENV}>[(#REM) Pied de page ]
 

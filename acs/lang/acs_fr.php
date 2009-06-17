@@ -6,6 +6,8 @@
 $traductions_acs = array(
   'use' => 'Utiliser',
 
+	'fond' => ' Fond', // Non traduit en 2.0.8 sans l'espace devant : a debugger
+
   'bordcolor' => 'Bordure',
   'bordlargeur' => 'largeur de bordure',
   'bordstyle' => 'style de bordure',
@@ -29,7 +31,6 @@ $traductions_acs = array(
 	'fontsize' => 'Taille',
 	'fontfamily' => 'Famille de fonte'
 );
-
 
 // Lang file is build with components lang files
 if (_DIR_RESTREINT != '') {

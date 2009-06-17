@@ -4,7 +4,9 @@ ACS version 0.5
  - nouvelles traductions generiques.
  - controles revus. Composants ordonnés par ordre alphabetique dans le contrôle Widget.
  - nouvelle balise de mise en page <admin> pour masquer des parties de mises en page de composant en mode
-
+ - nouvelle balise #VAR{variable, valeur par defaut} : lorsque la valeur de variable est un nom de variable ACS, ce nom est remplacé par sa valeur à l'execution (permet l'héritage de variables de composants).
+ - creation du controle de type Bord pour définir largeur, style, et couleur de bordure en une fois.
+ 
 Modele Cat pour ACS vesion 0.5:
  - Composant Agenda : amélioration CSS
  - Composant Articles : meilleure integration avec plugin notation (0.6.3) et composant Democratie
@@ -20,10 +22,13 @@ Modele Cat pour ACS vesion 0.5:
  - Composant Syndic : integration du formulaire site. Pagination ajax et améliorations look.
  - Composant Tags : valeur par defaut de la couleur de fond et du fond du titre = celle de Rubnav
  - Composant Video : correction positionnement du lien telecharger. Ajax.
-
+ 
+ - nouveau fichier d'initialisation des composants avec des valeurs par defaut heritees.
+ - validation xhtml 1.0 pages et composants du modele Cat.
+ - modification de tous les composants pour permettre l'heritage de valeurs d'autres composants avec la balise #VAR
  - habillage.css : override des styles de formulaires de la dist SPIP remis e jour.
  - formulaire_ecrire_auteur.html & formulaire_forum.html supprimes : on utilise la dist SPIP.
- - inc-article.html : suppression boucle "du même auteur", remplacée par un composant Auteurs.
+ - inc-article.html : suppression boucle "du même auteur", remplacée par un composant Auteurs, integration avec plugin recommander.
  - mot.html : on masque tous les groupes de mots-clés qui commencent par un "_" (réservés aux mots-clés techniques), ainsi que le groupe en cours dans le bloc "autres groupes de mots-clés".  Suppression de boucles, remplacées par le composant Keys (contextuel).
  - models/cat/modeles/paginationvideo : ajax.
 _______________________________________

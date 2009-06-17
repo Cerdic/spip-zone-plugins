@@ -31,11 +31,11 @@ function acs_page_get_all_variables() {
   $r .= '<tr style="text-align: center; border-bottom: '.$GLOBALS['couleur_claire'].' thin groove;"><th class="verdana1"><b>'._T('nom')."</b></th>\n<th class='verdana1'><b>"._T('acs:valeur')."</b></th>\n</tr>\n";
   foreach($cv as $c=>$p) {
 		foreach($p['vars'] as $var=>$vp) {
-			$r .= composant_variable($c, $var);
+			$r .= composant_variable($c, $var, false, $vp);
 		}
   	foreach(composant_instances($c) as $nic) {
   		foreach($p['vars'] as $var=>$vp) {
-				$r .= composant_variable($c, $var, $nic);
+				$r .= composant_variable($c, $var, $nic, $vp);
   		}
 			$r .= '<tr><td colspan="2" style=" height: 1px; padding: 0; background-color: '.$GLOBALS['couleur_claire'].';"></td></tr>';
   	}
@@ -45,7 +45,7 @@ function acs_page_get_all_variables() {
   return acs_box(_T('acs:toutes_les_variables'), $r, _DIR_PLUGIN_ACS.'/images/vars-24.gif');
 }
 
-function composant_variable($c, $v, $nic=false) {
+function composant_variable($c, $v, $nic, $vp) {
   static $i;
   $bgcolor = alterner($i++, '#eeeeee','white');
   
@@ -58,12 +58,18 @@ function composant_variable($c, $v, $nic=false) {
     $before = '';
     $after = '';
   }
-  $varname = 'acs'.ucfirst($c).$nic.$v;
-  return '<tr style="background: '.$bgcolor.'; vertical-align: top;"><td class="verdana2">'.
-  '<a href="?exec=acs&onglet=composants&composant='.$c.($nic ? '&nic='.$nic : '').'" class="nompage">'.
-  $before.'<span style="color:#8d8d8f">acs'.ucfirst($c).$nic.'</span>'.$v.$after.'</a></td>'.
-  '<td class="crayon var-'.$c.'_'.$v.'-'.($nic ? $nic : 0).' type_pinceau crayon_'.$c.$v.' arial2">'.
-  (isset($GLOBALS['meta'][$varname]) ? couper(htmlspecialchars($GLOBALS['meta'][$varname]), 150) : '<span style="color:darkviolet">'._T('acs:undefined').'</span>').
-  '</td></tr>';
+  $varname = 'acs'.ucfirst($c).$nic.$v; 
+	if ($vp['type'] == 'bord')
+		$v2 = array($varname.'Color', $varname.'Width', $varname.'Style');
+	else 
+		$v2 = array($varname);
+	$r = '<td class="verdana2"><a href="?exec=acs&onglet=composants&composant='.$c.($nic ? '&nic='.$nic : '').'" class="nompage">'.
+      $before.'<span style="color:#8d8d8f">acs'.ucfirst($c).$nic.'</span>'.$v.$after.'</a></td>'.
+      '<td class="crayon var-'.$c.'_'.$v.'-'.($nic ? $nic : 0).' type_pinceau crayon_'.$c.$v.' arial2">';
+  foreach($v2 as $vn) {
+		$r .= (isset($GLOBALS['meta'][$vn]) ? couper(htmlspecialchars($GLOBALS['meta'][$vn]), 150).' ' : '<span style="color:darkviolet">'._T('acs:undefined').'</span> ');
+  }
+  $r .= '</td>';
+  return '<tr style="background: '.$bgcolor.'; vertical-align: top;">'.$r.'</tr>';
 }
 ?>

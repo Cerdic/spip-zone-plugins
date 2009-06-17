@@ -6,6 +6,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'nom' => 'Syndic',
 'description' => 'Syndicated websites block',
 
+'TitreFond' => 'Title',
 'NbArt' => 'Nb of articles per site',
 'NbSites' => 'Nb of sites'
 );

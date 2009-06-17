@@ -19,7 +19,7 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 </div>[(#REM) fin colonne1 (navigation)]
 <div id="colonne2"><div class="spacer"></div>[(#REM) Colonne 2 ]
   [(#REM) Contenu principal : derniers articles publies ]
-  [(#CONFIG{acsOngletsUse}|!={non}|?{' '}) <INCLURE{fond=composants/onglets/onglets}{env=#ENV}>
+  [(#VAR{acsOngletsUse}|!={non}|?{' '}) <INCLURE{fond=composants/onglets/onglets}{env=#ENV}>
   <div id="onglet">]
     [(#REM) Fil d'Ariane ]
     <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <a href="?page=auteurs"><:info_auteurs:></a>[ &gt; (#NOM|couper{80})]</div>
@@ -43,7 +43,7 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
     </div><!-- fin contre-encart -->
     </B_articles>
     [<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
-	[(#CONFIG{acsOngletsUse}|!={non}|?{' '}) </div>][(#REM) fin onglet]
+	[(#VAR{acsOngletsUse}|!={non}|?{' '}) </div>][(#REM) fin onglet]
 </div>[(#REM) fin colonne2]
 <div id="colonne3">
     [<div class="encart">(#FORMULAIRE_ECRIRE_AUTEUR)</div>]

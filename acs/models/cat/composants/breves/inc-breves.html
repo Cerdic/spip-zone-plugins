@@ -6,7 +6,7 @@
       [<p class="pagination">(#PAGINATION)</p>]
     </div>
     <ul>
-      <BOUCLE_breves(BREVES) {id_rubrique ?} {par date}{inverse} {pagination #CONFIG{acsBrevesNb,10}}>
+      <BOUCLE_breves(BREVES) {id_rubrique ?} {par date}{inverse} {pagination #VAR{acsBrevesNb,10}}>
       <li class="menu-item">[<small>(#DATE|affdate_court)</small> ]<a href="#URL_BREVE">#TITRE</a></li>
       </BOUCLE_breves>
     </ul>

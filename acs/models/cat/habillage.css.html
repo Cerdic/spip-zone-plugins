@@ -39,25 +39,25 @@ html { font-size: 100%; } /* Cf.: http://pompage.net/pompe/definir-des-tailles-d
 [(#EVAL{defined('_DIR_PLUGIN_NOTATION')}|?{'', ' '})
   .notation {}
   .notation .topten {
-    border: thin dotted #CONFIG{acsRubnavBordColor,#AAE};
-    background: #CONFIG{acsFondColor};
+    border: thin dotted #VAR{acsRubnavBordColor,#AAE};
+    background: #VAR{acsFondColor};
     padding: 2px;
     margin: 5px;
   }
   .notation thead tr {
-    background-color: #CONFIG{acsRubnavTitreFondColor, #CONFIG{acsFondColor,#AAE}};
+    background-color: #VAR{acsRubnavTitreFondColor, #VAR{acsFondColor,#AAE}};
     text-align:center;
-    color: #CONFIG{acsFondText, #004f8f};
+    color: #VAR{acsFondText, #004f8f};
   }
   .notation .ligne_paire {
-    background-color: #CONFIG{acsRubnavFondColorHover,#EEF};
+    background-color: #VAR{acsRubnavFondColorHover,#EEF};
   }
   .notation small {
-    color: #CONFIG{acsFondText, #004f8f};
+    color: #VAR{acsFondText, #004f8f};
     font-weight:normal;
   }
   .formulaire_notation small {
-    color: #CONFIG{acsFondText, #004f8f};
+    color: #VAR{acsFondText, #004f8f};
   }
 ]
 
@@ -75,7 +75,7 @@ background-repeat: no-repeat;
 }
 
 ul.spip {
-	list-style : url(#ACS_CHEMIN{img/puces/}#CONFIG{acsArticlesPuce,puce_8x8.gif});
+	list-style : url(#ACS_CHEMIN{img/puces/}#VAR{acsArticlesPuce,puce_8x8.gif});
 }
 
 /* Espaceur de blocs */
@@ -284,12 +284,12 @@ table.petition {
   margin-top: 0;
   padding: 0.77em;
   padding-top: 0;
-  border: 1px dotted #CONFIG{acsRubnavBordColor,#004F8F};
+  border: 1px dotted #VAR{acsRubnavBordColor,#004F8F};
  }
  .formulaire_spip legend {
   font-weight: bold;
   padding: 3px;
-  background-color: #CONFIG{acsFondColor, #FFF}; /* Sinon, superposition dans MSIE */
+  background-color: #VAR{acsFondColor, #FFF}; /* Sinon, superposition dans MSIE */
 }
 .formulaire_spip .boutons {
   text-align : #LANG_RIGHT;
@@ -308,9 +308,9 @@ table.petition {
 }
 .formulaire_spip input.text, .formulaire_spip textarea, .formulaire_spip select {
   width: 100%;
-  background: #CONFIG{acsOngletsFondColor,#CONFIG{acsFondColor}};
-  border: thin groove #CONFIG{acsRubnavBordColor};
-  color: #CONFIG{acsFondText};
+  background: #VAR{acsOngletsFondColor,#VAR{acsFondColor}};
+  border: thin groove #VAR{acsRubnavBordColor};
+  color: #VAR{acsFondText};
 }
 .formulaire_spip label {
   line-height: 1.5em;
@@ -339,10 +339,10 @@ table.petition {
 
 .form_inscription {
   width: 80%;
-  [border-color: (#CONFIG{acsRubnavBordColor, afdfaf});]
-  [border-width:(#CONFIG{acsRubnavBordLargeur, thin});]
-  border-style: #CONFIG{acsRubnavBordStyle, dotted};
-  [background-color: (#CONFIG{acsFondColor, #efffef});]
+  [border-color: (#VAR{acsRubnavBordColor, afdfaf});]
+  [border-width:(#VAR{acsRubnavBordLargeur, thin});]
+  border-style: #VAR{acsRubnavBordStyle, dotted};
+  [background-color: (#VAR{acsFondColor, #efffef});]
   padding: 4px;
   -moz-border-radius: 8px;
 }

@@ -16,7 +16,7 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
   <INCLURE{fond=composants/module/module}{self=#SELF}{env=#ENV}{nic=21}>
 </div>[(#REM) fin colonne1 (navigation) ]
 <div id="colonne2"><div class="spacer"></div>[(#REM) Colonne 2 ]
-  [(#CONFIG{acsOngletsUse}|!={non}|?{' '}) <INCLURE{fond=composants/onglets/onglets}{current=sites}{env=#ENV}>
+  [(#VAR{acsOngletsUse}|!={non}|?{' '}) <INCLURE{fond=composants/onglets/onglets}{current=sites}{env=#ENV}>
   <div id="onglet">]
     <span id="hierarchie" style="float: left"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_article}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero|couper{80})]</a></BOUCLE_ariane>[ &gt; <a href="#URL_SITE" title="[(#DESCRIPTIF|textebrut)]" class="spip_out" target="_new">(#NOM_SITE)</a>]</span>
 	  <div class="cartouche">
@@ -51,7 +51,7 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
       [<a href="#forum" name="forum" id="forum"></a><h2 class="forum-repondre"><span class="texte_nav" style="float: right"><a href="#SELF&ouvrir=oui"><small><:lire_tous_les_messages:></small></a></span><a href="(#PARAMETRES_FORUM|url_reponse_forum)"><:repondre_article:><small><i>(<:repondre_article_notice:>)</i></small></a><INCLURE{fond=inc-forum}{env=#ENV}{id_syndic}{ouvrir=#OUVRIR}{debut_forums}>]
 
 		</div>[(#REM) fin cartouche ]
-	[(#CONFIG{acsOngletsUse}|!={non}|?{' '}) </div>][(#REM) fin onglet]
+	[(#VAR{acsOngletsUse}|!={non}|?{' '}) </div>][(#REM) fin onglet]
 </div>[(#REM) fin colonne2]
 <INCLURE{fond=composants/fond/pied}{self=#SELF}{env=#ENV}>[(#REM) Pied de page ]
 </BOUCLE_site>

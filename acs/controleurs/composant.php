@@ -35,7 +35,7 @@ function controleurs_composant_dist($regs) {
       recuperer_fond('vues/composant', $contexte).
     '</div>'.
     '<div style="position: relative; opacity: 1;">'.
-    '<a href="'._DIR_RESTREINT.'?exec=acs&onglet=composants&composant='.$ctype.'&nic='.$id.'"><img src="'.$icon.'" alt="'.$ctype.'" title="'._T('crayons:editer').' '._T($champ).'"  class="bouton_edit_composant" /></a>'.
+    '<a href="'._DIR_RESTREINT.'?exec=acs&amp;onglet=composants&amp;composant='.$ctype.'&amp;nic='.$id.'"><img src="'.$icon.'" alt="'.$ctype.'" title="'._T('crayons:editer').' '._T($champ).'"  class="bouton_edit_composant" /></a>'.
   	'</div>'.
   	'<div class="edit_composant" style="position: absolute; display: block; top:0; left:'.$left.'px; z-index: 99999999">'.
     acs_box(

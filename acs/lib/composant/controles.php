@@ -6,13 +6,13 @@
 # Copyright Daniel FAIVRE, 2007-2009
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
-// Choix de couleur
+// Choix de couleur - Color choice
 function ctlColor($composant, $nic, $nom, $couleur, $param, $wid) {
   $var =  nomvar($composant, $nic, $nom);
-  return '<div align="'.$GLOBALS['spip_lang_right'].'"><table><tr><td align="'.$GLOBALS['spip_lang_right'].'">&nbsp;<label for "'.$var.'_'.$wid.'" title="'.$var.'" class="label">'._TC($composant, $nom).'</label>&nbsp;</td><td><input type="text" class="palette" id="'.$var.'" name="'.$var.'_'.$wid.'" size="8" maxlength="8" value="'.$couleur.'"></td></tr></table></div>';
+  return '<div align="'.$GLOBALS['spip_lang_right'].'"><table><tr><td align="'.$GLOBALS['spip_lang_right'].'">&nbsp;<label for "'.$var.'_'.$wid.'" title="'.$var.'" class="label">'._TC($composant, $nom).'</label>&nbsp;</td><td><input type="text" class="palette" id="'.$var.'" name="'.$var.'_'.$wid.'" size="16" value="'.$couleur.'"></td></tr></table></div>';
 }
 
-// Choix d'image
+// Choix d'image - Image choice
 function ctlImg($composant, $nic, $nom, $image, $param, $wid) {
   $var =  nomvar($composant, $nic, $nom);
   $path = $GLOBALS['ACS_CHEMIN'].'/'.$param['chemin'];
@@ -21,36 +21,56 @@ function ctlImg($composant, $nic, $nom, $image, $param, $wid) {
   $r = '<div align="'.$GLOBALS['spip_lang_right'].'"><table><tr>';
   if ($param['label'] != 'non')
     $r .= '<td align="'.$GLOBALS['spip_lang_right'].'">&nbsp;<label for "'.$var.'_'.$wid.'" title="'.$var.'"  class="label">'._TC($composant, $nom).'</label>&nbsp;</td>';
-  $r .= '<td><input type="text" name="'.$var.'_'.$wid.'"'.(is_array($s) ? ' title="'.$s[0].'x'.$s[1].'"' : '').' value="'.$image.'" size="40" class="forml"></td>';
+  $r .= '<td><input type="text" name="'.$var.'_'.$wid.'"'.(is_array($s) ? ' title="'.$s[0].'x'.$s[1].'"' : '').' value="'.$image.'" size="40" class="forml" /></td>';
   $r .= '<td>&nbsp;<a href="javascript:TFP.popup(document.forms[\'acs\'].elements[\''.$var.'_'.$wid.'\'], document.forms[\'acs\'].elements[\''.$var.'_'.$wid.'\'].value, \''.$path.'\', \''._DIR_RACINE.'\');" title="'._T('acs:choix_image').'"><img src="'._DIR_ACS.'images/folder_image.png" class="icon" alt="'._T('acs:choix_image').'" /></a></td></tr></table></div>';
   return $r;
 }
 
-// Choix d'une largeur de bordure
+// Choix de bordure - Border choice
+function ctlBord($composant, $nic, $nom, $bord, $param, $wid) {
+  $var =  nomvar($composant, $nic, $nom);
+ 	$largeur = $GLOBALS['meta'][$var.'Width'];
+ 	$style = $GLOBALS['meta'][$var.'Style'];
+	$couleur = $GLOBALS['meta'][$var.'Color'];
+	$r = '<table><tr><td>'.ctlColor($composant, $nic, $nom.'Color', $couleur, $param, $wid).'</td>';
+	$param['label'] = 'non';
+	$r .= '<td>'.ctlLargeurBord($composant, $nic, $nom.'Width', $largeur, $param, $wid).
+				'<td>'.ctlStyleBord($composant, $nic, $nom.'Style', $style, $param, $wid).'</td>'.
+		'</tr></table>';
+	return $r;
+}
+
+// Choix d'une largeur de bordure - Border width choice
 function ctlLargeurBord($composant, $nic, $nom, $largeur='0', $param, $wid) {
   $var =  nomvar($composant, $nic, $nom);
   $r = '<div align="'.$GLOBALS['spip_lang_right'].'"><table><tr>';
   if ($param['label'] != 'non') $r .= '<td align="'.$GLOBALS['spip_lang_right'].'"><label for "'.$var.'_'.$wid.'" title="'.$var.'" class="label">'._TC($composant, $nom).'</label></td>';
-  $r .= '<td><select name="'.$var.'_'.$wid.'" title="'._T('acs:bordlargeur').'" class="forml" style="width: auto">'.
-    '<option value=""'.($largeur=="" ? ' selected' : '').'></option>'.
-    '<option value="0"'.($largeur=="0" ? ' selected' : '').'>0</option>'.
-    '<option value="thin"'.($largeur=="thin" ? ' selected' : '').'>thin</option>'.
-    '<option value="1px"'.($largeur=="1px" ? ' selected' : '').'>1px</option>'.
-    '<option value="2px"'.($largeur=="2px" ? ' selected' : '').'>2px</option>'.
-    '<option value="3px"'.($largeur=="3px" ? ' selected' : '').'>3px</option>'.
-    '<option value="4px"'.($largeur=="4px" ? ' selected' : '').'>4px</option>'.
-    '<option value="5px"'.($largeur=="5px" ? ' selected' : '').'>5px</option>'.
+  if (!in_array($largeur, array('', '0', 'thin', '1px', '2px', '3px', '4px', '5px')))
+  	$option = '<option value="'.$largeur.'"  title="'.$largeur.' ('.$GLOBALS['meta'][substr($largeur, 1)].')" selected>=</option>';
+  $r .= '<td><select name="'.$var.'_'.$wid.'" title="'._T('acs:bordlargeur').' '.$var.'" class="forml" style="width: auto">'.
+    '<option value=""'.($largeur=="" ? ' selected' : '').' title="'._T('acs:parent').'"></option>'.
+  	$option.
+    '<option value="0"'.($largeur=="0" ? ' selected' : '').' title="0">0</option>'.
+    '<option value="thin"'.($largeur=="thin" ? ' selected' : '').' title="'._T('acs:thin').'">thin</option>'.
+    '<option value="1px"'.($largeur=="1px" ? ' selected' : '').' title="1px">1px</option>'.
+    '<option value="2px"'.($largeur=="2px" ? ' selected' : '').' title="2px">2px</option>'.
+    '<option value="3px"'.($largeur=="3px" ? ' selected' : '').' title="3px">3px</option>'.
+    '<option value="4px"'.($largeur=="4px" ? ' selected' : '').' title="4px">4px</option>'.
+    '<option value="5px"'.($largeur=="5px" ? ' selected' : '').' title="5px">5px</option>'.
     '</select></td></tr></table></div>';
   return $r;
 }
 
-// Choix d'un style  de bordure
+// Choix d'un style  de bordure - Border style choice
 function ctlStyleBord($composant, $nic, $nom, $style='solid', $param, $wid) {
   $var =  nomvar($composant, $nic, $nom);
   $r = '<div align="'.$GLOBALS['spip_lang_right'].'"><table><tr>';
   if ($param['label'] != 'non') $r .= '<td align="'.$GLOBALS['spip_lang_right'].'"><label for "'.$var.'_'.$wid.'" title="'.$var.'" class="label">'._TC($composant, $nom).'</label></td>';
-  $r .= '<td><select name="'.$var.'_'.$wid.'" title="'._T('acs:bordstyle').'" class="forml" style="width: auto">'.
+  if (!in_array($style, array('', 'none', 'solid', 'dashed', 'dotted', 'double', 'groove', 'ridge', 'inset', 'outset')))
+  	$option = '<option value="'.$style.'"  title="'.$style.' ('.$GLOBALS['meta'][substr($style, 1)].')" selected>=</option>';
+  $r .= '<td><select name="'.$var.'_'.$wid.'" title="'._T('acs:bordstyle').' '.$var.'" class="forml" style="width: auto">'.
     '<option value=""'.($style=="" ? ' selected' : '').' title="'._T('acs:parent').'"></option>'.
+  	$option.
     '<option value="none"'.($style=="none" ? ' selected' : '').' title="'._T('acs:none').'">none</option>'.
     '<option value="solid"'.($style=="solid" ? ' selected' : '').' title="'._T('acs:solid').'">solid</option>'.
     '<option value="dashed"'.($style=="dashed" ? ' selected' : '').' title="'._T('acs:dashed').'">dashed</option>'.
@@ -64,7 +84,7 @@ function ctlStyleBord($composant, $nic, $nom, $style='solid', $param, $wid) {
   return $r;
 }
 
-// Choix d'une famille de fonte
+// Choix d'une famille de fonte - Font family choice
 function ctlFontFamily($composant, $nic, $nom, $style='sans-serif', $param, $wid) {
   $var =  nomvar($composant, $nic, $nom);
   $r = '<div align="'.$GLOBALS['spip_lang_right'].'"><table><tr>';

@@ -19,7 +19,7 @@ Page d'une rubrique
 
 [(#REM) Colonne 2 ]
 <div id="colonne2"><div class="spacer"></div>
-  [(#CONFIG{acsOngletsUse}|!={non}|?{' '}) <INCLURE{fond=composants/onglets/onglets}{current=rubrique}{env=#ENV}>
+  [(#VAR{acsOngletsUse}|!={non}|?{' '}) <INCLURE{fond=composants/onglets/onglets}{current=rubrique}{env=#ENV}>
    <div id="onglet">]
     [(#REM) Fil d'Ariane ]
     <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_rubrique}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero|couper{80})]</a></BOUCLE_ariane>[ &gt; (#TITRE|supprimer_numero|couper{80})]</div>
@@ -28,7 +28,7 @@ Page d'une rubrique
     <div class="cartouche">
         [(#LOGO_RUBRIQUE||image_reduire{200,200})]
         [<h1 class="#EDIT{titre} titre">(#TITRE|supprimer_numero)</h1>]
-        [(#CONFIG{acsRubnavMaJ}=={oui}|?{<small><:dernier_ajout:> &ndash; [(#DATE|nom_jour) ][(#DATE|affdate).]</small>})]
+        [(#VAR{acsRubnavMaJ}=={oui}|?{<small><:dernier_ajout:> &ndash; [(#DATE|nom_jour) ][(#DATE|affdate).]</small>})]
     </div>
       [<div class="#EDIT{texte} chapo" style="z-order:2">(#TEXTE)</div>]
 
@@ -52,7 +52,7 @@ Page d'une rubrique
       [<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
   </div><!-- fin contre-encart -->
   <br />
-	[(#CONFIG{acsOngletsUse}|!={non}|?{' '}) </div>][(#REM) fin onglet]
+	[(#VAR{acsOngletsUse}|!={non}|?{' '}) </div>][(#REM) fin onglet]
 </div>[(#REM) fin colonne2]
 <div id="colonne3"><div class="spacer"></div>
   <INCLURE{fond=composants/module/module}{nic=26}{self=#SELF}{env=#ENV}{id_rubrique}>

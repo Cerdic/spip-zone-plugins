@@ -15,7 +15,7 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
   <INCLURE{fond=composants/module/module}{self=#SELF}{env=#ENV}{nic=21}>
 </div>[(#REM) fin colonne1 (navigation) ]
 <div id="colonne2"><div class="spacer"></div>[(#REM) Colonne 2 ]
-  [(#CONFIG{acsOngletsUse}|!={non}|?{' '}) <INCLURE{fond=composants/onglets/onglets}{current=recherche}{env=#ENV}>
+  [(#VAR{acsOngletsUse}|!={non}|?{' '}) <INCLURE{fond=composants/onglets/onglets}{current=recherche}{env=#ENV}>
   <div id="onglet">]
     [(#REM) Fil d'Ariane ]
     <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:info_rechercher:>[ &gt; (#RECHERCHE)]</div>
@@ -66,7 +66,7 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
           <p><:aucun_article:></p>
       <//B_articles>
     </div><!-- fin contre-encart -->
-	[(#CONFIG{acsOngletsUse}|!={non}|?{' '}) </div>][(#REM) fin onglet]
+	[(#VAR{acsOngletsUse}|!={non}|?{' '}) </div>][(#REM) fin onglet]
 </div>[(#REM) fin colonne2]
 <div id="colonne3"><div class="spacer"></div>
       <div class="encart">

@@ -35,28 +35,14 @@
     <type>img</type>
     <chemin>img/trame</chemin>
     <label>non</label>
-  </variable>
+  </variable>  
   <variable>
-    <nom>BordColor</nom>
-    <type>color</type>
-    <valeur>acsRubnavBordColor</valeur>
-  </variable>
+    <nom>Bord</nom>
+    <type>bord</type>
+  </variable>  
   <variable>
     <nom>Sep</nom>
     <type>color</type>
-    <valeur>acsRubnavSep</valeur>
-  </variable>
-  <variable>
-    <nom>BordLargeur</nom>
-    <type>largeurbord</type>
-    <valeur>acsRubnavBordLargeur</valeur>
-    <label>non</label>
-  </variable>
-  <variable>
-    <nom>BordStyle</nom>
-    <type>stylebord</type>
-    <valeur>acsRubnavBordStyle</valeur>
-    <label>non</label>
   </variable>
   <variable>
     <nom>Align</nom>

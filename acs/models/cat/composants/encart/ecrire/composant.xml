@@ -11,4 +11,9 @@
     <valeur>200</valeur>
   </param>
 
+  <variable>
+    <nom>Nb</nom>
+    <type>nombre</type>
+    <valeur>3</valeur>
+  </variable>
 </composant>

@@ -7,7 +7,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'description' => 'Bandeau texte ou html',
 'help' => 'Le bandeau occupe toute la largeur de la page. Il peut contenir du texte et/ou du code html.',
 
-'Fond' => 'Fond',
 'BordHaut' => 'Bord haut',
 'BordBas' => 'Bord bas',
 'TextColor' => 'Couleur texte',

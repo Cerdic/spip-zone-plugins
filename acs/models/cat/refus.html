@@ -18,7 +18,7 @@ Liste des articles refusés
 </div>[(#REM) fin colonne1 (navigation) ]
 
 <div id="colonne2"><div class="spacer"></div>[(#REM) Colonne 2 ]
-	[(#CONFIG{acsOngletsUse}|!={non}|?{' '}) <INCLURE{fond=composants/onglets/onglets}{current=refus}{env=#ENV}>
+	[(#VAR{acsOngletsUse}|!={non}|?{' '}) <INCLURE{fond=composants/onglets/onglets}{current=refus}{env=#ENV}>
 	<div id="onglet">]
 
 		[(#REM) Fil d'Ariane ]
@@ -53,6 +53,6 @@ Liste des articles refusés
 				</div>
 		 </B_articles>
 		</div><!-- fin div texte -->
-	[(#CONFIG{acsOngletsUse}|!={non}|?{' '}) </div>][(#REM) fin onglet]
+	[(#VAR{acsOngletsUse}|!={non}|?{' '}) </div>][(#REM) fin onglet]
 </div>[(#REM) fin colonne2]
 <INCLURE{fond=composants/fond/pied}{self=#SELF}{env=#ENV}>[(#REM) Pied de page ]

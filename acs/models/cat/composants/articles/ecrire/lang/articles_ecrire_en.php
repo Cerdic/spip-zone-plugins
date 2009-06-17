@@ -12,7 +12,7 @@ Access control limit access to articles tagged with keyword _ide, _aut, or _adm 
 'before list of last published articles.',
 
 'TitresFondColor' => 'Title background color',
-'BordColor' => 'Border top',
+'Bord' => 'Border top',
 'MargeBas' => 'Margin bottom',
 'NbLettres' => 'Nb of letters before cut',
 'LogoTailleMax' => 'max logo size',

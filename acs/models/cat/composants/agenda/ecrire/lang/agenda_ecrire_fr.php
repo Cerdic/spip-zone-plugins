@@ -12,7 +12,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'NotThisMonth' => 'Pas ce mois',
 'ThisDay' => 'Ce jour',
 'TitreFondColor' => 'Titre',
-'BordColor' => 'Bordure',
 'BulleFondColor' => 'Info-bulle',
 'BulleVoirArticlesModifies' => 'Afficher les modifications d\'articles',
 'BulleArticleModifieFondColor' => 'Article modifi&eacute;',

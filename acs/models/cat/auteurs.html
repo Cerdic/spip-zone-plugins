@@ -18,7 +18,7 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 	</div><!-- fin mg -->
 </div><!-- fin colonne1 (navigation) -->
 <div id="colonne2"><div class="spacer"></div>[(#REM) Colonne 2 ]
-  [(#CONFIG{acsOngletsUse}|!={non}|?{' '}) <INCLURE{fond=composants/onglets/onglets}{current=auteurs}{env=#ENV}>
+  [(#VAR{acsOngletsUse}|!={non}|?{' '}) <INCLURE{fond=composants/onglets/onglets}{current=auteurs}{env=#ENV}>
   <div id="onglet">]
 		<span id="hierarchie" style="float: left"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; auteurs</span>
 		<span class="texte_nav" style="float: right">Faisons les présentations ...</span>
@@ -32,7 +32,7 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 			</ul>
 		</BOUCLE1>
 		</div>[(#REM) fin liste-articles ]
-	[(#CONFIG{acsOngletsUse}|!={non}|?{' '}) </div>][(#REM) fin onglet]
+	[(#VAR{acsOngletsUse}|!={non}|?{' '}) </div>][(#REM) fin onglet]
 </div>[(#REM) fin colonne2]
 [(#REM) Pied de page ]
 <INCLURE{fond=composants/fond/pied}{self=#SELF}{env=#ENV}>

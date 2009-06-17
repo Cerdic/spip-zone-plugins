@@ -1,8 +1,8 @@
 [(#SET{acsEncartKeyword,<:acs:encart_keyword:>})]
 <B_encart>
 <div class="composantEncart">
-<BOUCLE_encart(ARTICLES) {doublons} {titre_mot=#GET{acsEncartKeyword}} {par date} {inverse} {0,3} {lang ?}>
-  <BOUCLE_encart_democratique(ARTICLES spip_notations_articles) {id_article} {note_ponderee>=#CONFIG{acsDemocratieSeuilPublic,0}} {lang ?}>
+<BOUCLE_encart(ARTICLES) {doublons} {titre_mot=#GET{acsEncartKeyword}} {par date} {inverse} {0,#VAR{acsEncartNb,3}} {lang ?}>
+  <BOUCLE_encart_democratique(ARTICLES spip_notations_articles) {id_article} {note_ponderee>=#VAR{acsDemocratieSeuilPublic,0}} {lang ?}>
     <div class="cartouche">
       [<div class="spip_logos"><a href="#URL_ARTICLE">(#LOGO_ARTICLE_RUBRIQUE)</a></div>]
 

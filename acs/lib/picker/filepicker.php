@@ -88,10 +88,10 @@ if ($d = @opendir($dir)) {
 	while (false !== ($file = @readdir($d))) {
   	if ($file != "." && $file != "..") {
       $s = @getimagesize($dir.'/'.$file);
-      if ($s) $s = $s[0].'x'.$s[1];
-      $action_effacer = url_filepicker($dir, $file, '&del=true');
+      if ($s)
+      	$s = $s[0].'x'.$s[1];
       $hash = md5(serialize($action_effacer.$GLOBALS['auteur_session']['hash_env']));
-      $onclick = "aconfirmer('".addslashes(_T('acs:effacer_image'))." (".addslashes($file).")','".$action_effacer."&hash=$hash"."')";
+      $onclick = "aconfirmer('".addslashes(_T('acs:effacer_image'))." (".addslashes($file).")','".url_filepicker($dir, $file, '&del=true')."&hash=$hash"."')";
 			echo '<table class="cadre"><tr><td colspan="2" style="text-align: center"><img src="'.$dir.'/'.$file.'" title="'.$file.'" class="boutonImg" onclick="P.select(\''.$file.'\')" onmouseover="P.preview(\''.$dir.'/'.$file.'\')" /></td></tr><tr><td class="bandeau">'.$s.'</td><td><a onclick="'.$onclick.'" title="'._T('acs:effacer_image').'"><img src="'._DIR_PLUGIN_ACS.'images/supprimer.gif" alt="x" /></a></td></tr></table>';
 		}
 	}

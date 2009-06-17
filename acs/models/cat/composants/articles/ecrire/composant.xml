@@ -27,21 +27,8 @@
     <label>non</label>
   </variable>
   <variable>
-    <nom>BordColor</nom>
-    <type>color</type>
-    <valeur>acsOngletsBordColor</valeur>
-  </variable>
-  <variable>
-    <nom>BordLargeur</nom>
-    <type>largeurbord</type>
-    <valeur>acsRubnavBordLargeur</valeur>
-    <label>non</label>
-  </variable>
-  <variable>
-    <nom>BordStyle</nom>
-    <type>stylebord</type>
-    <label>non</label>
-    <valeur>dotted</valeur>
+    <nom>Bord</nom>
+    <type>bord</type>
   </variable>
   <variable>
     <nom>MargeBas</nom>
@@ -123,20 +110,8 @@
   </variable>
 
   <variable>
-    <nom>TabBordColor</nom>
-    <type>color</type>
-  </variable>
-  <variable>
-    <nom>TabBordLargeur</nom>
-    <type>largeurbord</type>
-    <label>non</label>
-    <valeur>thin</valeur>
-  </variable>
-  <variable>
-    <nom>TabBordStyle</nom>
-    <type>stylebord</type>
-    <label>non</label>
-    <valeur>solid</valeur>
+    <nom>TabBord</nom>
+    <type>bord</type>
   </variable>
   <variable>
     <nom>TabFirst</nom>

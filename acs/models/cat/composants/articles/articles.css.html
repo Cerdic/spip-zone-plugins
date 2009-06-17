@@ -6,14 +6,14 @@
  */
 
 .liste-articles li {
-  border-top: #CONFIG{acsArticlesBordLargeur,#CONFIG{acsFondBordLargeur,thin}}[ (#CONFIG{acsArticlesBordStyle,dotted})][ (#CONFIG{acsArticlesBordColor,#CONFIG{acsOngletsBordColor}})];
-  [margin-bottom: (#CONFIG{acsArticlesMargeBas})px;]
+  border-top: #VAR{acsArticlesBordLargeur,#VAR{acsFondBordLargeur,thin}}[ (#VAR{acsArticlesBordStyle,dotted})][ (#VAR{acsArticlesBordColor,#VAR{acsOngletsBordColor}})];
+  [margin-bottom: (#VAR{acsArticlesMargeBas})px;]
   margin-right: 1px;
 }
 
 .liste-articles .entete, .cartouche .entete, .plan-secteur h1 {
-  [background-color: (#CONFIG{acsArticlesTitresFondColor,#CONFIG{acsFondColor}});]
-  [background: url('[(#ACS_CHEMIN)]img/trame/(#CONFIG{acsArticlesTitresFondImage})') repeat top left;]
+  [background-color: (#VAR{acsArticlesTitresFondColor,#VAR{acsFondColor}});]
+  [background: url('[(#ACS_CHEMIN)]img/trame/(#VAR{acsArticlesTitresFondImage})') repeat top left;]
  }
 
 .liste-articles .entete {
@@ -80,7 +80,7 @@
 table.spip {
   margin: auto;
   margin-bottom: 1em;
-  border: [(#CONFIG{acsArticlesTabBordLargeur,1px})][ (#CONFIG{acsArticlesTabBordStyle,solid})][ (#CONFIG{acsArticlesTabBordColor})];
+  border: [(#VAR{acsArticlesTabBordLargeur,1px})][ (#VAR{acsArticlesTabBordStyle,solid})][ (#VAR{acsArticlesTabBordColor})];
   border-collapse: collapse;
 }
 table.spip caption {
@@ -90,9 +90,9 @@ table.spip caption {
   padding: 3px;
   font-weight: bold;
 }
-[table.spip tr.row_first { background: (#CONFIG{acsArticlesTabFirst});}]
-[table.spip tr.row_odd { background: (#CONFIG{acsArticlesTabOdd});}]
-[table.spip tr.row_even { background: (#CONFIG{acsArticlesTabEven});}]
+[table.spip tr.row_first { background: (#VAR{acsArticlesTabFirst});}]
+[table.spip tr.row_odd { background: (#VAR{acsArticlesTabOdd});}]
+[table.spip tr.row_even { background: (#VAR{acsArticlesTabEven});}]
 table.spip th, table.spip td { padding: 3px; text-align: left; vertical-align: middle;}
 
 [(#REM) Habillage specifique du plan du site ]
@@ -100,7 +100,7 @@ table.spip th, table.spip td { padding: 3px; text-align: left; vertical-align: m
 
 .plan-secteur h1 {
   border: 0;
-  border-top: [(#CONFIG{acsArticlesBordLargeur,1px})][ (#CONFIG{acsArticlesBordStyle,solid})][ (#CONFIG{acsArticlesBordColor})];
+  border-top: [(#VAR{acsArticlesBordLargeur,1px})][ (#VAR{acsArticlesBordStyle,solid})][ (#VAR{acsArticlesBordColor})];
   margin: 0;
   font-size: 110%;
   font-weight: bold;
@@ -116,22 +116,22 @@ table.spip th, table.spip td { padding: 3px; text-align: left; vertical-align: m
 
 .plan-secteur .menu-item {
   margin-left: 1.5em;
-  list-style: url(#ACS_CHEMIN{img/puces/}#CONFIG{acsArticlesPuce,puce_8x8.gif});
+  list-style: url(#ACS_CHEMIN{img/puces/}#VAR{acsArticlesPuce,puce_8x8.gif});
 }
 
 .plan-rubrique {
-  border: [(#CONFIG{acsArticlesBordLargeur,1px})][ (#CONFIG{acsArticlesBordStyle,solid})][ (#CONFIG{acsArticlesBordColor})];
+  border: [(#VAR{acsArticlesBordLargeur,1px})][ (#VAR{acsArticlesBordStyle,solid})][ (#VAR{acsArticlesBordColor})];
   padding: 4px;
   font-weight: bold;
-  [margin-top: (#CONFIG{acsArticlesMargeBas})px;]
-  [margin-bottom: (#CONFIG{acsArticlesMargeBas})px;]
+  [margin-top: (#VAR{acsArticlesMargeBas})px;]
+  [margin-bottom: (#VAR{acsArticlesMargeBas})px;]
   -moz-border-radius: 8px;
 /*
   border-right: 0;
   -moz-border-radius-topright: 0;
   -moz-border-radius-bottomright: 0;
 */
-  min-height: #CONFIG{acsArticlesLogoTailleMax,50}px;
+  min-height: #VAR{acsArticlesLogoTailleMax,50}px;
 }
 
 .plan-rubrique .spip_logos {
@@ -156,23 +156,23 @@ span.plan-article {
 /* Eclaircissement ou assombrissement progressif des rubriques en fonction de la profondeur */
 
 ul .plan-rubrique {
-  background: [(#CONFIG{acsArticlesRubFond2, #fafffa})];
+  background: [(#VAR{acsArticlesRubFond2, #fafffa})];
   margin-left: 2%;
 }
 
 ul ul .plan-rubrique {
-  background: [(#CONFIG{acsArticlesRubFond3, #f5fff5})];
+  background: [(#VAR{acsArticlesRubFond3, #f5fff5})];
   margin-left: 3%;
 }
 ul ul ul .plan-rubrique {
-  background: [(#CONFIG{acsArticlesRubFond4, #efffef})];
+  background: [(#VAR{acsArticlesRubFond4, #efffef})];
   margin-left: 4%;
 }
 ul ul ul ul .plan-rubrique {
-  background: [(#CONFIG{acsArticlesRubFond5, #dfffdf})];
+  background: [(#VAR{acsArticlesRubFond5, #dfffdf})];
   margin-left: 5%;
 }
 ul ul ul ul ul .plan-rubrique {
-  background: [(#CONFIG{acsArticlesRubFond6, #d0ffd0})];
+  background: [(#VAR{acsArticlesRubFond6, #d0ffd0})];
   margin-left: 6%;
 }

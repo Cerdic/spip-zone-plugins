@@ -50,7 +50,7 @@
     <valeur>acsFondColor</valeur>
   </variable>
   <variable>
-    <nom>TitreColor</nom>
+    <nom>TitreFond</nom>
     <type>color</type>
     <valeur>acsRubnavTitreFond</valeur>
   </variable>
@@ -62,39 +62,14 @@
     <label>non</label>
   </variable>
   <variable>
-    <nom>BordColor</nom>
-    <type>color</type>
-    <valeur>acsRubnavBordColor</valeur>
+    <nom>Bord</nom>
+    <type>bord</type>
   </variable>
   <variable>
-    <nom>BordLargeur</nom>
-    <type>largeurbord</type>
-    <valeur>acsRubnavBordLargeur</valeur>
-    <label>non</label>
+    <nom>Sep</nom>
+    <type>bord</type>
   </variable>
-  <variable>
-    <nom>BordStyle</nom>
-    <type>stylebord</type>
-    <valeur>acsRubnavBordStyle</valeur>
-    <label>non</label>
-  </variable>
-  <variable>
-    <nom>SepColor</nom>
-    <type>color</type>
-    <valeur>acsRubnavSep</valeur>
-  </variable>
-  <variable>
-    <nom>SepLargeur</nom>
-    <type>largeurbord</type>
-    <valeur>acsRubnavBordLargeur</valeur>
-    <label>non</label>
-  </variable>
-  <variable>
-    <nom>SepStyle</nom>
-    <type>stylebord</type>
-    <valeur>acsRubnavBordStyle</valeur>
-    <label>non</label>
-  </variable>
+
   <variable>
     <nom>NbMp3</nom>
     <type>nombre</type>

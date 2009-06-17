@@ -3,14 +3,13 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-'fond' => 'Fond',
-'fond_description' => 'Fond de page. Image ou couleur de fond pour toutes les pages du site.',
-'fond_info' => 'Définit le style général du site et les valeurs par d&eacute;faut des autres composants.',
+'description' => 'Fond de page. Image ou couleur de fond pour toutes les pages du site.',
+'info' => 'Définit le style général du site et les valeurs par d&eacute;faut des autres composants.',
 
-'acsFondColor' => 'Fond',
-'acsFondText' => 'Texte',
-'acsFondLink' => 'Liens',
-'acsFondLinkHover' => 'Au survol',
-'acsFondBordColor' => 'Bordure par d&eacute;faut'
+'Color' => 'Fond',
+'Text' => 'Texte',
+'Link' => 'Liens',
+'LinkHover' => 'Au survol',
+'BordColor' => 'Bordure par d&eacute;faut'
 );
 ?>

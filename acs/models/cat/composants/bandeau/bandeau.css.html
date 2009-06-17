@@ -11,17 +11,17 @@ fieldset.a_la_une {
   padding-right: 0.79em;
   padding-bottom: 0.4em;
   border: 0;
-  [color: (#CONFIG{acsBandeauTextColor,#CONFIG{acsFondText}});]
-  [background: #(#CONFIG{acsBandeauFond}) repeat;]
-  [border-top: #CONFIG{acsBandeauBordLargeur,thin}[ (#CONFIG{acsBandeauBordStyle,groove}) ](#CONFIG{acsBandeauBordHaut});]
-  [border-bottom: #CONFIG{acsBandeauBordLargeur,thin}[ (#CONFIG{acsBandeauBordStyle,groove}) ](#CONFIG{acsBandeauBordBas});]
-  [text-align: (#CONFIG{acsBandeauAlignement,center});]
+  [color: (#VAR{acsBandeauTextColor,#VAR{acsFondText}});]
+  [background: #(#VAR{acsBandeauFond}) repeat;]
+  [border-top: #VAR{acsBandeauBordLargeur,thin}[ (#VAR{acsBandeauBordStyle,groove}) ](#VAR{acsBandeauBordHaut});]
+  [border-bottom: #VAR{acsBandeauBordLargeur,thin}[ (#VAR{acsBandeauBordStyle,groove}) ](#VAR{acsBandeauBordBas});]
+  [text-align: (#VAR{acsBandeauAlignement,center});]
   margin-top: -0.8em;
 }
 
 fieldset.a_la_une legend {
   position: relative;
-  [border: #CONFIG{acsBandeauBordLargeur,thin}[ (#CONFIG{acsBandeauBordStyle,groove}) ](#CONFIG{acsBandeauBordHautCouleur});
+  [border: #VAR{acsBandeauBordLargeur,thin}[ (#VAR{acsBandeauBordStyle,groove}) ](#VAR{acsBandeauBordHautCouleur});
   border-bottom: 0;
   ]
   font-weight: normal;
@@ -40,5 +40,5 @@ div.a_la_une {
   padding-right: 8px;
   font-style: normal;
   font-size: 0.61em;
-  [text-align: (#CONFIG{acsBandeauAlignement,center});]
+  [text-align: (#VAR{acsBandeauAlignement,center});]
 }

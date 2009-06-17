@@ -3,11 +3,11 @@
 #          (Plugin Spip)
 #     http://acs.geomaticien.org
 #
-# Copyright Daniel FAIVRE, 2007-2008
+# Copyright Daniel FAIVRE, 2007-2009
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-spip_log('crayons_composant_store ACS');
+spip_log('ACS: crayons_composant_store');
 /**
  * Crayon pour un composant - Sauvegarde
  * Crayon for one component - Store changes
@@ -26,11 +26,9 @@ function action_crayons_composant_store_dist() {
 
 	$wid = $_POST['crayons'][0];
 	$c = 'composants/'.$_POST['composant'].'/'.$_POST['composant'];	
-	// MàJ du composant - Update component
-	// l'instanciation d'un objet composant met à jour le composant
+	// MàJ du composant - Update component : l'instanciation d'un objet composant fait la mise a jour
 	include_spip('lib/composant/classComposantPrive');
 	$cprovi = new AdminComposant($_POST['composant'], $_POST['nic']);
-	
 	// Retourne la vue - Return vue 
 	$return['$erreur'] ='';
   $return[$wid] = vues_dist('composant', $c, $_POST['nic'], array('var_mode'=>'recalcul'));

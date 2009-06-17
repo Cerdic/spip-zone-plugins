@@ -30,13 +30,38 @@ function balise_ACS_DERNIERE_MODIF($p) {
   return $p;
 }
 
+// Retourne le chemin d'une ressource ACS
+// ou vide si la ressource n'est pas accessible au moins en lecture. 
 function balise_ACS_CHEMIN($p) {
-  $path = interprete_argument_balise(1,$p);
-  $path = substr($path, 1, strlen($path)-2);
-  $p->code = '$GLOBALS["ACS_CHEMIN"]."/'.$path.'"';
+  $arg = interprete_argument_balise(1,$p);
   $p->statut = 'php';
   $p->interdire_scripts = false;
+  $p->code = $arg ? '$GLOBALS["ACS_CHEMIN"]."/".'.$arg : '$GLOBALS["ACS_CHEMIN"]."/"';
+  eval('$path = '.$p->code.';');
+  if (!is_readable($path))
+  	$p->code = '""';
   return $p;
+}
+// VAR = balise CONFIG de SPIP etendue, qui remplaçe les variables ACS par leur valeur.
+// admet deux arguments : nom de variable, valeur par defaut si vide
+// syntaxe : #VAR{acsComposantVariable} ou #VAR{acsComposantVariable, valeur_par_defaut}
+function balise_VAR($p) {
+	$var = interprete_argument_balise(1,$p);
+	$sinon = interprete_argument_balise(2,$p);
+	$src = '$GLOBALS["meta"]';
+	if (!$var) {
+		// cas de #VAR sans argument : on retourne le serialize() du tableau
+		// une belle fonction [(#VAR|affiche_env)] serait pratique
+		$p->code = $src ? ('(is_array($a = ('.$src.')) ? serialize($a) : "")'): '@serialize($Pile[0])';
+	} else {
+		$meta = substr($var, 1, -1);
+		$p->code = $src ? ('is_array($a = ('.$src.')) ? $a[meta_recursive("'.$meta.'")] : ""') : ('@$Pile[0][meta_recursive("'.$meta.'")]');
+		if ($sinon)
+			$p->code = 'sinon('.$p->code.",$sinon)";
+		else
+			$p->code = '('.$p->code.')';
+	}
+	return $p;
 }
 
 /**
@@ -91,17 +116,19 @@ function isUsed($c) {
 /**
  * Retourne un objet ou un tableau sous forme de tableau affichable en html
  */
-function dbg($r) {
+function dbg($r, $html=false) {
    if (is_object($r) or is_array($r)) {
         ob_start();
         print_r($r);
         $r = ob_get_contents();
         ob_end_clean();
-        $r = htmlentities($r);
+        if ($html)
+        	$r = htmlentities($r);
         $srch = array('/Array[\n\r]/', '/\s*[\(\)]+/', '/[\n\r]+/', '/ (?= )/s');
-        $repl = array(''             , ''            , "\n"       , '&nbsp;');
+        $repl = array(''             , ''            , "\n"       , ($html ? '&nbsp;' : ' '));
         $r = preg_replace($srch, $repl, $r);
-        $r = nl2br($r);
+        if ($html)
+        	$r = nl2br($r);
     }
     return $r;
 }

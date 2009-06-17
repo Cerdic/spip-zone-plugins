@@ -8,8 +8,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info' => 'Display a cloud of keywords sized to their frequency of use.',
 'help' => 'Keywords beginning by "_" are not displayed',
 
-'Bord' => 'Border',
-'Fond' => 'Background',
 'TitreFond' => 'Title',
 'Align' => 'Alignment',
 'AlignCenter' => 'center',

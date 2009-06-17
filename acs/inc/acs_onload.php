@@ -87,4 +87,15 @@ function mkdir_recursive($pathname) {
     is_dir(dirname($pathname)) || mkdir_recursive(dirname($pathname));
     return is_dir($pathname) || @mkdir($pathname);
 }
+
+// Utilise par la fonction balise_VAR()
+function meta_recursive($meta) {
+	if (isset($GLOBALS['meta'][$meta])) {
+		$val = $GLOBALS['meta'][$meta];
+		if (substr($val, 0 ,1) == '=') {
+  		$meta = meta_recursive(substr($val, 1));
+  	}
+	}
+	return $meta;
+}
 ?>

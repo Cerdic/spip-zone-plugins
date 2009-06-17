@@ -1,4 +1,4 @@
-[(#CONFIG{acsEditoUse}|=={oui}|?{' '})<div class="#PINCEAU{edito}">
-[(#CONFIG{acsDemocratieUse}|=={oui}|?{' '}) <INCLURE{fond=composants/edito/edito-democratie}>][(#REM) Edito si composant democratie activé]
-[(#CONFIG{acsDemocratieUse}|!={oui}|?{' '}) <INCLURE{fond=composants/edito/edito-oligarchie}>][(#REM) Edito si composant democratie inactif]
+[(#VAR{acsEditoUse}|=={oui}|?{' '})<div class="#PINCEAU{edito}">
+[(#VAR{acsDemocratieUse}|=={oui}|?{' '}) <INCLURE{fond=composants/edito/edito-democratie}>][(#REM) Edito si composant democratie activé]
+[(#VAR{acsDemocratieUse}|!={oui}|?{' '}) <INCLURE{fond=composants/edito/edito-oligarchie}>][(#REM) Edito si composant democratie inactif]
 </div>]

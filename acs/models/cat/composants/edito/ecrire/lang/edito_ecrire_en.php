@@ -7,9 +7,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'description' => 'An article &quot;a la Une&quot; according to a keyword.',
 'help' => 'Keyword depends on lang. In english, it\'s "Edito". Keyword is defined in component Edito lang\'s file.',
 
-'Fond' => 'Background',
-'Bord' => 'Border',
-'LegendBord' => 'Title border',
+'LegendBordColor' => 'Title border',
 'NbLettres' => 'Letters before cut'
 );
 ?>

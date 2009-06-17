@@ -6,7 +6,7 @@
 
 .mp3player .track_info, .mp3player .track_id3, .playlist .track_info {
   border: thin solid;
-  [border-color: (#CONFIG{acsAudioSepColor,#CONFIG{acsRubnavSepColor,#CONFIG{acsRubnavColor}}});]
+  [border-color: (#VAR{acsAudioSepColor,#VAR{acsRubnavSepColor,#VAR{acsRubnavColor}}});]
   -moz-border-radius: 1em;
   margin: 2px;
   margin-right: 5px;
@@ -18,7 +18,7 @@
   text-align: center;
   font-size: 8px;
   height: 10px;
-  color: #CONFIG{acsAudioTrackStatus,#00afdf};
+  color: #VAR{acsAudioTrackStatus,#00afdf};
 }
 
 .mp3player .track_info {
@@ -33,7 +33,7 @@
 
 .mp3player .track_status {
   font-size: 8px;
-  color: #CONFIG{acsAudioTrackStatus,00afdf};
+  color: #VAR{acsAudioTrackStatus,00afdf};
 }
 
 .mp3player .track_control, .mp3player .hidden {
@@ -55,7 +55,7 @@
 }
 
 .mp3player .progressBarBorder {
-  border: 1px solid #CONFIG{acsAudioProgressBarBord,#CONFIG{acsRubnavBordColor,#afafaf}};
+  border: 1px solid #VAR{acsAudioProgressBarBord,#VAR{acsRubnavBordColor,#afafaf}};
   height: 2px;
   margin: 6px;
   margin-left: 8px;
@@ -117,15 +117,15 @@
 
 .playlist {
   text-align: left;
-  [background: (#CONFIG{acsAudioFondColor});]
-  [border-width: (#CONFIG{acsAudioBordLargeur,#CONFIG{acsRubnavBordLargeur}});]
-  [border-style: (#CONFIG{acsAudioBordStyle,#CONFIG{acsRubnavBordStyle}});]
-  [border-color: (#CONFIG{acsAudioBordColor,#CONFIG{acsRubnavBordColor}});]
+  [background: (#VAR{acsAudioFondColor});]
+  [border-width: (#VAR{acsAudioBordWidth});]
+  [border-style: (#VAR{acsAudioBordStyle});]
+  [border-color: (#VAR{acsAudioBordColor});]
 }
 
 .playlist .menu-titre {
-  [background: (#CONFIG{acsAudioTitreColor,#CONFIG{acsRubnavTitreFond}})[ url([(#ACS_CHEMIN)]img/trame/(#CONFIG{acsAudioTitreImage,#CONFIG{acsRubnavTitreFondImage}})) repeat top left];]
-  border-bottom: [(#CONFIG{acsAudioSepLargeur,#CONFIG{acsAudioBordLargeur,#CONFIG{acsRubnavBordLargeur,1px}}})][ (#CONFIG{acsAudioSepStyle,#CONFIG{acsRubnavBordStyle,solid}})][ (#CONFIG{acsAudioSepColor,#CONFIG{acsRubnavSepColor,#efefef}})];
+  [background: (#VAR{acsRubnavTitreFond})[ url("(#ACS_CHEMIN{img/trame/#VAR{acsAudioTitreImage}})") repeat top left];]
+  border-bottom: [(#VAR{acsAudioSepLargeur,#VAR{acsAudioBordWidth,#VAR{acsRubnavBordWidth,1px}}})][ (#VAR{acsAudioSepStyle,#VAR{acsRubnavBordStyle,solid}})][ (#VAR{acsAudioSepColor,#VAR{acsRubnavSepColor,#efefef}})];
   margin-bottom: 4px;
 }
 
@@ -135,35 +135,35 @@
 
 .playlist .track_status, .playlist .playliste .track_status  {
   font-size: 8px;
-  color: #CONFIG{acsAudioTrackStatus,00afdf};
+  color: #VAR{acsAudioTrackStatus,00afdf};
 }
 
 .playlist .playliste li, .playlist .playliste li .play_ {
-  border-top: [(#CONFIG{acsAudioSepLargeur,#CONFIG{acsAudioBordLargeur,#CONFIG{acsRubnavBordLargeur,#CONFIG{acsFondBordLargeur,1px}}}})][ (#CONFIG{acsAudioSepStyle,#CONFIG{acsRubnavBordStyle,solid}})][ (#CONFIG{acsAudioSepColor,#CONFIG{acsRubnavSepColor,#efefef}})];
+  border-top: [(#VAR{acsAudioSepLargeur,#VAR{acsAudioBordLargeur,#VAR{acsRubnavBordLargeur,#VAR{acsFondBordLargeur,1px}}}})][ (#VAR{acsAudioSepStyle,#VAR{acsRubnavBordStyle,solid}})][ (#VAR{acsAudioSepColor,#VAR{acsRubnavSepColor,#efefef}})];
 }
 
 .playlist .playliste li.over {
-  background: #CONFIG{acsAudioMp3hover,#af8f00};
+  background: #VAR{acsAudioMp3hover,#af8f00};
 }
 
 .playlist .playliste li.play_on {
-  background: #CONFIG{acsAudioMp3on,#4422aa};
+  background: #VAR{acsAudioMp3on,#4422aa};
 }
 
 .playlist .playliste a.article {
-  color: #CONFIG{acsAudioArticleColor,#080};
+  color: #VAR{acsAudioArticleColor,#080};
 }
 
 .playlist .playliste a.article:hover {
-  color: #CONFIG{acsAudioArticleColorHover,#808};
+  color: #VAR{acsAudioArticleColorHover,#808};
 }
 
 .playlist .playliste a.podcast {
   font-size: 0.65em;
   padding:2px;
-  color: #CONFIG{acsAudioPodcastColor,#f40};
+  color: #VAR{acsAudioPodcastColor,#f40};
 }
 
 .playlist .playliste a.podcast:hover {
-  color: #CONFIG{acsAudioPodcastColorHover,#008};
+  color: #VAR{acsAudioPodcastColorHover,#008};
 }

@@ -22,7 +22,7 @@
 
 <B_rubriques2>
   <div class="cbloc rubriques">
-    [(#CONFIG{acsRubnavTitre}|=={oui}|?{' '})<div class="menu-titre"><:rubriques:></div>]
+    [(#VAR{acsRubnavTitre}|=={oui}|?{' '})<div class="menu-titre"><:rubriques:></div>]
     <ul>
       <BOUCLE_rubriques2(RUBRIQUES) {racine} {par num titre, titre}{titre_mot=_Group2}{doublons}>
         <li class="menu-item" [id="rubmenu(#EXPOSE)"]><BOUCLE_test_sousrub2(RUBRIQUES){id_parent}{0,1}>[(#SET{AFILLES,oui})]</BOUCLE_test_sousrub2>
@@ -48,18 +48,18 @@
 <BOUCLE_rubriques_ours(RUBRIQUES) {racine} {titre_mot=_Ours} {doublons}></BOUCLE_rubriques_ours>[(#REM) On exclut les rubriques ayant le mot-clé "_Ours" ]
 <B_rubriques>
 	<div class="cbloc rubriques">
-		[(#CONFIG{acsRubnavTitre}|=={oui}|?{' '})<div class="menu-titre"><a href="?page=plan" title="<:acs:onglets__plan:>"><:rubriques:></a></div>]
+		[(#VAR{acsRubnavTitre}|=={oui}|?{' '})<div class="menu-titre"><a href="?page=plan" title="<:acs:onglets__plan:>"><:rubriques:></a></div>]
 		<ul>
 			<BOUCLE_rubriques(RUBRIQUES) {racine} {par num titre, titre}{doublons}>
 				<li class="menu-item" [id="rubmenu(#EXPOSE)"]><BOUCLE_test_sousrub(RUBRIQUES){id_parent}{0,1}>[(#SET{AFILLES,oui})]</BOUCLE_test_sousrub>
-            [(#SET{IMG,composants/rubnav/images/deplier[(#EXPOSE|?{bas,haut})].gif})][(#GET{AFILLES}|?{' '})<a href="#URL_RUBRIQUE"><img src="#CHEMIN{#GET{IMG}}" class="deplierub" alt="+" title="<:info_deplier:>" onmouseover='this.src="#CHEMIN{composants/rubnav/images/deplierhauton.gif}"' onmouseout='this.src="#CHEMIN{#GET{IMG}}"' align="right" /></a>][(#SET{AFILLES, ""})]<a id="rub#ID_RUBRIQUE" href="#URL_RUBRIQUE"[ class="(#EXPOSE)"] title="[(#DESCRIPTIF|textebrut|couper{80}|sans_guillemets)]">[(#TITRE|supprimer_numero|couper{80})]</a>
+            [(#SET{IMG,composants/rubnav/images/deplier[(#EXPOSE|?{bas,haut})].gif})][(#GET{AFILLES}|?{' '})<a href="#URL_RUBRIQUE"><img src="#CHEMIN{#GET{IMG}}" class="deplierub" alt="+" title="<:info_deplier:>" onmouseover='this.src="#CHEMIN{composants/rubnav/images/deplierhauton.gif}"' onmouseout='this.src="#CHEMIN{#GET{IMG}}"' align="right" /></a>][(#SET{AFILLES, ""})]<a id="rub#ID_RUBRIQUE" href="#URL_RUBRIQUE" title="[(#DESCRIPTIF|textebrut|couper{80}|sans_guillemets)]" class="ajax[ (#EXPOSE)] ">[(#TITRE|supprimer_numero|couper{80})]</a>
           <B_sous_rubriques>
 						<ul[ class="(#EXPOSE|?{'',#GET{HIDDEN}})"]>
 							<BOUCLE_sous_rubriques(RUBRIQUES) {id_parent} {par num titre, titre}><BOUCLE_test_expose(RUBRIQUES){id_enfant}>#EXPOSE{' '}</BOUCLE_test_expose>
 							<li class="menu-item"><BOUCLE_test_soussousrub(RUBRIQUES){id_parent}{0,1}>[(#SET{AFILLES,oui})]</BOUCLE_test_soussousrub>
                   [(#SET{IMG,composants/rubnav/images/deplier[(#EXPOSE|?{bas,haut})].gif})][(#GET{AFILLES}|?{' '})<a href="#URL_RUBRIQUE"><img src="#CHEMIN{#GET{IMG}}" class="deplierub" alt="+" title="<:info_deplier:>" onmouseover='this.src="#CHEMIN{composants/rubnav/images/deplierhauton.gif}"' onmouseout='this.src="#CHEMIN{#GET{IMG}}"' align="right" /></a>][(#SET{AFILLES, ""})]<a id="rub#ID_RUBRIQUE" href="#URL_RUBRIQUE"[ class="(#EXPOSE)"] title="[(#DESCRIPTIF|textebrut|couper{80}|sans_guillemets)]">[(#TITRE|supprimer_numero|couper{80})]</a><BOUCLE_re(BOUCLE_sous_rubriques)></BOUCLE_re></li>
                   </B_test_expose>[(#SET{HIDDEN,hidden})]
-                      <li class="menu-item"><BOUCLE_test_soussousrubjs(RUBRIQUES){id_parent}{0,1}>[(#SET{AFILLES,oui})]</BOUCLE_test_soussousrubjs>[(#GET{AFILLES}|?{' '})<a href="#URL_RUBRIQUE"><img src="#CHEMIN{#GET{IMG}}" class="deplierub" alt="+" title="<:info_deplier:>" onmouseover='this.src="#CHEMIN{composants/rubnav/images/deplierhauton.gif}"' onmouseout='this.src="#CHEMIN{#GET{IMG}}"' align="right" /></a>][(#SET{AFILLES, ""})]<a id="rub#ID_RUBRIQUE" href="#URL_RUBRIQUE" title="[(#DESCRIPTIF|textebrut|couper{80}|sans_guillemets)]">[(#TITRE|supprimer_numero|couper{80})]</a><BOUCLE_rehidden(BOUCLE_sous_rubriques)></BOUCLE_rehidden></li>
+                      <li class="menu-item"><BOUCLE_test_soussousrubjs(RUBRIQUES){id_parent}{0,1}>[(#SET{AFILLES,oui})]</BOUCLE_test_soussousrubjs>[(#GET{AFILLES}|?{' '})<a href="#URL_RUBRIQUE"><img src="#CHEMIN{#GET{IMG}}" class="deplierub" alt="+" title="<:info_deplier:>" onmouseover='this.src="#CHEMIN{composants/rubnav/images/deplierhauton.gif}"' onmouseout='this.src="#CHEMIN{#GET{IMG}}"' align="right" /></a>][(#SET{AFILLES, ""})]<a id="rub#ID_RUBRIQUE" href="#URL_RUBRIQUE" title="[(#DESCRIPTIF|textebrut|couper{80}|sans_guillemets)]" class="ajax">[(#TITRE|supprimer_numero|couper{80})]</a><BOUCLE_rehidden(BOUCLE_sous_rubriques)></BOUCLE_rehidden></li>
                   <//B_test_expose>
 							</BOUCLE_sous_rubriques>
             </ul>

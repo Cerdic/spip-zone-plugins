@@ -1,22 +1,22 @@
 #CACHE{0}
 
 .tags {
-  [border-width: (#CONFIG{acsTagsBordLargeur,#CONFIG{acsRubnavBordLargeur}});]
-  [border-style: (#CONFIG{acsTagsBordStyle,#CONFIG{acsRubnavBordStyle}});]
-  [border-color: (#CONFIG{acsTagsBordColor,#CONFIG{acsRubnavBordColor}});]
-  [background: (#CONFIG{acsTagsFond,#CONFIG{acsRubnavFond}});]
+  [border-width: (#VAR{acsTagsBordWidth});]
+  [border-style: (#VAR{acsTagsBordStyle});]
+  [border-color: (#VAR{acsTagsBordColor});]
+  [background: (#VAR{acsTagsFond});]
   -moz-border-radius: 5px;
 }
 
 .tags .text {
-  text-align : #CONFIG{acsTagsAlign,center};
+  text-align : #VAR{acsTagsAlign,center};
   padding : 5px;
   overflow: hidden;
 }
 
 .tags .menu-titre {
-  [background: (#CONFIG{acsTagsTitreFond})[ url([(#ACS_CHEMIN)]img/trame/(#CONFIG{acsTagsTitreFondImage})) repeat top left];]
-  [border-bottom: 1px solid (#CONFIG{acsTagsSep});]
+  [background: (#VAR{acsTagsTitreFond})[ url("(#ACS_CHEMIN{img/trame/#VAR{acsTagsTitreFondImage}})") repeat top left];]
+  [border-bottom: 1px solid (#VAR{acsTagsSep});]
 
   -moz-border-radius: 5px;
   -moz-border-radius-bottomleft: 0;

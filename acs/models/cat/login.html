@@ -23,7 +23,7 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 	</div><!-- fin colonne1 (navigation) -->
 [(#REM) Colonne 2 ]
 <div id="colonne2"><div class="spacer"></div>
-  [(#CONFIG{acsOngletsUse}|!={non}|?{' '}) <INCLURE{fond=composants/onglets/onglets}{current=login}{env=#ENV}>
+  [(#VAR{acsOngletsUse}|!={non}|?{' '}) <INCLURE{fond=composants/onglets/onglets}{current=login}{env=#ENV}>
    <div id="onglet">]
    
     <div style="text-align: center; width: 400px; margin: 0 auto; padding: 3em 0;">
@@ -47,7 +47,7 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 	</div>
     </div>
     <br />
-	[(#CONFIG{acsOngletsUse}|!={non}|?{' '}) </div>][(#REM) fin onglet]
+	[(#VAR{acsOngletsUse}|!={non}|?{' '}) </div>][(#REM) fin onglet]
 </div>[(#REM) fin colonne2]
 <INCLURE{fond=composants/fond/pied}{self=#SELF}{env=#ENV}>[(#REM) Pied de page ]
 

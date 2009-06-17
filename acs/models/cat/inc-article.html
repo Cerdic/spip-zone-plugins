@@ -31,12 +31,12 @@ Si le plugin notation est présent, il est intégré.
 	 [(#REM) Colonne 2 ]
 	 <div id="colonne2"><div class="spacer"></div>
 			[(#REM) Contenu principal : derniers articles publies ]
-				[(#CONFIG{acsOngletsUse}|!={non}|?{' '}) <INCLURE{fond=composants/onglets/onglets}{current=article}{env=#ENV}>
+				[(#VAR{acsOngletsUse}|!={non}|?{' '}) <INCLURE{fond=composants/onglets/onglets}{current=article}{env=#ENV}>
 				 <div id="onglet">]
 
 				 [(#REM) Fil d'Ariane ]
 				 <span id="hierarchie" style="float: left"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_article}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero|couper{80})]</a></BOUCLE_ariane>[ &gt; (#TITRE|supprimer_numero|couper{80})]</span>
-				<span class="texte_nav" style="float: right">[(#CONFIG{acsArticlesDates}|=={oui}|?{[(#DATE_REDAC|?{[(#DATE_REDAC|nom_jour) ][(#DATE_REDAC|affdate)], [(#DATE|nom_jour) ][(#DATE|affdate)]})]})][(#CONFIG{acsArticlesAut}=={oui}?{[, <:par_auteur:> (#LESAUTEURS)]})]</span>
+				<span class="texte_nav" style="float: right">[(#VAR{acsArticlesDates}|=={oui}|?{[(#DATE_REDAC|?{[(#DATE_REDAC|nom_jour) ][(#DATE_REDAC|affdate)], [(#DATE|nom_jour) ][(#DATE|affdate)]})]})][(#VAR{acsArticlesAut}=={oui}?{[, <:par_auteur:> (#LESAUTEURS)]})]</span>
 				<br class="nettoyeur" />
 
 				<div class="contre-encart">
@@ -98,24 +98,26 @@ Si le plugin notation est présent, il est intégré.
 
 				 [<div class="notes"><h2><:info_notes:></h2>#DEBUT_SURLIGNE(#NOTES)#FIN_SURLIGNE</div>]
          <div class="texte">
-  				 [(#CONFIG{acsArticlesStats}|=={oui}|?{[(#CONFIG{activer_statistiques}|=={oui}|?{' '}) <div style="font-size:75%; padding-right: 5px;" align="right">[Lu par (#VISITES) personnes depuis le ] [(#DATE|nom_jour)] [(#DATE|jour)] [(#DATE|nom_mois)] [(#DATE|annee)]</div>]})]
-  
-  				 [(#REM) Petition : la petition ayant une PAGINATION il faut absolument lui passer SELF]
-  				 [(#PETITION|?{' '}) <INCLURE{fond=inc-petition}{env=#ENV}{id_article}{self=#SELF}>]
-  					<br class="nettoyeur" />
-  				  [(#EVAL{defined('_DIR_PLUGIN_NOTATION')}|?{' '}) #FORMULAIRE_NOTATION]
+[(#VAR{acsArticlesStats}|=={oui}|?{[(#CONFIG{activer_statistiques}|=={oui}|?{' '}) <div style="font-size:75%; padding-right: 5px;" align="right">[Lu par (#VISITES) personnes depuis le ] [(#DATE|nom_jour)] [(#DATE|jour)] [(#DATE|nom_mois)] [(#DATE|annee)]</div>]})]
 
-  				 [(#REM) Forum de l'article ]
-  					[(#STATUT|=={refuse}|?{' ', ''})
-              <a href="" class="refus">Article refusé</a>
-              <a href="#forum" name="forum" id="forum"></a><span class="texte_nav" style="float: right"><a href="#URL_ARTICLE&ouvrir=oui"><small><:lire_tous_les_messages:></small></a></span><INCLURE{fond=composants/forums/forum}{id_article}{ouvrir=#OUVRIR}{debut_forums}{statut=prive}>
-            ]
-  					[(#STATUT|=={publie}|?{' ', ''})
-              [(#FORMULAIRE_FORUM)]
-  						<a href="#forum" name="forum" id="forum"></a><span class="texte_nav" style="float: right"><a href="#URL_ARTICLE&ouvrir=oui"><small><:lire_tous_les_messages:></small></a></span><INCLURE{fond=composants/forums/forum}{id_article}{ouvrir=#OUVRIR}{debut_forums}>
-  					]
+[(#PLUGIN{recommander}|?{' '})#RECOMMANDER{#TITRE,#URL_ARTICLE,#INTRODUCTION}] 
+
+[(#REM) Petition : la petition ayant une PAGINATION il faut absolument lui passer SELF]
+[(#PETITION|?{' '}) <INCLURE{fond=inc-petition}{env=#ENV}{id_article}{self=#SELF}>]
+<br class="nettoyeur" />
+[(#EVAL{defined('_DIR_PLUGIN_NOTATION')}|?{' '}) #FORMULAIRE_NOTATION]
+
+[(#REM) Forum de l'article ]
+[(#STATUT|=={refuse}|?{' ', ''})
+      <a href="" class="refus">Article refusé</a>
+      <a href="#forum" name="forum" id="forum"></a><span class="texte_nav" style="float: right"><a href="#URL_ARTICLE&ouvrir=oui"><small><:lire_tous_les_messages:></small></a></span><INCLURE{fond=composants/forums/forum}{id_article}{ouvrir=#OUVRIR}{debut_forums}{statut=prive}>
+]
+[(#STATUT|=={publie}|?{' ', ''})
+  [(#FORMULAIRE_FORUM)]
+  <a href="#forum" name="forum" id="forum"></a><span class="texte_nav" style="float: right"><a href="#URL_ARTICLE&ouvrir=oui"><small><:lire_tous_les_messages:></small></a></span><INCLURE{fond=composants/forums/forum}{id_article}{ouvrir=#OUVRIR}{debut_forums}>
+]
           </div>
-					[(#CONFIG{acsOngletsUse}|!={non}|?{' '}) </div>][(#REM) fin onglet]
+					[(#VAR{acsOngletsUse}|!={non}|?{' '}) </div>][(#REM) fin onglet]
 				</div>[(#REM) fin colonne2]
 <div id="colonne3"><div class="spacer"></div>[(#REM) colonne 3 configurable ]
 	<INCLURE{fond=composants/module/module}{self=#SELF}{env=#ENV}{nic=25}{id_article}>

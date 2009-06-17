@@ -11,8 +11,7 @@ include_spip('lib/composant/pages_liste');
 
 /**
  * Analyse une page
- * Retourne un tableau des variables ACS, des balises
- * et des inclusions de la page $pg
+ * Retourne un tableau des variables ACS, des balise et des inclusions
  */
 function analyse_page($page, $mode_source) {
   // Construit regexp pour chercher les variables de composants

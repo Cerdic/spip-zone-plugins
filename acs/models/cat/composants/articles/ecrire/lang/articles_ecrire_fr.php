@@ -14,7 +14,7 @@ _ide, _aut, ou _adm aux visiteurs enregistrés, aux rédacteurs, et aux administ
  Les 3 derniers articles de la rubrique avec le mot-cl&eacute; "Communiques" s\'affichent à la Une avant la liste des derniers articles publi&eacute;s.',
 
 'TitresFondColor' => 'Fond titres',
-'BordColor' => 'Bord sup&eacute;rieur',
+'Bord' => 'Bord sup&eacute;rieur',
 'MargeBas' => 'Marge inf&eacute;rieure',
 'NbLettres' => 'Nb de lettres avant coupure',
 'LogoTailleMax' => 'Taille maxi du logo',

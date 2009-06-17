@@ -15,8 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'TrackStatus' => 'Infos piste',
 
 'FondColor' => 'Fond',
-'TitreColor' => 'Fond titre',
-'BordColor' => 'Bordure',
+'TitreFond' => 'Titre',
 'ArticleColor' => 'Lien vers l\'article',
 'ArticleColorHover' => 'au survol',
 'PodcastColor' => 'Lien podcast',

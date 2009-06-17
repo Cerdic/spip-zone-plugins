@@ -14,7 +14,7 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
   <INCLURE{fond=composants/module/module}{self=#SELF}{env=#ENV}{nic=21}>
 </div>[(#REM) fin colonne1 (navigation) ]
 <div id="colonne2"><div class="spacer"></div>[(#REM) Colonne 2 ]
-  [(#CONFIG{acsOngletsUse}|!={non}|?{' '}) <INCLURE{fond=composants/onglets/onglets}{current=proposes}{env=#ENV}>
+  [(#VAR{acsOngletsUse}|!={non}|?{' '}) <INCLURE{fond=composants/onglets/onglets}{current=proposes}{env=#ENV}>
   <div id="onglet">]
     [(#REM) Fil d'Ariane ]
     <span id="hierarchie" style="float: left"><a href="#URL_SITE_SPIP"><:accueil_site:></a> > articles proposés</span>
@@ -22,6 +22,6 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
     <br class="nettoyeur" />
     [(#REM) Contenu principal : derniers articles publies ]
     <INCLURE{fond=composants/articles/boucle-articles-proposes}{debut_articles_pas_notes}{debut_articles_mal_notes}>
-	[(#CONFIG{acsOngletsUse}|!={non}|?{' '}) </div>][(#REM) fin onglet]
+	[(#VAR{acsOngletsUse}|!={non}|?{' '}) </div>][(#REM) fin onglet]
 </div>[(#REM) fin colonne2]
 <INCLURE{fond=composants/fond/pied}{self=#SELF}{env=#ENV}>[(#REM) Pied de page ]

@@ -3,11 +3,11 @@ Feuille de style Agenda, par Daniel Faivre, 2007-2009
 ]
 .agenda-mini {
   font-size: 11px;
-  color: #CONFIG{acsFondText,#000};
-  [background: (#CONFIG{acsAgendaThisMonth, #CONFIG{acsFondColor}});]
-  [border-width: (#CONFIG{acsAgendaBordLargeur,#CONFIG{acsRubnavBordLargeur}});]
-  [border-style: (#CONFIG{acsAgendaBordStyle,#CONFIG{acsRubnavBordStyle}});]
-  [border-color: (#CONFIG{acsAgendaBordColor,#CONFIG{acsRubnavBordColor}});]
+  color: #VAR{acsFondText,#000};
+  [background: (#VAR{acsAgendaThisMonth, #VAR{acsFondColor}});]
+  [border-width: (#VAR{acsAgendaBordWidth});]
+  [border-style: (#VAR{acsAgendaBordStyle});]
+  [border-color: (#VAR{acsAgendaBordColor});]
   text-align:center;
   font-style:normal;
 }
@@ -17,36 +17,36 @@ Feuille de style Agenda, par Daniel Faivre, 2007-2009
 }
 
 .agenda-mini .menu-titre {
-  [background: (#CONFIG{acsAgendaTitreFondColor})[ url([(#ACS_CHEMIN)]img/trame/(#CONFIG{acsAgendaTitreFondImage,#CONFIG{acsRubnavTitreFondImage}})) repeat top right];]
-  [border-bottom: 1px solid (#CONFIG{acsRubnavSep});]
+  [background: (#VAR{acsAgendaTitreFondColor})[ url("(#ACS_CHEMIN{img/trame/#VAR{acsAgendaTitreFondImage}})") repeat top left];]  
+  [border-bottom: 1px solid (#VAR{acsRubnavSep});]
 }
 
 .calendar_head_mini {
-  background: #CONFIG{acsAgendaHeadFondColor,#CONFIG{acsRubnavFondColor}};
+  background: #VAR{acsAgendaHeadFondColor,#VAR{acsRubnavFondColor}};
   text-align: center;
   font-size: 10px;
-  color: #CONFIG{acsFondText,000};
+  color: #VAR{acsFondText,000};
   font-family: Verdana, Arial, Helvatica, sans-serif;
   font-style:normal;
 }
 
 .calendar_not_this_month {
-  [background: (#CONFIG{acsAgendaNotThisMonth,#CONFIG{acsRubnavFondColorHover}});]
+  [background: (#VAR{acsAgendaNotThisMonth,#VAR{acsRubnavFondColorHover}});]
   color:#aaa;
 }
 
 .calendar_this_month {
   padding: 2px;
-  [background: (#CONFIG{acsAgendaThisMonth,#CONFIG{acsFondColor}});]
+  [background: (#VAR{acsAgendaThisMonth,#VAR{acsFondColor}});]
   color:#aaa;
 }
 
 .calendar_this_day a {
   text-align: center;
-  [background: (#CONFIG{acsAgendaThisDay});]
+  [background: (#VAR{acsAgendaThisDay});]
   font-weight:bold;
   font-style: italic;
-  border: 1px solid #CONFIG{acsFondLink};
+  border: 1px solid #VAR{acsFondLink};
   -moz-border-radius: 5px;
   padding: 2px;
   padding-bottom: 0;
@@ -63,18 +63,18 @@ display: none;
 z-index : 999;
 padding: 0;
 margin: 0;
-border: [(#CONFIG{acsAgendaBordLargeur,1px})][ (#CONFIG{acsAgendaBordStyle,ridge})][ (#CONFIG{acsAgendaBordColor})];
+border: [(#VAR{acsAgendaBordWidth,1px})][ (#VAR{acsAgendaBordStyle,ridge})][ (#VAR{acsAgendaBordColor})];
 font-size: 8pt;
 line-height:normal;
 text-align: #LANG_LEFT;
 }
 
 .bulle .publie:hover, .bulle .modifie:hover{
-  [background: (#CONFIG{acsAgendaBulleSurvol});]
+  [background: (#VAR{acsAgendaBulleSurvol});]
 }
 
 .bulle .publie a, .bulle .modifie a, .bulle .breve a {
-  color: #CONFIG{acsFondLink, #df0000};
+  color: #VAR{acsFondLink, #df0000};
 	font-weight: normal;
 	display: block;
 	width: 100%;
@@ -85,16 +85,16 @@ text-align: #LANG_LEFT;
   -moz-border-radius: 0;
 }
 .bulle .publie a{
-  [background: (#CONFIG{acsAgendaBulleFondColor,#ffffef});]
+  [background: (#VAR{acsAgendaBulleFondColor,#ffffef});]
 }
 .bulle .modifie a {
-  [background: (#CONFIG{acsAgendaBulleArticleModifieFondColor,#dfffef});]
+  [background: (#VAR{acsAgendaBulleArticleModifieFondColor,#dfffef});]
 }
 .bulle .breve a{
-  [background: (#CONFIG{acsAgendaBulleBreveFondColor,#dfefef});]
+  [background: (#VAR{acsAgendaBulleBreveFondColor,#dfefef});]
 }
 .bulle .publie a:hover, .bulle .modifie a:hover, .bulle .breve a:hover {
-  color: #CONFIG{acsFondLinkHover, #df0000};
-  [background: (#CONFIG{acsAgendaBulleSurvol});] display: block; width: 100%;
+  color: #VAR{acsFondLinkHover, #df0000};
+  [background: (#VAR{acsAgendaBulleSurvol});] display: block; width: 100%;
 }
 
