@@ -20,7 +20,7 @@ $def = array(
 	'acsAgendaThisMonth' => '=acsRubnavFond', 
 	'acsArticlesUse' => 'oui',
 	'acsArticlesTabBordColor' => '#cfcfcf',
-	'acsArticlesTabBordLargeur' => 'thin',
+	'acsArticlesTabBordWidth' => 'thin',
 	'acsArticlesTabBordStyle' => 'solid',
 	'acsArticlesTabFirst' => '#dfe5ef',
 	'acsArticlesTabOdd' => '#e4dfef',

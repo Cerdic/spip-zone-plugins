@@ -13,15 +13,15 @@ fieldset.a_la_une {
   border: 0;
   [color: (#VAR{acsBandeauTextColor,#VAR{acsFondText}});]
   [background: #(#VAR{acsBandeauFond}) repeat;]
-  [border-top: #VAR{acsBandeauBordLargeur,thin}[ (#VAR{acsBandeauBordStyle,groove}) ](#VAR{acsBandeauBordHaut});]
-  [border-bottom: #VAR{acsBandeauBordLargeur,thin}[ (#VAR{acsBandeauBordStyle,groove}) ](#VAR{acsBandeauBordBas});]
+  [border-top: #VAR{acsBandeauBordWidth,thin}[ (#VAR{acsBandeauBordStyle,groove}) ](#VAR{acsBandeauBordColor});]
+  [border-bottom: #VAR{acsBandeauBordWidth,thin}[ (#VAR{acsBandeauBordStyle,groove}) ](#VAR{acsBandeauBordBas});]
   [text-align: (#VAR{acsBandeauAlignement,center});]
   margin-top: -0.8em;
 }
 
 fieldset.a_la_une legend {
   position: relative;
-  [border: #VAR{acsBandeauBordLargeur,thin}[ (#VAR{acsBandeauBordStyle,groove}) ](#VAR{acsBandeauBordHautCouleur});
+  [border: #VAR{acsBandeauBordWidth,thin}[ (#VAR{acsBandeauBordStyle,groove}) ](#VAR{acsBandeauBordColor});
   border-bottom: 0;
   ]
   font-weight: normal;

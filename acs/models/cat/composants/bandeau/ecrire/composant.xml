@@ -20,22 +20,12 @@
     <type>color</type>
   </variable>
   <variable>
-    <nom>BordHaut</nom>
-    <type>color</type>
+    <nom>Bord</nom>
+    <type>bord</type>
   </variable>
   <variable>
     <nom>BordBas</nom>
     <type>color</type>
-  </variable>
-  <variable>
-    <nom>BordLargeur</nom>
-    <type>largeurbord</type>
-    <label>non</label>
-  </variable>
-  <variable>
-    <nom>BordStyle</nom>
-    <type>stylebord</type>
-    <label>non</label>
   </variable>
 
   <variable>

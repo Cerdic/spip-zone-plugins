@@ -12,21 +12,8 @@
   </param>
 
   <variable>
-    <nom>BordColor</nom>
-    <type>color</type>
-    <valeur>acsRubnavBordColor</valeur>
-  </variable>
-  <variable>
-    <nom>BordLargeur</nom>
-    <type>largeurbord</type>
-    <valeur>acsRubnavBordLargeur</valeur>
-    <label>non</label>
-  </variable>
-  <variable>
-    <nom>BordStyle</nom>
-    <type>stylebord</type>
-    <label>non</label>
-    <valeur>acsRubnavBordStyle</valeur>
+    <nom>Bord</nom>
+    <type>bord</type>
   </variable>
 
 </composant>
