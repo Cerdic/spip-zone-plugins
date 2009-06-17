@@ -72,25 +72,43 @@ function traite_contenu_jeu($texte, $id_jeu) {
 	return propre(str_replace('</jeux>', "[config]id_jeu=$id_jeu</jeux>", $texte));
 }
 
-// renvoie le titre du jeu que l'on peut trouver grace au separateur [titre]
+// renvoie le titre public du jeu que l'on peut trouver grace au separateur [titre]
 function titre_jeu($texte) {
 	include_spip('jeux_utils');
 	return jeux_trouver_titre_public($texte);
 }
 
+/* Quelques balises "raccourcis" */
+
+// extraction du titre public, equivalent a : #CONTENU*|titre_jeu
 function balise_TITRE_PUBLIC_dist($p) {
 	$texte = champ_sql('contenu', $p);
 	$p->code = "titre_jeu($texte)";
 	return $p;
 }
-/*
+
+// interpretation du jeu, equivalent a : #CONTENU*|traite_contenu_jeu{#ID_JEU}
 function balise_CONTENU_PROPRE_dist($p) {
 	$id = champ_sql('id_jeu', $p);
 	$texte = champ_sql('contenu', $p);
 	$p->code = "traite_contenu_jeu($texte, $id)";
 	return $p;
 }
-*/
+
+// traduction longue du type de resultat
+function balise_TYPE_RESULTAT_LONG_dist($p) {
+	$type = champ_sql('type_resultat', $p);
+	$p->code = "_T('jeux:resultat2_'.$type)";
+	return $p;
+}
+
+// traduction courte du type de resultat
+function balise_TYPE_RESULTAT_COURT_dist($p) {
+	$type = champ_sql('type_resultat', $p);
+	$p->code = "_T('jeux:resultat_'.$type)";
+	return $p;
+}
+
 include_spip('public/interfaces');
 global $table_des_traitements;
 // TITRE_PUBLIC est un TITRE :

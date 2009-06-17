@@ -4,6 +4,8 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+'alphabet' =>	"ABCDEFGHIJKLMNOPQRSTUVWXYZ-",
+'aucun_jeu'	=> 'Kein Spiel',
 'votre_choix'    => "Ihre Wahl: ",
 'votre_reponse' => "Ihre Antwort: ",
 'corriger'        => "Korrigieren",
