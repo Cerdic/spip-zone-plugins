@@ -25,8 +25,8 @@ td.fiche {
 
 /*ici on règle le rouge du table header */
 table.tablesorter thead tr .header {
-	background-color: #DA0000; 
-	background-image: url("./plugins/auto/tablesorter/images/bg.png");
+	background-color: none; 
+	background-image: url("http://cfdtparis.com/plugins/auto/tablesorter/images/bg.gif");
 	background-repeat: no-repeat;
 	background-position: center right;
 	cursor: pointer;
@@ -57,10 +57,10 @@ table.tablesorter thead tr .headerSortUp {
 	color: #FFFFFF;
 }
 table.tablesorter thead tr .headerSortUp {
-	background-image: url("./plugins/auto/tablesorter/images/asc.png");
+	background-image: url("../../tablesorter/images/asc.gif");
 }
 table.tablesorter thead tr .headerSortDown {
-	background-image: url("./plugins/auto/tablesorter/images/desc.png");
+	background-image: url("http://cfdtparis.com/plugins/auto/tablesorter/images/desc.gif");
 }
 .pager {
 	clear:both;

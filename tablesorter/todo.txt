@@ -1,8 +1,7 @@
 
 A faire pour ce plugin
 
-toutes les apges du site auront (ou alors seulement les pages de class"tablesorter" ?)
-à voir
+toutes les pages du site auront (ou alors seulement les pages de class"tablesorter" ? à voir) 
 
 toutes les pages auront, donc :
 - dans le head :
