@@ -70,7 +70,8 @@
     
     // Store ananymous function in variable since it's used twice.
     var showPicker = function() {
-      $tpDiv.show(); // Show picker.
+			var elmOffset = $(elm).offset();
+			$tpDiv.css({'top':elmOffset.top, 'left':elmOffset.left}).show(); // Show picker.
       $tpDiv.mouseover(function() { // Have to use mouseover instead of mousedown because of Opera
         tpOver = true;
       }).mouseout(function() {
