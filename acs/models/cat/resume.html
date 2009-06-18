@@ -11,7 +11,7 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 [(#SET{mdescription,<:acs:entete_meta_page_resume:>[ (#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)]})]
 <INCLURE{fond=composants/fond/entete}{page=resume}{title=<:acs:fond_meta_page_resume:>}{mkeywords=#EVAL{'_T("acs:fond_meta_page_resume").","._T("acs:fond_meta_keywords")'}}{mdescription=#GET{mdescription}}{mabstract=<:acs:fond_meta_page_resume:>}>
 <div id="colonne1"><div class="spacer"></div>[(#REM) Menu de navigation laterale (colonne 1)]
-  <INCLURE{fond=composants/module/module}{self=#SELF}{env=#ENV}{nic=22}>
+  <INCLURE{fond=composants/module/module}{self=#SELF}{env=#ENV}{nic=21}>
 </div>[(#REM) fin colonne1 (navigation) ]
 <div id="colonne2"><div class="spacer"></div>[(#REM) Colonne 2 ]
   [(#REM) Contenu principal : derniers articles publies ]
@@ -25,7 +25,7 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 	[(#VAR{acsOngletsUse}|!={non}|?{' '}) </div>][(#REM) fin onglet]
 </div>[(#REM) fin colonne2]
 <div id="colonne3"><div class="spacer"></div>
-  <INCLURE{fond=composants/module/module}{self=#SELF}{env=#ENV}{nic=26}>
+  <INCLURE{fond=composants/module/module}{self=#SELF}{env=#ENV}{nic=41}>
 </div>[(#REM) fin colonne3 ]
 <INCLURE{fond=composants/fond/pied}{self=#SELF}{env=#ENV}>[(#REM) Pied de page ]
 

@@ -1,0 +1,36 @@
+#CACHE{0}
+
+.auteurs {
+  [border-width: (#VAR{acsAuteursBordWidth});]
+  [border-style: (#VAR  {acsAuteursBordStyle});]
+  [border-color: (#VAR{acsAuteursBordColor});]
+  [background: (#VAR{acsAuteursFond});]
+}
+
+.auteurs .nomauteur {
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow: hidden;
+}
+
+.auteurs .menu-titre {
+  [background: (#VAR{acsAuteursTitreFond})[ url("(#ACS_CHEMIN{img/trame/#VAR{acsAuteursTitreFondImage}})") repeat top left];]
+  [border-bottom: 1px solid (#VAR{acsRubnavSep});]
+}
+
+.auteurs .menu-item {
+  [background: (#VAR{acsRubnavFond});]
+  [border-top: 1px solid (#VAR{acsRubnavSep,#VAR{acsRubnavBordColor}});]
+  text-align: #LANG_LEFT;
+}
+.auteurs .menu-item a {
+  display: block;
+  width: 100%;
+
+}
+[.auteurs .menu-item:hover, .auteurs .menu-item a:hover { background: (#VAR{acsRubnavFondHover});}]
+
+.auteurs .pagination {
+  [background: (#VAR{acsRubnavTitreFond,#VAR{acsFondColor}});]
+  [border-top: 1px solid (#VAR{acsRubnavSep,#VAR{acsRubnavBordColor}});]
+}

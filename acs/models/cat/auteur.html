@@ -13,8 +13,7 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 <INCLURE{fond=composants/fond/entete}{self=#SELF}{env=#ENV}{page=auteur}{title=#GET{title}}{mdescription=#BIO|couper{150}|textebrut}{mkeywords=#GET{mkeywords}}{mauthor=#NOM|textebrut}{mexpires=86400}{mabstract=#GET{mabstract}}{mpublisher=#NOM|textebrut}{mcontributor=#NOM|textebrut}{msubject=#NOM|textebrut}>
 <div id="colonne1"><div class="spacer"></div>[(#REM) Menu de navigation lateral (colonne 1)]
   <div class="mg">[(#REM) Colonne 1 - Menu de navigation par rubriques ]
-    <INCLURE{fond=composants/module/module}{self=#SELF}{env=#ENV}{nic=21}>
-    <INCLURE{fond=composants/auteurs/auteurs}{self=#SELF}{debut_auteurs}{id_auteur}>[(#REM) Autres auteurs ]
+    <INCLURE{fond=composants/module/module}{self=#SELF}{env=#ENV}{nic=24}>
   </div>[(#REM) fin menu ]
 </div>[(#REM) fin colonne1 (navigation)]
 <div id="colonne2"><div class="spacer"></div>[(#REM) Colonne 2 ]
@@ -25,10 +24,10 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
     <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <a href="?page=auteurs"><:info_auteurs:></a>[ &gt; (#NOM|couper{80})]</div>
     <div class="cartouche">
       [(#LOGO_AUTEUR||image_reduire{200,200})]
-      <h1 class="titre">#NOM</h1>
+      <h1 class="titre #EDIT{nom}">#NOM</h1>
       [<p class="soustitre"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
     </div>
-    [<div class="texte">(#BIO)</div><br />]
+    [<div class="texte #EDIT{bio}">(#BIO)</div><br />]
     <B_articles>[(#REM) Articles de l'auteur ]
     <div class="contre-encart">
         <div class="liste-articles">

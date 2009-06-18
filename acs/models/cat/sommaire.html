@@ -14,7 +14,7 @@ Home page
 ][(#SET{mdescription,<:acs:fond_meta_page_sommaire:>[ (#NOM_SITE_SPIP|textebrut)][: (#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)]})]
 <INCLURE{fond=composants/fond/entete}{self=#SELF}{page=sommaire}{title=<:acs:fond_meta_page_sommaire:>}{mkeywords=<:acs:fond_meta_keywords:>,<:acs:fond_sommaire:>}{mdescription=#GET{mdescription}}>
 <div id="colonne1"><div class="spacer"></div>[(#REM) Menu de navigation laterale (colonne 1)]
-  <INCLURE{fond=composants/module/module}{self=#SELF}{env=#ENV}{nic=21}>
+  <INCLURE{fond=composants/module/module}{self=#SELF}{env=#ENV}{nic=20}>
 </div>[(#REM) fin colonne1 (navigation) ]
 <div id="colonne2"><div class="spacer"></div>[(#REM) Colonne 2 ]
   [(#VAR{acsOngletsUse}|!={non}|?{' '}) <INCLURE{fond=composants/onglets/onglets}{current=sommaire}{env=#ENV}>
@@ -27,7 +27,7 @@ Home page
 	[(#VAR{acsOngletsUse}|!={non}|?{' '}) </div>][(#REM) fin onglet]
 </div>[(#REM) fin colonne2]
 <div id="colonne3"><div class="spacer"></div>
-  <INCLURE{fond=composants/module/module}{self=#SELF}{env=#ENV}{nic=25}>
+  <INCLURE{fond=composants/module/module}{self=#SELF}{env=#ENV}{nic=40}>
 </div>[(#REM) Fin colonne3]
 [(#REM) Pied de page ]
 <INCLURE{fond=composants/fond/pied}{self=#SELF}>

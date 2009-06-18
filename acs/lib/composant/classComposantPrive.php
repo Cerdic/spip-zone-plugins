@@ -181,6 +181,7 @@ class AdminComposant {
 					else
 						$nv = $_POST[$posted];
 					ecrire_meta($w, $nv);
+					unset($nv);
 					$updated = true;
 			  }
 			}

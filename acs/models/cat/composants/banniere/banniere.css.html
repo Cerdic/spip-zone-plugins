@@ -4,7 +4,7 @@
   width: 100%;
   text-align: #VAR{acsBanniereAlign,center};
   height: #VAR{acsBanniereHauteur,60px};
-  [background: url('[(#ACS_CHEMIN)]img/fond/(#VAR{acsBanniereImageFond})') repeat-x;]
+  [background: (#VAR{acsBanniereFond})[ url("(#ACS_CHEMIN{img/fond/#VAR{acsBanniereFondImage}})") repeat-x];]
   font-family: [(#VAR{acsBanniereFont}), ]#VAR{acsBanniereFontFamily};
 }
 

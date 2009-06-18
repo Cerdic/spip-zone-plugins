@@ -14,7 +14,7 @@ Page d'une rubrique
 <INCLURE{fond=composants/fond/entete}{env=#ENV}{page=rubrique}{title=#TITRE|textebrut}>
 
 <div id="colonne1"><div class="spacer"></div>[(#REM) Menu de navigation laterale (colonne 1)]
-  <INCLURE{fond=composants/module/module}{nic=21}{self=#SELF}{env=#ENV}{id_rubrique}>
+  <INCLURE{fond=composants/module/module}{nic=26}{self=#SELF}{env=#ENV}{id_rubrique}>
 </div>[(#REM) fin colonne1 (navigation) ]
 
 [(#REM) Colonne 2 ]
@@ -55,7 +55,7 @@ Page d'une rubrique
 	[(#VAR{acsOngletsUse}|!={non}|?{' '}) </div>][(#REM) fin onglet]
 </div>[(#REM) fin colonne2]
 <div id="colonne3"><div class="spacer"></div>
-  <INCLURE{fond=composants/module/module}{nic=26}{self=#SELF}{env=#ENV}{id_rubrique}>
+  <INCLURE{fond=composants/module/module}{nic=46}{self=#SELF}{env=#ENV}{id_rubrique}>
 </div>[(#REM) fin colonne 3]
 
 [(#REM) Pied de page ]

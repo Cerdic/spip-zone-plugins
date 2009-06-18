@@ -2,7 +2,7 @@
 Bloc auteurs, avec pagination.
 Variables: id_auteur (EXPOSE), debut_auteurs (PAGINATION), id_article (auteurs d'un article)
 ]<B_auteurs>#SET{debut_auteurs,#EVAL{$_GET['debut_auteurs']}}
-<div class="cbloc divers auteurs">
+<div class="cbloc auteurs">
   <img id="img_ajax_auteurs" src="#CHEMIN{images/searching.gif}" style="visibility: hidden;" align="#LANG_RIGHT" />
   <h2 class="menu-titre"><a href="?page=auteurs">[(#ID_ARTICLE|=={''}|?{<:info_auteurs:>,<:meme_auteur:>})]</a></h2>
   #ANCRE_PAGINATION
@@ -10,7 +10,7 @@ Variables: id_auteur (EXPOSE), debut_auteurs (PAGINATION), id_article (auteurs d
     <ul>
     <BOUCLE_auteurs(AUTEURS) {par nom} {id_article ?} {pagination #VAR{acsAuteursNb,10}}>
       <li class="menu-item">
-        <a href="#URL_AUTEUR[&debut_auteurs=(#GET{debut_auteurs})]"[ class="(#EXPOSE)"]>[(#NOM|couper{80})]</a>
+        <a href="#URL_AUTEUR[&debut_auteurs=(#GET{debut_auteurs})]"[ class="(#EXPOSE)"]><span class="nomauteur">[(#NOM|couper{80})]</span></a>
         [(#ID_ARTICLE|=={''}|?{'',' '})
             [<div class="menu-item" style="text-align: center"><a href="(#URL_SITE)">#NOM_SITE</a></div>]
             [<div class="menu-item" style="text-align: center">(#BIO)</div>]

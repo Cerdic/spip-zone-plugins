@@ -13,9 +13,14 @@
   </param>
 
   <variable>
-    <nom>ImageFond</nom>
+    <nom>Fond</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>FondImage</nom>
     <type>img</type>
     <chemin>img/fond</chemin>
+    <label>non</label>
   </variable>
   <variable>
     <nom>Image</nom>
@@ -28,7 +33,7 @@
     <option>left</option>
     <option>center</option>
     <option>right</option>
-    <valeur>left</valeur>
+    <valeur>center</valeur>
   </variable>
   <variable>
     <nom>Hauteur</nom>

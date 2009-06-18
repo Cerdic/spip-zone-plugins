@@ -8,7 +8,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'help' => 'A banner measure normally 468x60 pixels. On mouse over, Banner randomly display one of the available image uploaded. Without banner image, website name is displayed instead.',
 
 'Image' => 'Banner',
-'ImageFond' => 'Background',
+'FondImage' => 'Background',
 'Hauteur' => 'Height',
 'Logo' => 'Display website logo',
 'LogoAlign' => _T('acs:align'),
