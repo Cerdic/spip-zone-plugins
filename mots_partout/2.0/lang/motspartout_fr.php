@@ -26,6 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 									   'info_breves' => 'Br&egrave;ves',
 									   'info_rubriques' => 'Rubriques',
 									   'info_syndic' => 'Syndic',
+									   'info_syndic_articles' => 'Articles syndiqu&eacute;s',
 									   'info_auteurs' => 'Auteurs',
 									   'info_documents' => 'Documents',
 									   'info_messages' => 'Messages',
@@ -37,14 +38,23 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 									   'item_mots_cles_association_rubriques' => 'aux rubriques',
 									   'item_mots_cles_association_breves' => 'aux breves',
 									   'item_mots_cles_association_syndic' => 'aux sites syndiqu&eacute;s',
+									   'item_mots_cles_association_syndic_articles' => 'aux articles de sites syndiqu&eacute;s',
+									   'item_mots_cles_association_evenements' => 'aux &eacute;v&eacute;nements',
 
 									   'info_auteurs_lies_mot' => 'Les auteurs li&eacute;s &agrave; ce mot clef',
 
 									  'icone_creation_sous_groupe_mots'=>'Cr&eacute;er un sous groupe de mot-cl&eacute;s',
 									  'choix_mots_clefs'=>'Associer les mots clefs :',
 									  'liste_mots_clefs'=>'Mots clefs d&eacute;j&agrave; associ&eacute;s',
-									  'supprimer_mot_clef'=>'cocher et valider pour supprimer le mot clef'
-										
+									  'supprimer_mot_clef'=>'cocher et valider pour supprimer le mot clef',
+
+									  'libelle_breves'=>"Breves",
+									  'libelle_documents'=>"Documents",
+									  'libelle_messages'=>"Messages",
+									  'libelle_evenements'=>"Evenements",
+									  'libelle_auteurs'=>"Auteurs",
+									  'libelle_groupes_mots'=>"Groupes de mots"
+
 									   );
 
 ?>

@@ -28,18 +28,20 @@ function exec_mots_tous_dist()
 //	$choses= array('articles', 'breves', 'rubriques', 'syndic');
 // - ceux du plugin
 //	include(_DIR_PLUGIN_MOTSPARTOUT."/mots_partout_choses.php");
-	$tables_installees = unserialize(lire_meta('MotsPartout:tables_installees'));
-	
-	if (!$tables_installees){
-	  $tables_installees=array("articles"=>true,"rubriques"=>true,"breves"=>true,"syndic"=>true);
+
+
+  $tables_installees = unserialize(lire_meta('MotsPartout:tables_installees'));
+  if (!$tables_installees){
+	  $tables_installees= array('articles','rubriques','documents','auteurs','syndic','syndic_articles','messages');
+	  /* définition d'un pipeline qu'un autre plugin pourra appeler pour ajouter un type d'objet non spip a gerer dans mots partout */
+	  //$tables_installees = pipeline('motspartout_tables_installes',$tables_installees);
 	  ecrire_meta('MotsPartout:tables_installees',serialize($tables_installees));
-	  ecrire_metas();
 	}
-	
+
 	foreach($tables_installees as $chose => $m) { $choses[]= $chose; }
 ///////////////////
 
-	$conf_mot = intval(_request('conf_mot'));
+		$conf_mot = intval(_request('conf_mot'));
 	$son_groupe = intval(_request('son_groupe'));
 
 	pipeline('exec_init',array('args'=>array('exec'=>'mots_tous'),'data'=>''));
@@ -51,9 +53,20 @@ function exec_mots_tous_dist()
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'mots_tous'),'data'=>''));
 
 	if (autoriser('creer','groupemots')  AND !$conf_mot){
-		$res = icone_horizontale(_T('icone_creation_groupe_mots'), generer_url_ecrire("mots_type","new=oui"), "groupe-mot-24.gif", "creer.gif",false);
+		$out = "";
+		$result = sql_select("*, ".sql_multi ("titre", "$spip_lang"), "spip_groupes_mots", "", "", "multi");
+		while ($row_groupes = sql_fetch($result)) {
+			$id_groupe = $row_groupes['id_groupe'];
+			$titre_groupe = typo($row_groupes['titre']);
+			$out .= "<li><a href='#mots_tous-$id_groupe' onclick='$(\"div.mots_tous\").hide().filter(\"#mots_tous-$id_groupe\").show();return false;'>$titre_groupe</a></li>";
+		}
+		if (strlen($out))
+			$out = "
+			<ul class='raccourcis_rapides'>".$out."</ul>
+			<a href='#' onclick='$(\"div.mots_tous\").show();return false;'>"._T('icone_voir_tous_mots_cles')."</a>";
 
-		echo bloc_des_raccourcis($res);
+		$res = icone_horizontale(_T('icone_creation_groupe_mots'), generer_url_ecrire("mots_type","new=oui"), "groupe-mot-24.gif", "creer.gif",false);
+		echo bloc_des_raccourcis($res . $out);
 	}
 
 
@@ -70,17 +83,12 @@ function exec_mots_tous_dist()
 //
 // On boucle d'abord sur les groupes de mots
 //
-	//YOANN
 	//Modif mots clef arbo
 	//va afficher les groupes et leurs sous groupes de mots clefs
 	mots_partout_arbo_affiche_sous_groupe();
-	//FIN YOANN
 
-	
-	
+
 	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'mots_tous'),'data'=>''));
-
-
 	echo fin_gauche(), fin_page();
 }
 
@@ -91,7 +99,7 @@ function mots_partout_arbo_affiche_sous_groupe($id_groupe=0){
 //cette fonction permet d'afficher recursivement les groupes et leurs sous groupes de mots clefs
     global $conf_mot, $spip_lang, $spip_lang_right, $son_groupe;
     $tables_installees = unserialize(lire_meta('MotsPartout:tables_installees'));
-	foreach($tables_installees as $chose => $m) { $choses[]= $chose; }
+	  foreach($tables_installees as $chose) { $choses[]= $chose; }
 
     $result_groupes = sql_select("*, ".sql_multi ("titre", "$spip_lang"), "spip_groupes_mots", "id_parent=".$id_groupe, "","multi");
 
@@ -103,33 +111,33 @@ function mots_partout_arbo_affiche_sous_groupe($id_groupe=0){
 		$texte = $row_groupes['texte'];
 		$unseul = $row_groupes['unseul'];
 		$obligatoire = $row_groupes['obligatoire'];
+		$tables_liees = $row_groupes['tables_liees'];
+		$acces_minirezo = $row_groupes['minirezo'];
+		$acces_comite = $row_groupes['comite'];
+		$acces_forum = $row_groupes['forum'];
 ///////////////////
 //MODIFICATION
 ///////////////////
-/*		
+/*
 		$articles = $row_groupes['articles'];
 		$breves = $row_groupes['breves'];
 		$rubriques = $row_groupes['rubriques'];
 		$syndic = $row_groupes['syndic'];
 */
 ///////////////////
-		$acces_minirezo = $row_groupes['minirezo'];
-		$acces_comite = $row_groupes['comite'];
-		$acces_forum = $row_groupes['forum'];
 
 		// Afficher le titre du groupe
-		echo "<a id='mots_tous-$id_groupe'></a>";
-
+		echo "<div id='mots_tous-$id_groupe' class='mots_tous'>";
 		echo debut_cadre_enfonce("groupe-mot-24.gif", true, '', $titre_groupe);
-		
+
 		//YOANN
-		//TODO Ajaxiser la partie ouverture et fermeture  ci dessous
+		//TODO Ajaxiser la partie ouverture et fermeture  ci dessous : car sur une grosse arborescence c'est assez lourd
 		if($id_parent==0)
 		{ //on n'aura que pour le premier niveau cette possibilité d'ouverture fermeture
-		echo "<a href=\"javascript:;\" onclick=\"$('#bloc-groupe-$id_groupe').toggle()\" >Ouvrir / Fermer</a>";
-		$aff="";
-		if(_request('id_groupe')!=$id_groupe) $aff="style='display:none;'";
-		echo "<div id='bloc-groupe-$id_groupe' $aff >"; //YOANN fermer ouvrir
+  		echo "<a href=\"javascript:;\" onclick=\"$('#bloc-groupe-$id_groupe').toggle()\" >Ouvrir / Fermer</a>";
+  		$aff="";
+  		if(_request('id_groupe')!=$id_groupe) $aff="style='display:none;'";
+  		echo "<div id='bloc-groupe-$id_groupe' class='mots_tous'' $aff >"; //YOANN fermer ouvrir
 		}
 		//FIN YOANN
 
@@ -150,9 +158,20 @@ function mots_partout_arbo_affiche_sous_groupe($id_groupe=0){
 ///////////////////
 //TODO : documenter syntaxe
 // affichage des cases a cocher
+
 		foreach($choses as $chose) {
 			if ($row_groupes[$chose] == "oui") echo "> "._T('motspartout:info_'.$chose)." &nbsp;&nbsp;";
 		}
+
+		$tables_liees = explode(',',$tables_liees);
+
+		$libelles = array('articles'=>'info_articles_2','breves'=>'info_breves_02','rubriques'=>'info_rubriques','syndic'=>'icone_sites_references');
+		$libelles = pipeline('libelle_association_mots',$libelles);
+
+		foreach($tables_liees as $table)
+			if (strlen($table))
+				$res .= "> " . _T(isset($libelles[$table])?$libelles[$table]:"$table:info_$table") . " &nbsp;&nbsp;";
+
 ///////////////////
 		if ($unseul == "oui" OR $obligatoire == "oui") $res .= "<br />";
 		if ($unseul == "oui") $res .= "> "._T('info_un_mot')." &nbsp;&nbsp;";
@@ -219,13 +238,15 @@ function mots_partout_arbo_affiche_sous_groupe($id_groupe=0){
 			echo "</td></tr></table>";
 		}
 
-		mots_partout_arbo_affiche_sous_groupe($id_groupe); // 
+		mots_partout_arbo_affiche_sous_groupe($id_groupe); //
 
 		if($id_parent==0) echo "</div>"; //YOANN fin du div qui permet de fermer ouvrir un bloc
 
 		echo fin_cadre_enfonce(true);
+		echo "</div>";
 
 	}
+
 
 }
 //FIN YOANN
@@ -266,7 +287,7 @@ function confirmer_mot ($conf_mot, $son_groupe, $total)
 		$texte_lie .= _T('info_nombre_rubriques', array('nb_rubriques' => $nr))." ";
 	}
 */
-$tables_installees = unserialize(lire_meta('MotsPartout:tables_installees'));	
+$tables_installees = unserialize(lire_meta('MotsPartout:tables_installees'));
 	if (!$tables_installees){
 	  $tables_installees=array("articles"=>true,"rubriques"=>true,"breves"=>true,"forum"=>true,"syndic"=>true);
 	  ecrire_meta('MotsPartout:tables_installees',serialize($tables_installees));
@@ -279,7 +300,7 @@ $tables_installees = unserialize(lire_meta('MotsPartout:tables_installees'));
 		$chaine2=substr($chose,0,-1);
 		if ($chose=='syndic') $chaine2='site';
 		elseif ($chose=='breve') $chaine1='une';
-		
+
 		if (($nb[$chose] = intval($nb[$chose])) == 1) {
 			$texte_lie .= _T('info_'.$chaine1.'_'.$chaine2)." ";
 		} else if ($nb[$chose] > 1) {
@@ -297,7 +318,7 @@ $tables_installees = unserialize(lire_meta('MotsPartout:tables_installees'));
 	.  _T('info_oui_suppression_mot_cle')
 	. '</p>'
 	  /* troublant. A refaire avec une visibility
-	 . "<li><b><a href='" 
+	 . "<li><b><a href='"
 	. generer_url_ecrire("mots_tous")
 	. "#editer_mot-$son_groupe"
 	. "'>"

@@ -11,7 +11,7 @@
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
  *    This program is free software; you can redistribute it and/or modify *
- *    it under the terms of the GNU General Public License as published by * 
+ *    it under the terms of the GNU General Public License as published by *
  *    the Free Software Foundation.                                        *
 \***************************************************************************/
 
@@ -26,13 +26,14 @@ if(!function_exists('secureIntArray')){
 		foreach($array as $id) {
 		  $to_return[] = intval($id);
 		}
-	  } 
+	  }
 	  return $to_return;
 	}
 }
 
 // transfert la variable POST d'un tableau (19 => 'avec', 20=>'voir') en 4 tableaux avec=(19) voir=(20)
-function splitArrayIds($array) {
+if(!function_exists("splitArrayIds")){
+  function splitArrayIds($array) {
   $voir = Array();
   $cacher = Array();
   $ajouter = Array();
@@ -42,7 +43,7 @@ function splitArrayIds($array) {
       $id_mot = intval($id_mot);
       if($id_mot > 0) {
         switch(addslashes($action)) {
-		  case 'avec': 
+		  case 'avec':
 			$ajouter[] = $id_mot;
 		  case 'voir':
 			$voir[] = $id_mot;
@@ -52,7 +53,7 @@ function splitArrayIds($array) {
 			break;
 		  case 'cacher':
 			$cacher[] = $id_mot;
-            break; 
+            break;
 
         }
       }
@@ -60,7 +61,7 @@ function splitArrayIds($array) {
   }
   return array($voir, $cacher, $ajouter, $enlever);
 }
-
+}
 
 global $tables_principales;
 $tables_principales['spip_mots_documents']['field'] = array(
@@ -101,7 +102,7 @@ $choses_possibles['articles'] = array(
 																				  'nom_id' => 'id_auteur')
 															   )
 									  );
-									  
+
 $choses_possibles['breves'] = array(
 									  'titre_chose' => 'breves',
 									  'id_chose' => 'id_breve',
@@ -198,7 +199,7 @@ $choses_possibles['syndic_articles'] = array(
 																				  'nom_id' => 'id_auteur')
 															   )
 									  );
-*/		  
+*/
 
 $choses_possibles['documents'] = array(
 									   'titre_chose' => 'info_documents',

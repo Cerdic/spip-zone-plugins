@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
@@ -10,7 +10,7 @@
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
  *    This program is free software; you can redistribute it and/or modify *
- *    it under the terms of the GNU General Public License as published by * 
+ *    it under the terms of the GNU General Public License as published by *
  *    the Free Software Foundation.                                        *
 \***************************************************************************/
 
@@ -39,7 +39,7 @@ function verifier_auteur($table, $id_objet, $id) {
 }
 
 
-// on calcule le style pour ce mot. I.E. 
+// on calcule le style pour ce mot. I.E.
 // on regarde s'il est attache a tout ou seulement une partie
 function calcul_numeros($array, $search, $total) {
   if(is_array($array))
@@ -73,7 +73,7 @@ function md_afficher_liste($largeurs, $table, $styles = '') {
 	echo "<li";
 	if ($style)  echo ' class="'.$style[$sel].'"';
 	echo ">$texte</li>";
-	
+
 	while (list($texte, $sel) = each($t)) {
 	  $style = $largeur = "";
 	  if ($styles) list(,$style) = each($styles);
@@ -152,7 +152,7 @@ function afficher_liste_defaut($choses) {
 
 function exec_mots_partout() {
 global $choses_possibles;
-  
+
   /***********************************************************************/
   /* recuperation de la chose sur laquelle on travaille*/
   /***********************************************************************/
@@ -183,22 +183,22 @@ global $choses_possibles;
   /**********************************************************************/
   /* recherche des choses.*/
   /***********************************************************************/
-  
+
   if(count($choses) == 0) {
 	$select = array();
 	$select[] = "DISTINCT main.$id_chose";
-	
+
 	$from = array();
 	$where = array();
 	$group = '';
 	$order = array();
-	
+
 	if(isset($limit) && $limit != 'rien') {
 	  $table_lim = $tables_limite[$limit]['table'];
 	  $nom_id_lim = $tables_limite[$limit]['nom_id'];
-	  
+
 	  $from[0] = "$table_lim as main";
-	  $where[0] = "main.$nom_id_lim IN ($id_limit)"; 
+	  $where[0] = "main.$nom_id_lim IN ($id_limit)";
 	  if(count($mots_voir) > 0) {
 		$from[1] = "spip_mots_$nom_chose as table_temp";
 		$where[1] = "table_temp.$id_chose = main.$id_chose";
@@ -218,7 +218,7 @@ global $choses_possibles;
 		  $group = "main.$id_chose";
 		  $order = ('tot DESC');
 		}
-	  }	
+	  }
 	} else if((count($mots_voir) > 0)||($mots_cacher)){
 	  if(count($mots_voir) > 0) {
 		$from[0] = "spip_mots_$nom_chose as main";
@@ -239,7 +239,7 @@ global $choses_possibles;
 		}
 	  }
 	} else {
-	  $from[] = "$table_principale as main"; 
+	  $from[] = "$table_principale as main";
 	}
 	$select = join(',',$select);
 	$from = join(',',$from);
@@ -283,7 +283,7 @@ global $choses_possibles;
   $commencer_page = charger_fonction('commencer_page', 'inc');
   $l = $commencer_page('&laquo; '._T('motspartout:titre_page').' &raquo;', 'documents', 'mots');
   $css = '<link rel="stylesheet" type="text/css" href="'
-    . url_absolue( _DIR_PLUGIN_MOTSPARTOUT."/mots_partout.css")
+    . find_in_path("mots_partout.css")
     . '" id="cssprivee" />'  . "\n";
   echo str_replace('</head>', "$css</head>", $l);
   echo '<br><br><center>';
@@ -294,7 +294,7 @@ global $choses_possibles;
   echo debut_gauche('', true);
 
   $tables_installees = unserialize(lire_meta('MotsPartout:tables_installees'));
-  if (!$tables_installees) {
+/*  if (!$tables_installees) {
     $tables_installees=array(
 	"articles"=>true,
 	"rubriques"=>true,
@@ -306,21 +306,22 @@ global $choses_possibles;
 #	'groupes_mots'=>true
 	);
 	ecrire_meta('MotsPartout:tables_installees',serialize($tables_installees));
-  }
+  }*/
+
 
   echo mots_partout_choix($choses, $choses_possibles, $id_limit, $limit, $nb_aff, $nom_chose, $tables_installees, $tables_limite);
 
   $redirect = generer_url_ecrire('mots_partout',"limit=$limit&identifiant_limit=$id_limit&nb_aff=$nb_aff");
 
   echo "<form method='post' action='".generer_url_action('mots_partout',"redirect=$redirect")."'>";
-  
-  echo '<input type="hidden" name="nom_chose" value="'.$nom_chose.'">'; 
-  
+
+  echo '<input type="hidden" name="nom_chose" value="'.$nom_chose.'">';
+
   // les actions et limitations possibles.
   if(count($choses)) {
 	debut_cadre_enfonce('',false,'',_T('motspartout:action'));
-	
-	
+
+
 	echo '<div class=\'liste\'>
 		  <table border=0 cellspacing=0 cellpadding=3 width=\'100%\'>
      	   <tr class=\'tr_liste\'>
@@ -376,7 +377,7 @@ _T('motspartout:stricte').
   // Affichage de toutes les choses (on pourrait imaginer faire une pagination
   debut_cadre_relief('',false,'document', _T('portfolio'));
   if(count($choses) > 0) {
-  	
+
 	$trouver_table = charger_fonction('trouver_table', 'base');
 	$afficher_objets = charger_fonction('afficher_objets','inc');
 	$desc = $trouver_table($nom_chose);
@@ -385,8 +386,8 @@ _T('motspartout:stricte').
 	OR function_exists('afficher_' . $nom_choe . 's_boucle')) {
 		if (!function_exists($f = 'formater_' . $nom_chose . '_mots'))				$f='';
 		echo $afficher_objets($nom_choe, $nom_chose,
-			array('SELECT' => '*', 
-				'FROM' => $desc['table'], 
+			array('SELECT' => '*',
+				'FROM' => $desc['table'],
 				'WHERE' => sql_in($desc['key']['PRIMARY KEY'], $choses)),
 		       $f);
 	} else afficher_liste_defaut($choses,$nb_aff);
@@ -398,25 +399,25 @@ _T('motspartout:stricte').
   } else {
 	echo _T('motspartout:pas_de_documents').'.';
   }
-  
+
   fin_cadre_relief();
   echo '</form>
 <script>
-function selectAll(formObj, isInverse) 
+function selectAll(formObj, isInverse)
 {
-   for (var i=0;i < formObj.length;i++) 
+   for (var i=0;i < formObj.length;i++)
    {
       fldObj = formObj.elements[i];
       if (fldObj.type == \'checkbox\')
-      { 
+      {
          if(isInverse)
             fldObj.checked = (fldObj.checked) ? false : true;
-         else fldObj.checked = true; 
+         else fldObj.checked = true;
        }
    }
 }
 </script>';
-  
+
   fin_page();
 }
 
@@ -424,6 +425,8 @@ function selectAll(formObj, isInverse)
 
 function mots_partout_choix($choses, $choses_possibles, $id_limit, $limit, $nb_aff, $nom_chose, $tables_installees, $tables_limite)
 {
+
+
   $res = debut_cadre_enfonce('',true,'',_T('motspartout:choses'));
   $res .= '<div class=\'liste\'>
 <table border=0 cellspacing=0 cellpadding=3 width=\"100%\">
@@ -431,8 +434,8 @@ function mots_partout_choix($choses, $choses_possibles, $id_limit, $limit, $nb_a
 <td colspan=2><select name="nom_chose">';
 
   foreach($choses_possibles as $cho => $m) {
-	  if($tables_installees[$cho]) {
-		$res .= "<option value=\"$cho\"".(($cho == $nom_chose)?'selected':'').'>'._T($m['titre_chose']).'</option>';
+	  if(in_array($cho,$tables_installees)) {
+		  $res .= "<option value=\"$cho\"".(($cho == $nom_chose)?'selected':'').'>'._T($m['titre_chose']).'</option>';
 	  }
   }
 
@@ -445,10 +448,10 @@ function mots_partout_choix($choses, $choses_possibles, $id_limit, $limit, $nb_a
 <option value="rien" selected="true">'.
 	_T('motspartout:aucune').
 	'</option>';
-  
+
   foreach($tables_limite as $t => $m)
 	$res .= "<option value=\"$t\"".(($t == $limit)?'selected':'').">$t</option>";
-  
+
   $res .= '</select></td>'
 	."<td><input type='text' size='3' name='identifiant_limit' value='$id_limit'></td></tr>"
 	.'<tr class=\'tr_liste\'>'
@@ -460,7 +463,7 @@ function mots_partout_choix($choses, $choses_possibles, $id_limit, $limit, $nb_a
 
   if (count($choses)>0) {
 	$res .= '<td colspan=2><label for="nb_aff">'._T('motspartout:par').':</label><select name="nb_aff">';
-	for($nb = 10;$nb<count($choses);$nb=$nb+10)
+	for($nb = 10;$nb<count($choses)+10;$nb=$nb+10)
 		$res .="<option value=\"$nb\"".(($nb == $nb_aff)?'selected="true"':'').">$nb</option>";
 	$res .= '</select></td>';
   } else $res .= '<td colspan=2></td>';
