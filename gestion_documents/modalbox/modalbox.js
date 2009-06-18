@@ -18,9 +18,12 @@
 	};
 
 	$.modalboxload = function (url, options) {
-		$.get(url,function(data){
-			$.modalbox(data,options);
-		},"html");
+		$.ajax({
+			url: url,
+			success: function(c){
+				$.modalbox(c,options);
+			}
+		});
 	};
 
 	$.modalboxclose = function () {

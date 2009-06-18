@@ -61,6 +61,13 @@ function action_ajouter_un_document_dist($id_document, $file, $objet, $id_objet,
 	
 	$source = $file['tmp_name'];
 	$nom_envoye = $file['name'];
+
+	// passer en minuscules le nom du fichier, pour eviter les collisions
+	// si le file system fait la difference entre les deux il ne detectera
+	// pas que Toto.pdf et toto.pdf
+	// et on aura une collision en cas de changement de file system
+	$file['name'] = strtolower(translitteration($file['name']));
+
 	$titrer = isset($file['titrer'])?$file['titrer']:false;
 
 	include_spip('inc/modifier');
@@ -154,7 +161,7 @@ function action_ajouter_un_document_dist($id_document, $file, $objet, $id_objet,
 	// attention piege semantique : les images s'installent en mode 'vignette'
 	if (!$id_document){
 		$id_document = insert_document();
-		spip_log ("ajout du document $source $nom_envoye  (M '$mode' T '$objet' L '$id_objet' D '$id_document')");
+		spip_log ("ajout du document ".$file['tmp_name']." ".$file['name']."  (M '$mode' T '$objet' L '$id_objet' D '$id_document')");
 	}
 	
 	document_set($id_document,$champs);

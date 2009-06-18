@@ -200,7 +200,7 @@
 			}
 			else if (typeof data == 'string' || typeof data == 'number') {
 				// just insert the data as innerHTML
-				data = $('<div/>').html(data);
+				// data = $('<div/>').html(data);
 			}
 			else {
 				// unsupported data type!
@@ -283,15 +283,21 @@
 				.appendTo(this.dialog.container);
 				
 			// add styling and attributes to the data
-			this.dialog.data = data
-				.attr('id', data.attr('id') || this.opts.dataId)
+			if (typeof data == 'string' || typeof data == 'number')
+				this.dialog.data = $('<div/>');
+			else
+				this.dialog.data = data;
+			this.dialog.data
+				.attr('id', this.dialog.data.attr('id') || this.opts.dataId)
 				.addClass('simplemodal-data')
 				.css($.extend(this.opts.dataCss, {
 						display: 'none'
-				}));
+				})).appendTo(this.dialog.wrap);
+			if (typeof data == 'string' || typeof data == 'number')
+				this.dialog.data.html(data);
 
 			this.setContainerDimensions();
-			this.dialog.data.appendTo(this.dialog.wrap);
+			//this.dialog.data.appendTo(this.dialog.wrap);
 
 			// fix issues with IE
 			if (ie6 || ieQuirks) {

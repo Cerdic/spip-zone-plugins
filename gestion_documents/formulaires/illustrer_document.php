@@ -78,5 +78,3 @@ function formulaires_illustrer_document_traiter_dist($id_document){
 }
 
 ?>
-
-
