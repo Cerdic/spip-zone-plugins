@@ -19,7 +19,7 @@ function action_valider_paiement_fictif_dist() {
 	spip_log("Reception de paiement", 'abonnement');
 	
 	// on recupere les petites variables :
-	$id_auteur = intval(_request('references'));
+	$id_auteur = intval(_request('reference'));
 	$args = _request('args');
 	$montant = intval(_request('montant'));
 	$redirect = _request('redirect');
@@ -32,14 +32,14 @@ function action_valider_paiement_fictif_dist() {
 		$message = "paiement_ok";
 		if ($type == 'article') {
 			include_spip('action/activer_article');
-			if (!abo_traiter_activer_article_hash($hash)) {
+			if (!$libelle = abo_traiter_activer_article_hash($hash)) {
 				spip_log("Erreur de traitement (article)", 'abonnement');
 				$message = "erreur_site";
 			}
 		}
 		elseif ($type == 'abonnement') {
 			include_spip('action/activer_abonnement');
-			if (!abo_traiter_activer_abonnement_hash($hash)) {
+			if (!$libelle = abo_traiter_activer_abonnement_hash($hash)) {
 				spip_log("Erreur de traitement (abonnement)", 'abonnement');
 				$message = "erreur_site";
 			}
@@ -50,6 +50,18 @@ function action_valider_paiement_fictif_dist() {
 		$message = "erreur_banque";
 		// passer l'abo en "erreur_bank"
 	}
+
+
+	// envoyer un mail de confirmation
+			include_spip('action/envoyer_mail_confirmation');
+			if (!abo_envoyer_mail_confirmation($reponse_banque,$id_auteur,$libelle,$type,$id_article='')) {
+				spip_log("Erreur de traitement - pas de mail de confirmation (abonnement)", 'abonnement');
+				$message = "erreur_mail";
+			}
+
+
+
+// redirection simulée vers la page ok.
 
 	include_spip('inc/headers');
 	// on redirige sur la page de fin de transaction 
