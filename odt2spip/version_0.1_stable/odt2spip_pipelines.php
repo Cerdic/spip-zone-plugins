@@ -18,7 +18,7 @@ function odt2spip_affiche_droite($flux){
     $out .= form_hidden($action);
     $out .= "<strong><label for='id_article'>"._T("odtspip:choix_fichier")."</label></strong> ";
     $out .= "<br />";
-    $out .= "<input type='file' name='fichier_odt' id='fichier_odt' class='formo'>";
+    $out .= "<input type='file' name='fichier_odt' id='fichier_odt' class='formo' style='font-size: 11px;' />";
     $out .= "<br /><small>";
     $out .= "<strong>"._T("odtspip:attacher_fichier_odt")."</strong> ";
     $out .= "<label for='attacher_oui'>"._T("odtspip:oui")."</label>";
