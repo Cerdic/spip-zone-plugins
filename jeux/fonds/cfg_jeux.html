@@ -16,8 +16,8 @@
 <h2 style="text-align:center;"><:jeux:configuration_generale:></h2><hr/>
 <label><:jeux:type_resultat:><br/>
 <select name="type_resultat"> 
+    <option value="dernier"[ selected="(#CONFIG{jeux/type_resultat}|=={dernier}|?{selected})"]><:jeux:resultat2_dernier:></option>
 	<option value="premier"[ selected="(#CONFIG{jeux/type_resultat}|=={premier}|?{selected})"]><:jeux:resultat2_premier:></option>
-	<option value="dernier"[ selected="(#CONFIG{jeux/type_resultat}|=={dernier}|?{selected})"]><:jeux:resultat2_dernier:></option>
 	<option value="meilleur"[ selected="(#CONFIG{jeux/type_resultat}|=={meilleur}|?{selected})"]><:jeux:resultat2_meilleur:></option>
 	<option value="meilleurs"[ selected="(#CONFIG{jeux/type_resultat}|=={meilleurs}|?{selected})"]><:jeux:resultat2_meilleurs:></option>
 	<option value="tous"[ selected="(#CONFIG{jeux/type_resultat}|=={tous}|?{selected})"]><:jeux:resultat2_tous:></option>
