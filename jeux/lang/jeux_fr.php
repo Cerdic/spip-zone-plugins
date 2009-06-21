@@ -148,6 +148,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'doc_jeux' => 'Documentation g&eacute;n&eacute;rale',
 'doc_scores' => 'Documentation sur les scores',
 
+'total'     =>'Total',
 // Corbeille
   'jeux_corbeille_tous' => "@nb@ jeux dans la corbeille",
   'jeux_corbeille_un' => "1 jeu dans la corbeille",
