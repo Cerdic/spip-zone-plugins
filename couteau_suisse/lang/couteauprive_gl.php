@@ -25,7 +25,7 @@ _ Ligaz&oacute;n de test : [->test@test.com] (vexa a p&aacute;xina completamente
 	'action_rapide_non' => 'Acci&oacute;n r&aacute;pida, dispo&ntilde;ible tras a activaci&oacute;n desta utilidade :',
 	'admins_seuls' => 'S&oacute; para administradores/as',
 	'attente' => 'En espera...',
-	'auteur_forum:description' => 'Invite a todos os autores a cubri (cando menos cunha letra!) o campo &laquo;@_CS_FORUM_NOM@&raquo; co fin de evitar as contribuci&oacute;ns totalmente an&oacute;nimas.',
+	'auteur_forum:description' => '<MODIF>Invite a todos os autores a cubri (cando menos cunha letra!) o campo &laquo;@_CS_FORUM_NOM@&raquo; co fin de evitar as contribuci&oacute;ns totalmente an&oacute;nimas.',
 	'auteur_forum:nom' => 'Non haber&aacute; foros an&oacute;nimos',
 	'auteurs:description' => 'Esta utilidade configura a apariencia da [p&aacute;xina de autores->./?exec=auteurs], na s&uacute;a parte privada.
 
@@ -189,8 +189,7 @@ _ Esta utilidade pode ser emparellada con &laquo;&nbsp;[.->sommaire]&nbsp;&raquo
 	'detail_balise_etoilee' => '{{Aviso}} : Comprobe a utilizaci&oacute;n feita polos seus esqueletos das balizas estreladas. O tratamento desta ferramenta non se aplicar&aacute;n sobre : @bal@.',
 	'detail_fichiers' => 'Ficheiros :',
 	'detail_inline' => 'C&oacute;digo inline :',
-	'detail_jquery1' => '{{Aviso}} : esta utilidade precisa o m&oacute;dulo {jQuery} para funcionar con esta versi&oacute;n de SPIP.',
-	'detail_jquery2' => 'Esta ferramenta necesita a librar&iacute;a {jQuery}.',
+	'detail_jquery2' => '<MODIF>Esta ferramenta necesita a librar&iacute;a {jQuery}.',
 	'detail_jquery3' => '{{Aviso}} : esta utilidade necesita o plugin [jQuery para SPIP 1.92->http://files.spip.org/spip-zone/jquery_192.zip] para funcionar correctamente con esta versi&oacute;n de  SPIP.',
 	'detail_pipelines' => 'Tubar&iacute;as (pipelines) :',
 	'detail_traitements' => 'Tratamentos :',

@@ -25,7 +25,7 @@ _ Enllaz de preba: [->test@test.com] (recarga la p&aacute;xina pa prebar).[[%env
 	'action_rapide_non' => 'Aici&oacute;n r&aacute;pida, disponible de magar que actives esta ferramienta:',
 	'admins_seuls' => 'Nam&aacute;i los alministradores',
 	'attente' => 'N\'espera...',
-	'auteur_forum:description' => 'Encamienta a tolos autores de mensaxes p&uacute;blicos escribir (&iexcl;polo menos una lletra!) nel campu &laquo;@_CS_FORUM_NOM@&raquo; col fin d\'evitar los mensaxes totalmente an&oacute;nimos.',
+	'auteur_forum:description' => '<MODIF>Encamienta a tolos autores de mensaxes p&uacute;blicos escribir (&iexcl;polo menos una lletra!) nel campu &laquo;@_CS_FORUM_NOM@&raquo; col fin d\'evitar los mensaxes totalmente an&oacute;nimos.',
 	'auteur_forum:nom' => 'Ensin foros an&oacute;nimos',
 	'auteurs:description' => 'Esta ferramienta configura l\'aspeutu de [la p&aacute;xina de los autores->./?exec=auteurs], na parte privada.
 
@@ -75,7 +75,7 @@ _ Enllaz de preba: [->test@test.com] (recarga la p&aacute;xina pa prebar).[[%env
 	'boites_privees:nom' => 'Caxes privaes',
 	'bp_tri_auteurs' => 'Ordenaciones d\'autores',
 	'bp_urls_propres' => 'Les URLs propies',
-	'brouteur:description' => 'Utilizar el selector d\'estaya n\'AJAX a partir de %rubrique_brouteur% estaya(es)',
+	'brouteur:description' => '<MODIF>Utilizar el selector d\'estaya n\'AJAX a partir de %rubrique_brouteur% estaya(es)',
 	'brouteur:nom' => 'Axuste del selector d\'estaya',
 
 	// C
@@ -197,8 +197,7 @@ Esta ferramienta puede acoplase con &laquo;[.->sommaire]&raquo;.',
 	'detail_balise_etoilee' => '{{Attention}}: Compreba bien l\'usu que faen les cadarmes de les balices con asteriscu. Los procesos d\'esta ferramienta nun s\'aplicar&aacute;n a: @bal@.',
 	'detail_fichiers' => 'Archivos:',
 	'detail_inline' => 'C&oacute;digu en llinia:',
-	'detail_jquery1' => '{{Atenci&oacute;n}}: esta ferramienta necesita el plugin {jQuery} pa funcionar con esta versi&oacute;n de SPIP.',
-	'detail_jquery2' => 'Esta ferramienta necesita la llibrer&iacute;a {jQuery}.',
+	'detail_jquery2' => '<MODIF>Esta ferramienta necesita la llibrer&iacute;a {jQuery}.',
 	'detail_jquery3' => '{{Atenci&oacute;n}}: esta ferramienta necesita el plugin [jQuery pa SPIP 1.92->http://files.spip.org/spip-zone/jquery_192.zip] pa funcionar correutamente con esta versi&oacute;n de SPIP.',
 	'detail_pipelines' => 'Tuber&iacute;es:',
 	'detail_traitements' => 'Tratamientos:',

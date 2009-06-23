@@ -21,7 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'action_rapide' => 'Snelle actie, alleen als u weet wat u doet !',
 	'action_rapide_non' => 'Vlugge actie, ter beschikking eens dat het instrument is geactiveerd',
 	'attente' => 'Wachten...',
-	'auteur_forum:description' => 'Zet alle auteurs van openbare berichten ertoe aan om te vullen (van minstens van een brief!) het veld &laquo;@_CS_FORUM_NOM@&raquo; teneinde de volkomen onbekende bijdragen te vermijden.',
+	'auteur_forum:description' => '<MODIF>Zet alle auteurs van openbare berichten ertoe aan om te vullen (van minstens van een brief!) het veld &laquo;@_CS_FORUM_NOM@&raquo; teneinde de volkomen onbekende bijdragen te vermijden.',
 	'auteur_forum:nom' => 'Geen onbekende forums',
 	'auteurs:description' => 'Dit werktuig configureert de schijn van [de bladzijde van de auteurs ->./?exec=auteurs], gedeeltelijk particulier.
 
@@ -173,8 +173,7 @@ Cet outil peut &ecirc;tre coupl&eacute; avec &laquo;&nbsp;[.->sommaire]&nbsp;&ra
 	'detail_balise_etoilee' => '{{Aandacht}}: Controleert goed het gebruik dat door uw skeletten van de met sterren bezaaide bakens wordt gemaakt. De behandelingen van dit werktuig zullen niet op van toepassing zijn : @bal@.',
 	'detail_fichiers' => 'Bestanden :',
 	'detail_inline' => 'Code inline :',
-	'detail_jquery1' => '{{Aandacht}}: dit werktuig maakt plugin {jQuery} het noodzakelijk om met deze versie van SPIP te werken.',
-	'detail_jquery2' => 'Dit werktuig vereist de boekhandel {jQuery}.',
+	'detail_jquery2' => '<MODIF>Dit werktuig vereist de boekhandel {jQuery}.',
 	'detail_jquery3' => '<MODIF>{{Attention}} : deze tool heeft een andere plugin nodig[jQuery pour SPIP 1.92->http://files.spip.org/spip-zone/jquery_192.zip]om efficient te functioneren met deze spip versie.',
 	'detail_pipelines' => 'Pijpleidingen :',
 	'detail_traitements' => 'Behandelingen :',

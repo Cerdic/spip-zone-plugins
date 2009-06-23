@@ -25,7 +25,7 @@ _ Enlla&ccedil; de test: [->test@test.com] (recarregueu la p&agrave;gina complet
 	'action_rapide_non' => 'Acci&oacute; r&agrave;pida, disponible un cop aquesta eina siga activada :',
 	'admins_seuls' => 'Nom&eacute;s els administradors',
 	'attente' => 'Espera...',
-	'auteur_forum:description' => 'Incita a tots els autors de missatges p&uacute;blics a omplir (amb una lletra com a m&iacute;nim!) el camp &laquo;@_CS_FORUM_NOM@&raquo; per tal d\'evitar les contribucions totalment an&ograve;nimes.',
+	'auteur_forum:description' => '<MODIF>Incita a tots els autors de missatges p&uacute;blics a omplir (amb una lletra com a m&iacute;nim!) el camp &laquo;@_CS_FORUM_NOM@&raquo; per tal d\'evitar les contribucions totalment an&ograve;nimes.',
 	'auteur_forum:nom' => 'No als f&ograve;rums an&ograve;nims',
 	'auteurs:description' => 'Aquesta eina configura l\'aparen&ccedil;a de [la p&agrave;gina autors->./?exec=auteurs], a la part privada.
 
@@ -74,7 +74,7 @@ _ Enlla&ccedil; de test: [->test@test.com] (recarregueu la p&agrave;gina complet
 	'boites_privees:nom' => 'Requadres privats',
 	'bp_tri_auteurs' => 'Les classificacions d\'autors',
 	'bp_urls_propres' => 'Els URLs propis',
-	'brouteur:description' => 'Utilitzar el selector de secci&oacute; a AJAX a partir de %rubrique_brouteur% secci&oacute;(seccions)',
+	'brouteur:description' => '<MODIF>Utilitzar el selector de secci&oacute; a AJAX a partir de %rubrique_brouteur% secci&oacute;(seccions)',
 	'brouteur:nom' => 'Regulaci&oacute; del selector de secci&oacute;',
 
 	// C
@@ -196,8 +196,7 @@ Aquesta eina es pot acompanyar amb &laquo;&nbsp;[.->sommaire]&nbsp;&raquo;.',
 	'detail_balise_etoilee' => '{{Atenci&oacute;}}: Verifiqueu b&eacute; l\'&uacute;s fet pels vostres esquelets d\'etiquetes estrellades. Els tractaments d\'aquesta eina no s\'aplicaran pas a: @bal@.',
 	'detail_fichiers' => 'Fitxers:',
 	'detail_inline' => 'Codi inserit:',
-	'detail_jquery1' => '{{Atenci&oacute;}}: aquesta eina necessita el plugin {jQuery} per funcionar amb aquesta versi&oacute; d\'SPIP.',
-	'detail_jquery2' => 'Aquesta eina necessita la llibreria {jQuery}.',
+	'detail_jquery2' => '<MODIF>Aquesta eina necessita la llibreria {jQuery}.',
 	'detail_jquery3' => '{{Atenci&oacute;}} : aquesta eina necessita el plugin [jQuery per SPIP 1.92->http://files.spip.org/spip-zone/jquery_192.zip] per funcionar correctament amb aquesta versi&oacute; d\'SPIP.',
 	'detail_pipelines' => 'Pipelines :',
 	'detail_traitements' => 'Tractaments :',

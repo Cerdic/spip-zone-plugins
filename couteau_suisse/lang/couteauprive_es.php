@@ -23,7 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'action_rapide_non' => 'Acci&oacute;n r&aacute;pida, disponible una vez activada esta herramienta:',
 	'admins_seuls' => 'Los administradores solamente',
 	'attente' => 'Espera...',
-	'auteur_forum:description' => 'Pide a todos los autores de mensajes p&uacute;blicos que rellenen (&iexcl;al menos con una letra!) el campo &laquo;@_CS_FORUM_NOM@&raquo; para evitar las contribuciones completamente an&oacute;nimas.',
+	'auteur_forum:description' => '<MODIF>Pide a todos los autores de mensajes p&uacute;blicos que rellenen (&iexcl;al menos con una letra!) el campo &laquo;@_CS_FORUM_NOM@&raquo; para evitar las contribuciones completamente an&oacute;nimas.',
 	'auteur_forum:nom' => 'Sin foros an&oacute;nimos',
 	'auteurs:description' => 'Esta herramienta configura la apariencia de [la p&aacute;gina de los autores->./?exec=auteurs], en el espacio privado.
 
@@ -182,8 +182,7 @@ Esta herramienta puede acoplarse con &laquo;&nbsp;[.->sommaire]&nbsp;&raquo;.',
 	'detail_balise_etoilee' => '{{Atenci&oacute;n}} : Revisa bien el uso que tus esqueletos hacen de las balizas con asteriscos. El procesado con esta herramienta no se aplicar&aacute; sobre: @bal@.',
 	'detail_fichiers' => 'Ficheros:',
 	'detail_inline' => 'C&oacute;digo en l&iacute;nea:',
-	'detail_jquery1' => '{{Atenci&oacute;n}}: esta herramienta necesita el plugin {jQuery} para funcionar con esta versi&oacute;n de SPIP.',
-	'detail_jquery2' => 'Esta herramienta necesita la biblioteca {jQuery}.',
+	'detail_jquery2' => '<MODIF>Esta herramienta necesita la biblioteca {jQuery}.',
 	'detail_jquery3' => '{{Atenci&oacute;n}}: esta herramienta necesita el plugin [jQuery para SPIP 1.92->http://files.spip.org/spip-zone/jquery_192.zip] para funcionar correctamente con esta versi&oacute;n de SPIP.',
 	'detail_pipelines' => 'Pipelines:',
 	'detail_traitements' => 'Procesado:',
