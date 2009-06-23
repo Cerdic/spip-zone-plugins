@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_modifier_auteur_supp' => 'Extra information',
 	'adresse' => 'Address',
 	'adresse_pro' => 'Professionnal address',
-	'ajouter_adherent' => 'Add a member',
+	'ajouter_adherent' => '<MODIF>Add a member',
 	'aout' => 'August',
 	'auteur' => 'Author',
 	'autre' => 'Other',
@@ -212,7 +212,7 @@ Thank you for your trust
 
 The @nom_site@ Team 
 @url_site@',
-	'texte_email_inscription' => 'You have asked to participate on @nom_site@. 
+	'texte_email_inscription' => '<MODIF>You have asked to participate on @nom_site@. 
 You are about to finish your registration for @nom_site@. 
 
 You just need to click the link below to activate your account and choose your password.

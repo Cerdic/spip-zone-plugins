@@ -11,18 +11,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'a_confirmer' => 'Zu best&amp;auml;tigen',
 	'accesrestreint' => 'Eingeschr&amp;auml;nkter Zugang',
 	'aconfirmer' => 'Zu best&amp;auml;tigen',
-	'action_adherent' => '<MODIF>Aktion Mitglied',
+	'action_adherent' => 'Aktionen',
 	'activation_compte' => 'Aktivieren Sie Ihr Konto',
 	'adherents' => 'Mitglieder',
 	'admin' => 'Admin',
 	'admin_modifier_auteur_supp' => 'Weiterf&uuml;hrende Informationen',
 	'adresse' => 'Adresse',
 	'adresse_pro' => 'Adresse (beruflich)',
-	'ajouter_adherent' => '<MODIF>Mitglied hinzuf&uuml;gen',
+	'ajouter_adherent' => '<MODIF>Neuen Besucher<br /> anlegen',
 	'aout' => 'August',
+	'aucun_resultat_recherche' => 'Nichts gefunden',
 	'auteur' => 'Autor',
 	'autre' => 'Andere',
 	'avril' => 'April',
+
+	// B
+	'bio' => 'Biographie',
 
 	// C
 	'caracteres' => 'Zeichen',
@@ -40,6 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'code_postal_pro' => 'Postleitzahl (beruflich)',
 	'commentaire' => 'Kommentar',
 	'compte_active' => 'Ihr Konto wurde aktiviert',
+	'compte_efface' => 'Ihr Zugang wurde gel&ouml;scht',
 	'conf_plugin' => 'Konfiguration Inscription2',
 	'conf_plugin_page' => 'Gespeicherte Konfiguration des Plugin Inscription2',
 	'configs' => 'Konfigurationen',
@@ -53,6 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// D
 	'decembre' => 'Dezember',
 	'demande_password' => 'Ihr Passwort:',
+	'description_cfg' => 'Dieses Plugin erm&ouml;glicht, Zusatzinformationen &uuml;ber die Redakteure ihrer Website zu erfassen. Bitte w&auml;hlen sie die entsprechenden Felder hier aus.',
 	'description_page' => 'Hier k&ouml;nnen Sie Ihre gespeicherten Einstellungen &uuml;berpr&uuml;fen.',
 	'divers' => 'Verschiedenes',
 	'domaine' => 'Domaine',
@@ -60,6 +66,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'editer_adherent' => 'Mitglied bearbeiten',
+	'effacement_auto_impossible' => 'Der Zugang kann nicht automatische gel&ouml;scht werden. Bitte nehmen sie mit uns Kontakt auf.',
 	'email' => 'Email',
 	'email_bonjour' => 'Hallo @nom@,',
 	'email_obligatoire' => 'Email ist Pflichtfeld',
@@ -88,11 +95,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_inscription_ok' => 'Ihre Anmeldung wurde gespeichert. Sie erhalten nun eine Mail mit Ihren Verbindungsdaten.',
 	'formulaire_login_deja_utilise' => 'Diese Bezeichnung wird bereits verwendet. Bitte w&auml;hlen Sie eine andere.',
 	'formulaire_remplir_obligatoires' => 'Bitte f&uuml;llen Sie die Pflichtfelder aus.',
+	'formulaire_remplir_validation' => 'Bitte &uuml;berpr&uuml;fen sie die ung&uuml;ltigen Felder.',
 
 	// G
 	'general_infos' => 'Allgemeine Informationen',
 	'geoloc' => 'Geografische Lokalisierung',
 	'geomap_obligatoire' => 'Um Daten zur Lokalisierung von Personen zu verwenden, wird das Plugin GoogleMapApi ben&ouml;tigt.',
+	'gerent' => 'Mitglied',
 	'gestion_adherent' => 'Mitgliederverwaltung',
 
 	// H
@@ -112,6 +121,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_pro' => 'Berufliche Angaben',
 	'infos_adherent' => 'Zusatzinformationen',
 	'infos_personnelles' => 'Neue pers&ouml;nliche Angaben',
+	'inscriptions' => 'Anmeldungen',
 	'inserez_infos' => 'Tragen Sie bitte die Angaben ein',
 
 	// J
@@ -123,7 +133,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'latitude' => 'Geographische Breite',
 	'legende' => 'Legende',
 	'lisez_mail' => 'An die eingetragene Adresse wurde eine Email geschickt. Sie enth&auml;lt die zur Aktivierung Ihres Kontos erforderlichen Informationen.',
-	'liste_adherents' => '<MODIF>Mitgliederliste',
+	'liste_adherents' => '<MODIF>Mitgliederliste anzeigen',
+	'liste_comptes_titre' => 'Mitgliederliste',
 	'login' => 'Benutzername (login)',
 	'longitude' => 'Geographische L&auml;nge',
 
@@ -137,6 +148,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mobile' => 'Funktelefon',
 	'mobile_pro' => 'Funktelefon (beruflich)',
 	'modif_pass_titre' => 'Passwort &auml;ndern',
+	'mot_passe_reste_identique' => 'Ihr Passwort wurde ge&auml;ndert',
 
 	// N
 	'naissance' => 'Geburtstag',
@@ -144,6 +156,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom' => 'Pseudonym',
 	'nom_explication' => 'Ihr Name oder Pseudonym',
 	'nom_famille' => 'Name',
+	'nom_site' => 'Name er Website',
 	'non_renseigne' => 'Keine Angabe',
 	'non_renseignee' => 'Keine Angabe',
 	'novembre' => 'November',
@@ -169,6 +182,7 @@ um Ihre Zugangsdaten zu &auml;ndern.',
 	'password_retaper' => 'Passwort best&auml;tigen',
 	'pays' => 'Land',
 	'pays_pro' => 'Land (beruflich)',
+	'pgp' => 'PGP Schl&uuml;ssel',
 	'prenom' => 'Vorname',
 	'probleme_email' => 'Mailproblem: Die Mail zum Aktivieren des Kontos konnte nicht verschickt werden.',
 	'profession' => 'Beruf',
@@ -180,10 +194,14 @@ um Ihre Zugangsdaten zu &auml;ndern.',
 	'raccourcis' => 'Schnellzugang',
 	'rappel_login' => 'Erinnerung - Ihr Login lautet: ',
 	'rappel_password' => 'Ihr Passwort',
+	'recherche_case' => 'Suchfeld',
+	'recherche_utilisateurs' => 'Redakteure suchen',
+	'recherche_valeur' => 'Inhalt der Suche',
 	'redemande_password' => 'Geben Sie Ihr Passwort erneut ein:',
 	'rien_a_faire' => 'Keien Aktion erforderlich',
 
 	// S
+	'saisir_email_valide' => 'Bitte geben sie eine g&uuml;ltige E-Mail Adresse an.',
 	'secteur' => 'Sektor',
 	'septembre' => 'September',
 	'sexe' => 'Anrede/Geschlecht',
@@ -202,7 +220,7 @@ um Ihre Zugangsdaten zu &auml;ndern.',
 	'telephone' => 'Telefon',
 	'telephone_pro' => 'Telefon (beruflich)',
 	'texte' => 'Text',
-	'texte_email_confirmation' => '<MODIF>Ihr KOnto wurde aktiviert. Sie k&ouml;nnen sich jetzt mit Ihren pers&ouml;nlichen Zugangsdaten einloggen.\\n
+	'texte_email_confirmation' => 'Ihr Konto ist aktiviert. Sie k&ouml;nnen sich jetzt mit Ihren pers&ouml;nlichen Zugangsdaten einloggen.n
 
 Ihr Login ist&nbsp;: @login@
 Ihr Passwort haben Sie soeben enigegeben.
@@ -217,7 +235,7 @@ Bitte schlie&szlig;en Sie Ihre Anmeldung ab, indem Sie auf den Link weiter unten
 
 Ihr Login ist: @login@
 
-Wenn Sie sich nicht angemeldet haben, klicken Sie bitte auf den Link weiter unten.\\n
+Wenn Sie sich nicht angemeldet haben, klicken Sie bitte auf den Link weiter unten, um alle erfassten Daten zu l&ouml;schen.n
 
 @link_suppresion@
 
@@ -227,6 +245,7 @@ Das @nom_site@-Team',
 	'titre_confirmation' => 'Best&auml;tigung',
 
 	// U
+	'url_site' => 'URL der Website',
 	'url_societe' => 'Website (der Firma/Verein)',
 
 	// V
@@ -237,6 +256,7 @@ Das @nom_site@-Team',
 	'vos_contacts_personnels' => 'Ihre pers&ouml;nlichen Kontakte',
 	'votre_adresse' => 'Ihre pers&ouml;nliche Adresse',
 	'votre_adresse_pro' => 'Ihre berufliche Adresse',
+	'votre_mail' => 'Ihr E-Mail:',
 	'votre_nom_complet' => 'Ihr vollst&auml;ndiger Name',
 	'votre_profil' => 'Ihr Profil',
 

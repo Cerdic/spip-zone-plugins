@@ -11,18 +11,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'a_confirmer' => 'A confirmar',
 	'accesrestreint' => 'Acc&eacute;s Restringit',
 	'aconfirmer' => 'A confirmar',
-	'action_adherent' => '<MODIF><- Operacions ->',
+	'action_adherent' => 'Operacions',
 	'activation_compte' => 'Activeu el vostre compte',
 	'adherents' => 'Adherents',
 	'admin' => 'Admin',
 	'admin_modifier_auteur_supp' => 'Informacions suplement&agrave;ries',
 	'adresse' => 'Adre&ccedil;a',
 	'adresse_pro' => 'Adre&ccedil;a professional (Pro.)',
-	'ajouter_adherent' => 'Crear <br />un nou visitant',
+	'ajouter_adherent' => '<MODIF>Crear <br />un nou visitant',
 	'aout' => 'agost',
+	'aucun_resultat_recherche' => 'La vostra cerca no ha donat cap resultat.',
 	'auteur' => 'Autor',
 	'autre' => 'Altre',
 	'avril' => 'abril',
+
+	// B
+	'bio' => 'Biografia',
 
 	// C
 	'caracteres' => 'car&agrave;cters',
@@ -54,6 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// D
 	'decembre' => 'desembre',
 	'demande_password' => 'La vostra contrasenya:',
+	'description_cfg' => 'Aquest plugin permet ampliar les informacions dels autors i del vostre lloc, podeu escollir aqu&iacute; els camps suplementaris',
 	'description_page' => 'Aqu&iacute; podeu verificar la vostra configuraci&oacute; escollida tal i com est&agrave; emmagatzemada',
 	'divers' => 'Divers',
 	'domaine' => 'Domini',
@@ -90,6 +95,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_inscription_ok' => 'La vostra inscripci&oacute; s\'ha tingut en compte. Rebreu, per correu electr&ograve;nic, els vostres identificadors de connexi&oacute;.',
 	'formulaire_login_deja_utilise' => 'L\'usuari ja s\'utilitza, escolliu-ne un altre.',
 	'formulaire_remplir_obligatoires' => 'Ompliu els camps obligatoris',
+	'formulaire_remplir_validation' => 'Verifiqueu els camps que no s&oacute;n v&agrave;lids.',
 
 	// G
 	'general_infos' => 'Informacions Generals',
@@ -115,6 +121,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_pro' => 'Informacions professionals',
 	'infos_adherent' => 'Informacions suplement&agrave;ries',
 	'infos_personnelles' => 'Informacions personals',
+	'inscriptions' => 'Inscripcions',
 	'inserez_infos' => 'Introdu&iuml;u les informacions demanades',
 
 	// J
@@ -126,7 +133,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'latitude' => 'Latitud',
 	'legende' => 'Llegenda',
 	'lisez_mail' => 'Us acabem d\'enviar un correu electr&ograve;nic a l\'adre&ccedil;a donada. Per activar el vostre compte seguiu les instruccions.',
-	'liste_adherents' => '<MODIF>Mostrar els visitants',
+	'liste_adherents' => '<MODIF>Mostrar els comptes usuaris',
+	'liste_comptes_titre' => 'Llista dels comptes usuaris',
 	'login' => 'Nom d\'usuari (login)',
 	'longitude' => 'Longitud ',
 
@@ -148,6 +156,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom' => 'Signatura',
 	'nom_explication' => 'el vostre nom o el vostre&nbsp;pseudo',
 	'nom_famille' => 'Cognom',
+	'nom_site' => 'Nom del lloc',
 	'non_renseigne' => 'no informat.',
 	'non_renseignee' => 'no informada.',
 	'novembre' => 'novembre',
@@ -172,6 +181,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'password_retaper' => 'Confirmeu la contrasenya',
 	'pays' => 'Pa&iacute;s',
 	'pays_pro' => 'Pa&iacute;s (Pro.)',
+	'pgp' => 'Clau PGP',
 	'prenom' => 'Nom',
 	'probleme_email' => 'Problema de correu: el correu d\'activaci&oacute; no es pot enviar.',
 	'profession' => 'Professi&oacute;',
@@ -183,10 +193,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'raccourcis' => 'Dreceres',
 	'rappel_login' => 'Recorda: el vostre identificador &eacute;s: ',
 	'rappel_password' => 'La vostra contrasenya',
+	'recherche_case' => 'Camps de la cerca',
+	'recherche_utilisateurs' => 'Cerca a dins dels usuaris',
+	'recherche_valeur' => 'Contingut cercat',
 	'redemande_password' => 'Torneu a introduir la vostra contrasenya:',
 	'rien_a_faire' => 'Res a fer',
 
 	// S
+	'saisir_email_valide' => 'Introdu&iuml;u una adre&ccedil;a de correu v&agrave;lida ',
 	'secteur' => 'Sector',
 	'septembre' => 'setembre ',
 	'sexe' => 'Estat civil',
@@ -214,7 +228,7 @@ Gr&agrave;cies per la vostra confian&ccedil;a
 
 L\'equip de @nom_site@ 
 ',
-	'texte_email_inscription' => 'esteu a punt de confirmar la vostra inscripci&oacute; al lloc @nom_site@. 
+	'texte_email_inscription' => '<MODIF>esteu a punt de confirmar la vostra inscripci&oacute; al lloc @nom_site@. 
 
  Cliqueu l\'enlla&ccedil; que hi ha m&eacute;s avall per activar el vostre compte i escollir la vostra contrasenya.
 
@@ -234,6 +248,7 @@ Si no heu demanat aquesta inscripci&oacute; o si no voleu a partir d\'ara formar
 	'titre_confirmation' => 'Confirmaci&oacute;',
 
 	// U
+	'url_site' => 'URL del lloc',
 	'url_societe' => 'Lloc associat',
 
 	// V

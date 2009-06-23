@@ -11,18 +11,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'a_confirmer' => 'Por confirmar',
 	'accesrestreint' => 'Accesu Torg&aacute;u',
 	'aconfirmer' => 'Por confirmar',
-	'action_adherent' => '<MODIF><- Operaciones ->',
+	'action_adherent' => 'Operaciones',
 	'activation_compte' => 'Activa la to cuenta',
 	'adherents' => 'Asociaos',
 	'admin' => 'Almin',
 	'admin_modifier_auteur_supp' => 'Informaci&oacute;n suplementaria',
 	'adresse' => 'Se&ntilde;es',
 	'adresse_pro' => 'Se&ntilde;es profesionales (Pro.)',
-	'ajouter_adherent' => 'Crear <br />un visitante nuevu',
+	'ajouter_adherent' => '<MODIF>Crear <br />un visitante nuevu',
 	'aout' => 'agostu',
+	'aucun_resultat_recherche' => 'Nun hai deng&uacute;n result&aacute;u pa lo que guetasti.',
 	'auteur' => 'Autor',
 	'autre' => 'Otru',
 	'avril' => 'abril',
+
+	// B
+	'bio' => 'Biograf&iacute;a',
 
 	// C
 	'caracteres' => 'carauteres',
@@ -54,6 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// D
 	'decembre' => 'avientu',
 	'demande_password' => 'La to clave:',
+	'description_cfg' => 'Esti complementu permite estender la informaci&oacute;n sobro los autores del sitiu, equ&iacute; vas poder escoyer los campos suplementarios.',
 	'description_page' => 'Equ&iacute; pues verificar los valores de configuraci&oacute;n tal como tan guardaos',
 	'divers' => 'Diversos',
 	'domaine' => 'Dominiu',
@@ -90,6 +95,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_inscription_ok' => 'La to inscripci&oacute;n ta acabante d\'aceutase. Vas recibir per corr&eacute;u electr&oacute;nicu les identificaciones pa la conex&oacute;n.',
 	'formulaire_login_deja_utilise' => 'Esi login y&aacute; ta n\'usu, has d\'escoyer otru.',
 	'formulaire_remplir_obligatoires' => 'Has de rellenar los campos obligatorios',
+	'formulaire_remplir_validation' => 'Has de verificar los campos que tan ensin validar.',
 
 	// G
 	'general_infos' => 'Informaci&oacute;n Xeneral',
@@ -115,6 +121,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_pro' => 'Informaci&oacute;n profesional',
 	'infos_adherent' => 'Informaci&oacute;n suplementaria',
 	'infos_personnelles' => 'Informaci&oacute;n personal',
+	'inscriptions' => 'Inscripciones',
 	'inserez_infos' => 'Tienes qu\'amestar la informaci&oacute;n solicitada',
 
 	// J
@@ -126,7 +133,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'latitude' => 'Llatit&uacute;',
 	'legende' => 'Lleenda',
 	'lisez_mail' => 'Vi&eacute;n d\'unviase un email a les se&ntilde;es qu\'apurriste. Pa activar la to cuenta has de siguir les instrucciones.',
-	'liste_adherents' => '<MODIF>Amosar les visites',
+	'liste_adherents' => '<MODIF>Amosar les cuentes d\'usuarios',
+	'liste_comptes_titre' => 'Llista de cuentes d\'usuarios',
 	'login' => 'Nome d\'usuariu (login)',
 	'longitude' => 'Llonxit&uacute;',
 
@@ -148,6 +156,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom' => 'Alcu&ntilde;u',
 	'nom_explication' => 'el to nome o nomatu',
 	'nom_famille' => 'Apell&iacute;os',
+	'nom_site' => 'Nome del sitiu',
 	'non_renseigne' => 'non revis&aacute;u.',
 	'non_renseignee' => 'non revisada.',
 	'novembre' => 'payares',
@@ -172,6 +181,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'password_retaper' => 'Confirmar la clave',
 	'pays' => 'Pa&iacute;s',
 	'pays_pro' => 'Pa&iacute;s (Pro.)',
+	'pgp' => 'Clave PGP',
 	'prenom' => 'Nome',
 	'probleme_email' => 'Problema de corr&eacute;u: l\'email d\'activaci&oacute;n nun pue unviase.',
 	'profession' => 'Oficiu',
@@ -183,10 +193,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'raccourcis' => 'Atayos',
 	'rappel_login' => 'Recordatoriu: el to identificador ye: ',
 	'rappel_password' => 'La to clave',
+	'recherche_case' => 'Campos de la gueta',
+	'recherche_utilisateurs' => 'Restolar ente los usuarios',
+	'recherche_valeur' => 'Conten&iacute;u guet&aacute;u',
 	'redemande_password' => 'Vuelve a escribir la to clave:',
 	'rien_a_faire' => 'N&aacute; por facer',
 
 	// S
+	'saisir_email_valide' => 'Has d\'escribir unes se&ntilde;es de corr&eacute;u v&aacute;lides',
 	'secteur' => 'Sector',
 	'septembre' => 'setiembre',
 	'sexe' => 'Tratamientu',
@@ -214,7 +228,7 @@ Gracies pola confianza
 
 L\'equipu de @nom_site@ 
 @url_site@',
-	'texte_email_inscription' => 'Tas a piques de confirmar la to inscripci&oacute;n nel sitiu @nom_site@. 
+	'texte_email_inscription' => '<MODIF>Tas a piques de confirmar la to inscripci&oacute;n nel sitiu @nom_site@. 
 
 Calca nel enllaz d\'embaxo p\'activar la to cuenta y escoyer to clave.
 
@@ -235,6 +249,7 @@ Si nun pidiste esta inscripci&oacute;n o si y&aacute; nun quies formar parte del
 	'titre_confirmation' => 'Confirmaci&oacute;n',
 
 	// U
+	'url_site' => 'Url del sitiu',
 	'url_societe' => 'Sitiu web de la socied&aacute;',
 
 	// V
