@@ -18,6 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'colonne_id' => 'Say&#305;',
 	'confirmer_retirer_auteur_zone' => 'Bu yazar&#305; bu b&ouml;l&uuml;mden (Zone) &ccedil;ekmek istedi&#287;inizden emin misiniz ?',
 	'confirmer_retirer_auteurs' => 'T&uuml;m yazarlar&#305; bu b&ouml;l&uuml;mden (Zone) &ccedil;ekmek istedi&#287;inizden emin misiniz ?',
+	'confirmer_supprimer_zone' => 'Bu b&ouml;lgeyi silmek istedi&#287;inizden emin misiniz ?',
 	'creer_zone' => 'Yeni bir b&ouml;lge olu&#351;tur',
 
 	// D

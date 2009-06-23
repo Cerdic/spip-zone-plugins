@@ -16,6 +16,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'colonne_id' => 'Num',
+	'confirmer_retirer_auteur_zone' => 'Sunte&#355;i sigur ca vre&#355;i s&#259; scoate&#355;i autorul din aceast&#259; zon&#259; ?',
+	'confirmer_retirer_auteurs' => 'Sunte&#355;i sigur c&#259; vre&#355;i s&#259; retrage&#355;i to&#355;i autorii din aceast&#259; zon&#259; ?',
+	'confirmer_supprimer_zone' => 'Sunte&#355;i sigur c&#259; vre&#355;i s&#259; suprima&#355;i aceast&#259; zon&#259; ?',
 	'creer_zone' => 'Crea&#355;i o zon&#259; nou&#259;',
 
 	// D
@@ -24,14 +27,24 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'icone_menu_config' => 'Acces Restr&acirc;ns',
 	'icone_supprimer_zone' => '&#350;terge&#355;i aceast&#259; zon&#259;',
+	'info_ajouter_auteur' => 'Ad&#259;uga&#355;i acest autor',
+	'info_ajouter_auteurs' => 'Ad&#259;uga&#355;i to&#355;i autorii',
 	'info_ajouter_zones' => 'Ad&#259;uga&#355;i toate zonele',
+	'info_aucun_acces' => 'Nici un acces autorizat',
+	'info_aucun_auteur' => 'Nici un autor &icirc;n aceast&#259; zon&#259;',
+	'info_aucune_zone' => 'Nici o zon&#259;',
 	'info_auteurs_lies_zone' => 'Autorii care au acces la aceast&#259; zon&#259;',
 	'info_page' => 'Aceast&#259; pagin&#259; v&#259; permite s&#259; gestiona&#355;i zonele de acces restr&acirc;ns din cadrul site-ului dumneavostr&#259;',
+	'info_retirer_auteurs' => 'Retrage&#355;i to&#355;i autorii',
 	'info_retirer_zone' => 'Scoate&#355;i din zon&#259;',
 	'info_retirer_zones' => 'Scoate&#355;i din toate zonele',
 
+	// M
+	'modifier_zone' => 'Modifica&#355;i zona',
+
 	// P
 	'page_zones_acces' => 'Acces Restr&acirc;ns',
+	'par_titre' => 'Dup&#259; titlu',
 	'privee' => 'Privat&#259;',
 	'publique' => 'Public&#259;',
 
@@ -45,8 +58,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'titre' => 'Titlu',
 	'titre_ajouter_zone' => 'Reg&#259;si&#355;i zona',
+	'titre_cadre_modifier_zone' => 'Modifica&#355;i o zon&#259;',
 	'titre_table' => 'Toate zonele de acces',
 	'titre_zones_acces' => 'Zonele de acces restr&acirc;ns',
+	'toutes' => 'Toate',
 
 	// V
 	'voir_toutes' => 'Vede&#355;i toate zonele',
