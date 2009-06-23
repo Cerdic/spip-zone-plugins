@@ -8,14 +8,14 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'alerte_publie_contenant' => '<MODIF>Alerta, aquest contingut &eacute;s p&uacute;blic, per&ograve; cont&eacute; enlla&ccedil;os cap a continguts que no ho s&oacute;n!',
+	'alerte_publie_contenant' => 'Alerta, aquest contingut &eacute;s p&uacute;blic, per&ograve; cont&eacute; enlla&ccedil;os cap a continguts que no ho s&oacute;n!',
 	'aucun_objets_avec_lien_depuis_courant' => 'Aquest contingut no cont&eacute; cap enlla&ccedil; cap a un altre contingut. ',
 	'aucun_objets_avec_lien_vers_courant' => 'Cap altre contingut cont&eacute; un enlla&ccedil; cap aquest. ',
 
 	// C
-	'confirmation_depublication' => '<MODIF>Atenci&oacute;, un contingut p&uacute;blic apunta cap aqu&iacute;, i ser&agrave; impactat si el despubliqueu! \\n\\nVoleu veritablement canviar l\'estat?',
-	'confirmation_publication' => '<MODIF>Atenci&oacute;, un contingut cap al que apunta aquest no &eacute;s p&uacute;blic!\\n\\nVoleu realment canviar l\'estat?',
-	'confirmation_suppression' => '<MODIF>Atenci&oacute;, un contingut p&uacute;blic apunta cap quest, i ser&agrave; impactat si el suprimiu!\\n\\n\\Voleu realment suprimir-lo?',
+	'confirmation_depublication' => 'Atenci&oacute;, un contingut p&uacute;blic apunta cap aqu&iacute;, i es pot modificar si el despubliqueu! nnVoleu veritablement canviar l\'estat?',
+	'confirmation_publication' => 'Atenci&oacute;, un contingut cap al que apunta aquest no &eacute;s p&uacute;blic!nnVoleu realment canviar l\'estat?',
+	'confirmation_suppression' => 'Atenci&oacute;, un contingut p&uacute;blic apunta cap aquest, i ser&agrave; modificat si el suprimiu!nnVoleu realment suprimir-lo?',
 
 	// I
 	'information_element_contenu' => 'Alerta, un altre contingut apunta cap aquest!',
