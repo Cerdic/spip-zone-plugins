@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/_stable_/fulltext/lang/
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/fulltext/lang/
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
@@ -19,20 +19,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'creer_tous' => 'Cr&#233;er tous les index FULLTEXT sugg&#233;r&#233;s',
 
 	// E
-	'enfant' => 'enfant',
 	'enfan' => 'enfan',
-	'enfants' => 'enfants',
 	'enfance' => 'enfance',
+	'enfant' => 'enfant',
 	'enfanter' => 'enfanter',
 	'enfantillage' => 'enfantillage',
+	'enfants' => 'enfants',
 	'et' => 'ET',
 	'etranger' => '&eacute;tranger',
 	'exemples' => 'Exemples d\'utilisation',
 
 	// F
+	'fant' => 'fant',
 	'fonctionnement_recherche' => 'Fonctionnement du moteur de recherche de ce site',
 	'fulltext_cree' => 'FULLTEXT cr&#233;&#233;',
-	'fant' => 'fant',
 
 	// I
 	'il_faut_myisam' => 'il faut MyISAM',
@@ -51,6 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// P
 	'pas_index' => 'Pas d\'index FULLTEXT',
+	'premier_soit' => 'SOIT',
 
 	// R
 	'regenerer_tous' => 'R&#233;g&#233;n&#233;rer tous les index FULLTEXT',
@@ -59,7 +60,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'sequence_exacte' => 'exactement la s&#233;quence de mots',
-	'premier_soit' => 'SOIT',
 	'soit' => 'SOIT',
 	'supprimer' => 'Supprimer',
 
