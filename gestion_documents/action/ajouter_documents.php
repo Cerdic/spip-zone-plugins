@@ -200,7 +200,7 @@ if (!function_exists('corriger_extension')){
  * @return string
  */
 function corriger_extension($ext) {
-	$ext = preg_replace(',[^a-z0-9],', '', $ext);
+	$ext = preg_replace(',[^a-z0-9],i', '', $ext);
 	switch ($ext) {
 		case 'docx':
 			$ext='doc';
