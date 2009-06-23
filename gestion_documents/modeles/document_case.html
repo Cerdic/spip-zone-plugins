@@ -6,7 +6,7 @@
 
 ]
 #CACHE{3600*100}
-<BOUCLE_docslies(DOCUMENTS spip_documents_liens){id_document}{id_objet}{objet}>
+<BOUCLE_docslies(DOCUMENTS spip_documents_liens){id_document}{id_objet}{objet}{statut?}>
 	<div class="item #MODE" id="doc#ID_DOCUMENT">
 		<h3 class="titrem">[<span class="fichier">(#FICHIER*|basename)</span>]
 			<span class="image_loading"></span>

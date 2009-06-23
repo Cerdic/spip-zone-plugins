@@ -6,7 +6,7 @@
 
 ]
 #CACHE{3600*100}
-<BOUCLE_docslies(DOCUMENTS spip_documents_liens){id_document}{id_objet}{objet}>
+<BOUCLE_docslies(DOCUMENTS spip_documents_liens){id_document}{id_objet}{objet}{statut?}>
 	<div class="item #MODE vu_#VU" id="doc#ID_DOCUMENT">
 		[(#EXTENSION|match{gif|png|jpg}|oui) #SET{id,#ID_VIGNETTE|?{#ID_VIGNETTE,#ID_DOCUMENT}}
 		<div class="tourner">
