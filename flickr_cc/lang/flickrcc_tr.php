@@ -18,14 +18,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// F
 	'fermer' => 'Kapat',
-	'flickr_cc_explication' => '<NEW><p>Yukar&#305;daki arama &ouml;zelliklerini kullanarak Flickr &uuml;zeinde Creative Commons resimleri aray&#305;n. Resimlerin hangi lisans tiplerine uydu&#287;unu belirtiniz. </p>
-<p>Cliquez sur la (ou les) images(s) choisie(s) parmi les r&eacute;sultats de la recherche&nbsp;: elle est imm&eacute;diatement associ&eacute;e &agrave; votre article. Cliquez sur le nom de l\'auteur pour acc&eacute;der &agrave; la page Flickr de cette image.</p>
-<p>Ces images sont mises &agrave; disposition par leurs auteurs respectifs&nbsp;: pour respecter leurs droits et leur travail,</p>
-<ul><li>ne supprimez pas la mention de l\'auteur et le lien vers leur page Flickr&nbsp;;</li>
-<li>respectez rigoureusement la licence Creative Commons associ&eacute;e &agrave; chaque image (en particulier, n\'utilisez pas une image dans un cadre commercial si la licence de l\'autorise pas&nbsp;;</li>
-<li>si l\'auteur de l\'image vous le demande, vous devez retirer l\'image de votre site dans un d&eacute;lai de 24 heures.</li>
+	'flickr_cc_explication' => 'Flickr\'da, yukar&#305;daki arama terimlerini belirterek Creative Commons resimleri aray&#305;n. Ayr&#305;ca resimlerin lisans tiplerini de belirtin. </p>
+<p>Arama sonucundaki resme veya resimlere t&#305;klay&#305;n&nbsp;: resim hemen makalenize ba&#287;lanacakt&#305;r. Bu resme ait sayfaya eri&#351;mek i&ccedil;in yazar ismine t&#305;klay&#305;n. </p>
+<p>Bu resimler s&#305;rayla belirtilen yazarlara aittir ve kullan&#305;m&#305;n&#305;za sunulmu&#351;tur&nbsp;: haklar&#305;na ve &ccedil;al&#305;&#351;malar&#305;na sayg&#305; g&ouml;stermek i&ccedil;in ,</p>
+<ul><li>yazar&#305;n ismine ve Flickr sayfas&#305;na y&ouml;nlendiren ba&#287;lant&#305;y&#305; silmeyin&nbsp;;</li>
+<li>Creative Commons lisans&#305;na harfiyen uyun (&ouml;zllikle, e&#287;er lisans buna izin vermiyorsa resmi ticar&icirc; bir alanda kullanmay&#305;n&nbsp;;</li>
+<li>e&#287;er yazar talep ederse resmi sitenizden 24 saat i&ccedil;inde silmelisiniz.</li>
 </ul>
-<p>Ce produit utilise l’API Flickr mais n’est ni soutenu, ni certifi&eacute; par Flickr.</p>',
+<p>Bu r&uuml;&uuml;rn Flickr API\'sini kullan&#305;r ama ne destek verir ne de Flickr taraf&#305;ndan tan&#305;nm&#305;&#351;t&#305;r.</p>',
 
 	// R
 	'rechercher_flickr' => 'Flickr\'da ara',
