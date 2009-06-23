@@ -227,7 +227,7 @@ Bkz [Spip-Contrib ile ilgili belgeler->http://www.spip-contrib.net/SpipBB-le-for
 	'forum_ouvrir' => 'Bu forumu a&ccedil;',
 	'forums_categories' => '&Ccedil;e&#351;itli',
 	'forums_spipbb' => 'SpipBB forumlar&#305;',
-	'forums_titre' => '<MODIF>Olu&#351;turdu&#287;um ilk forum',
+	'forums_titre' => 'Olu&#351;turdu&#287;um ilk forum',
 	'fromphpbb_erreur_db_phpbb_config' => 'phpBB veritaban&#305;ndaki konfig&uuml;rasyon okunam&#305;yor',
 	'fromphpbb_migre_categories' => 'Kategorilerin ithali',
 	'fromphpbb_migre_categories_dans_rub_dpt' => 'Ana ba&#351;l&#305;&#287;a forumlar&#305;n g&ouml;m&uuml;lmesi&nbsp;:',
@@ -329,7 +329,7 @@ _ Duyuru, t&uuml;m sayfalarda forumun en ba&#351;&#305;nda yer al&#305;r.',
 -* Bir makale/forum bu anahtar s&ouml;zc&uuml;&#287;&uuml; i&ccedil;eririyorsa sadece moderat&ouml;rler mesaj ekleyebilir.
 -* Lorsqu\'un sujet de forum est ferm&amp;ecute;, seuls les mod&eacute;rateurs peuvent y ajouter des r&eacute;ponses.',
 	'mot_groupe_moderation' => 'SpipBB\'nin idaresi i&ccedil;in kullan&#305;lan anahtar s&ouml;zc&uuml;k grubu',
-	'mot_postit' => '<MODIF>Postit
+	'mot_postit' => 'Postit
 _ Duyurular&#305;n alt&#305;nda, basit mesajlardan &ouml;nce bir postit vard&#305;r. Listede yaln&#305;z bir kere g&ouml;r&uuml;l&uuml;r.',
 
 	// N
@@ -367,8 +367,8 @@ _ [Y&ouml;netim panosuna eri&#351;im-> .?exec=spipbb_configuration]',
 	'plugin_mauvaise_version' => 'Eklentinin bu s&uuml;r&uuml;m&uuml; sizin SPIP s&uuml;r&uuml;m&uuml;n&uuml;zle uyumlu de&#287;il !',
 	'plugin_nom' => 'SpipBB : SPIP forumlar&#305;n&#305;n y&ouml;netimi',
 	'post_aucun_pt' => 'hi&ccedil;biri&nbsp;!',
-	'post_efface_lui' => '<MODIF>Bu konu @
-nbr_post@ mesaj i&ccedil;erir. Bu mesajlar da konuyla birlikte silinecektir&nbsp;!\\n',
+	'post_efface_lui' => 'Bu konu @
+nbr_post@ mesaj i&ccedil;erir. Bu mesajlar da konuyla birlikte silinecektir&nbsp;!n',
 	'post_ip' => '&#350;u IP adresinden g&ouml;nderilen mesajlar',
 	'post_propose' => '&Ouml;nerilen mesaj',
 	'post_rejete' => 'Reddedilen mesaj',
