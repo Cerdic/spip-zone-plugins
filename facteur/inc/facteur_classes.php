@@ -25,6 +25,14 @@
 			$this->CharSet	= $GLOBALS['meta']['charset'];
 	    	$this->Mailer	= 'mail';
 			$this->Subject	= $objet;
+			
+			//Pour un envoi multiple de mail, $email doit être un tableau avec les adresses.
+			if (is_array($email)) {
+				foreach ($email as $cle => $adresseMail) {
+					$this->AddAddress($adresseMail);
+				}
+			}
+			else
 			$this->AddAddress($email);
 
 			if (isset($GLOBALS['meta']['facteur_smtp_sender'])) {
