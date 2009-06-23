@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/_stable_/couteau_suisse/lang/
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/couteau_suisse/lang/
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
@@ -20,15 +20,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'derniers_connectes' => 'Derniers connect&eacute;s :',
 
 	// E
+	'email_forum' => 'Merci de sp&eacute;cifier votre email !',
 	'explique_spam' => 'Attention : vous avez utilis&eacute; des balises, des caract&egrave;res ou des mots interdits.<br /><br />Revenez en arri&egrave;re !',
 
 	// L
 	'lutte_spam' => 'Lutte contre le SPAM',
 
 	// N
-	'nom_forum' => 'Merci de sp&eacute;cifier votre nom !',
 	'nom_email_forum' => 'Merci de sp&eacute;cifier votre nom ou votre email !',
-	'email_forum' => 'Merci de sp&eacute;cifier votre email !',
+	'nom_forum' => 'Merci de sp&eacute;cifier votre nom !',
 	'non_confirmes' => 'Non confirm&eacute;s :',
 
 	// O

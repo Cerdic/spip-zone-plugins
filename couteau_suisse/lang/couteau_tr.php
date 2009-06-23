@@ -13,6 +13,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'attente_confirmation' => 'Onay bekliyor',
 
+	// C
+	'configurer' => '&#304;svi&ccedil;re &Ccedil;ak&#305;s&#305;n&#305; konfig&uuml;re et',
+	'connections' => 'Ba&#287;lant&#305;lar',
+
 	// D
 	'date_court' => '@jour@/@mois@/@annee@',
 	'derniers_connectes' => 'Son ba&#287;lananlar :',
@@ -49,7 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_lien' => 'Sayfa @page@ : @title@',
 	'page_precedente' => '&Ouml;nceki sayfa',
 	'page_suivante' => 'Sonraki sayfa',
-	'plugin_xml' => 'SPIP sitenizin y&ouml;netilmesine geli&#351;tirecek bir &ccedil;ok k&uuml;&ccedil;&uuml;k ve yararl&#305; yeni i&#351;levi tek bir eklentide toplar.
+	'plugin_xml' => '<MODIF>SPIP sitenizin y&ouml;netilmesine geli&#351;tirecek bir &ccedil;ok k&uuml;&ccedil;&uuml;k ve yararl&#305; yeni i&#351;levi tek bir eklentide toplar.
 
 Bu gere&ccedil;lerin her biri kullan&#305;c&#305; taraf&#305;ndan aktive edilebilir ve pasif hale getirilebilir [eklentinin y&ouml;netim sayfas&#305;->./?exec=admin_couteau_suisse] ve baz&#305; de&#287;i&#351;kenleri kontrol edilebilir : {{Configuration}}\'a t&#305;klay&#305;n&#305;z ve {{&#304;svi&ccedil;re &Ccedil;ak&#305;s&#305;}} ba&#351;l&#305;&#287;&#305;n&#305; se&ccedil;iniz.
 
@@ -59,7 +63,7 @@ Bu eklentide favori gere&ccedil;lerinizi bulacaks&#305;n&#305;z : {Numaray&#305;
 
 Eklentinin belgeleme makalelerini inceleyiniz : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
-Uyumluluk : SPIP 1.92x ve 2.0 ',
+Uyumluluk : SPIP 1.9x ve 2.0 ',
 
 	// S
 	'smileys_dispos' => 'Sunulan g&uuml;len suratlar (smileys) :',
@@ -86,7 +90,10 @@ Uyumluluk : SPIP 1.92x ve 2.0 ',
 
 	// V
 	'variable_vide' => '(Bo&#351;)',
-	'visiteurs_connectes' => 'Ba&#287;l&#305; ziyaret&ccedil;iler : @nb@'
+	'visiteurs_connectes' => 'Ba&#287;l&#305; ziyaret&ccedil;iler : @nb@',
+
+	// W
+	'webmestres' => 'SPIP web y&ouml;neticileri'
 );
 
 ?>

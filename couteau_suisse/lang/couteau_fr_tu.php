@@ -53,7 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_lien' => 'Page @page@ : @title@',
 	'page_precedente' => 'Page pr&eacute;c&eacute;dente',
 	'page_suivante' => 'Page suivante',
-	'plugin_xml' => 'R&eacute;unit en un seul plugin une liste de petites fonctionnalit&eacute;s nouvelles et utiles am&eacute;liorant la gestion de ton site SPIP.
+	'plugin_xml' => '<MODIF>R&eacute;unit en un seul plugin une liste de petites fonctionnalit&eacute;s nouvelles et utiles am&eacute;liorant la gestion de ton site SPIP.
 
 Chacun de ces outils peut &ecirc;tre activ&eacute; ou non par l\'utilisateur sur [la page d\'administration du plugin->./?exec=admin_couteau_suisse] et g&eacute;rer un certain nombre de variables : cliquer sur {{Configuration}}, puis choisir l\'onglet {{Le Couteau Suisse}}.
 
@@ -63,7 +63,7 @@ D&eacute;couvre dans ce plugin tes outils favoris : {Supprime le num&eacute;ro},
 
 N\'h&eacute;site pas &agrave; consulter les articles de documentation du plugin publi&eacute;s sur : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
-Compatibilit&eacute; : SPIP v1.92x et v2.0',
+Compatibilit&eacute; : SPIP v1.9x et v2.0',
 
 	// S
 	'smileys_dispos' => 'Frimousses disponibles :',

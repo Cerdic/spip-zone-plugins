@@ -56,7 +56,7 @@ Find your favourite tools in this plugin: {Superscript}, {Curly inverted commas}
 
 See the documentation articles at: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
-Compatibility: SPIP 1.92x (all versions)',
+Compatibility: SPIP 1.9x (all versions)',
 
 	// S
 	'smileys_dispos' => 'Tillg&auml;ngliga smileys:',

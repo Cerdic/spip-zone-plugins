@@ -7,10 +7,18 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	// 2
+	'2pts' => '@objet@&nbsp;:',
+
 	// A
 	'attente_confirmation' => '&Icirc;n a&#351;teptarea unei confirm&#259;ri',
 
+	// C
+	'configurer' => 'Configura&#355;i Briceagul Elve&#355;ian',
+	'connections' => 'Conexiuni',
+
 	// D
+	'date_court' => '@jour@/@mois@/@annee@',
 	'derniers_connectes' => 'Ultimii conecta&#355;i:',
 
 	// E
@@ -22,6 +30,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// N
 	'nom_forum' => 'V&#259; rug&#259;m s&#259; specifica&#355;i numele dumneavoastr&#259; !',
 	'non_confirmes' => 'Neconfirmate:',
+
+	// O
+	'objet_article' => 'Articol',
+	'objet_articles' => 'Articole',
+	'objet_auteur' => 'Autor',
+	'objet_auteurs' => 'Autori',
+	'objet_breve' => '&#350;tire',
+	'objet_breves' => '&#350;tiri',
+	'objet_mot' => 'Cuv&acirc;nt',
+	'objet_mots' => 'Cuvinte',
+	'objet_petition' => 'Peti&#355;ie',
+	'objet_petitions' => 'Peti&#355;ii',
+	'objet_rubrique' => 'Rubric&#259;',
+	'objet_rubriques' => 'Rubrici',
+	'objet_syndic' => 'Site',
+	'objet_syndics' => 'Site-uri',
 
 	// P
 	'page_debut' => 'Prima pagin&#259;',
@@ -39,7 +63,7 @@ Descoperi&#355;i &icirc;n aces plug-in tool-urile dumneavoastr&#259; favorite: {
 
 Nu ezita&#355;i s&#259; consulta&#355;i articolele de documenta&#355;ie publicate la : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
-Compatibilitate : SPIP toate versiunile 1.92x',
+Compatibilitate : SPIP 1.9x &#351;i v2.0',
 
 	// S
 	'smileys_dispos' => 'Emoticon-uri disponibile',
@@ -53,9 +77,23 @@ Compatibilitate : SPIP toate versiunile 1.92x',
 	'texte_formatspip' => 'TEXT ORIGINAL &Icirc;N FORMAT SPIP',
 	'textes_formatspip' => 'TEXTE ORIGINALE &Icirc;N FORMAT SPIP',
 	'titre' => 'Cu&#355;itul Elve&#355;ian',
+	'tri_auteurs' => 'ORDINEA AUTORILOR',
+	'tri_descendre' => 'Cobor&acirc;&#355;i acest autor',
+	'tri_monter' => 'Urca&#355;i acest autor',
+
+	// U
+	'urls_propres_erreur' => 'Acest format nu &#355;ine seama de URL-urile curate listate mai jos.',
+	'urls_propres_format' => 'Formatul curent al URL-urilor este : {{&laquo;&nbsp;@format@&nbsp;&raquo;}}. [<span>[Configuration->@url@]</span>]',
+	'urls_propres_lien' => 'Leg&#259;tura public&#259; de acces',
+	'urls_propres_objet' => 'Sunt listate aici URL-urile curate stocate &icirc;n baza de date, datorit&#259; c&#259;rora vizitatorii vor putea s&#259; navigheze &icirc;n site.',
+	'urls_propres_titre' => 'URL-uri CURATE',
 
 	// V
-	'variable_vide' => '(Gol)'
+	'variable_vide' => '(Gol)',
+	'visiteurs_connectes' => 'Vizitatori conecta&#355;i : @nb@',
+
+	// W
+	'webmestres' => 'Webmaster-i SPIP'
 );
 
 ?>

@@ -53,7 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_lien' => 'P&aacute;xina @page@: @title@',
 	'page_precedente' => 'P&aacute;xina anterior',
 	'page_suivante' => 'P&aacute;xina siguiente',
-	'plugin_xml' => 'Xunta nun solu plugin una llista de peque&ntilde;es funciones nueves y ferramientes pa meyorar la xesti&oacute;n del to sitiu SPIP.
+	'plugin_xml' => '<MODIF>Xunta nun solu plugin una llista de peque&ntilde;es funciones nueves y ferramientes pa meyorar la xesti&oacute;n del to sitiu SPIP.
 
 Cauna d\'estes ferramientes puede activase o non pol usuariu so [la p&aacute;xina d\'alministraci&oacute;n del plugin->./?exec=admin_couteau_suisse] y xestionar ciertu n&uacute;mberu de variables: calcar en {{Configuraci&oacute;n}}, llueu escoyer la lling&uuml;eta {{La Navaya Suiza}}.
 
@@ -63,7 +63,7 @@ Descubre nesti plugin les tos ferramientes favorites: {Suprime\'l n&uacute;mberu
 
 Si quies consultar los art&iacute;culos de la documentaci&oacute;n del plugin, tan espublizaos en: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
-Compatibilid&aacute;: SPIP v1.92x y v2.0',
+Compatibilid&aacute;: SPIP v1.9x y v2.0',
 
 	// S
 	'smileys_dispos' => 'Caruques disponibles:',

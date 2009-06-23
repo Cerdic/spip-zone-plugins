@@ -49,7 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_lien' => 'Bladzijde @page@: @title@',
 	'page_precedente' => 'Vorige bladzijde',
 	'page_suivante' => 'Volgende bladzijde',
-	'plugin_xml' => 'In slechts &eacute;&eacute;n plugin verenigt een lijst van kleine nieuwe en nuttige functies die het beleid verbeteren, van uw SPIP site .
+	'plugin_xml' => '<MODIF>In slechts &eacute;&eacute;n plugin verenigt een lijst van kleine nieuwe en nuttige functies die het beleid verbeteren, van uw SPIP site .
 
 Elk van deze werktuigen kan of niet door de gebruiker op geactiveerd worden [de bladzijde van bestuur van plugin->./?exec=admin_couteau_suisse] en een aantal variabele beheren: op {{Configuratie}} klikken, vervolgens de tab kiezen {{Le Couteau Suisse}}.
 
@@ -59,7 +59,7 @@ Ontdekt in dit plugin uw lievelingswerktuigen: {Typografische Inzenders}, {typog
 
 Aarzelt niet om de gepubliceerde artikelen van documentatie van plugin over te raadplegen : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
-De verenigbaarheid: SPIP iedereen betaalden 1.92x en v2.0',
+De verenigbaarheid: SPIP iedereen betaalden 1.9x en v2.0',
 
 	// S
 	'smileys_dispos' => 'Beschikbare smylies :',
