@@ -35,6 +35,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'installer_dossier_lib' => 'Ties que crear un direutoriu @dir@ na raiz del to sitiu SPIP, que tenga permisu d\'escritura.',
 	'installer_lib_192' => 'Pa asitiar una biblioteca, hai que descomprimir el ficheru zip a mano y copiar el so conten&iacute;u nel direutoriu @dir@.',
 
+	// L
+	'label_activer' => 'Activar',
+	'label_obligatoire' => 'Testu obligatoriu',
+
 	// N
 	'nom_table_manquant' => 'Falta\'l nome de la tabla SQL',
 	'nouveau' => 'Nuevu',
