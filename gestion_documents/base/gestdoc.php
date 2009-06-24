@@ -100,6 +100,34 @@ function gestdoc_upgrade($nom_meta_base_version,$version_cible){
 			ecrire_meta($nom_meta_base_version,$current_version="0.7",'non');
 		}
 	}
+	gestdoc_check_statuts();
+}
+
+function gestdoc_check_statuts(){
+	$docs = array_map('reset',sql_allfetsel('id_document','spip_documents',"statut='0'"));
+	if (count($docs)){
+		include_spip('action/editer_document');
+		foreach($docs as $id_document)
+			// mettre a jour le statut si necessaire
+			instituer_document($id_document);
+	}
+}
+
+function gestdoc_install($action,$prefix,$version_cible){
+	$version_base = $GLOBALS[$prefix."_base_version"];
+	switch ($action){
+		case 'test':
+			gestdoc_check_statuts();
+			return (isset($GLOBALS['meta'][$prefix."_base_version"])
+				AND version_compare($GLOBALS['meta'][$prefix."_base_version"],$version_cible,">="));
+			break;
+		case 'install':
+			gestdoc_upgrade('gestdoc_base_version',$version_cible);
+			break;
+		case 'uninstall':
+			//gestdoc_vider_tables();
+			break;
+	}
 }
 
 ?>

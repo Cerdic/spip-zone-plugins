@@ -138,6 +138,7 @@ function formulaires_joindre_document_verifier_dist($id_document='new',$id_objet
 
 function formulaires_joindre_document_traiter_dist($id_document='new',$id_objet=0,$objet='',$mode = 'auto',$galerie = false){
 	$res = array('editable'=>true);
+	$ancre = '';
 	// on joint un document deja dans le site
 	if (_request('joindre_mediatheque')){
 		if ($id_joindre = intval(preg_replace(',^(doc|document|img),','',_request('id_joindre')))){
@@ -146,6 +147,7 @@ function formulaires_joindre_document_traiter_dist($id_document='new',$id_objet=
 			include_spip('action/editer_document');
 			document_set($id_joindre,$champs);
 			set_request('id_joindre',''); // vider la saisie
+			$ancre = $id_joindre;
 			$res['message_ok'] = _T('gestdoc:document_attache_succes');
 		}
 	}
@@ -168,13 +170,18 @@ function formulaires_joindre_document_traiter_dist($id_document='new',$id_objet=
 		foreach ($nouveaux_doc as $doc) {
 			if (!is_numeric($doc))
 				$messages_erreur[] = $doc;
-			else
+			else{
+				if (!$ancre)
+					$ancre = $doc;
 				$nb_docs++;
+			}
 		}
 		if (count($messages_erreur))
 			$res['message_erreur'] = implode('<br />',$messages_erreur);
 		if ($nb_docs)
 			$res['message_ok'] = $nb_docs==1? _T('gestdoc:document_installe_succes'):_T('gestdoc:nb_documents_installe_succes',array('nb'=>$nb_docs));
+		if ($ancre)
+			$res['redirect'] = "#doc$ancre";
 	}
 	
 	return $res;
