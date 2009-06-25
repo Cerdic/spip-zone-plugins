@@ -312,7 +312,7 @@ function verifier_taille_document_acceptable($infos){
 	if (!$infos['type_image']) {
 		if (_DOC_MAX_SIZE > 0
 		 AND $infos['taille'] > _DOC_MAX_SIZE*1024)
-			return _T('info_logo_max_poids', array('maxi' => taille_en_octets(_DOC_MAX_SIZE*1024), 'actuel' => taille_en_octets($taille)));
+			return _T('gestdoc:info_doc_max_poids', array('maxi' => taille_en_octets(_DOC_MAX_SIZE*1024), 'actuel' => taille_en_octets($infos['taille'])));
 
 		if ($infos['mode'] == 'image')
 			return _T('gestdoc:erreur_format_fichier_image',array('nom'=> $infos['fichier']));
@@ -323,7 +323,7 @@ function verifier_taille_document_acceptable($infos){
 
 		if (_IMG_MAX_SIZE > 0
 		 AND $infos['taille'] > _IMG_MAX_SIZE*1024)
-			return _T('info_logo_max_poids', array('maxi' => taille_en_octets(_IMG_MAX_SIZE*1024), 'actuel' => taille_en_octets($taille)));
+			return _T('gestdoc:info_image_max_poids', array('maxi' => taille_en_octets(_IMG_MAX_SIZE*1024), 'actuel' => taille_en_octets($infos['taille'])));
 	
 		if (_IMG_MAX_WIDTH * _IMG_MAX_HEIGHT
 		 AND ($infos['largeur'] > _IMG_MAX_WIDTH

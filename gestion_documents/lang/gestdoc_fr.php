@@ -79,7 +79,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_gauche_numero_document'=>'DOCUMENT NUM&Eacute;RO',
 	'info_statut_document'=> 'Ce document est&nbsp;:',
 	'info_illustrations' => 'Illustrations',
-	
+	'info_doc_max_poids' => 'Les documents doivent obligatoirement faire moins de @maxi@ (ce fichier fait @actuel@).',
+	'info_image_max_poids' => 'Les images doivent obligatoirement faire moins de @maxi@ (ce fichier fait @actuel@).',
+
 	// L
 	'logo' => 'Logo',
 	'label_id_joindre' => 'Document',
