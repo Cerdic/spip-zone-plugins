@@ -80,17 +80,24 @@
                 
                 <li>
                 [(#GET{repartition}|non)<div class="choix">
-                    <label for="moyenne">Scrutin à la plus forte moyenne[(#GET{repartition}|oui) (Non modifiable)]</label><input type="radio" name="repartition" value="moyenne" id="moyenne"  [(#ENV**{erreurs}|table_valeur{repartition}|=={moyenne}|or{#ENV**{erreurs}|table_valeur{repartition}|=={''}}|oui) checked="checked"] />
+                    <label for="moyenne">Scrutin à la plus forte moyenne[(#GET{repartition}|oui) (Non modifiable)]</label><input type="radio" class="radio" name="repartition" value="moyenne" id="moyenne"  [(#ENV**{erreurs}|table_valeur{repartition}|=={moyenne}|or{#ENV**{erreurs}|table_valeur{repartition}|=={''}}|oui) checked="checked"] />
                 </div>
                 
                  <div class="choix">
-                        <label for="reste">Scrutin au plus fort reste[(#GET{repartition}|oui) (Non modifiable)]</label><input type="radio" name="repartition" value="reste" id="reste" [(#GET{repartition}|=={reste}|oui)] [(#ENV**{erreurs}|table_valeur{repartition}|=={reste}|oui) checked="checked"] />
+                        <label for="reste">Scrutin au plus fort reste[(#GET{repartition}|oui) (Non modifiable)]</label><input class="radio" type="radio" name="repartition" value="reste" id="reste" [(#GET{repartition}|=={reste}|oui)] [(#ENV**{erreurs}|table_valeur{repartition}|=={reste}|oui) checked="checked"] />
                 </div>
                 ]
                 [(#GET{repartition}|=={moyenne}|oui)Scrutin à la plus forte moyenne.<input type="hidden" name="repartition" value="moyenne" />]
                 [(#GET{repartition}|=={reste}|oui)Scrutin au plus fort reste.<input type="hidden" name="repartition" value="reste" />]
 
                 
+                </li>
+                
+                <li>
+                    <label for="graph">
+                        Afficher un graphique de répartition des sièges
+                    </label>
+                    <input type="checkbox" value="graph" name="graph" [checked="(#ENV**{erreurs}|table_valeur{graph}|=={graph})"] />
                 </li>
             </ul>
         </fieldset>

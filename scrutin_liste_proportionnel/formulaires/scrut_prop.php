@@ -164,6 +164,7 @@ function formulaires_scrut_prop_verifier_dist(){
     
         }
        $erreurs['valeurs_champs_obligatoire'] =  $valeur_champs_obligatoire;
+       $erreurs['graph']                      = _request('graph');
 	   return $erreurs;
     }
     else
@@ -266,6 +267,7 @@ function formulaires_scrut_prop_traiter_dist(){
     $return['exprimes'] = nb_en_to_fr($return['exprimes']);
     //returner ce qu'il faut
     $return['voix_par_liste']   = $resultats;
+    $return['url_graph']        = generer_url_graph($liste_sieges);
     return array('message_ok'=>$return);
 }
 
@@ -324,6 +326,21 @@ function sieges_restants_reste($sieges_par_listes,$restes,$sieges){
     }
     
     return $sieges_par_listes;
+}
+
+function generer_url_graph($sieges){
+    $url_base ='http://chart.apis.google.com/chart?cht=p&chs=400&200&chtt=Répartition des sièges';
+    
+    unset($sieges['']);
+    
+    $total  = array_sum($sieges);
+    $listes = '&chl=|'.implode(array_keys ($sieges),'|');
+    $sieges = '&chd=t:'.$total.','.implode($sieges,',');
+    $couleurs = '&chco=FFFFFF,000000';
+    
+    return $url_base.$listes.$sieges.$couleurs;
+
+
 }
 
 ?>
