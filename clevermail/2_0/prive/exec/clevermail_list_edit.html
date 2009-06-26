@@ -5,20 +5,20 @@
 [(#ENV{lst_id,-1}|=={-1}|non)
   <h2><:clevermail:editer_lettre:></h2>
 ]
-[(#REM)<div class="ajax">]
-#FORMULAIRE_CLEVERMAIL_LIST_EDIT{#ENV{lst_id,-1}}
-[(#REM)</div>]
+<div class="ajax">
+  #FORMULAIRE_CLEVERMAIL_LIST_EDIT{#ENV{lst_id,-1}}
+</div>
 <!--#navigation-->
-<INCLURE{fond=prive/menu}>
+  <INCLURE{fond=prive/menu}>
 <!--/#navigation-->
 <!--#extra-->
-<strong><:clevermail:tags_specifiques:> :</strong>
-<ul>
-  <li>@@NOM_LETTRE@@</li>
-  <li>@@DESCRIPTION@@</li>
-  <li>@@FORMAT_INSCRIPTION@@</li>
-  <li>@@EMAIL@@</li>
-  <li>@@URL_CONFIRMATION@@</li>
-  <li>@@URL_DESINSCRIPTION@@</li>
-</ul>
+	<strong><:clevermail:tags_specifiques:> :</strong>
+	<ul>
+	  <li>@@NOM_LETTRE@@</li>
+	  <li>@@DESCRIPTION@@</li>
+	  <li>@@FORMAT_INSCRIPTION@@</li>
+	  <li>@@EMAIL@@</li>
+	  <li>@@URL_CONFIRMATION@@</li>
+	  <li>@@URL_DESINSCRIPTION@@</li>
+	</ul>
 <!--/#extra-->
