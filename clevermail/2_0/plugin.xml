@@ -36,7 +36,7 @@ Gestion de lettres d'information reprenant les fonctionnalités du logiciel libr
 	<chemin dir='' />
 	<necessite id="SPIP" version="[2.0.8;]" />
 	<necessite id="facteur" version="[1.0;]" />
-  <bouton id='clevermail' parent='configuration'>
+  <bouton id='clevermail' parent='naviguer'>
     <titre>CleverMail</titre>
     <icone>img_pack/enveloppe.png</icone>
     <url>clevermail</url>
