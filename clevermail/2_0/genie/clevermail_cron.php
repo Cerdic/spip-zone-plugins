@@ -1,25 +1,20 @@
 <?php
-	/**
-	 *
-	 * CleverMail : plugin de gestion de lettres d'information basé sur CleverMail
-	 * Author : Thomas Beaumanoir
-	 * Clever Age <http://www.clever-age.com>
-	 * Copyright (c) 2006 - Distribue sous licence GNU/GPL
-	 *
-	 **/
-
-include_spip('phpmailer/class.phpmailer');
+// cf http://programmer.spip.org/Declarer-une-tache
 
 function genie_clevermail_cron($verbose = 'no') {
-	$cm_send_number = spip_fetch_array(spip_query("SELECT set_value FROM cm_settings WHERE set_name='CM_SEND_NUMBER'"));
-	$queued = spip_query("SELECT * FROM cm_posts_queued ORDER BY psq_date LIMIT 0,".$cm_send_number['set_value']);
-	while ($message = spip_fetch_array($queued)) {
-		$result = spip_fetch_array(spip_query("SELECT COUNT(*) AS nb FROM cm_posts_done WHERE pst_id = ".$message['pst_id']." AND sub_id = ".$message['sub_id']));
-		if ($result['nb'] == 0) {
-			$post = spip_fetch_array(spip_query("SELECT * FROM cm_posts WHERE pst_id = ".$message['pst_id']));
-			$list = spip_fetch_array(spip_query("SELECT * FROM cm_lists WHERE lst_id = ".$post['lst_id']));
-			$subscriber = spip_fetch_array(spip_query("SELECT * FROM cm_subscribers WHERE sub_id = ".$message['sub_id']));
-			$subscription = spip_fetch_array(spip_query("SELECT lsr_mode, lsr_id FROM cm_lists_subscribers WHERE lst_id = ".$post['lst_id']." AND sub_id = ".$message['sub_id']));
+	// On appelle le facteur
+	$envoyer_mail = charger_fonction('envoyer_mail', 'inc');
+	
+	$cm_send_number = sql_getfetsel("set_value", "spip_cm_settings", "set_name='CM_SEND_NUMBER'");
+	// TODO : syntaxe complÃ¨te sql_select pour le LIMIT
+	$queued = sql_select("*", "spip_cm_posts_queued", "", "psq_date LIMIT 0,".$cm_send_number['set_value']);
+	while ($message = sql_fetch($queued)) {
+		$nb = sql_countsel("spip_cm_posts_done", "pst_id = ".$message['pst_id']." AND sub_id = ".$message['sub_id']);
+		if ($nb == 0) {
+			$post = sql_fetsel("*", "spip_cm_posts", "pst_id = ".$message['pst_id']);
+			$list = sql_fetsel("*", "spip_cm_lists", "lst_id = ".$post['lst_id']);
+			$subscriber = sql_fetsel("*", "spip_cm_subscribers", "sub_id = ".$message['sub_id']);
+			$subscription = sql_fetsel("lsr_mode, lsr_id", "spip_cm_lists_subscribers", "lst_id = ".$post['lst_id']." AND sub_id = ".$message['sub_id']);
 
 			$mode = ($subscription['lsr_mode'] == 1 ? 'html' : 'text');
 
@@ -29,18 +24,20 @@ function genie_clevermail_cron($verbose = 'no') {
 			// subject
 			$subject = trim(($list['lst_subject_tag'] == 1 ? '['.$list['lst_name'].'] ' : '').$post['pst_subject']);
 
-			$cm_mail_from = spip_fetch_array(spip_query("SELECT set_value FROM cm_settings WHERE set_name='CM_MAIL_FROM'"));
-			$cm_mail_return = spip_fetch_array(spip_query("SELECT set_value FROM cm_settings WHERE set_name='CM_MAIL_RETURN'"));
+			$from = sql_getfetsel("set_value", "spip_cm_settings", "set_name='CM_MAIL_FROM'");
+			$return = sql_getfetsel("set_value", "spip_cm_settings", "set_name='CM_MAIL_RETURN'");
 
+			/*
 			$mail = new PHPMailer();
 			$mail->Subject = $subject;
-			$mail->Sender = $cm_mail_return['set_value'];
-			$mail->From = $cm_mail_from['set_value'];
+			$mail->Sender = $cm_mail_return;
+			$mail->From = $cm_mail_from;
 			$mail->FromName = $GLOBALS['meta']['nom_site'];
 			$mail->AddAddress($to);
-			$mail->AddReplyTo($cm_mail_from['set_value']);
+			$mail->AddReplyTo($cm_mail_from);
 			$mail->CharSet = $GLOBALS['meta']['charset'];
-
+      */
+			
 			// message content
 			$text = $post['pst_text'];
 			$text = str_replace("(\r\n|\n|\n)", CM_NEWLINE, $text);
@@ -58,7 +55,7 @@ function genie_clevermail_cron($verbose = 'no') {
 			$template['@@FORMAT_INSCRIPTION@@'] = $mode;
 			$template['@@EMAIL@@'] = $to;
 
-			// corrige le lien de désinscription
+			// corrige le lien de desinscription
 			$template[dirname($list['lst_url_html']).'/@@URL_DESINSCRIPTION@@'] = '@@URL_DESINSCRIPTION@@';
 			$template[dirname($list['lst_url_txt']).'/@@URL_DESINSCRIPTION@@'] = '@@URL_DESINSCRIPTION@@';
 
@@ -69,20 +66,23 @@ function genie_clevermail_cron($verbose = 'no') {
 				$html = str_replace($templateFrom, $templateTo, $html);
 			}
 
-			if ($mode == 'text') {
-				$mail->IsHTML(false);
-				$mail->Body    = $text;
-			} else {
-				$mail->IsHTML(true);
-				$mail->Body    = $html;
-				$mail->AltBody = $text;
-			}
-
-			if (spip_query("DELETE FROM cm_posts_queued WHERE pst_id = ".$message['pst_id']." AND sub_id = ".$message['sub_id'])) {
+			switch ($mode) {
+        case 'html':
+          $body = array('html' => $html, 'texte' => '');
+          break;
+        case 'texte':
+          $body = array('html' => '', 'texte' => $text);
+          break;
+        default:
+          $body = array('html' => $html, 'texte' => $text);
+          break;
+      }
+			
+			if (sql_delete("spip_cm_posts_queued", "pst_id = ".$message['pst_id']." AND sub_id = ".$message['sub_id'])) {
 				// message removed from queue, we can try to send it
-				if ($mail->Send()) {
+				if ($envoyer_mail($to, $subject, $body, $from)) {
 					// message sent
-					spip_query("INSERT INTO cm_posts_done (pst_id, sub_id) VALUES (".$message['pst_id'].", ".$message['sub_id'].")");
+					sql_insertq("spip_cm_posts_done", array('pst_id' => $message['pst_id'], 'sub_id' => $message['sub_id']));
 					if ($verbose == 'yes') {
 						echo "Message from list \"".$list['lst_name']."\" sent to ".$to." in ".$mode." format<br />";
 					} else {
@@ -91,10 +91,8 @@ function genie_clevermail_cron($verbose = 'no') {
 				} else {
 					if ($verbose == 'yes') {
 						echo "Message could not be sent.<br />";
-  						echo "Mailer Error: " . $mail->ErrorInfo;
 					} else {
-  						spip_log("Message could not be sent");
-  						spip_log("Mailer Error: ".$mail->ErrorInfo);
+  					spip_log("Message could not be sent");
 					}
 				}
 			}
