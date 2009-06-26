@@ -11,3 +11,8 @@
 [
 (#INCLURE{fond=prive/inc-ajouter-documents}{env}{ajax})
 ]
+<script type="text/javascript" src='#CHEMIN{javascript/jQuery.MultiFile.js}'></script>
+<script type='text/javascript'>
+jQuery.MultiFile();
+onAjaxLoad(function(){jQuery.MultiFile();});
+</script>
