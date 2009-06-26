@@ -2,11 +2,13 @@
 <plugin>
 	<nom>Tablesorter pour SPIP</nom>
 	<auteur>Chistian Bach http://lovepeacenukes.com/
-	Portabe sous SPIP par Cyril Marion</auteur>
+	Portabe sous SPIP par Cyril Marion http://www.cym.fr</auteur>
 	<version>0.0</version>
 	<etat>dev</etat>
 	<description>
-	Ajoute une class "tablesorter" &agrave; tous les tableaux ayant d&eacute;j&agrave; la class table.spip, permettant de trier les donn&eacute;es sur un simple clic sur une colonne.
+	Pour l'instant, permet de trier les tableaux portant la class CSS "tablesorter" en cliquant simplement sur l'ent&ecirc;te d'une colonne; par la suite, ajoutera une class "tablesorter" automatiquement &agrave; tous les tableaux ayant d&eacute;j&agrave; la class table.spip.
+	
+	Voir en ligne toutes les options de tris, sur le site de tablesorter.
 	</description>
 	
 	<prefix>tablesorter</prefix>
