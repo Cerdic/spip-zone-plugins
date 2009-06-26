@@ -174,9 +174,10 @@ if ($connect_statut == '0minirezo' OR ( $connect_statut !== '0minirezo' AND ($id
 
 	$onglet_documents = articles_documents('article', $id_article);
 	$onglet_interactivite = (_INTERFACE_ONGLETS?boites_de_config_articles($id_article):"");
-
+/* rers       supprimer les forums sous les articles dans l'espace privé, malgré l'autorisation de communiquer
+   rers       dans le forum des adhérents et forum des administrateurs
 	$onglet_discuter = !$statut_forum ? '' : ($discuter($id_article, 'articles', 'id_article', $statut_forum, $debut_forum));
-
+fin rers */
 
 	return
 	  $navigation

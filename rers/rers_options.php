@@ -5,7 +5,8 @@
 
 		if ($GLOBALS['connect_statut'] == "0minirezo") {
 		  // on voit le bouton comme  sous-menu de "naviguer"
-			$boutons_admin['naviguer']->sousmenu['cfg&cfg=rers']= new Bouton("plugin-24.gif", _T('Configuration plugin RERS') );
+			$boutons_admin['configuration']->sousmenu['cfg&cfg=rers']= new Bouton("plugin-24.gif", _T('Plugin RERS') );
+			$boutons_admin['forum']->sousmenu['controle_forum&type=interne']= new Bouton("suivi-forum-24.gif", _T('Suivi des forums privés') );
 		}
 		return $boutons_admin;
 	}

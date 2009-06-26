@@ -637,6 +637,17 @@ echo encours_accueil_derniers_savoirs_rers(); //rers  AJOUT
 
 	echo afficher_objets('article',afficher_plus(generer_url_ecrire('articles_page'))._T('info_en_cours_validation'),	array('FROM' => "spip_articles AS articles, spip_auteurs_articles AS lien", "WHERE" => "articles.id_article=lien.id_article AND lien.id_auteur=$connect_id_auteur AND articles.statut='prepa'", "ORDER BY" => "articles.date DESC"));
 
+
+// RERS : les articles en cours de rédaction par les adhérents (TOUS LES ARTICLES en cours de redaction)
+	echo  afficher_objets('article','Tous les articles en préparation', 
+                array("WHERE" => "statut='prepa'", 'ORDER BY' => "date DESC"));
+
+
+
+
+
+
+
 	if ($spip_display == 4)
 	  echo colonne_droite_eq4($id_rubrique,
 			 $GLOBALS['meta']["activer_breves"],
