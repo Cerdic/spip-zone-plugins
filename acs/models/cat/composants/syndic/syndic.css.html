@@ -1,32 +1,52 @@
 #CACHE{0}
 
-.syndic {
+.cSyndic {
+  font-size: 0.82em;
   [border-width: (#VAR{acsSyndicBordWidth});]
   [border-style: (#VAR{acsSyndicBordStyle});]
   [border-color: (#VAR{acsSyndicBordColor});]
   [background: (#VAR{acsSyndicFond});]
 }
 
-.syndic .menu-titre {
+.cSyndic .menu-titre {
+  text-align : center;
+  font-weight: bold;
   [background: (#VAR{acsSyndicTitreFond})[ url("(#ACS_CHEMIN{img/trame/#VAR{acsSyndicTitreFondImage}})") repeat top left];]
 }
 
-.syndic .article{
+.cSyndic .article{
   [background: (#VAR{acsSyndicFond});]
   padding-left: 5px;
   font-size: 80%;
 }
 
-.syndic .site {
+.cSyndic .site, .cSyndic .pagination {
   border-top: 1px solid[ (#VAR{acsRubnavSep})];
   text-align: center;
 }
-
-.syndic .menu-item a {
-  [text-align: (#VAR{acsRubnavAlign});]
+[.cSyndic .pagination {background: (#VAR{acsSyndicTitreFond});}]
+.cSyndic .site a {
+  display: block;
+  width: 100%;
 }
+[.cSyndic .site:hover, .cSyndic .site a:hover { background: (#VAR{acsRubnavFondHover});}]
 
 [(#REM) Override des styles de la dist SPIP pour le formulaire ]
-.syndic #description_site, .syndic #nom_site, .syndic #url_site {
+.cSyndicAdd {
+  font-size: 0.82em;
+}
+.cSyndicAdd #description_site, .cSyndic #nom_site, .cSyndic #url_site {
   width: 100%;
+}
+.cSyndicAdd .formulaire_spip fieldset {
+  [border-width: (#VAR{acsSyndicBordWidth});]
+  [border-style: (#VAR{acsSyndicBordStyle});]
+  [border-color: (#VAR{acsSyndicBordColor});]
+  [background: (#VAR{acsSyndicFond})]
+}
+.cSyndicAdd .formulaire_spip legend {
+  [border-width: (#VAR{acsSyndicBordWidth});]
+  [border-style: (#VAR{acsSyndicBordStyle});]
+  [border-color: (#VAR{acsSyndicBordColor});]
+  [background: (#VAR{acsSyndicTitreFond})[ url("(#ACS_CHEMIN{img/trame/#VAR{acsSyndicTitreFondImage}})") repeat top left];]
 }

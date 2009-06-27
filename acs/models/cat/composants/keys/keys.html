@@ -1,5 +1,5 @@
 [(#REM) Affiche le bloc de mots-clés d'un article, ou tous les mots-clés si id_article n'est pas défini. ]
 <div class="#PINCEAU{keys}">
-[(#ID_MOT|=={''}|?{' ', ''})<INCLURE{fond=composants/keys/inc-keys}{ajax}{lang=#LANG}{id_article}>]
-[(#ID_MOT|=={''}|?{'', ' '})<INCLURE{fond=composants/keys/inc-keygroup}{ajax}{lang=#LANG}{id_mot}{type}>]
+[(#ID_MOT|=={''}|?{' ', ''})<INCLURE{fond=composants/keys/inc-keys}{ajax}{lang}{id_article}{id_rubrique}>]
+[(#ID_MOT|=={''}|?{'', ' '})<INCLURE{fond=composants/keys/inc-keygroup}{ajax}{lang}{id_mot}{type}>]
 </div>

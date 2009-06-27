@@ -1,6 +1,7 @@
 #CACHE{0}
 
-.tags {
+.cTags {
+  font-size: 0.82em;
   [border-width: (#VAR{acsTagsBordWidth});]
   [border-style: (#VAR{acsTagsBordStyle});]
   [border-color: (#VAR{acsTagsBordColor});]
@@ -8,13 +9,15 @@
   -moz-border-radius: 5px;
 }
 
-.tags .text {
+.cTags .text {
   text-align : #VAR{acsTagsAlign,center};
   padding : 5px;
   overflow: hidden;
 }
 
-.tags .menu-titre {
+.cTags .menu-titre {
+  text-align : center;
+  font-weight: bold;
   [background: (#VAR{acsTagsTitreFond})[ url("(#ACS_CHEMIN{img/trame/#VAR{acsTagsTitreFondImage}})") repeat top left];]
   [border-bottom: 1px solid (#VAR{acsTagsSep});]
 

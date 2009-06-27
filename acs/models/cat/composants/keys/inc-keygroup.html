@@ -1,6 +1,6 @@
 [(#REM) Menu de navigation mots-cles : les autres mots cles du meme groupe ]
 <B_mots_freres>
-<div class="cbloc keys">
+<div class="cKeys">
   #ANCRE_PAGINATION
   [<p class="pagination">(#PAGINATION)</p>]
   <div class="menu-titre"><:mots_clefs_meme_groupe:></div>
@@ -15,7 +15,7 @@
 
 [(#REM) Menu de navigation mots-cles : les autres groupes avec un lien sur le premier mot du groupe ]
 <B_groupes_freres>
-<div class="cbloc keys">
+<div class="cKeys">
   <h2 class="menu-titre"><:autres_groupes_mots_clefs:></h2>
   <ul>
   <BOUCLE_groupes_freres(GROUPES_MOTS) {par titre} {titre!==(_.*)} {doublons}>
@@ -25,4 +25,5 @@
   </BOUCLE_groupes_freres>
   </ul>
 </div>
+<div class="spacer"></div>
 </B_groupes_freres>

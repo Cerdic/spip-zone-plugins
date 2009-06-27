@@ -12,6 +12,13 @@
   </param>
 
   <variable>
+    <nom>Orientation</nom>
+    <type>choix</type>
+    <option>vertical</option>
+    <option>horizontal</option>
+    <valeur>vertical</valeur>
+  </variable>
+  <variable>
     <nom>Left</nom>
     <type>nombre</type>
   </variable>
@@ -41,6 +48,14 @@
   </variable>
   <variable>
     <nom>6</nom>
+    <type>widget</type>
+  </variable>
+  <variable>
+    <nom>7</nom>
+    <type>widget</type>
+  </variable>
+  <variable>
+    <nom>8</nom>
     <type>widget</type>
   </variable>
 </composant>

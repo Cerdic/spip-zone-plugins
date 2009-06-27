@@ -75,11 +75,20 @@ $def = array(
 	'acsForumsBordStyle' => '=acsRubnavBordStyle',
 
 	'acsKeysUse' => 'oui',
+	'acsKeysTitreFond' => '=acsRubnavTitreFond',
+	'acsKeysTitreFondImage' => '=acsRubnavTitreFondImage',
+	'acsKeysFond' => '=acsRubnavFond',
 	'acsKeysBordColor' => '=acsRubnavBordColor',
 	'acsKeysBordWidth' => '=acsRubnavBordWidth',
 	'acsKeysBordStyle' => '=acsRubnavBordStyle',
-	'acsKeysTitreFond' => '=acsRubnavTitreFond',
-	'acsKeysTitreFondImage' => '=acsRubnavTitreFondImage',
+
+	'acsMailUse' => 'oui',
+	'acsMailTitreFond' => '=acsRubnavTitreFond',
+	'acsMailTitreFondImage' => '=acsRubnavTitreFondImage',
+	'acsMailFond' => '=acsRubnavFond',
+	'acsMailBordColor' => '=acsRubnavBordColor',
+	'acsMailBordWidth' => '=acsRubnavBordWidth',
+	'acsMailBordStyle' => '=acsRubnavBordStyle',
 
 	'acsOngletsUse' => 'oui',
 	'acsOnglets1' => 'sommaire',
@@ -109,20 +118,38 @@ $def = array(
 	'acsRubnavFond6' => '#c4c4ef',
 	'acsRubnavFondHover' => '#f8f8df',
 	'acsRubnavBordColor' => '#939ac2',
-	'acsRubnavBordWidth' => 'thin',
+	'acsRubnavBordWidth' => '1px',
 	'acsRubnavBordStyle' => 'solid',
 	'acsRubnavSep' => '#dfdfdf',
 
+	'acsRubriquesUse' => 'oui',
+	'acsRubriquesTitreFond' => '=acsRubnavTitreFond',
+	'acsRubriquesTitreFondImage' => '=acsRubnavTitreFondImage',
+	'acsRubriquesFond' => '=acsRubnavFond',
+	'acsRubriquesBordColor' => '=acsRubnavBordColor',
+	'acsRubriquesBordWidth' => '=acsRubnavBordWidth',
+	'acsRubriquesBordStyle' => '=acsRubnavBordStyle',
+
 	'acsSyndicUse' => 'oui',
+	'acsSyndicTitreFond' => '=acsRubnavTitreFond',
+	'acsSyndicTitreFondImage' => '=acsRubnavTitreFondImage',
+	'acsSyndicFond' => '=acsRubnavFond',
+	'acsSyndicBordColor' => '=acsRubnavBordColor',
+	'acsSyndicBordWidth' => '=acsRubnavBordWidth',
+	'acsSyndicBordStyle' => '=acsRubnavBordStyle',
 
 	'acsTagsUse' => 'oui',
-	'acsTagsTitre' => '=acsRubnavTitre',
+	'acsTagsTitreFond' => '=acsRubnavTitreFond',
+	'acsTagsTitreFondImage' => '=acsRubnavTitreFondImage',
+	'acsTagsFond' => '=acsRubnavFond',
 	'acsTagsBordColor' => '=acsRubnavBordColor',
 	'acsTagsBordWidth' => '=acsRubnavBordWidth',
 	'acsTagsBordStyle' => '=acsRubnavBordStyle',
 	'acsTagsTitreFond' => '=acsRubnavTitreFond',
 	'acsTagsTitreFondImage' => '=acsRubnavTitreFondImage',
 	'acsTagsSep' => '=acsRubnavSep',
+	'acsTagsTitre' => '=acsRubnavTitre',
+
 	
 	'acsVideoUse' => 'oui',
 
@@ -183,6 +210,12 @@ $def = array(
 	'acsModule241' => 'recherche',
 	'acsModule242' => 'rubnav',
 
+//auteur
+	'acsModule44Use' => 'oui',
+	'acsModule44Left' => '10px',
+	'acsModule44Right' => '10px',
+	'acsModule442' => 'mail',
+
 // article
 	'acsModule25Use' => 'oui',
 	'acsModule25Left' => '10px',
@@ -197,6 +230,7 @@ $def = array(
 	'acsModule45Left' => '10px',
 	'acsModule45Right' => '10px',
 	'acsModule451' => 'agenda',
+	'acsModule452' => 'rubriques',
 
 // rubrique
 	'acsModule26Use' => 'oui',

@@ -1,8 +1,15 @@
 #CACHE{0}
 
-.keys {
+.cKeys {
+  font-size: 0.82em;
   [border-width: (#VAR{acsKeysBordWidth,#VAR{acsRubnavBordWidth}});]
   [border-style: (#VAR{acsKeysBordStyle,#VAR{acsRubnavBordStyle}});]
   [border-color: (#VAR{acsKeysBordColor,#VAR{acsRubnavBordColor}});]
   [background: (#VAR{acsRubnavFondColor});]
+}
+
+.cKeys .menu-titre {
+  text-align : center;
+  font-weight: bold;
+  [background: (#VAR{acsTagsTitreFond})[ url("(#ACS_CHEMIN{img/trame/#VAR{acsTagsTitreFondImage}})") repeat top left];]
 }

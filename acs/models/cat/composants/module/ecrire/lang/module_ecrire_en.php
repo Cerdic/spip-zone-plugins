@@ -8,11 +8,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'help' => 'Module is an all-purposes container. In Cat ACS model, it is used for header, let and right columns, and footer. Pages of Cat model uses different instances of Module component, each with its own configuration.',
 
 'marge' => 'Margin',
+'orientation' => 'Orientation',
+'vertical' => 'vertical',
+'horizontal' => 'horizontal',
 '1' => 'Component 1',
 '2' => 'Component 2',
 '3' => 'Component 3',
 '4' => 'Component 4',
 '5' => 'Component 5',
-'6' => 'Component 6'
+'6' => 'Component 6',
+'7' => 'Component 7',
+'8' => 'Component 8'
 );
 ?>

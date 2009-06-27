@@ -132,6 +132,7 @@ function ctlChoix($composant, $nic, $nom, $value, $param, $wid) {
         break;
       default:
         $label = _TC($composant, $nom.ucfirst($option));
+spip_log($composant.', '.$nom.ucfirst($option) ,'acs');        
         // S'il n'existe pas de traduction propre au composant, on cherche une traduction ACS generique pour cette option
         if ($label == strtolower(str_replace('_', ' ', $nom.$option)))
         	$label = _T('acs:'.strtolower($option));
@@ -157,7 +158,7 @@ function ctlWidget($composant, $nic, $nom, $value, $param, $wid) {
   require_once(_DIR_PLUGIN_ACS.'lib/composant/composants_variables.php');
   $vars = composants_variables();
 
-  $r = '<table><tr><td><label for "'.$var.'_'.$wid.'" title="'.$var.'"  class="label">'.$nom.'</label></td>'.
+  $r = '<table><tr><td><label for "'.$var.'_'.$wid.'" title="'.$var.'"  class="label">'._TC($composant, $nom).'</label>&nbsp;</td>'.
   '<td><div id="'.$var.'_'.$wid.'" class="ctlWidget">';
   $r .= '<select id="select_'.$var.'_'.$wid.'" name="'.$var.'_'.$wid.'" class="forml select_widget">';
   $r .= '<option value=""'.($value=='' ? ' selected' : '').'> </option>';

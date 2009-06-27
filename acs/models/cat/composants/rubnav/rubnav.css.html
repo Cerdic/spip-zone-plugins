@@ -1,6 +1,7 @@
 #CACHE{0}
 
-.rubriques {
+.cRubnav {
+  font-size: 0.82em;
   [border-width: (#VAR{acsRubnavBordWidth});]
   [border-style: (#VAR{acsRubnavBordStyle});]
   [border-color: (#VAR{acsRubnavBordColor});]
@@ -8,11 +9,13 @@
   position: static;
 }
 
-.rubriques .menu-titre {
+.cRubnav .menu-titre {
+  text-align : center;
+  font-weight: bold;
   [background: (#VAR{acsRubnavTitreFond})[ url("(#ACS_CHEMIN{img/trame/#VAR{acsRubnavTitreFondImage}})") repeat top left];]
 }
 
-.rubriques .menu-item, .divers .menu-item, .breves .menu-item {
+.cRubnav .menu-item {
   [background: (#VAR{acsRubnavFond});]
   [border-top: 1px solid (#VAR{acsRubnavSep});]
 }
@@ -24,7 +27,7 @@
   vertical-align: middle;
 }
 
-.rubriques .menu-item {
+.cRubnav .menu-item {
   position: relative;
   [text-align: (#VAR{acsRubnavAlign});]
   [background: (#VAR{acsRubnavFond});]
@@ -32,39 +35,39 @@
   padding-bottom: 1px;
 }
 
-.rubriques .menu-item a {
+.cRubnav .menu-item a {
   display: block;
   [text-align: (#VAR{acsRubnavAlign});]
   width: 100%;
 }
 
-.rubriques li .menu-item {
+.cRubnav li .menu-item {
   position: relative;
   [background: (#VAR{acsRubnavFond2});]
   z-index: 999;
 }
-[.rubriques li li .menu-item {background: (#VAR{acsRubnavFond3});}]
-[.rubriques li li li .menu-item {background: (#VAR{acsRubnavFond4});}]
-[.rubriques li li li li .menu-item {background: (#VAR{acsRubnavFond5});}]
-[.rubriques li li li li li.menu-item {background: (#VAR{acsRubnavFond6});}]
+[.cRubnav li li .menu-item {background: (#VAR{acsRubnavFond3});}]
+[.cRubnav li li li .menu-item {background: (#VAR{acsRubnavFond4});}]
+[.cRubnav li li li li .menu-item {background: (#VAR{acsRubnavFond5});}]
+[.cRubnav li li li li li.menu-item {background: (#VAR{acsRubnavFond6});}]
 
-.rubriques .menu-item .on {
+.cRubnav .menu-item .on {
   font-weight: bold;
   width: 100%;
 }
 
-[.rubriques .menu-item:hover, .rubriques .menu-item a:hover { background: (#VAR{acsRubnavFondHover});}]
+[.cRubnav .menu-item:hover, .cRubnav .menu-item a:hover { background: (#VAR{acsRubnavFondHover});}]
 
-.rubriques ul.hidden {
+.cRubnav ul.hidden {
   display: none;
   position: absolute;
   left: 100%;
   width: 100%;
-  top:-1px;
+  top:-2px;
   [border-width: (#VAR{acsRubnavBordWidth});]
   [border-style: (#VAR{acsRubnavBordStyle});]
   [border-color: (#VAR{acsRubnavBord});]  
 }
-.rubriques .menu-item:hover>ul.hidden {
+.cRubnav .menu-item:hover>ul.hidden {
   display: block;
 }

@@ -1,9 +1,5 @@
 #CACHE{0}
-
-/*
- * paramètres communs à toutes les pages
- */
-
+[(#REM) Paramètres communs à toutes les pages ]
 body {
   margin: 0;
   padding: 0;
@@ -20,33 +16,17 @@ ul { list-style: none; }
 div, img, table, form { margin: 0; padding: 0; border-width: 0; border-style: none; }
 table {border-collapse: collapse;}
 
-/* liens du site */
 [a:link, a:visited {text-decoration: none; color: (#VAR{acsFondLink});}]
-[a:hover {color: (#VAR{acsFondLinkHover});}] /* couleur des liens au survol */
+[a:hover {color: (#VAR{acsFondLinkHover});}]
 
+[(#REM) couleur du lien "article refusé" des articles refusés ]
 a.refus {
-  color: red; /* couleur du lien "article refusé" des articles refusés */
+  color: red;
 }
-
 a.refus:hover {
   color: orange;
 }
 
 div.spip_poesie {
   font-size: 140%;
-}
-
-[(#REM) composants de type blocs, titres ]
-.cbloc {
-  font-size: 0.82em;
-}
-.menu-titre {
-  text-align : center;
-  font-weight: bold;
-}
-
-.menu-item a.menu-link {
-  width: 100%;
-  padding-left:5px;
-  padding-right: 5px;
 }

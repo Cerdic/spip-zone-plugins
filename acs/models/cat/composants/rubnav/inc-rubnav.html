@@ -1,5 +1,5 @@
 <B_rubriques1>
-	<div class="cbloc rubriques">
+	<div class="cRubnav">
 		<ul>
 			<BOUCLE_rubriques1(RUBRIQUES) {racine} {par num titre, titre}{titre_mot=_Group1}{doublons}>
 				<li class="menu-item" [id="rubmenu(#EXPOSE)"]>
@@ -21,7 +21,7 @@
 </B_rubriques1>
 
 <B_rubriques2>
-  <div class="cbloc rubriques">
+  <div class="cRubnav">
     [(#VAR{acsRubnavTitre}|=={oui}|?{' '})<div class="menu-titre"><:rubriques:></div>]
     <ul>
       <BOUCLE_rubriques2(RUBRIQUES) {racine} {par num titre, titre}{titre_mot=_Group2}{doublons}>
@@ -47,7 +47,7 @@
 
 <BOUCLE_rubriques_ours(RUBRIQUES) {racine} {titre_mot=_Ours} {doublons}></BOUCLE_rubriques_ours>[(#REM) On exclut les rubriques ayant le mot-clé "_Ours" ]
 <B_rubriques>
-	<div class="cbloc rubriques">
+	<div class="cRubnav">
 		[(#VAR{acsRubnavTitre}|=={oui}|?{' '})<div class="menu-titre"><a href="?page=plan" title="<:acs:onglets__plan:>"><:rubriques:></a></div>]
 		<ul>
 			<BOUCLE_rubriques(RUBRIQUES) {racine} {par num titre, titre}{doublons}>
@@ -68,4 +68,5 @@
 			</BOUCLE_rubriques>
 		</ul>
 	</div>[(#REM) fin rubriques]
+  <div class="spacer"></div>
 </B_rubriques>

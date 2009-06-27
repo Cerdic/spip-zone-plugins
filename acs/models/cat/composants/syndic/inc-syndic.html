@@ -1,5 +1,5 @@
 <B_syndsit>#ANCRE_PAGINATION
-<div class="cbloc syndic">
+<div class="cSyndic">
   <div class="menu-titre"><a href="?page=sites"><:sur_web:></a></div>
   [<p class="pagination">(#PAGINATION)</p>]  
   <BOUCLE_syndsit(SITES) {id_rubrique ?} {par date} {par nom_site} {pagination #VAR{acsSyndicNbSites,5}}>
@@ -18,5 +18,6 @@
     </ul>
   </BOUCLE_syndsit>
 </div>
+<div class="spacer"></div>
 </B_syndsit>
-[(#ID_RUBRIQUE|!={''}|?{' '}) #FORMULAIRE_SITE]
+[(#ID_RUBRIQUE|!={''}|?{' '}) <div class="cSyndicAdd">#FORMULAIRE_SITE</div><div class="spacer"></div>]

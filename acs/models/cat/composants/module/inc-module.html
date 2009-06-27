@@ -1,0 +1,21 @@
+[(#REM)
+             ACS
+         (Plugin Spip)
+         Squelette Cat
+    http://acs.geomaticien.org
+
+Copyright Daniel FAIVRE, 2007-2009
+Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
+
+]<div style="margin-left: #CONFIG{#EVAL{'acsModule'.'#NIC'.'Left'},0}; margin-right: #CONFIG{#EVAL{'acsModule'.'#NIC'.'Right'},0}">
+#SET{v1,#EVAL{'acsModule'.'#NIC'.'1'}}
+#SET{v2,#EVAL{'acsModule'.'#NIC'.'2'}}
+#SET{v3,#EVAL{'acsModule'.'#NIC'.'3'}}
+#SET{v4,#EVAL{'acsModule'.'#NIC'.'4'}}
+#SET{v5,#EVAL{'acsModule'.'#NIC'.'5'}}
+#SET{v6,#EVAL{'acsModule'.'#NIC'.'6'}}
+#SET{v7,#EVAL{'acsModule'.'#NIC'.'7'}}
+#SET{v8,#EVAL{'acsModule'.'#NIC'.'8'}}
+#SET{orientation,#EVAL{'acsModule'.'#NIC'.'Orientation'}}
+<INCLURE{fond=composants/module/inc-module_} {env} {self} {lang} {v1=#GET{v1}} {v2=#GET{v2}} {v3=#GET{v3}} {v4=#GET{v4}} {v5=#GET{v5}} {v6=#GET{v6}} {v7=#GET{v7}} {v8=#GET{v8}} {c1=#CONFIG{#GET{v1}}} {c2=#CONFIG{#GET{v2}}} {c3=#CONFIG{#GET{v3}}} {c4=#CONFIG{#GET{v4}}} {c5=#CONFIG{#GET{v5}}} {c6=#CONFIG{#GET{v6}}} {c7=#CONFIG{#GET{v7}}} {c8=#CONFIG{#GET{v8}}} {orientation=#CONFIG{#GET{orientation}}}>
+</div>

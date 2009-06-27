@@ -8,7 +8,7 @@ ACS version 0.5
  - creation du controle de type Bord pour définir largeur, style, et couleur de bordure en une fois.
  
 Modele Cat pour ACS vesion 0.5:
- - Composant Agenda : amélioration CSS
+ - Composant Agenda : amélioration CSS. Tri par heure des articles publies/modifies/breves dans l'info-bulle. Encapsulation des styles css dans la classe cAgenda.
  - Composant Articles : meilleure integration avec plugin notation (0.6.3) et composant Democratie
  - Composant Edito : mise a jour pour plugin notation 0.6.3. Prise en compte correcte du nombre de lettres avant coupure.
  - Composant Fond : debug du javascript. Fontes par défaut du site.
@@ -22,6 +22,8 @@ Modele Cat pour ACS vesion 0.5:
  - Composant Syndic : integration du formulaire site. Pagination ajax et améliorations look.
  - Composant Tags : valeur par defaut de la couleur de fond et du fond du titre = celle de Rubnav
  - Composant Video : correction positionnement du lien telecharger. Ajax.
+ - Composant Mail : nouveau composant encapsulant #FORMULAIRE_ECRIRE_AUTEUR
+ - Composant Module : gestion des marges en inclusion (evite doubles marges en edition avec le pinceau). Choix module horizontal / vertical (par defaut). Module peut contenir desormais 8 composants et non plus 6.
  
  - nouveau fichier d'initialisation des composants avec des valeurs par defaut heritees.
  - validation xhtml 1.0 pages et composants du modele Cat.

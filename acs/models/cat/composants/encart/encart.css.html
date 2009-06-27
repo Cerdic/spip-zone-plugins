@@ -1,30 +1,36 @@
 #CACHE{0}
 
-.composantEncart .cartouche {
-  [background: (#VAR{acsEncartColor,#VAR{acsFondColor}});]
-  [border-width: (#VAR{acsEncartBordWidth,#VAR{acsRubnavBordWidth}});]
-  [border-style: (#VAR{acsEncartBordStyle,#VAR{acsRubnavBordStyle}});]
-  [border-color: (#VAR{acsEncartBordColor,#VAR{acsRubnavBordColor}});]
-  padding-left: 4px;
-  padding-right: 4px;
+.cEncart {
+  font-size: 0.82em;
+  [background: (#VAR{acsEncartFond});]
+  [border-width: (#VAR{acsEncartBordWidth});]
+  [border-style: (#VAR{acsEncartBordStyle});]
+  [border-color: (#VAR{acsEncartBordColor});]
   -moz-border-radius: 8px;
 }
-
-.composantEncart .cartouche .surtitre, .composantEncart .cartouche .titre, .composantEncart .cartouche .soustitre  {
-  margin: 0;
-  font-size: 0.79em;
+.cEncart .cartouche {
+  [background: (#VAR{acsEncartTitreFond})[ url("(#ACS_CHEMIN{img/trame/#VAR{acsEncartTitreFondImage}})") repeat top left];]  
+  [border-bottom: 1px solid (#VAR{acsRubnavSep});]  
+  -moz-border-radius: 8px;
+  -moz-border-radius-bottomleft: 0;
+  -moz-border-radius-bottomright: 0;
 }
-.composantEncart .cartouche .titre {
+.cEncart .cartouche .surtitre, .cEncart .cartouche .titre, .cEncart .cartouche .soustitre  {
+  padding-left: 4px;
+  padding-right: 4px;
+  margin: 0;
+}
+.cEncart .cartouche .titre {
   text-align: center;
   font-size: 1em;
 }
 
-.composantEncart .cartouche .texte_nav {
-  text-align: [(#ENV{ltr}|choixsiegal{left,left,right})];
+.cEncart .cartouche .spip_logos {
+  float: [(#ENV{ltr}|choixsiegal{left,right,left})];
+  margin: 2px;
 }
 
-.composantEncart .cartouche .spip_logos {
-  float: [(#ENV{ltr}|choixsiegal{left,right,left})];
-  margin: 4px;
-  margin-left: 0; [(#REM) inherited, so do not do twice]
+.cEncart .texte_nav {
+  font-size: 0.79em;
+  text-align: [(#ENV{ltr}|choixsiegal{left,left,right})];
 }

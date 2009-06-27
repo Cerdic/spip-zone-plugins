@@ -75,19 +75,17 @@ while($article = sql_fetch($r)) {
 	if (!isset($events[$date])) 
 		$events[$date] = array();
 	if (($date > $datedebut) && ($date < $datefin)) {
-		$events[$date][ ] = array(
+		$events[$date][$heure][ ] = array(
 			'class' => 'publie',
 			'type' => 'article',
-			'heure' => $heure,
 			'id' => $article['id_article'],
 			'title' => $article['titre']);
 	}	elseif(isset($sql_modif)) {
 		$heure = ereg_replace("^.*([0-9]{2}):([0-9]{2}):([0-9]{2})$", "\\1h\\2", $article['date_modif']);
 		$date = ereg_replace("^([0-9]{4})-([0-9]{2})-([0-9]{2}).*$", "\\1\\2\\3", $article['date_modif']);
-		$events[$date][ ] = array(
+		$events[$date][$heure][ ] = array(
 			'class' => 'modifie',
 			'type' => 'article',
-			'heure' => $heure,
 			'id' => $article['id_article'],
 			'title' => $article['titre']);
 	}
@@ -101,10 +99,9 @@ if ($GLOBALS['meta']['activer_breves'] == 'oui') {
 		$date = ereg_replace("^([0-9]{4})-([0-9]{2})-([0-9]{2}).*$", "\\1\\2\\3", $breve['date_heure']);
 		if (!isset($events[$date])) 
 			$events[$date] = array();
-		$events[$date][ ] = array(
+		$events[$date][$heure][ ] = array(
 			'class' => 'breve',
 			'type' => 'breve',
-			'heure' => $heure,
 			'id' => $breve['id_breve'],
 			'title' => $breve['titre']);
 	}
@@ -155,7 +152,7 @@ else if (document.body) // other Explorers
 
 //-->
 </script>
-<div class="agenda-mini">
+<div class="cAgenda">
 <table width="100%" cellpadding="1" cellspacing="0" align="center">
 <tr>
 	<th colspan="7" valign="middle" class="menu-titre">
@@ -194,8 +191,12 @@ else if (document.body) // other Explorers
 		$date = date('Ymd', mkdate($M, $TempD, $Y));
 		if (isset($events[$date])) {
 				$evt = '';
-				foreach($events[$date] as $event) {
-					$evt .= '<div class="'.$event['class'].'"><a href="spip.php?'.$event['type'].''.$event['id'].'&amp;calendrier_mois='.$M.'&amp;calendrier_annee='.$Y.'"><small>'.$event['heure'].'</small>: '.$event['title']."</a></div>\r";
+				$eventsjour = $events[$date];
+				ksort($eventsjour);
+				foreach($eventsjour as $heure=>$eventsheure) {
+					foreach($eventsheure as $event) {
+						$evt .= '<div class="'.$event['class'].'"><a href="spip.php?'.$event['type'].''.$event['id'].'&amp;calendrier_mois='.$M.'&amp;calendrier_annee='.$Y.'"><small>'.$heure.'</small>: '.$event['title']."</a></div>\r";
+					}
 				}
 				echo '<span onmouseover="afficheBulle(\'bulle'.$date.'\', this)" onmouseout="cacheBulle(\'bulle'.$date.'\')">'.
 					'<a href="?page=agenda&amp;annee='.$Y.'&amp;mois='.$M.'&amp;jour='.$TempD.'&amp;type=jour&amp;echelle=80" class="agenda_mini">'. date('j', mkdate($M, $TempD, $Y)) .'</a></span>'.
@@ -211,3 +212,4 @@ else if (document.body) // other Explorers
 </tr>
 </table>
 </div>
+<div class="spacer"></div>

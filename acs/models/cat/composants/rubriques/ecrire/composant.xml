@@ -1,6 +1,6 @@
 <composant>
   <!-- Nom du composant -->
-  <nom>Encart</nom>
+  <nom>Rubriques</nom>
   <!-- Auteur du composant -->
   <auteur>Daniel FAIVRE &copy; 2008-2009 - licence GPL</auteur>
   <version>0.5</version>
@@ -8,7 +8,7 @@
 
   <param>
     <nom>preview</nom>
-    <valeur>200</valeur>
+    <valeur>250</valeur>
   </param>
 
   <variable>
@@ -22,16 +22,11 @@
     <label>non</label>
   </variable>
   <variable>
-    <nom>Fond</nom>
-    <type>color</type>
-  </variable>
-  <variable>
     <nom>Bord</nom>
     <type>bord</type>
   </variable>
   <variable>
-    <nom>Nb</nom>
-    <type>nombre</type>
-    <valeur>3</valeur>
+    <nom>Fond</nom>
+    <type>color</type>
   </variable>
 </composant>
