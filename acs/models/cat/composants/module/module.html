@@ -1,0 +1,18 @@
+[(#REM)
+             ACS
+         (Plugin Spip)
+         Squelette Cat
+    http://acs.geomaticien.org
+
+Copyright Daniel FAIVRE, 2007-2009
+Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
+
+Module est un composant conteneur pour d'autres composants
+C'est un composant instanciable: il possede un numero d'instance de composant: #NIC
+
+Module is a container for other components.
+Module is an instanciable component: it has a number that identify component's instance: #NIC
+]
+<div class="#PINCEAU{module,#NIC}">
+  <INCLURE{fond=composants/module/inc-module} {env} {self} {lang}>
+</div>
