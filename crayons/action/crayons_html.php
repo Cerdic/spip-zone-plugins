@@ -289,7 +289,9 @@ class Crayon {
 				if (!$f('PORTE_PLUME','est_actif')) {
 					include_spip('inc/barre');
 					$input = "<div style='width:".$this->largeur."px;height:23px;'>"
-						. afficher_barre("document.getElementById('$id')")
+						. (function_exists('afficher_barre')
+							? afficher_barre("document.getElementById('$id')")
+							: '')
 						. '</div>'
 						. $input;
 				}
