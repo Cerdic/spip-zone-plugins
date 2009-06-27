@@ -5,6 +5,11 @@
 #SET{inscrits,#ENV{inscrits,#ENV{valeurs_champs_obligatoire}|table_valeur{inscrits}}}
 [(#REM)attention, pour les test, 0 est considérés comme nul)] 
         <B_test>
+        [(#REM)les couleurs sont passé en paramètres)]
+        <BOUCLE_couleurs(POUR){tableau #ENV*{couleurs}}>
+        <input type="hidden" name="couleurs[#CLE]" value="#VALEUR" />
+        </BOUCLE_couleurs>
+        
         <fieldset>
         <legend>Résultats des listes</legend>
         <ul>
@@ -23,7 +28,7 @@
         
         <li[(#ENV**{erreurs}|table_valeur{liste_fausse}|table_valeur{#VALEUR}|oui) class="erreur"]>
         
-        <label[(#ENV**{erreurs}|table_valeur{liste_fausse}|table_valeur{#VALEUR}|oui) class="erreur_message"] for="#VALEUR">[(#VALEUR|scrut_prop_enlever_underscore)]</label>
+        <label[(#ENV**{erreurs}|table_valeur{liste_fausse}|table_valeur{#VALEUR}|oui) class="erreur_message"] for="#VALEUR" style="color:#[(#ENV**{couleurs}|table_valeur{#VALEUR})]">[(#VALEUR|scrut_prop_enlever_underscore)]</label>
         
         <input[(#ENV**{erreurs}|table_valeur{liste_fausse}|table_valeur{#VALEUR}|oui) class="erreur_message"]  size="10" type="text" name="resultat[#VALEUR]" id="#VALEUR" [value="(#ENV**{erreurs}|table_valeur{resultats}|table_valeur{#VALEUR})"]  />
         

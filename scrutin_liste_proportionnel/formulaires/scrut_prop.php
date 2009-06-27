@@ -1,10 +1,18 @@
 <?php
 
-function formulaires_scrut_prop_charger_dist($liste,$sieges='',$quota='',$prime='',$repartition='',$inscrits=''){
+function formulaires_scrut_prop_charger_dist($liste,$sieges='',$quota='',$prime='',$repartition='',$inscrits='',$couleurs=''){
     $return = array();
     $tab_des_obligatoires = array();
     include_spip('scrut_prop_fonctions');
     $return['liste'] = array_map("scrut_prop_mettre_underscore",explode(';',$liste));
+    $couleurs = explode(';',$couleurs);
+    
+    $return['couleurs'] = array();
+    $i = 0; 
+    foreach($return['liste'] as $liste){
+        $return['couleurs'][$liste] = $couleurs[$i];
+        $i++;
+    }
     
     //verifier que les sièges soient bien un entier
     $sieges2 = $sieges;
@@ -66,7 +74,7 @@ function formulaires_scrut_prop_charger_dist($liste,$sieges='',$quota='',$prime=
 function formulaires_scrut_prop_verifier_dist(){
     
     $resultats = array_map('supprime_espaces',_request('resultat'));
-    
+    $return['couleurs']  = _request($couleurs);
     $erreurs = array();
     $liste_fausse = array();
     //verification qu'on a bien affaire à des entiers
@@ -267,7 +275,9 @@ function formulaires_scrut_prop_traiter_dist(){
     $return['exprimes'] = nb_en_to_fr($return['exprimes']);
     //returner ce qu'il faut
     $return['voix_par_liste']   = $resultats;
-    $return['url_graph']        = generer_url_graph($liste_sieges);
+    if(_request('graph')) {
+        $return['url_graph']        = generer_url_graph($liste_sieges,_request('couleurs'));
+    }
     return array('message_ok'=>$return);
 }
 
@@ -328,19 +338,33 @@ function sieges_restants_reste($sieges_par_listes,$restes,$sieges){
     return $sieges_par_listes;
 }
 
-function generer_url_graph($sieges){
-    $url_base ='http://chart.apis.google.com/chart?cht=p&chs=400&200&chtt=Répartition des sièges';
+function generer_url_graph($sieges,$couleurs){
+    $url_base ='http://chart.apis.google.com/chart?cht=p&chs=600x400&chtt=Répartition des sièges';
     
     unset($sieges['']);
     
     $total  = array_sum($sieges);
-    $listes = '&chl=|'.implode(array_keys ($sieges),'|');
-    $sieges = '&chd=t:'.$total.','.implode($sieges,',');
-    $couleurs = '&chco=FFFFFF,000000';
+
+    $donnes = array();
     
-    return $url_base.$listes.$sieges.$couleurs;
+    foreach ($sieges as $i=>$siege){
+        $donnes[] = ramener_sous_cent($siege,$total);
+    
+    }
+    $legende = '&chl=|'.implode($sieges,'|');
+
+    
+    
+    $sieges = '&chd=t:1,'.implode($donnes,',');; 
+    
+    $couleurs = '&chco=FFFFFF,'.implode($couleurs,',');
+    
+    return $url_base.$legende.$sieges.$couleurs;
 
 
 }
+function ramener_sous_cent($i,$total){
 
+    return $i/$total;
+}
 ?>

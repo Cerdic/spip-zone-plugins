@@ -1,0 +1,13 @@
+<div class="graph">
+[(#ENV{message_ok}|table_valeur{url_graph}|en_image|inserer_attribut{title,Répartition des sièges}|inserer_attribut{alt,Graphisme de répartition des sièges})]
+
+<B_legende>
+
+<h3>Légende</h3>
+<ul style="list-style-type:square;list-style-position:inside">
+<BOUCLE_legende(POUR){tableau #ENV*{couleurs}}>
+<li style="color:##VALEUR">#CLE</li>
+</BOUCLE_legende>
+</ul>
+</B_legende>
+</div>

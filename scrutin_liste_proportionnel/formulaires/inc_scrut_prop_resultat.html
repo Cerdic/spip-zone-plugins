@@ -9,8 +9,7 @@
     <li><strong>Quotient élèctoral :</strong> [(#ENV{message_ok}|table_valeur{quotient})]...</li>
     <li>[(#ENV{message_ok}|table_valeur{restants})]</li>
 </ul>
-
-[<img src="(#ENV{message_ok}|table_valeur{url_graph})" alt="Répartition des sièges" title="Répartitions des sièges" />]
+[(#ENV{message_ok}|table_valeur{url_graph}|oui)<INCLURE{fond=formulaires/inc_scrut_graph}{env}>]
 
 <B_pour>
 <table class="spip">
