@@ -1,0 +1,40 @@
+#CACHE{0}
+[(#REM) descriptif=Options des copies des flux RSS en articles]
+[(#REM) titre=Copie RSS en articles]
+[(#REM) icone=img/rss20.png]
+
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+ <fieldset><legend><:rssarticle:statut_article_importe:></legend>
+      <select name="import_statut">
+        <option value="prop"[(#ENV{import_statut}|=={prop}|?{' selected="selected"'})]><:ecrire:info_statut_site_3:></option>
+        <option value="publie"[(#ENV{import_statut}|=={publie}|?{' selected="selected"'})]><:ecrire:info_statut_site_2:></option>
+      </select>
+ </fieldset>
+ 
+
+ <fieldset><legend><:rssarticle:suivi_syndic:></legend>
+  <p>
+       
+    <label><input type="checkbox" name="email_alerte"[ checked="(#ENV{email_alerte}|!={''}|?{'checked'})"] class="fondl" />
+          <:rssarticle:email_alerte:></label>    
+    <br /> <br />     
+    <label><:rssarticle:email_alerte_email:><input type="text" name="email_suivi" value="[(#ENV{email_suivi})]" size="20" class="fondl" />
+    </label>
+       
+  </p>
+  </fieldset>
+  
+
+ 
+ <fieldset><legend><:rssarticle:citer_source_oui:></legend>
+  <p>
+  <label><input type="checkbox" name="citer_source"[ checked="(#ENV{citer_source}|!={''}|?{'checked'})"] class="fondl" />
+  <:rssarticle:citer_source_oui:></label>
+  </p>
+  </fieldset>
+ 
+ 
+  <input type="submit" name="_cfg_ok" value="<:OK:>"  class="fondo"/>
+  <input type="reset" value="<:Reset:>" class="fondo" />
+  <input type="submit" name="_cfg_delete" value="<:Supprimer:>" class="fondo" />
+</form>
