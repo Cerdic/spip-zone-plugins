@@ -1,0 +1,20 @@
+<h1 class="grostitre"><:clevermail:administration:></h1>
+<BOUCLE_post(SPIP_CM_POSTS){pst_id=#ENV{pst_id}}>
+  <BOUCLE_list(SPIP_CM_LISTS){lst_id}>
+    <h2>Liste « #LST_NAME »</h2>
+  </BOUCLE_list>
+  <h3><:clevermail:modifier_message:></h3>
+  [(#REM)<div class="ajax">]
+    #FORMULAIRE_CLEVERMAIL_POST_EDIT{#ENV{pst_id}}
+  [(#REM)</div>]
+ 	</div>
+	<!--#navigation-->
+  	<INCLURE{fond=prive/menu}>
+	<!--/#navigation-->
+	<!--#extra-->
+  	Extra...
+	<!--/#extra-->
+</BOUCLE_post>
+</B_post>
+  Impossible, ce message n'existe pas.
+<//B_post>

@@ -28,6 +28,7 @@
 		'email_non_valide' => 'Adresse non valide',
 
 		// Back
+		'administration' => 'Administration de CleverMail',
 		'liste_lettres' => 'Liste des lettres d\'information',
 		'creer_lettre' => 'Cr&eacute;er une lettre d\'information',
 		'liste_abonnes' => 'Liste des abonn&eacute;s',
@@ -96,9 +97,12 @@
 		'envoye' => 'Envoy&eacute;',
 		'modifie' => 'Modifi&eacute;',
 		'apercu' => 'Aper&ccedil;u',
-		'queue_attente' => ' en attente et ',
-		'queue_envoye' => ' envoy&eacute;',
-		'mauvais_identifiant_lettre' => 'Mauvais identifiant de lettre d\'information',
+		'message_queue_attente' => 'message en attente',
+    'messages_queue_attente' => 'messages en attente',
+	  'aucun_message_queue_envoye' => 'aucun message envoy&eacute;',
+	  'message_queue_envoye' => 'message envoy&eacute;',
+    'messages_queue_envoye' => 'messages envoy&eacute;s',
+	  'mauvais_identifiant_lettre' => 'Mauvais identifiant de lettre d\'information',
 		'email_administrateur' => 'E-mail administrateur',
 		'email_expediteur' => 'E-mail exp&eacute;diteur (from et reply-to)',
 		'nombre_messages' => 'Nombre de messages par envoi',
