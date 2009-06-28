@@ -1,7 +1,7 @@
 <?php
 // cf http://programmer.spip.org/Declarer-une-tache
 
-function genie_clevermail_cron($verbose = 'no') {
+function genie_clevermail_queue_process_dist($verbose = 'no') {
 	// On appelle le facteur
 	$envoyer_mail = charger_fonction('envoyer_mail', 'inc');
 	
