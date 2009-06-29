@@ -56,8 +56,9 @@ function genie_rssarticle_copie_dist($t){
             $url   = $a['url'];
             $tags =  $a['tags'];
             
-            if ($citer_source) 
-                 $texte .= "\n\n\nURL: [->$url]";  
+            if ($citer_source)
+                   $texte = "{"._T('rssarticle:article_origine')."} [->$url]\n\n\n$texte";
+            //     $texte .= "\n\n\nURL: [->$url]";  
             if ($lang=="") 	
                 $lang = $GLOBALS['spip_lang'];    
         
@@ -103,16 +104,13 @@ function genie_rssarticle_copie_dist($t){
             }
             
             // logo
-            if ($copie_logo) {
-               $logo_site = inc_chercher_logo_dist($id_syndic,"id_syndic");
-               if (isset($logo_site[0])) {
+            if ($copie_logo) {             
+               if ($logo_site = inc_chercher_logo_dist($id_syndic,"id_syndic")) {
                   $logo_article = "arton$id_article.".$logo_site[3];
                   @copy($logo_site[0],_DIR_LOGOS."$logo_article");
-               }  
-               
+               }                 
             }
-            
-                    		
+                                		
         		$log_c++;
         		$log .= "\n - $titre";             
         } 
