@@ -21,7 +21,7 @@ function inscription2_upgrade(){
 	
 	//Certaines montées de version ont oublié de corriger la meta de I2
 	//si ce n'est pas un array alors il faut reconfigurer la meta
-	if (!is_array(unserialize($inscription2_meta))) {
+	if ($inscription2_meta && !is_array(unserialize($inscription2_meta))) {
 		spip_log("INSCRIPTION 2 : effacer la meta inscription2 et relancer l'install","inscription2");
 		echo "La configuration du plugin Inscription 2 a &eacute;t&eacute; effac&eacute;e.<br />";
 		effacer_meta('inscription2');
@@ -79,7 +79,6 @@ function inscription2_upgrade(){
 		while($q = sql_fetch($s)){
 			sql_insertq("spip_auteurs_elargis",array('id_auteur' => $q['id_auteur']));
 		}
-	
 		
 		/** Inscription 2 (0.70)
 		 * Les pays sont maintenant pris dans le plugin Geographie
@@ -88,9 +87,9 @@ function inscription2_upgrade(){
 		 */
 		i2_installer_pays();
 
-		
 		echo "Inscription2 installe @ ".$version_base;
 		ecrire_meta('inscription2_version',$current_version=$version_base);
+		$current_version = $version_base;
 	}
 
 	// Si la version installee est inferieur a O.6 on fait l homogeneisation avec spip_geo
@@ -137,15 +136,16 @@ function inscription2_upgrade(){
 		ecrire_meta('inscription2_version',$current_version=0.65);
 	}
 	
-	/*
-	 * Reinstaller les pays de Geographie
-	 * pour ne pas etre dependant de ce plugin
-	 */
 	if ($current_version<0.71){
+		/*
+		 * Reinstaller les pays de Geographie
+		 * pour ne pas etre dependant de ce plugin
+		 */
 		i2_installer_pays();
 		spip_log("Inscription2 update @ 0.71 : installation de la table pays de geographie", "maj");
 		ecrire_meta('inscription2_version',$current_version=0.71);
 	}
+	
 	ecrire_metas();
 }
 
