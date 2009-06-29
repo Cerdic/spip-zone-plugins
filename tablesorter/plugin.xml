@@ -7,15 +7,11 @@
 	<etat>dev</etat>
 	<description>
 	Pour l'instant, permet de trier les tableaux portant la class CSS "tablesorter" en cliquant simplement sur l'ent&ecirc;te d'une colonne; par la suite, ajoutera une class "tablesorter" automatiquement &agrave; tous les tableaux ayant d&eacute;j&agrave; la class table.spip.
-	
 	Voir en ligne toutes les options de tris, sur le site de tablesorter.
 	</description>
-	
 	<prefix>tablesorter</prefix>
-	
 	<pipeline>
 		<nom>insert_head</nom>
-		<inclure>inc-head.php</inclure>
+		<inclure>tablesorter_pipelines.php</inclure>
 	</pipeline>
-	
 </plugin>
