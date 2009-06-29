@@ -8,6 +8,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   // C
   'citer_source' => 'Citer la source',
   'citer_source_oui' => 'Citer l\'URL de l\'article d\'origine dans l\'article import&eacute;',
+  'copie_logo' => 'Recopier le logo du site comme logo d\'article',
 
   // S
   'statut_article_importe' => 'Statut des articles import&eacute;s',

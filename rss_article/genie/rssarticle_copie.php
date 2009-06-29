@@ -12,7 +12,7 @@
 include_spip("inc/mail");
 include_spip('inc/filtres'); 
 include_spip('inc/distant');
-
+include_spip('inc/chercher_logo');
 
 function genie_rssarticle_copie_dist($t){  
   
@@ -21,12 +21,14 @@ function genie_rssarticle_copie_dist($t){
         $import_statut = lire_config('rssarticle/import_statut');      
         if (lire_config('rssarticle/citer_source')=="on") $citer_source=true; else  $citer_source=false;
         if (lire_config('rssarticle/email_alerte')=="on") $email_alerte=true; else  $email_alerte=false;
+        if (lire_config('rssarticle/copie_logo')=="on")   $copie_logo=true; else  $copie_logo=false;
         $email_suivi = lire_config('rssarticle/email_suivi'); 
   } else { // sinon valeur par defaut
         $import_statut = "prop";         // statut des articles importés: prop(proposé),publie(publié)      
         $citer_source = true;            // citer source ?
         $email_alerte = false;           // envoi email  ?
         $email_suivi = $GLOBALS['meta']['adresse_suivi']; // adresse de suivi editorial
+        $copie_logo = false;            // reprendre le logo du site
   }
   
   // principe de pile:
@@ -35,7 +37,7 @@ function genie_rssarticle_copie_dist($t){
   $log = "";
   $log_c = 0;
   
-  $s = sql_select("*", "spip_syndic_articles", "statut='publie'","","maj DESC","15");  
+  $s = sql_select("*", "spip_syndic_articles", "statut='publie'","","maj DESC","15");    // faire le contraire ? boucler plutot sur les sites ?
   while ($a = sql_fetch($s)) {
 		$titre =  $a['titre'];
     $id_syndic_article = $a['id_syndic_article']; 	
@@ -98,6 +100,16 @@ function genie_rssarticle_copie_dist($t){
                     }
                 }
                 
+            }
+            
+            // logo
+            if ($copie_logo) {
+               $logo_site = inc_chercher_logo_dist($id_syndic,"id_syndic");
+               if (isset($logo_site[0])) {
+                  $logo_article = "arton$id_article.".$logo_site[3];
+                  @copy($logo_site[0],_DIR_LOGOS."$logo_article");
+               }  
+               
             }
             
                     		

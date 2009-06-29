@@ -13,8 +13,7 @@
  
 
  <fieldset><legend><:rssarticle:suivi_syndic:></legend>
-  <p>
-       
+  <p>       
     <label><input type="checkbox" name="email_alerte"[ checked="(#ENV{email_alerte}|!={''}|?{'checked'})"] class="fondl" />
           <:rssarticle:email_alerte:></label>    
     <br /> <br />     
@@ -30,6 +29,13 @@
   <p>
   <label><input type="checkbox" name="citer_source"[ checked="(#ENV{citer_source}|!={''}|?{'checked'})"] class="fondl" />
   <:rssarticle:citer_source_oui:></label>
+  </p>
+  </fieldset>
+  
+  <fieldset><legend><:rssarticle:copie_logo:></legend>
+  <p>
+  <label><input type="checkbox" name="copie_logo"[ checked="(#ENV{copie_logo}|!={''}|?{'checked'})"] class="fondl" />
+  <:rssarticle:copie_logo:></label>
   </p>
   </fieldset>
  
