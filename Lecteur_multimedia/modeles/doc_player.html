@@ -57,10 +57,10 @@ Sinon, utiliser le comportement normal.
 [<span><a href='(#URL_DOCUMENT)' rel='enclosure'>#URL_DOCUMENT</a></span>]
 </object>
 ][(#GET{player}|=={dewplayer}|?{' ',''})
-<object type="application/x-shockwave-flash' data='#CHEMIN{flash/dewplayer.swf}" height="[(#ENV{height,20})]" width="[(#ENV{width,200})]">
+<object type="application/x-shockwave-flash" data="#CHEMIN{flash/dewplayer.swf}" height="[(#ENV{height,20})]" width="[(#ENV{width,200})]">
 <param name="wmode" value="opaque" />
 <param name="movie" value='#CHEMIN{flash/dewplayer.swf}' />
-<param name="FlashVars" value='son=[(#URL_DOCUMENT|url_absolue)]' />
+<param name="FlashVars" value="son=[(#URL_DOCUMENT|url_absolue)]" />
 [<span><a href='(#URL_DOCUMENT)' rel='enclosure'>#URL_DOCUMENT</a></span>]
 </object>
 ][(#GET{player}|=={eraplayer}|?{' ',''})
