@@ -69,10 +69,6 @@ function inscription2_upgrade(){
 				))
 			);
 		}
-		
-		// Creation de la table et des champs
-		$verifier_tables = charger_fonction('inscription2_verifier_tables','inc');
-		$verifier_tables();
 	
 		//inserer les auteurs qui existent deja dans la table spip_auteurs en non pas dans la table elargis
 		$s = sql_select("a.id_auteur","spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur=b.id_auteur","b.id_auteur is null");
@@ -147,6 +143,10 @@ function inscription2_upgrade(){
 	}
 	
 	ecrire_metas();
+	
+	// Creation de la table et des champs
+	$verifier_tables = charger_fonction('inscription2_verifier_tables','inc');
+	$verifier_tables();
 }
 
 
