@@ -29,11 +29,11 @@ Gestion de lettres d'information reprenant les fonctionnalités du logiciel libr
   </pipeline>
 	<pipeline>
 		<nom>header_prive</nom>
-    <include>clevermail_pipelines.php</inclure>
+    <inclure>clevermail_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>taches_generales_cron</nom>
-		<include>clevermail_pipelines.php</inclure>
+		<inclure>clevermail_pipelines.php</inclure>
 	</pipeline>
 	<chemin dir='' />
 	<necessite id="SPIP" version="[2.0.8;]" />
