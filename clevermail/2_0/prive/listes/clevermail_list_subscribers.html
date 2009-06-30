@@ -9,7 +9,7 @@
 	    <th><:clevermail:actions:></th>
 	  </thead>
 	  <tbody>
-			<BOUCLE_subs(SPIP_CM_LISTS_SUBSCRIBERS spip_cm_subscribers){lst_id}{sub_email==#ENV{filtre_email,.*}}{par sub_email}{pagination 10}>
+			<BOUCLE_subs(SPIP_CM_LISTS_SUBSCRIBERS spip_cm_subscribers){lst_id?}{sub_email==#ENV{filtre_email,.*}}{par sub_email}{pagination 10}>
 		    <tr>
 		      <td>#SUB_EMAIL</td>
 		      <td>[(#LSR_MODE|=={1}|?{HTML,Texte})]</td>
