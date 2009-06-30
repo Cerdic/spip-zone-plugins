@@ -11,6 +11,7 @@ function action_clevermail_list_subscriber_remove_dist() {
 	  	$abonne = sql_getfetsel("sub_email", "spip_cm_subscribers", "sub_id=".$abonnement['sub_id']);
 	  	$liste = sql_getfetsel("lst_name", "spip_cm_lists", "lst_id=".$abonnement['lst_id']);
 	    sql_delete("spip_cm_lists_subscribers", "lsr_id = ".$lsr_id);
+      sql_delete("spip_cm_posts_queued", "sub_id = ".$abonnement['sub_id']);
 	    spip_log('Suppression du l\'abonnement de « '.$abonne.' » à la liste « '.$liste.' » (id='.$abonnement['lst_id'].')', 'clevermail');
 	  }
   }
