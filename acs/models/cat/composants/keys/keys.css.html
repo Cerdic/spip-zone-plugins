@@ -13,3 +13,22 @@
   font-weight: bold;
   [background: (#VAR{acsTagsTitreFond})[ url("(#ACS_CHEMIN{img/trame/#VAR{acsTagsTitreFondImage}})") repeat top left];]
 }
+.cKeys .menu-item {
+  [background: (#VAR{acsRubnavFond});]
+  [border-top: 1px solid (#VAR{acsRubnavSep});]
+  text-align: #LANG_LEFT;
+}
+.cKeys .menu-item a {
+  display: block;
+  width: 100%;
+}
+[.cKeys .menu-item:hover, .cKeys .menu-item a:hover { background: (#VAR{acsRubnavFondHover});}]
+.cKeys .menu-item .motcle{
+  padding-left: 5px;
+  padding-right: 5px;
+}
+.cKeys .pagination {
+  text-align: center;
+  [background: (#VAR{acsRubnavTitreFond});]
+  [border-top: 1px solid (#VAR{acsRubnavSep});]
+}

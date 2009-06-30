@@ -21,6 +21,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'me' => 'we',
 'je' => 'th',
 've' => 'fr',
-'sa' => 'sa'
+'sa' => 'sa',
+'publie' => 'Published',
+'modifie' => 'Modified'
 );
 ?>

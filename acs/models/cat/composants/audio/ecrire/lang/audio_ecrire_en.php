@@ -14,14 +14,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'ProgressBar' => 'Playing',
 'TrackStatus' => 'Track infos',
 
-'FondColor' => 'Background',
 'TitreFond' => 'Title',
 'ArticleColor' => 'Link to article',
 'ArticleColorHover' => 'over',
 'PodcastColor' => 'Podcast link',
 'PodcastColorHover' => 'over',
 'NbMp3' => 'Nb of mp3 files',
-'SepColor' => 'Separator',
+'Sep' => 'Separator',
 'Mp3on' => 'Active track background',
 'Mp3hover' => 'over',
 );

@@ -65,11 +65,12 @@ $test_mini_agenda_deja_present = 1;
 $datedebut = date("Ymd", mkdate($M, $D - 31, $Y));
 $datefin = date("Ymd", mkdate($M, $D + 31, $Y));
 
-// Articles publié ou modifiés
+// Articles publiés ou modifiés
 if (isset($GLOBALS['meta']['acsAgendaBulleVoirArticlesModifies']) && ($GLOBALS['meta']['acsAgendaBulleVoirArticlesModifies'] == 'oui'))
 	$sql_modif = " OR (date_modif BETWEEN '$datedebut' AND '$datefin')";
-$r = sql_select(array('id_article','date','date_modif','titre'), 'spip_articles', "statut='publie' AND ((date BETWEEN '$datedebut' AND '$datefin')$sql_modif)");
+$r = sql_select(array('id_article','date','date_modif','titre','chapo'), 'spip_articles', "statut='publie' AND ((date BETWEEN '$datedebut' AND '$datefin')$sql_modif)");
 while($article = sql_fetch($r)) {
+	if (substr($article['chapo'],0,1) == '=') continue; // Masque les redirections d'articles SPIP
 	$heure = ereg_replace("^.*([0-9]{2}):([0-9]{2}):([0-9]{2})$", "\\1h\\2", $article['date']);
 	$date = ereg_replace("^([0-9]{4})-([0-9]{2})-([0-9]{2}).*$", "\\1\\2\\3", $article['date']);
 	if (!isset($events[$date])) 
@@ -156,9 +157,15 @@ else if (document.body) // other Explorers
 <table width="100%" cellpadding="1" cellspacing="0" align="center">
 <tr>
 	<th colspan="7" valign="middle" class="menu-titre">
+    <img src="#CHEMIN{composants/agenda/images/aide.gif}" class="chelp" onmouseover="afficheBulle('bullechelp', this)" onmouseout="cacheBulle('bullechelp')" />
 		<?php
 		echo '<a id="agenda_prev" href="'.preparation_URL($self,$calendrier_mois_moins,$calendrier_annee_moins).'" title="Mois pr&eacute;c&eacute;dent" class="ajax"><img src="'.find_in_path('composants/agenda/images/fleche-left.png').'" alt="&lt;&lt;" /></a>&nbsp;&nbsp;<a href="spip.php?page=agenda&amp;annee='.$Y.'&amp;mois='.$M.'">'.$mes.' '.$Y.'</a>&nbsp;&nbsp;<a id="agenda_next" href="'.preparation_URL($self,$calendrier_mois_plus,$calendrier_annee_plus).'" title="Mois suivant" class="ajax"><img src="'.find_in_path('composants/agenda/images/fleche-right.png').'" alt="&gt;&gt;" /></a>';
 		?>
+    <div id="bullechelp" class="bulle" onmouseover="mouseOverBulle()" onmouseout="mouseOutBulle()">
+      <div class="publie"><a href="#"><small>01h11</small>: <:acs:agenda_publie:></a></div>[
+      (#CONFIG{acsAgendaBulleVoirArticlesModifies}|=={oui}|?{" "})<div class="modifie"><a href="#"><small>02h22</small>: <:acs:agenda_modifie:></a></div>][
+      (#CONFIG{activer_breves}|=={oui}|?{" "})<div class="breve"><a href="#"><small>03h33</small>: <:breves:></a></div>]
+    </div>
 	</th>
 </tr>
 <tr>

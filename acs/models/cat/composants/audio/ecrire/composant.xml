@@ -45,19 +45,16 @@
   </variable>
   
   <variable>
-    <nom>FondColor</nom>
+    <nom>Fond</nom>
     <type>color</type>
-    <valeur>acsFondColor</valeur>
   </variable>
   <variable>
     <nom>TitreFond</nom>
     <type>color</type>
-    <valeur>acsRubnavTitreFond</valeur>
   </variable>
   <variable>
     <nom>TitreImage</nom>
     <type>img</type>
-    <valeur>acsRubnavTitreFondImage</valeur>
     <chemin>img/trame</chemin>
     <label>non</label>
   </variable>
@@ -67,7 +64,7 @@
   </variable>
   <variable>
     <nom>Sep</nom>
-    <type>bord</type>
+    <type>color</type>
   </variable>
 
   <variable>

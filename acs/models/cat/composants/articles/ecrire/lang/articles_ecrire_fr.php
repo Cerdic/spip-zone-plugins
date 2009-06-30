@@ -18,12 +18,6 @@ _ide, _aut, ou _adm aux visiteurs enregistrés, aux rédacteurs, et aux administ
 'MargeBas' => 'Marge inf&eacute;rieure',
 'NbLettres' => 'Nb de lettres avant coupure',
 'LogoTailleMax' => 'Taille maxi du logo',
-'RubFond2' => '2',
-'RubFond3' => '3',
-'RubFond4' => '4',
-'RubFond5' => '5',
-'RubFond6' => '6',
-'Puce' => 'Puce',
 
 'table' => 'Tableaux',
 'TabBordColor' => 'Bordure',

@@ -9,10 +9,17 @@ var acsAudio_images = "#EVAL{_DIR_ACS}models/#VAR{acsModel,cat}/composants/audio
 [(#REM) Debug with soundmanager2.js instead of soundmanager2-nodebug-jsmin.js ]
 [(#INCLURE{composants/audio/javascript/soundmanager2-nodebug-jsmin.js})]
 
-soundManager.debugMode = false;
+//soundManager.debugMode = true;
 soundManager.defaultOptions.volume = 100;
 soundManager.waitForWindowLoad = true;
 soundManager.url = "[(#CHEMIN{composants/audio/swf/})]";
 soundManager.onload = initSoundPlayers;
 
+[(#INCLURE{[(#EVAL{_DIR_JAVASCRIPT})md5.js]})]
 [(#INCLURE{composants/audio/javascript/audio.js})]
+
+jQuery(document).ready(
+  function() {
+    onAjaxLoad(initSoundPlayers);
+  }
+);

@@ -16,12 +16,6 @@ Access control limit access to articles tagged with keyword _ide, _aut, or _adm 
 'MargeBas' => 'Margin bottom',
 'NbLettres' => 'Nb of letters before cut',
 'LogoTailleMax' => 'max logo size',
-'RubFond2' => '2',
-'RubFond3' => '3',
-'RubFond4' => '4',
-'RubFond5' => '5',
-'RubFond6' => '6',
-'Puce' => 'Puce',
 
 'table' => 'Tables',
 'TabBordColor' => 'Border',

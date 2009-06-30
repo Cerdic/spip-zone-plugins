@@ -51,12 +51,14 @@ function ctlLargeurBord($composant, $nic, $nom, $largeur='0', $param, $wid) {
     '<option value=""'.($largeur=="" ? ' selected' : '').' title="'._T('acs:parent').'"></option>'.
   	$option.
     '<option value="0"'.($largeur=="0" ? ' selected' : '').' title="0">0</option>'.
-    '<option value="thin"'.($largeur=="thin" ? ' selected' : '').' title="'._T('acs:thin').'">thin</option>'.
     '<option value="1px"'.($largeur=="1px" ? ' selected' : '').' title="1px">1px</option>'.
     '<option value="2px"'.($largeur=="2px" ? ' selected' : '').' title="2px">2px</option>'.
     '<option value="3px"'.($largeur=="3px" ? ' selected' : '').' title="3px">3px</option>'.
     '<option value="4px"'.($largeur=="4px" ? ' selected' : '').' title="4px">4px</option>'.
     '<option value="5px"'.($largeur=="5px" ? ' selected' : '').' title="5px">5px</option>'.
+    '<option value="8px"'.($largeur=="8px" ? ' selected' : '').' title="5px">8px</option>'.
+    '<option value="10px"'.($largeur=="10px" ? ' selected' : '').' title="5px">10px</option>'.
+    '<option value="15px"'.($largeur=="15px" ? ' selected' : '').' title="5px">15px</option>'.
     '</select></td></tr></table></div>';
   return $r;
 }
@@ -132,7 +134,6 @@ function ctlChoix($composant, $nic, $nom, $value, $param, $wid) {
         break;
       default:
         $label = _TC($composant, $nom.ucfirst($option));
-spip_log($composant.', '.$nom.ucfirst($option) ,'acs');        
         // S'il n'existe pas de traduction propre au composant, on cherche une traduction ACS generique pour cette option
         if ($label == strtolower(str_replace('_', ' ', $nom.$option)))
         	$label = _T('acs:'.strtolower($option));

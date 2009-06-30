@@ -8,8 +8,9 @@ ACS version 0.5
  - creation du controle de type Bord pour définir largeur, style, et couleur de bordure en une fois.
  
 Modele Cat pour ACS vesion 0.5:
- - Composant Agenda : amélioration CSS. Tri par heure des articles publies/modifies/breves dans l'info-bulle. Encapsulation des styles css dans la classe cAgenda.
- - Composant Articles : meilleure integration avec plugin notation (0.6.3) et composant Democratie
+ - Composant Agenda : amélioration CSS. Tri par heure des articles publies/modifies/breves dans l'info-bulle. Encapsulation des styles css dans la classe cAgenda. Bulle d'aide. masquage des redirections d'articles SPIP.
+ - Composant Articles : meilleure integration avec plugin notation (0.6.3) et composant Democratie. Variables liees au plan deplacees vers le composant rubriques.
+ - Composant Audio : pagination ajax. 
  - Composant Edito : mise a jour pour plugin notation 0.6.3. Prise en compte correcte du nombre de lettres avant coupure.
  - Composant Fond : debug du javascript. Fontes par défaut du site.
  - Composant Keys : nouveau. Bloc des mots-clés d'un article ou de tous les mots-clés.
