@@ -1,5 +1,6 @@
 <h1 class="grostitre"><:clevermail:administration:></h1>
 <BOUCLE_list(SPIP_CM_LISTS){lst_id=#ENV{lst_id}}>
+  <BOUCLE_subscribers(SPIP_CM_LISTS_SUBSCRIBERS){lst_id} />#SET{nbSubs,#TOTAL_BOUCLE}<//B_subscribers>
   <h2>#LST_NAME</h2>
   <B_posts_new>
 		<h3><:clevermail:nouveaux_messages:></h3>
@@ -18,7 +19,9 @@
 	          | <a href="[(#URL_PAGE{clevermail_post_preview_html}|parametre_url{pst_id,#PST_ID})]" target="_blank"><:clevermail:apercu:> HTML</a>
 				    | <a href="[(#URL_ECRIRE{clevermail_post_edit}|parametre_url{pst_id,#PST_ID})]"><:clevermail:modifier:></a>
 		        | [(#BOUTON_ACTION{<:clevermail:supprimer:>,#URL_ACTION_AUTEUR{clevermail_post_remove,#PST_ID,#SELF,ajax}})]
-	          | [(#BOUTON_ACTION{<:clevermail:envoyer:>,#URL_ACTION_AUTEUR{clevermail_post_queue,#PST_ID,#SELF,ajax}})]
+	          [(#GET{nbSubs}|>{0}|oui)
+  	          | [(#BOUTON_ACTION{<:clevermail:envoyer:>,#URL_ACTION_AUTEUR{clevermail_post_queue,#PST_ID,#SELF,ajax}})]
+  	        ]
 			    </div>
 			  </li>
 	  	</BOUCLE_posts_new>
