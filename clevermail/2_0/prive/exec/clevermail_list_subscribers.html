@@ -1,0 +1,24 @@
+<BOUCLE_list(SPIP_CM_LISTS){lst_id}>
+	<h1 class="grostitre"><:clevermail:administration:></h1>
+	<h2>#LST_NAME</h2>
+	<B_subs>
+	  #ANCRE_PAGINATION
+		<h3><:clevermail:liste_abonnes:></h3>
+		#PAGINATION{page}
+		<ul class="liste_items">
+			<BOUCLE_subs(SPIP_CM_LISTS_SUBSCRIBERS spip_cm_subscribers){lst_id}{par sub_email}{pagination 20}>
+		    <li class="item">
+		      #SUB_EMAIL
+		    </li>
+			</BOUCLE_subs>
+		</ul>
+  </B_subs>
+	
+	<!--#navigation-->
+	<INCLURE{fond=prive/menu}>
+	<!--/#navigation-->
+	
+	<!--#extra-->
+	Extra...
+	<!--/#extra-->
+</BOUCLE_list>
