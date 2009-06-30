@@ -1,29 +1,13 @@
 <BOUCLE_list(SPIP_CM_LISTS){lst_id}>
 	<h1 class="grostitre"><:clevermail:administration:></h1>
-	<h2>#LST_NAME</h2>
-	<B_subs>
-	  #ANCRE_PAGINATION
-		<h3><:clevermail:liste_abonnes:></h3>
-		#PAGINATION{page}
-		<table>
-		  <thead>
-		    <th><:clevermail:email:></th>
-		    <th><:clevermail:mode:></th>
-		    <th><:clevermail:actions:></th>
-		  </thead>
-		  <tbody>
-				<BOUCLE_subs(SPIP_CM_LISTS_SUBSCRIBERS spip_cm_subscribers){lst_id}{par sub_email}{pagination 10}>
-			    <tr>
-			      <td>#SUB_EMAIL</td>
-			      <td>[(#LSR_MODE|=={1}|?{HTML,Texte})]</td>
-			      <td class="actions">
-	            [(#BOUTON_ACTION{<:clevermail:desabonner:>,#URL_ACTION_AUTEUR{clevermail_list_subscriber_remove,#LSR_ID,#SELF,ajax}})]
-			      </td>
-			    </tr>
-				</BOUCLE_subs>
-			</tbody>
-		</table>
-  </B_subs>
+	<h2>#LST_NAME</a></h2>
+	<form method="get">
+	  <input type="hidden" id="exec" name="exec" value="clevermail_list_subscribers" />
+	  <input type="hidden" id="lst_id" name="lst_id" value="#LST_ID" />
+  	<label for="filtre_email">Filtre sur l'adresse e-mail : </label><input type="text" id="filtre_email" name="filtre_email" value="#ENV{filtre_email}" size="20" />
+  	<input type="submit" id="ok" name="ok" value="filtrer !" />
+  </form>
+  <INCLURE{fond=prive/listes/clevermail_list_subscribers}{env}>
 	
 	<!--#navigation-->
 	<INCLURE{fond=prive/menu}>
