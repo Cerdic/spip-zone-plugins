@@ -182,6 +182,17 @@ function clevermail_upgrade($nom_meta_base_version, $version_cible) {
       sql_insertq('spip_cm_settings',  array('set_name' => 'CM_SEND_NUMBER', 'set_value' => 50));
       ecrire_meta($nom_meta_base_version,$current_version="0.1",'non');
     }
+    if (version_compare($current_version,'0.2','<')) {
+		  sql_alter("TABLE cm_lists RENAME spip_cm_lists");
+		  sql_alter("TABLE cm_lists_subscribers RENAME spip_cm_lists_subscribers");
+		  sql_alter("TABLE cm_pending RENAME spip_cm_pending");
+		  sql_alter("TABLE cm_posts RENAME spip_cm_posts");
+		  sql_alter("TABLE cm_posts_done RENAME spip_cm_posts_done");
+		  sql_alter("TABLE cm_posts_links RENAME spip_cm_posts_links");
+		  sql_alter("TABLE cm_posts_queued RENAME spip_cm_posts_queued");
+		  sql_alter("TABLE cm_settings RENAME spip_cm_settings");
+		  sql_alter("TABLE cm_subscribers RENAME spip_cm_subscribers");
+    }
   }
 }
 
