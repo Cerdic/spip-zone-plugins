@@ -1,0 +1,33 @@
+#CACHE{0}
+<BOUCLE_article(ARTICLES){id_article}>
+	<BOUCLE_metas_articles(METAS){id_article}>
+		[<title>(#TITRE*|sinon{#_article:TITRE*}|textebrut)</title>]
+		[<meta name="description" content="(#DESCRIPTION*|sinon{#METAS_DESCRIPTION*})" />]
+		[<meta name="keywords" content="(#KEYWORDS*|sinon{#METAS_KEYWORDS*})" />]
+	</BOUCLE_metas_articles>
+		[<title>(#_article:TITRE*|textebrut)</title>]
+		[<meta name="description" content="(#DESCRIPTIF*|sinon{#METAS_DESCRIPTION*})" />]
+		[<meta name="keywords" content="(#METAS_KEYWORDS*)" />]
+	<//B_metas_articles>
+</BOUCLE_article>
+	<BOUCLE_rubrique(RUBRIQUES){id_rubrique}>
+		<BOUCLE_metas_rubriques(METAS){id_rubrique}>
+			[<title>(#TITRE*|sinon{#_rubrique:TITRE*}|textebrut)</title>]
+			[<meta name="description" content="(#DESCRIPTION*|sinon{#METAS_DESCRIPTION*})" />]
+			[<meta name="keywords" content="(#KEYWORDS*|sinon{#METAS_KEYWORDS*})" />]
+		</BOUCLE_metas_rubriques>
+			[<title>(#_rubrique:TITRE*|textebrut)</title>]
+			[<meta name="description" content="(#METAS_DESCRIPTION*)" />]
+			[<meta name="keywords" content="(#METAS_KEYWORDS*)" />]
+		<//B_metas_rubriques></BOUCLE_rubrique>
+		<BOUCLE_metas_sommaire(METAS){id_rubrique}>
+			<title>[(#TITRE*|textebrut)][(#TITRE|=={''}|?{' ',''})#NOM_SITE_SPIP]</title>
+			[<meta name="description" content="(#DESCRIPTION*|sinon{#METAS_DESCRIPTION*})" />]
+			[<meta name="keywords" content="(#METAS_KEYWORDS*)" />]
+		</BOUCLE_metas_sommaire>
+			[<title>(#TITRE*|textebrut|sinon{#NOM_SITE_SPIP})</title>]
+			[<meta name="description" content="(#METAS_DESCRIPTION*)" />]
+			[<meta name="keywords" content="(#METAS_KEYWORDS*)" />]
+		<//B_metas_sommaire>
+	<//B_rubrique>
+<//B_article>

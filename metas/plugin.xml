@@ -1,0 +1,40 @@
+<plugin>
+	<nom>M&eacute;tadatas</nom>
+	<version>1.0</version>
+	<etat>stable</etat>
+	<auteur>Quentin de Serres-Justiniac</auteur>
+	<description>
+	Permet d'associer des m&eacute;tas donn&eacute;es aux objets.
+	
+	Sur une id&eacute;e originale d'Olivier G.</description>
+	<prefix>metas</prefix>
+	<fonctions>metas.php</fonctions>
+	<options>metas_options.php</options>
+	<pipeline>
+		<nom>pre_propre</nom>
+		<action>mots_strong</action>
+		<inclure>metas.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<action>formulaire</action>
+		<inclure>metas.php</inclure>
+	</pipeline>
+	<onglet id="metas" parent="configuration">
+		<icone>images/referencement.png</icone>
+		<titre>metas:configuration_metas</titre>
+	</onglet>
+	<install>base/metas_install.php</install>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/metas.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/metas.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_auxiliaires</nom>
+		<inclure>base/metas.php</inclure>
+	</pipeline>
+</plugin>
