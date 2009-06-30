@@ -19,8 +19,22 @@
   <variable>
     <nom>FondImage</nom>
     <type>img</type>
-    <chemin>img/fond</chemin>
+    <chemin>img/trame</chemin>
     <label>non</label>
+  </variable>
+  <variable>
+    <nom>FondImageRepeatX</nom>
+    <type>choix</type>
+    <option>oui</option>
+    <option>non</option>
+    <valeur>oui</valeur>
+  </variable>
+  <variable>
+    <nom>FondImageRepeatY</nom>
+    <type>choix</type>
+    <option>oui</option>
+    <option>non</option>
+    <valeur>non</valeur>
   </variable>
   <variable>
     <nom>Image</nom>

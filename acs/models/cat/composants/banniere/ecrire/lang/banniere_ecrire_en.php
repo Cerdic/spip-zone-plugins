@@ -9,6 +9,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'Image' => 'Banner',
 'FondImage' => 'Background',
+'FondImageRepeatX' => 'Repeat image on X axis',
+'FondImageRepeatY' => 'Repeat image on Y axis',
 'Hauteur' => 'Height',
 'Logo' => 'Display website logo',
 'LogoAlign' => _T('acs:align'),
