@@ -8,7 +8,7 @@
     <div>
       <:clevermail:statistiques:> :
 	    [(#GET{nbSubs}|>{0}|oui)
-	      <a href="[(#URL_ECRIRE{clevermail_list_subscribers}|parametre_url{lst_id,#LST_ID})]">#GET{nbSubs} [ (#GET{nbSubs}|singulier_ou_pluriel{clevermail:abonne,clevermail:abonnes})]</a> 
+	      <a href="[(#URL_ECRIRE{clevermail_subscribers}|parametre_url{lst_id,#LST_ID})]">#GET{nbSubs} [ (#GET{nbSubs}|singulier_ou_pluriel{clevermail:abonne,clevermail:abonnes})]</a> 
 	    ]
 	    [(#GET{nbSubs}|>{0}|non)
 	      <:clevermail:aucun_abonne:>
