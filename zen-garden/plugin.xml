@@ -1,0 +1,15 @@
+<plugin>
+  <nom>Zen-Garden</nom>
+  <auteur>Cedric Morin [yterium.com->http://www.yterium.com]</auteur>
+  <version>0.9</version>
+  <icon>img_pack/themes-128.png</icon>
+  <etat>test</etat>
+  <description>Un jardin Zen pour Zpip</description>
+  <options>zengarden_options.php</options>
+  <prefix>zengarden</prefix>
+	<bouton id='theme' parent='configuration'>
+		<titre>zengarden:themes</titre>
+		<icone>img_pack/themes-24.png</icone>
+		<url>zengarden</url>
+	</bouton>
+</plugin>
