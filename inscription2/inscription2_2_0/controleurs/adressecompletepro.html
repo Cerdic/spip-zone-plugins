@@ -14,6 +14,11 @@
 	var id = me.crayon().find('form');
 
 	function validation(){
+		/**
+		 * Obligé de le répéter ici au cas ou on a activé la barre de rédaction dans les crayons
+		 */
+		var me = cQuery(".auteurs_elargi-adressecompletepro-#ID_AUTEUR");
+		var id = me.crayon().find('form');
 		var validator = cQuery(id).validate({
 			onkeyup:function(){
 				validation();
@@ -62,7 +67,6 @@
 	id.find('.obligatoire label').not('.error').append('*');
 	setTimeout('validation()',500);
 </script>
-<div class="formulaire_spip">
 	<fieldset[ style="(#ENV{style})"]>
 		<legend><:inscription2:votre_adresse_pro:></legend>
 		<ul>
@@ -98,6 +102,5 @@
 			</li>]
 		</ul>
 	</fieldset>
-</div>
 </BOUCLE_a>
 <//B_a>

@@ -14,6 +14,11 @@
 	var id = me.crayon().find('form');
 	
 	function validation(){
+		/**
+		 * Obligé de le répéter ici au cas ou on a activé la barre de rédaction dans les crayons
+		 */
+		var me = cQuery(".auteurs_elargi-adressecomplete-#ID_AUTEUR");
+		var id = me.crayon().find('form');
 		var validator = cQuery(id).validate({
 			errorElement:"p",
 			errorClass: "erreur",
@@ -66,7 +71,6 @@
 	setTimeout('validation()',500);
 
 </script>
-<div class="formulaire_spip">
 <fieldset[ style="(#ENV{style})"]>
 	<legend><:inscription2:votre_adresse:></legend>
 	<ul>
@@ -102,6 +106,5 @@
 		</li>]
 	</ul>
 </fieldset>
-</div>
 </BOUCLE_a>
 <//B_a>
