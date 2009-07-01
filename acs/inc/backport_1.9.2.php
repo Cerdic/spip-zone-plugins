@@ -41,4 +41,12 @@ function spip_xml_match_nodes($regexp,&$arbre,&$matches){
 		}
 	return (count($matches));
 }
+
+// touch_meta() n'existe que depuis rev. 11125
+if (!is_callable("touch_meta")) {
+  function touch_meta($antidate){ 
+  	if (!@touch(_FILE_META, $antidate)) 
+  		ecrire_fichier(_FILE_META, serialize(array_merge(array('touch'=>$antidate),$GLOBALS['meta']))); 
+  }
+}
 ?>
