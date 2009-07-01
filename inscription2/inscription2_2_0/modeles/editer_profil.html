@@ -3,8 +3,7 @@
 <div id="profil">
 
 	<h2 class="#_auteur:EDIT{nom} ">#NOM</h2>
-	
-	<div class="profil_contacts" id="infos_persos">
+
 	<h3><:inscription2:infos_personnelles:></h3>
 	<div class="#_auteur:EDIT{logo} buddy">[(#LOGO_AUTEUR||?{" ","<img src='http://www.kde-look.org/usermanager/nopic.png' alt='Avatar' />"})[(#LOGO_AUTEUR||image_reduire{200,0})]]</div>
 	[<p><span class="#EDIT{nomcomplet} fn"><span class="given-name">(#PRENOM|?{#PRENOM,<:inscription2:non_renseigne:>})</span> <span class="family-name">#NOM_FAMILLE</span></span></p>]
@@ -14,66 +13,66 @@
 	</div>
 	
 	<div class="profil_contacts" id="contacts_persos">
-	<h3><:inscription2:contacts_personnels:></h3>
+		<h3><:inscription2:contacts_personnels:></h3>
+	
+		[(#REM) Un test pour voir si on a les 4 champs adresse]
+		[(#CONFIG{inscription2/adresse_fiche_mod}|?{#SET{adresse,complet},''})]
+		[(#CONFIG{inscription2/code_postal_fiche_mod}|?{#SET{adresse,complet},''})]
+		[(#CONFIG{inscription2/ville_fiche_mod}|?{#SET{adresse,complet},''})]
+		[(#CONFIG{inscription2/pays_fiche_mod}|?{#SET{adresse,complet},''})]
+		
+		<p>[(#GET{adresse}|=={complet}|oui)<span class="#EDIT{adressecomplete} adr">]
+			[(#CONFIG{inscription2/adresse_fiche_mod}|oui)[<span class="street-address">(#ADRESSE|?{#ADRESSE,<:inscription2:adresse:> <:inscription2:non_renseignee:>})</span><br />]]
+			[(#CONFIG{inscription2/code_postal_fiche_mod}|oui)[<span class="postal-code">(#CODE_POSTAL|?{#CODE_POSTAL,<:inscription2:code_postal:> <:inscription2:non_renseigne:><br />})</span>]]
+			[(#CONFIG{inscription2/ville_fiche_mod}|oui)[<span class="locality">(#VILLE|?{#VILLE,<:inscription2:ville:> <:inscription2:non_renseignee:>})</span><br />]]
+			[(#CONFIG{inscription2/pays_fiche_mod}|oui)<span class="country-name">]
+				<BOUCLE_r(SPIP_GEO_PAYS){id_pays=#PAYS}{tous}>
+				[(#PAYS|couper{30})]
+				</BOUCLE_r>
+				[(#CONFIG{inscription2/pays_fiche_mod}|oui)<:inscription2:pays:> <:inscription2:non_renseigne:>]
+				<//B_r>
+			[(#CONFIG{inscription2/pays_fiche_mod}|oui)</span>]
+		[(#GET{adresse}|=={complet}|oui)</span>]
+		</p>
+	
+		[<p><span class="#_auteur:EDIT{auteur_email}"><:inscription2:email:> <a class="email" href="mailto:#EMAIL">(#EMAIL|?{#EMAIL,<:inscription2:non_renseigne:>})</a></span></p>]
+	
+		[(#REM) Un test pour voir si on a un des 3 champs telephones]
+		
+		[(#SET{contacts,false})]
+		[(#CONFIG{inscription2/telephone_fiche_mod}|?{[(#SET{contacts,true})],''})]
+		[(#CONFIG{inscription2/mobile_fiche_mod}|?{[(#SET{contacts,true})],''})]
+		[(#CONFIG{inscription2/fax_fiche_mod}|?{[(#SET{contacts,true})],''})]
+		[(#GET{contacts}|=={true}|oui)<p><span class="#EDIT{telfax}">]
+			
+			[(#CONFIG{inscription2/telephone_fiche_mod}|oui)
+				[(#TELEPHONE|oui)<:inscription2:telephone:> : <span class="tel">#TELEPHONE</span>]
+				[(#TELEPHONE|non)<span class="non_renseigne"><:inscription2:telephone:> : <span class="tel"><:inscription2:non_renseigne:></span></span>]
+			<br />]
+			
+			[(#CONFIG{inscription2/mobile_fiche_mod}|oui)
+				[(#MOBILE|oui)<:inscription2:mobile:> : <span class="cell">#MOBILE</span>]
+				[(#MOBILE|non)<span class="non_renseigne"><:inscription2:mobile:> : <span class="cell"><:inscription2:non_renseigne:></span></span>]
+			<br />]
+			
+			[(#CONFIG{inscription2/fax_fiche_mod}|oui)
+				[(#FAX|oui)<:inscription2:fax:> : <span class="fax">#FAX</span>]
+				[(#FAX|non)<span class="non_renseigne"><:inscription2:fax:> : <span class="fax"><:inscription2:non_renseigne:></span></span>]
+			]
+	
+		[(#GET{contacts}|oui)</span></p>]
 
-	[(#REM) Un test pour voir si on a les 4 champs adresse]
-	[(#CONFIG{inscription2/adresse_fiche_mod}|?{#SET{adresse,complet},''})]
-	[(#CONFIG{inscription2/code_postal_fiche_mod}|?{#SET{adresse,complet},''})]
-	[(#CONFIG{inscription2/ville_fiche_mod}|?{#SET{adresse,complet},''})]
-	[(#CONFIG{inscription2/pays_fiche_mod}|?{#SET{adresse,complet},''})]
-	
-	<p>[(#GET{adresse}|=={complet}|oui)<span class="#EDIT{adressecomplete} adr">]
-		[(#CONFIG{inscription2/adresse_fiche_mod}|oui)[<span class="street-address">(#ADRESSE|?{#ADRESSE,<:inscription2:adresse:> <:inscription2:non_renseignee:>})</span><br />]]
-		[(#CONFIG{inscription2/code_postal_fiche_mod}|oui)[<span class="postal-code">(#CODE_POSTAL|?{#CODE_POSTAL,<:inscription2:code_postal:> <:inscription2:non_renseigne:><br />})</span>]]
-		[(#CONFIG{inscription2/ville_fiche_mod}|oui)[<span class="locality">(#VILLE|?{#VILLE,<:inscription2:ville:> <:inscription2:non_renseignee:>})</span><br />]]
-		[(#CONFIG{inscription2/pays_fiche_mod}|oui)<span class="country-name">]
-			<BOUCLE_r(SPIP_GEO_PAYS){id_pays=#PAYS}{tous}>
-			[(#PAYS|couper{30})]
-			</BOUCLE_r>
-			[(#CONFIG{inscription2/pays_fiche_mod}|oui)<:inscription2:pays:> <:inscription2:non_renseigne:>]
-			<//B_r>
-		[(#CONFIG{inscription2/pays_fiche_mod}|oui)</span>]
-	[(#GET{adresse}|=={complet}|oui)</span>]
-	</p>
-	
-	[<p><span class="#_auteur:EDIT{auteur_email}"><:inscription2:email:> <a class="email" href="mailto:#EMAIL">(#EMAIL|?{#EMAIL,<:inscription2:non_renseigne:>})</a></span></p>]
-	
-	[(#REM) Un test pour voir si on a un des 3 champs telephones]
-	
-	[(#SET{contacts,false})]
-	[(#CONFIG{inscription2/telephone_fiche_mod}|?{[(#SET{contacts,true})],''})]
-	[(#CONFIG{inscription2/mobile_fiche_mod}|?{[(#SET{contacts,true})],''})]
-	[(#CONFIG{inscription2/fax_fiche_mod}|?{[(#SET{contacts,true})],''})]
-	[(#GET{contacts}|=={true}|oui)<p><span class="#EDIT{telfax}">]
-		
-		[(#CONFIG{inscription2/telephone_fiche_mod}|oui)
-			[(#TELEPHONE|oui)<:inscription2:telephone:> : <span class="tel">#TELEPHONE</span>]
-			[(#TELEPHONE|non)<span class="non_renseigne"><:inscription2:telephone:> : <span class="tel"><:inscription2:non_renseigne:></span></span>]
-		<br />]
-		
-		[(#CONFIG{inscription2/mobile_fiche_mod}|oui)
-			[(#MOBILE|oui)<:inscription2:mobile:> : <span class="cell">#MOBILE</span>]
-			[(#MOBILE|non)<span class="non_renseigne"><:inscription2:mobile:> : <span class="cell"><:inscription2:non_renseigne:></span></span>]
-		<br />]
-		
-		[(#CONFIG{inscription2/fax_fiche_mod}|oui)
-			[(#FAX|oui)<:inscription2:fax:> : <span class="fax">#FAX</span>]
-			[(#FAX|non)<span class="non_renseigne"><:inscription2:fax:> : <span class="fax"><:inscription2:non_renseigne:></span></span>]
+		[(#URL_SITE|oui) 
+			[<p><span class="#_auteur:EDIT{hyperlien}"><:inscription2:website:> : 
+				<a href="#URL_SITE" class="url spip_out" rel="me">(#NOM_SITE)</a>
+			</span></p>]
 		]
-
-	[(#GET{contacts}|oui)</span></p>]
-
-	[(#URL_SITE|oui) 
-		[<p><span class="#_auteur:EDIT{hyperlien}"><:inscription2:website:> : 
-			<a href="#URL_SITE" class="url spip_out" rel="me">(#NOM_SITE)</a>
-		</span></p>]
-	]
-	
-	[(#URL_SITE|non)
-		<p><span class="non_renseigne">
-			<span class="#_auteur:EDIT{hyperlien}"><:inscription2:website:> : <:inscription2:non_renseigne:></span>
-		</span></p>
-	]
+		
+		[(#URL_SITE|non)
+			<p><span class="non_renseigne">
+				<span class="#_auteur:EDIT{hyperlien}"><:inscription2:website:> : <:inscription2:non_renseigne:></span>
+			</span></p>
+		]
 	
 	</div>
 
