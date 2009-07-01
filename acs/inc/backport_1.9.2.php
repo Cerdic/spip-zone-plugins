@@ -44,9 +44,15 @@ function spip_xml_match_nodes($regexp,&$arbre,&$matches){
 
 // touch_meta() n'existe que depuis rev. 11125
 if (!is_callable("touch_meta")) {
-  function touch_meta($antidate){ 
-  	if (!@touch(_FILE_META, $antidate)) 
-  		ecrire_fichier(_FILE_META, serialize(array_merge(array('touch'=>$antidate),$GLOBALS['meta']))); 
+  function touch_meta($antidate= false){  
+  	if (!$antidate OR !@touch(_FILE_META, $antidate)) {
+  		$r = $GLOBALS['meta'];
+  		unset($r['alea_ephemere']);
+  		unset($r['alea_ephemere_ancien']);
+  		unset($r['secret_du_site']);
+  		if ($antidate) $r['touch']= $antidate;
+  		ecrire_fichier(_FILE_META, serialize($r));
+  	}
   }
 }
 ?>
