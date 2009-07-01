@@ -23,12 +23,25 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configuration_destinataires_plusieurs' => 'Permettre aux visiteurs de choisir <b>plusieurs</b> destinataires',
 	'configuration_intro' => 'Introduction',
 	'configuration_intro_explication' => '&Eacute;crivez &eacute;ventuellement un texte qui introduira le formulaire.',
+	'configuration_pj' => 'Pi&egrave;ces jointes',
+	'configuration_pj_autoriser' => 'Autoriser l\'envoi de pi&egrave;ces jointes',
+	'configuration_pj_nb_max' => 'Nombre maximal de pi&egrave;ces jointes',
+	'configuration_pj_facteur_absent' => 'Pour utiliser cette fonction, vous devez installer le plugin Facteur.',
 	
 	'courriel_de' => 'De',
 	'courriel_pour' => 'Pour',
 	
 	'form_destinataire' => 'Choisissez un destinataire',
 	'form_destinataires' => 'Choisissez les destinataires',
+	'form_pj_ajouter_pluriel' => 'Ajouter des pi&egrave;ces jointes',
+	'form_pj_ajouter_singulier' => 'Ajouter une pi&egrave;ce jointe',
+	'form_pj_fichier_ajoute' => 'Le fichier a bien &eacute;t&eacute; ajout&eacute; : ',
+	'form_pj_importer' => 'Importer un fichier',
+	'form_pj_previsu_pluriel' => 'Pi&egrave;ces jointes',
+	'form_pj_previsu_singulier' => 'Pi&egrave;ce jointe',
+	'form_pj_supprimer' => 'Supprimer',
+	'form_pj_titre' => 'Titre du fichier',
+	
 	'infos_supplementaires' => 'Informations suppl&eacute;mentaires',
 	'titre' => 'Formulaire de contact'
 );

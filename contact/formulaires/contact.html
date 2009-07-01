@@ -25,6 +25,19 @@
 			</BOUCLE_previsu_infos>
 			[<li><strong><:form_prop_sujet:></strong> : (#ENV{sujet_contact})</li>]
 			[<li><div><strong><:info_texte_message:></strong></div>(#ENV{texte_contact}|nl2br)</li>]
+			<B_previsu_pj>
+			<li>
+				[<strong>(#ENV{erreurs}|table_valeur{infos_pj}|count|>{1}|?{<:contact:form_pj_previsu_pluriel:>,<:contact:form_pj_previsu_singulier:>})</strong>]
+				<ul>
+				<BOUCLE_previsu_pj(POUR){tableau #ENV{erreurs}|table_valeur{infos_pj}}>
+					<li>
+						[<img src="(#ENV*{erreurs}|table_valeur{infos_pj}|table_valeur{#CLE}|table_valeur{vignette}|image_reduire{32}|extraire_attribut{src})" [title="(#ENV*{erreurs}|table_valeur{infos_pj}|table_valeur{#CLE}|table_valeur{mime})"] />]
+						[(#ENV*{erreurs}|table_valeur{infos_pj}|table_valeur{#CLE}|table_valeur{nom})]
+					</li>
+				</BOUCLE_previsu_pj>
+				</ul>
+			</li>
+			</B_previsu_pj>
 		</ul>
 		<p class="boutons"><input type="submit" class="submit" name="confirmer" value="<:form_prop_confirmer_envoi:>" /></p>
 	</fieldset>
@@ -109,6 +122,32 @@
 				[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{texte_contact})</span>]
 				<textarea name="texte_contact" id="texte_contact" rows="8" cols="60">#ENV{texte_contact}</textarea>
 			</li>
+			
+			<B_pj>
+			<li class ='pieces_jointes'>
+				<label>[(#ENV{nb_max_pj}|>{1}|?{<:contact:form_pj_ajouter_pluriel:>,<:contact:form_pj_ajouter_singulier:>})]</label>
+				<ul>
+					<BOUCLE_pj(POUR){tableau #ENV{pj_fichiers}}> 
+						<li>
+							[(#ENV*{erreurs}|table_valeur{infos_pj}|table_valeur{#CLE}|table_valeur{message}|oui)
+								<:contact:form_pj_fichier_ajoute:>
+								[<img src="(#ENV*{erreurs}|table_valeur{infos_pj}|table_valeur{#CLE}|table_valeur{vignette}|image_reduire{32}|extraire_attribut{src})" [title="(#ENV*{erreurs}|table_valeur{infos_pj}|table_valeur{#CLE}|table_valeur{mime})"] />]
+								[(#ENV*{erreurs}|table_valeur{infos_pj}|table_valeur{#CLE}|table_valeur{nom})]
+								<input type="hidden" name="pj_enregistrees_nom&#91;#CLE&#93;" value="[(#ENV*{erreurs}|table_valeur{infos_pj}|table_valeur{#CLE}|table_valeur{nom})]"/>
+								<input type="hidden" name="pj_enregistrees_mime&#91;#CLE&#93;" value="[(#ENV*{erreurs}|table_valeur{infos_pj}|table_valeur{#CLE}|table_valeur{mime})]"/>
+								<input type="hidden" name="pj_enregistrees_extension&#91;#CLE&#93;" value="[(#ENV*{erreurs}|table_valeur{infos_pj}|table_valeur{#CLE}|table_valeur{extension})]"/>
+								<input type="hidden" name="pj_enregistrees_vignette&#91;#CLE&#93;" value="[(#ENV*{erreurs}|table_valeur{infos_pj}|table_valeur{#CLE}|table_valeur{vignette})]"/>
+								<input type="submit" name="pj_supprimer_#CLE" value="<:contact:form_pj_supprimer:>"/>
+							]
+							 
+							[(#ENV*{erreurs}|table_valeur{infos_pj}|table_valeur{#CLE}|table_valeur{message}|non)
+								<input type="file" name="pj_fichiers&#91;#CLE&#93;" title="<:contact:form_pj_importer:>" size="30" />
+							]
+						</li>
+					</BOUCLE_pj>
+				</ul>
+			</li>
+			</B_pj>
 		</ul>
 	</fieldset>
 	
@@ -122,3 +161,9 @@
 </form>
 </BOUCLE_editable>
 </div>
+
+<script type="text/javascript">
+	$(function(){
+		
+	});
+</script>

@@ -63,6 +63,34 @@
 	</fieldset>
 	
 	<fieldset>
+		<legend><:contact:configuration_pj:></legend>
+		<ul>
+			<li class="choix editer_champ">
+				[(#REM) : On teste si le plugin facteur est présent pour pourvoir envoyer les pièces jointes ]
+				[(#PLUGIN{facteur}|oui)
+				<input type="checkbox" name="autoriser_pj" id="autoriser_pj" class="checkbox" value="true" [checked="checked"(#ENV{autoriser_pj}|=={true}|oui)] />
+				<label for="autoriser_pj"><:contact:configuration_pj_autoriser:></label>
+			
+				<div>
+					<label for="nb_max_pj"><:contact:configuration_pj_nb_max:></label>
+					<select name="nb_max_pj" id="nb_max_pj">
+						<option value="1" [selected="selected" (#ENV{nb_max_pj}|=={1}|oui)]>1</option>
+						<option value="2" [selected="selected" (#ENV{nb_max_pj}|=={2}|oui)]>2</option>
+						<option value="3" [selected="selected" (#ENV{nb_max_pj}|=={3}|oui)]>3</option>
+						<option value="4" [selected="selected" (#ENV{nb_max_pj}|=={4}|oui)]>4</option>
+						<option value="5" [selected="selected" (#ENV{nb_max_pj}|=={5}|oui)]>5</option>
+					</select>
+				</div>
+				]
+				
+				[(#PLUGIN{facteur}|non)
+				<p class="explication"><:contact:configuration_pj_facteur_absent:></p>
+				]
+			</li>
+		</ul>
+	</fieldset>
+	
+	<fieldset>
 		<legend><:contact:configuration_intro:></legend>
 		<ul>
 			<li class="editer_texte">

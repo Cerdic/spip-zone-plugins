@@ -23,12 +23,25 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configuration_destinataires_plusieurs' => 'Allow visitors to choose among <b>several</b> recipient authors',
 	'configuration_intro' => 'Introduction',
 	'configuration_intro_explication' => 'You may here add a text that will introduce your contact form.',
+	'configuration_pj' => 'Attachement',
+	'configuration_pj_autoriser' => 'Allow adding attachement',
+	'configuration_pj_nb_max' => 'Maximum number of attachments',
+	'configuration_pj_facteur_absent' => 'You have to install the Facteur plugin to use this functionality.',
 	
 	'courriel_de' => 'From',
 	'courriel_pour' => 'To',
 	
 	'form_destinataire' => 'Choose a recipient',
 	'form_destinataires' => 'Choose recipients',
+	'form_pj_ajouter_pluriel' => 'Add attachements',
+	'form_pj_ajouter_singulier' => 'Add attachement',
+	'form_pj_fichier_ajoute' => 'The file has been added : ',
+	'form_pj_importer' => 'Import a file',
+	'form_pj_previsu_pluriel' => 'Attachements',
+	'form_pj_previsu_singulier' => 'Attachement',
+	'form_pj_supprimer' => 'Delete',
+	'form_pj_titre' => 'File title',
+	
 	'infos_supplementaires' => 'Additional Infos',
 	'titre' => 'Contact Form'
 );
