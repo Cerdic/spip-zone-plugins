@@ -2,16 +2,14 @@
 <plugin>
 	<nom>Tablesorter pour SPIP</nom>
 	<auteur>Chistian Bach http://lovepeacenukes.com/<br />
-	Portage sous SPIP par cym http://www.cym.fr<br />
-	Optimisations et d&eacute;bugguage par b_b<br />
-	Troll et nommage improbable : BoOz.
+	Portage sous SPIP par cym, b_b, BoOz.
 	</auteur>
 	<version>1.0 beta</version>
 	<etat>test</etat>
 	<description>
 	Le plugin jQuery original permet de trier les tableaux portant la class CSS "tablesorter" en cliquant simplement sur l'ent&ecirc;te d'une colonne.<br />
 	<br />
-	Actuellement, la version SPIP nécessite d'ajouter la class "tablesorter" aux tableaux des squelettes; par la suite, ajoutera une class "tablesorter" automatiquement &agrave; tous les tableaux ayant d&eacute;j&agrave; la class table.spip.<br />
+	Actuellement, la version SPIP n&eacute;cessite d'ajouter la class "tablesorter" aux tableaux des squelettes; par la suite, ajoutera automatiquement la class "tablesorter" &agrave; tous les tableaux ayant d&eacute;j&agrave; la class table.spip.<br />
 	<br />
 	Voir en ligne toutes les options de tris, sur le site de <a href="http://tablesorter.com/docs/">http://tablesorter.com</a>.<br />
 	<br />
@@ -20,6 +18,10 @@
 	<prefix>tablesorter</prefix>
 	<pipeline>
 		<nom>insert_head</nom>
+		<inclure>tablesorter_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
 		<inclure>tablesorter_pipelines.php</inclure>
 	</pipeline>
 </plugin>
