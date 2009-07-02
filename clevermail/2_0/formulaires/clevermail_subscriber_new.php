@@ -64,9 +64,11 @@ function formulaires_clevermail_subscriber_new_traiter_dist() {
           spip_log('Ajout de '.$adresse.' (id='.$sub_id.') à la liste « '.$lst_name.' » (id='.$lst_id.')', 'clevermail');
     			$nbNewSubs++;
     		} else {
-    			sql_updateq("spip_cm_lists_subscribers", array('lsr_mode' => $lsr_mode), "lst_id=".$lst_id." AND sub_id=".$sub_id);
-          spip_log('Changement de mode d\'abonnement de '.$adresse.' (id='.$sub_id.') à la liste « '.$lst_name.' » (id='.$lst_id.')', 'clevermail');
-    			$nbUpdSubs++;
+    			if ($lsr_mode != sql_getfetsel("lsr_mode", "spip_cm_lists_subscribers", "lst_id=".$lst_id." AND sub_id=".$sub_id)) {
+	    			sql_updateq("spip_cm_lists_subscribers", array('lsr_mode' => $lsr_mode), "lst_id=".$lst_id." AND sub_id=".$sub_id);
+	          spip_log('Changement de mode d\'abonnement de '.$adresse.' (id='.$sub_id.') à la liste « '.$lst_name.' » (id='.$lst_id.')', 'clevermail');
+	    			$nbUpdSubs++;
+    			}
     		}
     	}
     }
