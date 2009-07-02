@@ -73,10 +73,10 @@ function formulaires_clevermail_subscriber_new_traiter_dist() {
     	}
     }
 	}
-  $msg = $nbNewSubs > 0 ? $nbNewSubs.' nouveaux abonnés' : '';
+  $msg = $nbNewSubs > 0 ? $nbNewSubs.' nouveaux abonnés' : 'aucun nouvel abonné';
   $msg .= $nbNewSubs > 0 && $nbUpdSubs > 0 ? ' et ' : '';
   $msg .= $nbUpdSubs > 0 ? $nbUpdSubs.' changements de mode d\'abonnement' : '';
-
+  
   return array('message_ok' => $msg);//, 'redirect' => generer_url_ecrire('clevermail'));
 }
 ?>
