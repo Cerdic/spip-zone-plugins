@@ -13,6 +13,14 @@ Gestion de lettres d'information reprenant les fonctionnalités du logiciel libr
 -* Envois en HTML ou texte brut
 -* Gestion des inscriptions/désinscription, les abonnés étant distincts des utilisateurs de SPIP
 -* Etc.
+
+Reste à faire :
+-* Extraction de tous les textes sous forme de chaînes de langue
+-* Salvatorisation
+-* Envoi programmé d'un message
+-* Envois périodiques automatisés
+-* Envoi en multipart avec images et CSS incluses ?
+-* Vos idées ?
 	</description>
 	<lien>[Documentation->http://www.clever-age.com/veille/blog/plugin-clevermail-pour-spip-pour-une-gestion-simple-de-lettres-d-informations.html]</lien>
 	<icon>img_pack/lettre-24.png</icon>
