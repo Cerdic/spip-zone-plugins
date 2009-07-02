@@ -9,7 +9,8 @@ function action_clevermail_list_subscriber_toggle_dist() {
 	  include_spip('inc/autoriser');
 	  if (autoriser('toggle','cm_list_subscriber',$pst_id)) {
 	    sql_updateq("spip_cm_lists_subscribers", array('lsr_mode' => $mode), "lsr_id=".$lsr_id);
-	    spip_log('Changement de mode de l\'abonnement de « '.$abonne.' » à la liste « '.$liste.' » (id='.$abonnement['lst_id'].')', 'clevermail');
+	    $abonnement = sql_fetsel("l.lst_id, l.lst_name, s.sub_email", "spip_cm_lists_subscribers ls, spip_cm_lists l, spip_cm_subscribers s", "ls.sub_id=s.sub_id AND ls.lst_id=l.lst_id AND ls.lsr_id=".$lsr_id);
+	    spip_log('Changement de mode de l\'abonnement de « '.$abonnement['sub_email'].' » à la liste « '.$abonnement['lst_name'].' » (id='.$abonnement['lst_id'].')', 'clevermail');
 	  }
   }
 }
