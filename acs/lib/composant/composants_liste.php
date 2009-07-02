@@ -65,4 +65,24 @@ function lit_liste_composants($dirc, $tag=''){
   }
   return $lc;
 }
+
+/**
+ * Retourne les instances d'un composant
+ */
+function composant_instances($c) {
+  static $ci = array();
+
+  if (count($ci[$c]) > 0)
+    return $ci[$c];
+    
+  $ci[$c] = array();
+  $metas = $GLOBALS['meta'];
+  $reg = '/acs'.ucfirst($c).'(\d+)Use/';
+  foreach ($metas as $meta=>$val) {
+    if (preg_match($reg, $meta, $matches))
+      $ci[$c][] = $matches[1];
+  }
+  sort($ci[$c]);
+  return $ci[$c];
+}
 ?>

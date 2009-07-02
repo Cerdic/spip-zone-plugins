@@ -4,7 +4,7 @@
   width: 100%;
   text-align: #VAR{acsBanniereAlign,center};
   height: #VAR{acsBanniereHauteur,60px};
-  [background: (#VAR{acsBanniereFond})[ url("(#ACS_CHEMIN{img/trame/#VAR{acsBanniereFondImage}})")][(#VAR{acsBanniereFondImageRepeatX}|=={oui}|?{[(#VAR{acsBanniereFondImageRepeatY}|=={oui}|?{"repeat","repeat-x"})],[(#VAR{acsBanniereFondImageRepeatY}|=={oui}|?{"repeat-y","no-repeat"})]})];]
+  [background: (#VAR{acsBanniereFond})[ url("(#ACS_CHEMIN{img/trame/#VAR{acsBanniereFondImage}})")][(#VAR{acsBanniereFondImageRepeatX}|=={oui}|?{[(#VAR{acsBanniereFondImageRepeatY}|=={oui}|?{"repeat","repeat-x"})],[(#VAR{acsBanniereFondImageRepeatY}|=={oui}|?{"repeat-y","no-repeat"})]})][ (#VAR{acsBanniereFondAlign}|=={left}|?{left,right})];]
   font-family: [(#VAR{acsBanniereFont}), ]#VAR{acsBanniereFontFamily};
 }
 

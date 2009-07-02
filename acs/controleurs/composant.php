@@ -66,7 +66,7 @@ function controleurs_composant_dist($regs) {
     		zIndex: 99998000,
     		helper: "clone",
     		delay: 100,
-    		distance: 10,
+    		distance: 20,
     		ghosting: true,
     		opacity:	0.8,
     		revert: true,

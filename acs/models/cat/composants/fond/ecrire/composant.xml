@@ -43,7 +43,7 @@
   <variable>
     <nom>Image</nom>
     <type>img</type>
-    <chemin>img/fond</chemin>
+    <chemin>img/trame</chemin>
     <label>non</label>
   </variable>
 

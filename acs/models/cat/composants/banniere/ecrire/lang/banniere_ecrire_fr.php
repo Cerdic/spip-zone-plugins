@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'FondImage' => 'Arri&egrave;re-plan',
 'FondImageRepeatX' => 'Répète l\'image en X',
 'FondImageRepeatY' => 'Répèter l\'image en Y',
+'FondAlign' => _T('acs:align'),
 'Hauteur' => 'Hauteur',
 'Logo' => 'Afficher le logo du site',
 'LogoAlign' => _T('acs:align'),

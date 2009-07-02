@@ -3,7 +3,7 @@
 #          (Plugin Spip)
 #     http://acs.geomaticien.org
 #
-# Copyright Daniel FAIVRE, 2007-2008
+# Copyright Daniel FAIVRE, 2007-2009
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
 require_once _DIR_ACS.'lib/composant/composants_ajouter_balises.php';
@@ -98,8 +98,19 @@ function composants_head($type) {
           continue;
         $r .= file_get_contents($file);
       }
-      else
-        $r .= recuperer_fond($filepath)."\r";
+      else {
+        $r .= recuperer_fond($filepath);
+      }
+      // On cherche aussi les css d'instances de composants
+      if (strtolower($type) == 'css') {
+      	$filepath = 'composants/'.$c.'/'.$c.'_instances.css';
+      	$file = find_in_path($filepath.'.html');
+      	if ($file) {
+      		foreach (composant_instances($c) as $nic) {
+      			$r .= recuperer_fond($filepath, array('nic' => $nic));
+      		}
+      	}
+      }
     }
   }
   return $r;

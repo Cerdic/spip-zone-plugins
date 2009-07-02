@@ -12,6 +12,17 @@
 // appellé depuis acs_options.php dans TOUS les cas
 // acs_options est le premier fichier du plugin chargé, avant même autoriser.php de la dist
 
+// Dossier des paramètres et images utilisateur
+// User images and parameters
+// compatible mutualisation (_DIR_SITE defini)
+if (_DIR_SITE == '_DIR_SITE') {
+	$dir_site = '';
+}
+else {
+	$dir_site = _DIR_RACINE ? substr(_DIR_SITE, 3) : _DIR_SITE ;
+}
+$GLOBALS['ACS_CHEMIN'] = $dir_site._NOM_PERMANENTS_ACCESSIBLES.'_acs';
+
 $GLOBALS['meta']['acsModel'] = (isset($GLOBALS['meta']['acsModel']) ? $GLOBALS['meta']['acsModel'] : 'cat');
 $GLOBALS['ACS_CHEMIN'] = $GLOBALS['ACS_CHEMIN'].'/'.$GLOBALS['meta']['acsModel'];
 

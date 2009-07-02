@@ -6,32 +6,34 @@ fieldset.a_la_une {
   font-style: italic;
   font-size: 0.88em;
   margin: 0;
-  padding: 1px;
+  padding: 0;
   padding-left: 0.79em;
   padding-right: 0.79em;
-  padding-bottom: 0.4em;
+  padding-bottom: 0.2em;
+  padding-top: 0.2em;
   border: 0;
   [color: (#VAR{acsBandeauTextColor,#VAR{acsFondText}});]
-  [background: #(#VAR{acsBandeauFond}) repeat;]
+  [background: (#VAR{acsBandeauFond});]
   [border-top: #VAR{acsBandeauBordWidth,thin}[ (#VAR{acsBandeauBordStyle,groove}) ](#VAR{acsBandeauBordColor});]
   [border-bottom: #VAR{acsBandeauBordWidth,thin}[ (#VAR{acsBandeauBordStyle,groove}) ](#VAR{acsBandeauBordBas});]
   [text-align: (#VAR{acsBandeauAlignement,center});]
-  margin-top: -0.8em;
 }
 
 fieldset.a_la_une legend {
   position: relative;
   [border: #VAR{acsBandeauBordWidth,thin}[ (#VAR{acsBandeauBordStyle,groove}) ](#VAR{acsBandeauBordColor});
   border-bottom: 0;
-  ]
+  ][background: (#VAR{acsBandeauFond});]
   font-weight: normal;
   padding-left: 8px;
   padding-right: 8px;
   font-style: italic;
-  font-size: 0.7em;
+  font-size: 0.71em;
   line-height: 1.2em;
   -moz-border-radius: 0.8em;
-  margin-top: -0.6em;
+  -moz-border-radius-bottomleft: 0;
+  -moz-border-radius-bottomright: 0;
+  margin-top: -1.2em;
 }
 
 div.a_la_une {

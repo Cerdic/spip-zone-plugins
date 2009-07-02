@@ -39,7 +39,7 @@
 	<auteur>	<!-- Auteur du plugin -->
  	Daniel FAIVRE &copy; 2008-2009 - <multi>[fr]licence GPL[en]GPL license</multi>
 	</auteur>
-  <version>0.5 (20090630)</version>
+  <version>0.5 (20090702)</version>
 	<etat>stable</etat>
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
 	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
@@ -51,9 +51,7 @@
   <icon>
     images/acs_32x32.gif
   </icon>
-	<fonctions>
-		acs_fonctions.php
-	</fonctions>
+
 	<options>
 		acs_options.php
 	</options>

@@ -7,6 +7,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'description' => 'Bloc des derni&egrave;res br&egrave;ves publi&eacute;es.',
 'help' => 'Activable si les br&egrave;ves de SPIP sont actives.',
 	
+'TitreFond' => 'Titre',
 'Nb' => 'Nombre',
 );
 ?>

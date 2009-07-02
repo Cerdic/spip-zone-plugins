@@ -58,21 +58,6 @@ function lecture_composants_variables() {
   return $r;
 }
 
-/**
- * Retourne le nombre d'instances d'un composant
- */
-function composant_instances($c) {
-  $r = array();
-  $metas = $GLOBALS['meta'];
-  $reg = '/acs'.ucfirst($c).'(\d+)Use/';
-  foreach ($metas as $meta=>$val) {
-    if (preg_match($reg, $meta, $matches))
-      $r[] = $matches[1];
-  }
-  sort($r);
-  return $r;
-}
-
 function liste_variables() {
 	static $lv = array();
   if (count($lv) > 0)

@@ -6,11 +6,13 @@ ACS version 0.5
  - nouvelle balise de mise en page <admin> pour masquer des parties de mises en page de composant en mode
  - nouvelle balise #VAR{variable, valeur par defaut} : lorsque la valeur de variable est un nom de variable ACS, ce nom est remplacé par sa valeur à l'execution (permet l'héritage de variables de composants).
  - creation du controle de type Bord pour définir largeur, style, et couleur de bordure en une fois.
+ - gestion des CSS d'instances de composants par fichier composant_instances.css.html contenant la balise #NIC.
  
 Modele Cat pour ACS vesion 0.5:
  - Composant Agenda : amélioration CSS. Tri par heure des articles publies/modifies/breves dans l'info-bulle. Encapsulation des styles css dans la classe cAgenda. Bulle d'aide. masquage des redirections d'articles SPIP.
  - Composant Articles : meilleure integration avec plugin notation (0.6.3) et composant Democratie. Variables liees au plan deplacees vers le composant rubriques.
- - Composant Audio : pagination ajax. 
+ - Composant Audio : pagination ajax.
+ - Composant Breves : feuille de style personnalisable indépendante.
  - Composant Edito : mise a jour pour plugin notation 0.6.3. Prise en compte correcte du nombre de lettres avant coupure.
  - Composant Fond : debug du javascript. Fontes par défaut du site.
  - Composant Keys : nouveau. Bloc des mots-clés d'un article ou de tous les mots-clés.

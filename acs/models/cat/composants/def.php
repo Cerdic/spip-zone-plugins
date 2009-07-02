@@ -7,7 +7,8 @@
 # Copyleft: licence GPL - Cf. LICENCES.txt
 #
 /**
- *  ACS model default values
+ * ACS model default values
+ * 
  * On initialise les valeurs des variables du modèle 
  */
 $def = array(
@@ -24,11 +25,12 @@ $def = array(
 	'acsAgendaBulleVoirArticlesModifies' => 'oui',
 
 	'acsArticlesUse' => 'oui',
+	'acsArticlesTitreFondColor' => '#f4f4f4',
 	'acsArticlesBordColor' => '#cec1eb',
-	'acsArticlesBordWidth' => 'thin',
+	'acsArticlesBordWidth' => '1px',
 	'acsArticlesBordStyle' => 'inset',
 	'acsArticlesTabBordColor' => '#cfcfcf',
-	'acsArticlesTabBordWidth' => 'thin',
+	'acsArticlesTabBordWidth' => '1px',
 	'acsArticlesTabBordStyle' => 'inset',
 	'acsArticlesTabFirst' => '#dfe5ef',
 	'acsArticlesTabOdd' => '#e4dfef',
@@ -43,7 +45,7 @@ $def = array(
  	'acsAudioBordWidth' => '=acsRubnavBordWidth',
 	'acsAudioBordStyle' => '=acsRubnavBordStyle', 
 	'acsAudioSep' => '=acsRubnavSep', 
-	'acsAudioMp3Hover' => '=acsRubnavFondHover', 
+	'acsAudioMp3hover' => '=acsRubnavFondHover', 
 	'acsAudioMp3on' => '=acsRubnavFond6', 
 
 	'acsAuteursUse' => 'oui',
@@ -54,14 +56,30 @@ $def = array(
 	'acsAuteursTitreFondImage' => '=acsRubnavTitreFondImage',
 
 	'acsBanniereUse' => 'oui',
-
+	'acsBanniereFond' => '#fcfcfc',
+	'acsBanniereFondImage' => 'titrefond_00.png',
+	'acsBanniereFondImageRepeatX' => 'non',
+	'acsBanniereFondImageRepeatY' => 'oui',
 	'acsBanniereLogo' => 'non',
 	'acsBanniereFont' => 'Verdana, Arial',
 
 	'acsBrevesUse' => 'oui',
-	'acsBandeauUse' => 'oui',
-	'acsBandeauContenu' => '<a href="http://acs.geomaticien.org">ACS</a>: pour configurer ce site, <a href="ecrire/?exec=acs&amp;onglet=composants&amp;composant=fond">cliquez ici</a>.',
+	'acsBrevesTitreFondColor' => '=acsRubnavTitreFond',
+	'acsBrevesTitreFondImage' => '=acsRubnavTitreFondImage',
+	'acsBrevesBordColor' => '=acsRubnavBordColor',
+	'acsBrevesBordWidth' => '=acsRubnavBordWidth',
+	'acsBrevesBordStyle' => '=acsRubnavBordStyle',
 
+	'acsBandeauUse' => 'oui',
+	'acsBandeauFond' => '=acsRubnavFond',
+	'acsBandeauBordColor' => '#c3d5c8',
+	'acsBandeauBordBas' => '#c3d5c8',
+	'acsBandeauBordWidth' => '1px',
+	'acsBandeauBordStyle' => 'inset',
+	'acsBandeauTextColor' => '#352d4d',
+	'acsBandeauLegende' => 'En construction - Under construction',
+	'acsBandeauContenu' => '<a href="http://acs.geomaticien.org">ACS</a>: pour configurer ce site, <a href="ecrire/?exec=acs&amp;onglet=composants&amp;composant=fond">cliquez ici</a>.',
+	'acsBandeauText2' => '-&gt; <a href="ecrire/?exec=acs&amp;onglet=composants&amp;composant=bandeau">Modifier ce bandeau</a> &lt;-',
 	'acsCustomUse' => 'oui',
 
 	'acsEditoUse' => 'oui',
