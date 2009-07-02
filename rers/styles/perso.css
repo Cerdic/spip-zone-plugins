@@ -9,6 +9,9 @@ Autre solution a creuser.. ROUGE-GRIS    :  FOND = gris 444444  , BACKGROUND MEN
 */
 
 
+
+
+
 body {
 font-size: 95%;
 }
@@ -178,6 +181,8 @@ h3.spip {
 	background-color: transparent;
 }
 
+ul, ul.spip { list-style: disc;}
+ul ul.spip, ol ul.spip { list-style: circle;}
 
 /* ------------------------------------------------------------------
  	5. NAVIGATION et MENUS

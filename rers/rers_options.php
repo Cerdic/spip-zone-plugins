@@ -27,15 +27,15 @@ $jcc = $GLOBALS['id_auteur'];
      		<ul style='padding-left:1em'>
 		<li><a href='?exec=naviguer&id_rubrique=$rers_rub_offres'>rubrique OFFRES</a></li>
 		<li><a href='?exec=naviguer&id_rubrique=$rers_rub_demandes'>rubrique DEMANDES</a></li>
-		<li><a href='?exec=naviguer&id_rubrique=$rers_rub_vie'>rubrique VIE</a></li>
+		<li><a href='?exec=naviguer&id_rubrique=$rers_rub_vie'>rubrique VIE DU RERS</a></li>
 		<li><a href='?exec=mots_tous'>DOMAINE DE SAVOIRS (classement des offres et demandes par domaines de savoirs)</a></li>
 		</ul>
      		<ul style='padding-left:1em'>
 		<li><a href='?exec=articles_page'>tous vos articles</a></li>
 		</ul>
      		<ul style='padding-left:1em'>
-		<li><a href='?exec=rers_aide'>Guide d'utilisation du site</a></li>
-		<li><a href='?exec=message_edit&new=oui&dest=$rers_auteur_webmestre'>une question ? (message privé au webmaster)</a></li>
+		<li><a href='?exec=rers_aide'>Aide</a></li>
+		
 		</ul>
 
      		<ul style='padding-left:1em'>

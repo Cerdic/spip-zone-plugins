@@ -187,6 +187,31 @@ RERS */
 		else
 			$aff_articles = "'prop','publie'";
 
+
+
+
+	$rers_rub_offres = lire_config('rers/rers_rub_offres');
+	$rers_rub_demandes = lire_config('rers/rers_rub_demandes');
+	$rers_rub_vie = lire_config('rers/rers_rub_vie');
+
+
+//RERS
+	$out .=  afficher_objets('article',"OFFRES", array('FROM' => "spip_articles AS articles LEFT JOIN spip_mots_articles AS lien ON lien.id_article=articles.id_article",
+ 	"WHERE" => "statut='prop' AND id_rubrique=$rers_rub_offres AND lien.id_mot=$id_mot", 
+	'ORDER BY' => "date DESC"));
+	$out .=  afficher_objets('article',"DEMANDES", array('FROM' => "spip_articles AS articles LEFT JOIN spip_mots_articles AS lien ON lien.id_article=articles.id_article",
+	"WHERE" => "statut='prop' AND id_rubrique=$rers_rub_demandes AND lien.id_mot=$id_mot", 
+	'ORDER BY' => "date DESC"));
+
+  global $connect_statut; //rers
+  if ($connect_statut !== '0minirezo') //RERS
+  {//rers if statut  != 0minirezo
+
+}  //RERS
+else //RERS
+{// RERS
+
+		$out .= "<br><br><br><hr><h3> Ce qui suit est réservé aux administrateurs</h3>"; //RERS
 		$out .= afficher_objets('rubrique','<b>' . _T('info_rubriques_liees_mot') . '</b>', array("FROM" => 'spip_rubriques AS rubrique LEFT JOIN spip_mots_rubriques AS lien ON lien.id_rubrique=rubrique.id_rubrique', 'WHERE' => "lien.id_mot=$id_mot", 'ORDER BY' => "rubrique.titre"));
 
 		$out .= afficher_objets('article',_T('info_articles_lies_mot'), array('FROM' => "spip_articles AS articles LEFT JOIN spip_mots_articles AS lien ON lien.id_article=articles.id_article", 'WHERE' => "lien.id_mot=$id_mot AND articles.statut IN ($aff_articles)", 'ORDER BY' => "articles.date DESC"));
@@ -194,6 +219,9 @@ RERS */
 		$out .= afficher_objets('breve','<b>' . _T('info_breves_liees_mot') . '</b>', array("FROM" => 'spip_breves AS breves LEFT JOIN spip_mots_breves AS lien ON lien.id_breve=breves.id_breve', 'WHERE' => "lien.id_mot=$id_mot", 'ORDER BY' => "breves.date_heure DESC"));
 
 		$out .= afficher_objets('site','<b>' . _T('info_sites_lies_mot') . '</b>', array("FROM" => 'spip_syndic AS syndic LEFT JOIN spip_mots_syndic AS lien ON lien.id_syndic=syndic.id_syndic', 'WHERE' => "lien.id_mot=$id_mot", 'ORDER BY' => "syndic.nom_site DESC"));
+
+
+}//RERS
 		
 	}
 

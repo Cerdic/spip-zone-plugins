@@ -29,7 +29,14 @@ function exec_rers_aide() {
 	echo debut_droite('', true);
 	// contenu
 	// ...
+
+
+// AIDE RERS
+	$rers_auteur_webmestre = lire_config('rers/rers_auteur_webmestre');
+	echo icone_horizontale("Envoyer un message prive au Webmestre ", generer_action_auteur("editer_message","normal/$rers_auteur_webmestre"),"message.gif","", false);
 	echo _T('rers_aide_contenu');
+
+
 	// ...
 	// fin contenu
 	echo pipeline('affiche_milieu', array('args'=>array('exec'=>'nom'),'data'=>''));

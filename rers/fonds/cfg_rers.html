@@ -143,47 +143,6 @@
 
 
 
-<h3>Liste des offres et demandes par domaines de savoirs</h3>
-
-
-
-
-<h4> Offres</h4>
-<ul>
-<BOUCLE_jccdom(MOTS){tous}{type_mot='Domaine de savoirs'}>
-	<li>#TITRE
-	<ul>
-<BOUCLE_jccmot(ARTICLES){statut=prop}{id_mot}{id_rubrique=#CONFIG{rers/rers_rub_offres}}>
-		<li><b>#TITRE</b>
-<BOUCLE_jccaut(AUTEURS){id_article}>
-[(#REM)  indiquer le nom ?
-		, par #NOM
-]
-		</li>
-</BOUCLE_jccaut>
-</BOUCLE_jccmot>
-	</ul></li>
-</BOUCLE_jccdom>
-</ul>
-
-<h4> Demandes</h4>
-<ul>
-<BOUCLE_jccdom2(MOTS){tous}{type_mot='Domaine de savoirs'}>
-	<li>#TITRE
-	<ul>
-<BOUCLE_jccmot2(ARTICLES){statut=prop}{id_mot}{id_rubrique=#CONFIG{rers/rers_rub_demandes}}>
-		<li><b>#TITRE</b>
-<BOUCLE_jccaut2(AUTEURS){id_article}>
-[(#REM)  indiquer le nom ?
-		, par #NOM
-]
-		</li>
-</BOUCLE_jccaut2>
-</BOUCLE_jccmot2>
-	</ul></li>
-</BOUCLE_jccdom2>
-</ul>
-
 
 <h3>Coordonnées email des auteurs (qui ont un email)</h3>
 
@@ -203,6 +162,94 @@ Rédacteurs : <br />
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+<h3> Offres et demandes  </h3>
+
+	<h4> Offres</h4>
+	<ul>
+	<BOUCLE_jccoff(ARTICLES){statut=prop}{id_rubrique=#CONFIG{rers/rers_rub_offres}}>
+			<li>#TITRE
+	<BOUCLE_jccautoff(AUTEURS){id_article}>
+	[(#REM)  indiquer le nom ?
+			, par #NOM
+	]
+			</li>
+	</BOUCLE_jccautoff>
+	</BOUCLE_jccoff>
+	</ul>
+
+	<h4> Demandes</h4>
+	<ul>
+	<BOUCLE_jccdem(ARTICLES){statut=prop}{id_rubrique=#CONFIG{rers/rers_rub_demandes}}>
+			<li>#TITRE
+	<BOUCLE_jccautdem(AUTEURS){id_article}>
+	[(#REM)  indiquer le nom ?
+			, par #NOM
+	]
+			</li>
+	</BOUCLE_jccautdem>
+	</BOUCLE_jccdem>
+	</ul>
+
+
+
+
+
+
+
+
+
+
+<h3> Offres et demandes par domaines de savoirs </h3>
+	<h4> Offres</h4>
+	<ul>
+	<BOUCLE_jccdom(MOTS){tous}{type_mot="Domaine de savoirs"}>
+		<li>#TITRE
+		<ul>
+	<BOUCLE_jccmot(ARTICLES){statut=prop}{id_mot}{id_rubrique=#CONFIG{rers/rers_rub_offres}}>
+			<li>#TITRE
+	<BOUCLE_jccaut(AUTEURS){id_article}>
+	[(#REM)  indiquer le nom ?
+			, par #NOM
+	]
+			</li>
+	</BOUCLE_jccaut>
+	</BOUCLE_jccmot>
+		</ul></li>
+	</BOUCLE_jccdom>
+	</ul>
+
+
+
+
+<h4> Demandes</h4>
+<ul>
+<BOUCLE_jccdom2(MOTS){tous}{type_mot='Domaine de savoirs'}>
+	<li>#TITRE
+	<ul>
+<BOUCLE_jccmot2(ARTICLES){statut=prop}{id_mot}{id_rubrique=#CONFIG{rers/rers_rub_demandes}}>
+		<li>#TITRE
+<BOUCLE_jccaut2(AUTEURS){id_article}>
+[(#REM)  indiquer le nom ?
+		, par #NOM
+]
+		</li>
+</BOUCLE_jccaut2>
+</BOUCLE_jccmot2>
+	</ul></li>
+</BOUCLE_jccdom2>
+</ul>
 
 
 

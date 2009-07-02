@@ -26,6 +26,11 @@ $rers_dest = $_GET['dest'];
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+//  A Classer....    
+'text_article_propose_publication_forum' => " ", // ecrire
+'texte_en_cours_validation_forum' => " ",   // ecrire
+
+
 //--- exec/rers_aide.php
 // aide RERS espace privé  
 'rers_aide_titre' => "Guide du rédacteur RERS Sud de l'Aisne",
@@ -60,7 +65,7 @@ placé dans une des deux rubriques OFFRES ou DEMANDES.
 
 //--- icones espace privé
 'icone_a_suivre' => "Accueil espace privé",//spip
-'icone_edition_site' => "Rubriques OFFRES, DEMANDES, VIE", //spip
+'icone_edition_site' => "Rubriques", //spip
 'titre_forum' => "Forum entre Adhérents", //spip
 'info_forum_interne' => "Forum entre Adhérents", //ecrire
 'icone_auteurs' => "Adhérents",//spip
@@ -184,7 +189,8 @@ if ($rers_exec == 'articles_edit')
   if ( $id_rub == $rers_rub_offres)
   {
   $GLOBALS[$GLOBALS['idx_lang']][info_texte] = "Texte <br />
-	<div style='border:solid 1px'>
+	<div style='border:dashed 1px'>
+	Conseils pour la rédaction : <br />
 	Pensez à détailler votre fiche d'offre de savoir en
 	indiquant par exemple : <br />
 	<dl>
@@ -207,7 +213,8 @@ if ($rers_exec == 'articles_edit')
   if ( $id_rub == $rers_rub_demandes)
   {
   $GLOBALS[$GLOBALS['idx_lang']][info_texte] = "Texte <br />
-	<div style='border:solid 1px'>
+	<div style='border:dashed 1px'>
+	Conseils pour la rédaction : <br />
 	Pensez à détailler votre fiche de demande de savoir en
 	indiquant par exemple : 
 	<ul>
