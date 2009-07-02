@@ -12,5 +12,5 @@
 	
 	[(#CONFIG{inscription2/pays_fiche_mod}|oui)
 		[(#ENV{pays}|non)<span class="country-name"><:inscription2:pays:> <:inscription2:non_renseigne:></span>]
-		[(#ENV{pays}|oui)<span class="country-name">[(#INCLURE{fond=vues/pays}{id=#ENV*{pays}})]</span>]
+		[(#ENV{pays}|oui)<span class="country-name">[(#INCLURE{fond=vues/pays}{pays=#ENV*{pays}})]</span>]
 	]

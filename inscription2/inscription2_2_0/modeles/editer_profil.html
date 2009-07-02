@@ -25,10 +25,8 @@
 			[(#CONFIG{inscription2/adresse_fiche_mod}|oui)[<span class="street-address">(#ADRESSE|?{#ADRESSE,<:inscription2:adresse:> <:inscription2:non_renseignee:>})</span><br />]]
 			[(#CONFIG{inscription2/code_postal_fiche_mod}|oui)[<span class="postal-code">(#CODE_POSTAL|?{#CODE_POSTAL,<:inscription2:code_postal:> <:inscription2:non_renseigne:><br />})</span>]]
 			[(#CONFIG{inscription2/ville_fiche_mod}|oui)[<span class="locality">(#VILLE|?{#VILLE,<:inscription2:ville:> <:inscription2:non_renseignee:>})</span><br />]]
-			[(#CONFIG{inscription2/pays_fiche_mod}|oui)<span class="country-name">]
-				<BOUCLE_r(SPIP_GEO_PAYS){id_pays=#PAYS}{tous}>
-				[(#PAYS|couper{30})]
-				</BOUCLE_r>
+			[(#CONFIG{inscription2/pays_fiche_mod}|oui)<span class="country-name">]#PAYS
+				[(#PAYS|id_pays_to_pays)]
 				[(#CONFIG{inscription2/pays_fiche_mod}|oui)<:inscription2:pays:> <:inscription2:non_renseigne:>]
 				<//B_r>
 			[(#CONFIG{inscription2/pays_fiche_mod}|oui)</span>]

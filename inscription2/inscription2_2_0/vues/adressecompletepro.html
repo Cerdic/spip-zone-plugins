@@ -9,5 +9,5 @@
 	[(#CONFIG{inscription2/ville_pro_fiche_mod}|?{' ',''})[<span class="locality">(#ENV*{ville_pro}|?{[(#ENV*{ville_pro}|typo)],<:inscription2:ville_pro:> <:inscription2:non_renseignee:>})</span><br />]]
 	[(#CONFIG{inscription2/pays_pro}|?{' ',''})
 		[(#ENV{pays_pro}|?{'',' '})<span class="country-name"><:inscription2:pays:> <:inscription2:non_renseigne:></span>]
-		[(#ENV{pays_pro}|?{' ',''})<span class="country-name">[(#INCLURE{fond=vues/pays}{id=#ENV*{pays_pro}})]</span>]
+		[(#ENV{pays_pro}|?{' ',''})<span class="country-name">[(#INCLURE{fond=vues/pays}{pays=#ENV*{pays_pro}})]</span>]
 	]
