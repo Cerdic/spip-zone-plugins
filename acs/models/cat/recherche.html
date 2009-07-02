@@ -135,7 +135,7 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
             [<p class="pagination">(#PAGINATION)</p>]
             <ul>
                 <BOUCLE_sites(SITES) {recherche} {par points}{inverse (#ORDRE|?{0,1})} {pagination 5}>
-                <li class="menu-item"><a href="[(#ID_SYNDIC|generer_url_site)]">#NOM_SITE</a></li>
+                <li class="menu-item"><a href="[(#ID_SYNDIC|generer_url_entite{site})]">#NOM_SITE</a></li>
                 </BOUCLE_sites>
             </ul>
           </div>
