@@ -25,7 +25,7 @@ function formulaires_guestbook_charger_dist() {
 function formulaires_guestbook_verifier_dist(){
 	$erreurs = array();
 	// verifier que les champs obligatoires sont bien la :
-	foreach(array('email','pseudo','ville','message','note') as $obligatoire)
+	foreach(array('email','pseudo','ville','message','note','captcha') as $obligatoire)
 	if (!_request($obligatoire)) { 
 		$erreurs[$obligatoire.'-ob'] = "<p class='erreur_message'>"._T('info_obligatoire_02')."</p>";
 		$erreurs[$obligatoire.'-erreur'] = 'obligatoire';
@@ -36,6 +36,9 @@ function formulaires_guestbook_verifier_dist(){
 		$erreurs['email'] = _T('spip:form_email_non_valide');
 		$erreurs['email-erreur'] = 'obligatoire';
 	}
+	if (_request('verif') != _request('captcha'))
+		$erreurs['captcha'] = _T('guestbook:captcha_invalide');
+		
 	if (preg_match(',\d,', _request('prenom'))) {
 		$erreurs['prenom'] = _T('guestbook:prenom_chiffres');
 		$erreurs['prenom-erreur'] = 'obligatoire';

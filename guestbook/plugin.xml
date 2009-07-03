@@ -8,6 +8,7 @@
 	<description>Guestbook vous procure un Livre d'or pour votre site Spip. Passez la souris sur le bouton Forum pour voir apparaitre l'interface de mod&eacute;ration</description>
 	<lien>[Documentation->http://www.spip-contrib.net/Guestbook]</lien>
 	<prefix>guestbook</prefix>
+	<fonctions>guestbook_fonctions.php</fonctions>
 	<install>base/guestbook.php</install>
 	<pipeline>
 		<nom>declarer_tables_principales</nom>
