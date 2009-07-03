@@ -1,0 +1,41 @@
+<div class="formulaire_spip formulaire_editer formulaire_#FORM" id="formulaire_#FORM-#ENV{id,new}">
+  [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+  [(#ENV{editable})
+	  [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	  <form action="#ENV{action}" method="post" enctype="multipart/form-data"><div>
+	    #ACTION_FORMULAIRE{#ENV{action}}
+	      <ul>
+	        [(#ENV{lst_id}|oui)
+	          <input type="hidden" name="lst_id" value="#ENV{lst_id}" />
+	        ]
+	        [(#ENV{lst_id}|non)
+            <INCLURE{fond=public/clevermail_abonnement_plusieurs_listes}{env}>
+          ]
+	        #SET{name,sub_email}
+	        #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+	        #SET{obli,'obligatoire'}
+	        <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+	          <label for="#GET{name}"><:clevermail:email:></label>
+	          [<span class='erreur_message'>(#GET{erreurs})</span>]
+            <input type="text" class="text" name="#GET{name}" id="#GET{name}" size="50" maxlength="255" value="#ENV{#GET{name}}" />
+	        </li>
+          #SET{name,lsr_mode}
+	        #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+	        #SET{obli,''}
+	        <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+	          <label><:clevermail:version:></label>
+	          [<span class='erreur_message'>(#GET{erreurs})</span>]
+	          <div class="choix">
+	            <input type="radio" name="#GET{name}" id="#GET{name}1" class="radio" value="1"[ (#ENV{#GET{name}}|=={1}|oui)checked="checked"] />
+	            <label for="#GET{name}1">HTML</label>
+	          </div>
+	          <div class="choix">
+	            <input type="radio" name="#GET{name}" id="#GET{name}2" class="radio" value="0"[ (#ENV{#GET{name}}|=={0}|oui)checked="checked"] />
+	            <label for="#GET{name}2">Text</label>
+	          </div>
+	        </li>
+	      </ul>
+	      <p class="boutons"><span class="image_loading"></span><input type="submit" class="submit" value="<:clevermail:bouton_inscription:>" /></p>
+	  </div></form>
+	]
+</div>
