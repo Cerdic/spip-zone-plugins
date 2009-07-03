@@ -69,11 +69,11 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 	[(#VAR{acsOngletsUse}|!={non}|?{' '}) </div>][(#REM) fin onglet]
 </div>[(#REM) fin colonne2]
 <div id="colonne3"><div class="spacer"></div>
-      <div class="encart">
+      <div class="cModule40">
 
           [(#REM) Rubriques trouvees ]
           <B_rubriques>
-          <div class="rubriques">
+          <div class="cRubnav">
             #ANCRE_PAGINATION
             <h2 class="menu-titre"><:rubriques:></h2>
             [<p class="pagination">(#PAGINATION)</p>]
@@ -83,11 +83,12 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
                 </BOUCLE_rubriques>
             </ul>
           </div>
+          <div class="spacer"></div>
           </B_rubriques>
 
           [(#REM) Mots-cles trouves ]
           <B_mots>
-          <div class="divers">
+          <div class="cKeys">
             #ANCRE_PAGINATION
             <h2 class="menu-titre"><:mots_clefs:></h2>
             [<p class="pagination">(#PAGINATION)</p>]
@@ -97,11 +98,12 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
                 </BOUCLE_mots>
             </ul>
           </div>
+          <div class="spacer"></div>
           </B_mots>
 
           [(#REM) Breves trouvees ]
           <B_breves>
-          <div class="breves">
+          <div class="cBreves">
             #ANCRE_PAGINATION
             <h2 class="menu-titre"><:breves:></h2>
             [<p class="pagination">(#PAGINATION)</p>]
@@ -111,11 +113,12 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
                 </BOUCLE_breves>
             </ul>
           </div>
+          <div class="spacer"></div>
           </B_breves>
 
           [(#REM) Messages trouves ]
           <B_messages>
-          <div class="forums">
+          <div class="blocForums">
             #ANCRE_PAGINATION
             <h2 class="menu-titre"><:messages_forum:></h2>
             [<p class="pagination">(#PAGINATION)</p>]
@@ -125,11 +128,12 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
                 </BOUCLE_messages>
             </ul>
           </div>
+          <div class="spacer"></div>
           </B_messages>
 
           [(#REM) Sites web trouves ]
           <B_sites>
-          <div class="syndic">
+          <div class="cSyndic">
             #ANCRE_PAGINATION
             <h2 class="menu-titre"><:sites_web:></h2>
             [<p class="pagination">(#PAGINATION)</p>]
@@ -139,6 +143,7 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
                 </BOUCLE_sites>
             </ul>
           </div>
+          <div class="spacer"></div>
           </B_sites>
 
       </div><!-- fin encart -->
