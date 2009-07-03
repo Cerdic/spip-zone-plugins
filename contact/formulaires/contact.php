@@ -243,8 +243,15 @@ function formulaires_contact_traiter_dist($id_auteur=''){
 	spip_log($texte);
 	$envoyer_mail = charger_fonction('envoyer_mail','inc');
 	$envoyer_mail($mail, $sujet, $texte, $adres, "X-Originating-IP: ".$GLOBALS['ip']);
+	
+	// Maintenant que tout a été envoyé, s'il y avait des PJ il faut supprimer les fichiers
+	if ($pj_enregistrees_nom != null) {
+		foreach ($pj_enregistrees_nom as $cle => $nom_pj) {
+			unlink($repertoire_temp_pj.$nom_pj);
+		}
+	}
+	
 	$message = _T("form_prop_message_envoye");
-
 	return array('message_ok'=>$message);
 }
 
