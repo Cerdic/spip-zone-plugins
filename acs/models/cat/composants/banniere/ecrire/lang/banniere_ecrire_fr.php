@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'Image' => 'Banni&egrave;re',
 'FondImage' => 'Arri&egrave;re-plan',
-'FondImageRepeatX' => 'Répète l\'image en X',
+'FondImageRepeatX' => 'Répèter l\'image en X',
 'FondImageRepeatY' => 'Répèter l\'image en Y',
 'FondAlign' => _T('acs:align'),
 'Hauteur' => 'Hauteur',

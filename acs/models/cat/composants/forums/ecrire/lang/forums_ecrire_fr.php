@@ -10,6 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'bloc' => 'Bloc des derniers messages',
 
+'TitreFond' => 'Titre',
 'messages' => 'Forum d\'un objet (article ...)',
 'Nb' => 'Nombre',
 'Fond1' => 'Fond 1',
