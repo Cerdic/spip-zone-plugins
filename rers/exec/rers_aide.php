@@ -19,6 +19,7 @@ function exec_rers_aide() {
 	
 	// colonne gauche
 	echo debut_gauche('', true);
+	echo icone_horizontale("Envoyer un message prive au Webmestre ", generer_action_auteur("editer_message","normal/$rers_auteur_webmestre"),"message.gif","", false);
 	echo pipeline('affiche_gauche', array('args'=>array('exec'=>'nom'),'data'=>''));
 	
 	// colonne droite
@@ -33,7 +34,6 @@ function exec_rers_aide() {
 
 // AIDE RERS
 	$rers_auteur_webmestre = lire_config('rers/rers_auteur_webmestre');
-	echo icone_horizontale("Envoyer un message prive au Webmestre ", generer_action_auteur("editer_message","normal/$rers_auteur_webmestre"),"message.gif","", false);
 	echo _T('rers_aide_contenu');
 
 

@@ -18,30 +18,27 @@ $rers_rub_offres = lire_config('rers/rers_rub_offres');
 $rers_rub_demandes = lire_config('rers/rers_rub_demandes');
 $rers_rub_vie = lire_config('rers/rers_rub_vie');
 $rers_auteur_webmestre = lire_config('rers/rers_auteur_webmestre');
+global $connect_id_auteur;
 
 $jcc = $GLOBALS['id_auteur'];
 
 
-	$flux['data'] .= "<div class='cadre cadre-info verdana1'><div class='cadre_padding'>
-		<b>Raccourcis RERS : $jcc</b>
-     		<ul style='padding-left:1em'>
-		<li><a href='?exec=naviguer&id_rubrique=$rers_rub_offres'>rubrique OFFRES</a></li>
-		<li><a href='?exec=naviguer&id_rubrique=$rers_rub_demandes'>rubrique DEMANDES</a></li>
-		<li><a href='?exec=naviguer&id_rubrique=$rers_rub_vie'>rubrique VIE DU RERS</a></li>
-		<li><a href='?exec=mots_tous'>DOMAINE DE SAVOIRS (classement des offres et demandes par domaines de savoirs)</a></li>
-		</ul>
-     		<ul style='padding-left:1em'>
-		<li><a href='?exec=articles_page'>tous vos articles</a></li>
-		</ul>
-     		<ul style='padding-left:1em'>
-		<li><a href='?exec=rers_aide'>Aide</a></li>
-		
-		</ul>
-
-     		<ul style='padding-left:1em'>
-		<li>vos informations personnelles : cliquez en haut sur votre nom</li>
-		</ul>
-		</div></div>";
+	$flux['data'] .= "<div class='cadre cadre-info verdana1'><div class='cadre_padding'>"
+		. "<b>Raccourcis RERS : $jcc</b>"
+     		. "<ul style='padding-left:1em'>"
+		. "<li><a href='?exec=naviguer&id_rubrique=$rers_rub_offres'>rubrique OFFRES</a></li>"
+		. "<li><a href='?exec=naviguer&id_rubrique=$rers_rub_demandes'>rubrique DEMANDES</a></li>"
+		. "<li><a href='?exec=naviguer&id_rubrique=$rers_rub_vie'>rubrique VIE DU RERS</a></li>"
+		. "<li><a href='?exec=mots_tous'>Recherche par domaine de savoir</a></li>"
+		. "<li><a href='?exec=articles_page'>tous vos articles</a></li>"
+		. "<li><a href='"
+		. generer_url_ecrire("auteur_infos","id_auteur=$connect_id_auteur")
+		. "'>"
+		. "Modifier mes informations personnelles"
+		. "</a></li>" 
+		. "<li><a href='?exec=rers_aide'>Aide : Guide du rédacteur</a></li>"
+		. "</ul>"
+		. "</div></div>";
 	return $flux;
 
 
