@@ -12,7 +12,7 @@ function action_clevermail_post_create_dist() {
   	$html = recuperer_page($list['lst_url_html']);
     $post['pst_subject'] = trim(eregi_replace("^.*<title>(.*)</title>.*$", "\\1", $html));
   	$post['pst_html'] = $html;
-    $post['pst_text'] = wordwrap(recuperer_page($list['lst_url_text']), 70);
+    $post['pst_text'] = recuperer_page($list['lst_url_text']);
     sql_insertq("spip_cm_posts", $post);
     spip_log('Création du message « '.$post['pst_subject'].' » dans la liste « '.sql_getfetsel("lst_name", "spip_cm_lists", "lst_id=".$lst_id).' » (id = '.$lst_id.')', 'clevermail');
   }

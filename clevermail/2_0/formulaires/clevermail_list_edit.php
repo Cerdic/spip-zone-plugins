@@ -44,18 +44,18 @@ function formulaires_clevermail_list_edit_verifier_dist($lst_id = -1) {
 
 function formulaires_clevermail_list_edit_traiter_dist($lst_id = -1) {
   $champs = array(
-    'lst_name' => sql_quote(_request('lst_name')),
-    'lst_comment' => sql_quote(_request('lst_comment')),
-    'lst_moderation' => sql_quote(_request('lst_moderation')),
-    'lst_moderator_email' => sql_quote(_request('lst_moderator_email')),
-    'lst_subscribe_subject' => sql_quote(_request('lst_subscribe_subject')),
-    'lst_subscribe_text' => sql_quote(_request('lst_subscribe_text')),
-    'lst_subject' => sql_quote(_request('lst_subject')),
-    'lst_unsubscribe_subject' => sql_quote(_request('lst_unsubscribe_subject')),
-    'lst_unsubscribe_text' => sql_quote(_request('lst_unsubscribe_text')),
-    'lst_subject_tag' => sql_quote(_request('lst_subject_tag')),
-    'lst_url_html' => sql_quote(_request('lst_url_html')),
-    'lst_url_text' => sql_quote(_request('lst_url_text'))
+    'lst_name' => _request('lst_name'),
+    'lst_comment' => _request('lst_comment'),
+    'lst_moderation' => _request('lst_moderation'),
+    'lst_moderator_email' => _request('lst_moderator_email'),
+    'lst_subscribe_subject' => _request('lst_subscribe_subject'),
+    'lst_subscribe_text' => _request('lst_subscribe_text'),
+    'lst_subject' => _request('lst_subject'),
+    'lst_unsubscribe_subject' => _request('lst_unsubscribe_subject'),
+    'lst_unsubscribe_text' => _request('lst_unsubscribe_text'),
+    'lst_subject_tag' => _request('lst_subject_tag'),
+    'lst_url_html' => _request('lst_url_html'),
+    'lst_url_text' => _request('lst_url_text')
   );
 
   // Handle checkbox value

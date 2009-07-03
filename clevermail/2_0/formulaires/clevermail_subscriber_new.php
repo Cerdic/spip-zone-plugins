@@ -54,7 +54,7 @@ function formulaires_clevermail_subscriber_new_traiter_dist() {
 	if (sizeof($adresses) > 0) {
     foreach($adresses as $adresse) {
     	if (!$sub_id = sql_getfetsel("sub_id", "spip_cm_subscribers", "sub_email=".sql_quote($adresse))) {
-    		$sub_id = sql_insertq("spip_cm_subscribers", array('sub_email' => sql_quote($adresse)));
+    		$sub_id = sql_insertq("spip_cm_subscribers", array('sub_email' => $adresse));
     		sql_updateq("spip_cm_subscribers", array('sub_profile' => md5($sub_id.'#'.$adresse.'#'.time())), "sub_id=".intval($sub_id));
     	}
     	foreach(_request('cm_lists') as $lst_id) {
