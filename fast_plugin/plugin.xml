@@ -1,0 +1,30 @@
+<plugin>
+	<nom>Fast plugin</nom>
+	<auteur>Di Carmine Fabrizio - Pix-l.fr</auteur>
+	<version>0.1</version>
+	<etat>stable</etat>
+	<description>
+        {{vous alllez pouvoir creer des pages dans la partie admin tres rapidement
+        grace à une simple convention de nomage . 
+        
+        }}
+	</description>
+	<options>fast_options.php</options>
+	<prefix>fast_plugin</prefix>
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<inclure>fast_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+        <nom>header_prive</nom>
+        <inclure>fast_pipeline.php</inclure>
+    </pipeline>
+    <pipeline>
+        <nom>fast_plug</nom>
+        <inclure>fast_pipeline.php</inclure>
+    </pipeline>
+    <pipeline>
+		<nom>autoriser</nom>
+		<inclure>fast_pipeline.php</inclure>
+	</pipeline>
+</plugin>
