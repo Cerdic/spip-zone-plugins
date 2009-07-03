@@ -10,7 +10,11 @@ function action_clevermail_post_create_dist() {
   	$post = array('lst_id' => intval($lst_id), 'pst_date_create' => time());
   	include_spip('inc/distant');
   	$html = recuperer_page($list['lst_url_html']);
-    $post['pst_subject'] = trim(eregi_replace("^.*<title>(.*)</title>.*$", "\\1", $html));
+  	if (eregi("<title>(.*)</title>", $html, $regs)) {
+      $post['pst_subject'] = trim($regs[1]);
+  	} else {
+  		$post['pst_subject'] = 'Aucun sujet';
+  	}
   	$post['pst_html'] = $html;
     $post['pst_text'] = recuperer_page($list['lst_url_text']);
     sql_insertq("spip_cm_posts", $post);
