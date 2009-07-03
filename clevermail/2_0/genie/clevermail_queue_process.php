@@ -15,7 +15,7 @@ function genie_clevermail_queue_process_dist($verbose = 'no') {
 			$subscriber = sql_fetsel("*", "spip_cm_subscribers", "sub_id = ".intval($message['sub_id']));
 			$subscription = sql_fetsel("lsr_mode, lsr_id", "spip_cm_lists_subscribers", "lst_id = ".intval($post['lst_id'])." AND sub_id = ".intval($message['sub_id']));
 
-			$mode = ($subscription['lsr_mode'] == 1 ? 'html' : 'text');
+			$mode = ($subscription['lsr_mode'] == 1 ? 'html' : 'texte');
 
 			// recipient
 			$to = $subscriber['sub_email'];
