@@ -6,15 +6,14 @@ function genie_clevermail_queue_process_dist($verbose = 'no') {
 	$envoyer_mail = charger_fonction('envoyer_mail', 'inc');
 	
 	$cm_send_number = sql_getfetsel("set_value", "spip_cm_settings", "set_name='CM_SEND_NUMBER'");
-	// TODO : syntaxe complète sql_select pour le LIMIT
-	$queued = sql_select("*", "spip_cm_posts_queued", "", "psq_date LIMIT 0,".$cm_send_number['set_value']);
+	$queued = sql_select("*", "spip_cm_posts_queued", "", "", "psq_date", "0,".intval($cm_send_number));
 	while ($message = sql_fetch($queued)) {
-		$nb = sql_countsel("spip_cm_posts_done", "pst_id = ".$message['pst_id']." AND sub_id = ".$message['sub_id']);
+		$nb = sql_countsel("spip_cm_posts_done", "pst_id = ".intval($message['pst_id'])." AND sub_id = ".intval($message['sub_id']));
 		if ($nb == 0) {
-			$post = sql_fetsel("*", "spip_cm_posts", "pst_id = ".$message['pst_id']);
-			$list = sql_fetsel("*", "spip_cm_lists", "lst_id = ".$post['lst_id']);
-			$subscriber = sql_fetsel("*", "spip_cm_subscribers", "sub_id = ".$message['sub_id']);
-			$subscription = sql_fetsel("lsr_mode, lsr_id", "spip_cm_lists_subscribers", "lst_id = ".$post['lst_id']." AND sub_id = ".$message['sub_id']);
+			$post = sql_fetsel("*", "spip_cm_posts", "pst_id = ".intval($message['pst_id']));
+			$list = sql_fetsel("*", "spip_cm_lists", "lst_id = ".intval($post['lst_id']));
+			$subscriber = sql_fetsel("*", "spip_cm_subscribers", "sub_id = ".intval($message['sub_id']));
+			$subscription = sql_fetsel("lsr_mode, lsr_id", "spip_cm_lists_subscribers", "lst_id = ".intval($post['lst_id'])." AND sub_id = ".intval($message['sub_id']));
 
 			$mode = ($subscription['lsr_mode'] == 1 ? 'html' : 'text');
 
@@ -78,11 +77,11 @@ function genie_clevermail_queue_process_dist($verbose = 'no') {
           break;
       }
 			
-			if (sql_delete("spip_cm_posts_queued", "pst_id = ".$message['pst_id']." AND sub_id = ".$message['sub_id'])) {
+			if (sql_delete("spip_cm_posts_queued", "pst_id = ".intval($message['pst_id'])." AND sub_id = ".intval($message['sub_id']))) {
 				// message removed from queue, we can try to send it
 				if ($envoyer_mail($to, $subject, $body, $from)) {
 					// message sent
-					sql_insertq("spip_cm_posts_done", array('pst_id' => $message['pst_id'], 'sub_id' => $message['sub_id']));
+					sql_insertq("spip_cm_posts_done", array('pst_id' => intval($message['pst_id']), 'sub_id' => intval($message['sub_id'])));
 					if ($verbose == 'yes') {
 						echo "Message from list \"".$list['lst_name']."\" sent to ".$to." in ".$mode." format<br />";
 					} else {

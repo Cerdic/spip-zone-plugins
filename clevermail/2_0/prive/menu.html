@@ -1,10 +1,7 @@
-[(#URL_ECRIRE{clevermail}|icone{<:clevermail:liste_lettres:>,#CHEMIN{img_pack/lettre-24.png},#LANG_LEFT})]
-<div class='nettoyeur'></div>
-[(#URL_ECRIRE{clevermail_list_edit}|parametre_url{lst_id,-1}|icone{<:clevermail:creer_lettre:>,#CHEMIN{img_pack/lettre-24.png},#LANG_LEFT,creer.gif})]
-<div class='nettoyeur'></div>
-[(#URL_ECRIRE{clevermail_subscribers}|icone{<:clevermail:liste_abonnes:>,#CHEMIN{img_pack/abonnes.png},#LANG_LEFT})]
-<div class='nettoyeur'></div>
-[(#URL_ECRIRE{clevermail_subscriber_new}|icone{<:clevermail:ajouter_abonne:>,#CHEMIN{img_pack/abonnes.png},#LANG_LEFT,creer.gif})]
-<div class='nettoyeur'></div>
-[(#URL_ECRIRE{clevermail_settings_edit}|icone{<:clevermail:parametres:>,#CHEMIN{img_pack/configuration.png},#LANG_LEFT})]
-<div class='nettoyeur'></div>
+<ul>
+  [<li><a href="(#URL_ECRIRE{clevermail})"><:clevermail:liste_lettres:></a></li>]
+  [<li><a href="(#URL_ECRIRE{clevermail_list_edit}|parametre_url{lst_id,-1})"><:clevermail:creer_lettre:></a></li>]
+  [<li><a href="(#URL_ECRIRE{clevermail_subscribers})"><:clevermail:liste_abonnes:></a></li>]
+  [<li><a href="(#URL_ECRIRE{clevermail_subscriber_new})"><:clevermail:ajouter_abonne:></a></li>]
+  [<li><a href="(#URL_ECRIRE{clevermail_settings_edit})"><:clevermail:parametres:></a></li>]
+</ul>

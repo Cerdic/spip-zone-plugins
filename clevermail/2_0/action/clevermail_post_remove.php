@@ -6,12 +6,12 @@ function action_clevermail_post_remove_dist() {
 
   include_spip('inc/autoriser');
   if (autoriser('supprimer','cm_post',$pst_id)) {
-  	$nbQueued = sql_countsel("*", "spip_cm_posts_queued", "pst_id = ".$pst_id);
+  	$nbQueued = sql_countsel("*", "spip_cm_posts_queued", "pst_id = ".intval($pst_id));
   	if ($nbQueued == 0) {
-	    $post = sql_fetsel("lst_id, pst_subject", "spip_cm_posts", "pst_id = ".$pst_id);
+	    $post = sql_fetsel("lst_id, pst_subject", "spip_cm_posts", "pst_id = ".intval($pst_id));
 	    $lst_id = $post['lst_id'];
-	  	$list = sql_fetsel("*", "spip_cm_lists", "lst_id = ".$lst_id);
-	    sql_delete("spip_cm_posts", "pst_id = ".$pst_id);
+	  	$list = sql_fetsel("*", "spip_cm_lists", "lst_id = ".intval($lst_id));
+	    sql_delete("spip_cm_posts", "pst_id = ".intval($pst_id));
 	    spip_log('Suppression du message « '.$post['pst_subject'].' » (id='.$pst_id.') de la liste « '.$list['lst_name'].' » (id='.$lst_id.')', 'clevermail');
   	}
   }

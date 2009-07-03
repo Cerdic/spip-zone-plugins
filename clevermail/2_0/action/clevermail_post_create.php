@@ -6,8 +6,8 @@ function action_clevermail_post_create_dist() {
 
   include_spip('inc/autoriser');
   if (autoriser('creer','cm_post',$lst_id)) {
-  	$list = sql_fetsel("*", "spip_cm_lists", "lst_id = ".$lst_id);
-  	$post = array('lst_id' => $lst_id, 'pst_date_create' => time());
+  	$list = sql_fetsel("*", "spip_cm_lists", "lst_id = ".intval($lst_id));
+  	$post = array('lst_id' => intval($lst_id), 'pst_date_create' => time());
   	include_spip('inc/distant');
   	$html = recuperer_page($list['lst_url_html']);
     $post['pst_subject'] = trim(eregi_replace("^.*<title>(.*)</title>.*$", "\\1", $html));

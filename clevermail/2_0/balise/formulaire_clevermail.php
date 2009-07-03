@@ -1,21 +1,4 @@
 <?php
-	/**
-	 *
-	 * CleverMail : plugin de gestion de lettres d'information basé sur CleverMail
-	 * Author : Thomas Beaumanoir
-	 * Clever Age <http://www.clever-age.com>
-	 * Copyright (c) 2007 - Distribue sous licence GNU/GPL
-	 *
-	 **/
-
-if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
-
-include_spip('phpmailer/class.phpmailer');
-
-function balise_FORMULAIRE_CLEVERMAIL ($p) {
-	return calculer_balise_dynamique($p, 'FORMULAIRE_CLEVERMAIL', array('id_liste'));
-}
-
 // args[0] indique une liste, mais ne sert pas encore
 // args[1] indique un eventuel squelette alternatif
 // #FORMULAIRE_CLEVERMAIL{lettreX} permet d'afficher le formulaire d'abonnement a la lettre numero X
@@ -54,8 +37,8 @@ function balise_FORMULAIRE_CLEVERMAIL_dyn($id_liste, $formulaire) {
 			}
 			$result = spip_fetch_array(spip_query("SELECT COUNT(*) AS nb FROM cm_lists_subscribers WHERE lst_id = "._q($listId)." AND sub_id = "._q($recId)));
 			if ($result['nb'] == 1) {
-				// Inscription à cette liste déjà présente
-				// On met à jour pour éventuellement changer le mode
+				// Inscription ï¿½ cette liste dï¿½jï¿½ prï¿½sente
+				// On met ï¿½ jour pour ï¿½ventuellement changer le mode
 				spip_query("UPDATE cm_lists_subscribers SET lsr_mode="._q($mode)." WHERE lst_id = "._q($listId)." AND sub_id = "._q($recId));
 				$cm_sub = _T('clevermail:deja_inscrit');
 			} else {
