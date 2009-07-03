@@ -75,8 +75,23 @@ echo debut_droite('', true);
 //rers :  vos fiches  de savoirs
 
 	$res = '';
-	$res .=  afficher_objets('article',"Vos fiches d'offres de savoirs", array("WHERE" => "statut='prop' AND id_rubrique=$rers_rub_offres", 'ORDER BY' => "date DESC"));
-	$res .=  afficher_objets('article',"Vos fiches de demandes de savoirs", array("WHERE" => "statut='prop' AND id_rubrique=$rers_rub_demandes", 'ORDER BY' => "date DESC"));
+	$res .=  afficher_objets('article',"Vos fiches d'offres de savoirs", array(
+		"FROM" =>"spip_articles AS articles, spip_auteurs_articles AS lien ", 
+		"WHERE" => "articles.id_article=lien.id_article AND 	
+				lien.id_auteur=$connect_id_auteur AND 
+				articles.statut='prop'
+				AND id_rubrique=$rers_rub_offres",
+		'ORDER BY' => "date DESC"));
+	$res .=  afficher_objets('article',"Vos fiches de demandes de savoirs", array(
+		"FROM" =>"spip_articles AS articles, spip_auteurs_articles AS lien ", 
+		"WHERE" => "articles.id_article=lien.id_article AND 	
+				lien.id_auteur=$connect_id_auteur AND 
+				articles.statut='prop'
+				AND id_rubrique=$rers_rub_demandes",
+		'ORDER BY' => "date DESC"));
+
+
+
 	echo	"<div style='position:relative;display:inline;'>" 
 	. debut_cadre_couleur_foncee("",true, "","Vos articles `fiches de savoirs'" //rers
 		. (($GLOBALS['meta']['forum_prive_objets'] != 'non')
