@@ -6,7 +6,7 @@
 	<licence>GNU/GPL v3</licence>
 	<etat>test</etat>
 	<description>Recopie les flux RSS en articles</description>
-	<lien></lien>
+	<lien>http://www.spip-contrib.net/Plugin-Flux-RSS-en-articles</lien>
 	<prefix>rssarticle</prefix>
 	<pipeline>
 		<nom>taches_generales_cron</nom>
