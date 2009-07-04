@@ -1,4 +1,15 @@
 <?php
+/*
+ * CSVimport
+ * Plug-in d'import csv dans les tables spip et d'export CSV des tables
+ *
+ * Auteur :
+ * Cedric MORIN
+ * notre-ville.net
+ * © 2005,2009 - Distribue sous licence GNU/GPL
+ *
+ */
+ 
 // declarer les tables exportees dans $tables_auxiliaires
 // pour qu'elles soient prises en compte dans le dump
 if (isset($GLOBALS['meta']['csvimport_tables_auth'])){

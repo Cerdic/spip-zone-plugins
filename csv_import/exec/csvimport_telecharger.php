@@ -1,12 +1,12 @@
 <?php
 /*
- * csvimport
- * plug-in d'import csv dans les tables spip
+ * CSVimport
+ * Plug-in d'import csv dans les tables spip et d'export CSV des tables
  *
  * Auteur :
  * Cedric MORIN
  * notre-ville.net
- * (c) 2005,2006 - Distribue sous licence GNU/GPL
+ * © 2005,2009 - Distribue sous licence GNU/GPL
  *
  */
 
@@ -14,7 +14,6 @@ include_spip("inc/csvimport");
 include_spip("inc/presentation");
 
 function exec_csvimport_telecharger(){
-	global $spip_lang_right;
 	$table = _request('table');
 	$retour = _request('retour');
 
@@ -26,7 +25,7 @@ function exec_csvimport_telecharger(){
 	
 	$operations = array();
 	
-	$titre = "Export ".$table;
+	$titre = _T("csvimport:export_table",array('table'=>$table));
 	$is_importable = csvimport_table_importable($table,$titre,$operations);
 	if (in_array('export',$operations))
 	  $csvimport_export_actif = true;
@@ -34,41 +33,55 @@ function exec_csvimport_telecharger(){
 	
 	if ((!$delim)&&($csvimport_export_actif)){
 		$icone = "../"._DIR_PLUGIN_CSVIMPORT."img_pack/csvimport-24.png";
-	
-		debut_page($titre, "documents", "csvimport");
-		debut_gauche();
-	
-		echo "<br /><br />\n";
-		debut_droite();
-	
-		debut_cadre_relief($icone);
-		gros_titre($titre);
-		echo "<br />\n";
-		echo _L("Format du fichier&nbsp;:");
-		echo "<br />\n";
-		// Extrait de la table en commencant par les dernieres maj
-		echo generer_url_post_ecrire('csvimport_telecharger',"table=$table&retour=$retour");
-		echo "<select name='delim'>\n";
-		echo "<option value=','>"._L("CSV classique (,)")."</option>\n";
-		echo "<option value=';'>"._L("CSV pour Excel (;)")."</option>\n";
-		echo "<option value='TAB'>"._L("CSV avec tabulations")."</option>\n";
-		echo "</select>";
-		echo "<br /><br />\n";
-		echo "<input type='submit' name='ok' value='T&eacute;l&eacute;charger' />\n";
-	
-		fin_cadre_relief();
-	
-	
+		//
+		// Affichage de la page
+		//
+		$commencer_page = charger_fonction('commencer_page', 'inc');
+		pipeline('exec_init',array('args'=>$_GET,'data'=>''));
+			
+		echo $commencer_page($titre,"csvimport");
+		
+		echo debut_gauche('',true);
+
+		$raccourcis = icone_horizontale(_T('csvimport:administrer_tables'), generer_url_ecrire("csvimport_admin"), "../"._DIR_PLUGIN_CSVIMPORT."img_pack/csvimport-24.png", "", false);
+		$raccourcis .= icone_horizontale(_T('csvimport:import_export_tables'), generer_url_ecrire("csvimport_tous"), "../"._DIR_PLUGIN_CSVIMPORT."img_pack/csvimport-24.png", "", false);
+
+		echo bloc_des_raccourcis($raccourcis);
+
+		echo pipeline('affiche_gauche',array('args'=>array('exec'=>'csvimport_telecharger','table'=>$table),'data'=>''));
+		
+		echo creer_colonne_droite("",true);
+		echo pipeline('affiche_droite',array('args'=>array('exec'=>'csvimport_telecharger','table'=>$table),'data'=>''));
+		echo debut_droite("",true);
+
+		$milieu = '';
+		
+		$milieu .= "<div class='entete-formulaire'>";
 		//
 		// Icones retour
 		//
 		if ($retour) {
-			echo "<br />\n";
-			echo "<div align='$spip_lang_right'>";
-			icone(_T('icone_retour'), $retour, $icone, "rien.gif");
-			echo "</div>\n";
+			$milieu .= icone_inline(_T('icone_retour'), $retour, $icone, "rien.gif",$GLOBALS['spip_lang_left']);
 		}
-		fin_page();
+		$milieu .= gros_titre($titre,'', false);
+		$milieu .= "</div>";
+
+		$milieu .= "<div class='formulaire_spip'>";
+		$action = generer_url_ecrire("csvimport_telecharger","table=$table&retour=$retour");
+		$milieu .= "\n<form action='$action' method='post' class='formulaire_editer'><div>".form_hidden($action);
+		$milieu .= "<ul><li><label for='delim'>"._T("csvimport:export_format")."</label>";
+		$milieu .= "<select name='delim' id='delim'>\n";
+		$milieu .= "<option value=','>"._T("csvimport:export_classique")."</option>\n";
+		$milieu .= "<option value=';'>"._T("csvimport:export_excel")."</option>\n";
+		$milieu .= "<option value='TAB'>"._T("csvimport:export_tabulation")."</option>\n";
+		$milieu .= "</select></li></ul>";
+		$milieu .= "<p class='boutons'><input type='submit' class='submit' name='ok' value='"._T('bouton_download')."' /></p>\n";
+		$milieu .= "</div></form>";
+		$milieu .= "</div>";
+
+		echo pipeline('affiche_milieu',array('args'=>array('exec'=>'csvimport_telecharger','table'=>$table),'data'=>$milieu));
+
+		echo fin_gauche(), fin_page();
 		exit;
 	
 	}
@@ -86,10 +99,9 @@ function exec_csvimport_telecharger(){
 	
 		$output = csvimport_csv_ligne($tablefield,$delim);
 		//$tablefield = array_flip($tablefield);
-	
-		$query="SELECT * FROM $table";
-		$result = spip_query($query);
-		while ($row=spip_fetch_array($result)){
+
+		$result = sql_select('*',$table);
+		while ($row=sql_fetch($result)){
 			$ligne=array();
 			foreach($tablefield as $key)
 			  if (isset($row[$key]))
@@ -123,7 +135,8 @@ function exec_csvimport_telecharger(){
 		exit;
 	}
 	else {
-		acces_interdit();
+		include_spip('inc/minipres');
+		echo minipres();
 	}
 }
 ?>

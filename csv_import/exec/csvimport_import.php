@@ -1,12 +1,12 @@
 <?php
 /*
- * csvimport
- * plug-in d'import csv dans les tables spip
+ * CSVimport
+ * Plug-in d'import csv dans les tables spip et d'export CSV des tables
  *
  * Auteur :
  * Cedric MORIN
  * notre-ville.net
- * © 2005,2006 - Distribue sous licence GNU/GPL
+ * Â© 2005,2009 - Distribue sous licence GNU/GPL
  *
  */
 
@@ -15,13 +15,13 @@ include_spip("inc/presentation");
 include_spip('public/assembler');
 
 function csvimport_visu_extrait($nombre,$import_mode,$table,$id_form){
-	// Extrait de la table en commençant par les dernieres maj
+	// Extrait de la table en commenÃ§ant par les dernieres maj
 	if ($import_mode!='form')
-		csvimport_table_visu_extrait($table,$nombre);
+		return csvimport_table_visu_extrait($table,$nombre);
 	else {
 		$contexte = array('id_form'=>$id_form,'total'=>$nombre);
 		$out = recuperer_fond("fonds/tables_visu_extrait",$contexte);
-		echo $out;
+		return $out;
 	}
 }
 
@@ -70,6 +70,9 @@ function csvimport_import_step3(&$step, &$erreur, $import_link, $import_form_lin
 	$remplacer = _request('remplacer');
 	$assoc_field = _request('assoc_field');
 	$apercu = _request('apercu');
+	
+	$titre = _T("csvimport:import_csv",array('table'=>$table));
+	
 	if ($table===NULL && $id_form)
 		$import_mode='form';
 	else	
@@ -90,14 +93,14 @@ function csvimport_import_step3(&$step, &$erreur, $import_link, $import_form_lin
 
 	if ($step==3){
 		if ( (!$file_name)||(!$tmp_name)||(!$size)||(!$type) )
-			 $erreur[$step][] = _L("Fichier absent");
+			 $erreur[$step][] = _T("csvimport:fichier_absent");
 
 		if (!$delim)
-			 $erreur[$step][] = _L("Delimiteur non d&eacute;fini");
+			 $erreur[$step][] = _T("csvimport:delimiteur_indefini");
 		/*if (!isset($head))
 			 $erreur[$step][] = _L("Header non d&eacute;fini");*/
 		if (!count($assoc_field))
-			 $erreur[$step][] = _L("Correspondances CSV-Table non d&eacute;finies");
+			 $erreur[$step][] = _T("csv_import:correspondance_indefinie");
 		if (isset($erreur[$step])) $step--;
 	}
 	
@@ -105,13 +108,13 @@ function csvimport_import_step3(&$step, &$erreur, $import_link, $import_form_lin
 		if (!$head) $head = false;
 		$data = csvimport_importcsv($tmp_name, $head, $delim);
 		if ($data==false) {
-		  $erreur[$step][] = _L("Fichier vide");
+		  $erreur[$step][] = _T("csvimport:fichier_vide");
 		}
 		$table_fields = csvimport_table_fields($import_mode,$table,$id_form);
 		$new_assoc=csvimport_field_associate($data, $table_fields, $assoc_field);
 		$test=array_diff($new_assoc,$assoc_field);
 		if (count($test)>0){
-			$erreur[$step][] = _L("Correspondances CSV-Table incompl&egrave;tes");
+			$erreur[$step][] = _T("csvimport:correspondance_incomplete");
 		}
 		if (isset($erreur[$step])) $step--;
 	}
@@ -137,52 +140,44 @@ function csvimport_import_step3(&$step, &$erreur, $import_link, $import_form_lin
 
 		if (($remplacer)&&(!_request('confirme_remplace'))){
 			$hidden['remplacer'] = 'oui';
-			debut_cadre_relief($icone);
-			gros_titre($titre);
-			// Extrait de la table en commençant par les dernieres maj
-			csvimport_visu_extrait(5,$import_mode,$table,$id_form);
-			fin_cadre_relief();
-
-			debut_cadre_enfonce();
-			echo csvimport_array_visu_assoc($data, $table_fields, $assoc_field, 5);
-			fin_cadre_enfonce();
-			echo "<div style='padding: 2px; color: black;'>&nbsp;";
-			echo _L("Cette op&eacute;ration va entra&icirc;ner la suppression de toutes les donn&eacute;es pr&eacute;sentes dans la table.");
-			echo $import_form_link;
+			$step3 .= $import_form_link;
 			foreach($hidden as  $key=>$value)
-				echo "<input type='hidden' name='$key' value='$value' />";
-			echo "<input type='submit' name='annule_remplace' value='"._L('Annuler')."' class='fondo'>";
-			echo "</div>\n";
-			echo "<div class='iconedanger' style='margin-top:15px;'>";
-			echo "<input type='submit' name='confirme_remplace' value='"._L('Remplacer toute la table')."' class='fondo'>";
-			echo "</div>\n";
-			echo "</form>";
+				$step3 .= "<input type='hidden' name='$key' value='$value' />";
+			// Extrait de la table en commencant par les dernieres maj
+			$step3 .= "<ul><li class='editer_texte'>";
+			$step3 .= csvimport_visu_extrait(5,$import_mode,$table,$id_form);
+			$step3 .= "</li><li class='editer_texte'>";
+			$step3 .= "<div class='explication'>"._T('csvimport:avertissement_remplacement')."</div>";
+			$step3 .= csvimport_array_visu_assoc($data, $table_fields, $assoc_field, 5);
+			$step3 .= "</li></ul>";
+			$step3 .= "<p class='boutons'>";
+			$step3 .= "<input type='submit' name='annule_remplace' value='"._T('annuler')."' class='submit' />";
+			$step3 .= "</p>\n";
+			$step3 .= "<p class='boutons iconedanger'>";
+			$step3 .= "<input type='submit' name='confirme_remplace' value='"._T('csvimport:remplacer_toute_table')."' class='submit' />";
+			$step3 .= "</p>\n";
+			$step3 .= "</div></form>";
 		}
 		else if (($ajouter)&&(!_request('confirme_ajoute'))){
 			$hidden['ajouter'] = 'oui';
-			debut_cadre_relief($icone);
-			gros_titre($titre);
-			// Extrait de la table en commençant par les dernieres maj
-			csvimport_visu_extrait(5,$import_mode,$table,$id_form);
-			fin_cadre_relief();
+			$step3 .= $import_form_link;
+			// Extrait de la table en commencant par les dernieres maj
+			$step3 .= csvimport_visu_extrait(5,$import_mode,$table,$id_form);
 
-			debut_cadre_enfonce();
-			echo csvimport_array_visu_assoc($data, $table_fields, $assoc_field, 5);
-			fin_cadre_enfonce();
+			$step3 .= csvimport_array_visu_assoc($data, $table_fields, $assoc_field, 5);
 			if ($import_mode=='form')
 				if (include_spip('inc/forms')){
 					Forms_csvimport_ajoute_table_csv($data, $id_form, $assoc_field, $err, true);
-					echo csvimport_show_erreurs($err);
+					$step3 .= csvimport_show_erreurs($err);
 				}
 			
-			echo "<div style='padding: 2px; color: black;'>&nbsp;";
-			echo _L("Les donn&eacute;es du fichier CSV vont &ecirc;tre ajout&eacute;es &agrave; la table comme illustr&eacute; ci-dessus.");
-			echo $import_form_link;
+			$step3 .= "<div style='padding: 2px; color: black;'>&nbsp;";
+			$step3 .= _T("csvimport:avertissement_ajout",array('table'=>$table));
 			foreach($hidden as  $key=>$value)
-				echo "<input type='hidden' name='$key' value='$value' />";
-			echo "<input type='submit' name='annule_ajoute' value='"._L('Annuler')."' class='fondo'> ";
-			echo "<input type='submit' name='confirme_ajoute' value='"._L('Ajouter les donn&eacute;es')."' class='fondo'>";
-			echo "</form>";
+				$step3 .= "<input type='hidden' name='$key' value='$value' />";
+			$step3 .= "<p class='boutons'><input type='submit' name='annule_ajoute' value='"._T('annuler')."' class='submit' /> ";
+			$step3 .= "<input type='submit' name='confirme_ajoute' value='"._T('csvimport:ajouter_donnees')."' class='submit' /></p>";
+			$step3 .= "</div></form>";
  		}
 		else {
 			// vidange de la table
@@ -202,24 +197,22 @@ function csvimport_import_step3(&$step, &$erreur, $import_link, $import_form_lin
 					if (include_spip('inc/forms'))
 						Forms_csvimport_ajoute_table_csv($data, $id_form, $assoc_field, $err);
 
-				debut_cadre_relief($icone);
-				gros_titre($titre);
-				// Extrait de la table en commençant par les dernieres maj
-				csvimport_visu_extrait(10,$import_mode,$table,$id_form);
-				fin_cadre_relief();
+				// Extrait de la table en commencant par les dernieres maj
+				$step3 .= csvimport_visu_extrait(10,$import_mode,$table,$id_form);
 
 				if (count($err)){
-					echo bouton_block_invisible("erreurs");
-					echo count($err) . _L(" erreurs lors de l'ajout dans la base");
-					echo debut_block_invisible("erreurs");
-					echo csvimport_show_erreurs($err);
-					echo fin_block();
+					$step3 .= bouton_block_invisible("erreurs");
+					$step3 .= _T("csvimport:erreurs_ajout_base",array('nb'=>count($err)));
+					$step3 .= debut_block_invisible("erreurs");
+					$step3 .= csvimport_show_erreurs($err);
+					$step3 .= fin_block();
 				}
 				else
-					echo csvimport_show_erreurs($err);
-  		}
+					$step3 .= csvimport_show_erreurs($err);
+  			}
 		}
 	}
+	return $step3;
 }
 function csvimport_import_step2(&$step, &$erreur, $import_link, $import_form_link, $csvimport_replace_actif, $csvimport_add_actif){
 	$table = _request('table');	
@@ -241,15 +234,14 @@ function csvimport_import_step2(&$step, &$erreur, $import_link, $import_form_lin
 		$import_mode='table';
 	if ($step==2){
 		if (!isset($_FILES))
-			$erreur[$step][] = _L("Probl&egrave;me inextricable...");
+			$erreur[$step][] = _T("csvimport:probleme_inextricable");
 		if (
-				(!isset($_FILES['csvfile']))
-			&&( (!$file_name)||(!$tmp_name)||(!$size)||(!$type) )
-			 )
-			 $erreur[$step][] = _L("Probl&egrave;me lors du chargement du fichier");
+			(!isset($_FILES['csvfile'])) &&( (!$file_name)||(!$tmp_name)||(!$size)||(!$type) )
+		)
+			 $erreur[$step][] = _T("csvimport:probleme_chargement_fichier");
 
 		if ((isset($_FILES['csvfile']))&&($_FILES['csvfile']['error']!=0))
-			$erreur[$step][]=_L("Probl&egrave;me lors du chargement du fichier (erreur ".$_FILES['csvfile']['error'].")");
+			$erreur[$step][]=_T("csvimport:probleme_chargement_fichier_erreur",array("erreur" => $_FILES['csvfile']['error']));
 		if (isset($erreur[$step])) $step--;
 	}
 	if ($step==2){
@@ -262,17 +254,16 @@ function csvimport_import_step2(&$step, &$erreur, $import_link, $import_form_lin
 			$type = $_FILES['csvfile']['type'];
 
 			$dest = _DIR_SESSIONS.basename($tmp_name);
-			move_uploaded_file ( $tmp_name, $dest );
+			move_uploaded_file( $tmp_name, $dest );
 			$tmp_name = $dest;
 	 	}
-
 
 		if (!$delim){
 			if ($type=="application/vnd.ms-excel")
 				$delim = ";"; // specificite Excel de faire des fichiers csv avec des ; au lieu de ,
 			else{
 				$handle = fopen($tmp_name, "rt");
-  			$contenu = fread($handle, 8192);
+				$contenu = fread($handle, 8192);
 				fclose($handle);
 				if ($contenu!=FALSE){
 					if (substr_count($contenu,",")>=substr_count($contenu,";"))
@@ -286,7 +277,7 @@ function csvimport_import_step2(&$step, &$erreur, $import_link, $import_form_lin
 	 	}
 		$data = csvimport_importcsv($tmp_name, $head, $delim);
 		if ($data==false) {
-		  $erreur[$step][] = _L("Fichier vide");
+		  $erreur[$step][] = _T("csvimport:fichier_vide");
 		  $step--;
 		}
 	}
@@ -300,56 +291,50 @@ function csvimport_import_step2(&$step, &$erreur, $import_link, $import_form_lin
 		$hidden['type'] = $type;
 		$hidden['step'] = 3;
 
-		echo "<br />\n";
-		echo csvimport_show_erreurs($erreur);
-
-		debut_cadre_enfonce();
-		echo csvimport_array_visu_extrait($data, /*$head*/true, 5);
-		fin_cadre_enfonce();
-
-
-		debut_cadre_relief();
-		echo $import_form_link;
+		$step2 .= csvimport_show_erreurs($erreur);
+		$step2 .= $import_form_link;
 		foreach($hidden as  $key=>$value)
-			echo "<input type='hidden' name='$key' value='$value' />";
-		echo "<div style='margin: 2px; background-color: $couleur_claire; color: black;'>&nbsp;";
-		echo "Pr&eacute;visualisation ";
-		echo "<input type='submit' name='apercu' value='"._L('Appliquer')."' class='fondl'>";
-		echo "</div>";
+			$step2 .= "<input type='hidden' name='$key' value='$value' />";
+					
+		$step2 .= "<ul><li class='editer_texte'>";
+		$step2 .= "<div class='explication'>"._T('csvimport:premieres_lignes',array('nb'=>5))."</div>";
+		$step2 .= csvimport_array_visu_extrait($data, /*$head*/true, 5);
 
-		echo "<strong><label for='separateur'>"._L("Caract&egrave;re de s&eacute;paration")."</label></strong> ";
-		echo "<input type='text' name='delim' id='separateur' class='fondl' style='width:2em;' maxlength='1' value='$delim'><br />";
-		echo "<strong><label for='entete'>"._L("1<sup>&egrave;re</sup> ligne d'en-t&ecirc;te")."</label></strong> ";
-		echo "<input type='checkbox' name='head' id='entete' class='fondl' style='width:2em;' value='true'";
+		$step2 .= "</li><li class='editer_texte'>";
+		$step2 .= "<p class='boutons'><input type='submit' name='apercu' value='"._T('previsualisation')."' class='submit' /></p>";
+		$step2 .= "</li>";
+
+		$step2 .= "<li><label for='separateur'>"._T("csvimport:caracteres_separation")."</label>";
+		$step2 .= "<input type='text' name='delim' id='separateur' class='text' style='width:2em;' maxlength='1' value='$delim' /></li>";
+		$step2 .= "<li><label for='entete'>"._L("csvimport:ligne_entete")."</label>";
+		$step2 .= "<input type='checkbox' name='head' id='entete' class='fondl' style='width:2em;' value='true'";
 		if ($head==true)
-		  echo " checked='checked'";
-		echo "><br />";
+		  $step2 .= " checked='checked'";
+		$step2 .= " /></li><li class='editer_texte'>";
 
+		$step2 .= csvimport_field_configure($data, $table_fields, $assoc_field);
 
-		echo csvimport_field_configure($data, $table_fields, $assoc_field);
+		$step2 .= "</li>\n";
 
-		echo "</div><hr />\n";
-
-		echo "<div align='$spip_lang_left'>";
-
-		echo csvimport_array_visu_assoc($data, $table_fields, $assoc_field, 5);
-		echo "</div><hr />\n";
+		$step2 .= "<li class='editer_texte'>";
+		$step2 .= csvimport_array_visu_assoc($data, $table_fields, $assoc_field, 5);
+		$step2 .= "</li></ul>\n";
 
 		if ($csvimport_add_actif) {
-			echo "<div style='padding: 2px; color: black;'>&nbsp;";
-			echo "<input type='submit' name='ajouter' value='"._L('Ajouter &agrave; la table')."' class='fondo'>";
-			echo "</div>\n";
+			$step2 .= "<p class='boutons'>";
+			$step2 .= "<input type='submit' name='ajouter' value='"._T('csvimport:ajouter_table')."' class='submit' />";
+			$step2 .= "</p>\n";
 		}
 
 		if ($csvimport_replace_actif) {
-			echo "<div class='iconedanger' style='margin-top:15px;'>";
-			echo "<input type='submit' name='remplacer' value='"._L('Remplacer toute la table')."' class='fondo'>";
-			echo "</div>\n";
+			$step2 .= "<p class='boutons iconedanger' style='margin-top:15px;'>";
+			$step2 .= "<input type='submit' name='remplacer' value='"._T('csvimport:remplacer_toute_table')."' class='submit' />";
+			$step2 .= "</p>\n";
 		}
 
-		echo "</form>";
+		$step2 .= "</div></form>";
 
-		fin_cadre_relief();
+		return $step2;
 	}
 }
 function csvimport_import_step1(&$step, &$erreur, $import_link, $import_form_link, $csvimport_replace_actif, $csvimport_add_actif){
@@ -372,21 +357,23 @@ function csvimport_import_step1(&$step, &$erreur, $import_link, $import_form_lin
 		$import_mode='table';
 
 	if ($step==1){
-		echo "<br />\n";
-		echo "<div align='$spip_lang_left'>";
-		echo csvimport_show_erreurs($erreur);
+		$step1 = "<br />\n";
+		$step1 .= "<div style='float:$spip_lang_left'>";
+		$step1 .= csvimport_show_erreurs($erreur);
 
 		$hidden['head'] = 'true';
 		$hidden['step'] = 2;
-		echo "<form action='$import_link' method='POST' enctype='multipart/form-data'>";
+		$step1 .= "<form action='$import_link' method='post' enctype='multipart/form-data' class='formulaire_editer'><div>";
 		foreach($hidden as  $key=>$value)
-			echo "<input type='hidden' name='$key' value='$value' />";
-		echo "<strong><label for='file_name'>"._L("Fichier CSV &agrave; importer")."</label></strong> ";
-		echo "<br />";
-		echo "<input type='file' name='csvfile' id='file_name' class='formo'>";
-		echo "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo'>";
-		echo "</form></div>\n";
+			$step1 .= "<input type='hidden' name='$key' value='$value' />";
+		$step1 .= "<ul><li>";
+		$step1 .= "<label for='file_name'>"._T("csvimport:fichier_choisir")."</label>";
+		$step1 .= "<input type='file' name='csvfile' id='file_name' class='fichier' />";
+		$step1 .= "</li></ul>";
+		$step1 .= "<p class='boutons'><input type='submit' name='Valider' value='"._T('bouton_valider')."' class='submit' /></p>";
+		$step1 .= "</div></form></div>\n";
 	}
+	return $step1;
 }
 
 function exec_csvimport_import(){
@@ -412,25 +399,26 @@ function exec_csvimport_import(){
 	if (!$retour)
 		$retour = generer_url_ecrire('csvimport_tous');
 	
-	$titre = _L("Import CSV : ");
+	$titre = _T("csvimport:import_csv",array('table'=>$table));
 	$icone = "../"._DIR_PLUGIN_CSVIMPORT."img_pack/csvimport-24.png";
 	$operations = array();
 
 	if ($table===NULL && $id_form) {
 		$import_mode='form';
 		$import_link = generer_url_ecrire("csvimport_import","id_form=$id_form&retour=".urlencode($retour));
-		$import_form_link = generer_url_post_ecrire("csvimport_import","id_form=$id_form&retour".urlencode($retour));
+		$action = generer_url_ecrire("csvimport_import","id_form=$id_form&retour".urlencode($retour));
+		$import_form_link = "\n<form action='$action' method='post' class='formulaire_editer'><div>".form_hidden($action);
 		if (!include_spip('inc/autoriser'))
 			include_spip('inc/autoriser_compat');
-		$is_importable = 	autoriser('administrer','form',$id_form);
+		$is_importable = autoriser('administrer','form',$id_form);
 	  $csvimport_replace_actif = true;
 	  $csvimport_add_actif = true;
 	}
 	else {
 		$import_mode='table';
 		$import_link = generer_url_ecrire("csvimport_import","table=$table&retour=".urlencode($retour));
-		$import_form_link = generer_url_post_ecrire("csvimport_import","table=$table&retour".urlencode($retour));
-		
+		$action = generer_url_ecrire("csvimport_import","table=$table&retour".urlencode($retour));
+		$import_form_link = "\n<form action='$action' method='post' class='formulaire_editer'><div>".form_hidden($action);
 		$is_importable = csvimport_table_importable($table,$titre,$operations);
 	
 		if (in_array('replaceall',$operations))
@@ -443,58 +431,73 @@ function exec_csvimport_import(){
 	//
 	// Affichage de la page
 	//
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	pipeline('exec_init',array('args'=>$_GET,'data'=>''));
+		
+	echo $commencer_page($titre,"csvimport");
 	
-	debut_page($titre, "documents", "csvimport");
-	debut_gauche();
+	echo debut_gauche('',true);
 	
-	echo "<br /><br />\n";
+	$raccourcis = icone_horizontale(_T('csvimport:administrer_tables'), generer_url_ecrire("csvimport_admin"), "../"._DIR_PLUGIN_CSVIMPORT."img_pack/csvimport-24.png", "", false);
+	$raccourcis .= icone_horizontale(_T('csvimport:import_export_tables'), generer_url_ecrire("csvimport_tous"), "../"._DIR_PLUGIN_CSVIMPORT."img_pack/csvimport-24.png", "", false);
+
+	echo bloc_des_raccourcis($raccourcis);
+	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'csvimport_import','table'=>$table),'data'=>''));
 	
-	debut_droite();
+	echo creer_colonne_droite("",true);
+	echo pipeline('affiche_droite',array('args'=>array('exec'=>'csvimport_import','table'=>$table),'data'=>''));
+	echo debut_droite("",true);
 	
 	$erreur=array();
 	
 	if ($is_importable) {
 	
 		$hidden = array();
-		// --- STEP 3
-		csvimport_import_step3($step, $erreur, $import_link, $import_form_link, $csvimport_replace_actif, $csvimport_add_actif);
-		if ($step<3) {
-			debut_cadre_relief($icone);
-			gros_titre($titre);
-			// Extrait de la table en commençant par les dernieres maj
-			csvimport_visu_extrait(5,$import_mode,$table,$id_form);
-			fin_cadre_relief();
-	 	}	
+		
+		$milieu = '';
+		
+		$milieu .= "<div class='entete-formulaire'>";
 		//
 		// Icones retour
 		//
 		if ($retour) {
-			echo "<br />\n";
-			echo "<div align='$spip_lang_right'>";
-			icone(_T('icone_retour'), $retour, $icone, "rien.gif");
-			echo "</div>\n";
+			$milieu .= icone_inline(_T('icone_retour'), $retour, $icone, "rien.gif",$GLOBALS['spip_lang_left']);
 		}
-	
-		// --- STEP 2
-		csvimport_import_step2($step, $erreur, $import_link, $import_form_link, $csvimport_replace_actif, $csvimport_add_actif);
+		$milieu .= gros_titre($titre,'', false);
+		$milieu .= "</div>";
 
+		$milieu .= "<div class='formulaire_spip'>";
+		
+		if($step<3){
+			$milieu .= csvimport_visu_extrait(5,$import_mode,$table,$id_form);
+		}
+		// --- STEP 3
+		$milieu .= csvimport_import_step3($step, $erreur, $import_link, $import_form_link, $csvimport_replace_actif, $csvimport_add_actif);
+		
+		// --- STEP 2
+		$milieu .= csvimport_import_step2($step, $erreur, $import_link, $import_form_link, $csvimport_replace_actif, $csvimport_add_actif);
 	
 		// --- STEP 1
-		csvimport_import_step1($step, $erreur, $import_link, $import_form_link, $csvimport_replace_actif, $csvimport_add_actif);
+		$milieu .= csvimport_import_step1($step, $erreur, $import_link, $import_form_link, $csvimport_replace_actif, $csvimport_add_actif);
+		
+		$milieu .= "</div>";
+		
 	}
 	else {
 		//
 		// Icones retour
 		//
 		if ($retour) {
-			echo "<br />\n";
-			echo "<div align='$spip_lang_right'>";
-			icone(_T('icone_retour'), $retour, $icone, "rien.gif");
-			echo "</div>\n";
+			$milieu = "<br />\n";
+			$milieu .= "<div style='float:$spip_lang_right'>";
+			$milieu .= icone_inline(_T('icone_retour'), $retour, $icone, "rien.gif",$GLOBALS['spip_lang_left']);
+			$milieu .= "</div>\n";
 		}
 	}
 	
-	fin_page();
+	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'csvimport_import','table'=>$table),'data'=>$milieu));
+
+	echo fin_gauche(), fin_page();
 }
 
 ?>

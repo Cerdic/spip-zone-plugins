@@ -1,32 +1,18 @@
 <?php
 /*
- * csvimport
- * plug-in d'import csv dans les tables spip
+ * CSVimport
+ * Plug-in d'import csv dans les tables spip et d'export CSV des tables
  *
  * Auteur :
  * Cedric MORIN
  * notre-ville.net
- * © 2005,2006 - Distribue sous licence GNU/GPL
+ * Â© 2005,2009 - Distribue sous licence GNU/GPL
  *
  */
 
-if (!defined('_DIR_PLUGIN_CSVIMPORT')){
-	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(dirname(__FILE__)))));
-	define('_DIR_PLUGIN_CSVIMPORT',(_DIR_PLUGINS.end($p))."/");
-}
-
-include_spip("base/db_mysql");
 include_spip("base/abstract_sql");
 include_spip("inc/charsets");
-
-function acces_interdit() {
-	debut_page(_T('avis_acces_interdit'), "documents", "cvsimport");
-	debut_gauche();
-	debut_droite();
-	echo "<strong>"._T('avis_acces_interdit')."</strong>";
-	fin_page();
-	exit;
-}
+include_spip("inc/importer_csv");
 
 function csvimport_tables_auth(){
 	if (isset($GLOBALS['meta']['csvimport_tables_auth']))
@@ -61,15 +47,12 @@ function csvimport_table_importable($nom_table,&$titre,&$operations){
 function csvimport_afficher_tables($titre_table, $icone = '') {
 	$csvimport_tables_auth = csvimport_tables_auth();
 	global $connect_statut;
-	global $couleur_claire, $couleur_foncee;
-	global $connect_id_auteur;
 
 	if (!$icone) $icone = "../"._DIR_PLUGIN_CSVIMPORT."img_pack/csvimport-24.png";
 
 	if (count($csvimport_tables_auth)) {
-		if ($titre_table) echo "<div style='height: 12px;'></div>";
-		echo "<div class='liste'>";
-		echo bandeau_titre_boite2($titre_table, $icone, $couleur_claire, "black",false);
+		echo debut_cadre_enfonce($icone, true, '', $titre_table);
+		
 		echo "<table width='100%' cellpadding='3' cellspacing='0' border='0'>";
 
 		$num_rows = count($csvimport_tables_auth);
@@ -87,18 +70,16 @@ function csvimport_afficher_tables($titre_table, $icone = '') {
 			if ($declared) {
 
 				$maj_exist = true;
-				$query="SELECT maj FROM $latable ORDER BY maj DESC";
-		 		$result = spip_query($query);
+		 		$result = sql_select("maj",$latable,"","","maj DESC");
 		 		if (!$result) {
-					$query="SELECT * FROM $latable";
-			 		$result = spip_query($query);
+			 		$result = sql_select("*",$latable);
 			 		$maj_exist = false;
 		 		}
 
-		 		$nb_data=spip_num_rows($result);
+		 		$nb_data=sql_count($result);
 		 		$last_mod='';
 		 		if ($maj_exist){
-					$row = spip_fetch_array($result);
+					$row = sql_fetch($result);
 					$last_mod = $row['maj'];
 			 	}
 
@@ -136,17 +117,17 @@ function csvimport_afficher_tables($titre_table, $icone = '') {
 
 				$s = "";
 				if ($nb_data) {
-					$s .= $nb_data . " " . _L("enregistrements");
+					$s .= _T("csvimport:nb_enregistrements",array('nb'=>$nb_data));
 					if ($last_mod)
 					  $s .= " (" . $last_mod . ")";
 				}
 				$vals[] = $s;
 
 				$s = "";
-				if ($exportable){
+				if ($exportable && $nb_data){
 					$link = generer_url_ecrire("csvimport_telecharger","table=$latable&retour=".urlencode(self()));
 					$s .= "<a href='$link'>";
-					$s .= _L("T&eacute;l&eacute;charger");
+					$s .= _T("bouton_download");
 					$s .= "</a>";
 				}
 				$vals[] = $s;
@@ -157,7 +138,27 @@ function csvimport_afficher_tables($titre_table, $icone = '') {
 
 		$largeurs = array('','','');
 		$styles = array('arial11', 'arial1', 'arial1');
-		echo afficher_liste($largeurs, $table, $styles);
+		
+		$liste = ''; 
+		foreach ($table as $t) {
+			reset($largeurs);
+			if ($styles) reset($styles);
+			$res ='';
+			while (list(, $texte) = each($t)) {
+				$style = $largeur = "";
+				list(, $largeur) = each($largeurs);
+				if ($styles) list(, $style) = each($styles);
+				if (!trim($texte)) $texte .= "&nbsp;";
+				$res .= "\n<td" .
+					($largeur ? (" style=\'width: $largeur" ."px;\'") : '') .
+					($style ? " class=\"$style\"" : '') .
+					">" . lignes_longues($texte) . "\n</td>";
+			}
+		
+			$liste .=  "\n<tr class='tr_liste'>$res</tr>"; 
+		}
+		
+		echo $liste;
 		echo "</table>";
 		echo "</div>\n";
 	}
@@ -174,7 +175,7 @@ function csvimport_afficher_tables($titre_table, $icone = '') {
 	}
 	
 	if (!count($csvimport_tables_auth) && !$out) {
-		echo _L("Pas de tables d&eacute;clar&eacute;es pour l'import CSV");
+		echo _T("csvimport:aucune_table_declaree");
  	}
 }
 
@@ -188,50 +189,13 @@ function csvimport_csv_ligne($ligne, $delim = ',') {
 	return join($delim, array_map('csvimport_csv_champ', $ligne))."\r\n";
 }
 
-/**
- * Based on an example by ramdac at ramdac dot org
- * Returns a multi-dimensional array from a CSV file optionally using the
- * first row as a header to create the underlying data as associative arrays.
- * @param string $file Filepath including filename
- * @param bool $head Use first row as header.
- * @param string $delim Specify a delimiter other than a comma.
- * @param int $len Line length to be passed to fgetcsv
- * @return array or false on failure to retrieve any rows.
- */
-
 function csvimport_importcharset($texte){
-	include_spip('inc/charsets');
-	$charset_source = 'iso-8859-1';
-	if (is_utf8($texte))
-		$charset_source = 'utf-8';
-	return importer_charset($texte,$charset_source);
+	return importer_csv_importcharset($texte);
 }
 
 function csvimport_importcsv($file, $head = 0, $delim = ",", $enclos = '"', $len = 10000) {
-	$return = false;
-	$handle = fopen($file, "r");
-	if ($handle){
-		if ($head) {
-			$header = fgetcsv($handle, $len, $delim);
-			if ($header){
-				$header = array_map('csvimport_importcharset',$header);
-				$header = array_map('csvimport_nettoie_key',$header);
-			}
-		}
-		while (($data = fgetcsv($handle, $len, $delim)) !== FALSE) {
-			$data = array_map('csvimport_importcharset',$data);
-			if ($head AND isset($header)) {
-				foreach ($header as $key=>$heading) {
-					$row[$heading]=(isset($data[$key])) ? $data[$key] : '';
-				}
-				$return[]=$row;
-			} else {
-				$return[]=$data;
-			}
-		}
-		fclose($handle);
-	}
-	return $return;
+	$importer_csv = charger_fonction('importer_csv','inc');
+	return $importer_csv($file, $head = false, $delim = ",", $enclos = '"', $len = 10000);
 }
 
 function csvimport_show_erreurs($erreur){
@@ -250,45 +214,45 @@ function csvimport_table_visu_extrait($nom_table,$nombre_lignes = 0){
 	$maj_exist = true;
 	$limit = "";
 	if ($nombre_lignes > 0)
-	  $limit = " LIMIT " . ($nombre_lignes+1);
-	$query="SELECT * FROM $nom_table ORDER BY maj DESC" . $limit;
-	$result = spip_query($query);
+	  $limit = $nombre_lignes+1;
+	$result = sql_select("*",$nom_table,"","","maj DESC",$limit);
 	if (!$result) {
-		$query="SELECT * FROM $nom_table $limit";
- 		$result = spip_query($query);
+ 		$result = sql_select("*",$nom_table,"","","",$limit);
  		$maj_exist = false;
 	}
-
-	$nb_data=spip_num_rows($result);
+	$nb_data=sql_count($result);
 	if ($nombre_lignes==0)
 		$nombre_lignes = $nb_data;
 	$data_count = 0;
 	$head_set = false;
 	$nb_col = 0;
-	echo "<table>";
-	while (($row = spip_fetch_array($result,SPIP_ASSOC))&&($data_count++<$nombre_lignes)){
-		if (!$head_set){
-			echo "<tr>";
-			foreach($row as $key=>$value){
-			  echo "<th>" . $key . "</th>";
-			  $nb_col++;
+	if($nb_data>0){
+		$ret .= "<table width='100%'>";
+		while (($row = sql_fetch($result))&&($data_count++<$nombre_lignes)){
+			if (!$head_set){
+				$ret .= "<tr>";
+				foreach($row as $key=>$value){
+				  $ret .= "<th>" . $key . "</th>";
+				  $nb_col++;
+				}
+				$ret .= "</tr>\n";
+				$head_set = true;
 			}
-			echo "</tr>\n";
-			$head_set = true;
+			$ret .= "<tr>";
+			foreach($row as $key=>$value)
+			  $ret .= "<td>" . $value . "</td>";
+			$ret .= "</tr>\n";
 		}
-		echo "<tr>";
-		foreach($row as $key=>$value)
-		  echo "<td>" . $value . "</td>";
-		echo "</tr>\n";
+		if ($nb_data>$nombre_lignes){
+			$num_rows = sql_count(sql_select("*",$nom_table));
+			$ret .= "<tr><td colspan='$nb_col' style='border-top:1px dotted;'>"._T("csvimport:lignes_table",array('table'=>$nom_table,'nb_resultats'=>$num_rows))."</td></tr>\n";
+		}
+		$ret .= "</table>\n";
 	}
-	if ($nb_data>$nombre_lignes){
-		$query="SELECT COUNT(*) FROM $nom_table";
-		list($num_rows) = spip_fetch_array(spip_query($query));
-		echo "<tr><td colspan='$nb_col' style='border-top:1px dotted;'>$num_rows "._L("lignes")." ...</td></tr>\n";
-	}
-	echo "</table>\n";
-	if ($data_count==0)
-	  echo _L("Table vide");
+	else
+	  $ret = "<p>"._T("csvimport:table_vide", array('table'=>$nom_table))."</p>";
+	  
+	return $ret;
 }
 
 function csvimport_array_visu_extrait($data, $head, $nombre_lignes = 0){
@@ -297,7 +261,7 @@ function csvimport_array_visu_extrait($data, $head, $nombre_lignes = 0){
 	$head_set = false;
 	$nb_col = 0;
 	if ($data!=false){
-		$output .= "<table>";
+		$output .= "<table width='100%'>";
 		foreach($data as $key=>$ligne) {
 			if (($head==true)&&($head_set==false)){
 				$output .= "<tr>";
@@ -318,12 +282,12 @@ function csvimport_array_visu_extrait($data, $head, $nombre_lignes = 0){
 			if (($nombre_lignes>0)&&($data_count++>=$nombre_lignes))
 			  break;
 		}
+		if ($data_count>0)
+		  $output .= '<tr><td style="border-top:1px dotted" colspan="'.$nb_col.'">'._T("csvimport:lignes_totales_csv",array("nb"=>count($data))).'</td></tr>';
 		$output .= "</table>\n";
 	}
 	if ($data_count==0)
-	  $output .= _L("Pas de donn&eacute;e");
-	else
-	  $output .= count($data) . _L(" lignes au total");
+	  $output .= _T("csvimport:aucune_donnee");
 	return $output;
 }
 
@@ -332,21 +296,25 @@ function csvimport_array_visu_assoc($data, $table_fields, $assoc_field, $nombre_
 
 	$output = "";
 	$data_count = 0;
-	$output .= "<table>";
+	$output .= "<table width='100%'>";
 	$output .= "<tr>";
 	foreach($table_fields as $key=>$value){
 	  $output .= "<th>" . $value . "</th>";
 	}
 	$output .= "</tr>\n";
-
+	
+	$nb_col = 0;
 	if ($data!=false){
 		foreach($data as $key=>$ligne) {
+			$nb_col = 0;
 			$output .= "<tr>";
 			foreach($table_fields as $key=>$value){
+				$nb_col++;
 				$kc = csvimport_nettoie_key($key);
-			  $output .= "<td>";
-			  if ((isset($assoc[$kc]))&&(isset($ligne[$assoc[$kc]])))
-			    $output .= $ligne[$assoc[$kc]];
+				
+				$output .= "<td>";
+				if ((isset($assoc[$kc]))&&(isset($ligne[$assoc[$kc]])))
+			    	$output .= $ligne[$assoc[$kc]];
 				else
 					$output .= "&nbsp;";
 				$output .= "</td>";
@@ -356,17 +324,14 @@ function csvimport_array_visu_assoc($data, $table_fields, $assoc_field, $nombre_
 			  break;
 		}
 	}
-	$output .= "</table>";
-
 	if ($data_count>0)
-	  $output .= count($data) . _L(" lignes au total");
+	  $output .= '<tr><td style="border-top:1px dotted" colspan="'.$nb_col.'">'._T("csvimport:lignes_totales_csv",array("nb"=>count($data))).'</td></tr>';
+	$output .= "</table>";
 	return $output;
 }
 
 function csvimport_nettoie_key($key){
-	$accents=array('é','è','ê','à','ù',"ô","ç","'");
-	$accents_rep=array('e','e','e','a','u',"o","c","_");
-	return str_replace($accents,$accents_rep,$key);
+	return importer_csv_nettoie_key($key);
 }
 
 function csvimport_field_associate($data, $table_fields, $assoc_field){
@@ -423,13 +388,13 @@ function csvimport_field_configure($data, $table_fields, $assoc){
 	$output = "";
 	$csvfield=array_keys($data{1});
 
-	$output .= "<table><tr><td>"._L("Champ CSV")."</td><td>"._L("Champ Table")."</td></tr>";
+	$output .= "<table><tr><td>"._T("csvimport:champs_csv")."</td><td>"._T("csvimport:champs_table")."</td></tr>";
 	foreach($csvfield as $csvkey){
 		$csvkey = csvimport_nettoie_key($csvkey);
 		$output .=  "<tr>";
 		$output .=  "<td>$csvkey</td>";
 		$output .= "<td><select name='assoc_field[$csvkey]'>\n";
-		$output .= "<option value='-1'>"._L("Ne pas importer")."</option>\n";
+		$output .= "<option value='-1'>"._T("csvimport:pas_importer")."</option>\n";
 		foreach($table_fields as $tablekey => $libelle){
 			$output .= "<option value='$tablekey'";
 			if ($assoc[$csvkey]==$tablekey)
@@ -442,18 +407,23 @@ function csvimport_field_configure($data, $table_fields, $assoc){
 	return $output;
 }
 
-// vidange de la table
+/**
+ * Fonction de vidange de la table lors du remplacement des donnÃ©es
+ *  
+ * @return
+ * @param String $table Nom de la table
+ */
 function csvimport_vidange_table($table){
-	$res = spip_query("DELETE FROM $table"); // et voila ...
+	sql_delete($table);
 }
 
 function csvimport_ajoute_table_csv($data, $table, $assoc_field, &$erreur){
 	global $tables_principales;
 	$csvimport_tables_auth = csvimport_tables_auth();
 	$assoc = array_flip($assoc_field);
-	$desc = spip_abstract_showtable($table);
+	$desc = sql_showtable($table);
 	if (!isset($desc['field']) || count($desc['field'])==0){
-		$erreur[0][] = "Description de la table introuvable";
+		$erreur[0][] = _T("csvimport:description_table_introuvable");
 		return;
 	}
 	if ($GLOBALS['mysql_rappel_nom_base'] AND $db = $GLOBALS['spip_mysql_db'])
@@ -477,38 +447,25 @@ function csvimport_ajoute_table_csv($data, $table, $assoc_field, &$erreur){
 	if ($data!=false){
 		$count_lignes = 0;
 		foreach($data as $key=>$ligne) {
-      $count_lignes ++;
-			// creation de la cle primaire puis modif de l'enregistrement
-			//if (isset($primaire)){
-				$what = "(";
-				$with = "(";
-				$check = array_flip($tablefield);
-				foreach($check as $key=>$value){
-					$kc = csvimport_nettoie_key($key);
-				  if ((isset($assoc[$kc]))&&(isset($ligne[$assoc[$kc]]))){
-						$what .= "$key,";
-						$with .= "'" . addslashes($ligne[$assoc[$kc]]) . "',";
-						unset($check[$key]);
-					}
-		 		}
-				if ((isset($stamp))&&isset($check[$stamp])){
-					$what .= "$stamp,";
-					$with .= "NOW(),";
+		$count_lignes ++;
+			$check = array_flip($tablefield);
+			foreach($check as $key=>$value){
+				$kc = csvimport_nettoie_key($key);
+				if ((isset($assoc[$kc]))&&(isset($ligne[$assoc[$kc]]))){
+					$what[$key] = addslashes($ligne[$assoc[$kc]]);
+					unset($check[$key]);
 				}
-				if ((strlen($what)>1)&&(strlen($with)>1)) {
-					$what = substr($what,0,strlen($what)-1) . ")";
-					$with = substr($with,0,strlen($with)-1) . ")";
-					$id_primary = spip_abstract_insert($table, $what, $with);
-					if ($id_primary==0)
-					  $erreur[$count_lignes][] = "ajout impossible ::$what::$with::<br />";
-				}
-				else
-				  $erreur[$count_lignes][] = "rien &agrave; ajouter<br />";
-		 	//}
-			// creation de l'enregistrement direct
-		 	/*else {
-
-			}*/
+	 		}
+			if ((isset($stamp))&&isset($check[$stamp])){
+				$what[$stamp] = date('Y-m-d H:i:s');
+			}
+			if (is_array($what)) {
+				$id_primary = sql_insertq($table, $what);
+				if ($id_primary==0)
+				  $erreur[$count_lignes][] = "ajout impossible ::$what::$with::<br />";
+			}
+			else
+			  $erreur[$count_lignes][] = "rien &agrave; ajouter<br />";
 		}
 	}
 }

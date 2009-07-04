@@ -1,12 +1,12 @@
 <?php
 /*
- * csvimport
- * plug-in d'import csv dans les tables spip
+ * CSVimport
+ * Plug-in d'import csv dans les tables spip et d'export CSV des tables
  *
  * Auteur :
  * Cedric MORIN
  * notre-ville.net
- * © 2005,2006 - Distribue sous licence GNU/GPL
+ * Â© 2005,2009 - Distribue sous licence GNU/GPL
  *
  */
 
@@ -35,7 +35,7 @@ function csvimport_admin_action(){
 					'operations'=>isset($operation[$table])?$operation[$table]:array(),
 					'field'=>isset($field[$table])?$field[$table]:array(),
 					'dyn_declare_aux'=>(!isset($tables_principales[$table])&&!isset($tables_auxiliaires[$table]))
-					);
+				);
 			}
 		}
 		ecrire_meta('csvimport_tables_auth',serialize($csvimport_tables_auth));
@@ -45,8 +45,8 @@ function csvimport_admin_action(){
 
 function ligne_table_import($table,$desc){
 	static $csvimport_tables_auth=NULL;
-	$liste_statuts = array('0minirezo'=>_T('item_administrateur_2'), '1comite'=>_T('intem_redacteur'));
-	$liste_operations = array('add' => _L('Ajouter des donn&eacute;es'),'replaceall' =>_L('Tout remplacer'),'export' =>_L('Exporter'));
+	$liste_statuts = array('0minirezo'=>_T('item_choix_administrateurs'), '1comite'=>_T('item_choix_redacteurs'));
+	$liste_operations = array('add' => _T('csvimport:ajouter_donnees'),'replaceall' =>_T('csvimport:tout_remplacer'),'export' =>_T('csvimport:exporter'));
 
 	if ($csvimport_tables_auth==NULL)
 		$csvimport_tables_auth = csvimport_tables_auth();
@@ -74,39 +74,39 @@ function ligne_table_import($table,$desc){
 	$s .= ($exportable)?" checked='checked'":"";
 	$s .= " /> <label for='exportable_$table'>";
 	$s .= $table;
-	$s .= "</label>";
+	$s .= "</label>\n";
 	$vals[] = $s;
 
 	// Libelle explicite
-	$s = "<input type='text' name='titre[$table]' id='titre_$table' class='formo' value='".entites_html($titre)."' size='30' />";
+	$s = "<input type='text' name='titre[$table]' id='titre_$table' class='texte' value='".entites_html($titre)."' />";
 	//$vals[] = $s;
 	$s .= "<br />";
 	
 	// status autorises a manipuler la table
 	//$s = "";
 	foreach($liste_statuts as $stat=>$lib){
-		$s .= "<input type='checkbox' name='statut[$table][]' value='$stat' id='statut_$table_$stat'";
+		$s .= "<input type='checkbox' name='statut[$table][]' value='$stat' id='statut_".$table."_".$stat."'";
 		$s .= (in_array($stat,$statuts))?" checked='checked'":"";
-		$s .= " />&nbsp;<label for='statut_$table_$stat'>";
+		$s .= " />&nbsp;<label for='statut_".$table."_".$stat."'>";
 		$s .= str_replace(" ","&nbsp;",$lib);
-		$s .= "</label> ";
+		$s .= "</label>\n\n";
 		//$s .= "<br />";
 	}
-	$s .= "<hr />";
+	$s .= "<hr />\n\n";
 	//$vals[] = $s;
 
 	
 	// operations autorises sur la table
 	//$s = "";
 	foreach($liste_operations as $op=>$lib){
-		$s .= "<input type='checkbox' name='operation[$table][]' value='$op' id='statut_$table_$op'";
+		$s .= "<input type='checkbox' name='operation[$table][]' value='$op' id='statut_".$table."_".$op."'";
 		$s .= (in_array($op,$operations))?" checked='checked'":"";
-		$s .= " />&nbsp;<label for='statut_$table_$op'>";
+		$s .= " />&nbsp;<label for='statut_".$table."_".$op."'>";
 		$s .= str_replace(" ","&nbsp;",$lib);
-		$s .= "</label> ";
+		$s .= "</label>\n\n";
 		//$s .= "<br />";
 	}
-	$s .= "<hr />";
+	$s .= "<hr />\n\n";
 	//$vals[] = $s;
 	
 	// champs de la table
@@ -117,49 +117,52 @@ function ligne_table_import($table,$desc){
 		if ($col==0)
 			$s .= "<tr>";
 		$s.="<td>";
-		$s .= "<input type='checkbox' name='field[$table][]' value='$field' id='statut_$table_$field'";
+		$s .= "<input type='checkbox' name='field[$table][]' value='$field' id='statut_".$table."_".$field."'";
 		$s .= (in_array($field,$fields))?" checked='checked'":"";
-		$s .= " />&nbsp;<label for='statut_$table_$field'>";
+		$s .= " />&nbsp;<label for='statut_".$table."_".$field."'>";
 		$s .= $field;
 		$s .= "</label>";
-		$s.="</td>";
+		$s.="</td>\n\n";
 		$col++;
-		if ($col==4){
-			$s .= "</tr>";
+		if ($col==3){
+			$s .= "</tr>\n\n";
 			$col = 0;
 		}
 		//$s .= "<br />";
 	}
 	if ($col!=0)
-		$s .= "</tr>";
+		$s .= "</tr>\n\n";
 	$s.= "</table>";
 	$vals[] = $s;
-	
 
 	return $vals;
 }
 
 function exec_csvimport_admin(){
-	global $connect_statut;
-	global $tables_jointures;	
+	global $tables_jointures;
+	global $tables_principales;
+	global $tables_auxiliaires;
+	global $table_des_tables;	
 	global $table_prefix;
-	global $spip_lang_right;
 	$tables_defendues = array('ajax_fonc','meta','ortho_cache','ortho_dico','caches','test');
+	
+	if (!autoriser('configurer')) {
+		include_spip('inc/minipres');
+		minipres();
+		exit;
+	}
 	
 	//
 	// Afficher une liste de tables importables
 	//
+	$commencer_page = charger_fonction('commencer_page','inc');
+	echo $commencer_page(_T("csvimport:import_csv"), "csvimport");
+	echo debut_gauche('',true);
 	
-	debut_page(_L("Import CSV"), "csvimport", "csvimport");
-	debut_gauche();
+	$raccourcis = icone_horizontale(_T('csvimport:import_export_tables'), generer_url_ecrire("csvimport_tous"), "../"._DIR_PLUGIN_CSVIMPORT."img_pack/csvimport-24.png", "", false);
+	echo bloc_des_raccourcis($raccourcis);
 	
-	debut_droite();
-
-	if ($connect_statut != '0minirezo') {
-		echo "<strong>"._T('avis_acces_interdit')."</strong>";
-		fin_page();
-		exit;
-	}
+	echo debut_droite('',true);
 	
 	csvimport_admin_action();
 	
@@ -169,23 +172,18 @@ function exec_csvimport_admin(){
 	if (!$retour)
 		$retour = generer_url_ecrire('csvimport_tous');
 	$icone = "../"._DIR_PLUGIN_CSVIMPORT."img_pack/csvimport-24.png";
-		
+	
+	$titre = _T('csvimport:administrer_tables');
 	//
 	// Icones retour
 	//
-	if ($retour) {
-		echo "<br />\n";
-		echo "<div align='$spip_lang_right'>";
-		icone(_T('icone_retour'), $retour, $icone, "rien.gif");
-		echo "</div>\n";
-	}
+	$milieu = '';
+	$milieu .= "<div class='entete-formulaire'>";
+	$milieu .= icone_inline(_T('icone_retour'), $retour, $icone, "rien.gif",$GLOBALS['spip_lang_left']);
+	$milieu .= gros_titre($titre,'', false);
+	$milieu .= "</div>";
 
-	include_spip('base/serial');
-	include_spip('base/auxiliaires');
-	global $tables_principales;
-	global $tables_auxiliaires;
-	global $table_des_tables;
-	global $tables_jointures;
+
 	// on construit un index des tables de liens
 	// pour les ajouter SI les deux tables qu'ils connectent sont sauvegardees
 	$tables_for_link = array();
@@ -207,7 +205,7 @@ function exec_csvimport_admin(){
 			}
 		}
 	
-	$res = spip_query("SHOW TABLES");
+	$res = sql_showbase();
 	$liste_des_tables_spip=array();
 	$liste_des_tables_autres=array();
 	while ($row=spip_fetch_array($res,SPIP_NUM)){
@@ -225,11 +223,11 @@ function exec_csvimport_admin(){
 		}
 	}
 	
-	echo "<div class='liste'>";
-	echo bandeau_titre_boite2(_L("Tables pr&eacute;sentes dans la base"), $icone, $couleur_claire, "black",false);
-	echo "<table width='100%' cellpadding='5' cellspacing='0' border='0'>";
-
-	echo generer_url_post_ecrire('csvimport_admin',"modif=1&retour=".urlencode($retour));
+	$milieu .= "<div class='formulaire_spip'>";
+	$action = generer_url_ecrire("csvimport_admin", "modif=1&retour=".urlencode($retour));
+	
+	$milieu .= "\n<form action='$action' method='post' class='formulaire_editer'><div>".form_hidden($action);
+	$milieu .= "<table width='100%' cellpadding='5' cellspacing='0' border='0'>";
 	$num_rows = count($liste_des_tables_spip)+count($liste_des_tables_autres);
 
 	$ifond = 0;
@@ -238,30 +236,53 @@ function exec_csvimport_admin(){
 	$compteur_liste = 0;
 	$tableau = array();
 	foreach($liste_des_tables_spip as $table) {
-		$desc = spip_abstract_showtable($table);
+		$desc = sql_showtable($table);
 		if (is_array($desc)){
 			$ligne = ligne_table_import($table,$desc);
 			$tableau[] = $ligne;
 		}
 	}
 	foreach($liste_des_tables_autres as $table) {
-		$desc = spip_abstract_showtable($table);
+		$desc = sql_showtable($table);
 		if (is_array($desc)){
 			$ligne = ligne_table_import($table,$desc);
 			$tableau[] = $ligne;
 		}
 	}
 
-	$largeurs = array('','','','','');
-	$styles = array('arial11', 'arial1', 'arial1', 'arial1', 'arial1');
-	echo afficher_liste($largeurs, $tableau, $styles);
-	echo "</table>";
-	echo "</div>\n";
-	echo "<div style='text-align:$spip_lang_right'>";
-	echo "<input type='submit' name='Enregistrer' value='"._T('bouton_enregistrer')."' class='fondo'>";
-	echo "</div>";
+	$largeurs = array('','','');
+	$styles = array('arial11', 'arial1', 'arial1');
+	$evt = ' style="width:100%"';
+	$liste = ''; 
+	foreach ($tableau as $t) {
+		reset($largeurs);
+		if ($styles) reset($styles);
+		$res ='';
+		while (list(, $texte) = each($t)) {
+			$style = $largeur = "";
+			list(, $largeur) = each($largeurs);
+			if ($styles) list(, $style) = each($styles);
+			if (!trim($texte)) $texte .= "&nbsp;";
+			$res .= "\n<td" .
+				($largeur ? (" style='width: $largeur px;'") : '') .
+				($style ? " class='$style'" : '') .
+				">" . lignes_longues($texte) . "</td>\n\n";
+		}
 	
-	fin_page();
+		$liste .=  "\n<tr class='tr_liste'$evt>$res</tr>"; 
+	}
+	
+	$milieu .= $liste;
+	$milieu .= "</table>";
+	$milieu .= "<p class='boutons'>";
+	$milieu .= "<input type='submit' name='Enregistrer' value='"._T('bouton_enregistrer')."' class='submit' />";
+	$milieu .= "</p>";
+	$milieu .= "</div></form>";
+	$milieu .= "</div>";
+	
+	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'csvimport_admin','table'=>$table),'data'=>$milieu));
+
+	echo fin_gauche(), fin_page();
 }
 
 ?>
