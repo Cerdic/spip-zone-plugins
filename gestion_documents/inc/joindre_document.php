@@ -119,10 +119,12 @@ function joindre_trouver_fichier_envoye(){
 		if (_tmp_dir == _DIR_IMG)
 			return _T('avis_operation_impossible');
 		
-		$files = joindre_deballer_lister_zip($path,_tmp_dir);
+		$files = array();
+		if (_request('options_upload_zip')=='deballe')
+			$files = joindre_deballer_lister_zip($path,_tmp_dir);
 	  
 		// si le zip doit aussi etre conserve, l'ajouter
-		if (_request('options_deballe_zip_conserver')){
+		if (_request('options_upload_zip')=='upload' OR _request('options_deballe_zip_conserver')){
 	  	$files[] = array(
 				'name' => basename($path),
 				'tmp_name' => $path,

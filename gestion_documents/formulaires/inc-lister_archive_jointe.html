@@ -2,8 +2,8 @@
 	<div class='explication'><:upload_fichier_zip_texte:></div>
 	<input type='hidden' name='chemin_zip' value='#ENV{chemin_zip}' />
 	<ul>
-		<li class='editer_options_upload_zip'>[
-			<span class='erreur_message'><ul>(#ENV*{erreurs_fichier_zip}|joindre_liste_erreurs_to_li)</ul></span>
+		<li class='editer_options_upload_zip[ (#ENV*{erreurs_fichier_zip}|oui)erreur]'>[
+			<div class='erreur_message'><ul>(#ENV*{erreurs_fichier_zip}|joindre_liste_erreurs_to_li)</ul></div>
 		]
 		<label><:upload_fichier_zip_texte2:></label>
 		<div class='choix'>
