@@ -57,8 +57,12 @@ echo debut_droite('', true);
 //
 // Vos articles en cours de redaction
 //
-
-	echo afficher_objets('article',_T('info_en_cours_validation'), array('FROM' => "spip_articles AS articles, spip_auteurs_articles AS lien ", "WHERE" => "articles.id_article=lien.id_article AND lien.id_auteur=$connect_id_auteur AND articles.statut='prepa'", 'ORDER BY' => "articles.date DESC"));
+//RERS   seulement hors rubriques OFFRES et DEMANDES
+	echo afficher_objets('article',_T('info_en_cours_validation'), array('FROM' => "spip_articles AS articles, spip_auteurs_articles AS lien ", 
+		"WHERE" => "articles.id_article=lien.id_article 
+			AND lien.id_auteur=$connect_id_auteur AND articles.statut='prepa'
+			AND id_rubrique!=$rers_rub_offres AND id_rubrique!=$rers_rub_demandes", //RERS
+		'ORDER BY' => "articles.date DESC"));
 
 
 
@@ -79,15 +83,15 @@ echo debut_droite('', true);
 		"FROM" =>"spip_articles AS articles, spip_auteurs_articles AS lien ", 
 		"WHERE" => "articles.id_article=lien.id_article AND 	
 				lien.id_auteur=$connect_id_auteur AND 
-				articles.statut='prop'
-				AND id_rubrique=$rers_rub_offres",
+			(articles.statut='prop' OR articles.statut='prepa' OR articles.statut='publie')
+				AND articles.id_rubrique=$rers_rub_offres",
 		'ORDER BY' => "date DESC"));
 	$res .=  afficher_objets('article',"Vos fiches de demandes de savoirs", array(
 		"FROM" =>"spip_articles AS articles, spip_auteurs_articles AS lien ", 
 		"WHERE" => "articles.id_article=lien.id_article AND 	
 				lien.id_auteur=$connect_id_auteur AND 
-				articles.statut='prop'
-				AND id_rubrique=$rers_rub_demandes",
+			(articles.statut='prop' OR articles.statut='prepa' OR articles.statut='publie')
+				AND articles.id_rubrique=$rers_rub_demandes",
 		'ORDER BY' => "date DESC"));
 
 

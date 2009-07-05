@@ -100,8 +100,10 @@ else
 
 
 		// Affichage des options du groupe (types d'elements, permissions...)
+
+// RERS réservé aux administrateurs
 global $connect_statut; //rers
-if ($connect_statut == '0minirezo') // rers  boucle supplémentaire
+if ($connect_statut == '0minirezo') // rers  
 { //rers
 		$res = '';
 		$tables_liees = explode(',',$tables_liees);

@@ -14,7 +14,7 @@ $rers_rub_vie = lire_config('rers/rers_rub_vie');
 $id_art = $_GET['id_article'];
 $id_rub = $_GET['id_rubrique'];
 if ($id_rub == ''){
-$row = spip_fetch_array(spip_query("SELECT id_rubrique FROM spip_articles WHERE id_article=$id_art")); $id_rub  = $row['id_rubrique'];
+$row = spip_fetch_array(spip_mysql_query("SELECT id_rubrique FROM spip_articles WHERE id_article=$id_art")); $id_rub  = $row['id_rubrique'];
 }
 
 
@@ -27,7 +27,7 @@ $rers_dest = $_GET['dest'];
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 //  A Classer....    
-'text_article_propose_publication_forum' => " ", // ecrire
+//'text_article_propose_publication_forum' => " ", // ecrire
 'texte_en_cours_validation_forum' => " ",   // ecrire
 
 
@@ -114,9 +114,8 @@ placé dans une des deux rubriques OFFRES ou DEMANDES.
 'info_auteurs' => "Les Adhérents", //ecrire
 'entree_infos_perso' => "Qui êtes-vous ? (ne sera pas affiché sur l'espace public)", // ecrire
 'entree_adresse_email' => // ecrire
-	"Votre adresse email. Vous serez prévenu par email que quelqu'un 
-	vous a laissé un message sur votre messagerie du site RERS. 
-	Votre email ne sera pas divulgué aux adhérents de l'association.", 
+	"Votre adresse email. 
+	Elle ne sera pas divulgué aux adhérents de l'association.", 
 'entree_nom_pseudo' =>  //ecrire
 	"Votre prénom suivi d'au moins la première lettre de votre nom. 
 	Exemple : Jean-Pierre D"
@@ -125,19 +124,8 @@ placé dans une des deux rubriques OFFRES ou DEMANDES.
 
 
 
-// exec/articles.php       (annotation en rouge : id_rubrique n'apparait pas dans l'url, donc 
-//                            pas de distinction possible entre rubrique VIE   et   OFFRES/DEMANDES)
-$GLOBALS[$GLOBALS['idx_lang']][text_article_propose_publication] = " ";//ecrire
 
 
-
-// +++++++++++++ OFFRES et DEMANDES
-if ($id_rub== $rers_rub_offres OR $id_rub == $rers_rub_demandes)  // pour une rubrique : deux signes =
-{
-// exec/naviguer.php
-$GLOBALS[$GLOBALS['idx_lang']][texte_statut_propose_evaluation] = "publié dans l'espace privé";//spip
-$GLOBALS[$GLOBALS['idx_lang']][texte_en_cours_validation] = "Articles publiés dans l'espace privé";//ecrire
-$GLOBALS[$GLOBALS['idx_lang']][info_tous_articles_presents] = "Erreur : Articles avec mauvais statut ";//ecrire
 // +++++++++++++ OFFRES
   if ($id_rub == $rers_rub_offres) 
   {
@@ -145,7 +133,7 @@ $GLOBALS[$GLOBALS['idx_lang']][info_tous_articles_presents] = "Erreur : Articles
   $GLOBALS[$GLOBALS['idx_lang']][icone_ecrire_article] = "Écrire un nouvel article (fiche de 
     savoir offert)";//spip
   }
-}
+
 // +++++++++++++ DEMANDES
   if ($id_rub == $rers_rub_demandes)  
   {
@@ -164,8 +152,8 @@ if ($rers_exec == 'message_edit' AND $rers_dest !== '')
 {
 $GLOBALS[$GLOBALS['idx_lang']][bouton_envoi_message_02] = 
 "ENVOYER UN MESSAGE
-<br /> <small> Ce message est strictement privé. Le destinataire recevra un email lui indiquant qu'il a 
-un nouveau message à consulter sur le site RERS Sud Aisne.</small>"
+<br /> <small> Ce message est strictement privé. Si le destinataire a une adresse électronique, il recevra un email lui indiquant qu'il a un nouveau message à consulter sur le site RERS Sud Aisne.</small>
+<br /> Sinon, c'est à sa prochaine connexion au site qu'il lira ce message."
 ;
 $GLOBALS[$GLOBALS['idx_lang']][info_texte_message_02] = //ecrire
 "Texte du message. 
@@ -194,17 +182,12 @@ if ($rers_exec == 'articles_edit')
 	Pensez à détailler votre fiche d'offre de savoir en
 	indiquant par exemple : <br />
 	<dl>
-	<dt>- le nombre de participants</dt>
-	<dt>- le nombre de séances</dt>
-	<dt>- le temps par séance</dt>
-	<dt>- le lieu</dt>
-	<dt>- le matériel éventuel</dt>
-	<dt>- disponibilité</dt>
-	</dl>
-	Et n'oubliez pas par la suite de : 
-        <dl>
-	<dt>- choisir un statut entre 'en cours de rédaction' et 'publier dans l'espace privé' </dt>
-	<dt>- choisir le mot clé qui placera votre fiche de savoir dans une catégorie : sport, musique..</dt>
+	<dt>- le nombre de participants : </dt>
+	<dt>- le nombre de séances : </dt>
+	<dt>- le temps par séance : </dt>
+	<dt>- le lieu : </dt>
+	<dt>- le matériel éventuel : </dt>
+	<dt>- disponibilité : </dt>
 	</dl>
 	</div>
 	";
@@ -218,13 +201,8 @@ if ($rers_exec == 'articles_edit')
 	Pensez à détailler votre fiche de demande de savoir en
 	indiquant par exemple : 
 	<ul>
-	<dt>- lieu</dt>
-	<dt>- disponibilité</dt>
-	</dl>
-	Et n'oubliez pas par la suite de : 
-        <dl>
-	<dt>- choisir un statut entre 'en cours de rédaction' et 'publier dans l'espace privé' </dt>
-	<dt>- choisir le mot clé qui placera votre fiche de savoir dans une catégorie : sport, musique..</dt>
+	<dt>- lieu : </dt>
+	<dt>- disponibilité : </dt>
 	</dl>
 	</div>
 	";

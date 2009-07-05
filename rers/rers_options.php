@@ -24,19 +24,20 @@ $jcc = $GLOBALS['id_auteur'];
 
 
 	$flux['data'] .= "<div class='cadre cadre-info verdana1'><div class='cadre_padding'>"
-		. "<b>Raccourcis RERS : $jcc</b>"
+		. "<b>Raccourcis RERS&nbsp: </b>"
      		. "<ul style='padding-left:1em'>"
-		. "<li><a href='?exec=naviguer&id_rubrique=$rers_rub_offres'>rubrique OFFRES</a></li>"
-		. "<li><a href='?exec=naviguer&id_rubrique=$rers_rub_demandes'>rubrique DEMANDES</a></li>"
-		. "<li><a href='?exec=naviguer&id_rubrique=$rers_rub_vie'>rubrique VIE DU RERS</a></li>"
+		. "<li><a href='?exec=naviguer&id_rubrique=$rers_rub_offres'>Rubrique OFFRES</a></li>"
+		. "<li><a href='?exec=naviguer&id_rubrique=$rers_rub_demandes'>Rubrique DEMANDES</a></li>"
+		. "<li><a href='?exec=naviguer&id_rubrique=$rers_rub_vie'>Rubrique VIE DU RERS</a></li>"
 		. "<li><a href='?exec=mots_tous'>Recherche par domaine de savoir</a></li>"
-		. "<li><a href='?exec=articles_page'>tous vos articles</a></li>"
+		. "<li><a href='?exec=articles_page'>Tous vos articles</a></li>"
 		. "<li><a href='"
 		. generer_url_ecrire("auteur_infos","id_auteur=$connect_id_auteur")
 		. "'>"
-		. "Modifier mes informations personnelles"
+		. "Modifier vos informations personnelles"
 		. "</a></li>" 
 		. "<li><a href='?exec=rers_aide'>Aide : Guide du rédacteur</a></li>"
+		. "<li>Message privé à un adhérent&nbsp;: cliquer sur l'icône <img src='/prive/images/m_envoi.gif'/> à côté de son nom </li>"
 		. "</ul>"
 		. "</div></div>";
 	return $flux;

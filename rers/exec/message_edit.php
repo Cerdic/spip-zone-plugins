@@ -67,15 +67,22 @@ function exec_message_edit_args($id_message, $new, $dest)
 
 
 	echo debut_gauche('', true);
+
+
+
 // rers : pas de lien mailto:  $email
-/* rers	
+//RERS   Cacher email  aux adhérents  (option cfg)
+global $connect_statut; //rers
+$rers_email_cache = lire_config('rers/rers_email_cache');
+if ( ($rers_email_cache == "on" AND $connect_statut !== '0minirezo') OR $connect_statut == '0minirezo' )
+{//RERS
 	if($type == 'normal' AND $dest) {
 		$email = sql_getfetsel("email", "spip_auteurs", "id_auteur=$dest");
 		if (strlen($email) > 3) {
 			echo icone(_T('info_envoyer_message_prive'), "mailto:".$email, "envoi-message-24.gif");
 		}
 	}
-rers */
+}//RERS
 
 	echo debut_droite('', true);
 

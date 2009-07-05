@@ -29,10 +29,14 @@ function encours_accueil_derniers_savoirs_rers()
 	$rers_rub_vie = lire_config('rers/rers_rub_vie');
 
 	$res = '';
-	$res .=  afficher_objets('article',"OFFRES", array("WHERE" => "statut='prop' 
-		AND id_rubrique=$rers_rub_offres", 'ORDER BY' => "date DESC", 'LIMIT' => '0,10'));
-	$res .=  afficher_objets('article',"DEMANDES", array("WHERE" => "statut='prop' 
-		AND id_rubrique=$rers_rub_demandes", 'ORDER BY' => "date DESC", 'LIMIT' => '0,10'));
+	$res .=  afficher_objets('article',"OFFRES", array(
+		"WHERE" => "(statut='prop' OR statut='prepa' OR statut='publie')
+			 AND id_rubrique=$rers_rub_offres", 
+		'ORDER BY' => "date DESC", 'LIMIT' => '0,10'));
+	$res .=  afficher_objets('article',"DEMANDES", array(
+		"WHERE" => "(statut='prop' OR statut='prepa' OR statut='publie')
+			 AND id_rubrique=$rers_rub_demandes", 
+		'ORDER BY' => "date DESC", 'LIMIT' => '0,10'));
 	if (!$res) echo ''; 
 	return 
 	"<div style='position:relative;display:inline;'>" 
@@ -61,8 +65,8 @@ function encours_accueil()
 	$res = '';
 
 	// Les articles a valider
-	//
-// rers   ne pas afficher (pour l'administrateur) les articles à valider   de la rubrique OFFRE ou DEMANDES
+	//  RERS     la fonction encours_accueil n'est appelée que pour les administrateurs
+	// RERS     "Les articles a valider" SAUF POUR les rubriques OFFRE et DEMANDES
  	$res .=  afficher_objets('article',_T('info_articles_proposes'), array("WHERE" => "statut='prop' AND id_rubrique!=$rers_rub_offres AND id_rubrique!=$rers_rub_demandes", 'ORDER BY' => "date DESC"));
 
 	//
@@ -446,147 +450,11 @@ function accueil_liste_participants()
 function exec_accueil_dist()
 {
   global $connect_statut; //rers
-  if ($connect_statut !== '0minirezo') //rers   : copie entiere de la fonction et grandes coupes dedans.
-  {//rers if statut  != 0minirezo
 
-     global $id_rubrique, $connect_statut, $connect_id_auteur, $spip_display, $connect_id_rubrique;
+	$rers_rub_offres = lire_config('rers/rers_rub_offres');
+	$rers_rub_demandes = lire_config('rers/rers_rub_demandes');
+	$rers_rub_vie = lire_config('rers/rers_rub_vie');
 
-	$id_rubrique =  intval($id_rubrique);
- 	pipeline('exec_init',array('args'=>array('exec'=>'accueil','id_rubrique'=>$id_rubrique),'data'=>''));
-
-	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo $commencer_page(_T('titre_page_index'), "accueil", "accueil");
-
-	echo debut_gauche("",true);
-
-	if ($spip_display != 4) {
-
-//rers (pour les rédacteurs) supprimer le cadre Cookie de correspondance
-//rers		echo personnel_accueil(@$_COOKIE['spip_admin']);
-
-		echo pipeline('affiche_gauche',array('args'=>array('exec'=>'accueil','id_rubrique'=>$id_rubrique),'data'=>''));
-		echo "\n<div>&nbsp;</div>";
-		$nom = typo($GLOBALS['meta']["nom_site"]);
-		if (!$nom) $nom=  _T('info_mon_site_spip');
-
-
-//rers (pour les rédacteurs) supprimer le cartouche
-/* rers
-		echo debut_cadre_relief("racine-site-24.gif", true, "", $nom),
-		  etat_base_accueil(),
-		  fin_cadre_relief(true);
-rers*/
-
-
-
-	}
-
-	echo creer_colonne_droite("", true);
-	list($evtm, $evtt, $evtr) = http_calendrier_messages(date("Y"), date("m"), date("d")," 23:59:59");
-
-	echo "<div>&nbsp;</div>", $evtt, $evtm, $evtr;
-
-	echo pipeline('affiche_droite',array('args'=>array('exec'=>'accueil','id_rubrique'=>$id_rubrique),'data'=>''));
-
-	echo debut_droite("", true);
-
-	if ($GLOBALS['meta']["post_dates"] == "non"
-	AND $connect_statut == '0minirezo')
-		echo afficher_objets('article',_T('info_article_a_paraitre'), array("WHERE" => "statut='publie' AND date>NOW()", 'ORDER BY' => "date"));
-
-
-//rers (pour les rédacteurs) supprimer le cadre articles récents
-/*rers
-	// Les articles recents
-	//
-	echo afficher_objets('article',
-	#afficher_plus(generer_url_ecrire('articles_page')) .
-	_T('articles_recents'), array("WHERE" => "statut='publie'" .($GLOBALS['meta']["post_dates"] == "non"
-		? " AND date<NOW()" : ''),
-		'ORDER BY' => "date DESC", 'LIMIT' => '0,4'));
-rers*/
-
-
-//
-// Vos articles en cours 
-//
-
-	echo afficher_objets('article',afficher_plus(generer_url_ecrire('articles_page'))._T('info_en_cours_validation'),	array('FROM' => "spip_articles AS articles, spip_auteurs_articles AS lien", "WHERE" => "articles.id_article=lien.id_article AND lien.id_auteur=$connect_id_auteur AND articles.statut='prepa'", "ORDER BY" => "articles.date DESC"));
-
-
-// rers   : (pour les redacteurs) ne pas afficher les raccourcis "ecrire un nouvel article"   "mots cle"
-/*rers
-	if ($spip_display == 4)
-	  echo colonne_droite_eq4($id_rubrique,
-			 $GLOBALS['meta']["activer_breves"],
-			 $GLOBALS['meta']["activer_sites"],
-			 $GLOBALS['meta']['articles_mots']);
-	else {
-	  echo colonne_droite_neq4($id_rubrique,
-			 $GLOBALS['meta']["activer_breves"],
-			 $GLOBALS['meta']["activer_sites"],
-			 $GLOBALS['meta']['articles_mots']);
-rers*/
-
-
-
-
-// rers  AJOUT : (pour les redacteurs) afficher le raccourci  "Navigation par domaine de savoir" (mot cle)
-		$gadget = "<table><tr>";
-			$gadget .= "<td>"
-			. icone_horizontale  ("Navigation par domaine de savoirs", generer_url_ecrire("mots_tous",""), "mot-cle-24.gif", "", false)
-			. "</td>";
-		$gadget .= "</tr></table>\n";
-	  $gadget = "<div>&nbsp;</div>"
-	    . debut_cadre_trait_couleur('', true)
-	    . $gadget
-	    . fin_cadre_trait_couleur(true);
-	$gadget .= "<div>&nbsp;</div>";
-	echo $gadget;
-
-
-
-
-// rers FIN AJOUT
-
-
-
-
-
-
-
-
-
-
-//rers COMMENTE	  echo encours_accueil();
-// rers   :  (pour les rédacteurs) afficher les dernières propositions de savoirs,   
-echo encours_accueil_derniers_savoirs_rers(); //rers  AJOUT
-
-//rers	}     rers REMARQUE : fin du if ($spip_display == 4)
-
-	include_spip('inc/presenter_enfants');
-	if (!$connect_id_rubrique)
-		echo afficher_enfant_rub(0, false, true) . "<div class='nettoyeur'></div>";
-
- 	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'accueil'),'data'=>''));
-
-	// Dernieres modifications d'articles
-	if (($GLOBALS['meta']['articles_versions'] == 'oui')) {
-		include_spip('inc/suivi_versions');
-		echo afficher_suivi_versions (0, 0, false, "", true);
-	}
-
-	echo fin_gauche(), fin_page();
-
-
-
-
-
-  }//rers if statut  != 0minirezo
-
-
-  else//rers else statut  != 0minirezo
- {//rers else statut  != 0minirezo
 
  global $id_rubrique, $connect_statut, $connect_id_auteur, $spip_display, $connect_id_rubrique;
 
@@ -599,14 +467,24 @@ echo encours_accueil_derniers_savoirs_rers(); //rers  AJOUT
 	echo debut_gauche("",true);
 
 	if ($spip_display != 4) {
+//rers (pour les rédacteurs) supprimer le cadre Cookie de correspondance
+		if ($connect_statut == '0minirezo') //RERS
+		{
 		echo personnel_accueil(@$_COOKIE['spip_admin']);
+		}
+
 		echo pipeline('affiche_gauche',array('args'=>array('exec'=>'accueil','id_rubrique'=>$id_rubrique),'data'=>''));
 		echo "\n<div>&nbsp;</div>";
 		$nom = typo($GLOBALS['meta']["nom_site"]);
 		if (!$nom) $nom=  _T('info_mon_site_spip');
+
+//rers (pour les rédacteurs) supprimer le cartouche
+		if ($connect_statut == '0minirezo') //RERS
+		{ //RERS
 		echo debut_cadre_relief("racine-site-24.gif", true, "", $nom),
 		  etat_base_accueil(),
 		  fin_cadre_relief(true);
+		}//RERS
 	}
 
 	echo creer_colonne_droite("", true);
@@ -623,31 +501,54 @@ echo encours_accueil_derniers_savoirs_rers(); //rers  AJOUT
 		echo afficher_objets('article',_T('info_article_a_paraitre'), array("WHERE" => "statut='publie' AND date>NOW()", 'ORDER BY' => "date"));
 
 
+//rers    Les articles récents : SAUF rubriques Demandes et Offres
 	// Les articles recents
 	//
 	echo afficher_objets('article',
 	#afficher_plus(generer_url_ecrire('articles_page')) .
-	_T('articles_recents'), array("WHERE" => "statut='publie'" .($GLOBALS['meta']["post_dates"] == "non"
-		? " AND date<NOW()" : ''),
+	_T('articles_recents'), array(
+		"WHERE" => "statut='publie'
+		 AND id_rubrique!=$rers_rub_offres AND id_rubrique!=$rers_rub_demandes"   //RERS
+		.($GLOBALS['meta']["post_dates"] == "non" ? " AND date<NOW()" : ''),
 		'ORDER BY' => "date DESC", 'LIMIT' => '0,4'));
 
+
+
+
+//RERS   Vos articles en cours de rédaction (SAUF rubriques Demandes et Offres)
 //
 // Vos articles en cours 
 //
 
-	echo afficher_objets('article',afficher_plus(generer_url_ecrire('articles_page'))._T('info_en_cours_validation'),	array('FROM' => "spip_articles AS articles, spip_auteurs_articles AS lien", "WHERE" => "articles.id_article=lien.id_article AND lien.id_auteur=$connect_id_auteur AND articles.statut='prepa'", "ORDER BY" => "articles.date DESC"));
+	echo afficher_objets('article',afficher_plus(generer_url_ecrire('articles_page'))._T('info_en_cours_validation'),	array('FROM' => "spip_articles AS articles, spip_auteurs_articles AS lien", 
+	"WHERE" => "articles.id_article=lien.id_article AND lien.id_auteur=$connect_id_auteur 
+		AND articles.statut='prepa' 
+		AND articles.id_rubrique!=$rers_rub_offres  
+		AND articles.id_rubrique!=$rers_rub_demandes", //RERS
+	"ORDER BY" => "articles.date DESC"));
 
 
-// RERS : les articles en cours de rédaction par les adhérents (TOUS LES ARTICLES en cours de redaction)
-	echo  afficher_objets('article','Tous les articles en préparation', 
-                array("WHERE" => "statut='prepa'", 'ORDER BY' => "date DESC"));
+// RERS : les articles en cours de rédaction par les adhérents 
+//       (TOUS LES ARTICLES en cours de redaction  sauf rubriques Offres et demandes)
+	if ($connect_statut == '0minirezo') //RERS
+	{ //RERS
+	echo  afficher_objets('article','Tous les articles en cours de rédaction', 
+                array("WHERE" => "statut='prepa' 
+		AND articles.id_rubrique!=$rers_rub_offres
+		AND articles.id_rubrique!=$rers_rub_demandes", //RERS
+		 'ORDER BY' => "date DESC"));
+	} //RERS
 
 
 
 
 
-
-
+// rers   : (pour les redacteurs) ne pas afficher les raccourcis "ecrire un nouvel article" car 
+// RERS      ce raccourci rend nécessaire le choix de la rubrique alors qu'il est automatique si
+// RERS      on est déjà dans la bonne rubrique
+// RERS     Ne pas afficher le raccourci "mots cle"
+if ($connect_statut == '0minirezo') //RERS
+{ //RERS
 	if ($spip_display == 4)
 	  echo colonne_droite_eq4($id_rubrique,
 			 $GLOBALS['meta']["activer_breves"],
@@ -661,10 +562,13 @@ echo encours_accueil_derniers_savoirs_rers(); //rers  AJOUT
 
 	  echo encours_accueil();
 
-// rers   :  (pour les administrateurs) afficher les dernières propositions de savoirs,   
-	echo encours_accueil_derniers_savoirs_rers(); //rers  AJOUT
 
 	}
+} //RERS
+
+// rers   :  afficher les dernières propositions de savoirs,   
+	echo encours_accueil_derniers_savoirs_rers(); //rers  AJOUT
+
 
 	include_spip('inc/presenter_enfants');
 	if (!$connect_id_rubrique)
@@ -679,7 +583,6 @@ echo encours_accueil_derniers_savoirs_rers(); //rers  AJOUT
 	}
 
 	echo fin_gauche(), fin_page();
- }//rers else statut  != 0minirezo
 
 }
 ?>

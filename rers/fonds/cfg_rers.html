@@ -59,12 +59,18 @@
   	 </BOUCLE_secteurs3>
    </select>
 
-
 </fieldset>
 
+<fieldset><legend>Données personnelles des adhérents</legend>
+  <label>Cacher les adresses électroniques (Les adhérents ne peuvent pas voir les adresses email des autres adhérents)</label>
+  <input type="checkbox" name="rers_email_cache" [checked="(#ENV{rers_email_cache})"] />
+<br />
+</fieldset>
 
-
-
+<fieldset><legend>Communication entre les adhérents</legend>
+  <label>Autoriser les forums privés dans les rubriques OFFRES et DEMANDES (Nécessite, dans la configuration, d'activer les forum sous les articles dans l'espace privé). [On peut vouloir les laisser désactivés pour que les adhérents ne soient pas tentés de divulguer leurs coordonnées dans ces forums.]</label>
+  <input type="checkbox" name="rers_forum_offres_demandes" [checked="(#ENV{rers_forum_offres_demandes})"] />
+</fieldset>
 
 
 

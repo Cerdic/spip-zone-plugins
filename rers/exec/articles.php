@@ -1,6 +1,9 @@
 <?php
 
 
+	$rers_rub_offres = lire_config('rers/rers_rub_offres');
+	$rers_rub_demandes = lire_config('rers/rers_rub_demandes');
+	$rers_rub_vie = lire_config('rers/rers_rub_vie');
 
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
@@ -16,6 +19,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 include_spip('inc/actions');
+
+
 
 // http://doc.spip.org/@exec_articles_dist
 function exec_articles_dist()
@@ -59,6 +64,12 @@ function exec_articles_args($id_article)
 // http://doc.spip.org/@articles_affiche
 function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot,  $select_groupe, $trad_err, $debut_forum=0, $statut_forum='prive')
 {
+	$rers_rub_offres = lire_config('rers/rers_rub_offres');
+	$rers_rub_demandes = lire_config('rers/rers_rub_demandes');
+	$rers_rub_vie = lire_config('rers/rers_rub_vie');
+	global $connect_statut; //rers
+
+
 	global $spip_lang_right, $dir_lang;
 
 	$id_rubrique = $row['id_rubrique'];
@@ -111,31 +122,35 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 			'row' => $row
 		)
 	));
+	$navigation = ""; 
+
+//RERS    chacher le numéro d'article quand c'est une fiche de savoirs (article rubrique OFFRES ou DEMANDES)
+//RERS     et seulement pour les rédacteurs
+if ( ( $id_rubrique !== $rers_rub_offres AND  $id_rubrique !== $rers_rub_demandes AND $connect_statut !== '0minirezo' ) OR $connect_statut == '0minirezo' )
+{
+	$navigation .=	  debut_boite_info(true). $boite . fin_boite_info(true) . $icone ;
+}
+
 //rers modification : suppression du cadre "forum et petition" pour les rédacteurs
-global $connect_statut; //rers
 if ($connect_statut == '0minirezo') // rers
 { //rers
-	$navigation =
-	  debut_boite_info(true). $boite . fin_boite_info(true)
-	  . $icone
-		. (_INTERFACE_ONGLETS?"":boites_de_config_articles($id_article))
-	  . ($flag_editable ? boite_article_virtuel($id_article, $virtuel):'')
+	$navigation .=	(_INTERFACE_ONGLETS?"":boites_de_config_articles($id_article));
+} //RERS
+
+
+	$navigation .= ($flag_editable ? boite_article_virtuel($id_article, $virtuel):'')
 	  . pipeline('affiche_gauche',array('args'=>array('exec'=>'articles','id_article'=>$id_article),'data'=>''));
 
-} else { //rers
 
-	$navigation =
-	  debut_boite_info(true). $boite . fin_boite_info(true)
-	  . $icone 
-//		. (_INTERFACE_ONGLETS?"":boites_de_config_articles($id_article))   // rers  suppression ligne
-	  . ($flag_editable ? boite_article_virtuel($id_article, $virtuel):'')
-	  . pipeline('affiche_gauche',array('args'=>array('exec'=>'articles','id_article'=>$id_article),'data'=>''));
-}  //rers
+	$extra = creer_colonne_droite('', true);
+//RERS     simplification interface rédacteurs :
+//RERS		Cacher la liste (longue) des articles de la même rubrique
+if ($connect_statut == '0minirezo') // rers
+{
+	$extra .= $meme_rubrique($id_rubrique, $id_article, 'article');
+}
 
-
-	$extra = creer_colonne_droite('', true)
-		. $meme_rubrique($id_rubrique, $id_article, 'article')
-	  . pipeline('affiche_droite',array('args'=>array('exec'=>'articles','id_article'=>$id_article),'data'=>''))
+	$extra .=  pipeline('affiche_droite',array('args'=>array('exec'=>'articles','id_article'=>$id_article),'data'=>''))
 	  . debut_droite('',true);
 
 	// affecter les globales dictant les regles de typographie de la langue
@@ -154,7 +169,10 @@ if ($connect_statut == '0minirezo') // rers
 	  afficher_corps_articles($id_article,$virtuel,$row);
 
 
-//rers   DEBUT MODIF ET AJOUT
+
+
+
+
 	$onglet_proprietes = ((!_INTERFACE_ONGLETS) ? "" :"")
 	  . $dater($id_article, $flag_editable, $statut_article, 'article', 'articles', $date, $date_redac)
 	  . $editer_auteurs('article', $id_article, $flag_editable, $cherche_auteur, $ids);
@@ -172,14 +190,28 @@ if ($connect_statut == '0minirezo' OR ( $connect_statut !== '0minirezo' AND ($id
 	$onglet_proprietes .=  (!$referencer_traduction ? '' : $referencer_traduction($id_article, $flag_editable, $id_rubrique, $id_trad, $trad_err))
 	  . pipeline('affiche_milieu',array('args'=>array('exec'=>'articles','id_article'=>$id_article),'data'=>''))
 	  ;
-//rers   FIN MODIF ET AJOUT
+
+
+
+
 
 	$onglet_documents = articles_documents('article', $id_article);
 	$onglet_interactivite = (_INTERFACE_ONGLETS?boites_de_config_articles($id_article):"");
-/* rers       supprimer les forums sous les articles dans l'espace privé, malgré l'autorisation de communiquer
-   rers       dans le forum des adhérents et forum des administrateurs
+
+
+
+//rers       supprimer les forums sous les articles (rubriques OFFRES et DEMANDES seulement )
+//RERS             dans l'espace privé, malgré l'autorisation de communiquer
+//RERS             dans le forum des adhérents et forum des administrateurs
+$rers_forum_offres_demandes = lire_config('rers/rers_forum_offres_demandes');
+if (  ($id_rubrique !== $rers_rub_offres AND  $id_rubrique !== $rers_rub_demandes)
+      OR  	
+      (($id_rubrique == $rers_rub_offres OR  $id_rubrique == $rers_rub_demandes) 
+			AND $rers_forum_offres_demandes == "on")
+   )
+{//RERS
 	$onglet_discuter = !$statut_forum ? '' : ($discuter($id_article, 'articles', 'id_article', $statut_forum, $debut_forum));
-fin rers */
+} //RERS
 
 	return
 	  $navigation
@@ -319,14 +351,40 @@ function bouton_modifier_articles($id_article, $id_rubrique, $flag_modif, $mode,
 function afficher_corps_articles($id_article, $virtuel, $row)
 {
 	$res = '';
+
+
+//RERS     Alerte pour la rubrique OFFRES et DEMANDES  si aucun mot clé n'a été choisi
+	  $id_article = $row['id_article'];
+	$rersb = spip_fetch_array(spip_mysql_query("SELECT id_mot FROM spip_mots_articles WHERE id_article=$id_article"));
+	$rersc = $rersb['id_mot'];
+	if ($id_rubrique == $rers_rub_offres OR  $id_rubrique == $rers_rub_demandes) {
+		if ($rersc){}
+		else {
+		$res .= "<p class='article_prop'> Pensez à sélectionner le domaine de savoir 
+                             correspondant à votre fiche de savoirs. <br>
+			Une fois ce domaine de savoir choisi, la couleur orange de la case disparaîtra.</p>";
+		}
+	}
+
+
+
+
 	if ($row['statut'] == 'prop') {
 
+//RERS   Indication "texte proposé à la publication" seulement hors des rubriques OFFRES et DEMANDES
+	  $rers_rub_offres = lire_config('rers/rers_rub_offres');
+	  $rers_rub_demandes = lire_config('rers/rers_rub_demandes');
+	  $id_rubrique = $row['id_rubrique'];
+	  if ($id_rubrique !== $rers_rub_offres AND  $id_rubrique !== $rers_rub_demandes) {
 
 		$res .= "<p class='article_prop'>"._T('text_article_propose_publication');
 		if ($GLOBALS['meta']['forum_prive_objets'] != 'non')
 			$res .= ' '._T('text_article_propose_publication_forum');
-
 		$res.= "</p>";
+	  }//RERS
+
+
+
 	}
 
 	if ($virtuel) {

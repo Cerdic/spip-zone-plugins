@@ -185,12 +185,17 @@ function legender_auteur_voir($auteur) {
 
 	$contenu_auteur = "";
 
+//RERS   Cacher email  aux adhérents  (option cfg)
 global $connect_statut; //rers
-if ($connect_statut == '0minirezo'){ 	// rers
+$rers_email_cache = lire_config('rers/rers_email_cache');
+if ( $connect_statut == '0minirezo' OR ($rers_email_cache !== "on" AND $connect_statut !== '0minirezo') )
+{//RERS
 if (strlen($auteur['email']))
+{
 		$contenu_auteur .= "<div>"._T('email_2')
 			." <b><a href='mailto:".htmlspecialchars($auteur['email'])."'>"
 			.$auteur['email']."</a></b></div>";
+}
 } // rers
 
 

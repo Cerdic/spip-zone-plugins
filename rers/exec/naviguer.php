@@ -207,12 +207,12 @@ function infos_naviguer($id_rubrique, $statut, $row, $n_forums)
 		$navigation .= debut_cadre_relief("fiche-perso-24.gif", true, '', _T('info_administrateurs')). $res . fin_cadre_relief(true);
 
 
-// rers supprimer le cadre "rubrique numéro : 10" en haut à gauche  (pour les rédacteurs) 
-global $connect_statut; //rers
-if ($connect_statut == '0minirezo') // rers
-{ //rers
+ // rers supprimer le cadre "rubrique numéro : 10" en haut à gauche  (pour les rédacteurs) 
+ global $connect_statut; //rers
+ if ($connect_statut == '0minirezo') // rers
+ { //rers 
 	return $navigation;
-}//rers
+ }//rers
 }
 
 // http://doc.spip.org/@raccourcis_naviguer
