@@ -18,6 +18,7 @@ require_once _DIR_ACS.'lib/composant/composants_liste.php';
  * 3. langue par défaut depuis dossier(s) squelettes_over_acs
  * 4. langue par défaut depuis dossier modèle acs actif
  */
+
 function composants_ajouter_langue($module='') {
   $idx = $GLOBALS['idx_lang'];
   $idx_tmp = $idx.'_tmp';
@@ -31,7 +32,7 @@ function composants_ajouter_langue($module='') {
       $langfile = find_in_path("composants/$c/".($module ? $module.'/' : '')."lang/$c".'_'.($module ? $module.'_' : '').'fr.php');
     if (!$langfile)
       continue;
-    @include($langfile);
+    require_once($langfile);
     if (is_array($GLOBALS[$idx_tmp])) {
       $cla = array();
       foreach($GLOBALS[$idx_tmp] as $k => $v) {
