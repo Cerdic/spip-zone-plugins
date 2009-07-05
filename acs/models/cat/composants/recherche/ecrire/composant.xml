@@ -17,13 +17,25 @@
   </param>
 
   <variable>
-    <nom>Bord</nom>
+    <nom>TitreFond</nom>
     <type>color</type>
-    <valeur>acsRubnavBordColor</valeur>
   </variable>
   <variable>
-    <nom>Onglet</nom>
+    <nom>TitreFondImage</nom>
+    <type>img</type>
+    <chemin>img/trame</chemin>
+    <label>non</label>
+  </variable>
+  <variable>
+    <nom>Bord</nom>
+    <type>bord</type>
+  </variable>
+  <variable>
+    <nom>Fond</nom>
     <type>color</type>
-    <valeur>acsRubnavFond</valeur>
+  </variable>
+  <variable>
+    <nom>Input</nom>
+    <type>color</type>
   </variable>
 </composant>

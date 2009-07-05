@@ -130,6 +130,13 @@ $def = array(
 	'acsOursUse' => 'oui',
 
 	'acsRechercheUse' => 'oui',
+	'acsRechercheTitreFond' => '=acsRubnavTitreFond',
+	'acsRechercheTitreFondImage' => '=acsRubnavTitreFondImage',
+	'acsRechercheFond' => '=acsRubnavFond',
+	'acsRechercheInput' => '#ffffff',
+	'acsRechercheBordColor' => '=acsRubnavBordColor',
+	'acsRechercheBordWidth' => '=acsRubnavBordWidth',
+	'acsRechercheBordStyle' => '=acsRubnavBordStyle',
 
 	'acsRubnavUse' => 'oui',
 	'acsRubnavTitre' => 'oui',

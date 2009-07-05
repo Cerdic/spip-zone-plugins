@@ -7,7 +7,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'description' => 'Input search form.',
 'help' => 'Generate "formulaires/recherche.html" form style for active skeleton. Spip search engine must be activated.',
 
-'Bord' => 'Border',
-'Onglet' => 'Legend'
+'TitreFond' => 'Title',
+'Input' => 'Input'
 );
 ?>
