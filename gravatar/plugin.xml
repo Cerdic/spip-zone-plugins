@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Gravatar</nom>
 	<auteur>Thomas Beaumanoir - [Clever Age->http://www.clever-age.com] pour <code>#GRAVATAR</code>
-	<br /> Fil - [SPIP->www.spip.net] pour <code>#LOGO_AUTEUR</code>
+	<br />Fil - [SPIP->www.spip.net] pour <code>#LOGO_AUTEUR</code>
 	</auteur>
 	<icon>images/gravatar-64.png</icon>
 	<version>0.6</version>
@@ -17,7 +17,7 @@ _ Exemple : <code>#GRAVATAR{#EMAIL,80,#URL_SITE_SPIP/defaut-gravatar.gif}</code>
 Fournit le filtre <code>|gravatar</code>, &agrave; utiliser par exemple comme 
 <code>[(#EMAIL|gravatar|image_reduire{80})]</code>.
 	</description>
-	<lien>[Gravatar->http://www.spip-contrib.net/Gravatar]</lien>
+	<lien>http://www.spip-contrib.net/gravatar</lien>
 	<prefix>gravatar</prefix>
 	<fonctions>inc/gravatar.php</fonctions>
 	<pipeline>
