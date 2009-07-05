@@ -222,8 +222,9 @@ function raccourcis_naviguer($id_rubrique, $id_parent)
 
 //rers   (redacteurs) : supprimer le raccourci  "tous vos articles"
 global $connect_statut; //rers
-if ($connect_statut == '0minirezo') // rers
+if ($connect_statut == '0minirezo'){ // rers
 	$res = icone_horizontale(_T('icone_tous_articles'), generer_url_ecrire("articles_page"), "article-24.gif", '',false);
+}//RERS
 
 	$n = sql_countsel('spip_rubriques');
 	if ($n) {
@@ -307,6 +308,35 @@ function contenu_naviguer($id_rubrique, $id_parent) {
 
 	$res = '';
 
+
+
+	$rers_rub_offres = lire_config('rers/rers_rub_offres');
+	$rers_rub_demandes = lire_config('rers/rers_rub_demandes');
+	$rers_rub_vie = lire_config('rers/rers_rub_vie');
+
+if ($id_rubrique == $rers_rub_offres OR $id_rubrique == $rers_rub_demandes)
+ {//RERS
+
+ if ($id_rubrique == $rers_rub_offres) $rerstextea="Fiches d'Offre de savoir";
+ if ($id_rubrique == $rers_rub_demandes) $rerstextea="Fiches de Demande de savoir";
+
+	if ($relief) {
+
+		$res .= debut_cadre_couleur('',true);
+		$res .= "<div class='verdana2' style='color: black;'><b> 
+			$rerstextea </b></div>";
+
+		$res .= afficher_objets('article',_T('info_articles_proposes'),	
+		array('WHERE' => "id_rubrique=$id_rubrique 
+		AND (statut='prop' OR statut='prepa' OR statut='publie')", 
+		'ORDER BY' => "date DESC"));
+
+		$res .= fin_cadre_couleur(true);
+	}
+
+ }//RERS
+ else //RERS
+ {//RERS
 	if ($relief) {
 
 		$res .= debut_cadre_couleur('',true);
@@ -320,6 +350,9 @@ function contenu_naviguer($id_rubrique, $id_parent) {
 		// Les articles a valider
 		//
 		$res .= afficher_objets('article',_T('info_articles_proposes'),	array('WHERE' => "id_rubrique=$id_rubrique AND statut='prop'", 'ORDER BY' => "date DESC"));
+
+
+
 
 		//
 		// Les breves a valider
@@ -358,6 +391,7 @@ function contenu_naviguer($id_rubrique, $id_parent) {
 					_T('info_liens_syndiques_2') .
 					"</a></small>";
 		}
+
 
 		$res .= fin_cadre_couleur(true);
 	}
@@ -403,6 +437,8 @@ function contenu_naviguer($id_rubrique, $id_parent) {
 		$res .= afficher_objets('site','<b>' . _T('titre_sites_references_rubrique') . '</b>', array("FROM" => 'spip_syndic', 'WHERE' => "id_rubrique=$id_rubrique AND statut!='refuse' AND statut != 'prop' AND syndication NOT IN ('off','sus')", 'ORDER BY' => 'nom_site'));
  		$res .= $bouton_sites;
 	}
+
+}//RERS
 	return $res;
 }
 
