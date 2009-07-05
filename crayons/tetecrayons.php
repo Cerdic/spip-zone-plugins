@@ -130,7 +130,8 @@ EOH;
 	// Est-ce que PortePlume est la ?
 	$meta_crayon = unserialize($GLOBALS['meta']['crayons']);
 	if ($meta_crayon['barretypo']) {
-		if ($f = chercher_filtre('info_plugin')
+		if (function_exists('chercher_filtre')
+		AND $f = chercher_filtre('info_plugin')
 		AND $f('PORTE_PLUME','est_actif')) {
 			$lang = $GLOBALS['spip_lang'];
 			$incHead .= <<<EOF
