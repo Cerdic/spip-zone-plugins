@@ -310,17 +310,18 @@ function contenu_naviguer($id_rubrique, $id_parent) {
 
 
 
+//RERS
 	$rers_rub_offres = lire_config('rers/rers_rub_offres');
 	$rers_rub_demandes = lire_config('rers/rers_rub_demandes');
 	$rers_rub_vie = lire_config('rers/rers_rub_vie');
+	if ($relief OR ($id_rubrique == $rers_rub_offres OR $id_rubrique == $rers_rub_demandes)) {
+
+
 
 if ($id_rubrique == $rers_rub_offres OR $id_rubrique == $rers_rub_demandes)
  {//RERS
-
  if ($id_rubrique == $rers_rub_offres) $rerstextea="Fiches d'Offre de savoir";
  if ($id_rubrique == $rers_rub_demandes) $rerstextea="Fiches de Demande de savoir";
-
-	if (true) {
 
 		$res .= debut_cadre_couleur('',true);
 		$res .= "<div class='verdana2' style='color: black;'><b> 
@@ -329,15 +330,12 @@ if ($id_rubrique == $rers_rub_offres OR $id_rubrique == $rers_rub_demandes)
 		$res .= afficher_objets('article',_T('info_articles_proposes'),	
 		array('WHERE' => "id_rubrique=$id_rubrique 
 		AND (statut='prop' OR statut='prepa' OR statut='publie')", 
-		'ORDER BY' => "date DESC"));
+		'ORDER BY' => "date DESC", 'LIMIT' => '0,50'));
 
-		$res .= fin_cadre_couleur(true);
-	}
-
+	
  }//RERS
  else //RERS
  {//RERS
-	if ($relief) {
 
 		$res .= debut_cadre_couleur('',true);
 		$res .= "<div class='verdana2' style='color: black;'><b>"._T('texte_en_cours_validation')
@@ -352,7 +350,7 @@ if ($id_rubrique == $rers_rub_offres OR $id_rubrique == $rers_rub_demandes)
 		$res .= afficher_objets('article',_T('info_articles_proposes'),	array('WHERE' => "id_rubrique=$id_rubrique AND statut='prop'", 'ORDER BY' => "date DESC"));
 
 
-
+}//RERS
 
 		//
 		// Les breves a valider
@@ -416,8 +414,11 @@ if ($id_rubrique == $rers_rub_offres OR $id_rubrique == $rers_rub_demandes)
 	//////////  Les articles en cours de redaction
 	/////////////////////////
 
+//RERS
+if ($id_rubrique != $rers_rub_offres AND $id_rubrique != $demandes)
+ {//RERS
   $res .= afficher_objets('article',_T('info_tous_articles_en_redaction'), array("WHERE" => "statut='prepa' AND id_rubrique=$id_rubrique", 'ORDER BY' => "date DESC"));
-
+}//RERS
 
 	//////////  Les articles publies
 	/////////////////////////
@@ -438,7 +439,7 @@ if ($id_rubrique == $rers_rub_offres OR $id_rubrique == $rers_rub_demandes)
  		$res .= $bouton_sites;
 	}
 
-}//RERS
+
 	return $res;
 }
 
