@@ -1,0 +1,43 @@
+<plugin>
+	<nom>kconf</nom>
+	<auteur>
+	Arnaud Cordier, Shazaam, Nonox, Mutins
+_ &copy; 2007 - 2009 -> Distribu&eacute; sous licence GNU/GPL v3 bi1nentendu !
+	</auteur>
+	<version>0.4</version>
+	<etat>test</etat>
+	<description>
+-* {{fonctions}} : permet d'offir à l'utilisateur des interfaces de configuration squelettable.
+-* {{documentation}} : un jour.
+
+Ce plugin est pr&eacute;vu pour SPIP 2.x
+	</description>
+	<lien></lien>
+	<prefix>kconf</prefix>
+	<install>kconf_install.php</install>
+	<options>kconf_options.php</options>
+	<fonctions>kconf_fonctions.php</fonctions>
+
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/kconf_base.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_auxiliaires</nom>
+		<inclure>base/kconf_base.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/kconf_base.php</inclure>
+	</pipeline>
+
+	<pipeline>
+		<nom>afficher_contenu_objet</nom>
+		<inclure>kconf_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>kconf_pipelines.php</inclure>
+	</pipeline>
+
+</plugin>

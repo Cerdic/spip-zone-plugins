@@ -1,0 +1,48 @@
+.kconf_admin {background:#522704;width:99%;margin-top:15px;}
+.kconf_admin .linkconfig {padding-left:5px;font-weight:bold;}
+.kconf_admin .bulletverte {float: left; margin:0 5px;}
+.kconf_admin .bulletclose {float: right; margin:0 5px;}
+
+.kconf_admin .onglets {margin:0 auto;padding-top:10px;}
+.kconf_admin .kadr_config1_ong {float: left; width: 145px;}
+
+.kconf_admin .config {margin:0 auto;clear: both;}
+.kconf_admin .kadr_config1 {padding:20px;background:#78B0AF; text-align: center; line-height: 1.5em;}
+.kconf_admin .kadr_config2 {padding:15px 5px 10px 5px;background:#61918F;}
+
+.kconf_admin ul {
+	list-style-image:none;
+	list-style-position:outside;
+	list-style-type:none;
+	margin:0;
+	padding:0;
+}
+.kconf_admin .tab {
+	background-color:#FFFFFF;
+	border: 1px solid #78B0AF;
+	cursor:move;
+	float:left;
+	list-style-image:none;
+	list-style-position:outside;
+	list-style-type:none;
+	margin:0 2px;
+}
+.kconf_admin .tab:hover {
+	background-color:#78B0AF;
+	color:white;
+}
+.kconf_admin .tabon {background:#78B0AF;}
+.kconf_admin .tab a, .kconf_admin .tab div {
+	display:block;
+	float:left;
+	padding:0 10px;
+	text-decoration:none;
+	color: #522704;
+	font-size:12px;
+}
+.kconf_admin .kadr_config1 .konglet_on {position: relative;background-color:#344C4C;color:white;border:1px solid #344C4C;margin:2px;}
+.kconf_admin .kadr_config1 .konglet_off {position: relative;background-color: #4C706F;border:1px solid #344C4C;margin:2px;}
+.kconf_admin .kadr_config1 .konglet_off:hover {background-color:#344C4C;}
+a {text-decoration:none;}
+
+.kconf_admin h3 {color:white;}
