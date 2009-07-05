@@ -20,11 +20,13 @@ function formulaires_clevermail_subscriber_new_verifier_dist() {
 	}
   if (isset($_FILES['cm_file']) && is_uploaded_file($_FILES['cm_file']['tmp_name'])) {
     $adresses = implode('', file($_FILES['cm_file']['tmp_name']));
+    // TODO : utiliser plutôt la fonction email_valide()
     if (!ereg("^([^@ ]+@[^@ ]+\.[^@. ]+[,;\t\n\r ]+)*[^@ ]+@[^@ ]+\.[^@. ]+[,;\t\n\r ]*$", $adresses)) {
       $erreurs['cm_file'] = 'Le format des adresses ne semble pas bon.';
     }
   }
-	if (_request('cm_subs') != '' && !ereg("^([^@ ]+@[^@ ]+\.[^@. ]+[,;\n\r ]+)*[^@ ]+@[^@ ]+\.[^@. ]+[,;\t\n\r ]*$", _request('cm_subs'))) {
+  // TODO : utiliser plutôt la fonction email_valide()
+  if (_request('cm_subs') != '' && !ereg("^([^@ ]+@[^@ ]+\.[^@. ]+[,;\n\r ]+)*[^@ ]+@[^@ ]+\.[^@. ]+[,;\t\n\r ]*$", _request('cm_subs'))) {
     $erreurs['cm_subs'] = 'Le format des adresses ne semble pas bon.';
 	}
 	if (sizeof(_request('cm_lists')) == 0) {
