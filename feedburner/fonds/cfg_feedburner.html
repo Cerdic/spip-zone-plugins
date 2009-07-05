@@ -1,8 +1,13 @@
-[(#REM) descriptif=
-<h4>Ici vous pouvez configurer le plugin FeedBurner.</h4>]
+<!-- descriptif=
+<img src='#CHEMIN{feedburner-64.png}' alt='' style="float:#LANG_RIGHT;" />
+<strong>Configuration de FeedBurner</strong>
+<p class="explication">Pour que ce plugin fonctionne, il est indispensable d'indiquer l'identifiant FeedBurner de votre flux.</p>
+<p>Pour cela, consultez votre compte <a href="http://www.feedburner.com/" class="spip_out">FeedBurner</a>.</p>
+<p><a href="http://www.spip-contrib.net/feedburner" class="spip_out">Documentation sur&nbsp;SPIP-Contrib</a></p>
+-->
 
 [(#REM) titre=FeedBurner]
-[(#REM) icone=feedburner20.png]
+[(#REM) icone=feedburner-20.png]
 
 #CACHE{0}
 
@@ -14,7 +19,6 @@
 			<li class="feedburner_feedId obligatoire">
 				<label for="feedId">Identifiant du flux</label>
 				<input type="text" name="feedId" value="#ENV{feedId}" id="feedId" style="width: 8em;" />
-				<p class="explication"><strong>Obligatoire</strong>. Vous trouverez cet identifiant dans l'adresse des pages de votre tableau de bord <a href="http://feedburner.google.com/fb/a/myfeeds" class="spip_out">FeedBurner</a> qui concernent le flux.</p>
 			</li>
 			<li class="feedburner_url">
 				<label for="url">URL de redirection du flux RSS</label>
