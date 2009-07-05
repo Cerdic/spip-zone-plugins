@@ -320,7 +320,7 @@ if ($id_rubrique == $rers_rub_offres OR $id_rubrique == $rers_rub_demandes)
  if ($id_rubrique == $rers_rub_offres) $rerstextea="Fiches d'Offre de savoir";
  if ($id_rubrique == $rers_rub_demandes) $rerstextea="Fiches de Demande de savoir";
 
-	if ($relief) {
+	if (true) {
 
 		$res .= debut_cadre_couleur('',true);
 		$res .= "<div class='verdana2' style='color: black;'><b> 
