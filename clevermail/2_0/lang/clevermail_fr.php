@@ -21,24 +21,26 @@
 	  'aucun_nouvel_abonne' => 'aucun nouvel abonné',
 	  'nouveaux_abonnes_et' => ' et ',
 	  'changements_mode_abonnement' => ' changements de mode d\'abonnement',
+	  'inscription_deja_abonne_meme_mode' => 'Vous étiez déjà inscrit à la liste « @lst_name@ » dans ce même mode.',
+	  'inscription_deja_abonne_autre_mode' => 'Vous étiez déjà inscrit à la liste « @lst_name@ » dans un autre mode.',
 
 		// Front
 		'email' => 'E-mail :',
 		'version' => 'Version :',
 		'inscription_lettre' => 'Inscrivez-vous à notre lettre d\'information :',
 		'inscription_lettres' => 'Inscrivez-vous à nos lettres d\'information :',
-		'deja_inscrit' => 'Vous êtiez déjà inscrit à cette lettre d\'information. Votre mode d\'inscription a été mis à jour.',
-		'inscription_validee' => 'Votre inscription est validée. Merci.',
-		'desinscription_validee' => 'Votre désinscription est validée. A bientôt.',
+		'deja_inscrit' => 'Vous étiez déjà inscrit à la liste « @lst_name@ ». Votre mode d\'inscription a été mis à jour.',
+		'inscription_validee' => 'Votre inscription à la liste « @lst_name@ » est validée. Merci.',
+		'desinscription_validee' => 'Votre désinscription de la liste « @lst_name@ » est validée. A bientôt.',
 		'deja_validee' => 'Cette opération a déjà été validée. Désolé.',
 		'aucune_inscription' => 'Aucune inscription ne correspond &agrave; ce paramètre.',
 		'desinscription_confirmation_debut' => 'Désinscription de la lettre d\'information',
 		'desinscription_confirmation_fin' => 'demandée. Vous allez recevoir un message demandant confirmation.',
-		'ok' => 'Vous allez recevoir un message de demande de confirmation de votre inscription à la liste ',
-		'nok' => 'Inscription non authorisée pour cette lettre d\'information',
-		'mok' => 'Votre demande d\'inscription a été soumise au modérateur. Vous serez informé de sa décision.',
-		'send_error' => 'Erreur lors de l\'envoi',
-		'email_non_valide' => 'Adresse non valide',
+		'inscription_ok' => 'Vous allez recevoir un message de demande de confirmation de votre inscription à la liste « @lst_name@ ».',
+		'inscription_nok' => 'Inscription non authorisée pour cette lettre d\'information',
+		'inscription_mok' => 'Votre demande d\'inscription à la liste « @lst_name@ » a été soumise au modérateur. Vous serez informé de sa décision.',
+		'send_error' => 'Erreur lors de l\'envoi du message de demande de confirmation, veuillez réessayer.',
+		'email_non_valide' => 'Adresse non valide.',
 	  'front_clevermail_action_validation' => 'Validation d\'une opération',
 	  'front_clevermail_unsubscription_query' => 'Demande de désinscription',
 
@@ -141,6 +143,12 @@
 		'supprimer_abonnes' => 'Supprimer les abonn&eacute;s selectionn&eacute;s',
 		'desabonner_abonnes' => 'D&eacute;sabonner les abonn&eacute;s selectionn&eacute;s',
 		'confirme_suppression_multiple_base' => 'Vous &ecirc;tes sur le point de supprimer des abonn&eacute;s de la base. &Eacute;tes vous sur ?',
-		'confirme_desabonnement_multiple_lettre' => 'Vous &ecirc;tes sur le point de d&eacute;sabonner plusieurs abonn&eacute;s de cette liste. &Eacute;tes vous sur ?'
+		'confirme_desabonnement_multiple_lettre' => 'Vous &ecirc;tes sur le point de d&eacute;sabonner plusieurs abonn&eacute;s de cette liste. &Eacute;tes vous sur ?',
+	
+	  // Mails
+	  'mail_info_inscription_sujet' => 'Inscription de @sub_email@',
+	  'mail_info_inscription_corps' => 'Alerte envoyée par le plugin CleverMail du site @nom_site@ ( @url_site@ ) :'."\n\n".'Inscription de @sub_email@ à la liste « @lst_name@ »',
+    'mail_info_desinscription_corps' => 'Alerte envoyée par le plugin CleverMail du site @nom_site@ ( @url_site@ ) :'."\n\n".'Désinscription de @sub_email@ de la liste « @lst_name@ »',
+	
 	);
 ?>

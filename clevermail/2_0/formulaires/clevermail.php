@@ -64,11 +64,11 @@ function formulaires_clevermail_traiter_dist($lst_id = 0) {
     if (sql_countsel("spip_cm_lists_subscribers", "lst_id=".intval($lst_id)." AND sub_id=".intval($sub_id)) == 1) {
     	if (sql_getfetsel("lsr_mode", "spip_cm_lists_subscribers", "lst_id=".intval($lst_id)." AND sub_id=".intval($sub_id)) == intval(_request('lsr_mode'))) {
     		// Déjà abonné avec ce mode
-    		$message .= (strlen($message) > 0 ? '<br />' : '')._T('clevermail:inscription_deja_abonne_meme_mode').$listData['lst_name']; 
+    		$message .= (strlen($message) > 0 ? '<br />' : '')._T('clevermail:inscription_deja_abonne_meme_mode', array('lst_name' => $listData['lst_name']));
     	} else {
     		// Déjà abonné mais changement de mode
         sql_updateq("spip_cm_lists_subscribers", array('lsr_mode' => intval(_request('lsr_mode'))), "lst_id=".intval($lst_id)." AND sub_id=".intval($sub_id));
-    		$message .= (strlen($message) > 0 ? '<br />' : '')._T('clevermail:inscription_deja_abonne_autre_mode').$listData['lst_name']; 
+    		$message .= (strlen($message) > 0 ? '<br />' : '')._T('clevermail:inscription_deja_abonne_autre_mode', array('lst_name' => $listData['lst_name'])); 
     	}
     } else {
     	// Nouvel abonnement
@@ -76,7 +76,7 @@ function formulaires_clevermail_traiter_dist($lst_id = 0) {
     		case 'open':
     			$actionId = md5('subscribe#'.$lst_id.'#'.$sub_id.'#'.time());
           sql_insertq("spip_cm_lists_subscribers", array('lst_id' => intval($lst_id), 'sub_id' => intval($sub_id), 'lsr_mode' => intval(_request('lsr_mode')), 'lsr_id' => $actionId));
-          $message .= (strlen($message) > 0 ? '<br />' : '')._T('clevermail:inscription_validee').$listData['lst_name'];
+          $message .= (strlen($message) > 0 ? '<br />' : '')._T('clevermail:inscription_validee', array('lst_name' => $listData['lst_name']));
     			break;
     		case 'email':
     			// TODO : à finir
@@ -105,16 +105,16 @@ function formulaires_clevermail_traiter_dist($lst_id = 0) {
           // TODO : Et le return-path ?
           $envoyer_mail = charger_fonction('envoyer_mail', 'inc');
           if ($envoyer_mail($to, $subject, $body, $from)) {
-            $message .= (strlen($message) > 0 ? '<br />' : '')._T('clevermail:ok').$listData['lst_name'];
+            $message .= (strlen($message) > 0 ? '<br />' : '')._T('clevermail:inscription_ok', array('lst_name' => $listData['lst_name']));
           } else {
-            $message .= (strlen($message) > 0 ? '<br />' : '')._T('clevermail:send_error').$listData['lst_name'];
+            $message .= (strlen($message) > 0 ? '<br />' : '')._T('clevermail:send_error', array('lst_name' => $listData['lst_name']));
           }
     			break;
     		case 'mod':
           // TODO : à faire
     			break;
         case 'closed':
-          $message .= (strlen($message) > 0 ? '<br />' : '')._T('clevermail:inscription_nok').$listData['lst_name'];
+          $message .= (strlen($message) > 0 ? '<br />' : '')._T('clevermail:inscription_nok', array('lst_name' => $listData['lst_name']));
           $ok = false;
         break;
     	}
