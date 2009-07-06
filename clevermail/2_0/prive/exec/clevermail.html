@@ -4,9 +4,8 @@
   <BOUCLE_subscribers(SPIP_CM_LISTS_SUBSCRIBERS){lst_id} />#SET{nbSubs,#TOTAL_BOUCLE}<//B_subscribers>
   <BOUCLE_posts(SPIP_CM_POSTS){lst_id} />#SET{nbPosts,#TOTAL_BOUCLE}<//B_posts>
   <li class="item">
-    <p><strong>#LST_NAME</strong></p>
+    <p><strong>#LST_NAME</strong> (#LST_MODERATION)</p>
     <div>
-      <:clevermail:statistiques:> :
 	    [(#GET{nbSubs}|>{0}|oui)
 	      <a href="[(#URL_ECRIRE{clevermail_subscribers}|parametre_url{lst_id,#LST_ID})]">#GET{nbSubs} [ (#GET{nbSubs}|singulier_ou_pluriel{clevermail:abonne,clevermail:abonnes})]</a> 
 	    ]
