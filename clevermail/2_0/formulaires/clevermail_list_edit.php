@@ -25,7 +25,7 @@ function formulaires_clevermail_list_edit_verifier_dist($lst_id = -1) {
 	$erreurs = array();
 	foreach(array('lst_name', 'lst_moderator_email', 'lst_url_html', 'lst_url_text') as $obligatoire) {
 		if (!_request($obligatoire)) {
-			$erreurs[$obligatoire] = 'Ce champ est obligatoire.';
+			$erreurs[$obligatoire] = _T('clevermail:ce_champ_est_obligatoire');
 		}
 	}
 	$nb = sql_countsel("spip_cm_lists", "lst_id != ".intval(_request('lst_id'))." AND lst_name = ".sql_quote(_request('lst_name')));
@@ -34,10 +34,10 @@ function formulaires_clevermail_list_edit_verifier_dist($lst_id = -1) {
   }
 	include_spip('inc/filtres');
 	if (_request('lst_moderator_email') && !email_valide(_request('lst_moderator_email'))) {
-		$erreurs['lst_moderator_email'] = 'Cette adresse e-mail n\'est pas valide.';
+		$erreurs['lst_moderator_email'] = _T('cette_adresse_email_n_est_pas_valide');
 	}
 	if (count($erreurs)) {
-		$erreurs['message_erreur'] = 'Veuillez corriger votre saisie.';
+		$erreurs['message_erreur'] = _T('clevermail:veuillez_corriger_votre_saisie');
 	}
 	return $erreurs;
 }

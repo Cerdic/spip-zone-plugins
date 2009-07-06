@@ -28,17 +28,17 @@ function formulaires_clevermail_charger_dist($lst_id = 0) {
 function formulaires_clevermail_verifier_dist($lst_id = 0) {
   $erreurs = array();
   if (!_request('lst_id') && !_request('lst_ids')) {
-    $erreurs['lst_ids'] = 'Ce champ est obligatoire.';
+    $erreurs['lst_ids'] = _T('clevermail:ce_champ_est_obligatoire');
   }
   if (!_request('sub_email')) {
-    $erreurs['sub_email'] = 'Ce champ est obligatoire.';
+    $erreurs['sub_email'] = _T('clevermail:ce_champ_est_obligatoire');
   }
   include_spip('inc/filtres');
   if (_request('sub_email') && !email_valide(_request('sub_email'))) {
-    $erreurs['sub_email'] = 'Cette adresse e-mail n\'est pas valide.';
+    $erreurs['sub_email'] = _T('cette_adresse_email_n_est_pas_valide');
   }
 	if (count($erreurs)) {
-    $erreurs['message_erreur'] = 'Veuillez corriger votre saisie.';
+    $erreurs['message_erreur'] = _T('clevermail:veuillez_corriger_votre_saisie');
   }
   return $erreurs;
 }

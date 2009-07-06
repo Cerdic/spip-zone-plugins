@@ -9,23 +9,38 @@
 	 **/
 
 	$GLOBALS[$GLOBALS['idx_lang']] = array(
+	  // Formulaires
+	  'ce_champ_est_obligatoire' => 'Ce champ est obligatoire.',
+	  'cette_adresse_email_n_est_pas_valide' => 'Cette adresse e-mail n\'est pas valide.',
+	  'le_format_des_adresses_email_ne_semble_pas_bon' => 'Le format des adresses e-mail ne semble pas bon.',
+	  'vous_devez_choisir_un_fichier' => 'Vous devez choisir un fichier...',
+	  'et_ou_saisir_des_adresses' => '...et/ou saisir des adresses.',
+	  'vous_devez_choisir_au_moins_une_liste' => 'Vous devez choisir au moins une liste.',
+	  'veuillez_corriger_votre_saisie' => 'Veuillez corriger votre saisie.',
+	  'n_nouveaux_abonnes' => ' nouveaux abonnés',
+	  'aucun_nouvel_abonne' => 'aucun nouvel abonné',
+	  'nouveaux_abonnes_et' => ' et ',
+	  'changements_mode_abonnement' => ' changements de mode d\'abonnement',
+
 		// Front
 		'email' => 'E-mail :',
 		'version' => 'Version :',
 		'inscription_lettre' => 'Inscrivez-vous à notre lettre d\'information :',
 		'inscription_lettres' => 'Inscrivez-vous à nos lettres d\'information :',
 		'deja_inscrit' => 'Vous êtiez déjà inscrit à cette lettre d\'information. Votre mode d\'inscription a été mis à jour.',
-		'inscription_validee' => 'Votre inscription est validée. Merci',
-		'desinscription_validee' => 'Votre désinscription est validée. A bientôt',
-		'deja_validee' => 'Cette opération a déjà été validée. Merci.',
+		'inscription_validee' => 'Votre inscription est validée. Merci.',
+		'desinscription_validee' => 'Votre désinscription est validée. A bientôt.',
+		'deja_validee' => 'Cette opération a déjà été validée. Désolé.',
 		'aucune_inscription' => 'Aucune inscription ne correspond &agrave; ce paramètre.',
 		'desinscription_confirmation_debut' => 'Désinscription de la lettre d\'information',
 		'desinscription_confirmation_fin' => 'demandée. Vous allez recevoir un message demandant confirmation.',
-		'ok' => 'Inscription demandée. Vous allez recevoir un message de demande de confirmation.',
+		'ok' => 'Vous allez recevoir un message de demande de confirmation de votre inscription à la liste ',
 		'nok' => 'Inscription non authorisée pour cette lettre d\'information',
-		'mok' => 'Inscription en attente de validation par le modérateur.',
+		'mok' => 'Votre demande d\'inscription a été soumise au modérateur. Vous serez informé de sa décision.',
 		'send_error' => 'Erreur lors de l\'envoi',
 		'email_non_valide' => 'Adresse non valide',
+	  'front_clevermail_action_validation' => 'Validation d\'une opération',
+	  'front_clevermail_unsubscription_query' => 'Demande de désinscription',
 
 		// Back
 		'administration' => 'Administration de CleverMail',

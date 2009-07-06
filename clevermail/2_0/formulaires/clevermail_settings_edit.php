@@ -15,16 +15,16 @@ function formulaires_clevermail_settings_edit_verifier_dist() {
 	$erreurs = array();
 	foreach($keys as $obligatoire) {
 		if (!_request($obligatoire)) {
-			$erreurs[$obligatoire] = 'Ce champ est obligatoire.';
+			$erreurs[$obligatoire] = _T('clevermail:ce_champ_est_obligatoire');
 		}
 	}
 	foreach($mails as $mail) {
 		if (!email_valide(_request($mail))) {
-      $erreurs[$mail] = 'Cette adresse e-mail n\'est pas valide.';
+      $erreurs[$mail] = _T('cette_adresse_email_n_est_pas_valide');
     }
 	}
 	if (count($erreurs)) {
-		$erreurs['message_erreur'] = 'Veuillez corriger votre saisie.';
+		$erreurs['message_erreur'] = _T('clevermail:veuillez_corriger_votre_saisie');
 	}
 	return $erreurs;
 }

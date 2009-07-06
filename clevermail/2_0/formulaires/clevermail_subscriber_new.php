@@ -15,25 +15,25 @@ function formulaires_clevermail_subscriber_new_verifier_dist() {
 	if (
 	    (!isset($_FILES['cm_file']) || $_FILES['cm_file']['name'] == '' || !is_uploaded_file($_FILES['cm_file']['tmp_name']))
 	    && _request('cm_subs') == '') {
-    $erreurs['cm_file'] = 'Vous devez choisir un fichier...';
-    $erreurs['cm_subs'] = '...et/ou saisir des adresses.';
+    $erreurs['cm_file'] = _T('clevermail:vous_devez_choisir_un_fichier');
+    $erreurs['cm_subs'] = _T('clevermail:et_ou_saisir_des_adresses');
 	}
   if (isset($_FILES['cm_file']) && is_uploaded_file($_FILES['cm_file']['tmp_name'])) {
     $adresses = implode('', file($_FILES['cm_file']['tmp_name']));
     // TODO : utiliser plutôt la fonction email_valide()
     if (!ereg("^([^@ ]+@[^@ ]+\.[^@. ]+[,;\t\n\r ]+)*[^@ ]+@[^@ ]+\.[^@. ]+[,;\t\n\r ]*$", $adresses)) {
-      $erreurs['cm_file'] = 'Le format des adresses ne semble pas bon.';
+      $erreurs['cm_file'] = _T('clevermail:le_format_des_adresses_email_ne_semble_pas_bon');
     }
   }
   // TODO : utiliser plutôt la fonction email_valide()
   if (_request('cm_subs') != '' && !ereg("^([^@ ]+@[^@ ]+\.[^@. ]+[,;\n\r ]+)*[^@ ]+@[^@ ]+\.[^@. ]+[,;\t\n\r ]*$", _request('cm_subs'))) {
-    $erreurs['cm_subs'] = 'Le format des adresses ne semble pas bon.';
+    $erreurs['cm_subs'] = _T('clevermail:le_format_des_adresses_email_ne_semble_pas_bon');
 	}
 	if (sizeof(_request('cm_lists')) == 0) {
-    $erreurs['cm_lists'] = 'Vous devez choisir au moins une liste.';
+    $erreurs['cm_lists'] = _T('clevermail:vous_devez_choisir_au_moins_une_liste');
 	}
 	if (count($erreurs)) {
-		$erreurs['message_erreur'] = 'Veuillez corriger votre saisie.';
+		$erreurs['message_erreur'] = _T('clevermail:veuillez_corriger_votre_saisie');
 	}
 	return $erreurs;
 }
@@ -75,9 +75,9 @@ function formulaires_clevermail_subscriber_new_traiter_dist() {
     	}
     }
 	}
-  $msg = $nbNewSubs > 0 ? $nbNewSubs.' nouveaux abonnés' : 'aucun nouvel abonné';
-  $msg .= $nbNewSubs > 0 && $nbUpdSubs > 0 ? ' et ' : '';
-  $msg .= $nbUpdSubs > 0 ? $nbUpdSubs.' changements de mode d\'abonnement' : '';
+  $msg = $nbNewSubs > 0 ? $nbNewSubs._T('clevermail:n_nouveaux_abonnes') : _T('clevermail:aucun_nouvel_abonne');
+  $msg .= $nbNewSubs > 0 && $nbUpdSubs > 0 ? _T('clevermail:nouveaux_abonnes_et') : '';
+  $msg .= $nbUpdSubs > 0 ? $nbUpdSubs._T('clevermail:changements_mode_abonnement') : '';
   
   return array('message_ok' => $msg);
 }
