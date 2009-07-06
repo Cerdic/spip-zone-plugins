@@ -1,6 +1,6 @@
-<?php
-// This is a SPIP language file. Specific to ACS plugin
-  include_spip('lib/composant/composants_ajouter_langue');
+<?php // This is a SPIP language file. Specific to ACS plugin
+
+require_once _DIR_ACS.'lib/composant/composants_ajouter_langue.php';
 
 // traductions génériques utilisées dans la partie privée ET par les pinceaux (crayons des composants)
 $traductions_acs = array(

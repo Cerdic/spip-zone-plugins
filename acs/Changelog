@@ -27,6 +27,7 @@ Modele Cat pour ACS vesion 0.5:
  - Composant Video : correction positionnement du lien telecharger. Ajax.
  - Composant Mail : nouveau composant encapsulant #FORMULAIRE_ECRIRE_AUTEUR
  - Composant Module : gestion des marges en inclusion (evite doubles marges en edition avec le pinceau). Choix module horizontal / vertical (par defaut). Module peut contenir desormais 8 composants et non plus 6.
+ - Composant Recherche : nouveau design identique aux autres blocs.
  
  - nouveau fichier d'initialisation des composants avec des valeurs par defaut heritees.
  - validation xhtml 1.0 pages et composants du modele Cat.
