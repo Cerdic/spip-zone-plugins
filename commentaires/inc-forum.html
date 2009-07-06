@@ -1,10 +1,9 @@
 [(#REM) Cette balise (invisible) provoque le recalcul du forum la premiere fois qu'un message est poste (cf. inc/invalideur). ]
 [(#PARAMETRES_FORUM|?{''})]
 
-[(#REM) Microformatage de reference : http://microformats.org/wiki/comments-formats ]
 <B_commentaires>
 <div class="comments" id="comments">
-    <h2>[(#TOTAL_BOUCLE|>{1}|?{#TOTAL_BOUCLE ,''})]<:messages_forum:></h2>
+    <h2><:commentaires:commentaires_titre:></h2>
     [(#REM)<p class="explication"><a href="#URL_PAGE{backend}"><img src="#CHEMIN{feed.png}" width="10" height="10" alt="RSS" /></a> Vous pouvez suivre cette conversation en vous abonnant au <a href="#URL_PAGE{backend}">flux des commentaires</a> de cette page.</p>]
     <ul>
         <BOUCLE_commentaires(FORUMS) {statut IN publie} {id_rubrique ?}{id_article ?}{id_breve ?}{id_syndic ?} {plat} {par date}>

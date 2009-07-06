@@ -10,6 +10,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'messages_forum' => 'commentaires',
 'commentaire' => 'commentaire',
 'commentaires' => 'commentaires',
+'commentaires_titre' => 'Vos commentaires',
+'commentaires_tout' => 'Tous vos commentaires',
 
 // Formulaire de commentaires
 'form_pet_message_commentaire' => 'Ajoutez votre commentaire ici',
@@ -20,7 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'forum_votre_email' => 'Courriel (non&nbsp;publi&eacute;)',
 'forum_url' => 'Votre site web',
 
-'info_creation_paragraphe' => 'Ce formulaire accepte les raccourcis&nbsp;SPIP et le code HTML. Pour cr&eacute;er des paragraphes, laissez simplement des lignes vides.',
+'info_creation_paragraphe' => 'Ce formulaire accepte les raccourcis&nbsp;SPIP et le code&nbsp;HTML. Pour cr&eacute;er des paragraphes, laissez simplement des lignes vides.',
 
 'forum_voir_avant' => 'Pr&eacute;visualiser',
 'forum_message_definitif' => 'Confirmer l\'envoi',
