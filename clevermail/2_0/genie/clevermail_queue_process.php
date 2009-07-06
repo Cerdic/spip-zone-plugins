@@ -26,17 +26,6 @@ function genie_clevermail_queue_process_dist($verbose = 'no') {
 			$from = sql_getfetsel("set_value", "spip_cm_settings", "set_name='CM_MAIL_FROM'");
 			$return = sql_getfetsel("set_value", "spip_cm_settings", "set_name='CM_MAIL_RETURN'");
 
-			/*
-			$mail = new PHPMailer();
-			$mail->Subject = $subject;
-			$mail->Sender = $cm_mail_return;
-			$mail->From = $cm_mail_from;
-			$mail->FromName = $GLOBALS['meta']['nom_site'];
-			$mail->AddAddress($to);
-			$mail->AddReplyTo($cm_mail_from);
-			$mail->CharSet = $GLOBALS['meta']['charset'];
-      */
-			
 			// message content
 			$text = $post['pst_text'];
 			$text = str_replace("(\r\n|\n|\n)", CM_NEWLINE, $text);
@@ -79,6 +68,8 @@ function genie_clevermail_queue_process_dist($verbose = 'no') {
 			
 			if (sql_delete("spip_cm_posts_queued", "pst_id = ".intval($message['pst_id'])." AND sub_id = ".intval($message['sub_id']))) {
 				// message removed from queue, we can try to send it
+				// TODO : Et le charset ?
+				// TODO : Et le return-path ?
 				if ($envoyer_mail($to, $subject, $body, $from)) {
 					// message sent
 					sql_insertq("spip_cm_posts_done", array('pst_id' => intval($message['pst_id']), 'sub_id' => intval($message['sub_id'])));
