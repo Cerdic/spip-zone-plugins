@@ -24,7 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bookmarklet_lien' => 'Ajouter &agrave; @site@',
 'bookmarklet_explication' => 'D&eacute;placez ce bookmarklet dans les marques-pages de votre navigateur et cliquez dessus chaque fois que vous souhaitez ajouter un signet pour la page courante dans @site@.',
 'importer' => 'Importer',
-'importer_explication' => 'Exportez vos marque-pages d\'où ils sont stock&eacute;s actuellement (Firefox, IE, delicious, etc), puis t&eacute;l&eacute;chargez le fichier ici.',
+'importer_explication' => 'Exportez vos marque-pages d\'où ils sont stock&eacute;s actuellement (Firefox, IE, etc), puis t&eacute;l&eacute;chargez le fichier ici.',
 
 // Pour la configuration
 'configuration_titre' => 'Configuration des marque-pages',

@@ -9,7 +9,7 @@
 		<ul>
 			[(#SESSION{id_auteur}|!={#ID_AUTEUR}|oui)
 				<li class="copier">
-					<a title="<:marquepages:copier:>" href="[(#URL_PAGE{#ENV{ajout,marquepages_ajouter}}|parametre_url{id_rubrique,#ENV{id_rubrique,#CONFIG{marquepages/rubrique}}}|parametre_url{mp_url,#URL_SITE}|parametre_url{mp_titre,#TITRE}|parametre_url{redirect,#ENV{self}})]">
+					<a title="<:marquepages:copier:>" href="[(#VAL{nouveau}|url_mp_editer|parametre_url{id_rubrique,#ENV{id_rubrique,#CONFIG{marquepages/rubrique}}}|parametre_url{mp_url,#URL_SITE}|parametre_url{mp_titre,#TITRE}|parametre_url{redirect,#ENV{self}})]">
 						<span><:marquepages:copier:></span>
 					</a>
 				</li>

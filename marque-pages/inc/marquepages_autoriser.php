@@ -78,10 +78,10 @@ function autoriser_marquepage_modifier_dist($faire, $type, $id, $qui, $opt){
 	
 	return
 		$requete
-		and autoriser('voir', 'rubrique', intval($requete['site.id_rubrique']), $qui, $opt)
+		and autoriser('voir', 'rubrique', intval($requete['id_rubrique']), $qui, $opt)
 		and(
-			intval($qui['id_auteur']) == intval($requete['marquepage.id_auteur'])
-			or autoriser('publierdans', 'rubrique', intval($requete['site.id_rubrique']), $qui, $opt)
+			intval($qui['id_auteur']) == intval($requete['id_auteur'])
+			or autoriser('publierdans', 'rubrique', intval($requete['id_rubrique']), $qui, $opt)
 		);
 	
 }
