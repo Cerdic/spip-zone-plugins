@@ -7,7 +7,7 @@
 <li class="item">
 <h3>#LESVALEURS{ligne_1,' '}</h3>
 [(#LESVALEURS{texte_1,' '}|PtoBR)]
-<p class="actions">&#91;<a href="[(#URL_ECRIRE{sigle_edit,id_sigle=#ID_DONNEE}|parametre_url{retour,#SELF})]"><:bouton_modifier:></a>&#93;</p>
+<p class="actions">&#91;<a href="[(#URL_ECRIRE{sigle_edit,id_sigle=#ID_DONNEE}|parametre_url{retour,#SELF})]"><:bouton_modifier:></a>&#93;&#91;<a href="#URL_ACTION_AUTEUR{instituer_forms_donnee,#ID_DONNEE-poubelle,#ENV{retour,#SELF}}"><:acronymessigles:texte_supprimer:></a>&#93;</p>
 </li>
 </BOUCLE_acronymes>
 </ul>
