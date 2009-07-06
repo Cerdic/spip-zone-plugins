@@ -198,7 +198,6 @@ function formulaires_contact_traiter_dist($id_auteur=''){
 		'id_auteur IN ('.join(', ', $destinataire).')'
 	);
 	$mail = array_map('reset', $mail);
-	$mail = join(', ', $mail);
 	// S'il n'y a pas le plugin facteur, on met l'(es) adresse(s) sous forme de chaine de caractères.
 	if (!defined("_DIR_PLUGIN_FACTEUR"))
 		$mail = join(', ', $mail);
