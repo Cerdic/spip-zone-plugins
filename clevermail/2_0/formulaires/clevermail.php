@@ -74,13 +74,41 @@ function formulaires_clevermail_traiter_dist($lst_id = 0) {
     	// Nouvel abonnement
     	switch ($listData['lst_moderation']) {
     		case 'open':
-    			$actionId = md5('subscribe#'.$listId.'#'.$recId.'#'.time());
+    			$actionId = md5('subscribe#'.$lst_id.'#'.$sub_id.'#'.time());
           sql_insertq("spip_cm_lists_subscribers", array('lst_id' => intval($lst_id), 'sub_id' => intval($sub_id), 'lsr_mode' => intval(_request('lsr_mode')), 'lsr_id' => $actionId));
           $message .= (strlen($message) > 0 ? '<br />' : '')._T('clevermail:inscription_validee').$listData['lst_name'];
     			break;
     		case 'email':
-    			// TODO : à faire
-    			$message .= (strlen($message) > 0 ? '<br />' : '')._T('clevermail:ok');
+    			// TODO : à finir
+          $actionId = md5('subscribe#'.$lst_id.'#'.$sub_id.'#'.time());
+          if (sql_countsel("spip_cm_pending", "lst_id=".intval($lst_id)." AND sub_id=".intval($sub_id)) == 0) {
+          	sql_insertq("spip_cm_pending", array('lst_id' => intval($lst_id), 'sub_id' => intval($sub_id), 'pnd_action' => 'subscribe', 'pnd_mode' => intval(_request('lsr_mode')), 'pnd_action_date' => time(), 'pnd_action_id' => $actionId));
+          }
+          $envoyer_mail = charger_fonction('envoyer_mail', 'inc');
+          // Composition du message de demande de confirmation
+          $template = array();
+          $template['@@NOM_LETTRE@@'] = $list['lst_name'];
+          $template['@@DESCRIPTION@@'] = $list['lst_comment'];
+          $template['@@FORMAT_INSCRIPTION@@']  = ($mode == 1 ? 'HTML' : 'texte');
+          $template['@@EMAIL@@'] = $address;
+          $template['@@URL_CONFIRMATION@@'] = $GLOBALS['meta']['adresse_site'].'/spip.php?page=clevermail_do&id='.$actionId;
+          $body = $listData['lst_subscribe_text'];
+          while (list($from, $to) = each($template)) {
+            $body = str_replace($from, $to, $body);
+          }
+          $to = _request('sub_email');
+          $subject = (intval($listData['lst_subject_tag']) == 1 ? '['.$listData['lst_name'].'] ' : '').$listData['lst_subscribe_subject'];
+          $from = sql_getfetsel("set_value", "spip_cm_settings", "set_name='CM_MAIL_FROM'");
+          $return = sql_getfetsel("set_value", "spip_cm_settings", "set_name='CM_MAIL_RETURN'");
+          
+          // message removed from queue, we can try to send it
+          // TODO : Et le charset ?
+          // TODO : Et le return-path ?
+          if ($envoyer_mail($to, $subject, $body, $from)) {
+            $message .= (strlen($message) > 0 ? '<br />' : '')._T('clevermail:ok').$listData['lst_name'];
+          } else {
+            $message .= (strlen($message) > 0 ? '<br />' : '')._T('clevermail:send_error').$listData['lst_name'];
+          }
     			break;
     		case 'mod':
           // TODO : à faire
@@ -99,51 +127,6 @@ function formulaires_clevermail_traiter_dist($lst_id = 0) {
 /*
 	if($_POST['cm_sub_return']) {
 				switch($list['lst_moderation']) {
-					case 'open':
-						$actionId = md5('subscribe#'.$listId.'#'.$recId.'#'.time());
-						spip_query("INSERT INTO cm_lists_subscribers (lst_id, sub_id, lsr_mode, lsr_id) VALUES ("._q($listId).", "._q($recId).", "._q($mode).", '$actionId')");
-						$cm_sub = _T('clevermail:inscription_validee');
-					break;
-
-					case 'email':
-						$actionId = md5('subscribe#'.$listId.'#'.$recId.'#'.time());
-						$result = spip_fetch_array(spip_query("SELECT COUNT(*) AS nb FROM cm_pending WHERE lst_id = "._q($listId)." AND sub_id = "._q($recId)));
-						if ($result['nb'] == 0) {
-							spip_query("INSERT INTO cm_pending (lst_id, sub_id, pnd_action, pnd_mode, pnd_action_date, pnd_action_id) VALUES ("._q($listId).", "._q($recId).", 'subscribe', "._q($mode).", ".time().", "._q($actionId).")");
-						}
-
-						// Composition du message de demande de confirmation
-						$list = spip_fetch_array(spip_query("SELECT * FROM cm_lists WHERE lst_id="._q($listId)));
-						$subject = ((int)$list['lst_subject_tag'] == 1 ? '['.$list['lst_name'].'] ' : '').$list['lst_subscribe_subject'];
-						$template = array();
-						$template['@@NOM_LETTRE@@'] = $list['lst_name'];
-						$template['@@DESCRIPTION@@'] = $list['lst_comment'];
-						$template['@@FORMAT_INSCRIPTION@@']  = ($mode == 1 ? 'HTML' : 'texte');
-						$template['@@EMAIL@@'] = $address;
-						$template['@@URL_CONFIRMATION@@'] = $GLOBALS['meta']['adresse_site'].'/spip.php?page=clevermail_do&id='.$actionId;
-						$message = $list['lst_subscribe_text'];
-						while (list($from, $to) = each($template)) {
-							$message = str_replace($from, $to, $message);
-						}
-
-						$mail = new PHPMailer();
-						$mail->Subject = $subject;
-						$cm_mail_from = spip_fetch_array(spip_query("SELECT set_value FROM cm_settings WHERE set_name='CM_MAIL_FROM'"));
-						$mail->From = $cm_mail_from['set_value'];
-						$mail->FromName = $GLOBALS['meta']['nom_site'];
-						$mail->AddAddress($address);
-						$mail->CharSet = $GLOBALS['meta']['charset'];
-						$mail->IsHTML(false);
-						$mail->Body = $message;
-
-						 // Envoi du message
-						if($mail->Send()) {
-							$cm_sub = _T('clevermail:ok');
-						} else {
-							$cm_sub = _T('clevermail:send_error');
-						}
-					break;
-
 					case 'mod':
 						$actionId = md5('subscribe#'.$listId.'#'.$recId.'#'.time());
 						$result = spip_fetch_array(spip_query("SELECT COUNT(*) AS nb FROM cm_pending WHERE lst_id = "._q($listId)." AND sub_id = "._q($recId)));

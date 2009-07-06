@@ -13,7 +13,7 @@ function action_clevermail_list_subscriber_remove_dist() {
 	    sql_delete("spip_cm_lists_subscribers", "lsr_id = ".sql_quote($lsr_id));
       sql_delete("spip_cm_posts_queued", "sub_id = ".intval($abonnement['sub_id']));
       if (sql_countsel("spip_cm_lists_subscribers", "sub_id=".intval($abonnement['sub_id'])) == 0) {
-      	// Plus aucun abonnement, suppression générale
+      	// No more subscription, subscriber address is removed
         sql_delete("spip_cm_subscribers", "sub_id = ".intval($abonnement['sub_id']));
       }
 	    spip_log('Suppression du l\'abonnement de « '.$abonne.' » à la liste « '.$liste.' » (id='.$abonnement['lst_id'].')', 'clevermail');
