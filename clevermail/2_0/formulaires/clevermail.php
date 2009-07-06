@@ -84,7 +84,6 @@ function formulaires_clevermail_traiter_dist($lst_id = 0) {
           if (sql_countsel("spip_cm_pending", "lst_id=".intval($lst_id)." AND sub_id=".intval($sub_id)) == 0) {
           	sql_insertq("spip_cm_pending", array('lst_id' => intval($lst_id), 'sub_id' => intval($sub_id), 'pnd_action' => 'subscribe', 'pnd_mode' => intval(_request('lsr_mode')), 'pnd_action_date' => time(), 'pnd_action_id' => $actionId));
           }
-          $envoyer_mail = charger_fonction('envoyer_mail', 'inc');
           // Composition du message de demande de confirmation
           $template = array();
           $template['@@NOM_LETTRE@@'] = $listData['lst_name'];
@@ -104,6 +103,7 @@ function formulaires_clevermail_traiter_dist($lst_id = 0) {
           // message removed from queue, we can try to send it
           // TODO : Et le charset ?
           // TODO : Et le return-path ?
+          $envoyer_mail = charger_fonction('envoyer_mail', 'inc');
           if ($envoyer_mail($to, $subject, $body, $from)) {
             $message .= (strlen($message) > 0 ? '<br />' : '')._T('clevermail:ok').$listData['lst_name'];
           } else {

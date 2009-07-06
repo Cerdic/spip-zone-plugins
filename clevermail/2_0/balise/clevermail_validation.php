@@ -8,7 +8,7 @@ function balise_CLEVERMAIL_VALIDATION_dyn() {
 		if (sql_countsel("spip_cm_pending", "pnd_action_id=".sql_quote($_GET['id'])) == 1) {
   		$action = sql_fetsel("*", "spip_cm_pending", "pnd_action_id=".sql_quote($_GET['id']));
       switch ($action['pnd_action']) {
-        case 'subscribe' :
+        case 'subscribe':
           if (sql_countsel("spip_cm_lists_subscribers", "lst_id = ".intval($action['lst_id'])." AND sub_id = ".intval($action['sub_id'])) == 1) {
             sql_updateq("spip_cm_lists_subscribers", array('lsr_mode' => $action['pnd_mode'], 'lsr_id' => $action['pnd_action_id']), "lst_id = ".$action['lst_id']." AND sub_id = ".$action['sub_id']);
             $return = '<p>'._T('clevermail:deja_inscrit').'</p>';
@@ -21,34 +21,48 @@ function balise_CLEVERMAIL_VALIDATION_dyn() {
             $list = sql_fetsel("*", "spip_cm_lists", "lst_id = ".intval($action['lst_id']));
             $to = $list['lst_moderator_email'];
             $subject = '['.addslashes($list['lst_name']).'] Inscription de '.addslashes($sub['sub_email']);
-            $body = 'Alerte envoyée par le plugin CleverMail du site '.$GLOBALS['meta']['nom_site'].' ( '.$GLOBALS['meta']['adresse_site'].' ) :'."\n\n".'Inscription de '.addslashes($sub['sub_email']).' à la liste '.addslashes($list['lst_name']);
+            $body = 'Alerte envoyée par le plugin CleverMail du site '.$GLOBALS['meta']['nom_site'].' ( '.$GLOBALS['meta']['adresse_site'].' ) :'."\n\n";
+            $body .= 'Inscription de '.addslashes($sub['sub_email']).' à la liste '.addslashes($list['lst_name']);
             $from = sql_getfetsel("set_value", "spip_cm_settings", "set_name='CM_MAIL_FROM'");
             $envoyer_mail = charger_fonction('envoyer_mail', 'inc');
             $envoyer_mail($to, $subject, $body, $from);
           }
-	        break;
-	      case 'unsubscribe' :
-	      	/*
-		    	spip_query("DELETE FROM cm_pending WHERE sub_id = ".$action['sub_id']);
-		     	spip_query("DELETE FROM cm_posts_queued WHERE sub_id = ".$action['sub_id']);
-	        spip_query("DELETE FROM cm_lists_subscribers WHERE lst_id = ".$action['lst_id']." AND sub_id = ".$action['sub_id']);
-	        $return = '<p>'._T('clevermail:desinscription_validee').'</p>';
-          $sub = spip_fetch_array(spip_query("SELECT * FROM cm_subscribers WHERE sub_id = ".$action['sub_id']));
-          $list = spip_fetch_array(spip_query("SELECT * FROM cm_lists WHERE lst_id = ".$action['lst_id']));
-          $cm_mail_admin = spip_fetch_array(spip_query("SELECT set_value FROM cm_settings WHERE set_name='CM_MAIL_ADMIN'"));
-          $cm_mail_from = spip_fetch_array(spip_query("SELECT set_value FROM cm_settings WHERE set_name='CM_MAIL_FROM'"));
-      		// E-mail d'alerte envoye au moderateur de la liste s'il est renseigne sinon a l'administrateur de CleverMail
-          $mail = new PHPMailer();
-					$mail->Subject = '['.addslashes($list['lst_name']).'] D&eacute;sinscription de '.addslashes($sub['sub_email']);
-					$mail->From = $cm_mail_from['set_value'];
-					$mail->FromName = $GLOBALS['meta']['nom_site'];
-					$mail->AddAddress(($list['lst_moderator_email'] != '' ? $list['lst_moderator_email'] : $cm_mail_admin['set_value']));
-					$mail->Send();
-          */
+          break;
+	      case 'unsubscribe':
+          if (sql_countsel("spip_cm_lists_subscribers", "lst_id = ".intval($action['lst_id'])." AND sub_id = ".intval($action['sub_id'])) == 0) {
+            $return = '<p>'._T('clevermail:deja_desinscrit').'</p>';
+          } else {
+          	// remove the subscription to the list
+            sql_delete("spip_cm_lists_subscribers", "lst_id = ".intval($action['lst_id'])." AND sub_id = ".intval($action['sub_id']));
+            // remove posts from this list already queued
+            sql_delete("spip_cm_posts_queued", "sub_id = ".intval($action['sub_id'])." AND pst_id IN (".implode(',', sql_fetsel("lst_id", "spip_cm_posts", "lst_id=".intval($action['lst_id']), "lst_id")).")");
+            
+            $return = '<p>'._T('clevermail:desinscription_validee').'</p>';
+
+            // E-mail d'alerte envoye au moderateur de la liste
+            $sub = sql_fetsel("*", "spip_cm_subscribers", "sub_id = ".intval($action['sub_id']));
+            $list = sql_fetsel("*", "spip_cm_lists", "lst_id = ".intval($action['lst_id']));
+            $to = $list['lst_moderator_email'];
+            $subject = '['.addslashes($list['lst_name']).'] Désinscription de '.addslashes($sub['sub_email']);
+            $body = 'Alerte envoyée par le plugin CleverMail du site '.$GLOBALS['meta']['nom_site'].' ( '.$GLOBALS['meta']['adresse_site'].' ) :'."\n\n";
+            $body .= 'Désinscription de '.addslashes($sub['sub_email']).' de la liste '.addslashes($list['lst_name']);
+            $from = sql_getfetsel("set_value", "spip_cm_settings", "set_name='CM_MAIL_FROM'");
+            $envoyer_mail = charger_fonction('envoyer_mail', 'inc');
+            $envoyer_mail($to, $subject, $body, $from);
+          }
+	      	
+		      $abonnement = sql_fetsel("sub_id, lst_id", "spip_cm_lists_subscribers", "lsr_id=".sql_quote($lsr_id));
+		      $abonne = sql_getfetsel("sub_email", "spip_cm_subscribers", "sub_id=".intval($abonnement['sub_id']));
+		      $liste = sql_getfetsel("lst_name", "spip_cm_lists", "lst_id=".intval($abonnement['lst_id']));
+		      if (sql_countsel("spip_cm_lists_subscribers", "sub_id=".intval($abonnement['sub_id'])) == 0) {
+		        // No more subscription, subscriber address is removed
+		        sql_delete("spip_cm_subscribers", "sub_id = ".intval($abonnement['sub_id']));
+		      }
+		      spip_log('Suppression du l\'abonnement de « '.$abonne.' » à la liste « '.$liste.' » (id='.$abonnement['lst_id'].')', 'clevermail');
           break;
       }
       sql_delete("spip_cm_pending", "pnd_action_id=".sql_quote($_GET['id']));
-	  } else {
+		} else {
 	    $return = '<p>'._T('clevermail:deja_validee').'</p>';
     }
   }
