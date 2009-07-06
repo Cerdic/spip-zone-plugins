@@ -51,4 +51,9 @@ Reste à faire :
     <icone>img_pack/enveloppe.png</icone>
     <url>clevermail</url>
   </bouton> 
+  <bouton id='clevermail2' parent='bando_publication' position='-1'>
+    <icone>img_pack/enveloppe.png</icone>
+    <titre>CleverMail</titre>
+    <url>clevermail</url>
+  </bouton>
 </plugin>
