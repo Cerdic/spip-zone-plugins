@@ -87,14 +87,14 @@ function formulaires_clevermail_traiter_dist($lst_id = 0) {
           $envoyer_mail = charger_fonction('envoyer_mail', 'inc');
           // Composition du message de demande de confirmation
           $template = array();
-          $template['@@NOM_LETTRE@@'] = $list['lst_name'];
-          $template['@@DESCRIPTION@@'] = $list['lst_comment'];
+          $template['@@NOM_LETTRE@@'] = $listData['lst_name'];
+          $template['@@DESCRIPTION@@'] = $listData['lst_comment'];
           $template['@@FORMAT_INSCRIPTION@@']  = ($mode == 1 ? 'HTML' : 'texte');
-          $template['@@EMAIL@@'] = $address;
+          $template['@@EMAIL@@'] = _request('sub_email');
           $template['@@URL_CONFIRMATION@@'] = $GLOBALS['meta']['adresse_site'].'/spip.php?page=clevermail_do&id='.$actionId;
           $body = $listData['lst_subscribe_text'];
-          while (list($from, $to) = each($template)) {
-            $body = str_replace($from, $to, $body);
+          while (list($translateFrom, $translateTo) = each($template)) {
+            $body = str_replace($translateFrom, $translateTo, $body);
           }
           $to = _request('sub_email');
           $subject = (intval($listData['lst_subject_tag']) == 1 ? '['.$listData['lst_name'].'] ' : '').$listData['lst_subscribe_subject'];
