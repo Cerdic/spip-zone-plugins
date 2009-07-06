@@ -5,6 +5,7 @@
   <BOUCLE_posts(SPIP_CM_POSTS){lst_id} />#SET{nbPosts,#TOTAL_BOUCLE}<//B_posts>
   <li class="item">
     <p><strong>#LST_NAME</strong> (#LST_MODERATION)</p>
+    <div>[(#LST_COMMENT|propre)]</div>
     <div>
 	    [(#GET{nbSubs}|>{0}|oui)
 	      <a href="[(#URL_ECRIRE{clevermail_subscribers}|parametre_url{lst_id,#LST_ID})]">#GET{nbSubs} [ (#GET{nbSubs}|singulier_ou_pluriel{clevermail:abonne,clevermail:abonnes})]</a> 
