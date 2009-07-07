@@ -1,5 +1,8 @@
 <div id="sidebar">
 <div id="blognav">
+
+	#PIPELINE{spipclear_blognav_debut}
+	
 	[(#CONFIG{spipclear/navigation_desactiver_calendrier}|=={on}|non)
 	[(#MODELE{rubrique_calendrier}{id_rubrique=#ID_RUBRIQUE}{self=#ENV{self}}{var_date=archives}{date=#ENV{archives,#DATE}})]
 	]
@@ -57,6 +60,8 @@
 	]
 	
 	#PIPELINE{boussole}
+	
+	#PIPELINE{spipclear_blognav_fin}
 	
 </div>
 <div id="blogextra">
