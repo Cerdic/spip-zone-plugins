@@ -1,3 +1,3 @@
 <BOUCLE_auteur(AUTEURS){tout}{id_auteur}>
-	[(#LOGO_AUTEUR||sinon{#CHEMIN{images/gravatar.png}}|image_reduire{60,0}|image_recadre{60,60,center}|inserer_attribut{alt,''}|inserer_attribut{class,gravatar})]
+	[(#LOGO_AUTEUR||sinon{#CHEMIN{images/gravatar.png}}|image_passe_partout{60}|image_recadre{60,60,center}|inserer_attribut{alt,''}|inserer_attribut{class,gravatar})]
 </BOUCLE_auteur>
