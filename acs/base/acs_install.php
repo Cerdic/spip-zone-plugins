@@ -62,7 +62,7 @@ function acs_reset_vars() {
 // Copie recursive d'un dossier
 function copy_dir($dir2copy, $dir_paste) {
 // On verifie si $dir2copy existe et est un dossier
-if ($dir2copy && is_dir($dir2copy)) {
+if ($dir2copy && @is_dir($dir2copy)) {
 	// Si le dossier destination n'existe pas, on le cree
 	if (!mkdir_recursive($dir_paste))
 		continue;
@@ -72,7 +72,7 @@ if ($dir2copy && is_dir($dir2copy)) {
   		if ($file=='.' || $file=='..' || substr($file, 0, 1)=='.')
   			continue; 
   		// S'il s'agit d'un dossier, on relance la fonction récursive
-  		if(is_dir($dir2copy.$file))
+  		if(@is_dir($dir2copy.$file))
   			copy_dir($dir2copy.$file.'/', $dir_paste.$file.'/');
   		// S'il sagit d'un fichier, on le copie
   		else

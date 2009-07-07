@@ -9,7 +9,7 @@ Copyright Daniel FAIVRE, 2007-2008
 Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 
 
-]<INCLURE{fond=composants/fond/entete}{self=#SELF}{env=#ENV}{page=plan}{mrobots=none}>
+][(#CONFIG{langues_utilisees}|detecte_langue{#SELF})]<INCLURE{fond=composants/fond/entete}{self=#SELF}{env=#ENV}{page=plan}{mrobots=none}>
 <div id="colonne1"><div class="spacer"></div>[(#REM) Menu de navigation laterale (colonne 1)]
   <INCLURE{fond=composants/module/module}{self=#SELF}{env=#ENV}{nic=21}>
 </div>[(#REM) fin colonne1 (navigation) ]

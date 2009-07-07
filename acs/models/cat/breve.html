@@ -9,7 +9,7 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 
 Page d'une brève.
 
-]<BOUCLE_breve_principal(BREVES) {id_breve} {lang ?}>
+][(#CONFIG{langues_utilisees}|detecte_langue{#SELF})]<BOUCLE_breve_principal(BREVES) {id_breve} {lang ?}>
 <INCLURE{fond=composants/fond/entete}{env=#ENV}{page=breve}{title=<:dernieres_breves:>}{mexpires=7*86400}>
 <div id="colonne1"><div class="spacer"></div>[(#REM) Menu de navigation laterale (colonne 1)]
   <div class="mg">

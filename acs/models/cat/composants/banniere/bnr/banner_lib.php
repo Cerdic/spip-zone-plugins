@@ -18,7 +18,7 @@ function getBanners($path = '.', $exclut = "")
  function expFp($folder = ".", $filetype = "", $exclut="")
     {
     $currdir=getcwd();
-    if ($folder && is_dir("$currdir/$folder"))
+    if ($folder && @is_dir("$currdir/$folder"))
         chdir("$currdir/$folder");
     $dh = opendir(".");
 		$a_files = array();
@@ -30,7 +30,7 @@ function getBanners($path = '.', $exclut = "")
 						($file != $exclut)
 					)
             $a_files[] = $file;
-        if (is_dir($file) && $file!="." && $file!=".." && $file!=".xvpics")
+        if (@is_dir($file) && $file!="." && $file!=".." && $file!=".xvpics")
             $a_files[$file] = expFp($file, $filetype);
         }
     closedir($dh);

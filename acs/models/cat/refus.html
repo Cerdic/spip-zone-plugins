@@ -10,7 +10,7 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 
 Liste des articles refusés
 
-]<INCLURE{fond=composants/fond/entete}{self=#SELF}{page=plan}{mrobots=none}>
+][(#CONFIG{langues_utilisees}|detecte_langue{#SELF})]<INCLURE{fond=composants/fond/entete}{self=#SELF}{page=plan}{mrobots=none}>
 <div id="colonne1"><div class="spacer"></div>[(#REM) Menu de navigation laterale (colonne 1)]
 	<div class="mg">[(#REM) Colonne 1 - Menu de navigation par rubriques ]
 		<INCLURE{fond=composants/module/module}{self=#SELF}{env=#ENV}{nic=21}>

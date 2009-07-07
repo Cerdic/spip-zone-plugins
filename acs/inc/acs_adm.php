@@ -137,7 +137,7 @@ function list_models(){
   $squelettes = array();
   if ($d = @opendir(_DIR_PLUGIN_ACS.'models')) {
     while (false !== ($file = @readdir($d))) {
-      if ($file != "." && $file != ".." && substr($file, 0, 1) != '.' && is_dir(_DIR_PLUGIN_ACS.'models/'.$file)) {
+      if ($file != "." && $file != ".." && substr($file, 0, 1) != '.' && @is_dir(_DIR_PLUGIN_ACS.'models/'.$file)) {
         $squelettes[] = $file;
       }
     }

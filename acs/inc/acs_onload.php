@@ -95,8 +95,8 @@ function acs_autorise() {
  * @return boolean returns TRUE if exists or made or FALSE on failure.
  */
 function mkdir_recursive($pathname) {
-    is_dir(dirname($pathname)) || mkdir_recursive(dirname($pathname));
-    return is_dir($pathname) || @mkdir($pathname);
+    @is_dir(dirname($pathname)) || mkdir_recursive(dirname($pathname));
+    return @is_dir($pathname) || @mkdir($pathname);
 }
 
 // Utilise par la fonction balise_VAR()

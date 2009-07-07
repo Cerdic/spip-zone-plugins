@@ -16,7 +16,7 @@
   comme le plugin Lecteur_multimedia ou le lecteur multimedia d'ACS.
 
 ]
-  #SET{document,#EVAL{is_dir(_DIR_PLUGIN_DW2)}|?{#URL_DOC_OUT,#ENV{lien}}}
+  #SET{document,#EVAL{@is_dir(_DIR_PLUGIN_DW2)}|?{#URL_DOC_OUT,#ENV{lien}}}
   [(#MODE|=={vignette}|?{' '})
 	#SET{fichier,#URL_DOCUMENT}
 	#SET{width,#LARGEUR}

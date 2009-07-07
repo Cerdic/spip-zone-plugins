@@ -12,7 +12,7 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
    Le fichier est en cache dans SPIP, mais les navigateurs ne doivent pas
    conserver cette page en memoire
 
-]<INCLURE{fond=composants/fond/entete}{self=#SELF}{env=#ENV}{page=login}>
+][(#CONFIG{langues_utilisees}|detecte_langue{#SELF})]<INCLURE{fond=composants/fond/entete}{self=#SELF}{env=#ENV}{page=login}>
 <div id="colonne1"><div class="spacer"></div>[(#REM) Menu de navigation laterale (colonne 1)]
     <INCLURE{fond=composants/module/module}{self=#SELF}{env=#ENV}{nic=21}>
 </div>[(#REM) fin colonne1 (navigation) ]
