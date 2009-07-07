@@ -22,7 +22,8 @@
 	  'nouveaux_abonnes_et' => ' et ',
 	  'changements_mode_abonnement' => ' changements de mode d\'abonnement',
 	  'inscription_deja_abonne_meme_mode' => 'Vous étiez déjà inscrit à la liste « @lst_name@ » dans ce même mode.',
-	  'inscription_deja_abonne_autre_mode' => 'Vous étiez déjà inscrit à la liste « @lst_name@ » dans un autre mode.',
+	  'inscription_deja_abonne_autre_mode' => 'Vous étiez déjà inscrit à la liste « @lst_name@ » dans un autre mode, changement opéré.',
+	  'bouton_inscription' => 'S\'inscrire', 
 
 		// Front
 		'email' => 'E-mail :',
@@ -44,7 +45,18 @@
 	  'front_clevermail_action_validation' => 'Validation d\'une opération',
 	  'front_clevermail_unsubscription_query' => 'Demande de désinscription',
 
-		// Back
+		// Back ?exec=clevermail
+		'aucun_message_en_attente' => 'aucun en attente',
+    'un_message_en_attente' => '1 en attente',
+	  'plusieurs_messages_en_attente' => '@nb@ en attente',
+    'aucun_message_en_cours_envoi' => 'aucun en cours d\'envoi',
+    'un_message_en_cours_envoi' => '1 en cours d\'envoi',
+    'plusieurs_messages_en_cours_envoi' => '@nb@ en cours d\'envoi',
+    'aucun_message_envoye' => 'aucun envoyé',
+    'un_message_envoye' => '1 envoyé',
+    'plusieurs_messages_envoyes' => '@nb@ envoyés',
+	
+		// Back reste
 		'administration' => 'Administration de CleverMail',
 		'liste_lettres' => 'Liste des lettres d\'information',
 		'creer_lettre' => 'Cr&eacute;er une lettre d\'information',

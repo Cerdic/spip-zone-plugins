@@ -26,6 +26,7 @@ Reste à faire :
 	<icon>img_pack/lettre-24.png</icon>
 	<install>base/clevermail.php</install>
 	<options>clevermail_options.php</options>
+  <fonctions>clevermail_fonctions.php</fonctions>
 	<prefix>clevermail</prefix>
   <pipeline>
     <nom>declarer_tables_principales</nom>
