@@ -45,7 +45,17 @@
 	  'front_clevermail_action_validation' => 'Validation d\'une opération',
 	  'front_clevermail_unsubscription_query' => 'Demande de désinscription',
 
-		// Back ?exec=clevermail
+	  // Back Office : toutes pages
+    'administration' => 'Administration de CleverMail',
+	
+	  // Back Office : menu
+    'liste_lettres' => 'Liste des lettres d\'information',
+    'creer_lettre' => 'Cr&eacute;er une lettre d\'information',
+    'liste_abonnes' => 'Liste des abonn&eacute;s',
+    'ajouter_abonne' => 'Ajouter un abonn&eacute;',
+    'parametres' => 'Param&egrave;tres',
+	
+		// Back Office : ?exec=clevermail
 		'aucun_message_en_attente' => 'aucun en attente',
     'un_message_en_attente' => '1 en attente',
 	  'plusieurs_messages_en_attente' => '@nb@ en attente',
@@ -57,13 +67,6 @@
     'plusieurs_messages_envoyes' => '@nb@ envoyés',
 	
 		// Back reste
-		'administration' => 'Administration de CleverMail',
-		'liste_lettres' => 'Liste des lettres d\'information',
-		'creer_lettre' => 'Cr&eacute;er une lettre d\'information',
-		'liste_abonnes' => 'Liste des abonn&eacute;s',
-		'ajouter_abonne' => 'Ajouter un abonn&eacute;',
-		'parametres' => 'Param&egrave;tres',
-		'rechercher_abonne' => 'Rechercher un abonn&eacute; :',
 		'editer_lettre' => 'Editer la lettre d\'information',
 		'abonne' => 'abonn&eacute;',
 		'abonnes' => 'abonn&eacute;s',
