@@ -28,11 +28,11 @@
 			$boucle->modificateur['crit_id_mot']=array();
 			$boucle->modificateur['crit_id_mot']['select'][] =  "donnees_champs.valeur AS id_mot";
 			$boucle->modificateur['crit_id_mot']['from']["donnees_champs"] =  "spip_forms_donnees_champs";
-			$boucle->modificateur['crit_id_mot']['from']["champs"] =  "spip_forms_champs";
-			$boucle->modificateur['crit_id_mot']['where'][]= array("'='", "'$id_table.id_form'", "'champs.id_form'");
-			$boucle->modificateur['crit_id_mot']['where'][]= array("'='", "'champs.type'", "'\"mot\"'");
-			$boucle->modificateur['crit_id_mot']['where'][]= array("'='", "'donnees_champs.champ'", "'champs.champ'");
 			$boucle->modificateur['crit_id_mot']['where'][]= array("'='", "'donnees_champs.id_donnee'", "'$id_table.id_donnee'");
+			#$boucle->modificateur['crit_id_mot']['from']["champs"] =  "spip_forms_champs";
+			#$boucle->modificateur['crit_id_mot']['where'][]= array("'='", "'$id_table.id_form'", "'champs.id_form'");
+			#$boucle->modificateur['crit_id_mot']['where'][]= array("'='", "'champs.type'", "'\"mot\"'");
+			$boucle->modificateur['crit_id_mot']['where'][]= array("'LIKE'", "'donnees_champs.champ'", "'\'mot%\''");
 			//$boucle->modificateur['crit_id_mot']['group'][] = $id_table . '.id_donnee'; 
 	
 			$t = "donnees_champs";
