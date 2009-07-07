@@ -35,7 +35,7 @@ function formulaires_clevermail_verifier_dist($lst_id = 0) {
   }
   include_spip('inc/filtres');
   if (_request('sub_email') && !email_valide(_request('sub_email'))) {
-    $erreurs['sub_email'] = _T('cette_adresse_email_n_est_pas_valide');
+    $erreurs['sub_email'] = _T('clevermail:cette_adresse_email_n_est_pas_valide');
   }
 	if (count($erreurs)) {
     $erreurs['message_erreur'] = _T('clevermail:veuillez_corriger_votre_saisie');
