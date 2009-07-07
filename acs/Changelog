@@ -29,10 +29,11 @@ Modele Cat pour ACS vesion 0.5:
  - Composant Module : gestion des marges en inclusion (evite doubles marges en edition avec le pinceau). Choix module horizontal / vertical (par defaut). Module peut contenir desormais 8 composants et non plus 6.
  - Composant Recherche : nouveau design identique aux autres blocs.
  
+ - detection des langues prefereees du navigateur.
  - nouveau fichier d'initialisation des composants avec des valeurs par defaut heritees.
  - validation xhtml 1.0 pages et composants du modele Cat.
  - modification de tous les composants pour permettre l'heritage de valeurs d'autres composants avec la balise #VAR
- - habillage.css : override des styles de formulaires de la dist SPIP remis e jour.
+ - habillage.css : override des styles de formulaires de la dist SPIP remis à jour.
  - formulaire_ecrire_auteur.html & formulaire_forum.html supprimes : on utilise la dist SPIP.
  - inc-article.html : suppression boucle "du même auteur", remplacée par un composant Auteurs, integration avec plugin recommander.
  - mot.html : on masque tous les groupes de mots-clés qui commencent par un "_" (réservés aux mots-clés techniques), ainsi que le groupe en cours dans le bloc "autres groupes de mots-clés".  Suppression de boucles, remplacées par le composant Keys (contextuel).
