@@ -4,10 +4,10 @@
 	  [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	  <form action="#ENV{action}" method="post" enctype="multipart/form-data"><div>
 	    #ACTION_FORMULAIRE{#ENV{action}}
-	      <ul>
 	        [(#ENV{lst_id}|oui)
 	          <input type="hidden" name="lst_id" value="#ENV{lst_id}" />
 	        ]
+	      <ul>
 	        [(#ENV{lst_id}|non)
             <INCLURE{fond=public/clevermail_abonnement_plusieurs_listes}{env}>
           ]
