@@ -1,0 +1,10 @@
+[(#REM) appel du module imageblock de Gallery 2 pour affichage de photos 
+  parametre {item=XXX} (= item Gallery 2) obligatoire
+  parametre {affiche=brut} facultatif pour affichage d'un simple <img src="" alt="">
+  sinon affichage équivalent à un <imgXXX> à la mode SPIP
+  dans tous les cas on transmet un éventuel {taille=XXX}: il surclasse la taille par défaut définie dans le CFG
+  idem pour un éventuel {align=left/right}
+][(#SET{taille, [(#ENV{taille}|sinon{''})]})
+][(#SET{affiche, [(#ENV{affiche}|sinon{''})]})
+][(#SET{align, [(#ENV{align}|sinon{''})]})
+][(#ENV{item}|oui)[(#ENV{item}|g2img{#GET{affiche},#GET{taille},#GET{align}})]]
