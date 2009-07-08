@@ -12,8 +12,33 @@
 #SET{frequences,#GET{frequences}|marquepages_trier}
 #SET{mots,#GET{frequences}|array_keys}
 
-<B_popu>
+[(#REM) On récupère les mots liés]
+#SET{frequences_lies,#ARRAY}
+<BOUCLE_marquepages_lies(MARQUEPAGES){id_auteur}{mots}>
+	<BOUCLE_mots_lies_calcul(MOTS){id_forum}>
+		#SET{frequences_lies,#GET{frequences_lies}|array_merge{#ARRAY{#TITRE*,#GET{frequences_lies}|table_valeur{#TITRE*,0}|plus{1}}}}
+	</BOUCLE_mots_lies_calcul>
+</BOUCLE_marquepages_lies>
+#SET{frequences_lies,#GET{frequences_lies}|marquepages_trier}
+#SET{mots_lies,#GET{frequences_lies}|array_keys}
+
+<B_lies>
 <div class="pliable">
+	<h2><:etiquettes:etiquettes_liees:></h2>
+	<ul>
+	<BOUCLE_lies(MOTS){titre IN #GET{mots_lies}}>
+		[(#TITRE|in_array{#ENV{mots}}|non)
+		<li>
+			<a href="[(#SELF|url_mp_ajouter_tag{#TITRE})]"><strong>+</strong> #TITRE <span class="frequence">[(#GET{frequences_lies}|table_valeur{#TITRE*})]</span></a>
+		</li>
+		]
+	</BOUCLE_lies>
+	</ul>
+</div>
+</B_lies>
+
+<B_popu>
+<div class="pliable[(#ENV{mots}|oui) plier]">
 	<h2><:etiquettes:etiquettes_populaires:></h2>
 	<ul>
 	<BOUCLE_popu(MOTS){titre IN #GET{mots}}{0,10}>

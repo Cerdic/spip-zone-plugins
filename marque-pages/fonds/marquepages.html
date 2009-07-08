@@ -53,7 +53,7 @@
 <li><:marquepages:nombre_marquepages{nombre=#GET{total}}:></li>
 </ul>
 #ANCRE_PAGINATION
-<BOUCLE_marquepages(MARQUEPAGES syndic mots_forum mots){syndic.id_rubrique?}{titre_mot?}{id_forum?}{id_syndic?}{id_auteur?}{recherche?}{pagination #ENV{pagination,10}}{par #GET{tri}}{inverse #GET{sens}}>
+<BOUCLE_marquepages(MARQUEPAGES syndic mots_forum mots){syndic.id_rubrique?}{mots?}{titre_mot?}{id_forum?}{id_syndic?}{id_auteur?}{recherche?}{pagination #ENV{pagination,10}}{par #GET{tri}}{inverse #GET{sens}}>
 [(#AUTORISER{voir,marquepage,#ID_FORUM}|oui)
 	[(#INCLURE{fond=fonds/marquepage}{id_forum}{id_rubrique=#ENV{id_rubrique}}{titre_mot}{self})]
 ]

@@ -35,11 +35,17 @@ function filtre_url_mp_tag_dist($tag, $login=''){
 	$url = generer_url_public('mp');
 	if ($login)
 		$url = parametre_url($url, 'login', $login);
-	$url = parametre_url($url, 'titre_mot', $tag);
+	$url = parametre_url($url, 'mots[]', $tag);
+	return $url;
+}
+function filtre_url_mp_ajouter_tag_dist($url, $tag){
+	$url = parametre_url($url, 'mots[]', $tag);
 	return $url;
 }
 function filtre_url_mp_supprimer_tag_dist($url, $tag){
-	$url = parametre_url($url, 'titre_mot', '');
+	$url = html_entity_decode($url);
+	$tag = preg_quote(rawurlencode($tag));
+	$url = preg_replace("/&?mots\[\]=$tag/", '', $url);
 	return $url;
 }
 

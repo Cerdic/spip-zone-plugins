@@ -62,5 +62,6 @@ N&eacute;cessite le plugin Étiquettes et CFG.
 	<necessite id='cfg' version='[1.10;]' />
 	<necessite id='etiquettes' version='[0.6.5;]' />
 	<necessite id='nuage' version='[1.4;]' />
+	<necessite id="critere_mots" />
 	<utilise id='crayons' />
 </plugin>
