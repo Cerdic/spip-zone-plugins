@@ -4,19 +4,19 @@
 	</nom>
     <icon>img_pack/tabledata.gif</icon>
 	<auteur>	<!-- Auteur du plugin -->
- 	Christophe Boutin - christophe (at)  cboutin . net -
+ 	Christophe Boutin - christophe (at) cboutin . net -
     </auteur>
-	<licence>_ &#169; 2009 - [fr]Distribu&#233; sous licence GPL</licence>
+	<licence>_ &#169; 2009 - <multi>[fr]Distribu&#233; sous licence GPL</multi></licence>
 	<version>2.2.1</version>
     <etat>stable</etat>
 	<description>
 	<multi>
-	[fr] Gestion des tables extra (tables SQL que vous avez ajoutées à SPIP).
-_ Liste les tables 'extra' et permet le choix
-_ Liste les enregistrement d'une table.
-_ Ajouter/supprimer/editer des enregistrements dans une table.
-_ Les pages sont dynamiques, elles s'adaptent à la structure de la table.
-_ Compatible fonctions sql portables MySQL, PostGreSQL, SQLite
+	[fr] Gestion des tables extra (tables SQL que vous avez ajout&eacute;es &agrave; SPIP).
+_ - liste les tables 'extra' et permet le choix
+_ - liste les enregistrement d'une table.
+_ - ajouter/supprimer/editer des enregistrements dans une table.
+_ - les pages sont dynamiques, elles s'adaptent Ã  la structure de la table.
+_ - compatible fonctions sql portables MySQL, PostGreSQL, SQLite
 	</multi>
 	</description>
 	<prefix>tabledata</prefix>

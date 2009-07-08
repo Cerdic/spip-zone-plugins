@@ -771,16 +771,16 @@ function tabledata_Cadre_Modifier($table, $serveur, $field, $key , $idLigne)
 function tabledata_cadre($table){
 	 // Afficher info concernant export des données 
 	echo "<br>";
-    echo gros_titre(_T('tabledata:export')." : <I>'".$table."'</I>",'',false);
+    echo gros_titre(_T('tabledata:export')." <em>".$table."</em>",'',false);
     echo debut_cadre_relief("../"._DIR_PLUGIN_TABLEDATA."/img_pack/tabledata-add.gif",true,'',"");
-    echo "<br/>";
+    echo "<br />";
 	echo tabledata_url_generer_post_ecrire(
 											'export_table',
-											'Exporte la table au format csv :<input type="hidden" name="table_exporter" value="'.$table.'" />', 
+											'Exporte la table <strong><input type="hidden" name="table_exporter" value="'.$table.'" /></strong> au format csv.', 
 											'Exporter Table',''
 											);	
 	
-	echo "(en cours de d&eacute;veloppement...)";
+	echo "(en cours de test. Commentaires bienvenus.)";
     echo fin_cadre_relief(true);
 }
 // FIN DE EXPORT
