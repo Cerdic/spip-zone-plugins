@@ -1,0 +1,50 @@
+<plugin>
+  <nom>Gallery2-embed</nom>
+  <auteur>Philippe Grison (CNRS - UPS 2259 - Cultures, Langues, Textes)</auteur>
+  <licence>&#169; 2009 - GNU/GLP</licence>
+  <version>1.0</version>
+  <etat>test</etat>
+  <description>
+    Integration de la phototheque Gallery2 (version 2.2 et 2.3) dans SPIP (version 2.0). La connexion à Gallery s'effectue par le même login/password que celui de SPIP. Les comptes utilisateurs dans Gallery sont automatiquement synchronisé avec ceux de SPIP. L'affichage des photos ou des albums dans le site web s'effectue par le biais du squelette g2embed.html en mode "guest" qui est appelé par le menu "Galerie". L'affichage d'une photo de Gallery dans un article est par ailleurs possible via le modèle GPHOTO.
+  </description>
+  <icon>img/g2logo.png</icon>
+  <fonctions>g2photos.php</fonctions>
+  <prefix>g2</prefix> 	
+	<pipeline>
+		<nom>g2_call</nom>
+		<action>call</action>
+		<inclure>g2embed.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>g2_head</nom>
+		<action>head</action>
+		<inclure>g2embed.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>g2_body</nom>
+		<action>body</action>
+		<inclure>g2embed.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>g2_exit</nom>
+		<action>exit</action>
+		<inclure>g2embed.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>g2_init</nom>
+		<action>init</action>
+		<inclure>g2embed.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>g2_close</nom>
+		<action>close</action>
+		<inclure>g2embed.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>g2_call_guest</nom>
+		<action>call_guest</action>
+		<inclure>g2embed.php</inclure>
+	</pipeline>
+
+			
+</plugin>
