@@ -22,7 +22,7 @@ ou arguments doit inclure la vidéo source et la vidéo de sortie au format flv 
 
 
 Exemple :
-./spipmotion --e video-entree.avi --s video-sortie.flv --size 320x240 --bitrate 448 --fps 15 --audiobitrate 64 --audiofreq 22050 --p /usr/local/bin/ffmpeg
+./spipmotion.sh --e video-entree.avi --s video-sortie.flv --size 320x240 --bitrate 448 --fps 15 --audiobitrate 64 --audiofreq 22050 --p /usr/local/bin/ffmpeg
 
 #####################################################
 ##  Ce programme recquiert une version de ffmpeg   ##

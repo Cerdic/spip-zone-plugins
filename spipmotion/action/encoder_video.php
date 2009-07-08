@@ -1,22 +1,21 @@
 <?php
-
-/***************************************************************************\
- *  SPIP, Systeme de publication pour l'internet                           *
- *                                                                         *
- *  Copyright (c) 2001-2006                                                *
- *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
- *                                                                         *
- *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
- *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
-\***************************************************************************/
-
+/**
+ * SPIPmotion
+ * Gestion de l'encodage et des métadonnées de vidéos directement dans spip
+ * 
+ * Auteurs :
+ * Quentin Drouet
+ * 2006-2009 - Distribué sous licence GNU/GPL
+ *
+ */
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/charsets');	# pour le nom de fichier
 include_spip('base/abstract_sql');
 include_spip('inc/actions');
 
-function action_encoder_video_dist(){
+function action_encoder_video_dist()
+{
 	global $redirect;
 	
 	$securiser_action = charger_fonction('securiser_action', 'inc');

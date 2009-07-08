@@ -1,6 +1,25 @@
 <?php
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+	// E
+	'encoder_video' => '(R&eacute;)encoder cette vid&eacute;o',
+	'extensions_prises_en_charge' => 'Formats pris en charge de base',
+	'extensions_audio' => 'Formats audio',
+	'extensions_video' => 'Formats vid&eacute;o',
+	'extensions_prises_en_charge_encodage' => 'Formats pris en charge pour l\'encodage',
+
+	// F
+	'document_dans_file_attente' => 'Ce document est dans la file d\'attente pour l\'encodage',
+	
+	// G
+	'gestion_format_entree' => 'Gestion des formats d\'entr&eacute;e',
+	
+	// S
+	'select_all' => 'Tout s&eacute;lectionner',
+	
+	// U
+	'unselect_all' => 'Tout d&eacute;s&eacute;lectionner',
+	
 	// CFG
 	'titre' => 'SPIPmotion',
 	'spipmotion_boite' => 'Configuration de SPIPmotion',
@@ -29,6 +48,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'verifier_droits' => 'V&eacute;rifiez les droits du fichier "script_bash/spipmotion.sh". Les droits sur ce fichier doivent &ecirc;tre en 777.',
 	'encodage_en_cours' => 'ENCODAGE EN COURS ...',
 	
+	// V
 	'video_infos_techniques' => 'Informations techniques...',
 	'video_nom_fichier' => 'Nom du fichier : ',
 	'video_format' => 'Format : ',
@@ -44,8 +64,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'video_audiocodec' => 'Codec audio : ',
 	'video_audiochannels' => 'Nombres de canaux audios : ',
 	
-	'recuperer_logo' => 'R&eacute;cup&eacute;rer un logo depuis la video',
-	'recuperer_infos' => 'R&eacute;cup&eacute;rer des informations techniques sur la video',
+	// R
+	'recuperer_logo' => 'R&eacute;cup&eacute;rer un logo depuis la vid&eacute;o',
+	'recuperer_infos' => 'R&eacute;cup&eacute;rer des informations techniques sur la vid&eacute;o',
 	'zzzz' => 'zzzz'
 );
 ?>
