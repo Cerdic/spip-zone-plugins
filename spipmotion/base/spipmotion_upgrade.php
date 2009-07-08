@@ -1,6 +1,6 @@
 <?php
 	
-	$GLOBALS['spipmotion_base_version'] = 0.4;
+	$GLOBALS['spipmotion_base_version'] = 0.5;
 	function spipmotion_verifier_base(){
 		$version_base = $GLOBALS['spipmotion_base_version'];
 		$current_version = 0.0;
@@ -11,8 +11,9 @@
 				include_spip('base/create');
 				include_spip('base/abstract_sql');
 				creer_base();
-				echo 'Cr&eacute;ation de la base de spipmotion';
-				ecrire_meta('spipmotion_base_version',$current_version=0.1);
+				maj_tables('spip_documents');
+				echo 'Cr&eacute;ation de la base de spipmotion<br />Ajout des champs sur spip_documents';
+				ecrire_meta('spipmotion_base_version',$current_version=$version_base);
 			}
 			if ($current_version<0.2){
 				sql_alter("TABLE spip_spipmotion_attentes ADD `id_auteur` BIGINT(21) NOT NULL DEFAULT '0' AFTER `id_article`");
@@ -41,6 +42,15 @@
 				ecrire_meta('spipmotion_base_version',$current_version=0.4);
 				echo 'Mise &agrave; jour de la base de spipmotion en 0.4';
 			}
+			if ($current_version<0.5){
+				sql_alter("TABLE spip_documents ADD `id_orig` BIGINT(21) NOT NULL AFTER `audiochannels`");
+				ecrire_meta('spipmotion_base_version',$current_version=0.5);
+				echo 'Mise &agrave; jour de la base de spipmotion en 0.5';
+			}
+			/**
+			 * TODO : générer un htaccess dans le répertoire script_bash/
+			 * TODO : insérer une préconfiguration par défaut
+			 */
 			ecrire_metas();
 		}
 	}
