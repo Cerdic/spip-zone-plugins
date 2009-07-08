@@ -1,0 +1,30 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	<multi>[fr]TableDATA</multi>
+	</nom>
+    <icon>img_pack/tabledata.gif</icon>
+	<auteur>	<!-- Auteur du plugin -->
+ 	Christophe Boutin - christophe (at)  cboutin . net -
+    </auteur>
+	<licence>_ &#169; 2009 - [fr]Distribu&#233; sous licence GPL</licence>
+	<version>2.2.1</version>
+    <etat>stable</etat>
+	<description>
+	<multi>
+	[fr] Gestion des tables extra (tables SQL que vous avez ajoutées à SPIP).
+_ Liste les tables 'extra' et permet le choix
+_ Liste les enregistrement d'une table.
+_ Ajouter/supprimer/editer des enregistrements dans une table.
+_ Les pages sont dynamiques, elles s'adaptent à la structure de la table.
+_ Compatible fonctions sql portables MySQL, PostGreSQL, SQLite
+	</multi>
+	</description>
+	<prefix>tabledata</prefix>
+	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+    <pipeline>
+        <nom>ajouter_boutons</nom>
+        <action>ajouterBoutons</action>
+        <inclure>tabledata_pipelines.php</inclure>
+    </pipeline>
+    <!-- necessite id="SPIP" version='[2.0.0;]' / -->
+</plugin>
