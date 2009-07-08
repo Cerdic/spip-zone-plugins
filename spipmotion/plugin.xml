@@ -7,8 +7,9 @@
 	Quentin Drouet (kent1)
 	</auteur>
 	<version>
-	0.2
+	0.3
 	</version>
+	<version_base>0.5</version_base>
 	<etat>
 	experimental
 	</etat>
@@ -51,5 +52,4 @@
 		<inclure>spipmotion_pipelines.php</inclure>
 	</pipeline>
 	<install>base/spipmotion_upgrade.php</install>
-	<chemin dir='' />
 </plugin>
