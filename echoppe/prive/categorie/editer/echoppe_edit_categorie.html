@@ -44,7 +44,7 @@
 			</li>
 			<li>
 				<label for="text_area" ><:echoppe:texte:></label><br />
-				[(#EVAL{text_area}|barre_typo)]
+				[(#EVAL*{text_area}|barre_typo)]
 				<textarea name='texte' id='text_area' class='barre_inserer forml' rows='30' cols='40'[(#ENV**{browser_caret,''})]>[(#TEXTE**)]</textarea>
 			</li>
 			<p class="boutons">

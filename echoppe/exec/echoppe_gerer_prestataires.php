@@ -31,7 +31,7 @@ function exec_echoppe_gerer_prestataires(){
 	echo creer_colonne_droite(true);
 	
 	echo debut_droite(true,_T('echoppe:gerer_les_prestataire_paiement'));
-	echo recuperer_fond('fonds/echoppe_gerer_prestataire_paiement', $contexte);
+	echo recuperer_fond('prive/prestataires/gerer_prestataires', $contexte);
 	echo fin_gauche(true);
 	echo fin_page(true);
 	

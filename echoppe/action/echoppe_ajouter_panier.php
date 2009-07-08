@@ -18,6 +18,7 @@ function action_echoppe_ajouter_panier(){
 	$contexte['achat_rapide'] = _request('achat_rapide');
 	$contexte['date_maj'] = date("Y-m-d h:i:s");
 	$contexte['message_erreur'] = "";
+	$contexte['page'] = _request('page');
 	
 	$res_le_produit_existant = sql_select(array("quantite"),"spip_echoppe_paniers","id_produit = '".$contexte['id_produit']."' AND token_panier = '".$contexte['token_panier']."'");
 	$le_produit_existant = sql_fetch($res_le_produit_existant);
@@ -56,12 +57,12 @@ function action_echoppe_ajouter_panier(){
 	}
 
 	if (sql_count(sql_select(array("id_auteur"),"spip_echoppe_clients","token_client = '".$contexte['token_client']."'")) < 1){
-		$sql_lien = "INSERT INTO spip_echoppe_clients VALUES ('','".$contexte['id_auteur']."','".$contexte['token_client']."')";
 		$res_lien = sql_insertq('spip_echoppe_clients',array('id_auteur' => $contexte['id_auteur'], 'token_client' => $contexte['token_client']));
-		spip_log('liaison de l\'auteur '.$contexte['id_auteur'].' au token *** from ajout de produit ***','echoppe');
+		spip_log('liaison de l\'auteur '.$contexte['id_auteur'].' au token *** from ajout de produit ==> '.$res_lien,'echoppe');
 	}
-	
-	redirige_par_entete($contexte['redirect']);
+	$redirect = generer_url_public($contexte['page'],array('id_produit'=>$contexte['id_produit']),'&');
+	//$redirect = parametre_url($redirect,array("id_produit" => $contexte['id_produit']));
+	redirige_par_entete($redirect);
 	
 }
 

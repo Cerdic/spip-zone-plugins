@@ -362,6 +362,35 @@ function echoppe_tables_principales($tables_principales){
 		'join' => &$spip_prestataires_join
 	);
 	
+	/*
+	$spip_prestataires_paiement = array(
+		"id_prestataire_paiement"	=> "bigint(21) NOT NULL",
+		"nom"	=> "VARCHAR(255) NOT NULL",
+		"url"	=> "VARCHAR(255) NOT NULL",
+		"logo"			=> "VARCHAR(255) NOT NULL",
+		"prefix"			=> "VARCHAR(255) NOT NULL",
+		"version"			=> "VARCHAR(255) NOT NULL",
+		"avertissement_user"			=> "longblob NOT NULL",
+		"statut"		=> "VARCHAR(10) NOT NULL",
+		);
+
+	$spip_prestataires_key = array(
+		"PRIMARY KEY"		=> "id_prestataire"
+		);
+
+	$spip_prestataires_join = array(
+		"id_prestataire"		=> "id_prestataire",
+		"modele"				=>"modele",
+		"type"					=> "type"
+		);
+	
+	$tables_principales['spip_echoppe_prestataires'] = array(
+		'field' => &$spip_prestataires,
+		'key' => &$spip_prestataires_key,
+		'join' => &$spip_prestataires_join
+	);
+	*/
+	
 	return $tables_principales;
 	
 	

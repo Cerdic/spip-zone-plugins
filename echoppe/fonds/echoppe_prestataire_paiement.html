@@ -20,16 +20,18 @@
 			<li>
 				<label for="descriptif_area"><:echoppe:description_du_prestataire:></label>
 				[(#EVAL{descriptif_area}|barre_typo)]
-				<textarea name='texte' id='descriptif_area' class='barre_inserer forml' rows='30' cols='40'[(#ENV**{browser_caret,''})]>[(#DESCRIPTIF**)]</textarea>
+				<textarea name='texte' id='descriptif_area' class='barre_inserer forml' rows='30' cols='40'[(#ENV**{browser_caret,''})]>[(#TEXTE**)]</textarea>
 			</li>
 			<li>
 				<label for=""><:echoppe:fichier_de_definition:></label>
-				[(#LISTE_SKEL_PAIEMENT|skel_paiement{#MDL})]
+				[(#LISTE_SKEL_PAIEMENT{#ENV{modele}})]
 			</li>
+			<!--
 			<li>
 				<label for="version_prestataire"><:echoppe:version_du_prestataire:></label>
 				<input type="text" name="version" id="version_prestataire" class="forml" value="#VERSION" />
 			</li>
+			-->
 			<li>
 				<label for="statut" ><:echoppe:statut_du_prestataire:></label>
 				<select name="statut" id="statut" class="forml" >

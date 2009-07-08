@@ -1,5 +1,7 @@
 <?php
 include_spip('inc/echoppe');
+
+
 function select_lang($les_langues, $nom, $value, $style){
 	$les_langues = explode(",",$les_langues);
 	$select .= '<select name="'.$nom.'" class="'.$style.'">';
@@ -16,6 +18,19 @@ function select_lang($les_langues, $nom, $value, $style){
 
 function generer_url_inscription(){
 	return "";
+}
+
+function generer_liste_squelette_paiment($selection){
+	$les_chemins = find_all_in_path('prestataires/paiement/', '.html$');
+	
+	$select_prestataire = "<select name='modele' class='forml'>";
+	foreach ($les_chemins as $key => $value){
+		$select_prestataire .= "<option value='$key' ";
+		if ($selection == $key) $select_prestataire .= " SELECTED = 'SELECTED' ";
+		$select_prestataire .= " >$key</option>";
+	}
+	$select_prestataire .= "</select>";
+	return $select_prestataire;
 }
 
 function calculer_taux_tva($taux_tva){
@@ -40,7 +55,7 @@ function calculer_url_achat($_var,$quantite,$redirect){
 		if ($redirect){
 			$args_url .= "&page=".$redirect;
 		}else{
-			$args_url .= "&page=".$_page;
+			$args_url .= "&page=".$_page."&".$_SERVER["QUERY_STRING"];
 		}
 		$url = generer_url_action('echoppe_ajouter_panier',$args_url,"&");
 		return $url;
@@ -70,6 +85,10 @@ function calculer_balise_url_echoppe($p, $nom){
     return $p;
 }
 
+function calculer_url_paiement(){
+	$action = "generer_formulaire_paiement";
+	return generer_url_action($action);
+}
 /*=============================BALISES===============================*/
 function balise_PRIX_TVAC($p){
 	$_prix = champ_sql('prix_base_htva', $p);
@@ -120,6 +139,11 @@ function balise_URL_ACHAT_RAPIDE($p){
 	return $p;
 }
 
+function balise_URL_PAIEMENT_dist($p){
+	$p->code = "calculer_url_paiement()";
+	return $p;
+}
+
 function balise_URL_PRODUIT_dist($p) {
     return  calculer_balise_url_echoppe($p, 'produit');
 }
@@ -142,10 +166,67 @@ function balise_TOTAL_STOCK($p){
 	return $p;
 }
 
+function balise_LISTE_SKEL_PAIEMENT($p){
+	$selection = interprete_argument_balise(1,$p);
+	$p->code="generer_liste_squelette_paiment($selection)";
+	$p->interdire_script = false;
+	return $p;
+}
+
+function balise_URL_RETOUR_PAIEMENT_OK ($p) {
+		$_token_paiemet = date("YmdHms");
+		$p->code = "generer_url_paiement_ok($_token_paiemet)";
+		$p->interdire_script = false;
+		return $p;
+}
+
+
+function balise_URL_RETOUR_PAIEMENT_ERREUR ($p) {
+		$_token_paiemet = date("YmdHms");
+		$p->code = "generer_url_paiement_erreur($_token_paiemet)";
+		$p->interdire_script = false;
+		return $p;
+}
+
+
+function generer_url_paiement_ok($token_paiement){
+	include_spip('inc/utils');
+	include_spip('inc/session');
+	$_token_panier = session_get('echoppe_token_panier');
+	$_token_client = session_get('echoppe_token_client');
+	$_token_paiemet = md5($_token_panier.$_token_client);
+	$page = "echoppe_valider_paiement";
+	$url = generer_url_action($page,"token_paiement=".$_token_paiemet,"&");
+	return $url;
+}
+
+function generer_url_paiement_erreur($token_paiement){
+	include_spip('inc/utils');
+	include_spip('inc/session');
+	$_token_panier = session_get('echoppe_token_panier');
+	$_token_client = session_get('echoppe_token_client');
+	$_token_paiemet = md5($_token_panier.$_token_client);
+	$page = "echoppe_invalider_paiement";
+	$url = generer_url_action($page,"token_paiement=".$_token_paiemet,"&");
+	return $url;
+}
 
 /*=============================BOUCLES================================*/
 
 function boucle_ECHOPPE_PRODUITS_dist($id_boucle, &$boucles) {
+	$boucle = &$boucles[$id_boucle];
+	$id_table = $boucle->id_table;
+	$mstatut = $id_table .'.statut';
+	// Restreindre aux elements publies, sauf si le critere statut est utilise
+	if (!isset($boucle->modificateur['criteres']['statut'])) {
+		array_unshift($boucle->where,array("'<>'", "'$mstatut'", "'\\'poubelle\\''"));
+		array_unshift($boucle->where,array("'<>'", "'$mstatut'", "'\\'propose\\''"));
+		array_unshift($boucle->where,array("'<>'", "'$mstatut'", "'\\'prepa\\''"));
+	}
+	return calculer_boucle($id_boucle, $boucles); 
+}
+
+function boucle_ECHOPPE_CATEGORIES_dist($id_boucle, &$boucles) {
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table;
 	$mstatut = $id_table .'.statut';

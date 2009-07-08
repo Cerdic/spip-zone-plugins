@@ -28,8 +28,6 @@ _
 	<prefix>echoppe</prefix>
 	<necessite id='cfg' version='[1.0.6;]' />
 	<necessite id='Inscription2' version='[0.2;]' />
-	<necessite id='Ajaxforms' version='[0.2;]' />
-	<necessite id='spip_bonux' version='[1.6;]' />
 	<necessite id="lib:jquery.ui-1.6rc2" src="http://jquery-ui.googlecode.com/files/jquery.ui-1.6rc2.zip" />
 	<install>base/echoppe_upgrade.php</install>
 	<options>echoppe_options.php</options>
@@ -79,6 +77,21 @@ _
 		   <nom>declarer_tables_interfaces</nom>
 		   <inclure>base/tables_interfaces.php</inclure>
 		   <action>tables_interfaces</action>
+	</pipeline>
+	<pipeline>
+		   <nom>formulaire_charger</nom>
+		   <inclure>echoppe_pipeline.php</inclure>
+		   <action>formulaire_charger</action>
+	</pipeline>
+	<pipeline>
+		   <nom>formulaire_verifier</nom>
+		   <inclure>echoppe_pipeline.php</inclure>
+		   <action>formulaire_verifier</action>
+	</pipeline>
+	<pipeline>
+		   <nom>formulaire_traiter</nom>
+		   <inclure>echoppe_pipeline.php</inclure>
+		   <action>formulaire_traiter</action>
 	</pipeline>
 	<bouton id='echoppe' parent='naviguer'>
 		<icone>images/logo.png</icone>

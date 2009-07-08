@@ -13,9 +13,8 @@ function exec_echoppe_prestataire(){
 	$contexte['id_prestataire_paiement'] = _request('id_prestataire');
 	$contexte['new'] = _request('new');
 	
-	$sql_le_prestataire_paiement = "SELECT * FROM spip_echoppe_prestataires_paiement WHERE id_prestataire = '".$contexte['id_prestataire_paiement']."';";
-	$res_le_prestataire_paiement = spip_query($sql_le_prestataire_paiement);
-	$le_prestataire_paiement = spip_fetch_array($res_le_prestataire_paiement);
+	$res_le_prestataire_paiement = sql_select("*","spip_echoppe_prestataires","id_prestataire = '".$contexte['id_prestataire_paiement']."'");
+	$le_prestataire_paiement = sql_fetch($res_le_prestataire_paiement);
 	$adresse_prestataire_paiement = unserialize($le_prestataire_paiement['adresse']);
 	(is_array($le_prestataire_paiement))?$contexte = array_merge($contexte, $le_prestataire_paiement):$contexte = $contexte;
 	(is_array($adresse_prestataire_paiement))?$contexte = array_merge($contexte, $adresse_prestataire_paiement):$contexte = $contexte;

@@ -1,5 +1,75 @@
 #CACHE{0}
+
 [<p class='formulaire_erreur'>(#ENV*{information_livraison_manquantes})</p>]
 [<p class='formulaire_erreur'>(#ENV*{echoppe_non_configure})</p>]
 [<p class='formulaire_ok'>(#ENV*{message_ok})</p>]
-Paiement
+
+<B_LePanier>
+	<table class="panier spip" summary="<:echoppe:panier_du_client:>">
+	<tbody>
+		<tr class="titre_panier">
+			<th class = "panier_titre"><:echoppe:titre_produit:></th>
+			<th class = "panier_prix_ttc"><:echoppe:prix_ttc:></th>
+			<th class = "panier_quantite"><:echoppe:quantite:></th>
+		</tr>
+<BOUCLE_LePanier(ECHOPPE_PANIERS){token_panier = #SESSION{echoppe_token_panier}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<BOUCLE_LeProduit(ECHOPPE_PRODUITS){id_produit}>
+				<td class = "panier_titre"><a href="?page=produit&id_produit=#ID_PRODUIT">#TITRE</a></td>
+				<td class = "panier_prix_ttc">#PRIX_TVAC&nbsp;&euro;</td>
+				<td class = "panier_quantite">
+					#QUANTITE
+				</td>
+			</BOUCLE_LeProduit>
+		</tr>
+</BOUCLE_LePanier>
+		   <tr class="titre_panier">
+			<th>Total</th>
+			<th>#TOTAL_PANIER_TVAC&nbsp;&euro; TTC<br /><small>#TOTAL_PANIER_HTVA&nbsp;&euro; HTVA</small></td>
+			<th></th>
+		</tr>
+	 </tbody>
+	</table>
+
+<B_LesMethodes>
+<hr />
+S&eacute;l&eacute;ctionnez le mode de paiement: <br />
+<div class="formulaire_spip formulaire_paiement" >
+	<form action="#ENV{action}" method="post">
+		#ACTION_FORMULAIRE{#ENV{action}}
+		[<input type="hidden" name="id_auteur" value="(#SESSION{id_auteur})" />]
+		<input type="hidden" name="etape_paiement" value="selection_prestataire_paiement" />
+		<BOUCLE_LesMethodes(ECHOPPE_PRESTATAIRES){statut = publie}>
+			<input type="radio" name="id_prestataire" value="#ID_PRESTATAIRE" [(#TOTAL_BOUCLE|=={1}?{checked="CHECKED"})]/> #TITRE<br />
+		</BOUCLE_LesMethodes>
+		
+		[(#SESSION{echoppe_modele_prestataire_paiement}|?{'',' '})
+		<p style="text-align: right;">
+			<span class="bouton_ok" >
+				<input type="submit" value="Confirmez le mode de paiement &raquo;" name="payer" />
+			</span>
+		</p>]
+	</form>
+	[(#SESSION{echoppe_modele_prestataire_paiement}|?{' ',''})
+		<p style="text-align: right;">
+			<span class="bouton_ok" >
+			
+				[(#REM)
+				Ancienne methode
+				<INCLURE{fond=#SESSION{echoppe_modele_prestataire_paiement}}>
+				]
+				[(#REM) Nouvelle Methode :o) ]
+				<a href="#URL_PAIEMENT"><:echoppe:payer_mon_panier:></a>
+				
+			</span>
+
+		</p>		
+		]
+</div>
+</B_LesMethodes>
+Impossible d'effectuer le paiement : pas de prestataires disponible.
+<//B_LesMethodes>
+</B_LePanier>
+
+
+
