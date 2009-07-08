@@ -1,0 +1,70 @@
+[(#REM) Gestion de la mémoire cache : remise à zero à chaque nouvelle page ]
+#CACHE{0}
+[(#REM) appel de gallery2 ]
+#PIPELINE{g2_call}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+<title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#INTRODUCTION{150}|textebrut)" />]
+<INCLURE{fond=inc-head}>
+[(#REM) Lien vers le flux RSS des articles la rubrique ]
+<link rel="alternate" type="application/rss+xml" title="<:syndiquer_rubrique:>" href="[(#URL_PAGE{backend}|parametre_url{id_rubrique,#ID_RUBRIQUE})]" />
+[(#REM) affichage du head de Gallery2 ]
+#PIPELINE{g2_head}
+</head>
+
+<body class="page_rubrique">
+<div id="page">
+
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}>
+
+	[(#REM) Contenu principal : contenu de la rubrique ]
+    <div id="conteneur">
+    <div id="contenu">  
+
+        <div class="cartouche">
+            [(#LOGO_RUBRIQUE||image_reduire{200,200})]
+            <h1 class="#EDIT{titre}">Gallery -<span class="titre">  Private area</span></h1>
+            [(#REM) appel de l'interface Gallery2 ]
+			#PIPELINE{g2_body}	
+        </div>
+
+	</div><!--#contenu-->
+	</div><!--#conteneur-->
+
+    [(#REM) Menu de navigation laterale ]
+    <div id="navigation">
+
+        [(#REM) Menu de navigation par rubriques ]
+        <INCLURE{fond=inc-rubriques}{id_rubrique}>
+		
+		#FORMULAIRE_RECHERCHE
+
+    </div><!--#navigation-->
+    
+    [(#REM) Menu de navigation laterale ]
+    <div id="extra">
+
+        [(#REM) Menu de navigation mots-cles ]
+        <B_mots>
+        <div class="menu">
+            <h2><:mots_clefs:></h2>
+            <ul>
+                <BOUCLE_mots(MOTS) {id_rubrique} {par titre}>
+                <li><a href="#URL_MOT" rel="tag">#TITRE</a></li>
+                </BOUCLE_mots>
+            </ul>
+        </div>
+        </B_mots>
+        
+    </div><!--#extra-->
+
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
+</div><!--#page-->
+</body>
+</html>

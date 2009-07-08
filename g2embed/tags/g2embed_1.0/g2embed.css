@@ -1,0 +1,82 @@
+/* CSS Document */
+
+/* --------------- GALLERY */	
+#gallery {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    /*font-size: 80.0%;*/
+	font-size: 0.80em;
+    color: #333;
+    background-color: #F8F3ED;
+}
+
+body.gallery {
+    background-color: #F8F3ED;
+}
+
+/* legende des images g2 */
+.summary { font-size: 0.87em; color:#999999; margin-top: 0em; }
+.giDescription { font-size: 0.87em; color:#666; margin-top: 0em; display:inline-block;}
+.giTitle  { font-size: 0.87em; color:#999999; margin-top: 0em; }
+.gbDataTable { font-size: 0.87em; color:#999999; margin-top: 0em; }
+.gbBlock h3 { font-size: 0.87em; margin-top: 0em; }
+.gcBackground2 {
+    background-color: #F8F3ED;
+}
+.summary {
+	font-size: 0.87em;
+	color:#999999;
+	margin-top: 0em;
+}
+.one-image {
+	display: inline;
+	float: left;
+	margin: 0px;
+	padding: 15px;
+}
+
+
+/* affichage des entetes des images : titres, dates, size*/
+
+/*.gcBackground1  { display:none; }*/
+.gcBackground1  { background-color: #F8F3ED;}
+
+/* spositionnement des images*/
+#gsImageView {
+	text-align: center;
+}
+/* supprime l'affichage du logo gallery*/
+#gsHeader {display:none; }
+
+/* supprime l'affichage de la barre de navigation : "chemin de fer"
+.gbBreadCrumb {display:none}
+*/
+div.gbBreadCrumb {
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;	
+}
+div.block-core-BreadCrumb{
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+}
+.BreadCrumb-4{
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;	
+}
+/* couleurs des liens */
+#gallery a {
+    font-weight: normal;
+    text-decoration: none;
+    color: #663333;
+}
+#gallery a:hover {
+    text-decoration: underline;
+    color: #EF830C;
+}
+
+/* couleurs du lien "galerie" lorsque la rubrique est selectionnée : EN GRAS*/
+.menu_galerie{
+	font-weight: bold;
+}
