@@ -1,0 +1,17 @@
+	<b><:echoppe:titre_produit:></b><br />
+	<input type=text class="forml" name="titre" value="#TITRE"/><br />
+	
+	<b><:echoppe:descriptif:></b><br />
+	<textarea name="descriptif" class="forml" >#DESCRIPTIF</textarea><br />
+	
+	<b><:echoppe:texte:></b><br />
+	[(#TEXTE**|barre_textarea{20,40,#LANG})]
+	<br />
+	
+	<b><:echoppe:ps:></b><br />
+	<textarea name="ps" class="forml" >#PS</textarea><br />
+	
+	
+	<b><:echoppe:quantite_minimum:></b>&nbsp;<input type="text" name="quantite_mini" value="#QUANTITE_MINI" />&nbsp;<:echoppe:unites:><br /><br />
+	<b><:echoppe:tva:></b>&nbsp;<input type="text" name="tva" value="#TVA" />&nbsp;%
+	<hr/>
