@@ -66,7 +66,8 @@ function inc_prepare_mots_dist($mots, $table='articles', $cond=false, $score, $s
 	$wh = "$_table.$_id_table IN (
 		SELECT $_id_table FROM spip_mots_$_table WHERE "
 		. join(' OR ', $where)
-		. ' HAVING COUNT(*) >= '.ceil($score * count($where))
+		. ' GROUP BY '.$_id_table
+		. ' HAVING SUM(1) >= '.ceil($score * count($where))
 		. "\n\t)";
 
 	return $wh;
