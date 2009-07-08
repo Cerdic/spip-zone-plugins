@@ -60,12 +60,12 @@ if (GBrowserIsCompatible()) {
 						map.addOverlay(marker);
 						marker.openInfoWindowHtml(adresse);
 						jQuery("#formulaire_editer_gis #lat").val(point.lat());
-						jQuery("#formulaire_editer_gis #long").val(point.lng());
+						jQuery("#formulaire_editer_gis #lonx").val(point.lng());
 						jQuery("#formulaire_editer_gis #zoom").val(map.getZoom());
 						GEvent.addListener(marker, 'dragend', function(){
 							var center = marker.getPoint();
 							jQuery("#formulaire_editer_gis #lat").val(center.lat());
-							jQuery("#formulaire_editer_gis #long").val(center.lng());
+							jQuery("#formulaire_editer_gis #lonx").val(center.lng());
 						});
 					}
 				});
