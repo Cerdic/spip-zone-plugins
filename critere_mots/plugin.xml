@@ -1,0 +1,13 @@
+<plugin>
+  <nom>Critère {mots}</nom>
+  <auteur>Fil</auteur>
+  <icon></icon>
+  <licence>(c) 2009 GPL</licence>
+  <version>1.0</version>
+  <etat>test</etat>
+  <description>Permet d'afficher les éléments qui ont plusieurs mots clés en communs, via la variable $mots[] passée dans l'environnement</description>
+  <lien></lien>
+  <fonctions>critere_mots_fonctions.php</fonctions>
+  <prefix>critere_mots</prefix>
+  <necessite id='SPIP' version='[2.0.0;]' />
+</plugin>
