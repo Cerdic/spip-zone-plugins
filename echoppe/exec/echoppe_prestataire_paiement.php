@@ -48,7 +48,7 @@ function exec_echoppe_prestataire_paiement(){
 	echo debut_droite(_T('echoppe:visualisation_d_un_prestataire_paiement'),true);
 	//echo gros_titre($contexte['titre']);
 	
-	echo recuperer_fond('fonds/echoppe_prestataire_paiement', $contexte);
+	echo recuperer_fond('prive/prestataires/paiement/echoppe_prestataire_paiement', $contexte);
 	echo fin_gauche(true);
 	echo fin_page(true);
 	
