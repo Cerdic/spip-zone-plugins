@@ -3,10 +3,11 @@ ACS version 0.5
  - nombre d'instances de chaque composant affiche en info-bulle sur les widgets de l'onglet "Composants".
  - nouvelles traductions generiques.
  - controles revus. Composants ordonnés par ordre alphabetique dans le contrôle Widget.
- - nouvelle balise de mise en page <admin> pour masquer des parties de mises en page de composant en mode
+ - nouvelle balise de mise en page <admin> pour masquer des parties de mises en page de composant en mode pinceau
  - nouvelle balise #VAR{variable, valeur par defaut} : lorsque la valeur de variable est un nom de variable ACS, ce nom est remplacé par sa valeur à l'execution (permet l'héritage de variables de composants).
  - creation du controle de type Bord pour définir largeur, style, et couleur de bordure en une fois.
  - gestion des CSS d'instances de composants par fichier composant_instances.css.html contenant la balise #NIC.
+ - amelioration des performances du cache.
  
 Modele Cat pour ACS vesion 0.5:
  - Composant Agenda : amélioration CSS. Tri par heure des articles publies/modifies/breves dans l'info-bulle. Encapsulation des styles css dans la classe cAgenda. Bulle d'aide. masquage des redirections d'articles SPIP.
@@ -14,7 +15,7 @@ Modele Cat pour ACS vesion 0.5:
  - Composant Audio : pagination ajax.
  - Composant Breves : feuille de style personnalisable indépendante.
  - Composant Edito : mise a jour pour plugin notation 0.6.3. Prise en compte correcte du nombre de lettres avant coupure.
- - Composant Fond : debug du javascript. Fontes par défaut du site.
+ - Composant Fond : debug du javascript. Fontes par défaut du site. Liens de traductions et cookie de langue du site pour la noisette fond/entete.
  - Composant Keys : nouveau. Bloc des mots-clés d'un article ou de tous les mots-clés.
  - Composant Onglets  : installation automatique des images par defaut.
  - Composant Rubnav : menus deroulants. Utilisation des traductions generiques.

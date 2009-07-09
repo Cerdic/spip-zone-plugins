@@ -3,7 +3,7 @@
 #          (Plugin Spip)
 #     http://acs.geomaticien.org
 #
-# Copyright Daniel FAIVRE, 2007-2008
+# Copyright Daniel FAIVRE, 2007-2009
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
 /**
@@ -27,8 +27,7 @@ function cache($fonction, $file, $args=null, $force_recalcul=false) {
     $cache = file_get_contents($cachefile);
     $r = unserialize($cache);
     if ($date == $r['date']) {
-      $r = decode_cache($r['content']);
-      return array($r, 'read', $r['date']);
+      return array($r['content'], 'read', $r['date']);
     }
   }
 
@@ -40,7 +39,7 @@ function cache($fonction, $file, $args=null, $force_recalcul=false) {
   $r = call_user_func_array($fonction, $args);
   $cachestring = serialize(array(
     'date' => $date,
-    'content' => encode_cache($r)
+    'content' => $r
   ));
   if (@file_put_contents($cachefile, $cachestring))
     return array($r, 'write', $date);
@@ -53,25 +52,4 @@ function cache($fonction, $file, $args=null, $force_recalcul=false) {
   return array($r, 'err', $date);
 }
 
-// Avoid buggy chars for unserialize
-// Work for string, numeric, array, and anything "base64_encode-able"
-function encode_cache($mixed) {
-  if (is_array($mixed)) {
-    $r = array();
-    foreach($mixed as $k=>$v)
-      $r[$k] = encode_cache($v);
-    return $r;
-  }
-  return base64_encode($mixed);
-}
-
-function decode_cache($mixed) {
-  if (is_array($mixed)) {
-    $r = array();
-    foreach($mixed as $k=>$v)
-      $r[$k] = decode_cache($v);
-    return $r;
-  }
-  return base64_decode($mixed);
-}
 ?>

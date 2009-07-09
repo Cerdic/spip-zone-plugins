@@ -1,6 +1,7 @@
 <?php
 // Fichier inséré uniquement en cas de nécessité, lorsqu'une fonction non définie en version 1.9.2 est utilisée
-// SPIP 1.9.2 ne contenait pas encore la fonction spip_xml_match_nodes() ni la fonction spip_xml_decompose_tag(), ni spip_xml_tagname()
+// SPIP 1.9.2 ne contenait pas encore la fonction spip_xml_match_nodes() ni la fonction spip_xml_decompose_tag(), ni spip_xml_tagname(),
+// ni touch_meta()
 
 // http://doc.spip.org/@spip_xml_tagname
 function spip_xml_tagname($tag){
@@ -55,4 +56,5 @@ if (!is_callable("touch_meta")) {
   	}
   }
 }
+
 ?>
