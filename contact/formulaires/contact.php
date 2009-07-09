@@ -79,6 +79,7 @@ function formulaires_contact_verifier_dist($id_auteur=''){
 	$erreurs = array();
 	include_spip('inc/filtres');
 	include_spip('inc/documents');
+	include_spip('inc/charsets');
 	
 	if (!_request('destinataire'))
 		$erreurs['destinataire'] = _T("info_obligatoire");
@@ -119,11 +120,13 @@ function formulaires_contact_verifier_dist($id_auteur=''){
 	//Pour les nouvelles pj uploadées
 	if ($pj_fichiers != null) {
 		foreach ($pj_fichiers['name'] as $cle => $nom_pj) {
+			// On commence par transformer le nom du fichier pour éviter les conflits
+			$nom_pj = trim(preg_replace('/[\s]+/', '_', strtolower(translitteration($nom_pj))));
 			// Si le fichier a bien un nom et qu'il n'y a pas d'erreur associé à ce fichier
 			if (($nom_pj != null) && ($pj_fichiers['error'][$cle] == 0)) {
 				//On vérifie qu'un fichier ne porte pas déjà le même nom, sinon on lui donne un nom aléatoire + nom original
 				if (file_exists($repertoire_temp_pj.$nom_pj))
-					$nom_pj = rand().$nom_pj;
+					$nom_pj = $nom_pj.'_'.rand();
 				
 				//déplacement du fichier vers le dossier de réception temporaire	
 				if (move_uploaded_file($pj_fichiers['tmp_name'][$cle], $repertoire_temp_pj.$nom_pj)) {
