@@ -24,30 +24,34 @@ $GLOBALS['i18n_gallery_fr'] = array(
 
 // G
 'gimg_modele' => 'Modele gimg',
-'gimg_modele_presentation' => 'ce plugin fourni un modele &lt;gimg|item=XXX&gt; qui permet d\'afficher les image de Gallery 2
-        avec le m&ecirc;me rendu que les balises &lt;imgYYY&gt; de SPIP (|left ou |right fonctionnent &agrave; l\'identique)
-        ou comme une simple balise HTML &lt;img src="mon-image.jpg"...&gt; si on passe le param&egrave;tre 
-        |affiche=brut (&lt;gimg|item=XXX|affiche=brut&gt;). 
+'gimg_modele_presentation' => 'ce plugin fourni un modele <strong>&lt;gimg|item=XXX&gt;</strong> qui permet d\'afficher les image de Gallery 2
+        avec le m&ecirc;me rendu que les balises <strong>&lt;imgYYY&gt;</strong> de SPIP 
+        (<strong>|left</strong> ou <strong>|right</strong> fonctionnent &agrave; l\'identique)
+        ou comme une simple balise HTML <strong>&lt;img src="mon-image.jpg"...&gt;</strong> si on passe le param&egrave;tre 
+        <strong>|affiche=brut</strong> (<strong>&lt;gimg|item=XXX|affiche=brut&gt;</strong>). 
         <br/>Par d&eacute;faut la taille de l\'image sera celle configur&eacute;e ici  
-        sauf si on ajoute un param&egrave;tre |taille=ZZZ (valeur en pixel)',
+        sauf si on ajoute un param&egrave;tre <strong>|taille=ZZZ</strong> (valeur en pixel)',
 'gimg_taille' => 'Taille des images par d&eacute;faut (en pixels)',
 'gimg_taille_explication' => 'sera remplac&eacute; par le parametre {taille=...} du mod&egrave;le si il en existe un', 
 'g2photo_modele' => 'Modele gphoto',
-'g2photo_modele_presentation' => 'ce plugin fourni un modele &lt;gphoto...&gt; qui permet 
-        d\'afficher les vignettes des photos stock&eacute;es dans Gallery 2
-        avec un lien qui les ouvre dans la page SPIP de Gallery (|left ou |right fonctionnent &agrave; l\'identique). 
-        <br/>En principe ce mod&egrave;le n&eacute;cessite un parametre {item=1} ou {item=1:2:3} 
-        pour afficher la(les) photo(s) correspondante(s) 
-        (dans le cas de plusieurs items, on peut ajouter un parametre {sep=...du code html ou autre...}: 
-        le code "sep" est ins&eacute;r&eacute; entre les diff&eacute;rentes photos)
-        <br/>Le parametre {item=...} peut &ecirc;tre remplac&eacute; par un parametre 
-        {dernieres=X} qui permet d\'afficher les X derni&egrave;res photos.
-        <br/>Si on ne passe aucun de ces 2 param&egrave;tres on affiche une photo au hazard.
-        <br/>Dans tous les cas on transmet un &eacute;ventuel param&egrave;tre {taille=XXX}: 
-        qui surclasse la taille par d&eacute;faut d&eacute;finie ici.
+'g2photo_modele_presentation' => 'ce plugin fourni un modele <strong>&lt;gphoto...&gt;</strong> qui permet 
+        d\'afficher les vignettes des photos ou albums stock&eacute;es dans Gallery 2
+        avec un lien qui les ouvre dans la page SPIP de Gallery (|left</strong> ou |right</strong> fonctionnent &agrave; l\'identique). 
+        <br/>En principe ce mod&egrave;le n&eacute;cessite un parametre <strong>|item=1</strong> ou <strong>|item=1:2:3</strong> 
+        pour afficher la(les) photo(s) ou album(s) correspondant(s) 
+        <br/>Dans le cas de plusieurs items, on peut ajouter un parametre <strong>|sep=...du code html ou autre...</strong>: 
+        le code "sep" est ins&eacute;r&eacute; entre les diff&eacute;rents photos/albums)
+        <br/>Le parametre <strong>|item=...</strong> peut &ecirc;tre remplac&eacute; par un parametre 
+        <strong>|dernieres=X</strong> qui permet d\'afficher les X derni&egrave;res photos. 
+        Si on ajoute le param&egrave;tre <strong>|type=album</strong> ce sont les X derniers albums qui sont affich&eacute;s.
+        <br/>Si on ne passe aucun de ces 2 param&egrave;tres on affiche une photo au hazard (ou un album si |type=album ).
+        <br/>Dans tous les cas on transmet un &eacute;ventuel param&egrave;tre <strong>|taille=XXX</strong>: 
+        qui surclasse la taille de la vignette par d&eacute;faut d&eacute;finie ici.
         <br/>Le lien sur l\'image cr&eacute;&eacute; par le mod&egrave;le peut &ecirc;tre supprim&eacute; si on passe
-        un param&egrave;tre {lien=non} ou remplac&eacute; par un autre url avec {lien=http://trux.tld} ou remplac&eacute;
-        par un lien sur l\image elle m&ecirc;me avec {lien=img} comme le fait SPIP dans le port-folio.',
+        un param&egrave;tre <strong>|lien=non</strong> ou remplac&eacute; par un autre url avec <strong>|lien=http://trux.tld</strong> ou remplac&eacute;
+        par un lien sur l\'image elle m&ecirc;me avec <strong>|lien=img</strong> comme le fait SPIP dans le port-folio.
+        <br/>Les &eacute;l&eacute;ments &agrave; afficher comme l&eacute;gende par d&eacute;faut sont ceux d&eacute;finis ici
+        mais il est possible de ne rien afficher pour une photo en passant le param&egrave;tre <strong>|legende=non</strong>',
 'g2photo_elements' => 'El&eacute;ments &agrave; afficher avec les vignettes des photos (ecrase le r&eacute;glage du module Image Block de Gallery)',
 'g2photo_taille' => 'Taille des vignettes par d&eacute;faut (en pixels)',
 'g2photo_taille_explication' => 'sera remplac&eacute; par le parametre {taille=...} 
@@ -89,6 +93,7 @@ $GLOBALS['i18n_gallery_fr'] = array(
 'squelette_gallery_explication' => 'ce plugin fourni un fichier "gallerie.html" mais vous pouvez souhaiter le renommer ou en utiliser un autre...',
 
 // T
+'test_modeles' => 'Test des mod&egrave;les du plugin Gallery 2',
 'titre_gallery' => 'Connecteur Gallery 2',
 
 // V
