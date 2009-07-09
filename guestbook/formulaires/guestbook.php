@@ -36,7 +36,7 @@ function formulaires_guestbook_verifier_dist(){
 		$erreurs['email'] = _T('spip:form_email_non_valide');
 		$erreurs['email-erreur'] = 'obligatoire';
 	}
-	if (_request('verif') != _request('captcha'))
+	if ((_request('verif') != _request('captcha')) AND (strlen(_request('captcha')) > 0))
 		$erreurs['captcha'] = _T('guestbook:captcha_invalide');
 		
 	if (preg_match(',\d,', _request('prenom'))) {
