@@ -27,8 +27,9 @@ _
 	<icon>images/echoppe_blk_50.png</icon>
 	<prefix>echoppe</prefix>
 	<necessite id='cfg' version='[1.0.6;]' />
-	<necessite id='Inscription2' version='[0.2;]' />
-	<necessite id='Ajaxforms' version='[0.2;]' /> 
+	<necessite id='inscription2' version='[0.2;]' />
+	<necessite id='porte_plume' version='[1.2.6;]' /> 
+	<necessite id='ajaxforms' version='[0.2;]' /> 
 	<necessite id='spip_bonux' version='[1.6;]' /> 
 	<necessite id="lib:jquery.ui-1.6rc2" src="http://jquery-ui.googlecode.com/files/jquery.ui-1.6rc2.zip" />
 	<install>base/echoppe_upgrade.php</install>
