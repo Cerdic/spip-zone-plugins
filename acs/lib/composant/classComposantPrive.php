@@ -329,7 +329,7 @@ class AdminComposant {
 		// Recherche une mise en page et y remplace les variables par des contrôles
 		$mis_en_page = array();
 		if (is_readable($this->rootDir.'/ecrire/'.$this->type.'_mep.html')) {
-			$mep .= recuperer_fond($this->rootDir.'/ecrire/'.$this->type.'_mep', array('lang' => $GLOBALS['spip_lang']));
+			$mep .= recuperer_fond('composants/'.$this->type.'/ecrire/'.$this->type.'_mep', array('lang' => $GLOBALS['spip_lang']));
 			foreach ($controls as $nom=>$html) {
 			  $tag = '&'.$nom.'&';
 			  if (strpos($mep, $tag) !== false)
