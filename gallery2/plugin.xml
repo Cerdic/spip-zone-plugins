@@ -8,16 +8,16 @@
     portage spip 1.9: job, 
     passage en plugin (spip 2.0): cy_altern</auteur>
 	<version>
-	0.1
+	   1.0.0
 	</version>
 	<etat>
-	dev
+	test
 	</etat>
 	<description>
     <multi>[fr]Integration de Gallery 2 dans SPIP sous forme d'une page de squelette et de modeles
 	 </multi>
   </description>
-	<lien>http://www.spip-contrib.net/Integration-de-l-album-de-photos</lien> <!-- URI de documentation -->
+	<lien>http://www.spip-contrib.net/Gallery2-pour-SPIP</lien> <!-- URI de documentation -->
 	<prefix>
 	 g2
 	</prefix>
@@ -25,6 +25,8 @@
 	<icon>g2.png</icon>
 	<chemin dir='' />
 	<necessite id="SPIP" version="[2.0.0;]" />
+	<necessite id="cfg" version="[1.10.2;]" />
+	<necessite id="spip_bonux" version="[1.8;]" />	
 	<onglet id="g2" parent="configuration">
 		<icone>g2-24.png</icone>
 		<titre>Gallery 2</titre>
