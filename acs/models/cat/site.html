@@ -9,8 +9,7 @@ Copyright Daniel FAIVRE, 2007-2009
 Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 
 ][(#CONFIG{langues_utilisees}|detecte_langue{#SELF})]<BOUCLE_site(SYNDICATION) {id_syndic} {unique}>
-[(#REM) Les sites n'ont pas de "lang" a proprement parler ; on se base donc sur la langue de la rubrique qui les contient. Les articles syndiques, eux, ont une "lang". ]
-<BOUCLE_lang(RUBRIQUES){id_rubrique}>[(#SET{lang,#LANG})]</BOUCLE_lang>
+<BOUCLE_lang(RUBRIQUES){id_rubrique}>[(#SET{lang,#LANG})]</BOUCLE_lang>[(#REM) Les sites n'ont pas de "lang" a proprement parler ; on se base donc sur la langue de la rubrique qui les contient. Les articles syndiques, eux, ont une "lang". ]
 <INCLURE{fond=composants/fond/entete}{page=site}{title=<:site:>}>
 <div id="colonne1"><div class="spacer"></div>[(#REM) Menu de navigation laterale (colonne 1)]
   <INCLURE{fond=composants/module/module}{self=#SELF}{env=#ENV}{nic=21}>

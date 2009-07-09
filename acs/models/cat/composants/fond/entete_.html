@@ -54,7 +54,7 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 <div class="traductions">[(#SET{userlang,#LANG})]
 <BOUCLE_langues(ARTICLES){fusion lang}{par lang}>
 [(#TOTAL_BOUCLE|>{1}|?{' '})<span lang="#LANG" xml:lang="#LANG" dir="#LANG_DIR" class="lang_button">[(#GET{userlang}|=={#LANG}|?{'',<a href="[(#REM|sinon{spip.php?action=converser}|parametre_url{var_lang,#LANG})]&amp;redirect=<?php
-echo urlencode(self()); ?>" rel="alternate" hreflang="#LANG"[ title="(#TITRE|texte_backend)"]>})]<img src="#EVAL{_DIR_ACS}/lang/flags/[(#LANG)].gif" alt="[(#LANG)]"[ title="(#LANG|traduire_nom_langue)"][ class="(#GET{userlang}|=={#LANG}|?{selected_lang,lang})"] />[(#GET{userlang}|=={#LANG}|?{'',</a>})]</span>]
+echo urlencode(self()); ?>" rel="alternate" hreflang="#LANG"[ title="(#TITRE|texte_backend)"]>})]<img src="#EVAL{_DIR_ACS}lang/flags/[(#LANG)].gif" alt="[(#LANG)]"[ title="(#LANG|traduire_nom_langue)"][ class="(#GET{userlang}|=={#LANG}|?{selected_lang,lang})"] />[(#GET{userlang}|=={#LANG}|?{'',</a>})]</span>]
 </BOUCLE_langues>
 </div>
 <INCLURE{fond=composants/module/module}{self=#SELF}{env=#ENV}{nic=1}>
