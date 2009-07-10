@@ -5,8 +5,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'nom' => 'Rubriques',
 'description' => 'Navigation par rubriques.',
-'info' => 'Types de rubriques:<br />_Group1<br />_Group2<br />_Ours<br />',
-'help' => 'Certains mots-clés de rubriques influent sur leur affichage.<br />Les rubriques ayant pour mot-clé _Group1 et _Group2 s\'affichent dans des blocs de menus séparés. Les rubriques sans mot-clé de type de rubrique sont affichées dans un troisième bloc.<br /><br />La rubrique ayant le mot-clé _Ours ne s\'affiche pas dans les menus de navigation par rubriques, mais par un lien depuis le composant Ours.<br /><br />Si ces mots-clés de types de rubriques sont définis dans un groupe de mots-clés appelé _rubs, ce groupe ne sera pas affiché dans la liste des groupes de mots-clés.',
+'info' => 'Types de rubriques:<br />_Group1<br />_Group2<br />_Ours<br />_Archive<br />',
+'help' => 'Certains mots-clés de rubriques influent sur leur affichage :<br /><br />Les rubriques ayant pour mot-clé _Group1 et _Group2 s\'affichent dans des blocs de menus séparés. Les rubriques sans mot-clé de type de rubrique sont affichées dans un troisième bloc.<br /><br />La rubrique ayant le mot-clé _Ours ne s\'affiche pas dans les menus de navigation par rubriques, mais par un lien depuis le composant Ours.<br /><br />Les rubriques ayant un mot-clé qui commence par "_", comme "_Archive", ne s\'affichent pas dans les menus de navigation par rubriques, mais sont visibles sur le plan du site.<br /><br />Si ces mots-clés de types de rubriques sont définis dans un groupe de mots-clés appelé _rubs, ce groupe ne sera pas affiché dans la liste des groupes de mots-clés.',
 
 'Fond2' => 'niveau 2',
 'Fond3' => 'niveau 3',

@@ -49,11 +49,12 @@ $def = array(
 	'acsAudioMp3on' => '=acsRubnavFond6', 
 
 	'acsAuteursUse' => 'oui',
+	'acsAuteursTitreFond' => '=acsRubnavTitreFond',
+	'acsAuteursTitreFondImage' => '=acsRubnavTitreFondImage',
+	'acsAuteursFond' => '=acsRubnavFond',
 	'acsAuteursBordColor' => '=acsRubnavBordColor',
 	'acsAuteursBordWidth' => '=acsRubnavBordWidth',
 	'acsAuteursBordStyle' => '=acsRubnavBordStyle',
-	'acsAuteursTitreFond' => '=acsRubnavTitreFond',
-	'acsAuteursTitreFondImage' => '=acsRubnavTitreFondImage',
 
 	'acsBanniereUse' => 'oui',
 	'acsBanniereFond' => '#fcfcfc',
@@ -64,8 +65,9 @@ $def = array(
 	'acsBanniereFont' => 'Verdana, Arial',
 
 	'acsBrevesUse' => 'oui',
-	'acsBrevesTitreFondColor' => '=acsRubnavTitreFond',
+	'acsBrevesTitreFond' => '=acsRubnavTitreFond',
 	'acsBrevesTitreFondImage' => '=acsRubnavTitreFondImage',
+	'acsBrevesFond' => '=acsRubnavFond',
 	'acsBrevesBordColor' => '=acsRubnavBordColor',
 	'acsBrevesBordWidth' => '=acsRubnavBordWidth',
 	'acsBrevesBordStyle' => '=acsRubnavBordStyle',
@@ -95,6 +97,9 @@ $def = array(
 	'acsFondDeplierBas' => 'deplierbas.gif',
 
 	'acsForumsUse' => 'oui',
+	'acsForumsTitreFond' => '=acsRubnavTitreFond',
+	'acsForumsTitreFondImage' => '=acsRubnavTitreFondImage',
+	'acsForumsFond' => '=acsRubnavFond',
 	'acsForumsBordColor' => '=acsRubnavBordColor',
 	'acsForumsBordWidth' => '=acsRubnavBordWidth',
 	'acsForumsBordStyle' => '=acsRubnavBordStyle',

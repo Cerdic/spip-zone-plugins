@@ -12,6 +12,7 @@ ACS version 0.5
 Modele Cat pour ACS vesion 0.5:
  - Composant Agenda : amélioration CSS. Tri par heure des articles publies/modifies/breves dans l'info-bulle. Encapsulation des styles css dans la classe cAgenda. Bulle d'aide. masquage des redirections d'articles SPIP.
  - Composant Articles : meilleure integration avec plugin notation (0.6.3) et composant Democratie. Variables liees au plan deplacees vers le composant rubriques.
+ - Composant Agenda : images dans IMG/_acs/
  - Composant Audio : pagination ajax.
  - Composant Breves : feuille de style personnalisable indépendante.
  - Composant Edito : mise a jour pour plugin notation 0.6.3. Prise en compte correcte du nombre de lettres avant coupure.
@@ -22,7 +23,7 @@ Modele Cat pour ACS vesion 0.5:
  - Composant Banniere : nouvelles variables. 
  - Comopsant Forums : amelioration de la css pour ses deux "noisettes", et nouvelle mise en page dans l'espace prive.Suppression des fichiers de langue publics, devenus inutiles. Mise en page mise à jour avec nouvelle balise <admin>
  - Composant Ours : tous les liens predefinis deviennent optionnels. Pied de page totalement personnalisable. Ajout des statistiques globales du site.
- - Composant Rubnav : amélioration CSS, 6 niveaux de couleurs de profondeurs de rubriques.
+ - Composant Rubnav : amélioration CSS, 6 niveaux de couleurs de profondeurs de rubriques. Masquage des rubriques ayant un mot-clé qui commence par "_", comme "_Ours" ou "_Archive".
  - Composant Syndic : integration du formulaire site. Pagination ajax et améliorations look.
  - Composant Tags : valeur par defaut de la couleur de fond et du fond du titre = celle de Rubnav
  - Composant Video : correction positionnement du lien telecharger. Ajax.
