@@ -18,8 +18,11 @@
 	function RevisionNbsp_revision_nbsp($letexte) {
 		if (!_DIR_RESTREINT) {
 			$letexte = echappe_html($letexte, '', true, ',(<img[^<]*>),Ums');
-			return str_replace('&nbsp;',
-				'<span class="spip-nbsp">&nbsp;</span>', $letexte);
+			$letexte = str_replace('&nbsp;',
+				'<span style="border-bottom:2px solid #ccc;">&nbsp;</span>', $letexte);
+			$letexte = str_replace("\n_ ",
+				"<span style='color:orange;'>&para;</span>\n_ ", $letexte);
+			return $letexte;
 		} else
 			return $letexte;
 	}
