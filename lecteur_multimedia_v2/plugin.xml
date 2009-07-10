@@ -1,0 +1,20 @@
+<plugin>
+	<nom>Lecteur Multimedia v2</nom>
+	<auteur>BoOz, kent1</auteur>
+	<version>0.1</version>
+	<version_base>0.1</version_base>
+	<etat>dev</etat>
+	<prefix>lm2</prefix>
+	<description>
+	Ma description du plugin
+	</description>
+	<fonctions>lm2_fonctions.php</fonctions>
+	<options>lm2_options.php</options>
+	<install>base/lm2_install.php</install>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>lm2_pipelines.php</inclure>
+	</pipeline>
+	<necessite id="lib:soundmanagerv295a-20090501" src="http://www.schillmania.com/projects/soundmanager2/download/soundmanagerv295a-20090501.zip" />
+	<necessite id="lib:jquery-ui-1.7.2.custom" src="http://jqueryui.com/download/jquery-ui-1.7.2.custom.zip" />
+</plugin>

@@ -1,0 +1,103 @@
+#CACHE{0}
+
+[<link rel="stylesheet" href="(#CHEMIN{labasplayer.css})" type="text/css" />]
+
+[(#REM) audio 
+	<img  src="#CHEMIN{skins/la-bas/play-liyt.png}" alt="play"/>
+]
+
+<div id="player">
+	<div id="playing">
+	En ce moment vous &eacute;coutez : 
+		<div id="scroller_container">
+			<div id="scroller">
+				<div id="now_playing"> </div>
+			</div>
+		</div>
+	</div>
+
+	<div id="scrollbar">
+		<div id="loading"></div>
+		<div id="position"></div>
+	</div>
+
+<div style="clear:both;"></div>
+
+<script>
+html_bouton_play = "<span class=\"cho\"><img src=\""+ DIR_PLUGIN_PLAYER + "play.png\" alt=\"play\"/></span>";	
+html_bouton_pause = "<span class=\"cho\"><img src=\""+ DIR_PLUGIN_PLAYER + "pause.png\" alt=\"pause\"/></span>";
+</script>
+
+	<div class="autres_boutons">
+		<div onclick="reset_boutons();player_stop();"><img src="#CHEMIN{skins/la-bas/stop.png}" alt="stop"/></div>
+		<div onclick="player_next()"> <img src="#CHEMIN{skins/la-bas/forward.png}"  id="bouton_forward" alt="suivant"/></div>
+		<div onclick="player_prev()"> <img src="#CHEMIN{skins/la-bas/backward.png}" id="bouton_next" alt="precedant"/></div>
+	</div>
+
+	<div class="play" id="bouton_play">
+		<img src="#CHEMIN{skins/la-bas/play.png}" alt="play"/>
+	</div>
+
+<div style="clear:both;"></div>
+	<div class="time">
+		<div class="position">
+		0'00''
+		</div>
+		<div class="duration">
+		0'00''
+		</div>
+	</div>
+
+<BOUCLE_derniere(ARTICLES){id_article}{id_secteur=181}{!par date}{0,1}>
+		
+[(#NOOP|playliste_emision{mp3/[(#DATE_REDAC|affdate{'ymd'})]/})]
+		<div class="haudio">
+		<a href="http://media.la-bas.org/mp3/[(#DATE_REDAC|affdate{'ymd'})]/[(#DATE_REDAC|affdate{'ymd'})].mp3" title="#TITRE" rel="enclosure" class="htrack title main_title playable" type="audio/mpeg"/>#TITRE</a>
+		</div>
+
+[(#SET{ecouter_en,
+Ecouter en <a href="http://media.la-bas.org/m3u/[(#DATE_REDAC|affdate{'ymd'})].m3u">Ogg</a> - <a href="http://www.la-bas.org/mp3/[(#DATE_REDAC|affdate{'ymd'})].ram">Ram</a> - <a href="http://media.la-bas.org/mp3/[(#DATE_REDAC|affdate{'ymd'})]/[(#DATE_REDAC|affdate{'ymd'})].mp3">Mp3</a>
+})]	
+[(#SET{podcaster,<a href="itpc://www.la-bas.org/podcast-[(#DATE_REDAC|affdate{'ymd'})].php3">Podcaster</a>})]
+[(#SET{telecharger,<a href="http://media.la-bas.org/mp3/[(#DATE_REDAC|affdate{'ymd'})]">Télécharger</a>})]
+</BOUCLE_derniere>
+
+<BOUCLE_dernierel(ARTICLES){id_secteur IN 130,181}{age < 7}{!par date}{0,1}>
+		<div class="haudio">
+		<a href="http://media.la-bas.org/mp3/[(#DATE_REDAC|affdate{'ymd'})]/[(#DATE_REDAC|affdate{'ymd'})].mp3" title="#TITRE" rel="enclosure" class="htrack title main_title playable" type="audio/mpeg"/>#TITRE</a> 
+		</div>
+
+[(#SET{ecouter_en,
+Ecouter en <a href="http://media.la-bas.org/m3u/[(#DATE_REDAC|affdate{'ymd'})].m3u">Ogg</a> - <a href="http://www.la-bas.org/mp3/[(#DATE_REDAC|affdate{'ymd'})].ram">Ram</a> - <a href="http://media.la-bas.org/mp3/[(#DATE_REDAC|affdate{'ymd'})]/[(#DATE_REDAC|affdate{'ymd'})].mp3">Mp3</a>
+})]
+[(#SET{voir_la_page,<a style="color:white;" href="#URL_ARTICLE">Voir la page de l'&eacute;mission</a>})]
+[(#SET{podcaster,<a href="itpc://www.la-bas.org/podcast-[(#DATE_REDAC|affdate{'ymd'})].php3">Podcaster</a>})]
+[(#SET{telecharger,<a href="http://media.la-bas.org/mp3/[(#DATE_REDAC|affdate{'ymd'})]">Télécharger</a>})]
+</BOUCLE_dernierel>
+
+<BOUCLE_dernierelpop(ARTICLES){id_secteur IN 130,181}{par hasard}{0,1}>
+		
+		<div class="haudio">
+		<a href="http://media.la-bas.org/mp3/[(#DATE_REDAC|affdate{'ymd'})]/[(#DATE_REDAC|affdate{'ymd'})].mp3" title="#TITRE" rel="enclosure" class="htrack title main_title playable" type="audio/mpeg"/>#TITRE</a> 
+		</div>
+
+[(#SET{ecouter_en,
+Ecouter en <a href="http://media.la-bas.org/m3u/[(#DATE_REDAC|affdate{'ymd'})].m3u">Ogg</a> - <a href="http://www.la-bas.org/mp3/[(#DATE_REDAC|affdate{'ymd'})].ram">Ram</a> - <a href="http://media.la-bas.org/mp3/[(#DATE_REDAC|affdate{'ymd'})]/[(#DATE_REDAC|affdate{'ymd'})].mp3">Mp3</a>
+})]
+#SET{voir_la_page,<a style="color:white;" href="#URL_ARTICLE">Voir la page de l'&eacute;mission</a>}
+[(#SET{podcaster,<a href="itpc://www.la-bas.org/podcast-[(#DATE_REDAC|affdate{'ymd'})].php3">Podcaster</a>})]
+[(#SET{telecharger,<a href="http://media.la-bas.org/mp3/[(#DATE_REDAC|affdate{'ymd'})]">Télécharger</a>})]
+</BOUCLE_dernierelpop>
+<//B_dernierel>
+<//B_derniere>
+
+	<div id="diffusion">
+	    <ul class="gauche">
+	    [<li>(#GET{voir_la_page})</li>]
+	    [<li>(#GET{ecouter_en})</li>]
+	    [<li>(#GET{podcaster})</li>]
+	    [<li>(#GET{telecharger})</li>]
+	    </ul>
+	    <div style="clear:both;"></div>
+	</div>
+</div>

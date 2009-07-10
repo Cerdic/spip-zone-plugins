@@ -1,0 +1,222 @@
+#CACHE{0}
+<style type="text/css" media="screen">
+	@import url('#CHEMIN{skins/blogo/css/radio.css}');
+</style>
+<script>
+jQuery(document).ready(function(){
+
+jQuery("#playliste_video").hide();
+jQuery("#playliste_podcast").hide();
+jQuery("img.player_logo_art").hide();
+
+var player_image_url = jQuery("img.player_logo_art").eq(0).attr("src") ; 
+var player_link_url = jQuery("img.player_logo_art").eq(0).next().attr("href");
+
+//console.log(player_link_url);
+
+if(player_image_url !== undefined)
+	jQuery("#media").html("<a href='" + player_link_url + "'><img src='" + player_image_url + "' style='width:285px' /> </a>");
+
+jQuery("#affiche_video a").click(function(e){
+	e.preventDefault();
+	jQuery("#menu_affiche td div").css("height","auto");
+	jQuery(this).parent().css("height","20px");
+	jQuery(".playliste,.controles,#scrollbar,#playing,#media").hide();
+	player_stop();
+	jQuery("#playliste_video").show();
+	var id_start = $("a[@title='video']").eq(0).attr("rel");
+	jQuery("#media").load("./?page=embed_video&id_document=" + id_start);
+});
+
+jQuery("#affiche_podcast a").click(function(e){
+	e.preventDefault();
+	jQuery("#menu_affiche td div").css("height","auto");
+	jQuery(this).parent().css("height","20px");
+	jQuery(".playliste,.controles,#scrollbar,#playing,#media").hide();
+	jQuery("#media").html('');
+	player_stop();
+	jQuery("#playliste_podcast").show();
+});
+
+jQuery("#affiche_musique a").click(function(e){
+	e.preventDefault();
+	jQuery(".playliste").hide();
+	jQuery("#menu_affiche td div").css("height","auto");
+	jQuery(this).parent().css("height","20px");
+	jQuery("#video").hide();
+	jQuery("#playliste_musique").show();
+
+	var player_image_url = $("img.player_logo_art").eq(0).attr("src") ; 
+	var player_link_url = $("img.player_logo_art").eq(0).next().attr("href");
+
+	//console.log(player_link_url);
+	if(player_image_url !== undefined)
+	jQuery("#media").html("<a href='" + player_link_url + "'><img src='" + player_image_url + "' style='width:285px' /> <\/a>");
+
+	jQuery(".controles,#scrollbar,#playliste_musique,#playing").show();
+});
+
+swfArray = new Array();
+swftitles = new Array();
+jQuery("a[@title='video']").each(
+	function(i) {	 
+		// we store swf links in an array
+		swfArray.push(this.href);
+		swftitles.push($(this).html());
+
+		//demarrer le lecteur lors d'un click
+		jQuery(this).click(
+             function(e){
+				e.preventDefault();
+				jQuery("#media").load("./?page=embed_video&id_document=" + this.rel);
+				// jQuery("#now_playing").html(jQuery(this).html());
+             }
+        );
+	}
+);
+
+});
+</script>		
+
+<div class="radiobox">
+<div id="media">
+
+</div>
+<div id="playing">
+En ce moment vous &eacute;coutez : 
+<div id="scroller_container">
+<div id="scroller">
+<div id="now_playing"> </div>
+</div>
+</div>
+</div>
+
+<div class="leplayer">LE PLAYER</div>
+
+<div id="scrollbar">
+<div id="loading"></div>
+<div id="position"></div>
+</div>
+
+<div class="controles">
+<!--
+<li onclick="player_prev()"><</li>
+//-->
+<div class="play">
+	<span><img id="bouton_play" src="#CHEMIN{skins/blogo/play.png}" alt="play"/></span>
+</div>
+<div class="time">
+	<div class="duration">
+	&nbsp;
+	</div>
+	<div class="position">
+	&nbsp;
+	</div>
+</div>
+<div  class="autres_boutons">
+	<span onclick="player_prev()"> <img src="#CHEMIN{skins/blogo/backward.png}" id="bouton_next" alt="precedant"/></span>
+	<span onclick="player_next()"> <img src="#CHEMIN{skins/blogo/forward.png}"  id="bouton_forward" alt="suivant"/></span>
+	<span onclick="reset_boutons();player_stop();"><img src="#CHEMIN{skins/blogo/stop.png}" alt="stop"/></span>
+</div>
+	<!--
+	<li onClick="player_next()">></li>
+	//-->
+</div>
+
+<table id="menu_affiche"><tr>
+<td><div id="affiche_musique"><a href="#">MUSIQUE</a></div></td>
+<td><div id="affiche_video"><a href="#">VIDEOS</a></div></td>
+#SET{visibility,""}
+<BOUCLE_podcast(ARTICLES documents_articles documents types_documents mots_articles) {id_mot = 21}  {statut=publie} {id_article ?} {extension==mp3}{!par date}{0,1}> </BOUCLE_podcast> [(#TOTAL_BOUCLE|=={0}|?{' ',''}) #SET{visibility,"visibility:hidden"} ] <//B_podcast>
+
+<td><div id="affiche_podcast" style="[(#GET{visibility})]"><a href="#">PODCASTS</a></div></td>
+</tr></table>
+
+<B_doc>
+<ul id="playliste_musique" class="playliste">
+<BOUCLE_doc (ARTICLES documents_articles documents types_documents){statut=publie} {id_article ?} {extension==mp3}{!par date}{0,30}>
+<BOUCLE_logo_art(ARTICLES){id_article}>
+<BOUCLE_doc_mp3(DOCUMENTS){id_article}{extension==mp3}>
+<li class="play_">
+[(#_logo_art:LOGO_ARTICLE||reduire_image{255}|inserer_attribut{"class","player_logo_art"})]<a href="#_logo_art:URL_ARTICLE" title="lire : #_logo_art:TITRE"><img border="0"  src="#CHEMIN{skins/blogo/pucenews.gif}"/></a>
+<a href="#FICHIER" rel="enclosure">[(#TITRE|sinon{[(#FICHIER|joli_titre|couper{30})]})]</a></li>
+</BOUCLE_doc_mp3>
+</BOUCLE_logo_art>
+</BOUCLE_doc>
+</ul>
+</B_doc>
+
+<B_doc_tout>
+<ul id="playliste_musique" class="haudio playliste">
+<BOUCLE_doc_tout (ARTICLES documents_articles documents types_documents){statut=publie}{extension==mp3}{!par date}{0,100}>
+<BOUCLE_logo_art_tout(ARTICLES){id_article}>
+<BOUCLE_doc_mp3_tout(DOCUMENTS){id_article}{extension==mp3}>
+<li class="title play_">
+[(#_logo_art_tout:LOGO_ARTICLE||reduire_image{255}|inserer_attribut{"class","player_logo_art"})]<a href="#_logo_art_tout:URL_ARTICLE" title="lire : #_logo_art_tout:TITRE"><img border="0"  src="#CHEMIN{skins/blogo/pucenews.gif}"/></a>
+<a href="#FICHIER" rel="enclosure">[(#TITRE|sinon{[(#FICHIER|joli_titre|couper{30})]})]</a></li>
+</BOUCLE_doc_mp3_tout>
+</BOUCLE_logo_art_tout>
+</BOUCLE_doc_tout>
+</ul>
+</B_doc_tout>
+
+<//B_doc>
+
+<B_docswf>
+<ul id="playliste_video" class="playliste">
+<BOUCLE_docswf (ARTICLES documents_articles documents types_documents){statut=publie} {id_article ?} {extension==swf}{!par date}{0,30}>
+<BOUCLE_logo_art_swf(ARTICLES){id_article}>
+<BOUCLE_doc_swf(DOCUMENTS){id_article}{extension==swf}>
+<li class="play_"><a href="#_logo_art_swf:URL_ARTICLE" title="lire : #_logo_art_swf:TITRE"><img border="0"  src="#CHEMIN{skins/blogo/pucenews.gif}"/></a>
+<a href="#FICHIER" rel="#ID_DOCUMENT" title="video">[(#TITRE|sinon{[(#FICHIER|joli_titre|couper{30})]})]</a></li>
+</BOUCLE_doc_swf>
+</BOUCLE_logo_art_swf>
+</BOUCLE_docswf>
+</ul>
+</B_docswf>
+
+<B_docswf_tout>
+<ul id="playliste_video" class="playliste">
+<BOUCLE_docswf_tout (ARTICLES documents_articles documents types_documents){statut=publie}{extension==swf}{!par date}{0,100}>
+<BOUCLE_logo_art_swf_tout(ARTICLES){id_article}>
+<BOUCLE_doc_swf_tout(DOCUMENTS){id_article}{extension==swf}>
+<li class="play_"><a href="#_logo_art_swf_tout:URL_ARTICLE" title="lire : #_logo_art_swf_tout:TITRE"><img border="0"  src="#CHEMIN{skins/blogo/pucenews.gif}"/></a>
+<a href="#FICHIER" rel="#ID_DOCUMENT" title="video">[(#TITRE|sinon{[(#FICHIER|joli_titre|couper{30})]})]</a></li>
+</BOUCLE_doc_swf_tout>
+</BOUCLE_logo_art_swf_tout>
+</BOUCLE_docswf_tout>
+</ul>
+</B_docswf_tout>
+<//B_docswf>
+
+<B_docpodcast>
+<ul id="playliste_podcast" class="playliste">
+<BOUCLE_docpodcast(ARTICLES documents_articles documents types_documents mots_articles) {id_mot = 21}  {statut=publie} {id_article ?} {extension==mp3}{!par date}{0,30}>
+<BOUCLE_logo_artpodcast(ARTICLES){id_article}>
+<BOUCLE_doc_mp3podcast(DOCUMENTS){id_article}{extension==mp3}>
+<li class="play_">
+<a href="#_logo_artpodcast:URL_ARTICLE" title="lire : #_logo_artpodcast:TITRE"><img border="0"  src="#CHEMIN{skins/blogo/pucenews.gif}"/></a>
+<a href="#FICHIER" rel="enclosure">[(#TITRE|sinon{[(#FICHIER|joli_titre|couper{30})]})]</a></li>
+</BOUCLE_doc_mp3podcast>
+</BOUCLE_logo_artpodcast>
+</BOUCLE_docpodcast>
+</ul>
+</B_docpodcast>
+
+<B_doc_toutpodcast>
+<ul id="playliste_podcast" class="playliste">
+<BOUCLE_doc_toutpodcast (ARTICLES documents_articles documents types_documents mots_articles) {id_mot = 21} {statut=publie}{extension==mp3}{!par date}{0,100}>
+<BOUCLE_logo_art_toutpodcast(ARTICLES){id_article}>
+<BOUCLE_doc_mp3_toutpodcast(DOCUMENTS){id_article}{extension==mp3}>
+<li class="play_">
+<a href="#_logo_art_toutpodcast:URL_ARTICLE" title="lire : #_logo_art_toutpodcast:TITRE"><img border="0"  src="#CHEMIN{skins/blogo/pucenews.gif}"/></a>
+<a href="#FICHIER" rel="enclosure">[(#TITRE|sinon{[(#FICHIER|joli_titre|couper{30})]})]</a></li>
+</BOUCLE_doc_mp3_toutpodcast>
+</BOUCLE_logo_art_toutpodcast>
+</BOUCLE_doc_toutpodcast>
+</ul>
+</B_doc_toutpodcast>
+
+<//B_docpodcast>
+
+</div>
