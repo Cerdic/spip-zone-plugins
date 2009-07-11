@@ -4,7 +4,7 @@
 #FORMULAIRE_RECHERCHE{#SELF}
 
 #SET{frequences,#ARRAY}
-<BOUCLE_marquepages(MARQUEPAGES){id_auteur}>
+<BOUCLE_marquepages(MARQUEPAGES syndic mots_forum mots){syndic.id_rubrique}{id_auteur}>
 	<BOUCLE_mots_calcul(MOTS){id_forum}>
 		#SET{frequences,#GET{frequences}|array_merge{#ARRAY{#TITRE*,#GET{frequences}|table_valeur{#TITRE*,0}|plus{1}}}}
 	</BOUCLE_mots_calcul>
@@ -14,7 +14,7 @@
 
 [(#REM) On récupère les mots liés]
 #SET{frequences_lies,#ARRAY}
-<BOUCLE_marquepages_lies(MARQUEPAGES){id_auteur}{mots}>
+<BOUCLE_marquepages_lies(MARQUEPAGES syndic mots_forum mots){syndic.id_rubrique}{id_auteur}{mots}>
 	<BOUCLE_mots_lies_calcul(MOTS){id_forum}>
 		#SET{frequences_lies,#GET{frequences_lies}|array_merge{#ARRAY{#TITRE*,#GET{frequences_lies}|table_valeur{#TITRE*,0}|plus{1}}}}
 	</BOUCLE_mots_lies_calcul>

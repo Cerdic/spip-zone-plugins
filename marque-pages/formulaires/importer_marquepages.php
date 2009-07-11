@@ -50,14 +50,20 @@ function formulaires_importer_marquepages_verifier_dist($id_rubrique){
 
 function formulaires_importer_marquepages_traiter_dist($id_rubrique){
 	include_spip('inc/marquepages_api');
+	include_spip('inc/invalideur');
 	global $fichier_ok;
 	$retours = array();
 	
 	$importer = 'marquepages_importer_'.$fichier_ok['type'];
 	$retours = $importer($fichier_ok['chemin'], $id_rubrique);
 	
-	if (!$retours['message_erreur'] and $redirect = _request('redirect')){
-		$retours['redirect'] = str_replace('&amp;', '&', $redirect);
+	// Si tout s'est bien passé
+	if (!$retours['message_erreur']){
+		// On invalide tout le cache
+		suivre_invalideur(1);
+		// On redirige éventuellement
+		if ($redirect = _request('redirect'))
+			$retours['redirect'] = str_replace('&amp;', '&', $redirect);
 	}
 	
 	return $retours;

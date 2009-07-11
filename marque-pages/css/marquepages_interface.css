@@ -125,7 +125,7 @@ h1 a:hover{
 #navigation h2{
 	position:relative;
 	margin:0.2em 0;
-	padding:0.2em 0;
+	padding:0.2em 10px;
 	font-size:1em;
 	font-weight:bold;
 	background:#eee;

@@ -11,7 +11,7 @@ function action_supprimer_marquepage(){
 	$id_forum = intval($arg);
 	
 	global $auteur_session;
-	$redirect = rawurldecode(_request('redirect'));
+	$redirect = str_replace('&amp;', '&', rawurldecode(_request('redirect')));
 	
 	$ok = marquepages_supprimer($id_forum);
 	redirige_par_entete($redirect);

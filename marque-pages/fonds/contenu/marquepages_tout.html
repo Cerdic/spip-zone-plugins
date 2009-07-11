@@ -4,7 +4,7 @@
 <ul class="etiquettes">
 <B_etiquettes>
 	<li><:marquepages:avec_etiquettes:></li>
-<BOUCLE_etiquettes(MOTS){titre=#ENV{titre_mot}}>
+<BOUCLE_etiquettes(MOTS){titre IN #ENV{mots}}>
 	<li>
 		<a href="[(#TITRE|url_mp_tag)]">#TITRE</a>
 		<a href="[(#SELF|url_mp_supprimer_tag{#TITRE})]" title="<:marquepages:enlever:>">-</a>
