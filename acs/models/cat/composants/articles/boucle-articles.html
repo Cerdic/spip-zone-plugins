@@ -1,2 +1,2 @@
-[(#VAR{acsDemocratieUse}|=={oui}|?{' '})<INCLURE{fond=composants/articles/ba-inc-democratie}{self=#SELF}{debut_articles}{classement}{url}>]
-[(#VAR{acsDemocratieUse}|=={oui}|?{'',' '})<INCLURE{fond=composants/articles/ba-inc}{self=#SELF}{debut_articles}>]
+[(#EVAL{defined('_DIR_PLUGIN_NOTATION')}|?{' '})<INCLURE{fond=composants/articles/inc-ban}{self}{debut_articles}{classement}{url}>]
+[(#EVAL{defined('_DIR_PLUGIN_NOTATION')}|?{'',' '})<INCLURE{fond=composants/articles/inc-ba}{self}{debut_articles}>]

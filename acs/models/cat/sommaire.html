@@ -20,10 +20,10 @@ Home page
   [(#VAR{acsOngletsUse}|!={non}|?{' '}) <INCLURE{fond=composants/onglets/onglets}{current=sommaire}{env=#ENV}>
   <div id="onglet">]
   <span id="hierarchie" style="float: left"><:accueil_site:></span>[(#REM) Fil d'Ariane ]
-  <span class="texte_nav" style="float: right"><:acs:fond_meta_page_sommaire:>,[(#VAR{acsEditoUse}|=={oui}|?{' '}) &eacute;ditorial,][(#VAR{acsAgendaUse}|=={oui}|?{' '}) agenda,][(#VAR{acsRepimagesUse}|=={oui}|?{' '}) vid&eacute;os,][(#VAR{acsPlaylistUse}|=={oui}|?{' '}) mp3,] ...</span><br class="nettoyeur" />
+  <span class="texte_nav" style="float: right"><:acs:fond_meta_page_sommaire:></span><br class="nettoyeur" />
   [(#VAR{acsEditoUse}|=={oui}|?{' '}) <INCLURE{fond=composants/edito/edito}{self=#SELF}>]  [(#REM) Contenu principal : éditorial ]
   [(#REM) Contenu principal : derniers communiqués et articles publies ]
-  <INCLURE{fond=composants/articles/boucle-com}{self=#SELF}{debut_articles}> [(#REM)  TODO : ne pas afficher article de l'édito si Edito actif ]
+  <INCLURE{fond=composants/articles/boucle-une}{self=#SELF}{debut_articles}> [(#REM)  TODO : ne pas afficher article de l'édito si Edito actif ]
 	[(#VAR{acsOngletsUse}|!={non}|?{' '}) </div>][(#REM) fin onglet]
 </div>[(#REM) fin colonne2]
 <div id="colonne3"><div class="spacer"></div>

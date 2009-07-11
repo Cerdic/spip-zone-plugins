@@ -9,7 +9,6 @@ par date, sans doublons, pour la langue en cours
 <B_communiques>
   [(#ANCRE_PAGINATION)][<p class="pagination"><:acs:articles_derniers_communiques:> : (#PAGINATION)</p>]
   <div class="liste-articles">
-      [(#ENV{debut_articles}|?{'',' '})]
       <ul>
         <BOUCLE_communiques(ARTICLES notations_objets) {id_objet=id_article} {objet=='article'} {id_rubrique} {par date}{inverse} {doublons} {pagination 3} {statut==#DEMOCRATIE_STATUT} {lang=#LANG}>
             <INCLURE{fond=composants/articles/articles}{id_article}{titre}{surtitre}{soustitre}{texte=#INTRODUCTION}{auteurs=#LESAUTEURS}{date}{date_redac}{date_modif}{coupe=#EVAL{2*#VAR{acsArticlesNbLettres,200}}}{note=#MOYENNE_PONDEREE}>
@@ -30,7 +29,6 @@ Les articles dotés d'une date de publication future ne sont donc pas affichés.
 <B_articles>
   [(#ANCRE_PAGINATION)][<p class="pagination">Derniers textes publiés : (#PAGINATION)</p>]
   <div class="liste-articles">
-      [(#ENV{debut_articles}|?{'',' '})]
       <ul>
         <BOUCLE_articles(ARTICLES notations_objets) {par date} {inverse} {doublons} {pagination #VAR{acsArticlesPagination,10}} {age_relatif>=0} {statut==#DEMOCRATIE_STATUT} {lang=#LANG} {note_ponderee>=#VAR{acsDemocratieSeuilPublic,0}}>
           <INCLURE{fond=composants/articles/articles}{id_article}{id_rubrique}{titre}{surtitre}{soustitre}{texte=#INTRODUCTION}{auteurs=#LESAUTEURS}{date}{date_redac}{date_modif}{coupe=#VAR{acsArticlesNbLettres,200}}{note=#NOTE_PONDEREE}>

@@ -10,8 +10,8 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 
 Page d'un forum
 
-][(#CONFIG{langues_utilisees}|detecte_langue{#SELF})]
-<INCLURE{fond=composants/fond/entete}{env=#ENV}{page=forum}{title=<:acs:forums_meta_page_forums:>}{mrobots=none}>
+][(#CONFIG{langues_utilisees}|detecte_langue{#SELF})][(#SET{mdescription,[(#NOM_SITE_SPIP|textebrut) - ]<:acs:fond_meta_page_forums:>})]
+<INCLURE{fond=composants/fond/entete}{env=#ENV}{page=forum}{title=#GET{mdescription}}{mrobots=none}>
 
 [(#REM) Menu de navigation laterale (colonne 1)]
 <div id="colonne1"><div class="spacer"></div>

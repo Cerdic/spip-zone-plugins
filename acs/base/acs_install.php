@@ -65,7 +65,7 @@ function copy_dir($dir2copy, $dir_paste) {
 if ($dir2copy && @is_dir($dir2copy)) {
 	// Si le dossier destination n'existe pas, on le cree
 	if (!mkdir_recursive($dir_paste))
-		continue;
+		return;
 	if ($dh = opendir($dir2copy)) {
   	// On liste les dossiers et fichiers de $dir2copy
   	while (($file = readdir($dh)) !== false) {
