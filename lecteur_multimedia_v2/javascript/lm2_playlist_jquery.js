@@ -1,9 +1,6 @@
 /**
  * @author kent1
  */
-// plugin definition
-soundManager.useMovieStar = true;
-soundManager.allowFullScreen = true;
 
 (function($){
 	var liens = [];
@@ -12,25 +9,54 @@ soundManager.allowFullScreen = true;
 	var isPlaying = false;
 	var isPaused = false;
 	var typePlaying = false;
-	
-	var isvideo = /\.(flv|mov|mp4|m4v|f4v|m4a|mp4v|3gp|3g2)(\?.*)?$/i;
+	var isvideo;
 	var issound = /\.(mp3|aac)(\?.*)?$/i;
 	
 	$.fn.playlist = function(options) {
 		var defaults = {
 			sources : $('a[type=application/mp4],a[type=audio/mpeg],a[type=video/x-flv]'),
+			smUrl : "soundmanager/swf/",
+			smnullUrl : "soundmanager/null.mp3",
 			logo : false,
 			playNext: false, // stop after one sound, or play through list until end
 			autoLoad: false,
-			autoPlay: false
+			autoPlay: false,
+			movie: true,
+			fullscreen: false,
+			wmode: 'transparent',
+			debug: false
 		};
-		var options = $.extend(defaults, options); 
+		var options = $.extend(defaults, options);
+		
+		soundManager.wmode = options.wmode;
+		soundManager.url = options.smUrl;
+		soundManager.nullURL = options.smnullUrl;
+		soundManager.allowFullScreen = options.fullscreen;
+		
+		if(options.movie){
+			isvideo = /\.(flv|mov|mp4|m4v|f4v|m4a|mp4v|3gp|3g2)(\?.*)?$/i;
+			soundManager.useMovieStar = true;
+			soundManager.flashVersion = 9;
+			soundManager.defaultOptions = {
+					useVideo: true
+			}
+		}
+		
+		if(options.debug){
+			soundManager.consoleOnly = true;
+			soundManager.debugMode = true;	
+		}else{
+			soundManager.consoleOnly = false;
+			soundManager.debugMode = false;
+		}
+		
 		$this = $(this);
 		var playliste_text = '';
 		var nb = 0;
 		options.sources.each(function() {
 			$source = $(this);
-			if($.inArray($source.attr('href'),liens)<0){
+			var sURL = $source.attr('href');
+			if(($.inArray(sURL,liens)<0) ) {
 				playliste_text += '<li class="sm2_play"><a href='+$source.attr('href')+'>'+$source.attr('href')+'</a></li>';
 				liens.push($source.attr('href'));
 				nb++;
@@ -90,7 +116,7 @@ soundManager.allowFullScreen = true;
 		live_track = i;
 
 		//$("span.play_:eq("+i+")").html("stop").addClass("play_on");
-		$("span.play_:eq("+i+")").html("<img src='" + image_pause + "'/>").addClass("play_on");	
+		//$("span.play_:eq("+i+")").html("<img src='" + image_pause + "'/>").addClass("play_on");	
 		// i c pas forcemment bon si t'as un player avant le lien, il faut retrancher le nb d'item de la playlist du lecteur 
 		// (ne pas mettre enclosure aux deux ?)	
 		// limiter une playliste a son parent plutot qu'a la page ?
@@ -144,6 +170,7 @@ soundManager.allowFullScreen = true;
 		console.log(liens[i].match(isvideo));
 		var video = liens[i].match(isvideo) ? true : false;
 		if(video){
+			if(soundManager.canPlayURL(liens[i])){
 			soundManager.createVideo({
 				id:'media_'+i,
 				url:liens[i],
@@ -180,6 +207,7 @@ soundManager.allowFullScreen = true;
 				'volume': 100    	
 			});
 			typePlaying = 'video';
+			}
 		}else{
 			soundManager.createSound({
 				id:'media_'+i,
