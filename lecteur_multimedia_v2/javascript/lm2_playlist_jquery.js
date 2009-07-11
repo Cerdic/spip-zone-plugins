@@ -22,12 +22,14 @@
 			autoLoad: false,
 			autoPlay: false,
 			movie: true,
+			bgcolor: '#000000',
 			fullscreen: false,
 			wmode: 'transparent',
 			debug: false
 		};
 		var options = $.extend(defaults, options);
 		
+		soundManager.bgColor = options.bgcolor;
 		soundManager.wmode = options.wmode;
 		soundManager.url = options.smUrl;
 		soundManager.nullURL = options.smnullUrl;
