@@ -92,6 +92,7 @@ function formater_auteur_mail($row, $id_auteur)
 
 	if ($row['imessage'] != 'non'
 	AND $GLOBALS['meta']['messagerie_agenda'] != 'non')
+//RERSTEST		$href = generer_action_auteur("editer_message","normal/$id_auteur")."&rers=$titre";
 		$href = generer_action_auteur("editer_message","normal/$id_auteur");
 	else if (strlen($row['email'])
 	AND autoriser('voir', 'auteur', $id_auteur))

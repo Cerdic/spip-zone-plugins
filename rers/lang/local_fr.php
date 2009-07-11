@@ -14,7 +14,7 @@ $rers_rub_vie = lire_config('rers/rers_rub_vie');
 $id_art = $_GET['id_article'];
 $id_rub = $_GET['id_rubrique'];
 if ($id_rub == ''){
-$row = spip_fetch_array(spip_mysql_query("SELECT id_rubrique FROM spip_articles WHERE id_article=$id_art")); $id_rub  = $row['id_rubrique'];
+$row = spip_fetch_array(spip_query("SELECT id_rubrique FROM spip_articles WHERE id_article=$id_art")); $id_rub  = $row['id_rubrique'];
 }
 
 
@@ -152,13 +152,21 @@ if ($rers_exec == 'message_edit' AND $rers_dest !== '')
 {
 $GLOBALS[$GLOBALS['idx_lang']][bouton_envoi_message_02] = 
 "ENVOYER UN MESSAGE
-<br /> <small> Ce message est strictement privé. Si le destinataire a une adresse électronique, il recevra un email lui indiquant qu'il a un nouveau message à consulter sur le site RERS Sud Aisne.</small>
-<br /> Sinon, c'est à sa prochaine connexion au site qu'il lira ce message."
+<small>
+<br/>
+<br /> N'oubliez pas d'indiquer dans le message la fiche de savoir qui vous fait réagir.
+<br/>
+<br />  Ce message est strictement privé. 
+ Si le destinataire a une adresse électronique, il recevra un email lui indiquant qu'il a un nouveau message à consulter sur le site RERS Sud Aisne.
+Sinon, c'est à sa prochaine connexion au site qu'il lira ce message.
+</small>"
 ;
-$GLOBALS[$GLOBALS['idx_lang']][info_texte_message_02] = //ecrire
-"Texte du message. 
-	<br /> >> Précisez par exemple le sujet de la fiche de savoir qui vous fait réagir."
-;
+
+//$GLOBALS[$GLOBALS['idx_lang']][info_texte_message_02] = //ecrire
+//"Texte du message. 
+//	<br /> >> Précisez par exemple le sujet de la fiche de savoir qui vous fait réagir."
+//;
+
 }
 
 

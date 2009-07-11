@@ -411,14 +411,16 @@ if ($id_rubrique == $rers_rub_offres OR $id_rubrique == $rers_rub_demandes)
 		  . "<br class='nettoyeur' />";
 	}
 
+
+
+//RERS
+if ($id_rubrique != $rers_rub_offres AND $id_rubrique != $rers_rub_demandes)
+ {//RERS
+
 	//////////  Les articles en cours de redaction
 	/////////////////////////
 
-//RERS
-if ($id_rubrique != $rers_rub_offres AND $id_rubrique != $demandes)
- {//RERS
   $res .= afficher_objets('article',_T('info_tous_articles_en_redaction'), array("WHERE" => "statut='prepa' AND id_rubrique=$id_rubrique", 'ORDER BY' => "date DESC"));
-}//RERS
 
 	//////////  Les articles publies
 	/////////////////////////
@@ -437,6 +439,9 @@ if ($id_rubrique != $rers_rub_offres AND $id_rubrique != $demandes)
 	if ($GLOBALS['meta']["activer_sites"] == 'oui') {
 		$res .= afficher_objets('site','<b>' . _T('titre_sites_references_rubrique') . '</b>', array("FROM" => 'spip_syndic', 'WHERE' => "id_rubrique=$id_rubrique AND statut!='refuse' AND statut != 'prop' AND syndication NOT IN ('off','sus')", 'ORDER BY' => 'nom_site'));
  		$res .= $bouton_sites;
+
+}//RERS
+
 	}
 
 

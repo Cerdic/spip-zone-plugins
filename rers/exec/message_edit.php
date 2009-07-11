@@ -24,12 +24,16 @@ function exec_message_edit_dist()
 			       intval(_request('dest')));
 }
 // http://doc.spip.org/@exec_message_edit_args
-function exec_message_edit_args($id_message, $new, $dest)
+function exec_message_edit_args($id_message, $new, $dest,$texterers)
 {
 	global  $connect_id_auteur, $connect_statut;
 
 	if ($new == 'oui') {
 		$onfocus = "\nonfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
+//RERS   Par défaut, le texte comporte le titre de la fiche de savoir depuis laquelle on contacte l'auteur
+//RERSTEST		$texte = entites_html($texterers);
+
+
 	} else $onfocus = '';
 
 	$row = sql_fetsel("*", "spip_messages", "id_message=$id_message");
