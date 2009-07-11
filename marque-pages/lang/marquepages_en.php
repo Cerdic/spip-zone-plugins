@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'aucun_marquepages' => 'There is no bookmarks.',
 'nombre_marquepages' => '@nombre@ bookmarks',
 'avec_etiquettes' => 'with tags',
+'contenant' => 'containing @recherche@',
 'poste_le' => 'post on',
 'et' => 'and',
 'autres' => 'other(s)',
@@ -24,7 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bookmarklet_lien' => 'Add to @site@',
 'bookmarklet_explication' => 'Move this bookmarklet in your browser\'s bookmarks and click on it every time you want to add a bookmark on @site@.',
 'importer' => 'Import',
-'importer_explication' => 'Export your bookmarks from where they are saved now (Firefox, IE, etc), then upload the file here.',
+'importer_explication' => 'Export your bookmarks from where they are saved now (Firefox, delicious, scuttle, etc), then upload the file here.',
 
 // Pour la configuration
 'configuration_titre' => 'Bookmarks configuration',

@@ -56,7 +56,7 @@ function formulaires_importer_marquepages_traiter_dist($id_rubrique){
 	$importer = 'marquepages_importer_'.$fichier_ok['type'];
 	$retours = $importer($fichier_ok['chemin'], $id_rubrique);
 	
-	if ($redirect = _request('redirect')){
+	if (!$retours['message_erreur'] and $redirect = _request('redirect')){
 		$retours['redirect'] = str_replace('&amp;', '&', $redirect);
 	}
 	

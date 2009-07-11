@@ -43,8 +43,8 @@ function filtre_url_mp_ajouter_tag_dist($url, $tag){
 	return $url;
 }
 function filtre_url_mp_supprimer_tag_dist($url, $tag){
-	$url = html_entity_decode($url);
-	$tag = preg_quote(rawurlencode($tag));
+	$url = html_entity_decode(rawurldecode($url));
+	$tag = preg_quote($tag);
 	$url = preg_replace("/&?mots\[\]=$tag/", '', $url);
 	return $url;
 }

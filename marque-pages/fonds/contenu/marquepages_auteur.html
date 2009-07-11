@@ -1,6 +1,6 @@
 
 <BOUCLE_auteur(AUTEURS){login}>
-<h2>[(#SESSION{id_auteur}|=={#ID_AUTEUR}|?{<:marquepages:mes_marquepages:>,<:marquepages:titre_marquepages_de{auteur=#NOM}:>})]</h2>
+<h2>[(#SESSION{id_auteur}|=={#ID_AUTEUR}|?{<:marquepages:mes_marquepages:>,<:marquepages:titre_marquepages_de{auteur=#NOM}:>})][ (#ENV{recherche}|oui)(<:marquepages:contenant{recherche=#ENV{recherche}}:>)]</h2>
 
 <ul class="etiquettes">
 <B_etiquettes>

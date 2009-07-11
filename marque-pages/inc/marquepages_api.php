@@ -249,9 +249,75 @@ function marquepages_importer_netscape($chemin, $id_rubrique){
 
 // Importer des marque-pages depuis un fichier d'export de delicious
 function marquepages_importer_delicious($chemin, $id_rubrique){
+	global $mp_xml_profondeur, $mp_id_rubrique;
+	$mp_xml_profondeur = array();
+	$mp_id_rubrique = $id_rubrique;
 	$retours = array();
-	$retours['message_ok'] = 'Importation delicious';
+	
+	$xml_parser = xml_parser_create();
+	xml_set_element_handler($xml_parser, "marquepages_importer_delicious_debut", "marquepages_importer_delicious_fin");
+	
+	if (!($flux_xml = fopen($chemin, "r")))
+		$retours['message_erreur'] = _T('marquepages:erreur_importation');
+	
+	while ($data = fread($flux_xml, 4096)) {
+		if (!xml_parse($xml_parser, $data, feof($flux_xml))) {
+			$retours['message_erreur'] = 
+				'Erreur XML :'
+				. xml_error_string(xml_get_error_code($xml_parser))
+				. 'à la ligne '
+				. xml_get_current_line_number($xml_parser);
+		}
+	}
+    xml_parser_free($xml_parser);
+    
+    if (!$retours['message_erreur'])
+		$retours['message_ok'] = _T('marquepages:erreur_importation_ok');
+	
 	return $retours;
+}
+
+function marquepages_importer_delicious_debut($parser, $nom, $attributs){
+	global $mp_xml_profondeur, $mp_id_rubrique;
+	$nom = strtolower($nom);
+	
+	if ($nom == 'post') {
+		while (list($titreAttr, $valeurAttr) = each($attributs)) {
+			$titreAttr = strtolower($titreAttr);
+			switch ($titreAttr) {
+				case 'href':
+					$url = $valeurAttr;
+					break;
+				case 'description':
+					$titre = $valeurAttr;
+					break;
+				case 'extended':
+					$description = $valeurAttr;
+					break;
+				case 'time':
+					$date = $valeurAttr;
+					break;
+				case 'tag':
+					$tags = strtolower($valeurAttr);
+					break;
+			}
+		}
+		
+		// Strangely, PHP can't work out full ISO 8601 dates, so we have to chop off the Z.
+		$date = substr($date, 0, -1);
+		// If bookmark claims to be from the future, set it to be now instead
+		if (strtotime($date) > time()) {
+			$date = gmdate('Y-m-d H:i:s');
+		}
+		
+		marquepages_ajouter($mp_id_rubrique, $url, $titre, $description, 'mppublic', $tags);
+    }
+    $mp_xml_profondeur[$parser]++;
+}
+
+function marquepages_importer_delicious_fin($parser, $nom){
+	global $mp_xml_profondeur;
+    $mp_xml_profondeur[$parser]--;
 }
 
 ?>
