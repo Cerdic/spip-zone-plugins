@@ -65,6 +65,7 @@ voir <a href="http://www.spip-contrib.net/-Autorite-">la documentation</a>. -->
     <br/><small><:gallery:squelette_gallery_explication:></small>
     </p>
     
+    
 </fieldset>    
     
 [(#REM) ------------------------ HABILLAGE ------------------------ ]
@@ -72,12 +73,29 @@ voir <a href="http://www.spip-contrib.net/-Autorite-">la documentation</a>. -->
     <legend>
     	<:gallery:habillage:>
     </legend>
+    <p>
+        <label><:gallery:choix_squelette_integration:> :</label>
+        #SET{liste_rep,#NOOP|liste_ssreps}
+        <select name="choix_squelette_integration" id="choix_squelette_integration">
+            <BOUCLE_liste_reps(POUR){tableau #GET{liste_rep}}>
+                <option value="#VALEUR" [(#ENV{choix_squelette_integration}|=={#VALEUR}|?{selected="selected",''})]>
+                    <:gallery:squelette:> #VALEUR
+                </option>
+            </BOUCLE_liste_reps>
+        </select>
+    </p>
     <p><:gallery:masquer_gallery:> :<br/>
        <label><:gallery:oui:></label>
        <input type="radio" name="masquer_gallery" [checked="(#ENV{masquer_gallery}|!={non})checked" ]value="oui"/>
        &nbsp;&nbsp;<label><:gallery:non:></label>
        <input type="radio" name="masquer_gallery" [checked="(#ENV{masquer_gallery}|=={non})checked" ]value="non"/>
     </p>
+    <p><:gallery:integrer_affmasq_barre:> :<br/>
+       <label><:gallery:oui:></label>
+       <input type="radio" name="integrer_affmasq_barre" [checked="(#ENV{integrer_affmasq_barre}|!={non})checked" ]value="oui"/>
+       &nbsp;&nbsp;<label><:gallery:non:></label>
+       <input type="radio" name="integrer_affmasq_barre" [checked="(#ENV{integrer_affmasq_barre}|=={non})checked" ]value="non"/>
+    </p>    
     <p><:gallery:integrer_page_spip:> :<br/>
        <label><:gallery:oui:></label>
        <input type="radio" name="integrer_page_spip" [checked="(#ENV{integrer_page_spip}|!={non})checked" ]value="oui"/>
@@ -86,12 +104,6 @@ voir <a href="http://www.spip-contrib.net/-Autorite-">la documentation</a>. -->
     </p>
     <span id="exp_integrer" class="affmasq">[<:gallery:plus_details:>]</span>
     <small id="details_exp_integrer" class="details"><:gallery:integrer_page_spip_explication:></small>
-    <p><:gallery:integrer_affmasq_barre:> :<br/>
-       <label><:gallery:oui:></label>
-       <input type="radio" name="integrer_affmasq_barre" [checked="(#ENV{integrer_affmasq_barre}|!={non})checked" ]value="oui"/>
-       &nbsp;&nbsp;<label><:gallery:non:></label>
-       <input type="radio" name="integrer_affmasq_barre" [checked="(#ENV{integrer_affmasq_barre}|=={non})checked" ]value="non"/>
-    </p>    
     
 </fieldset>    
 

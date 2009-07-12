@@ -8,7 +8,7 @@
     portage spip 1.9: job, 
     passage en plugin (spip 2.0): cy_altern</auteur>
 	<version>
-	   1.0.0
+	   1.1.0
 	</version>
 	<etat>
 	test
@@ -22,6 +22,7 @@
 	 g2
 	</prefix>
   <fonctions>gallery_fonctions.php</fonctions>
+  <options>gallery_options.php</options>
 	<icon>g2.png</icon>
 	<chemin dir='' />
 	<necessite id="SPIP" version="[2.0.0;]" />

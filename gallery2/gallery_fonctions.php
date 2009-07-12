@@ -1,4 +1,16 @@
 <?php
+// fonction pour lister les ss-reps de /squelettes du plugin et retourner un array
+    function liste_ssreps() {
+        $Treps = array();
+        if ($pointeur = opendir(_DIR_PLUGIN_G2.'squelettes')) {  
+            while (false !== ($fich = readdir($pointeur))) {
+                if ($fich != "." AND $fich != "..") $Treps[] = $fich;
+            }
+            closedir($pointeur);
+        }
+        return $Treps;
+    }
+
 // fonction pour tester si un user SPIP est user de Gallery2
     function trouveid($userName) {
         global $gallery;
@@ -45,16 +57,22 @@
         $lang = $GLOBALS['auteur_session']['lang'] ;
         if( $lang =='' ) $lang = 'fr';
         
+      // bidouillage pour gérer les url propres si intégration de gallerie.html 
+      // en tant que composition pour une rubrique
+        if (isset($_SERVER["REDIRECT_url_propre"])) 
+            $fic_embed = $_SERVER["REDIRECT_url_propre"];
+        else $fic_embed = 'spip.php?page='.$cfg['squelette_gallery'];
+        $fic_embed = trim($fic_embed , '/' );
+
       // initialisation de Gallery
         $ret = GalleryEmbed::init(array( 'activeLanguage' => $lang,
-                                         'embedUri' => $cfg['chemin_spip'].'spip.php?page='.$cfg['squelette_gallery'],
+                                         'embedUri' => $cfg['chemin_spip'].$fic_embed,
                                          'g2Uri' => $cfg['chemin_gallery'],
                                          
                                          'loginRedirect' => $cfg['chemin_spip'],  
                                          'activeUserId' => $GLOBALS['auteur_session']['id_auteur'] ));
          if ($ret) print 'GalleryEmbed::init failed, here is the error message: ' . $ret->getAsHtml();
     }
-    
 
 // le nécessaire pour faire tourner gallery en mode "embed" dans son squelette SPIP
     function gallery2(){    

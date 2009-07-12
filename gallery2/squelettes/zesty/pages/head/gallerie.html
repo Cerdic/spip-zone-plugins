@@ -1,0 +1,41 @@
+[(#REM) le head de gallery2 ]
+  [(#NOOP|g2data{headHtml})]
+
+[(#REM) le head de SPIP ]
+    <title>[(#NOM_SITE_SPIP|textebrut)]</title>
+    [<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)" />]  
+  
+[(#REM) le head du plugin g2 ]
+    [<link rel="stylesheet" type="text/css" href="(#URL_PAGE{g2.css})"/>]
+    [(#CONFIG{g2/integrer_affmasq_barre}|=={oui}|oui)
+        [<script type="text/javascript" src="(#CHEMIN{javascript/jquery.cookie.js})"></script>]
+        <script type="text/javascript">
+        // la fonction qui affiche / masque la barre d'outils de Gallery 2
+            function aff_masq_sidebar(onoff){
+                if (onoff == "off") {
+                    jQuery("#gsSidebar").hide();
+                    jQuery("#showsidebar").show();
+                    largeur_ini = jQuery("#gsSidebarCol").css("width");
+                    jQuery("#gsSidebarCol").css({width : "1%"});
+                    jQuery.cookie("g2_outils","off", { expires: 90 });
+                }
+                else if (onoff == "on") {
+                    jQuery("#gsSidebar").show();
+                    jQuery("#showsidebar").hide();
+                    try { jQuery("#gsSidebarCol").css({width : largeur_ini}); } catch(e){}
+                    jQuery.cookie("g2_outils", "on", { expires: 90 });
+                }
+            }
+            jQuery(document).ready( function(){
+              // le nécessaire pour déclencher le afficher/masquer de la barre d'outils
+                // ajouter les icones cliquables
+                jQuery("#gsSidebarCol").prepend('<img src="#CHEMIN{img/showsidebar.gif}" id="showsidebar"/>');
+                jQuery("#gsSidebar").prepend('<img src="#CHEMIN{img/hidesidebar.gif}" id="hidesidebar"/>');
+                // attribuer la fonction afficher/masquer aux icones cliquables
+                jQuery("#hidesidebar").click( function(){ aff_masq_sidebar("off"); });
+                jQuery("#showsidebar").click( function(){ aff_masq_sidebar("on"); });
+                // restaurer l'état affiché/masqué sauvé dans le cookie
+                if (jQuery.cookie("g2_outils")) aff_masq_sidebar(jQuery.cookie("g2_outils"));
+            });
+        </script>
+    ]

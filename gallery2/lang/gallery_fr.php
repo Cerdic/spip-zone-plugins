@@ -10,6 +10,9 @@ $GLOBALS['i18n_gallery_fr'] = array(
 'chemin_spip' => 'Chemin du SPIP',
 'chemin_spip_explication' => 'si votre SPIP est install&eacute; &agrave; la racine du serveur: "/", 
         sinon son chemin complet: "/mon/repertoire/spip/"',
+'choix_squelette_integration' => 'Ce plugin propose plusieurs variantes pour le squelette qui "emballe"
+        Gallery. Choisissez celle qui correspond le mieux &agrave; votre site ("dist" correspond au squelette
+        de SPIP par d&eacute;faut.',
 'configuration_g2' => 'Configuration du plugin Gallery 2',
 
 // D
@@ -89,6 +92,7 @@ $GLOBALS['i18n_gallery_fr'] = array(
 'plus_details' => '+ de d&eacute;tails',
 
 // S
+'squelette' => 'Squelette',
 'squelette_gallery' => 'Le nom du fichier de squelette qui int&egrave;gre Gallery (sans l\'extension .html)',
 'squelette_gallery_explication' => 'ce plugin fourni un fichier "gallerie.html" mais vous pouvez souhaiter le renommer ou en utiliser un autre...',
 
