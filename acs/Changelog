@@ -19,18 +19,20 @@ Modele Cat pour ACS vesion 0.5:
  - Composant Fond : debug du javascript. Fontes par défaut du site. Liens de traductions et cookie de langue du site pour la noisette fond/entete.
  - Composant Keys : nouveau. Bloc des mots-clés d'un article ou de tous les mots-clés.
  - Composant Onglets  : installation automatique des images par defaut.
- - Composant Rubnav : menus deroulants. Utilisation des traductions generiques.
+ - Composant Rubnav : menus deroulants. Utilisation des traductions generiques.Refonte style. 4 groupes de rubriques par mots-cles.
  - Composant Banniere : nouvelles variables. 
- - Comopsant Forums : amelioration de la css pour ses deux "noisettes", et nouvelle mise en page dans l'espace prive.Suppression des fichiers de langue publics, devenus inutiles. Mise en page mise à jour avec nouvelle balise <admin>
+ - Comopsant Forums : amelioration de la css pour ses deux "noisettes", et nouvelle mise en page dans l'espace prive.Suppression des fichiers de langue publics, devenus inutiles. Mise en page mise à jour avec nouvelle balise <admin>.
  - Composant Ours : tous les liens predefinis deviennent optionnels. Pied de page totalement personnalisable. Ajout des statistiques globales du site.
  - Composant Rubnav : amélioration CSS, 6 niveaux de couleurs de profondeurs de rubriques. Masquage des rubriques ayant un mot-clé qui commence par "_", comme "_Ours" ou "_Archive".
  - Composant Syndic : integration du formulaire site. Pagination ajax et améliorations look.
- - Composant Tags : valeur par defaut de la couleur de fond et du fond du titre = celle de Rubnav
+ - Composant Tags : valeur par defaut de la couleur de fond et du fond du titre = celle de Rubnav.
  - Composant Video : correction positionnement du lien telecharger. Ajax.
  - Composant Mail : nouveau composant encapsulant #FORMULAIRE_ECRIRE_AUTEUR
  - Composant Module : gestion des marges en inclusion (evite doubles marges en edition avec le pinceau). Choix module horizontal / vertical (par defaut). Module peut contenir desormais 8 composants et non plus 6.
  - Composant Recherche : nouveau design identique aux autres blocs.
  
+ - déplacement des images deplier/replier de Fond vers Rubnav.
+ - adaptation automatique aux langues qui s'ecrivent de gauche a droite.
  - detection des langues prefereees du navigateur.
  - nouveau fichier d'initialisation des composants avec des valeurs par defaut heritees.
  - validation xhtml 1.0 pages et composants du modele Cat.

@@ -92,9 +92,6 @@ $def = array(
 	'acsFondText' => '#002200',
 	'acsFondLink' => '#00008d',
 	'acsFondLinkHover' => '#0000f4',
-	'acsFondDeplierHaut' => 'deplierhaut.gif',
-	'acsFondDeplierHaut_rtl' => 'deplierhaut_rtl.gif',
-	'acsFondDeplierBas' => 'deplierbas.gif',
 
 	'acsForumsUse' => 'oui',
 	'acsForumsTitreFond' => '=acsRubnavTitreFond',
@@ -158,6 +155,12 @@ $def = array(
 	'acsRubnavBordWidth' => '1px',
 	'acsRubnavBordStyle' => 'solid',
 	'acsRubnavSep' => '#dfdfdf',
+	'acsRubnavDeplierHaut' => 'deplierhaut.gif',
+	'acsRubnavDeplierHautOver' => 'deplierhauton.gif',
+	'acsRubnavDeplierHaut_rtl' => 'deplierhaut_rtl.gif',
+	'acsRubnavDeplierHautOver_rtl' => 'deplierhauton_rtl.gif',
+	'acsRubnavDeplierBas' => 'deplierbas.gif',
+	'acsRubnavDeplierBasOver' => 'deplierbason.gif',
 
 	'acsRubriquesUse' => 'oui',
 	'acsRubriquesTitreFond' => '=acsRubnavTitreFond',

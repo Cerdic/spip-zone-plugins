@@ -36,6 +36,12 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 html { font-size: 100%; } /* Cf.: http://pompage.net/pompe/definir-des-tailles-de-polices-en-CSS */
 * {margin:0;padding:0} /* pour tous les éléments - for every element */
 
+[(#REM) Override position boutons admin pour multilinguisme ]
+.spip-admin-float {
+  #LANG_LEFT: 5px;
+  width: 38%;
+}
+
 [(#EVAL{defined('_DIR_PLUGIN_NOTATION')}|?{'', ' '})
   .notation {}
   .notation .topten {
@@ -90,7 +96,7 @@ br.nettoyeur { clear: both; line-height: 0;}
 }
 
 .traductions {
-  float: right;
+  float: #LANG_RIGHT;
   text-align:right;
   margin-top: 5px;
   margin-right: 5px;
@@ -119,7 +125,7 @@ br.nettoyeur { clear: both; line-height: 0;}
 }
 
 #colonne1 {
-  float:left;
+  float: #LANG_LEFT;
 	width: 20%;
 }
 
@@ -128,12 +134,12 @@ br.nettoyeur { clear: both; line-height: 0;}
 }
 
 .page_article #colonne2, .page_sommaire #colonne2, .page_resume #colonne2,.page_rubrique #colonne2, .page_recherche #colonne2, .page_auteur #colonne2, .page_breve #colonne2 {
-  float: left;
+  float: #LANG_LEFT;
   width: 60%;
 }
 
 .page_plan #colonne2, .page_sites #colonne2, .page_site #colonne2, .page_login #colonne2, .page_mot #colonne2, .page_agenda #colonne2, .page_refus #colonne2, .page_forum #colonne2, page_ifrm #colonne2 {
-	float: right;
+	float: #LANG_RIGHT;
 	width: 79%;
   margin-right: 1%;
 }
@@ -143,9 +149,9 @@ br.nettoyeur { clear: both; line-height: 0;}
 }
 
 #colonne3 {
-  float: right;
+  float: #LANG_RIGHT;
   width: 20%;
-	padding-top: 0.82em;
+	/*padding-top: 0.82em;*/
 }
 
 .spacer { /* marge entre haut et colonnes */
@@ -378,7 +384,7 @@ table.petition {
 }
 
 #colonne2 .cartouche .spip_logos {
-	float: right;
+	float: #LANG_RIGHT;
 	margin: 10px;
   margin-top: 0;
 }
@@ -419,7 +425,7 @@ table.petition {
 }
 
 .page_rubrique .spip_logos {
-	float: left;
+	float: #LANG_LEFT;
 	margin-right: 5px;
 }
 

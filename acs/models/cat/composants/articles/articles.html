@@ -1,9 +1,9 @@
 <li>
 <div class="entete">
-  <div class="infos_article">
   [(#PLUGIN{notation}|oui)<div style="float:#LANG_RIGHT; text-align: #LANG_LEFT; margin-left: 0.5em; margin-right:0.5em">[(#NOTATION_ETOILE{#NOTE})]</div>]
+  <div class="infos_article">
 [(#VAR{acsArticlesDates}|=={oui}|?{[(#DATE_REDAC|?{[(#DATE_REDAC|affdate)],[(#DATE|affdate)]})]})]
-[(#VAR{acsArticlesAut}|=={oui}|?{' '})[((#AUTEURS))]]
+[(#VAR{acsArticlesAut}|=={oui}|?{' '})[(#AUTEURS)]]
 <BOUCLE_Rubb2(RUBRIQUES){id_rubrique}>[(#ENV{masquer_rubrique}|!={oui}|?{' '})[(#VAR{acsArticlesDates}|=={oui}|?{ - })]<i><a href="#URL_RUBRIQUE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>[(#TITRE|supprimer_numero)]</a></i>]</BOUCLE_Rubb2>
   </div>
   <div class="titres">[<p class="surtitre">(#SURTITRE)</p>]<h3 class="titre"><a href="#URL_ARTICLE">#TITRE</a></h3>[<p class="soustitre">(#SOUSTITRE)</p>]</div>

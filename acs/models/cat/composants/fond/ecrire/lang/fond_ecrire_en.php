@@ -13,10 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'Color' => 'Background',
 'Text' => 'Text',
 'Link' => 'Links',
-'LinkHover' => 'Links hover',
-'DeplierHaut' => 'Wrap',
-'DeplierHaut_rtl' => 'Wrap, right to left',
-'DeplierBas' => 'Unwrap',
+'LinkHover' => 'Links hover'
 
 );
 ?>

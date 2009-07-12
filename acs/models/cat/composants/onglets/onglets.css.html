@@ -1,17 +1,15 @@
-#CACHE{0}
+#CACHE{0}[(#REM)
 
-/**
- * Onglets - dF 2008
- */
+Onglets - dF 2008
+]
 
-/* Onglet assorti aux onglets de menu */
 #onglet {
   margin: 0;
   margin-top: -1px;
   width: 100%;
   border: thin solid [(#VAR{acsOngletsBordColor})];
   [background: (#VAR{acsOngletsFondColor});]
-  -moz-border-radius-topright: 8px;
+  -moz-border-radius-top#LANG_RIGHT: 8px;
   -moz-border-radius-bottomright: 8px;
   -moz-border-radius-bottomleft: 8px;
   overflow: hidden;
@@ -26,7 +24,7 @@
 }
 
 #onglet #hierarchie { /* Fil d'Ariane */
-  padding-left: 5px;
+  padding-#LANG_LEFT: 5px;
   font-size: 0.71em;
   position: relative;
   z-index: 2;
@@ -34,7 +32,7 @@
 
 #onglet .texte_nav {
   font-size: 0.71em;
-  margin-right: 5px;
+  margin-#LANG_RIGHT: 5px;
   position: relative;
   z-index: 2;
 }
@@ -62,18 +60,18 @@
 }
 
 #menunav li {
-  float:left;
+  float: #LANG_LEFT;
   position:relative; /* pour IE */
   z-index: 1; /* pour IE */
   background: url("[(#ACS_CHEMIN)]img/onglets/left.gif") no-repeat left top;
-  margin-right: 3px; /* space between Onglets */
+  margin-#LANG_RIGHT: 3px; /* space between Onglets */
   padding:0 0 0 9px;
   border-bottom: 1px solid [(#VAR{acsOngletsBordColor})];
   line-height: 14px; /* PROVISOIRE : en px pour permettre différentes tailles de fontes sans flinguer le système d'onglets */
 }
 
 #menunav a {
-  float:left;
+  float: #LANG_LEFT;
   display:block;
   width:.1em;
   background:url("[(#ACS_CHEMIN)]img/onglets/right.gif") no-repeat right top;

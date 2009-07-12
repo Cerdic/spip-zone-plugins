@@ -56,7 +56,7 @@ a.spip_out:after, a.spip_glossaire:after { display: inline; content: " (" attr(h
 .cartouche .traductions { display: none; }
 .cartouche .surtitre, .cartouche .soustitre { font-size: 0.82em; font-variant: small-caps; }
 
-.spip_logos { float: right; margin-left: 0.8em; }
+.spip_logos { float: #LANG_RIGHT; margin-left: 0.8em; }
 
 .chapo {
 	margin-bottom: 1.5em;

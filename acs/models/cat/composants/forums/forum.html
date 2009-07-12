@@ -19,7 +19,7 @@ Variables :
 
 [(#REM) Nombre total de messages ]
 <BOUCLE_decompte(FORUMS) {id_rubrique ?}{id_article ?}{id_breve ?}{id_syndic ?} {plat}{statut==#GET{statut}}></BOUCLE_decompte>
-[<a class="repondreaufil" style="float: right" href="#URL_ARTICLE&ouvrir=oui"><:lire_tous_les_messages:></a>
+[<a class="repondreaufil" style="float: #LANG_RIGHT" href="#URL_ARTICLE&ouvrir=oui"><:lire_tous_les_messages:></a>
 <a name="forum" href="#forum" onclick="swap_couche('0', '','#ACS_CHEMIN{img/triangles/}'); return false;"><img id='triangle0' src='#ACS_CHEMIN{img/triangles/deplierbas.gif}' alt='' title='[(#ENV{ouvrir}|?{Déplier,Replier})]' width='10' height='10' border='0' /></a>
 	<a name="forum" href="#forum"  class="repondreaufil" onclick="swap_couche('0','','#ACS_CHEMIN{img/triangles/}'); return false;">
 		(#TOTAL_BOUCLE|>{0}|?{#TOTAL_BOUCLE,''})[ (#TOTAL_BOUCLE|=={1}|?{<:message:>,<:messages_forum:>})]

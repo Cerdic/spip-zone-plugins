@@ -7,7 +7,7 @@ a:hover {
   border: 1px solid #afafaf;
   border-collapse: collapse;
   background: #ffffff;
-  float: left;
+  float: #LANG_LEFT;
   font-size: 0.79em;
 }
 

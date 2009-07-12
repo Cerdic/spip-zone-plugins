@@ -22,8 +22,8 @@ Liste des articles refusés
 	<div id="onglet">]
 
 		[(#REM) Fil d'Ariane ]
-		<span id="hierarchie" style="float: left"><a href="#URL_SITE_SPIP"><:accueil_site:></a> > articles refusés</span>
-		<span class="texte_nav" style="float: right">Les articles refusés</span>
+		<span id="hierarchie" style="float: #LANG_LEFT"><a href="#URL_SITE_SPIP"><:accueil_site:></a> > articles refusés</span>
+		<span class="texte_nav" style="float: #LANG_RIGHT">Les articles refusés</span>
 		<br class="nettoyeur" />
 		<div class="texte">
 		
@@ -45,7 +45,7 @@ Liste des articles refusés
 								 [<p class="surtitre">(#SURTITRE)</p>]
 								 <h3 class="titre"><a href="#URL_ARTICLE&statut=refuse">#TITRE</a></h3>
 								 [<p class="soustitre">(#SOUSTITRE)</p>]
-								 [<div class="extrait" style="clear:both;float: left;">[(#LOGO_ARTICLE_RUBRIQUE|#URL_ARTICLE|image_reduire{150,100})](#INTRODUCTION)</div>]
+								 [<div class="extrait" style="clear:both;float: #LANG_LEFT;">[(#LOGO_ARTICLE_RUBRIQUE|#URL_ARTICLE|image_reduire{150,100})](#INTRODUCTION)</div>]
 								 <br class="nettoyeur" />
 							</li>
 							</BOUCLE_articles>

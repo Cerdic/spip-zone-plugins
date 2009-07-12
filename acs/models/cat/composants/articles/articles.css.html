@@ -1,10 +1,8 @@
-#CACHE{0}
+#CACHE{0}[(#REM)
 
-/**
- * Listes d'articles et extraits introductifs
- * Styles utilisés par les pages sommaire, recherche, resume, plan, sites ...
- */
-
+Listes d'articles et extraits introductifs
+Styles utilisés par les pages sommaire, recherche, resume, plan, sites ...
+]
 .liste-articles li {
   border-top: #VAR{acsArticlesBordWidth,thin}[ (#VAR{acsArticlesBordStyle,dotted})][ (#VAR{acsArticlesBordColor,#VAR{acsOngletsBordColor}})];
   [margin-bottom: (#VAR{acsArticlesMargeBas})px;]
@@ -18,7 +16,8 @@
 
 .liste-articles .entete {
   clear: both;
-  float: left;
+  float: #LANG_LEFT;
+  text-align: #LANG_LEFT;
   width: 100%;
 }
 
@@ -31,7 +30,7 @@
 .liste-articles li p { margin: 0; padding: 0; padding-left: 5px; }
 
 .liste-articles .titres {
-  float: left;
+  float: #LANG_LEFT;
 }
 
 .liste-articles .titre, .liste-articles .surtitre, .liste-articles .soustitre {
@@ -45,15 +44,15 @@
 }
 
 .liste-articles li .spip_logos {
-  float: left;
+  float: #LANG_LEFT;
   margin-left: 5px;
   margin-right: 5px;
   margin-top: 2px;
 }
 
 .liste-articles li .enclosures {
-  float: right;
-  text-align: right;
+  float: #LANG_RIGHT;
+  text-align: #LANG_RIGHT;
   max-width: 60%;
   margin: 0; }
 
@@ -72,7 +71,7 @@
   margin: 0;
   margin-left: 5px;
   margin-right: 5px;
-  float: right;
+  float: #LANG_RIGHT;
   font-size: 0.65em;
 }
 
@@ -135,7 +134,7 @@ table.spip th, table.spip td { padding: 3px; text-align: left; vertical-align: m
 }
 
 .plan-rubrique .spip_logos {
-  float: left;
+  float: #LANG_LEFT;
   margin-left: 5px;
   margin-right: 5px;
   margin-top: 2px;

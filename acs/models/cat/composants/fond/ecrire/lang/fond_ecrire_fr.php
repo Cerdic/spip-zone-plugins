@@ -14,9 +14,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'Text' => 'Texte',
 'Link' => 'Liens',
 'LinkHover' => 'Au survol',
-'DeplierHaut' => 'Déplier haut',
-'DeplierHaut_rtl' => 'Déplier haut droite &agrave; gauche',
-'DeplierBas' => 'Déplier bas',
 
 );
 ?>

@@ -63,22 +63,4 @@
 		<valeur>Verdana, 'Trebuchet MS', Arial, 'Lucida Sans'</valeur>
   </variable>
 
-  <variable>
-    <nom>DeplierHaut</nom>
-    <type>img</type>
-    <chemin>img/triangles</chemin>
-    <valeur>deplierhaut.gif</valeur>
-  </variable>
-  <variable>
-    <nom>DeplierHaut_rtl</nom>
-    <type>img</type>
-    <chemin>img/triangles</chemin>
-    <valeur>deplierhaut_rtl.gif</valeur>
-  </variable>
-  <variable>
-    <nom>DeplierBas</nom>
-    <type>img</type>
-    <chemin>img/triangles</chemin>
-    <valeur>deplierbas.gif</valeur>
-  </variable>
 </composant>

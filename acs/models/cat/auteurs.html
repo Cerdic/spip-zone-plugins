@@ -20,8 +20,8 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 <div id="colonne2"><div class="spacer"></div>[(#REM) Colonne 2 ]
   [(#VAR{acsOngletsUse}|!={non}|?{' '}) <INCLURE{fond=composants/onglets/onglets}{current=auteurs}{env=#ENV}>
   <div id="onglet">]
-		<span id="hierarchie" style="float: left"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; auteurs</span>
-		<span class="texte_nav" style="float: right">Faisons les présentations ...</span>
+		<span id="hierarchie" style="float: #LANG_LEFT"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; auteurs</span>
+		<span class="texte_nav" style="float: #LANG_RIGHT">Faisons les présentations ...</span>
 		<br class="nettoyeur" />
 		<div class="liste-articles">
 		<BOUCLE1(AUTEURS){par nom}{unique}>

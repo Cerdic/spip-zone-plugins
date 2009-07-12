@@ -21,8 +21,8 @@ Most popular texts.
   [(#VAR{acsOngletsUse}|!={non}|?{' '}) <INCLURE{fond=composants/onglets/onglets}{current=resume}{env=#ENV}>
   <div id="onglet">]
     [(#REM) Fil d'Ariane ]
-    <span id="hierarchie" style="float: left"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:en_resume:></span>
-    <span class="texte_nav" style="float: right"><:acs:fond_meta_page_resume:></span>
+    <span id="hierarchie" style="float: #LANG_LEFT"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:en_resume:></span>
+    <span class="texte_nav" style="float: #LANG_RIGHT"><:acs:fond_meta_page_resume:></span>
     <br class="nettoyeur" />
     <INCLURE{fond=composants/articles/boucle-articles}{env=#ENV}{debut_articles}{classement}{url=spip.php?page=resume}>
 	[(#VAR{acsOngletsUse}|!={non}|?{' '}) </div>][(#REM) fin onglet]

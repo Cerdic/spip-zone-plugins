@@ -12,7 +12,7 @@
   </param>
   <param>
     <nom>preview</nom>
-    <valeur>180</valeur>
+    <valeur>200</valeur>
   </param>
 
   <variable>
@@ -69,18 +69,46 @@
     <type>color</type>
   </variable>
   <variable>
-    <nom>Align</nom>
-    <type>choix</type>
-    <option>left</option>
-    <option>center</option>
-    <option>right</option>
-    <valeur>left</valeur>
-  </variable>
-  <variable>
     <nom>MaJ</nom>
     <type>choix</type>
     <option>oui</option>
     <option>non</option>
     <valeur>oui</valeur>
+  </variable>
+  <variable>
+    <nom>DeplierHaut</nom>
+    <type>img</type>
+    <chemin>img/triangles</chemin>
+    <valeur>deplierhaut.gif</valeur>
+  </variable>
+  <variable>
+    <nom>DeplierHautOver</nom>
+    <type>img</type>
+    <chemin>img/triangles</chemin>
+    <valeur>deplierhauton.gif</valeur>
+  </variable>
+  <variable>
+    <nom>DeplierHaut_rtl</nom>
+    <type>img</type>
+    <chemin>img/triangles</chemin>
+    <valeur>deplierhaut_rtl.gif</valeur>
+  </variable>
+  <variable>
+    <nom>DeplierHautOver_rtl</nom>
+    <type>img</type>
+    <chemin>img/triangles</chemin>
+    <valeur>deplierhaut_rtl.gif</valeur>
+  </variable>
+  <variable>
+    <nom>DeplierBas</nom>
+    <type>img</type>
+    <chemin>img/triangles</chemin>
+    <valeur>deplierbas.gif</valeur>
+  </variable>
+  <variable>
+    <nom>DeplierBasOver</nom>
+    <type>img</type>
+    <chemin>img/triangles</chemin>
+    <valeur>deplierbas.gif</valeur>
   </variable>
 </composant>
