@@ -1,13 +1,5 @@
 /* tables */
-table.tablesorter {
-	font-family:arial;
-	margin:10px 0pt 15px;
-	font-size: 8pt;
-	text-align: left;
-	/*
-	width: 100%;
-	*/
-}
+table.tablesorter {}
 
 table.tablesorter td,
 table.tablesorter th {
@@ -26,14 +18,14 @@ td.fiche {
 }
 
 table.tablesorter thead tr .header {
-	background-color: none; 
+	background-color: transparent; 
 	background-image: url("../images/bg.gif");
 	background-repeat: no-repeat;
 	background-position: center right;
 	cursor: pointer;
 }
 
-/* annulation du survol et fleche enlevée pour les zones non cliquables */
+/* annulation du survol et fleche enlevee pour les zones non cliquables */
 table.tablesorter thead tr th.none {
 	background-image: none;
 	cursor: auto;
@@ -43,7 +35,6 @@ table.tablesorter thead tr th.none {
 }
 
 table.tablesorter tbody td {
-	color: #3d3d3d;
 	padding: 4px;
 	/*
 	background-color: #fff;
