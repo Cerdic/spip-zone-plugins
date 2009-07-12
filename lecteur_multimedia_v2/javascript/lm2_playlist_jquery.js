@@ -11,6 +11,8 @@
 	var typePlaying = false;
 	var isvideo;
 	var issound = /\.(mp3|aac)(\?.*)?$/i;
+	var options = {};
+	var sm2_events = {};
 	
 	$.fn.playlist = function(options) {
 		var defaults = {
@@ -27,13 +29,46 @@
 			wmode: 'transparent',
 			debug: false
 		};
-		var options = $.extend(defaults, options);
+		
+		sm2_events = {
+			play:function(){
+				$("#loading").css("cursor","hand");
+				$(".duration").html(sm2_getHMSTime(this.durationEstimate,true));
+				sm2_update_button();
+			},
+			finish:function(){
+				if(options.playNext){
+					sm2_player_play(i+1);
+				}
+				isPlaying = false;
+				isPaused = false;
+				sm2_update_button();
+			},     
+			id3:function(){
+				
+			},                
+			load:function(){
+			},              
+			whileloading:function(){
+				var timer = this.bytesLoaded / this.bytesTotal * 100 ;
+				$(".duration").html(sm2_getHMSTime(this.durationEstimate,true));
+				$("#loading").css({width:Math.round(timer) +"%"});
+			},
+			whileplaying:function(){
+				var timer2 = this.position / this.durationEstimate * 100 ;
+				$("#position").css({width:Math.round(timer2) +"%"});
+				$(".position").html(sm2_getHMSTime(this.position,true));
+				sm2_update_button();
+			}	
+		}
+		options = $.extend(defaults, options);
 		
 		soundManager.bgColor = options.bgcolor;
 		soundManager.wmode = options.wmode;
 		soundManager.url = options.smUrl;
 		soundManager.nullURL = options.smnullUrl;
 		soundManager.allowFullScreen = options.fullscreen;
+		soundManager.useHighPerformance = true;
 		
 		if(options.movie){
 			isvideo = /\.(flv|mov|mp4|m4v|f4v|m4a|mp4v|3gp|3g2)(\?.*)?$/i;
@@ -76,6 +111,7 @@
 			}
 			lecteur += '<div id="sm2_player_stop" class="button stop">STOP</div>'
 				+ '</div>'
+				+ '<div><span class="position"></span> / <span class="duration"></span></div>'
 				+ '</div>';
 			playliste_text = $('<ul class="playliste"></ul>').append(playliste_text);
 			$this.html(playliste_text);
@@ -83,7 +119,6 @@
 			$this.find('li.sm2_play a').click(function(e){
 				e.preventDefault();
 				sm2_player_play($.inArray($(this).attr('href'),liens));
-				//window.alert($(this).html()+' is clicked');
 			});
 			$('#sm2_player_play').click(function(e){
 				e.preventDefault();
@@ -105,15 +140,28 @@
 					sm2_player_togglePause();
 				}
 			});
+			$('#sm2_player_prev').click(function(e){
+				e.preventDefault();
+				if(live_track>0){
+					sm2_player_play(live_track - 1);
+				}
+			});
+			$('#sm2_player_next').click(function(e){
+				e.preventDefault();
+				if(live_track != (nb - 1)){
+					sm2_player_play(live_track + 1);
+				}
+			});
 			sm2_update_button();
 			return;
 		}else{
 			playliste_text = 'no media elements found';
 		}
 	};
-	function sm2_player_play(i,opts){
+	
+	function sm2_player_play(i){
 		sm2_player_stop();
-
+		console.log('on joue le fichier '+i);
 		track_index = i;
 		live_track = i;
 
@@ -128,9 +176,6 @@
 		if(soundManager.url != 'undefined'){
 			
 			sm2_player_creer_media(i);
-		  
-		  	//$("span#now_playing").html(i+"("+mp3Array[i]+")"+track_index);
-		  	//$("span#now_playing").append("media_"+i.id3.artist);
 			/**
 			 * 
 				 file1 = mp3Titles[i];
@@ -169,85 +214,40 @@
 		}
 	}
 	function sm2_player_creer_media(i){
-		console.log(liens[i].match(isvideo));
 		var video = liens[i].match(isvideo) ? true : false;
-		if(video){
-			if(soundManager.canPlayURL(liens[i])){
-			soundManager.createVideo({
-				id:'media_'+i,
-				url:liens[i],
-				onfinish:function(){
-					sm2_player_play(i+1)
-				},     
-				onid3:function(){
-					
-				},                
-				onload:function(){
-				},              
-				whileloading:function(){
-					var timer = this.bytesLoaded / this.bytesTotal * 100 ;
-					var minutes = Math.floor(this.durationEstimate / 1000 / 60) ;
-					var secondes = Math.floor((this.durationEstimate - minutes*1000*60) /1000);
-					$(".duration").html(minutes + "'" + secondes +"''");
-					$("#loading").css({width:Math.round(timer) +"%"});
-				},
-				onplay:function(){
-					$("#loading").css("cursor","hand");
-					var minutes = Math.floor(this.durationEstimate / 1000 / 60) ;
-					var secondes = Math.floor((this.durationEstimate - minutes*1000*60) /1000);
-					$(".duration").html(minutes + "'" + secondes +"''");
-					sm2_update_button();
-				},
-				whileplaying:function(){
-					var minutes = Math.floor(this.position / 1000 / 60) ;
-					var secondes = Math.floor((this.position - minutes*1000*60) /1000);
-					var timer2 = this.position / this.durationEstimate * 100 ;
-					$("#position").css({width:Math.round(timer2) +"%"});
-					$(".position").html(minutes + "'" + secondes +"''");
-					sm2_update_button();
-				},
-				'volume': 100    	
-			});
-			typePlaying = 'video';
-			}
-		}else{
-			soundManager.createSound({
-				id:'media_'+i,
-				url:liens[i],
-				onfinish:function(){
-					sm2_player_play(i+1)
-				},     
-				onid3:function(){
-					
-				},                
-				onload:function(){
-				},              
-				whileloading:function(){
-					var timer = this.bytesLoaded / this.bytesTotal * 100 ;
-					var minutes = Math.floor(this.durationEstimate / 1000 / 60) ;
-					var secondes = Math.floor((this.durationEstimate - minutes*1000*60) /1000);
-					$(".duration").html(minutes + "'" + secondes +"''");
-					$("#loading").css({width:Math.round(timer) +"%"});
-				},
-				onplay:function(){
-					$("#loading").css("cursor","hand");
-					var minutes = Math.floor(this.durationEstimate / 1000 / 60) ;
-					var secondes = Math.floor((this.durationEstimate - minutes*1000*60) /1000);
-					$(".duration").html(minutes + "'" + secondes +"''");
-					sm2_update_button();
-				},
-				whileplaying:function(){
-					var minutes = Math.floor(this.position / 1000 / 60) ;
-					var secondes = Math.floor((this.position - minutes*1000*60) /1000);
-					var timer2 = this.position / this.durationEstimate * 100 ;
-					$("#position").css({width:Math.round(timer2) +"%"});
-					$(".position").html(minutes + "'" + secondes +"''");
-					sm2_update_button();
-				},
-				'volume': 100    	
-			});
-			typePlaying = 'sound';
-		};
+		if(soundManager.canPlayURL(liens[i])){
+			if(video){
+				soundManager.createVideo({
+					id:'media_'+i,
+					url:liens[i],
+					onplay:sm2_events.play,
+					onstop:sm2_events.stop,
+					onpause:sm2_events.pause,
+					onresume:sm2_events.resume,
+					onfinish:sm2_events.finish,
+					onbufferchange:sm2_events.bufferchange,
+					whileloading:sm2_events.whileloading,
+					whileplaying:sm2_events.whileplaying,
+					'volume': 100    	
+				});
+				typePlaying = 'video';
+			}else{
+				soundManager.createSound({
+					id:'media_'+i,
+					url:liens[i],
+					onplay:sm2_events.play,
+					onstop:sm2_events.stop,
+					onpause:sm2_events.pause,
+					onresume:sm2_events.resume,
+					onfinish:sm2_events.finish,
+					onbufferchange:sm2_events.bufferchange,
+					whileloading:sm2_events.whileloading,
+					whileplaying:sm2_events.whileplaying,
+					'volume': 100    	
+				});
+				typePlaying = 'sound';
+			};
+		}
 	}
 		
 	function sm2_player_stop(){
@@ -284,6 +284,16 @@
 		$("#sm2_player_play").css("display", (isPlaying)?"none":"block");
 		$("#sm2_player_pause").css("display", (isPlaying)?"block":"none");
 	}
+
+	function sm2_getHMSTime(nbMSec,bAsString){
+		// convert milliseconds to mm:ss, return as object literal or string
+		var nbSec = Math.floor(nbMSec/1000);
+		var min = Math.floor(nbSec/60);
+		var sec = nbSec-(min*60);
+		// if (min == 0 && sec == 0) return null; // return 0:00 as null
+		return (bAsString?(min+':'+(sec<10?'0'+sec:sec)):{'min':min,'sec':sec});
+	}
+
 	jQuery(document).unload(function(){
 		soundManager.unload();
 	})
