@@ -3,7 +3,6 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-'barre_e_accent_grave' => 'Ins&eacute;rer un E majuscule accent grave: &Egrave;',
 'barre_ea' => 'Ins&eacute;rer un E dans l\'A: &aelig;',
 'barre_ea_maj' => 'Ins&eacute;rer un E dans l\'A majuscule: &AElig;',
 'barre_c_cedille_maj' => 'Ins&eacute;rer un C c&eacute;dille majuscule: &Ccedil;',

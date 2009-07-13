@@ -262,7 +262,6 @@ function typoenluminee_porte_plume_lien_classe_vers_icone($flux){
 		'outil_indice' => 'indice.png',
 		'outil_petitescapitales' => 'petitescapitales.png',
 		
-		'outil_e_maj_grave' => 'eagrave-maj.png',
 		'outil_aelig' => 'aelig.png',
 		'outil_aelig_maj' => 'aelig-maj.png',
 		'outil_ccedil_maj' => 'ccedil-maj.png',
