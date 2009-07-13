@@ -32,6 +32,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'configuration_qui' => 'Qui peut ajouter des marque-pages ?',
 'configuration_rubrique' => 'Rubrique des marque-pages',
 'configuration_rubrique_explication' => 'Choisissez la rubrique dans laquelle les marque-pages seront enregistr&eacute;s par d&eacute;faut.',
+'configuration_titremp' => 'Titre de l\'interface de gestion',
+'configuration_titremp_explication' => 'Vous pouvez personnaliser le titre affich&eacute; dans l\'interface, sinon c\'est le titre du site SPIP qui sera utilis&eacute;.',
 
 // Erreurs
 'erreur_importation' => 'Erreur lors du chargement du fichier.',

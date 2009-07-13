@@ -32,6 +32,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'configuration_qui' => 'Who can add bookmarks ?',
 'configuration_rubrique' => 'Bookmarks section',
 'configuration_rubrique_explication' => 'Choose a section where bookmarks will be saved by default.',
+'configuration_titremp' => 'Bookmarks interface title',
+'configuration_titremp_explication' => 'You can customize the interface title, otherwise the title of the SPIP will be used.',
 
 // Erreurs
 'erreur_importation' => 'Error on file upload.',

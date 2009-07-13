@@ -44,17 +44,14 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
 <html dir="#LANG_DIR" lang="#LANG">
 	<head>
-		<title><:marquepages:titre_marquepages:>[(#GET{auteur}|?{' '})<:marquepages:de:> #ENV{login}][ - (#NOM_SITE_SPIP|textebrut)]</title>
+		<INCLURE{fond=fonds/head/marquepages_#GET{type}}{env}{id_rubrique}{self=#SELF}>
 		
-		<meta name="description" content="<:marquepages:ajouter:>" />
 		[(#REM) Preciser le charset ]
 		<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
 		[(#REM) Fierement fabrique avec SPIP ]
 		<meta name="generator" content="SPIP[ (#SPIP_VERSION)]" />
 		[(#REM) La petite icône ]
 		[<link rel="shortcut icon" href="(#CHEMIN{images/marquepages-24.png})" type='image/x-icon' />]
-
-		
 		[<link rel="stylesheet" href="(#CHEMIN{spip_formulaires.css})" type="text/css" media="all" />]
 		[<link rel="stylesheet" href="(#CHEMIN{css/marquepages_interface.css})" type="text/css" media="all" />]
 		#INSERT_HEAD
