@@ -131,9 +131,34 @@ function action_editer_message_post_nouveau($type, $dest='', $rv='')
 		      'type' => $type,
 		      'id_auteur' => $id_auteur);
 
-// RERS    préciser la page d'origine de l'envoi
-//RERSTEST	if ($_GET['rersorigine']) $vals['texte'] = "Remarque : le message a été envoyé à partir de la page " . $_GET['rersorigine'];            
+// RERSTEST   préciser la page d'origine de l'envoi
 
+	$rers_or=$_GET['rers_origine'];
+	if ($rers_or) 
+	{ 
+		$id_art=$rers_or;
+		$row = spip_fetch_array(spip_query("SELECT * FROM spip_articles WHERE id_article=$id_art")); 
+		$art_titre  = $row['titre'];
+		$art_texte =  $row['texte'];
+		$vals['texte'] = "
+
+
+
+
+
+
+" 
+		. "[Article d'origine : "
+		. "{{".$art_titre."}}
+-> "
+		. generer_url_ecrire('articles',"id_article=".$rers_or)
+	 	. "] 
+
+"
+		. $art_texte
+		;            
+
+	}
 
 
 

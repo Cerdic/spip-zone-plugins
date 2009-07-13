@@ -14,14 +14,11 @@
 
 
 function rers_affiche_aide($flux) {
-$rers_rub_offres = lire_config('rers/rers_rub_offres');
-$rers_rub_demandes = lire_config('rers/rers_rub_demandes');
-$rers_rub_vie = lire_config('rers/rers_rub_vie');
-$rers_auteur_webmestre = lire_config('rers/rers_auteur_webmestre');
-global $connect_id_auteur;
-
-$jcc = $GLOBALS['id_auteur'];
-
+	$rers_rub_offres = lire_config('rers/rers_rub_offres');
+	$rers_rub_demandes = lire_config('rers/rers_rub_demandes');
+	$rers_rub_vie = lire_config('rers/rers_rub_vie');
+	$rers_auteur_webmestre = lire_config('rers/rers_auteur_webmestre');
+	global $connect_id_auteur;
 
 	$flux['data'] .= "<div class='cadre cadre-info verdana1'><div class='cadre_padding'>"
 		. "<b>Raccourcis RERS&nbsp: </b>"

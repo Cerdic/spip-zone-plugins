@@ -4,10 +4,16 @@ function agenda_ajouter_onglets($flux) {
 	if($flux['args']=='calendrier'){
 		$flux['data']['agenda']= new Bouton(
 														 _DIR_PLUGIN_AGENDA.'/img_pack/agenda-24.png', _T('agenda:agenda'),
-														generer_url_ecrire("calendrier","type=semaine"));
+
+//RERS    mode=  activite editoriale par defaut, et non plus évènements du plugin agenda2
+//RERS  generer_url_ecrire("calendrier","type=semaine"));
+generer_url_ecrire("calendrier","mode=pluginagenda&type=mois"));//RERS
 		$flux['data']['calendrier']= new Bouton(
 													 'cal-rv.png', _T('agenda:activite_editoriale'),
-													 generer_url_ecrire("calendrier","mode=editorial&type=semaine"));
+
+//RERS    mode=  activite editoriale par defaut, et non plus évènements du plugin agenda2
+//RERS generer_url_ecrire("calendrier","mode=editorial&type=semaine"));
+generer_url_ecrire("calendrier","type=mois")); //RERS
 	}
 	return $flux;
 }
@@ -37,11 +43,10 @@ function calcul_hierarchie_in($id) {
 
 function agenda_affiche_milieu($flux) {
 	$exec =  $flux['args']['exec'];
-	
-global $connect_statut; //rers
+	global $connect_statut; //rers
 	if ($exec=='naviguer' 
-//rers   (pour rédacteur) ne pas afficher d'info agenda dans le cas d'une rubrique
-AND $connect_statut == '0minirezo' //rers
+//RERS   (pour rédacteur) ne pas afficher d'info agenda dans le cas d'une rubrique
+	AND $connect_statut == '0minirezo' //rers
 	  AND $id_rubrique = intval($flux['args']['id_rubrique'])){
 		$activer = true;
 		$res = "";
@@ -68,10 +73,6 @@ AND $connect_statut == '0minirezo' //rers
 			}
 		}
 
-
-
-
-
 		if (!$actif){
 			if($activer){
 				$res .= "<a href='".generer_action_auteur('rubrique_activer_agenda',$id_rubrique,self())."'>"._T('agenda:rubrique_activer_agenda').'</a>';
@@ -79,11 +80,6 @@ AND $connect_statut == '0minirezo' //rers
 		}
 		else
 			$res .= "<a href='".generer_action_auteur('rubrique_activer_agenda',"-$id_rubrique",self())."'>"._T('agenda:rubrique_desactiver_agenda').'</a>';
-
-
-
-
-
 		if ($voir)
 			$res .= "<p><a href='".generer_url_ecrire('calendrier',"id_rubrique=$id_rubrique")."'>$voir</a></p>";
 		if ($res)

@@ -24,14 +24,13 @@ function exec_message_edit_dist()
 			       intval(_request('dest')));
 }
 // http://doc.spip.org/@exec_message_edit_args
-function exec_message_edit_args($id_message, $new, $dest,$texterers)
+function exec_message_edit_args($id_message, $new, $dest)
 {
 	global  $connect_id_auteur, $connect_statut;
 
 	if ($new == 'oui') {
 		$onfocus = "\nonfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
-//RERS   Par défaut, le texte comporte le titre de la fiche de savoir depuis laquelle on contacte l'auteur
-//RERSTEST		$texte = entites_html($texterers);
+
 
 
 	} else $onfocus = '';
@@ -78,7 +77,7 @@ function exec_message_edit_args($id_message, $new, $dest,$texterers)
 //RERS   Cacher email  aux adhérents  (option cfg)
 global $connect_statut; //rers
 $rers_email_cache = lire_config('rers/rers_email_cache');
-if ( ($rers_email_cache == "on" AND $connect_statut !== '0minirezo') OR $connect_statut == '0minirezo' )
+if ( ($rers_email_cache !== "on" AND $connect_statut !== '0minirezo') OR $connect_statut == '0minirezo' )
 {//RERS
 	if($type == 'normal' AND $dest) {
 		$email = sql_getfetsel("email", "spip_auteurs", "id_auteur=$dest");
