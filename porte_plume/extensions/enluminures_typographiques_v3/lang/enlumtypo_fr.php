@@ -3,14 +3,6 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-'barre_ea' => 'Ins&eacute;rer un E dans l\'A: &aelig;',
-'barre_ea_maj' => 'Ins&eacute;rer un E dans l\'A majuscule: &AElig;',
-'barre_c_cedille_maj' => 'Ins&eacute;rer un C c&eacute;dille majuscule: &Ccedil;',
-'barre_euro' => 'Ins&eacute;rer un Euro: &euro;',
-'barre_gestion_cr_changercassemajuscules' => 'Passer la s&eacute;lection en majuscules',
-'barre_gestion_cr_changercasseminuscules' => 'Passer la s&eacute;lection en minuscules',
-
-
 // Aide des boutons supplémentaires de la barre typo
 'barre_intertitre2' => 'Transformer en {2{intertitre niveau deux}2}',
 'barre_intertitre3' => 'Transformer en {3{intertitre niveau trois}3}',
