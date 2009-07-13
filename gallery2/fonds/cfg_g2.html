@@ -55,23 +55,12 @@ voir <a href="http://www.spip-contrib.net/-Autorite-">la documentation</a>. -->
             })]" />
     <small><:gallery:chemin_gallery_explication:></small>
     </p>
-    <p>
-    <label><:gallery:squelette_gallery:> :</label>
-    <input type="text" name="squelette_gallery" id="squelette_gallery" style="width: 100px;" 
-        value="[(#ENV{squelette_gallery}|?{
-                [(#ENV{squelette_gallery})],
-                'gallerie'
-            })]" />
-    <br/><small><:gallery:squelette_gallery_explication:></small>
-    </p>
-    
     
 </fieldset>    
-    
-[(#REM) ------------------------ HABILLAGE ------------------------ ]
+[(#REM) ------------------------ CHOIX SQUELETTE ------------------------ ]
 <fieldset>
     <legend>
-    	<:gallery:habillage:>
+    	<:gallery:choix_squelette:>
     </legend>
     <p>
         <label><:gallery:choix_squelette_integration:> :</label>
@@ -83,7 +72,25 @@ voir <a href="http://www.spip-contrib.net/-Autorite-">la documentation</a>. -->
                 </option>
             </BOUCLE_liste_reps>
         </select>
+        <br/><small><:gallery:explication_squelette_dist:></small>
     </p>
+    <p>
+    <label><:gallery:squelette_gallery:> :</label>
+    <input type="text" name="squelette_gallery" id="squelette_gallery" style="width: 100px;" 
+        value="[(#ENV{squelette_gallery}|?{
+                [(#ENV{squelette_gallery})],
+                'gallerie'
+            })]" />
+    <br/><small><:gallery:squelette_gallery_explication:></small>
+    </p>
+
+</fieldset>    
+
+[(#REM) ------------------------ HABILLAGE ------------------------ ]
+<fieldset>
+    <legend>
+    	<:gallery:habillage:>
+    </legend>
     <p><:gallery:masquer_gallery:> :<br/>
        <label><:gallery:oui:></label>
        <input type="radio" name="masquer_gallery" [checked="(#ENV{masquer_gallery}|!={non})checked" ]value="oui"/>

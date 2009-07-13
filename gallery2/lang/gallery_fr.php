@@ -10,9 +10,9 @@ $GLOBALS['i18n_gallery_fr'] = array(
 'chemin_spip' => 'Chemin du SPIP',
 'chemin_spip_explication' => 'si votre SPIP est install&eacute; &agrave; la racine du serveur: "/", 
         sinon son chemin complet: "/mon/repertoire/spip/"',
+'choix_squelette' => 'Choix du squelette pour int&eacute;grer Gallery',
 'choix_squelette_integration' => 'Ce plugin propose plusieurs variantes pour le squelette qui "emballe"
-        Gallery. Choisissez celle qui correspond le mieux &agrave; votre site ("dist" correspond au squelette
-        de SPIP par d&eacute;faut.',
+        Gallery. Choisissez celle qui correspond le mieux &agrave; votre site',
 'configuration_g2' => 'Configuration du plugin Gallery 2',
 
 // D
@@ -20,6 +20,7 @@ $GLOBALS['i18n_gallery_fr'] = array(
 
 // E
 'erreur_insertion' => 'Erreur lors de l\'insertion de l\'item',
+'explication_squelette_dist' => '("dist" correspond au squelette de SPIP par d&eacute;faut.)',
 
 // F
 'fichier_embed_pas_trouve' => 'Le fichier de Gallery embed.php &agrave; inclure pour connecter SPIP n\'a pas &eacute;t&eacute; trouv&eacute;
@@ -94,7 +95,8 @@ $GLOBALS['i18n_gallery_fr'] = array(
 // S
 'squelette' => 'Squelette',
 'squelette_gallery' => 'Le nom du fichier de squelette qui int&egrave;gre Gallery (sans l\'extension .html)',
-'squelette_gallery_explication' => 'ce plugin fourni un fichier "gallerie.html" mais vous pouvez souhaiter le renommer ou en utiliser un autre...',
+'squelette_gallery_explication' => 'alternativement aux squelettes "gallerie.html" fournis dans ce plugin, 
+        vous pouvez souhaiter utiliser un fichier de squelette avec un autre nom...',
 
 // T
 'test_modeles' => 'Test des mod&egrave;les du plugin Gallery 2',

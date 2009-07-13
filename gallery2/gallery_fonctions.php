@@ -4,10 +4,11 @@
         $Treps = array();
         if ($pointeur = opendir(_DIR_PLUGIN_G2.'squelettes')) {  
             while (false !== ($fich = readdir($pointeur))) {
-                if ($fich != "." AND $fich != "..") $Treps[] = $fich;
+                if ($fich != "." AND $fich != ".." AND $fich != ".svn") $Treps[] = $fich;
             }
             closedir($pointeur);
         }
+        asort($Treps);
         return $Treps;
     }
 
