@@ -8,6 +8,8 @@
 		jQuery('#playliste#ENV{id_playliste}').playlist({
 			smUrl : "#EVAL{_DIR_LIB_SM}swf/",
 			smnullUrl : "#CHEMIN{soundmanager/null.mp3}",
+			[(#ENV{autoPlay}|oui)autoPlay : true,]
+			[(#ENV{autoLoad}|oui)autoLoad : true,]
 			fullscreen : true
 		});
 	});

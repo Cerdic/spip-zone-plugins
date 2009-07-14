@@ -2,57 +2,95 @@
 #HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
 #HTTP_HEADER{Vary: Accept-Encoding}
 
-div.movieContainer { top: 0; } /* 1 pixel contenant le player */
-
 #sm2_player{
-	margin:10px 0px 10px 0px;
+	margin:10px 0px 0;
 	padding:0px;
-	font-size:.9em;
+	font-size:1em;
 	color:#999999;
-}
-
-#sm2_player .button{
-	float:left;
-	cursor:pointer;
+	position:relative;
 }
 
 #sm2_player .button {
-		float:left;
-		width:64px;
-		height:64px;
-	}
-	#sm2_player .play {
-		background-image: url(#CHEMIN{skins/la-bas/play.png});
-	}
-	#sm2_player .play:hover {
-		background-image: url(#CHEMIN{skins/la-bas/play.png});
-	}
-	#sm2_player .next {
-		background-image: url(#CHEMIN{skins/la-bas/forward.png});
-	}
-	#sm2_player .next:hover {
-		background-image: url(#CHEMIN{skins/la-bas/forward.png});
-	}
-	#sm2_player .prev {
-		background-image: url(#CHEMIN{skins/la-bas/backward.png});
-	}
-	#player .prev:hover {
-		background-image: url(#CHEMIN{skins/la-bas/backward.png});
-	}
-	#sm2_player .pause {
-		background-image: url(#CHEMIN{skins/la-bas/pause.png});
-		display: none;
-	}
-	#sm2_player .pause:hover {
-		background-image: url(#CHEMIN{skins/la-bas/pause.png});
-	}
-	#sm2_player .stop {
-		background-image: url(#CHEMIN{skins/la-bas/stop.png});
-	}
-	#sm2_player .stop:hover {
-		background-image: url(#CHEMIN{skins/la-bas/stop.png});
-	}
-	
+	float:left;
+	width:32px;
+	height:32px;
+	cursor:pointer;
+	vertical-align:middle;
+}
+
+#sm2-container{
+	position:relative;
+}
+
+#sm2_cover{
+	background-color:#000;
+	width:100%;
+	height:100%;
+	position:absolute;
+	display:none;
+}
+
+#sm2_cover.sm2_cover_paused{
+	background:#000 url(#CHEMIN{skins/tango/media-playback-pause.png}) no-repeat 50% 50%;
+}
+#sm2_player .play {
+	background-image: url(#CHEMIN{skins/tango/media-playback-start.png});
+}
+#sm2_player .play:hover {
+	background-image: url(#CHEMIN{skins/tango/media-playback-start.png});
+}
+#sm2_player .next {
+	background-image: url(#CHEMIN{skins/tango/media-skip-forward.png});
+}
+#sm2_player .next:hover {
+	background-image: url(#CHEMIN{skins/tango/media-skip-forward.png});
+}
+#sm2_player .prev {
+	background-image: url(#CHEMIN{skins/tango/media-skip-backward.png});
+}
+#sm2_player .prev:hover {
+	background-image: url(#CHEMIN{skins/tango/media-skip-backward.png});
+}
+#sm2_player .pause {
+	background-image: url(#CHEMIN{skins/tango/media-playback-pause.png});
+	display: none;
+}
+#sm2_player .pause:hover {
+	background-image: url(#CHEMIN{skins/tango/media-playback-pause.png});
+}
+#sm2_player .stop {
+	background-image: url(#CHEMIN{skins/tango/media-playback-stop.png});
+}
+#sm2_player .stop:hover {
+	background-image: url(#CHEMIN{skins/tango/media-playback-stop.png});
+}
+#sm2_player .volume {
+	background-image: url(#CHEMIN{skins/tango/audio-volume-high.png});
+}
+#sm2_player .volume:hover {
+	background-image: url(#CHEMIN{skins/tango/audio-volume-high.png});
+}
+#sm2_player .mute {
+	background-image: url(#CHEMIN{skins/tango/audio-volume-muted.png});
+	display:none;
+}
+#sm2_player .mute:hover {
+	background-image: url(#CHEMIN{skins/tango/audio-volume-muted.png});
+	display:none;
+}
+
+.sm2_timer{
+	border: 1px solid #999;
+	padding: 3px 5px;
+	float: right;
+	margin:3px 0;
+	-moz-border-radius-bottomleft:4px;
+	-moz-border-radius-bottomright:4px;
+	-moz-border-radius-topleft:4px;
+	-moz-border-radius-topright:4px;
+	font-family:monaco,"VT-100",terminal,"lucida console",courier,system;
+}
+
 .controles {
 	cursor:hand;
 	cursor:pointer;
@@ -60,9 +98,9 @@ div.movieContainer { top: 0; } /* 1 pixel contenant le player */
 	margin-bottom:5px;
 }
 
-.playliste{
+ul.playliste{
 	list-style-type:none;
-	padding:3px;
+	padding:0;
 	margin:0;
 	border: 1px solid #cccccc;
 	clear:both;
@@ -74,7 +112,21 @@ div.movieContainer { top: 0; } /* 1 pixel contenant le player */
 	cursor :pointer;
 }
 
-#sm2_player li.over{
+ul.playliste li{
+	padding:3px 5px;
+	margin:0;
+	cursor:pointer;
+}
+
+ul.playliste li.sm2_play_on{
+	background:#e6e6e6;
+}
+
+ul.playliste li a{
+	display:block;
+}
+
+ul.playliste li.over{
 	background:#e6e6e6;
 }
 
@@ -83,41 +135,16 @@ div.movieContainer { top: 0; } /* 1 pixel contenant le player */
 	border: 1px solid #cccccc;
 }
 
-ul.playliste li{
-	cursor:hand;
-	cursor:pointer;
-}
-
-#sm2_player li.play_on{
-	background:#e6e6e6;
-}
-
-span.play_{
-	/*background:#E6ECFF;*/
-	cursor:hand;
-	cursor:pointer;
-}
-
-span.play_on{
-	/*background:#FF0000;*/
-	cursor:hand;
-	cursor:pointer;
-}
-
-#scrollbar{
+#sm2_scrollbar{
 	clear:both;
-	height:5px;
-	margin:5px 0px;
-	border:1px solid white;
+	height:10px;
+	margin:5px 0px 0;
+	border:1px solid #999;
 	background-color:white;
 	position:relative;
-	cursor:hand;
-	cursor:pointer;
 }
-#loading{
-	margin:0px;
-	padding:0px;
-	height:5px;
+#sm2_loading{
+	height:10px;
 	background-color:#ccc;
 	width:0%;
 	position:absolute;
@@ -125,11 +152,11 @@ span.play_on{
 	top:0px;
 	font-size:0.3em;
 	z-index:10;
+	cursor:pointer;
 }
-#position{
-	margin:0px;
-	padding:0px;
-	height:5px;
+
+#sm2_position{
+	height:10px;
 	background-color:#e74455;
 	width:0%;
 	position:absolute;
@@ -137,6 +164,7 @@ span.play_on{
 	top:0px;
 	font-size:0.3em;
 	z-index:20;
+	cursor:pointer;
 }
 
 div#now_playing{
@@ -162,38 +190,4 @@ div#now_playing{
 	left:0;
 	top:0;
 	margin: 0;
-}
-
-
-/* Scoller Box */
-
-/* At the end of the CSS File */
-
-/* CSS Hack Safari */
-#dummy {;# }
-
-#scroller_container {
-	overflow: auto;
-}
-
-/* ==================== Player video ==================== */
-#player {
-	background-color: #e9f6ff;
-	color: #000;
-	height: 20px;
-	width: 200px;
-	border: solid 1px #ccc;
-}
-#player .button {
-	width: 20px;
-	height: 20px;
-	background-repeat: no-repeat;
-	background-position: 2px 2px;
-	float: left;
-}
-#player .button a {
-	display: block;
-	height: 20px;
-	text-indent: -100em;
-	overflow: hidden;
 }
