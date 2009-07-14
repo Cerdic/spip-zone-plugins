@@ -8,12 +8,12 @@ _ &#169; 2009
 	<licence>GPL</licence>
 	<version>0.1</version>
 	<version_base>0.1.0</version_base>
-	<etat>dev</etat>
+	<etat>test</etat>
 	<description>
 	Plugin permettant de créer des liens transversaux en rattachant des rubriques
 	et articles à d'autres rubriques que leur rubriques que leur parent direct.
 	</description>
-	<lien></lien> 
+	<lien>http://www.spip-contrib.net/Polyhierarchie</lien>
 	<prefix>polyhier</prefix>
 	<install>base/polyhier.php</install>
 	<fonctions>public/polyhier_criteres.php</fonctions>
