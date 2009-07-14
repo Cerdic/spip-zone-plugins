@@ -1,0 +1,78 @@
+[(#REM)
+
+  Squelette
+  (c) 2009 Cedric Morin
+  Distribue sous licence GPL
+
+]
+#CACHE{3600*100}
+
+<h3> Dans une Boucle Rubrique </h3>
+<BOUCLE_rub(RUBRIQUES){id_rubrique}>
+	<h4>#ID_RUBRIQUE-#TITRE</h4>
+	<ul>
+	<li>Les parents directs {id_enfant}
+	<ul>
+	<BOUCLE_id_parent(RUBRIQUES){id_enfant}>
+	<li>#ID_RUBRIQUE-#TITRE</li>
+	</BOUCLE_id_parent>
+	</ul>
+	</li>
+	<li>Les parents directs {parents_directs}
+	<ul>
+	<BOUCLE_parents_directs(RUBRIQUES){parents_directs}>
+	<li>#ID_RUBRIQUE-#TITRE</li>
+	</BOUCLE_parents_directs>
+	</ul>
+	</li>
+	<li>Les parents indirects {parents_indirects}
+	<ul>
+	<BOUCLE_parents_indirects(RUBRIQUES){parents_indirects}>
+	<li>#ID_RUBRIQUE-#TITRE</li>
+	</BOUCLE_parents_indirects>
+	</ul>
+	</li>
+	<li>Tous Les parents {parents}
+	<ul>
+	<BOUCLE_parents(RUBRIQUES){parents}>
+	<li>#ID_RUBRIQUE-#TITRE</li>
+	</BOUCLE_parents>
+	</ul>
+	</li>
+	</ul>
+</BOUCLE_rub>
+<h3> Dans une Boucle Article </h3>
+<BOUCLE_art(ARTICLES){id_article}>
+	<h4>#ID_ARTICLE-#TITRE</h4>
+	<ul>
+	<li>Les parents directs {id_enfant}
+	<ul>
+	<BOUCLE_id_parent2(RUBRIQUES){id_enfant}>
+	<li>#ID_RUBRIQUE-#TITRE</li>
+	</BOUCLE_id_parent2>
+	</ul>
+	</li>
+	<li>Les parents directs {parents_directs}
+	<ul>
+	<BOUCLE_parents_directs2(RUBRIQUES){parents_directs}>
+	<li>#ID_RUBRIQUE-#TITRE</li>
+	</BOUCLE_parents_directs2>
+	</ul>
+	</li>
+	<li>Les parents indirects {parents_indirects}
+	<ul>
+	<BOUCLE_parents_indirects2(RUBRIQUES){parents_indirects}>
+	<li>#ID_RUBRIQUE-#TITRE</li>
+	</BOUCLE_parents_indirects2>
+	</ul>
+	</li>
+	<li>Tous Les parents {parents}
+	<ul>
+	<BOUCLE_parents2(RUBRIQUES){parents}>
+	<li>#ID_RUBRIQUE-#TITRE</li>
+	</BOUCLE_parents2>
+	</ul>
+	</li>
+	</ul>
+</BOUCLE_art>
+

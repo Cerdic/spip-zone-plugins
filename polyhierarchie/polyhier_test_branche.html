@@ -1,0 +1,85 @@
+[(#REM)
+
+  Squelette
+  (c) 2009 Cedric Morin
+  Distribue sous licence GPL
+
+]
+#CACHE{3600*100}
+
+<h3> Dans une Boucle Rubrique </h3>
+<BOUCLE_rub(RUBRIQUES){id_rubrique}>
+	<h4>#ID_RUBRIQUE-#TITRE</h4>
+	<ul>
+	<li>La branche directe {branche_principale}
+	<ul>
+	<BOUCLE_branche_principale(RUBRIQUES){branche_principale}>
+	<li>#ID_RUBRIQUE-#TITRE</li>
+	</BOUCLE_branche_principale>
+	</ul>
+	</li>
+	<li>La branche etendue {branche}
+	<ul>
+	<BOUCLE_branche(RUBRIQUES){branche}>
+	<li>#ID_RUBRIQUE-#TITRE</li>
+	</BOUCLE_branche>
+	</ul>
+	</li>
+	<li>La branche complete {branche_complete}
+	<ul>
+	<BOUCLE_branche_complete(RUBRIQUES){branche_complete}>
+	<li>#ID_RUBRIQUE-#TITRE</li>
+	</BOUCLE_branche_complete>
+	</ul>
+	</li>
+	</ul>
+</BOUCLE_rub>
+<h3> En dehors d'une Boucle Rubrique </h3>
+	<ul>
+	<li>La branche directe {branche_principale #ID_RUBRIQUE}
+	<ul>
+	<BOUCLE_branche_principale2(RUBRIQUES){branche_principale #ID_RUBRIQUE}>
+	<li>#ID_RUBRIQUE-#TITRE</li>
+	</BOUCLE_branche_principale2>
+	</ul>
+	</li>
+	<li>La branche etendue {branche #ID_RUBRIQUE}
+	<ul>
+	<BOUCLE_branche2(RUBRIQUES){branche #ID_RUBRIQUE}>
+	<li>#ID_RUBRIQUE-#TITRE</li>
+	</BOUCLE_branche2>
+	</ul>
+	</li>
+	<li>La branche complete {branche_complete #ID_RUBRIQUE}
+	<ul>
+	<BOUCLE_branche_complete2(RUBRIQUES){branche_complete #ID_RUBRIQUE}>
+	<li>#ID_RUBRIQUE-#TITRE</li>
+	</BOUCLE_branche_complete2>
+	</ul>
+	</li>
+	</ul>
+
+<h3> Sur une boucle ARTICLES en dehors d'une Boucle Rubrique </h3>
+	<ul>
+	<li>La branche directe {branche_principale #ID_RUBRIQUE}
+	<ul>
+	<BOUCLE_branche_principale3(ARTICLES){branche_principale #ID_RUBRIQUE}>
+	<li>#ID_ARTICLE-#TITRE</li>
+	</BOUCLE_branche_principale3>
+	</ul>
+	</li>
+	<li>La branche etendue {branche #ID_RUBRIQUE}
+	<ul>
+	<BOUCLE_branche3(ARTICLES){branche #ID_RUBRIQUE}>
+	<li>#ID_ARTICLE-#TITRE</li>
+	</BOUCLE_branche3>
+	</ul>
+	</li>
+	<li>La branche complete {branche_complete #ID_RUBRIQUE}
+	<ul>
+	<BOUCLE_branche_complete3(ARTICLES){branche_complete #ID_RUBRIQUE}>
+	<li>#ID_ARTICLE-#TITRE</li>
+	</BOUCLE_branche_complete3>
+	</ul>
+	</li>
+	</ul>

@@ -1,0 +1,15 @@
+[(#REM)
+
+  Squelette
+  (c) 2009 Cedric Morin
+  Distribue sous licence GPL
+
+]
+#CACHE{3600*100}
+<li class='editer_parents[ (#ENV**{erreurs}|table_valeur{parents}|oui)erreur]'>
+	<label for="parents"><:polyhier:label_parents:></label>[
+	<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{parents})</span>
+	]<INCLURE{fond=formulaires/selecteur/rubriques}{selected=#ENV{parents}}{name=parents}{sortable=oui}>
+	<input type="hidden" name="confirme_deplace" value="oui" />
+</li>
+

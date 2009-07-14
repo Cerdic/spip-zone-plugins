@@ -1,0 +1,61 @@
+<plugin>
+	<nom>PolyHierarchie</nom>
+	<icon>images/polyhier-128.png</icon>
+	<auteur>	<!-- Auteur du plugin -->
+ 	[Cedric Morin->http://www.yterium.com]
+_ &#169; 2009
+	</auteur>
+	<licence>GPL</licence>
+	<version>0.1</version>
+	<version_base>0.1.0</version_base>
+	<etat>dev</etat>
+	<description>
+	Plugin permettant de créer des liens transversaux en rattachant des rubriques
+	et articles à d'autres rubriques que leur rubriques que leur parent direct.
+	</description>
+	<lien></lien> 
+	<prefix>polyhier</prefix>
+	<install>base/polyhier.php</install>
+	<fonctions>public/polyhier_criteres.php</fonctions>
+	<pipeline>
+		<nom>declarer_tables_auxiliaires</nom>
+		<inclure>base/polyhier.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_hierarchie</nom>
+		<inclure>polyhier_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_droite</nom>
+		<inclure>polyhier_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_droite</nom>
+		<inclure>polyhier_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>polyhier_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>formulaire_charger</nom>
+		<inclure>polyhier_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>formulaire_verifier</nom>
+		<inclure>polyhier_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>editer_contenu_objet</nom>
+		<inclure>polyhier_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>pre_edition</nom>
+		<inclure>polyhier_pipeline.php</inclure>
+	</pipeline>
+
+
+
+ 	<necessite id='SPIP' version='[2.0.7;]' />
+	<necessite id='spip_bonux' version='[1.8;]' />
+</plugin>
