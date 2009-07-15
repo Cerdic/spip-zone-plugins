@@ -58,11 +58,11 @@ function critere_enfants($idb, &$boucles, $crit, $tous=true) {
 }
 
 function critere_enfants_directs_dist($idb, &$boucles, $crit) {
-	critere_enfants($idb, &$boucles, $crit, 'directs');
+	critere_enfants($idb, $boucles, $crit, 'directs');
 }
 
 function critere_enfants_indirects_dist($idb, &$boucles, $crit) {
-	critere_enfants($idb, &$boucles, $crit, 'indirects');
+	critere_enfants($idb, $boucles, $crit, 'indirects');
 }
 
 /**
@@ -108,14 +108,14 @@ function critere_parents($idb, &$boucles, $crit, $tous=true) {
 }
 
 function critere_parents_directs_dist($idb, &$boucles, $crit) {
-	critere_parents($idb, &$boucles, $crit, 'directs');
+	critere_parents($idb, $boucles, $crit, 'directs');
 }
 function critere_parent($idb, &$boucles, $crit) {
-	critere_parents($idb, &$boucles, $crit, 'directs');
+	critere_parents($idb, $boucles, $crit, 'directs');
 }
 
 function critere_parents_indirects_dist($idb, &$boucles, $crit) {
-	critere_parents($idb, &$boucles, $crit, 'indirects');
+	critere_parents($idb, $boucles, $crit, 'indirects');
 }
 
 
@@ -207,15 +207,15 @@ function critere_branche($idb, &$boucles, $crit, $tous='elargie') {
 }
 
 function critere_branche_principale_dist($idb, &$boucles, $crit) {
-	critere_branche($idb, &$boucles, $crit, 'directs');
+	critere_branche($idb, $boucles, $crit, 'directs');
 }
 // un alias
 function critere_branche_directe_dist($idb, &$boucles, $crit) {
-	critere_branche($idb, &$boucles, $crit, 'directs');
+	critere_branche($idb, $boucles, $crit, 'directs');
 }
 
 function critere_branche_complete_dist($idb, &$boucles, $crit) {
-	critere_branche($idb, &$boucles, $crit, true);
+	critere_branche($idb, $boucles, $crit, true);
 }
 
 ?>
