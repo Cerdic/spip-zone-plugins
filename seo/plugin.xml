@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<plugin>
+	<nom><multi>[fr]SEO[en]SEO</multi></nom>
+	<auteur>Pierre ROUSSET: p.rousset@gmail.com for Bouncing Orange: http://www.bouncingorange.com/</auteur>
+	<version>1.0</version>
+	<licence>(c) 2009 [GPL v2 Licence->http://www.opensource.org/licenses/gpl-2.0.php]</licence>
+	<etat>test</etat>
+	<icon>seo.png</icon>
+	<description><multi>[fr]SEO est un plugin qui ajoute la possibilité d'inserrer dans la partie head de votre site web : meta tags, URL canonique, Google webmaster tools Meta Code et Google Analytics javascript. Il est configurable dans la page de configuration de SPIP ainsi que dans chaque rubrique et article pour les meta tags.[en]SEO is a plugin who add the possibility to insert in the head of your website: meta tags, canoical URL, Google webmaster tools Meta Code and Google Analytics javascript code. It is fully configurable in the SPIP configuration page and in each article or rubrique page for meta tags.</multi></description>
+	<prefix>seo</prefix>
+	<lien>http://www.spip-contrib.net/Plugin-SEO</lien>
+	<chemin dir='' />	<necessite id="SPIP" version="[2.0.0;]" />
+
+	<install>base/seo_update.php</install>
+
+	<pipeline>
+        <nom>insert_head</nom>
+		<action>insert_head</action>
+        <inclure>pipelines/seo_insert_head.php</inclure>
+    </pipeline>
+	<pipeline>
+        <nom>affiche_milieu</nom>
+		<action>affiche_milieu</action>
+        <inclure>pipelines/seo_affiche_milieu.php</inclure>
+    </pipeline>
+   	<pipeline>
+		<nom>ajouter_onglets</nom>
+		<action>ajouter_onglets</action>
+        <inclure>pipelines/seo_ajouter_onglets.php</inclure>
+	</pipeline>
+</plugin>
