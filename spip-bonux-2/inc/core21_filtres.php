@@ -181,7 +181,7 @@ if (!function_exists('filtre_implode_dist')){
 function filtre_implode_dist($a,$b){return implode($b,$a);}
 }
 
-if (!function_exists('bando_images_background')){
+if (!function_exists('bando_images_background') AND !defined('_DIR_PLUGIN_BANDO')){
 function bando_images_background(){
 	return '';
 }
