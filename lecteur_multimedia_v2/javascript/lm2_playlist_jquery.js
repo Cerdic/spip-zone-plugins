@@ -26,6 +26,9 @@
 			smUrl : "soundmanager/swf/",
 			smnullUrl : "soundmanager/null.mp3",
 			logo : false,
+			logo_top: '50%',
+			logo_left: '50%',
+			logo_repeat: 'no-repeat',
 			playNext: false, // stop after one sound, or play through list until end
 			autoLoad: false,
 			autoPlay: false,
@@ -33,7 +36,7 @@
 			movie: true,
 			movieSize : 'adapt',
 			bgcolor: '#000000',
-			fullscreen: false,
+			fullscreen: true,
 			wmode: 'transparent',
 			volume: 100,
 			scrollPositionInfo:true,
@@ -50,7 +53,7 @@
 				}
 				$("#sm2_loading").css("cursor","hand");
 				$(".sm2_duration").html(sm2_getHMSTime(this.durationEstimate,true));
-				$('#sm2movie').unbind().click(function(e){
+				$('#sm2-container').unbind().click(function(e){
 					e.preventDefault();
 					sm2_player_togglePause();
 				});
@@ -148,7 +151,7 @@
 		options.sources.each(function() {
 			$source = $(this);
 			var sURL = $source.attr('href');
-			if(($.inArray(sURL,liens)<0) ) {
+			if($.inArray(sURL,liens)<0) {
 				playliste_text += '<li class="sm2_play"><a href='+sURL+'>'+sm2_joli_titre($source.html())+'</a></li>';
 				liens.push(sURL);
 				nb++;
@@ -178,9 +181,12 @@
 				+ '<div id="sm2_scrollbar"><div id="sm2_loading"></div><div id="sm2_position"></div></div>'
 				+ '</div>';
 			playliste_text = $('<ul class="playliste"></ul>').append(playliste_text);
-			$this.html(playliste_text);
-			$('ul.playliste').wrap(lecteur);
+			$this.html(lecteur);
+			$('#sm2_player').append(playliste_text);
 			
+			if(options.logo){
+				$('#sm2-container').css({'background-image' : 'url('+options.logo+')', 'background-position' : options.logo_top+' '+options.logo_left, 'background-repeat': options.logo_repeat});
+			}
 			
 			$this.find('li.sm2_play a').click(function(e){
 				e.preventDefault();
@@ -254,8 +260,9 @@
 			if(options.scrollPositionInfo){
 				$('#sm2_scrollbar').prepend('<div class="sm2_jump_position"></div>');
 				$('#sm2_scrollbar').hover(function(e){
-					if(live_track >= 0){
+					if(live_track|live_track == 0){
 						var son = soundManager.getSoundById('media_'+live_track);
+						if(son){
 						var duree = son.durationEstimate;
 						var scroll_width = $('#sm2_scrollbar').width();
 						var scroll_left = jQuery("#sm2_scrollbar").offset().left;
@@ -269,9 +276,10 @@
 							var temps = sm2_getHMSTime(duree_ml,true);
 							$('.sm2_jump_position').html(temps).css('left',percent_scrollbar+'%');
 						});
+						}
 					}
 					},function(){
-					if(live_track >= 0){$('.sm2_jump_position').fadeOut();}
+						if(live_track|live_track == 0){$('.sm2_jump_position').fadeOut();}
 				});
 			}
 			$('#sm2_player_volume,#sm2_player_mute').click(function(){
@@ -385,12 +393,7 @@
 	function sm2_player_togglePause(){
 		soundManager.togglePause('media_'+live_track);
 		if(isPaused){
-			$('#sm2_cover').css('opacity','.5').addClass('sm2_cover_paused').fadeIn('normal',function(){
-				$(this).unbind().click(function(e){
-					e.preventDefault();
-					sm2_player_togglePause();
-				})
-			});	
+			$('#sm2_cover').css('opacity','.5').addClass('sm2_cover_paused').fadeIn('normal');	
 		}else{
 			$('#sm2_cover').removeClass('sm2_cover_paused').fadeOut();
 		}
