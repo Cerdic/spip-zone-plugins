@@ -12,6 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+if (!function_exists('bando_images_background')){
 function bando_images_background(){
 	include_spip('inc/bandeau');
 	// recuperer tous les boutons et leurs images
@@ -29,9 +30,11 @@ function bando_images_background(){
 	}
 	return $res;
 }
-
+}
+if (!function_exists('bando_style_prive_skin')){
 function bando_style_prive_skin() {
 	if ($f = find_in_skin('style_prive_skin.html'))
 		return preg_replace(',[.]html$,Ui','',$f);
 	return '';
+}
 }
