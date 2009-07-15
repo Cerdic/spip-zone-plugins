@@ -1,8 +1,8 @@
 <plugin>
-	<nom>Utilisation de polices d'écriture</nom>
+	<nom>Utilisation de polices d'&#233;criture</nom>
 	<auteur>
     Samuel Bocharel, &eacute;quipe de d&eacute;veloppement Eva-WEB.<br/>
-    Basé sur le travail de Corrobori et de kent1 intitulé un modèle d'écriture 
+    Bas&#233; sur le travail de Corrobori et de kent1 intitul&#233; un mod&#232;le d'&#233;criture 
   	 qui se trouve ici : <a rel="modele" target="_blank" href="http://www.spip-contrib.net/Un-modele-d-ecriture">http://www.spip-contrib.net/Un-modele-d-ecriture</a><br/>
 	 <a rel="Eva-web" target="_blank" href="http://eva-web.edres74.net">http://eva-web.edres74.net</a><br/>
     Cette r&eacute;alisation est mise &agrave; disposition sous licence GNU GPL.
@@ -12,8 +12,8 @@
     <version_base>0.1</version_base>
 	<etat>dev</etat>
 	<description>
-	  Il s’agit pour un rédacteur de pouvoir modifier la police de caractères d’une partie d’un texte.
-		Ce plugin est compatible avec SPIP à partir de la version 2
+	  Il s'agit pour un r&#233;dacteur de pouvoir modifier la police de caract&#232;res d'une partie d'un texte.
+		Ce plugin est compatible avec SPIP &#224; partir de la version 2
 	</description>
 	
     <prefix>
@@ -21,7 +21,7 @@
     </prefix>
 
     <necessite id='cfg' version='[1.0.12;]' />
-    <necessite id='spip' version='[1.9.2;]' /> 
+    <necessite id='spip' version='[2.0.0;]' /> 
     
     <bouton id='eva_ecriture' parent='configuration'>
         <icone>img_pack/logo_ecriture.png</icone>

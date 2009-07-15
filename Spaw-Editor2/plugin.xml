@@ -5,10 +5,10 @@
 	<etat>dev</etat>
 	<description>
 	{{Edition WYSIWYG avec SPAW Editor 2}}<br /><br />
-	Ce plugin (pour SPIP 1.9.2+) permet d'utiliser SPAW Editor V2 comme éditeur wysisyg dans l'espace prive de SPIP, ceci est une excellente alternative à l'éditeur de SPIP ou bien aux autres éditeurs (FCKeditor, Tinymce, ...).
+	Ce plugin (pour SPIP 1.9.2+) permet d'utiliser SPAW Editor V2 comme &#233;diteur wysisyg dans l'espace priv&#233; de SPIP, ceci est une excellente alternative &#224; l'&#233;diteur de SPIP ou bien aux autres &#233;diteurs (FCKeditor, Tinymce, ...).
 	<br />
-	SPAW Editor est un remplacement du textarea traditionnel par un éditeur plus complet, avec support des CSS, tables, polices et styles, ajout/suppression déléments multimédia (images, autre. Il supporte aussi le copier / coller depuis les autres applications, et nettoye à la volée le code HTML qui lui est fourni (en provenance de Word, cest une bonne chose !). Il est gratuit, sous licence GPL, et payant pour les autres utilisations. Il dispose aussi dune version française, ainsi que dune version PHP.      <br />
-Nécessite le plugin "chargeur" pour importer l'archive de l'éditeur SPAW Editor 2.
+	SPAW Editor est un remplacement du textarea traditionnel par un &#233;diteur plus complet, avec support des CSS, tables, polices et styles, ajout/suppression d'&#233;l&#233;ments multim&#233;dia (images, autre. Il supporte aussi le copier / coller depuis les autres applications, et nettoye &#224; la vol&#233;e le code HTML qui lui est fourni (en provenance de Word, c'est une bonne chose !). Il est gratuit, sous licence GPL, et payant pour les autres utilisations. Il dispose aussi d'une version française, ainsi que d'une version PHP.      <br />
+N&#233;cessite le plugin "chargeur" pour importer l'archive de l'&#233;diteur SPAW Editor 2.
 	</description>
 	<lien>Net Studio : http://www.netstudio-dz.com<br />
 	Spaw Editor 2: http://www.solmetra.com/en/disp.php/en_products/en_spaw/en_spaw_intro</lien>
@@ -31,5 +31,5 @@ Nécessite le plugin "chargeur" pour importer l'archive de l'éditeur SPAW Edito
 		<action>pre_propre</action>
 		<inclure>spaw2_pre_propre.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

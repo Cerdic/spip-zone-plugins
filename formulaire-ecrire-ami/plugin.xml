@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <plugin>
 	<nom>#FORMULAIRE_ECRIRE_AMI</nom>
-	<auteur>[Artégo->http://www.artego.fr]</auteur>
+	<auteur>[Art&#233;go->http://www.artego.fr]</auteur>
 	<version>2.0</version>
 	<etat>stable</etat>
 	<licence>[GPLv3->http://www.gnu.org/licenses/gpl-3.0.html]</licence>
-	<description>Formulaire pour l'envoi d'une référence (article ou document) à un ami.</description>
+	<description>Formulaire pour l'envoi d'une r&#233;f&#233;rence (article ou document) &#224; un ami.</description>
 	<necessite id="SPIP" version="[2.0.3;]" />
 	<necessite id="facteur" version="[1.0;]" />
 	<lien>[Site officiel du plugin->http://www.artego.fr/-Formulaire-envoyer-a-un-ami-]</lien>

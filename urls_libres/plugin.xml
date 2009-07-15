@@ -16,16 +16,16 @@ _ &#169; 2007 - Distribu&#233; sous licence GNU/LGPL
 	</etat>
 	<description>
 _ Ce plugin permet de g&#233;rer des urls libres, autorisant plusieurs urls "propres" par objet.
-_ Notamment il mémorise les anciennes valeurs éventuelles et permet leur modification sans oublier
+_ Notamment il m&#233;morise les anciennes valeurs &#233;ventuelles et permet leur modification sans oublier
 ce qui a &eacute;t&eacute; d&eacute;j&agrave; diffus&eacute;.
 
-Fonctionnement défaut: query string : http://mon.site.tld/?titre-de-l-objet:
-Rien a faire
+Fonctionnement d&#233;faut: query string : http://mon.site.tld/?titre-de-l-objet:
+Rien &#224; faire
 
 Pour fonctionner en mode url sans ? : http://mon.site.tld/titre-de-l-objet
- recopiez le fichier {{htaccess.txt}} du repertoire du plugin dans le
- repertoire de base du site SPIP sous le nom {{.htaccess}}
- (attention a ne pas ecraser d'autres reglages
+ recopiez le fichier {{htaccess.txt}} du r&#233;pertoire du plugin dans le
+ r&#233;pertoire de base du site SPIP sous le nom {{.htaccess}}
+ (attention &#224; ne pas ecraser d'autres r&#233;glages
  que vous pourriez avoir mis dans ce fichier) 
 
 Si votre site est en sous-repertoire,

@@ -32,7 +32,7 @@
 		{{L'interface de configuration permet :}}
 		<ul>
 			<li>-De cr&#233;er une nouvelle colonne dans la table spip_documents indiquant pour un document donn&#233; s'il fait oui ou non parti de la playlist.</li>
-			<li>-D'ajouter en tant que document distant li&#233; &#224; un article, les liens spip <code>[xxx->http://mon_serveur/fichier.mp3]</code> pointant vers des fichier mp3, c'est nouveau documents distant pouront êtres manipul&#233; tout comme un document local.</li>
+			<li>-D'ajouter en tant que document distant li&#233; &#224; un article, les liens spip <code>[xxx->http://mon_serveur/fichier.mp3]</code> pointant vers des fichier mp3, c'est nouveau documents distant pouront &#234;tres manipul&#233; tout comme un document local.</li>
 		</ul><br /><br/>
 		
 		

@@ -1,5 +1,5 @@
 <plugin>
-        <nom>Dépublication des articles</nom>
+        <nom>D&#233;publication des articles</nom>
         <icon>images/depublication.png</icon>
         <auteur>
         	[Julien Redondo->mailto:julien@nouveauxterritoires.fr] - [Boris Humbert->mailto:boris@nouveauxterritoires.fr] 
@@ -13,7 +13,7 @@
         <version>0.1</version>
         <etat>test</etat>
         <description>
-        	Permet de spécifier une date de dépubication automatique pour les articles.
+        	Permet de sp&#233;cifier une date de d&#233;pubication automatique pour les articles.
         </description>
         <prefix>depublication</prefix>
 		<install>base/depublication_installer.php</install>

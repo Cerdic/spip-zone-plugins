@@ -6,7 +6,7 @@
   <etat>test</etat>
   <description>Chaque POST est v&#233;rifi&#233; contre la RBL de [->www.spamhaus.org] ; les machines pourries se font jeter.
   
-  (N'h&#233;sitez pas à recopier ce code dans d'autres plugins anti-spam.)</description>
+  (N'h&#233;sitez pas &#224; recopier ce code dans d'autres plugins anti-spam.)</description>
   <prefix>rbl</prefix>
   <options>rbl.inc</options>
   <necessite id="SPIP" version="[1.9.2;]" />

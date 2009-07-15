@@ -5,22 +5,22 @@
   <version_base>0.2</version_base>
 	<etat>dev</etat>
 	<description>
-{{ATTENTION, plugin en cours de refonte complète pour SPIP 2, pas stable du tout !}}
+{{ATTENTION, plugin en cours de refonte compl&#232;te pour SPIP 2, pas stable du tout !}}
 
-Gestion de lettres d'information reprenant les fonctionnalités du logiciel libre CleverMail :
+Gestion de lettres d'information reprenant les fonctionnalit&#233;s du logiciel libre CleverMail :
 -* Gestion de lettres multiples
--* Récupération du contenu à partir d'une URL, donc utilisation possible d'un squelette SPIP dédié
+-* R&#233;cup&#233;ration du contenu &#224; partir d'une URL, donc utilisation possible d'un squelette SPIP d&#233;di&#233;
 -* Envois en HTML ou texte brut
--* Gestion des inscriptions/désinscription, les abonnés étant distincts des utilisateurs de SPIP
+-* Gestion des inscriptions/d&#233;sinscription, les abonn&#233;s &#233;tant distincts des utilisateurs de SPIP
 -* Etc.
 
-Reste à faire :
--* Extraction de tous les textes sous forme de chaînes de langue
+Reste &#224; faire :
+-* Extraction de tous les textes sous forme de cha&#238;nes de langue
 -* Salvatorisation
--* Envoi programmé d'un message
--* Envois périodiques automatisés
+-* Envoi programm&#233; d'un message
+-* Envois p&#233;riodiques automatis&#233;s
 -* Envoi en multipart avec images et CSS incluses ?
--* Vos idées ?
+-* Vos id&#233;es ?
 	</description>
 	<lien>[Documentation->http://www.clever-age.com/veille/blog/plugin-clevermail-pour-spip-pour-une-gestion-simple-de-lettres-d-informations.html]</lien>
 	<icon>img_pack/lettre-24.png</icon>

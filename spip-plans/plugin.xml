@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <plugin>
 	<nom>SPIP-Plans</nom>
-	<auteur>[Artégo->http://www.artego.fr]</auteur>
+	<auteur>[Art&#233;go->http://www.artego.fr]</auteur>
 	<version>2.0</version>
 	<etat>stable</etat>
 	<licence>[GPLv3->http://www.gnu.org/licenses/gpl-3.0.html]</licence>
-	<description>Création de plans interactifs</description>
+	<description>Cr&#233;ation de plans interactifs</description>
 	<necessite id="SPIP" version="[2.0.3;]" />
 	<necessite id="surcharges" version="[2.0;]" />
 	<install>base/plans.php</install>

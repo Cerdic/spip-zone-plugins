@@ -1,7 +1,7 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
 	<multi>[it]ABCalendrier: Mini Calendario Articoli e Brevi
-	[fr]ABCalendrier: Mini-Calendrier pour Articles et Brèves
+	[fr]ABCalendrier: Mini-Calendrier pour Articles et Br&#232;ves
 	[en]ABCalendrier: Mini Calendar for Articles and News
 	</multi>
 	</nom>
@@ -22,9 +22,9 @@ _ © 2007 - 2009 - Distribue sous licence GNU/GPL
 		
 	Utilizza un campo {evento} aggiunto alle brevi.
 	
-	Il codice è stato riscritto utilizzando le #BALISE per il codice, piuttosto che un modelle che utilizzava includeva il PHP. Inoltre è stata implementata la localizzazione con i file multilingua e usando i relativi file di spip
+	Il codice &#232; stato riscritto utilizzando le #BALISE per il codice, piuttosto che un modelle che utilizzava includeva il PHP. Inoltre &#232; stata implementata la localizzazione con i file multilingua e usando i relativi file di spip
 	
-	Inoltre è stato aggiunto il supporto a più eventi nella stessa giornata
+	Inoltre &#232; stato aggiunto il supporto a pi&#249; eventi nella stessa giornata
 	<hr/>
 	
 	{{{Istallazione:}}} attivare il plugin,
@@ -38,7 +38,7 @@ _ © 2007 - 2009 - Distribue sous licence GNU/GPL
 	
 	Per aggiungere una breve al calendario, aggiungere la parola chiave mini-calendrier, salvare, e inserire la data evento
 	
-	Inserire il segnaposto #ABCALENDRIER nei modelli. è possinile anche scrivere #ABCALENDRIER{7} per limitare la lista di eventi visualizzati sotto il calendario a 7.
+	Inserire il segnaposto #ABCALENDRIER nei modelli. &#232; possinile anche scrivere #ABCALENDRIER{7} per limitare la lista di eventi visualizzati sotto il calendario a 7.
 	
 	<hr/>
 	
@@ -76,29 +76,29 @@ _ © 2007 - 2009 - Distribue sous licence GNU/GPL
 	{{{Thanks}}}
 	I want to thanks authors of [minicalendrier pour eva-&gt;http://eva-web.edres74.net/spip.php?article35] Olivier Gautier and all people contributing plugin developing documentation	
     [fr]
-	Ce plugin est inspiré du [minicalendrier pour eva-&gt;http://eva-web.edres74.net/spip.php?article35], mais il permet d'insérer dans le calendrier à la fois les articles et les brèves.
+	Ce plugin est inspir&#233; du [minicalendrier pour eva-&gt;http://eva-web.edres74.net/spip.php?article35], mais il permet d'ins&#233;rer dans le calendrier &#224; la fois les articles et les br&#232;ves.
 		
-    Un nouveau champ {evento} est ajouté à la table spip_breves dans la base de données.
+    Un nouveau champ {evento} est ajout&#233; &#224; la table spip_breves dans la base de donn&#233;es.
 	
-	Le code a été ré-écrit pour utiliser le tags #BALISE de spip, ce qui évite d'insérer du php dans les squelettes ; la compatibilité multilingue a été ajoutée.
+	Le code a &#233;t&#233; r&#233;-&#233;crit pour utiliser le tags #BALISE de spip, ce qui &#233;vite d'ins&#233;rer du php dans les squelettes ; la compatibilit&#233; multilingue a &#233;t&#233; ajout&#233;e.
 	
-	Il est maintenant possible d'ajouter plus d'évènements sur le même jour.
+	Il est maintenant possible d'ajouter plus d'&#233;v&#232;nements sur le m&#234;me jour.
 	<hr/>
 	
-	{{{Installation:}}} Activez le plugin de manière classique. Créez un mot-clé {mini-calendrier}
+	{{{Installation:}}} Activez le plugin de mani&#232;re classique. Cr&#233;ez un mot-cl&#233; {mini-calendrier}
 	
 	<hr/>
 	
 	{{{Utilisation:}}}
-	Pour ajouter un article au calendrier, ajoutez le mot-clé mini-calendrier et utilisez la date de rédaction antérieure comme date d'évènement (assurez-vous de l'avoir activée dans le panneau de configuration)
+	Pour ajouter un article au calendrier, ajoutez le mot-cl&#233; mini-calendrier et utilisez la date de r&#233;daction ant&#233;rieure comme date d'&#233;v&#232;nement (assurez-vous de l'avoir activ&#233;e dans le panneau de configuration)
 
-    Pour ajouter une brèves dans le calendrier, validez la brève puis ajoutez le mot-clé mini-calendrier et paramétrez la date de l'évènement.
+    Pour ajouter une br&#232;ves dans le calendrier, validez la br&#232;ve puis ajoutez le mot-cl&#233; mini-calendrier et param&#233;trez la date de l'&#233;v&#232;nement.
 
-    Insérez le tag #ABCALENDRIER dans les squelettes. Il est possible d'écrire #ABCALENDRIER{7} pour limiter la liste d'évènements visualisés sous le calendrier à 7.
+    Ins&#233;rez le tag #ABCALENDRIER dans les squelettes. Il est possible d'&#233;crire #ABCALENDRIER{7} pour limiter la liste d'&#233;v&#232;nements visualis&#233;s sous le calendrier &#224; 7.
 	<hr/>
 	
 	{{{Merci}}}
-	Je remercie les auteurs du [minicalendrier pour Eva-&gt;http://eva-web.edres74.net/spip.php?article35], Olivier Gautier et tous ceux qui ont contribué au développement de la documentation du plugin. Enfin un remerciement sp&eacute;cial &agrave; [Tropicaloo->http://www.spip-contrib.net/Tropicaloo] pour les traductions
+	Je remercie les auteurs du [minicalendrier pour Eva-&gt;http://eva-web.edres74.net/spip.php?article35], Olivier Gautier et tous ceux qui ont contribu&#233; au d&#233;veloppement de la documentation du plugin. Enfin un remerciement sp&eacute;cial &agrave; [Tropicaloo->http://www.spip-contrib.net/Tropicaloo] pour les traductions
 	</multi>
 
 	</description>

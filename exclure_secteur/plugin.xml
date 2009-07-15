@@ -15,12 +15,12 @@
     <description>
 Exclut automatiquement les secteurs s&eacute;l&eacute;ctionn&eacute;s des boucles ARTICLES / SITES / RUBRIQUES / BREVES / FORUMS (suivant la r&eacute;gle de SPIP, qui ne prend en compte que les forums li&eacute;s &agrave; des articles).
 
-    Attention, pour le moment, ne le fait pas sur les jointures (par exemple, n'exclura pas les forums qui appartiennent à un article du secteur).
+    Attention, pour le moment, ne le fait pas sur les jointures (par exemple, n'exclura pas les forums qui appartiennent &#224; un article du secteur).
     
     On peut faire une exception avec le crit&eacute;re <code>{tout_secteur}</code>. 
     Si on pr&eacute;cise le secteur explicitement, par <code>{id_secteur=x}</code>, <code>{id_secteur==x}</code> ou <code>{id_secteur IN X}</code>, le r&eacute;glage ne sera pas pris en compte.
     
-    Possibilit&eacute; aussi de configurer le plugin pour que <code>{tout}</code> soit &eacute;quivalent à <code>{tout_voir}</code>.
+    Possibilit&eacute; aussi de configurer le plugin pour que <code>{tout}</code> soit &eacute;quivalent &#224; <code>{tout_voir}</code>.
 
 
 	

@@ -5,7 +5,7 @@
 	<version>0.1</version>
 	<etat>test</etat>
     <description>
-	Création de jeux de couleurs et sélection d'un jeu pour une utilisation dans une feuille de style CSS
+	Cr&#233;ation de jeux de couleurs et s&#233;lection d'un jeu pour une utilisation dans une feuille de style CSS
 	 </description>
 	 <prefix>couleurs</prefix>
 	<necessite id="SPIP" version="[1.9.0;]" />

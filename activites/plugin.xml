@@ -6,7 +6,7 @@
 	<version>0.1</version>
 	<etat>dev</etat>
 	<description>
-		Inscription aux événements enregistrés dans l'agenda et proposés comme activités à l'aide de ce plugin
+		Inscription aux &#233;v&#233;nements enregistr&#233;s dans l'agenda et propos&#233;s comme activit&#233;s &#224; l'aide de ce plugin
 	</description>
 	<icon></icon>
 	<prefix>activites</prefix>

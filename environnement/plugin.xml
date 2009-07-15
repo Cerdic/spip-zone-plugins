@@ -1,5 +1,5 @@
 <plugin>
-        <nom>Différenciation des différents environnement (Dev, Test, Recette, Prod)</nom>
+        <nom>Diff&#233;renciation des diff&#233;rents environnement (Dev, Test, Recette, Prod)</nom>
         <icon>img/env_big.png</icon>
         <auteur>
         	[Julien Redondo->mailto:julien@nouveauxterritoires.fr] - [Boris Humbert->mailto:boris@nouveauxterritoires.fr] 
@@ -13,7 +13,7 @@
         <version>0.4</version>
         <etat>test</etat>
         <description>
-        	Permet d'afficher une différenciation graphique en fonction de l'environement s&eacute;lectionn&eacute; dans le frontOffice.
+        	Permet d'afficher une diff&#233;renciation graphique en fonction de l'environement s&eacute;lectionn&eacute; dans le frontOffice.
         	<br/>
         	Pour cela, il faut donc que vous ajoutiez ce code dans un de vos squelettes :
         	<br/> 

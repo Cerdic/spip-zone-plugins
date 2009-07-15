@@ -17,7 +17,7 @@
 	<description>
 Des outils pour d&eacute;velopper un syst&egrave;me de marque-pages en ligne, du style Scuttle.
 
-N&eacute;cessite le plugin Étiquettes et CFG.
+N&eacute;cessite le plugin &#201;tiquettes et CFG.
 	</description>
 	<lien>http://www.spip-contrib.net/Plugin-Marque-pages</lien> <!-- URI de documentation -->
 	<prefix> 

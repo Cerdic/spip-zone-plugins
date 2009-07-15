@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <plugin>
 	<nom>SPIP-Lettres</nom>
-	<auteur>[Artégo->http://www.artego.fr]</auteur>
+	<auteur>[Art&#233;go->http://www.artego.fr]</auteur>
 	<version>3.8</version>
 	<etat>stable</etat>
 	<licence>[GPLv3->http://www.gnu.org/licenses/gpl-3.0.html]</licence>

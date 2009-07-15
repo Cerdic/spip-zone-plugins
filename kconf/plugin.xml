@@ -7,7 +7,7 @@ _ &copy; 2007 - 2009 -> Distribu&eacute; sous licence GNU/GPL v3 bi1nentendu !
 	<version>0.4</version>
 	<etat>test</etat>
 	<description>
--* {{fonctions}} : permet d'offir à l'utilisateur des interfaces de configuration squelettable.
+-* {{fonctions}} : permet d'offir &#224; l'utilisateur des interfaces de configuration squelettable.
 -* {{documentation}} : un jour.
 
 Ce plugin est pr&eacute;vu pour SPIP 2.x

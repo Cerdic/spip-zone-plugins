@@ -14,7 +14,7 @@
 Ce plugin ajoute une sp&eacute;cialisation "technique" aux groupes de mots cl&eacute;s. 
 
 Par d&eacute;faut, les boucles MOTS et GROUPES_MOTS filtreront les mots-cl&eacute;s 
-techniques. Cependant, le critère {tout} permettra de renvoyer tous 
+techniques. Cependant, le crit&#232;re {tout} permettra de renvoyer tous 
 les mots cl&eacute;s et le crit&egrave;re {technique=oui} 
 permet de s&eacute;lectionner par type technique
 	</multi>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <plugin>
-	<nom>SPIP-Météo</nom>
-	<auteur>[Artégo->http://www.artego.fr]</auteur>
+	<nom>SPIP-M&#233;t&#233;o</nom>
+	<auteur>[Art&#233;go->http://www.artego.fr]</auteur>
 	<version>2.0</version>
 	<etat>stable</etat>
 	<licence>[GPLv3->http://www.gnu.org/licenses/gpl-3.0.html]</licence>
-	<description>Prévisions météo dans vos squelettes</description>
+	<description>Pr&#233;visions m&#233;t&#233;o dans vos squelettes</description>
  	<necessite id="SPIP" version="[2.0.3;]" />
 	<install>base/meteo.php</install>
 	<lien>[Site officiel du plugin->http://www.artego.fr/-Previsions-meteo-]</lien>

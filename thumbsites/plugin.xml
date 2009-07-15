@@ -6,11 +6,11 @@
 	<auteur>
 	    <multi>
 	        Camille Lafitte
-        	&#169; 2008 - à plus tard -
+        	&#169; 2008 - &#224; plus tard -
         	Distribu&#233; sous licence GNU/GPL
 
 		    [it]   Camille Lafitte
-        	&#169; 2008 - a più tardi -
+        	&#169; 2008 - a pi&#249; tardi -
             Distribuito sotto licenza GNU/GPL
         </multi>
 	</auteur>
@@ -23,8 +23,8 @@
 
 
 	<description>
-        <multi>Ce plugin {{disponible uniquement &#224; partir de SPIP 1.9.3}} fournit généralise la fonctions de capture de sites. Il est possible d'appliquer directement le filtre <code>thumbisite</code> sur toutes les balise genérant une url. Certains modeles sont disponibles pour les redacteurs tels que <code>&#60;siteXX|thumbsite&#62;</code>
-        [it]Questo plugin {{disponibile solamente da SPIP 1.9.3}} provvede generalizza le funzioni di cattura di luoghi. È possibile applicare direttamente il filtro <code>thumbsite</code> su tutto demarca generando un url. Alcuni modelli sono disponibili per i redattori come <code>&#60;siteXX|thumbsite&#62;</code>
+        <multi>Ce plugin {{disponible uniquement &#224; partir de SPIP 1.9.3}} fourni g&#233;n&#233;ralise la fonction de capture de sites. Il est possible d'appliquer directement le filtre <code>thumbsite</code> sur toutes les balises g&#233;n&#233;rant une url. Certains mod&#232;les sont disponibles pour les r&#233;dacteurs tels que <code>&#60;siteXX|thumbsite&#62;</code>
+        [it]Questo plugin {{disponibile solamente da SPIP 1.9.3}} provvede generalizza le funzioni di cattura di luoghi. &#200; possibile applicare direttamente il filtro <code>thumbsite</code> su tutto demarca generando un url. Alcuni modelli sono disponibili per i redattori come <code>&#60;siteXX|thumbsite&#62;</code>
         </multi>
 	</description>
 

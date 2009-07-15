@@ -15,7 +15,7 @@
 _ - liste les tables 'extra' et permet le choix
 _ - liste les enregistrement d'une table.
 _ - ajouter/supprimer/editer des enregistrements dans une table.
-_ - les pages sont dynamiques, elles s'adaptent à la structure de la table.
+_ - les pages sont dynamiques, elles s'adaptent &#224; la structure de la table.
 _ - compatible fonctions sql portables MySQL, PostGreSQL, SQLite
 	</multi>
 	</description>
@@ -26,5 +26,5 @@ _ - compatible fonctions sql portables MySQL, PostGreSQL, SQLite
         <action>ajouterBoutons</action>
         <inclure>tabledata_pipelines.php</inclure>
     </pipeline>
-    <!-- necessite id="SPIP" version='[2.0.0;]' / -->
+    <necessite id="SPIP" version='[2.0.0;]' />
 </plugin>

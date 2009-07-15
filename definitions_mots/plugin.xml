@@ -21,7 +21,7 @@ Ce plugin a &eacute;t&eacute; developp&eacute; dans le cadre du projet {{Casa d'
 {{{Description}}}
 Ce plugin met automatiquement en surbrillance tous les mots clefs du site qui sont pr&eacute;sents dans un texte. Le visiteur du site est alors invit&eacute; &agrave; cliquer sur le mot clefs pour en afficher sa d&eacute;finition (r&eacute;sum&eacute;).
 
-Une petite fenêtre s'affiche alors &agrave; l'interieur du texte et pr&eacute;sente un r&eacute;sum&eacute; de la d&eacute;finition du mot clefs. Le visiteur peut ensuite choisir de fermer cette fenetre ou bien d'en savoir plus sur le mot clefs et d'afficher ainsi la d&eacute;finition complète. C'est la page {mot} qui sera alors appel&eacute;e.
+Une petite fen&#234;tre s'affiche alors &agrave; l'interieur du texte et pr&eacute;sente un r&eacute;sum&eacute; de la d&eacute;finition du mot clefs. Le visiteur peut ensuite choisir de fermer cette fenetre ou bien d'en savoir plus sur le mot clefs et d'afficher ainsi la d&eacute;finition compl&#232;te. C'est la page {mot} qui sera alors appel&eacute;e.
 
 
 

@@ -6,7 +6,7 @@
 	<description>
 {{Login direct}}<br />
 Permet de s'identifier sur la partie publique du site en une seule etape (les champs login et mot de passe sont demandes sur le meme formulaire)<br />
-Ce plugin agit en modifiant le formulaire utilise lors de l'appel à la balise #LOGIN_PUBLIC,<br />
+Ce plugin agit en modifiant le formulaire utilise lors de l'appel &#224; la balise #LOGIN_PUBLIC,<br />
 et par l'utilisation d'Ajax afin de ne pas modifier les fonctions d'authentification de Spip et ainsi conserver sa securite.<br />
 Attention : Ce plugin necessite l'activation de javascript sur les ordinateurs des internautes pour pouvoir fonctionner.<br />
 	</description>

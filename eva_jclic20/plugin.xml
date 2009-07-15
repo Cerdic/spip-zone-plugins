@@ -20,7 +20,7 @@
     Permet de lire des activit&eacute;s Jclic &agrave; partir de spip.<br/>
     A utiliser plut&ocirc;t avec un affichage en 100%.<br/>
     Cr&eacute;er le mot-cl&eacute; "jclic". Dans un article, compl&eacute;tez le titre, le descriptif et le texte puis ajouter
-    l'activit&eacute; au format .jclic.zip en pièce jointe ("joindre un document" après avoir enregistr&eacute; l'article).
+    l'activit&eacute; au format .jclic.zip en pi&#232;ce jointe ("joindre un document" apr&#232;s avoir enregistr&eacute; l'article).
     </description>
     <prefix>
     evajclic

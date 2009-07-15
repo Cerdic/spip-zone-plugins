@@ -15,7 +15,7 @@ Pour cr&eacute;er ou restaurer une copie compl&egrave;te de votre spip:
 -* [Restaurer->../spip.php?action=decompresser_mes_fichiers]
 -* [T&eacute;l&eacute;charger->../spip.php?action=telecharger_mes_fichiers]
 
-Remarque: La restauration fonctionne par d&eacute;faut sur le fichier d'archives le plus r&eacute;cent. et s'appuie sur le script spip_loader.php qui doit &ecirc;tre pr&eacute;sent à la racine du site.
+Remarque: La restauration fonctionne par d&eacute;faut sur le fichier d'archives le plus r&eacute;cent. et s'appuie sur le script spip_loader.php qui doit &ecirc;tre pr&eacute;sent &#224; la racine du site.
 	</description>
 	<lien>http://www.spip-contrib.net/Mes-fichiers</lien>
 	<auteur>James &copy; 2007 - Distribu&eacute; sous licence GNU/GPL</auteur>

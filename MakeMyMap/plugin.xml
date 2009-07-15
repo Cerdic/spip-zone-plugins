@@ -5,8 +5,10 @@
 	<version>2.0</version>
 	<version_base>0.1.7</version_base>
 	<etat>dev</etat>
-	<auteur>[Art&eacute;go->http://www.artego.fr/], [Berio Molina->http://www.berio.alg-a.org], [Horaciogd->http://www.vhplab.net], Il permet d'ajouter des cartes dans les articles et d'inclure à chacune de ces cartes un ou plusieurs points avec leurs descriptifs. Il permet en outre de calculer des itinéraires jusqu'au point et de personnaliser chaque icone de point avec des icones par défaut. Il fonctionne sous spip 2.0.3</auteur>
-	<description>Google Maps. Fusion des plugins GIS et Gmap API</description>
+	<auteur>[Art&eacute;go->http://www.artego.fr/], [Berio Molina->http://www.berio.alg-a.org], [Horaciogd->http://www.vhplab.net]</auteur>
+	<description>Google Maps. Fusion des plugins GIS et Gmap API.
+_ Il permet d'ajouter des cartes dans les articles et d'inclure &#224; chacune de ces cartes un ou plusieurs points avec leurs descriptifs. Il permet en outre de calculer des itin&#233;raires jusqu'au point et de personnaliser chaque icone de point avec des icones par d&#233;faut. Il fonctionne sous spip 2.0.3	
+	</description>
 	<licence>[GPLv3->http://www.gnu.org/licenses/gpl-3.0.html]</licence>
 	<necessite id="SPIP" version="[2.0.3;]" />
 	<install>base/mymap.php</install>

@@ -11,7 +11,7 @@
 	<description>
 	Ce plugin transforme automatiquement le raccourci {&lt;quote&gt;} en {&lt;q&gt;} (et {&lt;/quote&gt;} en {&lt;/q&gt;}) si la citation ne contient pas de retour &agrave; la ligne.
 
-	L'objectif est de respecter les usages en HTML (les citations courtes doivent être entour&eacute;es par &lt;q&gt;, les citations contenant des paragraphes doivent &ecirc;tre entour&eacute;es des &lt;blockquote&gt;).
+	L'objectif est de respecter les usages en HTML (les citations courtes doivent &#234;tre entour&eacute;es par &lt;q&gt;, les citations contenant des paragraphes doivent &ecirc;tre entour&eacute;es des &lt;blockquote&gt;).
 	</description>
 	<lien>http://www.spip-contrib.net/Plugin-Citations-bien-balisees</lien>
 	<prefix>citations_bb</prefix>

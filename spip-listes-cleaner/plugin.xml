@@ -6,7 +6,7 @@
 	<licence>(c) 2009 [GPL v2 Licence->http://www.opensource.org/licenses/gpl-2.0.php]</licence>
 	<etat>test</etat>
 	<icon>spip-listes-cleaner.png</icon>
-	<description><multi>[fr]Récupere les emails failure delivery à partir d'un compte pop ou imap (nécessite php-imap) et nettoie la base de donnée de la liste spip pour les mails qui ne sont plus valide et supprime les emails failure delivery du compte mail.[en]Get failure delivery emails from a pop or imap account (need php-imap) and clean the spip-liste database of all emails that are not valid and delete failure delivery emails in the mail account.</multi></description>
+	<description><multi>[fr]R&#233;cupere et supprime les erreurs d'envoi de mails &#224; partir d'un compte pop ou imap (n&#233;cessite php-imap) et nettoie la base de donn&#233;e de la liste spip pour les mails qui ne sont plus valides.[en]Get failure delivery emails from a pop or imap account (need php-imap) and clean the spip-liste database of all emails that are not valid and delete failure delivery emails in the mail account.</multi></description>
 	<prefix>spiplistescleaner</prefix>
 	<lien>http://www.spip-contrib.net/SPIP-Listes-Cleaner</lien>
 	

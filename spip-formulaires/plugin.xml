@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <plugin>
 	<nom>SPIP-Formulaires</nom>
-	<auteur>[Artégo->http://www.artego.fr]</auteur>
+	<auteur>[Art&#233;go->http://www.artego.fr]</auteur>
 	<version>2.0</version>
 	<etat>stable</etat>
 	<licence>[GPLv3->http://www.gnu.org/licenses/gpl-3.0.html]</licence>
-	<description>Générateur de formulaires. Nécessite la bibliothèque PHP mcrypt.</description>
+	<description>G&#233;n&#233;rateur de formulaires. N&#233;cessite la biblioth&#232;que PHP mcrypt.</description>
 	<necessite id="SPIP" version="[2.0.3;]" />
 	<necessite id="facteur" version="[1.0;]" />
 	<necessite id="surcharges" version="[2.0;]" />

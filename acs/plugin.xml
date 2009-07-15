@@ -8,8 +8,8 @@
  - <a href="?exec=acs">Assistant de Configuration du Site</a>
  			<br />
  			ACS est un gestionnaire de composants dont l'apparence et le fonctionnement sont configurables 
- 			depuis le site public. ACS inclut un jeu de squelettes SPIP nommé "Mod&egrave;le Cat" enti&egrave;rement 
- 			constitué de composants configurables en quelques clics.<br />
+ 			depuis le site public. ACS inclut un jeu de squelettes SPIP nomm&#233; "Mod&egrave;le Cat" enti&egrave;rement 
+ 			constitu&#233; de composants configurables en quelques clics.<br />
  			ACS comprend aussi un explorateur de toutes les pages du site 
  			avec coloration syntaxique SPIP et liens directs vers les composants inclus dans le squelette.
 			<br />
@@ -20,7 +20,7 @@
 			 - palette 1.3 : choix visuel des couleurs.<br />
 			 - en option :<br />
 			 		- notation 0.6.3 : publication par notation pour le mod&egrave;le Cat.<br />
-			 		- recommander 0.2 : recommander un article a un-e ami-e<br />
+			 		- recommander 0.2 : recommander un article &#224; un-e ami-e<br />
 			 <br />
 		 [en]
  - <a href="?exec=acs&amp;detail=2">ACS Site Configuration Wizard</a>

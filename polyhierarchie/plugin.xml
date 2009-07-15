@@ -10,8 +10,8 @@ _ &#169; 2009
 	<version_base>0.1.0</version_base>
 	<etat>test</etat>
 	<description>
-	Plugin permettant de créer des liens transversaux en rattachant des rubriques
-	et articles à d'autres rubriques que leur rubriques que leur parent direct.
+	Plugin permettant de cr&#233;er des liens transversaux en rattachant des rubriques
+	et articles &#224; d'autres rubriques que leur rubriques que leur parent direct.
 	</description>
 	<lien>http://www.spip-contrib.net/Polyhierarchie</lien>
 	<prefix>polyhier</prefix>
