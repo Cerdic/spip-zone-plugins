@@ -1,0 +1,38 @@
+#ENV*{bloc_ancre}
+#SET{bornes,#ENV{page_courante}|bornes_pagination{#ENV{nombre_pages},10}}
+#SET{premiere, #GET{bornes}|reset}
+#SET{derniere, #GET{bornes}|end}
+#SET{separateur,#ENV{separateur,'/'}}
+<!--le bouton précédent-->
+#SET{i,#ENV{page_courante}|moins{1}}
+[(#GET{i}|>{0}|?{' '})[
+	(#SET{item, #GET{i}|moins{1}|mult{#ENV{pas}} })
+	][(#INCLURE{fond=modeles/paginationitem}{num=#GET{i}}{texte=#VAL{'<img style="vertical-align:middle;" src="'}|concat{#CHEMIN{images/previous.png},'" alt="previous"/>'}}{separateur=''}{url=#ENV{url}|parametre_url{#ENV{debut},#GET{item}}|ancre_url{#ENV{ancre}}}{page_courante=#ENV{page_courante}}{derniere=#ENV{derniere}})]
+]
+
+<!--la page où l'on se trouve-->
+#SET{i,#GET{i}|plus{1}}
+[(#GET{i}|<={#GET{derniere}}|?{' ',''})[
+	(#SET{item, #GET{i}|moins{1}|mult{#ENV{pas}} })
+	][(#INCLURE{fond=modeles/paginationitem}{num=#GET{i}}{texte=#GET{i}}{separateur=''}{url=#ENV{url}|parametre_url{#ENV{debut},#GET{item}}|ancre_url{#ENV{ancre}}}{page_courante=#ENV{page_courante}}{derniere=#GET{derniere}})]
+]
+
+<!--le nombre total de pages-->
+[ (#GET*{separateur}) ]
+#ENV{nombre_pages}
+
+<!--le bouton suivant-->
+#SET{i,#ENV{page_courante}|plus{1}}
+[(#GET{i}|<={#ENV{nombre_pages}}|?{' '})[
+	(#SET{item, #GET{i}|moins{1}|mult{#ENV{pas}} })
+	][(#INCLURE{fond=modeles/paginationitem}{num=#GET{i}}{texte=#VAL{'<img style="vertical-align:middle;" src="'}|concat{#CHEMIN{images/next.png},'" alt="next"/>'}}{separateur=''}{url=#ENV{url}|parametre_url{#ENV{debut},#GET{item}}|ancre_url{#ENV{ancre}}}{page_courante=#ENV{page_courante}}{derniere=#ENV{derniere}})]
+]
+
+
+
+
+
+
+
+
+
