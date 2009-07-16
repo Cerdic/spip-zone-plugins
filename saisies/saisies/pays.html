@@ -7,9 +7,9 @@
   - option_intro : chaine de langue de la premiere ligne vide ? (defaut:"")
   
   Exemple d'appel :
-	[(#SAISIE{pays}
-		{nom=pays}
-		{label=<:plugin:info_pays:>})] 
+	[(#SAISIE{pays, pays,
+		label=<:plugin:info_pays:>
+	})] 
 ]
 <select name="#ENV{nom}" id="champ_#ENV{nom}"[ class="(#ENV{class})"]>
 <option>[(#ENV{option_intro})]</option>

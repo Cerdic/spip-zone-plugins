@@ -7,10 +7,11 @@
     - label_case : pour un label a cote de la case (defaut:"")
   
   Exemple d'appel :
-	[(#SAISIE{case, afficher_liste}
-		{label=<:plugin:afficher_liste:>}
-		{label_case=<:plugin:activer:>}
-		{explication=<:plugin:explication_afficher_liste:>})]
+	[(#SAISIE{case, afficher_liste,
+		label=<:plugin:afficher_liste:>,
+		label_case=<:plugin:activer:>,
+		explication=<:plugin:explication_afficher_liste:>
+	})]
 ]
 <div class="choix">
 	<input type="checkbox" name="#ENV{nom}" class="checkbox" id='champ_#ENV{nom}'[ (#ENV{valeur}|oui)checked='checked'] value='on' />

@@ -7,9 +7,10 @@
     - aucun
   
   Exemple d'appel :
-	[(#SAISIE{oui_non, afficher_liste}
-		{label=<:plugin:afficher_liste:>}
-		{explication=<:plugin:explication_afficher_liste:>})]
+	[(#SAISIE{oui_non, afficher_liste,
+		label=<:plugin:afficher_liste:>,
+		explication=<:plugin:explication_afficher_liste:>
+	})]
 ]
 <div class="choix">
 	<input type="radio" name="#ENV{nom}" class="radio" id='champ_#ENV{nom}_oui'[ (#ENV{valeur}|sinon{#ENV{defaut}}|oui)checked='checked'] value='on' />

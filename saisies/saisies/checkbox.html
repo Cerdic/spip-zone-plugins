@@ -6,10 +6,11 @@
   - ** datas : tableau de donnees cle=>valeur
   
   Exemple d'appel :
-	[(#SAISIE{checkbox, criteres}
-		{label=<:plugin:choisir_criteres:>}
-		{defaut=#ARRAY{0,cle1,1,cle3}} {defaut=cle2}
-		{datas=#ARRAY{
+	[(#SAISIE{checkbox, criteres,
+		label=<:plugin:choisir_criteres:>,
+		defaut=#ARRAY{0,cle1,1,cle3}, 
+		defaut=cle2,
+		datas=#ARRAY{
 			cle1,valeur1,
 			cle2,valeur2,
 			cle3,valeur3,

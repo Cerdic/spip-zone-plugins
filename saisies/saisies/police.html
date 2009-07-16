@@ -6,10 +6,10 @@
   - class : classe(s) css ajoutes au select
   
   Exemple d'appel :
-	[(#SAISIE{police}
-		{nom=couleur_foncee}
-		{label=<:spa:couleur_foncee:>}
-		{obligatoire=non})] 
+	[(#SAISIE{police, couleur_foncee, 
+		label=<:spa:couleur_foncee:>, 
+		obligatoire=non
+	})] 
 ]
 <select name="police"[ class=" (#ENV{class})"]>
 	<option value="">[(#ENV{option_intro})]</option>
