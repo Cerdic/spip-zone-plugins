@@ -1,9 +1,9 @@
 <plugin>
   <nom>Pagination Simple</nom>
-  <auteur>Shazaam [->www.mutins.net]</auteur>
+  <auteur>Shazaam [->www.mutins.net], Cedric Morin</auteur>
   <licence>(c) 2009 GPL</licence>
   <version>1.0</version>
-	<lien>http://www.spip-contrib.net/Pagination_simple</lien>
+	<lien>http://www.spip-contrib.net/Pagination_simple</lien><!-- URI de documentation -->
   <etat>stable</etat>
   <description>Une pagination simple</description>
   <prefix>paginationsimple</prefix>
