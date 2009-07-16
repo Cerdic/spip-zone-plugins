@@ -6,12 +6,24 @@ include_spip('inc/cextras');
 // retourne la liste des objets valides utilisables par le plugin
 // (dont on peut afficher les champs dans les formulaires)
 function cextras_objets_valides(){
+	
 	$objets = array();
-	foreach (array('article','auteur','breve','groupes_mot','mot','rubrique','site') as $objet) {
+	
+	$objets_extensibles = pipeline("objets_extensibles", array(
+		'article'     => _T('cextras:table_article'),
+		'auteur'      => _T('cextras:table_auteur'),
+		'breve'       => _T('cextras:table_breve'),
+		'groupes_mot' => _T('cextras:table_groupes_mot'),
+		'mot'         => _T('cextras:table_mot'),
+		'rubrique'    => _T('cextras:table_rubrique'),
+		'site'        => _T('cextras:table_site')
+	));
+	
+	foreach ($objets_extensibles as $objet => $traduction) {
 		$objets[$objet] = array(
 			'table' => table_objet_sql($objet), 
 			'type' => objet_type($objet), 
-			'nom' => _T('cextras:table_'.$objet),
+			'nom' => $traduction,
 		);
 	}
 	return $objets;
