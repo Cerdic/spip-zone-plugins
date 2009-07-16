@@ -155,8 +155,7 @@ function balise_SAISIE_dist ($p) {
 	$p = Pile::creer_et_ajouter_argument_balise($p, 'valeur', $env_titre);
 	$p = Pile::creer_et_ajouter_argument_balise($p, 'erreurs');
 	$p = Pile::creer_et_ajouter_argument_balise($p, 'type_saisie', $type_saisie);
-	//$p = Pile::creer_et_ajouter_argument_balise($p, 'fond', 'saisies/_base');
-	$p = Pile::creer_et_ajouter_argument_balise($p, 'fond', 'sus');
+	$p = Pile::creer_et_ajouter_argument_balise($p, 'fond', 'saisies/_base');
 	
 	// on appelle la balise #INCLURE
 	// avec les arguments ajoutes
