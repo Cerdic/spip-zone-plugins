@@ -21,7 +21,7 @@ function cextras_enum($enum, $val='', $type='valeur', $name='') {
 				$enums[$cle] = 
 					($cle == $val
 					OR in_array($cle, $val_t))
-						? sinon(sinon($desc,$cle),_T('cextra:cextra_par_defaut'))
+						? sinon(sinon($desc,$cle),_T('cextras:cextra_par_defaut'))
 						: '';
 				break;
 			case 'option':
@@ -29,7 +29,7 @@ function cextras_enum($enum, $val='', $type='valeur', $name='') {
 					. ($cle == $val
 						? " selected='selected'"
 						: ''
-					) .'> '.sinon(sinon($desc,$cle),_T('cextra:cextra_par_defaut'))
+					) .'> '.sinon(sinon($desc,$cle),_T('cextras:cextra_par_defaut'))
 					.'</option>'
 					."\n";
 				break;
@@ -39,7 +39,7 @@ function cextras_enum($enum, $val='', $type='valeur', $name='') {
 						? " checked='checked'"
 						: ''
 					) ."><label for='${name}_$cle'>"
-					. sinon(sinon($desc,$cle),_T('cextra:cextra_par_defaut'))
+					. sinon(sinon($desc,$cle),_T('cextras:cextra_par_defaut'))
 					.'</label></div>'
 					."\n";
 				break;
@@ -49,7 +49,7 @@ function cextras_enum($enum, $val='', $type='valeur', $name='') {
 						? " checked='checked'"
 						: ''
 					) ." /><label for='${name}_$cle'>"
-					. sinon(sinon($desc,$cle),_T('cextra:cextra_par_defaut'))
+					. sinon(sinon($desc,$cle),_T('cextras:cextra_par_defaut'))
 					.'</label></div>'
 					."\n";
 				break;
