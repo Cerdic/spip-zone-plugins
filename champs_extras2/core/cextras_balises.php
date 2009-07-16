@@ -64,9 +64,8 @@ function calculer_balise_LISTER_VALEURS($objet, $_id_objet, $colonne, $id_objet,
 	// on ne peut pas traduire les cles
 	if (!is_array($champs)) return $cles;
 	
-	// initialiser les noms corrects d'objet et de table
+	// initialiser les noms corrects d'objet
 	$objet = objet_type(table_objet($objet));
-	$table = table_objet_sql($objet);
 	$vals = array();
 	
 	// on cherche les champs s'appliquant a la meme table	
