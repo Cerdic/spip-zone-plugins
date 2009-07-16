@@ -123,4 +123,9 @@ function agenda_libelle_association_mots($libelles){
 	return $libelles;
 }
 
+
+function agenda_objets_extensibles($objets){
+		return array_merge($objets, array('evenement' => _T('agenda:evenements')));
+}
+
 ?>

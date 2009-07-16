@@ -50,6 +50,11 @@
 		<nom>taches_generales_cron</nom>
 		<inclure>agenda_pipelines.php</inclure>
 	</pipeline>
+	<!-- avec plugin champs extras 2 -->
+	<pipeline>
+		<nom>objets_extensibles</nom>
+		<inclure>agenda_pipelines.php</inclure>
+	</pipeline>
   <bouton id='calendrier' parent='naviguer'>
       <icone>img_pack/agenda-24.png</icone>
       <titre>agenda:agenda</titre>
