@@ -47,13 +47,13 @@
       // mauvaise bidouille pour gérer l'include du fichier embed.php de Gallery 
       // selon qu'on est dans le public ou le privé...
         $chem_inclure = trim($cfg['chemin_gallery'],'/').'/';
+        $chem_inclure = _DIR_RACINE.$chem_inclure;
         if (file_exists($chem_inclure.'embed.php')) 
             include_once($chem_inclure.'embed.php');
         elseif (file_exists('../'.$chem_inclure.'embed.php')) 
             include_once('../'.$chem_inclure.'embed.php');
         else 
             die(_T('gallery:fichier_embed_pas_trouve'));
-//        require_once('gallery/embed.php');
             
         $lang = $GLOBALS['auteur_session']['lang'] ;
         if( $lang =='' ) $lang = 'fr';
@@ -69,21 +69,26 @@
         $ret = GalleryEmbed::init(array( 'activeLanguage' => $lang,
                                          'embedUri' => $cfg['chemin_spip'].$fic_embed,
                                          'g2Uri' => $cfg['chemin_gallery'],
-                                         
+                                         'fullInit' => true,
                                          'loginRedirect' => $cfg['chemin_spip'],  
                                          'activeUserId' => $GLOBALS['auteur_session']['id_auteur'] ));
          if ($ret) print 'GalleryEmbed::init failed, here is the error message: ' . $ret->getAsHtml();
+         
+         
     }
-
+    
+    
 // le nécessaire pour faire tourner gallery en mode "embed" dans son squelette SPIP
     function gallery2(){    
-        gallery_init();                                         
+        gallery_init();
+
         $ret = GalleryEmbed::checkActiveUser( $GLOBALS['auteur_session']['id_auteur']);
     
         if($ret) {
              $extUserId = $GLOBALS['auteur_session']['id_auteur'];
-//             $args = array('username' => $GLOBALS['auteur_session']['nom']);  
+//             $extUserId = $id_auteur;
              $args = array('username' => $GLOBALS['auteur_session']['login']);
+//             $args = array('username' => $login_auteur);
              $spipgallery = trouveid( $args['username']) ;
              if(  $spipgallery[0] ) {
                 $ret = GalleryEmbed::addExternalIdMapEntry($extUserId, $spipgallery[1], 'GalleryUser') ;
@@ -91,14 +96,6 @@
              else {
                 $ret = GalleryEmbed::createUser($extUserId, $args) ;
              }
-/* A quoi pouvait bien servir cette redondance du code???
-             $ret = GalleryEmbed::init(array( 'activeLanguage' => $lang,
-                                              'embedUri' => 'spip.php?page=gallerie',
-                                              'g2Uri' => '/gallery/',  
-                                              'loginRedirect' =>'/',  
-                                              'activeUserId' => $GLOBALS['auteur_session']['id_auteur'] ));
-             $ret = GalleryEmbed::checkActiveUser( $GLOBALS['auteur_session']['id_auteur']);
-*/
          }
          /* Now you *could* do something with $g2moddata['themeData'] */
         //$g2data = GalleryEmbed::handleRequest();
@@ -118,7 +115,6 @@
 // necessite le module imageblock de Gallery 2: http://codex.gallery2.org/Gallery2:Modules:imageblock
     function g2photo($item_id='', $nb_dernier='', $taille_perso='', $lien_perso='', $align='', $legende='', $sep_item='', $type='') {
 //         echo 'item= '.$item_id.' nb= '.$nb_dernier.' taille= '.$taille_perso.' lien= '.$lien_perso.' align= '.$align.' legende= '.$legende.' type= '.$type.'<br>';
-         
        // initialiser Gallery
          gallery_init();
          
@@ -157,7 +153,8 @@
          $html = '';
        // si il existe une référence d'item on l'utilise pour envoyer une image unique
          if ($item_id != '' AND intval($item_id)!= 0){ 
-             list($ret,$html,$head1) = GalleryEmbed::getImageBlock(array(
+//             list($ret,$html,$head1) = GalleryEmbed::getImageBlock(array(
+             list($ret,$html,$head1) = GalleryEmbed::getBlock('imageblock', 'ImageBlock', array(
                   'blocks' => 'specificItem',
                   'show' => $show,
                   'link' => $lien,
@@ -175,7 +172,7 @@
                 $ch_last .= $sep.$ch_type;
                 $sep = '|';
             }
-             list($ret,$html,$head1) = GalleryEmbed::getImageBlock(array(
+             list($ret,$html,$head1) = GalleryEmbed::getBlock('imageblock', 'ImageBlock', array(
                   'blocks' => $ch_last,
                   'show' => $show,
                   'link' => $lien,
@@ -187,7 +184,7 @@
       // si aucun paramètre on envoie une photo au hazard
         else {
             $ch_type =  ($type == 'album' ? 'randomAlbum' :  'randomImage');
-            list($ret,$html,$head1) = GalleryEmbed::getImageBlock(array(
+            list($ret,$html,$head1) = GalleryEmbed::getBlock('imageblock', 'ImageBlock', array(
                   'blocks' => $ch_type,
                   'show' => $show,
                   'link' => $lien,
@@ -257,7 +254,8 @@
              $taille = intval($cfg['gimg_taille']);
          else $taille = 640;
          
-         list($ret,$html,$head1) = GalleryEmbed::getImageBlock(array(
+//         list($ret,$html,$head1) = GalleryEmbed::getImageBlock(array(
+         list($ret,$html,$head1) = GalleryEmbed::getBlock('imageblock', 'ImageBlock', array(
               'blocks' => 'specificItem',
               'show' => 'none',
               'link' => 'none',
