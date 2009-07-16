@@ -8,12 +8,12 @@
   
   Exemple d'appel :
 	[(#SAISIE{input,couleur_foncee,
-		label=<:spa:couleur_foncee:>,
-		size=7
+		_label=<:spa:couleur_foncee:>,
+		_size=7
 	})]
 		
 ]
 
 
-#SET{type,#ENV{type,text}}
-<input type="#GET{type}" name="#ENV{nom}" class="#GET{type}[ (#ENV{class})]" id="champ_#ENV{nom}"[ value="(#ENV{valeur}|sinon{#ENV{defaut}})"][ size="(#ENV{size})"] />
+#SET{type,#ENV{_type,text}}
+<input type="#GET{type}" name="#ENV{_nom}" class="#GET{type}[ (#ENV{_class})]" id="champ_#ENV{_nom}"[ value="(#ENV{_valeur}|sinon{#ENV{_defaut}})"][ size="(#ENV{_size})"] />

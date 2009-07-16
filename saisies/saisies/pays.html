@@ -3,17 +3,17 @@
   ### /!\ table GEO_PAYS (geographie) ###
 	
   Parametres :
-  - class : classe(s) css ajoutes au select
-  - option_intro : chaine de langue de la premiere ligne vide ? (defaut:"")
+  - _class : classe(s) css ajoutes au select
+  - _option_intro : chaine de langue de la premiere ligne vide ? (defaut:"")
   
   Exemple d'appel :
 	[(#SAISIE{pays, pays,
-		label=<:plugin:info_pays:>
+		_label=<:plugin:info_pays:>
 	})] 
 ]
-<select name="#ENV{nom}" id="champ_#ENV{nom}"[ class="(#ENV{class})"]>
-<option>[(#ENV{option_intro})]</option>
+<select name="#ENV{_nom}" id="champ_#ENV{_nom}"[ class="(#ENV{_class})"]>
+<option>[(#ENV{_option_intro})]</option>
 <BOUCLE_pays(GEO_PAYS){par multi nom}>
-	<option value="#ID_PAYS"[(#ID_PAYS|=={#ENV{valeur}|sinon{#ENV{defaut}}}|oui) selected="selected"]>#NOM</option>
+	<option value="#ID_PAYS"[(#ID_PAYS|=={#ENV{_valeur}|sinon{#ENV{_defaut}}}|oui) selected="selected"]>#NOM</option>
 </BOUCLE_pays>
 </select>

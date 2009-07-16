@@ -1,14 +1,14 @@
 [(#REM) 
 
   Parametres :
-  - class : classe(s) css ajoutes au textarea
-  - rows : nombre de ligne
-  - cols : nombre de caracteres de large
+  - _class : classe(s) css ajoutes au textarea
+  - _rows : nombre de ligne
+  - _cols : nombre de caracteres de large
   
   Exemple d'appel :
 	[(#SAISIE{textarea, couleur_foncee,
-		label=<:spa:couleur_foncee:>,
-		obligatoire=non
+		_label=<:spa:couleur_foncee:>,
+		_obligatoire=non
 	})] 
 ]
-<textarea name="#ENV{nom}"[ class=" (#ENV{class})"] id="champ_#ENV{nom}" [ rows="(#ENV{rows})"][ cols="(#ENV{cols})"]>[(#ENV{valeur}|sinon{#ENV{defaut}})]</textarea>
+<textarea name="#ENV{_nom}"[ class="(#ENV{_class})"] id="champ_#ENV{_nom}" [ rows="(#ENV{_rows})"][ cols="(#ENV{_cols})"]>[(#ENV{_valeur}|sinon{#ENV{_defaut}})]</textarea>

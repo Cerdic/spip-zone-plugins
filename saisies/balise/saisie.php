@@ -151,10 +151,11 @@ function balise_SAISIE_dist ($p) {
 	$env_titre   = Pile::creer_balise('ENV', array('param' => array($titre))); // #ENV{titre}
 	
 	// on modifie $p pour ajouter des arguments
-	// {valeur=#ENV{$titre}, erreurs, type_saisie=$type, fond=saisies/_base}
-	$p = Pile::creer_et_ajouter_argument_balise($p, 'valeur', $env_titre);
-	$p = Pile::creer_et_ajouter_argument_balise($p, 'erreurs');
-	$p = Pile::creer_et_ajouter_argument_balise($p, 'type_saisie', $type_saisie);
+	// {nom=$titre, valeur=#ENV{$titre}, erreurs, type_saisie=$type, fond=saisies/_base}
+	$p = Pile::creer_et_ajouter_argument_balise($p, '_nom', $titre);
+	$p = Pile::creer_et_ajouter_argument_balise($p, '_valeur', $env_titre);
+	$p = Pile::creer_et_ajouter_argument_balise($p, '_type_saisie', $type_saisie);
+	$p = Pile::creer_et_ajouter_argument_balise($p, 'erreurs'); // celui la il vient de CVT ou CFG, pas de _
 	$p = Pile::creer_et_ajouter_argument_balise($p, 'fond', 'saisies/_base');
 	
 	// on appelle la balise #INCLURE
