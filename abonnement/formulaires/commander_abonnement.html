@@ -15,7 +15,9 @@
 	</p>
 	
 	<ul>
-		[(#SAISIE{abonnement,abonnement,oui}{label=<:abo:choisir_son_abonnement:>})]
+		[(#SAISIE{abonnement,abonnement,
+			obligatoire=oui,
+			label=<:abo:choisir_son_abonnement:>})]
 	</ul>
 	<p class="boutons">
 		<input type="submit" value="<:abo:bouton_commander:>" class="submit" />

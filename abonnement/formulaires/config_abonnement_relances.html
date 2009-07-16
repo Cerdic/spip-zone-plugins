@@ -16,11 +16,11 @@
 		<fieldset>
 			<h3 class="legend"><:abo:fieldset_expediteur:></h3>
 			<ul>
-				[(#SAISIE{input}{nom=nom_envoi}
-					{label=<:abo:label_nom:>})]
+				[(#SAISIE{input, nom_envoi,
+					label=<:abo:label_nom:>})]
 					
-				[(#SAISIE{input}{nom=email_envoi}
-					{label=<:abo:label_email:>})]
+				[(#SAISIE{input, email_envoi,
+					label=<:abo:label_email:>})]
 			</ul>
 		</fieldset>
 	</li>
@@ -29,12 +29,12 @@
 		<fieldset>
 			<h3 class="legend"><:abo:fieldset_relance_avant_1:></h3>
 			<ul>
-				[(#SAISIE{input}{nom=sujet_relance1}
-					{label=<:abo:label_sujet:>})]
+				[(#SAISIE{input, sujet_relance1,
+					label=<:abo:label_sujet:>})]
 					
-				[(#SAISIE{textarea}{nom=texte_relance1}
-					{label=<:abo:label_texte:>}
-					{rows=10})]
+				[(#SAISIE{textarea, texte_relance1,
+					label=<:abo:label_texte:>,
+					rows=10})]
 			</ul>
 		</fieldset>
 	</li>
@@ -43,12 +43,12 @@
 		<fieldset>
 			<h3 class="legend"><:abo:fieldset_relance_avant_2:></h3>
 			<ul>
-				[(#SAISIE{input}{nom=sujet_relance2}
-					{label=<:abo:label_sujet:>})]
+				[(#SAISIE{input, sujet_relance2,
+					label=<:abo:label_sujet:>})]
 					
-				[(#SAISIE{textarea}{nom=texte_relance2}
-					{label=<:abo:label_texte:>}
-					{rows=10})]
+				[(#SAISIE{textarea, texte_relance2,
+					label=<:abo:label_texte:>,
+					rows=10})]
 			</ul>
 		</fieldset>
 	</li>
@@ -57,12 +57,12 @@
 		<fieldset>
 			<h3 class="legend"><:abo:fieldset_relance:></h3>
 			<ul>
-				[(#SAISIE{input}{nom=sujet_relance3}
-					{label=<:abo:label_sujet:>})]
+				[(#SAISIE{input, sujet_relance3,
+					label=<:abo:label_sujet:>})]
 					
-				[(#SAISIE{textarea}{nom=texte_relance3}
-					{label=<:abo:label_texte:>}
-					{rows=10})]
+				[(#SAISIE{textarea, texte_relance3,
+					label=<:abo:label_texte:>,
+					rows=10})]
 			</ul>
 		</fieldset>
 	</li>
@@ -72,12 +72,12 @@
 		<fieldset>
 			<h3 class="legend"><:abo:fieldset_relance_apres:></h3>
 			<ul>
-				[(#SAISIE{input}{nom=sujet_relance4}
-					{label=<:abo:label_sujet:>})]
+				[(#SAISIE{input}{nom=sujet_relance4,
+					label=<:abo:label_sujet:>})]
 					
-				[(#SAISIE{textarea}{nom=texte_relance4}
-					{label=<:abo:label_texte:>}
-					{rows=10})]
+				[(#SAISIE{textarea}{nom=texte_relance4,
+					label=<:abo:label_texte:>,
+					rows=10})]
 			</ul>
 		</fieldset>
 	</li>

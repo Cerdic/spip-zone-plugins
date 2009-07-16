@@ -8,11 +8,11 @@
 	  #ACTION_FORMULAIRE{#ENV{action}}
 	  <input type='hidden' name='id_abonnement' value='#ENV{id_abonnement}' />
 	  <ul>
-	  	[(#SAISIE{input,libelle,oui}
-			{label=<:abo:label_libelle:>})]
+	  	[(#SAISIE{input,libelle,obligatoire=oui,
+			label=<:abo:label_libelle:>})]
 
-	  	[(#SAISIE{input,duree,oui}
-			{label=<:abo:label_duree:>})]		
+	  	[(#SAISIE{input,duree,obligatoire=oui,
+			label=<:abo:label_duree:>})]		
 
 	  	<li class="editer_periode obligatoire">
 			<label for="champ_periode"><:abo:label_periode:></label>
@@ -22,12 +22,12 @@
 			</select>
 		</li>
 
-	  	[(#SAISIE{input,montant,oui}
-			{label=<:abo:label_tarif:>})]
+	  	[(#SAISIE{input,montant,obligatoire=oui,
+			label=<:abo:label_tarif:>})]
 			
-	  	[(#SAISIE{textarea,commentaire}
-			{label=<:abo:label_commentaire:>}
-			{rows=8})]	
+	  	[(#SAISIE{textarea,commentaire,
+			label=<:abo:label_commentaire:>,
+			rows=8})]	
 		
 	  </ul>
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
