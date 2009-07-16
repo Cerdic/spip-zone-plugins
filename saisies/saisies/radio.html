@@ -3,21 +3,21 @@
   ### /!\ boucle POUR (spip Bonux) ###
   
   Parametres :
-  - ** _datas : tableau de donnees cle=>valeur
+  - ** datas : tableau de donnees cle=>valeur
   
   Exemple d'appel :
 	[(#SAISIE{radio, afficher_liste,
-		_label=<:plugin:afficher_liste:>,
-		_explication=<:plugin:explication_afficher_liste:>,
-		_datas=#ARRAY{
+		label=<:plugin:afficher_liste:>,
+		explication=<:plugin:explication_afficher_liste:>,
+		datas=#ARRAY{
 			cle1,valeur1,
 			cle2,valeur2,
 			cle3,valeur3,
 	}})]
 ]
-<BOUCLE_radio(POUR){tableau #ENV{_datas}}>
+<BOUCLE_radio(POUR){tableau #ENV{datas}}>
 <div class="choix">
-	<input type="radio" name="#ENV{_nom}" class="radio" id='champ_#ENV{_nom}_#COMPTEUR_BOUCLE'[ (#ENV{_valeur}|sinon{#ENV{_defaut}}|=={#CLE}|oui)checked='checked'] value='#CLE' />
-	<label for="champ_#ENV{_nom}_#COMPTEUR_BOUCLE">#VALEUR</label>
+	<input type="radio" name="#ENV{nom}" class="radio" id='champ_#ENV{nom}_#COMPTEUR_BOUCLE'[ (#ENV{valeur}|sinon{#ENV{defaut}}|=={#CLE}|oui)checked='checked'] value='#CLE' />
+	<label for="champ_#ENV{nom}_#COMPTEUR_BOUCLE">#VALEUR</label>
 </div>
 </BOUCLE_radio>

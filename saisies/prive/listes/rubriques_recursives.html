@@ -1,9 +1,9 @@
 [(#SET{iteration,#ENV{iteration,1}})]
 [(#SET{separateur,[(#ENV{separateur}|concat{&nbsp;&rsaquo;&nbsp;})]})]
 <BOUCLE_rubriques(RUBRIQUES){id_parent}{tout}>
-	[(#ENV{_multiple}|oui)
-	<option value="#ID_RUBRIQUE"[(#ID_RUBRIQUE|in_array{#ENV{_valeur}|sinon{#ENV{_defaut,#ARRAY}}}|oui) selected="selected"]>#GET{separateur}#TITRE</option>]
-	[(#ENV{_multiple}|non)
-	<option value="#ID_RUBRIQUE"[(#ID_RUBRIQUE|=={#ENV{_valeur}|sinon{#ENV{_defaut}}}|oui) selected="selected"]>#GET{separateur}#TITRE</option>]
-	<INCLURE{fond=prive/listes/rubriques_recursives}{_valeur=#ENV{_valeur}}{id_rubrique=#ID_RUBRIQUE}{iteration=(#GET{iteration}|plus{1})}{separateur=#GET{separateur}}{_multiple}{_defaut} />
+	[(#ENV{multiple}|oui)
+	<option value="#ID_RUBRIQUE"[(#ID_RUBRIQUE|in_array{#ENV{valeur}|sinon{#ENV{defaut,#ARRAY}}}|oui) selected="selected"]>#GET{separateur}#TITRE</option>]
+	[(#ENV{multiple}|non)
+	<option value="#ID_RUBRIQUE"[(#ID_RUBRIQUE|=={#ENV{valeur}|sinon{#ENV{defaut}}}|oui) selected="selected"]>#GET{separateur}#TITRE</option>]
+	<INCLURE{fond=prive/listes/rubriques_recursives}{valeur=#ENV{valeur}}{id_rubrique=#ID_RUBRIQUE}{iteration=(#GET{iteration}|plus{1})}{separateur=#GET{separateur}}{_multiple}{defaut} />
 </BOUCLE_rubriques>

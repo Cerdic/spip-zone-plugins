@@ -3,18 +3,18 @@
   ### /!\ boucle POUR ###
   
   Parametres :
-  - _class : classe(s) css ajoutes au select
-  - _option_intro : chaine de langue de la premiere ligne vide ? (defaut:"")
+  - class : classe(s) css ajoutes au select
+  - option_intro : chaine de langue de la premiere ligne vide ? (defaut:"")
   
   Exemple d'appel :
 	[(#SAISIE{police, couleur_foncee, 
-		_label=<:spa:couleur_foncee:>, 
-		_obligatoire=non
+		label=<:spa:couleur_foncee:>, 
+		obligatoire=non
 	})] 
 ]
-<select name="police" id="champ_#ENV{_nom}"[ class="(#ENV{_class})"]>
+<select name="police" id="champ_#ENV{nom}"[ class="(#ENV{class})"]>
 	<option value="">[(#ENV{_option_intro})]</option>
 	<BOUCLE_police(POUR){tableau #VAL{polices/}|find_all_in_path{\w+\.ttf}}{par cle}>
-		<option value="#CLE"[ (#ENV{_valeur}|=={#CLE}|oui)selected="selected"]>#CLE</option>
+		<option value="#CLE"[ (#ENV{valeur}|=={#CLE}|oui)selected="selected"]>#CLE</option>
 	</BOUCLE_police>
 </select>

@@ -8,15 +8,15 @@
   
   Exemple d'appel :
 	[(#SAISIE{oui_non, afficher_liste,
-		_label=<:plugin:afficher_liste:>,
-		_explication=<:plugin:explication_afficher_liste:>
+		label=<:plugin:afficher_liste:>,
+		explication=<:plugin:explication_afficher_liste:>
 	})]
 ]
 <div class="choix">
-	<input type="radio" name="#ENV{_nom}" class="radio" id='champ_#ENV{_nom}_oui'[ (#ENV{_valeur}|sinon{#ENV{_defaut}}|oui)checked='checked'] value='on' />
-	<label for="champ_#ENV{_nom}_oui"><:item_oui:></label>
+	<input type="radio" name="#ENV{nom}" class="radio" id='champ_#ENV{nom}_oui'[ (#ENV{valeur}|sinon{#ENV{defaut}}|oui)checked='checked'] value='on' />
+	<label for="champ_#ENV{nom}_oui"><:item_oui:></label>
 </div>
 <div class="choix">
-	<input type="radio" name="#ENV{_nom}" class="radio" id='champ_#ENV{_nom}_non'[ (#ENV{_valeur}|sinon{#ENV{_defaut}}|non)checked='checked'] value='' />
-	<label for="champ_#ENV{_nom}_non"><:item_non:></label>
+	<input type="radio" name="#ENV{nom}" class="radio" id='champ_#ENV{nom}_non'[ (#ENV{valeur}|sinon{#ENV{defaut}}|non)checked='checked'] value='' />
+	<label for="champ_#ENV{nom}_non"><:item_non:></label>
 </div>

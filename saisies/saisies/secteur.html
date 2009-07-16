@@ -1,28 +1,28 @@
 [(#REM) 
 
   Parametres :
-  - _class : classe(s) css ajoutes au select
-  - _multiple : si quelquechose est passe, le select est multiple, sinon, c'est un select simple
+  - class : classe(s) css ajoutes au select
+  - multiple : si quelquechose est passe, le select est multiple, sinon, c'est un select simple
   	Dans le cas multiple, defaut et valeur doivent etre un array, sinon un int
-  - _recursif : si oui liste les rubriques de facon recursive, et pas uniquement les secteurs
-  - _option_intro : chaine de langue de la premiere ligne vide ? (defaut:"")
+  - recursif : si oui liste les rubriques de facon recursive, et pas uniquement les secteurs
+  - option_intro : chaine de langue de la premiere ligne vide ? (defaut:"")
     (seulement si non multiple)
 	 
   Exemple d'appel :
 	[(#SAISIE{secteur,secteur_region,
-		_label=<:plugin:secteur_region:>,
-		_multiple=oui
+		label=<:plugin:secteur_region:>,
+		multiple=oui
 	})] 
 ]
-<select name="#ENV{_nom}[(#ENV{_multiple}|?{[(#VAL{&#91;&#93;}|html_entity_decode)]})]" id="champ_#ENV{_nom}"[ class="(#ENV{_class})"][(#ENV{_multiple}|oui) multiple="multiple"]>
-	[(#ENV{_multiple}|non)
-	<option value="0">[(#ENV{_option_intro})]</option>]
+<select name="#ENV{nom}[(#ENV{multiple}|?{[(#VAL{&#91;&#93;}|html_entity_decode)]})]" id="champ_#ENV{nom}"[ class="(#ENV{class})"][(#ENV{multiple}|oui) multiple="multiple"]>
+	[(#ENV{multiple}|non)
+	<option value="0">[(#ENV{option_intro})]</option>]
 	<BOUCLE_secteurs(RUBRIQUES){racine}{par num titre, titre}{tout}>
-		[(#ENV{_multiple}|oui)
-		<option value="#ID_RUBRIQUE"[(#ID_RUBRIQUE|in_array{#ENV{_valeur}|sinon{#ENV{_defaut,#ARRAY}}}|oui) selected="selected"]>#TITRE</option>]
-		[(#ENV{_multiple}|non)
-		<option value="#ID_RUBRIQUE"[(#ID_RUBRIQUE|=={#ENV{_valeur}|sinon{#ENV{_defaut}}}|oui) selected="selected"]>#TITRE</option>]
-		[(#ENV{_recursif}|oui)
-		<INCLURE{fond=prive/listes/rubriques_recursives}{_valeur=#ENV{_valeur}}{id_rubrique}{_multiple} />]
+		[(#ENV{multiple}|oui)
+		<option value="#ID_RUBRIQUE"[(#ID_RUBRIQUE|in_array{#ENV{valeur}|sinon{#ENV{defaut,#ARRAY}}}|oui) selected="selected"]>#TITRE</option>]
+		[(#ENV{multiple}|non)
+		<option value="#ID_RUBRIQUE"[(#ID_RUBRIQUE|=={#ENV{valeur}|sinon{#ENV{defaut}}}|oui) selected="selected"]>#TITRE</option>]
+		[(#ENV{recursif}|oui)
+		<INCLURE{fond=prive/listes/rubriques_recursives}{valeur=#ENV{valeur}}{id_rubrique}{multiple} />]
 	</BOUCLE_secteurs>
 </select>
