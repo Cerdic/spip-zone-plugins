@@ -12,4 +12,8 @@
 		<icone>img_pack/themes-24.png</icone>
 		<url>zengarden</url>
 	</bouton>
+	<bouton id='theme' parent='bando_configuration'>
+		<titre>zengarden:themes</titre>
+		<url>zengarden</url>
+	</bouton>
 </plugin>
