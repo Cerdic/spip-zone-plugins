@@ -20,7 +20,8 @@
 	</description>
 	<lien>http://kent1.sklunk.net/spip.php?article93</lien>
 	<necessite id="SPIP" version="[2.0;]" />
-	<necessite id='cfg' version='[1.12.2;]' />
+	<necessite id='cfg' version='[1.13;]' />
+	<necessite id='saisies' version='[1.0;]' />
 	<options>
 	spipmotion_options.php
 	</options>
