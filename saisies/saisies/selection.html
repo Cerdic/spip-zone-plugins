@@ -19,6 +19,6 @@
 <select name="#ENV{_nom}" id="champ_#ENV{_nom}"[ class="(#ENV{_class})"]>
 <option value="">[(#ENV{_option_intro})]</option>
 <BOUCLE_selection(POUR){tableau #ENV{_datas}}>
-	<option value="#CLE" [(#CLE|=={#ENV{_valeur}|sinon{#ENV{defaut}}}|oui) selected="selected"]>#VALEUR</option>
+	<option value="#CLE" [(#CLE|=={#ENV{_valeur}|sinon{#ENV{_defaut}}}|oui) selected="selected"]>#VALEUR</option>
 </BOUCLE_selection>
 </select>
