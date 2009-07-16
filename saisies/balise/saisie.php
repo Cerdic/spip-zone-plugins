@@ -1,0 +1,173 @@
+<?php
+
+// pour ne pas interferer avec d'eventuelles futures fonctions du core
+// on met le tout dans un namespace ; les fonctions sont autonomes.
+
+class Pile {
+
+
+	// les arguments sont dans l'entree 0 du tableau param.
+	// param[0][0] vaut toujours ''
+	function recuperer_argument_balise($pos, $p) {
+		//$pos--;
+		if (!isset($p->param[0])) {
+			return null;
+		}
+		if (!isset($p->param[0][$pos])) {
+			return null;
+		}	
+		return $p->param[0][$pos];
+	}
+	
+	
+	
+	// les arguments sont dans l'entree 0 du tableau param.
+	// param[0][0] vaut toujours ''
+	function supprimer_argument_balise($pos, $p) {
+		//$pos--;
+		if (!isset($p->param[0])) {
+			return null;
+		}
+		if (!isset($p->param[0][$pos])) {
+			return null;
+		}	
+		if ($pos == 0) {
+			array_shift($p->param[0]);
+		} else {
+			$debut = array_slice($p->param[0], 0, $pos);
+			$fin   = array_slice($p->param[0], $pos+1);
+			$p->param[0] = array_merge($debut, $fin);
+		}		
+		return $p;
+	}	
+	
+	
+	
+	function recuperer_et_supprimer_argument_balise($pos, &$p) {
+		$arg = Pile::recuperer_argument_balise($pos, $p);
+		$p   = Pile::supprimer_argument_balise($pos, $p);
+		return $arg;
+	}
+	
+	
+	
+	
+	// les arguments sont dans l'entree 0 du tableau param.
+	// param[0][0] vaut toujours ''
+	function ajouter_argument_balise($element, $p) {
+		$zero = array_shift($p->param[0]);
+		array_unshift($p->param[0], $element);
+		array_unshift($p->param[0], $zero);
+		return $p;
+	}
+	
+	
+	
+	// creer_argument_balise(nom) = {nom}
+	// creer_argument_balise(nom, 'coucou') = {nom=coucou}
+	// creer_argument_balise(nom, $balise) = {nom=#BALISE}
+	function creer_argument_balise($nom, $valeur = null) {
+		include_spip('inc/interfaces');
+		$s = new Texte;
+		$s->type="texte";
+		$s->texte = $nom;
+		$s->ligne=0;
+		
+		// si #BALISE cree avec Pile::creer_balise(), le mettre en array, comme les autres
+		if (is_object($valeur)) {
+			$valeur = array($valeur);
+		}
+		
+		$res = null;
+		
+		// {nom}
+		if (is_null($valeur)) {
+			$res = array($s);
+		} 
+		// {nom=coucou}
+		elseif (is_string($valeur)) {			
+			$s->texte .= "=$valeur";
+			$res = array($s);
+		}
+		// {nom=#BALISE}
+		elseif (is_array($valeur)) {
+			$s->texte .= "="; // /!\ sans cette toute petite chose, ça ne fait pas d'egalite :)
+			$res = array_merge(array($s), $valeur);
+		}
+
+		return $res;
+	}
+	
+	
+	
+	function creer_et_ajouter_argument_balise($p, $nom, $valeur = null) {
+		$new = Pile::creer_argument_balise($nom, $valeur); 
+		return Pile::ajouter_argument_balise($new, $p);
+	}
+
+
+
+	// creer une balise
+	function creer_balise($nom, $opt) {
+		include_spip('inc/interfaces');
+		$b = new Champ;
+		$b->type = 'champ';
+		$b->nom_champ = strtoupper($nom);
+		foreach ($opt as $o=>$val) {
+			if (isset($b->$o)) {
+				if ($o == 'param') {
+					array_unshift($val, '');
+					$b->$o = array($val);
+				} else {
+					$b->$o = $val;
+				}
+			}
+		}
+		return $b;
+	}
+}
+
+
+
+/* 
+ * #saisie{type,nom} : champs obligatoires
+ * 
+ * collecte des arguments en fonctions du parametre "nom"
+ * ajoute des arguments
+ * appelle #INCLURE avec les arguments collectes en plus
+ * 
+ * il faudrait en faire une balise dynamique (?)
+ * pour avoir un code plus propre
+ * mais je n'ai pas reussi a trouver comment recuperer "valeur=#ENV{$nom}"
+ * 
+ */
+function balise_SAISIE_dist ($p) {
+
+	// on recupere les parametres sans les traduire en code d'execution php
+	$type_saisie = Pile::recuperer_et_supprimer_argument_balise(1, $p); // $type
+	$titre       = Pile::recuperer_et_supprimer_argument_balise(1, $p); // $titre
+	
+	// creer #ENV{$titre}
+	$env_titre   = Pile::creer_balise('ENV', array('param' => array($titre))); // #ENV{titre}
+	
+	// on modifie $p pour ajouter des arguments
+	// {valeur=#ENV{$titre}, erreurs, type_saisie=$type, fond=saisies/_base}
+	$p = Pile::creer_et_ajouter_argument_balise($p, 'valeur', $env_titre);
+	$p = Pile::creer_et_ajouter_argument_balise($p, 'erreurs');
+	$p = Pile::creer_et_ajouter_argument_balise($p, 'type_saisie', $type_saisie);
+	//$p = Pile::creer_et_ajouter_argument_balise($p, 'fond', 'saisies/_base');
+	$p = Pile::creer_et_ajouter_argument_balise($p, 'fond', 'sus');
+	
+	// on appelle la balise #INCLURE
+	// avec les arguments ajoutes
+	if(function_exists('balise_INCLURE'))
+		return balise_INCLURE($p);
+	else
+		return balise_INCLURE_dist($p);	
+		
+}
+
+
+
+
+?>

@@ -1,0 +1,20 @@
+<plugin>
+    <nom>Saisies pour formulaires</nom>
+    <auteur>Matthieu Marcillaud</auteur>
+    <licence>&#169; 2009 GNU/GPL</licence>
+    <version>1.0</version>
+    <etat>experimental</etat>
+    
+    <description>
+    Ce plugin permet de faciliter l'écriture de champs de formulaires en proposant une
+    balise #SAISIE. Le HTML généré est compatible avec la nomenclature des formulaires
+    proposé par SPIP 2.0 et avec le plugin de configuration CFG.
+    </description>
+    
+    <lien></lien>
+    <prefix>saisies</prefix>
+    <icon></icon>
+    
+    <fonctions>balise/saisie.php</fonctions>
+	<necessite id="SPIP" version="[2.0;]" />
+</plugin>
