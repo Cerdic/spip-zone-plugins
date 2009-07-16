@@ -6,9 +6,9 @@
     <etat>experimental</etat>
     
     <description>
-    Ce plugin permet de faciliter l'écriture de champs de formulaires en proposant une
-    balise #SAISIE. Le HTML généré est compatible avec la nomenclature des formulaires
-    proposé par SPIP 2.0 et avec le plugin de configuration CFG.
+    Ce plugin permet de faciliter l'&eacute;criture de champs de formulaires en proposant une
+    balise #SAISIE. Le HTML g&eacute;n&eacute;r&eacute; est compatible avec la nomenclature des formulaires
+    propos&eacute; par SPIP 2.0 et avec le plugin de configuration CFG.
     </description>
     
     <lien></lien>
