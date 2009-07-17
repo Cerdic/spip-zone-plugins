@@ -26,6 +26,7 @@ function cextras_objets_valides(){
 			'nom' => $traduction,
 		);
 	}
+
 	return $objets;
 }
 
@@ -139,7 +140,7 @@ function vider_champs_extras($champs) {
 function extras_champs_utilisables($connect='') {
 	$tout = extras_champs_anormaux($connect);
 	$objets = cextras_objets_valides();
-	
+
 	$tables_utilisables = array();
 	foreach ($objets as $o){$tables_utilisables[] = $o['table'];}
 	foreach ($tout as $table=>$champs) {
