@@ -1,0 +1,26 @@
+<!-- nom=piwik -->
+
+<div class="formulaire_spip formulaire_editer formulaire_cfg">
+
+	[<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
+	[<p class="formulaire_message">(#ENV*{message_ok})</p>]
+	
+	<form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
+	#ACTION_FORMULAIRE{SELF}
+		<ul>
+			<li>
+				<label for="_google_id"><:piwik:adresse_du_serveur_web:></label>
+				<input type="text" name="urlpiwik" class="text" id="_piwik_url" size="60" value="#ENV{urlpiwik}" />
+			</li>
+			<li>
+				<label for="_google_id"><:piwik:texte_votre_identifiant:></label>
+				<input type="text" name="idpiwik" class="text" id="_piwik_id" size="4" value="#ENV{idpiwik}" />
+			</li>
+		</ul>
+		<p class="boutons">
+			<input type="submit" name="_cfg_ok" value="<:ok:>" class="submit" />
+			<input type="reset" value="<:reset:>" class="submit" />
+			<input type="submit" name="_cfg_delete" value="<:supprimer:>" class="submit" />
+		</p>
+	</form>
+</div>
