@@ -1,0 +1,25 @@
+[(#REM) 
+
+  Parametres :
+  - class : classe(s) css ajoutes au select
+  - multiple : si quelquechose est passe, le select est multiple, sinon, c'est un select simple
+  	Dans le cas multiple, defaut et valeur doivent etre un array, sinon un int
+  - option_intro : chaine de langue de la premiere ligne vide ? (defaut:"")
+    (seulement si non multiple)
+	 
+  Exemple d'appel :
+	[(#SAISIE{auteurs,auteurs_site,
+		label=<:plugin:auteurs_du_site:>,
+		multiple=oui
+		statut=0minirezo})] 
+]
+<select name="#ENV{nom}[(#ENV{multiple}|?{[(#VAL{&#91;&#93;}|html_entity_decode)]})]" id="champ_#ENV{nom}"[ class="(#ENV{class})"][(#ENV{multiple}|oui) multiple="multiple"]>
+	[(#ENV{multiple}|non)
+	<option value="0">[(#ENV{option_intro})]</option>]
+	<BOUCLE_auteurs(AUTEURS){par num nom, nom}{statut ?}{statut != 5poubelle}{tout}>
+		[(#ENV{multiple}|oui)
+		<option value="#ID_AUTEUR"[(#ID_AUTEUR|in_array{#ENV{valeur}|sinon{#ENV{defaut,#ARRAY}}}|oui) selected="selected"]>#NOM</option>]
+		[(#ENV{multiple}|non)
+		<option value="#ID_AUTEUR"[(#ID_AUTEUR|=={#ENV{valeur}|sinon{#ENV{defaut}}}|oui) selected="selected"]>#NOM</option>]
+	</BOUCLE_auteurs>
+</select>
