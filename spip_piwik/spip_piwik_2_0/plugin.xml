@@ -3,7 +3,7 @@
 	Piwik
 	</nom>
 	<auteur> <!-- Auteur du plugin -->
-	jsb
+	jsb, kent1
 	</auteur>
 	<version>
 	0.2
@@ -21,6 +21,7 @@
 	<prefix>
 	piwik
 	</prefix>
+	<fonctions>balises/piwik.php</fonctions>
 	<pipeline>
 		<nom>insert_head</nom>
 		<inclure>piwik_pipelines.php</inclure>

@@ -8,17 +8,52 @@
 	<form method="post" action="#ENV{action}"><div>
 	#ACTION_FORMULAIRE{SELF}
 		<ul>
-			<li>
-				<label for="urlpiwik"><:piwik:adresse_du_serveur_web:></label>
-				<input type="text" name="urlpiwik" class="text" id="urlpiwik" size="60" value="#ENV{urlpiwik}" />
-			</li>
-			<li>
-				<label for="idpiwik"><:piwik:texte_votre_identifiant:></label>
-				<input type="text" name="idpiwik" class="text" id="idpiwik" size="4" value="#ENV{idpiwik}" />
-			</li>
+			[(#SAISIE{input,urlpiwik,
+				label=<:piwik:label_adresse_serveur:>,
+				explication=<:piwik:explication_adresse_serveur:>,
+				size=50
+			})]
+
+			[(#SAISIE{input,idpiwik,
+				label=<:piwik:label_identifiant_site:>,
+				explication=<:piwik:explication_identifiant_site:>,
+				size=5
+			})]
+
+			[(#SAISIE{radio, mode_insertion,
+				label=<:piwik:label_mode_insertion:>,
+				explication=<:piwik:explication_mode_insertion:>,
+				datas=#ARRAY{
+					pipeline,<:piwik:mode_insertion_pipeline:>,
+					balise,<:piwik:mode_insertion_balise:>
+			}})]
+			
+			[(#CONFIG{piwik/mode_insertion}|=={balise}|oui)
+			
+				[(#SAISIE{statuts_auteurs, restreindre_statut_public,
+					label=<:piwik:label_restreindre_statut_public:>,
+					explication=<:piwik:explication_restreindre_statut_public:>,
+					multiple=oui})]
+				
+				[(#SAISIE{auteurs, restreindre_auteurs_public,
+					label=<:piwik:label_restreindre_auteurs_public:>,
+					multiple=oui})]
+			]
+			
 			[(#SAISIE{case, piwik_prive,
 				label=<:piwik:label_comptabiliser_prive:>
 			})]
+			
+			[(#CONFIG{piwik/piwik_prive}|=={on}|oui)
+				[(#SAISIE{statuts_auteurs, restreindre_statut_prive,
+					label=<:piwik:label_restreindre_statut_prive:>,
+					explication=<:piwik:explication_restreindre_statut_prive:>,
+					multiple=oui})]
+				
+				[(#SAISIE{auteurs, restreindre_auteurs_prive,
+					label=<:piwik:label_restreindre_auteurs_prive:>,
+					multiple=oui})]
+			]
 		</ul>
 		<p class="boutons">
 			<input type="submit" name="_cfg_ok" value="<:ok:>" class="submit" />
