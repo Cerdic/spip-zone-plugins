@@ -23,7 +23,11 @@
 	</prefix>
 	<pipeline>
 		<nom>insert_head</nom>
-		<inclure>head.php</inclure>
+		<inclure>piwik_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>piwik_pipelines.php</inclure>
 	</pipeline>
 	<necessite id="SPIP" version="[2.0.8;]" />
 	<necessite id='cfg' version='[1.13.0;]' />
