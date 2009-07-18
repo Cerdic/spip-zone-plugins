@@ -22,4 +22,12 @@ include_spip('inc/cfg_config');
 $GLOBALS['spip_pipeline']['cfg_post_edition'] = "";
 $GLOBALS['spip_pipeline']['editer_contenu_formulaire_cfg'] = "";
 
+
+
+// droit du bouton d'amin aux webmestres
+function autoriser_cfg_bouton($faire,$quoi,$id,$qui,$options) {
+	// si on est admin
+	return autoriser('configurer','cfg');
+}
+
 ?>
