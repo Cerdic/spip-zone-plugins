@@ -1,16 +1,10 @@
 [(#REM) titre=Microblog]
-
 [(#REM) presentation= ]
-
 [(#REM) autoriser=configurer ]
-
-
-[(#SET{logo,
-<img src='#DOSSIER_SQUELETTE/../microblog.png' alt='Logo rigolo' style="float:#LANG_RIGHT;" />
-})]
+[(#REM) icone=images/microblog-24.png]
 
 <!-- descriptif=
-#GET{logo}
+<img src='#CHEMIN{images/microblog-64.png}' alt='' style="float: #LANG_RIGHT;" />
 <h3>Microblog</h3>
 
 <a href="http://www.spip-contrib.net/Microblog" class="spip_out">Cf. documentation</a>
@@ -50,13 +44,13 @@
 <option value="">(<:microblog:choisir:>)</option>
 <option value="" disabled="disabled">- laconica -</option>
 <option value="spipo"[
-	(#ENV{service}|=={spipo}|?{selected="selected"})]>SPIP.org (spipo)</option>
+	(#env{service}|=={spipo}|?{selected="selected"})]>SPIP.org (spipo)</option>
 <option value="identica"[
-	(#ENV{service}|=={identica}|?{selected="selected"})]>Identi.ca (identica)</option>
+	(#env{service}|=={identica}|?{selected="selected"})]>Identi.ca (identica)</option>
 <option value="" disabled="disabled"></option>
 <option value="" disabled="disabled">- twitter -</option>
 <option value="twitter"[
-	(#ENV{service}|=={twitter}|?{selected="selected"})]>Twitter.com</option>
+	(#env{service}|=={twitter}|?{selected="selected"})]>Twitter.com</option>
 </select>
 </label>
 </p>
@@ -85,21 +79,21 @@ Password: <input type="password" name="pass" value="[(#ENV{pass})]" id="pass" />
 <p>
 <label>
 <input type="checkbox" name="evt_forumposte"[
-	(#ENV{evt_forumposte}|?{checked="checked"})] /> <:microblog:poster_forums:>.
+	(#env{evt_forumposte}|?{checked="checked"})] /> <:microblog:poster_forums:>.
 </label>
 </p>
 
 <p>
 <label>
 <input type="checkbox" name="evt_proposerarticles"[
-	(#ENV{evt_proposerarticles}|?{checked="checked"})] /> <:microblog:proposer_articles:>.
+	(#env{evt_proposerarticles}|?{checked="checked"})] /> <:microblog:proposer_articles:>.
 </label>
 </p>
 
 <p>
 <label>
 <input type="checkbox" name="evt_publierarticles"[
-	(#ENV{evt_publierarticles}|?{checked="checked"})] /> <:microblog:publier_articles:>.
+	(#env{evt_publierarticles}|?{checked="checked"})] /> <:microblog:publier_articles:>.
 </label>
 </p>
 
