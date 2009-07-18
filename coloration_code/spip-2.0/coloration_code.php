@@ -65,7 +65,7 @@ function coloration_code_color($code, $language, $cadre='cadre') {
 	$stylecss = "";
 	if (defined('PLUGIN_COLORATION_CODE_STYLES_INLINE') and !PLUGIN_COLORATION_CODE_STYLES_INLINE) {
 		$geshi->enable_classes();
-		$stylecss = "<style>".$geshi->get_stylesheet()."</style>";
+		$stylecss = "<style type='text/css'>".$geshi->get_stylesheet()."</style>";
 	}
 
 
