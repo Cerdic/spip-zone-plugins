@@ -214,7 +214,7 @@ function traite_xhtml ($buffer) {
 			$tidy = echappe_retour($tidy, $les_echap, "xhtml");
 		}
 
-		$tidy = ereg_replace ("\<\?xml([^\>]*)\>", "", $tidy);
+		$tidy = preg_replace (",<\?xml(.*)>,US", "", $tidy);
 		# pas de gestion d'erreur ?
 		return $tidy;
 	}
