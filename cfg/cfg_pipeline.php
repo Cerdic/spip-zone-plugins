@@ -9,6 +9,25 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// Ajoute le bouton d'amin aux webmestres
+function cfg_ajouter_boutons($flux) {
+	// si on est admin
+	if (autoriser('configurer','cfg')) {
+		$menu = "configuration";
+		$icone = "cfg-22.png";
+		if (isset($flux['bando_configuration'])){
+			$menu = "bando_configuration";
+			$icone = "cfg-16.png";
+		}
+		// on voit le bouton dans la barre "configuration"
+		$flux[$menu]->sousmenu['cfg']= new Bouton(
+		_DIR_PLUGIN_CFG.$icone,  // icone
+		_T('cfg:CFG'));
+	}
+	return $flux;
+}
+
+
 /*
  * Gerer l'option <!-- head= xxx --> des fonds CFG
  * uniquement dans le prive

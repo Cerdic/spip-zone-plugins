@@ -36,17 +36,10 @@ Es wird von vielen Plugins verwendet, kann aber auch anderen Nutzen finden wie d
     <options>cfg_options.php</options>
     <fonctions>cfg_fonctions.php</fonctions>
 
-		<bouton id='cfg' parent='configuration'>
-			<titre>cfg:CFG</titre>
-			<icone>cfg-22.png</icone>
-			<url>cfg</url>
-		</bouton>
-		<bouton id='cfg' parent='bando_configuration'>
-			<titre>cfg:CFG</titre>
-			<icone>cfg-16.png</icone>
-			<url>cfg</url>
-		</bouton>
-
+    <pipeline>
+        <nom>ajouter_boutons</nom>
+        <inclure>cfg_pipeline.php</inclure>
+    </pipeline>
     <pipeline>
         <nom>header_prive</nom>
         <inclure>cfg_pipeline.php</inclure>
