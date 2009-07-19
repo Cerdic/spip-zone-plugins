@@ -43,7 +43,7 @@
 </head>
 <body>
 <div id="aide_recherche">
-
+	[(#LANG_DIR|=={rtl}|?{#SET{arr,&larr;},#SET{arr,&rarr;}})]
     <p class="soustitre"><:fulltext:fonctionnement_recherche:></p>
     
     <table>
@@ -62,31 +62,31 @@
         </thead>
         <tbody>
             <tr>
-            <th><input type="text" class="txt" value="<:fulltext:enfant:> <:fulltext:etranger:>" />&nbsp;&nbsp;&rarr;</th>
+            <th><input type="text" class="txt" value="<:fulltext:enfant:> <:fulltext:etranger:>" />&nbsp;&nbsp;#GET{arr}</th>
             <td> <:fulltext:retourne:> <:fulltext:premier_soit:> «&nbsp;<:fulltext:enfant:>&nbsp;», <:fulltext:soit:> «&nbsp;<:fulltext:etranger:>&nbsp;», <:fulltext:soit:> «&nbsp;<:fulltext:enfant:>&nbsp;» <:fulltext:et:> «&nbsp;<:fulltext:etranger:>&nbsp;».</td>
             </tr>
             <tr>
-            <th><input type="text" class="txt" value="+<:fulltext:enfant:> +<:fulltext:etranger:>" />&nbsp;&nbsp;&rarr;</th>
+            <th><input type="text" class="txt" value="+<:fulltext:enfant:> +<:fulltext:etranger:>" />&nbsp;&nbsp;#GET{arr}</th>
             <td> <:fulltext:retourne:> «&nbsp;<:fulltext:enfant:>&nbsp;» <:fulltext:et:> «&nbsp;<:fulltext:etranger:>&nbsp;».</td>
             </tr>
             <tr>
-            <th><input type="text" class="txt" value="+<:fulltext:enfant:> <:fulltext:etranger:>" />&nbsp;&nbsp;&rarr;</th>
+            <th><input type="text" class="txt" value="+<:fulltext:enfant:> <:fulltext:etranger:>" />&nbsp;&nbsp;#GET{arr}</th>
             <td> <:fulltext:retourne:> «&nbsp;<:fulltext:enfant:>&nbsp;» <:fulltext:textes_premier:> <:fulltext:aussi:> «&nbsp;<:fulltext:etranger:>&nbsp;».</td>
             </tr>
             <tr>
-            <th><input type="text" class="txt" value="+<:fulltext:enfant:> -<:fulltext:etranger:>" />&nbsp;&nbsp;&rarr;</th>
+            <th><input type="text" class="txt" value="+<:fulltext:enfant:> -<:fulltext:etranger:>" />&nbsp;&nbsp;#GET{arr}</th>
             <td> <:fulltext:retourne:> «&nbsp;<:fulltext:enfant:>&nbsp;» <:fulltext:mais_pas:> «&nbsp;<:fulltext:etranger:>&nbsp;».</td>
             </tr>
             <tr>
-            <th><input type="text" class="txt" value="+<:fulltext:enfant:> +(><:fulltext:etranger:> <<:fulltext:asie:>)" />&nbsp;&nbsp;&rarr;</th>
+            <th><input type="text" class="txt" value="+<:fulltext:enfant:> +(><:fulltext:etranger:> <<:fulltext:asie:>)" />&nbsp;&nbsp;#GET{arr}</th>
             <td> <:fulltext:retourne:> «&nbsp;<:fulltext:enfant:>&nbsp;» <:fulltext:et:> «&nbsp;<:fulltext:etranger:>&nbsp;» <:fulltext:ou_bien:> «&nbsp;<:fulltext:enfant:>&nbsp;» <:fulltext:et:> «&nbsp;<:fulltext:asie:>&nbsp;» <:fulltext:textes_premier:> «&nbsp;<:fulltext:enfant:>&nbsp;» <:fulltext:et:> «&nbsp;<:fulltext:etranger:>&nbsp;».</td>
             </tr>
             <tr>
-            <th><input type="text" class="txt" value="<:fulltext:enfan:>*" />&nbsp;&nbsp;&rarr;</th>
+            <th><input type="text" class="txt" value="<:fulltext:enfan:>*" />&nbsp;&nbsp;#GET{arr}</th>
             <td> <:fulltext:retourne:> «&nbsp;<:fulltext:enfant:>&nbsp;», «&nbsp;<:fulltext:enfants:>&nbsp;», «&nbsp;<:fulltext:enfance:>e&nbsp;», «&nbsp;<:fulltext:enfanter:>&nbsp;», «&nbsp;<:fulltext:enfantillage:>&nbsp;».... («&nbsp;*<:fulltext:fant:>&nbsp;» <:fulltext:asterisque_terminale:>.)</td>
             </tr>
             <tr>
-            <th><input type="text" class="txt" value="&quot;<:fulltext:enfant:> <:fulltext:etranger:>&quot;" />&nbsp;&nbsp;&rarr;</th>
+            <th><input type="text" class="txt" value="&quot;<:fulltext:enfant:> <:fulltext:etranger:>&quot;" />&nbsp;&nbsp;#GET{arr}</th>
             <td> <:fulltext:retourne:> <:fulltext:sequence_exacte:> «&nbsp;<:fulltext:enfant:> <:fulltext:etranger:>&nbsp;».</td>
             </tr>
         </tbody>
