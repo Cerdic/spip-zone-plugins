@@ -19,7 +19,7 @@ function balise_GRAVATAR_stat($args, $filtres) {
 function balise_GRAVATAR_dyn($email, $size, $gravatar_default) {
 	include_spip('inc/filtres_images');
 	include_spip('inc/gravatar');
-	return image_reduire(sinon(gravatar($email),$gravatar_default), $size ? $size : 80);
+	return inserer_attribut(image_reduire(sinon(gravatar($email),$gravatar_default), $size ? $size : 80), "alt", "");
 }
 
 ?>
