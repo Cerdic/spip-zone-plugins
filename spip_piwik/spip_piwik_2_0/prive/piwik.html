@@ -1,8 +1,8 @@
 #CACHE{0}
 [(#CONFIG{piwik/urlpiwik}|oui)
 	[(#CONFIG{piwik/idpiwik}|oui)
-	[(#SESSION{statut}|in_array{#CONFIG{piwik/restreindre_statut_prive,#ARRAY}}|non)
-	[(#SESSION{id_auteur}|in_array{#CONFIG{piwik/restreindre_auteurs_prive,#ARRAY}}|non)
+	[(#SESSION{statut}|in_array{#CONFIG{piwik/restreindre_statut_public,#ARRAY}}|non)
+	[(#SESSION{id_auteur}|in_array{#CONFIG{piwik/restreindre_auteurs_public,#ARRAY}}|non)
 		<script type="text/javascript">
 			var pkBaseURL = (("https:" == document.location.protocol) ? "https://#CONFIG{piwik/urlpiwik}/" : "http://#CONFIG{piwik/urlpiwik}/");
 			document.write(unescape("%3Cscript src=\'" + pkBaseURL + "piwik.js\' type=\'text/javascript\'%3E%3C/script%3E"));

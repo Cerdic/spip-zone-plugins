@@ -10,6 +10,7 @@
  */
 
 function balise_PIWIK_dist($p){
+	
 	if(lire_config('piwik/mode_insertion','pipeline') == 'balise'){
 		$p->code = "recuperer_fond('prive/piwik',
 			'', array('trim'=>true))";
