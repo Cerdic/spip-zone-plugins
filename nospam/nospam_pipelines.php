@@ -6,6 +6,9 @@
  *
  */
 
+// pour verifier le nobot et le jeton sur un formulaire, l'ajouter a cette globale
+$GLOBALS['formulaires_no_spam'][] = 'forum';
+
 /**
  * Ajouter un jeton temporaire lie a l'heure et a l'IP pour limiter la reutilisation possible du formulaire
  *
@@ -13,12 +16,13 @@
  * @return array
  */
 function nospam_formulaire_charger($flux){
-	if ($flux['args']['form']=='forum'){
+	if (in_array($flux['args']['form'],$GLOBALS['formulaires_no_spam'])){
+		$form = $flux['args']['form'];
 		$time = date('Y-m-d-H');
 		$ip = $GLOBALS['ip'];
 		include_spip('inc/securiser_action');
 		// le jeton prend en compte l'heure et l'ip de l'internaute
-		$jeton = calculer_cle_action("jetonforum$time$ip");
+		$jeton = calculer_cle_action("jeton$form$time$ip");
 		$flux['data']['_hidden'] .= "<input type='hidden' name='_jeton' value='$jeton' />";
 	}
 	return $flux;
@@ -31,7 +35,8 @@ function nospam_formulaire_charger($flux){
  * @return array
  */
 function nospam_formulaire_verifier($flux){
-	if ($flux['args']['form']=='forum'){
+	$form = $flux['args']['form'];
+	if (in_array($form,$GLOBALS['formulaires_no_spam'])){
 		$time = time();
 		$time_old = date('Y-m-d-H',$time-3600);
 		$time = date('Y-m-d-H',$time);
@@ -40,11 +45,16 @@ function nospam_formulaire_verifier($flux){
 		$jeton = _request('_jeton');
 		include_spip('inc/securiser_action');
 		// le jeton prend en compte l'heure et l'ip de l'internaute
-		if (!verifier_cle_action("jetonforum$time$ip",$jeton)
-		AND !verifier_cle_action("jetonforum$time_old$ip",$jeton)){
+		if (_request('nobot') // trop facile !
+		  OR
+		  (!verifier_cle_action("jeton$form$time$ip",$jeton)
+		    AND !verifier_cle_action("jeton$form$time_old$ip",$jeton))){
 			$flux['data']['message_erreur'] .= _T('nospam:erreur_jeton');
-			unset($flux['data']['previsu']);
+			if ($form=='forum')
+				unset($flux['data']['previsu']);
 		}
+	}
+	if ($form=='forum'){
 		if (!isset($flux['data']['texte'])
 			AND $GLOBALS['meta']['forums_texte'] == 'oui'){
 			// regarder si il y a du contenu en dehors des liens !
