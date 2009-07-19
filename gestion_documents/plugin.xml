@@ -9,7 +9,7 @@
 	<auteur>[Cedric MORIN->http://www.yterium.net] &amp; [romy.tetue.net->http://romy.tetue.net]
 	</auteur>
 	<version>0.3</version>
-	<version_base>0.7</version_base>
+	<version_base>0.8</version_base>
 	<etat>stable</etat>
 	<description><multi>
 	[fr]Outils de gestion des documents, avec page r&eacute;capitulative listant tous les documents du site.

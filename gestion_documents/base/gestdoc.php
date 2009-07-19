@@ -99,6 +99,12 @@ function gestdoc_upgrade($nom_meta_base_version,$version_cible){
 			sql_alter("TABLE spip_documents ADD credits varchar(255) DEFAULT '' NOT NULL");
 			ecrire_meta($nom_meta_base_version,$current_version="0.7",'non');
 		}
+		if (version_compare($current_version,'0.8','<')){
+			// reset des statut='0' pour forcer un recalcul de tous les statuts
+			include_spip('base/abstract_sql');
+			sql_updateq('spip_documents',array("statut"=>'0'));
+			ecrire_meta($nom_meta_base_version,$current_version="0.8",'non');
+		}
 	}
 	gestdoc_check_statuts();
 }
