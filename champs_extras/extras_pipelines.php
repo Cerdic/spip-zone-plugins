@@ -28,6 +28,8 @@ function extras_afficher_contenu_objet($flux){
 	
 	return $flux;
 }
+
+// pipeline obsolete
 function extras_afficher_revision_objet($flux){
 	return extras_afficher_contenu_objet($flux); // pas de revisions sur les extras
 }
