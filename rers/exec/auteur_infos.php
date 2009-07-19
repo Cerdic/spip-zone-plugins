@@ -111,12 +111,18 @@ function auteur_infos_ok($auteur, $id_auteur, $echec, $new, $redirect)
 	} else {
 		echo gros_titre(_T('info_acces_interdit'),'', false);
 	}
+//RERS      Simplifier l'affichage des rédacteurs
+//RERS		 en enlevant le pipeline affiche_milieu : par exemple la grande boite de configuration
+//RERS           du plugin spiplistes. 
+	global $connect_statut; //rers
+	if ($connect_statut == '0minirezo') //RERS
+	{//RERS
 	echo pipeline('affiche_milieu',
 			      array('args' => array(
 						    'exec'=>'auteur_infos',
 						    'id_auteur'=>$id_auteur),
 				    'data'=>''));
-		
+	}//RERS
 	echo fin_cadre_relief(true);
 
 	// afficher le formulaire d'edition apres le cadre d'info

@@ -291,6 +291,11 @@ function contenu_naviguer($id_rubrique, $id_parent) {
 	// Verifier les boucles a mettre en relief
 	//
 
+	$rers_rub_offres = lire_config('rers/rers_rub_offres');
+	$rers_rub_demandes = lire_config('rers/rers_rub_demandes');
+	$rers_rub_vie = lire_config('rers/rers_rub_vie');
+
+
 	$relief = sql_countsel('spip_articles', "id_rubrique=$id_rubrique AND statut='prop'");
 
 	if (!$relief) {
@@ -310,35 +315,11 @@ function contenu_naviguer($id_rubrique, $id_parent) {
 
 
 
-//RERS
-	$rers_rub_offres = lire_config('rers/rers_rub_offres');
-	$rers_rub_demandes = lire_config('rers/rers_rub_demandes');
-	$rers_rub_vie = lire_config('rers/rers_rub_vie');
-	if ($relief OR ($id_rubrique == $rers_rub_offres OR $id_rubrique == $rers_rub_demandes)) {
-
-
-
-if ($id_rubrique == $rers_rub_offres OR $id_rubrique == $rers_rub_demandes)
- {//RERS
- if ($id_rubrique == $rers_rub_offres) $rerstextea="Fiches d'Offre de savoir";
- if ($id_rubrique == $rers_rub_demandes) $rerstextea="Fiches de Demande de savoir";
+	//RERS
+	if ($relief AND $id_rubrique !== $rers_rub_offres AND $id_rubrique !== $rers_rub_demandes) {
 
 		$res .= debut_cadre_couleur('',true);
-		$res .= "<div class='verdana2' style='color: black;'><b> 
-			$rerstextea </b></div>";
-
-		$res .= afficher_objets('article',_T('info_articles_proposes'),	
-		array('WHERE' => "id_rubrique=$id_rubrique 
-		AND (statut='prop' OR statut='prepa' OR statut='publie')", 
-		'ORDER BY' => "date DESC", 'LIMIT' => '0,50'));
-
-	
- }//RERS
- else //RERS
- {//RERS
-
-		$res .= debut_cadre_couleur('',true);
-		$res .= "<div class='verdana2' style='color: black;'><b>"._T('texte_en_cours_validation')
+		$res .= "<div class='verdana2' style='color: black;'><b>"._T('texte_en_cours_validation')	
 		. (($GLOBALS['meta']['forum_prive_objets'] != 'non')
 			? ' '._T('texte_en_cours_validation_forum')
 			: '' )
@@ -350,7 +331,6 @@ if ($id_rubrique == $rers_rub_offres OR $id_rubrique == $rers_rub_demandes)
 		$res .= afficher_objets('article',_T('info_articles_proposes'),	array('WHERE' => "id_rubrique=$id_rubrique AND statut='prop'", 'ORDER BY' => "date DESC"));
 
 
-}//RERS
 
 		//
 		// Les breves a valider
@@ -396,10 +376,12 @@ if ($id_rubrique == $rers_rub_offres OR $id_rubrique == $rers_rub_demandes)
 
 	$n = sql_countsel('spip_rubriques');
 	$bouton_article = $bouton_breves = $bouton_sites = "";
+
 	if ($n && !_INTERFACE_ONGLETS) {
 		if (autoriser('creerarticledans','rubrique',$id_rubrique))
 		  $bouton_article .= icone_inline(_T('icone_ecrire_article'), generer_url_ecrire("articles_edit","id_rubrique=$id_rubrique&new=oui"), "article-24.gif","creer.gif", $spip_lang_right)
 		  . "<br class='nettoyeur' />";
+
 
 		$activer_breves = $GLOBALS['meta']["activer_breves"];
 		if (autoriser('creerbrevedans','rubrique',$id_rubrique,NULL,array('id_parent'=>$id_parent)))
@@ -414,8 +396,7 @@ if ($id_rubrique == $rers_rub_offres OR $id_rubrique == $rers_rub_demandes)
 
 
 //RERS
-if ($id_rubrique != $rers_rub_offres AND $id_rubrique != $rers_rub_demandes)
- {//RERS
+if ($id_rubrique != $rers_rub_offres AND $id_rubrique != $rers_rub_demandes) {//RERS
 
 	//////////  Les articles en cours de redaction
 	/////////////////////////
@@ -439,10 +420,29 @@ if ($id_rubrique != $rers_rub_offres AND $id_rubrique != $rers_rub_demandes)
 	if ($GLOBALS['meta']["activer_sites"] == 'oui') {
 		$res .= afficher_objets('site','<b>' . _T('titre_sites_references_rubrique') . '</b>', array("FROM" => 'spip_syndic', 'WHERE' => "id_rubrique=$id_rubrique AND statut!='refuse' AND statut != 'prop' AND syndication NOT IN ('off','sus')", 'ORDER BY' => 'nom_site'));
  		$res .= $bouton_sites;
+	}
 
 }//RERS
+else
+{//RERS
+		if ($id_rubrique == $rers_rub_offres) $rerstextea="Fiches d'Offre de savoir";
+		if ($id_rubrique == $rers_rub_demandes) $rerstextea="Fiches de Demande de savoir";
+		$res .= debut_cadre_couleur('',true);
+		$res .= "<div class='verdana2' style='color: black;'><b> 
+		$rerstextea </b></div>";
 
-	}
+		$res .= afficher_objets('article',_T('info_articles_proposes'),	
+			array('WHERE' => "id_rubrique=$id_rubrique 
+			AND (statut='prop' OR statut='prepa' OR statut='publie')", 
+			'ORDER BY' => "date DESC", 'LIMIT' => '0,50'));
+		$res .= $bouton_article;
+
+	
+}//RERS
+
+
+
+	
 
 
 	return $res;

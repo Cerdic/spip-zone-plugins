@@ -124,8 +124,8 @@ if ($connect_statut == '0minirezo') // rers
 		if ($acces_forum == "oui") $res .= "> "._T('info_visiteurs_02')." &nbsp;&nbsp;";
 
  		echo "<span class='verdana1 spip_x-small'>", $res, "</span>";
-} //rers
 
+} //rers
 
 
 
