@@ -229,9 +229,9 @@ function InlinePlayer() {
 
 var inlinePlayer = null;
 
-soundManager.debugMode = true; // disable or enable debug output
+// soundManager.debugMode = true; // disable or enable debug output
 
-soundManager.url = 'lib/soundmanagerv295a-20090717/swf/'; // path to directory containing SM2 SWF
+soundManager.url = REPSWF ; // path to directory containing SM2 SWF
 
 soundManager.onready(function() {
   if (soundManager.supported()) {
