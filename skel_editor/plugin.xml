@@ -24,6 +24,7 @@
 	</description>
 	<lien>http://www.spip-contrib.net/Editeur-de-squelettes-Skel-editor</lien>
 	<prefix>skeleditor</prefix>
+	<fonctions>skeleditor_fonctions.php</fonctions>
 	<!-- bouton prive -->
   <bouton id="skeleditor" parent="naviguer">
       <icone>img_pack/icon.png</icone>

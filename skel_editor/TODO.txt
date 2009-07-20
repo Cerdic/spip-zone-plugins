@@ -5,10 +5,10 @@ TODO plugin skel_editor
 a faire:
 ----------------------------
 - portage SPIP 2
-... remplacer bouton_block_invisible par l'equivalent jQuery (depliant)
 ... mise en page
 ... renprendre les appels generer_url_xxxx
 ... integrer autoriser ?
+... integrer formulaire via CVT
 
 ajout de fonctionnalités:
 ----------------------------
