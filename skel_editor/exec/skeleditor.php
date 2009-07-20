@@ -282,12 +282,12 @@ function get_spip_path(){
 		// Chemin standard depuis l'espace public
 		$path = defined('_SPIP_PATH') ? _SPIP_PATH : 
 			_DIR_RACINE.':'.
-			_DIR_RACINE.'dist/:'.
+			_DIR_RACINE.'squelettes-dist/:'.
 			_DIR_RACINE.'formulaires/:'.
 			_DIR_RESTREINT;
 			
     // Ajouter dist/
-		$path = _DIR_RACINE.'dist/:' . $path;
+		$path = _DIR_RACINE.'squelettes-dist/:' . $path;
 
 		// Ajouter les repertoires des plugins 
     /*	solution trop globale: il faut ajouter seulement les plugins de type "squelettes"
@@ -532,8 +532,8 @@ function exec_skeleditor(){
                     $file_str = implode ('',$file_tmp);                  
                     if (($extension=='html') && (_request(debug)!='true')) echo  skel_parser($file_str); // experimental                            	        
                     $file_str = str_replace("&","&amp;",$file_str); //  preserve html entities
-		    $file_str = str_replace("</textarea","&lt;/textarea",$file_str); // exception: textarea closing tag                    
-  								  echo generer_url_post_ecrire('skeleditor',"retour=skeleditor&f=".urlencode($file_name));   								 
+		                $file_str = str_replace("</textarea","&lt;/textarea",$file_str); // exception: textarea closing tag                    
+  								  //FIXME echo generer_url_post_ecrire('skeleditor',"retour=skeleditor&f=".urlencode($file_name));   								 
                     echo "<textarea name='editor' cols='80' rows='50'>$file_str</textarea>\n";               
   									echo "<div style='text-align:$spip_lang_right'><input type='submit' name='action' value='"._T("skeleditor:sauver")."' class='fondo'></div>";
           	        echo "</form>\n";       	        
