@@ -4,20 +4,20 @@
 	</nom>
 	<icon>chart.png</icon>
 	<auteur>	<!-- Auteur du plugin -->Jacques Pyrat, [Pyrat.net->http://www.pyrat.net]
-_ &#169; 2008 - GPL
+_ &#169; 2009 - GPL
 	</auteur>
-	<version>0.1</version>
+	<version>0.2.0</version>
 	<etat>
-	stable
+	test
 	</etat>
 	<description>
-	Outil de Statisitique [Woopra->http://www.woopra.com/]
+	Outil de Statisitiques [Woopra->http://www.woopra.com/]
 	</description>
-	<lien></lien> <!-- URI de documentation -->
+	<lien>http://www.spip-contrib.net/Statistiques-avec-Woopra</lien> <!-- URI de documentation -->
 	<prefix>woopra</prefix>
 	<pipeline>
-		<nom>affichage_final</nom>
-		<action>affichage_final</action>
+		<nom>insert_head</nom>
+		<action>insert_head</action>
 		<inclure>woopra_options.php</inclure>
 	</pipeline>
 	<chemin dir='' />
