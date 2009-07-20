@@ -82,13 +82,13 @@ function editor_form_directory($path,$depth="") {
 }
 
 // add file form
-function editor_addfile($path_list) {
+function skeleditor_addfile($path_list) {
   //$output = bouton_block_invisible('editor_newfile');
   $output .= "<img src='"._DIR_PLUGIN_SKELEDITOR."/img_pack/action_add.png' alt='new' />"._T("skeleditor:fichier_nouveau");
   //$output .= debut_block_invisible('editor_newfile');  
   $output .= "<form method='get'>\n"; 
   $output .= "<input type='hidden' name='exec' value='skeleditor' />"; 
-  $output .= "<input type='hidden' name='action' value='new' />"; 
+  $output .= "<input type='hidden' name='operation' value='new' />"; 
   //$output .= "nom du fichier:<br />\n";
   $output .= "<input type='text' name='f' value='untitled.html' onfocus=\"this.value=''\" />"; 
   $output .= _T("skeleditor:target")."<br />\n"; 
@@ -101,14 +101,14 @@ function editor_addfile($path_list) {
 }
 
 // upload file form
-function editor_uploadfile($path_list) {
+function skeleditor_uploadfile($path_list) {
   //$output = "<br />".bouton_block_invisible('editor_uploadfile');
   $output .= "<img src='"._DIR_PLUGIN_SKELEDITOR."/img_pack/action_add.png' alt='new' />"._T("skeleditor:fichier_upload");
   //$output .= debut_block_invisible('editor_uploadfile');
   
   $output .= "<form method='post' enctype='multipart/form-data' >\n";  
   $output .= "<input type='hidden' name='exec' value='skeleditor' />"; 
-  $output .= "<input type='hidden' name='action' value='upload' />";
+  $output .= "<input type='hidden' name='operation' value='upload' />";
   $output .= "<input type='hidden' name='MAX_FILE_SIZE' value='200000' />"; 
   $output .= "<input type='file' name='upf'/>"; 
   $output .= _T("skeleditor:target")."<br />\n"; 

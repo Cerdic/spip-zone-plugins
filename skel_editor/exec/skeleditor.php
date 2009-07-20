@@ -34,7 +34,7 @@ function exec_skeleditor(){
 	$path_list = array_keys(array_flip(array_map('dirname',$files_editable)));
 
 	// --------------------------------------------------------------------------- 
-	// Action ? 
+	// operation ? 
 	// ---------------------------------------------------------------------------
 	$log = "";
 	$safe_flag = false;
@@ -67,7 +67,7 @@ function exec_skeleditor(){
                $target = ($_POST['target'])."/".$_FILES['upf']['name'];    // security
 					     if (check_file_allowed($target,$files_editable,true)) {     // security
 					           $_GET['f'] = $target;					           
-                     $_GET['action'] = 'preview';
+                     $_GET['operation'] = 'preview';
                      if (file_exists($target)) {
                         $log = "<span style='color:red'>"._T('skeleditor:erreur_overwrite')."</span>";
                      } else {
@@ -85,7 +85,7 @@ function exec_skeleditor(){
   } 
    
   // GET request ?
-  $action = "";
+  $operation = "";
 	if (isset($_GET['f'])) {
 	    $file_name = $_GET['f'];
 	    
@@ -100,11 +100,11 @@ function exec_skeleditor(){
            $safe_flag = check_file_allowed($file_name,$files_editable);
       }	                          
 	    
-	    if (isset($_GET['action']) && $safe_flag) { // any action on file ?
-          $action = $_GET['action'];          
-          if ($action=="delete") {                // delete the file 
+	    if (isset($_GET['operation']) && $safe_flag) { // any operation on file ?
+          $operation = $_GET['operation'];          
+          if ($operation=="delete") {                // delete the file 
             @unlink($file_name);          
-          } else if ($action=="download") {       // download the file 
+          } else if ($operation=="download") {       // download the file 
             if ($file_tmp = @file("$file_name")) {
                   $file_name_nopath = basename($file_name);
                   $file_str = implode ('',$file_tmp);
@@ -113,7 +113,7 @@ function exec_skeleditor(){
                   echo $file_str; 
                   exit; 
             }
-          } else if ($action=="new") {            // add new file
+          } else if ($operation=="new") {            // add new file
             if (isset($_GET['target'])) {                 
 			          // FIXME: check if allowed extension ?                   
                 if (is_file($file_name)) {  // security : ovewrite ?
@@ -130,7 +130,7 @@ function exec_skeleditor(){
                  }
             }
           }
-          // refresh file list after action
+          // refresh file list after operation
           $files_editable = parse_path($dossier_squelettes,array_merge($listed_extension,$img_extension));
       } 
   } else {
@@ -147,8 +147,7 @@ function exec_skeleditor(){
    
   $out .= gros_titre(_T('skeleditor:editer_skel'),'',false);
   $out .= debut_gauche('', true);
-  $out .= debut_boite_info(true)._T('skeleditor:skeleditor_description')."<p>"._T("skeleditor:skeleditor_dossier")." <strong>$dossier_squelettes</strong></p>".skeleditor_afficher_dir_skel($files_editable,$file_name,$img_extension);
-  //$out .= debut_boite_info(true)._T('skeleditor:skeleditor_description'._T("skeleditor:skeleditor_dossier")." <strong>$dossier_squelettes</strong><br />".show_skel_file($files_editable,$file_name,$img_extension).editor_addfile($path_list).editor_uploadfile($path_list));
+  $out .= debut_boite_info(true)._T('skeleditor:skeleditor_description')."<p>"._T("skeleditor:skeleditor_dossier")." <strong>$dossier_squelettes</strong></p>".skeleditor_afficher_dir_skel($files_editable,$file_name,$img_extension).skeleditor_addfile($path_list).skeleditor_uploadfile($path_list);
   $out .= fin_boite_info(true);
   
 	$out .=  debut_droite('', true);
@@ -157,14 +156,14 @@ function exec_skeleditor(){
 	if ($file_name!="") { 
        if ($safe_flag) {         
          $out .= "<div>"._T("skeleditor:fichier")."<strong>$file_name</strong> $log</div>\n"; // add extra infos on file:  size ? date ? ...
-         if ($action=="delete") {
+         if ($operation=="delete") {
            $out .= "<p style='color:green'>"._T("skeleditor:fichier_efface_ok")."</p>\n";
          } else { 
              // tools bar
              $out .= "<div id='skel_toolbar' style='width:100%;text-align:right;'>\n";
-             $out .= "<img src='"._DIR_PLUGIN_SKELEDITOR."/img_pack/action_dl.png' alt='download' /><a href=\"?exec=skeleditor&amp;f=".urlencode($file_name)."&amp;action=download\">"._T("skeleditor:telecharger")."</a>";
-             $out .= "<img src='"._DIR_PLUGIN_SKELEDITOR."/img_pack/action_del.png' alt='delete' /><a href=\"?exec=skeleditor&amp;f=".urlencode($file_name)."&amp;action=delete\" onclick=\"javascript:return confirm('"._T("skeleditor:effacer_confirme")."');\">"._T("skeleditor:effacer")."</a>";
-             $out .= "</div>\n";
+             $out .= "<img src='"._DIR_PLUGIN_SKELEDITOR."/img_pack/action_dl.png' alt='download' /><a href=\"?exec=skeleditor&amp;f=".urlencode($file_name)."&amp;operation=download\">"._T("skeleditor:telecharger")."</a>";
+             $out .= "<img src='"._DIR_PLUGIN_SKELEDITOR."/img_pack/action_del.png' alt='delete' /><a href=\"?exec=skeleditor&amp;f=".urlencode($file_name)."&amp;operation=delete\" onclick=\"javascript:return confirm('"._T("skeleditor:effacer_confirme")."');\">"._T("skeleditor:effacer")."</a>";
+             $out .= "</div>\n";             
              // img or text ?
              $extension =  strtolower(substr($file_name, strrpos($file_name,".")+1)); 
              if (in_array($extension,$img_extension)) {     // display file as img
@@ -174,12 +173,14 @@ function exec_skeleditor(){
              } else {  // edit file as text  
                 if ($file_tmp = @file("$file_name")) {
                     $file_str = implode ('',$file_tmp);                  
-                    if (($extension=='html') && (_request(debug)!='true')) $out .=  skel_parser($file_str); // experimental                            	        
+                    // FIXME pour l'instant on n'affiche plus le debug de boucle
+                    // if (($extension=='html') && (_request(debug)!='true')) $out .=  skel_parser($file_str); // experimental                            	        
                     $file_str = str_replace("&","&amp;",$file_str); //  preserve html entities
 		                $file_str = str_replace("</textarea","&lt;/textarea",$file_str); // exception: textarea closing tag                    
-  								  //FIXME echo generer_url_post_ecrire('skeleditor',"retour=skeleditor&f=".urlencode($file_name));   								 
+  								  //$out .= generer_url_post_ecrire('skeleditor',"retour=skeleditor&f=".urlencode($file_name));
+  								  $out .= "<form method='post' operation='?exec=skeleditor&f=".urlencode($file_name)."'>"; //FIX temporaire --> tout integrer ds CVT								 
                     $out .= "<textarea name='editor' cols='80' rows='50'>$file_str</textarea>\n";               
-  									$out .= "<div style='text-align:$spip_lang_right'><input type='submit' name='action' value='"._T("skeleditor:sauver")."' class='fondo'></div>";
+  									$out .= "<div style='text-align:$spip_lang_right'><input type='submit' name='operation' value='"._T("skeleditor:sauver")."' class='fondo'></div>";
           	        $out .= "</form>\n";       	        
   
                 } else {
