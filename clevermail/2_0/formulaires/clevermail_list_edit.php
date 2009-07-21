@@ -15,7 +15,11 @@ function formulaires_clevermail_list_edit_charger_dist($lst_id = -1) {
 			'lst_unsubscribe_text' => _T('clevermail:confirmation_votre_desinscription_text'),
 			'lst_subject_tag' => 1,
 			'lst_url_html' => "http://",
-			'lst_url_text' => "http://"
+			'lst_url_text' => "http://",
+		  'lst_auto_mode' => 'none',
+		  'lst_auto_hour' => 8,
+		  'lst_auto_week_day' => 1,
+		  'lst_auto_month_day' => 1
 		);
 	}
 	return $valeurs;
@@ -34,9 +38,23 @@ function formulaires_clevermail_list_edit_verifier_dist($lst_id = -1) {
   }
 	include_spip('inc/filtres');
 	if (_request('lst_moderator_email') && !email_valide(_request('lst_moderator_email'))) {
-		$erreurs['lst_moderator_email'] = _T('cette_adresse_email_n_est_pas_valide');
+		$erreurs['lst_moderator_email'] = _T('clevermail:cette_adresse_email_n_est_pas_valide');
 	}
-	if (count($erreurs)) {
+	if (_request('lst_auto_mode') && !in_array(_request('lst_auto_mode'), array('none', 'day', 'week', 'month'))) {
+		$erreurs['lst_auto_mode'] = _T('clevermail:auto_erreur_ce_mode_automatisation_existe_pas');
+	}
+  if (_request('lst_auto_hour') && (intval(_request('lst_auto_hour')) < 0 || intval(_request('lst_auto_hour')) > 23)) {
+    $erreurs['lst_auto_hour'] = _T('clevermail:auto_erreur_cette_heure_existe_pas');
+  }
+  if (_request('lst_auto_week_day') && (intval(_request('lst_auto_week_day')) < 0 || intval(_request('lst_auto_week_day')) > 6)) {
+    $erreurs['lst_auto_week_day'] = _T('clevermail:auto_erreur_ce_jour_semaine_existe_pas');
+  }
+  if (_request('lst_auto_month_day') && (intval(_request('lst_auto_month_day')) < 0 || intval(_request('lst_auto_month_day')) > 31)) {
+    $erreurs['lst_auto_month_day'] = _T('clevermail:auto_erreur_ce_jour_mois_existe_pas');
+  } elseif (intval(_request('lst_auto_month_day')) > 28) {
+    $erreurs['lst_auto_month_day'] = _T('clevermail:auto_erreur_ce_jour_mois_pas_possible');
+  }
+  if (count($erreurs)) {
 		$erreurs['message_erreur'] = _T('clevermail:veuillez_corriger_votre_saisie');
 	}
 	return $erreurs;
@@ -55,7 +73,11 @@ function formulaires_clevermail_list_edit_traiter_dist($lst_id = -1) {
     'lst_unsubscribe_text' => _request('lst_unsubscribe_text'),
     'lst_subject_tag' => _request('lst_subject_tag'),
     'lst_url_html' => _request('lst_url_html'),
-    'lst_url_text' => _request('lst_url_text')
+    'lst_url_text' => _request('lst_url_text'),
+    'lst_auto_mode' => _request('lst_auto_mode'),
+    'lst_auto_hour' => intval(_request('lst_auto_hour')),
+    'lst_auto_week_day' => intval(_request('lst_auto_week_day')),
+    'lst_auto_month_day' => intval(_request('lst_auto_month_day'))
   );
 
   // Handle checkbox value
