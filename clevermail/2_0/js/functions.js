@@ -19,3 +19,4 @@ function checkbox2input(formObj, checkName, inputObj)
 	inputObj.value = data;
 	return true;
 }
+

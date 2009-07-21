@@ -1,13 +1,4 @@
 <?php
-	/**
-	 *
-	 * CleverMail : plugin de gestion de lettres d'information basé sur CleverMail
-	 * Author : Thomas Beaumanoir
-	 * Clever Age <http://www.clever-age.com>
-	 * Copyright (c) 2006 - Distribue sous licence GNU/GPL
-	 *
-	 **/
-
 	$GLOBALS[$GLOBALS['idx_lang']] = array(
 	  // Formulaires
 	  'ce_champ_est_obligatoire' => 'Ce champ est obligatoire.',
@@ -107,12 +98,42 @@
 		'nom' => 'Nom',
 		'description' => 'Description',
 		'moderation' => 'Mod&eacute;ration',
-		'mod_open' => 'Ouverte : tout le monde peut s\'inscrire sans confirmation',
-		'mod_email' => 'E-mail : tout le monde peut s\'inscrire apr&egrave;s confirmation par e-mail',
-		'mod_mod' => 'Mod&eacute;r&eacute;e : le mod&eacute;rateur doit accepter l\'inscription',
-		'mod_closed' => 'Ferm&eacute;e : personne ne peut s\'inscrire',
-		'email_moderateur' => 'E-mail du mod&eacute;rateur',
-		'prefixer_messages' => 'Pr&eacute;fixer les sujets des messages avec le nom de la lettre d\'information',
+	  'mod_explication' => 'Les différents modes de modération sont décris ci-contre.',
+		'mod_explication_open' => 'Ouverte : tout le monde peut s\'inscrire sans confirmation',
+		'mod_explication_email' => 'E-mail : tout le monde peut s\'inscrire apr&egrave;s confirmation par e-mail',
+		'mod_explication_mod' => 'Mod&eacute;r&eacute;e : le mod&eacute;rateur doit accepter l\'inscription',
+		'mod_explication_closed' => 'Ferm&eacute;e : personne ne peut s\'inscrire',
+	  'mod_open' => 'Ouverte',
+	  'mod_email' => 'E-mail',
+	  'mod_mod' => 'Modérée',
+	  'mod_closed' => 'Fermée',
+	  'automatisation' => 'Automatisation',
+	  'auto_mode' => 'Mode',
+	  'auto_mode_none' => 'Aucune automatisation',
+	  'auto_mode_day' => 'Envois quotidiens',
+	  'auto_mode_week' => 'Envois hebdomadaires',
+	  'auto_mode_month' => 'Envois mensuels',
+	  'auto_erreur_ce_mode_automatisation_existe_pas' => 'Ce mode d\'automatisation n\'existe pas.',
+	  'auto_heure_creation' => 'Heure de création du message',
+	  'auto_heure_creation_explication' => 'Les messages seront créés à cette heure et directement mis en file d\'attente pour envoi.',
+	  'auto_heure_creation_minutes' => 'h00',
+	  'auto_erreur_cette_heure_existe_pas' => 'Cette heure n\'existe pas.',
+	  'auto_week_day' => 'Jour de la semaine',
+	  'auto_week_day_monday' => 'Lundi',
+    'auto_week_day_tuesday' => 'Mardi',
+    'auto_week_day_wednesday' => 'Mercredi',
+	  'auto_week_day_thursday' => 'Jeudi',
+	  'auto_week_day_friday' => 'Vendredi',
+	  'auto_week_day_saturday' => 'Samedi',
+	  'auto_week_day_sunday' => 'Dimanche',
+	  'auto_erreur_ce_jour_semaine_existe_pas' => 'Ce jour n\'existe pas dans la semaine.',
+    'auto_month_day' => 'Jour du mois',
+	  'auto_month_day_explication' => 'Les jours proposés ne vont que de 1 à 28 pour éviter tout problème lors des mois de moins de 31 jours.',
+	  'auto_erreur_ce_jour_mois_existe_pas' => 'Ce jour n\'existe pas dans le mois.',
+	  'auto_erreur_ce_jour_mois_pas_possible' => 'Le choix de ce jour n\'est pas possible.',
+	  'email_moderateur' => 'E-mail du mod&eacute;rateur',
+	  'prefixer_messages' => 'Préfixe',
+		'prefixer_messages_explication' => 'Pr&eacute;fixer les sujets des messages avec le nom de la lettre d\'information',
 		'confirmation_inscription' => 'Confirmation d\'une inscription envoy&eacute; par e-mail',
 		'confirmation_votre_inscription' => 'Confirmation de votre inscription',
 		'confirmation_votre_inscription_text' => "\nBonjour,\n\nPour confirmer votre inscription &agrave; la lettre d'information @@NOM_LETTRE@@ au format @@FORMAT_INSCRIPTION@@, veuillez cliquer sur ce lien :\n\n @@URL_CONFIRMATION@@\n\nMerci\n",
