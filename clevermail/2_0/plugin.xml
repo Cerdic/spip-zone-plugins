@@ -1,26 +1,25 @@
 <plugin>
 	<nom>CleverMail pour SPIP 2.0</nom>
-	<auteur>Thomas Beaumanoir, Nicolas Hoizey ([Clever Age->http://www.clever-age.com/])</auteur>
-	<version>2.0.0</version>
-  <version_base>0.2</version_base>
-	<etat>dev</etat>
+	<auteur>Thomas Beaumanoir et Nicolas Hoizey de [Clever Age->http://www.clever-age.com/]</auteur>
+	<version>2.1.0</version>
+  <version_base>0.3</version_base>
+	<etat>test</etat>
 	<description>
-{{ATTENTION, plugin en cours de refonte compl&#232;te pour SPIP 2, pas stable du tout !}}
+Gestion de {{lettres d'information}} assurant les fonctionnalit&eacute;s suivantes :
+-* Gestion de {{multiples lettres}}
+-* Gestion des inscriptions/d&eacute;sinscriptions, {{les abonn&eacute;s &eacute;tant distincts des utilisateurs de SPIP}}
+-* Abonnement au choix de l'utilisateur en version {{HTML ou texte brut}}
+-* R&eacute;cup&eacute;ration des contenus HTML et texte brut &agrave; partir de deux URL, donc {{utilisation de squelettes SPIP}} d&eacute;di&eacute;s possible
+-* {{Automatisation}} des cr&eacute;ations et envois quotidiens, hebdomadaires et mensuels
 
-Gestion de lettres d'information reprenant les fonctionnalit&#233;s du logiciel libre CleverMail :
--* Gestion de lettres multiples
--* R&#233;cup&#233;ration du contenu &#224; partir d'une URL, donc utilisation possible d'un squelette SPIP d&#233;di&#233;
--* Envois en HTML ou texte brut
--* Gestion des inscriptions/d&#233;sinscription, les abonn&#233;s &#233;tant distincts des utilisateurs de SPIP
--* Etc.
-
-Reste &#224; faire :
+&Eacute;volutions envisag&eacute;es :
+-* Option d'envoi en multipart simultan&eacute; HTML + texte brut (attention, Lotus Notes n'aime pas)
+-* Alimentation automatique de la liste des abonn&eacute;s &agrave; partir d'une ressource externe
 -* Extraction de tous les textes sous forme de cha&#238;nes de langue
--* Salvatorisation
--* Envoi programm&#233; d'un message
--* Envois p&#233;riodiques automatis&#233;s
+-* Salvatorisation. [N&eacute;cessite un changement de nom du plugin->http://article.gmane.org/gmane.comp.web.spip.zone/13503]... :-(
+-* Envoi programm&eacute; d'un message d&eacute;j&agrave; cr&eacute;&eacute;
 -* Envoi en multipart avec images et CSS incluses ?
--* Vos id&#233;es ?
+-* Vos id&eacute;es ?
 	</description>
 	<lien>[Documentation->http://www.clever-age.com/veille/blog/plugin-clevermail-pour-spip-pour-une-gestion-simple-de-lettres-d-informations.html]</lien>
 	<icon>img_pack/lettre-24.png</icon>

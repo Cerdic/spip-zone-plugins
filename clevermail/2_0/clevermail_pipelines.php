@@ -1,6 +1,7 @@
 <?php
 function clevermail_taches_generales_cron($taches_generales) {
 	$taches_generales['clevermail_queue_process'] = 10;
+  $taches_generales['clevermail_automatisation'] = 10;
 	return $taches_generales;
 }
 
