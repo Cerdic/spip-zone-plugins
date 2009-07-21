@@ -22,7 +22,7 @@ function gis_insertar_map($flux){
 	if ($flux['args']['exec']=='articles'){
 		//on teste si cfg est actif
 		if (function_exists('lire_config')) {
-			$arracfgrubriques_gis=lire_config("gis/rubriques_gis",array(0,0));
+			$arracfgrubriques_gis=lire_config("gis/rubriques_gis",array(0,-1));
 			$id_article = $flux['args']["id_article"];
 			if ($id_article!=''){
 				//on cherche la rubrique de l'article
@@ -30,7 +30,7 @@ function gis_insertar_map($flux){
 				$row = spip_fetch_array($s);
 				$id_rubrique = $row['id_rubrique'];
 				//et si la rubrique est dans l'arrayrub
-				if (in_array(0,$arracfgrubriques_gis) OR in_array($id_rubrique, $arracfgrubriques_gis)) {
+				if (in_array(-1,$arracfgrubriques_gis) OR in_array($id_rubrique, $arracfgrubriques_gis)) {
 					include_spip('inc/parte_privada');
 					$flux['data'].= gis_cambiar_coord($flux['args']['id_article'],"article","articles");
 				}
@@ -42,11 +42,11 @@ function gis_insertar_map($flux){
 	} else if ($flux['args']['exec']=='naviguer'){
 		//on teste si cfg est actif
 		if (function_exists('lire_config')) {
-			$arracfgrubriques_gis=lire_config("gis/rubriques_gis",array(0,0));
+			$arracfgrubriques_gis=lire_config("gis/rubriques_gis",array(0,-1));
 			$id_rubrique = $flux['args']["id_rubrique"];
 			if ($id_rubrique!=''){
 				//et si la rubrique est dans l'arrayrub
-				if (in_array(0,$arracfgrubriques_gis) OR in_array($id_rubrique, $arracfgrubriques_gis)) {
+				if (in_array(-1,$arracfgrubriques_gis) OR in_array($id_rubrique, $arracfgrubriques_gis)) {
 					include_spip('inc/parte_privada');
 					$flux['data'].= gis_cambiar_coord($flux['args']['id_rubrique'],"rubrique","naviguer");
 				}
