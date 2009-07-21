@@ -121,32 +121,6 @@ function skeleditor_uploadfile($path_list) {
   return $output;        
 }
 
-
-// fonction qui remplace la fonction initiale (voir ecrire/public/debug.php)
-// pour permettre d'éditer la page même s'il y a une erreur fatale
-function erreur_squelette($message='', $lieu='') {
-	global $tableau_des_erreurs;
-	global $auteur_session;
-	static $runs;
-
-	if (is_array($message)) list($message, $lieu) = $message;
-
-	spip_log("Erreur squelette (skel editor): $message | $lieu ("
-		. $GLOBALS['fond'].".html)");
-	$GLOBALS['bouton_admin_debug'] = true;
-	$tableau_des_erreurs[] = array($message, $lieu);
-	// Eviter les boucles infernales
-	//if (++$runs > 4) {
-	    // des la 1ere erreur, on arrete le parsing des boucles et on passe en mode debug
-	    echo _T('skeleditor:erreur_parsing');
-	    echo "<code style='display:block;color:#f00;padding:10px;background:#fff;border:1px solid #999'>$lieu</code>\n";
-      echo "<p><a href=\"?exec=skeleditor&amp;f=".urlencode(_request(f))."&amp;debug=true\">"._T('skeleditor:editer_skel_debug')."</a></p>";      	       
-			exit;  
-	//}
-}
-
-
-
 // skeleton parsing (more details:  public/phrase_html)
 function skel_parser($skel_str) {
   include_spip("public/interfaces");
