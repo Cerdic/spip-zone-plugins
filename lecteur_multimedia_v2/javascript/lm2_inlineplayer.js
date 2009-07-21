@@ -207,7 +207,7 @@ function InlinePlayer() {
     // grab all links, look for .mp3
     var foundItems = 0;
     for (var i=0; i<oLinks.length; i++) {
-      if (oLinks[i].href.match(/\.mp3/i) && !self.classContains(oLinks[i],self.excludeClass)) {
+      if (oLinks[i].href.match(/\.mp3/i) && oLinks[i].rel.match(/enclosure/i) && !self.classContains(oLinks[i],self.excludeClass)) {
         self.addClass(oLinks[i],self.css.sDefault); // add default CSS decoration
         self.links[foundItems] = (oLinks[i]);
         self.indexByURL[oLinks[i].href] = foundItems; // hack for indexing
