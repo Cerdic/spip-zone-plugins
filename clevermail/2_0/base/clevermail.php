@@ -14,7 +14,11 @@ function clevermail_declarer_tables_principales($tables_principales) {
 	    "lst_unsubscribe_text" => "TEXT NOT NULL",
 	    "lst_subject_tag" => "TINYINT(1) NOT NULL default '1'",
 	    "lst_url_html" => "VARCHAR(255) NOT NULL",
-	    "lst_url_text" => "VARCHAR(255) NOT NULL"
+	    "lst_url_text" => "VARCHAR(255) NOT NULL",
+	    "lst_auto_mode" => "ENUM('none', 'day', 'week', 'month') DEFAULT 'none'",
+	    "lst_auto_hour" => "TINYINT(2) NOT NULL default '8'",
+	    "lst_auto_week_day" => "TINYINT(1) NOT NULL default '1'", // 0 = dimanche
+	    "lst_auto_month_day" => "TINYINT(2) NOT NULL default '1'"
 	);
 	
 	$spip_cm_lists_key = array(
@@ -192,6 +196,13 @@ function clevermail_upgrade($nom_meta_base_version, $version_cible) {
 		  sql_alter("TABLE cm_posts_queued RENAME spip_cm_posts_queued");
 		  sql_alter("TABLE cm_settings RENAME spip_cm_settings");
 		  sql_alter("TABLE cm_subscribers RENAME spip_cm_subscribers");
+      ecrire_meta($nom_meta_base_version,$current_version="0.2",'non');
+    }
+    if (version_compare($current_version,'0.3','<')) {
+      include_spip('base/abstract_sql');
+      include_spip('base/create');
+    	maj_tables('spip_cm_lists');
+      ecrire_meta($nom_meta_base_version,$current_version="0.3",'non');
     }
   }
 }
