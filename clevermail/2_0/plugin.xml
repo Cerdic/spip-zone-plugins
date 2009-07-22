@@ -1,24 +1,25 @@
 <plugin>
 	<nom>CleverMail pour SPIP 2.0</nom>
 	<auteur>Thomas Beaumanoir et Nicolas Hoizey de [Clever Age->http://www.clever-age.com/]</auteur>
-	<version>2.1.0</version>
-  <version_base>0.3</version_base>
+	<version>2.1.1</version>
+  <version_base>0.4</version_base>
 	<etat>test</etat>
 	<description>
 Gestion de {{lettres d'information}} assurant les fonctionnalit&eacute;s suivantes :
 -* Gestion de {{multiples lettres}}
 -* Gestion des inscriptions/d&eacute;sinscriptions, {{les abonn&eacute;s &eacute;tant distincts des utilisateurs de SPIP}}
--* Abonnement au choix de l'utilisateur en version {{HTML ou texte brut}}
+-* Abonnement au choix de l'utilisateur en version {{HTML, texte brut ou multipart simultan&eacute; HTML + texte brut}} (attention, Lotus Notes n'aime pas)
 -* R&eacute;cup&eacute;ration des contenus HTML et texte brut &agrave; partir de deux URL, donc {{utilisation de squelettes SPIP}} d&eacute;di&eacute;s possible
--* {{Automatisation}} des cr&eacute;ations et envois quotidiens, hebdomadaires et mensuels
+-* {{Automatisation des envois}} avec une fr&eacute;quence quotidienne, hebdomadaire ou mensuelle
+-* {{Automatisation des inscriptions}} depuis un fichier distant
 
 &Eacute;volutions envisag&eacute;es :
--* Option d'envoi en multipart simultan&eacute; HTML + texte brut (attention, Lotus Notes n'aime pas)
--* Alimentation automatique de la liste des abonn&eacute;s &agrave; partir d'une ressource externe
+-* Choix des modes d'abonnement possibles pour chaque liste
 -* Extraction de tous les textes sous forme de cha&#238;nes de langue
 -* Salvatorisation. [N&eacute;cessite un changement de nom du plugin->http://article.gmane.org/gmane.comp.web.spip.zone/13503]... :-(
 -* Envoi programm&eacute; d'un message d&eacute;j&agrave; cr&eacute;&eacute;
 -* Envoi en multipart avec images et CSS incluses ?
+-* Utilisation de CFG pour la configuration ? (bof, une d&eacute;pendance en plus)
 -* Vos id&eacute;es ?
 	</description>
 	<lien>[Documentation->http://www.clever-age.com/veille/blog/plugin-clevermail-pour-spip-pour-une-gestion-simple-de-lettres-d-informations.html]</lien>

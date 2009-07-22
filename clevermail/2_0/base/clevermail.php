@@ -18,7 +18,10 @@ function clevermail_declarer_tables_principales($tables_principales) {
 	    "lst_auto_mode" => "ENUM('none', 'day', 'week', 'month') DEFAULT 'none'",
 	    "lst_auto_hour" => "TINYINT(2) NOT NULL default '8'",
 	    "lst_auto_week_day" => "TINYINT(1) NOT NULL default '1'", // 0 = dimanche
-	    "lst_auto_month_day" => "TINYINT(2) NOT NULL default '1'"
+	    "lst_auto_month_day" => "TINYINT(2) NOT NULL default '1'",
+	    "lst_auto_subscribers" => "VARCHAR(255) NOT NULL",
+	    "lst_auto_subscribers_mode" => "TINYINT(1) NOT NULL default '0'",
+	    "lst_auto_subscribers_updated" => "int(11) NOT NULL default '0'"
 	);
 	
 	$spip_cm_lists_key = array(
@@ -185,6 +188,7 @@ function clevermail_upgrade($nom_meta_base_version, $version_cible) {
       sql_insertq('spip_cm_settings',  array('set_name' => 'CM_MAIL_RETURN', 'set_value' => $GLOBALS['meta']['email_webmaster']));
       sql_insertq('spip_cm_settings',  array('set_name' => 'CM_SEND_NUMBER', 'set_value' => 50));
       ecrire_meta($nom_meta_base_version,$current_version="0.1",'non');
+      spip_log('Installation des tables du plugin CleverMail en version 0.1', 'clevermail');
     }
     if (version_compare($current_version,'0.2','<')) {
 		  sql_alter("TABLE cm_lists RENAME spip_cm_lists");
@@ -197,12 +201,21 @@ function clevermail_upgrade($nom_meta_base_version, $version_cible) {
 		  sql_alter("TABLE cm_settings RENAME spip_cm_settings");
 		  sql_alter("TABLE cm_subscribers RENAME spip_cm_subscribers");
       ecrire_meta($nom_meta_base_version,$current_version="0.2",'non');
+      spip_log('Mise à jour des tables du plugin CleverMail en version 0.2', 'clevermail');
     }
     if (version_compare($current_version,'0.3','<')) {
       include_spip('base/abstract_sql');
       include_spip('base/create');
     	maj_tables('spip_cm_lists');
       ecrire_meta($nom_meta_base_version,$current_version="0.3",'non');
+      spip_log('Mise à jour des tables du plugin CleverMail en version 0.3', 'clevermail');
+    }
+    if (version_compare($current_version,'0.4','<')) {
+      include_spip('base/abstract_sql');
+      include_spip('base/create');
+      maj_tables('spip_cm_lists');
+      ecrire_meta($nom_meta_base_version,$current_version="0.4",'non');
+      spip_log('Mise à jour des tables du plugin CleverMail en version 0.4', 'clevermail');
     }
   }
 }
@@ -220,5 +233,6 @@ function clevermail_vider_tables($nom_meta_base_version) {
   sql_drop_table('spip_cm_settings');
   sql_drop_table('spip_cm_subscribers');
   effacer_meta($nom_meta_base_version);
+  spip_log('Suppression des tables du plugin CleverMail', 'clevermail');
 }
 ?>

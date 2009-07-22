@@ -15,8 +15,6 @@ function genie_clevermail_queue_process_dist($verbose = 'no') {
 			$subscriber = sql_fetsel("*", "spip_cm_subscribers", "sub_id = ".intval($message['sub_id']));
 			$subscription = sql_fetsel("lsr_mode, lsr_id", "spip_cm_lists_subscribers", "lst_id = ".intval($post['lst_id'])." AND sub_id = ".intval($message['sub_id']));
 
-			$mode = ($subscription['lsr_mode'] == 1 ? 'html' : 'texte');
-
 			// recipient
 			$to = $subscriber['sub_email'];
 
@@ -54,15 +52,20 @@ function genie_clevermail_queue_process_dist($verbose = 'no') {
 				$html = str_replace($templateFrom, $templateTo, $html);
 			}
 
-			switch ($mode) {
-        case 'html':
-          $body = array('html' => $html, 'texte' => '');
+			switch (intval($subscription['lsr_mode'])) {
+        case 0:
+          $mode = 'text';
+        	$body = array('html' => '', 'texte' => $text);
           break;
-        case 'texte':
-          $body = array('html' => '', 'texte' => $text);
+				case 1:
+          $mode = 'html';
+          // TODO : que fait le facteur dans ce cas ?
+					$body = array('html' => '', 'texte' => $html);
           break;
+        case 2:
         default:
-          $body = array('html' => $html, 'texte' => $text);
+          $mode = 'composite';
+        	$body = array('html' => $html, 'texte' => $text);
           break;
       }
 			

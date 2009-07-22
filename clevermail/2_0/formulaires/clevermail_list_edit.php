@@ -14,12 +14,14 @@ function formulaires_clevermail_list_edit_charger_dist($lst_id = -1) {
 			'lst_unsubscribe_subject' => _T('clevermail:confirmation_votre_desinscription'),
 			'lst_unsubscribe_text' => _T('clevermail:confirmation_votre_desinscription_text'),
 			'lst_subject_tag' => 1,
-			'lst_url_html' => "http://",
-			'lst_url_text' => "http://",
+			'lst_url_html' => 'http://',
+			'lst_url_text' => 'http://',
 		  'lst_auto_mode' => 'none',
 		  'lst_auto_hour' => 8,
 		  'lst_auto_week_day' => 1,
-		  'lst_auto_month_day' => 1
+		  'lst_auto_month_day' => 1,
+		  'lst_auto_subscribers' => '',
+		  'lst_auto_subscribers_mode' => 0
 		);
 	}
 	return $valeurs;
@@ -54,6 +56,17 @@ function formulaires_clevermail_list_edit_verifier_dist($lst_id = -1) {
   } elseif (intval(_request('lst_auto_month_day')) > 28) {
     $erreurs['lst_auto_month_day'] = _T('clevermail:auto_erreur_ce_jour_mois_pas_possible');
   }
+  if (_request('lst_auto_subscribers') != '') {
+  	include_spip('inc/distant');
+    if ($adresses = recuperer_page(_request('lst_auto_subscribers'))) {
+	    include_spip('inc/clevermail_abonnes');
+	    if (!clevermail_verification_adresses_email($adresses)) {
+	      $erreurs['lst_auto_subscribers'] = _T('clevermail:le_format_des_adresses_email_ne_semble_pas_bon');
+	    }
+    } else {
+    	$erreurs['lst_auto_subscribers'] = _T('clevermail:fichier_adresses_distant_impossible_telecharger');
+    }
+  }
   if (count($erreurs)) {
 		$erreurs['message_erreur'] = _T('clevermail:veuillez_corriger_votre_saisie');
 	}
@@ -77,7 +90,9 @@ function formulaires_clevermail_list_edit_traiter_dist($lst_id = -1) {
     'lst_auto_mode' => _request('lst_auto_mode'),
     'lst_auto_hour' => intval(_request('lst_auto_hour')),
     'lst_auto_week_day' => intval(_request('lst_auto_week_day')),
-    'lst_auto_month_day' => intval(_request('lst_auto_month_day'))
+    'lst_auto_month_day' => intval(_request('lst_auto_month_day')),
+    'lst_auto_subscribers' => _request('lst_auto_subscribers'),
+    'lst_auto_subscribers_mode' => intval(_request('lst_auto_subscribers_mode'))
   );
 
   // Handle checkbox value
@@ -87,9 +102,11 @@ function formulaires_clevermail_list_edit_traiter_dist($lst_id = -1) {
   
   if (_request('lst_id') == -1) {
     sql_insertq('spip_cm_lists', $champs);
+    // XXX : log en chaîne de langue
     spip_log('Nouvelle liste « '._request('lst_name').' »', 'clevermail');
   } else {
   	sql_updateq('spip_cm_lists', $champs, "lst_id = ".intval(_request('lst_id')));
+  	// XXX : log en chaîne de langue
     spip_log('Modification de la liste « '._request('lst_name').' » (id = '._request('lst_id').')', 'clevermail');
   }
 

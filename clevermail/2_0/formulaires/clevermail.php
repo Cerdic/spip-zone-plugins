@@ -1,6 +1,6 @@
 <?php
 function formulaires_clevermail_charger_dist($lst_id = 0) {
-	$default = array('editable' => ' ', 'lsr_mode' => 1, 'sub_email' => '', 'lst_ids' => array());
+	$default = array('editable' => ' ', 'lsr_mode' => 0, 'sub_email' => '', 'lst_ids' => array());
 	if (intval($lst_id) != 0) {
 		if ($lst_id = sql_getfetsel("lst_id", "spip_cm_lists", "lst_id=".intval($lst_id)." AND lst_moderation!='closed'")) {
 			$valeurs = $default;
