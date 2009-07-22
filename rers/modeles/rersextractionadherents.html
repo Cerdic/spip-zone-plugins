@@ -1,0 +1,34 @@
+
+
+<h3>Listes d'adhérents</h3>
+
+<h5> En tableau </h5>
+<form action=''  method='get'><div>
+<input type='hidden' name='exec' value='' />
+<textarea readonly='readonly' cols='40' rows='9' class='spip_cadre' dir='ltr'>
+<BOUCLE_email4(AUTEURS){tous}{statut IN 0minirezo,1comite}{par nom}>#NOM;[(#EMAIL|textebrut)];[(#STATUT|=={'1comite'}|?{rédacteur,''})][(#STATUT|=={'0minirezo'}|?{administrateur,''})];[(#EN_LIGNE|affdate{'Y-m-d'})]
+</BOUCLE_email4></textarea></div></form>
+
+
+<!-- <h5> par date de connexion </h5> :   critère  {par en_ligne} ne fonctionne pas -->
+
+
+<h5>Administrateurs ayant un email </h5>
+<BOUCLE_jccemail(AUTEURS){tous}{statut=0minirezo}{par nom}>
+["#NOM" <(#EMAIL)>,]
+</BOUCLE_jccemail>
+<br />
+
+<h5>Rédacteurs avec email : </h5>
+<BOUCLE_jccemail2(AUTEURS){tous}{statut=1comite}{par nom}>
+["#NOM" <(#EMAIL)>,]
+</BOUCLE_jccemail2>
+
+<br />
+<h5>Rédacteurs sans Email : </h5>
+
+<BOUCLE_jccemail3(AUTEURS){tous}{statut=1comite}{par nom}>[(#EMAIL|?{'',#NOM ;})]
+</BOUCLE_jccemail3>
+
+
+

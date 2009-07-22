@@ -194,13 +194,12 @@ RERS */
 	$rers_rub_demandes = lire_config('rers/rers_rub_demandes');
 	$rers_rub_vie = lire_config('rers/rers_rub_vie');
 
-
 //RERS
 	$out .=  afficher_objets('article',"OFFRES", array('FROM' => "spip_articles AS articles LEFT JOIN spip_mots_articles AS lien ON lien.id_article=articles.id_article",
- 	"WHERE" => "statut='prop' AND id_rubrique=$rers_rub_offres AND lien.id_mot=$id_mot", 
+ 	"WHERE" => "(statut='prepa' OR statut='prop' OR statut='publie') AND id_rubrique=$rers_rub_offres AND lien.id_mot=$id_mot", 
 	'ORDER BY' => "date DESC"));
 	$out .=  afficher_objets('article',"DEMANDES", array('FROM' => "spip_articles AS articles LEFT JOIN spip_mots_articles AS lien ON lien.id_article=articles.id_article",
-	"WHERE" => "statut='prop' AND id_rubrique=$rers_rub_demandes AND lien.id_mot=$id_mot", 
+	"WHERE" => "(statut='prepa' OR statut='prop' OR statut='publie') AND id_rubrique=$rers_rub_demandes AND lien.id_mot=$id_mot", 
 	'ORDER BY' => "date DESC"));
 
   global $connect_statut; //rers

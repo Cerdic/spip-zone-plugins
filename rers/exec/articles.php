@@ -354,6 +354,9 @@ function afficher_corps_articles($id_article, $virtuel, $row)
 
 
 //RERS     Alerte pour la rubrique OFFRES et DEMANDES  si aucun mot clé n'a été choisi
+	  $rers_rub_offres = lire_config('rers/rers_rub_offres');
+	  $rers_rub_demandes = lire_config('rers/rers_rub_demandes');
+	  $id_rubrique = $row['id_rubrique'];
 	  $id_article = $row['id_article'];
 	$rersb = spip_fetch_array(spip_mysql_query("SELECT id_mot FROM spip_mots_articles WHERE id_article=$id_article"));
 	$rersc = $rersb['id_mot'];
@@ -361,8 +364,8 @@ function afficher_corps_articles($id_article, $virtuel, $row)
 		if ($rersc){}
 		else {
 		$res .= "<p class='article_prop'> Pensez à sélectionner le domaine de savoir 
-                             correspondant à votre fiche de savoirs. <br>
-			Une fois ce domaine de savoir choisi, la couleur orange de la case disparaîtra.</p>";
+                             correspondant à votre fiche de savoirs. 
+				(Une fois ce domaine de savoir choisi et confirmé à l'aide du bouton 'choisir', la couleur orange de la case disparaîtra)</p>";
 		}
 	}
 
