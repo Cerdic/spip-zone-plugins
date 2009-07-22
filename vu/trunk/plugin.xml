@@ -1,0 +1,57 @@
+<plugin>
+	<nom>Vu !</nom>
+	<auteur>Jonathan Chibois</auteur>
+	<version>0.2</version>
+	<version_base>0.2</version_base>
+
+	<!-- <icon>img_pack/vu_logo_96.png</icon> tester la taille 128 -->
+	<description>
+		Publier le r&eacute;sultat d'une activit&eacute; de veille th&eacute;matique.
+
+		Ce plugin propose de pallier à l'impossibilit&eacute; sur SPIP de publier de l'information sans contenu
+
+		<i>&laquo; Relayer l'information, plut&ocirc;t que de la (re)publier. &raquo;</i>
+	</description>
+	<url>http://www.spip-contrib.net/article3066</url>
+	<licence>&copy; 2009 - Distribu&eacute; sous licence GNU/LGPL</licence>
+
+	<etat>test</etat>
+
+	<prefix>vu</prefix>
+	<fonctions>vu_fonctions.php</fonctions>
+	<options>vu_options.php</options>
+
+	<!-- Installation, mise a jour ou desinstallation des tables supplementaire sur le serveur -->
+	<install>base/vu_upgrade.php</install>
+
+	<!-- Declarer a SPIP les tables principales -->
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/vu_pipelines.php</inclure>
+	</pipeline>
+
+	<!-- Declarer a SPIP les tables auxiliaires -->
+	<pipeline>
+	        <nom>declarer_tables_auxiliaires</nom>
+ 	       <inclure>base/vu_pipelines.php</inclure>
+	</pipeline> 
+
+	<!-- Declarer a SPIP les interfaces -->
+	<pipeline>
+  	      <nom>declarer_tables_interfaces</nom>
+  	      <inclure>base/vu_pipelines.php</inclure>
+	</pipeline> 
+
+	<necessite id="spip" version="[2.0.0;]" />
+
+	<!-- Ajouter bouton de navigation dans l'interface privee -->
+	<bouton id="vu_tous" parent="naviguer">
+		<!-- icone du nouveau bouton -->
+		<icone>img_pack/vu_logo_24.png</icone>
+		<!-- texte du nouveau bouton -->
+		<titre>Veille</titre>	
+		<!-- action a effectuer lors du clic : ici, execution de exec/vu_tous.php -->
+		<url>veille</url>	
+	</bouton>
+
+</plugin>
