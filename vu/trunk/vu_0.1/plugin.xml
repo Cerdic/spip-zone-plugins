@@ -1,0 +1,49 @@
+<plugin>
+	<nom>Vu !</nom>
+	<auteur>[Jonathan->http://www.laspic.eu]</auteur>
+	<version>0.1</version>
+	<version_base>0.1</version_base>
+
+	<icon>vu_logo.jpg</icon>
+	<description>Ce plugin a pour objectif de faciliter la publication du r&eacute;sultat d'une activit&eacute; de veille (scientifique, technologique...). Pour cela, il ajoute trois nouveaux types d'objets &eacute;ditoriaux que l'on peut &ecirc;tre amen&eacute; &agrave; rencontrer : les {annonces} que l'on souhaite relayer, les {&eacute;v&eacute;nements} &agrave; venir et les {publications} qui m&eacute;ritent le coup d'&oelig;il.
+	</description>
+	<url></url>
+	<licence>&copy; 2009 - Distribu&eacute; sous licence GNU/LGPL</licence>
+
+	<etat>test</etat>
+
+	<prefix>vu</prefix>
+	<fonctions>vu_fonctions.php</fonctions>
+	<options>vu_options.php</options>
+
+	<!-- Installation, mise a jour ou desinstallation des tables supplementaire sur le serveur -->
+	<install>base/vu_upgrade.php</install>
+
+	<!-- Declarer a SPIP les tables principales -->
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/vu_pipelines.php</inclure>
+	</pipeline>
+
+	<!-- Declarer a SPIP les tables auxiliaires -->
+	<pipeline>
+	        <nom>declarer_tables_auxiliaires</nom>
+ 	       <inclure>base/vu_pipelines.php</inclure>
+	</pipeline> 
+
+	<!-- Declarer a SPIP les interfaces -->
+	<pipeline>
+  	      <nom>declarer_tables_interfaces</nom>
+  	      <inclure>base/vu_pipelines.php</inclure>
+	</pipeline> 
+
+	<necessite id="spip" version="[2.0.0;]" />
+
+	<!-- Ajouter bouton de navigation dans l'interface privee - aucune utilite actuellement -->
+	<!-- <bouton id="vu_tous" parent="naviguer">
+		<icone>img/lien-24.png</icone>
+		<titre>Vu !</titre>	
+		<url>vu_tous</url>	
+	</bouton> -->
+
+</plugin>
