@@ -6,7 +6,7 @@
 	jsb, kent1
 	</auteur>
 	<version>
-	0.3
+	0.4
 	</version>
 	<etat>
 	dev
@@ -21,7 +21,6 @@
 	<prefix>
 	piwik
 	</prefix>
-	<fonctions>balises/piwik.php</fonctions>
 	<pipeline>
 		<nom>insert_head</nom>
 		<inclure>piwik_pipelines.php</inclure>

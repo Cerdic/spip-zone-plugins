@@ -13,6 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	//E
 	'explication_adresse_serveur' => 'Entrez l\'adresse sans "http://" ni "https://" ni slash final',
 	'explication_creer_site' => 'Le lien ci-dessous vous permet de cr&eacute;er un site sur le serveur Piwik qui sera disponible ensuite dans la liste. V&eacute;rifiez que vous avez bien configur&eacute; l\'adresse et le nom de votre site SPIP avant de cliquer, ce sont ces informations qui seront utilis&eacute;es.',
+	'explication_exclure_ips' => 'Pour exclure plusieurs adresses, s&eacute;parez les par des points virgules',
 	'explication_identifiant_site' => 'La liste des sites disponibles sur le serveur Piwik a &eacute;t&eacute; r&eacute;cup&eacute;r&eacute;e automatiquement gr&agrave;ce aux informations soumises. S&eacute;lectionnez dans la liste ci-dessous celui qui vous convient',
 	'explication_mode_insertion' => 'Il existe deux modes d\'insertion dans les pages du code n&eacute;cessaire au bon fonctionnement du plugin. Par le pipeline "insert_head" (m&eacute;thode automatique mais peu configurable), ou par l\'insertion d\'une balise (m&eacute;thode manuelle en insérant dans le pied de vos pages la balise #PIWIK) qui, quant &agrave; elle est pleinement configurable.',
 	'explication_restreindre_statut_public' => 'Choisissez ici les statuts d\'utilisateurs qui ne seront pas comptabilisés dans les statistiques dans la partie publique',
@@ -23,6 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_adresse_serveur' => 'Adresse URL du serveur (https:// ou http://)',
 	'label_comptabiliser_prive' => 'Comptabiliser les visites de l\'espace priv&eacute;',
 	'label_creer_site' => 'Cr&eacute;er un site sur le serveur Piwik',
+	'label_exclure_ips' => 'Exclure certaines adresses IP',
 	'label_identifiant_site' => 'L\'identifiant de votre site sur le serveur Piwik',
 	'label_mode_insertion' => 'Mode d\'insertion dans les pages publiques',
 	'label_restreindre_auteurs_public' => 'Restreindre certains utilisateurs connect&eacute;s (public)',

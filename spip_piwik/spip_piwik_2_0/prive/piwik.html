@@ -1,20 +1,12 @@
 #CACHE{0}
-[(#CONFIG{piwik/urlpiwik}|oui)
-	[(#CONFIG{piwik/idpiwik}|oui)
-	[(#SESSION{statut}|in_array{#CONFIG{piwik/restreindre_statut_public,#ARRAY}}|non)
-	[(#SESSION{id_auteur}|in_array{#CONFIG{piwik/restreindre_auteurs_public,#ARRAY}}|non)
-		<script type="text/javascript">
-			var pkBaseURL = (("https:" == document.location.protocol) ? "https://#CONFIG{piwik/urlpiwik}/" : "http://#CONFIG{piwik/urlpiwik}/");
-			document.write(unescape("%3Cscript src=\'" + pkBaseURL + "piwik.js\' type=\'text/javascript\'%3E%3C/script%3E"));
-		</script>
-		<script type="text/javascript">
-			try {
-			var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", #CONFIG{piwik/idpiwik});
-			piwikTracker.trackPageView();
-			piwikTracker.enableLinkTracking();
-			} catch( err ) {}
-		</script>
-	]
-	]
-	]
-]
+<script type="text/javascript">
+	var pkBaseURL = (("https:" == document.location.protocol) ? "https://#CONFIG{piwik/urlpiwik}/" : "http://#CONFIG{piwik/urlpiwik}/");
+	document.write(unescape("%3Cscript src=\'" + pkBaseURL + "piwik.js\' type=\'text/javascript\'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+	try {
+	var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", #CONFIG{piwik/idpiwik});
+	piwikTracker.trackPageView();
+	piwikTracker.enableLinkTracking();
+	} catch( err ) {}
+</script>
