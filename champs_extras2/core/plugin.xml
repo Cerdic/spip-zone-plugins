@@ -6,6 +6,7 @@
 	<description>
 	Creer de nouveaux champs aux objets d'&eacute;dition de SPIP
 	</description>
+	<lien>http://www.spip-contrib.net/Champs-Extras-2</lien>
 	<etat>test</etat>
 	<prefix>cextras</prefix>
 	<options>cextras_options.php</options>
