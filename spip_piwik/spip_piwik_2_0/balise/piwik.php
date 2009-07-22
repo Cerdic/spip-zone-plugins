@@ -28,7 +28,7 @@ function balise_PIWIK_dyn() {
 		return array(
         	'prive/piwik', 
         	0,
-        	array('ip'=>$GLOBALS['ip'])
+        	array()
     	);
 	}
 }
