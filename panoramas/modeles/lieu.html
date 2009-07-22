@@ -45,7 +45,7 @@
 <script type="text/javascript" src="#CHEMIN{js/jquery.flipv.js}"></script>
 <script type="text/javascript">
 	[(#MODE_JEU|=={'oui'}|?{' ',''})var mode_jeu=1;]
-	//chargement des objets à ramasser pour terminer le jeu
+	//chargement des objets ï¿½ ramasser pour terminer le jeu
 	var chaine_objets_a_ramasser = "[(#LISTE_OBJETS_JEU)]";
 	var tableau_objets_a_ramasser = new Array(); 
 	tableau_objets_a_ramasser = chaine_objets_a_ramasser.split(','); 
@@ -83,7 +83,7 @@
 $(document).ready(function(){
 	[(#MODE_JEU|=={'oui'}|?{' ',''})if (!$.cookie('objets_ramasses')) 
 		$.cookie('objets_ramasses',' ');]
-	$('.panorama-viewport').append("<div class='panorama-onglets'><div class='panorama-carte'><img src='#URL_DOCUMENT' height='"+parseInt($('.panorama-viewport').css('height'))+"' /><BOUCLE_position(VISITES_VIRTUELLES_LIEUX){id_visite=#ID_VISITE}{position_x_carte>0}><a class='icone-carte' href='[(#URL_CARTE|sinon{[(#URL_PAGE{lieu,id_lieu=#ID_LIEU})]#[(#REM)]lieu#ID_LIEU})]'><img src='<B_iconecarte><BOUCLE_iconecarte(DOCUMENTS){id_document=#ICONE_CARTE}>#URL_DOCUMENT</BOUCLE_iconecarte></B_iconecarte>#CHEMIN{img_pack/icone_carte.png}<//B_iconecarte>'  style='cursor: pointer; position: absolute; [left: (#POSITION_X_CARTE)px;][ top: (#POSITION_Y_CARTE)px;]' /></a><span class='lien-plan' style='display: none; [left: (#POSITION_X_CARTE|plus{13})px;][ top: (#POSITION_Y_CARTE|moins{33})px;]'><a href='[(#URL_CARTE|sinon{[(#URL_PAGE{lieu,id_lieu=#ID_LIEU})]#[(#REM)]lieu#ID_LIEU})]'[(#ACCES_CARTE|=={si_visite}|?{' ',''})class='verifier-lien-plan verifier-lien-plan#ID_LIEU']>[(#TITRE|replace{' ','&nbsp;'})]</a></span></BOUCLE_position></div>[(#MODE_JEU|=={'oui'}|?{' ',''})<div class='panorama-panier' style='width: "+parseInt(parseInt($('.panorama-viewport').css('width'))/3)+"px; height: "+parseInt($('.panorama-viewport').css('height'))+"px;' ><:panoramas:contenu_panier:> :<div class='panorama-panier-conteneur'><ul>"+ $.cookie('objets_ramasses') +"</ul></div></div>][(#REM) fin mode_jeu ]<div class='panorama-onglets-titres'><h2 class='panorama-carte'><a href='#'><:panoramas:carte:></a></h2>[(#MODE_JEU|=={'oui'}|?{' ',''})<h2 class='panorama-panier'><a href='#'><:panoramas:panier:></a></h2>][(#REM) fin mode_jeu ]</div></div>");
+	$('.panorama-viewport').append("<div class='panorama-onglets'><div class='panorama-carte'><img src='#URL_DOCUMENT' height='"+parseInt($('.panorama-viewport').css('height'))+"' /><BOUCLE_position(VISITES_VIRTUELLES_LIEUX){id_visite=#ID_VISITE}{position_x_carte>0}><a class='icone-carte' href='[(#URL_CARTE|sinon{[(#URL_PAGE{lieu,id_lieu=#ID_LIEU})]#[(#REM)]lieu#ID_LIEU})]'><img src='<B_iconecarte><BOUCLE_iconecarte(DOCUMENTS){id_document=#ICONE_CARTE}>#URL_DOCUMENT</BOUCLE_iconecarte></B_iconecarte>#CHEMIN{img_pack/icone_carte.png}<//B_iconecarte>'  style='cursor: pointer; position: absolute; [left: (#POSITION_X_CARTE)px;][ top: (#POSITION_Y_CARTE)px;]' /></a><span class='lien-plan[(#ACCES_CARTE|=={si_visite}|?{' ',''}) verifier-lien-plan verifier-lien-plan#ID_LIEU]' style='display: none; [left: (#POSITION_X_CARTE|plus{13})px;][ top: (#POSITION_Y_CARTE|moins{33})px;]'><a href='[(#URL_CARTE|sinon{[(#URL_PAGE{lieu,id_lieu=#ID_LIEU})]#[(#REM)]lieu#ID_LIEU})]'>[(#TITRE|replace{' ','&nbsp;'})]</a></span></BOUCLE_position></div>[(#MODE_JEU|=={'oui'}|?{' ',''})<div class='panorama-panier' style='width: "+parseInt(parseInt($('.panorama-viewport').css('width'))/3)+"px; height: "+parseInt($('.panorama-viewport').css('height'))+"px;' ><:panoramas:contenu_panier:> :<div class='panorama-panier-conteneur'><ul>"+ $.cookie('objets_ramasses') +"</ul></div></div>][(#REM) fin mode_jeu ]<div class='panorama-onglets-titres'><h2 class='panorama-carte'><a href='#'><:panoramas:carte:></a></h2>[(#MODE_JEU|=={'oui'}|?{' ',''})<h2 class='panorama-panier'><a href='#'><:panoramas:panier:></a></h2>][(#REM) fin mode_jeu ]</div></div>");
 	
 	$('.panorama-viewport a.icone-carte').bind('mouseover', function(){
 		if ($(this).next().css('display') == 'none') {
@@ -124,7 +124,7 @@ $(document).ready(function(){
 		if ($.cookie('lieux_visites')) {
 			tableau_lieux_visites = $.cookie('lieux_visites').split(','); 
 			if (tableau_lieux_visites.indexOf('#ID_LIEU')>=0) {
-				//le lieu est déja dans la liste
+				//le lieu est dï¿½ja dans la liste
 			} else {
 				tableau_lieux_visites.push('#ID_LIEU');
 			}
@@ -142,14 +142,14 @@ $(document).ready(function(){
 	}
 	<BOUCLE_toutesinteractions(VISITES_VIRTUELLES_INTERACTIONS){id_lieu}>
 		
-		[ (#REM) interactions qui ont précisé une image de fond : ajouter l'image dans le cadre ]
+		[ (#REM) interactions qui ont prï¿½cisï¿½ une image de fond : ajouter l'image dans le cadre ]
 		<BOUCLE_imagedefondcourante(DOCUMENTS){id_document=#ID_IMAGE_FOND}>
 			$('.interaction#_toutesinteractions:ID_INTERACTION').append("<img src='#URL_DOCUMENT' width='"+$('.interaction#_toutesinteractions:ID_INTERACTION').css('width')+"' height='"+$('.interaction#_toutesinteractions:ID_INTERACTION').css('height')+"' style='position: absolute; top: 0; left: 0;'/>").css('opacity',1).css('border','none').css('background','none');
 			$('.interaction#_toutesinteractions:ID_INTERACTION').bind('click', function() {
-							return false;
+							return true;
 						});
 				
-			[ (#REM) interactions qui ont précisé une image de fond au survol : ajouter l'image dans le cadre ]
+			[ (#REM) interactions qui ont prï¿½cisï¿½ une image de fond au survol : ajouter l'image dans le cadre ]
 			<BOUCLE_imagedefondsurvolcourante(DOCUMENTS){id_document=#ID_IMAGE_FOND_SURVOL}>
 				$('.interaction#_toutesinteractions:ID_INTERACTION img').bind('mouseover', function(){
 					$(this).attr('src', '#URL_DOCUMENT');
@@ -162,14 +162,14 @@ $(document).ready(function(){
 		</BOUCLE_imagedefondcourante>
 		
 
-		[ (#REM) interactions avec les objets : ajouter l'image de l'objet et gérer le drag and drop dans le panier ]
+		[ (#REM) interactions avec les objets : ajouter l'image de l'objet et gï¿½rer le drag and drop dans le panier ]
 		<BOUCLE_objetcourant(DOCUMENTS){id_document=#ID_IMAGE_FOND}>
 			[(#MODE_JEU|=={'oui'}|?{' ',''})	
 			[(#TYPE|=={'objet'}|?{' ',''})
 				$('.type-objet#ID_DOCUMENT').bind('click', function() {
 							return false;
 						}).draggable({helper: 'clone', opacity: .4, revert: true});
-				$('h2.panorama-panier').droppable({
+				$('.panorama-onglets-titres').droppable({
 					accept: ".type-objet#ID_DOCUMENT",
 					activeClass: 'droppable-active',
 					hoverClass: 'droppable-hover',
@@ -178,16 +178,16 @@ $(document).ready(function(){
 						$('div.panorama-panier ul li div').draggable({helper: 'clone', opacity: .4, revert: true});
 						$('.type-objet#ID_DOCUMENT').remove();
 						
-						//mis à jour des cookies
+						//mis ï¿½ jour des cookies
 						var objets_ramasses = $('div.panorama-panier ul').html();
 						$.cookie('objets_ramasses', objets_ramasses);
 						
-						//vérifier si on a trouvé tous les objets du jeu. Si oui, on affiche un message de félicitation et la partie est terminée
+						//vï¿½rifier si on a trouvï¿½ tous les objets du jeu. Si oui, on affiche un message de fï¿½licitation et la partie est terminï¿½e
 						verifier_objets_ramasses();			
 					}
 				});
 				
-				[ (#REM) suppression des objets qui sont déjà dans le panier ]
+				[ (#REM) suppression des objets qui sont dï¿½jï¿½ dans le panier ]
 				if ($('div.panorama-panier ul').find('.objet#ID_DOCUMENT').length > 0) {
 					$('.type-objet#ID_DOCUMENT').remove();
 				}
@@ -197,13 +197,13 @@ $(document).ready(function(){
 		</BOUCLE_objetcourant>
 		
 
-		[ (#REM) interactions qui requièrent un objet pour être actives (il faudra drag and dropper l'objet sur l'interaction depuis le panier ]
+		[ (#REM) interactions qui requiï¿½rent un objet pour ï¿½tre actives (il faudra drag and dropper l'objet sur l'interaction depuis le panier ]
 		<BOUCLE_objetactivationobjet(DOCUMENTS){id_document=#ID_OBJET_ACTIVATION}>
 			if (mode_jeu) {
 			$('.interaction#ID_INTERACTION')
 				.unbind('click')
 				.bind('click', function() {
-							[var texte_avant_activation = "(#TEXTE_AVANT_ACTIVATION)";
+							[var texte_avant_activation = "(#TEXTE_AVANT_ACTIVATION|replace{"\n","<br />"}|replace{"\r",""}|htmlspecialchars)";
 							texte_avant_activation = texte_avant_activation.replace("NOM_JOUEUR",$.cookie('nom_joueur'));
 							alert(texte_avant_activation);]
 							return false;
@@ -213,7 +213,7 @@ $(document).ready(function(){
 					activeClass: 'droppable-active',
 					hoverClass: 'droppable-hover',
 					drop: function(ev, ui) {
-						[var texte_apres_activation = "(#TEXTE_APRES_ACTIVATION)";
+						[var texte_apres_activation = "(#TEXTE_APRES_ACTIVATION|replace{"\n","<br />"}|replace{"\r",""}|htmlspecialchars)";
 							texte_apres_activation = texte_apres_activation.replace("NOM_JOUEUR",$.cookie('nom_joueur'));
 							alert(texte_apres_activation);]
 
@@ -221,11 +221,11 @@ $(document).ready(function(){
 							$('div.panorama-panier ul').append("<li><div class='objet#ID_DOCUMENT'><img src='#URL_DOCUMENT' /><span style='display: none;'>#ID_DOCUMENT</span></div></li>");
 							$('div.panorama-panier ul li div').draggable({helper: 'clone', opacity: .4, revert: true});
 						
-							//mis à jour des cookies
+							//mis ï¿½ jour des cookies
 							var objets_ramasses = $('div.panorama-panier ul').html();
 							$.cookie('objets_ramasses', objets_ramasses);
 						
-							//vérifier si on a trouvé tous les objets du jeu. Si oui, on affiche un message de félicitation et la partie est terminée
+							//vï¿½rifier si on a trouvï¿½ tous les objets du jeu. Si oui, on affiche un message de fï¿½licitation et la partie est terminï¿½e
 							verifier_objets_ramasses();
 						</BOUCLE_documentobjetapresactivationobjet>		
 					
@@ -235,7 +235,7 @@ $(document).ready(function(){
 						tb_init(this);
 						$('div.panorama-panier ul li div.objet#ID_DOCUMENT, .type-objet#ID_DOCUMENT').remove();
 						
-						//mis à jour des cookies
+						//mis ï¿½ jour des cookies
 						var objets_ramasses = $('div.panorama-panier ul').html();
 						$.cookie('objets_ramasses', objets_ramasses);
 						
@@ -244,7 +244,7 @@ $(document).ready(function(){
 			}[(#REM) fin mode_jeu ]
 		</BOUCLE_objetactivationobjet>
 
-		[ (#REM) interactions qui requièrent d'avoir visité un lieu ]
+		[ (#REM) interactions qui requiï¿½rent d'avoir visitï¿½ un lieu ]
 		<BOUCLE_objetactivationlieu(VISITES_VIRTUELLES_LIEUX){id_lieu=#ID_LIEU_ACTIVATION}>
 			if (mode_jeu) {
 			$('.interaction#ID_INTERACTION')
@@ -253,7 +253,7 @@ $(document).ready(function(){
 							if ($.cookie('lieux_visites')) {
 								var tableau_lieux_visites = $.cookie('lieux_visites').split(','); 
 								if (tableau_lieux_visites.indexOf('#ID_LIEU')>=0) {
-									[var texte_apres_activation = "(#TEXTE_APRES_ACTIVATION)";
+									[var texte_apres_activation = "(#TEXTE_APRES_ACTIVATION|replace{"\n","<br />"}|replace{"\r",""}|htmlspecialchars)";
 									texte_apres_activation = texte_apres_activation.replace("NOM_JOUEUR",$.cookie('nom_joueur'));
 									alert(texte_apres_activation);]
 
@@ -261,20 +261,20 @@ $(document).ready(function(){
 										$('div.panorama-panier ul').append("<li><div class='objet#ID_DOCUMENT'><img src='#URL_DOCUMENT' /><span style='display: none;'>#ID_DOCUMENT</span></div></li>");
 										$('div.panorama-panier ul li div').draggable({helper: 'clone', opacity: .4, revert: true});
 						
-										//mis à jour des cookies
+										//mis ï¿½ jour des cookies
 										var objets_ramasses = $('div.panorama-panier ul').html();
 										$.cookie('objets_ramasses', objets_ramasses);
 						
-										//vérifier si on a trouvé tous les objets du jeu. Si oui, on affiche un message de félicitation et la partie est terminée
+										//vï¿½rifier si on a trouvï¿½ tous les objets du jeu. Si oui, on affiche un message de fï¿½licitation et la partie est terminï¿½e
 										verifier_objets_ramasses();
 									</BOUCLE_documentobjetapresactivationlieu>		
 								} else {
-									[var texte_avant_activation = "(#TEXTE_AVANT_ACTIVATION)";
+									[var texte_avant_activation = "(#TEXTE_AVANT_ACTIVATION|replace{"\n","<br />"}|replace{"\r",""}|htmlspecialchars)";
 									texte_avant_activation = texte_avant_activation.replace("NOM_JOUEUR",$.cookie('nom_joueur'));
 									alert(texte_avant_activation);]
 								}
 							} else {
-								[var texte_avant_activation = "(#TEXTE_AVANT_ACTIVATION)";
+								[var texte_avant_activation = "(#TEXTE_AVANT_ACTIVATION|replace{"\n","<br />"}|replace{"\r",""}|htmlspecialchars)";
 								texte_avant_activation = texte_avant_activation.replace("NOM_JOUEUR",$.cookie('nom_joueur'));
 								alert(texte_avant_activation);]
 							}
@@ -283,7 +283,7 @@ $(document).ready(function(){
 			}[(#REM) fin mode_jeu ]
 		</BOUCLE_objetactivationlieu>
 
-		[ (#REM) interactions qui requièrent d'avoir réussi un questionnaire avant ]
+		[ (#REM) interactions qui requiï¿½rent d'avoir rï¿½ussi un questionnaire avant ]
 		<BOUCLE_objetactivationjeu(JEUX){id_jeu=#ID_JEU_ACTIVATION}>
 			if (mode_jeu) {
 			$('.interaction#ID_INTERACTION')
@@ -292,27 +292,27 @@ $(document).ready(function(){
 							if($.cookie('jeux_reussis')) {
 								var tableau_jeux_visites = $.cookie('jeux_reussis').split(','); 
 								if (tableau_jeux_visites.indexOf('#ID_JEU')>=0) {
-									[var texte_apres_activation = "(#TEXTE_APRES_ACTIVATION)";
+									[var texte_apres_activation = "(#TEXTE_APRES_ACTIVATION|replace{"\n","<br />"}|replace{"\r",""}|htmlspecialchars)";
 									texte_apres_activation = texte_apres_activation.replace("NOM_JOUEUR",$.cookie('nom_joueur'));
 									alert(texte_apres_activation);]
 									<BOUCLE_documentobjetapresactivationjeu(DOCUMENTS){id_document=#ID_OBJET_APRES_ACTIVATION}>
 										$('div.panorama-panier ul').append("<li><div class='objet#ID_DOCUMENT'><img src='#URL_DOCUMENT' /><span style='display: none;'>#ID_DOCUMENT</span></div></li>");
 										$('div.panorama-panier ul li div').draggable({helper: 'clone', opacity: .4, revert: true});
 						
-										//mis à jour des cookies
+										//mis ï¿½ jour des cookies
 										var objets_ramasses = $('div.panorama-panier ul').html();
 										$.cookie('objets_ramasses', objets_ramasses);
 						
-										//vérifier si on a trouvé tous les objets du jeu. Si oui, on affiche un message de félicitation et la partie est terminée
+										//vï¿½rifier si on a trouvï¿½ tous les objets du jeu. Si oui, on affiche un message de fï¿½licitation et la partie est terminï¿½e
 										verifier_objets_ramasses();
 									</BOUCLE_documentobjetapresactivationjeu>
 								} else {
-									[var texte_avant_activation = "(#TEXTE_AVANT_ACTIVATION)";
+									[var texte_avant_activation = "(#TEXTE_AVANT_ACTIVATION|replace{"\n","<br />"}|replace{"\r",""}|htmlspecialchars)";
 									texte_avant_activation = texte_avant_activation.replace("NOM_JOUEUR",$.cookie('nom_joueur'));
 									alert(texte_avant_activation);]
 								}
 							} else	{
-								[var texte_avant_activation = "(#TEXTE_AVANT_ACTIVATION)";
+								[var texte_avant_activation = "(#TEXTE_AVANT_ACTIVATION|replace{"\n","<br />"}|replace{"\r",""}|htmlspecialchars)";
 								texte_avant_activation = texte_avant_activation.replace("NOM_JOUEUR",$.cookie('nom_joueur'));
 								alert(texte_avant_activation);]
 							}
@@ -322,7 +322,7 @@ $(document).ready(function(){
 		</BOUCLE_objetactivationjeu>
 
 		
-		[(#REM) gif animée sur fond noir avant le chargement de la page suivante ]
+		[(#REM) gif animï¿½e sur fond noir avant le chargement de la page suivante ]
 		<BOUCLE_interactionsversautrepage(VISITES_VIRTUELLES_INTERACTIONS){id_interaction}{type IN lieu,visite,article,rubrique,url}>
 			$('.interaction#ID_INTERACTION').bind('click', function(){
 			$('.panorama-viewport').append("<div class='fond-noir-slideshow' style='background: black; width: 100%; height: 100%; position: absolute; left: 0; top: 0; opacity: .8;'></div><img src='#CHEMIN{img_pack/ajax-loader.gif}' style='position: absolute; top: 50%; left: 50%; margin-left: -33px; margin-top: -33px;' />");
@@ -362,19 +362,19 @@ $(document).ready(function(){
 	
 		
 	[(#MODE_JEU|=={'oui'}|?{' ',''})
-	//vérifier si les lieux doivent être affichés sur le plan
-	//certains doivent avoir été visités pour apparaître
-	$('.lien-plan a.verifier-lien-plan').each(function(){
-		var numero_lieu = $(this).attr('class').substr(37);
+	//vï¿½rifier si les lieux doivent ï¿½tre affichï¿½s sur le plan
+	//certains doivent avoir ï¿½tï¿½ visitï¿½s pour apparaï¿½tre
+	$('.verifier-lien-plan').each(function(){
+		var numero_lieu = $(this).attr('class').substr(47);
 		if ($.cookie('lieux_visites')) {
 			var tableau_lieux_visites = $.cookie('lieux_visites').split(','); 
 			if (tableau_lieux_visites.indexOf(numero_lieu)<0) {
-				$(this).parent().remove();	
+				$(this).hide();	
 			}
+		} else {
+		    $(this).hide();
 		}
-		else {
-			$(this).parent().remove();
-		}
+		
 		
 	});
 	][(#REM) fin mode_jeu ]
@@ -383,7 +383,7 @@ $(document).ready(function(){
 
 </script>
 
-[(#REM) gif animée sur fond noir avant le chargement de la page suivante (préchargement) ]
+[(#REM) gif animï¿½e sur fond noir avant le chargement de la page suivante (prï¿½chargement) ]
 <img src="#CHEMIN{img_pack/ajax-loader.gif}" width="0" height="0" alt="" />
 
 
@@ -402,7 +402,7 @@ $(document).ready(function(){
 
 <BOUCLE_interactionstransitions(VISITES_VIRTUELLES_INTERACTIONS){id_lieu}>
 
-	[ (#REM) préchargement des images de fond de survol ]
+	[ (#REM) prï¿½chargement des images de fond de survol ]
 	<BOUCLE_imagedefondsurvolprechargement(DOCUMENTS){id_document=#ID_IMAGE_FOND_SURVOL}>
 		<img src="#URL_DOCUMENT"  width="0" height="0" alt="" />				
 	</BOUCLE_imagedefondsurvolprechargement>
@@ -419,7 +419,7 @@ $(document).ready(function(){
 </div>
 <script type="text/javascript">
 $(document).ready(function(){
-[(#REM) faire jouer la transition avant d'activer l'interaction : cas d'une séquence d'images ]
+[(#REM) faire jouer la transition avant d'activer l'interaction : cas d'une sï¿½quence d'images ]
 	$('.interaction#ID_INTERACTION').bind('click', function(){
 		if ($('.images-transition-interaction#ID_INTERACTION')[0]){
 		
@@ -450,7 +450,7 @@ $(document).ready(function(){
 <script type="text/javascript">
 
 	function gestion_molette_souris() {
-		[(#REM) Gestion de la molette de la souris pour aller à gauche à droite ]
+		[(#REM) Gestion de la molette de la souris pour aller ï¿½ gauche ï¿½ droite ]
 		var intOverallDelta = 0;
 		$(".panorama-viewport").mousewheel(function(objEvent, intDelta){
 			if (intDelta > 0) { 
