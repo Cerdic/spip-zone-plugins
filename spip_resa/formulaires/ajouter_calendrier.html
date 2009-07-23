@@ -1,0 +1,17 @@
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+				
+<form action="#ENV{action}" method="post">
+#ACTION_FORMULAIRE{#ENV{action}}
+	<p><em>* <:resa:form_msg_champs_obligatoires:></em></p>
+	<fieldset>
+		<label for="article"><:resa:label_article:> <em>*</em></label>
+			<select name="article" id="article" value="#ENV{article}">
+				<BOUCLE_articles(ARTICLES)>
+					<option value="#ID_ARTICLE">#TITRE</option>
+				</BOUCLE_articles>
+			</select>
+			[<br /><span class="erreur">(#ENV**{erreurs}|table_valeur{article})</span>]
+		<input type="submit" value="<:resa:ajouter_calendrier:>" />
+	</fieldset>
+</form>

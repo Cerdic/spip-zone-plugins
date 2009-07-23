@@ -1,0 +1,7 @@
+<link rel="stylesheet" type="text/css" href="[(#CHEMIN{css/calendrier.css})]" />
+<?php
+
+if( !empty($contexte['id_calendrier']) && (int) $contexte['id_calendrier'] > 0 )
+{
+	resa_afficher_calendrier($contexte['id_calendrier']) ;
+}

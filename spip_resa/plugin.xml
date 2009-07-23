@@ -1,0 +1,29 @@
+<plugin>
+	<nom>spip_resa</nom>
+	<auteur>glims - dig^^</auteur>
+	<licence>GNU/GPL</licence>
+	<version>0.1</version>
+	<etat>dev</etat>
+	<description></description>
+	<icon>resa.jpg</icon>
+	<prefix>resa</prefix>
+	
+	<install>base/resa_upgrade.php</install>
+	<fonctions>resa.php</fonctions>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/resa.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>resa.php</inclure>
+	</pipeline>
+	
+	<necessite id="cfg" version="[1.0;2.0]" />
+	
+	<bouton id="spip_resa" parent="naviguer">
+		<icone>prive/images/resa.png</icone>
+		<titre>R&eacute;servations</titre>
+		<url>voir_calendriers</url>
+	</bouton>
+</plugin>

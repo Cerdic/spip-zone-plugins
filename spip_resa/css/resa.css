@@ -1,0 +1,12 @@
+/* CSS par dig^^ */
+
+table#liste-calendriers, table#liste-calendriers td {
+	margin:0;
+	padding:0;
+	border:1px solid grey;
+	text-align:center;
+}
+
+table#liste-calendriers { background-color:lightgrey; }
+table#liste-calendriers td { background-color:white; }
+table#liste-calendriers img{ margin:5px; }

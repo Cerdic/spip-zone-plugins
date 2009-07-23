@@ -1,0 +1,35 @@
+<!-- descriptif=
+<h4><:resa:configuration_plugin_resa:></h4>
+<:resa:msg_descriptif_config:><br />
+-->
+<!-- titre=<:resa:configuration_plugin_resa:> -->
+
+<form method="post" action="#SELF">
+	<div>
+	[(#ENV{_cfg_}|form_hidden)]
+		<p>
+			<label for="nb_mois"><:resa:mois_a_afficher:></label>
+			<select name="nb_mois" id="nb_mois">
+			<?php for( $i = 1 ; $i <= 12 ; $i++ ) : ?>
+				<option value="<?php echo $i ; ?>" <?php echo (int) lire_config('resa/nb_mois') === $i ? 'selected="selected"' : '' ; ?>><?php echo $i ; ?></option>
+			<?php endfor ; ?>
+			</select>
+		</p>
+		<p>
+			<label for="mois_depart"><:resa:mois_depart:></label>
+			<select name="mois_depart" id="mois_depart">
+				<option value="0" <?php echo !((int) lire_config('resa/mois_depart')) ? 'selected="selected"' : '' ; ?>><:resa:mois_courant:></option>
+			<?php for( $i = 1 ; $i <= 12 ; $i++ ) : ?>
+				<option value="<?php echo $i ; ?>" <?php echo (int) lire_config('resa/mois_depart') === $i ? 'selected="selected"' : '' ; ?>><?php echo $i ; ?></option>
+			<?php endfor ; ?>
+			</select>
+		</p>
+		<p>
+			<label for="type_affichage_mois"><:resa:type_affichage_mois:></label>
+				<input type="radio" name="type_affichage_mois" id="type_affichage_mois" value="vertical" <?php echo lire_config('resa/type_affichage_mois') == 'vertical' ? 'checked="checked"' : '' ; ?> /><:resa:affichage_vertical:>
+				<input type="radio" name="type_affichage_mois" id="type_affichage_mois" value="horizontal" <?php echo lire_config('resa/type_affichage_mois') == 'horizontal' ? 'checked="checked"' : '' ; ?> /><:resa:affichage_horizontal:>
+		</p>
+		<input type="submit" name="_cfg_ok" value="<:resa:ok:>" />
+		<input type="submit" name="_cfg_delete" value="<:resa:supprimer:>" />
+	</div>
+</form>

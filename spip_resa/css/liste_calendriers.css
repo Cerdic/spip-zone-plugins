@@ -1,0 +1,60 @@
+/* CSS par dig^^ */
+
+table#liste-calendriers {
+  border-collapse: collapse;
+  border: 1px solid #03476F;
+  color: #363636;
+  background: #92C428;
+  }
+table#liste-calendriers caption {
+  text-align: center;
+  background: transparent;
+  padding:6px 4px 8px 0px;
+  color: #03476F;
+  text-transform: uppercase;
+  }
+table#liste-calendriers td, table#liste-calendriers th {
+  border: 1px dotted #03476F;
+  padding: .4em;
+  color: #363636;
+  }
+
+table#liste-calendriers thead th, table#liste-calendriers tfoot th {
+  border: 1px solid #03476F;
+  text-align: left;
+  background: #005d80;
+  color: #FFFFFF;
+  padding-top:3px;
+  }
+table#liste-calendriers tbody td a {
+  background: transparent;
+  text-decoration: none;
+  color: #363636;
+  }
+table#liste-calendriers tbody th a {
+  background: transparent;
+  text-decoration: none;
+  font-weight:normal;
+  color: #363636;
+  }
+table#liste-calendriers tbody th a:hover {
+  background: transparent;
+  color: #363636;
+  }
+table#liste-calendriers tbody th, tbody td {
+  vertical-align: center;
+  text-align: left;
+  }
+table#liste-calendriers .odd {
+  background: #AEE239;
+  }
+table#liste-calendriers tbody tr:hover {
+  background: #FFD800;
+  border: 1px solid #03476F;
+  color: #FFFFFF;
+  }
+table#liste-calendriers tbody tr:hover th,
+table#liste-calendriers tbody tr.odd:hover th {
+  background: #FFD800;
+  color: #FFFFFF;
+  }

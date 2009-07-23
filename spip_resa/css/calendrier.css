@@ -1,0 +1,14 @@
+/* CSS par dig^^ */
+
+table#calendrier-resa { text-align:center;margin:10px auto; }
+table#calendrier-resa td a { color:black;text-decoration:none; }
+table#calendrier-resa td, table#calendrier-resa th { border:1px solid grey;text-align:center; }
+table#calendrier-resa td.empty { background-color:#012d3e; }
+table#calendrier-resa td.jours { width:80px; }
+table#calendrier-resa td.jours, table#calendrier-resa thead th { background-color:#dbdbdb;font-weight:normal; }
+table#calendrier-resa td.libre { background-color:#005d80; }
+table#calendrier-resa td.reserve { background-color:#ff7800; }
+table#calendrier-resa th.empty { visibility:hidden; }
+table#calendrier-resa td, th { width:35px; }
+table#calendrier-resa td.reserve, table#calendrier-resa td.reserve a, table#calendrier-resa td.libre, table#calendrier-resa td.libre a { color:white; }
+table#calendrier-resa th span {	width:100%;float:left;line-height:15px; }
