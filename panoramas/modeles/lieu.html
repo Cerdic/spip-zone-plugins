@@ -53,6 +53,7 @@
 	
 
 	function verifier_objets_ramasses() {
+		
 		var partie_terminee=0;
 		for (var i=0; i<tableau_objets_a_ramasser.length; i++) {
 			if ($('div.panorama-panier ul').find('.objet'+tableau_objets_a_ramasser[i]).length > 0) {
@@ -62,8 +63,11 @@
 		}	
 		if (partie_terminee == tableau_objets_a_ramasser.length) {
 			var panorama_bravo = "<:panoramas:bravo:>";
-			$('.panorama-viewport').append("<div class='panorama-fond-demarrer'></div>")
+			/*$('.panorama-viewport').append("<div class='panorama-fond-demarrer'></div>")
 			.append("<div class='panorama-bouton-demarrer'><a href='#'>"+panoramas_bravo.replace("NOM_JOUEUR",$.cookie('nom_joueur'))+"</a></div>");
+			*/
+			$('.panorama-viewport').append("<div class='panorama-bouton-demarrer'><a href='#'>"+panoramas_bravo.replace("NOM_JOUEUR",$.cookie('nom_joueur'))+"</a></div>");
+			
 			
 			$('.panorama-bouton-demarrer a').bind('click', function(){
 					$.cookie('lieux_visites','');
@@ -168,8 +172,20 @@ $(document).ready(function(){
 			[(#TYPE|=={'objet'}|?{' ',''})
 				$('.type-objet#ID_DOCUMENT').bind('click', function() {
 							return false;
-						}).draggable({helper: 'clone', opacity: .4, revert: true});
-				$('.panorama-onglets-titres').droppable({
+						}).draggable({helper: 'clone', opacity: .4, revert: true})
+				.bind('dblclick',function(){  
+					  $('div.panorama-panier ul').append("<li><div class='objet#ID_DOCUMENT'><img src='#URL_DOCUMENT' /><span style='display: none;'>#ID_DOCUMENT</span></div></li>");
+						$('div.panorama-panier ul li div').draggable({helper: 'clone', opacity: .4, revert: true});
+						$('.type-objet#ID_DOCUMENT').remove();
+						
+						//mis � jour des cookies
+						var objets_ramasses = $('div.panorama-panier ul').html();
+						$.cookie('objets_ramasses', objets_ramasses);
+						
+						//v�rifier si on a trouv� tous les objets du jeu. Si oui, on affiche un message de f�licitation et la partie est termin�e
+						verifier_objets_ramasses();	
+				});
+				/*$('.panorama-onglets-titres').droppable({
 					accept: ".type-objet#ID_DOCUMENT",
 					activeClass: 'droppable-active',
 					hoverClass: 'droppable-hover',
@@ -185,7 +201,7 @@ $(document).ready(function(){
 						//v�rifier si on a trouv� tous les objets du jeu. Si oui, on affiche un message de f�licitation et la partie est termin�e
 						verifier_objets_ramasses();			
 					}
-				});
+				});*/
 				
 				[ (#REM) suppression des objets qui sont d�j� dans le panier ]
 				if ($('div.panorama-panier ul').find('.objet#ID_DOCUMENT').length > 0) {
@@ -482,6 +498,7 @@ $(document).ready(function(){
 	}
 
 	$(document).ready(function(){
+		$('.panorama-viewport').append("<div class='panorama-fond-demarrer'></div>");
 		[(#MODE_JEU|=={oui}|?{' ',''})
 		verifier_objets_ramasses();
 		if (!$.cookie('nom_joueur')) {
@@ -504,6 +521,9 @@ $(document).ready(function(){
 		[(#MODE_JEU|=={oui}|?{'',' '})
 			gestion_molette_souris();
 		]
+
+		$('.panorama-fond-demarrer').fadeOut(3000);
+					
 			
 	});
 </script>
