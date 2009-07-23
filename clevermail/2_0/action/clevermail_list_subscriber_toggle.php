@@ -3,7 +3,7 @@ function action_clevermail_list_subscriber_toggle_dist() {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
   $arg = $securiser_action();
   $lsr_id = $arg;
-  $mode = (sql_getfetsel("lsr_mode", "spip_cm_lists_subscribers", "lsr_id=".sql_quote($lsr_id)) + 1) % 3;
+  $mode = (sql_getfetsel("lsr_mode", "spip_cm_lists_subscribers", "lsr_id=".sql_quote($lsr_id)) + 1) % 2;
   
   if (sql_countsel("spip_cm_lists_subscribers", "lsr_id=".sql_quote($lsr_id)) == 1) {
 	  include_spip('inc/autoriser');

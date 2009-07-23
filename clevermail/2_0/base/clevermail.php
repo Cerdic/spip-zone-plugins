@@ -217,6 +217,13 @@ function clevermail_upgrade($nom_meta_base_version, $version_cible) {
       ecrire_meta($nom_meta_base_version,$current_version="0.4",'non');
       spip_log('Mise à jour des tables du plugin CleverMail en version 0.4', 'clevermail');
     }
+    if (version_compare($current_version,'0.5','<')) {
+      include_spip('base/abstract_sql');
+      // On avait inventé un troisième mode pour rien
+      sql_updateq("spip_cm_lists_subscribers", array('lsr_mode' => 1), "lsr_mode=2");
+      ecrire_meta($nom_meta_base_version,$current_version="0.5",'non');
+      spip_log('Mise à jour des tables du plugin CleverMail en version 0.5', 'clevermail');
+    }
   }
 }
 

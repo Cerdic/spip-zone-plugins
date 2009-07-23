@@ -35,11 +35,6 @@
 	              <input type="radio" name="#GET{name}" id="#GET{name}#GET{value}" class="radio" value="#GET{value}"[ (#ENV{#GET{name}}|=={#GET{value}}|oui)checked="checked"] />
 	              <label for="#GET{name}#GET{value}"><:clevermail:choix_version_html:></label>
 	            </div>
-	            #SET{value,2}
-	            <div class="choix">
-	              <input type="radio" name="#GET{name}" id="#GET{name}#GET{value}" class="radio" value="#GET{value}"[ (#ENV{#GET{name}}|=={#GET{value}}|oui)checked="checked"] />
-	              <label for="#GET{name}#GET{value}"><:clevermail:choix_version_composite:></label>
-	            </div>
 	        </li>
 	      </ul>
 	      <p class="boutons"><span class="image_loading"></span><input type="submit" class="submit" value="<:clevermail:bouton_inscription:>" /></p>

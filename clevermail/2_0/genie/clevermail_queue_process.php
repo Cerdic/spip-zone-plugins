@@ -58,14 +58,9 @@ function genie_clevermail_queue_process_dist($verbose = 'no') {
         	$body = array('html' => '', 'texte' => $text);
           break;
 				case 1:
-          $mode = 'html';
-          // TODO : que fait le facteur dans ce cas ?
-					$body = array('html' => '', 'texte' => $html);
-          break;
-        case 2:
         default:
-          $mode = 'composite';
-        	$body = array('html' => $html, 'texte' => $text);
+					$mode = 'html';
+					$body = array('html' => $html, 'texte' => $text);
           break;
       }
 			
