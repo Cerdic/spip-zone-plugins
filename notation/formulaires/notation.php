@@ -22,7 +22,9 @@ function formulaires_notation_charger_dist($objet, $id_objet){
 		'editable'=>true,
 		'note'=>0,
 		'note_ponderee'=>0,
-		'total'=>0
+		'total'=>0,
+		'_note_max' => notation_get_nb_notes(),
+		'_form_id' => "-$objet$id_objet"
 	);
 
 	
@@ -59,6 +61,10 @@ function formulaires_notation_charger_dist($objet, $id_objet){
 	else 
 		$where[] = "ip=" . sql_quote($ip);
 	$id_notation = sql_getfetsel("id_notation","spip_notations",$where);
+
+	if ($id_notation){
+		$valeurs['id_notation'] = $id_notation;
+	}
 	
 
 	// peut il modifier son vote ?
@@ -86,8 +92,10 @@ function formulaires_notation_verifier_dist($objet, $id_objet){
 	// note dans la bonne fourchette
 	} else {
 		$note = intval(_request("notation-$objet$id_objet"));
-		if($note<1 || $note>notation_get_nb_notes())
-			$erreurs['message_erreur'] = _T('notation:note_hors_plage');
+		if(($note<1 || $note>notation_get_nb_notes())
+			AND ($note!==-1) // annulation du vote
+			)
+			$erreurs['message_erreur'] = _T('notation:note_hors_plage'). $note;
 	}
 	return $erreurs;
 }
@@ -103,7 +111,7 @@ function formulaires_notation_traiter_dist($objet, $id_objet){
 	
 	// recuperation des champs
 	$note = intval(_request("notation-$objet$id_objet"));
-	$id_donnees	= _request('notation_id_donnees');
+	$id_donnees	= _request('notation_id_donnees'); // ne sert a rien ?
 
 	// Si pas inscrit : recuperer la note de l'objet sur l'IP
 	// Sinon rechercher la note de l'auteur
@@ -129,8 +137,10 @@ function formulaires_notation_traiter_dist($objet, $id_objet){
 	}
 
 	if ($id_notation){
-		if ($note=='-1') // annulation d'un vote
+		if ($note=='-1'){ // annulation d'un vote
 			supprimer_notation($id_notation);
+			$id_notation = 0;
+		}
 		else {
 			// Modifier la note
 			$c = array(
@@ -157,7 +167,7 @@ function formulaires_notation_traiter_dist($objet, $id_objet){
 		notation_recalculer_total($objet,$id_objet);
 	}
 
-	$res = array("editable"=>true,"message_ok"=>"");
+	$res = array("editable"=>true,"message_ok"=>_T("notation:jainote"),'id_notation'=>$id_notation);
 	
 	// peut il modifier son vote ?
 	include_spip('inc/autoriser');

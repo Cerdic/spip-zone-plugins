@@ -99,6 +99,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	'change_note_label' => "Autoriser les votants &agrave; modifier leur note ?",
 	'info_modifications' => "Modifications des notes",
+
+	'jaime' => 'J\'aime',
+	'jaimepas' => 'Je n\'aime pas',
+	'jechangedavis' => 'Je retire mon avis',
+	'jaidonnemonavis' => 'J\'ai donn&eacute; mon avis !',
 	
 );
 

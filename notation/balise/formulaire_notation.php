@@ -30,7 +30,6 @@ function balise_FORMULAIRE_NOTATION ($p) {
 			$_id_objet
 		)
 	);
-
 }
 
 
@@ -50,7 +49,7 @@ function balise_FORMULAIRE_NOTATION_stat($args, $filtres) {
 	} else {		
 		$objet = table_objet($objet);
 	}
-	// on envoie les arguments à la fonction charger 
+	// on envoie les arguments ï¿½ la fonction charger 
 	// du formulaire CVT fomulaires/notation.php
 	return array($objet, $id_objet);
 	

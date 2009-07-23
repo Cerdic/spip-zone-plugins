@@ -114,3 +114,14 @@
 	padding: 0 !important;
 	margin: 0;
 }
+
+/* formulaire jaime_jaimepas */
+.formulaire_jaime_jaimepas {}
+.formulaire_jaime_jaimepas div.rating-cancel,
+.formulaire_jaime_jaimepas div.star-rating {margin-bottom:2px;}
+.formulaire_jaime_jaimepas .note {margin:0 5px;}
+.formulaire_jaime_jaimepas .reponse_formulaire {clear:both;margin:0;font-size:90%;padding:3px 3px 0;}
+.formulaire_jaime_jaimepas form div {clear:both;}
+
+.formulaire_jaime_jaimepas form .submit {border:0;background:0;padding:1px 0;cursor:pointer;}
+.formulaire_jaime_jaimepas form .submit:hover {font-weight:bold;}
