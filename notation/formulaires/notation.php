@@ -122,33 +122,40 @@ function formulaires_notation_traiter_dist($objet, $id_objet){
 
 	// Premier vote
 	if (!$row){  // Remplir la table de notation
-		$id_notation = insert_notation();
+		if ($note!=='-1') // annulation d'un vote -> ne pas creer un id !
+			$id_notation = insert_notation();
 	} else {
 		$id_notation = $row['id_notation'];
 	}
+
+	if ($id_notation){
+		if ($note=='-1') // annulation d'un vote
+			supprimer_notation($id_notation);
+		else {
+			// Modifier la note
+			$c = array(
+				"objet" => $objet,
+				"id_objet" => $id_objet,
+				"note" => $note,
+				"id_auteur" => $id_auteur,
+				"ip" => $ip
+			);
+			modifier_notation($id_notation,$c);
+		}
 	
-	// Modifier la note
-	$c = array(			
-		"objet" => $objet,
-		"id_objet" => $id_objet,
-		"note" => $note,
-		"id_auteur" => $id_auteur,
-		"ip" => $ip
-	);
-	modifier_notation($id_notation,$c);
-	
-	// mettre a jour les stats
-	//
-	// cette action est presque devenue inutile
-	// comme la table spip_notations_objets 
-	// (qui devrait s'appeler spip_notations_stats plutot !)
-	// car le critere {notation} permet d'obtenir ces resultats
-	// totalements a jour...
-	// Cependant, quelques cas tres particuliers de statistiques
-	// font que je le laisse encore, comme calculer l'objet le mieux note :
-	// 	<BOUCLE_notes_pond(NOTATIONS_OBJETS){0,10}{!par note_ponderee}>
-	// qu'il n'est pas possible de traduire dans une boucle NOTATION facilement.
-	notation_recalculer_total($objet,$id_objet);	
+		// mettre a jour les stats
+		//
+		// cette action est presque devenue inutile
+		// comme la table spip_notations_objets
+		// (qui devrait s'appeler spip_notations_stats plutot !)
+		// car le critere {notation} permet d'obtenir ces resultats
+		// totalements a jour...
+		// Cependant, quelques cas tres particuliers de statistiques
+		// font que je le laisse encore, comme calculer l'objet le mieux note :
+		// 	<BOUCLE_notes_pond(NOTATIONS_OBJETS){0,10}{!par note_ponderee}>
+		// qu'il n'est pas possible de traduire dans une boucle NOTATION facilement.
+		notation_recalculer_total($objet,$id_objet);
+	}
 
 	$res = array("editable"=>true,"message_ok"=>"");
 	
@@ -177,6 +184,13 @@ function modifier_notation($id_notation,$c=array()) {
 	// pipeline post edition
 	return true;
 	
+}
+
+function supprimer_notation($id_notation) {
+	// pipeline pre edition
+	sql_delete('spip_notations','id_notation='.sql_quote($id_notation));
+	// pipeline post edition
+	return true;
 }
 
 
