@@ -1,7 +1,8 @@
 <?php
 
-
-function tree_open_close_dir(&$current,$target,$current_file){
+// variante repliee de la fonction de l'affichage de l'arbre des repertoires
+// http://doc.spip.org/@tree_open_close_dir
+function skeleditor_tree_open_close_dir(&$current,$target,$current_file){
 	if ($current == $target) return "";
 	$tcur = explode("/",$current);
 	$ttarg = explode("/",$target);
@@ -40,7 +41,7 @@ function skeleditor_afficher_dir_skel($file_list,$current_file,$img_extension) {
 		$dir = dirname($file);
 			
 		if ($dir != $current_dir)
-			$output .= tree_open_close_dir($current_dir,$dir,$current_file);
+			$output .= skeleditor_tree_open_close_dir($current_dir,$dir,$current_file);
 		if (!is_writable($dir))
 			$output .= "<div style='background:#3ff'>";
 		else
@@ -63,7 +64,7 @@ function skeleditor_afficher_dir_skel($file_list,$current_file,$img_extension) {
 		}
 		$output .= "</div>\n";
 	}
-	$output .= tree_open_close_dir($current_dir,$init_dir,$current_file);
+	$output .= skeleditor_tree_open_close_dir($current_dir,$init_dir,$current_file);
   $output .= "</div>\n";
   return $output;
 }
