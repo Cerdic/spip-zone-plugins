@@ -6,16 +6,19 @@
   	Dans le cas multiple, defaut et valeur doivent être un array, sinon un int
   - option_intro : chaine de langue de la premiere ligne vide ? (defaut:"")
     (seulement si non multiple)
+  - table_liaison : permet de ne lister que les groupes de mots liés à une table en particulier
+    (champs tables_liees de spip_groupes_mots)
   
   Exemple d'appel :
 	[(#SAISIE{groupe_mots,groupes,
 		label=<:plugin:secteur_region:>,
-		multiple=oui})] 
+		multiple=oui,
+		table_liaison=articles})] 
 ]
 <select name="#ENV{nom}[(#ENV{multiple}|?{[(#VAL{&#91;&#93;}|html_entity_decode)]})]" id="champ_#ENV{nom}"[ class="(#ENV{class})"][(#ENV{multiple}|oui) multiple="multiple"]>
 	[(#ENV{multiple}|non)
 	<option value="0">[(#ENV{option_intro})]</option>]
-	<BOUCLE_groupes(GROUPES_MOTS){par num titre, titre}{tout}>
+	<BOUCLE_groupes(GROUPES_MOTS){par num titre, titre}{tables_liees==#VAL{'(^|,)'}|concat{#ENV{table_liaison,.*},'($|,)'}}{tout}>
 		[(#ENV{multiple}|oui)
 		<option value="#ID_GROUPE"[(#ID_GROUPE|in_array{#ENV{valeur}|sinon{#ENV{defaut,#ARRAY}}}|oui) selected="selected"]>#TITRE</option>]
 		[(#ENV{multiple}|non)
