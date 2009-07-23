@@ -1,12 +1,12 @@
 <plugin>
 	<nom>Langue pr&eacute;f&eacute;r&eacute;e par l'internaute</nom>
-	<auteur>Nicolas Hoizey &#169; 2007 - Licence GNU/GPL</auteur>
-	<version>0.3</version>
+	<auteur>Nicolas Hoizey &#169; 2007 <br/>chryjs &#169; 2007<br/>BobCaTT &#169; 2009<br/>Licence GNU/GPL</auteur>
+	<version>0.4</version>
 	<etat>test</etat>
 	<description>
 <multi>
 [fr]
-Ce plugin (pour SPIP 1.9.2+) permet d'identifier les langues pr&eacute;f&eacute;r&eacute;es configur&eacute;es par l'internaute dans son navigateur et de lui proposer automatiquement la langue la plus pertinente dans un site multilingue ayant un secteur par langue.
+Ce plugin (pour SPIP 1.9.2+ et 2.0.0+) permet d'identifier les langues pr&eacute;f&eacute;r&eacute;es configur&eacute;es par l'internaute dans son navigateur et de lui proposer automatiquement la langue la plus pertinente dans un site multilingue ayant un secteur par langue.
 Ce m&eacute;canisme suppose qu'il n'y a pas de page sommaire particuli&egrave;re, les pages d'accueil localis&eacute;es &eacute;tant des pages de secteurs.
 
 Utilisez la balise <code>#LANGUE_PREFEREE_SECTEUR_REDIRECTION</code> dans <code>sommaire.html</code>, &agrave; l'exclusion de tout autre code, pour que l'internaute soit redirig&eacute; automatiquement vers le secteur qu'il est le plus susceptible de comprendre, selon la configuration de langue de son navigateur.
@@ -19,7 +19,7 @@ Ce choix est alors stock&eacute; dans un cookie pour utilisation ult&#233;rieure
 La balise <code>#LANGUE_PREFEREE_LIEN_EFFACE_COOKIE</code> permet de proposer un lien de suppression de ce cookie.
 <code>#LANGUE_PREFEREE_LIEN_EFFACE_COOKIE{mon message personnalise}</code> permet de remplacer le message propos&eacute; par d&eacute;faut.
 [en]
-This plugin (for SPIP 1.9.2+) checks the visitor browser prefered languages and redirects automagically to this language within a multi language website having one section per language.
+This plugin (for SPIP 1.9.2+ and 2.0.0+) checks the visitor browser prefered languages and redirects automagically to this language within a multi language website having one section per language.
 It requiers not to have a specific sommaire page, the home pages will be localized to each sectors.
 
 Use only the <code>#LANGUE_PREFEREE_SECTEUR_REDIRECTION</code> tag in <code>sommaire.html</code>, but any other code, allowing each visitors to be redirected to the most meaningful sector.
