@@ -7,9 +7,10 @@
 <form action=''  method='get'><div>
 <input type='hidden' name='exec' value='' />
 <textarea readonly='readonly' cols='40' rows='9' class='spip_cadre' dir='ltr'>
-<BOUCLE_rers_dom(MOTS){tous}{type_mot="Domaine de savoirs"}><BOUCLE_rers_art(ARTICLES){statut IN prepa,prop,publie}{id_mot}{id_rubrique=#CONFIG{rers/rers_rub_offres}}><BOUCLE_rers_aut(AUTEURS){id_article}>Offre;#_rers_dom:TITRE;#_rers_art:TITRE;#_rers_aut:NOM
+domaine de savoir	Offre ou demande	titre	auteur	détail
+<BOUCLE_rers_dom(MOTS){tous}{type_mot="Domaine de savoirs"}><BOUCLE_rers_art(ARTICLES){statut IN prepa,prop,publie}{id_mot}{id_rubrique=#CONFIG{rers/rers_rub_offres}}><BOUCLE_rers_aut(AUTEURS){id_article}>#_rers_dom:TITRE	Offre	#_rers_art:TITRE	#_rers_aut:NOM	[(#_rers_art:TEXTE|textebrut|replace{\n,|})]
 </BOUCLE_rers_aut></BOUCLE_rers_art></BOUCLE_rers_dom>
-<BOUCLE_rers_dom2(MOTS){tous}{type_mot="Domaine de savoirs"}><BOUCLE_rers_art2(ARTICLES){statut IN prepa,prop,publie}{id_mot}{id_rubrique=#CONFIG{rers/rers_rub_demandes}}><BOUCLE_rers_aut2(AUTEURS){id_article}>Demande;#_rers_dom2:TITRE;#_rers_art2:TITRE;#_rers_aut2:NOM
+<BOUCLE_rers_dom2(MOTS){tous}{type_mot="Domaine de savoirs"}><BOUCLE_rers_art2(ARTICLES){statut IN prepa,prop,publie}{id_mot}{id_rubrique=#CONFIG{rers/rers_rub_demandes}}><BOUCLE_rers_aut2(AUTEURS){id_article}>#_rers_dom2:TITRE	Demande	#_rers_art2:TITRE	#_rers_aut2:NOM	[(#_rers_art:TEXTE|textebrut|replace{\n,-})]
 </BOUCLE_rers_aut2></BOUCLE_rers_art2></BOUCLE_rers_dom2>
 </textarea></div></form>
 

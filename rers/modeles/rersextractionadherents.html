@@ -6,7 +6,8 @@
 <form action=''  method='get'><div>
 <input type='hidden' name='exec' value='' />
 <textarea readonly='readonly' cols='40' rows='9' class='spip_cadre' dir='ltr'>
-<BOUCLE_email4(AUTEURS){tous}{statut IN 0minirezo,1comite}{par nom}>#NOM;[(#EMAIL|textebrut)];[(#STATUT|=={'1comite'}|?{rédacteur,''})][(#STATUT|=={'0minirezo'}|?{administrateur,''})];[(#EN_LIGNE|affdate{'Y-m-d'})]
+Nom	Email	Statut	Derniere connexion
+<BOUCLE_email4(AUTEURS){tous}{statut IN 0minirezo,1comite}{par nom}>#NOM,[(#EMAIL|textebrut)],[(#STATUT|=={'1comite'}|?{rédacteur,''})][(#STATUT|=={'0minirezo'}|?{administrateur,''})],[(#EN_LIGNE|affdate{'Y-m-d'})]
 </BOUCLE_email4></textarea></div></form>
 
 

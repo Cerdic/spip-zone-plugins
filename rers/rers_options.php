@@ -2,18 +2,31 @@
 
 	function rers_ajouter_boutons($boutons_admin) {
 		// si on est admin
+		$rers_rub_extraction = lire_config('rers/rers_rub_extraction');
+
+
 
 		if ($GLOBALS['connect_statut'] == "0minirezo") {
 		  // on voit le bouton comme  sous-menu de "naviguer"
 			$boutons_admin['configuration']->sousmenu['cfg&cfg=rers']= new Bouton("plugin-24.gif", _T('Plugin RERS') );
 			$boutons_admin['forum']->sousmenu['controle_forum&type=interne']= new Bouton("suivi-forum-24.gif", _T('Suivi des forums privés') );
+
+
+
+		   if ($rers_rub_extraction) {
+			$boutons_admin['naviguer']->sousmenu['naviguer&id_rubrique='.$rers_rub_extraction]= 
+			  new Bouton("breve-24.gif", "Rubrique Extractions" );
+		   }
+
+
+
 		}
 		return $boutons_admin;
 	}
 	
 
 
-function rers_affiche_aide($flux) {
+	function rers_affiche_aide($flux) {
 	$rers_rub_offres = lire_config('rers/rers_rub_offres');
 	$rers_rub_demandes = lire_config('rers/rers_rub_demandes');
 	$rers_rub_vie = lire_config('rers/rers_rub_vie');

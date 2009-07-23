@@ -59,6 +59,25 @@
   	 </BOUCLE_secteurs3>
    </select>
 
+
+<br />   
+   <label>Choix de la rubrique &agrave; utiliser comme rubrique EXTRACTION de la base de données :</label>
+   <select name="rers_rub_extraction">
+     <option value="">Choisir...</option>
+  	 <BOUCLE_secteurs4(RUBRIQUES) {racine}{tout} {par num titre}>
+	    <option value="#ID_RUBRIQUE" 
+		[(#CONFIG{rers/rers_rub_extraction}|=={#ID_RUBRIQUE}|?{selected="selected",''})]>
+		#TITRE</option>
+  			<BOUCLE_rubriques4(RUBRIQUES) {tout}{id_parent} {par num titre}>
+		    <option value="#ID_RUBRIQUE" 
+			[(#CONFIG{rers/rers_rub_extraction}|=={#ID_RUBRIQUE}|?{selected="selected",''})]>
+			&nbsp;&nbsp;#TITRE</option>
+  				 <BOUCLE_sous_rubriques4(BOUCLE_rubriques)></BOUCLE_sous_rubriques4>
+  			</BOUCLE_rubriques4>
+  	 </BOUCLE_secteurs4>
+   </select>
+
+
 </fieldset>
 
 <fieldset><legend>Données personnelles des adhérents</legend>
