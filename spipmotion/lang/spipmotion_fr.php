@@ -1,18 +1,26 @@
 <?php
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+
+	// D
+	'document_dans_file_attente' => 'Ce document est dans la file d\'attente pour l\'encodage',
+	
 	// E
 	'encoder_video' => '(R&eacute;)encoder cette vid&eacute;o',
-	'extensions_prises_en_charge' => 'Formats pris en charge de base',
+	'explications_extensions_prises_en_charge' => 'Les formats pris en charge sont l\'ensemble des formats de fichiers qui seront trait&eacute;s par SPIPmotion pour r&eacute;cup&eacute;rer diverses information (longueur,taille,vignette...)',
+	'explications_extensions_prises_en_charge_encodage' => 'Ces formats sont ceux qui seront transcod&eacute;s automatiquement ou &agrave; la demande',
+	'explications_extensions_sortie' => 'Ces extensions sont les formats vers lesquels les fichiers seront encod&eacute;s, vous pourvez en choisir plusieur par type (attention &agrave; la lourdeur pour le serveur cependant).',
 	'extensions_audio' => 'Formats audio',
 	'extensions_video' => 'Formats vid&eacute;o',
-	'extensions_prises_en_charge_encodage' => 'Formats pris en charge pour l\'encodage',
-
-	// F
-	'document_dans_file_attente' => 'Ce document est dans la file d\'attente pour l\'encodage',
 	
 	// G
 	'gestion_format_entree' => 'Gestion des formats d\'entr&eacute;e',
+	'gestion_format_sortie' => 'Gestion des formats de sortie',
+	
+	// L
+	'label_extensions_prises_en_charge_encodage' => 'Formats pris en charge pour l\'encodage',
+	'label_extensions_prises_en_charge' => 'Formats pris en charge de base',
+	'label_extensions_sortie' => 'Formats d\'encodage',
 	
 	// S
 	'select_all' => 'Tout s&eacute;lectionner',

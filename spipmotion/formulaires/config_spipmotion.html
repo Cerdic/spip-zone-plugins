@@ -19,47 +19,122 @@
 
 <form method="post" action="#ENV{action}">
 <div>
-#ACTION_FORMULAIRE{#ENV{action}}
-<ul>
-	<li class="fieldset">
-		<fieldset>
-			<h3 class="legend"><:spipmotion:options_config:></h3>
-			<ul>
-				[(#SAISIE{input,chemin}
-					{label=<:spipmotion:chemin_executable:>}
-					{defaut=/usr/local/bin/ffmpeg})]
-					
-				[(#SAISIE{input,width}
-					{label=<:spipmotion:width_video:>}
-					{defaut=480}{size=4})]
-					
-				[(#SAISIE{input,height}
-					{label=<:spipmotion:height_video:>}
-					{defaut=320}{size=4})]
-					
-				[(#SAISIE{input,bitrate}
-					{label=<:spipmotion:bitrate:>}
-					{defaut=418}{size=4})]
-					
-				[(#SAISIE{input,fps}
-					{label=<:spipmotion:framerate:>}
-					{defaut=15}{size=4})]
-					
-				[(#SAISIE{input,frequence_audio}
-					{label=<:spipmotion:frequence_audio:>}
-					{defaut=22050}{size=6})]
-					
-				[(#SAISIE{input,bitrate_audio}
-					{label=<:spipmotion:bitrate_audio:>}
-					{defaut=64}{size=4})]
-			</ul>
-		</fieldset>
-	</li>
-</ul>
-<p class="boutons">
-	<input type="submit" name="_cfg_ok" value="<:cfg:ok:>" class="submit" />
-	<input type="reset" value="<:reset:>" class="reset" />
-</p>
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<ul>
+		<li class="fieldset">
+			<fieldset>
+				<h3 class="legend"><:spipmotion:options_config:></h3>
+				<ul>
+					[(#SAISIE{input,chemin}
+						{label=<:spipmotion:chemin_executable:>}
+						{defaut=/usr/local/bin/ffmpeg})]
+						
+					[(#SAISIE{input,width}
+						{label=<:spipmotion:width_video:>}
+						{defaut=480}{size=4})]
+						
+					[(#SAISIE{input,height}
+						{label=<:spipmotion:height_video:>}
+						{defaut=320}{size=4})]
+						
+					[(#SAISIE{input,bitrate}
+						{label=<:spipmotion:bitrate:>}
+						{defaut=418}{size=4})]
+						
+					[(#SAISIE{input,fps}
+						{label=<:spipmotion:framerate:>}
+						{defaut=15}{size=4})]
+						
+					[(#SAISIE{input,frequence_audio}
+						{label=<:spipmotion:frequence_audio:>}
+						{defaut=22050}{size=6})]
+						
+					[(#SAISIE{input,bitrate_audio}
+						{label=<:spipmotion:bitrate_audio:>}
+						{defaut=64}{size=4})]
+				</ul>
+			</fieldset>
+		</li>
+		<li class="fieldset">
+			<fieldset>
+				<h3 class="legend"><:spipmotion:gestion_format_entree:></h3>
+				<ul>
+					<li>
+						<label><:spipmotion:label_extensions_prises_en_charge:></label>
+						<div class="explication"><:spipmotion:explications_extensions_prises_en_charge:></div>
+						#SET{extensions,#ARRAY}
+						<p class="explications"><:spipmotion:extensions_audio:></p>
+						<select name="fichiers_audios[]" multiple="multiple">
+							<BOUCLE_sons(TYPES_DOCUMENTS){mime_type LIKE audio/%}{extension !IN #GET{extensions}}>
+								<option value="#EXTENSION"[(#EXTENSION|in_any{#ENV{fichiers_audios}}|oui) selected="selected"]>#EXTENSION - #MIME_TYPE</option>
+								#SET{extensions,#GET{extensions}|push{#EXTENSION}}
+							</BOUCLE_sons>
+						</select>
+						<p><a href="#" class="select_all"><:spipmotion:select_all:></a> <a href="#" class="unselect_all"><:spipmotion:unselect_all:></a></p>
+						
+						#SET{videos,#ARRAY|push{mp4}|push{m4v}}
+						<BOUCLE_videos(TYPES_DOCUMENTS){mime_type LIKE video/%}{extension !IN #GET{extensions}}>
+						#SET{videos,#GET{videos}|push{#EXTENSION}}
+						</BOUCLE_videos>
+						<p class="explications"><:spipmotion:extensions_video:></p>
+						<select name="fichiers_videos[]" multiple="multiple">
+							<BOUCLE_videos1(TYPES_DOCUMENTS){extension IN #GET{videos}}>
+								#SET{extensions,#GET{extensions}|push{#EXTENSION}}
+								<option value="#EXTENSION"[(#EXTENSION|in_any{#ENV{fichiers_videos}}|oui) selected="selected"]>#EXTENSION - #MIME_TYPE</option>
+							</BOUCLE_videos1>
+						</select>
+						<p><a href="#" class="select_all"><:spipmotion:select_all:></a> <a href="#" class="unselect_all"><:spipmotion:unselect_all:></a></p>
+					</li>
+					<li>
+						<label><:spipmotion:label_extensions_prises_en_charge_encodage:></label>
+						<div class="explication"><:spipmotion:explications_extensions_prises_en_charge_encodage:></div>
+						<p class="explications"><:spipmotion:extensions_audio:></p>
+						<B_sons_encodage>
+						<select name="fichiers_audios_encodage[]" multiple="multiple">
+							<BOUCLE_sons_encodage(TYPES_DOCUMENTS){extension IN #CONFIG{spipmotion/fichiers_audios}}>
+								<option value="#EXTENSION"[(#EXTENSION|in_any{#CONFIG{spipmotion/fichiers_audios_encodage}}|oui) selected="selected"]>#EXTENSION - #MIME_TYPE</option>
+							</BOUCLE_sons_encodage>
+						</select>
+						<p><a href="#" class="select_all"><:spipmotion:select_all:></a> <a href="#" class="unselect_all"><:spipmotion:unselect_all:></a></p>
+						</B_sons_encodage>
+						<:spipmotion:configurer_avant_fichiers_audio:>
+						<//B_sons_encodage>
+						
+						<p class="explications"><:spipmotion:extensions_video:></p>
+						<B_videos1_encodage>
+						<select name="fichiers_videos_encodage[]" multiple="multiple">
+							<BOUCLE_videos1_encodage(TYPES_DOCUMENTS){extension IN #CONFIG{spipmotion/fichiers_videos}}>
+								<option value="#EXTENSION"[(#EXTENSION|in_any{#CONFIG{spipmotion/fichiers_videos_encodage}}|oui) selected="selected"]>#EXTENSION - #MIME_TYPE</option>
+							</BOUCLE_videos1_encodage>
+						</select>
+						<p><a href="#" class="select_all"><:spipmotion:select_all:></a> <a href="#" class="unselect_all"><:spipmotion:unselect_all:></a></p>
+						</B_videos1_encodage>
+						<:spipmotion:configurer_avant_fichiers_video:>
+						<//B_videos1_encodage>
+					</li>
+				</ul>
+			</fieldset>
+		</li>
+		[(#CONFIG{spipmotion/fichiers_audios_encodage,#ARRAY}|array_merge{#CONFIG{spipmotion/fichiers_videos_encodage,#ARRAY}}|count|>{0}|oui)
+			<INCLURE{fond=formulaires/spipmotion_sortie}{env}>
+		]
+	</ul>
+	<p class="boutons">
+		<input type="submit" name="_cfg_ok" value="<:cfg:ok:>" class="submit" />
+		<input type="reset" value="<:reset:>" class="reset" class="submit" />
+	</p>
 </div>
 </form>
 </div>
+<script type="text/javascript"><!--
+jQuery(document).ready(function(){
+	jQuery('a.select_all').click(function(){
+		jQuery(this).parent().prev('select').find('option').attr('selected', true);
+		return false;
+	});
+	jQuery('a.unselect_all').click(function(){
+		jQuery(this).parent().prev('select').find('option').attr('selected', false);
+		return false;
+	});
+});
+// --></script>
