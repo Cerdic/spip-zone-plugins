@@ -1,5 +1,9 @@
 Outil de prototypage de sites sous SPIP
 
+La table (ou le plugin) pourrait s'appeler aussi "spip_mine_section"
+par section on entend : section d'un site;
+voir concurrences.com, la section "antitrust" : http://www.concurrences.com/rubrique.php3?id_rubrique=512&lang=en
+
 Pour la gestion de :
 
 - pages 
