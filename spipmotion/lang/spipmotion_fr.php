@@ -7,11 +7,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	// E
 	'encoder_video' => '(R&eacute;)encoder cette vid&eacute;o',
-	'explications_extensions_prises_en_charge' => 'Les formats pris en charge sont l\'ensemble des formats de fichiers qui seront trait&eacute;s par SPIPmotion pour r&eacute;cup&eacute;rer diverses information (longueur,taille,vignette...)',
+	'explications_extensions_prises_en_charge' => 'Les formats pris en charge sont l\'ensemble des formats de fichiers qui seront trait&eacute;s par SPIPmotion pour r&eacute;cup&eacute;rer diverses informations (longueur, taille, vignette...)',
 	'explications_extensions_prises_en_charge_encodage' => 'Ces formats sont ceux qui seront transcod&eacute;s automatiquement ou &agrave; la demande',
-	'explications_extensions_sortie' => 'Ces extensions sont les formats vers lesquels les fichiers seront encod&eacute;s, vous pourvez en choisir plusieur par type (attention &agrave; la lourdeur pour le serveur cependant).',
-	'extensions_audio' => 'Formats audio',
-	'extensions_video' => 'Formats vid&eacute;o',
+	'explications_extensions_sortie' => 'Ces extensions sont les formats vers lesquels les fichiers seront encod&eacute;s, vous pouvez en choisir plusieurs par type (attention &agrave; la lourdeur pour le serveur cependant).',
+	'extensions_audio' => 'Formats audios',
+	'extensions_video' => 'Formats vid&eacute;os',
 	
 	// G
 	'gestion_format_entree' => 'Gestion des formats d\'entr&eacute;e',
@@ -32,18 +32,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre' => 'SPIPmotion',
 	'spipmotion_boite' => 'Configuration de SPIPmotion',
 	'titrepage' => 'SPIPmotion : Publication ais&eacute;e de vid&eacute;os sur internet',
-	'spipmotion_descriptif' => 'Ce plugin permet d"encoder à la vol&eacute;e des vid&eacute;os au format flv depuis les formats MP4/MPG/AVI/MOV... Pour l\'instant on se contente de la vid&eacute;o ... on verra plus tard pour le reste...',
+	'spipmotion_descriptif' => 'Ce plugin permet d"encoder à la vol&eacute;e des vid&eacute;os au format FLV depuis les formats MP4/MPG/AVI/MOV... Pour l\'instant on se contente de la vid&eacute;o... on verra plus tard pour le reste...',
 	'spipmotion_liens'=>'Liens compl&eacute;mentaires : ',
-	'lien_ffmpeg_mac'=>'Installer FFMpeg sur Mac OSX',
-	'lien_ffmpeg_linux'=>'Installer FFMpeg sur Mac OSX',
+	'lien_ffmpeg_mac'=>'Installer FFmpeg sur Mac OSX',
+	'lien_ffmpeg_linux'=>'Installer FFmpeg sur Linux',
 	'lien_flvtool'=>'Installer FLVTool2',
 	'gros_titre' => 'SPIPmotion : Publication ais&eacute;e de vid&eacute;os sur internet',
 	'chemin_executable' => 'Chemin de l\'ex&eacute;cutable FFmpeg sur le serveur :',
 	'width_video' => 'Largeur de la sortie en px : ',
 	'height_video' => 'Hauteur de la sortie en px : ',
-	'bitrate' => 'Bitrate vid&eacute;o de la sortie en kbps : ',
+	'bitrate' => 'Bitrate vid&eacute;o de la sortie en Kbps : ',
 	'framerate' => 'Nombre d\'images par seconde : ',
-	'bitrate_audio' => 'Bitrate audio de la sortie en kbps : ',
+	'bitrate_audio' => 'Bitrate audio de la sortie en Kbps : ',
 	'frequence_audio' => 'Fr&eacute;quence d\'&eacute;chantillonage audio : ',
 	'options_config' => 'Configuration de l\'encodage',
 	'bouton_ajouter_videos' => 'AJOUTER UNE VID&Eacute;O',
@@ -54,7 +54,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_encoder' => 'Encoder',
 	'bouton_encoder_videos' => 'VID&Eacute;OS &Agrave; ENCODER',
 	'verifier_droits' => 'V&eacute;rifiez les droits du fichier "script_bash/spipmotion.sh". Les droits sur ce fichier doivent &ecirc;tre en 777.',
-	'encodage_en_cours' => 'ENCODAGE EN COURS ...',
+	'encodage_en_cours' => 'ENCODAGE EN COURS...',
 	
 	// V
 	'video_infos_techniques' => 'Informations techniques...',
@@ -70,7 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'video_audiosamplerate' => 'Fr&eacute;quence d\'&eacute;chantillonnage audio : ',
 	'video_videocodec' => 'Codec vid&eacute;o : ',
 	'video_audiocodec' => 'Codec audio : ',
-	'video_audiochannels' => 'Nombres de canaux audios : ',
+	'video_audiochannels' => 'Nombre de canaux audios : ',
 	
 	// R
 	'recuperer_logo' => 'R&eacute;cup&eacute;rer un logo depuis la vid&eacute;o',
