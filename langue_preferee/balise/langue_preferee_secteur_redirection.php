@@ -6,6 +6,7 @@
  * Auteur :
  * Nicolas Hoizey
  * modification : chryjs - exclusion de rubriques
+ * modification : BobCaTT (www.menfin.net) suport spip 2.0 
  * © 2007 - Distribue sous licence GNU/GPL
  */
 
@@ -99,8 +100,13 @@ function balise_LANGUE_PREFEREE_SECTEUR_REDIRECTION_dyn($liste_rub_exclues="")
     $res = sql_query($query) ; // was spip_query($query);
     if ($row = sql_fetch($res)) { // was spip_fetch_array
         $id_rubrique = $row['id_rubrique'];
-	if (!function_exists('generer_url_rubrique')) { include_spip('urls/'.$GLOBALS['type_urls']); }
-        $url_rubrique = generer_url_rubrique($id_rubrique);
+	if ( $GLOBALS['spip_version_code']<1.93) { // spip 1.9.x
+		if (!function_exists('generer_url_rubrique')) { include_spip('urls/'.$GLOBALS['type_urls']); }
+		$url_rubrique = generer_url_rubrique($id_rubrique);
+	} else { // spip 2.x
+		if (!function_exists('generer_url_entite')) { include_spip('inc/utils'); }
+        	$url_rubrique = generer_url_entite($id_rubrique,'rubrique');
+	}
         spip_log('Redirection vers '.$url_rubrique);
         header('Location: '.$url_rubrique);
         exit;
