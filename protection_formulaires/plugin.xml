@@ -12,7 +12,7 @@
 	test
 	</etat>
 	<description>
-	Proteger les formulaires des sorties de pages.
+	Exp&eacute;rimental: quand on a modifi&eacute; un formulaire dans l'espace priv&eacute;, les liens hypertexte sont intercept&eacute;s par un message de confirmation, de fa&ccedil;on &agrave; &eacute;viter de perdre accidentellement les modifications.
 	</description>
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
 	sur le mode Rien::
