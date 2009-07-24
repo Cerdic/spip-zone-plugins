@@ -66,8 +66,8 @@ function agrandirTextarea(el) {
 	/* Au passage: corriger bug d'affichage Firefox 2: certains elements de pages restaient au dessus du textarea */
 	$("body").css ({
 		overflow: "hidden",
-		marginTop: -1 * $(window).height(),
-		height: $(window).height()
+		marginTop: -1 * $("body").height(),
+		height: $("body").height()
 	});
 	
 	/* Afficher bouton expliquant touche Escape pour sortir */
