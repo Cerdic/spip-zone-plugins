@@ -13,7 +13,7 @@
     
     <lien></lien>
     <prefix>saisies</prefix>
-    <icon>img_pack/application-edit.png</icon>
+    <icon>img_pack/logo_saisie_48.png</icon>
     
     <fonctions>balise/saisie.php</fonctions>
 	<necessite id="SPIP" version="[2.0;]" />
