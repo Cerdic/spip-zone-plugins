@@ -1,0 +1,105 @@
+<a name="abo"></a>
+[(#ENV{oubli_pass}|=={oui}|?{' ',''})
+	<h2><:pass_mot_oublie:></h2>
+
+	[(#ENV*{erreur})]
+
+	[(#ENV{erreur}|?{'',' '})
+	<:pass_indiquez_cidessous:>
+	
+	<form action="#SELF" method="post">
+		<div style="text-align:right">
+				<input type="text" class="spip_formulaires" name="email_oubli" value="" />
+				<input type="hidden" name="oubli_pass" value="oui" />
+				<input type="submit" class="spip_bouton" name="oubli" value="<:pass_ok:>" />
+		</div>
+	</form>	
+
+	]
+]
+
+<div class="formulaire_spip formulaire_inscription">
+[(#REM) 
+texte d'inscription en tant que rédacteur
+]
+[(#ENV{inscription_redacteur}|=={oui}|?{' ',''})
+<fieldset>
+<legend style="color:#000000"><:spiplistes:devenir_abonne:></legend>
+<strong><:spiplistes:devenir_redac:></strong>
+<div><:spiplistes:inscription_redacteurs:></div>
+<div style="margin-top:5px"><:form_forum_indiquer_nom_email:></div>
+</fieldset>
+]
+
+[(#REM) 
+texte d'inscription en tant que visiteur
+]
+[(#ENV{inscription_visiteur}|=={oui}|?{' ',''})
+<fieldset>
+<legend style="color:#000000"><:spiplistes:devenir_abonne:></legend>
+<div><:spiplistes:inscription_visiteurs:></div>
+<div style="margin-top:5px"><:form_forum_indiquer_nom_email:></div>
+	[(#CONFIG{accepter_inscriptions}|=={oui}|?{' ',''})
+	<div style="margin-top:5px">(<:spiplistes:vous_pouvez_egalement:> <a href="[(#SELF|parametre_url{'type','redac'})]"><:spiplistes:vous_inscrire_auteur:></a>)
+	</div>
+	]
+</fieldset>
+]
+
+
+[<span style="color:red">(#ENV*{reponse_formulaire})</span>]
+
+
+[(#ENV{mode_login}|?{' ',''})
+	<form action="#SELF#spip-listes" method="post">
+]
+		<div><a name="spip-listes"></a></div>
+		<BOUCLE_liste(LISTES) {statut=liste} {id_liste=#ENV{liste}} {0,(#ENV{mode_login}|?{1,0})}>
+			[<fieldset style="margin-bottom:1em;">
+			[<legend style="font-weight:bold;">(#TITRE)</legend>]
+			(#TEXTE)
+			</fieldset>]
+		</BOUCLE_liste>
+
+		
+		<B_listes>
+			<fieldset>
+			<legend style="color:#000000">[(#TOTAL_BOUCLE|=={1}|?{
+				<:spiplistes:abo_1_lettre:></legend>
+				,<:spiplistes:abo_listes:></legend>})]
+			
+		<BOUCLE_listes(LISTES) {statut=liste} {0,(#ENV{mode_login}|?{100,0})}>
+				[(#TOTAL_BOUCLE|=={1}|?{' ',''})
+				<input type="hidden" name="list&#91;&#93;"  checked="checked" value="#ID_LISTE" />
+				]
+				[(#TOTAL_BOUCLE|!={1}|?{' ',''})
+				<div style="text-align:left; padding:0px 0px 4px 0px;clear:both">
+				<label><input type="checkbox" name="list&#91;&#93;"  [(#COMPTEUR_BOUCLE|=={1}|?{'checked="checked"',''})]  value="#ID_LISTE" />#TITRE</label></div>]
+		</BOUCLE_listes>
+		[(#COMPTEUR_BOUCLE|!={1}|?{'<br />',''})]
+		</B_listes>
+			[(#ENV{mode_login}|?{' ',''})
+			<fieldset style="color:#000000">
+			<legend><:spiplistes:abo_1_lettre:></legend>]
+		<//B_listes>
+		[(#ENV{mode_login}|?{' ',''})
+		<div>
+				<input name="suppl_abo" id="suppl_abo_html" value="html"  type="hidden" />
+				
+			[(#ENV{acces_membres}|=={oui}|?{' ',''})
+				<div style="margin-top:5px"><label for="nom_inscription_" style="font-weight:bold;"><:form_pet_votre_nom:></label></div>
+				<input type="text" class="forml" style="width:12em" name="nom_inscription_" id="nom_inscription_" value="" size="30" style="clear:both;" />
+				]
+			<div style="margin-top:5px"><label for="mail_inscription_" style="font-weight:bold;"><:form_pet_votre_email:></label></div>
+			<input type="text" class="forml" style="width:12em;clear:both;" name="mail_inscription_" id="mail_inscription_" value="" size="30" />
+			<div>
+			<input name="desabo" id="suppl_abo_oui" value="non" checked="checked" type="radio" />
+			<label for="suppl_abo_oui"><:spiplistes:abonnement_0:></label>
+			</div>
+			<div>
+			<input name="desabo" id="desabo" value="oui" type="radio" />
+				<label for="desabo"><:spiplistes:desabonnement:></label>
+			</div>
+		<div class="spip_bouton" style="text-align:right"><input type="submit" name="Valider" value="<:bouton_valider:>" /></div>
+		</div></fieldset></form>]
+</div>
