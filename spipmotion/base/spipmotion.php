@@ -19,6 +19,7 @@ function spipmotion_declarer_tables_principales($tables_principales){
 		"id_objet" => "BIGINT(21) NOT NULL DEFAULT '0'",
 		"objet" => "VARCHAR(25)",
 		"id_auteur" => "BIGINT(21) NOT NULL DEFAULT '0'",
+		"extension"	=> "VARCHAR(10) DEFAULT '' NOT NULL",
 		"encode"	=> "VARCHAR(21)",
 		"maj" => "TIMESTAMP"
 	);

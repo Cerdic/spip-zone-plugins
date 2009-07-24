@@ -22,6 +22,7 @@
 	<necessite id="SPIP" version="[2.0;]" />
 	<necessite id='cfg' version='[1.13;]' />
 	<necessite id='saisies' version='[1.0;]' />
+	<necessite id='spip_bonux' version='[1.8;]' />
 	<options>
 	spipmotion_options.php
 	</options>

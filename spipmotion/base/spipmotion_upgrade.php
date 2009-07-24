@@ -1,6 +1,6 @@
 <?php
 	
-	$GLOBALS['spipmotion_base_version'] = 0.5;
+	$GLOBALS['spipmotion_base_version'] = 0.6;
 	function spipmotion_verifier_base(){
 		$version_base = $GLOBALS['spipmotion_base_version'];
 		$current_version = 0.0;
@@ -46,6 +46,11 @@
 				sql_alter("TABLE spip_documents ADD `id_orig` BIGINT(21) NOT NULL AFTER `audiochannels`");
 				ecrire_meta('spipmotion_base_version',$current_version=0.5);
 				echo 'Mise &agrave; jour de la base de spipmotion en 0.5';
+			}
+			if ($current_version<0.6){
+				sql_alter("TABLE spip_spipmotion_attentes ADD `extension` VARCHAR(10) DEFAULT '' NOT NULL AFTER `id_auteur`");
+				ecrire_meta('spipmotion_base_version',$current_version=0.6);
+				echo 'Mise &agrave; jour de la base de spipmotion en 0.6';
 			}
 			/**
 			 * TODO : générer un htaccess dans le répertoire script_bash/
