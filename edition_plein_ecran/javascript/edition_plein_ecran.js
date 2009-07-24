@@ -8,6 +8,24 @@ var ie6 = jQuery.browser.msie &&
 	parseInt(jQuery.browser.version) == 6 &&
 	typeof window['XMLHttpRequest'] != "object";
 
+/* Innerheight parce que jquery 1.1.1 ne le fait pas... */
+/* Nom de fonction impossible pour eviter conflits */
+function hauteurWindowPourTextarea() {
+  var myWidth = 0, myHeight = 0;
+  if( typeof( window.innerWidth ) == 'number' ) {
+    //Non-IE
+    myHeight = window.innerHeight;
+  } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+    //IE 6+ in 'standards compliant mode'
+    myHeight = document.documentElement.clientHeight;
+  } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+    //IE 4 compatible
+    myHeight = document.body.clientHeight;
+  }
+  return myHeight;
+}
+
+
 
 /* Afficher en mode plein ecran et forcer le ScrollTop */
 /* Est appele quand double clic, et quand redimensionnement de l'ecran */
@@ -23,10 +41,10 @@ function changerDimensions(el) {
 		width: "550px", 
 		paddingLeft: Math.floor(($("body").width() - 550) / 2),
 		paddingRight: Math.ceil(($("body").width() - 550) / 2),
-		height: window.innerHeight - (60 + 30),
+		height: hauteurWindowPourTextarea() - (60 + 30),
 		paddingTop: "30px",
 		paddingBottom: "30px",
-		border: "1", 
+		border: "0", 
 		backgroundColor : "white",
 		zIndex: 1000
 	});
@@ -90,8 +108,8 @@ function agrandirTextarea(el) {
 	/* Au passage: corriger bug d'affichage Firefox 2: certains elements de pages restaient au dessus du textarea */
 	$("body").css ({
 		overflow: "hidden",
-		marginTop: -1 * $("body").height(),
-		height: $("body").height()
+		marginTop: -1 * hauteurWindowPourTextarea(),
+		height: hauteurWindowPourTextarea()
 	});
 	
 	/* Afficher bouton expliquant touche Escape pour sortir */
