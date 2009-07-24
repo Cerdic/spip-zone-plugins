@@ -12,6 +12,7 @@ var ie6 = jQuery.browser.msie &&
 /* Afficher en mode plein ecran et forcer le ScrollTop */
 /* Est appele quand double clic, et quand redimensionnement de l'ecran */
 function changerDimensions(el) {
+	/* l'appel de window.innerHeight pour jquery 1.1.1 */
 	el.css({
 		position: "fixed", 
 		fontSize: "14px",
@@ -20,16 +21,19 @@ function changerDimensions(el) {
 		left: 0, 
 		padding:"0", 
 		width: "550px", 
-		paddingLeft: Math.floor(($(window).width() - 550) / 2),
-		paddingRight: Math.ceil(($(window).width() - 550) / 2),
-		height: $(window).height() - (60 + 30),
+		paddingLeft: Math.floor(($("body").width() - 550) / 2),
+		paddingRight: Math.ceil(($("body").width() - 550) / 2),
+		height: window.innerHeight - (60 + 30),
 		paddingTop: "30px",
 		paddingBottom: "30px",
-		border: "0", 
+		border: "1", 
 		backgroundColor : "white",
 		zIndex: 1000
 	});
-	el.scrollTop(textAreaActif.scrollTop * 2);
+	
+	if (jQuery().scrollTop) {
+		el.scrollTop(textAreaActif.scrollTop * 2);
+	}
 }
 
 /* Sortir du mode plein ecran quand Escape */
@@ -41,9 +45,10 @@ function intercepterEscape(e) {
 /* Afficher les elements necessaires hors textarea */
 function agrandirTextarea(el) {
 
+
 	/* Sauver les styles d'origine */
 	textAreaActif.id = el;
-	textAreaActif.submit = el.parents("form").find("input[type=submit]");
+	textAreaActif.submit = el.parents("form").find("input[type='input']");
 	textAreaActif.position = el.css("position");
 	textAreaActif.fontSize = el.css("fontSize");
 	textAreaActif.lineHeight = el.css("lineHeight");
@@ -60,8 +65,14 @@ function agrandirTextarea(el) {
 	textAreaActif.zIndex = el.css("zIndex");
 	textAreaActif.backgroundColor = el.css("backgroundColor");
 	
-	textAreaActif.scrollTop = el.scrollTop();
-	textAreaActif.pageScrollTop = $("body").scrollTop();
+	if (jQuery().scrollTop) {
+		textAreaActif.scrollTop = el.scrollTop();
+		textAreaActif.pageScrollTop = $("body").scrollTop();
+	} else {
+		textAreaActif.scrollTop = 0;
+		textAreaActif.pageScrollTop = 0;
+	}
+	
 	
 	textAreaActif.submit.css({
 		position: "fixed",
