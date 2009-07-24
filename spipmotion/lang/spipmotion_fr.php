@@ -22,6 +22,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_extensions_prises_en_charge' => 'Formats pris en charge de base',
 	'label_extensions_sortie' => 'Formats d\'encodage',
 	
+	// P
+	'profil_encodage' => 'Profil d\'encodage pour le format : @format@',
+	'profils_encodage_son' => 'Profil(s) d\'encodage (Son)',
+	'profils_encodage_video' => 'Profil(s) d\'encodage (Vid&eacute;o)',
+	
 	// S
 	'select_all' => 'Tout s&eacute;lectionner',
 	

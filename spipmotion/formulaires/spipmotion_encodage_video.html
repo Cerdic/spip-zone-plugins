@@ -1,0 +1,26 @@
+<h4><:spipmotion:profil_encodage{format=#ENV{valeur}}:></h4>
+<ul>
+	[(#SAISIE{input,width_#ENV{valeur}}
+		{label=<:spipmotion:width_video:>}
+		{defaut=480}{size=4})]
+		
+	[(#SAISIE{input,height_#ENV{valeur}}
+		{label=<:spipmotion:height_video:>}
+		{defaut=320}{size=4})]
+		
+	[(#SAISIE{input,bitrate_#ENV{valeur}}
+		{label=<:spipmotion:bitrate:>}
+		{defaut=418}{size=4})]
+		
+	[(#SAISIE{input,fps_#ENV{valeur}}
+		{label=<:spipmotion:framerate:>}
+		{defaut=15}{size=4})]
+		
+	[(#SAISIE{input,frequence_audio_#ENV{valeur}}
+		{label=<:spipmotion:frequence_audio:>}
+		{defaut=22050}{size=6})]
+		
+	[(#SAISIE{input,bitrate_audio_#ENV{valeur}}
+		{label=<:spipmotion:bitrate_audio:>}
+		{defaut=64}{size=4})]
+</ul>

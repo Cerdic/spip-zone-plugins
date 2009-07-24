@@ -28,30 +28,6 @@
 					[(#SAISIE{input,chemin}
 						{label=<:spipmotion:chemin_executable:>}
 						{defaut=/usr/local/bin/ffmpeg})]
-						
-					[(#SAISIE{input,width}
-						{label=<:spipmotion:width_video:>}
-						{defaut=480}{size=4})]
-						
-					[(#SAISIE{input,height}
-						{label=<:spipmotion:height_video:>}
-						{defaut=320}{size=4})]
-						
-					[(#SAISIE{input,bitrate}
-						{label=<:spipmotion:bitrate:>}
-						{defaut=418}{size=4})]
-						
-					[(#SAISIE{input,fps}
-						{label=<:spipmotion:framerate:>}
-						{defaut=15}{size=4})]
-						
-					[(#SAISIE{input,frequence_audio}
-						{label=<:spipmotion:frequence_audio:>}
-						{defaut=22050}{size=6})]
-						
-					[(#SAISIE{input,bitrate_audio}
-						{label=<:spipmotion:bitrate_audio:>}
-						{defaut=64}{size=4})]
 				</ul>
 			</fieldset>
 		</li>
@@ -97,8 +73,6 @@
 						</select>
 						<p><a href="#" class="select_all"><:spipmotion:select_all:></a> <a href="#" class="unselect_all"><:spipmotion:unselect_all:></a></p>
 						</B_sons_encodage>
-						<:spipmotion:configurer_avant_fichiers_audio:>
-						<//B_sons_encodage>
 						
 						<p class="explications"><:spipmotion:extensions_video:></p>
 						<B_videos1_encodage>
@@ -109,8 +83,6 @@
 						</select>
 						<p><a href="#" class="select_all"><:spipmotion:select_all:></a> <a href="#" class="unselect_all"><:spipmotion:unselect_all:></a></p>
 						</B_videos1_encodage>
-						<:spipmotion:configurer_avant_fichiers_video:>
-						<//B_videos1_encodage>
 					</li>
 				</ul>
 			</fieldset>
@@ -118,6 +90,26 @@
 		[(#CONFIG{spipmotion/fichiers_audios_encodage,#ARRAY}|array_merge{#CONFIG{spipmotion/fichiers_videos_encodage,#ARRAY}}|count|>{0}|oui)
 			<INCLURE{fond=formulaires/spipmotion_sortie}{env}>
 		]
+		<B_profils_son>
+		<li class="fieldset">
+			<fieldset>
+				<h3 class="legend"><:spipmotion:profils_encodage_son:></h3>
+				<BOUCLE_profils_son(POUR){tableau #CONFIG{spipmotion/fichiers_audios_sortie}}>
+					<INCLURE{fond=formulaires/spipmotion_encodage_son}{valeur=#VALEUR}{env}>
+				</BOUCLE_profils_son>
+			</fieldset>
+		</li>
+		</B_profils_son>
+		<B_profils_video>
+		<li class="fieldset">
+			<fieldset>
+				<h3 class="legend"><:spipmotion:profils_encodage_video:></h3>
+				<BOUCLE_profils_video(POUR){tableau #CONFIG{spipmotion/fichiers_videos_sortie}}>
+					<INCLURE{fond=formulaires/spipmotion_encodage_video}{valeur=#VALEUR}{env}>
+				</BOUCLE_profils_video>
+			</fieldset>
+		</li>
+		</B_profils_video>
 	</ul>
 	<p class="boutons">
 		<input type="submit" name="_cfg_ok" value="<:cfg:ok:>" class="submit" />
