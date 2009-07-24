@@ -1,0 +1,33 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	&Eacute;dition plein &eacute;cran
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	[ARNO*->arnaud@paris-beyrouth.net] © GPL 2009.
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	test
+	</etat>
+	<description>
+	Tous les champs multilignes (textarea) peuvent d&eacute;sormais &ecirc;tre &eacute;dit&eacute;s en mode plein &eacute;cran. Pour cela: double-cliquer dans un champ: la page dispara&icirc;t et seul le champ d'&eacute;dition occupe tout l'&eacute;cran. Pour sortir de ce mode d'&eacute;dition, utiliser la touche &laquo;Esc&raquo; (escape).
+	
+	Expérimental. Ne fonctionne pas sous Internet Explorer 6 (mais ne devrait pas provoquer de dysfonctionnement).
+	</description>
+	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
+	sur le mode Rien::
+	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
+	ce parametre est obligatoire et doit etre non vide
+	-->
+	<prefix> 
+	edition_plein_ecran
+	</prefix>
+	<pipeline>
+		<nom>header_prive</nom>
+		<action>charger_script</action>
+		<inclure>edition_plein_ecran.php</inclure>
+	</pipeline>
+
+</plugin>
