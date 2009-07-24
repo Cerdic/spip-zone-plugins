@@ -66,7 +66,7 @@ function exec_mots_tous_dist()
 
 
 
-//rers modification cacher le groupe _config_
+//rers    cacher le groupe _config_
 global $connect_statut; //rers
 if ($connect_statut == '0minirezo') // rers  boucle supplémentaire
 {
@@ -101,7 +101,7 @@ else
 
 		// Affichage des options du groupe (types d'elements, permissions...)
 
-// RERS réservé aux administrateurs
+// RERS            OPTIONS : réservé aux administrateurs
 global $connect_statut; //rers
 if ($connect_statut == '0minirezo') // rers  
 { //rers

@@ -70,60 +70,47 @@ function exec_articles_page_dist()
 //rers :  vos fiches  de savoirs
 
 	$res = '';
-	$res .=  afficher_objets('article',"Vos fiches d'offres de savoirs", array(
+	$res .=  afficher_objets('article',"OFFRES", array(
 		"FROM" =>"spip_articles AS articles, spip_auteurs_articles AS lien ", 
 		"WHERE" => "articles.id_article=lien.id_article AND 	
 				lien.id_auteur=$connect_id_auteur AND 
-			(articles.statut='prop' OR articles.statut='prepa' OR articles.statut='publie')
+			(articles.statut='publie')
 				AND articles.id_rubrique=$rers_rub_offres",
 		'ORDER BY' => "date DESC"));
-	$res .=  afficher_objets('article',"Vos fiches de demandes de savoirs", array(
+	$res .=  afficher_objets('article',"DEMANDES", array(
 		"FROM" =>"spip_articles AS articles, spip_auteurs_articles AS lien ", 
 		"WHERE" => "articles.id_article=lien.id_article AND 	
 				lien.id_auteur=$connect_id_auteur AND 
-			(articles.statut='prop' OR articles.statut='prepa' OR articles.statut='publie')
+			(articles.statut='publie')
 				AND articles.id_rubrique=$rers_rub_demandes",
 		'ORDER BY' => "date DESC"));
 
 
-
-	echo	"<div style='position:relative;display:inline;'>" 
-	. debut_cadre_couleur_foncee("",true, "","Vos articles `fiches de savoirs'" //rers
-		. (($GLOBALS['meta']['forum_prive_objets'] != 'non')
-			? ' '._T('texte_en_cours_validation_forum')
-			: '' )
-		)
-	. $res
-	. fin_cadre_couleur_foncee(true)
-	. "</div>";
-
+	echo 	"<div style='position:relative;display:inline;'>" 
+		. debut_cadre_relief("",true, "","Vos fiches de savoirs publiées") //rers
+		. $res 	. fin_cadre_relief(true). "</div>";
 //rers FIN AJOUT
 
 
 //
 // Vos articles en cours de redaction
 //
-//RERS   seulement hors rubriques OFFRES et DEMANDES
 	echo afficher_objets('article',_T('info_en_cours_validation'), 
 	  array('FROM' => "spip_articles AS articles, spip_auteurs_articles AS lien ", 
 		"WHERE" => "articles.id_article=lien.id_article 
-			AND lien.id_auteur=$connect_id_auteur AND articles.statut='prepa'
-			AND id_rubrique!=$rers_rub_offres AND id_rubrique!=$rers_rub_demandes", //RERS
+			AND lien.id_auteur=$connect_id_auteur AND articles.statut='prepa' ",
 		'ORDER BY' => "articles.date DESC"));
-
-
 
 //
 // Vos articles soumis au vote
 //
 
 
-//rers   :   articles en attente de validation :  exclure les rubriques DEMANDES et OFFRES
+// 
 	echo afficher_objets('article',_T('info_attente_validation'), array(
 	  'FROM' => "spip_articles AS articles, spip_auteurs_articles AS lien ", 
 	  "WHERE" => "articles.id_article=lien.id_article AND lien.id_auteur=$connect_id_auteur 
-	  AND articles.statut='prop' AND articles.id_rubrique!=$rers_rub_offres 
-	  AND articles.id_rubrique!=$rers_rub_demandes", "ORDER BY" => "articles.date"));
+	  AND articles.statut='prop'" , "ORDER BY" => "articles.date"));
 
 
 
@@ -133,14 +120,16 @@ function exec_articles_page_dist()
 
 
 
-//
-// Vos articles publies
+// 
+//RERS    Vos articles publies      (sauf rubriques OFFRES et DEMANDES)
 //
 
 	echo afficher_objets('article',_T('info_publies'),	
 	  array("FROM" =>"spip_articles AS articles, spip_auteurs_articles AS lien ", 
 	  "WHERE" => "articles.id_article=lien.id_article AND lien.id_auteur=$connect_id_auteur 
-	  AND articles.statut='publie'", 'ORDER BY' => "articles.date DESC"));
+	  AND articles.statut='publie' 
+	 AND id_rubrique!=$rers_rub_offres AND id_rubrique!=$rers_rub_demandes", 
+	'ORDER BY' => "articles.date DESC"));
 
 //
 //  Vos articles refuses

@@ -1,9 +1,9 @@
 <plugin>
 	<nom>RERS</nom>
-	<version>0.2</version>
+	<version>0.3</version>
 	<prefix>rers</prefix>
 	<etat>dev</etat>
-	<auteur>Jean-Charles C [contact->mailto:jccdkct-dev@yahoo.fr]</auteur>
+	<auteur>Jean-Charles C [contact->mailto:jccdkct-internet@yahoo.fr]</auteur>
 	<icon>img/logo_plugin_rers.png</icon>
 	<description>Plugin d&eacute;velopp&eacute; initialement pour le r&eacute;seau 
          d'&eacute;changes de savoirs RERS du sud de l'aisne en 2009.

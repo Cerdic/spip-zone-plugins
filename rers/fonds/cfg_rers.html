@@ -96,20 +96,6 @@
 <fieldset><legend>Choix des destinataires de messages</legend>
 
 
-   <label>Choix de l'auteur "responsable des inscriptions" :</label>
-   <select name="rers_auteur_resp_inscription">
-     <option value="">Choisir...</option>
-
-
-  	 <BOUCLE_auteurs(AUTEURS){tout} {par id_auteur}>
-	    <option value="#ID_AUTEUR" 
-		[(#CONFIG{rers/rers_auteur_resp_inscription}|=={#ID_AUTEUR}|?{selected="selected",''})]>
-		#ID_AUTEUR . #NOM</option>
-  	 </BOUCLE_auteurs>
-   </select>
-
-
-<br />
    <label>Choix de l'auteur recevant le message de la page CONTACT :</label>
    <select name="rers_auteur_contact">
      <option value="">Choisir...</option>

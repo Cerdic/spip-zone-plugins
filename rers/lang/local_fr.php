@@ -129,17 +129,16 @@ placé dans une des deux rubriques OFFRES ou DEMANDES.
 // +++++++++++++ OFFRES
   if ($id_rub == $rers_rub_offres) 
   {
-  $GLOBALS[$GLOBALS['idx_lang']][info_articles_proposes] = "Savoirs offerts";//spip
-  $GLOBALS[$GLOBALS['idx_lang']][icone_ecrire_article] = "Écrire un nouvel article (fiche de 
-    savoir offert)";//spip
+  $GLOBALS[$GLOBALS['idx_lang']][info_articles_proposes] = "OFFRES";//spip
+  $GLOBALS[$GLOBALS['idx_lang']][icone_ecrire_article] = "Écrire un nouvel article (OFFRE)";//spip
   }
 
 // +++++++++++++ DEMANDES
   if ($id_rub == $rers_rub_demandes)  
   {
-  $GLOBALS[$GLOBALS['idx_lang']][info_articles_proposes] = "Savoirs demandés";//spip
+  $GLOBALS[$GLOBALS['idx_lang']][info_articles_proposes] = "DEMANDES";//spip
   $GLOBALS[$GLOBALS['idx_lang']][icone_ecrire_article] = "Écrire un nouvel article 
-   (fiche de savoir demandé)";//spip
+   (DEMANDE)";//spip
   }
 
 
@@ -168,6 +167,17 @@ Sinon, c'est à sa prochaine connexion au site qu'il lira ce message.
 //;
 
 }
+
+
+if ($rers_exec == 'articles') 
+{
+  // +++++++++++++ OFFRES et DEMANDES
+  if ( $id_rub == $rers_rub_offres OR  $id_rub == $rers_rub_demandes )
+  {
+  $GLOBALS[$GLOBALS['idx_lang']][texte_statut_publie] = "Publié"; // SPIP
+  }
+}
+
 
 
 

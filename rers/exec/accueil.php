@@ -30,44 +30,34 @@ function encours_accueil_derniers_savoirs_rers()
 
 	$res = '';
 	$res .=  afficher_objets('article',"OFFRES", array(
-		"WHERE" => "(statut='prop' OR statut='prepa' OR statut='publie')
+		"WHERE" => "(statut='publie')
 			 AND id_rubrique=$rers_rub_offres", 
 		'ORDER BY' => "date DESC", 'LIMIT' => '0,10'));
 	$res .=  afficher_objets('article',"DEMANDES", array(
-		"WHERE" => "(statut='prop' OR statut='prepa' OR statut='publie')
+		"WHERE" => "(statut='publie')
 			 AND id_rubrique=$rers_rub_demandes", 
 		'ORDER BY' => "date DESC", 'LIMIT' => '0,10'));
 	if (!$res) echo ''; 
-	return 
-	"<div style='position:relative;display:inline;'>" 
-	. debut_cadre_couleur_foncee("",true, "","Dernières propositions de savoirs" //rers
-		. (($GLOBALS['meta']['forum_prive_objets'] != 'non')
-			? ' '._T('texte_en_cours_validation_forum')
-			: '' )
-		)
-	. $res
-	. fin_cadre_couleur_foncee(true)
-	. "</div>";
+	return 	"<div style='position:relative;display:inline;'>" 
+		. debut_cadre_relief("",true, "","Fiches de savoirs les plus récentes") //rers
+		. $res 	. fin_cadre_relief(true). "</div>";
 }
 
 
 // http://doc.spip.org/@encours_accueil
 function encours_accueil()
 {
+//  RERS     Remarque : la fonction encours_accueil n'est appelée que pour les administrateurs
 
 	global $connect_statut, $connect_toutes_rubriques;
-
-	$rers_rub_offres = lire_config('rers/rers_rub_offres');
-	$rers_rub_demandes = lire_config('rers/rers_rub_demandes');
-	$rers_rub_vie = lire_config('rers/rers_rub_vie');
-
 
 	$res = '';
 
 	// Les articles a valider
-	//  RERS     la fonction encours_accueil n'est appelée que pour les administrateurs
-	// RERS     "Les articles a valider" SAUF POUR les rubriques OFFRE et DEMANDES
- 	$res .=  afficher_objets('article',_T('info_articles_proposes'), array("WHERE" => "statut='prop' AND id_rubrique!=$rers_rub_offres AND id_rubrique!=$rers_rub_demandes", 'ORDER BY' => "date DESC"));
+	//
+
+	$res .=  afficher_objets('article',_T('info_articles_proposes'), array("WHERE" => "statut='prop'", 'ORDER BY' => "date DESC"));
+
 
 	//
 	// Les breves a valider
@@ -515,28 +505,26 @@ function exec_accueil_dist()
 
 
 
-//RERS   Vos articles en cours de rédaction (SAUF rubriques Demandes et Offres)
 //
 // Vos articles en cours 
 //
 
 	echo afficher_objets('article',afficher_plus(generer_url_ecrire('articles_page'))._T('info_en_cours_validation'),	array('FROM' => "spip_articles AS articles, spip_auteurs_articles AS lien", 
 	"WHERE" => "articles.id_article=lien.id_article AND lien.id_auteur=$connect_id_auteur 
-		AND articles.statut='prepa' 
-		AND articles.id_rubrique!=$rers_rub_offres  
-		AND articles.id_rubrique!=$rers_rub_demandes", //RERS
+		AND articles.statut='prepa' ",
 	"ORDER BY" => "articles.date DESC"));
 
 
-// RERS : les articles en cours de rédaction par les adhérents 
-//       (TOUS LES ARTICLES en cours de redaction  sauf rubriques Offres et demandes)
+// RERS : les autres articles en cours de rédaction  (pour les administrateurs)
 	if ($connect_statut == '0minirezo') //RERS
 	{ //RERS
-	echo  afficher_objets('article','Tous les articles en cours de rédaction', 
-                array("WHERE" => "statut='prepa' 
-		AND articles.id_rubrique!=$rers_rub_offres
-		AND articles.id_rubrique!=$rers_rub_demandes", //RERS
-		 'ORDER BY' => "date DESC"));
+	echo afficher_objets('article',
+		afficher_plus(generer_url_ecrire('articles_page')).
+		"RESERVE ADMINISTRATEURS   : Les autres articles en cours de rédaction",	
+		array('FROM' => "spip_articles AS articles, spip_auteurs_articles AS lien", 
+		"WHERE" => "articles.id_article=lien.id_article AND lien.id_auteur!=$connect_id_auteur 
+		AND articles.statut='prepa' ",
+		"ORDER BY" => "articles.date DESC"));
 	} //RERS
 
 

@@ -315,8 +315,8 @@ function contenu_naviguer($id_rubrique, $id_parent) {
 
 
 
-	//RERS
-	if ($relief AND $id_rubrique !== $rers_rub_offres AND $id_rubrique !== $rers_rub_demandes) {
+
+	if ($relief) {
 
 		$res .= debut_cadre_couleur('',true);
 		$res .= "<div class='verdana2' style='color: black;'><b>"._T('texte_en_cours_validation')	
@@ -425,18 +425,21 @@ if ($id_rubrique != $rers_rub_offres AND $id_rubrique != $rers_rub_demandes) {//
 }//RERS
 else
 {//RERS
-		if ($id_rubrique == $rers_rub_offres) $rerstextea="Fiches d'Offre de savoir";
-		if ($id_rubrique == $rers_rub_demandes) $rerstextea="Fiches de Demande de savoir";
-		$res .= debut_cadre_couleur('',true);
-		$res .= "<div class='verdana2' style='color: black;'><b> 
-		$rerstextea </b></div>";
+		if ($id_rubrique == $rers_rub_offres) $rerstextea="OFFRES";
+		if ($id_rubrique == $rers_rub_demandes) $rerstextea="DEMANDES";
 
-		$res .= afficher_objets('article',_T('info_articles_proposes'),	
+		$res .= afficher_objets('article',$rerstextea,	
 			array('WHERE' => "id_rubrique=$id_rubrique 
-			AND (statut='prop' OR statut='prepa' OR statut='publie')", 
+			AND (statut='publie')", 
 			'ORDER BY' => "date DESC", 'LIMIT' => '0,50'));
 		$res .= $bouton_article;
 
+		//RERS 	pour administrateurs :   Les articles en cours de redaction OFFRES et SAVOIRS
+		global $connect_statut ; //RERS
+		if ($connect_statut == '0minirezo') {//RERS
+			$res .= afficher_objets('article',_T('info_tous_articles_en_redaction'), 
+			array("WHERE" => "statut='prepa' AND id_rubrique=$id_rubrique", 'ORDER BY' => "date DESC"));
+		}//RERS
 	
 }//RERS
 

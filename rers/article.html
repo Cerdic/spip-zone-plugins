@@ -86,13 +86,6 @@
 
 
 
-[(#REM) rers : L'inscription  à l'association se passe sur un article ayant pour mot clé inscription]
-<BOUCLE_rersinscription(ARTICLES){id_article}{titre_mot=rers_inscription}>
-<BOUCLE_auteur_principal(AUTEURS){tous}{id_auteur = #CONFIG{rers/rers_auteur_resp_inscription}}>
-#FORMULAIRE_ECRIRE_AUTEUR
-</BOUCLE_auteur_principal>
-</BOUCLE_rersinscription>
-
 
 [(#REM) rers :   Page "contact" de l'espace public ]
 <BOUCLE_rerscontact(ARTICLES){id_article}{titre_mot=rers_contact}>
@@ -101,7 +94,8 @@
 </BOUCLE_auteur_principal2>
 </BOUCLE_rerscontact>
 
-[(#REM) rers : Page  d'inscription à la newsletter spip-listes]
+[(#REM) rers : Page  d'inscription à la newsletter spip-listes
+]
 <BOUCLE_rersspiplistes(ARTICLES){id_article}{titre_mot=rers_spiplistes}>
 #FORMULAIRE_ABONNEMENT
 </BOUCLE_rersspiplistes>

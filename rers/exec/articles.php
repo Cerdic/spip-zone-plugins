@@ -124,14 +124,17 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 	));
 	$navigation = ""; 
 
-//RERS    chacher le numéro d'article quand c'est une fiche de savoirs (article rubrique OFFRES ou DEMANDES)
+//RERS    chacher le numéro d'article (est choix de statut) 
+//RERS     quand c'est une fiche de savoirs (article rubrique OFFRES ou DEMANDES)
 //RERS     et seulement pour les rédacteurs
 if ( ( $id_rubrique !== $rers_rub_offres AND  $id_rubrique !== $rers_rub_demandes AND $connect_statut !== '0minirezo' ) OR $connect_statut == '0minirezo' )
 {
 	$navigation .=	  debut_boite_info(true). $boite . fin_boite_info(true) . $icone ;
 }
 
-//rers modification : suppression du cadre "forum et petition" pour les rédacteurs
+
+
+//rers       suppression du cadre "forum et petition" pour les rédacteurs
 if ($connect_statut == '0minirezo') // rers
 { //rers
 	$navigation .=	(_INTERFACE_ONGLETS?"":boites_de_config_articles($id_article));
@@ -374,18 +377,10 @@ function afficher_corps_articles($id_article, $virtuel, $row)
 
 	if ($row['statut'] == 'prop') {
 
-//RERS   Indication "texte proposé à la publication" seulement hors des rubriques OFFRES et DEMANDES
-	  $rers_rub_offres = lire_config('rers/rers_rub_offres');
-	  $rers_rub_demandes = lire_config('rers/rers_rub_demandes');
-	  $id_rubrique = $row['id_rubrique'];
-	  if ($id_rubrique !== $rers_rub_offres AND  $id_rubrique !== $rers_rub_demandes) {
-
 		$res .= "<p class='article_prop'>"._T('text_article_propose_publication');
 		if ($GLOBALS['meta']['forum_prive_objets'] != 'non')
 			$res .= ' '._T('text_article_propose_publication_forum');
 		$res.= "</p>";
-	  }//RERS
-
 
 
 	}

@@ -194,14 +194,24 @@ RERS */
 	$rers_rub_demandes = lire_config('rers/rers_rub_demandes');
 	$rers_rub_vie = lire_config('rers/rers_rub_vie');
 
-//RERS
+//RERS      Mettre en valeur les rubriques OFFRES et DEMANDES
+	$out .=	"<div style='position:relative;display:inline;'>" 
+		. debut_cadre_relief("",true, "","Fiches de savoirs correspondantes à ce domaine de savoir"); //rers
 	$out .=  afficher_objets('article',"OFFRES", array('FROM' => "spip_articles AS articles LEFT JOIN spip_mots_articles AS lien ON lien.id_article=articles.id_article",
- 	"WHERE" => "(statut='prepa' OR statut='prop' OR statut='publie') AND id_rubrique=$rers_rub_offres AND lien.id_mot=$id_mot", 
+ 	"WHERE" => "statut IN ($aff_articles) AND id_rubrique=$rers_rub_offres AND lien.id_mot=$id_mot", 
 	'ORDER BY' => "date DESC"));
 	$out .=  afficher_objets('article',"DEMANDES", array('FROM' => "spip_articles AS articles LEFT JOIN spip_mots_articles AS lien ON lien.id_article=articles.id_article",
-	"WHERE" => "(statut='prepa' OR statut='prop' OR statut='publie') AND id_rubrique=$rers_rub_demandes AND lien.id_mot=$id_mot", 
+	"WHERE" => "statut IN ($aff_articles) AND id_rubrique=$rers_rub_demandes AND lien.id_mot=$id_mot", 
 	'ORDER BY' => "date DESC"));
 
+	$out .=  	fin_cadre_relief(true). "</div>"; //RERS
+
+
+
+
+
+
+//RERS  pour les rédacteurs, cacher ce qui n'est pas OFFRES ou DEMANDES
   global $connect_statut; //rers
   if ($connect_statut !== '0minirezo') //RERS
   {//rers if statut  != 0minirezo

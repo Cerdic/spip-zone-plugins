@@ -165,41 +165,44 @@ function auteurs_interventions($auteur) {
 	$rers_rub_offres = lire_config('rers/rers_rub_offres');
 	$rers_rub_demandes = lire_config('rers/rers_rub_demandes');
 
+	//RERS    chacher les prepa   aux autres adhérents
+	global $connect_statut; //rers
+	global $connect_id_auteur;
+	if ($connect_id_auteur == $id_auteur OR $connect_statut == '0minirezo') {
+		$rers_statut_vis="(articles.statut='publie' or articles.statut='prop' or articles.statut='prepa')";
+	}
+	else {
+		$rers_statut_vis="(articles.statut='publie' or articles.statut='prop')";
+	}
 
 
 //RERS  Présenter les OFFRES et DEMANDES  de savoirs par auteur. 
 	$res = '';
-	$res .=  afficher_objets('article',"Offres de savoirs", array(
+	$res .=  afficher_objets('article',"OFFRES", array(
 		"FROM" =>"spip_articles AS articles, spip_auteurs_articles AS lien ", 
 		"WHERE" => "articles.id_article=lien.id_article AND 	
-				lien.id_auteur=$id_auteur AND 
-			(articles.statut='prop' OR articles.statut='prepa' OR articles.statut='publie')
+				lien.id_auteur=$id_auteur AND $rers_statut_vis
 				AND articles.id_rubrique=$rers_rub_offres",
 		'ORDER BY' => "date DESC"));
-	$res .=  afficher_objets('article',"Demandes de savoirs", array(
+	$res .=  afficher_objets('article',"DEMANDES", array(
 		"FROM" =>"spip_articles AS articles, spip_auteurs_articles AS lien ", 
 		"WHERE" => "articles.id_article=lien.id_article AND 	
-				lien.id_auteur=$id_auteur AND 
-			(articles.statut='prop' OR articles.statut='prepa' OR articles.statut='publie')
+				lien.id_auteur=$id_auteur AND $rers_statut_vis
 				AND articles.id_rubrique=$rers_rub_demandes",
 		'ORDER BY' => "date DESC"));
 
-	echo	"<div style='position:relative;display:inline;'>" 
-	. debut_cadre_couleur_foncee("",true, "","Les fiches de savoirs de cet auteur" //rers
-		. (($GLOBALS['meta']['forum_prive_objets'] != 'non')
-			? ' '._T('texte_en_cours_validation_forum')
-			: '' )
-		)
-	. $res
-	. fin_cadre_couleur_foncee(true)
-	. "</div>";
+	echo 	"<div style='position:relative;display:inline;'>" 
+		. debut_cadre_relief("",true, "","Fiches de savoirs de cet auteur") //rers
+		. $res 	. fin_cadre_relief(true). "</div>";
 
-//RERS modification de l'affichage existant
+
+//RERS          Articles de cet auteur  ,  sauf offres et demandes
 	echo afficher_objets('article',_T('info_articles_auteur'),  array(
 	  'FROM' => "spip_articles AS articles LEFT JOIN spip_auteurs_articles AS 
 	  lien ON lien.id_article=articles.id_article ",  
 	  "WHERE" => "lien.id_auteur=$id_auteur AND $aff_art  
-	  AND id_rubrique!=$rers_rub_offres AND id_rubrique!=$rers_rub_demandes", //RERS
+	  AND id_rubrique!=$rers_rub_offres AND id_rubrique!=$rers_rub_demandes
+	 AND $rers_statut_vis ", //RERS
 	  'ORDER BY' => "articles.date DESC"));
 
 

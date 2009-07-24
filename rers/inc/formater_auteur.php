@@ -66,8 +66,7 @@ $row = sql_fetsel("*", "spip_auteurs", "id_auteur=$id_auteur");   //RERS
 		$in = sql_in('statut', 
 			($connect_statut == "0minirezo"
 			? array('prepa', 'prop', 'publie', 'refuse')
-//RERS   ajout   'prepa'  pour que le nombre d'articles tienne compte des fiches de savoirs (qui ont statut prepa)
-			: array('prepa','prop', 'publie')));
+			: array('prop', 'publie')));
 		$cpt = sql_countsel("spip_auteurs_articles AS L LEFT JOIN spip_articles AS A ON A.id_article=L.id_article", "L.id_auteur=$id_auteur AND $in"); 
 		$t = _T('info_article_2');
 		$t1 = _T('info_1_article'); 
@@ -93,7 +92,8 @@ function formater_auteur_mail($row, $id_auteur)
 
 	if ($row['imessage'] != 'non'
 	AND $GLOBALS['meta']['messagerie_agenda'] != 'non')
-//RERSTEST debut
+//RERSTEST debut    :   pour inclure le message d'origine dans le texte du message privé
+//RERS                    (le texte de l'article que l'on consulte au moment de cliquer sur 'envoyer message privé')
 	{
 		if ($_GET['exec'] == 'articles')
 			$href = generer_action_auteur("editer_message","normal/$id_auteur")
