@@ -1,8 +1,11 @@
 <?php
-function formulaires_clevermail_charger_dist($lst_id = 0) {
+function formulaires_clevermail_charger_dist($lst_id = 0, $lsr_mode_force = false) {
 	$default = array('editable' => ' ', 'lsr_mode' => 0, 'sub_email' => '', 'lst_ids' => array());
+	if ($lsr_mode !== false && in_array($lsr_mode_force, array('texte', 'html'))) {
+		$default['lsr_mode_force'] = $lsr_mode_force;
+	}
 	if (intval($lst_id) != 0) {
-		if ($lst_id = sql_getfetsel("lst_id", "spip_cm_lists", "lst_id=".intval($lst_id)." AND lst_moderation!='closed'")) {
+		if ($lst_id = sql_getfetsel("lst_id", "spip_cm_lists", "lst_id = ".intval($lst_id)." AND lst_moderation != 'closed'")) {
 			$valeurs = $default;
 			$valeurs['lst_id'] = array($lst_id);
   		return $valeurs;
@@ -10,11 +13,11 @@ function formulaires_clevermail_charger_dist($lst_id = 0) {
       return array('editable' => '');
 		}
 	} else {
-	  $nbLists = sql_countsel("spip_cm_lists", "lst_moderation!='closed'");
+	  $nbLists = sql_countsel("spip_cm_lists", "lst_moderation != 'closed'");
 	  if ($nbLists == 0) {
       return array('editable' => '');
 	  } elseif ($nbLists == 1) {
-	  	$lst_id = sql_getfetsel("lst_id", "spip_cm_lists", "lst_moderation!='closed'");
+	  	$lst_id = sql_getfetsel("lst_id", "spip_cm_lists", "lst_moderation != 'closed'");
       $valeurs = $default;
       $valeurs['lst_id'] = array($lst_id);
       return $valeurs;
@@ -25,7 +28,7 @@ function formulaires_clevermail_charger_dist($lst_id = 0) {
 	}
 }
 
-function formulaires_clevermail_verifier_dist($lst_id = 0) {
+function formulaires_clevermail_verifier_dist($lst_id = 0, $lsr_mode_force = false) {
   $erreurs = array();
   if (!_request('lst_id') && !_request('lst_ids')) {
     $erreurs['lst_ids'] = _T('clevermail:ce_champ_est_obligatoire');
@@ -43,7 +46,7 @@ function formulaires_clevermail_verifier_dist($lst_id = 0) {
   return $erreurs;
 }
 
-function formulaires_clevermail_traiter_dist($lst_id = 0) {
+function formulaires_clevermail_traiter_dist($lst_id = 0, $lsr_mode_force = false) {
 	$ok = true;
 	$message = '';
   if ($sub_id = sql_getfetsel("sub_id", "spip_cm_subscribers", "sub_email=".sql_quote(_request('sub_email')))) {
@@ -58,16 +61,21 @@ function formulaires_clevermail_traiter_dist($lst_id = 0) {
   } elseif (_request('lst_ids')) {
   	$lists = array_map("intval", _request('lst_ids'));
   }
+  if (_request('lsr_mode_force')) {
+  	$lsr_mode = intval(_request('lsr_mode_force'));
+  } else {
+  	$lsr_mode = intval(_request('lsr_mode'));
+  }
   foreach($lists as $list) {
   	$lst_id = intval($list);
     $listData = sql_fetsel("*", "spip_cm_lists", "lst_id=".intval($lst_id));
     if (sql_countsel("spip_cm_lists_subscribers", "lst_id=".intval($lst_id)." AND sub_id=".intval($sub_id)) == 1) {
-    	if (sql_getfetsel("lsr_mode", "spip_cm_lists_subscribers", "lst_id=".intval($lst_id)." AND sub_id=".intval($sub_id)) == intval(_request('lsr_mode'))) {
+    	if (sql_getfetsel("lsr_mode", "spip_cm_lists_subscribers", "lst_id=".intval($lst_id)." AND sub_id=".intval($sub_id)) == intval($lsr_mode)) {
     		// Déjà abonné avec ce mode
     		$message .= (strlen($message) > 0 ? '<br />' : '')._T('clevermail:inscription_deja_abonne_meme_mode', array('lst_name' => $listData['lst_name']));
     	} else {
     		// Déjà abonné mais changement de mode
-        sql_updateq("spip_cm_lists_subscribers", array('lsr_mode' => intval(_request('lsr_mode'))), "lst_id=".intval($lst_id)." AND sub_id=".intval($sub_id));
+        sql_updateq("spip_cm_lists_subscribers", array('lsr_mode' => intval($lsr_mode)), "lst_id=".intval($lst_id)." AND sub_id=".intval($sub_id));
     		$message .= (strlen($message) > 0 ? '<br />' : '')._T('clevermail:inscription_deja_abonne_autre_mode', array('lst_name' => $listData['lst_name'])); 
     	}
     } else {
@@ -75,20 +83,20 @@ function formulaires_clevermail_traiter_dist($lst_id = 0) {
     	switch ($listData['lst_moderation']) {
     		case 'open':
     			$actionId = md5('subscribe#'.$lst_id.'#'.$sub_id.'#'.time());
-          sql_insertq("spip_cm_lists_subscribers", array('lst_id' => intval($lst_id), 'sub_id' => intval($sub_id), 'lsr_mode' => intval(_request('lsr_mode')), 'lsr_id' => $actionId));
+          sql_insertq("spip_cm_lists_subscribers", array('lst_id' => intval($lst_id), 'sub_id' => intval($sub_id), 'lsr_mode' => intval($lsr_mode), 'lsr_id' => $actionId));
           $message .= (strlen($message) > 0 ? '<br />' : '')._T('clevermail:inscription_validee', array('lst_name' => $listData['lst_name']));
     			break;
     		case 'email':
     			// TODO : à finir
           $actionId = md5('subscribe#'.$lst_id.'#'.$sub_id.'#'.time());
           if (sql_countsel("spip_cm_pending", "lst_id=".intval($lst_id)." AND sub_id=".intval($sub_id)) == 0) {
-          	sql_insertq("spip_cm_pending", array('lst_id' => intval($lst_id), 'sub_id' => intval($sub_id), 'pnd_action' => 'subscribe', 'pnd_mode' => intval(_request('lsr_mode')), 'pnd_action_date' => time(), 'pnd_action_id' => $actionId));
+          	sql_insertq("spip_cm_pending", array('lst_id' => intval($lst_id), 'sub_id' => intval($sub_id), 'pnd_action' => 'subscribe', 'pnd_mode' => intval($lsr_mode), 'pnd_action_date' => time(), 'pnd_action_id' => $actionId));
           }
           // Composition du message de demande de confirmation
           $template = array();
           $template['@@NOM_LETTRE@@'] = $listData['lst_name'];
           $template['@@DESCRIPTION@@'] = $listData['lst_comment'];
-          $template['@@FORMAT_INSCRIPTION@@']  = ($mode == 1 ? 'HTML' : 'texte');
+          $template['@@FORMAT_INSCRIPTION@@']  = (intval($lsr_mode) == 1 ? _T('choix_version_html') : _T('choix_version_texte'));
           $template['@@EMAIL@@'] = _request('sub_email');
           $template['@@URL_CONFIRMATION@@'] = $GLOBALS['meta']['adresse_site'].'/spip.php?page=clevermail_do&id='.$actionId;
           $body = $listData['lst_subscribe_text'];

@@ -8,7 +8,9 @@
 Gestion de {{lettres d'information}} assurant les fonctionnalit&eacute;s suivantes :
 -* Gestion de {{multiples lettres}}
 -* Gestion des inscriptions/d&eacute;sinscriptions, {{les abonn&eacute;s &eacute;tant distincts des utilisateurs de SPIP}}
--* Abonnement au choix de l'utilisateur en version {{HTML, texte brut ou multipart simultan&eacute; HTML + texte brut}} (attention, Lotus Notes n'aime pas)
+-* Possibilit&eacute; de restreindre la liste des lettres propos&eacute;es dans le formulaire d'abonnement
+-* Abonnement au choix de l'utilisateur en version {{texte brut ou multipart simultan&eacute; HTML + texte brut}} (attention, Lotus Notes n'aime pas)
+-* Possibilit&eacute; de forcer la version dans le formulaire d'abonnement
 -* R&eacute;cup&eacute;ration des contenus HTML et texte brut &agrave; partir de deux URL, donc {{utilisation de squelettes SPIP}} d&eacute;di&eacute;s possible
 -* {{Automatisation des envois}} avec une fr&eacute;quence quotidienne, hebdomadaire ou mensuelle
 -* {{Automatisation des inscriptions}} depuis un fichier distant

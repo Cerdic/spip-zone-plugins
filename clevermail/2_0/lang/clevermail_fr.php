@@ -21,7 +21,6 @@
 		'version' => 'Version :',
 	  'choix_version_html' => 'HTML',
 	  'choix_version_texte' => 'Texte brut',
-	  'choix_version_composite' => 'HTML et texte brut',
 		'inscription_lettre' => 'Inscrivez-vous &agrave; notre lettre d\'information :',
 		'inscription_lettres' => 'Inscrivez-vous &agrave; nos lettres d\'information :',
 		'deja_inscrit' => 'Vous &eacute;tiez d&eacute;j&agrave; inscrit &agrave; la liste « @lst_name@ ». Votre mode d\'inscription a &eacute;t&eacute; mis &agrave; jour.',
