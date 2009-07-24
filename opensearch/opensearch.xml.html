@@ -1,0 +1,12 @@
+[(#REM) Squelette pour SPIP 1.9.2, Copyright (c) Nicolas Krebs 2006-2007, distribue sous licence GPL version 2. 
+Documentation http://www.spip-contrib.net/article1465.html
+]#CACHE{86400}
+[(#HTTP_HEADER{Content-type: text/xml[; charset=(#CHARSET)]})]<?xml version="1.0"[ encoding="(#CHARSET)"]?>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
+	<ShortName>[(#NOM_SITE_SPIP|couper{16}|texte_backend)][ (#ID_RUBRIQUE)]</ShortName>[
+	<Description>(#DESCRIPTIF_SITE_SPIP|couper{150}|texte_backend)</Description>][(#REM) texte traduisible = xmlns:its="http://www.w3.org/2005/11/its" its:translate="yes" ][
+	<Image height="16" width="16" type="image/x-icon">(#MODELE{favicon}{favicon=#LOGO_SITE_SPIP}|extraire_attribut{href}|url_absolue)</Image>
+	]<InputEncoding>#CHARSET</InputEncoding>[
+	<Url type="text/html" template="(#URL_PAGE{recherche}|parametre_url{id_rubrique,#ID_RUBRIQUE}|url_absolue|texte_backend)&amp;recherche={searchTerms}"/>
+	][<Url type="application/atom+xml" template="(#URL_PAGE{recherche-atom}|parametre_url{id_rubrique,#ID_RUBRIQUE}|url_absolue|texte_backend)&amp;recherche={searchTerms}"/>]
+</OpenSearchDescription>
