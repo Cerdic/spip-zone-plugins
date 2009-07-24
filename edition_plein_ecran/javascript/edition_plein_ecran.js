@@ -128,12 +128,6 @@ function reduireTextarea(el) {
 	});
 	el.scrollTop(textAreaActif.scrollTop);
 
-	textAreaActif.submit.css({
-		position: "static",
-		width: "auto",
-		zIndex: 1
-	});
-
 
 	/* Replacer la page a son scroll d'origine */
 	/* Semble ne pas fonctionner sous IE */
@@ -141,6 +135,12 @@ function reduireTextarea(el) {
 
 	/* Supprimer le comportement de la touche Escape */
 	$(document).unbind("keydown", intercepterEscape);
+
+	textAreaActif.submit.css({
+		position: "static",
+		width: "auto",
+		zIndex: 1
+	});
 
 }
 
