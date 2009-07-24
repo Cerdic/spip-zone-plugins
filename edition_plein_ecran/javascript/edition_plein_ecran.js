@@ -48,7 +48,7 @@ function agrandirTextarea(el) {
 
 	/* Sauver les styles d'origine */
 	textAreaActif.id = el;
-	textAreaActif.submit = el.parents("form").find("input[type='input']");
+	textAreaActif.submit = el.parents("form").find("input[type=submit]");
 	textAreaActif.position = el.css("position");
 	textAreaActif.fontSize = el.css("fontSize");
 	textAreaActif.lineHeight = el.css("lineHeight");
