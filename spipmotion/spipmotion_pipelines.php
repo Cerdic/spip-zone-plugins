@@ -81,7 +81,7 @@ function spipmotion_post_edition($flux){
 					$invalider = true;
 				}
 
-				if(lire_config('spipmotion/encodage_auto')){
+				if(lire_config('spipmotion/encodage_auto') == 'oui'){
 					/**
 					 * Ajout de la vidéo dans la file d'attente d'encodage si besoin
 					 */
