@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'accents_pas_pris' => 'Accents are not taken into account ("d&eacute;j&agrave;" or "deja", will return the same results, including "d&eacute;j&agrave;", "dej&agrave;", "d&eacute;ja"...)',
+	'asie' => 'asia',
 	'asterisque_terminale' => 'will return no results: the asterisk must be final',
 	'aussi' => 'also',
 
@@ -20,10 +21,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'creer_tous' => 'Create all the suggested FULLTEXT indexes',
 
 	// E
+	'enfan' => 'chil',
+	'enfance' => 'childhood',
+	'enfant' => 'child',
+	'enfanter' => 'child',
+	'enfantillage' => 'childishness',
+	'enfants' => 'children',
 	'et' => 'AND',
+	'etranger' => 'stranger',
 	'exemples' => 'Usage examples',
 
 	// F
+	'fant' => 'ild',
 	'fonctionnement_recherche' => 'How the search mechanism works on this site',
 	'fulltext_cree' => 'FULLTEXT created',
 
@@ -44,6 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// P
 	'pas_index' => 'No FULLTEXT index',
+	'premier_soit' => 'EITHER',
 
 	// R
 	'regenerer_tous' => 'Regenerate all FULLTEXT indexes',
