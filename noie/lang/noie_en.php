@@ -8,8 +8,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
-	'ie6msg_info' => '<MODIF>To get the best possible experience using our website we recommend that you upgrade your browser to a newer version. The current version is <a href="http://www.microsoft.com/windows/downloads/ie/getitnow.mspx">Internet Explorer&nbsp;7</a> and <a href = "http://www.microsoft.com/windows/Internet-explorer/beta/">Internet Explorer&nbsp;8</a> is available as a beta. The upgrade is free. If you\'re using a PC at work you should contact your IT-administrator.
-<br />If you want to you may also try some other popular Internet browsers like <a href="http://www.opera.com">Opera</a>, <a href="http://mozilla.com ">FireFox</a> or <a href="http://www.apple.com/safari/download/">Safari</a>.',
+	'ie6msg_info' => 'To get the best possible experience using our website we recommend that you upgrade your browser to a newer version. Upgrade <a href="http://www.microsoft.com/windows/internet-explorer/default.aspx">Internet Explorer</a> or try some other popular Internet browsers like <a href="http://mozilla.com/en-US/firefox/firefox.html">FireFox</a>, <a href="http://www.opera.com">Opera</a> or <a href="http://www.apple.com/safari/">Safari</a>.
+<br />If you\'re using a PC at work you should contact your IT-administrator.',
 	'ie6msg_titre' => 'Did you know that your browser is out of date?',
 
 	// T
