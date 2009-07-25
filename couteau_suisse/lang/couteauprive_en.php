@@ -25,8 +25,12 @@ _ Test link:[->test@test.com] (Reload the page to test.)[[%enveloppe_mails%]]',
 	'action_rapide_non' => 'Rapid action, available when this tool is activated:',
 	'admins_seuls' => 'Only administrators',
 	'attente' => 'Waiting...',
-	'auteur_forum:description' => '<MODIF>Request all authors of public messages to fill in (with at least one letter!) the field "@_CS_FORUM_NOM@" in order to avoid completely anonymous messages.',
+	'auteur_forum:description' => 'Request all authors of public messages to fill in (with at least one letter!) a name and/or email in order to avoid completely anonymous messages. Note that the tool effectuates a Javascript validation on the user browser.[[%auteur_forum_nom%]][[->%auteur_forum_email%]][[->%auteur_forum_deux%]]
+{Caution : The third option cancel the others. It\'s important to verify that the forms of your template are compatibles with this tool.}',
 	'auteur_forum:nom' => 'No anonymous forums',
+	'auteur_forum_deux' => 'Or a least one of the two previous fields',
+	'auteur_forum_email' => 'The field &laquo;@_CS_FORUM_EMAIL@&raquo;',
+	'auteur_forum_nom' => 'The field &laquo;@_CS_FORUM_NOM@&raquo;',
 	'auteurs:description' => 'This tool configures the appearance of [the authors\' page->./?exec=auteurs], in the private area.
 
 @puce@ Define here the maximum number of authors to display in the central frame of the author\'s page. Beyond this number page numbering will be triggered.[[%max_auteurs_page%]]
@@ -74,7 +78,7 @@ _ Test link:[->test@test.com] (Reload the page to test.)[[%enveloppe_mails%]]',
 	'boites_privees:nom' => 'Private boxes',
 	'bp_tri_auteurs' => 'Order of authors',
 	'bp_urls_propres' => 'See clean URLs',
-	'brouteur:description' => '<MODIF>Use the AJAX section selector when there are more than %rubrique_brouteur% section(s)',
+	'brouteur:description' => 'Use the AJAX section selector when there are more than %rubrique_brouteur% section(s)',
 	'brouteur:nom' => 'Configuration of the section selector',
 
 	// C
@@ -94,6 +98,8 @@ _ Test link:[->test@test.com] (Reload the page to test.)[[%enveloppe_mails%]]',
 	'chatons:description' => 'Replace <code>:name</code> with smiley images in the text.
 _ This tool will replace the shortcuts by the images of the same name found in the directory <code>mon_squelette_toto/img/chatons/</code>, or else, by default, in <code>couteau_suisse/img/chatons/</code>.',
 	'chatons:nom' => 'Smileys',
+	'citations_bb:description' => 'In order to respect the HTML usages in the SPIP content of your site (articles, sections, etc.), this tool replaces the markup &lt;quote&gt; by the markup &lt;q&gt; when there is no line return. ',
+	'citations_bb:nom' => 'Well delimited citations',
 	'class_spip:description1' => 'Here you can define some SPIP shortcuts. An empty value is equivalent to using the default.[[%racc_hr%]]',
 	'class_spip:description2' => '@puce@ {{SPIP shortcuts}}.
 
@@ -196,7 +202,7 @@ This tool may be combined with "[.->sommaire]".',
 	'detail_balise_etoilee' => '{{N.B.}} : Check the use made in your templates of starred tags. This tool will not apply its treatment to the following tag(s): @bal@.',
 	'detail_fichiers' => 'Files:',
 	'detail_inline' => 'Inline code:',
-	'detail_jquery2' => '<MODIF>This tool requires the {jQuery} library.',
+	'detail_jquery2' => 'This tool uses the {jQuery} library.',
 	'detail_jquery3' => '{{N.B.}}: this tool requires the plugin [jQuery pour SPIP 1.92->http://files.spip.org/spip-zone/jquery_192.zip] in order to function correctly with this version of SPIP.',
 	'detail_pipelines' => 'Pipelines:',
 	'detail_traitements' => 'Treatment:',
@@ -312,6 +318,7 @@ N.B. This tool requires the {Round Corners} jQuery plugin in order to function. 
 	// L
 	'label:admin_travaux' => 'Close the public site for:',
 	'label:arret_optimisation' => 'Stop SPIP from emptying the wastebin automatically:',
+	'label:auteur_forum_nom' => 'The visitor must specify:',
 	'label:auteurs_tout_voir' => '@_CS_CHOIX@',
 	'label:auto_sommaire' => 'Systematic creation of a summary:',
 	'label:balise_decoupe' => 'Activate the #CS_DECOUPE tag:',
