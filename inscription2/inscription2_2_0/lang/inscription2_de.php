@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_modifier_auteur_supp' => 'Weiterf&uuml;hrende Informationen',
 	'adresse' => 'Adresse',
 	'adresse_pro' => 'Adresse (beruflich)',
-	'ajouter_adherent' => '<MODIF>Neuen Besucher<br /> anlegen',
+	'ajouter_adherent' => 'Neuen Teilnehmer anlegen',
 	'aout' => 'August',
 	'aucun_resultat_recherche' => 'Nichts gefunden',
 	'auteur' => 'Autor',
@@ -133,7 +133,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'latitude' => 'Geographische Breite',
 	'legende' => 'Legende',
 	'lisez_mail' => 'An die eingetragene Adresse wurde eine Email geschickt. Sie enth&auml;lt die zur Aktivierung Ihres Kontos erforderlichen Informationen.',
-	'liste_adherents' => '<MODIF>Mitgliederliste anzeigen',
+	'liste_adherents' => 'Mitglieder anzeigen',
 	'liste_comptes_titre' => 'Mitgliederliste',
 	'login' => 'Benutzername (login)',
 	'longitude' => 'Geographische L&auml;nge',
@@ -152,7 +152,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'naissance' => 'Geburtstag',
+	'nb_users_supprimes' => '@nb@ Mitglieder wurden gel&ouml;scht.',
 	'nettoyer_tables' => 'Tabellen aufr&auml;umen',
+	'no_user_selected' => 'Sie haben kein Mitglied ausgew&auml;hlt',
 	'nom' => 'Pseudonym',
 	'nom_explication' => 'Ihr Name oder Pseudonym',
 	'nom_famille' => 'Name',
@@ -228,20 +230,25 @@ Ihr Passwort haben Sie soeben enigegeben.
 Vielen Dank f&uuml;r Ihr Vertrauen
 
 Das @nom_site@-Team',
-	'texte_email_inscription' => '<MODIF>Sie m&ouml;chten bei der Website @nom_site@ mitmachen.
-Bitte schlie&szlig;en Sie Ihre Anmeldung ab, indem Sie auf den Link weiter unten klicken und Ihr Passwort festlegen.
+	'texte_email_inscription' => 'Sie sind dabei, ihre Anmeldung bei der Website @nom_site@ abzuschlie&szlig;en.
+Bitte klicken Sie auf den Link weiter unten klicken und legen sie ihr Passwort fest.
 
 @link_activation@
 
+Vielen Dank f&uuml;r Ihr Vertrauen.
+
+Das @nom_site@-Team
+@url_site@
+
 Ihr Login ist: @login@
+@url_site@
 
 Wenn Sie sich nicht angemeldet haben, klicken Sie bitte auf den Link weiter unten, um alle erfassten Daten zu l&ouml;schen.n
 
 @link_suppresion@
 
-Vielen Dank f&uuml;r Ihr Vertrauen.
 
-Das @nom_site@-Team',
+',
 	'titre_confirmation' => 'Best&auml;tigung',
 
 	// U

@@ -11,18 +11,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'a_confirmer' => 'To be confirmed',
 	'accesrestreint' => 'Restricted access',
 	'aconfirmer' => 'To be confirmed',
-	'action_adherent' => '<MODIF><- Operations ->',
+	'action_adherent' => 'Operations',
 	'activation_compte' => 'Activate your account',
 	'adherents' => 'Members',
 	'admin' => 'Admin',
 	'admin_modifier_auteur_supp' => 'Extra information',
 	'adresse' => 'Address',
 	'adresse_pro' => 'Professionnal address',
-	'ajouter_adherent' => '<MODIF>Add a member',
+	'ajouter_adherent' => 'Add a member',
 	'aout' => 'August',
+	'aucun_resultat_recherche' => 'There isn\'t any result that corresponds to your query.',
 	'auteur' => 'Author',
 	'autre' => 'Other',
 	'avril' => 'April',
+
+	// B
+	'bio' => 'Biography',
 
 	// C
 	'caracteres' => 'characters',
@@ -53,7 +57,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'decembre' => 'December',
+	'delete_user_select' => 'Delete the selected users',
 	'demande_password' => 'Your password:',
+	'description_cfg' => 'This plugin extends the informations about the authors of your site ; you can choose here some additionnal fields',
 	'description_page' => 'Here you can check your saved settings',
 	'divers' => 'any other business',
 	'domaine' => 'Domain',
@@ -90,6 +96,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_inscription_ok' => 'Your registration has been noted. You will receive your login information by email.',
 	'formulaire_login_deja_utilise' => 'This login is already in use. Please choose another.',
 	'formulaire_remplir_obligatoires' => 'Please fill in the required fields.',
+	'formulaire_remplir_validation' => 'Please check the fields that are not valid',
 
 	// G
 	'general_infos' => 'General Information',
@@ -115,6 +122,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_pro' => 'Professional information',
 	'infos_adherent' => 'Extra information',
 	'infos_personnelles' => 'Personal information',
+	'inscriptions' => 'Inscriptions',
 	'inserez_infos' => 'Please fill in the requested information',
 
 	// J
@@ -126,7 +134,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'latitude' => 'Latitude',
 	'legende' => 'Caption',
 	'lisez_mail' => 'An email has been just sent to the address provided. To activate your account please follow the instructions.',
-	'liste_adherents' => '<MODIF>Show members',
+	'liste_adherents' => 'Show members',
+	'liste_comptes_titre' => 'List of members',
 	'login' => 'Username (login)',
 	'longitude' => 'Longitude',
 
@@ -144,10 +153,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'naissance' => 'Date of birth',
+	'nb_users_supprimes' => '@nb@ user(s) has been deleted',
 	'nettoyer_tables' => 'Clean the tables',
+	'no_user_selected' => 'Please select a user',
 	'nom' => 'Signature',
 	'nom_explication' => 'your name or nickname',
 	'nom_famille' => 'Family Name',
+	'nom_site' => 'Website name',
 	'non_renseigne' => 'empty.',
 	'non_renseignee' => 'empty.',
 	'novembre' => 'November',
@@ -170,6 +182,7 @@ You will receive and email telling you how to change your login.',
 	'password_retaper' => 'Confirm the password',
 	'pays' => 'Country',
 	'pays_pro' => 'Country',
+	'pgp' => 'PGP key',
 	'prenom' => 'First name',
 	'probleme_email' => 'Email problem: the activation email cannot be sent.',
 	'profession' => 'Profession',
@@ -181,10 +194,14 @@ You will receive and email telling you how to change your login.',
 	'raccourcis' => 'Shortcuts',
 	'rappel_login' => 'Reminder: your login is: ',
 	'rappel_password' => 'Your password',
+	'recherche_case' => 'Search fields',
+	'recherche_utilisateurs' => 'Search for users',
+	'recherche_valeur' => 'Search',
 	'redemande_password' => 'Please fill in your password again:',
 	'rien_a_faire' => 'Nothing to do',
 
 	// S
+	'saisir_email_valide' => 'Please enter a valid email',
 	'secteur' => 'Sector of activity',
 	'septembre' => 'September',
 	'sexe' => 'Title',
@@ -212,10 +229,9 @@ Thank you for your trust
 
 The @nom_site@ Team 
 @url_site@',
-	'texte_email_inscription' => '<MODIF>You have asked to participate on @nom_site@. 
-You are about to finish your registration for @nom_site@. 
+	'texte_email_inscription' => 'You are about to finish your registration for @nom_site@. 
 
-You just need to click the link below to activate your account and choose your password.
+Click the link below to activate your account and choose your password.
 
 @link_activation@
 
@@ -229,11 +245,11 @@ If you did not ask for this registration or do not want to take part in the site
 @link_suppresion@
 
 
-
-The @nom_site@ Team',
+',
 	'titre_confirmation' => 'Confirmation',
 
 	// U
+	'url_site' => 'Website url',
 	'url_societe' => 'Company website',
 
 	// V
