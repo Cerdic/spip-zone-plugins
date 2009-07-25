@@ -3,17 +3,20 @@
 include_spip("inc/spipmotion");
 
 function spipmotion_editer_contenu_objet($flux){
-	if(extension_loaded('ffmpeg')){
-		if(is_array($flux['args']) && ($flux['args']['type']=='case_document')){
-			$id_document = $flux['args']['id'];
-			$document = sql_fetsel("docs.id_document, docs.extension, L.vu,L.objet,L.id_objet", "spip_documents AS docs INNER JOIN spip_documents_liens AS L ON L.id_document=docs.id_document","L.id_document=".sql_quote($id_document));
-			$extension = $document['extension'];
-			$type = $document['objet'];
-			$id = $document['id_objet'];
-			if(in_array($extension,lire_config('spipmotion/fichiers_videos',array()))){
-				$infos_videos = charger_fonction('infos_videos', 'inc');
+	if(is_array($flux['args']) && ($flux['args']['type']=='case_document')){
+		$id_document = $flux['args']['id'];
+		$document = sql_fetsel("docs.id_document, docs.extension, L.vu,L.objet,L.id_objet", "spip_documents AS docs INNER JOIN spip_documents_liens AS L ON L.id_document=docs.id_document","L.id_document=".sql_quote($id_document));
+		$extension = $document['extension'];
+		$type = $document['objet'];
+		$id = $document['id_objet'];
+		if(in_array($extension,lire_config('spipmotion/fichiers_videos',array()))){
+			if(extension_loaded('ffmpeg')){
+				$infos_videos = charger_fonction('spipmotion_infos_videos', 'inc');
 				$flux['data'] .= $infos_videos($id,$id_document,$type);
 			}
+		}else if(in_array($extension,lire_config('spipmotion/fichiers_audios',array()))){
+			$infos_sons = charger_fonction('spipmotion_infos_sons', 'inc');
+			$flux['data'] .= $infos_sons($id,$id_document,$type);
 		}
 	}
 	return $flux;
@@ -77,18 +80,38 @@ function spipmotion_post_edition($flux){
 
 					$invalider = true;
 				}
-				/**
-				 * Ajout de la vidéo dans la file d'attente d'encodage si besoin
-				 * TODO Passer une par une configuration en CFG
-				 */
-				if(in_array($extension,lire_config('spipmotion/fichiers_videos_encodage',array()))){
-					$en_file = sql_getfetsel("spip_spipmotion_attentes","id_document=$id_document");
-					if(!$en_file){
-						sql_insertq("spip_spipmotion_attentes", array('id_document'=>$id_document,'objet'=>$document['objet'],'id_objet'=>$document['id_objet'],'encode'=>'non','id_auteur'=> $connect_id_auteur));
-						spip_log("on ajoute une video dans la file d'attente","spipmotion");							
+
+				if(lire_config('spipmotion/encodage_auto')){
+					/**
+					 * Ajout de la vidéo dans la file d'attente d'encodage si besoin
+					 */
+					if(in_array($extension,lire_config('spipmotion/fichiers_videos_encodage',array()))){
+						foreach(lire_config('spipmotion/fichiers_videos_sortie',array()) as $extension_sortie){
+							$en_file = sql_getfetsel("spip_spipmotion_attentes","id_document=$id_document AND extension ='$extension_sortie'");
+							if(!$en_file){
+								sql_insertq("spip_spipmotion_attentes", array('id_document'=>$id_document,'objet'=>$document['objet'],'id_objet'=>$document['id_objet'],'encode'=>'non','id_auteur'=> $connect_id_auteur,'extension'=>$extension_sortie));
+								spip_log("on ajoute une video dans la file d'attente","spipmotion");							
+							}
+							else{
+								spip_log("Cette video existe deja dans la file d'attente","spipmotion");							
+							}
+						}
 					}
-					else{
-						spip_log("Cette video existe deja dans la file d'attente","spipmotion");							
+					
+					/**
+					 * Ajout du son dans la file d'attente d'encodage si besoin
+					 */
+					else if(in_array($extension,lire_config('spipmotion/fichiers_audios_encodage',array()))){
+						foreach(lire_config('spipmotion/fichiers_audios_sortie',array()) as $extension_sortie){
+							$en_file = sql_getfetsel("spip_spipmotion_attentes","id_document=$id_document AND extension ='$extension_sortie'");
+							if(!$en_file){
+								sql_insertq("spip_spipmotion_attentes", array('id_document'=>$id_document,'objet'=>$document['objet'],'id_objet'=>$document['id_objet'],'encode'=>'non','id_auteur'=> $connect_id_auteur,'extension'=>$extension_sortie));
+								spip_log("on ajoute un son dans la file d'attente","spipmotion");							
+							}
+							else{
+								spip_log("Ce son existe deja dans la file d'attente","spipmotion");							
+							}
+						}
 					}
 				}
 				if($invalider){

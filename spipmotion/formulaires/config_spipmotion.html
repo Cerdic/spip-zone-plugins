@@ -2,7 +2,6 @@
 <!-- autoriser=configurer -->
 <!-- refus=<:cfg:refus_configuration_configurer:> -->
 
-
 <div class="formulaire_spip formulaire_configurer_spipmotion">
 	
 [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
@@ -25,6 +24,12 @@
 			<fieldset>
 				<h3 class="legend"><:spipmotion:options_config:></h3>
 				<ul>
+					[(#SAISIE{checkbox,encodage_auto,
+						label=<:spipmotion:label_encodage_auto:>,
+						defaut=oui,
+						datas=#ARRAY{
+							oui,<:spipmotion:choix_encodage_auto:>,
+					}})]
 					[(#SAISIE{input,chemin}
 						{label=<:spipmotion:chemin_executable:>}
 						{defaut=/usr/local/bin/ffmpeg})]
