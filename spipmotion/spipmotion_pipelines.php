@@ -5,14 +5,25 @@ include_spip("inc/spipmotion");
 function spipmotion_editer_contenu_objet($flux){
 	if(is_array($flux['args']) && ($flux['args']['type']=='case_document')){
 		$id_document = $flux['args']['id'];
-		$document = sql_fetsel("docs.id_document, docs.extension, L.vu,L.objet,L.id_objet", "spip_documents AS docs INNER JOIN spip_documents_liens AS L ON L.id_document=docs.id_document","L.id_document=".sql_quote($id_document));
+		$document = sql_fetsel("docs.id_document, docs.id_orig, docs.extension, L.vu,L.objet,L.id_objet", "spip_documents AS docs INNER JOIN spip_documents_liens AS L ON L.id_document=docs.id_document","L.id_document=".sql_quote($id_document));
 		$extension = $document['extension'];
 		$type = $document['objet'];
 		$id = $document['id_objet'];
 		if(in_array($extension,lire_config('spipmotion/fichiers_videos',array()))){
-			if(extension_loaded('ffmpeg')){
+			if($document['id_orig'] > 0){
+				$flux['data'] .= '<p>'._T('spipmotion:version_encodee_de',array('id_orig'=>$document['id_orig'])).'</p>';
+			}
+			else if(extension_loaded('ffmpeg')){
 				$infos_videos = charger_fonction('spipmotion_infos_videos', 'inc');
 				$flux['data'] .= $infos_videos($id,$id_document,$type);
+			}
+		}
+		if(in_array($extension,lire_config('spipmotion/fichiers_audios',array()))){
+			if($document['id_orig'] > 0){
+				$flux['data'] .= '<p>'._T('spipmotion:version_encodee_de',array('id_orig'=>$document['id_orig'])).'</p>';
+			}else{
+				$infos_audios = charger_fonction('spipmotion_infos_audios', 'inc');
+				$flux['data'] .= $infos_audios($id,$id_document,$type);
 			}
 		}
 	}
@@ -101,28 +112,28 @@ function spipmotion_post_edition($flux){
 							}
 						}
 					}
-					
-					/**
-					 * Ajout du son dans la file d'attente d'encodage si besoin
-					 */
-					else if(in_array($extension,lire_config('spipmotion/fichiers_audios_encodage',array()))){
-						foreach(lire_config('spipmotion/fichiers_audios_sortie',array()) as $extension_sortie){
-							$en_file = sql_getfetsel("spip_spipmotion_attentes","id_document=$id_document AND extension ='$extension_sortie' AND encode IN('en_cours,non')");
-							if(!$en_file){
-								$id_doc_attente = sql_insertq("spip_spipmotion_attentes", array('id_document'=>$id_document,'objet'=>$document['objet'],'id_objet'=>$document['id_objet'],'encode'=>'non','id_auteur'=> $GLOBALS['visiteur_session']['id_auteur'],'extension'=>$extension_sortie));
-								spip_log("on ajoute un son dans la file d'attente","spipmotion");
-								$en_cours = sql_fetsel("id_spipmotion_attente","spip_spipmotion_attentes","encode='en_cours'");
-								if(!$en_cours){
-									$document = sql_select('*','spip_documents','id_document='.intval($id_document));
-									$encoder($document,$id_doc_attente);
-								}							
-							}
-							else{
-								spip_log("Ce son existe deja dans la file d'attente","spipmotion");							
-							}
+				}
+				/**
+				 * Ajout du son dans la file d'attente d'encodage si besoin
+				 */
+				else if(in_array($extension,lire_config('spipmotion/fichiers_audios_encodage',array()))){
+					foreach(lire_config('spipmotion/fichiers_audios_sortie',array()) as $extension_sortie){
+						$en_file = sql_getfetsel("spip_spipmotion_attentes","id_document=$id_document AND extension ='$extension_sortie' AND encode IN('en_cours,non')");
+						if(!$en_file){
+							$id_doc_attente = sql_insertq("spip_spipmotion_attentes", array('id_document'=>$id_document,'objet'=>$document['objet'],'id_objet'=>$document['id_objet'],'encode'=>'non','id_auteur'=> $GLOBALS['visiteur_session']['id_auteur'],'extension'=>$extension_sortie));
+							spip_log("on ajoute un son dans la file d'attente","spipmotion");
+							$en_cours = sql_fetsel("id_spipmotion_attente","spip_spipmotion_attentes","encode='en_cours'");
+							if(!$en_cours){
+								$document = sql_select('*','spip_documents','id_document='.intval($id_document));
+								$encoder($document,$id_doc_attente);
+							}							
+						}
+						else{
+							spip_log("Ce son existe deja dans la file d'attente","spipmotion");							
 						}
 					}
 				}
+				
 				if($invalider){
 					/**
 					 * On invalide le cache de cet élément 

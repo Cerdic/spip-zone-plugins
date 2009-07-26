@@ -50,7 +50,12 @@ function encodage($source,$doc_attente){
 	if(in_array($source['extension'],lire_config('spipmotion/fichiers_audios_encodage',array()))){
 		/**
 		 * Encodage du son 
-		 */	
+		 */
+		$encodage = find_in_path('script_bash/spipmotion.sh').' --e '.$chemin.' --s '.$fichier_temp.' --audiobitrate '.lire_config("spipmotion/bitrate_audio_$extension_attente","64").' --audiofreq '. lire_config("spipmotion/frequence_audio_$extension_attente","22050").' --p '.lire_config("spipmotion/chemin","/usr/local/bin/ffmpeg");
+		spip_log("$encodage",'spipmotion');
+		$lancement_encodage = exec($encodage,$retour);
+		spip_log($retour,'spipmotion');
+		spip_log("l'encodage est terminé",'spipmotion');
 	}
 	
 	/**
@@ -129,6 +134,6 @@ function encodage($source,$doc_attente){
 		spip_log('invalider', 'spipmotion');
 	}
 
-	return;
+	return $x;
 }
 ?>

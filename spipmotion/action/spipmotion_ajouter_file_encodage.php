@@ -18,8 +18,7 @@ function action_spipmotion_ajouter_file_encodage_dist(){
 	action_spipmotion_ajouter_file_encodage_post($r);
 }
 
-function action_spipmotion_ajouter_file_encodage_post($r)
-{	
+function action_spipmotion_ajouter_file_encodage_post($r){
 	global $visiteur_session;
 	list(, $sign, $id, $type, $id_document) = $r;
 	spip_log($id.' - '.$id_document.'  - '.$type);
@@ -30,14 +29,14 @@ function action_spipmotion_ajouter_file_encodage_post($r)
 		spip_log('On est dans le mode encodage auto','spipmotion');
 
 		$encoder = charger_fonction('encodage','inc');
-		$document = sql_fetsel("docs.id_document, docs.extension,docs.fichier,docs.mode,docs.distant, L.vu, L.objet, L.id_objet", "spip_documents AS docs INNER JOIN spip_documents_liens AS L ON L.id_document=docs.id_document","L.id_document=".intval($id_document));
 		/**
 		 * Ajout de la vidéo dans la file d'attente d'encodage si besoin
 		 */
 		if(in_array($extension,lire_config('spipmotion/fichiers_videos_encodage',array()))){
 			foreach(lire_config('spipmotion/fichiers_videos_sortie',array()) as $extension_sortie){
-				$en_file = sql_getfetsel("id_spipmotion_attente","spip_spipmotion_attentes","id_document=$id_document AND extension ='$extension_sortie' AND encode IN('en_cours,non')");
+				$en_file = sql_getfetsel("id_spipmotion_attente","spip_spipmotion_attentes","id_document=$id_document AND extension ='$extension_sortie' AND encode IN ('en_cours,non')");
 				if(!$en_file){
+					$document = sql_fetsel("docs.id_document, docs.extension,docs.fichier,docs.mode,docs.distant, L.vu, L.objet, L.id_objet", "spip_documents AS docs INNER JOIN spip_documents_liens AS L ON L.id_document=docs.id_document","L.id_document=".intval($id_document));
 					$id_doc_attente = sql_insertq("spip_spipmotion_attentes", array('id_document'=>$id_document,'objet'=>$document['objet'],'id_objet'=>$document['id_objet'],'encode'=>'non','id_auteur'=> $GLOBALS['visiteur_session']['id_auteur'],'extension'=>$extension_sortie));
 					spip_log("on ajoute une video dans la file d'attente","spipmotion");
 					$en_cours = sql_getfetsel("id_spipmotion_attente","spip_spipmotion_attentes","encode='en_cours'");
@@ -57,13 +56,15 @@ function action_spipmotion_ajouter_file_encodage_post($r)
 		 */
 		else if(in_array($extension,lire_config('spipmotion/fichiers_audios_encodage',array()))){
 			foreach(lire_config('spipmotion/fichiers_audios_sortie',array()) as $extension_sortie){
-				$en_file = sql_getfetsel("spip_spipmotion_attentes","id_document=$id_document AND extension ='$extension_sortie' AND encode IN('en_cours,non')");
+				$en_file = sql_getfetsel("id_spipmotion_attente","spip_spipmotion_attentes","id_document=$id_document AND extension ='$extension_sortie' AND encode IN ('en_cours,non')");
 				if(!$en_file){
+					$document = sql_fetsel("docs.id_document, docs.extension,docs.fichier,docs.mode,docs.distant, L.vu, L.objet, L.id_objet", "spip_documents AS docs INNER JOIN spip_documents_liens AS L ON L.id_document=docs.id_document","L.id_document=".intval($id_document));
 					$id_doc_attente = sql_insertq("spip_spipmotion_attentes", array('id_document'=>$id_document,'objet'=>$document['objet'],'id_objet'=>$document['id_objet'],'encode'=>'non','id_auteur'=> $GLOBALS['visiteur_session']['id_auteur'],'extension'=>$extension_sortie));
 					spip_log("on ajoute un son dans la file d'attente","spipmotion");
-					$en_cours = sql_fetsel("id_spipmotion_attente","spip_spipmotion_attentes","encode='en_cours'");
+					$en_cours = sql_getfetsel("id_spipmotion_attente","spip_spipmotion_attentes","encode='en_cours'");
 					if(!$en_cours){
-						$document = sql_select('*','spip_documents','id_document='.intval($id_document));
+						$document = sql_fetsel('*','spip_documents','id_document='.intval($id_document));
+						spip_log($document);
 						$encoder($document,$id_doc_attente);
 					}							
 				}

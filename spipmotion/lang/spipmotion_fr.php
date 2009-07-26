@@ -65,6 +65,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'encodage_en_cours' => 'ENCODAGE EN COURS...',
 	
 	// V
+	'version_encodee_de' => 'Ce document est une version encod&eacute;e du document @id_orig@',
 	'video_infos_techniques' => 'Informations techniques...',
 	'video_nom_fichier' => 'Nom du fichier : ',
 	'video_format' => 'Format : ',
