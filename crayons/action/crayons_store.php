@@ -59,7 +59,14 @@ function post_crayons() {
 }
 
 
-function crayons_store() {
+function crayons_store($options = array()) {
+	// permettre de surcharger les fonctions de recuperation des valeurs
+	// et de sauvegardes de celles-ci
+	$options = array_merge(array(
+			'f_get_valeur' => 'crayons_store_get_valeur',
+			'f_set_modifs' => 'crayons_store_set_modifs',
+		), $options);
+		
 	include_spip('inc/crayons');
 	$wdgcfg = wdgcfg();
 	
@@ -87,7 +94,8 @@ function crayons_store() {
 
 					// recuperer l'existant pour calculer son md5 et verifier
 					// qu'il n'a pas ete modifie entre-temps
-					$data = valeur_colonne_table($type, array_keys($content), $id);
+					$get_valeur = $options['f_get_valeur'];
+					$data = $get_valeur($content, $regs);
 					$md5 = md5(serialize($data));
 
 					// est-ce que le champ a ete modifie dans la base entre-temps ?
@@ -117,6 +125,37 @@ function crayons_store() {
 	if ($return['$erreur'])
 		return $return;
 
+	// on traite toutes les modifications
+	// en appelant la fonction adequate de traitement
+	$set_modifs = $options['f_set_modifs'];
+	$return = $set_modifs($modifs, $return);
+
+	// une quelconque erreur ... ou rien ==> on ne fait rien !
+	if ($return['$erreur'])
+		return $return;
+		
+	// et maintenant refaire l'affichage des crayons modifies
+	include_spip('inc/texte');
+	foreach ($modifs as $m) {
+		list($type, $modele, $id, $content, $wid) = $m;
+			$f = charger_fonction($type.'_'.$modele, 'vues', true)
+			  OR $f = charger_fonction($modele, 'vues', true)
+			  OR $f = charger_fonction($type, 'vues', true)
+			  OR $f = 'vues_dist';
+			$return[$wid] = $f($type, $modele, $id, $content);
+	}
+	return $return;
+}
+
+// recuperer une valeur en fonction des parametres recuperes
+// cette fonction cherche une valeur d'un colonne d'une table SQL
+function crayons_store_get_valeur($content, $regs) {
+	list(,$crayon,$type,$modele,$id) = $regs;
+	return valeur_colonne_table($type, array_keys($content), $id);
+}
+
+// stocke les valeurs envoyees dans des colonnes de table SQL
+function crayons_store_set_modifs($modifs, $return) {
 	// sinon on bosse : toutes les modifs ont ete acceptees
 	// verifier qu'on a tout ce qu'il faut pour mettre a jour la base
 	// et regrouper les mises a jour par type/id
@@ -195,18 +234,8 @@ function crayons_store() {
 	        $fun($id, $champsvaleurs['chval'], $type, $champsvaleurs['wdg']);
 	    }
 	}
-
-	// et maintenant refaire l'affichage des crayons modifies
-	include_spip('inc/texte');
-	foreach ($modifs as $m) {
-		list($type, $modele, $id, $content, $wid) = $m;
-			$f = charger_fonction($type.'_'.$modele, 'vues', true)
-			  OR $f = charger_fonction($modele, 'vues', true)
-			  OR $f = charger_fonction($type, 'vues', true)
-			  OR $f = 'vues_dist';
-			$return[$wid] = $f($type, $modele, $id, $content);
-	}
-	return $return;
+	
+	return $return;	
 }
 
 //
@@ -316,10 +345,15 @@ function modeles_tags($id, $c) {
 }
 
 function action_crayons_store_dist() {
+	return action_crayons_store_args();
+}
+
+// permettre de passer une autre fonction de stockage des informations
+function action_crayons_store_args($store = 'crayons_store') {
 	header("Content-Type: text/html; charset=".$GLOBALS['meta']['charset']);
 	lang_select($GLOBALS['auteur_session']['lang']);
 
-	$r = crayons_store();
+	$r = $store();
 
 	// Si on a ete appeles par jQuery, on renvoie tout, c'est le client
 	// crayons.js qui va traiter l'affichage du resultat et status
@@ -351,7 +385,7 @@ function action_crayons_store_dist() {
 		echo json_export($r);
 	}
 
-	exit;
+	exit;	
 }
 
 ?>
