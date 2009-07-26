@@ -9,7 +9,7 @@
 	<version>
 	0.3
 	</version>
-	<version_base>0.5</version_base>
+	<version_base>0.6</version_base>
 	<etat>
 	experimental
 	</etat>
@@ -19,10 +19,11 @@
 	</multi>
 	</description>
 	<lien>http://kent1.sklunk.net/spip.php?article93</lien>
-	<necessite id="SPIP" version="[2.0;]" />
+	<necessite id="SPIP" version="[2.0.8;]" />
 	<necessite id='cfg' version='[1.13;]' />
 	<necessite id='saisies' version='[1.0;]' />
 	<necessite id='spip_bonux' version='[1.8;]' />
+	<necessite id='getid3' version='[0.2;]' />
 	<options>
 	spipmotion_options.php
 	</options>

@@ -12,7 +12,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/actions');
 
-function inc_infos_videos_dist($id, $id_document,$type,$script='',$ignore_flag = false) {
+function inc_spipmotion_infos_videos_dist($id, $id_document,$type,$script='',$ignore_flag = false) {
 	if(_AJAX){
 		include_spip('public/assembler');
 		include_spip('inc/presentation');

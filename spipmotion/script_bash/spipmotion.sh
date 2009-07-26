@@ -14,15 +14,15 @@ spipmotion $version
 Utilisation : ./spipmotion arguments
 ou arguments doit inclure la vidéo source et la vidéo de sortie au format flv et éventuellement :
 * la taille de la video ex : --size 320x240
-* le bitrate de la video ex : --bitrate 448
+* le bitrate de la video ex : --bitrate 448kbs
 * le nombre d'image par seconde ex : --fps 15
-* le bitrate audio ex : --audiobitrate 64
+* le bitrate audio ex : --audiobitrate 64kbs
 * la fréquence d'echantillonnage sonnore ex : --bitrate 22050
 * le chemin vers l'executable ffmpeg (--p). /usr/local/bin/ffmpeg est la valeur par défaut.
 
 
 Exemple :
-./spipmotion.sh --e video-entree.avi --s video-sortie.flv --size 320x240 --bitrate 448 --fps 15 --audiobitrate 64 --audiofreq 22050 --p /usr/local/bin/ffmpeg
+./spipmotion.sh --e video-entree.avi --s video-sortie.flv --size 320x240 --bitrate 448kbs --fps 15 --audiobitrate 64kbs --audiofreq 22050 --p /usr/local/bin/ffmpeg
 
 #####################################################
 ##  Ce programme recquiert une version de ffmpeg   ##
