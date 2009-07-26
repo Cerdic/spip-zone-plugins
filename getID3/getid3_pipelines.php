@@ -28,12 +28,8 @@ function getid3_post_edition($flux){
 			$recuperer_infos = charger_fonction('getid3_recuperer_infos','inc');
 			$infos = $recuperer_infos($id_document);
 		}
-		else{
-			return $flux;
-		}
 	}
-	else{
-		return $flux;
-	}
+
+	return $flux;
 }
 ?>

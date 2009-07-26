@@ -11,7 +11,7 @@ function inc_getid3_recuperer_infos($id_document){
 		return;
 	}
 	include_spip('inc/documents');
-	$document = sql_fetsel("docs.id_document,docs.titre,docs.extension,docs.fichier,docs.taille,docs.mode", "spip_documents AS docs INNER JOIN spip_documents_liens AS L ON L.id_document=docs.id_document","L.id_document=".sql_quote($id_document));
+	$document = sql_fetsel("docs.id_document,docs.titre,docs.extension,docs.fichier,docs.taille,docs.mode", "spip_documents AS docs INNER JOIN spip_documents_liens AS L ON L.id_document=docs.id_document","L.id_document=".intval($id_document));
 	$son_chemin = get_spip_doc($document['fichier']);
 	spip_log("GETID3 : inc_getid3_recuperer_infos (postedition) - on travail sur $son_chemin","getid3");
 	$recuperer_id3 = charger_fonction('recuperer_id3','inc');
@@ -47,7 +47,7 @@ function inc_getid3_recuperer_infos($id_document){
 			'bits'=>$id3['bits'],
 			'canaux' => $id3['channels']
 		),
-		'id_document='.sql_quote($id_document));
+		'id_document='.intval($id_document));
 	
 	return;
 }
