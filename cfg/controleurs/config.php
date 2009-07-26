@@ -1,0 +1,30 @@
+<?php
+
+function controleurs_config_dist($regs) {
+    list(,$crayon,$type,$champ,$id) = $regs;
+	// evidemment, pour CFG, on recupere pas tout a fait ce qu'on souhaite...
+	// retraduire depot___plugin__casier__cle en depot::plugin/casier/cle
+	include_spip('cfg_fonctions');
+	$config = cfg_crayon2config($champ);
+	$val = lire_config($config);
+    if ($val === null) {
+	    return array("$type $config: " . _U('crayons:pas_de_valeur'), 6);
+    }
+    
+    $valeur = array('config' => $val);
+	$n = new Crayon($crayon, $valeur,
+			array('hauteurMini' => 140,
+				  /*'controleur' => 'controleurs/article_introduction'*/));
+    
+    $contexte = array();
+    $html = $n->formulaire($contexte);
+    include_spip('action/crayon_html');
+    $html = crayons_formulaire($html, 'crayons_config_store');
+    $status = NULL;
+
+	return array($html, $status);
+
+}
+
+
+?>

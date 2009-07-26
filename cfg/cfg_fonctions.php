@@ -49,6 +49,40 @@ function balise_CFG_CHEMIN_dist($p) {
 }
 
 
+/* 
+ * Pour jouer avec les Crayons et les configurations 
+ * <div class="#EDIT_CONFIG{plugin/casier/cle}">
+ * 		#CONFIG{plugin/casier/cle}
+ * </div>
+ */
+function balise_EDIT_CONFIG_dist($p) {
+	$config = interprete_argument_balise(1,$p); 
+	$instance = interprete_argument_balise(2,$p);
+	$instance = $instance ? $instance : "'0'";
+	  $p->code = 'classe_config_crayon('.$config.', '.$instance.')';
+	  $p->statut = 'php';
+	  $p->interdire_scripts = false;
+	return $p;
+}
+
+function classe_config_crayon($config, $instance) {
+	// pour n'avoir que des caracteres alphanumeriques,
+	// on transforme "depot::plugin/casier/cle" en "depot___plugin__casier__cle"
+	$config = cfg_config2crayon($config);
+   // return  'crayon composant-'.$composant.'-'.$instance.' type_pinceau';
+   return  'crayon config-'.$config.'-'.$instance . ' type_config';
+}
+
+function cfg_config2crayon($config) {return str_replace(array('::','/'), array('___','__'), $config);}
+function cfg_crayon2config($crayon) {return str_replace(array('___','__'), array('::','/'), $crayon);}
+
+// autorisation de crayonner
+function autoriser_config_crayonner_dist($faire, $type, $id, $qui, $opt) {
+	return autoriser('configurer', $type, $id, $qui, $opt);
+}
+function autoriser_config_modifier_dist($faire, $type, $id, $qui, $opt) {
+	return autoriser('crayonner', $type, $id, $qui, $opt);
+}
 # CFG_ARBO
 
 

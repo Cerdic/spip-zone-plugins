@@ -38,8 +38,8 @@ function cfg_header_prive($flux){
 		return $flux;
 	}
 
-	// Ajout des css de cfg (uniquement balise arbo pour l'instant) dans le header prive
-	$flux .= '<link rel="stylesheet" href="'._DIR_PLUGIN_CFG.'css/cfg.css" type="text/css" media="all" />';
+	// Ajout des css de cfg
+	$flux .= '<link rel="stylesheet" href="' . generer_url_public('cfg.css'). '" type="text/css" media="all" />';
 
 	include_spip('inc/filtres');
 	include_spip('inc/cfg_formulaire');
@@ -53,8 +53,11 @@ function cfg_header_prive($flux){
 	return $flux;
 }
 
-
-
+function cfg_insert_head($flux){
+	// Ajout des css de cfg
+	$flux .= '<link rel="stylesheet" href="' . generer_url_public('cfg.css'). '" type="text/css" media="all" />';
+	return $flux;
+}
 
 // teste si $form n'est pas un formulaire CVT deja existant
 // (et non un formulaire CFG nomme $form en CVT)
