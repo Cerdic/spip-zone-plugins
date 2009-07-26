@@ -15,7 +15,13 @@
 	[(#SAISIE{input,fps_#ENV{valeur}}
 		{label=<:spipmotion:framerate:>}
 		{defaut=15}{size=4})]
-		
+	[(#SAISIE{selection,acodev_#ENV{valeur},
+		label=<:spipmotion:codec_son:>,
+		datas=#ARRAY{
+			libmp3lame,mp3,
+			cle2,valeur2,
+			cle3,valeur3,
+		}})]
 	[(#SAISIE{input,frequence_audio_#ENV{valeur}}
 		{label=<:spipmotion:frequence_audio:>}
 		{defaut=22050}{size=6})]

@@ -24,12 +24,9 @@
 			<fieldset>
 				<h3 class="legend"><:spipmotion:options_config:></h3>
 				<ul>
-					[(#SAISIE{checkbox,encodage_auto,
+					[(#SAISIE{case,encodage_auto,
 						label=<:spipmotion:label_encodage_auto:>,
-						defaut=oui,
-						datas=#ARRAY{
-							oui,<:spipmotion:choix_encodage_auto:>,
-					}})]
+						label_case=<:spipmotion:choix_encodage_auto:>})]
 					[(#SAISIE{input,chemin}
 						{label=<:spipmotion:chemin_executable:>}
 						{defaut=/usr/local/bin/ffmpeg})]
