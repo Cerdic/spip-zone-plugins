@@ -1,18 +1,19 @@
 #!/bin/bash
-## spipmotion : A shell program to convert videos in flv format (flash video)
-## Version 0.1
+## SPIPmotion : A shell program to convert multimedia files
+## Version 0.2
+##
 ## Dependancies :
 ##   * ffmpeg with libmp3lame support
 ## Credits prealables : aozeo - http://www.aozeo.com/blog/40-linux-convertir-videos-flv-ffmpeg-telephone-portable
 
-version="0.1"
+VERSION="0.2"
 
 ################ LOCALISATION #####################
 messageaide="
-spipmotion $version
+SPIPmotion v$VERSION
 
 Utilisation : ./spipmotion arguments
-ou arguments doit inclure la vidéo source et la vidéo de sortie au format flv et éventuellement :
+ou arguments doit inclure le fichier source et le fichier de sortie et éventuellement :
 * la taille de la video ex : --size 320x240
 * le bitrate de la video ex : --bitrate 448kbs
 * le nombre d'image par seconde ex : --fps 15
@@ -21,21 +22,22 @@ ou arguments doit inclure la vidéo source et la vidéo de sortie au format flv 
 * le chemin vers l'executable ffmpeg (--p). /usr/local/bin/ffmpeg est la valeur par défaut.
 
 
-Exemple :
-./spipmotion.sh --e video-entree.avi --s video-sortie.flv --size 320x240 --bitrate 448kbs --fps 15 --audiobitrate 64kbs --audiofreq 22050 --p /usr/local/bin/ffmpeg
+Exemples :
+./spipmotion.sh --e fichier-entree.avi --s fichier-sortie.flv --size 320x240 --bitrate 448 --fps 15 --audiobitrate 64kbs --audiofreq 22050 --p /usr/local/bin/ffmpeg
+./spipmotion.sh --e fichier-entree.wav --s fichier-sortie.mp3 --audiobitrate 64 --audiofreq 22050
 
 #####################################################
 ##  Ce programme recquiert une version de ffmpeg   ##
 ##        compilée avec le support libmp3lame        ##
-## Voir http://kent1.sklunk.net/spip.php?article71 ##
+## Voir http://technique.arscenic.org/compilation-de-logiciel/article/compiler-ffmpeg1 ##
 #####################################################
 "
-		formatsortie="spipmotion : le fichier de sortie doit se terminer par flv"
-		mauvaisarg="spipmotion : argument ${1} non reconnu
+		formatsortie="SPIPmotion : le fichier de sortie doit se terminer par une extension reconnue : flv flac ogg ogv oga mp3 mp4"
+		mauvaisarg="SPIPmotion : argument ${1} non reconnu
 Pour visualiser le manuel de spipmotion, faîtes : \"./spipmotion --help\""
-		pasvideoentree="spipmotion : aucune vidéo source n'a été spécifiée
+		pasfichierentree="SPIPmotion : aucun fichier source n'a été spécifié
 Pour visualiser le manuel de spipmotion, faîtes : \"./spipmotion --help\""
-		pasvideosortie="spipmotion : aucune vidéo de sortie n'a été spécifiée
+		pasfichiersortie="SPIPmotion : aucun fichier de sortie n'a été spécifié
 Pour visualiser le manuel de spipmotion, faîtes : \"./spipmotion --help\""
 		assemblage="Conversion en .flv"
 		titredejala="Fichier de sortie existant"
@@ -44,7 +46,7 @@ Voulez-vous l'écraser ?
 Si non, le fichier déjà présent sera renommé."
 		oui="oui"
 		non="non"
-		succes="Succès ! La vidéo a bien été convertie en flv !"
+		succes="Succès ! Le fichier a bien été converti !"
 
 #################################################
 
@@ -52,13 +54,15 @@ Si non, le fichier déjà présent sera renommé."
 
 while test -n "${1}"; do
 	case "${1}" in
-		--help) echo "$messageaide";
+		--help|-h) echo "$messageaide";
+		exit 0;;
+		--version|-v) echo "SPIPmotion v. "${VERSION}"";
 		exit 0;;
 		--e) entree="${2}"
 		shift;;
 		--s) sortie="${2}"
 			case "$sortie" in
-			*".flv");;
+			*".mp3"|*".flac"|*".flv"|*".mp4"|*".ogg"*|".oga"|*".ogv");;
 			*) echo "$formatsortie";
 			exit 1;;
 			esac
@@ -67,9 +71,11 @@ while test -n "${1}"; do
 		shift;;
 		--bitrate) bitrate="${2}"
 		shift;;
-		--audiobitrate) audiobitrate="${2}"
+		--acodec) acodec="${2}"
 		shift;;
-		--audiofreq) audiofreq="${2}"
+		--audiobitrate) audiobitrate="-ab ${2}.kb"
+		shift;;
+		--audiofreq) audiofreq="-ar ${2}"
 		shift;;
 		--fps) fps="${2}"
 		shift;;
@@ -83,37 +89,64 @@ done
 ########## TRAITEMENT DES ARGUMENTS ###############
 
 case "$entree" in
-  "") echo "$pasvideoentree"; exit 1;;
+  "") echo "$pasfichierentree"; exit 1;;
 esac
 
 case "$sortie" in
   "") "$sortie" = "$entree.flv"
 esac
 
+case "$chemin" in
+  "") chemin="/usr/local/bin/ffmpeg"
+esac
+
+########### Arguments pour audio
+case "$audiobitrate" in
+  "") 
+  case "$sortie" in
+  	*".mp3") audiobitrate="-ab 128.kb" ;;
+  	*".flv") audiobitrate="-ab 64.kb" ;;
+  	*".ogg"|*".oga"|*".ogv") audiobitrate="-aq 50" ;;
+  esac
+esac
+
+case "$audiofreq" in
+  "") 
+  case "$sortie" in
+  	*".flv") audiofreq="-ar 22050" ;;
+  esac 
+esac
+
+case "$acodec" in
+	"")
+	case "$sortie" in
+  		*".mp3"|*".flv") acodec="-acodec libmp3lame" ;;
+  		*".flac") acodec="-acodec flac" ;;
+  		*".ogg"|*".oga"|*".ogv") acodec="-acodec vorbis" ;;
+  	esac
+esac
+
+########### Arguments spécifiques aux videos
+
 case "$size" in
   "") size="320x240"
 esac
 
 case "$bitrate" in
-  "") bitrate="448"
-esac
-
-case "$audiobitrate" in
-  "") audiobitrate="64"
-esac
-
-case "$audiofreq" in
-  "") audiofreq="22050"
+  "") bitrate="-b 448.kb"
 esac
 
 case "$fps" in
   "") fps="15"
 esac
 
-case "$chemin" in
-  "") chemin="/usr/local/bin/ffmpeg"
+case "$vcodec" in
+	"")
+	case "$sortie" in
+  		*".flv") vcodec="-vcodec flv" ;;
+  		*".ogg"|*".ogv") vcodec="-vcodec theora" ;;
+  	esac
 esac
-
 ########### SI LA SORTIE EXISTE DÉJÀ #############
 
 if [ -f $sortie ];
@@ -138,7 +171,15 @@ fi
 
 ############# ON UTILISE FFMPEG ################
 
-echo "ah$chemin"
-nice "$chemin" -i $entree -acodec libmp3lame -f flv -s $size -b $bitrate.kb -ab $audiobitrate -ar $audiofreq -r $fps -y $sortie
+echo "$chemin"
+
+case "$sortie" in
+  *".mp3"|*".flac"|*".ogg"|*".oga" ) 
+  echo "On est dans un son" 
+  nice -19 "$chemin" -i $entree $acodec $audiobitrate $audiofreq -y $sortie ;;
+  *".flv"|*".mp4"|*".ogv" ) 
+  echo "on est dans une video"
+  nice -19 "$chemin" -i $entree $acodec $vcodec -s $size $bitrate $audiobitrate $audiofreq -r $fps -y $sortie ;;
+esac
 
 echo "$succes"
