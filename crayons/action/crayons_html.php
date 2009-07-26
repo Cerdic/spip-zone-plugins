@@ -328,7 +328,7 @@ function crayons_boutons($boutons = array()) {
 		return '<div class="crayon-boutons"><div>'.$html.'</div></div>';
 }
 
-function crayons_formulaire($html) {
+function crayons_formulaire($html, $action='crayons_store') {
 	if (!$html)
 		return '';
 
@@ -336,7 +336,7 @@ function crayons_formulaire($html) {
 	return liens_absolus(
 		'<div class="formulaire_spip">'
 		. '<form class="formulaire_crayon" method="post" action="'
-		. url_absolue(parametre_url(self(),'action', 'crayons_store'))
+		. url_absolue(parametre_url(self(),'action', $action))
 		. '" enctype="multipart/form-data">'
 		. $html
 		. crayons_boutons()
