@@ -23,7 +23,17 @@
 	if (!isset($t['field']['cfg'])) {
 		sql_alter('TABLE spip_auteurs ADD COLUMN cfg TEXT DEFAULT \'\' NOT NULL');
 	}
+	
+### creation de la colonne 'extra' si absente ###
 
+	// creation de la colonne 'cfg' sur spip_auteurs si elle n'existe pas.
+	include_spip('base/abstract_sql');
+	$t = sql_showtable('spip_rubriques');
+	if (!isset($t['field']['extra'])) {
+		sql_alter('TABLE spip_rubriques ADD COLUMN extra TEXT DEFAULT \'\' NOT NULL');
+	}
+	
+	
 ### ecrire_config ###
 	// les bases de test
 	$assoc = array(
