@@ -10,8 +10,7 @@
   Exemple d'appel :
 	[(#SAISIE{statuts_auteurs,statuts,
 		label=<:plugin:statuts_des_auteurs:>,
-		multiple=oui
-	})] 
+		multiple=oui})] 
 ]
 
 <select name="#ENV{nom}[(#ENV{multiple}|?{[(#VAL{&#91;&#93;}|html_entity_decode)]})]" id="champ_#ENV{nom}"[ class="(#ENV{class})"][(#ENV{multiple}|oui) multiple="multiple"]>

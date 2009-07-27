@@ -18,15 +18,14 @@
   Exemples d'appels :
     [(#SAISIE{input, couleur_foncee,
 		label=<:spa:couleur_foncee:>,
-		size=7
-	})]
+		size=7})]
 
 ]
-
 [(#ENV{nom}|oui)
 #SET{erreurs,#ENV**{erreurs}|table_valeur{#ENV{nom}}}
 #SET{obligatoire,#ENV{obligatoire}|et{#ENV{obligatoire}|!={non}}|?{obligatoire,''}}
-<li class="editer_[(#ENV{nom})][ (#GET{obligatoire})][ (#GET{erreurs}|oui)erreur]">
+#SET{li_class,#ENV{type_saisie}|substr{0,9}|=={selecteur}|?{selecteur_item,''}}
+<li class="editer_[(#ENV{nom})][ (#GET{obligatoire})][ (#GET{erreurs}|oui)erreur][ (#GET{li_class})]">
 	<label for="champ_#ENV{nom}">[(#ENV*{label}|sinon{#ENV{nom}})][<span class='obligatoire'>(#GET{obligatoire}|et{#ENV{info_obligatoire}})#ENV*{info_obligatoire}</span>]</label>
 	[<span class='erreur_message'>(#GET{erreurs})</span>]
 	[<p class='explication'>(#ENV*{explication})</p>]
