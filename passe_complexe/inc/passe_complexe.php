@@ -2,7 +2,7 @@
 
   //on combine une liste de mots, separe par des virgules ou espace pour en faire une liste quoter: ,"mot1", "mot3"
 function passe_complexe_quote_common($list) {
-  $commons = split('[ ,]',$list);
+  $commons = preg_split('/[ ,]/',$list);
   $return = '';
   for ($i = 0; $i < count($commons); $i++) {
 	if($commons[$i] && count($commons[$i]) > 0)

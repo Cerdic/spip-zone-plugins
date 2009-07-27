@@ -56,7 +56,7 @@ function action_importer_catalogue_dist() {
 	else {
 
 		// verification si extention OK
-		$tableau = split('[.]', $fichier);
+		$tableau = explode('.', $fichier);
 		$type_ext = $tableau[1];
 
 		if ($type_ext == 'ods') {

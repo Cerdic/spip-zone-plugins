@@ -35,14 +35,14 @@ if (!$id_article = intval($arg)) {
 	list($id_auteur, $pass) =  caracteriser_auteur();
 	$hash = _action_auteur("editer_article-$arg", $id_auteur, $pass, 'alea_ephemere');
 
-    $new_arg_document = split('/',$arg_document);
+    $new_arg_document = explode('/',$arg_document);
     $fin_arg = '';
 	    for($i=1; $i < sizeof($new_arg_document) ; $i++){ 
 	    	$fin_arg = $fin_arg . '/' . $new_arg_document[$i] ;
 	    } 
     $new_arg_document = $id_article . $fin_arg ;
   
-    $new_arg_vignette = split('/',$arg_vignette);
+    $new_arg_vignette = explode('/',$arg_vignette);
     $fin_arg = '';
 	    for($i=1; $i < sizeof($new_arg_vignette) ; $i++){ 
 	    $fin_arg = $fin_arg . '/' . $new_arg_vignette[$i] ;

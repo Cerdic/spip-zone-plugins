@@ -88,7 +88,7 @@ function __exec_multi_queries($queries) {
 	if (substr($queries, -1, 1) == ';') {
 		$queries = substr($queries, 0, strlen($queries)-1);
 	}
-	$_queries = split(';', $queries);
+	$_queries = explode(';', $queries);
 	while( list(,$val) = each($_queries)) {
 		$res = spip_query($val);
 	}

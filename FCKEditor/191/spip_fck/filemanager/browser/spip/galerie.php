@@ -1,7 +1,7 @@
 <?php
 
 // détermination du chemin de base par rapport à la racine du serveur
-$dir_relatif_array = split('/', $_SERVER["PHP_SELF"]);
+$dir_relatif_array = explode('/', $_SERVER["PHP_SELF"]);
 $i = 0;
 $dir_relatif="";
 while($dir_relatif_array[$i] != 'plugins') {

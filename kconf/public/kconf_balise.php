@@ -82,7 +82,7 @@ function critere_kconf($idb, &$boucles, $crit) {
 		$t = $crit->param[0];
 		if ($t[0]->type == 'texte') {
 			$t = $t[0]->texte;
-			list($k,$v) = split(" ",$t);
+			list($k,$v) = explode(" ",$t);
 			$ret = "s:".strlen($k).":\"$k\";a:3:{i:0;s:".strlen($v).":\"$v\"";
 // 			spip_log("critere_kconf $k, $v, $ret");
 			$boucle = &$boucles[$idb];

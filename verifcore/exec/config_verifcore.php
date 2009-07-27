@@ -24,7 +24,7 @@ function exec_config_verifcore() {
   chdir (_DIR_RACINE) ; 
   $fich =recuperer_page("http://zone.spip.org/trac/spip-zone/browser/_plugins_/_test_/verifcore/refcorespip191.txt?format=txt");
   if($fich){
-    $tab_fic = split( "\n" ,"$fich") ;
+    $tab_fic = preg_split( ",\n," ,"$fich") ;
 
     foreach ( $tab_fic as $contenu ){
       trim($contenu) ;
@@ -46,7 +46,7 @@ function exec_config_verifcore() {
 
     $fich =recuperer_page("http://zone.spip.org/trac/spip-zone/browser/_plugins_/_test_/verifcore/fichier_repertoire_supprimer_depuis_svn6797.txt?format=txt"); 
     if($fich){
-      $tab_fic = split( "\n" ,"$fich") ;
+      $tab_fic = preg_split( ",\n," ,"$fich") ;
       $com = 0 ;
       foreach ( $tab_fic as $contenu ){
 	trim($contenu) ;

@@ -356,7 +356,7 @@ function raper_multi_swap_entities ($value, $to_entities = true) {
 		$value = preg_replace($patterns, $replacements, $value);
 	}
 	else if(raper_site_langues_compter() > 1) {
-		if(($langues_array = split(',', raper_langues_selection())) && (count($langues_array) > 1)) {
+		if(($langues_array = explode(',', raper_langues_selection())) && (count($langues_array) > 1)) {
 			sort($langues_array);
 			$value = "";
 			foreach($langues_array as $langue) {

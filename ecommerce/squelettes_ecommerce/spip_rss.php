@@ -41,8 +41,8 @@ OR ($a['id_auteur']>0 AND $id<>$a['id_auteur'])) {
 	unset($a);
 } else {
 	$a = array();
-	foreach (split(':', $args) as $bout) {
-		list($var, $val) = split('-', $bout, 2);
+	foreach (explode(':', $args) as $bout) {
+		list($var, $val) = explode('-', $bout, 2);
 		$a[$var] = $val;
 	}
 	include_ecrire('inc_lang.php3');

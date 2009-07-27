@@ -70,7 +70,7 @@ function action_lilo_auteur_infos_dist () {
 	
 		if($row = spip_fetch_array($sql_result)) {
 			$ok = true;
-			foreach(split(',', $sql_select) as $key) {
+			foreach(explode(',', $sql_select) as $key) {
 				$$key = trim($row[$key]);
 			}
 
@@ -88,7 +88,7 @@ function action_lilo_auteur_infos_dist () {
 		}
 		else {
 			// inconnu ? 
-			foreach(split(',', $sql_select) as $key) {
+			foreach(explode(',', $sql_select) as $key) {
 				$$key = "";
 			}
 		}
@@ -96,7 +96,7 @@ function action_lilo_auteur_infos_dist () {
 		// preparer le resultat a renvoyer
 		$result = "";
 		$sql_select .= ",logo_src";
-		foreach(split(',', $sql_select) as $key) {
+		foreach(explode(',', $sql_select) as $key) {
 			$result .= $$key . _LILO_AJAX_RESULT_SEPARATOR;
 		}
 		//include_spip('inc/utils');

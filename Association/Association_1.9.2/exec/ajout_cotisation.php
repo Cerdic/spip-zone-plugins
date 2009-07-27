@@ -28,7 +28,7 @@
 			$prenom=$data['prenom'];
 			$categorie=$data['categorie'];
 			$validite=$data['validite'];
-			$split = split("-",$validite); 
+			$split = explode("-",$validite); 
 			$annee = $split[0]; 
 			$mois = $split[1]; 
 			$jour = $split[2]; 

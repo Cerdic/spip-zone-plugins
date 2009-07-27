@@ -12,7 +12,7 @@
 
 	//Conversion de date
 	function association_datefr($date) { 
-		$split = split('-',$date); 
+		$split = explode('-',$date); 
 		$annee = $split[0]; 
 		$mois = $split[1]; 
 		$jour = $split[2]; 

@@ -11,7 +11,7 @@ function action_session_dist() {
 	$redirect = _request('redirect');
 	$redirect = isset($redirect) ? $redirect : _DIR_RESTREINT_ABS;
 
-	list($session, $action, $var, $val) = split('-', $arg);
+	list($session, $action, $var, $val) = explode('-', $arg);
 
   session_name($session);
 	session_start();

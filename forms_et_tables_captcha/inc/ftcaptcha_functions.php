@@ -424,7 +424,7 @@ function check($md5val, $value)
 
 				if ( strlen($solution) < 32 )
 				{
-					list($GLOBALS['captcha_level'], $solution) = split('-', $solution);
+					list($GLOBALS['captcha_level'], $solution) = explode('-', $solution);
 					if($value == $solution)
 					{
 					$ok = 1;
@@ -588,7 +588,7 @@ function show_captcha_img($code = '',$i = '')
 		$s = spip_query($strReq);
 		$row = spip_fetch_array($s);
 		$solution = $row['captcha_solution'];
-		list($GLOBALS['captcha_level'], $solution) = split('-', $solution);
+		list($GLOBALS['captcha_level'], $solution) = explode('-', $solution);
 					//$i = intval($_GET['i']);
 					$istr = $i;
 					$i = intval($i);

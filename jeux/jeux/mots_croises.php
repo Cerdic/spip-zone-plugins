@@ -117,7 +117,7 @@ function affichage_grille_mc($tableau_grille, $indexJeux, $solution=false){
 // dechiffre le code source de la grille
 function calcul_tableau_grille($texte){
 	$texte = preg_replace(",\s?[\r\n]+\s?,", "\n", trim($texte));
-	$tableau = split("\n", $texte);	
+	$tableau = preg_split("/\n/", $texte);	
 	foreach ($tableau as $i=>$valeur) $tableau[$i] = preg_split('//', trim($valeur), -1, PREG_SPLIT_NO_EMPTY);
 	return $tableau;
 }

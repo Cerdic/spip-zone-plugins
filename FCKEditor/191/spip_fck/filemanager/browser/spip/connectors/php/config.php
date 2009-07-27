@@ -38,7 +38,7 @@ $Config['Enabled'] = true ;
 
 //détermination du chemin des images de Spip par rapport à la racine du serveur
   $chemin_final='';  
-  $dir_relatif_array = split('/', $_SERVER["PHP_SELF"]);
+  $dir_relatif_array = explode('/', $_SERVER["PHP_SELF"]);
   $i = 0;
   while($dir_relatif_array[$i] != 'plugins') 
     {

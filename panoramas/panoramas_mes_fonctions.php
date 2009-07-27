@@ -18,7 +18,7 @@ function contient($texte, $findme) {
 function memoriser_resultat_jeu($texte, $id_jeu) {
 
 	//mise à jour de la liste des jeux réussis
-		$tab_jeux_reussis = split(",", $_COOKIE['jeux_reussis']);
+		$tab_jeux_reussis = explode(",", $_COOKIE['jeux_reussis']);
 		if (!in_array($id_jeu, $tab_jeux_reussis)) {
 			setcookie("jeux_reussis",implode(",", $tab_jeux_reussis).",".$id_jeu);
 		}

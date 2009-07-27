@@ -87,7 +87,7 @@ function barrac_insert_head ($flux) {
 		, unserialize(_BARRAC_POSITIONS_ARRAY)
 		, _BARRAC_POSITION_DEFAULT
 	);
-	list($ii, $jj) = split("_", $config['barrac_position_barre']);
+	list($ii, $jj) = explode("_", $config['barrac_position_barre']);
 	$style_barre = "$ii:0px;$jj:0px;";
 	
 	if($config['barrac_position_fixed'] == 'oui') {

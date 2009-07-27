@@ -335,7 +335,7 @@ if(!empty($variables['actions']['valider'])) {
 		$RubAgenda = $config['RubAgenda'];
 
 		// construction de la date complete
-		$tableau = split('[:]', $variables['champs_aux']['heure']);
+		$tableau = explode(':', $variables['champs_aux']['heure']);
 		$heure = $tableau[0];
 		$minute = $tableau[1];
 
@@ -761,7 +761,7 @@ if(!empty($variables['actions']['media'])) {
 		}
 
 		// verification si extention OK
-		$tableau = split('[.]', $fichier);
+		$tableau = explode('.', $fichier);
 		$type_ext = $tableau[1];
 	
 		// renomme les extensions

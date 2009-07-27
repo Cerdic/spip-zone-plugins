@@ -4,7 +4,7 @@
 $p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\',/*'*/'/',realpath(dirname(__FILE__))));
 define('_DIR_RELATIF_PLUGIN_FCKEDITOR',str_replace('../','',(_DIR_PLUGINS.end($p))));
 
-$dir_relatif_array = split('/', $_SERVER["PHP_SELF"]);
+$dir_relatif_array = explode('/', $_SERVER["PHP_SELF"]);
 $i = 0;
 while($dir_relatif_array[$i] != 'ecrire') 
 {

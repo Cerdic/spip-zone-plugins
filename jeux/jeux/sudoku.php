@@ -107,7 +107,7 @@ function calcul_tableau_sudoku($texte){
 	$texte = preg_replace(",\s*[\r\n]+\s*,", "\n", trim($texte));
 	// arggh les raccourcis SPIP... TODO : voir pkoi (1.93)
 	$texte = str_replace('&mdash;', '--', $texte); 
-	$tableau = split("\n", $texte);	
+	$tableau = preg_split("/\n/", $texte);	
 	$hauteur = count($tableau);
 	foreach ($tableau as $i=>$valeur) {
 		if (strlen($valeur)) $valeur .= str_repeat('-', $hauteur-strlen($valeur));

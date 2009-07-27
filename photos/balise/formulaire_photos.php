@@ -42,7 +42,7 @@ if(!empty($_POST['posted'])) {
 			                if(move_uploaded_file($_FILES['fichier']['tmp_name'], $target.$nom_file )) { 
                     
 {
-$tab= split("[.]",$nom_file);
+$tab= explode(".",$nom_file);
 $nom_file_thumb= $tab[0];
 $dateheure=date('Y-m-d H:i:s'); 
 sql_insertq('spip_photos', array('nom_photo' => $nom_file ,

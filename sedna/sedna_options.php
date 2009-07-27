@@ -48,7 +48,7 @@ function sedna_utils(){
 
 		// initialiser la liste des articles lus
 		if (!is_array($lus))
-			$lus = array_flip(split('-', '-'.$_COOKIE['sedna_lu']));
+			$lus = array_flip(explode('-', '-'.$_COOKIE['sedna_lu']));
 
 		if ($vu[$id_lien]++) return;
 

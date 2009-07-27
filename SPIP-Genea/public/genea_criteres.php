@@ -72,7 +72,7 @@ function critere_initial_dist($idb, &$boucles, $crit){
 	if (count($params) < 1)	erreur_squelette(_T('genea:zbug_manque_parametre_initial'), "BOUCLE$idb");
 	$params = array_shift($params);
 	//$champs = ($params[0]->type = 'texte') ? calculer_liste(array($params[0]), array(), $boucles, $boucle->parent) :
-	list($champs, $val) = split('[=]', $params[0]->texte);
+	list($champs, $val) = explode('=', $params[0]->texte);
 	if (isset($params[1])) {
 		$val = "'".calculer_liste(array($params[1]), array(), $boucles, $boucle->parent)."'";
 	}

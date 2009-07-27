@@ -213,7 +213,7 @@ function raper_edit_menu_langues ($raper_lang) {
 		if($id_menu === null) {
 			$id_menu = 0;
 			$alt = _T("raper:selectionnez_langue");
-			$langues_array = split(',', raper_langues_selection());
+			$langues_array = explode(',', raper_langues_selection());
 			sort($langues_array);
 			$traduire = charger_fonction('traduire', 'inc');
 			$url = generer_url_ecrire("raper_edit");

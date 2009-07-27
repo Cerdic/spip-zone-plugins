@@ -118,7 +118,7 @@ function calcul_diagramme_echecs($position, $indexJeux) {
 	if (in_array('r', $table)) $flip = true;
 	
 	for ($i=0 ; $i<count($table) ; $i++) {
-	  $sub_table = split("[:,]",$table[$i]);
+	  $sub_table = preg_split("/[:,]/",$table[$i]);
 	  switch($sub_table[0]) {
 		case "b" : $side = "w";break;
 		case "n" : $side = "b";break;

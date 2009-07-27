@@ -11,13 +11,13 @@ if ($GLOBALS['spip_version_code']<1.92){
 // retourne un tableau de mots ou d'expressions a partir d'un texte
 function Agenda_retourne_liste_mots($texte) {
 	$texte = preg_replace("/[\|\s\t\n\r]+/", " ", $texte);
-	$split = split('"', $texte);
+	$split = explode('"', $texte);
 	$c = count($split);
 	for($i=0; $i<$c; $i++) if ($i & 1) $split[$i] = preg_replace('/[ ,]+/', '+', trim($split[$i]));
 	$texte = join('', $split);
 	$texte = preg_replace("/ *,+ */","\t", $texte);
 	$texte = preg_replace("/\++/"," ", $texte);
-	return array_unique(split("\t", trim($texte)));
+	return array_unique(preg_split(",\t,", trim($texte)));
 }
 
 define('_format_heure', '([0-2]\d|\d)?:?([0-5]\d|\d)?');

@@ -88,7 +88,7 @@ function critere_frequence_dist($idb, &$boucles, $crit) {
     }
 		/*Ajouter ici un test et produire une erreur si table non trouvee*/
 		$ids = $desc['key']['PRIMARY KEY'];
-		foreach(split(',', $ids) as $_id)
+		foreach(explode(',', $ids) as $_id)
 			if(trim($_id) != $primary) $id = $_id;
 		$boucle->select[]= 'COUNT('.$frequence.'.'.$id.') AS '.$frequence;
 		$boucle->from[$frequence] = $table;

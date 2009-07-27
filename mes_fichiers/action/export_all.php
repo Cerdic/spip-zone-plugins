@@ -28,7 +28,7 @@ function action_export_all_dist()
 	if (!$GLOBALS['auteur_session']['restreint'] AND file_exists(_DIR_DUMP))
 		$dir = _DIR_DUMP;
 
-	list($quoi, $gz, $archive, $zip) = split(',', $arg);
+	list($quoi, $gz, $archive, $zip) = explode(',', $arg);
 	
 	$file =  $dir . $archive;
 

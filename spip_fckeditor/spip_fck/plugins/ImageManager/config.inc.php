@@ -18,7 +18,7 @@
 */
 //+++ Modif F. SAURET +++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //$IMConfig['base_dir'] = '/var/www/FCKeditor/images/';
-$dir_relatif_array = split('/', $_SERVER["PHP_SELF"]);
+$dir_relatif_array = explode('/', $_SERVER["PHP_SELF"]);
   $i = 0;
   $cheminSpip="";
   while($dir_relatif_array[$i] != 'spip_fck') 
