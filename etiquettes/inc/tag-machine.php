@@ -499,7 +499,7 @@ class ListeTags {
 		$liste_tags = preg_replace('/([[:space:],])\\1/', '\\1', $liste_tags);
 		
 		// exploser selon les tab
-		$tags = split("\t", substr($liste_tags,1));
+		$tags = explode("\t", substr($liste_tags,1));
 		
 		// recuperer les groupes sous la forme  <groupe:mot>
 		foreach ($tags as $i => $tag) {
