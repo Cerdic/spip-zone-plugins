@@ -1,0 +1,19 @@
+<plugin>
+    <nom>Jclic Modele</nom>
+    <auteur>Olivier Gautier</auteur>
+    <version>0.1</version>
+    <etat>stable</etat>
+    <description>
+    Ce plugin propose un mod&egrave;le permettant d'ins&eacute;rer des activit&eacute;s Jclic dans votre site.
+    </description>
+    <icon>img_pack/jclic_logo.png</icon>
+    <prefix>jclicmodele</prefix>
+    <pipeline>
+    <nom>insert_head</nom>
+    <inclure>jclicmodele_pipeline.php</inclure>
+    </pipeline>
+    <pipeline>
+    <nom>header_prive</nom>
+    <inclure>jclicmodele_pipeline.php</inclure>
+    </pipeline>
+</plugin>

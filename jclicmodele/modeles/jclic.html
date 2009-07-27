@@ -1,0 +1,30 @@
+[(#REM)
+/******************************************************************
+***  Ce plugin eva_freemind, créé par Olivier Gautier ***
+*** est mis à disposition sous un ***
+*** contrat GNU/GPL consultable à l'adresse                    ***
+***      http://www.april.org/gnu/gpl_french.html		     ***
+******************************************************************/
+]
+<BOUCLE_jclic(DOCUMENTS){id_document=#ENV**{doc}}>
+<?php
+$Fichier="#URL_DOCUMENT";
+?>
+</BOUCLE_jclic>
+<div style="text-align:center;">
+<script language="JavaScript">
+setJarBase('http://clic.xtec.net/dist/jclic');
+setExitUrl('');
+<?php
+$Site="#URL_SITE_SPIP/";
+echo "writePlugin('";
+//On teste ici le cas ou on travaille sur un document distant qui a donc http dans les 4 premiers caractères de la balise #URL_DOCUMENT. Par consequent #URL_SITE_SPIP est inutile pour l'adresse du document
+if (substr($Fichier,0,4)=='http') {
+	$Site='';
+}
+//On envoie ensuite la bonne adresse du fichier Jclic zippé, dans un cas non cité ci-dessus, on a une adresse de document qui doit etre egale a #URL_SITE_SPIP#URL_DOCUMENT
+echo $Site.$Fichier;
+?>
+','[(#ENV**{largeur}|?{#ENV**{largeur},"100%"})]','[(#ENV**{hauteur}|?{#ENV**{hauteur},"400"})]');
+</script>
+</div>
