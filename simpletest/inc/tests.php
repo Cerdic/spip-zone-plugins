@@ -5,7 +5,8 @@ include_spip('inc/autoriser');
 
 if (!autoriser('configurer')) 
 	die('Administrateur requis !');
-if ($_SERVER["REMOTE_ADDR"]!='127.0.0.1')
+
+if (!in_array($_SERVER["REMOTE_ADDR"], array('127.0.0.1', '127.0.1.1')))
 	die('Admin local requis pour executer les tests !');
 
 /*
