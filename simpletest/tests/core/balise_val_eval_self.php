@@ -24,13 +24,13 @@ class Test_balise_eval extends SpipTest{
 		$this->assertEqualCode(20,'#EVAL{3*5+5}');
 	}
 }
-
+/* pas au point
 class Test_balise_self extends SpipTest{
-	
 	function testBaliseSelf(){
 		$self = $this->recuperer_code('#EVAL{$_SERVER[\'PHP_SELF\']}');
 		//$self = $this->recuperer_code($this->php('echo $_SERVER[\'PHP_SELF\'];'));
 		$this->assertOkCode("[(#SELF|=={'$self'}|oui)ok]");
 	}
 }
+* */
 ?>
