@@ -11,19 +11,19 @@
      *
      *  Surcharge de la fonction thumbs() exploitant le serveur d'aperçu de girafa
      *  
-     * \param $url url du site à consulter
+     * \param $url_site url du site à consulter
      * \return url de l'image générée par le serveur
      */
-    function thumbsite_serveur($url) {
+    function url_thumbsite_serveur($url_site) {
         //obtient les paramétres de connexion
         $identifiant = lire_config('thumbsites/girafa_identifiant');
         $signature = lire_config('thumbsites/girafa_signature');
 
         //generer un md5sum spécifique pour girafa
         //cf : https://tserver.girafa.com/help/QuickStart.php
-        $md = substr(md5($signature.$url), -16, 16);
+        $md = substr(md5($signature.$url_site), -16, 16);
     
         //retourne l'url de la vignette
-        return "http://scst.srv.girafa.com/srv/i?i=".$identifiant."&r=".$url."&s=".$md;
+        return "http://scst.srv.girafa.com/srv/i?i=".$identifiant."&r=".$url_site."&s=".$md;
     }        
 ?>

@@ -14,12 +14,12 @@
      * \param $url url du site à consulter
      * \return url de l'image générée par le serveur
      */
-    function thumbsite_serveur($url) {
+    function url_thumbsite_serveur($url_site) {
         //obtient les paramétres de connexion
         $clef = lire_config('thumbsites/websnapr_clef');
         $taille = lire_config('thumbsites/websnapr_taille');
    
         //retourne l'url de la vignette
-        return "http://images.websnapr.com/?size=".$taille."&key=".$clef."&url=".$url;
+        return "http://images.websnapr.com/?size=".$taille."&key=".$clef."&url=".$url_site;
     }        
 ?>

@@ -11,11 +11,11 @@
      *
      *  Surcharge de la fonction thumbs() exploitant le serveur d'aperçu de thumbshots
      *  
-     * \param $url url du site à consulter
+     * \param $url_site url du site à consulter
      * \return url de l'image générée par le serveur
      */
-    function thumbsite_serveur($url) {
+    function url_thumbsite_serveur($url_site) {
         //retourne l'url de la vignette
-        return "http://open.thumbshots.org/image.pxf?url=".$url."&ext=jpg";
+        return "http://open.thumbshots.org/image.pxf?url=".$url_site."&ext=jpg";
     }        
 ?>
