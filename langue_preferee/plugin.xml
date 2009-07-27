@@ -9,7 +9,7 @@
 Ce plugin (pour SPIP 1.9.2+ et 2.0.0+) permet d'identifier les langues pr&eacute;f&eacute;r&eacute;es configur&eacute;es par l'internaute dans son navigateur et de lui proposer automatiquement la langue la plus pertinente dans un site multilingue ayant un secteur par langue.
 Ce m&eacute;canisme suppose qu'il n'y a pas de page sommaire particuli&egrave;re, les pages d'accueil localis&eacute;es &eacute;tant des pages de secteurs.
 
-Utilisez la balise <code>#LANGUE_PREFEREE_SECTEUR_REDIRECTION</code> dans <code>sommaire.html</code>, &agrave; l'exclusion de tout autre code, pour que l'internaute soit redirig&eacute; automatiquement vers le secteur qu'il est le plus susceptible de comprendre, selon la configuration de langue de son navigateur.
+Utilisez la balise <code>#LANGUE_PREFEREE_SECTEUR_REDIRECTION</code> en ins&eacture;rant le code suivant dans <code>sommaire.html</code>, &agrave; l'exclusion de tout autre code, pour que l'internaute soit redirig&eacute; automatiquement vers le secteur qu'il est le plus susceptible de comprendre, selon la configuration de langue de son navigateur : <code>[(#LANGUE_PREFEREE_SECTEUR_REDIRECTION|sinon{Activer le plugin langue_preferee})]</code>
 Si aucune langue disponible n'est compatible avec les choix configur&eacute;s dans le navigateur, la langue par d&eacute;faut du site est choisie.
 Si cette langue n'est utilis&eacute;e par aucun secteur (!!!), le premier secteur trouv&eacute; est choisi.
 Il est possible de filtrer le ou les secteurs pour ne par rediriger vers un secteur non souhait&eacute;. Pour cela mettez la liste des secteurs non souhait&eacute;s s&eacute;par&eacute;s par des virgules en param&egrave;tre de <code>#LANGUE_PREFEREE_SECTEUR_REDIRECTION</code>, par exemple : <code>#LANGUE_PREFEREE_SECTEUR_REDIRECTION{"3,12"}</code>, la balise ne pourra pas rediriger ni vers le secteur 3, ni vers le 12.
@@ -22,7 +22,7 @@ La balise <code>#LANGUE_PREFEREE_LIEN_EFFACE_COOKIE</code> permet de proposer un
 This plugin (for SPIP 1.9.2+ and 2.0.0+) checks the visitor browser prefered languages and redirects automagically to this language within a multi language website having one section per language.
 It requiers not to have a specific sommaire page, the home pages will be localized to each sectors.
 
-Use only the <code>#LANGUE_PREFEREE_SECTEUR_REDIRECTION</code> tag in <code>sommaire.html</code>, but any other code, allowing each visitors to be redirected to the most meaningful sector.
+Use only the <code>#LANGUE_PREFEREE_SECTEUR_REDIRECTION</code> tag by putting the following code in <code>sommaire.html</code>, but any other code, allowing each visitors to be redirected to the most meaningful sector: [(#LANGUE_PREFEREE_SECTEUR_REDIRECTION|sinon{Activate the langue_preferee plugin})]
 If not any website language suits the visitor's preferred language, the website default language is selected. By the way, if this language is not used by any sector (yes you can !), the first avalaible sector is selected.
 It's also possible to exclude some sectors from the possible redirections. In this case, just add as parameter a comma seperated list of unwanted sectors to <code>#LANGUE_PREFEREE_SECTEUR_REDIRECTION</code>, for example: <code>#LANGUE_PREFEREE_SECTEUR_REDIRECTION{"3,12"}</code>, the tag can not redirect to sector 3 or 12.
 
