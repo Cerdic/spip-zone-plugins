@@ -1,12 +1,12 @@
 
 <!-- autoriser=webmestre -->
-<!-- refus=Seuls les webmestres du site sont autoris&#233;s &#224; modifier ces param&#232;tres. -->
+<!-- refus=<:cfg:refus_configuration_webmestre:> -->
 <!-- nom=fancybox -->
 
-<div class="formulaire_spip formulaire_editer formulaire_cfg">
+<div class="formulaire_spip formulaire_configurer formulaire_configurer_fancy">
 
-	[<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
-	[<p class="formulaire_message">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	
 <form method="post" action="#ENV{action}"><div>
 	#ACTION_FORMULAIRE{#ENV{action}}
@@ -80,7 +80,21 @@
 				<label for='fancy_hideoncontentclick_off'><:non:></label>
 			</div>
 		</li>
+
+		<li class="editer_fancybox_communwidth[ (#ENV**{erreurs}|table_valeur{communwidth}|oui)erreur]">
+			<label for="fancy_communwidth"><:fancybox:cfg_lbl_communwidth:></label>
+			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{communwidth})</span>]
+			<p class="explication"><:fancybox:cfg_inf_communwidth:></p>
+			<input type="text" name="communwidth" class="text" id="fancy_communwidth" size="8" value="#ENV{communwidth, 425}" />	
+		</li>
 		
+		<li class="editer_fancybox_communheight[ (#ENV**{erreurs}|table_valeur{communheight}|oui)erreur]">
+			<label for="fancy_communheight"><:fancybox:cfg_lbl_communheight:></label>
+			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{communheight})</span>]
+			<p class="explication"><:fancybox:cfg_inf_communheight:></p>
+			<input type="text" name="communheight" class="text" id="fancy_communheight" size="8" value="#ENV{communheight, 355}" />	
+		</li>
+				
 		<li class="editer_fancybox_selecteur_frame[ (#ENV**{erreurs}|table_valeur{selecteur_frame}|oui)erreur]">
 			<label for="fancy_selecteur_frame"><:fancybox:cfg_lbl_selecteur_frame:></label>
 			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{selecteur_frame})</span>]

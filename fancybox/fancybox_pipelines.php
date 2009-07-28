@@ -15,8 +15,10 @@ function fancybox_insert_head($flux){
 		'overlayopacity' => '0.3',
 		'hideoncontentclick' => 'true',
 		'selecteur_frame' => '.iframe',
+		'communwidth' => '425',
+		'communheight' => '355',
 		'framewidth' => '600',
-		'frameheight' => '700'		
+		'frameheight' => '700'	
 	), $config);
 	// Insertion des librairies js
 	$flux .='<script src="'.url_absolue(find_in_path('javascript/jquery.fancybox-1.2.1.js')).'" type="text/javascript"></script>';
@@ -33,6 +35,8 @@ var fb_commun_options = {
 	"overlayShow": '.$config['overlayshow'].',
 	"overlayOpacity": '.$config['overlayopacity'].',
 	"hideOnContentClick": '.$config['hideoncontentclick'].',
+	"frameWidth": '.$config['communwidth'].',
+	"frameHeight": '.$config['communheight'].',
 	"callbackOnShow": showlongdesc
 };
 var fb_frame_options = {
