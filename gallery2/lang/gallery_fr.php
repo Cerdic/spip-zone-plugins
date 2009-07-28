@@ -21,8 +21,9 @@ $GLOBALS['i18n_gallery_fr'] = array(
 'descriptif_configuration' => 'Parametres de configuration du connecteur SPIP pour Gallery 2',
 
 // E
-'erreur_insertion' => 'Erreur lors de l\'insertion de l\'item',
+'erreur_insertion' => 'Erreur lors de l\'insertion de l\'item : v&eacute;rifiez que le plugin &quot;image block&quot; est activ&eacute;',
 'explication_squelette_dist' => '("dist" correspond au squelette de SPIP par d&eacute;faut.)',
+'erreur_getblock' => ' fonction getBlock() inconnue : v&eacute;rifiez que la version du plugin &quot;image block&quot; est &gt;= 1.1.9. et que la version de gallery2 &gt;= 2.3)',
 
 // F
 'fichier_embed_pas_trouve' => 'Le fichier de Gallery embed.php &agrave; inclure pour connecter SPIP n\'a pas &eacute;t&eacute; trouv&eacute;
