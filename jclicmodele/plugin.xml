@@ -6,7 +6,9 @@
     <description>
     Ce plugin propose un mod&egrave;le permettant d'ins&eacute;rer des activit&eacute;s Jclic dans votre site.
     </description>
+    <licence>GNU/GPL</licence>
     <icon>img_pack/jclic_logo.png</icon>
+    <lien>http://plugins.spip.net/Jclic-Modele</lien>
     <prefix>jclicmodele</prefix>
     <pipeline>
     <nom>insert_head</nom>
