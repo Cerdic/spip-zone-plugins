@@ -172,6 +172,84 @@ function image_pattern($vignette) {
 			height='".$vignette['hauteur']."' />";
 }
 
+//
+// Affiche le document avec sa vignette par defaut
+//
+// Attention : en mode 'doc', si c'est un fichier graphique on prefere
+// afficher une vue reduite, quand c'est possible (presque toujours, donc)
+// En mode 'image', l'image conserve sa taille
+//
+// A noter : dans le portfolio prive on pousse le vice jusqu'a reduire la taille
+// de la vignette -> c'est a ca que sert la variable $portfolio
+// http://doc.spip.org/@vignette_automatique
+// TO BE DELETED // utilise par ecrire/quete.php
+function vignette_automatique($img, $doc, $lien, $x=0, $y=0, $align='', $class='spip_logos')
+{
+	include_spip('inc/distant');
+	include_spip('inc/filtres');
+	include_spip('inc/filtres_images_mini');
+	$e = $doc['extension'];
+	if (!$img) {
+		if ($img = image_du_document($doc)) {
+			if (!$x AND !$y) // eviter une double reduction
+				$img = image_reduire($img);
+		}
+		else{
+			$img = vignette_par_defaut($e, false);
+			$size = @getimagesize($img);
+			$img = "<img src='$img' ".$size[3]." />";
+		}
+	}
+	else{
+		$size = @getimagesize($img);
+		$img = "<img src='$img' ".$size[3]." />";
+	}
+	// on appelle image_reduire independamment de la presence ou non
+	// des librairies graphiques
+	// la fonction sait se debrouiller et faire de son mieux dans tous les cas
+	if ($x OR $y) {
+		$img = image_reduire($img, $x, $y);
+	}
+	$img = inserer_attribut($img, 'alt', '');
+	$img = inserer_attribut($img, 'class', $class);
+	if ($align) $img = inserer_attribut($img, 'align', $align);
+
+	if (!$lien) return $img;
+
+	$titre = supprimer_tags(typo($doc['titre']));
+	$titre = " - " .taille_en_octets($doc['taille'])
+	  . ($titre ? " - $titre" : "");
+
+	$type = sql_fetsel('titre, mime_type','spip_types_documents', "extension = " . sql_quote($e));
+
+	$mime = $type['mime_type'];
+	$titre = attribut_html(couper($type['titre'] . $titre, 80));
+
+	return "<a href='$lien' type='$mime' title='$titre'>$img</a>";
+}
+// Trouve une image caracteristique d'un document.
+// Si celui-ci est une image et que les outils graphiques sont dispos, 
+// retourner le document (en exploitant sa copie locale s'il est distant).
+// Autrement retourner la vignette fournie par SPIP pour ce type MIME 
+// Resultat: un fichier local existant
+// TO BE DELETED // utilise par vignette_automatique() ci-dessus
+function image_du_document($document)
+{
+	$e = $document['extension'];
+	if ((strpos($GLOBALS['meta']['formats_graphiques'], $e) !== false)
+	  AND (!test_espace_prive() OR $GLOBALS['meta']['creer_preview']=='oui')
+	  AND $document['fichier']) {
+		if ($document['distant'] == 'oui') {
+			$image = _DIR_RACINE.copie_locale($document['fichier']);
+		} 
+		else
+			$image = get_spip_doc($document['fichier']);
+		if (@file_exists($image)) return $image;
+	}
+	return '';
+}
+
+
 // http://doc.spip.org/@document_et_vignette
 // TO BE DELETED // utilise par tourner()
 function document_et_vignette($document, $url, $portfolio=false) {
