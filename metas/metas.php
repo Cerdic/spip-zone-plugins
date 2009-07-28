@@ -118,15 +118,23 @@ function metas_formulaire ($vars = "")
 // Permet de mettre en strong des mots "importants" définis (référencement)
 function metas_mots_strong($flux)
 {
-	$recup_cfg=explode(',',$GLOBALS['meta']['spip_metas_mots_importants']);
-	if (empty($recup_cfg[0]))
-		return $flux;
-	foreach ($recup_cfg as $value)
-	{
-		$mots_recherche[]='/(^'.trim($value).'\b|\s'.trim($value).'\b)/im';
+	static $mots_recherche = null;
+	// passons vite si rien a faire
+	if (!strlen($GLOBALS['meta']['spip_metas_mots_importants'])) return $flux;
+
+	if (is_null($mots_recherche)){
+		$recup_cfg=explode(',',$GLOBALS['meta']['spip_metas_mots_importants']);
+		if (empty($recup_cfg[0]))
+			return $flux;
+		foreach ($recup_cfg as $value)
+		{
+			$mots_recherche[]='/(^'.trim($value).'\b|\s'.trim($value).'\b)/im';
+		}
 	}
-	$remplacer="<strong>$0</strong>";
-	$flux = preg_replace($mots_recherche, $remplacer, $flux);
+	if (count($mots_recherche)){
+		$remplacer="<strong>$0</strong>";
+		$flux = preg_replace($mots_recherche, $remplacer, $flux);
+	}
 	return $flux;
 }
 
