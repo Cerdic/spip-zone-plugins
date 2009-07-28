@@ -1,0 +1,67 @@
+#CACHE{0}
+<!-- boite=<multi>[fr]Test storage php pour le plugin cfg [en]php storage test for the cfg plugin</multi>-->
+<!-- depot=php -->
+
+
+#SET{test,#SESSION{id_auteur}|set_valid_global_admin}
+
+<div>
+	<input type='text' id='entre_fast' value='' >
+	<input type="button" value="Rajouter" onclick="entre_liste_fast()"/>
+</div>
+<script>
+function entre_liste_fast(){
+	val = $("#entre_fast").val();
+	if (val=="")return;
+	$("#cfg_id").append("<option value='" + val + "'>" + val + "</option>");	
+}
+</script>
+
+#SET{choix,#REM|liste_param_fast_plugin}
+
+
+<form action="./?exec=cfg&amp;cfg=fast_plugin" method="post">
+<select id="cfg_id" name="cfg_id" onchange="this.form.submit();">
+	#GET{choix}
+</select>
+<input type="submit" name="go" value="&gt;" />
+</form>
+
+
+
+[(#ENV{cfg_id}|oui)
+	<p>Vous allez mettre a jour ou creer des infos pour la page <b>#ENV{cfg_id}</b></p>
+
+	<form method="post">[(#ENV{_cfg_}|form_hidden)]
+	<fieldset><legend><b>#ENV{cfg_id}</b></legend>
+
+
+	<label>Plugin :</label>
+	<input type="text" name="plugin" value="#ENV{plugin}" size="50" />
+	<br /><br />
+	<label>Statut :</label>
+	<input type="text" name="statut" value="#ENV{statut}" size="50" />
+	<br /><br />
+	<label>Allowed :</label>
+	<input type="text" name="allowed" value="#ENV{allowed}" size="50" />
+	<br><br />
+	<label>Bouton :</label>
+	<input type="text" name="bouton" value="#ENV{bouton}" size="50" />
+	<br><br />
+	<label>CSS : </label>
+	<input type="text" name="addCss" value="#ENV{addCss}" size="50" />
+	<br><br />
+	<label>JS : </label>
+	<input type="text" name="addJS" value="#ENV{addJS}" size="50" />
+	
+	
+	
+	</fieldset>
+	<input type="submit" name="_cfg_ok" value="<:cfg:OK:>" />
+	<input type="reset" value="<:cfg:Reset:>" />
+	<!--  <input type="submit" name="_cfg_delete" value="<:cfg:Supprimer:>" /> -->
+	</form>
+]
+
+
+

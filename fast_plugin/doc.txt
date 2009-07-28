@@ -1,0 +1,106 @@
+
+/*
+ Dans votre plugin vous creez un fichier exec :
+        
+          -sur mon_plugin : exec/demo.php 
+         - dans le repertoire mon_plugin/css/demo.css (mettez ici votre css)
+         - dans le repertoire mon_plugin/js/demo.js (mettez ici votre js)
+         - pour la page elle meme : mon_plugin/fonds/demo.html
+        
+Dans le fichier exec/demo.php Nous allons avoir :
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+function exec_demo()
+	{
+				
+		// appel sur le pipeline fast_plug
+		// le type peut être simple(la page entière vient du html) ou
+		// complet -> on appelle les différents pipelines de presentation
+	 	pipeline('fast_plug',array('args'=>array(
+	 							'exec'=>'demo',
+	 							'type'=>'simple')
+	 						,'data'=>''));
+ 
+}
+
+dans le tableau les differents args sont :
+	- exec : le nom du fichier (indispensable)
+	- type : simple ou complet. Le type simple n'appel pas les pipelines affiche_droite, gauche et milieu ,
+	et par consequent laisse toute l'espace disponible pour sa page
+
+les autres parametres possibles sont :
+	- fond : par defaut c'est le fonds/demo qui sera appelé mais on peux en 
+	choisir un autre
+	- template (dans ce cas le type n'est pas necessaire) : on va 
+	appeler un template qui devra être dans fonds/template/mon_template/mon_template.html
+	dans le template devra figurer  '<!-- content_here -->' , c'est a cette endroit que
+	figurera la resultat de votre fond , ici fonds/demo  
+	
+	
+	
+NB : toute les pages appel en premier le pipeline exec_init
+
+
+
+
+
+
+/* 
+ * la fonction get_fast_plugin() retourne un tableau
+ * avec la configuration des pages utilisant le plugin 
+ * et donc le pipeline fast_plug.
+ * 
+ * Pour chacune des pages nous configurons certains parametres
+ * "nom_de_la_page"=>array("plugin"=>"nom_plugin",
+							"statut"=>"admin",
+							"allowed"=>"1,2",
+							'addCss' => '../plugins/meta_config/css/test_admin.css',
+	 						'addJS' => '../plugins/meta_config/js/jsadmin.js',							
+							"bouton"=>"sous_menu,chemin_image,titre")
+							
+Concernant le statut 4 valeurs sont possibles :
+	- tous 
+	- admin
+	- admin_restreint
+	- aucun
+
+Si le statut n'est pas renseigné on stop le traitement
+
+Dans allowed on liste : les autorisations specifiques délivré sur l'id de l'auteur 
+les valeurs sont separes par des virgules . Ces valeurs valeurs sont cumulatives avec
+'statut'. Par exemple si le statut est admin_complet et 'allowed'=> '2,7' cette 'page'
+sera accessible a tous les admin complet et auteurs ayant comme id 2 et 7. On peux 
+noter  que l'on peux mettre le statut a 'aucun' et allowed => '6,24' alors cette 'page'
+sera accessible aux auteurs ayant comme id 6 et 24. Ideal poru sécuriser une partie du site
+
+Il est egalement possible de specifier des fichiers CSS et JS a charger en plus ,
+par exemple vous souhaitez avoir le fichier js  du calendar de jquery, vous pouvez rajouter
+plusieurs fichier en separant les chemins par des virgules.
+
+
+Enfin pour les boutons il est possible de rajouter un bouton avec 3 parametres separes par des virgules 
+le sous menu utiliser , le chemin vers une image et le titre a afficher.
+
+
+
+
+La liste des differents boutons pour l'admin
+
+/* On met en place les boutons si nécessaires */
+
+/* La liste des boutons
+- $boutons_admin[’accueil’] => A suivre
+- $boutons_admin[’naviguer’] => Edition
+- $boutons_admin[’forum’] => Forum
+- $boutons_admin[’auteurs’] => Auteurs
+- $boutons_admin[’statistiques_visites’] => Statistiques
+- $boutons_admin[’configuration’] => Configuration
+- $boutons_admin[’aide_index’] => Aide
+- $boutons_admin[’visiter’] => Visiter
+ */
+
+
+
+
+
+
