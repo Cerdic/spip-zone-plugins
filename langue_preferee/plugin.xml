@@ -19,6 +19,9 @@ Il est possible de laisser l'internaute choisir sa langue pr&eacute;f&eacute;r&e
 Ce choix est alors stock&eacute; dans un cookie pour utilisation ult&#233;rieure prioritaire sur la configuration du navigateur.
 La balise <code>#LANGUE_PREFEREE_LIEN_EFFACE_COOKIE</code> permet de proposer un lien de suppression de ce cookie.
 <code>#LANGUE_PREFEREE_LIEN_EFFACE_COOKIE{mon message personnalise}</code> permet de remplacer le message propos&eacute; par d&eacute;faut.
+
+A faire :
+ * Utiliser le pipeline "styliser" et une option de configuration, plut&ocirc;t qu'un squelette sommaire.html sp&eacute;cifique pour la redirection sur la page d'accueil
 [en]
 This plugin (for SPIP 1.9.2+ and 2.0.0+) checks the visitor browser prefered languages and redirects automagically to this language within a multi language website having one section per language.
 It requiers not to have a specific sommaire page, the home pages will be localized to each sectors.
