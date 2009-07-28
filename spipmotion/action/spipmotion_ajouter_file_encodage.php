@@ -23,6 +23,15 @@ function action_spipmotion_ajouter_file_encodage_post($r){
 	list(, $sign, $id, $type, $id_document) = $r;
 	spip_log($id.' - '.$id_document.'  - '.$type);
 	
+	$ajouter_file = charger_fonction('spipmotion_ajouter_file','inc');
+	spipmotion_genere_file($id_document,$type,$id);
+	
+	$redirect = urldecode(_request('redirect'));
+
+	return $redirect;
+}
+
+function spipmotion_genere_file($id_document,$type,$id){
 	$extension = sql_getfetsel('extension','spip_documents','id_document='.intval($id_document));
 
 	if(lire_config('spipmotion/encodage_auto') == 'on'){
@@ -74,9 +83,5 @@ function action_spipmotion_ajouter_file_encodage_post($r){
 			}
 		}
 	}
-	
-	$redirect = urldecode(_request('redirect'));
-
-	return $redirect;
 }
 ?>

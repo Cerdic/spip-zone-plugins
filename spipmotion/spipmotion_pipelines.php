@@ -1,7 +1,16 @@
 <?php
-
-include_spip("inc/spipmotion");
-
+/**
+ * Insertion dans le pipeline editer_contenu_objet
+ * 
+ * Affiche les boutons supplémentaires de :
+ * - récupération de logo dans le cas d'une vidéo
+ * - récupération d'informations spécifiques dans le cas d'une video
+ * (Dans le cas d'un son, c'est le plugin getID3 qui s'en charge)
+ * - bouton de demande d'encodage / de réencodage du son ou de la vidéo
+ * 
+ * @param array $flux Le contexte du pipeline
+ * @return $flux Le contexte du pipeline complété
+ */
 function spipmotion_editer_contenu_objet($flux){
 	if(is_array($flux['args']) && ($flux['args']['type']=='case_document')){
 		$id_document = $flux['args']['id'];
@@ -31,9 +40,11 @@ function spipmotion_editer_contenu_objet($flux){
 }
 /**
  * Pipeline Cron de SPIPmotion
- * Vérifie la présence à intervalle régulier de vidéos à encoder dans la file d'attente
  * 
- * @return
+ * Vérifie la présence à intervalle régulier de fichiers à encoder 
+ * dans la file d'attente
+ * 
+ * @return L'array des taches complété
  * @param array $taches_generales Un array des tâches du cron de SPIP
  */
 function spipmotion_taches_generales_cron($taches_generales){
@@ -43,13 +54,16 @@ function spipmotion_taches_generales_cron($taches_generales){
 
 /**
  * Insertion dans le pipeline post-edition
- * Intervient à chaque modification d'un objet de SPIP notamment lors de l'ajout d'un document
  * 
- * @return 
- * @param object $flux
+ * Intervient à chaque modification d'un objet de SPIP 
+ * notamment lors de l'ajout d'un document
+ * 
+ * @return $flux Le contexte de pipeline complété
+ * @param array $flux Le contexte du pipeline
  */
 function spipmotion_post_edition($flux){	
 	spip_log("pipeline post_edition","spipmotion");
+	spip_log($flux['args'],'spipmotion');
 	$id_document = $flux['args']['id_objet'];
 	
 	/**
@@ -61,11 +75,12 @@ function spipmotion_post_edition($flux){
 	if($mode != 'vignette'){
 		if($flux['args']['operation'] == 'ajouter_document'){
 			spip_log("operation = ajouter_docs","spipmotion");
-			$document = sql_fetsel("docs.id_document, docs.extension,docs.fichier,docs.mode,docs.distant, L.vu, L.objet, L.id_objet", "spip_documents AS docs INNER JOIN spip_documents_liens AS L ON L.id_document=docs.id_document","L.id_document=".intval($id_document));
+			$document = sql_fetsel("docs.id_document, docs.extension,docs.fichier,docs.id_orig,docs.mode,docs.distant, L.vu, L.objet, L.id_objet", "spip_documents AS docs INNER JOIN spip_documents_liens AS L ON L.id_document=docs.id_document","L.id_document=".intval($id_document));
+			spip_log('id_document = '.$document['id_orig'],'emballe_medias');
 			$extension = $document['extension'];
 			
 			/**
-			 * Si nous sommes dans un format que SPIPmotion peut traiter, 
+			 * Si nous sommes dans un format vidéo que SPIPmotion peut traiter, 
 			 * on lui applique certains traitements
 			 */
 			if(in_array($extension,lire_config('spipmotion/fichiers_videos',array()))){
@@ -86,61 +101,20 @@ function spipmotion_post_edition($flux){
 
 					$invalider = true;
 				}
-
-				if(lire_config('spipmotion/encodage_auto') == 'on'){
-					spip_log('On est dans le mode encodage auto','spipmotion');
-
-					$encoder = charger_fonction('encodage','inc');
-					
-					/**
-					 * Ajout de la vidéo dans la file d'attente d'encodage si besoin
-					 */
-					if(in_array($extension,lire_config('spipmotion/fichiers_videos_encodage',array()))){
-						foreach(lire_config('spipmotion/fichiers_videos_sortie',array()) as $extension_sortie){
-							$en_file = sql_getfetsel("id_spipmotion_attente","spip_spipmotion_attentes","id_document=$id_document AND extension ='$extension_sortie' AND encode IN('en_cours,non')");
-							if(!$en_file){
-								$id_doc_attente = sql_insertq("spip_spipmotion_attentes", array('id_document'=>$id_document,'objet'=>$document['objet'],'id_objet'=>$document['id_objet'],'encode'=>'non','id_auteur'=> $GLOBALS['visiteur_session']['id_auteur'],'extension'=>$extension_sortie));
-								spip_log("on ajoute une video dans la file d'attente","spipmotion");
-								$en_cours = sql_getfetsel("id_spipmotion_attente","spip_spipmotion_attentes","encode='en_cours'");
-								if(!$en_cours){
-									$document = sql_fetsel('*','spip_documents','id_document='.intval($id_document));
-									$encoder($document,$id_doc_attente);
-								}
-							}
-							else{
-								spip_log("Cette video existe deja dans la file d'attente","spipmotion");							
-							}
-						}
-					}
-				}
+			}
+			
+			/**
+			 * On l'ajoute dans la file d'attente d'encodage si nécessaire
+			 */
+			include_spip('action/spipmotion_ajouter_file_encodage');
+			spipmotion_genere_file($id_document,$document['objet'],$document['id_objet']);
+			
+			if($invalider){
 				/**
-				 * Ajout du son dans la file d'attente d'encodage si besoin
+				 * On invalide le cache de cet élément si nécessaire
 				 */
-				else if(in_array($extension,lire_config('spipmotion/fichiers_audios_encodage',array()))){
-					foreach(lire_config('spipmotion/fichiers_audios_sortie',array()) as $extension_sortie){
-						$en_file = sql_getfetsel("spip_spipmotion_attentes","id_document=$id_document AND extension ='$extension_sortie' AND encode IN('en_cours,non')");
-						if(!$en_file){
-							$id_doc_attente = sql_insertq("spip_spipmotion_attentes", array('id_document'=>$id_document,'objet'=>$document['objet'],'id_objet'=>$document['id_objet'],'encode'=>'non','id_auteur'=> $GLOBALS['visiteur_session']['id_auteur'],'extension'=>$extension_sortie));
-							spip_log("on ajoute un son dans la file d'attente","spipmotion");
-							$en_cours = sql_fetsel("id_spipmotion_attente","spip_spipmotion_attentes","encode='en_cours'");
-							if(!$en_cours){
-								$document = sql_select('*','spip_documents','id_document='.intval($id_document));
-								$encoder($document,$id_doc_attente);
-							}							
-						}
-						else{
-							spip_log("Ce son existe deja dans la file d'attente","spipmotion");							
-						}
-					}
-				}
-				
-				if($invalider){
-					/**
-					 * On invalide le cache de cet élément 
-					 */
-					include_spip('inc/invalideur');
-					suivre_invalideur("id='id_$type/$id'");
-				}
+				include_spip('inc/invalideur');
+				suivre_invalideur("id='id_$type/$id'");
 			}
 		}
 	}
