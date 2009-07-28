@@ -25,7 +25,6 @@ Cela permet notamment de cr&#233;er des pages de notice l&#233;gale, d'&#224;-pr
 	</prefix>
 	<necessite id='SPIP' version='[2.0.0;]' /> 
 	
-	<options>pages_options.php</options>
 	<install>base/pages_installation.php</install>
 	
 	<bouton id='pages_tous' parent='naviguer'>
