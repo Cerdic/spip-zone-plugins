@@ -1,6 +1,8 @@
 <?php
 
 $GLOBALS['i18n_gallery_fr'] = array(
+// A
+'afficher_barre_laterale' => 'Afficher la barre laterale',
 
 // C
 'chemins_appli' => 'Chemins des applications',
@@ -82,6 +84,7 @@ $GLOBALS['i18n_gallery_fr'] = array(
 
 // M
 'masquer_gallery' => 'Masquer l\'en-t&ecirc;te et le pied de page de Gallery',
+'masquer_barre_laterale' => 'Masquer la barre laterale',
 
 // N
 'non' => 'non',
