@@ -1,18 +1,18 @@
 <?php
 
-/*! \brief filtre ˆ utiliser dans les squelettes
+/*! \brief filtre à utiliser dans les squelettes
  *
- *  DŽfinition de la fonction de filtre
- *  VŽrifie que le plugin est activŽ et qu'il n'existe pas ailleurs deja ce filtre
- *  Rappel : dans le cadre d'une utilisation SPIP, il n'y a pas de paramŽtre ˆ donner. $url correspond ˆ la balise appelant le filtre
+ *  Définition de la fonction de filtre
+ *  Vérifie que le plugin est activé et qu'il n'existe pas ailleurs deja ce filtre
+ *  Rappel : dans le cadre d'une utilisation SPIP, il n'y a pas de paramètre à donner. $url correspond à la balise appelant le filtre
  *  
- * \param $url_site url du site ˆ consulter
- * \return url de l'image gŽnŽrŽe par le serveur
+ * \param $url_site url du site à consulter
+ * \return url de l'image générée par le serveur
  */
 if (!function_exists('url_thumbsite')) {
 	function url_thumbsite($url_site) {
 		$url_serveur = '';
-		//determine le serveur d'aperu a utiliser, defaut thumbshots.com
+		//determine le serveur d'aperçu a utiliser, defaut thumbshots.com
 		$serveur = sinon(lire_config('thumbsites/serveur'), "thumbshots");
 		//Charge le fichier de conf specifique au serveur
 		include_spip('serveurs/'.$serveur);
