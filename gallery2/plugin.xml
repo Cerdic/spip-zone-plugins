@@ -6,9 +6,11 @@
 	</nom>
 	<auteur>contribution initiale (spip 1.8): E. Lafargue, 
     portage spip 1.9: job, 
-    passage en plugin (spip 2.0): cy_altern</auteur>
+    passage en plugin (spip 2.0): philippe GRISON, cy_altern
+_ &#169; 2009 - distribu&#233; sous licence GNU/LGPL
+  </auteur>
 	<version>
-	   1.1.0
+	   1.2.0
 	</version>
 	<etat>
 	test
