@@ -4,9 +4,9 @@
 	<auteur>C&eacute;dric Morin</auteur>
 	<licence>GPL</licence>
 	<version>0.1</version>
-	<etat>dev</etat>
+	<etat>stable</etat>
 	<description>Interface d'aministration des forums</description>
 	<prefix>forum</prefix>
-	<necessite id="SPIP" version="[2.0.3;]" />
+	<necessite id="SPIP" version="[2.0.8;]" />
 	<necessite id="spip_bonux" version="[1.4;]" />
 </plugin>
