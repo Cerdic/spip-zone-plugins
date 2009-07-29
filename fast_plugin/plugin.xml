@@ -10,7 +10,10 @@
         }}
 	</description>
 	<options>fast_options.php</options>
+	<fonctions>fast_fonctions.php</fonctions>
 	<prefix>fast_plugin</prefix>
+	<necessite id="cfg" version="[1.13.0;]" />
+	<necessite id="SPIP" version="[2.0.0;]" />
 	<pipeline>
 		<nom>ajouter_boutons</nom>
 		<inclure>fast_pipeline.php</inclure>
