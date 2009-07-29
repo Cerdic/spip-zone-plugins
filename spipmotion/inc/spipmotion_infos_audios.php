@@ -10,8 +10,6 @@
  */
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/actions');
-
 function inc_spipmotion_infos_audios_dist($id, $id_document,$type,$script='',$ignore_flag = false) {
 	if(_AJAX){
 		include_spip('public/assembler');
@@ -24,7 +22,7 @@ function inc_spipmotion_infos_audios_dist($id, $id_document,$type,$script='',$ig
 	 */
 	
 	if(autoriser('joindredocument',$type, $id)){
-		$texte3 = _T('spipmotion:encoder_son');
+		$texte = _T('spipmotion:encoder_son');
 		$script = $type.'s';
 		$redirect =  generer_url_ecrire($script,"id_$type=$id#portfolio_documents");
 		$extension = sql_getfetsel("extension", "spip_documents","id_document=".sql_quote($id_document));
@@ -47,25 +45,29 @@ function inc_spipmotion_infos_audios_dist($id, $id_document,$type,$script='',$ig
 			if(in_array($extension,lire_config('spipmotion/fichiers_audios_encodage',array()))){
 				$statut_encodage = sql_getfetsel('encode','spip_spipmotion_attentes','id_document='.intval($id_document).' AND encode IN ("en_cours","non")');
 				if($statut_encodage == 'en_cours'){
-					$action3 = '';
-					$texte3 = _T('spipmotion:document_dans_file_attente');
+					$action = false;
+					$texte = _T('spipmotion:document_dans_file_attente');
 				}elseif ($statut_encodage == 'non'){
-					$action3 = '';
-					$texte3 = _T('spipmotion:document_dans_file_attente');
+					$action = false;
+					$texte = _T('spipmotion:document_dans_file_attente');
 				}else{
-					$action3 = generer_action_auteur('spipmotion_ajouter_file_encodage', "$id/$type/$id_document", $redirect);
-					$action3 = "<a href='$action3'>$texte3</a>";
+					$action = generer_action_auteur('spipmotion_ajouter_file_encodage', "$id/$type/$id_document", $redirect);
+					$action = "<a href='$action'>$texte</a>";
 				}
 			}
 		}
 		else{
 			$redirect = str_replace('&amp;','&',$redirect);
 			$action = generer_action_auteur('spipmotion_ajouter_file_encodage', "$id/$type/$id_document", $redirect);
-			$action = "<a href='$action3'>$texte3</a>";
+			$action = "<a href='$action'>$texte</a>";
 		}
 		if(!_AJAX){
 			if(in_array($extension,lire_config('spipmotion/fichiers_audios_encodage',array()))){
-				$corps .= icone_horizontale($texte3, $action3, $supp, "creer.gif", false);
+				if($action){
+					$corps .= icone_horizontale($texte, $action, $supp, "creer.gif", false);
+				}else{
+					$corps .= "<p>".$texte."</p>";
+				}
 			}
 		}
 	}

@@ -17,9 +17,7 @@ function inc_encodage_dist($source,$attente){
 	  return encodage($source,$attente);
 }
 
-function encodage($source,$doc_attente){
-	spip_log($source,'spipmotion');
-	
+function encodage($source,$doc_attente){	
 	/**
 	 * On change le statut d'encodage à en_cours pour changer les messages et indiquer si nécessaire le statut
 	 */
@@ -39,7 +37,7 @@ function encodage($source,$doc_attente){
 	$string = "$fichier-$width-$height";
 	$query = md5($string);
 	$dossier = _DIR_VAR;
-	$fichier_final = substr($fichier,0,-(strlen($source['extension']))).$extension_attente;
+	$fichier_final = substr($fichier,0,-(strlen($source['extension'])+1)).'-encoded.'.$extension_attente;
 	
 	$fichier_temp = "$dossier$query.$extension_attente";
 	spip_log("le nom temporaire durant l'encodage est $fichier_temp","spipmotion");
@@ -121,13 +119,15 @@ function encodage($source,$doc_attente){
 	$mode = 'document';
 	$invalider = true;
 
+	sql_updateq("spip_spipmotion_attentes",array('encode'=>'oui'),"id_spipmotion_attente=".intval($doc_attente));
+
 	$ajouter_documents = charger_fonction('ajouter_documents', 'inc');
 	$x = $ajouter_documents($fichier_temp, $fichier_final, $type_doc, $id_objet, $mode, '', $actif,'','','');
 	spip_log("on ajoute le nouveau fichier qui devient $x","spipmotion");
 	unlink($fichier_temp);
 
-	sql_updateq("spip_spipmotion_attentes",array('encode'=>'oui'),"id_spipmotion_attente=".intval($doc_attente));
 	sql_updateq("spip_documents",array('id_orig'=>$attente['id_document']),'id_document='.intval($x));
+	
 	if ($invalider) {
 		include_spip('inc/invalideur');
 		suivre_invalideur("0",true);

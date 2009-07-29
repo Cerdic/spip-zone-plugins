@@ -69,14 +69,16 @@ function spipmotion_post_edition($flux){
 	/**
 	 * Il n'est pas nécessaire de récupérer la vignette d'une vignette
 	 */
-	$mode = sql_getfetsel('mode','spip_documents','id_document='.intval($id_document));
+	$infos_doc = sql_fetsel('fichier,mode','spip_documents','id_document='.intval($id_document));
+	$mode = $infos_doc['mode'];
+	$fichier = $infos_doc['fichier'];
 	spip_log("mode = $mode","spipmotion");
 	
 	if($mode != 'vignette'){
 		if($flux['args']['operation'] == 'ajouter_document'){
 			spip_log("operation = ajouter_docs","spipmotion");
 			$document = sql_fetsel("docs.id_document, docs.extension,docs.fichier,docs.id_orig,docs.mode,docs.distant, L.vu, L.objet, L.id_objet", "spip_documents AS docs INNER JOIN spip_documents_liens AS L ON L.id_document=docs.id_document","L.id_document=".intval($id_document));
-			spip_log('id_document = '.$document['id_orig'],'emballe_medias');
+			spip_log('id_origine = '.$document['id_orig'],'emballe_medias');
 			$extension = $document['extension'];
 			
 			/**
@@ -106,9 +108,10 @@ function spipmotion_post_edition($flux){
 			/**
 			 * On l'ajoute dans la file d'attente d'encodage si nécessaire
 			 */
-			include_spip('action/spipmotion_ajouter_file_encodage');
-			spipmotion_genere_file($id_document,$document['objet'],$document['id_objet']);
-			
+			if(!preg_match('/encoded/',$fichier)){
+				include_spip('action/spipmotion_ajouter_file_encodage');
+				spipmotion_genere_file($id_document,$document['objet'],$document['id_objet']);
+			}
 			if($invalider){
 				/**
 				 * On invalide le cache de cet élément si nécessaire
