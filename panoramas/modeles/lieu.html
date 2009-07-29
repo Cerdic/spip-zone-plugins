@@ -18,7 +18,7 @@
 				[(#TYPE|=={'visite'}|?{' ',''})<area shape="rect" coords="#X1,#Y1,#X2,#Y2" href="#URL_PAGE{visite,id_visite=#ID_VISITE_CIBLE}" class="interaction#ID_INTERACTION type-visite" alt="#TITRE" />]
 				[(#TYPE|=={'url'}|?{' ',''})<area shape="rect" coords="#X1,#Y1,#X2,#Y2" href="#URL_CIBLE" class="interaction#ID_INTERACTION type-url" alt="#TITRE" />]
 				[(#TYPE|=={'descriptif'}|?{' ',''})<area shape="rect" coords="#X1,#Y1,#X2,#Y2" href="#URL_PAGE{descriptif_interaction_ajax,id_interaction=#ID_INTERACTION&KeepThis=true&TB_iframe=true&height=400&width=600}" class="interaction#ID_INTERACTION type-descriptif thickbox" alt="#TITRE" />]
-				<BOUCLE_documentimagepointe(DOCUMENTS){id_document=#ID_DOCUMENT_CIBLE}{extension IN jpg,JPG}>[(#TYPE|=={'document'}|?{' ',''})<area shape="rect" coords="#X1,#Y1,#X2,#Y2" href="#URL_DOCUMENT" class="interaction#ID_INTERACTION type-document thickbox" alt="#TITRE" />]</BOUCLE_documentimagepointe>
+				<BOUCLE_documentimagepointe(DOCUMENTS){id_document=#ID_DOCUMENT_CIBLE}{extension IN jpg,JPG}>[(#TYPE|=={'document'}|?{' ',''})<area shape="rect" coords="#X1,#Y1,#X2,#Y2" href="#URL_DOCUMENT" class="interaction#ID_INTERACTION type-document thickbox" alt="[<b>(#TITRE|htmlspecialchars)</b>][<br />(#DESCRIPTIF|htmlspecialchars)]" />]</BOUCLE_documentimagepointe>
 				<BOUCLE_documentmp3pointe(DOCUMENTS){id_document=#ID_DOCUMENT_CIBLE}{extension IN mp3,MP3}>[(#TYPE|=={'document'}|?{' ',''})<area shape="rect" coords="#X1,#Y1,#X2,#Y2" href="#URL_PAGE{document_ajax,id_document=#ID_DOCUMENT_CIBLE&KeepThis=true&TB_iframe=true&height=400&width=600}" class="interaction#ID_INTERACTION type-audio thickbox" alt="#TITRE" />]</BOUCLE_documentmp3pointe>
 				<BOUCLE_documentvideopointe(DOCUMENTS){id_document=#ID_DOCUMENT_CIBLE}{extension IN flv,FLV,swf,SWF}>[(#TYPE|=={'document'}|?{' ',''})<area shape="rect" coords="#X1,#Y1,#X2,#Y2" href="#URL_PAGE{document_ajax,id_document=#ID_DOCUMENT_CIBLE&KeepThis=true&TB_iframe=true&height=400&width=600}" class="interaction#ID_INTERACTION type-video thickbox" alt="#TITRE" />]</BOUCLE_documentvideopointe>
 				[(#MODE_JEU|=={'oui'}|?{' ',''})[(#TYPE|=={'jeu'}|?{' ',''})<area shape="rect" coords="#X1,#Y1,#X2,#Y2" href="#URL_PAGE{jeu_interaction_ajax,id_interaction=#ID_INTERACTION&KeepThis=true&TB_iframe=true&height=400&width=600}" class="interaction#ID_INTERACTION type-jeu thickbox" alt="#TITRE" />]]
@@ -63,9 +63,9 @@
 		}	
 		if (partie_terminee == tableau_objets_a_ramasser.length) {
 			var panorama_bravo = "<:panoramas:bravo:>";
-			/*$('.panorama-viewport').append("<div class='panorama-fond-demarrer'></div>")
+			$('.panorama-viewport').append("<div class='panorama-fond-demarrer'></div>")
 			.append("<div class='panorama-bouton-demarrer'><a href='#'>"+panoramas_bravo.replace("NOM_JOUEUR",$.cookie('nom_joueur'))+"</a></div>");
-			*/
+			
 			$('.panorama-viewport').append("<div class='panorama-bouton-demarrer'><a href='#'>"+panoramas_bravo.replace("NOM_JOUEUR",$.cookie('nom_joueur'))+"</a></div>");
 			
 			
@@ -232,7 +232,7 @@ $(document).ready(function(){
 						[var texte_apres_activation = "(#TEXTE_APRES_ACTIVATION|replace{"\n","<br />"}|replace{"\r",""}|htmlspecialchars)";
 							texte_apres_activation = texte_apres_activation.replace("NOM_JOUEUR",$.cookie('nom_joueur'));
 							alert(texte_apres_activation);]
-
+					      
 						<BOUCLE_documentobjetapresactivationobjet(DOCUMENTS){id_document=#ID_OBJET_APRES_ACTIVATION}>
 							$('div.panorama-panier ul').append("<li><div class='objet#ID_DOCUMENT'><img src='#URL_DOCUMENT' /><span style='display: none;'>#ID_DOCUMENT</span></div></li>");
 							$('div.panorama-panier ul li div').draggable({helper: 'clone', opacity: .4, revert: true});
@@ -256,7 +256,7 @@ $(document).ready(function(){
 						$.cookie('objets_ramasses', objets_ramasses);
 						
 					}
-			});
+					});
 			}[(#REM) fin mode_jeu ]
 		</BOUCLE_objetactivationobjet>
 
@@ -501,7 +501,8 @@ $(document).ready(function(){
 		$('.panorama-viewport').append("<div class='panorama-fond-demarrer'></div>");
 		[(#MODE_JEU|=={oui}|?{' ',''})
 		verifier_objets_ramasses();
-		if (!$.cookie('nom_joueur')) {
+		$('div.panorama-panier ul li div').draggable({helper: 'clone', opacity: .4, revert: true});
+			if (!$.cookie('nom_joueur')) {
 			$('.panorama-viewport').append("<div class='panorama-fond-demarrer'></div>")
 			.append("<div class='panorama-bouton-demarrer'><label for='nom_joueur'><:panoramas:nom_joueur:> :</label> <input type='text' value='' id='nom_joueur' name='nom_joueur'/><br /><a href='#'><:panoramas:demarrer:></a></div>");
 		
@@ -521,7 +522,6 @@ $(document).ready(function(){
 		[(#MODE_JEU|=={oui}|?{'',' '})
 			gestion_molette_souris();
 		]
-
 		$('.panorama-fond-demarrer').fadeOut(3000);
 					
 			
