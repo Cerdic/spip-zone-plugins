@@ -1,0 +1,5 @@
+/* Couleurs des liens
+---------------------------------------------- */
+a {}
+a[hreflang]:after { background : transparent; content: "\0000a0(" attr(hreflang) ")"; color: #CCC; }
+a.spip_out, a.spip_url, a.spip_glossaire { padding-right: 14px; background: transparent url(img/spip_out.gif) no-repeat right; }
