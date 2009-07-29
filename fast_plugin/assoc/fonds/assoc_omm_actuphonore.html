@@ -1,0 +1,13 @@
+#CACHE{0}
+#HTTP_HEADER{Content-Type: text/html}
+<donnee>
+<BOUCLE_video(OMM_ACTUPHONORE){date>#ENV{debut}}{date<#ENV{fin}}{par date}{inverse}{#ENV{page},#ENV{num}}>
+	<omm>
+		<id>#ID_ACTUPHONORE</id>
+		<titre>[(#TITRE|texte_backend)]</titre>
+		<texte>[(#DESCRIPTIF|couper{70}|texte_backend)]</texte>
+		<date>[(#DATE|texte_backend)]</date>
+		<valid><BOUCLE_test(ASSOCIATION){type_lien=3}{id_lien=#ID_ACTUPHONORE}{0,1}>oui</BOUCLE_test></valid>
+	</omm>	
+</BOUCLE_video>
+</donnee>
