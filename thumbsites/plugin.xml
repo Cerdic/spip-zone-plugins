@@ -4,17 +4,9 @@
 
     <!-- Auteur du plugin -->
 	<auteur>
-	    <multi>
 	        Camille Lafitte, Eric Lupinacci
-        	&#169; 2008 - &#224; plus tard -
-        	Distribu&#233; sous licence GNU/GPL
-
-		    [it]   Camille Lafitte, Eric Lupinacci
-        	&#169; 2008 - a pi&#249; tardi -
-            Distribuito sotto licenza GNU/GPL
-        </multi>
 	</auteur>
-
+	<licence>GNU/GPL - &#169; 2008 - &#224; plus tard</licence>
 	<version>0.3</version>
 	<etat>stable</etat>
 
@@ -22,16 +14,13 @@
 	<icon>images/thumbsites.png</icon>
 
 	<description>
-        <multi>Ce plugin {{disponible uniquement &#224; partir de SPIP 2.0}} g&#233;n&#233;ralise la fonction de capture de sites. Il est possible d'appliquer directement le filtre <code>thumbsite</code> sur toutes les balises g&#233;n&#233;rant une url. Certains mod&#232;les sont disponibles pour les r&#233;dacteurs tels que <code>&#60;siteXX|thumbshot&#62;</code>
-        [it]Questo plugin {{disponibile solamente da SPIP 2.0}} provvede generalizza le funzioni di cattura di luoghi. &#200; possibile applicare direttamente il filtro <code>thumbsite</code> su tutto demarca generando un url. Alcuni modelli sono disponibili per i redattori come <code>&#60;siteXX|thumbsite&#62;</code>
-        </multi>
+Thumbsites fournit un syst&egrave;me de capture d’&eacute;cran de site g&eacute;n&eacute;r&eacute;e par des serveurs d&eacute;di&eacute;s. Le plugin propose des balises, des filtres et des mod&egrave;les pour afficher la vignette d’un site donn&eacute;.
+_ Ce plugin g&egrave;re aussi un cache qui permet de pallier les indisponibilit&eacute;s fr&eacute;quentes des serveurs et d’acc&eacute;l&eacute;rer les affichages. Une configuration est disponible dans l’espace priv&eacute;.
 	</description>
 
     <!-- URI de documentation -->
 	<lien>
-	    [<multi>Documentation[it]Documentazione</multi>->http://www.spip-contrib.net/?article2584],
-        <multi>et si vous avez[it] e se avete installato anche</multi> cfg:
-        	[<multi>Configuration[it]Configurazione</multi>->.?exec=cfg&amp;cfg=thumbsites]
+	    [Documentation sur SPIP-Contrib->http://www.spip-contrib.net/?article2584]
 	</lien>
 
     <!-- precise le prefixe utilisé pour toutes les fonctions du plugin, en general le nom du plugin -->
