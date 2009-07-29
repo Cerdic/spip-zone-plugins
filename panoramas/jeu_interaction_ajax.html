@@ -1,30 +1,37 @@
+#CACHE{0}
 [(#HTTP_HEADER{Content-type: text/html[; charset=(#CHARSET)]})]
 <html>
 <head>
 <INCLURE{fond=inc-head}>
 </head>
 <body>
-<p class="jeu-interaction">
 
 <BOUCLE_interactions(VISITES_VIRTUELLES_INTERACTIONS){id_interaction}>
-	<BOUCLE_jeux(JEUX){id_jeu=#ID_JEU_CIBLE}>
+<BOUCLE_jeux(JEUX){id_jeu=#ID_JEU_CIBLE}>
+	<p class="jeu-interaction">
 		#CONTENU
 		[(#CONTENU|contient{Bravo}|?{' ',''})
 			[(#REM|memoriser_resultat_jeu{#ID_JEU})]
 			
 		]
-		[(#REM) un objet doit-il etre donné en récompense ? ]
-		<BOUCLE_objetrecompense(DOCUMENTS){id_document=#ID_OBJET_RECOMPENSE}>
+		[(#REM) un objet doit-il etre donnÃ© en rÃ©compense ? ]
+		
+	
+
+</p>
+<script type="text/javascript">
+$(document).ready(function(){
+<BOUCLE_objetrecompense(DOCUMENTS){id_document=#ID_OBJET_RECOMPENSE}>
 		[(#CONTENU|contient{Bravo}|?{' ',''})
-			[(#REM|remplir_sacoche{#ID_DOCUMENT,#URL_DOCUMENT})]
+			$.cookie('objets_ramasses', $.cookie('objets_ramasses')+"<li><div class='objet#ID_DOCUMENT'><img src='#URL_DOCUMENT' /><span style='display: none;'>#ID_DOCUMENT</span></div></li>");
+						
 			
 		]
 		</BOUCLE_objetrecompense>
-	
+});
+</script>
 	</BOUCLE_jeux>
 
 </BOUCLE_interactions>
-</p>
-
 </body>
 </html>

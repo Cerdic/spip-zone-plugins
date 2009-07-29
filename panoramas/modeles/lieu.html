@@ -6,7 +6,7 @@
 	
 	<a id="[lieu(#ID_LIEU)]" name="[lieu(#ID_LIEU)]"></a>
 	<BOUCLE_photo(DOCUMENTS){id_document=#ID_PHOTO}>
-		<img src="#URL_DOCUMENT" class="panorama#ID_LIEU" width="#LARGEUR" height="#HAUTEUR"  
+		<img src="#URL_DOCUMENT" unselectable="on" style="-moz-user-select: none;" class="panorama#ID_LIEU" width="#LARGEUR" height="#HAUTEUR"  
 	</BOUCLE_photo>
 	 alt="[(#_lieux:TITRE|texte_backend)]" usemap="map#ID_LIEU" />
 	<B_interactions>
@@ -51,7 +51,7 @@
 	tableau_objets_a_ramasser = chaine_objets_a_ramasser.split(','); 
 
 	  function alert_panorama(texte) {
-	    $('.panorama-viewport').append("<div class='fenetre-dialogue' style='position: absolute; margin: 0; padding: 0; bottom: 29px; width: 100%; height: auto; background: white; opacity: .8; text-align: center; color: black; font-style: italic; font-weight: normal;'><div style='padding: 5px;'>"+texte+"&nbsp;<a href='#' class='fermer-dialogue'>Fermer</a></div></div>");
+	    $('.fenetre-dialogue').remove(); $('.panorama-viewport').append("<div class='fenetre-dialogue' style='position: absolute; margin: 0; padding: 0; bottom: 29px; width: 100%; height: auto; background: white; opacity: .8; text-align: center; color: black; font-style: italic; font-weight: normal;'><div style='padding: 5px;'>"+texte+"&nbsp;<a href='#' class='fermer-dialogue'>Fermer</a></div></div>");
 	    $('.fermer-dialogue').bind('click', function(){$('.fenetre-dialogue').remove();return false;});
       
 	}
@@ -446,6 +446,7 @@ $(document).ready(function(){
 		<li>[<img src="(#FICHIER)" height="#_visites:HAUTEUR" />]</li>
 	]</BOUCLE_imagestransition>
 </ul>
+<img src="#CHEMIN{img_pack/bg-transition.png}" style="position: absolute; top: 0; left: 0; z-index: 0; width: <BOUCLE_visiteparent2(VISITES_VIRTUELLES){id_visite=#ID_VISITE}>[(#LARGEUR|=={0}|?{'570',#LARGEUR})]</BOUCLE_visiteparent2>px;" />
 </div>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -552,7 +553,6 @@ $(document).ready(function(){
 		[(#MODE_JEU|=={oui}|?{'',' '})
 			gestion_molette_souris();
 		]
-		
 		$('.panorama-fond-demarrer').fadeOut(3000);
 
 					
