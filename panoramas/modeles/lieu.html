@@ -54,6 +54,9 @@
 
 	function verifier_objets_ramasses() {
 		
+		
+		
+		//tester si tous les objets ont été ramassés pour terminer la partie
 		var partie_terminee=0;
 		for (var i=0; i<tableau_objets_a_ramasser.length; i++) {
 			if ($('div.panorama-panier ul').find('.objet'+tableau_objets_a_ramasser[i]).length > 0) {
@@ -71,9 +74,10 @@
 			
 			$('.panorama-bouton-demarrer a').bind('click', function(){
 					$.cookie('lieux_visites','');
-					$.cookie('objets_ramasses',' ');
+					$.cookie('objets_ramasses',' '); [(#REM) objets actuellement dans le panier sous la forme d'une liste <ul><li>]
 					$.cookie('jeux_reussis','');
 					$.cookie('nom_joueur','');
+					$.cookie('objets_ramasses_memo',''); [(#REM) mémoriser tous les objets déjà ramassés, même qui ne sont plus dans le panier]
 					$('.panorama-bouton-demarrer, .panorama-fond-demarrer').fadeOut(1000);
 					document.location.href="?page=visite&id_visite=#ID_VISITE";
 					return false;
@@ -175,7 +179,8 @@ $(document).ready(function(){
 						}).draggable({helper: 'clone', opacity: .4, revert: true})
 				.bind('dblclick',function(){  
 					  $('div.panorama-panier ul').append("<li><div class='objet#ID_DOCUMENT'><img src='#URL_DOCUMENT' /><span style='display: none;'>#ID_DOCUMENT</span></div></li>");
-						$('div.panorama-panier ul li div').draggable({helper: 'clone', opacity: .4, revert: true});
+					  $.cookie('objets_ramasses_memo', $.cookie('objets_ramasses_memo')+',#ID_DOCUMENT');
+					  $('div.panorama-panier ul li div').draggable({helper: 'clone', opacity: .4, revert: true});
 						$('.type-objet#ID_DOCUMENT').remove();
 						
 						//mis � jour des cookies
@@ -235,6 +240,7 @@ $(document).ready(function(){
 					      
 						<BOUCLE_documentobjetapresactivationobjet(DOCUMENTS){id_document=#ID_OBJET_APRES_ACTIVATION}>
 							$('div.panorama-panier ul').append("<li><div class='objet#ID_DOCUMENT'><img src='#URL_DOCUMENT' /><span style='display: none;'>#ID_DOCUMENT</span></div></li>");
+							$.cookie('objets_ramasses_memo', $.cookie('objets_ramasses_memo')+',#ID_DOCUMENT');
 							$('div.panorama-panier ul li div').draggable({helper: 'clone', opacity: .4, revert: true});
 						
 							//mis � jour des cookies
@@ -275,6 +281,7 @@ $(document).ready(function(){
 
 									<BOUCLE_documentobjetapresactivationlieu(DOCUMENTS){id_document=#ID_OBJET_APRES_ACTIVATION}>
 										$('div.panorama-panier ul').append("<li><div class='objet#ID_DOCUMENT'><img src='#URL_DOCUMENT' /><span style='display: none;'>#ID_DOCUMENT</span></div></li>");
+										$.cookie('objets_ramasses_memo', $.cookie('objets_ramasses_memo')+',#ID_DOCUMENT');
 										$('div.panorama-panier ul li div').draggable({helper: 'clone', opacity: .4, revert: true});
 						
 										//mis � jour des cookies
@@ -313,6 +320,7 @@ $(document).ready(function(){
 									alert(texte_apres_activation);]
 									<BOUCLE_documentobjetapresactivationjeu(DOCUMENTS){id_document=#ID_OBJET_APRES_ACTIVATION}>
 										$('div.panorama-panier ul').append("<li><div class='objet#ID_DOCUMENT'><img src='#URL_DOCUMENT' /><span style='display: none;'>#ID_DOCUMENT</span></div></li>");
+										$.cookie('objets_ramasses_memo', $.cookie('objets_ramasses_memo')+',#ID_DOCUMENT');
 										$('div.panorama-panier ul li div').draggable({helper: 'clone', opacity: .4, revert: true});
 						
 										//mis � jour des cookies
@@ -499,6 +507,22 @@ $(document).ready(function(){
 
 	$(document).ready(function(){
 		$('.panorama-viewport').append("<div class='panorama-fond-demarrer'></div>");
+		
+		//masquer les objets déjà ramassés
+		var tableau_objets_ramasses_memo = new Array();
+		if ($.cookie('objets_ramasses_memo')) {
+			tableau_objets_ramasses_memo = $.cookie('objets_ramasses_memo').split(','); 
+			<BOUCLE_objets(VISITES_VIRTUELLES_INTERACTIONS){id_lieu}{type=objet}>
+			<BOUCLE_imageobjet(DOCUMENTS){id_document=#ID_IMAGE_FOND}>
+			if (tableau_objets_ramasses_memo.indexOf('#ID_DOCUMENT')>=0) {
+				//l'objet a déjà été ramassé
+				$('.interaction#ID_INTERACTION').remove();
+			} 
+			</BOUCLE_imageobjet>
+			</BOUCLE_objets>
+		}
+		
+
 		[(#MODE_JEU|=={oui}|?{' ',''})
 		verifier_objets_ramasses();
 		$('div.panorama-panier ul li div').draggable({helper: 'clone', opacity: .4, revert: true});
