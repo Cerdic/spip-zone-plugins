@@ -50,7 +50,11 @@
 	var tableau_objets_a_ramasser = new Array(); 
 	tableau_objets_a_ramasser = chaine_objets_a_ramasser.split(','); 
 
-	
+	  function alert_panorama(texte) {
+	    $('.panorama-viewport').append("<div class='fenetre-dialogue' style='position: absolute; margin: 0; padding: 0; bottom: 29px; width: 100%; height: auto; background: white; opacity: .8; text-align: center; color: black; font-style: italic; font-weight: normal;'><div style='padding: 5px;'>"+texte+"&nbsp;<a href='#' class='fermer-dialogue'>Fermer</a></div></div>");
+	    $('.fermer-dialogue').bind('click', function(){$('.fenetre-dialogue').remove();return false;});
+      
+	}
 
 	function verifier_objets_ramasses() {
 		
@@ -178,7 +182,7 @@ $(document).ready(function(){
 							return false;
 						}).draggable({helper: 'clone', opacity: .4, revert: true})
 				.bind('dblclick',function(){  
-					  $('div.panorama-panier ul').append("<li><div class='objet#ID_DOCUMENT'><img src='#URL_DOCUMENT' /><span style='display: none;'>#ID_DOCUMENT</span></div></li>");
+					  $('div.panorama-panier ul').append("<li><div class='objet#ID_DOCUMENT'><img src='#URL_DOCUMENT' style='max-height: 100px; margin-left: 10px;' /><span style='display: none;'>#ID_DOCUMENT</span></div></li>");
 					  $.cookie('objets_ramasses_memo', $.cookie('objets_ramasses_memo')+',#ID_DOCUMENT');
 					  $('div.panorama-panier ul li div').draggable({helper: 'clone', opacity: .4, revert: true});
 						$('.type-objet#ID_DOCUMENT').remove();
@@ -226,7 +230,9 @@ $(document).ready(function(){
 				.bind('click', function() {
 							[var texte_avant_activation = "(#TEXTE_AVANT_ACTIVATION|replace{"\n","<br />"}|replace{"\r",""}|htmlspecialchars)";
 							texte_avant_activation = texte_avant_activation.replace("NOM_JOUEUR",$.cookie('nom_joueur'));
-							alert(texte_avant_activation);]
+							alert_panorama(texte_avant_activation);
+							 
+							]
 							return false;
 						})
 				.droppable({
@@ -236,10 +242,10 @@ $(document).ready(function(){
 					drop: function(ev, ui) {
 						[var texte_apres_activation = "(#TEXTE_APRES_ACTIVATION|replace{"\n","<br />"}|replace{"\r",""}|htmlspecialchars)";
 							texte_apres_activation = texte_apres_activation.replace("NOM_JOUEUR",$.cookie('nom_joueur'));
-							alert(texte_apres_activation);]
+							alert_panorama(texte_apres_activation);]
 					      
 						<BOUCLE_documentobjetapresactivationobjet(DOCUMENTS){id_document=#ID_OBJET_APRES_ACTIVATION}>
-							$('div.panorama-panier ul').append("<li><div class='objet#ID_DOCUMENT'><img src='#URL_DOCUMENT' /><span style='display: none;'>#ID_DOCUMENT</span></div></li>");
+							$('div.panorama-panier ul').append("<li><div class='objet#ID_DOCUMENT'><img src='#URL_DOCUMENT' style='max-height: 100px; margin-left: 10px;' /><span style='display: none;'>#ID_DOCUMENT</span></div></li>");
 							$.cookie('objets_ramasses_memo', $.cookie('objets_ramasses_memo')+',#ID_DOCUMENT');
 							$('div.panorama-panier ul li div').draggable({helper: 'clone', opacity: .4, revert: true});
 						
@@ -277,10 +283,10 @@ $(document).ready(function(){
 								if (tableau_lieux_visites.indexOf('#ID_LIEU')>=0) {
 									[var texte_apres_activation = "(#TEXTE_APRES_ACTIVATION|replace{"\n","<br />"}|replace{"\r",""}|htmlspecialchars)";
 									texte_apres_activation = texte_apres_activation.replace("NOM_JOUEUR",$.cookie('nom_joueur'));
-									alert(texte_apres_activation);]
+									alert_panorama(texte_apres_activation);]
 
 									<BOUCLE_documentobjetapresactivationlieu(DOCUMENTS){id_document=#ID_OBJET_APRES_ACTIVATION}>
-										$('div.panorama-panier ul').append("<li><div class='objet#ID_DOCUMENT'><img src='#URL_DOCUMENT' /><span style='display: none;'>#ID_DOCUMENT</span></div></li>");
+										$('div.panorama-panier ul').append("<li><div class='objet#ID_DOCUMENT'><img src='#URL_DOCUMENT' style='max-height: 100px; margin-left: 10px;' /><span style='display: none;'>#ID_DOCUMENT</span></div></li>");
 										$.cookie('objets_ramasses_memo', $.cookie('objets_ramasses_memo')+',#ID_DOCUMENT');
 										$('div.panorama-panier ul li div').draggable({helper: 'clone', opacity: .4, revert: true});
 						
@@ -294,12 +300,12 @@ $(document).ready(function(){
 								} else {
 									[var texte_avant_activation = "(#TEXTE_AVANT_ACTIVATION|replace{"\n","<br />"}|replace{"\r",""}|htmlspecialchars)";
 									texte_avant_activation = texte_avant_activation.replace("NOM_JOUEUR",$.cookie('nom_joueur'));
-									alert(texte_avant_activation);]
+									alert_panorama(texte_avant_activation);]
 								}
 							} else {
 								[var texte_avant_activation = "(#TEXTE_AVANT_ACTIVATION|replace{"\n","<br />"}|replace{"\r",""}|htmlspecialchars)";
 								texte_avant_activation = texte_avant_activation.replace("NOM_JOUEUR",$.cookie('nom_joueur'));
-								alert(texte_avant_activation);]
+								alert_panorama(texte_avant_activation);]
 							}
 							return false;
 						});
@@ -317,9 +323,9 @@ $(document).ready(function(){
 								if (tableau_jeux_visites.indexOf('#ID_JEU')>=0) {
 									[var texte_apres_activation = "(#TEXTE_APRES_ACTIVATION|replace{"\n","<br />"}|replace{"\r",""}|htmlspecialchars)";
 									texte_apres_activation = texte_apres_activation.replace("NOM_JOUEUR",$.cookie('nom_joueur'));
-									alert(texte_apres_activation);]
+									alert_panorama(texte_apres_activation);]
 									<BOUCLE_documentobjetapresactivationjeu(DOCUMENTS){id_document=#ID_OBJET_APRES_ACTIVATION}>
-										$('div.panorama-panier ul').append("<li><div class='objet#ID_DOCUMENT'><img src='#URL_DOCUMENT' /><span style='display: none;'>#ID_DOCUMENT</span></div></li>");
+										$('div.panorama-panier ul').append("<li><div class='objet#ID_DOCUMENT'><img src='#URL_DOCUMENT'  style='max-height: 100px; margin-left: 10px;' /><span style='display: none;'>#ID_DOCUMENT</span></div></li>");
 										$.cookie('objets_ramasses_memo', $.cookie('objets_ramasses_memo')+',#ID_DOCUMENT');
 										$('div.panorama-panier ul li div').draggable({helper: 'clone', opacity: .4, revert: true});
 						
@@ -333,12 +339,12 @@ $(document).ready(function(){
 								} else {
 									[var texte_avant_activation = "(#TEXTE_AVANT_ACTIVATION|replace{"\n","<br />"}|replace{"\r",""}|htmlspecialchars)";
 									texte_avant_activation = texte_avant_activation.replace("NOM_JOUEUR",$.cookie('nom_joueur'));
-									alert(texte_avant_activation);]
+									alert_panorama(texte_avant_activation);]
 								}
 							} else	{
 								[var texte_avant_activation = "(#TEXTE_AVANT_ACTIVATION|replace{"\n","<br />"}|replace{"\r",""}|htmlspecialchars)";
 								texte_avant_activation = texte_avant_activation.replace("NOM_JOUEUR",$.cookie('nom_joueur'));
-								alert(texte_avant_activation);]
+								alert_panorama(texte_avant_activation);]
 							}
 							return false;
 						});
@@ -532,7 +538,7 @@ $(document).ready(function(){
 		
 			$('.panorama-bouton-demarrer a').bind('click', function(){
 					if ($('#nom_joueur').val() == "") {
-						alert("<:panoramas:nom_obligatoire:>");
+						alert_panorama("<:panoramas:nom_obligatoire:>");
 					} else {
 						$.cookie('nom_joueur',$('#nom_joueur').val());
 						$('.panorama-bouton-demarrer, .panorama-fond-demarrer').fadeOut(1000);
@@ -546,7 +552,9 @@ $(document).ready(function(){
 		[(#MODE_JEU|=={oui}|?{'',' '})
 			gestion_molette_souris();
 		]
+		
 		$('.panorama-fond-demarrer').fadeOut(3000);
+
 					
 			
 	});
