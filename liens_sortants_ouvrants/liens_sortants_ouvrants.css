@@ -3,3 +3,8 @@
 a {}
 a[hreflang]:after { background : transparent; content: "\0000a0(" attr(hreflang) ")"; color: #CCC; }
 a.spip_out { padding-right: 14px; background: transparent url(img/spip_out.gif) no-repeat right; }
+
+@media print {
+a.spip_out { padding-right: 0; background: none; text-decoration: underline; }
+a.spip_out:after { content: " (" attr(href) ") "; font-size: 90%; font-weight: normal; }
+}
