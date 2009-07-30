@@ -28,7 +28,7 @@
 		while ($arr = sql_fetch($villes)) {
 			$code = $arr['code'];
 			$id_meteo = $arr['id_meteo'];
-			$url = "http://xoap.weather.com/weather/local/".$code."?cc=*&unit=s&dayf=".$jours;
+			$url = "http://xoap.weather.com/weather/local/".$code."?cc=*&unit=s&dayf=".$jours."&link=xoap&prod=xoap&par=[(#CONFIG{spip-meteo/partner,'Partner'})]&key=[(#CONFIG{spip-meteo/License,'License'})]";
 			$xml = meteo_lire_xml($url,true,"day d=.*",array("hi","low","part p=\"d\"","part p=\"n\""));
 			if ($xml) {
 				sql_updateq('spip_meteo', array('statut' => 'publie', 'maj' => 'NOW()'), "id_meteo=$id_meteo");
