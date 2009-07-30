@@ -1,0 +1,82 @@
+#CACHE{0}[(#NOOP|gallery2)]
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><head>
+[(#REM) le head de gallery2 ]
+  [(#NOOP|g2data{headHtml})]
+
+
+
+<title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#INTRODUCTION{150}|textebrut)" />]
+<INCLURE{fond=inc-head}>
+
+[(#REM) Lien vers le flux RSS des articles la rubrique ]
+<link rel="alternate" type="application/rss+xml" title="<:syndiquer_rubrique:>" href="[(#URL_PAGE{backend}|parametre_url{id_rubrique,#ID_RUBRIQUE})]" />
+
+[(#REM) le head du plugin g2 ]
+    [<link rel="stylesheet" type="text/css" href="(#URL_PAGE{g2.css})"/>]
+    [(#CONFIG{g2/integrer_affmasq_barre}|=={oui}|oui)
+        [<script type="text/javascript" src="(#CHEMIN{javascript/jquery.cookie.js})"></script>]
+        [<script type="text/javascript" src="(#URL_PAGE{g2.js})"></script>]
+    ]
+</head>
+
+<body class="page_rubrique">
+<div id="page">
+
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}>
+    [(#REM) sortir du div#page de SPIP selon l'option de config integrer_page_spip ]  
+  [(#CONFIG{g2/integrer_page_spip}|=={oui}|non)</div>]
+
+	[(#REM) Contenu principal : contenu de la rubrique ]
+    <div id="conteneur">
+    <div id="contenu">  
+
+        <div class="cartouche">
+            [(#LOGO_RUBRIQUE||image_reduire{200,200})]
+            <h1 class="#EDIT{titre}">#TITRE</h1>
+            [(#REM) le body de gallery2 ]
+            [(#NOOP|g2data{bodyHtml})]	
+        </div>
+
+	</div><!--#contenu-->
+	</div><!--#conteneur-->
+
+    [(#REM) Menu de navigation laterale ]
+    <div id="navigation">
+
+        [(#REM) Menu de navigation par rubriques ]
+        <INCLURE{fond=inc-rubriques}{id_rubrique}>
+		
+		#FORMULAIRE_RECHERCHE
+
+    </div><!--#navigation-->
+    
+    [(#REM) Menu de navigation laterale ]
+    <div id="extra">
+
+        [(#REM) Menu de navigation mots-cles ]
+        <B_mots>
+        <div class="menu">
+            <h2><:mots_clefs:></h2>
+            <ul>
+                <BOUCLE_mots(MOTS) {id_rubrique} {par titre}>
+                <li><a href="#URL_MOT" rel="tag">#TITRE</a></li>
+                </BOUCLE_mots>
+            </ul>
+        </div>
+        </B_mots>
+        
+    </div><!--#extra-->
+
+	[(#REM) Pied de page ]
+    [(#REM) retour dans un pseudo div#page si l'option de config integrer_page_spip est à "non" ]
+  	[(#CONFIG{g2/integrer_page_spip}|=={oui}|non)<div class="g2page">]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
+</div><!--#page-->
+</body>
+</html>
+
