@@ -1,0 +1,32 @@
+[(#REM) titre=spip meteo]
+
+[(#REM) icone=prive/images/meteo-24.png]
+
+
+
+<!-- descriptif=
+After registration on weather.com you will receive Partner ID and License key
+-->
+
+
+#CACHE{0}
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+
+
+<fieldset><legend><strong>Spip meteo setup</strong></legend>
+<p>
+	<label>weather.com Partner ID :</label>
+	<label><input type="text" name="partner" value="[(#CONFIG{spip_meteo/partner}|sinon{"Partner ID"})]" size="30" /></label>
+</p>
+<p>
+	<label>weather.com License Key :</label>
+	<label><input type="text" name="license" value="[(#CONFIG{spip_meteo/license}|sinon{"License key"})]" size="30" /></label>
+</p>
+
+
+</fieldset>
+<p>Create your weather account on : <a href="https://registration.weather.com/ursa/xmloap/step1"></a>https://registration.weather.com/ursa/xmloap/step1</a></p>
+<input type="submit" name="_cfg_ok" value="<:OK:>" />
+<input type="reset" value="<:Reset:>" />
+<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
+</form>
