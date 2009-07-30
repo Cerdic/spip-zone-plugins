@@ -44,3 +44,4 @@ Faut-il distinguer pages et blocs ?
 Comment estimer la charge ?
 - d'une part en estimant la charge correspondant à la conception du bloc => charge de conception
 - d'autre part en estimant la charge correspondant à l'assemblage des blocs dans un bloc ou dans une page => charge d'assemblage
+
