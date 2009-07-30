@@ -6,6 +6,9 @@ voir concurrences.com, la section "antitrust" : http://www.concurrences.com/rubr
 
 Pour la gestion de :
 
+- sections
+	- id_section
+
 - pages 
 	- id_page
 	- nom_page
@@ -30,9 +33,14 @@ Pour la gestion de :
 Balises :
 ---------
 
-- liens entrants : comment on arrive sur la page ? calculé à partir des liens pointant vers cette page
-- liens sortants : vers où l'on peut aller ? calculé à partir des liens des blocs de la branche
+- liens entrants : comment on arrive sur la page ? balise calculée à partir des liens pointant vers cette page
+- liens sortants : vers où l'on peut aller ? balise calculée à partir des liens des blocs de la branche
 
 Faut-il distinguer pages et blocs ?
+- les pages ne peuvent pas contenir d'autres pages
 - les blocs peuvent s'imbriquer les uns dans les autres
 - les liens sont contenus dans des blocs, ex bloc nav, bloc menu (et pas dans des pages)
+
+Comment estimer la charge ?
+- d'une part en estimant la charge correspondant à la conception du bloc => charge de conception
+- d'autre part en estimant la charge correspondant à l'assemblage des blocs dans un bloc ou dans une page => charge d'assemblage
