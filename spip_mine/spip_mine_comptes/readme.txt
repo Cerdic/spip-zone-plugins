@@ -1,0 +1,1 @@
+aurait pu s'appeler spip_mine_accounts
