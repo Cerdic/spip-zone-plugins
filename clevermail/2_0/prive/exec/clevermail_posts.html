@@ -55,7 +55,7 @@
   </B_posts_new>
   #SET{nbEnvoyes,0}
   <B_posts_sent>
-      <BOUCLE_posts_sent(SPIP_CM_POSTS){pst_date_sent!=0}{par pst_date_sent}{inverse}>
+      <BOUCLE_posts_sent(SPIP_CM_POSTS){lst_id}{pst_date_sent!=0}{par pst_date_sent}{inverse}>
         <BOUCLE_still_queued2(SPIP_CM_POSTS_QUEUED){pst_id} />#SET{nbQueued,#TOTAL_BOUCLE}<//B_still_queued2>
         <BOUCLE_already_sent2(SPIP_CM_POSTS_DONE){pst_id} />#SET{nbSent,#TOTAL_BOUCLE}<//B_already_sent2>
         [(#GET{nbQueued}|=={0}|oui)
