@@ -6,7 +6,7 @@
 	
 	<a id="[lieu(#ID_LIEU)]" name="[lieu(#ID_LIEU)]"></a>
 	<BOUCLE_photo(DOCUMENTS){id_document=#ID_PHOTO}>
-		<img src="#URL_DOCUMENT" unselectable="on" style="-moz-user-select: none;" class="panorama#ID_LIEU" width="#LARGEUR" height="#HAUTEUR"  
+		<img src="#URL_DOCUMENT" unselectable="on" style="-moz-user-select: none; visibility: hidden;" class="panorama#ID_LIEU" width="#LARGEUR" height="#HAUTEUR"  
 	</BOUCLE_photo>
 	 alt="[(#_lieux:TITRE|texte_backend)]" usemap="map#ID_LIEU" />
 	<B_interactions>
@@ -266,6 +266,23 @@ $(document).ready(function(){
 						//mis � jour des cookies
 						var objets_ramasses = $('div.panorama-panier ul').html();
 						$.cookie('objets_ramasses', objets_ramasses);
+
+						if ($('.images-transition-interaction#ID_INTERACTION')[0]){
+						
+							var nb_li = ($('.images-transition-interaction#ID_INTERACTION ul li').length);
+							setTimeout(function(){
+								$('.images-transition-interaction#ID_INTERACTION').remove();
+								document.location.href=$('.interaction#ID_INTERACTION').attr('href');
+							}, nb_li*#IMAGES_TRANSITION_DELAI );
+							$('.panorama-viewport').append("<div class='fond-noir-slideshow' style='background: black; width: 100%; height: 100%; position: absolute; left: 0; top: 0; opacity: .8;'></div>");
+							$('.images-transition-interaction#ID_INTERACTION').appendTo(".panorama-viewport").show();
+							$('.images-transition-interaction#ID_INTERACTION ul').innerfade({
+											speed: 'slow', 
+											timeout: #IMAGES_TRANSITION_DELAI, 
+											type: 'sequence'
+										});
+							return false;
+						} 
 						
 					}
 					});
@@ -354,15 +371,16 @@ $(document).ready(function(){
 		
 		[(#REM) gif anim�e sur fond noir avant le chargement de la page suivante ]
 		<BOUCLE_interactionsversautrepage(VISITES_VIRTUELLES_INTERACTIONS){id_interaction}{type IN lieu,visite,article,rubrique,url}>
-			$('.interaction#ID_INTERACTION').bind('click', function(){
+			
+			/*$('.interaction#ID_INTERACTION').bind('click', function(){
 			$('.panorama-viewport').append("<div class='fond-noir-slideshow' style='background: black; width: 100%; height: 100%; position: absolute; left: 0; top: 0; opacity: .8;'></div><img src='#CHEMIN{img_pack/ajax-loader.gif}' style='position: absolute; top: 50%; left: 50%; margin-left: -33px; margin-top: -33px;' />");
 				return true;	
-			});
+			});*/
 		</BOUCLE_interactionsversautrepage>
 
 
 		[(#REM) Transistion de type film avant d'activer l'interaction ]
-		<BOUCLE_filmtransition(DOCUMENTS){id_document=#ID_FILM_TRANSITION}>
+		<BOUCLE_filmtransitionstd(DOCUMENTS){id_document=#ID_FILM_TRANSITION}>
 			$('.interaction#ID_INTERACTION').bind('click', function(){
 				setTimeout(function(){
 					document.location.href=$('.interaction#ID_INTERACTION').attr('href');
@@ -379,7 +397,7 @@ $(document).ready(function(){
 				return false;
 		
 			});
-		</BOUCLE_filmtransition>
+		</BOUCLE_filmtransitionstd>
 		
 	</BOUCLE_toutesinteractions>
 
@@ -451,6 +469,7 @@ $(document).ready(function(){
 <script type="text/javascript">
 $(document).ready(function(){
 [(#REM) faire jouer la transition avant d'activer l'interaction : cas d'une s�quence d'images ]
+	[(#ID_OBJET_ACTIVATION|?{'',' '})
 	$('.interaction#ID_INTERACTION').bind('click', function(){
 		if ($('.images-transition-interaction#ID_INTERACTION')[0]){
 		
@@ -471,7 +490,8 @@ $(document).ready(function(){
 			
 			return true;
 		}
-	});		
+	});
+	]	
 });
 
 </script>
@@ -553,6 +573,8 @@ $(document).ready(function(){
 		[(#MODE_JEU|=={oui}|?{'',' '})
 			gestion_molette_souris();
 		]
+
+		$('.panorama#ID_LIEU').css('visibility','visible');
 		$('.panorama-fond-demarrer').fadeOut(3000);
 
 					
