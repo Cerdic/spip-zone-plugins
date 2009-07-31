@@ -18,4 +18,12 @@ function aucun_ou_un_ou_plusieurs($nb, $chaine_aucun, $chaine_un, $chaine_plusie
     return _T($chaine_plusieurs, $vars);
   }
 }
+
+function cm_date($timestamp) {
+  return date('d/m/Y', $timestamp);
+}
+
+function cm_heure($timestamp) {
+  return date('H:i', $timestamp);
+}
 ?>
