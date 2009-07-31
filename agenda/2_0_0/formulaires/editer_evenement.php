@@ -20,7 +20,7 @@ function formulaires_editer_evenement_charger_dist($id_evenement='new', $id_arti
 	$valeurs['id_parent'] = $valeurs['id_article'];
 	unset($valeurs['id_article']);
 	// pour le selecteur d'article(s) optionnel
-	$valeurs['id_parents'] = array("article|".$valeurs['id_parent']);
+	$valeurs['parents_id'] = array("article|".$valeurs['id_parent']);
 
 	// fixer la date par defaut en cas de creation d'evenement
 	if (!intval($id_evenement)){
@@ -69,7 +69,7 @@ function formulaires_editer_evenement_verifier_dist($id_evenement='new', $id_art
 		$erreurs['date_fin'] = _L('la date de fin doit etre posterieure a la date de debut');
 	
 	include_spip('spip_bonux_fonctions');
-	if (count($id = picker_selected(_request('id_parents'),'article'))
+	if (count($id = picker_selected(_request('parents_id'),'article'))
 	  AND $id = reset($id)
 	  AND $id = sql_getfetsel('id_article','spip_articles','id_article='.intval($id))){
 	  // reinjecter dans id_parent
