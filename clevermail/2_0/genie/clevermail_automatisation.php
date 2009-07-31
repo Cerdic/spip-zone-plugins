@@ -5,7 +5,7 @@ function genie_clevermail_automatisation_dist() {
 			$createAuto = false;
 			if (!$lastCreate = sql_getfetsel("pst_date_create", "spip_cm_posts", "lst_id=".intval($list['lst_id']), "", "pst_date_create DESC", "0,1")) {
 				// Il n'y a pas encore eu de message dans cette liste
-				$lastCreate = 0;
+				$lastCreate = 60*60*24; // On se place le 2 janvier 1970, SPIP n'aime pas epoc avec le critere "age"
 			}
 			if (date("d/m/Y") != date("d/m/Y", $lastCreate)                       // Aujourd'hui est un autre jour
           && intval(date("H")) > (intval($list['lst_auto_hour']) - 1)) {    // L'heure est venue
