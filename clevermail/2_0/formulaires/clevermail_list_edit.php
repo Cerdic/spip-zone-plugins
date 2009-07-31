@@ -1,6 +1,8 @@
 <?php
 function formulaires_clevermail_list_edit_charger_dist($lst_id = -1) {
-	if ($lst_id == -1 || !$valeurs = sql_fetsel('*', 'spip_cm_lists', 'lst_id='.intval($lst_id))) {
+	if ($valeurs = sql_fetsel('*', 'spip_cm_lists', 'lst_id='.intval($lst_id))) {
+		$valeurs['lst_auto_week_days'] = explode(',', $valeurs['lst_auto_week_days']);
+	} else {
     $cm_mail_admin = sql_getfetsel('set_value', 'spip_cm_settings', 'set_name="CM_MAIL_ADMIN"');
 		$valeurs = array(
 			'lst_id' => -1,
@@ -18,7 +20,7 @@ function formulaires_clevermail_list_edit_charger_dist($lst_id = -1) {
 			'lst_url_text' => 'http://',
 		  'lst_auto_mode' => 'none',
 		  'lst_auto_hour' => 8,
-		  'lst_auto_week_day' => 1,
+      'lst_auto_week_days' => array(1),
 		  'lst_auto_month_day' => 1,
 		  'lst_auto_subscribers' => '',
 		  'lst_auto_subscribers_mode' => 0
@@ -42,20 +44,33 @@ function formulaires_clevermail_list_edit_verifier_dist($lst_id = -1) {
 	if (_request('lst_moderator_email') && !email_valide(_request('lst_moderator_email'))) {
 		$erreurs['lst_moderator_email'] = _T('clevermail:cette_adresse_email_n_est_pas_valide');
 	}
-	if (_request('lst_auto_mode') && !in_array(_request('lst_auto_mode'), array('none', 'day', 'week', 'month'))) {
-		$erreurs['lst_auto_mode'] = _T('clevermail:auto_erreur_ce_mode_automatisation_existe_pas');
+	if (_request('lst_auto_mode') && _request('lst_auto_mode') != 'none') {
+		if (in_array(_request('lst_auto_mode'), array('day', 'week', 'month'))) {
+		  if (_request('lst_auto_hour') && (intval(_request('lst_auto_hour')) < 0 || intval(_request('lst_auto_hour')) > 23)) {
+		    $erreurs['lst_auto_hour'] = _T('clevermail:auto_erreur_cette_heure_existe_pas');
+		  }
+			switch(_request('lst_auto_mode')) {
+				case 'day':
+					break;
+			  case 'week':
+          if (!_request('lst_auto_week_days') || count(_request('lst_auto_week_days')) == 0) {
+            $erreurs['lst_auto_week_days'] = _T('clevermail:auto_erreur_choisir_un_jour_minimum');
+          } elseif (min(_request('lst_auto_week_days')) < 0 || max(_request('lst_auto_week_day')) > 6) {
+            $erreurs['lst_auto_week_days'] = _T('clevermail:auto_erreur_ce_jour_semaine_existe_pas');
+          }
+					break;
+				case 'month':
+				  if (_request('lst_auto_month_day') && (intval(_request('lst_auto_month_day')) < 0 || intval(_request('lst_auto_month_day')) > 31)) {
+				    $erreurs['lst_auto_month_day'] = _T('clevermail:auto_erreur_ce_jour_mois_existe_pas');
+				  } elseif (intval(_request('lst_auto_month_day')) > 28) {
+				    $erreurs['lst_auto_month_day'] = _T('clevermail:auto_erreur_ce_jour_mois_pas_possible');
+				  }
+					break;
+			}
+		} else {
+      $erreurs['lst_auto_mode'] = _T('clevermail:auto_erreur_ce_mode_automatisation_existe_pas');
+		}
 	}
-  if (_request('lst_auto_hour') && (intval(_request('lst_auto_hour')) < 0 || intval(_request('lst_auto_hour')) > 23)) {
-    $erreurs['lst_auto_hour'] = _T('clevermail:auto_erreur_cette_heure_existe_pas');
-  }
-  if (_request('lst_auto_week_day') && (intval(_request('lst_auto_week_day')) < 0 || intval(_request('lst_auto_week_day')) > 6)) {
-    $erreurs['lst_auto_week_day'] = _T('clevermail:auto_erreur_ce_jour_semaine_existe_pas');
-  }
-  if (_request('lst_auto_month_day') && (intval(_request('lst_auto_month_day')) < 0 || intval(_request('lst_auto_month_day')) > 31)) {
-    $erreurs['lst_auto_month_day'] = _T('clevermail:auto_erreur_ce_jour_mois_existe_pas');
-  } elseif (intval(_request('lst_auto_month_day')) > 28) {
-    $erreurs['lst_auto_month_day'] = _T('clevermail:auto_erreur_ce_jour_mois_pas_possible');
-  }
   if (_request('lst_auto_subscribers') != '') {
   	include_spip('inc/distant');
     if ($adresses = recuperer_page(_request('lst_auto_subscribers'))) {
@@ -89,7 +104,7 @@ function formulaires_clevermail_list_edit_traiter_dist($lst_id = -1) {
     'lst_url_text' => _request('lst_url_text'),
     'lst_auto_mode' => _request('lst_auto_mode'),
     'lst_auto_hour' => intval(_request('lst_auto_hour')),
-    'lst_auto_week_day' => intval(_request('lst_auto_week_day')),
+    'lst_auto_week_days' => implode(',', _request('lst_auto_week_days')),
     'lst_auto_month_day' => intval(_request('lst_auto_month_day')),
     'lst_auto_subscribers' => _request('lst_auto_subscribers'),
     'lst_auto_subscribers_mode' => intval(_request('lst_auto_subscribers_mode'))

@@ -2,7 +2,7 @@
 	<nom>CleverMail pour SPIP 2.0</nom>
 	<auteur>Thomas Beaumanoir et Nicolas Hoizey de [Clever Age->http://www.clever-age.com/]</auteur>
 	<version>2.2.1</version>
-  <version_base>0.5</version_base>
+  <version_base>0.6</version_base>
 	<etat>test</etat>
 	<description>
 Gestion de {{lettres d'information}} assurant les fonctionnalit&eacute;s suivantes :
@@ -12,7 +12,7 @@ Gestion de {{lettres d'information}} assurant les fonctionnalit&eacute;s suivant
 -* Abonnement au choix de l'utilisateur en version {{texte brut ou multipart simultan&eacute; HTML + texte brut}} (attention, Lotus Notes n'aime pas)
 -* Possibilit&eacute; de forcer la version dans le formulaire d'abonnement
 -* R&eacute;cup&eacute;ration des contenus HTML et texte brut &agrave; partir de deux URL, donc {{utilisation de squelettes SPIP}} d&eacute;di&eacute;s possible
--* {{Automatisation des envois}} avec une fr&eacute;quence quotidienne, hebdomadaire ou mensuelle
+-* {{Automatisation des envois}} avec une fr&eacute;quence quotidienne, hebdomadaire (multiples jours de la semaine possibles) ou mensuelle
 -* {{Automatisation des inscriptions}} depuis un fichier distant
 
 &Eacute;volutions envisag&eacute;es :

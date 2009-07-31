@@ -18,6 +18,7 @@ function clevermail_declarer_tables_principales($tables_principales) {
 	    "lst_auto_mode" => "ENUM('none', 'day', 'week', 'month') DEFAULT 'none'",
 	    "lst_auto_hour" => "TINYINT(2) NOT NULL default '8'",
 	    "lst_auto_week_day" => "TINYINT(1) NOT NULL default '1'", // 0 = dimanche
+      "lst_auto_week_days" => "VARCHAR(13) NOT NULL default '1'", // concatenation numeros des jours, 0 = dimanche
 	    "lst_auto_month_day" => "TINYINT(2) NOT NULL default '1'",
 	    "lst_auto_subscribers" => "VARCHAR(255) NOT NULL",
 	    "lst_auto_subscribers_mode" => "TINYINT(1) NOT NULL default '0'",
@@ -223,6 +224,15 @@ function clevermail_upgrade($nom_meta_base_version, $version_cible) {
       sql_updateq("spip_cm_lists_subscribers", array('lsr_mode' => 1), "lsr_mode=2");
       ecrire_meta($nom_meta_base_version,$current_version="0.5",'non');
       spip_log('Mise à jour des tables du plugin CleverMail en version 0.5', 'clevermail');
+    }
+    if (version_compare($current_version,'0.6','<')) {
+      include_spip('base/abstract_sql');
+      include_spip('base/create');
+      maj_tables('spip_cm_lists');
+      sql_updateq("spip_cm_lists", "lst_auto_week_days=lst_auto_week_day");
+      sql_alter("TABLE spip_cm_lists DROP lst_auto_week_day");
+      ecrire_meta($nom_meta_base_version,$current_version="0.6",'non');
+      spip_log('Mise à jour des tables du plugin CleverMail en version 0.6', 'clevermail');
     }
   }
 }

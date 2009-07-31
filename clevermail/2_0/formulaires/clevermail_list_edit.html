@@ -202,27 +202,28 @@
               <option value="#GET{hour}"[(#GET{hour}|=={#ENV{lst_auto_hour}}|oui) selected="selected"]>#GET{hour}<:clevermail:auto_heure_creation_minutes:></option>
             </select>
           </li>
-          #SET{name,lst_auto_week_day}
+          #SET{name,lst_auto_week_days}
           #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-          #SET{obli,''}
+          #SET{obli,'obligatoire'}
           <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-            <label for="#GET{name}"><:clevermail:auto_week_day:></label>
+            <label for="#GET{name}"><:clevermail:auto_week_days:></label>
             [<span class='erreur_message'>(#GET{erreurs})</span>]
-            <select name="#GET{name}" id="#GET{name}">
+            <p class="explication"><:clevermail:auto_jours_semaine_explication:></p>
+            <select name="#GET{name}[]" multiple="multiple" size="7" id="#GET{name}">
               #SET{day,1}
-              <option value="#GET{day}"[(#GET{day}|=={#ENV{lst_auto_week_day}}|oui) selected="selected"]><:clevermail:auto_week_day_monday:></option>
+              <option value="#GET{day}"[(#GET{day}|in_array{#ENV{#GET{name}}}|oui) selected="selected"]><:clevermail:auto_week_day_monday:></option>
               #SET{day,2}
-              <option value="#GET{day}"[(#GET{day}|=={#ENV{lst_auto_week_day}}|oui) selected="selected"]><:clevermail:auto_week_day_tuesday:></option>
+              <option value="#GET{day}"[(#GET{day}|in_array{#ENV{#GET{name}}}|oui) selected="selected"]><:clevermail:auto_week_day_tuesday:></option>
               #SET{day,3}
-              <option value="#GET{day}"[(#GET{day}|=={#ENV{lst_auto_week_day}}|oui) selected="selected"]><:clevermail:auto_week_day_wednesday:></option>
+              <option value="#GET{day}"[(#GET{day}|in_array{#ENV{#GET{name}}}|oui) selected="selected"]><:clevermail:auto_week_day_wednesday:></option>
               #SET{day,4}
-              <option value="#GET{day}"[(#GET{day}|=={#ENV{lst_auto_week_day}}|oui) selected="selected"]><:clevermail:auto_week_day_thursday:></option>
+              <option value="#GET{day}"[(#GET{day}|in_array{#ENV{#GET{name}}}|oui) selected="selected"]><:clevermail:auto_week_day_thursday:></option>
               #SET{day,5}
-              <option value="#GET{day}"[(#GET{day}|=={#ENV{lst_auto_week_day}}|oui) selected="selected"]><:clevermail:auto_week_day_friday:></option>
+              <option value="#GET{day}"[(#GET{day}|in_array{#ENV{#GET{name}}}|oui) selected="selected"]><:clevermail:auto_week_day_friday:></option>
               #SET{day,6}
-              <option value="#GET{day}"[(#GET{day}|=={#ENV{lst_auto_week_day}}|oui) selected="selected"]><:clevermail:auto_week_day_saturday:></option>
+              <option value="#GET{day}"[(#GET{day}|in_array{#ENV{#GET{name}}}|oui) selected="selected"]><:clevermail:auto_week_day_saturday:></option>
               #SET{day,0}
-              <option value="#GET{day}"[(#GET{day}|=={#ENV{lst_auto_week_day}}|oui) selected="selected"]><:clevermail:auto_week_day_sunday:></option>
+              <option value="#GET{day}"[(#GET{day}|in_array{#ENV{#GET{name}}}|oui) selected="selected"]><:clevermail:auto_week_day_sunday:></option>
             </select>
           </li>
           #SET{name,lst_auto_month_day}

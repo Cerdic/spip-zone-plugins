@@ -1,6 +1,6 @@
 <?php
 function genie_clevermail_automatisation_dist() {
-	if ($autoLists = sql_select("lst_id, lst_auto_mode, lst_auto_hour, lst_auto_week_day, lst_auto_month_day", "spip_cm_lists", "lst_auto_mode != 'none'")) { 
+	if ($autoLists = sql_select("lst_id, lst_auto_mode, lst_auto_hour, lst_auto_week_days, lst_auto_month_day", "spip_cm_lists", "lst_auto_mode != 'none'")) { 
 		while($list = sql_fetch($autoLists)) {
 			$createAuto = false;
 			if (!$lastCreate = sql_getfetsel("pst_date_create", "spip_cm_posts", "lst_id=".intval($list['lst_id']), "", "pst_date_create DESC", "0,1")) {
@@ -14,7 +14,7 @@ function genie_clevermail_automatisation_dist() {
 						$createAuto = true;
 						break;
 					case 'week':
-						if (intval(date("w")) == intval($list['lst_auto_week_day'])) {     // Le bon jour de la semaine
+						if (in_array(date("w"), explode(',', $list['lst_auto_week_days']))) {     // Le bon jour de la semaine
               $createAuto = true;
 	          }
 	          break;
