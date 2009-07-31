@@ -1,0 +1,18 @@
+#CACHE{0}
+#HTTP_HEADER{Content-type: text/html; charset=#CHARSET}
+<B_test_contenu>
+<h1>@@NOM_LETTRE@@</h1>
+
+<div>
+@@DESCRIPTION@@
+</div>
+
+<BOUCLE_test_contenu(AUTEURS){0,1}{tous}><BOUCLE_articles(ARTICLES){age_relatif<=0}{par date}{inverse}{0,20}>
+[<h2><a href="[(#URL_ARTICLE|url_absolue)]">(#TITRE)</a></h2>]
+<p>[par (#LESAUTEURS|textebrut)][ le (#DATE|affdate)]</p>
+[<div>
+(#CHAPO|sinon{#INTRODUCTION})</div>]
+</BOUCLE_articles></BOUCLE_test_contenu>
+
+<p>Cliquez sur le lien suivant pour vous désinscrire : <a href="@@URL_DESINSCRIPTION@@">@@URL_DESINSCRIPTION@@</a></p>
+</B_test_contenu>
