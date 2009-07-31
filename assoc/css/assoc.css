@@ -1,0 +1,34 @@
+
+
+/* conteneur globaux */
+#panel_conteneur { position:absolute; top:10%; left : 50% ; margin-left:-475px; 
+							  visibility : visible; border:1px solid #DFDFDF; background-color :  #EFEFEF ; font-size: 12px}
+#panel_relative 	{ width : 100% ; height : 100% ; position : relative}
+.clear-block { clear:both; }
+
+
+/* propriétés communes à tous les secteurs du panneau */
+#panel_conteneur .pb { margin:0; padding:0; float:left ;  }
+
+
+/*  Secteurs  */
+/*  	1. barre du haut */
+#panel_haut 	{ width : 100% ; height : 16px ; text-align :right ; background: transparent url(../../../imgs/admin/grip.gif) repeat-x scroll 0 0; border-bottom:1px solid #DFDFDF; cursor:move; font-size:11px; color:#FFF; }
+#assoc_haut  span { cursor:pointer; background:#AAA;  }
+
+/* 		2. zone de recherche */	
+#panel_recherche 	{ background-color :#EFEFE1 ;   }		
+
+/* 		3. zone de resultat */
+#panel_resultat 	{  background-color : #EFEFE1; font-size:12px;  }		
+
+/* 		4. zone d'insertion */	
+#panel_assoc { width : 100% ; clear:left ; background-color : #EFEFE1;}	 
+
+/* la pagination */ 
+#pagination {text-align : center}
+#pagination span {display : inline-block; width : 80px ; vertical-align : middle ; cursor : pointer}
+#retour5 {background : url(../../../plugins/assoc/img/retour5.png) no-repeat 0 0;width : 32px ; height : 32px;}
+#retour1 {background : url(../../../plugins/assoc/img/retour1.png) no-repeat 0 0;width : 32px ; height : 32px;}
+#avance1 {background : url(../../../plugins/assoc/img/avance1.png) no-repeat 0 0;width : 32px ; height : 32px;}
+#avance5 {background : url(../../../plugins/assoc/img/avance5.png) no-repeat 0 0;width : 32px ; height : 32px;} 

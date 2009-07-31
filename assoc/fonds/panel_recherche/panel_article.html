@@ -1,0 +1,26 @@
+#CACHE{3600}
+#HTTP_HEADER{Content-Type: text/html}
+<fieldset id='recherche_rub'>
+	<legend>Recherche</legend>
+	
+	<select id="les_rubriques">
+		<option value="">Choisissez</option>
+		<BOUCLE_rub(RUBRIQUES){tous}>
+		 	<option value="#ID_RUBRIQUE">[(#TITRE*|supprimer_numero)]</option>
+		</BOUCLE_rub>
+	</select>
+	
+	<br><br>
+	
+	<label for="date_debut">Entre les dates :<br/>(cliquer dans les champs textes pour faire apparaitre un calendrier)</span></label><br><br>
+	<strong>Entre le </strong><br/>
+	<input id="date_debut_assoc" class="text" type="text" /><br/>
+	<strong>et le</strong><br/>
+	<input id="date_fin_assoc" class="text" type="text" />
+	<br/>
+	<br/>
+	
+	<input type="submit" value="rechercher"  onclick="class_assoc.rechercher(true)" >
+
+	
+</fieldset>

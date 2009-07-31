@@ -1,0 +1,11 @@
+/* Ecran de gestion de l'admin */
+.gestion_assoc {margin-bottom: 30px; font-size: 14px ;}
+.delete_relation {color: red ; cursor : pointer}
+.titre_assoc_admin {font-size: 15px; font-weight: bold; margin-left: 8px}
+
+#liste_type_lien li { margin-bottom: 5px }
+.cadre {padding-left: 8px}
+
+								
+								
+						

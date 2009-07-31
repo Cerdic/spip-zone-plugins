@@ -1,0 +1,19 @@
+#CACHE{3600}
+#HTTP_HEADER{Content-Type: text/html}
+<fieldset id='recherche_rub'>
+	<legend>Recherche</legend>
+	
+	<select id="les_rubriques">
+		<option value="">Choisissez</option>
+		<BOUCLE_rub(RUBRIQUES){tous}>
+		 	<option value="#ID_RUBRIQUE">[(#TITRE*|supprimer_numero)]</option>
+		</BOUCLE_rub>
+	</select>
+	
+
+
+	
+	<input type="submit" value="Valider"  onclick="class_assoc.associer(true)" >
+
+	
+</fieldset>

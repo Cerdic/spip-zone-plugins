@@ -1,0 +1,16 @@
+<div id='liste_assoc_rubrique' class='une_liste_type'>
+	<B_ass1>
+			<p>Vos rubriques associées</p>
+			<ul>
+		<BOUCLE_ass1(ASSOCIATION){id=#ENV{id}}{type_id=#ENV{type}}{type_lien=rubrique}>
+			#SET{cle,#CLE} 
+			<BOUCLE_art1(RUBRIQUES){id_rubrique=#ID_LIEN}{tous}>
+				<li id='cle#GET{cle}'>#TITRE <span class='sup_lien' onclick="class_assoc.supprimer(#GET{cle},#ENV{id},'cle#GET{cle}')"> X </span></li>
+			</BOUCLE_art1>
+		</BOUCLE_ass1>
+		</ul>
+	</B_ass1>
+</div>	
+		
+
+

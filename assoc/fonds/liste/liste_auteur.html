@@ -1,0 +1,26 @@
+#CACHE{0}
+<div class='cadre-e assoc_admin' id='choix_assoc'>
+	<div>
+		<p class='titre'>Associer des elements à votre auteur</p>
+		<ul id='type_association'>
+			<li class='une_association' onclick='class_assoc("assoc_panel","panel_article","liste/liste_auteur",#ENV{id},"auteur","article")'>
+				Article
+			</li>
+		</ul>
+	</div>
+	<div id='liste_assoc'>
+		<p class='titre'>Les elements associer a votre auteur</p>
+		<p class='sous_titre'>Les articles</p>
+		<ul>
+			<BOUCLE_ass(ASSOCIATION){id=#ENV{id}}{type_id=auteur}{type_lien=article}>
+				#SET{cle,#CLE}
+				<BOUCLE_art(ARTICLES){id_article=#ID_LIEN}>
+					<li id='cle#GET{cle}'>#TITRE <span class='sup_lien' onclick="class_assoc.supprimer(#GET{cle},'cle#GET{cle}')"> X </span></li>
+				</BOUCLE_art>
+			</BOUCLE_ass>
+		</ul>
+	</div>
+</div>
+
+
+

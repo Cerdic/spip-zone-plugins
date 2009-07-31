@@ -1,0 +1,52 @@
+#CACHE{0}
+<!-- #conteneur -->
+<div id="conteneur">
+    <h1 class="ecrm-titre"> Gestion des associations entre objets </h1>
+    <!-- .ecrm-header -->
+    <div class="ecrm-header cadre cadre-trait-couleur">
+        <div class="titrem impliable"> Informations Générales </div>
+        <div class="cadre_padding  gestion_assoc">
+
+            <div class="clear-block"></div>
+            <div class="cadre cadre-r">
+            	<br>
+                <div class="titre_assoc_admin"> Choisissez le type d'association que vous souhaitez avoir</div>
+                <br>
+                <div class="cadre_padding">
+       	
+					<select id='pour_type'>
+					</select>&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;
+					
+					<select id='avec_type'>
+					</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					
+					<input type="button" value='Valider' onclick="set_relation()">
+					
+					<ul id='liste_type_lien'>
+						
+					</ul>
+					
+                </div>
+            </div>
+            <div class="cadre cadre-r">
+            	<br>
+                <div class="titre_assoc_admin"> Gerer les types d'éléments que vous souhaitez associer</div>
+                <br>
+                	<ul id='type_existant'>
+						
+					</ul>
+                  <br>
+                <p>Ajoutez un type</p>
+                <input type="text" id="ajout_type">
+				&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value='Valider'  onclick="ajout_type()">
+                <br><br>
+                
+            </div>
+        </div>
+    </div>
+    <!-- /.ecrm-header -->
+    <div class="clear-block"></div>
+    <!-- .liste-auteurs -->
+    
+    
+</div>
