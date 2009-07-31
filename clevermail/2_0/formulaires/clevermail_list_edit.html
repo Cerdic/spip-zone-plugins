@@ -1,129 +1,129 @@
 <div class="formulaire_spip formulaire_editer formulaire_#FORM" id="formulaire_#FORM-#ENV{id,new}">
   [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
   [(#ENV{editable})
-		[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
-		<form action="#ENV{action}" method="post"><div>
-		  #ACTION_FORMULAIRE{#ENV{action}}
-	    <input type="hidden" name="lst_id" value="#ENV{lst_id}" />
-		  <fieldset>
-		    <legend><:clevermail:configuration_generale:></legend>
-	      <ul>
-		      #SET{name,lst_name}
-		      #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-		      #SET{obli,'obligatoire'}
-		      <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-		        <label for="#GET{name}"><:clevermail:nom:></label>
-		        [<span class='erreur_message'>(#GET{erreurs})</span>]
-		        <input type="text" class="text" name="#GET{name}" id="#GET{name}" size="50" maxlength="255" value="#ENV{#GET{name}}" /></li>
-		      </li>
-	        #SET{name,lst_comment}
-	        #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-	        #SET{obli,''}
-	        <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-	          <label for="#GET{name}"><:clevermail:description:></label>
-	          [<span class='erreur_message'>(#GET{erreurs})</span>]
-	          <textarea name="#GET{name}" id="#GET{name}" cols="50" rows="5" wrap="virtual" class="textarea">#ENV{#GET{name}}</textarea>
-	        </li>
-	        #SET{name,lst_moderation}
-	        #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-	        #SET{obli,''}
-	        <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-	          <label for="#GET{name}"><:clevermail:moderation:></label>
-	          [<span class='erreur_message'>(#GET{erreurs})</span>]
-	          <p class="explication"><:clevermail:mod_explication:></p>
-	          <select name="#GET{name}" id="#GET{name}" class="select">
-	            #SET{mode,open}
-	            <option value="#GET{mode}"[(#GET{mode}|=={#ENV{lst_moderation}}|oui) selected="selected"]><:clevermail:mod_open:></option>
-	            #SET{mode,email}
-	            <option value="#GET{mode}"[(#GET{mode}|=={#ENV{lst_moderation}}|oui) selected="selected"]><:clevermail:mod_email:></option>
-	            #SET{mode,mod}
-	            <option value="#GET{mode}"[(#GET{mode}|=={#ENV{lst_moderation}}|oui) selected="selected"]><:clevermail:mod_mod:></option>
-	            #SET{mode,closed}
-	            <option value="#GET{mode}"[(#GET{mode}|=={#ENV{lst_moderation}}|oui) selected="selected"]><:clevermail:mod_closed:></option>
-	          </select>
-	        </li>
-	        #SET{name,lst_moderator_email}
-	        #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-	        #SET{obli,'obligatoire'}
-	        <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-	          <label for="#GET{name}"><:clevermail:email_moderateur:></label>
-	          [<span class='erreur_message'>(#GET{erreurs})</span>]
-	          <input type="text" class="text" name="#GET{name}" id="#GET{name}" size="50" maxlength="255" value="#ENV{#GET{name}}" /></li>
-	        </li>
-	        #SET{name,lst_subject_tag}
-	        #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-	        #SET{obli,''}
-	        <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-	          <label for="#GET{name}"><:clevermail:prefixer_messages:></label>
-	          [<span class='erreur_message'>(#GET{erreurs})</span>]
+    [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+    <form action="#ENV{action}" method="post"><div>
+      #ACTION_FORMULAIRE{#ENV{action}}
+      <input type="hidden" name="lst_id" value="#ENV{lst_id}" />
+      <fieldset>
+        <legend><:clevermail:configuration_generale:></legend>
+        <ul>
+          #SET{name,lst_name}
+          #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+          #SET{obli,'obligatoire'}
+          <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+            <label for="#GET{name}"><:clevermail:nom:></label>
+            [<span class='erreur_message'>(#GET{erreurs})</span>]
+            <input type="text" class="text" name="#GET{name}" id="#GET{name}" size="50" maxlength="255" value="#ENV{#GET{name}}" /></li>
+          </li>
+          #SET{name,lst_comment}
+          #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+          #SET{obli,''}
+          <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+            <label for="#GET{name}"><:clevermail:description:></label>
+            [<span class='erreur_message'>(#GET{erreurs})</span>]
+            <textarea name="#GET{name}" id="#GET{name}" cols="50" rows="5" wrap="virtual" class="textarea">#ENV{#GET{name}}</textarea>
+          </li>
+          #SET{name,lst_moderation}
+          #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+          #SET{obli,''}
+          <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+            <label for="#GET{name}"><:clevermail:moderation:></label>
+            [<span class='erreur_message'>(#GET{erreurs})</span>]
+            <p class="explication"><:clevermail:mod_explication:></p>
+            <select name="#GET{name}" id="#GET{name}" class="select">
+              #SET{mode,open}
+              <option value="#GET{mode}"[(#GET{mode}|=={#ENV{lst_moderation}}|oui) selected="selected"]><:clevermail:mod_open:></option>
+              #SET{mode,email}
+              <option value="#GET{mode}"[(#GET{mode}|=={#ENV{lst_moderation}}|oui) selected="selected"]><:clevermail:mod_email:></option>
+              #SET{mode,mod}
+              <option value="#GET{mode}"[(#GET{mode}|=={#ENV{lst_moderation}}|oui) selected="selected"]><:clevermail:mod_mod:></option>
+              #SET{mode,closed}
+              <option value="#GET{mode}"[(#GET{mode}|=={#ENV{lst_moderation}}|oui) selected="selected"]><:clevermail:mod_closed:></option>
+            </select>
+          </li>
+          #SET{name,lst_moderator_email}
+          #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+          #SET{obli,'obligatoire'}
+          <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+            <label for="#GET{name}"><:clevermail:email_moderateur:></label>
+            [<span class='erreur_message'>(#GET{erreurs})</span>]
+            <input type="text" class="text" name="#GET{name}" id="#GET{name}" size="50" maxlength="255" value="#ENV{#GET{name}}" /></li>
+          </li>
+          #SET{name,lst_subject_tag}
+          #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+          #SET{obli,''}
+          <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+            <label for="#GET{name}"><:clevermail:prefixer_messages:></label>
+            [<span class='erreur_message'>(#GET{erreurs})</span>]
             <p class="explication"><:clevermail:prefixer_messages_explication:></p>
-	          <input type="checkbox" class="checkbox" name="#GET{name}" id="#GET{name}" value="1" [(#ENV{#GET{name}}|=={1}|oui) checked="checked"] /></li>
-	        </li>
-	      </ul>
-	    </fieldset> 
-	    <fieldset>
-	      <legend><:clevermail:confirmation_inscription:></legend>
-	      <ul>
-	        #SET{name,lst_subscribe_subject}
-	        #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-	        #SET{obli,''}
-	        <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-	          <label for="#GET{name}"><:clevermail:sujet:></label>
-	          [<span class='erreur_message'>(#GET{erreurs})</span>]
-	          <input type="text" class="text" name="#GET{name}" id="#GET{name}" size="50" maxlength="255" value="#ENV{#GET{name}}" /></li>
-	        </li>
-	        #SET{name,lst_subscribe_text}
-	        #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-	        #SET{obli,''}
-	        <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-	          <label for="#GET{name}"><:clevermail:description:></label>
-	          [<span class='erreur_message'>(#GET{erreurs})</span>]
-	          <textarea name="#GET{name}" id="#GET{name}" cols="50" rows="5" wrap="virtual" class="textarea">#ENV{#GET{name}}</textarea>
-	        </li>
-	      </ul>
-	    </fieldset> 
-	    <fieldset>
-	      <legend><:clevermail:confirmation_desinscription:></legend>
-	      <ul>
-	        #SET{name,lst_unsubscribe_subject}
-	        #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-	        #SET{obli,''}
-	        <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-	          <label for="#GET{name}"><:clevermail:sujet:></label>
-	          [<span class='erreur_message'>(#GET{erreurs})</span>]
-	          <input type="text" class="text" name="#GET{name}" id="#GET{name}" size="50" maxlength="255" value="#ENV{#GET{name}}" /></li>
-	        </li>
-	        #SET{name,lst_unsubscribe_text}
-	        #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-	        #SET{obli,''}
-	        <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-	          <label for="#GET{name}"><:clevermail:description:></label>
-	          [<span class='erreur_message'>(#GET{erreurs})</span>]
-	          <textarea name="#GET{name}" id="#GET{name}" cols="50" rows="5" wrap="virtual" class="textarea">#ENV{#GET{name}}</textarea>
-	        </li>
-	      </ul>
-	    </fieldset> 
-	    <fieldset>
-	      <legend><:clevermail:url_templates:></legend>
-	      <ul>
-	        #SET{name,lst_url_html}
-	        #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-	        #SET{obli,'obligatoire'}
-	        <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-	          <label for="#GET{name}"><:clevermail:version_html:></label>
-	          [<span class='erreur_message'>(#GET{erreurs})</span>]
-	          <input type="text" class="text" name="#GET{name}" id="#GET{name}" size="50" maxlength="255" value="#ENV{#GET{name}}" /></li>
-	        </li>
-	        #SET{name,lst_url_text}
-	        #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-	        #SET{obli,'obligatoire'}
-	        <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-	          <label for="#GET{name}"><:clevermail:version_txt:></label>
-	          [<span class='erreur_message'>(#GET{erreurs})</span>]
-	          <input type="text" class="text" name="#GET{name}" id="#GET{name}" size="50" maxlength="255" value="#ENV{#GET{name}}" /></li>
-	        </li>
-	      </ul>
-	    </fieldset> 
+            <input type="checkbox" class="checkbox" name="#GET{name}" id="#GET{name}" value="1" [(#ENV{#GET{name}}|=={1}|oui) checked="checked"] /></li>
+          </li>
+        </ul>
+      </fieldset> 
+      <fieldset>
+        <legend><:clevermail:confirmation_inscription:></legend>
+        <ul>
+          #SET{name,lst_subscribe_subject}
+          #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+          #SET{obli,''}
+          <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+            <label for="#GET{name}"><:clevermail:sujet:></label>
+            [<span class='erreur_message'>(#GET{erreurs})</span>]
+            <input type="text" class="text" name="#GET{name}" id="#GET{name}" size="50" maxlength="255" value="#ENV{#GET{name}}" /></li>
+          </li>
+          #SET{name,lst_subscribe_text}
+          #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+          #SET{obli,''}
+          <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+            <label for="#GET{name}"><:clevermail:description:></label>
+            [<span class='erreur_message'>(#GET{erreurs})</span>]
+            <textarea name="#GET{name}" id="#GET{name}" cols="50" rows="5" wrap="virtual" class="textarea">#ENV{#GET{name}}</textarea>
+          </li>
+        </ul>
+      </fieldset> 
+      <fieldset>
+        <legend><:clevermail:confirmation_desinscription:></legend>
+        <ul>
+          #SET{name,lst_unsubscribe_subject}
+          #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+          #SET{obli,''}
+          <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+            <label for="#GET{name}"><:clevermail:sujet:></label>
+            [<span class='erreur_message'>(#GET{erreurs})</span>]
+            <input type="text" class="text" name="#GET{name}" id="#GET{name}" size="50" maxlength="255" value="#ENV{#GET{name}}" /></li>
+          </li>
+          #SET{name,lst_unsubscribe_text}
+          #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+          #SET{obli,''}
+          <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+            <label for="#GET{name}"><:clevermail:description:></label>
+            [<span class='erreur_message'>(#GET{erreurs})</span>]
+            <textarea name="#GET{name}" id="#GET{name}" cols="50" rows="5" wrap="virtual" class="textarea">#ENV{#GET{name}}</textarea>
+          </li>
+        </ul>
+      </fieldset> 
+      <fieldset>
+        <legend><:clevermail:url_templates:></legend>
+        <ul>
+          #SET{name,lst_url_html}
+          #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+          #SET{obli,'obligatoire'}
+          <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+            <label for="#GET{name}"><:clevermail:version_html:></label>
+            [<span class='erreur_message'>(#GET{erreurs})</span>]
+            <input type="text" class="text" name="#GET{name}" id="#GET{name}" size="50" maxlength="255" value="#ENV{#GET{name}}" /></li>
+          </li>
+          #SET{name,lst_url_text}
+          #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+          #SET{obli,'obligatoire'}
+          <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+            <label for="#GET{name}"><:clevermail:version_txt:></label>
+            [<span class='erreur_message'>(#GET{erreurs})</span>]
+            <input type="text" class="text" name="#GET{name}" id="#GET{name}" size="50" maxlength="255" value="#ENV{#GET{name}}" /></li>
+          </li>
+        </ul>
+      </fieldset> 
       <fieldset>
         <legend><:clevermail:automatisation:></legend>
         <ul>
@@ -209,7 +209,7 @@
             <label for="#GET{name}"><:clevermail:auto_week_days:></label>
             [<span class='erreur_message'>(#GET{erreurs})</span>]
             <p class="explication"><:clevermail:auto_jours_semaine_explication:></p>
-            <select name="#GET{name}[]" multiple="multiple" size="7" id="#GET{name}">
+            <select name="#GET{name}&#91;&#93;" multiple="multiple" size="7" id="#GET{name}">
               #SET{day,1}
               <option value="#GET{day}"[(#GET{day}|in_array{#ENV{#GET{name}}}|oui) selected="selected"]><:clevermail:auto_week_day_monday:></option>
               #SET{day,2}
@@ -312,21 +312,21 @@
           <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
             <label><:clevermail:auto_subscribers_mode:></label>
             [<span class='erreur_message'>(#GET{erreurs})</span>]
-	           #SET{value,0}
-	           <div class="choix">
-	             <input type="radio" name="#GET{name}" id="#GET{name}#GET{value}" class="radio" value="#GET{value}"[ (#ENV{#GET{name}}|=={#GET{value}}|oui)checked="checked"] />
-	             <label for="#GET{name}#GET{value}"><:clevermail:choix_version_texte:></label>
-	           </div>
-	           #SET{value,1}
-	           <div class="choix">
-	             <input type="radio" name="#GET{name}" id="#GET{name}#GET{value}" class="radio" value="#GET{value}"[ (#ENV{#GET{name}}|=={#GET{value}}|oui)checked="checked"] />
-	             <label for="#GET{name}#GET{value}"><:clevermail:choix_version_html:></label>
-	           </div>
+             #SET{value,0}
+             <div class="choix">
+               <input type="radio" name="#GET{name}" id="#GET{name}#GET{value}" class="radio" value="#GET{value}"[ (#ENV{#GET{name}}|=={#GET{value}}|oui)checked="checked"] />
+               <label for="#GET{name}#GET{value}"><:clevermail:choix_version_texte:></label>
+             </div>
+             #SET{value,1}
+             <div class="choix">
+               <input type="radio" name="#GET{name}" id="#GET{name}#GET{value}" class="radio" value="#GET{value}"[ (#ENV{#GET{name}}|=={#GET{value}}|oui)checked="checked"] />
+               <label for="#GET{name}#GET{value}"><:clevermail:choix_version_html:></label>
+             </div>
           </li>
         </ul>
       </fieldset> 
       <p class="boutons"><span class="image_loading"></span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
-		</div></form>
-		<script language="javascript" type="text/javascript" src="#CHEMIN{js/clevermail_list_edit.js}"></script>
+    </div></form>
+    <script language="javascript" type="text/javascript" src="#CHEMIN{js/clevermail_list_edit.js}"></script>
   ]
 </div>
