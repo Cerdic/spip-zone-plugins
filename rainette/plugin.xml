@@ -14,7 +14,7 @@ soit via la balise {{RAINETTE_INFOS}}. Tous les affichages propos&eacute;s par R
 
 Essayez le fichier {rainette_demo.html} pour des exemples d'utilisation et consultez le site SPIP-Contrib pour une documentation compl&egrave;te des fonctions de Rainette.
 	</description>
-	<lien>[Documentation sur SPIP-Contrib->http://www.spip-contrib.net/?article3133]</lien>
+	<lien>[Documentation sur SPIP-Contrib->http://www.spip-contrib.net/Rainette]</lien>
 	<prefix>rainette</prefix>
 	<icon>rainette-64.png</icon>
 	<fonctions>rainette_fonctions.php</fonctions>
