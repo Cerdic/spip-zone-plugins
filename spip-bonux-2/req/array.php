@@ -383,9 +383,9 @@ function spip_array_showbase($match, $serveur='')
 // pas fe SHOW en array, on renvoie une declaration type si la variable existe
 function spip_array_showtable($nom_table, $serveur='')
 {
-	if (in_array($nom_table,array('pour')))
+	if (in_array($nom_table,array('pour','POUR')))
 		return array('field'=>array('cle'=>'text','valeur'=>'text'),'key'=>array('PRIMARY KEY'=>'cle'));
-	if (in_array($nom_table,array('condition')))
+	if (in_array($nom_table,array('condition','CONDITION')))
 		return array('field'=>array('valeur'=>'text'),'key'=>array());
 	return false;
 }
