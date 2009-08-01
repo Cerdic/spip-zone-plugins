@@ -27,14 +27,18 @@
 	  	</BOUCLE_posts_new>
 		</ul>
 	</B_posts_new>
+	#SET{posts,#ARRAY}
+	<BOUCLE_posts(SPIP_CM_POSTS){lst_id}>
+	  #SET{posts,#GET{posts}|push{#PST_ID}}
+	</BOUCLE_posts>
   <B_posts_queued>
     <h3><:clevermail:messages_attentes:></h3>
     <p><:clevermail:messages_attentes_text:> :</p>
     <ul class="liste_items">
-      <BOUCLE_posts_queued(SPIP_CM_POSTS_QUEUED){par psq_date}{inverse}{fusion pst_id}>
-        <BOUCLE_still_queued1(SPIP_CM_POSTS_QUEUED){pst_id} />#SET{nbQueued,#TOTAL_BOUCLE}<//B_still_queued1>
-        <BOUCLE_already_sent1(SPIP_CM_POSTS_DONE){pst_id} />#SET{nbSent,#TOTAL_BOUCLE}<//B_already_sent1>
+      <BOUCLE_posts_queued(SPIP_CM_POSTS_QUEUED){pst_id IN #GET{posts}}{par psq_date}{inverse}{fusion pst_id}>
         <BOUCLE_post_queued(SPIP_CM_POSTS){pst_id}>
+	        <BOUCLE_still_queued1(SPIP_CM_POSTS_QUEUED){pst_id} />#SET{nbQueued,#TOTAL_BOUCLE}<//B_still_queued1>
+	        <BOUCLE_already_sent1(SPIP_CM_POSTS_DONE){pst_id} />#SET{nbSent,#TOTAL_BOUCLE}<//B_already_sent1>
           <li class="item">
 	          <p><strong>#PST_SUBJECT</strong></p>
 	          <div>
@@ -52,7 +56,7 @@
 	      </BOUCLE_post_queued>
       </BOUCLE_posts_queued>
     </ul>
-  </B_posts_new>
+  </B_posts_queued>
   #SET{nbEnvoyes,0}
   <B_posts_sent>
       <BOUCLE_posts_sent(SPIP_CM_POSTS){lst_id}{pst_date_sent!=0}{par pst_date_sent}{inverse}>
