@@ -55,7 +55,7 @@ function formulaires_clevermail_list_edit_verifier_dist($lst_id = -1) {
 			  case 'week':
           if (!_request('lst_auto_week_days') || count(_request('lst_auto_week_days')) == 0) {
             $erreurs['lst_auto_week_days'] = _T('clevermail:auto_erreur_choisir_un_jour_minimum');
-          } elseif (min(_request('lst_auto_week_days')) < 0 || max(_request('lst_auto_week_day')) > 6) {
+          } elseif (min(_request('lst_auto_week_days')) < 0 || max(_request('lst_auto_week_days')) > 6) {
             $erreurs['lst_auto_week_days'] = _T('clevermail:auto_erreur_ce_jour_semaine_existe_pas');
           }
 					break;
