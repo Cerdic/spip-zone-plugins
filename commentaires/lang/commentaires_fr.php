@@ -12,6 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'commentaires' => 'commentaires',
 'commentaires_titre' => 'Vos commentaires',
 'commentaires_tout' => 'Tous vos commentaires',
+'permalink_pour' => 'Lien permanent vers',
 
 // Formulaire de commentaires
 'form_pet_message_commentaire' => 'Ajoutez votre commentaire ici',

@@ -4,7 +4,9 @@
 <licence>GPL</licence>
 <version>1.0</version>
 <etat>dev</etat>
-<description>Remplace le traditionnel #FORMULAIRE_FORUM de SPIP par un formulaire de commentaires simplifi&eacute; et affiche une liste des commentaires.</description>
+<description>PLUGIN INSTABLE, encore en d&eacute;veloppement.
+_ Remplace le traditionnel #FORMULAIRE_FORUM de SPIP par un formulaire de commentaires (plus succint) et affiche une liste des commentaires.
+_ Le plugin gravatar ajoutera un avatar &agrave; chaque message.</description>
 <prefix>commentaires</prefix>
 <necessite id='SPIP' version='[1.9.0;]' />
 </plugin>
