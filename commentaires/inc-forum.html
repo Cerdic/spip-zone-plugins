@@ -1,10 +1,8 @@
 [(#REM) Cette balise (invisible) provoque le recalcul du forum la premiere fois qu'un message est poste (cf. inc/invalideur). ]
 [(#PARAMETRES_FORUM|?{''})]
-
 <B_commentaires>
 <div class="comments" id="comments">
     <h2><:commentaires:commentaires_titre:></h2>
-    <p class="explication" id="comments-feed"><a href="#URL_PAGE{comments-rss}"><img src="#CHEMIN{feed.png}" width="10" height="10" alt="RSS" /></a> Vous pouvez suivre cette conversation en vous abonnant au <a href="#URL_PAGE{comments-rss}">flux des commentaires</a> de cette page.</p>
     <ul>
         <BOUCLE_commentaires(FORUMS) {statut IN publie} {id_rubrique ?}{id_article ?}{id_breve ?}{id_syndic ?} {plat} {par date}>
         <li class="comment[ (#COMPTEUR_BOUCLE|alterner{'odd','even'})][ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#EXPOSE)]" id="forum#ID_FORUM">
