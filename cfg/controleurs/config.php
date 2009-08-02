@@ -12,11 +12,14 @@ function controleurs_config_dist($regs) {
     }
     
     $valeur = array('config' => $val);
-	$n = new Crayon($crayon, $valeur,
-			array('hauteurMini' => 140,
-				  /*'controleur' => 'controleurs/article_introduction'*/));
-    
-    $contexte = array();
+	$n = new Crayon($crayon, $valeur);
+	
+	$contexte = array();
+    if (is_string($val) and preg_match(",[\n\r],", $val))
+		$contexte['config'] = array('type'=>'texte');
+	else
+		$contexte['config'] = array('type'=>'ligne');
+		
     $html = $n->formulaire($contexte);
     include_spip('action/crayon_html');
     $html = crayons_formulaire($html, 'crayons_config_store');
