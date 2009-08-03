@@ -1,0 +1,27 @@
+#CACHE{0}
+<div class="formulaire_spip formulaire_cfg">
+[<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
+[<p class="formulaire_message">(#ENV*{message_ok})</p>]
+<script type="text/javascript">
+function ajouter() {
+	var divliste = $('#listeliens');
+	var imax = $('#imax')[0].value;
+	$.get('?exec=div_lien', {i : imax}, function(data) {divliste.append(data);});
+	$('#imax')[0].value = imax +1;
+}
+
+function supprimer(i) {
+	$('#divlien_'+i).remove();
+}
+</script>
+<form method="post" action="#ENV{action}"><div>#ACTION_FORMULAIRE{#SELF}
+<fieldset><legend><:groupes:gerer_liens:></legend>
+<ul id="listeliens">
+#PIPELINE{listeliens}
+</ul>
+<a href="javascript:ajouter()"><:groupes:ajouter:></a>
+<input type="submit" name="_cfg_ok" class="submit" value="<:cfg:OK:>" />
+<input type="submit" name="_cfg_delete" class="reset" value="<:effacer:>" />
+</fieldset>
+</form></div>
+
