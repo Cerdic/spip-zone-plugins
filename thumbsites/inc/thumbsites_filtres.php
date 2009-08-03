@@ -76,7 +76,13 @@ function thumbshot($url_site) {
 				rename($thumb_cache, $thumb_cache.'.png');
 				include_spip('inc/filtres_images');
 				$img = imagecreatefrompng($thumb_cache.'.png');
-				image_imagejpg($img, $thumb_cache);
+				if (function_exists('image_imagejpg')) {
+					image_imagejpg($img, $thumb_cache);				
+				} else {
+					/* Depuis SPIP 2.1, les filtres images changent de nom */
+					include_spip('inc/filtres_images_lib_mini');
+					_image_imagejpg($img, $thumb_cache);
+				}
 			}
 
 			creer_index_thumbshots($tmp);
