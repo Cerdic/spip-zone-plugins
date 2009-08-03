@@ -1,10 +1,7 @@
 <?php
-// cf http://programmer.spip.org/Declarer-une-tache
-
-function genie_clevermail_queue_process_dist($verbose = 'no') {
+function genie_clevermail_queue_process_dist($t, $verbose = 'no') {
 	// On appelle le facteur
 	$envoyer_mail = charger_fonction('envoyer_mail', 'inc');
-	
 	$cm_send_number = sql_getfetsel("set_value", "spip_cm_settings", "set_name='CM_SEND_NUMBER'");
 	$queued = sql_select("*", "spip_cm_posts_queued", "", "", "psq_date", "0,".intval($cm_send_number));
 	while ($message = sql_fetch($queued)) {
