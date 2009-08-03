@@ -32,7 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'interesar'			=>	'kunnen interessant zijn',
 'descargarte'		=>	'Op de website kunt u de volgende documenten downloaden :',
 'source'			=>	'Bron',
-'no_escrito_nombre' =>  'Geen naa vermeld'
+'no_escrito_nombre' =>  'Geen naam vermeld'
 
 );
 
