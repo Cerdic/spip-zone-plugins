@@ -1,0 +1,15 @@
+<plugin>
+	<nom>Corrections typographiques des dates (<code>1er mars</code> donne "<code>1er&nbsp;mars</code>")</nom>
+	<version>1.0</version>
+	<prefix>typo</prefix>
+	<etat>stable</etat>
+	<auteur>Fil</auteur>
+	<description></description>
+	<pipeline>
+		<nom>post_typo</nom>
+		<action>mois</action>
+		<inclure>typo_mois_fonctions.php</inclure>
+	</pipeline>
+
+	<necessite id="SPIP" version="[1.9.0;]" />
+</plugin>
