@@ -1,0 +1,21 @@
+<div id="liste_de_lecture_principale">
+[(#MODELE{playliste})]
+</div>
+		
+		[(#REM) Liste de lecture multimedia]
+		<B_liste_lecture>
+			<div class="menu haudio" id="liste_lecture" [(#ENV{afficher_liste}|=={oui}|oui)style="display:block"]>
+			<h2><:lm2:titre_liste_lecture:></h2>
+			<ul>
+				<BOUCLE_liste_lecture(DOCUMENTS) {id_article ?} {extension IN mp3,flv} {vu=non}{par num titre, date}>
+				[
+				<li>
+					<strong><a href="(#URL_DOCUMENT)" title="<:lm2:source:>" type="#MIME_TYPE">
+					[<span class="title">(#TITRE|sinon{#FICHIER|lm2_joli_titre})</span>]</a></strong>
+					<small>(<span>#TYPE_DOCUMENT[ &ndash; (#TAILLE|taille_en_octets)]</span>)</small>
+					#DESCRIPTIF
+				]</li>
+				</BOUCLE_liste_lecture>
+			</ul>
+			</div>
+		</B_liste_lecture>
