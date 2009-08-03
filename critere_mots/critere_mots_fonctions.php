@@ -15,9 +15,9 @@ function critere_mots_dist($idb, &$boucles, $crit) {
 
 	if (isset($crit->param[0])) {
 		$score = calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
-	} else
+	} else{
 		$score = '1';
-
+    }
 	$quoi = '@$Pile[0]["mots"]';
 
 	$boucle->hash .= '
@@ -65,7 +65,8 @@ function inc_prepare_mots_dist($mots, $table='articles', $cond=false, $score, $s
 	// (=> faire attention si on utilise les mots techniques)
 	
 	// si on a un % dans le score, c'est que c'est une fraction ou %age
-	if (ereg ('%',$score)){
+	if (substr($score,-1,1)=='%'){
+	       $score = str_replace('%','',$score);
 	       if ($score>1){
 	           $score = $score/100;
 	       } // si exprime en %
