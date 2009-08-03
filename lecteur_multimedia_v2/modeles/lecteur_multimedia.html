@@ -1,0 +1,21 @@
+[(#ENV{id_article}|oui)
+	[(#ENV{format}|=={haudio}|oui)
+		[(#REM) Liste des mp3 de l'article au format haudio]
+		[(#MODELE{playliste-haudio}{id_article})]
+	]
+	[(#ENV{format}|non)
+		[(#REM) Lecteur multimedia proposant les documents de l'article]
+		[(#MODELE{playliste}{id_article})]
+	]	
+]
+[(#ENV{id_article}|non)
+	[(#ENV{format}|=={haudio}|oui)
+		[(#REM) Lecteur multimedia proposant les derniers mp3 du site au format haudio]
+		[(#MODELE{playliste-haudio})]
+	]
+	[(#ENV{format}|non)
+		[(#REM) Lecteur multimedia proposant les derniers documents du site]
+		[(#MODELE{playliste_generale}{afficher_liste=non})]
+	]
+]
+
