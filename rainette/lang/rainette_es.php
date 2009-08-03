@@ -9,7 +9,7 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// Textos incluidos en los modelos
-	'meteo' => 'm&eacute;t&eacute;o',
+	'meteo' => 'meteorolog&iacute;a',
 	'meteo_previsions' => 'pron&oacute;stico',
 	'meteo_conditions' => 'condiciones actuales',
 	'valeur_indeterminee' => 'N/D',
@@ -24,7 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'vent' => 'viento',
 	'humidite' => 'humedad',
 	'pression' => 'presi&oacute;n',
-	'point_rosee' => 'punto de evaporaci&oacute;n',
+	'point_rosee' => 'punto de roc&iacute;o',
 	'visibilite' => 'visibilidad',
 	'risque_precipitation' => 'riesgo de precip.',
 	'lever_soleil' => 'salida del sol',
