@@ -36,7 +36,7 @@ function critere_mots_dist($idb, &$boucles, $crit) {
 
 
 function inc_prepare_mots_dist($mots, $table='articles', $cond=false, $score, $serveur='') {
-
+    
 	if (!is_array($mots)
 	OR !$mots = array_filter($mots)) {
 		// traiter le cas {mots?}
@@ -63,11 +63,23 @@ function inc_prepare_mots_dist($mots, $table='articles', $cond=false, $score, $s
 	// on analyse la jointure spip_mots_$_table
 	// sans regarder spip_mots ni les groupes
 	// (=> faire attention si on utilise les mots techniques)
+	
+	// si on a un % dans le score, c'est que c'est une fraction ou %age
+	if (ereg ('%',$score)){
+	       if ($score>1){
+	           $score = $score/100;
+	       } // si exprime en %
+	   $having = ' HAVING SUM(1) >= '.ceil($score * count($where)) ;
+	}
+	else{
+	   $having = ' HAVING SUM(1) >= '. $score;
+	   }
+	
 	$wh = "$_table.$_id_table IN (
 		SELECT $_id_table FROM spip_mots_$_table WHERE "
 		. join(' OR ', $where)
 		. ' GROUP BY '.$_id_table
-		. ' HAVING SUM(1) >= '.ceil($score * count($where))
+		. $having
 		. "\n\t)";
 
 	return $wh;
