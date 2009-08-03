@@ -15,6 +15,7 @@
 			<option value="thumbshots_de"[ (#ENV{serveur}|=={thumbshots_de}|?{selected="selected"})]><:thumbsites:cfg_itm_serveur_2:></option>
 			<option value="girafa"[ (#ENV{serveur}|=={girafa}|?{selected="selected"})]><:thumbsites:cfg_itm_serveur_3:></option>
 			<option value="websnapr"[ (#ENV{serveur}|=={websnapr}|?{selected="selected"})]><:thumbsites:cfg_itm_serveur_4:></option>
+			<option value="robothumb"[ (#ENV{serveur}|=={robothumb}|?{selected="selected"})]><:thumbsites:cfg_itm_serveur_5:></option>
 		</select>
 	</fieldset>
 
@@ -60,6 +61,26 @@
 				<option value="S" [(#ENV{websnapr_taille}|=={S}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette_s:></option>
 				<option value="M" [(#ENV{websnapr_taille}|=={M}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette_m:></option>
 				<option value="L" [(#ENV{websnapr_taille}|=={L}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette_l:></option>
+			</select>
+		</p>
+	</fieldset>
+
+	<fieldset id="robothumb" class="conf_serveur [(#ENV{serveur}|=={'robothumb'}|?{'actif'})]">
+		<legend><:thumbsites:cfg_itm_serveur_5:></legend>
+		<p><:thumbsites:cfg_inf_serveur_5_1:></p>
+		<p><:thumbsites:cfg_inf_serveur_5_2:></p>
+		<p>
+			<label for="robothumb_taille"><:thumbsites:cfg_lbl_taille_vignette:></label>
+			<select name="robothumb_taille" id="robothumb_taille">
+				<option value="100x75" [(#ENV{robothumb_taille}|=={100x75}|?{selected="selected"})]>100x75 pixels</option>
+				<option value="120x90" [(#ENV{robothumb_taille}|=={120x90}|?{selected="selected"})]>120x90 pixels</option>
+				<option value="160x120" [(#ENV{robothumb_taille}|=={160x120}|?{selected="selected"})]>160x120 pixels</option>
+				<option value="180x135" [(#ENV{robothumb_taille}|=={180x135}|?{selected="selected"})]>180x135 pixels</option>
+				<option value="240x180" [(#ENV{robothumb_taille}|=={240x180}|?{selected="selected"})]>240x180 pixels</option>
+				<option value="320x240" [(#ENV{robothumb_taille}|=={320x240}|?{selected="selected"})]>320x240 pixels</option>
+				<option value="560x420" [(#ENV{robothumb_taille}|=={560x420}|?{selected="selected"})]>560x420 pixels</option>				
+				<option value="640x480" [(#ENV{robothumb_taille}|=={640x480}|?{selected="selected"})]>640x480 pixels</option>	
+				<option value="800x600" [(#ENV{robothumb_taille}|=={800x600}|?{selected="selected"})]>800x600 pixels</option>									
 			</select>
 		</p>
 	</fieldset>
