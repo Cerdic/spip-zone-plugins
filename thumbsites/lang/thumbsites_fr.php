@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/_stable_/noie/lang/
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/thumbsites/lang/
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
@@ -20,10 +20,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_inf_serveur_3_3' => 'Pour utiliser ce service veuillez saisir vos donn&eacute;es personnelles:',
 	'cfg_inf_serveur_4_1' => 'Pour utiliser ce service vous devez &ecirc;tre inscrit sur le site <a href="http://www.websnapr.com">Websnapr</a>. La version gratuite permet de traiter de 250.000 captures de site par mois, &agrave; un rythme de 80 captures par heure.',
 	'cfg_inf_serveur_4_2' => 'Pour utiliser ce service veuillez saisir vos donn&eacute;es personnelles:',
+	'cfg_inf_serveur_5_1' => 'Pour utiliser ce service vous devez mettre un lien vers le site <a href="http://www.robothumb.com">Robothumb</a>. La pr&eacute;sence de ce lien est v&eacute;rifi&eacute; p&eacute;riodiquement par leur soin.',
 	'cfg_itm_serveur_1' => 'Thumbshot.com',
 	'cfg_itm_serveur_2' => 'Thumbshot.de',
 	'cfg_itm_serveur_3' => 'Girafa',
 	'cfg_itm_serveur_4' => 'Websnapr',
+	'cfg_itm_serveur_5' => 'Robothumb',
 	'cfg_itm_taille_vignette_t' => '92x70 pixels',
 	'cfg_itm_taille_vignette_s' => '202x152 pixels',
 	'cfg_itm_taille_vignette_m' => '400x300 pixels',
