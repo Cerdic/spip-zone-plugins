@@ -15,16 +15,13 @@ function balise_TOTAL_PANIER_TVAC_stat ($args, $filtres) {
 // http://doc.spip.org/@balise_URL_LOGOUT_dyn
 function balise_TOTAL_PANIER_TVAC_dyn($cible) {
 	include_spip('inc/echoppe');
-	$_sql = "SELECT id_produit, quantite FROM spip_echoppe_paniers WHERE token_panier='".session_get('echoppe_token_panier')."' AND token_client = '".session_get('echoppe_token_client')."' ;";
-	$_res = spip_query($_sql);
-	//echo $_sql;
+	include_spip('base/abstract_sql');
+	$row = sql_select(array('spip_echoppe_paniers.id_produit', 'spip_echoppe_paniers.quantite', 'spip_echoppe_produits.prix_base_htva'), 
+	'spip_echoppe_paniers LEFT JOIN spip_echoppe_produits ON spip_echoppe_paniers.id_produit = spip_echoppe_produits.id_produit', 
+	'token_panier = '.sql_quote(session_get('echoppe_token_panier')).' AND token_client = '.sql_quote(session_get('echoppe_token_client')));
 	$total_panier = 0;
-	while ($_produit = spip_fetch_array($_res)){
-		$_sql_le_produit = "SELECT prix_base_htva FROM spip_echoppe_produits WHERE id_produit = '".$_produit['id_produit']."';";
-		//echo $_sql_le_produit;
-		$_res_le_produit = spip_query($_sql_le_produit);
-		$_le_produit = spip_fetch_array($_res_le_produit);
-		$total_panier = $total_panier + ($_produit['quantite'] * calculer_prix_tvac($_le_produit['prix_base_htva'], 0));
+	while ($produit = sql_fetch($row)){
+		$total_panier = $total_panier + ($produit['quantite'] * calculer_prix_tvac($produit['prix_base_htva'], 0));
 	}
     return zero_si_vide($total_panier);
 }

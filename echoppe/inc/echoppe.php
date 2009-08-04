@@ -11,7 +11,7 @@ function zero_si_vide($_var){
 
 function calculer_prix_tvac($prix_htva, $taux_tva){
 	if ($taux_tva == 0){
-		$taux_tva = lire_config('echoppe/taux_de_tva_par_defaut',21);
+		$taux_tva = lire_config('echoppe/taux_de_tva_par_defaut',6);
 	}
 	$prix_ttc = $prix_htva + ($prix_htva * ($taux_tva / 100));
 	$prix_ttc = round($prix_ttc, lire_config('echoppe/nombre_chiffre_apres_virgule',2));
