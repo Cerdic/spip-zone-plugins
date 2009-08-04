@@ -54,10 +54,16 @@ include_spip("inc/plugin_globales_lib");
  * Option debug, à n'activer qu'en dev.
  * Permet d'avoir le journal "tmp/imageflow_log" 
  * */
-//define("_IMAGEFLOW_DEBUG", true);
+if(preg_match('/^(192\.168|127\.0)/', $_SERVER['SERVER_ADDR'])) {
+	define("_IMAGEFLOW_DEBUG", true);
+}
+else {
+	define("_IMAGEFLOW_DEBUG", false);
+}
 
 define("_IMAGEFLOW_PREFIX", "imageflow");
 
+// Pour 1.9.1 ?
 if(!defined('_DIR_PLUGIN_IMAGEFLOW')) {
 	$p = explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
 	define('_DIR_PLUGIN_IMAGEFLOW',(_DIR_PLUGINS.end($p)).'/');
@@ -82,6 +88,7 @@ define("_IMAGEFLOW_PREFERENCES_DEFAULT",
 			, 'slideshow' => "non" // Effet de fondu enchaine' ?
 			, 'active_link' => "non" // activer le lien URL sur l'image finale ?
 			, 'active_description' => "non" // activer (afficher) la description sur l'image finale ?
+			, 'active_desc_effets' => "non" // utiliser les effets de fondus pour la legende ?
 			, 'active_alert' => "non" // activer (afficher) la description dans une boite alerte (attention au charset)
 		)
 	)

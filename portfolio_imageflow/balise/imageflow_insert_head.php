@@ -54,7 +54,7 @@ if(!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
 
 // insert la ligne qui charge le css
-// A placer dans votre squelette, après la balise INSERT_HEAD
+// A placer dans votre squelette, apres la balise INSERT_HEAD
 function balise_IMAGEFLOW_INSERT_HEAD ($p) {
 	
 	$result = 

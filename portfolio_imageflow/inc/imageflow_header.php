@@ -63,11 +63,11 @@ include_spip('inc/imageflow_api_globales');
 function inc_imageflow_header_dist () {
 
 	$error = array();
-	$css = $js = $result = $js_ready = "";
+	$css = $js = $result = "";
 
 	$preferences_meta = imageflow_get_all_preferences();
 	$preferences_default = unserialize(_IMAGEFLOW_PREFERENCES_DEFAULT);
-	
+
 	foreach($preferences_meta as $key => $value) {
 		if($key == 'img') continue;
 		if(empty($value)) {
@@ -75,7 +75,7 @@ function inc_imageflow_header_dist () {
 		}
 	}
 
-	// récupère le contenu du css et mise en cache
+	// recupere le contenu du css et mise en cache
 	if($path = find_in_path($f = "imageflow/screen.css")) {
 		$path = direction_css($path);
 		$css = compacte($path);
@@ -85,22 +85,27 @@ function inc_imageflow_header_dist () {
 		$error[] = $f;
 	}
 	
-	// idem pour javascript
-	if($f = find_in_path("imageflow/imageflow.js")) {
-		$js = imageflow_inserer_js($f);
-	}	
+	$js = (defined("_IMAGEFLOW_DEBUG") && _IMAGEFLOW_DEBUG) 
+		? "imageflow.js" // script d'origine avec ses corrections
+		: "imageflow.0.8.min.js" // la version compressee 
+		;
+	$js = 'imageflow/' . $js;
+	if(!($f = find_in_path($js))) {
+		$error[] = $js;
+		$js = false;
+	}
 	else {
-		$error[] = $f;
+		$js = $f;
 	}
 
 	if(!empty($css) && !empty($js)) {
 		$result .= ""
 			. "<link rel=\"stylesheet\" title=\"Standard\" href=\"".$css."\" type=\"text/css\" media=\"screen\" />\n"
-			. $js
+			. "<script type=\"text/javascript\" src=\"".$js."\"></script>\n"
 			;
 	}
 	foreach($error as $f) {
-		$e = "ERROR: image flow ".$f." file not found!";
+		$e = "ERROR: image flow: ".$f." file not found!";
 		$result .= "<!-- ".$e." -->\n";
 		imageflow_log($e);
 	}
@@ -126,7 +131,7 @@ function inc_imageflow_header_dist () {
 #slider {background-image:url(" . $slider . ");top:0;left:0}
 #images {overflow: hidden;}
 #lightbox {text-align:center;width:512px;height:384px;margin:0 auto}
-#affichage {max-width:512px;max-height:384px;margin:0 auto;}
+#affichage {display:block;max-width:512px;max-height:384px;margin:0 auto;}
 .mouse-hover {cursor:pointer}
 </style>
 "
@@ -144,120 +149,27 @@ function inc_imageflow_header_dist () {
 		$result .= "<script type=\"text/javascript\" src=\"".$js."\"></script>\n
 <style type=\"text/css\" media=\"screen\">
 #lightbox {position:relative}
-#affichage {position:absolute;top:0;left:0;z-index:1024}
+/* #affichage {position:absolute;top:0;left:0;z-index:1024} */
 #affichage_cache {}
-.affichage_legend {position:absolute;top:0;border:1px solid #000;background-color:#eee;color:#000;display:none;z-index:2000;padding:0 1ex}
+.affichage_legend {border:1px solid #ccc;background-color:#333;color:#fff;margin-top:-1em;z-index:2000;padding:0 1ex}
 </style>
-		"
+"
 		;
 	}
 
-
-
-	// precharger les images ?
-	if ($preferences_meta['preloader'] == 'oui') 
-	{
-		$js_ready .= "
-	var tmp_img = new Image();
-	$(\"#imageflow #images img\").each(function(){
-		tmp_img.src = $(this).attr(\"name\");
-	});
-		";
-	}
-	
-	// activer le lien URL sur l'image finale ?
-	if ($preferences_meta['active_link'] == 'oui') 
-	{
-		$js_ready .= "
-	$(\"#affichage\").hover(function(){
-		$(this).addClass(\"mouse-hover\");
-	},function(){
-		$(this).removeClass(\"mouse-hover\");
-	});
-	
-	$(\"#affichage\").click(function(){
-		/* var l = $(this).attr(\"longdesc\"); /* pas glop */
-		var l = document.getElementById(\"affichage\").longdesc;
-		/* si url */
-		if(l.match(/^[a-z]{3,7}:\/\//)) {
-			window.open(l, $(this).attr(\"title\"));
+	foreach(array(
+		'preloader' // precharger les images ?
+		, 'active_link' // activer le lien URL sur l'image finale ?
+		, 'active_description' // afficher la légende contenue dans longdesc ?
+		, 'active_desc_effets' // utiliser les effets de fondus pour la legende ?
+		, 'active_alert' // afficher le longdesc dans une boite alerte javascript ?
+		) as $pref) {
+		if ($preferences_meta[$pref] == 'oui') 
+		{
+			$result .= "<meta name=\'x-imageflow\' id=\'x-imageflow-$pref\' content=\'oui\' />\n";
 		}
-		";
-	
-	// afficher la légende contenue dans longdesc ?
-	if ($preferences_meta['active_description'] == 'oui') 
-	{
-	$js_ready .= "
-		/* champ data ? */
-		else if(l.match(/^data:/)) {
-			var i = l.indexOf(\",\");
-			if(i > 0) {
-				/* urldecoder */
-				var s = l.substr(i + 1);
-				var m = s.length;
-				var o = \"\";
-				i = 0;
-				while(i < m) {
-					if (s.substr(i, 3).match(/^%[0-9a-fA-F]{2}/)) {
-						o += unescape(s.substr(i,3));
-						i += 3;
-					} else {
-						o += s.substr(i, 1);
-						i++;
-					}
-				}
-				";
-				// afficher le longdesc dans une boite alerte javascript ?
-				// Attention au charset. 
-				if ($preferences_meta['active_alert'] == 'oui') 
-				{
-					$js_ready .= "
-						alert(o);
-						";
-				}
-				else 
-				{
-					$js_ready .= "
-						var div_legend = \"\";
-						if (div_legend == \"\")
-						{
-							div_legend = \"<div id=\'affichage_legend\'></div>\";
-							$(\"#affichage_cache\").after(div_legend);
-						}
-						$(\"#affichage_legend\").addClass(\"affichage_legend\");
-						$(\"#affichage_legend\").prepend(o).show();
-						";
-				}
-				// suite du js
-				$js_ready .= "
-			}
-		}
-		/* efface la legende si le curseur sort de lightbox */
-		$(\"#lightbox\").mouseout( function() { 
-			$(\"#affichage_legend\").hide();
-		});
-		";
-	}
-	// fin du js
-	$js_ready .= "
-	});
-		";
 	}
 
-	// si ajout des options, envelopper du code necessaire
-	if(!empty($js_ready))
-	{
-		$result .= "
-<script type=\"text/javascript\">
-//<![CDATA[ 
-$(document).ready(function(){
-" . $js_ready . "
-});
-//]]>
-</script>
-		";
-	}
-	
 	return ($result);
 }
 ?>

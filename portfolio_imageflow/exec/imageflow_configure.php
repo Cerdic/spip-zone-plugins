@@ -281,9 +281,11 @@ function exec_imageflow_configure () {
 			_T('imageflow:active_description')
 			, 'active_description', 'oui', ($preferences_current['active_description'] == 'oui'), "display:block;")
 		. imageflow_input_checkbox (
+			_T('imageflow:active_desc_effets')
+			, 'active_desc_effets', 'oui', ($preferences_current['active_desc_effets'] == 'oui'), "display:block;")
+		. imageflow_input_checkbox (
 			_T('imageflow:active_alert')
-			, 'active_alert', 'oui', ($preferences_current['active_alert'] == 'oui')
-			, "display:".(($preferences_current['active_description'] == 'oui') ? "block;" : "none;"))
+			, 'active_alert', 'oui', ($preferences_current['active_alert'] == 'oui'), "display:block;")
 		. fin_cadre_relief(true)		
 		;
 	

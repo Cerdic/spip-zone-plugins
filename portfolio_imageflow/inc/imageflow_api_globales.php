@@ -48,6 +48,7 @@
 // $LastChangedDate$
 
 include_spip('inc/utils');
+include_spip('inc/filtres');
 
 function imageflow_spip_est_inferieur_193 () {
 	static $is_inf;
@@ -159,7 +160,7 @@ function imageflow_ecrire_metas () {
 	return(true);
 }
 
-/*
+/**
  * Verifier PHP et GD 
  * @return TRUE ou index message (lang)
  * @see http://reflection.corephp.co.uk
@@ -191,38 +192,5 @@ function imageflow_ecrire_metas () {
 	}
 	return(true);
 }
-
-
-/*
- * Compresser un script js pour insertion dans la page XHTML
- * @return string
- * @param $fichier string
- */
-function imageflow_inserer_js ($fichier) {
-	$js_array = file($fichier); 
-	$string = "";
-	foreach($js_array as $value) {
-		if(($ii = strpos($value, "//")) !== false) {
-			$value = substr($value, 0, $ii);
-		}
-		$value = trim($value);
-		if(!empty($value)) $string .= $value . "\n";
-	}
-
-	if($string) {
-		$repl = array(
-			  '|/\*.*\*/|Ums' => "" // pas de commentaires
-			, '|[[:blank:]]+|' => " " // supprimer les espaces et tabulations en double
-			, "|\s+([^[:alnum:]])|Ums" => '$1' // eliminer les espaces en trop
-			, "|([^[:alnum:]])\s+|Ums" => '$1'."\n" // idem, right part
-			, "|'|Ums" => "\'"  // eval() en a besoin
-			);
-		$s = preg_replace(array_keys($repl), array_values($repl), $string); 
-		$s = "\n<script type=\"text/javascript\">\n//<![CDATA[\n" 
-					. $s
-					. "\n//]]>\n</script>";
-	}
-	return($s);
-} 
 
 ?>

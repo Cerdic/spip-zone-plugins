@@ -6,6 +6,11 @@
 
 $(document).ready(function(){
 	
+	// [@attr] style selectors removed in jQuery 1.3
+	// @see: http://docs.jquery.com/Selectors
+	// rendre compatible avec anciennes versions de jQuery
+	var jqss = (jQuery.fn.jquery < '1.3') ? '@' : '';
+	
 	$(".slider").hover(function(){
 		$(this).addClass("hover");
 	},function(){
@@ -28,19 +33,20 @@ $(document).ready(function(){
 		$("#imageflow_configure .slider input").removeAttr('checked');
 		for (key in imageflow_default) {
 			if((key == 'preloader') || (key == 'slideshow') || (key == 'slider')) {
-				$("#imageflow_configure [@name="+key+"]").removeAttr('checked');
+				$("#imageflow_configure [" + jqss + "name="+key+"]").removeAttr('checked');
 			}
 			else if (key != 'slider') {
-				$("#imageflow_configure [@name="+key+"]").val(imageflow_default[key]);
+				$("#imageflow_configure [" + jqss + "name="+key+"]").val(imageflow_default[key]);
 			}
 			else if (key == 'slider') {
-				$("#imageflow_configure [@value=" + imageflow_default[key] + "]").attr('checked', 'checked');
-				$("#imageflow_configure [@value=" + imageflow_default[key] + "]").parent().addClass('checked');
+				$("#imageflow_configure [" + jqss + "value=" + imageflow_default[key] + "]").attr('checked', 'checked');
+				$("#imageflow_configure [" + jqss + "value=" + imageflow_default[key] + "]").parent().addClass('checked');
 			}
 		}
 	});
 	
-	$("input[@name=active_description]").click(function(){
+	$("input[" + jqss + "name=active_description]").click(function(){
+		$("#label_active_desc_effets").toggle();
 		$("#label_active_alert").toggle();
 	});
 });

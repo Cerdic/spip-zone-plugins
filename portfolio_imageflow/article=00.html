@@ -1,5 +1,5 @@
 #CACHE{86400}
-[(#REM)
+[<!--(#REM)
 
 	// $LastChangedRevision$
 	// $LastChangedBy$
@@ -9,7 +9,7 @@
 
 	Documentation : http://www.quesaco.org/Portfolio-ImageFlow-pour-SPIP	
 
-]<BOUCLE_article_principal(ARTICLES) {id_article}>
+-->]<BOUCLE_article_principal(ARTICLES) {id_article}>
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
 <html dir="#LANG_DIR" lang="#LANG">
 <head>
@@ -58,12 +58,13 @@
 			[<div class="#EDIT{texte} texte">(#TEXTE|image_reduire{520,0})</div>]
 			#FIN_SURLIGNE
 
-[(#REM) 
-	***************************************
+[<!--(#REM) 
+
 	Portfolio : album d'images 
 	Code d'origine de Stéphane Kus
 	http://www.spip-contrib.net/ImageFlow-pour-SPIP
-]<!-- portfolio imageflow -->
+
+-->]<!-- portfolio imageflow -->
 <B_documents_portfolio>
 	<div id="documents_portfolio">
 		<h2><:info_portfolio:></h2>     
@@ -98,9 +99,9 @@
 	</div> 
 	<!-- fin docs portfolio -->		
 </B_documents_portfolio>
-[(#REM)
+[<!--(#REM)
 	***************************************
-]<!-- fin portfolio imageflow -->		
+-->]<!-- fin portfolio imageflow -->		
 
 			[<div class="ps"><h2><:info_ps:></h2>#DEBUT_SURLIGNE<div class="#EDIT{ps}">(#PS)</div>#FIN_SURLIGNE</div>]
 
