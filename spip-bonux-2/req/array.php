@@ -219,9 +219,12 @@ function array_query($query){
 		else {
 			preg_match(',^(.*)( DESC)?$,Ui', $sort, $tri);
 			$sens = $tri[2] ? '<' : '>';
-			usort($res,
+			uasort($res,
 				create_function('$a, $b',
-					'return ((array)$a["'.$tri[1].'"] '.$sens.' (array) $b["'.$tri[1].'"]) ? 1 : -1;'
+					'return ((is_string($a["'.$tri[1].'"]) AND is_string($b["'.$tri[1].'"]))?
+						 (strcasecmp($a["'.$tri[1].'"],$b["'.$tri[1].'"])'.$sens.'0)
+						:((array)$a["'.$tri[1].'"] '.$sens.' (array) $b["'.$tri[1].'"]))
+						 ? 1 : -1;'
 				)
 			);
 		}
