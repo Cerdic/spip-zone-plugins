@@ -40,7 +40,14 @@
 #sliders .end {
 	clear:left;
 }
+#label_active_desc_effets, #label_active_alert {padding-left:2ex}
 .reset-btn {
 	color:gray;
 	font-weight:700;
+}
+#if-html-signature {
+	font-weight:bold;
+}
+#if-html-signature span {
+	 color:gray;
 }
