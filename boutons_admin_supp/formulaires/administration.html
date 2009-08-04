@@ -7,6 +7,10 @@
 // Les images sont tirees du jeu d'icones Nuvola <http://icon-king.com/?p=15>
 // et sont publiees sous licence LGPL <http://fr.wikipedia.org/wiki/LGPL>
 
+
+// Pas de boutons pour les visiteurs
+if($GLOBALS['auteur_session'][statut] == '6forum') return;
+
 // Quelques definitions de variables
 $img_montrer =	'<img id="montrer1" src="'.
 		find_in_path('montrer.png').
