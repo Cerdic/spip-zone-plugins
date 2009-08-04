@@ -1,5 +1,31 @@
 <div id="liste_de_lecture_principale">
-[(#MODELE{playliste})]
+
+[(#REM)
+	
+	afficher une playliste
+
+]
+<script type="text/javascript">
+	jQuery(document).ready(function(){
+		jQuery('#playliste#ENV{id_playliste}').playlist({
+			smUrl : "#EVAL{_DIR_LIB_SM}swf/",
+			smnullUrl : "#CHEMIN{soundmanager/null.mp3}",
+			sources : $("a[rel='enclosure']"),
+			[(#ENV{autoPlay}|oui)autoPlay : true,]
+			[(#ENV{autoLoad}|oui)autoLoad : true,]
+			[(#ENV{logo}|oui)logo:'#ENV{logo}',]
+			[(#ENV{logo_top}|oui)logo_top:'#ENV{logo_top}',]
+			[(#ENV{logo_left}|oui)logo_left:'#ENV{logo_left}',]
+			[(#ENV{logo_repeat}|oui)logo_repeat:'#ENV{logo_repeat}',]
+			fullscreen : true
+		});
+	});
+</script>
+<div id="playliste#ENV{id_playliste}">
+	Là ou doit apparaitre la playliste
+</div>
+
+
 </div>
 		
 [(#REM) Liste de lecture multimedia]
@@ -10,7 +36,7 @@
 		<BOUCLE_liste_lecture(DOCUMENTS) {id_article ?} {extension IN flv,mp3} {vu=non}{!par date}{0,10}>
 		[
 		<li>
-			<strong><a href="(#URL_DOCUMENT)" title="<:lm2:source:>" type="#MIME_TYPE">
+			<strong><a href="(#URL_DOCUMENT)" title="<:lm2:source:>" type="#MIME_TYPE" rel="enclosure">
 			[<span class="title">(#TITRE|sinon{#FICHIER|lm2_joli_titre})</span>]</a></strong>
 			<small>(<span>#TYPE_DOCUMENT[ &ndash; (#TAILLE|taille_en_octets)]</span>)</small>#DATE
 			#DESCRIPTIF
