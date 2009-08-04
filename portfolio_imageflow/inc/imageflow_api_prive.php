@@ -86,15 +86,17 @@ function imageflow_html_signature ($prefix, $html = true) {
 	$version = typo($info['version']);
 	$version = 
 		($version && $html) 
-		? " <span style='color:gray;'>" . $version . "</span>"
+		? " <span>" . $version . "</span>"
 		: $version
 		;
 	$result = ""
 		. $nom
 		. " " . $version
 		;
+	$gd_info = gd_info();
+	
 	if($html) {
-		$result = "<p class='verdana1 spip_xx-small' style='font-weight:bold;'>$result</p>\n";
+		$result = "<p class='verdana1 spip_xx-small' id='if-html-signature'>$result - gd <span>" . $gd_info['GD Version'] . "</span></p>\n";
 	}
 	return($result);
 }
