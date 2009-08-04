@@ -12,4 +12,23 @@ function lm2_insert_head($flux){
 	return $flux;
 }
 
+/**
+ * enclosures 
+ * ajout d'un rel="enclosure" sur les liens mp3 absolus
+ * permet de traiter les [mon son->http://monsite/mon_son.mp3] dans un texte. 
+ * Le filtre peut etre appele dans un squelette apres |liens_absolus
+ */
+ 
+ function lm2_post_propre($texte) {
+
+	$reg_formats="mp3";
+
+	$texte = preg_replace(
+		",<a(\s[^>]*href=['\"]?(http:\/\/[a-zA-Z0-9\s()\/\:\._%\?+'=~-]*\.($reg_formats))['\"]?[^>]*)>(.*)</a>,Uims",
+		'<a$1 rel="enclosure">$4</a>', 
+		$texte);
+	
+	return $texte;
+}
+
 ?>
