@@ -34,7 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'meta_page_description_value' => 'Valeur de la Description de la Page',
 	
 	'canonical_url' => 'URL Canoniques',
-	'canonical_url_activate' => 'Activater les URL Canoniques',
+	'canonical_url_activate' => 'Activer les URL Canoniques',
 	
 	'google_webmaster_tools' => 'Google Webmaster Tools',
 	'google_webmaster_tools_activate' => 'Activer Webmaster Tools',
