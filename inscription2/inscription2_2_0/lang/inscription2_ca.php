@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_modifier_auteur_supp' => 'Informacions suplement&agrave;ries',
 	'adresse' => 'Adre&ccedil;a',
 	'adresse_pro' => 'Adre&ccedil;a professional (Pro.)',
-	'ajouter_adherent' => '<MODIF>Crear <br />un nou visitant',
+	'ajouter_adherent' => 'Crear un nou usuari',
 	'aout' => 'agost',
 	'aucun_resultat_recherche' => 'La vostra cerca no ha donat cap resultat.',
 	'auteur' => 'Autor',
@@ -57,6 +57,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'decembre' => 'desembre',
+	'delete_user_select' => 'Suprimir els usuaris seleccionats ',
 	'demande_password' => 'La vostra contrasenya:',
 	'description_cfg' => 'Aquest plugin permet ampliar les informacions dels autors i del vostre lloc, podeu escollir aqu&iacute; els camps suplementaris',
 	'description_page' => 'Aqu&iacute; podeu verificar la vostra configuraci&oacute; escollida tal i com est&agrave; emmagatzemada',
@@ -133,7 +134,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'latitude' => 'Latitud',
 	'legende' => 'Llegenda',
 	'lisez_mail' => 'Us acabem d\'enviar un correu electr&ograve;nic a l\'adre&ccedil;a donada. Per activar el vostre compte seguiu les instruccions.',
-	'liste_adherents' => '<MODIF>Mostrar els comptes usuaris',
+	'liste_adherents' => 'Mostrar els comptes usuaris',
 	'liste_comptes_titre' => 'Llista dels comptes usuaris',
 	'login' => 'Nom d\'usuari (login)',
 	'longitude' => 'Longitud ',
@@ -152,7 +153,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'naissance' => 'Data de naixement',
+	'nb_users_supprimes' => '@nb@ usuaris s\'han suprimit.',
 	'nettoyer_tables' => 'Netejar les taules',
+	'no_user_selected' => 'No heu seleccionat cap usuari.',
 	'nom' => 'Signatura',
 	'nom_explication' => 'el vostre nom o el vostre&nbsp;pseudo',
 	'nom_famille' => 'Cognom',
@@ -228,9 +231,9 @@ Gr&agrave;cies per la vostra confian&ccedil;a
 
 L\'equip de @nom_site@ 
 ',
-	'texte_email_inscription' => '<MODIF>esteu a punt de confirmar la vostra inscripci&oacute; al lloc @nom_site@. 
+	'texte_email_inscription' => 'esteu a punt de confirmar la vostra inscripci&oacute; al lloc @nom_site@. 
 
- Cliqueu l\'enlla&ccedil; que hi ha m&eacute;s avall per activar el vostre compte i escollir la vostra contrasenya.
+Cliqueu l\'enlla&ccedil; que hi ha m&eacute;s avall per activar el vostre compte i escollir la vostra contrasenya.
 
 @link_activation@
 
@@ -240,7 +243,7 @@ Gr&agrave;cies per la vostra confian&ccedil;a.
 L\'equip de @nom_site@.
 @url_site@
 
-Si no heu demanat aquesta inscripci&oacute; o si no voleu a partir d\'ara formar part del nostre lloc, cliqueu l\'enlla&ccedil; que hi ha a sota.
+Si no heu demanat aquesta inscripci&oacute; o si no voleu, a partir d\'ara, formar part del nostre lloc, cliqueu l\'enlla&ccedil; que hi ha a sota.
 @link_suppresion@
 
 
