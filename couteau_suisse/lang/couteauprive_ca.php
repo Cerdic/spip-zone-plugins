@@ -25,8 +25,12 @@ _ Enlla&ccedil; de test: [->test@test.com] (recarregueu la p&agrave;gina complet
 	'action_rapide_non' => 'Acci&oacute; r&agrave;pida, disponible un cop aquesta eina siga activada :',
 	'admins_seuls' => 'Nom&eacute;s els administradors',
 	'attente' => 'Espera...',
-	'auteur_forum:description' => '<MODIF>Incita a tots els autors de missatges p&uacute;blics a omplir (amb una lletra com a m&iacute;nim!) el camp &laquo;@_CS_FORUM_NOM@&raquo; per tal d\'evitar les contribucions totalment an&ograve;nimes.',
+	'auteur_forum:description' => 'Incita a tots els autors de missatges p&uacute;blics a omplir (amb una lletra com a m&iacute;nim!) un nom i/o un correu electr&ograve;nic per tal d\'evitar les contribucions totalment an&ograve;nimes. Feixeu-vos que aquesta eina fa una verificaci&oacute; del JavaScript al lloc del visitant.[[%auteur_forum_nom%]][[->%auteur_forum_email%]][[->%auteur_forum_deux%]]
+ {Alerta: Escollir la tercera opci&oacute; anul&middot;la les 2 primeres. &Eacute;s important verificar que els formularis del vostre esquelet s&oacute;n compatibles completament amb aquesta eina.}',
 	'auteur_forum:nom' => 'No als f&ograve;rums an&ograve;nims',
+	'auteur_forum_deux' => 'O, al menys un dels dos camps precedents',
+	'auteur_forum_email' => 'El camp &laquo;@_CS_FORUM_EMAIL@&raquo;',
+	'auteur_forum_nom' => 'El camp &laquo;@_CS_FORUM_NOM@&raquo;',
 	'auteurs:description' => 'Aquesta eina configura l\'aparen&ccedil;a de [la p&agrave;gina autors->./?exec=auteurs], a la part privada.
 
 @puce@ Defineix aqu&iacute; el nombre m&agrave;xim d\'autors a mostrar en el quadre central de la p&agrave;gina d\'autors. M&eacute;s enll&agrave;, trobem una paginaci&oacute;.[[%max_auteurs_page%]]
@@ -74,7 +78,7 @@ _ Enlla&ccedil; de test: [->test@test.com] (recarregueu la p&agrave;gina complet
 	'boites_privees:nom' => 'Requadres privats',
 	'bp_tri_auteurs' => 'Les classificacions d\'autors',
 	'bp_urls_propres' => 'Els URLs propis',
-	'brouteur:description' => '<MODIF>Utilitzar el selector de secci&oacute; a AJAX a partir de %rubrique_brouteur% secci&oacute;(seccions)',
+	'brouteur:description' => 'Utilitzar el selector de secci&oacute; a AJAX a partir de %rubrique_brouteur% secci&oacute;(seccions)',
 	'brouteur:nom' => 'Regulaci&oacute; del selector de secci&oacute;',
 
 	// C
@@ -94,6 +98,8 @@ _ Enlla&ccedil; de test: [->test@test.com] (recarregueu la p&agrave;gina complet
 	'chatons:description' => 'Insereix imatges (o emoticones pels {xats}) en tots els textos on apareix una cadena del tipus <code>:nom</code>.
 _ Aquesta eina substitueix aquestes dreceres per les imatges del mateix nom que troba a dins de la vostra carpeta <code>mon_squelette_toto/img/chatons/</code>, o per defecte, la carpeta <code>couteau_suisse/img/chatons/</code>.',
 	'chatons:nom' => 'Emoticones',
+	'citations_bb:description' => 'Per tal de respectar els usos en HTML a dins dels continguts SPIP del vostre lloc (articles, seccions, etc.), aquesta eina substitueix les etiquetes &lt;quote&gt; per les etiquetes &lt;q&gt; quan no hi ha canvi de l&iacute;nia. Efectivament, a les citacions curtes s\'hi ha de posar &lt;q&gt; i les citacions que contenen par&agrave;grafs per &lt;blockquote&gt;.',
+	'citations_bb:nom' => 'Citacions ben etiquetades',
 	'class_spip:description1' => 'Aqu&iacute; podeu definir algunes dreceres d\'SPIP. Un valor buit equival a utilitzar el valor per defecte.[[%racc_hr%]]',
 	'class_spip:description2' => '@puce@ {{Les dreceres d\'SPIP}}.
 
@@ -196,7 +202,7 @@ Aquesta eina es pot acompanyar amb &laquo;&nbsp;[.->sommaire]&nbsp;&raquo;.',
 	'detail_balise_etoilee' => '{{Atenci&oacute;}}: Verifiqueu b&eacute; l\'&uacute;s fet pels vostres esquelets d\'etiquetes estrellades. Els tractaments d\'aquesta eina no s\'aplicaran pas a: @bal@.',
 	'detail_fichiers' => 'Fitxers:',
 	'detail_inline' => 'Codi inserit:',
-	'detail_jquery2' => '<MODIF>Aquesta eina necessita la llibreria {jQuery}.',
+	'detail_jquery2' => 'Aquesta eina utilitza la llibreria {jQuery}.',
 	'detail_jquery3' => '{{Atenci&oacute;}} : aquesta eina necessita el plugin [jQuery per SPIP 1.92->http://files.spip.org/spip-zone/jquery_192.zip] per funcionar correctament amb aquesta versi&oacute; d\'SPIP.',
 	'detail_pipelines' => 'Pipelines :',
 	'detail_traitements' => 'Tractaments :',
@@ -312,6 +318,7 @@ Atenci&oacute;, aquesta eina necessita per funcionar el plugin {jQuery}: {Round 
 	// L
 	'label:admin_travaux' => 'Tancar el lloc p&uacute;blic per:',
 	'label:arret_optimisation' => 'Impedir que SPIP buidi la paperera autom&agrave;ticament:',
+	'label:auteur_forum_nom' => 'El visitant ha d\'especificar:',
 	'label:auteurs_tout_voir' => '@_CS_CHOIX@',
 	'label:auto_sommaire' => 'Creaci&oacute; sistem&agrave;tica del sumari:',
 	'label:balise_decoupe' => 'Activar l\'etiqueta #CS_DECOUPE :',
