@@ -4,22 +4,29 @@
 // {mots?} ne s'applique que si au moins un mot est demande
 // on passe dans l'url &mots[]=titre1&mots[]=titre2
 // et/ou &mots[]=11 etc
-// parametre optionnel : {mots score} ou score est un nombre entre 0 et 1
-// qui indique le pourcentage de mots a valider
-// ex: {mots? 0.66} selectionne tous les articles qui ont au moins 2/3
+// parametre optionnel : {mots score%} ou score est un nombre entre 0 et 1
+// qui indique le pourcentage de mots a valider (ou entre 0 et 100)
+//ou encore {mots score} qui indique le nombre de mots communs (par exemple 2)
+// ex: {mots? 0.66%} selectionne tous les articles qui ont au moins 2/3
 // de mots en commun avec ceux demandes par le contexte (ou l'URL)
 // par defaut score=1 (tous les mots demandes doivent figurer)
 function critere_mots_dist($idb, &$boucles, $crit) {
 
 	$boucle = &$boucles[$idb];
 
-	if (isset($crit->param[0])) {
-		$score = calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
+	if (isset($crit->param[0][0])) {
+		$score = calculer_liste(array($crit->param[0][0]), array(), $boucles, $boucles[$idb]->id_parent);
 	} else{
-		$score = '1';
+		$score = "'100%'";
     }
-	$quoi = '@$Pile[0]["mots"]';
+    if (isset($crit->param[0][1])){
+        $quoi = calculer_liste(array($crit->param[0][1]), array(), $boucles, $boucles[$idb]->id_parent);
+        }
+    else{
+        $quoi = '@$Pile[0]["mots"]';
+    }
 
+	
 	$boucle->hash .= '
 	// {MOTS}
 	$prepare_mots = charger_fonction(\'prepare_mots\', \'inc\');
@@ -36,7 +43,8 @@ function critere_mots_dist($idb, &$boucles, $crit) {
 
 
 function inc_prepare_mots_dist($mots, $table='articles', $cond=false, $score, $serveur='') {
-    
+
+    $score = trim($score);
 	if (!is_array($mots)
 	OR !$mots = array_filter($mots)) {
 		// traiter le cas {mots?}
@@ -63,9 +71,10 @@ function inc_prepare_mots_dist($mots, $table='articles', $cond=false, $score, $s
 	// on analyse la jointure spip_mots_$_table
 	// sans regarder spip_mots ni les groupes
 	// (=> faire attention si on utilise les mots techniques)
-	
+    
 	// si on a un % dans le score, c'est que c'est une fraction ou %age
-	if (substr($score,-1,1)=='%'){
+	if (substr($score,-1)=='%'){
+        
 	       $score = str_replace('%','',$score);
 	       if ($score>1){
 	           $score = $score/100;
