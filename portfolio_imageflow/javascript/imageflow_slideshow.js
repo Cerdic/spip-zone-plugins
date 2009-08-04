@@ -63,7 +63,7 @@ jQuery(document).ready(function(){
 					else {
 						// ou dans une boite 
 						$('#affichage')
-							.after("<div id='affichage_legend' class='affichage_legend' style='display:block;position:relative'>petito</div>");
+							.after("<div id='affichage_legend' class='affichage_legend' style='display:block;position:relative'></div>");
 						$('#affichage_legend')
 							.addClass('affichage_legend')
 							.prepend(o).show(10000);
