@@ -75,7 +75,7 @@ function metas_formulaire_affiche ($ElementGestionMetas, $IdElementGestionMetas)
 			<input id="GestionMetas_title" type="text" name="GestionMetasTitre" value="'.htmlspecialchars($metas['titre'], ENT_QUOTES).'" style="width: 98%" class="fondl"/></p>
 			<p><label for="GestionMetas_description">Description</label><br />
 			<textarea id="GestionMetas_description" name="GestionMetasDescription" style="width: 98%" rows="2" class="fondl">'.htmlspecialchars($metas['description'], ENT_QUOTES).'</textarea></p>
-			<p><label for="GestionMetas_keywords">Keywords (s&eacute;par&eacute;s par un espace)</label><br />
+			<p><label for="GestionMetas_keywords">Keywords (s&eacute;par&eacute;s par une virgule)</label><br />
 			<textarea id="GestionMetas_keywords" name="GestionMetasKeywords" cols="50" rows="10" style="width: 98%" class="fondl">'.htmlspecialchars($metas['keywords'], ENT_QUOTES).'</textarea>
 			</p>
 			<p><input type="submit" name="valider" value="valider" class="fondl"/></p>
