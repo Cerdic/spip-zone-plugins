@@ -1,12 +1,13 @@
 <plugin>
-	<nom>M&eacute;tadatas</nom>
+	<nom>M&eacute;tas</nom>
 	<version>1.0</version>
 	<etat>stable</etat>
-	<auteur>Quentin de Serres-Justiniac</auteur>
-	<description>
-	Permet d'associer des m&eacute;tas donn&eacute;es aux objets.
-	
-	Sur une id&eacute;e originale d'Olivier G.</description>
+	<icon>icon.png</icon>
+	<auteur>[Quentin de Serres-Justiniac->http://www.spip-contrib.net/?auteur10451]
+_ (d'apr&egrave;s une id&eacute;e originale d'[Olivier Gendrin->http://www.spip-contrib.net/?auteur1343])</auteur>
+	<description>Permet l'ajout, depuis l'espace priv&eacute;, de m&eacute;tas donn&eacute;es aux objets &eacute;ditoriaux SPIP.</description>
+	<lien>http://www.spip-contrib.net/?rubrique1250</lien>
+	<necessite id="SPIP" version="[2.0.0;]" />
 	<prefix>metas</prefix>
 	<fonctions>metas.php</fonctions>
 	<options>metas_options.php</options>
@@ -21,7 +22,7 @@
 		<inclure>metas.php</inclure>
 	</pipeline>
 	<onglet id="metas" parent="configuration">
-		<icone>images/referencement.png</icone>
+		<icone>icon.png</icone>
 		<titre>metas:configuration_metas</titre>
 	</onglet>
 	<install>base/metas_install.php</install>

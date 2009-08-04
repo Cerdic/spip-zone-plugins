@@ -47,7 +47,7 @@ function metas_formulaire_affiche ($ElementGestionMetas, $IdElementGestionMetas)
 	}
 
 	$bouton = bouton_block_depliable('M&eacute;tas Donn&eacute;es',false,"metas_form");
-	$retour = debut_cadre_enfonce(_DIR_PLUGIN_METAS.'/images/referencement.png',true,'',$bouton);
+	$retour = debut_cadre_enfonce(_DIR_PLUGIN_METAS.'/icon.png',true,'',$bouton);
 
 	if ($metas['id_meta'])
 	{
