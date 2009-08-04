@@ -12,7 +12,7 @@
 // ou encore {mots 66%} indique qu'on doit avoir 66% de mot en commun (identique à {mots 0.66} 
 // de mots en commun avec ceux demandes par le contexte (ou l'URL)
 // par defaut score=100% (tous les mots demandes doivent figurer)
-function critere_mots_dist($idb, &$boucles, $crit) {
+function critere_mots_dist($idb, &$boucles, $crit,$id_ou_titre=false) {
 
 	$boucle = &$boucles[$idb];
 
@@ -32,7 +32,7 @@ function critere_mots_dist($idb, &$boucles, $crit) {
 	$boucle->hash .= '
 	// {MOTS}
 	$prepare_mots = charger_fonction(\'prepare_mots\', \'inc\');
-	$mots_where = $prepare_mots('.$quoi.', "'.$boucle->id_table.'", "'.$crit->cond.'", '.$score.', "' . $boucle->sql_serveur . '");
+	$mots_where = $prepare_mots('.$quoi.', "'.$boucle->id_table.'", "'.$crit->cond.'", '.$score.', "' . $boucle->sql_serveur . '","'.$id_ou_titre.'");
 	';
 
 	$t = $boucle->id_table . '.' . $boucle->primary;
@@ -43,8 +43,15 @@ function critere_mots_dist($idb, &$boucles, $crit) {
 
 }
 
+function critere_mots_selon_id_dist($idb, &$boucles, $crit){
+    critere_mots_dist($idb, &$boucles, $crit,'id');
+}
+function critere_mots_selon_titre_dist($idb, &$boucles, $crit){
+    critere_mots_dist($idb, &$boucles, $crit,'titre');
+}
 
-function inc_prepare_mots_dist($mots, $table='articles', $cond=false, $score, $serveur='') {
+
+function inc_prepare_mots_dist($mots, $table='articles', $cond=false, $score, $serveur='',$id_ou_titre=false) {
 
     $score = trim($score);
 	if (!is_array($mots)
@@ -61,15 +68,29 @@ function inc_prepare_mots_dist($mots, $table='articles', $cond=false, $score, $s
 	$_table = str_replace('spip_', '', table_objet_sql($table));
 	$_id_table = id_table_objet($table);
 	$where = array();
-
-	foreach($mots as $mot) {
-		if (preg_match(',^[1-9][0-9]*$,', $mot))
-			$id_mot = $mot;
-		else
-			$id_mot = sql_getfetsel('id_mot', 'spip_mots', 'titre='.sql_quote($mot));
-		$where[] = 'id_mot='.sql_quote($id_mot);
+    
+    //selon le cas, on sélèctionne sur les titres ou sur les id
+    if (!$id_ou_titre){
+        foreach($mots as $mot) {
+            if (preg_match(',^[1-9][0-9]*$,', $mot))
+                $id_mot = $mot;
+            else
+                $id_mot = sql_getfetsel('id_mot', 'spip_mots', 'titre='.sql_quote($mot));
+            $where[] = 'id_mot='.sql_quote($id_mot);
+        }
+    }
+	elseif($id_ou_titre == 'id'){
+	   foreach($mots as $mot) {
+	       $where[] = 'id_mot='.sql_quote($mot);
+	   }
 	}
-
+	elseif($id_ou_titre == 'titre'){
+	   foreach($mots as $mot) {
+	        $id_mot = sql_getfetsel('id_mot', 'spip_mots', 'titre='.sql_quote($mot));
+            $where[] = 'id_mot='.sql_quote($id_mot);  
+	   }
+	}
+	
 	// on analyse la jointure spip_mots_$_table
 	// sans regarder spip_mots ni les groupes
 	// (=> faire attention si on utilise les mots techniques)
