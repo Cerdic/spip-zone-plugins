@@ -5,11 +5,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	// B
 	'bouton_effacer' => 'Effacer',
 	'bouton_valider' => 'Valider',
 	'bulle_bouton_effacer' => 'Effacer les saisies et revenir aux valeurs de d&eacute;part',
 	'bulle_bouton_valider' => 'Valider les saisies',
 
+	// C
 	'cfg_descriptif' => 'Cette page vous permez de configurer le plugin Thumbsites, et, en particulier, de choisir le serveur de vignettes. Pour en savoir plus, consultez la <a href="http://www.spip-contrib.net/?article2584">documentation sur contrib</a>',
 	'cfg_inf_serveur_1_1' => '<a href="http://www.thumbshots.com">Thumbshots.com</a> propose un service gratuit qui ne n&eacute;cessite pas d\'identification.',
 	'cfg_inf_serveur_1_2' => 'Les vignettes g&eacute;n&eacute;r&eacute;es seront de 120 x 90 pixels.',
@@ -26,19 +28,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_itm_serveur_3' => 'Girafa',
 	'cfg_itm_serveur_4' => 'Websnapr',
 	'cfg_itm_serveur_5' => 'Robothumb',
-	'cfg_itm_taille_vignette_t' => '92x70 pixels',
-	'cfg_itm_taille_vignette_s' => '202x152 pixels',
-	'cfg_itm_taille_vignette_m' => '400x300 pixels',
 	'cfg_itm_taille_vignette_l' => '640x480 pixels',
+	'cfg_itm_taille_vignette_m' => '400x300 pixels',
+	'cfg_itm_taille_vignette_s' => '202x152 pixels',
+	'cfg_itm_taille_vignette_t' => '92x70 pixels',
+	'cfg_lbl_choix_serveur' => 'Choisissez le serveur de vignettes',
+	'cfg_lbl_cle' => 'Votre cl&eacute;',
 	'cfg_lbl_identifiant' => 'Votre identifiant',
 	'cfg_lbl_signature' => 'Votre signature',
-	'cfg_lbl_cle' => 'Votre cl&eacute;',
 	'cfg_lbl_taille_vignette' => 'Taille des vignettes',
-	'cfg_lbl_choix_serveur' => 'Choisissez le serveur de vignettes',
 	'cfg_lgd_choix_serveur' => 'Serveur',
 
-	'titre_thumbshot_site' => 'VIGNETTE DU SITE',
-
+	// T
+	'titre_thumbshot_site' => 'VIGNETTE DU SITE'
 );
 
 ?>
