@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'accents_pas_pris' => 'Els accents no es tenen en compte (&laquo;&nbsp;d&eacute;j&agrave;&nbsp;&raquo; o &laquo;&nbsp;deja&nbsp;&raquo;, ens retornaran el mateix &laquo;&nbsp;d&eacute;j&agrave;&nbsp;&raquo;, &laquo;&nbsp;dej&agrave;&nbsp;&raquo;, &laquo;&nbsp;d&eacute;ja&nbsp;&raquo;...)',
+	'asie' => '&agrave;sia ',
 	'asterisque_terminale' => 'no retornar&agrave; res: l\'asterisc* ha de ser terminal',
 	'aussi' => 'tamb&eacute;',
 
@@ -20,10 +21,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'creer_tous' => 'Crear tots els &iacute;ndexs FULLTEXT suggerits',
 
 	// E
+	'enfan' => 'infan',
+	'enfance' => 'inf&agrave;ncia',
+	'enfant' => 'infant',
+	'enfanter' => 'infantar',
+	'enfantillage' => 'criaturada',
+	'enfants' => 'infants',
 	'et' => 'I',
+	'etranger' => 'estranger',
 	'exemples' => 'Exemples d\'&uacute;s',
 
 	// F
+	'fant' => 'fant',
 	'fonctionnement_recherche' => 'Funcionament del motor de cerca d\'aquest lloc',
 	'fulltext_cree' => 'FULLTEXT creat',
 
@@ -44,6 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// P
 	'pas_index' => 'Cap &iacute;ndex FULLTEXT',
+	'premier_soit' => 'O',
 
 	// R
 	'regenerer_tous' => 'Renovar tots els &iacute;ndex FULLTEXT',
