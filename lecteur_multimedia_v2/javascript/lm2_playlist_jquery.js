@@ -64,7 +64,7 @@
 			},
 			finish:function(){
 				if(options.playNext){
-					sm2_player_play(i+1);
+					sm2_player_play(live_track+1);
 				}
 				isPlaying = false;
 				isPaused = false;
