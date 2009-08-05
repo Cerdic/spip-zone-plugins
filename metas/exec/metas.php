@@ -66,14 +66,6 @@ function exec_metas() {
 	echo debut_droite('', true);
 
 	echo '<form method="post" action="'.generer_url_ecrire('metas').'" >';
-		echo debut_cadre_trait_couleur("", true, "", _T('metas:configuration_mots_importants'));
-			echo '<p>';
-				echo '<label for="spip_metas_mots_importants">'._T('metas:label_mots_importants').'</label>';
-				echo "<textarea name=\"spip_metas_mots_importants\" cols=\"40\" rows=\"4\" class=\"forml\">$spip_metas_mots_importants</textarea>";
-			echo '</p>';
-			echo '<p style="text-align: right;"><input class="fondo" name="valider" type="submit" value="'._T('metas:valider').'" /></p>';
-		echo fin_cadre_trait_couleur(true);
-
 		echo debut_cadre_trait_couleur("", true, "", _T('metas:configuration_referencement'));
 			echo '<p>';
 				echo '<label for="spip_metas_title">'._T('metas:label_title').'</label>';
@@ -86,6 +78,13 @@ function exec_metas() {
 			echo '<p>';
 				echo '<label for="spip_metas_keywords">'._T('metas:meta_keywords_label').'</label>';
 				echo "<textarea name=\"spip_metas_keywords\" cols=\"40\" rows=\"4\" class=\"forml\">$spip_metas_keywords</textarea>";
+			echo '</p>';
+			echo '<p style="text-align: right;"><input class="fondo" name="valider" type="submit" value="'._T('metas:valider').'" /></p>';
+		echo fin_cadre_trait_couleur(true);
+		echo debut_cadre_trait_couleur("", true, "", _T('metas:configuration_mots_importants'));
+			echo '<p>';
+				echo '<label for="spip_metas_mots_importants">'._T('metas:label_mots_importants').'</label>';
+				echo "<textarea name=\"spip_metas_mots_importants\" cols=\"40\" rows=\"4\" class=\"forml\">$spip_metas_mots_importants</textarea>";
 			echo '</p>';
 			echo '<p style="text-align: right;"><input class="fondo" name="valider" type="submit" value="'._T('metas:valider').'" /></p>';
 		echo fin_cadre_trait_couleur(true);
