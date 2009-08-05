@@ -76,15 +76,15 @@ function exec_metas() {
 
 		echo debut_cadre_trait_couleur("", true, "", _T('metas:configuration_referencement'));
 			echo '<p>';
-				echo '<label for="spip_metas_title">'._T('metas:label_metas_title').'</label>';
+				echo '<label for="spip_metas_title">'._T('metas:label_title').'</label>';
 				echo "<input type=\"text\" name=\"spip_metas_title\" value=\"$spip_metas_title\" class=\"forml\"/>";
 			echo '</p>';
 			echo '<p>';
-				echo '<label for="spip_metas_description">'._T('metas:label_metas_description').'</label>';
+				echo '<label for="spip_metas_description">'._T('metas:meta_description_label').'</label>';
 				echo "<textarea name=\"spip_metas_description\" cols=\"40\" rows=\"4\" class=\"forml\">$spip_metas_description</textarea>";
 			echo '</p>';
 			echo '<p>';
-				echo '<label for="spip_metas_keywords">'._T('metas:label_metas_keywords').'</label>';
+				echo '<label for="spip_metas_keywords">'._T('metas:meta_keywords_label').'</label>';
 				echo "<textarea name=\"spip_metas_keywords\" cols=\"40\" rows=\"4\" class=\"forml\">$spip_metas_keywords</textarea>";
 			echo '</p>';
 			echo '<p style="text-align: right;"><input class="fondo" name="valider" type="submit" value="'._T('metas:valider').'" /></p>';

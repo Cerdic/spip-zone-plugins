@@ -71,14 +71,14 @@ function metas_formulaire_affiche ($ElementGestionMetas, $IdElementGestionMetas)
 	<div id="metas_form" style="display:none;">
 		<form onsubmit="vars=$(\'#metas_donnes\').serialize();$(\'#pave_metas\').load(\'?exec=metas_interface&id_objet='.$IdElementGestionMetas.'&objet='.$ElementGestionMetas.'&\'+vars);return false;" action="index.php" method="get" id="metas_donnes">
 			<input type="hidden" name="GestionMetasSubmit" value="1" />
-			<p><label for="GestionMetas_title">Titre</label><br />
+			<p><label for="GestionMetas_title">'._T('metas:label_title').'</label><br />
 			<input id="GestionMetas_title" type="text" name="GestionMetasTitre" value="'.htmlspecialchars($metas['titre'], ENT_QUOTES).'" style="width: 98%" class="fondl"/></p>
-			<p><label for="GestionMetas_description">Description</label><br />
+			<p><label for="GestionMetas_description">'._T('metas:meta_description_label').'</label><br />
 			<textarea id="GestionMetas_description" name="GestionMetasDescription" style="width: 98%" rows="2" class="fondl">'.htmlspecialchars($metas['description'], ENT_QUOTES).'</textarea></p>
-			<p><label for="GestionMetas_keywords">Keywords (s&eacute;par&eacute;s par une virgule)</label><br />
+			<p><label for="GestionMetas_keywords">'._T('metas:meta_keywords_label').'</label><br />
 			<textarea id="GestionMetas_keywords" name="GestionMetasKeywords" cols="50" rows="10" style="width: 98%" class="fondl">'.htmlspecialchars($metas['keywords'], ENT_QUOTES).'</textarea>
 			</p>
-			<p><input type="submit" name="valider" value="valider" class="fondl"/></p>
+			<p><input type="submit" name="valider" value="'._T('metas:valider').'" class="fondl"/></p>
 		</form>
 	</div>';
 
