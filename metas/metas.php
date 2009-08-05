@@ -46,7 +46,7 @@ function metas_formulaire_affiche ($ElementGestionMetas, $IdElementGestionMetas)
 		}
 	}
 
-	$bouton = bouton_block_depliable('M&eacute;tas Donn&eacute;es',false,"metas_form");
+	$bouton = bouton_block_depliable(_T('metas:config_metas_page'),false,"metas_form");
 	$retour = debut_cadre_enfonce(_DIR_PLUGIN_METAS.'/icon.png',true,'',$bouton);
 
 	if ($metas['id_meta'])
@@ -72,17 +72,21 @@ function metas_formulaire_affiche ($ElementGestionMetas, $IdElementGestionMetas)
 		<form onsubmit="vars=$(\'#metas_donnes\').serialize();$(\'#pave_metas\').load(\'?exec=metas_interface&id_objet='.$IdElementGestionMetas.'&objet='.$ElementGestionMetas.'&\'+vars);return false;" action="index.php" method="get" id="metas_donnes">
 			<input type="hidden" name="GestionMetasSubmit" value="1" />
 			<p>
-			<label for="GestionMetas_title"><b>'._T('metas:title_label').'</b></label>
-			<br /><span class="explication" style="color:#666;">'._T('metas:title_explication').'</span><br />
-			<input id="GestionMetas_title" type="text" name="GestionMetasTitre" value="'.htmlspecialchars($metas['titre'], ENT_QUOTES).'" class="fondl" style="width: 98%" /></p>
-			<p><label for="GestionMetas_description"><b>'._T('metas:meta_description_label').'</b></label>
-			<br /><span class="explication" style="color:#666;">'._T('metas:meta_description_explication').'</span><br />
-			<textarea id="GestionMetas_description" name="GestionMetasDescription" rows="3" class="fondl" style="width: 98%">'.htmlspecialchars($metas['description'], ENT_QUOTES).'</textarea></p>
-			<p><label for="GestionMetas_keywords"><b>'._T('metas:meta_keywords_label').'</b></label>
-			<br /><span class="explication" style="color:#666;">'._T('metas:meta_keywords_explication').'</span><br />
-			<textarea id="GestionMetas_keywords" name="GestionMetasKeywords" rows="5" class="fondl" style="width: 98%">'.htmlspecialchars($metas['keywords'], ENT_QUOTES).'</textarea>
+				<label for="GestionMetas_title"><b>'._T('metas:title').'</b></label>
+				<br /><span class="explication" style="color:#444;">'._T('metas:title_explication').'</span><br />
+				<input id="GestionMetas_title" type="text" name="GestionMetasTitre" value="'.htmlspecialchars($metas['titre'], ENT_QUOTES).'" class="fondl" style="width: 98%" />
 			</p>
-			<p><input type="submit" name="valider" value="'._T('metas:valider').'" class="fondl"/></p>
+			<p>
+				<label for="GestionMetas_description"><b>'._T('metas:meta_description').'</b></label>
+				<br /><span class="explication" style="color:#444;">'._T('metas:meta_description_explication').'</span><br />
+				<textarea id="GestionMetas_description" name="GestionMetasDescription" cols=\"40\" rows="4" class="fondl" style="width: 98%">'.htmlspecialchars($metas['description'], ENT_QUOTES).'</textarea>
+			</p>
+			<p>
+				<label for="GestionMetas_keywords"><b>'._T('metas:meta_keywords').'</b></label>
+				<br /><span class="explication" style="color:#444;">'._T('metas:meta_keywords_explication').'</span><br />
+				<textarea id="GestionMetas_keywords" name="GestionMetasKeywords" cols=\"40\" rows="4" class="fondl" style="width: 98%">'.htmlspecialchars($metas['keywords'], ENT_QUOTES).'</textarea>
+			</p>
+			<p style="text-align: right;"><input type="submit" name="valider" value="'._T('metas:valider').'" class="fondl" /></p>
 		</form>
 	</div>';
 

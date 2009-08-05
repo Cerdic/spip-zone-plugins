@@ -5,7 +5,7 @@
 	<icon>icon.png</icon>
 	<auteur>[Quentin de Serres-Justiniac->http://www.spip-contrib.net/?auteur10451]
 _ (d'apr&egrave;s une id&eacute;e originale d'[Olivier Gendrin->http://www.spip-contrib.net/?auteur1343])</auteur>
-	<description>Permet l'ajout, depuis l'espace priv&eacute;, de m&eacute;tas donn&eacute;es aux articles et rubriques de&nbsp;SPIP.</description>
+	<description>Gestion des m&eacute;tas <code>title</code>, <code>description</code> et <code>keywords</code> des articles et rubriques de SPIP, et mise en exergue de mots importants.</description>
 	<lien>http://www.spip-contrib.net/?rubrique1250</lien>
 	<necessite id="SPIP" version="[2.0.0;]" />
 	<prefix>metas</prefix>
