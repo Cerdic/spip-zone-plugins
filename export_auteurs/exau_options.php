@@ -18,8 +18,28 @@ if(!defined('_DIR_PLUGIN_EXAU')) {
 	define('_DIR_PLUGIN_EXAU',(_DIR_PLUGINS.end($p)).'/');
 }
 
-// permettre l'export des statuts :
-//define("EXAU_PERMET_STATUTS", "0minirezo,1comite,6forum");
-define("EXAU_PERMET_STATUTS", "6forum");
+/// Vous pouvez modifier EXAU_EXPORTER_TOUT
+//
+// si EXAU_EXPORTER_TOUT==FALSE ou absent, le raccourci n'apparait que dans la page "Visiteurs"
+// si EXAU_EXPORTER_TOUT==TRUE, le raccourci d'export apparait egalement dans la page "Auteurs"
+define("EXAU_EXPORTER_TOUT", true);
+//define("EXAU_EXPORTER_TOUT", false);
+
+
+
+
+// normalement, vous n'avez rien a modifier ci-dessous
+define("EXAU_STATUTS_AUTEURS", '0minirezo,1comite,5poubelle');
+if(version_compare($GLOBALS['spip_version_code'],'1.9300','<')) 
+{
+	define("EXAU_STATUTS_INVITES", '6forum');
+	define("EXAU_STATUTS_INVITES2", '6forum'); // bug SPIP 2 ? 
+}
+else 
+{
+	define("EXAU_STATUTS_INVITES", '!0minirezo,1comite,5poubelle');
+	define("EXAU_STATUTS_INVITES2", '!1comite,0minirezo,nouveau'); // bug SPIP 2 ? liens différents dans exec=auteurs pour la meme action ?
+}
+
 
 ?>

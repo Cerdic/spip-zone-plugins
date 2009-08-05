@@ -19,7 +19,7 @@ function exau_header_prive ($flux) {
 		
 		$statut = _request('statut');
 		
-		if(exau_statut_correct ($statut)) {
+		if($statut = exau_statut_correct ($statut)) {
 		
 			$url = generer_action_auteur('exau_export_auteurs', $statut);
 		
@@ -53,7 +53,7 @@ function exau_affiche_droite ($flux) {
 
 	if ($exec == 'auteurs') {
 	
-		if(exau_statut_correct ($statut)) {
+		if($statut = exau_statut_correct ($statut)) {
 	
 			$bg = find_in_path('images/searching.gif');
 
@@ -63,7 +63,7 @@ function exau_affiche_droite ($flux) {
 				. "<div style='background url($bg) no-repeat top right !important'>\n"
 				. "<img id='exau-ajax-loader' src='$bg' style='position:absolute;top:6px;right:0;display:none' width='13' height='13' />\n"
 				. "<a id='export_auteurs' href='" . generer_url_ecrire("exau_export_auteurs", "statut=".$statut) . "' class='cellule-h'>"
-				. _T('exau:' . (($statut == "6forum") ? "exporter_visiteurs" : "exporter_auteurs"))
+				. _T('exau:' . (($statut == EXAU_STATUTS_INVITES) ? "exporter_visiteurs" : "exporter_auteurs"))
 				. "</a>\n"
 				. "</div>\n"
 				. fin_cadre_enfonce(true)

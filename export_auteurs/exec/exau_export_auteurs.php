@@ -25,7 +25,7 @@ function exec_exau_export_auteurs_dist () {
 	$statut = _request('statut');
 
 	if(
-		exau_statut_correct ($statut)
+		($statut = exau_statut_correct ($statut))
 		&& autoriser('voir', 'auteur', $connect_id_auteur)) {
 	
 		include_spip('inc/exau_api');

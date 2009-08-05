@@ -29,8 +29,8 @@ function action_exau_export_auteurs () {
 		// l'argument récupéré est le statut demandé
 		$statut = $securiser_action();
 
-		if(exau_statut_correct ($statut)) {
-			
+		if($statut = exau_statut_correct ($statut)) {
+
 			include_spip('inc/exau_api');
 		
 			exau_exporter($statut);

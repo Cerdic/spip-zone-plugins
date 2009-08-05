@@ -20,15 +20,20 @@
  */
 function exau_exporter ($statut) {
 	
-	if(exau_statut_correct ($statut)) {
+	$statut = trim($statut);
+	
+	if($statut = exau_statut_correct ($statut)) {
 		
 		$skel = find_in_path("lister_auteurs.html");
+
+		$not = ((strpos($statut, '!') === 0) ? '^' : '');
+		$statut = trim($statut, '!');
 		
 		$filename = exau_generer_nom_fichier ($statut);
-		
+
 		$contexte = array(
 			'filename' => $filename
-			, 'zstatut' => (($statut=='6forum') ? "6" : "0-1")
+			, 'zstatut' => $not . $statut
 		);
 		
 		include_spip('public/assembler');
@@ -65,25 +70,32 @@ function exau_generer_nom_fichier ($statut) {
 }
 
 /**
- * Verifier que le staut demande' est correct.
- * Le statut doit être un des statuts donnes par EXAU_PERMET_STATUTS (cf: mes_options.php)
- * Si $statut est vide, mais que EXAU_PERMET_STATUTS autorise les auteurs, renvoie true
- * @return boolean
+ * Verifie que le statut demande' est correct.
+ * Si $statut est vide, mais que EXAU_EXPORTER_TOUT autorise les auteurs, renvoie true
+ * sinon, verifie si la selection est correcte
+ * @return boolean OR string
  * @param string $statut
  */
 function exau_statut_correct ($statut) {
-	static $statuts_array;
-	static $avec_auteurs;
 	
-	if($statuts_array === null) {
-		$statuts_array = explode(',', EXAU_PERMET_STATUTS);
-		$avec_auteurs = in_array('0minirezo', $statuts_array) || in_array('1comite', $statuts_array);
+	$complet = (defined('EXAU_EXPORTER_TOUT') && EXAU_EXPORTER_TOUT);
+	
+	if(!$statut && $complet) 
+	{
+		$statut = EXAU_STATUTS_AUTEURS;
 	}
-	
-	$present = in_array($statut, $statuts_array);
-	
-	return($present XOR (!$statut && $avec_auteurs));
-
+	else
+	{
+		if(($statut == EXAU_STATUTS_INVITES) || ($statut == EXAU_STATUTS_INVITES2))
+		{
+			return(EXAU_STATUTS_INVITES);
+		}
+		if($complet && ($statut == EXAU_STATUTS_AUTEURS)
+		) {
+			return($statut);
+		}
+	}
+	return (false);
 }
 
 ?>
