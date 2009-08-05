@@ -13,7 +13,7 @@ Pour la gestion de :
 	- id_page
 	- nom_page
 	- objectif
-	- particularités
+	- particularitï¿½s
 	- DA (image)
 	- url
 	- commentaires
@@ -21,7 +21,7 @@ Pour la gestion de :
 - blocs
 	- id_bloc
 	- id_parent
-	- id_page (calculé ou id_bloc... pour le cas de bloc inclus dans un bloc)
+	- id_page (calculï¿½ ou id_bloc... pour le cas de bloc inclus dans un bloc)
 	- nom_bloc
 
 
@@ -33,8 +33,8 @@ Pour la gestion de :
 Balises :
 ---------
 
-- liens entrants : comment on arrive sur la page ? balise calculée à partir des liens pointant vers cette page
-- liens sortants : vers où l'on peut aller ? balise calculée à partir des liens des blocs de la branche
+- liens entrants : comment on arrive sur la page ? balise calculï¿½e ï¿½ partir des liens pointant vers cette page
+- liens sortants : vers oï¿½ l'on peut aller ? balise calculï¿½e ï¿½ partir des liens des blocs de la branche
 
 Faut-il distinguer pages et blocs ?
 - les pages ne peuvent pas contenir d'autres pages
@@ -42,6 +42,7 @@ Faut-il distinguer pages et blocs ?
 - les liens sont contenus dans des blocs, ex bloc nav, bloc menu (et pas dans des pages)
 
 Comment estimer la charge ?
-- d'une part en estimant la charge correspondant à la conception du bloc => charge de conception
-- d'autre part en estimant la charge correspondant à l'assemblage des blocs dans un bloc ou dans une page => charge d'assemblage
+- d'une part en estimant la charge correspondant ï¿½ la conception du bloc => charge de conception
+- d'autre part en estimant la charge correspondant ï¿½ l'assemblage des blocs dans un bloc ou dans une page => charge d'assemblage
+
 
