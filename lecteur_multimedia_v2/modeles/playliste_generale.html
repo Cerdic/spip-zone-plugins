@@ -10,7 +10,7 @@
 		jQuery('#playliste#ENV{id_playliste}').playlist({
 			smUrl : "#EVAL{_DIR_LIB_SM}swf/",
 			smnullUrl : "#CHEMIN{soundmanager/null.mp3}",
-			sources : $("a[rel='enclosure']"),
+			sources : $("a[rel='media']"),
 			[(#ENV{autoPlay}|oui)autoPlay : true,]
 			[(#ENV{autoLoad}|oui)autoLoad : true,]
 			[(#ENV{logo}|oui)logo:'#ENV{logo}',]
@@ -36,7 +36,7 @@
 		<BOUCLE_liste_lecture(DOCUMENTS) {id_article ?} {extension IN flv,mp3} {vu=non}{!par date}{0,10}>
 		[
 		<li>
-			<strong><a href="(#URL_DOCUMENT)" title="<:lm2:source:>" type="#MIME_TYPE" rel="enclosure">
+			<strong><a href="(#URL_DOCUMENT)" title="<:lm2:source:>" type="#MIME_TYPE" rel="media">
 			[<span class="title">(#TITRE|sinon{#FICHIER|lm2_joli_titre})</span>]</a></strong>
 			<small>(<span>#TYPE_DOCUMENT[ &ndash; (#TAILLE|taille_en_octets)]</span>)</small>#DATE
 			#DESCRIPTIF
