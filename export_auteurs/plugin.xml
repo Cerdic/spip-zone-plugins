@@ -25,7 +25,9 @@ _ &#169; 2009 - Distribu&#233; sous licences MIT et GPL
 	
 	<etat>stable</etat>
 	
-	<version>1.01.01</version>
+	<version>1.01.02</version>
+	
+	<lien>[Documentation->http://www.quesaco.org/Exporter-les-auteurs]</lien>
 	
 	<!-- espace de nommage -->
 	<prefix>exau</prefix>
