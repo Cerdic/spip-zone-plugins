@@ -4,6 +4,7 @@
 	<prefix>multidomaines</prefix>
 	<etat>test</etat>
 	<icon>images/logo-72.png</icon>
+	<lien>http://www.spip-contrib.net/article3127</lien> <!-- URI de documentation -->
 	<auteur>[Nathana&euml;l Louison->mailto:bennetteson@free.fr]</auteur>
 	<description>
 		Multidomaines permet d'associer des secteurs &agrave; un domaine
