@@ -83,6 +83,7 @@ function exau_statut_correct ($statut) {
 	if(!$statut && $complet) 
 	{
 		$statut = EXAU_STATUTS_AUTEURS;
+		return($statut);
 	}
 	else
 	{
