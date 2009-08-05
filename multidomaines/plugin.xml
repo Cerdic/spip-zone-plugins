@@ -2,7 +2,7 @@
 	<nom>Multidomaines</nom>
 	<version>1.0</version>
 	<prefix>multidomaines</prefix>
-	<etat>dev</etat>
+	<etat>test</etat>
 	<icon>images/logo-72.png</icon>
 	<auteur>[Nathana&euml;l Louison->mailto:bennetteson@free.fr]</auteur>
 	<description>
