@@ -23,9 +23,11 @@ _ &#169; 2009 - Distribu&#233; sous licences MIT et GPL
 		Pour personnaliser l'export, recopiez et adaptez le squelette {{lister_auteurs.html}} dans votre r&#233;pertoire de squelettes.
 	</description>
 	
+	<icon>images/export_auteurs-64.png</icon>
+	
 	<etat>stable</etat>
 	
-	<version>1.01.02</version>
+	<version>1.01.03</version>
 	
 	<lien>[Documentation->http://www.quesaco.org/Exporter-les-auteurs]</lien>
 	
