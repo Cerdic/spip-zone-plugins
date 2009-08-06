@@ -72,7 +72,7 @@ function seo_insert_head($flux) {
 	/* GOOGLE WEBMASTER TOOLS */
 	
 	if ($config['webmaster_tools']['activate'] == 'yes' && $type_object == 'sommaire') {
-		$flux .= '<meta name="verify-v1" content="'. $config['webmaster_tools']['id'] .'" >';
+		$flux .= '<meta name="verify-v1" content="'. $config['webmaster_tools']['id'] .'"/>';
 	}
 	
 	/* GOOGLE ANALYTICS */

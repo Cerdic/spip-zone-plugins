@@ -235,7 +235,7 @@ function exec_seo_config () {
 		. 	'(checkbox.attr(\'checked\')==true) ? form.slideDown()  : form.slideUp();'
 		. '}'
 		. (($config['meta_tags']['activate'] != 'yes') ? "$('.meta_tags_slide').hide();" : "")
-		. (($config['webmaster_tool']['activate'] != 'yes') ? "$('.webmaster_tools_slide').hide();" : "")
+		. (($config['webmaster_tools']['activate'] != 'yes') ? "$('.webmaster_tools_slide').hide();" : "")
 		. (($config['analytics']['activate'] != 'yes') ? "$('.analytics_slide').hide();" : "")
 		. '</script>'
 		;
