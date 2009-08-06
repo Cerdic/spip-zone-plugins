@@ -11,10 +11,8 @@ $extention = array_pop($hostArray);
 	
 do
 {
-	$return[] = $GLOBALS['meta']['multidomaines_squelettes'].'/https.'.implode('.',$hostArray).'.'.$extention;
-	$return[] = $GLOBALS['meta']['multidomaines_squelettes'].'/https.'.implode('.',$hostArray);
-	$return[] = $GLOBALS['meta']['multidomaines_squelettes'].'/http.'.implode('.',$hostArray).'.'.$extention;
-	$return[] = $GLOBALS['meta']['multidomaines_squelettes'].'/http.'.implode('.',$hostArray);
+	$return[] = $GLOBALS['meta']['multidomaines_squelettes'].'/'.implode('.',$hostArray).'.'.$extention.'.'.$_SERVER["SERVER_PORT"];
+	$return[] = $GLOBALS['meta']['multidomaines_squelettes'].'/'.implode('.',$hostArray).'.'.$_SERVER["SERVER_PORT"];
 	$return[] = $GLOBALS['meta']['multidomaines_squelettes'].'/'.implode('.',$hostArray).'.'.$extention;
 	$return[] = $GLOBALS['meta']['multidomaines_squelettes'].'/'.implode('.',$hostArray);
 	array_shift($hostArray);
