@@ -32,20 +32,8 @@ function gestdoc_upgrade($nom_meta_base_version,$version_cible){
 			|| (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){
 		if (version_compare($current_version,'0.2','<')){
 			include_spip('base/abstract_sql');
-			
 			sql_alter("TABLE spip_types_documents ADD media varchar(10) DEFAULT 'file' NOT NULL");
-			// mettre a jour les bonnes valeurs
-			// les cas evidents
-			sql_updateq('spip_types_documents',array('media'=>'image'),"mime_type REGEXP '^image/'");
-			sql_updateq('spip_types_documents',array('media'=>'audio'),"mime_type REGEXP '^audio/'");
-			sql_updateq('spip_types_documents',array('media'=>'video'),"mime_type REGEXP '^video/'");
-			// les cas particuliers ...
-			sql_updateq('spip_types_documents',array('media'=>'video'),"mime_type='application/ogg'");
-			sql_updateq('spip_types_documents',array('media'=>'video'),"mime_type='application/x-shockwave-flash'");
-			sql_updateq('spip_types_documents',array('media'=>'image'),"mime_type='application/illustrator'");
-			sql_updateq('spip_types_documents',array('media'=>'image'),"mime_type='application/illustrator'");
-			sql_updateq('spip_types_documents',array('media'=>'video'),"mime_type='application/mp4'");
-
+			gestdoc_check_type_media();
 			sql_alter("TABLE spip_documents ADD statut varchar(10) DEFAULT '0' NOT NULL");
 			ecrire_meta($nom_meta_base_version,$current_version="0.2",'non');
 		}
@@ -81,17 +69,7 @@ function gestdoc_upgrade($nom_meta_base_version,$version_cible){
 		if (version_compare($current_version,'0.6','<')){
 			include_spip('base/abstract_sql');
 			sql_alter("TABLE spip_types_documents ADD media varchar(10) DEFAULT 'file' NOT NULL");
-			// mettre a jour les bonnes valeurs
-			// les cas evidents
-			sql_updateq('spip_types_documents',array('media'=>'image'),"mime_type REGEXP '^image/'");
-			sql_updateq('spip_types_documents',array('media'=>'audio'),"mime_type REGEXP '^audio/'");
-			sql_updateq('spip_types_documents',array('media'=>'video'),"mime_type REGEXP '^video/'");
-			// les cas particuliers ...
-			sql_updateq('spip_types_documents',array('media'=>'video'),"mime_type='application/ogg'");
-			sql_updateq('spip_types_documents',array('media'=>'video'),"mime_type='application/x-shockwave-flash'");
-			sql_updateq('spip_types_documents',array('media'=>'image'),"mime_type='application/illustrator'");
-			sql_updateq('spip_types_documents',array('media'=>'image'),"mime_type='application/illustrator'");
-			sql_updateq('spip_types_documents',array('media'=>'video'),"mime_type='application/mp4'");
+			gestdoc_check_type_media();
 			ecrire_meta($nom_meta_base_version,$current_version="0.6",'non');
 		}
 		if (version_compare($current_version,'0.7','<')){
@@ -107,8 +85,21 @@ function gestdoc_upgrade($nom_meta_base_version,$version_cible){
 		}
 	}
 	gestdoc_check_statuts();
+	gestdoc_check_type_media();
 }
 
+function gestdoc_check_type_media(){
+	include_spip('base/abstract_sql');
+	// mettre a jour les bonnes valeurs
+	// les cas evidents
+	sql_updateq('spip_types_documents',array('media'=>'image'),"mime_type REGEXP '^image/'");
+	sql_updateq('spip_types_documents',array('media'=>'audio'),"mime_type REGEXP '^audio/'");
+	sql_updateq('spip_types_documents',array('media'=>'video'),"mime_type REGEXP '^video/'");
+	// les cas particuliers ...
+	sql_updateq('spip_types_documents',array('media'=>'video'),"mime_type='application/ogg' OR mime_type='application/x-shockwave-flash'");
+	sql_updateq('spip_types_documents',array('media'=>'image'),"mime_type='application/illustrator'");
+	sql_updateq('spip_types_documents',array('media'=>'video'),"mime_type='application/mp4'");
+}
 function gestdoc_check_statuts(){
 	$docs = array_map('reset',sql_allfetsel('id_document','spip_documents',"statut='0'"));
 	if (count($docs)){
@@ -124,6 +115,7 @@ function gestdoc_install($action,$prefix,$version_cible){
 	switch ($action){
 		case 'test':
 			gestdoc_check_statuts();
+			gestdoc_check_type_media();
 			return (isset($GLOBALS['meta'][$prefix."_base_version"])
 				AND version_compare($GLOBALS['meta'][$prefix."_base_version"],$version_cible,">="));
 			break;
