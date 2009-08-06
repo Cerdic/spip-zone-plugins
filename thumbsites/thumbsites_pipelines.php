@@ -14,7 +14,7 @@ function thumbsites_affiche_gauche($flux) {
 					$taille = _T('info_largeur_vignette', array('largeur_vignette' => $taille[0], 'hauteur_vignette' => $taille[1]));
 				$bouton = bouton_block_depliable(_T('thumbsites:titre_thumbshot_site'), false, "thumbshot-$id_syndic");
 
-				$cadre = '<div id="iconifier-thumbshot-$id_syndic" class="iconifier">';
+				$cadre = '<div id="iconifier-thumbshot-' . $id_syndic . '" class="iconifier">';
 				$cadre .= debut_cadre('r', find_in_path('images/thumbsites-24.gif'), '', $bouton, '', '', false);
 				$cadre .= '<div><a href="' . $thumbshot_cache . '">'. $img . '</a></div>';
 				$cadre .= debut_block_depliable(false,"thumbshot-$id_syndic") 
