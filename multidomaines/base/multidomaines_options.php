@@ -13,6 +13,16 @@ do
 {
 	$return[] = $GLOBALS['meta']['multidomaines_squelettes'].'/'.implode('.',$hostArray).'.'.$extention.'.'.$_SERVER["SERVER_PORT"];
 	$return[] = $GLOBALS['meta']['multidomaines_squelettes'].'/'.implode('.',$hostArray).'.'.$_SERVER["SERVER_PORT"];
+	array_shift($hostArray);
+}while (count($hostArray)>0);
+
+$hostArray = explode('.',$_SERVER['HTTP_HOST']);
+
+if (count($hostArray)==1) return $return = $hostArray;
+$extention = array_pop($hostArray);
+	
+do
+{
 	$return[] = $GLOBALS['meta']['multidomaines_squelettes'].'/'.implode('.',$hostArray).'.'.$extention;
 	$return[] = $GLOBALS['meta']['multidomaines_squelettes'].'/'.implode('.',$hostArray);
 	array_shift($hostArray);
