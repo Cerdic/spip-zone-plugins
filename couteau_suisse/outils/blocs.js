@@ -1,17 +1,20 @@
 // fonction de de/re-pliement
 jQuery.fn.blocs_toggle = function() {
 	if (!this.length) return this;
-	dest = this.toggleClass('blocs_replie')
+	// applique-t-on la fonction sur cs_blocs ou sur blocs_titre ?
+	var cible = this.hasClass('cs_blocs')? this.children('.blocs_titre').eq(0) : this;
+	// on replie la cible...
+	var dest = cible.toggleClass('blocs_replie')
 		.next().toggleClass('blocs_invisible')
 	// est-on sur un resume ?
 	if (dest.is('div.blocs_resume')) dest.next().toggleClass('blocs_invisible');
 	// est-on sur un bloc ajax ?
-	url = this.children().attr("href");
+	var url = cible.children().attr("href");
 	if(url != 'javascript:;') {
 		// une fois le bloc ajax en place, plus besoin de le recharger ensuite
-		this.children().attr("href", 'javascript:;');
+		cible.children().attr("href", 'javascript:;');
 		// ici, on charge !
-		this.parent().children(".blocs_destination")
+		cible.parent().children(".blocs_destination")
 		//.animeajax()
 		.load(url);
 	}
@@ -21,11 +24,17 @@ jQuery.fn.blocs_toggle = function() {
 // replie tout sauf le bloc appelant et sa lignee parentale
 jQuery.fn.blocs_replie_tout = function() {
 	if(blocs_replier_tout) {
-		var lignee = this.parents('div.cs_blocs').children('.blocs_titre');
+		// applique-t-on la fonction sur cs_blocs ou sur blocs_titre ?
+		var cible = this.hasClass('cs_blocs')? this : this.parents('div.cs_blocs');
+		// lignee du bloc
+		var lignee = cible.children('.blocs_titre');
 		jQuery('.blocs_titre').not('.blocs_replie').not(lignee).blocs_toggle();
 	}
 	return this;
 }
+
+// une variable globale stockant le(s) bloc(s) a deplier si un clic ajax a eu lieu
+var blocs_clic_ajax = null;
 
 // compatibilite Ajax : ajouter "this" a "jQuery" pour mieux localiser les actions 
 // et tagger avec cs_done pour eviter de binder plrs fois le meme bloc
@@ -36,7 +45,26 @@ function blocs_init() {
 		jQuery(this).blocs_replie_tout().blocs_toggle();
 		// annulation du clic
 		return false;
-		});
+	   });
+
+/*
+// LA SUITE DE CE CODE NE FONCTIONNE POUR L'INSTANT QUE SUR LE PREMIER CLIC, JE NE SAIS PAS ENCORE PKOI...
+	// stockage du bloc (numerote !) a reouvrir dans le cas d'un clic ajax sur une 
+	// pagination SPIP contenue a l'interieur
+	jQuery(".ajaxbloc .pagination a.noajax", this).not('.cs_done').addClass('cs_done')
+	  .click( function(){
+		var parent = jQuery(this).parents('.cs_blocs');
+		if(!parent.length) return true;
+		var numero = /cs_bloc\d+/.exec(parent[0].className);
+		if(numero!==null) blocs_clic_ajax = numero[0];
+		return true;
+	   });
+	// rouvre le nouveau bloc ajax si un clic a eu lieu a l'interieur de l'ancien
+	if(blocs_clic_ajax!==null) {
+		jQuery('.'+blocs_clic_ajax, this).blocs_toggle();
+		blocs_clic_ajax = null
+	}
+*/
 }
 
 // un JS actif replie les blocs invisibles
@@ -50,7 +78,7 @@ function cs_blocs_cookie() {
 	var deplies = jQuery.cookie(blocs_cookie_name);
 	jQuery.cookie(blocs_cookie_name, null);
 	if(deplies)
-		jQuery(deplies).children('.blocs_titre').blocs_replie_tout().blocs_toggle();
+		jQuery(deplies).blocs_replie_tout().blocs_toggle();
 	jQuery(window).bind('unload', function() {
 		jQuery.cookie(blocs_cookie_name, blocs_deplies());
 	});
@@ -74,6 +102,7 @@ function blocs_get_pagination(url) {
 	if (tab==null) return false;
 	return tab[1];
 }
+
 var blocs_pagination = blocs_get_pagination(window.location.hash);
 
 /*
