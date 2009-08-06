@@ -14,7 +14,7 @@ function gravatar_affiche_gauche($flux) {
 					$taille = _T('info_largeur_vignette', array('largeur_vignette' => $taille[0], 'hauteur_vignette' => $taille[1]));
 				$bouton = bouton_block_depliable(_T('gravatar:titre_gravatar_auteur'), false, "gravatar-$id_auteur");
 
-				$cadre_gravatar = '<div id="iconifier-gravatar-$id_auteur" class="iconifier">';
+				$cadre_gravatar = '<div id="iconifier-gravatar-' . $id_auteur . '" class="iconifier">';
 				$cadre_gravatar .= debut_cadre('r', find_in_path('images/gravatar-24.gif'), '', $bouton, '', '', false);
 				$cadre_gravatar .= '<div><a href="' . $gravatar_cache . '">'. $img . '</a></div>';
 				$cadre_gravatar .= debut_block_depliable(false,"gravatar-$id_auteur") 
