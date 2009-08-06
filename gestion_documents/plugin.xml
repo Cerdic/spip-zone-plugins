@@ -8,7 +8,7 @@
 	<icon>img_pack/portfolio-64.png</icon>
 	<auteur>[Cedric MORIN->http://www.yterium.net] &amp; [romy.tetue.net->http://romy.tetue.net]
 	</auteur>
-	<version>0.3</version>
+	<version>1.0</version>
 	<version_base>0.8</version_base>
 	<etat>stable</etat>
 	<description><multi>
@@ -55,6 +55,6 @@
 		<icone>img_pack/portfolio-24.png</icone>
 		<url>portfolio</url>
 	</bouton>	
-	<necessite id="SPIP" version="[2.0.0;]" />
-	<necessite id="spip_bonux" version="[1.6;]" />
+	<necessite id="SPIP" version="[2.0.9;]" />
+	<necessite id="spip_bonux" version="[1.8;]" />
 </plugin>
