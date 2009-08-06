@@ -9,16 +9,16 @@
 <lien>http://www.spip-contrib.net/?rubrique1165</lien>
 <prefix>nospam</prefix>
 <pipeline>
-<nom>pre_edition</nom>
-<inclure>nospam_pipelines.php</inclure>
+	<nom>pre_edition</nom>
+	<inclure>nospam_pipelines.php</inclure>
 </pipeline>
 <pipeline>
-<nom>formulaire_charger</nom>
-<inclure>nospam_pipelines.php</inclure>
+	<nom>formulaire_charger</nom>
+	<inclure>nospam_pipelines.php</inclure>
 </pipeline>
 <pipeline>
-<nom>formulaire_verifier</nom>
-<inclure>nospam_pipelines.php</inclure>
+	<nom>formulaire_verifier</nom>
+	<inclure>nospam_pipelines.php</inclure>
 </pipeline>
 <necessite id="SPIP" version="[2.0.0;]" />
 </plugin>
