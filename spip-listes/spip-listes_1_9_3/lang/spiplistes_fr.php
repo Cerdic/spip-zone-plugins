@@ -22,11 +22,11 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 
 // action/spiplistes_supprimer_abonne.php
 // balise/formulaire_abonnement.php
-, 'inscription_liste_f' => 'Vous avez choisi de recevoir les courriers adress&eacute;s &agrave; la liste suivante en format @f@ : '
+, 'inscription_liste_f' => 'Vous avez choisi de recevoir les courriers adress&eacute;s &#224; la liste suivante en format @f@ : '
 , 'inscription_listes_f' => 'Vous avez choisi de recevoir les courriers adress&eacute;s aux listes suivantes en format @f@ : '
 , 'inscription_reponse_s' => "Vous &#234;tes abonn&#233; &#224; la liste d'information du site @s@"
 , 'inscription_reponses_s' => 'Vous &ecirc;tes abonn&eacute; aux listes d\'informations du site @s@'
-, 'vous_abonne_aucune_liste' => "Vous n'&ecirc;tes pas abonn&eacute; &agrave; une liste de diffusion"
+, 'vous_abonne_aucune_liste' => "Vous n'&ecirc;tes pas abonn&eacute; &#224; une liste de diffusion"
 , 'liste_dispo_site_' => "Liste de diffusion disponible sur ce site : "
 , 'listes_dispos_site_' => "Listes de diffusion disponibles sur ce site : "
 , 'desole_pas_de_liste' => "D&#233;sol&#233;, il n&#39;y a pas de liste de diffusion disponible pour le moment."
@@ -35,7 +35,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'abonnement_mail_passcookie' => "
 	<br />
 	Pour modifier votre abonnement aux lettres d'information du site <strong>@nom_site_spip@</strong> (@adresse_site@), 	
-	veuillez vous rendre &agrave; l'adresse suivante :<br /><br />
+	veuillez vous rendre &#224; l'adresse suivante :<br /><br />
 	<a href='@adresse_site@/spip.php?page=abonnement&d=@cookie@'>@adresse_site@/spip.php?page=abonnement&d=@cookie@</a><br /><br />
 	Vous pourrez alors confirmer la modification de votre abonnement.
 	<br/>"
@@ -50,7 +50,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 	Ce lien vous permettra de s&#233;lectionner les listes de diffusion publi&#233;es ici.
 	"
 , 'confirmation_inscription' => "Confirmation de votre inscription"
-, 'souhait_modifier_abo'=>'Vous souhaitez modifier votre abonnement &agrave; la lettre d\'information'
+, 'souhait_modifier_abo'=>'Vous souhaitez modifier votre abonnement &#224; la lettre d\'information'
 , 'suspendre_abonnement_' => "Suspendre mon abonnement "
 , 'vous_etes_redact' => "Vous &#234;tes inscrit en tant que r&#233;dacteur."
 , 'vous_etes_membre' => "Vous &#234;tes membre abonn&#233; aux listes de diffusion de ce site.
@@ -84,7 +84,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
    Vous pouvez &eacute;galement d&eacute;sabonner temporairement ce contact. 
    Il reste inscrit dans les listes en tant que destinataire, mais les courriers 
    ne lui seront pas envoy&eacute;s tant que vous ne lui aurez pas d&eacute;fini un format de r&eacute;ception de courriers."
-, 'mettre_a_jour' => '<h3>SPIP-listes va mettre &agrave; jour</h3>'
+, 'mettre_a_jour' => '<h3>SPIP-listes va mettre &#224; jour</h3>'
 , 'regulariser' => 'regulariser les desabonnes avec listes...<br />'
 , 'Supprimer_ce_contact' => "Supprimer ce contact"
 , 'abonne_listes' => "Ce contact est abonn&eacute; aux listes suivantes"
@@ -97,7 +97,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'chercher_un_auteur' => "Chercher un auteur"
 , 'une_inscription' => 'Un abonn&eacute; trouv&eacute;'
 , 'suivi' => 'Suivi des abonnements' // + presentation
-, 'abonne_aucune_liste' => 'Abonn&eacute;s &agrave; aucune liste'
+, 'abonne_aucune_liste' => 'Abonn&eacute;s &#224; aucune liste'
 , 'format_aucun' => "Aucun"
 , 'repartition_formats' => "R&eacute;partition des formats"
 
@@ -114,7 +114,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'requiert_identification' => "Requiert une identification"
 , 'adresse_smtp' => "Adresse email du <em>sender</em> SMTP"
 , '_aide_install' => "<p>Bienvenue dans le monde de SPIP-Listes.</p>
-	<p class='verdana2'>Par d&eacute;faut, &agrave; l'installation, SPIP-Listes est en mode <em>simulation 
+	<p class='verdana2'>Par d&eacute;faut, &#224; l'installation, SPIP-Listes est en mode <em>simulation 
 	d'envoi</em> afin de vous permettre de d&eacute;couvrir les fonctionnalit&eacute;s 
 	et d'effectuer vos premiers tests.</p>
 	<p class='verdana2'>Pour valider les diff&eacute;rentes options de SPIP-Listes, rendez-vous <a href='@url_config@'>sur 
@@ -173,14 +173,14 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'a_partir_de_patron' => "A partir d'un patron"
 , 'avec_introduction' => "Avec texte d'introduction"
 , 'calcul_patron_attention' => "Certains patrons ins&egrave;rent dans leur r&eacute;sultat le texte ci-dessous (Texte du courrier). 
-	Si vous faites une mise &agrave; jour de votre courrier, pensez &agrave; vider cette boîte avant de g&eacute;n&eacute;rer le contenu."
+	Si vous faites une mise &#224; jour de votre courrier, pensez &#224; vider cette boîte avant de g&eacute;n&eacute;rer le contenu."
 , 'charger_patron' => 'Choisir un patron pour le courrier'
 , 'Courrier_numero_' => "Courrier num&eacute;ro :" // + _gerer
 , 'Creer_un_courrier_' => "Cr&eacute;er un courrier :"
 , 'choisir_un_patron_' => "Choisir un patron "
 , 'Courrier_edit_desc' => 'Vous pouvez choisir de g&eacute;n&eacute;rer automatiquement le contenu du courrier
 	ou r&eacute;diger simplement votre courrier dans la bo&icirc;te <strong>texte du courrier</strong>.'
-, 'Contenu_a_partir_de_date_' => "Contenu &agrave; partir de cette date "
+, 'Contenu_a_partir_de_date_' => "Contenu &#224; partir de cette date "
 , 'Cliquez_Generer_desc' => "Cliquez sur <strong>@titre_bouton@</strong> pour injecter le r&eacute;sultat 
 	dans la bo&icirc;te @titre_champ_texte@."
 , 'Lister_articles_de_rubrique' => "Et lister les articles de la rubrique "
@@ -190,7 +190,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'generer_patron_' => "G&eacute;n&eacute;rer le patron "
 , 'generer_patron_avant' => "avant le sommaire"
 , 'generer_patron_apres' => "apr&egrave;s le sommaire."
-, 'introduction_du_courrier_' => "Introduction &agrave; votre courrier, avant le contenu issu du site "
+, 'introduction_du_courrier_' => "Introduction &#224; votre courrier, avant le contenu issu du site "
 , 'Modifier_un_courrier__' => "Modifier un courrier :"
 , 'Modifier_ce_courrier' => "Modifier ce courrier"
 , 'sujet_courrier' => '<strong>Sujet du courrier</strong> [obligatoire]'
@@ -225,7 +225,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'message_en_cours' => 'Ce courrier est en cours de r&eacute;daction'
 , 'modif_envoi' => 'Vous pouvez le modifier ou demander son envoi'
 , 'message_presque_envoye' =>'Ce courrier est sur le point d\'&ecirc;tre envoy&eacute;'
-, 'Erreur_Adresse_email_inconnue' => 'Attention, l\'adresse email de test que vous avez fournie ne correspond &agrave; 
+, 'Erreur_Adresse_email_inconnue' => 'Attention, l\'adresse email de test que vous avez fournie ne correspond &#224; 
 	aucun abonn&eacute;, <br />l\'envoi ne peut se faire, veuillez reprendre la proc&eacute;dure<br /><br />'
 
 // exec/spiplistes_courrier_previsu.php
@@ -235,7 +235,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 // exec/spiplistes_import_export.php
 , 'Exporter_une_liste_d_abonnes' => "Exporter une liste d'abonn&eacute;s"
 , 'Exporter_une_liste_de_non_abonnes' => "Exporter une liste de non abonn&eacute;s"
-, '_aide_import' => "Vous pouvez importer ici une liste d'abonn&eacute;s &agrave; partir de votre 
+, '_aide_import' => "Vous pouvez importer ici une liste d'abonn&eacute;s &#224; partir de votre 
    ordinateur.<br />
 	Cette liste d'abonn&eacute;s doit &ecirc;tre au format texte seul, une ligne 
    par abonn&eacute;. Chaque ligne doit &ecirc;tre compos&eacute;e ainsi :<br />
@@ -263,14 +263,14 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'Tous_les_ans' => "Tous les ans"
 , 'version_html' => '<strong>Version HTML</strong>'
 , 'version_texte' => '<strong>Version texte</strong>'
-, 'erreur_import' => 'Le fichier d\'import pr&eacute;sente une erreur &agrave; la ligne '
+, 'erreur_import' => 'Le fichier d\'import pr&eacute;sente une erreur &#224; la ligne '
 , 'envoi_manuel' => "Envoi manuel"
 , 'format_date' => 'Y/m/d'
 , 'importer' => 'Importer une liste d\'abonn&eacute;s'
 , 'importer_fichier' => 'Importer un fichier'
 , 'importer_fichier_txt' => '<p><strong>Votre liste d\'abonn&eacute;s doit &ecirc;tre un fichier simple (texte) 
 	qui ne comporte qu\'une adresse e-mail par ligne</strong></p>'
-, 'importer_preciser' => '<p>Pr&eacute;cisez les listes et le format correspondant &agrave; votre import d\'abonn&eacute;s</p>'
+, 'importer_preciser' => '<p>Pr&eacute;cisez les listes et le format correspondant &#224; votre import d\'abonn&eacute;s</p>'
 , 'prochain_envoi_prevu' => 'Prochain envoi pr&eacute;vu' // + gerer
 , 'option_import_' => "Option d'importation "
 , 'forcer_abos_' => "Forcer les abonnements (si l&#39;adresse mail existe dans la base, forcer l&#39;abonnement
@@ -291,7 +291,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'texte_contenu_pied' => '<br />(Message ajout&eacute; en bas de chaque email au moment de l\'envoi)<br />'
 , 'texte_pied' => '<p><strong>Texte du pied de page</strong>'
 , 'modifier_liste' => 'Modifier cette liste '
-, 'txt_abonnement' => '(Indiquez ici le texte pour l\'abonnement &agrave; cette liste, affich&eacute; 
+, 'txt_abonnement' => '(Indiquez ici le texte pour l\'abonnement &#224; cette liste, affich&eacute; 
 	sur le site public si la liste est active)'
 
 // exec/spiplistes_liste_gerer.php
@@ -300,18 +300,18 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'liste_sans_titre' => 'Liste sans titre'
 , 'statut_interne' => "Priv&eacute;"
 , 'statut_publique' => "Publique"
-, 'adresse' => "Indiquez ici l&#39;adresse &agrave; utiliser pour les r&eacute;ponses de mails 
-	(&agrave; d&eacute;faut, l&#39;adresse du webmestre sera utilis&eacute;e comme adresse de r&eacute;ponse) :"
+, 'adresse' => "Indiquez ici l&#39;adresse &#224; utiliser pour les r&eacute;ponses de mails 
+	(&#224; d&eacute;faut, l&#39;adresse du webmestre sera utilis&eacute;e comme adresse de r&eacute;ponse) :"
 , 'Ce_courrier_ne_sera_envoye_qu_une_fois' => "Ce courrier ne sera envoy&eacute; qu'une fois."
 , 'adresse_de_reponse' => "Adresse de r&eacute;ponse"
 , 'adresse_mail_retour' => 'Adresse email du gestionnaire de la liste (reply-to)'
 , 'Attention_action_retire_invites' => "Attention: cette action retire les invit&eacute;s de la liste des abonn&eacute;s."
-, 'A_partir_de' => "&Agrave; partir de"
+, 'A_partir_de' => "&#224; partir de"
 , 'Apercu_plein_ecran' => "Aper&ccedil;u plein &eacute;cran dans une nouvelle fen&ecirc;tre"
 , 'Attention_suppression_liste' => "Attention ! Vous demandez la suppression d'une liste de diffusion. 
 	Les abonn&eacute;s seront retir&eacute;s de cette liste de diffusion automatiquement. "
-, 'Abonner_tous_les_invites_public' => "Abonner tous les membres invit&eacute;s &agrave; cette liste publique."
-, 'Abonner_tous_les_inscrits_prives' => "Abonner tous les membres &agrave; cette liste priv&eacute;e, sauf les visiteurs."
+, 'Abonner_tous_les_invites_public' => "Abonner tous les membres invit&eacute;s &#224; cette liste publique."
+, 'Abonner_tous_les_inscrits_prives' => "Abonner tous les membres &#224; cette liste priv&eacute;e, sauf les visiteurs."
 , 'boite_confirmez_envoi_liste' => "Vous avez demand&eacute; l'envoi imm&eacute;diat de cette liste 
 	de diffusion.<br />
 	Svp, veuillez confirmer votre demande."
@@ -320,7 +320,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'Confirmez_requete' => "Veuillez confirmer la requ&ecirc;te."
 , 'date_expedition_' => "Date d'exp&eacute;dition "
 , 'Dernier_envoi_le_' => "Dernier envoi le :"
-, 'forcer_abonnement_desc' => "Vous pouvez forcer ici les abonnements &agrave; cette liste, soit pour tous 
+, 'forcer_abonnement_desc' => "Vous pouvez forcer ici les abonnements &#224; cette liste, soit pour tous 
    les membres inscrits (visiteurs, auteurs et administrateurs), soit pour tous 
    les visiteurs."
 , 'forcer_abonnement_aide' => "<strong>Attention</strong>: un membre abonn&eacute; ne re&ccedil;oit pas forc&eacute;ment 
@@ -341,7 +341,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'liste_sans_patron' => "Liste sans patron." // courriers_listes
 , 'Patron_grand_' => "Grand patron "
 , 'sommaire_date_debut' => "A partir de la date définie ci-dessus"
-, 'abos_cette_liste' => "Les abonn&eacute;s &agrave; cette liste"
+, 'abos_cette_liste' => "Les abonn&eacute;s &#224; cette liste"
 , 'confirme_envoi' => 'Veuillez confirmer l\'envoi'
 , 'env_esquel' => 'Envoi programm&eacute; du patron'
 , 'env_maint' => 'Envoyer maintenant'
@@ -352,7 +352,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'prog_env' => 'Programmer un envoi automatique'
 , 'prog_env_non' => 'Ne pas programmer d\'envoi'
 , 'conseil_regenerer_pied' => "<br />Ce patron est issu d'une ancienne version de SPIP-Listes.<br />
-	Conseil: s&eacute;lectionnez &agrave; nouveau le patron de pied pour prendre en compte le multilinguisme 
+	Conseil: s&eacute;lectionnez &#224; nouveau le patron de pied pour prendre en compte le multilinguisme 
 	et/ou la version &#39;texte seul&#39; du patron."
 , 'boite_alerte_manque_vrais_abos' => "Il n&#39;y a pas d&#39;abonn&eacute;s pour cette liste de diffusion,
 	ou les abonn&eacute;s n'ont pas de format de r&eacute;ception.
@@ -415,14 +415,14 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'mode_debug_actif' => "Mode debug actif"
 
 // inc/spiplistes_api_presentation.php
-, '_aide' => '<p>SPIP-Listes permet d\'envoyer un courrier ou des courriers automatiques &agrave; des abonn&eacute;s.</p>
-	<p>Vous pouvez &eacute;crire un texte simple, composer votre courrier en HTML ou appliquer un "patron" &agrave; 
+, '_aide' => '<p>SPIP-Listes permet d\'envoyer un courrier ou des courriers automatiques &#224; des abonn&eacute;s.</p>
+	<p>Vous pouvez &eacute;crire un texte simple, composer votre courrier en HTML ou appliquer un "patron" &#224; 
 	votre courrier</p>
 	<p>Via un formulaire d\'inscription public, les abonn&eacute;s d&eacute;finissent eux-m&ecirc;mes leur statut d\'abonnement, 
 	les listes auxquelles ils s\'abonnent et le format
 	dans lequel ils souhaitent recevoir les courriers (HTML/texte). </p>
 	<p>Tout courrier sera traduit automatiquement en format texte pour les abonn&eacute;s qui en ont fait la demande.</p>
-	<p><strong>Note :</strong><br />L\'envoi des mails peut prendre quelques minutes : les lots partent peu &agrave; 
+	<p><strong>Note :</strong><br />L\'envoi des mails peut prendre quelques minutes : les lots partent peu &#224; 
 	peu quand les utilisateurs parcourent le site public. Vous pouvez aussi provoquer manuellement l\'envoi des lots 
 	en cliquant sur le lien "suivi des envois" pendant un envoi.</p>'
 , 'envoi_en_cours' => 'Envoi en cours'
@@ -434,7 +434,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'utilisez_formulaire_ci_contre' => "Utilisez le formulaire ci-contre pour activer/d&eacute;activer cette option."
 , 'texte_boite_en_cours' => 'SPIP-Listes envoie un courrier.<p>Cette boite disparaitra une fois l\'envoi achev&eacute;.</p>'
 , 'meleuse_suspendue_info' => "L'envoi des courriers en attente d'exp&eacute;dition est suspendu."
-, 'casier_a_courriers' => "Casier &agrave; courriers" // + courriers_casier
+, 'casier_a_courriers' => "Casier &#224; courriers" // + courriers_casier
 , 'Pas_de_donnees' => "D&eacute;sol&eacute;, mais l'enregistrement demand&eacute; n'existe pas dans la base de donn&eacute;es."
 , '_dont_n_sans_format_reception' => ", dont @n@ sans format de r&eacute;ception"
 , 'mode_simulation' => "Mode simulation"
@@ -482,7 +482,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'envoi_annule' => 'Envoi annul&eacute;'
 , 'sans_adresse' => ' Mail non envoy&eacute; -> Veuillez d&eacute;finir une adresse de r&eacute;ponse'
 , 'erreur_mail' => 'Erreur : envoi du mail impossible (v&eacute;rifier si mail() de php est disponible)'
-, 'abonnement_mail_text' => 'Pour modifier votre abonnement, veuillez vous rendre &agrave; l\'adresse suivante : '
+, 'abonnement_mail_text' => 'Pour modifier votre abonnement, veuillez vous rendre &#224; l\'adresse suivante : '
 , 'msg_abonne_sans_format' => "format de reception manquant"
 , 'Cliquez_ici_pour_modifier_votre_abonnement' => "<br />Cliquez ici pour modifier votre abonnement"
 
@@ -492,7 +492,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'Adresse_email_obligatoire' => "Une adresse email est obligatoire pour pouvoir vous abonner aux listes de diffusion. 
 	Si vous d&eacute;sirez profiter de ce service, merci de modifier votre fiche en compl&eacute;tant ce champ. "
 , 'Alert_abonnement_sans_format' => "Votre abonnement est suspendu. Vous ne recevrez pas les courriers des listes de 
-	diffusion list&eacute;es ci-dessous. Pour recevoir &agrave; nouveau le courrier 
+	diffusion list&eacute;es ci-dessous. Pour recevoir &#224; nouveau le courrier 
 	de vos listes pr&eacute;f&eacute;r&eacute;es, choisissez un format de r&eacute;ception 
 	et validez ce formulaire. "
 , 'abonnements_aux_courriers' => "Abonnements aux courriers"
@@ -510,7 +510,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 
 // formulaires, patrons, etc.
 , 'abo_1_lettre' => 'Liste de diffusion '
-, 'abonnement_seule_liste_dispo' => "Abonnement &agrave; la seule liste disponible "
+, 'abonnement_seule_liste_dispo' => "Abonnement &#224; la seule liste disponible "
 , 'abo_listes' => 'Abonnement'
 , 'abonnement_0' => 'Abonnement'
 , 'abonnement_titre_mail'=>'Modifier votre abonnement'
@@ -524,7 +524,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'abonnement_change_format' => "Vous pouvez changer de format de r&eacute;ception ou vous d&eacute;sabonner : "
 , 'abonnement_texte_mail' => 'Indiquez ci-dessous l\'adresse email sous laquelle vous vous &ecirc;tes 
 	pr&eacute;c&eacute;demment enregistr&eacute;. 
-	Vous recevrez un email permettant d\'acc&eacute;der &agrave; la page de modification de votre abonnement.'
+	Vous recevrez un email permettant d\'acc&eacute;der &#224; la page de modification de votre abonnement.'
 , 'article_entier' => 'Lire l\'article entier'
 , 'form_forum_identifiants' => 'Confirmation'
 , 'form_forum_identifiant_confirm'=>'Votre inscription est enregistr&#233;e. Vous allez recevoir un mail de confirmation.'
@@ -544,7 +544,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 	"
 , 'inscription_mail_forum' => 'Voici vos identifiants pour vous connecter au site @nom_site_spip@ (@adresse_site@)'
 , 'inscription_mail_redac' => 'Voici vos identifiants pour vous connecter au site @nom_site_spip@ (@adresse_site@) 
-	et &agrave; l\'interface de r&eacute;daction (@adresse_site@/ecrire)'
+	et &#224; l\'interface de r&eacute;daction (@adresse_site@/ecrire)'
 , 'inscription_visiteurs' => 'L&acute;abonnement vous permet 
 	d&acute;intervenir sur les forums r&eacute;serv&eacute;s aux visiteurs enregistr&eacute;s et de recevoir 
 	les lettres d&acute;informations.'
@@ -552,7 +552,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 	Une fois enregistr&#233;, vous pourrez consulter les articles en cours de r&#233;daction, proposer des articles
 	et participer &#224; tous les forums.  L&#39;inscription permet &#233;galement d&#39;acc&#233;der aux parties du 
 	site en acc&#232;s restreint et de recevoir les lettres d&#39;informations."
-, 'mail_non' => 'Vous n\'&ecirc;tes pas abonn&eacute; &agrave; la lettre d\'information du site @nom_site_spip@'
+, 'mail_non' => 'Vous n\'&ecirc;tes pas abonn&eacute; &#224; la lettre d\'information du site @nom_site_spip@'
 , 'messages_auto' => 'Courriers automatiques'
 , 'nouveaute_intro' => 'Bonjour, <br />Voici les nouveaut&eacute;s publi&eacute;es sur le site'
 , 'nom' => 'Nom d\'utilisateur'
@@ -560,13 +560,13 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'vous_pouvez_egalement' => 'Vous pouvez &eacute;galement'
 , 'vous_inscrire_auteur' => 'vous inscrire en tant qu\'auteur'
 , 'voir_discussion' => 'Voir la discussion'
-, 'inconnu' => 'n\'est plus abonn&eacute; &agrave; la liste'
+, 'inconnu' => 'n\'est plus abonn&eacute; &#224; la liste'
 , 'infos_liste' => 'Informations sur cette liste'
 , 'editeur' => 'Editeur : '
 , 'html_description' => " Texte enrichi (caract&egrave;res en gras ou en italique, parfois accompagn&eacute; d&#39;images)"
 , 'texte_brut' => "Texte brut"
 , 'vous_etes_abonne_aux_listes_' => "Vous &ecirc;tes abonn&eacute; aux listes de diffusion :"
-, 'vous_etes_abonne_a_la_liste_' => "Vous &ecirc;tes abonn&eacute; &agrave; la liste de diffusion :"
+, 'vous_etes_abonne_a_la_liste_' => "Vous &ecirc;tes abonn&eacute; &#224; la liste de diffusion :"
 
 // tableau items *_options
 , 'Liste_de_destination' => "Liste de destination"
@@ -581,18 +581,18 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'Liste_mensuelle' => "Liste mensuelle"
 , 'Publiques_mensuelles' => "Publiques, mensuelles"
 , 'Listes_diffusion_mensuelle' => "Listes publiques mensuelles"
-, 'Listes_diffusion_publiques_desc' => "L'abonnement &agrave; ces listes est propos&eacute; sur le site public."
+, 'Listes_diffusion_publiques_desc' => "L'abonnement &#224; ces listes est propos&eacute; sur le site public."
 , 'Liste_annuelle' => "Liste annuelle"
 , 'Publiques_annuelles' => "Publiques, annuelles"
 , 'Listes_diffusion_annuelle' => "Listes publiques annuelles"
 , 'Listes_diffusion_publique' => 'Listes de diffusion publiques'
 , 'Listes_diffusion_privees' => 'Listes de diffusion priv&eacute;es'
-, 'Listes_diffusion_privees_desc' => "L'abonnement &agrave; ces listes est réserv&eacute;e aux administrateurs et auteurs du site."
+, 'Listes_diffusion_privees_desc' => "L'abonnement &#224; ces listes est réserv&eacute;e aux administrateurs et auteurs du site."
 , 'Listes_diffusion_suspendue' => 'Listes de diffusion suspendues'
 , 'Listes_diffusion_suspendue_desc' => " "
 , 'Courriers_en_cours_de_redaction' => 'Courriers en cours de r&eacute;daction'
 , 'Courriers_en_cours_denvoi' => 'Courriers en cours d\'envoi'
-, 'Courriers_prets_a_etre_envoye' => "Courriers pr&ecirc;ts &agrave; &ecirc;tre envoy&eacute;s"
+, 'Courriers_prets_a_etre_envoye' => "Courriers pr&ecirc;ts &#224; &ecirc;tre envoy&eacute;s"
 , 'Courriers_publies' => "Courriers publi&eacute;s"
 , 'Courriers_auto_publies' => "Courriers automatiques publi&eacute;s"
 , 'Courriers_stope' => "Courriers stopp&eacute;s en cours d'envoi"
@@ -602,7 +602,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'devenir_redac'=>'Devenir r&eacute;dacteur pour ce site'
 , 'devenir_membre'=>'Devenir membre du site'
 , 'devenir_abonne' => "Vous inscrire sur ce site"
-, 'desabonnement_valid'=>'L\'adresse suivante n\'est plus abonn&eacute;e &agrave; la lettre d\'information' 
+, 'desabonnement_valid'=>'L\'adresse suivante n\'est plus abonn&eacute;e &#224; la lettre d\'information' 
 , 'pass_recevoir_mail'=>'Vous allez recevoir un email vous indiquant comment modifier votre abonnement. '
 , 'discussion_intro' => 'Bonjour, <br />Voici les discussions d&eacute;marr&eacute;es sur le site'
 , 'En_redaction' => "En r&eacute;daction"
@@ -616,8 +616,8 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'Envoi_abandonne' => "Envoi abandonn&eacute;"
 , 'Liste_prive' => "Liste priv&eacute;e"
 , 'Liste_publique' => "Liste publique"
-, 'message_redac' => 'En cours de r&eacute;daction et pr&ecirc;t &agrave; l\'envoi'
-, 'Prets_a_envoi' => "Pr&ecirc;ts &agrave; l'envoi"
+, 'message_redac' => 'En cours de r&eacute;daction et pr&ecirc;t &#224; l\'envoi'
+, 'Prets_a_envoi' => "Pr&ecirc;ts &#224; l'envoi"
 , 'Publies' => "Publi&eacute;s"
 , 'publies_auto' => "Publi&eacute;s (auto)"
 , 'Stoppes' => "Stopp&eacute;s"
@@ -679,28 +679,28 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'erreur_destinataire' => 'Erreur destinataire : pas d\'envoi'
 , 'contacts_lot' => 'Contacts de ce lot'
 , 'envoi_fini' => 'Envois termin&eacute;s'
-, 'non_courrier' => 'Pas / plus de courrier &agrave; envoyer'
+, 'non_courrier' => 'Pas / plus de courrier &#224; envoyer'
 , 'non_html' => 'Votre logiciel de messagerie ne peut apparemment pas afficher correctement la version graphique (HTML) de cet e-mail'
 , 'envoi_erreur' => 'Erreur : SPIP-Listes ne trouve pas de destinataire pour ce courrier'
 , 'email_reponse' => 'Email de r&eacute;ponse : '
-, 'envoi_listes' => 'Envoi &agrave; destination des abonn&eacute;s &agrave; la liste : '
+, 'envoi_listes' => 'Envoi &#224; destination des abonn&eacute;s &#224; la liste : '
 , 'confirmer' => 'Confirmer'
 , 'listes_emails' => 'Lettres d\'information'
 , 'info_liste_1' => 'liste'
 , 'bonjour' => 'Bonjour,' // deja dans SPIP
-, 'envoi_tous' => 'Envoi &agrave; destination de tous les inscrits'
+, 'envoi_tous' => 'Envoi &#224; destination de tous les inscrits'
 , 'patron_detecte' => '<p><strong>Patron d&eacute;tect&eacute; pour la version texte</strong><p>'
 , 'val_texte' => 'Texte'
 , 'membres_sans_messages_connecte' => 'Vous n\'avez pas de nouveaux messages'
 , 'messages_derniers' => 'Derniers Messages'
 , 'pas_abonne_en_ce_moment' => "n'est pas abonn&eacute;"
 , 'reinitialiser' => 'reinitialiser'
-, 'mail_a_envoyer' => 'Nombre de mails &agrave; envoyer : '
+, 'mail_a_envoyer' => 'Nombre de mails &#224; envoyer : '
 , 'lettre_d_information' => 'Lettre d\'information'
 , 'desole' => 'D&eacute;sol&eacute;'
 , 'Historique_des_envois' => 'Historique des envois'
 , 'patron_disponibles' => 'Patrons disponibles'
-, 'liste_diff_publiques' => 'Listes de diffusion publiques<br /><i>La page du site public propose l\'inscription &agrave; ces listes.</i>'
+, 'liste_diff_publiques' => 'Listes de diffusion publiques<br /><i>La page du site public propose l\'inscription &#224; ces listes.</i>'
 , 'messages_non_lus_grand' => 'Pas de nouveaux messages'
 , 'messages_repondre' => 'Nouvelle R&eacute;ponse'
 , 'Liste_abandonnee' => "Liste abandonn&eacute;e"
@@ -718,7 +718,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'abonnes_liste_int' => 'Abonn&eacute;s aux listes internes : '
 , 'abonnes_liste_pub' => 'Abonn&eacute;s aux listes publiques : '
 , 'actualiser' => 'Actualiser'
-, 'a_destination_de_' => '&agrave; destination de '
+, 'a_destination_de_' => '&#224; destination de '
 , 'aff_lettre_auto' => 'Lettres des nouveaut&eacute;s envoy&eacute;es'
 , 'alerte_edit' => 'Le formulaire ci-dessous permet de modifier le texte d\'un courrier. 
 	Vous pouvez choisir de commencer par importer un patron pour g&eacute;n&eacute;rer le contenu de votre message.'
@@ -732,7 +732,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'choix_defini' => 'Pas de choix d&eacute;fini.\n'
 , 'definir_squel_choix' => 'A la r&eacute;daction d\'un nouveau courrier, SPIP-Listes vous permet de charger un patron. 
 	En appuyant sur un bouton, vous chargez dans le corps du courrier le contenu d\'un des squelettes du 
-	repertoire <strong>/patrons</strong> (situ&eacute; &agrave; la racine de votre site Spip). 
+	repertoire <strong>/patrons</strong> (situ&eacute; &#224; la racine de votre site Spip). 
 	<p><strong>Vous pouvez &eacute;diter et modifier ces squelettes selon vos go&ucirc;ts.</strong></p> 
 	<ul><li>Ces squelettes peuvent contenir du code HTML classique</li>
 	<li>Ce squelette peut contenir des boucles Spip</li>
@@ -740,11 +740,11 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 	</ul><p>La fonction "charger un patron" permet donc d\'utiliser des gabarits HTML personnalis&eacute;s pour vos courriers 
 	ou de cr&eacute;er des lettres d\'information th&eacute;matiques dont le contenu est d&eacute;fini gr&acirc;ce aux boucles Spip.</p>
 	<p>Attention : ce squelette ne doit pas contenir de balises body, head ou html mais juste du code HTML ou des boucles Spip.</p>'
-, 'definir_squel' => 'Choisir le mod&egrave;le de courrier &agrave; pr&eacute;visualiser'
+, 'definir_squel' => 'Choisir le mod&egrave;le de courrier &#224; pr&eacute;visualiser'
 , 'courrier_realise_avec_spiplistes' => "Courrier r&eacute;alis&eacute; avec SPIP-Listes"
-, 'definir_squel_texte' => 'Si vous disposez des codes d\'acc&egrave;s au FTP, vous pouvez ajouter des squelettes SPIP dans le r&eacute;pertoire /patrons (&agrave; la racine de votre site Spip).'
+, 'definir_squel_texte' => 'Si vous disposez des codes d\'acc&egrave;s au FTP, vous pouvez ajouter des squelettes SPIP dans le r&eacute;pertoire /patrons (&#224; la racine de votre site Spip).'
 , 'dernier_envoi'=>'Dernier envoi il y a'
-, 'desabonnement_confirm'=>'Vous &ecirc;tes sur le point de r&eacute;silier votre abonnement &agrave; la lettre d\'information'
+, 'desabonnement_confirm'=>'Vous &ecirc;tes sur le point de r&eacute;silier votre abonnement &#224; la lettre d\'information'
 , 'date_depuis'=>'depuis @delai@'
 , 'envoi_charset' => 'Charset de l\'envoi'
 , 'envoi_nouv' => 'Envoi des nouveaut&eacute;s'
@@ -768,12 +768,12 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'log' => 'Logs'
 , 'login' => 'Connexion'
 , 'logout' => 'D&eacute;connexion'
-, 'mail_format' => 'Vous &ecirc;tes abonn&eacute; &agrave; la lettre d\'information du site @nom_site_spip@ en format'
+, 'mail_format' => 'Vous &ecirc;tes abonn&eacute; &#224; la lettre d\'information du site @nom_site_spip@ en format'
 , 'messages_auto_texte' => '<p>Par d&eacute;faut, le squelette des nouveaut&eacute;s permet d\'envoyer automatiquement 
 	la liste des articles et br&egrave;ves publi&eacute;s sur le site depuis le dernier envoi automatique. </p>
 	<p>vous pouvez personnaliser le message en d&eacute;finissant l\'adresse d\'un logo et d\'une image de fond 
 	pour les titres de parties en &eacute;ditant le fichier nomm&eacute; <strong>"nouveautes.html"</strong> 
-	(situ&eacute; &agrave; dans le rep&eacute;rtoire /dist).</p>'
+	(situ&eacute; &#224; dans le rep&eacute;rtoire /dist).</p>'
 , 'membres_groupes' => 'Groupes d\'utilisateurs'
 , 'membres_profil' => 'Profil'
 , 'membres_messages_deconnecte' => 'Se connecter pour v&eacute;rifier ses messages priv&eacute;s'
@@ -786,7 +786,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'messages_pas_nouveaux' => 'Pas de nouveaux messages'
 , 'messages_voir_dernier' => 'Voir le dernier message'
 , 'moderateurs' => "Mod&eacute;rateur(s)"
-, 'mis_a_jour' => 'Mis &agrave; jour'
+, 'mis_a_jour' => 'Mis &#224; jour'
 , 'nouveaux_messages' => 'Nouveaux messages'
 , 'numero' => 'N&nbsp;'
 , 'photos' => 'Photos'
@@ -809,9 +809,9 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'masquer_le_journal_SPIPLISTES' => "Masquer le journal de SPIP-Listes"
 , 'abon' => 'LES ABONNES'
 , 'abonees' => 'tous les abonn&eacute;s'
-, 'abonnement_newsletter' => '<strong>Abonnement &agrave; la lettre d\'information</strong>'
-, 'acces_a_la_page' => 'Vous n\'avez pas acc&egrave;s &agrave; cette page.'
-, 'adresse_deja_inclus' => 'Adresse d&eacute;j&agrave; connue'
+, 'abonnement_newsletter' => '<strong>Abonnement &#224; la lettre d\'information</strong>'
+, 'acces_a_la_page' => 'Vous n\'avez pas acc&egrave;s &#224; cette page.'
+, 'adresse_deja_inclus' => 'Adresse d&eacute;j&#224; connue'
 , 'Choisir_cette_liste' => 'Choisir cette liste'
 , 'Charger_un_patron' => "Charger un patron"
 , 'date_ref' => 'Date de r&eacute;f&eacute;rence'
@@ -820,7 +820,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'email_test_liste' => 'Envoyer vers une liste de diffusion'
 , 'envoyer' => 'envoyer le mail'
 , 'envoyer_a' => 'Envoi vers '
-, 'listes_poubelle' => 'Vos listes de diffusion &agrave; la poubelle'
+, 'listes_poubelle' => 'Vos listes de diffusion &#224; la poubelle'
 , 'Liste_numero_:' => 'Liste num&eacute;ro :'
 , 'mail_tache_courante' => 'Mails envoy&eacute;s pour la t&acirc;che courante : '
 , 'messages_auto_envoye' => 'Courriers automatiques envoy&eacute;s'
@@ -828,8 +828,8 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'nb_inscrits' => 'Dans le site :  '
 , 'nb_listes' => 'Incriptions dans toutes les listes : '
 , 'nouvelle_abonne' => 'L\'abonn&eacute; suivant a &eacute;t&eacute; ajout&eacute; la liste'
-, 'pas_acces' => 'Vous n\'avez pas acc&egrave;s &agrave; cette page.'
-, 'plus_abonne' => ' n\'est plus abonn&eacute; &agrave; la liste '
+, 'pas_acces' => 'Vous n\'avez pas acc&egrave;s &#224; cette page.'
+, 'plus_abonne' => ' n\'est plus abonn&eacute; &#224; la liste '
 , 'prochain_envoi_aujd' => 'Prochain envoi pr&eacute;vu aujourd\'hui'
 , 'prochain_envoi_prevu_dans' => 'Prochain envoi pr&eacute;vu dans '
 , 'program' => 'Programmation des courriers automatiques'
@@ -841,7 +841,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'supprime_contact' => 'Supprimer ce contact d&eacute;finitivement'
 , 'tableau_bord' => 'Tableau de bord'
 , 'toutes' => 'Tous les inscrits'
-, 'acces_refuse' => 'Vous n\'avez plus acc&egrave;s &agrave; ce site'
+, 'acces_refuse' => 'Vous n\'avez plus acc&egrave;s &#224; ce site'
 , 'confirmation_format' => ' en format '
 , 'confirmation_liste_unique_1' => 'Vous &ecirc;tes abonn&eacute; &agrave la liste d\'information du site'
 , 'confirmation_liste_unique_2' =>'Vous avez choisi de recevoir les courriers adress&eacute;s &agrave la liste suivante :'
