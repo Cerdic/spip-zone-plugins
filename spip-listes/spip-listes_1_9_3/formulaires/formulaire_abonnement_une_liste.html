@@ -1,5 +1,5 @@
 <div class="formulaire_spip formulaire_inscription">
-[(#REM)
+[<!--(#REM)
 
 // formulaire_abonnement_une_liste.html
 
@@ -11,11 +11,11 @@
 
 // Ce formulaire est appele quand balise FORMULAIRE_ABONNEMENT avec un argument (listeN, ou N == id_liste)
 
-][(#REM)
+
 	================================
 	texte d'inscription en tant que redacteur
 
-][(#ENV{inscription_redacteur}|=={oui}|?{' ',''})
+-->][(#ENV{inscription_redacteur}|=={oui}|?{' ',''})
 <fieldset>
 <legend style="color:#000"><:spiplistes:devenir_abonne:></legend>
 <strong><:spiplistes:devenir_redac:></strong>
@@ -24,11 +24,12 @@
 </fieldset>
 ]
 
-[(#REM) 
+[<!--(#REM) 
+
 	================================
 	texte d'inscription en tant que visiteur
 
-][(#ENV{inscription_visiteur}|=={oui}|?{' ',''})
+-->][(#ENV{inscription_visiteur}|=={oui}|?{' ',''})
 <fieldset>
 <legend ><:spiplistes:devenir_abonne:></legend>
 <div><:spiplistes:inscription_visiteurs:></div>

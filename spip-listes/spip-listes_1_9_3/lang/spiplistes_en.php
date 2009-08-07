@@ -23,8 +23,8 @@ $GLOBALS['i18n_spiplistes_en'] = array(
 , 'inscription_reponse_s' => 'Your e-mail address has been added to the mailing list of @s@\n'
 , 'inscription_reponses_s' => 'Your e-mail address has been added to the mailing list of @s@\n'
 , 'vous_abonne_aucune_liste' => 'You are not subscribed to a mailing list'
-, 'liste_dispo_site' => 'Mailing list available on this site'
-, 'listes_dispos_site' => 'Mailing lists available on this site'
+, 'liste_dispo_site_' => 'Mailing list available on this site : '
+, 'listes_dispos_site_' => 'Mailing lists available on this site : '
 , 'desole_pas_de_liste' => 'Sorry, there is no mailing list available yet.'
 , 'pour_vous_abonner' => 'To subscribe to mailing lists'
 // obsolete

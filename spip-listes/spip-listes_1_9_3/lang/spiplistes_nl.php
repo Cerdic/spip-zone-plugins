@@ -27,8 +27,8 @@ $GLOBALS['i18n_spiplistes_nl'] = array(
 , 'inscription_reponse_s' => 'U bent geabonneerd op de nieuwslijst van de site @s@'
 , 'inscription_reponses_s' => 'Vous &ecirc;tes abonn&eacute; aux listes d\'informations du site @s@'
 , 'vous_abonne_aucune_liste' => "Vous n'&ecirc;tes pas abonn&eacute; &agrave; une liste de diffusion"
-, 'liste_dispo_site' => "Beschikbare mailing lijst van de site"
-, 'listes_dispos_site' => "Listes de diffusion disponibles sur ce site"
+, 'liste_dispo_site_' => "Beschikbare mailing lijst van de site : "
+, 'listes_dispos_site_' => "Listes de diffusion disponibles sur ce site : "
 , 'desole_pas_de_liste' => "D&#233;sol&#233;, il n&#39;y a pas de liste de diffusion disponible pour le moment."
 , 'pour_vous_abonner' => "Pour vous abonner aux listes de diffusion"
 // obsolete

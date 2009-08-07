@@ -26,8 +26,8 @@ $GLOBALS['i18n_spiplistes_es'] = array(
 , 'inscription_reponse_s' => "Est&aacute;s inscrit@ para recibir el bolet&iacute;n informativo de @s@"
 , 'inscription_reponses_s' => 'Est&aacute;s inscrit@ para recibir los boletines informativos de @s@'
 , 'vous_abonne_aucune_liste' => "No est&aacute;s inscrito a ning&uacute;n bolet&iacute;n informativo"
-, 'liste_dispo_site' => "Bolet&iacute;n informativo de este sitio"
-, 'listes_dispos_site' => "Boletines informativos de este sitio"
+, 'liste_dispo_site_' => "Bolet&iacute;n informativo de este sitio : "
+, 'listes_dispos_site_' => "Boletines informativos de este sitio : "
 , 'desole_pas_de_liste' => "Por ahora no hay boletines informativos disponibles"
 , 'pour_vous_abonner' => "Para inscribirte en los boletines informativos"
 
