@@ -15,7 +15,7 @@ Il est con&ccedil;u pour faciliter la phase de d&eacute;veloppement du site (not
 	
 	<prefix>tickets</prefix>
 
-	<fonctions>tickets_fonctions.php</fonctions>
+	<fonctions>inc/tickets_filtres.php</fonctions>
 	<install>base/tickets_upgrade.php</install>
 	
 	<pipeline>
