@@ -65,7 +65,7 @@ function seo_insert_head($flux) {
 		// Print the result on the page
 		foreach ($meta_tags as $name => $content) {
 			if ($content != '')
-				$flux .= '<meta name="'. $name .'" content="'. $content .'"/>';
+				$flux .= '<meta name="'. $name .'" content="'. htmlspecialchars($content) .'"/>';
 		}
 	}
 	
