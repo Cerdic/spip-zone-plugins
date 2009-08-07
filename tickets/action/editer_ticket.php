@@ -13,10 +13,9 @@
  */
  
 function action_editer_ticket() {
-	spip_log('editer_ticket action');
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
-	spip_log($arg);
+
 	// si id_ticket n'est pas un nombre, c'est une creation 
 	// mais on verifie qu'on a toutes les donnees qu'il faut.
 	if (!$id_ticket = intval($arg)) {
