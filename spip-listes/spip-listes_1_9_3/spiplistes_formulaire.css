@@ -54,3 +54,7 @@ form.formulaire-spiplistes-abo p.spip_bouton {
 	text-align:right !important;
 	margin:0;
 }
+#spiplistes-pageabo {text-align:center;padding:1em;}
+#spiplistes-pageabo div.bloc {text-align:left;margin:1em auto}
+#spiplistes-pageabo h1, #spiplistes-pageabo div.spiplistes-cdt, .center {text-align:center}
+
