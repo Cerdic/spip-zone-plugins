@@ -79,7 +79,7 @@ function pp_codes_porte_plume_barre_pre_charger($barres){
 						"className"   => 'outil_lien_trac',
 						"openWith" => "[?",
 						"closeWith" => "#trac]",
-						"display"     => true,
+						"display"     => false,
 					),
 				),
 			));
