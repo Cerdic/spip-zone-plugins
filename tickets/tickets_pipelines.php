@@ -60,4 +60,9 @@ function tickets_gauche ($flux) {
 	}
 	return $flux;
 }
+
+// champs extras 2
+function tickets_objets_extensibles($objets){
+	return array_merge($objets, array('ticket' => _T('tickets:tickets')));
+}
 ?>

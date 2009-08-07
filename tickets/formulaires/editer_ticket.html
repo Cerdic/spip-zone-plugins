@@ -7,7 +7,6 @@
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input type='hidden' name='id_ticket' value='#ID_TICKET' />
-		<fieldset>
 		<ul>
 			<li class="editer_titre obligatoire">
 				<label for="titre"><:tickets:champ_titre_ticket:></label>
@@ -71,7 +70,7 @@
 				<input type='text' class='text' name='exemple' id='exemple' value="[(#ENV**{exemple})]" />
 			</li>
 		</ul>
-		</fieldset>
+		<!--extra-->
 		<p class='boutons'><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
 	</div></form>]
 </div>
