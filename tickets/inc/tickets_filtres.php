@@ -81,9 +81,11 @@ function tickets_classer_par_jalon($bidon) {
 
 // Affichage des boutons modifier ou retour
 function tickets_bouton_modifier ($id_ticket, $logo, $align) {
+	include_spip("inc/presentation");
 	return icone_inline(_L('Modifier ce ticket'), generer_url_ecrire("ticket_editer","id_ticket=$id_ticket"), $logo, "edit.gif", $align);
 }
 function tickets_bouton_retour ($id_ticket, $logo, $align) {
+	include_spip("inc/presentation");
 	return icone_inline(_L('Retour'), generer_url_ecrire("ticket_afficher","id_ticket=$id_ticket"), $logo, "", $align);
 }
 

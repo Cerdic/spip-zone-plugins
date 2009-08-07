@@ -39,7 +39,7 @@ function definir_autorisations_tickets($action){
 function tickets_autoriser(){}
 
 // Autorisation de creation ou modification des tickets
-function autoriser_ticket_ecrire($faire, $type, $id, $qui, $opt){
+function autoriser_ticket_ecrire_dist($faire, $type, $id, $qui, $opt){
 	$aut = FALSE;
 
 	$liste = definir_autorisations_tickets('ecrire');
@@ -52,7 +52,7 @@ function autoriser_ticket_ecrire($faire, $type, $id, $qui, $opt){
 }
 
 // Autorisation de notification des tickets
-function autoriser_ticket_assigner($faire, $type, $id, $qui, $opt){
+function autoriser_ticket_assigner_dist($faire, $type, $id, $qui, $opt){
 	$aut = FALSE;
 
 	$liste = definir_autorisations_tickets('assigner');
@@ -65,7 +65,7 @@ function autoriser_ticket_assigner($faire, $type, $id, $qui, $opt){
 }
 
 // Autorisation de notification des tickets
-function autoriser_ticket_commenter($faire, $type, $id, $qui, $opt){
+function autoriser_ticket_commenter_dist($faire, $type, $id, $qui, $opt){
 	$aut = FALSE;
 
 	$liste = definir_autorisations_tickets('commenter');
