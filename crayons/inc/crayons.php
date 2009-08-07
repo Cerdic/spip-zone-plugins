@@ -108,6 +108,13 @@ function valeur_champ_document($table, $id, $champ) {
 		return $t['date'];
 }
 
+function valeur_champ_vignette($table, $id, $champ) {
+	$vignette = sql_getfetsel('id_vignette','spip_documents','id_document='.intval($id));
+	if(is_numeric($vignette) && ($vignette > 0)){
+		$date = sql_getfetsel('date','spip_documents','id_document='.intval($vignette));
+	}
+	return $date ? $date : false;
+}
 // cette fonction de revision recoit le fichier upload a passer en logo
 // en reference : le nom du widget, pour aller chercher d'autres donnees
 // (ex: supprimer)
@@ -191,7 +198,7 @@ function document_fichier_revision($id, $data, $type, $ref) {
 		$ajouter_documents = charger_fonction('ajouter_documents', 'inc');
 		$arg = $data['document'];
 		check_upload_error($arg['error']);
-		$x = $ajouter_documents($arg['tmp_name'], $arg['name'], 
+		$x = $ajouter_documents($arg['tmp_name'], $arg['name'],
 			'article', 0, 'document', null, $actifs);
 
 		// $actifs contient l'id_document nouvellement cree
@@ -237,6 +244,60 @@ function document_fichier_revision($id, $data, $type, $ref) {
 
 }
 
+// cette fonction de revision soit supprime la vignette d'un document,
+// soit recoit le fichier upload a passer ou remplacer la vignette du document
+function vignette_revision($id, $data, $type, $ref) {
+	$s = sql_fetsel("*","spip_documents","id_document=".intval($id));
+	if (!is_array($s))
+		return false;
+
+	$objet_parent = sql_getfetsel('id_objet,objet',"spip_documents_liens","id_document=".intval($id));
+
+	// Chargement d'un nouveau doc ?
+	if ($data['vignette']) {
+		define('FILE_UPLOAD', true);
+		if(is_numeric($s['id_vignette']) && ($s['id_vignette']>0)){
+			spip_log('suppression de la vignette');
+			include_spip('inc/documents');
+			$fichier = sql_getfetsel('fichier','spip_documents','id_document='.intval($s['id_vignette']));
+			if (@file_exists($f = get_spip_doc($fichier))) {
+				spip_log("efface $f");
+				supprimer_fichier($f);
+			}
+			// Supprimer les entrees dans spip_documents
+			sql_delete('spip_documents', 'id_document='.intval($s['id_vignette']));
+			// Suppression des liens dans spip_documents_liens
+			sql_delete('spip_documents_liens',  'id_document='.intval($s['id_vignette']));
+			// On remet l'id_vignette a 0
+			sql_updateq('spip_documents', array('id_vignette'=>0), 'id_document='.intval($s['id_document']));
+		}
+		// Ajout du document comme vignette
+		$ajouter_documents = charger_fonction('ajouter_documents', 'inc');
+		$arg = $data['vignette'];
+		check_upload_error($arg['error']);
+		$x = $ajouter_documents($arg['tmp_name'], $arg['name'],
+			$objet_parent['objet'], $objet_parent['id_objet'], 'vignette', $id, $actifs);
+	}else
+		// Suppression de la vignette ?
+		if ($wid = array_pop($ref)
+			AND $_POST['content_'.$wid.'_vignette_supprimer'] == 'on') {
+			if(is_numeric($s['id_vignette']) && ($s['id_vignette']>0)){
+				include_spip('inc/documents');
+				$fichier = sql_getfetsel('fichier','spip_documents','id_document='.intval($s['id_vignette']));
+				if (@file_exists($f = get_spip_doc($fichier))) {
+					spip_log("efface $f");
+					supprimer_fichier($f);
+				}
+				// Supprimer les entrees dans spip_documents
+				sql_delete('spip_documents', 'id_document='.intval($s['id_vignette']));
+				// Suppression des liens dans spip_documents_liens
+				sql_delete('spip_documents_liens',  'id_document='.intval($s['id_vignette']));
+				// On remet l'id_vignette a 0
+				sql_updateq('spip_documents', array('id_vignette'=>0), 'id_document='.intval($s['id_document']));
+			}
+		}
+	return true;
+}
 
 function colonne_table($table, $col) {
 	$nom_table = '';
