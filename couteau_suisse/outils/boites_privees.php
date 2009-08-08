@@ -1,5 +1,7 @@
 <?php
 
+// Doc : http://www.spip-contrib.net/Les-Boites-Privees
+
 if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 include_spip('inc/layer');
@@ -37,7 +39,7 @@ function boites_privees_affiche_gauche($flux){
 			case 'mots_edit': $flux['data'] .= cs_urls_propres('mot', $flux['args']['id_mot']); break;
 			case 'sites': $flux['data'] .= cs_urls_propres('syndic', $flux['args']['id_syndic']); break;
 		}
-	return $flux;
+	return cs_pipeline_boite_privee($flux, 'gauche');
 }
 
 function boites_privees_affiche_milieu($flux){
@@ -51,7 +53,7 @@ function boites_privees_affiche_milieu($flux){
 		default:
 			break;
 	}
-	return $flux;
+	return cs_pipeline_boite_privee($flux, 'milieu');
 }
 
 function boites_privees_affiche_droite($flux) {
@@ -61,7 +63,36 @@ function boites_privees_affiche_droite($flux) {
 		default:
 			break;
 	}
+	// on telecharge les news...
+	if (defined('boites_privees_CS')) $flux['data'] .= cs_boite_rss();
+	return cs_pipeline_boite_privee($flux, 'droite');
+}
+
+/*
+ fonction appelant une liste de fonctions qui permettent :
+ - d'ajouter facilement des boites privees perso
+ - de modifier les boites "officielles"
+ par exemple : 
+	$GLOBALS['boites_privees_gauche'][] = 'ma_boite_privee';
+	function ma_boite_privee($flux, $exec) { 
+		return $flux . debut_boite_info(true) . 'Youpi !!' . fin_boite_info(true); 
+	}
+*/
+function cs_pipeline_boite_privee(&$flux, $endroit) {
+	// liste de filtres
+	if(!is_array($GLOBALS[$globale = 'boites_privees_'.$endroit])) return $flux;
+	$liste = array_unique($GLOBALS[$globale]);
+	foreach($liste as $f)
+		if (function_exists($f)) $flux['data'] = $f($flux['data'], $flux['args']['exec']);
 	return $flux;
+}
+
+function cs_boite_rss() {
+	return debut_boite_info(true)
+		. '<p><b>'._T('couteauprive:rss_titre').'</b></p><div class="cs_boite_rss"><p>'._T('couteauprive:rss_attente').'</p><noscript>'._T('couteauprive:outil_inactif').' !</noscript></div>'
+		/*.'<div style="text-align: right; font-size: 87%;"><a title="'._T('couteauprive:rss_desactiver').'" href="'
+		.generer_url_ecrire(_request('exec'),'cmd=switch&outil=rss_couteau_suisse').'">'._T('couteauprive:supprimer_cadre').'</a></div>'*/
+		. fin_boite_info(true);
 }
 
 function cs_infos_webmasters() {

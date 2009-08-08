@@ -540,8 +540,6 @@ if (!window.jQuery) document.write('".str_replace('/','\/',addslashes(propre('<p
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>$exec),'data'=>''));
 
 	echo creer_colonne_droite('', true);
-	// on telecharge les news...
-	if (defined('boites_privees_CS')) cs_boite_rss();
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>$exec),'data'=>'')),
 		debut_droite('', true),
 		debut_cadre_trait_couleur(find_in_path('img/couteau-24.gif'),true,'','&nbsp;'._T('couteauprive:outils_liste')),
@@ -571,12 +569,5 @@ cs_log(" FIN : exec_admin_couteau_suisse()");
 function cs_couper_25($matches) { return couper(_T($matches[1]), 25); }
 // raccourci pour le JavaScript
 function cs_javascript($chaine) { return unicode_to_javascript(addslashes(html2unicode(_T($chaine)))); }
-
-function cs_boite_rss() {
-	echo debut_boite_info(true), '<p><b>'._T('couteauprive:rss_titre').'</b></p><div class="cs_boite_rss"><p>'._T('couteauprive:rss_attente').'</p><noscript>'._T('couteauprive:outil_inactif').' !</noscript></div>'
-		/*.'<div style="text-align: right; font-size: 87%;"><a title="'._T('couteauprive:rss_desactiver').'" href="'
-		.generer_url_ecrire(_request('exec'),'cmd=switch&outil=rss_couteau_suisse').'">'._T('couteauprive:supprimer_cadre').'</a></div>'*/
-		, fin_boite_info(true);
-}
 
 ?>
