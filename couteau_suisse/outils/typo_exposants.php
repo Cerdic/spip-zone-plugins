@@ -45,27 +45,27 @@ function typo_exposants_fr($texte){
 			'/(?<=\b[Mm])([nd]s?)\b/',	// millions, milliards
 			'/(?<=\bV)(ve)\b/', '/(?<=\bC)(ies?)\b/',	// Vve et Cie(s)
 			"/(?<=\bS)(t(?:$eaigu1)s?)(?=\W)/", "/(?<=\W)(?:E|$eaigu2)ts\b/",	 // Societes(s), Etablissements
-	
+
 			'/(?<=\b[1I])i?(ers?)\b/',	// 1er(s), Erreurs 1ier(s), 1ier(s)
 			"/(?<=\b[1I])i?(?:e|$egrave)(res?)\b/",	// Erreurs 1(i)ere(s) + accents
 			'/(?<=\b1)(r?es?)\b/', // 1e(s), 1re(s)
 			'/(?<=\b2)(nde?s?)\b/',	// 2nd(e)(s)
-	
+
 			"/(\b[0-9IVX]+)i?(?:e|$egrave)?me(s?)\b/", // Erreurs (i)(e)me(s) + accents
 			'/\b([0-9IVX]+)(es?)\b/', // 2e(s), IIIe(s)... (les 1(e?r?s?) ont deja ete remplaces)
-			"/(?<![;$accents])\b(\d+|r|v)o\b/", // recto, verso, primo, secondo, etc.
+			"/(?<![;$accents])\b(\d+|r|v)o(?=(?:&nbsp;|[\s,;:!\/\?\.-]))/", // recto, verso, primo, secondo, etc.
 			'/(?<=\bM)(e)(?= [A-Z])/', // Maitre (suivi d'un espace et d'une majuscule)
 		), array(
 			_TYPO_sup, _TYPO_sup,		// Mlle(s), Mme(s), Mgr
 			_TYPO_sup,		// Dr, Pr, 
-	
+
 			'm<sup class="typo_exposants">2</sup>',	_TYPO_sup,	// m2, m3, m²
 			_TYPO_sup, _TYPO_sup, _TYPO_sup,	// Vve, Mn(s), Md(s), Bd(s), Cie(s)
 			_TYPO_sup, '&#201;<sup class="typo_exposants">ts</sup>',	// Sté(s), Ets
-	
+
 			_TYPO_sup, _TYPO_sup, _TYPO_sup, // 1er et Cie
 			_TYPO_sup,	// 2nd(e)(s)
-	
+
 			'$1<sup class="typo_exposants">e$2</sup>', // Erreurs me, eme, ème, ième + pluriels
 			_TYPO_sup2, // 2e(s), IIIe(s)...
 			'$1<sup class="typo_exposants">o</sup>', // ro, vo, 1o, 2o, etc.
