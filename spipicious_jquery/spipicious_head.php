@@ -7,41 +7,36 @@
  * Auteurs :
  * Quentin Drouet
  * Erational
- * 
+ *
  * 2007-2008 - Distribue sous licence GNU/GPL
  *
  */
- 
+
 function spipicious_insert_head($flux){
 	global $visiteur_session;
 	$contenu = " ";
-	
+
 	$autorise = lire_config('spipicious/people',array());
-	
+
 	spip_log("autorise == '$autorise'");
-	
+
 	if($visiteur_session['id_auteur'] && in_any($visiteur_session['statut'],$autorise)){
 
 	include_spip('selecteurgenerique_fonctions');
 	$flux .= selecteurgenerique_verifier_js($flux);
-	
+
 	$selecteur = generer_url_public('selecteurs_tags');
     $tags_link = generer_url_public('inc-tags');
-	
+
 	$flux .= <<<EOS
 		<script type="text/javascript"><!--
-		
-		var deletetag = function(tag){
-				jQuery('input#remove_tag').val(tag).parents('form').submit().end();
-				return false;
-		};
-		
+
 	(function($) {
 		var appliquer_selecteur_spipicious = function() {
-			
+
 			// chercher l'input de saisie
 			var spipicious = $('input[name=spipicious_tags][autocomplete!=off]');
-			
+
 			var id_objet = $("input#spipicious_id").val();
 			var type = $("input#spipicious_type").val();
 			if((spipicious.size()>0)&&(type!='')){
@@ -55,7 +50,7 @@ function spipicious_insert_head($flux){
 					}
 				});
 			}
-			
+
 			//.addClass('loading').load('$tags_link&id_'+type+'='+id_objet).removeClass('loading');
 			spipicious.autocomplete('$selecteur',
 				{
@@ -89,7 +84,7 @@ function spipicious_insert_head($flux){
 			// Le selecteur generique ne se rechargeait pas
 			spipicious.blur().focus();
 		};
-	
+
 		$(function(){
 			appliquer_selecteur_spipicious();
 			onAjaxLoad(appliquer_selecteur_spipicious);

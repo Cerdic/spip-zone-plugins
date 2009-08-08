@@ -1,9 +1,10 @@
 #CACHE{0}
 #HTTP_HEADER{Content-Type:text/html}
+[(#SET{id_groupe,#ENV{id_groupe,#CONFIG{spipicious/groupe_mot,1}}})]
 <div class="tags">
 <B_motsElement>
 	<ul>
-		<BOUCLE_motsElement(MOTS){id_article ?}{id_document ?}{id_rubrique ?}{id_syndic ?}>
+		<BOUCLE_motsElement(MOTS){id_article ?}{id_document ?}{id_rubrique ?}{id_syndic ?}{id_groupe=#GET{id_groupe}}>
 			<li><a href="#URL_MOT" title="#TITRE" rel="tag">#TITRE</a>
 		<B_aut>
 			<span class="spipicious_auteurs">
@@ -14,6 +15,6 @@
 		</BOUCLE_motsElement>
 	</ul>
 </B_motsElement>
-	<p><:spipicious:aucun_tags:></p>
+	<p><:aucun_mots:></p>
 <//B_motsElement>
 </div>

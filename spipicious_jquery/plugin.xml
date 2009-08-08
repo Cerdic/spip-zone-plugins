@@ -2,9 +2,10 @@
 	<nom>spip.icio.us</nom>
 	<auteur>[kent1->http://kent1.sklunk.net]
 _ R&#233;utilisation de code du plugin r&#233;alis&#233; par [erational->http://www.erational.org]
-_ &#169; 2007-2009 - Licence GPL 
+_ &#169; 2007-2009 - Licence GPL
 	</auteur>
-	<version>0.4</version>
+	<version>0.5</version>
+	<version_base>0.5</version_base>
 	<etat>test</etat>
 	<description>
 	<multi>
@@ -24,9 +25,6 @@ _ Icon from [Wolfgang Bartelme and Chris Messina->http://www.factorycity.net/pro
 	<lien>http://kent1.sklunk.net/spip.php?article97</lien>
 	<prefix>spipicious</prefix>
 	<install>base/spipicious_upgrade.php</install>
-	<options>
-		spipicious_options.php
-	</options>
 	<pipeline>
 		<nom>declarer_tables_interfaces</nom>
 		<inclure>base/spipicious.php</inclure>
@@ -45,6 +43,7 @@ _ Icon from [Wolfgang Bartelme and Chris Messina->http://www.factorycity.net/pro
 	</pipeline>
 	<necessite id="SelecteurGenerique" version="[0.2;]" />
 	<necessite id='cfg' version='[1.10.1;]' />
-	<necessite id="SPIP" version='[2.0.0;]' />
+	<necessite id="SPIP" version='[2.0.9;]' />
+	<necessite id="saisies" version='[1.1;]' />
 	<chemin dir='' />
 </plugin>

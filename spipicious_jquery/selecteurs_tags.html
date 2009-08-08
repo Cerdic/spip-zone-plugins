@@ -10,7 +10,6 @@
 	Eliminer d'abord les mots deja lies a l'article/breve etc.
 	Attention il FAUT passer un de ces 3 id_xxx en parametre
 ]
-[(#SET{titre_groupe,#CONFIG{spipicious/groupe_mot}})]
-
+[(#SET{id_groupe,#CONFIG{spipicious/groupe_mot,1}})]
 [(#REM) Chercher les mots correspondant a la requete ]
-[(#INCLURE{fond=selecteurs/tags_#ENV{type}}{id_objet}{q=#ENV{q}}{titre_groupe=#GET{titre_groupe}})]
+[(#INCLURE{fond=selecteurs/tags_#ENV{type}}{id_objet}{q=#ENV{q}}{id_groupe=#GET{id_groupe}})]
