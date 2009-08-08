@@ -81,6 +81,9 @@ function notation_declarer_tables_interfaces($interface){
 	
 	$interface['tables_jointures']['spip_notations'][] = 'notations_objets';
 	$interface['tables_jointures']['spip_notations_objets'][] = 'notations';
+
+	$interface['tables_jointures']['spip_articles'][] = 'notations_objets';
+	$interface['tables_jointures']['spip_notations_objets'][] = 'articles';
 	return $interface;
 }
 
