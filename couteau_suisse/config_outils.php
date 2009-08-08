@@ -1054,12 +1054,15 @@ add_variable( array(
 ));
 
 // Recuperer tous les outils de la forme outils/monoutil_config.php
+// y compris les lames perso dont on met le nom en italiques
 foreach (find_all_in_path('outils/', '\w+_config\.php$') as $f) 
-if (preg_match(',^([^.]*)_config$,',basename($f,'.php'),$regs)){
+if (preg_match(',^([^.]*)_config$,', basename($f, '.php'),$regs)){
 	include $f;
 	if(function_exists($cs_temp=$regs[1].'_add_outil')) {
 		$cs_temp = $cs_temp();
 		$cs_temp['id'] = $regs[1];
+		if(strlen($cs_temp['nom']) && !preg_match(',couteau_suisse/outils/,', $f))
+			$cs_temp['nom'] = "<i>$cs_temp[nom]</i>";
 		add_outil($cs_temp);
 	}
 	if(function_exists($cs_temp='add_variable_'.$regs[1])) add_variable($cs_temp());
