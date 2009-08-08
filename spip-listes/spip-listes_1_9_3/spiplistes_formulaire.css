@@ -69,10 +69,33 @@ div.formulaire_modif_abonnement, div.formulaire_modif_abonnement2 {
 	padding:0;
 	}
 div.bloc-formats {text-align: left;}
+
+ul.liste-des-listes {}
+ul.liste-des-listes li { margin-bottom:3px }
+
 ul.liste-formats {}
 ul.liste-formats input {display:block; width:2ex; float:left }
 ul.liste-formats label {display:block; font-weight:500 }
 
+span.liste-titre {
+	display:inline;
+	font-size:100%;
+	font-weight:700;
+	line-height:1.4em;
+	color:#099;
+	margin:0;
+	padding:0;
+	border-bottom:1px solid #0f0;
+	cursor:pointer;
+}
+span.liste-descriptif {
+	display:block;
+	font-size:90%;
+	font-weight:300;
+	color:#333;
+	margin:0.75em 0;
+	padding:0 0 0 5ex;
+}
 div.formulaire_modif_abonnement div.spip_bouton, div.formulaire_modif_abonnement2 div.spip_bouton {
 	background-color:transparent !important;
 	margin:0.5em 0;

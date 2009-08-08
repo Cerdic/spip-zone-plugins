@@ -64,6 +64,7 @@ function formulaires_modif_abonnement2_traiter_dist(){
 	$d = _request('d');
 	$list = _request('list');
 	$email_desabo = _request('email_desabo');
+	$type_abo = _request('suppl_abo'); 
 	
 	// cherche l'abonne'
 	$sql_select = "id_auteur,statut,nom,email";
@@ -84,38 +85,47 @@ function formulaires_modif_abonnement2_traiter_dist(){
 	}
 	$id_auteur = intval($id_auteur);
 	$format = spiplistes_format_abo_demande($id_auteur);
-	spiplistes_log("id_auteur = $id_auteur");
-	// confirme les modifications ?
-		// désabonne l'auteur
-		spiplistes_abonnements_desabonner_statut($id_auteur, explode(";", _SPIPLISTES_LISTES_STATUTS_TOUS));
+	spiplistes_log("format actuel pour #$id_auteur: '$format' - format futur: '$type_abo'", LOG_DEBUG);
 
-		if(is_array($list) && count($list)) {	
-			// on abonne l'auteur aux listes choisies
-			if(spiplistes_abonnements_ajouter($id_auteur, $list) !== false) {
-				$message_formulaire = _T('spiplistes:abonnement_modifie');
-			}
-		} 
-		
-		// maj du format de reception
-		$type_abo = _request('suppl_abo'); 
-		if($format != $type_abo) {
-			$format = $type_abo;
-			spiplistes_format_abo_modifier($id_auteur, $format);
-			// affichage des modifs
-			if($format == 'non') {
-				$message_formulaire = _T('spiplistes:desabonnement_valid').":&nbsp;".$email;  
-			}
-			else {
-				$message_formulaire = _T('spiplistes:abonnement_modifie');
-				$message_formulaire .= "<p>"._T('spiplistes:abonnement_nouveau_format').$format."<br />";
-			}
+	// confirme les modifications ?
+	// désabonne l'auteur
+	spiplistes_abonnements_desabonner_statut($id_auteur, explode(";", _SPIPLISTES_LISTES_STATUTS_TOUS));
+
+	if(is_array($list) && count($list)) {	
+		// on abonne l'auteur aux listes choisies
+		if(spiplistes_abonnements_ajouter($id_auteur, $list) !== false) {
+			$message_formulaire = _T('spiplistes:abonnement_modifie');
 		}
-		
-		// detruire le cookie perso
-		//spip_query("UPDATE spip_auteurs SET cookie_oubli='' WHERE cookie_oubli =".sql_quote($d));
-		spiplistes_auteurs_cookie_oubli_updateq('', $d, $true);
-		
-		return array('editable'=>true,'message' => $message_formulaire);
+	} 
+	
+	if($format != $type_abo) {
+		spiplistes_log("modifie actuel pour #$id_auteur: '$format' - format futur: '$type_abo'", LOG_DEBUG);
+		$format = $type_abo;
+		spiplistes_format_abo_modifier($id_auteur, $format);
+		// affichage des modifs
+		if($format == 'non') 
+		{
+			$message_formulaire = _T('spiplistes:desabonnement_valid').":&nbsp;".$email;  
+		}
+		else 
+		{
+			$message_formulaire = _T('spiplistes:abonnement_modifie');
+			$message_formulaire .= "<p>"._T('spiplistes:abonnement_nouveau_format').$format."<br />";
+		}
+	}
+	
+	// detruire le cookie perso
+	//spip_query("UPDATE spip_auteurs SET cookie_oubli='' WHERE cookie_oubli =".sql_quote($d));
+	spiplistes_auteurs_cookie_oubli_updateq('', $d, $true);
+	spiplistes_log("format: '$format'", LOG_DEBUG);
+
+	$contexte = array(
+		'editable' => true
+		, 'message' => $message_formulaire
+		, 'format' => $format
+	);
+	
+	return ($contexte);
 }
 
 ?>

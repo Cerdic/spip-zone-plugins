@@ -634,7 +634,7 @@ function spiplistes_format_abo_modifier ($id_auteur, $format = 'non') {
 		}
 		else {
 			$id_auteur = ($id_auteur == 'tous') ? "ALL" :  "id_auteur #$id_auteur";
-			spiplistes_log_api("$action format $format to $id_auteur");
+			spiplistes_log_api("$action format to '$format' for $id_auteur");
 		}
 	}
 	return($sql_result);

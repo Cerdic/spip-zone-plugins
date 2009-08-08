@@ -6,7 +6,24 @@
 // $LastChangedBy: paladin@quesaco.org $
 // $LastChangedDate: 2009-04-07 17:12:31 +0200 (mar., 07 avr. 2009) $
 
--->][<!--(#REM)
+-->]
+<script type="text/javascript">
+<!--
+jQuery(document).ready(function(){
+	jQuery('span.listeDescriptif').hide();
+	$('ul.liste-des-listes li label').hover(
+		function () {
+			jQuery('span.listeDescriptif').hide();
+			jQuery('#listeDescriptif' + jQuery(this).children('input').val()).fadeIn();
+		}, 
+		function () {
+			jQuery('#listeDescriptif' + jQuery(this).children('input').val()).hide();
+		}
+	);
+});
+-->
+</script>
+[<!--(#REM)
 
 	===============
 	Message de confirmation (si present)
@@ -42,6 +59,7 @@
 	<!-- br class='spacer' / -->
 [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
 [(#ENV{editable}|oui)
 <form method='post' action='#SELF' enctype='multipart/form-data'>
 	#ACTION_FORMULAIRE{#SELF}
@@ -50,19 +68,23 @@
 <B_listes>
 	<li class="fieldset">
 		<h3>[(#TOTAL_BOUCLE|=={1}|?{<:spiplistes:abo_1_lettre:>,<:spiplistes:abo_listes:>})]</h3>
-		<ul>
+		<ul class='liste-des-listes'>
 		<BOUCLE_listes(LISTES) {statut IN 'liste','pub_jour','pub_hebdo','pub_7jours','pub_mensul','pub_mois','pub_an'} {0,(#ENV{formulaire_affiche}|?{100,0})}>
 			[(#TOTAL_BOUCLE|=={1}|oui)
-				<li style="margin-bottom:3px">
+				<li id="liste#ID_LISTE" style="margin-bottom:3px">
 					<input type="checkbox" name="list&#91;&#93;" checked="checked"  value="#ID_LISTE" />
-					<a href='[(#SELF|parametre_url{liste,#ID_LISTE})]' title='<:spiplistes:infos_liste:>'>#TITRE</a>				
+					<a class='liste-titre' title='<:spiplistes:infos_liste:>'>#TITRE</a>
+					<p class='liste-descriptif'>[(#TEXTE|textebrut|couper{80})]</p>
 				</li>
 			]
 			<BOUCLE_inscription(AUTEURS){tous} {id_liste} {id_auteur=#ENV{id_auteur}}></BOUCLE_inscription>
 				[(#TOTAL_BOUCLE|!={1}|oui)
-					<li style="margin-bottom:3px">
-						<input type="checkbox" name="list&#91;&#93;" [(#_inscription:TOTAL_BOUCLE|?{' ''''''''''''',''})checked="checked"] value="#ID_LISTE" />
-						<a href='[(#SELF|parametre_url{liste,#ID_LISTE})]' title='<:spiplistes:infos_liste:>'>#TITRE</a>
+					<li onmouseover='jQuery.montreTexte([(#ID_LISTE)])' onmouseout='jQuery.cacheTexte([(#ID_LISTE)])'>
+						<label lang='#LANG'>
+							<input type="checkbox" name="list&#91;&#93;" [(#_inscription:TOTAL_BOUCLE|?{' ''''''''''''',''})checked="checked"] value="#ID_LISTE" />
+							<span class='liste-titre' title='<:spiplistes:infos_liste:>'>#TITRE</span>
+							<span id='listeDescriptif#ID_LISTE' class='listeDescriptif liste-descriptif'>[(#TEXTE|textebrut|couper{80})]</span>
+						</label>
 					</li>
 				]
 		</BOUCLE_listes>
@@ -84,11 +106,11 @@
 				<h3 class="explications"><:spiplistes:format_de_reception:> :</h3>
 				<ul class='liste-formats'>
 				<li>
-					<input name="suppl_abo" value="html" [(#ENV{format}|=={html}|?{'checked="checked"',''})]  type="radio" id='fslhtml' />
+					<input name="suppl_abo" [(#ENV{format}|=={html}|?{'checked="checked"',''})] value="html" type="radio" id='fslhtml' />
 					<label for='fslhtml'><:spiplistes:html:><:spiplistes:html_description:></label>
 				</li>
 				<li>
-					<input name="suppl_abo" value="texte" [(#ENV{format}|=={texte}|?{'checked="checked"',''})] type="radio" id='fsltexte' />
+					<input name="suppl_abo" [(#ENV{format}|=={texte}|?{'checked="checked"',''})] value="texte" type="radio" id='fsltexte' />
 					<label for='fsltexte'><:spiplistes:texte_brut:></label>
 				</li>
 				<li>
