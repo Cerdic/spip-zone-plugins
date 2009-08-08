@@ -36,8 +36,8 @@
 	
 -->][(#ENV*{confirm_formulaire})]
 <BOUCLE_auteur(AUTEURS){tous} {id_auteur=(#ENV{id_auteur})}>
-<p>#NOM</p>
-<p><:spiplistes:souhait_modifier_abo:></p>
+<p class='nom'>#NOM</p>
+<p class='souhait'><:spiplistes:souhait_modifier_abo:></p>
 <div class="formulaire_spip formulaire_modif_abonnement2 ajax">
 	<!-- br class='spacer' / -->
 [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
@@ -69,6 +69,7 @@
 		</ul>
 	</li>
 </B_listes>
+	</ul>
 	[(#ENV{editable}|oui)<li class="fieldset">
 	<h3><:spiplistes:abo_1_lettre:></h3>]
 <//B_listes>
@@ -79,23 +80,23 @@
 	===============
 	
 -->][(#ENV{editable}|oui)
-
-			<li>
-				<p class="explications"><:spiplistes:format_de_reception:> :</p>
-			</li>
-			<li>
-				<input name="suppl_abo" value="html" [(#ENV{format}|=={html}|?{'checked="checked"',''})]  type="radio" id='fslhtml' />
-				<label for='fslhtml'><:spiplistes:html:><:spiplistes:html_description:></label>
-			</li>
-			<li>
-				<input name="suppl_abo" value="texte" [(#ENV{format}|=={texte}|?{'checked="checked"',''})] type="radio" id='fsltexte' />
-				<label for='fsltexte'><:spiplistes:texte_brut:></label>
-			</li>
-			<li>
-				<input name="suppl_abo" [(#ENV{format}|=={non}|?{'checked="checked"',''})] value="non" type="radio" id='fslnon' />
-				<label for='fslnon'><:spiplistes:desabonnement:></label>
-			</li>
-			</ul>
+			<div class='bloc-formats'>
+				<h3 class="explications"><:spiplistes:format_de_reception:> :</h3>
+				<ul class='liste-formats'>
+				<li>
+					<input name="suppl_abo" value="html" [(#ENV{format}|=={html}|?{'checked="checked"',''})]  type="radio" id='fslhtml' />
+					<label for='fslhtml'><:spiplistes:html:><:spiplistes:html_description:></label>
+				</li>
+				<li>
+					<input name="suppl_abo" value="texte" [(#ENV{format}|=={texte}|?{'checked="checked"',''})] type="radio" id='fsltexte' />
+					<label for='fsltexte'><:spiplistes:texte_brut:></label>
+				</li>
+				<li>
+					<input name="suppl_abo" [(#ENV{format}|=={non}|?{'checked="checked"',''})] value="non" type="radio" id='fslnon' />
+					<label for='fslnon'><:spiplistes:desabonnement:></label>
+				</li>
+				</ul>
+			</div>
 			<div class="spip_bouton" style="clear:both">
 				<input type='submit' class='submit' name='valider' value='<:spiplistes:abonnement_bouton:>' />
 				<input type="hidden" name="d" value="[(#ENV{d})]" />

@@ -58,3 +58,29 @@ form.formulaire-spiplistes-abo p.spip_bouton {
 #spiplistes-pageabo div.bloc {text-align:left;margin:1em auto}
 #spiplistes-pageabo h1, #spiplistes-pageabo div.spiplistes-cdt, .center {text-align:center}
 
+#spiplistes-formabo p.nom {
+	font-size:1.2em;
+}
+#spiplistes-formabo p.nom, #spiplistes-formabo p.souhait {text-align:center}
+
+div.formulaire_modif_abonnement, div.formulaire_modif_abonnement2 {
+	border:1px solid gray;width:75%;
+	margin:0 auto 2em;
+	padding:0;
+	}
+div.bloc-formats {text-align: left;}
+ul.liste-formats {}
+ul.liste-formats input {display:block; width:2ex; float:left }
+ul.liste-formats label {display:block; font-weight:500 }
+
+div.formulaire_modif_abonnement div.spip_bouton, div.formulaire_modif_abonnement2 div.spip_bouton {
+	background-color:transparent !important;
+	margin:0.5em 0;
+	}
+div.formulaire_modif_abonnement input.submit, div.formulaire_modif_abonnement2 input.submit {
+	display:block;
+	margin:0 0 0 auto;
+	}
+p.reponse_formulaire_ok {background-color:green;}
+p.reponse_formulaire_erreur {background-color:red;}
+p.reponse_formulaire_ok, p.reponse_formulaire_erreur {text-align:center;color:white}

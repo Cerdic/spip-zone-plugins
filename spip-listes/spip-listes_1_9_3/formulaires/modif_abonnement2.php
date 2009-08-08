@@ -50,23 +50,22 @@ function formulaires_modif_abonnement2_charger_dist(){
 			$valeurs['formulaire_affiche'] = '1';
 		}
 	} // end if($d)
-	spip_log('charger','listes');
 	return $valeurs;
 }
 
 function formulaires_modif_abonnement2_verifier(){
+	spiplistes_log('formulaires_modif_abonnement2_verifier()', LOG_DEBUG);
 	$erreurs = array();
-	spiplistes_log('yeenenejddddddddddddddddddddddddddddddddddddd dddddddd verifier','listes');
 	return $erreurs;
 }
 
 function formulaires_modif_abonnement2_traiter_dist(){
-	spip_log('traiter','listes');
+	spiplistes_log('formulaires_modif_abonnement2_traiter_dist()', LOG_DEBUG);
 	$d = _request('d');
 	$list = _request('list');
 	$email_desabo = _request('email_desabo');
 	
-	// cherche l'abonné
+	// cherche l'abonne'
 	$sql_select = "id_auteur,statut,nom,email";
 	$sql_result = sql_select(
 		$sql_select
@@ -79,13 +78,13 @@ function formulaires_modif_abonnement2_traiter_dist(){
 		, '', '', 1
 	);
 	$row = sql_fetch($sql_result);
-	print_r($row);
+	//print_r($row);
 	foreach(explode(",",$sql_select) as $key) {
 		$$key = $row[$key];
 	}
 	$id_auteur = intval($id_auteur);
 	$format = spiplistes_format_abo_demande($id_auteur);
-	spip_log("id_auteur = $id_auteur");
+	spiplistes_log("id_auteur = $id_auteur");
 	// confirme les modifications ?
 		// désabonne l'auteur
 		spiplistes_abonnements_desabonner_statut($id_auteur, explode(";", _SPIPLISTES_LISTES_STATUTS_TOUS));
