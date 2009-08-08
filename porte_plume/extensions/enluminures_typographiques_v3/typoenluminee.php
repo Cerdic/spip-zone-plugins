@@ -10,6 +10,7 @@
 	 *
 	 *     Syntaxe des raccourcis :
 	 *           [/texte/] : aligner le texte a droite
+	 *           [!texte!] : aligner le texte a gauche
 	 *           [|texte|] : centrer le texte
 	 *           [(texte)] : encadrer le texte (occupe toute la largeur de la page, a mettre autour d'un paragraphe)
 	 *           [*texte*] : encadrer/surligner le texte (une partie a l'interieur d'un paragraphe)
@@ -168,6 +169,7 @@ function typoenluminee_post_propre($texte) {
 			}
 	
 		$cherche1[] = /* 15 */ 	",\[/(.*)/\],Ums";
+		$cherche1[] = /* 16 */ 	",\[!(.*)!\],Ums";
 		$cherche1[] = /* 17 */ 	",\[\|(.*)\|\],Ums";
 		$cherche1[] = /* 19 */ 	",\[\((.*)\)\],Ums";
 		$cherche1[] = /* 21 */ 	"/\[\*\*/S";
@@ -177,6 +179,7 @@ function typoenluminee_post_propre($texte) {
 		$cherche1[] = /* 24 */	"/\^\]/S";
 	
 		$remplace1[] = /* 15 */ 	"<div class=\"spip\" style=\"text-align:right;\">$1</div>";
+		$remplace1[] = /* 16 */ 	"<div class=\"spip\" style=\"text-align:left;\">$1</div>";
 		$remplace1[] = /* 17 */ 	"<div class=\"spip\" style=\"text-align:center;\">$1</div>";
 		$remplace1[] = /* 19 */ 	"<div class=\"texteencadre-spip spip\">$1</div>";
 		$remplace1[] = /* 21 */ 	"<strong class=\"caractencadre2-spip spip\">";

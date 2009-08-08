@@ -16,6 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_petitescapitales' => 'Mettre le texte en &lt;sc&gt;petites capitales&lt;/sc&gt;',
 'barre_centrer' => '[|Centrer|] le paragraphe',
 'barre_alignerdroite' => '[/Aligne &agrave; droite/] le paragraphe',
+'barre_alignergauche' => '[!Aligne &agrave; gauche!] le paragraphe',
 'barre_encadrer' => '[(Encadrer)] le paragraphe',
 
 'barre_barre' => '&lt;del&gt;Barrer&lt;/del&gt; le texte',

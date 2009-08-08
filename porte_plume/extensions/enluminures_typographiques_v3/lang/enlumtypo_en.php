@@ -16,6 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_petitescapitales' => 'Small caps',
 'barre_centrer' => '[|Centre|] the paragraph',
 'barre_alignerdroite' => '[/Right-align/] the paragraph',
+'barre_alignergauche' => '[!left-align!] the paragraph',
 'barre_encadrer' => '[(Place a border)] round the paragraph',
 
 'barre_barre' => '&lt;del&gt;Strikethrough&lt;/del&gt;',
