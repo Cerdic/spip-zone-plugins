@@ -20,10 +20,10 @@ function action_editer_ticket() {
 	// mais on verifie qu'on a toutes les donnees qu'il faut.
 	if (!$id_ticket = intval($arg)) {
 		$id_auteur = $GLOBALS['visiteur_session']['id_auteur'];
-		if (!$id_auteur) {
+		/*if (!$id_auteur) {
 			include_spip('inc/headers');
 			redirige_url_ecrire();
-		}
+		}*/
 		$id_ticket = insert_ticket($id_auteur);
 	} 
 
