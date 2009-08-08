@@ -25,6 +25,10 @@ function formulaires_editer_ticket_charger($id_ticket='new', $retour='', $config
 		$valeurs = formulaires_editer_objet_charger('ticket',$id_ticket,0,0,$retour,$config_fonc,$row,$hidden);
 		$editable = true;
 	}
+	// si nouveau ticket et qu'une url d'exemple est donnee dans l'environnement, on la colle
+	if ((!$id_ticket or $id_ticket=='new') and ($exemple = _request('exemple'))) {
+		$valeurs['exemple'] = $exemple;
+	}
 	
 	$valeurs['editable'] = $editable;
 	return $valeurs;

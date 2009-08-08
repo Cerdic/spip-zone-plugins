@@ -15,7 +15,7 @@
 			<li class="editer_statut">
 				<label for="statut"><:tickets:champ_statut:></label>
 				<select name="statut" id="statut" onchange="$('#validation_bouton').slideDown();">
-					<option value="redac" [(#ENV{statut}|=={redac}|?{" selected='selected'",""})]>[(#VAL{redac}|tickets_texte_statut)]</option>
+					[(#SESSION{id_auteur}|oui)<option value="redac" [(#ENV{statut}|=={redac}|?{" selected='selected'",""})]>[(#VAL{redac}|tickets_texte_statut)]</option>]
 					<option value="ouvert" [(#ENV{statut}|=={ouvert}|?{" selected='selected'",""})]>[(#VAL{ouvert}|tickets_texte_statut)]</option>
 					<option value="resolu" [(#ENV{statut}|=={resolu}|?{" selected='selected'",""})]>[(#VAL{resolu}|tickets_texte_statut)]</option>
 					<option value="ferme" [(#ENV{statut}|=={ferme}|?{" selected='selected'",""})]>[(#VAL{ferme}|tickets_texte_statut)]</option>
