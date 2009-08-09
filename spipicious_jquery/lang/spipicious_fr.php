@@ -1,14 +1,14 @@
 <?php
 
-/*
- * spipicious
+/**
+ * spip.icio.us
  * Gestion de tags lies aux auteurs
  *
  * Auteurs :
  * Quentin Drouet
  * Erational
  *
- * 2007-2008 - Distribue sous licence GNU/GPL
+ * 2007-2009 - Distribue sous licence GNU/GPL
  *
  */
 
@@ -25,6 +25,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'identifier' => 'Pour ajouter des tags sur cet article, vous devez vous identifier',
+
+	// M
+	'message_installation_activation' => 'Installation des tables et configuration par d&eacute;faut de spip.icio.us',
+	'message_upgrade_database' => 'spipicious update @ @version@<br/>',
 
 	// N
 	'no_tags_associes' => 'Vous n\'avez pas de mot cl&eacute; associ&eacute;',

@@ -1,17 +1,17 @@
 <?php
 
-/*
- * spipicious
+/**
+ * spip.icio.us
  * Gestion de tags lies aux auteurs
  *
  * Auteurs :
  * Quentin Drouet
  * Erational
- * 
- * 2007-2008 - Distribue sous licence GNU/GPL
+ *
+ * 2007-2009 - Distribue sous licence GNU/GPL
  *
  */
- 
+
 	$GLOBALS['spipicious_base_version'] = 0.5;
 
 	function spipicious_upgrade(){
@@ -25,19 +25,38 @@
 				include_spip('base/abstract_sql');
 				creer_base();
 				ecrire_meta('spipicious_base_version',$current_version=$version_base,'non');
-				echo "Installation des tables de spip.icio.us";
+
+				/**
+				 * On crée un groupe de mots dédié qui servira à la configuration
+				 * On active les mots clés dans le site si ce n'est déjà fait
+				 * On active une configuration du plugin par défaut
+				 */
+				$titre_groupe = '- Tags -';
+				$id_groupe = sql_getfetsel('id_groupe','spip_groupes_mots','titre='.sql_quote($titre_groupe));
+				if(!$id_groupe){
+					$id_groupe = sql_insertq('spip_groupes_mots',array('titre' => $titre_groupe));
+				}
+				if($GLOBALS['meta']['config_precise_groupes'] == 'non'){
+					ecrire_meta('config_precise_groupes','oui','oui');
+				}
+				if($GLOBALS['meta']['articles_mots'] == 'non'){
+					ecrire_meta('articles_mots','oui','oui');
+				}
+				$config_spipicious = array('people' => array('0minirezo'),'groupe_mot' => $id_groupe);
+				ecrire_meta('spipicious',serialize($config_spipicious),'oui');
+				echo _T('spipicious:message_installation_activation');
 			}
 			if($current_version<0.2){
 				sql_alter("TABLE `spip_spipicious` ADD PRIMARY KEY (`id_mot`) ");
-				sql_alter("TABLE `spip_spipicious` ADD KEY (`id_auteur`) ");	
+				sql_alter("TABLE `spip_spipicious` ADD KEY (`id_auteur`) ");
 				sql_alter("TABLE `spip_spipicious` ADD maj timestamp AFTER position ");
-				echo "spipicious update @ 0.2<br/>";
+				echo _T('spipicious:upgrade_database',array('version'=>0.2));
 				ecrire_meta('spipicious_base_version',$current_version=0.2,'non');
 			}
 			if($current_version<0.3){
 				sql_alter("TABLE `spip_spipicious` ADD id_rubrique bigint(21) NOT NULL AFTER`id_article` ");
 				sql_alter("TABLE `spip_spipicious` ADD id_document bigint(21) NOT NULL AFTER`id_rubrique` ");
-				echo "spipicious update @ 0.3<br/>";
+				echo _T('spipicious:upgrade_database',array('version'=>0.3));
 				ecrire_meta('spipicious_base_version',$current_version=0.3,'non');
 			}
 			if($current_version<0.4){
@@ -53,25 +72,26 @@
 					creer_base();
 					echo "Creation de la table spip_mots_documents<br/>";
 				}
-				echo "spipicious update @ 0.4<br/>";
+				echo _T('spipicious:upgrade_database',array('version'=>0.4));
 				ecrire_meta('spipicious_base_version',$current_version=0.4,'non');
 			}
 			if($current_version<0.5){
-					sql_alter("TABLE `spip_spipicious` ADD id_syndic bigint(21) NOT NULL AFTER`id_document` ");
-					sql_alter("TABLE `spip_spipicious` ADD id_evenement bigint(21) NOT NULL AFTER`id_syndic` ");
-					echo "spipicious update @ 0.5<br/>";
-					ecrire_meta('spipicious_base_version',$current_version=0.5,'non');
+				sql_alter("TABLE `spip_spipicious` ADD id_syndic bigint(21) NOT NULL AFTER`id_document` ");
+				sql_alter("TABLE `spip_spipicious` ADD id_evenement bigint(21) NOT NULL AFTER`id_syndic` ");
+				echo _T('spipicious:upgrade_database',array('version'=>0.5));
+				ecrire_meta('spipicious_base_version',$current_version=0.5,'non');
 			}
 			ecrire_metas();
 		}
 	}
-	
+
 	function spipicious_vider_tables() {
 		sql_drop_table("spip_spipicious");
 		effacer_meta('spipicious_base_version');
+		effacer_meta('spipicious');
 		ecrire_metas();
 	}
-	
+
 	function spipicious_install($action){
 		$version_base = $GLOBALS['spipicious_base_version'];
 		switch ($action){
