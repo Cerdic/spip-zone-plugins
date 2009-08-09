@@ -135,7 +135,7 @@ function instituer_ticket($id_ticket, $c) {
 
 	// cf autorisations dans inc/instituer_article
 	if ($s AND $s != $statut) {
-		if (autoriser('creer', 'ticket'))
+		if (autoriser('ecrire', 'ticket', $id_ticket))
 			$statut = $champs['statut'] = $s;
 		else
 			spip_log("editer_ticket $id_ticket refus " . join(' ', $c));

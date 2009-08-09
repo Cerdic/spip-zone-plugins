@@ -1,4 +1,6 @@
 <?php
+// pour le pipeline
+function tickets_notifications() {}
 
 /**
  * 
@@ -10,6 +12,8 @@
  * @param object $options
  */
  
+
+
 function notifications_instituerticket_dist($quoi, $id_ticket, $options) {
 	
 	// ne devrait jamais se produire
