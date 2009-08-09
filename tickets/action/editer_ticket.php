@@ -132,8 +132,7 @@ function instituer_ticket($id_ticket, $c) {
 	$statut_ancien = $statut = $row['statut'];
 	$champs = array();
 	$date = $c['date'];
-spip_log($c,"c");	
-spip_log($row,"c");	
+
 	$s = $c['statut'];
 
 	// cf autorisations dans inc/instituer_article
