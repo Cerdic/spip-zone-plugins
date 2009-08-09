@@ -18,6 +18,8 @@ include_spip('inc/editer');
  * Fonction de chargement des valeurs
  */
 function formulaires_editer_ticket_charger($id_ticket='new', $retour='', $config_fonc='tickets_edit_config', $row=array(), $hidden=''){
+	// mettre une valeur new pour formulaires_editer_objet_charger()
+	if (!$id_ticket) $id_ticket='new';
 	
 	if (!autoriser('ecrire', 'ticket', $id_ticket)) {
 		$editable = false;

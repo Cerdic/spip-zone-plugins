@@ -89,11 +89,16 @@ function insert_ticket($id_auteur) {
  */
 function revision_ticket ($id_ticket, $c=false) {
 
-	// Si l'article est publie, invalider les caches et demander sa reindexation
-	$t = sql_getfetsel("statut", "spip_tickets", "id_ticket=$id_ticket");
-	if ($t == 'publie') {
+	// Si le ticket est publie, invalider les caches et demander sa reindexation
+	if (isset($c['statut']) and $c['statut'] == 'publie') {
 		$invalideur = "id='id_ticket/$id_ticket'";
 		$indexation = true;
+	} else {
+		$t = sql_getfetsel("statut", "spip_tickets", "id_ticket=$id_ticket");
+		if ($t == 'publie') {
+			$invalideur = "id='id_ticket/$id_ticket'";
+			$indexation = true;
+		}		
 	}
 
 	modifier_contenu('ticket', $id_ticket,
@@ -136,12 +141,8 @@ function instituer_ticket($id_ticket, $c) {
 			spip_log("editer_ticket $id_ticket refus " . join(' ', $c));
 
 		// En cas de publication, fixer la date a "maintenant"
-		// sauf si $c commande autre chose
-		
-		if ($champs['statut'] == 'ouvert'
-		OR ($champs['statut'] == 'ouvert'
-			AND !in_array($statut_ancien, array('ouvert'))
-		)) {
+		// sauf si $c commande autre chose		
+		if ($champs['statut'] == 'ouvert' AND !in_array($statut_ancien, array('ouvert'))) {
 			if (!is_null($date))
 				$champs['date'] = $date;
 			else
