@@ -1,11 +1,11 @@
 <?php
-/*
+/**
  * SPIPmotion
- * Gestion de l'encodage des videos directement dans spip
+ * Gestion de l'encodage des videos et sons directement dans spip
  *
  * Auteurs :
  * Quentin Drouet
- * 2006-2008 - Distribue sous licence GNU/GPL
+ * 2006-2009 - Distribue sous licence GNU/GPL
  *
  */
 if (!defined("_ECRIRE_INC_VERSION")) return;
@@ -25,7 +25,7 @@ function exec_spipmotion_infos_dist()
 
 function exec_spipmotion_infos_args($id_article, $type,$id_document,$script) {
 		include_spip('inc/actions');
-		$infos_videos = charger_fonction('infos_videos', 'inc');
+		$infos_videos = charger_fonction('spipmotion_infos_videos', 'inc');
 		if(_request("iframe")=="iframe") { 
 			$res = $infos_videos($id, $id_document,$type,$script, 'ajax').
 			  $infos_videos($id, $id_document,$type,$script, 'ajax');
