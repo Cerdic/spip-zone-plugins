@@ -71,7 +71,7 @@ function boites_privees_affiche_droite($flux) {
 /*
  fonction appelant une liste de fonctions qui permettent :
  - d'ajouter facilement des boites privees perso
- - de modifier les boites "officielles"
+ - voire de modifier les boites "officielles"
  par exemple : 
 	$GLOBALS['boites_privees_gauche'][] = 'ma_boite_privee';
 	function ma_boite_privee($flux, $exec) { 

@@ -9,10 +9,10 @@
 */
 
 // Constantes surchargeables
-//@define ('_FILETS_SEP_BALISE_DEBUT', '<hr');
-//@define ('_FILETS_SEP_BALISE_FIN', '/>');
-@define ('_FILETS_SEP_BALISE_DEBUT', '<p');
-@define ('_FILETS_SEP_BALISE_FIN', '></p>');
+//@define('_FILETS_SEP_BALISE_DEBUT', '<hr');
+//@define('_FILETS_SEP_BALISE_FIN', '/>');
+@define('_FILETS_SEP_BALISE_DEBUT', '<p');
+@define('_FILETS_SEP_BALISE_FIN', '></p>');
 
 // cette fonction est appelee automatiquement a chaque affichage de la page privee du Couteau Suisse
 function filets_sep_installe() {
@@ -76,7 +76,7 @@ function filets_sep_BarreTypo($tr) {
 	// le tableau des filets est present dans les metas
 	$filets = unserialize($GLOBALS['meta']['cs_filets_sep']);
 	$res = array();
-	@define ('_FILETS_SEP_MAX_CSS', 7);
+	@define('_FILETS_SEP_MAX_CSS', 7);
 	for ($i=0; $i<=_FILETS_SEP_MAX_CSS; $i++)
 		$res[] = "<a title=\"__{$i}__\" href=\"javascript:barre_inserer('\\n\\n__{$i}__\\n\\n',@@champ@@)\"><span class=\"cs_BT\">CSS {$i}</span></a>";
 	$max = count($filets[0]);
