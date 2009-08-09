@@ -78,7 +78,7 @@ jQuery(document).ready(function(){
 				<li>
 					<label lang='#LANG'>
 						<input type="checkbox" name="list&#91;&#93;" checked="checked"  value="#ID_LISTE" />
-						<span class='liste-titre' title='<:spiplistes:infos_liste:>'>#TITRE</span>
+						<span class='liste-titre'>#TITRE</span>
 						<span id='listeDescriptif#ID_LISTE' class='listeDescriptif liste-descriptif'>[(#TEXTE|textebrut|couper{80})]</span>
 					</label>
 				</li>
@@ -92,7 +92,7 @@ jQuery(document).ready(function(){
 					<li>
 						<label lang='#LANG'>
 							<input type="checkbox" name="list&#91;&#93;" [(#_inscription:TOTAL_BOUCLE|?{' ''''''''''''',''})checked="checked"] value="#ID_LISTE" />
-							<span class='liste-titre' title='<:spiplistes:infos_liste:>'>#TITRE</span>
+							<span class='liste-titre'>#TITRE</span>
 							<span id='listeDescriptif#ID_LISTE' class='listeDescriptif liste-descriptif'>[(#TEXTE|textebrut|couper{80})]</span>
 						</label>
 					</li>

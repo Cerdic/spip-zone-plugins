@@ -5,13 +5,19 @@ form.formulaire-spiplistes-abo {
 	padding:1em !important;
 }
 form.formulaire-spiplistes-abo legend { 
+	font-family: Georgia, Times, serif;
+	font-size:1.4em;
+	color:black;
+	text-align:left !important;
 	font-weight:700; 
+	background-color:transparent;
+	width:auto;
 }
 form.formulaire-spiplistes-abo div.coord {
 }
 form.formulaire-spiplistes-abo div.coord label {
 	display:block;
-	font-size:90%;
+/*	font-size:90%; /* */
 	font-weight:500;
 }
 form.formulaire-spiplistes-abo div.coord input {
@@ -28,7 +34,8 @@ form.formulaire-spiplistes-abo li {
 }
 form.formulaire-spiplistes-abo fieldset {
 	margin:0 0 0.75em !important;
-	padding-top:0 !important;
+	padding-top:1em !important;
+	border:0;
 }
 form.formulaire-spiplistes-abo fieldset p {
 	margin:0.75em 0;
@@ -47,7 +54,8 @@ form.formulaire-spiplistes-abo fieldset label.block span {
 	float:none;
 }
 form.formulaire-spiplistes-abo p.message-formulaire {
-	color:red; font-size: 110%
+	color:red; 
+	font-size: 110%
 }
 form.formulaire-spiplistes-abo p.spip_bouton {
 	background-color:transparent !important;

@@ -30,7 +30,8 @@ function spiplistes_insert_head ($flux) {
 	// pour le formulaire en général
 	$flux .= ""
 		. $sig
-		. "<link rel='stylesheet' href='".find_in_path('spiplistes_formulaire.css')."' type='text/css' media='all' />\n"
+		// deja charge' dans le squelette
+		//. "<link rel='stylesheet' href='".find_in_path('spiplistes_formulaire.css')."' type='text/css' media='all' />\n"
 		;
 
 	// pour la page abonnement.html

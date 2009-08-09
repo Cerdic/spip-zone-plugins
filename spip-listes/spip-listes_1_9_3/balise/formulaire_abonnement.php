@@ -343,7 +343,9 @@ function spiplistes_formulaire_abonnement (
 		else
 		{
 			//spiplistes_log("pas de demande, afficher formulaire de modif au complet", _SPIPLISTES_LOG_DEBUG);
-			$reponse_formulaire = _T('spiplistes:effectuez_modif_validez', array('s' => $abonne['nom']));
+			$reponse_formulaire = ""
+				. "<p class='nom'>" . $abonne['nom'] . "</p>\n"
+				. _T('spiplistes:effectuez_modif_validez');
 		}
 		
 		$id_abonne = $abonne['id_auteur'];
