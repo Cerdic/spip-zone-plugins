@@ -138,7 +138,8 @@ function spiplistes_courriers_casier_premier ($sql_select, $sql_whereq) {
 // Les fonctions spiplistes_abonnements_*() concernent les abonnements
 // Table cible : spip_auteurs_listes
 
-// CP-20080324 : abonner un id_auteur a une id_liste
+/**
+ * CP-20080324 : abonner un id_auteur a une id_liste
 // CP-20080508 : ou une liste de listes ($id_liste est un tableau de (id)listes)
 // CP-20090111: ajouter la date d'inscription
 /*
@@ -156,11 +157,13 @@ function spiplistes_abonnements_ajouter ($id_auteur, $id_liste) {
 		$r_id_listes = array();
 		
 		if(is_array($id_liste)) {
+			// si une seule liste demandee
 			$sql_valeurs = array();
 			$msg = array();
 			foreach($id_liste as $id) {
 				if(
 				   (($id = intval($id)) > 0)
+				   // si pas encore abonne'
 					&& !in_array($id, $curr_abos_auteur)
 				  )
 				{
@@ -173,6 +176,7 @@ function spiplistes_abonnements_ajouter ($id_auteur, $id_liste) {
 			}
 		}
 		else if(
+			// si une seule liste demandee, et si pas encore abonne'
 			(($id_liste = intval($id_liste)) > 0)
 			&& (!$curr_abos || !in_array($id_liste, $curr_abos))
 			)

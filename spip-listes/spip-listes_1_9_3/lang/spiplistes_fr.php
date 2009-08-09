@@ -50,7 +50,6 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 	Ce lien vous permettra de s&#233;lectionner les listes de diffusion publi&#233;es ici.
 	"
 , 'confirmation_inscription' => "Confirmation de votre inscription"
-, 'souhait_modifier_abo'=>'Vous souhaitez modifier votre abonnement &#224; la lettre d\'information'
 , 'suspendre_abonnement_' => "Suspendre mon abonnement "
 , 'vous_etes_redact' => "Vous &#234;tes inscrit en tant que r&#233;dacteur."
 , 'vous_etes_membre' => "Vous &#234;tes membre abonn&#233; aux listes de diffusion de ce site.
@@ -531,11 +530,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'demande_enregistree_retour_mail' => "
 	Votre demande est enregistr&#233;e. Vous allez recevoir un mail de confirmation.
 	"
-, 'effectuez_modif_validez' => "
-	<span>Bonjour @s@,</span>
-	<br />
-	Effectuez les modifications souhait&#233;es pour votre abonnement, puis validez.
-	"
+, 'effectuez_modif_validez' => "Effectuez les modifications souhait&#233;es pour votre abonnement, puis validez."
 , 'vous_etes_desabonne' => "
 	Vous &#234;tes maintenant d&#233;sabonn&#233; aux listes de diffusion,
 	mais votre inscription sur ce site est toujours valide. Pour revenir &#224; ce formulaire de modification
@@ -851,6 +846,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'patron_erreur' => 'Le patron sp&eacute;cifi&eacute; ne donne pas de r&eacute;sulat avec les param&egrave;tres choisis'
 , 'abonees_titre' => 'Abonn&eacute;s'
 , 'options' => 'radio|brut|Format :|Html,Texte,D&eacute;sabonnement|html,texte,non'
+, 'souhait_modifier_abo'=>'Vous souhaitez modifier votre abonnement.'
 
 );
 

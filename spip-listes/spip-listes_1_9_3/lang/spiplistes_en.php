@@ -45,7 +45,7 @@ $GLOBALS['i18n_spiplistes_en'] = array(
 	You will receive at this address a confirmation of registration and a link.
 	This link will allow you to select the mailing lists posted here.'
 , 'confirmation_inscription' => "Confirmation of the subcription"
-, 'souhait_modifier_abo' => 'You want to change your subscription to the letter d\'information'
+, 'souhait_modifier_abo' => 'You want to change your subscription.'
 , 'suspendre_abonnement_' => "Suspend my subscription "
 , 'vous_etes_redact' => "You are logged in as editor."
 , 'vous_etes_membre' => "You are subscribed to mailing lists on this site.

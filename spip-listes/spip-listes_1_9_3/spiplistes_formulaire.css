@@ -62,6 +62,7 @@ form.formulaire-spiplistes-abo p.spip_bouton {
 	font-size:1.2em;
 }
 #spiplistes-formabo p.nom, #spiplistes-formabo p.souhait {text-align:center}
+#spiplistes-formabo p.souhait {font-size:90%}
 
 div.formulaire_modif_abonnement, div.formulaire_modif_abonnement2 {
 	border:1px solid gray;width:75%;

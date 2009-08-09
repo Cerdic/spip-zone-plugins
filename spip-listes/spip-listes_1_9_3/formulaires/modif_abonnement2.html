@@ -54,7 +54,7 @@ jQuery(document).ready(function(){
 -->][(#ENV*{confirm_formulaire})]
 <BOUCLE_auteur(AUTEURS){tous} {id_auteur=(#ENV{id_auteur})}>
 <p class='nom'>#NOM</p>
-<p class='souhait'><:spiplistes:souhait_modifier_abo:></p>
+<p class='souhait'><:spiplistes:effectuez_modif_validez:></p>
 <div class="formulaire_spip formulaire_modif_abonnement2 ajax">
 	<!-- br class='spacer' / -->
 [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
@@ -67,7 +67,7 @@ jQuery(document).ready(function(){
 </BOUCLE_auteur>
 <B_listes>
 	<li class="fieldset">
-		<h3>[(#TOTAL_BOUCLE|=={1}|?{<:spiplistes:abo_1_lettre:>,<:spiplistes:abo_listes:>})]</h3>
+		<h3>[(#TOTAL_BOUCLE|=={1}|?{<:spiplistes:abo_1_lettre:>,<:spiplistes:abo_listes:>})] :</h3>
 		<ul class='liste-des-listes'>
 		<BOUCLE_listes(LISTES) {statut IN 'liste','pub_jour','pub_hebdo','pub_7jours','pub_mensul','pub_mois','pub_an'} {0,(#ENV{formulaire_affiche}|?{100,0})}>
 		[<!--(#REM) 
