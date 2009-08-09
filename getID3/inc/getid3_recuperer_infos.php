@@ -16,16 +16,16 @@ function inc_getid3_recuperer_infos($id_document){
 	spip_log("GETID3 : inc_getid3_recuperer_infos (postedition) - on travail sur $son_chemin","getid3");
 	$recuperer_id3 = charger_fonction('recuperer_id3','inc');
 	$id3 = $recuperer_id3($son_chemin);
-	
+
 	if($document['titre'] == ''){
 		$document['titre'] = ereg_replace('_',' ',utf8_encode($id3['titre']));
 	}
 	if($document['titre'] == ''){
-		$titre = strtolower(array_shift(explode('.',$document['fichier'])));
+		$titre = strtolower(array_shift(explode('.',basename($document['fichier']))));
 		$titre = utf8_encode($titre);
 		$document['titre'] = ereg_replace('_',' ',$titre);
 	}
-	
+
 	if($document['descriptif'] == ''){
 		if($id3['comments']){
 			$document['descriptif'] = utf8_encode($id3['comments']);
@@ -34,7 +34,7 @@ function inc_getid3_recuperer_infos($id_document){
 			$document['descriptif'] = utf8_encode($id3['genre']);
 		}
 	}
-	
+
 	sql_updateq('spip_documents',
 		array(
 			'titre'=>$document['titre'],
@@ -48,7 +48,7 @@ function inc_getid3_recuperer_infos($id_document){
 			'canaux' => $id3['channels']
 		),
 		'id_document='.intval($id_document));
-	
+
 	return;
 }
 ?>
