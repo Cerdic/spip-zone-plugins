@@ -89,17 +89,10 @@ function insert_ticket($id_auteur) {
  */
 function revision_ticket ($id_ticket, $c=false) {
 
-	// Si le ticket est publie, invalider les caches et demander sa reindexation
-	if (isset($c['statut']) and $c['statut'] == 'publie') {
-		$invalideur = "id='id_ticket/$id_ticket'";
-		$indexation = true;
-	} else {
-		$t = sql_getfetsel("statut", "spip_tickets", "id_ticket=$id_ticket");
-		if ($t == 'publie') {
-			$invalideur = "id='id_ticket/$id_ticket'";
-			$indexation = true;
-		}		
-	}
+	// invalider le cache quelque soit la circonstance.
+	// une modification de base = effacer les caches.
+	$invalideur = "id='id_ticket/$id_ticket'";
+	$indexation = true;
 
 	modifier_contenu('ticket', $id_ticket,
 		array(
