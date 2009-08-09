@@ -70,9 +70,18 @@ function tickets_set($id_ticket) {
  * @return int
  */
 function insert_ticket($id_auteur) {
-
+	/* Si anonyme, on ne propose pas le ticket en redaction : on ouvre aussitot en lecture 
+	 * vu que l'autorisation de modifier de ticket dans instituer_ticket()
+	 * risque d'interdire l'edition ensuite si l'autorisation de creation et de modification
+	 * ne concernent pas les memes personnes.
+	 * Ceci n'est pas encore ideal : 
+	 * si autoriser creer renvoie toujours true, et modifier false, pour un anonyme,
+	 * un statut different de 'ouvert' ne sera pas pris en compte tout simplement.
+	 * Mais a la creation, on met rarement "resolu" !
+	 */
+	$statut = intval($id_auteur) ? 'redac' : 'ouvert';
 	$id_ticket = sql_insertq("spip_tickets", array(
-		'statut' => 'redac',
+		'statut' => $statut,
 		'date' => date('Y-m-d H:i:s'),
 		'date_modif' => date('Y-m-d H:i:s'),
 		'id_auteur' => $id_auteur));
@@ -123,7 +132,8 @@ function instituer_ticket($id_ticket, $c) {
 	$statut_ancien = $statut = $row['statut'];
 	$champs = array();
 	$date = $c['date'];
-	
+spip_log($c,"c");	
+spip_log($row,"c");	
 	$s = $c['statut'];
 
 	// cf autorisations dans inc/instituer_article
