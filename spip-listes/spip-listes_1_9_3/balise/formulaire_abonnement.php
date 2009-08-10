@@ -365,7 +365,7 @@ function spiplistes_formulaire_abonnement (
 		{
 			// si l'abonne existe deja mais pas d'action demandee, affiche formulaire complet
 			if($row = sql_fetch(
-				spiplistes_auteurs_auteur_select('id_auteur,login,nom,statut', "email=".sql_quote($abonne['email']))
+				spiplistes_auteurs_auteur_select('id_auteur,login,nom,statut,lang', "email=".sql_quote($abonne['email']))
 				)
 			) {
 				
@@ -373,6 +373,7 @@ function spiplistes_formulaire_abonnement (
 				$abonne['statut'] = $row['statut'];
 				$abonne['login'] = $row['login'];
 				$abonne['nom'] = $row['nom'];
+				$abonne['lang'] = $row['lang'];
 				$abonne['format'] =
 					($f = spiplistes_format_abo_demande($abonne['id_auteur']))
 					? $f
@@ -467,7 +468,7 @@ function spiplistes_formulaire_abonnement (
 	if($id_abonne && $email_a_envoyer) {
 		
 		$abonne['ids_abos'] = spiplistes_abonnements_listes_auteur($abonne['id_auteur']);
-		
+
 		$abonne['format'] = spiplistes_format_valide($abonne['format']);
 		
 		$email_a_envoyer = spiplistes_preparer_message(
@@ -502,14 +503,13 @@ function spiplistes_formulaire_abonnement (
 function spiplistes_preparer_message ($objet, $patron, $contexte) {
 	
 	// si pas encore abonne' ou desabonne', pas de format ! donc forcer a texte
-	$format = ($contexte['format'] == 'html') ? $contexte['format'] : 'texte';
+	$format = ($contexte['format'] == 'html') ? $contexte['format'] : ($contexte['format'] = 'texte');
+
+	$contexte['patron'] = $patron;
+	$path_patron = _SPIPLISTES_PATRONS_MESSAGES_DIR . $patron;
 	
-	list($message_html, $message_texte) =
-		spiplistes_courriers_assembler_patron (
-			_SPIPLISTES_PATRONS_MESSAGES_DIR . $patron
-			, $contexte
-		);
-	
+	list($message_html, $message_texte) = spiplistes_assembler_patron($path_patron, $contexte);
+
 	$charset = $GLOBALS['meta']['spiplistes_charset_envoi'];
 	
 	if($charset != $GLOBALS['meta']['charset'])

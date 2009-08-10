@@ -879,6 +879,7 @@ function spiplistes_assembler_patron ($path_patron, $contexte) {
 	
 	$patron_html = spiplistes_patron_find_in_path($path_patron, $contexte['lang'], false);
 	$contexte['patron_html'] = $patron_html;
+	
 	// le resultat assemble' au format html
 	$result_html = 
 		$patron_html
@@ -886,7 +887,7 @@ function spiplistes_assembler_patron ($path_patron, $contexte) {
 		? recuperer_page(generer_url_public('patron_switch')."&".spiplistes_http_build_query($contexte,"","&"),true)
 		: ""
 		;
-		
+
 	// chercher si un patron version texte existe
 	$patron_texte = spiplistes_patron_find_in_path($path_patron, $contexte['lang'], true);
 	unset($contexte['patron_html']);

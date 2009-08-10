@@ -453,7 +453,7 @@ function spiplistes_courriers_total_abonnes ($id_courrier = 0) {
  * @param $ignorer bool
  */
 function spiplistes_courriers_assembler_patron ($path_patron, $contexte, $ignorer = false) {
-	
+
 	if($ignorer) {
 		$result = array("", "");
 	}
