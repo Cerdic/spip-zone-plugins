@@ -40,9 +40,16 @@ function spiplistes_insert_head ($flux) {
 		)
 		)
 	) {
+	
 		$flux .= ""
 			. "<link rel='stylesheet' href='".find_in_path('spiplistes_style.css')."' type='text/css' media='all' />\n"
 			;
+		if(
+			(($s = spiplistes_pref_lire('opt_plier_deplier_formabo')) && ($s == 'oui'))
+			&& ($f = find_in_path("javascript/spiplistes_abonnement.js")))
+		{
+			$flux .= "<script type='text/javascript' src='" . compacte($f) . "'></script>\n";
+		}
 	}
 
 	if(!empty($sig))

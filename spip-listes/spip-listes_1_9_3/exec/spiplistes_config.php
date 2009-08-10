@@ -58,6 +58,10 @@ function exec_spiplistes_config () {
 			$tampon_labels[$key] = _T('spiplistes:'.$key);
 		}
 	
+		$keys_opt_formabo = array(
+			'opt_plier_deplier_formabo' // effet plier/deplier dans le formulaire abonnement
+		);
+		
 		$keys_param_valider = array(
 			'email_defaut'
 			, 'smtp_server'
@@ -88,11 +92,13 @@ function exec_spiplistes_config () {
 		foreach(array_merge(
 			array(
 				'abonnement_valider', 'abonnement_config', 'param_reinitialise'
+				, 'btn_formabo_valider'
 				, 'btn_complement_courrier'
 				, 'btn_param_valider'
 				, 'btn_console_syslog'
 				, 'voir_logs'
 			)
+			, $keys_opt_formabo
 			, $keys_complement_courrier
 			, $keys_param_valider
 			, $keys_str_param_valider
@@ -114,11 +120,23 @@ function exec_spiplistes_config () {
 			$str_log .= "abonnement_config = $abonnement_config, ";
 		}
 	
+		if($btn_formabo_valider) {
+			foreach($keys_opt_formabo as $key) {spiplistes_log("$key ".$$key);
+				spiplistes_ecrire_key_in_serialized_meta(
+					$key
+					, ($$key = (!empty($$key) ? $$key : 'non'))
+					, _SPIPLISTES_META_PREFERENCES
+					);
+				$str_log .= $key." = ".$$key.", ";
+			}
+			$doit_ecrire_metas = true;
+		}
+		
 		if($btn_complement_courrier) {
 			foreach($keys_complement_courrier as $key) {
 				spiplistes_ecrire_key_in_serialized_meta(
 					$key
-					, (!empty($$key) ? $$key : 'non')
+					, ($$key = (!empty($$key) ? $$key : 'non'))
 					, _SPIPLISTES_META_PREFERENCES
 					);
 				$str_log .= $key." = ".$$key.", ";
@@ -250,6 +268,22 @@ function exec_spiplistes_config () {
 		. "</p>\n"
 		// bouton de validation
 		. "<div style='text-align:right;'><input type='submit' name='abonnement_valider' class='fondo' value='"._T('bouton_valider')."' /></div>\n"
+		. "</form>\n"
+		. fin_cadre_trait_couleur(true)
+		;
+
+	//////////////////////////////////////////////////////
+	// Formulaire abonnement
+	$checked1 = ((spiplistes_pref_lire('opt_plier_deplier_formabo') == 'oui') ? "checked='checked'" : "");
+	$page_result .= ""
+		. debut_cadre_trait_couleur("redacteurs-24.gif", true, "", _T('spiplistes:formulaire_abonnement'))
+		. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_CONFIGURE)."' method='post'>\n"
+		. "<p class='verdana2'>\n"
+		. "<input type='checkbox' name='opt_plier_deplier_formabo' value='oui' $checked1 id='plier_deplier' />\n"
+		. "<label for='plier_deplier'>"._T('spiplistes:formulaire_abonnement_effet')."</label>\n"
+		. "</p>\n"
+		// bouton de validation
+		. "<div style='text-align:right;'><input type='submit' name='btn_formabo_valider' class='fondo' value='"._T('bouton_valider')."' /></div>\n"
 		. "</form>\n"
 		. fin_cadre_trait_couleur(true)
 		;
