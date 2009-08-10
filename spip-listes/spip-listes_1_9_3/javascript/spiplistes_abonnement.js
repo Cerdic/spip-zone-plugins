@@ -2,6 +2,9 @@
  * spiplistes_abonnement.js
  * Appele' pour le squelette abonnement
  * 
+ * $LastChangedRevision$
+ * $LastChangedBy$
+ * $LastChangedDate$
  */
 jQuery(document).ready(function(){
 	jQuery('span.listeDescriptif').hide();

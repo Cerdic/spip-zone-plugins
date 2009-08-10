@@ -219,6 +219,7 @@ function balise_FORMULAIRE_ABONNEMENT_dyn($id_liste, $formulaire) {
 					//, 'acces_membres' => $acces_membres
 					, 'inscription_visiteur' => $inscription_visiteur
 					, 'mode_login' => $affiche_formulaire
+					, 'message_formulaire' => $message_formulaire
 					, 'reponse_formulaire' => $reponse_formulaire
 					, 'accepter_auteur' => $GLOBALS['meta']['accepter_inscriptions']
 					, 'id_liste' => $id_liste
@@ -344,8 +345,9 @@ function spiplistes_formulaire_abonnement (
 		{
 			//spiplistes_log("pas de demande, afficher formulaire de modif au complet", _SPIPLISTES_LOG_DEBUG);
 			$reponse_formulaire = ""
-				. "<p class='nom'>" . $abonne['nom'] . "</p>\n"
-				. _T('spiplistes:effectuez_modif_validez');
+				. "<span class='nom'>" . $abonne['nom'] . "</span>\n"
+				. "<span class='souhait'>" . _T('spiplistes:effectuez_modif_validez'). "</span>\n"
+				;
 		}
 		
 		$id_abonne = $abonne['id_auteur'];

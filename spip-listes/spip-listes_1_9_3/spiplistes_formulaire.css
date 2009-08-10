@@ -1,8 +1,8 @@
 /* spiplistes_formulaire.css */
 
 form.formulaire-spiplistes-abo {
-	margin:0;
-	padding:1em !important;
+/*	margin:0;
+	padding:1em !important; /* */
 }
 form.formulaire-spiplistes-abo legend { 
 	font-family: Georgia, Times, serif;
@@ -51,7 +51,7 @@ form.formulaire-spiplistes-abo fieldset label.block input {
 	float:left;
 }
 form.formulaire-spiplistes-abo fieldset label.block span {
-	float:none;
+/*	float:none; /* */
 }
 form.formulaire-spiplistes-abo p.message-formulaire {
 	color:red; 
@@ -66,11 +66,9 @@ form.formulaire-spiplistes-abo p.spip_bouton {
 #spiplistes-pageabo div.bloc {text-align:left;margin:1em auto}
 #spiplistes-pageabo h1, #spiplistes-pageabo div.spiplistes-cdt, .center {text-align:center}
 
-#spiplistes-formabo p.nom {
-	font-size:1.2em;
-}
-#spiplistes-formabo p.nom, #spiplistes-formabo p.souhait {text-align:center}
-#spiplistes-formabo p.souhait {font-size:90%}
+#spiplistes-formabo .nom {display:block;font-size:1.2em;}
+#spiplistes-formabo .nom, #spiplistes-formabo .souhait {text-align:center}
+#spiplistes-formabo .souhait {display:block;font-size:90%}
 
 div.formulaire_modif_abonnement, div.formulaire_modif_abonnement2 {
 	border:1px solid gray;width:75%;

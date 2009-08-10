@@ -132,19 +132,34 @@
 		<legend>[(#TOTAL_BOUCLE|=={1}|?{
 			<:spiplistes:abo_1_lettre:>
 			,<:spiplistes:listes_de_diffusion_:>})] : </legend>
-	<ul>
+	<ul class='liste-des-listes'>
 	<BOUCLE_listes(LISTES) {statut IN 'liste','pub_jour','pub_hebdo','pub_7jours','pub_mensul','pub_mois','pub_an'}{0,(#ENV{mode_login}|?{100,0})}>
 			[(#TOTAL_BOUCLE|=={1}|?{' ',''})
 			<li>
-			[(#ENV{mode_modifier}|?{' ',''})
-			<label><input type="hidden" name="list&#91;&#93;" checked="checked" value="#ID_LISTE" />]
-			<span><:spiplistes:abonnement_seule_liste_dispo:>:<br /><strong>#TITRE</strong> [- <em>(#TEXTE|textebrut)</em>]</span>[(#ENV{mode_modifier}|?{' ',''})</label>]</li>
-			]
-			<BOUCLE_inscription(AUTEURS){tous}{id_liste}{id_auteur=#ENV{id_auteur}}></BOUCLE_inscription>
+			[<!--(#REM) 
+		
+			si une seule liste dispo, precocher la case d'abonnement
+			
+			-->]<label lang='#LANG'>
+				<input type="checkbox" name="list&#91;&#93;" checked="checked" value="#ID_LISTE" />
+				<span class='liste-titre'>#TITRE</span>
+				<span id='listeDescriptif#ID_LISTE' class='listeDescriptif liste-descriptif'>[(#TEXTE|textebrut|couper{80})]</span>
+				</label>
+			</li>
+			][<!--(#REM)
+			
+			sinon, proposer la liste complete
+			
+			-->]<BOUCLE_inscription(AUTEURS){tous}{id_liste}{id_auteur=#ENV{id_auteur}}></BOUCLE_inscription>
 			[(#TOTAL_BOUCLE|!={1}|?{' ',''})
 			<li>
-			[(#ENV{mode_modifier}|?{' ',''})<label class="block"><input [(#_inscription:TOTAL_BOUCLE|?{' ',''})checked="checked"] type="checkbox" name="list&#91;&#93;" value="#ID_LISTE" />]
-			<span>[<strong>(#TITRE)</strong>][ - <em>(#TEXTE|textebrut|couper{80})</em>]</span>[(#ENV{mode_modifier}|?{' ',''})</label>]</li>]
+						<label lang='#LANG'>
+							<input type="checkbox" name="list&#91;&#93;" [(#_inscription:TOTAL_BOUCLE|?{' ',''})checked="checked"] value="#ID_LISTE" />
+							<span class='liste-titre'>#TITRE</span>
+							<span id='listeDescriptif#ID_LISTE' class='listeDescriptif liste-descriptif'>[(#TEXTE|textebrut|couper{80})]</span>
+						</label>
+					</li>
+			]
 	</BOUCLE_listes>
 	</ul>
 	</fieldset>
@@ -178,8 +193,18 @@
 	[(#ENV{mode_modifier}|?{' ',''})
 	<fieldset>
 		<legend><:spiplistes:format_reception:></legend>
-		<label class="block"><input name="suppl_abo" value="html" [(#ENV{format}|=={html}|?{' ',''})checked="checked"] type="radio" /><span><:spiplistes:html:><:spiplistes:html_description:></span></label>
-		<label class="block"><input name="suppl_abo" value="texte" [(#ENV{format}|=={texte}|?{' ',''})checked="checked"] type="radio" /><span><:spiplistes:texte:></span></label>
+		<ul class='liste-formats'>
+			<li>
+				<label class="block">
+					<input name="suppl_abo" value="html" [(#ENV{format}|=={html}|?{' ',''})checked="checked"] type="radio" /><span><:spiplistes:html:><:spiplistes:html_description:></span>
+				</label>
+			</li>
+			<li>
+				<label class="block">
+					<input name="suppl_abo" value="texte" [(#ENV{format}|=={texte}|?{' ',''})checked="checked"] type="radio" /><span><:spiplistes:texte_brut:></span>
+				</label>
+			</li>
+		</ul>
 	</fieldset>
 	<fieldset>
 		<legend><:spiplistes:suspendre_abonnement_:> : </legend>
