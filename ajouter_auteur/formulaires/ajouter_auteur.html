@@ -1,5 +1,5 @@
 <script type="text/javascript"><!--
-		
+
 	(function($) {
 	var rechercher_auteur = function() {
 
@@ -45,7 +45,9 @@
 [(#ENV{editable})
 <div class="formulaire_spip formulaire_ajouter_auteur" id="formulaire_ajouter_auteur">
 <form action="#ENV{action}#formulaire_ajouter_auteur" method="post" class="noajax">
-#ACTION_FORMULAIRE{#ENV{action}}
+	[<p class="formulaire_message">(#ENV*{message_ok})</p>]
+	[<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
+	#ACTION_FORMULAIRE{#ENV{action}}
 	<ul>
 		<li>
 			<label for="ajouter_auteur">[(#ENV{_label_ajouter_auteur})]</label>

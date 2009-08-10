@@ -7,10 +7,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'ajouter_un_auteur' => 'Ajouter un auteur',
 	'auteur_ajoute' => 'Auteur ajout&eacute;',
-	
+
 	// B
 	'bouton_valider' => 'Valider',
-	
+
+	// E
+	'erreur_deja_id_auteur' => 'Cet auteur est d&eacute;j&agrave; auteur de l\'article',
+	'erreur_pas_id_auteur' => 'Choisissez un auteur',
+
 );
 
 ?>
