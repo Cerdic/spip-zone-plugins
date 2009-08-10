@@ -1,7 +1,7 @@
 <?php
 
 /**
- * spipicious
+ * spip.icio.us
  * Gestion de tags lies aux auteurs
  *
  * Auteurs :
@@ -16,13 +16,15 @@ if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
 function formulaires_spipicious_ajax_charger($id_objet,$type='article') {
 	global $visiteur_session;
-	$autorise = lire_config('spipicious/people',array());
-	if (!$visiteur_session['id_auteur'] OR !in_array($visiteur_session['statut'],$autorise)) {
+
+	include_spip('inc/autoriser');
+	if(!autoriser('tagger_spipicious',$type,$id_objet,$visiteur_session,$opt)){
 		return array('editable'=> false);
 	}
+
 	$id_type = id_table_objet($type);
 	$id_groupe = lire_config('spipicious/groupe_mot');
-	$valeurs = array($id_type=>$id_objet,'type'=>$type,'id_objet'=>$id_objet,'spipicious_groupe'=>$id_groupe);
+	$valeurs = array('type'=>$type,'type'=>$type,'id_objet'=>$id_objet,'spipicious_groupe'=>$id_groupe);
 	return $valeurs;
 }
 

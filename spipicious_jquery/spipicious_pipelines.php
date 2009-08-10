@@ -1,26 +1,27 @@
 <?php
 
-/*
- * spipicious
+/**
+ * spip.icio.us
  * Gestion de tags lies aux auteurs
  *
  * Auteurs :
  * Quentin Drouet
  * Erational
  *
- * 2007-2008 - Distribue sous licence GNU/GPL
+ * 2007-2009 - Distribue sous licence GNU/GPL
  *
  */
 
+/**
+ * Insertion du code javascript nécessaire dans le head
+ *
+ * @param object $flux
+ * @return
+ */
 function spipicious_insert_head($flux){
 	global $visiteur_session;
-	$contenu = " ";
 
-	$autorise = lire_config('spipicious/people',array());
-
-	spip_log("autorise == '$autorise'");
-
-	if($visiteur_session['id_auteur'] && in_any($visiteur_session['statut'],$autorise)){
+	if(autoriser('tagger_spipicious','article',$id_objet,$visiteur_session,$opt)){
 
 	include_spip('selecteurgenerique_fonctions');
 	$flux .= selecteurgenerique_verifier_js($flux);
@@ -32,6 +33,7 @@ function spipicious_insert_head($flux){
 		<script type="text/javascript"><!--
 
 	(function($) {
+		var spipicious_call = 0;
 		var appliquer_selecteur_spipicious = function() {
 
 			// chercher l'input de saisie
@@ -39,14 +41,17 @@ function spipicious_insert_head($flux){
 
 			var id_objet = $("input#spipicious_id").val();
 			var type = $("input#spipicious_type").val();
-			if((spipicious.size()>0)&&(type!='')){
+			if((spipicious.size()>0) && ($('.tags_'+type+'_'+id_objet).size()>0) && (spipicious_call > 1)){
 				$.ajax({
 					type: "GET",
 					url:'$tags_link',
-					data: 'id_'+type+'='+id_objet,
+					data: {
+						id_objet : id_objet,
+						objet : type
+					},
 					success:function(data,status){
 						var newdata = jQuery(data+' #tags').html();
-						$('.tags').addClass('loading').html(newdata).removeClass('loading');
+						$('.tags_'+type+'_'+id_objet).addClass('loading').html(newdata).removeClass('loading');
 					}
 				});
 			}
@@ -80,6 +85,7 @@ function spipicious_insert_head($flux){
 					return data[1];
 				}
 			});
+			spipicious_call++;
 			// Hack pour le focus obligatoire de positionner
 			// Le selecteur generique ne se rechargeait pas
 			spipicious.blur().focus();

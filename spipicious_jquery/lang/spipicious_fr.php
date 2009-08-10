@@ -23,15 +23,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// B
 	'by' => 'Par',
 
+	// E
+	'explication_ajout_tag' => 'Pour ajouter plusieurs tags &agrave; la fois, utilisez le s&eacute;parateur : "@separateur@".',
+	'explication_suppression_tag' => 'S&eacute;lectionnez vos tags dans la liste ci-dessous et validez pour les supprimer.',
+
 	// I
 	'identifier' => 'Pour ajouter des tags sur cet article, vous devez vous identifier',
 
 	// M
 	'message_installation_activation' => 'Installation des tables et configuration par d&eacute;faut de spip.icio.us',
-	'message_upgrade_database' => 'spipicious update @ @version@<br/>',
+	'message_upgrade_database' => 'Mise &agrave; de la base de donn&eacute; de spip.ici.ous en version @version@<br/>',
 
 	// N
 	'no_tags_associes' => 'Vous n\'avez pas de mot cl&eacute; associ&eacute;',
+	'nom_groupe_tag' => 'Groupe de mots cl&eacute; associ&eacute;',
 
 	// S
 	'spipicious' => "Spip.icio.us",
@@ -44,19 +49,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tags_ajoutes' => 'Vous avez ajout&eacute; plusieurs tags:<br />@name@',
 	'tags_supprimes' => 'Vous avez supprim&eacute; plusieurs tags:<br />@name@',
 	'to' => "avec",
+	'types_utilisateurs' => 'Qui a acc&egrave;s au formulaire ?',
 
 	// V
 	'vos_tags' => 'Vos tags (modification)',
 
 	// W
-	'waiting' => 'recherche de vos tags',
+	'waiting' => 'recherche de vos tags'
 
-	'administrateurs' => 'Les administrateurs',
-	'redacteurs' => 'Les r&eacute;dacteurs',
-	'visiteurs' => 'Les visiteurs',
-	'types_utilisateurs' => 'Qui a acc&egrave;s au formulaire ?',
-	'nom_groupe_tag' => 'Groupe de mots cl&eacute; associ&eacute;',
-	'waiting' => 'recherche de vos tags',
-	'remove' => 'Supprimer',
+
 );
 ?>

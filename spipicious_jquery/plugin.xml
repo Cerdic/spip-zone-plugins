@@ -4,8 +4,8 @@
 _ R&#233;utilisation de code du plugin r&#233;alis&#233; par [erational->http://www.erational.org]
 _ &#169; 2007-2009 - Licence GPL
 	</auteur>
-	<version>0.5</version>
-	<version_base>0.5</version_base>
+	<version>0.6</version>
+	<version_base>0.6</version_base>
 	<etat>test</etat>
 	<description>
 	<multi>
@@ -39,8 +39,12 @@ _ Icon from [Wolfgang Bartelme and Chris Messina->http://www.factorycity.net/pro
 	</pipeline>
 	<pipeline>
 		<nom>insert_head</nom>
-		<inclure>spipicious_head.php</inclure>
+		<inclure>spipicious_pipelines.php</inclure>
 	</pipeline>
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>spipicious_autoriser.php</inclure>
+    </pipeline>
 	<necessite id="SelecteurGenerique" version="[0.2;]" />
 	<necessite id='cfg' version='[1.10.1;]' />
 	<necessite id="SPIP" version='[2.0.9;]' />

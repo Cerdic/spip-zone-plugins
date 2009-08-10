@@ -12,7 +12,7 @@
  *
  */
 
-	$GLOBALS['spipicious_base_version'] = 0.5;
+	$GLOBALS['spipicious_base_version'] = 0.6;
 
 	function spipicious_upgrade(){
 		$version_base = $GLOBALS['spipicious_base_version'];
@@ -50,13 +50,13 @@
 				sql_alter("TABLE `spip_spipicious` ADD PRIMARY KEY (`id_mot`) ");
 				sql_alter("TABLE `spip_spipicious` ADD KEY (`id_auteur`) ");
 				sql_alter("TABLE `spip_spipicious` ADD maj timestamp AFTER position ");
-				echo _T('spipicious:upgrade_database',array('version'=>0.2));
+				echo _T('spipicious:message_upgrade_database',array('version'=>0.2));
 				ecrire_meta('spipicious_base_version',$current_version=0.2,'non');
 			}
 			if($current_version<0.3){
 				sql_alter("TABLE `spip_spipicious` ADD id_rubrique bigint(21) NOT NULL AFTER`id_article` ");
 				sql_alter("TABLE `spip_spipicious` ADD id_document bigint(21) NOT NULL AFTER`id_rubrique` ");
-				echo _T('spipicious:upgrade_database',array('version'=>0.3));
+				echo _T('spipicious:message_upgrade_database',array('version'=>0.3));
 				ecrire_meta('spipicious_base_version',$current_version=0.3,'non');
 			}
 			if($current_version<0.4){
@@ -72,15 +72,30 @@
 					creer_base();
 					echo "Creation de la table spip_mots_documents<br/>";
 				}
-				echo _T('spipicious:upgrade_database',array('version'=>0.4));
+				echo _T('spipicious:message_upgrade_database',array('version'=>0.4));
 				ecrire_meta('spipicious_base_version',$current_version=0.4,'non');
 			}
 			if($current_version<0.5){
 				sql_alter("TABLE `spip_spipicious` ADD id_syndic bigint(21) NOT NULL AFTER`id_document` ");
 				sql_alter("TABLE `spip_spipicious` ADD id_evenement bigint(21) NOT NULL AFTER`id_syndic` ");
-				echo _T('spipicious:upgrade_database',array('version'=>0.5));
+				echo _T('spipicious:message_upgrade_database',array('version'=>0.5));
 				ecrire_meta('spipicious_base_version',$current_version=0.5,'non');
 			}
+			if($current_version<0.6){
+				sql_alter("TABLE `spip_spipicious` ADD id_objet bigint(21) NOT NULL AFTER `id_auteur` ");
+				sql_alter("TABLE `spip_spipicious` ADD objet VARCHAR (25) DEFAULT '' NOT NULL AFTER `id_objet` ");
+				spipicious_id_objet_objet_upgrade();
+				sql_alter("TABLE `spip_spipicious` DROP PRIMARY KEY");
+				sql_alter("TABLE `spip_spipicious` ADD PRIMARY KEY (`id_mot`,`id_auteur`,`id_objet`,`objet`)");
+				sql_alter("TABLE `spip_spipicious` DROP COLUMN `id_article`");
+				sql_alter("TABLE `spip_spipicious` DROP COLUMN `id_document`");
+				sql_alter("TABLE `spip_spipicious` DROP COLUMN `id_rubrique`");
+				sql_alter("TABLE `spip_spipicious` DROP COLUMN `id_syndic`");
+				sql_alter("TABLE `spip_spipicious` DROP COLUMN `id_evenement`");
+				echo _T('spipicious:message_upgrade_database',array('version'=>0.6));
+				ecrire_meta('spipicious_base_version',$current_version=0.6,'non');
+			}
+
 			ecrire_metas();
 		}
 	}
@@ -104,6 +119,22 @@
 			case 'uninstall':
 				spipicious_vider_tables();
 				break;
+		}
+	}
+
+	/**
+	 * Reunir en un seul champs id_objet/objet
+	 */
+	function spipicious_id_objet_objet_upgrade () {
+		// Recopier les donnees avec le coupe id_objet / objet
+		foreach (array('article', 'rubrique', 'document', 'evenement', 'syndic') as $liste => $l) {
+			spip_log($l);
+			$s = sql_select('*', 'spip_spipicious','id_'.$l.' > 0');
+			while ($t = sql_fetch($s)) {
+				$t['id_objet'] = $t["id_$l"];
+				$t['objet'] = $l;
+				sql_updateq('spip_spipicious',$t,'id_'.$l.' = '.intval($t['id_'.$l]).' AND id_mot='.intval($t['id_mot'].' AND id_auteur='.intval($t{'id_auteur'})));
+			}
 		}
 	}
 ?>

@@ -10,6 +10,20 @@
 	Eliminer d'abord les mots deja lies a l'article/breve etc.
 	Attention il FAUT passer un de ces 3 id_xxx en parametre
 ]
+
 [(#SET{id_groupe,#CONFIG{spipicious/groupe_mot,1}})]
-[(#REM) Chercher les mots correspondant a la requete ]
-[(#INCLURE{fond=selecteurs/tags_#ENV{type}}{id_objet}{q=#ENV{q}}{id_groupe=#GET{id_groupe}})]
+#SET{total,0}
+<BOUCLE_s0(MOTS){id_auteur=#SESSION{id_auteur}}{id_objet=#ENV{id_objet}}{objet=#ENV{type}}{doublons}> </BOUCLE_s0>
+<BOUCLE_s(MOTS){titre LIKE (#ENV{q})%}{id_groupe = #GET{id_groupe}}{0,20}{par titre}{doublons}>
+#TITRE[ - (#DESCRIPTIF|textebrut|couper{20})]|[(#TITRE|textebrut)]|#ID_MOT
+</BOUCLE_s>
+#SET{total,#GET{total}|plus{#COMPTEUR_BOUCLE}}
+</B_s>
+
+<BOUCLE_s1(MOTS){titre LIKE %(#ENV{q})%}{id_groupe = #GET{id_groupe}}{0,20}{par titre}{doublons}>
+#TITRE[ - (#DESCRIPTIF|textebrut|couper{20})]|[(#TITRE|textebrut)]|#ID_MOT
+</BOUCLE_s1>
+#SET{total,#GET{total}|plus{#COMPTEUR_BOUCLE}}
+</B_s1>
+
+[(#GET{total}|>{0}|non)<:selecteurgenerique:pas_suggestion:>|[(#ENV*{q}|textebrut)]|0]
