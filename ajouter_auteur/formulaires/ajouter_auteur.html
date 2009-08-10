@@ -1,0 +1,61 @@
+<script type="text/javascript"><!--
+		
+	(function($) {
+	var rechercher_auteur = function() {
+
+		// chercher l'input de saisie
+		var me = jQuery('input[@name=ajouter_auteur][autocomplete!=off]');
+		var id_article = #ENV{id_article};
+		me.autocomplete('[(#URL_PAGE{selecteur_auteur})]',
+					{
+						extraParams:{id_article:id_article},
+						delay: 200,
+						autofill: false,
+						minChars: 1,
+						multiple:false,
+						multipleSeparator:";",
+						scroll: false,
+						formatItem: function(data, i, n, value) {
+							return data[0];
+						},
+						formatResult: function(data, i, n, value) {
+							return data[1];
+						},
+					}
+				);
+				me.result(function(event, data, formatted) {
+					if (data[2] > 0) {
+						var id = data[2];
+						jQuery('#ajouter_id_auteur').val(id);
+						jQuery('#formulaire_ajouter_auteur input[type="submit"]').focus();
+						jQuery(me)
+						.end();
+					}
+					else{
+						return data[1];
+					}
+				});
+			};
+			$(function(){
+				rechercher_auteur();
+				onAjaxLoad(rechercher_auteur);
+			});
+		})(jQuery);
+// --></script>
+[(#ENV{editable})
+<div class="formulaire_spip formulaire_ajouter_auteur" id="formulaire_ajouter_auteur">
+<form action="#ENV{action}#formulaire_ajouter_auteur" method="post" class="noajax">
+#ACTION_FORMULAIRE{#ENV{action}}
+	<ul>
+		<li>
+			<label for="ajouter_auteur">[(#ENV{_label_ajouter_auteur})]</label>
+			<input type="text" class="text" name="ajouter_auteur" id="ajouter_auteur" onclick="jQuery(this).val('');jQuery('#ajouter_id_auteur').val('');" />
+			<input type="hidden" name="ajouter_id_auteur" id="ajouter_id_auteur" value="" />
+		</li>
+	</ul>
+	<p class="boutons">
+		<input type="submit" class="submit" name="valider" value="<:ajouter_auteur:bouton_valider:>" />
+	</p>
+</form>
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+</div>]

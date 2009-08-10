@@ -1,0 +1,21 @@
+	<plugin>
+	<nom>Ajouter auteur</nom>
+	<auteur>b_b
+_ Distribu&#233; sous licence GNU/LGPL
+	</auteur>
+	<version>0.1</version>
+	<etat>dev</etat>
+	<icon></icon>
+	<description>
+	Plugin qui permet d'ajouter des auteurs a un article par la balise FORMULAIRE_AJOUTER_AUTEUR
+	</description>
+	<lien></lien>
+	<prefix>ajouter_auteur</prefix>
+	<fonctions>ajouter_auteur_fonctions.php</fonctions>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>ajouter_auteur_pipelines.php</inclure>
+	</pipeline>
+	<necessite id='SPIP' version='[2.0.0;]' />
+	<necessite id="SelecteurGenerique" version="[0.2;]" />
+</plugin>
