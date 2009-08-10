@@ -1,7 +1,7 @@
 <?php
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function action_sauvegarder_cfg() {
+function action_sauvegarder_savefg() {
 	include_spip('inc/filtres');
 	$fond = _request('arg');
 	$sfg = sql_getfetsel('valeur', 'spip_meta', 'nom='.sql_quote($fond));

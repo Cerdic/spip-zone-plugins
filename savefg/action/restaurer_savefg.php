@@ -1,7 +1,7 @@
 <?php
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function action_restaurer_cfg() {
+function action_restaurer_savefg() {
 	include_spip('inc/meta');
 	include_spip('inc/filtres');
 	$fond = _request('arg');
