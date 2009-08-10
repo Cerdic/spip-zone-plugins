@@ -48,7 +48,8 @@ function spiplistes_insert_head ($flux) {
 			(($s = spiplistes_pref_lire('opt_plier_deplier_formabo')) && ($s == 'oui'))
 			&& ($f = find_in_path("javascript/spiplistes_abonnement.js")))
 		{
-			$flux .= "<script type='text/javascript' src='" . compacte($f) . "'></script>\n";
+			//$flux .= "<script type='text/javascript' src='" . compacte($f) . "'></script>\n";
+			$flux .= "<script type='text/javascript' src='" . $f . "'></script>\n";
 		}
 	}
 
