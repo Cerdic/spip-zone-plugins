@@ -49,7 +49,10 @@ function spiplistes_dater_envoi (
 
 		list($annee, $mois, $jour, $heure, $minute, $seconde) = $date_valide;
 		
-		$js = "size='1' class='fondl' onchange=\"findObj_forcer('valider_date').style.visibility='visible';\"";
+		$js = "size='1' class='fondl'";
+		
+		if($enveloppe_formulaire)
+			$js .= "onchange=\"findObj_forcer('valider_date').style.visibility='visible';\"";
 		
 		$invite = ""
 			. "<span class='verdana1 titre-boite-date'>"
