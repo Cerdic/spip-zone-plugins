@@ -1,12 +1,22 @@
 <?php
 // Ajout du bouton permettant de se rendre sur la page de gestion des tickets
 function tickets_ajouterBoutons($boutons_admin) {
-		// affiche le bouton dans "Forum", tout le monde peut voir cette page
-		$boutons_admin['forum']->sousmenu['tickets'] = new Bouton(
-			find_in_path('bugs.png', 'imgs/', false),
-			_T('tickets:titre'),
-			generer_url_ecrire('tickets')
-		);
+		// affiche le bouton dans "Forum" si les forums sont activés, tout le monde peut voir cette page
+		if($boutons_admin['forum']){
+			$boutons_admin['forum']->sousmenu['tickets'] = new Bouton(
+				find_in_path('bugs.png', 'imgs/', false),
+				_T('tickets:titre'),
+				generer_url_ecrire('tickets')
+			);
+		}else{
+			// Sinon affiche les tickets en sous menu de Edition, aussi accessible pour tout le monde
+			$boutons_admin['naviguer']->sousmenu['tickets'] = new Bouton(
+				find_in_path('bugs.png', 'imgs/', false),
+				_T('tickets:titre'),
+				generer_url_ecrire('tickets')
+			);		
+		}
+		
 	return ($boutons_admin);
 }
 
