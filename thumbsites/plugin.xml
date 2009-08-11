@@ -27,8 +27,8 @@ _ Ce plugin g&egrave;re aussi un cache qui permet de pallier les indisponibilit&
 	<prefix>thumbsites</prefix>
 
     <!-- précise les dependances vis-a-vis de d'autres plugins -->
-	<necessite id="SPIP" version="[1.9.3;)" />
-	<necessite id="cfg" version="[1.7.6;)" />
+	<necessite id="SPIP" version="[2.0;]" />
+	<necessite id="cfg" version="[1.7.6;]" />
 
     <!-- mes fonctions -->
 	<fonctions>thumbsites_fonctions.php</fonctions>
