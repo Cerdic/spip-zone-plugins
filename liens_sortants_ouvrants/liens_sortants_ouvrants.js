@@ -7,8 +7,8 @@ function targetLinks() {
 		.attr('rel','external')
 		.addClass('external')
 		.each(function(){
-			title =  "(nouvelle fenetre)";
-			if($(this).attr("title")) title = $(this).attr("title") + " (nouvelle fenetre)";
+			title =  "(nouvelle fenêtre)";
+			if($(this).attr("title")) title = $(this).attr("title") + " (nouvelle fenêtre)";
 			$(this).attr("title",title);
 		});
 }
