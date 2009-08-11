@@ -1,0 +1,38 @@
+<plugin>
+	<nom>Ldap++</nom>
+	<auteur>VincentL
+_ &#169; 2009 - Distribu&#233; sous licence GPL   
+	</auteur>
+	<lien></lien>
+	<version>0.1</version>
+	<etat>dev</etat>
+    <description>
+		Ajoute des fonctionnalités LDAP
+		<a href="?exec=ldaplus">Page de gestion</a>
+	</description>
+	<prefix>ldaplus</prefix>
+	<fonctions>
+		ldaplus_fonctions.php
+	</fonctions>
+	<options>
+		ldaplus_options.php
+	</options>
+	<pipeline>
+		<nom>champs_ldap</nom>
+		<inclure>ldaplus_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>champs_auteurs</nom>
+		<inclure>ldaplus_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>champs_auteurs_elargis</nom>
+		<inclure>ldaplus_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>memberOf</nom>
+		<inclure>ldaplus_pipelines.php</inclure>
+	</pipeline>
+	<necessite id="SPIP" version='[2.0.0;]' />
+	<chemin dir='' />
+</plugin>

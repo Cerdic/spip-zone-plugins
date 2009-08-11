@@ -1,0 +1,28 @@
+#CACHE{0}
+<form action='#ENV{action}' method='post'>
+	#ACTION_FORMULAIRE{#ENV{action}}
+<fieldset><legend><:ldaplus:tbl_auteur:></legend>
+<table>
+	<tr>
+		<th><:ldaplus:chp_auteur:></th>
+		<th><:ldaplus:chp_ldap:></th>
+	</tr>
+	#PIPELINE{champs_auteurs}
+</table>
+</fieldset>
+<br/>
+
+[(#EVAL{defined('_DIR_PLUGIN_INSCRIPTION2')}|?{' '}) 
+<fieldset><legend><:ldaplus:tbl_auteur_elargi:></legend>
+<table>
+	<tr>
+		<th><:ldaplus:chp_auteur:></th>
+		<th><:ldaplus:chp_ldap:></th>
+	</tr>
+	#PIPELINE{champs_auteurs_elargis}
+</table>
+</fieldset>]
+<input type="submit" name="_cfg_ok" class="submit" value="<:valider:>" />
+<input type="submit" name="_cfg_delete" class="reset" value="<:effacer:>" />
+</form>
+

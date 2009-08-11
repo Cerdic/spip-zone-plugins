@@ -1,0 +1,22 @@
+#CACHE{0}
+<script type="text/javascript">
+function ajouter() {
+	var i = $('#i_max')[0].value;
+	$('#li_liens').append('<li id="memberOf_'+i+'"><:ldaplus:lien_ldap:><input type="text" name="memberOf_'+i+'"/> <:ldaplus:et_groupe:><B_grp><select name="grp_'+i+'[]" multiple><BOUCLE_grp(GROUPES)><option value="#ID_GROUPE">#NOM</option></BOUCLE_grp></select></B_grp><a href="javascript:supprimer('+i+')"><:ldaplus:supprimer:></a></li></li>');
+	$('#i_max')[0].value = i + 1;
+}
+
+function supprimer(id) {
+	$('#memberOf_'+id).remove();
+}
+</script>
+
+<form action='#ENV{action}' method='post'>
+	#ACTION_FORMULAIRE{#ENV{action}}
+<fieldset>
+	#PIPELINE{memberOf}
+<a href="javascript:ajouter()"><:ldaplus:ajouter_lien:></a>
+</fieldset>	
+<input type="submit" name="_cfg_ok" class="submit" value="<:valider:>" />
+<input type="submit" name="_cfg_delete" class="reset" value="<:effacer:>" />
+</form>
