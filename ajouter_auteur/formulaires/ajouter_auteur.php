@@ -39,8 +39,8 @@ function formulaires_ajouter_auteur_traiter_dist($id_article, $_T=array(), $reto
 	//recuperer les donnees qui nous interessent
 	$ajouter_id_auteur = _request('ajouter_id_auteur');
 
-	include_spip('action/editer_auteur');
-	action_legender_auteur_post('', '', '', '', '', '', '', '', '', '', '', $id_article, '', '', $ajouter_id_auteur);
+	include_spip('action/editer_auteurs');
+	$ajout = ajouter_auteur_et_rediriger('article', $id_article, $ajouter_id_auteur, '');
 	$invalider = true;
 
 	if ($retour) {
