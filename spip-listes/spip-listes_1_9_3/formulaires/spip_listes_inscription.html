@@ -1,20 +1,21 @@
-[<p class='formulaire_ok'>(#ENV*{message_ok})</p>]
-[<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
-[<p><span class='erreur'>(#ENV**{erreurs}|table_valeur{email})</span></p>]
-
-
+<div class="formulaire_spip formulaire_spip_listes_inscription">
+<!-- <br class='bugajaxie' /> -->
+[<p class="formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="formulaire_erreur">(#ENV*{message_erreur})</p>]
+[<p><span class="erreur">(#ENV**{erreurs}|table_valeur{email})</span></p>]
 [(#ENV{editable}|oui)
-	<form action='#ENV{action}' method='post'>
-		#ACTION_FORMULAIRE{#ENV{action}}
-		<label>Votre email</label>
-		<input type='text' name='email' value='#ENV{email}' />
-		<input type="hidden" name="listes&#91;&#93;" checked="checked" value="1" />
-
-		<br />
-		
-	<input name="format_abo" value="html" checked="checked" type="hidden" />			
-	<p style="text-align:right">
-	<input type='submit' name='ok' value='ok' />
+<form action="#ENV{action}" method="post">
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<input type="hidden" name="listes&#91;&#93;" checked="checked" value="1" />
+	<input type="hidden" name="format_abo" checked="checked" value="html" />
+	<ul>
+		<li class="editer_email">
+			<label for="email">Votre email</label>
+			<input type="text" name="email" id="email" value="#ENV{email}" class="text" />
+		</li>
+	</ul>
+	<p class="boutons">
+		<input type="submit" class="submit" name="ok" value="ok" />
 	</p>
-	</form>
-]
+</form>]
+</div>
