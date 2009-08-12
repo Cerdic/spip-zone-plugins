@@ -1,0 +1,5 @@
+#CACHE{0}
+
+<BOUCLE_fav_auteur(AUTEURS){id_auteur=#SESSION{id_auteur}}{tout}>
+<form action="#SELF" method='post' ><input name="ajouter" type="hidden" value="[(#TMP{cle})]" ><input name="id_zoteur" type="hidden" value="#SESSION{id_auteur}" readonly="true"><input name="yes" value ="submit" src="prive/images/puce-verte.gif" align="absmiddle" title="ajouter aux favoris!" type="image"  id="false"/>&nbsp;<input name="no" value ="submit" src="prive/images/puce-poubelle.gif" align="absmiddle" title="Retirer de vos favoris!" type="image"  id="false"/></form>
+</BOUCLE_fav_auteur>

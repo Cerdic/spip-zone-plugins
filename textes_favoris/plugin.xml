@@ -1,0 +1,26 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	favoris
+	</nom>
+	<auteur>Bernard Blazin </auteur>
+	<version>
+	0.2
+	</version>
+	<etat>
+	test
+	</etat>
+	<icon>img_pack/favo.gif</icon>
+	<description>
+	Permet aux auteurs connect&eacute;s de choisir une liste d'articles favoris dans la partie publique du site
+	</description>
+	<prefix> 
+	favotexte
+	</prefix>
+	<install>base/favotexte_init.php</install>
+	 <bouton id='favoris' parent='naviguer'>
+      <icone>img_pack/favo.gif</icone>
+      <titre>Favoris</titre>
+  </bouton>
+			<fonctions>favoris_fonctions.php</fonctions>
+		<necessite id="SPIP" version="[2.0.0;]" />
+</plugin>
