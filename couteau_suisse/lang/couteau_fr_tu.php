@@ -15,7 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'configurer' => 'Configurer le Couteau Suisse',
-	'connections' => 'Connexions',
+	'connections' => '<MODIF>Connections',
 
 	// D
 	'date_court' => '@jour@/@mois@/@annee@',

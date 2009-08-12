@@ -15,7 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'configurer' => 'Configurar la Navaya Suiza',
-	'connections' => 'Conexones',
+	'connections' => '<MODIF>Conexones',
 
 	// D
 	'date_court' => '@jour@/@mois@/@annee@',

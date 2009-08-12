@@ -15,7 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'configurer' => 'Schweizer Taschenmesser konfigurieren',
-	'connections' => 'Verbindungen',
+	'connections' => '<MODIF>Verbindungen',
 
 	// D
 	'date_court' => '@jour@/@mois@/@annee@',

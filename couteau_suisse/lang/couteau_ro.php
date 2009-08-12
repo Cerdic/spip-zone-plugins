@@ -15,7 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'configurer' => 'Configura&#355;i Briceagul Elve&#355;ian',
-	'connections' => 'Conexiuni',
+	'connections' => '<MODIF>Conexiuni',
 
 	// D
 	'date_court' => '@jour@/@mois@/@annee@',

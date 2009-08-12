@@ -15,7 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'configurer' => '<NEW>Configurar la Nabaja Suiza',
-	'connections' => '<NEW>Conexiones',
+	'connections' => '<MODIF><NEW>Conexiones',
 
 	// D
 	'date_court' => '@jour@/@mois@/@annee@',

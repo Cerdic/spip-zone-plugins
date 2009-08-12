@@ -15,7 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'configurer' => '&#304;svi&ccedil;re &Ccedil;ak&#305;s&#305;n&#305; konfig&uuml;re et',
-	'connections' => 'Ba&#287;lant&#305;lar',
+	'connections' => '<MODIF>Ba&#287;lant&#305;lar',
 
 	// D
 	'date_court' => '@jour@/@mois@/@annee@',
