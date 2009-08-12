@@ -31,6 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'identifier' => 'Pour ajouter des tags sur cet article, vous devez vous identifier',
 
 	// M
+	'message_aucun_tags' => 'Aucun tag n\'est associ&eacute;',
 	'message_installation_activation' => 'Installation des tables et configuration par d&eacute;faut de spip.icio.us',
 	'message_upgrade_database' => 'Mise &agrave; de la base de donn&eacute; de spip.ici.ous en version @version@<br/>',
 
@@ -48,6 +49,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tags' => 'Tags :',
 	'tags_ajoutes' => 'Vous avez ajout&eacute; plusieurs tags:<br />@name@',
 	'tags_supprimes' => 'Vous avez supprim&eacute; plusieurs tags:<br />@name@',
+	'title_tag_utilise_nb' => 'Ce mot cl&eacute; est associ&eacute; par @nb@ personnes.',
+	'title_tag_utilise_un' => 'Ce mot cl&eacute; est associ&eacute; par une personne.',
+
 	'to' => "avec",
 	'types_utilisateurs' => 'Qui a acc&egrave;s au formulaire ?',
 

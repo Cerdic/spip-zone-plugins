@@ -56,7 +56,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 			}
 			else {
 				// Utilisation par un autre utilisateur ok mais utilisation sur le meme id_$type
-				$newt2 = sql_getfetsel("id_auteur","spip_spipicious","id_mot=".intval($remove_tag)." AND $id_table_objet=".intval($id_objet));
+				$newt2 = sql_getfetsel("id_auteur","spip_spipicious","id_mot=".intval($remove_tag)." AND id_objet=".intval($id_objet)." AND objet=".sql_quote($type));
 				if(!$newt2){
 					sql_delete("$table_mot","id_mot=".intval($remove_tag)." AND $id_table_objet=".intval($id_objet));
 				}

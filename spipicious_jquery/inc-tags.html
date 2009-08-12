@@ -1,12 +1,15 @@
 #CACHE{0}
 #HTTP_HEADER{Content-Type:text/html}
 [(#SET{id_groupe,#ENV{id_groupe,#CONFIG{spipicious/groupe_mot,1}}})]
-<div class="tags_#ENV{objet}_#ENV{id_objet} tags_liste">
+<div class="tags[_(#ENV{objet})][_(#ENV{id_objet})] tags_liste">
 <B_motsElement>
 	<ul>
 		<BOUCLE_motsElement(SPIPICIOUS mots){id_objet}{objet}{mots.id_groupe=#GET{id_groupe}}>
-			<li><a href="#URL_MOT" title="#TITRE" rel="tag">#TITRE</a>
-			<BOUCLE_nb(SPIPICIOUS){id_mot}{objet}{id_objet}> </BOUCLE_nb>(#TOTAL_BOUCLE)</B_nb>
+			<li><a href="#URL_MOT" title="[(#TITRE|attribut_html)]" rel="tag">#TITRE</a>
+			<BOUCLE_nb(SPIPICIOUS){id_mot}{objet}{id_objet}> </BOUCLE_nb>
+				[(#TOTAL_BOUCLE|>{1}|oui)(<abbr title="<:spipicious:title_tag_utilise_nb{nb=#COMPTEUR_BOUCLE}:>">#COMPTEUR_BOUCLE</abbr>)]
+				[(#TOTAL_BOUCLE|=={1}|oui)(<abbr title="<:spipicious:title_tag_utilise_un:>">#COMPTEUR_BOUCLE</abbr>)]
+			</B_nb>
 			</li>
 		</BOUCLE_motsElement>
 	</ul>
