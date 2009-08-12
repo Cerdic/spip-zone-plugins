@@ -331,6 +331,12 @@ jQuery(function($) {
 			return;
 		debug('processModal');
 		modal.started = true;
+		/*
+			TODO Externaliser ce bout de code, par exemple sur un événement "click" sur le sélecteur d'ouverture 
+			Permettrait la surcharge et donc de bénéficier des mises à jours faciles de la modale officielle
+		*/
+		$('embed, object, select').css({ 'visibility' : 'hidden' });
+		
 		setDefaultCurrentSettings(settings);
 		if (!modal.full)
 			modal.blockerVars = modal.blocker = null;
@@ -1297,7 +1303,7 @@ jQuery(function($) {
 				setMarginLoading();
 				currentSettings.showLoading(modal, currentSettings, function(){modal.anim=false;showContentOrLoading();});
 			}
-		}
+		}        
 	}
 
 
@@ -1366,6 +1372,12 @@ jQuery(function($) {
 			.css(currentSettings.css.wrapper)
 			.append(modal.content);
 		showContentOrLoading();
+		/*
+			TODO Externaliser ce bout de code, par exemple sur un événement "click" sur le sélecteur de fermeture = class="nyroModalClose" id="closeBut"
+			Permet la surcharge et donc de bénéficier des mises à jours faciles de la modale officielle
+		*/
+		$('embed, object, select').css({ 'visibility' : 'visible' });
+        
 	}
 
 	function endRemove() {
