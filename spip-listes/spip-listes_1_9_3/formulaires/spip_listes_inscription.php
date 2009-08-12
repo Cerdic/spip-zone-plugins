@@ -47,6 +47,7 @@ function formulaires_spip_listes_inscription_traiter_dist(){
 	// enregistre dans spip_auteurs, spip_auteurs_elargis, spip_auteurs_listes			
 			
 			$val['email'] = _request('email');
+			$val['nom'] = _request('email');
 			include_spip('inc/acces');
 			$alea_actuel = creer_uniqid();
 			$alea_futur = creer_uniqid();
