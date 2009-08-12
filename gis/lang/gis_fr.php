@@ -28,6 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	"cambiar" => "changer les coordonn&eacute;es",
 	"clic_mapa" => "Cliquer sur la carte pour changer les coordonn&eacute;es",
 	"clic_desplegar" => "d&eacute;plier",
+	"coord" => "Coordonn&eacute;es",
 	"coord_enregistre" => "Coordonn&eacute;es enregistr&eacute;es",
 	"coord_maj" => "Coordonn&eacute;es mises &agrave; jour",
 	"label_address" => "Rechercher",
