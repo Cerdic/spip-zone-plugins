@@ -1,0 +1,14 @@
+<plugin>
+  <nom>Lifestream</nom>
+  <auteur>[Mathieu Drouet (Izo) ->http://www.takeasip.net]</auteur>
+  <licence>(c) 2009 GPL</licence>
+  <version>1.0</version>
+	<lien>http://www.spip-contrib.net</lien><!-- URI de documentation -->
+  <etat>stable</etat>
+<description> adaption pour spip du lifestream de [Chris Spooner -> http://line25.com/tutorials/how-to-create-a-lifestream-of-your-online-activities]
+  Police [Nevis ->http://www.tenbytwenty.com/products/typefaces/nevis]
+ </description>
+  <prefix>lifestream</prefix>
+    <icon>ls.png</icon>
+	<necessite id="SPIP" version="[2.0;]" />
+</plugin>

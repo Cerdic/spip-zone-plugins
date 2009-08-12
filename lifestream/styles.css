@@ -1,0 +1,136 @@
+body, div, h1, h2, h3, h4, p, ul, ol, li, dl, dt, dd, img, form, fieldset, blockquote {
+	margin: 0px;
+	padding: 0px;
+	border: 0px;
+}
+
+body {
+	font-family: Helvetica, Arial, sans-serif;
+	background: #ededed url(images/bg-repeat.png);
+}
+
+a {
+	color: gray;
+	text-decoration: none;
+}
+
+a:hover {
+	color: black;
+	text-decoration: underline;
+}
+
+#page-wrap {
+	min-height: 711px;
+	background: url(images/bg-texture.jpg) left top no-repeat;
+}
+
+#container {
+	width: 800px;
+	margin: 0 auto 50px auto;
+	padding: 70px 0 0 0;
+}
+
+h1 {
+	width: 768px;
+	height: 73px;
+	margin: 0 auto 45px auto;
+}
+
+div.texte {
+	margin-top: 50px;
+	margin-left: 10px;
+	margin-bottom: 20px;
+	font-size: small;
+	text-align: justify;
+}
+
+h1 img {
+	
+}
+
+ul.lifestream {
+	list-style: none;
+	margin: 0 15px 0 15px;
+}
+
+ul.lifestream li {
+	width: 710px;
+	float: right;
+	clear: both;
+	position: relative;
+	padding: 15px;
+	margin: 0 0 55px 0;
+	background: url(images/white-trans.png);
+}
+
+ul.lifestream li div.entry-date {
+	width: 160px;
+	padding: 5px;
+	text-align: right;
+	background: url(images/black-trans.png);
+	float: left;
+	margin: -15px 0 0 -45px;
+}
+
+ul.lifestream li div.entry-date p.date {
+	font-size: 20px;
+	font-weight: bold;
+	color: #3c3c3c;
+	margin: 0 0 -1px 0;
+}
+
+ul.lifestream li div.entry-date p.time {
+	font-size: 25px;
+	font-weight: bold;
+	color: #fff;
+	margin: 0 0 -4px 0;
+}
+
+h2.entry-content {
+	width: 565px;
+	float: right;
+	margin: 0 0 0 20px;
+	font-weight: normal;
+	line-height: 26px;
+}
+
+h2.entry-content a {
+	color: #3c3c3c;
+	font-size: 22px;
+	text-decoration: none;
+}
+
+h2.entry-content a:hover {
+	color: #918f8f;
+	font-size: 22px;
+	text-decoration: none;
+}
+
+img.favicon {
+	float: left;
+	clear: left;
+	margin: 20px 0 0 109px;
+}
+
+div.entry-source {
+	clear: both;
+	float: right;
+	margin: 20px 0 -48px 0;
+	position: relative;
+	left: 15px;
+}
+
+div.entry-source p {
+	padding: 8px 10px 8px 10px;
+	text-align: right;
+	background: url(images/black-trans.png);
+}
+
+div.entry-source p a {
+	color: #fff;
+	text-decoration: none;
+}
+
+div.entry-source p a:hover {
+	color: #f0f0f0;
+}
