@@ -20,7 +20,7 @@
  */
 function spipicious_insert_head($flux){
 	global $visiteur_session;
-
+	include_spip('inc/autoriser');
 	if(autoriser('tagger_spipicious','article',$id_objet,$visiteur_session,$opt)){
 
 	include_spip('selecteurgenerique_fonctions');
