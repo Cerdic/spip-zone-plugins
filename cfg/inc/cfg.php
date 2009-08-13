@@ -289,6 +289,12 @@ class cfg
 			return propre($d);	
 	}
 	
+	// affiche une colonne à gauche
+	function gauche(){
+		if ($d = $this->form->param['gauche'])
+			return propre($d);	
+	}
+	
 	// affiche le message en cas d'acces interdit
 	function acces_refuse(){
 		include_spip('inc/minipres');

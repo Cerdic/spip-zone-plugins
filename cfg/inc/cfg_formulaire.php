@@ -59,6 +59,7 @@ class cfg_formulaire{
 			'descriptif' => '', // descriptif
 			'depot' => 'metapack', // (ancien 'storage') le depot utilise pour stocker les donnees, par defaut metapack: spip_meta serialise 
 			'fichier' => '', // pour storage php, c'est l'adresse du fichier (depuis la racine de spip), sinon ca prend /local/cfg/nom.php
+			'gauche' => '', // pour une colonne à gauche
 			'head' => '', // partie du fond cfg a inserer dans le head par le pipeline header_prive (todo insert_head?)
 			'icone' => '', // lien pour une icone
 			'inline' => '', // code qui sera insere apres le contenu du fond (peut servir pour inserer du js)

@@ -50,6 +50,9 @@ function exec_cfg_dist($class = null)
 	// si un formulaire cfg est demande
 	if ($s = $config->descriptif()) echo debut_boite_info(true) . $s . fin_boite_info(true);
 	
+	// affiche éventuellement une colonne supplémentaire à gauche
+	if ($s = $config->gauche()) echo debut_boite_info(true) . $s . fin_boite_info(true);
+	
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'cfg'),'data'=>''));
 	echo creer_colonne_droite('', true);
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'cfg'),'data'=>''));
