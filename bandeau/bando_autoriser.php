@@ -12,6 +12,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+function bando_autoriser(){}
+
 /**
  * Edition
  */
