@@ -1,0 +1,32 @@
+<plugin>
+	<nom>
+		<multi>
+		[fr]Mercure
+		[en]Mercure
+		</multi>
+	</nom>
+	<icon>img_pack/mercure.png</icon>
+	<auteur>Patrick Kuchard [contact->patrick@kalaia.net] _ [site->http://www.encyclopedie-incomplete.com]</auteur>
+	<version>0.2</version>
+	<prefix>en test</prefix>
+	<etat>test</etat>
+	<description>
+		<multi>
+		[fr]Tchat dans l'espace priv&eacute; entre les r&eacute;dacteurs
+		[en]Chat for the redactors in the private area
+		</multi>
+	</description>
+	<prefix>Mercure</prefix>
+	<lien>
+		[Documentation->http://www.encyclopedie-incomplete.com/spip.php?articleXXX]
+	</lien>
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<action>ajouterBoutons</action>
+		<inclure>mercure_pipe.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>mercure_pipe.php</inclure>
+	</pipeline>
+</plugin>

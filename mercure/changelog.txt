@@ -1,0 +1,17 @@
+ MERCURE - Redactor's Chat 
+ OFFRIR UN ESPACE DE DISCUSSION AUX REDACTEURS DANS L'ESPACE PRIVE DE SPIP
+ Première version : v. 0.10 - 29/07/2009 - SPIP 1.9.2
+ Version actuelle : v. 0.20 - 12/08/2009 - SPIP 1.9.2
+ Patrick Kuchard - www.encyclopedie-incomplete.com
+
+TODO List :
+* Euh... des idées ?
+
+
+* 12/08/09 -> 0.20 ************************************************************
+.. Modification de "mercure_pipe" : "ereg" déprécié et remplacé par "preg_match"
+.. Modification de "func_bdd.php" : toutes les fonctions SQLite enlevées
+
+* 29/07/09 -> 0.10 ************************************************************
+.. Première version diffusée
+
