@@ -1,0 +1,27 @@
+<div class="formulaire_spip formulaire_savefg">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method="post" action="#ENV{action}">
+		<div>
+			#ACTION_FORMULAIRE{#ENV{action}}
+			<ul>
+				<li class="fieldset">
+					<fieldset>
+						[<h3 class="legend">Sauvegarder le fond (#ENV{action}|substr{20})</h3>]
+						<ul>
+							<li>
+								[<input type="hidden" name="fond" value="(#ENV{action}|substr{20})" />]
+								<label for="nom">Commentaire de la sauvegarde[ (#ENV**{erreurs}|table_valeur{nom}|sinon{ <em>(obligatoire)</em>})]</label>
+								<input type="text" size="10" class="text" name="nom" id="nom" value="#ENV{nom}" />
+								[<p>(#ENV**{erreurs}|table_valeur{nom})</p>]
+							</li>
+						</ul>
+					</fieldset>
+				</li>
+			</ul>
+			<p class="boutons">
+				<input type="submit" class="submit" value="Enregistrer" />
+			</p>
+		</div>
+	</form>
+</div>

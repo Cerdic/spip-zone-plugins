@@ -1,7 +1,7 @@
 <plugin>
 	<nom>SaveFG</nom>
 	<auteur>Yohann Prigent (potter64) - 2009</auteur>
-	<version>0.1</version>
+	<version>0.2</version>
 	<version_base>0.1</version_base>
 	<etat>dev</etat>
 	<description>SaveFG vous permet de sauvegarder des configurations de CFG puis de les restaurer à votre guise.</description>

@@ -1,6 +1,6 @@
 <?php
 function savefg_find_infos_fond($fond, $etat='tout') {
-	include_spip('inc/cfg.php');
+	include_spip('inc/cfg');
 	$tmp = new cfg($fond);
 	if ($tmp->autoriser()){
 		// titre

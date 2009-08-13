@@ -1,0 +1,34 @@
+<div class="formulaire_spip formulaire_savefg">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method="post" action="#ENV{action}">
+		<div>
+			#ACTION_FORMULAIRE{#ENV{action}}
+			<ul>
+				<li class="fieldset">
+					<fieldset>
+						[<h3 class="legend">Restaurer le fond (#ENV{action}|substr{20})</h3>]
+						<ul>
+							<li>
+								[<input type="hidden" name="fond" value="(#ENV{action}|substr{20})" />]
+								<B_savefg>
+								<select name="fond_rest">
+								<option value="none" selected="selected">Liste configurations...</option>
+								<BOUCLE_savefg(spip_savefg){fond=#ENV{action}|substr{20}}>
+								<option value="#ID_SAVEFG">#COMMENTAIRE</option>
+								</BOUCLE_savefg>
+								</select>
+								</B_savefg>
+								Aucune restauration disponible
+								<//B_savefg>
+							</li>
+						</ul>
+					</fieldset>
+				</li>
+			</ul>
+			<p class="boutons">
+				<input type="submit" class="submit" value="Restaurer" />
+			</p>
+		</div>
+	</form>
+</div>
