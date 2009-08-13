@@ -59,29 +59,28 @@ function formulaires_inscription2_recherche_verifier_dist(){
 function formulaires_inscription2_recherche_traiter_dist(){
 	
 	$retour = array();
-	
 	if(_request('supprimer_auteurs')){
 		$auteurs_checked = _request('check_aut');
 		$nb_auteurs = 0;
 		if(is_array($auteurs_checked)){
 			foreach($auteurs_checked as $key=>$val){
 				$statut = sql_getfetsel('statut','spip_auteurs','id_auteur='.intval($val));
-				if($statut !='0minirezo')
-					sql_updateq("spip_auteurs",array('statut' => ''),"id_auteur=".intval($id_auteur));
-		
-				sql_delete("spip_auteurs_elargis","id_auteur=".intval($id_auteur));
-		                
-		        if(defined('_DIR_PLUGIN_ACCESRESTREINT'))
-		            sql_delete("spip_zones_auteurs","id_auteur=".intval($id_auteur));
-		
-		        if(defined('_DIR_PLUGIN_SPIPLISTES'))
-		            sql_delete("spip_auteurs_listes","id_auteur=".intval($id_auteur));
-				$nb_auteurs++;
+				if($statut !='0minirezo') {
+					sql_updateq("spip_auteurs",array('statut' => '5poubelle'),"id_auteur=".intval($val));
+					sql_delete("spip_auteurs_elargis","id_auteur=".intval($val));
+							
+					if(defined('_DIR_PLUGIN_ACCESRESTREINT'))
+						sql_delete("spip_zones_auteurs","id_auteur=".intval($val));
+			
+					if(defined('_DIR_PLUGIN_SPIPLISTES'))
+						sql_delete("spip_auteurs_listes","id_auteur=".intval($val));
+					$nb_auteurs++;
+				}
 			}
 		}else{
 			// Rien à faire
 		}
-		$retour['message_ok'] = _T('inscription2:nb_users_supprimes',array('nb',$nb_auteurs));
+		$retour['message_ok'] = _T('inscription2:nb_users_supprimes',array('nb'=>$nb_auteurs));
 	}
     return $retour;
 }
