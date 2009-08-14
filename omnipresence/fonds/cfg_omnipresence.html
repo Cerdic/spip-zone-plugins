@@ -1,0 +1,11 @@
+#CACHE{0}
+<!-- titre=Omnipr&eacute;sence -->
+<form method="post" action="#SELF">
+[(#ENV{_cfg_}|form_hidden)]
+<p><:omnipresence:serveur_omnipresence_defaut_explication{defaut=http://presence.jabberfr.org}:></p>
+<label for="omnipresence_serveur_defaut"><:omnipresence:serveur_omnipresence_defaut:></label>
+<input type="text" name="omnipresence_serveur_defaut" id="omnipresence_serveur_defaut" value="#ENV{omnipresence_serveur_defaut}" />
+<input type="submit" name="_cfg_ok" value="<:OK:>" />
+<input type="reset" value="<:Reset:>" />
+<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
+</form>
