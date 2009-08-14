@@ -1,6 +1,7 @@
 <?php
 
-
+	include_spip('inc/charsets');
+	
 	if (intval(phpversion()) == 5) {
 		include_spip('phpmailer-php5/class.phpmailer');
 		include_spip('phpmailer-php5/class.smtp');
@@ -60,6 +61,7 @@
 			}
 
 			if (!empty($message_html)) {
+				$message_html = unicode_to_utf_8(charset2unicode($message_html,$GLOBALS['meta']['charset']));
 	     		$this->Body = $message_html;
 	     		$this->IsHTML(true);
 				if ($GLOBALS['meta']['facteur_filtre_css'])
@@ -68,6 +70,7 @@
 					$this->JoindreImagesHTML();
 			}
 			if (!empty($message_texte)) {
+				$message_texte = unicode_to_utf_8(charset2unicode($message_texte,$GLOBALS['meta']['charset']));
 				if (!$this->Body) {
 					$this->IsHTML(false);
 					$this->Body = $message_texte;
