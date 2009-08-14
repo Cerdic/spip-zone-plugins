@@ -14,7 +14,7 @@
 								<B_savefg>
 								<select name="fond_rest">
 								<option value="none" selected="selected">Liste configurations...</option>
-								<BOUCLE_savefg(spip_savefg){fond=#ENV{action}|substr{20}}>
+								<BOUCLE_savefg(SAVEFG){fond=#ENV{action}|substr{20}}>
 								<option value="#ID_SAVEFG">#COMMENTAIRE</option>
 								</BOUCLE_savefg>
 								</select>

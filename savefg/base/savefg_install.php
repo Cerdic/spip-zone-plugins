@@ -9,7 +9,11 @@
 	 *  
 	 **/
 if (!defined("_ECRIRE_INC_VERSION")) return;
-
+function savefg_declarer_tables_interfaces($interface){
+	// 'spip_' dans l'index de $tables_principales
+	$interface['table_des_tables']['savefg']='savefg';
+	return $interface;
+}
 function savefg_declarer_tables_principales($tables_principales){
 	$spip_savefg = array(
 		"id_savefg" 	=> "INT(10) NOT NULL AUTO_INCREMENT",

@@ -13,10 +13,6 @@
 		<inclure>base/savefg_install.php</inclure>
 	</pipeline>
 	<pipeline>
-		<nom>declarer_tables_auxiliaires</nom>
-		<inclure>base/savefg_install.php</inclure>
-	</pipeline>
-	<pipeline>
 		<nom>declarer_tables_interfaces</nom>
 		<inclure>base/savefg_install.php</inclure>
 	</pipeline>
