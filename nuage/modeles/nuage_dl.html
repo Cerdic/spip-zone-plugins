@@ -1,0 +1,7 @@
+[(#CONFIG{multi_articles}|=={oui}|?{' '})#SET{lang,#ENV{lang}}]
+<BOUCLE_tags(MOTS){type ?}{id_groupe==^((#ENV{id,.*}))$}{id_groupe!==^((#ENV{notid,-1}))$}{par #ENV{tri,titre}}>[
+(#ID_MOT|nuage{#TITRE,[(#URL_MOT|parametre_url{lang,#GET{lang}})]})
+]<BOUCLE_pop(ARTICLES){id_mot}></BOUCLE_pop>[
+(#ID_MOT|nuage{'','',#TOTAL_BOUCLE|div{#ID_GROUPE|=={20}|?{5,1}}})
+]<//B_pop></BOUCLE_tags>
+[(#NUAGE|nuage_tri{poids}|nuage_affiche{70})]
