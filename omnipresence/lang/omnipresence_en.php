@@ -5,7 +5,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-'avatar_info' => 'In order to display your Jabber avatar here, please add an Omnipresence bot (e.g. <a href="xmpp:presence.jabberfr.org">JID \'presence.jabberfr.org\'</a> to your roster.',
+'avatar_info' => 'In order to display your Jabber avatar here, please add an Omnipresence bot (e.g. <a href="xmpp:presence.jabberfr.org">JID \'presence.jabberfr.org\'</a> to your buddy list.',
 'titre_avatar_auteur' => 'AUTHOR\'s JABBER AVATAR',
 'serveur_omnipresence_nom_champ' => 'Omnipresence server',
 'serveur_omnipresence_precisions' => 'If an Omnipresence server is subscribed to your presence, please give its HTTP URL here.',
