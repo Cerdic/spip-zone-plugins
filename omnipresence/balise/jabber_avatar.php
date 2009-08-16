@@ -13,6 +13,7 @@ function balise_JABBER_AVATAR_stat($args, $filtres) {
 }
 
 function balise_JABBER_AVATAR_dyn($jid, $host) {
+        include_spip('inc/filtres');
 	return inserer_attribut(demander_action('avatar',$jid, $host), "alt", "");
 }
 ?>

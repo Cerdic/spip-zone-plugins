@@ -14,6 +14,7 @@ function balise_JABBER_ACTIVITY_ICON_stat($args, $filtres) {
 
 function balise_JABBER_ACTIVITY_ICON_dyn($jid, $host) {
 	#TODO: Request value in the context's locale
+	include_spip('inc/filtres');
 	$status = demander_action('pep/activity/value.txt', $jid, $host);
 	return inserer_attribut(demander_action('pep/activity/image.png'.$theme, $jid, $host), "alt", $status);
 }

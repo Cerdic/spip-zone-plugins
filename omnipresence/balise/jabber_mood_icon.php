@@ -14,6 +14,7 @@ function balise_JABBER_MOOD_ICON_stat($args, $filtres) {
 }
 
 function balise_JABBER_MOOD_ICON_dyn($jid, $host, $locale) {
+	include_spip('inc/filtres');
 	$status = demander_action("pep/mood/value-$locale.txt", $jid, $host);
 	return inserer_attribut(demander_action('pep/mood/image.png'.$theme, $jid, $host), "alt", $status);
 }

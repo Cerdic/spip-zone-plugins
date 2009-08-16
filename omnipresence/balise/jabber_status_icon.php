@@ -15,6 +15,7 @@ function balise_JABBER_STATUS_ICON_stat($args, $filtres) {
 }
 
 function balise_JABBER_STATUS_ICON_dyn($jid, $host, $theme, $locale) {
+	include_spip('inc/filtres');
 	$status = demander_action("text-$locale.txt", $jid, $host);
 	return inserer_attribut(demander_action('image'.$theme, $jid, $host), "alt", $status);
 }
