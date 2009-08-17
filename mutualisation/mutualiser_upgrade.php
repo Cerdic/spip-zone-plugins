@@ -3,6 +3,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function mutualiser_upgrade() {
+	define('_DOCTYPE_ECRIRE', ''); # on n'a pas lance spip_initialisation_suite() donc cette constante n'est pas definie
 	include_spip('inc/minipres');
 
 	// verif securite
