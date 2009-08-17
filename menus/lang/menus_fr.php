@@ -4,7 +4,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-'editer_menus_titre' => 'Éditer les menus',
+'editer_menus_titre' => 'Menus du site',
 'editer_menus_explication' => 'Cr&eacute;ez et configurez ici les menus de votre site.',
 'editer_menus_nouveau' => 'Cr&eacute;er un nouveau menu',
 'editer_menus_editer' => '&Eacute;diter ce menu',
