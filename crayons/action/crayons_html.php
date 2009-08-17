@@ -285,8 +285,9 @@ class Crayon {
 			if ($meta_crayon['barretypo']
 			AND $type == 'texte') {
 				// Pas la peine de mettre cette barre si PortePlume est la
-				$f = chercher_filtre('info_plugin');
-				if (!$f('PORTE_PLUME','est_actif')) {
+				if (function_exists('chercher_filtre')
+				AND $f = chercher_filtre('info_plugin')
+				AND !$f('PORTE_PLUME','est_actif')) {
 					include_spip('inc/barre');
 					$input = "<div style='width:".$this->largeur."px;height:23px;'>"
 						. (function_exists('afficher_barre')
