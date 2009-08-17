@@ -5,6 +5,8 @@
 
 
 TO-DO:
++ probleme d'accents signale' sur les variables perso. Revoir spiplistes_personnaliser_courrier()
+dans le meleuse.
 + recuper les erreurs de phpmailer ($this->error) dans les logs de spiplistes
 + ajouter option de maintenance "supprimer les invites sans abonnements"
 . revoir inventaire des abonnements. Donne parfois un chiffre negatif pour le nombre d'abonnes (probablement ancienne version. SL 1.98 ?)
