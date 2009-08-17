@@ -198,12 +198,10 @@
 		echo "<input type='checkbox' id='facteur_filtre_css' name='facteur_filtre_css' value=\"1\" ".($facteur_filtre_css ? "checked='checked'" : '')." />";
 		echo '<label for="facteur_filtre_css">'._T('facteur:facteur_filtre_css').'</label>';
 		echo '</p>';
-		if ($GLOBALS['meta']['charset'] == 'utf-8') {
-			echo '<p>';
-			echo "<input type='checkbox' id='facteur_filtre_iso_8859' name='facteur_filtre_iso_8859' value=\"1\" ".($facteur_filtre_iso_8859 ? "checked='checked'" : '')." />";
-			echo '<label for="facteur_filtre_iso_8859">'._T('facteur:facteur_filtre_iso_8859').'</label>';
-			echo '</p>';
-		}
+		echo '<p>';
+		echo "<input type='checkbox' id='facteur_filtre_iso_8859' name='facteur_filtre_iso_8859' value=\"1\" ".($facteur_filtre_iso_8859 ? "checked='checked'" : '')." />";
+		echo '<label for="facteur_filtre_iso_8859">'._T('facteur:facteur_filtre_iso_8859').'</label>';
+		echo '</p>';
 		echo '<p style="text-align: right;"><input class="fondo" name="valider" type="submit" value="'._T('facteur:valider').'" /></p>';
 
 		echo fin_cadre_trait_couleur(true);

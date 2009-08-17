@@ -23,9 +23,9 @@
 				$this->FromName	= $GLOBALS['meta']['nom_site'];
 			}
 
-			$this->CharSet	= $GLOBALS['meta']['charset'];
+			$this->CharSet	= "utf-8";
 	    	$this->Mailer	= 'mail';
-			$this->Subject	= $objet;
+			$this->Subject	= unicode_to_utf_8(charset2unicode($objet,$GLOBALS['meta']['charset']));
 			
 			//Pour un envoi multiple de mail, $email doit être un tableau avec les adresses.
 			if (is_array($email)) {
@@ -309,15 +309,26 @@
 		}
 
 
+		function safe_utf8_decode($text,$mode='texte_brut') {
+			if (!is_utf8($text))
+				return ($text);
+				
+			if (function_exists('iconv') && $mode == 'texte_brut') {
+				return iconv("UTF-8", "ISO-8859-1//TRANSLIT", $text);
+			} else {
+				if ($mode == 'texte_brut') 
+					$text = str_replace('’',"'",$text); 
+				return unicode2charset(utf_8_to_unicode($text),'iso-8859-1');
+			}
+		}
+		
 		function ConvertirUtf8VersIso8859() {
-			$this->Body		= str_replace('’',"'",$this->Body);
-			$this->AltBody	= str_replace('’',"'",$this->AltBody);
 			$this->CharSet	= 'iso-8859-1';
 			$this->Body		= str_replace('charset=utf-8', 'charset=iso-8859-1', $this->Body);
-			$this->Body		= utf8_decode($this->Body);
-			$this->AltBody	= utf8_decode($this->AltBody);
-			$this->Subject	= utf8_decode($this->Subject);
-			$this->FromName	= utf8_decode($this->FromName);
+			$this->Body		= $this->safe_utf8_decode($this->Body,'html');
+			$this->AltBody	= $this->safe_utf8_decode($this->AltBody);
+			$this->Subject	= $this->safe_utf8_decode($this->Subject);
+			$this->FromName	= $this->safe_utf8_decode($this->FromName);
 		}
 
 		function ConvertirAccents() {
