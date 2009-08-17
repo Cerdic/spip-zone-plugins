@@ -10,7 +10,7 @@ function sparkstats_insert_head($flux){
   $flux .= "<script src='$jsFile' type='text/javascript'></script>";
 
   $flux .= '<script type="text/javascript">
-  (function($){$(function(){$(".entry-title.crayon")
+  (function($){$(function(){$(".entry-title.crayon,h1.crayon")
   .each(function() {
     var m;
     if ((m = $(this).attr("className").match(/article-titre-(\d+)/)) && (m=m[1])) {
