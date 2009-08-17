@@ -1,0 +1,38 @@
+[(#SET{id_rubrique, #ENV{id_rubrique}|intval})]
+[(#SET{niveau, #ENV{niveau}|intval|?{#ENV{niveau},infini}})]
+
+[(#ENV{appel_formulaire}|oui)
+	[(#SET{titre, #GET{id_rubrique}|?{#GET{id_rubrique}|generer_titre_entite{rubrique}, <:info_racine_site:>}})]
+	<div class="titre">#GET{titre}</div>
+	<div class="infos">
+		[(#GET{niveau}|=={infini}|non)
+			<:menus:entree_sur_n_niveaux{n=#GET{niveau}}:>
+		]
+		[(#GET{niveau}|=={infini}|oui)
+			<:menus:entree_infini:>
+		]
+	</div>
+]
+<BOUCLE_appel(CONDITION){si #ENV{appel_menu}|oui}>
+	<BOUCLE_rubriques(RUBRIQUES){id_parent=#GET{id_rubrique}}>
+		#SET{niveau_actuel,1}
+		<li>
+			<a href="#URL_RUBRIQUE">#TITRE</a>
+			<BOUCLE_test_niveau(CONDITION){si #GET{niveau_actuel}|!={#GET{niveau}}}>
+			<B_sous_rubriques>
+			<ul>
+				<BOUCLE_sous_rubriques(RUBRIQUES){id_parent}>
+				#SET{niveau_actuel,#GET{niveau_actuel}|plus{1}}
+				<li>
+					<a href="#URL_RUBRIQUE">#TITRE</a>
+					<BOUCLE_test_niveau2(CONDITION){si #GET{niveau_actuel}|!={#GET{niveau}}}>
+					<BOUCLE_sous_sous(BOUCLE_sous_rubriques)></BOUCLE_sous_sous>
+					</BOUCLE_test_niveau2>
+				</li>
+				</BOUCLE_sous_rubriques>
+			</ul>
+			</B_sous_rubriques>
+			</BOUCLE_test_niveau>
+		</li>
+	</BOUCLE_rubriques>
+</BOUCLE_appel>

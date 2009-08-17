@@ -1,0 +1,9 @@
+[(#ENV{appel_formulaire}|oui)
+	<div class="titre">#ENV{titre}</div>
+	<div class="infos">#ENV{url}</div>
+]
+[(#ENV{appel_menu}|oui)
+	<li>
+		<a href="#ENV{url}">#ENV{titre}</a>
+	</li>
+]

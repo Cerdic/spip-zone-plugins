@@ -1,0 +1,13 @@
+
+<BOUCLE_menu(MENUS){id_menu?}{identifiant?}>
+	<B_entrees>
+	<ul>
+		<BOUCLE_entrees(MENUS_ENTREES){id_menu}{par rang}>
+		#MENUS_AFFICHER_ENTREE
+			<BOUCLE_sous_menu(MENUS){id_menus_entree}>
+				#INCLURE{fond=inclure/menu, env, id_menu, identifiant}
+			</BOUCLE_sous_menu>
+		</BOUCLE_entrees>
+	</ul>
+	</B_entrees>
+</BOUCLE_menu>

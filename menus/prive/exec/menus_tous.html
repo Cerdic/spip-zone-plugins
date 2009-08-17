@@ -1,0 +1,20 @@
+
+<h1 class="grostitre"><:menus:editer_menus_titre:></h1>
+<p><:menus:editer_menus_explication:></p>
+
+<B_menus_principaux>
+<ul>
+	<BOUCLE_menus_principaux(MENUS){par titre}>
+	<li>
+		<a href="[(#URL_ECRIRE{menus_editer}|parametre_url{id_menu,#ID_MENU})]">#TITRE (#IDENTIFIANT)</a>
+	</li>
+	</BOUCLE_menus_principaux>
+<ul>
+</B_menus_principaux>
+
+<a href="[(#URL_ECRIRE{menus_editer}|parametre_url{nouveau,oui})]" class="icone36" style="display:block; margin:1em auto;">
+	<img width="48" height="48" src="#CHEMIN{images/menus-nouveau-48.png}" />
+	<span><:menus:editer_menus_nouveau:></span>
+</a>
+
+<div class="nettoyeur" />

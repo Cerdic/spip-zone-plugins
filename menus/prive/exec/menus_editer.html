@@ -1,0 +1,24 @@
+
+<div class="cadre-formulaire-editer">
+	<div class="entete-formulaire">
+		<a href="#URL_ECRIRE{menus_tous}" class="icone36" style="float:left;">
+			<img width="24" height="24" src="#CHEMIN{images/menus-24.png}" />
+			<span><:retour:></span>
+		</a>
+		<:menus:formulaire_modifier_menu:>
+		<h1>
+			<BOUCLE_menu(MENUS){id_menu=#VAL{id_menu}|_request}>
+			#TITRE
+			</BOUCLE_menu>
+			[(#ENV{nouveau}|=={oui}|?{<:menus:formulaire_nouveau:>,#VAL{id_menu}|_request})]
+			<//B_menu>
+		</h1>
+	</div>
+	#FORMULAIRE_EDITER_MENU{#VAL{id_menu}|_request|sinon{0}, #VAL{nouveau}|_request|sinon{''}}
+</div>
+
+<!--#navigation-->
+<!--/#navigation-->
+
+<!--#extra-->
+<!--/#extra-->
