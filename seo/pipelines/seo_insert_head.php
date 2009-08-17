@@ -95,11 +95,11 @@ function seo_insert_head($flux) {
 	if ($config['canonical_url']['activate'] == 'yes') {
 		switch ($type_object) {
 			case 'sommaire':	
-				$flux .= '<link rev="canonical" href="'. url_de_base() .'" />';
+				$flux .= '<link rel="canonical" href="'. url_de_base() .'" />';
 				break;
 			case 'article':
 			case 'rubrique':				
-				$flux .= '<link rev="canonical" href="'. url_de_base() . generer_url_entite($id_object, $type_object) .'" />';
+				$flux .= '<link rel="canonical" href="'. url_de_base() . generer_url_entite($id_object, $type_object) .'" />';
 				break;
 		}
 	}
