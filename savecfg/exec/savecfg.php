@@ -1,7 +1,7 @@
 <?php
-function exec_savefg() {
+function exec_savecfg() {
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo $commencer_page(_T('savefg:titre'), "", "");
+	echo $commencer_page(_T('savecfg:titre'), "", "");
 	include_spip('inc/cfg');
 	$arbo = liste_cfg();
 	$fonds = array();
@@ -11,6 +11,6 @@ function exec_savefg() {
 			$fonds[$prem] = $deux;
 		}
 	}
-	echo recuperer_fond('prive/savefg', array('arbo' => $fonds));
+	echo recuperer_fond('prive/savecfg', array('arbo' => $fonds));
 }
 ?>

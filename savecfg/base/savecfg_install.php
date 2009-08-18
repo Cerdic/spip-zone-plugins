@@ -1,6 +1,6 @@
 <?php
 	/**
-	 * SaveFG
+	 * savecfg
 	 *
 	 * Copyright (c) 2009
 	 * Yohann Prigent (potter64)
@@ -9,26 +9,26 @@
 	 *  
 	 **/
 if (!defined("_ECRIRE_INC_VERSION")) return;
-function savefg_declarer_tables_interfaces($interface){
+function savecfg_declarer_tables_interfaces($interface){
 	// 'spip_' dans l'index de $tables_principales
-	$interface['table_des_tables']['savefg']='savefg';
+	$interface['table_des_tables']['savecfg']='savecfg';
 	return $interface;
 }
-function savefg_declarer_tables_principales($tables_principales){
-	$spip_savefg = array(
-		"id_savefg" 	=> "INT(10) NOT NULL AUTO_INCREMENT",
+function savecfg_declarer_tables_principales($tables_principales){
+	$spip_savecfg = array(
+		"id_savecfg" 	=> "INT(10) NOT NULL AUTO_INCREMENT",
 		"fond" 	=> "text NOT NULL",
 		"valeur" 	=> "text NOT NULL",
-		"commentaire" 	=> "text NOT NULL",
+		"titre" 	=> "text NOT NULL",
 		"version" => "VARCHAR(100) NOT NULL DEFAULT '1'",
 		"date"	=> "DATETIME");
 	
-	$spip_savefg_key = array(
-		"PRIMARY KEY" => "id_savefg");
+	$spip_savecfg_key = array(
+		"PRIMARY KEY" => "id_savecfg");
 	
-	$tables_principales['spip_savefg'] = array(
-		'field' => &$spip_savefg,
-		'key' => &$spip_savefg_key);
+	$tables_principales['spip_savecfg'] = array(
+		'field' => &$spip_savecfg,
+		'key' => &$spip_savecfg_key);
 		
 	return $tables_principales;
 }

@@ -1,0 +1,29 @@
+<B_savecfg>
+Voici la liste des sauvegardes disponibles :
+<table border=1>
+<thead>
+<tr>
+<th>Nom du fond</th><td>Version</td><td>Titre</td><td>Date</td><td>Action</td></tr>
+</thead>
+<tbody>
+<BOUCLE_savecfg(spip_savecfg)>
+<tr>[<td>(#FOND|savecfg_find_infos_fond{'tout'})</td>]<td>#VERSION</td><td>#TITRE</td>[<td>(#DATE|affdate)</td>]
+<td>[<a href="(#URL_ACTION_AUTEUR{'restaurer_savecfg', #FOND&id_savecfg=#ID_savecfg, #SELF})">Restaurer</a>] - [<a href="(#URL_ACTION_AUTEUR{'supprimer_savecfg', #FOND&id_savecfg=#ID_savecfg, #SELF})">Supprimer</a>]</td></tr>
+</BOUCLE_savecfg>
+</tbody>
+</table>
+</B_savecfg>
+<B_fonds>
+Voici les fonds que vous pouvez sauvegarder
+<table>
+<thead>
+<tr>
+<th>Nom du fond</th><td>Action</td></tr>
+</thead>
+<tbody>
+<BOUCLE_fonds(POUR){tableau #ENV{arbo}}{par cle}>
+<tr>[<td>(#CLE|savecfg_find_infos_fond{'tout'})</td>]<th><a href="#URL_ACTION_AUTEUR{'sauvegarder_savecfg', #CLE, #SELF}">Sauvegarder</a></th></tr>
+</BOUCLE_fonds>
+</tbody>
+</table>
+</B_fonds>

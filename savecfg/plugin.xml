@@ -1,27 +1,27 @@
 <plugin>
-	<nom>SaveFG</nom>
+	<nom>SaveCFG</nom>
 	<auteur>Yohann Prigent (potter64) - 2009</auteur>
 	<version>0.2</version>
 	<version_base>0.1</version_base>
 	<etat>test</etat>
-	<description>SaveFG vous permet de sauvegarder des configurations de CFG puis de les restaurer à votre guise.</description>
-	<prefix>savefg</prefix>
-	<install>base/savefg.php</install>
-	<fonctions>savefg_fonctions.php</fonctions>
+	<description>SaveCFG vous permet de sauvegarder des configurations de CFG puis de les restaurer à votre guise.</description>
+	<prefix>savecfg</prefix>
+	<install>base/savecfg.php</install>
+	<fonctions>savecfg_fonctions.php</fonctions>
 	<pipeline>
 		<nom>declarer_tables_principales</nom>
-		<inclure>base/savefg_install.php</inclure>
+		<inclure>base/savecfg_install.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>declarer_tables_interfaces</nom>
-		<inclure>base/savefg_install.php</inclure>
+		<inclure>base/savecfg_install.php</inclure>
 	</pipeline>
-	<bouton id='savefg' parent='configuration'>
-		<icone>images/savefg.jpg</icone>
-		<titre>SaveFG</titre>
-		<url>savefg</url>
+	<bouton id='savecfg' parent='configuration'>
+		<icone>images/savecfg.jpg</icone>
+		<titre>SaveCFG</titre>
+		<url>savecfg</url>
 	</bouton>
-	<necessite id="SPIP" version='[2.0.0;]' />
-	<necessite id='cfg' version='[1.0.6;]' />
+	<necessite id="SPIP" version='[2.0.9;]' />
+	<necessite id='cfg' version='[1.14.0;]' />
 	<necessite id='spip_bonux' version='[1.3;]' />
 </plugin>

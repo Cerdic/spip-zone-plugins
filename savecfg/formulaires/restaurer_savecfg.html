@@ -1,4 +1,4 @@
-<div class="formulaire_spip formulaire_savefg">
+<div class="formulaire_spip formulaire_savecfg">
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	<form method="post" action="#ENV{action}">
@@ -11,16 +11,16 @@
 						<ul>
 							<li>
 								[<input type="hidden" name="fond" value="(#ENV{action}|substr{20})" />]
-								<B_savefg>
+								<B_savecfg>
 								<select name="fond_rest">
 								<option value="none" selected="selected">Liste configurations...</option>
-								<BOUCLE_savefg(SAVEFG){fond=#ENV{action}|substr{20}}>
-								<option value="#ID_SAVEFG">#COMMENTAIRE</option>
-								</BOUCLE_savefg>
+								<BOUCLE_savecfg(savecfg){fond=#ENV{action}|substr{20}}>
+								<option value="#ID_savecfg">#TITRE</option>
+								</BOUCLE_savecfg>
 								</select>
-								</B_savefg>
+								</B_savecfg>
 								Aucune restauration disponible
-								<//B_savefg>
+								<//B_savecfg>
 							</li>
 						</ul>
 					</fieldset>

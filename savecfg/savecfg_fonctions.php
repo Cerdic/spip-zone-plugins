@@ -1,5 +1,5 @@
 <?php
-function savefg_find_infos_fond($fond, $etat='tout') {
+function savecfg_find_infos_fond($fond, $etat='tout') {
 	include_spip('inc/cfg');
 	$tmp = new cfg($fond);
 	if ($tmp->autoriser()){
