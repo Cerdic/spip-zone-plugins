@@ -1,0 +1,88 @@
+<!-- nom=microblog -->
+
+<div class="formulaire_spip formulaire_editer formulaire_cfg">
+	[<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
+	[<p class="formulaire_message">(#ENV*{message_ok})</p>]
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{SELF}
+		<ul>
+			<li class="fieldset">
+				<fieldset>
+					<h3 class="legend"><:microblog:compte_defaut:> <code><tt>microblog()</tt></code></h3>
+
+					<p class="explication"><:microblog:creer_compte_services:>&nbsp;:</p>
+
+					<ul>
+						<li>
+							<label>laconi.ca</label>
+							<a href="http://spip.org/main/register">http://spip.org/main/register</a>, <:microblog:presentation_spipo:><br />
+							<a href="http://identi.ca/main/register">http://identi.ca/main/register</a>, <:microblog:presentation_laconica:>
+						</li>
+						<li>
+							<label>Twitter</label>
+							<a href="https://twitter.com/signup">https://twitter.com/signup</a>, twitter.com
+						</li>
+					</ul>
+
+					<ul>
+						<li>
+							<label for="service"><:microblog:service:></label>
+							<p class="explication"><:microblog:compte_tests:> : twitter | spipotest spipotest1</p>
+							<select name="service" id="service">
+								<option value="">(<:microblog:choisir:>)</option>
+								<option value="" disabled="disabled">- laconica -</option>
+								<option value="spipo"[
+									(#ENV{service}|=={spipo}|?{selected="selected"})]>SPIP.org (spipo)</option>
+								<option value="identica"[
+									(#ENV{service}|=={identica}|?{selected="selected"})]>Identi.ca (identica)</option>
+								<option value="" disabled="disabled"></option>
+								<option value="" disabled="disabled">- twitter -</option>
+								<option value="twitter"[
+									(#ENV{service}|=={twitter}|?{selected="selected"})]>Twitter.com</option>
+							</select>
+						</li>
+						<li>
+							<label for="user">Username</label>
+							<input type="text" name="user" value="[(#ENV{user})]" id="user" class="text" />
+						</li>
+						<li>
+							<label for="password"><:entree_mot_passe:></label>
+							<input type="password" name="pass" value="[(#ENV{pass})]" id="pass" class="text" />
+						</li>
+					</ul>
+				</fieldset>
+			</li>
+			<li class="fieldset">
+				<fieldset>
+					<h3 class="legend"><:microblog:notifications:></h3>
+					<ul>
+						<li>
+							<label><:microblog:notifications_publiques:></label>
+							<p class="explication"><:microblog:elements_signaler:> :</p>
+							<div class="choix">
+								<label for="evt_forumposte"><:microblog:poster_forums:></label>
+								<input type="checkbox" name="evt_forumposte"[
+									(#ENV{evt_forumposte}|?{checked="checked"})] id="evt_forumposte" />
+							</div>
+							<div class="choix">
+								<label for="evt_proposerarticles"><:microblog:proposer_articles:></label>
+								<input type="checkbox" name="evt_proposerarticles"[
+									(#ENV{evt_proposerarticles}|?{checked="checked"})] id="evt_proposerarticles" />
+							</div>
+							<div class="choix">
+								<label for="evt_publierarticles"><:microblog:publier_articles:></label>
+								<input type="checkbox" name="evt_publierarticles"[
+									(#ENV{evt_publierarticles}|?{checked="checked"})] id="evt_publierarticles" />
+							</div>
+						</li>
+					</ul>
+				</fieldset>
+			</li>
+		</ul>
+		<p class="boutons">
+			<input type="submit" name="_cfg_ok" value="<:ok:>" class="submit" />
+			<input type="reset" value="<:reset:>" class="submit" />
+			<input type="submit" name="_cfg_delete" value="<:supprimer:>" class="submit" />
+		</p>
+	</div>
+</form>

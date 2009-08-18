@@ -1,112 +1,15 @@
 [(#REM) titre=Microblog]
-[(#REM) presentation= ]
-[(#REM) autoriser=configurer ]
+[(#REM) autoriser=configurer]
 [(#REM) icone=images/microblog-24.png]
-
-<!-- descriptif=
+[(#REM) descriptif=
 <img src='#CHEMIN{images/microblog-64.png}' alt='' style="float: #LANG_RIGHT;" />
 <h3>Microblog</h3>
 
-<a href="http://www.spip-contrib.net/Microblog" class="spip_out">Cf. documentation</a>
--->
-
+<a href="http://www.spip-contrib.net/Microblog" class="spip_out">Cf. documentation</a>]
 #CACHE{0}
 
-
-<form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
-
-
-
-[(#REM) ------------------------ COMPTE PAR DEFAUT ------------------------ ]
-<fieldset>
-<legend>
-	<:microblog:compte_defaut:> <code><tt>microblog()</tt></code>
-</legend>
-
-<p><small><:microblog:creer_compte_services:>&nbsp;:</small></p>
-
-<h4>laconi.ca</h4>
-<ul>
-<li><a href="http://spip.org/main/register">http://spip.org/main/register</a>, <:microblog:presentation_spipo:></li>
-<li><a href="http://identi.ca/main/register">http://identi.ca/main/register</a>, <:microblog:presentation_laconica:></li>
-</ul>
-
-<h4>Twitter</h4>
-<ul>
-<li><a href="https://twitter.com/signup">https://twitter.com/signup</a>, twitter.com</li>
-</ul>
-
-<hr />
-
-<p>
-<label>
-<:microblog:service:>: <select name="service" id="service">
-<option value="">(<:microblog:choisir:>)</option>
-<option value="" disabled="disabled">- laconica -</option>
-<option value="spipo"[
-	(#env{service}|=={spipo}|?{selected="selected"})]>SPIP.org (spipo)</option>
-<option value="identica"[
-	(#env{service}|=={identica}|?{selected="selected"})]>Identi.ca (identica)</option>
-<option value="" disabled="disabled"></option>
-<option value="" disabled="disabled">- twitter -</option>
-<option value="twitter"[
-	(#env{service}|=={twitter}|?{selected="selected"})]>Twitter.com</option>
-</select>
-</label>
-</p>
-<p>
-<label>
-Username: <input type="text" name="user" value="[(#ENV{user})]" id="user" />
-</label>
-
-<label>
-Password: <input type="password" name="pass" value="[(#ENV{pass})]" id="pass" />
-</label>
-</p>
-
-<p><small><:microblog:compte_tests:> : twitter | spipotest spipotest1</small></p>
-</fieldset>
-
-
-
-<fieldset>
-<legend>
-	<:microblog:notifications_publiques:>
-</legend>
-
-<p><small><:microblog:elements_signaler:> :</small></p>
-
-<p>
-<label>
-<input type="checkbox" name="evt_forumposte"[
-	(#env{evt_forumposte}|?{checked="checked"})] /> <:microblog:poster_forums:>.
-</label>
-</p>
-
-<p>
-<label>
-<input type="checkbox" name="evt_proposerarticles"[
-	(#env{evt_proposerarticles}|?{checked="checked"})] /> <:microblog:proposer_articles:>.
-</label>
-</p>
-
-<p>
-<label>
-<input type="checkbox" name="evt_publierarticles"[
-	(#env{evt_publierarticles}|?{checked="checked"})] /> <:microblog:publier_articles:>.
-</label>
-</p>
-
-
-[(#REM) ------------------------ BOUTON OK ------------------------ ]
-<div>
-<input style="float:#LANG_RIGHT;" type="submit" name="_cfg_ok" value="<:OK:>" class="fondo" />
-<!--
-<input type="reset" value="<:Reset:>" class="fondo" />
-<input type="submit" name="_cfg_delete" value="<:Supprimer:>" class="fondo" />
--->
+<div class="ajax">
+#FORMULAIRE_CONFIG_MICROBLOG
 </div>
-
-</form>
 
 
