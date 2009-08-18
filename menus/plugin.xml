@@ -39,7 +39,7 @@
 		<icone>images/menus-24.png</icone>
 	</bouton>
 	
-	<necessite id="SPIP" version="[2.0.8;]" />
-	<necessite id="spip_bonux" version="[1.2;]" />
+	<necessite id="SPIP" version="[2.0.9;]" />
+	<necessite id="spip_bonux" version="[1.8.1;]" />
 	<utilise id="Z" />
 </plugin>
