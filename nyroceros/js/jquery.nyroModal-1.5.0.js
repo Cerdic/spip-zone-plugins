@@ -1371,13 +1371,7 @@ jQuery(function($) {
 		modal.contentWrapper
 			.css(currentSettings.css.wrapper)
 			.append(modal.content);
-		showContentOrLoading();
-		/*
-			TODO Externaliser ce bout de code, par exemple sur un événement "click" sur le sélecteur de fermeture = class="nyroModalClose" id="closeBut"
-			Permet la surcharge et donc de bénéficier des mises à jours faciles de la modale officielle
-		*/
-		$('embed, object, select').css({ 'visibility' : 'visible' });
-        
+		showContentOrLoading();        
 	}
 
 	function endRemove() {
@@ -1386,6 +1380,12 @@ jQuery(function($) {
 		modal.anim = false;
 		modal.full.remove();
 		modal.full = null;
+		/*
+			TODO Externaliser ce bout de code, par exemple sur un événement "click" sur le sélecteur de fermeture = class="nyroModalClose" id="closeBut"
+			Permet la surcharge et donc de bénéficier des mises à jours faciles de la modale officielle
+		*/
+		$('embed, object, select').css({ 'visibility' : 'visible' });
+		
 		if (isIE6) {
 			body.css({height: '', width: '', position: '', overflow: ''});
 			$('html').css({overflow: ''});
