@@ -14,8 +14,8 @@
 								<B_savecfg>
 								<select name="fond_rest">
 								<option value="none" selected="selected">Liste configurations...</option>
-								<BOUCLE_savecfg(savecfg){fond=#ENV{action}|substr{20}}>
-								<option value="#ID_savecfg">#TITRE</option>
+								<BOUCLE_savecfg(SAVECFG){fond=#ENV{action}|substr{20}}>
+								<option value="#ID_SAVECFG">#TITRE</option>
 								</BOUCLE_savecfg>
 								</select>
 								</B_savecfg>
