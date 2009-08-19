@@ -10,10 +10,13 @@ function sparkstats_insert_head($flux){
   $flux .= "<script src='$jsFile' type='text/javascript'></script>";
 
   $flux .= '<script type="text/javascript">
-  (function($){$(function(){$(".entry-title.crayon,h1.crayon")
+  (function($){$(function(){var fini=false;
+  $(".entry-title.crayon,h1.crayon")
   .each(function() {
+    if (fini) return;
     var m;
     if ((m = $(this).attr("className").match(/article-titre-(\d+)/)) && (m=m[1])) {
+      fini=true;
       $.get("'.generer_url_public('sparkstats','id_article=', '&').'"+m, function(e){
         if(e)
         $("<span style=\'padding-left:20px\'>")
@@ -21,7 +24,7 @@ function sparkstats_insert_head($flux){
         .appendTo(".cartouche small:eq(0)")
         .sparkline();
       });
-	}
+    }
   });
   })})(jQuery);
   </script>
