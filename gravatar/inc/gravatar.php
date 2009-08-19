@@ -57,7 +57,9 @@ function gravatar($email) {
 			if ($gravatar
 			= recuperer_page('http://www.gravatar.com/avatar/'.$md5_email)
 			// ceci est le hash du gravatar bleu moche par defaut : on l'ignore
-			AND md5($gravatar) !== '2bd0ca9726695502d06e2b11bf4ed555') {
+			AND md5($gravatar) !== '2bd0ca9726695502d06e2b11bf4ed555'
+			AND md5($gravatar) !== 'd5fe5cbcc31cff5f8ac010db72eb000c'
+			) {
 				spip_log('gravatar ok pour '.$email);
 				ecrire_fichier($gravatar_cache, $gravatar);
 				// si c'est un png, le convertir en jpg
