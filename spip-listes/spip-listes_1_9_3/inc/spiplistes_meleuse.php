@@ -133,7 +133,8 @@ spiplistes_log("spiplistes_meleuse()", _SPIPLISTES_LOG_DEBUG);
 			spiplistes_log($prefix_log."etiquette en cours pour id_courrier #$id_courrier", _SPIPLISTES_LOG_DEBUG);
 		} else {
 			// un vieux bug dans une ancienne version, eradique depuis (j'espere ;-)
-			spiplistes_log($prefix_log."premiere etiquette en erreur. id_courier = 0. Supprimer cette etiquette manuellement !");
+			//spiplistes_log($prefix_log."premiere etiquette en erreur. id_courier = 0. Supprimer cette etiquette manuellement !");
+			spiplistes_log(_T('erreur_queue_supprimer_courrier', array('s' => $prefix_log)));
 		}
 		
 		// boucle (sur LIMIT 1) pour pouvoir sortir par break si erreur
