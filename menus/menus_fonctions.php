@@ -12,6 +12,7 @@ function menus_type_entree($nom){
 if (!function_exists('generer_titre_entite')){
 	function generer_titre_entite($id_objet, $type_objet){
 		include_spip('base/connect_sql');
+		include_spip('inc/texte');
 		global $table_titre;
 		$champ_titre = $table_titre[table_objet($type_objet)];
 		if (!$champ_titre) $champ_titre = 'titre';
@@ -20,7 +21,7 @@ if (!function_exists('generer_titre_entite')){
 		    table_objet_sql($type_objet),
 		    id_table_objet($type_objet).'='.intval($id_objet)
 		);
-		return $ligne ? $ligne['titre'] : '';
+		return $ligne ? typo($ligne['titre']) : '';
 	}
 }
 

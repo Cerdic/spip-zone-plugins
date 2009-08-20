@@ -1,9 +1,11 @@
+#SET{titre, #ENV*{titre}|typo}
+
 [(#ENV{appel_formulaire}|oui)
-	<div class="titre">#ENV{titre}</div>
+	<div class="titre">#GET{titre}</div>
 	<div class="infos">#ENV{url}</div>
 ]
 [(#ENV{appel_menu}|oui)
-	<li class="entree">
-		<a href="#ENV{url}">#ENV{titre}</a>
+	<li class="entree[ (#ENV{css})]">
+		<a href="#ENV{url}">#GET{titre}</a>
 	</li>
 ]

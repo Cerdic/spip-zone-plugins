@@ -4,4 +4,5 @@
 	<icone>images/menus_lien.png</icone>
 	<parametre nom="titre" label="menus:entree_titre" obligatoire="oui" />
 	<parametre nom="url" label="menus:entree_url" obligatoire="oui" />
+	<parametre nom="css" label="menus:entree_css" />
 </entree>

@@ -1,11 +1,13 @@
+
+
 [(#ENV{appel_formulaire}|oui)
-	<div class="titre">[(#ENV{titre}|sinon{#ENV{id_objet}|generer_titre_entite{#ENV{type_objet}}}|sinon{<:info_sans_titre:>})]</div>
+	<div class="titre">[(#ENV*{titre}|typo|sinon{#ENV{id_objet}|generer_titre_entite{#ENV{type_objet}}}|sinon{<:info_sans_titre:>})]</div>
 	<div class="infos">#ENV{type_objet}-#ENV{id_objet}</div>
 ]
 [(#ENV{appel_menu}|oui)
-	<li class="entree">
+	<li class="entree[ (#ENV{css})]">
 		<a href="[(#ENV{id_objet}|generer_url_entite{#ENV{type_objet}})]">
-			[(#ENV{titre}|sinon{#ENV{id_objet}|generer_titre_entite{#ENV{type_objet}}}|sinon{<:info_sans_titre:>})]
+			[(#ENV*{titre}|typo|sinon{#ENV{id_objet}|generer_titre_entite{#ENV{type_objet}}}|sinon{<:info_sans_titre:>})]
 		</a>
 	</li>
 ]

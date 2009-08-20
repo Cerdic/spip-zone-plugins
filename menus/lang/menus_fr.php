@@ -34,6 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'formulaire_facultatif' => 'Facultatif',
 
 'entree_choisir' => 'Choisissez le type d\'entr&eacute;e que vous voulez ajouter :',
+'entree_css' => 'Classe CSS de l\'entr&eacute;e',
 'entree_titre' => 'Titre',
 'entree_url' => 'Adresse',
 'entree_type_objet' => 'Type de l\'objet',
