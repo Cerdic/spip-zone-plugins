@@ -6,12 +6,8 @@
 	<auteur>	<!-- Auteur du plugin -->
 	MaZiaR [NetAktiv->http://www.netaktiv.com]
 	</auteur>
-	<version>
-	0.3
-	</version>
-	<etat>
-	dev
-	</etat>
+	<version>0.3</version>
+	<etat>dev</etat>
 	<description>
 	Ce plugin permet via une balise #FORMULAIRE_ABOMAILMAN d&rsquo;afficher un formulaire d&rsquo;abonnement &agrave; l&rsquo;ensemble des listes renseign&eacute;es Mailman.
 	Cette inscription se fait via l&rsquo;interface priv&eacute;e de SPIP par le menu &laquo; Edition &gt; Abomailmans &gt; les listes de diffusions mailman &raquo;
@@ -25,9 +21,7 @@
 	<fonctions> <!-- fichier charge a chaque hit -->
 		abomailmans_fonctions.php
 	</fonctions>
-	<prefix> 
-		abomailmans
-	</prefix>
+	<prefix>abomailmans</prefix>
 	<install>base/abomailmans_upgrade.php</install>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<pipeline>

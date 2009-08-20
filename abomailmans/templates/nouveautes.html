@@ -3,10 +3,10 @@
 [(#REM)
 /**********************************************************
 * Ce squelette pour Abomailmains
-* Attention a :                             
+* Attention a :
 * - ne pas envoyer des gabarits de plus de 10Ko
 * - ne pas placer de balises html <html><body> ni de fermeture </body></html>
-* ils seront ajoutes automatiquement a l'envoi du mail 
+* ils seront ajoutes automatiquement a l'envoi du mail
 * - mettre les style  CSS directement dans les balises pour etre sur qu'ils seront interpretes (meme par les webmails)
 * - les urls et liens images seront automatiquement converties en absolues
 *  ex. rubrique5.html -> http://www.monsite.org/rubrique5.html
@@ -32,10 +32,8 @@ a:hover {
 /* Espaceur de blocs */
 .nettoyeur { clear: both; margin: 0; padding: 0; border: none; height: 0; line-height: 1px; font-size: 1px; }
 
-a img {
+a.img {
 	border:0;}
-
-
 
 p.spip {
 	margin:0 0 1em 0 !important;
@@ -46,10 +44,7 @@ h3.spip {
 	font-weight:bold !important;
 	margin:1em 0 0 0 !important;}
 
-
-.header {
-	padding:.8em;
-	background-color:#E00000;}
+.header {padding:.8em;}
 
 .LogoPCF {
 	position: relative;
@@ -66,20 +61,16 @@ h3.spip {
 	font-size:12px;
 	color:#FFF;}
 
-.NomSite a {
-	color:#FFF;}
+.NomSite a {color:#FFF;}
 
-.NomSite a:hover {
-	color:#FFFF00;}
-
+.NomSite a:hover {color:#FFFF00;}
 
 .liberezvous {
 	padding:5px;
 	background-color:#FFFFFF;
 	border:1px solid #E00000;
 	text-align:center;
-	margin-bottom:5px;
-}
+	margin-bottom:5px;}
 
 .BandoSite{
 	position: relative;
@@ -102,9 +93,6 @@ h3.spip {
 	float:left;
 	margin:12px 0.5em 0 0;}
 
-
-
-
 p > a, b > a {
 	text-decoration:underline !important;
 	color:#E00000;}
@@ -119,7 +107,6 @@ p {
 	text-align:justify;
 	margin:12px 0 2em 0;}
 
-
 .ligne {
 	border-bottom:1px solid #E00000;
 	margin-bottom:1em;}
@@ -127,8 +114,6 @@ p {
 .Suite_02 {
 	float:right;
 	font-size:12px;
-	background-image:url(#URL_SITE_SPIP/squelettes/icono/fl_o.gif);
-	background-repeat:no-repeat;
 	padding:0 0 0 15px;
 	margin:.5em 0 0 0;}
 
@@ -138,7 +123,6 @@ p {
 .logo {
 	float:left;
 	margin:12px 0.5em 0 0;}
-
 
 h3 {
 	font-weight:normal;
@@ -158,20 +142,16 @@ h4 {
 	font-size:12px;
 	margin:1.5em 2em 0 1.5em;
 	text-transform: uppercase;}
+
 .date{
-	
 	background-color:#eeeeee;
 	padding:0.2em;
 	font-style:italic;}
-
-
-
 </style>
 
-
 <div class="header">
-	<a href="#URL_SITE_SPIP"><img src="#URL_SITE_SPIP/squelettes/icono/logo.gif" alt="Parti Communiste Français" class="LogoPCF"></a>		
-	<div class="BandoSite">[(#LOGO_SITE_SPIP||liens_absolus|reduire_image{405,0})]</div>
+	<a href="#URL_SITE_SPIP"><img src="#URL_SITE_SPIP/IMG/siteon0.jpg" alt="#NOM_SITE_SPIP" class="LogoPCF"></a>
+	<!--<div class="BandoSite">[(#LOGO_SITE_SPIP||liens_absolus|reduire_image{405,0})]</div>-->
 	<br class="nettoyeur" />
 	<div class="NomSite">[(#NOM_SITE_SPIP)][&nbsp;|&nbsp;(#DESCRIPTIF_SITE_SPIP)]</div>
 	<br class="nettoyeur" />
@@ -195,28 +175,15 @@ h4 {
 				[<h3>(#SURTITRE|textebrut|supprimer_numero) :</h3>]
 				 <h2>[(#TITRE|textebrut|supprimer_numero)]</h2>
 				[(#LOGO_ARTICLE||reduire_image{300, 0}|liens_absolus|inserer_attribut{class,logo})]
-				[<p><b>(#CHAPO|liens_absolus)</b></p>] 
+				[<p><b>(#CHAPO|liens_absolus)</b></p>]
 				<!-- SI PAS agenda -->
 				[(#GET{type}|=={'agenda'}|?{'',' '})<p class="date">[(#DATE|affdate)]</p>]
-				<a href="[(#URL_ARTICLE|url_absolue)]" class="Suite_02">Lire l'article</a>
+				<a href="[(#URL_ARTICLE|url_absolue)]" class="Suite_02"><:abomailmans:lire_article:></a>
 				<br class="nettoyeur" />
 				<div class="ligne">&nbsp;</div>
 			</BOUCLE_articlesDate>
 		</B_articlesDate>
-
-
 		<//B_articlesDate>
 	</td>
   </tr>
 </table>
-<div class="header">
-<div class="liberezvous"><a href="http://www.framasoft.net/rubrique2.html" target="_blank"><img src="#URL_SITE_SPIP/squelettes/icono/Liberez-vous_Bleu_Ptt.gif" class="LogoPCF"></a>	<br class="nettoyeur" /></div>
-
-</div>
-
-
-
-
-
-
-
