@@ -8,5 +8,6 @@
 _ Remplace le traditionnel #FORMULAIRE_FORUM de SPIP par un formulaire de commentaires (plus succint) et affiche une liste des commentaires.
 _ Le plugin gravatar ajoutera un avatar &agrave; chaque message.</description>
 <prefix>commentaires</prefix>
-<necessite id='SPIP' version='[1.9.0;]' />
+<fonctions>commentaires_fonctions.php</fonctions>
+<necessite id='SPIP' version='[2.0.9;]' />
 </plugin>
