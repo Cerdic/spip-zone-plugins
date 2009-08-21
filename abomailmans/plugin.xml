@@ -6,7 +6,7 @@
 	<auteur>	<!-- Auteur du plugin -->
 	MaZiaR [NetAktiv->http://www.netaktiv.com]
 	</auteur>
-	<version>0.3</version>
+	<version>0.4</version>
 	<etat>dev</etat>
 	<description>
 	Ce plugin permet via une balise #FORMULAIRE_ABOMAILMAN d&rsquo;afficher un formulaire d&rsquo;abonnement &agrave; l&rsquo;ensemble des listes renseign&eacute;es Mailman.
