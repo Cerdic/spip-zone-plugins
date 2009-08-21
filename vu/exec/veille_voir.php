@@ -1,0 +1,193 @@
+<?php
+
+/*	Fonction generale d'affichage du contenu des objets, 	*/
+/*	dans l'espace prive.					*/
+/*	Elle s'affiche lors de l'appel de la page 		*/
+/*	'exec/veille_voir&type=truc&id=1', en recuperant	*/	
+/*	donc deux parametres passes dans l'url, depuis la	*/
+/* 	page 'veille_tous'.					*/
+
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
+// Chargement prealable des fonctions exterieures
+// suivantes (du core) dont on va avoir besoin pour la suite
+include_spip('inc/presentation');
+include_spip('inc/actions');
+
+
+function exec_veille_voir(){
+
+// 1/4 - Les autorisations
+	// Avant meme de commencer, on verifie qu'on a bien
+	// l'autorisation de voir cette page.
+	if (!autoriser('voir', 'veille_voir')) {
+		// Si on est pas autorise,
+		include_spip('inc/minipres');
+		// on renvoie un message d'erreur,
+		echo minipres();
+		// et on quitte.
+		exit;
+	}
+
+
+// 2/4 - Le contexte
+	// Premiere chose, il s'agit de recuperer le contexte.
+	// Pour le type, plus complique : un regex.
+	// On analyse l'URL complete (_SERVER["REQUEST_URI"]),
+	// pour trouver une chaine de caracteres quelconque qui 
+	// soit entouree par 'id_' d'un cote et '=' de l'autre
+	// (motif : /id_(.*)=/U). On souhaite la deuxieme colonne
+	// (la n°1) du tableau des resultats (cf. doc sur preg_match).	
+	//preg_match("/id_(.*)=/U",$_SERVER["REQUEST_URI"],$matches);
+	//$type_objet = $matches[1];
+	$type_objet = 'annonce';
+	// Pour l'id, il s'agit d'un appel simple aux parametres
+	// fournis par l'URL
+	$id_objet = intval(_request('id_'.$type_objet));
+
+
+	// Ceci nous permet de connaitre le nom de la table dans
+	// lequel se trouve l'objet 
+	$table_objet = "spip_vu_".$type_objet."s";
+
+	// et nous permet d'aller chercher en base les infos 
+	// qui nous manquent. On extrait chaque champ, et on met 
+	// le tout dans le tableau $row.
+	$row = sql_fetsel("*", $table_objet, "id_$type_objet=$id_objet");
+
+	// On extrait quelques champs du tableau $row, pour en faire 
+	// autant de variables. Ceci pour plus de praticite dans 
+	// les manipulation qui vont suivre.
+	// Le titre pour l'entete <head> de la page
+	$titre = $row['titre'];
+	// Le statut pour le changement de statut a la volee	
+	$statut = $row['statut'];
+	// La date de publication pour l'appel de la fonction 'dater'
+	$date_heure = $row['date'];
+	// Le reste n'est pas indispensable pour le moment...
+
+	
+// 3/4 - Preparation de l'affichage
+	// Est-ce que quelqu'un a deja ouvert l'annonce en edition ?
+	$flag_editable = autoriser('modifier','annonce',$id_annonce);
+	if ($flag_editable AND $GLOBALS['meta']['articles_modif'] != 'non') {
+		// Si oui, on affiche le message
+		include_spip('inc/drapeau_edition');
+		$modif = mention_qui_edite($id_annonce, 'annonce');
+	} else
+		// Sinon, on se contente de laisser vide la variable $modif
+		$modif = array();
+	
+	// On initialise la page et les entetes
+	pipeline('exec_init', array('args'=>array('exec'=>'annonces_voir','id_annonce'=>$id_annonce),'data'=>'')); 
+
+	// Puis charge tout le debut du HTML, les entetes...
+	$commencer_page = charger_fonction('commencer_page', 'inc'); 
+	// que l'on affiche ensuite
+	echo $commencer_page(_T("&laquo; $titre &raquo;", "naviguer", "vu_tous"));			
+
+
+// 4/4 - Le contenu 
+
+	// # La colonne de gauche # //
+
+	// On cree une colonne a gauche
+	echo debut_gauche('', true)
+		// On ouvre une boite d'infos.
+		. debut_boite_info(true)
+		// Le pipeline 'boite_infos' va recuperer le squelette decrit 
+		// en '/prive/infos', et le calculer avec les parametres indiques
+		. pipeline('boite_infos', array('data' => '','args' => array('type'=>$type_objet, 'id'=>$id_objet, 'row'=>$row)))
+		// On ferme la boite d'infos
+		. fin_boite_info(true);
+
+	// On a fini, mais on laisse la possibilite a d'autres
+	// d'afficher du contenu ici
+	echo pipeline('affiche_gauche', array('args'=>array('exec'=>'veille_voir','id_$type_objet'=>$id_objet),'data'=>''));		
+
+
+
+	// # La colonne de droite # //
+	// (qui s'affiche a gauche en mode petit ecran)
+
+	// On cree une colonne a droite
+	echo creer_colonne_droite('', true)
+		// On ouvre un bloc de raccourcis
+		. bloc_des_raccourcis(
+			// On y ajoute un lien vers chaque type d'objet que nous avons
+			icone_horizontale(_T('vu:raccourcis_annonce'), generer_url_ecrire("veille_edit","type=annonce&new=oui"), _DIR_VU_IMG_PACK."annonce-24.gif", "creer.gif", false)
+			. icone_horizontale(_T('vu:raccourcis_evenement'), generer_url_ecrire("veille_edit","type=evenement&new=oui"), _DIR_VU_IMG_PACK."evenement-24.gif", "creer.gif", false)
+			. icone_horizontale(_T('vu:raccourcis_publication'), generer_url_ecrire("veille_edit","type=publication&new=oui"), _DIR_VU_IMG_PACK."publication-24.gif", "creer.gif", false));
+
+	// On a fini, mais on laisse la possibilite a d'autres
+	// d'afficher du contenu ici
+	echo pipeline('affiche_droite',	array('args'=>array('exec'=>'breves_voir','id_breve'=>$id_breve),'data'=>''));
+
+
+
+	// # Contenu central # //
+
+	// Voici une serie de variable necessaire a l'affichage...		
+	// --> ici on creee un contexte pour l'appel du fond
+	$contexte = array('id'=>$id_objet);
+
+	// --> ici on recupere le fond, calcule selon le $contexte, qui
+	// contient le prototype de la fiche objet. On notera qu'il existe
+	// autant de fonds que de type d'objets differents.
+	$fond = recuperer_fond("prive/contenu/$type_objet",$contexte);
+	// Puis laisse la possibilite a d'autres d'ajouter du contenu ici
+	// ou de faire des modifications		
+	$fond = pipeline('afficher_contenu_objet', array('args'=>array('type'=>$type_objet,'id_objet'=>$id_objet,'contexte'=>$contexte),'data'=> $fond));
+
+	// --> ici on inclut notre fond dans un onglet de contenu
+	$onglet_contenu = "<div id='wysiwyg'>$fond</div>";
+
+	// --> ici on cree l'onglet de proprietes
+	// Prechargement du bloc de date et d'edition de mots-cles
+	$dater = charger_fonction('dater', 'inc');
+	$editer_mots = charger_fonction('editer_mots', 'inc');
+	// L'onglet propriete n'est qu'un assemblage subtil des deux
+	$onglet_proprietes = ($dater? $dater($id_objet, $flag_editable, $statut, $type_objet, 'veille_voir', $date_heure): '')
+		. $editer_mots($type_objet, $id_objet, $cherche_mot, $select_groupe, $flag_editable, true, 'veille_voir');
+
+	// --> ici un bouton de modification de l'objet
+	$actions = $flag_editable
+		? icone_inline(
+			!$modif ? _T('vu:icone_modifier_'.$type_objet)
+				: "",
+			generer_url_ecrire("veille_edit","id_$type_objet=$id_objet&retour=nav"),
+			!$modif ? _DIR_VU_IMG_PACK."$type_objet-24.gif" : "warning-24.gif",
+			!$modif ? "edit.gif" : '',
+			$GLOBALS['spip_lang_right']
+			)
+		: "";	
+
+	// Et maintenant l'affichage proprement dit du contenu.
+	// A ce stade nous possedons un onglet de contenu, un onglet
+	// de proprietes et un bouton de modification qu'il va falloir
+	// orgniser dans la fiche de l'objet.
+
+	// On cree la colonne centrale de la page,
+	echo debut_droite('', true)
+		// on ouvre le bloc general de la fiche objet
+		. "<div class='fiche_objet'>"
+		// on affiche le bouton de modification
+		. "<div class='bouton_actions'>$actions</div>"
+		// on ouvre le sous-bloc des onglets
+		. _INTERFACE_ONGLETS
+		// on affiche les 2 onglets a l'aide la fonction adequate
+		// qui fait ça proprement (core)
+		. afficher_onglets_pages(array('voir' => _T('onglet_contenu'), 'props' => _T('onglet_proprietes')), array('props'=>$onglet_proprietes, 'voir'=>$onglet_contenu))
+		// On ferme le bloc de la fiche objet	
+		. "</div>";
+
+	// On a fini, mais on laisse la possibilite a d'autres
+	// d'afficher du contenu ici
+	echo pipeline('affiche_milieu', array('args'=>array('exec'=>'veille_voir','id_objet'=>$id_objet),'data'=>''));
+
+	// Enfin, on ferme les differentes colonnes de la pages
+	echo fin_gauche(), fin_page();
+}
+
+?>
