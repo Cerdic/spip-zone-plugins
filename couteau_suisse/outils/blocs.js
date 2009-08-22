@@ -1,3 +1,10 @@
+// compatibilité SPIP 1.9.2 : fonction $.hasClass indisponible sous jQuery 1.1.1
+if(typeof jQuery.fn.hasClass=="undefined")
+	jQuery.fn.hasClass = function( selector ) {
+		return this.is( "." + selector );
+	};
+
+
 // fonction de de/re-pliement
 jQuery.fn.blocs_toggle = function() {
 	if (!this.length) return this;
