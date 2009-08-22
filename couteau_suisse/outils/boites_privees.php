@@ -59,12 +59,12 @@ function boites_privees_affiche_milieu($flux){
 function boites_privees_affiche_droite($flux) {
 	switch($flux['args']['exec']) {
 		case 'auteurs':case 'auteur_infos':case 'auteurs_edit': 
-			$flux['data'] .= cs_infos_webmasters().cs_infos_connection(); break;
+			$flux['data'] .= cs_infos_webmasters() . cs_infos_connection();	break;
+		case 'admin_couteau_suisse':
+			$flux['data'] .= cs_boite_rss(); break;
 		default:
 			break;
 	}
-	// on telecharge les news...
-	if (defined('boites_privees_CS')) $flux['data'] .= cs_boite_rss();
 	return cs_pipeline_boite_privee($flux, 'droite');
 }
 
@@ -88,6 +88,7 @@ function cs_pipeline_boite_privee(&$flux, $endroit) {
 }
 
 function cs_boite_rss() {
+	if (!defined('boites_privees_CS') || !cout_autoriser()) return '';
 	return debut_boite_info(true)
 		. '<p><b>'._T('couteauprive:rss_titre').'</b></p><div class="cs_boite_rss"><p>'._T('couteauprive:rss_attente').'</p><noscript>'._T('couteauprive:outil_inactif').' !</noscript></div>'
 		/*.'<div style="text-align: right; font-size: 87%;"><a title="'._T('couteauprive:rss_desactiver').'" href="'
