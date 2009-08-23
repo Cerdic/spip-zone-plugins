@@ -8,14 +8,14 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'alerte_publie_contenant' => '<MODIF>Attention, ce contenu est publi&eacute;, mais contient des liens vers des contenus qui ne le sont pas !',
+	'alerte_publie_contenant' => 'Attention, ce contenu est publi&eacute;, mais contient des liens vers des contenus qui ne le sont pas !',
 	'aucun_objets_avec_lien_depuis_courant' => 'Ce contenu ne contient aucun lien vers un autre contenu.',
 	'aucun_objets_avec_lien_vers_courant' => 'Aucun autre contenu ne contient de lien vers celui-ci.',
 
 	// C
-	'confirmation_depublication' => '<MODIF>Attention, un contenu publi&eacute; pointe vers celui-ci, et sera affect&eacute; si tu le d&eacute;publies !\\n\\nVeux-tu vraiment changer le statut ?',
-	'confirmation_publication' => '<MODIF>Attention, un contenu vers lequel pointe celui-ci n\'est pas publi&eacute; !\\n\\nVeux-tu vraiment changer le statut ?',
-	'confirmation_suppression' => '<MODIF>Attention, un contenu publi&eacute; pointe vers celui-ci, et sera affect&eacute; si tu le supprimes !\\n\\nVeux-tu vraiment le supprimer ?',
+	'confirmation_depublication' => 'ttention, un contenu publi&eacute; pointe vers celui-ci, et sera affect&eacute; si tu le d&eacute;publies !nnVeux-tu vraiment changer le statut ?',
+	'confirmation_publication' => 'Attention, un contenu vers lequel pointe celui-ci n\'est pas publi&eacute; !nnVeux-tu vraiment changer le statut ?',
+	'confirmation_suppression' => 'Attention, un contenu publi&eacute; pointe vers celui-ci, et sera affect&eacute; si tu le supprimes !nnVeux-tu vraiment le supprimer ?',
 
 	// I
 	'information_element_contenu' => 'Attention, un autre contenu pointe vers celui-ci !',

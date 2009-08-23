@@ -8,14 +8,14 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'alerte_publie_contenant' => '<MODIF>Achtung, dieses Objekt ist ver&ouml;ffentlicht, enth&auml;lt jedoch Links zu nicht ver&ouml;ffentlichten Inhalten!',
+	'alerte_publie_contenant' => 'Achtung, dieses Objekt ist ver&ouml;ffentlicht, enth&auml;lt jedoch Links zu nicht ver&ouml;ffentlichten Inhalten!',
 	'aucun_objets_avec_lien_depuis_courant' => 'Dieses Objekt enth&auml;lt keinen Links zu anderen Inhalten.',
 	'aucun_objets_avec_lien_vers_courant' => 'Kein anderes Objekt enth&auml;lt Links zu diesem.',
 
 	// C
-	'confirmation_depublication' => '<MODIF>Achtung, ein ver&ouml;ffentlichtes Objekt enth&auml;lt Links zu diesem!\\n\\nWollen Sie den Status wirklich &auml;ndern?',
-	'confirmation_publication' => '<MODIF>Achtung, ein Links in diesem Objekt verweist auf nicht ver&ouml;ffentlichte Inhalte!\\n\\nWollen Sie den Status wirklich &auml;ndern?',
-	'confirmation_suppression' => '<MODIF>Achtung, ein ver&ouml;ffentlichter Link verweist auf dieses Objekt und wird von seiner L&ouml;schung betroffen sein.!\\n\\nWollen Sie es wirklich l&ouml;schen?',
+	'confirmation_depublication' => 'Achtung, ein ver&ouml;ffentlichtes Objekt enth&auml;lt Links zu diesem!nnWollen Sie den Status wirklich &auml;ndern?',
+	'confirmation_publication' => 'Achtung, ein Links in diesem Objekt verweist auf nicht ver&ouml;ffentlichte Inhalte!nnWollen Sie den Status wirklich &auml;ndern?',
+	'confirmation_suppression' => 'Achtung, ein ver&ouml;ffentlichter Link verweist auf dieses Objekt und wird von seiner L&ouml;schung betroffen sein.!nnWollen Sie es wirklich l&ouml;schen?',
 
 	// I
 	'information_element_contenu' => 'Achtung, ein anderes Objekt verweist auf dieses!',
