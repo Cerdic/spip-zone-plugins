@@ -242,5 +242,11 @@ function classe_boucle_crayon($type, $champ, $id) {
 
 	return 'crayon ' . $type . '-' . $champ . '-' . $id . $plus;
 }
+/*permettre de fonctionner en l'absence d'acces restreint et d'exclure secteur*/
+if (!defined('_DIR_PLUGIN_ACCESRESTREINT') and !defined('_DIR_PLUGIN_EXCLURE_SECT')) {
+	    function critere_tout_voir_dist($idb, &$boucles, $crit) {
+	        return NULL;
+	    }
+	}
 
 ?>
