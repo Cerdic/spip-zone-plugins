@@ -15,19 +15,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'configurer' => 'Configurer le Couteau Suisse',
-	'connections' => '<MODIF>Connections',
+	'connections' => 'Connexions',
 
 	// D
 	'date_court' => '@jour@/@mois@/@annee@',
 	'derniers_connectes' => 'Derniers connect&eacute;s :',
 
 	// E
+	'email_forum' => 'Merci de sp&eacute;cifier ton email !',
 	'explique_spam' => 'Attention : tu as utilis&eacute; des balises, des caract&egrave;res ou des mots interdits.<br /><br />Reviens en arri&egrave;re !',
 
 	// L
 	'lutte_spam' => 'Lutte contre le SPAM',
 
 	// N
+	'nom_email_forum' => 'Merci de sp&eacute;cifier ton nom ou ton email !',
 	'nom_forum' => 'Merci de sp&eacute;cifier ton nom !',
 	'non_confirmes' => 'Non confirm&eacute;s :',
 
@@ -53,17 +55,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_lien' => 'Page @page@ : @title@',
 	'page_precedente' => 'Page pr&eacute;c&eacute;dente',
 	'page_suivante' => 'Page suivante',
-	'plugin_xml' => '<MODIF>R&eacute;unit en un seul plugin une liste de petites fonctionnalit&eacute;s nouvelles et utiles am&eacute;liorant la gestion de ton site SPIP.
+	'plugin_xml' => 'R&eacute;unit en un seul plugin une liste de petites fonctionnalit&eacute;s nouvelles et utiles am&eacute;liorant la gestion de ton site SPIP.
 
 Chacun de ces outils peut &ecirc;tre activ&eacute; ou non par l\'utilisateur sur [la page d\'administration du plugin->./?exec=admin_couteau_suisse] et g&eacute;rer un certain nombre de variables : cliquer sur {{Configuration}}, puis choisir l\'onglet {{Le Couteau Suisse}}.
 
 Les cat&eacute;gories disponibles sont : Administration, Am&eacute;liorations typographiques, Raccourcis typographiques, Affichage public, Balises, filtres, crit&egrave;res.
 
-D&eacute;couvre dans ce plugin tes outils favoris : {Supprime le num&eacute;ro}, {Format des URLs}, {Exposants typographiques}, {Guillemets typographiques}, {Belles puces}, {Lutte contre le SPAM}, {Mailcrypt}, {Belles URLs}, {SPIP et les liens... externes}, {Smileys}, {Un sommaire pour vos articles}, {D&eacute;coupe en pages et onglets}, etc., etc.
+D&eacute;couvre dans ce plugin tes outils favoris : {Supprime le num&eacute;ro}, {Format des URLs}, {Exposants typographiques}, {Guillemets typographiques}, {Belles puces}, {Lutte contre le SPAM}, {Mailcrypt}, {Belles URLs}, {SPIP et les liens... externes}, {Smileys}, {Un sommaire pour tes articles}, {D&eacute;coupe en pages et onglets}, etc., etc.
 
 N\'h&eacute;site pas &agrave; consulter les articles de documentation du plugin publi&eacute;s sur : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
-Compatibilit&eacute; : SPIP v1.9x et v2.0',
+Compatibilit&eacute; : SPIP v1.92x et v2.0.x',
 
 	// S
 	'smileys_dispos' => 'Frimousses disponibles :',
