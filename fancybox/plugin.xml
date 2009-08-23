@@ -11,7 +11,7 @@ _ Mis en plugin par b_b
 Fen&#234;tre de dialogue ou de galerie photo
 _ Ce plugin fonctionne sur les squelettes disposant de la balise <code>#INSERT_HEAD</code>
 	</description>
-	<lien>http://fancy.klade.lv/home</lien>
+	<lien>http://www.spip-contrib.net/FancyBox</lien>
 	<prefix>fancybox</prefix>
 	<necessite id="SPIP" version="[2.0;]" />
 	<utilise id="cfg" version="[1.12;]" />
