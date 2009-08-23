@@ -175,7 +175,7 @@ function cs_non_confirmes(){
 
 function cs_urls_propres($type, $id) {
 	global $type_urls;
-	if(!$if) return '';
+	if(!$id) return '';
 	$res = "";
 	// SPIP >= 2.0
 	if(defined('_SPIP19300')) {
