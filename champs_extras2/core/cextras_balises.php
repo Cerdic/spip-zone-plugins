@@ -36,7 +36,7 @@ function balise_LISTER_VALEURS_dist($p) {
 	// generer le code d'execution
 	$p->code = "calculer_balise_LISTER_VALEURS('$objet', '$_id_objet', $colonne, $id_objet, $valeur)";
 	
-	// retourne un array si #LISTER_VALEURS*
+	// retourne un array si #LISTER_VALEURS**
 	// sinon fabrique une chaine avec le separateur designe.
 	if ($p->etoile != "**") {
 		$p->code = "join($separateur, " . $p->code . ")";
@@ -78,10 +78,20 @@ function calculer_balise_LISTER_VALEURS($objet, $_id_objet, $colonne, $id_objet,
 			// HOP on a trouve le champs extra
 			// il faut calculer le bon retour...
 			// comparer $c->enum aux $cles
-			$liste = explode("\n", $c->enum); 
-			foreach($liste as $l) {
-				list($cle, $valeur) = explode(',', $l, 2);
-				if (in_array($cle, $cles)) $vals[$cle] = _T(trim($valeur)); // et on traduit en meme temps...
+			
+			// 2 possibilites : 
+			// - $c->enum = array (plugin) 
+			// - $c->enum = string (interface)
+			if (is_array($c->enum)) {
+				foreach($c->enum as $cle=>$valeur) {
+					if (in_array($cle, $cles)) $vals[$cle] = $valeur; // et on suppose que c'est deja traduit
+				}
+			} else {
+				$liste = explode("\n", $c->enum); 
+				foreach($liste as $l) {
+					list($cle, $valeur) = explode(',', $l, 2);
+					if (in_array($cle, $cles)) $vals[$cle] = _T(trim($valeur)); // et on traduit en meme temps...
+				}
 			}
 			// sortir si trouve
 			break;

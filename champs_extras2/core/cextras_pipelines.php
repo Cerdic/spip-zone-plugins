@@ -8,9 +8,15 @@ include_spip('inc/cextras');
 // Creer les item d'un select a partir des enum
 function cextras_enum($enum, $val='', $type='valeur', $name='') {
 	$enums = array();
-	foreach ($vals = explode("\n", $enum) as $x) {
-		list($cle, $desc) = explode(',', trim($x), 2);
-		$enums[$cle] = _T($desc);
+	// 2 possibilites : enum deja un tableau (vient certainement d'un plugin), 
+	// sinon texte a decouper (vient certainement de interfaces pour champs extra).
+	if (is_array($enum)) {
+		$enums = $enum;
+	} else {
+		foreach ($vals = explode("\n", $enum) as $x) {
+			list($cle, $desc) = explode(',', trim($x), 2);
+			$enums[$cle] = _T($desc);
+		}
 	}
 
 	$val_t = explode(',', $val);
@@ -286,10 +292,5 @@ function cextras_rechercher_liste_des_champs($tables){
 	return $tables;
 }
 
-
-// declarer les autorisations specifiques aux extras
-function cextras_autoriser(){
-	include_spip('inc/cextras_autoriser');
-}
 
 ?>

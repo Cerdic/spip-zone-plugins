@@ -2,7 +2,7 @@
 	<nom>Champs Extras2</nom>
 	<auteur>Matthieu Marcillaud, Fil</auteur>
 	<licence>GNU/GPL</licence>
-	<version>1.0.2</version>
+	<version>1.1.0</version>
 	<description>
 	Creer de nouveaux champs aux objets d'&eacute;dition de SPIP
 	</description>
@@ -14,7 +14,7 @@
 	<necessite id="SPIP" version="[2.0;]" />
  	<pipeline>
 		<nom>autoriser</nom>
-		<inclure>cextras_pipelines.php</inclure>
+		<inclure>inc/cextras_autoriser.php</inclure>
 	</pipeline>	
 	<!--
  	<pipeline>

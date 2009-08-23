@@ -1,6 +1,10 @@
 <?php
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// fonction pour le pipeline autoriser
+function cextras_autoriser(){}
+
+
 /**
   * Autorisation de voir un champ extra
   * autoriser('voirextra','auteur_prenom', $id_auteur);
