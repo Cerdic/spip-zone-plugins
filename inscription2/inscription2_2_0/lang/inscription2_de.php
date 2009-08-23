@@ -57,6 +57,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'decembre' => 'Dezember',
+	'delete_user_select' => 'Ausgew&auml;hlte Nutzer l&ouml;schen',
 	'demande_password' => 'Ihr Passwort:',
 	'description_cfg' => 'Dieses Plugin erm&ouml;glicht, Zusatzinformationen &uuml;ber die Redakteure ihrer Website zu erfassen. Bitte w&auml;hlen sie die entsprechenden Felder hier aus.',
 	'description_page' => 'Hier k&ouml;nnen Sie Ihre gespeicherten Einstellungen &uuml;berpr&uuml;fen.',
