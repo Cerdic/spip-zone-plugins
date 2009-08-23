@@ -9,19 +9,19 @@
 [(#EXTRA**|extra_affichage{auteurs})]
 </BOUCLE_a>
 
-<BOUCLE_b(ARTICLES){id_article}{statut==.}>
+<BOUCLE_b(ARTICLES){id_article}{statut==.}{tout_voir}>
 [(#EXTRA**|extra_affichage{articles})]
 </BOUCLE_b>
 
-<BOUCLE_c(BREVES){id_breve}{statut==.}>
+<BOUCLE_c(BREVES){id_breve}{statut==.}{tout_voir}>
 [(#EXTRA**|extra_affichage{breves})]
 </BOUCLE_c>
 
-<BOUCLE_d(RUBRIQUES){id_rubrique}{statut==.}>
+<BOUCLE_d(RUBRIQUES){id_rubrique}{statut==.}{tout_voir}>
 [(#EXTRA**|extra_affichage{rubriques})]
 </BOUCLE_d>
 
-<BOUCLE_e(SITES){id_syndic=#ENV{id_site}}{statut==.}>
+<BOUCLE_e(SITES){id_syndic=#ENV{id_site}}{statut==.}{tout_voir}>
 [(#EXTRA**|extra_affichage{sites})]
 </BOUCLE_e>
 

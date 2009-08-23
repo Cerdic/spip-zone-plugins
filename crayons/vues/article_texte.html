@@ -12,7 +12,7 @@
 [(#REM) met dans la variable r la valeur de la class ]
 [(#SET{r,[(#ENV{class}|match{\bimagereduire\.\d+\b}|match{\b\d+\b})]})]
 
-<BOUCLE_a(ARTICLES){id_article}{statut==.}>
+<BOUCLE_a(ARTICLES){id_article}{statut==.}{tout_voir}>
 [(#GET{r}|?{
 	[(#TEXTE|image_reduire{#GET{r},0})]
 ,
