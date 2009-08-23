@@ -35,6 +35,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'installer_dossier_lib' => 'Tu dois cr&eacute;er un dossier @dir@ &agrave; la racine de ton SPIP ayant des permissions d\'&eacute;criture.',
 	'installer_lib_192' => 'Pour installer une librairie, d&eacute;compresse manuellement le zip et copie son contenu dans le dossier @dir@.',
 
+	// L
+	'label_activer' => 'Activer',
+	'label_obligatoire' => 'Saisie obligatoire',
+
 	// N
 	'nom_table_manquant' => 'Nom de la table SQL manquant',
 	'nouveau' => 'Nouveau',
@@ -47,6 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'pas_de_changement' => 'Pas de changement dans <b>@nom@</b>',
 
 	// R
+	'refus_configuration_administrateur' => 'Seuls les administrateurs du site sont autoris&eacute;s &agrave; modifier ces param&egrave;tres.',
 	'refus_configuration_webmestre' => 'Seuls les webmestres du site sont autoris&eacute;s &agrave; modifier ces param&egrave;tres.',
 	'reset' => 'Effacer',
 
