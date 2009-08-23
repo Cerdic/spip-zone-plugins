@@ -8,7 +8,7 @@
 _ http://www.appelsiini.net/projects/lazyload
 _ Ic&ocirc;ne de www.iconshock.com
 	</description>
-	<lien></lien>
+	<lien>http://www.spip-contrib.net/jQuery-Lazy-Load</lien>
 	<prefix>lazyload</prefix>
 	<icon>lazyload-64.png</icon>
 	<pipeline>
