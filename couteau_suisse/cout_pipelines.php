@@ -115,7 +115,8 @@ function couteau_suisse_affichage_final($flux){
 	global $cs_metas_pipelines;
 	if (isset($cs_metas_pipelines['affichage_final']))
 		eval($cs_metas_pipelines['affichage_final']);
-	return $flux;
+	// nettoyage des separateurs et differentes sentinelles
+	return preg_replace(',<span class=\'csfoo \w+\'></span>,', '', $flux);
 }
 
 function couteau_suisse_insert_head($flux_){

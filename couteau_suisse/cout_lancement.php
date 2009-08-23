@@ -132,16 +132,20 @@ function cs_block($texte) {
 		|| preg_match(',</?(p|'._BALISES_BLOCS.')[>[:space:]],iS', $texte);
 }
 
+// balises de tracage, directement compatibles regexpr
+// le separateur <span class='csfoo xxxx'></span> est supprime en fin de calcul de page
+@define('_CS_HTMLA', '<span class=\'csfoo htmla\'></span>');
+@define('_CS_HTMLB', '<span class=\'csfoo htmlb\'></span>');
+
 // fonction de tracage des balises <html></html>
-// SPIP supprime ces balises dans les pipelines. Les traitements de balises ne les voient donc jamais...
+// SPIP echappe ces balises dans les pipelines. Les traitements de balises ne les voient donc jamais...
 function cs_trace_balises_html(&$flux) {
 	if(strpos($flux, 'base64')!==false)
-		$flux = preg_replace(',<span class="base64"[^>]+></span>,', '<!-- htmlA -->$0<!-- htmlB -->', $flux);
+		$flux = preg_replace(',<span class="base64"[^>]+></span>,', _CS_HTMLA.'$0'._CS_HTMLB, $flux);
 }
-
 // fonction callback pour cs_echappe_balises
 function cs_echappe_html_callback($matches) {
- return '<!-- htmlA -->'.cs_code_echappement($matches[1], 'CS');
+ return _CS_HTMLA.cs_code_echappement($matches[1], 'CS');
 }
 
 // evite les transformations typo dans les balises $balises
@@ -158,8 +162,8 @@ function cs_echappe_balises($balises, $fonction, $texte, $arg=NULL){
 		return $texte;
 	}
 	// trace d'anciennes balises <html></html> ?
-	if(strpos($texte, '<!-- htmlA')!==false)
-		$texte = preg_replace_callback(',<!-- htmlA -->(.*?)(?=<!-- htmlB -->),s', 'cs_echappe_html_callback', $texte);
+	if(strpos($texte, _CS_HTMLA)!==false)
+		$texte = preg_replace_callback(','._CS_HTMLA.'(.*?)(?='._CS_HTMLB.'),s', 'cs_echappe_html_callback', $texte);
 
 	// protection du texte
 	if($balises!==false) {

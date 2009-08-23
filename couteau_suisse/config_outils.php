@@ -453,7 +453,8 @@ add_variable( array(
 add_outil( array(
 	'id' => 'decoupe',
 	'contrib'	=> 2135,
-	'code:options' => "%%balise_decoupe%%define('_onglets_FIN', '<span class=\'_fooonglets\'></span>');\n@define('_decoupe_SEPARATEUR', '++++');
+	// Le separateur <span class='csfoo xxxx'></span> est supprime en fin de calcul de page
+	'code:options' => "%%balise_decoupe%%define('_onglets_FIN', '<span class=\'csfoo ongl\'></span>');\n@define('_decoupe_SEPARATEUR', '++++');
 if(!defined('_SPIP19300') && isset(\$_GET['var_recherche'])) {
 	include_spip('inc/headers');
 	redirige_par_entete(str_replace('var_recherche=', 'decoupe_recherche=', \$GLOBALS['REQUEST_URI']));
@@ -504,7 +505,8 @@ include_spip('inc/filtres');
 add_outil( array(
 	'id' => 'sommaire',
 	'contrib'	=> 2378,
-	'code:options' => "define('_sommaire_REM', '<span class=\'_foosommaire\'></span>');\ndefine('_CS_SANS_SOMMAIRE', '[!sommaire]');\ndefine('_CS_AVEC_SOMMAIRE', '[sommaire]');\n%%lgr_sommaire%%%%auto_sommaire%%%%balise_sommaire%%",
+	// Le separateur <span class='csfoo xxxx'></span> est supprime en fin de calcul de page
+	'code:options' => "define('_sommaire_REM', '<span class=\'csfoo somm\'></span>');\ndefine('_CS_SANS_SOMMAIRE', '[!sommaire]');\ndefine('_CS_AVEC_SOMMAIRE', '[sommaire]');\n%%lgr_sommaire%%%%auto_sommaire%%%%balise_sommaire%%",
 	'code:jq' => 'if(jQuery("div.cs_sommaire").length) {
 		// s\'il y a un sommaire, on cache la navigation haute sur les pages
 		jQuery("div.decoupe_haut").css("display", "none");
