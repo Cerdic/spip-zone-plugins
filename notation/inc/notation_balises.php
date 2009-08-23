@@ -114,8 +114,14 @@ function notation_calculer_id($p){
 	$boucle->select[]= 'COUNT(notations.note) AS nombre_votes';
 	$boucle->select[]= 'ROUND(AVG(notations.note),2) AS moyenne';
 	$boucle->select[]= 'ROUND(AVG(notations.note)*(1-EXP(-5*COUNT(notations.note)/'.$ponderation.')),2) AS moyenne_ponderee';
-	$boucle->from[$boucle->id_table] .= " LEFT JOIN spip_notations AS notations 
-		ON (notations.id_objet=$id_table AND notations.objet='.sql_quote($objet).')";
+	# jointure sur spip_notations
+	$boucle->from['notations'] = "spip_notations"; 
+	$boucle->from_type['notations'] = "LEFT"; 
+	# Ordre des choses : 
+	# $boucle->join["surnom (as) table de liaison"] = array("surnom de la table a lier", "cle primaire de la table de liaison", "identifiant a lier", "type d'objet de l'identifiant");
+	# exemple : notations = spip_documents, id_objet, id_document, notations.objet=document
+	$boucle->join["notations"]= array("'$boucle->id_table'","'id_objet'","'$boucle->primary'","'notations.objet='.sql_quote('$objet')");
+
 	$boucle->group[]=$id_table;
 	
 	// Cas d'un {notation moyenne>3}
