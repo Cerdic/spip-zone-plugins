@@ -5,10 +5,10 @@
     Licence : GPL3
     </auteur>
     <version>
-    1.1.1
+    1.2
     </version>
     <etat>
-    test
+    stable
     </etat>
     <necessite id='CFG' />
 
@@ -21,6 +21,8 @@ Exclut automatiquement les secteurs s&eacute;l&eacute;ctionn&eacute;s des boucle
     Si on pr&eacute;cise le secteur explicitement, par <code>{id_secteur=x}</code>, <code>{id_secteur==x}</code> ou <code>{id_secteur IN X}</code>, le r&eacute;glage ne sera pas pris en compte.
     
     Possibilit&eacute; aussi de configurer le plugin pour que <code>{tout}</code> soit &eacute;quivalent &#224; <code>{tout_voir}</code>.
+    
+    On peut aussi configurer pour que que si l'id principal du nom de boucle est passée via <code>{id_boucle}</code> ou <code>{id_boucle==X}</code> ou <code>{id_boucle=X}</code> ou <code>{id_boucle IN X}</code>, cela fait sauter l'exclusion des secteurs. (Depuis la 1.2)
 
 
 	

@@ -22,13 +22,20 @@
 	</fieldset>
 	<fieldset>
 	<ul>
-	<legend id="explication">R&eacute;glage avanc&eacute; du plugin</legend>
+	<legend id="explication">R&eacute;glages avanc&eacute;s du plugin</legend>
 
 	<li>
 	<label for="tout">Est-ce que le crit&eacute;re <code>{tout}</code> est &eacute;quivalent au crit&eacute;re <code>{tout_secteur}</code> ?</label>
 	<input type="checkbox" name="tout" value="oui"[(#ENV{tout}|=={oui}|oui) checked="checked"] />
 	</li>
-    </li>
+	
+    <li>
+	<label for="idexplicite">Expliciter l'id sur lequel on boucle est-il &eacute;quivalent à {tout_voir} (ne s'applique pas au '!' et aux crit&egrave;res de comparaison) </label>
+	<input type="checkbox" name="idexplicite" value="oui"[(#ENV{idexplicite}|=={oui}|oui) checked="checked"] />
+	</li>
+	
+	
+    </ul>
     </fieldset>
 	<p class="boutons">
 	<input type="submit" name="_cfg_ok" value="<:OK:>" />
