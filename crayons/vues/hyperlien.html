@@ -5,11 +5,20 @@
 ]
 #CACHE{0}
 
+[(#REM) Cas general ]
 #SET{titre,#ENV*{nom_site}}
 #SET{url,#ENV*{url_site}}
+
+[(#REM) syndic-article ]
 [(#ENV{id_syndic_article}|?{
 	[(#SET{titre,#ENV*{titre}})]
 	[(#SET{url,#ENV*{url}})]
+})]
+
+[(#REM) breve ]
+[(#ENV{id_breve}|?{
+	[(#SET{titre,#ENV*{lien_titre}})]
+	[(#SET{url,#ENV*{lien_url}})]
 })]
 
 [(#ENV{id_article}|?{' '})<:voir_en_ligne:>&nbsp;:]
