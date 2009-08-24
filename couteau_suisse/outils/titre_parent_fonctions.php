@@ -41,6 +41,7 @@ function cs_titre_sql($table, $where) {
 	// Utiliser la bonne requete en fonction de la version de SPIP
 	if(function_exists('sql_getfetsel')) {
 		// SPIP 2.0
+// echo "<br/>SELECT $titre FROM spip_$table WHERE $where";
 		if($r = sql_getfetsel($titre, table_objet_sql($table), $where))
 			return $r;
 	} else {
@@ -86,16 +87,16 @@ function balise_TITRE_GROUPE_dist($p) {
 if(defined('_SPIP19300') && defined('_PARENTS_ETENDUS')) {
 
 	// recherche de la table associee a l'objet
-	function cs_table_objet($id_objet) {
-		switch($id_objet) {
+	function cs_table_objet($objet) {
+		switch($objet) {
 			case 'trad': return 'articles';
 			case 'thread': /*case 'forum':*/ return 'forum';
 			case 'secteur': return 'rubriques';
 #			case 'import': return ''; // a quoi ca sert ?
 		}
-		return table_objet($id_objet);
+		return table_objet($objet);
 	}
-
+	
 	// balise #TITRE_QQCHOSE
 	// voire #TITRE_QQCHOSE{id}
 	function balise_TITRE__dist($p) {
@@ -108,7 +109,7 @@ if(defined('_SPIP19300') && defined('_PARENTS_ETENDUS')) {
 			preg_match(",^TITRE_([A-Z_]+)?$,i", $champ, $regs);
 			$objet = strtolower($regs[1]);
 			$table = cs_table_objet($objet);
-			$champ_parent = 'id_'.$objet;
+			$champ_parent = id_table_objet($objet);
 			// id de l'objet a trouver pour retourner son titre
 			$id = ($v = interprete_argument_balise(1,$p))!==NULL ? $v : champ_sql($champ_parent, $p);
 			// le code php a executer, avant de le passer aux traitements
