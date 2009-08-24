@@ -35,9 +35,9 @@
 <form action="#ENV{action}#formulaire_forum" method="post" enctype='multipart/form-data'><div>
 [(#ACTION_FORMULAIRE{#ENV{action}})]
 [<input type="hidden" name="id_forum" value="(#ENV*{id_forum})" />]
-[<fieldset>
+[<fieldset class="moderation_info">
 	<legend><:bouton_radio_modere_priori:></legend>
-	<p class="explication">(#ENV{modere})<:forum_info_modere:></p>
+	<p class="explication">(#ENV{modere})<:commentaires:forum_info_modere:></p>
 </fieldset>]
 
 [(#ENV**{afficher_texte}|choixsiegal{'non', ' ',''})
@@ -46,26 +46,24 @@
 
 [(#ENV**{afficher_texte}|choixsiegal{'non', '',' '})
 
-	<fieldset>
-	<legend><:commentaires:form_pet_message_commentaire:></legend>
-	<ul>
-
 	<INCLURE{fond=formulaires/inc-login_forum}{env} />
     
-	<input type="hidden" name="titre" id="titre"[ value="(#ENV{titre})"] />
-    
-[(#CONFIG{forums_texte}|!={non}|?{
-	<li class='saisie_texte[ (#ENV**{erreurs}|table_valeur{texte}|oui)erreur]'>
-		<label for='texte'><:forum_texte|typo:></label>
-		[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{texte})</span>]
-		[(#ENV**{config}|table_valeur{afficher_barre}|?{#VAL{texte}|barre_typo{#LANG,1}})]
-		<textarea name="texte" id="texte" rows="12" cols="60">[(#ENV{texte})]</textarea>
-		<p class='explication'><:commentaires:info_creation_paragraphe:></p>
-	</li>
-})]
-    
-	[<li class='saisie_mots_forum'>(#INCLURE{fond=formulaires/inc-forum_bloc_choix_mots}{table=#ENV*{table}}{ajouter_mot})</li>]
-	</ul></fieldset>
+	<fieldset>
+	<legend><:commentaires:form_pet_message_commentaire:></legend>
+        <ul>
+            <input type="hidden" name="titre" id="titre"[ value="(#ENV{titre})"] />
+        [(#CONFIG{forums_texte}|!={non}|?{
+            <li class='saisie_texte[ (#ENV**{erreurs}|table_valeur{texte}|oui)erreur]'>
+                <label for='texte'><:forum_texte|typo:></label>
+                [<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{texte})</span>]
+                [(#ENV**{config}|table_valeur{afficher_barre}|?{#VAL{texte}|barre_typo{#LANG,1}})]
+                <textarea name="texte" id="texte" rows="12" cols="60">[(#ENV{texte})]</textarea>
+                <p class='explication'><:commentaires:info_creation_paragraphe:></p>
+            </li>
+        })]
+            [<li class='saisie_mots_forum'>(#INCLURE{fond=formulaires/inc-forum_bloc_choix_mots}{table=#ENV*{table}}{ajouter_mot})</li>]
+        </ul>
+    </fieldset>
 
 
 
@@ -73,31 +71,31 @@
 	<fieldset>
 	<legend><:bouton_ajouter_document:></legend>
 	<ul>
-	<li class='saisie_document_forum[ (#ENV**{erreurs}|table_valeur{document_forum}|oui)erreur]'>
-	[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{document_forum})</span>]
-	<input type="hidden" name="cle_ajouter_document" value="(#ENV{cle_ajouter_document})" />
-	[<div id="ajouter_document_up">(#ENV{ajouter_document})
-	<label for="supprimer_document_ajoute"><input type='checkbox' name='supprimer_document_ajoute' id='supprimer_document_ajoute' />
-	<:lien_supprimer:></label>
-	</div>]
-	<div>
-	[<label for="ajouter_document">(#ENV{formats_documents_forum}|join{', '})</label>]
-	<input class='file' type="file" name="ajouter_document" id="ajouter_document"[
-	accept="(#ENV{formats_documents_forum}|join{','})"] />
-	</div>
-
-	<script type='text/javascript'>
-	jQuery('#ajouter_document_up')
-	.next()
-		.hide()
-	.prev()
-	.find(':checkbox')
-	.bind('change', function(){
-		jQuery('#ajouter_document_up').hide().next().show();
-	})
-	;
-	</script>
-	</li>
+        <li class='saisie_document_forum[ (#ENV**{erreurs}|table_valeur{document_forum}|oui)erreur]'>
+        [<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{document_forum})</span>]
+        <input type="hidden" name="cle_ajouter_document" value="(#ENV{cle_ajouter_document})" />
+        [<div id="ajouter_document_up">(#ENV{ajouter_document})
+        <label for="supprimer_document_ajoute"><input type='checkbox' name='supprimer_document_ajoute' id='supprimer_document_ajoute' />
+        <:lien_supprimer:></label>
+        </div>]
+        <div>
+        [<label for="ajouter_document">(#ENV{formats_documents_forum}|join{', '})</label>]
+        <input class='file' type="file" name="ajouter_document" id="ajouter_document"[
+        accept="(#ENV{formats_documents_forum}|join{','})"] />
+        </div>
+    
+        <script type='text/javascript'>
+        jQuery('#ajouter_document_up')
+        .next()
+            .hide()
+        .prev()
+        .find(':checkbox')
+        .bind('change', function(){
+            jQuery('#ajouter_document_up').hide().next().show();
+        })
+        ;
+        </script>
+        </li>
 	</ul></fieldset>
 ]
 
@@ -106,7 +104,7 @@
 		<label for="nobot_forum"><:antispam_champ_vide:></label>
 		<input type="text" class="text" name="nobot" id="nobot_forum" value="#ENV{nobot}" size="10" />
 	</p>
-	<p class="boutons"><input type="submit" class="submit" value="<:forum_voir_avant:>" /></p>
+	<p class="boutons"><input type="submit" class="submit" value="<:commentaires:forum_voir_avant:>" /></p>
 ]
 </div>
 </form>

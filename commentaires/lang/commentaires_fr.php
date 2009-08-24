@@ -1,7 +1,6 @@
 <?php
-// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/_stable_/noie/lang/
-if (!defined("_ECRIRE_INC_VERSION")) return;
+
+// This is a SPIP-forum module file  --  Ceci est un fichier module de SPIP-forum
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -23,7 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'forum_votre_email' => 'Courriel (non&nbsp;publi&eacute;)',
 'forum_url' => 'Votre site web',
 
-'info_creation_paragraphe' => 'Ce formulaire accepte les raccourcis&nbsp;SPIP et le code&nbsp;HTML. Pour cr&eacute;er des paragraphes, laissez simplement des lignes vides.',
+'info_creation_paragraphe' => 'Ce formulaire accepte les <a href="http://www.spip.net/fr_article1578.html" rel="external nofollow" class="spip_out">raccourcis&nbsp;SPIP</a> et le code&nbsp;HTML. Pour cr&eacute;er des paragraphes, laissez simplement des lignes vides.',
 
 'forum_voir_avant' => 'Pr&eacute;visualiser',
 'forum_message_definitif' => 'Confirmer l\'envoi',
