@@ -1,0 +1,17 @@
+[(#REM)
+
+	Vue pour le crayon 'vignette',
+	Ce crayons ne s'applique qu'aux documents
+
+]
+
+[(#SET{image,[(#LOGO_DOCUMENT||image_reduire{100})]})]
+
+[(#GET{image}|?{
+
+	[(#SET{url,[(#GET{image}|extraire_attribut{src}|replace{\?.*$})]})]
+	[(#SET{url,[(#GET{url}|parametre_url{s,#EVAL{time()}})]})]
+	[(#SET{width,[(#GET{image}|extraire_attribut{width})]})]
+
+	[(#GET{image}|inserer_attribut{src,#GET{url}})]
+})]

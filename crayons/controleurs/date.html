@@ -1,0 +1,69 @@
+[(#REM)
+
+	Controleur pour le crayon 'date'
+	Est il interessant de mettre http://marcgrabanski.com/code/ui-datepicker/core/core.ui.datepicker.zip dans lib/ ?
+]
+#CACHE{0}
+<BOUCLE_a(ARTICLES){id_article}{statut==.}>
+<style type="text/css">
+	@import url(http://marcgrabanski.com/code/ui-datepicker/core/ui.datepicker.css);
+</style> 
+<script type="text/javascript" src="http://jquery-ui.googlecode.com/svn/trunk/ui/ui.core.js"></script>
+<script type="text/javascript" src="http://jquery-ui.googlecode.com/svn/trunk/ui/ui.datepicker.js"></script>
+<script type="text/javascript">
+	jQuery(document).ready(function(){
+		jQuery('#jour').datepicker({dateFormat: 'yy-mm-dd',showOn: 'both', buttonImage: 'http://marcgrabanski.com/code/ui-datepicker/img/calendar.gif', buttonImageOnly: true});   
+		jQuery.datepicker.setDefaults(jQuery.datepicker.regional['#ENV{lang}']);
+		jQuery('#jour, #heure, #minute').change(function(){
+			var jourval = jQuery('#jour').val();
+			var heureval = jQuery('#heure').val();
+			var minuteval = jQuery('#minute').val();
+			var dateval = jourval+' '+heureval+':'+minuteval+':00';
+			jQuery('#date').val(dateval);
+		});
+	});
+</script>
+<fieldset style="#ENV{style}"><legend>Date  ?</legend>
+<input class="crayon-active" name="#ENV{name_date}" type="text" style="width:0;height:0;" value="#DATE" id="date" />
+<input type="text" id="jour" name="jour" value="[(#DATE|affdate{Y-m-d})]" size="10" />
+<select name="heure" id="heure">
+	<option value="01"[(#VAL{01}|=={[(#DATE|affdate{h})]}|?{' selected="selected"'})]>01</option>
+	<option value="02"[(#VAL{02}|=={[(#DATE|affdate{h})]}|?{' selected="selected"'})]>02</option>
+	<option value="03"[(#VAL{03}|=={[(#DATE|affdate{h})]}|?{' selected="selected"'})]>03</option>
+	<option value="04"[(#VAL{04}|=={[(#DATE|affdate{h})]}|?{' selected="selected"'})]>04</option>
+	<option value="05"[(#VAL{05}|=={[(#DATE|affdate{h})]}|?{' selected="selected"'})]>05</option>
+	<option value="06"[(#VAL{06}|=={[(#DATE|affdate{h})]}|?{' selected="selected"'})]>06</option>
+	<option value="07"[(#VAL{07}|=={[(#DATE|affdate{h})]}|?{' selected="selected"'})]>07</option>
+	<option value="08"[(#VAL{08}|=={[(#DATE|affdate{h})]}|?{' selected="selected"'})]>08</option>
+	<option value="09"[(#VAL{09}|=={[(#DATE|affdate{h})]}|?{' selected="selected"'})]>09</option>
+	<option value="10"[(#VAL{10}|=={[(#DATE|affdate{h})]}|?{' selected="selected"'})]>10</option>
+	<option value="11"[(#VAL{11}|=={[(#DATE|affdate{h})]}|?{' selected="selected"'})]>11</option>
+	<option value="12"[(#VAL{12}|=={[(#DATE|affdate{h})]}|?{' selected="selected"'})]>12</option>
+	<option value="13"[(#VAL{13}|=={[(#DATE|affdate{h})]}|?{' selected="selected"'})]>13</option>
+	<option value="14"[(#VAL{14}|=={[(#DATE|affdate{h})]}|?{' selected="selected"'})]>14</option>
+	<option value="15"[(#VAL{15}|=={[(#DATE|affdate{h})]}|?{' selected="selected"'})]>15</option>
+	<option value="16"[(#VAL{16}|=={[(#DATE|affdate{h})]}|?{' selected="selected"'})]>16</option>
+	<option value="17"[(#VAL{17}|=={[(#DATE|affdate{h})]}|?{' selected="selected"'})]>17</option>
+	<option value="18"[(#VAL{18}|=={[(#DATE|affdate{h})]}|?{' selected="selected"'})]>18</option>
+	<option value="19"[(#VAL{19}|=={[(#DATE|affdate{h})]}|?{' selected="selected"'})]>19</option>
+	<option value="20"[(#VAL{20}|=={[(#DATE|affdate{h})]}|?{' selected="selected"'})]>20</option>
+	<option value="21"[(#VAL{21}|=={[(#DATE|affdate{h})]}|?{' selected="selected"'})]>21</option>
+	<option value="22"[(#VAL{22}|=={[(#DATE|affdate{h})]}|?{' selected="selected"'})]>22</option>
+	<option value="23"[(#VAL{23}|=={[(#DATE|affdate{h})]}|?{' selected="selected"'})]>23</option>
+</select>
+<select name="minute" id="minute">
+	<option value="00">00</option>
+	<option value="05">05</option>
+	<option value="10">10</option>
+	<option value="15">15</option>
+	<option value="20">20</option>
+	<option value="25">25</option>
+	<option value="30">30</option>
+	<option value="35">35</option>
+	<option value="40">40</option>
+	<option value="45">45</option>
+	<option value="50">50</option>
+	<option value="55">55</option>
+</select>
+</fieldset>
+</BOUCLE_a>

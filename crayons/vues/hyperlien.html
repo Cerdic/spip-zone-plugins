@@ -1,0 +1,21 @@
+[(#REM)
+
+	Vue pour le crayon 'hyperlien'
+
+]
+#CACHE{0}
+
+#SET{titre,#ENV*{nom_site}}
+#SET{url,#ENV*{url_site}}
+[(#ENV{id_syndic_article}|?{
+	[(#SET{titre,#ENV*{titre}})]
+	[(#SET{url,#ENV*{url}})]
+})]
+
+[(#ENV{id_article}|?{' '})<:voir_en_ligne:>&nbsp;:]
+
+[(#GET{url}|?{
+	<a href="[(#GET{url})]" class="spip_out">[(#GET{titre}|typo|sinon{[(#GET{url}|couper{80})]})]</a>
+,
+	[(#GET{titre}|typo|sinon{<:info_sans_titre:>})]
+})]

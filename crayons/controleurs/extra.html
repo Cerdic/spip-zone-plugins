@@ -1,0 +1,38 @@
+[(#REM)
+
+	Controleur pour le crayon 'extra'
+
+]
+#CACHE{0}
+
+<fieldset[ style="(#ENV{style});"]>
+<legend>extra</legend>
+
+<input class="crayon-active" name="#ENV{name_extra}" type="hidden" value="go" />
+
+<BOUCLE_a(AUTEURS){id_auteur}{tous}>
+[(#EXTRA**|extra_saisie{auteurs,#STATUT})]
+</BOUCLE_a>
+
+<BOUCLE_b(ARTICLES){id_article}{statut==.}>
+[(#EXTRA**|extra_saisie{articles,#ID_RUBRIQUE})]
+</BOUCLE_b>
+
+<BOUCLE_c(BREVES){id_breve}{statut==.}>
+[(#EXTRA**|extra_saisie{breves,#ID_RUBRIQUE})]
+</BOUCLE_c>
+
+<BOUCLE_d(RUBRIQUES){id_rubrique}{statut==.}>
+[(#EXTRA**|extra_saisie{rubriques,#ID_SECTEUR})]
+</BOUCLE_d>
+
+<BOUCLE_e(SITES){id_syndic=#ENV{id_site}}{statut==.}>
+[(#EXTRA**|extra_saisie{sites,#ID_RUBRIQUE})]
+</BOUCLE_e>
+
+<//B_d>
+<//B_c>
+<//B_b>
+<//B_a>
+
+</fieldset>
