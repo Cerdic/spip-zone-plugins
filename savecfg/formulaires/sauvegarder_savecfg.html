@@ -4,15 +4,15 @@
 	<form method="post" action="#ENV{action}">
 		<div>
 			#ACTION_FORMULAIRE{#ENV{action}}
+			#SET{fond, #SELF|match{(cfg=)(\w+?),2}}
 			<ul>
 				<li class="fieldset">
 					<fieldset>
-						[<h3 class="legend">Sauvegarder le fond (#ENV{action}|substr{20})</h3>]
-						<ul>
+						<h3 class="legend"><:savecfg:sauvegarder_savecfg{fond=#GET{fond}}:></h3>						<ul>
 							<li>
-								[<input type="hidden" name="fond" value="(#ENV{action}|substr{20})" />]
-								<label for="nom">Titre de la sauvegarde[ (#ENV**{erreurs}|table_valeur{nom}|sinon{ <em>(obligatoire)</em>})]</label>
-								<input type="text" size="10" class="text" name="nom" id="nom" value="#ENV{nom}" />
+								[<input type="hidden" name="fond" value="(#GET{fond})" />]
+								<label for="nom"><:savecfg:titre_sauvegarde:>[ (#ENV**{erreurs}|table_valeur{nom}|sinon{ <em><:ecrire:info_obligatoire_02:></em>})]</label>
+								<input type="text" size="10" class="text" name="titre" id="nom" value="#ENV{nom}" />
 								[<p>(#ENV**{erreurs}|table_valeur{nom})</p>]
 							</li>
 						</ul>
@@ -20,7 +20,7 @@
 				</li>
 			</ul>
 			<p class="boutons">
-				<input type="submit" class="submit" value="Enregistrer" />
+				<input type="submit" value="<:savecfg:sauvegarder:>" />
 			</p>
 		</div>
 	</form>

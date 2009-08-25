@@ -1,15 +1,8 @@
 <?php
-function savecfg_find_infos_fond($fond, $etat='tout') {
-	include_spip('inc/cfg');
-	$tmp = new cfg($fond);
-	if ($tmp->autoriser()){
-		// titre
-		if (!$titre = $tmp->form->param['titre'])
-			$titre = $fond;
+function savecfg_afficher_tout($flux) {
+	if($flux['args']['exec'] == 'cfg') {
+		$flux['data'] = debut_boite_info(true) . recuperer_fond('prive/formulaires_savecfg') . fin_boite_info(true);
 	}
-	if ($etat == 'tout')
-		return $titre.' ('.$fond.')';
-	else
-		return $titre;
+	return $flux;
 }
 ?>

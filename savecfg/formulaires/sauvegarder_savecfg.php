@@ -8,15 +8,19 @@ function formulaires_sauvegarder_savecfg_charger_dist() {
 }
 function formulaires_sauvegarder_savecfg_verifier_dist(){
 	$erreurs = array();
-	if (strlen(_request('nom')) < 1)
-		$erreurs['message_erreur'] = 'champ obligatoire';
+	if (strlen(_request('titre')) < 1)
+		$erreurs['message_erreur'] = _T('spip:info_obligatoire');
 	return $erreurs;
 }
 function formulaires_sauvegarder_savecfg_traiter_dist() {
-	$fond = _request('fond');
-	$sfg = sql_getfetsel('valeur', 'spip_meta', 'nom='.sql_quote($fond));
-	sql_insertq('spip_savecfg', array('id_savecfg' => '', 'fond' => $fond, 'valeur' => $sfg, 'titre' => _request('nom'), 'version' => 1, 'date' => date('Y-m-d H:m:s')));
-	$message = 'Sauvegarde effectuée';
+	$message = sauvegarder_savecfg(_request('fond'), _request('titre'));
 	return $message;
+}
+function sauvegarder_savecfg($fond, $titre) {
+	if (sql_countsel('spip_meta', 'fond='.sql_quote($fond)) == 0) {
+		$sfg = sql_getfetsel('valeur', 'spip_meta', 'nom='.sql_quote($fond));
+		sql_insertq('spip_savecfg', array('id_savecfg' => '', 'fond' => $fond, 'valeur' => $sfg, 'titre' => $titre, 'version' => 1, 'date' => date('Y-m-d H:m:s')));
+	}
+	return 'Sauvegarde effectuée';
 }
 ?>

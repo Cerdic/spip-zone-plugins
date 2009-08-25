@@ -1,9 +1,9 @@
 <plugin>
 	<nom>SaveCFG</nom>
 	<auteur>Yohann Prigent (potter64) - 2009</auteur>
-	<version>0.3</version>
+	<version>1.0</version>
 	<version_base>0.1</version_base>
-	<etat>test</etat>
+	<etat>stable</etat>
 	<description>SaveCFG vous permet de sauvegarder des configurations de CFG puis de les restaurer à votre guise.</description>
 	<prefix>savecfg</prefix>
 	<install>base/savecfg.php</install>
@@ -16,6 +16,11 @@
 		<nom>declarer_tables_interfaces</nom>
 		<inclure>base/savecfg_install.php</inclure>
 	</pipeline>
+	<pipeline>
+		<nom>affiche_gauche</nom>
+		<inclure>savecfg_fonctions.php</inclure>
+		<action>afficher_tout</action>
+	</pipeline>
 	<bouton id='savecfg' parent='configuration'>
 		<icone>images/savecfg.jpg</icone>
 		<titre>SaveCFG</titre>
@@ -23,5 +28,4 @@
 	</bouton>
 	<necessite id="SPIP" version='[2.0.9;]' />
 	<necessite id='cfg' version='[1.14.0;]' />
-	<necessite id='spip_bonux' version='[1.3;]' />
 </plugin>

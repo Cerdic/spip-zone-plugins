@@ -4,22 +4,23 @@
 	<form method="post" action="#ENV{action}">
 		<div>
 			#ACTION_FORMULAIRE{#ENV{action}}
+			#SET{fond, #SELF|match{(cfg=)(\w+?),2}}
 			<ul>
 				<li class="fieldset">
 					<fieldset>
-						[<h3 class="legend">Restaurer le fond (#ENV{action}|substr{20})</h3>]
+						<h3 class="legend"><:savecfg:gerer_restauration{fond=#GET{fond}}:></h3>
 						<ul>
 							<li>
-								[<input type="hidden" name="fond" value="(#ENV{action}|substr{20})" />]
+								[<input type="hidden" name="fond" value="(#GET{fond})" />]
 								<B_savecfg>
-								<select name="fond_rest">
-								<option value="none" selected="selected">Liste configurations...</option>
-								<BOUCLE_savecfg(SAVECFG){fond=#ENV{action}|substr{20}}>
+								<select name="id_fond">
+								<option value="none" selected="selected"><:savecfg:restaurations:></option>
+								<BOUCLE_savecfg(SAVECFG){fond=#GET{fond}}>
 								<option value="#ID_SAVECFG">#TITRE</option>
 								</BOUCLE_savecfg>
 								</select>
 								</B_savecfg>
-								Aucune restauration disponible
+								<:savecfg:aucune_restauration:>
 								<//B_savecfg>
 							</li>
 						</ul>
@@ -27,7 +28,8 @@
 				</li>
 			</ul>
 			<p class="boutons">
-				<input type="submit" class="submit" value="Restaurer" />
+				<input type="submit" name="_restaurer_" value="<:savecfg:restaurer:>" />
+				<input type="submit" name="_supprimer_" value="Supprimer" />
 			</p>
 		</div>
 	</form>
