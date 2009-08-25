@@ -71,11 +71,11 @@ function formulaires_mot_de_passe_traiter_dist($id_auteur=null){
 	$message = '';
 	include_spip('base/abstract_sql');
 	if ($id_auteur=intval($id_auteur)) {
-		$row = sql_fetsel('id_auteur,login','spip_auteurs',array('id_auteur='.intval($id_auteur),"statut<>'5poubelle'","pass<>''"));
+		$row = sql_fetsel('id_auteur,login,statut','spip_auteurs',array('id_auteur='.intval($id_auteur),"statut<>'5poubelle'","pass<>''"));
 	}
 	elseif ($p=_request('p')) {
 		$p = preg_replace(',[^0-9a-f.],i','',$p);
-		$row = sql_fetsel('id_auteur,email','spip_auteurs',array('cookie_oubli='.sql_quote($p),"statut<>'5poubelle'"));
+		$row = sql_fetsel('id_auteur,email,login,statut','spip_auteurs',array('cookie_oubli='.sql_quote($p),"statut<>'5poubelle'"));
 	}
 
 	if ($row
@@ -84,12 +84,27 @@ function formulaires_mot_de_passe_traiter_dist($id_auteur=null){
 		include_spip('inc/acces');
 		$mdpass = md5($oubli);
 		$htpass = generer_htpass($oubli);
+		if($row['statut'] == 'aconfirmer'){
+			$statut = lire_config('inscription2/statut_nouveau');
+		}else{
+			$statut = $row['statut'];
+		}
 		include_spip('base/abstract_sql');
-		sql_updateq('spip_auteurs', array('htpass' =>$htpass, 'pass'=>$mdpass, 'alea_actuel'=>'', 'cookie_oubli'=>'', 'statut'=> lire_config('inscription2/statut_nouveau')), "id_auteur=" . intval($id_auteur));
-	
+		sql_updateq('spip_auteurs', array('htpass' =>$htpass, 'pass'=>$mdpass, 'alea_actuel'=>'', 'cookie_oubli'=>'', 'statut'=> $statut), "id_auteur=" . intval($id_auteur));
+
 		$email = $row['email'];
-		$message = "<b>" . _T('pass_nouveau_enregistre') . "</b>".
-		"<p>" . _L('Rappel : votre email est ').$email;
+		$affordance = lire_config('inscription2/affordance_form','login');
+
+		if($affordance == 'login'){
+			$message = _T('pass_nouveau_enregistre').
+			"<p>" . _T('pass_rappel_login', array('login' => $login));
+		}else if($affordance == 'email'){
+			$message = _T('pass_nouveau_enregistre').
+			"<p>" . _T('inscription2:pass_rappel_email', array('email' => $email));
+		}else{
+			$message = _T('pass_nouveau_enregistre').
+			"<p>" . _T('inscription2:pass_rappel_login_email', array('email' => $email,'login'=>$row['login']));
+		}
 	}
 	return array('message_ok'=>$message);
 }

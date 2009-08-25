@@ -22,7 +22,11 @@
 		<span id="spip_logo_auteur">#ENV*{_logo,''}</span>
 		<ul>
 			<li class="editer_login obligatoire">
-				<label for="var_login"><:inscription2:votre_mail:></label>
+				<label for="var_login">
+					[(#CONFIG{inscription2/affordance_form}|=={login}|oui)<:login_login2:>]
+					[(#CONFIG{inscription2/affordance_form}|=={email}|oui)<:inscription2:votre_mail:>]
+					[(#CONFIG{inscription2/affordance_form}|=={login_et_email}|oui)<:inscription2:votre_login_mail:>]
+					</label>
 				<input type='text' class='text' name='var_login' id='var_login' value="[(#ENV**{var_login})]" size='40' />
 				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{var_login})</span>]
 			</li>
@@ -66,7 +70,7 @@
 	var page_auteur = '#URL_PAGE{informer_auteur}';
 	var informe_auteur_en_cours = false;
 	var attente_informe = 0;
-	
+
 	(function($){
 		$('#password')
 			.after("<em id='pass_securise'><img src='#EVAL{_DIR_IMG_PACK}securise.gif' width='16' height='16' alt='<:login_securise:>' title='<:login_securise:>' \/><\/em>");
@@ -74,5 +78,5 @@
 		$('#var_login').change(actualise_auteur);
 		$('form#formulaire_login').submit(login_submit);
 	}(jQuery));
-	
+
 /*#EVAL{chr(93)}[(#EVAL{chr(93)})]>*/</script>

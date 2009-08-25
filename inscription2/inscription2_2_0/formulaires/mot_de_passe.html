@@ -3,7 +3,7 @@
 [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>
 [(#LOGIN_PUBLIC{'/'})]
 ]
-[(#ENV*{editable}|?{' '})
+[(#ENV*{editable}|oui)
 <form id="oubli_form" action="[(#ENV{action})]" method="post">
 	[(#REM) activer le traitement auto et dispatch sur charger/verifier/traiter]
 	#ACTION_FORMULAIRE{#ENV{action}}

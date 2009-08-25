@@ -3,11 +3,11 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
- * 
+ *
  * Insertion dans le pipeline ajouter_boutons
  * Modifie le bouton afficher les visiteurs aux webmestres
- * 
- * @return 
+ *
+ * @return
  * @param object $boutons_admin
  */
 function inscription2_ajouter_boutons($boutons_admin){
@@ -19,10 +19,10 @@ function inscription2_ajouter_boutons($boutons_admin){
 }
 
 /**
- * 
+ *
  * Insertion dans le pipeline affiche_milieu
  * Dans la page auteur_infos, insertion des champs spécifiques d'Inscription2
- * 
+ *
  * @return array Le $flux modifié
  * @param array $flux
  */
@@ -36,11 +36,11 @@ function inscription2_affiche_milieu($flux){
 }
 
 /**
- * 
+ *
  * Insertion dans le pipeline editer_contenu_objet
  * Ajoute les champs I2 sur le formulaire CVT editer_auteur
- * 
- * @return array Le $flux complété 
+ *
+ * @return array Le $flux complété
  * @param array $flux
  */
 function inscription2_editer_contenu_objet($flux){
@@ -48,19 +48,19 @@ function inscription2_editer_contenu_objet($flux){
 		include_spip('public/assembler');
 		include_spip('inc/legender_auteur_supp');
 		/**
-		 * 
+		 *
 		 * Si on est dans la modification d'un auteur :
 		 * vérification de l'existence d'une entrée correspondante dans spip_auteurs_elargis
 		 * Quelquefois elle n'existe pas.
-		 *  
+		 *
 		 */
 		if((is_numeric($flux['args']['contexte']['id_auteur'])) && (!sql_getfetsel('id_auteur','spip_auteurs_elargis','id_auteur='.$flux['args']['contexte']['id_auteur']))){
 			sql_insertq('spip_auteurs_elargis',array('id_auteur'=>$flux['args']['contexte']['id_auteur']));
 		}
 		/**
-		 * 
+		 *
 		 * Insertion des champs dans le formulaire aprs le textarea PGP
-		 * 
+		 *
 		 */
 		$inscription2 = legender_auteur_supp_saisir($flux['args']['contexte']['id_auteur']);
 		$flux['data'] = preg_replace('%(<li class="editer_pgp(.*?)</li>)%is', '$1'."\n".$inscription2, $flux['data']);
@@ -73,7 +73,7 @@ function inscription2_editer_contenu_objet($flux){
  *
  * Insertion dans le pipeline post_edition
  * ajouter les champs inscription2 soumis lors de la soumission du formulaire CVT editer_auteur
- * @return 
+ * @return
  * @param object $flux
  */
 function inscription2_post_edition($flux){
@@ -97,10 +97,10 @@ function inscription2_post_edition($flux){
 			$id_elargi = sql_insertq("spip_auteurs_elargis",array('id_auteur'=> $id_auteur));
 		}
 		sql_updateq("spip_auteurs_elargis",$var_user,"id_auteur=$id_auteur");
-			
+
 		// Notifications, gestion des revisions, reindexation...
 		pipeline('post_edition',
-			array(	
+			array(
 				'args' => array(
 					'table' => 'spip_auteurs_elargis',
 					'id_objet' => $id_auteur
@@ -113,18 +113,18 @@ function inscription2_post_edition($flux){
 }
 
 /**
- * 
+ *
  * Insertion dans le pipeline i2_exceptions_des_champs_auteurs_elargis
- * qui empêche la création de certains champs dans la table 
+ * qui empêche la création de certains champs dans la table
  * après les avoir configuré
- * 
- * @return array Un tableau des champs correspondant au "name" de son input de configuration dans le CFG 
+ *
+ * @return array Un tableau des champs correspondant au "name" de son input de configuration dans le CFG
  * @param array $array Prend un tableau en argument qui doit être complété en fonction des besoins
  */
 
 function inscription2_i2_exceptions_des_champs_auteurs_elargis($array){
 	// liste des champs pour lesquels on ne doit pas créer de champs dans la table spip_auteurs_elargis
-	
+
 	// Principalement les champs déjà présents dans spip_auteurs
 	$array[] = 'id_auteur';
 	$array[] = 'bio';
@@ -136,7 +136,7 @@ function inscription2_i2_exceptions_des_champs_auteurs_elargis($array){
 	$array[] = 'pgp';
 	$array[] = 'url_site';
 	$array[] = 'nom_site';
-	
+
 	// Des choses spécifiques à inscription2
 	$array[] = 'username';
 	$array[] = 'statut_nouveau';
@@ -144,33 +144,34 @@ function inscription2_i2_exceptions_des_champs_auteurs_elargis($array){
 	$array[] = 'statut_interne';
 	$array[] = 'accesrestreint';
 	$array[] = 'password';
-	
+	$array[] = 'affordance_form';
+
 	return $array;
 }
 
 /**
- * 
+ *
  * Insertion dans le pipeline i2_verifications_specifiques du plugin inscription2
- * 
- * @return array Tableau contenant plusieurs tableaux en fonction du type de champs 
+ *
+ * @return array Tableau contenant plusieurs tableaux en fonction du type de champs
  * @param object $array Doit recevoir un tableau du même type
  */
 
 function inscription2_i2_verifications_specifiques($array){
-	
+
 	// Les emails : fonction inc/inscrition2_valide_email
 	$array['email'] = 'valide_email';
-	
+
 	// Les logins : fonction inc/inscription2_valide_login
 	$array['login'] = 'valide_login';
-	
+
 	// Les statuts : fonction inc/inscription2_valide_statut
 	$array['statut'] = 'valide_statut';
-	
+
 	// Les codes postaux : fonction inc/inscription2_valide_cp
 	$array['code_postal'] = 'valide_cp';
 	$array['code_postal_pro'] = 'valide_cp';
-	
+
 	// Les numéros de téléphone : fonction inc/inscription2_valide_numero
 	$array['telephone'] = 'valide_numero';
 	$array['fax'] = 'valide_numero';
@@ -178,16 +179,16 @@ function inscription2_i2_verifications_specifiques($array){
 	$array['telephone_pro'] = 'valide_numero';
 	$array['fax_pro'] = 'valide_numero';
 	$array['mobile_pro'] = 'valide_numero';
-	
+
 	return $array;
 }
 
 /**
- * 
+ *
  * Insertion dans le pipeline affiche_droite
  * Dans certaines pages définies, afficher le lien d'accès à la page des comptes utilisateurs
- * 
- * @return array Le même tableau qu'il reçoit en argument 
+ *
+ * @return array Le même tableau qu'il reçoit en argument
  * @param array $flux Un tableau donnant des informations sur le contenu passé au pipeline
  */
 

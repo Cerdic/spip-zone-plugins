@@ -9,10 +9,26 @@
 <form method="post" action="#ENV{action}">
 	<div>
 		#ACTION_FORMULAIRE{#ENV{action}}
-	
-		[(#REM) ------------------------ INFORMATIONS SUR LES AUTEURS ------------------------ ]
+
 		<fieldset>
 			<ul>
+				<li class="fieldset">
+					<fieldset>
+						<h3 class="legend"><:inscription2:legend_affordance_form:></h3>
+						<ul>
+							<li>
+								[(#SAISIE{radio, affordance_form,
+									label=<:inscription2:label_affordance_form:>,
+									explication=<:inscription2:explication_affordance_form:>,
+									defaut=#ARRAY{0,login},
+									datas=#ARRAY{
+										login,<:inscription2:choix_affordance_login:>,
+										email,<:inscription2:choix_affordance_email:>,
+										login_et_email,<:inscription2:choix_affordance_login_email:>}})]
+							</li>
+						</ul>
+					</fieldset>
+				</li>
 				<li class="fieldset">
 					<fieldset>
 						<h3 class="legend"><:inscription2:info_defaut:></h3>
@@ -26,7 +42,7 @@
 										<strong><:inscription2:fiche_mod:></strong><:inscription2:fiche_mod_expl:><br />
 										<strong><:inscription2:fiche:></strong><:inscription2:fiche_expl:><br />
 										<strong><:inscription2:table:></strong><:inscription2:table_expl:><br />
-									</small>	
+									</small>
 								</div>
 							</li>
 							<li>
@@ -103,14 +119,14 @@
 						</ul>
 					</fieldset>
 				</li>
-		
+
 		[(#REM) ------------------------ INFORMATIONS PERSONNELLES? ------------------------ ]
 		<INCLURE{fond=fonds/inscription2_infos_persos}>
-		
+
 		[(#REM) ------------------------ INFORMATIONS PROFESSIONNELLES? ------------------------ ]
 		<INCLURE{fond=fonds/inscription2_infos_pros}>
-		
-		[(#REM) ------------------------ GREFFONS 
+
+		[(#REM) ------------------------ GREFFONS
 		    geomap
 		    echoppe
 		    spiplistes
@@ -120,7 +136,7 @@
 		    ...
 		------------------------ ]
 		#PIPELINE{i2_cfg_form}
-		
+
 		[(#REM) ------------------------ OPTIONS DES AUTEURS ------------------------ ]
 		<li class="fieldset" id="option">
 			<fieldset>
@@ -135,11 +151,11 @@
 				[(#SAISIE{case,divers}
 					{label=<:inscription2:publication:>}
 					{explication=<:inscription2:exp_publication:>})]
-				
+
 			</ul>
 			</fieldset>
 		</li>
-	
+
 		<li class="fieldset">
 			<fieldset>
 			<h3 class="legend"><:inscription2:info_internes:></h3>
@@ -190,7 +206,7 @@ function showhide(boxName, boxNom) {
 	if(boxName.checked){
 		$(boxNom).slideDown('slow');
 	}
-	else 
+	else
 		$(boxNom).slideUp('slow');
 }
 
@@ -210,7 +226,7 @@ function enadis(boxName, boxNom) {
 	if(boxName.checked){
 		boxNom.disabled = true;
 		boxNom.checked = false;
-	}else 
+	}else
 		boxNom.disabled = false;
 }
 // --></script>

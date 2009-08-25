@@ -36,6 +36,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'choisir_categories' => 'Choisissez-les ci-dessous&nbsp;:',
 	'choisir_nouveau_password' => 'Vous pourrez choisir un nouveau mot de passe en cliquant le lien suivant',
 	'choisir_zones' => 'Veuillez choisir les zones auxquelles vous voulez que les nouveaux adh&eacute;rents soient affect&eacute;s',
+	'choix_affordance_login' => 'Login (d&eacute;faut de SPIP)',
+	'choix_affordance_email' => 'Email',
+	'choix_affordance_login_email' => 'Login et Email',
 	'choix_domaine' => 'Veuillez choisir votre domaine',
 	'civilite' => 'Civilit&eacute;',
 	'code_postal' => 'Code Postal',
@@ -74,6 +77,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'exp_publication' => 'Autorisation de publication des donn&eacute;es personnelles',
 	'exp_statut' => 'Choisissez le statut que vous voulez attribuer aux nouveaux adh&eacute;rents',
 	'exp_statut_rel' => 'Champ diff&eacute;rent du statut de SPIP, celui-ci sert pour le controle interne d\'une institution',
+	'explication_affordance_form' => 'Cette option permet de modifier l\'intitul&eacute; des labels des formulaires en relation avec l\'identification.',
 
 	// F
 	'fax' => 'Fax',
@@ -129,7 +133,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'juin' => 'juin',
 
 	// L
+	'label_affordance_form' => 'Choisir l\'affordance des formulaires d\'identification',
 	'latitude' => 'Latitude',
+	'legend_affordance_form' => 'Affordance des formulaires',
+
 	'legende' => 'L&eacute;gende',
 	'lisez_mail' => 'Un email vient d\'&ecirc;tre envoy&eacute; &agrave; l\'adresse fournie. Pour activer votre compte veuillez suivre les instructions.',
 	'liste_adherents' => 'Afficher les comptes utilisateurs',
@@ -177,6 +184,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 			modifier votre acc&egrave;s.',
 	'pass_minimum' => 'Votre mot de passe doit comporter au moins 5 caract&egrave;res',
 	'pass_oubli_mot' => 'Changement de votre mot de passe',
+	'pass_rappel_email' => 'Rappel : votre adresse email est "@email@".',
+	'pass_rappel_login_email' => 'Rappel : votre login est "@login@" et votre adresse email est "@email@".',
 	'pass_recevoir_mail' => 'Vous allez recevoir un email vous indiquant comment modifier votre acc&egrave;s au site.',
 	'password_obligatoire' => 'Le mot de passe est obligatoire.',
 	'password_retaper' => 'Confirmez le mot de passe',
@@ -227,9 +236,9 @@ et vous venez choisir votre mot de passe.
 
 Merci de votre confiance
 
-L\'&eacute;quipe de @nom_site@ 
+L\'&eacute;quipe de @nom_site@
 @url_site@',
-	'texte_email_inscription' => 'vous &ecirc;tes sur le point de confirmer votre inscription au site @nom_site@. 
+	'texte_email_inscription' => 'vous &ecirc;tes sur le point de confirmer votre inscription au site @nom_site@.
 
 Cliquer le lien ci-dessous pour activer votre compte et choisir votre mot de passe.
 
@@ -260,6 +269,7 @@ Si vous n\'avez pas demand&eacute; cette inscription ou si vous ne voulez plus f
 	'vos_contacts_personnels' => 'Vos contacts personnels',
 	'votre_adresse' => 'Votre adresse personnelle',
 	'votre_adresse_pro' => 'Votre adresse (professionnelle)',
+	'votre_login_mail' => 'Votre login ou email :',
 	'votre_mail' => 'Votre email :',
 	'votre_nom_complet' => 'Votre nom complet',
 	'votre_profil' => 'Votre profil',

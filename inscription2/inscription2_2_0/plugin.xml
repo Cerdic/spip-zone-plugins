@@ -5,11 +5,11 @@
 	<auteur>
 		&copy; cmtmt2003 - 2007/2009 - Distribu&eacute; sous licence GNU/LGPL
 	</auteur>
-	
+
 	<version>0.71</version>
 	<version_base>0.71</version_base>
 	<etat>test</etat>
-	
+
 	<description>
 		Inscription personnalis&eacute;e au site par l&rsquo;ajout de champs compl&eacute;mentaires.
 	</description>
@@ -44,17 +44,17 @@
 	    <icone>images/fiche-perso.png</icone>
 	    <titre>icone_afficher_visiteurs</titre>
 	</bouton>
-	
+
 	<pipeline>
 		<nom>ajouter_boutons</nom>
 		<action>ajouter_boutons</action>
 		<inclure>inscription2_pipelines.php</inclure>
 	</pipeline>
-	
+
 	<pipeline>
 		<nom>editer_contenu_objet</nom>
 		<inclure>inscription2_pipelines.php</inclure>
-	</pipeline>	
+	</pipeline>
  	<pipeline>
 		<nom>post_edition</nom>
 		<inclure>inscription2_pipelines.php</inclure>
@@ -67,8 +67,9 @@
 		<nom>affiche_droite</nom>
 		<inclure>inscription2_pipelines.php</inclure>
 	</pipeline>
-	<necessite id="cfg" version="[1.12.2;]" />
-	<necessite id="SPIP" version='[2.0.0;]' />
+	<necessite id="cfg" version="[1.14;]" />
+	<necessite id="SPIP" version='[2.0.9;]' />
 	<necessite id='spip_bonux' version='[1.6;]' />
+	<necessite id='saisies' version='[1.1;]' />
 	<necessite id="lib:jquery-validate" src="http://plugins.jquery.com/files/jquery.validate_13.zip" />
 </plugin>
