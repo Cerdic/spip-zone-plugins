@@ -21,11 +21,6 @@
 		<inclure>savecfg_fonctions.php</inclure>
 		<action>afficher_tout</action>
 	</pipeline>
-	<bouton id='savecfg' parent='configuration'>
-		<icone>images/savecfg.jpg</icone>
-		<titre>SaveCFG</titre>
-		<url>savecfg</url>
-	</bouton>
 	<necessite id="SPIP" version='[2.0.9;]' />
 	<necessite id='cfg' version='[1.14.0;]' />
 </plugin>
