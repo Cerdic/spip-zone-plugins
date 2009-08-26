@@ -66,10 +66,10 @@ function crayons_store($options = array()) {
 			'f_get_valeur' => 'crayons_store_get_valeur',
 			'f_set_modifs' => 'crayons_store_set_modifs',
 		), $options);
-		
+
 	include_spip('inc/crayons');
 	$wdgcfg = wdgcfg();
-	
+
 	$return = array('$erreur'=>'');
 
 	$postees = post_crayons();
@@ -133,7 +133,7 @@ function crayons_store($options = array()) {
 	// une quelconque erreur ... ou rien ==> on ne fait rien !
 	if ($return['$erreur'])
 		return $return;
-		
+
 	// et maintenant refaire l'affichage des crayons modifies
 	include_spip('inc/texte');
 	foreach ($modifs as $m) {
@@ -142,7 +142,7 @@ function crayons_store($options = array()) {
 			  OR $f = charger_fonction($modele, 'vues', true)
 			  OR $f = charger_fonction($type, 'vues', true)
 			  OR $f = 'vues_dist';
-			$return[$wid] = $f($type, $modele, $id, $content);
+			$return[$wid] = $f($type, $modele, $id, $content, $wid);
 	}
 	return $return;
 }
@@ -234,15 +234,14 @@ function crayons_store_set_modifs($modifs, $return) {
 	        $fun($id, $champsvaleurs['chval'], $type, $champsvaleurs['wdg']);
 	    }
 	}
-	
-	return $return;	
+
+	return $return;
 }
 
 //
 // VUE
 //
-function vues_dist($type, $modele, $id, $content){
-
+function vues_dist($type, $modele, $id, $content, $wid){
 	// pour ce qui a une {lang_select} par defaut dans la boucle,
 	// la regler histoire d'avoir la bonne typo dans le propre()
 	// NB: ceci n'a d'impact que sur le "par defaut" en bas
@@ -263,7 +262,7 @@ function vues_dist($type, $modele, $id, $content){
 		    'crayon_type' => $type,
 			'crayon_modele' => $modele,
 		    'champ' => $modele,
-		    'class' => _request('class'),
+		    'class' => _request('class_'.$wid),
 		    'self' => _request('self'),
 		    'lang' => $GLOBALS['spip_lang']
 		);
@@ -278,7 +277,7 @@ function vues_dist($type, $modele, $id, $content){
 		// ce qu'on vient d'envoyer, il y a nettoyage des caracteres et
 		// eventuellement d'autres filtres de saisie...)
 		$valeur = array_pop(valeur_colonne_table($type, $modele, $id));
-		
+
 		// seul spip core sait rendre les donnees
 		if (in_array($modele,
 		  array('chapo', 'texte', 'descriptif', 'ps', 'bio'))) {
@@ -308,7 +307,7 @@ function crayons_update($id, $colval = array(), $type = '')
 		$sep = ', ';
 	}
 
-	$a = spip_query($q = 
+	$a = spip_query($q =
         'UPDATE `' . $nom_table . '` SET ' . $update . ' WHERE ' . $where);
 
 	#spip_log($q);
@@ -385,7 +384,7 @@ function action_crayons_store_args($store = 'crayons_store') {
 		echo json_export($r);
 	}
 
-	exit;	
+	exit;
 }
 
 ?>
