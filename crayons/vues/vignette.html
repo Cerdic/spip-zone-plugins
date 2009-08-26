@@ -4,8 +4,9 @@
 	Ce crayons ne s'applique qu'aux documents
 
 ]
+[(#SET{resize,[(#ENV{class}|match{\bresize-\d+\b}|replace{resize-})]})]
 
-[(#SET{image,[(#LOGO_DOCUMENT||image_reduire{100})]})]
+[(#SET{image,[(#LOGO_DOCUMENT||image_reduire{#GET{resize,0},#GET{resize,120}})]})]
 
 [(#GET{image}|?{
 
