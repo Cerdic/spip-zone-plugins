@@ -2,11 +2,11 @@
 <nom>Commentaires</nom>
 <auteur>[romy.tetue.net->http://romy.tetue.net] - 2009</auteur>
 <licence>GPL</licence>
-<version>1.0</version>
+<version>0.2</version>
 <etat>dev</etat>
-<description>PLUGIN INSTABLE, encore en d&eacute;veloppement.
-_ Remplace le traditionnel #FORMULAIRE_FORUM de SPIP par un formulaire de commentaires (plus succint) et affiche une liste des commentaires.
-_ Le plugin gravatar ajoutera un avatar &agrave; chaque message.</description>
+<description>PLUGIN INSTABLE, encore en d&eacute;veloppement&nbsp;!
+_ Remplace le traditionnel #FORMULAIRE_FORUM de SPIP par un formulaire de commentaires (plus succint) et affiche une liste des commentaires.</description>
+<lien>http://www.spip-contrib.net/?article3173</lien>
 <prefix>commentaires</prefix>
 <fonctions>commentaires_fonctions.php</fonctions>
 <necessite id='SPIP' version='[2.0.9;]' />
