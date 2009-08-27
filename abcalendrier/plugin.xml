@@ -102,6 +102,7 @@ _ © 2007 - 2009 - Distribue sous licence GNU/GPL
 	</multi>
 
 	</description>
+	<lien>http://www.spip-contrib.net/Plugin-ABCalendrier,2686</lien>
 	<pipeline>
 		<nom>insert_head</nom>
 		<inclure>abcal_pipelines.php</inclure>
