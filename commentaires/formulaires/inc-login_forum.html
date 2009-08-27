@@ -6,11 +6,10 @@
 	Pour les forums sur abonnement, un squelette specifique presente les regles
 
 ]
-<fieldset>
-<legend><:forum_qui_etes_vous:></legend>
+<fieldset class="qui[ (#SESSION{auth}|?{session_qui,saisie_qui})]">
+	<legend><:forum_qui_etes_vous:></legend>
 [(#SESSION{auth}|?{' '})
-	[<p class='explication'><:forum_votre_nom:> <strong>(#SESSION{nom}|typo)</strong> <span class="details">&#91;<a href="#URL_LOGOUT" rel="nofollow"><:icone_deconnecter:></a>&#93;</span></p>]
-	
+	[<p><:forum_votre_nom:> <strong>(#SESSION{nom}|typo)</strong> <span class="details">&#91;<a href="#URL_LOGOUT" rel="nofollow"><:icone_deconnecter:></a>&#93;</span></p>]	
 ]
 [(#SESSION{auth}|?{'',' '})
 	<ul>
