@@ -111,7 +111,7 @@ if(defined('_SPIP19300') && defined('_PARENTS_ETENDUS')) {
 			$table = cs_table_objet($objet);
 			$champ_parent = id_table_objet($table);
 			// id de l'objet a trouver pour retourner son titre
-			$id = ($v = interprete_argument_balise(1,$p))!==NULL ? $v : champ_sql($champ_parent, $p);
+			$id = ($v = interprete_argument_balise(1,$p))!==NULL ? $v : champ_sql('id_'.$objet, $p);
 			// le code php a executer, avant de le passer aux traitements
 			$p->code = cs_titre_traitements("cs_titre_id(intval($id), '$table', '$champ_parent')", $table);
 		} else 
