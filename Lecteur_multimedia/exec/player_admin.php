@@ -42,7 +42,7 @@ function exec_player_admin()
 
 	$player_flv_lecteurs = unserialize(_PLAYER_FLV_LECTEURS);
 
-	// la grosse table commune à tous les profils
+	// la grosse table commune a tous les profils
 	$player_flv_config = player_flv_config();
 	
 	// lecture du meta
@@ -52,12 +52,12 @@ function exec_player_admin()
 	// est-ce bien un retour du formulaire ?
 	$player_retour_formulaire = _request('btn_valider_video');
 	
-	// aplatir le tableau en ne récupérant que les valeurs
+	// aplatir le tableau en ne recuperant que les valeurs
 	$player_flv_lecteurs_values = array();
 	foreach($player_flv_lecteurs as $key => $value) {
 		$player_flv_lecteurs_values[$key] = $value['value'];
 	}
-	// vérifier si le lecteur vidéo indiqué est correct
+	// verifier si le lecteur video indique est correct
 	$player_video = $player_config['player_video'] = 
 		(($ii = _request('player_video')) && (in_array($ii, $player_flv_lecteurs_values)))
 		? $ii 
@@ -66,7 +66,7 @@ function exec_player_admin()
 	$player_key = array_search($player_video, $player_flv_lecteurs_values);
 	$player_config['player_key'] = $player_key;
 	
-	// première install pour le profil ou global
+	// premiere install pour le profil ou global
 	if($player_premiere_installation = (!isset($player_config['player_video_prefs']))) {
 		spip_log("PLAYER: premiere installation profil $player_key");
 		$player_config['player_video_prefs'] = array();
@@ -163,7 +163,7 @@ function exec_player_admin()
 			case 'list':
 				$player_flv_options = "<label title='$key'>".$value['label']."<select name='$key' class='fondl'>\n";
 				foreach($value['values'] as $k1 => $v1) {
-					// si la clé n'est pas une chaine, prendre $v1 pour valeur de option
+					// si la cle n'est pas une chaine, prendre $v1 pour valeur de option
 					$ii = (is_string($v1) ? _T(_PLAYER_LANG.$v1) : $v1);
 					$player_flv_options .= "<option value='$k1'".(($$key == $k1) ? " selected='selected'" : "").">$ii</option>\n";
 				}

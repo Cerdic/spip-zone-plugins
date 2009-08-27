@@ -1,4 +1,4 @@
-[(#REM)
+[<!--(#REM)
 
 	// modeles/doc_player.html
 
@@ -15,13 +15,16 @@ Afficher le TITRE, le DESCRIPTIF suivi du lecteur flash permettant de faire joue
 Sinon, utiliser le comportement normal.
 
 
-]
+-->]
 <BOUCLE_doc (DOCUMENTS) {id_document}{tout}>
 #SET{player,#ENV{player,#CONFIG{player,'neoplayer'}}}
 
 
-[(#REM) Document MP3 ? ]
-[(#TYPE_DOCUMENT|=={MP3}|?{
+[<!--(#REM) 
+
+	Document MP3 ? 
+
+-->][(#TYPE_DOCUMENT|=={MP3}|?{
 <dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
 [(#ID_VIGNETTE|?{
 	<dt><a href="[(#ENV{lien}|sinon{#URL_DOCUMENT})]" type="#MIME_TYPE"[ class="(#ENV{lien_class})"] title='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets|texte_backend)]'>
@@ -34,7 +37,11 @@ Sinon, utiliser le comportement normal.
 <dd class='spip_doc_descriptif #EDIT{descriptif}'[ style='width:(#LOGO_DOCUMENT||largeur|min{350}|max{120})px;']>(#DESCRIPTIF|PtoBR)[(#NOTES|PtoBR)]</dd>]
 <dd class='spip_doc_descriptif'[ style='width:(#LOGO_DOCUMENT||largeur|min{350}|max{120})px;']>
 [(#GET{player}|=={pixplayer}|?{' ',''})
-[(#REM) Pour voir les options de configuration : http://www.1pixelout.net/code/audio-player-wordpress-plugin/]
+[<!--(#REM) 
+
+	Pour voir les options de configuration : http://www.1pixelout.net/code/audio-player-wordpress-plugin/
+	
+-->]
 <object type='application/x-shockwave-flash' data='#CHEMIN{flash/pixplayer.swf}' id='audioplayer#ID_DOCUMENT' height='[(#ENV{height,24})]' width='[(#ENV{width,290})]'>
 <param name="wmode" value="opaque" />
 <param name='movie' value='#CHEMIN{flash/pixplayer.swf}' />
@@ -76,14 +83,19 @@ Sinon, utiliser le comportement normal.
 })]
 
 
-[(#REM) Document Flash (.flv) ?
+[<!--(#REM) 
+
+	Document Flash (.flv) ?
+	
 	Documentation:
 	- player_flv_js.swf -> http://flv-player.net/players/js/documentation/
 	- player_flv_multi.swf -> http://flv-player.net/players/multi/documentation/
 	- player_flv_maxi -> http://flv-player.net/players/maxi/documentation/
 	- player_flv.swf -> http://flv-player.net/players/normal/documentation/
 	- player_flv_mini.swf -> http://flv-player.net/players/mini/documentation/
-][(#TYPE_DOCUMENT|=={Flash Video}|?{' '})
+
+
+-->][(#TYPE_DOCUMENT|=={Flash Video}|?{' '})
 <dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
 <dt class='spip_doc_titre'>
 <object type="application/x-shockwave-flash" data="#CHEMIN{flash/player_flv_maxi.swf}" width="[(#LARGEUR|=={0}|?{400,#LARGEUR})]" height="[(#HAUTEUR|=={0}|?{300,#HAUTEUR})]">
@@ -100,8 +112,11 @@ Sinon, utiliser le comportement normal.
 ]
 
 
-[(#REM) Sinon : document normal ]
-[(#TYPE_DOCUMENT|match{^(Flash Video|MP3)$}|?{'',' '})
+[<!--(#REM) 
+
+	Sinon : document normal 
+	
+-->][(#TYPE_DOCUMENT|match{^(Flash Video|MP3)$}|?{'',' '})
 <dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
 <a href="[(#ENV{lien}|sinon{#URL_DOCUMENT})]" type="#MIME_TYPE"[ class="(#ENV{lien_class})"]><img src='[(#LOGO_DOCUMENT||extraire_attribut{src})]' width='[(#LOGO_DOCUMENT||largeur)]' height='[(#LOGO_DOCUMENT||hauteur)]' alt='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets)]' title='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets)]' /></a>
 [

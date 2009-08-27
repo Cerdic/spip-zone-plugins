@@ -1,6 +1,11 @@
 #CACHE{7200}
-[(#REM) Les sites n'ont pas de "lang" a proprement parler ; on se base donc sur la langue de la rubrique qui les contient. Les articles syndiques, eux, ont une "lang". ]
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+[<!--(#REM) 
+
+	Les sites n'ont pas de "lang" a proprement parler ; 
+	on se base donc sur la langue de la rubrique qui les contient. 
+	Les articles syndiques, eux, ont une "lang". 
+
+-->]<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <BOUCLE_lang(RUBRIQUES){id_rubrique}><html dir="#LANG_DIR" lang="#LANG"></BOUCLE_lang>
 <head>
 	<title>[(#NOM_SITE|textebrut)][ - (#NOM_SITE_SPIP|textebrut)]</title>
@@ -23,11 +28,11 @@
 <body id="page_site">
 <div id="page">
 
-	[(#REM) Entete de la page + titre du site ]
-	<INCLURE{fond=inc-entete}{lang}>
+	[<!--(#REM) Entete de la page + titre du site 
+	-->]<INCLURE{fond=inc-entete}{lang}>
 
-	[(#REM) Fil d'Ariane ]
-	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_syndic}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; (#NOM_SITE|couper{80})]</div>
+	[<!--(#REM) Fil d'Ariane 
+	-->]<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_syndic}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; (#NOM_SITE|couper{80})]</div>
 
 	<div id="conteneur">
 
@@ -106,11 +111,8 @@
 			</div>
 			</B_sites>
 
-
-
-
-			[(#REM) Menu de navigation mots-cles ]
-			<B_mots>
+			[<!--(#REM) Menu de navigation mots-cles 
+			-->]<B_mots>
 			<div class="divers">
 				<h2 class="menu-titre"><:mots_clefs:></h2>
 				<ul>
@@ -125,8 +127,8 @@
 
 	</div><!-- fin conteneur -->
 
-	[(#REM) Pied de page ]
-	<INCLURE{fond=inc-pied}{lang}>
+	[<!--(#REM) Pied de page 
+	-->]<INCLURE{fond=inc-pied}{lang}>
 
 </div><!-- fin page -->
 </body>
