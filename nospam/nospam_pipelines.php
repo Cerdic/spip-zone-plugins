@@ -16,13 +16,10 @@ $GLOBALS['formulaires_no_spam'][] = 'forum';
  * @return array
  */
 function nospam_formulaire_charger($flux){
-	if (in_array($flux['args']['form'],$GLOBALS['formulaires_no_spam'])){
-		$form = $flux['args']['form'];
-		$time = date('Y-m-d-H');
-		$ip = $GLOBALS['ip'];
-		include_spip('inc/securiser_action');
-		// le jeton prend en compte l'heure et l'ip de l'internaute
-		$jeton = calculer_cle_action("jeton$form$time$ip");
+	$form = $flux['args']['form'];
+	if (in_array($form,$GLOBALS['formulaires_no_spam'])){
+		include_spip("inc/nospam");
+		$jeton = creer_jeton($form);
 		$flux['data']['_hidden'] .= "<input type='hidden' name='_jeton' value='$jeton' />";
 	}
 	return $flux;
@@ -37,18 +34,12 @@ function nospam_formulaire_charger($flux){
 function nospam_formulaire_verifier($flux){
 	$form = $flux['args']['form'];
 	if (in_array($form,$GLOBALS['formulaires_no_spam'])){
-		$time = time();
-		$time_old = date('Y-m-d-H',$time-3600);
-		$time = date('Y-m-d-H',$time);
-		$ip = $GLOBALS['ip'];
-		
+		include_spip("inc/nospam");
 		$jeton = _request('_jeton');
-		include_spip('inc/securiser_action');
+		
 		// le jeton prend en compte l'heure et l'ip de l'internaute
 		if (_request('nobot') // trop facile !
-		  OR
-		  (!verifier_cle_action("jeton$form$time$ip",$jeton)
-		    AND !verifier_cle_action("jeton$form$time_old$ip",$jeton))){
+		OR (!verifier_jeton($form, $jeton))){
 			$flux['data']['message_erreur'] .= _T('nospam:erreur_jeton');
 			if ($form=='forum')
 				unset($flux['data']['previsu']);
