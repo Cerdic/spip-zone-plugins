@@ -14,8 +14,10 @@
 	<auteur>
 		<multi>
 			[fr][babbibel->http://www.spip-contrib.net/babbibel]			
+			<br />Exemple: [Le Cri du peuple->http://www.cridupeuple.com]
 			<br /> &copy; 2009 - Distribué sous licence GNU/GPL
 			[en][babbibel->http://www.spip-contrib.net/babbibel]
+			<br />Exemple: [Le Cri du peuple->http://www.cridupeuple.com]
 			<br />_ &copy; 2009 - distributed under GNU/GPL licence
 		</multi>
 	</auteur>
@@ -50,10 +52,9 @@
 	</ul>
 	</multi></description>
 
-	<lien>Doc [spip-contrib.net->http://www.spip-contrib.net/Le-menu-deroulant-Babbibel]</lien>
-	<br /> 
 	<!-- URI de documentation -->
-	<lien>Exemple: [Le Cri du peuple->http://www.cridupeuple.com]</lien>
+	<lien>Doc [spip-contrib.net->http://www.spip-contrib.net/Le-menu-deroulant-Babbibel]</lien>
+
 	
 	<fonctions>fonctions_menu.php</fonctions>
 
