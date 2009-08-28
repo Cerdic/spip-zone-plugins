@@ -4,8 +4,8 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // Aide des boutons supplémentaires de la barre typo
-'barre_intertitre2' => 'Transformer en {2{intertitre niveau deux}2}',
-'barre_intertitre3' => 'Transformer en {3{intertitre niveau trois}3}',
+'barre_intertitre2' => 'Transformer en {{{**intertitre niveau deux}}}',
+'barre_intertitre3' => 'Transformer en {{{***intertitre niveau trois}}}',
 'barre_miseenevidence' => 'Mettre le texte en [*&eacute;vidence*]',
 'barre_miseenevidence2' => 'Mettre le texte en [**&eacute;vidence*] (2e couleur)',
 

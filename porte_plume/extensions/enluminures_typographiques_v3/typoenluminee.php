@@ -93,20 +93,14 @@ function typoenluminee_pre_propre($texte) {
 				$remplacer_raccourcis[]=$item['remplacer'];	
 			}
 	
-			/* 1 */ 	$chercher_raccourcis[]="/(^|[^{])[{][{][{]/S";
-			/* 2 */ 	$chercher_raccourcis[]="/[}][}][}]($|[^}])/S";
-			/* 3 */ 	$chercher_raccourcis[]="/(^|[^{])\{1\{/S";
-			/* 4 */ 	$chercher_raccourcis[]="/\}1\}($|[^}])/S";
-			/* 5 */ 	$chercher_raccourcis[]="/(^|[^{])\{2\{/S";
-			/* 6 */ 	$chercher_raccourcis[]="/\}2\}($|[^}])/S";
-			/* 7 */ 	$chercher_raccourcis[]="/(^|[^{])\{3\{/S";
-			/* 8 */ 	$chercher_raccourcis[]="/\}3\}($|[^}])/S";
-			/* 9 */ 	$chercher_raccourcis[]="/(^|[^{])\{4\{/S";
-			/* 10 */ 	$chercher_raccourcis[]="/\}4\}($|[^}])/S";
-			/* 9b */ 	$chercher_raccourcis[]="/(^|[^{])\{5\{/S";
-			/* 10b */ 	$chercher_raccourcis[]="/\}5\}($|[^}])/S";
-			/* 11 */ 	$chercher_raccourcis[]="/\{(�|§)\{/S"; # § Pour gerer l'unicode aussi !
-			/* 12 */ 	$chercher_raccourcis[]="/\}(�|§)\}/S";
+			/* 9b */ 	$chercher_raccourcis[]="/(^|[^{])[{][{][{]\*\*\*\*\*(.*)[}][}][}]($|[^}])/S";
+			/* 9 */ 	$chercher_raccourcis[]="/(^|[^{])[{][{][{]\*\*\*\*(.*)[}][}][}]($|[^}])/S";
+			/* 7 */ 	$chercher_raccourcis[]="/(^|[^{])[{][{][{]\*\*\*(.*)[}][}][}]($|[^}])/S";
+			/* 5 */ 	$chercher_raccourcis[]="/(^|[^{])[{][{][{]\*\*(.*)[}][}][}]($|[^}])/S";
+			/* 3 */ 	$chercher_raccourcis[]="/(^|[^{])[{][{][{]\*(.*)[}][}][}]($|[^}])/S";
+			/* 1 */ 	$chercher_raccourcis[]="/(^|[^{])[{][{][{](.*)[}][}][}]($|[^}])/S";
+			/* 11 */ 	$chercher_raccourcis[]="/\{(§|Â§)\{/S"; # Â§ Pour gerer l'unicode aussi !
+			/* 12 */ 	$chercher_raccourcis[]="/\}(§|Â§)\}/S";
 			/* 13 */ 	$chercher_raccourcis[]="/<-->/S";
 			/* 14 */ 	$chercher_raccourcis[]="/-->/S";
 			/* 15 */ 	$chercher_raccourcis[]="/<--/S";
@@ -118,18 +112,12 @@ function typoenluminee_pre_propre($texte) {
 			/* 21 */ 	$chercher_raccourcis[]="/\([tT][mM]\)/S";
 			/* 22 */ 	$chercher_raccourcis[]="/\.\.\./S";
 	
-			/*  1 */	$remplacer_raccourcis[]="\$1\n\n$debut_intertitre";
-			/*  2 */	$remplacer_raccourcis[]="$fin_intertitre\n\n\$1";
-			/*  3 */	$remplacer_raccourcis[]="\$1\n\n$debut_intertitre";
-			/*  4 */	$remplacer_raccourcis[]="$fin_intertitre\n\n\$1";
-			/*  5 */	$remplacer_raccourcis[]="\$1\n\n$debut_intertitre_2";
-			/*  6 */	$remplacer_raccourcis[]="$fin_intertitre_2\n\n\$1";
-			/*  7 */	$remplacer_raccourcis[]="\$1\n\n$debut_intertitre_3";
-			/*  8 */	$remplacer_raccourcis[]="$fin_intertitre_3\n\n\$1";
-			/*  9 */	$remplacer_raccourcis[]="\$1\n\n$debut_intertitre_4";
-			/* 10 */	$remplacer_raccourcis[]="$fin_intertitre_4\n\n\$1";
-			/* 9b */	$remplacer_raccourcis[]="\$1\n\n$debut_intertitre_5";
-			/* 10b */	$remplacer_raccourcis[]="$fin_intertitre_5\n\n\$1";
+			/* 9b */	$remplacer_raccourcis[]="\$1\n\n$debut_intertitre_5\$2$fin_intertitre_5\n\n\$3";
+			/*  9 */	$remplacer_raccourcis[]="\$1\n\n$debut_intertitre_4\$2$fin_intertitre_4\n\n\$3";
+			/*  7 */	$remplacer_raccourcis[]="\$1\n\n$debut_intertitre_3\$2$fin_intertitre_3\n\n\$3";
+			/*  5 */	$remplacer_raccourcis[]="\$1\n\n$debut_intertitre_2\$2$fin_intertitre_2\n\n\$3";
+			/*  3 */	$remplacer_raccourcis[]="\$1\n\n$debut_intertitre\$2$fin_intertitre\n\n\$3";
+			/*  1 */	$remplacer_raccourcis[]="\$1\n\n$debut_intertitre\$2$fin_intertitre\n\n\$3";
 			/* 11 */	$remplacer_raccourcis[]="<span style=\"font-variant: small-caps\">";
 			/* 12 */	$remplacer_raccourcis[]="</span>";
 			/* 13 */	$remplacer_raccourcis[]="&harr;";
@@ -143,6 +131,16 @@ function typoenluminee_pre_propre($texte) {
 			/* 21 */	$remplacer_raccourcis[]="&trade;";
 			/* 22 */	$remplacer_raccourcis[]="&hellip;";
 	}
+	
+	// Conversion des intertitres d'enluminures type {ß{titre}ß}
+	// ou ß est un nombre en intertitres avec des étoiles type {{{* (avec ß étoiles)
+	// {1{ sera converti en {{{* ; {2{ sera converti en {{{** ; etc.
+	$texte=preg_replace_callback ("/(\{(\d)\{)(.*?)(\}\\2\})/",
+					create_function (
+						'$matches',
+						'return "{{{".str_repeat("*",$matches[2]).$matches[3]."}}}";'
+						),
+					$texte);
 
 	$texte = preg_replace($chercher_raccourcis, $remplacer_raccourcis, $texte);
 
