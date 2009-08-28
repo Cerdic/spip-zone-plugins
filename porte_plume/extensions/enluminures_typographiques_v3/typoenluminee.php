@@ -99,8 +99,8 @@ function typoenluminee_pre_propre($texte) {
 			/* 5 */ 	$chercher_raccourcis[]="/(^|[^{])[{][{][{]\*\*(.*)[}][}][}]($|[^}])/S";
 			/* 3 */ 	$chercher_raccourcis[]="/(^|[^{])[{][{][{]\*(.*)[}][}][}]($|[^}])/S";
 			/* 1 */ 	$chercher_raccourcis[]="/(^|[^{])[{][{][{](.*)[}][}][}]($|[^}])/S";
-			/* 11 */ 	$chercher_raccourcis[]="/\{(§|Â§)\{/S"; # Â§ Pour gerer l'unicode aussi !
-			/* 12 */ 	$chercher_raccourcis[]="/\}(§|Â§)\}/S"; # ne pas sauvergarder ce fichier en utf8 !
+			/* 11 */ 	$chercher_raccourcis[]="/\{(�|§)\{/S"; # § Pour gerer l'unicode aussi !
+			/* 12 */ 	$chercher_raccourcis[]="/\}(�|§)\}/S"; # ne pas sauvergarder ce fichier en utf8 !
 			/* 13 */ 	$chercher_raccourcis[]="/<-->/S";
 			/* 14 */ 	$chercher_raccourcis[]="/-->/S";
 			/* 15 */ 	$chercher_raccourcis[]="/<--/S";
@@ -132,8 +132,8 @@ function typoenluminee_pre_propre($texte) {
 			/* 22 */	$remplacer_raccourcis[]="&hellip;";
 	}
 	
-	// Conversion des intertitres d'enluminures type {ß{titre}ß}
-	// ou ß est un nombre en intertitres avec des étoiles type {{{* (avec ß étoiles)
+	// Conversion des intertitres d'enluminures type {�{titre}�}
+	// ou � est un nombre en intertitres avec des �toiles type {{{* (avec � �toiles)
 	// {1{ sera converti en {{{* ; {2{ sera converti en {{{** ; etc.
 	$texte=preg_replace_callback ("/(\{(\d)\{)(.*?)(\}\\2\})/",
 					create_function (
