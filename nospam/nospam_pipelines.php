@@ -39,7 +39,7 @@ function nospam_formulaire_verifier($flux){
 		
 		// le jeton prend en compte l'heure et l'ip de l'internaute
 		if (_request('nobot') // trop facile !
-		OR (!verifier_jeton($form, $jeton))){
+		OR (!verifier_jeton($jeton, $form))){
 			$flux['data']['message_erreur'] .= _T('nospam:erreur_jeton');
 			if ($form=='forum')
 				unset($flux['data']['previsu']);
