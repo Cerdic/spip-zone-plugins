@@ -100,7 +100,7 @@ function typoenluminee_pre_propre($texte) {
 			/* 3 */ 	$chercher_raccourcis[]="/(^|[^{])[{][{][{]\*(.*)[}][}][}]($|[^}])/S";
 			/* 1 */ 	$chercher_raccourcis[]="/(^|[^{])[{][{][{](.*)[}][}][}]($|[^}])/S";
 			/* 11 */ 	$chercher_raccourcis[]="/\{(§|Â§)\{/S"; # Â§ Pour gerer l'unicode aussi !
-			/* 12 */ 	$chercher_raccourcis[]="/\}(§|Â§)\}/S";
+			/* 12 */ 	$chercher_raccourcis[]="/\}(§|Â§)\}/S"; # ne pas sauvergarder ce fichier en utf8 !
 			/* 13 */ 	$chercher_raccourcis[]="/<-->/S";
 			/* 14 */ 	$chercher_raccourcis[]="/-->/S";
 			/* 15 */ 	$chercher_raccourcis[]="/<--/S";
