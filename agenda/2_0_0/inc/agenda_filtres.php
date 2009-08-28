@@ -181,6 +181,18 @@ function agenda_memo_evt_full($date_deb=0, $date_fin=0 , $titre='', $descriptif=
 
 function agenda_affiche_full($i)
 {
+	/* On recupere la date a afficher dans le contexte SPIP */
+	global $contexte;
+	$mois = $contexte['mois'];
+	$jour = $contexte['jour'];
+	$annee = $contexte['annee'];
+	if (!$mois || !$jour || !$annee) {
+		$date_agenda = ''; /* si il manque un des elements, date vide, http_calendrier_init mettra la date courante */
+	}
+	else { /* sinon on cree une date a partir des informations du contexte pour la donner en parametre a http_calendrier_init */
+		$date_agenda = mktime(0,0,0,$mois,$jour,$annee);
+	}
+
 	$args = func_get_args();
 	$nb = array_shift($args); // nombre d'evenements (on pourrait l'afficher)
 	$sinon = array_shift($args);
@@ -219,7 +231,7 @@ function agenda_affiche_full($i)
 	}
 
 	include_spip('inc/agenda');
-	$texte=http_calendrier_init('', $type, '', '', self(), $evt);
+	$texte=http_calendrier_init($date_agenda, $type, '', '', self(), $evt);
 
 	return $texte;
 }
