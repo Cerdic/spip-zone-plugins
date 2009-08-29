@@ -8,9 +8,9 @@
 
 /**
  * Afficher une de facon textuelle les dates de debut et fin en fonction des cas
- * - Le lundi 20 fevrier � 18h
- * - Le 20 f�vrier de 18h � 20h
- * - Du 20 au 23 f�vrier
+ * - Le lundi 20 fevrier a 18h
+ * - Le 20 fevrier de 18h a 20h
+ * - Du 20 au 23 fevrier
  * - du 20 fevrier au 30 mars
  * - du 20 fevrier 2007 au 30 mars 2008
  * $horaire='oui' permet d'afficher l'horaire, toute autre valeur n'indique que le jour
