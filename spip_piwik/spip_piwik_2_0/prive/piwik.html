@@ -1,12 +1,16 @@
 #CACHE{0}
 <script type="text/javascript">
 	var pkBaseURL = (("https:" == document.location.protocol) ? "https://#CONFIG{piwik/urlpiwik}/" : "http://#CONFIG{piwik/urlpiwik}/");
-	document.write(unescape("%3Cscript src=\'" + pkBaseURL + "piwik.js\' type=\'text/javascript\'%3E%3C/script%3E"));
+	if (typeof jQuery.getScript == 'function') {
+		jQuery.getScript(pkBaseURL + "piwik.js");
+	}else{
+		document.write(unescape("%3Cscript src=\'" + pkBaseURL + "piwik.js\' type=\'text/javascript\'%3E%3C/script%3E"));
+	}
 </script>
 <script type="text/javascript">
 	try {
-	var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", #CONFIG{piwik/idpiwik});
-	piwikTracker.trackPageView();
-	piwikTracker.enableLinkTracking();
+		var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", #CONFIG{piwik/idpiwik});
+		piwikTracker.trackPageView();
+		piwikTracker.enableLinkTracking();
 	} catch( err ) {}
 </script>
