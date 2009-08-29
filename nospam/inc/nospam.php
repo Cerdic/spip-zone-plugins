@@ -16,8 +16,8 @@
 function creer_jeton($form, $qui=NULL) {
 	$time = date('Y-m-d-H');
 	if (is_null($qui)){
-		if (isset($GLOBALS['visiteur_session']['id_auteur']))
-			$qui = md5(serialize($GLOBALS['visiteur_session']));
+		if (isset($GLOBALS['visiteur_session']['id_auteur']) AND intval($GLOBALS['visiteur_session']['id_auteur']))
+			$qui = ":".$GLOBALS['visiteur_session']['id_auteur'].":".$GLOBALS['visiteur_session']['nom'];
 		else {
 			include_spip('inc/session');
 			$qui = hash_env();
@@ -41,8 +41,8 @@ function verifier_jeton($jeton, $form, $qui=NULL) {
 	$time = date('Y-m-d-H',$time);
 
 	if (is_null($qui)){
-		if (isset($GLOBALS['visiteur_session']['id_auteur']))
-			$qui = md5(serialize($GLOBALS['visiteur_session']));
+		if (isset($GLOBALS['visiteur_session']['id_auteur']) AND intval($GLOBALS['visiteur_session']['id_auteur']))
+			$qui = ":".$GLOBALS['visiteur_session']['id_auteur'].":".$GLOBALS['visiteur_session']['nom'];
 		else {
 			include_spip('inc/session');
 			$qui = hash_env();
