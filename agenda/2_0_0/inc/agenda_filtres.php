@@ -8,9 +8,9 @@
 
 /**
  * Afficher une de facon textuelle les dates de debut et fin en fonction des cas
- * - Le lundi 20 fevrier ˆ 18h
- * - Le 20 fvrier de 18h ˆ 20h
- * - Du 20 au 23 fvrier
+ * - Le lundi 20 fevrier ï¿½ 18h
+ * - Le 20 fï¿½vrier de 18h ï¿½ 20h
+ * - Du 20 au 23 fï¿½vrier
  * - du 20 fevrier au 30 mars
  * - du 20 fevrier 2007 au 30 mars 2008
  * $horaire='oui' permet d'afficher l'horaire, toute autre valeur n'indique que le jour
@@ -183,34 +183,47 @@ function agenda_affiche_full($i)
 {
 	$args = func_get_args();
 	$nb = array_shift($args); // nombre d'evenements (on pourrait l'afficher)
-	$sinon = array_shift($args);
-	if (!$nb) return $sinon;
+	$evt = array_shift($args);
 	$type = array_shift($args);
+
 	$agenda = agenda_memo_full(0);
 	$evt_avec = array();
-	foreach (($args ? $args : array_keys($agenda)) as $k) {
-		if (isset($agenda[$k])&&is_array($agenda[$k]))
-			foreach($agenda[$k] as $d => $v) {
-				$evt_avec[$d] = isset($evt_avec[$d]) ? (array_merge($evt_avec[$d], $v)) : $v;
-			}
-	}
-
-	$evenements = agenda_memo_evt_full(0);
 	$evt_sans = array();
-	foreach (($args ? $args : array_keys($evenements)) as $k) {
-		if (isset($evenements[$k])&&is_array($evenements[$k]))
-			foreach($evenements[$k] as $d => $v) {
-				$evt_sans[$d] = isset($evt_sans[$d]) ? (array_merge($evt_sans[$d], $v)) : $v;
-			}
+	if (!$nb) {
+		$d = array(time());
+	} else {
+		foreach (($args ? $args : array_keys($agenda)) as $k) {
+			if (isset($agenda[$k])&&is_array($agenda[$k]))
+				foreach($agenda[$k] as $d => $v) {
+					$evt_avec[$d] = isset($evt_avec[$d]) ? (array_merge($evt_avec[$d], $v)) : $v;
+				}
+		}
+		$d = array_keys($evt_avec);
+
+		$evenements = agenda_memo_evt_full(0);
+		foreach (($args ? $args : array_keys($evenements)) as $k) {
+			if (isset($evenements[$k])&&is_array($evenements[$k]))
+				foreach($evenements[$k] as $d => $v) {
+					$evt_sans[$d] = isset($evt_sans[$d]) ? (array_merge($evt_sans[$d], $v)) : $v;
+				}
+		}
 	}
 
+	if (count($d)){
+		$mindate = min($d);
+		$start = strtotime($mindate);
+	} else {
+		$mindate = ($j=_request('jour')) * ($m=_request('mois')) * ($a=_request('annee'));
+  	if ($mindate)
+			$start = mktime(0,0,0, $m, $j, $a);
+  	else
+			$start = mktime(0,0,0);
+	}
 
 	if ($type != 'periode')
 		$evt = array($evt_sans, $evt_avec);
 	else
 	{
-		$d = array_keys($evt_avec);
-		$mindate = min($d);
 		$min = substr($mindate,6,2);
 		$max = $min + ((strtotime(max($d)) - strtotime($mindate)) / (3600 * 24));
 		if ($max < 31) $max = 0;
@@ -219,7 +232,7 @@ function agenda_affiche_full($i)
 	}
 
 	include_spip('inc/agenda');
-	$texte=http_calendrier_init('', $type, '', '', self(), $evt);
+	$texte=http_calendrier_init($start, $type, '', '', self(), $evt);
 
 	return $texte;
 }
