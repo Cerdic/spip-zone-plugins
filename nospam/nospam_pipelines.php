@@ -73,7 +73,10 @@ function nospam_pre_edition($flux){
 	  AND $flux['args']['action']=='instituer'){
 	  
 	  // ne pas publier automatiquement certains messages suspects ...
-	  if ($flux['data']['statut'] == 'publie'){
+		// sauf si le posteur a de toute facon le pouvoir de moderer et de se publier
+		include_spip('inc/autoriser');
+	  if ($flux['data']['statut'] == 'publie'
+		  AND (!isset($GLOBALS['visiteur_session']['id_auteur']) OR !autoriser('modererforum'))){
 	  	// si c'est un message bourre de liens, on le modere
 	  	$texte = propre($flux['data']['texte']);
 	  	$liens = extraire_balises($texte,'a');
