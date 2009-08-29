@@ -14,17 +14,14 @@ function Nyro_insert_head($flux){
 		'preload' => 'oui'
 	), $config);
 
-	
-
-	
 	$flux .='
 <script src="'.url_absolue(find_in_path('js/jquery.nyroModal-1.5.0.js')).'" type="text/javascript"></script>
 <script src="'.url_absolue(find_in_path('js/nyromodal.js')).'" type="text/javascript"></script>';
-	
+
 	if ($config['installer_diapo_auto'] == 'oui'){
 		$flux .='<script src="'.url_absolue(find_in_path('js/nyrodiapo.js')).'" type="text/javascript"></script>';
-	}	
-	
+	}
+
 	$flux .='
 <script type="text/javascript">/* <![CDATA[ */
 var nyro_traiter_toutes_images='.($config['traiter_toutes_images'] == 'oui'?'true':'false').';
@@ -38,7 +35,7 @@ if (window.jQuery)
 	$(nyro_init);
  })(jQuery);
 /* ]]> */</script>
-<link rel="stylesheet" href="'.url_absolue(find_in_path('styles/nyroModal.full.css')).'" type="text/css" />
+<link rel="stylesheet" href="'.url_absolue(find_in_path('styles/nyroModal.full.css')).'" type="text/css" media="all" />
 ';
 	return $flux;
 }
