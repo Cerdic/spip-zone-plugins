@@ -16,6 +16,49 @@ include_spip('inc/presentation');
 include_spip('inc/actions');
 
 
+function afficher_vu_hierarchie($id_parent, $message='',$id_objet=0,$type='',$id_secteur=0,$restreint='') {
+	global $spip_lang_left,$spip_lang_right;
+
+	$out = "";
+	$nav = "";
+
+	$parents = '';
+	$tag = "a";
+	$on = ' on';
+
+
+	$res = sql_fetsel("id_parent, titre, lang", "spip_rubriques", "id_rubrique=".intval($id_rubrique));
+
+	$id_parent = $res['id_parent'];
+	changer_typo($res['lang']);
+
+	$class = '';
+
+	$parents = "<ul><li><span class='bloc'><em> &gt; </em><$tag class='$class$on'"
+	. ($tag=='a'?" href='". generer_url_ecrire("naviguer","veille_voir")."'":"")
+	. ">"
+	. supprimer_numero(typo(sinon($res['titre'], _T('Vu !'))))
+	. "</$tag></span>"
+	. $parents
+	. "</li></ul>";
+
+
+
+	$out .=  $nav;
+
+	$out = pipeline('affiche_hierarchie',array('args'=>array(
+			'id_parent'=>$id_parent,
+			'message'=>$message,
+			'id_objet'=>$id_objet,
+			'objet'=>$type,
+			'id_secteur'=>$id_secteur,
+			'restreint'=>$restreint),
+			'data'=>$out));
+
+ 	return $out;
+}
+
+
 function exec_veille_voir(){
 
 // 1/4 - Les autorisations
@@ -85,7 +128,22 @@ function exec_veille_voir(){
 	// Puis charge tout le debut du HTML, les entetes...
 	$commencer_page = charger_fonction('commencer_page', 'inc'); 
 	// que l'on affiche ensuite
-	echo $commencer_page(_T("&laquo; $titre &raquo;", "naviguer", "vu_tous"));			
+	echo $commencer_page(_T("&laquo; $titre &raquo;", "naviguer", "vu_tous"));	
+
+	// On affiche un fil d'ariane (assez rudimentaire)
+	// pour faciliter la navigation sur le modele 
+	// de 'afficher_hierarchie'
+	echo debut_grand_cadre(true);
+	echo "<ul dir='ltr' class='verdana3' id='chemin'><li>"
+		. "<span class='bloc'><a href='".generer_url_ecrire("naviguer","id_rubrique=0")."' class='racine'>Racine du site</a></span>"
+		. "<ul><li>"
+		. "<span class='bloc'>"
+		. "<em> > </em>"
+		. "<a href='".generer_url_ecrire("veille_tous")."' class='secteur on'>"._T('vu:naviguer_titre')."</a>"
+		. "</span></li></ul></li></ul>";
+	echo fin_grand_cadre(true);
+
+		
 
 
 // 4/4 - Le contenu 

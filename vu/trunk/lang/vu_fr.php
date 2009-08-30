@@ -71,6 +71,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'liste_annonces' => 'Annonces vues',
 	'liste_evenements' => '&Eacute;venements',
 	'liste_publications' => 'Publications',
+
+// N
+	'naviguer_titre' => 'Veille',
 // R
 	'raccourcis_annonce' => 'Nouvelle annonce',
 	'raccourcis_evenement' => 'Nouvel &eacute;venement',

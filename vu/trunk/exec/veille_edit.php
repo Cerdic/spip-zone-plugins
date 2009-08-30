@@ -116,10 +116,18 @@ function objet_edit_ok($row, $type_objet, $id_objet, $new)
 	// que l'on affiche ensuite
 	echo $commencer_page(_T('vu:titre_page_'.$type_objet.'s_edit', array('titre' => $titre)), "naviguer", $types_objet.'s');
 
-	// On affiche un fil d'ariane pour faciliter la navigation
-	//echo debut_grand_cadre(true);
-	//echo afficher_hierarchie($id_rubrique); // Permet d'afficher le fil de navigation
-	//echo fin_grand_cadre(true);
+	// On affiche un fil d'ariane (assez rudimentaire)
+	// pour faciliter la navigation sur le modele 
+	// de 'afficher_hierarchie'
+	echo debut_grand_cadre(true);
+	echo "<ul dir='ltr' class='verdana3' id='chemin'><li>"
+		. "<span class='bloc'><a href='".generer_url_ecrire("naviguer","id_rubrique=0")."' class='racine'>Racine du site</a></span>"
+		. "<ul><li>"
+		. "<span class='bloc'>"
+		. "<em> > </em>"
+		. "<a href='".generer_url_ecrire("veille_tous")."' class='secteur on'>"._T('vu:naviguer_titre')."</a>"
+		. "</span></li></ul></li></ul>";
+	echo fin_grand_cadre(true);
 
 
 // 3 - Le contenu

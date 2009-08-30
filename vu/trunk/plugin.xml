@@ -83,7 +83,7 @@
 		<!-- icone du nouveau bouton -->
 		<icone>img_pack/vu_logo_24.png</icone>
 		<!-- texte du nouveau bouton -->
-		<titre>Vu !</titre>	
+		<titre>Veille</titre>	
 		<!-- action a effectuer lors du clic : ici, execution de exec/veille_tous.php -->
 		<url>veille_tous</url>	
 	</bouton>
