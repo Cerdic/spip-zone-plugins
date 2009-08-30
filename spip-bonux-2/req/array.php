@@ -151,6 +151,7 @@ function array_results($hash,$store='get',$arg=null){
 	elseif($store=='free')
 		unset($array_results[$hash]);
 	else {
+		$hash = count($array_results)?max(array_keys($array_results)):1; // pas de 0 svp
 		// un tableau direct
 		if (is_array($store)){
 			$array_results[$hash]['res'] = $store;
@@ -161,6 +162,7 @@ function array_results($hash,$store='get',$arg=null){
 			if (count($iter)==2 OR count($iter)==3)
 				$array_results[$hash]['iter']=array('debut'=>reset($iter),'fin'=>end($iter),'pas'=>count($iter)==2?1:$iter[1],'i'=>0);
 		}
+		return $hash;
 	}
 }
 
@@ -242,8 +244,7 @@ function array_query($query){
 	}
 	// ici calculer un vrai res si la variable existe
 	if (count($res)) {
-		$hash = md5(serialize($query));
-		array_results($hash,$res);
+		$hash = array_results(false,$res);
 		return $hash;
 	}
 	return -1; // pas de resultats mais pas false non plus
