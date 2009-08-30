@@ -307,7 +307,7 @@ function spip_array_query($query, $serveur='') {
 
 function spip_array_select($select, $from, $where='',
 			   $groupby='', $orderby='', $limit='', $having='',
-			   $serveur='') {
+			   $serveur='',$requeter=true) {
 
 	$from = (!is_array($from) ? $from : spip_array_select_as($from));
 
@@ -325,19 +325,25 @@ function spip_array_select($select, $from, $where='',
 	$query['having'] = $having;
 
 	// Erreur ? C'est du debug de squelette, ou une erreur du serveur
-	if (isset($GLOBALS['var_mode']) AND $GLOBALS['var_mode'] == 'debug') {
+	if (isset($GLOBALS['var_mode'])
+	  AND $GLOBALS['var_mode'] == 'debug'
+	  AND function_exists('boucle_debug_requete')) {
 		include_spip('public/debug');
 		boucle_debug_requete($querydump);
 	}
 
-	if (!($res = spip_array_query($query, $serveur))) {
+	$res = spip_array_query($query, $serveur);
+
+	if (!$res AND function_exists('boucle_debug_requete')) {
 		include_spip('public/debug');
 		erreur_requete_boucle($querydump,
 				      spip_array_errno(),
 				      spip_array_error($query) );
 	}
 
-	return $res;
+	// renvoyer la requete inerte si demandee
+	if ($requeter === false) return $querydump;
+	return $res ? $res : $querydump;
 }
 
 // 0+x avec un champ x commencant par des chiffres est converti par array
