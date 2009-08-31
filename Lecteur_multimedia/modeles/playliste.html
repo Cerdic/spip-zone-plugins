@@ -5,7 +5,17 @@
 	
 	afficher une playliste
 	
--->]
+	CP-20090831: memo:
+	Pour transmettre un parametre au modele :
+	Ex: a partir d'un squelette 
+	[(#MODELE{playliste}{trierpar=fichier})]
+	permet de forcer l'ordre des elements dans la liste
+	trie'e par le nom du fichier mp3.
+	Pratique si vos noms de fichiers commencent par 
+	un chiffre ;-)
+	
+	
+-->]#SET{trierpar,#ENV{trierpar,1}}
 
 <B_doc>
 #ANCRE_PAGINATION
@@ -35,7 +45,7 @@
 </div>
 
 <ul class="playliste">
-<BOUCLE_doc (DOCUMENTS) {id_article ?} {extension==mp3} {fichier==(mp3$)} {!par date}{pagination 15}{0,100}>
+<BOUCLE_doc (DOCUMENTS) {id_article ?} {extension==mp3} {fichier==(mp3$)} {par #GET{trierpar}} {!par date}{pagination 15}{0,100}>
 <li class="play_"><a href="#FICHIER" rel="enclosure">[(#TITRE|sinon{[(#FICHIER|joli_titre|couper{30})]})]</a></li>
 </BOUCLE_doc>
 </ul>
