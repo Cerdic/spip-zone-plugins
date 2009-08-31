@@ -11,10 +11,10 @@
 function savecfg_install($action){
 	switch ($action){
 		case 'test':
-			savecfg_upgrade('savecfg_base_version',0.1);
+			savecfg_upgrade('savecfg_base_version',0.2);
 		break;
 		case 'install':
-			savecfg_upgrade('savecfg_base_version',0.1);
+			savecfg_upgrade('savecfg_base_version',0.2);
 		break;
 		case 'uninstall':
 			savecfg_vider_tables('savecfg_base_version');
@@ -31,6 +31,9 @@ function savecfg_upgrade($nom_meta_base_version,$version_cible){
 			include_spip('base/savecfg_install');
 			creer_base();
 			ecrire_meta($nom_meta_base_version,$version_cible,'non');
+		}
+		if (version_compare($current_version,'0.2','<')){
+			sql_alter("TABLE `spip_savecfg` DROP `version`");
 		}
 		ecrire_metas();
 	}

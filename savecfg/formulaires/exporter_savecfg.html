@@ -1,0 +1,28 @@
+<div class="formulaire_spip formulaire_savecfg">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method="post" action="#ENV{action}" enctype="multipart/form-data">
+		<div>
+			#ACTION_FORMULAIRE{#ENV{action}}
+			#SET{fond, #SELF|match{(cfg=)(\w+?),2}}
+			<ul>
+				<li class="fieldset">
+					<fieldset>
+						<h3 class="legend"><:savecfg:exporter_savecfg:></h3>						<ul>
+							<li>
+							<BOUCLE_savecfg_export(SAVECFG){fond=#GET{fond}}{" <br /> "}>
+								<label for="#ID_SAVECFG">#TITRE</label>
+								<input id="#ID_SAVECFG" type="checkbox" name="export[#ID_SAVECFG]" id="#ID_SAVECFG" />
+								</BOUCLE_savecfg_export>
+								[<p>(#ENV**{erreurs}|table_valeur{nom})</p>]
+							</li>
+						</ul>
+					</fieldset>
+				</li>
+			</ul>
+			<p class="boutons">
+				<input type="submit" value="<:savecfg:exporter:>" />
+			</p>
+		</div>
+	</form>
+</div>
