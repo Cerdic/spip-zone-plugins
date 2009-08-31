@@ -102,7 +102,7 @@ function nospam_pre_edition($flux){
 			$seuils = $spammeur_connu?$seuils['spammeur']:$seuils[0];
 			foreach($flux['data'] as $champ=>$valeur){
 				$valeur = propre($valeur); // on passe propre a chaque fois, ce qui recupere aussi les adresse de site non linkees
-				if ($liens = extraire_balises($valeur,'a')>0){
+				if (($liens = count(extraire_balises($valeur,'a')))>0){
 					if (isset($seuils[$champ]))
 						$seuil = $seuils[$champ];
 					else
