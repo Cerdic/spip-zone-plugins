@@ -17,7 +17,7 @@ function formulaires_sauvegarder_savecfg_traiter_dist() {
 	return $message;
 }
 function sauvegarder_savecfg($fond, $titre) {
-	if (sql_countsel('spip_meta', 'fond='.sql_quote($fond)) == 0) {
+	if (sql_countsel('spip_meta', 'nom='.sql_quote($fond)) == 0) {
 		$sfg = sql_getfetsel('valeur', 'spip_meta', 'nom='.sql_quote($fond));
 		sql_insertq('spip_savecfg', array('id_savecfg' => '', 'fond' => $fond, 'valeur' => $sfg, 'titre' => $titre, 'date' => date('Y-m-d H:m:s')));
 	}
