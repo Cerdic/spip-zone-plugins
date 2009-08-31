@@ -1,3 +1,4 @@
+<B_savecfg>
 <div class="formulaire_spip formulaire_savecfg">
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
@@ -12,16 +13,12 @@
 						<ul>
 							<li>
 								[<input type="hidden" name="fond" value="(#GET{fond})" />]
-								<B_savecfg>
 								<select name="id_fond">
 								<option value="none" selected="selected"><:savecfg:restaurations:></option>
 								<BOUCLE_savecfg(SAVECFG){fond=#GET{fond}}>
 								<option value="#ID_SAVECFG">#TITRE</option>
 								</BOUCLE_savecfg>
 								</select>
-								</B_savecfg>
-								<:savecfg:aucune_restauration:>
-								<//B_savecfg>
 							</li>
 						</ul>
 					</fieldset>
@@ -34,3 +31,4 @@
 		</div>
 	</form>
 </div>
+</B_savecfg>
