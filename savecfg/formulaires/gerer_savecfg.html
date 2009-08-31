@@ -1,3 +1,4 @@
+#SET{fond, #SELF|match{(cfg=)(\w+?),2}}
 <B_savecfg>
 <div class="formulaire_spip formulaire_savecfg">
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
@@ -5,7 +6,6 @@
 	<form method="post" action="#ENV{action}">
 		<div>
 			#ACTION_FORMULAIRE{#ENV{action}}
-			#SET{fond, #SELF|match{(cfg=)(\w+?),2}}
 			<ul>
 				<li class="fieldset">
 					<fieldset>
