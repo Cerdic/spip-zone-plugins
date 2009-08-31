@@ -26,7 +26,7 @@
 #SET{obligatoire,#ENV{obligatoire}|et{#ENV{obligatoire}|!={non}}|?{obligatoire,''}}
 #SET{li_class,#ENV{type_saisie}|substr{0,9}|=={selecteur}|?{selecteur_item,''}}
 <li class="editer_[(#ENV{nom})][ (#GET{obligatoire})][ (#GET{erreurs}|oui)erreur][ (#GET{li_class})]">
-	<label for="champ_#ENV{nom}">[(#ENV*{label}|sinon{#ENV{nom}})][<span class='obligatoire'>(#GET{obligatoire}|et{#ENV{info_obligatoire}})#ENV*{info_obligatoire}</span>]</label>
+	<label[(#ENV{type_saisie}|match{oui_non|radio}|non) for="champ_#ENV{nom}"]>[(#ENV*{label}|sinon{#ENV{nom}})][<span class='obligatoire'>(#GET{obligatoire}|et{#ENV{info_obligatoire}})#ENV*{info_obligatoire}</span>]</label>
 	[<span class='erreur_message'>(#GET{erreurs})</span>]
 	[<p class='explication'>(#ENV*{explication})</p>]
 	[<p class='attention'>(#ENV*{attention})</p>]
