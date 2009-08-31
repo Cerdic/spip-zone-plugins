@@ -26,6 +26,7 @@
 					[(#CONFIG{inscription2/affordance_form}|=={login}|oui)<:login_login2:>]
 					[(#CONFIG{inscription2/affordance_form}|=={email}|oui)<:inscription2:votre_mail:>]
 					[(#CONFIG{inscription2/affordance_form}|=={login_et_email}|oui)<:inscription2:votre_login_mail:>]
+					[(#CONFIG{inscription2/affordance_form}|non)<:inscription2:votre_login_mail:>]
 					</label>
 				<input type='text' class='text' name='var_login' id='var_login' value="[(#ENV**{var_login})]" size='40' />
 				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{var_login})</span>]

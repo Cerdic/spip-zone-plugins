@@ -112,6 +112,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'icone_menu_config' => 'Inscription2',
+	'identification' => 'Identification',
 	'info_connection' => 'Informations de connexion',
 	'info_defaut' => 'Informations par d&eacute;faut',
 	'info_defaut_desc' => 'Informations obligatoires par d&eacute;faut',
@@ -136,6 +137,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_affordance_form' => 'Choisir l\'affordance des formulaires d\'identification',
 	'latitude' => 'Latitude',
 	'legend_affordance_form' => 'Affordance des formulaires',
+	'legend_oubli_pass' => 'Pas de mot de passe / mot de passe oubli&eacute;',
 
 	'legende' => 'L&eacute;gende',
 	'lisez_mail' => 'Un email vient d\'&ecirc;tre envoy&eacute; &agrave; l\'adresse fournie. Pour activer votre compte veuillez suivre les instructions.',
