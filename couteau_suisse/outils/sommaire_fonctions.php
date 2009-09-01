@@ -9,30 +9,32 @@ $GLOBALS['cs_introduire'][] = 'sommaire_nettoyer_raccourcis';
 // renvoie le sommaire d'une page d'article
 // $page=false reinitialise le compteur interne des ancres
 function sommaire_d_une_page(&$texte, &$nbh3, $page=0, $num_pages=0) {
-	static $index; if(!$index || $page===false) $index=0;
+	static $index = 0;
+	if($page===false) $index = 0;
+	static $self = NULL; 
+	if(!isset($self)) 
+		$self = str_replace('&', '&amp;', nettoyer_uri());//self();//$GLOBALS['REQUEST_URI'];
 	if($page===false) return;
 	// trouver quel <hx> est utilise
 	$hierarchie = preg_match(',<h(\d),',$GLOBALS['debut_intertitre'],$regs)?$regs[1]:'3';
 	@define('_sommaire_NB_CARACTERES', 30);
-	$self = str_replace('&', '&amp;', nettoyer_uri());//self();//$GLOBALS['REQUEST_URI'];
-	// si on n'est pas en mode impression, on calcule l'image de retour au sommaire
-	if(!defined('_CS_PRINT')) {
-		$titre = _T('couteau:sommaire_titre');
-		$haut = "<a title=\"$titre\" href=\"".$self."#outil_sommaire\" class=\"sommaire_ancre\">&nbsp;</a>";
-	} else $haut = '';
 	// traitement des intertitres <hx>
 	preg_match_all(",(<h{$hierarchie}[^>]*)>(.*)</h{$hierarchie}>,Umsi",$texte, $regs);
 	$nbh3 += count($regs[0]);
 	$pos = 0; $sommaire = '';
 	// calcul de la page
 	$suffixe = $page?_T('couteau:sommaire_page', array('page'=>$page)):'';
+	$fct_lien_retour = function_exists('sommaire_lien_retour')?'sommaire_lien_retour':'sommaire_lien_retour_dist';
 	for($i=0;$i<count($regs[0]);$i++,$index++){
 		$ancre = " id=\"outil_sommaire_$index\">";
 		if (($pos2 = strpos($texte, $regs[0][$i], $pos))!==false) {
 			$titre = preg_replace(',^<p[^>]*>(.*)</p>$,Umsi', '\\1', trim($regs[2][$i]));
-			// ancre 'haut', sauf si les blocs depliables utilisent h{$hierarchie}...
-			$texte = substr($texte, 0, $pos2) . $regs[1][$i]
-				. $ancre . (strpos($regs[0][$i], 'blocs_titre')===false?$haut:'') . $titre
+			// ancre 'retour au sommaire', sauf :
+			// si on imprime, ou si les blocs depliables utilisent h{$hierarchie}...
+			$haut = (defined('_CS_PRINT') OR (strpos($regs[0][$i], 'blocs_titre')!==false))
+				?''
+				:$fct_lien_retour($self, $titre);
+			$texte = substr($texte, 0, $pos2) . $regs[1][$i] . $ancre . $haut
 				. substr($texte, $pos2 + strlen($regs[1][$i])+1 + strlen($regs[2][$i]));
 			$pos = $pos2 + strlen($ancre) + strlen($regs[0][$i]);
 			// tout le texte, sans les notes
@@ -52,6 +54,22 @@ function sommaire_d_une_page(&$texte, &$nbh3, $page=0, $num_pages=0) {
 		}
 	}
 	return $sommaire;
+}
+
+/*
+ Fonction surchargeable qui reconstruit les titres de la page 
+ en ajoutant une ancre de retour au sommaire.
+ La fonction de surcharge a placer dans config/mes_options.php est : 
+   sommaire_lien_retour($self, $titre)
+ Exemple sans lien de retour : 
+   function sommaire_lien_retour($self, $titre) { return $titre; }
+*/
+function sommaire_lien_retour_dist($self, $titre) {
+	static $haut = NULL;
+	// si on n'est pas en mode impression, on calcule l'image de retour au sommaire
+	if(!isset($haut)) 
+		$haut = defined('_CS_PRINT')?'':'<a title="'._T('couteau:sommaire_titre').'" href="'.$self.'#outil_sommaire" class="sommaire_ancre">&nbsp;</a>';
+	return $haut . $titre;
 }
 
 // fonction appellee sur les parties du textes non comprises entre les balises : html|code|cadre|frame|script|acronym|cite
