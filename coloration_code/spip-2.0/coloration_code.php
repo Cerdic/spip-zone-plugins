@@ -62,6 +62,12 @@ function coloration_code_color($code, $language, $cadre='cadre') {
 	}
 	global $spip_lang_right;
 	
+	// eviter des ajouts abusifs de CSS par Geshy 
+	// qui pose des 'font-family: monospace;' un peu partout
+	// et que FF ne gere pas comme les autres navigateurs (va comprendre).
+	$geshi->set_overall_style('');
+	$geshi->set_code_style('');
+	
 	$stylecss = "";
 	if (defined('PLUGIN_COLORATION_CODE_STYLES_INLINE') and !PLUGIN_COLORATION_CODE_STYLES_INLINE) {
 		$geshi->enable_classes();
@@ -85,9 +91,7 @@ function coloration_code_color($code, $language, $cadre='cadre') {
 		$fichier = "$dossier$nom_fichier.txt";
 
 		if (!file_exists($fichier)) {
-			$handle = fopen($fichier, 'w');
-			fwrite($handle, $code);
-			fclose($handle);
+			ecrire_fichier($fichier, $code);
 		}
 	}
 
