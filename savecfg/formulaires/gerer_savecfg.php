@@ -1,8 +1,9 @@
 <?php
 function formulaires_gerer_savecfg_charger_dist() {
 	$valeurs = array(
-		'nom' => $nom,
-		'fond' => $fond
+		'nom' => '',
+		'fond' => _request('cfg'),
+		'id_fond' => ''
 	);
 	return $valeurs;
 }
@@ -14,25 +15,25 @@ function formulaires_gerer_savecfg_verifier_dist(){
 }
 function formulaires_gerer_savecfg_traiter_dist() {
 	if (_request('_restaurer_')) {
-		$message = restaurer_savecfg(_request('id_fond'), _request('fond'));
+		$message = restaurer_savecfg(_request('id_fond'));
 	}
 	if (_request('_supprimer_')) {
-		$message = supprimer_savecfg(_request('id_fond'), _request('fond'));
+		$message = supprimer_savecfg(_request('id_fond'));
 	}
 	return $message;
 }
-function restaurer_savecfg($id_savecfg, $fond) {
-	if (sql_countsel('spip_savecfg', 'fond='.sql_quote($fond)) > 0) {
+function restaurer_savecfg($id_savecfg) {
+	if (sql_countsel('spip_savecfg', 'fond='.sql_quote(_request('cfg'))) > 0) {
 		include_spip('inc/meta');
 		$sfg = sql_fetsel(array('titre', 'valeur'), 'spip_savecfg', 'id_savecfg='.sql_quote($id_savecfg));
-		ecrire_meta($fond, $sfg['valeur']);
+		ecrire_meta(_request('cfg'), $sfg['valeur']);
 		ecrire_metas();
 	}
-	return _T('savecfg:savecfg_restauree', array('nom' => $sfg['titre'], 'fond' => $fond));
+	return _T('savecfg:savecfg_restauree', array('nom' => $sfg['titre'], 'fond' => _request('cfg')));
 }
-function supprimer_savecfg($id_savecfg, $fond) {
-	$nom = sql_getfetsel('titre', 'spip_savecfg', 'id_savecfg='.sql_quote($id_savecfg).' AND fond='.sql_quote($fond));
+function supprimer_savecfg($id_savecfg) {
+	$nom = sql_getfetsel('titre', 'spip_savecfg', 'id_savecfg='.sql_quote($id_savecfg).' AND fond='.sql_quote(_request('cfg')));
 	sql_delete('spip_savecfg', 'id_savecfg='.sql_quote($id_savecfg));
-	return _T('savecfg:savecfg_supprimee', array('nom' => $nom, 'fond' => $fond));
+	return _T('savecfg:savecfg_supprimee', array('nom' => $nom, 'fond' => _request('cfg')));
 }
 ?>

@@ -10,9 +10,9 @@
 					<fieldset>
 						<h3 class="legend"><:savecfg:sauvegarder_savecfg{fond=#GET{fond}}:></h3>						<ul>
 							<li>
-								[<input type="hidden" name="fond" value="(#GET{fond})" />]
+								<input type="hidden" name="fond" value="[(#ENV{nom})]" />
 								<label for="nom"><:savecfg:titre_sauvegarde:>[ (#ENV**{erreurs}|table_valeur{nom}|sinon{ <em><:ecrire:info_obligatoire_02:></em>})]</label>
-								<input type="text" size="10" class="text" name="titre" id="nom" value="#ENV{nom}" />
+								<input type="text" size="10" class="text" name="titre" id="nom" value="" />
 								[<p>(#ENV**{erreurs}|table_valeur{nom})</p>]
 							</li>
 						</ul>

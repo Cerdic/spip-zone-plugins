@@ -1,6 +1,6 @@
 #SET{fond, #SELF|match{(cfg=)(\w+?),2}}
 <B_savecfg>
-<div class="formulaire_spip formulaire_savecfg">
+<div class="ajax formulaire_spip formulaire_savecfg">
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	<form method="post" action="#ENV{action}">
@@ -12,7 +12,6 @@
 						<h3 class="legend"><:savecfg:gerer_restauration{fond=#GET{fond}}:></h3>
 						<ul>
 							<li>
-								[<input type="hidden" name="fond" value="(#GET{fond})" />]
 								<select name="id_fond">
 								<option value="none" selected="selected"><:savecfg:restaurations:></option>
 								<BOUCLE_savecfg(SAVECFG){fond=#GET{fond}}>
