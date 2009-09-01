@@ -3,11 +3,11 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
-# CONFIG 
+# CONFIG
 
 
 // #CONFIG retourne lire_config()
-// 
+//
 // Le 3eme argument permet de controler la serialisation du resultat
 // (mais ne sert que pour le depot 'meta') qui doit parfois deserialiser
 // ex: |in_array{#CONFIG{toto,#ARRAY,1}}.
@@ -21,8 +21,8 @@ function balise_CONFIG($p) {
 	$sinon = interprete_argument_balise(2,$p);
 	$unserialize = sinon(interprete_argument_balise(3,$p),"false");
 
-	$p->code = 'lire_config(' . $arg . ',' . 
-		($sinon && $sinon != "''" ? $sinon : 'null') . ',' . $unserialize . ')';	
+	$p->code = 'lire_config(' . $arg . ',' .
+		($sinon && $sinon != "''" ? $sinon : 'null') . ',' . $unserialize . ')';
 
 	return $p;
 }
@@ -41,22 +41,22 @@ function balise_CFG_CHEMIN_dist($p) {
 		$arg = "''";
 	}
 	$sinon = interprete_argument_balise(2,$p);
-	
-	$p->code = '($l = lire_config(' . $arg . ',' . 
-		($sinon && $sinon != "''" ? $sinon : 'null') . ')) ? _DIR_IMG . $l : null';		
-	
+
+	$p->code = '($l = lire_config(' . $arg . ',' .
+		($sinon && $sinon != "''" ? $sinon : 'null') . ')) ? _DIR_IMG . $l : null';
+
 	return $p;
 }
 
 
-/* 
- * Pour jouer avec les Crayons et les configurations 
+/*
+ * Pour jouer avec les Crayons et les configurations
  * <div class="#EDIT_CONFIG{plugin/casier/cle}">
  * 		#CONFIG{plugin/casier/cle}
  * </div>
  */
 function balise_EDIT_CONFIG_dist($p) {
-	$config = interprete_argument_balise(1,$p); 
+	$config = interprete_argument_balise(1,$p);
 	$instance = interprete_argument_balise(2,$p);
 	$instance = $instance ? $instance : "'0'";
 	  $p->code = 'classe_config_crayon('.$config.', '.$instance.')';
@@ -88,13 +88,13 @@ function autoriser_config_modifier_dist($faire, $type, $id, $qui, $opt) {
 
 /*
  * Affiche une arborescence du contenu d'un #CONFIG
- * 
- * #CFG_ARBO, 
- * #CFG_ARBO{ma_meta}, 
- * #CFG_ARBO{~toto}, 
+ *
+ * #CFG_ARBO,
+ * #CFG_ARBO{ma_meta},
+ * #CFG_ARBO{~toto},
  * #CFG_ARBO{ma_meta/mon_casier},
  * #CFG_ARBO{ma_table:mon_id/mon_champ}
- * 
+ *
  */
 function balise_CFG_ARBO_dist($p) {
 	if (!$arg = interprete_argument_balise(1,$p)) {
@@ -109,7 +109,7 @@ function cfg_affiche_arborescence($cfg='') {
 
 	$sortie = '';
 	$hash = substr(md5(rand()*rand()),0,6);
-	
+
 	// integration du css
 	// Suppression de cette inclusion des css arbo au profit d'une inclusion d'un fichier cfg.css dans le header prive
 // 	$sortie .= "<style type='text/css'>\n"
@@ -118,35 +118,35 @@ function cfg_affiche_arborescence($cfg='') {
 // 			.  ".cfg_arbo ul{border:1px solid #ccc; margin:0; padding:0.2em 0.5em; list-style-type:none;}\n"
 // 			.  "</style>\n";
 
-	// integration du js	
+	// integration du js
 	$sortie .= "<script type='text/javascript'><!--
-				
-				$(document).ready(function(){
+
+				jQuery(document).ready(function(){
 					function cfg_arbo(){
 						jQuery('#cfg_arbo_$hash ul').hide();
+						jQuery('#cfg_arbo_$hash h5 strong').remove();
 						jQuery('#cfg_arbo_$hash h5')
 						.prepend('<strong>[+] <\/strong>')
-						.toggle(
+						.unbind().toggle(
 						  function () {
-							$(this).children('strong').text('[-] ');
-							$(this).next('ul').show();
+							jQuery(this).children('strong').text('[-] ');
+							jQuery(this).next('ul').show();
 						  },
 						  function () {
-							$(this).children('strong').text('[+] ');
-							$(this).next('ul').hide();
-						  });						
+							jQuery(this).children('strong').text('[+] ');
+							jQuery(this).next('ul').hide();
+						  });
 					}
 					setTimeout(cfg_arbo,100);
-
 				});
 				// --></script>\n";
-				
+
 	$tableau = lire_config($cfg);
 	if ($c = @unserialize($tableau)) $tableau = $c;
-	
+
 	if (empty($cfg)) $cfg = 'spip_meta';
 	// parcours des donnees
-	$sortie .= 
+	$sortie .=
 		"<div class='cfg_arbo' id='cfg_arbo_$hash'>\n" .
 		cfg_affiche_sous_arborescence($cfg, $tableau) .
 		"\n</div>\n";
@@ -161,19 +161,19 @@ function cfg_affiche_sous_arborescence($nom, $tableau){
 	if (is_array($tableau)){
 		ksort($tableau);
 		foreach ($tableau as $tab=>$val){
-			if (is_array($val)) 
+			if (is_array($val))
 				$sortie .= "<li>" . cfg_affiche_sous_arborescence($tab, $val) . "</li>";
 			elseif (false !== $v = @unserialize($val))
 				$sortie .= "<li>" . cfg_affiche_sous_arborescence($tab, $v) . "</li>";
 			else
 				$sortie .= "<li>$tab = " . htmlentities($val) ."</li>\n";
-			
+
 		}
 	} else {
 		$sortie .= "<li>$nom = " . htmlentities($tableau) . "</li>";
 	}
 	$sortie .= "</ul>\n";
-	return $sortie;	
+	return $sortie;
 }
 
 ?>
