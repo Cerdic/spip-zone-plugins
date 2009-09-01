@@ -32,6 +32,9 @@ function find_in_skin($file, $dirname='', $include=false){
 	foreach($skins as $skin){
 		if ($f = find_in_path($file,"skins/$skin/$dirname",$include))
 			return $f;
+		// et chercher aussi comme en 2.1...
+		if ($f = find_in_path($file,"prive/skins/$skin/$dirname",$include))
+			return $f;		
 	}
 	spip_log("$dirname/$file introuvable dans la skin ".reset($skins),'skin');
 	return "";
