@@ -66,9 +66,8 @@ function sommaire_d_une_page(&$texte, &$nbh3, $page=0, $num_pages=0) {
 */
 function sommaire_lien_retour_dist($self, $titre) {
 	static $haut = NULL;
-	// si on n'est pas en mode impression, on calcule l'image de retour au sommaire
 	if(!isset($haut)) 
-		$haut = defined('_CS_PRINT')?'':'<a title="'._T('couteau:sommaire_titre').'" href="'.$self.'#outil_sommaire" class="sommaire_ancre">&nbsp;</a>';
+		$haut = '<a title="'._T('couteau:sommaire_titre').'" href="'.$self.'#outil_sommaire" class="sommaire_ancre">&nbsp;</a>';
 	return $haut . $titre;
 }
 
