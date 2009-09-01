@@ -1,6 +1,8 @@
 <?php
 // Ajout du bouton permettant de se rendre sur la page de gestion des tickets
 function tickets_ajouterBoutons($boutons_admin) {
+	// uniquement si le plugin bandeau n'est pas la (ou SPIP 2.1)
+	if(!$boutons_admin['bando_publication']){
 		// affiche le bouton dans "Forum" si les forums sont activés, tout le monde peut voir cette page
 		if($boutons_admin['forum']){
 			$boutons_admin['forum']->sousmenu['tickets'] = new Bouton(
@@ -16,7 +18,7 @@ function tickets_ajouterBoutons($boutons_admin) {
 				generer_url_ecrire('tickets')
 			);		
 		}
-		
+	}
 	return ($boutons_admin);
 }
 
