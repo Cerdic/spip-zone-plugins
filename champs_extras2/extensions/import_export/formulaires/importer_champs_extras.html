@@ -1,0 +1,19 @@
+<div class="formulaire_spip formulaire_editer formulaire_#FORM">
+	<h3 class='titrem'><:ie_extras:importer:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable}|oui)
+	<form method='post' action='#ENV{action}'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<p class="explication"><:ie_extras:importer_infos:></p>
+		<ul>
+			[(#SAISIE{textarea,champs,rows=20,li_class=haut,
+				label=<:ie_extras:label_description:>})]			
+		</ul>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class='boutons'><input type='submit' class='submit' value='<:ie_extras:bouton_importer:>' /></p>
+	</div></form>
+	]
+</div>
