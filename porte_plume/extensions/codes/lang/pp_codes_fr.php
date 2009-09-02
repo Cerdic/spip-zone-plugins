@@ -11,5 +11,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'outil_inserer_kbd' => "Ins&eacute;rer une entr&eacute;e clavier (kdb)",
 	'outil_inserer_lien_trac' => "Ins&eacute;rer un lien vers le trac de SPIP",
 
+	//P
+	'pp_codes' => "Codes informatiques pour Porte Plume",
+	
+	//C
+	'cfg_description_pp_codes' => "Configurer l'extension codes informatiques pour Porte Plume",
+	'cfg_activer_extension_sur' => "Activer sur quelles barres d'outils ?",
+	'cfg_activer_barre_edition' => "Barre d'&eacute;dition",
+	'cfg_activer_barre_forum' => "Barre de forum",
 );
 ?>
