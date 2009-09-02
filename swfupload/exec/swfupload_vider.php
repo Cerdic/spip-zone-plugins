@@ -6,7 +6,7 @@ include_spip('inc/actions'); // *action_auteur et determine_upload
 
 function exec_swfupload_vider()
 {
-global $connect_statut, $connect_login, $connect_toutes_rubriques, $couleur_foncee, $flag_gz, $options,$supp;
+global $connect_statut, $connect_login, $connect_toutes_rubriques, $couleur_foncee, $options,$supp;
 
 if ($connect_statut != '0minirezo' ) {
 		$commencer_page = charger_fonction('commencer_page', 'inc');

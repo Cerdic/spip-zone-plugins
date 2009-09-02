@@ -6,7 +6,6 @@ include('exec/admin_tech.php');
 
 function exec_admin_tech()
 {
-	global $flag_gz;
 	if (!autoriser('sauvegarder')){
 		include_spip('inc/minipres');
 		echo minipres();
@@ -78,7 +77,7 @@ function exec_admin_tech()
 	$file = nom_fichier_zip();
 	$nom = "\n<input name='nom_sauvegarde' size='40' value='$file' />";
 	
-	if ($flag_gz) {
+	if (function_exists('gzcompress')) {
 	
 	$res .= "\n<p>" .
 	  _T('mesfichiers:texte_admin_tech_03') .
@@ -124,7 +123,7 @@ function exec_admin_tech()
 		. ')</label></li>';
 		}
  	
-		if ($flag_gz) {
+		if (function_exists('gzcompress')) {
 			$fichier_defaut = str_replace(array("@stamp@","@nom_site@"),array("",""),_SPIP_DUMP) . '.gz';
 			$texte_compresse = _T('texte_compresse_ou_non')."&nbsp;";
 		} else {

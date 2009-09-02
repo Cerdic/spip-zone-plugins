@@ -168,7 +168,7 @@ function choisir_miroirs_ortho($lang) {
 // http://doc.spip.org/@post_ortho
 function post_ortho($url, $texte, $lang) {
 
-	$gz = ($GLOBALS['flag_gz'] && strlen($texte) >= 200);
+	$gz = (function_exists('gzcompress') && strlen($texte) >= 200);
 	$boundary = '';
 	$vars = array(
 		'op' => 'spell',
