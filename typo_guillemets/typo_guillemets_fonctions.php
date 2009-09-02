@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /*
 Fichier de formatage typographique des guillemets, par Vincent Ramos
 <spip_dev AD kailaasa PVNCTVM net>, sous licence GNU/GPL.
