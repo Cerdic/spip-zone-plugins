@@ -7,10 +7,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 //A
 	'abomailmans' 					=> 'Mailmans',
 	'abonne'						=>'Je m\'abonne',
-	'active'                        => 'Activ&eacute;',
+	'active'                        => 'Active',
 	'aucune_langue'					=> 'Aucune sp&eacute;cifique',
 
 //B
+	'bouton_listes_diffusion'		=> 'Les listes de diffusion',
 	'btn_abonnement'                => 'S\'abonner',
 	'btn_desabonnement'             => 'Se d&eacute;sabonner',
 
@@ -20,8 +21,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'creation_droits_insuffisants'	=> 'Vos droits sont insuffisants...',
 
 //D
-	'desactive'                     => 'D&eacute;sactiv&eacute;',
-	
+	'desactive'                     => 'D&eacute;sactiv&eacute;e',
+
 //E
 	'emailliste_abomailman'			=> 'L\'adresse e-mail de la liste',
 	'emailliste_abosympa'           => 'L\'adresse e-mail de l\'administrateur Sympa',
@@ -34,6 +35,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'envoyer_courier'				=> 'Envoyer un courrier',
 	'envoyer_courier_liste'			=> 'Envoyer ce courrier &agrave; cette liste de diffusion :',
 	'envoyer_mailmans'				=> 'S&eacute;l&eacute;ctionner le mod&egrave;le et son contenu',
+	'erreur_email_liste_oublie'		=> 'L\'adresse email de la liste est obligatoire',
+	'explication_email_sympa'		=> 'Si ce champ est renseign&eacute;, la liste est consid&eacute;r&eacute;e comme une liste de serveur "Sympa", dans le cas contraire comme une liste "Mailman".',
 
 //I
 	'icone_ajouter_liste'			=> 'Ajouter une nouvelle liste',
@@ -47,6 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 //K
 
 //L
+	'label_etat_liste'				=> '&Eacute;tat de la liste',
 	'langue_liste'					=> 'Langue de la liste',
 	'les_listes_mailmans'			=> 'Les listes mailmans ou sympas renseign&eacute;es',
 	'lire_article' 					=> 'Lire l\'article',
@@ -84,6 +88,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 //T
 	'template'						=> 'Choisissez le mod&egrave;le et son contenu',
 	'titre_abomailman'				=> 'Titre de la liste',
+	'titre_liste_obligatoire'		=> 'Le titre de la liste est obligatoire',
 	'toute_liste'					=> 'Toutes les listes de diffusions',
 
 //U

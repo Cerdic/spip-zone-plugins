@@ -10,12 +10,12 @@
 function abomailmans_ajouter_boutons($boutons_admin) {
 	global $visiteur_session;
 	// si on est admin
-	if ($visiteur_session['statut'] == "0minirezo" && !$visiteur_session['restreint'] 
+	if ($visiteur_session['statut'] == "0minirezo" && !$visiteur_session['restreint']
 	AND (!isset($GLOBALS['meta']['activer_abomailmans']) OR $GLOBALS['meta']['activer_abomailmans']!="non") ) {
 	  // on voit le bouton dans la barre "naviguer"
 		$boutons_admin['naviguer']->sousmenu["abomailmans_tous"]= new Bouton(
 		find_in_path("/img_pack/mailman.gif"),  // icone
-		_T("abomailmans:abomailmans") //titre
+		_T("abomailmans:bouton_listes_diffusion") //titre
 		);
 	}
 	return $boutons_admin;
