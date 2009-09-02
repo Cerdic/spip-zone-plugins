@@ -151,7 +151,7 @@ function array_results($hash,$store='get',$arg=null){
 	elseif($store=='free')
 		unset($array_results[$hash]);
 	else {
-		$hash = count($array_results)?max(array_keys($array_results)):1; // pas de 0 svp
+		$hash = count($array_results)?max(array_keys($array_results))+1:1; // pas de 0 svp
 		// un tableau direct
 		if (is_array($store)){
 			$array_results[$hash]['res'] = $store;
