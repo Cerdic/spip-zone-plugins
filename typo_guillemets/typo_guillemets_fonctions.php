@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /*
 Fichier de formatage typographique des guillemets, par Vincent Ramos
 <spip_dev AD kailaasa PVNCTVM net>, sous licence GNU/GPL.
@@ -19,16 +19,28 @@ de la forme &ldquo;mot&rdquo;, sauf si la barre d'insertion de SPIP proposait
 deja une autre forme.
 */
 
-function typo_guillemets_remplacements($texte){
+function typo_guillemets_remplacements($texte) {
+
+	// si le texte ne contient pas de guill droit
+	// ou s'il contient deja des guillemets élaborés
+	// on ne touche pas
+	if ((strpos($texte, '"') === false)
+	OR (strpos($texte, '&#171;') !== false)
+	OR (strpos($texte, '&#187;') !== false)
+	OR (strpos($texte, '&#8220;') !== false)
+	OR (strpos($texte, '&#8221;') !== false)
+	)
+		return $texte;
+
 	switch ($GLOBALS['spip_lang']){
 		case 'fr':
-			$guilles="&laquo;&nbsp;$1&nbsp;&raquo;"; //LRTEUIN
+			$guilles="&laquo;&nbsp;$2&nbsp;&raquo;"; //LRTEUIN
 		break;
 //		case 'ar':
 //			$guilles="";
 //		break;
 		case 'bg':
-			$guilles="&bdquo;$1&ldquo;";
+			$guilles="&bdquo;$2&ldquo;";
 		break;
 //		case 'br':
 //			$guilles="";
@@ -37,31 +49,31 @@ function typo_guillemets_remplacements($texte){
 //			$guilles="";
 //		break;
 		case 'ca':
-			$guilles="&laquo;$1&raquo;";
+			$guilles="&laquo;$2&raquo;";
 		break;
 		case 'cpf':
-			$guilles="&laquo;&nbsp;$1&nbsp;&raquo;";
+			$guilles="&laquo;&nbsp;$2&nbsp;&raquo;";
 		break;
 //		case 'cpf_hat':
 //			$guilles="";
 //		break;
 		case 'cs':
-			$guilles="&bdquo;$1&ldquo;";
+			$guilles="&bdquo;$2&ldquo;";
 		break;
 		case 'da':
-			$guilles="&raquo;$1&laquo;";
+			$guilles="&raquo;$2&laquo;";
 		break;
 		case 'de':
-			$guilles="&bdquo;$1&ldquo;"; //ou "&raquo;$1&laquo;" // LRTEUIN
+			$guilles="&bdquo;$2&ldquo;"; //ou "&raquo;$2&laquo;" // LRTEUIN
 		break;
 		case 'en':
-			$guilles="&ldquo;$1&rdquo;"; //LRTEUIN
+			$guilles="&ldquo;$2&rdquo;"; //LRTEUIN
 		break;
 		case 'eo':
-			$guilles="&laquo;$1&raquo;";
+			$guilles="&laquo;$2&raquo;";
 		break;
 		case 'es':
-			$guilles="&laquo;$1&raquo;";
+			$guilles="&laquo;$2&raquo;";
 		break;
 //		case 'eu':
 //			$guilles="";
@@ -76,22 +88,22 @@ function typo_guillemets_remplacements($texte){
 //			$guilles="";
 //		break;
 		case 'hu':
-			$guilles="&bdquo;$1&rdquo;";
+			$guilles="&bdquo;$2&rdquo;";
 		break;
 		case 'it':
-			$guilles="&laquo;$1&raquo;";
+			$guilles="&laquo;$2&raquo;";
 		break;
 		case 'it_fem':
-			$guilles="&laquo;$1&raquo;";
+			$guilles="&laquo;$2&raquo;";
 		break;
 		case 'ja':
-			$guilles="&#12300;$1&#12301;";
+			$guilles="&#12300;$2&#12301;";
 		break;
 //		case 'lb':
 //			$guilles="";
 //		break;
 		case 'nl':
-			$guilles="&bdquo;$1&rdquo;";
+			$guilles="&bdquo;$2&rdquo;";
 		break;
 //		case 'oc_auv':
 //			$guilles="";
@@ -118,45 +130,44 @@ function typo_guillemets_remplacements($texte){
 //			$guilles="";
 //		break;
 		case 'pl':
-			$guilles="&bdquo;$1&rdquo;";
+			$guilles="&bdquo;$2&rdquo;";
 		break;
 		case 'pt':
-			$guilles="&laquo;$1&raquo;";
+			$guilles="&laquo;$2&raquo;";
 		break;
 		case 'pt_br':
-			$guilles="&laquo;$1&raquo;";
+			$guilles="&laquo;$2&raquo;";
 		break;
 		case 'ro':
-			$guilles="&bdquo;$1&rdquo;";
+			$guilles="&bdquo;$2&rdquo;";
 		break;
 		case 'ru':
-			$guilles="&laquo;$1&raquo;";
+			$guilles="&laquo;$2&raquo;";
 		break;
 		case 'tr':
-			$guilles="&laquo;$1&raquo;";
+			$guilles="&laquo;$2&raquo;";
 		break;
 //		case 'vi':
 //			$guilles="";
 //		break;
 		case 'zh':
-			$guilles="&#12300;$1&#12301;"; // ou "&ldquo;$1&rdquo;" en chinois simplifie
+			$guilles="&#12300;$2&#12301;"; // ou "&ldquo;$2&rdquo;" en chinois simplifie
 		break;
 		default:
-			$guilles="&ldquo;$1&rdquo;";
+			$guilles="&ldquo;$2&rdquo;";
 	}
 
-$trouve = array(
-	'/="(.*?)"/', // 1. Echappement des guillemets a l'interieur de balises
-	'/"\s?(.*?)\s?"/', // 2. Remplacement des autres paires de guillemets (et suppression des espaces apres/avant)
-	'/@@GUILLEMETS_ECHAPPES@@/' // 3. Restitution des guillemets a l'interieur de balises
+	// on echappe les " dans les tags ;
+	// attention ici \01 est le caractere chr(1), et \$0 represente le tag
+	$texte = preg_replace(',<[^>]*"[^>]*(>|$),msSe', "str_replace('\"','\01', \"\$0\")", $texte);
 
-			);
-$remplace = array
-			(
-	'=@@GUILLEMETS_ECHAPPES@@$1@@GUILLEMETS_ECHAPPES@@', // 1
-	$guilles, // 2
-	'"' // 3
-			);
-return preg_replace($trouve, $remplace, $texte);
+	// on corrige les guill restants, qui sont par definition hors des tags
+	// Un guill n'est pas pris s'il suit un caractere autre que espace, ou
+	// s'il est suivi par un caractere de mot (lettre, chiffre)
+	$texte = preg_replace('/(^|\s)"\s?([^"]*?)\s?"(\W|$)/S', '$1'.$guilles.'$3', $texte);
+
+	// et on remet les guill des tags
+	return str_replace("\01", '"', $texte);
 }
+
 ?>
