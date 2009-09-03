@@ -31,13 +31,16 @@ function inc_instituer_article_dist($id_article, $statut, $id_rubrique)
 	$etats = $GLOBALS['liste_des_etats'];
 
 	if (!autoriser('publierdans', 'rubrique', $id_rubrique)) {
-
-//RERS   autoriser à tout le monde la publication  ('publie')  pour les rubriques offres et demandes
+//RERS   tout le monde a la publication autorisée ('publie')  pour les rubriques offres et demandes lors de la création de
+//               l'article dans cette rubrique. Pour ces articles, on n'affiche dans les statuts que 
+//                  - "publie" (mais ce n'est pas actif) 
+//		    - et "a la poubelle"
 		$rers_rub_offres = lire_config('rers/rers_rub_offres');	
 		$rers_rub_demandes = lire_config('rers/rers_rub_demandes');
 		$rers_rub_vie = lire_config('rers/rers_rub_vie');
 		if ( $id_rubrique == $rers_rub_offres OR  $id_rubrique == $rers_rub_demandes ) {
 			unset($etats[array_search('prop', $etats)]);
+			unset($etats[array_search('prepa', $etats)]);
 		}
 		else {
 			unset($etats[array_search('publie', $etats)]);
