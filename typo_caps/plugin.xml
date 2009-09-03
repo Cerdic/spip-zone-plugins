@@ -1,0 +1,14 @@
+<plugin>
+	<nom>Corrections typographiques des caps (<code>ONU</code> devient <code><span class="caps">ONU</span></code>)</nom>
+	<version>1.0</version>
+	<prefix>typo</prefix>
+	<etat>stable</etat>
+	<auteur>Fil</auteur>
+	<description></description>
+	<pipeline>
+		<nom>pre_typo</nom>
+		<action>caps</action>
+		<inclure>typo_caps_fonctions.php</inclure>
+	</pipeline>
+	<necessite id="SPIP" version="[1.9.0;]" />
+</plugin>
