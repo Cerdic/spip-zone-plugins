@@ -187,8 +187,8 @@ function bando_images_background(){
 }
 }
 
-if (!function_exists('bando_style_prive_skin')){
-function bando_style_prive_skin() {
+if (!function_exists('bando_style_prive_theme')){
+function bando_style_prive_theme() {
 	return '';
 }
 }
