@@ -3,21 +3,22 @@
 	<auteur>ARNO*</auteur>
 	<licence>GPL v3</licence>
 	<description>
-<i>Tickets</i> est un outil de suivi de bugs directement int&eacute;gr&eacute; &agrave; l'espace priv&eacute; de SPIP. 
+<i>Tickets</i> est un outil de suivi de bugs directement int&eacute;gr&eacute; &agrave; l'espace priv&eacute; de SPIP.
 Il est con&ccedil;u pour faciliter la phase de d&eacute;veloppement du site (notamment les squelettes du site public).
 	</description>
 	<lien></lien> <!-- URI de documentation -->
 	<icon>imgs/logo-bugs.png</icon>
-	
+
 	<version>1.5.2</version>
 	<version_base>0.6</version_base>
 	<etat>stable</etat>
-	
+
 	<prefix>tickets</prefix>
 
-	<fonctions>inc/tickets_filtres.php</fonctions>
+	<options>tickets_options.php</options>
+	<fonctions>tickets_fonctions.php</fonctions>
 	<install>base/tickets_upgrade.php</install>
-	
+
 	<pipeline>
 		<nom>declarer_tables_interfaces</nom>
 		<inclure>base/tickets_install.php</inclure>
@@ -54,13 +55,12 @@ Il est con&ccedil;u pour faciliter la phase de d&eacute;veloppement du site (not
 		<nom>objets_extensibles</nom>
 		<inclure>tickets_pipelines.php</inclure>
 	</pipeline>
-	
+
 	<bouton id='tickets' parent='bando_publication'>
 		<icone>images/ticket-16.png</icone>
 		<titre>tickets:titre</titre>
 		<url>tickets</url>
 	</bouton>
-	
+
 	<necessite id="SPIP" version="[2.0.0;]" />
 </plugin>
-

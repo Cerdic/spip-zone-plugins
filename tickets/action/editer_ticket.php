@@ -6,17 +6,18 @@
  *
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 /**
  * editer un ticket (action apres creation/modif de ticket)
  *
  * @return array
  */
- 
 function action_editer_ticket() {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 
-	// si id_ticket n'est pas un nombre, c'est une creation 
+	// si id_ticket n'est pas un nombre, c'est une creation
 	// mais on verifie qu'on a toutes les donnees qu'il faut.
 	if (!$id_ticket = intval($arg)) {
 		$id_auteur = $GLOBALS['visiteur_session']['id_auteur'];
@@ -25,21 +26,21 @@ function action_editer_ticket() {
 			redirige_url_ecrire();
 		}*/
 		$id_ticket = insert_ticket($id_auteur);
-	} 
+	}
 
 	// Enregistre l'envoi dans la BD
 	if ($id_ticket > 0) $err = tickets_set($id_ticket);
-	
+
 	return array($id_ticket,$err);
 }
 
 /**
- * 
+ *
  * Mettre a jour une zone
  *
- * @return 
+ * @return
  * @param int $id_ticket
- * 
+ *
  */
 function tickets_set($id_ticket) {
 	spip_log('ticket_set');
@@ -53,7 +54,7 @@ function tickets_set($id_ticket) {
 
 	include_spip('inc/modifier');
 	revision_ticket($id_ticket, $c);
- 
+
 	// Modification de statut. On ne peut passer par inc/modifier
 	$c = array();
 	foreach (array('statut') as $champ)
@@ -70,11 +71,11 @@ function tickets_set($id_ticket) {
  * @return int
  */
 function insert_ticket($id_auteur) {
-	/* Si anonyme, on ne propose pas le ticket en redaction : on ouvre aussitot en lecture 
+	/* Si anonyme, on ne propose pas le ticket en redaction : on ouvre aussitot en lecture
 	 * vu que l'autorisation de modifier de ticket dans instituer_ticket()
 	 * risque d'interdire l'edition ensuite si l'autorisation de creation et de modification
 	 * ne concernent pas les memes personnes.
-	 * Ceci n'est pas encore ideal : 
+	 * Ceci n'est pas encore ideal :
 	 * si autoriser creer renvoie toujours true, et modifier false, pour un anonyme,
 	 * un statut different de 'ouvert' ne sera pas pris en compte tout simplement.
 	 * Mais a la creation, on met rarement "resolu" !
@@ -89,38 +90,14 @@ function insert_ticket($id_auteur) {
 	return $id_ticket;
 }
 
-/**
- * Enregistre une revision de ticket
- * 
- * @return 
- * @param int $id_ticket
- * @param array $c[optional]
- */
-function revision_ticket ($id_ticket, $c=false) {
 
-	// invalider le cache quelque soit la circonstance.
-	// une modification de base = effacer les caches.
-	$invalideur = "id='id_ticket/$id_ticket'";
-	$indexation = true;
-
-	modifier_contenu('ticket', $id_ticket,
-		array(
-			'nonvide' => array('titre' => _T('info_sans_titre')),
-			'invalideur' => $invalideur,
-			'indexation' => $indexation,
-			'date_modif' => 'date_modif' // champ a mettre a date('Y-m-d H:i:s') s'il y a modif
-		),
-		$c);
-
-	return ''; // pas d'erreur
-}
 
 /**
- * 
+ *
  * Gestion du statut d'un ticket
  * Tout changement de statut devrait passer par là
- * 
- * @return 
+ *
+ * @return
  * @param int $id_ticket
  * @param array $c
  */
@@ -143,7 +120,7 @@ function instituer_ticket($id_ticket, $c) {
 			spip_log("editer_ticket $id_ticket refus " . join(' ', $c));
 
 		// En cas de publication, fixer la date a "maintenant"
-		// sauf si $c commande autre chose		
+		// sauf si $c commande autre chose
 		if ($champs['statut'] == 'ouvert' AND !in_array($statut_ancien, array('ouvert'))) {
 			if (!is_null($date))
 				$champs['date'] = $date;
