@@ -124,13 +124,7 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 	));
 	$navigation = ""; 
 
-//RERS    chacher le numéro d'article (est choix de statut) 
-//RERS     quand c'est une fiche de savoirs (article rubrique OFFRES ou DEMANDES)
-//RERS     et seulement pour les rédacteurs
-if ( ( $id_rubrique !== $rers_rub_offres AND  $id_rubrique !== $rers_rub_demandes AND $connect_statut !== '0minirezo' ) OR $connect_statut == '0minirezo' )
-{
 	$navigation .=	  debut_boite_info(true). $boite . fin_boite_info(true) . $icone ;
-}
 
 
 
