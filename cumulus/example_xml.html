@@ -4,7 +4,7 @@
 <title>Exemple Cumulus XML - CFG swfobject 2.2</title>
 <meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
 
-[<!--(#REM) dŽbut partie du code ˆ recopier dans la balise <head> de votre page -->]
+[<!--(#REM) debut partie du code a recopier dans la balise <head> de votre page -->]
 [(#SET{gmt,[(#CONFIG{cumulus/groupes_mots_exclus}|implode{|}|sinon{-1})]})]
 <script type="text/javascript" src="#CHEMIN{swfobject.js}"></script>
 <script type="text/javascript">
@@ -23,16 +23,16 @@
 		attributes.align = "middle";
 		swfobject.embedSWF("#CHEMIN{tagcloud.swf}", "[(#CONFIG{cumulus/bloc_cumulus}|sinon{cumulus})]", "[(#CONFIG{cumulus/largeur}|sinon{200})]", "[(#CONFIG{cumulus/hauteur}|sinon{200})]", "9.0.0", "expressInstall.swf", flashvars, params, attributes);
 </script>
-[<!--(#REM) fin partie du code ˆ recopier dans la balise <head> de votre page -->]
+[<!--(#REM) fin partie du code a recopier dans la balise <head> de votre page -->]
 
 </head>
 	<body>    
-[<!--(#REM) dŽbut partie du code ˆ recopier ou vous voulez dans la balise <body> de votre page-->]        
+[<!--(#REM) debut partie du code a recopier ou vous voulez dans la balise <body> de votre page-->]
         [<div id="[(#CONFIG{cumulus/bloc_cumulus}|sinon{cumulus})]">
             <h2><:mots_clefs:></h2> 
         (#MODELE{nuage}{notid=#GET{gmt}})
         </div>]
-[<!--(#REM) fin partie du code ˆ recopier ou vous voulez dans la balise <body> de votre page-->]	
+[<!--(#REM) fin partie du code a recopier ou vous voulez dans la balise <body> de votre page-->]
 	</body>
 
 </html>
