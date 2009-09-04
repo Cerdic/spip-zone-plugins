@@ -1,0 +1,4 @@
+[(#CONFIG{multi_articles}|=={oui}|?{' '})#SET{lang,#ENV{lang}}]
+<BOUCLE_mots(MOTS){frequence}{type ?}{id_groupe==^((#ENV{id,.*}))$}{id_groupe!==^((#ENV{notid,-1}))$}{par #ENV{tri,titre}}>[(#SET{score,[(#FREQUENCE|div{#MAX_FREQUENCE})]})][(#GET{score}|>{0.05}|?{' '})[(#SET{score,[(#GET{score}|plus{0.900001})]})][(#SET{unite,[(#GET{score}|floor)]})][(#SET{decimale,[(#GET{score}|moins{#GET{unite}}|mult{10}|floor)]})]
+<a href="[(#URL_MOT|parametre_url{lang,#GET{lang}})]" class="tag-link-#ID_MOT" title="[(#FREQUENCE)]/[(#MAX_FREQUENCE)] topics" rel="tag" style="font-size: 1[(#GET{unite})][.(#GET{decimale})]pt;">[(#TITRE|texte_backend|oeuf)]</a>]</BOUCLE_mots>
+

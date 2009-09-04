@@ -1,0 +1,141 @@
+<!-- titre=<:cumulus:titre_cumulus:> -->
+<!-- icone=nuage-24.gif-->
+<!-- boite=<:cumulus:configuration_cumulus:> -->
+
+<!-- autoriser=webmestre -->
+
+<!-- refus=Seuls les webmestres du site sont autoris&#233;s &#224; 
+modifier ces param&#232;tres. Pour en savoir plus, 
+voir <a href="http://www.spip-contrib.net/-Autorite-">la documentation</a>. -->
+
+<!-- descriptif=
+<h4><:cumulus:descriptif_configuration:></h4>
+-->
+
+<!-- head=
+	
+	<style type="text/css">
+	table.def td{padding-left:1em; padding-right:1em;}
+	</style>
+
+-->
+#CACHE{0}
+
+
+<form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
+
+
+[(#REM) ------------------------ TEXTES INTERFACE ------------------------ ]
+<fieldset>
+    <legend>
+    	<:cumulus:titre_bloc_cumulus:>
+    </legend>    
+    <p>
+    <label>
+        <:cumulus:texte_titre_nuage:>: 
+        <input type="text" name="bloc_cumulus" id="bloc_cumulus" style="width: 100%;" value="[(#ENV{bloc_cumulus}|sinon{<:cumulus:defaut_titre:>})]" />
+    </label>
+    </p>
+</fieldset>
+
+[(#REM) ------------------------ REGLAGES ------------------------ ]
+<fieldset>
+    <legend>
+    	<:cumulus:reglages:>
+    </legend>
+   <p>
+    <label>
+        <:cumulus:largeur:>:
+        <input type="text" name="largeur" id="largeur" style="width: 80px" value="[(#ENV{largeur}|sinon{200})]" />
+    </label>
+    </p>
+    <p>
+    <label>
+        <:cumulus:hauteur:>:
+        <input type="text" name="hauteur" id="hauteur" style="width: 80px" value="[(#ENV{hauteur}|sinon{200})]" />
+    </label>
+    </p>
+        <p>
+    <label>
+        <:cumulus:vitesse:>:
+        <input type="text" name="vitesse" id="vitesse" style="width: 80px" value="[(#ENV{vitesse}|sinon{100})]" />
+    </label>
+    </p>
+</fieldset>
+
+
+[(#REM) ------------------------ COULEURS ------------------------ ]
+<fieldset>
+    <legend>
+    	<:cumulus:couleurs:>
+    </legend>
+    <p><:cumulus:saisir_couleur:>: <br/><small><:cumulus:explication_palette:></small></p>
+    <p>
+    <label>
+       <:cumulus:couleur_reference_max:>:
+	<input type="text" name="couleur_1" class="palette" id="couleur_1" value="[(#ENV{couleur_1}|sinon{#009900})]" style="width: 80px"/>
+	    </label>
+    </p>
+        <p>
+    <label><:cumulus:couleur_reference_min:>:
+	<input type="text" name="couleur_2" class="palette" id="couleur_2" value="[(#ENV{couleur_2}|sinon{#333333})]" style="width: 80px" />
+	    </label>
+    </p>
+        <p>
+    <label><:cumulus:couleur_survol:>:
+	<input type="text" name="couleur_survol" class="palette" id="couleur_survol" value="[(#ENV{couleur_survol}|sinon{#000000})]" style="width: 80px"/>
+	    </label>
+    </p>
+        <p>
+    <label><:cumulus:couleur_fond:>:
+        <input type="text" name="couleur_fond" class="palette" id="couleur_fond" value="[(#ENV{couleur_fond}|sinon{#FFFFFF})]" style="width: 80px"/>
+	    </label>
+    </p>
+        <p>
+    <label><:cumulus:fond_transparent:></label>
+	<input type="checkbox" name="transparent" [checked="(#ENV{transparent}?{checked})"] id="transparent" />
+    </label>
+    </p>
+</fieldset>
+    
+
+
+[(#REM) ------------------------ GROUPES MOTS CLES A EXCLURE ------------------------ ]
+<B_gm>
+<fieldset>
+    <legend>
+    	<:cumulus:choix_groupes_mots_exclus:>
+    </legend>
+    <p>
+    <label>
+        <:cumulus:explication_groupe_exclus:>: 
+        <table>
+        <tr><th><:cumulus:titre:></th><th><:cumulus:id_groupe:></th><th></th></tr>
+        <BOUCLE_gm(GROUPES_MOTS){par id_groupe}>
+        <tr><td>#TITRE</td><td style="text-align: center;">#ID_GROUPE</td><td>
+        <input type="checkbox" name="groupes_mots_exclus[]" 
+        [(#ENV{groupes_mots_exclus}|oui) [(#ID_GROUPE|in_array{#ENV{groupes_mots_exclus}}|oui) checked="checked"] ]
+        value="#ID_GROUPE" />
+        </td></tr>
+        </BOUCLE_gm>
+        </table>
+        [gmt: (#ENV{groupes_mots_exclus}|oui) [(#ENV{groupes_mots_exclus}|implode{|})] ]
+    </label>
+    </p>
+</fieldset>
+</B_gm>
+
+
+[(#REM) ------------------------ BOUTON OK ------------------------ ]
+<div>
+<input style="float:#LANG_RIGHT;" type="submit" name="_cfg_ok" value="<:OK:>" class="fondo" />
+<!--
+<input type="reset" value="<:Reset:>" class="fondo" />
+<input type="submit" name="_cfg_delete" value="<:Supprimer:>" class="fondo" />
+-->
+</div>
+
+</form>
+
+
+

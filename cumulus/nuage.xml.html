@@ -1,0 +1,4 @@
+﻿[(#HTTP_HEADER{Content-type: text/xml[; charset=(#CHARSET)]})]<tags>[(#REM) notid= exclure le groupe de mots clefs indésirable][(#SET{notid,[(#CONFIG{cumulus/groupes_mots_exclus}|implode{|}|sinon{-1})]})]#SET{tri,titre}
+<BOUCLE_mots(MOTS){frequence}{type ?}{id_groupe!==^((#GET{notid,-1}))$}{par #GET{tri,titre}}>[(#SET{score,[(#FREQUENCE|div{#MAX_FREQUENCE})]})][(#GET{score}|>{0.05}|?{' '})[(#SET{score,[(#GET{score}|plus{1.1}|mult{9}|floor)]})][(#SET{unite,[(#GET{score}|floor)]})]]
+<a href="[(#URL_MOT|parametre_url{lang,#GET{lang}})]" class="tag-link-#ID_MOT" <BOUCLE_nbart(ARTICLES){id_mot}> </BOUCLE_nbart>title="#TOTAL_BOUCLE topics"</B_nbart>  rel="tag" style="font-size: [(#EVAL{[(#FREQUENCE)]+10})]pt;">[(#TITRE|texte_backend|oeuf)]</a></BOUCLE_mots>
+</tags>

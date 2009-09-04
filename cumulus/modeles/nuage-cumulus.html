@@ -1,0 +1,3 @@
+[(#CONFIG{multi_articles}|=={oui}|?{' '})#SET{lang,#ENV{lang}}]#SET{expose,#ARRAY}<BOUCLE_expose(MOTS){id_article ?}>[(#SET{expose,[(#GET{expose}|push{#ID_MOT})]})]</BOUCLE_expose><B_mots><BOUCLE_mots(MOTS){frequence}{type ?}{id_groupe==^((#ENV{id,.*}))$}{id_groupe!==^((#ENV{notid,-1}))$}{par #ENV{tri,titre}}{0,14}><a href='[(#URL_MOT|parametre_url{lang,#GET{lang}})]' style='[(#EVAL{[(#FREQUENCE)]+15})]'>#TITRE</a></BOUCLE_mots></B_mots>
+
+[(#REM) curieusement limité à 14 mots.. [ class="(#GET{expose}|find{#ID_MOT}|?{on})"] style="font-size: #GET{unite}[.(#GET{decimale})]em;"]

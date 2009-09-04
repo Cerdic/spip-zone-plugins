@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<plugin>
+	<nom>Cumulus</nom>
+	<auteur>Adaptation Anne-lise Martenot
+_ Licence GNU/GPL
+	</auteur>
+	<lien>http://www.spip-contrib.net/</lien>
+	<icon>cumulus.png</icon>
+	<version>1.0</version>
+	<etat>stable</etat>
+<description>
+Ce plugin permet d'utiliser WP-cumulus voir http://www.roytanck.com/2008/03/15/wp-cumulus-released/
+</description>
+	<prefix>cumulus</prefix>
+  <fonctions>cumulus_fonctions.php</fonctions>
+	<necessite id="SPIP" version="[2.0.6;]" />
+	<necessite id="cfg" version="[1.10.2;]" />
+	<necessite id="spip_bonux" version="[1.8;]" />
+	<necessite id="nuage" version="[1.4;]" />
+	<utilise id="palette" version="[1.0;]" />
+</plugin>
