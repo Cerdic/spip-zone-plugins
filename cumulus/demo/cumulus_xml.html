@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
 
 [<!--(#REM) debut partie du code a recopier dans la balise <head> de votre page -->]
-[(#SET{gmt,[(#CONFIG{cumulus/groupes_mots_exclus}|implode{|}|sinon{-1})]})]
+[(#SET{gmt,[(#CONFIG{cumulus/groupes_mots_exclus}|sinon{#ARRAY}|implode{|}|sinon{-1})]})]
 <script type="text/javascript" src="#CHEMIN{swfobject.js}"></script>
 <script type="text/javascript">
 	var flashvars = {};

@@ -7,7 +7,7 @@
 
 [<!--(#REM) debut partie du code a recopier dans la balise <head> de votre page -->]
 <script type="text/javascript" src="#CHEMIN{swfobject.js}"></script>
-[(#SET{gmt,[(#CONFIG{cumulus/groupes_mots_exclus}|implode{|}|sinon{-1})]})]
+[(#SET{gmt,[(#CONFIG{cumulus/groupes_mots_exclus}|sinon{#ARRAY}|implode{|}|sinon{-1})]})]
 <script type="text/javascript">
 	var flashvars = {};
 		flashvars.tcolor="0x[(#CONFIG{cumulus/couleur_1}|no_diese|sinon{333333})]";
