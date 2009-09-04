@@ -16,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	// B
 	'bouton_copier_local'=>'Copier dans le site',
-	'bouton_download_depuis'=>'depuis&nbsp:',
+	'bouton_download_depuis'=>'depuis&nbsp;:',
 	'bouton_download_local' => 'mon ordinateur',
 	'bouton_download_par_mediatheque' => 'la mediath&egrave;que',
 	'bouton_download_par_ftp' => 'le serveur',
@@ -85,7 +85,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'logo' => 'Logo',
-	'label_id_joindre' => 'Document',
+	'label_id_joindre' => 'Document num&eacute;ro',
 	'label_parents' => 'Ce document est li&eacute; &agrave;',
 	'label_fichier' => 'Fichier',
 	'label_fichier_vignette' => 'Vignette',
@@ -118,7 +118,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'un_audio'=>'1 bande son',
 	'un_video'=>'1 s&eacute;quence',
 	'une_utilisation'=>'1 utilisation',
-	'upload_info_mode_document' => 'Deposer dans le portfolio',
+	'upload_info_mode_document' => 'D&eacute;poser dans le portfolio',
 	'upload_info_mode_image' => 'Retirer du portfolio',
 	
 	//
