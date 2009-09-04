@@ -3,10 +3,10 @@
 
 if(($tr_prive = strpos($_SERVER["PHP_SELF"],'/ecrire')) !== false) {
 	// prive : les admins passent, les redac passent si '!Tous'
-	$tr_acces = cout_autoriser() || !defined('_en_travaux_PRIVE');
+	$tr_acces = cs_autoriser() || !defined('_en_travaux_PRIVE');
 } else {
 	// public : les admins passent si 'SaufAdmin'
-	$tr_acces = cout_autoriser() && defined('_en_travaux_ADMIN');
+	$tr_acces = cs_autoriser() && defined('_en_travaux_ADMIN');
 	// tentative pour prendre en compte les autres cas possibles d'exception
 	$tr_acces |=
 		isset($_GET['action']) || isset($_POST['action'])

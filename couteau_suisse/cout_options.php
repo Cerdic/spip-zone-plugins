@@ -18,11 +18,13 @@ $metas_vars = isset($GLOBALS['meta']['tweaks_variables'])?unserialize($GLOBALS['
 // pour les serveurs qui aiment les virgules...
 $GLOBALS['spip_version_code'] = str_replace(',','.',$GLOBALS['spip_version_code']);
 // constantes de compatibilite
-if (version_compare($GLOBALS['spip_version_code'],'1.9300','>=')) {	
-	@define('_SPIP19300', 1); @define('_SPIP19200', 1);
-	if (version_compare(substr($GLOBALS['spip_version_branche'],0,5),'2.1.0','>=')) @define('_SPIP20100', 1);
-}
-elseif (version_compare($GLOBALS['spip_version_code'],'1.9200','>=')) @define('_SPIP19200', 1);
+// (pour info : SPIP 2.0 => 12691, SPIP 2.1 => 14213)
+if ($GLOBALS['spip_version_code']>=14213) 
+	{ @define('_SPIP20100', 1); @define('_SPIP19300', 1); @define('_SPIP19200', 1); }
+elseif (version_compare($GLOBALS['spip_version_code'],'1.9300','>=')) 
+	{ @define('_SPIP19300', 1); @define('_SPIP19200', 1); }
+elseif (version_compare($GLOBALS['spip_version_code'],'1.9200','>=')) 
+	@define('_SPIP19200', 1);
 else @define('_SPIP19100', 1);
 // chemin du fichier de fonctions
 define('_COUT_FONCTIONS_PHP', find_in_path('cout_fonctions.php'));
@@ -46,17 +48,12 @@ cs_log(str_repeat('-', 80), '', sprintf('COUTEAU-SUISSE. [#%04X]. ', rand()));
 cs_log('INIT : cout_options, '.$_SERVER['REQUEST_URI']);
 
 // on passe son chemin si un reset general est demande
-$zap = (_request('cmd')=='resetall')
-;/* //obsolete
-// idem si la page est un css ou un js (sauf si le cache est desactive)
- || (!($metas_outils['spip_cache']['actif'] && $metas_vars['radio_desactive_cache3'])
-		&& (isset($_GET['page']) && preg_match(',(\.(css|js)$|style_prive(_ie)?),', $_GET['page'])));
-*/
-//spip_log("cout_options sur '$_GET[page]', ".(preg_match(',(\.(css|js)$|style_prive(_ie)?),', $_GET['page'])?' = css/js, donc zap !!':''));
-//spip_log("URL='".self()."', zap=".($zap?'oui':'non'));
+$zap = _request('cmd')=='resetall';
 
 // lancer maintenant les options du Couteau Suisse
-if($zap) cs_log(' FIN : cout_options sans initialisation du plugin'); else {
+if($zap)
+	cs_log(' FIN : cout_options sans initialisation du plugin');
+else {
 	// $cs_metas_pipelines ne sert qu'a l'execution et ne comporte que :
 	//	- le code pour <head></head>
 	//	- le code pour les pipelines utilises
@@ -127,29 +124,28 @@ if($zap) cs_log(' FIN : cout_options sans initialisation du plugin'); else {
 	cs_log(" FIN : cout_options, cs_spip_options = $GLOBALS[cs_spip_options], cs_options = $GLOBALS[cs_options], cs_fonctions_essai = $GLOBALS[cs_fonctions_essai]");
 }
 
-// Droits pour le Couteau Suisse, compatibilite si la fonction autoriser() n'est pas trouvee
-// appelee sans argument cette fonction renvoie le droit de configurer le Couteau Suisse
-// (droits equivalents a 'configurer' les 'plugins')
-function cout_autoriser($faire='configurer', $type='plugins', $id=0, $qui = NULL, $opt = NULL) {
-	// autorisation sur les outils $type=$outil
-	if($faire=='outiller') {
-		if(isset($type['autoriser'])) {
-			eval('$test = '.$type['autoriser'].';');
-			return $test;
-		}
-		return true;
-	}
-	// SPIP >= 1.92
-	include_spip("inc/autoriser");
-	if(function_exists('autoriser')) return autoriser($faire, $type, $id, $qui, $opt);
-	// SPIP 1.91
-// ici $qui n'est jamais rempli
-//	if ($qui === NULL) $qui = $GLOBALS['auteur_session']; // "" si pas connecte
-//	elseif (is_int($qui)) $qui = spip_fetch_array(spip_query("SELECT * FROM spip_auteurs WHERE id_auteur=".$qui));
+// Droits pour configurer le Couteau Suisse : equivalents a 'configurer' les 'plugins'
+function cs_autoriser() {
+	include_spip('inc/autoriser');
+	return defined('_SPIP19300')
+		? autoriser('configurer', 'plugins')
+		: $GLOBALS['connect_statut'] == '0minirezo' AND $GLOBALS['connect_toutes_rubriques'];
+}
 
-	/*if(($faire=='configurer') && ($type=='plugins'))*/ 
-		return $GLOBALS['connect_statut'] == "0minirezo" && $GLOBALS["connect_toutes_rubriques"];
-	return false;
+// Droits pour voir/manipuler un outil du Couteau Suisse
+// $type represente ici l'outil concerne : $outil
+// Si $outil['autoriser'] (code PHP) n'est pas renseigne, les droits sont toujours accordes
+function autoriser_outiller_dist($faire, $type, $id, $qui, $opt) {
+	$test = !cs_version_erreur($type);
+	if(isset($type['autoriser']))
+		eval('$test &= '.$type['autoriser'].';');
+	return $test;
+}
+
+// TODO : revoir eventuellement tout ca avec la syntaxe de <necessite>
+function cs_version_erreur(&$outil) {
+	return (isset($outil['version-min']) && version_compare($GLOBALS['spip_version_code'], $outil['version-min'], '<'))
+		|| (isset($outil['version-max']) && version_compare($GLOBALS['spip_version_code'], $outil['version-max'], '>'));
 }
 
 // Logs de tmp/spip.log
@@ -164,7 +160,7 @@ function cs_log($variable, $prefixe='', $stat='') {
 
 // message si non autorise
 function cs_minipres($exit=-1) { 
-	if($exit===-1) $exit=!cout_autoriser();
+	if($exit===-1) $exit=!cs_autoriser();
 	if($exit) {
 		include_spip('inc/minipres');
 		echo minipres();

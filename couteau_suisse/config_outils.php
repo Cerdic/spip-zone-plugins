@@ -98,7 +98,7 @@ add_outil( array(
 	'categorie' => 'admin',
 	// non supporte avant la version 1.92
 	'version-min' => '1.9200',
-	'autoriser' => "cout_autoriser('webmestre')",
+	'autoriser' => "autoriser('webmestre')",
 ));
 
 add_outil( array(

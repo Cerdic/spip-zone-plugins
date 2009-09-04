@@ -88,7 +88,7 @@ function cs_pipeline_boite_privee(&$flux, $endroit) {
 }
 
 function cs_boite_rss() {
-	if (!defined('boites_privees_CS') || !cout_autoriser()) return '';
+	if (!defined('boites_privees_CS') || !cs_autoriser()) return '';
 	return debut_boite_info(true)
 		. '<p><b>'._T('couteauprive:rss_titre').'</b></p><div class="cs_boite_rss"><p>'._T('couteauprive:rss_attente').'</p><noscript>'._T('couteauprive:outil_inactif').' !</noscript></div>'
 		/*.'<div style="text-align: right; font-size: 87%;"><a title="'._T('couteauprive:rss_desactiver').'" href="'
@@ -97,7 +97,7 @@ function cs_boite_rss() {
 }
 
 function cs_infos_webmasters() {
-	if (!defined('boites_privees_WEBMASTERS') || !cout_autoriser()) return '';
+	if (!defined('boites_privees_WEBMASTERS') || !cs_autoriser()) return '';
 	include_spip('cout_define');
 	def_liste_adminsitrateurs();
 	return cs_cadre_depliable(_T('couteau:webmestres'), 'bp_infos_webmasters', 
@@ -105,7 +105,7 @@ function cs_infos_webmasters() {
 }
 
 function cs_infos_connection() {
-	if (!defined('boites_privees_AUTEURS') || !cout_autoriser()) return '';
+	if (!defined('boites_privees_AUTEURS') || !cs_autoriser()) return '';
 	// pour cs_lien()
 	include_spip('cout_fonctions');
 	$res = "<p><b>"._T('couteau:derniers_connectes')."</b></p>"
@@ -262,7 +262,7 @@ spip_log("action_rapide_tri_auteurs : $id_article, $id_auteur, $monter");
 }
 
 function cs_div_configuration() {
-	if(!cout_autoriser()) return '';
+	if(!cs_autoriser()) return '';
 	return '<div style="float:right; top:4px; right:-4px; position:relative;" ><a title="'._T('couteau:configurer').'" href="'.generer_url_ecrire('admin_couteau_suisse','cmd=descrip&outil=boites_privees#cs_infos').'"><img alt="'._T('couteau:configurer').'" src="'._DIR_IMG_PACK.'secteur-12.gif"/></a></div>';
 }
 

@@ -11,14 +11,9 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('inc/autoriser');
 include_spip('cout_define');
 cout_define('distant');
-
-// TODO : revoir tout ca avec la syntaxe de <necessite>
-function cs_version_erreur(&$outil) {
-	return (isset($outil['version-min']) && version_compare($GLOBALS['spip_version_code'], $outil['version-min'], '<'))
-		|| (isset($outil['version-max']) && version_compare($GLOBALS['spip_version_code'], $outil['version-max'], '>'));
-}
 
 // initialiser les plugins, les pipelines, etc.
 function cs_init_plugins() {
@@ -83,7 +78,7 @@ cs_log(" -- appel de charger_fonction('description_outil', 'inc') et de descript
 
 	// cette valeur par defaut n'est pas definie sous SPIP 1.92
 	@define('_ID_WEBMESTRES', 1);
-	if(!strlen($outil['id']) || !cout_autoriser('outiller', $outil) || cs_version_erreur($outil))
+	if(!strlen($outil['id']) || !autoriser('outiller', $outil))
 		return $s . _T('info_acces_interdit') . '</div>';
 
 	$s .= "<h3 class='titrem'><img src='"._DIR_IMG_PACK."$puce' width='9' height='9' alt=\"$titre_etat\" title=\"$titre_etat\" />&nbsp;" . $outil['nom'] . '</h3>';
@@ -123,7 +118,8 @@ function liste_outils() {
 		$s_actifs = $s_inactifs = array();
 		foreach($outils as $outil) if ($outil['categorie']==$i) {
 			$test = $outil['actif']?'s_actifs':'s_inactifs';
-			$hide = cs_version_erreur($outil) || (!$outil['actif'] && isset($metas_caches[$outil['id']]['cache'])) || !cout_autoriser('outiller', $outil);
+			$hide = (!$outil['actif'] && isset($metas_caches[$outil['id']]['cache']))
+				|| !autoriser('outiller', $outil);
 			if (!$hide)
 				${$test}[] .= $outil['nom'] . '|' . $outil['index'] . '|' . $outil['id'];
 		}
