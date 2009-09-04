@@ -26,6 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_enlever_supprimer_document' => 'Supprimer',
 	'bouton_modifier_document' => 'Modifier',
 	'bouton_parcourir' => 'Parcourir...',
+	'bouton_refresh_document' => 'Rafraichir le document',
 	'bouton_remplacer_image' => 'Remplacer cette image',
 	'bouton_remplacer_document' => 'Remplacer ce document',
 	'bouton_remplacer_image_document' => 'Remplacer par une image ou un document',
