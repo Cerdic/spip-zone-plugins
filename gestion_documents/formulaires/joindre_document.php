@@ -66,6 +66,8 @@ function formulaires_joindre_document_charger_dist($id_document='new',$id_objet=
 				$valeurs['_dir_upload_ftp'] = "<b>".joli_repertoire($dir)."</b>";
 		}
 	}
+	// On ne propose le FTP que si on a des choses a afficher
+	$valeurs['proposer_ftp'] = ($valeurs['_options_upload_ftp'] or $valeurs['_dir_upload_ftp']);
 
 	if ($galerie){
 		# colonne documents ou portfolio ?
