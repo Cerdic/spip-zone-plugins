@@ -59,7 +59,12 @@ function inc_compat_cfg_dist($quoi = NULL) {
 
 function compat_cfg_defs_dist() {
 	$defs = array(
-		
+		// on fait au plus simple pour le journal
+		'journal' => 
+			'($phrase, $opt = array()) {
+				return spip_log($phrase, \'journal\');
+			}',
+					
 		'push' => 
 			'($array, $val) {
 				if($array == \'\' OR !array_push($array, $val)) return \'\';
