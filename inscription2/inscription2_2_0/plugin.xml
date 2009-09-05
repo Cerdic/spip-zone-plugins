@@ -6,7 +6,7 @@
 		&copy; cmtmt2003 - 2007/2009 - Distribu&eacute; sous licence GNU/LGPL
 	</auteur>
 
-	<version>0.71</version>
+	<version>0.72</version>
 	<version_base>0.71</version_base>
 	<etat>test</etat>
 
@@ -69,7 +69,7 @@
 	</pipeline>
 	<necessite id="cfg" version="[1.14;]" />
 	<necessite id="SPIP" version='[2.0.9;]' />
-	<necessite id='spip_bonux' version='[1.6;]' />
+	<necessite id='spip_bonux' version='[1.8.2;]' />
 	<necessite id='saisies' version='[1.1;]' />
-	<necessite id="lib:jquery-validate" src="http://plugins.jquery.com/files/jquery.validate_13.zip" />
+	<necessite id="lib:jquery-validate" src="http://plugins.jquery.com/files/jquery.validate_15.zip" />
 </plugin>
