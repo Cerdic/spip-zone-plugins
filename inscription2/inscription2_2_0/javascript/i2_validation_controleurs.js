@@ -45,3 +45,12 @@ function crayon_affiche_submit(me,id){
 		id.find('.crayon-submit').hide();
 	}
 }
+
+jQuery.validator.setDefaults({
+	errorElement:"p",
+	errorClass: "erreur",
+	errorPlacement: function(error, element) {
+		error.appendTo( element.parents("li") );
+		element.parents("li").addClass('erreur');
+	}
+});

@@ -12,11 +12,9 @@
 <script type="text/javascript">
 	var me = cQuery(".auteurs_elargi-telfaxpro-#ID_AUTEUR");
 	var id = me.crayon().find('form');
-	
+
 	function validation(){
 		var validator = cQuery(id).validate({
-			errorElement:"p",
-			errorClass:"erreur",
 			onkeyup:function(){
 				validation();
 			},
@@ -24,22 +22,10 @@
 				crayon_affiche_submit(me,id);
 				validator.defaultShowErrors();
 			},
-			errorPlacement: function(error, element) {
-				error.appendTo(element.parent("li"));
-			},
 			success: function(label){
+				label.parents('li.erreur').removeClass('erreur');
 				label.remove();
-				crayon_affiche_submit(me,id);
-			}
-		});
-		//On ajoute l'asterisque qui signale qu'un champ est obligatoire
-		id.find('input .obligatoire').each(function(){
-			if(cQuery(this).val() == ""){
-				cQuery(this).parent().addClass('error');
-				var label = '<label class="error" generated="true"><:inscription2:champ_obligatoire:></label>';
-				cQuery(this).parent("div").append(label);
-				cQuery(this).parent("div").find("label.error").show();
-				id.find('.crayon-submit').hide();
+				crayon_affiche_submit(me,id)
 			}
 		});
 		//On test le formulaire pour chercher les potentielles erreurs
@@ -60,14 +46,14 @@
 		<label><:inscription2:telephone:> : </label>
 		<input class="crayon-active text numero[(#GET{telephone_pro_obl}|oui) obligatoire]" name="#ENV{name_telephone_pro}" style="width:#ENV{largeur}px;" value="[(#TELEPHONE_PRO**|entites_html)]" />
 		</li>]
-	
+
 		[(#CONFIG{inscription2/mobile_pro_fiche_mod}|oui)
 		[(#CONFIG{inscription2/mobile_pro_obligatoire}|=={on}|oui)#SET{mobile_pro_obl,true}]
 		[(#GET{mobile_pro_obl}|?{<li class="obligatoire">,<li>})]
 		<label><:inscription2:mobile:> : </label>
 		<input class="crayon-active text numero[(#GET{mobile_pro_obl}|oui) obligatoire]" name="#ENV{name_mobile_pro}" style="width:#ENV{largeur}px;" value="[(#MOBILE_PRO**|entites_html)]" />
 		</li>]
-	
+
 		[(#CONFIG{inscription2/fax_pro_fiche_mod}|oui)
 		[(#CONFIG{inscription2/fax_pro_obligatoire}|=={on}|oui)#SET{fax_pro_obl,true}]
 		[(#GET{fax_pro_obl}|?{<li class="obligatoire">,<li>})]

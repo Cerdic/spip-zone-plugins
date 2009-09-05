@@ -16,11 +16,9 @@
 <script type="text/javascript">
 	var me = cQuery(".auteurs_elargi-pays_pro-#ID_AUTEUR");
 	var id = me.crayon().find('form');
-	
+
 	function validation(){
 		var validator = cQuery(id).validate({
-			errorElement:"p",
-			errorClass: "erreur",
 			onkeyup:function(){
 				validation();
 			},
@@ -28,22 +26,10 @@
 				validator.defaultShowErrors();
 				crayon_affiche_submit(me,id);
 			},
-			errorPlacement: function(error, element) {
-				error.appendTo(element.parent("li"));
-			},
 			success: function(label){
+				label.parents('li.erreur').removeClass('erreur');
 				label.remove();
 				crayon_affiche_submit(me,id)
-			}
-		});
-		id.find('.obligatoire input').each(function(){
-			if(cQuery(this).val() == ""){
-				cQuery(this).addClass('error');
-				var id_label = cQuery(this).attr('name');
-				var erreur = '<p class="error" generated="true"><:inscription2:champ_obligatoire:></p>';
-				cQuery(this).parent("div").append(erreur);
-				cQuery(this).parent("div").find("p.error").show();
-				id.find('.crayon-submit').hide();
 			}
 		});
 		//On test le formulaire pour chercher les potentielles erreurs
@@ -59,7 +45,7 @@
 	<ul>
 		[(#CONFIG{inscription2/pays_pro_fiche_mod}|oui)
 		[(#GET{pays_pro_obl}|?{<li class="obligatoire">,<li>})]
-			<label><:inscription2:pays_pro:></label> 
+			<label><:inscription2:pays_pro:></label>
 			#SET{id,#PAYS_PRO}
 			<select class="crayon-active text[(#GET{pays_pro_obl}|oui) obligatoire]" name="#ENV{name_pays_pro}" style="width:#ENV{largeur}px;"[(#GET{pays_pro_obl}|oui) onchange="validation()"]>
 				<INCLURE{fond=prive/listes/select_pays}{id=#GET{id}}>

@@ -9,14 +9,12 @@
 <BOUCLE_b(AUTEURS_ELARGIS){id_auteur=#ENV{id_auteurs_elargi}}{tout}>
 [<script type="text/javascript" src="(#URL_PAGE{crayons_validation.js}|parametre_url{lang,#ENV{lang}})"></script>]
 <script type="text/javascript">
-		
+
 	var me = cQuery(".auteurs_elargi-nomcomplet-#ID_AUTEUR");
 	var id = me.crayon().find('form');
-	
+
 	function validation(){
 		var validator = cQuery(id).validate({
-			errorElement:"p",
-			errorClass: "erreur",
 			onkeyup:function(){
 				validation();
 			},
@@ -24,12 +22,10 @@
 				crayon_affiche_submit(me,id);
 				validator.defaultShowErrors();
 			},
-			errorPlacement: function(error, element) {
-				error.appendTo( element.parent("li") );
-			},
 			success: function(label){
+				label.parents('li.erreur').removeClass('erreur');
 				label.remove();
-				crayon_affiche_submit(me,id);
+				crayon_affiche_submit(me,id)
 			},
 			rules: {
 				#ENV{name_nom_famille}: {
@@ -50,17 +46,6 @@
 				}
 			}
 		});
-		//On ajoute l'asterisque qui signale qu'un champ est obligatoire
-		id.find('.obligatoire input').each(function(){
-			if(cQuery(this).val() == ""){
-				cQuery(this).addClass('error');
-				var id_label = cQuery(this).attr('name');
-				var label = '<label class="error" generated="true"><:inscription2:champ_obligatoire:></label>';
-				cQuery(this).parent("div").append(label);
-				cQuery(this).parent("div").find("label.error").show();
-				id.find('.crayon-submit').hide();
-			}
-		});
 		//On test le formulaire pour chercher les potentielles erreurs
 		validator.form();
 		crayon_affiche_submit(me,id);
@@ -78,7 +63,7 @@
 				<label><:inscription2:nom_famille:></label>
 				<input class="crayon-active text[(#GET{nom_famille_obl}|oui) obligatoire]" name="#ENV{name_nom_famille}" style="width:#ENV{largeur}px;" value="[(#NOM_FAMILLE**|entites_html)]" />
 			</li>]
-		
+
 			[(#CONFIG{inscription2/prenom_fiche_mod}|oui)
 			[(#CONFIG{inscription2/prenom_obligatoire}|=={on}|oui)#SET{prenom_obl,true}]
 			[(#GET{prenom_obl}|=={true}|?{<li class="obligatoire">,<li>})]
