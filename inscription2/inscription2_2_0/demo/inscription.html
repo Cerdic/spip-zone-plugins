@@ -1,3 +1,16 @@
+[(#REM)
+
+	Ce squelette est ici à titre d'exemple
+	Il est dans un sous répertoire afin de ne pas pouvoir être appelé par
+	n'importe qui dans le cas où il ne serait pas utilisé sur le site.
+
+	Pour l'utiliser directement sur votre site, copiez le simplement dans votre
+	dossier de squelettes
+
+	Un webmestre peut l'appeler de la sorte spip.php?page=demo/inscription
+	afin de le tester
+
+]
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
 <head>
@@ -18,7 +31,7 @@
 		<div class="cartouche">
 			<h1 class="invisible"><:inscription2:formulaire_inscription:></h1>
 		</div>
-		
+
 		<div class="texte">
 			#FORMULAIRE_INSCRIPTION2
 		</div>
@@ -32,7 +45,7 @@
         <INCLURE{fond=inc-rubriques}{id_rubrique}>
 
     </div><!--#navigation-->
-    
+
     [(#REM) Menu de navigation laterale ]
     <div id="extra">
 
@@ -47,7 +60,7 @@
             </ul>
         </div>
         </B_articles_rubrique>
-        
+
     </div><!--#extra-->
 
 	[(#REM) Pied de page ]
