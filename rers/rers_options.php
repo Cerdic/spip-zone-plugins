@@ -46,7 +46,10 @@
 		. "'>"
 		. "Modifier vos informations personnelles"
 		. "</a></li>" 
-		. "<li><a href='?exec=rers_aide'>Aide : Guide du rédacteur</a></li>"
+		. "<li><a href='"
+		.find_in_path('aide_rers/guide_redacteur.pdf')
+		."'>Guide du rédacteur (PDF)</a></li>"
+		. "<li><a href='/?auteur$rers_auteur_webmestre'>Question au webmestre</a></li>"
 		. "<li>Message privé à un adhérent&nbsp;: cliquer sur l'icône <img src='/prive/images/m_envoi.gif'/> à côté de son nom </li>"
 		. "</ul>"
 		. "</div></div>";

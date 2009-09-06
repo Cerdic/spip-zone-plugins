@@ -1,5 +1,6 @@
 <?php
 // rers page d'aide aux adhérents
+//  INUTILE depuis son remplacement en sept 2009 par un fichier PDF.  !!!!!!!!
 
 // doc : http://programmer.spip.org/Contenu-d-un-fichier-exec
 
