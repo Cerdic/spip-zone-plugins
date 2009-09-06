@@ -26,12 +26,10 @@
 				<icon>
 				  img_pack/csv2spip-24.png
 				</icon>
-        <!-- Definitions des fonctions qui s'inserent dans les pipelines -->
         <pipeline>
         		<nom>ajouter_boutons</nom>
             <inclure>csv2spip_pipelines.php</inclure>
         </pipeline>
-        <!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.        -->
-
-	<necessite id="SPIP" version="[2.0.0;]" />
+		<necessite id="SPIP" version="[2.0.0;]" />
+		<install>inc/csv2spip_install.php</install>
 </plugin>

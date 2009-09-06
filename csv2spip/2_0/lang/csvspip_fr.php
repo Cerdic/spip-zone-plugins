@@ -41,8 +41,8 @@
     'err_etape1.1_fin' => ' &agrave; &eacute;chou&eacute; : veuillez recommencer. Code d\'erreur :',
     'err_etape1.2_debut' => 'Etape 1.2 :</strong> la copie du fichier ',
     'err_etape1.2_fin' => ' &agrave; &eacute;chou&eacute;, veuillez recommencer. Fichier destination : ',
-    'err_etape2.1' => '<strong>Etape 2.1 :</strong> erreur lors de la cr&eacute;ation de la table temporaire "tmp_auteur"',
-    'err_etape2.2' => '<strong>Etape 2.2 :</strong> erreur(s) lors de l\'int&eacute;gration des utilisateurs dans la base temporaire "tmp_auteurs" : ',
+    'err_etape2.1' => '<strong>Etape 2.1 :</strong> erreur lors du vidage de la table temporaire "spip_tmp_csv2spip"',
+    'err_etape2.2' => '<strong>Etape 2.2 :</strong> erreur(s) lors de l\'int&eacute;gration des utilisateurs dans la base temporaire "spip_tmp_csv2spip" : ',
     'err_etape2.1' => '<strong>Etape 2.1 :</strong> erreur(s) lors de la lecture de la premi&egrave;re ligne du fichier (r&eacute;f&eacute;rence des colonnes) : ',
     'err_etape3.1' => '<strong>Etape 3.1 :</strong> erreur(s) lors de la cr&eacute;ation des rubriques des sous-groupes d\'administrateurs : 
     						 		 <br>Il manque le(s) nom(s) de colonne(s) suivant(s) : ',    
