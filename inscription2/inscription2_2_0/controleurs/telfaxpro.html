@@ -40,21 +40,21 @@
 <fieldset[ style="(#ENV{style})"]>
 	<legend><:inscription2:vos_contacts_professionnels:></legend>
 	<ul>
-		[(#CONFIG{inscription2/telephone_pro_fiche_mod}|oui)
+		[(#CONFIG{inscription2/telephone_pro_fiche_mod}|=={on}|oui)
 		[(#CONFIG{inscription2/telephone_pro_obligatoire}|=={on}|oui)#SET{telephone_pro_obl,true}]
 		[(#GET{telephone_pro_obl}|?{<li class="obligatoire">,<li>})]
 		<label><:inscription2:telephone:> : </label>
 		<input class="crayon-active text numero[(#GET{telephone_pro_obl}|oui) obligatoire]" name="#ENV{name_telephone_pro}" style="width:#ENV{largeur}px;" value="[(#TELEPHONE_PRO**|entites_html)]" />
 		</li>]
 
-		[(#CONFIG{inscription2/mobile_pro_fiche_mod}|oui)
+		[(#CONFIG{inscription2/mobile_pro_fiche_mod}|=={on}|oui)
 		[(#CONFIG{inscription2/mobile_pro_obligatoire}|=={on}|oui)#SET{mobile_pro_obl,true}]
 		[(#GET{mobile_pro_obl}|?{<li class="obligatoire">,<li>})]
 		<label><:inscription2:mobile:> : </label>
 		<input class="crayon-active text numero[(#GET{mobile_pro_obl}|oui) obligatoire]" name="#ENV{name_mobile_pro}" style="width:#ENV{largeur}px;" value="[(#MOBILE_PRO**|entites_html)]" />
 		</li>]
 
-		[(#CONFIG{inscription2/fax_pro_fiche_mod}|oui)
+		[(#CONFIG{inscription2/fax_pro_fiche_mod}|=={on}|oui)
 		[(#CONFIG{inscription2/fax_pro_obligatoire}|=={on}|oui)#SET{fax_pro_obl,true}]
 		[(#GET{fax_pro_obl}|?{<li class="obligatoire">,<li>})]
 		<label><:inscription2:fax:> : </label>

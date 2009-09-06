@@ -40,11 +40,11 @@
 <fieldset[ style="(#ENV{style})"]>
 	<legend><:inscription2:adresse:></legend>
 	<ul>
-		[(#CONFIG{inscription2/adresse_fiche_mod}|oui)
+		[(#CONFIG{inscription2/adresse_fiche_mod}|=={on}|oui)
 		[(#CONFIG{inscription2/adresse_obligatoire}|=={on}|oui)#SET{adresse_obl, true}]
 		[(#GET{adresse_obl}|?{<li class="obligatoire">,<li>})]
 			<label><:inscription2:adresse:></label>
-			<textarea class="crayon-active text adresse[(#GET{adresse_obl}|oui) obligatoire]" name="#ENV{name_adresse}" style="width:#ENV{largeur}px;">[(#ADRESSE**|entites_html)]</textarea><br />
+			<textarea class="crayon-active text adresse[(#GET{adresse_obl}|oui) obligatoire]" name="#ENV{name_adresse}" style="width:#ENV{largeur}px;">[(#ADRESSE**|entites_html)]</textarea>
 		</li>]
 	</ul>
 </fieldset>

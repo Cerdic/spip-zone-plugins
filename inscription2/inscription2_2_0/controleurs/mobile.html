@@ -37,7 +37,7 @@
 </script>
 <fieldset[ style="(#ENV{style})"]>
 	<ul>
-		[(#CONFIG{inscription2/mobile_fiche_mod}|oui)
+		[(#CONFIG{inscription2/mobile_fiche_mod}|=={on}|oui)
 		[(#CONFIG{inscription2/mobile_obligatoire}|=={on}|oui)#SET{mobile_obl, true}]
 		[(#GET{mobile_obl}|?{<li class="obligatoire">,<li>})]
 		<label><:inscription2:mobile:> : </label>
