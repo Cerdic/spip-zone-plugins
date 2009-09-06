@@ -14,32 +14,33 @@
 [<script type="text/javascript" src="(#URL_PAGE{crayons_validation.js}|parametre_url{lang,#ENV{lang}})"></script>]
 
 <script type="text/javascript">
-	var me = cQuery(".auteurs_elargi-pays_pro-#ID_AUTEUR");
-	var id = me.crayon().find('form');
+	if (typeof cQuery.fn.validate == "function") {
+		var me = cQuery(".auteurs_elargi-pays_pro-#ID_AUTEUR");
+		var id = me.crayon().find('form');
 
-	function validation(){
-		var validator = cQuery(id).validate({
-			onkeyup:function(){
-				validation();
-			},
-			showErrors: function(errors, errorList) {
-				validator.defaultShowErrors();
-				crayon_affiche_submit(me,id);
-			},
-			success: function(label){
-				label.parents('li.erreur').removeClass('erreur');
-				label.remove();
-				crayon_affiche_submit(me,id)
-			}
-		});
-		//On test le formulaire pour chercher les potentielles erreurs
-		validator.form();
-		crayon_affiche_submit(me,id);
+		function validation(){
+			var validator = cQuery(id).validate({
+				onkeyup: function(){
+					validation();
+				},
+				showErrors: function(errors, errorList){
+					validator.defaultShowErrors();
+					crayon_affiche_submit(me, id);
+				},
+				success: function(label){
+					label.parents('li.erreur').removeClass('erreur');
+					label.remove();
+					crayon_affiche_submit(me, id)
+				}
+			});
+			//On test le formulaire pour chercher les potentielles erreurs
+			validator.form();
+			crayon_affiche_submit(me, id);
+		}
+		//On ajoute l'asterisque qui signale qu'un champ est obligatoire
+		id.find('.obligatoire label').not('.error').append('*');
+		setTimeout('validation()', 500);
 	}
-	//On ajoute l'asterisque qui signale qu'un champ est obligatoire
-	id.find('.obligatoire label').not('.error').append('*');
-	setTimeout('validation()',500);
-
 </script>]
 <fieldset[ style="(#ENV{style})"]>
 	<ul>
