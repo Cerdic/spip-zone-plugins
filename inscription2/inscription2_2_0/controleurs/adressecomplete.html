@@ -36,7 +36,7 @@
 			crayon_affiche_submit(me, id);
 		}
 		//On ajoute l'asterisque qui signale qu'un champ est obligatoire
-		id.find('.obligatoire label').not('.error').append('*');
+		id.find('.obligatoire label').append('*');
 		setTimeout('validation()', 500);
 	}
 </script>
