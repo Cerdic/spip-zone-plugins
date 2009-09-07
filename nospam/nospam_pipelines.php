@@ -9,6 +9,31 @@
 // pour verifier le nobot et le jeton sur un formulaire, l'ajouter a cette globale
 $GLOBALS['formulaires_no_spam'][] = 'forum';
 
+
+/**
+ * Ajouter le champ de formulaire 'nobot' au besoin
+ *
+ * @param array $flux
+ * @return array
+ */
+function nospam_recuperer_fond($flux){
+	// determiner le nom du formulaire
+	$fond = $flux['args']['fond'];
+	if (false !== $pos = strpos($fond, 'formulaires/')) {
+		$form = substr($fond, $pos + 12);
+		if (in_array($form, $GLOBALS['formulaires_no_spam'])){
+			// on ajoute le champ 'nobot' si pas present dans le formulaire
+			$texte = &$flux['data']['texte'];
+			if ((false === strpos($texte, 'name="nobot"'))
+			and (false !== $pos = strpos($texte, '</form>'))) {
+				$nobot = recuperer_fond("inclure/nobot", array('nobot'=>''));
+				$texte = substr_replace($texte, $nobot, $pos, 0);
+			}
+		}
+	}
+	return $flux;
+}
+
 /**
  * Ajouter un jeton temporaire lie a l'heure et a l'IP pour limiter la reutilisation possible du formulaire
  *
@@ -17,7 +42,7 @@ $GLOBALS['formulaires_no_spam'][] = 'forum';
  */
 function nospam_formulaire_charger($flux){
 	$form = $flux['args']['form'];
-	if (in_array($form,$GLOBALS['formulaires_no_spam'])){
+	if (in_array($form, $GLOBALS['formulaires_no_spam'])){
 		include_spip("inc/nospam");
 		$jeton = creer_jeton($form);
 		$flux['data']['_hidden'] .= "<input type='hidden' name='_jeton' value='$jeton' />";
@@ -33,10 +58,9 @@ function nospam_formulaire_charger($flux){
  */
 function nospam_formulaire_verifier($flux){
 	$form = $flux['args']['form'];
-	if (in_array($form,$GLOBALS['formulaires_no_spam'])){
+	if (in_array($form, $GLOBALS['formulaires_no_spam'])){
 		include_spip("inc/nospam");
 		$jeton = _request('_jeton');
-		
 		// le jeton prend en compte l'heure et l'ip de l'internaute
 		if (_request('nobot') // trop facile !
 		OR (!verifier_jeton($jeton, $form))){
