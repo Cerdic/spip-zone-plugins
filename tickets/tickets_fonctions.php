@@ -134,5 +134,10 @@ function tickets_icone_severite ($niveau) {
 	return $img;
 }
 
+if(!function_exists('barre_typo')){
+	function barre_typo(){
+		return;
+	}
+}
 
 ?>

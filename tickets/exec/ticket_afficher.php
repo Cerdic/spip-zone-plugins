@@ -73,7 +73,7 @@ function tickets_affiche($id_ticket, $row){
 	  . debut_droite('',true);;
 
 	$actions =
-	  ($flag_editable ? bouton_modifier_tickets($id_ticket, $modif, _T('ticket:avis_projet_modifie', $modif), chemin('prive/images/projet-24.gif'), "edit.gif",$spip_lang_right) : "");
+	  ($flag_editable ? bouton_modifier_tickets($id_ticket, $modif, _T('ticket:avis_projet_modifie', $modif), _chemin('prive/images/projet-24.gif'), "edit.gif",$spip_lang_right) : "");
 
 	$haut =
 		"<div class='bandeau_actions'>$actions</div>"
@@ -120,7 +120,7 @@ function bouton_modifier_tickets($id_ticket, $flag_modif, $mode, $ip, $im, $alig
 		return icone_inline(_T('tickets:icone_modifier_ticket'), generer_url_ecrire("ticket_editer","id_ticket=$id_ticket"), $ip, $im, $align, false)
 		. "<span class='arial1 spip_small'>$mode</span>";
 	}
-	else return icone_inline(_T('tickets:icone_modifier_ticket'), generer_url_ecrire("ticket_editer","id_ticket=$id_ticket"), chemin("imgs/bugs.png"), "edit.gif", $align);
+	else return icone_inline(_T('tickets:icone_modifier_ticket'), generer_url_ecrire("ticket_editer","id_ticket=$id_ticket"), _chemin("imgs/bugs.png"), "edit.gif", $align);
 }
 
 // http://doc.spip.org/@afficher_corps_articles
