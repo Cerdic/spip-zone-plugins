@@ -103,7 +103,7 @@ function plugin_get_infos_maj($p, $force = false) {
 		$infos['zip_trac'] = _MAJ_ZIP . $p2. '.zip';
 		// nom de l'archive recemment installee par chargeur
 		$ok = lire_fichier(sous_repertoire(_DIR_CACHE, 'chargeur').$p2.'/install.log', $log);
-		$infos['zip_log'] = ($ok && preg_match(',[\n\r]source: *(.*)(?:[\n\r]|$),i', $log, $regs))
+		$infos['zip_log'] = ($ok && preg_match(',[\n\r]source: *([^\n\r]+),msi', $log, $regs))
 			?$regs[1]:'';
 	} else $infos['zip_log'] = $infos['zip_trac'] = '';
 	// fichier svn.revision
