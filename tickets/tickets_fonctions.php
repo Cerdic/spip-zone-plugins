@@ -115,7 +115,7 @@ function tickets_icone_severite ($niveau) {
 	return $img;
 }
 
-function tickets_liste_statuts($connecte = true){
+function tickets_liste_statut($connecte = true){
 	$statuts = array(
 		"redac" => "en cours de r&eacute;daction",
 		"ouvert" => "ouvert et discut&eacute",
@@ -129,7 +129,7 @@ function tickets_liste_statuts($connecte = true){
 }
 
 
-function tickets_liste_types(){
+function tickets_liste_type(){
 	return array(
 		1 => "probl&egrave;me",
 		2 => "am&eacute;lioration",
