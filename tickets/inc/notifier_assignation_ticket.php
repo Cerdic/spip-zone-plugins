@@ -7,7 +7,7 @@
 		
 		$nom_auteur = sql_getfetsel("nom","spip_auteurs","id_auteur=".intval($datas['id_assigne']));
 		
-		include_spip('inc/tickets_filtres');
+		include_spip('tickets_fonctions');
 		$envoyer_mail = charger_fonction('envoyer_mail','inc');
 		
 		$nom_site = $GLOBALS["meta"]["nom_site"];
