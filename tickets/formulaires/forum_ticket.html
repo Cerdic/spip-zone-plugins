@@ -3,7 +3,7 @@
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	[(#ENV{editable})
 	<form method='post' action='#ENV{action}'><div>
-		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<fieldset>
@@ -16,7 +16,7 @@
 						[(#VAL{text_area}|barre_typo{#LANGUE})]
 					]
 					[<p class='erreur_message'>(#ENV**{erreurs}|table_valeur{texte})</p>]
-					<textarea name='texte' id='text_area' class='barre_inserer' rows='20' cols='50'[(#ENV**{browser_caret,''})]>[(#ENV**{texte})]</textarea>
+					<textarea name='texte' id='text_area' class='barre_inserer inserer_barre_forum' rows='20' cols='50'[(#ENV**{browser_caret,''})]>[(#ENV**{texte})]</textarea>
 				</li>
 			</ul>
 		</fieldset>
