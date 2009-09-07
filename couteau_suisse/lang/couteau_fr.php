@@ -7,6 +7,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// 2
 	'2pts' => '@objet@&nbsp;:',
+	'maj_rev_ko' => "La [r&eacute;vision distante->@url@] n'a pas pu &ecirc;tre trouv&eacute;e.",
+	'maj_rev_ok' => 'La [r&eacute;vision @revision@->@url@] est disponible.',
+	'maj_ok' => 'Ce [plugin->@zip@] semble [&agrave; jour->@url@].',
+	'maj_svn' => 'Ce plugin SVN semble [&agrave; jour->@url@].',
+	'maj_rev' => "R&eacute;v.&nbsp;@revision@",
+	'maj_actu' => 'Forcer l\'actualisation',
+	'maj_verif2' => 'Attention : apr&egrave;s avoir cliqu&eacute; sur le bouton ci-dessus, v&eacute;rifiez bien que l\'archive t&eacute;l&eacute;charg&eacute;e correspond bien au plugin qu\'il vous faut mettre &agrave; jour.',
+	'maj_maj' => 'Mettre &agrave; jour le plugin s&eacute;lectionn&eacute;',
+	'maj_liste' => 'Liste des plugins d&eacute;tect&eacute;s :',
+	'plug_actifs' => 'Plugins actifs',
+	'plug_inactifs' => 'Plugins inactifs',
+	'maj_verif' => 'V&eacute;rifiez pr&eacute;alablement l\'archive qui vous convient :',
 
 	// A
 	'attente_confirmation' => 'En attente de confirmation',
