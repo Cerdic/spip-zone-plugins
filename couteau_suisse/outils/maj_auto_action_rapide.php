@@ -116,7 +116,7 @@ function plugin_get_infos_maj($p, $force = false) {
 		?intval($regs[1]):version_svn_courante(_DIR_PLUGINS.$p);
 	if($infos['svn'] = $rev_local<0) { 
 		// fichier SVN
-		if (lire_fichier(_DIR_PLUGINS.$p.'/.svn/entries', $svn) && preg_match(',('.preg_quote(_MAJ_SVN_TRAC).'[^\n\r]*),ms', $svn, $regs))
+		if (lire_fichier(_DIR_PLUGINS.$p.'/.svn/entries', $svn) && preg_match(',('.preg_quote(_MAJ_SVN_TRAC).'[^\n\r]+),ms', $svn, $regs))
 			$url_origine = str_replace(_MAJ_SVN_TRAC, _MAJ_LOG_DEBUT, $regs[1]);
 		$infos['zip_trac'] = 'SVN';
 	}
