@@ -1,7 +1,7 @@
 /* le nuage en ul */
 ul.nuage		{ margin:0; padding: 0; list-style: none; }
 ul.nuage li		{ display: inline; line-height:2em; }
-ul.nuage li a	{ white-space: nowrap; }
+ul.nuage li a	{ display:inline; white-space: nowrap; }
 ul.nuage span.frequence { display: block; float: left; height: 0; overflow: auto; width: 0; }
 
 /* le nuage en dl (modele nuage_dl) */
