@@ -28,7 +28,9 @@
 			#SET{saisies, #ARRAY{0,projet,1,composant,2,version,3,jalon}}
 			<BOUCLE_saisies(POUR) {tableau #GET{saisies}}>
 			[(#VALEUR|tickets_champ_optionnel_actif|oui) 
-				[(#SAISIE{selection, #VALEUR label=[(#VAL{tickets:champ_}|concat{#VALEUR}|_T)], datas=[(#VALEUR|tickets_champ_optionnel_actif)]})] 
+				[(#SAISIE{selection, #VALEUR, 
+					label=[(#VAL{tickets:champ_}|concat{#VALEUR}|_T)], 
+					datas=[(#VALEUR|tickets_champ_optionnel_actif)]})] 
 			] 
 			</BOUCLE_saisies>
 			
