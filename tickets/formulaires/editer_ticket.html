@@ -25,29 +25,12 @@
 				label=<:tickets:champ_severite:>,
 				datas=[(#VAL|tickets_liste_severite)]})]
 
-
-			[(#REM) 4 fois la meme chose ]
-			
-			[(#VAL{projet}|tickets_champ_optionnel_actif|oui)
-				[(#SAISIE{selection, projet,
-					label=<:tickets:champ_projet:>,
-					datas=[(#VAL{projet}|tickets_champ_optionnel_actif)]})]
-			]
-			[(#VAL{composant}|tickets_champ_optionnel_actif|oui)
-				[(#SAISIE{selection, composant,
-					label=<:tickets:champ_composant:>,
-					datas=[(#VAL{composant}|tickets_champ_optionnel_actif)]})]
-			]
-			[(#VAL{version}|tickets_champ_optionnel_actif|oui)
-				[(#SAISIE{selection, version,
-					label=<:tickets:champ_version:>,
-					datas=[(#VAL{version}|tickets_champ_optionnel_actif)]})]
-			]
-			[(#VAL{jalon}|tickets_champ_optionnel_actif|oui)
-				[(#SAISIE{selection, jalon,
-					label=<:tickets:champ_jalon:>,
-					datas=[(#VAL{jalon}|tickets_champ_optionnel_actif)]})]
-			]
+			#SET{saisies, #ARRAY{0,projet,1,composant,2,version,3,jalon}}
+			<BOUCLE_saisies(POUR) {tableau #GET{saisies}}>
+			[(#VALEUR|tickets_champ_optionnel_actif|oui) 
+				[(#SAISIE{selection, #VALEUR label=[(#VAL{tickets:champ_}|concat{#VALEUR}|_T)], datas=[(#VALEUR|tickets_champ_optionnel_actif)]})] 
+			] 
+			</BOUCLE_saisies>
 			
 			[(#SAISIE{textarea, texte,
 				label=<:tickets:champ_description:>,
