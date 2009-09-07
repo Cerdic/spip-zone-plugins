@@ -5,7 +5,7 @@
 	<auteur>Stephane Laurent (Bill)</auteur>
 	<auteur>Yoann Nogues (Zerax)</auteur>
 	<lien>http://www.spip-contrib.net/Des-mots-clefs-partout</lien>
-	<version>0.5</version>
+	<version>0.5.1</version>
 	<etat>test</etat>
 	<necessite id="SPIP" version="[2.0;]" />
 	<description>

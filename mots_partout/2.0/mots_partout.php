@@ -10,14 +10,14 @@
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
  *    This program is free software; you can redistribute it and/or modify *
- *    it under the terms of the GNU General Public License as published by * 
+ *    it under the terms of the GNU General Public License as published by *
  *    the Free Software Foundation.                                        *
 \***************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function MotsPartout_ajouterBoutons($boutons_admin) {
-  
+
 	//if (autoriser('mottous','MotsPartout')) {
 	  // on voit les bouton dans la barre "edition"
 	  $boutons_admin['naviguer']->sousmenu["mots_partout"]= new Bouton(
@@ -40,4 +40,3 @@ function MotsPartout_afficherMots($flux) {
 	return $flux;
 }
 
-?>

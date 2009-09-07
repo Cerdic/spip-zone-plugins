@@ -366,8 +366,8 @@ _T('motspartout:stricte').
   if(count($warnings) > 0) {
 	debut_cadre_relief('',false,'',_T('motspartout:ATTENTION'));
 	echo '<div class="liste"><table border=0 cellspacing=0 cellpadding=3 width=\"100%\">';
-	$largeurs = array('100%');
-	$styles = array( 'arial11');
+	//$largeurs = array('100%');
+	$styles = array( array('arial11','100%'));
 	afficher_liste($largeurs, $warnings, $styles);
 	echo '</table>';
 	echo '</div>';

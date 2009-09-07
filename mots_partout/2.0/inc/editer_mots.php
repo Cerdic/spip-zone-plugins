@@ -51,23 +51,14 @@ function inc_editer_mots($objet, $id_objet, $cherche_mot, $select_groupe, $flag,
 	}
 
 	//Ceci n'est plus vraiment utile dans le cas de la squeletisation
+	//on caclcule le nombre de mots liés a l'objet
 	$cpt = sql_countsel("spip_mots AS mots, spip_mots_$table AS lien", "lien.$table_id=$id_objet AND mots.id_mot=lien.id_mot");
-
 	if (!$cpt) {
 		if (!$flag) return;
-		$cpt = sql_fetch(editer_mots_droits("COUNT(*) AS n", "$table = 'oui'"));
-
+    //sinon	on calcule s'il y a des groupes de mots permettant la liaison avec la table de l'objet
+		$cpt = sql_fetch(editer_mots_droits("COUNT(*) AS n", "tables_liees REGEXP '(^|,)$table($|,)'"));
 		if (!$cpt['n']) return;
 	}
-	//////////////////////
-
-	//preparation de l'utilisation de recuperer_fond a ce niveau
-	//definition du contexte
-
-	//$squel=recup_squelette_motspartout("listemot_".$table);
-	//$contexte_liste=array("table"=>$table,"id_objet"=>$id_objet,"visible"=>$visible,"simplifie"=>$simplifie);
-	//$res=recuperer_fond($squel,$contexte_liste);
-
 
 	//
 	// Preparer l'affichage
@@ -76,7 +67,9 @@ function inc_editer_mots($objet, $id_objet, $cherche_mot, $select_groupe, $flag,
 	// La reponse
 	$reponse = '';
 	$modifier = false;
+
 	if ($flag AND $cherche_mot) {
+
 		list($reponse, $nouveaux_mots) = recherche_mot_cle($cherche_mot, $select_groupe, $objet, $id_objet, $table, $table_id, $url_base);
 		foreach($nouveaux_mots as $nouv_mot) {
 			if ($nouv_mot!='x') {
@@ -204,20 +197,21 @@ function recherche_mot_cle($cherche_mots, $id_groupe, $objet, $id_objet, $table,
 function afficher_mots_cles($flag_editable, $objet, $id_objet, $table, $table_id, $url_base, $visible)
 {
 
+
 	$requete = array('SELECT' => "mots.id_mot, mots.titre , mots.id_groupe", 'FROM' => "spip_mots AS mots, spip_mots_$table AS lien", 'WHERE' => "lien.$table_id=$id_objet AND mots.id_mot=lien.id_mot", 'GROUP BY' => "mots.type, mots.titre",  'ORDER BY' => "mots.type, mots.titre");
 
 	$cle = http_img_pack('petite-cle.gif', "", "width='23' height='12'");
 	$ret = generer_url_retour($url_base, "$table_id=$id_objet#mots");
-	$largeurs = array('25', '', '', '');
-	$styles = array('arial11', 'arial2', 'arial2', 'arial1');
+	$styles = array(array('arial11','25'),array('arial2'),array('arial2'),array('arial1'));
+
 
 	$presenter_liste = charger_fonction('presenter_liste', 'inc');
 
 	// cette variable est passe par reference et recevra les valeurs du champ indique
 	$les_mots = 'id_mot';
-	$res = 	$presenter_liste($requete, 'editer_mots_un', $les_mots, array($cle, $flag_editable, $id_objet, $objet, $ret, $table, $table_id, $url_base), false, $largeurs, $styles);
+	$res = 	$presenter_liste($requete, 'editer_mots_un', $les_mots, array($cle, $flag_editable, $id_objet, $objet, $ret, $table, $table_id, $url_base), false, $styles);
 
-	if ($flag_editable)
+	if ($flag_editable )
 	  $res .= formulaire_mots_cles($id_objet, $les_mots, $table, $table_id, $url_base, $visible, $objet);
 
 	return $res;
@@ -265,30 +259,36 @@ function formulaire_mots_cles($id_objet, $les_mots, $table, $table_id, $url_base
 
 	$id_groupes_vus = array();
 	$flag_tous = 1;
+
 	if ($cond_mots_vus) {
 
 		$droit = substr($GLOBALS['visiteur_session']['statut'],1);
 		$q = sql_select("M.id_groupe, G.$droit", "spip_mots AS M LEFT JOIN spip_groupes_mots AS G ON M.id_groupe=G.id_groupe", $cond_mots_vus, "M.id_groupe");
 		while($r = sql_fetch($q)) {
+
 			$id_groupes_vus[]= $r['id_groupe'];
-			$flag_tous &= ($r[$droit] === 'oui');
+			$flag_tous = ($r[$droit] === 'oui');
 		}
 		$cond_id_groupes_vus = (" OR (unseul = 'oui' AND " . sql_in('id_groupe', $id_groupes_vus, 'NOT')." ) ");
 	} else {
 		$cond_id_groupes_vus = '';
 	}
 
-	$nb_groupes = sql_fetch(editer_mots_droits('count(*) AS n', "$table = 'oui' AND obligatoire = 'oui'$cond_id_groupes_vus"));
+	$nb_groupes = sql_fetch(editer_mots_droits('count(*) AS n', "tables_liees REGEXP '(^|,)$table($|,)' $cond_id_groupes_vus"));
 	$nb_groupes = $nb_groupes['n'];
 
 	$res = debut_block_depliable($visible OR ($nb_groupes > 0),"lesmots-".$table.$id_objet);
-	if ($flag_tous AND count($les_mots)>= 3) {
+
+	//affiche le lien retirer tous les mots clefs de l'objet
+	if ($flag_tous AND count($les_mots)>= 3 ) {
 		$res .= "<div style='text-align: right' class='arial1'>"
 		  . ajax_action_auteur('editer_mots', "$id_objet,-1,$table,$table_id,$objet", $url_base, "$table_id=$id_objet", array(_T('info_retirer_mots'),''),"&id_objet=$id_objet&objet=$objet")
 		. "</div><br />\n";
 	}
+	//fin retirer tous les mots de l'objet
 
-	$result = editer_mots_droits("id_groupe,unseul,obligatoire,titre, ".sql_multi ("titre", $spip_lang), "$table = 'oui' AND (unseul != 'oui'  $cond_id_groupes_vus) ORDER BY multi");
+	//on récupére tous les groupes de mots de la racine de l'arborescence
+	$result = editer_mots_droits("id_groupe,unseul,obligatoire,titre, ".sql_multi ("titre", $spip_lang), "tables_liees REGEXP '(^|,)$table($|,)' AND (unseul != 'oui'  $cond_id_groupes_vus) AND id_parent=0 ORDER BY multi");
 
 	// Afficher un menu par groupe de mots non vu
 	$ajouter ='';
@@ -296,6 +296,7 @@ function formulaire_mots_cles($id_objet, $les_mots, $table, $table_id, $url_base
 	  (" AND " . sql_in('id_mot', $les_mots, 'NOT'));
 
 	while ($row = sql_fetch($result)) {
+
 
 	  $ancre=$table."-".$id_groupe."-".$id_objet;
 
@@ -349,6 +350,7 @@ function formulaire_mots_cles($id_objet, $les_mots, $table, $table_id, $url_base
 // http://doc.spip.org/@menu_mots
 function menu_mots($row, $id_groupes_vus, $les_mots,$ancre="")
 {
+
 	$id_groupe = $row['id_groupe'];
 
 	$n = sql_countsel("spip_mots", "id_groupe=$id_groupe" . $les_mots);
@@ -399,9 +401,9 @@ function menu_mots($row, $id_groupes_vus, $les_mots,$ancre="")
 			$res .= "<select name='nouv_mot' id='nouv_mot$id_groupe' size='1' class='fondl' $jscript>";
 
 		//on a le groupe de mots de base
-		$res .= "\n<option value='x' style='font-variant: small-caps;'>$titre</option>";
+		$res .= "\n<option value='' style='font-variant: small-caps;'>$titre</option>";
 
-		$result = sql_select("id_mot, type, titre", "spip_mots", "id_groupe =$id_groupe " . $les_mots, "", "titre");
+		$result = sql_select("id_mot, type, titre", "spip_mots", "id_groupe =$id_groupe ");
 
 
 		//on boucle sur les mots du groupe de base
@@ -411,69 +413,70 @@ function menu_mots($row, $id_groupes_vus, $les_mots,$ancre="")
 				textebrut(typo($row['titre'])) .
 				"</option>";
 		}
+
+		//ARBORESCENCE : on va rajouter dans le select les sous-groupes ainsi que leurs mots clefs
+  	$res.=select_sous_menu_groupe_mots($id_groupe,$table,1);  //gestion de la hierarchie des mots clefs
+  	$res .= "</select>&nbsp;";
+
+
 	}
-	//ARBORESCENCE : on va rajouter dans le select les sous-groupes ainsi que leurs mots clefs
-	$res.=select_sous_menu_groupe_mots($id_groupe,$table);  //gestion de la hierarchie des mots clefs
-	$res .= "</select>&nbsp;";
+
 	return array($res, _T('bouton_choisir'));
 
 }
 
 // http://doc.spip.org/@select_sous_menu_groupe_mots
-function select_sous_menu_groupe_mots($id_groupe,$table='articles',$niveau=0){
+function select_sous_menu_groupe_mots($id_groupe,$table='articles',$niveau=1){
 //fonction recursive qui permet de recuperer larborescence des groupes de mots et les mots
-return;
-	global $spip_lang,$connect_statut,$cond_id_groupes_vus;
+
+	global $spip_lang,$cond_id_groupes_vus;
 	//$query="SELECT id_groupe,titre, ".creer_objet_multi ("titre", $spip_lang)." FROM spip_groupes_mots WHERE `".$table."` = 'oui' AND ".substr($connect_statut,1)." = 'oui' ".($cond_id_groupes_vus?" AND (unseul != 'oui'   OR (unseul = 'oui' AND id_groupe NOT IN ($cond_id_groupes_vus)) )":"")." AND id_parent=".$id_groupe." ORDER BY multi";
 
-     //boucle sur les sous groupes
+    //boucle sur les sous groupes
 		//$result_sous_groupes = spip_query($query);
-
-
 
 		//hum hum
 		if(!$table) $table="articles";
 
 
-if($table!="articles" && $table!="rubriques") $cond_table=$table." = 'oui' AND ";
-else  $cond_table="tables_liees REGEXP '(^|,)$table($|,)' AND ";
+ $cond_table="tables_liees REGEXP '(^|,)$table($|,)' ";
+ $cond_table.=" AND id_parent=".$id_groupe;
 
-if($cond_id_groupes_vus){
-		$result_sous_groupes = editer_mots_droits("id_groupe,titre, ".sql_multi ("titre", $spip_lang), " (unseul != 'oui'  OR (unseul = 'oui' AND id_groupe NOT IN ($cond_id_groupes_vus))) ORDER BY multi");
+ if($cond_id_groupes_vus){
+		$result_sous_groupes = editer_mots_droits("id_groupe,titre, ".sql_multi ("titre", $spip_lang), $cond_table." AND (unseul != 'oui'  OR (unseul = 'oui' AND id_groupe NOT IN ($cond_id_groupes_vus))) ORDER BY multi");
 }else {
-  $result_sous_groupes = editer_mots_droits("id_groupe,titre, ".sql_multi ("titre", $spip_lang), "$table = 'oui' AND (unseul != 'oui'  OR (unseul = 'oui')) ORDER BY multi");
+  $result_sous_groupes = editer_mots_droits("id_groupe,titre, ".sql_multi ("titre", $spip_lang), $cond_table. "  ORDER BY multi");
 }
 
 		 while ($row = sql_fetch($result_sous_groupes)) {
+
+		   //on affiche les groupes de mots
 		     $res .= "\n<option value='" .$row['id_groupe'] .
 				"'>".str_repeat("&nbsp;&nbsp;",$niveau) .
 				textebrut(typo($row['titre'])) .
 				"</option>";
 				//BOUCLES sur les mots de chaque sous groupe
 				//$result = spip_query("SELECT id_mot, type, titre,".creer_objet_multi ("titre", $spip_lang)." FROM spip_mots WHERE id_groupe =".$row['id_groupe']." ORDER BY type, titre");
-				$result = sql_select("id_mot, type, titre", "spip_mots", "id_groupe =$id_groupe " . ($les_mots ? "AND id_mot NOT IN ($les_mots) " : '') .  "", "", "titre");
+
+
+				//on affiche les mots du groupe
+				//TODO : rajouter ici le principe des groupes de mots qui ne permettent d'avoir qu'un seul mot clef associé a l'objet
+				$result = sql_select("id_mot, type, titre","spip_mots","id_groupe =".$row['id_groupe']);
 
 				while($row2 = sql_fetch($result)) {
-    			     $res .= "\n<option value='" .$row2['id_mot'] .
+				    $res .= "\n<option value='" .$row2['id_mot'] .
     				"'>".str_repeat("&nbsp;&nbsp;",$niveau)."&nbsp;-&gt;" .
     				textebrut(typo($row2['titre'])) .
     				"</option>";
-                }
+        }
 
+        //on va afficher les sous groupes de mots du groupe
 				$res.=select_sous_menu_groupe_mots($row['id_groupe'],$table,$niveau+1);
 		 }
         return $res;
 }
 
-/*function recup_squelette_motspartout($squel){
 
-	if($fond=find_in_path($squel)) return $fond;
-	else {//on va aller chercher l'interface g�n�rale
-		$squel="fond/listemot_general";
-		return find_in_path($squel);
-	}
-
-}*/
 
 // Fonction verifiant que l'auteur a le droit de modifier un groupe de mots.
 // Fondee sur l'egalite du nom du statut et du nom du champ.
@@ -481,9 +484,13 @@ if($cond_id_groupes_vus){
 // et un table de jointure entre ca et la table des groupes de mots.
 
 // http://doc.spip.org/@editer_mots_droits
-function editer_mots_droits($select, $cond)
+function editer_mots_droits($select, $cond,$debug=false)
 {
-	
+if($debug) {
+  print_r($select);
+  print_r($cond);
+  die();
+}
 	$droit = substr($GLOBALS['visiteur_session']['statut'],1);
 	return sql_select("$select", "spip_groupes_mots", "$droit = 'oui' AND $cond");
 }
@@ -532,7 +539,7 @@ function editer_mots_un($row, $own)
 	// On recupere le typo_mot ici, et non dans le mot-cle lui-meme;
 	// sinon bug avec arabe
 
-	
+
 
 	if ($table!="documents"){ //interface simplifiée documents
 		$groupe = typo(sql_getfetsel("titre", "spip_groupes_mots", "id_groupe = $id_groupe"));
@@ -552,7 +559,7 @@ function editer_mots_un($row, $own)
 				$r =  _T('info_retirer_mot')
 			  	. "&nbsp;";
 			}
-			
+
 			$r.=http_img_pack('croix-rouge.gif', "X", " class='puce' style='vertical-align: bottom;'");
 
 			$retire = ajax_action_auteur('editer_mots', "$id_objet,$id_mot,$table,$table_id,$objet", $url_base, "$table_id=$id_objet", array($r,''),"&id_objet=$id_objet&objet=$objet");

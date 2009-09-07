@@ -60,4 +60,3 @@ if(isset($tables_jointures['spip_'.$chose])){ //si on a pas défini le type even
 }
 
 }
-?>
