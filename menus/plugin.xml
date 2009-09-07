@@ -2,8 +2,8 @@
 	<nom>Menus</nom>
 	<auteur>RastaPopoulos</auteur>
 	<licence>GPL v3</licence>
-	<version>0.2</version>
-	<version_base>0.1</version_base>
+	<version>0.5</version>
+	<version_base>0.5</version_base>
 	<etat>test</etat>
 	<description>Cr&eacute;ez enfin vos menus dans la partie priv&eacute;e !</description>
 	<lien>http://www.spip-contrib.net/Plugin-Menus</lien>

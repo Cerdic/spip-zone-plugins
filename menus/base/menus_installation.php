@@ -26,17 +26,16 @@ function menus_upgrade($nom_meta_version_base, $version_cible){
 			ecrire_meta($nom_meta_version_base, $version_actuelle=$version_cible, 'non');
 		}
 		
-		/*if (version_compare($version_actuelle,'0.5','<')){
-			include_spip('base/create');
+		if (version_compare($version_actuelle,'0.5','<')){
 			include_spip('base/abstract_sql');
 			
-			// Modification de menus
-			sql_alter('');
-						
-			// On change la version
-			echo "Mise à jour du plugin menus en version 0.5<br/>";
-			ecrire_meta($nom_meta_version_base, $version_actuelle=$version_cible, 'non');
-		}*/
+			// AJout de personalisation CSS sur un menu
+			sql_alter("TABLE spip_menus ADD COLUMN css tinytext DEFAULT '' NOT NULL");
+		}
+		
+		// On change la version
+		echo "Mise à jour du plugin menus en version $version_cible<br/>";
+		ecrire_meta($nom_meta_version_base, $version_actuelle=$version_cible, 'non');
 	
 	}
 

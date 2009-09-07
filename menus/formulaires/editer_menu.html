@@ -32,6 +32,15 @@
 								[<span class='erreur_message'>(#GET{erreurs})</span>]
 								<input type="text" class="text" name="#GET{name}" id="#GET{name}" size="40" value="#ENV{#GET{name}}" />
 							</li>
+							
+							#SET{name,css}
+							#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+							<li class="editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
+								<label for="#GET{name}"><:menus:formulaire_css:></label>
+								<div class="explication"><:menus:formulaire_css_explication:></div>
+								[<span class='erreur_message'>(#GET{erreurs})</span>]
+								<input type="text" class="text" name="#GET{name}" id="#GET{name}" size="40" value="#ENV{#GET{name}}" />
+							</li>
 						</ul>
 
 						<p class='boutons'>

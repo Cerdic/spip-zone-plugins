@@ -52,7 +52,7 @@ function formulaires_editer_menu_charger($id_menu, $nouveau){
 			// Si le menu existe on prérempli
 			if ($id_menu){
 				$menu = sql_fetsel(
-					'titre, identifiant',
+					'titre, identifiant, css',
 					'spip_menus',
 					'id_menu='.$id_menu
 				);
@@ -110,6 +110,7 @@ function formulaires_editer_menu_traiter($id_menu, $nouveau){
 	// On récupère les deux champs
 	$titre = _request('titre');
 	$identifiant = _request('identifiant');
+	$css = _request('css');
 	
 	// Si le menu existe on modifie
 	if ($id_menu = intval(_request('id_menu'))){
@@ -117,7 +118,8 @@ function formulaires_editer_menu_traiter($id_menu, $nouveau){
 			'spip_menus',
 			array(
 				'titre' => $titre,
-				'identifiant' => $identifiant
+				'identifiant' => $identifiant,
+				'css' => $css
 			),
 			'id_menu = '.$id_menu
 		);
@@ -129,6 +131,7 @@ function formulaires_editer_menu_traiter($id_menu, $nouveau){
 			array(
 				'titre' => $titre,
 				'identifiant' => $identifiant,
+				'css' => $css,
 				'id_menus_entree' => 0
 			)
 		);

@@ -23,6 +23,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'formulaire_titre' => 'Titre',
 'formulaire_identifiant' => 'Identifiant',
 'formulaire_identifiant_explication' => 'Donnez un mot-cl&eacute; unique qui vous permettra d\'appeler votre menu facilement.',
+'formulaire_css' => 'Classes CSS',
+'formulaire_css_explication' => 'Vous pouvez ajouter au menu d\'&eacute;ventuelles classes CSS suppl&eacute;mentaires.',
 'formulaire_ajouter_entree' => 'Ajouter une entr&eacute;e',
 'formulaire_modifier_entree' => 'Modifier cette entr&eacute;e',
 'formulaire_supprimer_entree' => 'Supprimer cette entr&eacute;e',
@@ -34,7 +36,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'formulaire_facultatif' => 'Facultatif',
 
 'entree_choisir' => 'Choisissez le type d\'entr&eacute;e que vous voulez ajouter :',
-'entree_css' => 'Classe CSS de l\'entr&eacute;e',
+'entree_css' => 'Classes CSS de l\'entr&eacute;e',
 'entree_titre' => 'Titre',
 'entree_url' => 'Adresse',
 'entree_type_objet' => 'Type de l\'objet',
