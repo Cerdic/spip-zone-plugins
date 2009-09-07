@@ -38,6 +38,11 @@ spip_log("action 'action_rapide' du Couteau suisse : $arg");
 		action_rapide_tri_auteurs(_request('bp_article'), abs(_request('bp_auteur')), _request('bp_auteur')>0);
 		break;
 
+	// forcer la lecture des revisions distantes de plugins
+	case 'maj_auto_forcer':
+		ecrire_meta('tweaks_maj_auto', serialize(array()));
+		ecrire_metas();
+		break;
 	// tester l'anti-spam
 	case 'test_spam':
 		// aucune action, le test est pris en charge par ?exec=action_rapide

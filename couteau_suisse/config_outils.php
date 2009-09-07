@@ -1042,6 +1042,12 @@ add_outil( array(
 	'code:jq_init' => 'jclock_init.apply(this);',
 ));
 
+add_outil( array(
+	'id' => 'maj_auto',
+	'categorie' => 'admin',
+	'version-min' => '1.9300',
+));
+
 //reglage du nombre de case pour le brouteur
 add_outil( array(
 	'id' => 'brouteur',

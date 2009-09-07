@@ -45,14 +45,14 @@ cs_log(" FIN : exec_description_outil_dist() - Appel maintenant de ajax_retour()
 
 	// retour normal des action rapides du couteau suisse : affichage du bloc au sein de la description d'un outil
 	case 'retour_normal':
-cs_log("INIT : exec_action_rapide_dist() - Preparation du retour par Ajax (donnees transmises par GET)");
+cs_log("INIT : exec_action_rapide_dist() - Preparation du 'retour normal' par Ajax (donnees transmises par GET)");
 		$script = _request('script');
 		$outil = _request('outil');
 cs_log(" -- outil = $outil - script = $script - arg = $arg");
 		cs_minipres(!preg_match('/^\w+$/', $script));
 		include_spip('inc/cs_outils');
 		$res = cs_action_rapide($outil);
-cs_log(" FIN : exec_description_outil_dist() - Appel maintenant de ajax_retour() pour afficher le formulaire de la boite privee");	
+cs_log(" FIN : exec_description_outil_dist() - Appel maintenant de ajax_retour() pour afficher le formulaire de '$outil'");	
 		ajax_retour($res);
 		break;
 
