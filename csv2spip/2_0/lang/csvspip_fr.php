@@ -113,8 +113,8 @@
     
   // O
     'ok_etape1' => '<strong>Etape 1 :</strong> t&eacute;l&eacute;chargement r&eacute;ussi du fichier ',
-    'ok_etape2.1' => '<strong>Etape 2.1 :</strong> cr&eacute;ation de la table temporaire "tmp_auteurs" = OK',
-    'ok_etape2.2' => '<strong>Etape 2.2 :</strong> int&eacute;gration des auteurs dans la base temporaire = OK ',    
+    'ok_etape2.1' => '<strong>Etape 2.1 :</strong> remise &agrave; zero de la table temporaire "spip_tmp_csv2spip" = OK',
+    'ok_etape2.2' => '<strong>Etape 2.2 :</strong> int&eacute;gration des auteurs dans la table temporaire = OK ',    
     'ok_etape3.1_debut' => '<strong>Etape 3.1 :</strong> cr&eacute;ation des rubriques admins = OK ',
     'ok_etape3.1_fin' => ' rubriques cr&eacute;&eacute;es',
     'ok_cree_rub_defaut' => 'Cr&eacute;ation de la rubrique par d&eacute;faut : ',
@@ -170,7 +170,7 @@
     'titre_page' => 'CSV2SPIP : gestion des utilisateurs de SPIP &agrave; partir de fichiers CSV',
     'titre_info' => 'plugin CSV2SPIP',
     'titre_etape1' => 'Etape 1 :</strong> t&eacute;l&eacute;chargement du fichier sur le serveur',
-    'titre_etape2' => '<strong>Etape 2 :</strong> passage des donn&eacute;es du fichier dans la base temporaire',
+    'titre_etape2' => '<strong>Etape 2 :</strong> passage des donn&eacute;es du fichier dans la table temporaire',
     'titre_etape3' => '<strong>Etape 3 :</strong> gestion des sous-groupes (rubriques et acces_groupes)',
     'titre_etape4' => '<strong>Etape 4 :</strong> traitement des utilisateurs',
     'titre_etape5' => '<strong>Etape 5 :</strong> attribution des rubriques aux administrateurs :',

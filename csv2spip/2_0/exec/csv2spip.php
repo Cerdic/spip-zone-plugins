@@ -527,288 +527,296 @@ function exec_csv2spip() {
         		}
         	}
 */         
+        }  // fin du while traitant les comptes 1 à 1
         
-        // 4.4 : gestion des suppressions
-        
-        // VERSION 2.3 de effacer les absents
-            $ch_maj = 0;
-            $eff_absv = 0;
-            $eff_absr = 0;
-            $eff_absa = 0;
-        	if ($_POST['eff_visit'] == 1) {
-        //					 $ch_maj = 1;
-                $eff_absv = 1;
-            }
-            if ($_POST['eff_redac'] == 1) {
-                $ch_maj = 1;
-        	    $eff_absr = 1;
-            }
-            if ($_POST['eff_admin'] == 1) {
-                $ch_maj = 1;
-        	    $eff_absa = 1;
-            }
-        
-        // paramétrage auteur et dossier d'archive
-        	if ($ch_maj !== 0) {
-        		  // si auteurs supprimés (pas de poubelle), récupérer l'id du rédacteur affecté aux archives + si nécessaire, créer cet auteur (groupe = poubelle)
-          	    if ($_POST['auteurs_poubelle'] != 1) {
-          		    $nom_auteur_archives = $_POST['nom_auteur_archives'];
-          			$sql615 = sql_query("SELECT id_auteur FROM $Tauteurs WHERE login = '$nom_auteur_archives' LIMIT 1");
-          			if (mysql_num_rows($sql615) > 0) {
-          			    $data615 = mysql_fetch_array($sql615);
-          				$id_auteur_archives = $data615['id_auteur'];
-          			}
-          			else {
-          			    sql_query("INSERT INTO $Tauteurs (id_auteur, nom, login, pass, statut) VALUES ('', '$nom_auteur_archives', '$nom_auteur_archives', '$nom_auteur_archives', '5poubelle')");
-          				$id_auteur_archives = mysql_insert_id();
-          			}
-          			$nom_rub_archivesR = $nom_auteur_archives;
-          			$id_rub_parent_archivesA = $nom_auteur_archives;
-          			$id_rub_parent_archivesR = $id_auteur_archives;
-          			$nom_rub_archivesA = $nom_auteur_archives;
-          			$id_auteur_archivesA = $id_auteur_archives;
-          			$nom_auteur_archivesR = $nom_auteur_archives;
-          			$id_auteur_archivesR = $id_auteur_archives;
-        				
-        		// si archivage, récup de l'id de la rubrique archive + si nécessaire, créer la rubrique				 		
-        			if ($_POST['supprimer_articles'] != 1 AND $_POST['archivage'] != 0) {
-        			    $supprimer_articlesr = 0;
-        				$supprimer_articlesa = 0;
-        				$archivager =1;
-        				$archivagea = 1;
-        					 
-        				$nom_rub_archives = $_POST['rub_archivage'];
-        			// $_POST['rub_parent_archivage'] de la forme : "id_rubrique,id_secteur"
-        				$Tids_parent_rub_archives = explode(',', $_POST['rub_parent_archivage']);
-        				$id_rub_parent_archives = $Tids_parent_rub_archives[0];
-        				$id_sect_parent_archives = $Tids_parent_rub_archives[1];
-        				$date_rub_archives = date("Y-m-j H:i:s");
-        				$sql613 = sql_query("SELECT id_rubrique, id_secteur FROM $Trubriques WHERE titre = '$nom_rub_archives' AND id_parent = '$id_rub_parent_archives' LIMIT 1");
-        				if (mysql_num_rows($sql613) > 0) {
-        				    $data613 = mysql_fetch_array($sql613);
-        					$id_rub_archives = $data613['id_rubrique'];
-        				}
-        				else {
-        				    sql_query("INSERT INTO $Trubriques (id_rubrique, id_parent, titre, id_secteur, statut, date) VALUES ('', '$id_rub_parent_archives', '$nom_rub_archives', '$id_sect_parent_archives', 'publie', '$date_rub_archives')" );
-        					$id_rub_archives = mysql_insert_id();
-        				}
-          			}
-          		}
-            }
-        			        						
-          // 4.4.1 : traitement des visiteurs actuels de la base spip_auteurs => si effacer les absV = OK
-            if ($eff_absv == 1) {
-        	    $sql1471 = sql_query("SELECT COUNT(*) AS nb_redacsV FROM $Tauteurs WHERE statut = '6forum'");
-            	$data1471 = mysql_fetch_array($sql1471);
-            	if ($data1471['nb_redacsV'] > 0) {
-          		  // pas de poubelle pour les visiteurs => suppression puisque pas d'articles
-            		$sql1591 = sql_query("SELECT id_auteur, login FROM $Tauteurs WHERE statut = '6forum'");
-          			while ($data1591 = mysql_fetch_array($sql1591)) {
-            		    $login_sp = strtolower($data1591['login']);
-          				$id_auteur_ec = $data1591['id_auteur'];
-            			$sql4561 = sql_query("SELECT COUNT(*) AS nb FROM spip_tmp_csv2spip WHERE LOWER(nom) = '$login_sp' LIMIT 1");
-            			$data4561 = mysql_fetch_array($sql4561);
-                 // l'utilisateur n'est pas dans le fichier CSV importé => le supprimer
-              			if ($data4561['nb'] == 0) {
-          				  // traitement des visiteurs à effacer												
-          					sql_query("DELETE FROM $Tauteurs WHERE id_auteur = '$id_auteur_ec' AND statut = '6forum' LIMIT 1");
-          					if (mysql_error() == 0) {
-              				    $TresV_eff[] = $login;
-        				  // effacer toutes les références à ce visiteur dans acces_groupes
-        					    sql_query("DELETE FROM $Taccesgroupes_auteurs WHERE id_auteur = $id_auteur_ec");
-        					    if (mysql_error() != '') {
-        					        $TerrV_eff_accesgroupes[] = array('id_auteur' => $id_auteur_ec, 'erreur' => mysql_error());
-        					    }
-                			}
-                			else {
-                			    $TerrV_eff[] = array('id_auteur' => $id_auteur_ec, 'erreur' => mysql_error());
-                			}
-          				}
-          			}
-                  // optimisation de la table après les effacements
-          			sql_query("OPTIMIZE TABLE $Tauteurs, $Taccesgroupes_auteurs");
-          		}	
-            }
-            
-          // 4.4.2 : traitement des rédacteurs actuels de la base spip_auteurs => si effacer les absents redac = OK
-            if ($eff_absr == 1) {
-                $sql147 = sql_query("SELECT COUNT(*) AS nb_redacsR FROM $Tauteurs WHERE statut = '1comite'");
-              	$data147 = mysql_fetch_array($sql147);
-              	if ($data147['nb_redacsR'] > 0) {
-            	  // si archivage, récup de l'id de la rubrique archive + si nécessaire, créer la rubrique				 		
-            		if ($supprimer_articlesr != 1 AND $archivager != 0) {
-            		    $nom_rub_archivesR = $rub_archivager;
-            			$sql613 = sql_query("SELECT id_rubrique, id_secteur FROM $Trubriques WHERE titre = '$nom_rub_archivesR' AND id_parent = '$id_rub_parent_archivesR' LIMIT 1");
-            			if (mysql_num_rows($sql613) > 0) {
-            			    $data613 = mysql_fetch_array($sql613);
-            				$id_rub_archivesR = $data613['id_rubrique'];
+    // 4.4 : gestion des suppressions
+    // VERSION 2.3 de effacer les absents
+        $ch_maj = 0;
+        $eff_absv = 0;
+        $eff_absr = 0;
+        $eff_absa = 0;
+    	if ($_POST['eff_visit'] == 1) {
+    //					 $ch_maj = 1;
+            $eff_absv = 1;
+        }
+        if ($_POST['eff_redac'] == 1) {
+            $ch_maj = 1;
+    	    $eff_absr = 1;
+        }
+        if ($_POST['eff_admin'] == 1) {
+            $ch_maj = 1;
+    	    $eff_absa = 1;
+        }
+
+    // paramétrage auteur et dossier d'archive
+    	if ($ch_maj !== 0) {
+    		  // si auteurs supprimés (pas de poubelle), récupérer l'id du rédacteur affecté aux archives + si nécessaire, créer cet auteur (groupe = poubelle)
+      	    if ($_POST['auteurs_poubelle'] != 1) {
+      		    $nom_auteur_archives = $_POST['nom_auteur_archives'];
+      			$sql615 = sql_query("SELECT id_auteur FROM $Tauteurs WHERE login = '$nom_auteur_archives' LIMIT 1");
+      			if (mysql_num_rows($sql615) > 0) {
+      			    $data615 = mysql_fetch_array($sql615);
+      				$id_auteur_archives = $data615['id_auteur'];
+      			}
+      			else {
+      			    sql_query("INSERT INTO $Tauteurs (id_auteur, nom, login, pass, statut) VALUES ('', '$nom_auteur_archives', '$nom_auteur_archives', '$nom_auteur_archives', '5poubelle')");
+      				$id_auteur_archives = mysql_insert_id();
+      			}
+      			$nom_rub_archivesR = $nom_auteur_archives;
+      			$id_rub_parent_archivesA = $nom_auteur_archives;
+      			$id_rub_parent_archivesR = $id_auteur_archives;
+      			$nom_rub_archivesA = $nom_auteur_archives;
+      			$id_auteur_archivesA = $id_auteur_archives;
+      			$nom_auteur_archivesR = $nom_auteur_archives;
+      			$id_auteur_archivesR = $id_auteur_archives;
+    				
+    		// si archivage, récup de l'id de la rubrique archive + si nécessaire, créer la rubrique				 		
+    			if ($_POST['supprimer_articles'] != 1 AND $_POST['archivage'] != 0) {
+    			    $supprimer_articlesr = 0;
+    				$supprimer_articlesa = 0;
+    				$archivager =1;
+    				$archivagea = 1;
+    					 
+    				$nom_rub_archives = $_POST['rub_archivage'];
+    			// $_POST['rub_parent_archivage'] de la forme : "id_rubrique,id_secteur"
+    				$Tids_parent_rub_archives = explode(',', $_POST['rub_parent_archivage']);
+    				$id_rub_parent_archives = $Tids_parent_rub_archives[0];
+    				$id_sect_parent_archives = $Tids_parent_rub_archives[1];
+    				$date_rub_archives = date("Y-m-j H:i:s");
+    				$sql613 = sql_query("SELECT id_rubrique, id_secteur FROM $Trubriques WHERE titre = '$nom_rub_archives' AND id_parent = '$id_rub_parent_archives' LIMIT 1");
+    				if (mysql_num_rows($sql613) > 0) {
+    				    $data613 = mysql_fetch_array($sql613);
+    					$id_rub_archives = $data613['id_rubrique'];
+    				}
+    				else {
+    				    sql_query("INSERT INTO $Trubriques (id_rubrique, id_parent, titre, id_secteur, statut, date) VALUES ('', '$id_rub_parent_archives', '$nom_rub_archives', '$id_sect_parent_archives', 'publie', '$date_rub_archives')" );
+    					$id_rub_archives = mysql_insert_id();
+    				}
+      			}
+      		}
+        }
+    			        						
+      // 4.4.1 : traitement des visiteurs actuels de la base spip_auteurs => si effacer les absV = OK
+        if ($eff_absv == 1) {
+    	    $sql1471 = sql_query("SELECT COUNT(*) AS nb_redacsV FROM $Tauteurs WHERE statut = '6forum'");
+        	$data1471 = mysql_fetch_array($sql1471);
+        	if ($data1471['nb_redacsV'] > 0) {
+      		  // pas de poubelle pour les visiteurs => suppression puisque pas d'articles
+        		$sql1591 = sql_query("SELECT id_auteur, login FROM $Tauteurs WHERE statut = '6forum'");
+      			while ($data1591 = mysql_fetch_array($sql1591)) {
+        		    $login_sp = strtolower($data1591['login']);
+      				$id_auteur_ec = $data1591['id_auteur'];
+        			$sql4561 = sql_query("SELECT COUNT(*) AS nb FROM spip_tmp_csv2spip WHERE LOWER(nom) = '$login_sp' LIMIT 1");
+        			$data4561 = mysql_fetch_array($sql4561);
+             // l'utilisateur n'est pas dans le fichier CSV importé => le supprimer
+          			if ($data4561['nb'] == 0) {
+      				  // traitement des visiteurs à effacer												
+      					sql_query("DELETE FROM $Tauteurs WHERE id_auteur = '$id_auteur_ec' AND statut = '6forum' LIMIT 1");
+      					if (mysql_error() == 0) {
+          				    $TresV_eff[] = $login;
+/*
+// pas d'acces_groupe pour cette version            								                                 
+    				  // effacer toutes les références à ce visiteur dans acces_groupes
+    					    sql_query("DELETE FROM $Taccesgroupes_auteurs WHERE id_auteur = $id_auteur_ec");
+    					    if (mysql_error() != '') {
+    					        $TerrV_eff_accesgroupes[] = array('id_auteur' => $id_auteur_ec, 'erreur' => mysql_error());
+    					    }
+*/                            
             			}
             			else {
-            			    sql_query("INSERT INTO $Trubriques (id_rubrique, id_parent, titre, id_secteur, statut, date) VALUES ('', '$id_rub_parent_archivesR', '$nom_rub_archivesR', '$id_sect_parent_archivesR', 'publie', '$date_rub_archivesR')" );
-        				    $id_rub_archivesR = mysql_insert_id();
+            			    $TerrV_eff[] = array('id_auteur' => $id_auteur_ec, 'erreur' => mysql_error());
             			}
-            		}
-              		$sql159 = sql_query("SELECT id_auteur, login FROM $Tauteurs WHERE statut = '1comite' AND bio != 'archive'");
-              		$cteur_articles_deplacesR = 0;
-            		$cteur_articles_supprimesR = 0;
-            		$cteur_articles_modif_auteurR = 0;
-            		while ($data159 = mysql_fetch_array($sql159)) {
-              		    $login_sp = strtolower($data159['login']);
-            			$id_auteur_ec = $data159['id_auteur'];
-              			$sql456 = sql_query("SELECT COUNT(*) AS nb FROM spip_tmp_csv2spip WHERE nom = '$login_sp' LIMIT 1");
-              			$data456 = mysql_fetch_array($sql456);
-                      // l'utilisateur n'est pas dans le fichier CSV importé => le supprimer
-                		if ($data456['nb'] == 0) {
-            			  // traitement éventuel des articles de l'auteur à supprimer
-            			    $sql757 = sql_query("SELECT COUNT(*) AS nb_articles_auteur FROM $Tauteurs_articles WHERE id_auteur = '$id_auteur_ec'");
-            				$data757 = mysql_fetch_array($sql757);
-        //print '<br><br>id_auteur = '.$id_auteur_ec;
-        //print '<br>nb_articles_auteur = '.$data757['nb_articles_auteur'];
-        //print '<br>$supprimer_articlesr = '.$supprimer_articlesr;
-        //print '<br>$archivager = '.$archivager;
-            				if ($data757['nb_articles_auteur'] > 0) {
-                			    if ($supprimer_articlesr != 1) {
-                    			    if ($archivager != 0) {
-            						    $sql612 = sql_query("SELECT id_article FROM $Tauteurs_articles WHERE id_auteur = $id_auteur_ec");
-                    					if (mysql_num_rows($sql612) > 0) {
-        //print '<br>départ UPDATE';
-                    					    while ($data612 = mysql_fetch_array($sql612)) {
-                    						    $id_article_ec = $data612['id_article'];
-            									sql_query("UPDATE $Tarticles SET id_rubrique = '$id_rub_archivesR', id_secteur = '$id_sect_parent_archivesR' WHERE id_article = '$id_article_ec' LIMIT 1");
-            									$cteur_articles_deplacesR ++;
-                    						}
-                    					} 
-                       					if ($auteurs_poubeller != 1) {
-                      					    sql_query("UPDATE $Tauteurs_articles SET id_auteur = '$id_auteur_archivesR' WHERE id_auteur = '$id_auteur_ec'");
-                      					}	   														
-                    				}
+      				}
+      			}
+              // optimisation de la table après les effacements
+      			sql_query("OPTIMIZE TABLE $Tauteurs, $Taccesgroupes_auteurs");
+      		}	
+        }
+        
+      // 4.4.2 : traitement des rédacteurs actuels de la base spip_auteurs => si effacer les absents redac = OK
+        if ($eff_absr == 1) {
+            $sql147 = sql_query("SELECT COUNT(*) AS nb_redacsR FROM $Tauteurs WHERE statut = '1comite'");
+          	$data147 = mysql_fetch_array($sql147);
+          	if ($data147['nb_redacsR'] > 0) {
+        	  // si archivage, récup de l'id de la rubrique archive + si nécessaire, créer la rubrique				 		
+        		if ($supprimer_articlesr != 1 AND $archivager != 0) {
+        		    $nom_rub_archivesR = $rub_archivager;
+        			$sql613 = sql_query("SELECT id_rubrique, id_secteur FROM $Trubriques WHERE titre = '$nom_rub_archivesR' AND id_parent = '$id_rub_parent_archivesR' LIMIT 1");
+        			if (mysql_num_rows($sql613) > 0) {
+        			    $data613 = mysql_fetch_array($sql613);
+        				$id_rub_archivesR = $data613['id_rubrique'];
+        			}
+        			else {
+        			    sql_query("INSERT INTO $Trubriques (id_rubrique, id_parent, titre, id_secteur, statut, date) VALUES ('', '$id_rub_parent_archivesR', '$nom_rub_archivesR', '$id_sect_parent_archivesR', 'publie', '$date_rub_archivesR')" );
+    				    $id_rub_archivesR = mysql_insert_id();
+        			}
+        		}
+          		$sql159 = sql_query("SELECT id_auteur, login FROM $Tauteurs WHERE statut = '1comite' AND bio != 'archive'");
+          		$cteur_articles_deplacesR = 0;
+        		$cteur_articles_supprimesR = 0;
+        		$cteur_articles_modif_auteurR = 0;
+        		while ($data159 = mysql_fetch_array($sql159)) {
+          		    $login_sp = strtolower($data159['login']);
+        			$id_auteur_ec = $data159['id_auteur'];
+          			$sql456 = sql_query("SELECT COUNT(*) AS nb FROM spip_tmp_csv2spip WHERE nom = '$login_sp' LIMIT 1");
+          			$data456 = mysql_fetch_array($sql456);
+                  // l'utilisateur n'est pas dans le fichier CSV importé => le supprimer
+            		if ($data456['nb'] == 0) {
+        			  // traitement éventuel des articles de l'auteur à supprimer
+        			    $sql757 = sql_query("SELECT COUNT(*) AS nb_articles_auteur FROM $Tauteurs_articles WHERE id_auteur = '$id_auteur_ec'");
+        				$data757 = mysql_fetch_array($sql757);
+    //print '<br><br>id_auteur = '.$id_auteur_ec;
+    //print '<br>nb_articles_auteur = '.$data757['nb_articles_auteur'];
+    //print '<br>$supprimer_articlesr = '.$supprimer_articlesr;
+    //print '<br>$archivager = '.$archivager;
+        				if ($data757['nb_articles_auteur'] > 0) {
+            			    if ($supprimer_articlesr != 1) {
+                			    if ($archivager != 0) {
+        						    $sql612 = sql_query("SELECT id_article FROM $Tauteurs_articles WHERE id_auteur = $id_auteur_ec");
+                					if (mysql_num_rows($sql612) > 0) {
+    //print '<br>départ UPDATE';
+                					    while ($data612 = mysql_fetch_array($sql612)) {
+                						    $id_article_ec = $data612['id_article'];
+        									sql_query("UPDATE $Tarticles SET id_rubrique = '$id_rub_archivesR', id_secteur = '$id_sect_parent_archivesR' WHERE id_article = '$id_article_ec' LIMIT 1");
+        									$cteur_articles_deplacesR ++;
+                						}
+                					} 
+                   					if ($auteurs_poubeller != 1) {
+                  					    sql_query("UPDATE $Tauteurs_articles SET id_auteur = '$id_auteur_archivesR' WHERE id_auteur = '$id_auteur_ec'");
+                  					}	   														
                 				}
-                				else {
-                				    $sql756 = sql_query("SELECT id_article FROM $Tauteurs_articles WHERE id_auteur = '$id_auteur_ec'");
-        //print '<br>départ DELETE';
-                					while ($data756 = mysql_fetch_array($sql756)) {
-                					    $id_article_a_effac = $data756['id_article'];
-                						sql_query("DELETE FROM $Tarticles WHERE id_article = '$id_article_a_effac' LIMIT 1");
-            							$cteur_articles_supprimesR ++;
-                					}
-                					sql_query("DELETE FROM $Tauteurs_articles WHERE id_auteur = '$id_auteur_ec'");
-                				}
-            				}
-            			  // traitement des auteurs à effacer												
-            				if ($auteurs_poubeller != 1) {
-            				    sql_query("DELETE FROM $Tauteurs WHERE id_auteur = '$id_auteur_ec' AND statut = '1comite' LIMIT 1");
-                				if (mysql_error() == 0) {
-                    			    $TresR_eff[] = $login;
-        						  // effacer toutes les références à ce visiteur dans acces_groupes
-        							sql_query("DELETE FROM $Taccesgroupes_auteurs WHERE id_auteur = $id_auteur_ec");
-        							if (mysql_error() != '') {
-        							    $TerrR_eff_accesgroupes[] = array('id_auteur' => $id_auteur_ec, 'erreur' => mysql_error());
-        							}
-                      			}
-        						else {
-                      			    $TerrR_eff[] = array('id_auteur' => $id_auteur_ec, 'erreur' => mysql_error());
-                      			}
             				}
             				else {
-            				    sql_query("UPDATE $Tauteurs SET statut = '5poubelle' WHERE id_auteur = '$id_auteur_ec' LIMIT 1");
-                  				if (mysql_error() == 0) {
-                      			    $TresR_poub[] = $id_auteur_ec;
-                        		}
-                        		else {
-                        		    $TerrR_poub[] = array('id_auteur' => $id_auteur_ec, 'erreur' => mysql_error());
-                        		}
+            				    $sql756 = sql_query("SELECT id_article FROM $Tauteurs_articles WHERE id_auteur = '$id_auteur_ec'");
+    //print '<br>départ DELETE';
+            					while ($data756 = mysql_fetch_array($sql756)) {
+            					    $id_article_a_effac = $data756['id_article'];
+            						sql_query("DELETE FROM $Tarticles WHERE id_article = '$id_article_a_effac' LIMIT 1");
+        							$cteur_articles_supprimesR ++;
+            					}
+            					sql_query("DELETE FROM $Tauteurs_articles WHERE id_auteur = '$id_auteur_ec'");
             				}
-            			}
-            		}
-                  // optimisation de la table après les effacements
-            		sql_query("OPTIMIZE TABLE $Tauteurs, $Tarticles, $Tauteurs_articles, $Taccesgroupes_auteurs");
-            	}		
-            }
-         // 4.4.3 : traitement des administrateurs restreints actuels de la base spip_auteurs => si effacer les absA = OK
-            if ($eff_absa == 1) {
-        	    $sql1473 = sql_query("SELECT COUNT(*) AS nb_redacsA FROM $Tauteurs
-        								 LEFT JOIN $Tauteurs_rubriques
-        								 ON $Tauteurs_rubriques.id_auteur = $Tauteurs.id_auteur
-        								 WHERE statut = '0minirezo'");
-        //echo '<br>mysql_error 1473 = '.mysql_error();
-          		$data1473 = mysql_fetch_array($sql1473);
-          		if ($data1473['nb_redacsA'] > 0) {
-          		    $sql1593 = sql_query("SELECT Tauteurs.id_auteur, Tauteurs.login FROM $Tauteurs AS Tauteurs, $Tauteurs_rubriques AS Tauteurs_rubriques WHERE statut = '0minirezo' AND Tauteurs.id_auteur = Tauteurs_rubriques.id_auteur");
-          			$cteur_articles_deplacesA = 0;
-        			$cteur_articles_supprimesA = 0;
-        			$cteur_articles_modif_auteurA = 0;
-        			while ($data1593 = mysql_fetch_array($sql1593)) {
-          			    $login_sp = strtolower($data1593['login']);
-        				$id_auteur_ec = $data1593['id_auteur'];
-          				$sql4563 = sql_query("SELECT COUNT(*) AS nbA FROM spip_tmp_csv2spip WHERE nom = '$login_sp' LIMIT 1");
-          				$data4563 = mysql_fetch_array($sql4563);
-                      // l'utilisateur n'est pas dans le fichier CSV importé => le supprimer
-            			if ($data4563['nbA'] == 0) {
-        				  // traitement éventuel des articles de l'admin à supprimer
-        					$sql7573 = sql_query("SELECT COUNT(*) AS nb_articles_auteur FROM $Tauteurs_articles WHERE id_auteur = '$id_auteur_ec'");
-        					$data7573 = mysql_fetch_array($sql7573);
-        					if ($data7573['nb_articles_auteur'] > 0) {
-            				    if ($supprimer_articlesa != 1) {
-                				    if ($archivagea != 0) {
-        							    $sql6123 = sql_query("SELECT id_article FROM $Tauteurs_articles WHERE id_auteur = '$id_auteur_ec'");
-                						    if (mysql_num_rows($sql6123) > 0) {
-                							    while ($data6123 = mysql_fetch_array($sql6123)) {
-                								    $id_article_ec = $data6123['id_article'];
-        											sql_query("UPDATE $Tarticles SET id_rubrique = '$id_rub_archivesA', id_secteur = '$id_sect_parent_archivesA' WHERE id_article = '$id_article_ec' LIMIT 1");
-        											$cteur_articles_deplacesA ++;
-                								}
-                							} 
-                   							if ($auteurs_poubellea != 1) {
-                  							    sql_query("UPDATE $Tauteurs_articles SET id_auteur = '$id_auteur_archivesA' WHERE id_auteur = '$id_auteur_ec'");
-                  							}	   														
-                						}
+        				}
+        			  // traitement des auteurs à effacer												
+        				if ($auteurs_poubeller != 1) {
+        				    sql_query("DELETE FROM $Tauteurs WHERE id_auteur = '$id_auteur_ec' AND statut = '1comite' LIMIT 1");
+            				if (mysql_error() == 0) {
+                			    $TresR_eff[] = $login;
+/*
+// pas d'acces_groupe pour cette version            								                                 
+    						  // effacer toutes les références à ce visiteur dans acces_groupes
+    							sql_query("DELETE FROM $Taccesgroupes_auteurs WHERE id_auteur = $id_auteur_ec");
+    							if (mysql_error() != '') {
+    							    $TerrR_eff_accesgroupes[] = array('id_auteur' => $id_auteur_ec, 'erreur' => mysql_error());
+    							}
+*/                                
+                  			}
+    						else {
+                  			    $TerrR_eff[] = array('id_auteur' => $id_auteur_ec, 'erreur' => mysql_error());
+                  			}
+        				}
+        				else {
+        				    sql_query("UPDATE $Tauteurs SET statut = '5poubelle' WHERE id_auteur = '$id_auteur_ec' LIMIT 1");
+              				if (mysql_error() == 0) {
+                  			    $TresR_poub[] = $id_auteur_ec;
+                    		}
+                    		else {
+                    		    $TerrR_poub[] = array('id_auteur' => $id_auteur_ec, 'erreur' => mysql_error());
+                    		}
+        				}
+        			}
+        		}
+              // optimisation de la table après les effacements
+        		sql_query("OPTIMIZE TABLE $Tauteurs, $Tarticles, $Tauteurs_articles, $Taccesgroupes_auteurs");
+        	}		
+        }
+     // 4.4.3 : traitement des administrateurs restreints actuels de la base spip_auteurs => si effacer les absA = OK
+        if ($eff_absa == 1) {
+    	    $sql1473 = sql_query("SELECT COUNT(*) AS nb_redacsA FROM $Tauteurs
+    								 LEFT JOIN $Tauteurs_rubriques
+    								 ON $Tauteurs_rubriques.id_auteur = $Tauteurs.id_auteur
+    								 WHERE statut = '0minirezo'");
+    //echo '<br>mysql_error 1473 = '.mysql_error();
+      		$data1473 = mysql_fetch_array($sql1473);
+      		if ($data1473['nb_redacsA'] > 0) {
+      		    $sql1593 = sql_query("SELECT Tauteurs.id_auteur, Tauteurs.login FROM $Tauteurs AS Tauteurs, $Tauteurs_rubriques AS Tauteurs_rubriques WHERE statut = '0minirezo' AND Tauteurs.id_auteur = Tauteurs_rubriques.id_auteur");
+      			$cteur_articles_deplacesA = 0;
+    			$cteur_articles_supprimesA = 0;
+    			$cteur_articles_modif_auteurA = 0;
+    			while ($data1593 = mysql_fetch_array($sql1593)) {
+      			    $login_sp = strtolower($data1593['login']);
+    				$id_auteur_ec = $data1593['id_auteur'];
+      				$sql4563 = sql_query("SELECT COUNT(*) AS nbA FROM spip_tmp_csv2spip WHERE nom = '$login_sp' LIMIT 1");
+      				$data4563 = mysql_fetch_array($sql4563);
+                  // l'utilisateur n'est pas dans le fichier CSV importé => le supprimer
+        			if ($data4563['nbA'] == 0) {
+    				  // traitement éventuel des articles de l'admin à supprimer
+    					$sql7573 = sql_query("SELECT COUNT(*) AS nb_articles_auteur FROM $Tauteurs_articles WHERE id_auteur = '$id_auteur_ec'");
+    					$data7573 = mysql_fetch_array($sql7573);
+    					if ($data7573['nb_articles_auteur'] > 0) {
+        				    if ($supprimer_articlesa != 1) {
+            				    if ($archivagea != 0) {
+    							    $sql6123 = sql_query("SELECT id_article FROM $Tauteurs_articles WHERE id_auteur = '$id_auteur_ec'");
+            						    if (mysql_num_rows($sql6123) > 0) {
+            							    while ($data6123 = mysql_fetch_array($sql6123)) {
+            								    $id_article_ec = $data6123['id_article'];
+    											sql_query("UPDATE $Tarticles SET id_rubrique = '$id_rub_archivesA', id_secteur = '$id_sect_parent_archivesA' WHERE id_article = '$id_article_ec' LIMIT 1");
+    											$cteur_articles_deplacesA ++;
+            								}
+            							} 
+               							if ($auteurs_poubellea != 1) {
+              							    sql_query("UPDATE $Tauteurs_articles SET id_auteur = '$id_auteur_archivesA' WHERE id_auteur = '$id_auteur_ec'");
+              							}	   														
             						}
-            						else {
-            						    $sql7563 = sql_query("SELECT id_article FROM $Tauteurs_articles WHERE id_auteur = '$id_auteur_ec'");
-            							while ($data7563 = mysql_fetch_array($sql7563)) {
-            							    $id_article_a_effac = $data7563['id_article'];
-            								sql_query("DELETE FROM $Tarticles WHERE id_article = '$id_article_a_effac' LIMIT 1");
-        									$cteur_articles_supprimesA ++;
-            							}
-            							sql_query("DELETE FROM $Tauteurs_articles WHERE id_auteur = '$id_auteur_ec'");
-            						}
-        						}
-        				      // traitement des admins à effacer												
-        						if ($auteurs_poubellea != 1) {
-        						    sql_query("DELETE FROM $Tauteurs WHERE id_auteur = '$id_auteur_ec' AND statut = '0minirezo' LIMIT 1");
-            						if (mysql_error() == 0) {
-                					    $TresA_eff[] = $login;
-        						      // effacer toutes les références à ce visiteur dans acces_groupes
-        							    sql_query("DELETE FROM $Taccesgroupes_auteurs WHERE id_auteur = $id_auteur_ec");
-        							    if (mysql_error() != '') {
-        							        $TerrA_eff_accesgroupes[] = array('id_auteur' => $id_auteur_ec, 'erreur' => mysql_error());
-        							    }
-                  					  // virer l'administation de toutes les rubriques pour cet admin
-        							    sql_query("DELETE FROM $Tauteurs_rubriques WHERE id_auteur = $id_auteur_ec");
-        							    if (mysql_error() != '') {
-        							        $TerrA_eff_rub_admins[] = array('id_auteur' => $id_auteur_ec, 'erreur' => mysql_error());
-        							    }
-                  					}
-                  					else {
-        						        $TerrA_eff[] = array('id_auteur' => $id_auteur_ec, 'erreur' => mysql_error());
-                  					}
         						}
         						else {
-        						    sql_query("UPDATE $Tauteurs SET statut = '5poubelle' WHERE id_auteur = '$id_auteur_ec' LIMIT 1");
-              						if (mysql_error() == 0) {
-                  					    $TresA_poub[] = $id_auteur_ec;
-                    				}
-                    				else {
-                    				    $TerrA_poub[] = array('id_auteur' => $id_auteur_ec, 'erreur' => mysql_error());
-                    				}
+        						    $sql7563 = sql_query("SELECT id_article FROM $Tauteurs_articles WHERE id_auteur = '$id_auteur_ec'");
+        							while ($data7563 = mysql_fetch_array($sql7563)) {
+        							    $id_article_a_effac = $data7563['id_article'];
+        								sql_query("DELETE FROM $Tarticles WHERE id_article = '$id_article_a_effac' LIMIT 1");
+    									$cteur_articles_supprimesA ++;
+        							}
+        							sql_query("DELETE FROM $Tauteurs_articles WHERE id_auteur = '$id_auteur_ec'");
         						}
-        					}
-        				}
-                      // optimisation de la table après les effacements
-        				sql_query("OPTIMIZE TABLE $Tauteurs, $Tarticles, $Tauteurs_articles, $Taccesgroupes_auteurs");
-        			}
-                }
-            }   //   fin effacer les abs (4.4)  V 2.3	
+    						}
+    				      // traitement des admins à effacer												
+    						if ($auteurs_poubellea != 1) {
+    						    sql_query("DELETE FROM $Tauteurs WHERE id_auteur = '$id_auteur_ec' AND statut = '0minirezo' LIMIT 1");
+        						if (mysql_error() == 0) {
+            					    $TresA_eff[] = $login;
+/*
+// pas d'acces_groupe pour cette version            								 
+    						      // effacer toutes les références à ce visiteur dans acces_groupes
+    							    sql_query("DELETE FROM $Taccesgroupes_auteurs WHERE id_auteur = $id_auteur_ec");
+    							    if (mysql_error() != '') {
+    							        $TerrA_eff_accesgroupes[] = array('id_auteur' => $id_auteur_ec, 'erreur' => mysql_error());
+    							    }
+*/                                    
+              					  // virer l'administation de toutes les rubriques pour cet admin
+    							    sql_query("DELETE FROM $Tauteurs_rubriques WHERE id_auteur = $id_auteur_ec");
+    							    if (mysql_error() != '') {
+    							        $TerrA_eff_rub_admins[] = array('id_auteur' => $id_auteur_ec, 'erreur' => mysql_error());
+    							    }
+              					}
+              					else {
+    						        $TerrA_eff[] = array('id_auteur' => $id_auteur_ec, 'erreur' => mysql_error());
+              					}
+    						}
+    						else {
+    						    sql_query("UPDATE $Tauteurs SET statut = '5poubelle' WHERE id_auteur = '$id_auteur_ec' LIMIT 1");
+          						if (mysql_error() == 0) {
+              					    $TresA_poub[] = $id_auteur_ec;
+                				}
+                				else {
+                				    $TerrA_poub[] = array('id_auteur' => $id_auteur_ec, 'erreur' => mysql_error());
+                				}
+    						}
+    					}
+    				}
+                  // optimisation de la table après les effacements
+    				sql_query("OPTIMIZE TABLE $Tauteurs, $Tarticles, $Tauteurs_articles, $Taccesgroupes_auteurs");
+    			}
+            }   //   fin effacer les abs (4.4)  V 2.3
         
           // résultats étape 4
             echo debut_cadre_couleur(_DIR_PLUGIN_CSV2SPIP."/img_pack/csv2spip-24.gif", true, "", _T('csvspip:titre_etape4'));
@@ -949,11 +957,11 @@ function exec_csv2spip() {
          	    if (count($TerrR_eff) > 0 OR count($TerrR_poub) >0) {
         	 	    echo "<span class=\"Cerreur\">"._T('csvspip:suppr_redac');
         			foreach ($TerrR_eff as $ee) { 
-        			    echo _T('csvspip:redac').$ee['login']._T('csvspip: erreur').$ee['erreur'];
+        			    echo '<br/>'._T('csvspip:redac').$ee['login']._T('csvspip: erreur').' '.$ee['erreur'];
         			}
         			echo "<span class=\"Cerreur\">"._T('csvspip:redac_poubelle');
         			foreach ($TerrR_poub as $ep) { 
-        				echo _T('csvspip:redac').$ep['login']._T('csvspip: erreur').$ep['erreur'];
+        				echo '<br/>'._T('csvspip:redac').$ep['login']._T('csvspip: erreur').' '.$ep['erreur'];
         			}
          		    $err_total ++;
                 }
@@ -975,11 +983,11 @@ function exec_csv2spip() {
          	    if (count($TerrA_eff) > 0 OR count($TerrA_poub) >0) {
         	 	    echo "<span class=\"Cerreur\">"._T('csvspip:suppr_redac');
         			foreach ($TerrA_eff as $Aee) { 
-        			    echo _T('csvspip:admin').$Aee['login']._T('csvspip: erreur').$Aee['erreur'];
+        			    echo "<br />"._T('csvspip:admin').$Aee['login']._T('csvspip: erreur').' '.$Aee['erreur'];
         			}
         			echo "<span class=\"Cerreur\">"._T('csvspip:redac_poubelle');
         			foreach ($TerrA_poub as $Aep) { 
-        				echo _T('csvspip:admin').$Aep['login']._T('csvspip: erreur').$Aep['erreur'];
+        				echo "<br />"._T('csvspip:admin').$Aep['login']._T('csvspip: erreur').' '.$Aep['erreur'];
         			}
          		    $err_total ++;
                 }
@@ -993,6 +1001,8 @@ function exec_csv2spip() {
         	    if ($supprimer_articlesa == 1) {
         	 	    echo "<br />"._T('csvspip:suppression_debut').$cteur_articles_supprimesA._T('csvspip:suppression_fin')."<br>";
         	    }
+/*    
+// pas d'acces_groupe pour cette version    
         	    if (count ($TerrA_eff_accesgroupes) > 0) {
         	 	    echo "<span class=\"Cerreur\">"._T('csvspip:suppr_redac');
         			foreach ($TerrA_eff_accesgroupes as $Aec) { 
@@ -1001,6 +1011,7 @@ function exec_csv2spip() {
         			echo "</span>";
         			$err_total ++;
         	    }
+*/                
         	    if (count ($TerrA_eff_rub_admins) > 0) {
         	 	    echo "<span class=\"Cerreur\">"._T('csvspip:suppr_redac');
         			foreach ($TerrA_eff_rub_admins as $Aer) { 
@@ -1009,9 +1020,7 @@ function exec_csv2spip() {
         			echo "</span>";
         			$err_total ++;					 		
         	    }
-            }
-        
-        // fin effacer les absents V 2.3
+            }   // fin effacer les absents V 2.3
             echo fin_cadre_couleur(true);			
         
         // étape 5 : si nécessaire intégration des admins comme administrateurs restreints de la rubrique de leur sous-groupe
@@ -1109,7 +1118,7 @@ function exec_csv2spip() {
             	
           // vidage de la table temporaire
             if ($err_total == 0) { 
-                sql_query("TRUNCATE TABLE spip_tmp_csv2spip");
+//                sql_query("TRUNCATE TABLE spip_tmp_csv2spip");
             }
         }
 // FIN TRAITEMENT DES DONNEES
