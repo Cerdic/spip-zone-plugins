@@ -179,6 +179,12 @@ function cs_date_long($numdate) {
 	if(!defined('_SPIP19300')) list($heures, $minutes) =array(heures($numdate), minutes($numdate));
 	return _T('couteau:stats_date', array('jour'=>$jour, 'mois'=>$mois, 'annee'=>substr($annee,2), 'h'=>$heures, 'm'=>$minutes, 's'=>$sec));
 }
+function cs_date_court($numdate) {
+	$date_array = recup_date($numdate);
+	if (!$date_array) return '?';
+	list($annee, $mois, $jour) = $date_array;
+	return _T('couteau:date_court', array('jour'=>$jour, 'mois'=>$mois, 'annee'=>substr($annee,2)));
+}
 
 
 ?>
