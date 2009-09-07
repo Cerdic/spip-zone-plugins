@@ -20,7 +20,7 @@
 			<a href="#URL_RUBRIQUE">#TITRE</a>
 			<BOUCLE_test_niveau(CONDITION){si #GET{niveau_actuel}|!={#GET{niveau}}}>
 			<B_sous_rubriques>
-			<ul class="menu">
+			<ul class="menu-liste">
 				<BOUCLE_sous_rubriques(RUBRIQUES){id_parent}>
 				#SET{niveau_actuel,#GET{niveau_actuel}|plus{1}}
 				<li class="menu-entree">

@@ -7,6 +7,8 @@
 			<BOUCLE_sous_menu(MENUS){id_menus_entree}>
 				#INCLURE{fond=inclure/menu, env, id_menu, identifiant}
 			</BOUCLE_sous_menu>
+		[(#REM) On ferme le li si le type d'entrée accepte des sous-menus ]
+		[(#TYPE_ENTREE|menus_type_refuser_sous_menu|non)</li>]
 		</BOUCLE_entrees>
 	</ul>
 	</B_entrees>

@@ -9,6 +9,12 @@ function menus_type_entree($nom){
 	return $dispo[$nom]['nom'];
 }
 
+function menus_type_refuser_sous_menu($nom){
+	include_spip('inc/menus');
+	$dispo = menus_lister_disponibles();
+	return $dispo[$nom]['refuser_sous_menu'];
+}
+
 if (!function_exists('generer_titre_entite')){
 	function generer_titre_entite($id_objet, $type_objet){
 		include_spip('base/connect_sql');

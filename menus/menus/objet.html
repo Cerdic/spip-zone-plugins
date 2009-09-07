@@ -9,5 +9,4 @@
 		<a href="[(#ENV{id_objet}|generer_url_entite{#ENV{type_objet}})]">
 			[(#ENV*{titre}|typo|sinon{#ENV{id_objet}|generer_titre_entite{#ENV{type_objet}}}|sinon{<:info_sans_titre:>})]
 		</a>
-	</li>
 ]
