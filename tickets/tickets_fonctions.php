@@ -2,45 +2,33 @@
 
 // Creation de la liste des options du select des champ jalon, version, projet ou composant
 function tickets_select_champ_optionnel($champ='', $en_cours){
-	$options = NULL;
-	if ($champ ==  '')
-		return $options;
-
-	switch(strtolower($champ))
-	{
-		case 'jalon':
-			if (defined('_TICKETS_LISTE_JALONS'))
-				$define = _TICKETS_LISTE_JALONS;
-			break;
-		case 'version':
-			if (defined('_TICKETS_LISTE_VERSIONS'))
-				$define = _TICKETS_LISTE_VERSIONS;
-			break;
-		case 'projet':
-			if (defined('_TICKETS_LISTE_PROJETS'))
-				$define = _TICKETS_LISTE_PROJETS;
-			break;
-		case 'composant':
-			if (defined('_TICKETS_LISTE_COMPOSANTS'))
-				$define = _TICKETS_LISTE_COMPOSANTS;
-			break;
-		default:
-			$define = '';
-			break;
+	if (!$liste = tickets_champ_optionnel_actif($champ)) {
+		return null;
 	}
-	if ($define ==  '')
-		return $options;
 
-	$liste = explode(':', $define);
+	$options = '';
 	foreach ($liste as $_item) {
 		if ($_item != '') {
 			$selected = ($_item == $en_cours) ? ' selected="selected"' : '';
 			$options .= '<option value="' . $_item . '"' . $selected . '>' . $_item . '</option>';
 		}
 	}
-
 	return $options;
 }
+
+// retourne false si pas de champ defini
+// sinon retourne un tableau des elements du champ
+function tickets_champ_optionnel_actif($nom){
+	$nom = '_TICKETS_LISTE_' . strtoupper($nom);
+	if (!defined($nom)) {
+		return false;
+	}
+	$liste = constant($nom);
+	if ($liste == '') return false;
+	
+	return explode(':', $liste);
+}
+
 
 // Creation de la liste des options du select d'assignation
 function tickets_select_assignation($en_cours){
@@ -99,24 +87,17 @@ function tickets_bouton_block_depliable($texte,$deplie,$ids=""){
 	return bouton_block_depliable($texte,$deplie,$ids);
 }
 
-// Interpretation des valeurs de certains champs de la table ticket
-function tickets_texte_severite ($niveau) {
-	if ($niveau == 1) return "bloquant";
-	else if ($niveau == 2) return "important";
-	else if ($niveau == 3) return "normal";
-	else if ($niveau == 4) return "peu important";
+// creation des fonction de selection de texte
+// encore en truc a reprendre !
+foreach (array('severite', 'type', 'statut') as $nom){
+	eval("function tickets_texte_$nom(\$niveau) {
+		\$type = tickets_liste_$nom();
+		if (isset(\$type[\$niveau])) {
+			return \$type[\$niveau];
+		}
+	}");
 }
-function tickets_texte_type ($niveau) {
-	if ($niveau == 1) return "probl&egrave;me";
-	else if ($niveau == 2) return "am&eacute;lioration";
-	else if ($niveau == 3) return "t&acirc;che";
-}
-function tickets_texte_statut ($niveau) {
-	if ($niveau == "redac") return "en cours de r&eacute;daction";
-	else if ($niveau == "ouvert") return "ouvert et discut&eacute;";
-	else if ($niveau == "resolu") return "r&eacute;solu";
-	else if ($niveau == "ferme") return "ferm&eacute;";
-}
+
 function tickets_icone_statut ($niveau) {
 	if ($niveau == "redac") $img = "puce-blanche.gif";
 	else if ($niveau == "ouvert") $img = "puce-orange.gif";
@@ -134,10 +115,40 @@ function tickets_icone_severite ($niveau) {
 	return $img;
 }
 
+function tickets_liste_statuts($connecte = true){
+	$statuts = array(
+		"redac" => "en cours de r&eacute;daction",
+		"ouvert" => "ouvert et discut&eacute",
+		"resolu" => "r&eacute;solu",
+		"ferme" => "ferme",
+	);
+	if (!$connecte) {
+		unset($statuts['redac']);
+	}
+	return $statuts;
+}
+
+
+function tickets_liste_types(){
+	return array(
+		1 => "probl&egrave;me",
+		2 => "am&eacute;lioration",
+		3 => "t&acirc;che",
+	);
+}
+
+function tickets_liste_severite(){
+	return array(
+		1 => "bloquant",
+		2 => "important",
+		3 => "normal",
+		4 => "peu important",
+	);
+}
+
 if(!function_exists('barre_typo')){
 	function barre_typo(){
 		return;
 	}
 }
-
 ?>
