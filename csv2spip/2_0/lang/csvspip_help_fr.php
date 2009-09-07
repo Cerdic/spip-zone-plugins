@@ -43,7 +43,7 @@ L'utilisation de cette premi&egrave;re ligne permet de pouvoir mettre les colonn
 </li>
 <li>s&eacute;parateur de champ: ; (point-virgule)</li>
 <li>valeurs encadr&eacute;es par des " (guillemets doubles) 
-		(vous n'&ecirc;tes pas oblig&eacute; d'encadrer les valeurs par des " mais si vous voulez &eacute;viter les probl&egrave;mes, c'est plus sûr...)</li>
+		(vous n'&ecirc;tes pas oblig&eacute; d'encadrer les valeurs par des " mais si vous voulez &eacute;viter les probl&egrave;mes, c'est plus s&ucirc;r...)</li>
 <li>s&eacute;parateur de ligne: \r\n (sauts de lignes utilis&eacute; par OOo Calc par d&eacute;faut) sous Windows, \n sous Linux 
 		(dans les 2 cas c'est le s&eacute;parateur standard du syst&egrave;me, &agrave; priori vous n'avez pas &agrave; vous en soucier)
 </ul>
