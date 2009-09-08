@@ -122,8 +122,10 @@ function genie_rssarticle_copie_dist($t){
 	} // FIN PILE
 	
 	// log et alerte email
-  $log .= "\nPlugin Copie RSS en Articles: $log_c articles copies";
-  spip_log($log);     
+  $log .= "\n\n---------\nPlugin Copie RSS en Articles: $log_c articles copies\n";
+  spip_log($log);
+  $log .= $GLOBALS['meta']['adresse_site']."/ecrire/?exec=accueil";
+       
   if ($email_alerte && $email_suivi !="" && $log_c > 0)                 
                   envoyer_mail($email_suivi,"Copie RSS en Articles", $log);
               
