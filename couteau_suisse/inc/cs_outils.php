@@ -61,13 +61,16 @@ function description_outil2($outil_id) {
 	include_spip('cout_utils');
 	// remplir $outils (et aussi $cs_variables qu'on n'utilise pas ici);
 	include_spip('config_outils');
-cs_log(" -- exec_charger_description_outil_dist() - Appel de config_outils.php : nb_outils = ".count($outils));
+cs_log(" -- description_outil2($outil_id) - Appel de config_outils.php : nb_outils = ".count($outils));
 
 cs_log(" -- appel de charger_fonction('description_outil', 'inc') et de description_outil($outil_id) :");
 	$description_outil = charger_fonction('description_outil', 'inc');
 	$descrip = cs_initialisation_d_un_outil($outil_id, $description_outil, true);
 
 	include_spip('inc/presentation');
+	include_spip('inc/texte');
+	include_spip('public/parametrer'); // fonctions pour les pipelines
+
 	$s = '<div class="cs-cadre">';
 
 	$outil = $outils[$outil_id]; unset($outils);
@@ -90,7 +93,6 @@ cs_log(" -- appel de charger_fonction('description_outil', 'inc') et de descript
 	$act = $actif?'des':'';
 	$s .= '<a href="'.generer_url_ecrire(_request('source'),'cmd=switch&outil='.$outil_id).'" title="'._T("couteauprive:outil_{$act}activer_le").'">'._T("couteauprive:outil_{$act}activer")."</a></div>";
 	if(strlen($temp = cs_action_rapide($outil_id, $actif))) $s .= "<div class='cs_action_rapide' id='cs_action_rapide'>$temp</div>";
-	include_spip('inc/texte');
 	$s .= propre($descrip);
 
 	$serial = serialize(array_keys($outil));
