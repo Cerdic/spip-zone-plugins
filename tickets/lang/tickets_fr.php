@@ -15,6 +15,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'assignation_supprimee' => 'L\'assignation de ce ticket a &eacute;t&eacute; supprim&eacute;e.',
 
 	// C
+	'cfg_descr_tickets' => 'Configuration du plugin Tickets pour SPIP',
+	'cfg_lgd_autorisation_assigner' => 'Assigner les tickets',
+	'cfg_lgd_autorisation_ecrire' => '&Eacute;crire les tickets',
+	'cfg_lgd_autorisation_modifier' => 'Modifier les tickets',
+	'cfg_lgd_autorisation_commenter' => 'Commenter les tickets',
+	'cfg_form_tickets_autorisations' => 'Configuration des autorisations',
+	'cfg_inf_type_autorisation' => 'Si vous choisissez par statut ou par auteur, il vous sera demand&eacute; ci-dessous votre s&eacute;lection de statuts ou d\'auteurs.',
+	'cfg_lbl_type_autorisation' => 'M&eacute;thode d\'autorisation',
+	'cfg_lbl_autorisation_webmestre' => 'Autoriser les webmestres uniquement',
+	'cfg_lbl_autorisation_statuts' => 'Autoriser par statut d\'auteurs',
+	'cfg_lbl_autorisation_auteurs' => 'Autoriser par liste d\'auteurs',
+	'cfg_lbl_statuts_auteurs' => 'Statuts possibles',
+	'cfg_lbl_liste_auteurs' => 'Auteurs du site',
+	'cfg_titre_tickets' => 'Tickets',
+
 	'champ_assigner' => 'Assigner &agrave;',
 	'champ_composant' => 'Composant',
 	'champ_date' => 'Date',
