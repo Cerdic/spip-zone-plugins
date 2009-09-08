@@ -1,0 +1,23 @@
+[(#REM) Infomartions Base généalogique ]
+
+       <div id="infobase">
+              <div id="titre"><:genespip:informations_sur_la_base:></div>
+       <BOUCLE_nombre_individu(SPIP_GENESPIP_INDIVIDU)>
+       </BOUCLE_nombre_individu>
+       [<small><:genespip:nombre_de_fiches:> :(#TOTAL_BOUCLE)</small><br />]
+       </B_nombre_individu>
+
+       <BOUCLE_nombre_nom(SPIP_GENESPIP_LISTE)>
+       </BOUCLE_nombre_nom>
+       [<small><:genespip:nombre_de_patronymes:> :(#TOTAL_BOUCLE)</small>]
+       </B_nombre_nom>
+              <div style="font-size:9px;color:#808080;text-align:left;padding-top:10px">
+               [SPIP: (#SPIP_VERSION)<br />]
+               [<:genespip:version_base_genespip:>:(#CONFIG{genespip_base_version})<br />]
+               [<:genespip:version_squelette:>:(#CONFIG{genespip_version_squelette})<br />]
+               [<:genespip:version_plugin:>:(#CONFIG{genespip_version_plugin})]
+              </div>
+
+       </div>
+
+

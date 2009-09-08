@@ -1,0 +1,75 @@
+#CACHE{7200}
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+<title>[(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)" />]
+<INCLURE{fond=inc-head}>
+</head>
+<body>
+<div id="enveloppe">
+    [(#REM) Entete de la page + titre du site ]
+    <INCLURE{fond=inc-entete}>
+ <div id="genespip_principale">
+    [(#REM) Fil d'Ariane ]
+    <div id="hierarchie"><a href="#URL_SITE_SPIP/?lang=#ENV{lang}">&nbsp;<:accueil_site:></a> > <:genespip:lieux:></div>
+    <div id="gauche">
+    <INCLURE{fond=inc-gauche}>
+    </div>
+    <div id="droite">
+    <INCLURE{fond=inc-droite}>
+    </div>
+    <div id="centre">
+      <div id="genespip_listenom">
+       <BOUCLE_acces_lieu(SPIP_GENESPIP_PARAMETRES){acces>=(#SESSION{statut}|acces)}>
+      <B_lieu>
+      <fieldset>
+      <BOUCLE_lieu(SPIP_GENESPIP_LIEUX){id_lieu}>
+      <legend>[(#PAYS|drapeau) ][&raquo;(#REGION)][&raquo;(#DEPARTEMENT)][((#CODE_DEPARTEMENT))][&raquo;(#VILLE)] <a href="http://fr.wikipedia.org/wiki/#VILLE" target="_blank"><img src="http://fr.wikipedia.org/favicon.ico" /></a> </legend>
+      </BOUCLE_lieu>
+      <BOUCLE_fiche(SPIP_GENESPIP_INDIVIDU){par nom}{par prenom}>
+      <BOUCLE_evtnaissance(SPIP_GENESPIP_EVENEMENTS){id_individu}{id_lieu}{id_type_evenement==1}>
+      [<u>(#NOM|unique)</u><br />]
+           - <a href="#URL_PAGE{individu,id_individu=#ID_INDIVIDU}&lang=#ENV{lang}">[(#PRENOM)]</a>
+         ([&ordm;(#NAISSANCE|quand)][,&dagger;(#DECES|quand)])<br />
+      </BOUCLE_evtnaissance>
+      </BOUCLE_fiche>
+      </fieldset>
+      <br /><br />
+      </B_lieu>
+       </BOUCLE_acces_lieu>
+      <INCLURE{fond=inc-acces}>
+       <//B_acces_lieu>
+       <BOUCLE_acces_pays(SPIP_GENESPIP_PARAMETRES){acces>=(#SESSION{statut}|acces)}>
+      <B_pays>
+       <BOUCLE_pays(SPIP_GENESPIP_LIEUX){par pays}{par region}{par code_departement}{par ville}{doublons}>
+          <BOUCLE_compte(SPIP_GENESPIP_EVENEMENTS){id_lieu}{id_type_evenement==1}>
+          </BOUCLE_compte>
+       [<div style="margin-top:15px">(#PAYS|drapeau|unique)</div>]
+        [<div style="margin-top:10px;border-top:1px solid black"><blockquote style="background-color:#E7E7E7">(#REGION|unique)</blockquote></div>]
+         [<div style="margin-top:10px;margin-left:20px"><blockquote><:genespip:departement:> : (#CODE_DEPARTEMENT|=={0}|?{'',#CODE_DEPARTEMENT}|unique)[, (#DEPARTEMENT)]</blockquote></div>]
+           <a href="#URL_PAGE{lieu,id_lieu=#ID_LIEU}&lang=#ENV{lang}">[(#VILLE|unique)][((#TOTAL_BOUCLE)), ]</a>
+          </B_compte>
+       </BOUCLE_pays>
+      </B_pays>
+       </BOUCLE_acces_pays>
+      <B_pays_non>
+       <BOUCLE_pays_non(SPIP_GENESPIP_LIEUX){par pays}{par region}{par code_departement}{par ville}{doublons}>
+          <BOUCLE_compte_non(SPIP_GENESPIP_EVENEMENTS){id_lieu}{id_type_evenement==1}>
+          </BOUCLE_compte_non>
+       [<div style="margin-top:15px">(#PAYS|drapeau|unique)</div>]
+        [<div style="margin-top:10px;border-top:1px solid black"><blockquote style="background-color:#E7E7E7">(#REGION|unique)</blockquote></div>]
+         [<div style="margin-top:10px;margin-left:20px"><blockquote><:genespip:departement:> : (#CODE_DEPARTEMENT|=={0}|?{'',#CODE_DEPARTEMENT}|unique)[, (#DEPARTEMENT)]</blockquote></div>]
+           [(#VILLE|unique)][((#TOTAL_BOUCLE)), ]
+          </B_compte_non>
+       </BOUCLE_pays_non>
+      </B_pays_non>
+       <//B_acces_pays>
+      </div>
+    </div>
+    [(#REM) Pied de page ]
+    <INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+ </div>
+</div>
+</body>
+</html>

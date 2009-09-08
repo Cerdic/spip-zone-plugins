@@ -1,0 +1,43 @@
+#CACHE{7200}
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+<title>[(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)" />]
+<INCLURE{fond=inc-head}>
+</head>
+<body>
+<div id="enveloppe">
+    [(#REM) Entete de la page + titre du site ]
+    <INCLURE{fond=inc-entete}>
+ <div id="genespip_principale">
+    [(#REM) Fil d'Ariane ]
+    <div id="hierarchie"><a href="#URL_SITE_SPIP/?lang=#ENV{lang}">&nbsp;<:accueil_site:></a> > <:genespip:liste_patronyme:></div>
+    <div id="gauche">
+    <INCLURE{fond=inc-gauche}>
+    </div>
+    <div id="droite">
+    <INCLURE{fond=inc-droite}><br />
+    </div>
+    <div id="centre">
+    <INCLURE{fond=inc-patronyme}{nom}>
+      <div id="genespip_listenom">
+       <BOUCLE_acces(SPIP_GENESPIP_PARAMETRES){acces>=(#SESSION{statut}|acces)}>
+       <BOUCLE_listing(SPIP_GENESPIP_LISTE){par nom}>
+       [<br /><div id="genespip_lettre">(#NOM|couper{1}|unique)</div>]<a href="#URL_PAGE{patronyme,nom=#NOM}&lang=#ENV{lang}">[(#NOM|majuscules)]</a>[ ((#NOMBRE)), ]
+       </BOUCLE_listing>
+       </BOUCLE_acces>
+       <BOUCLE_listingnon(SPIP_GENESPIP_LISTE){par nom}>
+       [<br /><div id="genespip_lettre">(#NOM|couper{1}|unique)</div>][(#NOM|majuscules)][ ((#NOMBRE)), ]
+       </BOUCLE_listingnon>
+       <//B_acces>
+      </div>
+
+
+    </div>
+    [(#REM) Pied de page ]
+    <INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+ </div>
+</div>
+</body>
+</html>

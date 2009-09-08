@@ -1,0 +1,585 @@
+/* ------------------------------------ *
+ CSS
+ vendredi 11 janvier 2008 17:37:24
+ HAPedit 3.1.11.111
+ * ------------------------------------ */
+
+/*
+Couleur principale -> #C0C0C0
+Couleur secondaire -> #FFB6E4
+Couleur principale -> #C0C0C0
+Couleur secondaire -> #FFB6E4
+*/
+
+body {
+
+    margin: 1em;
+    text-align: center;
+    font-size: 1em;
+    color: #333;
+}
+blockquote {
+margin-top:1px;
+margin-bottom:1px;
+border:1px dotted #E1E1E1;
+background-color:#FFF5D1;
+width:30em;
+}
+fieldset {
+width: 80%;
+font-size:10px;
+background:#F0F0F0;
+   border: 1px solid #C0C0C0;
+}
+legend {
+   padding-left: 2px;
+   padding-right: 2px;
+   border: 1px solid #C0C0C0;
+   font-family: Verdana;
+   background:#FFB6E4;
+}
+fieldset.forum {
+background-color:white;
+background-image: url(../img_pack/forum.png);
+background-repeat:no-repeat;
+background-position:top right;
+width: 90%;
+font-size:10px;
+text-align:left;
+border: 1px solid #E7E7E7;
+
+}
+
+legend.forum {
+   padding-left: 2px;
+   padding-right: 0px;
+   font-size:11px;
+   border: 1px solid white;
+   font-family: Verdana;
+   background:white;
+}
+h3.spip {
+     color:#252525;
+     font-size:20px;
+     border-bottom:2px solid #252525;
+     font-family: verdana, Symbol, serif;
+}
+hr {
+     border:1px solid #252525;
+}
+#siecle {
+     font-size:28px;
+     color:white;
+     background-color:#DEDEDE;
+     border:1px solid #C0C0C0;
+}
+.forml {
+   width: 70%;
+   padding: 1px;
+   border: 1px solid #666;
+}
+/*BREVE*/
+#breve {
+    background-image: url(../img_pack/background.gif);
+    background-repeat:repeat-y;
+    width:90%;
+    text-align:center;
+    border:1px solid #C0C0C0;
+}
+#breve #titre {
+    font-size:13px;
+    color:#C0C0C0;
+    text-align:center;
+    margin:1em;
+    margin-top:0em;
+    border-bottom:1px dotted #C0C0C0;
+}
+#breve #titre_breve {
+    font-size:11px;
+    color:#2A2A2A;
+    text-align:left;
+    margin-left:1em;
+}
+#breve #texte_breve {
+    font-size:11px;
+    color:#808080;
+    text-align:left;
+    margin-left:1.2em;
+    margin-bottom:1em;
+}
+#breve #logo {
+    display: block;
+    float: left;
+    margin-right:0.1em;
+}
+/*FIN BREVE*/
+
+#article #titre_rubrique {
+font-size:13px;
+color:#C0C0C0;
+text-align:right;
+margin-bottom:1em;
+border-bottom:2px solid #C0C0C0;
+}
+
+#enveloppe {
+    width: 58em;
+    /*height : 100em;*/
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+#enveloppe #coin-gauche {
+   float: left;
+   background-image: url(../img_pack/coin-gauche.png);
+   width:19px;
+}
+#enveloppe #coin-droite {
+   background-image: url(../img_pack/coin-droite.png);
+   width:19px;
+   float: right;
+}
+
+#titre_recherche {
+    font-size:1.3em;
+    color:#802E2E;
+}
+#genespip_principale {
+    background-color: #FFFFFF;
+    border-right:1em solid #C0C0C0;
+    border-left:1em solid #C0C0C0;
+    border-bottom:1px solid #C0C0C0;
+    text-align: left;
+    margin-left: auto;
+    margin-right: auto;
+}
+#genespip_principale #gauche {
+    display: block;
+    float: left;
+    width: 12.5em;
+    text-align:center;
+/*    border:1px solid black;*/
+}
+#genespip_principale #centre {
+    display: block;
+    float: right;
+    width: 30em;
+    text-align:center;
+/*    border:1px solid black;*/
+}
+
+#genespip_principale #centre_article {
+    display: block;
+    float: right;
+    width: 43em;
+    text-align:center;
+/*    border:1px solid black;*/
+}
+
+#genespip_principale #centre_article #contenu {
+    font-size:0.90em;
+    margin-left:2em;
+    width: 35em;
+    text-align:left;
+/*    border:1px solid black;*/
+}
+#genespip_principale #centre_rubrique {
+    display: block;
+    float: right;
+    width: 27em;
+    text-align:center;
+/*    border:1px solid black;*/
+}
+
+#genespip_principale #centre_rubrique #contenu {
+    font-size:0.90em;
+    width: 25em;
+    text-align:left;
+/*    border:1px solid black;*/
+}
+#genespip_principale #centre_rubrique #contenu #site {
+    width: 25em;
+    font-size:14px;
+    margin-bottom:1em;
+    border-bottom:1px dotted black;
+}
+#site #descriptif {
+    font-size:10px;
+}
+#site #titre {
+    text-align:left;
+}
+#site #logo {
+    display: block;
+    float: right;
+    width:10em;
+    text-align:right;
+}
+
+#genespip_principale #droite {
+    display: block;
+    float: right;
+    width: 11.5em;
+    text-align:center;
+/*    border:1px solid black;*/
+}
+#article {
+    width:95%;
+    text-align:left;
+}
+#article ul {
+    list-style: none;
+}
+#article li{
+    list-style-image: url(../img_pack/fiche.gif);
+    border-bottom:1px solid #C0C0C0;
+    margin-bottom:0.5em;
+    background:#F9F9F9;
+}
+#liste_individu li{
+    list-style-image: url(../img_pack/acte.png);
+    border-bottom:1px solid #C0C0C0;
+    margin-bottom:0.5em;
+    background:#F9F9F9;
+
+}
+#article #logo {
+    display: block;
+    float: left;
+    margin-right:1em;
+    margin:0.5em;
+}
+#article #titre {
+    background-color:#EEEEEE;
+    border-left:1px solid #C0C0C0;
+    font-size:0.85em;
+    vertical-align:top;
+    padding-left:1em;
+}
+#article #texte {
+    padding:1em;
+    font-size:0.75em;
+    border-top:1px dotted #C0C0C0;
+    border-bottom:1px solid #C0C0C0;
+    background:#F9F9F9;
+    margin-bottom:2em;
+}
+
+#centre #fiche {
+   font-size:0.75em;
+   text-align:left;
+   border-right:1px dotted silver;
+   border-bottom:1px dotted silver;
+   margin-right:1em;
+   margin-left:1em;
+   padding:1em;
+}
+#centre #fiche #auteurfiche {
+    width:100%;
+    text-align:center;
+    background:white;
+    border-bottom:1px dashed #C0C0C0;
+}
+#fiche #contenufiche {
+    height:120px;
+}
+#fiche #parentfiche {
+    width:100%;
+    background:#FFB6E4;
+    border:1px solid #C0C0C0;
+}
+#fiche #famillefiche {
+    width:100%;
+    background:#FFB6E4;
+    border:1px solid #C0C0C0;
+
+}
+#fiche #enfantfiche{
+   padding-left:1em;
+}
+#fiche #titrefiche{
+    width:100%;
+    font-size:1em;
+    font-weight:600;
+    background:white;
+    border-bottom:1px dashed #C0C0C0;
+}
+#fiche #portraitfiche{
+    display: block;
+    float:left;
+    width:100px;
+    height:100px;
+    padding:0.3em;
+}
+#fiche #note{
+    margin-top:1em;
+    padding-bottom:1em;
+    border-top:1px solid #C0C0C0;
+}
+#centre #centre_haut {
+    text-align:left;
+    display: block;
+    float:left;
+    width:25em;
+    border-bottom:1px dotted #808080;
+    margin-right:0.5em;
+    margin-bottom:1em;
+}
+
+#centre #centre_droite {
+    display: block;
+    float:right;
+    width:11em;
+    margin-right:0.5em;
+}
+
+#centre #centre_gauche {
+    font-size:0.75em;
+    display: block;
+    float:left;
+    text-align:left;
+    border-right:1px dotted #808080;
+}
+
+#genespip_listenom {
+    display: block;
+    float:right;
+    width: 33em;
+    text-align:left;
+    font-size:0.80em;
+    margin-left:2em;
+    margin-right:2em;
+}
+
+#genespip_lettre {
+    display: block;
+    border:1px solid #999;
+    padding: 0px;
+    margin: 1em;
+    background-color:#FFB6E4;
+    background-image: url(../img_pack/fondbouton.png);
+    color:#1F1F24;
+    width: 2em;
+}
+
+/* Entete */
+
+#genespip_entete {
+    background: #C0C0C0;
+    text-align: left;
+    width: 58em;
+}
+
+#enveloppe #nom_site_spip {
+    padding-left:2em;
+    width: 56em;
+    font-weight: bold;
+    z-index:1;
+ }
+#enveloppe #banniere {
+    z-index:2;
+    position: absolute;
+    left:58em;
+}
+#enveloppe #banniere2 {
+    z-index:3;
+    padding-top:2.5em;
+    position: absolute;
+    left:55em;
+}
+
+#genespip_entete a { text-decoration: none; }
+#genespip_entete .formulaire_recherche { float: right; }
+
+
+
+/** Parametres des menus de l'en-tete : Accueil, Plan, Contact et Redaction **/
+/* Le bloc "menu" lui meme */
+#mgs_menu_tete {
+    font-family: arial;
+    font-size: 11px;
+    text-align: center;
+    margin: 0px;
+    padding: 0px;
+    position:relative;
+    left:3em;
+}
+
+/* La liste des boutons */
+#mgs_menu_tete ul {
+    list-style: none;
+    margin: 0px;
+    padding-right: 5px;
+    padding-left: 5px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+/* Chaque bouton */
+#mgs_menu_tete li {
+    list-style: none;
+    text-align: center;
+    width: 80px;
+    float: left;
+    padding: 0px;
+    margin-top: 0px;
+    margin-right: 5px;
+    margin-bottom: 0px;
+    margin-left: 5px;
+}
+
+/** Parametres des liens des menus de l'en-tete **/
+/* Liens simples */
+#mgs_menu_tete li a, #mgs_menu_tete li a:link {
+    display: block;
+    border-right:1px solid #999;
+    border-left:1px solid #999;
+    border-top:1px solid #999;
+    padding: 0px;
+    margin: 0px;
+    background-color:#FFB6E4;
+    background-image: url(../img_pack/fondbouton.png);
+    color:#1F1F24;
+}
+
+/* Liens survoles */
+#mgs_menu_tete li a:hover {
+    background-color: #DCD3C9;
+    background-image: url(../img_pack/fondbouton2.png);
+    background-position:top;
+    color:black;
+}
+
+/** Parametres du champ de recherche des menus de l'en-tete **/
+/* Le champ de recherche lui meme */
+#mgs_menu_tete .mgs_form_rech {
+    clear: none; 
+    float: right;
+    margin: 1px 5px;
+    padding: 0px;
+    background-color: inherit;
+    font-size: 13px;
+
+}
+
+/* Les liens simples du champ de recherche */
+.mgs_form_rech a, .mgs_form_rech a:link {
+    border-style: none;
+}
+
+/* Fil d'Ariane */
+#genespip_principale #hierarchie {
+/*    display: block;
+    float: left;
+*/    width:100%;
+    font-size: 0.77em;
+    background-color:#FFB6E4;
+    border-bottom:1px solid #C0C0C0;
+    border-top:1px solid #C0C0C0;
+     }
+
+#genespip_logo {
+    font-size:0.75em;
+}
+#infobase {
+    width:15em;
+    font-size:0.75em;
+    text-align:left;
+    border:1px solid #C0C0C0;
+    background:#FFB6E4;
+}
+#infobase #titre{
+    padding-top:0.3em;
+    padding-bottom:0.3em;
+    width:100%;
+    text-align:center;
+    background:white;
+    border-bottom:1px dotted #C0C0C0;
+}
+#infobase #pied{
+    padding-top:0.3em;
+    padding-bottom:0.3em;
+    text-align:center;
+    background:white;
+    border-top:1px dotted #C0C0C0;
+}
+
+#genespip_rubriques {
+    text-align:left;
+}
+
+#arbre {
+text-align:left;
+font-size:10px;
+margin-left:2em;
+margin-right:1px;
+margin-top:0.5em;
+padding-left:0.5em;
+border-left:1px dashed black;
+background-color:#F7F7F7;
+}
+
+ul.liste, .liste li, .liste a {padding:1px ; margin:0px} /*met à 0 les marges internes et externes de la liste et des liens */
+ul.liste2, .liste2 li, .liste2 a {padding:1px ; margin-left:4px} /*met à 0 les marges internes et externes de la liste et des liens */
+
+.arbre ul {
+    list-style: none;
+}
+.arbre li{
+    list-style-image:url(../img_pack/arbre.png)
+}
+
+
+.liste {
+list-style-type:none;
+text-align:left;
+font-size:0.85em;
+font-family:arial;
+}
+.liste li a {
+border:0.1em solid #C0C0C0 ;
+background-color:#FFB6E4 ;
+display:block;
+padding-left:0.5em ;
+color:#000000 ;
+}
+.liste li a:hover {
+background-color:white ;
+color:#984B06 ;
+}
+#genespip_forum {
+    padding:1px;
+    margin:2px;
+    font-size:0.75em;
+    text-align:left;
+    border:1px solid #C0C0C0;
+    background:#FFB6E4;
+}
+#genespip_forum #titre{
+    padding-top:0.3em;
+    padding-bottom:0.3em;
+    width:100%;
+    text-align:center;
+    background:white;
+    border-bottom:1px dotted #C0C0C0;
+}
+#genespip_forum #forum_titre{
+    border-bottom:1px dotted white;
+    font-size:0.75em;
+    padding:0.50em;
+}
+#genespip_forum #forum_titre #date {
+/*    border-bottom:1px dotted #C0C0C0;*/
+}
+#genespip_forum #forum_titre #lien {
+    border-left:1px dotted #C0C0C0;
+    background:white;
+    padding:2px;
+    margin-left:0.75em;
+}
+#genespip_forum #forum_titre #icone {
+    display: block;
+    float: left;
+    padding-right:1em;
+
+}

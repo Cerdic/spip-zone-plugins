@@ -1,0 +1,45 @@
+#CACHE{86400}
+<BOUCLE_auteur_principal(AUTEURS) {id_auteur}>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+<title>[(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)" />]
+<INCLURE{fond=inc-head}>
+</head>
+
+<body>
+<div id="enveloppe">
+    [(#REM) Entete de la page + titre du site ]
+    <INCLURE{fond=inc-entete}>
+
+ <div id="genespip_principale">
+    [(#REM) Fil d'Ariane ]
+    <div id="hierarchie"><a href="#URL_SITE_SPIP"><:accueil_site:></a> > #NOM</div>
+    <div id="gauche">
+    <INCLURE{fond=inc-gauche}>
+    </div>
+    <div id="droite">
+    <INCLURE{fond=inc-droite}>
+    </div>
+    <div id="centre">
+
+<table>
+<tr><td>[(#LOGO_AUTEUR||image_reduire{200,200})]</td>
+    <td>
+        <h1 class="#EDIT{qui} titre">#NOM</h1>
+        [<div class="#EDIT{bio} texte">(#BIO)</div><br />]
+    </td>
+</tr>
+</table><br /><br />
+            [(#FORMULAIRE_ECRIRE_AUTEUR)]
+            [<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
+
+    </div>
+    [(#REM) Pied de page ]
+    <INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+ </div>
+</div>
+</body>
+</html>
+</BOUCLE_auteur_principal>
