@@ -57,8 +57,7 @@ function genie_rssarticle_copie_dist($t){
             $tags =  $a['tags'];
             
             if ($citer_source)
-                   $texte = "{"._T('rssarticle:article_origine')."} [->$url]\n\n\n$texte";
-            //     $texte .= "\n\n\nURL: [->$url]";  
+                   $texte .= "\n\n\n{"._T('rssarticle:article_origine')."} [->$url]";           
             if ($lang=="") 	
                 $lang = $GLOBALS['spip_lang'];    
         
