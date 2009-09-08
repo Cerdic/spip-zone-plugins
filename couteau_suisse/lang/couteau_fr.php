@@ -8,7 +8,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// 2
 	'2pts' => '@objet@&nbsp;:',
 	'maj_rev_ko' => "La [r&eacute;vision distante->@url@] n'a pas pu &ecirc;tre trouv&eacute;e.",
-	'maj_rev_ok' => 'La [r&eacute;vision @revision@->@url@] est disponible.',
+	'maj_rev_ok' => 'La r&eacute;vision [@revision@->@url@] est [disponible->@zip@].',
 	'maj_ok' => 'Ce [plugin->@zip@] semble [&agrave; jour->@url@].',
 	'maj_svn' => 'Ce plugin SVN semble [&agrave; jour->@url@].',
 	'maj_rev' => "R&eacute;v.&nbsp;@revision@",

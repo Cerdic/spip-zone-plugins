@@ -23,7 +23,7 @@ function maj_auto_action_rapide() {
 		$maj_lib = $checked = '';
 		if($infos['maj_dispo']) { 
 			$maj_lib = _T('couteau:maj_rev_ok', 
-				array('revision' => $infos['rev_rss'], 'url'=>$infos['url_origine']));
+				array('revision' => $infos['rev_rss'], 'url'=>$infos['url_origine'], 'zip'=>$infos['zip_trac']));
 			$checked = " class='maj_checked'"; }
 		elseif($infos['rev_rss']>0 && $infos['rev_local'])
 			$maj_lib = _T('couteau:maj'.($infos['svn']?'_svn':'_ok'),
@@ -33,6 +33,8 @@ function maj_auto_action_rapide() {
 			$checked = " class='maj_checked'"; }
 		elseif($infos['rev_local'] && $infos['rev_rss']<=0)
 			$maj_lib = _T('couteau:maj_rev_ko', array('url'=>$infos['url_origine']));
+		// eventuels liens morts
+		$maj_lib = preg_replace(',\[([^[]+)->\],', '$1', $maj_lib);
 		$nom = trim($infos['nom']). '&nbsp;(v' .$infos['version'] . ')' . ($maj_lib?"\n_ {{".$maj_lib.'}}':'');
 		$rev = $infos['rev_local']?_T('couteau:maj_rev', array('revision' => $infos['rev_local'])):'';
 		if(strlen($infos['commit'])) $rev .= (strlen($rev)?'<br/>':'') . cs_date_court($infos['commit']);
@@ -118,7 +120,7 @@ function plugin_get_infos_maj($p, $force = false) {
 		// fichier SVN
 		if (lire_fichier(_DIR_PLUGINS.$p.'/.svn/entries', $svn) && preg_match(',('.preg_quote(_MAJ_SVN_TRAC).'[^\n\r]+),ms', $svn, $regs))
 			$url_origine = str_replace(_MAJ_SVN_TRAC, _MAJ_LOG_DEBUT, $regs[1]);
-		$infos['zip_trac'] = 'SVN';
+		//$infos['zip_trac'] = 'SVN';
 	}
 	$infos['url_origine'] = strlen($url_origine)?$url_origine._MAJ_LOG_FIN:'';
 	$infos['rev_local'] = abs($rev_local);
