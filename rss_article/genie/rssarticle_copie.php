@@ -67,6 +67,9 @@ function genie_rssarticle_copie_dist($t){
                                 'titre'=>$titre, 'id_rubrique'=>$id_rubrique,
                                 'texte'=>$texte, 'statut'=>$import_statut, 'id_secteur'=>$id_secteur,
                                 'date'=> $lsDate, 'accepter_forum'=>'non', 'lang'=>$lang));
+             
+            // lierarticle et site
+            sql_insertq( 'spip_articles_syndic', array('id_article'=>$id_article, 'id_syndic'=>$id_syndic));
                                 
             // gestion auteur            
             $auteurs= explode(", ",$a['lesauteurs']);            
@@ -109,7 +112,7 @@ function genie_rssarticle_copie_dist($t){
                   @copy($logo_site[0],_DIR_LOGOS."$logo_article");
                }                 
             }
-                                		
+                                                       		
         		$log_c++;
         		$log .= "\n - $titre";             
         } 

@@ -21,7 +21,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   'email_alerte' => 'Pr&eacute;venir par email &agrave; chaque nouvelle syndication en articles ?',
   'email_alerte_email' => 'Si oui, sur quel email ? ',
   
-  
+  // I
+  'install_rssarticle' => 'Cr&eacute;ation de la table spip_articles_syndic'
   
 
 );
