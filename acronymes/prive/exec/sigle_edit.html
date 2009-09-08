@@ -6,11 +6,11 @@
 <div class='cadre-formulaire-editer'>
 <div class="entete-formulaire">
 	[(#ENV{retour,#URL_ECRIRE{sigles_tous}}|icone{<:icone_retour:>,#CHEMIN{img_pack/acronym-24.png}})]
-	[(#ID_SIGLE|oui)<h1>Modifier le sigle ##ID_SIGLE</h1>]
-	[(#ID_SIGLE|non)<h1>Ajouter un nouveau sigle</h1>]
+	[(#ID_DONNEE|oui)<h1>Modifier le sigle ##ID_DONNEE</h1>]
+	[(#ID_DONNEE|non)<h1>Ajouter un nouveau sigle</h1>]
 </div>
 <BOUCLE_table(FORMS){type_form=acronymes_sigles}{0,1}>
-<BOUCLE_acronymes(FORMS_DONNEES){id_form}{id_donnee=#ENV{id_sigle}}>
+<BOUCLE_acronymes(FORMS_DONNEES){id_form}{id_donnee=#ENV{id_donnee}}>
 <?php $GLOBALS['forms_actif_exec']=array('sigle_edit'); ?>
 [(#FORMS{'valide_form','forms:avis_message_confirmation','forms:reponse_enregistree','',#ENV{retour,#URL_ECRIRE{sigles_tous}}})]
 </BOUCLE_acronymes>
@@ -19,7 +19,7 @@
 <//B_acronymes>
 </BOUCLE_table>
 <p class="actions">
-<a href="#URL_ACTION_AUTEUR{instituer_forms_donnee,#ID_SIGLE-poubelle,#ENV{retour,#URL_ECRIRE{sigles_tous}}}"><:acronymessigles:texte_supprimer:></a>
+<a href="#URL_ACTION_AUTEUR{instituer_forms_donnee,#ID_DONNEE-poubelle,#ENV{retour,#URL_ECRIRE{sigles_tous}}}"><:acronymessigles:texte_supprimer:></a>
 </p>
 
 </div>
