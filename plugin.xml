@@ -1,0 +1,24 @@
+<plugin>
+    <nom>GeneSPIP</nom>
+    <auteur>Christophe RENOU</auteur>
+    <version>2.0</version>
+    <etat>test</etat>
+    <description>genespip pour SPIP 2.0</description>
+    <prefix>genespip</prefix>
+    <icon>logo_genespip.png</icon>
+    <fonctions>genespip_fonctions.php</fonctions>    <!-- fichier charge a chaque recalul de page (espace public) -->
+    <install>base/gestion_base.php</install>
+    <!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+    <pipeline>
+        <nom>ajouter_boutons</nom>
+        <action>ajouterBoutons</action>
+        <inclure>genespip_pipelines.php</inclure>
+    </pipeline>
+    
+    <pipeline>
+        <nom>header_prive</nom>
+        <action>header_prive</action>       
+        <inclure>genespip_fonctions.php</inclure>
+    </pipeline>
+
+</plugin>

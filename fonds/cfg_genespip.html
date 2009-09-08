@@ -1,0 +1,59 @@
+[(#REM) titre=GeneSpip]
+[(#REM) icone=logo_genespip.png]
+[(#REM) descriptif=
+<p>Cette zone permet de configurer les variables de base du plugin.</p>
+<p> Pour fonctionner correctement ce plugin doit &ecirc;tre install&eacute; en parall&egrave;le avec le plugin cfg</p>
+]
+
+#CACHE{0}
+
+<form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
+		<br />
+	[(#REM)THEME]
+	<fieldset>	
+		<legend>Thème</legend>
+		<div style="float:left;width:20%;padding:1px;"><input type='radio' name='theme' value="747DFF" [(#ENV{theme}|=={'747DFF'}|?{checked="checked"})] /><span style="background:#747DFF">747DFF</span></div>
+		<div style="float:left;width:20%;padding:1px;"><input type='radio' name='theme' value="A1DF1C" [(#ENV{theme}|=={A1DF1C}|?{checked="checked"})] /><span style="background:#A1DF1C">A1DF1C</span></div>
+		<div style="float:left;width:20%;padding:1px;"><input type='radio' name='theme' value="B07575" [(#ENV{theme}|=={B07575}|?{checked="checked"})] /><span style="background:#B07575">B07575</span></div>
+		<div style="float:left;width:20%;padding:1px;"><input type='radio' name='theme' value="C0C0C0" [(#ENV{theme}|=={C0C0C0}|?{checked="checked"})] /><span style="background:#C0C0C0">C0C0C0</span></div>
+		<br />
+		<div style="float:left;width:20%;padding:1px;"><input type='radio' name='theme' value="C8D5E1" [(#ENV{theme}|=={C8D5E1}|?{checked="checked"})] /><span style="background:#C8D5E1">C8D5E1</span></div>
+		<div style="float:left;width:20%;padding:1px;"><input type='radio' name='theme' value="F00078" [(#ENV{theme}|=={F00078}|?{checked="checked"})] /><span style="background:#F00078">F00078</span></div>
+		<div style="float:left;width:20%;padding:1px;"><input type='radio' name='theme' value="FF8000" [(#ENV{theme}|=={FF8000}|?{checked="checked"})] /><span style="background:#FF8000">FF8000</span></div>
+		<div style="float:left;width:20%;padding:1px;"><input type='radio' name='theme' value="FFF1CE" [(#ENV{theme}|=={FFF1CE}|?{checked="checked"})] /><span style="background:#FFF1CE">FFF1CE</span></div>
+	</fieldset>	
+	<br />#ENV{theme}
+	
+	<fieldset>
+		[(#REM)PUBLICITE]
+		<input type='checkbox' name='pub' value='on' [(#ENV{pub}|=={on}|?{checked="checked"})] /> 
+		<label for="pub"><:genespip:pub:></label>
+		<div><i><:genespip:info_pub:></i></div>
+		<br />
+		[(#REM)MULTILINGUE]
+		
+		<input type='checkbox' name='multilingue' value='on' [(#ENV{multilingue}|=={on}|?{checked="checked"})] />
+		<label for="multilingue"><:genespip:multilingue:></label>
+		<div><i><:genespip:info_multilingue:></i></div> 
+		
+		<br />
+		[(#REM)CENT ANS]
+		
+		<input type='checkbox' name='centans' value='on' [(#ENV{centans}|=={on}|?{checked="checked"})] />
+		<label for="centans"><:genespip:centans:></i></label>
+		<div><i><:genespip:info_centans:></div>
+	</fieldset>	
+	<br />
+	[(#REM)ACCES]
+	<fieldset>
+		<legend><:genespip:restriction_acces:></legend>
+		<select name="acces" id="acces" style="width:100%" />
+			<option value='0' [(#ENV{acces}|=={0}|?{selected="selected"})]><:genespip:info_restriction_acces0:></option>
+			<option value='1' [(#ENV{acces}|=={1}|?{selected="selected"})]><:genespip:info_restriction_acces1:></option>
+			<option value='2' [(#ENV{acces}|=={2}|?{selected="selected"})]><:genespip:info_restriction_acces2:></option>
+			<option value='3' [(#ENV{acces}|=={3}|?{selected="selected"})]><:genespip:info_restriction_acces3:></option>
+		</select>
+		<div><i><:genespip:info_restriction_acces:></i></div>
+	</fieldset>
+	<div><input style="float:#LANG_RIGHT;" type="submit" name="_cfg_ok" value="<:OK:>" class="fondo" /></div>
+</form>

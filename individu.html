@@ -1,0 +1,170 @@
+#CACHE{7200}
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+<title>[(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)" />]
+<INCLURE{fond=inc-head}>
+</head>
+
+<body>
+<div id="enveloppe">
+    [(#REM) Entete de la page + titre du site ]
+    <INCLURE{fond=inc-entete}>
+
+ <div id="genespip_principale">
+   <B_fiche>
+   <BOUCLE_fiche(SPIP_GENESPIP_INDIVIDU){id_individu}{poubelle!=1}>
+    [(#REM) Fil d'Ariane ]
+    <div id="hierarchie"><a href="#URL_SITE_SPIP/?lang=#ENV{lang}"><:accueil_site:></a> > <:genespip:fiche_num:> #ID_INDIVIDU</div>
+    <div id="gauche">
+    <INCLURE{fond=inc-gauche}>
+    </div>
+    <div id="droite">
+    <INCLURE{fond=inc-droite}>
+    </div>
+    <div id="centre">
+	<BOUCLE_acces_individu(SPIP_GENESPIP_PARAMETRES){acces>=(#ACCESS{statut}|acces)}></BOUCLE_acces_individu>
+        <div id="fiche">
+             <div id="auteurfiche">
+                  <BOUCLE_auteur(AUTEURS){id_auteur=#ID_AUTEUR}>
+                  <small>[Déposé par <i>(#NOM)</i> - ]
+                  </BOUCLE_auteur>
+                  [Dernière modification le (#DATE_UPDATE|affdate)<br />]</small>
+             </div><!-- fin auteurfiche -->
+           <div style="margin:4px;font-size:10px"><img src="#CHEMIN{img_pack/arbredesc.png}" alt=""> &raquo;  <a href="#URL_PAGE{arbre,nom=#NOM}&lang=#ENV{lang}"><:genespip:arborescence_des:> "#NOM"</a></div>
+           <div style="margin:4px;font-size:10px"><img src="#CHEMIN{img_pack/arbreasc.png}" alt=""> &raquo;  <a href="#URL_PAGE{arbreasc,id_individu=#ID_INDIVIDU}&lang=#ENV{lang}" target="_blank"><:genespip:arbre_asc:> </a></div>
+
+             <div id="contenufiche">
+                  [<div id="portraitfiche">(#PHOTO|image_reduire{90})</div>]<br />
+                  [(#NOM|image_typo{police=bellerose.ttf,taille=15,couleur=313131}|image_alpha{60})]
+                  [(#PRENOM|image_typo{police=bellerose.ttf,taille=15,couleur=313131}|image_alpha{60})]
+                  <br />
+                  [&ordm;&nbsp;(#NAISSANCE|quand)][, (#NAISSANCE|lieu)] [(#NAISSANCE|lieu|pays|drapeau)]<br />
+                  [&dagger;&nbsp;(#DECES|quand)][, (#DECES|lieu)] [(#DECES|lieu|pays|drapeau)]<br />
+                  [<:genespip:metier:> : (#METIER)<br />]
+                  [<:genespip:adresse:> : (#ADRESSE)<br /><br />]
+             </div><!-- fin contenufiche -->
+                  <div style="text-align:center">[(#SIGNATURE)<br />]</div>
+             <br />
+    [(#REM) Liste documents liees ]
+            <B_liste_documents>
+            <fieldset>
+             <legend>Documents li&eacute;s</legend>
+               <BOUCLE_liste_documents(SPIP_GENESPIP_DOCUMENTS){id_individu}>
+                <BOUCLE_article_principal(ARTICLES){id_article=#ID_ARTICLE}>
+                 <img src='#CHEMIN{img_pack/stock_attach-16.png}' alt='-' align='top' border='0'> <a href="#URL_ARTICLE&lang=#ENV{lang}"[ class="(#EXPOSE)"]>[(#TITRE)]</a><br />
+                </BOUCLE_article_principal>
+               </BOUCLE_liste_documents>
+             </fieldset><br />
+             </B_liste_documents>
+
+             <fieldset>
+                  <legend><:genespip:parents:></legend>
+                  <BOUCLE_pere(SPIP_GENESPIP_INDIVIDU){id_individu=#PERE}>
+                  <u><i><:genespip:pere:></i></u> : <a href="#URL_SITE?page=individu&id_individu=[(#ID_INDIVIDU)]&lang=#ENV{lang}"> #NOM #PRENOM</a>
+                  [(#PORTRAIT|=={0}|?{'',' '})<img src="#CHEMIN{img_pack/portrait.png}" alt="Portrait">]
+                  <BOUCLE_liste_documents_pere(SPIP_GENESPIP_DOCUMENTS){id_individu=#ID_INDIVIDU}></BOUCLE_liste_documents_pere>
+                  [(#TOTAL_BOUCLE|=={0}|?{'',' '})[((#TOTAL_BOUCLE)] <img src="#CHEMIN{img_pack/stock_attach-16.png}" alt="Documents">)]
+                  <//B_liste_documents_pere>
+                  <br /> <small>([&ordm;(#NAISSANCE|quand)][,&dagger;(#DECES|quand)])</small>
+                  <br />
+                  </BOUCLE_pere>
+                  <BOUCLE_mere(SPIP_GENESPIP_INDIVIDU){id_individu=#MERE}>
+                  <u><i><:genespip:mere:></i></u> : <a href="#URL_SITE?page=individu&id_individu=[(#ID_INDIVIDU)]&lang=#ENV{lang}"> #NOM #PRENOM</a>
+                  [(#PORTRAIT|=={0}|?{'',' '})<img src="#CHEMIN{img_pack/portrait.png}" alt="Portrait">]
+                  <BOUCLE_liste_documents_mere(SPIP_GENESPIP_DOCUMENTS){id_individu=#ID_INDIVIDU}></BOUCLE_liste_documents_mere>
+                  [(#TOTAL_BOUCLE|=={0}|?{'',' '})[((#TOTAL_BOUCLE)] <img src="#CHEMIN{img_pack/stock_attach-16.png}" alt="Documents">)]
+                  <//B_liste_documents_mere>
+                  <br /> <small>([&ordm;(#NAISSANCE|quand)][,&dagger;(#DECES|quand)])</small>
+                  </BOUCLE_mere>
+             </fieldset><!-- fin parentfiche -->
+             <br /><br />
+<B_famille>
+                  <BOUCLE_famille(SPIP_GENESPIP_EVENEMENTS){id_individu}{id_type_evenement=3}>
+             <fieldset>
+                  <legend><:genespip:famille:> #COMPTEUR_BOUCLE</legend>
+                  [<h1><b>&ndash;X&ndash;</b></font> <:genespip:mariage_le:> (#MARIAGE|quand)][, (#MARIAGE|lieu|ville)]
+                  <BOUCLE_epoux(SPIP_GENESPIP_INDIVIDU){id_individu=#ID_EPOUX}>
+                    <:genespip:avec:> <a href="#URL_SITE?page=individu&id_individu=[(#ID_INDIVIDU)]&lang=#ENV{lang}"> #NOM #PRENOM</a>
+                  </BOUCLE_epoux>
+                  <br />
+                  <div id="enfantfiche">
+                       <B_enfant_pere>
+                           <u><i><:genespip:enfants_couple:></i></u>
+                           <BOUCLE_enfant_pere(SPIP_GENESPIP_INDIVIDU){pere=#ID_INDIVIDU}{mere=#ID_EPOUX}>
+                           [<br />&ndash;(#ENFANT|=={0}|?{" ","<b>&rsaquo;&rsaquo;&rsaquo;</b>"})]<a href="#URL_SITE?page=individu&id_individu=[(#ID_INDIVIDU)]&lang=#ENV{lang}"> #NOM #PRENOM</a>
+                           [(#PORTRAIT|=={0}|?{'',' '})<img src="#CHEMIN{img_pack/portrait.png}" alt="Portrait">]
+                           <BOUCLE_liste_documents_enfant_pere(SPIP_GENESPIP_DOCUMENTS){id_individu=#ID_INDIVIDU}></BOUCLE_liste_documents_enfant_pere>
+                           [(#TOTAL_BOUCLE|=={0}|?{'',' '})[((#TOTAL_BOUCLE)] <img src="#CHEMIN{img_pack/stock_attach-16.png}" alt="Documents">)]
+                           <//B_liste_documents_enfant_pere>
+                           <br /> <small>([&ordm;(#NAISSANCE|quand)][,&dagger;(#DECES|quand)])</small>
+                           </BOUCLE_enfant_pere>
+                       </B_enfant_pere>
+                       <B_enfant_mere>
+                           <u><i><:genespip:enfants_couple:></i></u>
+                           <BOUCLE_enfant_mere(SPIP_GENESPIP_INDIVIDU){mere=#ID_INDIVIDU}{pere=#ID_EPOUX}>
+                           [<br />&ndash;(#ENFANT|=={0}|?{" ","<b>&rsaquo;&rsaquo;&rsaquo;</b>"})]<a href="#URL_SITE?page=individu&id_individu=[(#ID_INDIVIDU)]&lang=#ENV{lang}"> #NOM #PRENOM</a>
+                           [(#PORTRAIT|=={0}|?{'',' '})<img src="#CHEMIN{img_pack/portrait.png}" alt="Portrait">]
+                           <BOUCLE_liste_documents_enfant_mere(SPIP_GENESPIP_DOCUMENTS){id_individu=#ID_INDIVIDU}></BOUCLE_liste_documents_enfant_mere>
+                           [(#TOTAL_BOUCLE|=={0}|?{'',' '})[((#TOTAL_BOUCLE)] <img src="#CHEMIN{img_pack/stock_attach-16.png}" alt="Documents">)]
+                           <//B_liste_documents_enfant_mere>
+                           <br /> <small>([&ordm;(#NAISSANCE|quand)][,&dagger;(#DECES|quand)])</small>
+                           </BOUCLE_enfant_mere>
+                       </B_enfant_mere>
+                  </div>
+             </fieldset><br /><!-- fin famillefiche -->
+                  </BOUCLE_famille>
+</B_famille>
+             <fieldset>
+                  <legend><:genespip:famille:></legend>
+                  <div id="enfantfiche">
+                       <B_enfant_sans_mere>
+                           <u><i><:genespip:enfants:></i></u>
+                           <BOUCLE_enfant_sans_mere(SPIP_GENESPIP_INDIVIDU){pere=#ID_INDIVIDU}>
+                           [<br />&ndash;(#ENFANT|=={0}|?{" ","<b>&rsaquo;&rsaquo;&rsaquo;</b>"})]<a href="#URL_SITE?page=individu&id_individu=[(#ID_INDIVIDU)]&lang=#ENV{lang}"> #NOM #PRENOM</a>
+                           [(#PORTRAIT|=={0}|?{'',' '})<img src="#CHEMIN{img_pack/portrait.png}" alt="Portrait">]
+                  <BOUCLE_liste_documents_sans_mere(SPIP_GENESPIP_DOCUMENTS){id_individu=#ID_INDIVIDU}></BOUCLE_liste_documents_sans_mere>
+                  [(#TOTAL_BOUCLE|=={0}|?{'',' '})[((#TOTAL_BOUCLE)] <img src="#CHEMIN{img_pack/stock_attach-16.png}" alt="Documents">)]
+                  <//B_liste_documents_sans_mere>
+                           <br /> <small>([&ordm;(#NAISSANCE|quand)][,&dagger;(#DECES|quand)])</small>
+                           </BOUCLE_enfant_sans_mere>
+                       </B_enfant_sans_mere>
+                       <B_enfant_sans_pere>
+                           <u><i><:genespip:enfants:></i></u>
+                           <BOUCLE_enfant_sans_pere(SPIP_GENESPIP_INDIVIDU){mere=#ID_INDIVIDU}>
+                           [<br />&ndash;(#ENFANT|=={0}|?{" ","<b>&rsaquo;&rsaquo;&rsaquo;</b>"})]<a href="#URL_SITE?page=individu&id_individu=[(#ID_INDIVIDU)]&lang=#ENV{lang}"> #NOM #PRENOM</a>
+                           [(#PORTRAIT|=={0}|?{'',' '})<img src="#CHEMIN{img_pack/portrait.png}" alt="Portrait">]
+                  <BOUCLE_liste_documents_sans_pere(SPIP_GENESPIP_DOCUMENTS){id_individu=#ID_INDIVIDU}></BOUCLE_liste_documents_sans_pere>
+                  [(#TOTAL_BOUCLE|=={0}|?{'',' '})[((#TOTAL_BOUCLE)] <img src="#CHEMIN{img_pack/stock_attach-16.png}" alt="Documents">)]
+                  <//B_liste_documents_sans_pere>
+                           <br /> <small>([&ordm;(#NAISSANCE|quand)][,&dagger;(#DECES|quand)])</small>
+                           </BOUCLE_enfant_sans_pere>
+                       </B_enfant_sans_pere>
+                  </div>
+             </fieldset><br />
+<//B_famille>
+             [<div id='note'>
+             <div id="titrefiche"><:genespip:note:></div>
+             (#NOTE)
+             </div>]
+<INCLURE{fond=inc-patronyme}{nom}>
+
+         </div><!-- fin fiche -->
+
+       </B_acces_individu>
+      <INCLURE{fond=inc-acces}>
+       <//B_acces_individu>
+      </div><!-- fin centre -->
+ </BOUCLE_fiche>
+ </B_fiche>
+Aucune Fiche ne possède ce numéro.
+<//B_fiche>
+
+
+    [(#REM) Pied de page ]
+    <INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+ </div>
+</div>
+</body>
+</html>

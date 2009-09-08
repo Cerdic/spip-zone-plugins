@@ -1,0 +1,62 @@
+#CACHE{7200}
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+<title>[(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)" />]
+<INCLURE{fond=inc-head}>
+</head>
+<body>
+<div id="enveloppe">
+    [(#REM) Entete de la page + titre du site ]
+    <INCLURE{fond=inc-entete}>
+ <div id="genespip_principale">
+    [(#REM) Fil d'Ariane ]
+    <div id="hierarchie"><a href="#URL_SITE_SPIP/?lang=#ENV{lang}">&nbsp;<:accueil_site:></a> > <:genespip:galerie:></div>
+    <div id="gauche">
+    <INCLURE{fond=inc-gauche}>
+    </div>
+    <div id="droite">
+    <INCLURE{fond=inc-droite}><br />
+    </div>
+    <div id="centre">
+<BOUCLE_acces_galerie(SPIP_GENESPIP_PARAMETRES){acces>=(#SESSION{statut}|acces)}>
+      <div id="genespip_listenom" style="text-align:center">
+      [(#SET{texte, <:genespip:photos:>})]
+          [(#GET{texte}|image_typo{police=album-avantquelombre.ttf,taille=17,padding=14,couleur=#202020}|image_alpha{30})]
+
+      <br /> <br />
+       <BOUCLE_date(SPIP_GENESPIP_EVENEMENTS){par date_evenement}{id_type_evenement=1}>
+       <BOUCLE_listingphoto(SPIP_GENESPIP_INDIVIDU){id_individu}{portrait=1}>
+       [<div style="border:1px solid #4D4D4D;background-color:#EBEBEB;padding:2px;margin:2px;position:relative;width:60px;float:right">
+       <a href="[(#URL_PAGE{individu,id_individu=#ID_INDIVIDU})]" alt="#NOM #PRENOM" title="#NOM #PRENOM">(#PHOTO|image_reduire{60})</a>
+       </div>]
+       </BOUCLE_listingphoto>
+       </BOUCLE_date>
+      </div>
+      <B_listingsign>
+      <div id="genespip_listenom" style="text-align:center">
+      <br /><hr />
+      [(#SET{texte, <:genespip:signatures:>})]
+          [(#GET{texte}|image_typo{police=album-avantquelombre.ttf,taille=17,padding=14,couleur=#202020}|image_alpha{30})]
+
+      <br /> <br />
+       <BOUCLE_listingsign(SPIP_GENESPIP_INDIVIDU){signature=1}>
+       <fieldset><legend>#NOM #PRENOM</legend>
+       <div style="border:1px solid #4D4D4D;background-color:white;padding:2px;margin:2px;text-align:center">
+       [<a href="[(#URL_PAGE{individu,id_individu=#ID_INDIVIDU})]" alt="#NOM #PRENOM" title="#NOM #PRENOM">(#SIGNATURE|image_reduire{200})</a>]
+       </div></fieldset>
+       </BOUCLE_listingsign>
+      </div>
+      </B_listingsign>
+       </BOUCLE_acces_galerie>
+      <INCLURE{fond=inc-acces}>
+       <//B_acces_galerie>
+
+    </div>
+    [(#REM) Pied de page ]
+    <INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+ </div>
+</div>
+</body>
+</html>
