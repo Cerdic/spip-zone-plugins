@@ -87,6 +87,7 @@ function crayons_store($options = array()) {
 				list(,$crayon,$type,$modele,$id) = $regs;
 				$wid = $postee[3];
 
+				spip_log("autoriser('crayonner', $type, $id, NULL, array('modele'=>$modele)","crayons_distant");
 				if (!autoriser('crayonner', $type, $id, NULL, array('modele'=>$modele))) {
 					$return['$erreur'] =
 						"$type $id: " . _U('crayons:non_autorise');
@@ -230,8 +231,11 @@ function crayons_store_set_modifs($modifs, $return) {
 	        // Enregistrer dans la base
 	        // $updok = ... quand on aura un retour
 	        // -- revisions_articles($id_article, $c) --
-	        spip_log("$fun($id ...)", 'crayons');
-	        $fun($id, $champsvaleurs['chval'], $type, $champsvaleurs['wdg']);
+			spip_log("$fun($id ...)", 'crayons');
+			$updok = $fun($id, $champsvaleurs['chval'], $type, $champsvaleurs['wdg']);
+			//Renvoyer erreur si update base distante echoue, on ne regarde pas les updates base local car ils ne revoient rien
+			list($distant,$table) = distant_table($type);
+			$distant AND !$updok ? $return['$erreur'] = "$type: " . _U('update_impossible'):pass;
 	    }
 	}
 
@@ -245,6 +249,7 @@ function vues_dist($type, $modele, $id, $content, $wid){
 	// pour ce qui a une {lang_select} par defaut dans la boucle,
 	// la regler histoire d'avoir la bonne typo dans le propre()
 	// NB: ceci n'a d'impact que sur le "par defaut" en bas
+	list($distant,$table) = distant_table($type);
 	if (colonne_table($type, 'lang')) {
 		$b = valeur_colonne_table($type, 'lang', $id);
 		lang_select($a = array_pop($b));
@@ -258,7 +263,7 @@ function vues_dist($type, $modele, $id, $content, $wid){
   OR find_in_path( ($fond = 'vues/' . $modele) .'.html')
   OR find_in_path( ($fond = 'vues/' . $type) .'.html')) {
 		$contexte = array(
-		    'id_' . $type => $id,
+		    'id_' . $table => $id,
 		    'crayon_type' => $type,
 			'crayon_modele' => $modele,
 		    'champ' => $modele,
@@ -293,6 +298,7 @@ function vues_dist($type, $modele, $id, $content, $wid){
 //
 function crayons_update($id, $colval = array(), $type = '')
 {
+	list($distant,$table) = distant_table($type);
 	if (!$colval) {
 		return false;
 	}
@@ -308,7 +314,7 @@ function crayons_update($id, $colval = array(), $type = '')
 	}
 
 	$a = spip_query($q =
-        'UPDATE `' . $nom_table . '` SET ' . $update . ' WHERE ' . $where);
+        'UPDATE `' . $nom_table . '` SET ' . $update . ' WHERE ' . $where , $distant );
 
 	#spip_log($q);
 	include_spip('inc/invalideur');

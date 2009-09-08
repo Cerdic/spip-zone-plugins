@@ -65,6 +65,7 @@ function &Crayons_affichage_final(&$page) {
 	$droits_accordes = 0;
 	foreach ($regs as $reg) {
 		list(,$crayon,$type,$champ,$id) = $reg;
+		spip_log("autoriser('modifier', $type, $id, NULL, array('champ'=>$champ))","crayons_distant");
 		if (autoriser('modifier', $type, $id, NULL, array('champ'=>$champ))) {
 			$droits['.' . $crayon]++;
 			$droits_accordes ++;
@@ -139,7 +140,7 @@ EOH;
 <!--
 (function($){
 $(document).ready(function(){
-	/* Ajouter une barre porte plume sur les crayons */	
+	/* Ajouter une barre porte plume sur les crayons */
 	function barrebouilles_crayons(){
 		$('.formulaire_crayon textarea.crayon-active:not(.markItUpEditor)').markItUp(barre_outils_edition,{lang:'$lang'});
 	}
@@ -147,7 +148,7 @@ $(document).ready(function(){
 	onAjaxLoad(barrebouilles_crayons);
 });
 })(jQuery);
--->		
+-->
 </script>
 EOF;
 		}
@@ -182,7 +183,7 @@ function balise_EDIT($p) {
 	// crayon sur une base distante 'nua:article-intro-5'
 	// on ne sait pas encore les gerer, mais au moins on les detecte
 	if ($distant = $p->boucles[$i_boucle]->sql_serveur)
-		$type = "$distant:$type";
+		$type = $distant.'__'.$type;
 
 	// le compilateur 1.9.2 ne calcule pas primary pour les tables secondaires
 	// il peut aussi arriver une table sans primary (par ex: une vue)
@@ -230,7 +231,7 @@ function balise_CRAYON($p) {
 // - de l'id courant
 function classe_boucle_crayon($type, $champ, $id) {
 	$type = $type[strlen($type) - 1] == 's' ?
-		substr($type, 0, -1) : 
+		substr($type, 0, -1) :
 		str_replace(
 			array('hierarchie', 'syndication'),
 			array('rubrique',   'site'),

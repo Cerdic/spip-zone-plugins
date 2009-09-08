@@ -10,6 +10,7 @@ function affiche_controleur($class, $c=null) {
 		$regs[] = $class;
 
 		// A-t-on le droit de crayonner ?
+		spip_log("autoriser('crayonner', $type, $id, NULL, array('modele'=>$modele)","crayons_distant");
 		if (!autoriser('crayonner',$type, $id, NULL, array('modele'=>$champ))) {
 			$return['$erreur'] = "$type $id: " . _U('crayons:non_autorise');
 		} else {
@@ -35,6 +36,7 @@ function controleur_dist($regs, $c=null) {
 	$options = array(
 		'class' => $class
 	);
+	list($distant,$table) = distant_table($type);
 	// Si le controleur est un squelette html, on va chercher
 	// les champs qu'il lui faut dans la table demandee
 	// Attention, un controleur multi-tables ne fonctionnera
@@ -112,8 +114,12 @@ function controleur_dist($regs, $c=null) {
 class Crayon {
 	// le nom du crayon "type-modele-id" comme "article-introduction-237"
 	var $name;
-	// type, a priori une table, extrait du nom
+	// type, a priori une table, extrait du nom plus eventuellement base distante
 	var $type;
+	// table la table a crayonner
+	var $table;
+	// distant base distante
+	var $distant;
 	// modele, un champ comme "texte" ou un modele, extrait du nom
 	var $modele;
 	// l'identificateur dans le type, comme un numero d'article
@@ -143,6 +149,7 @@ class Crayon {
 	function Crayon($name, $texts = array(), $options = array(), $c=null) {
 		$this->name = $name;
 		list($this->type, $this->modele, $this->id) = explode('-', $this->name, 3);
+		list($this->distant,$this->table) = distant_table($this->type);
 		if (is_scalar($texts) || is_null($texts)) {
 			$texts = array($this->modele => $texts);
 		}
@@ -183,7 +190,7 @@ class Crayon {
 			if (null !== ($p = _request($property)))
 				$this->styles[] = "$property:$p;";
 		}
-		
+
 		$property = 'background-color';
 		if (!$p = _request($property)
 		OR $p == 'transparent') {
@@ -223,6 +230,7 @@ class Crayon {
 	function fond($contexte = array()) {
 		include_spip('inc/filtres');
 		$contexte['id_' . $this->type] = $this->id;
+		$contexte['id_' . $this->table] = $this->id;
 		$contexte['crayon_type'] = $this->type;
 		$contexte['crayon_modele'] = $this->modele;
 		$contexte['lang'] = $GLOBALS['spip_lang'];
@@ -380,7 +388,7 @@ function action_crayons_html_dist() {
 	$return = affiche_controleur(_request('class'));
 	if (!_request('type') OR _request('type') == 'crayon')
 	  $return['$html'] = crayons_formulaire($return['$html']);
-	
+
 	$json = trim(var2js($return));
 	die($json);
 }

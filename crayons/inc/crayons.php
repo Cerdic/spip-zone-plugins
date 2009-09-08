@@ -299,7 +299,8 @@ function vignette_revision($id, $data, $type, $ref) {
 	return true;
 }
 
-function colonne_table($table, $col) {
+function colonne_table($type, $col) {
+	list($distant,$table) = distant_table($type);
 	$nom_table = '';
 	if (!(($tabref = &crayons_get_table($table, $nom_table)) && ($brut = $tabref['field'][$col]))) {
 		return false;
@@ -361,10 +362,11 @@ function colonne_table($table, $col) {
 }
 //	var_dump(colonne_table('forum', 'id_syndic')); die();
 
-function table_where($table, $id)
+function table_where($type, $id)
 {
+	list($distant,$table) = distant_table($type);
 	$nom_table = '';
-	if (!(($tabref = &crayons_get_table($table, $nom_table))
+	if (!(($tabref = &crayons_get_table($type, $nom_table))
 			&& ($tabid = explode(',', $tabref['key']['PRIMARY KEY'])))) {
 		spip_log('crayons: table ' . $table . ' inconnue');
 		return array(false, false);
@@ -381,8 +383,9 @@ function table_where($table, $id)
 }
 //	var_dump(colonne_table('forum', 'id_syndic')); die();
 
-function valeur_colonne_table_dist($table, $col, $id) {
-	list($nom_table, $where) = table_where($table, $id);
+function valeur_colonne_table_dist($type, $col, $id) {
+	list($distant,$table) = distant_table($type);
+	list($nom_table, $where) = table_where($type, $id);
 	if (!$nom_table)
 		return false;
 
@@ -400,7 +403,7 @@ function valeur_colonne_table_dist($table, $col, $id) {
 	if (count($col)
 	AND $s = spip_query(
 			'SELECT `' . implode($col, '`, `') .
-			'` FROM ' . $nom_table . ' WHERE ' . $where)
+			'` FROM ' . $nom_table . ' WHERE ' . $where, $distant)
 	AND $t = sql_fetch($s))
 		$r = array_merge($r, $t);
 
@@ -508,7 +511,8 @@ function wdgcfg() {
 	return $wdgcfg;
 }
 
-function &crayons_get_table($table, &$nom_table) {
+function &crayons_get_table($type, &$nom_table) {
+	list($distant,$table) = distant_table($type);
 	static $return = array();
 	static $noms = array();
 	if (!isset($return[$table])) {
@@ -517,7 +521,7 @@ function &crayons_get_table($table, &$nom_table) {
 		// premiere possibilite (1.9.3) : regarder directement la base
 		if (function_exists('sql_showtable')) {
 			foreach ($try as $nom) {
-				if ($q = sql_showtable($nom)) {
+				if ($q = sql_showtable($nom , !$distant , $distant)) {
 					$noms[$table] = $nom;
 					$return[$table] = $q;
 				}
@@ -547,4 +551,10 @@ function &crayons_get_table($table, &$nom_table) {
 	return $return[$table];
 }
 
+function distant_table($type) {
+	//separation $type en $distant $table
+	//separateur double underscore "__"
+	strstr($type,'__')? list($distant,$table) = explode('__',$type) : list($distant,$table) = array(False,$type);
+	return array($distant,$table);
+}
 ?>
