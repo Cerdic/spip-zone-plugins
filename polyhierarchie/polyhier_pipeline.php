@@ -49,6 +49,9 @@ function polyhier_formulaire_charger($flux){
 		($objet = $flux['data']['_polyhier'] AND in_array($objet,array('article','rubrique')))
 		OR ($objet = substr($form,7) AND in_array($form,array('editer_article','editer_rubrique')))
 		){
+		// On ne fait rien si l'id_parent principal est incoherent (exemple : compat pages uniques)
+		if ($flux['data']['id_parent'] < 0) return $flux;
+		
 		$id_table_objet = id_table_objet($objet);
 
 		// on met en tete l'id_parent principal
@@ -77,6 +80,9 @@ function polyhier_formulaire_verifier($flux){
 	$form = $flux['args']['form'];
 	if ($objet = _request('_polyhier')
 		AND in_array($objet,array('article','rubrique'))){
+		// On ne fait rien si l'id_parent principal est incoherent (exemple : compat pages uniques)
+		if (_request('id_parent') < 0) return $flux;
+		
 		$id_table_objet = id_table_objet($objet);
 
 		// on verifie qu'au moins un parent est present si c'est un article
@@ -107,7 +113,9 @@ function polyhier_editer_contenu_objet($flux){
 	$args = $flux['args'];
 	$type = $args['type'];
 	if (in_array($type,array('rubrique','article'))){
-
+		// On ne fait rien si l'id_parent principal est incoherent (exemple : compat pages uniques)
+		if ($args['contexte']['id_parent'] < 0) return $flux;
+		
 		$saisie = "<script type='text/javascript'>jQuery(function() {jQuery('li.editer_parent').remove();});</script>";
 		$saisie .= recuperer_fond("formulaires/inc-selecteur-parents",$args['contexte']);
 		if (strpos($flux['data'],'<!--polyhier-->')!==FALSE)
