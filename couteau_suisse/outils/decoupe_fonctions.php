@@ -3,6 +3,7 @@
 
 define('_onglets_CONTENU', '<div class="onglets_contenu"><h2 class="cs_onglet"><a href="#">');
 define('_onglets_DEBUT', '<div class="onglets_bloc_initial">');
+define('_onglets_REGEXPR', ',<onglets([0-9]*)>(.*?)</onglets\1>,ms');
 
 // aide le Couteau Suisse a calculer la balise #INTRODUCTION
 $GLOBALS['cs_introduire'][] = 'decoupe_nettoyer_raccourcis';
@@ -14,7 +15,8 @@ function decoupe_url($url, $page, $num_pages) {
 
 function onglets_callback($matches) {
 	// cas des onglets imbriques
-	$matches[2] = preg_replace_callback(',<onglets([0-9]*)>(.*?)</onglets\1>,ms', 'onglets_callback', $matches[2]);
+	if (strpos($matches[2], '<onglets')!==false)
+		$matches[2] = preg_replace_callback(_onglets_REGEXPR, 'onglets_callback', $matches[2]);
 	// nettoyage apres les separateurs
 	$matches[2] = preg_replace(','.preg_quote(_decoupe_SEPARATEUR,',').'\s+,', _decoupe_SEPARATEUR, $matches[2]);
 	// au cas ou on ne veuille pas d'onglets, on remplace les '++++' par un filet et on entoure d'une classe.
@@ -37,7 +39,7 @@ function onglets_callback($matches) {
 }
 
 // fonction appellee sur les parties du texte non comprises entre les balises : html|code|cadre|frame|script|acronym|cite
-function decouper_en_onglets_rempl($texte) {
+function decouper_en_onglets_rempl(&$texte) {
 	// compatibilite avec la syntaxe de Pierre Troll
 	if (strpos($texte, '<onglet|')!==false) {
 		$texte = str_replace('<onglet|fin>', '</onglets>', $texte);
@@ -45,7 +47,7 @@ function decouper_en_onglets_rempl($texte) {
 		$texte = preg_replace(',\s*<onglet\|titre=([^>]*)>\s*,', "\n\n++++\\1\n\n", $texte);
 	}
 	// il faut un callback pour analyser l'interieur du texte
-	return preg_replace_callback(',<onglets([0-9]*)>(.*?)</onglets\1>,ms', 'onglets_callback', $texte);
+	return preg_replace_callback(_onglets_REGEXPR, 'onglets_callback', $texte);
 }
 
 // fonction renvoyant l'image appellee dans img/decoupe
