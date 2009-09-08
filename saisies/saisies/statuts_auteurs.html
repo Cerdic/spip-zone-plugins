@@ -1,4 +1,4 @@
-[(#REM) 
+[(#REM)
 
   Parametres :
   - class : classe(s) css ajoutes au select
@@ -6,11 +6,12 @@
   	Dans le cas multiple, defaut et valeur doivent être un array, sinon un int
   - option_intro : chaine de langue de la premiere ligne vide ? (defaut:"")
     (seulement si non multiple)
-  
+  - afficher_tous : permet d'afficher une option de valeur "tous" correspondant à tous les utilisateurs
+
   Exemple d'appel :
 	[(#SAISIE{statuts_auteurs,statuts,
 		label=<:plugin:statuts_des_auteurs:>,
-		multiple=oui})] 
+		multiple=oui})]
 ]
 
 <select name="#ENV{nom}[(#ENV{multiple}|?{[(#VAL{&#91;&#93;}|html_entity_decode)]})]" id="champ_#ENV{nom}"[ class="(#ENV{class})"][(#ENV{multiple}|oui) multiple="multiple"]>
@@ -20,11 +21,15 @@
 		<option value="0minirezo"[(#VAL{0minirezo}|in_array{#ENV{valeur}|sinon{#ENV{defaut,#ARRAY}}}|oui) selected="selected"]><:info_administrateurs:></option>
 		<option value="1comite"[(#VAL{1comite}|in_array{#ENV{valeur}|sinon{#ENV{defaut,#ARRAY}}}|oui) selected="selected"]><:info_redacteurs:></option>
 		<option value="6forum"[(#VAL{6forum}|in_array{#ENV{valeur}|sinon{#ENV{defaut,#ARRAY}}}|oui) selected="selected"]><:info_visiteurs:></option>
+		[(#ENV{afficher_tous}|oui)
+		<option value="tous"[(#VAL{tous}|in_array{#ENV{valeur}|sinon{#ENV{defaut,#ARRAY}}}|oui) selected="selected"]><:saisies:tous_visiteurs:></option>]
 	]
 	[(#ENV{multiple}|non)
 		<option value="0minirezo"[(#VAL{0minirezo}|=={#ENV{valeur}|sinon{#ENV{defaut}}}|oui) selected="selected"]><:info_administrateurs:></option>
 		<option value="1comite"[(#VAL{1comite}|=={#ENV{valeur}|sinon{#ENV{defaut}}}|oui) selected="selected"]><:info_redacteurs:></option>
 		<option value="6forum"[(#VAL{6forum}|=={#ENV{valeur}|sinon{#ENV{defaut}}}|oui) selected="selected"]><:info_visiteurs:></option>
+		[(#ENV{afficher_tous}|oui)
+		<option value="tous"[(#VAL{tous}|in_array{#ENV{valeur}|sinon{#ENV{defaut,#ARRAY}}}|oui) selected="selected"]><:saisies:tous_visiteurs:></option>]
 	]
 </select>
 
