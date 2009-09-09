@@ -1,6 +1,17 @@
-// Inside the function "this" will be "document" when called by ready() 
-// and "the ajaxed element" when called because of onAjaxLoad 
+// Inside the function "this" will be "document" when called by ready()
+// and "the ajaxed element" when called because of onAjaxLoad
 var nyro_init = function() {
+	// On cache les embed et object qui n'ont pas de wmode=transparent pour eviter qu'ils
+	// passent par dessus la modale
+	if(!navigator.platform.match('Mac')){
+		$.fn.nyroModal.settings.processHandler = function(){
+			jQuery('embed[wmode!=transparent]').addClass('nyro_cache').css('visibility','hidden')
+				.parents('object').addClass('nyro_cache').css('visibility','hidden');
+		}
+		$.fn.nyroModal.settings.endRemove = function(){
+			jQuery('.nyro_cache').removeClass('.nyro_cache').css('visibility','visible');
+		}
+	}
 	if (nyro_traiter_toutes_images) {
 		// selectionner tous les liens vers des images
 		$("a[type=\'image/jpeg\'],a[type=\'image/png\'],a[type=\'image/gif\']",this)
@@ -28,7 +39,7 @@ var nyro_init = function() {
 	  }
 	  $.fn.nyroModal.settings.endShowContent = function(elts,settings) {
 	    $(".nyroModalNext").preload();
-	  } 
+	  }
 	  $(".nyroceros[rel]:eq(0)").preload();
 	}
 };
