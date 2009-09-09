@@ -7,7 +7,7 @@
 */
 
     include_spip('inc/presentation');
-    include_spip('inc/gestion_base');
+    include_spip('base/gestion_base');
     include_spip('inc/version');
 
 function exec_genespip() {
