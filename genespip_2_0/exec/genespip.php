@@ -103,7 +103,6 @@ function exec_genespip() {
     echo "<br /><input type='submit' value='Valider ...' />";
     echo "</form>";
     echo "</td></tr></table>";
-	spip_mysql_free($result);
 	echo fin_cadre_formulaire(true);
 
 	echo '<br />';
@@ -204,7 +203,6 @@ function exec_genespip() {
 			 "</td></tr>";
 		echo '</form></table>';
 		echo fin_cadre_relief(true);
-		spip_free_result($result);
 	}
 	echo fin_page();
 }
