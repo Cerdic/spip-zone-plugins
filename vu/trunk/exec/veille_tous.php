@@ -50,8 +50,8 @@ function exec_veille_tous_dist(){
 
 		// D'abord un 'bloc des raccourcis' pour les boutons de creation de nouveaux objets
 		echo bloc_des_raccourcis(icone_horizontale(_T('vu:raccourcis_annonce'), generer_url_ecrire("veille_edit","type=annonce&new=oui"), _DIR_VU_IMG_PACK."annonce-24.gif", "creer.gif", false)
-			. icone_horizontale(_T('vu:raccourcis_evenement'), generer_url_ecrire("annonces_edit","type=evenement&new=oui"), _DIR_VU_IMG_PACK."evenement-24.gif", "creer.gif", false)
-			. icone_horizontale(_T('vu:raccourcis_publication'), generer_url_ecrire("annonces_edit","type=publication&new=oui"), _DIR_VU_IMG_PACK."publication-24.gif", "creer.gif", false)
+			. icone_horizontale(_T('vu:raccourcis_evenement'), generer_url_ecrire("veille_edit","type=evenement&new=oui"), _DIR_VU_IMG_PACK."evenement-24.gif", "creer.gif", false)
+			. icone_horizontale(_T('vu:raccourcis_publication'), generer_url_ecrire("veille_edit","type=publication&new=oui"), _DIR_VU_IMG_PACK."publication-24.gif", "creer.gif", false)
 		);
 
 	
@@ -65,9 +65,9 @@ function exec_veille_tous_dist(){
 	// Liste des annonces
 	echo afficher_objets('annonce',_T('vu:liste_annonces'), array("SELECT" => 'id_annonce, date, titre, statut', "FROM" => 'spip_vu_annonces AS annonces', 'WHERE' => "", 'ORDER BY' => "date DESC"),'',true);
 	// Liste des evenements
-	//echo afficher_objets('evenement',_T('vu:liste_evenements'), array("SELECT" => 'id_evenement, date, titre, statut', "FROM" => 'spip_vu_evenements AS evenements', 'WHERE' => "", 'ORDER BY' => "date DESC"),'',true);
+	echo afficher_objets('evenement',_T('vu:liste_evenements'), array("SELECT" => 'id_evenement, date, titre, statut', "FROM" => 'spip_vu_evenements AS evenements', 'WHERE' => "", 'ORDER BY' => "date DESC"),'',true);
 	// Liste des publications
-	//echo afficher_objets('publication',_T('vu:liste_publications'),	array("SELECT" => 'id_publication, date, titre, statut', "FROM" => 'spip_vu_publications AS publications', 'WHERE' => "", 'ORDER BY' => "date DESC"),'',true);
+	echo afficher_objets('publication',_T('vu:liste_publications'),	array("SELECT" => 'id_publication, date, titre, statut', "FROM" => 'spip_vu_publications AS publications', 'WHERE' => "", 'ORDER BY' => "date DESC"),'',true);
 
 	
 

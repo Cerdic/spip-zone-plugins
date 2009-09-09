@@ -4,13 +4,13 @@
 	<version>0.2</version>
 	<version_base>0.2</version_base>
 
-	<!-- <icon>img_pack/vu_logo_96.png</icon> tester la taille 128 -->
+	<icon>img_pack/vu_logo_64.png</icon>
 	<description>
 		Publier le r&eacute;sultat d'une activit&eacute; de veille th&eacute;matique.
 
-		Ce plugin propose de pallier à l'impossibilit&eacute; sur SPIP de publier de l'information sans contenu
+		Ce plugin propose plusieurs nouveaux objets pour pallier à l'impossibilit&eacute; sur SPIP de publier de l'information sans contenu
 
-		<i>&laquo; Relayer l'information, plut&ocirc;t que de la (re)publier ! &raquo;</i>
+		<i>&laquo; Relayez l'information, plut&ocirc;t que de la (re)publier ! &raquo;</i>
 	</description>
 	<url>http://www.spip-contrib.net/article3066</url>
 	<licence>&copy; 2009 - Distribu&eacute; sous licence GNU/LGPL</licence>
@@ -18,7 +18,6 @@
 	<etat>test</etat>
 
 	<prefix>vu</prefix>
-	<fonctions>vu_fonctions.php</fonctions>
 	<options>vu_options.php</options>
 
 	<!-- Installation, mise a jour ou desinstallation des tables supplementaire sur le serveur -->

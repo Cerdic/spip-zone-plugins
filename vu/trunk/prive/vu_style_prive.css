@@ -10,6 +10,6 @@
 /* 	Page /exec : veille_voir.php 		*/
 .bouton_actions { margin: auto; }
 
-.titre_annonce { font-weight: bold; font-size: 1.1em; }
-.type_annonce { font-style: italic; font-size: 0.9em; }
-.source_annonce { font-style: italic; }
+.titre_objet { font-weight: bold; font-size: 1.1em; }
+.type_objet { font-style: italic; font-size: 0.9em; }
+.source_objet { font-style: italic; }

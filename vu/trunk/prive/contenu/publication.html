@@ -1,0 +1,12 @@
+<BOUCLE_afficher_contenu(VU_PUBLICATIONS){id_publication=#ENV{id}}>
+        [<div class='type_objet'>(#TYPE)</div>]
+	<div class='titre_objet'>#TITRE</div>
+	<div>
+		<span>
+			[<:vu:apercu_lien_publication:><a href='#LIEN' title='#LIEN'>(#EDITEUR|choixsivide{#LIEN,#EDITEUR})</a>][(#DATE_PUBLICATION|?{", ","."})]
+			[(#EDITEUR|?{" le ","Le "})][(#DATE_PUBLICATION|affdate_jourcourt)]
+		</span>
+		[<span class='source_objet'> (<:vu:apercu_source_publication:><a href='#SOURCE_LIEN' title='#SOURCE_LIEN'>(#SOURCE_NOM)</a>)</span>]
+	</div>
+	[<div>(#DESCRIPTIF)</a></div>]
+</BOUCLE_afficher_contenu>

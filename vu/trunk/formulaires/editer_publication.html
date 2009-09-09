@@ -1,14 +1,14 @@
 [(#REM)
 
-	Fichier HTML du formulaire CVT : editer_annonce. Etroitement 	
+	Fichier HTML du formulaire CVT : editer_publication. Etroitement 	
 	lie aux fonctions PHP dans le fichier du meme nom. Pour plus d'infos
 	sur les formulaires CVT : http://www.spip.net/fr_article3800.html.	
-	Ces deux sont conjointement appeles par la balise #FORMULAIRE_EDITER_ANNONCE
-	dans le fond 'prive/editer/annonce.html'.					
+	Ces deux sont conjointement appeles par la balise #FORMULAIRE_EDITER_PUBLICATION
+	dans le fond 'prive/editer/publication.html'.					
 
 ]
 
-<div class='formulaire_spip formulaire_editer formulaire_editer_breve formulaire_editer_breve-#ENV{id_annonce,nouveau}'>
+<div class='formulaire_spip formulaire_editer formulaire_editer_breve formulaire_editer_breve-#ENV{id_publication,nouveau}'>
 	<!-- <br class='bugajaxie' /> -->
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
@@ -18,14 +18,14 @@
 		[(#REM) declarer les hidden qui declencheront le service du formulaire 
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
-	  <input type='hidden' name='id_annonce' value='#ENV{id_annonce}' />
+	  <input type='hidden' name='id_publication' value='#ENV{id_publication}' />
 	  <ul>
 
 	[(#REM) 'Titre' est un champ commun - et obligatoire]
 	   	<li class="editer_titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur]">
 		    	<label for="titre"><:vu:info_titre:></label>[
 			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>
-			]<input type='text' class='text' name='titre' id='titre' value="[(#ENV**{titre,#REM|concat{vu:titre_nouvelle_annonce}|_T})]"
+			]<input type='text' class='text' name='titre' id='titre' value="[(#ENV**{titre,#REM|concat{vu:titre_nouvelle_publication}|_T})]"
 			[(#ENV{titre,''}|?{'',' '})onfocus="if(!antifocus){this.value='';antifocus=true;}"]/>
 		</li>
 
@@ -36,21 +36,28 @@
 			<input type='text' class='text' name='lien' id='lien' value="[(#ENV**{lien})]" />
 		</li>
 
-	[(#REM) 'Annonceur' est un champ specifique]
-	 	<li class="editer_annonceur[ (#ENV**{erreurs}|table_valeur{annonceur}|oui)erreur]">
-			<label for="annonceur"><:vu:info_annonceur:></label>
-			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{annonceur})</span>]
-			<input type='text' class='text' name='annonceur' id='annonceur' value="[(#ENV**{annonceur})]" />
+	[(#REM) 'Auteur' est un champ specifique]
+	 	<li class="editer_auteur[ (#ENV**{erreurs}|table_valeur{auteur}|oui)erreur]">
+			<label for="auteur"><:vu:info_auteur:></label>
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{auteur})</span>]
+			<input type='text' class='text' name='auteur' id='auteur' value="[(#ENV**{auteur})]" />
 		</li>
 
-	[(#REM) 'Peremption' est un champ specifique]
-		<li class="editer_peremption[ (#ENV**{erreurs}|table_valeur{peremption}|oui)erreur]">
-			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{peremption})</span>]
-			<label for="date_debut"><:vu:info_peremption:></label>
-			<p class="explication"><:vu:explication_dates:></p>
-			<input type='text' class='text date' name='peremption' id='peremption' value="[(#ENV{peremption})]" />
+	[(#REM) 'Editeur' est un champ specifique]
+	 	<li class="editer_editeur[ (#ENV**{erreurs}|table_valeur{editeur}|oui)erreur]">
+			<label for="editeur"><:vu:info_editeur:></label>
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{editeur})</span>]
+			<input type='text' class='text' name='editeur' id='editeur' value="[(#ENV**{editeur})]" />
 		</li>
 
+
+	[(#REM) 'Date-publication' est un champ specifique]
+		<li class="editer_date_publication[ (#ENV**{erreurs}|table_valeur{date_publication}|oui)erreur]">
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{date_publication})</span>]
+			<label for="date_debut"><:vu:info_date:></label>
+			<p class="explication"><:vu:explication_date:></p>
+			<input type='text' class='text date' name='date_publication' id='date_publication' value="[(#ENV{date_publication})]" />
+		</li>
 
 	[(#REM) 'Type' est un champ optionnel]
 	 	<li class="editer_type[ (#ENV**{erreurs}|table_valeur{type}|oui)erreur]">
@@ -95,11 +102,11 @@
 			<h3 class="legend"><:vu:info_legend_statut:></h3>
 			<ul>
 			<li class="editer_statut obligatoire">
-				<label for='statut'><:vu:info_annonce_publiee:></label>
+				<label for='statut'><:vu:info_publication_publiee:></label>
 				<select name='statut' id='statut' size='1'>
-					<option value='prop'[(#ENV**{statut}|=={prop}|?{' selected="selected"'})] style='background-color: white'><:vu:item_annonce_proposee:></option>
-					<option value='refuse'[(#ENV**{statut}|=={refuse}|?{' selected="selected"'})] class='danger'><:vu:item_annonce_refusee:></option>
-					<option value='publie'[(#ENV**{statut}|=={publie}|?{' selected="selected"'})] style='background-color: #B4E8C5'><:vu:item_annonce_validee:></option>
+					<option value='prop'[(#ENV**{statut}|=={prop}|?{' selected="selected"'})] style='background-color: white'><:vu:item_publication_proposee:></option>
+					<option value='refuse'[(#ENV**{statut}|=={refuse}|?{' selected="selected"'})] class='danger'><:vu:item_publication_refusee:></option>
+					<option value='publie'[(#ENV**{statut}|=={publie}|?{' selected="selected"'})] style='background-color: #B4E8C5'><:vu:item_publication_validee:></option>
 				</select>
 			</li>
 			</ul>

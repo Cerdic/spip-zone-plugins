@@ -82,9 +82,8 @@ function exec_veille_voir(){
 	// soit entouree par 'id_' d'un cote et '=' de l'autre
 	// (motif : /id_(.*)=/U). On souhaite la deuxieme colonne
 	// (la n°1) du tableau des resultats (cf. doc sur preg_match).	
-	//preg_match("/id_(.*)=/U",$_SERVER["REQUEST_URI"],$matches);
-	//$type_objet = $matches[1];
-	$type_objet = 'annonce';
+	preg_match("/id_(.*)=/U",$_SERVER["REQUEST_URI"],$matches);
+	$type_objet = $matches[1];
 	// Pour l'id, il s'agit d'un appel simple aux parametres
 	// fournis par l'URL
 	$id_objet = intval(_request('id_'.$type_objet));
@@ -112,18 +111,18 @@ function exec_veille_voir(){
 
 	
 // 3/4 - Preparation de l'affichage
-	// Est-ce que quelqu'un a deja ouvert l'annonce en edition ?
-	$flag_editable = autoriser('modifier','annonce',$id_annonce);
+	// Est-ce que quelqu'un a deja ouvert l'objet en edition ?
+	$flag_editable = autoriser('modifier',$type_objet,$id_objet);
 	if ($flag_editable AND $GLOBALS['meta']['articles_modif'] != 'non') {
 		// Si oui, on affiche le message
 		include_spip('inc/drapeau_edition');
-		$modif = mention_qui_edite($id_annonce, 'annonce');
+		$modif = mention_qui_edite($id_objet, $type_objet);
 	} else
 		// Sinon, on se contente de laisser vide la variable $modif
 		$modif = array();
 	
 	// On initialise la page et les entetes
-	pipeline('exec_init', array('args'=>array('exec'=>'annonces_voir','id_annonce'=>$id_annonce),'data'=>'')); 
+	pipeline('exec_init', array('args'=>array('exec'=>$type_objet.'s_voir',$id_objet=>$id_objet),'data'=>'')); 
 
 	// Puis charge tout le debut du HTML, les entetes...
 	$commencer_page = charger_fonction('commencer_page', 'inc'); 

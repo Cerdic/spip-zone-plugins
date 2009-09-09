@@ -90,13 +90,6 @@ function objet_edit_ok($row, $type_objet, $id_objet, $new)
 		// Si l'objet n'est pas nouveau, alors il est en base
 		// on peut donc charger les differents champs dans des variables
 		$titre=$row['titre'];
-		/*$lien=$row['lien'];
-		$annonceur=$row['annonceur'];
-		$peremption=$row['peremption'];
-		$type=$row['type'];
-		$descriptif=$row['descriptif'];
-		$source_nom=$row['source_nom'];
-		$source_lien=$row['source_lien'];*/
 		$statut=$row['statut'];
 
 	} else {			
@@ -138,7 +131,7 @@ function objet_edit_ok($row, $type_objet, $id_objet, $new)
 	echo debut_gauche('', true);
 	// Nous n'affichons pour notre part rien ici...
 	// ... mais laissons ici la possibilite a d'autres de le faire
-	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'annonces_edit','id_annonce'=>$id_annonce),'data'=>''));
+	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'veille_edit','id_objet'=>$id_objet),'data'=>''));
 
 
 	
