@@ -114,6 +114,8 @@ function liste_outils() {
 	global $outils;
 	$id = $nb_actifs = 0;
 	$metas_caches = isset($GLOBALS['meta']['tweaks_caches'])?unserialize($GLOBALS['meta']['tweaks_caches']):array();
+	if(defined('_CS_OUTILS_CACHES'))
+		foreach (explode(':',_CS_OUTILS_CACHES) as $o) $metas_caches[$o]['cache'] = 1;
 	foreach($outils as $outil) $categ[_T('couteauprive:categ:'.$outil['categorie'])] = $outil['categorie']; ksort($categ);
 	$results_actifs = $results_inactifs = '';
 	foreach($categ as $c=>$i) {
