@@ -162,7 +162,7 @@ function recherche_mot_cle($cherche_mots, $id_groupe, $objet, $id_objet, $table,
 	$nouveaux_mots = array();
 	$res = '';
 
-	foreach (preg_split("/ *[,;] */", $cherche_mots) as $cherche_mot) {
+	foreach (split(" *[,;] *", $cherche_mots) as $cherche_mot) {
 	  if  ($cherche_mot) {
 		$resultat = mots_ressemblants($cherche_mot, $table_mots, $table_ids);
 		$res .= "<br />" . debut_boite_info(true);
@@ -489,7 +489,7 @@ function editer_mots_droits($select, $cond,$debug=false)
 if($debug) {
   print_r($select);
   print_r($cond);
-  die();
+  //die();
 }
 	$droit = substr($GLOBALS['visiteur_session']['statut'],1);
 	return sql_select("$select", "spip_groupes_mots", "$droit = 'oui' AND $cond");

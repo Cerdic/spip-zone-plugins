@@ -5,7 +5,7 @@
 	<auteur>Stephane Laurent (Bill)</auteur>
 	<auteur>Yoann Nogues (Zerax)</auteur>
 	<lien>http://www.spip-contrib.net/Des-mots-clefs-partout</lien>
-	<version>0.5.1</version>
+	<version>0.5.2</version>
 	<etat>test</etat>
 	<necessite id="SPIP" version="[2.0;]" />
 	<description>
@@ -36,6 +36,10 @@
 	</pipeline>
 	<pipeline>
 		<nom>editer_contenu_objet</nom>
+		<inclure>inc/motspartout_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>post_edition</nom>
 		<inclure>inc/motspartout_pipeline.php</inclure>
 	</pipeline>
 </plugin>
