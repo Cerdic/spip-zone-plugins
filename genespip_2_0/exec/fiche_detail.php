@@ -37,15 +37,15 @@ function exec_fiche_detail(){
 	//Ajout d'une photo
 
 	if ($_POST['edit']=='image'){
-		$chemin=_DIR_PLUGIN_GENESPIP.'IMG/';
+		$chemin=_DIR_IMG;
 		$split = split('/',$_FILES['image']['type']);
 		if (is_uploaded_file($_FILES['image']['tmp_name'])) {
 			if ($_POST['media']=='photo'){
-				move_uploaded_file ( $_FILES['image']['tmp_name'],$chemin."portrait".$_POST['id_individu'].".".$split[1]);
+				move_uploaded_file ( $_FILES['image']['tmp_name'],$chemin."gene_portrait_".$_POST['id_individu'].".".$split[1]);
 				genespip_modif_fiche_portrait(1,$_POST['id_individu'],$split[1]);
 			}
 			if ($_POST['media']=='signature'){
-			   move_uploaded_file ( $_FILES['image']['tmp_name'],$chemin."signature".$_POST['id_individu'].".".$split[1]);
+			   move_uploaded_file ( $_FILES['image']['tmp_name'],$chemin."gene_signature_".$_POST['id_individu'].".".$split[1]);
 				genespip_modif_fiche_signature(1,$_POST['id_individu'],$split[1]);
 			}
 		}
@@ -61,28 +61,28 @@ function exec_fiche_detail(){
 	include_spip('inc/boite_info');
 	
 	//Formulaire photo
-	echo "<br />";
-		$ret .= "<a name='images'></a>\n";
-		$titre_cadre = _T('genespip:ajout_media');
-		$ret .= debut_cadre_relief("image-24.gif", true, "creer.gif", $titre_cadre);
-		$ret .= "<FORM ACTION='".$url_action_fiche."' method='POST' ENCTYPE='multipart/form-data'>";
-		$ret .= "<input type='hidden' name='edit' value='image'>";
-		$ret .= "<input name='id_individu' type='hidden' value='".$id_individu."'>";
-		$ret .= "<input type='hidden' name='max_file_size' value='100000'>";
-		$ret .= _T('genespip:media').":<input TYPE='file' NAME='image' size='10'><br />";
-		$ret .= "<select name='media'>";
-		$ret .= "<option value='photo'>"._T('genespip:photo')."</option>";
-		$ret .= "<option value='signature'>"._T('genespip:signature')."</option>";
-		$ret .= "</select>";
-		$ret .= "<INPUT TYPE='submit' NAME='telecharger' VALUE='T&eacute;l&eacute;charger' class='fondo'>";
-		$ret .=_T('genespip:indication_format_photo');
-		$ret .= "</form>";
-		$ret .= fin_cadre_relief(true);
-		echo $ret;
+	$ret .= "<a name='images'></a>\n";
+	$titre_cadre = _T('genespip:ajout_media');
+	$ret .= debut_cadre_relief("image-24.gif", true, "creer.gif", $titre_cadre);
+	$ret .= "<FORM ACTION='".$url_action_fiche."' method='POST' ENCTYPE='multipart/form-data'>";
+	$ret .= "<input type='hidden' name='edit' value='image'>";
+	$ret .= "<input name='id_individu' type='hidden' value='".$id_individu."'>";
+	$ret .= "<input type='hidden' name='max_file_size' value='100000'>";
+	$ret .= _T('genespip:media').":<input TYPE='file' NAME='image' size='10'><br />";
+	$ret .= "<select name='media'>";
+	$ret .= "<option value='photo'>"._T('genespip:photo')."</option>";
+	$ret .= "<option value='signature'>"._T('genespip:signature')."</option>";
+	$ret .= "</select>";
+	$ret .= "<INPUT TYPE='submit' NAME='telecharger' VALUE='T&eacute;l&eacute;charger' class='fondo'>";
+	$ret .=_T('genespip:indication_format_photo');
+	$ret .= "</form>";
+	$ret .= fin_cadre_relief(true);
+	echo $ret;
 	//fin formulaire photo
 
-	include_spip('inc/raccourcis_fiche');
 	echo genespip_nouvelle_fiche($url_action_accueil);
+	include_spip('inc/raccourcis_fiche');
+	
 
 	echo debut_droite('',true); 
 
@@ -114,7 +114,7 @@ function exec_fiche_detail(){
 	echo '<td><input type="text" name="nom" value="'.$nom.'" size="20" /></td>';
 	echo "<td rowspan='4'>";
 	if ($fiche['portrait']==1){
-	echo "<center><img src='"._DIR_PLUGIN_GENESPIP."IMG/portrait".$id_individu.".".$fiche['format_portrait']."' alt=><br />",
+	echo "<center><img src='"._DIR_IMG."/gene_portrait_".$id_individu.".".$fiche['format_portrait']."' alt=><br />",
 		 "<a href='".$url_action_fiche."&actionportrait=0&id_individu=".$id_individu."'>&lsaquo;"._T('genespip:supprimer')."&rsaquo;</a></center>";
 	}
 	echo "</td></tr>";
@@ -145,7 +145,7 @@ function exec_fiche_detail(){
 	echo '<td colspan="2"><input type="text" name="source" value="'.$source.'" size="40" /></td></tr>';
 	echo "<tr><td colspan='3'>";
 	if ($fiche['signature']==1){
-		echo "<center><img src='"._DIR_PLUGIN_GENESPIP."IMG/signature".$id_individu.".".$fiche['format_signature']."' alt=><br />",
+		echo "<center><img src='"._DIR_IMG."/gene_signature_".$id_individu.".".$fiche['format_signature']."' alt=><br />",
 		 "<a href='".$url_action_fiche."&actionsignature=0&id_individu=".$id_individu."'>&lsaquo;"._T('genespip:supprimer')."&rsaquo;</a></center>";
 	}
 	echo "</td></tr>";
