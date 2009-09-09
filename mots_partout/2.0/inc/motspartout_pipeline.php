@@ -49,7 +49,7 @@ function MotsPartout_editer_contenu_objet($flux){
  * @param object $flux
  */
 function MotsPartout_post_edition($flux){
-	if ($flux['args']['table']=='spip_groupe_mots') {
+	if ($flux['args']['type']=='groupe_mot') {
 
 		$id_groupe = $flux['args']['id_objet'];
 		$id_parent=intval(_request('id_parent'));
@@ -72,7 +72,7 @@ function MotsPartout_post_edition($flux){
 function MotsPartout_pre_edition($flux){
 
   //on ajoute le champ en pre_edition du groupe de mot
-  if ($flux['args']['table']=='spip_groupe_mots') {
+  if ($flux['args']['type']=='groupe_mot') {
 	  $flux['args']['champs']['id_parent']=intval(_request('id_parent'));
 	}
 	return $flux;
