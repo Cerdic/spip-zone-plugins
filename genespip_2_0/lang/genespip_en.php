@@ -151,7 +151,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'info_doc' => '<p>Plugin de g&eacute;n&eacute;alogie.</p> <p>Publier votre g&eacute;n&eacute;alogie sur internet &agrave; partir d&acute;un site SPIP.</p>',
     'info_pub' => '<p>Les revenus publicitaires sont d&eacute;stin&eacute;s au cr&eacute;ateur de GeneSPIP, vous pouvez placer votre propre banniere publicitaire en modifiant le contenu du fichier pub/200x200genespip.html, abonnez-vous au programme google adsense si vous souhaitez cr&eacute;er votre banniere</p>',
     'info_multilingue' => '<p>Afficher la bannière multilingue sur le site.<br />allez dans le menu multilingue de SPIP pour désactiver les langues inutiles</p>',
-    'info_restriction_acces' => '<p>Limiter les acc&egrave;s aux d&eacute;tails des fiches sur le site public<br /><ul>Liste des limitations possibles</ul></p>',
+    'info_restriction_acces' => '<p>Limiter les acc&egrave;s aux d&eacute;tails des fiches sur le site public</p>',
 
     'info_restriction_acces0' => '<b>0</b> : Limitation administrators',
     'info_restriction_acces1' => '<b>1</b> : Limitation administrators and redactors',

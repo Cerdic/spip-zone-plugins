@@ -68,7 +68,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
  //Titres
     'titre_menu_genespip' => 'GeneSPIP',
-    'theme' => 'Param&egrave;tres du Site publique',
+    'theme' => 'Param&egrave;tres du site publique',
     'gedcom' => 'GedCom',
     'evenements' => 'Ev&egrave;nements',
 
@@ -154,10 +154,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'info_gedcom_etape3' => 'A partir de l&acute;entr&eacute;e choisie, s&eacute;lectionnez pour chaque information la mani&egrave;re dont GeneSPIP doit la traduire',
     'info_doc' => '<p>Plugin de g&eacute;n&eacute;alogie.</p> <p>Publier votre g&eacute;n&eacute;alogie sur internet &agrave; partir d&acute;un site SPIP.</p>',
     'info_pub' => '<p>Les revenus publicitaires sont d&eacute;stin&eacute;s au cr&eacute;ateur de GeneSPIP, vous pouvez placer votre propre banniere publicitaire en modifiant le contenu du fichier pub/200x200genespip.html, abonnez-vous au programme google adsense si vous souhaitez cr&eacute;er votre banniere</p>',
-    'info_multilingue' => '<p>Afficher la banni&egrave;re multilingue sur le site.<br />allez dans le menu multilingue de SPIP pour d&eacute;sactiver les langues inutiles</p>',
+    'info_multilingue' => '<p>Afficher la banni&egrave;re multilingue sur le site.<br />Allez dans le menu multilingue de SPIP pour d&eacute;sactiver les langues inutiles</p>',
     'info_centans' => '<p>Interdire syst&eacute;matiquement l&lsquo;affichage des dates ayant moins de 100 ans.<br />Cette option ne s&lsquo;applique que pour les visiteurs<br />Si cette option est d&eacute;sactiv&eacute;e, il est possible de limiter l&lsquo;affichage fiche par fiche.</p>',
 
-    'info_restriction_acces' => '<p>Limiter les acc&egrave;s aux d&eacute;tails des fiches sur le site public<br /><ul>Liste des limitations possibles</ul></p>',
+    'info_restriction_acces' => '<p>Limiter les acc&egrave;s aux d&eacute;tails des fiches sur le site public</p>',
     'info_restriction_acces0' => '<b>0</b> : Limitation aux administrateurs',
     'info_restriction_acces1' => '<b>1</b> : Limitation aux administrateurs et r&eacute;dacteurs',
     'info_restriction_acces2' => '<b>2</b> : Limitation aux administrateurs, r&eacute;dacteurs et visiteurs(priv&eacute;e)',
