@@ -27,7 +27,7 @@ function MotsPartout_editer_contenu_objet($flux){
       $flux['data'] = str_replace('<!--choix_tables-->',"$input\n<!--choix_tables-->", $flux['data']);
 
 			//on ajoute le groupe de mots parent
-			$id_parent=$flux['args']['id_parent'];
+			$id_parent=$flux['args']['contexte']['id_parent'];
 			$contexte=array("id_parent"=>$id_parent,
 			                "name"=>"id_parent",
 			                "id"=>"id_parent",
@@ -56,6 +56,24 @@ function MotsPartout_post_edition($flux){
 		$var_update=array('id_parent'=>$id_parent);
 
 		sql_updateq("spip_groupe_mots",$var_update,"id_groupe=$id_groupe");
+	}
+	return $flux;
+}
+
+
+
+/**
+ *
+ * Insertion dans le pipeline pre_edition
+ * ajouter le champ id_parent lors de l'edition d'un groupe de mots
+ * @return
+ * @param object $flux
+ */
+function MotsPartout_pre_edition($flux){
+
+  //on ajoute le champ en pre_edition du groupe de mot
+  if ($flux['args']['table']=='spip_groupe_mots') {
+	  $flux['args']['champs']['id_parent']=intval(_request('id_parent'));
 	}
 	return $flux;
 }

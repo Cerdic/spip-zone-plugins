@@ -162,7 +162,7 @@ function recherche_mot_cle($cherche_mots, $id_groupe, $objet, $id_objet, $table,
 	$nouveaux_mots = array();
 	$res = '';
 
-	foreach (split(" *[,;] *", $cherche_mots) as $cherche_mot) {
+	foreach (preg_split("/ *[,;] */", $cherche_mots) as $cherche_mot) {
 	  if  ($cherche_mot) {
 		$resultat = mots_ressemblants($cherche_mot, $table_mots, $table_ids);
 		$res .= "<br />" . debut_boite_info(true);
@@ -484,13 +484,8 @@ function select_sous_menu_groupe_mots($id_groupe,$table='articles',$niveau=1){
 // et un table de jointure entre ca et la table des groupes de mots.
 
 // http://doc.spip.org/@editer_mots_droits
-function editer_mots_droits($select, $cond,$debug=false)
+function editer_mots_droits($select, $cond)
 {
-if($debug) {
-  print_r($select);
-  print_r($cond);
-  //die();
-}
 	$droit = substr($GLOBALS['visiteur_session']['statut'],1);
 	return sql_select("$select", "spip_groupes_mots", "$droit = 'oui' AND $cond");
 }
@@ -576,5 +571,3 @@ function editer_mots_un($row, $own)
 
 	return array("<a href='$url'>$cle</a>", $mot, $groupe, $retire);
 }
-
-?>

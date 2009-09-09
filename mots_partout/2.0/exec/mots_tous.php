@@ -31,10 +31,13 @@ function exec_mots_tous_dist()
 
 
   $tables_installees = unserialize(lire_meta('MotsPartout:tables_installees'));
+
+	/* définition d'un pipeline qu'un autre plugin pourra appeler pour ajouter un type d'objet non spip a gerer dans mots partout */
+  //$tables_installees = pipeline('motspartout_tables_installes',$tables_installees);
+  //tester pour voir s'il faut écrire dans les metas
+
   if (!$tables_installees){
 	  $tables_installees= array('articles','rubriques','documents','auteurs','syndic','syndic_articles','messages');
-	  /* définition d'un pipeline qu'un autre plugin pourra appeler pour ajouter un type d'objet non spip a gerer dans mots partout */
-	  //$tables_installees = pipeline('motspartout_tables_installes',$tables_installees);
 	  ecrire_meta('MotsPartout:tables_installees',serialize($tables_installees));
 	}
 

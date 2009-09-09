@@ -5,14 +5,15 @@
 <ul><li style="padding:10px;">
 	<div class='choix'>
 
-<select[ name='(#ENV{name})'][ id='(#ENV{id})'] onchange="$('#hidden_id_parent_groupe_mot').val(Math.random());">
+<select[ name='(#ENV{name})'][ id='(#ENV{id})'] >
+<option value="0"><:motspartout:groupe_racine:></option>
 #SET{niveau,0}
-<BOUCLE_groupes_arborescent(GROUPES_MOTS){par titre}{id_parent=0}>
+<BOUCLE_groupes_arborescent(GROUPES_MOTS){par titre}{id_parent=0}{id_groupe!=#ENV{id_groupe}}>
 [(#REM) on ne prend que le premier niveau ce qui permet d'initialiser la recursivite ]
-<option value='#ID_GROUPE'[(#EXPOSE{' '})selected='selected']>[(#VAL{'&nbsp;&nbsp;'}|str_repeat{#GET{niveau}})][(#TITRE|supprimer_tags|texte_backend)]</option>
+<option value='#ID_GROUPE' [(#ID_GROUPE|=={[(#ENV{id_parent})]}|?{' '})selected='selected'] >[(#VAL{'&nbsp;&nbsp;'}|str_repeat{#GET{niveau}})][(#TITRE|supprimer_tags|texte_backend)]</option>
   [(#SET{niveau,#GET{niveau}|plus{1}})]
-  <BOUCLE_sous_groupes(GROUPES_MOTS){id_parent=#ID_GROUPE}>
-      <option value='#ID_GROUPE'[(#EXPOSE{' '})selected='selected']>[(#VAL{'&nbsp;&nbsp;'}|str_repeat{#GET{niveau}})][(#TITRE|supprimer_tags|texte_backend)]</option>
+  <BOUCLE_sous_groupes(GROUPES_MOTS){id_parent=#ID_GROUPE}{id_groupe!=#ENV{id_groupe}}>
+      <option value='#ID_GROUPE' [(#ID_GROUPE|=={[(#ENV{id_parent})]}|?{' '})selected='selected']>[(#VAL{'&nbsp;&nbsp;'}|str_repeat{#GET{niveau}})][(#TITRE|supprimer_tags|texte_backend)]</option>
       [(#SET{niveau,#GET{niveau}|plus{1}})]
       <BOUCLE_recursive(BOUCLE_sous_groupes){id_parent=#ID_GROUPE}></BOUCLE_recursive>
       [(#SET{niveau,#GET{niveau}|moins{1}})]
@@ -20,8 +21,6 @@
   [(#SET{niveau,#GET{niveau}|moins{1}})]
 </BOUCLE_groupes_arborescent>
 </select>
-[(#REM) ce hidden permet d'invalider la non modification de l'objet si on ne modifie que le id_parent ]
-<input type="hidden" name="hidden_id_parent_groupe_mot" id="hidden_id_parent_groupe_mot"/>
 </div>
 </li></ul>
 </fieldset>
