@@ -30,7 +30,7 @@ function rainette_icone_meteo($code_icon, $taille='petit', $chemin='', $extensio
 
 function rainette_resume_meteo($code_icon){
 	include_spip('inc/rainette_utils');
-	$resume = _T('rainette:meteo_'.code2icone($code_icon));
+	$resume = ucfirst(_T('rainette:meteo_'.code2icone($code_icon)));
 	return $resume;
 }
 
