@@ -8,6 +8,7 @@
     (seulement si non multiple)
   - option_statut: si quelque chose est passe on insere un bonhomme de statut a cote du nom, sinon rien
     (defaut = rien)
+  - cacher_option_intro : pas de premier option vide  (defaut:"")
 	 
   Exemple d'appel :
 	[(#SAISIE{auteurs,auteurs_site,
@@ -19,8 +20,8 @@
 	#SET{bonhomme_statut, #ARRAY{0minirezo, admin-12.gif, 1comite, redac-12.gif, 6forum, visit-12.gif}}
 ]
 <select name="#ENV{nom}[(#ENV{multiple}|?{[(#VAL{&#91;&#93;}|html_entity_decode)]})]" id="champ_#ENV{nom}"[ class="(#ENV{class})"][(#ENV{multiple}|oui) multiple="multiple"]>
-	[(#ENV{multiple}|non)
-	<option value="0">[(#ENV{option_intro})]</option>]
+	[(#ENV{cacher_option_intro}|ou{#ENV{multiple}}|non)
+		<option value="0">[(#ENV{option_intro})]</option>]
 	<BOUCLE_auteurs(AUTEURS){par num nom, nom}{statut ?}{statut != 5poubelle}{tout}>
 		[(#ENV{multiple}|oui)
 		<option value="#ID_AUTEUR"[(#ID_AUTEUR|in_array{#ENV{valeur}|sinon{#ENV{defaut,#ARRAY}}}|oui) selected="selected"][ style="background:url(../prive/images/(#GET{bonhomme_statut}|table_valeur{#STATUT})) no-repeat left; padding-left: 20px;"]>#NOM</option>]

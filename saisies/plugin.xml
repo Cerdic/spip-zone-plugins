@@ -2,8 +2,8 @@
     <nom>Saisies pour formulaires</nom>
     <auteur>Matthieu Marcillaud</auteur>
     <licence>&#169; 2009 GNU/GPL</licence>
-    <version>1.3</version>
-    <etat>experimental</etat>
+    <version>1.4</version>
+    <etat>test</etat>
     
     <description>
     Ce plugin permet de faciliter l'&eacute;criture de champs de formulaires en proposant une
