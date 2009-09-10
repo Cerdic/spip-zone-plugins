@@ -49,7 +49,7 @@ function MotsPartout_editer_contenu_objet($flux){
  * @param object $flux
  */
 function MotsPartout_post_edition($flux){
-	if ($flux['args']['type']=='groupe_mot') {
+	if ($flux['args']['table']=='spip_groupe_mots') {
 
 		$id_groupe = $flux['args']['id_objet'];
 		$id_parent=intval(_request('id_parent'));
@@ -72,10 +72,32 @@ function MotsPartout_post_edition($flux){
 function MotsPartout_pre_edition($flux){
 
   //on ajoute le champ en pre_edition du groupe de mot
-  if ($flux['args']['type']=='groupe_mot') {
+  if ($flux['args']['table']=='spip_groupe_mots') {
 	  $flux['args']['champs']['id_parent']=intval(_request('id_parent'));
 	}
 	return $flux;
 }
 
-?>
+/**
+ *
+ * Insertion dans le pipeline affiche milieu afin de pouvoir editer les objets autre que rubriques et articles
+ * @return
+ * @param object $flux
+ */
+function MotsPartout_affiche_milieu($flux){
+
+  //include_spip("inc/editer_mots");
+  $editer_mot = charger_fonction('editer_mots', 'inc');
+
+  switch($flux['args']['exec']) {
+		case 'auteur_infos':
+			$flux['data'] .= $editer_mot('auteur', $flux['args']['id_auteur'], $cherche_mot, $select_group, true);
+		break;
+		case 'mots_types':
+		  $flux['data'] .= $editer_mot('groupes_mot', $flux['args']['id_groupe'], $cherche_mot, $select_group, true);
+	  break;
+		default:
+			break;
+	}
+	return $flux;
+}

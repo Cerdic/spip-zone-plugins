@@ -5,7 +5,7 @@
 	<auteur>Stephane Laurent (Bill)</auteur>
 	<auteur>Yoann Nogues (Zerax)</auteur>
 	<lien>http://www.spip-contrib.net/Des-mots-clefs-partout</lien>
-	<version>0.5.2</version>
+	<version>0.5.1</version>
 	<etat>test</etat>
 	<necessite id="SPIP" version="[2.0;]" />
 	<description>
@@ -27,8 +27,7 @@
 
 	<pipeline>
 		<nom>affiche_milieu</nom>
-		<action>afficherMots</action>
-		<inclure>mots_partout.php</inclure>
+		<inclure>inc/motspartout_pipeline.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>libelle_association_mots</nom>
