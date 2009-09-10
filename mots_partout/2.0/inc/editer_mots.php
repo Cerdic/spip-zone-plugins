@@ -398,7 +398,7 @@ function menu_mots($row, $id_groupes_vus, $les_mots,$ancre="")
 		else if ($unseul)
 			$res .= "<select name='nouv_mot' id='nouv_mot$id_groupe' size='1' style=' background-color:#cccccc;' class='fondl' $jscript>";
 		else
-			$res .= "<select name='nouv_mot' id='nouv_mot$id_groupe' size='1' class='fondl' $jscript>";
+			$res .= "<select name='nouv_mot' id='nouv_mot$id_groupe' size='1' class='fondl' style='width:100%' $jscript>";
 
 		//on a le groupe de mots de base
 		$res .= "\n<option value='' style='font-variant: small-caps;'>$titre</option>";
@@ -451,10 +451,8 @@ function select_sous_menu_groupe_mots($id_groupe,$table='articles',$niveau=1){
 		 while ($row = sql_fetch($result_sous_groupes)) {
 
 		   //on affiche les groupes de mots
-		     $res .= "\n<option value='" .$row['id_groupe'] .
-				"'>".str_repeat("&nbsp;&nbsp;",$niveau) .
-				textebrut(typo($row['titre'])) .
-				"</option>";
+		     $res .= "\n<optgroup label='".str_repeat("&nbsp;&nbsp;",$niveau) .
+				textebrut(typo($row['titre']))."'>" ;
 				//BOUCLES sur les mots de chaque sous groupe
 				//$result = spip_query("SELECT id_mot, type, titre,".creer_objet_multi ("titre", $spip_lang)." FROM spip_mots WHERE id_groupe =".$row['id_groupe']." ORDER BY type, titre");
 
@@ -472,6 +470,9 @@ function select_sous_menu_groupe_mots($id_groupe,$table='articles',$niveau=1){
 
         //on va afficher les sous groupes de mots du groupe
 				$res.=select_sous_menu_groupe_mots($row['id_groupe'],$table,$niveau+1);
+
+				$res.="</optgroup>";
+
 		 }
         return $res;
 }

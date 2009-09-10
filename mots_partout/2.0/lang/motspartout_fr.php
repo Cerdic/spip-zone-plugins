@@ -53,9 +53,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 									  'libelle_messages'=>"Messages",
 									  'libelle_evenements'=>"Evenements",
 									  'libelle_auteurs'=>"Auteurs",
+									  'libelle_syndic_articles'=>"Articles syndiqu&eacute;s",
 									  'libelle_groupes_mots'=>"Groupes de mots",
 									  'groupe_mot_parent'=>"S&eacute;lectionnez le groupe de mot parent",
-									  'groupe_racine'=>"Aucun - groupe de mots clefs a la racine"
+									  'groupe_racine'=>"Aucun - groupe de mots clefs &agrave; la racine"
 
 									   );
 

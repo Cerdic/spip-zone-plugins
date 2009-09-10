@@ -90,6 +90,9 @@ function MotsPartout_affiche_milieu($flux){
   $editer_mot = charger_fonction('editer_mots', 'inc');
 
   switch($flux['args']['exec']) {
+    case 'breves_voir':
+			//$flux['data'] .= $editer_mot('breve', $flux['args']['id_breve'], $cherche_mot, $select_group, true);
+		break;
 		case 'auteur_infos':
 			$flux['data'] .= $editer_mot('auteur', $flux['args']['id_auteur'], $cherche_mot, $select_group, true);
 		break;
