@@ -19,3 +19,5 @@ function balise_TYPE_BOUCLE_dist($p) {
 	return $p;
     
 }
+
+?>
