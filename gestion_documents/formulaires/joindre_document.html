@@ -14,7 +14,7 @@
 	<form action="#ENV{action}#formulaire_joindre_document-#ENV{id,new}" method="post" enctype='multipart/form-data'><div>
 		[(#ACTION_FORMULAIRE{#ENV{action}})]
 		
-		[(#INCLURE{fond=formulaires/inc-upload_document}{env}{mediatheque=#ENV{objet,''}|et{#ENV{id_objet,''}}})]
+		[(#INCLURE{fond=formulaires/inc-upload_document}{env}{mediatheque=#ENV{objet,''}|et{#ENV{id_objet,''}}|et{#ENV{proposer_media}}})]
 		
 	</div></form>
 

@@ -26,7 +26,7 @@ function joindre_determiner_mode($mode,$id_document,$objet){
 }
 
 
-function formulaires_joindre_document_charger_dist($id_document='new',$id_objet=0,$objet='',$mode = 'auto',$galerie = false){
+function formulaires_joindre_document_charger_dist($id_document='new',$id_objet=0,$objet='',$mode = 'auto',$galerie = false, $proposer_media=true, $proposer_ftp=true){
 	$valeurs = array();
 	$mode = joindre_determiner_mode($mode,$id_document,$objet);
 	
@@ -48,10 +48,14 @@ function formulaires_joindre_document_charger_dist($id_document='new',$id_objet=
 	if (intval($id_document)){
 		$valeurs['editable'] = autoriser('modifier','document',$id_document)?' ':'';
 	}
-
-	# regarder si un choix d'upload FTP est possible
+	
+	$valeurs['proposer_media'] = is_string($proposer_media) ? (preg_match('/^(false|non|no)$/i', $proposer_media) ? false : true) : $proposer_media;
+	$valeurs['proposer_ftp'] = is_string($proposer_ftp) ? (preg_match('/^(false|non|no)$/i', $proposer_ftp) ? false : true) : $proposer_ftp;
+	
+	# regarder si un choix d'upload FTP est vraiment possible
 	if (
-	 test_espace_prive() # ??
+	 $valeurs['proposer_ftp']
+	 AND test_espace_prive() # ??
 	 AND ($mode == 'document' OR $mode == 'choix') # si c'est pour un document
 	 //AND !$vignette_de_doc		# pas pour une vignette (NB: la ligne precedente suffit, mais si on la supprime il faut conserver ce test-ci)
 	 AND $GLOBALS['flag_upload']
@@ -68,7 +72,7 @@ function formulaires_joindre_document_charger_dist($id_document='new',$id_objet=
 	}
 	// On ne propose le FTP que si on a des choses a afficher
 	$valeurs['proposer_ftp'] = ($valeurs['_options_upload_ftp'] or $valeurs['_dir_upload_ftp']);
-
+	
 	if ($galerie){
 		# colonne documents ou portfolio ?
 		$valeurs['_galerie'] = $galerie;
@@ -86,7 +90,7 @@ function formulaires_joindre_document_charger_dist($id_document='new',$id_objet=
 }
 
 
-function formulaires_joindre_document_verifier_dist($id_document='new',$id_objet=0,$objet='',$mode = 'auto',$galerie = false){
+function formulaires_joindre_document_verifier_dist($id_document='new',$id_objet=0,$objet='',$mode = 'auto',$galerie = false, $proposer_media=true, $proposer_ftp=true){
 	include_spip('inc/joindre_document');
 	
 	$erreurs = array();
@@ -138,7 +142,7 @@ function formulaires_joindre_document_verifier_dist($id_document='new',$id_objet
 }
 
 
-function formulaires_joindre_document_traiter_dist($id_document='new',$id_objet=0,$objet='',$mode = 'auto',$galerie = false){
+function formulaires_joindre_document_traiter_dist($id_document='new',$id_objet=0,$objet='',$mode = 'auto',$galerie = false, $proposer_media=true, $proposer_ftp=true){
 	$res = array('editable'=>true);
 	$ancre = '';
 	// on joint un document deja dans le site
