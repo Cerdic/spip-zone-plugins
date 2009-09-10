@@ -134,7 +134,6 @@ EOH;
 		if (function_exists('chercher_filtre')
 		AND $f = chercher_filtre('info_plugin')
 		AND $f('PORTE_PLUME','est_actif')) {
-			$lang = $GLOBALS['spip_lang'];
 			$incHead .= <<<EOF
 <script type="text/javascript">
 <!--
@@ -142,7 +141,7 @@ EOH;
 $(document).ready(function(){
 	/* Ajouter une barre porte plume sur les crayons */
 	function barrebouilles_crayons(){
-		$('.formulaire_crayon textarea.crayon-active:not(.markItUpEditor)').markItUp(barre_outils_edition,{lang:'$lang'});
+		$('.formulaire_crayon textarea.crayon-active').barre_outils('edition');
 	}
 	barrebouilles_crayons();
 	onAjaxLoad(barrebouilles_crayons);
