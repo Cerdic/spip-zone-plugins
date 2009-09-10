@@ -44,7 +44,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_id_rubrique' => 'Num&eacute;ro de la rubrique parente',
 'entree_niveau' => 'Niveau des sous-rubriques',
 'entree_sur_n_niveaux' => 'Sur @n@ niveau(x)',
-'entree_infini' => '&Agrave l\'infini'
+'entree_infini' => '&Agrave l\'infini',
+'entree_mapage' => 'Ma page perso'
 );
 
 ?>
