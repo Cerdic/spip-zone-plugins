@@ -1,7 +1,7 @@
 <div class="formulaire_spip formulaire_editer formulaire_editer_ticket formulaire_editer_ticket-#ENV{id_ticket,nouveau} ajax">
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
-	[(#ENV{editable})
+	<BOUCLE_editable(CONDITION) {si #ENV{editable}}>
 	<form method='post' action='#ENV{action}'><div>
 		[(#REM) declarer les hidden qui declencheront le service du formulaire
 		parametre : url d'action ]
@@ -15,14 +15,17 @@
 
 			[(#SAISIE{selection, statut,
 				label=<:tickets:champ_statut:>,
-				datas=[(#VAL{#SESSION{id_auteur}}|tickets_liste_statut)]})]
+				cacher_option_intro=oui,
+				datas=[(#SESSION{id_auteur}|tickets_liste_statut)]})]
 				
 			[(#SAISIE{selection, type,
 				label=<:tickets:champ_type:>,
+				cacher_option_intro=oui,
 				datas=[(#VAL|tickets_liste_type)]})]
 				
 			[(#SAISIE{selection, severite,
 				label=<:tickets:champ_severite:>,
+				cacher_option_intro=oui,
 				datas=[(#VAL|tickets_liste_severite)]})]
 
 			#SET{saisies, #ARRAY{0,projet,1,composant,2,version,3,jalon}}
@@ -47,5 +50,6 @@
 		</ul>
 		<!--extra-->
 		<p class='boutons'><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
-	</div></form>]
+	</div></form>
+	</BOUCLE_editable>
 </div>
