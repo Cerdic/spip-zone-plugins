@@ -565,6 +565,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'texte_brut' => "Texte brut"
 , 'vous_etes_abonne_aux_listes_' => "Vous &ecirc;tes abonn&#233; aux listes de diffusion :"
 , 'vous_etes_abonne_a_la_liste_' => "Vous &ecirc;tes abonn&#233; &#224; la liste de diffusion :"
+, 'votre_email' => "Votre email"
 
 // tableau items *_options
 , 'Liste_de_destination' => "Liste de destination"
