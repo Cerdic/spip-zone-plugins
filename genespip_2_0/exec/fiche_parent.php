@@ -28,7 +28,7 @@ function exec_fiche_parent(){
 	echo debut_droite('',true);
 
 	echo debut_cadre_relief(  "", false, "", $titre = _T('genespip:fiche parents'));
-	echo debut_boite_info(true);
+
 	//Requêtes parents
 	$result = spip_query("SELECT * FROM spip_genespip_individu where id_individu = ".$id_individu." and poubelle <> '1'");
 	while ($fiche = spip_fetch_array($result)) {
@@ -101,7 +101,6 @@ function exec_fiche_parent(){
 		echo "</table>";
 		echo "</fieldset>";
 	}
-	echo fin_boite_info(true);
 
 	echo fin_cadre_relief();  
 

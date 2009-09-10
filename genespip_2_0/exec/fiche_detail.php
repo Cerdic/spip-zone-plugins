@@ -87,7 +87,7 @@ function exec_fiche_detail(){
 	echo debut_droite('',true); 
 
 	echo debut_cadre_relief(  "", false, "", $titre = _T('genespip:detail fiche'));
-	echo debut_boite_info(true);
+
 
 	$result = spip_query("SELECT * FROM spip_genespip_individu where id_individu = ".$id_individu);
 	while ($fiche = spip_fetch_array($result)) {
@@ -163,7 +163,6 @@ function exec_fiche_detail(){
 	echo '</table>';
 	echo '</fieldset>';
 
-	echo fin_boite_info(true);
 	echo fin_cadre_relief(true);
 	
 	//echo "action=".$_POST['action'];
@@ -177,7 +176,6 @@ function exec_fiche_detail(){
 		genespip_add_evt($id_individu);
 	}
 	echo debut_cadre_relief(  "", false, "", $titre = _T('genespip:evenements'));
-	echo debut_boite_info(true);
 	$resultevt = spip_query("SELECT * FROM spip_genespip_type_evenements");
 	while ($evt = spip_fetch_array($resultevt)) {
 		genespip_evt($evt['id_type_evenement'],$id_individu);
@@ -204,7 +202,6 @@ function exec_fiche_detail(){
 	}
 	echo "<a name='bottom'></a>";
 	
-	echo fin_boite_info(true);
 	echo fin_cadre_relief(true);
 	echo fin_page(true);
 }

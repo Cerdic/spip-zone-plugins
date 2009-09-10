@@ -17,7 +17,9 @@ function exec_fiche_lieux(){
 	$url_action_evt=generer_url_ecrire('fiche_evt_par_lieu');
 	$url_retour = $_SERVER['HTTP_REFERER'];
 	if ($_GET['id_individu']!=NULL){$id_individu = $_GET['id_individu'];}else{$id_individu=$_POST['id_individu'];}
-
+	
+	echo gros_titre(_T('genespip:Liste des lieux'), '', false);
+	
 	echo debut_gauche('',true);
 	include_spip('inc/boite_info');
 	include_spip('inc/raccourcis_intro');
@@ -25,14 +27,13 @@ function exec_fiche_lieux(){
 	echo debut_droite('',true);
 
 	echo debut_cadre_relief(  "", false, "", $titre = _T('genespip:fiche lieux'));
-    echo debut_boite_info(true);
 	
 	//Actions
 	if ($_POST['action']=='up_lieu'){genespip_up_lieu($_POST['id_lieu']);}
 	if ($_POST['action']=='add_lieu'){genespip_add_lieu();}
 	if ($_GET['action']=='del_lieu'){genespip_del_lieu($_GET['id_lieu']);}
 
-	echo gros_titre(_T('genespip:Liste des lieux'), '', false);
+	
 	echo "<br /><fieldset><legend>"._T('genespip:ajout lieu')."</b></i></legend>";
 	echo "<table style='border:1px;border-color:black'>";
 	echo "<tr>",
@@ -119,9 +120,6 @@ function exec_fiche_lieux(){
 	}}
 	echo "</table><br /><br />";
 	   echo "</fieldset>";
-
-
-	echo fin_boite_info(true);
 
 	echo fin_cadre_relief(true);  
 

@@ -8,6 +8,7 @@
 	$result = spip_query("SELECT id_individu FROM spip_genespip_individu where poubelle = '1'");
 	$compte = mysql_num_rows($result);
 	
+	$rac=icone_horizontale(_T('genespip:liste patronyme'), generer_url_ecrire("genespip"), '../'._DIR_PLUGIN_GENESPIP.'/img_pack/globe.gif', '',false);
 	if ($id_individu){
 		$rac.=icone_horizontale(_T('genespip:retour fiche'), generer_url_ecrire("fiche_detail&id_individu=".$id_individu), '../'._DIR_PLUGIN_GENESPIP.'/img_pack/globe.gif', '',false);
 	}

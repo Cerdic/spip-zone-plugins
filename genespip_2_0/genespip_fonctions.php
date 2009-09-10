@@ -374,7 +374,7 @@ $sqlmodif =spip_query($action_sql) or die ("Requête update_parent invalide");
 		  $art .= "<select size='1' name='id_article' size='3'>";
 		  $art .= "<option value='0'>---</option>";
 		while ($fiche = spip_fetch_array($result)) {
-			$art .= "<option value='".$fiche['id_article']."'>".$fiche['id_article']."/ ".$fiche['titre']."</option>";
+			$art .= "<option value='".$fiche['id_article']."'>".$fiche['titre']."</option>";
 		}
 		$art .= "</select>";
 		return $art;
