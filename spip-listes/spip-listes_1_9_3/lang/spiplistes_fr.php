@@ -566,6 +566,9 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'vous_etes_abonne_aux_listes_' => "Vous &ecirc;tes abonn&#233; aux listes de diffusion :"
 , 'vous_etes_abonne_a_la_liste_' => "Vous &ecirc;tes abonn&#233; &#224; la liste de diffusion :"
 , 'votre_email' => "Votre email"
+, 'liste_inconnue' => "liste inconnue"
+, 'cet_email_pas_valide' => 'Cet email n\'est pas valide'
+, 'cet_email_deja_enregistre' => 'Cet email est d&#233;ja enregistr&#233;.'
 
 // tableau items *_options
 , 'Liste_de_destination' => "Liste de destination"
@@ -853,5 +856,3 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'souhait_modifier_abo'=>'Vous souhaitez modifier votre abonnement.'
 
 );
-
-?>
