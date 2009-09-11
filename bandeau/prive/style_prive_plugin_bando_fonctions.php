@@ -33,7 +33,7 @@ function bando_images_background(){
 }
 if (!function_exists('bando_style_prive_theme')){
 function bando_style_prive_theme() {
-	if ($f = find_in_skin('style_prive_theme.html'))
+	if ($f = find_in_theme('style_prive_theme.html'))
 		return preg_replace(',[.]html$,Ui','',$f);
 	return '';
 }
