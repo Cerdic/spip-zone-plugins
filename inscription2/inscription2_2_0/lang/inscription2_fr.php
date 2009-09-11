@@ -77,7 +77,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'exp_publication' => 'Autorisation de publication des donn&eacute;es personnelles',
 	'exp_statut' => 'Choisissez le statut que vous voulez attribuer aux nouveaux adh&eacute;rents',
 	'exp_statut_rel' => 'Champ diff&eacute;rent du statut de SPIP, celui-ci sert pour le controle interne d\'une institution',
-	'explication_affordance_form' => 'Champ affiché sur le formulaire d\'identification.',
+	'explication_affordance_form' => 'Champ affiché sur les formulaires d\'identification (#LOGIN_PUBLIC)',
 
 	// F
 	'fax' => 'Fax',
@@ -127,7 +127,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'infos_personnelles' => 'Informations personnelles',
 	'inscriptions' => 'Inscriptions',
 	'inserez_infos' => 'Veuillez saisir les informations demand&eacute;es',
-	'inscription2' => 'Gestion avancée des utilisateurs',
+	'inscription2' => 'inscription 2',
 
 	// J
 	'janvier' => 'janvier',
@@ -135,7 +135,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'juin' => 'juin',
 
 	// L
-	'label_affordance_form' => 'Paramétrage du formulaire d\'identification',
+	'label_affordance_form' => 'Paramétrage des formulaires d\'identification',
 	'latitude' => 'Latitude',
 	'legend_affordance_form' => 'Formulaire d\'identification',
 	'legend_oubli_pass' => 'Pas de mot de passe / mot de passe oubli&eacute;',
