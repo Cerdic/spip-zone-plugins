@@ -1,6 +1,6 @@
 <!-- autoriser=webmestre -->
 <!-- refus=<:cfg:refus_configuration_webmestre:> -->
-<!-- nom=inscription2 -->
+<!-- nom=<:inscription2:inscription2:> -->
 
 <div class="formulaire_spip formulaire_config formulaire_config_inscription2">
 [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
@@ -12,29 +12,8 @@
 
 		<fieldset>
 			<ul>
-				<li class="fieldset">
-					<fieldset>
-						<h3 class="legend"><:inscription2:legend_affordance_form:></h3>
-						<ul>
-							<li>
-								[(#SAISIE{radio, affordance_form,
-									label=<:inscription2:label_affordance_form:>,
-									explication=<:inscription2:explication_affordance_form:>,
-									defaut=#ARRAY{0,login},
-									datas=#ARRAY{
-										login,<:inscription2:choix_affordance_login:>,
-										email,<:inscription2:choix_affordance_email:>,
-										login_et_email,<:inscription2:choix_affordance_login_email:>}})]
-							</li>
-						</ul>
-					</fieldset>
-				</li>
-				<li class="fieldset">
-					<fieldset>
-						<h3 class="legend"><:inscription2:info_defaut:></h3>
-						<ul>
-							<li>
-								<div class="explication">
+			<li>
+						<div class="explication">
 									<p><:inscription2:info_defaut_desc:></p>
 									<small id="legend">
 										<strong><:inscription2:form:></strong><:inscription2:form_expl:><br />
@@ -43,8 +22,13 @@
 										<strong><:inscription2:fiche:></strong><:inscription2:fiche_expl:><br />
 										<strong><:inscription2:table:></strong><:inscription2:table_expl:><br />
 									</small>
-								</div>
-							</li>
+						</div>
+			 </li>
+							
+				<li class="fieldset">
+					<fieldset>
+						<h3 class="legend"><:inscription2:info_defaut:></h3>
+						<ul>
 							<li>
 								<table>
 									<thead>
@@ -138,6 +122,13 @@
 		#PIPELINE{i2_cfg_form}
 
 		[(#REM) ------------------------ OPTIONS DES AUTEURS ------------------------ ]
+		<li>
+						<div class="explication">
+									<p><:inscription2:Autres_informations:></p>
+								
+						</div>
+			 </li>
+			
 		<li class="fieldset" id="option">
 			<fieldset>
 			<h3 class="legend"><:inscription2:info_gener:></h3>
@@ -191,6 +182,24 @@
 			</ul>
 			</fieldset>
 		</li>
+				<li class="fieldset">
+					<fieldset>
+						<h3 class="legend"><:inscription2:legend_affordance_form:></h3>
+						<ul>
+							<li>
+								[(#SAISIE{radio, affordance_form,
+									label=<:inscription2:label_affordance_form:>,
+									explication=<:inscription2:explication_affordance_form:>,
+									defaut=#ARRAY{0,login},
+									datas=#ARRAY{
+										login,<:inscription2:choix_affordance_login:>,
+										email,<:inscription2:choix_affordance_email:>,
+										login_et_email,<:inscription2:choix_affordance_login_email:>}})]
+							</li>
+						</ul>
+					</fieldset>
+				</li>
+		
 	</ul>
 	<p class="boutons">
 		<input type="submit" name="_cfg_ok" class="submit" value="<:valider:>" />

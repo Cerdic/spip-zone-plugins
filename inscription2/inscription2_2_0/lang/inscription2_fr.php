@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aconfirmer' => '&Agrave; confirmer',
 	'action_adherent' => 'Opérations',
 	'activation_compte' => 'Activez votre compte',
-	'adherents' => 'Adh&eacute;rents',
+	'adherents' => 'Utilistateurs',
 	'admin' => 'Admin',
 	'admin_modifier_auteur_supp' => 'Informations suppl&eacute;mentaires',
 	'adresse' => 'Adresse',
@@ -36,9 +36,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'choisir_categories' => 'Choisissez-les ci-dessous&nbsp;:',
 	'choisir_nouveau_password' => 'Vous pourrez choisir un nouveau mot de passe en cliquant le lien suivant',
 	'choisir_zones' => 'Veuillez choisir les zones auxquelles vous voulez que les nouveaux adh&eacute;rents soient affect&eacute;s',
-	'choix_affordance_login' => 'Login (d&eacute;faut de SPIP)',
+	'choix_affordance_login' => 'Login (par d&eacute;faut dans SPIP)',
 	'choix_affordance_email' => 'Email',
-	'choix_affordance_login_email' => 'Login et Email',
+	'choix_affordance_login_email' => 'Login et email',
 	'choix_domaine' => 'Veuillez choisir votre domaine',
 	'civilite' => 'Civilit&eacute;',
 	'code_postal' => 'Code Postal',
@@ -60,14 +60,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'decembre' => 'd&eacute;cembre',
 	'delete_user_select' => 'Supprimer les utilisateurs s&eacute;lectionn&eacute;s',
 	'demande_password' => 'Votre mot de passe&nbsp;:',
-	'description_cfg' => 'Ce plugin permet d\'&eacute;tendre les informations sur les auteurs sur votre site, vous pouvez choisir ici les champs suppl&eacute;mentaires',
+	'description_cfg' => 'Activer des champs supplémentaires pour les utilisateurs du site',
 	'description_page' => 'Ici vous pouvez v&eacute;rifier vos choix de configuration tels qu\'ils sont stock&eacute;s',
 	'divers' => 'Divers',
 	'domaine' => 'Domaine',
 	'domaines' => 'Domaine',
 
 	// E
-	'editer_adherent' => '&Eacute;diter adh&eacute;rent',
+	'editer_adherent' => '&Eacute;diter utilisateur',
 	'effacement_auto_impossible' => 'Le compte ne peut &ecirc;tre effac&eacute; automatiquement, contactez-nous.',
 	'email' => 'E-Mail',
 	'email_bonjour' => 'Bonjour @nom@,',
@@ -77,7 +77,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'exp_publication' => 'Autorisation de publication des donn&eacute;es personnelles',
 	'exp_statut' => 'Choisissez le statut que vous voulez attribuer aux nouveaux adh&eacute;rents',
 	'exp_statut_rel' => 'Champ diff&eacute;rent du statut de SPIP, celui-ci sert pour le controle interne d\'une institution',
-	'explication_affordance_form' => 'Cette option permet de modifier l\'intitul&eacute; des labels des formulaires en relation avec l\'identification.',
+	'explication_affordance_form' => 'Champ affiché sur le formulaire d\'identification.',
 
 	// F
 	'fax' => 'Fax',
@@ -85,13 +85,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'feminin' => 'Madame',
 	'fevrier' => 'f&eacute;vrier',
 	'fiche' => 'Fiche',
-	'fiche_adherent' => 'Fiche adh&eacute;rent',
+	'fiche_adherent' => 'Fiche utilisateur',
 	'fiche_expl' => ' : Le champ sera visible sur la fiche d\'adh&eacute;rent',
 	'fiche_mod' => 'Modifiable',
-	'fiche_mod_expl' => ' : Le champ sera modifiable depuis l\'interface publique par l\'adh&eacute;rent &agrave; condition d\'utiliser le plugin CRAYONS',
+	'fiche_mod_expl' => ' : Le champ sera modifiable depuis l\'interface publique par l\'adh&eacute;rent &agrave; condition d\'utiliser le plugin #CRAYONS',
 	'fonction' => 'Fonction',
 	'form' => 'Formulaire',
-	'form_expl' => ' : Le champ sera affich&eacute; sur le formulaire INSCRIPTION2',
+	'form_expl' => ' : Le champ sera affich&eacute; sur le formulaire #INSCRIPTION2',
 	'form_oblig_expl' => ' : Rendre la saisie obligatoire dans le formulaire',
 	'format' => 'Format',
 	'formulaire_inscription' => 'Formulaire d\'inscription',
@@ -105,17 +105,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'geoloc' => 'G&eacute;olocalisation',
 	'geomap_obligatoire' => 'Pour utiliser les donn&eacute;es de g&eacute;olocalisation des personnes, il est n&eacute;cessaire d\'installer le plugin GoogleMapApi...',
 	'gerent' => 'Adh&eacute;rent',
-	'gestion_adherent' => 'Gestion d\'adh&eacute;rents',
+	'gestion_adherent' => 'Gestion des utilisateurs',
 
 	// H
 	'html' => 'HTML',
 
 	// I
-	'icone_menu_config' => 'Inscription2',
+	'icone_menu_config' => 'Configuration avancée des utilisateurs',
 	'identification' => 'Identification',
 	'info_connection' => 'Informations de connexion',
-	'info_defaut' => 'Informations par d&eacute;faut',
-	'info_defaut_desc' => 'Informations obligatoires par d&eacute;faut',
+	'info_defaut' => 'Informations obligatoires',
+	'info_defaut_desc' => 'Possibilités de paramétrage',
 	'info_gener' => 'Informations G&eacute;n&eacute;rales',
 	'info_gener_desc' => 'Options qui seront demand&eacute;es aux nouveaux adh&eacute;rents du site',
 	'info_internes' => 'Informations internes',
@@ -127,6 +127,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'infos_personnelles' => 'Informations personnelles',
 	'inscriptions' => 'Inscriptions',
 	'inserez_infos' => 'Veuillez saisir les informations demand&eacute;es',
+	'inscription2' => 'Gestion avancée des utilisateurs',
 
 	// J
 	'janvier' => 'janvier',
@@ -134,9 +135,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'juin' => 'juin',
 
 	// L
-	'label_affordance_form' => 'Choisir l\'affordance des formulaires d\'identification',
+	'label_affordance_form' => 'Paramétrage du formulaire d\'identification',
 	'latitude' => 'Latitude',
-	'legend_affordance_form' => 'Affordance des formulaires',
+	'legend_affordance_form' => 'Formulaire d\'identification',
 	'legend_oubli_pass' => 'Pas de mot de passe / mot de passe oubli&eacute;',
 
 	'legende' => 'L&eacute;gende',
@@ -220,7 +221,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'statut' => 'Statut',
 	'statut_rel' => 'Statut interne',
 	'suppression_faite' => 'La suppression de vos donn&eacute;es a &eacute;t&eacute; effectu&eacute;e',
-	'supprimer_adherent' => 'Supprimer adh&eacute;rent',
+	'supprimer_adherent' => 'Supprimer utilisateurs',
 	'supprimer_adherent_red' => 'Sup',
 	'surnom' => 'Surnom',
 
