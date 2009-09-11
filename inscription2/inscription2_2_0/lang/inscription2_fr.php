@@ -58,7 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'decembre' => 'd&eacute;cembre',
-	'delete_user_select' => 'Supprimer les utilisateurs s&eacute;lectionn&eacute;s',
+	'delete_user_select' => 'Supprimer le(s) utilisateur(s) s&eacute;lectionn&eacute;(s)',
 	'demande_password' => 'Votre mot de passe&nbsp;:',
 	'description_cfg' => 'Activer des champs supplémentaires pour les utilisateurs du site',
 	'description_page' => 'Ici vous pouvez v&eacute;rifier vos choix de configuration tels qu\'ils sont stock&eacute;s',
@@ -161,7 +161,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'naissance' => 'Date de naissance',
-	'nb_users_supprimes' => '@nb@ utilisateurs ont &eacute;t&eacute; supprim&eacute;s.',
+	'nb_users_supprimes' => '@nb@ suppression(s) effectu&eacute;e(s).',
 	'nettoyer_tables' => 'Nettoyer tables',
 	'no_user_selected' => 'Vous n\'avez s&eacute;lectionn&eacute; aucun utilisateur.',
 	'nom' => 'Signature',
