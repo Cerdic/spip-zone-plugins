@@ -10,17 +10,17 @@
 			]</span>
 		</a>
 	</h3>
-	
+
 	[(#REM) Un test pour voir si on a au moins un champs d'adresse]
 	[(#ADRESSE|?{#SET{adresse,ok},' '})
 	[(#CODE_POSTAL|?{#SET{adresse,ok},' '})
 	[(#VILLE|?{#SET{adresse,ok},' '})
 	[(#PAYS|?{#SET{adresse,ok},#SET{adresse,pasok}})]]]]
-	
+
 	[(#GET{adresse}|=={'ok'}|oui)<p>
 		<span class="adr">]
 			[<span class="street-address #EDIT{adresse}">(#ADRESSE)</span><br />]
-			[<span class="postal-code #EDIT{codepostal}">(#CODE_POSTAL)</span>]
+			[<span class="postal-code #EDIT{code_postal}">(#CODE_POSTAL)</span>]
 			[<span class="locality #EDIT{ville}">(#VILLE)</span><br />]
 			[(#PAYS|oui)<span class="country-name #EDIT{pays}">
 				[(#PAYS|id_pays_to_pays)]
@@ -30,7 +30,7 @@
 
 	[<p><:inscription2:organisation:> <a class="org" href="#URL_ORGANISATION">(#ORGANISATION)</a></p>]
 	[<p><:inscription2:email:> <span class="#EDIT{email}"><a class="email" href="mailto:#EMAIL">(#EMAIL)</a></span></p>]
-	
+
 	[(#REM) Un test pour voir si on a au moins un champs telephone]
 	[(#TELEPHONE|?{#SET{telephone_perso,ok},' '})
 	[(#FAX|?{#SET{telephone_perso,ok},' '})
@@ -40,9 +40,9 @@
 			[<span class="tel"><span class="type" style="display:none">Fax</span><:inscription2:fax:> : <span class="value #EDIT{fax}">(#FAX)</span></span><br />]
 			[<span class="tel"><span class="type" style="display:none">cell</span><:inscription2:mobile:> : <span class="value #EDIT{mobile}">(#MOBILE)</span></span>]
 	[(#GET{telephone_perso}|=={ok}|oui)</p>]
-	
+
 	[<p><:inscription2:website:> : <span class="#EDIT{hyperlien}"><a href="#URL_SITE" class="url" rel="me">(#NOM_SITE)</a></span></p>]
-	
+
 	[(#LATITUDE|?{#SET{geo,ok},' '})
 	[(#LONGITUDE|?{#SET{geo,ok},#SET{geo,pasok}})]]
 	[(#GET{geo}|=={'ok'}|oui)<div class="geo"><p>GEO :]
