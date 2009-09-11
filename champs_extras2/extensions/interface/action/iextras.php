@@ -139,6 +139,7 @@ function action_desassocier_champ_extra($id_extra) {
 function action_associer_champ_sql_comme_champ_extra($table, $champ){
 	// recuperer la description du champ
 	include_spip('inc/cextras_gerer');
+	include_spip('inc/iextras');
 	$champs = extras_champs_anormaux();
 	if (isset($champs[$table][$champ])) {
 		$sql = $champs[$table][$champ];
