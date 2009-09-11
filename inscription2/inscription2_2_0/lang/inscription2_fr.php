@@ -101,7 +101,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_remplir_validation' => 'Veuillez v&eacute;rifier les champs qui ne sont pas valid&eacute;s.',
 
 	// G
-	'general_infos' => 'Informations G&eacute;n&eacute;rales',
+	'general_infos' => 'Informations g&eacute;n&eacute;rales',
 	'geoloc' => 'G&eacute;olocalisation',
 	'geomap_obligatoire' => 'Pour utiliser les donn&eacute;es de g&eacute;olocalisation des personnes, il est n&eacute;cessaire d\'installer le plugin GoogleMapApi...',
 	'gerent' => 'Adh&eacute;rent',
@@ -116,7 +116,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_connection' => 'Informations de connexion',
 	'info_defaut' => 'Informations obligatoires',
 	'info_defaut_desc' => 'Possibilités de paramétrage',
-	'info_gener' => 'Informations G&eacute;n&eacute;rales',
+	'info_gener' => 'Informations g&eacute;n&eacute;rales',
 	'info_gener_desc' => 'Options qui seront demand&eacute;es aux nouveaux adh&eacute;rents du site',
 	'info_internes' => 'Informations internes',
 	'info_internes_desc' => 'Options qui seront stock&eacute;es dans la base de donn&eacute;es mais ne seront pas affich&eacute;es dans le formulaire des nouveaux adh&eacute;rents',
