@@ -75,6 +75,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'info_numero_ticket' => 'TICKET NUM&Eacute;RO&nbsp;:',
 	'icone_modifier_ticket' => 'Modifier ce ticket',
+	'icone_retour_ticket' => 'Retour au ticket',
 
 	// M
 	'mail_texte_message_auto' => 'Ceci est un message automatique : n\'y repondez pas.',

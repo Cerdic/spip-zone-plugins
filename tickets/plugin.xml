@@ -55,6 +55,15 @@ Il est con&ccedil;u pour faciliter la phase de d&eacute;veloppement du site (not
 		<nom>objets_extensibles</nom>
 		<inclure>tickets_pipelines.php</inclure>
 	</pipeline>
+	<!-- avec plugin revisions (2.1) -->
+	<pipeline>
+		<nom>revisions_infos_tables_versions</nom>
+		<inclure>tickets_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>revisions_liste_objets</nom>
+		<inclure>tickets_pipelines.php</inclure>
+	</pipeline>
 
 	<bouton id='tickets' parent='bando_publication'>
 		<icone>images/ticket-16.png</icone>

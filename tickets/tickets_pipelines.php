@@ -16,7 +16,7 @@ function tickets_ajouterBoutons($boutons_admin) {
 				find_in_path('bugs.png', 'imgs/', false),
 				_T('tickets:titre'),
 				generer_url_ecrire('tickets')
-			);		
+			);
 		}
 	}
 	return ($boutons_admin);
@@ -31,7 +31,7 @@ function menu_colonne () {
 	$options = array("ajax"=>true);
 	$page = recuperer_fond("prive/contenu/inc_liste_simple", $contexte, $options);
 	$ret .= $page;
-	
+
 	$contexte = array("titre"=>_T('tickets:tous_tickets_ouverts'), "statut"=>"ouvert", "bloc"=>"_bloc2");
 	$options = array("ajax"=>true);
 	$page = recuperer_fond("prive/contenu/inc_liste_simple", $contexte, $options);
@@ -49,10 +49,10 @@ function menu_colonne () {
 // Pipeline menu a droite
 function tickets_droite ($flux) {
 	$exec = $flux["args"]["exec"];
-	
+
 	if ($exec == "accueil") {
 		$data = $flux["data"];
-		
+
 		$ret = menu_colonne();
 
 		$flux["data"] = $data.$ret;
@@ -60,21 +60,63 @@ function tickets_droite ($flux) {
 	return $flux;
 }
 
-// Pipeline menu a droite
+/**
+ * Insertion dans le pipeline affiche_aguche
+ * @param object $flux
+ * @return
+ */
 function tickets_gauche ($flux) {
 	$exec = $flux["args"]["exec"];
-	
+
 	if (($exec == "ticket_afficher") OR ($exec == "ticket_editer")) {
 		$data = $flux["data"];
-		
+
 		$ret = menu_colonne();
 		$flux["data"] = $data.$ret;
 	}
 	return $flux;
 }
 
-// champs extras 2
+/**
+ * Insertion dans le pipeline objets_extensibles (du plugin champs_extras)
+ * Permet aux tickets d'avoir des champs supplémentaires
+ *
+ * @param object $objets
+ * @return
+ */
 function tickets_objets_extensibles($objets){
 	return array_merge($objets, array('ticket' => _T('tickets:tickets')));
+}
+
+/**
+ * Insertion dans le pipeline revisions_infos_tables_versions (plugin revisions en 2.1)
+ * Permet de gérer les révisions sur les tickets
+ *
+ * @param object $array
+ * @return
+ */
+function tickets_revisions_infos_tables_versions($array){
+	$array['spip_tickets'] = array(
+								'table_objet' => 'tickets',
+								'type' => 'ticket',
+								'champs' => array('titre','exemple', 'texte'),
+								'url_voir' => 'ticket_afficher',
+								'texte_retour' => 'tickets:icone_retour_ticket',
+								'url_edit' => 'ticket_editer',
+								'texte_modifier' => 'tickets:icone_modifier_ticket',
+								'icone_objet' => 'ticket-24.png'
+							);
+	return $array;
+}
+
+/**
+ * Insertion dans le pipeline revisions_liste_objets du plugin revisions (2.1)
+ * Definir la liste des tables possibles
+ * @param object $array
+ * @return
+ */
+function tickets_revisions_liste_objets($array){
+	$array['tickets'] = 'tickets:tickets';
+	return $array;
 }
 ?>

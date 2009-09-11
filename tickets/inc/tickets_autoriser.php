@@ -8,7 +8,7 @@
 function tickets_autoriser(){}
 
 // Renvoie la liste des auteurs ou des statuts autorises pour une action donnee
-function definir_autorisations_tickets($action,$utiliser_defaut){
+function definir_autorisations_tickets($action,$utiliser_defaut=true){
 	$aut = null;
 
 	switch(strtolower($action))
