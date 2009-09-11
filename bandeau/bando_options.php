@@ -1,42 +1,42 @@
 <?php
 /*
- * Plugin xxx
+ * Plugin Bando
  * (c) 2009 cedric
  * Distribue sous licence GPL
  *
  */
 
-//$GLOBALS['skin_defaut'] = 'basic'; // pour tester une skin
+//$GLOBALS['theme_defaut'] = 'basic'; // pour tester un theme
 
-function get_skins(){
-	static $skins = null;
-	if (is_null($skins)){
+function lister_themes_prives(){
+	static $themes = null;
+	if (is_null($themes)){
 		// si pas encore definie
-		if (!defined('_SPIP_SKIN'))
-			@define('_SPIP_SKIN','spip');
-		$skins = array(_SPIP_SKIN);
+		if (!defined('_SPIP_THEME_PRIVE'))
+			@define('_SPIP_THEME_PRIVE','spip');
+		$themes = array(_SPIP_THEME_PRIVE);
 		$prefs = $GLOBALS['visiteur_session']['prefs'];
 		if (is_string($prefs))
 			$prefs = unserialize($GLOBALS['visiteur_session']['prefs']);
 		if (
-			((isset($prefs['skin']) AND $skin = $prefs['skin'])
-			OR (isset($GLOBALS['skin_defaut']) AND $skin = $GLOBALS['skin_defaut']))
-			AND $skin != _SPIP_SKIN)
-			array_unshift($skins,$skin); // placer la skin choisie en tete
+			((isset($prefs['theme']) AND $theme = $prefs['theme'])
+			OR (isset($GLOBALS['theme_prive_defaut']) AND $theme = $GLOBALS['theme_prive_defaut']))
+			AND $theme != _SPIP_THEME_PRIVE)
+			array_unshift($themes,$theme); // placer le theme choisie en tete
 	}
-	return $skins;
+	return $themes;
 }
 
-function find_in_skin($file, $dirname='', $include=false){
-	$skins = get_skins();
-	foreach($skins as $skin){
-		if ($f = find_in_path($file,"skins/$skin/$dirname",$include))
+function find_in_theme($file, $dirname='', $include=false){
+	$themes = lister_themes_prives();
+	foreach($themes as $theme){
+		if ($f = find_in_path($file,"themes/$theme/$dirname",$include))
 			return $f;
 		// et chercher aussi comme en 2.1...
-		if ($f = find_in_path($file,"prive/skins/$skin/$dirname",$include))
-			return $f;		
+		if ($f = find_in_path($file,"prive/themes/$theme/$dirname",$include))
+			return $f;
 	}
-	spip_log("$dirname/$file introuvable dans la skin ".reset($skins),'skin');
+	spip_log("$dirname/$file introuvable dans le theme ".reset($themes),'skin');
 	return "";
 }
 

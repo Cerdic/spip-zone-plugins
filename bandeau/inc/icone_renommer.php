@@ -38,7 +38,7 @@ function inc_icone_renommer_dist($fond,$fonction){
 
 	$dir = "images/";
 	$f = "$type-$size.png";
-	if ($icone = find_in_skin($dir.$f)){
+	if ($icone = find_in_theme($dir.$f)){
 		$dir = dirname($icone);
 		$fond = $icone;
 

@@ -59,7 +59,7 @@ function definir_barre_boutons($contexte=array(),$icones = true, $autorise = tru
 					$position = $infos['position']?$infos['position']:count($boutons_admin[$parent]->sousmenu);
 					$boutons_admin[$parent]->sousmenu = array_slice($boutons_admin[$parent]->sousmenu,0,$position)
 					+ array($id=> new Bouton(
-					  ($icones AND $infos['icone'])?find_in_skin($infos['icone']):'',  // icone
+					  ($icones AND $infos['icone'])?find_in_theme($infos['icone']):'',  // icone
 					  $infos['titre'],	// titre
 					  $infos['url']?$infos['url']:null,
 					  $infos['args']?$infos['args']:null
@@ -69,12 +69,12 @@ function definir_barre_boutons($contexte=array(),$icones = true, $autorise = tru
 				if (!$parent
 				// provisoire, eviter les vieux boutons
 				AND (!in_array($id,array('forum','statistiques_visites')))
-				
+
 				) {
 					$position = $infos['position']?$infos['position']:count($boutons_admin);
 					$boutons_admin = array_slice($boutons_admin,0,$position)
 					+array($id=> new Bouton(
-					  ($icones AND $infos['icone'])?find_in_skin($infos['icone']):'',  // icone
+					  ($icones AND $infos['icone'])?find_in_theme($infos['icone']):'',  // icone
 					  $infos['titre'],	// titre
 					  $infos['url']?$infos['url']:null,
 					  $infos['args']?$infos['args']:null
@@ -123,7 +123,7 @@ function bando_lister_sous_menu($sousmenu,$contexte=null,$class="",$image=false)
 	$class = $class ? " class='$class'":"";
 	$sous = "";
 	if (is_array($sousmenu)){
-		$sous = "";		 
+		$sous = "";
 		foreach($sousmenu as $souspage => $sousdetail){
 			$url = bandeau_creer_url($sousdetail->url?$sousdetail->url:$souspage, $sousdetail->urlArg, $contexte);
 			if (!$image){
@@ -156,12 +156,12 @@ function bando_lister_sous_menu($sousmenu,$contexte=null,$class="",$image=false)
 function bando_navigation($boutons, $contexte = array())
 {
 	$res = "";
-	
+
 	$first = " class = 'first'";
 	foreach($boutons as $page => $detail){
         // les outils rapides sont traites a part, dans une barre dediee
         if (!in_array($page,array('outils_rapides','outils_collaboratifs'))){
-		
+
             // les icones de premier niveau sont ignoree si leur sous menu est vide
             // et si elles pointent vers exec=navigation
             if (
@@ -193,13 +193,13 @@ function bando_navigation($boutons, $contexte = array())
 function bando_identite(){
 
 	$nom_site = typo($GLOBALS['meta']['nom_site']);
-	$img_info = find_in_skin('images/information-24.png');
+	$img_info = find_in_theme('images/information-24.png');
 	$url_config_identite = generer_url_ecrire('config_identite');
 
 	$res = "";
 
 	$moi = typo($GLOBALS['visiteur_session']['nom']);
-	$img_langue = find_in_skin('images/langues.png');
+	$img_langue = find_in_theme('images/langues.png');
 	$url_aide = generer_url_ecrire('aide_index',"var_lang=".$GLOBALS['spip_lang']);
 	$url_lang = generer_url_ecrire('config_langage');
 
@@ -228,7 +228,7 @@ function bando_identite(){
 	  . "<a class='voir' href='"._DIR_RACINE."'>"._T('bando:icone_visiter_site')."</a>"
 	  . "</p>";
 
-	
+
 	return "<div id='bando_identite'><div class='largeur'>\n$res<div class='nettoyeur'></div></div></div>";
 
 }
@@ -244,7 +244,7 @@ function bando_outils_rapides($boutons, $contexte = array()){
 
 
 	// le navigateur de rubriques
-	$img = find_in_skin('images/boussole-24.png');
+	$img = find_in_theme('images/boussole-24.png');
 	$url = generer_url_ecrire("articles_tous");
 	$res .= "<ul class='bandeau_rubriques deroulant'><li class='boussole'>";
 	$res .= "<a href='$url' id='boutonbandeautoutsite'><img src='$img' width='24' height='24' alt='' /></a>";
@@ -299,6 +299,6 @@ function inc_bandeau_dist($rubrique, $sous_rubrique, $largeur)
 		. bando_outils_rapides($boutons,$contexte)
 		. "</div>"
 		;
-	
+
 }
 ?>
