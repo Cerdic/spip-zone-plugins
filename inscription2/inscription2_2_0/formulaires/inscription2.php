@@ -1,4 +1,18 @@
 <?php
+/**
+ * Formulaire d'inscription et de modification de profil amélioré au site
+ *
+ * Pour l'utiliser en tant que formulaire d'inscription :
+ * - #FORMULAIRE_INSCRIPTION2
+ *
+ * Pour l'utiliser afin de modifier le profil d'un utilisateur :
+ * - #FORMULAIRE_INSCRIPTION2{#ID_AUTEUR} dans une boucle auteur
+ * - #FORMULAIRE_INSCRIPTION2{#ENV{id_auteur}} si l'id_auteur est dans
+ * l'environnement (modèle / page spécifique)
+ * - #FORMULAIRE_INSCRIPTION2{2} pour éditer le profil d'un utilisateur en
+ * particulier (ici l'id_auteur numéro 2)
+ *
+ */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
@@ -6,15 +20,15 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('cfg_options');
 
 /**
- * 
+ *
  * Chargement des valeurs par defaut des champs du formulaire
- * 
+ *
  * @return array L'ensemble des champs et de leur valeurs
  * @param int $id_auteur[optional] Si cette valeur est utilisée, on entre dans le cadre de
  * la modification d'un auteur, et plus dans la création
  */
 function formulaires_inscription2_charger_dist($id_auteur = NULL,$redirect = null){
-   
+
 	//initialise les variables d'environnement pas défaut
 	$valeurs = array();
 
@@ -25,7 +39,9 @@ function formulaires_inscription2_charger_dist($id_auteur = NULL,$redirect = nul
 	//si on a bien un auteur alors on preremplit le formulaire avec ses informations
 	//les nom des champs sont les memes que ceux de la base de données
 	if (is_numeric($id_auteur)) {
-		
+		if (!autoriser('modifier','auteur',$id_auteur)) {
+			return;
+		}
 		$auteur = sql_fetsel(
 			$champs,
 			'spip_auteurs LEFT JOIN spip_auteurs_elargis USING(id_auteur)',
@@ -55,9 +71,9 @@ function formulaires_inscription2_charger_dist($id_auteur = NULL,$redirect = nul
 					$champs['jour'] = $date_naissance[3];
 				}
             }
-	    }		
+	    }
 	}
-	
+
 	//Offrir aux autres plugins la possibilite de charger les donnees
 	$champs = pipeline('i2_charger_formulaire',
 		array(
@@ -65,33 +81,33 @@ function formulaires_inscription2_charger_dist($id_auteur = NULL,$redirect = nul
 			'data' => $champs
 		)
 	);
-	
+
 	return $champs;
 }
 
 function formulaires_inscription2_verifier_dist($id_auteur = NULL,$redirect = null){
-    
+
 	//charge la fonction de controle du login et mail
 	//$test_inscription = charger_fonction('test_inscription');
-	
+
 	//initialise le tableau des erreurs
 	$erreurs = array();
-	
-    //initilise le tableau de valeurs $champs => $valeur
-    $valeurs = array();	
-    
+
+    //initialise le tableau de valeurs $champs => $valeur
+    $valeurs = array();
+
 	//recupere la liste des champs possible
 	$chercher_champs = charger_fonction('inscription2_champs_formulaire','inc');
-	$champs = $chercher_champs($id_auteur);	
+	$champs = $chercher_champs($id_auteur);
 
 	$champs_a_verifier = pipeline('i2_verifications_specifiques',array());
 
 	//gere la correspondance champs -> _request(champs)
 	foreach($champs as $clef => $valeur) {
-		
-		// On récupère sa valeur 
+
+		// On récupère sa valeur
 		$valeurs[$valeur] = _request($valeur);
-		
+
 		// On vérifie s'il est obligatoire et s'il est bien rempli
 		if ((lire_config('inscription2/'.$valeur.'_obligatoire') == 'on' ) && (empty($valeurs[$valeur]) OR (strlen(_request($valeur)) == 0))) {
 			$erreurs[$valeur] = _T('inscription2:champ_obligatoire');
@@ -103,7 +119,7 @@ function formulaires_inscription2_verifier_dist($id_auteur = NULL,$redirect = nu
 				$pass == 'ok';
 			}
 		}
-		
+
 		// Sinon on la vérifie une seconde fois si nécessaire avec les fonctions spécifiques de validations
 		if(!$erreurs[$valeur]){
 			if(array_key_exists($valeur,$champs_a_verifier)){
@@ -159,25 +175,25 @@ function formulaires_inscription2_verifier_dist($id_auteur = NULL,$redirect = nu
 			$erreurs['message_erreur'] .= _T('inscription2:profil_droits_insuffisants');
 		}
 	}
-	
+
 	//message d'erreur generalise
 	if (count($erreurs)) {
 		if(isset($erreurs_obligatoires)){
-			$erreurs['message_erreur'] .= _T('inscription2:formulaire_remplir_obligatoires');	
+			$erreurs['message_erreur'] .= _T('inscription2:formulaire_remplir_obligatoires');
 		}else{
 			$erreurs['message_erreur'] .= _T('inscription2:formulaire_remplir_validation');
 		}
-		
+
 	}
-	
+
     return $erreurs; // si c'est vide, traiter sera appele, sinon le formulaire sera resoumis
 }
 
 function formulaires_inscription2_traiter_dist($id_auteur = NULL,$redirect = null){
 	global $tables_principales;
-	
+
 	$retour = array();
-	
+
 	if((is_numeric($id_auteur) && (lire_config('inscription2/pass_fiche_mod') != 'on'))
 		OR (is_numeric($id_auteur) && (lire_config('inscription2/pass_fiche_mod') == 'on')) && (strlen(_request('password')) == 0)){
 		$mode = 'modification_auteur_simple';
@@ -191,17 +207,17 @@ function formulaires_inscription2_traiter_dist($id_auteur = NULL,$redirect = nul
 	else{
 		$mode = 'inscription';
 	}
-	
+
 	/* Generer la liste des champs a traiter
 	* champ => valeur formulaire
 	*/
 	if(!is_numeric($id_auteur)){
 		$new = true;
 	}
-	
+
 	$chercher_champs = charger_fonction('inscription2_champs_formulaire','inc');
 	$champs = $chercher_champs($id_auteur);
-	
+
 	foreach($champs as $clef => $valeur) {
 		$valeurs[$valeur] = _request($valeur);
 		if($valeur == 'naissance'){
@@ -230,20 +246,20 @@ function formulaires_inscription2_traiter_dist($id_auteur = NULL,$redirect = nul
 			$valeurs['login'] = $definir_login($valeurs['nom'], $valeurs['email']);
 		}
 	}
-	
-	//$valeurs contient donc tous les champs remplit ou non 
+
+	//$valeurs contient donc tous les champs remplit ou non
 	include_spip('inc/inscription2_compat_php4');
 	//definir les champs pour spip_auteurs
 	$table = "spip_auteurs";
-    
+
 	//genere le tableau des valeurs a mettre a jour pour spip_auteurs
 	//toutes les clefs qu'inscription2 peut mettre a jour
 
-	$clefs = array_fill_keys(array('login','nom','email','bio','nom_site','url_site','pgp'),'');
-	
+	//$clefs = array_fill_keys(array('login','nom','email','bio','nom_site','url_site','pgp'),'');
+	$clefs = $tables_principales[$table]['field'];
 	//extrait uniquement les donnees qui ont ete proposees a la modification
 	$val = array_intersect_key($valeurs,$clefs);
-	
+
 	//Verification du password
 	if(($mode == 'inscription_pass') || ($mode == 'modification_auteur_pass')){
 		if (strlen(_request('password')) != 0)
@@ -270,7 +286,7 @@ function formulaires_inscription2_traiter_dist($id_auteur = NULL,$redirect = nul
 			$val['statut'] = 'aconfirmer';
 		}
 	}
-	
+
 	//inserer les donnees dans spip_auteurs -- si $id_auteur : mise a jour - autrement : nouvelle entree
 	if (!$new) {
 		$where = 'id_auteur = '.$id_auteur;
@@ -285,36 +301,36 @@ function formulaires_inscription2_traiter_dist($id_auteur = NULL,$redirect = nul
 			$val
 		);
 	}
-	
+
 	$table = 'spip_auteurs_elargis';
 	//extrait les valeurs propres a spip_auteurs_elargis
-	
+
 	//genere le tableau des valeurs a mettre a jour pour spip_auteurs
 	//toutes les clefs qu'inscription2 peut mettre a jour
 	//s'appuie sur les tables definies par le plugin
-	
+
 	$clefs = $tables_principales[$table]['field'];
 	if(is_array($clefs)){
 		//extrait uniquement les donnees qui ont ete proposees a la modification
 		$val = array_intersect_key($valeurs,$clefs);
 	}else{
-		$where = 'id_auteur='.sql_quote($id_auteur);	
+		$where = 'id_auteur='.sql_quote($id_auteur);
 		$res = sql_select('*',$table,$where);
 		$clefs = sql_fetch($res);
-		$val = array_intersect_key($valeurs,$clefs);	
+		$val = array_intersect_key($valeurs,$clefs);
 	}
-	
+
 	unset($val['login']);
-	
+
 	//recherche la presence d'un complement sur l'auteur
 	$id_elargi = sql_getfetsel('id_auteur','spip_auteurs_elargis','id_auteur='.$id_auteur);
-	
+
 	if ($id_elargi) {
 		$where = 'id_auteur = '.$id_auteur;
 		sql_updateq(
 			$table,
 			$val,
-			$where      
+			$where
 		);
 	} else {
 		// Si on utilise la date de creation de la fiche
@@ -327,17 +343,17 @@ function formulaires_inscription2_traiter_dist($id_auteur = NULL,$redirect = nul
 			$val
 		);
 	}
-    
+
 	$traiter_plugin = pipeline('i2_traiter_formulaire',
 		array(
 			'args' => array(
 				'id_auteur' => $id_auteur,
-				'champs' => $val
+				'champs' => $valeurs
 			),
 		'data' => null
 		)
 	);
-	
+
     if (!$new){
         $message = _T('inscription2:profil_modifie_ok');
         if($mode == 'modification_auteur_simple'){
@@ -351,17 +367,17 @@ function formulaires_inscription2_traiter_dist($id_auteur = NULL,$redirect = nul
 			$message = _T('inscription2:formulaire_inscription_ok');
 		}
 		if($traiter_plugin['message_ok'])
-			$message = $traiter_plugin['message_ok'] ;
+			$message = $traiter_plugin['message_ok'];
 		$editable = false;
     }
-	
+
 	$retour['editable'] = $editable;
 	$retour['message_ok'] = $message;
-	
+
 	if($redirect){
 		$retour['redirect'] = $redirect;
 	}
-	
+
     return $retour;
 }
 ?>
