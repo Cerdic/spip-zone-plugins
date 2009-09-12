@@ -179,7 +179,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// P
 	'page_confirmation' => 'Page de confirmation de votre inscription',
-	'par_defaut' => 'Ce champs est obligatoire',
+	'par_defaut' => 'Ce champ est obligatoire',
 	'pass' => 'Mot de passe',
 	'pass_egal' => 'Veuillez entrer le m&ecirc;me mot de passe que pr&eacute;c&eacute;demment.',
 	'pass_indiquez_cidessous' => 'Indiquez ci-dessous l\'adresse email sous laquelle vous
@@ -207,7 +207,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'raccourcis' => 'Raccourcis',
 	'rappel_login' => 'Rappel : votre identifiant est : ',
 	'rappel_password' => 'Votre mot de passe',
-	'recherche_case' => 'Champs de la recherche',
+	'recherche_case' => 'Champ de la recherche',
 	'recherche_utilisateurs' => 'Rechercher un utilisateur',
 	'recherche_valeur' => 'Rechercher :',
 	'redemande_password' => 'R&eacute;inserez votre mot de passe&nbsp;:',
