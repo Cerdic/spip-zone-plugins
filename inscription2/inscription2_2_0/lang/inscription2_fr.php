@@ -49,7 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'conf_plugin' => 'Configuration Inscription2',
 	'conf_plugin_page' => 'Configuration stock&eacute;e du plugin Inscription2',
 	'configs' => 'Configurations',
-	'configuration' => 'Configuration',
+	'configuration' => 'Configuration des champs des utilisateurs',
 	'confirmation' => '<p>&Ecirc;tes vous s&ucirc;r(e) de vouloir continuer?</p><p>Toutes les modifications seront irreversibles!!!</p>',
 	'contacts_personnels' => 'Contacts personnels',
 	'contacts_pros' => 'Contacts professionnels',
@@ -65,7 +65,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'divers' => 'Divers',
 	'domaine' => 'Domaine',
 	'domaines' => 'Domaine',
-	'descriptif_plugin' =>'Vous trouverez ici tous les utilisateurs inscrits sur le site. Leur statut est indiqué par la couleur de leur icone.' ,
+	'descriptif_plugin' =>'Vous trouverez ici tous les utilisateurs inscrits sur le site. Leur statut est indiqué par la couleur de leur icone.<br /><br />Vous pouvez configurer des champs supplémentaires, proposés en option aux visiteurs au moment de l\'insciption.' ,
 
 	// E
 	'editer_adherent' => '&Eacute;diter utilisateur',
@@ -208,8 +208,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'rappel_login' => 'Rappel : votre identifiant est : ',
 	'rappel_password' => 'Votre mot de passe',
 	'recherche_case' => 'Champs de la recherche',
-	'recherche_utilisateurs' => 'Recherche dans les utilisateurs',
-	'recherche_valeur' => 'Rechercher un utilisateur',
+	'recherche_utilisateurs' => 'Rechercher un utilisateur',
+	'recherche_valeur' => 'Rechercher :',
 	'redemande_password' => 'R&eacute;inserez votre mot de passe&nbsp;:',
 	'rien_a_faire' => 'Rien &agrave; faire',
 
