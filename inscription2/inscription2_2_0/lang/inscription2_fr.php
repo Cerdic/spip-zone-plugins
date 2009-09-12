@@ -9,14 +9,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'a_confirmer' => '&Agrave; confirmer',
 	'accesrestreint' => 'Acc&egrave;s Restreint',
 	'aconfirmer' => '&Agrave; confirmer',
-	'action_adherent' => 'Opérations',
+	'action_adherent' => 'Op&eacute;rations',
 	'activation_compte' => 'Activez votre compte',
 	'adherents' => 'Utilistateurs',
 	'admin' => 'Admin',
 	'admin_modifier_auteur_supp' => 'Informations suppl&eacute;mentaires',
 	'adresse' => 'Adresse',
 	'adresse_pro' => 'Adresse professionnelle (Pro.)',
-	'ajouter_adherent' => 'Créer un nouvel utilisateur',
+	'ajouter_adherent' => 'Cr&eacute;er un nouvel utilisateur',
 	'aout' => 'ao&ucirc;t',
 	'aucun_resultat_recherche' => 'Il n\'y a aucun r&eacute;sultat pour votre recherche.',
 	'auteur' => 'Auteur',
@@ -45,9 +45,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'code_postal_pro' => 'Code Postal (Pro.)',
 	'commentaire' => 'Commentaire',
 	'compte_active' => 'Votre compte sur @nom_site@',
-	'compte_efface' => 'Votre compte a été effacé.',
-	'conf_plugin' => 'Configuration Inscription2',
-	'conf_plugin_page' => 'Configuration stock&eacute;e du plugin Inscription2',
+	'compte_efface' => 'Votre compte a &eacute;t&eacute; effac&eacute;.',
+	'conf_plugin' => 'Configuration Inscription 2.0',
+	'conf_plugin_page' => 'Configuration stock&eacute;e du plugin Inscription 2.0',
 	'configs' => 'Configurations',
 	'configuration' => 'Configuration des champs des utilisateurs',
 	'confirmation' => '<p>&Ecirc;tes vous s&ucirc;r(e) de vouloir continuer?</p><p>Toutes les modifications seront irreversibles!!!</p>',
@@ -60,12 +60,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'decembre' => 'd&eacute;cembre',
 	'delete_user_select' => 'Supprimer le(s) utilisateur(s) s&eacute;lectionn&eacute;(s)',
 	'demande_password' => 'Votre mot de passe&nbsp;:',
-	'description_cfg' => 'Paramétrer les champs supplémentaires pour les utilisateurs',
+	'description_cfg' => 'Param&eacute;trer les champs suppl&eacute;mentaires pour les utilisateurs',
 	'description_page' => 'Ici vous pouvez v&eacute;rifier vos choix de configuration tels qu\'ils sont stock&eacute;s',
 	'divers' => 'Divers',
 	'domaine' => 'Domaine',
 	'domaines' => 'Domaine',
-	'descriptif_plugin' =>'Vous trouverez ici tous les utilisateurs inscrits sur le site. Leur statut est indiqué par la couleur de leur icone.<br /><br />Vous pouvez configurer des champs supplémentaires, proposés en option aux visiteurs au moment de l\'insciption.' ,
+	'descriptif_plugin' =>'Vous trouverez ici tous les utilisateurs inscrits sur le site. Leur statut est indiqu&eacute; par la couleur de leur icone.<br /><br />Vous pouvez configurer des champs suppl&eacute;mentaires, propos&eacute;s en option aux visiteurs au moment de l\'insciption.' ,
 
 	// E
 	'editer_adherent' => '&Eacute;diter utilisateur',
@@ -78,7 +78,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'exp_publication' => 'Autorisation de publication des donn&eacute;es personnelles',
 	'exp_statut' => 'Choisissez le statut que vous voulez attribuer aux nouveaux adh&eacute;rents',
 	'exp_statut_rel' => 'Champ diff&eacute;rent du statut de SPIP, celui-ci sert pour le controle interne d\'une institution',
-	'explication_affordance_form' => 'Champ affiché sur les formulaires d\'identification (#LOGIN_PUBLIC)',
+	'explication_affordance_form' => 'Champ affich&eacute; sur les formulaires d\'identification (#LOGIN_PUBLIC)',
 
 	// F
 	'fax' => 'Fax',
@@ -112,11 +112,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'html' => 'HTML',
 
 	// I
-	'icone_menu_config' => 'Configuration avancée des utilisateurs',
+	'icone_menu_config' => 'Configuration avanc&eacute;e des utilisateurs',
 	'identification' => 'Identification',
 	'info_connection' => 'Informations de connexion',
 	'info_defaut' => 'Informations obligatoires',
-	'info_defaut_desc' => 'Possibilités de paramétrage',
+	'info_defaut_desc' => 'Possibilit&eacute;s de param&eacute;trage',
 	'info_gener' => 'Informations g&eacute;n&eacute;rales',
 	'info_gener_desc' => 'Options qui seront demand&eacute;es aux nouveaux adh&eacute;rents du site',
 	'info_internes' => 'Informations internes',
@@ -128,7 +128,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'infos_personnelles' => 'Informations personnelles',
 	'inscriptions' => 'Inscriptions',
 	'inserez_infos' => 'Veuillez saisir les informations demand&eacute;es',
-	'inscription2' => 'inscription 2',
+	'inscription2' => 'Inscription 2.0',
 
 	// J
 	'janvier' => 'janvier',
@@ -136,7 +136,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'juin' => 'juin',
 
 	// L
-	'label_affordance_form' => 'Paramétrage des formulaires d\'identification',
+	'label_affordance_form' => 'Param&eacute;trage des formulaires d\'identification',
 	'latitude' => 'Latitude',
 	'legend_affordance_form' => 'Formulaire d\'identification',
 	'legend_oubli_pass' => 'Pas de mot de passe / mot de passe oubli&eacute;',
