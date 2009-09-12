@@ -87,9 +87,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'fevrier' => 'f&eacute;vrier',
 	'fiche' => 'Fiche',
 	'fiche_adherent' => 'Fiche utilisateur',
-	'fiche_expl' => ' : Le champ sera visible sur la fiche d\'adh&eacute;rent',
+	'fiche_expl' => ' : Le champ sera visible sur la fiche de l\'utilisateur (espace priv&eacute;)',
 	'fiche_mod' => 'Modifiable',
-	'fiche_mod_expl' => ' : Le champ sera modifiable depuis l\'interface publique par l\'adh&eacute;rent &agrave; condition d\'utiliser le plugin #CRAYONS',
+	'fiche_mod_expl' => ' : Le champ sera modifiable depuis l\'interface publique par l\'utilisateur &agrave; condition d\'utiliser le plugin #CRAYONS',
 	'fonction' => 'Fonction',
 	'form' => 'Formulaire',
 	'form_expl' => ' : Le champ sera affich&eacute; sur le formulaire #INSCRIPTION2',
@@ -229,7 +229,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'table' => 'Table',
-	'table_expl' => ' : Le champ sera affich&eacute; sur la liste des adh&eacute;rents (espace priv&eacute;)',
+	'table_expl' => ' : Le champ sera affich&eacute; sur la liste des utilisateurs (espace priv&eacute;)',
 	'tel' => 'T&eacute;l.',
 	'telephone' => 'T&eacute;l&eacute;phone',
 	'telephone_pro' => 'T&eacute;l&eacute;phone professionnel',
