@@ -190,7 +190,6 @@ function formulaires_inscription2_verifier_dist($id_auteur = NULL,$redirect = nu
 }
 
 function formulaires_inscription2_traiter_dist($id_auteur = NULL,$redirect = null){
-	global $tables_principales;
 
 	$retour = array();
 
@@ -247,6 +246,8 @@ function formulaires_inscription2_traiter_dist($id_auteur = NULL,$redirect = nul
 		}
 	}
 
+	$trouver_table = charger_fonction('trouver_table','base');
+
 	//$valeurs contient donc tous les champs remplit ou non
 	include_spip('inc/inscription2_compat_php4');
 	//definir les champs pour spip_auteurs
@@ -256,7 +257,9 @@ function formulaires_inscription2_traiter_dist($id_auteur = NULL,$redirect = nul
 	//toutes les clefs qu'inscription2 peut mettre a jour
 
 	//$clefs = array_fill_keys(array('login','nom','email','bio','nom_site','url_site','pgp'),'');
-	$clefs = $tables_principales[$table]['field'];
+	$clefs = $trouver_table('auteurs');
+	$clefs = $clefs['field'];
+
 	//extrait uniquement les donnees qui ont ete proposees a la modification
 	$val = array_intersect_key($valeurs,$clefs);
 
@@ -279,7 +282,7 @@ function formulaires_inscription2_traiter_dist($id_auteur = NULL,$redirect = nul
 			$val['low_sec'] = '';
 		}
 		if(!is_numeric($id_auteur)){
-			$val['statut'] = lire_config('inscription2/statut_nouveau');
+			$val['statut'] = lire_config('inscription2/statut_nouveau','6forum');
 		}
 	}else{
 		if(!is_numeric($id_auteur)){
@@ -309,7 +312,9 @@ function formulaires_inscription2_traiter_dist($id_auteur = NULL,$redirect = nul
 	//toutes les clefs qu'inscription2 peut mettre a jour
 	//s'appuie sur les tables definies par le plugin
 
-	$clefs = $tables_principales[$table]['field'];
+	$clefs = $trouver_table('auteurs_elargis');
+	$clefs = $clefs['field'];
+
 	if(is_array($clefs)){
 		//extrait uniquement les donnees qui ont ete proposees a la modification
 		$val = array_intersect_key($valeurs,$clefs);
