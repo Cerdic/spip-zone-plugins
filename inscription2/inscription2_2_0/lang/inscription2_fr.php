@@ -65,6 +65,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'divers' => 'Divers',
 	'domaine' => 'Domaine',
 	'domaines' => 'Domaine',
+	'descriptif_plugin' =>'Vous trouverez ici tous les utilisateurs inscrits sur le site. Leur statut est indiqué par la couleur de leur icone.' ,
 
 	// E
 	'editer_adherent' => '&Eacute;diter utilisateur',
@@ -224,7 +225,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'supprimer_adherent' => 'Supprimer utilisateurs',
 	'supprimer_adherent_red' => 'Sup',
 	'surnom' => 'Surnom',
-	'statuts_actifs' => 'Les couleurs des pictogrammes correspondent aux statuts suivants : ',
+	'statuts_actifs' => 'Les couleurs des icones correspondent aux statuts suivants : ',
 
 	// T
 	'table' => 'Table',
