@@ -71,7 +71,15 @@ _ Lien de test : [->test@test.com] (rechargez la page enti&egrave;rement).[[%env
 
 @puce@ En cochant &laquo;oui&raquo; ci-dessous, l\'&eacute;tat des blocs num&eacute;rot&eacute;s sera stock&eacute; dans un cookie le temps de la session, afin de conserver l\'aspect de la page en cas de retour.[[%blocs_cookie%]]
 
-@puce@ Le Couteau Suisse utilise par d&eacute;faut la balise HTML &lt;h4&gt; pour le titre des blocs d&eacute;pliables. Choisissez ici une autre balise &lt;hN&gt;&nbsp;:[[%bloc_h4%]]',
+@puce@ Le Couteau Suisse utilise par d&eacute;faut la balise HTML &lt;h4&gt; pour le titre des blocs d&eacute;pliables. Choisissez ici une autre balise &lt;hN&gt;&nbsp;:[[%bloc_h4%]]
+
+@puce@ Afin d\'obtenir un effet plus doux au moment du clic, vos blocs d&eacute;pliables peuvent s\'animer &agrave; la mani&egrave;re d\'un "glissement".[[%blocs_slide%]][[->%blocs_millisec% millisecondes]]',
+	'label:blocs_slide'=>'Type d\'animation&nbsp;:',
+	'jslide_aucun'=>'Aucune animation',
+	'jslide_normal' => 'Glissement normal',
+	'jslide_lent' => 'Glissement lent',
+	'jslide_fast' => 'Glissement rapide',
+	'jslide_millisec' => 'Glissement durant&nbsp;:',
 	'blocs:nom' => 'Blocs D&eacute;pliables',
 	'boites_privees:description' => 'Toutes les bo&icirc;tes d&eacute;crites ci-dessous apparaissent ici ou l&agrave; dans la partie priv&eacute;e.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]][[->%qui_webmasters%]][[->%bp_urls_propres%]][[->%bp_tri_auteurs%]]
 - {{Les r&eacute;visions du Couteau Suisse}} : un cadre sur la pr&eacute;sente page de configuration, indiquant les derni&egrave;res modifications apport&eacute;es au code du plugin ([Source->@_CS_RSS_SOURCE@]).

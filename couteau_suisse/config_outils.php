@@ -843,38 +843,6 @@ add_outil( array(
 	'code:css' => 'a.spip_out:after {display:none;}',
 )); 
 
-add_variables( array(
-	'nom' => 'bloc_h4',
-	'format' => _format_CHAINE,
-	'defaut' => '"h4"',
-	'code:preg_match(\',^h\d$,i\', trim(%s))' => "define('_BLOC_TITRE_H', %s);\n",
-), array(
-	'nom' => 'bloc_unique',
-	'format' => _format_NOMBRE,
-	'radio' => array(1 => 'item_oui', 0 => 'item_non'),
-	'defaut' => 0,
-), array(
-	'nom' => 'blocs_cookie',
-	'format' => _format_NOMBRE,
-	'radio' => array(1 => 'item_oui', 0 => 'item_non'),
-	'defaut' => 0,
-));
-add_outil( array(
-	'id' => 'blocs',
-	'categorie'	=> 'typo-racc',
-	'contrib' => 2583,
-	'code:options' => "%%bloc_h4%%",
-	// fonction blocs_init() codee dans blocs.js : executee lors du chargement de la page et a chaque hit ajax
-	'code:js' => "var blocs_replier_tout = %%bloc_unique%%;",
-	'code:jq_init' => 'blocs_init.apply(this);',
-	// utilisation des cookies pour conserver l\'etat des blocs numerotes si on quitte la page
-	'code:jq' => 'if(%%blocs_cookie%%) { if(jQuery("div.cs_blocs").length)
-		jQuery.getScript(cs_CookiePlugin, cs_blocs_cookie); }',
-	'jquery' => 'oui',
-	'pipeline:pre_typo' => 'blocs_pre_typo',
-	'pipeline:bt_toolbox' => 'blocs_BarreTypo',
-)); 
-
 add_variables( array(	// variable utilisee par 'pipelinecode:insert_head'
 	'nom' => 'scrollTo',
 	'check' => 'couteauprive:jq_scrollTo',

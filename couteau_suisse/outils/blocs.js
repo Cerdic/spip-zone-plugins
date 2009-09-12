@@ -4,17 +4,28 @@ if(typeof jQuery.fn.hasClass=="undefined")
 		return this.is( "." + selector );
 	};
 
+// Gestion du slide jQuery
+jQuery.fn.blocs_toggle_slide = function( selector ) {
+	return this.toggleClass('blocs_slide')
+		.is(".blocs_slide")?this.slideUp(blocs_slide):this.slideDown(blocs_slide);
+};
 
 // fonction de de/re-pliement
 jQuery.fn.blocs_toggle = function() {
 	if (!this.length) return this;
 	// applique-t-on la fonction sur cs_blocs ou sur blocs_titre ?
 	var cible = this.hasClass('cs_blocs')? this.children('.blocs_titre').eq(0) : this;
-	// on replie la cible...
-	var dest = cible.toggleClass('blocs_replie')
-		.next().toggleClass('blocs_invisible')
-	// est-on sur un resume ?
-	if (dest.is('div.blocs_resume')) dest.next().toggleClass('blocs_invisible');
+	// on replie/deplie la cible...
+	var dest = cible.toggleClass('blocs_replie').next();
+	if(blocs_slide=='aucun') {
+		dest.toggleClass('blocs_invisible');
+		// est-on sur un resume ?
+		if (dest.is('div.blocs_resume')) dest.next().toggleClass('blocs_invisible');
+	} else {
+		dest.blocs_toggle_slide();
+		// est-on sur un resume ?
+		if (dest.is('div.blocs_resume')) dest.next().blocs_toggle_slide();
+	}
 	// est-on sur un bloc ajax ?
 	var url = cible.children().attr("href");
 	if(url != 'javascript:;') {

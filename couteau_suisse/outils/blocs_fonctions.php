@@ -68,12 +68,12 @@ function balise_BLOC_DEBUT($p) {
 	$stade=$bloc_stade[$k];
 
 	if($stade == 3)	/* on arrive du resume, fermer la div resume seulement */
-		$p->code = "'</div><div class=\"blocs_invisible blocs_destination\">'";
+		$p->code = "'</div><div class=\"blocs_invisible blocs_slide blocs_destination\">'";
 	else	{
 		if($stade<1 || $stade>2)
 					/* on DOIT arriver de titre */
 			die("erreur de compilation #BLOC_DEBUT sans #BLOC_TITRE_($stade)");
-		$p->code = "'</a></"._BLOC_TITRE_H."><div class=\"blocs_invisible blocs_destination\">'";
+		$p->code = "'</a></"._BLOC_TITRE_H."><div class=\"blocs_invisible blocs_slide blocs_destination\">'";
 		}
 	$bloc_stade[$k]=4; /* 4=debut */
 	return $p;
