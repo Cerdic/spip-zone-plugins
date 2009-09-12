@@ -60,6 +60,7 @@ function remplace_points_de_suite($texte, $id, $racc) {
 // lgr=0 : pas possible
 // TODO : $connect est pour SPIP 2.0
 function cs_introduction($texte, $descriptif, $lgr, $id, $racc, $connect) {
+	@define('_INTRODUCTION_LGR', 100);
 	// fonction couper_intro
 	$couper = $GLOBALS['cs_couper_intro'];
 	if (strlen($descriptif))
@@ -71,7 +72,8 @@ function cs_introduction($texte, $descriptif, $lgr, $id, $racc, $connect) {
 		// pas de maths dans l'intro...
 		$texte = preg_replace(',<math>.*</math>,imsU', '', $texte);
 		// on coupe proprement...
-		$texte = PtoBR(propre(supprimer_tags($couper(cs_introduire($texte), $lgr>0?round($lgr*_INTRODUCTION_LGR/100):-$lgr, _INTRODUCTION_CODE))));
+		$lgr = $lgr>0?round($lgr*_INTRODUCTION_LGR/100):-$lgr;
+		$texte = PtoBR(propre(supprimer_tags($couper(cs_introduire($texte), $lgr, _INTRODUCTION_CODE))));
 	}
 	// si les points de suite ont ete ajoutes
 	return remplace_points_de_suite($texte, $id, $racc);
@@ -89,7 +91,6 @@ if (!function_exists('balise_INTRODUCTION')) {
 		$table_des_traitements['INTRODUCTION_SPIP'] = $table_des_traitements['INTRODUCTION'];
 	// #INTRODUCTION
 	function balise_INTRODUCTION($p) {
-		@define('_INTRODUCTION_LGR', 100);
 		$type = $p->type_requete;
 		$_texte = champ_sql('texte', $p);
 		$_descriptif =  "''";
@@ -113,7 +114,6 @@ if (!function_exists('balise_INTRODUCTION')) {
 		if(($v = interprete_argument_balise(1,$p))!==NULL) $_lgr = "-intval($v)" ;
 		$_id = champ_sql(id_table_objet($racc = objet_type($type)), $p);
 		$p->code = "cs_introduction($_texte, $_descriptif, $_lgr, $_id, '$racc', \$connect)";
-	
 		#$p->interdire_scripts = true;
 		$p->etoile = '*'; // propre est deja fait dans le calcul de l'intro
 		return $p;
