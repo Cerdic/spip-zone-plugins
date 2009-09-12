@@ -30,8 +30,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   'propose' => 'propos&#233;',
 	'publier_articles' => 'Articles publi&#233;s',
   'publie' => 'publi&#233;',
-	'publier_articles_futurs_immediatement'=>'Annoncer les articles futurs immediatement',
-	'publier_articles_futurs_visibles'=>'Annoncer les articles futurs quand ils sont visibles',
+	'publier_articles_futurs_immediatement'=>'Annoncer les articles quelle que soit leur date de publication',
+	'publier_articles_futurs_visibles'=>'Ne pas annoncer les articles avant la date de publication fix&eacute;e',
 
 	// S
   'service' => 'Service'
