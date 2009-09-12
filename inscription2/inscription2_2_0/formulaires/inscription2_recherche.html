@@ -25,6 +25,16 @@
 			<input type="submit" class="submit" name="afficher_tous" value="<:inscription2:afficher_tous:>" />
 		</p>
 
+		<div class="legend" style="padding:10px;margin-bottom:20px">
+		<h3><:inscription2:legende:></h3>
+		<p><:inscription2:statuts_actifs:></p>
+			<img src="#CHEMIN{'images/admin-12.gif'}" alt="<:inscription2:fiche_adherent:>" /> <:inscription2:admin:>, 
+			<img src="#CHEMIN{'images/redac-12.gif'}" alt="<:inscription2:fiche_adherent:>" /> <:inscription2:auteur:>, 
+			<img src="#CHEMIN{'images/adherent-12.gif'}" alt="<:inscription2:fiche_adherent:>" /> <:inscription2:visiteur:>, 
+			<img src="#CHEMIN{'images/aconf-12.gif'}" alt="<:inscription2:fiche_adherent:>" /> <:inscription2:a_confirmer:>, 
+			<img src="#CHEMIN{'images/defaut-12.gif'}" alt="<:inscription2:fiche_adherent:>" /> <:inscription2:autre:>
+		</div>
+
 		[(#ENV{case}|oui)
 			<INCLURE{fond=prive/table_adherent_auteur_recherche}{ajax}{ordre}{env}>
 		]

@@ -142,8 +142,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	'legende' => 'L&eacute;gende',
 	'lisez_mail' => 'Un email vient d\'&ecirc;tre envoy&eacute; &agrave; l\'adresse fournie. Pour activer votre compte veuillez suivre les instructions.',
-	'liste_adherents' => 'Afficher les comptes utilisateurs',
-	'liste_comptes_titre' => 'Liste des comptes utilisateurs',
+	'liste_adherents' => 'Voir la liste des utilisateurs',
+	'liste_comptes_titre' => 'Liste des utilisateurs',
 	'login' => 'Nom d\'utilisateur (login)',
 	'longitude' => 'Longitude',
 
@@ -208,7 +208,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'rappel_password' => 'Votre mot de passe',
 	'recherche_case' => 'Champs de la recherche',
 	'recherche_utilisateurs' => 'Recherche dans les utilisateurs',
-	'recherche_valeur' => 'Contenu recherch&eacute;',
+	'recherche_valeur' => 'Rechercher un utilisateur',
 	'redemande_password' => 'R&eacute;inserez votre mot de passe&nbsp;:',
 	'rien_a_faire' => 'Rien &agrave; faire',
 
@@ -224,6 +224,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'supprimer_adherent' => 'Supprimer utilisateurs',
 	'supprimer_adherent_red' => 'Sup',
 	'surnom' => 'Surnom',
+	'statuts_actifs' => 'Les couleurs des pictogrammes correspondent aux statuts suivants : ',
 
 	// T
 	'table' => 'Table',
