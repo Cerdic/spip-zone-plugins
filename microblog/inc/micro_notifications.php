@@ -37,13 +37,25 @@ function Microblog_notifications($x) {
 		
 		case 'instituerarticle':    // publier | proposer articles
 		if ($id = intval($x['args']['id'])
-			AND ( ($cfg['evt_publierarticles'] 
-				AND $x['args']['options']['statut'] == 'publie') // publier
-			OR ($cfg['evt_proposerarticles'] 
+			AND (
+				// publier
+				($cfg['evt_publierarticles']
+					AND $x['args']['options']['statut'] == 'publie'
+					AND $x['args']['options']['statut_ancien'] != 'publie'
+					AND ($GLOBALS['meta']["post_dates"]=='oui'
+						OR strtotime($x['args']['options']['date'])<=time()
+						OR $cfg['evt_publierarticlesfutur']!='publication'
+					)
+				)
+			OR 
+				// proposer
+				($cfg['evt_proposerarticles']
 				AND $x['args']['options']['statut'] == 'prop' 
-				AND $x['args']['options']['statut_ancien'] != 'publie') )  // proposer
+				AND $x['args']['options']['statut_ancien'] != 'publie'
+				)
+			)
 		) {
-			$espace_lien = ($x['args']['options']['statut'] == 'publie' ? true : false);  // lien notifié vers public | privé
+			$espace_lien = ($x['args']['options']['statut'] == 'publie' ? true : false);  // lien notifie vers public | privï¿½
         $url = str_replace('amp;','',url_absolue(generer_url_entite($id, 'article', '', '', $espace_lien)));
 			$t = sql_fetsel('titre,descriptif,texte', 'spip_articles', 'id_article='.$id);
 			$etat = str_replace(array('prop','publie'),
@@ -56,6 +68,7 @@ function Microblog_notifications($x) {
 				.$t['texte']),
 				120 - strlen($url));
 			$status = "$titre $url";
+			spip_log($status,'microblogdb');
 		}
 		break;
 	}

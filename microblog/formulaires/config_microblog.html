@@ -60,19 +60,44 @@
 							<label><:microblog:notifications_publiques:></label>
 							<p class="explication"><:microblog:elements_signaler:> :</p>
 							<div class="choix">
-								<label for="evt_forumposte"><:microblog:poster_forums:></label>
 								<input type="checkbox" name="evt_forumposte"[
 									(#ENV{evt_forumposte}|?{checked="checked"})] id="evt_forumposte" />
+								<label for="evt_forumposte"><:microblog:poster_forums:></label>
 							</div>
 							<div class="choix">
-								<label for="evt_proposerarticles"><:microblog:proposer_articles:></label>
 								<input type="checkbox" name="evt_proposerarticles"[
 									(#ENV{evt_proposerarticles}|?{checked="checked"})] id="evt_proposerarticles" />
+								<label for="evt_proposerarticles"><:microblog:proposer_articles:></label>
 							</div>
 							<div class="choix">
-								<label for="evt_publierarticles"><:microblog:publier_articles:></label>
 								<input type="checkbox" name="evt_publierarticles"[
 									(#ENV{evt_publierarticles}|?{checked="checked"})] id="evt_publierarticles" />
+								<label for="evt_publierarticles"><:microblog:publier_articles:></label>
+								[(#CONFIG{post_dates}|=={non}|oui)
+								<div id="synchro_evt"[(#ENV{evt_publierarticles}|non)style="display:none;"]>
+									<div class="choix">
+										<input type="radio" name="evt_publierarticlesfutur" id="evt_publierarticlesfutur_validation" value="validation"[
+											(#ENV{evt_publierarticlesfutur}|=={publication}|?{'',checked="checked"})] />
+										<label for="evt_publierarticlesfutur_validation"><:microblog:publier_articles_futurs_immediatement:></label>
+									</div>
+									<div class="choix">
+										<input type="radio" name="evt_publierarticlesfutur" id="evt_publierarticlesfutur_publication" value="publication"[
+											(#ENV{evt_publierarticlesfutur}|=={publication}|?{checked="checked"})] />
+										<label for="evt_publierarticlesfutur_publication"><:microblog:publier_articles_futurs_visibles:></label>
+									</div>
+								</div>
+								<script type="text/javascript">
+									function affiche_bloc_synchro(){
+										if (jQuery("#evt_publierarticles").attr("checked"))
+											jQuery("#synchro_evt").show('fast');
+										else
+											jQuery("#synchro_evt").hide('fast');
+									}
+									jQuery(document).ready(function(){
+										jQuery("#evt_publierarticles").click(affiche_bloc_synchro);
+									});
+								</script>
+								]
 							</div>
 						</li>
 					</ul>
