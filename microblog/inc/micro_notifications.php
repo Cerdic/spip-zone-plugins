@@ -11,8 +11,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-
-
 /*
  * Buzzer les notifications
  */
@@ -55,20 +53,16 @@ function Microblog_notifications($x) {
 				)
 			)
 		) {
-			$espace_lien = ($x['args']['options']['statut'] == 'publie' ? true : false);  // lien notifie vers public | priv�
-        $url = str_replace('amp;','',url_absolue(generer_url_entite($id, 'article', '', '', $espace_lien)));
-			$t = sql_fetsel('titre,descriptif,texte', 'spip_articles', 'id_article='.$id);
-			$etat = str_replace(array('prop','publie'),
-				array(_T('microblog:propose'),_T('microblog:publie')),
-				$x['args']['options']['statut']
-			);
-			$titre = couper(typo($t['titre']
-				.' | '.$etat
-				.' | '.($t['descriptif'] != '' ? $t['descriptif'].' | ' : '')
-				.$t['texte']),
-				120 - strlen($url));
-			$status = "$titre $url";
-			spip_log($status,'microblogdb');
+			// si on utilise aussi le cron pour annoncer les articles post-dates
+			// noter ceux qui sont deja annonces ici (pour eviter double annonce)
+			if ($x['args']['options']['statut'] == 'publie'
+			  AND $GLOBALS['meta']["post_dates"]=='non'
+				AND $cfg['evt_publierarticlesfutur']=='publication'
+			){
+				include_spip('inc/meta');
+				ecrire_meta('microblog_annonces',$GLOBALS['meta']['microblog_annonces'].','.$id);
+			}
+			$status = Microblog_annonce_article($id,$x['args']['options']['statut']);
 		}
 		break;
 	}
@@ -81,3 +75,21 @@ function Microblog_notifications($x) {
 	return $x;
 }
 
+function Microblog_annonce_article($id,$statut){
+  include_spip('inc/filtres_mini');
+  include_spip('inc/texte');
+	
+	$espace_lien = ($statut == 'publie' ? true : false);  // lien notifie vers public | prive
+		$url = str_replace('amp;','',url_absolue(generer_url_entite($id, 'article', '', '', $espace_lien)));
+	$t = sql_fetsel('titre,descriptif,texte', 'spip_articles', 'id_article='.$id);
+	$etat = str_replace(array('prop','publie'),
+		array(_T('microblog:propose'),_T('microblog:publie')),
+		$statut
+	);
+	$titre = couper(typo($t['titre']
+		.' | '.$etat
+		.' | '.($t['descriptif'] != '' ? $t['descriptif'].' | ' : '')
+		.$t['texte']),
+		120 - strlen($url));
+	return "$titre $url";
+}

@@ -24,7 +24,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * $api : si on est vraiment desespere :-)
  */
 function microblog($status, $user=null, $pass=null, $service=null, $api=null){
-
 	$cfg = @unserialize($GLOBALS['meta']['microblog']);
 
 	// services connus

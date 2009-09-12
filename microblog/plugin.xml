@@ -25,6 +25,10 @@
 		<nom>notifications</nom>
 		<inclure>inc/micro_notifications.php</inclure>
 	</pipeline>
+	<pipeline>
+		<nom>taches_generales_cron</nom>
+		<inclure>genie/microblog.php</inclure>
+	</pipeline>
 
 	<chemin dir='' />
 	<necessite id="SPIP" version="[2.0;]" />
