@@ -17,7 +17,7 @@ jQuery.fn.blocs_toggle = function() {
 	var cible = this.hasClass('cs_blocs')? this.children('.blocs_titre').eq(0) : this;
 	// on replie/deplie la cible...
 	var dest = cible.toggleClass('blocs_replie').next();
-	if(blocs_slide=='aucun') {
+	if(blocs_slide===false) {
 		dest.toggleClass('blocs_invisible');
 		// est-on sur un resume ?
 		if (dest.is('div.blocs_resume')) dest.next().toggleClass('blocs_invisible');

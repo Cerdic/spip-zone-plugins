@@ -11,8 +11,8 @@ function blocs_add_outil() { return array(
 	'code:options' => "%%bloc_h4%%",
 	// fonction blocs_init() codee dans blocs.js : executee lors du chargement de la page et a chaque hit ajax
 	'code:js' => "var blocs_replier_tout = %%bloc_unique%%;
-var blocs_slide = '%%blocs_slide%%';
-if(blocs_slide=='millisec') blocs_slide = %%blocs_millisec%%;
+var blocs_millisec = %%blocs_millisec%%;
+var blocs_slide = [[%blocs_slide%]];
 ",
 	'code:jq_init' => 'blocs_init.apply(this);',
 	// utilisation des cookies pour conserver l\'etat des blocs numerotes si on quitte la page
@@ -46,7 +46,11 @@ add_variables( array(
 	'format' => _format_CHAINE,
 	'radio' => array('aucun' => 'couteauprive:jslide_aucun', 'normal' => 'couteauprive:jslide_normal', 'slow' => 'couteauprive:jslide_lent', 'rapide' => 'couteauprive:jslide_fast', 'millisec' => 'couteauprive:jslide_millisec' ),
 	'radio/ligne' => 2,
-	'defaut' => 'aucun',
+	'defaut' => '"aucun"',
+	// si la variable est 'millisec' alors on prends directement les millisecondes
+	'code:%s==="millisec"' => "blocs_millisec",
+	'code' => "%s",
+	'code:%s==="aucun"' => "false",
 ), array(
 	'nom' => 'blocs_millisec',
 	'format' => _format_NOMBRE,
