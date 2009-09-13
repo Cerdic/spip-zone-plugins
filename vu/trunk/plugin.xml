@@ -54,6 +54,11 @@
   	      <inclure>base/vu_base.php</inclure>
 	</pipeline> 
 	
+	<pipeline>
+                <nom>insert_head</nom>
+                <inclure>vu_pipelines.php</inclure>
+        </pipeline>
+
 	<!-- Pipeline : entete des pages de l'espace prive -->
 	<pipeline>
 		<nom>header_prive</nom>

@@ -1,7 +1,13 @@
 <?php
 
+
+function vu_header_prive($flux){
+	$flux = vu_insert_head($flux);
+	return $flux;
+}
+
 // Pipeline. Pour l'entete des pages de l'espace prive
-function vu_header_prive($flux)
+function vu_insert_head($flux)
 {
 	// Insertion dans l'entete des pages 'vu' d'un appel la feuille de style dediee
 	$flux .= "<link rel='stylesheet' href='"._DIR_VU_PRIVE."vu_style_prive.css' type='text/css' media='all' />\n";
