@@ -106,7 +106,6 @@ function analyser_spams($texte) {
 		$titres_liens = supprimer_tags($liens);
 		$titres_liens = array_map('strlen', $titres_liens);
 		$infos['caracteres_texte_lien_min'] = min($titres_liens);
-		spip_log($infos,'liens');
 	}
 	return $infos;
 }
