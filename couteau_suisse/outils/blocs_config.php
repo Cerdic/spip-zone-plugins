@@ -49,8 +49,7 @@ add_variables( array(
 	'defaut' => '"aucun"',
 	// si la variable est 'millisec' alors on prends directement les millisecondes
 	'code:%s==="millisec"' => "blocs_millisec",
-	'code' => "%s",
-	'code:%s==="aucun"' => "false",
+	'code:%s!=="millisec"' => "%s",
 ), array(
 	'nom' => 'blocs_millisec',
 	'format' => _format_NOMBRE,
