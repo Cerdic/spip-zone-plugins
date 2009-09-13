@@ -73,11 +73,10 @@ function nospam_formulaire_verifier($flux){
 	if ($form=='forum'){
 		if (!isset($flux['data']['texte'])
 			AND $GLOBALS['meta']['forums_texte'] == 'oui'){
+			include_spip("inc/nospam");
 			// regarder si il y a du contenu en dehors des liens !
-			$texte = PtoBR(propre(_request('texte')));
-			$texte = preg_replace(',<a.*</a>,Uims','',$texte);
-			$texte = trim(preg_replace(',[\W]+,uims',' ',$texte));
-			if (strlen($texte) < 10){
+			$caracteres = compter_caracteres_utiles(_request('texte'));
+			if ($caracteres < 10){
 				$flux['data']['texte'] = _T('forum_attention_dix_caracteres');
 				unset($flux['data']['previsu']);
 			}
@@ -101,7 +100,7 @@ function nospam_pre_edition($flux){
 		// sauf si le posteur a de toute facon le pouvoir de moderer et de se publier
 		include_spip('inc/autoriser');
 	  if ($flux['data']['statut'] == 'publie'
-		  AND (!isset($GLOBALS['visiteur_session']['id_auteur']) OR !autoriser('modererforum'))){
+	  AND (!isset($GLOBALS['visiteur_session']['id_auteur']) OR !autoriser('modererforum'))){
 
 			$email = strlen($flux['data']['email_auteur']) ? " OR email_auteur=".sql_quote($flux['data']['email_auteur']):"";
 			$spammeur_connu = (sql_countsel('spip_forum','(ip='.sql_quote($GLOBALS['ip'])."$email) AND statut='spam'")>0);
@@ -124,16 +123,22 @@ function nospam_pre_edition($flux){
 			);
 
 			$seuils = $spammeur_connu?$seuils['spammeur']:$seuils[0];
-			foreach($flux['data'] as $champ=>$valeur){
-				$valeur = propre($valeur); // on passe propre a chaque fois, ce qui recupere aussi les adresse de site non linkees
-				if (($liens = count(extraire_balises($valeur,'a')))>0){
+			include_spip("inc/nospam"); // pour analyser_spams()
+			foreach($flux['data'] as $champ=>$valeur) {
+				$infos = analyser_spams($valeur);
+				if ($infos['nombre_liens'] > 0) {
+					// si un lien a un titre de moins de 3 caracteres, c'est louche...
+					if ($infos['caracteres_texte_lien_min'] < 3) {
+						$flux['data']['statut'] = 'prop'; // en dur en attendant une idee plus generique
+					}
+					
 					if (isset($seuils[$champ]))
 						$seuil = $seuils[$champ];
 					else
 						$seuil = $seuils[0];
 
 					foreach($seuil as $s=>$stat)
-						if ($liens>=$s)
+						if ($infos['nombre_liens'] >= $s)
 							$flux['data']['statut'] = $stat;
 				}
 			}
