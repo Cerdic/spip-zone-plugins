@@ -46,7 +46,6 @@ function action_editer_evenement() {
 		// Si une information de redirection existe on la recupere, et on redirige
 		$redirect = parametre_url(urldecode(_request('redirect')),
 			'id_evenement', $id_evenement, '&');
-		echo $redirect;
 		include_spip('inc/headers');
 		redirige_par_entete($redirect);
 	}
