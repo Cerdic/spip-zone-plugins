@@ -1,6 +1,6 @@
 <?php
 
-// Pipeline pour l'entete des pages de l'espace prive
+// Pipeline. Pour l'entete des pages de l'espace prive
 function vu_header_prive($flux)
 {
 	// Insertion dans l'entete des pages 'vu' d'un appel la feuille de style dediee
@@ -9,7 +9,7 @@ function vu_header_prive($flux)
 	return $flux;
 }
 
-// Pipeline pour ajouter du contenu aux formulaires CVT du core
+// Pipeline. Pour ajouter du contenu aux formulaires CVT du core.
 function vu_editer_contenu_objet($flux){
 	// Concernant le formulaire CVT 'editer_groupe_mot', on veut faire apparaitre les nouveaux objets
 	if ($flux['args']['type']=='groupe_mot') {
@@ -23,5 +23,20 @@ function vu_editer_contenu_objet($flux){
 	return $flux;
 }
 
+// Pipeline. Pour associer un libelle (etiquette) aux types d'objets.
+// Dans la page listant tous les groupes de mots (exec/mots_tous),
+// il est indique pour chacun d'entre eux les objets sur lesquels 
+// ils s'appliquent (ex : '> Articles'). Pour que cela fonctionne,
+// il est necessaire que ces objets aient un libelle, au risque sinon
+// d'afficher '> info_table'. 
+function vu_libelle_association_mots($flux){
+	// On recupere le flux, ici le tableau des libelles,
+	// et on ajoute nos trois objets.
+	$flux['vu_annonces'] = 'vu:info_vu_libelle_annonce';
+	$flux['vu_evenements'] = 'vu:info_vu_libelle_evenement';
+	$flux['vu_publications'] = 'vu:info_vu_libelle_publication';
+
+	return $flux;
+}
 
 ?>

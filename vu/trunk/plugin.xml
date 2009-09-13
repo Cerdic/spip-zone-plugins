@@ -67,10 +67,15 @@
 		<inclure>vu_pipelines.php</inclure>
 	</pipeline>
 
-
 	<!-- Pipeline : permettre la selection des nouveaux objets dans les groupes de mots -->
 	<pipeline>
 		<nom>editer_contenu_objet</nom>
+		<inclure>vu_pipelines.php</inclure>
+	</pipeline>
+
+	<!-- Pipeline : permet d'associer un libelle aux types d'objets, notamment dans 'exec/mots_tous' -->
+	<pipeline>
+		<nom>libelle_association_mots</nom>
 		<inclure>vu_pipelines.php</inclure>
 	</pipeline>   
 

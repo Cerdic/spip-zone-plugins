@@ -11,11 +11,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 // A
 	'alt_img_logo' => 'Logo du plugin Vu!',
+	'apercu_chez' => ' chez ',
+	'apercu_de' => 'De ',
+	'apercu_le' => ' le ',
 	'apercu_lien_annonce' => '&Agrave; voir sur&nbsp;',
 	'apercu_lien_evenement' => ' organis&eacute; par&nbsp;',
 	'apercu_informations' => 'Plus d\'informations sur&nbsp;',
-	'apercu_lien_publication' => 'Publi&eacute; chez ',
 	'apercu_peremption' => 'Annonce valable jusqu\'au ',
+	'apercu_publie' => 'Publi&eacute;',
 	'apercu_source' => 'source : ',
 
 // D
@@ -39,7 +42,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_modifier_publication' => 'Modifier la publication',
 	'info_annonce_publiee' => 'Cette annonce doit-elle &ecirc;tre publi&eacute;e ?',
 	'info_annonceur' => 'Annonceur :',
-	'info_auteur' => 'Auteur :',
+	'info_auteur' => 'Auteur(s) :',
 	'info_date' => 'Date&nbsp;:',
 	'info_date_evenement' => 'Date de l\'&eacute;v&eacute;nement&nbsp;:',
 	'info_descriptif' => 'Descriptif :',
@@ -63,6 +66,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_titre' => 'Titre :',
 	'info_type' => 'Type :',
 	'info_vu_annonce' => 'Annonces',
+	'info_vu_libelle_annonce' => 'Annonces relay&eacute;es',
+	'info_vu_libelle_evenement' => '&Eacute;v&eacute;nements relay&eacute;s',
+	'info_vu_libelle_publication' => 'Publications relay&eacute;es',
 	'item_annonce_proposee' => 'Annonce propos&eacute;e',
 	'item_annonce_refusee' => 'NON - Annonce refus&eacute;e',
 	'item_annonce_validee' => 'OUI - Annonce valid&eacute;e',
