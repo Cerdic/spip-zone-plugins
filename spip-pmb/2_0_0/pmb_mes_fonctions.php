@@ -171,7 +171,7 @@ function pmb_auteur_extraire($id_auteur, $url_base, $pmb_page=1, $mode='auto') {
 
 function pmb_recherche_extraire($recherche, $url_base, $look_FIRSTACCESS='', $look_ALL='', $look_AUTHOR='', $look_PUBLISHER='', $look_COLLECTION='', $look_SUBCOLLECTION='', $look_CATEGORY='', $look_INDEXINT='', $look_KEYWORDS='', $look_TITLE='', $look_ABSTRACT='', $surligne='', $typdoc='', $ok='',$mode='auto') {
 	$tableau_resultat = Array();
-	$url_page = "index.php?lvl=search_result";
+	//$url_page = "index.php?lvl=search_result";
 	if ($surligne) $url_page.="&surligne=".$surligne;
 	if ($typdoc) $url_page.="&typdoc=".$typdoc;
 	if ($ok) $url_page.="&ok=".$ok;
@@ -187,7 +187,7 @@ function pmb_recherche_extraire($recherche, $url_base, $look_FIRSTACCESS='', $lo
 	if ($recherche) $url_page.="&user_query=".$recherche;
 
 
-	if ($htmldom = pmb_charger_page($url_base, $url_page,$mode)) {
+	/*if ($htmldom = pmb_charger_page($url_base, $url_page,$mode)) {
 			$tableau_resultat[0] = Array();
 			$tableau_resultat[0]['nav_bar'] = $htmldom->find('.navbar',0)->outertext;
 			$tableau_resultat[0]['nav_bar'] = pmb_transformer_nav_bar($tableau_resultat[0]['nav_bar']);
@@ -200,9 +200,64 @@ function pmb_recherche_extraire($recherche, $url_base, $look_FIRSTACCESS='', $lo
 				if ($i>1) pmb_parser_notice_apercu($res, $tableau_resultat[$i]);
 				$i++;
 			}	
-	}
+	}*/
+
+
+	//récupérer le résultat d'une recherche simple via les webservices
+	
+	global $gtresultat;
+	$gtresultat = array();
+	
+	
+	
+	pmb_ws_charger_wsdl($ws);
+	try {	
+			$tableau_resultat[0] = Array();
+			/*$tableau_resultat[0]['nav_bar'] = $htmldom->find('.navbar',0)->outertext;
+			$tableau_resultat[0]['nav_bar'] = pmb_transformer_nav_bar($tableau_resultat[0]['nav_bar']);
+
+			$resultats_recherche = $htmldom->find('.notice-child');
+			
+			$tableau_resultat[0]['nb_resultats'] = count($resultats_recherche);
+			$i = 1;
+			foreach($resultats_recherche as $res) {
+				$tableau_resultat[$i] = Array();				
+				if ($i>1) pmb_parser_notice_apercu($res, $tableau_resultat[$i]);
+				$i++;
+			}*/
+			//Recherche dans tous les champs du mot "loup"
+			$r=$ws->pmbesOPACAnonymous_simpleSearch(0,$recherche);
+			$searchId=$r["searchId"];
+			$tableau_resultat[0]['nb_resultats'] = $r["nbResults"];
+	    
+			//R�cup�ration des 10 premiers r�sultats
+			/*Les formats peuvent-�tre :
+				pmb_xml_unimarc pour du xml.
+				json_unimarc pour du javascript.
+				serialized_unimarc pour du php.
+				header, isbd, isbd_suite pour du texte.
+				dc, oai_dc pour du dublin core.
+				convert:truc pour un passage pas admin/convert dans le format truc.
+				autre: renvoi l'id de la notice.
+			*/ 
+			  $r=$ws->pmbesOPACAnonymous_fetchSearchRecords($searchId,0,10,"pmb_xml_unimarc","utf8");
+			  $i = 1;
+			  foreach($r as $value) {
+				    $tableau_resultat[$i] = Array();				
+				
+				    pmb_ws_parser_notice($value['noticeId'], $value['noticeContent'], $tableau_resultat[$i]);
+				    $i++;
+			  }
+		
+
+	} catch (SoapFault $fault) {
+		print("Erreur : ".$fault->faultcode." : ".$fault->faultstring);
+	} 
+
 	return $tableau_resultat;
 }
+
+
 function pmb_parser_notice_apercu ($localdom, &$tresultat) {
 	$tresultat['id'] = intval(substr($localdom->id,2));	
 	$tresultat['logo_src'] = $localdom->find('table td img',2)->src; 
@@ -354,19 +409,11 @@ function pmb_parser_notice_apercu ($localdom, &$tresultat) {
         }         
     }
 
-//récuperer une notice en xml via les webservices
-function pmb_ws_parser_notice ($id_notice, &$ws, &$tresultat) {
+//parsing xml d'une notice
+function pmb_ws_parser_notice($id_notice, $value, &$tresultat) {
+	    global $gtresultat;
+	    $gtresultat = array();
 	
-	global $gtresultat;
-	$gtresultat = array();
-	
-	try {	
-	$listenotices = array(''.$id_notice);
-	$tresultat['id'] = '4904';
-		  $r=$ws->pmbesNotices_fetchNoticeList($listenotices,"pmb_xml_unimarc","utf8",true,true);
-		echo("<ul>");
-		foreach($r as $value) {
-				
 	    // Création du parseur XML
 	    $parseurXML = xml_parser_create();
 
@@ -386,12 +433,25 @@ function pmb_ws_parser_notice ($id_notice, &$ws, &$tresultat) {
 	    xml_parser_free($parseurXML);
 
 	    if ($gtresultat['lesauteurs'] == "")
-		  $gtresultat['lesauteurs'] = $tresultat['auteur'];
+		  $gtresultat['lesauteurs'] = $gtresultat['auteur'];
 	    $gtresultat['logo_src'] = "http://tence.bibli.fr/opac/getimage.php?url_image=http%3A%2F%2Fimages-eu.amazon.com%2Fimages%2FP%2F!!isbn!!.08.MZZZZZZZ.jpg&noticecode=".str_replace("-","",$gtresultat['isbn'])."&vigurl=";
-	    $tresultat = $gtresultat ;
-
+	    $gtresultat['id'] = $id_notice;
 	    
-	    }
+
+	    $tresultat = $gtresultat ;
+}
+
+//récuperer une notice en xml via les webservices
+function pmb_ws_recuperer_notice ($id_notice, &$ws, &$tresultat) {
+	
+	
+	try {	
+	$listenotices = array(''.$id_notice);
+	$tresultat['id'] = $id_notice;
+		  $r=$ws->pmbesNotices_fetchNoticeList($listenotices,"pmb_xml_unimarc","utf8",true,true);
+		  foreach($r as $value) {
+		      pmb_ws_parser_notice($id_notice, $value, $tresultat);
+		  }
 		
 
 	} catch (SoapFault $fault) {
@@ -416,7 +476,7 @@ function pmb_notice_extraire ($id_notice, $url_base, $mode='auto') {
 	pmb_ws_charger_wsdl($ws);
 	//if ($htmldom = pmb_charger_page($url_base, "index.php?lvl=notice_display&seule=1&id=".$id_notice, $mode)) {
 		 //pmb_parser_notice($id_notice, $htmldom->find('#notice',0), $tableau_resultat);	
-		 pmb_ws_parser_notice($id_notice, $ws, $tableau_resultat);
+		 pmb_ws_recuperer_notice($id_notice, $ws, $tableau_resultat);
 	//}
 	return $tableau_resultat;
 			
