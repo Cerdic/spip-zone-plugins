@@ -312,7 +312,7 @@ function balise_BOUTON_ACTION($p){
 }
 
 /**
- * Generer n'importe quel info pour un objet : #INFO_ARTICLE{#ENV{id_article}, titre}
+ * Generer n'importe quel info pour un objet : #INFO_TITRE{article, #ENV{id_article}}
  * Utilise la fonction generer_info_entite(), se reporter a sa documentation
  */
 function balise_INFO__dist($p){
