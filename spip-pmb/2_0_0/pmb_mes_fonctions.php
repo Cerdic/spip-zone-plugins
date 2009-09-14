@@ -232,7 +232,7 @@ function pmb_parser_notice_apercu ($localdom, &$tresultat) {
 
 
 //d�coupage d'une notice au d�part dans un div de class .parent
-function pmb_parser_notice ($id_notice, $localdom, &$tresultat) {
+/*function pmb_parser_notice ($id_notice, $localdom, &$tresultat) {
 	$tresultat['id'] = $id_notice;	
 	$tresultat['logo_src'] = $localdom->find('table td img',2)->src; 
 	$tresultat['exemplaires'] = $localdom->find('.exemplaires',0)->outertext;
@@ -260,14 +260,164 @@ function pmb_parser_notice ($id_notice, $localdom, &$tresultat) {
 		else if (strpos($libelle, 'sum')) $tresultat['resume'] = $valeur; 
 	}
 
+}*/
+
+    // Traitement des balises ouvrantes
+    function fonctionBaliseOuvrante($parseur, $nomBalise, $tableauAttributs)
+    {
+        // En fait... nous nous conteterons de mémoriser le nom de la balise
+        // afin d'en tenir compte dans la fonction "fonctionTexte"
+
+        global $derniereBaliseRencontree;
+         global $dernierAttributRencontre;
+       global $dernierTypeTrouve;
+
+        $derniereBaliseRencontree = $nomBalise;
+  
+        $dernierAttributRencontre = $tableauAttributs;
+	
+    }
+   
+    // Rraitement des balises fermantes
+    function fonctionBaliseFermante($parseur, $nomBalise)
+    {
+        // On oublie la dernière balise rencontrée
+        global $derniereBaliseRencontree;
+         global $dernierAttributRencontre;
+       global $dernierTypeTrouve;
+
+        $derniereBaliseRencontree = "";
+    }
+
+    // Traitement du texte
+    // qui est appelé par le "parseur"
+    function fonctionTexte($parseur, $texte)
+    {
+        global $derniereBaliseRencontree;
+         global $dernierAttributRencontre;
+       global $dernierTypeTrouve;
+    global $gtresultat;
+
+        // Selon les cas, nous affichons le texte
+        // ou nous proposons un lien
+        // ATTENTION: Par défaut les noms des balises sont
+        //            mises en majuscules
+       //echo("<br />fonctionTexte=".$derniereBaliseRencontree);
+        switch ($derniereBaliseRencontree) {
+            case "F": 
+		   foreach($dernierAttributRencontre as $cle=>$attr) {
+			if ($cle=="C") $dernierTypeTrouve = $attr;
+		  }
+              break;
+
+            case "S":
+               foreach($dernierAttributRencontre as $cle=>$attr) {
+			if ($cle=="C") $dernierSousTypeTrouve = $attr;
+		  }
+
+		if (($dernierTypeTrouve == "010") && ($dernierSousTypeTrouve == "a")) $gtresultat['isbn'] .= $texte;
+		if (($dernierTypeTrouve == "010") && ($dernierSousTypeTrouve == "b")) $gtresultat['reliure'] .= $texte;
+		if (($dernierTypeTrouve == "010") && ($dernierSousTypeTrouve == "d")) $gtresultat['prix'] .= $texte;
+		
+		if (($dernierTypeTrouve == "101") && ($dernierSousTypeTrouve == "a")) $gtresultat['langues'] .= $texte;
+		
+		if (($dernierTypeTrouve == "102") && ($dernierSousTypeTrouve == "a")) $gtresultat['pays'] .= $texte;
+		
+		if (($dernierTypeTrouve == "200") && ($dernierSousTypeTrouve == "a")) $gtresultat['titre'] .= $texte;
+		if (($dernierTypeTrouve == "200") && ($dernierSousTypeTrouve == "f")) $gtresultat['auteur'] .= $texte;
+		
+		if (($dernierTypeTrouve == "210") && ($dernierSousTypeTrouve == "c")) $gtresultat['editeur'] .= $texte;
+		if (($dernierTypeTrouve == "210") && ($dernierSousTypeTrouve == "a")) $gtresultat['editeur'] .= ' ('.$texte.')';
+		if (($dernierTypeTrouve == "210") && ($dernierSousTypeTrouve == "d")) $gtresultat['annee_publication'] .= $texte;
+		
+		if (($dernierTypeTrouve == "215") && ($dernierSousTypeTrouve == "a")) $gtresultat['importance'] .= $texte;
+		if (($dernierTypeTrouve == "215") && ($dernierSousTypeTrouve == "c")) $gtresultat['presentation'] .= $texte;
+		if (($dernierTypeTrouve == "215") && ($dernierSousTypeTrouve == "d")) $gtresultat['format'] .= $texte;
+		
+		if (($dernierTypeTrouve == "225") && ($dernierSousTypeTrouve == "a")) $gtresultat['collection'] .= $texte;
+		
+		if (($dernierTypeTrouve == "330") && ($dernierSousTypeTrouve == "a")) $gtresultat['resume'] .= str_replace("\n","<br />", $texte);
+		
+		if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "a")) $gtresultat['lesauteurs'] .= $texte;
+		if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "b")) $gtresultat['lesauteurs'] .= " ".$texte;
+		
+
+		//a faire : disponibilité
+
+		/* sous la forme ...
+	      <table cellpadding='2' class='exemplaires' width='100%'>
+		    <tr><th class='expl_header_expl_cb'>Code barre</th><th class='expl_header_expl_cote'>Cote</th><th class='expl_header_tdoc_libelle'>Support</th><th class='expl_header_location_libelle'>Localisation</th><th class='expl_header_section_libelle'>Section</th><th>Disponibilité</th><tr><td class='expl_cb'>4319900946</td><td class='expl_cote'>RP GUI</td><td class='tdoc_libelle'>Livre</td><td class='location_libelle'>Saint-Jeures</td><td class='section_libelle'>Romans Policiers</td><td class='expl_situation'><strong>Disponible</strong> </td></tr>
+
+	      </table>
+	      */
+                break;
+        }         
+    }
+
+//récuperer une notice en xml via les webservices
+function pmb_ws_parser_notice ($id_notice, &$ws, &$tresultat) {
+	
+	global $gtresultat;
+	$gtresultat = array();
+	
+	try {	
+	$listenotices = array(''.$id_notice);
+	$tresultat['id'] = '4904';
+		  $r=$ws->pmbesNotices_fetchNoticeList($listenotices,"pmb_xml_unimarc","utf8",true,true);
+		echo("<ul>");
+		foreach($r as $value) {
+				
+	    // Création du parseur XML
+	    $parseurXML = xml_parser_create();
+
+	    // Je précise le nom des fonctions à appeler
+	    // lorsque des balises ouvrantes ou fermantes sont rencontrées
+	    xml_set_element_handler($parseurXML, "fonctionBaliseOuvrante"
+					      , "fonctionBaliseFermante");
+
+	    // Je précise le nom de la fonction à appeler
+	    // lorsque du texte est rencontré
+	    xml_set_character_data_handler($parseurXML, "fonctionTexte");
+
+	    // Ouverture du fichier
+	    xml_parse($parseurXML, $value, true);
+	  
+	   // echo("<br/><br />version brute : <br/><br />".$value);
+	    xml_parser_free($parseurXML);
+
+	    if ($gtresultat['lesauteurs'] == "")
+		  $gtresultat['lesauteurs'] = $tresultat['auteur'];
+	    $gtresultat['logo_src'] = "http://tence.bibli.fr/opac/getimage.php?url_image=http%3A%2F%2Fimages-eu.amazon.com%2Fimages%2FP%2F!!isbn!!.08.MZZZZZZZ.jpg&noticecode=".str_replace("-","",$gtresultat['isbn'])."&vigurl=";
+	    $tresultat = $gtresultat ;
+
+	    
+	    }
+		
+
+	} catch (SoapFault $fault) {
+		print("Erreur : ".$fault->faultcode." : ".$fault->faultstring);
+	} 
+
+	
+
 }
+
+//charger les webservices
+function pmb_ws_charger_wsdl(&$ws) {
+	$ws=new SoapClient("http://test3.bibli.fr/ostudio/PMBWsSOAP_1?wsdl");
+	
+}
+
 
 // retourne un tableau associatif contenant tous les champs d'une notice 
 function pmb_notice_extraire ($id_notice, $url_base, $mode='auto') {
 	$tableau_resultat = Array();
-	if ($htmldom = pmb_charger_page($url_base, "index.php?lvl=notice_display&seule=1&id=".$id_notice, $mode)) {
-		 pmb_parser_notice($id_notice, $htmldom->find('#notice',0), $tableau_resultat);	
-	}
+	
+	pmb_ws_charger_wsdl($ws);
+	//if ($htmldom = pmb_charger_page($url_base, "index.php?lvl=notice_display&seule=1&id=".$id_notice, $mode)) {
+		 //pmb_parser_notice($id_notice, $htmldom->find('#notice',0), $tableau_resultat);	
+		 pmb_ws_parser_notice($id_notice, $ws, $tableau_resultat);
+	//}
 	return $tableau_resultat;
 			
 }
