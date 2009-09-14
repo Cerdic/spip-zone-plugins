@@ -8,7 +8,8 @@
 
 function exec_calendrier(){
 	$mode = _request('mode');
-	if ($mode=='editorial'){
+	// si $echelle dans l'url, c'est une page du mode editorial aussi
+	if (($mode == 'editorial') or _request('echelle')){
 	  include_spip('exec/calendrier');
 	  exec_calendrier_dist();
 	}
