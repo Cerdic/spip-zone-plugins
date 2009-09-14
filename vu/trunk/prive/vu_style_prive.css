@@ -13,3 +13,12 @@
 .titre_objet { font-weight: bold; font-size: 1.1em; }
 .type_objet { font-style: italic; font-size: 0.9em; }
 .source_objet { font-style: italic; }
+
+.boutons_nav ul { margin: 0; padding: 0; list-style: none; }
+.boutons_nav li  
+{  float: left; 
+   padding: 0;
+   margin: 0;
+   text-align: center;
+}
+.boutons_nav a { display: block; }

@@ -220,15 +220,53 @@ function exec_veille_voir(){
 			)
 		: "";	
 
+	// --> ici deux boutons de navigations : precedent, suivant
+	// Pour 'precedent. Requete sql qui selectionne 
+	// le *premier* objet dont l'id est *inferieur*
+	// à celui de l'actuel, que l'on associe ensuite à '$prec_id'.
+	$requete_prec = mysql_query("SELECT id_".$type_objet." FROM spip_vu_".$type_objet."s WHERE id_".$type_objet." < ".$id_objet." ORDER BY id_".$type_objet." desc LIMIT 1 ");
+	$prec_id = mysql_fetch_array($requete_prec);
+	// Idem pour 'suivant', on effectue une requete sql qui 
+	// selectionne le *premier* objet dont l'id est *superieur* 
+	// à celui de l'actuel, que l'on associe ensuite à '$suiv_id'.
+	$requete_suiv = mysql_query("SELECT id_".$type_objet." FROM spip_vu_".$type_objet."s WHERE id_".$type_objet." > ".$id_objet." ORDER BY id_".$type_objet." LIMIT 1 ");
+	$suiv_id = mysql_fetch_array($requete_suiv);
+	// On calcule les url precedente et suivante
+	$prec_url = generer_url_ecrire("veille_voir","id_$type_objet=$prec_id[0]");
+	$suiv_url = generer_url_ecrire("veille_voir","id_$type_objet=$suiv_id[0]");
+	// On genere le texte a afficher sous les boutons
+	$libelle_precedent_objet = "vu:icone_precedent_".$type_objet;
+	$libelle_suivant_objet = "vu:icone_suivant_".$type_objet;
+	// On cree les boutons avec leurs liens et libelles
+	$boutons_nav = "<ul>"
+		// Une boite pour le bouton precedent
+		. "<li class='bouton_prec'>"
+			// Contenu s'affiche seulement si un objet precede
+			//. ($prec_id ? "<a href='".$prec_url."'>"._T($libelle_precedent_objet)."</a>" : "")
+			. ($prec_id ? icone_inline(_T($libelle_precedent_objet), $prec_url, _DIR_VU_IMG_PACK."$type_objet-24.gif", _DIR_VU_IMG_PACK."precedent.gif") : "")
+		. "</li>"
+		// Une boite pour le bouton suivant
+		. "<li class='bouton_suiv'>"
+			// Contenu d'affiche seulement si un objet suit
+			//. ($suiv_id ? "<a href='".$suiv_url."'>"._T($libelle_suivant_objet)."</a>" : "")
+			. ($suiv_id ? icone_inline(_T($libelle_suivant_objet), $suiv_url, _DIR_VU_IMG_PACK."$type_objet-24.gif", _DIR_VU_IMG_PACK."suivant.gif") : "")
+		. "</li>"		
+		. "</ul>"; 
+
+
+
 	// Et maintenant l'affichage proprement dit du contenu.
 	// A ce stade nous possedons un onglet de contenu, un onglet
-	// de proprietes et un bouton de modification qu'il va falloir
-	// orgniser dans la fiche de l'objet.
+	// de proprietes, deux boutons de navigation et un bouton 
+	// de modification qu'il va falloir organiser dans la fiche 
+	// de l'objet.
 
 	// On cree la colonne centrale de la page,
 	echo debut_droite('', true)
 		// on ouvre le bloc general de la fiche objet
 		. "<div class='fiche_objet'>"
+		// on affiche les boutons de navigation
+		. "<div class='boutons_nav'>$boutons_nav</div>"
 		// on affiche le bouton de modification
 		. "<div class='bouton_actions'>$actions</div>"
 		// on ouvre le sous-bloc des onglets
