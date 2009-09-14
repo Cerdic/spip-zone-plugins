@@ -1,12 +1,12 @@
-
+[(#SET{titre, #ENV*{titre}|typo|sinon{#INFO_TITRE{#ENV{type_objet}, #ENV{id_objet}}}|sinon{<:info_sans_titre:>}})]
 
 [(#ENV{appel_formulaire}|oui)
-	<div class="titre">[(#ENV*{titre}|typo|sinon{#ENV{id_objet}|generer_titre_entite{#ENV{type_objet}}}|sinon{<:info_sans_titre:>})]</div>
+	<div class="titre">#GET{titre}</div>
 	<div class="infos">#ENV{type_objet}-#ENV{id_objet}</div>
 ]
 [(#ENV{appel_menu}|oui)
 	<li class="menu-entree[ (#ENV{css})]">
-		<a href="[(#ENV{id_objet}|generer_url_entite{#ENV{type_objet}})]">
-			[(#ENV*{titre}|typo|sinon{#ENV{id_objet}|generer_titre_entite{#ENV{type_objet}}}|sinon{<:info_sans_titre:>})]
+		<a href="#INFO_URL{#ENV{type_objet}, #ENV{id_objet}}">
+			#GET{titre}
 		</a>
 ]

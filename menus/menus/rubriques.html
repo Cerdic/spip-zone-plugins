@@ -2,7 +2,7 @@
 [(#SET{niveau, #ENV{niveau}|intval|?{#ENV{niveau},infini}})]
 
 [(#ENV{appel_formulaire}|oui)
-	[(#SET{titre, #GET{id_rubrique}|?{#GET{id_rubrique}|generer_titre_entite{rubrique}, <:info_racine_site:>}})]
+	[(#SET{titre, #GET{id_rubrique}|?{#INFO_TITRE{rubrique, #GET{id_rubrique}}, <:info_racine_site:>}})]
 	<div class="titre">#GET{titre}</div>
 	<div class="infos">
 		[(#GET{niveau}|=={infini}|non)
