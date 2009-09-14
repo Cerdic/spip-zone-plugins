@@ -242,13 +242,11 @@ function exec_veille_voir(){
 		// Une boite pour le bouton precedent
 		. "<li class='bouton_prec'>"
 			// Contenu s'affiche seulement si un objet precede
-			//. ($prec_id ? "<a href='".$prec_url."'>"._T($libelle_precedent_objet)."</a>" : "")
 			. ($prec_id ? icone_inline(_T($libelle_precedent_objet), $prec_url, _DIR_VU_IMG_PACK."$type_objet-24.gif", _DIR_VU_IMG_PACK."precedent.gif") : "")
 		. "</li>"
 		// Une boite pour le bouton suivant
 		. "<li class='bouton_suiv'>"
 			// Contenu d'affiche seulement si un objet suit
-			//. ($suiv_id ? "<a href='".$suiv_url."'>"._T($libelle_suivant_objet)."</a>" : "")
 			. ($suiv_id ? icone_inline(_T($libelle_suivant_objet), $suiv_url, _DIR_VU_IMG_PACK."$type_objet-24.gif", _DIR_VU_IMG_PACK."suivant.gif") : "")
 		. "</li>"		
 		. "</ul>"; 
