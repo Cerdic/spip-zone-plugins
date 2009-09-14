@@ -19,7 +19,7 @@ function accesrestreint_ajouter_boutons($boutons_admin) {
 	if (autoriser('administrer','zone')) {
 	  // on voit le bouton dans la barre "naviguer"
 		$boutons_admin['configuration']->sousmenu['acces_restreint']= new Bouton(
-		_DIR_PLUGIN_ACCESRESTREINT."/img_pack/zones-acces-24.gif",  // icone
+		_DIR_PLUGIN_ACCESRESTREINT."img_pack/zones-acces-24.gif",  // icone
 		_T('accesrestreint:icone_menu_config')	// titre
 		);
 	}
