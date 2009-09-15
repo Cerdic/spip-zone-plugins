@@ -9,8 +9,4 @@
   <options>queue_options.php</options>
 	<lien></lien> <!-- URI de documentation -->
   <prefix>queue</prefix>
-  <pipeline>
-	  <nom>cfg_post_edition</nom>
-	  <inclure>bank_pipeline.php</inclure>
-  </pipeline>
 </plugin>
