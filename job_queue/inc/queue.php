@@ -40,7 +40,7 @@ function queue_add_job($function, $description, $arguments = array(), $file = ''
 	if (
 			$no_duplicate
 		AND
-			sql_count('spip_jobs',
+			sql_countsel('spip_jobs',
 				'fonction='.sql_quote($function)
 				.(($no_duplicate=='function_only')?'':
 				 ' AND args='.sql_quote($arguments).' AND file='.sql_quote($file)))
@@ -125,6 +125,7 @@ function queue_start_job($row){
  */
 function queue_schedule(){
 	$start = time();
+
 	// rien a faire si le prochain job est encore dans le futur
 	if ($GLOBALS['meta']['queue_next_job_time']>$start)
 		return;
@@ -141,28 +142,28 @@ function queue_schedule(){
 	$now = date('Y-m-d H:i:s',$start);
 	$res = sql_select('*','spip_jobs','date<'.sql_quote($now),'','priorite DESC,date','0,10');
 	do {
-		$row = sql_fetch($res);
-		// il faut un verrou, a base de sql_delete ?
-		if (sql_delete('spip_jobs','id_job='.intval($row['id_job']))
-			AND sql_affected_rows()){
-			// on a la main sur le job :
-			// l'executer
-			$res = queue_start_job($row);
+		if ($row = sql_fetch($res)){
+			// il faut un verrou, a base de sql_delete ?
+			if (sql_delete('spip_jobs','id_job='.intval($row['id_job']))){
+				// on a la main sur le job :
+				// l'executer
+				$res = queue_start_job($row);
 
-			// est-ce une tache cron qu'il faut relancer ?
-			if ($periode = queue_is_cron_job($row['fonction'],$row['inclure'])){
-				// relancer avec les nouveaux arguments de temps
-				include_spip('inc/genie');
-				if ($res<0)
-					// relancer tout de suite, mais en baissant la priorite
-					queue_genie_replan_job($row['fonction'],$periode,0-$res/*last*/,0/*ASAP*/,$row['priorite']-1);
-				else
-					// relancer avec la periode prevue
-					queue_genie_replan_job($row['fonction'],$periode,time());
+				// est-ce une tache cron qu'il faut relancer ?
+				if ($periode = queue_is_cron_job($row['fonction'],$row['inclure'])){
+					// relancer avec les nouveaux arguments de temps
+					include_spip('inc/genie');
+					if ($res<0)
+						// relancer tout de suite, mais en baissant la priorite
+						queue_genie_replan_job($row['fonction'],$periode,0-$res/*last*/,0/*ASAP*/,$row['priorite']-1);
+					else
+						// relancer avec la periode prevue
+						queue_genie_replan_job($row['fonction'],$periode,time());
+				}
 			}
 		}
-
-	} while (time()<$start+$max_time);
+	} while ($row AND time()<$start+$max_time);
+	
 	if ($row = sql_fetch($res))
 		queue_update_next_job_time(0); // on sait qu'il y a encore des jobs a lancer ASAP
 	else

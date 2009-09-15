@@ -59,7 +59,6 @@ function inc_genie_dist($taches = array()) {
 	// on reroute en ajoutant simplement le job a la queue, ASAP
 	foreach($taches as $function=>$period)
 		queue_add_job($function, _L("Tache CRON $function (ASAP)"), array(time()-abs($period)), "genie/");
-	}
 	
 	// et on passe la main a la gestion de la queue !
 	queue_schedule();
@@ -131,7 +130,7 @@ function genie_invalideur_dist($t) {
 function genie_queue_watch_dist(){
 	$taches = taches_generales();
 	foreach($taches as $tache=>$periode){
-		queue_genie_replan_job($tache,$periode);
+		//queue_genie_replan_job($tache,$periode);
 	}
 }
 

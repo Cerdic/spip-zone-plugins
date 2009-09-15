@@ -9,4 +9,12 @@
   <options>queue_options.php</options>
 	<lien></lien> <!-- URI de documentation -->
   <prefix>queue</prefix>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/queue.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/queue.php</inclure>
+	</pipeline>
 </plugin>
