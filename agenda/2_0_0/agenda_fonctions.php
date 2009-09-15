@@ -98,10 +98,10 @@ function http_calendrier_mini($annee, $mois, $jour, $echelle, $partie_cal, $scri
 		if ($evts) {
 			$nb_elmts= @count($evts);
 			if ($nb_elmts>1){
-				$evts = "<a href='".parametre_url(trim($evts[0]['URL']),'date',"$annee_en_cours-$mois_en_cours-$jour")."' title='".$nb_elmts." ".utf8_encode("événements")."'>".intval($jour)."</a>";
+				$evts = "<a href='".$evts[0]['URL']."' title='".$nb_elmts." ".utf8_encode("événements")."'>".intval($jour)."</a>";
 			}
 			else{
-				$evts = "<a href='".parametre_url(trim($evts[0]['URL']),'date',"$annee_en_cours-$mois_en_cours-$jour")."' title='".$evts[0]['SUMMARY'].
+				$evts = "<a href='".$evts[0]['URL']."' title='".$evts[0]['SUMMARY'].
 			"'>".intval($jour)."</a>";
 			}
 			$class='occupe';
