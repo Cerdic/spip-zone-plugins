@@ -175,16 +175,26 @@ function pmb_recherche_extraire($recherche, $url_base, $look_FIRSTACCESS='', $lo
 	if ($surligne) $url_page.="&surligne=".$surligne;
 	if ($typdoc) $url_page.="&typdoc=".$typdoc;
 	if ($ok) $url_page.="&ok=".$ok;
-	if ($look_ALL) $url_page.="&look_ALL=".$look_ALL;
-	if ($look_FIRSTACCESS) $url_page.="&look_FIRSTACCESS=".$look_FIRSTACCESS;
-	if ($look_AUTHOR) $url_page.="&look_AUTHOR=".$look_AUTHOR;
-	if ($look_PUBLISHER) $url_page.="&look_PUBLISHER=".$look_PUBLISHER;
-	if ($look_COLLECTION) $url_page.="&look_COLLECTION=".$look_COLLECTION;
-	if ($look_CATEGORY) $url_page.="&look_CATEGORY=".$look_CATEGORY;
-	if ($look_INDEXINT) $url_page.="&look_INDEXINT=".$look_INDEXINT;
+
+	/*0 (SEARCH_ALL)=tous les champs,
+	1 (SEARCH_TITLE)=titre,
+	2 (SEARCH_AUTHOR)=auteur,
+	3 (SEARCH_EDITOR)=éditeur,
+	4 (SEARCH_COLLECTION)=collection,
+	6 (SEARCH_CATEGORIES)=catégories/mots matières
+	*/
+	$searchType = 0; //par défaut recherche sur tous les champs
+	if ($look_ALL) $searchType = 0;
+	if ($look_TITLE) $searchType = 1;
+	//if ($look_FIRSTACCESS) $url_page.="&look_FIRSTACCESS=".$look_FIRSTACCESS;
+	if ($look_AUTHOR)  $searchType = 2;
+	if ($look_PUBLISHER) $searchType = 3;
+	if ($look_COLLECTION) $searchType = 4;
+	if ($look_ABSTRACT) $searchType = 5;
+	if ($look_CATEGORY) $searchType = 6;
+	/*if ($look_INDEXINT) $url_page.="&look_INDEXINT=".$look_INDEXINT;
 	if ($look_KEYWORDS) $url_page.="&look_KEYWORDS=".$look_KEYWORDS;
-	if ($look_ABSTRACT) $url_page.="&look_ABSTRACT=".$look_ABSTRACT;
-	if ($recherche) $url_page.="&user_query=".$recherche;
+	if ($recherche) $url_page.="&user_query=".$recherche;*/
 
 
 	/*if ($htmldom = pmb_charger_page($url_base, $url_page,$mode)) {
@@ -226,7 +236,7 @@ function pmb_recherche_extraire($recherche, $url_base, $look_FIRSTACCESS='', $lo
 				$i++;
 			}*/
 			//Recherche dans tous les champs du mot "loup"
-			$r=$ws->pmbesOPACAnonymous_simpleSearch(0,$recherche);
+			$r=$ws->pmbesOPACAnonymous_simpleSearch($searchType ,$recherche);
 			$searchId=$r["searchId"];
 			$tableau_resultat[0]['nb_resultats'] = $r["nbResults"];
 	    
@@ -240,12 +250,12 @@ function pmb_recherche_extraire($recherche, $url_base, $look_FIRSTACCESS='', $lo
 				convert:truc pour un passage pas admin/convert dans le format truc.
 				autre: renvoi l'id de la notice.
 			*/ 
-			  $r=$ws->pmbesOPACAnonymous_fetchSearchRecords($searchId,0,10,"pmb_xml_unimarc","utf8");
+			  $r=$ws->pmbesOPACAnonymous_fetchSearchRecords($searchId,0,10,"serialized_unimarc","utf8");
 			  $i = 1;
 			  foreach($r as $value) {
 				    $tableau_resultat[$i] = Array();				
 				
-				    pmb_ws_parser_notice($value['noticeId'], $value['noticeContent'], $tableau_resultat[$i]);
+				    pmb_ws_parser_notice_serialisee($value['noticeId'], $value['noticeContent'], $tableau_resultat[$i]);
 				    $i++;
 			  }
 		
@@ -410,7 +420,7 @@ function pmb_parser_notice_apercu ($localdom, &$tresultat) {
     }
 
 //parsing xml d'une notice
-function pmb_ws_parser_notice($id_notice, $value, &$tresultat) {
+function pmb_ws_parser_notice_xml($id_notice, $value, &$tresultat) {
 	    global $gtresultat;
 	    $gtresultat = array();
 	
@@ -441,6 +451,67 @@ function pmb_ws_parser_notice($id_notice, $value, &$tresultat) {
 	    $tresultat = $gtresultat ;
 }
 
+//parsing d'une notice sérialisée
+function pmb_ws_parser_notice_serialisee($id_notice, $value, &$tresultat) {
+	    global $gtresultat;
+	    $gtresultat = array();
+	
+	    $noticecontent = array();
+	    $unserialized = $value; 
+	    $unserialized = preg_replace('!s:(\d+):"(.*?)";!se', "'s:'.strlen('$2').':\"$2\";'", $unserialized );
+
+	    $noticecontent = unserialize($unserialized);
+	    foreach ( $noticecontent as $c1=>$v1) {
+	      //echo("<br />C1 -> ".$c1."=".$v1);
+	      foreach ( $v1 as $c2=>$v2) {
+		    //echo("<br />C2 -> ".$c2."=".$v2);
+		    foreach ( $v2 as $c3=>$v3) {
+			   if ($c3=="c") $dernierTypeTrouve = $v3;
+			    foreach ( $v3 as $c4=>$v4) {
+				//echo("<br />attr=".$dernierTypeTrouve.",".$v4['c'].",".$v4['value']);
+				$dernierSousTypeTrouve = $v4['c'];
+				$texte = $v4['value'];
+				if (($dernierTypeTrouve == "010") && ($dernierSousTypeTrouve == "a")) $gtresultat['isbn'] .= $texte;
+				if (($dernierTypeTrouve == "010") && ($dernierSousTypeTrouve == "b")) $gtresultat['reliure'] .= $texte;
+				if (($dernierTypeTrouve == "010") && ($dernierSousTypeTrouve == "d")) $gtresultat['prix'] .= $texte;
+				
+				if (($dernierTypeTrouve == "101") && ($dernierSousTypeTrouve == "a")) $gtresultat['langues'] .= $texte;
+				
+				if (($dernierTypeTrouve == "102") && ($dernierSousTypeTrouve == "a")) $gtresultat['pays'] .= $texte;
+				
+				if (($dernierTypeTrouve == "200") && ($dernierSousTypeTrouve == "a")) $gtresultat['titre'] .= $texte;
+				if (($dernierTypeTrouve == "200") && ($dernierSousTypeTrouve == "f")) $gtresultat['auteur'] .= $texte;
+				
+				if (($dernierTypeTrouve == "210") && ($dernierSousTypeTrouve == "c")) $gtresultat['editeur'] .= $texte;
+				if (($dernierTypeTrouve == "210") && ($dernierSousTypeTrouve == "a")) $gtresultat['editeur'] .= ' ('.$texte.')';
+				if (($dernierTypeTrouve == "210") && ($dernierSousTypeTrouve == "d")) $gtresultat['annee_publication'] .= $texte;
+				
+				if (($dernierTypeTrouve == "215") && ($dernierSousTypeTrouve == "a")) $gtresultat['importance'] .= $texte;
+				if (($dernierTypeTrouve == "215") && ($dernierSousTypeTrouve == "c")) $gtresultat['presentation'] .= $texte;
+				if (($dernierTypeTrouve == "215") && ($dernierSousTypeTrouve == "d")) $gtresultat['format'] .= $texte;
+				
+				if (($dernierTypeTrouve == "225") && ($dernierSousTypeTrouve == "a")) $gtresultat['collection'] .= $texte;
+				
+				if (($dernierTypeTrouve == "330") && ($dernierSousTypeTrouve == "a")) $gtresultat['resume'] .= stripslashes(str_replace("\n","<br />", $texte));
+				
+				if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "a")) $gtresultat['lesauteurs'] .= $texte;
+				if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "b")) $gtresultat['lesauteurs'] .= " ".$texte;
+				
+			    }
+		    }
+	      }
+	    }
+
+	    if ($gtresultat['lesauteurs'] == "")
+		  $gtresultat['lesauteurs'] = $gtresultat['auteur'];
+	    $gtresultat['logo_src'] = "http://tence.bibli.fr/opac/getimage.php?url_image=http%3A%2F%2Fimages-eu.amazon.com%2Fimages%2FP%2F!!isbn!!.08.MZZZZZZZ.jpg&noticecode=".str_replace("-","",$gtresultat['isbn'])."&vigurl=";
+	    $gtresultat['id'] = $id_notice;
+	    
+
+	    $tresultat = $gtresultat ;
+}
+
+
 //récuperer une notice en xml via les webservices
 function pmb_ws_recuperer_notice ($id_notice, &$ws, &$tresultat) {
 	
@@ -448,9 +519,9 @@ function pmb_ws_recuperer_notice ($id_notice, &$ws, &$tresultat) {
 	try {	
 	$listenotices = array(''.$id_notice);
 	$tresultat['id'] = $id_notice;
-		  $r=$ws->pmbesNotices_fetchNoticeList($listenotices,"pmb_xml_unimarc","utf8",true,true);
+		  $r=$ws->pmbesNotices_fetchNoticeList($listenotices,"serialized_unimarc","utf8",true,true);
 		  foreach($r as $value) {
-		      pmb_ws_parser_notice($id_notice, $value, $tresultat);
+		      pmb_ws_parser_notice_serialisee($id_notice, $value, $tresultat);
 		  }
 		
 
