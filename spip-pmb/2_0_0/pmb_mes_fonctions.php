@@ -406,12 +406,21 @@ function pmb_parser_notice_apercu ($localdom, &$tresultat) {
 		if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "a")) $gtresultat['lesauteurs'] .= $texte;
 		if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "b")) $gtresultat['lesauteurs'] .= " ".$texte;
 		
+		//section996
+		if (($dernierTypeTrouve == "996") && ($dernierSousTypeTrouve == "f")) $gtresultat['exemplaires'] .= "<tr><td class='expl_cb'>".$texte."</td>";
+		if (($dernierTypeTrouve == "996") && ($dernierSousTypeTrouve == "k")) $gtresultat['exemplaires'] .= "<td class='expl_cote'>".$texte."</td>";
+		if (($dernierTypeTrouve == "996") && ($dernierSousTypeTrouve == "e")) $gtresultat['exemplaires'] .= "<td class='tdoc_libelle'>".$texte."</td>";
+		if (($dernierTypeTrouve == "996") && ($dernierSousTypeTrouve == "v")) $gtresultat['exemplaires'] .= "<td class='location_libelle'>".$texte."</td>";
+		if (($dernierTypeTrouve == "996") && ($dernierSousTypeTrouve == "x")) $gtresultat['exemplaires'] .= "<td class='section_libelle'>".$texte."</td>";
+		if (($dernierTypeTrouve == "996") && ($dernierSousTypeTrouve == "1")) $gtresultat['exemplaires'] .= "<td class='expl_situation'><strong>".$texte."</strong></td></tr>";
 
 		//a faire : disponibilité
 
 		/* sous la forme ...
 	      <table cellpadding='2' class='exemplaires' width='100%'>
-		    <tr><th class='expl_header_expl_cb'>Code barre</th><th class='expl_header_expl_cote'>Cote</th><th class='expl_header_tdoc_libelle'>Support</th><th class='expl_header_location_libelle'>Localisation</th><th class='expl_header_section_libelle'>Section</th><th>Disponibilité</th><tr><td class='expl_cb'>4319900946</td><td class='expl_cote'>RP GUI</td><td class='tdoc_libelle'>Livre</td><td class='location_libelle'>Saint-Jeures</td><td class='section_libelle'>Romans Policiers</td><td class='expl_situation'><strong>Disponible</strong> </td></tr>
+		    <tr><th class='expl_header_expl_cb'>Code barre</th><th class='expl_header_expl_cote'>Cote</th><th class='expl_header_tdoc_libelle'>Support</th><th class='expl_header_location_libelle'>Localisation</th><th class='expl_header_section_libelle'>Section</th><th>Disponibilité</th>
+
+		    <tr><td class='expl_cb'>4319900946</td><td class='expl_cote'>RP GUI</td><td class='tdoc_libelle'>Livre</td><td class='location_libelle'>Saint-Jeures</td><td class='section_libelle'>Romans Policiers</td><td class='expl_situation'><strong>Disponible</strong> </td></tr>
 
 	      </table>
 	      */
@@ -436,10 +445,14 @@ function pmb_ws_parser_notice_xml($id_notice, $value, &$tresultat) {
 	    // lorsque du texte est rencontré
 	    xml_set_character_data_handler($parseurXML, "fonctionTexte");
 
+	   $gtresultat['exemplaires'] = "<table cellpadding='2' class='exemplaires' width='100%'>
+		    <tr><th class='expl_header_expl_cb'>Code barre</th><th class='expl_header_expl_cote'>Cote</th><th class='expl_header_tdoc_libelle'>Support</th><th class='expl_header_location_libelle'>Localisation</th><th class='expl_header_section_libelle'>Section</th><th>Disponibilité</th></tr>";
+
 	    // Ouverture du fichier
 	    xml_parse($parseurXML, $value, true);
 	  
-	   // echo("<br/><br />version brute : <br/><br />".$value);
+	   $gtresultat['exemplaires'] .= "</table>";
+	    // echo("<br/><br />version brute : <br/><br />".$value);
 	    xml_parser_free($parseurXML);
 
 	    if ($gtresultat['lesauteurs'] == "")
@@ -519,9 +532,9 @@ function pmb_ws_recuperer_notice ($id_notice, &$ws, &$tresultat) {
 	try {	
 	$listenotices = array(''.$id_notice);
 	$tresultat['id'] = $id_notice;
-		  $r=$ws->pmbesNotices_fetchNoticeList($listenotices,"serialized_unimarc","utf8",true,true);
+		  $r=$ws->pmbesNotices_fetchNoticeList($listenotices,"pmb_xml_unimarc","utf8",true,true);
 		  foreach($r as $value) {
-		      pmb_ws_parser_notice_serialisee($id_notice, $value, $tresultat);
+		      pmb_ws_parser_notice_xml($id_notice, $value, $tresultat);
 		  }
 		
 
