@@ -2,7 +2,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function mots_techniques_declarer_champs_extras($champs){
+function mots_techniques_declarer_champs_extras($champs = array()){
 	// ajout du champ technique
 	$champs[] = new ChampExtra(array(
 		'table' => 'groupes_mot', // sur quelle table ?
