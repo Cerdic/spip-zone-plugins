@@ -35,7 +35,9 @@ function cache($fonction, $file, $args=null, $force_recalcul=false) {
     return array(_T('err_not_callable').' : '.$fonction, 'err', $date);
   if (isset($args) && (!is_array($args)))
     return array(_T('err_args_not_in_array').' : '.$fonction, 'err', $date);
-
+	
+  if ($args==null)
+   $args = array(); // un array vide si pas d'arguments
   $r = call_user_func_array($fonction, $args);
   $cachestring = serialize(array(
     'date' => $date,
