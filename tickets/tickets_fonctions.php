@@ -25,7 +25,7 @@ function tickets_champ_optionnel_actif($nom){
 	}
 	$liste = constant($nom);
 	if ($liste == '') return false;
-	
+
 	return explode(':', $liste);
 }
 
@@ -117,10 +117,10 @@ function tickets_icone_severite ($niveau) {
 
 function tickets_liste_statut($connecte = true){
 	$statuts = array(
-		"redac" => "en cours de r&eacute;daction",
-		"ouvert" => "ouvert et discut&eacute",
-		"resolu" => "r&eacute;solu",
-		"ferme" => "ferme",
+		"redac" => _T("tickets:statut_redac"),
+		"ouvert" => _T("tickets:statut_ouvert"),
+		"resolu" => _T("tickets:statut_resolu"),
+		"ferme" => _T("tickets:statut_ferme"),
 	);
 	if (!$connecte) {
 		unset($statuts['redac']);

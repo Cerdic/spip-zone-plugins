@@ -7,48 +7,50 @@
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input type='hidden' name='id_ticket' value='#ID_TICKET' />
-		<ul>
-			[(#SAISIE{input, titre,
-				label=<:tickets:champ_titre_ticket:>,
-				defaut=<:tickets:nouveau_ticket:>,
-				obligatoire=oui})]
+		<fieldset>
+			<ul>
+				[(#SAISIE{input, titre,
+					label=<:tickets:champ_titre_ticket:>,
+					defaut=<:tickets:nouveau_ticket:>,
+					obligatoire=oui})]
 
-			[(#SAISIE{selection, statut,
-				label=<:tickets:champ_statut:>,
-				cacher_option_intro=oui,
-				datas=[(#SESSION{id_auteur}|tickets_liste_statut)]})]
-				
-			[(#SAISIE{selection, type,
-				label=<:tickets:champ_type:>,
-				cacher_option_intro=oui,
-				datas=[(#VAL|tickets_liste_type)]})]
-				
-			[(#SAISIE{selection, severite,
-				label=<:tickets:champ_severite:>,
-				cacher_option_intro=oui,
-				datas=[(#VAL|tickets_liste_severite)]})]
+				[(#SAISIE{selection, statut,
+					label=<:tickets:champ_statut:>,
+					cacher_option_intro=oui,
+					datas=[(#SESSION{id_auteur}|tickets_liste_statut)]})]
 
-			#SET{saisies, #ARRAY{0,projet,1,composant,2,version,3,jalon}}
-			<BOUCLE_saisies(POUR) {tableau #GET{saisies}}>
-			[(#VALEUR|tickets_champ_optionnel_actif|oui) 
-				[(#SAISIE{selection, #VALEUR, 
-					label=[(#VAL{tickets:champ_}|concat{#VALEUR}|_T)], 
-					datas=[(#VALEUR|tickets_champ_optionnel_actif)]})] 
-			] 
-			</BOUCLE_saisies>
-			
-			[(#SAISIE{textarea, texte,
-				label=<:tickets:champ_description:>,
-				explication=<:tickets:explication_description_ticket:>,
-				obligatoire=oui,
-				class=inserer_barre_edition,
-				rows=20})]
-				
-			[(#SAISIE{input, exemple,
-				label=<:tickets:champ_url_exemple:>,
-				explication=<:tickets:explication_url_exemple:>})]	
-		</ul>
+				[(#SAISIE{selection, type,
+					label=<:tickets:champ_type:>,
+					cacher_option_intro=oui,
+					datas=[(#VAL|tickets_liste_type)]})]
+
+				[(#SAISIE{selection, severite,
+					label=<:tickets:champ_severite:>,
+					cacher_option_intro=oui,
+					datas=[(#VAL|tickets_liste_severite)]})]
+
+				#SET{saisies, #ARRAY{0,projet,1,composant,2,version,3,jalon}}
+				<BOUCLE_saisies(POUR) {tableau #GET{saisies}}>
+				[(#VALEUR|tickets_champ_optionnel_actif|oui)
+					[(#SAISIE{selection, #VALEUR,
+						label=[(#VAL{tickets:champ_}|concat{#VALEUR}|_T)],
+						datas=[(#VALEUR|tickets_champ_optionnel_actif)]})]
+				]
+				</BOUCLE_saisies>
+
+				[(#SAISIE{textarea, texte,
+					label=<:tickets:champ_description:>,
+					explication=<:tickets:explication_description_ticket:>,
+					obligatoire=oui,
+					class=inserer_barre_edition,
+					rows=20})]
+
+				[(#SAISIE{input, exemple,
+					label=<:tickets:champ_url_exemple:>,
+					explication=<:tickets:explication_url_exemple:>})]
+			</ul>
 		<!--extra-->
+		</fieldset>
 		<p class='boutons'><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
 	</div></form>
 	</BOUCLE_editable>
