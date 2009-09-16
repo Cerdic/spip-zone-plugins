@@ -1,15 +1,16 @@
 <div id="calendar">
+	<h2><BOUCLE_titre(ARTICLES){id_article}>#TITRE</BOUCLE_titre><:icone_calendrier:><//B_titre></h2>
 	<table summary="<:icone_calendrier:>">
 		<caption>[
 			<a
 				href="(#ENV{self}|parametre_url{#ENV{var_date},[(#ENV{#ENV{var_date},#ENV{date}}|Agenda_moisdecal{-1,'Y-m'})]})"
 				title="[(#ENV{#ENV{var_date},#ENV{date}}|Agenda_moisdecal{-1,'Y-m'}|affdate_mois_annee)]"
-			>&#60;&#60;</a>][
+			>&#171;</a>][
 			(#ENV{#ENV{var_date},#ENV{date}}|affdate_mois_annee)][
 			<a
 				href="(#ENV{self}|parametre_url{#ENV{var_date},[(#ENV{#ENV{var_date},#ENV{date}}|Agenda_moisdecal{1,'Y-m'})]})"
 				title="[(#ENV{#ENV{var_date},#ENV{date}}|Agenda_moisdecal{1,'Y-m'}|affdate_mois_annee)]"
-			>&#62;&#62;</a>]
+			>&#187;</a>]
 		</caption>
 		<thead>
 			<tr>
