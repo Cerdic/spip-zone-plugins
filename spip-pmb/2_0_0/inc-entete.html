@@ -1,12 +1,15 @@
+#CACHE{0}
 <div id="top">
 
 	<a rel="start" href="#URL_SITE_SPIP/">[(#LOGO_SITE_SPIP||image_reduire{500,100}|inserer_attribut{alt,#NOM_SITE_SPIP}|inserer_attribut{title,#NOM_SITE_SPIP}) ]<span id="nom_site_spip">[(#NOM_SITE_SPIP)]</span></a>
 
-[<div class="formulaire_spip formulaire_moncomptepmb">
+<div class="formulaire_spip formulaire_moncomptepmb">
 <h2><:pmb:mon_compte:></h2>
-<form name="myform" method="post" target="_blank" action="(#CONFIG{spip_pmb/url})empr.php">
+<form name="myform" method="post" action="#SELF">
 <fieldset>
 <legend><:pmb:mon_compte:></legend>
+<input type="hidden" name="action" value="connexion_pmb" />
+<input type="hidden" name="redirect" value="#SELF" />
 <ul>
 <li>
 	<label for="pmb-login"><:pmb:pmb_login:> :</label>
@@ -25,7 +28,7 @@
 
 </form>
 
-</div>]
+</div>
 <div class="fonctionnement"><:pmb:comment_ca_fonctionne:></div>
 
 <br class="nettoyeur" />

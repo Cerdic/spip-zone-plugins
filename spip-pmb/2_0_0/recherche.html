@@ -22,9 +22,7 @@
 			<h1>[(#REM|?{'',<:resultats_recherche:>}|image_typo{police=togase.ttf,taille=30,couleur=333300,largeur=600})]</h1>
 			<p class="soustitre">&#171;&nbsp;(#RECHERCHE)&nbsp;&#187;</p>
 		</div>]
-		[(#ENV{recherche_avancee}|=={1}|?{' ',''})
-			<INCLURE{fond=inc-recherche-avancee}{recherche}{env}>
-		]
+		<INCLURE{fond=inc-recherche-avancee}{recherche}{env}>
 		[(#ENV{look_SITE}|=={1}|?{' ',''})
 			<INCLURE{fond=inc-recherche-site}{recherche}{env}>
 		]

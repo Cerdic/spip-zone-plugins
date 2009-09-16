@@ -171,31 +171,25 @@ function pmb_auteur_extraire($id_auteur, $url_base, $pmb_page=1, $mode='auto') {
 
 function pmb_recherche_extraire($recherche, $url_base, $look_FIRSTACCESS='', $look_ALL='', $look_AUTHOR='', $look_PUBLISHER='', $look_COLLECTION='', $look_SUBCOLLECTION='', $look_CATEGORY='', $look_INDEXINT='', $look_KEYWORDS='', $look_TITLE='', $look_ABSTRACT='', $surligne='', $typdoc='', $ok='',$mode='auto') {
 	$tableau_resultat = Array();
-	//$url_page = "index.php?lvl=search_result";
 	if ($surligne) $url_page.="&surligne=".$surligne;
 	if ($typdoc) $url_page.="&typdoc=".$typdoc;
 	if ($ok) $url_page.="&ok=".$ok;
 
-	/*0 (SEARCH_ALL)=tous les champs,
-	1 (SEARCH_TITLE)=titre,
-	2 (SEARCH_AUTHOR)=auteur,
-	3 (SEARCH_EDITOR)=éditeur,
-	4 (SEARCH_COLLECTION)=collection,
-	6 (SEARCH_CATEGORIES)=catégories/mots matières
-	*/
-	$searchType = 0; //par défaut recherche sur tous les champs
-	if ($look_ALL) $searchType = 0;
-	if ($look_TITLE) $searchType = 1;
+	
+	$search = array();
+	
+			
+	if ($look_ALL) $search[] = array("inter"=>"or","field"=>42,"operator"=>"BOOLEAN", "value"=>$recherche);	
+	if ($look_TITLE) $search[] = array("inter"=>"or","field"=>1,"operator"=>"BOOLEAN", "value"=>$recherche);
 	//if ($look_FIRSTACCESS) $url_page.="&look_FIRSTACCESS=".$look_FIRSTACCESS;
-	if ($look_AUTHOR)  $searchType = 2;
-	if ($look_PUBLISHER) $searchType = 3;
-	if ($look_COLLECTION) $searchType = 4;
-	if ($look_ABSTRACT) $searchType = 5;
-	if ($look_CATEGORY) $searchType = 6;
-	/*if ($look_INDEXINT) $url_page.="&look_INDEXINT=".$look_INDEXINT;
-	if ($look_KEYWORDS) $url_page.="&look_KEYWORDS=".$look_KEYWORDS;
-	if ($recherche) $url_page.="&user_query=".$recherche;*/
-
+	if ($look_AUTHOR) $search[] = array("inter"=>"or","field"=>2,"operator"=>"BOOLEAN", "value"=>$recherche);
+	if ($look_PUBLISHER) $search[] = array("inter"=>"or","field"=>3,"operator"=>"BOOLEAN", "value"=>$recherche);
+	if ($look_COLLECTION) $search[] = array("inter"=>"or","field"=>4,"operator"=>"BOOLEAN", "value"=>$recherche);
+	if ($look_ABSTRACT) $search[] = array("inter"=>"or","field"=>10,"operator"=>"BOOLEAN", "value"=>$recherche);
+	if ($look_CATEGORY) $search[] = array("inter"=>"or","field"=>11,"operator"=>"BOOLEAN", "value"=>$recherche);
+	if ($look_INDEXINT) $search[] = array("inter"=>"or","field"=>12,"operator"=>"BOOLEAN", "value"=>$recherche);
+	if ($look_KEYWORDS) $search[] = array("inter"=>"or","field"=>13,"operator"=>"BOOLEAN", "value"=>$recherche);
+	
 
 	/*if ($htmldom = pmb_charger_page($url_base, $url_page,$mode)) {
 			$tableau_resultat[0] = Array();
@@ -235,8 +229,9 @@ function pmb_recherche_extraire($recherche, $url_base, $look_FIRSTACCESS='', $lo
 				if ($i>1) pmb_parser_notice_apercu($res, $tableau_resultat[$i]);
 				$i++;
 			}*/
-			//Recherche dans tous les champs du mot "loup"
-			$r=$ws->pmbesOPACAnonymous_simpleSearch($searchType ,$recherche);
+						
+			$r=$ws->pmbesOPACAnonymous_advancedSearch($search);
+			
 			$searchId=$r["searchId"];
 			$tableau_resultat[0]['nb_resultats'] = $r["nbResults"];
 	    
