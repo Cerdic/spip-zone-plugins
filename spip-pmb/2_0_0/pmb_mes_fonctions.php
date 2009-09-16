@@ -179,34 +179,51 @@ function pmb_recherche_extraire($recherche, $url_base, $look_FIRSTACCESS='', $lo
 	$search = array();
 	
 			
-	if ($look_ALL) $search[] = array("inter"=>"or","field"=>42,"operator"=>"BOOLEAN", "value"=>$recherche);	
-	if ($look_TITLE) $search[] = array("inter"=>"or","field"=>1,"operator"=>"BOOLEAN", "value"=>$recherche);
-	//if ($look_FIRSTACCESS) $url_page.="&look_FIRSTACCESS=".$look_FIRSTACCESS;
-	if ($look_AUTHOR) $search[] = array("inter"=>"or","field"=>2,"operator"=>"BOOLEAN", "value"=>$recherche);
-	if ($look_PUBLISHER) $search[] = array("inter"=>"or","field"=>3,"operator"=>"BOOLEAN", "value"=>$recherche);
-	if ($look_COLLECTION) $search[] = array("inter"=>"or","field"=>4,"operator"=>"BOOLEAN", "value"=>$recherche);
-	if ($look_ABSTRACT) $search[] = array("inter"=>"or","field"=>10,"operator"=>"BOOLEAN", "value"=>$recherche);
-	if ($look_CATEGORY) $search[] = array("inter"=>"or","field"=>11,"operator"=>"BOOLEAN", "value"=>$recherche);
-	if ($look_INDEXINT) $search[] = array("inter"=>"or","field"=>12,"operator"=>"BOOLEAN", "value"=>$recherche);
-	if ($look_KEYWORDS) $search[] = array("inter"=>"or","field"=>13,"operator"=>"BOOLEAN", "value"=>$recherche);
+	if ($look_ALL) {
+		  $search[] = array("inter"=>"or","field"=>42,"operator"=>"BOOLEAN", "value"=>$recherche);	
+		  if ($typdoc) $search[] = array("inter"=>"and","field"=>15,"operator"=>"EQ", "value"=>$typdoc);
+	}
+	if ($look_TITLE) {
+		  $search[] = array("inter"=>"or","field"=>1,"operator"=>"BOOLEAN", "value"=>$recherche);
+		  if ($typdoc) $search[] = array("inter"=>"and","field"=>15,"operator"=>"EQ", "value"=>$typdoc);
+	}
+
+	if ($look_AUTHOR) {
+		  $search[] = array("inter"=>"or","field"=>2,"operator"=>"BOOLEAN", "value"=>$recherche);
+		  if ($typdoc) $search[] = array("inter"=>"and","field"=>15,"operator"=>"EQ", "value"=>$typdoc);
+	}
+    
+	if ($look_PUBLISHER) {
+		  $search[] = array("inter"=>"or","field"=>3,"operator"=>"BOOLEAN", "value"=>$recherche);
+		  if ($typdoc) $search[] = array("inter"=>"and","field"=>15,"operator"=>"EQ", "value"=>$typdoc);
+	}
+
+	if ($look_COLLECTION) {
+		  $search[] = array("inter"=>"or","field"=>4,"operator"=>"BOOLEAN", "value"=>$recherche);
+		  if ($typdoc) $search[] = array("inter"=>"and","field"=>15,"operator"=>"EQ", "value"=>$typdoc);
+	}
+
+	if ($look_ABSTRACT) {
+		  $search[] = array("inter"=>"or","field"=>10,"operator"=>"BOOLEAN", "value"=>$recherche);
+		  if ($typdoc) $search[] = array("inter"=>"AND","field"=>15,"operator"=>"EQ", "value"=>$typdoc);
+	}
+  
+	if ($look_CATEGORY) {
+		  $search[] = array("inter"=>"or","field"=>11,"operator"=>"BOOLEAN", "value"=>$recherche);
+		  if ($typdoc) $search[] = array("inter"=>"and","field"=>15,"operator"=>"EQ", "value"=>$typdoc);
+	}
+
+	if ($look_INDEXINT) {
+		  $search[] = array("inter"=>"or","field"=>12,"operator"=>"BOOLEAN", "value"=>$recherche);
+		  if ($typdoc) $search[] = array("inter"=>"and","field"=>15,"operator"=>"EQ", "value"=>$typdoc);
+	}
+
+	if ($look_KEYWORDS) {
+		  $search[] = array("inter"=>"","field"=>13,"operator"=>"BOOLEAN", "value"=>$recherche);
+		  if ($typdoc) $search[] = array("inter"=>"and","field"=>15,"operator"=>"EQ", "value"=>$typdoc);
+	}
 	
-
-	/*if ($htmldom = pmb_charger_page($url_base, $url_page,$mode)) {
-			$tableau_resultat[0] = Array();
-			$tableau_resultat[0]['nav_bar'] = $htmldom->find('.navbar',0)->outertext;
-			$tableau_resultat[0]['nav_bar'] = pmb_transformer_nav_bar($tableau_resultat[0]['nav_bar']);
-
-			$resultats_recherche = $htmldom->find('.notice-child');
-			$tableau_resultat[0]['nb_resultats'] = count($resultats_recherche);
-			$i = 1;
-			foreach($resultats_recherche as $res) {
-				$tableau_resultat[$i] = Array();				
-				if ($i>1) pmb_parser_notice_apercu($res, $tableau_resultat[$i]);
-				$i++;
-			}	
-	}*/
-
-
+	
 	//récupérer le résultat d'une recherche simple via les webservices
 	
 	global $gtresultat;
@@ -217,19 +234,7 @@ function pmb_recherche_extraire($recherche, $url_base, $look_FIRSTACCESS='', $lo
 	pmb_ws_charger_wsdl($ws);
 	try {	
 			$tableau_resultat[0] = Array();
-			/*$tableau_resultat[0]['nav_bar'] = $htmldom->find('.navbar',0)->outertext;
-			$tableau_resultat[0]['nav_bar'] = pmb_transformer_nav_bar($tableau_resultat[0]['nav_bar']);
-
-			$resultats_recherche = $htmldom->find('.notice-child');
-			
-			$tableau_resultat[0]['nb_resultats'] = count($resultats_recherche);
-			$i = 1;
-			foreach($resultats_recherche as $res) {
-				$tableau_resultat[$i] = Array();				
-				if ($i>1) pmb_parser_notice_apercu($res, $tableau_resultat[$i]);
-				$i++;
-			}*/
-						
+					
 			$r=$ws->pmbesOPACAnonymous_advancedSearch($search);
 			
 			$searchId=$r["searchId"];
