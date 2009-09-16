@@ -11,7 +11,7 @@
 <BOUCLE_to(AUTEURS spip_auteurs_messages){id_message=#GET{id_message}}{tout}{', '}><a href='#URL_AUTEUR'>#NOM</a></BOUCLE_to>
 </span>
 <span class='date'> [(#DATE_HEURE|affdate_jourcourt)] - [(#DATE_HEURE|heures)]h[(#DATE_HEURE|minutes)]</span>
-<h3><a href='[(#SELF|parametre_url{id_message,#ID_MESSAGE})]' onclick="jQuery('#message_#ID_MESSAGE').addClass('on');return false;">#TITRE</a></h3>
+<h3><a href='[(#SELF|parametre_url{id_message,#ID_MESSAGE})]' onclick="jQuery('#message_#ID_MESSAGE').toggleClass('on');return false;">#TITRE</a></h3>
 <span class='intro'>[(#TEXTE|couper{80}|PtoBR)]</span>
 <div class='texte'>#TEXTE</div>
 </div></li>
