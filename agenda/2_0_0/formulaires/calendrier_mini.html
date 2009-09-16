@@ -1,14 +1,15 @@
 <div id="calendar">
-	<h2><BOUCLE_titre(ARTICLES){id_article}>#TITRE</BOUCLE_titre><:icone_calendrier:><//B_titre></h2>
 	<table summary="<:icone_calendrier:>">
 		<caption>[
 			<a
-				href="(#ENV{self}|parametre_url{#ENV{var_date},[(#ENV{date}|Agenda_moisdecal{-1,'Y-m'})]})"
-				title="[(#ENV{date}|Agenda_moisdecal{-1,'Y-m'}|affdate_mois_annee)]">&#171;</a>][
-			(#ENV{date}|affdate_mois_annee)][
+				href="(#ENV{self}|parametre_url{#ENV{var_date},[(#ENV{#ENV{var_date},#ENV{date}}|Agenda_moisdecal{-1,'Y-m'})]})"
+				title="[(#ENV{#ENV{var_date},#ENV{date}}|Agenda_moisdecal{-1,'Y-m'}|affdate_mois_annee)]"
+			>&#60;&#60;</a>][
+			(#ENV{#ENV{var_date},#ENV{date}}|affdate_mois_annee)][
 			<a
-				href="(#ENV{self}|parametre_url{#ENV{var_date},[(#ENV{date}|Agenda_moisdecal{1,'Y-m'})]})"
-				title="[(#ENV{date}|Agenda_moisdecal{1,'Y-m'}|affdate_mois_annee)]">&#187;</a>]
+				href="(#ENV{self}|parametre_url{#ENV{var_date},[(#ENV{#ENV{var_date},#ENV{date}}|Agenda_moisdecal{1,'Y-m'})]})"
+				title="[(#ENV{#ENV{var_date},#ENV{date}}|Agenda_moisdecal{1,'Y-m'}|affdate_mois_annee)]"
+			>&#62;&#62;</a>]
 		</caption>
 		<thead>
 			<tr>
@@ -26,22 +27,22 @@
 				Ainsi que ceux qui sont a cheval (commencent avant, et finissent apres le mois courant)
 			]
 			<BOUCLE_calendrier_debut(EVENEMENTS)
-			{id_article}{id_mot?}
-			{agenda date_debut, mois, (#ENV{date}|annee), (#ENV{date}|mois)}>[
+			{id_article?}{id_mot?}
+			{agenda date_debut, mois, (#ENV{#ENV{var_date},#ENV{date}}|annee), (#ENV{#ENV{var_date},#ENV{date}}|mois)}>[
 			(#DATE_DEBUT|Agenda_memo_full{#DATE_FIN,[(#TITRE|addslashes)],
 				#DESCRIPTIF,#LIEU,
 				[(#ENV{self}|parametre_url{#ENV{var_date},[(#DATE_DEBUT|affdate{'Y-m-d'})]})]})
 			]</BOUCLE_calendrier_debut><BOUCLE_calendrier_fin(EVENEMENTS)
-			{id_article}{id_mot?}
-			{agenda date_fin, mois, (#ENV{date}|annee), (#ENV{date}|mois)}>[
+			{id_article?}{id_mot?}
+			{agenda date_fin, mois, (#ENV{#ENV{var_date},#ENV{date}}|annee), (#ENV{#ENV{var_date},#ENV{date}}|mois)}>[
 			(#DATE_DEBUT|Agenda_memo_full{#DATE_FIN,[(#TITRE|addslashes)],
 				#DESCRIPTIF,#LIEU,
 				[(#ENV{self}|parametre_url{#ENV{var_date},[(#DATE_DEBUT|affdate{'Y-m-d'})]})]})
 			]</BOUCLE_calendrier_fin>
-			#SET{'borne_debut_mois', (#ENV{date}|Agenda_moisdecal{0,'Y-m-d'})}
-			#SET{'borne_fin_mois', (#ENV{date}|Agenda_moisdecal{1,'Y-m-d'})}
+			#SET{'borne_debut_mois', (#ENV{#ENV{var_date},#ENV{date}}|Agenda_moisdecal{0,'Y-m-d'})}
+			#SET{'borne_fin_mois', (#ENV{#ENV{var_date},#ENV{date}}|Agenda_moisdecal{1,'Y-m-d'})}
 			<BOUCLE_calendrier(EVENEMENTS)
-			{id_article}{id_mot?}
+			{id_article?}{id_mot?}
 			{date_debut < #GET{'borne_debut_mois'}} 
 			{date_fin >= #GET{'borne_fin_mois'}}>[
 			(#DATE_DEBUT|Agenda_memo_full{#DATE_FIN,[(#TITRE|addslashes)],
@@ -50,7 +51,7 @@
 			]</BOUCLE_calendrier>
 			
 			[(#REM) Puis on les affiche dans un agenda]
-			[(#ENV{date}|agenda_mini)]
+			[(#ENV{#ENV{var_date},#ENV{date}}|agenda_mini)]
 			
 		</tbody>
 	</table>
