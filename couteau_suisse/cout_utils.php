@@ -541,7 +541,6 @@ function cs_parse_code_js($code) {
 	while(preg_match(',%%([a-zA-Z_][a-zA-Z0-9_]*)%%,U', $code, $matches)) {
 		// la valeur de la variable n'est stockee dans les metas qu'au premier post
 		if (isset($metas_vars[$matches[1]])) {
-			//$rempl = cs_get_code_variable($matches[1], $metas_vars[$matches[1]]);
 			// la valeur de la variable est directement inseree dans le code js
 			$rempl = $metas_vars[$matches[1]];
 		} else {
