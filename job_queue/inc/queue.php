@@ -91,8 +91,8 @@ function queue_remove_job($id_job){
  */
 function queue_start_job($row){
 
-	// deserialiser les arguments
-	$arguments = unserialize($arguments);
+// deserialiser les arguments
+	$arguments = unserialize($row['args']);
 	if ($arguments===false){
 		spip_log('arguments job errones '.var_export($row,true),'queue');
 		$arguments = array();
@@ -131,6 +131,9 @@ function queue_schedule(){
 		return;
 
 	$max_time = ini_get('max_execution_time')/2;
+	// valeur conservatrice si on a pas reussi a lire le max_execution_time
+	if (!$max_time) $max_time=5;
+	$max_time = min($max_time,15); // une valeur maxi en temps.
 
 	// attraper les jobs
 	// dont la date est passee (echus en attente),
@@ -147,15 +150,15 @@ function queue_schedule(){
 			if (sql_delete('spip_jobs','id_job='.intval($row['id_job']))){
 				// on a la main sur le job :
 				// l'executer
-				$res = queue_start_job($row);
+				$result = queue_start_job($row);
 
 				// est-ce une tache cron qu'il faut relancer ?
 				if ($periode = queue_is_cron_job($row['fonction'],$row['inclure'])){
 					// relancer avec les nouveaux arguments de temps
 					include_spip('inc/genie');
-					if ($res<0)
+					if ($result<0)
 						// relancer tout de suite, mais en baissant la priorite
-						queue_genie_replan_job($row['fonction'],$periode,0-$res/*last*/,0/*ASAP*/,$row['priorite']-1);
+						queue_genie_replan_job($row['fonction'],$periode,0-$result/*last*/,0/*ASAP*/,$row['priorite']-1);
 					else
 						// relancer avec la periode prevue
 						queue_genie_replan_job($row['fonction'],$periode,time());

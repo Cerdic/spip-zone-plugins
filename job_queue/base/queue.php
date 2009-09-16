@@ -60,9 +60,9 @@ function queue_upgrade($nom_meta_base_version,$version_cible){
 }
 
 function queue_vider_tables($nom_meta_base_version) {
+	effacer_meta('queue_next_job_time');
 	effacer_meta($nom_meta_base_version);
-	sql_drop("TABLE spip_jobs");
-	ecrire_metas();
+	sql_drop_table("spip_jobs");
 }
 
 
