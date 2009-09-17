@@ -54,6 +54,7 @@ function queue_add_job($function, $description, $arguments = array(), $file = ''
 
 	$id_job = sql_insertq('spip_jobs',array(
 			'fonction'=>$function,
+			'descriptif'=>$description,
 			'args'=>$arguments,
 			'inclure'=>$file,
 			'priorite'=>max(-10,min(10,intval($priority))),

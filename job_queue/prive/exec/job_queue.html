@@ -1,0 +1,21 @@
+[(#REM)
+
+  Squelette
+  (c) 2009 xxx
+  Distribue sous licence GPL
+
+]
+<h1>Job Queue</h1>
+<B_jobs>
+	[<p class="pagination">(#PAGINATION)</p>]
+	<ul class="liste_items">
+		<BOUCLE_jobs(JOBS){par date}{pagination 20}>
+			<li class="item">
+				<div class="date">[(#DATE|date_relative)]</div>
+				[<strong class="description">(#DESCRIPTIF|PtoBR)</strong>]
+				[<span class="small">| #FONCTION((#ARGS|unserialize|implode{','}))</span>]
+			</li>
+		</BOUCLE_jobs>
+	</ul>
+	[<p class="pagination">(#PAGINATION)</p>]
+</B_jobs>
