@@ -135,7 +135,7 @@ function typoenluminee_pre_propre($texte) {
 	// Conversion des intertitres d'enluminures type {ß{titre}ß}
 	// ou ß est un nombre en intertitres avec des étoiles type {{{* (avec ß étoiles)
 	// {1{ sera converti en {{{* ; {2{ sera converti en {{{** ; etc.
-	$texte=preg_replace_callback ("/(\{(\d)\{)(.*?)(\}\\2\})/",
+	$texte=preg_replace_callback ("/(\{(\d)\{)(.*?)(\}\d\})/",
 					create_function (
 						'$matches',
 						'return "{{{".str_repeat("*",$matches[2]).$matches[3]."}}}";'
