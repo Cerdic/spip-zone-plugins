@@ -18,7 +18,7 @@ $GLOBALS['formulaires_no_spam'][] = 'forum';
  */
 function nospam_recuperer_fond($flux){
 	// determiner le nom du formulaire
-	$fond = $flux['args']['fond'];
+	$fond = strval($flux['args']['fond']);
 	if (false !== $pos = strpos($fond, 'formulaires/')) {
 		$form = substr($fond, $pos + 12);
 		if (in_array($form, $GLOBALS['formulaires_no_spam'])){
