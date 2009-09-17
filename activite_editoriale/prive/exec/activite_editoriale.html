@@ -1,0 +1,32 @@
+#CACHE{0}
+<h1>Activité éditoriale</h1>
+
+<div>
+  <h2>Rubriques n'ayant pas été mises à jour</h2>
+	<div class='cadre cadre-liste' style='margin-top: 20px;'>
+		<table width='100%' cellpadding='2' cellspacing='0' border='0'>
+		  <thead>
+		    <tr>
+		      <th>Rubrique</th>
+		      <th>Responsable(s)</th>
+		      <th>Délai</th>
+		      <th>Dernière MàJ</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+	      <BOUCLE_rubriques(RUBRIQUES){tout}{par maj}>
+	        [(#MAJ|age_rubrique|>={#EXTRAS_DELAI}|oui)
+	          <INCLURE{fond=prive/exec/activite_editoriale_rubrique}{id_rubrique}>
+	        ]
+	      </BOUCLE_rubriques>
+		  </tbody>
+		</table>
+	</div>
+</div>
+
+
+<!--#navigation-->
+<!--/#navigation-->
+
+<!--#extra-->
+<!--/#extra-->
