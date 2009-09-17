@@ -11,8 +11,7 @@ function tickets_autoriser(){}
 function definir_autorisations_tickets($action,$utiliser_defaut=true){
 	$aut = null;
 
-	switch(strtolower($action))
-	{
+	switch(strtolower($action)){
 		case 'ecrire':
 			$define = (defined('_TICKETS_AUTORISATION_ECRIRE')) ? _TICKETS_AUTORISATION_ECRIRE : ($utiliser_defaut ? '0minirezo':'');
 			break;
@@ -33,15 +32,17 @@ function definir_autorisations_tickets($action,$utiliser_defaut=true){
 			break;
 	}
 
-	$liste = explode(':', $define);
-	if (in_array('webmestre', $liste))
-		$aut['auteur'] = explode(':', _ID_WEBMESTRES);
-	else if (in_array('0minirezo', $liste))
-		$aut['statut'] = array('0minirezo');
-	else if (in_array('1comite', $liste))
-		$aut['statut'] = array('0minirezo', '1comite');
-	else
-		$aut['auteur'] = $liste;
+	if($define){
+		$liste = explode(':', $define);
+		if (in_array('webmestre', $liste))
+			$aut['auteur'] = explode(':', _ID_WEBMESTRES);
+		else if (in_array('0minirezo', $liste))
+			$aut['statut'] = array('0minirezo');
+		else if (in_array('1comite', $liste))
+			$aut['statut'] = array('0minirezo', '1comite');
+		else
+			$aut['auteur'] = $liste;
+	}
 
 	return $aut;
 }
@@ -194,9 +195,11 @@ function autoriser_ticket_modifier_dist($faire, $type, $id, $qui, $opt){
 
 	// Si l'auteur en question est l'auteur assigné au ticket,
 	// il peut modifier le ticket
-	$id_assigne = sql_getfetsel('id_assigne','spip_tickets','id_ticket='.intval($id));
-	if($id_assigne=$qui['id_auteur']){
-		return true;
+	if(intval($id)){
+		$id_assigne = sql_getfetsel('id_assigne','spip_tickets','id_ticket='.intval($id));
+		if($id_assigne && ($id_assigne == $qui['id_auteur'])){
+			return true;
+		}
 	}
 	// Utilisation du CFG si possible
 	if(function_exists('lire_config')){
@@ -236,7 +239,6 @@ function autoriser_ticket_modifier_dist($faire, $type, $id, $qui, $opt){
 		$autorise = in_array($qui['statut'], $liste['statut']);
 	else if ($liste['auteur'])
 		$autorise = in_array($qui['id_auteur'], $liste['auteur']);
-
 	return $autorise;
 }
 
