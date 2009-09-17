@@ -558,13 +558,39 @@ function pmb_notice_extraire ($id_notice, $url_base, $mode='auto') {
 	$tableau_resultat = Array();
 	
 	pmb_ws_charger_wsdl($ws);
-	//if ($htmldom = pmb_charger_page($url_base, "index.php?lvl=notice_display&seule=1&id=".$id_notice, $mode)) {
-		 //pmb_parser_notice($id_notice, $htmldom->find('#notice',0), $tableau_resultat);	
-		 pmb_ws_recuperer_notice($id_notice, $ws, $tableau_resultat);
-	//}
+	pmb_ws_recuperer_notice($id_notice, $ws, $tableau_resultat);
 	return $tableau_resultat;
 			
 }
+
+// retourne un tableau associatif contenant tous les champs d'une notice 
+function pmb_prets_extraire ($session_id, $url_base, $type_pret=0) {
+	$tableau_resultat = Array();
+	pmb_ws_charger_wsdl($ws);
+	$loans = $ws->pmbesOPACEmpr_list_loans($session_id, $type_pret);
+	$cpt = 0;
+	foreach ($loans as $loan) {
+	      $tableau_resultat[$cpt] = Array();
+	      $tableau_resultat[$cpt]['empr_id'] = $loan->empr_id;
+	      $tableau_resultat[$cpt]['notice_id'] = $loan->notice_id;
+	      $tableau_resultat[$cpt]['bulletin_id'] = $loan->bulletin_id;
+	      $tableau_resultat[$cpt]['expl_id'] = $loan->expl_id;
+	      $tableau_resultat[$cpt]['expl_cb'] = $loan->expl_cb;
+	      $tableau_resultat[$cpt]['expl_support'] = $loan->expl_support;
+	      $tableau_resultat[$cpt]['expl_location_id'] = $loan->expl_location_id;
+	      $tableau_resultat[$cpt]['expl_location_caption'] = $loan->expl_location_caption;
+	      $tableau_resultat[$cpt]['expl_section_id'] = $loan->expl_section_id;
+	      $tableau_resultat[$cpt]['expl_section_caption'] = $loan->expl_section_caption;
+	      $tableau_resultat[$cpt]['expl_libelle'] = $loan->expl_libelle;
+	      $tableau_resultat[$cpt]['loan_startdate'] = $loan->loan_startdate;
+	      $tableau_resultat[$cpt]['loan_returndate'] = $loan->loan_returndate;
+	      $cpt++;
+	}
+
+	return $tableau_resultat;
+			
+}
+
 
 
 function pmb_notice_champ ($tableau_resultat, $champ) {
@@ -576,9 +602,6 @@ function pmb_tableau2_valeur ($tableau_resultat, $indice1, $indice2) {
 /*mettre le champ de recherche au format de pmb */
 function pmb_prepare_recherche ($recherche) {
 	$recherche = str_replace("+"," ",$recherche);
-	$recherche = str_replace(" ","%20",$recherche);
-	//$recherche = htmlentities($recherche);
-	//$recherche = unicode2charset(charset2unicode($recherche, 'utf-8'),'iso-8859-1');
 	return $recherche;
 }
 

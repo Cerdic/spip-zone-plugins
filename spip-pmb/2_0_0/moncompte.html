@@ -1,0 +1,95 @@
+#CACHE{0}
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+<title>Mon Compte - [(#NOM_SITE_SPIP|textebrut)]</title>
+<INCLURE{fond=inc-head}>
+</head>
+
+<body class="page_moncompte">
+<div id="page">
+	
+	[(#REM) Contenu principal ]
+    <div class="hfeed" id="conteneur">
+    <div class="hentry" id="contenu">
+    
+        [(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}>
+
+	[(#REM) Fil d'Ariane ]
+        <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <strong class="on">Mon compte</strong></div>
+
+        			
+
+	<div class="cartouche">
+            <div class="surlignable">
+				<h1 class="#EDIT{titre} entry-title[ (#TITRE|strlen|>{30}|?{'titre-long',''})]">[(#REM|sinon{Mon compte}|ucfirst|image_typo{police=togase.ttf,taille=30,couleur=333300,largeur=600})]</h1>
+				
+            </div>
+
+           
+            
+        </div>
+		
+        
+
+	
+
+	 
+	<div class="corps-conteneur surlignable">
+		
+		[<div class="#EDIT{texte} texte entry-content">(#TEXTE|image_reduire{500,0})</div>]
+
+
+	</div>
+
+
+		<div class="ps surlignable"><h2 class="pas_surlignable">Informations personnelles</h2>
+		<div>
+		      Pr&eacute;nom : #SESSION{pmb_firstname}<br />
+		      Nom : #SESSION{pmb_lastname}<br />
+		      Adresse 1 : #SESSION{pmb_address_part1}<br />
+		      Adresse 2 : #SESSION{pmb_address_part2}<br />
+		      CP : #SESSION{pmb_address_cp}<br />
+		      Ville : #SESSION{pmb_address_city}<br />
+		      T&eacute;l&eacute;phone 1 : #SESSION{pmb_phone_number1}<br />
+		      T&eacute;l&eacute;phone 2 : #SESSION{pmb_phone_number2}<br />
+		      Email : #SESSION{pmb_email}<br />
+		      Ann&eacute;e de naissance : #SESSION{pmb_birthyear}<br />
+		      Lieu : #SESSION{pmb_location_caption}<br />
+		      Date d'adh&eacute;sion : #SESSION{pmb_adhesion_date}<br />
+		      Date d'expiration : #SESSION{pmb_expiration_date}<br />
+		      
+		</div></div>
+        
+		[(#SET{tab_prets,[(#SESSION{pmb_session}|pmb_prets_extraire{#CONFIG{spip_pmb/url},2})]})]
+		<div class="ps surlignable"><h2 class="pas_surlignable">Livres emprunt&eacute;s</h2>
+		<div>[(#GET{tab_prets}|pmb_tableau2_valeur{0,expl_libelle})]
+		      <BOUCLE_tab_resultat(POUR){tableau #GET{tab_prets}}>
+			 res#COMPTEUR_BOUCLE<br /> [(#GET{tab_prets}|pmb_tableau2_valeur{#CLE,expl_libelle})]
+		      </BOUCLE_tab_resultat>
+		</div></div>
+
+		<div class="ps surlignable"><h2 class="pas_surlignable">Livres en retard</h2><div></div></div>
+
+		<br class="nettoyeur" />
+
+	</div><!--#contenu-->
+	</div><!--#conteneur-->
+
+
+    [(#REM) Menu de navigation laterale ]
+    <div id="navigation">
+
+        [(#REM) Menu de navigation par rubriques ]
+        <INCLURE{fond=inc-rubriques}{env}>
+
+    </div><!--#navigation-->
+
+    <br class="nettoyeur" />
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
+</div><!--#page-->
+</body>
+</html>
