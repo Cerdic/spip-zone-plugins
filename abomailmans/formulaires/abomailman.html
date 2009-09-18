@@ -1,14 +1,14 @@
-<div class="formulaire_spip ajax" id="formulaire_spipicious[_(#ENV{type})][_(#ENV{id_objet})]">
-	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+<div class="formulaire_spip ajax" id="formulaire_abomailman">
+	[<div class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</div>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	[(#ENV{editable}|oui)
 	<form method='post' action='#ENV{action}' enctype='multipart/form-data' id='abomailmansListes'>
 		<div>
-		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<fieldset>
-			<legend><:abomailmans:insciption_lettres_legende:></legend>
+			<legend><:abomailmans:inscription_lettres_legende:></legend>
 				<ul>
 					<li class="abomailman_nom[ (#ENV**{erreurs}|table_valeur{nom}|oui)erreur]">
 						<label for="nom"><:abomailmans:nom:></label>
