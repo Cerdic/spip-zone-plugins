@@ -1,6 +1,8 @@
 <?php
 include_spip('base/pmb_tables');
 
+include_spip('inc/session');
+
 function pmb_transformer_nav_bar($nav_bar) {
 	//si une seule page, on retourne vide
 	if (strpos($nav_bar,"1/1")) return "";
@@ -562,7 +564,7 @@ function pmb_notice_extraire ($id_notice, $url_base, $mode='auto') {
 function pmb_prets_extraire ($session_id, $url_base, $type_pret=0) {
 	$tableau_resultat = Array();
 	pmb_ws_charger_wsdl($ws, $url_base);
-	$loans = $ws->pmbesOPACEmpr_add_resa($session_id, $type_pret);
+	$loans = $ws->pmbesOPACEmpr_list_loans($session_id, $type_pret);
 	$cpt = 0;
 	foreach ($loans as $loan) {
 	      $tableau_resultat[$cpt] = Array();
@@ -585,7 +587,36 @@ function pmb_prets_extraire ($session_id, $url_base, $type_pret=0) {
 	return $tableau_resultat;
 			
 }
+function pmb_reservations_extraire($pmb_session, $url_base) {
+	$tableau_resultat = Array();
+	pmb_ws_charger_wsdl($ws, $url_base);
+	$reservations = $ws->pmbesOPACEmpr_list_resas($pmb_session);
 
+	$cpt = 0;
+	foreach ($reservations as $reservation) {
+	      $tableau_resultat[$cpt] = Array();
+	      $tableau_resultat[$cpt]['resa_id'] = $reservation->resa_id;
+	      $tableau_resultat[$cpt]['empr_id'] = $reservation->empr_id;
+	      $tableau_resultat[$cpt]['notice_id'] = $reservation->notice_id;
+	      $tableau_resultat[$cpt]['bulletin_id'] = $reservation->bulletin_id;
+	      $tableau_resultat[$cpt]['resa_rank'] = $reservation->resa_rank;
+	      $tableau_resultat[$cpt]['resa_dateend'] = $reservation->resa_dateend;
+	      $tableau_resultat[$cpt]['resa_retrait_location_id '] = $reservation->resa_retrait_location_id ;
+	      $tableau_resultat[$cpt]['resa_retrait_location'] = $reservation->resa_retrait_location;
+	   
+	      $cpt++;
+	}
+
+	return $tableau_resultat;
+
+}
+function pmb_tester_session($pmb_session, $url_base) {
+	pmb_ws_charger_wsdl($ws, $url_base);
+	if (!$ws->pmbesOPACEmpr_get_account_info($pmb_session)) {
+	    
+		return 0;
+	} else return 1;
+}
 function pmb_reserver_ouvrage($session_id, $notice_id, $bulletin_id, $location, $url_base) {
 	pmb_ws_charger_wsdl($ws, $url_base);
 	return $ws->pmbesOPACEmpr_add_resa($session_id, $notice_id, $bulletin_id, $location);
