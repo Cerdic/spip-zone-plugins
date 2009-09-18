@@ -2,9 +2,9 @@
 include_spip('base/abstract_sql');
 
 /**
- * 
+ *
  * Transforme les /n en <br />
- * 
+ *
  */
 function n_to_br($texte){
 	$texte = str_replace("\n", "<br />", $texte);
@@ -12,10 +12,10 @@ function n_to_br($texte){
 }
 
 /**
- * 
+ *
  * Donne le nom d'un pays en fonction de son id
- * 
- * @return false|string false dans le cas ou il ne reçoit pas de paramètres ou si le paramètre n'est pas bon 
+ *
+ * @return false|string false dans le cas ou il ne reçoit pas de paramètres ou si le paramètre n'est pas bon
  * @param int $id_pays L'id_pays de la table spip_geo_pays
  */
 function id_pays_to_pays($id_pays){
@@ -27,11 +27,11 @@ function id_pays_to_pays($id_pays){
 }
 
 /**
- * 
+ *
  * Récupère la valeur d'un champs d'un auteur si on ne possède que le nom du champs
  * Dans le cas de la boucle FOR par exemple
- * 
- * @return 
+ *
+ * @return
  * @param object $champs
  * @param object $id_auteur
  */
@@ -40,12 +40,10 @@ function inscription2_recuperer_champs($champs,$id_auteur){
 		$champs = 'spip_auteurs.login';
 	}
 	if($champs == 'pays'){
-		spip_log('champs = pays');
 		$resultat = sql_getfetsel("b.nom","spip_auteurs_elargis a LEFT JOIN spip_geo_pays b on a.pays = b.id_pays","a.id_auteur=$id_auteur");
 		return typo($resultat);
 	}
 	if($champs == 'pays_pro'){
-		spip_log('champs = pays_pro');
 		$resultat = sql_getfetsel("b.nom","spip_auteurs_elargis a LEFT JOIN spip_geo_pays b on a.pays_pro = b.id_pays","a.id_auteur=$id_auteur");
 		return typo($resultat);
 	}
@@ -54,11 +52,11 @@ function inscription2_recuperer_champs($champs,$id_auteur){
 }
 
 /**
- * 
+ *
  * Fonction utilisée par le critère i2_recherche
- * 
+ *
  * @return array Le tableau des auteurs correspondants aux critères de recherche
- * @param string $quoi[optional] Le contenu textuel recherché 
+ * @param string $quoi[optional] Le contenu textuel recherché
  * @param object $ou[optional] Le champs dans lequel on recherche
  * @param object $table[optional]
  */
@@ -81,14 +79,14 @@ function i2_recherche($quoi=NULL,$ou=NULL,$table=NULL){
 				}
 			}
 		}
-		return "($auteurs)";	
+		return "($auteurs)";
 	}
 }
 
 /**
- * 
+ *
  * Critère utilisé pour rechercher dans les utilisateurs (page ?exec=inscription2_adherents)
- * 
+ *
  */
 function critere_i2_recherche_dist($idb, &$boucles){
 	$boucle = &$boucles[$idb];

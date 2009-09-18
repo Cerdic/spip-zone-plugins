@@ -1,12 +1,10 @@
 <?php
 
 /**
-* Plugin Inscription2
+* Plugin Inscription2 pour SPIP
 *
-* Copyright (c) 2007-2008
+* Copyright (c) 2007-2009 - Licence GPL v3
 * Sergio and co
-* Ce programme est un logiciel libre distribue sous licence GNU/GPL.
-* Pour plus de details voir le fichier COPYING.txt.
 *
 **/
 

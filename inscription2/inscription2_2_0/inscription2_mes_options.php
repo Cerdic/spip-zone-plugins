@@ -3,9 +3,9 @@
 include_spip('base/abstract_sql');
 
 /**
- * 
+ *
  * Déclaration des pipelines introduits par le plugin inscription2
- * 
+ *
  */
 
 // Sélectionne les champs qui ne doivent pas être créés dans la tables auteurs_elargis
@@ -24,14 +24,14 @@ $GLOBALS['spip_pipeline']['i2_confirmation'] = '';
 $GLOBALS['spip_pipeline']['i2_cfg_form'] = '';
 $GLOBALS['spip_pipeline']['i2_form_debut'] = '';
 $GLOBALS['spip_pipeline']['i2_form_fin'] = '';
- 
+
 /**
- * 
+ *
  * Surcharge de la boucle auteurs (à l'origine: http://doc.spip.org/@boucle_AUTEURS_dist)
  * <BOUCLE(AUTEURS)>
  * Création d'une jointure automatique avec spip_auteurs_elargis
- * 
- * @return 
+ *
+ * @return
  * @param object $id_boucle
  * @param object $boucles
  */
@@ -60,15 +60,15 @@ function boucle_AUTEURS($id_boucle, &$boucles) {
 		array_unshift($boucle->where,array("'!='", "'$mstatut'", "'\\'5poubelle\\''"));
 	}
 
-	return calculer_boucle($id_boucle, $boucles); 
+	return calculer_boucle($id_boucle, $boucles);
 }
 
 /**
- * 
+ *
  * Autorisation pour la table spip_auteurs_elargis
  * Autorise les visiteurs a modifier leurs infos dans cette table
- * 
- * @return 
+ *
+ * @return
  * @param object $faire
  * @param object $type
  * @param object $id
@@ -85,11 +85,11 @@ if (!function_exists('autoriser_spip_auteurs_elargis')) {
 }
 
 /**
- * 
+ *
  * Autorisation de modification pour la table spip_auteurs
  * Autorise les visiteurs a modifier leurs infos dans cette table
- * 
- * @return 
+ *
+ * @return
  * @param object $faire
  * @param object $type
  * @param object $id

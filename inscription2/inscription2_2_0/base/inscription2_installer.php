@@ -1,24 +1,33 @@
 <?php
+/**
+ * Plugin Inscription2 pour SPIP
+ * Licence GPL v3
+ *
+ */
 
 $GLOBALS['inscription2_version'] = 0.71;
 
+/**
+ * Fonction d'installation et de mise à jour du plugin
+ * @return
+ */
 function inscription2_upgrade(){
 	spip_log('INSCRIPTION 2 : installation','inscription2');
 	$exceptions_des_champs_auteurs_elargis = pipeline('i2_exceptions_des_champs_auteurs_elargis',array());
 	include_spip('cfg_options');
-	
+
 	//On force le fait d accepter les visiteurs
 	$accepter_visiteurs = $GLOBALS['meta']['accepter_visiteurs'];
 	if($accepter_visiteurs != 'oui'){
 		ecrire_meta("accepter_visiteurs", "oui");
 	}
-	
+
 	$version_base = $GLOBALS['inscription2_version'];
 	$current_version = 0.0;
 
 	//insertion des infos par defaut
 	$inscription2_meta = $GLOBALS['meta']['inscription2'];
-	
+
 	//Certaines montées de version ont oublié de corriger la meta de I2
 	//si ce n'est pas un array alors il faut reconfigurer la meta
 	if ($inscription2_meta && !is_array(unserialize($inscription2_meta))) {
@@ -32,12 +41,12 @@ function inscription2_upgrade(){
 	if ( (isset($GLOBALS['meta']['inscription2_version']) )
 		&& (($current_version = $GLOBALS['meta']['inscription2_version'])==$version_base))
 	return;
-		
+
 	//Si c est une nouvelle installation toute fraiche
 	if ($current_version==0.0){
 		//inclusion des fonctions pour les requetes sql
 		include_spip('base/abstract_sql');
-		
+
 		// à passer en sous plugin
 
 		if(!$inscription2_meta){
@@ -69,13 +78,13 @@ function inscription2_upgrade(){
 				))
 			);
 		}
-	
+
 		//inserer les auteurs qui existent deja dans la table spip_auteurs en non pas dans la table elargis
 		$s = sql_select("a.id_auteur","spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur=b.id_auteur","b.id_auteur is null");
 		while($q = sql_fetch($s)){
 			sql_insertq("spip_auteurs_elargis",array('id_auteur' => $q['id_auteur']));
 		}
-		
+
 		/** Inscription 2 (0.70)
 		 * Les pays sont maintenant pris dans le plugin Geographie
 		 * On ne les installe si le plugin n'est pas actif,
@@ -94,17 +103,20 @@ function inscription2_upgrade(){
 		include(_DIR_PLUGIN_INSCRIPTION2."/inc/pays.php");
 		$table_pays = "spip_geo_pays";
 		$descpays = sql_showtable($table_pays, '', false);
-		
+
 		$descpays_old = sql_showtable('spip_pays', '', false);
 		if(isset($descpays_old['field'])){
 			sql_drop_table("spip_pays");
 		}
-		
+
 		if(!isset($descpays['field']['pays'])){
-			spip_query("CREATE TABLE spip_geo_pays (id_pays SMALLINT NOT NULL AUTO_INCREMENT PRIMARY KEY, nom varchar(255) NOT NULL );");
+			sql_create("spip_geo_pays",
+				array("id_pays"=> "SMALLINT NOT NULL AUTO_INCREMENT","nom" => "varchar(255) NOT NULL"),
+				array('PRIMARY KEY' => "id_pays")
+			);
 			spip_query("INSERT INTO spip_geo_pays (nom) VALUES (\"".join('"), ("',$liste_pays)."\")");
 		}
-		
+
 		echo "Inscription2 update @ 0.6<br/>Spip_pays devient spip_geo_pays homogeneite avec spip_geo";
 		ecrire_meta('inscription2_version',$current_version=0.6);
 	}
@@ -113,11 +125,11 @@ function inscription2_upgrade(){
 		include_spip('base/abstract_sql');
 		$table_pays = "spip_geo_pays";
 		$descpays = sql_showtable($table_pays, '', false);
-		
+
 		if((isset($descpays['field']['nom'])) && (!isset($descpays['field']['pays']))){
 			sql_alter("TABLE spip_geo_pays CHANGE nom pays varchar(255) NOT NULL");
 		}
-		
+
 		echo "Inscription2 update @ 0.61<br/>On retablit le champs pays sur la table pays et pas nom";
 		ecrire_meta('inscription2_version',$current_version=0.61);
 	}
@@ -131,7 +143,7 @@ function inscription2_upgrade(){
 	if ($current_version<0.65){
 		ecrire_meta('inscription2_version',$current_version=0.65);
 	}
-	
+
 	if ($current_version<0.71){
 		/*
 		 * Reinstaller les pays de Geographie
@@ -141,21 +153,27 @@ function inscription2_upgrade(){
 		spip_log("Inscription2 update @ 0.71 : installation de la table pays de geographie", "maj");
 		ecrire_meta('inscription2_version',$current_version=0.71);
 	}
-	
+
 	ecrire_metas();
-	
+
 	// Creation de la table et des champs
 	$verifier_tables = charger_fonction('inscription2_verifier_tables','inc');
 	$verifier_tables();
 }
 
 
-//supprime les donnees depuis la table spip_auteurs_elargis
+/**
+ * Fonction de suppession du plugin
+ *
+ * Supprime les donnees de la table spip_auteurs_elargis
+ * Supprime la table si plus nécessaire
+ * Supprime la table des pays si nécessaire
+ */
 function inscription2_vider_tables() {
 	$exceptions_des_champs_auteurs_elargis = pipeline('i2_exceptions_des_champs_auteurs_elargis',array());
 	include_spip('cfg_options');
 	include_spip('base/abstract_sql');
-	
+
 	//supprime la table spip_auteurs_elargis
 	if (is_array(lire_config('inscription2'))){
 		$clef_passee = array();
@@ -200,11 +218,11 @@ function i2_installer_pays() {
 		include_spip('imports/pays');
 		include_spip('inc/charset');
 		foreach($GLOBALS['liste_pays'] as $k=>$p)
-			sql_insertq('spip_geo_pays',array('id_pays'=>$k,'nom'=>unicode2charset(html2unicode($p))));		
+			sql_insertq('spip_geo_pays',array('id_pays'=>$k,'nom'=>unicode2charset(html2unicode($p))));
 	}
 }
 
-/*
+/**
  * Surcharge de l'installe de SPIP par defaut
  * car inscription2 gere une seconde meta pour tester son installation correcte.
  */

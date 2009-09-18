@@ -1,4 +1,9 @@
 <?php
+/**
+ * Plugin Inscription2
+ * Licence GPL v3
+ *
+ */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
@@ -73,6 +78,7 @@ function inscription2_editer_contenu_objet($flux){
  *
  * Insertion dans le pipeline post_edition
  * ajouter les champs inscription2 soumis lors de la soumission du formulaire CVT editer_auteur
+ *
  * @return
  * @param object $flux
  */
@@ -82,7 +88,7 @@ function inscription2_post_edition($flux){
 		$exceptions_des_champs_auteurs_elargis = pipeline('i2_exceptions_des_champs_auteurs_elargis',array());
 		$id_auteur = $flux['args']['id_objet'];
 		foreach(lire_config('inscription2',array()) as $cle => $val){
-			$cle = ereg_replace("_(obligatoire|fiche|table).*$", "", $cle);
+			$cle = preg_replace("/_(obligatoire|fiche|table).*/", "", $cle);
 			if($val=='on' AND !in_array($cle,$exceptions_des_champs_auteurs_elargis) and !ereg("^(categories|zone|newsletter).*$", $cle)){
 				$var_user[$cle] = _request($cle);
 				if(is_array(_request($cle))){
