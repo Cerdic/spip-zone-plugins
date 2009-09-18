@@ -89,12 +89,31 @@
 
 	<br class="nettoyeur" />
 
-	[<div class="pmb-exemplaires">
+	
+
+	[(#SET{tab_exemplaires, [(#GET{notice}|pmb_notice_champ{'tab_exemplaires'})]})]
+	<B_tab_exemplaires>
+	<div class="pmb-exemplaires">
 		<h2><:pmb:exemplaires:></h2>
+		<table cellpadding='2' class='exemplaires' width='100%'>
+		    <tr><th class='expl_header_expl_cb'>Code barre</th><th class='expl_header_expl_cote'>Cote</th><th class='expl_header_tdoc_libelle'>Support</th><th class='expl_header_location_libelle'>Localisation</th><th class='expl_header_section_libelle'>Section</th><th>Disponibilité</th></tr>
 
-		(#GET{notice}|pmb_notice_champ{'exemplaires'})
-	</div>]
+		    <BOUCLE_tab_exemplaires(POUR){tableau #GET{tab_exemplaires}}>
+			  <tr>
+				    <td class='expl_cb'>[(#GET{tab_exemplaires}|pmb_tableau2_valeur{#CLE, expl_cb})]</td>
+				    <td class='expl_cote'>[(#GET{tab_exemplaires}|pmb_tableau2_valeur{#CLE, expl_cote})]</td>
+				    <td class='tdoc_libelle'>[(#GET{tab_exemplaires}|pmb_tableau2_valeur{#CLE, tdoc_libelle})]</td>
+				    <td class='location_libelle'>[(#GET{tab_exemplaires}|pmb_tableau2_valeur{#CLE, location_libelle})]</td>
+				    <td class='section_libelle'>[(#GET{tab_exemplaires}|pmb_tableau2_valeur{#CLE, section_libelle})]</td>
+				    <td class='expl_situation'><strong>[(#GET{tab_exemplaires}|pmb_tableau2_valeur{#CLE, expl_situation})]</strong></td>
+			  </tr>
 
+		    </BOUCLE_tab_exemplaires>
+		</table>
+	</div>
+	</B_tab_exemplaires>
+	<//B_tab_exemplaires>
+	
 	[<div class="pmb-autreslecteurs">
 		<h2><:pmb:autres_lecteurs:></h2>
 
@@ -102,13 +121,26 @@
 	</div>]
 
 	
-	<div class="pmb-toolbox">
+	<div class="pmb-toolbox" id="compte-lecteur">
 		<h2><:pmb:compte_lecteur:></h2>
+		[(#SESSION{pmb_session}|oui)
+
+		    [(#ENV{reserver}|=={1}|oui)
+				  <strong>
+
+
+				[(#SESSION{pmb_session}|pmb_reserver_ouvrage{[(#GET{notice}|pmb_notice_champ{'id'})],'','',''}|?{<:pmb:reservation_ok:>,		<:pmb:reservation_ko:>})]
+				  </strong>
+		    ]
 		<ul>
-			<li><a href="#CONFIG{spip_pmb/url}do_resa.php?lvl=resa&id_notice=#ENV{id}&$id_empr=&oresa=popup" class="lien-modal"><:pmb:reserver_ouvrage:></a></li>
+			<li><a href="[(#SELF|parametre_url{reserver,1})]#compte-lecteur"><:pmb:reserver_ouvrage:></a></li>
 			<li><a href="#CONFIG{spip_pmb/url}addtags.php?noticeid=#ENV{id}" class="lien-modal"><:pmb:ajouter_tag:></a></li>
 			<li><a href="#CONFIG{spip_pmb/url}avis.php?todo=liste&noticeid=#ENV{id}" class="lien-modal"><:pmb:donner_avis:></a></li>
     		</ul>
+		]
+		[(#SESSION{pmb_session}|non)
+			<i>Identifiez-vous pour r&eacute;server cet ouvrage ou donner votre avis.</i>
+		]
 	</div>	
 
 	</div><!--#contenu-->

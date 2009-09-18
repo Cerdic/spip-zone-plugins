@@ -53,25 +53,11 @@ function pmb_accueil_extraire($url_base, $mode='auto') {
 
 }
 
-function pmb_section_extraire($id_section, $id, $url_base, $pmb_page=1, $mode='auto') {
-	$tableau_resultat = Array();
-	
-	if ($htmldom = pmb_charger_page($url_base, "index.php?lvl=section_see&page=".$pmb_page."&location=".$id_section."&id=".$id,$mode)) {
-			$tableau_resultat[0] = Array();
-			$tableau_resultat[0]['nav_bar'] = $htmldom->find('.navbar',0)->outertext;
-			$tableau_resultat[0]['nav_bar'] = pmb_transformer_nav_bar($tableau_resultat[0]['nav_bar']);
-
-			$tableau_resultat[0]['titre_section'] = $htmldom->find('#aut_details h3',0)->innertext;
-			
-			$resultats_recherche = $htmldom->find('#aut_details_container table td');
-			$i = 1;
-			foreach($resultats_recherche as $res) {
-				$tableau_resultat[$i] = $res->find('a', 1)->outertext;
-				$i++;
-			}	
-	}
-	return $tableau_resultat;
-
+function pmb_section_extraire($id_section, $url_base) {
+	$tableau_sections = Array();
+	pmb_ws_charger_wsdl($ws, $url_base);
+	//$tab_sections = $ws->pmbesOPACGeneric_list_sections(13);
+	return $tab_sections;
 }
 
 function pmb_serie_extraire($id_serie, $url_base, $pmb_page=1, $mode='auto') {
@@ -231,7 +217,7 @@ function pmb_recherche_extraire($recherche, $url_base, $look_FIRSTACCESS='', $lo
 	
 	
 	
-	pmb_ws_charger_wsdl($ws);
+	pmb_ws_charger_wsdl($ws, $url_base);
 	try {	
 			$tableau_resultat[0] = Array();
 					
@@ -362,6 +348,7 @@ function pmb_parser_notice_apercu ($localdom, &$tresultat) {
          global $dernierAttributRencontre;
        global $dernierTypeTrouve;
     global $gtresultat;
+    global $indice_exemplaire;
 
         // Selon les cas, nous affichons le texte
         // ou nous proposons un lien
@@ -406,7 +393,7 @@ function pmb_parser_notice_apercu ($localdom, &$tresultat) {
 		if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "a")) $gtresultat['lesauteurs'] .= $texte;
 		if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "b")) $gtresultat['lesauteurs'] .= " ".$texte;
 		
-		//section996
+		//section996 mode html
 		if (($dernierTypeTrouve == "996") && ($dernierSousTypeTrouve == "f")) $gtresultat['exemplaires'] .= "<tr><td class='expl_cb'>".$texte."</td>";
 		if (($dernierTypeTrouve == "996") && ($dernierSousTypeTrouve == "k")) $gtresultat['exemplaires'] .= "<td class='expl_cote'>".$texte."</td>";
 		if (($dernierTypeTrouve == "996") && ($dernierSousTypeTrouve == "e")) $gtresultat['exemplaires'] .= "<td class='tdoc_libelle'>".$texte."</td>";
@@ -414,16 +401,20 @@ function pmb_parser_notice_apercu ($localdom, &$tresultat) {
 		if (($dernierTypeTrouve == "996") && ($dernierSousTypeTrouve == "x")) $gtresultat['exemplaires'] .= "<td class='section_libelle'>".$texte."</td>";
 		if (($dernierTypeTrouve == "996") && ($dernierSousTypeTrouve == "1")) $gtresultat['exemplaires'] .= "<td class='expl_situation'><strong>".$texte."</strong></td></tr>";
 
-		//a faire : disponibilité
+		//section996 mode tableau
+		if (($dernierTypeTrouve == "996") && ($dernierSousTypeTrouve == "f")) {
+			$indice_exemplaire++;
+			$gtresultat['tab_exemplaires'][$indice_exemplaire-1] = Array();
+			$gtresultat['tab_exemplaires'][$indice_exemplaire-1]['expl_cb'] .= $texte;
+		}
 
-		/* sous la forme ...
-	      <table cellpadding='2' class='exemplaires' width='100%'>
-		    <tr><th class='expl_header_expl_cb'>Code barre</th><th class='expl_header_expl_cote'>Cote</th><th class='expl_header_tdoc_libelle'>Support</th><th class='expl_header_location_libelle'>Localisation</th><th class='expl_header_section_libelle'>Section</th><th>Disponibilité</th>
+		if (($dernierTypeTrouve == "996") && ($dernierSousTypeTrouve == "k")) $gtresultat['tab_exemplaires'][$indice_exemplaire-1]['expl_cote'] .= $texte;
+		if (($dernierTypeTrouve == "996") && ($dernierSousTypeTrouve == "e")) $gtresultat['tab_exemplaires'][$indice_exemplaire-1]['tdoc_libelle'] .= $texte;
+		if (($dernierTypeTrouve == "996") && ($dernierSousTypeTrouve == "v")) $gtresultat['tab_exemplaires'][$indice_exemplaire-1]['location_libelle'] .= $texte;
+		if (($dernierTypeTrouve == "996") && ($dernierSousTypeTrouve == "x")) $gtresultat['tab_exemplaires'][$indice_exemplaire-1]['section_libelle'] .= $texte;
+		if (($dernierTypeTrouve == "996") && ($dernierSousTypeTrouve == "1")) $gtresultat['tab_exemplaires'][$indice_exemplaire-1]['expl_situation'] .= $texte;
 
-		    <tr><td class='expl_cb'>4319900946</td><td class='expl_cote'>RP GUI</td><td class='tdoc_libelle'>Livre</td><td class='location_libelle'>Saint-Jeures</td><td class='section_libelle'>Romans Policiers</td><td class='expl_situation'><strong>Disponible</strong> </td></tr>
-
-	      </table>
-	      */
+		
                 break;
         }         
     }
@@ -431,6 +422,8 @@ function pmb_parser_notice_apercu ($localdom, &$tresultat) {
 //parsing xml d'une notice
 function pmb_ws_parser_notice_xml($id_notice, $value, &$tresultat) {
 	    global $gtresultat;
+	    global $indice_exemplaire;
+	    $indice_exemplaire = 0;
 	    $gtresultat = array();
 	
 	    // Création du parseur XML
@@ -445,8 +438,10 @@ function pmb_ws_parser_notice_xml($id_notice, $value, &$tresultat) {
 	    // lorsque du texte est rencontré
 	    xml_set_character_data_handler($parseurXML, "fonctionTexte");
 
+	   $gtresultat['tab_exemplaires'] = Array();
+	  
 	   $gtresultat['exemplaires'] = "<table cellpadding='2' class='exemplaires' width='100%'>
-		    <tr><th class='expl_header_expl_cb'>Code barre</th><th class='expl_header_expl_cote'>Cote</th><th class='expl_header_tdoc_libelle'>Support</th><th class='expl_header_location_libelle'>Localisation</th><th class='expl_header_section_libelle'>Section</th><th>Disponibilité</th></tr>";
+		    <tr><th class='expl_header_expl_cb'>Code barre</th><th class='expl_header_expl_cote'>Cote</th><th class='expl_header_location_libelle'>Localisation</th><th class='expl_header_tdoc_libelle'>Support</th><th class='expl_header_section_libelle'>Section</th><th>Disponibilité</th></tr>";
 
 	    // Ouverture du fichier
 	    xml_parse($parseurXML, $value, true);
@@ -547,7 +542,7 @@ function pmb_ws_recuperer_notice ($id_notice, &$ws, &$tresultat) {
 }
 
 //charger les webservices
-function pmb_ws_charger_wsdl(&$ws) {
+function pmb_ws_charger_wsdl(&$ws, $url_base) {
 	$ws=new SoapClient("http://test3.bibli.fr/ostudio/PMBWsSOAP_1?wsdl");
 	
 }
@@ -557,17 +552,17 @@ function pmb_ws_charger_wsdl(&$ws) {
 function pmb_notice_extraire ($id_notice, $url_base, $mode='auto') {
 	$tableau_resultat = Array();
 	
-	pmb_ws_charger_wsdl($ws);
+	pmb_ws_charger_wsdl($ws, $url_base);
 	pmb_ws_recuperer_notice($id_notice, $ws, $tableau_resultat);
 	return $tableau_resultat;
 			
 }
 
-// retourne un tableau associatif contenant tous les champs d'une notice 
+// retourne un tableau associatif contenant les prêts en cours
 function pmb_prets_extraire ($session_id, $url_base, $type_pret=0) {
 	$tableau_resultat = Array();
-	pmb_ws_charger_wsdl($ws);
-	$loans = $ws->pmbesOPACEmpr_list_loans($session_id, $type_pret);
+	pmb_ws_charger_wsdl($ws, $url_base);
+	$loans = $ws->pmbesOPACEmpr_add_resa($session_id, $type_pret);
 	$cpt = 0;
 	foreach ($loans as $loan) {
 	      $tableau_resultat[$cpt] = Array();
@@ -591,7 +586,10 @@ function pmb_prets_extraire ($session_id, $url_base, $type_pret=0) {
 			
 }
 
-
+function pmb_reserver_ouvrage($session_id, $notice_id, $bulletin_id, $location, $url_base) {
+	pmb_ws_charger_wsdl($ws, $url_base);
+	return $ws->pmbesOPACEmpr_add_resa($session_id, $notice_id, $bulletin_id, $location);
+}
 
 function pmb_notice_champ ($tableau_resultat, $champ) {
 	return $tableau_resultat[$champ];

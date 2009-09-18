@@ -43,6 +43,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'message_compte_lecteur' => 'Prochainement, vous disposerez d\'une int\351gration compl\350te\nde votre compte lecteur sur ce site. \n\nEn attendant, vous allez \352tre redirig\351s vers l\'interface standard.',
 'message_recherche_avancee' => 'Prochainement, vous disposerez d\'une int\351gration compl\350te\nde la recherche avanc\351e sur ce site. \n\nEn attendant, vous allez \352tre redirig\351s vers l\'interface standard.',
 'comment_ca_fonctionne' => 'Comment &ccedil;a fonctionne ?',
-'en_savoir_plus' => 'en&nbsp;savoir&nbsp;+'
+'en_savoir_plus' => 'en&nbsp;savoir&nbsp;+',
+'catalogue' => 'Catalogue',
+'reservation_ok' => 'Votre r&eacute;servation &agrave; &eacute;t&eacute; prise en compte.',
+'reservation_ko' => 'Votre r&eacute;servation &agrave; n\'a pas pu &ecirc;tre prise en compte.'
+
 );
 ?>
