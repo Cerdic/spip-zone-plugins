@@ -13,9 +13,23 @@ function exec_mutualisation_dist() {
 		die('pas admin !');
 
 	$sites = array();
-	foreach(preg_files('../'.$GLOBALS['mutualisation_dir'].'/', '.*/config/connect.php') as $s) {
-		$sites[] = preg_replace(',^\.\./'.$GLOBALS['mutualisation_dir'].'/(.*)/config/connect.php,', '\1', $s);
-	}
+# Code tres tres tres lent !
+#	foreach(preg_files('../'.$GLOBALS['mutualisation_dir'].'/', '.*/config/connect.php') as $s) {
+#		$sites[] = preg_replace(',^\.\./'.$GLOBALS['mutualisation_dir'].'/(.*)/config/connect.php,', '\1', $s);
+#	}
+# Code rapide
+	$dir = '../'.$GLOBALS['mutualisation_dir'].'/';	
+	if (is_dir($dir)) {
+		if ($dh = opendir($dir)) {
+			while (($file = readdir($dh)) !== false) {
+				if (filetype($dir . $file) == 'dir') {
+					if (file_exists($dir . $file . '/config/connect.php')) $sites[] = $file;
+				}
+			}
+			closedir($dh);
+		}
+	}	
+
 	sort($sites);
 
 	if (!file_exists(_DIR_IMG.'mutualiser.png'))
