@@ -1,5 +1,5 @@
 <div class='ajax'>
-<BOUCLE_envoyes(MESSAGES){id_auteur=#SESSION{id_auteur}}{statut!=poub}{pagination 1}{!par date_heure}>
+<BOUCLE_envoyes(MESSAGES){id_auteur=#SESSION{id_auteur}}{statut!=poub}{0,1}{!par date_heure}>
 <div class="formulaire_spip formulaire_#ENV{form}" id="formulaire_#ENV{form}#ENV{id}">
 <br class='bugajaxie' />
 [<div class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</div>]
@@ -7,7 +7,7 @@
 [(#ENV{editable})
 <form method='post' action='#ENV{action}#formulaire_#ENV{form}#ENV{id}' enctype='multipart/form-data' class='ajax'>
 
-[(#REM) declarer les hidden qui declencheront le service du formulaire 
+[(#REM) declarer les hidden qui declencheront le service du formulaire
 parametre : url d'action ]
 #ACTION_FORMULAIRE{#ENV{action}}
 
