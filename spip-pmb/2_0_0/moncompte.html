@@ -32,74 +32,19 @@
         </div>
 		
  	 
-	<div class="corps-conteneur surlignable">
+	[(#SESSION{pmb_session}|oui)
+	    <INCLURE{fond=inc-moncompte}{env}>
+	]
+
+	[(#SESSION{pmb_session}|non)
+	    <div class="corps-conteneur surlignable">
 		
-		<div class="#EDIT{texte} texte entry-content">Bonjour[ (#SESSION{pmb_firstname})], bienvenue dans votre compte de lecteur.</div>
+		<div class="#EDIT{texte} texte entry-content">Vous devez vous identifier pour acc&eacute;der &agrave; votre compte de lecteur.</div>
 
 
-	</div>
+	    </div>
+	]
 
-
-		<div class="ps surlignable"><h2 class="pas_surlignable">Informations personnelles</h2>
-		<div>
-		      Pr&eacute;nom : #SESSION{pmb_firstname}<br />
-		      Nom : #SESSION{pmb_lastname}<br />
-		      Adresse 1 : #SESSION{pmb_address_part1}<br />
-		      Adresse 2 : #SESSION{pmb_address_part2}<br />
-		      CP : #SESSION{pmb_address_cp}<br />
-		      Ville : #SESSION{pmb_address_city}<br />
-		      T&eacute;l&eacute;phone 1 : #SESSION{pmb_phone_number1}<br />
-		      T&eacute;l&eacute;phone 2 : #SESSION{pmb_phone_number2}<br />
-		      Email : #SESSION{pmb_email}<br />
-		      Ann&eacute;e de naissance : #SESSION{pmb_birthyear}<br />
-		      Localisation : #SESSION{pmb_location_caption}<br />
-		      Date d'adh&eacute;sion : #SESSION{pmb_adhesion_date}<br />
-		      Date d'expiration : #SESSION{pmb_expiration_date}<br />
-		      
-		</div></div>
-		<div class="ps surlignable"><h2 class="pas_surlignable">Livres emprunt&eacute;s</h2>
-		<div>
-		      [(#SET{tab_prets,[(#SESSION**{pmb_session}|pmb_prets_extraire{#CONFIG{spip_pmb/url},1})]})]
-		      <B_tab_resultat>
-		      <table class="pmb-tableau">
-			  <thead>
-			    <tr><th>Num&eacute;ro</th><th>Titre</th><th>Support</th><th>Date</th><th>Retour</th></tr>
-			  </thead>
-			  <tbody>
-			  <BOUCLE_tab_resultat(POUR){tableau #GET{tab_prets}}>
-			 
-			    <tr><td>[(#GET{tab_prets}|pmb_tableau2_valeur{#CLE,'expl_cb'})]</td><td>[(#GET{tab_prets}|pmb_tableau2_valeur{#CLE,'expl_libelle'})]</td><td>[(#GET{tab_prets}|pmb_tableau2_valeur{#CLE,'expl_support'})]</td><td>[(#GET{tab_prets}|pmb_tableau2_valeur{#CLE,'loan_startdate'})]</td><td>[(#GET{tab_prets}|pmb_tableau2_valeur{#CLE,'loan_returndate'})]</td></tr>
-			 
-		      </BOUCLE_tab_resultat>
-		       </tbody>
-			 </table>
-		      </B_tab_resultat>
-			Pas de livres emprunt&eacute;s
-		      <//B_tab_resultat>
-		      
-		</div></div>
-
-		<div class="ps surlignable"><h2 class="pas_surlignable">Livres en retard</h2><div>
-		      [(#SET{tab_prets,[(#SESSION**{pmb_session}|pmb_prets_extraire{#CONFIG{spip_pmb/url},0})]})]
-		      <B_tab_resultat2>
-		      <table class="pmb-tableau">
-			  <thead>
-			    <tr><th>Num&eacute;ro</th><th>Titre</th><th>Support</th><th>Date</th><th>Retour</th></tr>
-			  </thead>
-			  <tbody>
-			  <BOUCLE_tab_resultat2(POUR){tableau #GET{tab_prets}}>
-			 
-			    <tr><td>[(#GET{tab_prets}|pmb_tableau2_valeur{#CLE,'expl_cb'})]</td><td>[(#GET{tab_prets}|pmb_tableau2_valeur{#CLE,'expl_libelle'})]</td><td>[(#GET{tab_prets}|pmb_tableau2_valeur{#CLE,'expl_support'})]</td><td>[(#GET{tab_prets}|pmb_tableau2_valeur{#CLE,'loan_startdate'})]</td><td>[(#GET{tab_prets}|pmb_tableau2_valeur{#CLE,'loan_returndate'})]</td></tr>
-			 
-		      </BOUCLE_tab_resultat2>
-		       </tbody>
-			 </table>
-		      </B_tab_resultat2>
-			Pas de livres en retard
-		      <//B_tab_resultat2>
-
-  
-		</div></div>
 
 		<br class="nettoyeur" />
 

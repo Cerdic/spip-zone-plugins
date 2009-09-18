@@ -5,29 +5,44 @@
 
 <div class="formulaire_spip formulaire_moncomptepmb">
 <h2><:pmb:mon_compte:></h2>
-<form name="myform" method="post" action="#SELF">
-<fieldset>
-<legend><:pmb:mon_compte:></legend>
-<input type="hidden" name="action" value="connexion_pmb" />
-<input type="hidden" name="redirect" value="#SELF" />
-<ul>
-<li>
-	<label for="pmb-login"><:pmb:pmb_login:> :</label>
-	<input type="text" onfocus="this.value='';" value="" size="14" id="pmb-login" name="login"/>
-</li>
-<li>
-	<label for="pmb-motdepasse"><:pmb:pmb_motdepasse:> :</label>
-	<input type="password" onfocus="this.value='';" value="" size="8" id="pmb-motdepasse" name="password"/>
-</li>
-<li class="boutons">
-	<input type="submit" value="Valider" name="ok"/>
-</li>
-</ul>
-</fieldset>
-
-
-</form>
-
+[(#SESSION{pmb_session}|non)
+      <form name="myform" method="post" action="#SELF">
+      <fieldset>
+      <legend><:pmb:mon_compte:></legend>
+      <input type="hidden" name="action" value="connexion_pmb" />
+      <input type="hidden" name="redirect" value="#SELF" />
+      <ul class="pmb-connexion">
+      <li>
+	      <label for="pmb-login"><:pmb:pmb_login:> :</label>
+	      <input type="text" onfocus="this.value='';" value="" size="14" id="pmb-login" name="login"/>
+      </li>
+      <li>
+	      <label for="pmb-motdepasse"><:pmb:pmb_motdepasse:> :</label>
+	      <input type="password" onfocus="this.value='';" value="" size="8" id="pmb-motdepasse" name="password"/>
+      </li>
+      <li class="boutons">
+	      <input type="submit" value="Valider" name="ok"/>
+      </li>
+      </ul>
+      </fieldset>
+     </form>
+]
+[(#SESSION{pmb_session}|oui)
+      <form name="myform" method="post" action="#SELF">
+      <fieldset>
+      <legend><:pmb:mon_compte:></legend>
+      <input type="hidden" name="action" value="deconnexion_pmb" />
+      <input type="hidden" name="redirect" value="#SELF" />
+      <ul class="pmb-deconnexion">
+       <li>Bonjour[ (#SESSION{pmb_firstname})], <a href="#URL_PAGE{moncompte}">acc&eacute;dez &agrave; votre compte de lecteur</a></li>
+       <li class="boutons">
+	      <input type="submit" value="Se d&eacute;connecter" name="ok"/>
+      </li>
+      </ul>
+      <br class="nettoyeur" />
+     </fieldset>
+     </form>
+]
 </div>
 <div class="fonctionnement"><:pmb:comment_ca_fonctionne:></div>
 
