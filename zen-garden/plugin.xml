@@ -7,6 +7,9 @@
   <description>Un jardin Zen pour Zpip</description>
   <options>zengarden_options.php</options>
   <prefix>zengarden</prefix>
+  
+  <necessite id="spip_bonux" version="[1.8;]" />
+  
 	<bouton id='theme' parent='configuration'>
 		<titre>zengarden:themes</titre>
 		<icone>img_pack/themes-24.png</icone>
