@@ -7,6 +7,9 @@
 #
 # Regle de dev: ne pas se rendre dependant de la lib sous-jacente
 
+// temporaire le temps de tester spyc
+define('_LIB_YAML','sfyaml'); 
+#define('_LIB_YAML','spyc'); 
 
 /*
  * Encode n'importe quelle structure en yaml
@@ -14,6 +17,11 @@
  * @return string
  */
 function yaml_encode($struct, $opt = array()) {
+	// test temporaire
+	if (_LIB_YAML == 'spyc') {
+		require_once _DIR_PLUGIN_YAML.'spyc/spyc.php';
+		return Spyc::YAMLDump($struct);
+	}
 	require_once _DIR_PLUGIN_YAML.'sfyaml/sfYaml.php';
 	require_once _DIR_PLUGIN_YAML.'sfyaml/sfYamlDumper.php';
 	$opt = array_merge(
@@ -29,6 +37,11 @@ function yaml_encode($struct, $opt = array()) {
  * @param string $input
  */
 function yaml_decode($input) {
+	// test temporaire
+	if (_LIB_YAML == 'spyc') {
+		require_once _DIR_PLUGIN_YAML.'spyc/spyc.php';
+		return Spyc::YAMLLoad($input);
+	}
 	require_once _DIR_PLUGIN_YAML.'sfyaml/sfYaml.php';
 	require_once _DIR_PLUGIN_YAML.'sfyaml/sfYamlParser.php';
 
