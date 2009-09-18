@@ -148,13 +148,14 @@ function action_editer_message_post_nouveau($type, $dest='', $rv='')
 
 
 " 
-		. "[Article d'origine : "
-		. "{{".$art_titre."}}
+		. "---------------------------------------Article d'origine : "
+		. "[{{"
+		.$art_titre
+		."}} 
 -> "
 		. generer_url_ecrire('articles',"id_article=".$rers_or)
-	 	. "] 
-
-"
+		. "]"
+		. "-----------------------------Texte de l'article d'origine : "
 		. $art_texte
 		;            
 

@@ -1,6 +1,16 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 //
+
+
+//RERS      notes...
+//    Les premieres définitions servent à pouvoir effectuer par exemple les tests conditionnels suivants : 
+//      if ($rers_exec == 'articles_edit') 
+//      if ( $id_rub == $rers_rub_offres OR  $id_rub == $rers_rub_demandes )
+
+
+
+
 if (!defined("_ECRIRE_INC_VERSION")) return;
 $rers_rub_offres = lire_config('rers/rers_rub_offres');
 $rers_rub_demandes = lire_config('rers/rers_rub_demandes');
@@ -34,34 +44,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 //--- exec/rers_aide.php
 // aide RERS espace privé  
 'rers_aide_titre' => "Guide du rédacteur RERS Sud de l'Aisne",
-'rers_aide_contenu' => "
-<h4> Distinction espace public et espace privé</h4>
-Chaque adhérent au RERS du Sud de l'Aisne possède un identifiant de connexion au site. 
-Une fois connecté (bouton 'se connecter'), vous avez accès à une partie supplémentaire du site.
-<ul>
-<li><b>L'espace public</b> est consultable par tout internaute/visiteur, y compris les adhérents 
-   connectés. </li>
-<li><b>L'espace privé</b> est l'espace consultable uniquement par les adhérents connectés.
-C'est dans cet espace que vous pouvez écrire dans trois rubriques : OFFRES, DEMANDES, et VIE DU RERS. 
-Chacune contient des articles : ce sont les articles des adhérents. 
-</li>
-</ul>
-
-
-<h4> Rubrique VIE DU RERS</h4>
-Ecrivez dans cette rubrique une information à diffuser dans la partie publique du 
-site internet. Si nécessaire, 
-une fois l'article rédigé, vous pouvez créer un 'évènement' lié à cet article 
-qui apparaîtra également dans l'agenda de la partie publique. 
-
-<h4> Rubriques OFFRES et DEMANDES</h4>
-Dans ces rubriques, vous pouvez consulter les fiches de demandes/offres de savoirs, mais
-aussi en rédiger. Ces fiches sont stockées de manière informatique sous la forme d'un 'article'
-placé dans une des deux rubriques OFFRES ou DEMANDES.
-
-",
-
-
 
 //--- icones espace privé
 'icone_a_suivre' => "Accueil espace privé",//spip
@@ -109,6 +91,24 @@ placé dans une des deux rubriques OFFRES ou DEMANDES.
 'ical_texte_public' => "Ce calendrier vous permet de suivre l'activité publique de ce site (pricipalement dates où des nouveaux articles de la rubrique VIE DU RERS ont été publiés).<br />
 (A ne pas confondre avec un 3ème calendrier plus adapté : 
 <a href='webcal://www.rers-sud-aisne.fr/spip.php?page=ical-agenda'>le calendrier des évènements publics</a> (agenda visible sur l'espace public)  ",
+
+//--- exec/articles_edit.php
+'rers_texte_defaut_offre' => "
+
+- nombre de participants : 
+- nombre de séances : 
+- temps par séance : 
+- lieu : 
+- matériel : 
+- disponibilité : 
+
+",
+'rers_texte_defaut_demande' => "
+
+- lieu : 
+- disponibilité : 
+
+",
 
 //--- exec/auteurs.php (page "auteurs" de l'espace privé)
 'info_auteurs' => "Les Adhérents", //ecrire
@@ -191,40 +191,6 @@ if ($rers_exec == 'articles_edit')
 	l'occurence une fiche de savoir)";
   }
 
-  // +++++++++++++ OFFRES
-  if ( $id_rub == $rers_rub_offres)
-  {
-  $GLOBALS[$GLOBALS['idx_lang']][info_texte] = "Texte <br />
-	<div style='border:dashed 1px'>
-	Conseils pour la rédaction : <br />
-	Pensez à détailler votre fiche d'offre de savoir en
-	indiquant par exemple : <br />
-	<dl>
-	<dt>- le nombre de participants : </dt>
-	<dt>- le nombre de séances : </dt>
-	<dt>- le temps par séance : </dt>
-	<dt>- le lieu : </dt>
-	<dt>- le matériel éventuel : </dt>
-	<dt>- disponibilité : </dt>
-	</dl>
-	</div>
-	";
-  }
-  // +++++++++++++ DEMANDES
-  if ( $id_rub == $rers_rub_demandes)
-  {
-  $GLOBALS[$GLOBALS['idx_lang']][info_texte] = "Texte <br />
-	<div style='border:dashed 1px'>
-	Conseils pour la rédaction : <br />
-	Pensez à détailler votre fiche de demande de savoir en
-	indiquant par exemple : 
-	<ul>
-	<dt>- lieu : </dt>
-	<dt>- disponibilité : </dt>
-	</dl>
-	</div>
-	";
-  }
 }
 
 
