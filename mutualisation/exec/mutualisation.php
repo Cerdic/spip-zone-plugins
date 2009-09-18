@@ -12,25 +12,9 @@ function exec_mutualisation_dist() {
 	if ( ($auteur_session['statut'] != '0minirezo') and ( $_SERVER["REMOTE_ADDR"]!='127.0.0.1'))
 		die('pas admin !');
 
-	$sites = array();
-# Code tres tres tres lent !
-#	foreach(preg_files('../'.$GLOBALS['mutualisation_dir'].'/', '.*/config/connect.php') as $s) {
-#		$sites[] = preg_replace(',^\.\./'.$GLOBALS['mutualisation_dir'].'/(.*)/config/connect.php,', '\1', $s);
-#	}
-# Code rapide
-	$dir = '../'.$GLOBALS['mutualisation_dir'].'/';	
-	if (is_dir($dir)) {
-		if ($dh = opendir($dir)) {
-			while (($file = readdir($dh)) !== false) {
-				if (filetype($dir . $file) == 'dir') {
-					if (file_exists($dir . $file . '/config/connect.php')) $sites[] = $file;
-				}
-			}
-			closedir($dh);
-		}
-	}	
+	$lister_sites = charger_fonction('lister_sites','mutualisation');
+	$sites = $lister_sites();
 
-	sort($sites);
 
 	if (!file_exists(_DIR_IMG.'mutualiser.png'))
 		@copy(find_in_path('mutualiser.png'), _DIR_IMG.'mutualiser.png');
@@ -149,4 +133,49 @@ EOF;
 function date_creation_repertoire_site ($v) {
 	return (date("d/M/y", @filectime('../'.$GLOBALS['mutualisation_dir'].'/'.$v."/config/connect.php"))) ;	
 }
+
+// lister les sites qui ont des sites/xx/config/connect.php
+// avec 'connect.php' ne changeant pas de nom
+function mutualisation_lister_sites_dist() {
+	$sites = array();
+# Code tres tres tres lent !
+#	foreach(preg_files('../'.$GLOBALS['mutualisation_dir'].'/', '.*/config/connect.php') as $s) {
+#		$sites[] = preg_replace(',^\.\./'.$GLOBALS['mutualisation_dir'].'/(.*)/config/connect.php,', '\1', $s);
+#	}
+# Code rapide
+	$dir = '../'.$GLOBALS['mutualisation_dir'].'/';	
+	if (is_dir($dir)) {
+		if ($dh = @opendir($dir)) {
+			while (($file = readdir($dh)) !== false) {
+				if (filetype($dir . $file) == 'dir') {
+					if (file_exists($dir . $file . '/config/'. _FILE_CONNECT_INS . '.php')) $sites[] = $file;
+				}
+			}
+			closedir($dh);
+		}
+	}
+	sort($sites);
+	return $sites;
+}
+
+/* autre exemple pour ceux qui mettent tous leurs fichiers de connexion
+ * dans /config/connect/xx.php
+ * fonction a mettre dans mes_options.php ou dans mutualisations/lister_sites.php
+ */
+/*
+function mutualisation_lister_sites() {
+	$sites = array();
+	if (is_dir(_DIR_CONNECT)) {
+		if ($dh = @opendir(_DIR_CONNECT)) {
+			while (($file = readdir($dh)) !== false) {
+				if (substr($file,-4)=='.php') {
+					$sites[] = substr($file,0,-4);
+				}
+			}
+		}
+	}
+	sort($sites);
+	return $sites;
+}
+*/
 ?>
