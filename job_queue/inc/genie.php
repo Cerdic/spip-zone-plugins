@@ -129,17 +129,18 @@ function genie_invalideur_dist($t) {
 // Une tache cron pour surveiller les taches crons et les relancer si besoin
 // quand ce cron s'execute, il n'est plus dans la queue, donc il se replanifie
 // lui meme, avec last=time()
+// avec une dose d'aleatoire pour ne pas planifier toutes les taches au meme moment
 function genie_queue_watch_dist(){
 	$taches = taches_generales();
 	foreach($taches as $tache=>$periode){
-		queue_genie_replan_job($tache,$periode,time());
+		queue_genie_replan_job($tache,$periode,time()-round(rand(1,$periode)));
 	}
 	return 1;
 }
 
 function queue_genie_replan_job($function,$period,$last=null,$time=0, $priority=0){
 		if (!$time){
-			if ($last)
+			if (!is_null($last))
 				$time = $last+$period;
 			else
 				$time=time();

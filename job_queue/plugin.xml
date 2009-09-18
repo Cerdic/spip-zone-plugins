@@ -3,7 +3,7 @@
   <auteur>Cedric&amp;Fil</auteur>
   <version>0.1</version>
   <version_base>0.1.0</version_base>
-  <etat>dev</etat>
+  <etat>test</etat>
   <description>Gestion d'une queue de Jobs</description>
   <install>base/queue.php</install>
   <options>queue_options.php</options>
