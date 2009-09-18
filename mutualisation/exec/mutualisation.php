@@ -147,7 +147,7 @@ function mutualisation_lister_sites_dist() {
 	if (is_dir($dir)) {
 		if ($dh = @opendir($dir)) {
 			while (($file = readdir($dh)) !== false) {
-				if (filetype($dir . $file) == 'dir') {
+				if ((filetype($dir . $file) == 'dir') OR (filetype($dir . $file) == 'link')) {
 					if (file_exists($dir . $file . '/config/'. _FILE_CONNECT_INS . '.php')) $sites[] = $file;
 				}
 			}
