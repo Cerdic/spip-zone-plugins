@@ -1,0 +1,50 @@
+PLUGIN Squelettes Par Mots Cle 2.0
+Copyright (C) 2009 Francois Sauterey
+
+Ce programme est libre, vous pouvez le redistribuer et/ou le modifier selon les termes
+de la Licence Publique Générale GNU publiée par la Free Software Foundation (version 3
+ou bien toute autre version ultérieure choisie par vous).
+
+Ce programme est distribué car potentiellement utile, mais SANS AUCUNE GARANTIE, ni
+explicite ni implicite, y compris les garanties de commercialisation ou d'adaptation
+dans un but spécifique. Reportez-vous à la Licence Publique Générale GNU pour plus de détails.
+
+Vous devez avoir reçu une copie de la Licence Publique Générale GNU en même temps que ce programme
+; si ce n'est pas le cas, écrivez à la Free Software Foundation, Inc., 59 Temple Place, Suite 330,
+Boston, MA 02111-1307, États-Unis.
+-----
+
+Ce plugin permet de specifier le squelette d'un élément (article,
+breves, etc...) ou de tous les éléments d'une rubrique en utilisant
+les mots clefs. 
+
+Le plugin marche sous forme de "règles" de sélection. Une règle
+spécifie:
+- un fond de base (le fichier de squelette de base, par exemple
+rubrique.html ou article.html)
+- un groupe de mot clef (le groupe qui contient les mots clefs qui
+spécifient quel squelette utiliser)
+- un type d'éléments (le type d'élément affiché par le squelette en
+question) 
+
+Le plugin permet de sélectionner des squelettes nommés:
+- fond=motclef.html pour le squelette d'un élément spécifique
+- fond-motclef.html pour le squelette de tous les éléments d'une
+rubrique
+
+Un exemple d'utilisation:
+1- créer un groupe de mot clef associable aux articles et rubriques, par exemple
+"squelettes articles",
+2- aller sur la page de configuration du plugin (Configuration, puis
+onglets "Configurer Squelettes Mots",
+3- créer une règle qui associe:
+ o le fond article
+ o le groupe "squelettes articles"
+ o le type d'élément "articles"
+4- créer, par exemple, un mot clef "galerie"
+5- vous pouvez alors:
+  o soit créer un fichier article=galerie.html et associer le mot clef
+    galerie à des articles individuels
+  o soit créer un fichier article-galerie.html et associer le mot clef
+    à une rubrique qui contiendra tous vos articles de galerie.
+ 
