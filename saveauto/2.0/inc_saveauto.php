@@ -54,6 +54,32 @@ function saveauto_go() {
         }
 }
 
+
+// Pipeline "mes_fichiers_a_sauver" permettant de rajouter des fichiers ˆ sauvegarder dans le plugin Mes Fichiers 2
+function saveauto_mes_fichiers_a_sauver($flux){
+
+	// Determination du repertoire de sauvegarde
+	$tmp_dump = defined('_DIR_DUMP') ? _DIR_DUMP: _DIR_RACINE.'tmp/dump/';
+	$rep_save = lire_config('saveauto/rep_bases');
+	$rep_save = $rep_save ? _DIR_RACINE.$rep_save : $tmp_dump;
+	// le dernier fichier de dump de la base cree par saveauto
+	$dump = preg_files($rep_save);
+	$fichier_dump = '';
+	$mtime = 0;
+	foreach ($dump as $_fichier_dump) {
+		if (($_mtime = filemtime($_fichier_dump)) > $mtime) {
+			$fichier_dump = $_fichier_dump;
+			$mtime = $_mtime;
+		}
+	}
+	if ($fichier_dump)
+		$flux[] = $fichier_dump;
+
+	spip_log('*** saveauto_mes_fichiers_a_sauver ***');
+	spip_log($flux);
+	return $flux;
+}
+
 // lancement du processus de sauvegarde
  saveauto_go();
 ?>
