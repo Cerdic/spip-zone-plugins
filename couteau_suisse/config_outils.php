@@ -333,6 +333,11 @@ add_variables( array(
 	'defaut' => 0,
 	'code:%s' => "define('_en_travaux_ADMIN', %s);\n",
 ), array(
+	'nom' => 'avertir_travaux',
+	'check' => 'couteauprive:travaux_masquer_avert',
+	'defaut' => 0,
+	'code:%s' => "define('_en_travaux_SANSMSG', %s);\n",
+), array(
 	'nom' => 'message_travaux',
 	'format' => _format_CHAINE,
 	'defaut' => "_T('couteauprive:travaux_prochainement')",
@@ -347,9 +352,10 @@ add_variables( array(
 ));
 add_outil( array(
 	'id' => 'en_travaux',
-	'code:options' => "%%message_travaux%%%%prive_travaux%%%%admin_travaux%%%%titre_travaux%%",
+	'code:options' => "%%message_travaux%%%%prive_travaux%%%%admin_travaux%%%%avertir_travaux%%%%titre_travaux%%",
 	'categorie' => 'admin',
 	'auteur' => "Arnaud Ventre pour l'id&eacute;e originale",
+	'pipeline:affichage_final' => 'en_travaux_affichage_final',
 ));
 
 add_variables( array(

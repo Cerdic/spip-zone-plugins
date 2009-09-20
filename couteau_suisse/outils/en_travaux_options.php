@@ -1,12 +1,19 @@
 <?php
 // affiche un fond travaux si on n'est pas en zone ecrire ni admin
 
-if(($tr_prive = test_espace_prive()) {
+// compatibilite pour SPIP 1.9.2
+if (!function_exists('test_espace_prive')) {
+	function test_espace_prive() {
+		return defined('_DIR_RESTREINT') ? !_DIR_RESTREINT : false;
+	}
+}
+
+if($tr_prive = test_espace_prive()) {
 	// prive : les admins passent, les redac passent si '!Tous'
-	$tr_acces = cs_autoriser() || !defined('_en_travaux_PRIVE');
+	$tr_acces = ($GLOBALS['auteur_session']['statut']=='0minirezo') || !defined('_en_travaux_PRIVE');
 } else {
 	// public : les admins passent si 'SaufAdmin'
-	$tr_acces = cs_autoriser() && defined('_en_travaux_ADMIN');
+	$tr_acces = ($GLOBALS['auteur_session']['statut']=='0minirezo') && defined('_en_travaux_ADMIN');
 	// tentative pour prendre en compte les autres cas possibles d'exception
 	$tr_acces |=
 		isset($_GET['action']) || isset($_POST['action'])
@@ -20,6 +27,7 @@ if(($tr_prive = test_espace_prive()) {
 
 // si aucune exception, on bloque le site pour travaux
 if (!$tr_acces) {
+	// $tr_message est defini dans config_outils.php par la variable 'message_travaux'
 	@define('_en_travaux_MESSAGE', $tr_message);
 	if($tr_prive) {
 		// les actions ne fonctionnent pas ici
@@ -45,4 +53,15 @@ function action_cs_travaux($prive=false){
 	));
 	return true;
 }
+
+function en_travaux_affichage_final($flux){
+	if(defined('_en_travaux_SANSMSG') || !$GLOBALS['html']) return $flux;
+	include_spip('inc/minipres'); // pour http_img_pack
+	$res = '<div id="en_travaux" style="padding:6px; position:absolute; left:12px; top:22px; border-color:#CECECE #CECECE #4A4A4A; background-color:#FFEEEE; opacity:0.8; font-size:12px; border-style:solid; border-width:3px; font-weight:bold;">'
+	. http_img_pack('warning-24.gif', _T('info_travaux_titre'), 'align="absmiddle"')
+	. ' &nbsp;'. _T('info_travaux_titre') . '</div>';
+	if (!$pos = stripos($flux, '</body>')) $pos = strlen($flux);
+	return substr_replace($flux, $res, $pos, 0);
+}
+
 ?>
