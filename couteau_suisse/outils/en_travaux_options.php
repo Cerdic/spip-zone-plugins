@@ -1,7 +1,7 @@
 <?php
-// force une action en travaux si on n'est pas en zone ecrire ni admin
+// affiche un fond travaux si on n'est pas en zone ecrire ni admin
 
-if(($tr_prive = strpos($_SERVER["PHP_SELF"],'/ecrire')) !== false) {
+if(($tr_prive = test_espace_prive()) {
 	// prive : les admins passent, les redac passent si '!Tous'
 	$tr_acces = cs_autoriser() || !defined('_en_travaux_PRIVE');
 } else {
@@ -20,7 +20,7 @@ if(($tr_prive = strpos($_SERVER["PHP_SELF"],'/ecrire')) !== false) {
 
 // si aucune exception, on bloque le site pour travaux
 if (!$tr_acces) {
-	define('_en_travaux_MESSAGE', $tr_message);
+	@define('_en_travaux_MESSAGE', $tr_message);
 	if($tr_prive) {
 		// les actions ne fonctionnent pas ici
 		action_cs_travaux(true);
