@@ -33,13 +33,25 @@
 </style>
 </head>
 <body onLoad="javascript:if(document.getElementById('le_formulaire')) if(document.getElementById('le_formulaire').textContent=='') document.getElementById('se_deconnecter').style.display='block';">
+[(#REM)
+<br />Admins seuls en prive : #EVAL{_en_travaux_PRIVE}
+<br />Admins admins en public : #EVAL{_en_travaux_ADMIN}
+<br />#SESSION{id_auteur}. #SESSION{nom}
+<br/>form_login : #ENV*{form_login}
+<br/>espace prive : #ENV*{prive} - #URL_ECRIRE
+]
+
 <div id='minipres'>
 	<h1>[(#ENV*{titre})]</h1>
 	<div id='en_travaux'>
 		[(#EVAL{_en_travaux_MESSAGE}|propre)]
-		[(#ENV*{prive}|=={non}|oui)
-		[(#ENV*{form_login}|=={non}|oui)<div style="text-align:right"><a href="./ecrire" class="spip_out"><:espace_prive:></a></div>]
-		]
+		[(#ENV*{prive}|=={non}|oui)[(#ENV*{form_login}|=={non}|oui)
+			<div style="text-align:right"><a href="./ecrire" class="spip_out"><:espace_prive:></a></div>
+		]]
+		[(#ENV*{prive}|=={oui}|oui)[(#SESSION{id_auteur}|non)
+			[(#REM) Cas SPIP 2.0 permettant d'acceder a l'espace prive ]
+			<div style="text-align:right"><a href="../?page=login" class="spip_out"><:lien_connecter:></a></div>
+		]]
 	</div>
 	<div id="se_deconnecter" style="text-align:right; display:none;"><br /><a href="[(#ENV*{prive}|=={oui}|?{'../?action=logout&logout=prive','?action=logout&logout=public'})][(#ENV*{prive}|=={non}|?{'&url=',''})#SELF]" class="spip_out"><:icone_deconnecter:></a></div>
 	[(#ENV*{form_login}|=={oui}|oui)
