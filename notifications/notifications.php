@@ -104,7 +104,7 @@ function notifier_publication_auteurs_article($id_article) {
 				if (!function_exists('job_queue_add'))
 					$envoyer_mail($email, $sujet, $courr);
 				else
-					job_queue_add('envoyer_mail',">$email : $sujet",array($email,$sujet,$courr),'inc/',true);
+					job_queue_add('envoyer_mail',">$email : $sujet",array($email,$sujet,$courr),'inc/');
 			}
 
 			if ($l) lang_select();
@@ -182,12 +182,10 @@ function Notifications_envoi($emails, $subject, $body) {
 
 			$bodyc .= "\n\n$url\n";
 		}
-		foreach (array_keys($destinataires) as $email) {
-			if (!function_exists('job_queue_add'))
-				$envoyer_mail($email, $subject, $bodyc);
-			else
-				job_queue_add('envoyer_mail',"->$email : $subject",array($email, $subject, $bodyc),'inc/',true);
-		}
+		if (!function_exists('job_queue_add'))
+			$envoyer_mail($email, $subject, $bodyc);
+		else
+			job_queue_add('envoyer_mail',"->$email : $subject",array($email, $subject, $bodyc),'inc/');
 	}
 }
 
