@@ -16,15 +16,14 @@
 <BOUCLE_s(MOTS){titre LIKE (#ENV{q})%}
 	{id_groupe IN #ENV{groupes}|explode{','}}
 	{0,20}{par titre}{doublons}{tous}>
-	#TITRE[ - (#DESCRIPTIF|textebrut|couper{20})][ ((#TYPE|textebrut))]|[(#TITRE|textebrut)]|#ID_MOT
+#TITRE[ - (#DESCRIPTIF|textebrut|couper{20})][ ((#TYPE|textebrut))]|[(#TITRE|textebrut)]|#ID_MOT
 </BOUCLE_s>
 #SET{rien,''}
 </B_s>
-
-<BOUCLE_s1(MOTS){recherche #ENV{q}*}
+<BOUCLE_s1(MOTS){recherche (#ENV*{q})*}
 	{id_groupe IN #ENV{groupes}|explode{','}}
 	{0,20}{!par points}{doublons}{tous}>
-	#TITRE[ - (#DESCRIPTIF|textebrut|couper{20})][ ((#TYPE|textebrut))]|[(#TITRE|textebrut)]|#ID_MOT
+#TITRE[ - (#DESCRIPTIF|textebrut|couper{20})][ ((#TYPE|textebrut))]|[(#TITRE|textebrut)]|#ID_MOT
 </BOUCLE_s1>
 #SET{rien,''}
 </B_s1>
