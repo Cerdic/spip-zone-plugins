@@ -1308,7 +1308,7 @@ echo "</script>";
             $code_langue = (!$GLOBALS['spip_lang'] ? lire_meta("langue_site") : $GLOBALS['spip_lang']);
             if (!find_in_path(_DIR_PLUGIN_CSV2SPIP.'lang/csvspip_help_'.$code_langue.'.php')) $code_langue = 'fr';
             include(_DIR_PLUGIN_CSV2SPIP.'lang/csvspip_help_'.$code_langue.'.php');
-            echo "<a href=\""._DIR_PLUGIN_CSV2SPIP."csv2spip_modele.csv\">csv2spip_modele.csv</a>";
+            echo "<a href=\""._DIR_PLUGIN_CSV2SPIP."tests_csv2spip/csv2spip_modele.csv\">csv2spip_modele.csv</a>";
             echo fin_cadre_trait_couleur(true);
             
         } 
