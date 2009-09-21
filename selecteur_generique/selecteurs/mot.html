@@ -11,11 +11,15 @@
 <BOUCLE_e(MOTS){tout}{id_article?}{id_breve?}{id_rubrique?}{id_syndic?}{doublons}></BOUCLE_e>
 
 [(#REM) Chercher les mots correspondant a la requete ]
-<BOUCLE_s(MOTS){titre LIKE (#ENV{q})%}{id_groupe?}{0,20}{par titre}{doublons}{tous}>
-	#TITRE[ - (#DESCRIPTIF|textebrut|couper{20})]|[(#TITRE|textebrut)]|#ID_MOT
+<BOUCLE_s(MOTS){titre LIKE (#ENV{q})%}
+	{id_groupe IN #ENV{groupes}|explode{','}}
+	{0,20}{par titre}{doublons}{tous}>
+	#TITRE[ - (#DESCRIPTIF|textebrut|couper{20})][ ((#TYPE|textebrut))]|[(#TITRE|textebrut)]|#ID_MOT
 </BOUCLE_s>
-	<BOUCLE_s1(MOTS){titre LIKE %(#ENV{q})%}{id_groupe?}{0,20}{par titre}{doublons}{tous}>
-	#TITRE[ - (#DESCRIPTIF|textebrut|couper{20})]|[(#TITRE|textebrut)]|#ID_MOT
+	<BOUCLE_s1(MOTS){titre LIKE %(#ENV{q})%}
+	{id_groupe IN #ENV{groupes}|explode{','}}
+	{0,20}{par titre}{doublons}{tous}>
+	#TITRE[ - (#DESCRIPTIF|textebrut|couper{20})][ ((#TYPE|textebrut))]|[(#TITRE|textebrut)]|#ID_MOT
 	</BOUCLE_s1>
 		[(#REM) Vraiment on n'a rien trouve ]
 		<:selecteurgenerique:pas_suggestion:>|[(#ENV*{q}|textebrut)]|0

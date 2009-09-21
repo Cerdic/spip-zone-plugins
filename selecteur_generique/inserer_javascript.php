@@ -74,12 +74,36 @@ function SelecteurGenerique_inserer_mot() {
 (function($) {
 	var appliquer_selecteur_cherche_mot = function() {
 		// chercher l'input de saisie
-		var me = jQuery('input[name=cherche_mot][autocomplete!=off]');
-		me.each(function(){
+		var groupes = new Array;
+		var groupes_titre = new Array;
+		var hide=false;
+		$('input[name=cherche_mot][autocomplete!=off]')
+		.each(function(){
+			var id_groupe = $(this).parents('form').find('input[name=select_groupe]').val();
+			groupes.push(id_groupe);
+			groupes_titre.push($(this).val());
+			if (hide) {
+				$(this).parent().hide();
+				/*
+				$(this).parent().parent().append(
+					$('<a>'+$(this).val()+'<\/a>')
+					.click(function(){
+						$(this).hide().parent().find('input[name=select_groupe]').parent().show();
+					})
+				);
+				*/
+			}
+			hide=true;
+		});
+		hide=false;
+		$('input[name=cherche_mot][autocomplete!=off]:first')
+		.each(function(){
 			var inp = this;
-			var id_groupe = jQuery(this).parents('form').find('input[name=select_groupe]').val();
-			jQuery(inp).autocomplete('$ac',{
-				extraParams:{quoi:'mot',$type:'$id',id_groupe:''+id_groupe+''},
+			$(this)
+			.val(groupes_titre.join(', '))
+			.attr('title',groupes_titre.join(', '));
+			$(inp).autocomplete('$ac',{
+				extraParams:{quoi:'mot',$type:'$id',groupes: groupes.join(',')},
 				delay: 300,
 				autofill: false,
 				minChars: 1,
@@ -87,13 +111,13 @@ function SelecteurGenerique_inserer_mot() {
 					return data[0];
 				},
 			});
-			jQuery(inp).result(function(event, data, formatted) {
+			$(inp).result(function(event, data, formatted) {
 				if (data[2] > 0) {
-					jQuery(inp)
+					$(inp)
 					.attr('name', 'old_value')
 					.parents('form')
 					.append(
-						jQuery("<input type='hidden' name='nouv_mot' value='"+data[2]+"' />")
+						$("<input type='hidden' name='nouv_mot' value='"+data[2]+"' />")
 					).find('input[type=submit]')
 					.click()
 					.end();
