@@ -41,7 +41,23 @@ function job_queue_add($function, $description, $arguments = array(), $file = ''
  * @return bool
  */
 function job_queue_remove($id_job){
+	include_spip('inc/queue');
 	return queue_remove_job($id_job);
+}
+
+/**
+ * Link a job with SPIP objects
+ *
+ *
+ * @param int $id_job
+ *	id of job to link
+ * @param array $objets
+ *  can be a simple array('objet'=>'article','id_objet'=>23)
+ *  or an array of simple array to link multiples objet in one time
+ */
+function job_queue_link($id_job,$objets){
+	include_spip('inc/queue');
+	return queue_link_job($id_job,$objets);
 }
 
 ?>

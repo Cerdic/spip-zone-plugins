@@ -12,6 +12,7 @@ function queue_declarer_tables_interfaces($interface){
 	// 'spip_' dans l'index de $tables_principales
 	$interface['table_des_tables']['jobs']='jobs';
 
+	$interface['tables_jointures']['spip_jobs'][] = 'jobs_liens';
 
 	return $interface;
 }
@@ -41,13 +42,31 @@ function queue_declarer_tables_principales($tables_principales){
 }
 
 
+function queue_declarer_tables_auxiliaires($tables_auxiliaires){
+	$spip_jobs_liens = array(
+		"id_job"	=> "bigint(21) DEFAULT '0' NOT NULL",
+		"id_objet"	=> "bigint(21) DEFAULT '0' NOT NULL",
+		"objet"	=> "VARCHAR (25) DEFAULT '' NOT NULL",
+	);
+
+$spip_documents_liens_key = array(
+		"PRIMARY KEY"		=> "id_job,id_objet,objet",
+		"KEY id_job"	=> "id_job");
+
+	$tables_auxiliaires['spip_jobs_liens'] = array(
+		'field' => &$spip_jobs_liens,
+		'key' => &$spip_documents_liens_key);
+	return $tables_auxiliaires;
+}
+
 function queue_upgrade($nom_meta_base_version,$version_cible){
 	$current_version = 0.0;
 	if (   (!isset($GLOBALS['meta'][$nom_meta_base_version]) )
 			|| (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){
 		include_spip('base/abstract_sql');
-		if ($current_version==0.0){
+		if (version_compare($current_version,"0.2.0"<=0.0)){
 			include_spip('base/serial');
+			include_spip('base/auxiliaires');
 			include_spip('base/create');
 			creer_base();
 			ecrire_meta($nom_meta_base_version,$current_version=$version_cible,'non');

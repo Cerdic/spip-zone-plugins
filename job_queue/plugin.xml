@@ -2,7 +2,7 @@
   <nom>Job Queue</nom>
   <auteur>Cedric&amp;Fil</auteur>
   <version>0.1</version>
-  <version_base>0.1.0</version_base>
+  <version_base>0.2.0</version_base>
   <etat>test</etat>
   <description>Gestion d'une queue de Jobs</description>
   <install>base/queue.php</install>
@@ -17,4 +17,13 @@
 		<nom>declarer_tables_principales</nom>
 		<inclure>base/queue.php</inclure>
 	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_auxiliaires</nom>
+		<inclure>base/queue.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<inclure>queue_pipelines.php</inclure>
+	</pipeline>
+
 </plugin>

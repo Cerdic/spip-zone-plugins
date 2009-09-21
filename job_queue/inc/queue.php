@@ -42,7 +42,7 @@ function queue_add_job($function, $description, $arguments = array(), $file = ''
 		AND
 			sql_countsel('spip_jobs',
 				'fonction='.sql_quote($function)
-				.(($no_duplicate=='function_only')?'':
+				.(($no_duplicate==='function_only')?'':
 				 ' AND args='.sql_quote($arguments).' AND file='.sql_quote($file)))
 		)
 		return false;
@@ -77,11 +77,47 @@ function queue_add_job($function, $description, $arguments = array(), $file = ''
  * @return bool
  */
 function queue_remove_job($id_job){
-	if ($res = sql_delete('spip_jobs','id_job='.intval($id_job)))
+	if ($res = sql_delete('spip_jobs','id_job='.intval($id_job))){
 		queue_update_next_job_time();
+		queue_unlink_job($id_job);
+	}
 	return $res;
 }
 
+/**
+ * Link a job with SPIP objects
+ *
+ *
+ * @param int $id_job
+ *	id of job to link
+ * @param array $objets
+ *  can be a simple array('objet'=>'article','id_objet'=>23)
+ *  or an array of simple array to link multiples objet in one time
+ */
+function queue_link_job($id_job,$objets){
+	if (is_array($objets) AND count($objets)){
+		if (is_array(reset($objets))){
+			foreach($objets as $k=>$o){
+				$objets[$k]['id_job'] = $id_job;
+			}
+			sql_insertq_multi('spip_jobs_liens',$objets);
+		}
+		else
+			sql_insertq('spip_jobs_liens',array_merge(array('id_job'=>$id_job),$objets));
+	}
+}
+
+/**
+ * Unlink job with SPIP objects
+ *
+ * @param int $id_job
+ *	id of job to unlink ibject with
+ * @return int/bool
+ *	result of sql_delete
+ */
+function queue_unlink_job($id_job){
+	return sql_delete("spip_jobs_liens","id_job=".intval($id_job));
+}
 
 /**
  * Start a job described by array $row
@@ -152,6 +188,9 @@ function queue_schedule(){
 				// on a la main sur le job :
 				// l'executer
 				$result = queue_start_job($row);
+
+				// purger ses liens eventuels avec des objets
+				sql_delete("spip_jobs_liens","id_job=".intval($row['id_job']));
 
 				// est-ce une tache cron qu'il faut relancer ?
 				if ($periode = queue_is_cron_job($row['fonction'],$row['inclure'])){
