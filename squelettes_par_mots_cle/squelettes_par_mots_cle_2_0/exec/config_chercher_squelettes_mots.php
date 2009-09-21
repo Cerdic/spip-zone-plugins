@@ -1,8 +1,8 @@
 <?php
 
-//    Fichier créé pour SPIP avec un bout de code emprunt  celui ci.
+//    Fichier créé pour SPIP avec un bout de code emprunté à celui ci.
 //    Distribué sans garantie sous licence GPL./
-//    Copyright (C) 2009  Francois Sauterey
+//    Copyright (C) 2006  Pierre ANDREWS
 //
 //    This program is free software; you can redistribute it and/or modify
 //    it under the terms of the GNU General Public License as published by
@@ -48,7 +48,7 @@ function exec_config_chercher_squelettes_mots() {
 	debut_gauche();	
 	
 	debut_boite_info();
-	echo propre(_T('squelettesmots:aide'));
+	echo propre(_T('squelettesmots:help'));
 	fin_boite_info();
 
 	debut_droite();
@@ -71,9 +71,10 @@ function exec_config_chercher_squelettes_mots() {
 
 	//TODO: trouver automatiquement ces informations pour toutes les tables avec un jonction sur les mots
 	$id_tables = array('articles' => 'id_article',
-		'rubriques' => 'id_rubrique',
-		'breves' => 'id_breve',
-		'sites' => 'id_site');
+					   'rubriques' => 'id_rubrique',
+					   'breves' => 'id_breve',
+					   'sites' => 'id_site');
+	
 
 	$fonds = unserialize(lire_meta('SquelettesMots:fond_pour_groupe'));
 
@@ -104,7 +105,7 @@ function exec_config_chercher_squelettes_mots() {
 	  $index++;
 	  echo '<fieldset class="regle">';
 	  echo '<legend>'._T('squelettesmots:reglei',array('id'=>$index)).'</legend>';
-	  if (!find_in_path($fond.'.html')) {
+	  if(!find_in_path($fond.'.html')) {
 		echo '<div class="avertissement">';
 		echo _T('squelettesmots:avertissement',array('squelette'=>'<em>'.$fond.'.html'.'</em>'));
 		echo '</div>';
@@ -199,6 +200,7 @@ function exec_config_chercher_squelettes_mots() {
   ecrire_metas();
   
   fin_page();
+  
 }
 
 ?>
