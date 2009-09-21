@@ -1,6 +1,7 @@
 <!-- nom=microblog -->
 
 <div class="formulaire_spip formulaire_editer formulaire_cfg">
+	<h2 class="titrem">Microblog</h2>
 	[<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
 	[<p class="formulaire_message">(#ENV*{message_ok})</p>]
 	<form method="post" action="#ENV{action}"><div>
@@ -8,8 +9,7 @@
 		<ul>
 			<li class="fieldset">
 				<fieldset>
-					<h3 class="legend"><:microblog:compte_defaut:> <code><tt>microblog()</tt></code></h3>
-
+					<legend><:microblog:compte_defaut:> <code><tt>microblog()</tt></code></legend>
 					<p class="explication"><:microblog:creer_compte_services:>&nbsp;:</p>
 
 					<ul>
@@ -54,7 +54,7 @@
 			</li>
 			<li class="fieldset">
 				<fieldset>
-					<h3 class="legend"><:microblog:notifications:></h3>
+					<legend><:microblog:notifications:></legend>
 					<ul>
 						<li>
 							<label><:microblog:notifications_publiques:></label>
@@ -109,5 +109,5 @@
 			<input type="reset" value="<:reset:>" class="submit" />
 			<input type="submit" name="_cfg_delete" value="<:supprimer:>" class="submit" />
 		</p>
-	</div>
-</form>
+	</div></form>
+</div>
