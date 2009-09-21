@@ -43,7 +43,7 @@ function queue_add_job($function, $description, $arguments = array(), $file = ''
 			sql_countsel('spip_jobs',
 				'fonction='.sql_quote($function)
 				.(($no_duplicate==='function_only')?'':
-				 ' AND args='.sql_quote($arguments).' AND file='.sql_quote($file)))
+				 ' AND args='.sql_quote($arguments).' AND inclure='.sql_quote($file)))
 		)
 		return false;
 
