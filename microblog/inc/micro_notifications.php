@@ -30,6 +30,7 @@ function Microblog_notifications($x) {
 				$titre = couper(typo($t['titre'].' | '.$t['texte']),
 					120 - strlen('#forum  ') - strlen($url));
 				$status = "$titre #forum $url";
+				envoyer_microblog($status,array('objet'=>'forum','id_objet'=>$id));
 			}
 			break;
 		
@@ -63,33 +64,30 @@ function Microblog_notifications($x) {
 				ecrire_meta('microblog_annonces',$GLOBALS['meta']['microblog_annonces'].','.$id);
 			}
 			$status = Microblog_annonce_article($id,$x['args']['options']['statut']);
+			envoyer_microblog($status,array('objet'=>'article','id_objet'=>$id));
 		}
 		break;
-	}
-
-	if (!is_null($status)) {
-		include_spip('inc/microblog');
-		microblog($status);
 	}
 
 	return $x;
 }
 
 function Microblog_annonce_article($id,$statut){
-  include_spip('inc/filtres_mini');
-  include_spip('inc/texte');
-	
-	$espace_lien = ($statut == 'publie' ? true : false);  // lien notifie vers public | prive
-		$url = str_replace('amp;','',url_absolue(generer_url_entite($id, 'article', '', '', $espace_lien)));
-	$t = sql_fetsel('titre,descriptif,texte', 'spip_articles', 'id_article='.$id);
-	$etat = str_replace(array('prop','publie'),
-		array(_T('microblog:propose'),_T('microblog:publie')),
-		$statut
-	);
-	$titre = couper(typo($t['titre']
-		.' | '.$etat
-		.' | '.($t['descriptif'] != '' ? $t['descriptif'].' | ' : '')
-		.$t['texte']),
-		120 - strlen($url));
-	return "$titre $url";
+	return trim(recuperer_fond('modeles/microblog_instituerarticle',array('id_article'=>$id)));
 }
+
+function envoyer_microblog($status,$liens=array()){
+	if (!is_null($status)) {
+		if (!function_exists('job_queue_add')){
+			include_spip('inc/microblog');
+			microblog($status);
+		}
+		else{
+			$id_job = job_queue_add('microblog',"microblog : $status",array($status),'inc/microblog',true,time()+60);
+			if ($liens)
+				job_queue_link($id_job,$liens);
+		}
+	}
+}
+
+?>
