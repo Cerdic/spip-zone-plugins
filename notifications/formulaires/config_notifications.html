@@ -15,7 +15,7 @@
 					<ul>
 						<li>
 							<div class="choix">
-								<input type="checkbox" name="prevenir_auteurs_articles" [checked="(#ENV{prevenir_auteurs_articles}?{checked})"] id="prevenir_auteurs_articles" />
+								<input type="checkbox" name="prevenir_auteurs_articles" [checked="(#ENV{prevenir_auteurs_articles}?{checked})"] id="prevenir_auteurs_articles" class="checkbox" />
 								<label for="prevenir_auteurs_articles"><:notifications:article_prive_auteurs:></label>
 							</div>
 						</li>
@@ -30,17 +30,17 @@
 					<ul>
 						<li>
 							<div class="choix">
-								<input type="checkbox" name="prevenir_auteurs" [checked="(#ENV{prevenir_auteurs}?{checked})"] id="prevenir_auteurs" />
+								<input type="checkbox" name="prevenir_auteurs" [checked="(#ENV{prevenir_auteurs}?{checked})"] id="prevenir_auteurs" class="checkbox" />
 								<label for="prevenir_auteurs"><:notifications:forums_public_auteurs:></label>
 							</div>
 							<div class="choix">
-								<input type="checkbox" name="thread_forum" [checked="(#ENV{thread_forum}?{checked})"] id="thread_forum" />
+								<input type="checkbox" name="thread_forum" [checked="(#ENV{thread_forum}?{checked})"] id="thread_forum" class="checkbox" />
 								<label for="thread_forum"><:notifications:forums_public_thread:></label>
 							</div>
 						</li>
 						<li>
 							<label for="moderateurs_forum"><:notifications:forums_public_moderateur:></label>
-							<input type="text" name="moderateurs_forum" value="[(#ENV{moderateurs_forum}|entites_html)]" id="moderateurs_forum" size="60" />
+							<input type="text" name="moderateurs_forum" value="[(#ENV{moderateurs_forum}|entites_html)]" id="moderateurs_forum" class="text" />
 							<p class="explication"><:notifications:forums_public_a_noter:></p>
 						</li>
 					</ul>
@@ -54,17 +54,17 @@
 					<ul>
 						<li>
 							<div class="choix">
-								<input type="checkbox" name="prevenir_auteurs_prive" [checked="(#ENV{prevenir_auteurs_prive}?{checked})"] id="prevenir_auteurs_prive" />
+								<input type="checkbox" name="prevenir_auteurs_prive" [checked="(#ENV{prevenir_auteurs_prive}?{checked})"] id="prevenir_auteurs_prive" class="checkbox" />
 								<label for="prevenir_auteurs_prive"><:notifications:forum_prives_auteur:></label>
 							</div>
 							<div class="choix">
-								<input type="checkbox" name="thread_forum_prive" [checked="(#ENV{thread_forum_prive}?{checked})"] id="thread_forum_prive" />
+								<input type="checkbox" name="thread_forum_prive" [checked="(#ENV{thread_forum_prive}?{checked})"] id="thread_forum_prive" class="checkbox" />
 								<label for="thread_forum_prive"><:notifications:forum_prives_thread:></label>
 							</div>
-							<div class="choix">
-								<input type="text" name="moderateurs_forum_prive" value="[(#ENV{moderateurs_forum_prive}|entites_html)]" id="moderateurs_forum_prive" size="60" />
+						</li>
+						<li>
 								<label for="moderateurs_forum_prive"><:notifications:forum_prives_moderateur:></label>
-							</div>
+								<input type="text" name="moderateurs_forum_prive" value="[(#ENV{moderateurs_forum_prive}|entites_html)]" id="moderateurs_forum_prive" class="text" />
 						</li>
 					</ul>
 				</fieldset>
@@ -77,7 +77,7 @@
 					<ul>
 						<li>
 							<div class="choix">
-								<input type="checkbox" name="messagerie" [checked="(#ENV{messagerie}?{checked})"] id="messagerie" />
+								<input type="checkbox" name="messagerie" [checked="(#ENV{messagerie}?{checked})"] id="messagerie" class="checkbox" />
 								<label for="messagerie"><:notifications:messagerie_interne_signaler:></label>
 							</div>
 						</li>
@@ -91,10 +91,8 @@
 					<h3 class="legend"><:notifications:signature_petition:></h3>
 					<ul>
 						<li>
-							<div class="choix">
-								<input type="text" name="moderateurs_signatures" value="[(#ENV{moderateurs_signatures}|entites_html)]" id="moderateurs_signatures" size="60" />
-								<label for="moderateurs_signatures"><:notifications:signature_petition_moderateur:></label>
-							</div>
+							<label for="moderateurs_signatures"><:notifications:signature_petition_moderateur:></label>
+							<input type="text" name="moderateurs_signatures" value="[(#ENV{moderateurs_signatures}|entites_html)]" id="moderateurs_signatures" class="text" />
 						</li>
 					</ul>
 				</fieldset>
