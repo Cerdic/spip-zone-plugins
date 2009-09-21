@@ -33,7 +33,7 @@ function genie_microblog_dist($last) {
 		include_spip('inc/micro_notifications');
 		include_spip('inc/microblog');
 		while($row = sql_fetch($res)){
-			$status = Microblog_annonce_article($row['id_article'],$row['statut']);
+			$status = Microblog_annonce('instituerarticle',array('id_article'=>$row['id_article']));
 			envoyer_microblog($status,array('objet'=>'article','id_objet'=>$row['id_article']));
 		}
 		// raz des annonces deja faites

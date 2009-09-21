@@ -25,11 +25,7 @@ function Microblog_notifications($x) {
 		case 'forumposte':      // post forums
 			if ($cfg['evt_forumposte']
 			AND $id = intval($x['args']['id'])) {
-				$url = url_absolue(generer_url_entite($id, 'forum'));
-				$t = sql_fetsel('titre,texte', 'spip_forum', 'id_forum='.$id);
-				$titre = couper(typo($t['titre'].' | '.$t['texte']),
-					120 - strlen('#forum  ') - strlen($url));
-				$status = "$titre #forum $url";
+				$status = Microblog_annonce('forumposte',array('id_forum'=>$id));
 				envoyer_microblog($status,array('objet'=>'forum','id_objet'=>$id));
 			}
 			break;
@@ -63,7 +59,7 @@ function Microblog_notifications($x) {
 				include_spip('inc/meta');
 				ecrire_meta('microblog_annonces',$GLOBALS['meta']['microblog_annonces'].','.$id);
 			}
-			$status = Microblog_annonce_article($id,$x['args']['options']['statut']);
+			$status = Microblog_annonce('instituerarticle',array('id_article'=>$id));
 			envoyer_microblog($status,array('objet'=>'article','id_objet'=>$id));
 		}
 		break;
@@ -72,8 +68,8 @@ function Microblog_notifications($x) {
 	return $x;
 }
 
-function Microblog_annonce_article($id,$statut){
-	return trim(recuperer_fond('modeles/microblog_instituerarticle',array('id_article'=>$id)));
+function Microblog_annonce($quoi,$contexte){
+	return trim(recuperer_fond("modeles/microblog_$quoi",$contexte));
 }
 
 function envoyer_microblog($status,$liens=array()){
