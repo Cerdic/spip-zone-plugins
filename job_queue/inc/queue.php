@@ -77,9 +77,17 @@ function queue_add_job($function, $description, $arguments = array(), $file = ''
  * @return bool
  */
 function queue_remove_job($id_job){
-	if ($res = sql_delete('spip_jobs','id_job='.intval($id_job))){
-		queue_update_next_job_time();
+	if ($row = sql_fetsel('fonction,inclure,date','spip_jobs','id_job='.intval($id_job))
+	 AND $res = sql_delete('spip_jobs','id_job='.intval($id_job))){
 		queue_unlink_job($id_job);
+		// est-ce une tache cron qu'il faut relancer ?
+		if ($periode = queue_is_cron_job($row['fonction'],$row['inclure'])){
+			// relancer avec les nouveaux arguments de temps
+			include_spip('inc/genie');
+			// relancer avec la periode prevue
+			queue_genie_replan_job($row['fonction'],$periode,strtotime($row['date']));
+		}
+		queue_update_next_job_time();
 	}
 	return $res;
 }
