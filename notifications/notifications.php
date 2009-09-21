@@ -49,8 +49,7 @@ function notifications_instituerarticle($quoi, $id_article, $options) {
 }
 
 function notifier_publication_auteurs_article($id_article) {
-
-	$envoyer_mail = charger_fonction('envoyer_mail','inc');
+	include_spip('base/abstract_sql');
 	$nom_site_spip = nettoyer_titre_email($GLOBALS['meta']["nom_site"]);
 	$suivi_edito = $GLOBALS['meta']["suivi_edito"];
 	
@@ -89,21 +88,24 @@ function notifier_publication_auteurs_article($id_article) {
 				$tous[] = $qui['email'];
 			}
 
-	// Nettoyer le tableau
-	// Ne pas ecrire au posteur du message !
-	$destinataires = array();
-	foreach ($tous as $m) {
-		if ($m = email_valide($m))
-			$destinataires[$m]++;
-	}
+			// Nettoyer le tableau
+			// Ne pas ecrire au posteur du message !
+			$destinataires = array();
+			foreach ($tous as $m) {
+				if ($m = email_valide($m))
+					$destinataires[$m]++;
+			}
 
-	//
-	// Envoyer les emails
-	//
-	foreach (array_keys($destinataires) as $email) {
-
-		$envoyer_mail($email, $sujet, $courr);
-	}
+			//
+			// Envoyer les emails
+			//
+			$envoyer_mail = charger_fonction('envoyer_mail','inc');
+			foreach (array_keys($destinataires) as $email) {
+				if (!function_exists('job_queue_add'))
+					$envoyer_mail($email, $sujet, $courr);
+				else
+					job_queue_add('envoyer_mail',">$email : $sujet",array($email,$sujet,$courr),'inc/',true);
+			}
 
 			if ($l) lang_select();
 		}
@@ -165,7 +167,7 @@ function Notifications_creer_auteur($email) {
 
 // Envoi des notifications
 function Notifications_envoi($emails, $subject, $body) {
-	include_spip('inc/mail'); # un peu obsolete, cf. envoyer_mail
+	$envoyer_mail = charger_fonction('envoyer_mail','inc');
 	include_spip('inc/filtres'); # pour email_valide()
 
 	// Attention $email peut etre une liste d'adresses, et on verifie qu'elle n'a pas de doublon
@@ -180,23 +182,29 @@ function Notifications_envoi($emails, $subject, $body) {
 
 			$bodyc .= "\n\n$url\n";
 		}
-		envoyer_mail($email, $subject, $bodyc);
+		foreach (array_keys($destinataires) as $email) {
+			if (!function_exists('job_queue_add'))
+				$envoyer_mail($email, $subject, $bodyc);
+			else
+				job_queue_add('envoyer_mail',"->$email : $subject",array($email, $subject, $bodyc),'inc/',true);
+		}
 	}
 }
 
 // insertion d'une nouvelle signature => mail aux moderateurs
 // definis par la constante _SPIP_MODERATEURS_PETITION
 function Notifications_spip_signatures($x) {
+	include_spip('base/abstract_sql');
 	if (!$GLOBALS['notifications']['moderateurs_signatures'])
 		return $x;
 
 	$id_signature = $x['args']['id_objet'];
 
-	$s = spip_query($q = "SELECT * FROM spip_signatures WHERE id_signature="._q($id_signature));
+	$s = sql_select("*","spip_signatures","id_signature=".intval($id_signature));
 
-	if ($t = spip_fetch_array($s)) {
+	if ($t = sql_fetch($s)) {
 
-		$a = spip_fetch_array(spip_query("SELECT titre,lang FROM spip_articles WHERE id_article="._q($t['id_article'])));
+		$a = sql_fetsel("titre,lang","spip_articles","id_article=".intval($t['id_article']));
 		lang_select($a['lang']);
 
 		if (function_exists('generer_url_entite')) {
@@ -248,8 +256,9 @@ function Notifications_spip_signatures($x) {
 
 
 function notifications_forumprive($quoi, $id_forum) {
-	$s = spip_query("SELECT * FROM spip_forum WHERE id_forum="._q($id_forum));
-	if (!$t = spip_fetch_array($s))
+	include_spip('base/abstract_sql');
+	$s = sql_select("*","spip_forum","id_forum=".intval($id_forum));
+	if (!$t = sql_fetch($s))
 		return;
 
 	include_spip('inc/texte');
@@ -265,9 +274,9 @@ function notifications_forumprive($quoi, $id_forum) {
 
 		// 1.1. Les auteurs du message (si c'est un message)
 		if ($t['id_message']) {
-			$result = spip_query("SELECT auteurs.email FROM spip_auteurs AS auteurs, spip_auteurs_messages AS lien WHERE lien.id_message="._q($t['id_message'])." AND auteurs.id_auteur=lien.id_auteur");
+			$result = sql_select("auteurs.email","spip_auteurs AS auteurs, spip_auteurs_messages AS lien","lien.id_message=".intval($t['id_message'])." AND auteurs.id_auteur=lien.id_auteur");
 	
-			while ($qui = spip_fetch_array($result))
+			while ($qui = sql_fetch($result))
 				$tous[] = $qui['email'];
 	
 			if (function_exists('generer_url_entite')) {
@@ -281,9 +290,9 @@ function notifications_forumprive($quoi, $id_forum) {
 	
 		// 1.2. Les auteurs de l'article (si c'est un article)
 		elseif ($t['id_article']) {
-			$result = spip_query("SELECT auteurs.email FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien WHERE lien.id_article="._q($t['id_article'])." AND auteurs.id_auteur=lien.id_auteur");
+			$result = sql_select("auteurs.email","spip_auteurs AS auteurs, spip_auteurs_articles AS lien","lien.id_article=".intval($t['id_article'])." AND auteurs.id_auteur=lien.id_auteur");
 	
-			while ($qui = spip_fetch_array($result))
+			while ($qui = sql_fetch($result))
 				$tous[] = $qui['email'];
 		}
 	}
@@ -298,8 +307,8 @@ function notifications_forumprive($quoi, $id_forum) {
 	// TODO: proposer une case a cocher ou un lien dans le message
 	// pour se retirer d'un troll (hack: replacer @ par % dans l'email)
 	if ($GLOBALS['notifications']['thread_forum_prive']) {
-		$s = spip_query("SELECT DISTINCT(email_auteur) FROM spip_forum WHERE id_thread=".$t['id_thread']." AND email_auteur != ''");
-		while ($r = spip_fetch_array($s))
+		$s = sql_select("DISTINCT(email_auteur)","spip_forum","id_thread=".intval($t['id_thread'])." AND email_auteur != ''");
+		while ($r = sql_fetch($s))
 			$tous[] = $r['email_auteur'];
 	}
 
@@ -342,8 +351,9 @@ function notifications_forumprive($quoi, $id_forum) {
 // pas ete a la notification forumposte (sachant que les deux peuvent se
 // suivre si le forum est valide directement ('pos' ou 'abo')
 function notifications_forumvalide($quoi, $id_forum) {
-	$s = spip_query("SELECT * FROM spip_forum WHERE id_forum="._q($id_forum));
-	if (!$t = spip_fetch_array($s))
+	include_spip('base/abstract_sql');
+	$s = sql_select("*","spip_forum","id_forum=".intval($id_forum));
+	if (!$t = sql_fetch($s))
 		return;
 
 	// forum sur un message prive : pas de notification ici (cron)
@@ -363,9 +373,9 @@ function notifications_forumvalide($quoi, $id_forum) {
 	// pas le droit de le moderer (les autres l'ont recu plus tot)
 	if ($t['id_article']
 	AND $GLOBALS['notifications']['prevenir_auteurs']) {
-		$result = spip_query("SELECT auteurs.* FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien WHERE lien.id_article="._q($t['id_article'])." AND auteurs.id_auteur=lien.id_auteur");
+		$result = sql_select("auteurs.*","spip_auteurs AS auteurs, spip_auteurs_articles AS lien","lien.id_article=".intval($t['id_article'])." AND auteurs.id_auteur=lien.id_auteur");
 
-		while ($qui = spip_fetch_array($result)) {
+		while ($qui = sql_fetch($result)) {
 			if (!autoriser('modererforum', 'article', $t['id_article'], $qui['id_auteur']))
 				$tous[] = $qui['email'];
 			else
@@ -378,8 +388,8 @@ function notifications_forumvalide($quoi, $id_forum) {
 	// TODO: proposer une case a cocher ou un lien dans le message
 	// pour se retirer d'un troll (hack: replacer @ par % dans l'email)
 	if ($GLOBALS['notifications']['thread_forum']) {
-		$s = spip_query("SELECT DISTINCT(email_auteur) FROM spip_forum WHERE id_thread=".$t['id_thread']." AND email_auteur != ''");
-		while ($r = spip_fetch_array($s))
+		$s = sql_select("DISTINCT(email_auteur)","spip_forum","id_thread=".intval($t['id_thread'])." AND email_auteur != ''");
+		while ($r = sql_fetch($s))
 			$tous[] = $r['email_auteur'];
 	}
 
@@ -422,8 +432,9 @@ function notifications_forumvalide($quoi, $id_forum) {
 
 
 function notifications_forumposte($quoi, $id_forum) {
-	$s = spip_query("SELECT * FROM spip_forum WHERE id_forum="._q($id_forum));
-	if (!$t = spip_fetch_array($s))
+	include_spip('base/abstract_sql');
+	$s = sql_select("*","spip_forum","id_forum=".intval($id_forum));
+	if (!$t = sql_fetch($s))
 		return;
 
 	include_spip('inc/texte');
@@ -439,9 +450,9 @@ function notifications_forumposte($quoi, $id_forum) {
 	// avertis par la notifications_forumvalide).
 	if ($t['id_article']
 	AND $GLOBALS['notifications']['prevenir_auteurs']) {
-		$result = spip_query("SELECT auteurs.* FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien WHERE lien.id_article="._q($t['id_article'])." AND auteurs.id_auteur=lien.id_auteur");
+		$result = sql_select("auteurs.*","spip_auteurs AS auteurs, spip_auteurs_articles AS lien","lien.id_article=".intval($t['id_article'])." AND auteurs.id_auteur=lien.id_auteur");
 
-		while ($qui = spip_fetch_array($result)) {
+		while ($qui = sql_fetch($result)) {
 			if (autoriser('modererforum', 'article', $t['id_article'], $qui['id_auteur']))
 				$tous[] = $qui['email'];
 		}
