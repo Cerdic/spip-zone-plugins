@@ -48,9 +48,11 @@
 		[(#ENV*{prive}|=={non}|oui)[(#ENV*{form_login}|=={non}|oui)
 			<div style="text-align:right"><a href="./ecrire" class="spip_out"><:espace_prive:></a></div>
 		]]
+		[(#REM) Cas SPIP 2.0 permettant d'acceder a l'espace prive ]
 		[(#ENV*{prive}|=={oui}|oui)[(#SESSION{id_auteur}|non)
-			[(#REM) Cas SPIP 2.0 permettant d'acceder a l'espace prive ]
 			<div style="text-align:right"><a href="../?page=login" class="spip_out"><:lien_connecter:></a></div>
+		][(#SESSION{id_auteur}|oui)
+			<div style="text-align:right"><a href="../?action=logout&logout=prive" class="spip_out"><:icone_deconnecter:></a></div>
 		]]
 	</div>
 	<div id="se_deconnecter" style="text-align:right; display:none;"><br /><a href="[(#ENV*{prive}|=={oui}|?{'../?action=logout&logout=prive','?action=logout&logout=public'})][(#ENV*{prive}|=={non}|?{'&url=',''})#SELF]" class="spip_out"><:icone_deconnecter:></a></div>
