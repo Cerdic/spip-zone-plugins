@@ -52,7 +52,7 @@ function typoenluminee_pre_propre($texte) {
 		// pour etre pris en charge par paragrapher
 	
 		// Definition des differents intertitres possibles, si pas deja definies
-		if (!function_exists('lire_config')) {
+		if ((!function_exists('lire_config')) OR (isset($GLOBALS['config_intertitre']))) {
 			tester_variable('debut_intertitre', '<h3 class="spip">');
 			tester_variable('fin_intertitre', '</h3>');
 			tester_variable('debut_intertitre_2', '<h4 class="spip">');
