@@ -35,6 +35,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'installer_dossier_lib' => 'U moet een dossier @dir@ aan de wortel van uw SPIP cre&euml;ren dat toestemmingen van schrift heeft.',
 	'installer_lib_192' => 'Om een boekhandel te plaatsen, d&eacute;compressez manueel zip en kopi&euml;ert zijn inhoud in het dossier @dir@.',
 
+	// L
+	'label_activer' => 'Activeren',
+	'label_obligatoire' => 'Verplicht beslag',
+
 	// N
 	'nom_table_manquant' => 'Ontbrekende naam van de tafel SQL',
 	'nouveau' => 'Nieuw',
@@ -47,6 +51,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'pas_de_changement' => 'Geen verandering in <b>@nom@</b>',
 
 	// R
+	'refus_configuration_administrateur' => 'Enkel de beheerders van de plaats worden gemachtigd om deze parameters te wijzigen.',
+	'refus_configuration_webmestre' => 'Enkel webmestres van de plaats worden toegestaan om deze parameters te wijzigen.',
 	'reset' => 'Uitwissen',
 
 	// S
