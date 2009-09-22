@@ -67,7 +67,7 @@ class Pile {
 	// creer_argument_balise(nom, 'coucou') = {nom=coucou}
 	// creer_argument_balise(nom, $balise) = {nom=#BALISE}
 	function creer_argument_balise($nom, $valeur = null) {
-		include_spip('inc/interfaces');
+		include_spip('public/interfaces');
 		$s = new Texte;
 		$s->type="texte";
 		$s->texte = $nom;
