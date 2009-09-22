@@ -55,7 +55,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_lien' => 'Page @page@: @title@',
 	'page_precedente' => 'Previous page',
 	'page_suivante' => 'Next page',
-	'plugin_xml' => 'Gathers together in one plugin a list of small, useful tools to improve the management of your SPIP site.
+	'plugin_xml' => '<MODIF>Gathers together in one plugin a list of small, useful tools to improve the management of your SPIP site.
 
 Each tool can be ativated/deactivated individually by the the user from the [plugin\'s admin page->./?exec=admin_couteau_suisse]. To set some options, click on {{Configuration}}, then choose the {{Swiss Knife}} tab.
 

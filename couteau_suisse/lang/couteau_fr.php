@@ -7,18 +7,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// 2
 	'2pts' => '@objet@&nbsp;:',
-	'maj_rev_ko' => "La [r&eacute;vision distante->@url@] n'a pas pu &ecirc;tre trouv&eacute;e.",
-	'maj_rev_ok' => 'La r&eacute;vision [@revision@->@url@] est [disponible->@zip@].',
-	'maj_ok' => 'Ce [plugin->@zip@] semble [&agrave; jour->@url@].',
-	'maj_svn' => 'Ce plugin SVN semble [&agrave; jour->@url@].',
-	'maj_rev' => "R&eacute;v.&nbsp;@revision@",
-	'maj_actu' => 'Forcer l\'actualisation',
-	'maj_verif2' => 'Attention : apr&egrave;s avoir cliqu&eacute; sur le bouton ci-dessus, v&eacute;rifiez bien que l\'archive t&eacute;l&eacute;charg&eacute;e correspond au plugin qu\'il vous faut mettre &agrave; jour.',
-	'maj_maj' => 'Mettre &agrave; jour le plugin s&eacute;lectionn&eacute;',
-	'maj_liste' => 'Liste des plugins d&eacute;tect&eacute;s :',
-	'plug_actifs' => 'Plugins actifs',
-	'plug_inactifs' => 'Plugins inactifs',
-	'maj_verif' => 'V&eacute;rifiez pr&eacute;alablement l\'archive qui vous convient :',
 
 	// A
 	'attente_confirmation' => 'En attente de confirmation',
@@ -37,6 +25,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'lutte_spam' => 'Lutte contre le SPAM',
+
+	// M
+	'maj_actu' => 'Forcer l\'actualisation',
+	'maj_liste' => 'Liste des plugins d&eacute;tect&eacute;s :',
+	'maj_maj' => 'Mettre &agrave; jour le plugin s&eacute;lectionn&eacute;',
+	'maj_ok' => 'Ce [plugin->@zip@] semble [&agrave; jour->@url@].',
+	'maj_rev' => 'R&eacute;v.&nbsp;@revision@',
+	'maj_rev_ko' => 'La [r&eacute;vision distante->@url@] n\'a pas pu &ecirc;tre trouv&eacute;e.',
+	'maj_rev_ok' => 'La r&eacute;vision [@revision@->@url@] est [disponible->@zip@].',
+	'maj_svn' => 'Ce plugin SVN semble [&agrave; jour->@url@].',
+	'maj_verif' => 'V&eacute;rifiez pr&eacute;alablement l\'archive qui vous convient :',
+	'maj_verif2' => 'Attention : apr&egrave;s avoir cliqu&eacute; sur le bouton ci-dessus, v&eacute;rifiez bien que l\'archive t&eacute;l&eacute;charg&eacute;e correspond au plugin qu\'il vous faut mettre &agrave; jour.',
 
 	// N
 	'nom_email_forum' => 'Merci de sp&eacute;cifier votre nom ou votre email !',
@@ -65,6 +65,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_lien' => 'Page @page@ : @title@',
 	'page_precedente' => 'Page pr&eacute;c&eacute;dente',
 	'page_suivante' => 'Page suivante',
+	'plug_actifs' => 'Plugins actifs',
+	'plug_inactifs' => 'Plugins inactifs',
 	'plugin_xml' => 'R&#233;unit en un seul plugin une liste de petites fonctionnalit&#233;s nouvelles et utiles am&#233;liorant la gestion de votre site SPIP.
 
 Chacun de ces outils peut &#234;tre activ&#233; ou non par l\'utilisateur sur [la page d\'administration du plugin->./?exec=admin_couteau_suisse] et g&#233;rer un certain nombre de variables : cliquer sur {{Configuration}}, puis choisir l\'onglet {{Le Couteau Suisse}}.

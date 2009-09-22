@@ -55,7 +55,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_lien' => 'P&agrave;gina @page@ : @title@',
 	'page_precedente' => 'P&agrave;gina enrere',
 	'page_suivante' => 'P&aacute;gina endavant',
-	'plugin_xml' => 'Reuneix en un &uacute;nic plugin una llista de petites noves funcionalitats i utilitats que milloren la gesti&oacute; del vostre lloc SPIP.
+	'plugin_xml' => '<MODIF>Reuneix en un &uacute;nic plugin una llista de petites noves funcionalitats i utilitats que milloren la gesti&oacute; del vostre lloc SPIP.
 
 Cadascuna d\'aquestes eines pot ser activada o no per l\'usuari a [la p&agrave;gina d\'administraci&oacute; del plugin->./?exec=admin_couteau_suisse] i gestionar un cert nombre de variables: fer un clic a {{Configuraci&oacute;}}, despr&eacute;s escolliu la pestanya {{El Ganivet Su&iacute;s}}.
 
