@@ -227,7 +227,7 @@ Raadpleegt [documentatie over Spip-Contrib-> http://www.spip-contrib.net/SpipBB-
 	'forum_ouvrir' => 'Dit forum openen',
 	'forums_categories' => 'Diversen',
 	'forums_spipbb' => 'SpipBB Forums',
-	'forums_titre' => '<MODIF>Mijn eerste gecre&euml;erd forum',
+	'forums_titre' => 'Mijn eerste gecre&euml;erd forum',
 	'fromphpbb_erreur_db_phpbb_config' => 'Onmogelijk om de configuratie in de basis phpBB te lezen',
 	'fromphpbb_migre_categories' => 'Import van de categorie&euml;n',
 	'fromphpbb_migre_categories_dans_rub_dpt' => 'Vestiging van de forums in de rubriek&nbsp;:',
@@ -329,7 +329,7 @@ _ Wordt een aankondiging in hoofd van forum over alle bladzijdes geplaatst.',
 -* Wanneer een artikel-forum aan dit sleutelwoord, alleen moderatoren er berichten kunnen toevoegen. 
  -* Wanneer een forum onderwerp is gesloten, enig kunnen moderatoren er antwoorden toevoegen.',
 	'mot_groupe_moderation' => 'Goupe van woord dat voor de matiging wordt gebruikt, van SpipBB',
-	'mot_postit' => '<MODIF>Postit
+	'mot_postit' => 'Postit
 _ Wordt een postit onder de aankondigingen, voor de gewone berichten geplaatst. Het komt slechts &eacute;&eacute;n keer in de lijst voor.',
 
 	// N
@@ -367,8 +367,8 @@ _ [Toegang tot het administratie paneel ->.?exec=spipbb_configuration]',
 	'plugin_mauvaise_version' => 'Deze plugin versie is niet verenigbaar met uw SPIP versie !',
 	'plugin_nom' => 'SpipBB: Beleid van de SPIP forums ',
 	'post_aucun_pt' => 'geen enkel&nbsp;!',
-	'post_efface_lui' => '<MODIF>Dit onderwerp omvat @
-nbr_post@ bericht(en). Uitgewist met hem&nbsp;!\\n',
+	'post_efface_lui' => 'Dit onderwerp omvat @
+nbr_post@ bericht(en). Uitgewist met hem&nbsp;!n',
 	'post_ip' => 'Berichten opgesteld aan deel van het IP adres',
 	'post_propose' => 'Voorgesteld bericht',
 	'post_rejete' => 'Verworpen bericht',
