@@ -11,9 +11,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'a_confirmer' => 'Por confirmar',
 	'accesrestreint' => 'Accesu Torg&aacute;u',
 	'aconfirmer' => 'Por confirmar',
-	'action_adherent' => 'Operaciones',
+	'action_adherent' => '<MODIF>Operaciones',
 	'activation_compte' => 'Activa la to cuenta',
-	'adherents' => 'Asociaos',
+	'adherents' => '<MODIF>Asociaos',
 	'admin' => 'Almin',
 	'admin_modifier_auteur_supp' => 'Informaci&oacute;n suplementaria',
 	'adresse' => 'Se&ntilde;es',
@@ -44,11 +44,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'code_postal_pro' => 'C&oacute;digu Postal (Pro.)',
 	'commentaire' => 'Comentariu',
 	'compte_active' => 'La to cuenta en @nom_site@',
-	'compte_efface' => 'To cuenta esborrose.',
-	'conf_plugin' => 'Configuraci&oacute;n d\'Inscription2',
-	'conf_plugin_page' => 'Configuraci&oacute;n guardada del plugin Inscription2',
+	'compte_efface' => '<MODIF>To cuenta esborrose.',
+	'conf_plugin' => '<MODIF>Configuraci&oacute;n d\'Inscription2',
+	'conf_plugin_page' => '<MODIF>Configuraci&oacute;n guardada del plugin Inscription2',
 	'configs' => 'Configuraciones',
-	'configuration' => 'Configuraci&oacute;n',
+	'configuration' => '<MODIF>Configuraci&oacute;n',
 	'confirmation' => '<p>&iquest;Tas seguru(a) de que quies siguir?</p><p>&iexcl;&iexcl;&iexcl;Tolos camb&eacute;os ser&aacute;n irreversibles!!!</p>',
 	'contacts_personnels' => 'Contautos personales',
 	'contacts_pros' => 'Contautos profesionales',
@@ -58,14 +58,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// D
 	'decembre' => 'avientu',
 	'demande_password' => 'La to clave:',
-	'description_cfg' => 'Esti complementu permite estender la informaci&oacute;n sobro los autores del sitiu, equ&iacute; vas poder escoyer los campos suplementarios.',
+	'description_cfg' => '<MODIF>Esti complementu permite estender la informaci&oacute;n sobro los autores del sitiu, equ&iacute; vas poder escoyer los campos suplementarios.',
 	'description_page' => 'Equ&iacute; pues verificar los valores de configuraci&oacute;n tal como tan guardaos',
 	'divers' => 'Diversos',
 	'domaine' => 'Dominiu',
 	'domaines' => 'Dominiu',
 
 	// E
-	'editer_adherent' => 'Editar asoci&aacute;u',
+	'editer_adherent' => '<MODIF>Editar asoci&aacute;u',
 	'effacement_auto_impossible' => 'La cuenta nun puede esborrase autom&aacute;ticamente, contauta non nos.',
 	'email' => 'E-Mail',
 	'email_bonjour' => 'Bones @nom@,',
@@ -82,13 +82,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'feminin' => 'Se&ntilde;ora',
 	'fevrier' => 'febreru',
 	'fiche' => 'Ficha',
-	'fiche_adherent' => 'Ficha d\'asociau',
-	'fiche_expl' => ' : El campu verase na ficha d\'asociau',
+	'fiche_adherent' => '<MODIF>Ficha d\'asociau',
+	'fiche_expl' => '<MODIF> : El campu verase na ficha d\'asociau',
 	'fiche_mod' => 'Modificable',
-	'fiche_mod_expl' => ' : El campu podr&aacute; modificase dende l\'interfaz p&uacute;blicu pol asociau a condici&oacute;n d\'utilizar el plugin CRAYONS',
+	'fiche_mod_expl' => '<MODIF> : El campu podr&aacute; modificase dende l\'interfaz p&uacute;blicu pol asociau a condici&oacute;n d\'utilizar el plugin CRAYONS',
 	'fonction' => 'Funci&oacute;n',
 	'form' => 'Formulariu',
-	'form_expl' => ' : El campu s\'amosar&aacute; nel formulariu INSCRIPTION2',
+	'form_expl' => '<MODIF> : El campu s\'amosar&aacute; nel formulariu INSCRIPTION2',
 	'form_oblig_expl' => ' : Facer obligatoria la edici&oacute;n nel formulariu',
 	'format' => 'Formatu',
 	'formulaire_inscription' => 'Formulariu d\'inscripci&oacute;n',
@@ -98,21 +98,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_remplir_validation' => 'Has de verificar los campos que tan ensin validar.',
 
 	// G
-	'general_infos' => 'Informaci&oacute;n Xeneral',
+	'general_infos' => '<MODIF>Informaci&oacute;n Xeneral',
 	'geoloc' => 'Xeoallugamientu',
 	'geomap_obligatoire' => 'Pa utilizar los datos de xeoallugamientu de les persones, ye necesario instalar el plugin GoogleMapApi...',
 	'gerent' => 'Asoci&aacute;u',
-	'gestion_adherent' => 'Xesti&oacute;n d\'asociaos',
+	'gestion_adherent' => '<MODIF>Xesti&oacute;n d\'asociaos',
 
 	// H
 	'html' => 'HTML',
 
 	// I
-	'icone_menu_config' => 'Inscripci&oacute;n2',
+	'icone_menu_config' => '<MODIF>Inscripci&oacute;n2',
 	'info_connection' => 'Informaci&oacute;n de conex&oacute;n',
-	'info_defaut' => 'Informaci&oacute;n por omisi&oacute;n',
-	'info_defaut_desc' => 'Informaci&oacute;n obligatoria por omisi&oacute;n',
-	'info_gener' => 'Informaci&oacute;n Xeneral',
+	'info_defaut' => '<MODIF>Informaci&oacute;n por omisi&oacute;n',
+	'info_defaut_desc' => '<MODIF>Informaci&oacute;n obligatoria por omisi&oacute;n',
+	'info_gener' => '<MODIF>Informaci&oacute;n Xeneral',
 	'info_gener_desc' => 'Opciones que van preguntase a los asociaos nuevos del sitiu',
 	'info_internes' => 'Informaci&oacute;n interna',
 	'info_internes_desc' => 'Opciones que van guardase na base de datos pero nun s\'amosar&aacute;n nel formulariu de los asociaos nuevos',
@@ -134,7 +134,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legende' => 'Lleenda',
 	'lisez_mail' => 'Vi&eacute;n d\'unviase un email a les se&ntilde;es qu\'apurriste. Pa activar la to cuenta has de siguir les instrucciones.',
 	'liste_adherents' => '<MODIF>Amosar les cuentes d\'usuarios',
-	'liste_comptes_titre' => 'Llista de cuentes d\'usuarios',
+	'liste_comptes_titre' => '<MODIF>Llista de cuentes d\'usuarios',
 	'login' => 'Nome d\'usuariu (login)',
 	'longitude' => 'Llonxit&uacute;',
 
@@ -167,7 +167,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// P
 	'page_confirmation' => 'P&aacute;xina de confirmaci&oacute;n de la inscripci&oacute;n',
-	'par_defaut' => 'Esti campu ye obligatoriu',
+	'par_defaut' => '<MODIF>Esti campu ye obligatoriu',
 	'pass' => 'Clave',
 	'pass_egal' => 'Has d\'escribir la mesma clave que l\'anterior.',
 	'pass_indiquez_cidessous' => 'Indica embaxo les se&ntilde;es d\'email coles que tas
@@ -193,9 +193,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'raccourcis' => 'Atayos',
 	'rappel_login' => 'Recordatoriu: el to identificador ye: ',
 	'rappel_password' => 'La to clave',
-	'recherche_case' => 'Campos de la gueta',
-	'recherche_utilisateurs' => 'Restolar ente los usuarios',
-	'recherche_valeur' => 'Conten&iacute;u guet&aacute;u',
+	'recherche_case' => '<MODIF>Campos de la gueta',
+	'recherche_utilisateurs' => '<MODIF>Restolar ente los usuarios',
+	'recherche_valeur' => '<MODIF>Conten&iacute;u guet&aacute;u',
 	'redemande_password' => 'Vuelve a escribir la to clave:',
 	'rien_a_faire' => 'N&aacute; por facer',
 
@@ -208,18 +208,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'statut' => 'Estatutu',
 	'statut_rel' => 'Estatutu internu',
 	'suppression_faite' => 'Vien de facese\'l desaniciu de los tos datos',
-	'supprimer_adherent' => 'Desaniciar asoci&aacute;u',
+	'supprimer_adherent' => '<MODIF>Desaniciar asoci&aacute;u',
 	'supprimer_adherent_red' => 'Des',
 	'surnom' => 'Nomatu',
 
 	// T
 	'table' => 'Tabla',
-	'table_expl' => ': El campu amosarase na llista d\'asociaos (espaciu priv&aacute;u)',
+	'table_expl' => '<MODIF>: El campu amosarase na llista d\'asociaos (espaciu priv&aacute;u)',
 	'tel' => 'Tel.',
 	'telephone' => 'Tel&eacute;fonu',
 	'telephone_pro' => 'Tel&eacute;fonu profesional',
 	'texte' => 'Testu',
-	'texte_email_confirmation' => 'La to cuenta ta activa, darr&eacute;u puedes coneutate al sitiu usando la to identificaci&oacute;n personal.
+	'texte_email_confirmation' => '<MODIF>La to cuenta ta activa, darr&eacute;u puedes coneutate al sitiu usando la to identificaci&oacute;n personal.
 
 El nome d\'usuariu ye: @login@
 y vienes d\'escoyer la to clave.

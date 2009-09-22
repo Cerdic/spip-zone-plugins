@@ -13,16 +13,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aconfirmer' => '<NEW>&Agrave; confirmer',
 	'action_adherent' => '<MODIF>Action adh&eacute;rent',
 	'activation_compte' => 'Active su cuenta',
-	'adherents' => '<NEW>Adh&eacute;rents',
+	'adherents' => '<MODIF>Adh&eacute;rents',
 	'admin' => '<NEW>Admin',
 	'admin_modifier_auteur_supp' => '<NEW>Informations suppl&eacute;mentaires',
 	'adresse' => 'Direcci&oacute;n',
 	'adresse_pro' => '<NEW>Adresse professionnelle (Pro.)',
 	'ajouter_adherent' => '<MODIF>Ajouter adh&eacute;rent',
 	'aout' => 'Agosto',
+	'aucun_resultat_recherche' => '<NEW>Il n\'y a aucun r&eacute;sultat pour votre recherche.',
 	'auteur' => '<NEW>Auteur',
 	'autre' => '<NEW>Autre',
 	'avril' => 'Abril',
+
+	// B
+	'bio' => '<NEW>Biographie',
 
 	// C
 	'caracteres' => '<NEW>caract&egrave;res',
@@ -40,10 +44,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'code_postal_pro' => 'C&oacute;digo Postal',
 	'commentaire' => '<NEW>Commentaire',
 	'compte_active' => 'Cuenta activada',
-	'conf_plugin' => 'Configuraci&oacute;n Inscripci&oacute;on2',
-	'conf_plugin_page' => 'Configuraci&oacute;n del plugin Inscripci&oacute;n2',
+	'compte_efface' => '<MODIF>Votre compte a été effacé.',
+	'conf_plugin' => '<MODIF>Configuraci&oacute;n Inscripci&oacute;on2',
+	'conf_plugin_page' => '<MODIF>Configuraci&oacute;n del plugin Inscripci&oacute;n2',
 	'configs' => 'Configuraciones',
-	'configuration' => '<NEW>Configuration',
+	'configuration' => '<MODIF>Configuration',
 	'confirmation' => '<NEW><p>&Ecirc;tes vous s&ucirc;r(e) de vouloir continuer?</p><p>Toutes les modifications seront irreversibles!!!</p>',
 	'contacts_personnels' => '<NEW>Contacts personnels',
 	'contacts_pros' => '<NEW>Contacts professionnels',
@@ -52,14 +57,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'decembre' => 'Diciembre',
+	'delete_user_select' => '<MODIF>Supprimer les utilisateurs s&eacute;lectionn&eacute;s',
 	'demande_password' => '<NEW>Votre mot de passe&nbsp;:',
+	'description_cfg' => '<MODIF>Ce plugin permet d\'&eacute;tendre les informations sur les auteurs sur votre site, vous pouvez choisir ici les champs suppl&eacute;mentaires',
 	'description_page' => 'En esta p&aacute;gina usted puede verificar la configuraci&oacute;n del plugin tal como est&aacute; guardada en la base de datos',
 	'divers' => 'Varios',
 	'domaine' => 'Dominio',
 	'domaines' => 'Restringir las inscripciones a ciertos dominios',
 
 	// E
-	'editer_adherent' => '<NEW>&Eacute;diter adh&eacute;rent',
+	'editer_adherent' => '<MODIF>&Eacute;diter adh&eacute;rent',
+	'effacement_auto_impossible' => '<NEW>Le compte ne peut &ecirc;tre effac&eacute; automatiquement, contactez-nous.',
 	'email' => 'E-Mail',
 	'email_bonjour' => 'Buenos D&iacute;as @nom@,',
 	'email_obligatoire' => '<NEW>Le champ email est obligatoire',
@@ -75,35 +83,37 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'feminin' => 'femenino',
 	'fevrier' => 'Febrero',
 	'fiche' => 'Ficha',
-	'fiche_adherent' => '<NEW>Fiche adh&eacute;rent',
-	'fiche_expl' => ': El campo ser&aacute; visible en la ficha de adherente',
+	'fiche_adherent' => '<MODIF>Fiche adh&eacute;rent',
+	'fiche_expl' => '<MODIF>: El campo ser&aacute; visible en la ficha de adherente',
 	'fiche_mod' => 'Modificable',
-	'fiche_mod_expl' => ': El campo ser&aacute; visible y modificable en la ficha de adherente, con la condicion de tener instalado el plugin CRAYONS',
+	'fiche_mod_expl' => '<MODIF>: El campo ser&aacute; visible y modificable en la ficha de adherente, con la condicion de tener instalado el plugin CRAYONS',
 	'fonction' => 'Funci&oacute;n',
 	'form' => 'Formulario',
-	'form_expl' => ': El campo ser&aacute; mostrado en el formulario INSCRIPTION2',
+	'form_expl' => '<MODIF>: El campo ser&aacute; mostrado en el formulario INSCRIPTION2',
 	'form_oblig_expl' => '<NEW> : Rendre la saisie obligatoire dans le formulaire',
 	'format' => 'Formato',
 	'formulaire_inscription' => 'Formulario de Inscripci&oacute;n',
 	'formulaire_inscription_ok' => '<NEW>Votre inscription a bien &eacute;t&eacute; prise en compte. Vous allez recevoir par courrier &eacute;lectronique vos identifiants de connexion.',
 	'formulaire_login_deja_utilise' => '<NEW>Le login est d&eacute;ja utilis&eacute;, veuillez en choisir un autre.',
 	'formulaire_remplir_obligatoires' => '<NEW>Veuillez remplir les champs obligatoires',
+	'formulaire_remplir_validation' => '<NEW>Veuillez v&eacute;rifier les champs qui ne sont pas valid&eacute;s.',
 
 	// G
-	'general_infos' => '<NEW>Informations G&eacute;n&eacute;rales',
+	'general_infos' => '<MODIF>Informations G&eacute;n&eacute;rales',
 	'geoloc' => 'G&eacute;olocalisation',
 	'geomap_obligatoire' => '<NEW>Pour utiliser les donn&eacute;es de g&eacute;olocalisation des personnes, il est n&eacute;cessaire d\'installer le plugin GoogleMapApi...',
-	'gestion_adherent' => '<NEW>Gestion d\'adh&eacute;rents',
+	'gerent' => '<NEW>Adh&eacute;rent',
+	'gestion_adherent' => '<MODIF>Gestion d\'adh&eacute;rents',
 
 	// H
 	'html' => 'HTML',
 
 	// I
-	'icone_menu_config' => 'Inscripci&oacute;n2',
+	'icone_menu_config' => '<MODIF>Inscripci&oacute;n2',
 	'info_connection' => '<NEW>Informations de connexion',
-	'info_defaut' => 'Informaciones por defecto',
-	'info_defaut_desc' => 'Informaciones obligatorias por defecto',
-	'info_gener' => 'Informaciones Generales',
+	'info_defaut' => '<MODIF>Informaciones por defecto',
+	'info_defaut_desc' => '<MODIF>Informaciones obligatorias por defecto',
+	'info_gener' => '<MODIF>Informaciones Generales',
 	'info_gener_desc' => 'Opciones que seran solicitadas a los nuevos adherentes del sitio',
 	'info_internes' => 'Informaciones Internas',
 	'info_internes_desc' => 'Opciones que seran almacenadas en la base de datos, pero que no seran solicitadas a los adherentes del sitio en el formulario de inscription',
@@ -112,6 +122,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_pro' => '<NEW>Informations professionnelles',
 	'infos_adherent' => '<NEW>Informations suppl&eacute;mentaires',
 	'infos_personnelles' => '<NEW>Informations personnelles',
+	'inscriptions' => '<NEW>Inscriptions',
 	'inserez_infos' => 'Ingrese los datos solicitados',
 
 	// J
@@ -124,6 +135,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legende' => '<NEW>L&eacute;gende',
 	'lisez_mail' => 'Un email acaba de ser enviado a la direcci&oacute;n email ingresada. Para poder utilizar su cuenta solo le queda un paso, siga las instrucciones que estan en el email y active su cuenta.',
 	'liste_adherents' => '<MODIF>Liste d\'adh&eacute;rents',
+	'liste_comptes_titre' => '<MODIF>Liste des comptes utilisateurs',
 	'login' => 'Usuario (login)',
 	'longitude' => '<NEW>Longitude',
 
@@ -137,13 +149,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mobile' => 'Celular',
 	'mobile_pro' => '<NEW>Mobile professionnel',
 	'modif_pass_titre' => '<NEW>Modifier votre mot de passe',
+	'mot_passe_reste_identique' => '<NEW>Votre mot de passe n\'a pas &eacute;t&eacute; modifi&eacute;.',
 
 	// N
 	'naissance' => 'Fecha de nacimiento',
+	'nb_users_supprimes' => '<MODIF>@nb@ utilisateurs ont &eacute;t&eacute; supprim&eacute;s.',
 	'nettoyer_tables' => '<NEW>Nettoyer tables',
+	'no_user_selected' => '<NEW>Vous n\'avez s&eacute;lectionn&eacute; aucun utilisateur.',
 	'nom' => '<MODIF>Pseudo',
 	'nom_explication' => '<NEW>votre nom ou votre&nbsp;pseudo',
 	'nom_famille' => 'Apellido',
+	'nom_site' => '<NEW>Nom du site',
 	'non_renseigne' => '<NEW>non renseign&eacute;.',
 	'non_renseignee' => '<NEW>non renseign&eacute;e.',
 	'novembre' => 'Noviembre',
@@ -154,7 +170,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// P
 	'page_confirmation' => '<NEW>Page de confirmation de votre inscription',
-	'par_defaut' => '<NEW> par d&eacute;faut',
+	'par_defaut' => '<MODIF> par d&eacute;faut',
 	'pass' => '<NEW>Mot de passe',
 	'pass_egal' => '<NEW>Veuillez entrer le m&ecirc;me mot de passe que pr&eacute;c&eacute;demment.',
 	'pass_indiquez_cidessous' => '<NEW>Indiquez ci-dessous l\'adresse email sous laquelle vous
@@ -168,6 +184,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'password_retaper' => '<NEW>Confirmez le mot de passe',
 	'pays' => '<NEW>Pays',
 	'pays_pro' => '<NEW>Pays (Pro.)',
+	'pgp' => '<NEW>Cl&eacute; PGP',
 	'prenom' => 'Nombre',
 	'probleme_email' => 'Problema de e-mail&nbsp;: el correo de activaci&oacute;n no pudo enviarse.',
 	'profession' => 'Profesion',
@@ -179,10 +196,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'raccourcis' => '<NEW>Raccourcis',
 	'rappel_login' => '<NEW>Rappel : votre identifiant est : ',
 	'rappel_password' => '<NEW>Votre mot de passe',
+	'recherche_case' => '<MODIF>Champs de la recherche',
+	'recherche_utilisateurs' => '<MODIF>Recherche dans les utilisateurs',
+	'recherche_valeur' => '<MODIF>Contenu recherch&eacute;',
 	'redemande_password' => 'Vuelva a ingresar su contrase&ntilde;a:',
 	'rien_a_faire' => '<NEW>Rien &agrave; faire',
 
 	// S
+	'saisir_email_valide' => '<NEW>Veuillez saisir une adresse email valide',
 	'secteur' => 'Sector',
 	'septembre' => 'Septiembre',
 	'sexe' => 'Sexo',
@@ -190,13 +211,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'statut' => '<NEW>Statut',
 	'statut_rel' => 'Statut interno',
 	'suppression_faite' => 'Sus datos han sido suprimidos con exito',
-	'supprimer_adherent' => '<NEW>Supprimer adh&eacute;rent',
+	'supprimer_adherent' => '<MODIF>Supprimer adh&eacute;rent',
 	'supprimer_adherent_red' => '<NEW>Sup',
 	'surnom' => '<NEW>Surnom',
 
 	// T
 	'table' => 'Tabla',
-	'table_expl' => ': El campo estar&aacute; presente en la tabla de adherentes (espacio privado)',
+	'table_expl' => '<MODIF>: El campo estar&aacute; presente en la tabla de adherentes (espacio privado)',
 	'tel' => '<NEW>T&eacute;l.',
 	'telephone' => 'Tel&eacute;fono',
 	'telephone_pro' => '<NEW>T&eacute;l&eacute;phone professionnel',
@@ -224,6 +245,7 @@ El equipo de @nom_site@',
 	'titre_confirmation' => 'Confirmation',
 
 	// U
+	'url_site' => '<NEW>Url du site',
 	'url_societe' => '<NEW>Site soci&eacute;t&eacute;',
 
 	// V
@@ -234,6 +256,7 @@ El equipo de @nom_site@',
 	'vos_contacts_personnels' => '<NEW>Vos contacts personnels',
 	'votre_adresse' => '<NEW>Votre adresse personnelle',
 	'votre_adresse_pro' => '<NEW>Votre adresse (professionnelle)',
+	'votre_mail' => '<NEW>Votre email :',
 	'votre_nom_complet' => '<NEW>Votre nom complet',
 	'votre_profil' => '<NEW>Votre profil',
 

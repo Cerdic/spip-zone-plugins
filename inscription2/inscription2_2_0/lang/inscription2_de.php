@@ -11,14 +11,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'a_confirmer' => 'Zu best&amp;auml;tigen',
 	'accesrestreint' => 'Eingeschr&amp;auml;nkter Zugang',
 	'aconfirmer' => 'Zu best&amp;auml;tigen',
-	'action_adherent' => 'Aktionen',
+	'action_adherent' => '<MODIF>Aktionen',
 	'activation_compte' => 'Aktivieren Sie Ihr Konto',
-	'adherents' => 'Mitglieder',
+	'adherents' => '<MODIF>Mitglieder',
 	'admin' => 'Admin',
 	'admin_modifier_auteur_supp' => 'Weiterf&uuml;hrende Informationen',
 	'adresse' => 'Adresse',
 	'adresse_pro' => 'Adresse (beruflich)',
-	'ajouter_adherent' => 'Neuen Teilnehmer anlegen',
+	'ajouter_adherent' => '<MODIF>Neuen Teilnehmer anlegen',
 	'aout' => 'August',
 	'aucun_resultat_recherche' => 'Nichts gefunden',
 	'auteur' => 'Autor',
@@ -44,11 +44,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'code_postal_pro' => 'Postleitzahl (beruflich)',
 	'commentaire' => 'Kommentar',
 	'compte_active' => 'Ihr Konto wurde aktiviert',
-	'compte_efface' => 'Ihr Zugang wurde gel&ouml;scht',
-	'conf_plugin' => 'Konfiguration Inscription2',
-	'conf_plugin_page' => 'Gespeicherte Konfiguration des Plugin Inscription2',
+	'compte_efface' => '<MODIF>Ihr Zugang wurde gel&ouml;scht',
+	'conf_plugin' => '<MODIF>Konfiguration Inscription2',
+	'conf_plugin_page' => '<MODIF>Gespeicherte Konfiguration des Plugin Inscription2',
 	'configs' => 'Konfigurationen',
-	'configuration' => 'Konfiguration',
+	'configuration' => '<MODIF>Konfiguration',
 	'confirmation' => '<p>Wollen Sie wirklich fortfahren?</p><p>Alle &Auml;nderungen sind unwiederrufbar!!!</p>',
 	'contacts_personnels' => 'Pers&ouml;nliche Kontakte',
 	'contacts_pros' => 'Berufliche Kontakte',
@@ -57,16 +57,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'decembre' => 'Dezember',
-	'delete_user_select' => 'Ausgew&auml;hlte Nutzer l&ouml;schen',
+	'delete_user_select' => '<MODIF>Ausgew&auml;hlte Nutzer l&ouml;schen',
 	'demande_password' => 'Ihr Passwort:',
-	'description_cfg' => 'Dieses Plugin erm&ouml;glicht, Zusatzinformationen &uuml;ber die Redakteure ihrer Website zu erfassen. Bitte w&auml;hlen sie die entsprechenden Felder hier aus.',
+	'description_cfg' => '<MODIF>Dieses Plugin erm&ouml;glicht, Zusatzinformationen &uuml;ber die Redakteure ihrer Website zu erfassen. Bitte w&auml;hlen sie die entsprechenden Felder hier aus.',
 	'description_page' => 'Hier k&ouml;nnen Sie Ihre gespeicherten Einstellungen &uuml;berpr&uuml;fen.',
 	'divers' => 'Verschiedenes',
 	'domaine' => 'Domaine',
 	'domaines' => 'Domain',
 
 	// E
-	'editer_adherent' => 'Mitglied bearbeiten',
+	'editer_adherent' => '<MODIF>Mitglied bearbeiten',
 	'effacement_auto_impossible' => 'Der Zugang kann nicht automatische gel&ouml;scht werden. Bitte nehmen sie mit uns Kontakt auf.',
 	'email' => 'Email',
 	'email_bonjour' => 'Hallo @nom@,',
@@ -83,13 +83,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'feminin' => 'Frau',
 	'fevrier' => 'Februar',
 	'fiche' => 'Eintrag',
-	'fiche_adherent' => 'Mitgliedseintrag',
-	'fiche_expl' => ' : Das Feld wird im Mitgliedseintrag angezeigt',
+	'fiche_adherent' => '<MODIF>Mitgliedseintrag',
+	'fiche_expl' => '<MODIF> : Das Feld wird im Mitgliedseintrag angezeigt',
 	'fiche_mod' => '&Auml;nderung m&ouml;glich',
-	'fiche_mod_expl' => ' : Das Feld kann vom Mitglied im &ouml;ffentlichen Bereich ge&auml;ndert werden, wenn das Plugin CRAYONS installiert ist.',
+	'fiche_mod_expl' => '<MODIF> : Das Feld kann vom Mitglied im &ouml;ffentlichen Bereich ge&auml;ndert werden, wenn das Plugin CRAYONS installiert ist.',
 	'fonction' => 'Funktion',
 	'form' => 'Formular',
-	'form_expl' => ' : Das Feld wird im Formular INSCRIPTION2 angezeigt',
+	'form_expl' => '<MODIF> : Das Feld wird im Formular INSCRIPTION2 angezeigt',
 	'form_oblig_expl' => ' : Pflichtfeld des Formulars',
 	'format' => 'Format',
 	'formulaire_inscription' => 'Anmeldeformular',
@@ -99,21 +99,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_remplir_validation' => 'Bitte &uuml;berpr&uuml;fen sie die ung&uuml;ltigen Felder.',
 
 	// G
-	'general_infos' => 'Allgemeine Informationen',
+	'general_infos' => '<MODIF>Allgemeine Informationen',
 	'geoloc' => 'Geografische Lokalisierung',
 	'geomap_obligatoire' => 'Um Daten zur Lokalisierung von Personen zu verwenden, wird das Plugin GoogleMapApi ben&ouml;tigt.',
 	'gerent' => 'Mitglied',
-	'gestion_adherent' => 'Mitgliederverwaltung',
+	'gestion_adherent' => '<MODIF>Mitgliederverwaltung',
 
 	// H
 	'html' => 'HTML',
 
 	// I
-	'icone_menu_config' => 'Inscription2',
+	'icone_menu_config' => '<MODIF>Inscription2',
 	'info_connection' => 'Verbindungsinformationen',
-	'info_defaut' => 'Standardinformationen',
-	'info_defaut_desc' => 'Obligatorische Standardinformationen',
-	'info_gener' => 'Allgemeine Informationen',
+	'info_defaut' => '<MODIF>Standardinformationen',
+	'info_defaut_desc' => '<MODIF>Obligatorische Standardinformationen',
+	'info_gener' => '<MODIF>Allgemeine Informationen',
 	'info_gener_desc' => 'Optionen, die von den neuen Mitgliedern des web site verlangt werden',
 	'info_internes' => 'Interne Informationen',
 	'info_internes_desc' => 'Options qui seront stock&eacute;es dans la base de donn&eacute;es mais ne seront pas affich&eacute;es dans le formulaire des nouveaux adh&eacute;rents',
@@ -134,8 +134,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'latitude' => 'Geographische Breite',
 	'legende' => 'Legende',
 	'lisez_mail' => 'An die eingetragene Adresse wurde eine Email geschickt. Sie enth&auml;lt die zur Aktivierung Ihres Kontos erforderlichen Informationen.',
-	'liste_adherents' => 'Mitglieder anzeigen',
-	'liste_comptes_titre' => 'Mitgliederliste',
+	'liste_adherents' => '<MODIF>Mitglieder anzeigen',
+	'liste_comptes_titre' => '<MODIF>Mitgliederliste',
 	'login' => 'Benutzername (login)',
 	'longitude' => 'Geographische L&auml;nge',
 
@@ -153,7 +153,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'naissance' => 'Geburtstag',
-	'nb_users_supprimes' => '@nb@ Mitglieder wurden gel&ouml;scht.',
+	'nb_users_supprimes' => '<MODIF>@nb@ Mitglieder wurden gel&ouml;scht.',
 	'nettoyer_tables' => 'Tabellen aufr&auml;umen',
 	'no_user_selected' => 'Sie haben kein Mitglied ausgew&auml;hlt',
 	'nom' => 'Pseudonym',
@@ -170,7 +170,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// P
 	'page_confirmation' => 'Seite zur Best&auml;tigung Ihrer Anmeldung',
-	'par_defaut' => 'Standard',
+	'par_defaut' => '<MODIF>Standard',
 	'pass' => 'Passwort',
 	'pass_egal' => 'Bitte wiederholen Sie das Passwort.',
 	'pass_indiquez_cidessous' => 'Bitte geben Sie die Mailadresse an,
@@ -197,9 +197,9 @@ um Ihre Zugangsdaten zu &auml;ndern.',
 	'raccourcis' => 'Schnellzugang',
 	'rappel_login' => 'Erinnerung - Ihr Login lautet: ',
 	'rappel_password' => 'Ihr Passwort',
-	'recherche_case' => 'Suchfeld',
-	'recherche_utilisateurs' => 'Redakteure suchen',
-	'recherche_valeur' => 'Inhalt der Suche',
+	'recherche_case' => '<MODIF>Suchfeld',
+	'recherche_utilisateurs' => '<MODIF>Redakteure suchen',
+	'recherche_valeur' => '<MODIF>Inhalt der Suche',
 	'redemande_password' => 'Geben Sie Ihr Passwort erneut ein:',
 	'rien_a_faire' => 'Keien Aktion erforderlich',
 
@@ -212,18 +212,18 @@ um Ihre Zugangsdaten zu &auml;ndern.',
 	'statut' => 'Status',
 	'statut_rel' => 'Interner Status',
 	'suppression_faite' => 'Ihr Daten wurden gel&ouml;scht.',
-	'supprimer_adherent' => 'Mitglied l&ouml;schen',
+	'supprimer_adherent' => '<MODIF>Mitglied l&ouml;schen',
 	'supprimer_adherent_red' => 'l&ouml;schen',
 	'surnom' => 'Spitzname',
 
 	// T
 	'table' => 'Liste',
-	'table_expl' => ' : Das Feld wird in der Mitgliedsliste angezeigt (Redaktionssystem)',
+	'table_expl' => '<MODIF> : Das Feld wird in der Mitgliedsliste angezeigt (Redaktionssystem)',
 	'tel' => 'Tel.',
 	'telephone' => 'Telefon',
 	'telephone_pro' => 'Telefon (beruflich)',
 	'texte' => 'Text',
-	'texte_email_confirmation' => 'Ihr Konto ist aktiviert. Sie k&ouml;nnen sich jetzt mit Ihren pers&ouml;nlichen Zugangsdaten einloggen.n
+	'texte_email_confirmation' => '<MODIF>Ihr Konto ist aktiviert. Sie k&ouml;nnen sich jetzt mit Ihren pers&ouml;nlichen Zugangsdaten einloggen.n
 
 Ihr Login ist&nbsp;: @login@
 Ihr Passwort haben Sie soeben enigegeben.
@@ -231,7 +231,7 @@ Ihr Passwort haben Sie soeben enigegeben.
 Vielen Dank f&uuml;r Ihr Vertrauen
 
 Das @nom_site@-Team',
-	'texte_email_inscription' => 'Sie sind dabei, ihre Anmeldung bei der Website @nom_site@ abzuschlie&szlig;en.
+	'texte_email_inscription' => '<MODIF>Sie sind dabei, ihre Anmeldung bei der Website @nom_site@ abzuschlie&szlig;en.
 Bitte klicken Sie auf den Link weiter unten klicken und legen sie ihr Passwort fest.
 
 @link_activation@

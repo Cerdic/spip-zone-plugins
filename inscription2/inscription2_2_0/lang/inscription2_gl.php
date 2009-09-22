@@ -13,7 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aconfirmer' => 'Para confirmar',
 	'action_adherent' => '<MODIF>Acci&oacute;n adherente',
 	'activation_compte' => 'Active a s&uacute;a conta',
-	'adherents' => 'Adherentes',
+	'adherents' => '<MODIF>Adherentes',
 	'admin' => 'Admin',
 	'admin_modifier_auteur_supp' => 'Informaci&oacute;n complementaria',
 	'adresse' => 'Enderezo',
@@ -40,10 +40,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'code_postal_pro' => 'C&oacute;digo postal (Prof.)',
 	'commentaire' => 'Comentario',
 	'compte_active' => 'A s&uacute;a conta en @nom_site@',
-	'conf_plugin' => 'Configuraci&oacute;n de Inscription2',
-	'conf_plugin_page' => 'Configuraci&oacute;n gardada do m&oacute;dulo Inscription2',
+	'conf_plugin' => '<MODIF>Configuraci&oacute;n de Inscription2',
+	'conf_plugin_page' => '<MODIF>Configuraci&oacute;n gardada do m&oacute;dulo Inscription2',
 	'configs' => 'Configuraci&oacute;ns',
-	'configuration' => 'Configuraci&oacute;n',
+	'configuration' => '<MODIF>Configuraci&oacute;n',
 	'confirmation' => '<p>Est&aacute; segurod de querer continuar?</p><p>Todas as modificaci&oacute;ns ser&aacute;n irreversibles!!!</p>',
 	'contacts_personnels' => 'Contactos persoais',
 	'contacts_pros' => 'Contactos profesionais',
@@ -59,7 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'domaines' => 'Dominio',
 
 	// E
-	'editer_adherent' => 'Editar adherente',
+	'editer_adherent' => '<MODIF>Editar adherente',
 	'email' => 'Correo-e',
 	'email_bonjour' => 'Bos d&iacute;as @nom@,',
 	'email_obligatoire' => 'O campo de correo-e &eacute; obrigado',
@@ -75,13 +75,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'feminin' => 'Se&ntilde;ora',
 	'fevrier' => 'febreiro',
 	'fiche' => 'Ficha',
-	'fiche_adherent' => 'Ficha de adherente',
-	'fiche_expl' => ': O campo ser&aacute; visible sobre a ficha do/a adherente',
+	'fiche_adherent' => '<MODIF>Ficha de adherente',
+	'fiche_expl' => '<MODIF>: O campo ser&aacute; visible sobre a ficha do/a adherente',
 	'fiche_mod' => 'Modificable',
-	'fiche_mod_expl' => ' : O campo ser&aacute; modificable desde a interface p&uacute;blica polo adherente coa condici&oacute;n de empregar o m&oacute;dulo CRAYONS',
+	'fiche_mod_expl' => '<MODIF> : O campo ser&aacute; modificable desde a interface p&uacute;blica polo adherente coa condici&oacute;n de empregar o m&oacute;dulo CRAYONS',
 	'fonction' => 'Funci&oacute;n',
 	'form' => 'Formulario',
-	'form_expl' => ': O campo ser&aacute; mostrado no formulario INSCRIPTION2',
+	'form_expl' => '<MODIF>: O campo ser&aacute; mostrado no formulario INSCRIPTION2',
 	'form_oblig_expl' => ' : Deixar a sa&iacute;da obrigada no formulario',
 	'format' => 'Formato',
 	'formulaire_inscription' => 'Formulairo de inscrici&oacute;n',
@@ -90,20 +90,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_remplir_obligatoires' => 'Cubra os campos obrigados',
 
 	// G
-	'general_infos' => 'Datos xerais',
+	'general_infos' => '<MODIF>Datos xerais',
 	'geoloc' => 'Xeolocalizaci&oacute;n',
 	'geomap_obligatoire' => 'Para usar os datos de xeolocalizaci&oacute;n de persoas, c&oacute;mpre instalar o m&oacute;dulo GoogleMapApi...',
-	'gestion_adherent' => 'Xesti&oacute;n de adherentes',
+	'gestion_adherent' => '<MODIF>Xesti&oacute;n de adherentes',
 
 	// H
 	'html' => 'HTML',
 
 	// I
-	'icone_menu_config' => 'Inscription2',
+	'icone_menu_config' => '<MODIF>Inscription2',
 	'info_connection' => 'Datos de conexi&oacute;n',
-	'info_defaut' => 'Datos predeterminados',
-	'info_defaut_desc' => 'Datos obrigados predeterminados',
-	'info_gener' => 'Datos xerais',
+	'info_defaut' => '<MODIF>Datos predeterminados',
+	'info_defaut_desc' => '<MODIF>Datos obrigados predeterminados',
+	'info_gener' => '<MODIF>Datos xerais',
 	'info_gener_desc' => 'Opci&oacute;ns que ser&aacute;n solicitadas aos novos adherentes do web',
 	'info_internes' => 'Datos internos',
 	'info_internes_desc' => 'Opci&oacute;ns que ser&aacute;n gardadas na base de datos pero que non ser&aacute;n mostradas no formulario dos novos adherentes',
@@ -154,7 +154,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// P
 	'page_confirmation' => 'P&aacute;xina de confirmaci&oacute;n da s&uacute;a inscrici&oacute;n',
-	'par_defaut' => 'Este campo &eacute; obrigado',
+	'par_defaut' => '<MODIF>Este campo &eacute; obrigado',
 	'pass_egal' => 'Introduza o mesmo contrasinal que antes.',
 	'pass_indiquez_cidessous' => 'Indique seguidamente o enderezo de correo-e co cal tivese
  o rexistro anteriormente.
@@ -189,13 +189,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'statut' => 'Estatuto',
 	'statut_rel' => 'Estatuto interno',
 	'suppression_faite' => 'A supresi&oacute;n dos seus datos foi realizada',
-	'supprimer_adherent' => 'Suprimir adherente',
+	'supprimer_adherent' => '<MODIF>Suprimir adherente',
 	'supprimer_adherent_red' => 'Sup',
 	'surnom' => 'Sobrenome',
 
 	// T
 	'table' => 'T&aacute;boa',
-	'table_expl' => ': O campo ser&aacute; mostrado na lista de adherentes (no espazo privado)',
+	'table_expl' => '<MODIF>: O campo ser&aacute; mostrado na lista de adherentes (no espazo privado)',
 	'tel' => 'T&eacute;l.',
 	'telephone' => 'Tel&eacute;fono',
 	'telephone_pro' => 'Tel&eacute;fono profesional',

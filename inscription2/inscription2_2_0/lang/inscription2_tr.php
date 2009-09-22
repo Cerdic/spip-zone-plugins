@@ -11,9 +11,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'a_confirmer' => 'Onaylanacak',
 	'accesrestreint' => 'S&#305;n&#305;rl&#305; Eri&#351;im',
 	'aconfirmer' => 'Onaylanacak',
-	'action_adherent' => '&#304;&#351;lemler',
+	'action_adherent' => '<MODIF>&#304;&#351;lemler',
 	'activation_compte' => 'Hesab&#305;n&#305;z&#305; etkinle&#351;tirin',
-	'adherents' => '&Uuml;yeler',
+	'adherents' => '<MODIF>&Uuml;yeler',
 	'admin' => 'Y&ouml;netici',
 	'admin_modifier_auteur_supp' => 'Ek bilgiler',
 	'adresse' => 'Adres',
@@ -44,11 +44,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'code_postal_pro' => 'Posta Kodu (&#304;&#351;)',
 	'commentaire' => 'Yorum',
 	'compte_active' => '@nom_site@ sitesindeki hesab&#305;n&#305;z',
-	'compte_efface' => 'Hesab&#305;n&#305;z silindi.',
-	'conf_plugin' => 'Inscription2 Konfig&uuml;rasyonu',
-	'conf_plugin_page' => 'Inscription2 eklentisinin kay&#305;tl&#305; konfig&uuml;rasyonu',
+	'compte_efface' => '<MODIF>Hesab&#305;n&#305;z silindi.',
+	'conf_plugin' => '<MODIF>Inscription2 Konfig&uuml;rasyonu',
+	'conf_plugin_page' => '<MODIF>Inscription2 eklentisinin kay&#305;tl&#305; konfig&uuml;rasyonu',
 	'configs' => 'Konfig&uuml;rasyonlar',
-	'configuration' => 'Konfig&uuml;rasyon',
+	'configuration' => '<MODIF>Konfig&uuml;rasyon',
 	'confirmation' => '<p>Devam etmek istedi&#287;inizden emin misiniz?</p><p>Yap&#305;lan de&#287;i&#351;iklikler geri al&#305;namaz!!!',
 	'contacts_personnels' => 'Ki&#351;isel ba&#287;lant&#305;lar',
 	'contacts_pros' => 'Meslek&icirc; ba&#287;lant&#305;lar',
@@ -58,14 +58,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// D
 	'decembre' => 'Aral&#305;k',
 	'demande_password' => '&#350;ifreniz&nbsp;:',
-	'description_cfg' => 'Bu eklenti sitenizin yazarlar&#305;na ait bilgileri geni&#351;letmeye olanak tan&#305;r, burada ek alanlar se&ccedil;ebilirsiniz',
+	'description_cfg' => '<MODIF>Bu eklenti sitenizin yazarlar&#305;na ait bilgileri geni&#351;letmeye olanak tan&#305;r, burada ek alanlar se&ccedil;ebilirsiniz',
 	'description_page' => 'Burada konfig&uuml;rasyon tercihlerinizi kaydedildikleri gibi kontrol edebilirsiniz.',
 	'divers' => '&Ccedil;e&#351;itli',
 	'domaine' => 'Alan ("Domaine")',
 	'domaines' => 'Alan ("Domaine")',
 
 	// E
-	'editer_adherent' => '&Uuml;ye bilgilerini d&uuml;zenle',
+	'editer_adherent' => '<MODIF>&Uuml;ye bilgilerini d&uuml;zenle',
 	'effacement_auto_impossible' => 'Hesap otomatik olarak silinemez, bizle temas kurun.',
 	'email' => 'E-Posta',
 	'email_bonjour' => 'G&uuml;nayd&#305;n @nom@,',
@@ -82,13 +82,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'feminin' => 'Bayan',
 	'fevrier' => '&#350;ubat',
 	'fiche' => 'Fi&#351;',
-	'fiche_adherent' => '&Uuml;ye fi&#351;i',
-	'fiche_expl' => ' : Alan &uuml;ye fi&#351;inde g&ouml;r&uuml;necek',
+	'fiche_adherent' => '<MODIF>&Uuml;ye fi&#351;i',
+	'fiche_expl' => '<MODIF> : Alan &uuml;ye fi&#351;inde g&ouml;r&uuml;necek',
 	'fiche_mod' => 'De&#287;i&#351;tirilebilir',
-	'fiche_mod_expl' => ' : Alan, CRAYON eklentisi kullanmas&#305; ko&#351;uluyla &uuml;ye taraf&#305;ndan kamusal aray&uuml;zden de&#287;i&#351;tirilebilecek',
+	'fiche_mod_expl' => '<MODIF> : Alan, CRAYON eklentisi kullanmas&#305; ko&#351;uluyla &uuml;ye taraf&#305;ndan kamusal aray&uuml;zden de&#287;i&#351;tirilebilecek',
 	'fonction' => '&#304;&#351;lev',
 	'form' => 'Form',
-	'form_expl' => ' : Alan INSCRIPTION2 formunda g&ouml;r&uuml;necek',
+	'form_expl' => '<MODIF> : Alan INSCRIPTION2 formunda g&ouml;r&uuml;necek',
 	'form_oblig_expl' => ' : Formda giri&#351;i zorunlu k&#305;l',
 	'format' => 'Format',
 	'formulaire_inscription' => 'Kay&#305;t formu',
@@ -98,21 +98,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_remplir_validation' => 'L&uuml;tfen onaylanmayan alanlar&#305; kontrol edin.',
 
 	// G
-	'general_infos' => 'Genel bilgiler',
+	'general_infos' => '<MODIF>Genel bilgiler',
 	'geoloc' => 'Jeo-Yerelle&#351;tirme',
 	'geomap_obligatoire' => 'Ki&#351;ilerin jeo-yerelle&#351;tirilmesi bilgilerinin kullan&#305;labilmesi i&ccedil;in GoogleMapApi eklentisinin kurulmas&#305; gerekli...',
 	'gerent' => '&Uuml;ye',
-	'gestion_adherent' => '&Uuml;yelerin i&#351;letilmesi',
+	'gestion_adherent' => '<MODIF>&Uuml;yelerin i&#351;letilmesi',
 
 	// H
 	'html' => 'HTML',
 
 	// I
-	'icone_menu_config' => 'Inscription2',
+	'icone_menu_config' => '<MODIF>Inscription2',
 	'info_connection' => 'Ba&#287;lant&#305; bilgileri',
-	'info_defaut' => 'Varsay&#305;lan bilgiler',
-	'info_defaut_desc' => 'Zorunlu, varsay&#305;lan bilgiler',
-	'info_gener' => 'Genel Bilgiler',
+	'info_defaut' => '<MODIF>Varsay&#305;lan bilgiler',
+	'info_defaut_desc' => '<MODIF>Zorunlu, varsay&#305;lan bilgiler',
+	'info_gener' => '<MODIF>Genel Bilgiler',
 	'info_gener_desc' => 'Sitenin yeni &uuml;yelerinden istenecek se&ccedil;enekler',
 	'info_internes' => '&#304;&ccedil; bilgiler',
 	'info_internes_desc' => 'Veritaban&#305;nda saklanacak ama yeni &uuml;ye formunda g&ouml;r&uuml;nmeyecek se&ccedil;enekler',
@@ -134,7 +134,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legende' => 'Lejand',
 	'lisez_mail' => 'Verilen adrese bir e-posta g&ouml;nderildi.Hesab&#305;n&#305;z&#305; etkinle&#351;tirmek i&ccedil;in l&uuml;tfen talimatlar&#305; izleyiniz.',
 	'liste_adherents' => '<MODIF>comptes_utilisateurs\'leri g&ouml;r&uuml;nt&uuml;le',
-	'liste_comptes_titre' => 'Kullan&#305;c&#305; hesaplar&#305; listesi',
+	'liste_comptes_titre' => '<MODIF>Kullan&#305;c&#305; hesaplar&#305; listesi',
 	'login' => 'Kullan&#305;c&#305; ismi (login)',
 	'longitude' => 'Boylam',
 
@@ -167,7 +167,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// P
 	'page_confirmation' => 'Kayd&#305;n&#305;z&#305;n onay sayfas&#305;',
-	'par_defaut' => 'Bu alan zorunlu',
+	'par_defaut' => '<MODIF>Bu alan zorunlu',
 	'pass' => '&#350;ifre',
 	'pass_egal' => 'L&uuml;tfen bir &ouml;ncekiyle ayn&#305; &#351;ifreyi girin.',
 	'pass_indiquez_cidessous' => 'A&#351;a&#287;&#305;dan kay&#305;t oldu&#287;unuzda verdi&#287;iniz e-posta adresini belirtin. Eri&#351;iminizi de&#287;i&#351;tirmek i&ccedil;in gerekli ad&#305;mlar&#305; g&ouml;steren bir e-posta alacaks&#305;n&#305;z.',
@@ -190,9 +190,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'raccourcis' => 'K&#305;sa yollar',
 	'rappel_login' => 'Hat&#305;rlatma : kullan&#305;c&#305; isminiz &#351;&ouml;yle : ',
 	'rappel_password' => '&#350;ifreniz',
-	'recherche_case' => 'Arama alan&#305;',
-	'recherche_utilisateurs' => 'kullan&#305;c&#305;larda arama',
-	'recherche_valeur' => 'Aranan i&ccedil;erik',
+	'recherche_case' => '<MODIF>Arama alan&#305;',
+	'recherche_utilisateurs' => '<MODIF>kullan&#305;c&#305;larda arama',
+	'recherche_valeur' => '<MODIF>Aranan i&ccedil;erik',
 	'redemande_password' => '&#350;ifrenizi tekrar girin&nbsp;:',
 	'rien_a_faire' => 'Yap&#305;lacak bi r&#351;ey yok',
 
@@ -205,18 +205,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'statut' => 'Durum',
 	'statut_rel' => '&#304;&ccedil; durum',
 	'suppression_faite' => 'Verileriniz silindi',
-	'supprimer_adherent' => '&Uuml;ye sil',
+	'supprimer_adherent' => '<MODIF>&Uuml;ye sil',
 	'supprimer_adherent_red' => 'Sil',
 	'surnom' => 'Takma isim',
 
 	// T
 	'table' => 'Tablo',
-	'table_expl' => ' : alan &uuml;ye listesinde g&ouml;r&uuml;necek (&ouml;zel alan)',
+	'table_expl' => '<MODIF> : alan &uuml;ye listesinde g&ouml;r&uuml;necek (&ouml;zel alan)',
 	'tel' => 'Tel.',
 	'telephone' => 'Telefon',
 	'telephone_pro' => 'Telefon (&#304;&#351;)',
 	'texte' => 'Metin',
-	'texte_email_confirmation' => 'Hesab&#305;n&#305;z etkin, &#351;imdiden ki&#351;isel bilgilerinizi kullanarak siteye ba&#287;lanabilirsiniz.
+	'texte_email_confirmation' => '<MODIF>Hesab&#305;n&#305;z etkin, &#351;imdiden ki&#351;isel bilgilerinizi kullanarak siteye ba&#287;lanabilirsiniz.
 
 Kullan&#305;c&#305; isminiz&nbsp;: @login@
 ve &#351;ifrenizi de se&ccedil;tiniz.

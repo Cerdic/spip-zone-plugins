@@ -36,8 +36,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'choisir_categories' => 'Choisissez-les ci-dessous&nbsp;:',
 	'choisir_nouveau_password' => 'Vous pourrez choisir un nouveau mot de passe en cliquant le lien suivant',
 	'choisir_zones' => 'Veuillez choisir les zones auxquelles vous voulez que les nouveaux adh&eacute;rents soient affect&eacute;s',
-	'choix_affordance_login' => 'Login (par d&eacute;faut dans SPIP)',
 	'choix_affordance_email' => 'Email',
+	'choix_affordance_login' => 'Login (par d&eacute;faut dans SPIP)',
 	'choix_affordance_login_email' => 'Login et email',
 	'choix_domaine' => 'Veuillez choisir votre domaine',
 	'civilite' => 'Civilit&eacute;',
@@ -60,12 +60,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'decembre' => 'd&eacute;cembre',
 	'delete_user_select' => 'Supprimer le(s) utilisateur(s) s&eacute;lectionn&eacute;(s)',
 	'demande_password' => 'Votre mot de passe&nbsp;:',
+	'descriptif_plugin' => 'Vous trouverez ici tous les utilisateurs inscrits sur le site. Leur statut est indiqu&eacute; par la couleur de leur icone.<br /><br />Vous pouvez configurer des champs suppl&eacute;mentaires, propos&eacute;s en option aux visiteurs au moment de l\'insciption.',
 	'description_cfg' => 'Param&eacute;trer les champs suppl&eacute;mentaires pour les utilisateurs',
 	'description_page' => 'Ici vous pouvez v&eacute;rifier vos choix de configuration tels qu\'ils sont stock&eacute;s',
 	'divers' => 'Divers',
 	'domaine' => 'Domaine',
 	'domaines' => 'Domaine',
-	'descriptif_plugin' =>'Vous trouverez ici tous les utilisateurs inscrits sur le site. Leur statut est indiqu&eacute; par la couleur de leur icone.<br /><br />Vous pouvez configurer des champs suppl&eacute;mentaires, propos&eacute;s en option aux visiteurs au moment de l\'insciption.' ,
 
 	// E
 	'editer_adherent' => '&Eacute;diter utilisateur',
@@ -126,9 +126,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_pro' => 'Informations professionnelles',
 	'infos_adherent' => 'Informations suppl&eacute;mentaires',
 	'infos_personnelles' => 'Informations personnelles',
+	'inscription2' => 'Inscription 2.0',
 	'inscriptions' => 'Inscriptions',
 	'inserez_infos' => 'Veuillez saisir les informations demand&eacute;es',
-	'inscription2' => 'Inscription 2.0',
 
 	// J
 	'janvier' => 'janvier',
@@ -140,7 +140,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'latitude' => 'Latitude',
 	'legend_affordance_form' => 'Formulaire d\'identification',
 	'legend_oubli_pass' => 'Pas de mot de passe / mot de passe oubli&eacute;',
-
 	'legende' => 'L&eacute;gende',
 	'lisez_mail' => 'Un email vient d\'&ecirc;tre envoy&eacute; &agrave; l\'adresse fournie. Pour activer votre compte veuillez suivre les instructions.',
 	'liste_adherents' => 'Voir la liste des utilisateurs',
@@ -221,11 +220,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'societe' => 'Soci&eacute;t&eacute; / Association ...',
 	'statut' => 'Statut',
 	'statut_rel' => 'Statut interne',
+	'statuts_actifs' => 'Les couleurs des icones correspondent aux statuts suivants : ',
 	'suppression_faite' => 'La suppression de vos donn&eacute;es a &eacute;t&eacute; effectu&eacute;e',
 	'supprimer_adherent' => 'Supprimer utilisateurs',
 	'supprimer_adherent_red' => 'Sup',
 	'surnom' => 'Surnom',
-	'statuts_actifs' => 'Les couleurs des icones correspondent aux statuts suivants : ',
 
 	// T
 	'table' => 'Table',

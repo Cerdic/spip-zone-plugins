@@ -11,14 +11,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'a_confirmer' => 'To be confirmed',
 	'accesrestreint' => 'Restricted access',
 	'aconfirmer' => 'To be confirmed',
-	'action_adherent' => 'Operations',
+	'action_adherent' => '<MODIF>Operations',
 	'activation_compte' => 'Activate your account',
-	'adherents' => 'Members',
+	'adherents' => '<MODIF>Members',
 	'admin' => 'Admin',
 	'admin_modifier_auteur_supp' => 'Extra information',
 	'adresse' => 'Address',
 	'adresse_pro' => 'Professionnal address',
-	'ajouter_adherent' => 'Add a member',
+	'ajouter_adherent' => '<MODIF>Add a member',
 	'aout' => 'August',
 	'aucun_resultat_recherche' => 'There isn\'t any result that corresponds to your query.',
 	'auteur' => 'Author',
@@ -44,11 +44,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'code_postal_pro' => 'Postcode',
 	'commentaire' => 'Comments',
 	'compte_active' => 'Your account on @nom_site@',
-	'compte_efface' => 'Your account has been deleted.',
-	'conf_plugin' => 'Inscription2 settings',
-	'conf_plugin_page' => 'Saved settings of the Inscription2 plugin',
+	'compte_efface' => '<MODIF>Your account has been deleted.',
+	'conf_plugin' => '<MODIF>Inscription2 settings',
+	'conf_plugin_page' => '<MODIF>Saved settings of the Inscription2 plugin',
 	'configs' => 'Configurations',
-	'configuration' => 'Configuration',
+	'configuration' => '<MODIF>Configuration',
 	'confirmation' => '<p>Are you sure you wish to continue</p><p>The changes made are irreversible!</p>',
 	'contacts_personnels' => 'Personnal contacts',
 	'contacts_pros' => 'Professional contacts',
@@ -57,16 +57,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'decembre' => 'December',
-	'delete_user_select' => 'Delete the selected users',
+	'delete_user_select' => '<MODIF>Delete the selected users',
 	'demande_password' => 'Your password:',
-	'description_cfg' => 'This plugin extends the informations about the authors of your site ; you can choose here some additionnal fields',
+	'description_cfg' => '<MODIF>This plugin extends the informations about the authors of your site ; you can choose here some additionnal fields',
 	'description_page' => 'Here you can check your saved settings',
 	'divers' => 'any other business',
 	'domaine' => 'Domain',
 	'domaines' => 'Domain',
 
 	// E
-	'editer_adherent' => 'Edit member',
+	'editer_adherent' => '<MODIF>Edit member',
 	'effacement_auto_impossible' => 'The account cannot be traced automatically. Please contact us.',
 	'email' => 'Email',
 	'email_bonjour' => 'Hello @nom@,',
@@ -83,13 +83,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'feminin' => 'Ms.',
 	'fevrier' => 'February',
 	'fiche' => 'Record',
-	'fiche_adherent' => 'Member record',
-	'fiche_expl' => ' : The field will be visible on the member\'s record',
+	'fiche_adherent' => '<MODIF>Member record',
+	'fiche_expl' => '<MODIF> : The field will be visible on the member\'s record',
 	'fiche_mod' => 'Can be modified',
-	'fiche_mod_expl' => ' : The field could be modified from the public interface by the member if the plugin CRAYONS is used ',
+	'fiche_mod_expl' => '<MODIF> : The field could be modified from the public interface by the member if the plugin CRAYONS is used ',
 	'fonction' => 'Function',
 	'form' => 'Form',
-	'form_expl' => ' : The field will be displayed on the INSCRIPTION2 form',
+	'form_expl' => '<MODIF> : The field will be displayed on the INSCRIPTION2 form',
 	'form_oblig_expl' => ' : required field on the form',
 	'format' => 'Format',
 	'formulaire_inscription' => 'Registration form',
@@ -99,21 +99,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_remplir_validation' => 'Please check the fields that are not valid',
 
 	// G
-	'general_infos' => 'General Information',
+	'general_infos' => '<MODIF>General Information',
 	'geoloc' => 'Geographical positioning',
 	'geomap_obligatoire' => 'To use the geographical positioning data for people, you need to install the GoogleMapApi plugin',
 	'gerent' => 'Member',
-	'gestion_adherent' => 'Manage members',
+	'gestion_adherent' => '<MODIF>Manage members',
 
 	// H
 	'html' => 'HTML',
 
 	// I
-	'icone_menu_config' => 'Inscription2',
+	'icone_menu_config' => '<MODIF>Inscription2',
 	'info_connection' => 'Login information',
-	'info_defaut' => 'Default information',
-	'info_defaut_desc' => 'Information which is required by default',
-	'info_gener' => 'General Information',
+	'info_defaut' => '<MODIF>Default information',
+	'info_defaut_desc' => '<MODIF>Information which is required by default',
+	'info_gener' => '<MODIF>General Information',
 	'info_gener_desc' => 'Options which new members will be asked about',
 	'info_internes' => 'Internal information',
 	'info_internes_desc' => 'Options which will be stored in the database but will not be displayed in the form for new members',
@@ -134,8 +134,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'latitude' => 'Latitude',
 	'legende' => 'Caption',
 	'lisez_mail' => 'An email has been just sent to the address provided. To activate your account please follow the instructions.',
-	'liste_adherents' => 'Show members',
-	'liste_comptes_titre' => 'List of members',
+	'liste_adherents' => '<MODIF>Show members',
+	'liste_comptes_titre' => '<MODIF>List of members',
 	'login' => 'Username (login)',
 	'longitude' => 'Longitude',
 
@@ -153,7 +153,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'naissance' => 'Date of birth',
-	'nb_users_supprimes' => '@nb@ user(s) has been deleted',
+	'nb_users_supprimes' => '<MODIF>@nb@ user(s) has been deleted',
 	'nettoyer_tables' => 'Clean the tables',
 	'no_user_selected' => 'Please select a user',
 	'nom' => 'Signature',
@@ -170,7 +170,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// P
 	'page_confirmation' => 'Confirmation of your registration',
-	'par_defaut' => 'This field is required',
+	'par_defaut' => '<MODIF>This field is required',
 	'pass' => 'Password',
 	'pass_egal' => 'Please enter the same password as earlier.',
 	'pass_indiquez_cidessous' => 'Give the email address with which you were previously registered.
@@ -194,9 +194,9 @@ You will receive and email telling you how to change your login.',
 	'raccourcis' => 'Shortcuts',
 	'rappel_login' => 'Reminder: your login is: ',
 	'rappel_password' => 'Your password',
-	'recherche_case' => 'Search fields',
-	'recherche_utilisateurs' => 'Search for users',
-	'recherche_valeur' => 'Search',
+	'recherche_case' => '<MODIF>Search fields',
+	'recherche_utilisateurs' => '<MODIF>Search for users',
+	'recherche_valeur' => '<MODIF>Search',
 	'redemande_password' => 'Please fill in your password again:',
 	'rien_a_faire' => 'Nothing to do',
 
@@ -209,18 +209,18 @@ You will receive and email telling you how to change your login.',
 	'statut' => 'Status',
 	'statut_rel' => 'Internal status',
 	'suppression_faite' => 'Deletion completed',
-	'supprimer_adherent' => 'Delete member',
+	'supprimer_adherent' => '<MODIF>Delete member',
 	'supprimer_adherent_red' => 'Del',
 	'surnom' => 'Nickname',
 
 	// T
 	'table' => 'Table',
-	'table_expl' => ' : The field will be displayed on the list of the members (private area)',
+	'table_expl' => '<MODIF> : The field will be displayed on the list of the members (private area)',
 	'tel' => 'Tel.',
 	'telephone' => 'Phone',
 	'telephone_pro' => 'Work phone',
 	'texte' => 'Text',
-	'texte_email_confirmation' => 'Your account has been activated. From now on you can access the site using your login.n
+	'texte_email_confirmation' => '<MODIF>Your account has been activated. From now on you can access the site using your login.n
 
 Your login is: @login@
 and you have just chosen your password.
@@ -229,7 +229,7 @@ Thank you for your trust
 
 The @nom_site@ Team 
 @url_site@',
-	'texte_email_inscription' => 'You are about to finish your registration for @nom_site@. 
+	'texte_email_inscription' => '<MODIF>You are about to finish your registration for @nom_site@. 
 
 Click the link below to activate your account and choose your password.
 
