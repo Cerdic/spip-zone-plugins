@@ -125,7 +125,7 @@ Nota: al modificar este segundo estilo, tambi&eacute;n pierdes los estilos est&a
 	'corbeille_objets_vider' => 'Suprimir los objetos seleccionados',
 	'corbeille_vider' => 'Vaciar la papelera:',
 	'couleurs:aide' => 'Asignar colores: <b>[coul]texto[/coul]</b>@fond@ en <b>color</b>= @liste@',
-	'couleurs:description' => 'Permite aplicar facilmente des colores a todos los textos del sitio (art&iacute;culos, breves, t&iacute;tulos, foro, …) utilizando balizas de atajo.
+	'couleurs:description' => '<MODIF>Permite aplicar facilmente des colores a todos los textos del sitio (art&iacute;culos, breves, t&iacute;tulos, foro, …) utilizando balizas de atajo.
 
 Dos ejemplos id&eacute;nticos para cambiar el color del texto:@_CS_EXEMPLE_COULEURS2@
 
@@ -191,7 +191,7 @@ Esta herramienta puede acoplarse con &laquo;&nbsp;[.->sommaire]&nbsp;&raquo;.',
 
 	// E
 	'effaces' => 'Borrados',
-	'en_travaux:description' => 'Permite mostrar un mensaje personalizable durante una fase de mantenimiento en todas las p&aacute;ginas p&uacute;blicas y, eventualmente, en el espacio privado.
+	'en_travaux:description' => '<MODIF>Permite mostrar un mensaje personalizable durante una fase de mantenimiento en todas las p&aacute;ginas p&uacute;blicas y, eventualmente, en el espacio privado.
 [[%message_travaux%]][[%titre_travaux%]][[%admin_travaux%]][[%prive_travaux%]]',
 	'en_travaux:nom' => 'Sitio en mantenimiento',
 	'erreur:bt' => '<span style=\\"color:red;\\">Atenci&oacute;n:</span> la barra de tipograf&iacute;as (version @version@) parece antigua.<br />La Navaja Suiza es compatible con una versi&oacute;n superior o igual a @mini@.',

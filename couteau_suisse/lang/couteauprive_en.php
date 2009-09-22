@@ -42,7 +42,7 @@ _ Test link:[->test@test.com] (Reload the page to test.)[[%enveloppe_mails%]]',
 	// B
 	'basique' => 'Basic',
 	'blocs:aide' => 'Folding blocks: <b>&lt;bloc&gt;&lt;/bloc&gt;</b> (alias: <b>&lt;invisible&gt;&lt;/invisible&gt;</b>) and <b>&lt;visible&gt;&lt;/visible&gt;</b>',
-	'blocs:description' => 'Allows you to create blocks which show/hide when you click on the title.
+	'blocs:description' => '<MODIF>Allows you to create blocks which show/hide when you click on the title.
 
 @puce@ {{In SPIP texts}}: authors can use the tags &lt;bloc&gt; (or &lt;invisible&gt;) and &lt;visible&gt; in this way: 
 
@@ -144,7 +144,7 @@ N.B.: by changing the second parameter you will lose any standard styles associa
 	'corbeille_objets_vider' => 'Delete the selected objects',
 	'corbeille_vider' => 'Empty the wastebin:',
 	'couleurs:aide' => 'Text colouring: <b>[coul]text[/coul]</b>@fond@ with <b>coul</b> = @liste@',
-	'couleurs:description' => 'Provide shortcuts to add colours in any text of the site (articles, news items, titles, forums, ...)
+	'couleurs:description' => '<MODIF>Provide shortcuts to add colours in any text of the site (articles, news items, titles, forums, ...)
 
 Here are two identical examples to change the colour of text:@_CS_EXEMPLE_COULEURS2@
 
@@ -211,7 +211,7 @@ This tool may be combined with "[.->sommaire]".',
 
 	// E
 	'effaces' => 'Deleted',
-	'en_travaux:description' => 'Makes it possible to display a customised message on the public site and also in the editing area during maintenance work.
+	'en_travaux:description' => '<MODIF>Makes it possible to display a customised message on the public site and also in the editing area during maintenance work.
 [[%message_travaux%]][[%titre_travaux%]][[%admin_travaux%]][[%prive_travaux%]]',
 	'en_travaux:nom' => 'Site in maintenance mode',
 	'erreur:bt' => '<span style=\\"color:red;\\">Warning:</span> the typographical bar appears to be an old version (@version@).<br />The Penknife is compatible only with version @mini@ or newer.',

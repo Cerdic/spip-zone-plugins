@@ -38,7 +38,7 @@ _ Enllaz de preba: [->test@test.com] (recarga la p&aacute;xina pa prebar).[[%env
 	// B
 	'basique' => 'B&aacute;sica',
 	'blocs:aide' => 'Bloques Desplegables: <b>&lt;bloc&gt;&lt;/bloc&gt;</b> (alias: <b>&lt;invisible&gt;&lt;/invisible&gt;</b>) y <b>&lt;visible&gt;&lt;/visible&gt;</b>',
-	'blocs:description' => 'Te permite crear bloques que puen facese visibles o invisibles al calcar nel so t&iacute;tulu.
+	'blocs:description' => '<MODIF>Te permite crear bloques que puen facese visibles o invisibles al calcar nel so t&iacute;tulu.
 
 @puce@ {{Nos testos SPIP}}: los redactores disponen de les nueves balices &lt;bloc&gt; (o &lt;invisible&gt;) y &lt;visible&gt; pa utilizar nos testos as&iacute;: 
 
@@ -139,7 +139,7 @@ Dec&aacute;tate: al modificar esti segundu estilu, pierdes los estilos est&aacut
 	'corbeille_objets_vider' => 'Desaniciar los oxetos seleicionaos',
 	'corbeille_vider' => 'Vaciar la papelera:',
 	'couleurs:aide' => 'Poner de colores: <b>[coul]testu[/coul]</b>@fond@ siendo <b>coul</b> = @liste@',
-	'couleurs:description' => 'Permite aplica-yos facilmente colores a tolos testos del sitiu (art&iacute;culos, breves, t&iacute;tulos, foru, …) utilizando balices en atayos.
+	'couleurs:description' => '<MODIF>Permite aplica-yos facilmente colores a tolos testos del sitiu (art&iacute;culos, breves, t&iacute;tulos, foru, …) utilizando balices en atayos.
 
 Dos exemplos id&eacute;nticos pa camudar la color del testu:@_CS_EXEMPLE_COULEURS2@
 
@@ -206,7 +206,7 @@ Esta ferramienta puede acoplase con &laquo;[.->sommaire]&raquo;.',
 
 	// E
 	'effaces' => 'Desaniciaos',
-	'en_travaux:description' => 'Permite amosar un mensaxe personalizable, demientres una fase de mantenimientu, en tou el sitiu p&uacute;blicu y, eventualmente na parte privada.
+	'en_travaux:description' => '<MODIF>Permite amosar un mensaxe personalizable, demientres una fase de mantenimientu, en tou el sitiu p&uacute;blicu y, eventualmente na parte privada.
 [[%message_travaux%]][[%titre_travaux%]][[%admin_travaux%]][[%prive_travaux%]]',
 	'en_travaux:nom' => 'Sitiu n\'obres',
 	'erreur:bt' => '<span style=\\"color:red;\\">Atenci&oacute;n :</span> la barra tipogr&aacute;fica (versi&oacute;n @version@) paez antigua.<br />La Navaya Suiza ye compatible con una versi&oacute;n mayor o igual a @mini@.',

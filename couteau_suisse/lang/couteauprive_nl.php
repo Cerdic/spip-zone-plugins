@@ -116,7 +116,7 @@ Opgelet: door deze tweede parameter te wijzigen, verliest u dan de standaardstij
 	'corbeille_objets_vider' => 'De geselecteerde onderwerpen afschaffen',
 	'corbeille_vider' => 'Het mandje legen&nbsp;:',
 	'couleurs:aide' => 'Inzet in kleuren: <b>[coul]tekst[/coul] </b>@fond@ met <b>coul</b> = @liste@',
-	'couleurs:description' => 'Maakt het mogelijk om kleuren gemakkelijk toe te passen op alle teksten van de plaats (artikelen, kort, titels, forum,…) door bakens in kortere wegen te gebruiken.
+	'couleurs:description' => '<MODIF>Maakt het mogelijk om kleuren gemakkelijk toe te passen op alle teksten van de plaats (artikelen, kort, titels, forum,…) door bakens in kortere wegen te gebruiken.
 
 Twee identieke voorbeelden om de kleur van de tekst te veranderen:@_CS_EXEMPLE_COULEURS2@
 

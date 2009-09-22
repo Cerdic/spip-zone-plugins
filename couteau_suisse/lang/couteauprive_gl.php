@@ -132,7 +132,7 @@ Ollo : modificando este segundo par&aacute;metro, p&eacute;rdense os estilos est
 	'corbeille_objets_vider' => 'Suprimir os obxectos seleccionados',
 	'corbeille_vider' => 'Baleirar a papeleira&nbsp;:',
 	'couleurs:aide' => 'Colorear : <b>[coul]texte[/coul]</b>@fond@ con <b>coul</b> = @liste@',
-	'couleurs:description' => 'Permite aplicar doadamente cores a todos os textos do web (artigos, breves, t&iacute;tulos, foro, …) usando balizas en atallos.
+	'couleurs:description' => '<MODIF>Permite aplicar doadamente cores a todos os textos do web (artigos, breves, t&iacute;tulos, foro, …) usando balizas en atallos.
 
 Dou exemplos id&eacute;nticos para trocar a cor do texto :@_CS_EXEMPLE_COULEURS2@
 
@@ -198,7 +198,7 @@ _ Esta utilidade pode ser emparellada con &laquo;&nbsp;[.->sommaire]&nbsp;&raquo
 
 	// E
 	'effaces' => 'Borrados',
-	'en_travaux:description' => 'Permite mostrar unha mensaxe personalizable durante unha fase de mantemento sobre todo o web p&uacute;blico, e mesmo sobre a parte privada.
+	'en_travaux:description' => '<MODIF>Permite mostrar unha mensaxe personalizable durante unha fase de mantemento sobre todo o web p&uacute;blico, e mesmo sobre a parte privada.
 [[%message_travaux%]][[%titre_travaux%]][[%admin_travaux%]][[%prive_travaux%]]',
 	'en_travaux:nom' => 'Web en obras',
 	'erreur:bt' => '<span style=\\"color:red;\\">Aviso:</span> a barra tipogr&aacute;fica (version @version@) parece antiga.<br />A Navalla Su&iacute;za &eacute;  compatible cunha versi&oacute;n superior ou igual a @mini@.',
