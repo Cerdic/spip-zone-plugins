@@ -60,7 +60,7 @@ function en_travaux_affichage_final($flux){
 	$res = '<div id="en_travaux" style="padding:6px; position:absolute; left:12px; top:22px; border-color:#CECECE #CECECE #4A4A4A; background-color:#FFEEEE; opacity:0.8; font-size:12px; border-style:solid; border-width:3px; font-weight:bold;">'
 	. http_img_pack('warning-24.gif', _T('info_travaux_titre'), 'align="absmiddle"')
 	. ' &nbsp;'. _T('info_travaux_titre') . '</div>';
-	if (!$pos = strpos($flux, '</body>')) $pos = strlen($flux);
+	if (!$pos = stripos($flux, '</body>')) $pos = strlen($flux);
 	return substr_replace($flux, $res, $pos, 0);
 }
 

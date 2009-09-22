@@ -16,6 +16,14 @@ cs_log("inclusion des fonctions de cout_lancement.php pour initialisation");
 
 // compatibilite avec les plugins de version anterieure a 1.7.0.0
 function tweak_choix($s) { if ($p = strpos($s, '(')) return substr($s, 0, $p); return ''; }
+// Compatibilite : stripos() n'existe pas en php4
+if (!function_exists('stripos')) {
+	function stripos($botte, $aiguille) {
+		if (preg_match('@^(.*)' . preg_quote($aiguille, '@') . '@isU', $botte, $regs))
+			return strlen($regs[1]);
+		return false;
+	}
+}
 
 // Echapper les elements perilleux en les passant en base64
 // Creer un bloc base64 correspondant a $rempl ; au besoin en marquant
