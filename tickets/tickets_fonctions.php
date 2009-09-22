@@ -131,18 +131,18 @@ function tickets_liste_statut($connecte = true){
 
 function tickets_liste_type(){
 	return array(
-		1 => "probl&egrave;me",
-		2 => "am&eacute;lioration",
-		3 => "t&acirc;che",
+		1 => _T("tickets:type_probleme"),
+		2 => _T("tickets:type_amelioration"),
+		3 => _T("tickets:type_tache"),
 	);
 }
 
 function tickets_liste_severite(){
 	return array(
-		1 => "bloquant",
-		2 => "important",
-		3 => "normal",
-		4 => "peu important",
+		1 => _T("tickets:severite_bloquant"),
+		2 => _T("tickets:severite_important"),
+		3 => _T("tickets:severite_normal"),
+		4 => _T("tickets:severite_peu_important"),
 	);
 }
 
