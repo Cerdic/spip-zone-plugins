@@ -95,10 +95,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'revenir_gestion' => 'Back to the bug reports management',
 
 	// S
-	'severite_bloquant' => 'Critic',
-	'severite_important' => 'Important',
+	'severite_bloquant' => 'Critical',
+	'severite_important' => 'Major',
 	'severite_normal' => 'Normal',
-	'severite_peu_important' => 'Peu important',
+	'severite_peu_important' => 'Trivial',
 	'statut_mis_a_jour' => 'Status updated',
 	'statut_ferme' => 'Closed',
 	'statut_ferme_long' => 'All the closed bug reports',
