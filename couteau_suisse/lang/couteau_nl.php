@@ -13,17 +13,23 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'attente_confirmation' => 'In wachten van bevestiging',
 
+	// C
+	'configurer' => 'Het Zwitserland Mes configureren',
+	'connections' => 'Aansluiten',
+
 	// D
 	'date_court' => '@jour@/@mois@/@annee@',
 	'derniers_connectes' => 'Laatsten aangesloten:',
 
 	// E
+	'email_forum' => 'Bedankt om uw e-mail te specificeren!',
 	'explique_spam' => 'Opgelet: u hebt bakens, verboden karakters of woorden gebruikt. <br /><br /> Terug komen !',
 
 	// L
 	'lutte_spam' => 'Bestrijding van SPAM',
 
 	// N
+	'nom_email_forum' => 'Bedankt om uw naam of uw e-mail te specificeren !',
 	'nom_forum' => 'Bedankt om uw naam te specificeren !',
 	'non_confirmes' => 'Niet bevestigd :',
 
@@ -49,7 +55,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_lien' => 'Bladzijde @page@: @title@',
 	'page_precedente' => 'Vorige bladzijde',
 	'page_suivante' => 'Volgende bladzijde',
-	'plugin_xml' => '<MODIF>In slechts &eacute;&eacute;n plugin verenigt een lijst van kleine nieuwe en nuttige functies die het beleid verbeteren, van uw SPIP site .
+	'plugin_xml' => 'In slechts &eacute;&eacute;n plugin verenigt een lijst van kleine nieuwe en nuttige functies die het beleid verbeteren, van uw SPIP site .
 
 Elk van deze werktuigen kan of niet door de gebruiker op geactiveerd worden [de bladzijde van bestuur van plugin->./?exec=admin_couteau_suisse] en een aantal variabele beheren: op {{Configuratie}} klikken, vervolgens de tab kiezen {{Le Couteau Suisse}}.
 
@@ -59,7 +65,7 @@ Ontdekt in dit plugin uw lievelingswerktuigen: {Typografische Inzenders}, {typog
 
 Aarzelt niet om de gepubliceerde artikelen van documentatie van plugin over te raadplegen : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
-De verenigbaarheid: SPIP iedereen betaalden 1.9x en v2.0',
+De verenigbaarheid: SPIP iedereen betaalden 1.92x en v2.0.x',
 
 	// S
 	'smileys_dispos' => 'Beschikbare smylies :',
@@ -86,7 +92,10 @@ De verenigbaarheid: SPIP iedereen betaalden 1.9x en v2.0',
 
 	// V
 	'variable_vide' => '(Leegte)',
-	'visiteurs_connectes' => 'Aangesloten bezoekers : @nb@'
+	'visiteurs_connectes' => 'Aangesloten bezoekers : @nb@',
+
+	// W
+	'webmestres' => 'Webmestres SPIP'
 );
 
 ?>
