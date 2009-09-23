@@ -7,18 +7,22 @@
  * $Id$
 */
 
-function abomailmans_ajouter_boutons($boutons_admin) {
+function abomailmans_ajouter_boutons($flux) {
+	if (isset($flux['bando_edition'])){
+		return $flux;
+	}
 	global $visiteur_session;
 	// si on est admin
 	if ($visiteur_session['statut'] == "0minirezo" && !$visiteur_session['restreint']
 	AND (!isset($GLOBALS['meta']['activer_abomailmans']) OR $GLOBALS['meta']['activer_abomailmans']!="non") ) {
-	  // on voit le bouton dans la barre "naviguer"
-		$boutons_admin['naviguer']->sousmenu["abomailmans_tous"]= new Bouton(
-		find_in_path("/img_pack/mailman.gif"),  // icone
-		_T("abomailmans:bouton_listes_diffusion") //titre
+		$menu = 'naviguer';
+		$icone = find_in_path("/img_pack/mailman.gif");
+		$flux[$menu]->sousmenu['abomailmans_tous'] = new Bouton(
+			$icone,  // icone
+			_T("abomailmans:bouton_listes_diffusion")
 		);
 	}
-	return $boutons_admin;
+	return $flux;
 }
 
 function abomailmans_header_prive($flux) {

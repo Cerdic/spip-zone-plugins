@@ -42,12 +42,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_ajouter_liste'			=> 'Ajouter une nouvelle liste',
 	'icone_envoyer_mail_liste'		=> 'Envoyer un e-mail aux lettres &agrave; partir du contenu de ce site',
 	'info_sisympa'                  => '[Obligatoire si liste Sympa]',
-	'inscription_lettres_legende'	=> 'Abonnement aux lettres de <br />diffusion et de discussions',
+	'insciption_listes_legende'		=> 'Abonnement au listes de diffusion',
+	'inscription_lettres_legende'	=> 'Abonnement aux listes de <br />diffusion et de discussions',
 
 //J
 	'je_m_abonne'					=> 'Cochez pour valider l\'abonnement ou le d&eacute;sabonnement.',
-
-//K
 
 //L
 	'label_etat_liste'				=> '&Eacute;tat de la liste',
@@ -90,8 +89,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_abomailman'				=> 'Titre de la liste',
 	'titre_liste_obligatoire'		=> 'Le titre de la liste est obligatoire',
 	'toute_liste'					=> 'Toutes les listes de diffusions',
-
-//U
 
 //V
 	'verifier_formulaire'			=>	'V&eacute;rifiez le remplissage du formulaire.',
