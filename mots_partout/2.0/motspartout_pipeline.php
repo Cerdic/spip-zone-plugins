@@ -104,3 +104,4 @@ function MotsPartout_affiche_milieu($flux){
 	}
 	return $flux;
 }
+?>
