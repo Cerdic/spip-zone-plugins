@@ -14,7 +14,7 @@
 [(#ENV{cacher_option_intro}|non)
 	<option value="0">[(#ENV{option_intro})]</option>]
 <BOUCLE_mots(MOTS){par num titre, titre}>
-	<option value="#ID_MOT" [(#ID_MOT|=={#ENV{valeur}|sinon{#ENV{defaut}}}|oui) selected="selected"]>#TITRE</option>
+	<option value="#ID_MOT" [(#ID_MOT|=={#ENV{valeur,#ENV{defaut}}}|oui) selected="selected"]>#TITRE</option>
 </BOUCLE_mots>
 </select>
 

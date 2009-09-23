@@ -15,4 +15,4 @@
 
 
 #SET{type,#ENV{type,text}}
-<input type="#GET{type}" name="#ENV{nom}" class="#GET{type}[ (#ENV{class})]" id="champ_#ENV{nom}"[ value="(#ENV{valeur}|sinon{#ENV{defaut}})"][ size="(#ENV{size})"] />
+<input type="#GET{type}" name="#ENV{nom}" class="#GET{type}[ (#ENV{class})]" id="champ_#ENV{nom}"[ value="(#ENV{valeur,#ENV{defaut}})"][ size="(#ENV{size})"] />

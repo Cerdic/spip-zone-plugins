@@ -18,7 +18,7 @@
 [(#SET{defaut,[(#ENV{defaut}|is_array|?{#ENV{defaut},#ARRAY{0,#ENV{defaut}}})]})]
 <BOUCLE_radio(POUR){tableau #ENV{datas}}>
 <div class="choix">
-	<input type="checkbox" name="#ENV{nom}[]" class="checkbox" id='champ_#ENV{nom}_#COMPTEUR_BOUCLE'[ (#CLE|in_any{[(#ENV{valeur}|sinon{#GET{defaut}})]}|oui)checked='checked'] value='#CLE' />
+	<input type="checkbox" name="#ENV{nom}[]" class="checkbox" id='champ_#ENV{nom}_#COMPTEUR_BOUCLE'[ (#CLE|in_any{[(#ENV{valeur,#GET{defaut}})]}|oui)checked='checked'] value='#CLE' />
 	<label for="champ_#ENV{nom}_#COMPTEUR_BOUCLE">#VALEUR</label>
 </div>
 </BOUCLE_radio>

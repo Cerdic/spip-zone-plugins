@@ -8,5 +8,5 @@
 		label=<:plugin:info_langue:>})] 
 ]
 <select name="#ENV{nom}" id="champ_#ENV{nom}"[ class="(#ENV{class})"]>
-[(#VAL{changer_lang}|liste_options_langues{[(#ENV{valeur}|sinon{''})]})]
+[(#VAL{changer_lang}|liste_options_langues{[(#ENV{valeur,''})]})]
 </select>

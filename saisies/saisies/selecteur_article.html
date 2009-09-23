@@ -14,7 +14,7 @@
 	[(#SAISIE{selecteur_article,id_article,
 		label=<:plugin:article_en_une:>})] 
 ]
-[(#SET{val,#ENV{valeur}|sinon{#ENV{defaut}}})]
+[(#SET{val,#ENV{valeur,#ENV{defaut}}})]
 [(#REM) Donner a manger a CFG si aucune valeur definie ]
 <!--<input type="hidden" name="[(#ENV{nom,id_item})][]" value="" />-->
 <INCLURE{fond=formulaires/selecteur/articles}

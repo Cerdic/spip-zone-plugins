@@ -2,12 +2,12 @@
 
   Parametres :
   - class : classe(s) css ajoutes au textarea
-  - rows : nombre de ligne
-  - cols : nombre de caracteres de large
+  - rows : nombre de ligne, par defaut : 20 
+  - cols : nombre de caracteres de large, par defaut : 40 (cela depend aussi et surtout du CSS)
 
   Exemple d'appel :
 	[(#SAISIE{textarea, couleur_foncee,
 		label=<:spa:couleur_foncee:>,
 		obligatoire=non})]
 ]
-<textarea name="#ENV{nom}"[ class="(#ENV{class})"] id="champ_#ENV{nom}" rows="[(#ENV{rows}|sinon{20})]" cols="[(#ENV{cols}|sinon{40})]">[(#ENV{valeur}|sinon{#ENV{defaut}})]</textarea>
+<textarea name="#ENV{nom}"[ class="(#ENV{class})"] id="champ_#ENV{nom}" rows="[(#ENV{rows,20})]" cols="[(#ENV{cols,40})]">[(#ENV{valeur,#ENV{defaut}})]</textarea>
