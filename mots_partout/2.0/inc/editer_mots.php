@@ -51,7 +51,7 @@ function inc_editer_mots($objet, $id_objet, $cherche_mot, $select_groupe, $flag,
 	}
 
 	//Ceci n'est plus vraiment utile dans le cas de la squeletisation
-	//on calcule le nombre de mots liés a l'objet
+	//on caclcule le nombre de mots liés a l'objet
 	$cpt = sql_countsel("spip_mots AS mots, spip_mots_$table AS lien", "lien.$table_id=$id_objet AND mots.id_mot=lien.id_mot");
 	if (!$cpt) {
 		if (!$flag) return;
@@ -551,7 +551,7 @@ function editer_mots_un($row, $own)
 		if ($r) {
 			$unseul = ($r[0]['unseul'] == 'oui');
 			$r="";
-			if($table!="documents"){ //interface simplifiée pour les documents
+			if($table!="documents"){ //interface simplifiée poru els documents
 				$r =  _T('info_retirer_mot')
 			  	. "&nbsp;";
 			}
@@ -572,4 +572,3 @@ function editer_mots_un($row, $own)
 
 	return array("<a href='$url'>$cle</a>", $mot, $groupe, $retire);
 }
-?>

@@ -289,4 +289,4 @@ function afficher_liste_mots($choses,$nb_aff=20) {
   }
 }
 */
-?>
+
