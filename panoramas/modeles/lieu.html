@@ -577,6 +577,12 @@ $(document).ready(function(){
 					
 			
 	});
+function rafraichir_panier() {
+ if ($.cookie('objets_ramasses')) { $('div.panorama-panier ul').html($.cookie('objets_ramasses')); } 	
+  setTimeout("rafraichir_panier()", 1000);
+}
+
+setTimeout("rafraichir_panier()", 1000);
 </script>
 
 </BOUCLE_visites>
