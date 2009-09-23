@@ -21,11 +21,27 @@
 </p>
 <script type="text/javascript">
 $(document).ready(function(){
-<BOUCLE_objetrecompense(DOCUMENTS){id_document=#ID_OBJET_RECOMPENSE}>
+		<BOUCLE_objetrecompense(DOCUMENTS){id_document=#ID_OBJET_RECOMPENSE}>
 		[(#CONTENU|contient{Bravo}|?{' ',''})
-			$.cookie('objets_ramasses', $.cookie('objets_ramasses')+"<li><div class='objet#ID_DOCUMENT'><img src='#URL_DOCUMENT' /><span style='display: none;'>#ID_DOCUMENT</span></div></li>");
-						
-			
+			[(#REM)tester si le jeu a déjà été réussi, dans ce cas, ne pas redonner la récompense]
+			if($.cookie('jeux_reussis')) {
+				var tableau_jeux_visites = $.cookie('jeux_reussis').split(','); 
+				if (tableau_jeux_visites.indexOf('#ID_JEU')<0) {
+					$.cookie('jeux_reussis', $.cookie('jeux_reussis')+',#ID_JEU') ;
+					if ($.cookie('objets_ramasses')) {
+					    $.cookie('objets_ramasses', $.cookie('objets_ramasses')+"<li><div class='objet#ID_DOCUMENT'><img src='#URL_DOCUMENT' style='max-height: 100px; margin-left: 10px;'/><span style='display: none;'>#ID_DOCUMENT</span></div></li>");
+					} else {
+					    $.cookie('objets_ramasses', "<li><div class='objet#ID_DOCUMENT'><img src='#URL_DOCUMENT' style='max-height: 100px; margin-left: 10px;'/><span style='display: none;'>#ID_DOCUMENT</span></div></li>");
+					}
+				}
+			} else {
+				$.cookie('jeux_reussis', '#ID_JEU') ;
+				if ($.cookie('objets_ramasses')) {
+					    $.cookie('objets_ramasses', $.cookie('objets_ramasses')+"<li><div class='objet#ID_DOCUMENT'><img src='#URL_DOCUMENT' style='max-height: 100px; margin-left: 10px;'/><span style='display: none;'>#ID_DOCUMENT</span></div></li>");
+				} else {
+					    $.cookie('objets_ramasses', "<li><div class='objet#ID_DOCUMENT'><img src='#URL_DOCUMENT' style='max-height: 100px; margin-left: 10px;'/><span style='display: none;'>#ID_DOCUMENT</span></div></li>");
+				}
+			}
 		]
 		</BOUCLE_objetrecompense>
 });
