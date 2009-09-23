@@ -7,8 +7,8 @@
 * Ce programme est un logiciel libre distribue sous licence GNU/GPL.
 *  
 **/
-		 $p = explode(basename(_DIR_PLUGINS)."/", str_replace('\\','/',realpath(dirname(__FILE__))));
-		 define('_DIR_PLUGIN_CSV2SPIP',(_DIR_PLUGINS.end($p)));
+//		 $p = explode(basename(_DIR_PLUGINS)."/", str_replace('\\','/',realpath(dirname(__FILE__))));
+//		 define('_DIR_PLUGIN_CSV2SPIP',(_DIR_PLUGINS.end($p)));
 
 	function csv2spip_ajouter_boutons($boutons_admin) {
 		// si on est admin
