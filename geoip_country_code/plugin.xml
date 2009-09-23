@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+
+	<!--  
+
+	// GeoIP Country Code 
+	// plugin.xml
+
+/**
+ * Copyright (c) 2009 Christian Paulus - http://www.quesaco.org
+ * Dual licensed under the MIT and GPL licenses.
+ * */
+ 
+	// $LastChangedRevision$
+	// $LastChangedBy$
+	// $LastChangedDate$
+	
+	 -->
+	 	
+	<nom>Localisation du pays visiteur</nom>
+	<auteur>
+		[Christian Paulus->http://www.quesaco.org]
+	</auteur>
+
+	<description>
+		Code pays du visiteur via les services [MaxMind->http://www.maxmind.com/]<br />
+		Placez la balise #GEOIP_COUNTRY_CODE dans votre squelette pour voir apparaitre 
+		le code pays du visiteur. 
+	</description>
+	<lien>http://www.quesaco.org/Localiser-le-pays-du-visiteur</lien>
+	
+	<version>1.00.00</version>
+	<etat>stable</etat>
+	
+	<icon>images/geoipcc-64.png</icon>
+	
+	<!-- espace de nommage -->
+	<prefix>geoipcc</prefix>
+	
+	<options>geoipcc_options.php</options>
+	<install>geoipcc_options.php</install>
+
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<inclure>inc/geoipcc_pipelines.php</inclure>
+	</pipeline>
+	
+</plugin>
