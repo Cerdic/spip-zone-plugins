@@ -1,0 +1,205 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<!--
+
+/**
+ * Copyright (c) 2009 Christian Paulus - http://www.quesaco.org
+ * Dual licensed under the MIT and GPL licenses.
+ * */
+  
+Ce fichier a ete cree/edite' via SeaMonkey.
+
+http://www.seamonkey-project.org/
+
+
+Svp, essayez de conserver l'utilisation de cet outil. Il permet de mettre a' jour 
+la table des contenus tres simplement.
+
+-->
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=iso-8859-1">
+  <title>Aide GEOIP Country Code</title>
+  <meta content="Christian Paulus &lt;cpaulus@quesaco.org&gt;" name="author">
+  <meta
+ content="Aide en ligne pour le plugin Ecrire Contact (EcCo) / SPIP"
+ name="description">
+  <style type="text/css">
+<!--
+body { background: url(#CHEMIN{images/geoipcc-64.png}) no-repeat top center; 
+font: 90%/1.5em "Luxi sans", "Lucida Grande", Lucida, "Lucida Sans Unicode", sans-serif; color: #000;
+padding:1em 2ex;
+}
+h1 small {display:block; font-weight:500; margin:0; padding:0}
+img { text-align:center;display:block; margin:1em auto; padding:1ex; border:1px solid gray }
+table { margin:0 auto; border:0; border-collapse:collapse; }
+td { border:1px solid #ccc;padding:0.5em 1ex }
+-->
+  </style>
+</head>
+<body>
+<h1><a class="mozTocH1" name="mozTocId902493"></a>GeoIP Country Code<small>Aide
+en ligne</small>
+</h1>
+<ol id="mozToc">
+<!--mozToc h1 1 h2 2-->
+  <li><a href="#mozTocId902493">GeoIP Country CodeAide
+en ligne </a>
+    <ol>
+      <li><a href="#mozTocId438123">Pr&eacute;sentation</a></li>
+      <li><a href="#mozTocId257163">Avertissements</a></li>
+      <li><a href="#mozTocId573185">Installation</a></li>
+      <li><a href="#mozTocId82496">Acc&egrave;s &agrave;
+l'aide en ligne</a></li>
+      <li><a href="#mozTocId591014">Principe de
+fonctionnement</a></li>
+      <li><a href="#mozTocId453610">API et base de donn&eacute;es</a></li>
+      <li><a href="#mozTocId966567">Utilisation</a></li>
+      <li><a href="#mozTocId684173">D&eacute;sinstallation</a></li>
+      <li><a href="#mozTocId455542">Remerciements</a></li>
+    </ol>
+  </li>
+</ol>
+<h2><a class="mozTocH2" name="mozTocId438123"></a>Pr&eacute;sentation</h2>
+<span style="font-weight: bold;">GeoIP Country Code</span>,
+nomm&eacute; ci-dessous <span style="font-weight: bold;">GeoIPcc</span>,
+est un plugin mettant &agrave; disposition des webma&icirc;tres
+une balise SPIP pour leurs squelettes. Cette balise ins&egrave;re
+&agrave; la compilation le
+code pays (<a
+ href="http://fr.wikipedia.org/wiki/Domaine_de_premier_niveau">Domaine_de_premier_niveau</a>)
+du visiteur. <br>
+Exemples :<br>
+<ul>
+  <li>pour une adresse IP 123.123.123.123, le code renvoy&eacute; sera
+: #GEOIP_COUNTRY_CODE{123.123.123.123}</li>
+  <li>si vous &ecirc;tes sur un r&eacute;seau local, de classe C, le
+code pays renvoy&eacute; est celui d&eacute;fini par d&eacute;faut :
+#GEOIP_COUNTRY_CODE&nbsp;</li>
+</ul>
+Pour <a href="?page=geoipcc_demo">d'autres exemples, consultez cette
+page de d&eacute;monstration</a>.<br>
+<h2><a class="mozTocH2" name="mozTocId257163"></a>Avertissements</h2>
+<span style="font-weight: bold;">GeoIPcc</span>, est un programme
+libre,
+vous pouvez le redistribuer et/ou le modifier selon les termes de la
+Licence Publique Generale GNU publi&eacute;e par la <a
+ href="http://www.fsf.org/">Free Software Foundation</a> (version 2 ou
+bien toute autre version ult&eacute;rieure choisie par vous). <span
+ style="font-weight: bold;">GeoIPcc</span>, est distribu&eacute;, car
+potentiellement utile, mais SANS AUCUNE GARANTIE, ni explicite ni
+implicite, y compris les garanties de commercialisation ou d'adaptation
+dans un but sp&eacute;cifique. Reportez-vous &agrave; la Licence
+Publique G&eacute;n&eacute;rale GNU pour plus de d&eacute;tails. Vous
+devez avoir re&ccedil;u une copie de la Licence Publique
+G&eacute;n&eacute;rale GNU en m&ecirc;me temps que ce programme ; si ce
+n'est
+pas le cas, &eacute;crivez &agrave; la Free Software Foundation, Inc.,
+59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.<br>
+<br>
+<span style="font-weight: bold;">GeoIPcc</span>, is free software; you
+can
+redistribute it and/or modify it under the terms of the GNU General
+Public License as published by the <a href="http://www.fsf.org/">Free
+Software Foundation</a>; either version 2 of the License, or (at your
+option) any later version. <span style="font-weight: bold;">GeoIPcc</span>,
+is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or
+FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
+for more details. You should have received a copy of the GNU General
+Public License along with this package.
+If not, write to the Free Software Foundation, Inc., 51 Franklin St,
+Fifth Floor, Boston, MA 02110-1301 USA.<br>
+<h2><a class="mozTocH2" name="mozTocId573185"></a>Installation</h2>
+T&eacute;l&eacute;chargez l&#8217;archive <span style="font-weight: bold;">GeoIPcc</span>
+sur la zone puis d&eacute;compressez l'archive. Le r&eacute;sultat est
+un dossier portant le nom du plug-in, dossier qu'il vous faut placer le
+dossier du plug-in, dans le dossier <span style="font-style: italic;">plugins</span>
+de votre site. Pour plus d&#8217;information sur l&#8217;installation d&#8217;un plug-in,
+<a href="http://www.spip.net/fr_article3396.html">consulter
+cette page sur Spip.net</a>.<br>
+<h2><a class="mozTocH2" name="mozTocId82496"></a>Acc&egrave;s &agrave;
+l'aide en ligne</h2>
+L'aide en ligne de <span style="font-weight: bold;">GeoIPcc</span> est
+accessible via l'espace priv&eacute; du site, aux administrateurs en
+charge de toutes les rubriques.<br>
+<h2><a class="mozTocH2" name="mozTocId591014"></a>Principe de
+fonctionnement</h2>
+Pour identifier le pays du visiteur, <span style="font-weight: bold;">GeoIPcc</span>
+recherche l'adresse IP qui vous passez en param&egrave;tre, lit le
+fichier GeoIP Country - base de donn&eacute;es de MaxMind - et renvoie
+le code pays correspondant &agrave; cette adresse IP.<br>
+Le fichier base de donn&eacute;es est t&eacute;l&eacute;charg&eacute;
+lors de l'installation du plug-in. Il est sauvegard&eacute; dans <span
+ style="font-weight: bold;">tmp/GeoIP.dat</span>. Si vous supprimez
+tous les fichiers pr&eacute;sents dans votre dossier <span
+ style="font-weight: bold;">tmp/</span>, <span
+ style="font-weight: bold;">GeoIPcc</span> replacera automatiquement ce
+fichier <span style="font-weight: bold;">tmp/GeoIP.dat</span>,
+&agrave; condition bien s&ucirc;r que l'acc&egrave;s au serveur
+MaxMind soit disponible.<br>
+De plus, tous les 1er du mois, <span style="font-weight: bold;">GeoIPcc</span>
+effectuera une mise &agrave; jour de <span style="font-weight: bold;">tmp/GeoIP.dat</span>
+si n&eacute;cessaire.
+<br>
+<!--
+
+	API et base
+
+-->
+<h2><a class="mozTocH2" name="mozTocId453610"></a>API et base de
+donn&eacute;es</h2>
+Il peut arriver que la structure de la base soit modifi&eacute;e par
+son cr&eacute;ateur. Dans ce cas, il y a de fortes chances que l'<a
+ href="http://fr.wikipedia.org/wiki/Interface_de_programmation">API</a>
+soit modifi&eacute;e aussi.<br>
+L'API (script <span style="font-weight: bold;">geoip.inc.php</span>)
+est issue de <a
+ href="http://geolite.maxmind.com/download/geoip/api/php/">geolite.maxmind.com</a>.
+Si le plug-in ne donne plus de bons r&eacute;sultats, il sera
+peut-&ecirc;tre n&eacute;cessaire de&nbsp; v&eacute;rifier s'il n'y a
+pas une nouvelle version de l'API dans ce r&eacute;pertoire distant. Si
+c'est le cas, t&eacute;l&eacute;chargez le script <span
+ style="font-weight: bold;">geoip.inc</span>, ou sa nouvelle version.
+V&eacute;rifiez-le, et
+enregistrez-le sous le nom <span style="font-weight: bold;">geoip.inc.php</span>
+dans le r&eacute;pertoire du plug-in. Testez le tout sur un serveur de
+test et si le r&eacute;sultat est positif, svp, signalez cette
+modification sur la zone. Merci.<br>
+<!--
+
+	Utilisation
+
+-->
+<h2><a class="mozTocH2" name="mozTocId966567"></a>Utilisation</h2>
+Placez la balise #GEOIP_COUNTRY_CODE dans un le squelette. Lorsque la
+page est appel&eacute;e et construite par SPIP, la balise
+d&eacute;tectera l'adresse IP du visiteur et renverra le code pays
+comme r&eacute;sultat. C'est ce code pays qui sera affich&eacute; en
+espace public.<br>
+<!--
+
+	desintallation
+
+-->
+<h2><a class="mozTocH2" name="mozTocId684173"></a>D&eacute;sinstallation</h2>
+Pour d&eacute;sinstaller le plug-in <span style="font-weight: bold;">GeoIPcc</span>,,
+il suffit, comme pour d&eacute;sinstaller tout plug-in, de cliquer sur
+la petite bo&icirc;te en page de configuration.<br>
+En cliquant sur la petite bo&icirc;te, vous supprimez les fichiers
+temporaires des pays. Si vous ne d&eacute;sirez pas supprimer ces
+fichiers temporaires, cliquez sur la case &agrave; cocher &agrave;
+gauche du nom du plug-in et validez.<br>
+<h2><a class="mozTocH2" name="mozTocId455542"></a>Remerciements</h2>
+<ul>
+  <li>A <a href="http://www.maxmind.com/app/geolitecountry">MaxMind
+pour la mise &agrave; disposition de la base de donn&eacute;es GeoIP
+Country</a>.</li>
+  <li>A toute l'&eacute;quipe de <a href="http://www.spip.net/fr">SPIP</a> et
+   les contributeurs de <a
+ href="http://zone.spip.org/trac/spip-zone/">la zone SPIP</a>.</li>
+</ul>
+<br>
+<br>
+</body>
+</html>

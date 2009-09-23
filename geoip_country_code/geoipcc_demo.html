@@ -1,0 +1,47 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+	[<!--(#REM)
+
+/**
+ * Copyright (c) 2009 Christian Paulus - http://www.quesaco.org
+ * Dual licensed under the MIT and GPL licenses.
+ * */
+ 	
+	Page de demonstration du plug-in GEOIP_CC
+	
+	Appeler cette page par http://<mon.domain>/?page=geoipcc_demo
+	
+	Si vous obtenez une page blanche, c'est que le plugin n'est pas active'.
+	
+	
+	
+	-->]
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET">
+		<title>GEOIP_COUNTRY_CODE page test</title>
+	</head>
+	<body>
+		
+		[(#SET{this_ip,[(#ENV{adresse_ip}|sinon{#GEOIP_IP_VISITEUR})]})]
+		
+		<h1>Recherche du code pays</h1>
+		
+		<p>Entrez ci-dessous une adresse IP (du style 1.2.3.4)
+		et validez pour obtenir le code pays correspondant.</p>
+		
+		<form action="?page=geoipcc_demo" method="get" enctype="text/plain">
+			<input type="hidden" name="page" value="geoipcc_demo" />
+			<label>Adresse IPV4 :  
+				<input name="adresse_ip" type="text" size="15" maxlength="15" value="#GET{this_ip}" /></label>
+			<input name="valider" type="submit" size="15" maxlength="15" value="Ok" />
+		</form>
+		
+		<h2>
+			Résultats
+		</h2>
+		<ul>
+			<li>Adresse IP : #GET{this_ip}</li>
+			<li>Code pays : #GEOIP_COUNTRY_CODE{#GET{this_ip}}</li>
+		</ul>
+	</body>
+</html>
