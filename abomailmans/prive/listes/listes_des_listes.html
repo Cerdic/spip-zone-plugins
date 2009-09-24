@@ -4,8 +4,8 @@
 	<ul>
 	<BOUCLE_listes(ABOMAILMANS){id_abomailman ?}{desactive=0}>
 		<li>
-			<label>#TITRE</label>
-			<input name="listes[]" type="checkbox" value="#ID_ABOMAILMAN"[(#GRAND_TOTAL|=={1}|oui) checked="checked"] />
+			<label for="liste_#ID_ABOMAILMAN">#TITRE</label>
+			<input name="listes[]" type="checkbox" id="liste_#ID_ABOMAILMAN" value="#ID_ABOMAILMAN"[(#GRAND_TOTAL|=={1}|oui) checked="checked"] />
 			[<p class="explications">
 			(#DESCRIPTIF|PtoBR)
 			</p>]
