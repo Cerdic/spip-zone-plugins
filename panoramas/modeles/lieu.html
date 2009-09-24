@@ -577,8 +577,18 @@ $(document).ready(function(){
 					
 			
 	});
+function trim (myString)
+{
+
+return myString.replace(/^\s+/g,'').replace(/\s+$/g,'');
+} 
 function rafraichir_panier() {
- if ($.cookie('objets_ramasses')) { $('div.panorama-panier ul').html($.cookie('objets_ramasses')); } 	
+ if ($.cookie('objets_ramasses')) { 
+      if ($.cookie('objets_ramasses') != $('div.panorama-panier ul').html()) {
+		$('div.panorama-panier ul').html($.cookie('objets_ramasses')); 
+		$.cookie('objets_ramasses', $('div.panorama-panier ul').html());
+      }
+  } 	
   setTimeout("rafraichir_panier()", 1000);
 }
 
