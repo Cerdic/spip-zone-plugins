@@ -102,6 +102,13 @@
 <link>http://www.furl.net/storeIt.jsp?add=%u&amp;t=%t</link>
 </item>
 
+<item>
+<title>Fuzz</title>
+<author>fuzz</author>
+<link>http://www.fuzz.fr/submit?url=%u&amp;title=%t</link>
+<description>Digg-like, fr</description>
+</item>
+
 <!-- G -->
 <item>
 <title>Google</title>
@@ -345,7 +352,7 @@
 <item>
 <title>Wikio</title>
 <author>wikio</author>
-<link>http://www.wikio.com/vote?newurl=%u</link>
+<link>http://www.wikio.com/vote?newurl=%u</link><!-- @todo: CP-20090925, à corriger. url ou newurl ? ne fonctionne pas -->
 <description>Digg-like, news, en-us fr</description>
 </item>
 
