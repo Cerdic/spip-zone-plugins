@@ -119,6 +119,14 @@
 
 <!-- J -->
 <item>
+<title>Jamespot</title>
+<author>jamespot</author>
+<!-- title ne passe pas. A corriger ASAP -->
+<link>http://www.jamespot.com/?action=spotit&amp;url=%u&amp;title=%t&amp;text=%d</link>
+<description>Portail, communauté, fr</description>
+</item>
+
+<item>
 <title>JoOok</title>
 <author>joook</author>
 <link>http://www.joook.net/submit.php?url=%u</link>
