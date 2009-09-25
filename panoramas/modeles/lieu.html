@@ -81,7 +81,7 @@
 			}
 		}	
 		if (partie_terminee == tableau_objets_a_ramasser.length) {
-			var panorama_bravo = "<:panoramas:bravo:>";
+			var panoramas_bravo = "<:panoramas:bravo:>";
 			$('.panorama-viewport').append("<div class='panorama-fond-demarrer'></div>")
 			.append("<div class='panorama-bouton-demarrer'><a href='#' focus='1'>"+panoramas_bravo.replace("NOM_JOUEUR",$.cookie('nom_joueur'))+"</a></div>");
 			
@@ -90,10 +90,10 @@
 			
 			$('.panorama-bouton-demarrer a').bind('click', function(){
 					$.cookie('lieux_visites','');
-					$.cookie('objets_ramasses',' '); [(#REM) objets actuellement dans le panier sous la forme d'une liste <ul><li>]
+					$.cookie('objets_ramasses',' '); 
 					$.cookie('jeux_reussis','');
 					$.cookie('nom_joueur','');
-					$.cookie('objets_ramasses_memo',''); [(#REM) mémoriser tous les objets déjà ramassés, même qui ne sont plus dans le panier]
+					$.cookie('objets_ramasses_memo',''); 	
 					$('.panorama-bouton-demarrer, .panorama-fond-demarrer').fadeOut(1000);
 					document.location.href="?page=visite&id_visite=#ID_VISITE";
 					return false;
@@ -177,7 +177,7 @@ $(document).ready(function(){
 								return true;
 							});
 					
-				[ (#REM) interactions qui ont pr�cis� une image de fond au survol : ajouter l'image dans le cadre ]
+				[ (#REM) interactions qui ont précisé une image de fond au survol : ajouter l'image dans le cadre ]
 				<BOUCLE_imagedefondsurvolcourante(DOCUMENTS){id_document=#ID_IMAGE_FOND_SURVOL}>
 					$('.interaction#_toutesinteractions:ID_INTERACTION img').bind('mouseover', function(){
 						$(this).attr('src', '#URL_DOCUMENT');
@@ -190,7 +190,7 @@ $(document).ready(function(){
 			</BOUCLE_imagedefondcourante>
 			
 
-			[ (#REM) interactions avec les objets : ajouter l'image de l'objet et g�rer le drag and drop dans le panier ]
+			[ (#REM) interactions avec les objets : ajouter l'image de l'objet et gérer le drag and drop dans le panier ]
 			<BOUCLE_objetcourant(DOCUMENTS){id_document=#ID_IMAGE_FOND}>
 				[(#MODE_JEU|=={'oui'}|?{' ',''})	
 				[(#TYPE|=={'objet'}|?{' ',''})
@@ -207,12 +207,12 @@ $(document).ready(function(){
 							var objets_ramasses = $('div.panorama-panier ul').html();
 							$.cookie('objets_ramasses', objets_ramasses);
 							
-							//v�rifier si on a trouv� tous les objets du jeu. Si oui, on affiche un message de f�licitation et la partie est termin�e
+							//vérifier si on a trouvé tous les objets du jeu. Si oui, on affiche un message de félicitation et la partie est terminée
 							verifier_objets_ramasses();	
 					});
 					
 					
-					[ (#REM) suppression des objets qui sont d�j� dans le panier ]
+					[ (#REM) suppression des objets qui sont déjà dans le panier ]
 					if ($('div.panorama-panier ul').find('.objet#ID_DOCUMENT').length > 0) {
 						$('.type-objet#ID_DOCUMENT').remove();
 					}
@@ -425,7 +425,7 @@ $(document).ready(function(){
 
 </script>
 
-[(#REM) gif anim�e sur fond noir avant le chargement de la page suivante (pr�chargement) ]
+[(#REM) gif animée sur fond noir avant le chargement de la page suivante (préchargement) ]
 <img src="#CHEMIN{img_pack/ajax-loader.gif}" width="0" height="0" alt="" />
 
 
@@ -587,6 +587,7 @@ function rafraichir_panier() {
       if ($.cookie('objets_ramasses') != $('div.panorama-panier ul').html()) {
 		$('div.panorama-panier ul').html($.cookie('objets_ramasses')); 
 		$.cookie('objets_ramasses', $('div.panorama-panier ul').html());
+		verifier_objets_ramasses();
       }
   } 	
   setTimeout("rafraichir_panier()", 1000);
