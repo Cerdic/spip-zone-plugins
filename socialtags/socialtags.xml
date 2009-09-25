@@ -105,11 +105,19 @@
 <item>
 <title>Fuzz</title>
 <author>fuzz</author>
-<link>http://www.fuzz.fr/submit?url=%u&amp;title=%t</link>
-<description>Digg-like, fr</description>
+<link>http://www.fuzz.fr/submit?url=%u&amp;title=%t</link> <!-- wrong referrer! correction en cours ? -->
+<description>Digg-like, news, fr</description>
 </item>
 
 <!-- G -->
+
+<item>
+<title>Gmiix</title>
+<author>gmiix</author>
+<link>http://www.gmiix.com/edit_actu.php?ext=1&amp;url=%u&amp;title=%t</link>
+<description>Digg-like, news</description>
+</item>
+
 <item>
 <title>Google</title>
 <author>google</author>
@@ -346,6 +354,13 @@
 <title>Viadeo</title>
 <author>viadeo</author>
 <link>http://www.viadeo.com/shareit/share/?url=%u&amp;title=%t</link>
+</item>
+
+<item>
+<title>VisitezMonSite</title>
+<author>visitezmonsite</author>
+<link>http://www.visitezmonsite.com/publier?url=%u&amp;title=%t</link>
+<description>Digg-like, , en-us fr</description>
 </item>
 
 <!-- W -->
