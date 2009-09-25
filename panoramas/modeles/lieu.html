@@ -81,7 +81,7 @@
 			}
 		}	
 		if (partie_terminee == tableau_objets_a_ramasser.length) {
-			var panoramas_bravo = "<:panoramas:bravo:>";
+			var panoramas_bravo = "[(#MESSAGE_FIN_JEU|sinon{<:panoramas:bravo:>})]"; 
 			$('.panorama-viewport').append("<div class='panorama-fond-demarrer'></div>")
 			.append("<div class='panorama-bouton-demarrer'><a href='#' focus='1'>"+panoramas_bravo.replace("NOM_JOUEUR",$.cookie('nom_joueur'))+"</a></div>");
 			
@@ -95,7 +95,8 @@
 					$.cookie('nom_joueur','');
 					$.cookie('objets_ramasses_memo',''); 	
 					$('.panorama-bouton-demarrer, .panorama-fond-demarrer').fadeOut(1000);
-					document.location.href="?page=visite&id_visite=#ID_VISITE";
+					document.location.href="[(#URL_FIN_JEU|sinon{?page=visite&id_visite=#ID_VISITE})]"; 
+
 					return false;
 				});
 		}
@@ -498,7 +499,7 @@ $(document).ready(function(){
 <script type="text/javascript">
 
 	function gestion_molette_souris() {
-		[(#REM) Gestion de la molette de la souris pour aller � gauche � droite ]
+		[(#REM) Gestion de la molette de la souris pour aller à gauche & à droite ]
 		var intOverallDelta = 0;
 		$(".panorama-viewport").mousewheel(function(objEvent, intDelta){
 			if (intDelta > 0) { 

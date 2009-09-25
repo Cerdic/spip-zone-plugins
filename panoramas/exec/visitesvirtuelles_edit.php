@@ -82,6 +82,8 @@ function exec_visitesvirtuelles_edit(){
 			$id_carte = $row['id_carte'];
 			$mode_jeu = $row['mode_jeu'];
 			$liste_objets_jeu = $row['liste_objets_jeu'];
+			$message_fin_jeu = $row['message_fin_jeu'];
+			$url_fin_jeu = $row['url_fin_jeu'];
 		}
 		$focus = "";
 		$action_link = generer_action_auteur("visitesvirtuelles_edit","$id_visite",urlencode($redirect));
@@ -183,6 +185,8 @@ function Panoramas_boite_proprietes_visitevirtuelle($id_visite, $row, $focus, $a
 	$id_lieu_depart = intval($row['id_lieu_depart']);	
 	$mode_jeu = $row['mode_jeu'];	
 	$liste_objets_jeu = $row['liste_objets_jeu'];	
+	$message_fin_jeu = $row['message_fin_jeu'];	
+	$url_fin_jeu = $row['url_fin_jeu'];	
 	
 
 	$out .= "<strong><label for='titre_visite'>"._T("panoramas:titre_visite")."</label></strong> "._T('info_obligatoire_02');
@@ -234,7 +238,14 @@ function Panoramas_boite_proprietes_visitevirtuelle($id_visite, $row, $focus, $a
 	$out .= "<input type='text' name='liste_objets_jeu' id='liste_objets_jeu_visite' class='formo $focus' ".
 		"value=\"".$liste_objets_jeu."\" size='5' /><br />\n";
 	
-
+	$out .= "<strong><label for='message_fin_jeu_visite'>"._T("panoramas:message_fin_jeu")."</label></strong> ";
+	$out .= "<input type='text' name='message_fin_jeu' id='message_fin_jeu_visite' class='formo $focus' ".
+		"value=\"".$message_fin_jeu."\" size='5' /><br />\n";
+	
+	$out .= "<strong><label for='url_fin_jeu_visite'>"._T("panoramas:url_fin_jeu")."</label></strong> ";
+	$out .= "<input type='text' name='url_fin_jeu' id='url_fin_jeu_visite' class='formo $focus' ".
+		"value=\"".$url_fin_jeu."\" size='5' /><br />\n";
+	
 	$out .= "<div style='text-align:right'>";
 	$out .= "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo'></div>\n";
 

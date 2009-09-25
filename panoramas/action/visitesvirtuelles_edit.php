@@ -15,7 +15,8 @@ function Visitesvirtuelles_update($id_visite){
 	$id_carte = intval(_request('id_carte'));
 	$mode_jeu = _request('mode_jeu');
 	$liste_objets_jeu = _request('liste_objets_jeu');
-	
+	$message_fin_jeu = _request('message_fin_jeu');
+	$url_fin_jeu = _request('url_fin_jeu');
 	//
 	// Modifications des donnees de base de la visite virtuelle
 	//
@@ -35,7 +36,9 @@ function Visitesvirtuelles_update($id_visite){
 			"largeur="._q($largeur).", ".
 			"hauteur="._q($hauteur).", ".
 			"mode_jeu="._q($mode_jeu).", ".
-			"liste_objets_jeu="._q($liste_objets_jeu).
+			"liste_objets_jeu="._q($liste_objets_jeu).", ".
+			"message_fin_jeu="._q($message_fin_jeu).", ".
+			"url_fin_jeu="._q($url_fin_jeu).
 		" WHERE id_visite="._q($id_visite);
 		$result = spip_query($query);
 	}
@@ -50,6 +53,8 @@ function Visitesvirtuelles_update($id_visite){
 		$id_lieu_depart = $row['id_lieu_depart'];
 		$liste_objets_jeu = $row['liste_objets_jeu'];
 		$mode_jeu = $row['mode_jeu'];
+		$message_fin_jeu = $row['message_fin_jeu'];
+		$url_fin_jeu = $row['url_fin_jeu'];
 	}
 
 	return array($id_visite);
