@@ -171,7 +171,7 @@ $(document).ready(function(){
 		
 		<BOUCLE_toutesinteractions(VISITES_VIRTUELLES_INTERACTIONS){id_lieu}>
 			
-			[ (#REM) interactions qui ont pr�cis� une image de fond : ajouter l'image dans le cadre ]
+			[ (#REM) interactions qui ont précisé une image de fond : ajouter l'image dans le cadre ]
 			<BOUCLE_imagedefondcourante(DOCUMENTS){id_document=#ID_IMAGE_FOND}>
 				$('.interaction#_toutesinteractions:ID_INTERACTION').append("<img src='#URL_DOCUMENT' width='"+$('.interaction#_toutesinteractions:ID_INTERACTION').css('width')+"' height='"+$('.interaction#_toutesinteractions:ID_INTERACTION').css('height')+"' style='position: absolute; top: 0; left: 0;'/>").css('opacity',1).css('border','none').css('background','none');
 				$('.interaction#_toutesinteractions:ID_INTERACTION').bind('click', function() {
@@ -262,7 +262,7 @@ $(document).ready(function(){
 							$('h2.panorama-carte').show();
 							$(this).unbind('click');
 							tb_init(this);
-							$('div.panorama-panier ul li div.objet#ID_DOCUMENT, .type-objet#ID_DOCUMENT').remove();
+							$('div.panorama-panier ul li div.objet#ID_DOCUMENT:first, .type-objet#ID_DOCUMENT').remove();
 							
 							//mis � jour des cookies
 							var objets_ramasses = $('div.panorama-panier ul').html();
@@ -587,8 +587,9 @@ function rafraichir_panier() {
  if ($.cookie('objets_ramasses')) { 
       if ($.cookie('objets_ramasses') != $('div.panorama-panier ul').html()) {
 		$('div.panorama-panier ul').html($.cookie('objets_ramasses')); 
-		$.cookie('objets_ramasses', $('div.panorama-panier ul').html());
 		verifier_objets_ramasses();
+		$('div.panorama-panier ul li div').draggable({helper: 'clone', opacity: .4, revert: true});
+							
       }
   } 	
   setTimeout("rafraichir_panier()", 1000);
