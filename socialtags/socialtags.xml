@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <rss version="2.0">
+	<!--
+		Bookmarks: titre et lien sur le site, description courte
+		Digg-like: idem, avec description longue
+		Blog: (éponymie)
+		Community: partage réservé aux membres
+		
+		Certains <link> sont marqués 'a corriger'
+		Si vous avez l'info, merci de completer.
+	-->
 <channel>
 <title>Social Tags</title>
 <link>http://www.spip-contrib.net/Social-tags</link>
@@ -37,6 +46,13 @@
 <author>bluegger</author>
 <link>http://www.bluegger.com/submit.php?url=%u</link>
 <description>Digg-like, fr</description>
+</item>
+
+<item>
+<title>Bookmarks.fr</title>
+<author>bookmarks.fr</author>
+<link>http://www.bookmarks.fr/?action=add&url=%u</link><!-- a corriger -->
+<description>Bookmarks, fr</description>
 </item>
 
 <!-- C -->
@@ -205,6 +221,13 @@
 
 <!-- N -->
 <item>
+<title>Netvibes</title>
+<author>netvibes</author>
+<link>http://www.netvibes.com/subscribe.php?url=%u</link>
+<description>Blog, news, fr en-us</description>
+</item>
+
+<item>
 <title>Netvouz</title>
 <author>netvouz</author>
 <link>http://www.netvouz.com/action/submitBookmark?url=%u</link>
@@ -259,6 +282,7 @@
 <title>Scoopeo</title>
 <author>scoopeo</author>
 <link>http://www.scoopeo.com/scoop/new?newurl=%u&amp;title=%t</link>
+<description>Digg-like, news, fr</description>
 </item>
 
 <item>
