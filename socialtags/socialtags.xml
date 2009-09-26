@@ -27,6 +27,7 @@
 <title>Bebo</title>
 <author>bebo</author>
 <link>http://www.bebo.com/c/share?Url=%u&amp;Title=%t</link>
+<description>Communauté, fr</description>
 </item>
 
 <item>
@@ -73,16 +74,16 @@
 <!-- D -->
 <item>
 <title>Del.icio.us</title>
+<author>delicious</author>
 <link>http://delicious.com/save?url=%u&amp;title=%t&amp;notes=%d</link>
 <description>Agrégateur à la mode. Bookmarks.</description>
-<author>delicious</author>
 </item>
 
 <item>
 <title>Digg</title>
+<author>digg</author>
 <link>http://digg.com/submit?phase=2&amp;url=%u&amp;title=%t</link>
 <description>Agrégateur à la mode.</description>
-<author>digg</author>
 </item>
 
 <item>
@@ -124,6 +125,7 @@
 <title>Furl</title>
 <author>furl</author>
 <link>http://www.furl.net/storeIt.jsp?add=%u&amp;t=%t</link>
+<description>Redirect sur Diigo</description>
 </item>
 
 <item>
@@ -357,6 +359,13 @@
 <title>ThisNext</title>
 <author>thisnext</author>
 <link>http://www.thisnext.com/pick/new/submit/sociable/?url=%u&amp;name=%t</link>
+<description>Digg-like, en-us</description>
+</item>
+
+<item>
+<title>Tip'd</title>
+<author>tipd</author>
+<link>http://tipd.com/submit.php?url=%u</link>
 <description>Digg-like, en-us</description>
 </item>
 
