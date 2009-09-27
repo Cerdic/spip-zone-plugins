@@ -7,7 +7,6 @@
 ]
 [<div class='ajax'>
 <div class="formulaire_spip formulaire_#FORM">
-	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	(#ENV{editable})
 	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
@@ -21,13 +20,13 @@
 				<span class='erreur_message'>(#GET{erreurs})</span>
 				]<label for="#GET{name}"><em>[(#VAL{140}|moins{#ENV{status}|strlen})]</em>[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>
 				<textarea name="#GET{name}" id="#GET{name}">#ENV{status}</textarea>
-				</div>
 	    </li>
 	  </ul>
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 	  <!--extra-->
 	  <p class='boutons'><span class='image_loading'></span><input type='submit' class='submit' value='<:microblog:bouton_envoyer:>' /></p>
 	</div></form>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 </div></div>]
 <script type="text/javascript">
 function status_length_count(){
