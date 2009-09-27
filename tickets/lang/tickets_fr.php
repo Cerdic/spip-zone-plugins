@@ -44,6 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_titre' => 'R&eacute;sum&eacute;',
 	'champ_titre_ticket' => 'Titre du ticket',
 	'champ_type' => 'Type',
+	'champ_texte' => 'Texte',
 	'champ_statut' => 'Statut',
 	'champ_url_exemple' => 'URL d&rsquo;exemple',
 	'champ_version' => 'Version',
