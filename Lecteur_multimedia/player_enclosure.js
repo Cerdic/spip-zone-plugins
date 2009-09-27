@@ -200,8 +200,9 @@ function player_play(i){
 		file1 = file1.replace(/(_|-)/g,' ');
 		//jQuery("img[@alt='play']").attr()
 		var taille = file1.length;
-		jQuery("#now_playing").css("width", taille*6) ;
-		jQuery("#scroller").css("width", taille*6) ;
+		$large_s = taille * 7;
+		jQuery("#now_playing").width($large_s);
+		jQuery("#scroller").width($large_s);
 		jQuery("#now_playing").html(file1) ;
 		var taille =  jQuery("#scroller").width();
   		var min_taille = jQuery("#scroller_container").width();
