@@ -200,7 +200,8 @@ function player_play(i){
 		file1 = file1.replace(/(_|-)/g,' ');
 		//jQuery("img[@alt='play']").attr()
 		var taille = file1.length;
-		$large_s = taille * 7;
+		//$large_s = taille * 7; // pas bon. Laisser le navigateur decider
+		$large_s = 'auto';
 		jQuery("#now_playing").width($large_s);
 		jQuery("#scroller").width($large_s);
 		jQuery("#now_playing").html(file1) ;
