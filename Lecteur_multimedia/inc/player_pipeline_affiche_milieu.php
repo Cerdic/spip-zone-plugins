@@ -10,7 +10,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // pipeline (plugin.xml)
-// Ajoute la boite en fin de page de configuration Fonctions avançées
+// Ajoute la boite en fin de page de configuration Fonctions avancees
 function player_affiche_milieu ($flux) {
 
 	$exec = $flux['args']['exec'];

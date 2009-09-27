@@ -98,7 +98,7 @@ function player_flv_config () {
 			, 'values' => player_array_set_key_from_value(0, 1, 2, 4, 8, 16, 24, 32)
 			, 'default' => '8'
 		  )
-		, 'srt' // 1 pour utiliser les sous-titres SRT (le fichier doit etre au m�me endroit que la video et avoir le meme nom que le fichier video mais avec l'extension .srt)
+		, 'srt' // 1 pour utiliser les sous-titres SRT (le fichier doit etre au meme endroit que la video et avoir le meme nom que le fichier video mais avec l'extension .srt)
 		  => array(
 		  	'type' => "boolean"
 		  	, 'class' => "normal maxi multi"
