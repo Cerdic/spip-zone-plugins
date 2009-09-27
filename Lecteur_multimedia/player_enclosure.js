@@ -147,6 +147,26 @@ jQuery(document).ready(function(){
 	jQuery("#now_playing").change(function(){
 		scroller_init();
 	});
+	
+	// si option choisie, presser la barre espace arrete le lecteur
+	if (key_espace_stop) {
+		jQuery(document).keypress(function(e)
+		{
+			key = (e.charCode) ? e.charCode : e.keyCode;
+			if(
+				(key == 32) // espace
+				|| (key == 27) // esc
+			) {
+				if(isPlaying) {
+					player_togglePause();
+				}
+				if (isVideoPlaying) {
+					// toto: faire la meme chose pour la video ?
+					
+				}
+			}
+		});
+	}
 }
 
 

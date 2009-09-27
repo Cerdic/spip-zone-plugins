@@ -7,7 +7,7 @@
 	// $LastChangedDate$
 
 // CP-20080321 : correction style (tous les formul en espace prive utilisent verdana2)
-// CP-20080321 : deplacement de la fonction initiale ici. Peut-etre a recoler en page admin ?
+// CP-20080321 : deplacement de la fonction initiale ici. Pour ajax
 
 function player_affiche_config_form ($exec_page){
 
