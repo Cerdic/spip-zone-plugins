@@ -77,3 +77,9 @@ function microblog($status, $user=null, $pass=null, $service=null, $api=null){
 }
 
 
+function microblog_affiche_droite($flux){
+	if (autoriser('microbloguer','status')){
+		$flux['data'] .= recuperer_fond('modeles/microblog_update',array());
+	}
+	return $flux;
+}

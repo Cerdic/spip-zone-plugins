@@ -7,6 +7,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   // A
   'article' => 'article',
 
+	// B
+	'bouton_envoyer' => 'Envoyer',
+
   // C
   'choisir' => 'choisir',
   'compte_tests' => 'Compte de tests',
@@ -17,6 +20,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   'elements_signaler' => 'Elements &#224; signaler sur le flux public ci-dessus',
 
   // L
+	'label_status' => 'Quoi de neuf ?',
+
+	// P
   'presentation_spipo' => 'le site de la communaut&#233; SPIP',
   'presentation_laconica' => 'le site public du logiciel laconi.ca',
 

@@ -13,7 +13,7 @@
 	</description>
 	<lien>http://www.spip-contrib.net/Microblog</lien>
 	<prefix>
-	Microblog
+	microblog
 	</prefix>
 	<icon>
 	images/microblog.png
@@ -26,6 +26,10 @@
 	<pipeline>
 		<nom>taches_generales_cron</nom>
 		<inclure>genie/microblog.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_droite</nom>
+		<inclure>inc/microblog.php</inclure>
 	</pipeline>
 
 	<chemin dir='' />
