@@ -15,6 +15,8 @@
 	
 	define("_PLAYER_META_PREFERENCES", "player_preferences");
 
+	define("_PLAYER_MP3_LECTEUR_DEFAULT", "eraplayer_playlist.swf"); // le plus leger
+	
 	define("_PLAYER_FLV_LECTEUR_DEFAULT", "player_flv_maxi.swf");
 	
 	define("_PLAYER_FLV_LECTEURS", 

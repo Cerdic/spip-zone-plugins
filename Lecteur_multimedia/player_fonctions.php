@@ -12,17 +12,21 @@ if (!defined('_DIR_PLUGIN_PLAYER')){ // defini automatiquement par SPIP 1.9.2
 }
 
 function Player_head(){
-	$flux = "";
-	$flux .= '<script type="text/javascript" src="'.find_in_path('soundmanager/soundmanager2.js').'"></script>';
-	$flux .= '<script type="text/javascript"><!--'."\n"
-	. 'var musicplayerurl="'.find_in_path('flash/eraplayer_playlist.swf').'";'."\n"
-	. 'var image_play="'.find_in_path('images/playl.gif').'";'."\n"
-	. 'var image_pause="'.find_in_path('images/pausel.gif').'";'."\n"
-	. 'soundManager.url = "'.find_in_path('soundmanager/soundmanager2.swf').'";'."\n"
-  	. 'soundManager.nullURL = "'.find_in_path('soundmanager/null.mp3').'";'."\n"
-	. 'var videoNullUrl = "'._DIR_PLUGIN_PLAYER.'null.flv";'."\n"
-	. 'var DIR_PLUGIN_PLAYER = "'._DIR_PLUGIN_PLAYER.'";'
-	. "//--></script>\n";
+	
+	$player_ = ($p = $GLOBALS['meta']['player']) ? $p : _PLAYER_MP3_LECTEUR_DEFAULT;
+	
+	$flux = ""
+		. '<script type="text/javascript" src="'.find_in_path('soundmanager/soundmanager2.js').'"></script>'
+		. '<script type="text/javascript"><!--' . "\n"
+		// . 'var musicplayerurl="'.find_in_path('flash/eraplayer_playlist.swf').'";'."\n"
+		. 'var musicplayerurl="' . find_in_path('flash/' . $player_ . '.swf') . '";'."\n"
+		. 'var image_play="'.find_in_path('images/playl.gif').'";'."\n"
+		. 'var image_pause="'.find_in_path('images/pausel.gif').'";'."\n"
+		. 'soundManager.url = "'.find_in_path('soundmanager/soundmanager2.swf').'";'."\n"
+  		. 'soundManager.nullURL = "'.find_in_path('soundmanager/null.mp3').'";'."\n"
+		. 'var videoNullUrl = "'._DIR_PLUGIN_PLAYER.'null.flv";'."\n"
+		. 'var DIR_PLUGIN_PLAYER = "'._DIR_PLUGIN_PLAYER.'";'
+		. "//--></script>\n";
 	
 	$flux .= '<script type="text/javascript" src="'._DIR_PLUGIN_PLAYER.'javascript/jscroller.js"></script>'."\n";
 	$flux .= '<script type="text/javascript" src="'._DIR_PLUGIN_PLAYER.'player_enclosure.js"></script>'."\n";
