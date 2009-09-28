@@ -1,0 +1,14 @@
+<plugin>
+	<nom>Pivot de syndication</nom>
+	<auteur>[Nicolas Hoizey->http://www.gasteroprod.com/]</auteur>
+	<version>0.0.1</version>
+  <version_base>0.1</version_base>
+	<etat>dev</etat>
+	<description>Transformation des nombreux formats de syndication RSS, Atom et d&eacute;riv&eacute;s en un unique format pivot utile à SPIP.</description>
+  <prefix>pivotsyndic</prefix>
+  <chemin dir='' />
+  <pipeline>
+    <nom>pre_syndication</nom>
+    <inclure>pivotsyndic_pipelines.php</inclure>
+  </pipeline>
+</plugin>
