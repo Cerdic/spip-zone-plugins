@@ -7,9 +7,8 @@ class Pile {
 
 
 	// les arguments sont dans l'entree 0 du tableau param.
-	// param[0][0] vaut toujours ''
+	// param[0][0] vaut toujours '' (ou presque ?)
 	function recuperer_argument_balise($pos, $p) {
-		//$pos--;
 		if (!isset($p->param[0])) {
 			return null;
 		}
@@ -22,9 +21,8 @@ class Pile {
 	
 	
 	// les arguments sont dans l'entree 0 du tableau param.
-	// param[0][0] vaut toujours ''
+	// param[0][0] vaut toujours '' (ou presque ?)
 	function supprimer_argument_balise($pos, $p) {
-		//$pos--;
 		if (!isset($p->param[0])) {
 			return null;
 		}
@@ -53,11 +51,15 @@ class Pile {
 	
 	
 	// les arguments sont dans l'entree 0 du tableau param.
-	// param[0][0] vaut toujours ''
+	// param[0][0] vaut toujours '' (ou presque ?)
 	function ajouter_argument_balise($element, $p) {
-		$zero = array_shift($p->param[0]);
-		array_unshift($p->param[0], $element);
-		array_unshift($p->param[0], $zero);
+		if (isset($p->param[0][0])) {
+			$zero = array_shift($p->param[0]);
+			array_unshift($p->param[0], $element);
+			array_unshift($p->param[0], $zero);
+		} else {
+			array_unshift($p->param[0], $element);
+		}
 		return $p;
 	}
 	
