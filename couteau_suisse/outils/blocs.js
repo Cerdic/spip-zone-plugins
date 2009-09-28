@@ -67,7 +67,11 @@ function blocs_init() {
 	// pour un lien 'replier_bloc' present dans le bloc
 	jQuery('.blocs_destination a.replier_bloc', this).cs_todo()
 	 .click( function(){
-		jQuery(this).parents('.cs_blocs:first').blocs_replie_tout().blocs_toggle();
+		s = jQuery(this).parents('.cs_blocs:first');
+		// scroll vers le debut du bloc, si le plugin 'SrollTo' est present
+		if(typeof jQuery.fn.scrollTo=="function") jQuery('body').scrollTo(s, 500, 
+			{margin:true, /*axis:'y',*/ onAfter:function(){s.blocs_replie_tout().blocs_toggle();}});
+		else s.blocs_replie_tout().blocs_toggle();
 		// annulation du clic
 		return false;
 	   });
