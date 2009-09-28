@@ -18,6 +18,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // charger cfg
 include_spip('cfg_options');
+include_spip('inc/autoriser');
 
 /**
  *
@@ -170,7 +171,6 @@ function formulaires_inscription2_verifier_dist($id_auteur = NULL,$redirect = nu
 
 	//verifier que l'auteur a bien des droits d'edition
 	if (is_numeric($id_auteur)) {
-		include_spip('inc/autoriser');
 		if (!autoriser('modifier','auteur',$id_auteur)) {
 			$erreurs['message_erreur'] .= _T('inscription2:profil_droits_insuffisants');
 		}
