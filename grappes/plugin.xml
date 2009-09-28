@@ -6,10 +6,11 @@
 	<etat>test</etat>
 	<prefix>grappes</prefix>
 	<description>
-	Permet de regrouper des &eacute;l&eacute;ments de SPIP 
-	comme des auteurs, rubriques, articles (lorsque l'interface existe pour)... 
+	Permet de regrouper des &eacute;l&eacute;ments de SPIP
+	comme des auteurs, rubriques, articles (lorsque l'interface existe pour)...
 	dans un m&ecirc;me univers (une grappe)
 	</description>
+	<options>grappes_options.php</options>
 	<fonctions>grappes_autorisations.php</fonctions>
 	<install>base/grappes_install.php</install>
 	<pipeline>

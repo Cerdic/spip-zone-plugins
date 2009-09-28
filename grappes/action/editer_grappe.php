@@ -13,8 +13,9 @@ include_spip('inc/filtres');
 // http://doc.spip.org/@action_editer_groupe_mot_dist
 function action_editer_grappe_dist()
 {
-	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$id_grappe = intval($securiser_action());
+
+	//$securiser_action = charger_fonction('securiser_action', 'inc');
+	//$id_grappe = intval($securiser_action());
 
 	if (!$id_grappe) {
 		$id_grappe = sql_insertq("spip_grappes");
@@ -28,14 +29,14 @@ function action_editer_grappe_dist()
 		'titre', 'descriptif', 'liaisons'
 	) as $champ)
 		$c[$champ] = _request($champ);
-	
+
 	foreach (array(
 		'acces'
 	) as $champ)
 		$opt[$champ] = _request($champ);
-		
+
 	$c['options'] = serialize($opt);
-	
+
 	if (is_array($c['liaisons']))
 		$c['liaisons'] = implode(',',$c['liaisons']);
 
@@ -46,16 +47,6 @@ function action_editer_grappe_dist()
 			'id_grappe', $id_grappe, '&'));
 	} else
 		return array($id_grappe,'');
-}
-
-// http://doc.spip.org/@revision_groupe_mot
-function revision_grappe($id_grappe, $c=false) {
-
-	modifier_contenu('grappe', $id_grappe,
-		array(
-			'nonvide' => array('titre' => _T('info_sans_titre'))
-		),
-		$c);
 }
 
 ?>

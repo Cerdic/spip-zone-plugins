@@ -14,21 +14,24 @@ function action_lier_objets_dist()
 	$arg = $securiser_action();
 
 	list($action,$source,$id_source,$cible,$id_cible) = explode('/',$arg);
-	
+
 	if ($action != 'lier' AND $action != 'delier') {
 		include_spip('inc/minipres');
-		minipres(_L('Action '.$action.' inconnue'));
+		minipres(_T('grappes:action_inconnue',array('action'=>$action)));
 	}
-	
+
 	if (!autoriser('associer',$source,$id_source)){
 		include_spip('inc/minipres');
-		minipres(_L('Vous n\'&ecirc;tes pas autoris&eacute; &agrave; effectuer cette action !'));		
+		minipres(_T('grappes:autoriser_associer_non'));
 	}
-	
+
 	if ($action == 'lier')
 		lier_objets($source,$id_source,$cible,$id_cible);
 	elseif ($action == 'delier')
 		delier_objets($source,$id_source,$cible,$id_cible);
+
+	include_spip('inc/invalideur');
+	suivre_invalideur("id='id_grappe/$id_source'");
 }
 
 
@@ -44,13 +47,13 @@ function lier_objets($source,$id_source,$cible,$id_cible){
 			$cible = objet_type($cible);
 			if (!sql_countsel($table, array("'$ids'=" . sql_quote($id_source), "'objet'=" . sql_quote($cible), "'id_objet'=" . sql_quote($id_cible)))){
 				sql_insertq($table,array($ids=>$id_source,'objet'=>$cible,'id_objet'=>$id_cible));
-			}		
+			}
 		}
 		elseif ($type=='lien_cible') {
 			$source = objet_type($source);
 			if (!sql_countsel($table, array("'$idc'=" . sql_quote($id_cible), "'objet'=" . sql_quote($source), "'id_objet'=" . sql_quote($id_source)))){
 				sql_insertq($table,array($idc=>$id_cible,'objet'=>$source,'id_objet'=>$id_source));
-			}		
+			}
 		}
 	}
 }
@@ -64,12 +67,12 @@ function delier_objets($source,$id_source,$cible,$id_cible){
 		elseif ($type=='lien_source') {
 			$cible = objet_type($cible);
 			sql_delete($table, array("$ids=" . sql_quote($id_source), "objet=" . sql_quote($cible), "id_objet=" . sql_quote($id_cible)));
-		}		
+		}
 		elseif ($type=='lien_cible') {
 			$source = objet_type($source);
 			sql_delete($table, array("$idc=" . sql_quote($id_cible), "objet=" . sql_quote($source), "id_objet=" . sql_quote($id_source)));
 		}
-	}	
+	}
 }
 
 //
@@ -83,9 +86,9 @@ function trouver_table_liaison($source,$cible){
 	$tc = table_objet($cible);
 	$ids = id_table_objet($source);
 	$idc = id_table_objet($cible);
-	
+
 	$trouver_table = charger_fonction('trouver_table', 'base');
-	
+
 	// chercher d'abord les tables : spip_sources_cibles (id_source, id_cible)
 	if (($d = $trouver_table($ts.'_'.$tc))
 	or ($d = $trouver_table($tc.'_'.$ts)))

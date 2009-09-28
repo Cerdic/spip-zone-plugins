@@ -3,6 +3,9 @@
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+// A
+'action_inconnue' => 'Unknown action : @action@',
+'autoriser_associer_non' => 'You are not authorized to perform this action.',
 
 // B
 'bouton_ajouter' => 'Add',
