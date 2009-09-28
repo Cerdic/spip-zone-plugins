@@ -66,7 +66,12 @@ function gravatar($email) {
 					rename($gravatar_cache, $gravatar_cache.'.png');
 					include_spip('inc/filtres_images');
 					$img = imagecreatefrompng($gravatar_cache.'.png');
-					image_imagejpg($img, $gravatar_cache);
+					// Compatibilite avec la 2.1
+					if(function_exists('_image_imagejpg')){
+						_image_imagejpg($img, $gravatar_cache);
+					}
+					else
+						image_imagejpg($img, $gravatar_cache);
 				}
 			} else {
 				$vides[$md5_email] = time();
