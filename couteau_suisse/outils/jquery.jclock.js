@@ -28,7 +28,7 @@ function set_jclock_ajax() {
 
 function each_jclock(diff) {
 	jQuery('.jclock')
-	.not('.cs_done').addClass('cs_done')
+	.cs_todo()
 	.each(function(){
 		var options = { serveur_offset: diff };
 		var opt = this.title.split('|');

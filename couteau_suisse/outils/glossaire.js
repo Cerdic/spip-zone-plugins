@@ -14,7 +14,7 @@ function glossaire_init() {
 		gloss_dt = gloss_dl.firstChild;
 		gloss_dd = gloss_dl.lastChild;
 	}
-	jQuery('span.gl_mot', this).not('.cs_done').addClass('cs_done').hover(
+	jQuery('span.gl_mot', this).cs_todo().hover(
 		function(e) {
 			$this = jQuery(this);	  
 			// cas du surligneur (SPIP 2)

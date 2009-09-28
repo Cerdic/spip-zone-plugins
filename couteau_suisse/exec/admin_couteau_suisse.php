@@ -272,10 +272,10 @@ if (window.jQuery) jQuery(function(){
 // compatibilite Ajax : ajouter this dans jQuery()
 var input_init=function(){
 	// outil actif
-	jQuery('.cs_input_checkbox', this).not('.cs_done').addClass('cs_done').click(bloc_variables);
+	jQuery('.cs_input_checkbox', this).cs_todo().click(bloc_variables);
 	jQuery('input.cs_input_checkbox:checked',this).each(bloc_variables);
 	// outil inactif
-	jQuery('.cs_hidden_checkbox', this).not('.cs_done').addClass('cs_done').each(bloc_variables);
+	jQuery('.cs_hidden_checkbox', this).cs_todo().each(bloc_variables);
 }
 function bloc_variables(index, domElement) {
 //alert(this.name+' - '+this.value);
@@ -409,16 +409,19 @@ cs_log("INIT : exec_admin_couteau_suisse()");
 		cout_exec_redirige('cmd=resetjs');
 	}
 	// installation personnalisee
-	if ($cmd=='install' && isset($_GET['pack']) && isset($GLOBALS['cs_installer'][$_GET['pack']]['outils'])){
-		spip_log("Installation peronnalisee de '$_GET[outils]' par l'auteur id=$connect_id_auteur");
-		$pack = &$GLOBALS['cs_installer'][$_GET['pack']];
-		effacer_meta('tweaks_actifs');
-		$metas_outils = array();
-		foreach(preg_split('%\s*[,|]\s*%', $pack['outils']) as $o) $metas_outils[trim($o)]['actif'] = 1;
-		if(isset($pack['variables'])) foreach($pack['variables'] as $i=>$v) $metas_vars[$i] = $v;
-		ecrire_meta('tweaks_actifs', serialize($metas_outils));
-		ecrire_meta('tweaks_variables', serialize($metas_vars));
-		cout_exec_redirige();
+	if(isset($_GET['pack']) && isset($GLOBALS['cs_installer'][$_GET['pack']]['outils'])) {
+		if ($cmd=='install'){
+			spip_log("Installation peronnalisee de '$_GET[outils]' par l'auteur id=$connect_id_auteur");
+			$pack = &$GLOBALS['cs_installer'][$_GET['pack']];
+			effacer_meta('tweaks_actifs');
+			$metas_outils = array();
+			foreach(preg_split('%\s*[,|]\s*%', $pack['outils']) as $o) $metas_outils[trim($o)]['actif'] = 1;
+			if(isset($pack['variables'])) foreach($pack['variables'] as $i=>$v) $metas_vars[$i] = $v;
+			ecrire_meta('tweaks_actifs', serialize($metas_outils));
+			ecrire_meta('tweaks_variables', serialize($metas_vars));
+			cout_exec_redirige();
+		} elseif ($cmd=='delete'){
+		}
 	}
 	// reset des variables d'un outil
 	if ($cmd=='reset' && strlen($_GET['outil'])){

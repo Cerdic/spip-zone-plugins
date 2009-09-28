@@ -58,14 +58,14 @@ var blocs_clic_ajax = null;
 // et tagger avec cs_done pour eviter de binder plrs fois le meme bloc
 function blocs_init() {
 	// clic sur un titre de bloc
-	jQuery('.blocs_titre', this).not('.cs_done').addClass('cs_done')
+	jQuery('.blocs_titre', this).cs_todo()
 	  .click( function(){
 		jQuery(this).blocs_replie_tout().blocs_toggle();
 		// annulation du clic
 		return false;
 	   });
 	// pour un lien 'replier_bloc' present dans le bloc
-	jQuery('.blocs_destination a.replier_bloc', this).not('.cs_done').addClass('cs_done')
+	jQuery('.blocs_destination a.replier_bloc', this).cs_todo()
 	 .click( function(){
 		jQuery(this).parents('.cs_blocs:first').blocs_replie_tout().blocs_toggle();
 		// annulation du clic
@@ -76,7 +76,7 @@ function blocs_init() {
 // LA SUITE DE CE CODE NE FONCTIONNE POUR L'INSTANT QUE SUR LE PREMIER CLIC, JE NE SAIS PAS ENCORE PKOI...
 	// stockage du bloc (numerote !) a reouvrir dans le cas d'un clic ajax sur une 
 	// pagination SPIP contenue a l'interieur
-	jQuery(".ajaxbloc .pagination a.noajax", this).not('.cs_done').addClass('cs_done')
+	jQuery(".ajaxbloc .pagination a.noajax", this).cs_todo()
 	  .click( function(){
 		var parent = jQuery(this).parents('.cs_blocs');
 		if(!parent.length) return true;

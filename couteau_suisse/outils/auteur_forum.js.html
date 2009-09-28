@@ -15,7 +15,7 @@ function cs_auteur_forum() {
 	if(!email.length) email = jQuery('#email_auteur', this);
 	if(auteur.length || email.length)
 	// eviter les forums anonymes
-	form.not('.cs_done').addClass('cs_done').bind('submit', function(event){
+	form.cs_todo().bind('submit', function(event){
 		var alert_nom = auteur.length && !auteur.val().length;
 		var alert_email = email.length && !email.val().length;
 		var alert_deux = cs_verif_deux && alert_nom && alert_email;

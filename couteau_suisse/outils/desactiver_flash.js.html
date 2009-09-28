@@ -5,7 +5,7 @@ function InhibeFlash_init() {
   jQuery('object', this).each(function(){
   	jQuery('param',this).remove();
   }).wrap("<div class='noflash'></div>");
-  jQuery('div.noflash', this).not('.cs_done').addClass('cs_done').each(function(){
+  jQuery('div.noflash', this).cs_todo().each(function(){
   	var code = this.innerHTML;
   	// ajouter les attributs juste avant la fermeture de la balise object
   	var reg=new RegExp("(<object [^>]*>)", "i");

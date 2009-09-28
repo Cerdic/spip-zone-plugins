@@ -4,7 +4,7 @@ var sommaire_sel = 'div.cs_sommaire_titre_avec_fond, div.cs_sommaire_titre_sans_
 // et tagger avec cs_done pour eviter de binder plrs fois le meme bloc
 function cs_sommaire_init() {
 	jQuery(sommaire_sel, this)
-		.not('.cs_done').addClass('cs_done')
+		.cs_todo()
 		.click( function(){
 			jQuery(this).toggleClass('cs_sommaire_replie')
 				.next().toggleClass('cs_sommaire_invisible')

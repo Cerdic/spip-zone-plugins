@@ -361,7 +361,10 @@ span.cs_BTg {font-size:140%; padding:0 0.3em;}';
 	if (count($temp_js)) {
 		$temp_js = join("\n", $temp_js);
 		if(function_exists('compacte_js')) $temp_js = compacte_js($temp_js);
-		$temp = array("<script type=\"text/javascript\"><!--\nvar cs_prive=window.location.pathname.match(/\\/ecrire\\/\$/)!=null;\n$temp_js\n// --></script>\n");
+		$temp = array("<script type=\"text/javascript\"><!--
+var cs_prive=window.location.pathname.match(/\\/ecrire\\/\$/)!=null;
+jQuery.fn.cs_todo=function(){return this.not('.cs_done').addClass('cs_done');};
+$temp_js\n// --></script>\n");
 		unset($temp_js);
 		$cs_metas_pipelines['header'] = is_array($cs_metas_pipelines['header'])?array_merge($temp, $cs_metas_pipelines['header']):$temp;
 	}
