@@ -64,6 +64,13 @@ function blocs_init() {
 		// annulation du clic
 		return false;
 	   });
+	// pour un lien 'replier_bloc' present dans le bloc
+	jQuery('.blocs_destination a.replier_bloc', this).not('.cs_done').addClass('cs_done')
+	 .click( function(){
+		jQuery(this).parents('.cs_blocs:first').blocs_replie_tout().blocs_toggle();
+		// annulation du clic
+		return false;
+	   });
 
 /*
 // LA SUITE DE CE CODE NE FONCTIONNE POUR L'INSTANT QUE SUR LE PREMIER CLIC, JE NE SAIS PAS ENCORE PKOI...
