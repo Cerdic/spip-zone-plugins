@@ -29,7 +29,8 @@ function action_supprimer_grappe_post($id_grappe)
 	}
 	else
 		spip_log('appel deprecie, rien a faire ici (voir action/editer_grappe)');
+
+	include_spip('inc/invalideur');
+	suivre_invalideur("id='id_grappe/$id_grappe'");
 }
-
-
 ?>
