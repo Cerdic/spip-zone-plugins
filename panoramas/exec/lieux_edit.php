@@ -273,9 +273,16 @@ function Panoramas_boite_proprietes_lieu($id_lieu, $row, $focus, $action_link, $
 	$out .= " >"._T("panoramas:toujours")."</option>
 			<option value=\"si_visite\"";
 
-	if (!($acces_carte=="toujours")) $out .= "selected=\"selected\"";
+	if ($acces_carte=="si_visite") $out .= "selected=\"selected\"";
 
 	$out .= " >"._T("panoramas:si_visite")."</option>
+		<option value=\"jamais\"";
+
+	if ($acces_carte=="jamais") $out .= "selected=\"selected\"";
+
+	$out .= " >"._T("panoramas:jamais")."</option>
+
+
 		</select><br />\n";
 
 

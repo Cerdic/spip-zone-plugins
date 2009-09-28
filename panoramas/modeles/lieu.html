@@ -108,7 +108,7 @@
 $(document).ready(function(){
 	[(#MODE_JEU|=={'oui'}|?{' ',''})if (!$.cookie('objets_ramasses')) 
 		$.cookie('objets_ramasses',' ');]
-	$('.panorama-viewport').append("<div class='panorama-onglets'><div class='panorama-carte'><img src='#URL_DOCUMENT' height='"+parseInt($('.panorama-viewport').css('height'))+"' /><BOUCLE_position(VISITES_VIRTUELLES_LIEUX){id_visite=#ID_VISITE}{position_x_carte>0}><a class='icone-carte' href='[(#URL_CARTE|sinon{[(#URL_PAGE{lieu,id_lieu=#ID_LIEU})]#[(#REM)]lieu#ID_LIEU})]'[(#_lieux:ID_LIEU|=={#ID_LIEU}|?{' ',''})style='display:none;']><img src='<B_iconecarte><BOUCLE_iconecarte(DOCUMENTS){id_document=#ICONE_CARTE}>#URL_DOCUMENT</BOUCLE_iconecarte></B_iconecarte>#CHEMIN{img_pack/icone_carte.png}<//B_iconecarte>'  style='cursor: pointer; position: absolute; [left: (#POSITION_X_CARTE)px;][ top: (#POSITION_Y_CARTE)px;]' /></a><span class='lien-plan[(#ACCES_CARTE|=={si_visite}|?{' ',''}) verifier-lien-plan verifier-lien-plan#ID_LIEU]' style='display: none; [left: (#POSITION_X_CARTE|plus{13})px;][ top: (#POSITION_Y_CARTE|moins{33})px;]'><a href='[(#URL_CARTE|sinon{[(#URL_PAGE{lieu,id_lieu=#ID_LIEU})]#[(#REM)]lieu#ID_LIEU})]'>[(#TITRE|replace{' ','&nbsp;'})]</a></span></BOUCLE_position></div>[(#MODE_JEU|=={'oui'}|?{' ',''})<div class='panorama-panier' style='width: "+parseInt(parseInt($('.panorama-viewport').css('width'))/3)+"px; height: "+parseInt($('.panorama-viewport').css('height'))+"px;' ><:panoramas:contenu_panier:> :<div class='panorama-panier-conteneur'><ul>"+ $.cookie('objets_ramasses') +"</ul></div></div>][(#REM) fin mode_jeu ]<div class='panorama-onglets-titres'><h2 class='panorama-carte'><a href='#'><:panoramas:carte:></a></h2>[(#MODE_JEU|=={'oui'}|?{' ',''})<h2 class='panorama-panier'><a href='#'><:panoramas:panier:></a></h2>][(#REM) fin mode_jeu ]</div></div>");
+	$('.panorama-viewport').append("<div class='panorama-onglets'><div class='panorama-carte'><img src='#URL_DOCUMENT' height='"+parseInt($('.panorama-viewport').css('height'))+"' /><BOUCLE_position(VISITES_VIRTUELLES_LIEUX){id_visite=#ID_VISITE}{position_x_carte>0}><a class='icone-carte icone-carte#ID_LIEU[ (#_lieux:ID_LIEU|=={#ID_LIEU}|?{' ',''})icone-carte-courant]' href='[(#URL_CARTE|sinon{[(#URL_PAGE{lieu,id_lieu=#ID_LIEU})]#[(#REM)]lieu#ID_LIEU})]'><img src='<B_iconecarte><BOUCLE_iconecarte(DOCUMENTS){id_document=#ICONE_CARTE}>#URL_DOCUMENT</BOUCLE_iconecarte></B_iconecarte>#CHEMIN{img_pack/icone_carte.png}<//B_iconecarte>'  style='position: absolute; [left: (#POSITION_X_CARTE)px;][ top: (#POSITION_Y_CARTE)px;]' /></a><span class='lien-plan lien-plan#ID_LIEU[ (#_lieux:ID_LIEU|=={#ID_LIEU}|?{' ',''})lien-plan-courant]' style='[(#_lieux:ID_LIEU|=={#ID_LIEU}|?{'margin-top: -1em;','display: none;'}) ][left: (#POSITION_X_CARTE|plus{13})px;][ top: (#POSITION_Y_CARTE|moins{33})px;]'><a href='[(#URL_CARTE|sinon{[(#URL_PAGE{lieu,id_lieu=#ID_LIEU})]#[(#REM)]lieu#ID_LIEU})]'>[(#_lieux:ID_LIEU|=={#ID_LIEU}|?{' ',''})Vous&nbsp;&ecirc;tes&nbsp;ici&nbsp;:&nbsp;<br />][(#TITRE|replace{' ','&nbsp;'})]</a></span></BOUCLE_position></div>[(#MODE_JEU|=={'oui'}|?{' ',''})<div class='panorama-panier' style='width: "+parseInt(parseInt($('.panorama-viewport').css('width'))/3)+"px; height: "+parseInt($('.panorama-viewport').css('height'))+"px;' ><:panoramas:contenu_panier:> :<div class='panorama-panier-conteneur'><ul>"+ $.cookie('objets_ramasses') +"</ul></div></div>][(#REM) fin mode_jeu ]<div class='panorama-onglets-titres'><h2 class='panorama-carte'><a href='#'><:panoramas:carte:></a></h2>[(#MODE_JEU|=={'oui'}|?{' ',''})<h2 class='panorama-panier'><a href='#'><:panoramas:panier:></a></h2>][(#REM) fin mode_jeu ]</div></div>");
 	
 	$('.panorama-viewport a.icone-carte').bind('mouseover', function(){
 		if ($(this).next().css('display') == 'none') {
@@ -397,30 +397,45 @@ $(document).ready(function(){
 		</BOUCLE_toutesinteractions>
 
 
-	
-		    $('div.panorama-carte .lien-plan a, div.panorama-carte a.icone-carte').bind('click', function(){
-				    $('.panorama-viewport').append("<div class='fond-noir-slideshow' style='background: black; width: 100%; height: 100%; position: absolute; left: 0; top: 0; opacity: .8;'></div><img src='#CHEMIN{img_pack/ajax-loader.gif}' style='position: absolute; top: 50%; left: 50%; margin-left: -33px; margin-top: -33px;' />");
+		  var lieuvisite = 0;
+		  var tableau_lieux_visites;
+		   <BOUCLE_activercarte(VISITES_VIRTUELLES_LIEUX){id_lieu != #ID_LIEU}{id_visite=#ID_VISITE}{position_x_carte>0}>
+
+		    [(#ACCES_CARTE|=={toujours}|?{' ',''})
+			    [(#REM) Toujours activer le lien sur la carte ]
+			    $('div.panorama-carte .lien-plan#ID_LIEU a, div.panorama-carte a.icone-carte#ID_LIEU').bind('click', function(){
+				    $('.panorama-viewport').append("<div class='fond-noir-slideshow' style='background: black; width: 100%; height: 100%; position: absolute; left: 0; top: 0; opacity: .8;'></div><img src='#CHEMIN{img_pack/ajax-loader.gif}' style='position: absolute; top: 50%; left: 50%; margin-left: -33px; margin-top: -33px;' />").css('cursor','pointer');
 				    return true;
 			    });
-	
-		
-		    [(#MODE_JEU|=={'oui'}|?{' ',''})
-		    //v�rifier si les lieux doivent �tre affich�s sur le plan
-		    //certains doivent avoir �t� visit�s pour appara�tre
-		    $('.verifier-lien-plan').each(function(){
-			    var numero_lieu = $(this).attr('class').substr(47);
+		    ]
+		    [(#ACCES_CARTE|=={jamais}|?{' ',''})
+			    [(#REM) Ne jamais activer le lien sur la carte ]
+			    $('div.panorama-carte .lien-plan#ID_LIEU a, div.panorama-carte a.icone-carte#ID_LIEU').bind('click', function(){return false}).css('cursor','default');
+		    ]
+		    [(#ACCES_CARTE|=={si_visite}|?{' ',''})
+			    [(#REM) N'activer le lien que si le lieu a été visité ]
+			    lieuvisite = 0;
 			    if ($.cookie('lieux_visites')) {
-				    var tableau_lieux_visites = $.cookie('lieux_visites').split(','); 
-				    if (tableau_lieux_visites.indexOf(numero_lieu)<0) {
-					    $(this).hide();	
+				    tableau_lieux_visites = $.cookie('lieux_visites').split(','); 
+				    if (tableau_lieux_visites.indexOf('#ID_LIEU')>=0) {
+					   lieuvisite = 1;
 				    }
-			    } else {
-				$(this).hide();
 			    }
-			    
-			    
-		    });
-		    ][(#REM) fin mode_jeu ]
+
+			    if (lieuvisite) {
+				  $('div.panorama-carte .lien-plan#ID_LIEU a, div.panorama-carte a.icone-carte#ID_LIEU').bind('click', function(){
+				    $('.panorama-viewport').append("<div class='fond-noir-slideshow' style='background: black; width: 100%; height: 100%; position: absolute; left: 0; top: 0; opacity: .8;'></div><img src='#CHEMIN{img_pack/ajax-loader.gif}' style='position: absolute; top: 50%; left: 50%; margin-left: -33px; margin-top: -33px;' />").css('cursor','pointer');
+				    return true;
+				  });
+			    } else {
+				  $('div.panorama-carte .lien-plan#ID_LIEU a, div.panorama-carte a.icone-carte#ID_LIEU').bind('click', function(){return false}).css('cursor','default');
+			    }
+
+		    ]
+		    </BOUCLE_activercarte>
+		    <BOUCLE_desactiverlercourant(VISITES_VIRTUELLES_LIEUX){id_lieu = #ID_LIEU}{id_visite=#ID_VISITE}{position_x_carte>0}>
+			    $('div.panorama-carte .lien-plan#ID_LIEU a, div.panorama-carte a.icone-carte#ID_LIEU').bind('click', function(){return false}).css('cursor','default') 	;
+		    </BOUCLE_desactiverlercourant>
 		    
 });
 	
