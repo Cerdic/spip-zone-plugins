@@ -88,7 +88,9 @@ function spiplistes_translate_2_charset ($texte, $charset='AUTO', $is_html = fal
 				$remplacements
 				, array(
 							// Latin Extended
-					  '&#338;' => "OE"  // OElig
+					  '&#224;' => 'à' // yuml
+					, '&#255;' => 'ÿ' // yuml
+					, '&#338;' => "OE"  // OElig
 					, '&#339;' => "oe"  // oelig
 					, '&#352;' => "S"  // Scaron
 					, '&#353;' => "s"  // scaron
@@ -103,6 +105,7 @@ function spiplistes_translate_2_charset ($texte, $charset='AUTO', $is_html = fal
 					, '&#8207;' => " " // rlm
 					, '&#8211;' => "-" // ndash
 					, '&#8212;' => "--" // mdash
+					, '&#39;' => "'" // apos
 					, '&#8216;' => "'" // lsquo
 					, '&#8217;' => "'" // rsquo
 					, '&#8218;' => "'" // sbquo

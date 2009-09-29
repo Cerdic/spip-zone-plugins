@@ -245,15 +245,18 @@ spiplistes_log("spiplistes_meleuse()", _SPIPLISTES_LOG_DEBUG);
 			////////////////////////////////////
 			// La petite ligne du renvoi du cookie pour modifier son abonnement
 			$pied_rappel_html = _T('spiplistes:Cliquez_ici_pour_modifier_votre_abonnement');
-			$pied_rappel_texte = html_entity_decode(_T('spiplistes:abonnement_mail_text'));
+			$pied_rappel_texte = _T('spiplistes:abonnement_mail_text');
 			
 			// transcrire le contenu
 			if($GLOBALS['meta']['spiplistes_charset_envoi'] != $GLOBALS['meta']['charset']){
 				include_spip('inc/charsets');
-				foreach(array('objet_html', 'objet_texte', 'page_html', 'page_texte', 'pied_html', 'pied_texte'
-					, 'pied_rappel_html'
-					//, 'pied_rappel_texte' // translate a revoir ? Il mange l'ISO ?!
-					, 'tampon_html', 'tampon_texte') as $key) {
+				foreach(array(
+					  'objet_html', 'objet_texte'
+					, 'page_html', 'page_texte'
+					, 'pied_html', 'pied_texte'
+					, 'pied_rappel_html', 'pied_rappel_texte'
+					, 'tampon_html', 'tampon_texte') as $key) 
+				{
 					if(!empty($$key)) {
 						$$key = spiplistes_translate_2_charset(
 							$$key
