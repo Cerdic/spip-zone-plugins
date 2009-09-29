@@ -41,7 +41,7 @@
 			      <tr[ class="(#COMPTEUR_BOUCLE|modulo{2}|?{row_even,row_odd})"]>
 			      <td> [(#REM|?{'','<img />'}|inserer_attribut{class,spip_logos}|inserer_attribut{src,[(#GET{notice}|pmb_notice_champ{'logo_src'}|copie_locale)]}image_reduire{60,0})]
 				</td><td>[(#GET{tab_prets}|pmb_tableau2_valeur{#CLE,'expl_cb'})]</td>
-				<td><a href="[(#URL_PAGE{notice_display}|parametre_url{id,[(#GET{tab_prets}|pmb_tableau2_valeur{#CLE,'notice_id'})]})]">[(#GET{tab_prets}|pmb_tableau2_valeur{#CLE,'expl_libelle'})]</a></td>
+				<td>[(#GET{tab_prets}|pmb_tableau2_valeur{#CLE,'expl_libelle'})]</td>
 				<td>[(#GET{tab_prets}|pmb_tableau2_valeur{#CLE,'expl_support'})]</td>
 				<td>[(#GET{tab_prets}|pmb_tableau2_valeur{#CLE,'loan_startdate'})]</td>
 				<td>[(#GET{tab_prets}|pmb_tableau2_valeur{#CLE,'loan_returndate'})]</td></tr>
@@ -70,7 +70,7 @@
 			      <td> [(#REM|?{'','<img />'}|inserer_attribut{class,spip_logos}|inserer_attribut{src,[(#GET{notice}|pmb_notice_champ{'logo_src'}|copie_locale)]}image_reduire{60,0})]
 				</td>
 			      <td>[(#GET{tab_prets}|pmb_tableau2_valeur{#CLE,'expl_cb'})]</td>
-			      <td><a href="[(#URL_PAGE{notice_display}|parametre_url{id,[(#GET{tab_prets}|pmb_tableau2_valeur{#CLE,'notice_id'})]})]">[(#GET{tab_prets}|pmb_tableau2_valeur{#CLE,'expl_libelle'})]</a></td>
+			      <td>[(#GET{tab_prets}|pmb_tableau2_valeur{#CLE,'expl_libelle'})]</td>
 			      <td>[(#GET{tab_prets}|pmb_tableau2_valeur{#CLE,'expl_support'})]</td>
 			      <td>[(#GET{tab_prets}|pmb_tableau2_valeur{#CLE,'loan_startdate'})]</td>
 			      <td>[(#GET{tab_prets}|pmb_tableau2_valeur{#CLE,'loan_returndate'})]</td></tr>
@@ -97,7 +97,7 @@
 			    <tr[ class="(#COMPTEUR_BOUCLE|modulo{2}|?{row_even,row_odd})"]>
 				<td> [(#REM|?{'','<img />'}|inserer_attribut{class,spip_logos}|inserer_attribut{src,[(#GET{notice}|pmb_notice_champ{'logo_src'}|copie_locale)]}image_reduire{60,0})]
 				</td>
-				<td><a href="[(#URL_PAGE{notice_display}|parametre_url{id,[(#GET{tab_reservations}|pmb_tableau2_valeur{#CLE,'notice_id'})]})]">[(#GET{notice}|pmb_notice_champ{'titre'})]</a></td>
+				<td>[(#GET{notice}|pmb_notice_champ{'titre'})]</td>
 				<td>[(#GET{tab_reservations}|pmb_tableau2_valeur{#CLE,'resa_rank'})]</td>
 			    </tr>
 			 

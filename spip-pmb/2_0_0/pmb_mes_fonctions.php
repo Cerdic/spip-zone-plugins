@@ -612,10 +612,48 @@ function pmb_reservations_extraire($pmb_session, $url_base) {
 }
 function pmb_tester_session($pmb_session, $url_base) {
 	pmb_ws_charger_wsdl($ws, $url_base);
-	if (!$ws->pmbesOPACEmpr_get_account_info($pmb_session)) {
-	    
+	
+
+	try {
+	      if ($ws->pmbesOPACEmpr_get_account_info($pmb_session)) {
+	  	return 1;
+	      } else {
+		session_set('pmb_firstname','');
+		session_set('pmb_lastname','');
+		session_set('pmb_address_part1','');
+		session_set('pmb_address_part2','');
+		session_set('pmb_address_cp','');
+		session_set('pmb_address_city','');
+		session_set('pmb_phone_number1','');
+		session_set('pmb_phone_number2','');
+		session_set('pmb_email','');
+		session_set('pmb_birthyear','');
+		session_set('pmb_location_id','');
+		session_set('pmb_location_caption','');
+		session_set('pmb_adhesion_date','');
+		session_set('pmb_expiration_date','');
+		session_set('pmb_session','');
 		return 0;
-	} else return 1;
+	      }
+
+	} catch (SoapFault $fault) {
+		session_set('pmb_firstname','');
+		session_set('pmb_lastname','');
+		session_set('pmb_address_part1','');
+		session_set('pmb_address_part2','');
+		session_set('pmb_address_cp','');
+		session_set('pmb_address_city','');
+		session_set('pmb_phone_number1','');
+		session_set('pmb_phone_number2','');
+		session_set('pmb_email','');
+		session_set('pmb_birthyear','');
+		session_set('pmb_location_id','');
+		session_set('pmb_location_caption','');
+		session_set('pmb_adhesion_date','');
+		session_set('pmb_expiration_date','');
+		session_set('pmb_session','');
+		return 0;
+	}
 }
 function pmb_reserver_ouvrage($session_id, $notice_id, $bulletin_id, $location, $url_base) {
 	pmb_ws_charger_wsdl($ws, $url_base);

@@ -1,5 +1,5 @@
 #CACHE{0}
-
+[(#SESSION{pmb_session}|pmb_tester_session{' '}|?{'',''})]
 <div id="top">
 
 	<a rel="start" href="#URL_SITE_SPIP/">[(#LOGO_SITE_SPIP||image_reduire{500,100}|inserer_attribut{alt,#NOM_SITE_SPIP}|inserer_attribut{title,#NOM_SITE_SPIP}) ]<span id="nom_site_spip">[(#NOM_SITE_SPIP)]</span></a>
@@ -44,6 +44,7 @@
      </fieldset>
      </form>
 ]
+
 </div>
 <div class="fonctionnement"><:pmb:comment_ca_fonctionne:></div>
 

@@ -19,7 +19,7 @@
     <div class="hentry" id="contenu">
     
         [(#REM) Entete de la page + titre du site ]
-	<INCLURE{fond=inc-entete}>
+	<INCLURE{fond=inc-entete}{env}>
 
 	[(#REM) Fil d'Ariane ]
         <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_article}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; <strong class="on">(#TITRE|couper{80})</strong>]</div>
