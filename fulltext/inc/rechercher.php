@@ -45,7 +45,7 @@ function liste_des_champs() {
 				'titre' => 3, 'texte' => 1, 'auteur' => 2, 'email_auteur' => 2, 'nom_site' => 1, 'url_site' => 1
 			),
 			'document' => array(
-				'titre' => 3, 'descriptif' => 1, 'fichier' => 1
+				'titre' => 3, 'descriptif' => 1, 'contenu' => 1, 'fichier' => 1
 			),
 			'syndic_article' => array(
 				'titre' => 5, 'descriptif' => 1
@@ -64,21 +64,21 @@ function liste_des_champs() {
 // en ne regardant que le titre ou le nom
 // http://doc.spip.org/@liste_des_jointures
 function liste_des_jointures() {
-	return 
+	return
 	pipeline('rechercher_liste_des_jointures',
 			array(
 			'article' => array(
 				'auteur' => array('nom' => 10),
 				'mot' => array('titre' => 3),
-				'document' => array('titre' => 2, 'descriptif' => 1)
+				'document' => array('titre' => 2, 'descriptif' => 1, 'contenu' => 1)
 			),
 			'breve' => array(
 				'mot' => array('titre' => 3),
-				'document' => array('titre' => 2, 'descriptif' => 1)
+				'document' => array('titre' => 2, 'descriptif' => 1, 'contenu' => 1)
 			),
 			'rubrique' => array(
 				'mot' => array('titre' => 3),
-				'document' => array('titre' => 2, 'descriptif' => 1)
+				'document' => array('titre' => 2, 'descriptif' => 1, 'contenu' => 1)
 			),
 			'document' => array(
 				'mot' => array('titre' => 3)
@@ -194,9 +194,9 @@ function recherche_en_base($recherche='', $tables=NULL, $options=array(), $serve
 			. preg_replace(",\s+,".$u, "%", $q)
 			. "%"
 		);
-		
+
 		$preg = '/'.preg_replace(",\s+,".$u, ".+", trim($recherche_mod)).'/' . $options['preg_flags'];
-		
+
 	} else {
 		$methode = 'REGEXP';
 		$q = sql_quote($recherche);

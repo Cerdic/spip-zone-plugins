@@ -48,6 +48,11 @@ function Fulltext_creer_index($table, $nom, $vals) {
 	else
 		$index = Fulltext_index($table,array($nom), $nom);
 
+	if ($table == 'document' && $nom == 'tout') {
+    // On initialise l'indexation du contenu des documents
+    sql_query("UPDATE spip_documents SET contenu='', indexe='non'");
+  }
+		
 	if (!$s = sql_alter("TABLE ".table_objet_sql($table)
 	." ADD FULLTEXT ".$index))
 		return "<strong>"._T('spip:erreur')." ".mysql_errno()." ".mysql_error()."</strong><pre>$query</pre><p />\n";
@@ -62,10 +67,15 @@ function Fulltext_creer_index($table, $nom, $vals) {
 }
 
 function Fulltext_supprimer_index($table, $nom='tout') {
-	if (!$s = sql_alter("TABLE ".table_objet_sql($table)." DROP INDEX ".$nom))
+	if (!$s = sql_alter("TABLE ".table_objet_sql($table)." DROP INDEX ".$nom)) {
 		return "<p><strong>"._T('spip:erreur')." ".mysql_errno()." ".mysql_error()."</strong><pre>$query</pre></p>\n";
-  else
+	} else {
+		if ($table == 'document' && $nom == 'tout') {
+			// Plus besoin des donnees extraites des fichiers
+			sql_query("UPDATE spip_documents SET contenu='', indexe='n/a'");
+		}
     return " <strong>=> "._T('fulltext:index_supprime')."</strong>\n";
+	}
 }
 
 function Fulltext_regenerer_index($table) {
@@ -110,7 +120,7 @@ function exec_fulltext()
 	include_spip('base/abstract_sql');
 
   $tables = liste_des_champs();
-  
+
 	// Creer un index ?
 	if ($table = _request('table')
 	AND $nom = _request('nom')
@@ -121,7 +131,7 @@ function exec_fulltext()
   // charset site
   $charset = strtolower(str_replace('-','',$GLOBALS['meta']['charset']));
   $necessite_conversion = false;
-  
+
 	foreach($tables as $table => $vals) {
     // charset table
     $data =  sql_fetch(sql_query("SHOW CREATE TABLE ".table_objet_sql($table)));
@@ -133,7 +143,7 @@ function exec_fulltext()
 
 		$count = sql_countsel(table_objet_sql($table));
 		echo "<h3>$table ($count)</h3>\n";
-		
+
     if (_request('regenerer') == $table OR _request('regenerer') == 'tous')
         echo Fulltext_regenerer_index($table);
 
@@ -161,7 +171,7 @@ function exec_fulltext()
                 if (_request('supprimer') == $table AND _request('index') == $key) {
                     echo Fulltext_supprimer_index($table, $key).'</dt>';
                     continue;
-                } 
+                }
                 echo "</dt><dd>$def</dd>\n";
 			}
 			} else
@@ -196,12 +206,12 @@ function exec_fulltext()
 		$url = generer_url_ecrire(_request('exec'), 'myisam=tous');
 		echo "<p><b><a href='$url'>"._T('fulltext:convertir_toutes')."</a></b></p>\n";
 	}
-  
+
   $url = generer_url_ecrire(_request('exec'), 'regenerer=tous');
   echo "<p><b><a href='$url'>"._T('fulltext:regenerer_tous')."</a></b></p>\n";
-  
+
   // signaler les incoherences de charset site/tables qui plantent les requetes avec accents...
-  // ?exec=convert_sql_utf8 => conversion base | ?exec=convert_utf8 => conversion site    
+  // ?exec=convert_sql_utf8 => conversion base | ?exec=convert_utf8 => conversion site
   if ($necessite_conversion) {
     $modif = (substr($charset, 0, 3) == 'iso' ? 'convert_utf8' : 'convert_sql_utf8');
     $url = generer_url_ecrire($modif);
@@ -211,3 +221,4 @@ function exec_fulltext()
 	echo fin_gauche(), fin_page();
 
 }
+
