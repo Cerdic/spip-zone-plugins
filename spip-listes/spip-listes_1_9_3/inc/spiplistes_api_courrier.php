@@ -88,8 +88,7 @@ function spiplistes_translate_2_charset ($texte, $charset='AUTO', $is_html = fal
 				$remplacements
 				, array(
 							// Latin Extended
-					  '&#224;' => 'à' // yuml
-					, '&#255;' => 'ÿ' // yuml
+					  '&#255;' => chr(255) // 'ÿ' // yuml inconnu php ?
 					, '&#338;' => "OE"  // OElig
 					, '&#339;' => "oe"  // oelig
 					, '&#352;' => "S"  // Scaron
