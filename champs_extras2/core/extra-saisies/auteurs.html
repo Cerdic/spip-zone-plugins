@@ -5,7 +5,7 @@
 		[<span class='erreur_message'>(#ENV**{erreur_extra})</span>]
 		[<p class="explication">(#ENV{precisions_extra})</p>]
 		<select name='#ENV{champ_extra}[]'[ lang='(#LANG)'] id='#ENV{champ_extra}' multiple='multiple' size='5'>
-			<option value="0"[(#EVAL{0}|in_array{#GET{valeur}}oui) selected="selected"]>
+			<option value="0"[(#EVAL{0}|in_array{#GET{valeur}}|oui) selected="selected"]>
 				- pas d'auteur -
 			</option>
 			<BOUCLE_a(AUTEURS){tous}{par statut,nom}>
