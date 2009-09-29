@@ -50,7 +50,7 @@ function Fulltext_creer_index($table, $nom, $vals) {
 
 	if ($table == 'document' && $nom == 'tout') {
     // On initialise l'indexation du contenu des documents
-    sql_query("UPDATE spip_documents SET contenu='', indexe='non'");
+    sql_query("UPDATE spip_documents SET contenu='', extrait='non'");
   }
 		
 	if (!$s = sql_alter("TABLE ".table_objet_sql($table)
@@ -72,7 +72,7 @@ function Fulltext_supprimer_index($table, $nom='tout') {
 	} else {
 		if ($table == 'document' && $nom == 'tout') {
 			// Plus besoin des donnees extraites des fichiers
-			sql_query("UPDATE spip_documents SET contenu='', indexe='n/a'");
+			sql_query("UPDATE spip_documents SET contenu='', extrait='n/a'");
 		}
     return " <strong>=> "._T('fulltext:index_supprime')."</strong>\n";
 	}

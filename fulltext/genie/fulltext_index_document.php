@@ -1,7 +1,7 @@
 <?php
 function genie_fulltext_index_document_dist() {
 	// TODO : rendre paramétrable cette limite de 5 docs par passe
-	if ($docLists = sql_select("*", "spip_documents", "indexe = 'non'", "", "maj", "0,5")) {
+	if ($docLists = sql_select("*", "spip_documents", "extrait = 'non'", "", "maj", "0,5")) {
 		while($row = sql_fetch($docLists)) {
 			$extension = $row['extension'];
 			$doc = $row['fichier'];
@@ -21,7 +21,7 @@ function genie_fulltext_index_document_dist() {
 				$contenu = $lire(_DIR_RACINE.$fichier, $charset);
 				if (!$contenu) {
 					spip_log('Echec de l\'extraction de '.$fichier, 'extract');
-          sql_updateq("spip_documents", array('contenu' => '', 'indexe' => 'err'), "id_document=".intval($row['id_document']));
+          sql_updateq("spip_documents", array('contenu' => '', 'extrait' => 'err'), "id_document=".intval($row['id_document']));
 				} else {
 					// Ne retenir que les 50 premiers ko
 					if(defined('_FULLTEXT_TAILLE')){
@@ -33,7 +33,7 @@ function genie_fulltext_index_document_dist() {
 					// importer le charset
 					include_spip('inc/charsets');
 					$contenu = importer_charset($contenu, $charset);
-					sql_updateq("spip_documents", array('contenu' => $contenu, 'indexe' => 'oui'), "id_document=".intval($row['id_document']));
+					sql_updateq("spip_documents", array('contenu' => $contenu, 'extrait' => 'oui'), "id_document=".intval($row['id_document']));
 				}
 			}
 		}
