@@ -931,13 +931,13 @@ function spiplistes_pied_page_assembler_patron ($id_liste, $lang = false) {
 	
 	if(($id_liste = intval($id_liste)) > 0)
 	{
-		$result = sql_getfetsel('pied_page', 'spip_listes', "id_liste=".sql_quote($id_liste), '','',1);
+		$pied_patron = sql_getfetsel('pied_page', 'spip_listes', "id_liste=".sql_quote($id_liste), '','',1);
 		
 		$pied_patron =
-			(!$result)
+			(!$pied_patron)
 			// si patron vide (ancienne version de SPIP-Listes ?), appliquer le patron par defaut
 			? _SPIPLISTES_PATRONS_PIED_DEFAUT
-			: $result
+			: $pied_patron
 			;
 		if(strlen($pied_patron) > _SPIPLISTES_PATRON_FILENAMEMAX)
 		{
