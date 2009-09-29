@@ -20,7 +20,7 @@ Pour un fonctionnement optimal, il faut installer des programmes compl&eacute;me
 -*** Sur Mac OS X via [MacPorts->http://xpdf.darwinports.com/] ou avec cette [version compilée->http://users.phg-online.de/tk/MOSXS/xpdf-tools-3.dmg],
 -*** Sur d'[autres OS->http://www.foolabs.com/xpdf/download.html]
 -** Définir ces constantes :
--*** <code>_FULLTEXT_PDF_EXE</code> (par exemple <code>/usr/bin/pdftotext</code>) : Chemin vers l'ex&eacute;cutable "pdftotext" de [Xdpf->http://www.foolabs.com/xpdf/] afin de transformer les fichiers PDF en texte brut
+-*** <code>_FULLTEXT_PDF_EXE</code> (par exemple <code>/usr/bin/pdftotext</code>) : Chemin vers l'ex&eacute;cutable <code>pdftotext</code> de [Xdpf->http://www.foolabs.com/xpdf/] afin de transformer les fichiers PDF en texte brut
 -*** <code>_FULLTEXT_PDF_CMD_OPTIONS</code> (par exemple <code>-enc UTF-8</code>) : Options d'appel de l'ex&eacute;cutable
 -*<code>_FULLTEXT_TAILLE</code> : Taille maximum conserv&eacute;e pour la version texte des fichiers (50000 par d&eacute;faut)
 	</description>
