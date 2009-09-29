@@ -5,15 +5,14 @@ function genie_fulltext_index_document_dist() {
 		while($row = sql_fetch($docLists)) {
 			$extension = $row['extension'];
 			$doc = $row['fichier'];
-			spip_log('-------------------------------------', 'fulltext');
-      spip_log('Indexation de '.$doc, 'fulltext');
+      spip_log('Indexation de '.$doc, 'extract');
 			global $extracteur;
 			include_spip('extract/'.$extension);
 			if (function_exists($lire = $extracteur[$extension])) {
 				include_spip('inc/distant');
 				include_spip('inc/documents');
 				if (!$fichier = copie_locale(get_spip_doc($row['fichier']), 'test')) {
-					spip_log("pas de copie locale de '$fichier'", "fulltext");
+					spip_log('Pas de copie locale de '.$fichier, 'extract');
 					return;
 				}
 				// par defaut, on pense que l'extracteur va retourner ce charset
@@ -21,7 +20,7 @@ function genie_fulltext_index_document_dist() {
 				// lire le contenu
 				$contenu = $lire(_DIR_RACINE.$fichier, $charset);
 				if (!$contenu) {
-					spip_log('Echec de l\'extraction de '.$fichier, 'fulltext');
+					spip_log('Echec de l\'extraction de '.$fichier, 'extract');
           sql_updateq("spip_documents", array('contenu' => '', 'indexe' => 'err'), "id_document=".intval($row['id_document']));
 				} else {
 					// Ne retenir que les 50 premiers ko

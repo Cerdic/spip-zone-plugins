@@ -31,14 +31,14 @@ function extracteur_pdf($fichier, &$charset) {
   } else {
   	$options = ' ';
   }
- 	spip_log('Extraction PDF avec '.$exe, 'fulltext');
+ 	spip_log('Extraction PDF avec '.$exe, 'extract');
   $cmd = $exe.$options.$fichier;
   $sortie = exec($cmd, $output, $return_var);
   if ($return_var != 0) {
     if ($return_var == 3) {
       $erreur = "Le contenu de ce fichier PDF est protégé.";
     }
-    spip_log('Erreur extraction '.$fichier.' (code '.$return_var.') : '.$erreur, 'fulltext');
+    spip_log('Erreur extraction '.$fichier.' (code '.$return_var.') : '.$erreur, 'extract');
     return false;
   } else {
     // on ouvre et on lit le .txt
@@ -48,16 +48,9 @@ function extracteur_pdf($fichier, &$charset) {
       unlink($nouveaufichier);
       return $texte;
     } else {
-      spip_log('Erreur extraction PDF : Le fichier texte n\'existe pas ou n\'est pas lisible.', 'fulltext');
+      spip_log('Erreur extraction PDF : Le fichier texte n\'existe pas ou n\'est pas lisible.', 'extract');
       return false;
     }
   }
 }
-
-  	
-  /*
-	# l'option "-enc utf-8" peut echouer ... dommage !
-	@exec('pdftotext '.escapeshellarg($fichier).' -', $r, $e);
-	if (!$e) return @join(' ', $r);
-  */
 ?>
