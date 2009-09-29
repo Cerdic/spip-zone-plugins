@@ -202,12 +202,6 @@ if (!function_exists('corriger_extension')){
 function corriger_extension($ext) {
 	$ext = preg_replace(',[^a-z0-9],i', '', $ext);
 	switch ($ext) {
-		case 'docx':
-			$ext='doc';
-			break;
-		case 'xlsx':
-			$ext='xls';
-			break;
 		case 'htm':
 			$ext='html';
 			break;
