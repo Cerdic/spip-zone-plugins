@@ -1,0 +1,16 @@
+<plugin>
+ 	<nom>gfc</nom>
+	<auteur>Benoit Aubert</auteur>
+	<version>1.0</version>
+	<version_base>1.0</version_base>
+	<etat>test</etat>
+	<description>Plugin pour utiliser Google Friend Connect pour autentifier les auteurs
+	</description>
+	<install>base/gfc_install.php</install>
+	<prefix>gfc</prefix>
+	<options>gfc_options.php</options>
+	<pipeline>
+  	<nom>insert_head</nom>
+  	<inclure>gfc_pipelines.php</inclure>
+  </pipeline>
+</plugin>
