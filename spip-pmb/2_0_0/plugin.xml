@@ -23,6 +23,7 @@ _ &#169; 2008 - Licence GPL
 	</description>
 	<lien>http://www.spip-contrib.net/Interface-PMB-pour-SPIP</lien> <!-- URI de documentation -->
 	<options> <!-- fichier charge a chaque hit -->
+	pmb_mes_options.php
 	</options>
 	
 	<fonctions> <!-- fichier charge a chaque recalcul -->

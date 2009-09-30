@@ -1,4 +1,5 @@
 #CACHE{0}
+
 [(#SESSION{pmb_session}|pmb_tester_session{' '}|?{'',''})]
 <div id="top">
 
@@ -6,43 +7,33 @@
 
 <div class="formulaire_spip formulaire_moncomptepmb">
 <h2><:pmb:mon_compte:></h2>
-[(#SESSION{pmb_session}|non)
-      <form name="myform" method="post" action="#SELF">
-      <fieldset>
-      <legend><:pmb:mon_compte:></legend>
-      <input type="hidden" name="action" value="connexion_pmb" />
-      <input type="hidden" name="redirect" value="#SELF" />
-      <ul class="pmb-connexion">
-      <li>
-	      <label for="pmb-login"><:pmb:pmb_login:> :</label>
-	      <input type="text" onfocus="this.value='';" value="" size="14" id="pmb-login" name="login"/>
-      </li>
-      <li>
-	      <label for="pmb-motdepasse"><:pmb:pmb_motdepasse:> :</label>
-	      <input type="password" onfocus="this.value='';" value="" size="8" id="pmb-motdepasse" name="password"/>
-      </li>
-      <li class="boutons">
-	      <input type="submit" value="Valider" name="ok"/>
-      </li>
-      </ul>
-      </fieldset>
-     </form>
+[(#SESSION{id_auteur}|non)
+      #LOGIN_PUBLIC
+      
+      <br class="nettoyeur" />     
 ]
-[(#SESSION{pmb_session}|oui)
-      <form name="myform" method="post" action="#SELF">
-      <fieldset>
-      <legend><:pmb:mon_compte:></legend>
-      <input type="hidden" name="action" value="deconnexion_pmb" />
-      <input type="hidden" name="redirect" value="#SELF" />
-      <ul class="pmb-deconnexion">
-       <li>Bonjour[ (#SESSION{pmb_firstname})], <a href="#URL_PAGE{moncompte}">acc&eacute;dez &agrave; votre compte de lecteur</a></li>
-       <li class="boutons">
-	      <input type="submit" value="Se d&eacute;connecter" name="ok"/>
-      </li>
-      </ul>
-      <br class="nettoyeur" />
-     </fieldset>
-     </form>
+[(#SESSION{id_auteur}|oui)
+          <form name="myform" method="post" action="#SELF">
+	    <fieldset>
+	    <legend><:pmb:mon_compte:></legend>
+	    <input type="hidden" name="action" value="deconnexion_pmb" />
+	    <input type="hidden" name="redirect" value="#SELF" />
+	    <ul class="pmb-deconnexion">
+	    [(#SESSION{pmb_session}|oui)
+		<li>Bonjour[ (#SESSION{pmb_firstname})], <a href="#URL_PAGE{moncompte}">acc&eacute;dez &agrave; votre compte de lecteur</a></li>
+		<li class="boutons">
+		    <a href="#URL_LOGOUT">Se d&eacute;connecter"</a>
+		</li>
+	     ]
+	     [(#SESSION{pmb_session}|non)
+		<li>Bonjour[ (#SESSION{nom})], <a href="#URL_LOGOUT">vous n'avez pas de compte de lecteur, ou votre session a expir&eacute;</a></li>
+	     ]
+	    
+	    </ul>
+	    <br class="nettoyeur" />
+	  </fieldset>
+	  </form>
+     
 ]
 
 </div>
