@@ -15,7 +15,8 @@
      * \return url de l'image générée par le serveur
      */
     function url_thumbsite_serveur($url_site) {
+        $taille = lire_config('thumbsites/miwin_taille');
         //retourne l'url de la vignette
-        return "http://thumbs.miwim.fr/img.php?url=".$url_site."&ext=jpg&size=120x90&remplace=http://www.miwim.fr/templates/miwim/img/no-preview.gif";
+        return "http://thumbs.miwim.fr/img.php?url=".$url_site."&ext=jpg&size=".$taille."&remplace=http://www.miwim.fr/templates/miwim/img/no-preview.gif";
     }        
 ?>
