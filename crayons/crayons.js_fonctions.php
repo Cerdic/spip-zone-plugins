@@ -11,8 +11,12 @@ function pack_cQuery($chemin) {
 
 	// On ne compacte PAS deux fois (c'est inutile et en plus ca bugge)
 	if (!strlen($flux)
+	// mode debug des crayons
 	OR _request('debug_crayons')
-	OR ($GLOBALS['meta']['auto_compress_js'] == 'oui')
+	// le vieil auto_compress_js
+	OR ($GLOBALS['meta']['auto_compress_js'] == 'oui'
+	  AND @file_exists(_DIR_RESTREINT.'inc/compacte_js.php'))
+	// ou l'espace prive
 	OR !function_exists('test_espace_prive')
 	OR test_espace_prive())
 		return $flux;
