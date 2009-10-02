@@ -42,10 +42,11 @@ function balise_URL_ACTION_AUTEUR($p) {
 // http://doc.spip.org/@balise_URL_ECRIRE_dist
 function balise_URL_ECRIRE($p) {
 
+	// attention, en SPIP 2.1, on recupere 'POUR' et non plus 'pour' comme en 2.0
 	if (isset($p->boucles[$p->id_boucle])
-	AND $p->boucles[$p->id_boucle]->sql_serveur
-	AND $p->boucles[$p->id_boucle]->sql_serveur!='pour'
-	AND $p->boucles[$p->id_boucle]->sql_serveur!='condition') {
+	AND $serveur = strtolower($p->boucles[$p->id_boucle]->sql_serveur)
+	AND $serveur!='pour'
+	AND $serveur!='condition') {
 		$p->code = 'generer_url_public("404")';
 		return $p;
 	}
