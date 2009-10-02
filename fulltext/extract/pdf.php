@@ -1,8 +1,4 @@
 <?php
-/*
- * Lit un document 'pdf' et extrait son contenu en texte brut
- */
-
 // Sait-on extraire ce format ?
 // TODO: ici tester si les binaires fonctionnent
 $GLOBALS['extracteur']['pdf'] = 'extracteur_pdf';
@@ -42,6 +38,7 @@ function extracteur_pdf($fichier, &$charset) {
     return false;
   } else {
     // on ouvre et on lit le .txt
+    // TODO : comment connaitre l'encoding du fichier ?
     $nouveaufichier = str_replace('.pdf', '.txt', $fichier);
     if (file_exists($nouveaufichier) && is_readable($nouveaufichier)) {
       $texte = file_get_contents($nouveaufichier);
