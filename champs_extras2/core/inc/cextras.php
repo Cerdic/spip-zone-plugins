@@ -64,7 +64,7 @@ function declarer_champs_extras($champs, $tables){
 		if (isset($tables[$table]) and $c->champ and $c->sql) {
 			$tables[$table]['field'][$c->champ] = $c->sql;
 		}
-	}	
+	}
 	return $tables;
 }
 

@@ -19,8 +19,9 @@
  */
 function balise_LISTER_VALEURS_dist($p) {
 	// prendre nom de la cle primaire de l'objet pour calculer sa valeur
-	$objet = $p->boucles[$p->id_boucle]->id_table;
-	$_id_objet = $p->boucles[$p->id_boucle]->primary;
+	$id_boucle = $p->nom_boucle ? $p->nom_boucle : $p->id_boucle;
+	$objet = $p->boucles[$id_boucle]->id_table;
+	$_id_objet = $p->boucles[$id_boucle]->primary;
 	$id_objet = champ_sql($_id_objet, $p);
 
 	// recuperer les parametres : colonne sql (champ) et separateur
@@ -53,7 +54,7 @@ function calculer_balise_LISTER_VALEURS($objet, $_id_objet, $colonne, $id_objet,
 	if ($champs === false) {
 		$champs = pipeline('declarer_champs_extras', array());
 	}
-	
+
 	// exploser les cles !
 	$cles = explode(',', $cles);
 
