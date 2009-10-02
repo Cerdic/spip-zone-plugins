@@ -23,15 +23,28 @@ include_spip('inc/texte');
 
 // lecture des sous repertoire plugin existants
 // http://doc.spip.org/@liste_plugin_files
-function liste_plugin_files(){
+function liste_plugin_files($dir_plugins = null){
 	static $plugin_files=array();
-	if (!count($plugin_files)){
-		foreach (preg_files(_DIR_PLUGINS, '/plugin[.]xml$') as $plugin) {
-			$plugin_files[]=substr(dirname($plugin), strlen(_DIR_PLUGINS));
-		}
-		sort($plugin_files);
+	$liste_plugs=array();
+	if (is_null($dir_plugins)) { 
+		if (defined('_DIR_PLUGINS_SUPPL')) { 
+			$dir_plugins = _DIR_PLUGINS_SUPPL.':'._DIR_PLUGINS; 
+		} else 
+		$dir_plugins = _DIR_PLUGINS; 
+	} 
+	if (!isset($plugin_files[$dir_plugins]) 
+		OR count($plugin_files[$dir_plugins]) == 0){
+			$plugin_files[$dir_plugins] = array();
+			foreach(array_filter(explode(':', $dir_plugins)) as $dir) 
+				foreach (preg_files($dir, '/plugin[.]xml$') as $plugin) {
+					if(!in_array($plugin, $liste_plugs)) {
+						$liste_plugs[]= str_replace(_DIR_PLUGINS,'',dirname($plugin));
+					}
+
+				}
+		sort(array_unique($liste_plugs));
 	}
-	return $plugin_files;
+	return $liste_plugs;
 }
 
 // http://doc.spip.org/@plugin_version_compatible
