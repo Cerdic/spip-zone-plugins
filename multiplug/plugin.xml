@@ -1,0 +1,22 @@
+<plugin>
+    <nom>
+    <multi>
+    Multi-Dossier (plugins)
+    </multi>
+    </nom>
+    <auteur>potter64</auteur>
+    <version>
+    1.0
+    </version>
+    <etat>
+    dev
+    </etat>
+    <description>
+    <multi>Ce plugin est un fork du core pour intégrer les multi dossiers pour les plugins en 2.0
+    </multi>
+    </description>
+    <prefix>
+    multiplugin
+    </prefix>
+	<necessite id="SPIP" version="[2.0.9;2.1.0]" />
+</plugin>
