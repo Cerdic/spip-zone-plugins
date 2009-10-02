@@ -45,7 +45,7 @@
 	Si (d) absent dans l'url, propose l'abonnement			
 
 -->][(#ENV{d}|?{'',' '})
-		#FORMULAIRE_ABONNEMENT
+		[(#SPIP_VERSION|<{2}|?{#FORMULAIRE_ABONNEMENT,#FORMULAIRE_SPIP_LISTES_INSCRIPTION})]
 ][<!--(#REM)
 
 	Si (d) present dans l'url, propose la modification de l'abonnement			
