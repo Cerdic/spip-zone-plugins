@@ -32,8 +32,4 @@ $tables_principales['spip_articles_lies'] = array(
 
 global $table_des_tables;
 $table_des_tables['articles_lies'] = 'articles_lies';
-/*
-global $tables_jointures;
-$tables_jointures['articles'][]= 'articles_lies';
-*/
 ?>
