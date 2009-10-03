@@ -17,9 +17,15 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function accesrestreint_ajouter_boutons($boutons_admin) {
 	// si on est admin
 	if (autoriser('administrer','zone')) {
+		$menu = "configuration";
+		$icone = "img_pack/zones-acces-24.gif";
+		if (isset($boutons_admin['bando_configuration'])){
+			$menu = "bando_configuration";
+			$icone = "img_pack/zones-acces-24.gif";
+		}
 	  // on voit le bouton dans la barre "naviguer"
-		$boutons_admin['configuration']->sousmenu['acces_restreint']= new Bouton(
-		_DIR_PLUGIN_ACCESRESTREINT."img_pack/zones-acces-24.gif",  // icone
+		$boutons_admin[$menu]->sousmenu['acces_restreint']= new Bouton(
+		_DIR_PLUGIN_ACCESRESTREINT.$icone,  // icone
 		_T('accesrestreint:icone_menu_config')	// titre
 		);
 	}
