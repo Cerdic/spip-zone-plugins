@@ -544,7 +544,7 @@ function pmb_ws_recuperer_notice ($id_notice, &$ws, &$tresultat) {
 
 //charger les webservices
 function pmb_ws_charger_wsdl(&$ws, $url_base) {
-	$ws=new SoapClient("http://test3.bibli.fr/ostudio/PMBWsSOAP_1?wsdl");
+	$ws=new SoapClient(lire_config('pmb/wsdl','http://test3.bibli.fr/ostudio/PMBWsSOAP_1?wsdl'));
 	
 }
 

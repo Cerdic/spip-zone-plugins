@@ -22,7 +22,7 @@ function auth_pmb_dist ($login, $pass) {
 
 	spip_log("pmb $login " . ($pass ? "mdp fourni" : "mdp absent"));
 	//connexion webservices pmb
-	if (!$ws=new SoapClient("http://test3.bibli.fr/ostudio/PMBWsSOAP_1?wsdl")) return false;
+	if (!$ws=new SoapClient(lire_config('pmb/wsdl','http://test3.bibli.fr/ostudio/PMBWsSOAP_1?wsdl'))) return false;
 	
 	// Securite 
 	if (!$login || !$pass) return array();

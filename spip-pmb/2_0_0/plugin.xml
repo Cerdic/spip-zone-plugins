@@ -28,6 +28,7 @@ _ &#169; 2008 - Licence GPL
 	
 	<fonctions> <!-- fichier charge a chaque recalcul -->
 	pmb_mes_fonctions.php</fonctions>
+	<install>base/pmb_tables.php</install>
 	
 	<pipeline>
   		<nom>post_syndication</nom>
