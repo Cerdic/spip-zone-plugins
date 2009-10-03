@@ -1,0 +1,27 @@
+<plugin>
+    <nom>
+    <multi>
+    Automatiser le plugin Multi-Dossier
+    </multi>
+    </nom>
+    <auteur>cy_altern</auteur>
+    <version>
+    0.1
+    </version>
+    <etat>
+    dev
+    </etat>
+    <description>
+    <multi>Ce plugin est une extension du plugin Multi-Dossier
+qui permet de ne pas avoir &#224; modifier le mes_options d'un SPIP qui utilise un dossier /plugins suppl&#233;mentaire.
+_ Les SPIP autoris&#233;s &#224; avoir un dossier /plugins sp&#233;cifique doivent &#202;tres d&#233;clar&#233;s dans le mes_options.php central par:
+_ $GLOBALS['multiplug_autorise'] = array('nom_dossier_spip1','nom_dossier_spip2', ...);
+	</multi>
+    </description>
+    <prefix>
+    multiplugin_auto
+    </prefix>
+	<necessite id="SPIP" version="[2.0.9;2.1.0]" />
+	<necessite id="multiplugin" version="[1.0;]" />
+	<options>multiplug_auto_options.php</options>
+</plugin>
