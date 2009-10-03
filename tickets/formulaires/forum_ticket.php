@@ -48,7 +48,7 @@ function formulaires_forum_ticket_verifier($id_ticket=''){
 	if(strlen($texte) < LONGUEUR_MINI_COMMENTAIRES_TICKETS){
 		$erreurs['texte'] = _T('tickets:erreur_texte_longueur_mini',array('nb'=> LONGUEUR_MINI_COMMENTAIRES_TICKETS));
 	}
-	if(_request("nobot_forum")){
+	if(_request("nobot")){
 		$erreurs['nobot'] = true;
 	}
 	if(count($erreurs)>0){
