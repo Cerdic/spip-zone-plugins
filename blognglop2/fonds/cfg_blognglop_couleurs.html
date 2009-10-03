@@ -1,0 +1,102 @@
+<!-- titre=<:blognglop:configuration_blognglop:> -->
+<!-- icone=blognglop-ico.png-->
+
+<!-- autoriser=webmestre -->
+
+<!-- refus=Seuls les webmestres du site sont autoris&#233;s &#224; 
+modifier ces param&#232;tres.-->
+
+<!-- descriptif=
+<h4><:blognglop:titre_configuration_blognglop:></h4>
+-->
+
+<!-- onglet=blognglop_couleurs -->
+
+
+<!-- liens*=blognglop:blognglop_general-->
+<!-- liens*=blognglop:blognglop_couleurs-->
+
+<!-- nom=blognglop -->
+<!-- casier=couleurs -->
+
+#CACHE{0}
+
+<form method="post" action="#SELF">
+<div class="formulaire_spip formulaire_editer">
+<div>[(#ENV{_cfg_}|form_hidden)]</div>
+
+<fieldset>
+	<legend><:blognglop:couleurs_des_fonds:></legend>
+	<ul>
+		<li><label for="fond_body"><:blognglop:couleur_fond_body:></label>
+			<input type="text" name="fond_body" id="fond_body" value="[(#ENV{fond_body}|sinon{#FFFFFF})]" size="8" class="fondl palette"  /></li>
+		<li><label for="fond_bloc"><:blognglop:couleur_fond_bloc:></label>
+			<input type="text" name="fond_bloc" id="fond_bloc" value="[(#ENV{fond_bloc}|sinon{#F0F0F0})]" size="8" class="fondl palette"  /></li>
+		<li><label for="bordure_bloc"><:blognglop:couleur_bordure_bloc:></label>
+			<input type="text" name="bordure_bloc" id="bordure_bloc" value="[(#ENV{bordure_bloc}|sinon{#7F7F7F})]" size="8" class="fondl palette"  /></li>
+	</ul>
+</fieldset>
+<fieldset>
+	<legend><:blognglop:couleurs_des_fonds_forum:></legend>
+	<ul>
+		<li><label for="fond_forum1"><:blognglop:couleur_fond_forum1:></label>
+			<input type="text" name="fond_forum1" id="fond_forum1" value="[(#ENV{fond_forum1}|sinon{#F0F0F0})]" size="8" class="fondl palette"  /></li>
+		<li><label for="fond_forum2"><:blognglop:couleur_fond_forum2:></label>
+			<input type="text" name="fond_forum2" id="fond_forum2" value="[(#ENV{fond_forum2}|sinon{#F4F4F4})]" size="8" class="fondl palette"  /></li>
+		<li><label for="fond_forum3"><:blognglop:couleur_fond_forum3:></label>
+			<input type="text" name="fond_forum3" id="fond_forum3" value="[(#ENV{fond_forum3}|sinon{#F8F8F8})]" size="8" class="fondl palette"  /></li>
+		<li><label for="fond_forum4"><:blognglop:couleur_fond_forum4:></label>
+			<input type="text" name="fond_forum4" id="fond_forum4" value="[(#ENV{fond_forum4}|sinon{#FAFAFA})]" size="8" class="fondl palette"  /></li>
+		<li><label for="fond_forum5"><:blognglop:couleur_fond_forum5:></label>
+		<input type="text" name="fond_forum5" id="fond_forum5" value="[(#ENV{fond_forum5}|sinon{#FCFCFC})]" size="8" class="fondl palette"  /></li>
+	</ul>
+</fieldset>
+<fieldset>
+	<legend><:blognglop:couleurs_des_fonds_tableaux:></legend>
+	<ul>
+		<li><label for="fond_tableau_titre"><:blognglop:couleur_fond_tableau_titre:></label>
+			<input type="text" name="fond_tableau_titre" id="fond_tableau_titre" value="[(#ENV{fond_tableau_titre}|sinon{#CCCCCC})]" size="8" class="fondl palette"  /></li>
+		<li><label for="fond_tableau_pair"><:blognglop:couleur_fond_tableau_pair:></label>
+			<input type="text" name="fond_tableau_pair" id="fond_tableau_pair" value="[(#ENV{fond_tableau_pair}|sinon{#F0F0F0})]" size="8" class="fondl palette"  /></li>
+		<li><label for="fond_tableau_impair"><:blognglop:couleur_fond_tableau_impair:></label>
+			<input type="text" name="fond_tableau_impair" id="fond_tableau_impair" value="[(#ENV{fond_tableau_impair}|sinon{#FAFAFA})]" size="8" class="fondl palette"  /></li>
+	</ul>
+</fieldset>
+<fieldset>
+	<legend><:blognglop:couleurs_des_textes:></legend>
+	<ul>
+		<li><label for="texte_defaut"><:blognglop:couleur_texte_defaut:></label>
+			<input type="text" name="texte_defaut" id="texte_defaut" value="[(#ENV{texte_defaut}|sinon{#000000})]" size="8" class="fondl palette"  /></li>
+		<li><label for="titre_defaut"><:blognglop:couleur_titre_defaut:></label>
+			<input type="text" name="titre_defaut" id="titre_defaut" value="[(#ENV{titre_defaut}|sinon{#000000})]" size="8" class="fondl palette"  /></li>
+		<li><label for="soustitre_defaut"><:blognglop:couleur_soustitre_defaut:></label>
+			<input type="text" name="soustitre_defaut" id="soustitre_defaut" value="[(#ENV{soustitre_defaut}|sinon{#333333})]" size="8" class="fondl palette"  /></li>
+		<li><label for="intertitre_defaut"><:blognglop:couleur_intertitre_defaut:></label>
+			<input type="text" name="intertitre_defaut" id="intertitre_defaut" value="[(#ENV{intertitre_defaut}|sinon{#666666})]" size="8" class="fondl palette"  /></li>
+		<li><label for="texte_special"><:blognglop:couleur_texte_special:></label>
+			<input type="text" name="texte_special" id="texte_special" value="[(#ENV{texte_special}|sinon{#333333})]" size="8" class="fondl palette"  /></li>
+		<li><label for="texte_paratxt"><:blognglop:couleur_texte_paratxt:></label>
+			<input type="text" name="texte_paratxt" id="texte_paratxt" value="[(#ENV{texte_paratxt}|sinon{#333333})]" size="8" class="fondl palette"  /></li>
+	</ul>
+</fieldset>
+<fieldset>
+	<legend><:blognglop:couleurs_des_liens:></legend>
+	<ul>
+		<li><label for="lien_normal"><:blognglop:couleur_lien_normal:></label>
+			<input type="text" name="lien_normal" id="lien_normal" value="[(#ENV{lien_normal}|sinon{#666666})]" size="8" class="fondl palette"  /></li>
+		<li><label for="lien_actif"><:blognglop:couleur_lien_actif:></label>
+			<input type="text" name="lien_actif" id="lien_actif" value="[(#ENV{lien_actif}|sinon{#333333})]" size="8" class="fondl palette"  /></li>
+	</ul>
+</fieldset>
+
+
+
+<div>
+<input type="submit" name="_cfg_ok" value="<:oK:>" class="fondo" />
+<input type="reset" value="<:reset:>" class="fondo" />
+<input type="submit" name="_cfg_delete" value="<:supprimer:>" class="fondo" />
+</div>
+</div>
+</form>
+
+

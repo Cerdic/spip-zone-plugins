@@ -1,0 +1,41 @@
+<!-- titre=<:blognglop:configuration_blognglop:> -->
+<!-- icone=blognglop-ico.png-->
+
+<!-- autoriser=webmestre -->
+
+<!-- refus=Seuls les webmestres du site sont autoris&#233;s &#224; 
+modifier ces param&#232;tres.-->
+
+<!-- descriptif=
+<h4><:blognglop:titre_configuration_mollio:></h4>
+-->
+
+<!-- liens*=blognglop:blognglop_general-->
+<!-- liens*=blognglop:blognglop_couleurs-->
+
+<!-- nom=blognglop -->
+<!-- casier=general -->
+
+#CACHE{0}
+
+<form method="post" action="#SELF">
+<div>
+<div>[(#ENV{_cfg_}|form_hidden)]</div>
+<fieldset class="cadre"><legend><:blognglop:configuration_generale:></legend>
+<ul>
+	<li><label for="citation_site"><:blognglop:citation_site:></label><br />
+	<input type="text" name="citation_site" id="citation_site" value="[(#ENV{citation_site}|sinon{<:blognglop:citation_site_defaut:>})]" size="50" class="fondl"  /></li>
+
+</ul>
+</fieldset>
+
+
+<div>
+<input type="submit" name="_cfg_ok" value="<:oK:>" class="fondo" />
+<input type="reset" value="<:reset:>" class="fondo" />
+<input type="submit" name="_cfg_delete" value="<:supprimer:>" class="fondo" />
+</div>
+</div>
+</form>
+
+
