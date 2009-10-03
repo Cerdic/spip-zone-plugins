@@ -12,6 +12,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/autoriser');
 
+define('LONGUEUR_MINI_COMMENTAIRES_TICKETS', 20);
+
 /**
  * Fonction de chargement des valeurs
  */
@@ -43,10 +45,10 @@ function formulaires_forum_ticket_charger($id_ticket=''){
  */
 function formulaires_forum_ticket_verifier($id_ticket=''){
 	$texte = _request("texte");
-	if(strlen($texte)<20){
-		$erreurs['texte'] = _T('tickets:erreur_texte_longueur_mini',array('nb'=> 20));
+	if(strlen($texte) < LONGUEUR_MINI_COMMENTAIRES_TICKETS){
+		$erreurs['texte'] = _T('tickets:erreur_texte_longueur_mini',array('nb'=> LONGUEUR_MINI_COMMENTAIRES_TICKETS));
 	}
-	if(_request(nobot_forum)){
+	if(_request("nobot_forum")){
 		$erreurs['nobot'] = true;
 	}
 	if(count($erreurs)>0){
