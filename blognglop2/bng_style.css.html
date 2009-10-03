@@ -1,0 +1,301 @@
+#CACHE{7*24*60*60,cache-client}
+#HTTP_HEADER{'Content-type: text/css'}
+/* -----------------------------------------------------------
+    Caracteristique des blocs principaux
+------------------------------------------------------------- */
+
+/*** Body ***/
+body {
+	background: [(#CONFIG{blognglop/couleurs/fond_body,#FFFFFF})];
+	text-align: justify;
+	color: [(#CONFIG{blognglop/couleurs/texte_defaut,#000000})];
+	font-family: Garamond, Georgia, "Bookman Old Style", serif;
+	font-size: 1em; /* 16px */}
+	
+/*** Page ***/
+#page { width: 50em; text-align: justify;}
+
+/*** En-tete ***/
+#entete {
+	width: 100%;
+	height: 150px;
+	background: [(#CONFIG{blognglop/couleurs/fond_bloc,#F0F0F0})][ url("(#LOGO_SITE_SPIP_SURVOL||extraire_attribut{src})") no-repeat left];
+	padding: 0;
+	border: 0;
+	margin-top: 1em;
+	text-align: justify;}
+#entete h1 {
+	padding: 1em 1em 0em;
+	font-size: 3em;  /* 48px */}
+#entete p {
+	float: right;
+	width: 45%;
+	margin-right: 0.75em;
+	text-align: right;
+	font-size: 0.875em; /* 14px */}
+#entete .formulaire_recherche {
+	float: right;
+	margin-right:1em;}
+	
+/*** Fil d'Ariane ***/
+#fil_dariane {
+	border-bottom: 1px solid [(#CONFIG{blognglop/couleurs/bordure_bloc,#7F7F7F})];
+	margin-top: 0.5em;
+	font-size: 0.75em; /* 12px */
+	color: [(#CONFIG{blognglop/couleurs/texte_paratxt,#333333})];}
+	
+/*** Colonne centrale ***/
+#conteneur {width: 100%;}
+#contenu {margin: 0 19%;}
+
+/*** Colonnes gauche et droite : Navigation et Extra***/
+#navigation {
+	float: left;
+	width: 17%;
+	margin-left:-100%;}
+#extra {
+	float: left;
+	width: 17%;
+	margin-left:-17%;}
+
+#navigation h1, #extra h1 {
+	background: [(#CONFIG{blognglop/couleurs/fond_bloc,#F0F0F0})];
+	padding: 0.2em 0.4em;
+	margin-top: 0.5em;
+	margin-bottom: 0.25em;
+	border-bottom: 1px dotted [(#CONFIG{blognglop/couleurs/bordure_bloc,#7F7F7F})]; 
+	font-size: 0.875em; /* 14px */
+	font-weight: bold;}
+#navigation h1 {text-align: left;}
+#extra h1 {text-align: right;}
+
+#navigation .affiche, #extra .affiche {
+	margin: 0.33em 0em 0.25em;
+	text-align: center;
+	font-size: 0.875em; /* 14px */}
+
+#navigation ul, #extra ul {
+	padding-left: 0;
+	margin-top: 0;
+	font-size: 0.875em; /* 14px */}
+	
+#navigation li, #extra li {
+	margin-bottom: 0.2em;
+	list-style : none;
+	text-align: justify;}
+	
+#navigation .nuage {
+	text-align: justify;
+	font-size: 0.875em; /* 14px */
+	font-weight: normal;
+	background: #FFFFFF;}
+#navigation .nuage p {
+	margin-top: 0;}
+	
+/*** Pied de page ***/
+#pied {
+	width: 100%;
+	margin-top: 2em;
+	border-top: 1px dotted [(#CONFIG{blognglop/couleurs/bordure_bloc,#7F7F7F})];
+	text-align: center;
+	font-size: 0.75em; /* 12px */
+	color: [(#CONFIG{blognglop/couleurs/texte_paratxt,#333333})];}
+
+/* Bloc pour la navigation transversale */
+.navigo {
+	width: 100%;
+	margin: 0 0 1.5em;
+	font-size: 0.75em; /* 12px */}
+.navigo div.art_prec {float: left; width: 50%; text-align: left;}
+.navigo div.art_suiv {float: right; width: 50%; text-align: right;}
+
+/* Cartouche de titre pour les articles, rubriques, breves, auteurs, etc. */
+.cartouche { 
+	background: [(#CONFIG{blognglop/couleurs/fond_bloc,#F0F0F0})]<BOUCLE_fond_cartouche(MOTS){titre=Fond_cartouche}>[  url("(#LOGO_MOT_NORMAL||extraire_attribut{src})")]</BOUCLE_fond_cartouche>;
+	padding: 0.25em;
+	margin-bottom: 1em; }
+.cartouche h1 {
+	font-size: 1.125em; /* 18px */
+	font-weight: bold;
+	color: [(#CONFIG{blognglop/couleurs/titre_defaut,#000000})]; }
+.cartouche p {
+	font-size: 0.875em; /* 14px */}
+.cartouche p.surtitre, .cartouche p.soustitre {
+	margin: 0.25em 0em;
+	font-size: 1em; /* 16px */
+	font-weight: normal;
+	text-transform: none;
+	letter-spacing: normal;
+	color: [(#CONFIG{blognglop/couleurs/soustitre_defaut,#333333})]; }
+.cartouche img.spip_logos {
+	margin: 0.25em; }
+
+/* Corps pour les articles, rubriques, breves, auteurs, etc. */
+h2.intertitre {
+	clear: both;
+	padding-left: 1em;
+	border-bottom: 1px solid [(#CONFIG{blognglop/couleurs/bordure_bloc,#7F7F7F})];
+	margin: 1em;
+	font-size: 1.125em; /* 18px */
+	color: [(#CONFIG{blognglop/couleurs/intertitre_defaut,#666666})];}
+
+h3.spip {
+	font-size: 1em;
+	color: [(#CONFIG{blognglop/couleurs/intertitre_defaut,#666666})]; }
+
+.chapo {
+	clear: both;
+	margin-bottom: 1em;
+	line-height : normal;
+	font-size: 1em; /* 16px */
+	font-weight: bold;
+	color: [(#CONFIG{blognglop/couleurs/texte_special,#333333})];}
+
+.texte {line-height : normal;}
+
+ul.puce {
+	list-style: square[ url("(#PUCE|extraire_attribut{src})")];}
+p.puce {
+	margin: 0em 2em;}
+
+h2.posttext {
+	border-bottom: 1px dotted [(#CONFIG{blognglop/couleurs/bordure_bloc,#7F7F7F})];
+	text-align: justify;
+	font-size: 1em; /* 16px */
+	font-weight: bold;
+	color: [(#CONFIG{blognglop/couleurs/texte_paratxt,#333333})];}
+
+.notes {
+	font-size: 1em; /* 16px */}
+.ps, .notes {
+	line-height: normal;
+	margin-bottom: 0em;}
+.ps p, .notes p {
+	font-size: 0.875em; /* 14px */
+	color: [(#CONFIG{blognglop/couleurs/texte_paratxt,#333333})];}
+.menu {
+	margin-bottom:0em;
+	text-align:justify;}
+.menu ul {
+	border-bottom: 0;
+	list-style: square inside;
+	font-size: 0.875em; /* 14px */
+	color: [(#CONFIG{blognglop/couleurs/texte_paratxt,#333333})];}
+.menu ul li {
+	border-top: 0;
+	margin:0.1em;
+	padding:0.1em;}
+
+/* Habillage des forums */
+.forum-fil { font-size: 0.875em; /* 14px */ }
+.repondre { font-weight: normal; }
+.hyperlien {background:inherit; color: [(#CONFIG{blognglop/couleurs/texte_paratxt,#333333})]; font-weight:normal;}
+ul .forum-chapo {background: [(#CONFIG{blognglop/couleurs/fond_forum1,#F0F0F0})];}
+ul ul .forum-chapo { background: [(#CONFIG{blognglop/couleurs/fond_forum2,#F4F4F4})]; }
+ul ul ul .forum-chapo { background: [(#CONFIG{blognglop/couleurs/fond_forum3,#F8F8F8})]; }
+ul ul ul ul .forum-chapo { background: [(#CONFIG{blognglop/couleurs/fond_forum4,#FAFAFA})]; }
+ul ul ul ul ul .forum-chapo { background: [(#CONFIG{blognglop/couleurs/fond_forum5,#FCFCFC})]; }
+
+/* Habillage des pétitions */
+#signatures thead { color: [(#CONFIG{blognglop/couleurs/intertitre_defaut,#666666})]; }
+#signatures td { border: [(#CONFIG{blognglop/couleurs/bordure_bloc,#7F7F7F})]; }
+#signatures td.signature-date { background:  [(#CONFIG{blognglop/couleurs/fond_forum1,#F0F0F0})]; }
+#signatures td.signature-nom { background: [(#CONFIG{blognglop/couleurs/fond_forum2,#F4F4F4})]; }
+#signatures td.signature-message { background:  [(#CONFIG{blognglop/couleurs/fond_forum3,#F8F8F8})]; }
+
+/* Dans page statistiques */
+p.nuage_mots {
+	width: 80%;
+	background: #FFFFFF;
+	margin-left: 10%;
+	text-align: center;
+	line-height : 1.5em;
+	font-family: "Luxi sans", "Lucida Grande", Lucida, "Lucida Sans Unicode", sans-serif;
+	font-size: 0.75em; /* 12px */}
+	
+/* ------------------------------------------
+/* Typographie generale (style transversaux)
+/* ------------------------------------------ */
+
+/*** Mise en forme de la titraille et des intertitres ***/
+h1, h2, h3 {font-family: Garamond, Georgia, "Bookman Old Style", serif;}
+	
+/*** Mise en forme des liens ***/
+a, a.spip_out, a.spip_in, a.spip_glossaire {text-decoration: none; color: [(#CONFIG{blognglop/couleurs/lien_normal,#666666})]; }
+h1 a, #fil_dariane a, #navigation a, #extra a {color: inherit; }
+a:hover, h1 a:hover, #fil_dariane a:hover, #navigation a:hover, #extra a:hover {text-decoration: none; color: [(#CONFIG{blognglop/couleurs/lien_actif,#333333})]; }
+a.spip_out:hover {text-decoration: underline;}
+a.spip_glossaire:hover {text-decoration: none; background: [(#CONFIG{blognglop/couleurs/fond_bloc,#F0F0F0})];}
+a:focus,a:active {text-decoration: none; color: [(#CONFIG{blognglop/couleurs/lien_actif,#333333})]; }
+h1 a:focus, h2 a:focus, h3 a:focus {color: inherit;}
+
+/*** Autres (dont corrections de habillage.css et spip_style.css) ***/
+.spip_documents_left, .spip_documents_center, .spip_documents_right {margin: 0.25em;}
+table.spip caption {margin-bottom: 0.25em; font-size: 1em; color: [(#CONFIG{blognglop/couleurs/intertitre_defaut,#666666})];}
+table.spip tr.row_first { background: [(#CONFIG{blognglop/couleurs/fond_tableau_titre,#CCCCCC})]; }
+table.spip tr.row_odd { background: [(#CONFIG{blognglop/couleurs/fond_tableau_pair,#F0F0F0})]; }
+table.spip tr.row_even { background: [(#CONFIG{blognglop/couleurs/fond_tableau_impair,#F0F0F0})]; }
+blockquote.spip {
+	background: [(#CONFIG{blognglop/couleurs/fond_bloc,#F0F0F0})]<BOUCLE_fond_citation(MOTS){titre=Fond_citation}>[  url("(#LOGO_MOT_NORMAL||extraire_attribut{src})")]</BOUCLE_fond_citation>;
+	padding: 0em 0.5em 0em 1.5em;
+	border: 0;
+	margin: 1em; }
+.spip_code, .spip_cadre {color: [(#CONFIG{blognglop/couleurs/texte_special,#333333})]; font-size: 0.75em; /* 12px */}
+.spip_cadre {background: [(#CONFIG{blognglop/couleurs/fond_bloc,#F0F0F0})];}
+
+
+/* -----------------------------------------------------------
+    Caracteristique des modeles
+------------------------------------------------------------- */
+	
+/*** Encart article/rubrique/breve/etc ***/
+.resume_encart {
+	border: 0;
+	margin-bottom: 1em;}
+.resume_encart h1 {
+	background: [(#CONFIG{blognglop/couleurs/fond_bloc,#F0F0F0})];
+	color: [(#CONFIG{blognglop/couleurs/titre_defaut,#000000})];
+	font-size: 1em; /* 16px */
+	font-weight: bold;}
+.resume_encart h2 {
+	background: [(#CONFIG{blognglop/couleurs/fond_bloc,#F0F0F0})];
+	font-size: 0.875em; /* 14px */
+	font-weight: bold;
+	color: [(#CONFIG{blognglop/couleurs/soustitre_defaut,#333333})];}	
+.resume_encart .logo img {
+	float: left;
+	margin: 0.5em;}	
+.resume_encart .accroche {
+	font-size: 0.875em; /* 14px */}	
+.resume_encart .accroche p {
+	margin-top: 0em;}		
+.resume_encart p.infos {
+	text-align: right;
+	font-size: 0.75em; /* 12px */}
+.resume_encart p.infos img.spip_logos {
+	vertical-align: middle;}
+
+/*** Encadre pour l'insertion des brèves ***/
+.breve_insert {
+	width: 33%;
+	background: [(#CONFIG{blognglop/couleurs/fond_bloc,#F0F0F0})];
+	padding: 0.25em;
+	border: 1px dotted [(#CONFIG{blognglop/couleurs/bordure_bloc,#7F7F7F})];
+	margin: 0.5em;
+	text-align: center;}
+.breve_insert h1 {
+	font-size: 1em; /* 16px */
+	font-weight: bold;}
+.breve_insert h3.spip {
+	font-size: 0.875em; /* 14px */}
+.breve_insert p {
+	text-align: justify;
+	font-size: 0.875em; /* 14px */}
+.breve_insert h2.posttext {
+	font-size: 0.875em; /* 14px */}
+.breve_insert .ps p, .breve_insert .notes p {
+	font-size: 0.75em; /* 12px */}
+.breve_insert .menu ul {
+	font-size: 0.75em; /* 12px */}
+
+

@@ -1,0 +1,31 @@
+[(#REM) Listes archives : 
+	* si une date est indiquee renvoie la liste des publications correspondantes sinon renvoie le sommaire "archives" (par date)
+	* utilisation du filtre unique pour obtenir une liste des annees et des mois cf.http://www.spip.net/fr_article901.html
+	* utilisation de boucles imbriquees pour recuperer l'information recherchee (nombre de breves du mois) cf. http://www.spip-contrib.net/Une-liste-d-article-trie-par-mois]
+
+<div class="cartouche">
+	<h1><:blognglop:archives:></h1>
+	<p class="soustitre">[(#ENV{date}|?{[<:blognglop:archives_de:> (#ENV{date}|affdate_mois_annee)],<:blognglop:archives:> <:blognglop:archives_des_breves:> <:blognglop:archives_par_date:>})]</p>
+	<p><:blognglop:voir_aussi:> : <a href="[(#URL_PAGE{archives,tri=antichron})]" title="<:blognglop:archives_info:>"><:blognglop:archives:> <:blognglop:archives_par_date:></a> &mdash; <a href="[(#URL_PAGE{archives,tri=auteur})]" title="<:ecrire:icone_afficher_auteurs:>"><:blognglop:archives:> <:blognglop:archives_par_auteur:></a></p>
+</div>
+
+<BOUCLE_breves_exclure_archives(BREVES) {type=Affichage}{doublons ExclureBreves} />
+<B_breves_deladate>
+<BOUCLE_breves_deladate(BREVES) {mois_relatif=0} {par date}{doublons ExclureBreves} >
+	[(#MODELE{breve_encart})]
+</BOUCLE_breves_deladate>
+</B_breves_deladate>
+	<B_recupdate>
+	<BOUCLE_recupdate(BREVES){!par date}>
+		[<h2 class="intertitre">(#DATE|annee|unique)</h2>]
+		<BOUCLE_cardinal(BREVES){mois_relatif=0} {doublons}{doublons ExclureBreves} />
+			[<p class="puce">[(#PUCE)] (#DATE|affdate_mois_annee|unique)
+			[ &ndash; <a[ href="(#SELF|parametre_url{'ladate',[(#DATE|affdate{'Y-m'})]})"][ title="<:blognglop:archives_de:> (#DATE|affdate_mois_annee)]">(#TOTAL_BOUCLE) <:spip:info_breves_2:></a></p>]]
+		<//B_cardinal>
+	</BOUCLE_recupdate>
+	</B_recupdate>
+		<p><:blognglop:breve_aucun_dispo:></p>
+	<//B_recupdate>
+<//B_breves_deladate>
+
+

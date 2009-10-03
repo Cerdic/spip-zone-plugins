@@ -1,0 +1,110 @@
+#CACHE{60*60}
+
+[(#REM) Menu gauche de navigation, contient :
+	- Logo du site (lien vers l'accueil)
+	- Articles importants labelisés "A la une"
+	- Menu des rubriques
+	- Dernières brèves
+	- Derniers commentaires
+	- Articles les plus populaires
+	- Thèmes les plus populaires
+	- Archives du site. ]
+
+[(#REM) Logo du site et lien vers l'accueil ]
+[<div class="affiche">
+	(#LOGO_SITE_SPIP_NORMAL
+		|#URL_SITE_SPIP
+		|inserer_attribut{'alt',[(#NOM_SITE_SPIP|attribut_html)]}
+		|inserer_attribut{'title',[<:accueil_site:> (#NOM_SITE_SPIP|attribut_html)]}
+		|image_reduire{100})
+</div>]
+
+[(#REM) Liste des articles "a la une" associes au mot-clef  "Une".]
+<B_liste_articles_une>
+	<h1 title="<:blognglop:articles_une_info:>"><:blognglop:articles_une_h1:></h1>
+	<ul>
+<BOUCLE_liste_articles_une(ARTICLES) {titre_mot=Une} {!par date}>
+	[<li><a href="(#URL_ARTICLE)"[ title="(#DESCRIPTIF|attribut_html|couper{45,'&hellip;'})"]>[(#TITRE|supprimer_numero|couper{45,'&hellip;'})]</a></li>]
+</BOUCLE_liste_articles_une>
+	</ul>
+</B_liste_articles_une>
+<//B_liste_articles_une>
+
+[(#REM) Liste des rubriques (d'après le code de inc-rubriques de la dist).]
+<B_rubriques>
+	<h1 title="<:blognglop:menu_rub_info:>"><:blognglop:menu_rub_h1:></h1>
+	<ul>
+	<BOUCLE_rubriques(RUBRIQUES) {racine} {par num titre, titre}>
+		<li>
+			<a href="#URL_RUBRIQUE"[ class="(#EXPOSE)"][ title="(#DESCRIPTIF|attribut_html|couper{45,'&hellip;'})"]>[(#TITRE|supprimer_numero|couper{45,'&hellip;'})]</a>
+			<B_sous_rubriques>
+			<ul>
+				<BOUCLE_sous_rubriques(RUBRIQUES) {id_parent} {par num titre, titre}><BOUCLE_test_expose(RUBRIQUES) {id_enfant}>#EXPOSE{' '}</BOUCLE_test_expose>
+					<li><a href="#URL_RUBRIQUE"[ class="(#EXPOSE)"[ title="(#DESCRIPTIF|attribut_html|couper{45,'&hellip;'})"]]>[(#TITRE|supprimer_numero|couper{45,'&hellip;'})]</a><BOUCLE_re(BOUCLE_sous_rubriques)></BOUCLE_re></li>
+				</B_test_expose></BOUCLE_sous_rubriques>
+			</ul>
+			</B_sous_rubriques>
+		</li>
+	</BOUCLE_rubriques>
+	</ul>
+</B_rubriques>
+
+[(#REM) Liste des dernières brèves publiées
+	dans le contexte du secteur ou, à défaut, sur tout le site
+	sont exclues les brèves liées à l'affichage]
+[(#INCLURE{fond=inc-breves}{id_rubrique=#ID_SECTEUR}{ajax})]
+
+[(#REM) Liste des derniers commentaires publies
+	dans le contexte du secteur ou, à défaut, sur tout le site]
+<B_liste_derniers_message>
+	<h1 title="<:messages_recents:>"><:derniers_commentaires:></h1>
+	<ul>
+<BOUCLE_liste_derniers_message(FORUMS) {id_secteur=#ID_SECTEUR}{plat}{!par date}{0,3}>
+	[<li><a href="(#URL_FORUM)" title="<:blognglop:message_poste_par:>[ (#NOM|attribut_html|sinon{<:blognglop:anonymous:>})][ ((#DATE|affdate))]">[(#TITRE|couper{45,'&hellip;'})]</a></li>]
+</BOUCLE_liste_derniers_message>
+	</ul>
+</B_liste_derniers_message>
+	<B_liste_derniers_message_defaut>
+		<h1 title="<:messages_recents:>"><:derniers_commentaires:></h1>
+		<ul>
+	<BOUCLE_liste_derniers_message_defaut(FORUMS) {plat}{!par date}{0,3}>
+		[<li><a href="(#URL_FORUM)" title="<:blognglop:message_poste_par:>[ (#NOM|attribut_html|sinon{<:blognglop:anonymous:>})][ ((#DATE|affdate))]">[(#TITRE|couper{45,'&hellip;'})]</a></li>]
+	</BOUCLE_liste_derniers_message_defaut>
+		</ul>
+	</B_liste_derniers_message_defaut>
+<//B_liste_derniers_message>
+		
+[(#REM) Liste des articles les plus populaires
+	dans le contexte du secteur ou, à défaut, sur tout le site]
+<B_liste_articles_populaires>
+	<h1 title="<:articles_populaires:>"><:blognglop:articles_populaires_h1:></h1>
+	<ul>
+<BOUCLE_liste_articles_populaires(ARTICLES) {id_secteur=#ID_SECTEUR}{!par popularite}{0,3}>
+	[<li><a href="(#URL_ARTICLE)"[ title="(#DESCRIPTIF|attribut_html|couper{45,'&hellip;'})"]>[(#TITRE|supprimer_numero|couper{45,'&hellip;'})]</a></li>]
+</BOUCLE_liste_articles_populaires>
+	</ul>
+</B_liste_articles_populaires>
+	<B_liste_articles_populaires_defaut>
+		<h1 title="<:articles_populaires:>"><:blognglop:articles_populaires_h1:></h1>
+		<ul>
+	<BOUCLE_liste_articles_populaires_defaut(ARTICLES) {!par popularite}{0,3}>
+		[<li><a href="(#URL_ARTICLE)"[ title="(#DESCRIPTIF|attribut_html|couper{45,'&hellip;'})"]>[(#TITRE|supprimer_numero|couper{45,'&hellip;'})]</a></li>]
+	</BOUCLE_liste_articles_populaires_defaut>
+		</ul>
+	</B_liste_articles_populaires_defaut>
+<//B_liste_articles_populaires>
+
+[(#REM) Accès aux statistiques et themes les plus populaires]
+<h1 title="<:blognglop:quelques_chiffres:>"><a href="[(#URL_PAGE{statistiques})]" title="<:ecrire:icone_voir_tous_mots_cles:>"><:spip:icone_statistiques_visites:></a></h1>
+[(#MODELE{themes_nuage})]
+	
+[(#REM) Archives récentes.
+	- liens vers les archives du dernier trimestre s'il y a lieu
+	- lien vers le sommaire des archives.]
+<h1 title="<:blognglop:archives_info:>"><:blognglop:archives_h1:></h1>
+<ul>
+<BOUCLE_archives_recentes(ARTICLES){!par date}{mois_relatif!=0}{age<122}>
+	[<li><a[ href="(#URL_PAGE{archives,ladate=[(#DATE|affdate{'Y-m'})]})"][ title="<:blognglop:archives_de:> (#DATE|affdate_mois_annee)"]>(#DATE|affdate_mois_annee|unique)</a></li>]
+</BOUCLE_archives_recentes>
+[<li><a href="(#URL_PAGE{archives})" title="<:blognglop:archives_vers_sommaire:>"><:blognglop:archives_toutes:></a></li>]
+</ul>

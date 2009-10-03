@@ -1,0 +1,42 @@
+[(#REM) Creation d'un nuage de mots-clefs.]
+
+<B_motsclefs_calpop>
+	<?php $max_popu_mc=0;?>
+<BOUCLE_motsclefs_calpop(MOTS){type=Themes}>
+	<?php $courant_popu=0; ?>
+	<B_articles_calpop>
+	<BOUCLE_articles_calpop(ARTICLES){id_mot}>
+		<?php $courant_popu+=#POPULARITE_ABSOLUE; ?>
+	</BOUCLE_articles_calpop>
+		<?php 
+			$mot_popu["#TITRE"]=$courant_popu;
+			$mot_url["#TITRE"]="#URL_MOT";
+			$max_popu_mc=max($max_popu_mc,$courant_popu);
+		?>
+	</B_articles_calpop>
+</BOUCLE_motsclefs_calpop>
+<?php 
+	if($max_popu_mc!=0) {
+	$popu_mc_ratio=(255/$max_popu_mc);
+	arsort($mot_popu);
+	$val_popu=array_values($mot_popu);
+	$seuil_popu=$val_popu[7];
+	ksort($mot_popu);
+	}
+?>
+</B_motsclefs_calpop>
+				
+<div class="nuage" title="<:blognglop:themes_populaires_info:>">
+<p>
+<?php
+	if($max_popu_mc!=0) {
+		foreach ($mot_popu as $key => $val) {
+			if($val>$seuil_popu) {
+				$mot_couleur=255-floor($val*$popu_mc_ratio);
+				echo "<a href=\"".$mot_url[$key]."\" title=\"<:blognglop:themes_infobis:>\"><span style=\"color: rgb(".$mot_couleur.",".$mot_couleur.",".$mot_couleur.");\">".$key." </span></a>";
+			}
+		}
+	}
+?>
+</p>
+</div>

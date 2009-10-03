@@ -1,0 +1,34 @@
+[(#REM) Afficher 
+	- la banniere (logo de survol du site, optionnel)
+	- le titre du site
+	- une citation (optionnel)
+	- le formulaire de recherche]
+
+[(#REM) Afficher la banniere ]
+
+<div id="entete" <BOUCLE_entete_image(RUBRIQUES) {id_rubrique}>
+	[style="background-repeat: no-repeat; background-image: url((#LOGO_RUBRIQUE_SURVOL||extraire_attribut{src}));"]</BOUCLE_entete_image>
+	>
+
+	[(#REM) Afficher une citation]
+	<B_citation_breve_context>
+	<BOUCLE_citation_breve_context(BREVES) {id_rubrique} {titre_mot=Citation}{par num titre, titre}{0,1}>
+		[(#TEXTE)]
+	</BOUCLE_citation_breve_context>
+	</B_citation_breve_context>
+		<B_citation_breve>
+		<BOUCLE_citation_breve(BREVES) {titre_mot=Citation}{par num titre, titre}{0,1}>
+			[(#TEXTE)]
+		</BOUCLE_citation_breve>
+		</B_citation_breve>
+			<p>[(#CONFIG{blognglop/general/citation_site,<:blognglop:citation_site_defaut:>})]</p>
+		<//B_citation_breve>
+	<//B_citation_breve_context>
+	
+	[(#REM) Afficher le titre du site]
+	<h1>[(#NOM_SITE_SPIP)]</h1>
+
+	[(#REM) Afficher le formulaire de recherche]
+	[(#FORMULAIRE_RECHERCHE)]
+
+</div>

@@ -1,0 +1,46 @@
+#HTTP_HEADER{"HTTP/1.0 404 Not Found"}
+#HTTP_HEADER{"Cache-Control: no-store, no-cache, must-revalidate"}
+#HTTP_HEADER{Pragma: no-cache}
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+	<title><:pass_erreur:> 404 - [(#NOM_SITE_SPIP|attribut_html)]</title>
+	[(#INCLURE{fond=inc-head})]
+	<meta name="robots" content="none" />
+</head>
+<body class="page_404">
+	<div id="page">
+
+	[(#REM) Inclusion statique de l'entete de la page]
+	[(#INCLURE{fond=inc-entete})]
+	
+	[(#REM) Inclusion statique du fil d'Ariane ]
+	[(#INCLURE{fond=inc-ariane})]
+
+	<div id="conteneur">
+	<div id="contenu">
+
+		<div class="cartouche">
+			<h1><:pass_erreur:> 404</h1>
+			[<p class="soustitre">(#ENV*{erreur}|propre)</p>]
+		</div>
+
+	</div><!--#contenu-->
+	</div><!--#conteneur-->
+	
+	[(#REM) Menu de navigation laterale gauche]
+	<div id="navigation">
+		<INCLURE{fond=inc-navigation}/>
+	</div><!--#navigation-->
+	
+	[(#REM) Menu de navigation laterale droite]
+	<div id="extra">
+		<INCLURE{fond=inc-extra}/>
+	</div><!--#extra-->
+
+	[(#REM) Inclusion statique du pied de page ]
+	[(#INCLURE{fond=inc-pied})]
+
+	</div><!--#page-->
+</body>
+</html>

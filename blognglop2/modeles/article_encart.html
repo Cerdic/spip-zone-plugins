@@ -1,0 +1,22 @@
+[(#REM) Modele affichant une cartouche contenant un resume de l'article]
+
+<B_article_encart>
+	<div class="resume_encart">
+		<BOUCLE_article_encart(ARTICLES) {id_article}>
+			[<h2>(#SURTITRE)</h2>]
+			[<div class="logo">(#LOGO_ARTICLE_RUBRIQUE
+				|#URL_ARTICLE
+				|inserer_attribut{'alt',[(#TITRE|supprimer_numero|attribut_html)]}
+				|inserer_attribut{'title',[(#TITRE|supprimer_numero|attribut_html)]}
+				|image_reduire{75})</div>]
+			[<h1><a href="#URL_ARTICLE">(#TITRE|supprimer_numero)</a></h1>]
+			[<h2>(#SOUSTITRE)</h2>]
+			[<div class="accroche">(#DESCRIPTIF|?{#DESCRIPTIF,[(#CHAPO|?{#CHAPO,#INTRODUCTION})]}|PtoBR|paragrapher)</div>]
+			<p class="infos">[(#LESAUTEURS)] &#124; [(#DATE|jour)].[(#DATE|mois)].[(#DATE|annee)] &#124; <BOUCLE_decompte(FORUMS) {id_article} {plat}></BOUCLE_decompte>[(#TOTAL_BOUCLE|>{0}|?{#TOTAL_BOUCLE,<:blognglop:pas_de:>}) [(#TOTAL_BOUCLE|=={1}|?{<:blognglop:commentaire:>,<:blognglop:commentaires:>})]]<//B_decompte> &#124; <BOUCLE_rubinfo(RUBRIQUES) {id_rubrique}>[<a href="(#URL_RUBRIQUE)"[ title="(#DESCRIPTIF|attribut_html)"]>[(#TITRE|supprimer_numero|couper{30})]</a>] [(#LOGO_RUBRIQUE_NORMAL|
+				|inserer_attribut{'alt',[(#TITRE|supprimer_numero|attribut_html)]}
+				|inserer_attribut{'title',[(#TITRE|supprimer_numero|attribut_html)]}
+				|image_reduire{25})]</BOUCLE_rubinfo></p>
+		</BOUCLE_article_encart>		
+	</div>
+</B_article_encart>
+			

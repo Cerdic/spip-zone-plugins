@@ -1,0 +1,18 @@
+[(#REM) Pied de page aver les informations legales. ]
+
+<div id="pied">
+	[<em>(#NOM_SITE_SPIP)</em> ]
+	<B_licence_breve>
+	<BOUCLE_licence_breve(BREVES) {titre_mot=Licence}{!par date}{0,1}>
+		[| (#TEXTE) ]
+	</BOUCLE_licence_breve>
+	</B_licence_breve>
+	| <:blognglop:bng_licence:> <a href="http://creativecommons.org/licenses/by-nc-nd/2.0/fr/" title="<:blognglop:bng_licence_title:>"><:blognglop:bng_licence_name:></a> 
+	<//B_licence_breve>
+	| <:blognglop:site_created_with:> <a href="http://www.spip.net" title="<:site_realise_avec_spip:>[ (#SPIP_VERSION)]">SPIP</a> &amp; <a href="http://spipistrelle.clinamen.org/spip.php?rubrique1" title="<:blognglop:site_created_with_bng:>[ (#BNG_VERSION)]">Blog'n Glop</a>
+</div>
+
+[(#REM)
+	Cette balise permet de deporter les calculs lourds (indexation etc)
+	dans une image cachee, ce qui evite de ralentir l'affichage des pages.
+]#SPIP_CRON

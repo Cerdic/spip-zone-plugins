@@ -1,0 +1,93 @@
+#CACHE{24*60*60}
+<BOUCLE_principale(MOTS) {id_mot} {doublons}>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+	[<title>(#TITRE|supprimer_numero|attribut_html)</title>]
+	[<meta name="description" lang="#LANG" content="(#TITRE|supprimer_numero|attribut_html)[ ((#TYPE))].[ (#DESCRIPTIF|couper{150,'&hellip;'}|attribut_html)]" />]
+	[<meta name="keywords" lang="#LANG" content="[(#TYPE),](#TITRE|supprimer_numero|attribut_html)[,(#NOM_SITE_SPIP|attribut_html)]" />]
+	[<meta name="author" content="(#NOM_SITE_SPIP|attribut_html)" />]
+	[<meta name="date" content="(#DATE|date_iso)" />]
+	[(#INCLURE{fond=inc-head})]
+	[(#REM) Lien vers le flux RSS des articles du mot cle ]
+	<link rel="alternate" type="application/rss+xml"[ title="(#TITRE|attribut_html)"] href="[(#URL_PAGE{backend}|parametre_url{id_mot,#ID_MOT})]" />
+</head>
+
+<body class="page_mot">
+<div id="page">
+
+	[(#REM) Inclusion statique de l'entete de la page]
+	[(#INCLURE{fond=inc-entete})]
+	
+	[(#REM) Inclusion statique du fil d'Ariane ]
+	[(#INCLURE{fond=inc-ariane}{env})]
+
+	[(#REM) Contenu principal : contenu du mot-cle ]
+	<div id="conteneur">
+	<div id="contenu">
+
+		<div class="cartouche">
+			[(#LOGO_MOT|
+				|inserer_attribut{'alt',[(#TITRE|supprimer_numero|attribut_html)]}
+				|inserer_attribut{'title',[(#TITRE|supprimer_numero|attribut_html)]}
+				|image_reduire{120,120})]
+			<h1 class="#EDIT{titre}">#TITRE</h1>
+			<p><:blognglop:objets_lies_mot:></p>
+		</div>
+
+		[<div class="#EDIT{texte} chapo">(#TEXTE|image_reduire{400})</div>]
+
+		[(#REM) Articles lies au mot-cle ]
+		<B_articles>
+			#ANCRE_PAGINATION
+			<h2 class="intertitre"><:articles:></h2>
+		<BOUCLE_articles(ARTICLES) {id_mot} {!par date} {pagination 5}>
+                	[(#MODELE{article_encart})]
+		</BOUCLE_articles>
+			[<p class="pagination">(#PAGINATION)</p>]
+		</B_articles>
+		
+		[(#REM) Rubriques liees au mot-cle ]
+		<B_rubriques>
+			#ANCRE_PAGINATION
+			<h2 class="intertitre"><:rubriques:></h2>
+		<BOUCLE_rubriques(RUBRIQUES) {id_mot} {!par date} {pagination 5}>
+                	[(#MODELE{rubrique_encart})]
+		</BOUCLE_rubriques>
+			[<p class="pagination">(#PAGINATION)</p>]
+		</B_rubriques>
+
+		[(#REM) Breves liees au mot-cle à l'exclusion de celles utilisées pour l'affichage]
+		<BOUCLE_breves_exclure_mots(BREVES) {type=Affichage}{doublons ExclureBreves} />
+		<B_breves>
+			#ANCRE_PAGINATION
+			<h2 class="intertitre"><:breves:></h2>
+		<BOUCLE_breves(BREVES) {id_mot} {!par date}{doublons ExclureBreves} {pagination 5}>
+                	[(#MODELE{breve_encart})]
+		</BOUCLE_breves>
+			[<p class="pagination">(#PAGINATION)</p>]
+		</B_breves>
+
+
+		[<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
+
+	</div><!--#contenu-->
+	</div><!--#conteneur-->
+
+	[(#REM) Menu de navigation laterale gauche]
+	<div id="navigation">
+		<INCLURE{fond=inc-navigation}/>
+	</div><!--#navigation-->
+	
+	[(#REM) Menu de navigation laterale droite]
+	<div id="extra">
+		<INCLURE{fond=inc-extra}{env}/>
+	</div><!--#extra-->
+
+	[(#REM) Inclusion statique du pied de page ]
+	[(#INCLURE{fond=inc-pied})]
+
+</div><!--#page-->
+</body>
+</html>
+</BOUCLE_principale>

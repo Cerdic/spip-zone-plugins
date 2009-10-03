@@ -1,0 +1,107 @@
+#CACHE{24*60*60}
+<BOUCLE_principale(ARTICLES) {id_article}>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+	<title>[(#TITRE|supprimer_numero|attribut_html)]</title>
+	[<meta name="description" lang="#LANG" content="(#TITRE|supprimer_numero|attribut_html).[ (#DESCRIPTIF|sinon{[(#INTRODUCTION)]}|couper{150,'&hellip;'}|attribut_html)]" />]
+	<B_motsclefs_meta><meta name="keywords" lang="#LANG" content="<BOUCLE_motsclefs_meta(MOTS){id_article}{type!=Affichage}{", "}>[(#TITRE|supprimer_numero|attribut_html)]</BOUCLE_motsclefs_meta>" /></B_motsclefs_meta>
+	<B_index_auteurs_meta><meta name="author" content="<BOUCLE_index_auteurs_meta(AUTEURS){id_article}{", "}>[(#NOM|supprimer_numero|attribut_html)]</BOUCLE_index_auteurs_meta>" /></B_index_auteurs_meta>
+	[<meta name="date" content="(#DATE|date_iso)" />]
+	[(#INCLURE{fond=inc-head})]
+</head>
+
+<body class="page_article">
+<div id="page">
+
+	[(#REM) Inclusion statique de l'entete de la page]
+	[(#INCLURE{fond=inc-entete}{env}{id_rubrique=#ID_RUBRIQUE})]
+	
+	[(#REM) Inclusion statique du fil d'Ariane ]
+	[(#INCLURE{fond=inc-ariane}{env}{id_rubrique=#ID_RUBRIQUE})]
+
+	[(#REM) Contenu principal : contenu de l'article ]
+	<div class="hfeed" id="conteneur">
+	<div class="hentry" id="contenu">
+
+		[(#REM) Navigation dans les articles]
+		<div class="navigo">
+			[(#REM) Article precedant par ordre chronologique s'il existe]
+			<BOUCLE_precedent(ARTICLES){age_relatif>=0}{!par date}{1,1}>
+				[<div class="art_prec"><a href="#URL_ARTICLE"[ title="(#DESCRIPTIF|attribut_html|couper{50,'&hellip;'})"]>&laquo; (#TITRE|supprimer_numero|couper{37,'&hellip;'})</a></div>]
+			</BOUCLE_precedent>
+			[(#REM) Article suivant par ordre chronologique s'il existe]
+			<BOUCLE_suivant(ARTICLES){age_relatif<0}{par date}{0,1}>
+				[<div class="art_suiv"><a href="#URL_ARTICLE"[ title="(#DESCRIPTIF|attribut_html|couper{50,'&hellip;'})"]>(#TITRE|supprimer_numero|couper{37,'&hellip;'}) &raquo;</a></div>]
+			</BOUCLE_suivant>
+		</div>
+	
+		<div class="cartouche">
+			<div class="surlignable">
+				[(#LOGO_ARTICLE|
+					|inserer_attribut{'alt',[(#TITRE|supprimer_numero|attribut_html)]}
+					|inserer_attribut{'title',[(#TITRE|supprimer_numero|attribut_html)]}
+					|image_reduire{120,120})]
+				[<p class="#EDIT{surtitre} surtitre">(#SURTITRE)</p>]
+				[<h1 class="#EDIT{titre} entry-title">(#TITRE|supprimer_numero)</h1>]
+				[<p class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</p>]
+			</div>
+		
+			<p><:blognglop:publie:>[ <:par_auteur:> (#LESAUTEURS),] <:blognglop:date_le:> <abbr class="published" title="[(#DATE_REDAC|sinon{#DATE}|date_iso)]">[(#DATE_REDAC|sinon{#DATE}|nom_jour) ][(#DATE_REDAC|sinon{#DATE}|affdate)]</abbr>[ (<:blognglop:date_maj:> (#DATE_REDAC|?{[<abbr class="published" title="[(#DATE|date_iso)]">[(#DATE|nom_jour) ](#DATE|affdate)</abbr>],""}))]</p>
+	    
+			<B_motsclefs_associes>
+	    			<p><img src="#CHEMIN{tags.png}" alt="<:blognglop:mots_alt:>" title="<:blognglop:mots_title:>" width="20" height="9" class="format_png" />
+			<BOUCLE_motsclefs_associes(MOTS) {id_article} {type=Themes}{par num titre, titre}{" - "}>
+				<a href="#URL_MOT" title="[(#DESCRIPTIF|sinon{<:blognglop:themes_infobis:>}|attribut_html)]">[(#TITRE|supprimer_numero|strtolower)]</a>
+			</BOUCLE_motsclefs_associes>
+				</p>
+			</B_motsclefs_associes>
+
+			[(#REM) Inclure le modele des liens de traductions ]
+			#MODELE{article_traductions}
+		</div>
+		
+		<div class="surlignable">
+			[<div class="#EDIT{chapo} chapo">(#CHAPO|image_reduire{500,0})</div>]
+			[<div class="#EDIT{texte} texte entry-content">(#TEXTE|image_reduire{400})</div>]
+		</div>
+
+		[<div class="ps surlignable"><h2 class="posttext pas_surlignable"><:info_ps:></h2><div class="#EDIT{ps}">(#PS|image_reduire{500,0})</div></div>]
+
+		[(#REM) Gestion du portfolio et des documents
+			Le critere {env} permet de passer d'autres arguments de la page
+			par exemple l'id_document choisi pour un affichage complet
+		][(#INCLURE{fond=inc-documents}{id_article}{env})]
+
+		[(#REM) Petition :
+			La petition ayant une PAGINATION il faut absolument {env}
+			et pourquoi pas ajax
+		][(#PETITION|?{' '})<INCLURE{fond=inc-petition}{id_article}{env}{ajax}>]
+
+		[<div class="notes surlignable"><h2 class="posttext pas_surlignable"><:info_notes:></h2>(#NOTES)</div>]
+
+		[(#REM) Forum de l'article ]
+		<a href="#forum" name="forum" id="forum"></a>
+		<INCLURE{fond=inc-forum}{id_article} />
+		[<p class="repondre"><a href="(#PARAMETRES_FORUM|url_reponse_forum)" rel="noindex nofollow"><:repondre_article:></a></p>] 
+
+	</div><!--#contenu-->
+	</div><!--#conteneur-->
+
+	[(#REM) Menu de navigation laterale gauche]
+	<div id="navigation">
+		<INCLURE{fond=inc-navigation}{env}{id_secteur=#ID_SECTEUR}/>
+	</div><!--#navigation-->
+	
+	[(#REM) Menu de navigation laterale droite]
+	<div id="extra">
+		<INCLURE{fond=inc-extra}{env}{id_rubrique=#ID_RUBRIQUE}/>
+	</div><!--#extra-->
+
+	[(#REM) Inclusion statique du pied de page ]
+	[(#INCLURE{fond=inc-pied})]
+
+</div><!--#page-->
+</body>
+</html>
+</BOUCLE_principale>

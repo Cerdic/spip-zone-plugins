@@ -1,0 +1,93 @@
+#CACHE{24*60*60}
+<BOUCLE_principale(RUBRIQUES) {id_rubrique}>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+	<title>[(#TITRE|supprimer_numero|attribut_html)]</title>
+	[<meta name="description" lang="#LANG" content="(#TITRE|supprimer_numero|attribut_html).[ (#DESCRIPTIF|sinon{[(#INTRODUCTION)]}|couper{150,'&hellip;'}|attribut_html)]" />]
+	<B_motsclefs_meta><meta name="keywords" lang="#LANG" content="<BOUCLE_motsclefs_meta(MOTS) {id_rubrique}{type!=Affichage}{", "}>[(#TITRE|supprimer_numero|attribut_html)]</BOUCLE_motsclefs_meta>" /></B_motsclefs_meta>
+	<B_index_auteurs_rub_meta><meta name="author" content="<BOUCLE_index_auteurs_rub_meta(AUTEURS){articles.id_rubrique}{", "}>[(#NOM|supprimer_numero|attribut_html)]</BOUCLE_index_auteurs_rub_meta>" /></B_index_auteurs_rub_meta>
+	[<meta name="date" content="(#DATE|date_iso)" />]
+	[(#INCLURE{fond=inc-head})]
+	
+	[(#REM) Lien vers le flux RSS des articles la rubrique ]
+	<link rel="alternate" type="application/rss+xml" title="<:blognglop:syndiquer_rubrique:>" href="[(#URL_PAGE{backend}|parametre_url{id_rubrique,#ID_RUBRIQUE})]" />
+</head>
+
+<body class="page_rubrique">
+<div id="page">
+
+	[(#REM) Inclusion statique de l'entete de la page]
+	[(#INCLURE{fond=inc-entete}{env})]
+	
+	[(#REM) Inclusion statique du fil d'Ariane ]
+	[(#INCLURE{fond=inc-ariane}{env})]
+
+	[(#REM) Contenu principal : contenu de la rubrique ]
+    <div id="conteneur">
+    <div id="contenu">
+
+	<div class="cartouche">
+		[(#LOGO_RUBRIQUE_NORMAL|
+			|inserer_attribut{'alt',[(#TITRE|supprimer_numero|attribut_html)]}
+			|inserer_attribut{'title',[(#TITRE|supprimer_numero|attribut_html)]}
+			|image_reduire{120,120})]
+		[<h1 class="#EDIT{titre}">(#TITRE|supprimer_numero)</h1>]
+		[<p><:blognglop:derniere_maj:>[(#DATE|nom_jour) ](#DATE|affdate_jourcourt).</p>]
+
+		<B_motsclefs_associes>
+	    		<p><img src="#CHEMIN{tags.png}" alt="<:blognglop:mots_alt:>" title="<:blognglop:mots_title:>" width="20" height="9" class="format_png" />
+		<BOUCLE_motsclefs_associes(MOTS) {id_rubrique} {type=Themes}{par num titre, titre}{" - "}>
+			<a href="#URL_MOT" title="[(#DESCRIPTIF|sinon{<:blognglop:themes_infobis:>}|attribut_html)]">[(#TITRE|supprimer_numero|strtolower)]</a>
+		</BOUCLE_motsclefs_associes>
+			</p>
+		</B_motsclefs_associes>
+		
+	</div>
+
+        [<div class="#EDIT{texte} chapo">(#TEXTE|image_reduire{400})</div>]
+
+        [(#REM) Articles de la rubrique ]
+        <B_articles>
+            #ANCRE_PAGINATION
+                <BOUCLE_articles(ARTICLES) {id_rubrique} {!par date} {pagination 5}>
+                	[(#MODELE{article_encart})]
+                </BOUCLE_articles>
+            [<p class="pagination">(#PAGINATION)</p>]
+        </B_articles>
+		<p><:blognglop:article_aucun_dispo:></p>
+	<//B_articles>
+
+	[(#REM) Gestion du portfolio et des documents
+			Le critere {env} permet de passer d'autres arguments de la page
+			par exemple l'id_document choisi pour un affichage complet
+		][(#INCLURE{fond=inc-documents}{id_rubrique}{env})]
+
+        [<div class="notes"><h2 class="posttext"><:info_notes:></h2>(#NOTES)</div>]
+	
+	[(#REM) Forum de la rubrique
+			NB : pour desactiver les forums de rubrique, supprimez simplement les lignes ci-dessous ]
+		<a href="#forum" name="forum" id="forum"></a>
+		<INCLURE{fond=inc-forum}{id_rubrique}>
+		[<p class="repondre"><a href="(#PARAMETRES_FORUM|url_reponse_forum)" rel="noindex nofollow"><:blognglop:repondre_rubrique:></a></p>]
+
+	</div><!--#contenu-->
+	</div><!--#conteneur-->
+	
+	[(#REM) Menu de navigation laterale gauche]
+	<div id="navigation">
+		<INCLURE{fond=inc-navigation}{env}{id_secteur=#ID_SECTEUR}/>
+	</div><!--#navigation-->
+	
+	[(#REM) Menu de navigation laterale droite]
+	<div id="extra">
+		<INCLURE{fond=inc-extra}{env}/>
+	</div><!--#extra-->
+
+	[(#REM) Inclusion statique du pied de page ]
+	[(#INCLURE{fond=inc-pied})]
+
+</div><!--#page-->
+</body>
+</html>
+</BOUCLE_principale>

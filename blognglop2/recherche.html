@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+	<title><:resultats_recherche:> - [(#NOM_SITE_SPIP|attribut_html)]</title>
+	[(#INCLURE{fond=inc-head})]
+	<meta name="robots" content="none" />
+</head>
+
+<body class="page_recherche pas_surlignable">
+<div id="page">
+
+	[(#REM) Inclusion statique de l'entete de la page]
+	[(#INCLURE{fond=inc-entete})]
+	
+	[(#REM) Inclusion statique du fil d'Ariane ]
+	[(#INCLURE{fond=inc-ariane}{env})]
+	
+	[(#REM) Contenu principal : Resultats de la recherche ]
+	<div id="conteneur">
+	<div id="contenu">
+		
+		<div class="cartouche">
+			<h1><:resultats_recherche:></h1>
+			[<p class="soustitre">&#171;&nbsp;(#RECHERCHE)&nbsp;&#187;</p>]
+			[(#REM) Mots-cles trouves ]
+			<B_motsclefs>
+	    			<p><img src="#CHEMIN{tags.png}" alt="<:blognglop:mots_alt:>" title="<:blognglop:mots_title:>" width="20" height="9" class="format_png" />
+			<BOUCLE_motsclefs(MOTS) {recherche} {!par points}>
+				<a href="#URL_MOT" title="[(#DESCRIPTIF|sinon{<:blognglop:themes_infobis:>}|attribut_html)]">[(#TITRE|supprimer_numero|strtolower)]</a>
+			</BOUCLE_motsclefs>
+				</p>
+			</B_motsclefs>
+		</div>
+		
+		[(#REM) Articles trouves ]
+		<B_articles>
+			#ANCRE_PAGINATION
+			<h2 class="intertitre"><:articles:> (#GRAND_TOTAL)</h2>
+		<BOUCLE_articles(ARTICLES) {recherche} {!par points} {pagination 5}>
+			[(#MODELE{article_encart})]
+		</BOUCLE_articles>
+			[<p class="pagination">(#PAGINATION)</p>]
+		</B_articles>
+		
+		[(#REM) Rubriques trouvees ]
+		<B_rubriques>
+			#ANCRE_PAGINATION
+			<h2 class="intertitre"><:rubriques:> (#GRAND_TOTAL)</h2>
+		<BOUCLE_rubriques(RUBRIQUES) {recherche} {!par points} {pagination 5}>
+			[(#MODELE{rubrique_encart})]
+		</BOUCLE_rubriques>
+			[<p class="pagination">(#PAGINATION)</p>]
+		</B_rubriques>
+		
+		[(#REM) Breves trouvees ]
+		<BOUCLE_breves_exclure_rech(BREVES) {type=Affichage}{doublons ExclureBreves} />
+		<B_breves>
+			#ANCRE_PAGINATION
+			<h2 class="intertitre"><:breves:> (#GRAND_TOTAL)</h2>
+		<BOUCLE_breves(BREVES) {recherche} {!par points}{doublons ExclureBreves} {pagination 5}>
+			[(#MODELE{breve_encart})]
+		</BOUCLE_breves>
+			[<p class="pagination">(#PAGINATION)</p>]
+		</B_breves>
+		
+	</div><!--#contenu-->
+	</div><!--#conteneur-->
+	
+	[(#REM) Menu de navigation laterale gauche]
+	<div id="navigation">
+		<INCLURE{fond=inc-navigation}/>
+	</div><!--#navigation-->
+	
+	[(#REM) Menu de navigation laterale droite]
+	<div id="extra">
+		<INCLURE{fond=inc-extra}{env}/>
+	</div><!--#extra-->
+	
+	[(#REM) Inclusion statique du pied de page ]
+	[(#INCLURE{fond=inc-pied})]
+    
+</div><!--#page-->
+</body>
+</html>

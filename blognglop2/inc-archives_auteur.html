@@ -1,0 +1,24 @@
+[(#REM) Listes archives classées par auteur]
+
+<div class="cartouche">
+	<h1><:blognglop:archives:></h1>
+	<p class="soustitre"><:blognglop:archives:> <:blognglop:archives_par_auteur:></p>
+	<p><:blognglop:voir_aussi:> : <a href="[(#URL_PAGE{archives,tri=antichron})]" title="<:blognglop:archives_info:>"><:blognglop:archives:> <:blognglop:archives_par_date:></a> &mdash; <a href="[(#URL_PAGE{archives,tri=breve})]" title="<:blognglop:archives_info_breve:>"><:blognglop:archives:> <:blognglop:archives_des_breves:></a></p>
+</div>
+
+<B_archives_parauteur>
+<BOUCLE_archives_parauteur(AUTEURS){par num nom, nom}>
+	[<h2 class="intertitre"[ title="(#BIO|attribut_html|couper{50,'&hellip;'})"]>(#NOM)</h2>]
+	<ul class="puce">
+	<B_cardinal>
+	<BOUCLE_cardinal(ARTICLES){id_auteur} />
+		[<li><a[ href="(#URL_AUTEUR)"] title="<:ecrire:info_articles_auteur:>">(#TOTAL_BOUCLE) <:spip:info_syndication_articles:></a></li>]
+	<//B_cardinal>
+	</ul>
+</BOUCLE_archives_parauteur>
+</B_archives_parauteur>
+	<p><:blognglop:article_aucun_dispo:></p>
+<//B_archives_parauteur>
+
+
+

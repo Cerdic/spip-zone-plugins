@@ -1,0 +1,28 @@
+<plugin>
+    <nom>Squelette Blog’n Glop</nom>
+
+
+    <auteur>[eM->http://spipistrelle.clinamen.org], [Denis Chenu->http://shnoulle.gsill.net]</auteur>
+    <licence>&#169; 2009 : El Murciélago, Denis Chenu  
+             _ Licence GNU/GPL http://www.gnu.org/licenses/</licence>
+    <version>2.0.1.1</version>
+  
+    <etat>test</etat>
+
+    <icon>blognglop.png</icon>
+    <description> Squelette Blog'n Glop version Plugin.
+
+	Pour personnaliser le plugin, vous pouvez consulter la documentation du squelette [Blog’n Glop->http://www.spip-contrib.net/?rubrique322]
+
+	Pour une configuration plus facile, ce squelette utilise les plugins [config (cfg)->http://www.spip-contrib.net/?rubrique575] et [palette->http://www.spip-contrib.net/?rubrique1118]</description>
+    <lien>http://www.spip-contrib.net/?rubrique322</lien>
+
+    <prefix>blognglop</prefix>
+
+    <fonctions>blognglop_fonctions.php</fonctions>
+    <options>blognglop_options.php</options>
+    
+    <necessite id="SPIP" version="[2.0.0;]" />
+    <utilise> id="cfg" version="[1.10.2;]" url="http://files.spip.org/spip-zone/cfg.zip"</utilise>
+    <utilise> id="palette" version="[1.2.1;]" url="http://files.spip.org/spip-zone/palette_2_0.zip"</utilise>
+</plugin>

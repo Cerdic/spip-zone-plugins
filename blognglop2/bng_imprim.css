@@ -1,0 +1,45 @@
+/****************************************************************************/
+/*  Feuille de style specifique a l'impression (squelettes Blog'n Glop) */
+/****************************************************************************/
+
+/***  Ne pas imprimer certains blocs ***/
+#entete, #hierarchie, #navigation, #extra, #pied, #fil_dariane, .navigo, .forum { display: none; }
+.repondre, .formulaire_spip { display: none; }
+.spip-admin, .spip-admin-float, .invisible { display: none; }
+img.spip_logos { display: none; }
+
+/***  Disposition des blocs ***/
+html body {padding : 0; border: 0; margin: 0; background:#FFF;}
+body #page { width: 100%; padding : 0; border: 0; margin: 0; background: transparent;}
+#page #conteneur {padding : 0; border: 0; margin: 0; background: transparent;}
+#conteneur #contenu {padding : 0.5cm; border: 0; margin: 0.5cm; background: transparent;}
+#contenu .cartouche {padding : 0; border: 0; margin: 0; background: transparent;}
+
+/***  Style du texte ***/
+html body {font : 12pt "Times New Roman", serif; text-align: justify; color: #000; }
+.cartouche h1 {font : 16pt "Times New Roman", serif; font-weight: bold; font-variant: small-caps; color: #000; }
+.cartouche .surtitre, .cartouche .soustitre {font  : 12pt "Times New Roman", serif; font-weight: bold; font-variant: small-caps; color: #666666; }
+.chapo {font : 12pt "Times New Roman", serif; font-weight: bold; color: #000; }
+h3.spip { font: 12pt "Times New Roman", serif; font-weight: bold; color: #000; }
+.ps, .notes, #documents_portfolio, #documents_joints, #sources_images {font : 10pt "Times New Roman", serif; color: #000;}
+#contenu h2.posttext {border: 0; font  : 10pt "Times New Roman", serif; font-weight: bold; color: #000; }
+q, blockquote, blockquote.spip {padding: 0.5em 1em ; border: 0 ; border-left: 2pt solid #666666; margin: 0.5em 1em;font : 10pt "Times New Roman", serif; font-style: italic; color: #666666; }
+/* Liens */
+a { text-decoration: none; color: #666666; }
+ /* Ne pas ajouter les url derrière les liens */
+a.spip_out:after, a.spip_glossaire:after, a.spip_mail:after { display: none;  }
+abbr.published { border:0;}
+
+/***  Garder une forme d'encart aux encarts ***/
+/* ceux-ci perdent leurs caracteristiques par defaut (?) */
+div.breve_insert {
+	text-align: justify;
+	width: 35%;
+	margin: 0.5em;
+	border: 1px solid #000000;
+	padding: 0.25em;}
+
+div.breve_insert  h1 {font : 10pt "Times New Roman", serif; color: #000; font-weight: bold; font-variant: small-caps;}
+div.breve_insert h3.spip {font : 10pt "Times New Roman", serif; color: #000; font-weight: bold; }
+div.breve_insert .notes, div.b_encart #encart_sources_images { font: 9pt "Times New Roman", serif; color: #000;}
+div.breve_insert q, div.b_encart blockquote {font : 10pt "Times New Roman", serif; color: #000; font-style: italic; }

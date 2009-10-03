@@ -1,0 +1,24 @@
+[(#REM) Liste des dernières brèves publiées
+	dans le contexte du secteur ou, à défaut, sur tout le site
+	sont exclues les brèves liées à l'affichage]
+
+<BOUCLE_breves_exclure_nav(BREVES) {type=Affichage}{doublons ExclureBreves} />
+<B_liste_dernieres_breves>
+	<h1 title="<:ecrire:icone_ecrire_nouvel_article:>"><:blognglop:breves_liste_h1:></h1>
+	[(#ANCRE_PAGINATION)]
+	<ul>
+<BOUCLE_liste_dernieres_breves(BREVES) {id_rubrique}{!par date}{doublons ExclureBreves}{pagination 3}>
+	[<li><a href="(#URL_BREVE)"[ title="(#INTRODUCTION|attribut_html|couper{80,'&hellip;'})"]>[(#TITRE|supprimer_numero|couper{50,'&hellip;'})]</a></li>]
+</BOUCLE_liste_dernieres_breves>
+	</ul>
+	[<p class="pagination">(#PAGINATION)</p>]
+</B_liste_dernieres_breves>
+	<B_liste_dernieres_breves_defaut>
+		<h1 title="<:dernieres_breves:>"><:blognglop:breves_liste_h1:></h1>
+		<ul>
+	<BOUCLE_liste_dernieres_breves_defaut(BREVES){!par date}{doublons ExclureBreves}{0,3}>
+		[<li><a href="(#URL_BREVE)"[ title="(#INTRODUCTION|attribut_html|couper{80,'&hellip;'})"]>[(#TITRE|supprimer_numero|couper{50,'&hellip;'})]</a></li>]
+	</BOUCLE_liste_dernieres_breves_defaut>
+		</ul>
+	</B_liste_dernieres_breves_defaut>
+<//B_liste_dernieres_breves>

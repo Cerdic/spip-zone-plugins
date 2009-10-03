@@ -1,0 +1,94 @@
+#CACHE{24*60*60}
+<BOUCLE_principale(BREVES) {id_breve}>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+	<title>[(#TITRE|supprimer_numero|attribut_html)]</title>
+	[<meta name="description" lang="#LANG" content="(#TITRE|supprimer_numero|attribut_html).[ (#INTRODUCTION|couper{150,'&hellip;'}|attribut_html)]" />]
+	<B_motsclefs_meta><meta name="keywords" lang="#LANG" content="<BOUCLE_motsclefs_meta(MOTS){id_breve}{type!=Affichage}{", "}>[(#TITRE|supprimer_numero|attribut_html)]</BOUCLE_motsclefs_meta>" /></B_motsclefs_meta>
+	[<meta name="author" content="(#NOM_SITE_SPIP|attribut_html)" />]
+	[<meta name="date" content="(#DATE|date_iso)" />]
+	[(#INCLURE{fond=inc-head})]
+	[(#REM) Lien vers le flux RSS des breves ]
+	<link rel="alternate" type="application/rss+xml" title="<:dernieres_breves:>" href="#URL_PAGE{backend-breves}" />
+</head>
+
+<body class="page_breve">
+<div id="page">
+
+	[(#REM) Inclusion statique de l'entete de la page]
+	[(#INCLURE{fond=inc-entete}{env}{id_rubrique=#ID_RUBRIQUE})]
+	
+	[(#REM) Inclusion statique du fil d'Ariane ]
+	[(#INCLURE{fond=inc-ariane}{env}{id_rubrique=#ID_RUBRIQUE})]
+
+	[(#REM) Contenu : corps de la breve ]
+	<div id="conteneur">
+	<div id="contenu">
+
+        	[(#REM) Navigation dans les breves]
+		<div class="navigo">
+			<BOUCLE_breves_exclure_navigo(BREVES) {type=Affichage}{doublons ExclureBreves} />
+			[(#REM) Breves precedante par ordre chronologique si elle existe]
+			<BOUCLE_precedent(BREVES){age_relatif>=0}{!par date}{doublons ExclureBreves}{1,1}>
+				[<div class="art_prec"><a href="#URL_BREVE"[ title="(#INTRODUCTION|attribut_html|couper{50,'&hellip;'})"]>&laquo; (#TITRE|supprimer_numero|couper{37,'&hellip;'})</a></div>]
+			</BOUCLE_precedent>
+			[(#REM) Breve suivante par ordre chronologique si elle existe]
+			<BOUCLE_suivant(BREVES){age_relatif<0}{par date}{doublons ExclureBreves}{0,1}>
+				[<div class="art_suiv"><a href="#URL_BREVE"[ title="(#INTRODUCTION|attribut_html|couper{50,'&hellip;'})"]>(#TITRE|supprimer_numero|couper{37,'&hellip;'}) &raquo;</a></div>]
+			</BOUCLE_suivant>
+		</div>
+
+		<div class="cartouche">
+			[(#LOGO_BREVE|
+				|inserer_attribut{'alt',[(#TITRE|supprimer_numero|attribut_html)]}
+				|inserer_attribut{'title',[(#TITRE|supprimer_numero|attribut_html)]}
+				|image_reduire{120,120})]
+			[<h1 class="#EDIT{titre}">(#TITRE|supprimer_numero)</h1>]
+
+			<p><:blognglop:publie:> <:blognglop:date_le:> <abbr class="published" title="[(#DATE|date_iso)]">[(#DATE|nom_jour) ][(#DATE|affdate)]</abbr></p>
+	    
+			<B_motsclefs_associes>
+	    			<p><img src="#CHEMIN{tags.png}" alt="<:blognglop:mots_alt:>" title="<:blognglop:mots_title:>" width="20" height="9" class="format_png" />
+			<BOUCLE_motsclefs_associes(MOTS) {id_breve} {type=Themes}{par num titre, titre}{" - "}>
+				<a href="#URL_MOT" title="[(#DESCRIPTIF|sinon{<:blognglop:themes_infobis:>}|attribut_html)]">[(#TITRE|supprimer_numero|strtolower)]</a>
+			</BOUCLE_motsclefs_associes>
+				</p>
+			</B_motsclefs_associes>
+		</div>
+        
+		[<div class="#EDIT{texte} texte">(#TEXTE|image_reduire{400})</div>]
+		
+		[(#REM) Gestion du portfolio et des documents
+			Le critere {env} permet de passer d'autres arguments de la page
+			par exemple l'id_document choisi pour un affichage complet
+		][(#INCLURE{fond=inc-documents}{id_breve}{env})]
+        
+		[<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
+        
+		[(#REM) Forum de la breve
+			NB : pour desactiver les forums de breve, supprimez simplement les lignes ci-dessous ]
+		<a href="#forum" name="forum" id="forum"></a>
+		<INCLURE{fond=inc-forum}{id_breve}>
+		[<p class="repondre"><a href="(#PARAMETRES_FORUM|url_reponse_forum)" rel="noindex nofollow"><:repondre_breve:></a></p>]
+
+	</div><!--#contenu-->
+	</div><!--#conteneur-->
+    
+    	[(#REM) Menu de navigation laterale gauche]
+		<div id="navigation">
+			<INCLURE{fond=inc-navigation}{env}{id_secteur=#ID_SECTEUR}/>
+		</div><!--#navigation-->
+	
+	[(#REM) Menu de navigation laterale droite]
+		<div id="extra">
+			<INCLURE{fond=inc-extra}{env}{id_rubrique=#ID_RUBRIQUE}/>
+		</div><!--#extra-->
+
+	[(#REM) Inclusion statique du pied de page ]
+	[(#INCLURE{fond=inc-pied})]
+
+</div><!--#page-->
+</body>
+</html>
+</BOUCLE_principale>

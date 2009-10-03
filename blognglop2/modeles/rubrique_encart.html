@@ -1,0 +1,23 @@
+[(#REM) Modele affichant une cartouche contenant un resume de la rubrique]
+
+<B_rubrique_encart>
+	<div class="resume_encart">
+		<BOUCLE_rubrique_encart(RUBRIQUES) {id_rubrique}>
+			[<div class="logo">(#LOGO_RUBRIQUE_NORMAL
+				|#URL_RUBRIQUE
+				|inserer_attribut{'alt',[(#TITRE|supprimer_numero|attribut_html)]}
+				|inserer_attribut{'title',[(#TITRE|supprimer_numero|attribut_html)]}
+				|image_reduire{75})</div>]
+			[<h1><a href="#URL_RUBRIQUE">(#TITRE|supprimer_numero)</a></h1>]
+			[<div class="accroche">(#DESCRIPTIF|PtoBR|paragrapher)</div>]
+			<p class="infos">[(#DATE|jour)].[(#DATE|mois)].[(#DATE|annee)] &#124; <BOUCLE_decompte(FORUMS) {id_rubrique} {plat} />[(#TOTAL_BOUCLE|>{0}|?{#TOTAL_BOUCLE,<:blognglop:pas_de:>}) [(#TOTAL_BOUCLE|=={1}|?{<:blognglop:commentaire:>,<:blognglop:commentaires:>})]]<//B_decompte><B_rubinfo><BOUCLE_rubinfo(RUBRIQUES) {id_enfant}>[ &#124; <a href="(#URL_RUBRIQUE)"[ title="(#DESCRIPTIF|attribut_html)"]>[(#TITRE|supprimer_numero|couper{30})]</a>] [(#LOGO_RUBRIQUE_NORMAL|
+				|inserer_attribut{'alt',[(#TITRE|supprimer_numero|attribut_html)]}
+				|inserer_attribut{'title',[(#TITRE|supprimer_numero|attribut_html)]}
+				|image_reduire{25})]</BOUCLE_rubinfo></B_rubinfo>[ &#124; <a href="(#URL_SITE_SPIP)"[ title="(#DESCRIPTIF|attribut_html)"]>[(#NOM_SITE_SPIP|supprimer_numero|couper{30})]</a>] [(#LOGO_SITE_SPIP_NORMAL|
+				|inserer_attribut{'alt',[(#NOM_SITE_SPIP|supprimer_numero|attribut_html)]}
+				|inserer_attribut{'title',[(#NOM_SITE_SPIP|supprimer_numero|attribut_html)]}
+				|image_reduire{25})]<//B_rubinfo></p>
+		</BOUCLE_rubrique_encart>		
+	</div>
+</B_rubrique_encart>
+			

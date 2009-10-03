@@ -1,0 +1,27 @@
+[(#REM) Modele affichant une cartouche contenant un resume d'un message de forum]
+
+<B_forum_encart>
+	<div class="resume_encart">
+		<BOUCLE_forum_encart(FORUMS) {id_forum}>
+			[<h1><a href="#URL_FORUM">(#TITRE|supprimer_numero)</a></h1>]
+			[<div class="accroche">(#INTRODUCTION|PtoBR|paragrapher)</div>]
+			<p class="infos">[(#NOM)] &#124; [(#DATE|jour)].[(#DATE|mois)].[(#DATE|annee)] &#124; <BOUCLE_decompte(FORUMS) {id_parent} />[(#TOTAL_BOUCLE|>{0}|?{#TOTAL_BOUCLE,<:blognglop:pas_de:>}) [(#TOTAL_BOUCLE|=={1}|?{<:blognglop:commentaire:>,<:blognglop:commentaires:>})]]<//B_decompte> &#124;
+			<BOUCLE_parent_art(ARTICLES) {id_article=#ID_ARTICLE}>[<a href="(#URL_ARTICLE)"[ title="(#DESCRIPTIF|attribut_html)"]>[(#TITRE|supprimer_numero|couper{30})]</a>] [(#LOGO_ARTICLE|
+				|inserer_attribut{'alt',[(#TITRE|supprimer_numero|attribut_html)]}
+				|inserer_attribut{'title',[(#TITRE|supprimer_numero|attribut_html)]}
+				|image_reduire{25})]</BOUCLE_parent_art>
+			<BOUCLE_parent_rub(RUBRIQUES) {id_rubrique=#ID_RUBRIQUE}>[<a href="(#URL_RUBRIQUE)"[ title="(#DESCRIPTIF|attribut_html)"]>[(#TITRE|supprimer_numero|couper{30})]</a>] [(#LOGO_RUBRIQUE_NORMAL|
+				|inserer_attribut{'alt',[(#TITRE|supprimer_numero|attribut_html)]}
+				|inserer_attribut{'title',[(#TITRE|supprimer_numero|attribut_html)]}
+				|image_reduire{25})]</BOUCLE_parent_rub>
+			</p>
+			<BOUCLE_parent_bre(BREVES) {id_breve=#ID_BREVE}>[<a href="(#URL_BREVE)"[ title="(#INTRODUCTION|attribut_html)"]>[(#TITRE|supprimer_numero|couper{30})]</a>] [(#LOGO_RUBRIQUE_NORMAL|
+				|inserer_attribut{'alt',[(#TITRE|supprimer_numero|attribut_html)]}
+				|inserer_attribut{'title',[(#TITRE|supprimer_numero|attribut_html)]}
+				|image_reduire{25})]</BOUCLE_parent_bre>
+			<BOUCLE_parent_for(FORUMS) {id_enfant}>[<a href="(#URL_FORUM)"[ title="(#INTRODUCTION|attribut_html)"]>[(#TITRE|supprimer_numero|couper{30})]</a>]</BOUCLE_parent_for>
+			</p>
+		</BOUCLE_forum_encart>		
+	</div>
+</B_forum_encart>
+			

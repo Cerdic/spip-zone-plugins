@@ -1,0 +1,124 @@
+#CACHE{60*60}
+
+[(#REM) Menu droite informations extérieures et utilitaires, contient :
+	* Informations externes
+		- Site associés à un article, une brève, un auteur, un mot, une recherche
+		- Sites "à l'affiche"
+		- Liens vers autres sites (blogroll)
+		- Liens vers articles issus de sites syndiqués
+	* Utilitaires
+		- Lien vers la syndication du site (fichier backend)
+		- Lien vers l'espace privé
+		- Lien de déconnexion. ]
+
+[(#REM) Si on est dans un article afficher le lien associe]
+<BOUCLE_liste_site_article(ARTICLES) {id_article}>
+[<h1 title="<:blognglop:site_lien_info:>"><:voir_en_ligne:></h1>
+	<ul>
+	<li><a href="(#URL_SITE)" title="<:blognglop:site_lien_infobis:>">[(#NOM_SITE|couper{45,'&hellip;'}|sinon{[(#URL_SITE|couper{20,'&hellip;'})]})]</a></li>
+	</ul>]
+</BOUCLE_liste_site_article>
+
+[(#REM) Si on est dans une brève afficher le lien associe]
+<BOUCLE_liste_site_breve(BREVES) {id_breve}>
+[<h1 title="<:blognglop:site_lien_info:>"><:voir_en_ligne:></h1>
+	<ul>
+	<li><a href="(#URL_SITE)" title="<:blognglop:site_lien_infobis:>">[(#NOM_SITE|couper{45,'&hellip;'}|sinon{[(#URL_SITE|couper{20,'&hellip;'})]})]</a></li>
+	</ul>]
+</BOUCLE_liste_site_breve>
+
+[(#REM) Si on est dans un auteur afficher le lien associe]
+<BOUCLE_liste_site_auteur(AUTEURS) {id_auteur}>
+[<h1 title="<:blognglop:site_lien_info:>"><:voir_en_ligne:></h1>
+	<ul>
+	<li><a href="(#URL_SITE)" title="<:blognglop:site_lien_infobis:>">[(#NOM_SITE|couper{45,'&hellip;'}|sinon{[(#URL_SITE|couper{20,'&hellip;'})]})]</a></li>
+	</ul>]
+</BOUCLE_liste_site_auteur>
+
+[(#REM) Si on est dans un mot afficher les sites associes]
+<B_liste_sites_mot>
+	<h1 title="<:ecrire:info_sites_lies_mot:>"><:sites_web:></h1>
+	<ul>
+<BOUCLE_liste_sites_mot(SITES) {id_mot}{par num nom_site, nom_site}>
+		[<li><a href="(#URL_SITE)"[ title="(#DESCRIPTIF|attribut_html|couper{45,'&hellip;'})"]>[(#NOM_SITE|supprimer_numero|couper{45,'&hellip;'}|sinon{[(#URL_SITE|couper{20,'&hellip;'})]})]</a></li>]
+</BOUCLE_liste_sites_mot>
+	</ul>
+</B_liste_sites_mot>
+
+[(#REM) Si on est dans une recherche afficher les sites trouvés]
+<B_liste_sites_rech>
+	<h1 title="<:ecrire:info_sites_lies_mot:>"><:sites_web:></h1>
+	<ul>
+<BOUCLE_liste_sites_rech(SITES) {recherche} {!par points}>
+		[<li><a href="(#URL_SITE)"[ title="(#DESCRIPTIF|attribut_html|couper{45,'&hellip;'})"]>[(#NOM_SITE|supprimer_numero|couper{45,'&hellip;'}|sinon{[(#URL_SITE|couper{20,'&hellip;'})]})]</a></li>]
+</BOUCLE_liste_sites_rech>
+	</ul>
+</B_liste_sites_rech>
+
+[(#REM) Sites a l'affiche qui apparaissent avec leur logo (associes au mot-clef  "Affiche"). ]
+
+<B_liste_sites_affiche>
+	<h1 title="<:blognglop:sites_affiche_info:>"><:blognglop:sites_affiche_h1:></h1>
+<BOUCLE_liste_sites_affiche(SITES) {titre_mot=Affiche}{par num nom_site, nom_site}{doublons NonLien}>
+	[<div class="affiche">
+		(#LOGO_SITE|#URL_SITE
+			|inserer_attribut{'alt',[(#NOM_SITE|supprimer_numero|attribut_html)]}
+			|inserer_attribut{'title',[(#DESCRIPTIF|couper{45,'&hellip;'}|attribut_html)]}
+			|image_reduire{100})
+		<br />
+		[<a href="(#URL_SITE)"[ title="(#URL_SITE|attribut_html|couper{45,'&hellip;'})"]>[(#NOM_SITE|supprimer_numero|couper{45,'&hellip;'}|sinon{[(#URL_SITE|couper{20,'&hellip;'})]})]</a>]
+	</div>]
+</BOUCLE_liste_sites_affiche>
+</B_liste_sites_affiche>
+
+[(#REM) Liste des sites référencés
+	dans le contexte d'une rubrique ou, à défaut, les sites référencés associés au mot-clef "Une"]
+<B_liste_sites_references>
+	<h1 title="<:ecrire:titre_sites_references_rubrique:>"><:spip:icone_sites_references:></h1>
+	<ul>
+<BOUCLE_liste_sites_references(SITES) {id_rubrique=#ID_RUBRIQUE}{doublons NonLien}{par num nom_site, nom_site}>
+		[<li><a href="(#URL_SITE)"[ title="(#DESCRIPTIF|attribut_html|couper{45,'&hellip;'})"]>[(#NOM_SITE|supprimer_numero|couper{45,'&hellip;'}|sinon{[(#URL_SITE|couper{20,'&hellip;'})]})]</a></li>]
+</BOUCLE_liste_sites_references>
+	</ul>
+</B_liste_sites_references>
+	<B_liste_sites_une>
+		<h1 title="<:sur_web:>"><:spip:icone_sites_references:></h1>
+		<ul>
+	<BOUCLE_liste_sites_une(SITES) {titre_mot=Une} {par num nom_site, nom_site}>
+			[<li><a href="(#URL_SITE)"[ title="(#DESCRIPTIF|attribut_html|couper{45,'&hellip;'})"]>[(#NOM_SITE|supprimer_numero|couper{45,'&hellip;'}|sinon{[(#URL_SITE|couper{20,'&hellip;'})]})]</a></li>]
+	</BOUCLE_liste_sites_une>
+		</ul>
+	</B_liste_sites_une>
+<//B_liste_sites_references>
+	
+[(#REM) Liste des derniers articles issus des sites syndiqués
+	dans le contexte d'une rubrique ou, à défaut, le dernier article de chacun des sites syndiques toutes rubriques confondues]
+<B_liste_dernieres_syndication>
+	<h1 title="<:ecrire:titre_dernier_article_syndique:>"><:nouveautes_web:></h1>
+	<ul>
+<BOUCLE_liste_dernieres_syndication(SYNDIC_ARTICLES) {id_rubrique=#ID_RUBRIQUE}{!par date} {0,7}>
+		[<li><a href="#URL_ARTICLE"[ title="(#SOURCE|sinon{[(#NOM_SITE|supprimer_numero|couper{45,'&hellip;'}|sinon{[(#URL_SITE|couper{20,'&hellip;'})]})]})[ - (#DATE|affdate)]"]>(#TITRE*|strtolower|ucfirst|couper{45,'&hellip;'})</a></li>]
+</BOUCLE_liste_dernieres_syndication>
+	</ul>
+</B_liste_dernieres_syndication>
+	<B_sites_syndiques_une>
+		<h1 title="<:ecrire:titre_dernier_article_syndique:>"><:nouveautes_web:></h1>
+		<ul>
+	<BOUCLE_sites_syndiques_une(SITES){syndication=oui}{par num nom_site, nom_site}>
+		<BOUCLE_articles_syndiques_une(SYNDIC_ARTICLES) {id_syndic}{!par date} {0,1}>
+			[<li><a href="#URL_ARTICLE"[ title="(#SOURCE|sinon{[(#NOM_SITE|supprimer_numero|couper{45,'&hellip;'}|sinon{[(#URL_SITE|couper{20,'&hellip;'})]})]})[ - (#DATE|affdate)]"]>(#TITRE*|strtolower|ucfirst|couper{45,'&hellip;'})</a></li>]
+		</BOUCLE_articles_syndiques_une>
+	</BOUCLE_sites_syndiques_une>
+		</ul>
+	</B_sites_syndiques_une>
+<//B_liste_dernieres_syndication>
+
+[(#REM) Gestion du site. ]
+
+<h1 title="<:blognglop:admin_info:>"><:blognglop:admin_h1:></h1>
+<ul>
+	<li><a href="#URL_PAGE{backend}" rel="alternate" title="<:syndiquer_site:>"><img src="#CHEMIN{feed.png}" alt="<:icone_suivi_activite:>" width="16" height="16" />&nbsp;RSS&nbsp;2.0</a></li>
+	[<li>(#AUTORISER{ecrire})<a href="#EVAL{_DIR_RESTREINT_ABS}"><:espace_prive:></a></li>]
+	[<li>(#SESSION{id_auteur}|?{'',' '})<a href="[(#URL_PAGE{login}|parametre_url{url,#SELF})]" rel="nofollow" class='login_modal'><:lien_connecter:></a></li>]
+	[<li>(#SESSION{id_auteur}|?{' '})<a href="#URL_LOGOUT" rel="nofollow"><:icone_deconnecter:></a></li>]
+</ul>

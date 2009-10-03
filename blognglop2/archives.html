@@ -1,0 +1,46 @@
+#CACHE{7*24*60*60}
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+	<title><:blognglop:archives:> - [(#NOM_SITE_SPIP|attribut_html)]</title>
+	[<meta name="description" content="<:blognglop:archives_de:> (#NOM_SITE_SPIP|attribut_html)" />]
+	[<meta name="keywords" lang="#LANG" content="<:blognglop:archives:>, (#NOM_SITE_SPIP|attribut_html)" />]
+	[<meta name="date" content="(#DATE|date_iso)" />]
+	[(#INCLURE{fond=inc-head})]
+</head>
+
+<body class="page_archives">
+<div id="page">
+
+	[(#REM) Inclusion statique de l'entete de la page]
+	[(#INCLURE{fond=inc-entete})]
+	
+	[(#REM) Inclusion statique du fil d'Ariane ]
+	[(#INCLURE{fond=inc-ariane}{env})]
+
+
+	[(#REM) Contenu principal : contenu du mot-cle ]
+	<div id="conteneur">
+	<div id="contenu">
+		[(#ENV{tri,antichron}|=={antichron}|?{' ',''})<INCLURE{fond=inc-archives_date}{date=#ENV{ladate}}>]
+		[(#ENV{tri}|=={auteur}|?{' ',''})<INCLURE{fond=inc-archives_auteur}>]
+		[(#ENV{tri}|=={breve}|?{' ',''})<INCLURE{fond=inc-archives_breve}{date=#ENV{ladate}}>]
+	</div><!--#contenu-->
+	</div><!--#conteneur-->
+
+	[(#REM) Menu de navigation laterale gauche]
+	<div id="navigation">
+		<INCLURE{fond=inc-navigation}/>
+	</div><!--#navigation-->
+	
+	[(#REM) Menu de navigation laterale droite]
+	<div id="extra">
+		<INCLURE{fond=inc-extra}/>
+	</div><!--#extra-->
+
+	[(#REM) Inclusion statique du pied de page ]
+	[(#INCLURE{fond=inc-pied})]
+
+</div><!--#page-->
+</body>
+</html>

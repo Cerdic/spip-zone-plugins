@@ -1,0 +1,20 @@
+[(#REM) Modele permettant d'utiliser les breves comme des encadrés dans des articles]
+
+<B_insert>
+	<div class="breve_insert" style="float: #ENV{align};">
+<BOUCLE_insert(BREVES) {id_breve}>
+	[(#LOGO_BREVE|
+		|inserer_attribut{'alt',[(#TITRE|supprimer_numero|attribut_html)]}
+		|inserer_attribut{'title',[(#TITRE|supprimer_numero|attribut_html)]}
+		|image_reduire{80,80})]
+	[<h1 class="#EDIT{titre}">(#TITRE|supprimer_numero)</h1>]
+	[<p>[(#PUCE)] <a[ href="(#URL_SITE)"] title="<:voir_en_ligne:>">(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})</a></p>]
+	[<div class="#EDIT{texte} texte">(#TEXTE|image_reduire{75}|lignes_longues{30})</div>]
+	[(#REM) Gestion du portfolio et des documents
+		Le critere {env} permet de passer d'autres arguments de la page
+		par exemple l'id_document choisi pour un affichage complet
+		][(#INCLURE{fond=inc-documents}{id_breve}{env})]
+	[<div class="notes"><h2 class="posttext"><:info_notes:></h2>(#NOTES)</div>]
+</BOUCLE_insert>
+	</div>
+</B_insert>

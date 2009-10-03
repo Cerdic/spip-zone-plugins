@@ -1,0 +1,33 @@
+[(#REM) Fil d'Ariane ]
+
+<div id="fil_dariane">
+	<a href="#URL_SITE_SPIP" [ title="(#NOM_SITE_SPIP|attribut_html)"]><:accueil_site:></a>
+	<BOUCLE_ariane_hierarchie(HIERARCHIE){id_rubrique}>
+		&gt; <a href="#URL_RUBRIQUE" [ title="(#DESCRIPTIF|attribut_html|couper{50,'&hellip;'})"]>[(#TITRE|supprimer_numero|couper{80,'hellip;'})]</a>
+	</BOUCLE_ariane_hierarchie>
+	<BOUCLE_ariane_rubrique(RUBRIQUES){id_rubrique}>
+		[&gt; <a href="#URL_RUBRIQUE" [ title="(#DESCRIPTIF|attribut_html|couper{50,'&hellip;'})"]>(#TITRE|supprimer_numero|couper{80})]</a>
+	</BOUCLE_ariane_rubrique>
+	<BOUCLE_ariane_article(ARTICLES){id_article}>
+		[&gt; (#TITRE|supprimer_numero|couper{80})]
+	</BOUCLE_ariane_article>
+	<BOUCLE_ariane_breve(BREVES){id_breve}>
+		[&gt; (#TITRE|supprimer_numero|couper{80})]
+	</BOUCLE_ariane_breve>
+	<BOUCLE_ariane_auteur(AUTEURS){id_auteur}>
+		[&gt; <a href="[(#URL_PAGE{archives,tri=auteur})]" title="<:ecrire:icone_afficher_auteurs:>"><:info_auteurs:></a> &gt; (#NOM|supprimer_numero|couper{80})]
+	</BOUCLE_ariane_auteur>
+	<BOUCLE_ariane_mot(MOTS){id_mot}>
+		[[&gt; <span title="<:mots_clefs:>">(#TYPE)</span> ]&gt;  <a href="(#URL_MOT)" [ title="(#DESCRIPTIF|attribut_html|couper{50,'&hellip;'})"]>[(#TITRE|supprimer_numero|couper{80})]</a>]
+	</BOUCLE_ariane_mot>
+	<BOUCLE_ariane_site(SITES){id_syndic}>
+		[&gt; (#TITRE|supprimer_numero|couper{80})]
+	</BOUCLE_ariane_site>
+	<BOUCLE_ariane_forum(FORUMS){id_forum}>
+		[&gt; (#TITRE|supprimer_numero|couper{80})]
+	</BOUCLE_ariane_forum>
+	[&gt; <:resultats_recherche:> &#171;&nbsp;(#RECHERCHE)&nbsp;&#187;]
+	[&gt; <a[ href="(#URL_PAGE{archives})"] title="<:blognglop:archives_vers_sommaire:>">(#ENV{page}|=={archives}|?{<:blognglop:archives:>,''})</a>[ (#ENV{tri}|=={auteur}|?{<:blognglop:archives_par_auteur:>,<:blognglop:archives_par_date:>})][ &gt; <:blognglop:archives_de:> (#ENV{ladate}|affdate_mois_annee)]]
+	[&gt; (#ENV{page}|=={statistiques}|?{<:spip:icone_statistiques:>,''})]
+	[&gt; (#ENV{page}|=={forum}|?{<:poster_message:>,''})]
+</div>

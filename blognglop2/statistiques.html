@@ -1,0 +1,165 @@
+#CACHE{24*60*60}
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="#LANG_DIR" lang="#LANG">
+<head>
+	<title><:spip:icone_statistiques_visites:>[ - (#NOM_SITE_SPIP|attribut_html)]</title>
+	[<meta name="description" content="<:spip:icone_statistiques:> (#NOM_SITE_SPIP|attribut_html)." />]
+	[<meta name="date" content="(#DATE|date_iso)" />]
+	[(#INCLURE{fond=inc-head})]
+</head>
+
+<body class="page_statistiques">
+<div id="page">
+
+	[(#REM) Inclusion statique de l'entete de la page]
+	[(#INCLURE{fond=inc-entete})]
+
+	[(#REM) Inclusion statique du fil d'Ariane ]
+	[(#INCLURE{fond=inc-ariane}{env})]
+	
+	[(#REM) Contenu principal : contenu du mot-cle ]
+	<div id="conteneur">
+	<div id="contenu">
+
+		<div class="cartouche">
+			<h1 class="#EDIT{titre}"><:spip:titre_statistiques:></h1>
+		</div>
+		
+		[(#REM) Statistiques generales ]
+		<h2 class="intertitre"><:blognglop:quelques_chiffres:></h2>
+		
+		<BOUCLE_compteur_auteurs(AUTEURS) />
+		#SET{nb_auteurs,#TOTAL_BOUCLE}
+		<//B_compteur_auteurs>
+
+		<BOUCLE_compteur_articles(ARTICLES) />
+		#SET{nb_articles,#TOTAL_BOUCLE}
+		<//B_compteur_articles>
+		
+		<BOUCLE_breves_exclure_stats(BREVES) {type=Affichage}{doublons ExclureBreves} />
+		<BOUCLE_compteur_breves(BREVES){doublons ExclureBreves} />
+		#SET{nb_breves,#TOTAL_BOUCLE}
+		<//B_compteur_breves>
+		
+		<BOUCLE_compteur_sites_ref(SITES){syndication=non} />
+		#SET{nb_sites_ref,#TOTAL_BOUCLE}
+		<//B_compteur_sites_ref>
+		
+		<BOUCLE_compteur_sites_synd(SITES){syndication=oui} />
+		#SET{nb_sites_synd,#TOTAL_BOUCLE}
+		<//B_compteur_sites_synd>
+		
+		<BOUCLE_compteur_documents(DOCUMENTS) />
+		#SET{nb_documents,#TOTAL_BOUCLE}
+		<//B_compteur_documents>
+		
+		<BOUCLE_compteur_rubriques(RUBRIQUES) />
+		#SET{nb_rubriques,#TOTAL_BOUCLE}
+		<//B_compteur_rubriques>
+		
+		<B_compteur_threads>
+		<BOUCLE_compteur_threads(FORUMS) {id_parent==0} />
+		#SET{nb_discussions,#TOTAL_BOUCLE}
+		<//B_compteur_threads>
+		
+		<B_compteur_forums>
+		<BOUCLE_compteur_forums(FORUMS) {plat}/>
+		#SET{nb_messages,#TOTAL_BOUCLE}
+		<//B_compteur_forums>
+		
+		<p class="texte"><:blognglop:statistiques_informations{auteurs=#GET{nb_auteurs}, articles=#GET{nb_articles}, breves=#GET{nb_breves}, sites_ref=#GET{nb_sites_ref}, sites_synd=#GET{nb_sites_synd}, documents=#GET{nb_documents}, rubriques=#GET{nb_rubriques}, visites=#POPULARITE_SITE, discussions=#GET{nb_discussions}, messages=#GET{nb_messages}}:></p>
+		
+		
+		[(#REM) Liste des themes.
+		* la densite de la couleur indique leur popularite/frequence. ]
+		<B_tags_calpop>
+		<?php 
+			$max_popu_tags=0;
+			$max_freq_tags=0;
+		?>
+		<BOUCLE_tags_calpop(MOTS){type=Themes}>
+			<?php 
+				$courant_popu=0;
+				$courant_freq=0;
+			?>
+			<BOUCLE_lesarticles_calpop(ARTICLES){id_mot}>
+				<?php 
+					$courant_popu+=#POPULARITE_ABSOLUE;
+					$courant_freq++;
+				?>
+			</BOUCLE_lesarticles_calpop>
+			<BOUCLE_lesbreves_calpop(BREVES){id_mot}>
+				<?php 
+					$courant_freq++;
+				?>
+			</BOUCLE_lesbreves_calpop>
+			<BOUCLE_lesrubriques_calpop(RUBRIQUES){id_mot}>
+				<?php 
+					$courant_freq++;
+				?>
+			</BOUCLE_lesrubriques_calpop>
+				<?php 
+					$tag_popu["#TITRE"]=$courant_popu;
+					$tag_freq["#TITRE"]=$courant_freq;
+					$max_popu_tags=max($max_popu_tags,$tag_popu["#TITRE"]);
+					$max_freq_tags=max($max_freq_tags,$tag_freq["#TITRE"]);
+				?>
+
+		</BOUCLE_tags_calpop>
+			<?php 
+				if($max_popu_tags!=0) {
+					$popu_tags_ratio=(255/$max_popu_tags);}
+				if($max_freq_tags!=0) {
+					$freq_tags_ratio=(255/$max_freq_tags);}
+			?>
+		</B_tags_calpop>
+				
+		[(#REM) Importance des thèmes en fonction du nombre d'objets éditoriaux qu'ils indexent ]
+		<h2 class="intertitre"><:blognglop:statistiques_freq_themes:></h2>
+		<p class="texte"><:blognglop:statistiques_freq_themes_info:></p>
+
+		<B_tags_affiche_freq>
+		<p class="nuage_mots">
+		<BOUCLE_tags_affiche_freq(MOTS){type=Themes}{par hasard}>
+			<?php $tag_couleur=255-floor($tag_freq["#TITRE"]*$freq_tags_ratio); ?>
+			[<a href="#URL_MOT" title="Acc&eacute;dez aux articles associ&eacute;s"><span style="font-size: 1.21em; color: rgb(<?php echo($tag_couleur); ?>,<?php echo($tag_couleur); ?>,<?php echo($tag_couleur); ?>);">(#TITRE)</span></a>]
+		</BOUCLE_tags_affiche_freq>
+		</p>
+		</B_tags_affiche_freq>
+			<p class="texte">Aucun th&egrave;me n'est disponible</p>
+		<//B_tags_affiche_freq>
+		
+		[(#REM) Importance des thèmes en fonction de la popularité des articles associés ]
+		<h2 class="intertitre"><:blognglop:statistiques_popu_themes:></h2>
+		<p class="texte"><:blognglop:statistiques_popu_themes_info:></p>
+
+		<B_tags_affiche>
+		<p class="nuage_mots">
+		<BOUCLE_tags_affiche(MOTS){type=Themes}{par hasard}>
+			<?php $tag_couleur=255-floor($tag_popu["#TITRE"]*$popu_tags_ratio); ?>
+			[<a href="#URL_MOT" title="Acc&eacute;dez aux articles associ&eacute;s"><span style="font-size: 1.21em; color: rgb(<?php echo($tag_couleur); ?>,<?php echo($tag_couleur); ?>,<?php echo($tag_couleur); ?>);">(#TITRE)</span></a>]
+		</BOUCLE_tags_affiche>
+		</p>
+		</B_tags_affiche>
+			<p class="texte">Aucun th&egrave;me n'est disponible</p>
+		<//B_tags_affiche>
+
+	</div><!--#contenu-->
+	</div><!--#conteneur-->
+
+	[(#REM) Menu de navigation laterale gauche]
+	<div id="navigation">
+		<INCLURE{fond=inc-navigation}/>
+	</div><!--#navigation-->
+	
+	[(#REM) Menu de navigation laterale droite]
+	<div id="extra">
+		<INCLURE{fond=inc-extra}/>
+	</div><!--#extra-->
+
+	[(#REM) Inclusion statique du pied de page ]
+	[(#INCLURE{fond=inc-pied})]
+
+</div><!--#page-->
+</body>
+</html>

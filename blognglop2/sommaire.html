@@ -1,0 +1,52 @@
+#CACHE{8*60*60}
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+	<title>[(#NOM_SITE_SPIP|attribut_html)]</title>
+	[<meta name="description" lang="#LANG" content="(#DESCRIPTIF_SITE_SPIP|attribut_html)" />]
+	<B_motsclefs_meta><meta name="keywords" lang="#LANG" content="<BOUCLE_motsclefs_meta(MOTS) {type!=Affichage}{", "}>[(#TITRE|supprimer_numero|attribut_html)]</BOUCLE_motsclefs_meta>" /></B_motsclefs_meta>
+	<B_index_auteurs_meta><meta name="author" content="<BOUCLE_index_auteurs_meta(AUTEURS) {", "}>[(#NOM|supprimer_numero|attribut_html)]</BOUCLE_index_auteurs_meta>" /></B_index_auteurs_meta>
+	[<meta name="date" content="(#DATE|date_iso)" />]
+	[(#INCLURE{fond=inc-head})]
+</head>
+
+<body class="page_sommaire">
+<div id="page">
+
+	[(#REM) Inclusion statique de l'entete de la page]
+	[(#INCLURE{fond=inc-entete})]
+	
+        [(#REM) Inclusion statique du fil d'Ariane ]
+	[(#INCLURE{fond=inc-ariane})]
+
+	[(#REM) Contenu principal : derniers articles publies ]
+	<div class="hfeed" id="conteneur">
+	<div id="contenu">
+		
+		[(#REM) Derniers articles ]
+		<B_articles_recents>
+		<BOUCLE_articles_recents(ARTICLES) {!par date} {0,7}>
+			[(#MODELE{article_encart})]
+		</BOUCLE_articles_recents>
+			<p><:blognglop:article_aucun_dispo:></p>
+		<//B_articles_recents>
+	
+	</div><!--#contenu-->
+	</div><!--#conteneur-->
+	
+	[(#REM) Menu de navigation laterale gauche]
+	<div id="navigation">
+		<INCLURE{fond=inc-navigation}/>
+	</div><!--#navigation-->
+	
+	[(#REM) Menu de navigation laterale droite]
+	<div id="extra">
+		<INCLURE{fond=inc-extra}/>
+	</div><!--#extra-->
+	
+	[(#REM) Inclusion statique du pied de page ]
+	[(#INCLURE{fond=inc-pied})]
+	
+</div><!--#page-->
+</body>
+</html>

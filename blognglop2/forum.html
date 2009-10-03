@@ -1,0 +1,53 @@
+#CACHE{24*60*60}
+#HTTP_HEADER{"Cache-Control: max-age=3600, must-revalidate"}
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="#LANG_DIR" lang="#LANG">
+<head>
+	<title>[(#NOM_SITE_SPIP|attribut_html) - ]<:poster_message:></title>
+	[(#INCLURE{fond=inc-head})]
+	<meta name="robots" content="none" />
+</head>
+<body class="page_forum">
+<div id="page">
+
+	[(#REM) Inclusion statique de l'entete de la page]
+	[(#INCLURE{fond=inc-entete})]
+	
+	[(#REM) Inclusion statique du fil d'Ariane ]
+	[(#INCLURE{fond=inc-ariane}{env}{id_rubrique=#ID_RUBRIQUE})]
+	
+	[(#REM) Contenu : poster un message dans le forum ]
+	<div id="conteneur">
+	<div id="contenu">		
+
+		<div class="cartouche">
+			<h1 class="titre"><:poster_message:></h1>
+			<p class="soustitre"><:en_reponse:></p>
+		</div>
+			
+		[(#MODELE{article_encart}{id_article=#ID_ARTICLE})]
+		[(#MODELE{rubrique_encart}{id_rubrique=#ID_RUBRIQUE})]
+		[(#MODELE{breve_encart}{id_breve=#ID_BREVE})]
+		[(#MODELE{forum_encart}{id_forum=#ID_FORUM})]
+			
+		[(#FORMULAIRE_FORUM)]
+			
+	</div><!--#contenu-->
+	</div><!--#conteneur-->
+
+	[(#REM) Menu de navigation laterale gauche]
+	<div id="navigation">
+		<INCLURE{fond=inc-navigation}/>
+	</div><!--#navigation-->
+	
+	[(#REM) Menu de navigation laterale droite]
+	<div id="extra">
+		<INCLURE{fond=inc-extra}/>
+	</div><!--#extra-->
+
+	[(#REM) Inclusion statique du pied de page ]
+	[(#INCLURE{fond=inc-pied})]
+
+</div><!-- fin page -->
+</body>
+</html>
