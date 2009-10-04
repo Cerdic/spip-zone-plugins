@@ -51,10 +51,10 @@
 			(#TRAD{description,#ENV{cfg},#ENV{onglet}}|propre)
 		</div>]
 		[<div class="cadre cadre-info">
-			(#CHEMIN{cfg/nav-config_#ENV{cfg}.html}|?{
-				[(#INCLURE{fond=cfg/nav-config_#ENV{cfg}}{cfg}{onglet})]
+			(#CHEMIN{cfg/nav-config_#ENV{cfg}|concat{.html}}|?{
+				[(#INCLURE{fond=cfg/nav-config_#ENV{cfg},cfg,onglet})]
 				,
-				[(#INCLURE{fond=cfg/nav-config_defaut}{cfg}{onglet})]
+				[(#INCLURE{fond=cfg/nav-config_defaut,cfg,onglet})]
 			})
 		</div>]
 		<!--/#navigation-->
