@@ -55,7 +55,7 @@ function calculer_ITEM_CONFIG($cfg, $cfg_actif, $onglet=false, $onglet_actif='')
 		} else {
 			$lien = calculer_lien_config($cfg, $onglet);
 			$on = $actif & ($onglet == $onglet_actif);
-			$retour .= "<li" . ($actif ? ' class = "on"' : '') . ">$lien</li>";
+			$retour .= "<li" . ($on ? ' class = "on"' : '') . ">$lien</li>";
 		}
 	} else {
 		$lien = calculer_lien_config($cfg);
