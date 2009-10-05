@@ -23,6 +23,7 @@ function abonnement_i2_charger_formulaire($flux) {
 		include_spip('inc/acces');
 		$hash = creer_uniqid();	
 		$flux['data']['hash'] = $hash ;
+		$flux['data']['type_commande'] = "abonnement" ;
 	}
 	return $flux;
 }

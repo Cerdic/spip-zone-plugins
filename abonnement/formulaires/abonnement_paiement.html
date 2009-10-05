@@ -38,7 +38,7 @@
 	<dl>
 		<BOUCLE_mon_abonnement(CONDITION){si #ENV{type_commande}|!={article}}>
 			[(#SET{texteLibre,[abonnement-(#ENV*{hash})]})]
-			<BOUCLE_abo(ABONNEMENTS){id_abonnement}>
+			<BOUCLE_abo(ABONNEMENTS){id_abonnement=#ENV{abonnement}}>
 				<dt><:abo:mon_abonnement:></dt>
 				<dd>#LIBELLE - #MONTANT euros</dd>
 				#SET{montant,#MONTANT}
