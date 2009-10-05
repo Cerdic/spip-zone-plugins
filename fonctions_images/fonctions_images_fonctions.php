@@ -764,7 +764,7 @@ function image_dispersion($im, $masque, $h=5, $v=5, $pos="") {
 	$arg_list = func_get_args();
 	$texte = $arg_list[0];
 	for ($i = 1; $i < $numargs; $i++) {
-		if (preg_match("#\=#", $arg_list[$i])) {
+		if (preg_match("#=#", $arg_list[$i])) {
 			$nom_variable = substr($arg_list[$i], 0, strpos($arg_list[$i], "="));
 			$val_variable = substr($arg_list[$i], strpos($arg_list[$i], "=")+1, strlen($arg_list[$i]));
 			$variable["$nom_variable"] = $val_variable;
