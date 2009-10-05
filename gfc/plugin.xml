@@ -1,11 +1,11 @@
 <plugin>
- 	<nom>gfc</nom>
+ 	<nom>Google Friend Connect to SPIP</nom>
 	<auteur>Benoit Aubert</auteur>
 	<version>1.1</version>
 	<version_base>1.0</version_base>
 	<etat>dev</etat>
 	<description>
-		Plugin pour utiliser Google Friend Connect pour autentifier les auteurs
+		Plugin permettant d'utiliser [Google Friend Connect->http://www.google.com/friendconnect/] pour autentifier les auteurs dans SPIP
 	</description>
 	<install>base/gfc_install.php</install>
 	<prefix>gfc</prefix>
