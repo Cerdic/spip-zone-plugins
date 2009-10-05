@@ -42,13 +42,16 @@ function abonnement_i2_traiter_formulaire($flux) {
 		if($id_abonnement = intval(_request('abonnement'))){	
 			$id_auteur = $flux['args']['id_auteur'] ;
 			$hash = _request('hash');
-
+			$row = sql_fetsel(array('montant'), 'spip_abonnements', 'id_abonnement='.sql_quote($id_abonnement));
+			$montant = $row['montant'];
+			
 			// (verififier si ca emplile pas en mode edition)
 			sql_insertq('spip_auteurs_elargis_abonnements', array(
 				'id_auteur' => $id_auteur,
 				'id_abonnement' => $id_abonnement,
 				'date' => date("Y-m-d H:i:s"),
 				'hash'=>$hash,
+				'montant'=>$montant,
 				'statut_paiement' => 'a_confirmer')
 			);
 		}
@@ -63,7 +66,8 @@ function abonnement_i2_confirmation($flux) {
 	// afficher un formulaire de paiement pour l'utilisateur (uniquement si la config le permet)
 	if (lire_config('abonnement/proposer_paiement')) {
 		$env = $flux['args'];
-		$row = sql_fetsel(array('id_auteur'), 'spip_auteurs', 'email='.sql_quote($env['email']));		$env['id_auteur'] = $row['id_auteur'] ;
+		$row = sql_fetsel(array('id_auteur'), 'spip_auteurs', 'email='.sql_quote($env['email']));
+		$env['id_auteur'] = $row['id_auteur'] ;
 		$flux['data'] .= recuperer_fond('formulaires/abonnement_paiement',$env);
 	}
 	return $flux;
