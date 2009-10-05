@@ -1,4 +1,10 @@
-<?
+<?php
+
+/**
+ * Definition du repertoire de l'api opensocial
+ * (telechargee automatiquement ou manuellement a l'installation
+ */
+define('_DIR_OSAPI',_DIR_RACINE.'lib/opensocial-php-client/osapi/');
 // USER CONFIG
 
 //consumer id

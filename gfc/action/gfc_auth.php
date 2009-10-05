@@ -9,7 +9,7 @@ function action_gfc_auth_dist() {
 	
 	//get osapi info
 	$display_name = $member_id = false;
-	require_once $_SERVER['DOCUMENT_ROOT']."/plugins/gfc/osapi/osapi.php";
+	include_spip(_DIR_OSAPI.'osapi');
 	include_spip('inc/texte');
 	include_spip('base/abstract_sql');
 	$provider = new osapiFriendConnectProvider();
@@ -69,7 +69,7 @@ function action_gfc_auth_dist() {
 }
 
 function login_spip($gfc_id, $spip_id=''){
-	if($gfc_id != '') $res = spip_query("select * from spip_auteurs where gfc_uid=".sql_quote($gfc_id)." limit 1");
+	if($gfc_id != '') $res = sql_select("*","spip_auteurs","gfc_uid=".sql_quote($gfc_id)." limit 1");
 	elseif($spip_id != '') $res = spip_query("select * from spip_auteurs where id_auteur=".sql_quote($spip_id)." limit 1");
 	if ($row = sql_fetch($res)){
 		$auth_source = 'gfc';
