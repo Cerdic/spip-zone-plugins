@@ -431,7 +431,7 @@ function image_courbe($im, $couche, $courb="") {
 	$arg_list = func_get_args();
 	$texte = $arg_list[0];
 	for ($i = 1; $i < $numargs; $i++) {
-		if (preg_match("#\=#", $arg_list[$i])) {
+		if (preg_match("#=#", $arg_list[$i])) {
 			$nom_variable = substr($arg_list[$i], 0, strpos($arg_list[$i], "="));
 			$val_variable = substr($arg_list[$i], strpos($arg_list[$i], "=")+1, strlen($arg_list[$i]));
 			$courbe[$nom_variable] = $val_variable;
@@ -758,7 +758,7 @@ function image_sincity($im)
 function image_dispersion($im, $masque, $h=5, $v=5, $pos="") {
 	
 	$nom = preg_replace("#\.(png|jpg|gif)$#", "", $masque);
-	$nom = preg_replace("#/#","-",$nom);
+	$nom = str_replace("/","-",$nom);
 
 	$numargs = func_num_args();
 	$arg_list = func_get_args();
