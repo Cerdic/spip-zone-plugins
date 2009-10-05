@@ -8,6 +8,9 @@
 		Plugin permettant d'utiliser [Google Friend Connect->http://www.google.com/friendconnect/] pour autentifier les auteurs dans SPIP
 	</description>
 	<install>base/gfc_install.php</install>
+	<icon>
+    images/gfc_logo.png
+    </icon>
 	<prefix>gfc</prefix>
 	<options>gfc_options.php</options>
 	<pipeline>
