@@ -1,0 +1,39 @@
+#CACHE{0}
+<!-- nom=gfc -->
+
+<div class="formulaire_spip formulaire_config">
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+<form method="post" action="#SELF">
+	<div>
+		#ACTION_FORMULAIRE{SELF}
+			<ul>
+				[(#SAISIE{input,consumer_id,
+					label=<:gfc:label_consumer_id:>,
+					size=7})]
+				[(#SAISIE{input,consumer_key,
+					label=<:gfc:label_consumer_key:>,
+					size=7})]
+				[(#SAISIE{input,consumer_secret,
+					label=<:gfc:label_consumer_secret:>,
+					size=7})]
+				[(#SAISIE{input,default_email,
+					label=<:gfc:label_default_email:>,
+					size=7})]
+				[(#SAISIE{input,cookie_name,
+					label=<:gfc:label_cookie_name:>,
+					size=7})]
+			</ul>
+		<p class="boutons">
+			<input type="submit" name="_cfg_ok" value="<:OK:>" class="submit" />
+		</p>
+	</div>
+</form>
+<div>
+	#CFG_ARBO{gfc}
+</div>
+[(#SAISIE|non)
+	<p class="erreur"><:gfc:cfg_activer_saisie_obligatoire:></p>
+]
