@@ -107,6 +107,7 @@ function formulaires_editer_menu_entrees_traiter($id_menu){
 		$rang = intval(_request('rang'));
 		$type_entree = _request('type_entree');
 		$parametres_envoyes = _request('parametres');
+		spip_desinfecte($parametres_envoyes);
 		$entrees = menus_lister_disponibles();
 		$infos = $entrees[$type_entree];
 		
