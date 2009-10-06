@@ -1,11 +1,11 @@
-<?
+<?php
 
 /**
  * Action d'autentification par GFC
  * 
  * @return 
  */
-include_spip('base/abstract_sql');
+
 function action_gfc_auth_dist() {
 	//ini_set("error_reporting", E_ALL);
 	//ini_set("display_errors", 1);
@@ -23,23 +23,21 @@ function action_gfc_auth_dist() {
 		$secret = _GFC_CONSUMER_SECRET;
 		$default_email = _GFC_DEFAULT_EMAIL;
 	}
+	
 	$token = $_COOKIE['fcauth'.$id];
-	spip_log("token = $token");
+	
 	//get osapi info
 	$display_name = $member_id = false;
 	include_spip(_DIR_OSAPI."osapi");
-	//include_spip("auth/osapiSecurityToken");
 	include_spip("auth/osapiFCAuth");
 	include_spip('inc/texte');
 	include_spip('base/abstract_sql');
 	$provider = new osapiFriendConnectProvider();
-	//$auth = new osapiOAuth2Legged($key, $secret);
 	$auth = new osapiFCAuth($token);
 	$osapi = new osapi($provider, $auth);
 	$strictMode = true;
 	if ($osapi) {
 		$batch = $osapi->newBatch();
-		//$request = $osapi->people->get($self_request_params), 'self');
 		$request = $osapi->people->get(array('userId'=>'@viewer', 'groupId'=>'@self'));
 		$batch->add($request, 'self');
 		$result = $batch->execute();
@@ -55,7 +53,6 @@ function action_gfc_auth_dist() {
 			$member_id =  $me->getFieldByName("id");
 			if(trim($display_name) == '') $display_name = $member_id;
 		}
-		spip_log("member_id = $member_id");
 	}
 	//END get osapi info
 	
@@ -76,7 +73,6 @@ function action_gfc_auth_dist() {
 		//if not connected to SPIP and gfc_id not in our system, we create a new SPIP account
 		else if(!sql_getfetsel("id_auteur","spip_auteurs","gfc_uid='$member_id'")){
 			$declaration = array();
-			spip_log($_COOKIE['GAUSER']);
 			$declaration['statut'] = '6forum';
 			$declaration['nom'] = safehtml($display_name);
 			$declaration['login'] = preg_replace("[^a-zA-Z0-9_]", "_", $declaration['nom']);
@@ -96,16 +92,13 @@ function action_gfc_auth_dist() {
 
 function login_spip($gfc_id, $spip_id=''){
 	if(intval($gfc_id)){
-		spip_log($gfc_id);
-		$res = sql_select("*","spip_auteurs","gfc_uid='$gfc_id'");
-		$res = sql_fetch($res);
-		spip_log($res);
+		$res = sql_fetsel("*","spip_auteurs","gfc_uid='$gfc_id'");
 	} 
-	elseif($spip_id != '') $res = sql_fetsel("*","spip_auteurs","id_auteur=".sql_quote($spip_id),"","","1");
+	elseif($spip_id != '') $res = sql_fetsel("*","spip_auteurs","id_auteur='$spip_id'");
 	if ($res){
-		spip_log($res);
 		$auth_source = 'gfc';
 		$res['auth'] = $auth_source;
+		
 		// create session
 		$session = charger_fonction('session','inc');
 		$spip_session = $session($res);
@@ -114,9 +107,9 @@ function login_spip($gfc_id, $spip_id=''){
 		preg_match(',^[^/]*//[^/]*(.*)/$,',
 			   url_de_base(),
 			   $r);
-		spip_log($r);
 		include_spip('inc/cookie');
 		spip_setcookie('spip_session', $spip_session, time() + 3600 * 24 * 14, $r[1]);
+		
 		// antentification
 		$auth = charger_fonction('auth','inc');
 		$auth();
