@@ -1,6 +1,6 @@
 <plugin>
 	<nom>Propaganda</nom>
-	<version>0.1</version>
+	<version>0.2</version>
 	<etat>dev</etat>
 	<auteur>[kent1->http://kent1.sklunk.net], [dani->http://abuelo.belvil.net/]</auteur>
 	<description>
@@ -13,7 +13,6 @@
 	<install>base/propaganda_upgrade.php</install>
  
 	<prefix>propaganda</prefix>
-	<chemin dir='' />
 	<necessite id="SPIP" version="[1.9.0;]" />
 	<necessite id="cfg" version="[1.0;]" />
 </plugin>

@@ -1,0 +1,9 @@
+[<span class="erreur_message">(#ENV{erreur}|table_valeur{document_carte})</span>]
+<div>
+<BOUCLE_articles_docs(DOCUMENTS){id_article IN #ENV{articles,*}}{extension IN jpg,png,gif}>
+<div class="choix" style="float:left;">
+	<input type="radio" value="[(#ID_DOCUMENT)]" name="document_carte" style="text-align:center"[(#ENV{document_carte}|=={#ID_DOCUMENT}|oui)checked="checked"] />
+	<a href="[(#FICHIER)]" title="<BOUCLE_auteurs_legend(AUTEURS){id_article}>#NOM</BOUCLE_auteurs_legend>">[(#FICHIER|image_reduire{60,0}|image_recadre{40,40}|inserer_attribut{style,"margin:0 auto"}|inserer_attribut{alt,#TITRE}|inserer_attribut{class,propagandalogo})]</a>
+</div>
+</BOUCLE_articles_docs>
+</div>

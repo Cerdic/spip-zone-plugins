@@ -1,0 +1,54 @@
+<div class="formulaire_spip formulaire_propaganda ajax" id="formulaire_propaganda_#ENV{id_article}">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV*{editable}|oui)
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			<li class="editer_document_carte obligatoire[(#ENV**{erreurs}|table_valeur{email_destinataire}|oui)erreur]">
+				<label><:propaganda:choose_image:></label>
+				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{document_carte})</span>]
+				<INCLURE{fond=prive/liste_propaganda_documents}{env}>
+				<br style="clear:both" />
+			</li>
+			<li class="editer_nom_expediteur obligatoire[(#ENV**{erreurs}|table_valeur{email_destinataire}|oui)erreur]">
+				<label for="nom_expediteur"><:form_pet_votre_nom:></label>
+				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{nom_expediteur})</span>]
+				<input type="text" class="text" name="nom_expediteur" id="nom_expediteur" value="[(#ENV{nom_expediteur})]" size="30" />
+			</li>
+			<li class="editer_email_expediteur obligatoire[(#ENV**{erreurs}|table_valeur{email_destinataire}|oui)erreur]">
+				<label for="email_expediteur"><:form_pet_votre_email:></label>
+				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{email_expediteur})</span>]
+				<input type="text" class="text" name="email_expediteur" id="email_expediteur" value="[(#ENV{email_expediteur})]" size="30" />
+			</li>
+			
+			<li class="editer_email_destinataire obligatoire[(#ENV**{erreurs}|table_valeur{nom_destinataire}|oui)erreur]">
+				<label for="email_destinataire"><:propaganda:nom_destinataire:></label>
+				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{nom_destinataire})</span>]
+				<input type="text" class="text" name="nom_destinataire" id="nom_destinataire" value="[(#ENV{nom_destinataire})]" size="30" />
+			</li>
+			
+			<li class="editer_email_destinataire obligatoire[(#ENV**{erreurs}|table_valeur{email_destinataire}|oui)erreur]">
+				<label for="email_destinataire"><:propaganda:email_destinataire:></label>
+				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{email_destinataire})</span>]
+				<input type="text" class="text" name="email_destinataire" id="email_destinataire" value="[(#ENV{email_destinataire})]" size="30" />
+			</li>
+			
+			<li class="editer_sujet obligatoire[(#ENV**{erreurs}|table_valeur{email_destinataire}|oui)erreur]">
+				<label for="sujet"><:form_prop_sujet:></label>
+				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{sujet})</span>]
+				<input type="text" class="text" name="sujet" id="sujet" value="[(#ENV{sujet})]" size="30" />
+			</li>
+			
+			<li class="editer_texte_message_auteur obligatoire[(#ENV**{erreurs}|table_valeur{email_destinataire}|oui)erreur]">
+				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{texte_message_auteur})</span>]
+				<textarea name="texte_message_auteur" rows='10' class='forml' cols='40'>[(#ENV{texte_message_auteur})]</textarea>
+			</li>
+		</ul>
+		<p class='boutons' id="validation_bouton_statut">
+			<input type='submit' class='submit' value='<:bouton_enregistrer:>' />
+		</p>
+	</div></form>]
+</div>

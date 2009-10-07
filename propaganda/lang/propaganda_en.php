@@ -8,13 +8,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'autoriser_tout_le_monde' => 'Allow any visitor of the website to send a postcard',
-	'autoriser_uniquement_inscrits' => 'Force visitors to register herselves in the site to be able to send a postcard',		
+	'autoriser_uniquement_inscrits' => 'Force visitors to register themselves in the site to be able to send a postcard',		
 	
 	// B
 	'bonjour' => 'Hello,',
 	
 	// C
 	'carte_envoyee' => 'Postcard sent',
+	'champ_obligatoire' => 'This field is mandatory',
+	'champ_trop_court' => 'This field must be more than @taille@ characters length',
 	'choose_image' => 'Choose a postcard image',
 	'consulter_carte' => 'You can see it at the following URL address:',
 	'credits' => 'Graphical credits: ',
@@ -34,13 +36,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	// S
 	'send_ecard' => 'Send an E-card',
-	'son_message' => 'Her message within the postcard',
+	'son_message' => 'The message within the e-card is :',
 	
 	// U
 	'untel_envoi_carte' => 'sent you an e-postcard.',
 
 	// V
-	'votre_carte' => 'Your postcard:',
+	'votre_carte' => 'Your e-card :',
 
 	// X
 	'xxx' => 'xxx'

@@ -13,6 +13,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'carte_envoyee' => 'Carte postale envoy&eacute;e',
+	'champ_obligatoire' => 'Ce champ est obligatoire',
+	'champ_trop_court' => 'Ce champ doit &ecirc;tre plus long que @taille@ caract&egrave;res',
 	'choose_image' => 'Choisissez une image',
 	'consulter_carte' => 'Vous pouvez la consulter &agrave; l\'adresse :',
 	'credits' => 'Cr&eacute;dits iconographiques : ',
@@ -32,7 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	// S
 	'send_ecard' => 'Envoyer une carte &eacute;lectronique',
-	'son_message' => 'Son message accompagnant cette carte',	
+	'son_message' => 'Le message accompagnant cette carte est :',	
 	
 	// U
 	'untel_envoi_carte' => 'vous a envoy&eacute; une carte &eacute;lectronique.',
