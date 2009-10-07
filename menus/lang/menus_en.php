@@ -45,7 +45,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_niveau' => 'Sub-sections level',
 'entree_sur_n_niveaux' => 'On @n@ level(s)',
 'entree_infini' => 'To infinity',
-'entree_mapage' => 'My page'
+'entree_mapage' => 'My page',
+
+'info_numero_menu' => 'MENU NUMBER:',
 );
 
 ?>

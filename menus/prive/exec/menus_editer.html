@@ -18,6 +18,20 @@
 </div>
 
 <!--#navigation-->
+[(#VAL{id_menu}|_request|>{0}|oui)
+<div class="cadre infos cadre-info">
+	<div class="numero">
+		<:menus:info_numero_menu:>
+		<p>[(#VAL{id_menu}|_request)]</p>
+	</div>
+	<div>
+		<a href="[(#URL_ECRIRE{menus_editer}|parametre_url{action,redirect}|parametre_url{type,menu}|parametre_url{id,#VAL{id_menu}|_request}|parametre_url{var_mode,calcul})]" class="cellule-h">
+			[<img src="(#CHEMIN{prive/images/racine-24.gif})" style="vertical-align:middle;" />]
+			<span style="vertical-align:middle;"><:voir_en_ligne:></span>
+		</a>
+	</div>
+</div>
+]
 <!--/#navigation-->
 
 <!--#extra-->
