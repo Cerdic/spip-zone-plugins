@@ -1,8 +1,10 @@
 <?php
 /**
- * Récupère la liste des sites accessibles par l'utilisateur sur le serveur Piwik configuré
+ * Récupère la liste des sites accessibles par l'utilisateur 
+ * sur le serveur Piwik configuré
  * 
  * Elle crée une meta spécifique 'piwik_sites_dispo' qui est un array serialisé
+ * Utilise la fonction de communication avec l'API
  * 
  * @return 
  */
@@ -19,15 +21,9 @@ function action_piwik_recuperer_liste(){
 	$format = _request('format')?_request('format'):'PHP';
 	$method = 'SitesManager.getSitesWithAdminAccess';
 	
-	$url = parametre_url($piwik_url,'token_auth',$piwik_token);
-	$url = parametre_url($url,'module','API','&');
-	$url = parametre_url($url,'format',$format,'&');
-	$url = parametre_url($url,'method',$method,'&');
-	$url = parametre_url($url,'format',$format,'&');
-	spip_log('URL = '.$url,'piwik');
-	include_spip('inc/distant');
-	$content = recuperer_page($url);
+	$piwik_api = charger_fonction('inc/piwik_recuperer_data');
+	$content = $piwik_api($piwik_url,$piwik_token,'API',$method,$format)
+	
 	ecrire_meta('piwik_sites_dispo', $content);
-	spip_log($content,'piwik');
 }
 ?>

@@ -1,6 +1,17 @@
 <?php
 
-function inc_piwik_recuperer_data($piwik_url,$token_auth,$module='API',$method,$format='PHP',$options=array()){
+/**
+ * Fonction de communication avec l'API REST du serveur Piwik
+ * 
+ * @param string $piwik_url Url du serveur
+ * @param string $token_auth Le token d'autentification du serveur
+ * @param string $module [optional]
+ * @param string $method
+ * @param string $format [optional]
+ * @param array $options [optional]
+ * @return string Le contenu de la réponse
+ */
+function inc_piwik_recuperer_data_dist($piwik_url,$token_auth,$module='API',$method,$format='PHP',$options=array()){
 	
 	$url = parametre_url($piwik_url,'token_auth',$token_auth);
 	$url = parametre_url($url,'module','API','&');
@@ -12,7 +23,6 @@ function inc_piwik_recuperer_data($piwik_url,$token_auth,$module='API',$method,$
 		}
 	}
 	
-	spip_log('URL = '.$url,'piwik');
 	include_spip('inc/distant');
 	$content = recuperer_page($url);
 	
