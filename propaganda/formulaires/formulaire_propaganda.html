@@ -1,5 +1,4 @@
-<div class="formulaire_spip formulaire_propaganda" id="formulaire_propaganda" style="background-color:#fff;">
-
+<div class="formulaire_spip formulaire_propaganda" id="formulaire_propaganda_#ENV{id_article}">
 <B_articles_docs>
 <form action="[(#SELF|parametre_url{url_carte})]#formulaire_propaganda" method='post'>
 
@@ -10,7 +9,7 @@
 <BOUCLE_articles_docs(DOCUMENTS){id_article=#ENV{id_article}}{extension IN jpg,png,gif}>
 <div class="propaganda" style="float:left;">
 	<input type="radio" value="[(#ID_DOCUMENT)]" name="document_carte" style="text-align:center" [(#ENV{document_carte}|=={#ID_DOCUMENT}|?{' '})checked="checked"]></input><br />
-	<a href="[(#FICHIER)]" title="<BOUCLE_auteurs_legend(AUTEURS){id_article}>#NOM</BOUCLE_auteurs_legend>" class="thickbox">[(#FICHIER|image_reduire{60,0}|image_recadre{40,40}|inserer_attribut{style,"margin:0 auto"}|inserer_attribut{alt,#TITRE}|inserer_attribut{class,propagandalogo})]</a>
+	<a href="[(#FICHIER)]" title="<BOUCLE_auteurs_legend(AUTEURS){id_article}>#NOM</BOUCLE_auteurs_legend>">[(#FICHIER|image_reduire{60,0}|image_recadre{40,40}|inserer_attribut{style,"margin:0 auto"}|inserer_attribut{alt,#TITRE}|inserer_attribut{class,propagandalogo})]</a>
 </div>
 </BOUCLE_articles_docs>
 <br style="clear:both" />
@@ -18,29 +17,29 @@
 
 <fieldset>
 <p><label for="nom_expediteur"><:form_pet_votre_nom:></label><br />
-<input type="text" class="forml" name="nom_expediteur" value="[(#ENV{nom_expediteur})]" size="30" />
+<input type="text" class="forml" name="nom_expediteur" id="nom_expediteur" value="[(#ENV{nom_expediteur})]" size="30" />
 </p>
 
 <p><label for="email_expediteur"><:form_pet_votre_email:></label><br />
-<input type="text" class="forml" name="email_expediteur" value="[(#ENV{mail})]" size="30" />
+<input type="text" class="forml" name="email_expediteur" id="email_expediteur" value="[(#ENV{mail})]" size="30" />
 </p>
 
 <p><label for="email_destinataire"><:propaganda:email_destinataire:></label><br />
-<input type="text" class="forml" name="email_destinataire" value="[(#ENV{destinataire})]" size="30" />
+<input type="text" class="forml" name="email_destinataire" id="email_destinataire" value="[(#ENV{destinataire})]" size="30" />
 </p>
 
 <p><label for="email_destinataire"><:propaganda:nom_destinataire:></label><br />
-<input type="text" class="forml" name="nom_destinataire" value="[(#ENV{nom_destinataire})]" size="30" />
+<input type="text" class="forml" name="nom_destinataire" id="nom_destinataire" value="[(#ENV{nom_destinataire})]" size="30" />
 </p>
 
 <p><label for="sujet"><:form_prop_sujet:></label><br />
-<input type="text" class="forml" name="sujet" value="[(#ENV{titre})]" size="30" />
+<input type="text" class="forml" name="sujet" id="sujet" value="[(#ENV{titre})]" size="30" />
 </p>
 
 <p><textarea name="texte_message_auteur" rows='10' class='forml' cols='40'>[(#ENV{texte})]</textarea></p>
 
 <p class="spip_bouton">
-<input type="submit" name="previsualiser" value="<:previsualiser:>" />
+	<input type="submit" name="previsualiser" value="<:previsualiser:>" />
 </p>
 
 </fieldset>
