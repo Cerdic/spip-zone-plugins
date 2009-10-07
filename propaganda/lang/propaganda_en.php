@@ -18,6 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_obligatoire' => 'This field is mandatory',
 	'champ_trop_court' => 'This field must be more than @taille@ characters length',
 	'choose_image' => 'Choose a postcard image',
+	'connexion_obligatoire' => 'You must be connected to the site to send an e-card.',
 	'consulter_carte' => 'You can see it at the following URL address:',
 	'credits' => 'Graphical credits: ',
 

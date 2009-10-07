@@ -13,6 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'carte_envoyee' => 'Carte postale envoy&eacute;e',
+	'connexion_obligatoire' => 'Vous devez &ecirc;tre connect&eacute; pour envoyer une carte.',
 	'champ_obligatoire' => 'Ce champ est obligatoire',
 	'champ_trop_court' => 'Ce champ doit &ecirc;tre plus long que @taille@ caract&egrave;res',
 	'choose_image' => 'Choisissez une image',
