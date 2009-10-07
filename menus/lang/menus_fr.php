@@ -8,6 +8,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'editer_menus_explication' => 'Cr&eacute;ez et configurez ici les menus de votre site.',
 'editer_menus_nouveau' => 'Cr&eacute;er un nouveau menu',
 'editer_menus_editer' => '&Eacute;diter ce menu',
+'editer_menus_exporter' => 'Exporter ce menu',
+'editer_menus_importer' => 'Importer un menu',
 
 'erreur_autorisation' => 'Vous n\'&ecirc;tes pas autoris&eacute; &agrave; modifier les menus.',
 'erreur_identifiant_deja' => 'Cet identifiant est d&eacute;j&agrave; utilis&eacute; par un menu.',

@@ -30,6 +30,14 @@
 			<span style="vertical-align:middle;"><:voir_en_ligne:></span>
 		</a>
 	</div>
+	[(#PLUGIN{yaml}|oui)
+	<div>
+		<a href="#URL_ACTION_AUTEUR{exporter_menu,#VAL{id_menu}|_request}" class="cellule-h">
+			[<img src="(#CHEMIN{images/export.png})" style="vertical-align:middle;" />]
+			<span style="vertical-align:middle;"><:menus:editer_menus_exporter:></span>
+		</a>
+	</div>
+	]
 </div>
 ]
 <!--/#navigation-->
