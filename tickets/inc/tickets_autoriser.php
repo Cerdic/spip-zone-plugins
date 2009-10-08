@@ -7,7 +7,13 @@
  */
 function tickets_autoriser(){}
 
-// Renvoie la liste des auteurs ou des statuts autorises pour une action donnee
+/**
+ * Renvoie la liste des auteurs ou des statuts autorises pour une action donnee
+ * 
+ * @param string $action L'action que l'on souhaite faire
+ * @param boolean $utiliser_defaut [optional]
+ * @return 
+ */ 
 function definir_autorisations_tickets($action,$utiliser_defaut=true){
 	$aut = null;
 
@@ -47,6 +53,17 @@ function definir_autorisations_tickets($action,$utiliser_defaut=true){
 	return $aut;
 }
 
+/**
+ * Autorisation d'écrire des tickets
+ * (défini qui peut créer un ticket)
+ * 
+ * @param object $faire
+ * @param object $type
+ * @param object $id
+ * @param object $qui
+ * @param object $opt
+ * @return 
+ */
 function autoriser_ticket_ecrire_dist($faire, $type, $id, $qui, $opt){
 	$autorise = false;
 	$utiliser_defaut = true;
@@ -94,7 +111,17 @@ function autoriser_ticket_ecrire_dist($faire, $type, $id, $qui, $opt){
 	return $autorise;
 }
 
-// Autorisation de notification des tickets
+/**
+ * Autorisation d'assignation des tickets
+ * (défini qui peu assigner les tickets)
+ * 
+ * @param object $faire
+ * @param object $type
+ * @param object $id
+ * @param object $qui
+ * @param object $opt
+ * @return 
+ */
 function autoriser_ticket_assigner_dist($faire, $type, $id, $qui, $opt){
 	$autorise = false;
 	$utiliser_defaut = true;
@@ -141,7 +168,17 @@ function autoriser_ticket_assigner_dist($faire, $type, $id, $qui, $opt){
 	return $autorise;
 }
 
-// Autorisation de notification des tickets
+/**
+ * Autorisation de notification des tickets
+ * (défini qui doit être notifié)
+ * 
+ * @param object $faire
+ * @param object $type
+ * @param object $id
+ * @param object $qui
+ * @param object $opt
+ * @return 
+ */
 function autoriser_ticket_commenter_dist($faire, $type, $id, $qui, $opt){
 	$autorise = false;
 	$utiliser_defaut = true;
@@ -188,7 +225,19 @@ function autoriser_ticket_commenter_dist($faire, $type, $id, $qui, $opt){
 	return $autorise;
 }
 
-// Autorisation de modification des tickets
+/**
+ * Autorisation de modification des tickets
+ * Défini qui peut modifier les tickets :
+ * - Les personnes assignées
+ * - Les personnes correspondant à la configuration
+ * 
+ * @param object $faire
+ * @param object $type
+ * @param object $id
+ * @param object $qui
+ * @param object $opt
+ * @return 
+ */ 
 function autoriser_ticket_modifier_dist($faire, $type, $id, $qui, $opt){
 	$autorise = false;
 	$utiliser_defaut = true;
