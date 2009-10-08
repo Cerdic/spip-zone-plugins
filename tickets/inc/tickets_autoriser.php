@@ -56,7 +56,7 @@ function autoriser_ticket_ecrire_dist($faire, $type, $id, $qui, $opt){
 	}
 	// Utilisation du CFG si possible
 	if(function_exists('lire_config')){
-		$type = lire_config('tickets/autorisations/ecrire_type', 'webmestre');
+		$type = lire_config('tickets/autorisations/ecrire_type', '1comite');
 		switch($type) {
 			case 'webmestre':
 				// Webmestres uniquement
@@ -104,7 +104,7 @@ function autoriser_ticket_assigner_dist($faire, $type, $id, $qui, $opt){
 	}
 	// Utilisation du CFG si possible
 	if(function_exists('lire_config')){
-		$type = lire_config('tickets/autorisations/assigner_type', 'webmestre');
+		$type = lire_config('tickets/autorisations/assigner_type', '0minirezo');
 		switch($type) {
 			case 'webmestre':
 				// Webmestres uniquement
@@ -151,7 +151,7 @@ function autoriser_ticket_commenter_dist($faire, $type, $id, $qui, $opt){
 	}
 	// Utilisation du CFG si possible
 	if(function_exists('lire_config')){
-		$type = lire_config('tickets/autorisations/commenter_type', 'webmestre');
+		$type = lire_config('tickets/autorisations/commenter_type', '1comite');
 		switch($type) {
 			case 'webmestre':
 				// Webmestres uniquement
@@ -203,7 +203,7 @@ function autoriser_ticket_modifier_dist($faire, $type, $id, $qui, $opt){
 	}
 	// Utilisation du CFG si possible
 	if(function_exists('lire_config')){
-		$type = lire_config('tickets/autorisations/modifier_type', 'webmestre');
+		$type = lire_config('tickets/autorisations/modifier_type', '0minirezo');
 		switch($type) {
 			case 'webmestre':
 				// Webmestres uniquement
