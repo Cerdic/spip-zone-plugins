@@ -8,7 +8,7 @@
 	<icon>img_pack/portfolio-64.png</icon>
 	<auteur>[Cedric MORIN->http://www.yterium.net] &amp; [romy.tetue.net->http://romy.tetue.net]
 	</auteur>
-	<version>1.0</version>
+	<version>1.1</version>
 	<version_base>0.8</version_base>
 	<etat>stable</etat>
 	<description><multi>
@@ -49,6 +49,11 @@
 	<pipeline>
 		<nom>autoriser</nom>
 		<inclure>gestdoc_autoriser.php</inclure>
+	</pipeline>
+	<!-- avec plugin champs extras 2 -->
+	<pipeline>
+		<nom>objets_extensibles</nom>
+		<inclure>gestdoc_pipelines.php</inclure>
 	</pipeline>
 	<bouton id='documents' parent='naviguer'>
 		<titre>gestdoc:documents</titre>

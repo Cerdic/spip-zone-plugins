@@ -100,6 +100,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'media_video' => 'S&eacute;quences',
 	'media_image' => 'Images',
 	'media_file' => 'Autres',
+
+	// O
+	'objet_documents'=>'Documents',
 	
 	// P
 	'par_id' => 'ID',
