@@ -1,0 +1,34 @@
+#CACHE{0}
+<!-- nom=propaganda -->
+
+<div class="formulaire_spip formulaire_editer formulaire_cfg">
+
+	[<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
+	[<p class="formulaire_message">(#ENV*{message_ok})</p>]
+	
+	<form method="post" action="#ENV{action}"><div>
+	#ACTION_FORMULAIRE{SELF}
+		<ul>
+			<li class="editer_droits_envoi">
+				<label><:propaganda:droit_envoi:></label>
+				<div class="choix">
+					<input type="radio" name="droit_envoi" id="droits_envoi_oui" value="oui" [(#ENV{droit_envoi}|=={oui}|oui)checked="checked"] />
+					<label for="droits_envoi_oui"><:propaganda:autoriser_tout_le_monde:></label>
+				</div>
+				<div class="choix">
+					<input type="radio" name="droit_envoi" id="droits_envoi_non" value="non" [(#ENV{droit_envoi}|=={non}|oui)checked="checked"] />
+					<label for="droits_envoi_non"><:propaganda:autoriser_uniquement_inscrits:></label>
+				</div>
+			</li>
+			<li class="editer_documents_traduction">
+				<label for="documents_traduction"><:propaganda:label_documents_traduction:></label>
+				<input type="checkbox" name="documents_traduction" id="documents_traduction"[(#ENV{documents_traduction}|=={on}|oui)checked="checked"] />
+			</li>	
+		</ul>
+		<p class="boutons">
+			<input type="submit" name="_cfg_ok" value="<:ok:>" class="submit" />
+			<input type="reset" value="<:reset:>" class="submit" />
+			<input type="submit" name="_cfg_delete" value="<:supprimer:>" class="submit" />
+		</p>
+	</div></form>
+</div>

@@ -8,6 +8,10 @@ include_spip('inc/actions');
 function formulaires_propaganda_charger_dist($id_article='',$retour=''){
 	$valeurs = array();
 	
+	if(!intval($id_article)){
+		return false;
+	}
+	
 	$valeurs['editable'] = true;
 	
 	$config = unserialize($GLOBALS['meta']['propaganda']);
@@ -17,14 +21,23 @@ function formulaires_propaganda_charger_dist($id_article='',$retour=''){
 			$valeurs['message_erreur'] = _T('propaganda:connexion_obligatoire');		
 		}
 	}
-	if($id_article){
-		$valeurs['articles'] = $id_article;
-		/**
-		 * Utiliser également les documents des traductions de cet article
-		 */
-		if($config['documents_traduction'] == 'oui'){
-				
+	
+	$valeurs['articles'][] = $id_article;
+	
+	/**
+	 * Utiliser également les documents des traductions de cet article
+	 */
+	if($config['documents_traduction'] == 'on'){
+		$id_trad = sql_getfetsel('id_trad','spip_articles','id_article='.intval($id_article));
+		$res = sql_select('id_article','spip_articles','id_trad='.intval($id_trad));	
+		while($r = sql_fetch($res)){
+		    $valeurs['articles'][] = $r['id_article'];
 		}
+	}
+	$nb_docs = sql_count(sql_select("DISTINCT id_document","spip_documents_liens",
+							"objet='article' AND ". (sql_in('id_objet', $valeurs['articles'],''))));
+	if(!$nb_docs){
+		return false;
 	}
 	
 	if($GLOBALS['visiteur_session']['id_auteur']>0){

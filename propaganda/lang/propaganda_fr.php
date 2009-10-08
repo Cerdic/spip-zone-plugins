@@ -14,6 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'carte_envoyee' => 'Carte postale envoy&eacute;e',
 	'connexion_obligatoire' => 'Vous devez &ecirc;tre connect&eacute; pour envoyer une carte.',
+	'cfg_titre_configuration' => 'Configuration du plugin "Propaganda"',
 	'champ_obligatoire' => 'Ce champ est obligatoire',
 	'champ_trop_court' => 'Ce champ doit &ecirc;tre plus long que @taille@ caract&egrave;res',
 	'choose_image' => 'Choisissez une image',
@@ -30,6 +31,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'emmetteur_envoi' => 'vous a fait parvenir cette carte &eacute;lectronique',
 	'envoi_nouvelle_carte' => 'Envoyer une autre carte postale',
 
+	// L
+	'label_documents_traduction' => 'Utiliser les documents des traductions li&eacute;es',
+	
 	// M
 	'merci_de_visite' => 'Merci de votre visite...',
 	

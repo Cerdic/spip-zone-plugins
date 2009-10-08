@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	// C
 	'carte_envoyee' => 'Postcard sent',
+	'cfg_titre_configuration' => 'Set up of the "Propaganda" plugin',
 	'champ_obligatoire' => 'This field is mandatory',
 	'champ_trop_court' => 'This field must be more than @taille@ characters length',
 	'choose_image' => 'Choose a postcard image',
@@ -31,6 +32,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'emmetteur' => 'Sender:',
 	'emmetteur_envoi' => 'sends you this e-postcard',
 	'envoi_nouvelle_carte' => 'Send another postcard',
+	
+	// L
+	'label_documents_traduction' => 'Use the documents of the linked translations',
 	
 	// M
 	'merci_de_visite' => 'Thank you for your visit...',
