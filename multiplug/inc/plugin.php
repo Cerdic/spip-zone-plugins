@@ -28,7 +28,7 @@ function liste_plugin_files($dir_plugins = null){
 	$liste_plugs=array();
 	if (is_null($dir_plugins)) { 
 		if (defined('_DIR_PLUGINS_SUPPL')) { 
-			$dir_plugins = _DIR_PLUGINS_SUPPL.':'._DIR_PLUGINS; 
+			$dir_plugins = _DIR_PLUGINS_FORK.':'_DIR_PLUGINS_SUPPL.':'._DIR_PLUGINS; 
 		} else 
 		$dir_plugins = _DIR_PLUGINS; 
 	} 
