@@ -29,9 +29,11 @@ function formulaires_propaganda_charger_dist($id_article='',$retour=''){
 	 */
 	if($config['documents_traduction'] == 'on'){
 		$id_trad = sql_getfetsel('id_trad','spip_articles','id_article='.intval($id_article));
-		$res = sql_select('id_article','spip_articles','id_trad='.intval($id_trad));	
-		while($r = sql_fetch($res)){
-		    $valeurs['articles'][] = $r['id_article'];
+		if($id_trad > 0){
+			$res = sql_select('id_article','spip_articles','id_trad='.intval($id_trad));	
+			while($r = sql_fetch($res)){
+			    $valeurs['articles'][] = $r['id_article'];
+			}
 		}
 	}
 	$nb_docs = sql_count(sql_select("DISTINCT id_document","spip_documents_liens",
