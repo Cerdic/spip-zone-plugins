@@ -22,24 +22,24 @@ function inscription2_upgrade(){
 		ecrire_meta("accepter_visiteurs", "oui");
 	}
 
-	$version_base = $GLOBALS['inscription2_version'];
 	$current_version = 0.0;
+	$version_base = $GLOBALS['meta']['inscription2_version'];
 
 	//insertion des infos par defaut
 	$inscription2_meta = $GLOBALS['meta']['inscription2'];
 
 	//Certaines montées de version ont oublié de corriger la meta de I2
 	//si ce n'est pas un array alors il faut reconfigurer la meta
-	if ($inscription2_meta && !is_array(unserialize($inscription2_meta))) {
+	if (isset($version_base) && !is_array(unserialize($inscription2_meta))) {
 		spip_log("INSCRIPTION 2 : effacer la meta inscription2 et relancer l'install","inscription2");
 		echo "La configuration du plugin Inscription 2 a &eacute;t&eacute; effac&eacute;e.<br />";
 		effacer_meta('inscription2');
-		$GLOBALS['meta']['inscription2_version']=0.0;
+		$version_base = 0.0;
 	}
 
 	// Si la version installee est la derniere en date, on ne fait rien
-	if ( (isset($GLOBALS['meta']['inscription2_version']) )
-		&& (($current_version = $GLOBALS['meta']['inscription2_version'])==$version_base))
+	if ( (isset($version_base) )
+		&& (($current_version = $version_base)==$GLOBALS['inscription2_version']))
 	return;
 
 	//Si c est une nouvelle installation toute fraiche
@@ -96,61 +96,25 @@ function inscription2_upgrade(){
 		ecrire_meta('inscription2_version',$current_version=$version_base);
 		$current_version = $version_base;
 	}
-
-	// Si la version installee est inferieur a O.6 on fait l homogeneisation avec spip_geo
-	if ($current_version<0.6){
-		include_spip('base/abstract_sql');
-		include(_DIR_PLUGIN_INSCRIPTION2."/inc/pays.php");
-		$table_pays = "spip_geo_pays";
-		$descpays = sql_showtable($table_pays, '', false);
-
-		$descpays_old = sql_showtable('spip_pays', '', false);
-		if(isset($descpays_old['field'])){
-			sql_drop_table("spip_pays");
-		}
-
-		if(!isset($descpays['field']['pays'])){
-			sql_create("spip_geo_pays",
-				array("id_pays"=> "SMALLINT NOT NULL AUTO_INCREMENT","nom" => "varchar(255) NOT NULL"),
-				array('PRIMARY KEY' => "id_pays")
-			);
-			spip_query("INSERT INTO spip_geo_pays (nom) VALUES (\"".join('"), ("',$liste_pays)."\")");
-		}
-
-		echo "Inscription2 update @ 0.6<br/>Spip_pays devient spip_geo_pays homogeneite avec spip_geo";
-		ecrire_meta('inscription2_version',$current_version=0.6);
-	}
-		// Si la version installee est inferieur a 0.6 on fait l homogeneisation avec spip_geo
-	if ($current_version<0.61){
-		include_spip('base/abstract_sql');
-		$table_pays = "spip_geo_pays";
-		$descpays = sql_showtable($table_pays, '', false);
-
-		if((isset($descpays['field']['nom'])) && (!isset($descpays['field']['pays']))){
-			sql_alter("TABLE spip_geo_pays CHANGE nom pays varchar(255) NOT NULL");
-		}
-
-		echo "Inscription2 update @ 0.61<br/>On retablit le champs pays sur la table pays et pas nom";
-		ecrire_meta('inscription2_version',$current_version=0.61);
-	}
 	if ($current_version<0.63){
 		include_spip('base/abstract_sql');
 		// Suppression du champs id et on remet la primary key sur id_auteur...
-		sql_alter("TABLE spip_auteurs_elargis DROP id, DROP INDEX id_auteur, ADD PRIMARY KEY (id_auteur)");
-		echo "Inscription2 update @ 0.63<br />On supprime le champs id pour privilegier id_auteur";
+		sql_alter("TABLE spip_auteurs_elargis DROP id");
+		sql_alter("TABLE spip_auteurs_elargis DROP INDEX id_auteur");
+		sql_alter("TABLE spip_auteurs_elargis ADD PRIMARY KEY (id_auteur)");
+		echo "Inscription2 update @ 0.63 : On supprime le champs id pour privilegier id_auteur<br />";
 		ecrire_meta('inscription2_version',$current_version=0.63);
-	}
-	if ($current_version<0.65){
-		ecrire_meta('inscription2_version',$current_version=0.65);
 	}
 
 	if ($current_version<0.71){
+		spip_log('INSCRIPTION2 : upgrade en version 0.71');	
 		/*
 		 * Reinstaller les pays de Geographie
 		 * pour ne pas etre dependant de ce plugin
 		 */
 		i2_installer_pays();
 		spip_log("Inscription2 update @ 0.71 : installation de la table pays de geographie", "maj");
+		echo "Inscription2 update @ 0.71 : installation de la table pays de geographie<br />";
 		ecrire_meta('inscription2_version',$current_version=0.71);
 	}
 
@@ -179,7 +143,7 @@ function inscription2_vider_tables() {
 		$clef_passee = array();
 		$desc = sql_showtable('spip_auteurs_elargis','', '', true);
 		foreach(lire_config('inscription2',array()) as $cle => $val){
-			$cle = ereg_replace("_(obligatoire|fiche|table).*", "", $cle);
+			$cle = preg_replace("_(obligatoire|fiche|table).*", "", $cle);
 			if(!in_array($cle,$clef_passee)){
 				if(isset($desc['field'][$cle]) and !in_array($cle,$exceptions_des_champs_auteurs_elargis)){
 					spip_log("INSCRIPTION 2 : suppression de $cle","inscription2");
@@ -206,10 +170,14 @@ function inscription2_vider_tables() {
 
 // reinstaller la table de pays
 function i2_installer_pays() {
+	spip_log('INSCRIPTION2 : i2_installer_pays');
 	if (!defined('_DIR_PLUGIN_GEOGRAPHIE')) {
 		// 1) suppression de la table existante
 		// pour redemarrer les insert a zero
-		sql_drop_table("spip_geo_pays");
+		$descpays = sql_showtable('spip_geo_pays', '', false);
+		if(isset($descpays['field'])){
+			sql_drop_table("spip_geo_pays");
+		}
 		// 2) recreation de la table
 		include_spip('base/create');
 		creer_base();

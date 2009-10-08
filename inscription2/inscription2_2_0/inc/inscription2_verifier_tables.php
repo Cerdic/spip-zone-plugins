@@ -61,6 +61,7 @@ function inc_inscription2_verifier_tables_dist(){
 		$tables_principales[$table]['field']['spip_listes_format'] = "VARCHAR(8) DEFAULT 'non' NOT NULL";
 
 	include_spip('base/create');
+	creer_base();
 	maj_tables($table);
 	return;
 }
