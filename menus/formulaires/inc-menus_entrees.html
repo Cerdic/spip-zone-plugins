@@ -37,6 +37,7 @@
 		</BOUCLE_test_modifier>
 		#INCLURE{fond=formulaires/inc-nouvelle_entree-2, env, id_menus_entree=#ID_MENUS_ENTREE}
 		<//B_test_modifier>
+		
 		[(#REM) Est-ce qu'il y a un sous-menu ?)]
 		<BOUCLE_sous_menu(MENUS){id_menus_entree}>
 			#INCLURE{fond=formulaires/inc-menus_entrees, env, id_menu, sous_menu=oui}
@@ -48,26 +49,23 @@
 		#SET{id_menu_nouvelle_entree, (#ENV{erreurs}|table_valeur{id_menu_nouvelle_entree})}
 		#SET{type_entree, (#ENV{erreurs}|table_valeur{type_entree})}
 
-		[(#GET{id_menu_nouvelle_entree}|=={#ENV{id_menu}}|non)
-			<span class='image_loading'></span>
+		<BOUCLE_pas_demande_entree(CONDITION){si #GET{id_menu_nouvelle_entree}|=={#ENV{id_menu}}|non}>
+			[(#ENV{sous_menu}|non)<span class="image_loading"></span>]
 			<button type="submit" class="submit" name="demander_nouvelle_entree" value="#ENV{id_menu}">
 				[<img src="(#CHEMIN{images/menus_action_ajouter.png})" />]
 				<:menus:formulaire_ajouter_entree:>
 			</button>
-			[(#ENV{sous_menu}|oui)
-			<button type="submit" class="submit" name="supprimer_sous_menu" value="#ENV{id_menu}">
+			<button type="submit" class="submit" name="supprimer_menu" value="#ENV{id_menu}">
 				[<img src="(#CHEMIN{images/menus_action_supprimer.png})" />]
-				<:menus:formulaire_supprimer_sous_menu:>
+				[(#ENV{sous_menu}|?{<:menus:formulaire_supprimer_sous_menu:>,<:menus:formulaire_supprimer_menu:>})]
 			</button>
-			]
-		]
-		[(#GET{id_menu_nouvelle_entree}|=={#ENV{id_menu}}|oui)
+		</BOUCLE_pas_demande_entree>
 			[(#GET{type_entree}|non)
 				#INCLURE{fond=formulaires/inc-nouvelle_entree-1, env, id_menu_nouvelle_entree=#GET{id_menu_nouvelle_entree}}
 			]
 			[(#GET{type_entree}|oui)
 				#INCLURE{fond=formulaires/inc-nouvelle_entree-2, env, id_menu_nouvelle_entree=#GET{id_menu_nouvelle_entree}, rang_suivant=#GET{rang_suivant}}
 			]
-		]
+		<//B_pas_demande_entree>
 	</li>
 </ul>

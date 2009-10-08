@@ -45,9 +45,11 @@ function formulaires_editer_menu_charger($id_menu, $nouveau){
 		if ($contexte['editable']){
 			$contexte['id_menu'] = $id_menu;
 		
-			// Les deux champs du menu principal
+			// Les champs du menu principal
 			$contexte['titre'] = '';
 			$contexte['identifiant'] = '';
+			$contexte['css'] = '';
+			$contexte['import'] = '';
 		
 			// Si le menu existe on prérempli
 			if ($id_menu){
@@ -107,7 +109,7 @@ function formulaires_editer_menu_traiter($id_menu, $nouveau){
 	include_spip('base/abstract_sql');
 	$retours = array();
 	
-	// On récupère les deux champs
+	// On récupère les champs
 	$titre = _request('titre');
 	$identifiant = _request('identifiant');
 	$css = _request('css');
@@ -135,6 +137,22 @@ function formulaires_editer_menu_traiter($id_menu, $nouveau){
 				'id_menus_entree' => 0
 			)
 		);
+		
+		// S'il y a un fichier on tente d'importer son contenu
+		if ($_FILES['import']){
+			$fichier = $_FILES['import']['tmp_name'];
+			$yaml = '';
+			lire_fichier($fichier, $yaml);
+			// Si on a bien recupere une chaine on tente de la decoder
+			if ($yaml){
+				include_spip('inc/yaml');
+				$entrees = yaml_decode($yaml);
+				// Si le decodage marche on importe alors le contenu
+				if (is_array($entrees)){
+					menus_importer($entrees, $id_menu);
+				}
+			}
+		}
 	}
 	
 	// Si ça va pas on errorise
@@ -151,6 +169,34 @@ function formulaires_editer_menu_traiter($id_menu, $nouveau){
 	$retours['editable'] = true;
 	
 	return $retours;
+}
+
+function menus_importer($entrees, $id_menu){
+	// On lit chaque entree de premier niveau
+	foreach ($entrees as $cle => $entree){
+		// On ajoute cette entree
+		$id_menus_entree = sql_insertq(
+			'spip_menus_entrees',
+			array(
+				'id_menu' => $id_menu,
+				'rang' => ($cle+1),	// les entrees sont dans l'ordre des rangs
+				'type_entree' => $entree['type_entree'],
+				'parametres' => serialize($entree['parametres'])
+			)
+		);
+		
+		// S'il existe un sous-menu pour cette entree on le cree
+		if (is_array($entree['sous_menu'])){
+			$id_sous_menu = sql_insertq(
+				'spip_menus',
+				array(
+					'id_menus_entree' => $id_menus_entree
+				)
+			);
+			// Puis dedans on importe les entrees correspondantes
+			menus_importer($entree['sous_menu'], $id_sous_menu);
+		}
+	}
 }
 
 ?>

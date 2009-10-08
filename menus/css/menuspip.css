@@ -1,4 +1,13 @@
 
+.formulaire_editer_menu_entrees{
+	position:relative;
+}
+.formulaire_editer_menu_entrees .image_loading{
+	position:absolute;
+	top:50%;
+	left:50%;
+}
+
 .formulaire_spip ul.menus_entrees{
 	clear:both;
 }
@@ -18,19 +27,14 @@
 }
 
 .formulaire_spip ul.menus_entrees .ligne{
-	padding-right:50%;
+	position:relative;
 }
 
-.formulaire_spip ul.menus_entrees .description{
-	float:left;
-	width:100%;
-}
 .formulaire_spip ul.menus_entrees .actions{
-	float:right;
-	width:95%;
-	margin-right:-100%;
+	position:absolute;
+	right:5px;
+	top:5px;
 	text-align:right;
-	line-height:29px;
 }
 
 .formulaire_spip ul.menus_entrees .titre{

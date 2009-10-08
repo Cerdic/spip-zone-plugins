@@ -41,6 +41,18 @@
 								[<span class='erreur_message'>(#GET{erreurs})</span>]
 								<input type="text" class="text" name="#GET{name}" id="#GET{name}" size="40" value="#ENV{#GET{name}}" />
 							</li>
+							
+							[(#REM) Seulement si c'est un nouveau)]
+							[(#ENV{id_menu}|non)
+							#SET{name,import}
+							#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+							<li class="editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
+								<label for="#GET{name}"><:menus:formulaire_importer:></label>
+								<div class="explication"><:menus:formulaire_importer_explication:></div>
+								[<span class='erreur_message'>(#GET{erreurs})</span>]
+								<input type="file" class="file" name="#GET{name}" id="#GET{name}" size="20" value="#ENV{#GET{name}}" />
+							</li>
+							]
 						</ul>
 
 						<p class='boutons'>

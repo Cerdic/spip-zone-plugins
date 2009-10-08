@@ -246,11 +246,18 @@ function formulaires_editer_menu_entrees_traiter($id_menu){
 		if (!$id_menu) $retours['message_erreur'] = _T('menus:erreur_mise_a_jour');
 	}
 	
-	// Si on veut supprimer un sous-menu ---------------------------------------
+	// Si on veut supprimer un menu --------------------------------------------
 	
-	if ($id_menu = intval(_request('supprimer_sous_menu'))){
+	if ($id_menu = intval(_request('supprimer_menu'))){
+		// Est-ce un menu ou un sous-menu ?
+		$sous_menu = intval(sql_getfetsel(
+			'id_menus_entree',
+			'spip_menus',
+			'id_menu = '.$id_menu
+		));
 		$ok = menus_supprimer_menu($id_menu);
 		if (!$ok) $retours['message_erreur'] = _T('menus:erreur_mise_a_jour');
+		if ($ok and !$sous_menu) $retours['redirect'] = generer_url_ecrire('menus_tous');
 	}
 	
 	$retours['editable'] = true;
