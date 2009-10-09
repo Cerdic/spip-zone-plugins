@@ -57,11 +57,11 @@ Il est con&ccedil;u pour faciliter la phase de d&eacute;veloppement du site (not
 	</pipeline>
 	<!-- avec plugin revisions (2.1) -->
 	<pipeline>
-		<nom>revisions_infos_tables_versions</nom>
+		<nom>gouverneur_infos_tables</nom>
 		<inclure>tickets_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
-		<nom>gouverneur_liste_objets</nom>
+		<nom>revisions_liste_objets</nom>
 		<inclure>tickets_pipelines.php</inclure>
 	</pipeline>
 
