@@ -7,7 +7,7 @@
 
 function grappes_inserer_js_recherche_objet(){
 	return <<<EOS
-		
+
 		function rechercher_objet(id_selecteur, page_selection) {
 			// chercher l'input de saisie
 			var me = jQuery(id_selecteur+' input[name=nom_objet]');
@@ -44,16 +44,16 @@ EOS;
 function grappes_inserer_javascript($flux){
 	include_spip('selecteurgenerique_fonctions');
 	$flux .= selecteurgenerique_verifier_js($flux);
-	
+
 	$js = grappes_inserer_js_recherche_objet();
 	$js = "<script type='text/javascript'><!--\n$js\n// --></script>\n";
 
-	return $flux.$js;	
+	return $flux.$js;
 }
 
 /**
  * Ajoute aux pages qui peuvent etres lies a une grappe
- * un formulaire pour lister les grappes lies 
+ * un formulaire pour lister les grappes lies
  * et en ajouter de nouvelles
 **/
 
@@ -63,11 +63,11 @@ function grappes_affiche_milieu($flux){
 			case 'articles':
 				$source = 'articles';
 				$id_source = $flux['args']['id_article'];
-				break;			
+				break;
 			case 'auteur_infos':
 				$source = 'auteurs';
 				$id_source = $flux['args']['id_auteur'];
-				break;			
+				break;
 			case 'breves_voir':
 				$source = 'breves';
 				$id_source = $flux['args']['id_breve'];
@@ -79,14 +79,14 @@ function grappes_affiche_milieu($flux){
 			case 'mots_edit':
 				$source = 'mots';
 				$id_source = $flux['args']['id_mot'];
-				break;	
+				break;
 			case 'sites':
 				$source = 'syndic';
 				$id_source = $flux['args']['id_syndic'];
-				break;			
+				break;
 			default:
 				$source = $id_source = '';
-				break;	
+				break;
 		}
 		if ($source && $id_source) {
 			// seulement s'il existe une grappe liable a cet objet
@@ -96,8 +96,8 @@ function grappes_affiche_milieu($flux){
 			}
 		}
 	}
-	
-	return $flux;	
+
+	return $flux;
 }
 
 ?>

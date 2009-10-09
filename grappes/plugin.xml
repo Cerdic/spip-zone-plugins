@@ -47,4 +47,8 @@
 		<url>grappes</url> <!-- nom de l'exec, facultatif, par defaut prend l'id -->
 		<args></args>
 	</bouton>
+	<bouton id='grappes' parent='bando_edition'>
+		<icone>images/grappe-16.png</icone>
+		<titre>grappes:titre_page_grappes</titre>
+	</bouton>
 </plugin>

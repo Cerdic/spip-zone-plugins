@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // D
 'delier' => 'D&eacute;lier',
+
 // I
 'icone_creation_grappe' => 'Cr&eacute;er une nouvelle grappe',
 'icone_modif_grappe' => 'Modifier cette grappe',
