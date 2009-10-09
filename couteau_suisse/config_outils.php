@@ -1020,6 +1020,7 @@ add_outil( array(
 	'id' => 'maj_auto',
 	'categorie' => 'admin',
 	'version-min' => '1.9300',
+	'contrib' => 3223,
 ));
 
 //reglage du nombre de case pour le brouteur
