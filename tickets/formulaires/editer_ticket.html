@@ -21,12 +21,12 @@
 				[(#SAISIE{selection, type,
 					label=<:tickets:champ_type:>,
 					cacher_option_intro=oui,
-					datas=[(#VAL|tickets_liste_type)]})]
+					datas=[(#VAL{#ENV{id_ticket}}|tickets_liste_type)]})]
 
 				[(#SAISIE{selection, severite,
 					label=<:tickets:champ_severite:>,
 					cacher_option_intro=oui,
-					datas=[(#VAL|tickets_liste_severite)]})]
+					datas=[(#VAL{#ENV{id_ticket}}|tickets_liste_severite)]})]
 
 				#SET{saisies, #ARRAY{0,projet,1,composant,2,version,3,jalon}}
 				<BOUCLE_saisies(POUR) {tableau #GET{saisies}}>

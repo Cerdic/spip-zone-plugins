@@ -124,21 +124,23 @@ function tickets_liste_statut($connecte = true){
 }
 
 
-function tickets_liste_type(){
-	return array(
-		1 => _T("tickets:type_probleme"),
-		2 => _T("tickets:type_amelioration"),
-		3 => _T("tickets:type_tache"),
+function tickets_liste_type($id_ticket = null){
+	$types = array(
+		_T("tickets:type_probleme"),
+		_T("tickets:type_amelioration"),
+		_T("tickets:type_tache"),
 	);
+	return $types;
 }
 
-function tickets_liste_severite(){
-	return array(
-		1 => _T("tickets:severite_bloquant"),
-		2 => _T("tickets:severite_important"),
-		3 => _T("tickets:severite_normal"),
-		4 => _T("tickets:severite_peu_important"),
+function tickets_liste_severite($id_ticket = null){
+	$severites = array(
+		_T("tickets:severite_bloquant"),
+		_T("tickets:severite_important"),
+		_T("tickets:severite_normal"),
+		_T("tickets:severite_peu_important"),
 	);
+	return $severites;
 }
 
 if(!function_exists('barre_typo')){

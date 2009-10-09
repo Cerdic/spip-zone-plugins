@@ -64,22 +64,20 @@ function tickets_edit_config(){
  *
  * @return
  * @param int $id_ticket[optional]
- * @param string $retour[optional]
+ * @param string $retour[optional] Une url de retour (on lui passera id_ticket=XX en paramètre)
  * @param object $config_fonc[optional]
  * @param object $row[optional]
  */
 function formulaires_editer_ticket_traiter($id_ticket='new',$retour='', $config_fonc='tickets_edit_config', $row=array(), $hidden=''){
-	return formulaires_editer_objet_traiter('ticket',$id_ticket,0,0,$retour,$config_fonc,$row,$hidden);
-	$action_editer = charger_fonction("editer_ticket",'action');
-	list($id,$err) = $action_editer();
+	$res = formulaires_editer_objet_traiter('ticket',$id_ticket,0,0,$retour,$config_fonc,$row,$hidden);
 
 	$message['message_ok'] = _T('tickets:ticket_enregistre');
-	if ($retour) {
-		include_spip('inc/headers');
-		$retour = parametre_url($retour,'id_ticket',$id);
-		$message['redirect'] = redirige_formulaire($retour);
-	}else{
-		$message['redirect'] = parametre_url(self(),'id_ticket',$id);
+	/**
+	 * Si pas d'adresse de retour on revient sur la page en cours avec l'id_ticket en paramètre
+	 * Utile pour l'utilisation dans le public
+	 */
+	if (!$retour) {
+		$message['redirect'] = parametre_url(parametre_url(self(),'id_ticket', $res['id_ticket']),'ticket','');
 	}
 	return $message;
 }

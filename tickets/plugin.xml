@@ -1,5 +1,5 @@
 <plugin>
-	<nom>Tickets, syst&egrave;me de suivi de bugs</nom>
+	<nom><multi>[fr]Tickets, syst&egrave;me de suivi de bugs[en]Tickets, Bug tracking system</multi></nom>
 	<auteur>ARNO*</auteur>
 	<licence>GPL v3</licence>
 	<description>

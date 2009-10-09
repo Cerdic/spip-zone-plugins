@@ -110,6 +110,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'ticket' => 'Bug report',
+	'ticket_enregistre' => 'The ticket has been saved.',
 	'tickets' => 'Bug reports',
 	'titre' => 'Tickets, bug tracking',
 	'titre_liste' => 'List of the bug reports',
