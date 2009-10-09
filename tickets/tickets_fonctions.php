@@ -68,11 +68,6 @@ function tickets_classer_par_jalon($bidon) {
 	return $page;
 }
 
-function tickets_bouton_retour ($id_ticket, $logo, $align) {
-	include_spip("inc/presentation");
-	return icone_inline(_L('Retour'), generer_url_ecrire("ticket_afficher","id_ticket=$id_ticket"), $logo, "", $align);
-}
-
 // Affichage des blocs de liste depliables et ajaxes
 function tickets_debut_block_depliable($deplie,$id=""){
 	include_spip('inc/layer');

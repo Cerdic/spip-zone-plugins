@@ -37,7 +37,7 @@
 
 [(#AUTORISER{ecrire, ticket}|oui)
 	[(#VAL{<:tickets:creer_ticket:>}|icone_inline{
-		#VAL{ticket_editer}|generer_url_ecrire{id_ticket=new},
+		#VAL{ticket_editer}|generer_url_ecrire{id_ticket=new}|parametre_url{retour,#SELF},
 		#CHEMIN{imgs/bugs.png},
 		creer.gif,
 		right
