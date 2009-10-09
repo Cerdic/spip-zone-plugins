@@ -3,6 +3,7 @@
 	<multi>[fr]Mediath&egrave;que
 	[it]Gestione dei documenti
 	[es]Gesti&oacute;n de los documentos
+	[ar]&#1605;&#1585;&#1603;&#1586;&#32;&#1575;&#1604;&#1608;&#1579;&#1575;&#1574;&#1602;
 	</multi>
 	</nom>
 	<icon>img_pack/portfolio-64.png</icon>
@@ -15,6 +16,7 @@
 	[fr]Outils de gestion des documents, avec page r&eacute;capitulative listant tous les documents du site.
 	[it]Utility di gestione dei documenti : una pagina che mostra tutti i documenti.
 	[es]Utilidad de gesti&oacute;n de los documentos: una p&aacute;gina que resume todos los documentos del sitio.
+	[ar]&#1571;&#1583;&#1608;&#1575;&#1578;&#32;&#1573;&#1583;&#1575;&#1585;&#1577;&#32;&#1575;&#1604;&#1608;&#1579;&#1575;&#1574;&#1602;&#1548;&#32;&#1605;&#1593;&#32;&#1589;&#1601;&#1581;&#1577;&#32;&#1605;&#1608;&#1580;&#1586;&#32;&#1580;&#1605;&#1610;&#1593;&#32;&#1575;&#1604;&#1608;&#1579;&#1575;&#1574;&#1602;&#32;&#1593;&#1604;&#1609;&#32;&#1575;&#1604;&#1605;&#1608;&#1602;&#1593;&#46;
 	</multi></description>
 	<lien>http://www.spip-contrib.net/mediatheque</lien> <!-- URI de documentation -->
 	<install>base/gestdoc.php</install>
