@@ -95,16 +95,16 @@ function tickets_objets_extensibles($objets){
  * @param object $array
  * @return
  */
-function tickets_revisions_infos_tables_versions($array){
+function tickets_gouverneur_infos_tables($array){
 	$array['spip_tickets'] = array(
 								'table_objet' => 'tickets',
 								'type' => 'ticket',
-								'champs' => array('titre','exemple', 'texte'),
 								'url_voir' => 'ticket_afficher',
 								'texte_retour' => 'tickets:icone_retour_ticket',
 								'url_edit' => 'ticket_editer',
 								'texte_modifier' => 'tickets:icone_modifier_ticket',
-								'icone_objet' => 'ticket-24.png'
+								'icone_objet' => 'ticket-24.png',
+								'champs_versionnes' => array('titre','exemple', 'texte'),
 							);
 	return $array;
 }

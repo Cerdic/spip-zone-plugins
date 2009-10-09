@@ -61,7 +61,7 @@ Il est con&ccedil;u pour faciliter la phase de d&eacute;veloppement du site (not
 		<inclure>tickets_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
-		<nom>revisions_liste_objets</nom>
+		<nom>gouverneur_liste_objets</nom>
 		<inclure>tickets_pipelines.php</inclure>
 	</pipeline>
 
