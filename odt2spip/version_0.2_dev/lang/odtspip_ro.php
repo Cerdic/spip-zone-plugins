@@ -17,7 +17,7 @@
 
     // E
         'err_enregistrement_fichier_sortie' => 'Salvare eroare fragment fisier',
-        'err_extension_xslt'=> 'Functiile Xslt nu sunt operationale in apache: cereti administratorului de server activarea extensiilor XSL',
+        'err_extension_xslt'=> 'Functiile Xslt nu sunt operationale in PHP: cereti administratorului de server activarea extensiilor XSL',
         'err_import_snippet' => 'Eroare la crearea articolului cu plugin Snippets. Asigurativa ca este instalat corespunzator si activat.',
         'err_repertoire_tmp' => 'Eroare: folderul tmp/odt2spip sau subfolderul lui /id_auteur nu a fost creat',
         'err_telechargement_fichier' => 'Eroare: fisierul nu a putut fi recuperat',

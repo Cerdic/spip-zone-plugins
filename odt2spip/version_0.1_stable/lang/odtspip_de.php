@@ -17,7 +17,7 @@
 
     // E
         'err_enregistrement_fichier_sortie' => 'Fehler beim Speichern der Datei des pluggin snippet',
-        'err_extension_xslt'=> 'Xslt Funktionen arbeiten nicht in Apache: Frage nach der Aktivierung der XSL Erweiterungen bei deinem Server Administrator',
+        'err_extension_xslt'=> 'Xslt Funktionen arbeiten nicht in PHP: Frage nach der Aktivierung der XSL Erweiterungen bei deinem Server Administrator',
         'err_import_snippet' => 'Fehler bei der Herstellung des Artikels mit Zusatzdateien. Kontrolliere auf richtige Installierung und Aktivierung.',
         'err_repertoire_tmp' => 'Fehler: tmp/odt2spip Ordner oder zugehöriger Unterordner  /id auteur wurde nicht hergestellt',
         'err_telechargement_fichier' => 'Fehler: die Datei konnte nicht wieder hergestellt werden',

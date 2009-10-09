@@ -17,7 +17,7 @@
 
     // E
         'err_enregistrement_fichier_sortie' => 'Erreur lors de l\'enregistrement du fichier de snippet ',
-        'err_extension_xslt'=> 'Les fonctions xslt ne sont pas operationnelles dans apache: demandez l\'activation des extensions XSL &agrave votre administrateur de serveur',
+        'err_extension_xslt'=> 'Les fonctions XSLT ne sont pas operationnelles : demandez l\'activation des extensions XSL de PHP &agrave votre administrateur de serveur',
         'err_import_snippet' => 'Erreur lors de la cr&eacute;ation de l\'article par le plugin Snippets. V&eacute;rifiez que celui-ci est correctement install&eacute; et activ&eacute;.',
         'err_repertoire_tmp' => 'Erreur: le dossier tmp/odt2spip ou son sous-dossier /id_auteur n\'a pu &ecirc;tre cr&eacute;&eacute;',
         'err_telechargement_fichier' => 'Erreur: le fichier t&eacute;l&eacute;charg&eacute; n\'a pu &ecirc;tre r&eacute;cup&eacute;r&eacute;',

@@ -17,7 +17,7 @@
 
     // E
         'err_enregistrement_fichier_sortie' => 'Error saving file snippet',
-        'err_extension_xslt'=> 'Xslt functions are not operational in apache : ask activation XSL extensions to your server administrator',
+        'err_extension_xslt'=> 'PHP\'s XSLT functions are not operational in: ask activation XSL extensions to your server administrator',
         'err_import_snippet' => 'Error when creating the article with the plugin Snippets. Make sure it is properly installed and activated.',
         'err_repertoire_tmp' => 'Error: tmp/odt2spip folder or its subfolder / id_auteur has not been created',
         'err_telechargement_fichier' => 'Error: the file could not be recovered',
