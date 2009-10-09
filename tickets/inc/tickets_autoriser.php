@@ -22,7 +22,7 @@ function definir_autorisations_tickets($action,$utiliser_defaut=true){
 			$define = (defined('_TICKETS_AUTORISATION_ECRIRE')) ? _TICKETS_AUTORISATION_ECRIRE : ($utiliser_defaut ? '0minirezo':'');
 			break;
 		case 'notifier':
-			$define = (defined('_TICKETS_AUTORISATION_NOTIFIER')) ? _TICKETS_AUTORISATION_NOTIFIER : ($utiliser_defaut ? '1comite':'');
+			$define = (defined('_TICKETS_AUTORISATION_NOTIFIER')) ? _TICKETS_AUTORISATION_NOTIFIER : ($utiliser_defaut ? '0minirezo':'');
 			break;
 		case 'assigner':
 			$define = (defined('_TICKETS_AUTORISATION_ASSIGNER')) ? _TICKETS_AUTORISATION_ASSIGNER : ($utiliser_defaut ? '0minirezo':'');
@@ -73,7 +73,7 @@ function autoriser_ticket_ecrire_dist($faire, $type, $id, $qui, $opt){
 	}
 	// Utilisation du CFG si possible
 	if(function_exists('lire_config')){
-		$type = lire_config('tickets/autorisations/ecrire_type', '1comite');
+		$type = lire_config('tickets/autorisations/ecrire_type', 'par_statut');
 		switch($type) {
 			case 'webmestre':
 				// Webmestres uniquement
@@ -81,7 +81,7 @@ function autoriser_ticket_ecrire_dist($faire, $type, $id, $qui, $opt){
 				break;
 			case 'par_statut':
 				// Traitement spécifique pour la valeur 'tous'
-				if(in_array('tous',lire_config('tickets/autorisations/ecrire_statuts',array()))){
+				if(in_array('tous',lire_config('tickets/autorisations/ecrire_statuts',array('0minirezo')))){
 					return true;
 				}
 				// Autorisation par statut
@@ -131,7 +131,7 @@ function autoriser_ticket_assigner_dist($faire, $type, $id, $qui, $opt){
 	}
 	// Utilisation du CFG si possible
 	if(function_exists('lire_config')){
-		$type = lire_config('tickets/autorisations/assigner_type', '0minirezo');
+		$type = lire_config('tickets/autorisations/assigner_type', 'par_statut');
 		switch($type) {
 			case 'webmestre':
 				// Webmestres uniquement
@@ -143,7 +143,7 @@ function autoriser_ticket_assigner_dist($faire, $type, $id, $qui, $opt){
 					return true;
 				}
 				// Autorisation par statut
-				$autorise = in_array($qui['statut'], lire_config('tickets/autorisations/assigner_statuts',array()));
+				$autorise = in_array($qui['statut'], lire_config('tickets/autorisations/assigner_statuts',array('0minirezo')));
 				break;
 			case 'par_auteur':
 				// Autorisation par id d'auteurs
@@ -188,7 +188,7 @@ function autoriser_ticket_commenter_dist($faire, $type, $id, $qui, $opt){
 	}
 	// Utilisation du CFG si possible
 	if(function_exists('lire_config')){
-		$type = lire_config('tickets/autorisations/commenter_type', '1comite');
+		$type = lire_config('tickets/autorisations/commenter_type', 'par_statut');
 		switch($type) {
 			case 'webmestre':
 				// Webmestres uniquement
@@ -200,7 +200,7 @@ function autoriser_ticket_commenter_dist($faire, $type, $id, $qui, $opt){
 					return true;
 				}
 				// Autorisation par statut
-				$autorise = in_array($qui['statut'], lire_config('tickets/autorisations/commenter_statuts',array()));
+				$autorise = in_array($qui['statut'], lire_config('tickets/autorisations/commenter_statuts',array('0minirezo','1comite')));
 				break;
 			case 'par_auteur':
 				// Autorisation par id d'auteurs
@@ -252,7 +252,7 @@ function autoriser_ticket_modifier_dist($faire, $type, $id, $qui, $opt){
 	}
 	// Utilisation du CFG si possible
 	if(function_exists('lire_config')){
-		$type = lire_config('tickets/autorisations/modifier_type', '0minirezo');
+		$type = lire_config('tickets/autorisations/modifier_type', 'par_statut');
 		switch($type) {
 			case 'webmestre':
 				// Webmestres uniquement
@@ -264,7 +264,7 @@ function autoriser_ticket_modifier_dist($faire, $type, $id, $qui, $opt){
 					return true;
 				}
 				// Autorisation par statut
-				$autorise = in_array($qui['statut'], lire_config('tickets/autorisations/modifier_statuts',array()));
+				$autorise = in_array($qui['statut'], lire_config('tickets/autorisations/modifier_statuts',array('0minirezo')));
 				break;
 			case 'par_auteur':
 				// Autorisation par id d'auteurs
