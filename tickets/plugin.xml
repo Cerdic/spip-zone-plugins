@@ -9,8 +9,8 @@ Il est con&ccedil;u pour faciliter la phase de d&eacute;veloppement du site (not
 	<lien></lien> <!-- URI de documentation -->
 	<icon>imgs/logo-bugs.png</icon>
 
-	<version>1.61</version>
-	<version_base>0.6</version_base>
+	<version>1.62</version>
+	<version_base>0.7</version_base>
 	<etat>stable</etat>
 
 	<prefix>tickets</prefix>

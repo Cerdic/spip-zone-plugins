@@ -65,12 +65,20 @@ function formulaires_forum_ticket_verifier($id_ticket=''){
  * @param int $id_ticket[optional]
  */
 function formulaires_forum_ticket_traiter($id_ticket=''){
-	global $visiteur_session;
-	
+
 	$texte = _request("texte");
-		
-	$id_forum_ticket = sql_insertq("spip_tickets_forum", 
-		array("id_ticket" => $id_ticket, "texte" => $texte, "id_auteur" => $visiteur_session['id_auteur'],  "date" => "NOW()"));
+
+	// on stocke l'ip lorsqu'on ne connait pas l'auteur du commentaire
+	// ca peut servir pour de l'antispam
+	$id_auteur = $GLOBALS['visiteur_session']['id_auteur'];
+	$ip = $id_auteur ? '' : $GLOBALS['ip'];
+	
+	$id_forum_ticket = sql_insertq("spip_tickets_forum", array(
+			"id_ticket" => $id_ticket,
+			"texte" => $texte,
+			"id_auteur" => $id_auteur,
+			"ip" => $ip,
+			"date" => "NOW()"));
 
 	// Invalider les caches
 	include_spip('inc/invalideur');

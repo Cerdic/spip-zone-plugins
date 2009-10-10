@@ -79,12 +79,17 @@ function insert_ticket($id_auteur) {
 	 * si autoriser creer renvoie toujours true, et modifier false, pour un anonyme,
 	 * un statut different de 'ouvert' ne sera pas pris en compte tout simplement.
 	 * Mais a la creation, on met rarement "resolu" !
+	 *
+	 * Cependant, lorsqu'on cree un ticket anonyme,
+	 * on stocke l'adresse ip ; cela peut servir pour filtrer des spam
 	 */
+	$ip = $id_auteur ? '' : $GLOBALS['ip'];
 	$statut = intval($id_auteur) ? 'redac' : 'ouvert';
 	$id_ticket = sql_insertq("spip_tickets", array(
 		'statut' => $statut,
 		'date' => date('Y-m-d H:i:s'),
 		'date_modif' => date('Y-m-d H:i:s'),
+		'ip' => $ip,
 		'id_auteur' => $id_auteur));
 
 	return $id_ticket;

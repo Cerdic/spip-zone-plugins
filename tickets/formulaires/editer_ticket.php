@@ -32,7 +32,6 @@ function formulaires_editer_ticket_charger($id_ticket='new', $retour='', $config
 	if ((!$id_ticket or $id_ticket=='new') and ($exemple = _request('exemple'))) {
 		$valeurs['exemple'] = $exemple;
 	}
-
 	$valeurs['editable'] = $editable;
 	return $valeurs;
 }
@@ -50,7 +49,6 @@ function formulaires_editer_ticket_charger($id_ticket='new', $retour='', $config
 function formulaires_editer_ticket_verifier($id_ticket='new', $retour='', $config_fonc='tickets_edit_config', $row=array(), $hidden=''){
 
 	$erreurs = formulaires_editer_objet_verifier('ticket',$id_ticket,array('titre','texte'));
-
 	return $erreurs;
 }
 
@@ -78,7 +76,11 @@ function formulaires_editer_ticket_traiter($id_ticket='new',$retour='', $config_
 	 */
 	if (!$retour) {
 		$message['redirect'] = parametre_url(parametre_url(self(),'id_ticket', $res['id_ticket']),'ticket','');
+	} else {
+		// sinon on utilise la redirection donnee.
+		$message['redirect'] = parametre_url($retour, 'id_ticket', $res['id_ticket']);
 	}
+	
 	return $message;
 }
 ?>

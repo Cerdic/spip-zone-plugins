@@ -15,6 +15,7 @@ function tickets_declarer_tables_principales($tables_principales){
 			"type"	=> "integer DEFAULT '0' NOT NULL",
 			"statut"	=> "varchar(10) DEFAULT '0' NOT NULL",
 			"id_auteur"	=> "bigint(21) NOT NULL",
+			"ip"	=> "varchar(16) DEFAULT '' NOT NULL",
 			"id_assigne"	=> "bigint(21) NOT NULL",
 			"exemple"	=> "varchar(255) DEFAULT '' NOT NULL",
 			"projet"	=> "varchar(60) DEFAULT '' NOT NULL",
@@ -43,6 +44,7 @@ function tickets_declarer_tables_principales($tables_principales){
 			"texte"	=> "longtext DEFAULT '' NOT NULL",
 			"date"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
 			"id_auteur"	=> "bigint(21) NOT NULL",
+			"ip"	=> "varchar(16) DEFAULT '' NOT NULL",
 			"maj"	=> "TIMESTAMP"
 	);
 	$spip_tickets_forum_key = array(
