@@ -1,0 +1,75 @@
+#CACHE{0}
+
+[(#REM) descriptif=
+<h4>Configuration du plugin Rep&egrave;res</h4>
+<p>Cette page de configuration du plugin <strong>rep&egrave;res</strong> vous permet de d&eacute;finir le nombre de rep&egrave;res &agrave; afficher, leur orientation, leur position et leur couleur.</p>
+<p><a href="http://www.spip-contrib.net/Plugin-Reperes?var_mode=preview" class="spip_out">Doc en ligne, forum, FAQ sur SPIP-Contrib</a></p>
+]
+
+[(#REM) Voir en ligne : http://spipnantes.free.fr/spip.php?article97
+]
+[(#REM) titre=Plugin Rep&egrave;res]
+
+
+<div class="config_reperes">
+
+<form method="post" action="#SELF">
+[(#ENV{_cfg_}|form_hidden)]
+
+
+<fieldset class="insertion">
+
+	<legend><:reperes:cfg_lbl_insertion:></legend>
+
+	<p><:reperes:cfg_inf_insertion:></p>
+	
+	<input type="radio" name="insertion" value="avant" class="radio" [(#ENV{insertion}=={avant}?{'checked="checked"',''})] /><label for="champ_insertion_1"><:reperes:cfg_lbl_avant:></label>
+	<input type="radio" name="insertion" value="dans"  class="radio" [(#ENV{insertion}=={dans}?{'checked="checked"',''})]/><label for="champ_insertion_2"><:reperes:cfg_lbl_dans:></label>
+	<input type="radio" name="insertion" value="apres" class="radio" [(#ENV{insertion}=={apres}?{'checked="checked"',''})][(#ENV{insertion}?{'','checked="checked"'})]/><label for="champ_insertion_3"><:reperes:cfg_lbl_apres:></label>
+
+	<label>&nbsp;le bloc <input type="text" name="bloc" value="[(#ENV{bloc}|sinon{'#page'})]" /></label>
+	
+</fieldset>	
+
+<fieldset class="ajouter">
+	<legend><:reperes:cfg_lbl_ajouter:></legend>
+	<table class="spip">
+		<thead>
+		<tr class="row_first">
+			<th rowspan="2">id</th>
+			<th colspan="2">Orientation</th>
+			<th rowspan="2">Position<br />(px ou %)</th>
+			<th rowspan="2">Couleur<br />(#abc ou web)</th>
+		</tr>
+		<tr class="row_first">
+			<th>Hor.</th>
+			<th>Vert.</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr class="">
+			<td><input type="text"  name="numero" value="#ENV{numero}" class="numero" /></td>
+			<td><input type="radio" name="orientation" value="[(#ENV{orientation}=={vertical}?{'checked="checked"',''})] " class="orientation" /></td>
+			<td><input type="radio" name="orientation" value="[(#ENV{orientation}=={horizontal}?{'checked="checked"',''})] " class="orientation" /></td>
+			<td><input type="text"  name="position" value="#ENV{position}" class="position" /></td>
+			<td><input type="text"  name="couleur" value="#ENV{couleur}" class="couleur" /></td>
+		</tr>
+		
+		</tbody>
+
+	</table>
+	
+
+</fieldset>
+
+
+<div style="text-align:#LANG_RIGHT;">
+	<input type="submit" name="_cfg_ok" value="<:oK:>" class="fondo" />
+	<input type="reset" value="<:reset:>" class="fondo" />
+	<input type="submit" name="_cfg_delete" value="<:supprimer:>" class="fondo" />
+</div>
+
+</form>
+
+#CFG_ARBO{reperes}
+</div>

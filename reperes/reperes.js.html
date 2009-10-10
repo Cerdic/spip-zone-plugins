@@ -1,0 +1,20 @@
+#HTTP_HEADER{Content-Type: text/javascript}
+
+/*# AVOID COLLISIONS #*/
+;if(window.jQuery) (function($){
+/*# AVOID COLLISIONS #*/
+
+$(document).ready(function(){ 
+
+	// ici lire la variable reperes/bloc pour remplacer le nom de la div
+	// lire aussi la variable reperes/insertion (pour remplacer after|before ou append) 
+	// voir en ligne : http://docs.jquery.com/Manipulation
+	// lire enfin le tablea de valeurs pour construire les divs
+	$('div#page').after('<div class="invisible trait vertical gauche"></div><div class="invisible trait vertical bord_gauche"></div><div class="invisible trait vertical milieu"></div><div class="invisible trait vertical bord_droite"></div><div class="invisible trait vertical droite"></div><div class="invisible trait horizontal centre"></div>');
+	
+});
+
+
+/*# AVOID COLLISIONS #*/
+})(jQuery);
+/*# AVOID COLLISIONS #*/
