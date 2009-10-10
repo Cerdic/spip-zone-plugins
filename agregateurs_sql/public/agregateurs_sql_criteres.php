@@ -19,10 +19,11 @@ function critere_compteur($idb, &$boucles, $crit){
 	$params = $crit->param;
 	$table = reset($params);
 	$table = $table[0]->texte;
+	$op = false;
 	if(preg_match(',^(\w+)([<>=])([0-9]+)$,',$table,$r)){
 		$table=$r[1];
-		$op=$r[2];
-		$op_val=$r[3];
+		if (count($r)>=3) $op=$r[2];
+		if (count($r)>=4) $op_val=$r[3];
 	}
 	$type = objet_type($table);
 	$type_id = id_table_objet($type);
@@ -46,6 +47,65 @@ function critere_compteur($idb, &$boucles, $crit){
 		$boucle->select[]= "COUNT($compt.$type_id) AS compteur_$table";	
 		if ($op)
 			$boucle->having[]= array("'".$op."'", "'compteur_".$table."'",$op_val);
+	}
+}
+
+
+/**  Critere {somme champ} #SOMME{champ} */
+function critere_somme($idb, &$boucles, $crit){
+	calcul_critere_fonctions(array('SUM'=>'somme'), $idb, $boucles, $crit);
+}
+
+/**  Critere {compte champ} #COMPTE{champ} */
+function critere_compte($idb, &$boucles, $crit){
+	calcul_critere_fonctions(array('COUNT'=>'compte'), $idb, $boucles, $crit);
+}
+
+/**  Critere {moyenne champ} #MOYENNE{champ} */
+function critere_moyenne($idb, &$boucles, $crit){
+	calcul_critere_fonctions(array('AVG'=>'moyenne'), $idb, $boucles, $crit);
+}
+
+/**  Critere {minimum champ} #MINIMUM{champ} */
+function critere_minimum($idb, &$boucles, $crit){
+	calcul_critere_fonctions(array('MIN'=>'minimum'), $idb, $boucles, $crit);
+}
+
+/**  Critere {maximum champ} #MAXIMUM{champ} */
+function critere_maximum($idb, &$boucles, $crit){
+	calcul_critere_fonctions(array('MAX'=>'maximum'), $idb, $boucles, $crit);
+}
+
+/**  Critere {stats champ} calcul la totale : somme, compte, minimum, moyenne, maximum */
+function critere_stats($idb, &$boucles, $crit){
+	calcul_critere_fonctions(array(
+		'SUM'=>'somme',
+		'COUNT'=>'compte',
+		'AVG'=>'moyenne',
+		'MIN'=>'minimum',
+		'MAX'=>'maximum',
+	), $idb, $boucles, $crit);
+}
+
+/* $func : array(FUNC => balise) */
+function calcul_critere_fonctions($func, $idb, &$boucles, $crit) {
+	$boucle = &$boucles[$idb];
+	$_fusion = calculer_liste($crit->param[1], array(), $boucles, $boucle->id_parent);
+
+	$params = $crit->param;
+	$champ = reset($params);
+	$champ = $champ[0]->texte;
+
+	// option DISTINCT {compte DISTINCT(id_article) }
+	$filter="";
+	if (preg_match('/^([a-zA-Z]+)\(\s*([a-zA-Z_]+)\s*\)$/', trim($champ), $r)) {
+		$filter = $r[1]; // DISTINCT
+		$champ = $r[2]; // id_article
+	}
+	
+	$sel = $filter ? "$filter($champ)" : $champ;
+	foreach ($func as $f => $as) {
+		$boucle->select[]= "$f($sel) AS $as" . "_$champ";
 	}
 }
 

@@ -1,0 +1,48 @@
+/*
+/************** Criteres supplémentaires d'agrégation SQL. ***************/
+/* A TESTER et à discuter sur la pertinence et le fonctionnement.
+*/
+
+Featuring : Compteurs et agrégation sql (calculs statistiques). 
+
+Critères disponibles : 
+
+{compteur table} : permet de compter les elements d’une table associées à ceux d’une autre.
+
+Exemple, pour afficher les auteurs avec leur nombre d’articles :
+
+<BOUCLE1(AUTEURS){compteur articles}{par compteur_articles}>
+#ID_AUTEUR : #COMPTEUR{articles}
+</BOUCLE1>
+
+{compte champ}, {somme champ}, {minimum champ}, {maximum champ}, {moyenne champ} : calculs statistiques sans jointures.
+
+également disponible : {compte DISTINCT(champ)}
+
+Balises : 
+
+utiliser les balises homonymes. Exemple : #SOMME{champ}.
+
+Exemple :
+
+<BOUCLE_articles(ARTICLES){fusion statut}{moyenne id_article}{maximum id_article}{minimum id_article}{compte id_article}{somme id_article}>
+#ID_ARTICLE,
+somme : #SOMME{id_article} ,
+compte : #COMPTE{id_article},
+moyenne : #MOYENNE{id_article},
+minimum : #MINIMUM{id_article},
+maximum : #MAXIMUM{id_article}<br />
+</BOUCLE_articles>
+
+<BOUCLE_articles2(ARTICLES){fusion statut}{stats id_article}>
+#ID_ARTICLE,
+somme : #STATS{id_article,somme} ,
+compte : #STATS{id_article,compte},
+moyenne : #STATS{id_article,moyenne},
+minimum : #STATS{id_article,minimum},
+maximum : #STATS{id_article,maximum}<br />
+</BOUCLE_articles2>
+
+En test aussi, une autre possibilité : {stats champ} qui les calcule tous, mais récupérable par #STATS{champ, somme} (echec pour le moment de pouvoir utiliser les #SOMME{champ} et consoeur avec ...)
+
+
