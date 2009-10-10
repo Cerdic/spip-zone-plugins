@@ -105,7 +105,7 @@ function tickets_icone_severite ($niveau) {
 	if ($niveau == 1) $img = "puce-rouge-breve.gif";
 	else if ($niveau == 2) $img = "puce-orange-breve.gif";
 	else if ($niveau == 3) $img = "puce-verte-breve.gif";
-	else if ($niveau == 4)  $img = "puce-poubelle-breve.gif";
+	else if ($niveau == 4) $img = "puce-poubelle-breve.gif";
 
 	return $img;
 }
@@ -126,19 +126,19 @@ function tickets_liste_statut($connecte = true){
 
 function tickets_liste_type($id_ticket = null){
 	$types = array(
-		_T("tickets:type_probleme"),
-		_T("tickets:type_amelioration"),
-		_T("tickets:type_tache"),
+		1 => _T("tickets:type_probleme"),
+		2 => _T("tickets:type_amelioration"),
+		3 => _T("tickets:type_tache"),
 	);
 	return $types;
 }
 
 function tickets_liste_severite($id_ticket = null){
 	$severites = array(
-		_T("tickets:severite_bloquant"),
-		_T("tickets:severite_important"),
-		_T("tickets:severite_normal"),
-		_T("tickets:severite_peu_important"),
+		1 => _T("tickets:severite_bloquant"),
+		2 => _T("tickets:severite_important"),
+		3 => _T("tickets:severite_normal"),
+		4 => _T("tickets:severite_peu_important"),
 	);
 	return $severites;
 }
