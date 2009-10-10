@@ -58,6 +58,9 @@ class Pile {
 			array_unshift($p->param[0], $element);
 			array_unshift($p->param[0], $zero);
 		} else {
+			if (!is_array($p->param[0])) {
+				$p->param[0] = array();
+			}
 			array_unshift($p->param[0], $element);
 		}
 		return $p;
