@@ -1,0 +1,51 @@
+#CACHE{0}
+
+[(#REM) descriptif=
+<h4>Configuration du plugin Actunite</h4>
+<p>Cette page de configuration du plugin <strong>Actunite</strong> vous permet de d&eacute;finir diff&eacute;rents param&egrave;tres de personnalisation.</p>
+<p><a href="http://www.spip-contrib.net/Plugin-Acunite?var_mode=preview" class="spip_out">Doc en ligne, forum, FAQ sur SPIP-Contrib</a></p>
+]
+
+[(#REM) titre=Plugin Actunite ]
+[(#REM) boite=Formulaire de configuration du plugin "Actunite" ]
+[(#REM) nom=actunite ]
+
+<div id="cfg_actunite">
+
+<form method="post" action="#SELF">
+[(#ENV{_cfg_}|form_hidden)]
+
+<fieldset class="boucle">
+
+	<legend><:actunite:cfg_label_titre_cfg_boucle:></legend>
+	
+	<p><:actunite:cfg_info_boucle:></p>
+	
+	<p><label><:actunite:cfg_label_rubriques:></label><input type="text" name="rubriques" value="#ENV{rubriques}" /></p>
+	<p><label><:actunite:cfg_label_mots_cle:></label><input type="text" name="mots_cle" value="#ENV{mots-cle}" /></p>
+	<p><label><:actunite:cfg_label_critere_tri:></label><input type="text" name="tri" value="#ENV{tri}" /></p>
+
+</fieldset>
+
+<fieldset class="insertion">
+
+	<legend><:actunite:cfg_label_titre_insertion:></legend>
+	<p><:actunite:cfg_info_insertion:></p>	
+	<p><label><:actunite:cfg_label_bloc_insertion:></label><input type="text" name="bloc_insertion" value="#ENV{bloc_insertion}" /></p>
+	
+</fieldset>
+
+
+<div style="text-align:#LANG_RIGHT;">
+	<input type="submit" name="_cfg_ok" value="<:oK:>" class="fondo" />
+	<input type="reset" value="<:reset:>" class="fondo" />
+	<input type="submit" name="_cfg_delete" value="<:supprimer:>" class="fondo" />
+</div>
+
+
+
+
+</form>
+
+#CFG_ARBO{actunite}
+</div>

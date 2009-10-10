@@ -1,0 +1,37 @@
+<plugin>
+
+	<version>beta</version>
+	
+	<nom>Actunite - Actualit&eacute;s "Unite Like"</nom>
+	
+	<prefix>actunite</prefix>
+	
+	<auteur>Cyril MARION</auteur>
+	
+    <licence>&#169; 2009 Ateliers CYM - PARIS - Licence GNU/GPL</licence>
+	
+	<etat>dev</etat>
+	
+	<description>
+	Ajoute un bloc pr&eacute;sentant les 4 actualit&eacute;s les plus r&eacute;centes du site dans un joli bloc de 4 onglets avec effet de survol.
+	Certains param&egrave;tres sont modifiables via [CFG->./index.php?exec=cfg&amp;cfg=actunite] : position, crit&egrave;res de la boucle.
+_ Pourquoi ce nom ? Tout simplement par ce que ce plugin nous a &eacute;t&eacute; l&eacute;g&egrave;rement insprir&eacute; par l'introduction du site "[opera unite->http://unite.opera.com/]"...
+	</description>
+
+	<lien>
+	[Doc en ligne, forum, FAQ sur SPIP-Contrib->http://www.spip-contrib.net/Plugin-Acunite?var_mode=preview]
+	</lien>
+	
+	<icon>actunite-24.png</icon>
+	
+	<pipeline>
+		<nom>insert_head</nom>
+		<action>insert_head</action>
+		<inclure>actunite_fonctions.php</inclure>
+	</pipeline>
+
+	<necessite id="SPIP" version="[1.9.0;]" /-->
+
+	<necessite id='cfg' version='[1.0;]' />
+	
+</plugin>
