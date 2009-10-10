@@ -16,7 +16,7 @@
 		</div>]
 		[(#LOGO_DOCUMENT{40,40}|#URL_DOCUMENT)]
 		<h4 class="titrem">[<span class="fichier">(#FICHIER*|basename)</span>]
-			[<span class="titre">(#TITRE)</span>]
+			[<span class="#EDIT{titre} titre">(#TITRE|sinon{<i>vide</i>})</span>]
 			<span class="image_loading"></span>
 		</h4>
 		<div class="infos">
