@@ -104,7 +104,9 @@ function tickets_gouverneur_infos_tables($array){
 								'url_edit' => 'ticket_editer',
 								'texte_modifier' => 'tickets:icone_modifier_ticket',
 								'icone_objet' => 'ticket-24.png',
-								'champs_versionnes' => array('titre','exemple', 'texte'),
+								'texte_unique' => 'tickets:ticket',
+								'texte_multiple' => 'tickets:tickets',
+								'champs_versionnes' => array('titre','exemple', 'texte')
 							);
 	return $array;
 }
