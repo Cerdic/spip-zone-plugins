@@ -1188,4 +1188,68 @@ function couleur_eclaircirluminosite($coul,$pourcentage=20) {
 	return $couleurs;
 }
 
+function image_reflechir($im, $hauteur=45){
+	include_spip("inc/filtres_images");
+	$image = image_valeurs_trans($im, "relechir-$hauteur");
+	if (!$image) return("");
+    $x_i = $image["largeur"];
+    $y_i = $image["hauteur"];
+    $im = $image["fichier"];
+    $dest = $image["fichier_dest"];
+    $creer = $image["creer"];
+	if($creer) {
+		if($hauteur > $y_i)
+			$hauteur = $y_i;
+		$im = $image["fonction_imagecreatefrom"]($im);
+		$resultat = imagecreatetruecolor($x_i, $y_i + $hauteur);
+		$gradientHeight = $hauteur;
+		// Create new blank image with sizes.
+		$background = imagecreatetruecolor($x_i, $gradientHeight);
+		$gradientColor = "255 255 255"; //White
+		$gradparts = explode(" ",$gradientColor); // get the parts of the  colour (RRR,GGG,BBB)
+		$dividerHeight = 1;
+		$gradient_y_startpoint = $dividerHeight;
+		$gdGradientColor=ImageColorAllocate($background,$gradparts[0],$gradparts[1],$gradparts[2]);
+		$newImage = imagecreatetruecolor($x_i, $y_i);
+		for ($x = 0; $x < $x_i; $x++) {
+    		for ($y = 0; $y < $y_i; $y++) {
+    			imagecopy($newImage, $im, $x, $y_i - $y - 1, $x, $y, 1, 1);
+    		}
+		}
+		// Add it to the blank background image
+		imagecopymerge ($background, $newImage, 0, 0, 0, 0, $x_i, $y_i, 100); 
+		//create from a the image so we can use fade out.
+		$gradient_line = imagecreatetruecolor($x_i, 1);
+		// Next we draw a GD line into our gradient_line
+		imageline ($gradient_line, 0, 0, $x_i, 0, $gdGradientColor);
+		$i = 0;
+		$transparency = 30; //from 0 - 100
+   		while ($i < $gradientHeight) //create line by line changing as we go 
+   		{
+        	imagecopymerge ($background, $gradient_line, 0,$gradient_y_startpoint, 0, 0, $x_i, 1, $transparency);
+        	++$i;
+        	++$gradient_y_startpoint;    
+			if ($transparency == 100) {
+				$transparency = 100;
+			}
+			else {
+				// this will determing the height of the
+				//reflection. The higher the number, the smaller the reflection. 
+				//1 being the lowest(highest reflection)
+				$transparency = $transparency + 1; 
+			}
+		}
+		// Set the thickness of the line we're about to draw
+		imagesetthickness ($background, $dividerHeight);
+		// Draw the line - me do not likey the liney
+		imageline ($background, 0, 0, $imgName_w, 0, $gdGradientColor);
+		imagecopymerge ($resultat, $im, 0, 0, 0, 0, $x_i, $y_i, 100); 
+		imagecopymerge ($resultat, $background, 0, $y_i, 0, 0, $x_i, $y_i, 100); 
+		imagedestroy($gradient_line);
+		imagedestroy($newImage);
+		$image["fonction_image"]($resultat, "$dest");
+	}
+	return "<img src='$dest'$tags />";
+}
+
 ?>
