@@ -88,7 +88,8 @@ function analyser_spams($texte) {
 	);
 
 	if (!$texte) return $infos;
-	
+
+	include_spip('inc/texte');
 	$texte = propre($texte);
 
 	// caracteres_utiles
