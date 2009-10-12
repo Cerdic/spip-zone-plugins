@@ -1188,66 +1188,72 @@ function couleur_eclaircirluminosite($coul,$pourcentage=20) {
 	return $couleurs;
 }
 
-function image_reflechir($im, $hauteur=45){
+//
+// filtre tiré de http://reflection.corephp.co.uk
+// adapté par Yohann Prigent
+//
+function image_reflechir($im, $hauteur=0.5, $alphastart=80, $alphaend=0, $red=127, $green=127, $blue=127){
 	include_spip("inc/filtres_images");
-	$image = image_valeurs_trans($im, "relechir-$hauteur");
+	$image = image_valeurs_trans($im, "relechir-$hauteur-$alphastart-$alphaend", "png");
 	if (!$image) return("");
-    $x_i = $image["largeur"];
-    $y_i = $image["hauteur"];
+    $width = $image["largeur"];
+    $height = $image["hauteur"];
     $im = $image["fichier"];
     $dest = $image["fichier_dest"];
     $creer = $image["creer"];
+    $new_height = $height * $hauteur;
 	if($creer) {
-		if($hauteur > $y_i)
-			$hauteur = $y_i;
-		$im = $image["fonction_imagecreatefrom"]($im);
-		$resultat = imagecreatetruecolor($x_i, $y_i + $hauteur);
-		$gradientHeight = $hauteur;
-		// Create new blank image with sizes.
-		$background = imagecreatetruecolor($x_i, $gradientHeight);
-		$gradientColor = "255 255 255"; //White
-		$gradparts = explode(" ",$gradientColor); // get the parts of the  colour (RRR,GGG,BBB)
-		$dividerHeight = 1;
-		$gradient_y_startpoint = $dividerHeight;
-		$gdGradientColor=ImageColorAllocate($background,$gradparts[0],$gradparts[1],$gradparts[2]);
-		$newImage = imagecreatetruecolor($x_i, $y_i);
-		for ($x = 0; $x < $x_i; $x++) {
-    		for ($y = 0; $y < $y_i; $y++) {
-    			imagecopy($newImage, $im, $x, $y_i - $y - 1, $x, $y, 1, 1);
-    		}
-		}
-		// Add it to the blank background image
-		imagecopymerge ($background, $newImage, 0, 0, 0, 0, $x_i, $y_i, 100); 
-		//create from a the image so we can use fade out.
-		$gradient_line = imagecreatetruecolor($x_i, 1);
-		// Next we draw a GD line into our gradient_line
-		imageline ($gradient_line, 0, 0, $x_i, 0, $gdGradientColor);
-		$i = 0;
-		$transparency = 30; //from 0 - 100
-   		while ($i < $gradientHeight) //create line by line changing as we go 
-   		{
-        	imagecopymerge ($background, $gradient_line, 0,$gradient_y_startpoint, 0, 0, $x_i, 1, $transparency);
-        	++$i;
-        	++$gradient_y_startpoint;    
-			if ($transparency == 100) {
-				$transparency = 100;
-			}
-			else {
-				// this will determing the height of the
-				//reflection. The higher the number, the smaller the reflection. 
-				//1 being the lowest(highest reflection)
-				$transparency = $transparency + 1; 
-			}
-		}
-		// Set the thickness of the line we're about to draw
-		imagesetthickness ($background, $dividerHeight);
-		// Draw the line - me do not likey the liney
-		imageline ($background, 0, 0, $imgName_w, 0, $gdGradientColor);
-		imagecopymerge ($resultat, $im, 0, 0, 0, 0, $x_i, $y_i, 100); 
-		imagecopymerge ($resultat, $background, 0, $y_i, 0, 0, $x_i, $y_i, 100); 
-		imagedestroy($gradient_line);
-		imagedestroy($newImage);
+		if($hauteur > $height)
+			$hauteur = $height;
+		$source = $image["fonction_imagecreatefrom"]($im);
+		//	We'll store the final reflection in $output. $buffer is for internal use.
+		$resultat = imagecreatetruecolor($width, $new_height + $height);	
+		$output = imagecreatetruecolor($width, $new_height);
+		$buffer = imagecreatetruecolor($width, $new_height);
+    	//  Save any alpha data that might have existed in the source image and disable blending
+    	imagesavealpha($source, true);
+   		// alpha for output
+   		imagesavealpha($output, true);
+    	imagealphablending($output, false);
+		// alpha for the buffer
+    	imagesavealpha($buffer, true);
+    	imagealphablending($buffer, false);
+    	// and alpha for the final result
+   		imagesavealpha($resultat, true);
+    	imagealphablending($resultat, false);	
+		//	Copy the bottom-most part of the source image into the output
+		imagecopy($output, $source, 0, 0, 0, $height - $new_height, $width, $new_height);
+		//	Rotate and flip it (strip flip method)
+    	for ($y = 0; $y < $new_height; $y++)
+    	{
+    	   imagecopy($buffer, $output, 0, $y, 0, $new_height - $y - 1, $width, 1);
+    	}
+		$output = $buffer;
+		$alpha_length = abs($alphastart - $alphaend);
+   		imagelayereffect($output, IMG_EFFECT_OVERLAY);
+    	for ($y = 0; $y <= $new_height; $y++)
+    	{
+    	    //  Get % of reflection height
+    	    $pct = $y / $new_height;
+       		//  Get % of alpha
+        	if ($alphastart > $alphaend)
+        	{
+            	$alpha = (int) ($alphastart - ($pct * $alpha_length));
+        	}
+        	else
+        	{
+            	$alpha = (int) ($alphastart + ($pct * $alpha_length));
+        	}
+        	//  Rejig it because of the way in which the image effect overlay works
+       		$final_alpha = 127 - $alpha;
+       		imagefilledrectangle($output, 0, $y, $width, $y, imagecolorallocatealpha($output, $red, $green, $blue, $final_alpha));
+    	}
+    	// now, source with effect
+    	imagecopy($resultat, $source, 0, 0, 0, 0, $width, $height);
+    	imagecopy($resultat, $output, 0, $height,0, 0, $width, $height);
 		$image["fonction_image"]($resultat, "$dest");
+		imagedestroy($buffer);
+		imagedestroy($resultat);
 	}
 	return "<img src='$dest'$tags />";
 }
