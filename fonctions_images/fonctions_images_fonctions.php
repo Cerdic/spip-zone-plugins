@@ -1196,65 +1196,70 @@ function image_reflechir($im, $hauteur=0.5, $alphastart=80, $alphaend=0, $red=12
 	include_spip("inc/filtres_images");
 	$image = image_valeurs_trans($im, "relechir-$hauteur-$alphastart-$alphaend", "png");
 	if (!$image) return("");
-    $width = $image["largeur"];
-    $height = $image["hauteur"];
-    $im = $image["fichier"];
-    $dest = $image["fichier_dest"];
-    $creer = $image["creer"];
-    $new_height = $height * $hauteur;
+	$width = $image["largeur"];
+	$height = $image["hauteur"];
+	$im = $image["fichier"];
+	$dest = $image["fichier_dest"];
+	$creer = $image["creer"];
+	$new_height = $height * $hauteur;
 	if($creer) {
 		if($hauteur > $height)
 			$hauteur = $height;
 		$source = $image["fonction_imagecreatefrom"]($im);
 		//	We'll store the final reflection in $output. $buffer is for internal use.
-		$resultat = imagecreatetruecolor($width, $new_height + $height);	
+		$resultat = imagecreatetruecolor($width, $new_height + $height);
 		$output = imagecreatetruecolor($width, $new_height);
 		$buffer = imagecreatetruecolor($width, $new_height);
-    	//  Save any alpha data that might have existed in the source image and disable blending
-    	imagesavealpha($source, true);
-   		// alpha for output
-   		imagesavealpha($output, true);
-    	imagealphablending($output, false);
+		//  Save any alpha data that might have existed in the source image and disable blending
+		imagesavealpha($source, true);
+		// alpha for output
+		imagesavealpha($output, true);
+		imagealphablending($output, false);
 		// alpha for the buffer
-    	imagesavealpha($buffer, true);
-    	imagealphablending($buffer, false);
-    	// and alpha for the final result
-   		imagesavealpha($resultat, true);
-    	imagealphablending($resultat, false);	
+		imagesavealpha($buffer, true);
+		imagealphablending($buffer, false);
+		// and alpha for the final result
+		imagesavealpha($resultat, true);
+		imagealphablending($resultat, false);
 		//	Copy the bottom-most part of the source image into the output
 		imagecopy($output, $source, 0, 0, 0, $height - $new_height, $width, $new_height);
 		//	Rotate and flip it (strip flip method)
-    	for ($y = 0; $y < $new_height; $y++)
-    	{
-    	   imagecopy($buffer, $output, 0, $y, 0, $new_height - $y - 1, $width, 1);
-    	}
+		for ($y = 0; $y < $new_height; $y++)
+		{
+			imagecopy($buffer, $output, 0, $y, 0, $new_height - $y - 1, $width, 1);
+		}
 		$output = $buffer;
 		$alpha_length = abs($alphastart - $alphaend);
-   		imagelayereffect($output, IMG_EFFECT_OVERLAY);
-    	for ($y = 0; $y <= $new_height; $y++)
-    	{
-    	    //  Get % of reflection height
-    	    $pct = $y / $new_height;
-       		//  Get % of alpha
-        	if ($alphastart > $alphaend)
-        	{
-            	$alpha = (int) ($alphastart - ($pct * $alpha_length));
-        	}
-        	else
-        	{
-            	$alpha = (int) ($alphastart + ($pct * $alpha_length));
-        	}
-        	//  Rejig it because of the way in which the image effect overlay works
-       		$final_alpha = 127 - $alpha;
-       		imagefilledrectangle($output, 0, $y, $width, $y, imagecolorallocatealpha($output, $red, $green, $blue, $final_alpha));
-    	}
-    	// now, source with effect
-    	imagecopy($resultat, $source, 0, 0, 0, 0, $width, $height);
-    	imagecopy($resultat, $output, 0, $height,0, 0, $width, $height);
+		imagelayereffect($output, IMG_EFFECT_OVERLAY);
+		for ($y = 0; $y <= $new_height; $y++)
+		{
+			//  Get % of reflection height
+			$pct = $y / $new_height;
+			//  Get % of alpha
+			if ($alphastart > $alphaend)
+			{
+				$alpha = (int) ($alphastart - ($pct * $alpha_length));
+			}
+			else
+			{
+				$alpha = (int) ($alphastart + ($pct * $alpha_length));
+			}
+			//  Rejig it because of the way in which the image effect overlay works
+			$final_alpha = 127 - $alpha;
+			imagefilledrectangle($output, 0, $y, $width, $y, imagecolorallocatealpha($output, $red, $green, $blue, $final_alpha));
+		}
+		// now, source with effect
+		imagecopy($resultat, $source, 0, 0, 0, 0, $width, $height);
+		imagecopy($resultat, $output, 0, $height,0, 0, $width, $height);
 		$image["fonction_image"]($resultat, "$dest");
 		imagedestroy($buffer);
 		imagedestroy($resultat);
 	}
+	$class = $image["class"];
+	if (strlen($class) > 1) $tags=" class='$class'";
+	$tags = "$tags alt='".$image["alt"]."'";
+	$style = $image["style"];
+	if (strlen($style) > 1) $tags="$tags style='$style'";
 	return "<img src='$dest'$tags />";
 }
 
