@@ -1,0 +1,14 @@
+<plugin>
+<nom>D&eacute;finitions et FAQ</nom>
+<auteur>[romy.tetue.net->http://romy.tetue.net] - 2009</auteur>
+<licence>GPL</licence>
+<version>0.1</version>
+<etat>dev</etat>
+<necessite id='SPIP' version='[2.0.9;]' />
+<description>Ce petit plugin style les termes d&eacute;finis (<code>dfn</code>) et les listes de d&eacute;finitions (<code>dl</code>, <code>dt</code>, <code>dd</code>). Il&nbsp;transforme les listes de d&eacute;finitions marqu&eacute;es &laquo;&nbsp;<code>faq</code>&nbsp;&raquo; en <abbr title="Foire Aux Questions">FAQ</abbr> d&eacute;pliable.</description>
+<prefix>faq</prefix>
+<pipeline>
+	<nom>insert_head</nom>
+	<inclure>faq_pipelines.php</inclure>
+</pipeline>
+</plugin>
