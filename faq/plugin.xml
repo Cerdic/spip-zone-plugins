@@ -6,6 +6,7 @@
 <etat>dev</etat>
 <necessite id='SPIP' version='[2.0.9;]' />
 <description>Ce petit plugin style les termes d&eacute;finis (<code>dfn</code>) et les listes de d&eacute;finitions (<code>dl</code>, <code>dt</code>, <code>dd</code>). Il&nbsp;transforme les listes de d&eacute;finitions marqu&eacute;es &laquo;&nbsp;<code>faq</code>&nbsp;&raquo; en <abbr title="Foire Aux Questions">FAQ</abbr> d&eacute;pliable.</description>
+<lien>http://www.spip-contrib.net/Definitions-et-FAQ</lien>
 <prefix>faq</prefix>
 <pipeline>
 	<nom>insert_head</nom>
