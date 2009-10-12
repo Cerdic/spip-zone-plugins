@@ -42,7 +42,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'documents_tous'=> 'Tous',
 	'documents_brises' => 'Bris&eacute;s',
 	'documents_orphelins' => 'Inutilis&eacute;s',
-	'documents_sanstitre' => 'Sans titre',
 	'descriptif'=>'Description',
 	'des_documents'=>'@nb@ documents',
 	'des_files'=>'@nb@ documents',
