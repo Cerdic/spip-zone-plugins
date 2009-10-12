@@ -5,50 +5,43 @@
  *
  */
 
-$GLOBALS['inscription2_version'] = 0.71;
+include_spip('inc/meta');
+include_spip('cfg_options');
 
 /**
  * Fonction d'installation et de mise à jour du plugin
  * @return
  */
-function inscription2_upgrade(){
+function inscription2_upgrade($nom_meta_base_version,$version_cible){
 	spip_log('INSCRIPTION 2 : installation','inscription2');
 	$exceptions_des_champs_auteurs_elargis = pipeline('i2_exceptions_des_champs_auteurs_elargis',array());
-	include_spip('cfg_options');
-
+	$verifier_tables = charger_fonction('inscription2_verifier_tables','inc');
+	
 	//On force le fait d accepter les visiteurs
 	$accepter_visiteurs = $GLOBALS['meta']['accepter_visiteurs'];
 	if($accepter_visiteurs != 'oui'){
 		ecrire_meta("accepter_visiteurs", "oui");
 	}
 
-	$current_version = 0.0;
-	$version_base = $GLOBALS['meta']['inscription2_version'];
+	$current_version = "0.0";
+	if (isset($GLOBALS['meta'][$nom_meta_base_version]))
+		$current_version = $GLOBALS['meta'][$nom_meta_base_version];
 
 	//insertion des infos par defaut
 	$inscription2_meta = $GLOBALS['meta']['inscription2'];
 
 	//Certaines montées de version ont oublié de corriger la meta de I2
 	//si ce n'est pas un array alors il faut reconfigurer la meta
-	if (isset($version_base) && !is_array(unserialize($inscription2_meta))) {
+	if (isset($inscription2_meta) && !is_array(unserialize($inscription2_meta))) {
 		spip_log("INSCRIPTION 2 : effacer la meta inscription2 et relancer l'install","inscription2");
 		echo "La configuration du plugin Inscription 2 a &eacute;t&eacute; effac&eacute;e.<br />";
 		effacer_meta('inscription2');
-		$version_base = 0.0;
+		$current_version = 0.0;
 	}
-
-	// Si la version installee est la derniere en date, on ne fait rien
-	if ( (isset($version_base) )
-		&& (($current_version = $version_base)==$GLOBALS['inscription2_version']))
-	return;
 
 	//Si c est une nouvelle installation toute fraiche
 	if ($current_version==0.0){
-		//inclusion des fonctions pour les requetes sql
-		include_spip('base/abstract_sql');
-
-		// à passer en sous plugin
-
+		spip_log('INSCRIPTION2 : installation neuve');
 		if(!$inscription2_meta){
 		ecrire_meta(
 			'inscription2',
@@ -78,7 +71,10 @@ function inscription2_upgrade(){
 				))
 			);
 		}
-
+		
+		// Creation de la table et des champs
+		$verifier_tables();
+	
 		//inserer les auteurs qui existent deja dans la table spip_auteurs en non pas dans la table elargis
 		$s = sql_select("a.id_auteur","spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur=b.id_auteur","b.id_auteur is null");
 		while($q = sql_fetch($s)){
@@ -92,18 +88,16 @@ function inscription2_upgrade(){
 		 */
 		i2_installer_pays();
 
-		echo "Inscription2 installe @ ".$version_base;
-		ecrire_meta('inscription2_version',$current_version=$version_base);
-		$current_version = $version_base;
+		echo "Inscription2 installe @ ".$version_cible;
+		ecrire_meta($nom_meta_base_version,$current_version=$version_cible);
 	}
 	if ($current_version<0.63){
-		include_spip('base/abstract_sql');
 		// Suppression du champs id et on remet la primary key sur id_auteur...
 		sql_alter("TABLE spip_auteurs_elargis DROP id");
 		sql_alter("TABLE spip_auteurs_elargis DROP INDEX id_auteur");
 		sql_alter("TABLE spip_auteurs_elargis ADD PRIMARY KEY (id_auteur)");
 		echo "Inscription2 update @ 0.63 : On supprime le champs id pour privilegier id_auteur<br />";
-		ecrire_meta('inscription2_version',$current_version=0.63);
+		ecrire_meta($nom_meta_base_version,$current_version=0.63);
 	}
 
 	if ($current_version<0.71){
@@ -113,16 +107,11 @@ function inscription2_upgrade(){
 		 * pour ne pas etre dependant de ce plugin
 		 */
 		i2_installer_pays();
+		$verifier_tables();
 		spip_log("Inscription2 update @ 0.71 : installation de la table pays de geographie", "maj");
 		echo "Inscription2 update @ 0.71 : installation de la table pays de geographie<br />";
-		ecrire_meta('inscription2_version',$current_version=0.71);
+		ecrire_meta($nom_meta_base_version,$current_version=0.71);
 	}
-
-	ecrire_metas();
-
-	// Creation de la table et des champs
-	$verifier_tables = charger_fonction('inscription2_verifier_tables','inc');
-	$verifier_tables();
 }
 
 
@@ -133,17 +122,15 @@ function inscription2_upgrade(){
  * Supprime la table si plus nécessaire
  * Supprime la table des pays si nécessaire
  */
-function inscription2_vider_tables() {
+function inscription2_vider_tables($nom_meta_base_version) {
 	$exceptions_des_champs_auteurs_elargis = pipeline('i2_exceptions_des_champs_auteurs_elargis',array());
-	include_spip('cfg_options');
-	include_spip('base/abstract_sql');
 
 	//supprime la table spip_auteurs_elargis
 	if (is_array(lire_config('inscription2'))){
 		$clef_passee = array();
 		$desc = sql_showtable('spip_auteurs_elargis','', '', true);
 		foreach(lire_config('inscription2',array()) as $cle => $val){
-			$cle = preg_replace("_(obligatoire|fiche|table).*", "", $cle);
+			$cle = preg_replace("/_(obligatoire|fiche|table).*/", "", $clef);
 			if(!in_array($cle,$clef_passee)){
 				if(isset($desc['field'][$cle]) and !in_array($cle,$exceptions_des_champs_auteurs_elargis)){
 					spip_log("INSCRIPTION 2 : suppression de $cle","inscription2");
@@ -156,6 +143,7 @@ function inscription2_vider_tables() {
 	}
 	if (!lire_config('plugin/SPIPLISTES')){
 		sql_drop_table('spip_auteurs_elargis');
+		spip_log("INSCRIPTION 2 : suppression de la table spip_auteurs_elargis");
 	}
 	if(!lire_config('spip_geo_base_version')
 	and !defined('_DIR_PLUGIN_GEOGRAPHIE')){
@@ -163,8 +151,7 @@ function inscription2_vider_tables() {
 		spip_log("INSCRIPTION 2 : suppression de la table spip_geo");
 	}
 	effacer_meta('inscription2');
-	effacer_meta('inscription2_version');
-	ecrire_metas();
+	effacer_meta($nom_meta_base_version);
 }
 
 
@@ -190,26 +177,4 @@ function i2_installer_pays() {
 	}
 }
 
-/**
- * Surcharge de l'installe de SPIP par defaut
- * car inscription2 gere une seconde meta pour tester son installation correcte.
- */
-function inscription2_install($action){
-	$version_base = $GLOBALS['inscription2_version'];
-	switch ($action){
-		case 'test':
-			if (!is_array(unserialize($GLOBALS['meta']['inscription2'])) OR !$GLOBALS['meta']['inscription2'] OR ($GLOBALS['meta']['inscription2']=='')){
-				// Si cette meta n'est pas un array ... vaut mieux relancer l'ensemble du processus d'install
-				return false;
-			}
-			return (isset($GLOBALS['meta']['inscription2_version']) AND ($GLOBALS['meta']['inscription2_version']>=$version_base));
-			break;
-		case 'install':
-			inscription2_upgrade();
-			break;
-		case 'uninstall':
-			inscription2_vider_tables();
-			break;
-	}
-}
 ?>

@@ -11,6 +11,8 @@
  * Appelée à chaque validation du formulaire CFG
  */
 function inc_inscription2_verifier_tables_dist(){
+	include_spip('base/create');
+	
 	$exceptions_des_champs_auteurs_elargis = pipeline('i2_exceptions_des_champs_auteurs_elargis',array());
 	spip_log('INCRIPTION 2 : verification des tables','inscription2');
 
@@ -27,10 +29,7 @@ function inc_inscription2_verifier_tables_dist(){
 		}
 		sql_alter("TABLE ".$table." DROP id, DROP INDEX id_auteur, ADD PRIMARY KEY (id_auteur)");
 	}else if(!$tables_principales[$table]){
-		sql_create($table,
-			array("id_auteur"=> "bigint(21) NOT NULL default '0'"),
-			array('PRIMARY KEY' => "id_auteur")
-		);
+		creer_base();
 	}
 
 	if (is_array(lire_config('inscription2'))){
@@ -60,8 +59,6 @@ function inc_inscription2_verifier_tables_dist(){
 	if($GLOBALS['meta']['spiplistes_version'] and !isset($tables_principales[$table]['field']['spip_listes_format']))
 		$tables_principales[$table]['field']['spip_listes_format'] = "VARCHAR(8) DEFAULT 'non' NOT NULL";
 
-	include_spip('base/create');
-	creer_base();
 	maj_tables($table);
 	return;
 }
