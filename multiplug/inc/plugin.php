@@ -30,7 +30,7 @@ function liste_plugin_files($dir_plugins = null){
 		if (defined('_DIR_PLUGINS_FORK')) { 
 			$dir_plugins = _DIR_PLUGINS_FORK.':'._DIR_PLUGINS;
 			if (defined('_DIR_PLUGINS_SUPPL'))
-			$dir_plugins = _DIR_PLUGINS_FORK.':'_DIR_PLUGINS_SUPPL.':'._DIR_PLUGINS;
+			$dir_plugins = _DIR_PLUGINS_FORK.':'._DIR_PLUGINS_SUPPL.':'._DIR_PLUGINS;
 		} else 
 		$dir_plugins = _DIR_PLUGINS; 
 	} 
