@@ -9,7 +9,7 @@ function abonnement_i2_cfg_form($flux) {
 }
 
 function abonnement_i2_form_debut($flux) {
-	if (lire_config('abonnement/proposer_paiement')) {
+	if (lire_config('abonnement/proposer_paiement') == 'on') {
 		$contexte = array("abonnement" => $flux['args']['abonnement'],"hash" => $flux['args']['hash']);
 		$flux['data'] .= recuperer_fond('formulaires/liste_abonnements',$contexte);
 	}
@@ -17,7 +17,7 @@ function abonnement_i2_form_debut($flux) {
 }
 
 function abonnement_i2_charger_formulaire($flux) {
-	if (lire_config('abonnement/proposer_paiement')) {
+	if (lire_config('abonnement/proposer_paiement') == 'on') {
 		// valeur par defaut
 		$flux['data']['abonnement'] = '1' ;
 		include_spip('inc/acces');
@@ -29,7 +29,7 @@ function abonnement_i2_charger_formulaire($flux) {
 }
 
 function abonnement_i2_verifier_formulaire($flux) {
-	//if (lire_config('abonnement/proposer_paiement')) {
+	//if (lire_config('abonnement/proposer_paiement') == 'on') {
 		// rien a faire, mais sait on jamais ! un jour peut etre !
 	//}
 	return $flux;
@@ -39,7 +39,7 @@ function abonnement_i2_verifier_formulaire($flux) {
 // et afficher un formulaire de paiement (uniquement si la config le permet)
 	
 function abonnement_i2_traiter_formulaire($flux) {	
-	if (lire_config('abonnement/proposer_paiement')) {
+	if (lire_config('abonnement/proposer_paiement') == 'on') {
 		if($id_abonnement = intval(_request('abonnement'))){	
 			$id_auteur = $flux['args']['id_auteur'] ;
 			$hash = _request('hash');
@@ -65,7 +65,7 @@ function abonnement_i2_traiter_formulaire($flux) {
 
 function abonnement_i2_confirmation($flux) {
 	// afficher un formulaire de paiement pour l'utilisateur (uniquement si la config le permet)
-	if (lire_config('abonnement/proposer_paiement')) {
+	if (lire_config('abonnement/proposer_paiement') == 'on') {
 		$env = $flux['args'];
 		$row = sql_fetsel(array('id_auteur'), 'spip_auteurs', 'email='.sql_quote($env['email']));
 		$env['id_auteur'] = $row['id_auteur'] ;
