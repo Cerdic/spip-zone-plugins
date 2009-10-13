@@ -54,7 +54,7 @@ function i2_import_step3(&$step, &$erreur, $import_link, $import_form_link){
 		  $erreur[$step][] = _L("Fichier vide");
 		}
 		$table_fields = i2_import_table_fields($table);
-		$new_assoc=csvimport_field_associate($data, $table_fields, $assoc_field);
+		$new_assoc=i2_import_field_associate($data, $table_fields, $assoc_field);
 		$test=array_diff($new_assoc,$assoc_field);
 		if (count($test)>0){
 			$erreur[$step][] = _L("Correspondances CSV-Table incompl&egrave;tes");
@@ -68,7 +68,7 @@ function i2_import_step3(&$step, &$erreur, $import_link, $import_form_link){
 		$hidden['type'] = $type;
 		$hidden['step'] = 3;
 		foreach($assoc_field as $key=>$value)
-			$hidden["assoc_field[".csvimport_nettoie_key($key)."]"] = $value;
+			$hidden["assoc_field[".i2_import_nettoie_key($key)."]"] = $value;
 		$hidden["delim"] = $delim;
 		$hidden["head"] = $head;
 
@@ -92,7 +92,7 @@ function i2_import_step3(&$step, &$erreur, $import_link, $import_form_link){
 			echo "</p>";
 			echo "<p class='explication'>"._L("Les donn&eacute;es du fichier CSV vont &ecirc;tre ajout&eacute;es &agrave; la table comme illustr&eacute; ci-dessus.")."</p>";
 			echo '<div style="width=100%;overflow:auto">';
-			echo csvimport_array_visu_assoc($data, $table_fields, $assoc_field, 5);
+			echo i2_import_array_visu_assoc($data, $table_fields, $assoc_field, 5);
 			echo '</div>';
 			
 			foreach($hidden as  $key=>$value)
@@ -218,7 +218,7 @@ function i2_import_step2(&$step, &$erreur, $import_link, $import_form_link){
 	$table_fields = i2_import_table_fields($table);
 	
 	if ($data && ($step==2))
-		$assoc_field=csvimport_field_associate($data, $table_fields, $assoc_field);
+		$assoc_field=i2_import_field_associate($data, $table_fields, $assoc_field);
 	if ($step==2){
 		$hidden['file_name'] = $file_name;
 		$hidden['tmp_name'] = $tmp_name;
@@ -254,7 +254,7 @@ function i2_import_step2(&$step, &$erreur, $import_link, $import_form_link){
 		echo "<li class='fieldset'><fieldset>";
 		echo "<h3 class='legend'>"._T('i2_import:previsualisation')."</h3>";
 		echo "<div style='width:100%;margin-top:15px;overflow:auto'>";
-		echo csvimport_array_visu_assoc($data, $table_fields, $assoc_field, 5);
+		echo i2_import_array_visu_assoc($data, $table_fields, $assoc_field, 5);
 		echo "</div>\n";
 		echo "</fieldset></li>";
 		

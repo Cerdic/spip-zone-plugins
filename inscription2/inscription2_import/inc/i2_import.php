@@ -55,16 +55,15 @@ function i2_import_table_fields($tables,$type='unique'){
 	return;
 }
 
-function csvimport_csv_champ($champ) {
+function i2_import_csv_champ($champ) {
 	$champ = preg_replace(',[\s]+,', ' ', $champ);
 	$champ = str_replace(',",', '""', $champ);
 	return '"'.$champ.'"';
 }
 
-function csvimport_csv_ligne($ligne, $delim = ',') {
-	return join($delim, array_map('csvimport_csv_champ', $ligne))."\r\n";
+function i2_import_csv_ligne($ligne, $delim = ',') {
+	return join($delim, array_map('i2_import_csv_champ', $ligne))."\r\n";
 }
-
 
 function i2_import_show_erreurs($erreur){
 	$output = "";
@@ -152,7 +151,7 @@ function i2_import_table_visu_extrait($tables,$nombre_lignes = 0){
 	  echo _L("Table vide");
 }
 
-function csvimport_array_visu_assoc($data, $table_fields, $assoc_field, $nombre_lignes = 0){
+function i2_import_array_visu_assoc($data, $table_fields, $assoc_field, $nombre_lignes = 0){
 	$assoc=array_flip($assoc_field);
 
 	$output = "";
@@ -172,7 +171,7 @@ function csvimport_array_visu_assoc($data, $table_fields, $assoc_field, $nombre_
 			$ligne_nb++;
 			$output .= "<tr class='".alterner($ligne_nb,'row_odd','row_even')."'>";
 			foreach($table_fields as $key=>$value){
-				$kc = csvimport_nettoie_key($key);
+				$kc = i2_import_nettoie_key($key);
 				if(isset($assoc[$kc])){
 			  		$output .= "<td>";
 			  		if(isset($ligne[$assoc[$kc]]))
@@ -194,17 +193,17 @@ function csvimport_array_visu_assoc($data, $table_fields, $assoc_field, $nombre_
 	return $output;
 }
 
-function csvimport_nettoie_key($key){
+function i2_import_nettoie_key($key){
 	return translitteration($key);
 }
 
-function csvimport_field_associate($data, $table_fields, $assoc_field){
+function i2_import_field_associate($data, $table_fields, $assoc_field){
 	global $tables_principales;
 	$assoc=$assoc_field;
 	if (!is_array($assoc)) $assoc = array();
 	$csvfield=array_keys($data{1});
 	foreach($csvfield as $k=>$v){
-		$csvfield[$k] = csvimport_nettoie_key($v);
+		$csvfield[$k] = i2_import_nettoie_key($v);
 	}
 	$csvfield=array_flip($csvfield);
 
@@ -255,7 +254,7 @@ function i2_import_field_configure($data, $table_fields, $assoc){
 	$nb_champs = 0;
 	foreach($csvfield as $csvkey){
 		$nb_champs++;
-		$csvkey = csvimport_nettoie_key($csvkey);
+		$csvkey = i2_import_nettoie_key($csvkey);
 		$output .=  "<li>";
 		$output .=  "<label for='champs$nb_champs'>$csvkey</label>";
 		$output .= "<select name='assoc_field[$csvkey]' id='champs$nb_champs'>\n";
@@ -289,7 +288,7 @@ function i2_import_ajoute_table_csv($data, $table, $assoc_field, &$erreur){
 			$auteurs_elargis_insert = array();
 			$check = array_flip($table_fields);
 			foreach($check as $key=>$value){
-				$kc = csvimport_nettoie_key($key);
+				$kc = i2_import_nettoie_key($key);
 				$ligne[$assoc[$kc]] = trim($ligne[$assoc[$kc]]);
 				if ((isset($assoc[$kc]))&&(isset($ligne[$assoc[$kc]]))){
 					// On vérifie tout d'abord si le champs dispose d'une fonction de vaidation
