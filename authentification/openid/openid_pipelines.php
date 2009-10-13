@@ -15,7 +15,13 @@ function openid_editer_contenu_objet($flux){
 function openid_pre_edition($flux){
 	if ($flux['args']['table']=='spip_auteurs') {
 		if ($openid = _request('openid')) {
-			$flux['data']['openid'] = vider_url($openid, false);
+			$openid = vider_url($openid, false);
+			$openid = rtrim($openid,'/');
+			// si pas de protocole, mettre http://
+			if ($openid  AND !preg_match(';^[a-z]{3,6}://;i',$openid ))
+				$openid = "http://".$openid;
+
+			$flux['data']['openid'] = $openid;
 		}
 	}
 	return $flux;

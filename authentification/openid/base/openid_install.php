@@ -15,6 +15,19 @@ function openid_upgrade($nom_meta_base_version,$version_cible){
 			maj_tables('spip_auteurs');
 			ecrire_meta($nom_meta_base_version,$current_version=$version_base,'non');
 		}
+		if (version_compare($current_version,"0.2","<")){
+			$res = sql_select('id_auteur,openid','spip_auteurs',"openid<>''");
+			while ($row = sql_fetch($res)){
+				$openid = rtrim($row['openid'],'/');
+				// si pas de protocole, mettre http://
+				if ($openid  AND !preg_match(';^[a-z]{3,6}://;i',$openid ))
+					$openid = "http://".$openid;
+				if ($openid!==$row['openid']){
+					sql_updateq('spip_auteurs',array('openid'=>$openid),'id_auteur='.intval($row['id_auteur']));
+				}
+			}
+			ecrire_meta($nom_meta_base_version,$current_version="0.2",'non');
+		}
 	}
 }
 

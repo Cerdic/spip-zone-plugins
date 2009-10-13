@@ -178,9 +178,10 @@ function terminer_authentification_openid($cible){
 	// This means the authentication succeeded.
 	elseif ($response->status == Auth_OpenID_SUCCESS) {
 		
-	    $openid = $response->identity_url;
-	    $esc_identity = htmlspecialchars($openid, ENT_QUOTES);
-	    openid_log("Succes de l'authentification $openid chez le fournisseur d'identification", 1);
+		$openid = rtrim($response->identity_url,'/'); // pas de / final dans l'openid
+		
+		$esc_identity = htmlspecialchars($openid, ENT_QUOTES);
+		openid_log("Succes de l'authentification $openid chez le fournisseur d'identification", 1);
 
 		// identification dans SPIP
 		// (charge inc/auth_openid)
