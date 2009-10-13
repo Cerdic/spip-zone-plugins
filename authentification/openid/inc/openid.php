@@ -9,6 +9,10 @@ function nettoyer_openid($openid){
 	// mettre http://
 	if ($openid  AND !preg_match(';^[a-z]{3,6}://;i',$openid ) AND strpos($openid,'@')===FALSE)
 		$openid = "http://".$openid;
+
+	// pas d'ancre dans une url openid !
+	$openid = preg_replace(',#[^#]*$,','',$openid);
+
 	return $openid;
 }
 /*****
@@ -213,6 +217,8 @@ function terminer_authentification_openid($cible){
 				'nom' => isset($sreg['fullname']) ? $sreg['fullname'] : $sreg['nickname'],
 				'openid' => $openid
 			);
+
+			#openid_log("sreg ".var_export($sreg_resp,true), 2);
 
 			// on ajoute un auteur uniquement si les inscriptions sont autorisees sur le site
 			if ($GLOBALS['meta']['accepter_inscriptions']=='oui') {
