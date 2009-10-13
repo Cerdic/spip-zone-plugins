@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_openid' => 'Erreur d\'authentification OpenID: avez-vous bien entr&eacute; un OpenID valide?',
 	'erreur_librairies' => 'Impossible de trouver les librairies d\'authenfication OpenID',
 	// F
-	'form_login_openid' => 'Vous pouvez aussi utiliser votre OpenID pour vous identifier',
+	'form_login_openid' => 'Vous pouvez aussi utiliser votre <a href=\'http://www.openidfrance.fr/\'>OpenID</a> pour vous identifier',
 	'form_forum_indiquer_openid' => 'Vous pouvez vous inscrire sur ce site en indiquant une adresse OpenID.',
 	'form_forum_openid' => 'Inscription par OpenID',
 	'form_pet_votre_openid' => 'Login OpenID',
