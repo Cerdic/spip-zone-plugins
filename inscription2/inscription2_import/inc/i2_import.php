@@ -22,11 +22,13 @@ include_spip("inc/charsets");
  * @param string $type[optional] détermine la forme du retour
  */
 function i2_import_table_fields($tables,$type='unique'){
+	$trouver_table = charger_fonction('trouver_table','base');
 	$table_fields_final = array();
 	if(is_array($tables)){
 		foreach($tables as $table){
 			if($table == 'spip_auteurs'){
 				// Tous les champs de spip_auteurs ne sont pas à prendre en compte
+				
 				$spip_auteurs['nom'] = 'nom';
 				$spip_auteurs['bio'] = 'bio';
 				$spip_auteurs['email'] = 'email';
@@ -35,10 +37,18 @@ function i2_import_table_fields($tables,$type='unique'){
 				$spip_auteurs['login'] = 'login';
 				$spip_auteurs['statut'] = 'statut';
 			}else{
-				$spip_auteurs_elargis=array_keys($GLOBALS['tables_principales'][$table]['field']);
+				$table_desc = $trouver_table($table);
+				$spip_auteurs_elargis=array_keys(is_array($table_desc['field']) ? $table_desc['field'] : array());
 				$spip_auteurs_elargis=array_flip($spip_auteurs_elargis);
 				foreach ($spip_auteurs_elargis as $key=>$value) {
-					$spip_auteurs_elargis[$key] = $key;
+					/**
+					 * On ne garde que les champs activés
+					 */
+					if(lire_config('inscription2/'.$key) == 'on'){
+						$spip_auteurs_elargis[$key] = $key;
+					}else{
+						unset($spip_auteurs_elargis[$key]);
+					}
 				}
 				// On ne met pas à disposition le champs id_auteur
 				unset($spip_auteurs_elargis['id_auteur']);

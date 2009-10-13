@@ -20,6 +20,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	// E
 	'exec_texte_boite_info' => 'Cette page vous permet d\'importer des auteurs dans les tables "auteurs" et "auteurs_elargis" de SPIP en uploadant un simple fichier CSV',
+	'export_users_sites' => '@site@ - Export des utilisateurs - @date@',
+	'exporter_users_csv_normal' => 'Exporter les utilisateurs au format CSV simple',
+	'exporter_users_xls' => 'Exporter les utilisateurs au format CSV pour Excel',
 	
 	// F
 	'fichier_vide' => 'Le fichier est vide.',

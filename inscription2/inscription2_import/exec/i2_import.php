@@ -76,7 +76,7 @@ function i2_import_step3(&$step, &$erreur, $import_link, $import_form_link){
 			$hidden['ajouter'] = 'oui';
 			$titre = _T('i2_import:derniers_utilisateurs',array('nb' => 5));
 			echo "<div class='entete-formulaire'>";
-			echo gros_titre($titre);
+			echo gros_titre($titre,'',false);
 			echo "</div>";
 			debut_cadre_relief($icone);
 			echo '<div style="width=100%;overflow:auto">';
@@ -107,7 +107,7 @@ function i2_import_step3(&$step, &$erreur, $import_link, $import_form_link){
 			list($erreurs,$auteurs_ajoutes) = i2_import_ajoute_table_csv($data, $table, $assoc_field,$erreurs);
 			$titre = _T('i2_import:derniers_utilisateurs',array('nb' => 10));
 			echo "<div class='entete-formulaire'>";
-			echo gros_titre($titre);
+			echo gros_titre($titre,'',false);
 			echo "</div>";
 			debut_cadre_relief($icone);
 			// Extrait de la table en commençant par les dernieres maj
@@ -227,7 +227,7 @@ function i2_import_step2(&$step, &$erreur, $import_link, $import_form_link){
 		$hidden['step'] = 3;
 
 		echo "<div class='entete-formulaire' id='step'>";
-		echo gros_titre(_T('i2_import:previsualisation'));
+		echo gros_titre(_T('i2_import:previsualisation'),'',false);
 		echo "</div>";
 		
 		echo "<div class='formulaire_spip'>";
@@ -288,7 +288,7 @@ function i2_import_step1(&$step, &$erreur, $import_link, $import_form_link){
 		$hidden['step'] = 2;
 		
 		echo "<div class='entete-formulaire' id='step'>";
-		gros_titre(_T('i2_import:import_fichier'));
+		echo gros_titre(_T('i2_import:import_fichier'),'',false);
 		echo "</div>";
 		
 		echo "<div class='formulaire_spip'>";
@@ -351,7 +351,7 @@ function exec_i2_import(){
 	
 	pipeline('exec_init',array('args'=>$_GET,'data'=>''));
 	
-	gros_titre(_T('i2_import:i2_import_gros_titre'),'',false);
+	echo gros_titre(_T('i2_import:i2_import_gros_titre'),'',false);
 	echo debut_gauche('',true);
 	
 	echo debut_boite_info(true);
@@ -364,7 +364,7 @@ function exec_i2_import(){
 	
 	echo pipeline('affiche_droite',array('args'=> array('exec' => 'i2_import'),'data'=>''));
 	
-	echo debut_droite(true);
+	echo debut_droite('',true);
 		
 		$hidden = array();
 		// --- STEP 3 => Incorporation a la base de donnee
@@ -372,7 +372,7 @@ function exec_i2_import(){
 		if ($step<3) {
 			$titre = _T('i2_import:derniers_utilisateurs',array('nb' => 5));
 			echo "<div class='entete-formulaire'>";
-			gros_titre($titre);
+			echo gros_titre($titre,'',false);
 			echo "</div>";
 			echo debut_cadre_relief($icone, true);
 			echo '<div style="width=100%;overflow:auto">';
