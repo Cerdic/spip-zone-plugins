@@ -22,3 +22,5 @@ dl.faq dd {}
 .spip_documents dl,
 .spip_documents dt,
 .spip_documents dd { margin: 0 auto; padding: 0; background: 0; }
+
+@media print { dl.faq dd { display: block !important; } }
