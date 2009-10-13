@@ -1,0 +1,61 @@
+#CACHE{0}
+
+<div id="cfg_spipmine">
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+[(#REM) descriptif=
+<h4>Param&eacute;trer le plugin Spipmine</h4>
+<p>Il est probable qu'un jour nous ayons des trucs &agrave; param&eacute;trer ici...</p>
+<p><a href="http://www.spip-contrib.net/Plugin-Spipmine?var_mode=preview">Doc en ligne, forum, FAQ sur SPIP-Contrib</a></p>]
+
+[(#REM) titre=Plugin Spipmine]
+#SET{wichrub,#CONFIG{spipmine/rubriques_spipmine,#ARRAY{0,0}}}
+
+<fieldset>
+
+	<legend>Rubriques d&eacute;j&agrave; g&eacute;r&eacute;es par le plugin</legend>
+	
+	<BOUCLE_theme(RUBRIQUES){racine}>
+	<h4>#TITRE</h4>
+	<B_rub>
+	<ul class="theme">
+		<BOUCLE_rub(RUBRIQUES){id_parent}{id_rubrique IN #CONFIG{metapack::spipmine/rubriques_spipmine}}{doublons}{par date}>
+		<li>#ID_RUBRIQUE | <a href="#URL_RUBRIQUE">#TITRE</a></li>
+		</BOUCLE_rub>
+	</ul>
+	
+	</B_rub>
+	<ul><li>Aucune rubrique trouv&eacute;e...</li></ul>
+	<//B_rub>
+	
+	</BOUCLE_theme>
+
+</fieldset>
+
+<fieldset>
+
+	<legend>Choix des rubriques par formulaire</legend>
+	
+	<select name="rubriques_spipmine[]" multiple="multiple" >
+	
+		<BOUCLE_secteurs(RUBRIQUES){racine}>
+		<optgroup label="#TITRE">
+
+		<BOUCLE_rubriques(RUBRIQUES){id_parent}{!par date}>
+		<option value="#ID_RUBRIQUE" [(#ID_RUBRIQUE|in_array{#GET{wichrub}}|?{' selected="selected"'})]>&nbsp;&nbsp;#ID_RUBRIQUE : [(#TITRE|supprimer_numero)]</option>	
+		</BOUCLE_rubriques>
+		
+		</BOUCLE_secteurs>
+
+	</select>
+	
+</fieldset>
+
+<input type="submit" name="_cfg_ok" value="<:OK:>" />
+<input type="reset" value="<:Reset:>" />
+<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
+
+</form>
+
+#CFG_ARBO{spipmine}
+
+</div>

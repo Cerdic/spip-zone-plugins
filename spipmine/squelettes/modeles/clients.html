@@ -1,0 +1,26 @@
+<h1>Voici un tableau listant les clients et indiquant la ou les rubriques liées :</h1>
+
+
+
+<B_c>
+<table class="spip">
+	<thead>
+	<tr class="row_first">
+		<th>ID</th>
+		<th>NOM</th>
+		<th>VILLE</th>
+		<th>RUB.</th>
+	</tr>
+	</thead>
+	<tbody>
+<BOUCLE_c(SPIPMINE_CLIENTS)>
+	<tr[ class="(#COMPTEUR_BOUCLE|alterner{'row_even','row_odd'})"]>
+		<td>#ID_CLIENT</td>
+		<td>#NOM_CLIENT</td>
+		<td>#VILLE</td>
+		<td>#ID_RUBRIQUE</td>
+	</tr>
+</BOUCLE_c>
+	</tbody>
+</table>
+</B_c>
