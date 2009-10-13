@@ -77,12 +77,68 @@ function pmb_accueil_extraire($url_base, $mode='auto') {
 	return $tableau_resultat;
 
 }
-
 function pmb_section_extraire($id_section, $url_base) {
 	$tableau_sections = Array();
 	pmb_ws_charger_wsdl($ws, $url_base);
-	//$tab_sections = $ws->pmbesOPACGeneric_list_sections(13);
-	return $tab_sections;
+	$tab_sections = $ws->pmbesOPACGeneric_list_sections($id_section);
+	$cpt = 0;
+	foreach ($tab_sections as $section) {
+	      $tableau_sections[$cpt] = Array();
+	      $tableau_sections[$cpt]['section_id'] = $section->section_id;
+	      $tableau_sections[$cpt]['section_location'] = $section->section_location;
+	      $tableau_sections[$cpt]['section_caption'] = $section->section_caption;
+	      $tableau_sections[$cpt]['section_image'] = lire_config("spip_pmb/url","http://tence.bibli.fr/opac").'/'.$section->section_image;
+
+	      
+	      $cpt++;
+	}
+	return $tableau_sections;
+}
+
+function pmb_liste_locations_extraire($url_base) {
+	$tableau_sections = Array();
+	pmb_ws_charger_wsdl($ws, $url_base);
+	$tab_locations = $ws->pmbesOPACGeneric_list_locations();
+	$cpt = 0;
+	foreach ($tab_locations as $location) {
+	      $tableau_locations[$cpt] = Array();
+	      $tableau_locations[$cpt]['location_id'] = $location->location_id;
+	      $tableau_locations[$cpt]['location_caption'] = $location->location_caption;
+	      $cpt++;
+	}
+	return $tableau_locations;
+}
+
+function pmb_notices_section_extraire($id_section, $url_base) {
+	$tableau_resultat = Array();
+	
+	$search = array();
+	$search[] = array("inter"=>"and","field"=>17,"operator"=>"EQ", "value"=>$id_section);
+			
+	pmb_ws_charger_wsdl($ws, $url_base);
+	try {	
+			$tableau_resultat[0] = Array();
+					
+			$r=$ws->pmbesOPACAnonymous_advancedSearch($search);
+			
+			$searchId=$r["searchId"];
+			$tableau_resultat[0]['nb_resultats'] = $r["nbResults"];
+	    
+			 $r=$ws->pmbesOPACAnonymous_fetchSearchRecords($searchId,0,10,"serialized_unimarc","utf8");
+			  $i = 1;
+			  foreach($r as $value) {
+				    $tableau_resultat[$i] = Array();				
+				
+				    pmb_ws_parser_notice_serialisee($value['noticeId'], $value['noticeContent'], $tableau_resultat[$i]);
+				    $i++;
+			  }
+		
+
+	} catch (SoapFault $fault) {
+		print("Erreur : ".$fault->faultcode." : ".$fault->faultstring);
+	} 
+
+	return $tableau_resultat;
 }
 
 function pmb_serie_extraire($id_serie, $url_base, $pmb_page=1, $mode='auto') {
@@ -568,7 +624,7 @@ function pmb_ws_recuperer_notice ($id_notice, &$ws, &$tresultat) {
 
 //charger les webservices
 function pmb_ws_charger_wsdl(&$ws, $url_base) {
-	$ws=new SoapClient(lire_config('pmb/wsdl','http://test3.bibli.fr/ostudio/PMBWsSOAP_1?wsdl'));
+	$ws=new SoapClient(lire_config("spip_pmb/wsdl","http://tence.bibli.fr/pmbws/PMBWsSOAP_1?wsdl"));
 	
 }
 

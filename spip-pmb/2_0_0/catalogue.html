@@ -1,5 +1,6 @@
-[(#SET{tab_sections,[(#ENV{id_section}|pmb_section_extraire{' '})]})
-]<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+[(#ENV{id_section}|non)[(#SET{tab_locations,[(#REM|pmb_liste_locations_extraire)]})
+]][(#ENV{id_section}|oui)[(#SET{tab_sections,[(#ENV{id_section}|pmb_section_extraire{' '})]})
+]]<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
 <head>
 <title>Catalogue[ - (#ENV{titre_section})] - [(#NOM_SITE_SPIP|textebrut)]</title>
@@ -34,21 +35,82 @@
  	 
 	<div class="corps-conteneur surlignable">
 		
-		<div class="#EDIT{texte} texte entry-content">Cette section est en cours de d&eacute;veloppement.</div>
+		<div class="#EDIT{texte} texte entry-content">Cette rubrique est en cours de d&eacute;veloppement[ ((#ENV{titre_section}))].</div>
   
 
 	</div>
 
-		<ul>
-		<BOUCLE_tab_resultat2(POUR){tableau #GET{tab_sections}}>
-			 
-			    <li>[(#GET{tab_sections}|pmb_tableau2_valeur{#CLE,'section_caption'})]</li>
-			 
-		</BOUCLE_tab_resultat2>
-		</ul>
+	[(#REM) Locations ]
+        <B_tab_resultat1>
+        <div class="menu articles">
+            #ANCRE_PAGINATION
+            [<p class="pagination">(#PAGINATION)</p>]
+	    <h2 class="invisible"><:articles_rubrique:></h2>
+            <ul>
+              <BOUCLE_tab_resultat1(POUR){tableau #GET{tab_locations}}{pagination}>
+                <li>
+                    	<h3><a href="[(#SELF|parametre_url{id_section,[(#GET{tab_locations}|pmb_tableau2_valeur{#CLE,'location_id'})]}|parametre_url{titre_section,[(#GET{tab_locations}|pmb_tableau2_valeur{#CLE,'location_caption'})]})]">[(#GET{tab_locations}|pmb_tableau2_valeur{#CLE,'location_caption'})]</a></h3>
+                	<a class="lire-la-suite" title="[(#GET{tab_locations}|pmb_tableau2_valeur{#CLE,'location_caption'}|texte_backend)]" href="[(#SELF|parametre_url{id_section,[(#GET{tab_locations}|pmb_tableau2_valeur{#CLE,'location_id'})]}|parametre_url{titre_section,[(#GET{tab_locations}|pmb_tableau2_valeur{#CLE,'location_caption'})]})]"><:decouvrir:> +</a>
+                </li>
+                </BOUCLE_tab_resultat1>
+            </ul>
+            [<p class="pagination">(#PAGINATION)</p>]
+        </div>
+        </B_tab_resultat1>
 
+      [(#REM) Sections ]
+        <B_tab_resultat2>
+        <div class="menu articles">
+            #ANCRE_PAGINATION
+            [<p class="pagination">(#PAGINATION)</p>]
+	    <h2 class="invisible"><:articles_rubrique:></h2>
+            <ul>
+              <BOUCLE_tab_resultat2(POUR){tableau #GET{tab_sections}}{pagination}>
+                <li>
+                    	[(#REM|?{'','<img />'}|inserer_attribut{class,spip_logos}|inserer_attribut{src,[(#GET{tab_sections}|pmb_tableau2_valeur{#CLE,'section_image'}|copie_locale)]}image_reduire{120,140})]
+                    	<h3><a href="[(#SELF|parametre_url{id_section,[(#GET{tab_sections}|pmb_tableau2_valeur{#CLE,'section_id'})]}|parametre_url{titre_section,[(#GET{tab_sections}|pmb_tableau2_valeur{#CLE,'section_caption'})]})]">[(#GET{tab_sections}|pmb_tableau2_valeur{#CLE,'section_caption'})]</a></h3>
+                	<a class="lire-la-suite" title="[(#GET{tab_sections}|pmb_tableau2_valeur{#CLE,'section_caption'}|texte_backend)]" href="[(#SELF|parametre_url{id_section,[(#GET{tab_sections}|pmb_tableau2_valeur{#CLE,'section_id'})]}|parametre_url{titre_section,[(#GET{tab_sections}|pmb_tableau2_valeur{#CLE,'section_caption'})]})]"><:decouvrir:> +</a>
+                </li>
+                </BOUCLE_tab_resultat2>
+            </ul>
+            [<p class="pagination">(#PAGINATION)</p>]
+        </div>
+        </B_tab_resultat2>
+		
+<br class="nettoyeur" />
+[(#SET{tab_resultat, [(#ENV{id_section}|pmb_notices_section_extraire{''})]})]
+<a id="resultats_recherche"></a>
+			
+		<div class="menu articles">
+			<B_tab_resultat>
+			
+			
+			<BOUCLE_tab_resultat(POUR){tableau #GET{tab_resultat}}>
+			[(#COMPTEUR_BOUCLE|=={2}|?{' ',''})
+				<h2><:ouvrages:></h2><ul>
+			]
 
-		<br class="nettoyeur" />
+			[(#COMPTEUR_BOUCLE|>{1}|?{' ',''})
+			 	<li[ (#ENV{look_ALL}|oui)class="surlignable"]>
+						[(#REM|?{'','<img />'}|inserer_attribut{class,spip_logos}|inserer_attribut{src,[(#GET{tab_resultat}|pmb_tableau2_valeur{#CLE, logo_src}|copie_locale)]}|image_reduire{130,0})]
+						<h3[(#ENV{look_TITLE}|oui) class="surlignable"]><a href="index.php?page=notice_display&id=[(#GET{tab_resultat}|pmb_tableau2_valeur{#CLE, id})]&seule=1">[(#GET{tab_resultat}|pmb_tableau2_valeur{#CLE, titre})]</a></h3>
+                				[<small[(#ENV{look_AUTHOR}|oui) class="surlignable"]><:par_auteur:> (#GET{tab_resultat}|pmb_tableau2_valeur{#CLE, lesauteurs})</small>]
+						[(#ENV{look_PUBLISHER}|oui)[[(#GET{tab_resultat}|pmb_tableau2_valeur{#CLE, lesauteurs}|oui)<br />]<small class="surlignable">&eacute;diteur : (#GET{tab_resultat}|pmb_tableau2_valeur{#CLE, editeur})</small>]]
+					
+						[<div class="introduction entry-content[(#ENV{look_ABSTRACT}|oui) surlignable]">(#GET{tab_resultat}|pmb_tableau2_valeur{#CLE, resume}|couper{300,'...'})</div>]
+						<a class="lire-la-suite pas_surlignable²" title="[(#GET{tab_resultat}|pmb_tableau2_valeur{#CLE, titre})]" href="index.php?page=notice_display&id=[(#GET{tab_resultat}|pmb_tableau2_valeur{#CLE, id})]&seule=1"><:lire_la_suite:> +</a>
+
+				</li>
+			]
+			</BOUCLE_tab_resultat>
+				</ul>
+			
+			</B_tab_resultat>
+				
+			<//B_tab_resultat>
+			
+		</div>
+		<br class="nettoyeur" />	
 
 	</div><!--#contenu-->
 	</div><!--#conteneur-->
