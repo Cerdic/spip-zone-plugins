@@ -1,0 +1,75 @@
+-----------------------------------------
+	EXPORT DE DONNÉES SPIP AU FORMAT CSV
+	Auteur : Stéphanie De Nadaï
+	2009
+	License GNU/GPL
+-----------------------------------------
+-----------------------------------------
+	version 0.3 en test pour SPIP 2.0
+	testé avec SPIP 2.0.8 / MySQL
+-----------------------------------------
+
+-----------------------------------------
+	PRÉSENTATION
+-----------------------------------------
+	Export au format tableur CSV des articles et pétitions pour publication papier
+	Ce plugin est axé sur les articles SPIP. Il exporte au choix de l’utilisateur les éléments les composants (titre, sous-titre, texte, p.s...) ainsi que :
+    * leur rubrique (et les éléments la composant)
+    * les mots-clés associés (titre et nom du groupe) :
+          o aux rubriques,
+          o aux articles
+    * les pétitions
+    
+    voir http://www.spip-contrib.net/Export-CSV-des-articles-pour
+
+-----------------------------------------
+	INSTALLATION :
+-----------------------------------------
+	0 - LE PLUGIN CFG DOIT ÊTRE PRÉALABLEMENT INSTALLÉ
+	
+	1 - Comme pour tous les plugins SPIP, décompacter le contenu de l'archive dans le dossier "plugins" situé à la racine du site.
+	
+	2 - Dans l'interface privée du site, bouton "Configuration" -> "Gestion des plugins", activer le plugin "Export CSV"
+	
+	3 - Ouvrir la page du plugin en survolant le bouton "Édition" puis en  cliquant sur l'icône "Extraire les données". Sur cette page, s'affiche :
+		- un aperçu des données extraites,
+		- un lien vers CFG pour configurer les données à extraire,
+		- un lien pour télécharger les données "articles" au format CSV,
+		- un lien pour télécharger les signatures de chaque article contenant une pétition
+		
+	4 - Configurer le plugin via CFG
+	
+	
+-----------------------------------------
+	TODO LIST 
+-----------------------------------------
+
+	+ CONFIGURATION
+	|   |
+	|   |___ permettre de choisir
+	|       | 
+	|       |___ les rubriques à extraire - ok
+	|       |
+	|       |___ les mots-clés : - ok
+	|	    |   |___ par rubrique - ok
+	|	    |   |___ par article - ok
+	|       |
+	|       |___ les éléments : 
+	|	    |   |___ des rubriques - ok
+	|	    |   |___ des articles - ok
+	|	    |        |___ auteurs - nok v0.3 ?
+	|       |
+	|       |___ les brèves : oui ou non ?  - nok v1.0 ?
+	|       |
+	|       |___ quel statut d'article (publié, en rédaction, en attente)  - nok v0.3 ?
+	|
+	|
+	+ AVENIR RADIEUX
+	|   |
+	|   |___ choix du format : XML, PDF, etc.  - nok v1.0 ?
+	|   |
+	|   |___ interface de génération de doc pour publication directe  - nok v1.0 ?
+	|   |
+	|   |___ MODÈLES
+	|        |___ pour squelette "rubrique" : permettre l'export au public  - nok v1.5 ?
+	|

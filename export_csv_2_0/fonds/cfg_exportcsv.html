@@ -1,0 +1,210 @@
+#CACHE{0}
+<?php
+/*##############################################################
+ * ExportCSV
+ * Export des articles / rubriques SPIP en fichiers CSV.
+ *
+ * Auteur :
+ * Stéphanie De Nadaï -> webdesigneuse.net
+ * © 2008 - Distribué sous licence GNU/GPL
+ *
+##############################################################*/
+#include_spip("inc/exportcsv");
+include_spip("base/exportcsv_librairie");
+include_spip("inc/presentation");
+global $couleur_foncee;
+#generer_url_public('style_prive', parametres_css_prive());
+?>
+<!-- icone=img_pack/exportcsv-24.png -->
+<!-- titre=Export CSV -->
+<!-- boite=<:exportcsv:config_extraction:> -->
+<!-- descriptif=
+<p><img src="<?php echo _DIR_IMG_EXPORTCSV.'cfg-22.png'; ?>" alt="" /> <:exportcsv:description_cfg:></p><p> 
+<?php
+echo icone_horizontale (_T('exportcsv:extraction_data_back'), generer_url_ecrire('exportcsv_tous'), _DIR_IMG_EXPORTCSV.'exportcsv-24.png', '', false);
+?>
+</p>-->
+<!-- head=<script type="text/javascript">
+//<![CDATA[
+	// récursivité pour décocher les sous-rubriques
+	function unchecked(mum) {
+		mum.each( function() {		
+			var unchek = $(this).find("input[@type=checkbox]");
+			unchek.attr( 'checked', false );	
+			
+			unchecked($(this).find("li"));
+		});
+	}
+	$(function() {
+		// récupération des éléments racine
+		<B_jQracine>
+			var racine = [<BOUCLE_jQracine(RUBRIQUES) {tout} {racine}{par titre} {', '}>'#r#ID_RUBRIQUE'</BOUCLE_jQracine>];
+		</B_jQracine>
+
+		// on masque par défaut les sous-rubrique lorsqu'une rubrique racine est cochée dans la config
+		$(racine).each( function(i) {
+			
+			var chek = $(racine[i]).children("input"); 
+			var ss_rub = $(racine[i]).next("ul:first");
+			
+			if($(chek).is(':checked')) {
+				$(ss_rub).hide()
+			}
+		});
+		
+		// on masque/affiche et coche/décoche les sous-rubriques à la sélection de la rubrique racine
+		$("#listerub").find("label.racine").click( function() {
+			var secteur = this.id;
+			$(racine).each( function(i) {
+			
+				var chek = $(racine[i]).children("input"); 
+				var ss_rub = $(racine[i]).next("ul:first");
+	
+				if( secteur == $(racine[i]).attr('id') ) {
+					
+					if(ss_rub.is(':visible')) {
+						
+						unchecked(ss_rub.children("li"));
+						ss_rub.slideUp();
+
+					} else {
+						ss_rub.slideDown();
+					}
+
+					if(chek.is(':checked')) {
+						chek.attr( 'checked', false );
+						
+					} else {
+						chek.attr( 'checked', true );
+					}
+				}
+			});
+			return false;
+		});
+	});
+	//]]>
+</script>-->
+
+<form method="post" name="form_exportcsv" id="form_exportcsv">[(#ENV{_cfg_}|form_hidden)]
+	[(#SET{title_label,<:exportcsv:toutes_selectionnees:>})]
+	<fieldset><legend style="color:<?php echo $couleur_foncee; ?>;"><:exportcsv:rub_a_extraire:></legend>
+
+	<ul id="listerub">
+	<BOUCLE_racine(RUBRIQUES) {tout} {racine}{par titre}>
+
+		<li class="racine"><label class="racine" id="r#ID_RUBRIQUE" title="#GET{title_label}">
+			<input type="checkbox" name="secteur[]" value="#ID_RUBRIQUE" <?php is_checked('secteur', '#ID_RUBRIQUE'); ?>/>
+			[(#TITRE|supprimer_numero)] <small>(#EXCSV_STATUT{id_rubrique})</small></label>
+		<B_rub><ul>
+			<BOUCLE_rub(RUBRIQUES){id_parent} {tout} {par titre}>
+				<li class="lissrub">
+				<label class="ssrub">
+				<input type="checkbox" name="rub[]" class="rien" value="#ID_RUBRIQUE" <?php is_checked('rub', '#ID_RUBRIQUE'); ?>/>
+				[(#TITRE|supprimer_numero)] <small>(#EXCSV_STATUT{id_rubrique})</small></label>
+				<BOUCLE_ssrub(BOUCLE_rub)></BOUCLE_ssrub>
+				</li>
+			</BOUCLE_rub>
+		</ul></B_rub>
+		</li>
+	</BOUCLE_racine>
+	</ul>
+	</fieldset>
+
+	<fieldset><legend style="color:<?php echo $couleur_foncee; ?>;"><:exportcsv:gmc_associes:></legend>
+
+		<fieldset class="ss_field"><legend style="color:<?php echo $couleur_foncee; ?>;"><:exportcsv:aux_rub:></legend>
+			<?php excsv_mots_cles('rubriques'); ?>		
+		</fieldset>
+		
+		<fieldset class="ss_field"><legend style="color:<?php echo $couleur_foncee; ?>;"><:exportcsv:aux_art:></legend>
+			<?php excsv_mots_cles('articles'); ?>
+		</fieldset>
+		
+	</fieldset>
+	
+	<fieldset><legend style="color:<?php echo $couleur_foncee; ?>;"><:exportcsv:elements_a_extract:></legend>
+		<fieldset class="ss_field"><legend style="color:<?php echo $couleur_foncee; ?>;"><:exportcsv:aux_rub:></legend>
+			<ul class="racine">
+				<li><label>
+				<input type="checkbox" name="rubriques_a_titre" [checked="(#ENV{rubriques_a_titre})"] />
+				<:exportcsv:titre:></label></li>
+				<li><label>
+				<input type="checkbox" name="rubriques_b_descriptif" [checked="(#ENV{rubriques_b_descriptif})"] />
+				<:exportcsv:descriptif:></label></li>      
+				<li><label>
+				<input type="checkbox" name="rubriques_c_texte" [checked="(#ENV{rubriques_c_texte})"] />
+				<:ecrire:info_texte:></label></li>
+			</ul>		
+		</fieldset>
+	
+		<fieldset class="ss_field"><legend style="color:<?php echo $couleur_foncee; ?>;"><:exportcsv:aux_art:></legend>
+
+			<ul class="racine">
+				<li><label>
+				<input type="checkbox" name="articlestitre" checked="checked" disabled="disabled" />
+				<:exportcsv:titre:></label>
+				<input type="hidden" name="articles_a_titre" value="1" /></li>
+				
+				<li><label>
+				<input type="checkbox" name="articles_f_texte" [checked="(#ENV{articles_f_texte})"] />
+				<:ecrire:info_texte:></label></li>
+
+				<li><label>
+				<input type="checkbox" name="articles_j_date" [checked="(#ENV{articles_j_date})"] />
+				<:exportcsv:date:></label></li>
+				
+[(#REM) on verra plus tard
+				<li><label>
+				<input type="checkbox" name="articles_k_auteurs" [checked="(#ENV{articles_k_auteurs})"] />
+				<:exportcsv:auteurs:></label></li>
+]
+<?php   if($GLOBALS['meta']['articles_surtitre'] == 'oui') { ?>
+				<li><label>
+				<input type="checkbox" name="articles_b_surtitre" [checked="(#ENV{articles_b_surtitre})"] />
+				<:ecrire:texte_sur_titre:></label></li>
+
+<?php } 
+		if($GLOBALS['meta']['articles_soustitre'] == 'oui') { ?>
+				<li><label>
+				<input type="checkbox" name="articles_c_soustitre" [checked="(#ENV{articles_c_soustitre})"] />
+				<:ecrire:texte_sous_titre:></label></li>
+
+<?php }
+		if($GLOBALS['meta']['articles_descriptif'] == 'oui') { ?>
+				<li><label>
+				<input type="checkbox" name="articles_d_descriptif" [checked="(#ENV{articles_d_descriptif})"] />
+				<:exportcsv:descriptif:></label></li>
+
+<?php } 
+		if($GLOBALS['meta']['articles_chapeau'] == 'oui') { ?>
+				<li><label>
+				<input type="checkbox" name="articles_e_chapo" [checked="(#ENV{articles_e_chapo})"] />
+				<:ecrire:info_chapeau:></label></li>
+<?php }
+		if($GLOBALS['meta']['articles_ps'] == 'oui') { ?>
+				<li><label>
+				<input type="checkbox" name="articles_g_ps" [checked="(#ENV{articles_g_ps})"] />
+				<:ecrire:info_post_scriptum:></label></li>
+<?php }
+		if($GLOBALS['meta']['articles_urlref'] == 'oui') { ?>
+				<li><label>
+				<input type="checkbox" name="articles_h_nom_site" [checked="(#ENV{articles_h_nom_site})"] />
+				<:exportcsv:lien_nom:></label></li>
+				<li><label>
+				<input type="checkbox" name="articles_i_url_site" [checked="(#ENV{articles_i_url_site})"] />
+				<:exportcsv:lien_url:></label></li>
+				
+<?php } ?>
+			</ul>
+		</fieldset>
+	</fieldset>
+
+	<p class="center">
+		<input type="submit" name="_cfg_ok" class="fondo" value="<:exportcsv:ok_cfg:>" />
+		<input type="reset" class="fondo" value="<:exportcsv:reset_cfg:>" />
+		<input type="submit" class="fondo" name="_cfg_delete" value="<:exportcsv:del_cfg:>" />
+	</p>
+</form>
+
+
+
