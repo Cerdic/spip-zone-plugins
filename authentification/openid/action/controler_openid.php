@@ -39,7 +39,7 @@ function action_controler_openid() {
 	// La cible de notre operation de connexion
 	$url = _request('url');
 	$redirect = isset($url) ? $url : _DIR_RESTREINT_ABS;
-	
+
 	// Verifier l'openid revenant
 	include_spip('inc/openid');
 	terminer_authentification_openid($redirect);

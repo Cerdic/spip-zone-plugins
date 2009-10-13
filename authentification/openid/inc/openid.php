@@ -196,8 +196,8 @@ function terminer_authentification_openid($cible){
 		// (charge inc/auth_openid)
 		openid_log("Verification de l'identite '$openid' dans SPIP", 2);
 
-		include_spip('formulaires/login');
-		if (!$ok = $auteur = verifier_login($openid, "")){ // pas de mot de passe
+		$auth = charger_fonction('openid','auth');
+		if (!$ok = $auteur = $auth($openid, "","","",'ok')){ // pas de mot de passe
 			// c'est ici que l'on peut ajouter un utilisateur inconnu dans SPIP
 			// en plus, on connait (si la personne l'a autorise) son nom et email
 			// en plus du login

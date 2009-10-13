@@ -14,23 +14,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
 include_spip('formulaires/login');
 
-// determine si un login est de type openid (une url avec http ou https)
-function is_openid($login){
-	// Detection s'il s'agit d'un URL à traiter comme un openID
-	// RFC3986 Regular expression for matching URIs
-	#if (preg_match('_^(?:([^:/?#]+):)?(?://([^/?#]*))?([^?#]*)(?:\?([^#]*))?(?:#(.*))?$_', $login, $uri_parts)
-	#	AND ($uri_parts[1] == "http" OR $uri_parts[1] == "https")) {
-	
-	// s'il y a un point, c'est potentiellement un login openid
-	// ca permet d'eliminer un bon nombre de pseudos tout en 
-	// autorisant les connexions openid sans avoir besoin de renseigner le http://
-	if (strpos($login, '.')!==false) {
-		return true;
-	} else {
-		return false;
-	}
-}
-
 
 function formulaires_login_verifier($cible="",$login="",$prive=null){
 	
@@ -50,34 +33,9 @@ function formulaires_login_verifier($cible="",$login="",$prive=null){
 	$row = retrouver_login($session_login);
 	if ($row) 
 		$login = $row['login'];
-	elseif (spip_connect_ldap()) 
+	else 
 		$login = $session_login;  // laisser une chance
 
-	if (!$login OR (!$session_password AND !$session_md5pass AND !$session_md5next)) {
-		
-		#openid# tester le login openid
-		$erreurs_openid = "";
-		// * Si quelqu'un possede effectivement cet openid,
-		// on demande l'authentification
-		$auth_openid = charger_fonction('openid','auth');
-		if ($auteur = $auth_openid($session_login,$session_password,$session_md5pass, $session_md5next,"fastlog")) {
-			// * Si l'openid existe, la procedure continue en redirigeant
-			// vers le fournisseur d'identite. En cas d'erreur, il y a une redirection de faite
-			// sur la page login, en cas de reussite, sur l'action controler_openid
-			// * S'il l'openid n'existe pas, on est de retour ici, et on continue
-			// pour d'autres methodes d'identification
-			include_spip('inc/openid');
-			$erreurs_openid = demander_authentification_openid($auteur['openid'], $cible);
-			// potentiellement, on arrive ici avec une erreur si l'openid donne n'existe pas
-		}
-		#/openid#
-
-		include_spip('inc/cookie');
-		spip_setcookie("spip_admin", "", time() - 3600);
-		return array('message_erreur' =>
-			_T('login_identifiant_inconnu' . ($erreurs_openid ? "<br />" . $erreurs_openid:""),
-			array('login' => htmlspecialchars($session_login))));
-	}
 	$auteur = verifier_login($login, $session_password, $session_md5pass, $session_md5next);
 	if (!$auteur) {
 		if (strlen($session_password) OR strlen($session_md5pass))
