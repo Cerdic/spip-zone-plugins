@@ -38,6 +38,10 @@
 		<inclure>base/openid.php</inclure>
 	</pipeline>
 	<pipeline>
+		<nom>formulaire_charger</nom>
+		<inclure>openid_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
 		<nom>afficher_contenu_objet</nom>
 		<inclure>openid_pipelines.php</inclure>
 	</pipeline>

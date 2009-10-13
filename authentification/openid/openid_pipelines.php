@@ -1,6 +1,29 @@
 <?php
 
-// ajouter un champ openID sur le formulaire CVT editer_auteur
+/**
+ * Si un auteur a un openid, le preferer en guise de login
+ * dans le formulaire de login
+ * sans le http:// implicite au debut
+ * 
+ * @param <type> $flux
+ */
+function openid_formulaire_charger($flux){
+	if ($flux['args']['form']=='login'){
+		if ($login = $flux['data']['var_login']
+			AND $openid = sql_getfetsel('openid','spip_auteurs','login='.sql_quote($login))){
+
+			$flux['data']['var_login'] = preg_replace(',^http://,i','',$openid);
+		}
+	}
+	return $flux;
+}
+
+/**
+ * ajouter un champ openID sur le formulaire CVT editer_auteur
+ *
+ * @param array $flux
+ * @return array
+ */
 function openid_editer_contenu_objet($flux){
 	if ($flux['args']['type']=='auteur') {
 		include_spip('public/assembler');
@@ -11,7 +34,12 @@ function openid_editer_contenu_objet($flux){
 	return $flux;
 }
 
-// ajouter l'open_id soumis lors de la soumission du formulaire CVT editer_auteur
+/**
+ * ajouter l'open_id soumis lors de la soumission du formulaire CVT editer_auteur
+ *
+ * @param array $flux
+ * @return array
+ */
 function openid_pre_edition($flux){
 	if ($flux['args']['table']=='spip_auteurs') {
 		if ($openid = _request('openid')) {
