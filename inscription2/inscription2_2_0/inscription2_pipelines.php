@@ -17,8 +17,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  */
 function inscription2_ajouter_boutons($boutons_admin){
 	if ($GLOBALS['connect_statut'] == "0minirezo" && $GLOBALS["connect_toutes_rubriques"]) {
-		//$boutons_admin['auteurs']->sousmenu['auteurs']= '';
 		unset($boutons_admin['auteurs']->sousmenu['auteurs']);
+		unset($boutons_admin['bando_reactions']->sousmenu['visiteurs']);
 	}
 	return $boutons_admin;
 }
@@ -144,6 +144,7 @@ function inscription2_i2_exceptions_des_champs_auteurs_elargis($array){
 	$array[] = 'nom_site';
 
 	// Des choses spécifiques à inscription2
+	$array[] = 'logo_auteur';
 	$array[] = 'username';
 	$array[] = 'statut_nouveau';
 	$array[] = 'statut_int';
@@ -151,6 +152,8 @@ function inscription2_i2_exceptions_des_champs_auteurs_elargis($array){
 	$array[] = 'accesrestreint';
 	$array[] = 'password';
 	$array[] = 'affordance_form';
+	$array[] = 'reglement';
+	$array[] = 'article_reglement';
 
 	return $array;
 }
