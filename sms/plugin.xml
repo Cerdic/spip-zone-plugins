@@ -9,6 +9,7 @@ _ &#169; 2007 - Distribu&#233; sous licence GNU/LGPL
 	<version>
 	0.2.0
 	</version>
+	<icon>images/sms-64.png</icon>
 	<etat>
 	test
 	</etat>
@@ -20,7 +21,7 @@ _ Il est bas&eacute; sur Net_SMS de Horde/PEAR
 	<lien>
 	</lien>
 	<prefix>
-	SMS
+	sms
 	</prefix>
 	<chemin dir='' type='prive' />
 	<necessite id="SPIP" version="[1.9.0;]" />
