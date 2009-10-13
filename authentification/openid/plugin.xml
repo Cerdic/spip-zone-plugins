@@ -15,7 +15,7 @@
    <version>0.8.8</version>
    <version_base>0.1</version_base>
    <etat>test</etat>
-   <icon>openid_big.png</icon>
+   <icon>images/openid_big.png</icon>
    <description>
       <multi>
         [fr]Authentification des auteurs et visiteurs &#224; l'aide de leur OpenID.
@@ -36,7 +36,11 @@
 	<pipeline>
 		<nom>declarer_tables_principales</nom>
 		<inclure>base/openid.php</inclure>
-	</pipeline>	
+	</pipeline>
+	<pipeline>
+		<nom>afficher_contenu_objet</nom>
+		<inclure>openid_pipelines.php</inclure>
+	</pipeline>
  	<pipeline>
 		<nom>editer_contenu_objet</nom>
 		<inclure>openid_pipelines.php</inclure>
