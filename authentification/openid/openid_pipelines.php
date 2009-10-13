@@ -76,7 +76,9 @@ function openid_recuperer_fond($flux){
 	if ($flux['args']['fond']=='formulaires/login'){
 		$login = pipeline('social_login_links','');
 		$flux['data']['texte'] .= "<style type='text/css'>"
-		."input#var_login {background-image : url(".find_in_path('images/login_auth_openid.gif').");background-repeat:no-repeat;background-position:center left;padding-left:18px;}"
+		."input#var_login {width:10em;background-image : url(".find_in_path('images/login_auth_openid.gif').");background-repeat:no-repeat;background-position:center left;padding-left:18px;}\n"
+		."input#password {width:10em;padding-right:18px;}\n"
+		.".explication {margin:5px 0;}"
 		."</style>"
 		."<script type='text/javascript'>"
 		."jQuery(document).ready(function(){jQuery('input#var_login').after('<div class=\'explication\'>".addslashes(_T('openid:form_login_openid'))."</div>');});"
