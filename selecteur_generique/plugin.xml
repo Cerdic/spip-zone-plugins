@@ -6,11 +6,11 @@
 	Fil kent1
 	</auteur>
 	<version>
-	0.3
+	0.4
 	</version>
 	<icon></icon>
 	<etat>
-	test
+	stable
 	</etat>
 	<description>
 	Remplace les s&#233;lecteurs (auteurs, mots, rubriques) par quelque chose de plus l&#233;ger &#38; rapide, capable de traiter autant de donn&#233;es que possible
