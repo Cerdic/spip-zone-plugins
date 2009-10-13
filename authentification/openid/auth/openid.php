@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Authentifie via OPENID et retourne la ligne SQL decrivant l'utilisateur si ok
 
 // http://doc.spip.org/@inc_auth_ldap_dist
-function auth_openid_dist ($login, $pass, $md5pass="", $md5next="") {
+function auth_openid_dist ($login, $pass, $md5pass="", $md5next="", $fastlog=false) {
 
 	// il faut un login non vide et qui contient au moins un point
 	// car c'est cense etre une url
@@ -37,7 +37,7 @@ function auth_openid_dist ($login, $pass, $md5pass="", $md5next="") {
 	// si le login est un login spip mais qu'on arrive la,
 	// et qu'il a pas fournit de pass
 	// dans ce cas, si l'utilisateur a un openid on peut tenter de la loger avec !
-	if (!$result AND !$pass AND !$md5pass){
+	if ($fastlog AND !$result){
 		// Si l'utilisateur figure dans la base, y recuperer les infos
 		$result = sql_fetsel("*", "spip_auteurs", array("statut!=".sql_quote("5poubelle") , "login=" . sql_quote($login)));
 		if (!$result['openid'])

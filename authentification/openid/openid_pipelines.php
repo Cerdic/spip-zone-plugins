@@ -11,7 +11,6 @@ function openid_formulaire_charger($flux){
 	if ($flux['args']['form']=='login'){
 		if ($login = $flux['data']['var_login']
 			AND $openid = sql_getfetsel('openid','spip_auteurs','login='.sql_quote($login))){
-
 			$flux['data']['var_login'] = preg_replace(',^http://,i','',$openid);
 		}
 	}
@@ -43,13 +42,8 @@ function openid_editer_contenu_objet($flux){
 function openid_pre_edition($flux){
 	if ($flux['args']['table']=='spip_auteurs') {
 		if ($openid = _request('openid')) {
-			$openid = vider_url($openid, false);
-			$openid = rtrim($openid,'/');
-			// si pas de protocole, mettre http://
-			if ($openid  AND !preg_match(';^[a-z]{3,6}://;i',$openid ))
-				$openid = "http://".$openid;
-
-			$flux['data']['openid'] = $openid;
+			include_spip('inc/openid');
+			$flux['data']['openid'] = nettoyer_openid($openid);
 		}
 	}
 	return $flux;

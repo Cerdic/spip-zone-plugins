@@ -2,6 +2,15 @@
 
 @define('_OPENID_LOG', true);
 
+function nettoyer_openid($openid){
+	$openid = vider_url($openid, false);
+	$openid = rtrim($openid,'/');
+	// si pas de protocole et que ca ne semble pas un email style gmail,
+	// mettre http://
+	if ($openid  AND !preg_match(';^[a-z]{3,6}://;i',$openid ) AND strpos($openid,'@')===FALSE)
+		$openid = "http://".$openid;
+	return $openid;
+}
 /*****
  * Initialisation de l'authent OpenID
  ****/
@@ -178,7 +187,7 @@ function terminer_authentification_openid($cible){
 	// This means the authentication succeeded.
 	elseif ($response->status == Auth_OpenID_SUCCESS) {
 		
-		$openid = rtrim($response->identity_url,'/'); // pas de / final dans l'openid
+		$openid = nettoyer_openid($response->identity_url); // pas de / final dans l'openid
 		
 		$esc_identity = htmlspecialchars($openid, ENT_QUOTES);
 		openid_log("Succes de l'authentification $openid chez le fournisseur d'identification", 1);
