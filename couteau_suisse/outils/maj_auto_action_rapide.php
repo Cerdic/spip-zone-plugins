@@ -63,7 +63,8 @@ function maj_auto_action_rapide() {
 		. '" /><p><i>'._T('couteau:maj_verif2').'</i></p></div></fieldset></div>'
 		. http_script("
 jQuery(document).ready(function() {
-	jQuery('#maj_auto_div .maj_checked')[0].checked = true;
+	var ch = jQuery('#maj_auto_div .maj_checked');
+	if(ch.length) ch[0].checked = true;
 	if(!jQuery('#maj_auto_div :radio:checked').length)
 		jQuery('#maj_auto_div :radio:first')[0].checked = true;
 });");
@@ -111,15 +112,21 @@ function plugin_get_infos_maj($p, $force = false) {
 	// fichier svn.revision
 	$ok = lire_fichier($svn_rev = _DIR_PLUGINS.$p.'/svn.revision', $svn);
 	$lastmodified = @file_exists($svn_rev)?@filemtime($svn_rev):0;
-	$url_origine = ($ok && preg_match(',<origine>(.+)</origine>,', $svn, $regs))
-		?str_replace(_MAJ_SVN_DEBUT, _MAJ_LOG_DEBUT, $regs[1]):'';
+	if($ok && preg_match(',<origine>(.+)</origine>,', $svn, $regs)) {
+		$url_origine = str_replace(_MAJ_SVN_DEBUT, _MAJ_LOG_DEBUT, $regs[1]);
+		// prise en compte du recent demenagement de la Zone...
+		$url_origine = preg_replace(',/_plugins_/_(?:stable|dev|test)_/,','/_plugins_/', $url_origine);
+	} else $url_origine = '';
 	$infos['commit'] = ($ok && preg_match(',<commit>(.+)</commit>,', $svn, $regs))?$regs[1]:'';
 	$rev_local = (strlen($svn) && preg_match(',<revision>(.+)</revision>,', $svn, $regs))
 		?intval($regs[1]):version_svn_courante(_DIR_PLUGINS.$p);
 	if($infos['svn'] = $rev_local<0) { 
 		// fichier SVN
-		if (lire_fichier(_DIR_PLUGINS.$p.'/.svn/entries', $svn) && preg_match(',('.preg_quote(_MAJ_SVN_TRAC).'[^\n\r]+),ms', $svn, $regs))
+		if (lire_fichier(_DIR_PLUGINS.$p.'/.svn/entries', $svn) && preg_match(',('.preg_quote(_MAJ_SVN_TRAC).'[^\n\r]+),ms', $svn, $regs)) {
 			$url_origine = str_replace(_MAJ_SVN_TRAC, _MAJ_LOG_DEBUT, $regs[1]);
+			// prise en compte du recent demenagement de la Zone...
+			$url_origine = preg_replace(',/_plugins_/_(?:stable|dev|test)_/,','/_plugins_/', $url_origine);
+		}
 		//$infos['zip_trac'] = 'SVN';
 	}
 	$infos['url_origine'] = strlen($url_origine)?$url_origine._MAJ_LOG_FIN:'';
