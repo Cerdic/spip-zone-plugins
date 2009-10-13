@@ -38,4 +38,27 @@ function openid_afficher_contenu_objet($flux){
 
 	return $flux;
 }
+
+/**
+ * Afficher l'openid sur le formulaire de login
+ * @param <type> $flux
+ * @return <type>
+ */
+function openid_recuperer_fond($flux){
+	if ($flux['args']['fond']=='formulaires/login'){
+		$login = pipeline('social_login_links','');
+		$flux['data']['texte'] .= "<style type='text/css'>"
+		."input#var_login {background-image : url(".find_in_path('images/login_auth_openid.gif').");background-repeat:no-repeat;background-position:center left;padding-left:18px;}"
+		."</style>"
+		."<script type='text/javascript'>"
+		."jQuery(document).ready(function(){jQuery('input#var_login').after('<div class=\'explication\'>".addslashes(_T('openid:form_login_openid'))."</div>');});"
+		."</script>";
+	}
+	/*if ($flux['args']['fond']=='formulaires/inscription'){
+		$insc = pipeline('social_inscription_links','');
+		$flux['data']['texte'] = str_replace('<form',$insc . '<form',$flux['data']['texte']);
+	}*/
+	return $flux;
+}
+
 ?>
