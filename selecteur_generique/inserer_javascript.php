@@ -82,17 +82,8 @@ function SelecteurGenerique_inserer_mot() {
 			var id_groupe = $(this).parents('form').find('input[name=select_groupe]').val();
 			groupes.push(id_groupe);
 			groupes_titre.push($(this).val());
-			if (hide) {
+			if (hide)
 				$(this).parent().hide();
-				/*
-				$(this).parent().parent().append(
-					$('<a>'+$(this).val()+'<\/a>')
-					.click(function(){
-						$(this).hide().parent().find('input[name=select_groupe]').parent().show();
-					})
-				);
-				*/
-			}
 			hide=true;
 		});
 		hide=false;
@@ -102,11 +93,19 @@ function SelecteurGenerique_inserer_mot() {
 			$(this)
 			.val(groupes_titre.join(', '))
 			.attr('title',groupes_titre.join(', '));
+			$(this)
+			.parents('form')
+			.bind('submit', function(){
+				$('.ac_results').remove();
+			})
+			.find('input[name=select_groupe]')
+			.val(groupes.join(','));
 			$(inp).autocomplete('$ac',{
 				extraParams:{quoi:'mot',$type:'$id',groupes: groupes.join(',')},
 				delay: 300,
 				autofill: false,
 				minChars: 1,
+				selectFirst: false,
 				formatItem: function(data, i, n, value) {
 					return data[0];
 				},
