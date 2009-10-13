@@ -60,14 +60,14 @@ function formulaires_login_verifier($cible="",$login="",$prive=null){
 			// * Si quelqu'un possede effectivement cet openid,
 			// on demande l'authentification
 			$auth_openid = charger_fonction('openid','auth');
-			if ($auth_openid($session_login)) {
+			if ($auteur = $auth_openid($session_login,$session_password,$session_md5pass,$session_md5next)) {
 				// * Si l'openid existe, la procedure continue en redirigeant 
 				// vers le fournisseur d'identite. En cas d'erreur, il y a une redirection de faite
 				// sur la page login, en cas de reussite, sur l'action controler_openid
 				// * S'il l'openid n'existe pas, on est de retour ici, et on continue
 				// pour d'autres methodes d'identification
 				include_spip('inc/openid');
-				$erreurs_openid = demander_authentification_openid($session_login, $cible);
+				$erreurs_openid = demander_authentification_openid($auteur['openid'], $cible);
 				// potentiellement, on arrive ici avec une erreur si l'openid donne n'existe pas
 			}
 		}
