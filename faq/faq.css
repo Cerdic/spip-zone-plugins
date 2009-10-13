@@ -19,8 +19,9 @@ dl.faq dd {}
 #faq dl dt .retour { display: block; position: absolute; top: 0; right: 0; padding: .2em .5em 0 0; text-align: right; font-weight: normal; }
 #faq dl dd { margin-bottom: 2em; padding-right: 1em; }
 
+dl.spip_documents,
 .spip_documents dl,
 .spip_documents dt,
-.spip_documents dd { margin: 0 auto; padding: 0; background: 0; }
+.spip_documents dd { margin: 0 auto; padding: 0; background: 0; border: 0; }
 
 @media print { dl.faq dd { display: block !important; } }
