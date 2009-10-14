@@ -369,7 +369,7 @@ function exec_malettre(){
 								
 								echo "<br /><br />"._T('malettre:compose_sujet')." :<i>("._T('malettre:compose_non_spip').")</i><br />\n";
 								echo "<input type='text' size='55' name='lettre_title' /><br />\n";
-								echo "<br />"._T('malettre:compose_contenu')." - <a href='$page_edit$id_article_edito'>"._T('malettre:compose_edito')."</a><br />\n";
+								echo "<br />"._T('malettre:compose_contenu')." - <a href='?exec=articles&amp;id_article=$id_article_edito'>"._T('malettre:compose_edito')."</a><br />\n";								
 								echo "<iframe width='600' height='500' src='$path_url/spip.php?page=malettre_edito&amp;id_article=$id_article_edito'></iframe>\n";
 								echo $stro;								
 							
