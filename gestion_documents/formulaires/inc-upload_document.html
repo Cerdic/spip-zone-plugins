@@ -30,10 +30,10 @@
 ][(#ENV{mediatheque,''}|oui)
 <div class='joindre_mode#GET{domid}' id='joindre_media#GET{domid}'>
 	<ul>
-		<li class='editer_id_joindre[ (#ENV**{erreurs}|table_valeur{id_joindre}|oui)erreur]'>
+		<li class='editer_id_joindre[ (#ENV**{erreurs}|table_valeur{refdoc_joindre}|oui)erreur]'>
 			<label for='id_joindre#GET{domid}'><:gestdoc:label_id_joindre:></label>[
-			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{id_joindre})</span>
-			]<input class='text' type="text" name="id_joindre" value='#ENV{id_joindre}' id="id_joindre#GET{domid}"/>
+			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{refdoc_joindre})</span>
+			]<input class='text' type="text" name="refdoc_joindre" value='#ENV{refdoc_joindre}' id="id_joindre#GET{domid}"/>
 		</li>
 	</ul>
 	<p class='boutons'><input class='submit' type="button" name="parcourir" value="<:gestdoc:bouton_parcourir:>"

@@ -25,7 +25,6 @@ function joindre_determiner_mode($mode,$id_document,$objet){
 	return $mode;
 }
 
-
 function formulaires_joindre_document_charger_dist($id_document='new',$id_objet=0,$objet='',$mode = 'auto',$galerie = false, $proposer_media=true, $proposer_ftp=true){
 	$valeurs = array();
 	$mode = joindre_determiner_mode($mode,$id_document,$objet);
@@ -80,7 +79,7 @@ function formulaires_joindre_document_charger_dist($id_document='new',$id_objet=
 	if ($objet AND $id_objet){
 		$valeurs['id_objet'] = $id_objet;
 		$valeurs['objet'] = $objet;
-		$valeurs['id_joindre'] = '';
+		$valeurs['refdoc_joindre'] = '';
 		if ($valeurs['editable']){
 			$valeurs['editable'] = autoriser('modifier',$objet,$id_objet)?' ':'';
 		}
@@ -96,7 +95,7 @@ function formulaires_joindre_document_verifier_dist($id_document='new',$id_objet
 	$erreurs = array();
 	// on joint un document deja dans le site
 	if (_request('joindre_mediatheque')){
-		$id_joindre = intval(preg_replace(',^(doc|document|img),','',_request('id_joindre')));
+    $id_joindre = intval(preg_replace(',^(doc|document|img),','',_request('refdoc_joindre')));
 		if (!sql_getfetsel('id_document','spip_documents','id_document='.intval($id_joindre)))
 			$erreurs['message_erreur'] = _T('gestdoc:erreur_aucun_document');
 	}
@@ -147,12 +146,12 @@ function formulaires_joindre_document_traiter_dist($id_document='new',$id_objet=
 	$ancre = '';
 	// on joint un document deja dans le site
 	if (_request('joindre_mediatheque')){
-		if ($id_joindre = intval(preg_replace(',^(doc|document|img),','',_request('id_joindre')))){
+		if ($id_joindre = intval(preg_replace(',^(doc|document|img),','',_request('refdoc_joindre')))){
 			// lier le parent
 			$champs = array('parents' => array("$objet|$id_objet"));
 			include_spip('action/editer_document');
 			document_set($id_joindre,$champs);
-			set_request('id_joindre',''); // vider la saisie
+			set_request('refdoc_joindre',''); // vider la saisie
 			$ancre = $id_joindre;
 			$res['message_ok'] = _T('gestdoc:document_attache_succes');
 		}
