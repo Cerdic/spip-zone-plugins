@@ -16,7 +16,7 @@
 		speed: Fadingspeed in milliseconds or keywords (slow, normal or fast)(Default: 'normal')
 		timeout: Time between the fades in milliseconds (Default: '2000')
 		type: Type of slideshow: 'sequence' or 'random' (Default: 'sequence')
-		containerheight: Height of the containing element in any css-height-value (Default: 'auto')  runningclass: CSS-Class which the container getÕs applied (Default: 'innerfade') ]
+		containerheight: Height of the containing element in any css-height-value (Default: 'auto')  runningclass: CSS-Class which the container getï¿½s applied (Default: 'innerfade') ]
 	
 	
 [(#ENV{id_rubrique}|?{' ',''}) 
@@ -35,32 +35,30 @@
   [(#SET{objet_spip,article})]
   [(#SET{id_objet,[(#ENV{id_article})]})]
 ]
-
-
-[(#SET{timeout,#ENV{timeout,2000}})]
 	
 <B_PORFOLIO2>
     <script type="text/javascript">
-        $(document).ready(
+        jQuery(document).ready(
 	        function(){					
-		        $('ul.innerfade').innerfade({
-			        [speed: '(#ENV{speed})',]
+		        jQuery('ul#innerfade[-(#GET{objet_spip})][-(#GET{id_objet})]').innerfade({
+			        speed: '(#ENV{speed,slow}',
 			        [type: '(#ENV{type})',]
 			        [containerheight: '(#ENV{containerheight})',]
 			        [containerwidth: '(#ENV{containerwidth})',]
-        		    timeout: #GET{timeout}
+        		    timeout: #ENV{timeout,2000}
 		        });
         });		
     </script>
 
-    <ul id="innerfade-#GET{objet_spip}-#GET{id_objet}" class="innerfade" style="list-style-type: none ;">
+    <ul id="innerfade[-(#GET{objet_spip})][-(#GET{id_objet})]" class="#ENV{class,innerfade}" style="list-style-type: none;">
         <BOUCLE_PORFOLIO2(DOCUMENTS){id_article?}{id_rubrique?}{mode=document}{extension==jpg|gif|png} {par num titre, date}>
             <li class="diapo">
-                [(#URL_DOCUMENT||image_reduire{200,400}|inserer_attribut{'alt',#TITRE})]
-                <div class="diapo">
+                [(#URL_DOCUMENT||image_reduire{#ENV{image_max_largeur,200},#ENV{image_max_hauteur,400}}|inserer_attribut{'alt',[(#TITRE|textebrut|sinon{#FICHIER{basename}})]})]
+                [(#TITRE|sinon{#DESCRIPTIF}|oui)
+				<div class="diapo">
                     [<h3>(#TITRE|supprimer_numero)</h3>]
                     [(#DESCRIPTIF|paragrapher)]
-                </div>
+                </div>]
              </li>
         </BOUCLE_PORFOLIO2>	
     </ul>

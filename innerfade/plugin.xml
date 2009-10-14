@@ -6,7 +6,7 @@
 _ &#169; 2007 - Distribu&#233; sous licence GNU/LGPL pour la partie spip
 	</auteur>
 	<version>
-	0.0.1
+	0.0.2
 	</version>
 	<etat>
 	dev
@@ -17,7 +17,6 @@ _ &#169; 2007 - Distribu&#233; sous licence GNU/LGPL pour la partie spip
 	<description>
 Ce plugin fournit des modeles produisant des diaporamas en jquery innerfade
 [Jquery Innerfade->http://medienfreunde.com/lab/innerfade/]
-
 	</description>
 	<lien>
 	[Documentation sur contrib->http://www.spip-contrib.net/Diaporama-Innerfade-developpement]
