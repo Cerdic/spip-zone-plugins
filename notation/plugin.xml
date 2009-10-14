@@ -59,7 +59,7 @@
 		<url>notation</url>
 	</bouton>
 	<bouton id='notation21' parent='bando_reactions'>
-		<icone>img_pack/notation.png</icone>
+		<icone>images/notation-16.png</icone>
 		<titre>notation:notation</titre>
 		<url>notation</url>
 	</bouton>
