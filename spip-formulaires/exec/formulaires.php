@@ -85,7 +85,7 @@
 		echo '</ul>';
 
 		if ($formulaire->statut == 'en_ligne') {
-			echo '<table class="cellule-h-table" cellpadding="0" style="vertical-align: middle"><tr><td><a href="'.generer_url_formulaire($formulaire->id_formulaire).'" class="cellule-h"><span class="cell-i"><img src="../prive/images/rien.gif" alt="'._T('formulairesprive:voir_en_ligne').'"  style="background: url(../prive/images/racine-24.gif) center center no-repeat;" /></span></a></td><td class="cellule-h-lien"><a href="'.generer_url_formulaire($formulaire->id_formulaire).'" class="cellule-h" target="_blank">'._T('formulairesprive:voir_en_ligne').'</a></td></tr></table>';
+			echo '<table class="cellule-h-table" cellpadding="0" style="vertical-align: middle"><tr><td><a href="'.generer_url_formulaire($formulaire->id_formulaire).'" class="cellule-h"><span class="cell-i"><img src="../prive/images/rien.gif" alt="'._T('formulairesprive:voir_en_ligne').'"  style="background: url(../prive/images/racine-24.gif) center center no-repeat;" /></span></a></td><td class="cellule-h-lien"><a href="'.generer_url_formulaire($formulaire->id_formulaire).'" class="cellule-h">'._T('formulairesprive:voir_en_ligne').'</a></td></tr></table>';
 		}
 		echo '</div>';
 		echo '</div>';
