@@ -19,6 +19,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   // E
   'elements_signaler' => 'Elements &#224; signaler sur le flux public ci-dessus',
 
+	// I
+	'invite' => 'Invite',
+	'invite_statut' => 'Invite de statut',
+	'invite_statut_explications' => 'Le plugin peut afficher dans l\'espace priv&#233; une invite de statut. Voulez-vous afficher une invite de statut pour les r&#233;dacteurs autoris&#233;s (par d&#233;faut&nbsp;: les administrateurs du site) ?',
+	'invite_afficher' => 'Afficher l\'invite de statut',
+	
+
   // L
 	'label_status' => 'Quoi de neuf ?',
 
