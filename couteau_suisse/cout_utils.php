@@ -263,13 +263,14 @@ function cs_sauve_configuration() {
 		. "\n// Valeurs validees en metas\n\$valeurs_validees = array(\n" . join(",\n", $metas) . "\n);\n";
 
 	include_spip('inc/charset');
+	$nom_pack = _T('couteauprive:pack_actuel', array('date'=>cs_date()));
 	$sauve .= $temp = "\n######## "._T('couteauprive:pack_actuel_titre')." #########\n\n// "
 		. filtrer_entites(_T('couteauprive:pack_actuel_avert')."\n\n"
-			. "\$GLOBALS['cs_installer']['"._T('couteauprive:pack_actuel', array('date'=>cs_date()))."'] = array(\n\n\t// "
+			. "\$GLOBALS['cs_installer']['".$nom_pack."'] = array(\n\n\t// "
 			. _T('couteauprive:pack_outils_defaut')."\n"
 			. "\t'outils' =>\n\t\t'".join(",\n\t\t", $actifs)."',\n"
 			. "\n\t// "._T('couteauprive:pack_variables_defaut')."\n")
-		. "\t'variables' => array(\n\t" . join(",\n\t", $metas_actifs) . "\n\t)\n);\n";
+		. "\t'variables' => array(\n\t" . join(",\n\t", $metas_actifs) . "\n\t)\n); # $nom_pack #\n";
 
 	ecrire_fichier(_DIR_CS_TMP.'config.php', '<'."?php\n// Configuration de controle pour le plugin 'Couteau Suisse'\n\n$sauve?".'>');
 	if($_GET['cmd']=='pack') $GLOBALS['cs_pack_actuel'] = $temp;

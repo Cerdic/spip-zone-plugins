@@ -20,11 +20,39 @@ function pack_action_rapide() {
 		case 1 : $info = _T('couteauprive:pack_nb_un'); break;
 		default : $info = _T('couteauprive:pack_nb_plrs', array('nb' => $n));
 	}
+	$liste = $script = '';
+	if($n) {
+		$exec = _request('exec');
+		$fin_delete = _T('couteauprive:pack_delete');
+		$fin_delete = "\" class='pack_delete' title=\"$fin_delete\"><img src=\"". chemin_image('poubelle.gif') . "\" width='12' height='12' alt=\"$fin_delete\" /></a>&nbsp; <a href=\"";
+		$fin_install = _T('couteauprive:pack_installe');
+		$fin_install = "\" class='pack_install' title=\"$fin_install\"><img src=\"". chemin_image('secteur-12.gif') . "\" width='12' height='12' alt=\"$fin_install\" /></a>&nbsp; ";
+		foreach(array_keys($GLOBALS['cs_installer']) as $pack) {
+			$u = urlencode($pack);
+			$liste .= "\n-* <a href=\"" 
+				. generer_url_ecrire($exec,'cmd=delete&pack='.$u)
+				. $fin_delete
+				. generer_url_ecrire($exec,'cmd=install&pack='.$u)
+				. $fin_install . $pack;
+		}
+		$liste = propre($liste);
+		$script = "<script type=\"text/javascript\"><!--
+if (window.jQuery) jQuery(function(){
+	jQuery('a.pack_delete').click( function() { 
+		msg=\"".cs_javascript('couteauprive:pack_supprimer')."\";
+		return window.confirm(msg.replace(/@pack@/,jQuery(this).parent().text().trim())); 
+	});
+	jQuery('a.pack_install').click( function() { 
+		msg=\"".cs_javascript('couteauprive:pack_installer').'\n\n'.cs_javascript('couteauprive:cs_reset2')."\";
+		return window.confirm(msg.replace(/@pack@/,jQuery(this).parent().text().trim())); 
+	});
+}); //--></script>\n";
+	}
 	// pour la constante _CS_FILE_OPTIONS
 	cout_define('cs_comportement');
 	// appel direct, sans ajax, histoire de mettre a jour le menu :
 	return redirige_action_post('action_rapide', 'sauve_pack', 'admin_couteau_suisse', "cmd=pack#cs_infos",
-			"\n<div style='padding:0.4em;'><p>$info</p><p>"._T('couteauprive:pack_sauver_descrip', array('file' => _CS_FILE_OPTIONS))
+			"\n$script<div style='padding:0.4em;'><p>$info</p>$liste<p>"._T('couteauprive:pack_sauver_descrip', array('file' => _CS_FILE_OPTIONS))
 			."</p><div style='text-align: center;'><input class='fondo' type='submit' value=\""
 			.attribut_html(_T('couteauprive:pack_sauver')) . "\" /></div></div>"); 
 }
@@ -36,21 +64,9 @@ function action_rapide_sauve_pack() {
 		while(isset($GLOBALS['cs_installer']["$titre (".++$n.')']));
 	if($n) $titre = "$titre ($n)";
 	include_spip(_DIR_CS_TMP.'config');
-	$pack = "\n# Le Couteau Suisse : pack de configuration du ".date("d M Y, H:i:s")."\n\$GLOBALS['cs_installer']['$titre'] = " . var_export($GLOBALS['cs_installer'][$titre0], true) . ";\n";
-	$fo = strlen(_FILE_OPTIONS)? _FILE_OPTIONS:false;
-	$t='';
-	if ($fo) {
-		if (lire_fichier($fo, $t) && strlen($t)) {
-			$t = preg_replace(',\?'.'>\s*$,m', $pack.'?'.'>', $t, 1);
-			if(ecrire_fichier($fo, $t)) return;
-			else cs_log("ERREUR : l'ecriture du fichier $fo a echoue !");
-		} else cs_log(" -- fichier $fo illisible. Inclusion non permise");
-		if(strlen($t)) return;
-	}
-	// creation
-	$fo = _DIR_RACINE._NOM_PERMANENTS_INACCESSIBLES._NOM_CONFIG.'.php';
-	$ok = ecrire_fichier($fo, '<?'."php\n".$pack."\n?".'>');
-cs_log(" -- fichier $fo absent ".($ok?'mais cree avec l\'inclusion':' et impossible a creer'));
+	$pack = "\n# Le Couteau Suisse : pack de configuration du ".date("d M Y, H:i:s")."\n\$GLOBALS['cs_installer']['$titre'] = "
+		. var_export($GLOBALS['cs_installer'][$titre0], true) . "; # $titre #\n";
+	cs_ecrire_config(',\?'.'>\s*$,m', $pack.'?'.'>', $pack);
 }
 
 ?>

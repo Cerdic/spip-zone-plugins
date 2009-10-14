@@ -368,12 +368,14 @@ cs_log("INIT : enregistre_modif_outils()");
 cs_log(" FIN : enregistre_modif_outils()");
 }
 
-function cout_exec_redirige($p = '') {
-	ecrire_metas();
-	cs_initialisation(true);
-	include_spip('inc/invalideur');
-	purger_repertoire(_DIR_SKELS);
-	purger_repertoire(_DIR_CACHE);
+function cout_exec_redirige($p='', $recompiler=true) {
+	if($recompiler) {
+		ecrire_metas();
+		cs_initialisation(true);
+		include_spip('inc/invalideur');
+		purger_repertoire(_DIR_SKELS);
+		purger_repertoire(_DIR_CACHE);
+	}
 	include_spip('inc/headers');
 	redirige_par_entete(generer_url_ecrire(_request('exec'), $p, true));
 }
@@ -411,7 +413,7 @@ cs_log("INIT : exec_admin_couteau_suisse()");
 	// installation personnalisee
 	if(isset($_GET['pack']) && isset($GLOBALS['cs_installer'][$_GET['pack']]['outils'])) {
 		if ($cmd=='install'){
-			spip_log("Installation peronnalisee de '$_GET[outils]' par l'auteur id=$connect_id_auteur");
+			spip_log("Installation peronnalisee de '$_GET[pack]' par l'auteur id=$connect_id_auteur");
 			$pack = &$GLOBALS['cs_installer'][$_GET['pack']];
 			effacer_meta('tweaks_actifs');
 			$metas_outils = array();
@@ -419,8 +421,17 @@ cs_log("INIT : exec_admin_couteau_suisse()");
 			if(isset($pack['variables'])) foreach($pack['variables'] as $i=>$v) $metas_vars[$i] = $v;
 			ecrire_meta('tweaks_actifs', serialize($metas_outils));
 			ecrire_meta('tweaks_variables', serialize($metas_vars));
+			// tout recompiler
 			cout_exec_redirige();
 		} elseif ($cmd=='delete'){
+			spip_log("Suppression de '$_GET[pack]' par l'auteur id=$connect_id_auteur");
+			$p = preg_quote($_GET[pack],',');
+			$r = "[$]GLOBALS\['cs_installer'\]\['$p'\] *= *array *\(";
+			cs_ecrire_config(
+				array(",$r,", ",# [^\n\r]+[\n\r]+if\(0\) {$r}[\n\r]+.*# $p #[\n\r]+,Us"),
+				array('if(0) \0', ''));
+			// simplement prendre en compte la supression
+			cout_exec_redirige('cmd=pack', false);
 		}
 	}
 	// reset des variables d'un outil
@@ -435,6 +446,7 @@ cs_log("INIT : exec_admin_couteau_suisse()");
 			foreach ($outils[$_GET['outil']]['variables'] as $a) unset($metas_vars[$a]);
 			ecrire_meta('tweaks_variables', serialize($metas_vars));
 		}
+		// tout recompiler
 		cout_exec_redirige("cmd=descrip&outil={$_GET[outil]}#cs_infos");
 	}
 	// reset de l'affichage

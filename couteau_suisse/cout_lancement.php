@@ -200,4 +200,23 @@ function cs_canonicalize($address) {
 	return preg_replace(',([^.])\./,', '\1', $address);
 }
 
+// manipule le fichier config/mes_options.php
+function cs_ecrire_config($regexpr, $replace, $ajout_sinon='') {
+	$fo = strlen(_FILE_OPTIONS)? _FILE_OPTIONS:false;
+	$t='';
+	if ($fo && strlen($regexpr) && strlen($replace)) {
+		if (lire_fichier($fo, $t) && strlen($t)) {
+			$t = preg_replace($regexpr, $replace, $t, 1);
+			if(ecrire_fichier($fo, $t)) return;
+			else cs_log("ERREUR : l'ecriture du fichier $fo a echoue !");
+		} else cs_log(" -- fichier $fo illisible. Inclusion non permise");
+		if(strlen($t)) return;
+	}
+	// creation
+	if(!strlen($ajout_sinon)) return;
+	$fo = _DIR_RACINE._NOM_PERMANENTS_INACCESSIBLES._NOM_CONFIG.'.php';
+	$ok = ecrire_fichier($fo, '<?'."php\n".$ajout_sinon."\n?".'>');
+cs_log(" -- fichier $fo absent ".($ok?'mais cree avec l\'inclusion':' et impossible a creer'));
+}
+
 ?>
