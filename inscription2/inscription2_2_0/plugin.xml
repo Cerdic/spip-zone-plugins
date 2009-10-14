@@ -42,11 +42,11 @@
 	</pipeline>
 	<bouton id='inscription2_adherents' parent='auteurs'>
 	    <icone>images/fiche-perso.png</icone>
-	    <titre>icone_afficher_visiteurs</titre>
+	    <titre>inscription2:icone_afficher_utilisateurs</titre>
 	</bouton>
 	<bouton id='inscription2_adherents' parent='bando_reactions'>
 		<icone>images/inscription2-16.png</icone>
-		<titre>icone_afficher_visiteurs</titre>
+		<titre>inscription2:icone_afficher_utilisateurs</titre>
 	</bouton>
 
 	<pipeline>

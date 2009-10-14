@@ -16,6 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_modifier_auteur_supp' => 'Informations suppl&eacute;mentaires',
 	'adresse' => 'Adresse',
 	'adresse_pro' => 'Adresse professionnelle (Pro.)',
+	'afficher_tous' => 'Afficher tous les utilisateurs',
 	'ajouter_adherent' => 'Cr&eacute;er un nouvel utilisateur',
 	'aout' => 'ao&ucirc;t',
 	'aucun_resultat_recherche' => 'Il n\'y a aucun r&eacute;sultat pour votre recherche.',
@@ -60,7 +61,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'decembre' => 'd&eacute;cembre',
 	'delete_user_select' => 'Supprimer le(s) utilisateur(s) s&eacute;lectionn&eacute;(s)',
 	'demande_password' => 'Votre mot de passe&nbsp;:',
-	'descriptif_plugin' => 'Vous trouverez ici tous les utilisateurs inscrits sur le site. Leur statut est indiqu&eacute; par la couleur de leur icone.<br /><br />Vous pouvez configurer des champs suppl&eacute;mentaires, propos&eacute;s en option aux visiteurs au moment de l\'insciption.',
+	'descriptif_plugin' => 'Vous trouverez ici tous les utilisateurs inscrits sur le site. Leur statut est indiqu&eacute; par la couleur de leur icone.<br /><br />Vous pouvez configurer des champs suppl&eacute;mentaires, propos&eacute;s en option aux visiteurs au moment de l\'inscription.',
 	'description_cfg' => 'Param&eacute;trer les champs suppl&eacute;mentaires pour les utilisateurs',
 	'description_page' => 'Ici vous pouvez v&eacute;rifier vos choix de configuration tels qu\'ils sont stock&eacute;s',
 	'divers' => 'Divers',
@@ -74,6 +75,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'email_bonjour' => 'Bonjour @nom@,',
 	'email_obligatoire' => 'Le champ email est obligatoire',
 	'email_valide' => 'Veuillez ins&eacute;rer un email valide',
+	'erreur_reglement_obligatoire' => 'Vous devez accepter le r&egrave;glement',
 	'exp_divers' => 'Champ qui sera propos&eacute; aux visiteurs avec le nom de commentaire',
 	'exp_publication' => 'Autorisation de publication des donn&eacute;es personnelles',
 	'exp_statut' => 'Choisissez le statut que vous voulez attribuer aux nouveaux adh&eacute;rents',
@@ -113,6 +115,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'icone_menu_config' => 'Configuration avanc&eacute;e des utilisateurs',
+	'icone_afficher_utilisateurs' => 'Afficher les utilisateurs',
 	'identification' => 'Identification',
 	'info_connection' => 'Informations de connexion',
 	'info_defaut' => 'Informations obligatoires',
@@ -137,15 +140,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_affordance_form' => 'Param&eacute;trage des formulaires d\'identification',
+	'label_reglement' => 'R&egrave;glement &agrave; valider',
+	'label_reglement_article' => 'Article original du site correspondant au r&egrave;glement',
+	'label_public_reglement' => 'J\'ai lu et j\'accepte le r&egrave;glement',
+	'label_public_reglement_url' => 'J\'ai lu et j\'accepte le <a href="@url@" class="spip_in reglement">r&egrave;glement</a>',
 	'latitude' => 'Latitude',
 	'legend_affordance_form' => 'Formulaire d\'identification',
 	'legend_oubli_pass' => 'Pas de mot de passe / mot de passe oubli&eacute;',
+	'legend_reglement' => 'R&egrave;glement du site',
 	'legende' => 'L&eacute;gende',
 	'lisez_mail' => 'Un email vient d\'&ecirc;tre envoy&eacute; &agrave; l\'adresse fournie. Pour activer votre compte veuillez suivre les instructions.',
 	'liste_adherents' => 'Voir la liste des utilisateurs',
 	'liste_comptes_titre' => 'Liste des utilisateurs',
 	'login' => 'Nom d\'utilisateur (login)',
 	'longitude' => 'Longitude',
+	'logo_auteur' => 'Logo',
 
 	// M
 	'mai' => 'mai',

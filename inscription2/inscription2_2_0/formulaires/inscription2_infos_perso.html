@@ -4,6 +4,7 @@ On teste la présence d'au moins un des champs pour l'afficher]
 [(#CONFIG{inscription2/sexe}|=={on}|ou{
 [(#CONFIG{inscription2/nom_famille}|=={on})]}|ou{
 [(#CONFIG{inscription2/prenom}|=={on})]}|ou{
+[(#CONFIG{inscription2/logo_auteur}|=={on})]}|ou{
 [(#CONFIG{inscription2/surnom}|=={on})]}|ou{
 [(#CONFIG{inscription2/naissance}|=={on})]}|ou{
 [(#CONFIG{inscription2/bio}|=={on})]}|ou{
@@ -28,11 +29,10 @@ On teste la présence d'au moins un des champs pour l'afficher]
         <li class="editer_sexe[ (#CONFIG{inscription2/sexe_obligatoire}|=={on}|oui)obligatoire][ (#ENV**{erreurs}|table_valeur{sexe}|oui)erreur]">
 		    <fieldset>
 			    <legend><:inscription2:civilite:></legend>
-			    <ul class="formfx">
+			    <ul>
 				    <li>
                         <input class="radio" name="sexe" id="monsieur" type="radio" [(#ENV{sexe}|=={M}|?{'checked="checked"'})] value="M" />
     	                <label for="monsieur"> <:inscription2:masculin:></label>
-
 				    </li>
 				    <li>
     	                <input class="radio" name="sexe" id="madame" type="radio" [(#ENV{sexe}|=={F}|?{'checked="checked"'})] value="F" />
@@ -58,6 +58,13 @@ On teste la présence d'au moins un des champs pour l'afficher]
             [<p class='erreur_message'>(#ENV**{erreurs}|table_valeur{nom_famille})</p>]
         </li>]
 
+		[(#CONFIG{inscription2/logo_auteur}|=={on}|oui)	
+	    <li class="editer_logo_auteur[ (#CONFIG{inscription2/logo_auteur_obligatoire}|=={on}|?{obligatoire})][ (#ENV**{erreurs}|table_valeur{logo_auteur}|oui)erreur]">
+	        <label for="logo_auteur"><:inscription2:logo_auteur:></label>
+	        <input type="file" class="text" name="logo_auteur" id="logo_auteur" value="#ENV{logo_auteur}" />
+	        [<p class='erreur_message'>(#ENV**{erreurs}|table_valeur{logo_auteur})</p>]
+	    </li>]
+		
         [(#CONFIG{inscription2/surnom}|=={on}|oui)
         <li class="editer_surnom[ (#CONFIG{inscription2/surnom_obligatoire}|=={on}|oui)obligatoire][ (#ENV**{erreurs}|table_valeur{surnom}|oui)erreur]">
             <label for="surnom"><:inscription2:surnom:></label>

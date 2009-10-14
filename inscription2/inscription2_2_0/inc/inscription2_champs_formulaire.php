@@ -13,9 +13,9 @@ function inc_inscription2_champs_formulaire_dist($id_auteur=NULL) {
 	}
 	
 	$exceptions_des_champs_auteurs_elargis = pipeline('i2_exceptions_chargement_champs_auteurs_elargis',array());
-	
 	//charge les valeurs de chaque champs proposés dans le formulaire   
-	foreach (lire_config('inscription2/') as $clef => $valeur) {
+	foreach (lire_config('inscription2') as $clef => $valeur) {
+		
 		/* Il faut retrouver les noms des champ, 
 		 * par défaut inscription2 propose pour chaque champ le cas champ_obligatoire
 		 *  On retrouve donc les chaines de type champ_obligatoire
@@ -29,6 +29,12 @@ function inc_inscription2_champs_formulaire_dist($id_auteur=NULL) {
 		if ((!empty($resultat[1])) && (lire_config('inscription2/'.$resultat[1].$suffixe) == 'on') && (!in_array($resultat[1],$exceptions_des_champs_auteurs_elargis)) && ($resultat[1] != 'password')) {
 			$valeurs[] = $resultat[1];
 		}
+	}
+	/**
+	 * On force l'ajout du règlement si configuré (il ne passe pas avec les tests ci dessus) 
+	 */
+	if(lire_config('inscription2/reglement')){
+		$valeurs[] = 'reglement';
 	}
 	return $valeurs;
 }

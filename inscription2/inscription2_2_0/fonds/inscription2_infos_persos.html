@@ -60,6 +60,26 @@
 					</tr>
 					<tr>
 						<td class="label">
+							<label for="logo_auteur"><:inscription2:logo_auteur:></label>
+						</td>
+						<td>
+							<input type="checkbox" name="logo_auteur" [checked="(#CONFIG{inscription2/logo_auteur}?{checked})"] onclick="showoblig(this)" id="logo_auteur" />
+							<div style="[(#CONFIG{inscription2/logo_auteur}|=={on}|?{display: block;, display:none;})]">
+								<input type="checkbox" name="logo_auteur_obligatoire" [checked="(#CONFIG{inscription2/logo_auteur_obligatoire}?{checked})"] id="logo_auteur_obligatoire" />
+								<span style="color:red">*</span>
+							</div>
+						</td>
+						<td>
+							<input type="checkbox" name="logo_auteur_fiche_mod" onclick = "enadis(this,logo_auteur_fiche)" [checked="(#CONFIG{inscription2/logo_auteur_fiche_mod}?{checked})"] id="logo_auteur_fiche_mod" />
+						</td>
+						<td>
+							<input type="checkbox" name="logo_auteur_fiche" [checked="(#CONFIG{inscription2/logo_auteur_fiche}?{checked})"] id="logo_auteur_fiche" [disabled ="(#CONFIG{inscription2/logo_auteur_fiche_mod}?{disabled})"] />
+						</td>
+						<td>
+						</td>
+					</tr>
+					<tr>
+						<td class="label">
 							<label for="surnom"><:inscription2:surnom:></label>
 						</td>
 						<td>

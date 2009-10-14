@@ -153,7 +153,7 @@ function inscription2_i2_exceptions_des_champs_auteurs_elargis($array){
 	$array[] = 'password';
 	$array[] = 'affordance_form';
 	$array[] = 'reglement';
-	$array[] = 'article_reglement';
+	$array[] = 'reglement_article';
 
 	return $array;
 }
@@ -188,6 +188,9 @@ function inscription2_i2_verifications_specifiques($array){
 	$array['telephone_pro'] = 'valide_numero';
 	$array['fax_pro'] = 'valide_numero';
 	$array['mobile_pro'] = 'valide_numero';
+	
+	// Verifie que la case du reglement est cochée
+	$array['reglement'] = 'valide_reglement';
 
 	return $array;
 }
@@ -203,7 +206,7 @@ function inscription2_i2_verifications_specifiques($array){
 
 function inscription2_affiche_droite($flux){
 	if(((preg_match('/^inscription2/',$flux['args']['exec']))
-		 || (preg_match('/^auteurs/',$flux['args']['exec']))
+		 || (preg_match('/^auteur/',$flux['args']['exec']))
 		 || (preg_match('/^i2_/',$flux['args']['exec']))
 		 || (($flux['args']['exec'] == 'cfg') && ((_request('cfg') == 'inscription2') || preg_match('/^i2_/',_request('cfg'))))
 		)

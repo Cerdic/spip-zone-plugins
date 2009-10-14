@@ -122,12 +122,6 @@
 				#PIPELINE{i2_cfg_form}
 
 				[(#REM) ------------------------ OPTIONS DES AUTEURS ------------------------ ]
-				<li>
-					<div class="explication">
-						<p><:inscription2:autres_informations:></p>
-					</div>
-				</li>
-
 				<li class="fieldset" id="option">
 					<fieldset>
 					<h3 class="legend"><:inscription2:info_gener:></h3>
@@ -138,14 +132,24 @@
 							</p>
 						</li>
 
-						[(#SAISIE{case,divers}
+						[(#SAISIE{case,publication}
 							{label=<:inscription2:publication:>}
 							{explication=<:inscription2:exp_publication:>})]
 
 					</ul>
 					</fieldset>
 				</li>
-
+				<li class="fieldset">
+					<fieldset>
+						<h3 class="legend"><:inscription2:legend_reglement:></h3>
+						<ul>
+							[(#SAISIE{case, reglement,
+								label=<:inscription2:label_reglement:>})]
+							[(#SAISIE{articles_originaux, reglement_article,
+								label=<:inscription2:label_reglement_article:>})]
+						</ul>
+					</fieldset>
+				</li>
 				<li class="fieldset">
 					<fieldset>
 					<h3 class="legend"><:inscription2:info_internes:></h3>
@@ -185,16 +189,14 @@
 					<fieldset>
 						<h3 class="legend"><:inscription2:legend_affordance_form:></h3>
 						<ul>
-							<li>
-								[(#SAISIE{radio, affordance_form,
-									label=<:inscription2:label_affordance_form:>,
-									explication=<:inscription2:explication_affordance_form:>,
-									defaut=#ARRAY{0,login},
-									datas=#ARRAY{
-										login,<:inscription2:choix_affordance_login:>,
-										email,<:inscription2:choix_affordance_email:>,
-										login_et_email,<:inscription2:choix_affordance_login_email:>}})]
-							</li>
+							[(#SAISIE{radio, affordance_form,
+								label=<:inscription2:label_affordance_form:>,
+								explication=<:inscription2:explication_affordance_form:>,
+								defaut=#ARRAY{0,login},
+								datas=#ARRAY{
+									login,<:inscription2:choix_affordance_login:>,
+									email,<:inscription2:choix_affordance_email:>,
+									login_et_email,<:inscription2:choix_affordance_login_email:>}})]
 						</ul>
 					</fieldset>
 				</li>

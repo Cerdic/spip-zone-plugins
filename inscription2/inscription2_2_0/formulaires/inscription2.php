@@ -86,10 +86,7 @@ function formulaires_inscription2_charger_dist($id_auteur = NULL,$redirect = nul
 	return $champs;
 }
 
-function formulaires_inscription2_verifier_dist($id_auteur = NULL,$redirect = null){
-
-	//charge la fonction de controle du login et mail
-	//$test_inscription = charger_fonction('test_inscription');
+function formulaires_inscription2_verifier_dist($id_auteur = null,$redirect = null){
 
 	//initialise le tableau des erreurs
 	$erreurs = array();
@@ -110,7 +107,7 @@ function formulaires_inscription2_verifier_dist($id_auteur = NULL,$redirect = nu
 		$valeurs[$valeur] = _request($valeur);
 
 		// On vérifie s'il est obligatoire et s'il est bien rempli
-		if ((lire_config('inscription2/'.$valeur.'_obligatoire') == 'on' ) && (empty($valeurs[$valeur]) OR (strlen(_request($valeur)) == 0))) {
+		if ((lire_config('inscription2/'.$valeur.'_obligatoire') == 'on' ) && ((empty($valeurs[$valeur]) OR (strlen(_request($valeur)) == 0)))) {
 			$erreurs[$valeur] = _T('inscription2:champ_obligatoire');
 			$erreurs_obligatoires = true;
 			if(is_numeric($id_auteur) && (lire_config('inscription2/pass_fiche_mod') == 'on') && (strlen(_request('pass')) == 0)){
@@ -124,6 +121,7 @@ function formulaires_inscription2_verifier_dist($id_auteur = NULL,$redirect = nu
 		// Sinon on la vérifie une seconde fois si nécessaire avec les fonctions spécifiques de validations
 		if(!$erreurs[$valeur]){
 			if(array_key_exists($valeur,$champs_a_verifier)){
+				
 				$fonction_verif_{$valeur} = charger_fonction('inscription2_'.$champs_a_verifier[$valeur],'inc');
 				if($val = $fonction_verif_{$valeur}($valeurs[$valeur],$id_auteur)){
 					$erreurs[$valeur] = $val;
@@ -347,6 +345,20 @@ function formulaires_inscription2_traiter_dist($id_auteur = NULL,$redirect = nul
 			$table,
 			$val
 		);
+	}
+
+	if(isset($_FILES['logo_auteur'])){
+		$chercher_logo = charger_fonction('chercher_logo', 'inc');
+		
+		// supprimer l'ancien logo
+		$on = $chercher_logo($id_auteur, 'id_auteur', 'on');
+		if ($on) @unlink($on[0]);
+
+		// ajouter le nouveau
+		include_spip('action/iconifier');
+		action_spip_image_ajouter_dist(
+			type_du_logo('id_auteur').'on'.$id_auteur, false, false
+		); // beurk
 	}
 
 	$traiter_plugin = pipeline('i2_traiter_formulaire',
