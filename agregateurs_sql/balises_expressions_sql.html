@@ -1,0 +1,57 @@
+#CACHE{0}
+
+<h1>Balise &#35;EXPRESSION</h1>
+
+<p>
+La nouvelle balise &#35;EXPRESSION{<i>expression</i>} permet d'ajouter des expressions sql au <em>select</em>.
+</p>
+<p>
+&#35;EXPRESION{<i>expression</i>,<i>alias</i>} permet de trier {par alias}.
+</p>
+
+<h2>Critères d'agrégation dans les boucles avec le critère {fusion}</h2>
+<p>
+&lt;BOUCLE_art(ARTICLES){fusion statut}&gt;<br />
+&#35;EXPRESSION{<i>expression</i>}<br />
+&lt;/BOUCLE_art&gt;
+</p>
+<dl>
+<BOUCLE_art(ARTICLES){fusion statut}>
+<dt>Somme des id_article de statut <em>#STATUT</em></dt>
+<dd> &#35;EXPRESSION{SUM(id_article)} = [(#EXPRESSION{SUM(id_article)})]. Equivalent à &#35;SUM{id_article} qui vaut aussi [(#SUM{id_article})]</dd>
+<dt>Autres agrégateurs</dt>
+<dd>&#35;EXPRESSION{COUNT(id_article)} = [(#EXPRESSION{COUNT(id_article)})] - nombre d'id_article de statut <em>#STATUT</em></dd>
+<dd>&#35;EXPRESSION{AVG(id_article)} = [(#EXPRESSION{AVG(id_article)})] - moyenne des id_article de statut <em>#STATUT</em></dd>
+<dd>&#35;EXPRESSION{MIN(id_article)} = [(#EXPRESSION{MIN(id_article)})] - minimum des id_article de statut <em>#STATUT</em></dd>
+<dd>&#35;EXPRESSION{MAX(id_article)} = [(#EXPRESSION{MAX(id_article)})] - maximum des id_article de statut <em>#STATUT</em></dd>
+</BOUCLE_art>
+</dl>
+
+<h2>Exemple d'usage de la balise &#35;EXPRESSION avec tri</h2>
+
+
+<p>
+&lt;BOUCLE_art(ARTICLES){fusion id_rubrique}{!par nombre_articles}&gt;<br />
+Rubrique #ID_RUBRIQUE : &#35;EXPRESSION{COUNT(id_article), nombre_articles} art.<br />
+Evaluation littérale : &#35;EXPRESSION{CASE COUNT(id_article) WHEN 1 THEN 'one' WHEN 2 THEN 'two' ELSE 'more' END}<br />
+&lt;/BOUCLE_art&gt;
+</p>
+<dl>
+<BOUCLE_arti(ARTICLES){fusion id_rubrique}{!par nombre_articles}>
+<dt>Rubrique #ID_RUBRIQUE : [(#EXPRESSION{COUNT(id_article), nombre_articles})]&nbsp;art.</dt>
+<dd>Evaluation littérale : #EXPRESSION{CASE COUNT(id_article) WHEN 1 THEN 'one' WHEN 2 THEN 'two' ELSE 'more' END}</dd>
+</BOUCLE_arti>
+</dl>
+
+
+
+<hr />
+Vérification ancienne méthode : 
+
+<BOUCLE_articles(ARTICLES){fusion statut}{moyenne id_article}{maximum id_article}{minimum id_article}{compte id_article}{somme id_article}>
+somme : #SOMME{id_article} ,
+compte : #COMPTE{id_article},
+moyenne : #MOYENNE{id_article},
+minimum : #MINIMUM{id_article},
+maximum : #MAXIMUM{id_article}
+</BOUCLE_articles>

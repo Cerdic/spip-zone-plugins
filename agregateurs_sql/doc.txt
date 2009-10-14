@@ -31,7 +31,8 @@ somme : #SOMME{id_article} ,
 compte : #COMPTE{id_article},
 moyenne : #MOYENNE{id_article},
 minimum : #MINIMUM{id_article},
-maximum : #MAXIMUM{id_article}<br />
+maximum : #MAXIMUM{id_article}
+
 </BOUCLE_articles>
 
 <BOUCLE_articles2(ARTICLES){fusion statut}{stats id_article}>
@@ -40,9 +41,57 @@ somme : #STATS{id_article,somme} ,
 compte : #STATS{id_article,compte},
 moyenne : #STATS{id_article,moyenne},
 minimum : #STATS{id_article,minimum},
-maximum : #STATS{id_article,maximum}<br />
+maximum : #STATS{id_article,maximum}
 </BOUCLE_articles2>
 
 En test aussi, une autre possibilité : {stats champ} qui les calcule tous, mais récupérable par #STATS{champ, somme} (echec pour le moment de pouvoir utiliser les #SOMME{champ} et consoeur avec ...)
 
+Proposition Renato, sans critère
 
+<?php
+
+function balise_SUM($p) {
+  $t = $p->param[0][1][0]->texte;
+  $p->param[0][1][0]->texte = "SUM($t)";
+  $p->param[0][2][0]->texte = "sum_$t";
+  return balise_EXPRESSION($p); 
+}
+
+function balise_EXPRESSION($p) {
+  static $num = 1;
+	$b = $p->nom_boucle ? $p->nom_boucle : $p->descr['id_mere'];
+	if ($b === '' || !isset($p->boucles[$b])) {
+		erreur_squelette(
+			_T('zbug_champ_hors_boucle',
+				array('champ' => "#$b" . 'EXPRESSION')
+			), $p->id_boucle);
+		$p->code = "''";
+	} else {
+  	if (isset($p->param[0][1][0])
+  	AND $champ = ($p->param[0][1][0]->texte)
+    ) {
+  		if(isset($p->param[0][2][0]) AND $p->param[0][2][0]->texte)
+        $alias = $p->param[0][2][0]->texte;
+      else {
+        $alias = "expr_$num";
+        $num++;
+      }
+      $p->code = "\$Pile[\$SP]['$alias']";
+  		$p->boucles[$b]->select[] = "$champ as $alias";
+  		$p->interdire_scripts = true;
+  	}
+	}
+	return $p;
+}
+
+?>
+
+<BOUCLE_art(ARTICLES){fusion id_rubrique}>
+[(#SUM{id_article})]
+</BOUCLE_art>
+
+<BOUCLE_art(ARTICLES)>
+[(#EXPRESSION{CASE id_article WHEN 1 THEN 'one' WHEN 2 THEN 'two' ELSE 'more' END})]<br />
+</BOUCLE_art>
+
+http://dev.mysql.com/doc/refman/5.1/en/control-flow-functions.html
