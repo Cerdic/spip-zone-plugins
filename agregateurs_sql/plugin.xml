@@ -1,11 +1,11 @@
 <plugin>
   <nom>Agr&#233;gateurs sql</nom>
-  <auteur>Cedric Morin, BoOz</auteur>
+  <auteur>Renato, Cedric Morin, Marcimat, BoOz</auteur>
   <icon></icon>
   <licence>(c) 2008 GPL</licence>
   <version>1.0</version>
   <etat>test</etat>
-  <description>Ajout des crit&#232;res d'agr&#233;gation dans le select sql : count(), sum(), max(), etc...</description>
+  <description>Ajout des expressions, notamment d'agr&#233;gation, dans le select sql : count(), sum(), max(), etc...</description>
   <lien></lien>
   <fonctions>public/agregateurs_sql_criteres.php</fonctions>
   <fonctions>public/agregateurs_sql_balises.php</fonctions>
