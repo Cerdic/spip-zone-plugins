@@ -55,6 +55,10 @@ function auth_openid_dist ($login, $pass, $md5pass="", $md5next="", $log_step='c
 		$auteur = false;
 	}
 
+	if ($auteur AND $log_step=='ok'){
+		$auteur['auth'] = 'openid';
+	}
+
 	return is_array($auteur) ? $auteur : array();
 }
 
