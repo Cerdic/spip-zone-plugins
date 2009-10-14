@@ -37,14 +37,21 @@ function formulaires_inscription2_charger_dist($id_auteur = NULL,$redirect = nul
 	$chercher_champs = charger_fonction('inscription2_champs_formulaire','inc');
 	$champs = $chercher_champs($id_auteur);
 
-	//si on a bien un auteur alors on preremplit le formulaire avec ses informations
-	//les nom des champs sont les memes que ceux de la base de données
+	/**
+	 * si on a un auteur alors on preremplit le formulaire avec ses informations
+	 * les nom des champs sont les memes que ceux de la base de données
+	 */
 	if (is_numeric($id_auteur)) {
 		if (!autoriser('modifier','auteur',$id_auteur)) {
 			return;
 		}
+		/**
+		 * On sélectionne tout pour éviter les champs qui ne sont pas dans la 
+		 * base de donnée.
+		 * par exemple : logo_auteur et reglement
+		 */
 		$auteur = sql_fetsel(
-			$champs,
+			'*',
 			'spip_auteurs LEFT JOIN spip_auteurs_elargis USING(id_auteur)',
 			'spip_auteurs_elargis.id_auteur ='.$id_auteur
 		);
@@ -110,6 +117,14 @@ function formulaires_inscription2_verifier_dist($id_auteur = null,$redirect = nu
 		if ((lire_config('inscription2/'.$valeur.'_obligatoire') == 'on' ) && ((empty($valeurs[$valeur]) OR (strlen(_request($valeur)) == 0)))) {
 			$erreurs[$valeur] = _T('inscription2:champ_obligatoire');
 			$erreurs_obligatoires = true;
+			if($valeur == 'naissance'){
+				$annee = _request('annee');
+				$mois = _request('mois');
+				$jour = _request('jour');
+				if($annee && $mois && $jour){
+					unset($erreurs['naissance']);
+				}
+			}
 			if(is_numeric($id_auteur) && (lire_config('inscription2/pass_fiche_mod') == 'on') && (strlen(_request('pass')) == 0)){
 				// Si le password est vide et que l'on est dans le cas de la modification d'un auteur
 				// On garde le pass original
@@ -133,11 +148,25 @@ function formulaires_inscription2_verifier_dist($id_auteur = null,$redirect = nu
 	//Verifier certains champs specifiquement
 
 	//messages d'erreur au cas par cas (PASSWORD)
-	//verification des champs
-	// Sinon on le verifie
-	if(($pass != 'ok') && (lire_config('inscription2/pass') == 'on')) {
-		if (strlen(_request('password')) != 0){$p = _request('password');}else{$p = _request('pass');}
-		if($p) {
+	/**
+	 * Il se peut que l'on active pas le password à l'inscription
+	 * mais uniquement à la modification ...
+	 * On le test ici en créant la variable $pass_actif
+	 */  
+	$pass_actif = false;
+	if(is_numeric($id_auteur) && (lire_config('inscription2/pass_fiche_mod') == 'on')){
+		$pass_actif = true;
+	}else if(!$id_auteur && (lire_config('inscription2/pass') == 'on')){
+		$pass_actif = true;
+	}
+	if(($pass != 'ok') && $pass_actif) {
+		if (strlen(_request('password')) != 0){
+			$p = _request('password');
+		}
+		else{
+			$p = _request('pass');
+		}
+		if($p){
 			if(strlen($p)){
 				if (strlen($p) < 6) {
 					$erreurs['pass'] = _T('info_passe_trop_court');

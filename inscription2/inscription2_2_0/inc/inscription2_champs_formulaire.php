@@ -3,11 +3,11 @@
 /**
  * Function déterminant les champs à utiliser dans le formulaire en fonction de la configuration de CFG
  * 
- * @return array Un array contenant l'ensemble des champs 
+ * @return array Un array contenant l'ensemble des champs
  * @param int $id_auteur[optional] Dans le cas ou cette option est présente, on ne retourne que les champs autorisé à être modifiés dans la configuration
  */
 
-function inc_inscription2_champs_formulaire_dist($id_auteur=NULL) {
+function inc_inscription2_champs_formulaire_dist($id_auteur=null) {
 	if(is_numeric($id_auteur)){
 		$suffixe = '_fiche_mod';
 	}
@@ -33,7 +33,7 @@ function inc_inscription2_champs_formulaire_dist($id_auteur=NULL) {
 	/**
 	 * On force l'ajout du règlement si configuré (il ne passe pas avec les tests ci dessus) 
 	 */
-	if(lire_config('inscription2/reglement')){
+	if(lire_config('inscription2/reglement') && ($action != 'charger')){
 		$valeurs[] = 'reglement';
 	}
 	return $valeurs;
