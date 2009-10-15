@@ -32,7 +32,7 @@ Lorsque vous utilisez une adresse OpenID pour vous connecter à un site :
 
 -- la sécurité de votre accès à ce site dépend de la sécurisation de votre fournisseur d'adresse OpenID. Ainsi, si par exemple openidfrance.fr se fait pirater, il est possible que la connexion vers votre site SPIP soit compromise. Si vous vous connectez d'un cybercafé, pensez donc à bien vous déconnecter de votre serveur OpenID lorsque vous terminez votre session.
 
--- à chaque demande de connexion, le site valide votre identité auprès de votre fournisseur OpenID. En termes de {privacy,} cela signifie que, si vous employez votre compte de webmail pour vous connecter, l'hébergeur de votre webmail est informé du fait que vous vous êtes connecté à tel et tel site, à tel moment et à partir de tel endroit.
+-- à chaque demande de connexion, le site valide votre identité auprès de votre fournisseur OpenID. En termes de {privacy,} cela signifie que, si vous employez votre compte de webmail pour vous connecter, l'hébergeur de votre webmail est informé du fait que vous vous êtes connecté à tel et tel site, à tel moment et à partir de tel endroit. Choisissez donc un fournisseur en qui {vous} avez confiance.
 
 Si OpenID offre un confort certain en offrant un seul point de connexion pour de nombreux sites, il n'est pas interdit d'utiliser plusieurs adresses OpenID pour des activités différentes. Ainsi vous utiliserez l'adresse OpenID <code>http://ma-societe.biz/nom.prenom</code> pour vous connecter sur vos sites professionnels, <code>http://association-openid.org/pseudo</code> pour vous connecter sur vos sites persos, familiaux et associatifs, et <code>http://darknet-hax0r.net/x09</code> pour vos sites de piratage.
 
