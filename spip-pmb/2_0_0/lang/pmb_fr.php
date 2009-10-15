@@ -50,7 +50,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'ouvrages_trouves' => 'ouvrages trouv&eacute;s',
 'ouvrages_trouve' => 'ouvrages trouv&eacute;',
 'resultats_suivants' => 'R&eacute;sultats suivants',
-'resultats_precedents' => 'R&eacute;sultats pr&eacute;c&eacute;dents'
+'resultats_precedents' => 'R&eacute;sultats pr&eacute;c&eacute;dents',
+'resultats' => 'R&eacute;sultats',
+'a' => '&agrave;',
+'sur' => 'sur'
 
 
 );

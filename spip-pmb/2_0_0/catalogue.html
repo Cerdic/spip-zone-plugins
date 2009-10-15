@@ -81,7 +81,7 @@
 			<BOUCLE_tab_resultat(POUR){tableau #GET{tab_resultat}}{pagination}>
 			[(#COMPTEUR_BOUCLE|=={2}|?{' ',''})
 				[(#GET{tab_resultat}|pmb_tableau2_valeur{0,nb_resultats}|>{1}|oui)
-				      [<p>(#GET{tab_resultat}|pmb_tableau2_valeur{0,nb_resultats}) <:pmb:ouvrages_trouves:> :</p>]
+				      [<p><:pmb:resultats:> [(#ENV{debut}|plus{1})] <:pmb:a:> [(#ENV{debut}|plus{[(#ENV{fin}|sinon{5})]}|min{[(#GET{tab_resultat}|pmb_tableau2_valeur{0,nb_resultats})]})] <:pmb:sur:> (#GET{tab_resultat}|pmb_tableau2_valeur{0,nb_resultats}) <:pmb:ouvrages_trouves:>.</p>]
 				 ]
 				[(#GET{tab_resultat}|pmb_tableau2_valeur{0,nb_resultats}|>{1}|non)
 				      [<p>(#GET{tab_resultat}|pmb_tableau2_valeur{0,nb_resultats}) <:pmb:ouvrage_trouve:> :</p>]
