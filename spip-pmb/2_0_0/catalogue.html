@@ -7,7 +7,7 @@
 <INCLURE{fond=inc-head}>
 </head>
 
-<body class="page_moncompte">
+<body class="page_catalogue">
 <div id="page">
 	
 	[(#REM) Contenu principal ]
@@ -20,11 +20,12 @@
 	[(#REM) Fil d'Ariane ]
         <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <strong class="on">Catalogue</strong></div>
 
+	<p>Cette section est en cours de r&eacute;alisation.</p>
         			
 
 	<div class="cartouche">
             <div class="surlignable">
-				<h1 class="#EDIT{titre} entry-title[ (#TITRE|strlen|>{30}|?{'titre-long',''})]">[(#REM|sinon{Catalogue}|ucfirst|image_typo{police=togase.ttf,taille=30,couleur=333300,largeur=600})]</h1>
+				<h1 class="#EDIT{titre} entry-title[ (#ENV{titre_section}|sinon{<:catalogue:>}|strlen|>{30}|?{'titre-long',''})]">[(#ENV{titre_section}|sinon{<:catalogue:>}|ucfirst|image_typo{police=togase.ttf,taille=30,couleur=333300,largeur=600})]</h1>
 				
             </div>
 
@@ -33,12 +34,7 @@
         </div>
 		
  	 
-	<div class="corps-conteneur surlignable">
-		
-		<div class="#EDIT{texte} texte entry-content">Cette rubrique est en cours de d&eacute;veloppement[ ((#ENV{titre_section}))].</div>
-  
-
-	</div>
+	
 
 	[(#REM) Locations ]
         <B_tab_resultat1>
@@ -62,7 +58,9 @@
             <ul>
               <BOUCLE_tab_resultat2(POUR){tableau #GET{tab_sections}}>
                 <li>
-                    	[(#REM|?{'','<img />'}|inserer_attribut{class,spip_logos}|inserer_attribut{src,[(#GET{tab_sections}|pmb_tableau2_valeur{#CLE,'section_image'}|copie_locale)]}image_reduire{120,140})]
+                    	[(#GET{tab_sections}|pmb_tableau2_valeur{#CLE,'section_image'}|contient{rayonnage}|non)
+			  [(#REM|?{'','<img />'}|inserer_attribut{class,spip_logos}|inserer_attribut{src,[(#GET{tab_sections}|pmb_tableau2_valeur{#CLE,'section_image'}|copie_locale)]}image_reduire{120,140})]
+			]
                     	<h3><a href="[(#SELF|parametre_url{id_section,[(#GET{tab_sections}|pmb_tableau2_valeur{#CLE,'section_id'})]}|parametre_url{titre_section,[(#GET{tab_sections}|pmb_tableau2_valeur{#CLE,'section_caption'})]})]">[(#GET{tab_sections}|pmb_tableau2_valeur{#CLE,'section_caption'})]</a></h3>
                 	<a class="lire-la-suite" title="[(#GET{tab_sections}|pmb_tableau2_valeur{#CLE,'section_caption'}|texte_backend)]" href="[(#SELF|parametre_url{id_section,[(#GET{tab_sections}|pmb_tableau2_valeur{#CLE,'section_id'})]}|parametre_url{titre_section,[(#GET{tab_sections}|pmb_tableau2_valeur{#CLE,'section_caption'})]})]"><:decouvrir:> +</a>
                 </li>
@@ -70,9 +68,46 @@
             </ul>
         </div>
         </B_tab_resultat2>
-	      [(#SET{tab_resultat, [(#ENV{id_section}|pmb_notices_section_extraire{''})]})]
+			[(#SET{tab_resultat, [(#ENV{id_section}|pmb_notices_section_extraire{'', [(#ENV{debut}|sinon{0})], [(#ENV{fin}|sinon{5})]})]})]
 
-	      <INCLURE{fond=inc-catalogue-notices}{env}{tab_resultat=[(#GET{tab_resultat})]}>
+			<a id="resultats_recherche"></a>
+			
+			<B_tab_resultat>
+			<div class="menu articles">
+			#ANCRE_PAGINATION
+            
+			[<p class="pagination">(#PAGINATION)</p>]
+			<BOUCLE_tab_resultat(POUR){tableau #GET{tab_resultat}}{pagination}>
+			[(#COMPTEUR_BOUCLE|=={2}|?{' ',''})
+				<h2><:ouvrages:></h2>
+				<a class="pmb_pagination_suiv" href="[(#SELF|parametre_url{debut,[(#ENV{debut}|plus{5})]})]#resultats_recherche">>></a>
+				[(#ENV{debut}|moins{5}|>={0}|oui)<a class="pmb_pagination_prec" href="[(#SELF|parametre_url{debut,[(#ENV{debut}|moins{5})]})]#resultats_recherche"><<</a>]
+				<br class="nettoyeur" />
+			<ul>
+			]
+
+			[(#COMPTEUR_BOUCLE|>{1}|?{' ',''})
+			 	<li[ (#ENV{look_ALL}|oui)class="surlignable"]>
+						[(#REM|?{'','<img />'}|inserer_attribut{class,spip_logos}|inserer_attribut{src,[(#GET{tab_resultat}|pmb_tableau2_valeur{#CLE, logo_src}|copie_locale)]}|image_reduire{130,0})]
+						<h3[(#ENV{look_TITLE}|oui) class="surlignable"]><a href="index.php?page=notice_display&id=[(#GET{tab_resultat}|pmb_tableau2_valeur{#CLE, id})]&seule=1">[(#GET{tab_resultat}|pmb_tableau2_valeur{#CLE, titre})]</a></h3>
+                				[<small[(#ENV{look_AUTHOR}|oui) class="surlignable"]><:par_auteur:> (#GET{tab_resultat}|pmb_tableau2_valeur{#CLE, lesauteurs})</small>]
+						[(#ENV{look_PUBLISHER}|oui)[[(#GET{tab_resultat}|pmb_tableau2_valeur{#CLE, lesauteurs}|oui)<br />]<small class="surlignable">&eacute;diteur : (#GET{tab_resultat}|pmb_tableau2_valeur{#CLE, editeur})</small>]]
+					
+						[<div class="introduction entry-content[(#ENV{look_ABSTRACT}|oui) surlignable]">(#GET{tab_resultat}|pmb_tableau2_valeur{#CLE, resume}|couper{300,'...'})</div>]
+						<a class="lire-la-suite pas_surlignable²" title="[(#GET{tab_resultat}|pmb_tableau2_valeur{#CLE, titre})]" href="index.php?page=notice_display&id=[(#GET{tab_resultat}|pmb_tableau2_valeur{#CLE, id})]&seule=1"><:lire_la_suite:> +</a>
+
+				</li>
+			]
+			</BOUCLE_tab_resultat>
+				</ul>
+			[<p class="pagination">(#PAGINATION)</p>]
+			</div> 	
+			</B_tab_resultat>
+				
+			<//B_tab_resultat>
+			
+		
+
 	<//B_tab_resultat2>
 
       <//B_tab_resultat1>

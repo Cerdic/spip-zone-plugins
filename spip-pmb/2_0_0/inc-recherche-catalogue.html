@@ -8,8 +8,8 @@
 			<BOUCLE_tab_resultat(POUR){tableau #GET{tab_resultat}}>
 			[(#COMPTEUR_BOUCLE|=={2}|?{' ',''})
 				<h2><:ouvrages:></h2>
-				<a style="float: right; margin-right: .2em; font-weight: bold; background: #999966; color: white; padding: .2em;" href="[(#SELF|parametre_url{debut,[(#ENV{debut}|plus{5})]})]#resultats_recherche">>></a>
-				[(#ENV{debut}|moins{5}|>={0}|oui)<a style="float: left; margin-left: .2em; font-weight: bold; background: #999966; color: white; padding: .2em;" href="[(#SELF|parametre_url{debut,[(#ENV{debut}|moins{5})]})]#resultats_recherche"><<</a>]
+				<a class="pmb_pagination_suiv" href="[(#SELF|parametre_url{debut,[(#ENV{debut}|plus{5})]})]#resultats_recherche">>></a>
+				[(#ENV{debut}|moins{5}|>={0}|oui)<a class="pmb_pagination_prec" href="[(#SELF|parametre_url{debut,[(#ENV{debut}|moins{5})]})]#resultats_recherche"><<</a>]
 				<br class="nettoyeur" />
 			
 				<ul>

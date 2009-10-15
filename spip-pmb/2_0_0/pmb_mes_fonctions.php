@@ -109,7 +109,7 @@ function pmb_liste_locations_extraire($url_base) {
 	return $tableau_locations;
 }
 
-function pmb_notices_section_extraire($id_section, $url_base) {
+function pmb_notices_section_extraire($id_section, $url_base, $debut=0, $fin=5) {
 	$tableau_resultat = Array();
 	
 	$search = array();
@@ -124,7 +124,7 @@ function pmb_notices_section_extraire($id_section, $url_base) {
 			$searchId=$r["searchId"];
 			$tableau_resultat[0]['nb_resultats'] = $r["nbResults"];
 	    
-			 $r=$ws->pmbesOPACAnonymous_fetchSearchRecords($searchId,0,100,"serialized_unimarc","utf8");
+			 $r=$ws->pmbesOPACAnonymous_fetchSearchRecords($searchId,$debut,$fin,"serialized_unimarc","utf8");
 			  $i = 1;
 			  foreach($r as $value) {
 				    $tableau_resultat[$i] = Array();				
@@ -733,4 +733,8 @@ function pmb_prepare_recherche ($recherche) {
 function pmb_remplacer ($chaine, $p1, $p2) {
 	return str_replace($p1,$p2,$chaine);
 }
+function contient($texte, $findme) {
+	return (strpos($texte, $findme) !== false);
+}
+
 ?>
