@@ -42,9 +42,9 @@ function openid_afficher_contenu_objet($flux){
 		AND $id_auteur = $flux['args']['id_objet']
 		AND $openid = sql_getfetsel('openid','spip_auteurs','id_auteur='.intval($id_auteur))
 	){
-		$flux['data'] .= "<div><img src='".find_in_path('images/login_auth_openid.gif')
+		$flux['data'] .= propre("<div><img src='".find_in_path('images/login_auth_openid.gif')
 			."' alt='"._T('openid:openid')."' width='16' height='16' />"
-			.  " <a href='" . $openid . "'>$openid</a></div>";
+			. " [->$openid]</div>");
 
 	}
 
