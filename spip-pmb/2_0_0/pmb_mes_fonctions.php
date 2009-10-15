@@ -124,7 +124,7 @@ function pmb_notices_section_extraire($id_section, $url_base) {
 			$searchId=$r["searchId"];
 			$tableau_resultat[0]['nb_resultats'] = $r["nbResults"];
 	    
-			 $r=$ws->pmbesOPACAnonymous_fetchSearchRecords($searchId,0,10,"serialized_unimarc","utf8");
+			 $r=$ws->pmbesOPACAnonymous_fetchSearchRecords($searchId,0,100,"serialized_unimarc","utf8");
 			  $i = 1;
 			  foreach($r as $value) {
 				    $tableau_resultat[$i] = Array();				
@@ -236,11 +236,9 @@ function pmb_auteur_extraire($id_auteur, $url_base, $pmb_page=1, $mode='auto') {
 
 }
 
-function pmb_recherche_extraire($recherche, $url_base, $look_FIRSTACCESS='', $look_ALL='', $look_AUTHOR='', $look_PUBLISHER='', $look_COLLECTION='', $look_SUBCOLLECTION='', $look_CATEGORY='', $look_INDEXINT='', $look_KEYWORDS='', $look_TITLE='', $look_ABSTRACT='', $surligne='', $typdoc='', $ok='',$mode='auto') {
+function pmb_recherche_extraire($recherche, $url_base, $look_ALL='', $look_AUTHOR='', $look_PUBLISHER='', $look_COLLECTION='', $look_SUBCOLLECTION='', $look_CATEGORY='', $look_INDEXINT='', $look_KEYWORDS='', $look_TITLE='', $look_ABSTRACT='', $debut=0, $fin=5) {
 	$tableau_resultat = Array();
-	if ($surligne) $url_page.="&surligne=".$surligne;
-	if ($typdoc) $url_page.="&typdoc=".$typdoc;
-	if ($ok) $url_page.="&ok=".$ok;
+
 
 	
 	$search = array();
@@ -317,7 +315,7 @@ function pmb_recherche_extraire($recherche, $url_base, $look_FIRSTACCESS='', $lo
 				convert:truc pour un passage pas admin/convert dans le format truc.
 				autre: renvoi l'id de la notice.
 			*/ 
-			  $r=$ws->pmbesOPACAnonymous_fetchSearchRecords($searchId,0,10,"serialized_unimarc","utf8");
+			  $r=$ws->pmbesOPACAnonymous_fetchSearchRecords($searchId,$debut,$fin,"serialized_unimarc","utf8");
 			  $i = 1;
 			  foreach($r as $value) {
 				    $tableau_resultat[$i] = Array();				
@@ -533,7 +531,8 @@ function pmb_ws_parser_notice_xml($id_notice, $value, &$tresultat) {
 
 	    if ($gtresultat['lesauteurs'] == "")
 		  $gtresultat['lesauteurs'] = $gtresultat['auteur'];
-	    $gtresultat['logo_src'] = "http://tence.bibli.fr/opac/getimage.php?url_image=http%3A%2F%2Fimages-eu.amazon.com%2Fimages%2FP%2F!!isbn!!.08.MZZZZZZZ.jpg&noticecode=".str_replace("-","",$gtresultat['isbn'])."&vigurl=";
+	    $gtresultat['logo_src'] = lire_config("spip_pmb/url","http://tence.bibli.fr/opac")."/getimage.php?url_image=http%3A%2F%2Fimages-eu.amazon.com%2Fimages%2FP%2F!!isbn!!.08.MZZZZZZZ.jpg&noticecode=".str_replace("-","",$gtresultat['isbn'])."&vigurl=";
+	    
 	    $gtresultat['id'] = $id_notice;
 	    
 
@@ -593,7 +592,8 @@ function pmb_ws_parser_notice_serialisee($id_notice, $value, &$tresultat) {
 
 	    if ($gtresultat['lesauteurs'] == "")
 		  $gtresultat['lesauteurs'] = $gtresultat['auteur'];
-	    $gtresultat['logo_src'] = "http://tence.bibli.fr/opac/getimage.php?url_image=http%3A%2F%2Fimages-eu.amazon.com%2Fimages%2FP%2F!!isbn!!.08.MZZZZZZZ.jpg&noticecode=".str_replace("-","",$gtresultat['isbn'])."&vigurl=";
+	     $gtresultat['logo_src'] = lire_config("spip_pmb/url","http://tence.bibli.fr/opac")."/getimage.php?url_image=http%3A%2F%2Fimages-eu.amazon.com%2Fimages%2FP%2F!!isbn!!.08.MZZZZZZZ.jpg&noticecode=".str_replace("-","",$gtresultat['isbn'])."&vigurl=";
+
 	    $gtresultat['id'] = $id_notice;
 	    
 
