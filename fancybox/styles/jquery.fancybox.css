@@ -1,7 +1,9 @@
 
-/*html,*/ body {
+html, body {
 	height: 100%;
 }
+/* vilain hack pour ie7 */
+*+html { height: auto; }
 
 div#fancy_overlay {
 	position: fixed;
