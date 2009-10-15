@@ -309,8 +309,8 @@ function openid_url_erreur($message, $cible=''){
 	if ($cible)
 		$ret = $cible;
 	else
-		$ret = generer_url_public("login","var_erreur=openid&url=".$redirect,'&');
-	return parametre_url($ret, "message_erreur", urlencode($message),'&');
+		$ret = generer_url_public("login","url=".$redirect,'&'); // $redirect pas defini ici ..
+	return parametre_url($ret, "var_erreur", urlencode($message),'&');
 }
 
 function openid_is_url_prive($cible){
