@@ -250,11 +250,31 @@ function cextras_formulaire_verifier($flux){
 		// des champs extras correspondent ?
 		if ($extras = cextras_get_extras_match($type)) {
 			foreach ($extras as $c) {
-				if ($c->obligatoire AND !_request($c->champ)) {
-					$flux['data'][$c->champ] = _T('info_obligatoire');
+				// si on est autorise a modifier le champ
+				// et que le champ est obligatoire
+				// alors on renvoie une erreur.
+				// Mais : ne pas renvoyer d'erreur si le champ est
+				// obligatoire, mais qu'il n'est pas visible dans le formulaire
+				// (si affiche uniquement pour la rubrique XX par exemple).
+				// On teste seulement les champs dont la modification est autorisee
+				$type = objet_type($c->table).'_'.$c->champ;
+				$id_objet = $flux['args']['args'][0]; // ? vraiment toujours ?
+
+				// l'autorisation n'a pas de contexte a transmettre
+				// comme dans l'autre appel (cextras_afficher_contenu_objet())
+				// du coup, on risque de se retrouver parfois avec des
+				// resultats differents... Il faudra surveiller.
+				if (autoriser('modifierextra', $type, $id_objet, '', array(
+					'type' => $c->table, 
+					'id_objet' => $id_objet))) 
+				{
+					if ($c->obligatoire AND !_request($c->champ)) {
+						$flux['data'][$c->champ] = _T('info_obligatoire');
+					}
+				
+					// ajouter une fonction de verification ici
+					// verifier_extra($c, _request($c->champ))
 				}
-				// ajouter une fonction de verification ici
-				// verifier_extra($c, _request($c->champ))
 			}
 		}
 	}	
