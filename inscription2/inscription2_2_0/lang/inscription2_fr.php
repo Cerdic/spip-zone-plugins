@@ -144,10 +144,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_reglement_article' => 'Article original du site correspondant au r&egrave;glement',
 	'label_public_reglement' => 'J\'ai lu et j\'accepte le r&egrave;glement',
 	'label_public_reglement_url' => 'J\'ai lu et j\'accepte le <a href="@url@" class="spip_in reglement">r&egrave;glement</a>',
+	'label_validation_numero_international' => 'Forcer les num&eacute;ros de t&eacute;l&eacute;phone &agrave; &ecirc;tre sous la forme internationale',
 	'latitude' => 'Latitude',
 	'legend_affordance_form' => 'Formulaire d\'identification',
 	'legend_oubli_pass' => 'Pas de mot de passe / mot de passe oubli&eacute;',
 	'legend_reglement' => 'R&egrave;glement du site',
+	'legend_validation' => 'Validations',
 	'legende' => 'L&eacute;gende',
 	'lisez_mail' => 'Un email vient d\'&ecirc;tre envoy&eacute; &agrave; l\'adresse fournie. Pour activer votre compte veuillez suivre les instructions.',
 	'liste_adherents' => 'Voir la liste des utilisateurs',
@@ -181,6 +183,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'non_renseignee' => 'non renseign&eacute;e.',
 	'novembre' => 'novembre',
 	'numero_valide' => 'Veuillez ins&eacute;rer un num&eacute;ro valide',
+	'numero_valide_international' => 'Ce num&eacute;ro doit &ecirc;tre sous la forme internationale (ex: +32 475 123 456)',
 
 	// O
 	'octobre' => 'octobre',
