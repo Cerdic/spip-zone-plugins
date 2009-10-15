@@ -12,6 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'form_login_openid' => 'Vous pouvez aussi utiliser un identifiant OpenID (<a href="http://www.openidfrance.fr/" target="_blank">aide</a>)',
 	'form_forum_indiquer_openid' => 'Vous pouvez vous inscrire sur ce site en indiquant un identifiant OpenID.',
 	'form_login_openid_ok' => 'Cet identifiant utilise OpenID.',
+	'form_login_openid_pass' => 'Vous pouvez utiliser un mot de passe',
 	'form_forum_openid' => 'Inscription par OpenID',
 	'form_pet_votre_openid' => 'Login OpenID',
 	// O

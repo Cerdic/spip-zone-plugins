@@ -60,11 +60,21 @@ function openid_recuperer_fond($flux) {
 	if ($flux['args']['fond']=='formulaires/login'){
 		$login = pipeline('social_login_links','');
 
+		$scriptopenid = "";
 		if ($login = $flux['data']['contexte']['var_login']
 		AND $openid = sql_getfetsel('openid','spip_auteurs','login='.sql_quote($login))
 		) {
 			$openid = preg_replace(',^http://,i','',$openid);
-			$message = _T('openid:form_login_openid_ok'); // $openid;
+			$message = _T('openid:form_login_openid_ok')  // . $openid
+			. " <a href=\"#\" onclick=\"jQuery('.editer_login .explication').hide();jQuery('.editer_password').show();return false;\">"._T('openid:form_login_openid_pass')."</a>";
+			$scriptopenid = "jQuery('#var_login').keyup(function(){
+				if (jQuery(this).val()!='".addslashes($login)."') {
+					jQuery('.editer_login .explication').hide();
+					jQuery('.editer_password').show();
+				} else {
+					jQuery('.editer_login .explication').show();
+				}
+			});";
 		}
 		else
 			$message = _T('openid:form_login_openid');
@@ -75,7 +85,9 @@ function openid_recuperer_fond($flux) {
 		.".explication {margin:5px 0;}"
 		."</style>"
 		."<script type='text/javascript'>"
-		."jQuery(document).ready(function(){jQuery('input#var_login').after('<div class=\'explication\'>".addslashes($message)."</div>');});"
+		."jQuery(document).ready(function(){jQuery('input#var_login').after('<div class=\'explication\'>".addslashes($message)."</div>');"
+		.($scriptopenid?"if (!jQuery('.editer_password').is('.erreur')) jQuery('.editer_password').hide();":"")
+		."$scriptopenid});"
 		."</script>";
 	}
 	/*if ($flux['args']['fond']=='formulaires/inscription'){
