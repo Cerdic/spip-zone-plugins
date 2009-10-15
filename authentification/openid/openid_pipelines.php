@@ -1,21 +1,5 @@
 <?php
 
-/**
- * Si un auteur a un openid, le preferer en guise de login
- * dans le formulaire de login
- * sans le http:// implicite au debut
- * 
- * @param <type> $flux
- */
-function openid_formulaire_charger($flux){
-	if ($flux['args']['form']=='login'){
-		if ($login = $flux['data']['var_login']
-			AND $openid = sql_getfetsel('openid','spip_auteurs','login='.sql_quote($login))){
-			$flux['data']['var_login'] = preg_replace(',^http://,i','',$openid);
-		}
-	}
-	return $flux;
-}
 
 /**
  * ajouter un champ openID sur le formulaire CVT editer_auteur
@@ -72,16 +56,26 @@ function openid_afficher_contenu_objet($flux){
  * @param <type> $flux
  * @return <type>
  */
-function openid_recuperer_fond($flux){
+function openid_recuperer_fond($flux) {
 	if ($flux['args']['fond']=='formulaires/login'){
 		$login = pipeline('social_login_links','');
+
+		if ($login = $flux['data']['contexte']['var_login']
+		AND $openid = sql_getfetsel('openid','spip_auteurs','login='.sql_quote($login))
+		) {
+			$openid = preg_replace(',^http://,i','',$openid);
+			$message = _T('openid:form_login_openid_ok'); // $openid;
+		}
+		else
+			$message = _T('openid:form_login_openid');
+
 		$flux['data']['texte'] .= "<style type='text/css'>"
 		."input#var_login {width:10em;background-image : url(".find_in_path('images/login_auth_openid.gif').");background-repeat:no-repeat;background-position:center left;padding-left:18px;}\n"
 		."input#password {width:10em;padding-right:18px;}\n"
 		.".explication {margin:5px 0;}"
 		."</style>"
 		."<script type='text/javascript'>"
-		."jQuery(document).ready(function(){jQuery('input#var_login').after('<div class=\'explication\'>".addslashes(_T('openid:form_login_openid'))."</div>');});"
+		."jQuery(document).ready(function(){jQuery('input#var_login').after('<div class=\'explication\'>".addslashes($message)."</div>');});"
 		."</script>";
 	}
 	/*if ($flux['args']['fond']=='formulaires/inscription'){

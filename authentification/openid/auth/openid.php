@@ -26,10 +26,10 @@ function auth_openid_dist ($login, $pass, $md5pass="", $md5next="", $log_step='c
 	if (is_openid($login)){
 		include_spip('inc/openid');
 		// si pas de protocole, mettre http://
-		$login = nettoyer_openid($login);
+		$idurl = nettoyer_openid($login);
 
 		// Si l'utilisateur figure deja dans la base, y recuperer les infos
-		$auteur = sql_fetsel("*", "spip_auteurs", array("statut!=".sql_quote("5poubelle") , "openid=" . sql_quote($login)));
+		$auteur = sql_fetsel("*", "spip_auteurs", array("statut!=".sql_quote("5poubelle") , "openid=" . sql_quote($idurl)));
 	}
 	
 	// encore plus fort :
@@ -38,9 +38,7 @@ function auth_openid_dist ($login, $pass, $md5pass="", $md5next="", $log_step='c
 	// dans ce cas, si l'utilisateur a un openid on peut tenter de la loger avec !
 	if ($log_step=='check' AND !$auteur){
 		// Si l'utilisateur figure dans la base, y recuperer les infos
-		$auteur = sql_fetsel("*", "spip_auteurs", array("statut!=".sql_quote("5poubelle") , "login=" . sql_quote($login)));
-		if (!$auteur['openid'])
-			$auteur = false;
+		$auteur = sql_fetsel("*", "spip_auteurs", array("statut!=".sql_quote("5poubelle") , "login=" . sql_quote($login). " AND openid>''"));
 	}
 
 	if ($log_step=='check' AND $auteur) {
