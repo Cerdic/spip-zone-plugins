@@ -69,7 +69,7 @@ function formulaires_inscription2_charger_dist($id_auteur = NULL,$redirect = nul
 	    //si on est en mode creation et que l'utilisateur a saisi ses valeurs on les prends en compte
 	    foreach($champs as $clef =>$valeurs) {
             if (_request($valeurs)) {
-                $champs[$valeurs] = _request($valeurs);
+                $champs[$valeurs] = trim(_request($valeurs));
             }
             if($valeurs == 'naissance'){
 	            if(preg_match("/([0-9]{4})-([0-9]{2})-([0-9]{2})/",_request($valeurs),$date_naissance)){
@@ -111,16 +111,16 @@ function formulaires_inscription2_verifier_dist($id_auteur = null,$redirect = nu
 	foreach($champs as $clef => $valeur) {
 
 		// On récupère sa valeur
-		$valeurs[$valeur] = _request($valeur);
+		$valeurs[$valeur] = trim(_request($valeur));
 
 		// On vérifie s'il est obligatoire et s'il est bien rempli
 		if ((lire_config('inscription2/'.$valeur.'_obligatoire') == 'on' ) && ((empty($valeurs[$valeur]) OR (strlen(_request($valeur)) == 0)))) {
 			$erreurs[$valeur] = _T('inscription2:champ_obligatoire');
 			$erreurs_obligatoires = true;
 			if($valeur == 'naissance'){
-				$annee = _request('annee');
-				$mois = _request('mois');
-				$jour = _request('jour');
+				$annee = trim(_request('annee'));
+				$mois = trim(_request('mois'));
+				$jour = trim(_request('jour'));
 				if($annee && $mois && $jour){
 					unset($erreurs['naissance']);
 				}
@@ -136,7 +136,6 @@ function formulaires_inscription2_verifier_dist($id_auteur = null,$redirect = nu
 		// Sinon on la vérifie une seconde fois si nécessaire avec les fonctions spécifiques de validations
 		if(!$erreurs[$valeur]){
 			if(array_key_exists($valeur,$champs_a_verifier)){
-				
 				$fonction_verif_{$valeur} = charger_fonction('inscription2_'.$champs_a_verifier[$valeur],'inc');
 				if($val = $fonction_verif_{$valeur}($valeurs[$valeur],$id_auteur)){
 					$erreurs[$valeur] = $val;
@@ -245,10 +244,10 @@ function formulaires_inscription2_traiter_dist($id_auteur = NULL,$redirect = nul
 	$champs = $chercher_champs($id_auteur);
 
 	foreach($champs as $clef => $valeur) {
-		$valeurs[$valeur] = _request($valeur);
+		$valeurs[$valeur] = trim(_request($valeur));
 		if($valeur == 'naissance'){
 			include_spip('inc/date');
-			$annee = _request('annee');
+			$annee = trim(_request('annee'));
 			$mois = _request('mois');
 			$jour = _request('jour');
 			$valeurs[$valeur] = format_mysql_date($annee,$mois,$jour);
