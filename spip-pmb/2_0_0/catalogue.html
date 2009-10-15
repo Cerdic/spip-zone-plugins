@@ -18,7 +18,8 @@
 	<INCLURE{fond=inc-entete}{env}>
 
 	[(#REM) Fil d'Ariane ]
-        <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <strong class="on">Catalogue</strong></div>
+        <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt;[(#ENV{titre_section}|oui) <a href="#URL_PAGE{catalogue}"><:catalogue:></a> [(#ENV{hierarchie_catalogue})]&gt;] <strong class="on">[(#ENV{titre_section}|sinon{<:catalogue:>})]</strong></div>
+
 
 	<p>Cette section est en cours de r&eacute;alisation.</p>
         			
@@ -79,9 +80,14 @@
 			[<p class="pagination">(#PAGINATION)</p>]
 			<BOUCLE_tab_resultat(POUR){tableau #GET{tab_resultat}}{pagination}>
 			[(#COMPTEUR_BOUCLE|=={2}|?{' ',''})
-				<h2><:ouvrages:></h2>
-				<a class="pmb_pagination_suiv" href="[(#SELF|parametre_url{debut,[(#ENV{debut}|plus{5})]})]#resultats_recherche">>></a>
-				[(#ENV{debut}|moins{5}|>={0}|oui)<a class="pmb_pagination_prec" href="[(#SELF|parametre_url{debut,[(#ENV{debut}|moins{5})]})]#resultats_recherche"><<</a>]
+				[(#GET{tab_resultat}|pmb_tableau2_valeur{0,nb_resultats}|>{1}|oui)
+				      [<p>(#GET{tab_resultat}|pmb_tableau2_valeur{0,nb_resultats}) <:pmb:ouvrages_trouves:> :</p>]
+				 ]
+				[(#GET{tab_resultat}|pmb_tableau2_valeur{0,nb_resultats}|>{1}|non)
+				      [<p>(#GET{tab_resultat}|pmb_tableau2_valeur{0,nb_resultats}) <:pmb:ouvrage_trouve:> :</p>]
+				 ]
+				<a class="pmb_pagination_suiv" href="[(#SELF|parametre_url{debut,[(#ENV{debut}|plus{5})]})]#resultats_recherche" title="<:pmb:resultats_suivants:>">>></a>
+				[(#ENV{debut}|moins{5}|>={0}|oui)<a class="pmb_pagination_prec" href="[(#SELF|parametre_url{debut,[(#ENV{debut}|moins{5})]})]#resultats_recherche" title="<:pmb:resultats_precedents:>"><<</a>]
 				<br class="nettoyeur" />
 			<ul>
 			]

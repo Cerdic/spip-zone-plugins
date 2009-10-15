@@ -46,7 +46,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'en_savoir_plus' => 'en&nbsp;savoir&nbsp;+',
 'catalogue' => 'Catalogue',
 'reservation_ok' => 'Votre r&eacute;servation &agrave; &eacute;t&eacute; prise en compte.',
-'reservation_ko' => 'Votre r&eacute;servation &agrave; n\'a pas pu &ecirc;tre prise en compte.'
+'reservation_ko' => 'Votre r&eacute;servation &agrave; n\'a pas pu &ecirc;tre prise en compte.',
+'ouvrages_trouves' => 'ouvrages trouv&eacute;s',
+'ouvrages_trouve' => 'ouvrages trouv&eacute;',
+'resultats_suivants' => 'R&eacute;sultats suivants',
+'resultats_precedents' => 'R&eacute;sultats pr&eacute;c&eacute;dents'
+
 
 );
 ?>
