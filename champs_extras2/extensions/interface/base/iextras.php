@@ -14,7 +14,6 @@ function iextras_declarer_champs_extras($champs=array()) {
 	// recuperer le tableau de champ et les ajouter.
 	$extras = iextras_get_extras();
 	$champs = array_merge($champs, $extras);
-
 	return $champs;
 }
 ?>

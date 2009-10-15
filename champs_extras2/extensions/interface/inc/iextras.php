@@ -13,10 +13,10 @@ function iextras_get_extras(){
 
 
 /* retourne l'extra ayant l'id demande */
-function iextra_get_extra($id_extra){
+function iextra_get_extra($extra_id){
 		$extras = iextras_get_extras();
 		foreach($extras as $extra) {
-			if ($extra->get_id() == $id_extra) {
+			if ($extra->get_id() == $extra_id) {
 				return $extra;
 			}
 		}

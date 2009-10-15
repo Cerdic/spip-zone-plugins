@@ -51,7 +51,7 @@ class ChampExtra{
 				$extra[$cle] = $val;
 			}
 		}
-		$extra['id_extra'] = $this->get_id();
+		$extra['extra_id'] = $this->get_id();
 		return $extra;
 	}
 }

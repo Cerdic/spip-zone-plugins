@@ -51,7 +51,7 @@ function action_iextras_dist() {
 	
 	// cas de l'association d'un champ existant
 	if (($arg == 'associer_champ') and ($table = $id_extra_ou_table) and $champ){
-		$id_extra = action_associer_champ_sql_comme_champ_extra($table, $champ);
+		$extra_id = action_associer_champ_sql_comme_champ_extra($table, $champ);
 	}
 
 	// cas de la suppression d'un champ existant
@@ -62,11 +62,11 @@ function action_iextras_dist() {
 
 
 // remonter d'un cran un champ extra
-function action_monter_champ_extra($id_extra) {
+function action_monter_champ_extra($extra_id) {
 	include_spip('inc/iextras');
 	$extras = iextras_get_extras_tries_par_table();
 	foreach($extras as $i=>$extra) {
-		if ($extra->get_id() == $id_extra) {
+		if ($extra->get_id() == $extra_id) {
 			extras_log("Remonter le champ $extra->table/$extra->champ par auteur ".$GLOBALS['auteur_session']['id_auteur']);
 			
 			if ($i !== 0) {
@@ -80,12 +80,12 @@ function action_monter_champ_extra($id_extra) {
 }
 
 // descendre d'un cran un champ extra
-function action_descendre_champ_extra($id_extra) {
+function action_descendre_champ_extra($extra_id) {
 	include_spip('inc/iextras');
 	$extras = iextras_get_extras_tries_par_table();
 	$total = count($extras);
 	foreach($extras as $i=>$extra) {
-		if ($extra->get_id() == $id_extra) {
+		if ($extra->get_id() == $extra_id) {
 			extras_log("Descendre le champ $extra->table/$extra->champ par auteur ".$GLOBALS['auteur_session']['id_auteur']);
 			
 			if ($i+1 !== $total) {
@@ -99,11 +99,11 @@ function action_descendre_champ_extra($id_extra) {
 }
 
 // suppression d'un champ extra donne
-function action_supprimer_champ_extra($id_extra) {
+function action_supprimer_champ_extra($extra_id) {
 	include_spip('inc/iextras');
 	$extras = iextras_get_extras();
 	foreach($extras as $i=>$extra) {
-		if ($extra->get_id() == $id_extra) {
+		if ($extra->get_id() == $extra_id) {
 			extras_log("Suppression d'un champ par auteur ".$GLOBALS['auteur_session']['id_auteur'],true);
 			extras_log($extra, true);
 			
@@ -120,11 +120,11 @@ function action_supprimer_champ_extra($id_extra) {
 // desassocier un champ extra 
 // (ne plus le gerer avec le plugin champ extra
 // mais ne pas le supprimer de la base de donnee)
-function action_desassocier_champ_extra($id_extra) {
+function action_desassocier_champ_extra($extra_id) {
 	include_spip('inc/iextras');
 	$extras = iextras_get_extras();
 	foreach($extras as $i=>$extra) {
-		if ($extra->get_id() == $id_extra) {
+		if ($extra->get_id() == $extra_id) {
 			extras_log("Desassociation du champ $extra->table/$extra->champ par auteur ".$GLOBALS['auteur_session']['id_auteur'],true);
 			
 			unset($extras[$i]);
@@ -160,7 +160,7 @@ function action_associer_champ_sql_comme_champ_extra($table, $champ){
 		$extras[] = $extra;
 		iextras_set_extras($extras);
 		
-		// retourner id_extra
+		// retourner extra_id
 		return $extra->get_id();
 	}	
 }

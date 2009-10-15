@@ -38,11 +38,11 @@ function exec_iextras_edit_dist(){
 	echo debut_droite('', true);
 	
 	// contenu
-	$id_extra = _request('id_extra');
-	$id_extra = $id_extra ? $id_extra : 'new' ;
+	$extra_id = _request('extra_id');
+	$extra_id = $extra_id ? $extra_id : 'new' ;
 	echo recuperer_fond('prive/editer/champs_extras', array(
-		'id_extra' => $id_extra,
-		'titre' => $id_extra=='new' ? _T('iextras:info_nouveau_champ_extra') : _T('iextras:info_modifier_champ_extra'),
+		'extra_id' => $extra_id,
+		'titre' => $extra_id=='new' ? _T('iextras:info_nouveau_champ_extra') : _T('iextras:info_modifier_champ_extra'),
 		'redirect' => generer_url_ecrire("iextras"),
 		'icone_retour' => icone_inline(_T('icone_retour'), generer_url_ecrire('iextras'), find_in_path("images/iextras-24.png"), "rien.gif",$GLOBALS['spip_lang_left']),
 		));

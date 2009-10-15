@@ -4,14 +4,14 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/iextras');
 include_spip('inc/cextras_gerer');
 
-function formulaires_editer_champ_extra_charger_dist($id_extra='new', $redirect=''){
+function formulaires_editer_champ_extra_charger_dist($extra_id='new', $redirect=''){
 	// nouveau ?
-	$new = ($id_extra == 'new') ? ' ': '';
+	$new = ($extra_id == 'new') ? ' ': '';
 	
 	// valeur par defaut (on utilise les valeurs d'un champ vide)
 	$c = new ChampExtra;
 	$valeurs = array_merge($c->toArray(), array(
-		'id_extra' => $id_extra,
+		'extra_id' => $extra_id,
 		'new' => $new,
 		'redirect' => $redirect,
 	));
@@ -22,18 +22,18 @@ function formulaires_editer_champ_extra_charger_dist($id_extra='new', $redirect=
 	// si un extra est demande (pour edition)
 	// remplir les valeurs avec infos de celui-ci
 	if (!$new) {
-		$extra = iextra_get_extra($id_extra);
+		$extra = iextra_get_extra($extra_id);
 		$valeurs = array_merge($valeurs, $extra->toArray());
 	}
 	return $valeurs;
 }
 
 
-function formulaires_editer_champ_extra_verifier_dist($id_extra='new', $redirect=''){
+function formulaires_editer_champ_extra_verifier_dist($extra_id='new', $redirect=''){
 	$erreurs = array();
 	
 	// nouveau ?
-	$new = ($id_extra == 'new') ? ' ': '';	
+	$new = ($extra_id == 'new') ? ' ': '';	
 	
 	// recuperer les valeurs postees
 	$extra = iextras_post_formulaire();
@@ -57,7 +57,7 @@ function formulaires_editer_champ_extra_verifier_dist($id_extra='new', $redirect
 	// n'existe pas deja sur la meme table
 	$verifier = false;
 	if (!$new) {
-		$ancien = iextra_get_extra($id_extra);
+		$ancien = iextra_get_extra($extra_id);
 		if (($ancien->champ != $champ) or ($ancien->table != $extra['table'])) {
 			$verifier = true;
 		}
@@ -74,9 +74,9 @@ function formulaires_editer_champ_extra_verifier_dist($id_extra='new', $redirect
 }
 
 
-function formulaires_editer_champ_extra_traiter_dist($id_extra='new', $redirect=''){
+function formulaires_editer_champ_extra_traiter_dist($extra_id='new', $redirect=''){
 	// nouveau ?
-	$new = ($id_extra == 'new') ? ' ': '';
+	$new = ($extra_id == 'new') ? ' ': '';
 		
 	// recuperer les valeurs postees
 	$extra = iextras_post_formulaire();
@@ -90,7 +90,7 @@ function formulaires_editer_champ_extra_traiter_dist($id_extra='new', $redirect=
 		$extras[] = $extra;
 	} else {
 		foreach($extras as $i=>$e) {
-			if ($e->get_id() == $id_extra) {
+			if ($e->get_id() == $extra_id) {
 				$extras[$i] = $extra;
 				break;
 			}
