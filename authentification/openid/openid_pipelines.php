@@ -66,7 +66,7 @@ function openid_recuperer_fond($flux) {
 		) {
 			$openid = preg_replace(',^http://,i','',$openid);
 			$message = _T('openid:form_login_openid_ok')  // . $openid
-			. " <a href=\"#\" onclick=\"jQuery('.editer_login .explication').hide();jQuery('.editer_password').show();return false;\">"._T('openid:form_login_openid_pass')."</a>";
+			. "<br />[<a href=\"#\" onclick=\"jQuery('.editer_login .explication').hide();jQuery('.editer_password').show();return false;\">"._T('openid:form_login_openid_pass')."</a>]";
 			$scriptopenid = "jQuery('#var_login').keyup(function(){
 				if (jQuery(this).val()!='".addslashes($login)."') {
 					jQuery('.editer_login .explication').hide();
