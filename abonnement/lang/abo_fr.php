@@ -24,6 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	"abonnement" => "Abonnements",
 	"abonnement_relances" => "Relance des abonnements",
 	
+	"configuration_abonnements" => "Paramétrage",
 	"configuration_description_abonnement" => "Cette page permet de d&eacute;finir les options d'abonnement de votre site.",
 	"configuration_description_abonnement_relances" => "Cette page permet de d&eacute;finir les options de relances d'abonnement de votre site.",
 
