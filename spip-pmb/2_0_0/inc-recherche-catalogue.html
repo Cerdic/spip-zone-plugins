@@ -21,7 +21,9 @@
 			]
 			[(#COMPTEUR_BOUCLE|>{1}|?{' ',''})
 			 	<li[ (#ENV{look_ALL}|oui)class="surlignable"]>
-						[(#REM|?{'','<img />'}|inserer_attribut{class,spip_logos}|inserer_attribut{src,[(#GET{tab_resultat}|pmb_tableau2_valeur{#CLE, logo_src}|copie_locale)]}|image_reduire{130,0})]
+						[(#GET{tab_resultat}|pmb_tableau2_valeur{#CLE, logo_src}|oui)
+						    [(#REM|?{'','<img />'}|inserer_attribut{class,spip_logos}|inserer_attribut{src,[(#GET{tab_resultat}|pmb_tableau2_valeur{#CLE, logo_src}|copie_locale)]}|image_reduire{130,0})]
+						]
 						<h3[(#ENV{look_TITLE}|oui) class="surlignable"]><a href="index.php?page=notice_display&id=[(#GET{tab_resultat}|pmb_tableau2_valeur{#CLE, id})]&seule=1">[(#GET{tab_resultat}|pmb_tableau2_valeur{#CLE, titre})]</a></h3>
                 				[<small[(#ENV{look_AUTHOR}|oui) class="surlignable"]><:par_auteur:> (#GET{tab_resultat}|pmb_tableau2_valeur{#CLE, lesauteurs})</small>]
 						[(#ENV{look_PUBLISHER}|oui)[[(#GET{tab_resultat}|pmb_tableau2_valeur{#CLE, lesauteurs}|oui)<br />]<small class="surlignable">&eacute;diteur : (#GET{tab_resultat}|pmb_tableau2_valeur{#CLE, editeur})</small>]]
