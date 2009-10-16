@@ -32,7 +32,7 @@ function blocs_callback($matches) {
 	// types de blocs : bloc|invisible|visible
 	if ($matches[1]=='visible' || defined('_CS_PRINT')) {
 		$h = $d = '';
-		$r = ' blocs_invisible blocs_slide ';
+		$r = ' blocs_invisible blocs_slide';
 	} else {
 		$h = ' blocs_replie';
 		$d = ' blocs_invisible blocs_slide';
