@@ -10,6 +10,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// F
 	'form_login_openid' => 'You can use your <a href=\'http://openid.net/\'>OpenID</a> as login',
 	'form_forum_indiquer_openid' => 'You can sign up on this site with your OpenID adress',
+	'form_login_openid_ok' => 'This login use OpenID.',
+	'form_login_openid_pass' => 'Connect with password.',
 	'form_forum_openid' => 'Sign up with OpenID',
 	'form_pet_votre_openid' => 'OpenID Login',
 
