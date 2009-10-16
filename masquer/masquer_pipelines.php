@@ -5,7 +5,7 @@ function masquer_pre_boucle($boucle) {
   static $liste_articles;
 
   // On ne masque que sur l'espace public
-  if (test_espace_prive() || isset($boucle->modificateur['tout'])) {
+  if (test_espace_prive() || isset($boucle->modificateur['tout_voir'])) {
     return $boucle;
   }
   
