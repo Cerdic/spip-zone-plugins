@@ -14,6 +14,7 @@
   </description>
   <etat>test</etat>
   <prefix>masquer</prefix>
+  <fonctions>masquer_fonctions.php</fonctions>
   <pipeline>
     <nom>pre_boucle</nom>
     <inclure>masquer_pipelines.php</inclure>
