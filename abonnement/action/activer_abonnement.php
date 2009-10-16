@@ -105,15 +105,22 @@ function abo_traiter_activer_abonnement($id_abonnement, $id_auteur, $hash = fals
 	}
 	
 	// ouvir des zones pour acces restreint selon l'abonnement (action a faire)
+	// envoyer le mail de confirmation (action a faire)		
+	$produit = "abonnement";
+	$validation_paiement = "ok" ;
+	$libelle = $abonnement['libelle'] ;
+	
 	
 	// signaler un changement
-	spip_log("abonnement: activation abo n°$id_abonnement pour auteur $id_auteur","abonnement");
+	spip_log("abonnement: appel action/envoyer_mail_confirmation abo $libelle pour auteur $id_auteur","abonnement");
 	
-	if($libelle = $abonnement['libelle']){
-		return $libelle;
-	}else{
-	 	return false ;	
-	}
+	include_spip('action/envoyer_mail_confirmation');
+			if (!abonnement_envoyer_mails_confirmation($validation_paiement,$id_auteur,$libelle,$produit)) {
+				spip_log("Erreur de traitement mail (abonnement)", 'abonnement');
+				$message = "erreur_site";
+			}
+			
+	return true;
 }
 
 
