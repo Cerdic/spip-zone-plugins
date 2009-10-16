@@ -24,6 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'type' => 'Type',
 'editeur' => 'Editeur',
 'format' =>'Format',
+'collection' => 'Collection',
 'annee_publication' => 'Ann&eacute;e de publication',
 'importance' => 'Importance',
 'presentation' => 'Pr&eacute;sentation',

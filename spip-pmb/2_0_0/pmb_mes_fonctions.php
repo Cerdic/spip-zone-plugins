@@ -411,6 +411,7 @@ function pmb_parser_notice_apercu ($localdom, &$tresultat) {
         global $derniereBaliseRencontree;
          global $dernierAttributRencontre;
        global $dernierTypeTrouve;
+       global $dernierIdTrouve;
 
         $derniereBaliseRencontree = $nomBalise;
   
@@ -425,6 +426,7 @@ function pmb_parser_notice_apercu ($localdom, &$tresultat) {
         global $derniereBaliseRencontree;
          global $dernierAttributRencontre;
        global $dernierTypeTrouve;
+       global $dernierIdTrouve;
 
         $derniereBaliseRencontree = "";
     }
@@ -436,6 +438,7 @@ function pmb_parser_notice_apercu ($localdom, &$tresultat) {
         global $derniereBaliseRencontree;
          global $dernierAttributRencontre;
        global $dernierTypeTrouve;
+       global $dernierIdTrouve;
     global $gtresultat;
     global $indice_exemplaire;
 
@@ -448,13 +451,14 @@ function pmb_parser_notice_apercu ($localdom, &$tresultat) {
             case "F": 
 		   foreach($dernierAttributRencontre as $cle=>$attr) {
 			if ($cle=="C") $dernierTypeTrouve = $attr;
+			if ($cle=="ID") $dernierIdTrouve = $attr;
 		  }
               break;
 
             case "S":
                foreach($dernierAttributRencontre as $cle=>$attr) {
 			if ($cle=="C") $dernierSousTypeTrouve = $attr;
-		  }
+		}
 
 		if (($dernierTypeTrouve == "010") && ($dernierSousTypeTrouve == "a")) $gtresultat['isbn'] .= $texte;
 		if (($dernierTypeTrouve == "010") && ($dernierSousTypeTrouve == "b")) $gtresultat['reliure'] .= $texte;
@@ -470,17 +474,20 @@ function pmb_parser_notice_apercu ($localdom, &$tresultat) {
 		if (($dernierTypeTrouve == "210") && ($dernierSousTypeTrouve == "c")) $gtresultat['editeur'] .= $texte;
 		if (($dernierTypeTrouve == "210") && ($dernierSousTypeTrouve == "a")) $gtresultat['editeur'] .= ' ('.$texte.')';
 		if (($dernierTypeTrouve == "210") && ($dernierSousTypeTrouve == "d")) $gtresultat['annee_publication'] .= $texte;
+		if (($dernierTypeTrouve == "210") && ($dernierSousTypeTrouve == "c")) $gtresultat['id_editeur'] = $dernierIdTrouve;
 		
 		if (($dernierTypeTrouve == "215") && ($dernierSousTypeTrouve == "a")) $gtresultat['importance'] .= $texte;
 		if (($dernierTypeTrouve == "215") && ($dernierSousTypeTrouve == "c")) $gtresultat['presentation'] .= $texte;
 		if (($dernierTypeTrouve == "215") && ($dernierSousTypeTrouve == "d")) $gtresultat['format'] .= $texte;
 		
 		if (($dernierTypeTrouve == "225") && ($dernierSousTypeTrouve == "a")) $gtresultat['collection'] .= $texte;
+		if (($dernierTypeTrouve == "225") && ($dernierSousTypeTrouve == "a")) $gtresultat['id_collection'] = $dernierIdTrouve;
 		
-		if (($dernierTypeTrouve == "330") && ($dernierSousTypeTrouve == "a")) $gtresultat['resume'] .= str_replace("\n","<br />", $texte);
+		if (($dernierTypeTrouve == "330") && ($dernierSousTypeTrouve == "a")) $gtresultat['resume'] .= str_replace("","&oelig;", str_replace("\n","<br />", $texte));
 		
 		if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "a")) $gtresultat['lesauteurs'] .= $texte;
 		if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "b")) $gtresultat['lesauteurs'] .= " ".$texte;
+		if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "a")) $gtresultat['id_auteur'] = $dernierIdTrouve;
 		
 		//section996 mode html
 		if (($dernierTypeTrouve == "996") && ($dernierSousTypeTrouve == "f")) $gtresultat['exemplaires'] .= "<tr><td class='expl_cb'>".$texte."</td>";
@@ -572,6 +579,7 @@ function pmb_ws_parser_notice_serialisee($id_notice, $value, &$tresultat) {
 		    //echo("<br />C2 -> ".$c2."=".$v2);
 		    foreach ( $v2 as $c3=>$v3) {
 			   if ($c3=="c") $dernierTypeTrouve = $v3;
+			   if ($c3=="id") $dernierIdTrouve = $v3;
 			    foreach ( $v3 as $c4=>$v4) {
 				//echo("<br />attr=".$dernierTypeTrouve.",".$v4['c'].",".$v4['value']);
 				$dernierSousTypeTrouve = $v4['c'];
@@ -589,6 +597,7 @@ function pmb_ws_parser_notice_serialisee($id_notice, $value, &$tresultat) {
 				
 				if (($dernierTypeTrouve == "210") && ($dernierSousTypeTrouve == "c")) $gtresultat['editeur'] .= $texte;
 				if (($dernierTypeTrouve == "210") && ($dernierSousTypeTrouve == "a")) $gtresultat['editeur'] .= ' ('.$texte.')';
+				if (($dernierTypeTrouve == "210") && ($dernierSousTypeTrouve == "c")) $gtresultat['id_editeur'] = $dernierIdTrouve;
 				if (($dernierTypeTrouve == "210") && ($dernierSousTypeTrouve == "d")) $gtresultat['annee_publication'] .= $texte;
 				
 				if (($dernierTypeTrouve == "215") && ($dernierSousTypeTrouve == "a")) $gtresultat['importance'] .= $texte;
@@ -596,11 +605,14 @@ function pmb_ws_parser_notice_serialisee($id_notice, $value, &$tresultat) {
 				if (($dernierTypeTrouve == "215") && ($dernierSousTypeTrouve == "d")) $gtresultat['format'] .= $texte;
 				
 				if (($dernierTypeTrouve == "225") && ($dernierSousTypeTrouve == "a")) $gtresultat['collection'] .= $texte;
+				if (($dernierTypeTrouve == "225") && ($dernierSousTypeTrouve == "a")) $gtresultat['id_collection'] = $dernierIdTrouve;
 				
-				if (($dernierTypeTrouve == "330") && ($dernierSousTypeTrouve == "a")) $gtresultat['resume'] .= stripslashes(str_replace("\n","<br />", $texte));
+				if (($dernierTypeTrouve == "330") && ($dernierSousTypeTrouve == "a")) $gtresultat['resume'] .= str_replace("","&oelig;", stripslashes(str_replace("\n","<br />", $texte)));
 				
 				if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "a")) $gtresultat['lesauteurs'] .= $texte;
 				if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "b")) $gtresultat['lesauteurs'] .= " ".$texte;
+				if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "a")) $gtresultat['id_auteur'] = $dernierIdTrouve;
+				
 				
 			    }
 		    }

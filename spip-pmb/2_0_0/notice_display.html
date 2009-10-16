@@ -73,15 +73,16 @@
 		
 		
 		<div class="pmb-ouvrage-infos">	
-			[<p><:auteur:> : (#GET{notice}|pmb_notice_champ{'lesauteurs'})</p>]
-			[<p><:serie:> : (#GET{notice}|pmb_notice_champ{'serie'})</p>]
-			[<p><:type:> : (#GET{notice}|pmb_notice_champ{'type'})</p>]
-			[<p><:editeur:> : (#GET{notice}|pmb_notice_champ{'editeur'})</p>]
-			[<p><:format:> : (#GET{notice}|pmb_notice_champ{'format'})</p>]
-			[<p><:annee_publication:> : (#GET{notice}|pmb_notice_champ{'annee_publication'})</p>]
-			[<p><:importance:> : (#GET{notice}|pmb_notice_champ{'importance'})</p>]
-			[<p><:presentation:> : (#GET{notice}|pmb_notice_champ{'presentation'})</p>]
-			[<p><:isbn:> : (#GET{notice}|pmb_notice_champ{'isbn'})</p>]
+			[<p><:pmb:auteur:> : <a href="[(#URL_PAGE{author_see}|parametre_url{id,[(#GET{notice}|pmb_notice_champ{'id_auteur'})]})]">(#GET{notice}|pmb_notice_champ{'lesauteurs'})</a></p>]
+			[<p><:pmb:serie:> : (#GET{notice}|pmb_notice_champ{'serie'})</p>]
+			[<p><:pmb:type:> : (#GET{notice}|pmb_notice_champ{'type'})</p>]
+			[<p><:pmb:editeur:> : <a href="[(#URL_PAGE{publisher_see}|parametre_url{id,[(#GET{notice}|pmb_notice_champ{'id_editeur'})]})]">(#GET{notice}|pmb_notice_champ{'editeur'})</a></p>]
+			[<p><:pmb:collection:> : <a href="[(#URL_PAGE{coll_see}|parametre_url{id,[(#GET{notice}|pmb_notice_champ{'id_collection'})]})]">(#GET{notice}|pmb_notice_champ{'collection'})</a></p>]
+			[<p><:pmb:format:> : (#GET{notice}|pmb_notice_champ{'format'})</p>]
+			[<p><:pmb:annee_publication:> : (#GET{notice}|pmb_notice_champ{'annee_publication'})</p>]
+			[<p><:pmb:importance:> : (#GET{notice}|pmb_notice_champ{'importance'})</p>]
+			[<p><:pmb:presentation:> : (#GET{notice}|pmb_notice_champ{'presentation'})</p>]
+			[<p><:pmb:isbn:> : (#GET{notice}|pmb_notice_champ{'isbn'})</p>]
 		</div>
 		
 		[<div class="texte entry-content">(#GET{notice}|pmb_notice_champ{'resume'})</div>]
