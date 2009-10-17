@@ -36,3 +36,13 @@ Lorsque vous utilisez une adresse OpenID pour vous connecter à un site :
 
 Si OpenID offre un confort certain en offrant un seul point de connexion pour de nombreux sites, il n'est pas interdit d'utiliser plusieurs adresses OpenID pour des activités différentes. Ainsi vous utiliserez l'adresse OpenID <code>http://ma-societe.biz/nom.prenom</code> pour vous connecter sur vos sites professionnels, <code>http://association-openid.org/pseudo</code> pour vous connecter sur vos sites persos, familiaux et associatifs, et <code>http://darknet-hax0r.net/x09</code> pour vos sites de piratage.
 
+
+{{{Arguments en faveur}}}
+
+Pour le webmestre :
+-- Sécurité (on ne diffuse plus le mot de passe sur une connexion http)
+-- Facilité pour l'ajout de contributeurs à un projet (on ne leur donne plus de mot de passe, on se contente d'ajouter leurs openid dans des fiches auteurs)
+
+Pour le rédacteur :
+-- Sécurité
+-- Confort
