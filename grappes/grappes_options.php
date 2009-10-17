@@ -7,7 +7,7 @@
 	 * @param object $id_grappe
 	 * @param object $c[optional]
 	 */
-	function revision_grappe_dist($id_grappe, $c=false) {
+	function revision_grappe($id_grappe, $c=false) {
 		modifier_contenu('grappe', $id_grappe,
 			array(
 				'champs' => array('titre', 'descriptif', 'liaisons','options'),
