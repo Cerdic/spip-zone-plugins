@@ -387,6 +387,8 @@ function formulaires_inscription2_traiter_dist($id_auteur = NULL,$redirect = nul
 		action_spip_image_ajouter_dist(
 			type_du_logo('id_auteur').'on'.$id_auteur, false, false
 		); // beurk
+		// indiquer qu'on doit recalculer les images
+		$GLOBALS['var_images'] = true;
 	}
 
 	$traiter_plugin = pipeline('i2_traiter_formulaire',
@@ -416,6 +418,10 @@ function formulaires_inscription2_traiter_dist($id_auteur = NULL,$redirect = nul
 		$editable = false;
     }
 
+	// Invalider les caches
+	include_spip('inc/invalideur');
+    suivre_invalideur("id='id_auteur/$id_auteur'");
+	
 	$retour['editable'] = $editable;
 	$retour['message_ok'] = $message;
 
