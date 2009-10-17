@@ -3,15 +3,33 @@
 	var URLbase = "[(#CHEMIN{plugins}|url_absolue)]";
 	var map[(#GET{id_carte_gis})] = null;
 	var markers[(#GET{id_carte_gis})] = null;
-    <BOUCLE_centrado(GIS){id_article?}{id_rubrique ?}{0,1}>
-	#SET{latitude,#ENV{latit,#LAT}}
-	#SET{lonxitude,#ENV{lonxit,#LONX}}
-	#SET{zoommapa, #ENV{zoom,#ZOOM}}
-	</BOUCLE_centrado>
-	#SET{latitude,#ENV{latit,#CONFIG**{openlayer/latitude,0}}}
-	#SET{lonxitude,#ENV{lonxit,#CONFIG**{openlayer/longitude,0}}}
-	#SET{zoommapa, #ENV{zoom,#CONFIG**{openlayer/zoom,0}}
-	<//B_centrado>
+	[(#REM) Centrer sur les coordonnees de l'article passe en parametre, sinon celles de la sur la rubrique ]
+	<BOUCLE_centrer_article(GIS){id_article}{0,1}>
+		[(#ENV{latit}|non)
+			#SET{latitude,#LAT}]
+		[(#ENV{lonxit}|non)
+			#SET{lonxitude,#LONX}]
+		[(#ENV{zoom}|non)
+			#SET{zoommapa,#ZOOM}]
+	</BOUCLE_centrer_article>
+		<BOUCLE_centrer_rubrique(GIS){id_rubrique}{0,1}>
+			[(#ENV{latit}|non)
+				#SET{latitude,#LAT}]
+			[(#ENV{lonxit}|non)
+				#SET{lonxitude,#LONX}]
+			[(#ENV{zoom}|non)
+				#SET{zoommapa,#ZOOM}]
+		</BOUCLE_centrer_rubrique>
+	<//B_centrer_article>
+	
+	[(#REM) Sinon centrer sur les coordonnes passees en parametre ou sur celle par defaut ]
+	[(#GET{latitude}|non)
+	#SET{latitude,#ENV{latit,#CONFIG**{geomap/latitude,0}}}]
+	[(#GET{lonxitude}|non)
+	#SET{lonxitude,#ENV{lonxit,#CONFIG**{geomap/longitude,0}}}]
+	[(#GET{zoommapa}|non)
+	#SET{zoommapa, #ENV{zoom,#CONFIG**{geomap/zoom,0}}]
+	
 	function init[(#GET{id_carte_gis})](){
 		map[(#GET{id_carte_gis})] = new OpenLayers.Map("map[(#GET{id_carte_gis})]",{
 			maxExtent: new OpenLayers.Bounds(-20037508.34,-20037508.34,20037508.34,20037508.34),
