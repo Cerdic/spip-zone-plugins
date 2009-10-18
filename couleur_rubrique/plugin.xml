@@ -9,18 +9,21 @@ _ &#169; Distribu&#233; sous licence GNU/GPL
 _ Le module de choix de couleur par [Steven Wittens->http://acko.net/dev/farbtastic] sous licence GPL
 	</auteur>
 	<version>
-	1.5
+	1.6
 	</version>
 	<etat>
 	stable
 	</etat>
 	<description>
-		<p>Ce plugin permet de choisir une couleur pour chaque rubrique du site.</p>
-		<p>Pour afficher la couleur d'une rubrique dans un squelette, il suffit d'utiliser le code: <code>[#(#ID_RUBRIQUE|couleur_rubrique)]</code>.</p>
+		Ce plugin permet de choisir une couleur pour chaque rubrique du site.
+
+		Pour afficher la couleur d'une rubrique dans un squelette, il suffit d'utiliser le code: <code>[#(#ID_RUBRIQUE|couleur_rubrique)]</code>.
+
+		Pour l'installer, pensez &agrave; cr&eacute;er une rubrique &laquo;<code>/lib</code>&raquo; &agrave; la racine de votre site afin de permettre l'installation automatique des librairies n&eacute;cessaires.
 	</description>
-	<fonctions>
-	pb_couleur_rubrique_fonctions.php
-	</fonctions>
+	<options>
+	pb_couleur_rubrique_options.php
+	</options>
 	<prefix> 
 	pb_couleur_rubrique
 	</prefix>
@@ -39,4 +42,9 @@ _ Le module de choix de couleur par [Steven Wittens->http://acko.net/dev/farbtas
 	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
 
 	<necessite id="SPIP" version="[1.9.0;]" />
+	
+	<necessite id="lib:farbtastic_1_3" src="http://files.spip.org/spip-zone/farbtastic_1_3.zip" />
+	
 </plugin>
+
+
