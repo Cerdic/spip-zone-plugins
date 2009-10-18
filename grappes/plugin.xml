@@ -41,7 +41,7 @@
 	</pipeline>
 	<necessite id="SPIP" version="[2.0.0;]" />
 	<necessite id="SelecteurGenerique" version="[0.2;]" />
-	<bouton id='grappes' parent="naviguer">
+	<bouton id='grappes2' parent="naviguer">
 		<icone>images/grappe-24.gif</icone>
 		<titre>Grappes</titre>
 		<url>grappes</url> <!-- nom de l'exec, facultatif, par defaut prend l'id -->
