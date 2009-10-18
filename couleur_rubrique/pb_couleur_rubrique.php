@@ -36,15 +36,15 @@ function pb_couleur_rubrique_gauche($vars){
 			$titre = "Couleur de la rubrique";
 			if ($id_rubrique == 0) $titre = "Couleur principale du site";
 		
-			$ret .= debut_cadre_enfonce(_DIR_PLUGIN_PB_COULEUR_RUBRIQUE."img_pack/icon.png", true, "rien.gif", bouton_block_depliable($titre, $deplier, "selection_couleur"));
+			$ret .= debut_cadre_enfonce(_DIR_PLUGIN_PB_COULEUR_RUBRIQUE."img_pack/icon-24.png", true, "rien.gif", bouton_block_depliable($titre, $deplier, "selection_couleur"));
 
 			$ret .= debut_block_depliable($deplier, "selection_couleur");
 		    $ret .= "<form method='post' action='index.php?exec=naviguer&id_rubrique=$id_rubrique'>";
 
 			$ret .= "<div id='picker' style='margin-left: -5px;'></div>";
-			$ret .= "<div style='text-align: center;'><input type='text' id='pb_couleur_rubrique' name='pb_couleur_rubrique' value='#$pb_couleur_rubrique'  class='colorwell' /></div>\n"; 
-
 			$ret .= "<div style='float: right;'><input class='fondo' type='submit' value='"._L("Enregistrer")."' /></div>";
+			$ret .= "<div style='text-align: left; padding-top: 2px;'><input type='text' id='pb_couleur_rubrique' name='pb_couleur_rubrique' value='#$pb_couleur_rubrique'  class='colorwell' style='width: 70px;' /></div>\n"; 
+
 			if ($deplier) {
 				$ret .= "<input type='submit' class='fondl' name='supprimer' value='Supprimer la couleur' />";
 			}
