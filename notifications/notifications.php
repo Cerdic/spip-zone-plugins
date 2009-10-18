@@ -479,8 +479,7 @@ function notifications_forumposte($quoi, $id_forum) {
 	$links = array();
 	foreach ($t as $champ)
 		$links = $links + extraire_balises($champ,'a');
-	foreach($links as $k=>$l)
-		$links[$k] = extraire_attribut($l,'href');
+	$links = extraire_attribut($links,'href');
 	$links = implode("\n",$links);
 	if ($links)
 		$links = "\n\n".$links;
