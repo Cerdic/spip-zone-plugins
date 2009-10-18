@@ -475,8 +475,17 @@ function notifications_forumposte($quoi, $id_forum) {
 	//
 	// Envoyer les emails
 	//
+	// detecter at afficher les url des liens du forum poste
+	$links = array();
+	foreach ($t as $champ)
+		$links = $links + extraire_balises($champ,'a');
+	foreach($links as $k=>$l)
+		$links[$k] = extraire_attribut($l,'href');
+	$links = implode("\n",$links);
+	if ($links)
+		$links = "\n\n".$links;
 	foreach (array_keys($destinataires) as $email) {
-		$msg = email_notification_forum($t, $email);
+		$msg = email_notification_forum($t, $email) . $links;
 		Notifications_envoi($email, $msg['subject'], $msg['body']);
 	}
 
