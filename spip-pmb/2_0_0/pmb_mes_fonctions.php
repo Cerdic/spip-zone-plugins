@@ -214,24 +214,42 @@ function pmb_editeur_extraire($id_editeur, $url_base, $pmb_page=1, $mode='auto')
 
 }
 
-function pmb_auteur_extraire($id_auteur, $url_base, $pmb_page=1, $mode='auto') {
+function pmb_auteur_extraire($id_auteur, $url_base) {
 	$tableau_resultat = Array();
 	
-	if ($htmldom = pmb_charger_page($url_base, "index.php?lvl=author_see&page=".$pmb_page."&id=".$id_auteur,$mode)) {
-			$tableau_resultat[0] = Array();
-			$tableau_resultat[0]['nav_bar'] = $htmldom->find('.navbar',0)->outertext;
-			$tableau_resultat[0]['nav_bar'] = pmb_transformer_nav_bar($tableau_resultat[0]['nav_bar']);
-			$tableau_resultat[0]['titre_auteur'] = $htmldom->find('#aut_see h3',0)->innertext;
-			
-			$resultats_recherche = $htmldom->find('.notice-child');
-			$tableau_resultat[0]['nb_resultats'] = count($resultats_recherche);
-			$i = 1;
-			foreach($resultats_recherche as $res) {
-				$tableau_resultat[$i] = Array();				
-				pmb_parser_notice_apercu($res, $tableau_resultat[$i]);
-				$i++;
-			}	
-	}
+	pmb_ws_charger_wsdl($ws, $url_base);
+	try {
+	      $result = $ws->pmbesAuthors_get_author_information_and_notices($id_auteur,0);
+	      if ($result) {
+		  $tableau_resultat['author_id'] = $result['information']->author_id;
+		  $tableau_resultat['author_type'] = $result['information']->author_type;
+		  $tableau_resultat['author_name'] = $result['information']->author_name;
+		  $tableau_resultat['author_rejete'] = $result['information']->author_rejete;
+		  $tableau_resultat['author_see'] = $result['information']->author_see;
+		  $tableau_resultat['author_date'] = $result['information']->author_date;
+		  $tableau_resultat['author_web'] = $result['information']->author_web;
+		  $tableau_resultat['author_comment'] = $result['information']->author_comment;
+		  $tableau_resultat['author_lieu'] = $result['information']->author_lieu;
+		  $tableau_resultat['author_ville'] = $result['information']->author_ville;
+		  $tableau_resultat['author_pays'] = $result['information']->author_pays;
+		  $tableau_resultat['author_subdivision'] = $result['information']->author_subdivision;
+		  $tableau_resultat['author_numero'] = $result['information']->author_numero;
+		  $tableau_resultat['notice_ids'] = Array();
+
+		  $liste_notices = Array();
+		  foreach($result['notice_ids'] as $cle=>$valeur) {
+		    $liste_notices[] = $valeur;
+		  }
+		  pmb_ws_recuperer_tab_notices($liste_notices, $ws, $tableau_resultat['notice_ids']);
+		  $cpt=0;
+		  foreach($liste_notices as $notice) {
+		    $tableau_resultat['notice_ids'][$cpt]['id'] = $notice;
+		    $cpt++;
+		  }
+		}
+	} catch (SoapFault $fault) {
+		print("Erreur : ".$fault->faultcode." : ".$fault->faultstring);
+	} 
 	return $tableau_resultat;
 
 }
@@ -644,6 +662,29 @@ function pmb_ws_recuperer_notice ($id_notice, &$ws, &$tresultat) {
 		  $r=$ws->pmbesNotices_fetchNoticeList($listenotices,"pmb_xml_unimarc","utf8",true,true);
 		  foreach($r as $value) {
 		      pmb_ws_parser_notice_xml($id_notice, $value, $tresultat);
+		  }
+		
+
+	} catch (SoapFault $fault) {
+		print("Erreur : ".$fault->faultcode." : ".$fault->faultstring);
+	} 
+
+	
+
+}
+//récuperer une notice en xml via les webservices
+function pmb_ws_recuperer_tab_notices ($listenotices, &$ws, &$tresultat) {
+	
+	
+	try {	
+	
+	$tresultat['id'] = $id_notice;
+		  $r=$ws->pmbesNotices_fetchNoticeList($listenotices,"pmb_xml_unimarc","utf8",true,true);
+		  $cpt=0;
+		  foreach($r as $value) {
+		      $tresultat[$cpt] = Array();
+		      pmb_ws_parser_notice_xml($id_notice, $value, $tresultat[$cpt]);
+		      $cpt++;
 		  }
 		
 

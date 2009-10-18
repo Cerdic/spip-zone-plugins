@@ -54,8 +54,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'resultats_precedents' => 'R&eacute;sultats pr&eacute;c&eacute;dents',
 'resultats' => 'R&eacute;sultats',
 'a' => '&agrave;',
-'sur' => 'sur'
-
-
+'sur' => 'sur',
+'author_date' => 'Date',
+'author_web' => 'Site internet',
+'author_comment' => 'Commentaire',
+'author_lieu' => 'Lieu',
+'author_ville' => 'Ville',
+'author_pays' => 'Pays'
 );
 ?>

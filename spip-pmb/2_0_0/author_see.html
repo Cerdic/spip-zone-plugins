@@ -1,8 +1,8 @@
-[(#SET{tab_resultat,[(#ENV{id}|pmb_auteur_extraire{[(#CONFIG{spip_pmb/url})],[(#ENV{pmb_page}|sinon{1})]})]})
+[(#SET{tab_resultat,[(#ENV{id}|pmb_auteur_extraire{[(#CONFIG{spip_pmb/url})]})]})
 ]<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
 <head>
-<title>[(#GET{tab_resultat}|pmb_tableau2_valeur{0,titre_auteur}|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>[
+<title>[(#GET{tab_resultat}|pmb_notice_champ{'author_name'}|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>[
 <meta name="description" content="(#GET{tab_resultat}|pmb_tableau2_valeur{0,infos_auteur}|attribut_html)" />
 ]<INCLURE{fond=inc-head}>
 </head>
@@ -18,43 +18,50 @@
 	<INCLURE{fond=inc-entete}{env}>
 
 	[(#REM) Fil d'Ariane ]
-        <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:pmb:auteurs:> &gt; [(#GET{tab_resultat}|pmb_tableau2_valeur{0,titre_auteur}|pmb_remplacer{"Auteur ",""}|couper{80})]</div>
+        <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:pmb:auteurs:> &gt; [(#GET{tab_resultat}|pmb_notice_champ{'author_name'}|couper{80})]</div>
 	<div class="cartouche">
 	        	<div class="surlignable">
-				<h1 class="entry-title[ (#GET{tab_resultat}|pmb_tableau2_valeur{0,titre_auteur}|pmb_remplacer{"Auteur ",""}|strlen|>{30}|?{'titre-long',''})][ (#GET{tab_resultat}|pmb_tableau2_valeur{0,infos_auteur}|?{'','pas-de-texte'})]">
-					[(#GET{tab_resultat}|pmb_tableau2_valeur{0,titre_auteur}|pmb_remplacer{"Auteur ",""}|image_typo{police=togase.ttf,taille=30,couleur=333300,largeur=600})]
+				<h1 class="entry-title[ (#GET{tab_resultat}|pmb_notice_champ{'author_name'}|strlen|>{30}|?{'titre-long',''})]">
+					[(#GET{tab_resultat}|pmb_notice_champ{'author_name'}|image_typo{police=togase.ttf,taille=30,couleur=333300,largeur=600})]
 				</h1>
           	  	</div>
         </div>
-	[<div class="corps-conteneur surlignable">
-			<div class="texte entry-content">(#GET{tab_resultat}|pmb_tableau2_valeur{0,infos_auteur})</div>
-	</div>]
-
-	<div class="menu articles ouvrages">
+	<div class="corps-conteneur surlignable">
+			<div class="pmb-ouvrage-infos">	
 			
+			[<p><:pmb:author_date:> : (#GET{tab_resultat}|pmb_notice_champ{'author_date'})</p>]
+			[<p><:pmb:author_web:> : <a href="[(#GET{tab_resultat}|pmb_notice_champ{'author_web'})]">(#GET{tab_resultat}|pmb_notice_champ{'author_web'})</a></p>]
+			[<p><:pmb:author_lieu:> : (#GET{tab_resultat}|pmb_notice_champ{'author_lieu'})</p>]
+			[<p><:pmb:author_ville:> : (#GET{tab_resultat}|pmb_notice_champ{'author_ville'})</p>]
+			[<p><:pmb:author_pays:> : (#GET{tab_resultat}|pmb_notice_champ{'author_pays'})</p>]
+			
+			
+		</div>
+		[<div class="texte entry-content">(#GET{tab_resultat}|pmb_notice_champ{'author_comment'}|ucfirst)</div>]
+	</div>
+	<div class="menu articles ouvrages">
+			[(#SET{tab_notices,[(#GET{tab_resultat}|pmb_notice_champ{'notice_ids'})]})]
 			<B_tab_resultat>
 			<h2><:pmb:ouvrages:></h2>
 			<ul>
-				<BOUCLE_tab_resultat(POUR){tableau #GET{tab_resultat}}>
-
-				
-				[(#COMPTEUR_BOUCLE|>{1}|?{' ',''})
-			 		<li>
-						[(#REM|?{'','<img />'}|inserer_attribut{class,spip_logos}|inserer_attribut{src,[(#GET{tab_resultat}|pmb_tableau2_valeur{#CLE, logo_src}|copie_locale)]}|image_reduire{130,0})]
-	
-						<h3><a href="index.php?page=notice_display&id=[(#GET{tab_resultat}|pmb_tableau2_valeur{#CLE, id})]&seule=1">[(#GET{tab_resultat}|pmb_tableau2_valeur{#CLE, titre})]</a></h3>
-                				[<small><:par_auteur:> (#GET{tab_resultat}|pmb_tableau2_valeur{#CLE, lesauteurs})</small>]
+				<BOUCLE_tab_resultat(POUR){tableau #GET{tab_notices}}>
+					[(#COMPTEUR_BOUCLE|>{1}|?{' ',''})
+					<li>
+						[(#GET{tab_notices}|pmb_tableau2_valeur{#CLE, logo_src}|oui)
+						    [(#REM|?{'','<img />'}|inserer_attribut{class,spip_logos}|inserer_attribut{src,[(#GET{tab_notices}|pmb_tableau2_valeur{#CLE, logo_src}|copie_locale)]}|image_reduire{130,0})]
+						]
+						<h3[(#ENV{look_TITLE}|oui) class="surlignable"]><a href="index.php?page=notice_display&id=[(#GET{tab_notices}|pmb_tableau2_valeur{#CLE, id})]">[(#GET{tab_notices}|pmb_tableau2_valeur{#CLE, titre})]</a></h3>
+                				[<small[(#ENV{look_AUTHOR}|oui) class="surlignable"]><:par_auteur:> (#GET{tab_notices}|pmb_tableau2_valeur{#CLE, lesauteurs})</small>]
+						[(#ENV{look_PUBLISHER}|oui)[[(#GET{tab_notices}|pmb_tableau2_valeur{#CLE, lesauteurs}|oui)<br />]<small class="surlignable">&eacute;diteur : (#GET{tab_notices}|pmb_tableau2_valeur{#CLE, editeur})</small>]]
 					
-						[<div class="introduction entry-content">(#GET{tab_resultat}|pmb_tableau2_valeur{#CLE, resume}|couper{300,'...'})</div>]
-						<a class="lire-la-suite" title="[(#GET{tab_resultat}|pmb_tableau2_valeur{#CLE, titre})]" href="index.php?page=notice_display&id=[(#GET{tab_resultat}|pmb_tableau2_valeur{#CLE, id})]&seule=1"><:pmb:lire_la_suite:> +</a>
+						[<div class="introduction entry-content[(#ENV{look_ABSTRACT}|oui) surlignable]">(#GET{tab_notices}|pmb_tableau2_valeur{#CLE, resume}|couper{300,'...'})</div>]
+						<a class="lire-la-suite pas_surlignable" title="[(#GET{tab_notices}|pmb_tableau2_valeur{#CLE, titre})]" href="index.php?page=notice_display&id=[(#GET{tab_notices}|pmb_tableau2_valeur{#CLE, id})]"><:lire_la_suite:> +</a>
 
-					</li>
-				]
+					</li>]
 				</BOUCLE_tab_resultat>
 			</ul>
 
-			[(#GET{tab_resultat}|pmb_tableau2_valeur{0,nav_bar})]
-
+			
 			</B_tab_resultat>
 				<:pmb:pas_d_ouvrages_trouves:>
 			<//B_tab_resultat>
