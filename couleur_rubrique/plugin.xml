@@ -19,7 +19,7 @@ _ Le module de choix de couleur par [Steven Wittens->http://acko.net/dev/farbtas
 
 		Pour afficher la couleur d'une rubrique dans un squelette, il suffit d'utiliser le code: <code>[#(#ID_RUBRIQUE|couleur_rubrique)]</code>.
 
-		Pour l'installer, pensez &agrave; cr&eacute;er une rubrique &laquo;<code>/lib</code>&raquo; &agrave; la racine de votre site afin de permettre l'installation automatique des librairies n&eacute;cessaires.
+		Pour l'installer, pensez &agrave; cr&eacute;er un dossier &laquo;<code>/lib</code>&raquo; &agrave; la racine de votre site afin de permettre l'installation automatique des librairies n&eacute;cessaires.
 	</description>
 	<options>
 	pb_couleur_rubrique_options.php
