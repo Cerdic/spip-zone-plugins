@@ -225,6 +225,12 @@ function pmb_auteur_extraire($id_auteur, $url_base) {
 		  $tableau_resultat['author_type'] = $result['information']->author_type;
 		  $tableau_resultat['author_name'] = $result['information']->author_name;
 		  $tableau_resultat['author_rejete'] = $result['information']->author_rejete;
+		  if ($result['information']->author_rejete) {
+		      $tableau_resultat['author_nomcomplet'] =  $tableau_resultat['author_rejete'].' '.$tableau_resultat['author_name'];
+		  } else {
+		      $tableau_resultat['author_nomcomplet'] = $tableau_resultat['author_name'];
+		  }
+
 		  $tableau_resultat['author_see'] = $result['information']->author_see;
 		  $tableau_resultat['author_date'] = $result['information']->author_date;
 		  $tableau_resultat['author_web'] = $result['information']->author_web;

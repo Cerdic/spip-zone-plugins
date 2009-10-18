@@ -2,7 +2,7 @@
 ]<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
 <head>
-<title>[(#GET{tab_resultat}|pmb_notice_champ{'author_name'}|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>[
+<title>[(#GET{tab_resultat}|pmb_notice_champ{'author_nomcomplet'}|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>[
 <meta name="description" content="(#GET{tab_resultat}|pmb_tableau2_valeur{0,infos_auteur}|attribut_html)" />
 ]<INCLURE{fond=inc-head}>
 </head>
@@ -18,11 +18,11 @@
 	<INCLURE{fond=inc-entete}{env}>
 
 	[(#REM) Fil d'Ariane ]
-        <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:pmb:auteurs:> &gt; [(#GET{tab_resultat}|pmb_notice_champ{'author_name'}|couper{80})]</div>
+        <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:pmb:auteurs:> &gt; [(#GET{tab_resultat}|pmb_notice_champ{'author_nomcomplet'}|couper{80})]</div>
 	<div class="cartouche">
 	        	<div class="surlignable">
-				<h1 class="entry-title[ (#GET{tab_resultat}|pmb_notice_champ{'author_name'}|strlen|>{30}|?{'titre-long',''})]">
-					[(#GET{tab_resultat}|pmb_notice_champ{'author_name'}|image_typo{police=togase.ttf,taille=30,couleur=333300,largeur=600})]
+				<h1 class="entry-title[ (#GET{tab_resultat}|pmb_notice_champ{'author_nomcomplet'}|strlen|>{30}|?{'titre-long',''})]">
+					[(#GET{tab_resultat}|pmb_notice_champ{'author_nomcomplet'}|image_typo{police=togase.ttf,taille=30,couleur=333300,largeur=600})]
 				</h1>
           	  	</div>
         </div>
