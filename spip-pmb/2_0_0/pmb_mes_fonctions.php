@@ -163,27 +163,39 @@ function pmb_serie_extraire($id_serie, $url_base, $pmb_page=1, $mode='auto') {
 
 }
 
-function pmb_collection_extraire($id_collection, $url_base, $pmb_page=1, $mode='auto') {
+function pmb_collection_extraire($id_collection, $debut=0, $nbresult=5, $id_session=0) {
 	$tableau_resultat = Array();
 	
-	if ($htmldom = pmb_charger_page($url_base, "index.php?lvl=coll_see&page=".$pmb_page."&id=".$id_collection,$mode)) {
-			$tableau_resultat[0] = Array();
-			$tableau_resultat[0]['nav_bar'] = $htmldom->find('.navbar',0)->outertext;
-			$tableau_resultat[0]['nav_bar'] = pmb_transformer_nav_bar($tableau_resultat[0]['nav_bar']);
-			$tableau_resultat[0]['titre_collection'] = $htmldom->find('#aut_see h3',0)->innertext;
-			$tableau_resultat[0]['collections_infos'] = $htmldom->find('#aut_see ul',0)->outertext;
-			
-			$resultats_recherche = $htmldom->find('.notice-child');
-			$tableau_resultat[0]['nb_resultats'] = count($resultats_recherche);
-			$i = 1;
-			foreach($resultats_recherche as $res) {
-				$tableau_resultat[$i] = Array();				
-				pmb_parser_notice_apercu($res, $tableau_resultat[$i]);
-				$i++;
-			}	
-	}
-	return $tableau_resultat;
+	pmb_ws_charger_wsdl($ws, $url_base);
+	try {
+	      $result = $ws->pmbesCollections_get_collection_information_and_notices($id_collection,$id_session);
+	      if ($result) {
+		  $tableau_resultat['collection_id'] = $result['information']->collection_id;
+		  $tableau_resultat['collection_name'] = $result['information']->collection_name;
+		  $tableau_resultat['collection_parent'] = $result['information']->collection_parent;
+		  $tableau_resultat['collection_issn'] = $result['information']->collection_issn;
+		  $tableau_resultat['collection_web'] = $result['information']->collection_web;
+		   $tableau_resultat['notice_ids'] = Array();
 
+		$liste_notices = Array();
+		  $cpt=0;
+		  foreach($result['notice_ids'] as $cle=>$valeur) {
+		    if (($cpt>=$debut) && ($cpt<$nbresult+$debut)) $liste_notices[] = $valeur;
+		    $cpt++;
+		  }
+		  pmb_ws_recuperer_tab_notices($liste_notices, $ws, $tableau_resultat['notice_ids']);
+		  $tableau_resultat['notice_ids'][0]['nb_resultats'] = $cpt;
+
+		  $cpt=0;
+		  foreach($liste_notices as $notice) {
+		    $tableau_resultat['notice_ids'][$cpt]['id'] = $notice;
+		    $cpt++;
+		  }
+		}
+	} catch (SoapFault $fault) {
+		print("Erreur : ".$fault->faultcode." : ".$fault->faultstring);
+	} 
+	return $tableau_resultat;
 }
 
 function pmb_editeur_extraire($id_editeur, $debut=0, $nbresult=5, $id_session=0) {
@@ -197,8 +209,6 @@ function pmb_editeur_extraire($id_editeur, $debut=0, $nbresult=5, $id_session=0)
 		  $tableau_resultat['publisher_name'] = $result['information']->publisher_name;
 		  $tableau_resultat['publisher_address1'] = $result['information']->publisher_address1;
 		  $tableau_resultat['publisher_address2'] = $result['information']->publisher_address2;
-		  
-
 		  $tableau_resultat['publisher_zipcode'] = $result['information']->publisher_zipcode;
 		  $tableau_resultat['publisher_city'] = $result['information']->publisher_city;
 		  $tableau_resultat['publisher_country'] = $result['information']->publisher_country;
