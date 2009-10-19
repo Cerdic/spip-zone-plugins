@@ -11,7 +11,7 @@
  * Utilisation: ce plugin active la reconnaissance des OpenID dans le
  * formulaire de Login. Si un OpenID est identifié, il lance l'authentification
  * puis, en cas de succès, recherche si l'OpenID en question correspond à un utilisateur
- * existant sur le site. Pour cela, il recherche un utilisateur sont le champ 'url_site'
+ * existant sur le site. Pour cela, il recherche un utilisateur dont le champ 'url_site'
  * est égal à cet OpenID. Si aucun n'existe, erreur. Sinon il écrit le cookie de session
  * et redirige vers la première page
  *
