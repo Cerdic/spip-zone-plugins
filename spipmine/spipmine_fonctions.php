@@ -115,6 +115,7 @@ $table_des_traitements['IMPORTANCE'][]= _TRAITEMENT_RACCOURCIS;
 $table_des_traitements['LIBELLE_FACTURE'][]= _TRAITEMENT_RACCOURCIS;
 $table_des_traitements['LIBELLE_FORFAIT'][]= _TRAITEMENT_RACCOURCIS;
 $table_des_traitements['METHODE'][]= _TRAITEMENT_RACCOURCIS;
+$table_des_traitements['NOTA_BENE'][]= _TRAITEMENT_RACCOURCIS;
 $table_des_traitements['OBJECTIF'][]= _TRAITEMENT_RACCOURCIS;
 
 

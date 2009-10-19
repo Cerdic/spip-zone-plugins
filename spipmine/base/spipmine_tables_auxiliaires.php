@@ -134,10 +134,11 @@ function spipmine_declarer_tables_auxiliaires($tables_auxiliaires){
 	$spipmine_types_status_key = array(
 		"PRIMARY KEY"			=>	"id_type_status"
 	);
-	$tables_principales['spipmine_types_status'] = array(
+	$tables_auxiliaires['spipmine_types_status'] = array(
 		'field' => &$spipmine_types_status,
 		'key' => &$spipmine_types_status_key
 	);
+
 	
 	
 	return $tables_auxiliaires;

@@ -5,62 +5,65 @@
  * Licence GPL (c) 2009 - Ateliers CYM
  */
 
-// references : http://doc.spip.org/@Plugin-xml
+$GLOBALS['spipmine_base_version'] = 0.10;
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
-
-/*
-function spipmine_install($action) {
-
-	switch ($action) {  
-	
-		// La base est deja cree ?
-		case 'test':
-			// Verifier que la table contacts existe
-			$desc = sql_showtable("spipmine_contacts", true);
-			break;
-	
-		// Installer la base
-		case 'install':
-			include_spip('base/create');  // definir la fonction
-			include_spip('base/spipmine'); // definir sa structure
-			creer_base();
-			break;
-	
-		// Supprimer la base
-		case 'uninstall':
-			spip_query('DROP TABLE spipmine_%');
-			break;
-			
-		default :
-			break;
-	}
-}
-*/
-
-function spipmine_upgrade($nom_meta_base_version,$version_cible){
+function spipmine_verifier_base(){
+	$version_base = $GLOBALS['spipmine_base_version'];
 	$current_version = 0.0;
-	// s'il n'y a pas de N° de version
-	if ((!isset($GLOBALS['meta'][$nom_meta_base_version]))
-	// ou si la version actuelle est différente de la version cible
-	|| (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){
-		
-		// on inclut le script SPIP de création des tables
-		include_spip('base/spipmine');
-	
-		// cas d'une installation
+	if (   (!isset($GLOBALS['meta']['spipmine_base_version']) )
+			|| (($current_version = $GLOBALS['meta']['spipmine_base_version'])!=$version_base)){
+			
+		// Cas d'une install toute neuve : la version
 		if ($current_version==0.0){
-	
-			// on inclut le script SPIP de création des tables		
 			include_spip('base/create');
-			maj_tables('spipmine_clients, spipmine_contacts');
-			ecrire_meta($nom_meta_base_version, $current_version=$version_cible, 'non');
+			include_spip('base/abstract_sql');
+			creer_base();
+			// if (file_exists('base/spipmine.sql')) {
+				$sql = trim(@file_get_contents('base/spipmine.sql'));
+				sql_query($sql);
+			// } 
+			ecrire_meta('spipmine_base_version',$current_version=$version_base,'non');
+		}
+		
+		if ($current_version>0.0){
+			ecrire_meta('spipmine_base_version',$current_version=0.11,'non');
 		}
 	}
 }
-function spipmine_vider_tables($nom_meta_base_version) {
-	sql_drop_table("spipmine_clients");
-	effacer_meta($nom_meta_base_version);
+
+function spipmine_vider_tables() {
+	include_spip('base/spipmine');
+	include_spip('base/abstract_sql');
+	sql_drop_table('spipmine_actions');
+	sql_drop_table('spipmine_clients');
+	sql_drop_table('spipmine_clients_rubriques');
+	sql_drop_table('spipmine_contacts');
+	sql_drop_table('spipmine_factures');
+	sql_drop_table('spipmine_lignes_facture');
+	sql_drop_table('spipmine_projets');
+	sql_drop_table('spipmine_reglements');
+	sql_drop_table('spipmine_types_actions');
+	sql_drop_table('spipmine_types_documents');
+	sql_drop_table('spipmine_types_facturation');
+	sql_drop_table('spipmine_types_livrables');
+	sql_drop_table('spipmine_types_prestations');
+	sql_drop_table('spipmine_types_status');
+	sql_drop_table('spipmine_users');
+	effacer_meta('spipmine_base_version');
 }
 
+function spipmine_install($action){
+	$version_base = $GLOBALS['spipmine_base_version'];
+	switch ($action){
+		case 'test':
+			return (isset($GLOBALS['meta']['spipmine_base_version']) AND ($GLOBALS['meta']['spipmine_base_version']>=$version_base));
+			break;
+		case 'install':
+			spipmine_verifier_base();
+			break;
+		case 'uninstall':
+			spipmine_vider_tables();
+			break;
+	}
+}
 ?>

@@ -11,7 +11,7 @@ function spipmine_declarer_tables_interfaces($interface){
 
 	$interface['tables_jointures']['spip_rubriques'][] = 'spipmine_clients_rubriques';
 	$interface['tables_jointures']['spipmine_clients'][] = 'spipmine_clients_rubriques';	
-	$interface['tables_jointures']['spipmine_clients_rubriques'][] = 'spip_rubriques';
+	$interface['tables_jointures']['spipmine_clients_rubriques'][] = 'rubriques';
 	$interface['tables_jointures']['spipmine_clients_rubriques'][] = 'spipmine_clients';
 	
 	return $interface;
