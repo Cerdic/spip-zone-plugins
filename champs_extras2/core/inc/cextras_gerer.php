@@ -72,9 +72,13 @@ function installer_champs_extras($champs, $nom_meta_base_version, $version_cible
  * @param $champs : objet ChampExtra ou tableau d'objets ChampExtra
  */
 function creer_champs_extras($champs) {
+	if (!$champs) {
+		return;
+	}
+	
 	if (!is_array($champs)) 
 		$champs = array($champs);
-		
+				
 	// on recupere juste les differentes tables a mettre a jour
 	$tables = array();
 	foreach ($champs as $c){ 
@@ -82,21 +86,28 @@ function creer_champs_extras($champs) {
 			$tables[$table] = $table;
 		}
 	}	
-		
+
 	// on met a jour les tables trouvees
-	if ($tables) {	
+	if ($tables) {
 		// recharger les tables principales et auxiliaires
 		include_spip('base/serial');
 		include_spip('base/auxiliaires');
 		global $tables_principales, $tables_auxiliaires;
 		base_serial($tables_principales);
-		base_auxiliaires($tables_auxiliaires);		
+		base_auxiliaires($tables_auxiliaires);
 		
+		// inclure les champs extras declares ALORS que le pipeline
+		// n'est pas encore actif : important lorsqu'on active
+		// en meme temps CE2 et un plugin dependant
+		// et non l'un apres l'autre
+		if (!defined('_CHAMPS_EXTRAS_DECLARES')) {
+			include_spip('base/cextras');
+			$tables_principales = cextras_declarer_tables_principales($tables_principales);
+		}
+
 		// executer la mise a jour
 		include_spip('base/create');
-		foreach($tables as $table) {
-			maj_tables($table);
-		}
+		maj_tables($tables);
 	}
 }
 
