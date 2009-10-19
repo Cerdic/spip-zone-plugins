@@ -25,3 +25,12 @@ padding:3px;
  	
  	#statut_abonnement{width:160px}
  	.statut_div{margin:5px 0px;text-align:right}
+ 	
+ 	#navigation ul{
+ 		list-style-type:none;
+ 		margin:0;
+ 		padding:0
+ 	}
+ 	#navigation ul li{
+ 	padding:0px 10px;
+ 	}

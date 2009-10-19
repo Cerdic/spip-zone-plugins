@@ -6,6 +6,49 @@
 <INCLURE{fond=inc/menu_abonnement} />
 
 <div class="cadre cadre-info">
+
+<strong><:abo:abonnes:></strong>
+
+<div class="stats_generales">
+	<ul>
+	<li>
+	<:abo:nombre_abonnes_a_jour:>
+	<BOUCLE_abonnes_a_jour(AUTEURS_ELARGIS_ABONNEMENTS){fusion 1=1}{validite>#DATE}{compte DISTINCT(id_auteur)}>
+		<strong>#COMPTE{id_auteur}</strong>
+	</BOUCLE_abonnes_a_jour>
+		<strong>0</strong>
+	<//B_abonnes_a_jour>
+	</li>
+	<li>
+	<:abo:nombre_abonnes_dechus:>
+	<BOUCLE_abonnes_dechus(AUTEURS_ELARGIS_ABONNEMENTS){fusion 1=1}{validite!=0}{validite<#DATE}{compte DISTINCT(id_auteur)}>
+		<strong>#COMPTE{id_auteur}</strong>
+	</BOUCLE_abonnes_dechus>
+		<strong>0</strong>
+	<//B_abonnes_dechus>	
+	</li>	
+	<li>
+	<:abo:nombre_abonnes_relances:>
+	<BOUCLE_abonnes_relances(AUTEURS_ELARGIS_ABONNEMENTS){fusion 1=1}{validite!=0}{validite<#DATE}{stade_relance>0}{compte DISTINCT(id_auteur)}>
+		<strong>#COMPTE{id_auteur}</strong>
+	</BOUCLE_abonnes_relances>
+		<strong>0</strong>
+	<//B_abonnes_relances>
+	</li>
+	<li>
+	<:abo:nombre_abonnes_inscrits:>
+	<BOUCLE_abonnes_inscrits(AUTEURS_ELARGIS){fusion 1=1}{compte DISTINCT(id_auteur)}>
+		<strong>#COMPTE{id_auteur}</strong>
+	</BOUCLE_abonnes_inscrits>
+		<strong>0</strong>
+	<//B_abonnes_inscrits>
+	</li>
+	</ul>
+</div>
+
+<strong><:abo:abonnements:></strong>
+
+
 <B_types>
 <table class="liste">
 <thead>
@@ -42,7 +85,7 @@
 </table>
 </B_types>
 
-<h2><:abo:numeros_payants:></h2>
+<strong><:abo:numeros_payants:></strong>
 <:abo:nombre_acheteurs_differents:>
 <BOUCLE_acheteurs(AUTEURS_ELARGIS_ARTICLES){fusion 1=1}{statut_paiement=ok}{compte DISTINCT(id_auteur_elargi)}>
 #COMPTE{id_auteur_elargi}
@@ -84,35 +127,7 @@
 <!--/#navigation-->
 
 
-<div class="stats_generales">
-	<:abo:nombre_abonnes_a_jour:>
-	<BOUCLE_abonnes_a_jour(AUTEURS_ELARGIS_ABONNEMENTS){fusion 1=1}{validite>#DATE}{compte DISTINCT(id_auteur)}>
-		<strong>#COMPTE{id_auteur}</strong>
-	</BOUCLE_abonnes_a_jour>
-		<strong>0</strong>
-	<//B_abonnes_a_jour>
--
-	<:abo:nombre_abonnes_dechus:>
-	<BOUCLE_abonnes_dechus(AUTEURS_ELARGIS_ABONNEMENTS){fusion 1=1}{validite!=0}{validite<#DATE}{compte DISTINCT(id_auteur)}>
-		<strong>#COMPTE{id_auteur}</strong>
-	</BOUCLE_abonnes_dechus>
-		<strong>0</strong>
-	<//B_abonnes_dechus>	
--
-	<:abo:nombre_abonnes_relances:>
-	<BOUCLE_abonnes_relances(AUTEURS_ELARGIS_ABONNEMENTS){fusion 1=1}{validite!=0}{validite<#DATE}{stade_relance>0}{compte DISTINCT(id_auteur)}>
-		<strong>#COMPTE{id_auteur}</strong>
-	</BOUCLE_abonnes_relances>
-		<strong>0</strong>
-	<//B_abonnes_relances>
--
-	<:abo:nombre_abonnes_inscrits:>
-	<BOUCLE_abonnes_inscrits(AUTEURS_ELARGIS){fusion 1=1}{compte DISTINCT(id_auteur)}>
-		<strong>#COMPTE{id_auteur}</strong>
-	</BOUCLE_abonnes_inscrits>
-		<strong>0</strong>
-	<//B_abonnes_inscrits>
-</div>
+
 
 <div class="stats_liens_mois">
 <p>
@@ -158,8 +173,8 @@
 </BOUCLE_labonnement>
 <BOUCLE_inscrits_ce_mois_ci(AUTEURS_ELARGIS_ABONNEMENTS auteurs_elargis) {mois_relatif}{id_abonnement}{!par date}>
 <tr class="tr_liste">
-	<td>#PRENOM</td>
-	<td>#NOM_FAMILLE</td>
+	<td onclick="location.href='./?exec=auteur_infos&id_auteur=#ID_AUTEUR'">#PRENOM</td>
+	<td onclick="location.href='./?exec=auteur_infos&id_auteur=#ID_AUTEUR'">#NOM_FAMILLE</td>
 	<td>#ADRESSE</td>
 	<td>#CODE_POSTAL</td>
 	<td>#VILLE</td>
