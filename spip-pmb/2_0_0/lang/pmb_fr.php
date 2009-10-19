@@ -60,6 +60,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'author_comment' => 'Commentaire',
 'author_lieu' => 'Lieu',
 'author_ville' => 'Ville',
-'author_pays' => 'Pays'
+'author_pays' => 'Pays',
+'decouvrir' => 'd&eacute;couvrir',
+'publisher_address1' => 'Adresse',
+'publisher_address2' => 'Adresse (suite)',
+'publisher_zipcode' => 'CP',
+'publisher_city' => 'Ville',
+'publisher_country' => 'Pays',
+'publisher_web' => 'Site internet'
 );
 ?>

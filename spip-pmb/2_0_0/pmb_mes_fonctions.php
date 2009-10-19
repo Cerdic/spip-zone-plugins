@@ -186,40 +186,54 @@ function pmb_collection_extraire($id_collection, $url_base, $pmb_page=1, $mode='
 
 }
 
-function pmb_editeur_extraire($id_editeur, $url_base, $pmb_page=1, $mode='auto') {
-	$tableau_resultat = Array();
-	
-	if ($htmldom = pmb_charger_page($url_base, "index.php?lvl=publisher_see&page=".$pmb_page."&id=".$id_editeur,$mode)) {
-			$tableau_resultat[0] = Array();
-			$tableau_resultat[0]['nav_bar'] = $htmldom->find('.navbar',0)->outertext;
-			$tableau_resultat[0]['nav_bar'] = pmb_transformer_nav_bar($tableau_resultat[0]['nav_bar']);
-			$tableau_resultat[0]['titre_editeur'] = $htmldom->find('#aut_see h3',0)->innertext;
-			$tableau_resultat[0]['collections_editeur'] = $htmldom->find('#aut_see ul',0)->outertext;
-			$infos_editeur = $htmldom->find('#aut_see p');
-			$tableau_resultat[0]['infos_editeur'] = '';
-			foreach($infos_editeur as $p_editeur) {
-				$tableau_resultat[0]['infos_editeur'] .= $p_editeur->outertext;
-			}
-			
-			$resultats_recherche = $htmldom->find('.notice-child');
-			$tableau_resultat[0]['nb_resultats'] = count($resultats_recherche);
-			$i = 1;
-			foreach($resultats_recherche as $res) {
-				$tableau_resultat[$i] = Array();				
-				pmb_parser_notice_apercu($res, $tableau_resultat[$i]);
-				$i++;
-			}	
-	}
-	return $tableau_resultat;
-
-}
-
-function pmb_auteur_extraire($id_auteur, $url_base) {
+function pmb_editeur_extraire($id_editeur, $debut=0, $nbresult=5, $id_session=0) {
 	$tableau_resultat = Array();
 	
 	pmb_ws_charger_wsdl($ws, $url_base);
 	try {
-	      $result = $ws->pmbesAuthors_get_author_information_and_notices($id_auteur,0);
+	      $result = $ws->pmbesPublishers_get_publisher_information_and_notices($id_editeur,$id_session);
+	      if ($result) {
+		  $tableau_resultat['publisher_id'] = $result['information']->publisher_id;
+		  $tableau_resultat['publisher_name'] = $result['information']->publisher_name;
+		  $tableau_resultat['publisher_address1'] = $result['information']->publisher_address1;
+		  $tableau_resultat['publisher_address2'] = $result['information']->publisher_address2;
+		  
+
+		  $tableau_resultat['publisher_zipcode'] = $result['information']->publisher_zipcode;
+		  $tableau_resultat['publisher_city'] = $result['information']->publisher_city;
+		  $tableau_resultat['publisher_country'] = $result['information']->publisher_country;
+		  $tableau_resultat['publisher_web'] = $result['information']->publisher_web;
+		  $tableau_resultat['publisher_comment'] = $result['information']->publisher_comment;
+		   $tableau_resultat['notice_ids'] = Array();
+
+		  $liste_notices = Array();
+		  $cpt=0;
+		  foreach($result['notice_ids'] as $cle=>$valeur) {
+		    if (($cpt>=$debut) && ($cpt<$nbresult+$debut)) $liste_notices[] = $valeur;
+		    $cpt++;
+		  }
+		  pmb_ws_recuperer_tab_notices($liste_notices, $ws, $tableau_resultat['notice_ids']);
+		  $tableau_resultat['notice_ids'][0]['nb_resultats'] = $cpt;
+
+		  $cpt=0;
+		  foreach($liste_notices as $notice) {
+		    $tableau_resultat['notice_ids'][$cpt]['id'] = $notice;
+		    $cpt++;
+		  }
+		}
+	} catch (SoapFault $fault) {
+		print("Erreur : ".$fault->faultcode." : ".$fault->faultstring);
+	} 
+	return $tableau_resultat;
+
+}
+
+function pmb_auteur_extraire($id_auteur, $debut=0, $nbresult=5, $id_session=0) {
+	$tableau_resultat = Array();
+	
+	pmb_ws_charger_wsdl($ws, $url_base);
+	try {
+	      $result = $ws->pmbesAuthors_get_author_information_and_notices($id_auteur,$id_session);
 	      if ($result) {
 		  $tableau_resultat['author_id'] = $result['information']->author_id;
 		  $tableau_resultat['author_type'] = $result['information']->author_type;
@@ -243,10 +257,13 @@ function pmb_auteur_extraire($id_auteur, $url_base) {
 		  $tableau_resultat['notice_ids'] = Array();
 
 		  $liste_notices = Array();
+		  $cpt=0;
 		  foreach($result['notice_ids'] as $cle=>$valeur) {
-		    $liste_notices[] = $valeur;
+		    if (($cpt>=$debut) && ($cpt<$nbresult+$debut)) $liste_notices[] = $valeur;
+		    $cpt++;
 		  }
 		  pmb_ws_recuperer_tab_notices($liste_notices, $ws, $tableau_resultat['notice_ids']);
+		   $tableau_resultat['notice_ids'][0]['nb_resultats'] = $cpt;
 		  $cpt=0;
 		  foreach($liste_notices as $notice) {
 		    $tableau_resultat['notice_ids'][$cpt]['id'] = $notice;

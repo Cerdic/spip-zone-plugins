@@ -44,7 +44,7 @@
               <BOUCLE_tab_resultat1(POUR){tableau #GET{tab_locations}}>
                 <li>
                     	<h3><a href="[(#SELF|parametre_url{id_section,[(#GET{tab_locations}|pmb_tableau2_valeur{#CLE,'location_id'})]}|parametre_url{titre_section,[(#GET{tab_locations}|pmb_tableau2_valeur{#CLE,'location_caption'})]}|parametre_url{look_ALL,1})]">[(#GET{tab_locations}|pmb_tableau2_valeur{#CLE,'location_caption'})]</a></h3>
-                	<a class="lire-la-suite" title="[(#GET{tab_locations}|pmb_tableau2_valeur{#CLE,'location_caption'}|texte_backend)]" href="[(#SELF|parametre_url{id_section,[(#GET{tab_locations}|pmb_tableau2_valeur{#CLE,'location_id'})]}|parametre_url{titre_section,[(#GET{tab_locations}|pmb_tableau2_valeur{#CLE,'location_caption'})]}|parametre_url{look_ALL,1})]"><:decouvrir:> +</a>
+                	<a class="lire-la-suite" title="[(#GET{tab_locations}|pmb_tableau2_valeur{#CLE,'location_caption'}|texte_backend)]" href="[(#SELF|parametre_url{id_section,[(#GET{tab_locations}|pmb_tableau2_valeur{#CLE,'location_id'})]}|parametre_url{titre_section,[(#GET{tab_locations}|pmb_tableau2_valeur{#CLE,'location_caption'})]}|parametre_url{look_ALL,1})]"><:pmb:decouvrir:> +</a>
                 </li>
                 </BOUCLE_tab_resultat1>
             </ul>
@@ -62,7 +62,7 @@
 			  [(#REM|?{'','<img />'}|inserer_attribut{class,spip_logos}|inserer_attribut{src,[(#GET{tab_sections}|pmb_tableau2_valeur{#CLE,'section_image'}|copie_locale)]}image_reduire{120,140})]
 			]
                     	<h3><a href="[(#SELF|parametre_url{id_section,[(#GET{tab_sections}|pmb_tableau2_valeur{#CLE,'section_id'})]}|parametre_url{titre_section,[(#GET{tab_sections}|pmb_tableau2_valeur{#CLE,'section_caption'})]}|parametre_url{look_ALL,1})]">[(#GET{tab_sections}|pmb_tableau2_valeur{#CLE,'section_caption'})]</a></h3>
-                	<a class="lire-la-suite" title="[(#GET{tab_sections}|pmb_tableau2_valeur{#CLE,'section_caption'}|texte_backend)]" href="[(#SELF|parametre_url{id_section,[(#GET{tab_sections}|pmb_tableau2_valeur{#CLE,'section_id'})]}|parametre_url{titre_section,[(#GET{tab_sections}|pmb_tableau2_valeur{#CLE,'section_caption'})]}|parametre_url{look_ALL,1})]"><:decouvrir:> +</a>
+                	<a class="lire-la-suite" title="[(#GET{tab_sections}|pmb_tableau2_valeur{#CLE,'section_caption'}|texte_backend)]" href="[(#SELF|parametre_url{id_section,[(#GET{tab_sections}|pmb_tableau2_valeur{#CLE,'section_id'})]}|parametre_url{titre_section,[(#GET{tab_sections}|pmb_tableau2_valeur{#CLE,'section_caption'})]}|parametre_url{look_ALL,1})]"><:pmb:decouvrir:> +</a>
                 </li>
                 </BOUCLE_tab_resultat2>
             </ul>
