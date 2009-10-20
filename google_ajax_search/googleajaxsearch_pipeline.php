@@ -18,7 +18,7 @@ function googleajaxsearch_insert_head($flux){
       var recherche = $(\'#searchcontrol span\').text();
       var searchControl = new google.search.SearchControl();      
       var siteSearch = new google.search.WebSearch();
-      siteSearch.setUserDefinedLabel("'.$nom_site.'");
+      siteSearch.setUserDefinedLabel("'.supprimer_tags($nom_site).'");
       siteSearch.setUserDefinedClassSuffix("siteSearch");
       siteSearch.setSiteRestriction("'.$adresse_site.'");
       options = new google.search.SearcherOptions();
