@@ -18,6 +18,7 @@ function cextras_objets_valides(){
 		'rubrique'    => _T('cextras:table_rubrique'),
 		'site'        => _T('cextras:table_site')
 	));
+	ksort($objets_extensibles);
 	
 	foreach ($objets_extensibles as $objet => $traduction) {
 		$objets[$objet] = array(
