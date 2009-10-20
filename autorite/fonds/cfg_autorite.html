@@ -243,8 +243,8 @@
 
     <p id="espace_wiki_motsclef_qui">
       <:autorite:espace_wiki_mots_cles_qui:>  
-        <br />
-        <label><:autorite:ouvrir_redacs:>
+        <br /><br />
+        <label><:autorite:ouvrir_redacs:><br />
             #SET{selected,#CONFIG{autorite/espace_wiki_motsclef_redacteurs,#ARRAY}}
             <select name="espace_wiki_motsclef_redacteurs" id="espace_wiki_motsclef_redacteurs">
                 [(#REM) Mots clef Wiki Redacteurs]
@@ -259,7 +259,7 @@
         </label>
 
         <br />
-        <label><:autorite:ouvrir_visiteurs_enregistres:>
+        <label><:autorite:ouvrir_visiteurs_enregistres:><br />
             #SET{selected,#CONFIG{autorite/espace_wiki_motsclef_visiteurs,#ARRAY}}
             <select name="espace_wiki_motsclef_visiteurs" id="espace_wiki_motsclef_visiteurs">
                 [(#REM) Mots clef Wiki Visiteurs]
@@ -275,7 +275,7 @@
 
         <br />
 
-        <label><:autorite:ouvrir_visiteurs_tous:>
+        <label><:autorite:ouvrir_visiteurs_tous:><br />
             #SET{selected,#CONFIG{autorite/espace_wiki_motsclef_anonyme,#ARRAY}}
             <select name="espace_wiki_motsclef_anonyme" id="espace_wiki_motsclef_anonyme">
                 [(#REM) Mots clef Wiki Anonyme]
@@ -382,7 +382,7 @@
 <br />
 <select name="statut_auteur_rubrique">
 	<option value=""[ selected="(#ENV{statut_auteur_rubrique}|?{'',selected})"]><:autorite:admins:></option>
-	<option value="1"[ selected="(#ENV{statut_auteur_rubrique}|=={1}|?{selected})"]><:autorite_admins_redacs:></option>
+	<option value="1"[ selected="(#ENV{statut_auteur_rubrique}|=={1}|?{selected})"]><:autorite:admins_redacs:></option>
 	<option value="2"[ selected="(#ENV{statut_auteur_rubrique}|=={2}|?{selected})"]><:autorite:tous:></option>
 	<option value="-1"[ selected="(#ENV{statut_auteur_rubrique}|=={-1}|?{selected})"]><:autorite:personne:></option>
 </select>

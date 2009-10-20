@@ -19,7 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'auteur_message_heure' => 'L&#39;auteur du message, pendant une heure',
 'auteur_modifie_article' => '<strong>Auteur modifie article</strong> : chaque r&#233;dacteur peut modifier les articles publi&#233;s dont il est l&#39;auteur (et, par cons&#233;quent, mod&#233;rer le forum et la p&#233;tition associ&#233;s).
 	<br />
-	<i>N.&nbsp;B. : cette option s&#39;applique aussi aux visiteurs enregistr&#233;s, s&#39;ils sont auteurs et si une interface sp&#233;cifique est pr&#233;vue.</i>',
+	<i>N.B. : cette option s&#39;applique aussi aux visiteurs enregistr&#233;s, s&#39;ils sont auteurs et si une interface sp&#233;cifique est pr&#233;vue.</i>',
 'auteur_modifie_email' => '<strong>R&#233;dacteur modifie email</strong> : chaque r&#233;dacteur peut modifier son email sur sa fiche d&#39;informations personnelles.',
 'auteur_modifie_forum' => '<strong>Auteur mod&#232;re forum</strong> : chaque r&#233;dacteur peut mod&#233;rer le forum des articles dont il est l&#39;auteur.',
 'auteur_modifie_petition' => '<strong>Auteur mod&#232;re p&#233;tition</strong> : chaque r&#233;dacteur peut mod&#233;rer la p&#233;tition des articles dont il est l&#39;auteur.',
@@ -33,7 +33,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'config_auteurs_statut' => 'A la cr&#233;ation d&#39;un auteur, quel est le <b>statut par d&#233;faut</b> ?',
 'config_site' => 'Configuration du site',
 'config_site_qui' => 'Qui peut <strong>modifier la configuration</strong> du site ?',
-'config_site' => 'Configuration du site',
 
 //D
 'descriptif_1' => 'Cette page de configuration est r&#233;serv&#233;e au webmestre du site :',
@@ -48,7 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 <a href='http://www.spip-contrib.net/-Autorite-' class='spip_out'>Cf. documentation</a>
 ",
 'deja_defini' => 'Les autorisations suivantes sont d&#233;j&#224; d&#233;finies par ailleurs :',
-'deja_defini_suite' => 'Le plugin &#171;&nbsp;Autorit&#233;&nbsp;&#187; ne peut pas les modifier&nbsp; certains des r&#233;glages ci-dessous risquent par cons&#233;quent de ne pas fonctionner.
+'deja_defini_suite' => 'Le plugin &#171;&nbsp;Autorit&#233;&nbsp;&#187; ne peut pas les modifier certains des r&#233;glages ci-dessous risquent par cons&#233;quent de ne pas fonctionner.
 	<br />Pour r&#233;gler ce probl&#232;me, vous devrez v&#233;rifier si votre fichier <tt>mes_options.php</tt> (ou un autre plugin actif) a d&#233;fini ces fonctions.',
 'details_option_auteur' => '<small><br />Pour le moment, l&#39;option &#171;&#160;auteur&#160;&#187; ne fonctionne que pour les auteurs enregistr&#233;s (forums sur abonnement, par exemple). Et, si elle est activ&#233;e, les administrateurs du site ont aussi la capacit&#233; d&#39;&#233;diter les forums.
 	</small>',
