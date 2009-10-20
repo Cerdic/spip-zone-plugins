@@ -1,0 +1,22 @@
+<BOUCLE_afficher_contenu(CHATS){id_chat=#ENV{id}}{tout}>
+<div class="champ contenu_nom[ (#NOM*|strlen|?{'',vide})]">
+	<div class='label'><:chats:label_nom:></div>
+	<div dir='#LANG_DIR' class='#EDIT{nom} nom'>#NOM</div>
+</div>
+<div class="champ contenu_race[ (#RACE*|strlen|?{'',vide})]">
+	<div class='label'><:chats:label_race:></div>
+	<div dir='#LANG_DIR' class='#EDIT{race} race'>#RACE</div>
+</div>
+<div class="champ contenu_robe[ (#ROBE*|strlen|?{'',vide})]">
+	<div class='label'><:chats:label_robe:></div>
+	<div dir='#LANG_DIR' class='#EDIT{robe} robe'>#ROBE</div>
+</div>
+<div class="champ contenu_annee_naissance[ (#ANNEE_NAISSANCE*|strlen|?{'',vide})]">
+	<div class='label'><:chats:label_annee_naissance:></div>
+	<div dir='#LANG_DIR' class='#EDIT{annee_naissance} annee_naissance'>#ANNEE_NAISSANCE</div>
+</div>
+<div class="champ contenu_infos[ (#INFOS*|strlen|?{'',vide})]">
+	<div class='label'><:chats:label_infos:></div>
+	<div dir='#LANG_DIR' class='#EDIT{infos} infos'>#INFOS</div>
+</div>
+</BOUCLE_afficher_contenu>

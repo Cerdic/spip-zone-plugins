@@ -1,0 +1,38 @@
+<BOUCLE_si_autorise(CONDITION){si (#ID_CHAT|intval|et{#AUTORISER{voir,chat,#ID_CHAT}})}>
+<BOUCLE_chat(CHATS){id_chat}{tout}>
+<div class='fiche_objet'>
+	[(#AUTORISER{modifier,chat,#ID_CHAT})
+		<div class='bandeau_actions'>
+			[(#URL_ECRIRE{chat_edit}
+				|parametre_url{id_chat,#ID_CHAT}
+				|parametre_url{retour,#SELF}
+				|icone{<:chats:action_modifier:>, #CHEMIN{images/chat-24.png}, #LANG_RIGHT, edit.gif})]
+		</div>
+	]
+
+
+	<h1>#NOM</h1>
+
+	<div id='wysiwyg'>
+		[(#PIPELINE{afficher_contenu_objet,[(#ARRAY{
+			args,[(#ARRAY{
+				type,chat,
+				id_objet,#ID_CHAT,
+				contexte,[(#ARRAY{
+					id_chat,#ID_CHAT})]})],
+			data,[(#INCLURE{fond=prive/contenu/chat,id=#ID_CHAT})]})]})]
+	</div>
+</div>
+
+<!--#navigation-->
+[(#REM) Ce pipeline charge prive/infos/$type ]
+[<div class='cadre cadre-info'>
+	(#PIPELINE{boite_infos,[(#ARRAY{
+		args,[(#ARRAY{
+			type,chat,
+			id,#ID_CHAT})],
+		data,''})]})
+</div>]
+<!--/#navigation-->
+</BOUCLE_chat>
+</BOUCLE_si_autorise>

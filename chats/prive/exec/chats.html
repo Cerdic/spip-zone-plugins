@@ -1,0 +1,19 @@
+[(#AUTORISER{voir,chats})
+	<h1><:chats:liste_des_chats:></h1>
+
+	<div class='ajax'>
+	<INCLURE{fond=inclure/liste_chats,env,ajax} />
+	</div>
+
+	<!--#navigation-->
+	<div class='cadre cadre-info'>
+		<p><:chats:description_chats:></p>
+
+		[(#AUTORISER{modifier,chat})
+			[(#URL_ECRIRE{chat_edit}
+				|parametre_url{new,oui}
+				|icone{<:chats:action_ajouter:>, #CHEMIN{images/chat-24.png}, center, creer.gif})]
+		]
+	</div>
+	<!--/#navigation-->
+]

@@ -1,0 +1,50 @@
+<plugin>
+	<nom>Chats (plugin d'exemple)</nom>
+	<auteur>Matthieu Marcillaud</auteur>
+	<version>1.0</version>
+	<version_base>1.1</version_base>
+	<install>base/chats_upgrade.php</install>
+
+	
+	<etat>stable</etat>
+	<description>
+		Ce plugin est un exemple de cr&eacute;ation
+		d'un nouvel objet &eacute;ditorial dans SPIP
+	</description>
+	<lien>http://marcimat.magraine.net/?article344</lien>
+	<icon>images/chat-128.png</icon>
+	<prefix>chats</prefix>
+	
+	<!--
+		charger inc/presentation 
+		pour la fonction f_boite_infos du pipeline boite_infos
+		c'est vraiment nul ! Faudra corriger cela !
+	-->
+	<fonctions>chats_fonctions.php</fonctions>
+	
+	<bouton id='chats' parent='naviguer'>
+		<icone>images/chat-24.png</icone>
+		<titre>chats:chats</titre>
+	</bouton>
+
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/chats.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/chats.php</inclure>
+	</pipeline>
+	
+	<!-- avec plugin champs extras 2 -->
+	<pipeline>
+		<nom>objets_extensibles</nom>
+		<inclure>chats_pipelines.php</inclure>
+	</pipeline>
+	
+	<necessite id="SPIP" version="[2.0.9;]" />
+	<!-- facilitons les champs de formulaires -->
+	<necessite id="saisies" version="[1.5.1;]" />
+	<!-- filtre |icone et boucles CONDITIONS -->
+	<necessite id="spip_bonux" version="[1.8.4;]" />
+</plugin>
