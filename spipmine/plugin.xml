@@ -16,7 +16,7 @@
 	[Doc en ligne, forum, FAQ sur SPIP-Contrib->http://www.spip-contrib.net/Plugin-Spipmine?var_mode=preview]
 	</lien>
 
-	<description>
+	<!--description>
 Spimine permet de g&eacute;rer tous les aspects d'une activit&eacute; de services, plut&ocirc;t orient&eacute;e web. <br>
 
 Il comprend 3 modules sp&eacute;cifiques fonctionnant ensemble et destin&eacute;s &agrave; la <em>gestion interne</em>, mettant en jeu <strong>8 tables principales</strong> :
@@ -26,7 +26,7 @@ _ - module 3. "factures" avec les tables [factures->../?spip.php&amp;page=table:
 
 _ Nota : les modules 2. et 3. ont besoin du module 1. pour fonctionner[[factures et projets n'existent pas sans client]].
 
-Spipmine comporte <strong>7 tables annexes</strong> permettant de caract&eacute;riser les tables des modules sp&eacute;cifiques : [spipmine_clients_rubriques->../?spip.php&amp;page=table:spipmine_clients_rubriques][[permet d'attribuer une ou plusieurs rubriques &agrave; un client]], [spipmine_types_actions->../?spip.php&amp;page=table:spipmine_types_actions], [spipmine_types_documents->../?spip.php&amp;page=table:spipmine_types_documents], [spipmine_types_facturation->../?spip.php&amp;page=table:spipmine_types_facturation], [spipmine_types_livrables->../?spip.php&amp;page=table:spipmine_types_livrables], [spipmine_types_prestations->../?spip.php&amp;page=table:spipmine_types_prestations], [spipmine_types_status->../?spip.php&amp;page=table:spipmine_types_status].
+Spipmine comporte <strong>9 tables annexes</strong> permettant de caract&eacute;riser les tables des modules sp&eacute;cifiques : [spipmine_clients_rubriques->../?spip.php&amp;page=table:spipmine_clients_rubriques][[permet d'attribuer une ou plusieurs rubriques &agrave; un client]], [spipmine_types_actions->../?spip.php&amp;page=table:spipmine_types_actions], [spipmine_types_documents->../?spip.php&amp;page=table:spipmine_types_documents], [spipmine_types_facturation->../?spip.php&amp;page=table:spipmine_types_facturation], [spipmine_types_livrables->../?spip.php&amp;page=table:spipmine_types_livrables], [spipmine_types_prestations->../?spip.php&amp;page=table:spipmine_types_prestations], [spipmine_types_reglements->../?spip.php&amp;page=table:spipmine_types_reglements], [spipmine_types_status->../?spip.php&amp;page=table:spipmine_types_status].
 
 Spipmine comporte 6 modules additionnels moins sp&eacute;cifiques, car r&eacute;alis&eacute;s sous forme de squelettes Spip, &agrave; partir des tables par d&eacute;faut (rubriques/articles/mots-cl&eacute;), et destin&eacute;s &agrave; de la gestion <em>client</em> :</p>
 _ - maquettes
@@ -34,7 +34,7 @@ _ - cahiers des charges
 _ - benchmarks de sites
 _ - cahiers de d&eacute;veloppement et de recette
 _ - documentations
-_ - formations</description>
+_ - formations</description-->
 	
 	<prefix>spipmine</prefix>
 	

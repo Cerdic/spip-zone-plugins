@@ -71,6 +71,8 @@ function spipmine_declarer_tables_principales($tables_principales){
 		"prenom"				=>	"varchar(50) default NULL",
 		"nom"					=>	"varchar(50) default NULL",
 		"fonction"				=>	"varchar(50) default NULL",
+		"telephone" 			=>	"varchar(25) default NULL",
+		"email"					=>	"varchar(50) default NULL",
 		"facture"				=>	"tinyint(1) default NULL",
 		"commentaire"			=>	"mediumtext"
 	);

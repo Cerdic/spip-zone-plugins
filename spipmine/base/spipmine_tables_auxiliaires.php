@@ -139,6 +139,20 @@ function spipmine_declarer_tables_auxiliaires($tables_auxiliaires){
 		'key' => &$spipmine_types_status_key
 	);
 
+	// structure de la table spipmine_types_reglements
+	$spipmine_types_reglements = array(
+		"id_type_reglement"		=>	"int(11) NOT NULL auto_increment",
+		"nom_type_reglement"	=>	"varchar(50) default NULL",
+		"commentaires"			=>	"mediumtext"
+	);
+	$spipmine_types_reglements_key = array(
+		"PRIMARY KEY"			=>	"id_type_reglement"
+	);
+	$tables_auxiliaires['spipmine_types_reglements'] = array(
+		'field' => &$spipmine_types_reglements,
+		'key' => &$spipmine_types_reglements_key
+	);
+
 	
 	
 	return $tables_auxiliaires;
