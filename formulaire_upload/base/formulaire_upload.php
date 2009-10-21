@@ -1,10 +1,10 @@
 <?php
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+function FormulaireUpload_declarer_tables_interfaces($interface){
+	// permettre <BOUCLE_a(AUTEURS){id_document}>
+	$interface['tables_jointures']['spip_auteurs'][]= 'documents_liens';
 
-
-// permettre <BOUCLE_a(AUTEURS){id_document}>
-global $tables_jointures;
-$tables_jointures['spip_auteurs']['id_document']= 'documents_liens';
+	return $interface;
+}
 
 ?>
