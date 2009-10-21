@@ -72,12 +72,10 @@ function formulaires_inscription2_charger_dist($id_auteur = NULL,$redirect = nul
                 $champs[$valeurs] = trim(_request($valeurs));
             }
             if($valeurs == 'naissance'){
-	            if(preg_match("/([0-9]{4})-([0-9]{2})-([0-9]{2})/",_request($valeurs),$date_naissance)){
-					include_spip('inc/date');
-					$champs['annee'] = $date_naissance[1];
-					$champs['mois'] = $date_naissance[2];
-					$champs['jour'] = $date_naissance[3];
-				}
+				include_spip('inc/date');
+				$champs['annee'] = _request('annee');
+				$champs['mois'] = _request('mois');
+				$champs['jour'] = _request('jour');
             }
 	    }
 	}
@@ -293,8 +291,7 @@ function formulaires_inscription2_traiter_dist($id_auteur = NULL,$redirect = nul
 	if(($mode == 'inscription_pass') || ($mode == 'modification_auteur_pass')){
 		if (strlen(_request('password')) != 0)
 			$new_pass = _request('password');
-			
-			
+
 		if (strlen($new_pass)>0) {
 			include_spip('inc/acces');
 			$htpass = generer_htpass($new_pass);
@@ -420,7 +417,7 @@ function formulaires_inscription2_traiter_dist($id_auteur = NULL,$redirect = nul
 		}
 		if($traiter_plugin['message_ok'])
 			$message = $traiter_plugin['message_ok'];
-		$editable = false;
+			$editable = false;
     }
 
 	// Invalider les caches
