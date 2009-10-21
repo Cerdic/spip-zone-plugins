@@ -61,7 +61,7 @@ function md_afficher_liste($largeurs, $table, $styles = '') {
   reset($table);
   echo "\n";
   while (list(,$t) = each($table)) {
-	if (eregi("msie", $browser_name)) $msover = " onMouseOver=\"changeclass(this,'tr_liste_over');\" onMouseOut=\"changeclass(this,'tr_liste');\"";
+	if (stripos($browser_name,"msie" )!==false) $msover = " onMouseOver=\"changeclass(this,'tr_liste_over');\" onMouseOut=\"changeclass(this,'tr_liste');\"";
 	reset($largeurs);
 	if ($styles) reset($styles);
 	list($texte, $sel) = each($t);
