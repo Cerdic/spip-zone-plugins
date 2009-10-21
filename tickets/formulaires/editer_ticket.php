@@ -20,7 +20,7 @@ include_spip('inc/editer');
 function formulaires_editer_ticket_charger($id_ticket='new', $retour='', $config_fonc='tickets_edit_config', $row=array(), $hidden=''){
 	// mettre une valeur new pour formulaires_editer_objet_charger()
 	
-	if (!$id_ticket) $id_ticket='new';
+	if (!intval($id_ticket)) $id_ticket='oui'; // oui pour le traitement de l'action (new, c'est pas suffisant)
 
 	if (!autoriser('ecrire', 'ticket', $id_ticket)) {
 		$editable = false;
@@ -29,7 +29,7 @@ function formulaires_editer_ticket_charger($id_ticket='new', $retour='', $config
 		$editable = true;
 	}
 	// si nouveau ticket et qu'une url d'exemple est donnee dans l'environnement, on la colle
-	if ((!$id_ticket or $id_ticket=='new') and ($exemple = _request('exemple'))) {
+	if ((!$id_ticket or $id_ticket=='oui') and ($exemple = _request('exemple'))) {
 		$valeurs['exemple'] = $exemple;
 	}
 	$valeurs['editable'] = $editable;
