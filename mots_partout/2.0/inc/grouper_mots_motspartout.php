@@ -44,4 +44,3 @@ function calcul_branchemot ($generation) {
 	}
 }
 
-?>

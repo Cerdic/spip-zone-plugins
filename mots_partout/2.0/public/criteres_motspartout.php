@@ -28,6 +28,4 @@ function critere_branchemot($idb, &$boucles, $crit)
 	  . ")";
 
 	$boucle->where[]= $crit->cond ? "($arg ? $c : 1=1)" : $c;
-}	
- 
-?>
+}

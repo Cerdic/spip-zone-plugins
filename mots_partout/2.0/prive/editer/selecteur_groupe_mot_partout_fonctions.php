@@ -17,4 +17,3 @@ function critere_GROUPES_MOTS_table_dist($idb,&$boucles, $crit) {
 	}
 }*/
 
-?>

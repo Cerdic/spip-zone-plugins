@@ -314,4 +314,3 @@ function date_formulaire_legender($date, $id_document) {
 
 }
 
-?>
