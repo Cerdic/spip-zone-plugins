@@ -15,24 +15,17 @@ function formulaires_exporter_savecfg_traiter_dist() {
 }
 function exporter_savecfg() {
 	$fichier = '';
-	$i = 0;
+	$save = array();
 	foreach (_request('export') as $key=>$value) {
 		if ($value == 'on') {
-		 $sfg = sql_fetsel(array('fond', 'valeur', 'titre'), 'spip_savecfg', 'id_savecfg='.sql_quote($key));
-		if ($i > 0)
-			$fichier .= ':!;!:';
-		$fichier .= '!:;:!';
-		$fichier .= $sfg['fond'];
-		$fichier .= '!:;:!';
-		$fichier .= $sfg['valeur'];
-		$fichier .= '!:;:!';
-		$fichier .= $sfg['titre'];
-		$i++;
+		$sfg = sql_fetsel(array('fond', 'valeur', 'titre', 'date'), 'spip_savecfg', 'id_savecfg='.sql_quote($key));
+		$save[$sfg['titre']] = array( 'id_savecfg' => $key, 'fond' => $sfg['fond'], 'valeur' => $sfg['valeur'], 'date' => $sfg['date']);
 		}
 	}
+	$save = serialize($save);
 	header("Content-type: application/cfg");
 	header("Content-disposition: attachment; filename=SaveCFG_" . date("Ymd").".cfg");
-	echo ($fichier);
+	echo ($save);
 	exit;
 	return true;
 }

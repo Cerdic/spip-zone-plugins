@@ -8,13 +8,12 @@ function formulaires_importer_savecfg_charger_dist() {
 function formulaires_importer_savecfg_verifier_dist(){
 	$erreurs = array();
 	if (strtolower(substr(strrchr($_FILES['fichier']['name'], '.'),1)) != 'cfg')
-		$erreurs['message_erreur'] == 'mauvaise extension';
-	$file = explode(':!;!:', file_get_contents($_FILES['fichier']['tmp_name']));
+		$erreurs['message_erreur'] == _T('savecfg:fichier_mauvaise_extension');
+	$file = unserialize(file_get_contents($_FILES['fichier']['tmp_name']));
 	foreach($file as $save=>$value) {
-		$content = explode('!:;:!', $value);
-	if ((!is_array(unserialize($content[2]))) OR (count($content) < 4))
-		$erreurs['message_erreur'] = 'mauvais';
-	}
+		if ((!is_array($file[$save])) OR (count($file[$save]) < 4))
+			$erreurs['message_erreur'] = _T('savecfg:fichier_mauvaise_syntaxe');
+		}
 	return $erreurs;
 }
 function formulaires_importer_savecfg_traiter_dist() {
@@ -22,19 +21,14 @@ function formulaires_importer_savecfg_traiter_dist() {
 	return $message;
 }
 function importer_savecfg($fichier) {
-	$file = explode(':!;!:', file_get_contents($_FILES[$fichier]['tmp_name']));
+	$file = unserialize(file_get_contents($_FILES['fichier']['tmp_name']));
 	foreach($file as $save=>$value) {
-		$content = explode('!:;:!', $value);
-		sql_insertq(
-			'spip_savecfg', 
-			array(
-				'id_savecfg' => $content[0],
-				'fond' => $content[1],
-				'valeur' => $content[2],
-				'titre' => $content[3],
-				'date' => date('Y-m-d H:m:s')
-			)
-		);
+		foreach($file[$save] as $mat=>$content) {
+			if ($mat == 'id_savecfg')
+				$file[$save][$mat] = '';
+			$file[$save]['titre'] = $save;
+		}
+		sql_insertq('spip_savecfg', $file[$save]);
 	}
 	return _T('savecfg:import_ok');
 }
