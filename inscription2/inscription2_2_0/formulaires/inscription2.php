@@ -293,9 +293,9 @@ function formulaires_inscription2_traiter_dist($id_auteur = NULL,$redirect = nul
 	if(($mode == 'inscription_pass') || ($mode == 'modification_auteur_pass')){
 		if (strlen(_request('password')) != 0)
 			$new_pass = _request('password');
-		else
-			$new_pass = _request('pass');
-		if (strlen($new_pass)) {
+			
+			
+		if (strlen($new_pass)>0) {
 			include_spip('inc/acces');
 			$htpass = generer_htpass($new_pass);
 			$alea_actuel = creer_uniqid();
@@ -307,6 +307,7 @@ function formulaires_inscription2_traiter_dist($id_auteur = NULL,$redirect = nul
 			$val['alea_futur'] = $alea_futur;
 			$val['low_sec'] = '';
 		}
+		
 		if(!is_numeric($id_auteur)){
 			$val['statut'] = lire_config('inscription2/statut_nouveau','6forum');
 		}
@@ -314,6 +315,10 @@ function formulaires_inscription2_traiter_dist($id_auteur = NULL,$redirect = nul
 		if(!is_numeric($id_auteur)){
 			$val['statut'] = 'aconfirmer';
 		}
+	}
+	$pass_length = strlen($val['pass']);
+	if($pass_length == 0){
+		unset($val['pass']);
 	}
 
 	//inserer les donnees dans spip_auteurs -- si $id_auteur : mise a jour - autrement : nouvelle entree
