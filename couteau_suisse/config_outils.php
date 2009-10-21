@@ -329,9 +329,9 @@ add_variables( array(
 ), array(
 	'nom' => 'admin_travaux',
 	'format' => _format_NOMBRE,
-	'radio' => array(0 => 'couteauprive:tous', 1 => 'couteauprive:sauf_admin'),
+	'radio' => array(0 => 'couteauprive:tous', 1 => 'couteauprive:sauf_admin', 2 => 'couteauprive:sauf_admin_redac', 3 => 'couteauprive:sauf_identifies'),
 	'defaut' => 0,
-	'code:%s' => "define('_en_travaux_ADMIN', %s);\n",
+	'code' => "define('_en_travaux_PUBLIC', %s);\n",
 ), array(
 	'nom' => 'avertir_travaux',
 	'check' => 'couteauprive:travaux_masquer_avert',

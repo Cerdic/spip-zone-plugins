@@ -523,6 +523,8 @@ Si vous r&eacute;initialisez le plugin en cliquant sur un pack, le Couteau Suiss
 
 	// S
 	'sauf_admin' => 'Tous, sauf les administrateurs',
+	'sauf_admin_redac' => 'Tous, sauf les administrateurs et r&eacute;dacteurs',
+	'sauf_identifies' => 'Tous, sauf les auteurs identifi&eacute;s',
 	'set_options:description' => 'S&eacute;lectionne d\'office le type d&rsquo;interface priv&eacute;e (simplifi&eacute;e ou avanc&eacute;e) pour tous les r&eacute;dacteurs d&eacute;j&agrave; existant ou &agrave; venir et supprime le bouton correspondant du bandeau des petites ic&ocirc;nes.[[%radio_set_options4%]]',
 	'set_options:nom' => 'Type d\'interface priv&eacute;e',
 	'sf_amont' => 'En amont',

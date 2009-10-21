@@ -13,7 +13,19 @@ if($tr_prive = test_espace_prive()) {
 	$tr_acces = ($GLOBALS['auteur_session']['statut']=='0minirezo') || !defined('_en_travaux_PRIVE');
 } else {
 	// public : les admins passent si 'SaufAdmin'
-	$tr_acces = ($GLOBALS['auteur_session']['statut']=='0minirezo') && defined('_en_travaux_ADMIN');
+	if (defined('_en_travaux_PUBLIC')) {
+		switch (_en_travaux_PUBLIC) {
+			case 1:
+				$tr_acces = ($GLOBALS['auteur_session']['statut']=='0minirezo');
+				break;
+			case 2:
+				$tr_acces = ($GLOBALS['auteur_session']['statut']=='0minirezo') || ($GLOBALS['auteur_session']['statut']=='1comite');
+				break;
+			case 3:
+				$tr_acces = ($GLOBALS['auteur_session']['statut']=='0minirezo') || ($GLOBALS['auteur_session']['statut']=='1comite') || ($GLOBALS['auteur_session']['statut']=='6forum');
+				break;
+		}
+	}
 	// tentative pour prendre en compte les autres cas possibles d'exception
 	$tr_acces |=
 		isset($_GET['action']) || isset($_POST['action'])
