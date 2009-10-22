@@ -12,6 +12,9 @@
 	'img_left' => 'Image flottante &agrave; gauche',
 	'img_center' => 'Image centr&eacute;e',
 	'img_right' => 'Image flottante &agrave; droite',
+	'msg_doc_added' => 'Document(s) ajout&eacute;(s)',
+	'msg_doc_deleted' => 'Document(s) supprim&eacute;(s)',
+	'msg_nothing_to_do' => 'Rien &agrave; faire',
 	'Z' => 'ZZzZZzzz'
 
 );

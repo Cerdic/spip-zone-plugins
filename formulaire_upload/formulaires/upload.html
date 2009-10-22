@@ -1,81 +1,29 @@
 <div class="formulaire_spip formulaire_upload">
-
-<form action="#ENV{url}#formulaire_upload" method="post" enctype="multipart/form-data">
-[(#ENV{url_post}|form_hidden)]
-
-
-[(#REM)
-	Ce qui suit est herite du formulaire forum mais ne semble plus servir, a voir...
-]
-
-[<input type="hidden" name="arg" value="(#ENV{arg})" />]
-[<input type="hidden" name="hash" value="(#ENV{hash})" />]
-[<input type="hidden" name="verif_(#ENV{hash})" value="ok" />]
-[<input type="hidden" name="afficher_texte" value="(#ENV{afficher_texte})" />]
-
-
-#ENV{debug}
-
-	<fieldset><legend><:formupload:yourfiles:></legend>
-
-	<B_docs>
-		#ANCRE_PAGINATION
-	<BOUCLE_docs(DOCUMENTS)
-	{id_auteur?}{id_article?}{id_breve?}{id_rubrique?}
-	{!par id_document}{tout}{pagination 3}>
-	<div class="bord_formup">
-	<div class="spip_doc_descriptif spip_doc_logo float#LANG_RIGHT">
-	[(#SET{logo,[(#LOGO_DOCUMENT|#URL_DOCUMENT
-		|inserer_attribut{title,#TYPE_DOCUMENT[
-			- (#TAILLE|taille_en_octets)]})]})]
-	[(#GET{logo}|extraire_attribut{width}|>{78}|?{
-		[(#SET{logo,[(#GET{logo}|image_reduire{140,140}|image_recadre{78,78})]
-	})]})]
-	#GET{logo}
-		[<br />(#DATE|affdate_court)]
-	</div>
-	<div class='float#LANG_RIGHT decrire_doc'>
-		<div class='forboxcheck checkbox'>
-		<input type="checkbox" name="supprimer[]" value="#ID_DOCUMENT" title="<:formupload:doc_delete:>" />
-		</div>
-	
-	<h4 class="#EDIT{titre}">[(#TITRE|sinon{[(#FICHIER|basename|couper{20})]})]</h4>
-	[<div class="spip_doc_descriptif #EDIT{descriptif}">(#DESCRIPTIF|sinon{<:info_descriptif:>})</div>]
-	
-	</div>
-	<br class='nettoyeur' />
-	[(#CONFIG{formupload/insert_code}|?{' ',''})
-	<div class="insert_code">
-		<div class="strong"><:formupload:insert_code:></div>
-		[(#TYPE_DOCUMENT|match{jpg|gif|png}|?{' ',''})
-		<abbr title="<:formupload:img_left:>">&lt;img#ID_DOCUMENT|left&gt;</abbr> <abbr title="<:formupload:img_center:>">&lt;img#ID_DOCUMENT|center&gt;</abbr> <abbr title="<:formupload:img_right:>">&lt;img#ID_DOCUMENT|right&gt;]
-		[(#TYPE_DOCUMENT|match{jpg|gif|png}|?{'',' '})
-		<abbr title="<:formupload:doc_left:>">&lt;doc#ID_DOCUMENT|left&gt;</abbr> <abbr title="<:formupload:doc_center:>">&lt;doc#ID_DOCUMENT|center&gt;</abbr> <abbr title="<:formupload:doc_right:>">&lt;doc#ID_DOCUMENT|right&gt;</abbr>]
-	</div>]
-	</div>
-	</BOUCLE_docs>
-		[<p class="pagination">(#PAGINATION)</p>]
-	</B_docs>
-		[<p class="pagination">(#PAGINATION)</p>]
-	<//B_docs>
-
-	[(#REM) Piege a robots spammeurs ]
-	<p style='display:none;'><label for="nobot"><:antispam_champ_vide:></label>
-	<input type="text" name="nobot" id="nobot" value="#ENV{nobot}" size="10" /></p>
-
-	<div class="inputfile">
-		<label for="fichier"><:formupload:choosefiles:></label>
-		<input type="file" name="fichier" class="forml" style="padding:0; font-size:0.8em" [ accept="(#CONFIG{formupload/files_accepted})"][ maxlength="(#CONFIG{formupload/files_number})"] />
-	
-
-	<p class="spip_bouton"><input type="submit" value="<:bouton_enregistrer:>" /><br style="clear:both;" /></p>
-	</div>
-	
+<br class='bugajaxie' />
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+[(#ENV{editable})
+<form action="#ENV{action}#formulaire_upload" method="post" enctype="multipart/form-data">
+	[(#REM) declarer les hidden qui declencheront le service du formulaire parametre : url d'action ]
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<fieldset>
+		<legend><:formupload:yourfiles:></legend>
+		[(#INCLURE{fond=formulaires/#ENV*{fond_documents}}{env})]
+		<ul>
+			<li class='saisie_fichier[ (#ENV**{erreurs}|table_valeur{fichier}|oui)erreur]'>
+			<div>
+				<label for="fichier"><:formupload:choosefiles:></label>
+				<input type="file" id="fichier" name="fichier"[ accept="(#CONFIG{formupload/files_accepted})"][ maxlength="(#CONFIG{formupload/files_number})"] />
+			</div>
+			</li>
+		</ul>
+		[(#REM) Piege a robots spammeurs ]
+		<p style="display: none;">
+			<label for="nobot_forum"><:antispam_champ_vide:></label>
+			<input type="text" class="text" name="nobot" id="nobot_forum" value="#ENV{nobot}" size="10" />
+		</p>
+		<p class="spip_bouton"><input type="submit" value="<:bouton_enregistrer:>" /><br style="clear:both;" /></p>
 	</fieldset>
 	<br style="clear:both;" />
-
-
+</form>]
 </div>
-</form>
-
-<br style="clear:both" />
