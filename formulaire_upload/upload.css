@@ -1,10 +1,13 @@
 /*pour plugin SPIP formulaire_upload*/
 
-.formulaire_upload .bord_formup{border:1px solid #ccc; margin-top:8px; margin-bottom:8px; padding:3px}
-.formulaire_upload .spip_doc_logo{ width:80px; margin-bottom:8px; text-align:center;}
-.formulaire_upload .floatright{float:right;}
-.formulaire_upload .floatleft{float:left;}
-.formulaire_upload .decrire_doc{width:57%;}
-.formulaire_upload .checkbox{width:10px;}
-.formulaire_upload .strong{font-weight:bold;}
-.formulaire_upload .pagination {width:90%}
+.formulaire_upload .bord_formup { border: 1px solid #ccc; margin: 8px 0; padding: 3px }
+.formulaire_upload .spip_doc_logo { width: 80px; margin-bottom: 8px; text-align: center; }
+.formulaire_upload .spip_doc_logo img { display: block; }
+.formulaire_upload .floatright { float: right; margin: 0 0 5px 10px; }
+.formulaire_upload .floatleft {float: left; margin: 0 10px 5px 0; }
+.formulaire_upload .decrire_doc .choix { margin-bottom: 0.5em; }
+.formulaire_upload .decrire_doc .choix .checkbox { margin: 0; }
+.formulaire_upload .decrire_doc .choix label { vertical-align: top; }
+.formulaire_upload .decrire_doc .spip_doc_descriptif { clear: none; }
+.formulaire_upload .insert_code strong { display: block; margin-bottom: 0.5em; }
+.formulaire_upload .pagination { width: 98% }
