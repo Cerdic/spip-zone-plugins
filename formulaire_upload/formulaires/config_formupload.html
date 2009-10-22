@@ -1,0 +1,47 @@
+
+<!-- autoriser=webmestre -->
+<!-- refus=<:cfg:refus_configuration_webmestre:> -->
+<!-- nom=formupload -->
+
+<div class="formulaire_spip formulaire_configurer formulaire_configurer_formupload">
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	
+<form method="post" action="#ENV{action}"><div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+
+	<ul>
+		<li class="editer_formupload_files_accepted[ (#ENV**{erreurs}|table_valeur{files_accepted}|oui)erreur]">
+			<label for="files_accepted"><:formupload:cfg_lbl_files_accepted:></label>
+			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{files_accepted})</span>]
+			<p class="explication"><:formupload:cfg_inf_files_accepted:></p>
+			<input type="text" name="files_accepted" class="text" id="files_accepted" size="60"
+				value="#ENV*{files_accepted,''}" />
+		</li>
+		
+		<li class="editer_formupload_files_number[ (#ENV**{erreurs}|table_valeur{files_number}|oui)erreur]">
+			<label for="files_number"><:formupload:cfg_lbl_files_number:></label>
+			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{files_number})</span>]
+			<p class="explication"><:formupload:cfg_inf_files_number:></p>
+			<input type="text" name="files_number" class="text" id="files_number" size="60"
+				value="#ENV*{files_number,''}" />
+		</li>
+		
+		<li class="editer_insert_code">
+			<label><:formupload:cfg_lbl_insert_code:></label>
+			<p class="explications"><:formupload:cfg_inf_insert_code:></p>
+			<div class="choix">
+				<input type="checkbox" name="insert_code" class="checkbox" value="non" id="insert_code_oui"[ (#ENV{insert_code}|=={non}|?{'checked="checked"'})] />
+				<label for="insert_code_oui"><:oui:></label>
+			</div>
+		</li>
+		
+	</ul>
+
+	<p class="boutons">
+		<input type="submit" name="_cfg_ok" class="submit" value="<:valider:>" />
+		<input type="submit" name="_cfg_delete" class="submit" value="<:effacer:>" />
+	</p>
+</div></form>
+</div>

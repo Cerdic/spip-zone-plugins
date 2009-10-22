@@ -29,10 +29,11 @@ function formulaires_upload_verifier_dist($objet, $id_objet, $fond_documents){
 }
 
 function formulaires_upload_traiter_dist($objet, $id_objet, $fond_documents){
+	$res = array('editable'=>' ', 'message_ok'=>'');
 	
 	$invalider = false;
 	$type = objet_type($objet);
-	$message = _T("formupload:msg_nothing_to_do");
+	$res['message_ok'] = _T("formupload:msg_nothing_to_do");
 
 	// supprimer des documents ?
 	if (is_array(_request('supprimer')))
@@ -43,7 +44,7 @@ function formulaires_upload_traiter_dist($objet, $id_objet, $fond_documents){
 			$supprimer_document($supprimer);
 			sql_delete('spip_documents_liens', 'id_document='.$supprimer);
 			$invalider = true;
-			$message = _T("formupload:msg_doc_deleted");
+			$res['message_ok'] = _T("formupload:msg_doc_deleted");
 			spip_log("supprimer document ($type)".$supprimer, 'upload');
 		}
 	}
@@ -55,9 +56,9 @@ function formulaires_upload_traiter_dist($objet, $id_objet, $fond_documents){
 		include_spip('action/joindre');
 		$joindre1 = charger_fonction('joindre1', 'inc');
 		if(!$joindre1($files, 'document', $type, $id_objet, 0, $hash, $redirect, $documents_actifs, $iframe_redirect))
-			$message['message_erreur'] = _T('gis:erreur_copie_impossible');
+			$res['message_erreur'] = _T('gis:erreur_copie_impossible');
 		$invalider = true;
-		$message = _T("formupload:msg_doc_added");
+		$res['message_ok'] = _T("formupload:msg_doc_added");
 		spip_log($files, 'upload');
 	}
 
@@ -67,7 +68,7 @@ function formulaires_upload_traiter_dist($objet, $id_objet, $fond_documents){
 		spip_log('invalider', 'upload');
 	}
 
-	return array('message_ok'=>$message);
+	return $res;
 }
 
 ?>

@@ -13,7 +13,7 @@
 			<li class='saisie_fichier[ (#ENV**{erreurs}|table_valeur{fichier}|oui)erreur]'>
 			<div>
 				<label for="fichier"><:formupload:choosefiles:></label>
-				<input type="file" id="fichier" name="fichier" class="multi"[ accept="(#CONFIG{formupload/files_accepted})"][ maxlength="(#CONFIG{formupload/files_number})"] />
+				<input type="file" id="fichier" name="fichier"[ accept="(#CONFIG{formupload/files_accepted})"][ maxlength="(#CONFIG{formupload/files_number})"] />
 			</div>
 			</li>
 		</ul>
@@ -25,5 +25,22 @@
 		<p class="spip_bouton"><input type="submit" value="<:bouton_enregistrer:>" /><br style="clear:both;" /></p>
 	</fieldset>
 	<br style="clear:both;" />
+<script type="text/javascript">
+(function($){
+	$(function(){
+		// si multifile est la, on l'utilise (trop bien)
+		if ($.fn.MultiFile)
+		$('#fichier').MultiFile({
+			[max: (#CONFIG{formupload/files_number}),
+			][accept: '(#CONFIG{formupload/files_accepted})',
+			]STRING: {
+				remove:'<:formupload:remove:>',
+				denied:'<:formupload:msg_format_non_autorise:>', 
+				duplicate:'<:formupload:msg_fichier_doublon:>'
+			}
+		});
+	});
+})(jQuery);
+</script>
 </form>]
 </div>
