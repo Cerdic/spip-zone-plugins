@@ -34,7 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// U
 	'update_impossible' => 'La mise &agrave; jour a &eacute;chou&eacute;.',
-	
+
 	// V
 	'veuillez_patienter' => 'Veuillez patienter...'
 );
