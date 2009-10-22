@@ -114,8 +114,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'html' => 'HTML',
 
 	// I
-	'icone_menu_config' => 'Configuration avanc&eacute;e des utilisateurs',
 	'icone_afficher_utilisateurs' => 'Afficher les utilisateurs',
+	'icone_menu_config' => 'Configuration avanc&eacute;e des utilisateurs',
 	'identification' => 'Identification',
 	'info_connection' => 'Informations de connexion',
 	'info_defaut' => 'Informations obligatoires',
@@ -140,10 +140,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_affordance_form' => 'Param&eacute;trage des formulaires d\'identification',
-	'label_reglement' => 'R&egrave;glement &agrave; valider',
-	'label_reglement_article' => 'Article original du site correspondant au r&egrave;glement',
 	'label_public_reglement' => 'J\'ai lu et j\'accepte le r&egrave;glement',
 	'label_public_reglement_url' => 'J\'ai lu et j\'accepte le <a href="@url@" class="spip_in reglement">r&egrave;glement</a>',
+	'label_reglement' => 'R&egrave;glement &agrave; valider',
+	'label_reglement_article' => 'Article original du site correspondant au r&egrave;glement',
 	'label_validation_numero_international' => 'Forcer les num&eacute;ros de t&eacute;l&eacute;phone &agrave; &ecirc;tre sous la forme internationale',
 	'latitude' => 'Latitude',
 	'legend_affordance_form' => 'Formulaire d\'identification',
@@ -155,8 +155,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'liste_adherents' => 'Voir la liste des utilisateurs',
 	'liste_comptes_titre' => 'Liste des utilisateurs',
 	'login' => 'Nom d\'utilisateur (login)',
-	'longitude' => 'Longitude',
 	'logo_auteur' => 'Logo',
+	'longitude' => 'Longitude',
 
 	// M
 	'mai' => 'mai',
