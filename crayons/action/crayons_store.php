@@ -111,6 +111,18 @@ function crayons_store($options = array()) {
 					}
 
 					$modifs[] = array($type, $modele, $id, $content, $wid);
+					
+					/* aiguillage pour verification de la saisie
+					Pour traitement ulterieur les fonctions de verifications doivent renvoyer $invalides :
+					 $invalides[wid_champ]['msg'] -> message de saisie invalide
+					 $invalides[wid_champ]['retour'] -> caracteres invalides */
+					$f = 'verifier_'.$type.'_'.$modele;
+					if (function_exists($f)) {
+						 if (count( $invalides = $f($modifs) )) {
+							$return['$invalides'] = $invalides;
+						 }
+						 
+					 }
 				}
 			}
 		}
@@ -121,6 +133,10 @@ function crayons_store($options = array()) {
 		   _U('crayons:pas_de_modification') : ' ';
 		$return['$annuler'] = true;
 	}
+	
+	// un champ invalide ... ou rien ==> on ne fait rien ! 
+	if ($return['$invalides'])
+		return $return;
 
 	// une quelconque erreur ... ou rien ==> on ne fait rien !
 	if ($return['$erreur'])
@@ -220,11 +236,11 @@ function crayons_store_set_modifs($modifs, $return) {
 		}
 	}
 
-	// il manque une fonction de mise à jour ==> on ne fait rien !
+	// il manque une fonction de mise a jour ==> on ne fait rien !
 	if ($return['$erreur'])
 	    return $return;
 
-	// hop ! mises à jour table par table et id par id
+	// hop ! mises a jour table par table et id par id
 	foreach ($updates as $type => $idschamps)
 	foreach ($idschamps as $fun => $ids) {
 		foreach ($ids as $id => $champsvaleurs) {
@@ -235,7 +251,7 @@ function crayons_store_set_modifs($modifs, $return) {
 			$updok = $fun($id, $champsvaleurs['chval'], $type, $champsvaleurs['wdg']);
 			//Renvoyer erreur si update base distante echoue, on ne regarde pas les updates base local car ils ne revoient rien
 			list($distant,$table) = distant_table($type);
-			$distant AND !$updok ? $return['$erreur'] = "$type: " . _U('update_impossible'):pass;
+			$distant AND !$updok ? $return['$erreur'] = "$type: " . _U('crayons:update_impossible'):pass;
 	    }
 	}
 
@@ -343,7 +359,7 @@ function crayons_update_article($id_article, $c = false) {
 
 // TODO:
 // Ce modele est cense enregistrer les tags sous forme de ??
-// une ligne dans un champ spip_articles.tags, et/ou des mots-clés...
+// une ligne dans un champ spip_articles.tags, et/ou des mots-cles...
 function modeles_tags($id, $c) {
 	var_dump($id); #id_article
 	var_dump($c); # perturbant : ici on a array('id_article'=>'valeur envoyee')

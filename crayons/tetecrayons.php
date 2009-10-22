@@ -180,7 +180,6 @@ function balise_EDIT($p) {
 	}
 
 	// crayon sur une base distante 'nua:article-intro-5'
-	// on ne sait pas encore les gerer, mais au moins on les detecte
 	if ($distant = $p->boucles[$i_boucle]->sql_serveur)
 		$type = $distant.'__'.$type;
 

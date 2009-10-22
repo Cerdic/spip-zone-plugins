@@ -79,6 +79,17 @@ em.crayon-edit, em.crayon-crayon, em.crayon-img-changed {
 	right:0px;
 }
 
+.crayon-invalide {
+	display: block;
+	background-color: #ff8888;
+	border: 1px dashed #ff0000;
+ }
+.crayon-invalide p { 
+	margin:0;
+	padding: 1%;
+	font-style: italic;
+	font-size: 80%;
+ }
 /* resizer */
 .resizehandle {
 	background:transparent url("images/resizer.png") no-repeat scroll 45%;

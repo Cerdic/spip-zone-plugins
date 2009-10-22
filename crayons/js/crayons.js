@@ -227,6 +227,37 @@ $.fn.activatecrayon = function(percent) {
 				me
 				.find("em.crayon-searching")
 					.remove();
+				
+				//Remise a zero des warnings invalides (unwrap)
+				crayon
+				.find("span.crayon-invalide p")
+					  .remove();
+				crayon
+				.find("span.crayon-invalide")
+					  .each(function(){
+					      $(this).replaceWith( this.childNodes );
+						}
+					    );
+				
+				if(d.$invalides) {
+					for (invalide in d.$invalides) {
+						//Affichage des warnings invalides
+						d.$invalides[invalide]['retour']?retour=d.$invalides[invalide]['retour']:retour='';
+						d.$invalides[invalide]['msg']?msg=d.$invalides[invalide]['msg']:msg='';
+						crayon
+						    .find("*[name='content_"+invalide+"']")
+							.wrap("<span class=\"crayon-invalide\"></span>")
+						    .parent()
+						    .append("<p>" 
+								+ retour
+								+ " "
+								+ msg
+								+ "</p>"
+							);
+						}
+
+				}
+				 
 				if (d.$erreur > '') {
 					if (d.$annuler) {
 						if (d.$erreur > ' ') {
@@ -236,16 +267,19 @@ $.fn.activatecrayon = function(percent) {
 						.cancelcrayon();
 					} else {
 							uniAlert(d.$erreur+'\n'+configCrayons.txt.error);
-							crayon
-							.find('form')
-								.css('opacity', 1.0)
-								.find(".crayon-boutons,.resizehandle")
-									.show()
-								.end()
-								.find('.crayon-searching')
-									.remove();
 					}
-					return false;
+				}
+				
+				if (d.erreur > '' || d.$invalides) {
+					crayon
+					.find('form')
+						.css('opacity', 1.0)
+						.find(".crayon-boutons,.resizehandle")
+							.show()
+						.end()
+						.find('.crayon-searching')
+							.remove();
+						return false; 
 				}
 				// Desactive celui pour qui on vient de recevoir les nouvelles donnees
 				$(me)
