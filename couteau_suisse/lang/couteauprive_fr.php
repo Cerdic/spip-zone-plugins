@@ -481,6 +481,7 @@ Note : les paquets <code>.zip</code> n\'&eacute;tant pas reconstruits instantan&
 	'pack_actuel_avert' => 'Attention, les surcharges sur les define() ou les globales ne sont pas sp&eacute;cifi&eacute;es ici',
 	'pack_actuel_titre' => 'PACK ACTUEL DE CONFIGURATION DU COUTEAU SUISSE',
 	'pack_alt' => 'Voir les param&egrave;tres de configuration en cours',
+	'pack_delete' => 'Supression d\'un pack de configuration',
 	'pack_descrip' => 'Votre &laquo;&nbsp;Pack de configuration actuelle&nbsp;&raquo; rassemble l\'ensemble des param&egrave;tres de configuration en cours concernant le Couteau Suisse : l\'activation des outils et la valeur de leurs &eacute;ventuelles variables.
 
 Si les droits d\'&eacute;criture le permettent, le code PHP ci-dessous pourra prendre place dans le fichier {{/config/mes_options.php}} et ajoutera un lien de r&eacute;initialisation sur cette page du pack &laquo;&nbsp;{@pack@}&nbsp;&raquo;. Bien s&ucirc;r il vous est possible de changer son nom.
@@ -488,15 +489,14 @@ Si les droits d\'&eacute;criture le permettent, le code PHP ci-dessous pourra pr
 Si vous r&eacute;initialisez le plugin en cliquant sur un pack, le Couteau Suisse se reconfigurera automatiquement en fonction des param&egrave;tres pr&eacute;d&eacute;finis dans ce pack.',
 	'pack_du' => '&bull; du pack @pack@',
 	'pack_installe' => 'Mise en place d\'un pack de configuration',
-	'pack_delete' => 'Supression d\'un pack de configuration',
 	'pack_installer' => '&Ecirc;tes-vous s&ucirc;r de vouloir r&eacute;initialiser le Couteau Suisse et installer le pack &laquo;&nbsp;@pack@&nbsp;&raquo; ?',
-	'pack_supprimer' => '&Ecirc;tes-vous s&ucirc;r de vouloir supprimer le pack &laquo;&nbsp;@pack@&nbsp;&raquo; ?',
 	'pack_nb_plrs' => 'Il y a actuellement @nb@ &laquo;&nbsp;packs de configuration&nbsp;&raquo; disponibles :',
 	'pack_nb_un' => 'Il y a actuellement un &laquo;&nbsp;pack de configuration&nbsp;&raquo; disponible :',
 	'pack_nb_zero' => 'Il n\'y a pas de &laquo;&nbsp;pack de configuration&nbsp;&raquo; disponible actuellement.',
 	'pack_outils_defaut' => 'Installation des outils par d&eacute;faut',
 	'pack_sauver' => 'Sauver la configuration actuelle',
 	'pack_sauver_descrip' => 'Le bouton ci-dessous vous permet d\'ins&eacute;rer directement dans votre fichier <b>@file@</b> les param&egrave;tres n&eacute;cessaires pour ajouter un &laquo;&nbsp;pack de configuration&nbsp;&raquo; dans le menu de gauche. Ceci vous permettra ult&eacute;rieurement de reconfigurer en un clic votre Couteau Suisse dans l\'&eacute;tat o&ugrave; il est actuellement.',
+	'pack_supprimer' => '&Ecirc;tes-vous s&ucirc;r de vouloir supprimer le pack &laquo;&nbsp;@pack@&nbsp;&raquo; ?',
 	'pack_titre' => 'Configuration Actuelle',
 	'pack_variables_defaut' => 'Installation des variables par d&eacute;faut',
 	'par_defaut' => 'Par d&eacute;faut',

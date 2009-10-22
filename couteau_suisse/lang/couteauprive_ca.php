@@ -42,7 +42,7 @@ _ Enlla&ccedil; de test: [->test@test.com] (recarregueu la p&agrave;gina complet
 	// B
 	'basique' => 'B&agrave;sic',
 	'blocs:aide' => 'Blocs Desplegables: <b>&lt;bloc&gt;&lt;/bloc&gt;</b> (&agrave;lies: <b>&lt;invisible&gt;&lt;/invisible&gt;</b>) i <b>&lt;visible&gt;&lt;/visible&gt;</b>',
-	'blocs:description' => '<MODIF>Us permet crear blocs que, amb el t&iacute;tol clicable, els pot tornar visibles o invisibles.
+	'blocs:description' => 'Us permet crear blocs que, amb el t&iacute;tol clicable, els pot tornar visibles o invisibles.
 
 @puce@ {{En els textos SPIP}}: els redactors tenen disponibles les noves etiquetes &lt;bloc&gt; (o &lt;invisible&gt;) i &lt;visible&gt; per utilitzar en el seus textos d\'aquesta manera: 
 
@@ -67,7 +67,9 @@ _ Enlla&ccedil; de test: [->test@test.com] (recarregueu la p&agrave;gina complet
 
 @puce@ Marcant amb una creu &laquo;si&raquo; m&eacute;s avall, l\'estat dels blocs enumerats ser&agrave; emmagatzemat a una galeta el temps de la sessi&oacute;, per tal de conservar l\'aspecte de la p&agrave;gina en cas de retorn.[[%blocs_cookie%]]
 
-@puce@ El Ganivet Su&iacute;s utilitza, per defecte, l\'etiqueta HTML &lt;h4&gt; pel t&iacute;tol dels blocs desplegables. Escolliu aqu&iacute; una altra etiqueta &lt;hN&gt;&nbsp;:[[%bloc_h4%]]',
+@puce@ El Ganivet Su&iacute;s utilitza, per defecte, l\'etiqueta HTML &lt;h4&gt; pel t&iacute;tol dels blocs desplegables. Escolliu aqu&iacute; una altra etiqueta &lt;hN&gt;&nbsp;:[[%bloc_h4%]]
+
+@puce@ Per tal d\'obtenir un efecte m&eacute;s agradable al moment del clic, els vostres blocs desplegables es poden animar com si "llisquessin".[[%blocs_slide%]][[->%blocs_millisec% millisecondes]]',
 	'blocs:nom' => 'Blocs Desplegables',
 	'boites_privees:description' => 'Tots els quadres descrits m&eacute;s avall apareixen aqu&iacute; o a la part privada.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]][[->%qui_webmasters%]][[->%bp_urls_propres%]][[->%bp_tri_auteurs%]]
 - {{Les revisions del Ganivet Su&iacute;s}}: un quadre a la p&agrave;gina actual de configuraci&oacute;, indicant les &uacute;ltimes modificacions aportades al codi del plugin ([Source->@_CS_RSS_SOURCE@]).
@@ -144,15 +146,15 @@ Anoteu: modificant aquest segon estil, tamb&eacute; perdeu els estils est&agrave
 	'corbeille_objets_vider' => 'Suprimir els objectes seleccionats',
 	'corbeille_vider' => 'Buidar la paperera:',
 	'couleurs:aide' => 'Acolorir el text: <b>[coul]text[/coul]</b>@fond@ amb <b>coul</b> = @liste@',
-	'couleurs:description' => '<MODIF>Permet aplicar f&agrave;cilment colors a tots els textos del lloc (articles, breus, t&iacute;tols, f&ograve;rum, …) utilitzant etiquetes en dreceres.
+	'couleurs:description' => 'Permet aplicar f&agrave;cilment colors a tots els textos del lloc (articles, breus, t&iacute;tols, f&ograve;rum, …) utilitzant etiquetes en dreceres.
 
 Dos exemples id&egrave;ntics per canviar el color del text:@_CS_EXEMPLE_COULEURS2@
 
 &Iacute;dem per canviar el fons, si la opci&oacute; de m&eacute;s avall ho permet:@_CS_EXEMPLE_COULEURS3@
 
 [[%couleurs_fonds%]]
-[[%set_couleurs%]][[->%couleurs_perso%]]
-@_CS_ASTER@El format d\'aquestes etiquetes personalitzades ha de llistar colors existents o definir parelles &laquo;balise=couleur&raquo;, separats tots per comes. Exemples: &laquo;gris, vermell&raquo;, &laquo;flux=groc, fort=vermell&raquo;, &laquo;baix=#99CC11, alt=marr&oacute;&raquo; o fins i tot    &laquo;gris=#DDDDCC, vermell=#EE3300&raquo;. Pel primer i l\'&uacute;ltim exemple, les etiquetes autoritzades s&oacute;n: <code>[gris]</code> et <code>[rouge]</code> (<code>[fond gris]</code> et <code>[fond rouge]</code> si els fons s&oacute;n permesos).',
+[[%set_couleurs%]][[-><set_couleurs valeur="1">%couleurs_perso%</set_couleurs>]]
+@_CS_ASTER@El format d\'aquestes etiquetes personalitzades ha de llistar colors existents o definir parelles &laquo;balise=couleur&raquo;, separats tots per comes. Exemples: &laquo;gris, vermell&raquo;, &laquo;fluix=groc, fort=vermell&raquo;, &laquo;baix=#99CC11, alt=marr&oacute;&raquo; o fins i tot &laquo;gris=#DDDDCC, vermell=#EE3300&raquo;. Pel primer i l\'&uacute;ltim exemple, les etiquetes autoritzades s&oacute;n: <code>[gris]</code> i <code>[rouge]</code> (<code>[fond gris]</code> i  <code>[fond rouge]</code> si els fons estan permesos). ',
 	'couleurs:nom' => 'Tot en colors',
 	'couleurs_fonds' => ', <b>[fond&nbsp;coul]text[/coul]</b>, <b>[bg&nbsp;coul]text[/coul]</b>',
 	'cs_comportement:description' => '@puce@ {{Logs.}} Obtingueu molta informaci&oacute; sobre el funcionament del Ganivet Su&iacute;s als fitxers {spip.log} que es poden trobar a dins del directori: {@_CS_DIR_TMP@}[[%log_couteau_suisse%]]
@@ -211,8 +213,8 @@ Aquesta eina es pot acompanyar amb &laquo;&nbsp;[.->sommaire]&nbsp;&raquo;.',
 
 	// E
 	'effaces' => 'Esborrats',
-	'en_travaux:description' => '<MODIF>Permet mostrar un missatge personalitzat durant una fase de manteniment a tot el lloc p&uacute;blic, eventualment a la part privada.
-[[%message_travaux%]][[%titre_travaux%]][[%admin_travaux%]][[%prive_travaux%]]',
+	'en_travaux:description' => 'Durant un per&iacute;ode de manteniment, permet mostrar un missatge personalitzat a tot el lloc p&uacute;blic, eventualment a la part privada.
+[[%message_travaux%]][[%titre_travaux%]][[%admin_travaux%]][[-><admin_travaux ',
 	'en_travaux:nom' => 'Lloc en manteniment',
 	'erreur:bt' => '<span style=\\"color:red;\\">Atenci&oacute;:</span> la barra tipogr&agrave;fica (version @version@) semble ancienne.<br />El Ganivet Su&iacute;s &eacute;s compatible amb una versi&oacute; superior o igual a @mini@.',
 	'erreur:description' => 'id absent en la definici&oacute; de l\'eina!',
@@ -314,6 +316,11 @@ Atenci&oacute;, aquesta eina necessita per funcionar el plugin {jQuery}: {Round 
 	'js_defaut' => 'Per defecte',
 	'js_jamais' => 'Mai',
 	'js_toujours' => 'Sempre',
+	'jslide_aucun' => 'Cap animaci&oacute;',
+	'jslide_fast' => 'Lliscament r&agrave;pid',
+	'jslide_lent' => 'Lliscament lent',
+	'jslide_millisec' => 'Lliscament durant&nbsp;:',
+	'jslide_normal' => 'Lliscament normal',
 
 	// L
 	'label:admin_travaux' => 'Tancar el lloc p&uacute;blic per:',
@@ -326,6 +333,7 @@ Atenci&oacute;, aquesta eina necessita per funcionar el plugin {jQuery}: {Round 
 	'label:bloc_h4' => 'Etiqueta pels t&iacute;tols:',
 	'label:bloc_unique' => 'Nom&eacute;s un bloc obert a la p&agrave;gina:',
 	'label:blocs_cookie' => 'Utilitzaci&oacute; de galetes:',
+	'label:blocs_slide' => 'Tipus d\'animaci&oacute;:',
 	'label:couleurs_fonds' => 'Permetre els fons:',
 	'label:cs_rss' => 'Activar:',
 	'label:debut_urls_libres' => '<:label:debut_urls_propres:>',
@@ -421,6 +429,12 @@ _ • {Extens}: s&oacute;n substitu&iuml;ts a m&eacute;s els enlla&ccedil;os del
 	// M
 	'mailcrypt:description' => 'Amaga tots els enlla&ccedil;os de correus presents als vostres textos substituint-los per un enlla&ccedil; JavaScript que permet malgrat tot activar la missatgeria del lector. Aquesta eina antispam impedeix que els robots recullin les adreces electr&ograve;niques deixades visibles als f&ograve;rums o a les etiquetes dels vostres esquelets.',
 	'mailcrypt:nom' => 'MailCrypt',
+	'maj_auto:description' => 'Aquesta eina us permet gestionar f&agrave;cilment l\'actualitzaci&oacute; dels vostres connectors (plugins), recuperant sobretot el n&uacute;mero de revisi&oacute; que cont&eacute; el fitxer <code>svn.revision</code> i comparant-lo amb el trobat a <code>zone.spip.org</code>.
+
+La llista de m&eacute;s amunt ofereix la possibilitat de llan&ccedil;ar el proc&eacute;s d\'actualitzaci&oacute; autom&agrave;tic d\'SPIP a cadascun dels connectors (plugins) instal&middot;lats pr&egrave;viament a la carpeta <code>plugins/auto/</code>. El altres plugins que es troben a dins de la carpeta <code>plugins/</code> nom&eacute;s es llisten com a mera informaci&oacute;. Si la revisi&oacute; a dist&agrave;ncia no s\'ha trobat, proveu llavors de fer l\'actualitzaci&oacute; del plugin manualment.
+
+Nota: com que els paquets <code>.zip</code> no es poden reconstruir instant&agrave;niament, es probable que estigueu obligat a esperar un cert temps abans de poder efectuar l\'actualitzaci&oacute; total d\'un plugin recentment modificat.',
+	'maj_auto:nom' => 'Actualitzacions autom&agrave;tiques',
 	'message_perso' => 'Moltes gr&agrave;cies als traductors que passaran per aqu&iacute;. Pat ;-)',
 	'moderation_admins' => 'administradors autenticats',
 	'moderation_message' => 'Aquest f&ograve;rum est&agrave; moderat a priori: la vostra contribuci&oacute; no apareixer&agrave; fins que hagi estat validada per un administrador del lloc, excepte si esteu identificats i autoritzats per publicar-hi directament.',
@@ -476,8 +490,8 @@ Si torneu a carregar el plugin fent un clic sobre un pack, el Ganivet Su&iacute;
 	'pack_du' => '• del pack @pack@',
 	'pack_installe' => 'Instal&middot;laci&oacute; d\'un pack de configuraci&oacute;',
 	'pack_installer' => 'Est&agrave; segur de voler reinicialitzar el Gavinet Su&iacute;s i d\'instal&middot;lar el pack &laquo;&nbsp;@pack@&nbsp;&raquo; ?',
-	'pack_nb_plrs' => 'Actualment hi ha @nb@ &laquo;paquets de configuraci&oacute;&raquo; disponibles:',
-	'pack_nb_un' => 'Actualment hi ha un &laquo;paquet de configuraci&oacute;&raquo; disponible:',
+	'pack_nb_plrs' => '<MODIF>Actualment hi ha @nb@ &laquo;paquets de configuraci&oacute;&raquo; disponibles.',
+	'pack_nb_un' => '<MODIF>Actualment hi ha un &laquo;paquet de configuraci&oacute;&raquo; disponible',
 	'pack_nb_zero' => 'No hi ha cap &laquo;paquet de configuraci&oacute;&raquo; disponible actualment.',
 	'pack_outils_defaut' => 'Instal&middot;laci&oacute; d\'eines per defecte',
 	'pack_sauver' => 'Salvar la configuraci&oacute; actual',
@@ -601,6 +615,7 @@ La funci&oacute; SPIP utilitzada en PHP &eacute;s <code>_T(\'chaine\')</code> se
  
 Per tant, no oblideu verificar que la clau  <code>\'chaine\'</code> est&agrave; ben definida en els fitxers de lleng&uuml;es. ',
 	'toutmulti:nom' => 'Blocs multiling&uuml;es',
+	'travaux_masquer_avert' => 'Amagar el requadre indicant al lloc p&uacute;blic que s\'est&agrave; fent un manteniment.',
 	'travaux_nom_site' => '@_CS_NOM_SITE@',
 	'travaux_prochainement' => 'Aquest lloc es restablir&agrave; ben aviat.
 _ Gr&agrave;cies per la vostra comprensi&oacute;.',
