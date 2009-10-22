@@ -28,6 +28,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'lutte_spam' => 'Lluita contra l\'SPAM',
 
+	// M
+	'maj_actu' => 'For&ccedil;ar l\'actualitzaci&oacute;',
+	'maj_liste' => 'Llista dels plugins detectats: ',
+	'maj_maj' => 'Actualitzar el plugin seleccionat',
+	'maj_ok' => 'Aquest [plugin->@zip@] sembla [a dia->@url@].',
+	'maj_rev' => 'R&eacute;v.&nbsp;@revision@',
+	'maj_rev_ko' => 'La [revisi&oacute; a dist&agrave;ncia->@url@] no s\'ha trobat.',
+	'maj_rev_ok' => 'La revisi&oacute; [@revision@->@url@] est&agrave; [disponible->@zip@].',
+	'maj_svn' => 'Aquest plugin SVN sembla [al dia->@url@].',
+	'maj_verif' => 'Verifiqueu pr&egrave;viament l\'arxiu que us conv&eacute;:',
+	'maj_verif2' => 'Atenci&oacute;: despr&eacute;s de clicar el bot&oacute; que hi ha m&eacute;s amunt, verifiqueu b&eacute; que l\'arxiu descarregat correspongui al plugin que us calia actualitzar. ',
+
 	// N
 	'nom_email_forum' => 'Gr&agrave;cies per especificar el vostre nom o el vostre correu electr&ograve;nic!',
 	'nom_forum' => 'Gr&agrave;cies per especificar el vostre nom!',
@@ -55,13 +67,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_lien' => 'P&agrave;gina @page@ : @title@',
 	'page_precedente' => 'P&agrave;gina enrere',
 	'page_suivante' => 'P&aacute;gina endavant',
-	'plugin_xml' => '<MODIF>Reuneix en un &uacute;nic plugin una llista de petites noves funcionalitats i utilitats que milloren la gesti&oacute; del vostre lloc SPIP.
+	'plug_actifs' => 'Plugins actius ',
+	'plug_inactifs' => 'Plugins inactius',
+	'plugin_xml' => 'Reuneix en un &uacute;nic plugin una llista de petites noves funcionalitats i utilitats que milloren la gesti&oacute; del vostre lloc SPIP.
 
 Cadascuna d\'aquestes eines pot ser activada o no per l\'usuari a [la p&agrave;gina d\'administraci&oacute; del plugin->./?exec=admin_couteau_suisse] i gestionar un cert nombre de variables: fer un clic a {{Configuraci&oacute;}}, despr&eacute;s escolliu la pestanya {{El Ganivet Su&iacute;s}}.
 
 Les categories disponibles s&oacute;n: Administraci&oacute;, Millores tipogr&agrave;fiques, Dreceres tipogr&agrave;fiques, Visualitzaci&oacute; p&uacute;blica, Etiquetes, filtres, criteris.
 
-Descobriu en aquest plugin les vostres eines favorites: {Suprimir el n&uacute;mero}, {Format dels URLs}, {Exponents tipogr&agrave;fics}, {Cometes tipogr&agrave;fiques}, {Bonics s&iacute;mbols gr&agrave;fics}, {Lluita contra l\'SPAM}, {Encriptaci&oacute; del correu electr&ograve;nic}, {Belles URLs}, {SPIP i els enlla&ccedil;os... externs}, {Emoticones}, {Un sumari pels vostres articles}, {Tallar en p&agrave;gines i pestanyes}, etc., etc.
+Descobriu en aquest plugin les vostres eines favorites: {Suprimir el n&uacute;mero}, {Format dels URLs}, {Exponents tipogr&agrave;fics}, {Cometes tipogr&agrave;fiques}, {Bonics s&iacute;mbols gr&agrave;fics}, {Lluita contra l\'SPAM}, {Encriptaci&oacute; del correu electr&ograve;nic}, {Bonics URLs}, {SPIP i els enlla&ccedil;os... externs}, {Emoticones}, {Un sumari pels vostres articles}, {Tallar en p&agrave;gines i pestanyes}, etc., etc.
 
 No dubteu a consultar els articles de la documentaci&oacute; del plugin publicats a: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
