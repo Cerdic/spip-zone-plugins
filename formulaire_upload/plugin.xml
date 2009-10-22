@@ -14,6 +14,7 @@
 	<etat>
 	dev
 	</etat>
+	<icon>images/formupload-32.png</icon>
 	<description>
 		<multi>
 		Permet &#224; chaque r&#233;dacteur d'uploader des documents dans sa bo&#238;te perso
