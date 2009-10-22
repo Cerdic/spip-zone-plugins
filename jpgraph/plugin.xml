@@ -1,11 +1,17 @@
 <plugin>
-	<nom>jpGraph</nom>
+	<nom>JpGraph</nom>
 	<auteur>mise en plugin [erational->http://www.erational.org]</auteur>
 	<licence>QPL 1.0</licence>
 	<version>0.1</version>
-	<description>Bibliotheque graphique pour generer des graphes (requiert PHP5)</description>
+	<description>
+  Bibliotheque graphique pour g&#233;n&#233;rer des graphes (requiert PHP5)
+  
+  Une fois le plugin activ&#233;, [consulter la page d&#233;monstration->../spip.php?page=demo_jpgraph]  
+  </description>
 	<etat>dev</etat>
 	<prefix>jpgraph</prefix>
+	<icon>img/jpgraph.png</icon>
+	<lien></lien>
 	<necessite id="lib:jpgraph-3.0.6" src="http://hem.bredband.net/jpgraph2/jpgraph-3.0.6.tar.bz2" />
 	<fonctions>jpgraph_fonctions.php</fonctions>
 </plugin>
