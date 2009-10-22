@@ -115,14 +115,11 @@
 </label>
 </p>
 
-[(#REM) : On teste si le les statistiques sont activées pour présenter cette autorisation]
-[(#CONFIG{compteur}|oui)
 <p>
 <label><input type="checkbox" name="redacteurs_lire_stats" [checked="(#ENV{redacteurs_lire_stats}?{checked})"] />
 <:autorite:redacteur_lire_stats:>
 </label>
 </p>
-]
 </fieldset>
 
 
