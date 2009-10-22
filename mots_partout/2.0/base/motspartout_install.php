@@ -86,8 +86,8 @@ function motspartout_upgrade($tables_possibles){
 				motspartout_modifier_tables($tables_possibles);
 			break;
 			case 'test':
-			  return (isset($GLOBALS['meta']['motspartout_version']) && $GLOBALS['meta']['motspartout_version']>=0.5.1 );
+			  return (isset($GLOBALS['meta']['motspartout_version']) && $GLOBALS['meta']['motspartout_version']>='0.5.1' );
 		  break;
 		}
 	}
-?>
+
