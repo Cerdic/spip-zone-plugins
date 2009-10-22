@@ -12,14 +12,18 @@ function calcule_nb_commentaires($id_article)
 
 	$id_article = intval($id_article);
 
-	if(!isset($nb_commentaires[$id_article]))
-	{
-		$query = sql_select(array('COUNT(p.post_id) AS nb_commentaires'),ARTICLES_PHPBB_TABLE.' a, '.PHPBB_PREFIX.'posts p
-					WHERE a.id_article='.intval($id_article).'
-					AND a.topic_id=p.topic_id');
-		$row = spip_fetch_array($query);
-		$nb_commentaires[$id_article] = intval($row['nb_commentaires']-1);
-	}
+   if(!isset($nb_commentaires[$id_article]))
+   {
+      $query = sql_select(
+      array('COUNT(p.post_id) AS nb_commentaires'),
+            array(ARTICLES_PHPBB_TABLE.' AS a', PHPBB_PREFIX.'posts AS p'),
+            array('a.id_article='.$id_article,'a.topic_id=p.topic_id'),
+            'p.topic_id');
+            $row = spip_fetch_array($query);
+            spip_log('nb_commentaires:'.$row);
+            $nb_commentaires[$id_article] = intval($row['nb_commentaires']-1);
+   }
+   
 
 	return $nb_commentaires[$id_article];
 }

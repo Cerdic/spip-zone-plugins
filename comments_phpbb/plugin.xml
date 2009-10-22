@@ -1,11 +1,11 @@
 <plugin>
 	<nom>Commentaires PhpBB </nom>
 	<icon>img_pack/comments_phpbb.png</icon>
-	<version>0.5</version>
+	<version>0.6</version>
 	<version_base>0.5</version_base>
 	<prefix>comments_phpbb</prefix>
 	<etat>test</etat>
-	<auteur>jfefe</auteur>
+	<auteur>jfefe, Dorch</auteur>
 	<description>Ce plugin cr&eacute;e un nouveau sujet sur votre forum PhpBB &agrave; chaque publication d'un nouvel article dans SPIP, afin d'y accueillir les commentaires des forumeurs.
 
 Deux nouvelles balises pour les squelettes (boucles ARTICLES) :

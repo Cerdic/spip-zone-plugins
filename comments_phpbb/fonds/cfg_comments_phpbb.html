@@ -4,18 +4,21 @@
 <form method="post" class="formulaire_spip">
 [(#ENV{_cfg_}|form_hidden)]
 <fieldset>
-<legend>Configuration g&eacute;n&eacute;rale</legend>
+<legend><:comments_phpbb:conf_titre:></legend>
 
 <ul>
   <li>
-      <label>Base PhpBB :</label> 
+      <label><:comments_phpbb:conf_base:> :</label> 
       <input type="text" name="phpbb_base" value="#CONFIG{comments_phpbb/phpbb_base}" />
   </li>
   <li>
-      <label>Pr&eacute;fixe des tables PhpBB :</label>
+      <label><:comments_phpbb:conf_prefix:> :</label>
       <input type="text" name="phpbb_prefix" value="#CONFIG{comments_phpbb/phpbb_prefix, 'phpbb_'}" />
   </li>
-  
+  <li>
+      <label><:comments_phpbb:conf_http:> :</label> 
+      <input type="text" name="phpbb_http" value="#CONFIG{comments_phpbb/phpbb_http}" />
+  </li>
 </ul>
 </fieldset>
 
@@ -42,7 +45,7 @@ if(sql_showtable($phpbb_prefix."posts",$phpbb_base))
 </li>
 <li>
 
-	<label>Forum des commentaires :</label>
+<label><:comments_phpbb:conf_comment:> :</label>
 	<select name="phpbb_forum">
 		<BOUCLE_phpbb_categories1(PHPBB_FORUMS){parent_id=0 }>
 			<option value="0" disabled="disabled">[(#FORUM_NAME)]</option>
@@ -54,10 +57,8 @@ if(sql_showtable($phpbb_prefix."posts",$phpbb_base))
 	</select>
 </li>
 <li>
-	
-
-	<label>Forum temporaire (o&ugrave; les topics sont d&eacute;plac&eacute;s si le statut de l'article n'est plus "publi&eacute;") </label> 
-	<select name="phpbb_tmpforum">
+   <label><:comments_phpbb:conf_temp:> :</label> 
+   <select name="phpbb_tmpforum">
 			<BOUCLE_phpbb_categories2(PHPBB_FORUMS){parent_id=0 }>
 			<option value="0" disabled="disabled">[(#FORUM_NAME)]</option>
 		
@@ -71,14 +72,14 @@ if(sql_showtable($phpbb_prefix."posts",$phpbb_base))
 	</fieldset>
 
 </BOUCLE_general_test>
-<p style="text-align:center; font-weight:bold;"><a href="#SELF" style="color:red;">Cliquez ici pour continuer la configuration du plugin...</a></p>
+<p style="text-align:center; font-weight:bold;"><a href="#SELF" style="color:red;"><:comments_phpbb:conf_continue:>...</a></p>
 <//B_general_test>
 <?php
 }
 else
 {
 ?>
-<p style="text-align:center; font-weight:bold; color:red;">Indiquez les paramètres de la base de données avant de continuer...</p>
+<p style="text-align:center; font-weight:bold; color:red;"><:comments_phpbb:conf_param:>...</p>
 <?php
 }
 ?>
@@ -88,3 +89,12 @@ else
 <input type="submit" name="_cfg_delete" value="<:supprimer:>" class="fondo" />
 </div>
 </form>
+
+<?php
+if(sql_showtable($phpbb_prefix."posts",$phpbb_base))
+{ ?>
+<div style="text-align:center;valign:middle">
+<a href="?exec=comments_phpbb_maj"><img src="#CHEMIN{img_pack/comments_phpbb_maj.png}"><br/><:comments_phpbb:maj_lien:></div>
+<?php
+}
+?>

@@ -24,28 +24,41 @@ function comments_phpbb_new($flux)
 					include_spip('inc/texte');
 				if(!function_exists('textebrut'))
 					include_spip('inc/filtres');
+            if(!function_exists('_T'))
+            include_spip('inc/utils');
+            if(!function_exists('balise_INTRODUCTION_dist'))
+            include_spip('public/balises');  
 
 				$texte_post = textebrut($article['chapo']);
 				/* TODO : problème avec les quotes qui sont convertis dans le post phpbb */
 				$texte_post .= "<br /><a href=/spip.php?article".$flux['args']['id_objet'].">Lire la news</a>";
 				$titre_post =  textebrut($article['titre']);
 				
-				$date = time();
+            if(!function_exists('datetime_mysql2unix'))
+            include_spip('comments_phpbb_fonctions');
+            
+            $date = datetime_mysql2unix($article['date']);
 				$forum_id = intval(lire_config('comments_phpbb/phpbb_forum'));
-				$result = sql_select('a.topic_id, b.topic_first_post_id',ARTICLES_PHPBB_TABLE." AS a, ".PHPBB_PREFIX."topics as b","id_article='".$flux['args']['id_objet']."' AND b.topic_id=a.topic_id");
-				// L'article est modifié, on fait l'update de la table topics et on déplace dans le bon forum
+            $result = sql_select(
+                  array('a.topic_id', 'b.topic_first_post_id'),
+                  array(ARTICLES_PHPBB_TABLE." AS a",PHPBB_PREFIX."topics as b"),
+                  array("id_article='".$flux['args']['id_objet']."'", "b.topic_id=a.topic_id"));
+                  
+            // L'article est modifié, on fait l'update de la table topics et on déplace dans le bon forum
 				if($article_phpbb = sql_fetch($result))
 				{
 					$article_phpbb['topic_id'] = intval($article_phpbb['topic_id']);
 					 sql_updateq(PHPBB_PREFIX.'topics',array(
 					    "topic_title" => $titre_post,
-					    "forum_id" => $forum_id
+					    "forum_id" => $forum_id,
+                   'topic_time' => $date
 					 ),
 					 "topic_id='".$article_phpbb['topic_id']."'");
 					
 					 sql_updateq(PHPBB_PREFIX.'posts',array(
 					     "post_text" => $texte_post,
-					     "post_edit_user" => $GLOBALS['auteur_session']['nom']),
+					     "post_edit_user" => $GLOBALS['auteur_session']['nom'],
+                    'post_time' => $date),
 					     "post_id=".intval($article_phpbb['topic_first_post_id'])
 					     
 					  );
@@ -86,9 +99,18 @@ function comments_phpbb_new($flux)
 					
 					// update de la table topics du forum
 					sql_updateq(PHPBB_PREFIX.'topics',array("topic_last_post_time"=>$date,"topic_first_post_id"=>$post_id,"topic_last_post_time"=>$date, "topic_last_post_id" => $topic_id),"topic_id='".$topic_id."'");
-	        	        	// nouvelle entrée dans articles_phpbb
-					sql_insertq(ARTICLES_PHPBB_TABLE,array('id_article'=>$flux['args']['id_objet'],'topic_id'=>$topic_id),"");
-					// Update des infos de l'utilisateur robot
+	        	   
+               // nouvelle entrée dans articles_phpbb ou mise à jour si enregistrement existant
+               $result = sql_select('topic_id',ARTICLES_PHPBB_TABLE, "id_article=".$flux['args']['id_objet']);
+               
+               if($article_phpbb = sql_fetch($result)) {
+                  sql_updateq(ARTICLES_PHPBB_TABLE,array('topic_id'=>$topic_id), "id_article=".$flux['args']['id_objet']);
+               }
+               else {
+                  sql_insertq(ARTICLES_PHPBB_TABLE,array('id_article'=>$flux['args']['id_objet'],'topic_id'=>$topic_id),"");
+               }	
+               
+               // Update des infos de l'utilisateur robot
 					sql_updateq(PHPBB_PREFIX.'users', array("user_posts"=>"user_posts+1","user_lastpost_time"=>$date),"user_id=".intval($poster_id));
 	        	        	
 					update_forum($forum_id);

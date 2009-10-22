@@ -19,7 +19,7 @@ function comments_phpbb_declarer_tables_principales($tables_principales){
     );
 
     // Associer les clés à la table
-    $tables_principales['spip_articles_phpbb'] = array(
+    $tables_principales[ARTICLES_PHPBB_TABLE] = array(
       'field' => &$spip_articles_phpbb,
       'key' => &$spip_articles_phpbb_key
     );
@@ -37,7 +37,7 @@ function comments_phpbb_declarer_tables_principales($tables_principales){
     $phpbb_users_key = array(
 	    'PRIMARY KEY' => 'user_id');
 
-    $tables_principales['phpbb_users'] = array(
+       $tables_principales[PHPBB_PREFIX.'users'] = array(
 	    'field' => &$phpbb_users,
 	    'key' => &$phpbb_users_key);
     
@@ -50,7 +50,7 @@ function comments_phpbb_declarer_tables_principales($tables_principales){
     $phpbb_forums_key = array(
 	    'PRIMARY KEY' => 'forum_id');
 
-    $tables_principales['phpbb_forums'] = array(
+       $tables_principales[PHPBB_PREFIX.'forums'] = array(
 	    'field' => &$phpbb_forums,
 	    'key' => &$phpbb_forums_key);
 
@@ -72,7 +72,7 @@ function comments_phpbb_declarer_tables_principales($tables_principales){
     );
 
 
-    $tables_principales['phpbb_posts'] = array(
+    $tables_principales[PHPBB_PREFIX.'posts'] = array(
 	    'field' => &$phpbb_posts,
 	    'key' => &$phpbb_posts_key);
 
@@ -85,7 +85,7 @@ function comments_phpbb_declarer_tables_principales($tables_principales){
     $phpbb_topics_key = array(
 	    'PRIMARY KEY' => 'topic_id');
 
-    $tables_principales['phpbb_topics'] = array(
+       $tables_principales[PHPBB_PREFIX.'posts'] = array(
 	    'field' => &$phpbb_topics,
 	    'key' => &$phpbb_topics_key);
 	    
@@ -94,8 +94,8 @@ function comments_phpbb_declarer_tables_principales($tables_principales){
 
 function comments_phpbb_declarer_tables_interfaces($interface){
         // definir les jointures possibles
-        $interface['tables_jointures']['phpbb_topic'][] = 'spip_articles_phpbb';
-        $interface['tables_jointures']['spip_articles_phpbb'][] = 'phpbb_topic';
+        $interface['tables_jointures'][PHPBB_PREFIX.'topic'][] = ARTICLES_PHPBB_TABLE;
+        $interface['tables_jointures']['spip_articles_phpbb'][] = PHPBB_PREFIX.'topic';
         return $interface;
 
 }

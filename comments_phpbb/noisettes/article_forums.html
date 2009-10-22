@@ -1,0 +1,59 @@
+      [(#REM) Forum de l'article ]
+   <a href="#forum" name="forum" id="forum"></a>
+   [<h2 class="forum-repondre">
+      <a href="(#CONFIG{comments_phpbb/phpbb_http})/posting.php?t=#TOPIC_ID&mode=reply&f=#CONFIG{comments_phpbb/phpbb_forum}">
+         <:repondre_article:>
+      </a>
+   </h2>]
+   
+      [(#REM) Nombre total de messages ]
+        [<h2 class="forum-decompte">
+           <a href="#CONFIG{comments_phpbb/phpbb_http}/viewtopic.php?t=#TOPIC_ID">
+               (#NB_COMMENTAIRES|>{0}|?{#NB_COMMENTAIRES,''}) [(#NB_COMMENTAIRES|>{1}|?{<:multiflex:commentaires:>,<:multiflex:commentaire:>})]
+           </a>
+
+         </h2>
+         <p>
+           <a href="#CONFIG{comments_phpbb/phpbb_http}/viewtopic.php?t=#TOPIC_ID">
+            <:comments_phpbb:public_voir_forum:>
+          </a>
+         </p>]
+   
+      [(#REM) Messages du forum ]
+      <B_commentaires>
+        <ul class="forum">
+         <BOUCLE_commentaires(PHPBB3_POSTS){topic_id=#TOPIC_ID}{1,10}>
+           [(#REM) on ne rÃ©cupÃ¨re pas le premier post, celui-ci est en effet le message envoyÃ© par spip Ã  phpbb]
+           <li class="forum-fil">
+
+            <div class="forum-message">
+             <B_posteur>
+               <BOUCLE_posteur(PHPBB3_USERS){user_id=#POSTER_ID}>
+                 <!-- Affichage de l'avatar -->
+                 [<div class="gravatar"><img src="forum/download/file.php?avatar=(#USER_AVATAR)" style="width:32px ;" alt="Avatar de #USERNAME" align="right"/></div>]
+                  [(#SET{username, [(#USERNAME|couper{80})]})]
+               </BOUCLE_posteur>
+             </B_posteur>
+              <div class="forum-chapo">
+                
+              
+                <strong class="forum-titre">
+
+                  <a href="#CONFIG{comments_phpbb/phpbb_http}/viewtopic.php?p=#POST_ID">
+                    #POST_SUBJECT
+                  </a>
+                </strong>
+                <small>
+                     [(#SET{post_date, [(#POST_TIME|datetime_unix2mysql)]})]
+                  [(#GET{post_date}|affdate_jourcourt)][&nbsp;(#GET{post_date}|heures)][:(#GET{post_date}|minutes)][, <:par_auteur:> (#GET{username})]
+                </small>
+              </div>
+              <div class="forum-texte">
+
+               [(#POST_TEXT|bbcode|lignes_longues)]
+              </div>
+            </div>
+           </li>
+         </BOUCLE_commentaires>
+        </ul>
+      </B_commentaires>
