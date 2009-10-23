@@ -84,6 +84,8 @@
 		'abonne_lettres' => 'Abonner aux lettres d\'information',
 		'mode' => 'Mode',
 		'importer' => 'Importer',
+		'infolettres' => 'Infolettres',
+		'changer_mode' => 'Changer de mode',
 		'aucun_abonne_ajoute' => 'aucun abonn&eacute; ajout&eacute;',
 		'abonne_ajoute' => 'abonn&eacute; ajout&eacute;',
 		'abonnes_ajoutes' => 'abonn&eacute;s ajout&eacute;s',
