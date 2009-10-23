@@ -59,7 +59,6 @@ function formulaires_upload_traiter_dist($objet, $id_objet, $fond_documents){
 			$res['message_erreur'] = _T('gis:erreur_copie_impossible');
 		$invalider = true;
 		$res['message_ok'] = _T("formupload:msg_doc_added");
-		spip_log($files, 'upload');
 	}
 
 	if ($invalider) {
