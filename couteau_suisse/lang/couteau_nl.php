@@ -28,6 +28,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'lutte_spam' => 'Bestrijding van SPAM',
 
+	// M
+	'maj_actu' => '<NEW>Forcer l\'actualisation',
+	'maj_liste' => '<NEW>Liste des plugins d&eacute;tect&eacute;s :',
+	'maj_maj' => '<NEW>Mettre &agrave; jour le plugin s&eacute;lectionn&eacute;',
+	'maj_ok' => '<NEW>Ce [plugin->@zip@] semble [&agrave; jour->@url@].',
+	'maj_rev' => '<NEW>R&eacute;v.&nbsp;@revision@',
+	'maj_rev_ko' => '<NEW>La [r&eacute;vision distante->@url@] n\'a pas pu &ecirc;tre trouv&eacute;e.',
+	'maj_rev_ok' => '<NEW>La r&eacute;vision [@revision@->@url@] est [disponible->@zip@].',
+	'maj_svn' => '<NEW>Ce plugin SVN semble [&agrave; jour->@url@].',
+	'maj_verif' => '<NEW>V&eacute;rifiez pr&eacute;alablement l\'archive qui vous convient :',
+	'maj_verif2' => '<NEW>Attention : apr&egrave;s avoir cliqu&eacute; sur le bouton ci-dessus, v&eacute;rifiez bien que l\'archive t&eacute;l&eacute;charg&eacute;e correspond au plugin qu\'il vous faut mettre &agrave; jour.',
+
 	// N
 	'nom_email_forum' => 'Bedankt om uw naam of uw e-mail te specificeren !',
 	'nom_forum' => 'Bedankt om uw naam te specificeren !',
@@ -55,6 +67,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_lien' => 'Bladzijde @page@: @title@',
 	'page_precedente' => 'Vorige bladzijde',
 	'page_suivante' => 'Volgende bladzijde',
+	'plug_actifs' => '<NEW>Plugins actifs',
+	'plug_inactifs' => '<NEW>Plugins inactifs',
 	'plugin_xml' => '<MODIF>In slechts &eacute;&eacute;n plugin verenigt een lijst van kleine nieuwe en nuttige functies die het beleid verbeteren, van uw SPIP site .
 
 Elk van deze werktuigen kan of niet door de gebruiker op geactiveerd worden [de bladzijde van bestuur van plugin->./?exec=admin_couteau_suisse] en een aantal variabele beheren: op {{Configuratie}} klikken, vervolgens de tab kiezen {{Le Couteau Suisse}}.
