@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Grappes</nom>
 	<auteur>Matthieu Marcillaud</auteur>
-	<version>0.2.1</version>
+	<version>0.2.3</version>
 	<version_base>0.1</version_base>
 	<etat>test</etat>
 	<prefix>grappes</prefix>
@@ -37,6 +37,14 @@
 	</pipeline>
 	<pipeline>
 		<nom>affiche_milieu</nom>
+		<inclure>grappes_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>rechercher_liste_des_champs</nom>
+		<inclure>grappes_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_url_objets</nom>
 		<inclure>grappes_pipelines.php</inclure>
 	</pipeline>
 	<necessite id="SPIP" version="[2.0.0;]" />

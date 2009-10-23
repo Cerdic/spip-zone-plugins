@@ -100,4 +100,36 @@ function grappes_affiche_milieu($flux){
 	return $flux;
 }
 
+/**
+ * 
+ * Insertion dans le pipeline declarer_url_objets
+ * Permet d'avoir des url propres de grappes avec un grappe.html et 
+ * un #URL_GRAPPE (SPIP 2.1)
+ * 
+ * @param object $array
+ * @return 
+ */
+function grappes_declarer_url_objets($array){
+	$array[] = 'grappe';
+	return $array;
+}
+
+/**
+ * 
+ * Insertion dans le pipeline rechercher_liste_des_champs
+ * Permet de rechercher dans les champs des grappes 
+ * Nécessite une boucle supplémentaire dans la page de recherche
+ * 
+ * @return array Tableau contenant plusieurs tableaux en fonction du type de champs 
+ * @param object $array Doit recevoir un tableau du même type
+ */
+
+function grappes_rechercher_liste_des_champs($array){
+	
+	$array['grappe'] = array(
+				'titre' => 8, 
+				'descriptif' => 5
+			);
+	return $array;
+}
 ?>
