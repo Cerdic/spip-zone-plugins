@@ -36,16 +36,11 @@ function cextras_objets_valides(){
 // (crayons appelle cela des 'controleurs')
 function cextras_types_formulaires(){
 	$types = array();
-
-	foreach(_chemin() as $dir) {
-		if (@is_dir($s = $dir.'extra-saisies/')) {
-			foreach(preg_files($s, '.*.html$') as $saisie) {
-				$type = basename($saisie,'.html');
-				$types[$type] = array(
-					'nom' => _T('cextras:type', array('type' => $type))
-				);
-			}
-		}
+	foreach(find_all_in_path('extra-saisies/','.*\.html$') as $saisie) {
+		$type = basename($saisie,'.html');
+		$types[$type] = array(
+			'nom' => _T('cextras:type', array('type' => $type))
+		);
 	}
 	return $types;
 }
