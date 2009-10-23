@@ -17,7 +17,9 @@ function formulaires_editer_champ_extra_charger_dist($extra_id='new', $redirect=
 	));
 	// valeur par defaut tout de meme sur sql et pour saisie
 	if (!$valeurs['sql']) $valeurs['sql'] = "text NOT NULL DEFAULT ''";
-	if (!$valeurs['type']) $valeurs['type'] = "ligne";
+	if (!$valeurs['type']) {
+		$valeurs['type'] = _CHAMPS_EXTRAS_SAISIES_EXTERNES ? "input" : "ligne";
+	}
 	
 	// si un extra est demande (pour edition)
 	// remplir les valeurs avec infos de celui-ci

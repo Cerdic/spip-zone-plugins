@@ -3,6 +3,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/cextras');
 
+// mettre 'true' pour utiliser
+// les saisies du plugin SAISIES
+// et non celles de 'extra-saisies/'
+// (experimental)
+define('_CHAMPS_EXTRAS_SAISIES_EXTERNES', false);
+
 // retourne la liste des objets valides utilisables par le plugin
 // (dont on peut afficher les champs dans les formulaires)
 function cextras_objets_valides(){
@@ -31,16 +37,33 @@ function cextras_objets_valides(){
 	return $objets;
 }
 
+
+// formater pour les boucles pour 'type'=>'nom'
+function cextras_objets_valides_boucle_pour(){
+	$objets = array();
+	foreach(cextras_objets_valides() as $objet) {
+		$objets[$objet['type']] = $objet['nom'];
+	}
+	return $objets;
+}
+
+
 // retourne la liste des types de formulaires de saisie
 // utilisables par les champs extras
 // (crayons appelle cela des 'controleurs')
 function cextras_types_formulaires(){
 	$types = array();
-	foreach(find_all_in_path('extra-saisies/','.*\.html$') as $saisie) {
+	
+	if (_CHAMPS_EXTRAS_SAISIES_EXTERNES) {
+		// plugin saisies (attention au chemin "/saisies/saisies/_base.html")
+		$saisies = find_all_in_path('saisies/','/([^_/]{1}[^/]*)\.html$');
+	} else { // saisies de ce plugin
+		$saisies = find_all_in_path('extra-saisies/','.*\.html$');
+	}
+	
+	foreach($saisies as $saisie) {
 		$type = basename($saisie,'.html');
-		$types[$type] = array(
-			'nom' => _T('cextras:type', array('type' => $type))
-		);
+		$types[$type] = _T('cextras:type', array('type' => $type));
 	}
 	return $types;
 }

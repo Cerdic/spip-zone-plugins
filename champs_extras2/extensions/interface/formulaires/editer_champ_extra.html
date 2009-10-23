@@ -6,151 +6,57 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input type='hidden' name='extra_id' value='#ENV{extra_id}' />
 		<ul>
-	  	#SET{fl,iextras}
-	  	#SET{name,champ}
-		#SET{label,#GET{fl}|concat{':label_',#GET{name}}|_T}
-		#SET{explications,#GET{fl}|concat{:caracteres_autorises_champ}|_T}
-		#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-		#SET{obli,obligatoire}
-		#SET{disabled,#ENV{new}|non}
-	    <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-	    	<label for="#GET{name}">#GET{label}</label>
-				[<span class='erreur_message'>(#GET{erreurs})</span>]
-				[<p class="explication">(#GET{explications})</p>]
-				<input type='text' class='text' name='#GET{name}' id='#GET{name}' value="#ENV{#GET{name}}"[ (#GET{disabled})disabled='disabled'] />
-				[(#GET{disabled}|oui)<input type='hidden' name='#GET{name}' value="#ENV{#GET{name}}" />]
-	    </li>
-		#SET{name,table}
-		#SET{label,#GET{fl}|concat{':label_',#GET{name}}|_T}
-		#SET{explications,''}
-		#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-		#SET{obli,obligatoire}
-		#SET{disabled,#ENV{new}|non}
-		<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-	    	<label for="#GET{name}">#GET{label}</label>
-				[<span class='erreur_message'>(#GET{erreurs})</span>]
-				[<p class="explication">(#GET{explications})</p>]
-				<select name='#GET{name}' id='#GET{name}'[ (#GET{disabled})disabled='disabled']>
-					<BOUCLE_liste_objet(POUR){tableau (#VAL|cextras_objets_valides)}>
-					<option value='[(#VALEUR|table_valeur{type})]'[ (#ENV{#GET{name}}|=={[(#VALEUR|table_valeur{type})]}|oui)selected='selected']>[(#VALEUR|table_valeur{nom})]</option>
-					</BOUCLE_liste_objet>
-				</select>
-				[(#GET{disabled}|oui)<input type='hidden' name='#GET{name}' value="#ENV{#GET{name}}" />]
-		</li>
-		#SET{name,label}
-		#SET{label,#GET{fl}|concat{':label_',#GET{name}}|_T}
-		#SET{explications,#GET{fl}|concat{:precisions_pour_label}|_T}
-		#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-		#SET{obli,obligatoire}
-		#SET{disabled,''}
-		<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-	    	<label for="#GET{name}">#GET{label}</label>
-				[<span class='erreur_message'>(#GET{erreurs})</span>]
-				[<p class="explication">(#GET{explications})</p>]
-				<input type='text' class='text' name='#GET{name}' id='#GET{name}' value="#ENV{#GET{name}}" [ (#GET{disabled})disabled='disabled']/>
-				[(#GET{disabled}|oui)<input type='hidden' name='#GET{name}' value="#ENV{#GET{name}}" />]
-		</li>
-		#SET{name,precisions}
-		#SET{label,#GET{fl}|concat{':label_',#GET{name}}|_T}
-		#SET{explications,#GET{fl}|concat{:precisions_pour_precisions}|_T}
-		#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-		#SET{obli,''}
-		#SET{disabled,''}
-		<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-	    	<label for="#GET{name}">#GET{label}</label>
-				[<span class='erreur_message'>(#GET{erreurs})</span>]
-				[<p class="explication">(#GET{explications})</p>]
-				<input type='text' class='text' name='#GET{name}' id='#GET{name}' value="#ENV{#GET{name}}" [ (#GET{disabled})disabled='disabled']/>
-				[(#GET{disabled}|oui)<input type='hidden' name='#GET{name}' value="#ENV{#GET{name}}" />]
-		</li>
-		#SET{name,obligatoire}
-		#SET{label,#GET{fl}|concat{':label_',#GET{name}}|_T}
-		#SET{explications,''}
-		#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-		#SET{obli,obligatoire}
-		#SET{disabled,''}
-		<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-	    	<label for="#GET{name}">#GET{label}</label>
-				[<span class='erreur_message'>(#GET{erreurs})</span>]
-				[<p class="explication">(#GET{explications})</p>]
-				<div class="choix">
-					<input type='radio' class='radio' name='#GET{name}' id='#GET{name}_oui'[ (#ENV{#GET{name}}|oui)checked='checked'][ (#GET{disabled})disabled='disabled'] value='oui' />
-					<label for="#GET{name}_oui"><:item_oui:></label>			
-				</div>
-				<div class="choix">
-					<input type='radio' class='radio' name='#GET{name}' id='#GET{name}_non'[ (#ENV{#GET{name}}|non)checked='checked'][ (#GET{disabled})disabled='disabled'] value='' />
-					<label for="#GET{name}_non"><:item_non:></label>			
-				</div>
-				[(#GET{disabled}|oui)<input type='hidden' name='#GET{name}' value="#ENV{#GET{name}}" />]
-		</li>
-		#SET{name,rechercher}
-		#SET{label,#GET{fl}|concat{':label_',#GET{name}}|_T}
-		#SET{explications,#GET{fl}|concat{:precisions_pour_rechercher}|_T}
-		#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-		#SET{obli,''}
-		#SET{disabled,''}
-		<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-	    	<label for="#GET{name}">#GET{label}</label>
-				[<span class='erreur_message'>(#GET{erreurs})</span>]
-				[<p class="explication">(#GET{explications})</p>]
-				<div class="choix">
-					<input type='radio' class='radio' name='#GET{name}' id='#GET{name}_oui'[ (#ENV{#GET{name}}|oui)checked='checked'][ (#GET{disabled})disabled='disabled'] value='oui' />
-					<label for="#GET{name}_oui"><:item_oui:></label>			
-				</div>
-				<div class="choix">
-					<input type='radio' class='radio' name='#GET{name}' id='#GET{name}_non'[ (#ENV{#GET{name}}|non)checked='checked'][ (#GET{disabled})disabled='disabled'] value='' />
-					<label for="#GET{name}_non"><:item_non:></label>			
-				</div>
-				[(#GET{disabled}|oui)<input type='hidden' name='#GET{name}' value="#ENV{#GET{name}}" />]
-		</li>
-		#SET{name,type}
-		#SET{label,#GET{fl}|concat{':label_',#GET{name}}|_T}
-		#SET{explications,#GET{fl}|concat{:precisions_pour_type}|_T}
-		#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-		#SET{obli,obligatoire}
-		#SET{disabled,''}
-		<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-	    	<label for="#GET{name}">#GET{label}</label>
-				[<span class='erreur_message'>(#GET{erreurs})</span>]
-				[<p class="explication">(#GET{explications})</p>]
-				<select name='#GET{name}' id='#GET{name}'[ (#GET{disabled})disabled='disabled']>
-					<BOUCLE_liste_types(POUR){tableau (#VAL|cextras_types_formulaires)}>
-					<option value='#CLE'[ (#ENV{#GET{name}}|=={#CLE}|oui)selected='selected']>[(#VALEUR|table_valeur{nom})]</option>
-					</BOUCLE_liste_types>
-				</select>
-				[(#GET{disabled}|oui)<input type='hidden' name='#GET{name}' value="#ENV{#GET{name}}" />]
-		</li>
-		#SET{name,enum}
-		#SET{label,#GET{fl}|concat{':label_',#GET{name}}|_T}
-		#SET{explications,#GET{fl}|concat{:precisions_pour_enum}|_T}
-		#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-		#SET{obli,''}
-		#SET{disabled,''}
-		<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-	    	<label for="#GET{name}">#GET{label}</label>
-				[<span class='erreur_message'>(#GET{erreurs})</span>]
-				[<p class="explication">(#GET{explications})</p>]
-				<textarea name="#GET{name}"
-					[(#GET{disabled})disabled='disabled']>
-[(#ENV{#GET{name}}|sinon{',-vide-
+		#SET{disable,#ENV{new}|?{'',oui}}
+		
+		[(#SAISIE{input,champ,
+			label=<:iextras:label_champ:>,
+			explication=<:iextras:caracteres_autorises_champ:>,
+			obligatoire=oui,
+			disable_avec_post=#GET{disable}})]
+	
+		[(#SAISIE{selection,table,
+			label=<:iextras:label_table:>,
+			obligatoire=oui,
+			disable_avec_post=#GET{disable},
+			datas=[(#VAL|cextras_objets_valides_boucle_pour)]})]
+
+		[(#SAISIE{input,label,
+			label=<:iextras:label_label:>,
+			explication=<:iextras:precisions_pour_label:>,
+			obligatoire=oui})]
+
+		[(#SAISIE{input,precisions,
+			label=<:iextras:label_precisions:>,
+			explication=<:iextras:precisions_pour_precisions:>})]
+
+		[(#SAISIE{oui_non,obligatoire,
+			label=<:iextras:label_obligatoire:>,
+			obligatoire=oui})]
+
+		[(#SAISIE{oui_non,rechercher,
+			label=<:iextras:label_rechercher:>,
+			explication=<:iextras:precisions_pour_rechercher:>})]
+
+		[(#SAISIE{selection,type,
+			label=<:iextras:label_type:>,
+			obligatoire=oui,
+			explication=<:iextras:precisions_pour_type:>,
+			datas=[(#VAL|cextras_types_formulaires)]})]
+
+		#SET{defaut,",-vide-
 1,valeur 1
-2,valeur 2'})]</textarea>
-				[(#GET{disabled}|oui)<input type='hidden' name='#GET{name}' value="#ENV{#GET{name}}" />]
-		</li>
-		#SET{name,sql}
-		#SET{label,#GET{fl}|concat{':label_',#GET{name}}|_T}
-		#SET{explications,''}
-		#SET{obli,obligatoire}
-		#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-		#SET{disabled,#ENV{new}|non}
-		<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-	    	<label for="#GET{name}">#GET{label}</label>
-				[<span class='erreur_message'>(#GET{erreurs})</span>]
-				[<p class="explication">(#GET{explications})</p>]
-				<input type='text' class='text' name='#GET{name}' id='#GET{name}' value="#ENV{#GET{name}}"[ (#GET{disabled})disabled='disabled']/>
-				[(#GET{disabled}|oui)<input type='hidden' name='#GET{name}' value="#ENV{#GET{name}}" />]
-		</li>
-				
+2,valeur 2"}
+		[(#SAISIE{textarea,enum,
+			label=<:iextras:label_enum:>,
+			explication=<:iextras:precisions_pour_enum:>,
+			rows=3,
+			defaut=#GET{defaut}})]
+
+		[(#SAISIE{input,sql,
+			label=<:iextras:label_sql:>,
+			obligatoire=oui,
+			disable_avec_post=#GET{disable}})]
+
 		</ul>
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->
