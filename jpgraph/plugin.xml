@@ -11,7 +11,7 @@
 	<etat>dev</etat>
 	<prefix>jpgraph</prefix>
 	<icon>img/jpgraph.png</icon>
-	<lien></lien>
+	<lien>http://www.spip-contrib.net/plugin-JpGraph</lien>
 	<necessite id="lib:jpgraph-3.0.6" src="http://hem.bredband.net/jpgraph2/jpgraph-3.0.6.tar.bz2" />
 	<fonctions>jpgraph_fonctions.php</fonctions>
 </plugin>
