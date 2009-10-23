@@ -4,7 +4,7 @@
 	<licence>QPL 1.0</licence>
 	<version>0.1</version>
 	<description>
-  Bibliotheque graphique pour g&#233;n&#233;rer des graphes (requiert PHP5)
+  Bibliotheque graphique pour g&#233;n&#233;rer des graphes (requiert PHP5.1 avec l'extension GD)
   
   Une fois le plugin activ&#233;, [consulter la page d&#233;monstration->../spip.php?page=demo_jpgraph]  
   </description>
