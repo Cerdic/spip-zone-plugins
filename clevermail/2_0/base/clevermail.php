@@ -177,6 +177,7 @@ function clevermail_declarer_tables_principales($tables_principales) {
 }
 
 function clevermail_upgrade($nom_meta_base_version, $version_cible) {
+	include_spip('inc/meta');
   $current_version = 0.0;
   if ((!isset($GLOBALS['meta'][$nom_meta_base_version]))
       || (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){
