@@ -134,6 +134,7 @@ function ce_calculer_saisie_externe($c, $contexte) {
 			$opts['precisions'],
 			$opts['sql'],
 			$opts['rechercher'],
+			$opts['filtres'],
 			// deja dedans
 			$opts['label'],
 			$opts['explication'],
