@@ -10,7 +10,7 @@
 		label=<:plugin:en_region:>})]
 ]
 
-<select name="#ENV{nom}" id="champ_#ENV{nom}"[ value="(#ENV{valeur})"]>
+<select name="#ENV{nom}" id="champ_#ENV{nom}"[ value="(#ENV{valeur})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"]>
 [(#ENV{cacher_option_intro}|non)
 	<option value="0">[(#ENV{option_intro})]</option>]
 <BOUCLE_mots(MOTS){par num titre, titre}>

@@ -10,4 +10,4 @@
 		label=<:spa:couleur_foncee:>,
 		obligatoire=non})]
 ]
-<textarea name="#ENV{nom}"[ class="(#ENV{class})"] id="champ_#ENV{nom}" rows="[(#ENV{rows,20})]" cols="[(#ENV{cols,40})]">[(#ENV{valeur,#ENV{defaut}})]</textarea>
+<textarea name="#ENV{nom}"[ class="(#ENV{class})"] id="champ_#ENV{nom}" rows="[(#ENV{rows,20})]" cols="[(#ENV{cols,40})]"[ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"]>[(#ENV{valeur,#ENV{defaut}})]</textarea>

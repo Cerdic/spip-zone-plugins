@@ -14,7 +14,7 @@
 		label=<:plugin:secteur_region:>,
 		multiple=oui})] 
 ]
-<select name="#ENV{nom}[(#ENV{multiple}|?{[(#VAL{&#91;&#93;}|html_entity_decode)]})]" id="champ_#ENV{nom}"[ class="(#ENV{class})"][(#ENV{multiple}|oui) multiple="multiple"]>
+<select name="#ENV{nom}[(#ENV{multiple}|?{[(#VAL{&#91;&#93;}|html_entity_decode)]})]" id="champ_#ENV{nom}"[ class="(#ENV{class})"][(#ENV{multiple}|oui) multiple="multiple"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"] >
 	[(#ENV{cacher_option_intro}|ou{#ENV{multiple}}|non)
 		<option value="0">[(#ENV{option_intro})]</option>]
 	<BOUCLE_secteurs(RUBRIQUES){racine}{par num titre, titre}{tout}>

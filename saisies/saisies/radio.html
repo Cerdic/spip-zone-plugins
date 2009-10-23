@@ -16,7 +16,7 @@
 ]
 <BOUCLE_radio(POUR){tableau #ENV{datas}}>
 <div class="choix">
-	<input type="radio" name="#ENV{nom}" class="radio" id='champ_#ENV{nom}_#COMPTEUR_BOUCLE'[ (#ENV{valeur,#ENV{defaut}}|=={#CLE}|oui)checked='checked'] value='#CLE' />
+	<input type="radio" name="#ENV{nom}" class="radio" id='champ_#ENV{nom}_#COMPTEUR_BOUCLE'[ (#ENV{valeur,#ENV{defaut}}|=={#CLE}|oui)checked='checked'] value='#CLE' [ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"] />
 	<label for="champ_#ENV{nom}_#COMPTEUR_BOUCLE">#VALEUR</label>
 </div>
 </BOUCLE_radio>
