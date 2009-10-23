@@ -88,6 +88,70 @@ function cextras_creer_contexte($c, $contexte_flux) {
 }
 
 
+// recuperation d'une saisie interne
+function ce_calculer_saisie_interne($c, $contexte) {
+	// le contexte possede deja l'entree SQL, 
+	// calcule par le pipeline formulaire_charger.
+	$contexte = cextras_creer_contexte($c, $contexte);
+
+	// calculer le bon squelette et l'ajouter
+	if (!find_in_path(
+	($f = 'extra-saisies/'.$c->type).'.html')) {
+		// si on ne sait pas, on se base sur le contenu
+		// pour choisir ligne ou bloc
+		$f = strstr($contexte[$c->champ], "\n")
+			? 'extra-saisies/bloc'
+			: 'extra-saisies/ligne';
+	}
+	return array($f, $contexte);
+}
+
+
+// en utilisant le plugin "saisies"
+function ce_calculer_saisie_externe($c, $contexte) {
+
+	$contexte['nom'] = $c->champ;
+	$contexte['type_saisie'] = $c->type;
+	if (isset($contexte[$c->champ]) and $contexte[$c->champ]) {
+		$contexte['valeur'] = $contexte[$c->champ];
+	}
+		
+	$opts = $c->toArray();
+	// remapper les precisions
+	if ($opts['precisions']) {
+		$opts['explication'] = $opts['precisions'];
+	}
+	// traductions a faire
+	foreach (array('label', 'explication', 'attention') as $nom) {
+		if ($opts[$nom]) {
+			$contexte[$nom] = _T($opts[$nom]);
+		}
+	}
+	
+	// inutiles dans le contexte
+	unset(  $opts['champ'],
+			$opts['type'],
+			$opts['precisions'],
+			$opts['sql'],
+			$opts['rechercher'],
+			// deja dedans
+			$opts['label'],
+			$opts['explication'],
+			$opts['attention']);
+		
+	// tout inserer le reste des champs
+	foreach ($opts as $nom=>$val) {
+		if ($val) {
+			$contexte[$nom] = $val;
+		}
+	}
+
+	return array('saisies/_base', $contexte);
+}
+
+
+
+
 // recuperer en bdd les valeurs des champs extras
 // en une seule requete...
 
@@ -146,20 +210,11 @@ function cextras_editer_contenu_objet($flux){
 				'id_objet' => $flux['args']['id'], 
 				'contexte' => $flux['args']['contexte']))) 
 			{
-						
-				// le contexte possede deja l'entree SQL, 
-				// calcule par le pipeline formulaire_charger.
-				$contexte = cextras_creer_contexte($c, $flux['args']['contexte']);
-				$extras[$c->champ] = $contexte[$c->champ];
 
-				// calculer le bon squelette et l'ajouter
-				if (!find_in_path(
-				($f = 'extra-saisies/'.$c->type).'.html')) {
-					// si on ne sait pas, on se base sur le contenu
-					// pour choisir ligne ou bloc
-					$f = strstr($contexte[$c->champ], "\n")
-						? 'extra-saisies/bloc'
-						: 'extra-saisies/ligne';
+				if ($c->saisie_externe) {
+					list($f, $contexte) = ce_calculer_saisie_externe($c, $flux['args']['contexte']);
+				} else {
+					list($f, $contexte) = ce_calculer_saisie_interne($c, $flux['args']['contexte']);
 				}
 				$saisie = recuperer_fond($f, $contexte);
 

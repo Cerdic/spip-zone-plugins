@@ -5,59 +5,66 @@
 	<form method='post' action='#ENV{action}'><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input type='hidden' name='extra_id' value='#ENV{extra_id}' />
-		<ul>
+
 		#SET{disable,#ENV{new}|?{'',oui}}
-		
-		[(#SAISIE{input,champ,
-			label=<:iextras:label_champ:>,
-			explication=<:iextras:caracteres_autorises_champ:>,
-			obligatoire=oui,
-			disable_avec_post=#GET{disable}})]
-	
-		[(#SAISIE{selection,table,
-			label=<:iextras:label_table:>,
-			obligatoire=oui,
-			disable_avec_post=#GET{disable},
-			datas=[(#VAL|cextras_objets_valides_boucle_pour)]})]
+		<fieldset>
+			<h3 class='legend'><:iextras:legend_declaration:></h3>
+			<ul>
+			[(#SAISIE{input,champ,
+				label=<:iextras:label_champ:>,
+				explication=<:iextras:caracteres_autorises_champ:>,
+				obligatoire=oui,
+				disable_avec_post=#GET{disable}})]
 
-		[(#SAISIE{input,label,
-			label=<:iextras:label_label:>,
-			explication=<:iextras:precisions_pour_label:>,
-			obligatoire=oui})]
+			[(#SAISIE{selection,table,
+				label=<:iextras:label_table:>,
+				obligatoire=oui,
+				disable_avec_post=#GET{disable},
+				datas=[(#VAL|cextras_objets_valides_boucle_pour)]})]
 
-		[(#SAISIE{input,precisions,
-			label=<:iextras:label_precisions:>,
-			explication=<:iextras:precisions_pour_precisions:>})]
-
-		[(#SAISIE{oui_non,obligatoire,
-			label=<:iextras:label_obligatoire:>,
-			obligatoire=oui})]
-
-		[(#SAISIE{oui_non,rechercher,
-			label=<:iextras:label_rechercher:>,
-			explication=<:iextras:precisions_pour_rechercher:>})]
-
-		[(#SAISIE{selection,type,
-			label=<:iextras:label_type:>,
-			obligatoire=oui,
-			explication=<:iextras:precisions_pour_type:>,
-			datas=[(#VAL|cextras_types_formulaires)]})]
-
-		#SET{defaut,",-vide-
+			[(#SAISIE{input,label,
+				label=<:iextras:label_label:>,
+				explication=<:iextras:precisions_pour_label:>,
+				obligatoire=oui})]
+				
+			[(#SAISIE{selection,type,
+				label=<:iextras:label_type:>,
+				obligatoire=oui,
+				explication=<:iextras:precisions_pour_type:>,
+				datas=[(#VAL|cextras_types_formulaires)]})]
+				
+			#SET{defaut,",-vide-
 1,valeur 1
 2,valeur 2"}
-		[(#SAISIE{textarea,enum,
-			label=<:iextras:label_enum:>,
-			explication=<:iextras:precisions_pour_enum:>,
-			rows=3,
-			defaut=#GET{defaut}})]
+			[(#SAISIE{textarea,enum,
+				label=<:iextras:label_enum:>,
+				explication=<:iextras:precisions_pour_enum:>,
+				rows=3,
+				defaut=#GET{defaut}})]
 
-		[(#SAISIE{input,sql,
-			label=<:iextras:label_sql:>,
-			obligatoire=oui,
-			disable_avec_post=#GET{disable}})]
+			</ul>
+		</fieldset>
+		<fieldset>
+			<h3 class='legend'><:iextras:legend_options:></h3>	
+			<ul>
+			[(#SAISIE{input,precisions,
+				label=<:iextras:label_precisions:>,
+				explication=<:iextras:precisions_pour_precisions:>})]
 
-		</ul>
+			[(#SAISIE{oui_non,obligatoire,
+				label=<:iextras:label_obligatoire:>,
+				obligatoire=oui})]
+
+			[(#SAISIE{oui_non,rechercher,
+				label=<:iextras:label_rechercher:>,
+				explication=<:iextras:precisions_pour_rechercher:>})]
+
+			[(#SAISIE{input,sql,
+				label=<:iextras:label_sql:>,
+				obligatoire=oui,
+				disable_avec_post=#GET{disable}})]
+			</ul>
+		</fieldset>		
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->
 		<p class='boutons'><input type='submit' class='submit' value='[(#ENV{new}|?{<:bouton_ajouter:>,<:bouton_modifier:>})]' /></p>

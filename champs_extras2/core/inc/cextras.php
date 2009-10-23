@@ -13,6 +13,15 @@ class ChampExtra{
 	var $sql = ''; // declaration sql (text NOT NULL DEFAULT '')
 	
 	var $_id = ''; // identifiant de ce champ extra
+
+	// experimental (avec saisies)
+	var $saisie_externe = false;
+	var $explication = ''; // message d'explication !
+	var $attention = ''; // message d'attention !
+	var $filtres = ''; // _TRAITEMENT_RACCOURCIS ,  _TRAITEMENT_TYPO
+	var	$class = ""; // classes CSS	sur l'element
+	var	$li_class = ""; // classes CSS sur l'element parent LI
+
 	
 	// constructeur
 	function ChampExtra($params=array()) {
@@ -68,6 +77,22 @@ function declarer_champs_extras($champs, $tables){
 	return $tables;
 }
 
+
+function declarer_champs_extras_interfaces($champs, $interface){
+	// ajoutons les filtres sur les champs
+	foreach ($champs as $c){
+		if ($c->filtres and $c->champ and $c->sql) {
+			$tobjet = table_objet($c->table);
+			$balise = strtoupper($c->champ);
+			// definir
+			if (!isset($interface['table_des_traitements'][$balise])) {
+				$interface['table_des_traitements'][$balise] = array();
+			}
+			$interface['table_des_traitements'][$balise][$tobjet] = $c->filtres;
+		}
+	}
+	return $interface;
+}
 
 
 /**

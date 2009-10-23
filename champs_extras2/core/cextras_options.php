@@ -12,4 +12,9 @@
 		include_spip('base/cextras');
 		return cextras_declarer_tables_principales($tables_principales);
 	}
+	$GLOBALS['spip_pipeline']['declarer_tables_interfaces'] .= '||cextras_declarer_champs_interfaces_apres_les_autres';
+	function cextras_declarer_champs_interfaces_apres_les_autres($interface) {
+		include_spip('base/cextras');
+		return cextras_declarer_tables_interfaces($interface);
+	}
 ?>

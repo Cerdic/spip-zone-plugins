@@ -45,6 +45,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_sql' => 'D&eacute;finition SQL',
 	'label_table' => 'Objet',
 	'label_type' => 'Type de saisie',
+	'legend_declaration' => 'D&eacute;claration',
+	'legend_options' => 'Options',
 	'liste_des_extras' => 'Liste des champs extras',
 	'liste_des_extras_possibles' => 'Liste des champs pr&eacute;sents non g&eacute;r&eacute;s',
 	//P
