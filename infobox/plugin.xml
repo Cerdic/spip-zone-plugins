@@ -26,7 +26,7 @@ _ On peut utiliser cette balise sans restricition.
 	[Doc en ligne, forum, FAQ sur SPIP-Contrib->http://www.spip-contrib.net/Plugin-Infobox?var_mode=preview]
 	</lien>
 	
-	<icon>reperes-24.png</icon>
+	<icon>ateliers_cym-24.gif</icon>
 	
 	<pipeline>
 		<nom>insert_head</nom>
