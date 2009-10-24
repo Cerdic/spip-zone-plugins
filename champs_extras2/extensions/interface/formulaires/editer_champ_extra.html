@@ -43,17 +43,14 @@
 
 			</ul>
 		</fieldset>
+		
 		<fieldset>
-			<h3 class='legend'><:iextras:legend_options:></h3>	
+			<h3 class='legend'><:iextras:legend_options_techniques:></h3>	
 			<ul>
-			[(#SAISIE{input,explication,
-				label=<:iextras:label_explication:>,
-				explication=<:iextras:precisions_pour_explication:>})]
-
 			[(#SAISIE{oui_non,obligatoire,
 				label=<:iextras:label_obligatoire:>,
 				obligatoire=oui})]
-
+				
 			[(#SAISIE{oui_non,rechercher,
 				label=<:iextras:label_rechercher:>,
 				explication=<:iextras:precisions_pour_rechercher:>})]
@@ -62,8 +59,39 @@
 				label=<:iextras:label_sql:>,
 				obligatoire=oui,
 				disable_avec_post=#GET{disable}})]
+
+			[(#SAISIE{radio,traitements,
+				label=<:iextras:label_traitements:>,
+				explication=<:iextras:precisions_pour_traitements:>,
+				datas=#ARRAY{
+					'',<:iextras:radio_traitements_aucun:>,
+					'_TRAITEMENT_TYPO',<:iextras:radio_traitements_typo:>,
+					'_TRAITEMENT_RACCOURCIS',<:iextras:radio_traitements_raccourcis:>}})]
+			
 			</ul>
-		</fieldset>		
+		</fieldset>
+		
+		<fieldset>
+			<h3 class='legend'><:iextras:legend_options_saisies:></h3>	
+			<ul>
+			[(#SAISIE{input,explication,
+				label=<:iextras:label_explication:>,
+				explication=<:iextras:precisions_pour_explication:>})]
+[(#VAL{_CHAMPS_EXTRAS_SAISIES_EXTERNES}|defined|et{#EVAL{_CHAMPS_EXTRAS_SAISIES_EXTERNES}})
+			[(#SAISIE{input,attention,
+				label=<:iextras:label_attention:>,
+				explication=<:iextras:precisions_pour_attention:>})]
+
+			[(#SAISIE{input,class,
+				label=<:iextras:label_class:>,
+				explication=<:iextras:precisions_pour_class:>})]
+				
+			[(#SAISIE{input,li_class,
+				label=<:iextras:label_li_class:>,
+				explication=<:iextras:precisions_pour_li_class:>})]
+]
+			</ul>
+		</fieldset>	
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->
 		<p class='boutons'><input type='submit' class='submit' value='[(#ENV{new}|?{<:bouton_ajouter:>,<:bouton_modifier:>})]' /></p>

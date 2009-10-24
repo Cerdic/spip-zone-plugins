@@ -37,6 +37,8 @@ function formulaires_editer_champ_extra_charger_dist($extra_id='new', $redirect=
 		} else {
 			$valeurs['type'] = 'interne/' . $valeurs['type'];
 		}
+		// chaque saisie_parametres devient un parametre a charger
+		$valeurs = array_merge($valeurs, $valeurs['saisie_parametres']);
 	}
 	return $valeurs;
 }

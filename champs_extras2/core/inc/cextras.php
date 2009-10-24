@@ -85,14 +85,16 @@ function declarer_champs_extras($champs, $tables){
 function declarer_champs_extras_interfaces($champs, $interface){
 	// ajoutons les filtres sur les champs
 	foreach ($champs as $c){
-		if ($c->filtres and $c->champ and $c->sql) {
+		if ($c->traitements and $c->champ and $c->sql) {
 			$tobjet = table_objet($c->table);
 			$balise = strtoupper($c->champ);
 			// definir
 			if (!isset($interface['table_des_traitements'][$balise])) {
 				$interface['table_des_traitements'][$balise] = array();
 			}
-			$interface['table_des_traitements'][$balise][$tobjet] = $c->filtres;
+			// le traitement peut etre le nom d'un define
+			$traitement = defined($c->traitements) ? constant($c->traitements) : $c->traitements;
+			$interface['table_des_traitements'][$balise][$tobjet] = $traitement;
 		}
 	}
 	return $interface;
