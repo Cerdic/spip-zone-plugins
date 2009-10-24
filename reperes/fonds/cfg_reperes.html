@@ -33,8 +33,53 @@
 	
 </fieldset>	
 
+
+
+
+<fieldset class="existant">
+
+	<legend><:reperes:cfg_lbl_existant:></legend>
+	
+	<table class="spip">
+	<thead>
+	<tr class="row_first">
+		<th rowspan="2">id</th>
+		<th colspan="2">Orientation</th>
+		<th rowspan="2">Position<br />(px ou %)</th>
+		<th rowspan="2">Couleur<br />(#abc ou web)</th>
+		<th rowspan="2">Suppr.</th>
+	</tr>
+	<tr class="row_first">
+		<th>Hor.</th>
+		<th>Vert.</th>
+	</tr>
+	</thead>
+	<tbody>
+	<!-- debut de la boucle -->
+	<tr class="row_odd">
+		<td>1</td>
+		<td><input type="radio" name="orientation" value="vertical" checked="checked" disabled="disabled" class="orientation" /></td>
+		<td><input type="radio" name="orientation" value="horizontal" disabled="disabled" class="orientation" /></td>
+		<td>120px</td>
+		<td>0</td>
+		<td><img src="plugins/auto/reperes/img_pack/supprime_21x18.png" alt="<:reperes:cfg_alt_supprimer_repere:>" /></td>
+	</tr>
+	<!--  fin  de la boucle -->
+	</tbody>
+	</table>
+	
+	<p><:reperes:cfg_help_existant:></p>
+	
+</fieldset>
+
+
+
+
+
 <fieldset class="ajouter">
+
 	<legend><:reperes:cfg_lbl_ajouter:></legend>
+
 	<table class="spip">
 		<thead>
 		<tr class="row_first">
@@ -60,7 +105,8 @@
 		</tbody>
 
 	</table>
-	
+
+	<p><:reperes:cfg_help_ajouter:></p>
 
 </fieldset>
 
