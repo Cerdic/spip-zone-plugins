@@ -26,8 +26,7 @@
 				label=<:iextras:label_label:>,
 				explication=<:iextras:precisions_pour_label:>,
 				obligatoire=oui})]
-				
-			[(#SAISIE{selection,type,
+			[(#SAISIE{selection_par_groupe,type,
 				label=<:iextras:label_type:>,
 				obligatoire=oui,
 				explication=<:iextras:precisions_pour_type:>,
@@ -47,9 +46,9 @@
 		<fieldset>
 			<h3 class='legend'><:iextras:legend_options:></h3>	
 			<ul>
-			[(#SAISIE{input,precisions,
-				label=<:iextras:label_precisions:>,
-				explication=<:iextras:precisions_pour_precisions:>})]
+			[(#SAISIE{input,explication,
+				label=<:iextras:label_explication:>,
+				explication=<:iextras:precisions_pour_explication:>})]
 
 			[(#SAISIE{oui_non,obligatoire,
 				label=<:iextras:label_obligatoire:>,

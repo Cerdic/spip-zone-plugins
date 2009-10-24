@@ -3,9 +3,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/cextras');
 
-// mettre 'true' pour utiliser
+// mettre 'true' pour autoriser l'utilisation
 // les saisies du plugin SAISIES
-// et non celles de 'extra-saisies/'
+// en plus de celles de 'extra-saisies/'
 // (experimental)
 define('_CHAMPS_EXTRAS_SAISIES_EXTERNES', false);
 
@@ -54,17 +54,27 @@ function cextras_objets_valides_boucle_pour(){
 function cextras_types_formulaires(){
 	$types = array();
 	
+	// saisies de ce plugin
+	$saisies = find_all_in_path('extra-saisies/','.*\.html$');
+	$noms = array();
+	foreach($saisies as $saisie) {
+		$type = basename($saisie,'.html');
+		$noms['interne/'.$type] = _T('cextras:type', array('type' => $type));
+	}
+	$types[_T('iextras:saisies_champs_extras')] = $noms;
+
+		
 	if (_CHAMPS_EXTRAS_SAISIES_EXTERNES) {
 		// plugin saisies (attention au chemin "/saisies/saisies/_base.html")
 		$saisies = find_all_in_path('saisies/','/([^_/]{1}[^/]*)\.html$');
-	} else { // saisies de ce plugin
-		$saisies = find_all_in_path('extra-saisies/','.*\.html$');
+		$noms = array();
+		foreach($saisies as $saisie) {
+			$type = basename($saisie,'.html');
+			$noms['externe/'.$type] = _T('cextras:type', array('type' => $type));
+		}
+		$types[_T('iextras:saisies_saisies')] = $noms;
 	}
-	
-	foreach($saisies as $saisie) {
-		$type = basename($saisie,'.html');
-		$types[$type] = _T('cextras:type', array('type' => $type));
-	}
+
 	return $types;
 }
 

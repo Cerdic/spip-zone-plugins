@@ -40,7 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_enum' => 'Liste de valeurs',
 	'label_label' => 'Label de la saisie',
 	'label_obligatoire' => 'Champ obligatoire&nbsp;?',
-	'label_precisions' => 'Pr&eacute;cisions de la saisie',
+	'label_explication' => 'Explications de la saisie',
 	'label_rechercher' => 'Recherche',
 	'label_sql' => 'D&eacute;finition SQL',
 	'label_table' => 'Objet',
@@ -52,12 +52,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	//P
 	'precisions_pour_enum' => 'Certains types de champ demandent une liste des valeurs accept&eacute;es&nbsp;: indiquez-en une par ligne, suivie d\'une virgule et d\'une description. Une ligne vide pour la valeur par d&eacute;faut. La description peut &ecirc;tre une cha&icirc;ne de langue.',
 	'precisions_pour_label' => 'Peut &ecirc;tre une cha&icirc;ne de langue &laquo;plugin:chaine&raquo;.',
-	'precisions_pour_precisions' => 'Optionnellement, vous pouvez donner plus d\'informations concernant la saisie. 
+	'precisions_pour_explication' => 'Optionnellement, vous pouvez donner plus d\'informations concernant la saisie. 
 		Peut &ecirc;tre une cha&icirc;ne de langue &laquo;plugin:chaine&raquo;.',
 	'precisions_pour_rechercher' => 'Inclure ce champ dans le moteur de recherche ?',
 	'precisions_pour_type' => 'Afficher une saisie de type :',
 	
 	//S
+	'saisies_champs_extras' => 'De &laquo;Champs Extras&raquo;',
+	'saisies_saisies' => 'De «Saisies&raquo;',
 	'supprimer_reelement' => 'Supprimer ce champ ?',
 	//T
 	'titre_page_iextras' => 'Champs Extras',

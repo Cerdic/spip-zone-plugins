@@ -17,8 +17,9 @@ function formulaires_editer_champ_extra_charger_dist($extra_id='new', $redirect=
 	));
 	// valeur par defaut tout de meme sur sql et pour saisie
 	if (!$valeurs['sql']) $valeurs['sql'] = "text NOT NULL DEFAULT ''";
+
 	if (!$valeurs['type']) {
-		$valeurs['type'] = _CHAMPS_EXTRAS_SAISIES_EXTERNES ? "input" : "ligne";
+		$valeurs['type'] = "ligne";
 	}
 	
 	// si un extra est demande (pour edition)
@@ -26,6 +27,16 @@ function formulaires_editer_champ_extra_charger_dist($extra_id='new', $redirect=
 	if (!$new) {
 		$extra = iextra_get_extra($extra_id);
 		$valeurs = array_merge($valeurs, $extra->toArray());
+		// compatibilite le temps de migrer vers cextras 1.4.0
+		if (isset($valeurs['precisions']) and $valeurs['precisions']) {
+			$valeurs['saisie_parametres']['explication'] = $valeurs['precisions'];
+		}
+		// separer saisies internes a celles du plug "saisies"
+		if ($valeurs['saisie_externe']) {
+			$valeurs['type'] = 'externe/' . $valeurs['type'];
+		} else {
+			$valeurs['type'] = 'interne/' . $valeurs['type'];
+		}
 	}
 	return $valeurs;
 }
@@ -83,6 +94,17 @@ function formulaires_editer_champ_extra_traiter_dist($extra_id='new', $redirect=
 	// recuperer les valeurs postees
 	$extra = iextras_post_formulaire();
 
+	// cextra 1.4.0 : on separe les parametres des saisies
+	// dans un tableau specifique
+	$extra['saisie_parametres'] = array();
+	foreach (array('explication', 'attention', 'class', 'li_class') as $p) {
+		$extra['saisie_parametres'][$p] = $extra[$p];
+		unset($extra[$p]);
+	}
+	// type est soit interne, soit externe (plugin saisies)
+	$extra['saisie_externe'] = (substr($extra['type'],0,7) == 'externe' );
+	$extra['type'] = substr($extra['type'], 8); // enlever 'externe/' et 'interne/'
+
 	// recreer le tableau de stockage des extras
 	$extras = iextras_get_extras();
 
@@ -122,7 +144,15 @@ function formulaires_editer_champ_extra_traiter_dist($extra_id='new', $redirect=
 // recuperer les valeurs postees par le formulaire
 function iextras_post_formulaire() {
 	$extra = array();
-	foreach(array('champ', 'table', 'type', 'label', 'sql', 'precisions', 'obligatoire', 'enum', 'rechercher') as $c) {
+	foreach(array(
+		'champ', 'table', 'type',
+		'label', 'sql',
+		'traitements',
+		// 'precisions',
+		'obligatoire',
+		'enum', 'rechercher',
+		'explication', 'attention', 'class', 'li_class'
+	) as $c) {
 		$extra[$c] = _request($c);
 	}
 	return $extra;	
