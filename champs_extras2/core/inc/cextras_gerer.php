@@ -84,13 +84,13 @@ function cextras_types_formulaires(){
  * gere en meme temps la mise a jour de la meta
  * du plugin concernant la base de donnee
  */
-function installer_champs_extras($champs, $nom_meta_base_version, $version_cible) {
+function installer_champs_extras($champs, $nom_meta_base_version, $version_cible, $creer_meta=true) {
 	$current_version = 0.0;
 	if ((!isset($GLOBALS['meta'][$nom_meta_base_version]))
 	|| (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){
 		// cas d'une installation
-		if ($current_version==0.0){
-			creer_champs_extras($champs);
+		creer_champs_extras($champs);
+		if ($creer_meta) {
 			ecrire_meta($nom_meta_base_version,$current_version=$version_cible,'non');
 		}
 	}	
