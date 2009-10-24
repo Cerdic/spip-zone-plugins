@@ -74,6 +74,8 @@ function cextras_creer_contexte($c, $contexte_flux) {
 	$contexte['champ_extra'] = $c->champ;
 	$contexte['label_extra'] = _T($c->label);
 	$contexte['precisions_extra'] = _T($c->precisions);
+	if (isset($c->saisie_parametres['explication']) and $c->saisie_parametres['explication'])
+		$contexte['precisions_extra'] = _T($c->saisie_parametres['explication']);
 	$contexte['obligatoire_extra'] = $c->obligatoire ? 'obligatoire' : '';
 	$contexte['valeur_extra'] = $contexte_flux[$c->champ];
 	$contexte['enum_extra'] = $c->enum;
@@ -112,40 +114,27 @@ function ce_calculer_saisie_externe($c, $contexte) {
 
 	$contexte['nom'] = $c->champ;
 	$contexte['type_saisie'] = $c->type;
+	$contexte['label'] = _T($c->label);
 	if (isset($contexte[$c->champ]) and $contexte[$c->champ]) {
 		$contexte['valeur'] = $contexte[$c->champ];
 	}
 		
-	$opts = $c->toArray();
+	$params = $c->saisie_parametres;
+	
 	// remapper les precisions
-	if ($opts['precisions']) {
-		$opts['explication'] = $opts['precisions'];
-	}
-	// traductions a faire
-	foreach (array('label', 'explication', 'attention') as $nom) {
-		if ($opts[$nom]) {
-			$contexte[$nom] = _T($opts[$nom]);
-		}
+	if ($c->precisions) {
+		$params['explication'] = $c->precisions;
 	}
 	
-	// inutiles dans le contexte
-	unset(  $opts['champ'],
-			$opts['type'],
-			$opts['precisions'],
-			$opts['sql'],
-			$opts['rechercher'],
-			$opts['filtres'],
-			// deja dedans
-			$opts['label'],
-			$opts['explication'],
-			$opts['attention']);
-		
+	// traductions a faire
+	$contexte['explication'] = _T($params['explication']);
+	$contexte['attention'] = _T($params['attention']);
+
+	unset (	$params['explication'],
+			$params['attention']);
+	
 	// tout inserer le reste des champs
-	foreach ($opts as $nom=>$val) {
-		if ($val) {
-			$contexte[$nom] = $val;
-		}
-	}
+	$contexte = array_merge($contexte, $params);
 
 	return array('saisies/_base', $contexte);
 }

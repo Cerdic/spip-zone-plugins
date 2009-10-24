@@ -5,22 +5,26 @@ class ChampExtra{
 	var $table = ''; // type de table ('rubrique')
 	var $champ = ''; // nom du champ ('ps')
 	var $label = ''; // label du champ, code de lanque ('monplug:mon_label')
-	var $precisions = ''; // precisions pour la saisie du champ (optionnel), code de lanque ('monplug:mon_label')
+		var $precisions = ''; // (deprecie ; voir $saisie_parametres) precisions pour la saisie du champ (optionnel), code de lanque ('monplug:mon_label')
 	var $obligatoire = false; // ce champ est il obligatoire ? 'oui' ou true : c'est le cas.
 	var $rechercher = false; // ce champ entre-t-il dans le moteur de recherche ?
 	var $enum = ''; // liste de valeurs (champ texte : "cle1,val1\ncle2,val2" ou tableau : array("cle1"=>"val1","cle2"=>"val2") )
 	var $type = ''; // type (ligne/bloc/etc)
 	var $sql = ''; // declaration sql (text NOT NULL DEFAULT '')
+	var $traitements = ''; // _TRAITEMENT_RACCOURCIS ,  _TRAITEMENT_TYPO ou autre declaration pour la $table_des_traitements
 	
 	var $_id = ''; // identifiant de ce champ extra
 
 	// experimental (avec saisies)
 	var $saisie_externe = false;
-	var $explication = ''; // message d'explication !
-	var $attention = ''; // message d'attention !
-	var $filtres = ''; // _TRAITEMENT_RACCOURCIS ,  _TRAITEMENT_TYPO
-	var	$class = ""; // classes CSS	sur l'element
-	var	$li_class = ""; // classes CSS sur l'element parent LI
+	var $saisie_parametres = array();
+		/*
+		    peut indiquer tout parametre d'une #SAISIE, tel que :
+			explication => ''; // message d'explication !
+			attention => ''; // message d'attention !
+			class => ""; // classes CSS	sur l'element
+			li_class => ""; // classes CSS sur l'element parent LI
+		*/
 
 	
 	// constructeur
