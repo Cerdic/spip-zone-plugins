@@ -100,8 +100,8 @@ function filtre_jpgraph($str,$type_graphe="courbe",$donnee="",$legende="",$large
     @unlink($filename); // http://jpgraph.intellit.nl/index.php?topic=4547.msg11823
     $graph->Stroke($filename);
     
-    
-    return "<span class='spip_documents jgraph'><img src='$filename' alt='' width='$largeur' height='$hauteur' /></span>";
+    $titre = str_replace("'","&#039",$titre);    
+    return "<span class='spip_documents jgraph'><img src='$filename' alt='$titre' width='$largeur' height='$hauteur' /></span>";
 
 }
 
