@@ -32,15 +32,28 @@ include_spip('inc/cookie');
 // associé dans spip (champ openid dans la base), et finalement l'authentifier
 // en creant le bon cookie.
 
-function action_controler_openid() {
+function action_controler_openid_dist() {
 
-	// La cible de notre operation de connexion
-	$url = _request('url');
-	$redirect = isset($url) ? $url : _DIR_RESTREINT_ABS;
+	$securiser_action = charger_fonction('securiser_action', 'inc');
+	$arg = $securiser_action();
 
-	// Verifier l'openid revenant
-	include_spip('inc/openid');
-	terminer_authentification_openid($redirect);
+	if (!$login = $arg) {
+		spip_log("action_controler_openid_dist $arg pas compris");
+	}
+	else {
+		include_spip('auth/openid');
+		$res = auth_openid_terminer_identifier_login($login);
+
+		if (is_string($res)){ // Erreur
+			$redirect = _request('redirect');
+			$redirect = parametre_url($redirect,'var_erreur',$res);
+			include_spip('inc/headers');
+			redirige_par_entete($redirect);
+		}
+
+		// sinon on loge l'auteur identifie, et on finit (redirection automatique)
+		auth_loger($res);
+	}
 
 }
 
