@@ -14,9 +14,40 @@
 function openid_editer_contenu_objet($flux){
 	if ($flux['args']['type']=='auteur') {
 		include_spip('public/assembler');
-		$flux['args']['contexte']['openid'] = sql_getfetsel('openid','spip_auteurs','id_auteur='.sql_quote($flux['args']['contexte']['id_auteur']));
 		$openid = recuperer_fond('formulaires/inc-openid', $flux['args']['contexte']);
 		$flux['data'] = preg_replace('%(<li class="editer_email(.*?)</li>)%is', '$1'."\n".$openid, $flux['data']);
+	}
+	return $flux;
+}
+
+/**
+ * Ajouter la valeur openID dans la liste des champs de la fiche auteur
+ *
+ * @param array $flux
+ */
+function openid_formulaire_charger($flux){
+	if ($flux['args']['form']=='editer_auteur'){
+		$flux['data']['openid'] = ''; // un champ de saisie openid !
+		if ($id_auteur = intval($flux['data']['id_auteur']))
+			$flux['data']['openid'] = sql_getfetsel('openid','spip_auteurs','id_auteur='.intval($id_auteur));
+	}
+	return $flux;
+}
+
+
+/**
+ * Verifier la saisie de l'url openID sur la fiche auteur
+ *
+ * @param array $flux
+ */
+function openid_formulaire_verifier($flux){
+	if ($flux['args']['form']=='editer_auteur'){
+		if ($openid = _request('openid')){
+			include_spip('inc/openid');
+			$openid = nettoyer_openid($openid);
+			if (!verifier_openid($openid))
+				$flux['data']['openid']=_T('openid:erreur_openid');
+		}
 	}
 	return $flux;
 }

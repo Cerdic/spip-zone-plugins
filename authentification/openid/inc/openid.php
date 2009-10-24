@@ -97,6 +97,8 @@ function nettoyer_openid($url_openid){
  * @param string $url_openid
  */
 function verifier_openid($url_openid){
+	if (!is_openid($url_openid))
+		return false;
 	// Begin the OpenID authentication process.
 	$consumer = init_auth_openid();
 	openid_log("Initialisation faite", 3);

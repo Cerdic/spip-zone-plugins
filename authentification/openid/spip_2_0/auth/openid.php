@@ -43,7 +43,9 @@ function auth_openid_dist ($login, $pass, $md5pass="", $md5next="") {
 		// * S'il l'openid n'existe pas, on est de retour ici, et on continue
 		// pour d'autres methodes d'identification
 		include_spip('inc/openid');
-		$retour = auth_openid_url_retour_login($auteur['login'],url_absolue(self()));
+		// il faut remettre var_login dans l'url de retour pour que le form de login retrouve le login
+		// des non admin ...
+		$retour = auth_openid_url_retour_login($auteur['login'],url_absolue(parametre_url(self(),'var_login',$auteur['login'],'&')));
 		$erreurs_openid = demander_authentification_openid($auteur['openid'], $retour);
 		// potentiellement, on arrive ici avec une erreur si l'openid donne n'existe pas
 		$auteur = false;
