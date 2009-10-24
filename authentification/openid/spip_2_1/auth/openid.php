@@ -15,10 +15,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @param string $login
  * @param string $pass
  * @param string $serveur
- * @param string $log_step
  * @return <type>
  */
-function auth_openid_dist ($login, $pass, $serveur='', $log_step='check') {
+function auth_openid_dist ($login, $pass, $serveur='') {
 
 	// il faut un login non vide ET un pass vide (sinon cela ne concerne pas OpenID)
 	if (!strlen($login) OR strlen($pass)) return false;
@@ -29,24 +28,36 @@ function auth_openid_dist ($login, $pass, $serveur='', $log_step='check') {
 		OR !$idurl = sql_getfetsel("openid", "spip_auteurs", "login=" . sql_quote($login),"","","","",$serveur) )
 		return false;
 	
-	if ($log_step=='check') {
-		// * Si l'openid existe, la procedure continue en redirigeant
-		// vers le fournisseur d'identite. En cas d'erreur, il y a une redirection de faite
-		// sur la page login, en cas de reussite, sur l'action controler_openid
-		// * S'il l'openid n'existe pas, on est de retour ici, et on continue
-		// pour d'autres methodes d'identification
-		include_spip('inc/openid');
-		$erreurs_openid = demander_authentification_openid($idurl, url_absolue(self()));
-		// potentiellement, on arrive ici avec une erreur si l'openid donne n'existe pas
-		// on la renvoie
-		return $erreurs_openid;
-	}
-	elseif ($log_step=='ok'){
-		$auteur = sql_fetsel("*", "spip_auteurs", "login=" . sql_quote($login),"","","","",$serveur);
-		$auteur['auth'] = 'openid'; // on se log avec cette methode, donc
-	}
+	// * Si l'openid existe, la procedure continue en redirigeant
+	// vers le fournisseur d'identite. En cas d'erreur, il y a une redirection de faite
+	// sur la page login, en cas de reussite, sur l'action controler_openid
+	// * S'il l'openid n'existe pas, on est de retour ici, et on continue
+	// pour d'autres methodes d'identification
+	include_spip('inc/openid');
+	$retour = auth_url_retour_login('openid', $login, url_absolue(self()));
+	$erreurs_openid = demander_authentification_openid($idurl, $retour);
+	// potentiellement, on arrive ici avec une erreur si l'openid donne n'existe pas
+	// on la renvoie
+	return $erreurs_openid;
+}
 
-	return $auteur;
+function auth_openid_terminer_identifier_login($login, $serveur=''){
+	include_spip('inc/openid');
+	$retour = auth_url_retour_login('openid', $login);
+	$auteur = terminer_authentification_openid($retour);
+
+	if (is_string($auteur))
+		return $auteur; // erreur !
+
+	if (is_array($auteur)
+		AND isset($auteur['openid'])
+		AND $openid = $auteur['openid']
+	  AND $auteur = sql_fetsel("*", "spip_auteurs", "login=" . sql_quote($login)." AND openid=".sql_quote($openid),"","","","",$serveur)){
+
+		$auteur['auth'] = 'openid'; // on se log avec cette methode, donc
+		return $auteur;
+	}
+	return false;
 }
 
 function auth_openid_formulaire_login($flux){

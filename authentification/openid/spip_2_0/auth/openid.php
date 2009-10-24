@@ -43,6 +43,7 @@ function auth_openid_dist ($login, $pass, $md5pass="", $md5next="", $log_step='c
 		// * S'il l'openid n'existe pas, on est de retour ici, et on continue
 		// pour d'autres methodes d'identification
 		include_spip('inc/openid');
+		$retour = parametre_url(openid_url_reception(), "url", url_absolue($cible), '&');
 		$erreurs_openid = demander_authentification_openid($auteur['openid'], url_absolue(self()));
 		// potentiellement, on arrive ici avec une erreur si l'openid donne n'existe pas
 		$auteur = false;

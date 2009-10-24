@@ -1,8 +1,19 @@
 <?php
+/**
+ * Plugin OpenID
+ * Licence GPL (c) 2007-2009 Edouard Lafargue, Mathieu Marcillaud, Cedric Morin, Fil
+ *
+ */
 
 @define('_OPENID_LOG', true);
 
-
+/**
+ * Ajout au formulaire de login
+ *
+ * @param string $texte
+ * @param array $contexte
+ * @return string
+ */
 function openid_login_form($texte,$contexte){
 	$scriptopenid = "";
 	if ($login = $contexte['var_login']
@@ -36,7 +47,12 @@ function openid_login_form($texte,$contexte){
 	return $texte;
 }
 
-// determine si un login est de type openid (une url avec http ou https)
+
+/**
+ * determine si un login est de type openid (une url avec http ou https)
+ * @param <type> $login
+ * @return <type>
+ */
 function is_openid($login){
 	// Detection s'il s'agit d'un URL à traiter comme un openID
 	// RFC3986 Regular expression for matching URIs
@@ -53,23 +69,62 @@ function is_openid($login){
 	}
 }
 
-function nettoyer_openid($openid){
-	$openid = vider_url($openid, false);
-	$openid = rtrim($openid,'/');
+/**
+ * Nettoyer et mettre en forme une url OpenID
+ *
+ * @param string $url_openid
+ * @return string
+ */
+function nettoyer_openid($url_openid){
+	include_spip('inc/filtres');
+	$url_openid = vider_url($url_openid, false);
+	$url_openid = rtrim($url_openid,'/');
 	// si pas de protocole et que ca ne semble pas un email style gmail,
 	// mettre http://
-	if ($openid  AND !preg_match(';^[a-z]{3,6}://;i',$openid ) AND strpos($openid,'@')===FALSE)
-		$openid = "http://".$openid;
+	if ($url_openid  AND !preg_match(';^[a-z]{3,6}://;i',$url_openid ) AND strpos($url_openid,'@')===FALSE)
+		$url_openid = "http://".$url_openid;
 
 	// pas d'ancre dans une url openid !
-	$openid = preg_replace(',#[^#]*$,','',$openid);
+	// (Yahoo ajoute une ancre a l'url a son retour)
+	$url_openid = preg_replace(',#[^#]*$,','',$url_openid);
 
-	return $openid;
+	return $url_openid;
 }
-/*****
- * Initialisation de l'authent OpenID
- ****/
 
+/**
+ * Verifier qu'une url OpenID est valide
+ *
+ * @param string $url_openid
+ */
+function verifier_openid($url_openid){
+	// Begin the OpenID authentication process.
+	$consumer = init_auth_openid();
+	openid_log("Initialisation faite", 3);
+	if ($auth_request = $consumer->begin($url_openid))
+		return true;
+	return false;
+}
+
+
+/**
+ * Logs pour openID, avec plusieurs niveaux pour le debug (1 a 3)
+ *
+ * @param mixed $data : contenu du log
+ * @param int(1) $niveau : niveau de complexite du log
+ * @return null
+**/
+function openid_log($data, $niveau=1){
+	if (!defined('_OPENID_LOG') OR _OPENID_LOG < $niveau) return;
+	spip_log('OpenID: '.$data, 'openid');
+}
+
+
+
+/**
+ * Initialisation de l'authent OpenID
+ *
+ * @return Auth_OpenID_Consumer
+ */
 function init_auth_openid() {
 	session_start();
 	
@@ -78,7 +133,7 @@ function init_auth_openid() {
 	chdir(realpath(_DIR_OPENID_LIB));
 	require_once "Auth/OpenID/Consumer.php";
 	require_once "Auth/OpenID/FileStore.php";
-    require_once "Auth/OpenID/SReg.php"; // Require the Simple Registration extension API.
+	require_once "Auth/OpenID/SReg.php"; // Require the Simple Registration extension API.
 	chdir($cwd);
 
 	/****
@@ -96,32 +151,31 @@ function init_auth_openid() {
 
 
 /**
- * Logs pour openID, avec plusieurs niveaux pour le debug (1 a 3) 
+ * Lancer une demande d'auth par OpenID
+ * consiste a verifier que l'url est legitime,
+ * et a rediriger vers le serveur OpenID,
+ * qui renverra sur l'url $retour apres identification
  *
- * @param mixed $data : contenu du log
- * @param int(1) $niveau : niveau de complexite du log
- * @return null
-**/
-function openid_log($data, $niveau=1){
-	if (!defined('_OPENID_LOG') OR _OPENID_LOG < $niveau) return;
-	spip_log('OpenID: '.$data, 'openid');
-}
-
-
-
-function demander_authentification_openid($login, $cible){
-	openid_log("Traitement login OpenID pour $login",2);
+ * Si tout se passe bien, la fonction quitte par une redirection+exit
+ * En cas d'echec, la fonction renvoie une erreur
+ *
+ * @param string $url_openid
+ * @param string $retour
+ * @return string
+ */
+function demander_authentification_openid($url_openid, $retour){
+	openid_log("Traitement login OpenID pour $url_openid",2);
 
 	// Begin the OpenID authentication process.
 	$consumer = init_auth_openid();
 	openid_log("Initialisation faite", 3);
-	$auth_request = $consumer->begin($login);
+	$auth_request = $consumer->begin($url_openid);
 
 	// Handle failure status return values.
 	if (!$auth_request) {
 		// ici, on peut rentrer dire que l'openid n'est pas connu...
 		// plutot que de rediriger et passer la main a d'autres methodes d'auth
-		openid_log("Ce login ($login) n'est pas connu", 2);
+		openid_log("Ce login ($url_openid) n'est pas connu", 2);
 		return _T('openid:erreur_openid');
 	} 
 	
@@ -132,7 +186,7 @@ function demander_authentification_openid($login, $cible){
 	// - une url de confiance, ici l'adresse du site : url_de_base()
 	// - une url de redirection, sur laquelle OPENID reviendra une fois l'authentification faite (réussie ou non)
 	else {
-		openid_log("Le login $login existe", 2);
+		openid_log("Le login $url_openid existe", 2);
 		// argument de redirection : cette url doit etre identique
 		// ici et au retour (au moins le premier parametre de l'url)
 		// sinon le script openid n'est pas content
@@ -140,9 +194,6 @@ function demander_authentification_openid($login, $cible){
 		// nous indiquons ici une autre redirection encore, celle de l'url
 		// vers laquelle le bonhomme souhaite aller (url=$cible)
 		
-		// attention, il ne faut pas utiliser parametre_url() afin
-		// d'encoder $cible, ce qui casserait la transaction...
-		$retour = parametre_url(openid_url_reception(), "url", url_absolue($cible), '&');
 		openid_log("Adresse de retour : $retour", 2);
 		// on demande quelques informations, dont le login obligatoire
 		if ($sreg_request = Auth_OpenID_SRegRequest::build(
@@ -167,6 +218,14 @@ function demander_authentification_openid($login, $cible){
 			if (Auth_OpenID::isFailure($redirect)) {
 				openid_log("Erreur sur l'adresse de redirection : $redirect", 2);
 				$erreur = openid_url_erreur(_L("Could not redirect to server: " . $redirect->message), $cible);
+			}
+			// pas d'erreur : redirection par entete
+			else {
+				openid_log("Redirection par entete", 3);
+				include_spip('inc/headers');
+				#redirige_par_entete($redirect);
+				echo redirige_formulaire($redirect);
+				exit;
 			}
 		}
 		
@@ -207,68 +266,60 @@ function demander_authentification_openid($login, $cible){
 		return $erreur;
 	}
 	
-	openid_log("Redirection par entete", 3);
-	include_spip('inc/headers');
-	#redirige_par_entete($redirect);		
-	echo redirige_formulaire($redirect);
-	exit;
 }
 
 
-
-// analyse le retour de la requete openID
-// et redirige vers une url en fonction
-function terminer_authentification_openid($cible){
-	$redirect=""; // redirection sur erreur
-	openid_log("Retour du fournisseur OpenId avec : $cible", 2);
+/**
+ * Finir l'authentification apres le retour depuis le serveur openID
+ * analyse le retour de la requete openID
+ * utilise l'url de retour pour verifier la demande
+ * renvoie une chaine d'erreur en cas d'erreur
+ * un tableau decrivant l'utilisateur en cas de succes
+ *
+ * @param string $retour
+ * @return mixed
+ */
+function terminer_authentification_openid($retour){
+	openid_log("Retour du fournisseur OpenId", 2);
 	
 	// Complete the authentication process using the server's response.
 	$consumer = init_auth_openid();
 	openid_log("Initialisation faite. analyse de la reponse rendue", 2);
-	$response = $consumer->complete(openid_url_reception());
+	$response = $consumer->complete($retour);
 
-	// This means the authentication was cancelled.	
+	// Authentification annulee par l'utilisateur
 	if ($response->status == Auth_OpenID_CANCEL) {
 		openid_log("Processus annule par l'utilisateur", 2);
-	    $redirect = openid_url_erreur(_T('openid:verif_refusee'), $cible); 
+		return _T('openid:verif_refusee');
 	} 
 	
 	// Authentification echouee
 	elseif ($response->status == Auth_OpenID_FAILURE) {
 		openid_log("Echec de l'authentification chez le fournisseur", 2);
-	    $redirect = openid_url_erreur("Authentication failed: " . $response->message, $cible);
+	  return _L("Authentication failed: " . $response->message);
 	} 
 	
-	// This means the authentication succeeded.
+	// Authentification reussie
 	elseif ($response->status == Auth_OpenID_SUCCESS) {
 		
 		$openid = nettoyer_openid($response->identity_url); // pas de / final dans l'openid
 		
-		$esc_identity = htmlspecialchars($openid, ENT_QUOTES);
 		openid_log("Succes de l'authentification $openid chez le fournisseur d'identification", 1);
-
-		// identification dans SPIP
-		// (charge inc/auth_openid)
-		openid_log("Verification de l'identite '$openid' dans SPIP", 2);
-
-		$auth = charger_fonction('openid','auth');
-		if (!$ok = $auteur = $auth($openid, "","","",'ok')){ // pas de mot de passe
-			// c'est ici que l'on peut ajouter un utilisateur inconnu dans SPIP
-			// en plus, on connait (si la personne l'a autorise) son nom et email
-			// en plus du login
-			openid_log("Identite '$openid' inconnue SPIP", 2);
-			
-			// recuperer login, nom, email
-			$sreg_resp = Auth_OpenID_SRegResponse::fromSuccessResponse($response);
-			$sreg = $sreg_resp->contents();
-			$couples = array(
-				'login' => isset($sreg['nickname']) ? $sreg['nickname'] : '',
-				'email' => isset($sreg['email']) ? $sreg['email'] : '', 
-				// login a defaut du nom, sinon c'est 'Nouvel auteur' qui est enregistre
-				'nom' => isset($sreg['fullname']) ? $sreg['fullname'] : $sreg['nickname'],
-				'openid' => $openid
-			);
-
+		// recuperer login, nom, email
+		$sreg_resp = Auth_OpenID_SRegResponse::fromSuccessResponse($response);
+		$sreg = $sreg_resp->contents();
+		$identite = array(
+			'login' => isset($sreg['nickname']) ? $sreg['nickname'] : '',
+			'email' => isset($sreg['email']) ? $sreg['email'] : '',
+			// login a defaut du nom, sinon c'est 'Nouvel auteur' qui est enregistre
+			'nom' => isset($sreg['fullname']) ? $sreg['fullname'] : $sreg['nickname'],
+			'openid' => $openid
+		);
+		return $identite;
+	}
+	return false;
+}
+/*
 			#openid_log("sreg ".var_export($sreg_resp,true), 2);
 
 			// on ajoute un auteur uniquement si les inscriptions sont autorisees sur le site
@@ -348,7 +399,7 @@ function terminer_authentification_openid($cible){
 	include_spip('inc/headers');
 	redirige_par_entete($redirect?$redirect:$cible);	
 }
-
+*/
 
 function openid_url_reception(){
 	include_spip('inc/filtres');
