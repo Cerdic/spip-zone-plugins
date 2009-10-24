@@ -36,6 +36,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_obligatoire' => 'Ce champ est obligatoire',
 	'choisir_categories' => 'Choisissez-les ci-dessous&nbsp;:',
 	'choisir_nouveau_password' => 'Vous pourrez choisir un nouveau mot de passe en cliquant le lien suivant',
+	'choisissez' =>'Choisissez',
 	'choisir_zones' => 'Veuillez choisir les zones auxquelles vous voulez que les nouveaux adh&eacute;rents soient affect&eacute;s',
 	'choix_affordance_email' => 'Email',
 	'choix_affordance_login' => 'Login (par d&eacute;faut dans SPIP)',
