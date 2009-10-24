@@ -16,9 +16,15 @@ include_spip('inc/spiplistes_api_globales');
 function spiplistes_ajouterBoutons($boutons_admin) {
 
 	if($GLOBALS['connect_statut'] == "0minirezo") {
+		$menu = "naviguer";
+		$icone = "courriers_listes-24.gif";
+		if (isset($boutons_admin['bando_edition'])){
+			$menu = "bando_edition";
+			$icone = "spip-listes-16.png";
+		}
 	// affiche le bouton dans "Edition"
-		$boutons_admin['naviguer']->sousmenu['spiplistes'] = new Bouton(
-			_DIR_PLUGIN_SPIPLISTES_IMG_PACK."courriers_listes-24.gif"  // icone
+		$boutons_admin[$menu]->sousmenu['spiplistes'] = new Bouton(
+			_DIR_PLUGIN_SPIPLISTES_IMG_PACK.$icone  // icone
 			, _T('spiplistes:listes_de_diffusion_')	// titre
 			, _SPIPLISTES_EXEC_COURRIERS_LISTE
 		);
