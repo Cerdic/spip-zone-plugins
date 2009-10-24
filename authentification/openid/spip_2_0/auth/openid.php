@@ -16,6 +16,7 @@ function auth_openid_dist ($login, $pass, $md5pass="", $md5next="") {
 	// car c'est cense etre une url
 	if (!$login) return false;
 	$auteur = false;
+	$idurl = "";
 
 	// il faut au moins que ca ressemble un peu a un openid !
 	include_spip('inc/openid');
@@ -36,6 +37,11 @@ function auth_openid_dist ($login, $pass, $md5pass="", $md5next="") {
 		$auteur = sql_fetsel("*", "spip_auteurs", array("statut!=".sql_quote("5poubelle") , "login=" . sql_quote($login). " AND openid>''"));
 	}
 
+	if (!$auteur AND $idurl){
+		if (verifier_openid($idurl))
+			return _T("openid:form_login_openid_inconnu");
+	}
+
 	if ($auteur) {
 		// * Si l'openid existe, la procedure continue en redirigeant
 		// vers le fournisseur d'identite. En cas d'erreur, il y a une redirection de faite
@@ -51,7 +57,7 @@ function auth_openid_dist ($login, $pass, $md5pass="", $md5next="") {
 		$auteur = false;
 	}
 
-	return is_array($auteur) ? $auteur : array();
+	return $auteur;
 }
 
 
