@@ -53,42 +53,14 @@ function openid_afficher_contenu_objet($flux){
 
 /**
  * Afficher l'openid sur le formulaire de login
+ * Utilise uniquement pour spip 2.0.x
  * @param <type> $flux
  * @return <type>
  */
 function openid_recuperer_fond($flux) {
 	if ($flux['args']['fond']=='formulaires/login'){
-		$login = pipeline('social_login_links','');
-
-		$scriptopenid = "";
-		if ($login = $flux['data']['contexte']['var_login']
-		AND $openid = sql_getfetsel('openid','spip_auteurs','login='.sql_quote($login))
-		) {
-			$openid = preg_replace(',^http://,i','',$openid);
-			$message = _T('openid:form_login_openid_ok')  // . $openid
-			. "<br />[<a href=\"#\" onclick=\"jQuery('.editer_login .explication').hide();jQuery('.editer_password').show();return false;\">"._T('openid:form_login_openid_pass')."</a>]";
-			$scriptopenid = "jQuery('#var_login').keyup(function(){
-				if (jQuery(this).val()!='".addslashes($login)."') {
-					jQuery('.editer_login .explication').hide();
-					jQuery('.editer_password').show();
-				} else {
-					jQuery('.editer_login .explication').show();
-				}
-			});";
-		}
-		else
-			$message = _T('openid:form_login_openid');
-
-		$flux['data']['texte'] .= "<style type='text/css'>"
-		."input#var_login {width:10em;background-image : url(".find_in_path('images/login_auth_openid.gif').");background-repeat:no-repeat;background-position:center left;padding-left:18px;}\n"
-		."input#password {width:10em;padding-right:18px;}\n"
-		.".explication {margin:5px 0;}"
-		."</style>"
-		."<script type='text/javascript'>"
-		."jQuery(document).ready(function(){jQuery('input#var_login').after('<div class=\'explication\'>".addslashes($message)."</div>');"
-		.($scriptopenid?"if (!jQuery('.editer_password').is('.erreur')) jQuery('.editer_password').hide();":"")
-		."$scriptopenid});"
-		."</script>";
+		include_spip('inc/openid');
+		$flux['data']['texte'] = openid_login_form($flux['data']['texte'],$flux['data']['contexte']);
 	}
 	/*if ($flux['args']['fond']=='formulaires/inscription'){
 		$insc = pipeline('social_inscription_links','');

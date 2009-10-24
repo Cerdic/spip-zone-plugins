@@ -21,10 +21,10 @@ function auth_openid_dist ($login, $pass, $md5pass="", $md5next="", $log_step='c
 	// car c'est cense etre une url
 	if (!$login) return false;
 	$auteur = false;
-	
+
 	// il faut au moins que ca ressemble un peu a un openid !
+	include_spip('inc/openid');
 	if (is_openid($login)){
-		include_spip('inc/openid');
 		// si pas de protocole, mettre http://
 		$idurl = nettoyer_openid($login);
 
@@ -60,21 +60,5 @@ function auth_openid_dist ($login, $pass, $md5pass="", $md5next="", $log_step='c
 	return is_array($auteur) ? $auteur : array();
 }
 
-// determine si un login est de type openid (une url avec http ou https)
-function is_openid($login){
-	// Detection s'il s'agit d'un URL à traiter comme un openID
-	// RFC3986 Regular expression for matching URIs
-	#if (preg_match('_^(?:([^:/?#]+):)?(?://([^/?#]*))?([^?#]*)(?:\?([^#]*))?(?:#(.*))?$_', $login, $uri_parts)
-	#	AND ($uri_parts[1] == "http" OR $uri_parts[1] == "https")) {
-
-	// s'il y a un point, c'est potentiellement un login openid
-	// ca permet d'eliminer un bon nombre de pseudos tout en
-	// autorisant les connexions openid sans avoir besoin de renseigner le http://
-	if (strpos($login, '.')!==false) {
-		return true;
-	} else {
-		return false;
-	}
-}
 
 ?>

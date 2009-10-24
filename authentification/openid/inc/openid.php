@@ -2,6 +2,57 @@
 
 @define('_OPENID_LOG', true);
 
+
+function openid_login_form($texte,$contexte){
+	$scriptopenid = "";
+	if ($login = $contexte['var_login']
+	AND $openid = sql_getfetsel('openid','spip_auteurs','login='.sql_quote($login))
+	) {
+		$openid = preg_replace(',^http://,i','',$openid);
+		$message = _T('openid:form_login_openid_ok')  // . $openid
+		. "<br />[<a href=\"#\" onclick=\"jQuery('.editer_login .explication').hide();jQuery('.editer_password').show();return false;\">"._T('openid:form_login_openid_pass')."</a>]";
+		$scriptopenid = "jQuery('#var_login').keyup(function(){
+			if (jQuery(this).val()!='".addslashes($login)."') {
+				jQuery('.editer_login .explication').hide();
+				jQuery('.editer_password').show();
+			} else {
+				jQuery('.editer_login .explication').show();
+			}
+		});";
+	}
+	else
+		$message = _T('openid:form_login_openid');
+
+	$texte .= "<style type='text/css'>"
+	."input#var_login {width:10em;background-image : url(".find_in_path('images/login_auth_openid.gif').");background-repeat:no-repeat;background-position:center left;padding-left:18px;}\n"
+	."input#password {width:10em;padding-right:18px;}\n"
+	.".explication {margin:5px 0;}"
+	."</style>"
+	."<script type='text/javascript'>"
+	."jQuery(document).ready(function(){jQuery('input#var_login').after('<div class=\'explication\'>".addslashes($message)."</div>');"
+	.($scriptopenid?"if (!jQuery('.editer_password').is('.erreur')) jQuery('.editer_password').hide();":"")
+	."$scriptopenid});"
+	."</script>";
+	return $texte;
+}
+
+// determine si un login est de type openid (une url avec http ou https)
+function is_openid($login){
+	// Detection s'il s'agit d'un URL à traiter comme un openID
+	// RFC3986 Regular expression for matching URIs
+	#if (preg_match('_^(?:([^:/?#]+):)?(?://([^/?#]*))?([^?#]*)(?:\?([^#]*))?(?:#(.*))?$_', $login, $uri_parts)
+	#	AND ($uri_parts[1] == "http" OR $uri_parts[1] == "https")) {
+
+	// s'il y a un point, c'est potentiellement un login openid
+	// ca permet d'eliminer un bon nombre de pseudos tout en
+	// autorisant les connexions openid sans avoir besoin de renseigner le http://
+	if (strpos($login, '.')!==false) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
 function nettoyer_openid($openid){
 	$openid = vider_url($openid, false);
 	$openid = rtrim($openid,'/');
