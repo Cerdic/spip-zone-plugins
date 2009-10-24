@@ -1,12 +1,10 @@
 <?php
-/**************************
- * auth_openid: un plugin d'authentification OpenID pour Spip
- * (c) 2007 Edouard Lafargue
- * License: GNU/GPL
+/**
+ * Plugin OpenID
+ * Licence GPL (c) 2007-2009 Edouard Lafargue, Mathieu Marcillaud, Cedric Morin, Fil
  *
- * Date: 24.03.2007
- *************************/
-
+ */
+ 
 /*****
  * Utilisation: ce plugin active la reconnaissance des OpenID dans le
  * formulaire de Login. Si un OpenID est identifié, il lance l'authentification

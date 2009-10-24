@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * Plugin OpenID
+ * Licence GPL (c) 2007-2009 Edouard Lafargue, Mathieu Marcillaud, Cedric Morin, Fil
+ *
+ */
 
 /**
  * ajouter un champ openID sur le formulaire CVT editer_auteur

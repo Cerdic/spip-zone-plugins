@@ -1,8 +1,19 @@
 <?php
-
+/**
+ * Plugin OpenID
+ * Licence GPL (c) 2007-2009 Edouard Lafargue, Mathieu Marcillaud, Cedric Morin, Fil
+ *
+ */
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/meta');
+
+/**
+ * Upgrade de la base
+ *
+ * @param string $nom_meta_base_version
+ * @param string $version_cible
+ */
 function openid_upgrade($nom_meta_base_version,$version_cible){
 	$current_version = 0.0;
 	$version_base = 0.1;
@@ -31,6 +42,11 @@ function openid_upgrade($nom_meta_base_version,$version_cible){
 	}
 }
 
+/**
+ * Desinstallation du plugin
+ *
+ * @param string $nom_meta_base_version
+ */
 function openid_vider_tables($nom_meta_base_version) {
 	sql_alter("TABLE spip_auteurs DROP openid");
 	effacer_meta($nom_meta_base_version);
