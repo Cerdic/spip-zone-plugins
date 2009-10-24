@@ -22,10 +22,18 @@ function auth_openid_dist ($login, $pass, $serveur='') {
 	// il faut un login non vide ET un pass vide (sinon cela ne concerne pas OpenID)
 	if (!strlen($login) OR strlen($pass)) return false;
 	$auteur = false;
-	
+
+	if (!$l = auth_openid_retrouver_login($login)){
+		if (is_openid($login)
+			AND $idurl = nettoyer_openid($login)
+			AND verifier_openid($idurl))
+			return _T("openid:form_login_openid_inconnu");
+		return false;
+	}
+	$login = $l;
+
 	// retrouver le login
-	if (!$login = auth_openid_retrouver_login($login)
-		OR !$idurl = sql_getfetsel("openid", "spip_auteurs", "login=" . sql_quote($login),"","","","",$serveur) )
+	if (!$idurl = sql_getfetsel("openid", "spip_auteurs", "login=" . sql_quote($login),"","","","",$serveur) )
 		return false;
 	
 	// * Si l'openid existe, la procedure continue en redirigeant
