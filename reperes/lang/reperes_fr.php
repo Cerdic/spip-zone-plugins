@@ -1,4 +1,9 @@
 <?php
+/**
+ * Plugin Reperes pour Spip 2.0
+ * Licence GPL (c) 2009 - Ateliers CYM
+ */
+
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
