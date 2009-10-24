@@ -60,7 +60,7 @@ function openid_formulaire_verifier($flux){
  */
 function openid_pre_edition($flux){
 	if ($flux['args']['table']=='spip_auteurs') {
-		if ($openid = _request('openid')) {
+		if (!is_null($openid = _request('openid'))) {
 			include_spip('inc/openid');
 			$flux['data']['openid'] = nettoyer_openid($openid);
 		}
