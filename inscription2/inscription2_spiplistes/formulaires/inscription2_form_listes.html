@@ -4,18 +4,17 @@
     </legend>
 	<ul>
 	<li>
-    <p class="explications"><:i2_spiplistes:exp_newsletter:></p>
+    
 
     [(#REM) Tableau des listes en selection par défaut]
     #SET{selected,#CONFIG{inscription2/newsletters,#ARRAY}}
 	
     <B_listes>
+    [<p class="explications">(#TOTAL_BOUCLE|affiche_un_ou_plusieurs{<:i2_spiplistes:exp_newsletter:>,<:i2_spiplistes:exp_newsletter:>})</p>]
     <ul>
 	<BOUCLE_listes(LISTES){id_liste IN #GET{selected}}{statut IN '.*pub.*','liste'}>
 	    <li class="editer_newsletters">
 			<label for="newsletters-#ID_LISTE">
-            #TITRE
-            </label>
             <input type="checkbox" class="checkbox" name="newsletters[]" id="newsletters-#ID_LISTE" value="#ID_LISTE" 
             [(#CONFIG{inscription2/optout}|=={on}|?{
 				[(#ID_LISTE|in_any{#ENV{listes}}|oui) checked="checked"]
@@ -23,6 +22,9 @@
 				[(#ID_LISTE|in_array{#GET{selected}}|oui) checked="checked"]
             })] 
 			/>
+            <span class='liste_titre'>#TITRE[ (#TEXTE|oui): ]</span>
+            [<span class='listeDescriptif#ID_LISTE liste_descriptif'>(#TEXTE|textebrut|couper{160})</span>]
+            </label>
             [<p class='erreur'>(#ENV**{erreurs}|table_valeur{newsletters-#ID_LISTE})</p>]
         </li>
     </BOUCLE_listes>
@@ -32,4 +34,4 @@
     [<p class='formulaire_erreur'>(#ENV**{erreurs}|table_valeur{newsletters})</p>]
 	</li>
 	</ul>
-</fieldset> 
+</fieldset>
