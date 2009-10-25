@@ -42,7 +42,7 @@
 		else {
 			// nouveau format de .svn/entries
 			$info = _SVN_COMMAND." info --xml $dest/";
-			exec($info, $out);
+			exec("$info 2>&1", $out);
 			if (preg_match(',<url>(.*?)</url>,', join('',$out), $r)) {
 				$old_src = $r[1];
 			} else {
@@ -101,14 +101,12 @@
 			echo "<hr /><b>", $aff, "</b>";
 			$res = update_svn($l);
 			if (is_string($res)){
-				include_spip('inc/charsets');
 				$res = importer_charset($res);
 				echo "<br /><b>Erreur: ",
 					htmlspecialchars($res),
 					"</b>";
 			}
 			if (is_array($res)){
-				include_spip('inc/charsets');
 				$res = importer_charset(join("\n", $res),'iso-8859-1');
 				echo "<br />".nl2br(htmlspecialchars($res));
 			}

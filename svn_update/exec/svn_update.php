@@ -44,7 +44,7 @@ function exec_svn_update() {
 	}
 
 	if ($dirs_ok) {
-
+		include_spip('inc/charsets');
 		chdir(_DIR_RACINE);
 		// Appliquer la demande
 		if (_request('dir_svn') == -1) {
