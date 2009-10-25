@@ -128,11 +128,15 @@ function openid_log($data, $niveau=1){
  * @return Auth_OpenID_Consumer
  */
 function init_auth_openid() {
+	// libs
+	@define('_DIR_LIB', _DIR_RACINE . 'lib/');
+	@define('_DIR_OPENID_LIB', _DIR_LIB . 'php-openid-2.1.3/');
+	@define('Auth_OpenID_RAND_SOURCE', null); // a priori...
+
 	session_start();
 	
 	$cwd = getcwd();
-	//chdir(dirname(dirname(__FILE__)));
-	chdir(realpath(_DIR_OPENID_LIB));
+	chdir(_DIR_OPENID_LIB);
 	require_once "Auth/OpenID/Consumer.php";
 	require_once "Auth/OpenID/FileStore.php";
 	require_once "Auth/OpenID/SReg.php"; // Require the Simple Registration extension API.
@@ -219,7 +223,7 @@ function demander_authentification_openid($url_openid, $retour){
 			// If the redirect URL can't be built, display an error message.
 			if (Auth_OpenID::isFailure($redirect)) {
 				openid_log("Erreur sur l'adresse de redirection : $redirect", 2);
-				$erreur = openid_url_erreur(_L("Could not redirect to server: " . $redirect->message), $cible);
+				$erreur = _L("Could not redirect to server: " . $redirect->message);
 			}
 			// pas d'erreur : redirection par entete
 			else {
@@ -243,7 +247,7 @@ function demander_authentification_openid($url_openid, $retour){
 			// otherwise, render the HTML.
 			if (Auth_OpenID::isFailure($form_html)) {
 				openid_log("Erreur sur le formulaire de redirection : $form_html", 2);
-				$erreur = openid_url_erreur(_L("Could not redirect to server: " . $form_html->message), $cible);
+				$erreur = _L("Could not redirect to server: " . $form_html->message);
 			} 
 			
 			// pas d'erreur : affichage du formulaire et arret du script
@@ -333,129 +337,6 @@ function terminer_authentification_openid($retour){
 function openid_url_retour_insc($idurl, $redirect=''){
 	$securiser_action = charger_fonction('securiser_action','inc');
 	return $securiser_action('inscrire_openid', $idurl, $redirect, true);
-}
-
-
-/*
-			#openid_log("sreg ".var_export($sreg_resp,true), 2);
-
-			// on ajoute un auteur uniquement si les inscriptions sont autorisees sur le site
-			if ($GLOBALS['meta']['accepter_inscriptions']=='oui') {
-				
-				openid_log("Tenter d'ajouter '$openid' dans SPIP");
-				// verifier qu'on a les infos necessaires
-				if (!$ok = ($couples['login'] AND $couples['email'])) {
-					openid_log("Les informations transmises ne sont pas suffisantes : il manque le login et/ou l'email pour $openid.");
-					$redirect = openid_url_erreur(_L("Inscription impossible : login ou email non renvoy&eacute;"), $cible);
-				}
-				// ajouter l'auteur si le login propose n'existe pas deja
-				elseif (!$ok = openid_ajouter_auteur($couples)) {
-					openid_log("Inscription impossible de '$openid' car un login ($couples[login]) existe deja dans SPIP");
-					$redirect = openid_url_erreur(_L("Inscription impossible : un login identique existe deja"), $cible);
-				} 
-				// verifier que l'insertion s'est bien deroulee 
-				else {
-					if (($ok = $identifier_login($openid, "")) && $cible){					
-						openid_log("Inscription de '$openid' dans SPIP OK", 3);
-						$cible = parametre_url($cible,'message_ok',_L('openid:Vous &ecirc;tes maintenant inscrit et identifi&eacute; sur le site. Merci.'),'&');
-					} else {
-						openid_log("Echec de l'ajout de '$openid' dans SPIP", 3);
-					}
-				}
-			}
-			// rediriger si pas inscrit
-			if (!$ok && !$redirect) {
-				$redirect = openid_url_erreur(_L("Utilisateur OpenID inconnu dans le site)"), $cible);
-			}
-		}
-		
-		// sinon, c'est on est habilite ;)
-		if ($ok) {
-			openid_log("Utilisateur '$openid' connu dans SPIP, on l'authentifie", 3);
-			
-			// creer la session
-				$session = charger_fonction('session', 'inc');
-				$session($auteur);
-				$p = ($auteur['prefs']) ? unserialize($auteur['prefs']) : array();
-				$p['cnx'] = ($session_remember == 'oui') ? 'perma' : '';
-				$p = array('prefs' => serialize($p));
-				sql_updateq('spip_auteurs', $p, "id_auteur=" . $auteur['id_auteur']);
-				//  bloquer ici le visiteur qui tente d'abuser de ses droits
-				verifier_visiteur();			
-			
-			## Cette partie est identique
-			## a formulaire_login_traiter
-			#$auth = charger_fonction('auth','inc');
-			#$auth();
-
-			// Si on se connecte dans l'espace prive, 
-			// ajouter "bonjour" (repere a peu pres les cookies desactives)
-			if (openid_is_url_prive($cible)) {
-				$cible = parametre_url($cible, 'bonjour', 'oui', '&');
-			}
-			if ($cible) {
-				$cible = parametre_url($cible, 'var_login', '', '&');
-			} 
-			
-			// transformer la cible absolue en cible relative
-			// pour pas echouer quand la meta adresse_site est foireuse
-			if (strncmp($cible,$u = url_de_base(),strlen($u))==0){
-				$cible = "./".substr($cible,strlen($u));
-			}
-		
-			// Si on est admin, poser le cookie de correspondance
-			if ($GLOBALS['auteur_session']['statut'] == '0minirezo') {
-				include_spip('inc/cookie');
-				spip_setcookie('spip_admin', '@'.$GLOBALS['auteur_session']['login'],
-				time() + 7 * 24 * 3600);
-			}
-			## /fin identique
-		}
-	}
-	
-	include_spip('inc/headers');
-	redirige_par_entete($redirect?$redirect:$cible);	
-}
-*/
-
-function openid_url_reception(){
-	include_spip('inc/filtres');
-	return url_absolue(generer_url_action("controler_openid"));
-}
-
-function openid_url_erreur($message, $cible=''){
-	openid_log($message);
-	if ($cible)
-		$ret = $cible;
-	else
-		$ret = generer_url_public("login","url=".$redirect,'&'); // $redirect pas defini ici ..
-	return parametre_url($ret, "var_erreur", urlencode($message),'&');
-}
-
-function openid_is_url_prive($cible){
-	$parse = parse_url($cible);
-	return strncmp(substr($parse['path'],-strlen(_DIR_RESTREINT_ABS)), _DIR_RESTREINT_ABS, strlen(_DIR_RESTREINT_ABS))==0;	
-}
-
-function openid_ajouter_auteur($couples){
-	$statut = ($GLOBALS['openid_statut_nouvel_auteur'] 
-			? $GLOBALS['openid_statut_nouvel_auteur'] 
-			: '1comite');
-			
-	include_spip('base/abstract_sql');
-	// si un utilisateur possede le meme login, on ne continue pas
-	// sinon on risque de perdre l'integrite de la table
-	// (pour le moment, on suppose dans la table spip_auteurs
-	// qu'un login ou qu'un opentid est unique)
-	if (sql_getfetsel('id_auteur','spip_auteurs','login='.sql_quote($couples['login']))) {
-		return false;
-	}
-	$id_auteur = sql_insertq("spip_auteurs", array('statut' => $statut));
-	openid_log("Creation de l'auteur '$id_auteur' pour $couples[login]", 3);
-	include_spip('inc/modifier');
-	revision_auteur($id_auteur, $couples);
-	
-	return true;
 }
 
 ?>
