@@ -12,9 +12,9 @@
 		[en]_ &#169; 2007-2009 - Distributed under GNU/GPL License
 		</multi>
 	</licence>
-	<version>0.8.8</version>
+	<version>1.0.0</version>
 	<version_base>0.2</version_base>
-	<etat>test</etat>
+	<etat>stable</etat>
 	<icon>images/openid_big.png</icon>
 	<description>
 		<multi>
@@ -81,9 +81,9 @@
 		[en]_ &#169; 2007-2009 - Distributed under GNU/GPL License
 		</multi>
 	</licence>
-	<version>0.8.8</version>
+	<version>1.0.0</version>
 	<version_base>0.2</version_base>
-	<etat>test</etat>
+	<etat>stable</etat>
 	<icon>images/openid_big.png</icon>
 	<description>
 		<multi>
