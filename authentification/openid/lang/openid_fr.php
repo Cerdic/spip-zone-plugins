@@ -17,6 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'form_forum_openid' => 'Inscription par OpenID',
 	'form_pet_votre_openid' => 'Votre adresse OpenID',
 	'form_login_openid_inconnu' => 'Cette adresse OpenID est inconnue. Corrigez, ou enregistrez-la dans votre profil.',
+	'form_login_statut_nouveau' => 'Pour votre premi&egrave;re connexion, vous devez utiliser le mot de passe qui vous a &eacute;t&eacute; envoy&eacute; par mail',
 	// O
   'openid' => 'OpenID',
 	// U

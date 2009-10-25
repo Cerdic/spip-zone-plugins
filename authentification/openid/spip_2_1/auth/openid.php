@@ -32,9 +32,16 @@ function auth_openid_dist ($login, $pass, $serveur='') {
 	}
 	$login = $l;
 
+
 	// retrouver le login
-	if (!$idurl = sql_getfetsel("openid", "spip_auteurs", "login=" . sql_quote($login),"","","","",$serveur) )
+	if (!$auteur = sql_fetsel("openid,statut", "spip_auteurs", "login=" . sql_quote($login),"","","","",$serveur) )
 		return false;
+
+	if (!$idurl = $auteur['openid'])
+		return false;
+
+	if ($auteur['statut']=='nouveau')
+		return _T('openid:form_login_statut_nouveau');
 	
 	// * Si l'openid existe, la procedure continue en redirigeant
 	// vers le fournisseur d'identite. En cas d'erreur, il y a une redirection de faite

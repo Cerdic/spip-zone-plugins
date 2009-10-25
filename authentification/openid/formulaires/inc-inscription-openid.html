@@ -15,7 +15,7 @@
 		<input type="hidden" name="openid" value="#ENV*{openid}" />
 	</li>
 </ul>
-<div class="openid"><img src="#CHEMIN{images/login_auth_openid.gif}" width="16" height="16" />#ENV*{openid}</div>
+[<div class="openid"><img src="#CHEMIN{images/login_auth_openid.gif}" width="16" height="16" />(#ENV*{openid})</div>]
 <script type="text/javascript">
 	function initinscform(){
 		if (!jQuery('#url_openid').val())
@@ -39,4 +39,10 @@
 	}
 	jQuery(document).ready(initinscform);
 	onAjaxLoad(initinscform);
+	[(#ENV{openid,''}|et{#ENV{nom_inscription,''}}|et{#ENV{mail_inscription,''}})
+	jQuery(document).ready(function(){setTimeout(
+		function(){jQuery('#formulaire_inscription input#EVAL{chr(91)}type=submit#EVAL{chr(93)}').get(0).click();},
+		10
+	)});
+	]
 </script>
