@@ -43,6 +43,11 @@ function auth_openid_dist ($login, $pass, $md5pass="", $md5next="") {
 	}
 
 	if ($auteur) {
+		// refuser la premiere connexion d'un nouvel auteur : il faut utiliser le pass
+		// pour confirmer l'email
+		if ($auteur['statut']=='nouveau')
+			return _T('openid:form_login_statut_nouveau');
+
 		// * Si l'openid existe, la procedure continue en redirigeant
 		// vers le fournisseur d'identite. En cas d'erreur, il y a une redirection de faite
 		// sur la page login, en cas de reussite, sur l'action controler_openid

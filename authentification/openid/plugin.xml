@@ -52,6 +52,10 @@
 		<nom>formulaire_verifier</nom>
 		<inclure>openid_pipelines.php</inclure>
 	</pipeline>
+	<pipeline>
+		<nom>formulaire_traiter</nom>
+		<inclure>openid_pipelines.php</inclure>
+	</pipeline>
  	<pipeline>
 		<nom>pre_edition</nom>
 		<inclure>openid_pipelines.php</inclure>
