@@ -39,7 +39,7 @@
 	}
 	jQuery(document).ready(initinscform);
 	onAjaxLoad(initinscform);
-	[(#ENV{openid,''}|et{#ENV{nom_inscription,''}}|et{#ENV{mail_inscription,''}})
+	[(#ENV{message_erreur}|non|et{#ENV{openid,''}|et{#ENV{nom_inscription,''}}|et{#ENV{mail_inscription,''}}})
 	jQuery(document).ready(function(){setTimeout(
 		function(){jQuery('#formulaire_inscription input#EVAL{chr(91)}type=submit#EVAL{chr(93)}').get(0).click();},
 		10
