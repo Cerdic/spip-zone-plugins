@@ -93,27 +93,29 @@ function xml2tab_previsions($xml){
 
 function xml2tab_conditions($xml){
 	$tableau = array();
-	$n = spip_xml_match_nodes(",^cc,",$xml,$conditions);
+	$n = spip_xml_match_nodes(",^cc,",$xml,$conditions); var_dump($n);
 	if ($n==1){
 		$conditions = reset($conditions['cc']);
 		// recuperer la date de derniere mise a jour des conditions
-		$date_maj = $conditions['lsup'][0];
-		$date_maj = strtotime(preg_replace(',\slocal\s*time\s*,ims','',$date_maj));
-		$tableau['derniere_maj'] = date('Y-m-d H:i:s',$date_maj);
-		// station d'observation (peut etre differente de la ville)
-		$tableau['station'] = $conditions['obst'][0];
-		// Liste des conditions meteo
-		$tableau['temperature_reelle'] = intval($conditions['tmp'][0]);
-		$tableau['temperature_ressentie'] = intval($conditions['flik'][0]);
-		$tableau['code_icone'] = intval($conditions['icon'][0]);
-		$tableau['pression'] = intval($conditions['bar'][0]['r'][0]);
-		$tableau['tendance_pression'] = $conditions['bar'][0]['d'][0];
-		$tableau['vitesse_vent'] = intval($conditions['wind'][0]['s'][0]);
-		$tableau['angle_vent'] = intval($conditions['wind'][0]['d'][0]);
-		$tableau['direction_vent'] = $conditions['wind'][0]['t'][0];
-		$tableau['humidite'] = intval($conditions['hmid'][0]);
-		$tableau['point_rosee'] = intval($conditions['dewp'][0]);
-		$tableau['visibilite'] = intval($conditions['vis'][0]);
+		if ($conditions) {
+			$date_maj = $conditions['lsup'][0];
+			$date_maj = strtotime(preg_replace(',\slocal\s*time\s*,ims','',$date_maj));
+			$tableau['derniere_maj'] = date('Y-m-d H:i:s',$date_maj);
+			// station d'observation (peut etre differente de la ville)
+			$tableau['station'] = $conditions['obst'][0];
+			// Liste des conditions meteo
+			$tableau['temperature_reelle'] = intval($conditions['tmp'][0]);
+			$tableau['temperature_ressentie'] = intval($conditions['flik'][0]);
+			$tableau['code_icone'] = intval($conditions['icon'][0]);
+			$tableau['pression'] = intval($conditions['bar'][0]['r'][0]);
+			$tableau['tendance_pression'] = $conditions['bar'][0]['d'][0];
+			$tableau['vitesse_vent'] = intval($conditions['wind'][0]['s'][0]);
+			$tableau['angle_vent'] = intval($conditions['wind'][0]['d'][0]);
+			$tableau['direction_vent'] = $conditions['wind'][0]['t'][0];
+			$tableau['humidite'] = intval($conditions['hmid'][0]);
+			$tableau['point_rosee'] = intval($conditions['dewp'][0]);
+			$tableau['visibilite'] = intval($conditions['vis'][0]);
+		}
 	}
 	return $tableau;
 }
