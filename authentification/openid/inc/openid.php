@@ -321,6 +321,21 @@ function terminer_authentification_openid($retour){
 	}
 	return false;
 }
+
+/**
+ * Fournir une url de retour pour l'inscription par OpenID
+ * pour finir l'inscription
+ *
+ * @param string $idurl
+ * @param string $redirect
+ * @return string
+ */
+function openid_url_retour_insc($idurl, $redirect=''){
+	$securiser_action = charger_fonction('securiser_action','inc');
+	return $securiser_action('inscrire_openid', $idurl, $redirect, true);
+}
+
+
 /*
 			#openid_log("sreg ".var_export($sreg_resp,true), 2);
 

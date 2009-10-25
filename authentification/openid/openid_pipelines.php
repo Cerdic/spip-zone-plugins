@@ -31,6 +31,15 @@ function openid_formulaire_charger($flux){
 		if ($id_auteur = intval($flux['data']['id_auteur']))
 			$flux['data']['openid'] = sql_getfetsel('openid','spip_auteurs','id_auteur='.intval($id_auteur));
 	}
+	if ($flux['args']['form']=='inscription'){
+		$flux['data']['_forcer_request'] = true; // forcer la prise en compte du post
+		$flux['data']['url_openid'] = ''; // un champ de saisie openid !
+		$flux['data']['openid'] = ''; // une url openid a se passer en hidden
+		if ($erreur = _request('var_erreur'))
+			$flux['data']['message_erreur'] = _request('var_erreur');
+		elseif(_request('openid') AND (!_request('nom_inscription') OR !_request('mail_inscription')))
+			$flux['data']['message_erreur'] = _T('openid:erreur_openid_info_manquantes');
+	}
 	return $flux;
 }
 
@@ -47,6 +56,24 @@ function openid_formulaire_verifier($flux){
 			$openid = nettoyer_openid($openid);
 			if (!verifier_openid($openid))
 				$flux['data']['openid']=_T('openid:erreur_openid');
+		}
+	}
+	if ($flux['args']['form']=='inscription'){
+		if ($idurl = _request('url_openid')){
+			include_spip('inc/openid');
+			if (!is_openid($idurl)
+				OR !$idurl = nettoyer_openid($idurl)
+				OR !verifier_openid($idurl))
+				$flux['data']['url_openid']=_T('openid:erreur_openid');
+			else {
+				// openid valide, il faut renvoyer vers le fournisseur pour identification
+				// et recup au retour du nom et de l'email
+				$retour = openid_url_retour_insc($idurl,self());
+				// lancer l'identification chez openid
+				$erreur = demander_authentification_openid($idurl, $retour);
+				// si on arrive ici : erreur
+				$flux['data']['url_openid']=$erreur;
+			}
 		}
 	}
 	return $flux;
@@ -97,10 +124,12 @@ function openid_recuperer_fond($flux) {
 		include_spip('inc/openid');
 		$flux['data']['texte'] = openid_login_form($flux['data']['texte'],$flux['data']['contexte']);
 	}
-	/*if ($flux['args']['fond']=='formulaires/inscription'){
-		$insc = pipeline('social_inscription_links','');
-		$flux['data']['texte'] = str_replace('<form',$insc . '<form',$flux['data']['texte']);
-	}*/
+	if ($flux['args']['fond']=='formulaires/inscription'){
+
+		$insc = recuperer_fond('formulaires/inc-inscription-openid',$flux['data']['contexte']);
+		$flux['data']['texte'] = str_replace('<ul',$insc . '<ul',$flux['data']['texte']);
+
+	}
 	return $flux;
 }
 
