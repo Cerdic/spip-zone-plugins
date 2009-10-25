@@ -79,7 +79,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 //I
 'icone_menu_config' => 'Autorit&#233;',
 'infos_selection' => '(vous pouvez s&#233;lectionner plusieurs secteurs avec la touche shift)',
-'interdire-admin' => 'Cochez les cases ci-dessous pour interdire aux administrateurs de cr&#233;er',
+'interdire_admin' => 'Cochez les cases ci-dessous pour interdire aux administrateurs de cr&#233;er',
 
 //J
 
@@ -93,14 +93,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 //N
 'non_webmestres' => 'Ce r&#233;glage ne s&#39;applique pas aux webmestres.',
-'note_rubriques' => '<small><br />(Notez que seuls les administrateurs peuvent créer des rubriques, et, pour les administrateurs restreints, cela ne peut se faire que dans leurs rubriques.)</small>',
+'note_rubriques' => '<small><br />(Notez que seuls les administrateurs peuvent cr&eacute;er des rubriques, et, pour les administrateurs restreints, cela ne peut se faire que dans leurs rubriques.)</small>',
 'nouvelles_rubriques' => 'de nouvelles rubriques &#224; la racine du site',
 'nouvelles_sous_rubriques' => 'de nouvelles sous-rubriques dans l&#39;arborescence.',
 
 //O
 'ouvrir_redacs' => 'Ouvrir aux r&#233;dacteurs du site&nbsp; :',
 'ouvrir_visiteurs_enregistres' => 'Ouvrir aux visiteurs enregistr&#233;s :',
-'ouvrir_visiteurs_tous' => 'Ouvrir à tous les visiteurs du site :',
+'ouvrir_visiteurs_tous' => 'Ouvrir &agrave; tous les visiteurs du site :',
 
 //Q
 
