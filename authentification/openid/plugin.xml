@@ -15,7 +15,7 @@
 	<version>1.0.0</version>
 	<version_base>0.2</version_base>
 	<etat>stable</etat>
-	<icon>images/openid_big.png</icon>
+	<icon>images/openid-100.png</icon>
 	<description>
 		<multi>
 			[fr]Authentification des auteurs et visiteurs &#224; l'aide de leur OpenID.
@@ -84,7 +84,7 @@
 	<version>1.0.0</version>
 	<version_base>0.2</version_base>
 	<etat>stable</etat>
-	<icon>images/openid_big.png</icon>
+	<icon>images/openid-100.png</icon>
 	<description>
 		<multi>
 		[fr]Authentification des auteurs et visiteurs &#224; l'aide de leur OpenID.
