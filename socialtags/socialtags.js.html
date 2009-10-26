@@ -2,7 +2,10 @@
 // socialtags.js
 
 // 'ajouter un bookmark' ne marche que sous IE
-// les tuyaux trouves pour FF ou Opera sont creves
+// les tuyaux trouves pour FF
+//	window.sidebar.addPanel(t,u,'');
+//	cf https://bugzilla.mozilla.org/show_bug.cgi?id=214530
+// ou Opera sont creves
 ;var socialtags_addfavorite = function(u,t){
 	if(document.all)window.external.AddFavorite(u,t);
 };
