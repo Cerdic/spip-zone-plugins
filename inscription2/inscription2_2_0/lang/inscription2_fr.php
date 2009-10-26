@@ -133,6 +133,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'inscription2' => 'Inscription 2.0',
 	'inscriptions' => 'Inscriptions',
 	'inserez_infos' => 'Veuillez saisir les informations demand&eacute;es',
+	'infos_complementaires' => 'Informations compl&eacute;mentaires',
 
 	// J
 	'janvier' => 'janvier',
