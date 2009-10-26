@@ -57,7 +57,10 @@
 		<nom>declarer_tables_principales</nom>
 		<inclure>base/abonnement.php</inclure>
 	</pipeline>
-
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<inclure>abonnement_pipelines.php</inclure>
+	</pipeline>
 	<bouton id='abonnements' parent='configuration'>
 		<icone>img/abonnement_22.png</icone>
 		<titre>abo:abonnements</titre>
@@ -71,7 +74,6 @@
 	<chemin dir='' />
 	<necessite id="SPIP" version="[2.0.6;]" />
 	<necessite id="inscription2" version="[0.68;]" />
-	<necessite id="cfg" version="[1.13;]" /> 
-	<necessite id="saisies" version="[1.0;]" /> 
+	<necessite id="cfg" version="[1.12.2;]" /> 
 	<necessite id="spip_bonux" version="[1.7;]" /> 
 </plugin>

@@ -21,7 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	"erreurs_formulaire" => "Des erreurs sont pr&eacute;sentes dans votre saisie.",
 	
 	// CFG
-	"abonnement" => "Abonnements",
+	"abonnement" => "Abonnement",
 	"abonnement_relances" => "Relance des abonnements",
 	
 	"configuration_abonnements" => "Paramétrage",
@@ -91,6 +91,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// mes_abonnements
 	'votre_abonnement' => 'Votre abonnement',
 	'echeance_le' => '&eacute;ch&eacute;ance le @date@',
+	'echeance' => 'Ech&eacute;ance',
 	'vos_articles' => 'Vos articles',
 	'echance_abonnement_proche' => "Votre abonnement <i>@titre@</i> arrive &agrave; &eacute;ch&eacute;ance le @date@.",
 	'echance_abonnement_passee' => "Votre abonnement <i>@titre@</i> est arriv&eacute; &agrave; &eacute;ch&eacute;ance le @date@.",
