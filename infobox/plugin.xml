@@ -12,7 +12,7 @@
 	
 	<etat>dev</etat> 
 	
-	<description>Permet d'afficher des messages &agrave; destination des r&eacute;dacteurs
+	<description>Affiche des messages &agrave; destination des r&eacute;dacteurs.
 	
 	<p>INFOBOX permet aux concepteurs de squelettes d'afficher des messages d'alerte &agrave; l'intention des r&eacute;dacteurs lors de la mise au point d'un site.</p>
 _ Il s'utilise dans les boucles alternatives par exemple, pour signaler au r&eacute;dacteur une rubrique vide ou un mot-cl&eacute; oubli&eacute;.
