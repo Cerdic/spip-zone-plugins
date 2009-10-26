@@ -44,11 +44,11 @@
 	    <icone>images/fiche-perso.png</icone>
 	    <titre>inscription2:icone_afficher_utilisateurs</titre>
 	</bouton>
-	<bouton id='inscription2_adherents' parent='bando_reactions'>
+	<bouton id='inscription2_adherents2' parent='bando_reactions'>
 		<icone>images/inscription2-16.png</icone>
 		<titre>inscription2:icone_afficher_utilisateurs</titre>
+		<url>inscription2_adherents2</url>
 	</bouton>
-
 	<pipeline>
 		<nom>ajouter_boutons</nom>
 		<action>ajouter_boutons</action>

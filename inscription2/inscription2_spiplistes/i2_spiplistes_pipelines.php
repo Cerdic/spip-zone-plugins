@@ -33,7 +33,7 @@
 	
 	function i2_spiplistes_i2_traiter_formulaire($flux){
 		$id_auteur = $flux['args']['id_auteur'];
-		$listes = _request('newsletters');
+		$listes = _request('newsletters',array()); 
 		$listes_str = is_array($listes)? implode(',',$listes): '0';
 		sql_delete("spip_auteurs_listes","id_auteur=$id_auteur AND id_liste NOT IN ($listes_str)");
 		foreach($listes as $cle => $liste){
