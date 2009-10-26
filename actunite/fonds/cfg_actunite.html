@@ -1,48 +1,49 @@
 #CACHE{0}
 
-[(#REM) descriptif=
-<h4>Configuration du plugin Actunite</h4>
-<p>Cette page de configuration du plugin <strong>Actunite</strong> vous permet de d&eacute;finir diff&eacute;rents param&egrave;tres de personnalisation.</p>
-<p><a href="http://www.spip-contrib.net/Plugin-Acunite?var_mode=preview" class="spip_out">Doc en ligne, forum, FAQ sur SPIP-Contrib</a></p>
-]
-
-[(#REM) titre=Plugin Actunite ]
-[(#REM) boite=Formulaire de configuration du plugin "Actunite" ]
-[(#REM) nom=actunite ]
+<!-- descriptif=<h4><:actunite:cfg_titre_descriptif:></h4><:actunite:cfg_texte_descriptif:> -->
+<!-- titre=<:actunite:cfg_titre_plugin:> -->
+<!-- boite=<:actunite:cfg_nom_boite:>-->
+<!-- nom=<:actunite:cfg_nom_plugin:> -->
 
 <div id="cfg_actunite">
 
 <form method="post" action="#SELF">
 [(#ENV{_cfg_}|form_hidden)]
 
+<fieldset class="insertion">
+
+	<legend><:actunite:cfg_legend_insertion:></legend>
+
+	<p><:actunite:cfg_info_insertion:></p>
+	
+	<input type="radio" name="insertion" value="avant" class="radio" [(#ENV{insertion}=={avant}?{'checked="checked"',''})] /><label for="champ_insertion_1"><:actunite:cfg_label_avant:></label>
+	<input type="radio" name="insertion" value="dans"  class="radio" [(#ENV{insertion}=={dans}?{'checked="checked"',''})]/><label for="champ_insertion_2"><:actunite:cfg_label_dans:></label>
+	<input type="radio" name="insertion" value="apres" class="radio" [(#ENV{insertion}=={apres}?{'checked="checked"',''})][(#ENV{insertion}?{'','checked="checked"'})]/><label for="champ_insertion_3"><:actunite:cfg_label_apres:></label>
+
+	<label>&nbsp;le bloc <input type="text" name="bloc" value="[(#ENV{bloc}|sinon{'#page'})]" /></label>
+	
+	<p><:actunite:cfg_help_insertion:></p>
+	
+</fieldset>	
+
+
 <fieldset class="boucle">
 
-	<legend><:actunite:cfg_label_titre_cfg_boucle:></legend>
-	
-	<p><:actunite:cfg_info_boucle:></p>
+	<legend><:actunite:cfg_legend_boucle:></legend>
 	
 	<p><label><:actunite:cfg_label_rubriques:></label><input type="text" name="rubriques" value="#ENV{rubriques}" /></p>
 	<p><label><:actunite:cfg_label_mots_cle:></label><input type="text" name="mots_cle" value="#ENV{mots-cle}" /></p>
 	<p><label><:actunite:cfg_label_critere_tri:></label><input type="text" name="tri" value="#ENV{tri}" /></p>
 
-</fieldset>
-
-<fieldset class="insertion">
-
-	<legend><:actunite:cfg_label_titre_insertion:></legend>
-	<p><:actunite:cfg_info_insertion:></p>	
-	<p><label><:actunite:cfg_label_bloc_insertion:></label><input type="text" name="bloc_insertion" value="#ENV{bloc_insertion}" /></p>
+	<p><:actunite:cfg_help_boucle:></p>
 	
 </fieldset>
-
 
 <div style="text-align:#LANG_RIGHT;">
 	<input type="submit" name="_cfg_ok" value="<:oK:>" class="fondo" />
 	<input type="reset" value="<:reset:>" class="fondo" />
 	<input type="submit" name="_cfg_delete" value="<:supprimer:>" class="fondo" />
 </div>
-
-
 
 
 </form>
