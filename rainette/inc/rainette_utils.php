@@ -93,7 +93,7 @@ function xml2tab_previsions($xml){
 
 function xml2tab_conditions($xml){
 	$tableau = array();
-	$n = spip_xml_match_nodes(",^cc,",$xml,$conditions); var_dump($n);
+	$n = spip_xml_match_nodes(",^cc,",$xml,$conditions);
 	if ($n==1){
 		$conditions = reset($conditions['cc']);
 		// recuperer la date de derniere mise a jour des conditions
