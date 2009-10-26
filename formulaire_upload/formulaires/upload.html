@@ -1,4 +1,4 @@
-<div class="formulaire_spip formulaire_upload">
+<div class="formulaire_spip formulaire_upload" id="formulaire_upload_#ENV{objet}_#ENV{id_objet}">
 <br class='bugajaxie' />
 [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
@@ -12,25 +12,19 @@
 		<ul>
 			<li class='saisie_fichier[ (#ENV**{erreurs}|table_valeur{fichier}|oui)erreur]'>
 			<div>
-				<label for="fichier"><:formupload:choosefiles:></label>
-				<input type="file" id="fichier" name="fichier"[ accept="(#CONFIG{formupload/files_accepted})"][ maxlength="(#CONFIG{formupload/files_number})"] />
+				<label for="fichier_#ENV{objet}_#ENV{id_objet}"><:formupload:choosefiles:></label>
+				<input type="file" id="fichier_#ENV{objet}_#ENV{id_objet}" name="fichier"[ accept="(#CONFIG{formupload/files_accepted})"][ maxlength="(#CONFIG{formupload/files_number})"] />
 			</div>
 			</li>
 		</ul>
-		[(#REM) Piege a robots spammeurs ]
-		<p style="display: none;">
-			<label for="nobot_forum"><:antispam_champ_vide:></label>
-			<input type="text" class="text" name="nobot" id="nobot_forum" value="#ENV{nobot}" size="10" />
-		</p>
-		<p class="spip_bouton"><input type="submit" value="<:bouton_enregistrer:>" /><br style="clear:both;" /></p>
+		<p class="spip_bouton"><input type="submit" value="<:bouton_enregistrer:>" /></p>
 	</fieldset>
-	<br style="clear:both;" />
 <script type="text/javascript">
 (function($){
 	$(function(){
 		// si multifile est la, on l'utilise (trop bien)
 		if ($.fn.MultiFile)
-		$('#fichier').MultiFile({
+		$('#fichier_#ENV{objet}_#ENV{id_objet}').MultiFile({
 			[max: (#CONFIG{formupload/files_number}),
 			][accept: '(#CONFIG{formupload/files_accepted})',
 			]STRING: {
