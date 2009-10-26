@@ -10,9 +10,12 @@ function balise_LOGO_AUTEUR($p) {
 	$_email3 = champ_sql('email_auteur', $p);
 	$_email4 = champ_sql('address', $p);
 
+	$_id = champ_sql('id_auteur', $p);
+	$_emailsql = "sql_getfetsel('email','spip_auteurs','id_auteur='.intval($_id))";
+
 	$p = $balise_logo_($p);
 
-	$p->code = str_replace('calcule_logo(', 'calcule_logo_ou_gravatar(sinon('.$_email1.',sinon('.$_email2.', sinon('.$_email3.','.$_email4.'))), ', $p->code);
+	$p->code = str_replace('calcule_logo(', 'calcule_logo_ou_gravatar(sinon('.$_email1.',sinon('.$_email2.', sinon('.$_email3.', sinon('.$_email4.','.$_emailsql.')))), ', $p->code);
 
 	return $p;
 }
