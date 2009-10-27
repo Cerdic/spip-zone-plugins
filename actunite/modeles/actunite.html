@@ -1,12 +1,15 @@
-	<div id="textes">
-		<BOUCLE_caroussel(ARTICLES){tout}{!par date}{0,4}>
-		<dl class="off">
-			<dd class="invisible"><a href="#URL_ARTICLE" title="[(#TITRE|supprimer_numero|texte_script|couper{30})]"><img src="[(#LOGO_ARTICLE||extraire_attribut{src})]" alt=""/></a></dd>
-			<dt>[(#TITRE|supprimer_numero|texte_script|couper{30})]</dt>
-			<dd>[(#INTRODUCTION|couper{120}|sinon{'&nbsp;'})]</dd>
-		</dl>[(#REM) on récupère le lien et l'image du 1er article de la boucle pour le mettre dans le visuel ][(#COMPTEUR_BOUCLE|=={'1'}|?{' ',''})#SET{url_article,#URL_ARTICLE} #SET{logo_article,#LOGO_ARTICLE} ]</BOUCLE_caroussel>
+<div id="textes">
+	<BOUCLE_caroussel(ARTICLES){tout}{!par date}{0,4}>
+	<dl class="off">
+		<dd class="invisible"><a href="#URL_ARTICLE" title="[(#TITRE|supprimer_numero|texte_script|couper{30})]"><img src="[(#LOGO_ARTICLE||extraire_attribut{src})]" alt=""/></a></dd>
+		<dt>[(#TITRE|supprimer_numero|texte_script|couper{30})]</dt>
+		<dd>[(#INTRODUCTION|couper{120}|sinon{'&nbsp;'})]</dd>
+	</dl>
+	[(#REM) on récupère le lien et l'image du 1er article de la boucle pour le mettre dans le visuel ]
+	[(#COMPTEUR_BOUCLE|=={'1'}|?{' ',''})#SET{url_article,#URL_ARTICLE} #SET{logo_article,#LOGO_ARTICLE} ]
+	</BOUCLE_caroussel>
+</div>
+<div id="visuel">
+	<a href="[(#GET{url_article})]"><img class="visuel" src="[(#GET{logo_article}||extraire_attribut{src})]" alt="visuel"/></a><div id="selecteur"><img src="#CHEMIN{images/png/selecteur.png}" alt="selecteur" />
 	</div>
-	<div id="visuel">
-		<a href="[(#GET{url_article})]"><img class="visuel" src="[(#GET{logo_article}||extraire_attribut{src})]" alt="visuel"/></a>
-		<div id="selecteur"><img src="#CHEMIN{images/png/selecteur.png}" alt="selecteur" /></div>
-	</div>
+</div>

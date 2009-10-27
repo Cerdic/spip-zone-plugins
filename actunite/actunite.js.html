@@ -10,9 +10,7 @@ $(document).ready(function(){
 	// lire aussi la variable actunite/insertion (pour remplacer after|before ou append) 
 	// voir en ligne : http://docs.jquery.com/Manipulation
 	$('div[(#ENV{bloc,'.cartouche'})]').[(#ENV{insertion,'after'})]('<div id="actunite"></div>');
-	/*
-	$('div#actunite').html(['(#MODELE{actunite})']);
-	*/
+	$('div#actunite').load('spip.php?page=modeles/actunite');
 	
 });
 

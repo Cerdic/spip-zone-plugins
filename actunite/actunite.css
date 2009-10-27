@@ -1,3 +1,7 @@
 
 
-#actunite	{ width:auto; height: 200px; background:orange; border:4px dashed purple; }
+#actunite	{ width:auto; height: 200px; background:white; border:1px solid cyan; overflow:hidden; }
+#textes		{ width:48%; padding: 0 1%; margin:0; float:left; }
+#textes dl	{ height:48px; margin:0; overflow:hidden; background: url('http://spipmine.cym.fr/plugins/auto/actunite/img_pack/fond_orange_blanc.png') bottom repeat-x; }
+#textes dt	{ font-weight:bold; }
+#visuel		{ width:50%; height:100%; background:cyan; margin:0; padding:0; float:right; }
