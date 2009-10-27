@@ -1,0 +1,16 @@
+
+
+A l'installtion du plugin :
+
+Cadre par défaut :
+------------------
+Cas par défaut : l'utilisateur n'a rien changé, il a juste indiqué la div dans laquelle insérer le code.
+
+- récupérer le nom de la div dans laquelle mettre le bloc "actunite".
+- récupérer si c'est avant, après ou dans
+- insérer le bloc : en jQuery => voir dans
+
+	- dans infobox j'insère le code "dans" un fieldset
+	- dans "repères" j'insère le code dans la div spécifiée...
+	
+donc je prends exeple sur "repères".

@@ -16,13 +16,13 @@
 
 	<p><:actunite:cfg_info_insertion:></p>
 	
-	<input type="radio" name="insertion" value="avant" class="radio" [(#ENV{insertion}=={avant}?{'checked="checked"',''})] /><label for="champ_insertion_1"><:actunite:cfg_label_avant:></label>
-	<input type="radio" name="insertion" value="dans"  class="radio" [(#ENV{insertion}=={dans}?{'checked="checked"',''})]/><label for="champ_insertion_2"><:actunite:cfg_label_dans:></label>
-	<input type="radio" name="insertion" value="apres" class="radio" [(#ENV{insertion}=={apres}?{'checked="checked"',''})][(#ENV{insertion}?{'','checked="checked"'})]/><label for="champ_insertion_3"><:actunite:cfg_label_apres:></label>
+	<input type="radio" name="insertion" value="before" class="radio" [(#ENV{insertion}=={before}?{'checked="checked"',''})] /><label for="champ_insertion_1"><:actunite:cfg_label_avant:></label>
+	<input type="radio" name="insertion" value="append"  class="radio" [(#ENV{insertion}=={append}?{'checked="checked"',''})]/><label for="champ_insertion_2"><:actunite:cfg_label_dans:></label>
+	<input type="radio" name="insertion" value="after" class="radio" [(#ENV{insertion}=={after}?{'checked="checked"',''})][(#ENV{insertion}?{'','checked="checked"'})]/><label for="champ_insertion_3"><:actunite:cfg_label_apres:></label>
 
-	<label>&nbsp;le bloc <input type="text" name="bloc" value="[(#ENV{bloc}|sinon{'#page'})]" /></label>
+	<label><:actunite:cfg_label_le_bloc:><input type="text" name="bloc" value="[(#ENV{bloc}|sinon{'#page'})]" /></label>
 	
-	<p><:actunite:cfg_help_insertion:></p>
+	<p class="help"><:actunite:cfg_help_insertion:></p>
 	
 </fieldset>	
 
@@ -35,7 +35,7 @@
 	<p><label><:actunite:cfg_label_mots_cle:></label><input type="text" name="mots_cle" value="#ENV{mots-cle}" /></p>
 	<p><label><:actunite:cfg_label_critere_tri:></label><input type="text" name="tri" value="#ENV{tri}" /></p>
 
-	<p><:actunite:cfg_help_boucle:></p>
+	<p class="help"><:actunite:cfg_help_boucle:></p>
 	
 </fieldset>
 
