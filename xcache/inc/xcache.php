@@ -1,7 +1,7 @@
 <?php
 
 //
-// Cache function W()
+// Cache function Cache()
 // (c) Fil 2009 - Double-licensed under the GNU/LGPL and MIT licenses
 // http://zzz.rezo.net/-SPIP-
 // $ttl = time to live
@@ -9,7 +9,8 @@
 // (the function's variables are automatically taken into account)
 //
 // Usage: require_once 'xcache.php';
-// In any cacheable function add at top: if (null!==$W=W())return$W;
+// In any cacheable function add at top:
+// if(!is_null($C=Cache())) return$C;
 
 if (!function_exists('Cache')) {
 
