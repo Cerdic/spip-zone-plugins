@@ -195,6 +195,7 @@ function cextras_editer_contenu_objet($flux){
 
 			// on affiche seulement les champs dont la saisie est autorisee 
 			$type = objet_type($c->table).'_'.$c->champ;
+			include_spip('inc/autoriser');
 			if (autoriser('modifierextra', $type, $flux['args']['id'], '', array(
 				'type' => $flux['args']['type'], 
 				'id_objet' => $flux['args']['id'], 
@@ -260,6 +261,7 @@ function cextras_afficher_contenu_objet($flux){
 			
 			// on affiche seulement les champs dont la vue est autorisee 
 			$type = objet_type($c->table).'_'.$c->champ;
+			include_spip('inc/autoriser');
 			if (autoriser('voirextra', $type, $flux['args']['id_objet'], '', array(
 				'type' => $flux['args']['type'], 
 				'id_objet' => $flux['args']['id_objet'], 
@@ -309,6 +311,7 @@ function cextras_formulaire_verifier($flux){
 				// comme dans l'autre appel (cextras_afficher_contenu_objet())
 				// du coup, on risque de se retrouver parfois avec des
 				// resultats differents... Il faudra surveiller.
+				include_spip('inc/autoriser');
 				if (autoriser('modifierextra', $type, $id_objet, '', array(
 					'type' => $c->table, 
 					'id_objet' => $id_objet))) 
