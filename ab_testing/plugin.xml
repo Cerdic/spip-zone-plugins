@@ -10,6 +10,7 @@
 	<etat>
 	dev
 	</etat>
+	<lien>http://zzz.rezo.net/Tests-A-B.html</lien>
 	<description>
 	Fournit un dossier squelettes différent à une fraction des visiteurs, et évalue les différences de comportement.
 	</description>
