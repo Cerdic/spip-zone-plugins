@@ -1,0 +1,22 @@
+<plugin>
+	<nom>XCache</nom>
+	<auteur>Fil
+	&#169; 2009 - GNU/GPL
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	dev
+	</etat>
+	<description>
+	Utilise XCache pour accelerer
+	</description>
+    <lien>http://zzz.rezo.net/Utiliser-xcache-pour-accelerer-n.html</lien>
+	<prefix>
+	XCache
+	</prefix>
+    <options>inc/xcache.php</options>
+	<chemin dir='' />
+	<necessite id="SPIP" version="[2.0.0;]" />
+</plugin>
