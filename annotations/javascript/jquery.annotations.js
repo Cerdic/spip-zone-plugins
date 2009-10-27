@@ -126,8 +126,7 @@
 			var imageOffset = selector.offset({relativeTo:container[0],border:true,padding:true});
 			var posLeft = coord.xy[0]+imageOffset.left-hotSpot[0]+"px";
 			var posTop = coord.xy[1]+imageOffset.top-hotSpot[1]+"px";
-			marker.css({zIndex:$.carto.overlay[index].zindex,position:"absolute",left:posLeft,top:posTop}).
-			appendTo(container).ifixpng();
+			marker.css({zIndex:$.carto.overlay[index].zindex,position:"absolute",left:posLeft,top:posTop}).appendTo(container);
 			var overlay = $("<img class='map_marker_overlay anno_instance"+this.instance+"' src='"+this.cfg.emptyImage+"' width='"+marker.width()+"' height='"+marker.height()+"' />").
 			css({zIndex:1000+$.carto.overlay[index].zindex,position:"absolute",left:posLeft,top:posTop}).
 			appendTo(container);

@@ -123,7 +123,7 @@
         #MODELE{article_mots}
         
         <BOUCLE_aut(AUTEURS){id_auteur=#SESSION{id_auteur}}{tout}>
-				#FORMULAIRE_UPLOAD{auteur,upload_annotation_forum}
+				#FORMULAIRE_UPLOAD{auteur,#ID_AUTEUR,upload_annotation_forum}
 				<script type="text/javascript">
 					$(function() {
 						$("#extra .formulaire_upload").upload_attach({

@@ -15,8 +15,6 @@ function Annotations_insert_head($flux) {
 	if(_request("carto_debug")) 
 		$flux .= '<link rel="stylesheet" href="'.url_absolue(find_in_path('css/jqModal.css')).'" type="text/css" />
 		<link rel="stylesheet" href="'.url_absolue(find_in_path('css/jquery.tooltip.css')).'" type="text/css" /> 
-		<script type="text/javascript" src="'.url_absolue(find_in_path('javascript/jquery.ifixpng.js')).'"></script>
-		<script type="text/javascript" src="'.url_absolue(find_in_path('javascript/jquery.ifixpng.js')).'"></script>
 		<script type="text/javascript" src="'.url_absolue(find_in_path('javascript/jqModal.js')).'"></script>
 		<script type="text/javascript" src="'.url_absolue(find_in_path('javascript/jquery.tooltip.js')).'"></script>
 		<script type="text/javascript" src="'.url_absolue(find_in_path('javascript/jquery.dimensions.js')).'"></script>
@@ -44,7 +42,6 @@ function Annotations_insert_head($flux) {
 			 	cache: true
 			};
 			var scripts = [
-			 "'.url_absolue(find_in_path('javascript/jquery.ifixpng.js')).'",
 			 "'.url_absolue(find_in_path('javascript/jqModal.js')).'",
 			 "'.url_absolue(find_in_path('javascript/jquery.tooltip.js')).'",
 			 "'.url_absolue(find_in_path('javascript/jquery.dimensions.js')).'",
