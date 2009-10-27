@@ -11,11 +11,11 @@
 // Usage: require_once 'xcache.php';
 // In any cacheable function add at top: if (null!==$W=W())return$W;
 
-if (!function_exists('W')) {
+if (!function_exists('Cache')) {
 
 # xcache ?
 if (function_exists('xcache_set')) {
-	function W($vars=null, $ttl=3600) {
+	function Cache($vars=null, $ttl=3600) {
 		$trace = debug_backtrace();
 		$trace = $trace[1];
 		$key = __FILE__ . md5(
@@ -34,7 +34,7 @@ if (function_exists('xcache_set')) {
 }
 # elementary compatibility
 else {
-	function W(){return null;}
+	function Cache(){return null;}
 }
 
 }
