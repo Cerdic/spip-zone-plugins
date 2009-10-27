@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin>
+	<nom>A/B Testing</nom>
+	<auteur>
+	Fil &#169; 2009
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	dev
+	</etat>
+	<description>
+	Fournit un dossier squelettes différent à une fraction des visiteurs, et évalue les différences de comportement.
+	</description>
+	<prefix>
+	AB
+	</prefix>
+	<options>ab_options.php</options>
+	<chemin dir='' />
+	<necessite id="SPIP" version="[1.9.0;]" />
+</plugin>
