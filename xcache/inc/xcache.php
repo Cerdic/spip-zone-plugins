@@ -2,7 +2,7 @@
 
 # xcache ?
 if (function_exists('cache_set')) {}
-elseif (!function_exists('xcache_set'))
+elseif (function_exists('xcache_set'))
 	require_once dirname(__FILE__).'/'.'xcache.inc';
 else
 	require_once dirname(__FILE__).'/'.'filecache.inc';
