@@ -12,17 +12,21 @@
 	
 	<etat>dev</etat>
 	
+	<icon>img_pack/picto_reperes_64x64.png</icon>
+	
 	<description>
 	Ajoute des rep&egrave;res verticaux et horizontaux &agrave; l'&eacute;cran.
 	
-<p>Le nombre de rep&egrave;res, leur orientation (verticale ou horizontale), leur position par rapport aux bords et leur couleur sont param&eacute;trables via [CFG->./index.php?exec=cfg&amp;cfg=reperes].</p>
+<p>Memes fonctionnalit&eacute;s que le plugin <em>WebDeveloper - Lignes de rep&egrave;res</em> pour FireFox, sauf que :</p>
+- &ccedil;a marche aussi pour IE, pour Safari, pour Opera...
+- les rep&egrave;res ne disparaissent pas au rechargement de la page</p>
+<p>[CFG->./index.php?exec=cfg&amp;cfg=reperes] permet de param&eacute;trer le nombre, la couleur, la position et l'orientation des rep&egrave;res.</p>
 	</description>
 
 	<lien>
 	[Doc en ligne, forum, FAQ sur SPIP-Contrib->http://www.spip-contrib.net/Plugin-Reperes?var_mode=preview]
 	</lien>
 	
-	<icon>img_pack/ateliers_cym-24.gif</icon>
 	
 	<fonctions>reperes.php</fonctions>
 	
