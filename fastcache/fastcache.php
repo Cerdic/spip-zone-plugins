@@ -31,7 +31,9 @@ if (defined('_FC_KEY'))
 	require_once _FC_XCACHE;
 
 if (defined('_FC_KEY')
-AND $p = cache_get(_FC_KEY)) {
+AND $p = cache_get(_FC_KEY)
+AND $p['time'] == @filemtime(_FC_META)
+) {
 	eval($p['head']);
 	$b = (!is_null($p['ie']) AND fc_testie()) ? 'ie' : 'body';
 	header('Content-length: '.strlen($p[$b]));

@@ -56,7 +56,8 @@ function Fastcache_affichage_final($texte) {
 					'body' => $texte
 						.(_FC_DEBUG?"\n<!-- read "._FC_KEY." -->\n":''),
 					'ie' => $ie
-						.(_FC_DEBUG?"\n<!-- read "._FC_KEY." -->\n":'')
+						.(_FC_DEBUG?"\n<!-- read "._FC_KEY." -->\n":''),
+					'time' => @filemtime(_FILE_META)
 				),
 				_FC_PERIODE
 			);
@@ -80,5 +81,8 @@ function Fastcache_affichage_final($texte) {
 # s'inserer au *debut* du pipeline affichage_final pour etre avant f_surligne etc
 # mais de preference apres mutualisation_url_img_courtes pour qu'il s'applique
 $GLOBALS['spip_pipeline']['affichage_final'] = preg_replace(',\|mutualisation_url_img_courtes|^,','\0|Fastcache_affichage_final', $GLOBALS['spip_pipeline']['affichage_final']);
+
+# Un recalcul provoque l'invalidation, par l'astuce du touch
+if (isset($_GET['var_mode'])) @touch(_FILE_META);
 
 ?>
