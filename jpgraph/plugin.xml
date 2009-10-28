@@ -2,7 +2,7 @@
 	<nom>JpGraph</nom>
 	<auteur>mise en plugin [erational->http://www.erational.org], compl&#233;t&#233; par Olivier Gautier</auteur>
 	<licence>QPL 1.0</licence>
-	<version>0.1</version>
+	<version>0.2</version>
 	<description>
   Bibliotheque graphique pour g&#233;n&#233;rer des graphes (requiert PHP5.1 avec l'extension GD)
   
