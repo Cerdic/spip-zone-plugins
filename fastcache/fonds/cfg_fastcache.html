@@ -18,13 +18,10 @@ Ici vous pouvez configurer le plugin Fast Cache.
 Debug <small>(affiche un commentaire html en bas des pages trait&#233;es)</small></label>
 <br />
 <label><input type="checkbox" name="pnghack" [checked="(#ENV{pnghack})"] />
-MSIE PNG Hack <small>(&#224; partir de SPIP 1.9.3&nbsp;: ajouter le code javascript specifique a Internet Explorer pour le traitement des PNG).</small></label>
+MSIE PNG Hack <small>(&#224; partir de SPIP 2.0&nbsp;: ajouter le code javascript sp&#233;cifique a Internet Explorer pour le traitement des PNG).</small></label>
 <br />
 <label>
 P&#233;riode (en secondes) de validit&#233; d'un cache rapide&nbsp;: <input type="text" name="periode" [value="(#ENV{periode}|sinon{180})"] /></label>
-
-<label>
-R&#233;pertoire du cache rapide&nbsp;: <input type="text" name="cache" [value="(#ENV{cache}|sinon{#EVAL{'joli_repertoire(_DIR_CACHE)'}})"] /></label>
 
 </p>
 </fieldset>
