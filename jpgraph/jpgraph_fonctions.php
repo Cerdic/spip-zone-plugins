@@ -9,8 +9,8 @@ define('_DIR_JPGRAPH_LIB', _DIR_LIB . 'jpgraph-3.0.6/');
 // (a ameliorer activer le cache de jpgraph ou celui de spip ?)
 function jpgraph_name_hash($type="graph",$largeur,$hauteur,$donnee) {
     // repertoire IMG/jpgraph dispo ?
-    if (!is_dir(_DIR_IMG."jpgraph/")) {                                     
-                   if (!mkdir (_DIR_IMG."jpgraph/", 0777)) // on essaie de le creer  
+    if (!is_dir(_DIR_VAR."jpgraph/")) {                                     
+                   if (!mkdir (_DIR_VAR."jpgraph/", 0777)) // on essaie de le creer  
                         spip_log("plugin jgraph: impossible de creer le reperoitre image");
     }
 
@@ -18,7 +18,7 @@ function jpgraph_name_hash($type="graph",$largeur,$hauteur,$donnee) {
     $donnee[] = $largeur;
     $donnee[] = $hauteur;
     $hash = md5(serialize($donnee));
-    return _DIR_IMG."jpgraph/$type-$hash.png";
+    return _DIR_VAR."jpgraph/$type-$hash.png";
 }
 
 
