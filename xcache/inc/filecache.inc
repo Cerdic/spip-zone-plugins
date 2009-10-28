@@ -16,10 +16,12 @@ int   cache_inc(string name [, int value [, int ttl]])
 int   cache_dec(string name [, int value [, int ttl]])
 */
 
-@define('_DIR_TMP_XCACHE', defined('_DIR_TMP') ? _DIR_TMP : 'tmp/');
+@define('_DIR_TMP_XCACHE', (defined('_DIR_TMP') ? _DIR_TMP : 'tmp/').'xcache/');
 
 function cache_filename($u) {
-	return _DIR_TMP_XCACHE.'cache/'.md5($u);
+	if (!is_dir(_DIR_TMP_XCACHE))
+		@mkdir(_DIR_TMP_XCACHE);
+	return _DIR_TMP_XCACHE.md5($u);
 }
 function cache_delete_dir($dir) {
 	if ($d = @opendir($dir))
@@ -30,7 +32,7 @@ function cache_delete_dir($dir) {
 
 function cache_get() {
 	$a = func_get_args();
-	if (lire_fichier(cache_filename($a[0]), $c)
+	if ($c = @file_get_contents(cache_filename($a[0]))
 	AND $r = unserialize($c)
 	AND $r[1] <= time())
 		return $r[0];
@@ -42,12 +44,19 @@ function cache_set() {
 	$r[1] = isset($a[2])
 		? time() + intval($a[2])
 		: time() + 365*24*3600;
-	return ecrire_fichier(cache_filename($a[0]), serialize($r));
+	return (
+		$f = cache_filename($a[0])
+		AND $n = @tempnam(dirname($f), 'xc')
+		AND $h = @fopen($n, 'w')
+		AND @fwrite($h, serialize($r))
+		AND @fclose($h)
+		AND @rename($n, $f)
+	);
 }
 
 function cache_isset() {
 	$a = func_get_args();
-	if (lire_fichier(cache_filename($a[0]), $c)
+	if ($c = file_get_contents(cache_filename($a[0]))
 	AND $r = unserialize($c)
 	AND $r[1] <= time())
 		return true;
@@ -58,7 +67,7 @@ function cache_isset() {
 function cache_unset() {
 	$a = func_get_args();
 	return (
-		lire_fichier($f = cache_filename($a[0]), $c)
+		$c = file_get_contents($f = cache_filename($a[0]))
 		AND $s = supprimer_fichier($f)
 		AND $r = unserialize($c)
 		AND $r[1] <= time()
