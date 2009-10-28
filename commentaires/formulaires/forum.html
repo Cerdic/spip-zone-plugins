@@ -130,10 +130,13 @@ if (window.jQuery)(function($){
 		});
 		$(window)
 		.bind('unload', function(){
-			if (saveauto)
-			$.cookie('spip_contenu_formulaire_#ENV{_sign}',
-				$('#formulaire_forum textarea#EVAL{chr(91)}name=texte#EVAL{chr(93)}').val()
-			);
+			if (saveauto){
+				var s = $('#formulaire_forum textarea#EVAL{chr(91)}name=texte#EVAL{chr(93)}').val();
+				if (s)
+					$.cookie('spip_contenu_formulaire_#ENV{_sign}', s);
+				else
+					$.cookie('spip_contenu_formulaire_#ENV{_sign}', null);
+			}
 		});
 	});
 }(jQuery));
