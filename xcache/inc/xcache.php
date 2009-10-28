@@ -3,6 +3,9 @@
 # xcache ?
 if (function_exists('xcache_set'))
 	require_once dirname(__FILE__).'/'.'xcache.inc';
+else
+	require_once dirname(__FILE__).'/'.'filecache.inc';
+
 
 //
 // Cache a function's result cache_me()
