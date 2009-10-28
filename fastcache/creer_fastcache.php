@@ -26,6 +26,8 @@ function creer_fastcache() {
 	$meta = var_export(_FILE_META, true);
 	$prefix = var_export($GLOBALS['cookie_prefix'], true);
 
+	$xcache = var_export(find_in_path('inc/xcache.php'), true);
+
 	$contenu = '<'.'?php' .
 <<<CONFIG
 
@@ -39,6 +41,7 @@ function creer_fastcache() {
 @define ('_FC_META', $meta);
 @define ('_FC_IE_PNGHACK', $pnghack);
 @define ('_FC_COOKIE_PREFIX', $prefix);
+@define ('_FC_XCACHE', $xcache);
 
 CONFIG
 

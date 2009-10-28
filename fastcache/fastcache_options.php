@@ -27,12 +27,12 @@ function Fastcache_affichage_final($texte) {
 			creer_fastcache();
 		}
 
-		if (defined('_FC_FILE')) {
+		if (defined('_FC_KEY')) {
 
 			// preparer les entetes
-			$head = '<'."?php\n"
-			."// ".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']."\n"
-			."header('Vary: Cookie, Accept-Encoding');\n";
+			$head = #'<'."?php\n".
+				"// ".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']."\n" .
+				"header('Vary: Cookie, Accept-Encoding');\n";
 
 			foreach ($page['entetes'] as $x => $v)
 				if ($x !== 'X-Spip-Cache')
@@ -44,35 +44,28 @@ function Fastcache_affichage_final($texte) {
 					$head .= "\$GLOBALS['$id'] = "
 					.var_export(intval($GLOBALS[$id]),true).";\n";
 
-			// stocker les caches
-			$ok = ecrire_fichier(_FC_FILE.'_head.inc', $head);
-			$ok &= ecrire_fichier(_FC_FILE, $texte
-			.(_FC_DEBUG?"\n<!-- read "._FC_FILE." -->\n":''));
-			$ok &= ecrire_fichier(_FC_FILE.'.gz', $texte
-			.(_FC_DEBUG?"\n<!-- read "._FC_FILE.".gz -->\n":''));
-
 			// version MSIE
-			if (_FC_IE_PNGHACK
-			AND $html) {
-				$textemsie = Fastcache_versionie($texte);
-				$ok &= ecrire_fichier(_FC_FILE.'_ie', $textemsie
-				.(_FC_DEBUG?"\n<!-- read "._FC_FILE."_ie -->\n":''));
-				$ok &= ecrire_fichier(_FC_FILE.'_ie.gz', $textemsie
-				.(_FC_DEBUG?"\n<!-- read "._FC_FILE."_ie.gz -->\n":''));
-			}
+			$ie = (_FC_IE_PNGHACK AND $html)
+				? Fastcache_versionie($texte)
+				: null;
 
-			supprimer_fichier(_FC_FILE.'.lock');
-
-			if (!$ok) {
-				include_once 'ecrire/inc_version.php';
-				sous_repertoire(dirname(_FC_DIR_CACHE), basename(_FC_DIR_CACHE), true);
-			}
+			// stocker les caches
+			$ok = cache_set(_FC_KEY,
+				array(
+					'head' => $head,
+					'body' => $texte
+						.(_FC_DEBUG?"\n<!-- read "._FC_KEY." -->\n":''),
+					'ie' => $ie
+						.(_FC_DEBUG?"\n<!-- read "._FC_KEY." -->\n":'')
+				),
+				_FC_PERIODE
+			);
 
 			return $texte
 				. (_FC_DEBUG
 					? ($ok
-						? "\n<!-- stored "._FC_FILE." -->\n"
-						: "\n<!-- error "._FC_FILE." -->\n"
+						? "\n<!-- stored "._FC_KEY." -->\n"
+						: "\n<!-- error "._FC_KEY." -->\n"
 						)
 					: ''
 				);
@@ -87,11 +80,5 @@ function Fastcache_affichage_final($texte) {
 # s'inserer au *debut* du pipeline affichage_final pour etre avant f_surligne etc
 # mais de preference apres mutualisation_url_img_courtes pour qu'il s'applique
 $GLOBALS['spip_pipeline']['affichage_final'] = preg_replace(',\|mutualisation_url_img_courtes|^,','\0|Fastcache_affichage_final', $GLOBALS['spip_pipeline']['affichage_final']);
-
-
-# supprimer les fc_cache trop vieux ?
-if (isset($_GET['var_mode'])) {
-	array_map('supprimer_fichier', preg_files(_FC_DIR_CACHE, '/fc_'));
-}
 
 ?>
