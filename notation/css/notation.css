@@ -125,3 +125,16 @@
 
 .formulaire_jaime_jaimepas form .submit {border:0;background:0;padding:1px 0;cursor:pointer;}
 .formulaire_jaime_jaimepas form .submit:hover {font-weight:bold;}
+
+/* formulaire jaime_jaimepas */
+.formulaire_jaime {}
+.formulaire_jaime div.rating-cancel,
+.formulaire_jaime div.star-rating {margin-bottom:2px;}
+.formulaire_jaime .note {margin:0 5px;}
+.formulaire_jaime .reponse_formulaire {clear:left;margin:0;font-size:90%;padding:3px 3px 0;}
+.formulaire_jaime form div {clear:left;}
+
+.formulaire_jaime .reponse_formulaire_ok {display:none;}
+
+.formulaire_jaime form .submit {border:0;background:0;padding:1px 0;cursor:pointer;}
+.formulaire_jaime form .submit:hover {font-weight:bold;}

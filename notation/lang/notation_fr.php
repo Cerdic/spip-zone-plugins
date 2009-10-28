@@ -102,6 +102,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	'jaime' => 'J\'aime',
 	'jaimepas' => 'Je n\'aime pas',
+	'jaimeplus' => 'Je n\'aime plus',
 	'jechangedavis' => 'Je retire mon avis',
 	'jaidonnemonavis' => 'J\'ai donn&eacute; mon avis !',
 	
