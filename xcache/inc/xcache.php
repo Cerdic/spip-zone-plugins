@@ -1,7 +1,11 @@
 <?php
 
+# xcache ?
+if (function_exists('xcache_set'))
+	require_once dirname(__FILE__).'/'.'xcache.inc';
+
 //
-// Cache function Cache()
+// Cache a function's result cache_me()
 // (c) Fil 2009 - Double-licensed under the GNU/LGPL and MIT licenses
 // http://zzz.rezo.net/-SPIP-
 // $ttl = time to live
@@ -10,34 +14,26 @@
 //
 // Usage: require_once 'xcache.php';
 // In any cacheable function add at top:
-// if(!is_null($C=Cache())) return$C;
-
-if (!function_exists('Cache')) {
-
-# xcache ?
-if (function_exists('xcache_set')) {
-	function Cache($vars=null, $ttl=3600) {
+// if(!is_null($c=cache_me())) return$c;
+if (!function_exists('debug_backtrace')) {
+	function cache_me() {return;}
+} else {
+	function cache_me($vars=null, $ttl=3600) {
 		$trace = debug_backtrace();
 		$trace = $trace[1];
-		$key = __FILE__ . md5(
+		$key = md5(
 			$trace['function']
 			.serialize($trace['args'])
 			.serialize($vars)
 		);
-		if (!xcache_isset($key)) {
-			xcache_set($key, null, $ttl);
+		if (!cache_isset($key)) {
+			cache_set($key, null, $ttl);
 			$r = call_user_func_array($trace['function'], $trace['args']);
-			xcache_set($key, $r, $ttl);
+			cache_set($key, $r, $ttl);
 			return $r;
 		}
-		return xcache_get($key);
+		return cache_get($key);
 	}
-}
-# elementary compatibility
-else {
-	function Cache(){return null;}
-}
-
 }
 
 ?>
