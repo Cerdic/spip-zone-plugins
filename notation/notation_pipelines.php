@@ -6,7 +6,7 @@ function notation_header_prive($flux){
 }
 
 function notation_insert_head($flux){
-	$flux .= '<link rel="stylesheet" href="'._DIR_PLUGIN_NOTATION.'css/notation.css" type="text/css" media="all" />';
+	$flux .= '<link rel="stylesheet" href="'._DIR_PLUGIN_NOTATION.'css/notation.v2.css" type="text/css" media="all" />';
 	return $flux;
 }
 
