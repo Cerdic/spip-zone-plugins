@@ -16,7 +16,10 @@ function notation_en_etoile($nb, $id, $clicable=false){
 	if ($nb>0 && $nb<=0.5) $nb=1;
 	$nb = round($nb);
 
+	$needjs = "";
+
 	if ($clicable OR !_NOTATION_AFFICHAGE_RAPIDE){
+		$needjs = " notation_note_on_load";
 		$class = $clicable ? 'auto-submit-star' : 'star';
 		$disabled = $clicable ? '' : " disabled='disabled'";
 		for ($i=1; $i<=notation_get_nb_notes(); $i++){
@@ -32,7 +35,7 @@ function notation_en_etoile($nb, $id, $clicable=false){
 			$ret .= "<div class='star-rating star_group_notation-$id star-rating-readonly$checked'><a title='$nb'>$nb</a></div>";
 		}
 	}
-	return "<div class='notation_note'>$ret</div>";
+	return "<div class='notation_note$needjs'>$ret</div>";
 }
 
 
