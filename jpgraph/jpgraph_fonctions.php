@@ -21,9 +21,6 @@ function jpgraph_name_hash($type="graph",$largeur,$hauteur,$donnee) {
     return _DIR_IMG."jpgraph/$type-$hash.png";
 }
 
-function jpgraph_nom_marqueur($nom) {
-	
-}
 
 //
 // filtre pour creer des courbes simples
