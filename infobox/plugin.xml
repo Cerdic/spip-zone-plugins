@@ -12,25 +12,16 @@
 	
 	<etat>dev</etat> 
 	
-	<description>Affiche des messages &agrave; destination des r&eacute;dacteurs.
-	
-	<p>INFOBOX permet aux concepteurs de squelettes d'afficher des messages d'alerte &agrave; l'intention des r&eacute;dacteurs lors de la mise au point d'un site.</p>
-_ Il s'utilise dans les boucles alternatives par exemple, pour signaler au r&eacute;dacteur une rubrique vide ou un mot-cl&eacute; oubli&eacute;.
-_ Lorsque le plugin est activ&eacute;, une fenetre &quot;infobox&quot; apparait sur le site public, compos&eacute;e de diff&eacute;rentes zones (fieldset) param&eacute;trables.
-_ Le concepteur des squelettes peut envoyer des messages dans les diff&eacute;rentes zones de la fenetre &quot;infobox&quot; gr&acirc;ce &agrave; la balise #INFOBOX &agrave; laquelle il peut passer 2 param&egrave;tres :<br>
-- le 1er parametre est le nom (la pseudo class) de la zone (du fieldset) souhait&eacute;
-- le 3&egrave;me param&egrave;tre est le message &agrave; afficher
-<p>Le plugin est adapt&eacute; &agrave; la structure de squelettes &quot;Zen&quot; car le &quot;remplissage&quot; de la fenetre &quot;infobox&quot; se fait au fil de la construction de la page; chaque fois que la balise #INFOBOX est rencontr&eacute;e dans un squelette le fieldset correspondant de la fenetre &quot;infobox&quot; se remplit.</p>
-
-<p>Balise &agrave; utiliser sans restriction !<p>
-
+	<description>Affiche des messages en provenance des squelettes &agrave; destination des r&eacute;dacteurs.
+	<p>INFOBOX permet aux concepteurs de squelettes de faire remonter des messages d'alerte &agrave; l'intention des r&eacute;dacteurs.<br />Les messages s'affichent "par dessus" le site public et sont g&eacute;n&eacute;r&eacute;s par des balises #INFOBOX plac&eacute;es à l'int&eacute;rieur des squelettes.</p>
+	<p>[CFG->?exec=cfg&cfg=reperes] permet de param&eacute;trer la position de la fen&ecirc;tre d'affichage et ses diff&eacute;rentes zones.</p>
 	</description>
 
 	<lien>
-	[Doc en ligne, forum, FAQ sur SPIP-Contrib->http://www.spip-contrib.net/Plugin-Infobox?var_mode=preview]
+	[Doc en ligne, forum, FAQ sur SPIP-Contrib->http://www.spip-contrib.net/Plugin-Infobox-Les-squelettes?var_mode=preview]
 	</lien>
 	
-	<icon>img_pack/ateliers_cym-24.gif</icon>
+	<icon>img_pack/picto_infobox_64x64.png</icon>
 	
 	<pipeline>
 		<nom>insert_head</nom>
