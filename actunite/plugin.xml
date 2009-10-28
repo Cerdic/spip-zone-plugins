@@ -15,7 +15,7 @@
 	<description>
 	Ajoute un bloc de 4 actualit&eacute;s sur votre site.
 	
-<p>La position d'insertion, les dimensions et le nombre d'actus sont paramétrables via [CFG->./index.php?exec=cfg&amp;cfg=actunite]</p>
+<p>La position d'insertion, les dimensions et le nombre d'actus sont param&eacute;trables via [CFG->./index.php?exec=cfg&amp;cfg=actunite].</p>
 	
 	</description>
 
@@ -23,7 +23,7 @@
 	[Doc en ligne, forum, FAQ sur SPIP-Contrib->http://www.spip-contrib.net/Plugin-Acunite?var_mode=preview]
 	</lien>
 	
-	<icon>img_pack/ateliers_cym-24.gif</icon>
+	<icon>img_pack/picto_actunite_64x64.png</icon>
 	
 	<pipeline>
 		<nom>insert_head</nom>
