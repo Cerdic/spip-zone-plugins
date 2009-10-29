@@ -1,63 +1,52 @@
 <?php
 
-# l'API de cache_set etc est exactement celle de xcache
-# a ceci pres qu'on se reserve un namespace specifique au site
-# afin de ne pas se melanger sur un serveur mutualise
-#
-# je laisse le soin a qui voudra de refaire ca en mode objet
-
 /*
-mixed cache_get(string name)
-bool  cache_set(string name, mixed value [, int ttl])
-bool  cache_isset(string name)
-bool  cache_unset(string name)
-bool  cache_unset_by_prefix(string prefix)
-int   cache_inc(string name [, int value [, int ttl]])
-int   cache_dec(string name [, int value [, int ttl]])
+mixed cache_get(string key)
+bool  cache_set(string key, mixed value [, int ttl])
+bool  cache_isset(string key)
+bool  cache_unset(string key)
+int   cache_inc(string key [, int value [, int ttl]])
+int   cache_dec(string key [, int value [, int ttl]])
+bool  cache_lock(string key)
+bool  cache_unlock(string key)
 */
+
+# http://xcache.lighttpd.net/wiki/XcacheApi
 
 @define('_CACHE_NAMESPACE', $_SERVER['HTTP_HOST'].':');
 
-function cache_get() {
-	$a = func_get_args();
-	$a[0] = _CACHE_NAMESPACE.$a[0];
-	return call_user_func_array('xcache_get', $a);
+function cache_get($key) {
+	return xcache_get(_CACHE_NAMESPACE.$key);
 }
 
-function cache_set() {
-	$a = func_get_args();
-	$a[0] = _CACHE_NAMESPACE.$a[0];
-	return call_user_func_array('xcache_set', $a);
+function cache_set($key, $value, $ttl=null) {
+	return is_null($ttl)
+		? xcache_set(_CACHE_NAMESPACE.$key, $value)
+		: xcache_set(_CACHE_NAMESPACE.$key, $value, $ttl);
 }
 
-function cache_isset() {
-	$a = func_get_args();
-	$a[0] = _CACHE_NAMESPACE.$a[0];
-	return call_user_func_array('xcache_isset', $a);
+function cache_isset($key) {
+	return xcache_isset(_CACHE_NAMESPACE.$key);
 }
 
-function cache_unset() {
-	$a = func_get_args();
-	$a[0] = _CACHE_NAMESPACE.$a[0];
-	return call_user_func_array('xcache_unset', $a);
+function cache_unset($key) {
+	return xcache_unset(_CACHE_NAMESPACE.$key);
 }
 
-function cache_unset_by_prefix() {
-	$a = func_get_args();
-	$a[0] = _CACHE_NAMESPACE.$a[0];
-	return call_user_func_array('xcache_unset_by_prefix', $a);
+function cache_inc($key) {
+	return xcache_inc(_CACHE_NAMESPACE.$key);
 }
 
-function cache_inc() {
-	$a = func_get_args();
-	$a[0] = _CACHE_NAMESPACE.$a[0];
-	return call_user_func_array('xcache_inc', $a);
+function cache_dec($key) {
+	return xcache_dec(_CACHE_NAMESPACE.$key);
 }
 
-function cache_dec() {
-	$a = func_get_args();
-	$a[0] = _CACHE_NAMESPACE.$a[0];
-	return call_user_func_array('xcache_dec', $a);
+function cache_lock($key) {
+	return cache_inc('lock::'.$key)===1;
+}
+
+function cache_unlock($key) {
+	return cache_unset('lock::'.$key);
 }
 
 ?>

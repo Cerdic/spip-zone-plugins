@@ -1,19 +1,14 @@
 <?php
 
-# l'API de cache_set etc est exactement celle de xcache
-# a ceci pres qu'on se reserve un namespace specifique au site
-# afin de ne pas se melanger sur un serveur mutualise
-#
-# je laisse le soin a qui voudra de refaire ca en mode objet
-
 /*
-mixed cache_get(string name)
-bool  cache_set(string name, mixed value [, int ttl])
-bool  cache_isset(string name)
-bool  cache_unset(string name)
-bool  cache_unset_by_prefix(string prefix)
-int   cache_inc(string name [, int value [, int ttl]])
-int   cache_dec(string name [, int value [, int ttl]])
+mixed cache_get(string key)
+bool  cache_set(string key, mixed value [, int ttl])
+bool  cache_isset(string key)
+bool  cache_unset(string key)
+int   cache_inc(string key [, int value [, int ttl]])
+int   cache_dec(string key [, int value [, int ttl]])
+bool  cache_lock(string key)
+bool  cache_unlock(string key)
 */
 
 @define('_DIR_TMP_XCACHE', (defined('_DIR_TMP') ? _DIR_TMP : 'tmp/').'xcache/');
@@ -23,31 +18,23 @@ function cache_filename($u) {
 		@mkdir(_DIR_TMP_XCACHE);
 	return _DIR_TMP_XCACHE.substr(md5($u),0,4); # soit 16^4 fichiers max
 }
-function cache_delete_dir($dir) {
-	if ($d = @opendir($dir))
-		while (($f = readdir($d)) !== false)
-			if (is_file($f))
-				unlink($f);
-}
 
-function cache_get() {
-	$a = func_get_args();
-	if ($c = @file_get_contents(cache_filename($a[0]))
+function cache_get($key) {
+	if ($c = @file_get_contents(cache_filename($key))
 	AND $r = unserialize($c)
-	AND $r[1] == $a[0]
+	AND $r[1] == $key
 	AND $r[2] <= time())
 		return $r[0];
 }
 
-function cache_set() {
-	$a = func_get_args();
-	$r = array($a[1]);
-	$r[1] = $a[0];
-	$r[2] = isset($a[2])
-		? time() + intval($a[2])
+function cache_set($key, $value, $ttl=null) {
+	$r = array($value);
+	$r[1] = $key;
+	$r[2] = isset($value)
+		? time() + intval($value)
 		: time() + 365*24*3600;
 	return (
-		$f = cache_filename($a[0])
+		$f = cache_filename($key)
 		AND $n = @tempnam(dirname($f), 'xc')
 		AND $h = @fopen($n, 'w')
 		AND @fwrite($h, serialize($r))
@@ -56,44 +43,59 @@ function cache_set() {
 	);
 }
 
-function cache_isset() {
-	$a = func_get_args();
-	if ($c = file_get_contents(cache_filename($a[0]))
+function cache_isset($key) {
+	if ($c = file_get_contents(cache_filename($key))
 	AND $r = unserialize($c)
-	AND $r[1] == $a[0]
+	AND $r[1] == $key
 	AND $r[2] <= time())
 		return true;
 	else
 		return false;
 }
 
-function cache_unset() {
-	$a = func_get_args();
+function cache_unset($key) {
 	return (
-		$c = file_get_contents($f = cache_filename($a[0]))
+		$c = file_get_contents($f = cache_filename($key))
 		AND $s = supprimer_fichier($f)
 		AND $r = unserialize($c)
-		AND $r[1] == $a[0]
+		AND $r[1] == $key
 		AND $r[2] <= time()
 	);
 }
 
-function cache_unset_by_prefix() {
-	# ici on efface tout aveuglement
-	cache_delete_dir(_DIR_TMP_XCACHE);
-	return true;
+function cache_inc($key) {
+	while (!cache_lock($key)){ sleep(1); }
+	$value = 1+intval(cache_get($key));
+	cache_set($key, $value);
+	cache_unlock($key);
+	return $value;
 }
 
-function cache_inc() {
-	$a = func_get_args();
-	$a[1] = intval(cache_get($a[0]))+1;
-	return call_user_func_array('cache_set', $a);
+function cache_dec($key) {
+	while (!cache_lock($key)){ sleep(1); }
+	$value = -1 + intval(cache_get($key));
+	cache_set($key, $value);
+	cache_unlock($key);
+	return $value;
 }
 
-function cache_dec() {
-	$a = func_get_args();
-	$a[1] = intval(cache_get($a[0]))-1;
-	return call_user_func_array('cache_set', $a);
+function cache_lock($key, /* private */ $unlock=false) {
+	static $locks = array();
+	$f = cache_filename($key);
+
+	if ($unlock) {
+		return isset($locks[$f])
+			AND is_resource($locks[$f])
+			AND @flock($locks[$f], LOCK_UN)
+			AND @fclose($locks[$f]);
+	} else {
+		return ($locks[$f] = @fopen($f, 'w'))
+			AND @flock($locks[$f], LOCK_EX);
+	}
+}
+
+function cache_unlock($key) {
+	return cache_lock($key, true);
 }
 
 ?>

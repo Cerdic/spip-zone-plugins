@@ -1,64 +1,63 @@
 <?php
 
-# l'API de cache_set etc est exactement celle de xcache
-# a ceci pres qu'on se reserve un namespace specifique au site
-# afin de ne pas se melanger sur un serveur mutualise
-#
-# je laisse le soin a qui voudra de refaire ca en mode objet
-
 /*
-mixed cache_get(string name)
-bool  cache_set(string name, mixed value [, int ttl])
-bool  cache_isset(string name)
-bool  cache_unset(string name)
-bool  cache_unset_by_prefix(string prefix)
-int   cache_inc(string name [, int value [, int ttl]])
-int   cache_dec(string name [, int value [, int ttl]])
+mixed cache_get(string key)
+bool  cache_set(string key, mixed value [, int ttl])
+bool  cache_isset(string key)
+bool  cache_unset(string key)
+int   cache_inc(string key [, int value [, int ttl]])
+int   cache_dec(string key [, int value [, int ttl]])
+bool  cache_lock(string key)
+bool  cache_unlock(string key)
 */
+
+# http://bart.eaccelerator.net/doc/phpdoc/eAccelerator/_shared_memory_php.html
 
 @define('_CACHE_NAMESPACE', $_SERVER['HTTP_HOST'].':');
 
-function cache_get() {
-	$a = func_get_args();
-	$a[0] = _CACHE_NAMESPACE.$a[0];
-	return ($v = call_user_func_array('eaccelerator_get', $a))
+function cache_get($key) {
+	return ($v = eaccelerator_get(_CACHE_NAMESPACE.$key))
 		? @unserialize($v)
 		: null;
 }
 
-function cache_set() {
-	$a = func_get_args();
-	$a[0] = _CACHE_NAMESPACE.$a[0];
-	$a[1] = serialize($a[1]);
-	return call_user_func_array('eaccelerator_put', $a);
+function cache_set($key, $value, $ttl = null) {
+	$value = serialize($value);
+	return is_null($ttl)
+		? eaccelerator_put(_CACHE_NAMESPACE.$key, $value)
+		: eaccelerator_put(_CACHE_NAMESPACE.$key, $value, $ttl);
 }
 
-function cache_isset() {
-	$a = func_get_args();
-	return cache_get($a[0]) !== null;
+function cache_isset($key) {
+	return cache_get($key) !== null;
 }
 
-function cache_unset() {
-	$a = func_get_args();
-	$a[0] = _CACHE_NAMESPACE.$a[0];
-	return call_user_func_array('eaccelerator_rm', $a);
+function cache_unset($key) {
+	return eaccelerator_rm(_CACHE_NAMESPACE.$key);
 }
 
-function cache_unset_by_prefix() {
-	$a = func_get_args();
-	return false; # on sait pas faire
+function cache_inc($key) {
+	while (!eaccelerator_lock($key)){ sleep(1); }
+	$value = 1 + intval(cache_get($key));
+	cache_set($key, $value);
+	eaccelerator_unlock($key);
+	return $value;
 }
 
-function cache_inc() {
-	$a = func_get_args();
-	$a[1] = intval(cache_get($a[0]))+1;
-	return call_user_func_array('cache_set', $a);
+function cache_dec($key) {
+	while (!eaccelerator_lock($key)){ sleep(1); }
+	$value = -1 + intval(cache_get($key));
+	cache_set($key, $value);
+	eaccelerator_unlock($key);
+	return $value;
 }
 
-function cache_dec() {
-	$a = func_get_args();
-	$a[1] = intval(cache_get($a[0]))-1;
-	return call_user_func_array('cache_set', $a);
+function cache_lock($key) {
+	return eaccelerator_lock(_CACHE_NAMESPACE.$key);
+}
+
+function cache_unlock($key) {
+	return eaccelerator_unlock(_CACHE_NAMESPACE.$key);
 }
 
 ?>

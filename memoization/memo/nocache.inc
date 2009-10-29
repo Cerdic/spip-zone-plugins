@@ -1,46 +1,45 @@
 <?php
 
-# l'API de cache_set etc est exactement celle de xcache
-# a ceci pres qu'on se reserve un namespace specifique au site
-# afin de ne pas se melanger sur un serveur mutualise
-#
-# je laisse le soin a qui voudra de refaire ca en mode objet
-
 /*
-mixed cache_get(string name)
-bool  cache_set(string name, mixed value [, int ttl])
-bool  cache_isset(string name)
-bool  cache_unset(string name)
-bool  cache_unset_by_prefix(string prefix)
-int   cache_inc(string name [, int value [, int ttl]])
-int   cache_dec(string name [, int value [, int ttl]])
+mixed cache_get(string key)
+bool  cache_set(string key, mixed value [, int ttl])
+bool  cache_isset(string key)
+bool  cache_unset(string key)
+int   cache_inc(string key [, int value [, int ttl]])
+int   cache_dec(string key [, int value [, int ttl]])
+bool  cache_lock(string key)
+bool  cache_unlock(string key)
 */
 
-function cache_get() {
+function cache_get($key) {
 }
 
-function cache_set() {
+function cache_set($key, $value, $ttl=null) {
 	return false;
 }
 
-function cache_isset() {
+function cache_isset($key) {
 	return false;
 }
 
-function cache_unset() {
+function cache_unset($key) {
 	return false;
 }
 
-function cache_unset_by_prefix() {
-	return false;
-}
-
-function cache_inc() {
+function cache_inc($key) {
 	return 1;
 }
 
-function cache_dec() {
+function cache_dec($key) {
 	return -1;
+}
+
+function cache_lock($key) {
+	return false;
+}
+
+function cache_unlock($key) {
+	return false;
 }
 
 ?>
