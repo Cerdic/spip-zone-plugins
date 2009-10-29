@@ -21,7 +21,7 @@ int   cache_dec(string name [, int value [, int ttl]])
 function cache_filename($u) {
 	if (!is_dir(_DIR_TMP_XCACHE))
 		@mkdir(_DIR_TMP_XCACHE);
-	return _DIR_TMP_XCACHE.md5($u);
+	return _DIR_TMP_XCACHE.substr(md5($u),0,4); # soit 16^4 fichiers max
 }
 function cache_delete_dir($dir) {
 	if ($d = @opendir($dir))
@@ -34,14 +34,16 @@ function cache_get() {
 	$a = func_get_args();
 	if ($c = @file_get_contents(cache_filename($a[0]))
 	AND $r = unserialize($c)
-	AND $r[1] <= time())
+	AND $r[1] == $a[0]
+	AND $r[2] <= time())
 		return $r[0];
 }
 
 function cache_set() {
 	$a = func_get_args();
 	$r = array($a[1]);
-	$r[1] = isset($a[2])
+	$r[1] = $a[0];
+	$r[2] = isset($a[2])
 		? time() + intval($a[2])
 		: time() + 365*24*3600;
 	return (
@@ -58,7 +60,8 @@ function cache_isset() {
 	$a = func_get_args();
 	if ($c = file_get_contents(cache_filename($a[0]))
 	AND $r = unserialize($c)
-	AND $r[1] <= time())
+	AND $r[1] == $a[0]
+	AND $r[2] <= time())
 		return true;
 	else
 		return false;
@@ -70,7 +73,8 @@ function cache_unset() {
 		$c = file_get_contents($f = cache_filename($a[0]))
 		AND $s = supprimer_fichier($f)
 		AND $r = unserialize($c)
-		AND $r[1] <= time()
+		AND $r[1] == $a[0]
+		AND $r[2] <= time()
 	);
 }
 

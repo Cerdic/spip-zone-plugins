@@ -1,22 +1,22 @@
 <plugin>
-	<nom>XCache</nom>
+	<nom>Memoization</nom>
 	<auteur>Fil
 	&#169; 2009 - GNU/GPL
 	</auteur>
 	<version>
-	0.1
+	0.2
 	</version>
 	<etat>
 	dev
 	</etat>
 	<description>
-	Utilise XCache pour accelerer
+	Un outil de m&#233;moization, destin&#233; &#224; acc&#233;l&#233;rer
 	</description>
     <lien>http://zzz.rezo.net/Utiliser-xcache-pour-accelerer-n.html</lien>
 	<prefix>
-	XCache
+	Memoization
 	</prefix>
-    <options>inc/xcache.php</options>
+    <options>inc/memoization.php</options>
 	<chemin dir='' />
 	<necessite id="SPIP" version="[2.0.0;]" />
 </plugin>
