@@ -8,7 +8,7 @@ define('_DIR_JPGRAPH_LIB', _DIR_LIB . 'jpgraph-3.0.6/');
 // cree un hash unique 
 // (a ameliorer activer le cache de jpgraph ou celui de spip ?)
 function jpgraph_name_hash($type="graph",$largeur,$hauteur,$donnee) {
-    // repertoire IMG/jpgraph dispo ?
+    // repertoire local/cache-jpgraph dispo ?
     if (!is_dir(_DIR_VAR."cache-jpgraph/")) {                                     
                    if (!mkdir (_DIR_VAR."cache-jpgraph/", 0777)) // on essaie de le creer  
                         spip_log("plugin jgraph: impossible de creer le reperoitre image");
@@ -22,25 +22,64 @@ function jpgraph_name_hash($type="graph",$largeur,$hauteur,$donnee) {
 }
 
 
-//
-// filtre pour creer des courbes simples
-//
+// On passe les donnee dans un tableau
+function jpgraph_traitement_donnees($donnee) {
+	$donnee =  explode(";", $donnee);
+	foreach ($donnee as $key => $value)
+	        $donnee[$key] = (float) $value;    
+	if (count($donnee)<2) 
+        $donnee[] = "1";   // securite pour empecher les erreurs si donnnee pas renseigne  
+	return $donnee;
+}
+
+// On passe les legendes dans un tableau
+function jpgraph_traitement_legendes($legende) {
+	$legende =  explode(";", $legende); 
+	foreach ($legende as $key => $value)  
+		$legende[$key] = utf8_decode(trim($value));
+	return $legende;
+}
+
+// extrait couleur ds un tableau: contour / fond / degrade
+function jpgraph_traitement_couleurs($couleur) {
+	$couleur = explode(";", $couleur);
+	$couleur['contour']=trim($couleur[0]);
+	if ($couleur[1]) $couleur['fond']=trim($couleur[1]);
+	if ($couleur[2]) $couleur['degrade']=trim($couleur[2]);
+	return $couleur;
+}
+
+// extrait marqueur dans un tableau: nom / epaisseur / contour / fond
+function jpgraph_traitement_marqueur($marqueur) {
+	$marqueur = explode(";", $marqueur);
+	$marqueur['nom'] = trim ($marqueur[0]);
+	if ($marqueur[1]) $marqueur['epaisseur'] = (int) $marqueur[1];
+	if ($marqueur[2]) $marqueur['contour'] = trim ($marqueur[2]);
+	if ($marqueur[3]) $marqueur['fond'] = trim ($marqueur[3]);
+	return $marqueur;
+}
+
+
+//--------------------------------------------
+// filtre jgraph
+//--------------------------------------------
 function filtre_jpgraph($str,
 	$type_graphe="courbe",
+	$titre="",
 	$donnee="",
+	$donnee2="",
+	$donnee3="",
 	$legende="",
+	$legende2="",
+	$legende3="",
 	$largeur=400,
 	$hauteur=300,
-	$titre="",
 	$couleur="orange",
-	$couleur_fond="",
-	$fond_degrade="",
-	$epaisseur="",
-	$marqueur_forme="",
-	$marqueur_couleur="",
-	$marqueur_epaisseur="",
-	$marqueur_couleur_fond="",
-	$style="")
+	$couleur2="",
+	$couleur3="",
+	$marqueur="",
+	$marqueur2="",
+	$marqueur3="")
 {
 	
 	  // constantes
@@ -54,37 +93,23 @@ function filtre_jpgraph($str,
                      "croix_x" => MARK_X,
                      "etoile" => MARK_STAR);
    
-    // traiter les donnees
+    // traiter les parametres en entree
     $type_graphe = strtolower(trim($type_graphe));  // pour pb avec les modeles si du blanc en fin de ligne
-    $couleur = trim($couleur);
-    $couleur_fond = trim($couleur_fond);
-    $epaisseur = (int) $epaisseur;
-    $marqueur_forme = trim($marqueur_forme);
-    $marqueur_couleur=trim($marqueur_couleur);
-    $marqueur_epaisseur=(int) $marqueur_epaisseur;
-    $marqueur_couleur_fond = trim($marqueur_couleur_fond);
-    $style = trim ($style);
-    
-    $donnee =  explode(";", $donnee);    
-    foreach ($donnee as $key => $value)
-         $donnee[$key] = (float) $value;    
-    if (count($donnee)<2) 
-        $donnee[] = "1";   // securite pour empecher les erreurs si donnnee pas renseigne  
-    
-    if ($fond_degrade) {
-          	$fond_degrade = explode(";", $fond_degrade);
-          	foreach ($fond_degrade as $key => $value) $fond_degrade[$key] = trim($value);
-          	if (count($fond_degrade)<2) {
-          		$fond_degrade[0]='white@0.5';
-          		$fond_degrade[1]='orange@0.5';
-          	}
-    }
-    
-    $legende =  explode(";", $legende); 
-    foreach ($legende as $key => $value)  
-            $legende[$key] = utf8_decode($value);
+    $donnee = jpgraph_traitement_donnees($donnee);
+    if ($donnee2) $donnee2 = jpgraph_traitement_donnees($donnee2);
+    if ($donnee3) $donnee3 = jpgraph_traitement_donnees($donnee3);
+    if ($legende) $legende = jpgraph_traitement_legendes($legende);
+    if ($legende2) $legende2 = jpgraph_traitement_legendes($legende2);
+    if ($legende3) $legende3 = jpgraph_traitement_legendes($legende2);
     $largeur = (int) $largeur;    if (($largeur<=0) OR ($largeur>1600)) $largeur = 400;
     $hauteur = (int) $hauteur;    if (($hauteur<=0) OR ($hauteur>1600)) $hauteur = 300;
+    $couleur = jpgraph_traitement_couleurs($couleur);
+    if ($couleur2) $couleur2 = jpgraph_traitement_couleurs($couleur2);
+    if ($couleur3) $couleur3 = jpgraph_traitement_couleurs($couleur3);
+    if ($marqueur) $marqueur = jpgraph_traitement_marqueur($marqueur);
+    if ($marqueur2) $marqueur2 = jpgraph_traitement_marqueur($marqueur2);
+    if ($marqueur3) $marqueur3 = jpgraph_traitement_marqueur($marqueur3);
+
     
     // retrouver jpgraph 
   	$cwd = getcwd();
@@ -108,17 +133,16 @@ function filtre_jpgraph($str,
                             // Create the linear plot
                             $plot=new LinePlot($donnee);                            
                             // style & couleur
-                  			    $plot->SetColor($couleur);
-                  			    if ($style=='marches') $plot->SetStepStyle();
-                  			    if ($fond_degrade) $plot->SetFillGradient($fond_degrade[0],$fond_degrade[1]);
-                  			    if ($couleur_fond) $plot->SetFillColor($couleur_fond);
-                  			    if ($epaisseur) $plot->SetWeight($epaisseur);
-                  			    if (isset($marqueur_formes[$marqueur_forme])) 
-                  			                         $plot->mark->SetType($marqueur_formes[$marqueur_forme]);                  			    
-                  			    if ($marqueur_couleur) $plot->mark->SetColor($marqueur_couleur);
-                      			if ($marqueur_couleur_fond) $plot->mark->SetFillColor($marqueur_couleur_fond);
-                      			if ($marqueur_epaisseur)$plot->mark->SetWidth($marqueur_epaisseur);  
-			    
+                            if ($couleur['contour']) $plot->SetColor($couleur['contour']);                      			
+                      			if ($couleur['degrade']) $plot->SetFillGradient($couleur['fond'],$couleur['degrade']);
+                      			if ($$couleur['fond']) $plot->SetFillColor($couleur['fond']);
+                      			// L'epaisseur est sorti du modele, voir comment reintegrer ulterieurement
+                      			//   if ($epaisseur) $plot->SetWeight($epaisseur);
+                      			if (isset($marqueur_formes[$marqueur['nom']])) 
+                  			                         $plot->mark->SetType($marqueur_formes[$marqueur['nom']]); 
+                      			if ($marqueur['couleur']) $plot->mark->SetColor($marqueur['couleur']);
+                      			if ($marqueur['fond']) $plot->mark->SetFillColor($marqueur['fond']);
+                      			if ($marqueur['epaisseur'])$plot->mark->SetWidth($marqueur['epaisseur']);
                             // titre & legende 
                             $graph->title->Set(utf8_decode($titre));
                             if (count($legende)>1) 
@@ -129,7 +153,17 @@ function filtre_jpgraph($str,
                             $graph->SetScale('textlin');
                             // Create the linear plot
                             $plot = new BarPlot($donnee);
-                            $plot->SetFillColor($couleur);    
+                            // style & couleur
+                      			if ($couleur['contour']) $plot->SetColor($couleur['contour']);
+                      			// Le degrade pour les barres est tres specifique (un peu comme le modele de marqueur) et doit etre traite dans une fonction supplementaire, sera fait ulterieurement
+                      			// if ($couleur['degrade']) $plot->SetFillGradient($couleur['fond'],$couleur['degrade']);
+                      			
+                      			//petit patch en attendant d'uniformiser la doc : pour l'instant la doc indique que couleur=blue doit remplir en bleu les barres, alors que l'uniformisation des
+                      			// couleurs indiquera plutot qu'il s'agit d'une couleur de contour et non une couleur de fond
+                      			if (($couleur['contour']) AND (!$couleur['fond'])) $plot->SetFillColor($couleur['contour']);
+                      			//Devra etre probablement supprime ulterieurement, ou alors on garde cela, dans le cas d'oubli de la couleur de fond
+                      			
+                      			if ($couleur['fond']) $plot->SetFillColor($couleur['fond']);                             
                             // titre & legende 
                             $graph->title->Set(utf8_decode($titre));
                             if (count($legende)>1)
@@ -140,7 +174,8 @@ function filtre_jpgraph($str,
                             // Create the linear plot
                             $plot = new PiePlot($donnee);
                             // style & couleur
-                            //$plot->SetTheme($style);    
+                            if ($couleur['contour']) $plot->SetColor($couleur['contour']);
+                            //$plot->SetTheme("earth"); 		   
                             // titre & legende 
                             $graph->title->Set(utf8_decode($titre));
                             if (count($legende)>1) 
