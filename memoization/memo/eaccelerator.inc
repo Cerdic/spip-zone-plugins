@@ -7,8 +7,8 @@ bool  cache_isset(string key)
 bool  cache_unset(string key)
 int   cache_inc(string key[, int value[, int ttl] ])
 int   cache_dec(string key[, int value[, int ttl] ])
-bool  cache_lock(string key)
-bool  cache_unlock(string key)
+null  cache_lock(string key)
+null  cache_unlock(string key)
 */
 
 # http://bart.eaccelerator.net/doc/phpdoc/eAccelerator/_shared_memory_php.html
@@ -52,12 +52,10 @@ function cache_dec($key, $value=null, $ttl=null) {
 
 function cache_lock($key) {
 	eaccelerator_lock(_CACHE_NAMESPACE.$key);
-	return true;
 }
 
 function cache_unlock($key) {
 	eaccelerator_unlock(_CACHE_NAMESPACE.$key);
-	return true;
 }
 
 ?>

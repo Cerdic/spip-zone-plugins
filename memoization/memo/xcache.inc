@@ -14,6 +14,7 @@ bool  cache_unlock(string key)
 # http://xcache.lighttpd.net/wiki/XcacheApi
 
 @define('_CACHE_NAMESPACE', $_SERVER['HTTP_HOST'].':');
+@define('_LOCK_MAX', 30); # max lock time (seconds)
 
 function cache_get($key) {
 	return xcache_get(_CACHE_NAMESPACE.$key);
@@ -34,19 +35,38 @@ function cache_unset($key) {
 }
 
 function cache_inc($key, $value=null, $ttl=null) {
-	return xcache_inc(_CACHE_NAMESPACE.$key, $value, $ttl);
+	$a = func_get_args();
+	$a[0] = _CACHE_NAMESPACE.$key;
+	return call_user_func_array('xcache_inc', $a);
 }
 
 function cache_dec($key, $value=null, $ttl=null) {
-	return xcache_dec(_CACHE_NAMESPACE.$key, $value, $ttl);
+	$a = func_get_args();
+	$a[0] = _CACHE_NAMESPACE.$key;
+	return call_user_func_array('xcache_dec', $a);
 }
 
-function cache_lock($key) {
-	return cache_inc('lock::'.$key)===1;
+function cache_lock($key, /* private */ $unlock = false) {
+	static $locks = array();
+
+	/* unlock */
+	if ($unlock) {
+		unset($locks[$key]);
+		cache_unset('lock::'.$key);
+	}
+	/* lock */
+	else {
+		if (!isset($locks[$key])) {
+			while (cache_isset('lock::'.$key)
+			OR cache_inc('lock::'.$key, 1, _LOCK_MAX) !== 1)
+				sleep (1);
+			register_shutdown_function('cache_lock', $key, true);
+		}
+	}
 }
 
 function cache_unlock($key) {
-	return cache_unset('lock::'.$key);
+	cache_lock($key, true);
 }
 
 ?>

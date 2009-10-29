@@ -7,8 +7,8 @@ bool  cache_isset(string key)
 bool  cache_unset(string key)
 int   cache_inc(string key[, int value[, int ttl] ])
 int   cache_dec(string key[, int value[, int ttl] ])
-bool  cache_lock(string key)
-bool  cache_unlock(string key)
+null  cache_lock(string key)
+null  cache_unlock(string key)
 */
 
 @define('_DIR_TMP_XCACHE', (defined('_DIR_TMP') ? _DIR_TMP : 'tmp/').'xcache/');
@@ -65,7 +65,7 @@ function cache_unset($key) {
 }
 
 function cache_inc($key, $value=null, $ttl=null) {
-	while (!cache_lock($key)){ sleep(1); }
+	cache_lock($key);
 	$value = (isset($value) ? intval($value) : 1) + intval(cache_get($key));
 	cache_set($key, $value);
 	cache_unlock($key);
@@ -81,19 +81,26 @@ function cache_lock($key, /* private */ $unlock=false) {
 	static $locks = array();
 	$f = cache_filename($key);
 
+	/* unlock */
 	if ($unlock) {
-		return isset($locks[$f])
-			AND is_resource($locks[$f])
-			AND @flock($locks[$f], LOCK_UN)
-			AND @fclose($locks[$f]);
-	} else {
-		return ($locks[$f] = @fopen($f, 'a'))
-			AND @flock($locks[$f], LOCK_EX);
+		if (isset($locks[$f])
+		AND is_resource($locks[$f])) {
+			@flock($locks[$f], LOCK_UN);
+			@fclose($locks[$f]);
+			unset($locks[$f]);
+		}
+	}
+	/* lock */
+	else {
+		if (!isset($locks[$f])) {
+			$locks[$f] = @fopen($f, 'a');
+			@flock($locks[$f], LOCK_EX);
+		}
 	}
 }
 
 function cache_unlock($key) {
-	return cache_lock($key, true);
+	cache_lock($key, true);
 }
 
 ?>
