@@ -5,8 +5,8 @@ mixed cache_get(string key)
 bool  cache_set(string key, mixed value [, int ttl])
 bool  cache_isset(string key)
 bool  cache_unset(string key)
-int   cache_inc(string key)
-int   cache_dec(string key)
+int   cache_inc(string key[, int value[, int ttl] ])
+int   cache_dec(string key[, int value[, int ttl] ])
 bool  cache_lock(string key)
 bool  cache_unlock(string key)
 */
@@ -33,12 +33,12 @@ function cache_unset($key) {
 	return xcache_unset(_CACHE_NAMESPACE.$key);
 }
 
-function cache_inc($key) {
-	return xcache_inc(_CACHE_NAMESPACE.$key);
+function cache_inc($key, $value=null, $ttl=null) {
+	return xcache_inc(_CACHE_NAMESPACE.$key, $value, $ttl);
 }
 
-function cache_dec($key) {
-	return xcache_dec(_CACHE_NAMESPACE.$key);
+function cache_dec($key, $value=null, $ttl=null) {
+	return xcache_dec(_CACHE_NAMESPACE.$key, $value, $ttl);
 }
 
 function cache_lock($key) {

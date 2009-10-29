@@ -1,12 +1,19 @@
 <?php
 
 # xcache ?
-if (function_exists('cache_set')) {}
-elseif (function_exists('xcache_set'))
-	require_once dirname(dirname(__FILE__)).'/memo/xcache.inc';
-else
-	require_once dirname(dirname(__FILE__)).'/memo/filecache.inc';
 
+if (function_exists('cache_set')) {
+	@define('_MEMOIZE', '??');
+} elseif (function_exists('xcache_set')) {
+	@define('_MEMOIZE', 'xcache');
+	require_once dirname(dirname(__FILE__)).'/memo/xcache.inc';
+} elseif (function_exists('eaccelerator_put')) {
+	@define('_MEMOIZE', 'eaccelerator');
+	require_once dirname(dirname(__FILE__)).'/memo/eaccelerator.inc';
+} else {
+	@define('_MEMOIZE', 'filecache');
+	require_once dirname(dirname(__FILE__)).'/memo/filecache.inc';
+}
 
 //
 // Cache a function's result cache_me()

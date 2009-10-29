@@ -5,8 +5,8 @@ mixed cache_get(string key)
 bool  cache_set(string key, mixed value [, int ttl])
 bool  cache_isset(string key)
 bool  cache_unset(string key)
-int   cache_inc(string key)
-int   cache_dec(string key)
+int   cache_inc(string key[, int value[, int ttl] ])
+int   cache_dec(string key[, int value[, int ttl] ])
 bool  cache_lock(string key)
 bool  cache_unlock(string key)
 */
@@ -22,17 +22,18 @@ function cache_filename($u) {
 function cache_get($key) {
 	if ($c = @file_get_contents(cache_filename($key))
 	AND $r = unserialize($c)
-	AND $r[1] == $key
-	AND $r[2] <= time())
+	AND $r[1] === $key
+	AND $r[2] >= time())
 		return $r[0];
 }
 
 function cache_set($key, $value, $ttl=null) {
 	$r = array($value);
 	$r[1] = $key;
-	$r[2] = isset($value)
-		? time() + intval($value)
+	$r[2] = isset($ttl)
+		? time() + intval($ttl)
 		: time() + 365*24*3600;
+
 	return (
 		$f = cache_filename($key)
 		AND $n = @tempnam(dirname($f), 'xc')
@@ -63,20 +64,17 @@ function cache_unset($key) {
 	);
 }
 
-function cache_inc($key) {
+function cache_inc($key, $value=null, $ttl=null) {
 	while (!cache_lock($key)){ sleep(1); }
-	$value = 1+intval(cache_get($key));
+	$value = (isset($value) ? intval($value) : 1) + intval(cache_get($key));
 	cache_set($key, $value);
 	cache_unlock($key);
 	return $value;
 }
 
-function cache_dec($key) {
-	while (!cache_lock($key)){ sleep(1); }
-	$value = -1 + intval(cache_get($key));
-	cache_set($key, $value);
-	cache_unlock($key);
-	return $value;
+function cache_dec($key, $value=null, $ttl=null) {
+	$value = isset($value) ? intval($value) : 1;
+	return cache_inc($key, -$value, $ttl);
 }
 
 function cache_lock($key, /* private */ $unlock=false) {
@@ -89,7 +87,7 @@ function cache_lock($key, /* private */ $unlock=false) {
 			AND @flock($locks[$f], LOCK_UN)
 			AND @fclose($locks[$f]);
 	} else {
-		return ($locks[$f] = @fopen($f, 'w'))
+		return ($locks[$f] = @fopen($f, 'a'))
 			AND @flock($locks[$f], LOCK_EX);
 	}
 }
