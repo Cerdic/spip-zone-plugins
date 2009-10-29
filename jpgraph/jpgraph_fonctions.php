@@ -22,6 +22,22 @@ function jpgraph_name_hash($type="graph",$largeur,$hauteur,$donnee) {
 }
 
 
+// Gestion de la forme du marqueur
+function jpgraph_nom_marqueur($plot,$marqueur) {
+switch($marqueur) {
+	case 'carre': $plot->mark->SetType(MARK_SQUARE); break;
+	case 'triangle': $plot->mark->SetType(MARK_UTRIANGLE); break;
+	case 'triangle_bas': $plot->mark->SetType(MARK_DTRIANGLE); break;
+	case 'losange': $plot->mark->SetType(MARK_DIAMOND); break;
+	case 'cercle': $plot->mark->SetType(MARK_CIRCLE); break;
+	case 'cercle_plein': $plot->mark->SetType(MARK_FILLEDCIRCLE); break;
+	case 'croix': $plot->mark->SetType(MARK_CROSS); break;
+	case 'croix_x': $plot->mark->SetType(MARK_X); break;
+	case 'etoile': $plot->mark->SetType(MARK_STAR); break;
+	default: $plot->mark->SetType(MARK_SQUARE); break;
+}
+}
+
 //
 // filtre pour creer des courbes simples
 //
@@ -101,18 +117,7 @@ function filtre_jpgraph($str,
 			    if ($couleur_fond) $plot->SetFillColor($couleur_fond);
 			    if ($epaisseur) $plot->SetWeight($epaisseur);
 			    if ($marqueur_forme) {
-			    switch($marqueur_forme) {
-			    	case 'carre': $plot->mark->SetType(MARK_SQUARE); break;
-				case 'triangle': $plot->mark->SetType(MARK_UTRIANGLE); break;
-				case 'triangle_bas': $plot->mark->SetType(MARK_DTRIANGLE); break;
-				case 'losange': $plot->mark->SetType(MARK_DIAMOND); break;
-				case 'cercle': $plot->mark->SetType(MARK_CIRCLE); break;
-				case 'cercle_plein': $plot->mark->SetType(MARK_FILLEDCIRCLE); break;
-				case 'croix': $plot->mark->SetType(MARK_CROSS); break;
-				case 'croix_x': $plot->mark->SetType(MARK_X); break;
-				case 'etoile': $plot->mark->SetType(MARK_STAR); break;
-				default: $plot->mark->SetType(MARK_SQUARE); break;
-			}
+			    jpgraph_nom_marqueur($plot,$marqueur_forme);
 			    if ($marqueur_couleur) $plot->mark->SetColor($marqueur_couleur);
 			    if ($marqueur_couleur_fond) $plot->mark->SetFillColor($marqueur_couleur_fond);
 			    if ($marqueur_epaisseur)$plot->mark->SetWidth($marqueur_epaisseur);
