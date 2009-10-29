@@ -9,8 +9,8 @@ define('_DIR_JPGRAPH_LIB', _DIR_LIB . 'jpgraph-3.0.6/');
 // (a ameliorer activer le cache de jpgraph ou celui de spip ?)
 function jpgraph_name_hash($type="graph",$largeur,$hauteur,$donnee) {
     // repertoire IMG/jpgraph dispo ?
-    if (!is_dir(_DIR_VAR."jpgraph/")) {                                     
-                   if (!mkdir (_DIR_VAR."jpgraph/", 0777)) // on essaie de le creer  
+    if (!is_dir(_DIR_VAR."cache-jpgraph/")) {                                     
+                   if (!mkdir (_DIR_VAR."cache-jpgraph/", 0777)) // on essaie de le creer  
                         spip_log("plugin jgraph: impossible de creer le reperoitre image");
     }
 
@@ -18,25 +18,9 @@ function jpgraph_name_hash($type="graph",$largeur,$hauteur,$donnee) {
     $donnee[] = $largeur;
     $donnee[] = $hauteur;
     $hash = md5(serialize($donnee));
-    return _DIR_VAR."jpgraph/$type-$hash.png";
+    return _DIR_VAR."cache-jpgraph/$type-$hash.png";
 }
 
-
-// Gestion de la forme du marqueur
-function jpgraph_nom_marqueur($plot,$marqueur) {
-switch($marqueur) {
-	case 'carre': $plot->mark->SetType(MARK_SQUARE); break;
-	case 'triangle': $plot->mark->SetType(MARK_UTRIANGLE); break;
-	case 'triangle_bas': $plot->mark->SetType(MARK_DTRIANGLE); break;
-	case 'losange': $plot->mark->SetType(MARK_DIAMOND); break;
-	case 'cercle': $plot->mark->SetType(MARK_CIRCLE); break;
-	case 'cercle_plein': $plot->mark->SetType(MARK_FILLEDCIRCLE); break;
-	case 'croix': $plot->mark->SetType(MARK_CROSS); break;
-	case 'croix_x': $plot->mark->SetType(MARK_X); break;
-	case 'etoile': $plot->mark->SetType(MARK_STAR); break;
-	default: $plot->mark->SetType(MARK_SQUARE); break;
-}
-}
 
 //
 // filtre pour creer des courbes simples
@@ -56,7 +40,19 @@ function filtre_jpgraph($str,
 	$marqueur_couleur="",
 	$marqueur_epaisseur="",
 	$marqueur_couleur_fond="",
-	$style=""){
+	$style="")
+{
+	
+	  // constantes
+	  $marqueur_formes = array("carre"=>MARK_SQUARE,
+                     "triangle"=> MARK_UTRIANGLE,
+                     "triangle_bas"=> MARK_DTRIANGLE,
+                     "losange"=> MARK_DIAMOND,
+                     "cercle"=> MARK_CIRCLE,
+                     "disque"=> MARK_FILLEDCIRCLE,
+                     "croix"=> MARK_CROSS,
+                     "croix_x" => MARK_X,
+                     "etoile" => MARK_STAR);
    
     // traiter les donnees
     $type_graphe = strtolower(trim($type_graphe));  // pour pb avec les modeles si du blanc en fin de ligne
@@ -76,12 +72,12 @@ function filtre_jpgraph($str,
         $donnee[] = "1";   // securite pour empecher les erreurs si donnnee pas renseigne  
     
     if ($fond_degrade) {
-	$fond_degrade = explode(";", $fond_degrade);
-	foreach ($fond_degrade as $key => $value) $fond_degrade[$key] = trim($value);
-	if (count($fond_degrade)<2) {
-		$fond_degrade[0]='white@0.5';
-		$fond_degrade[1]='orange@0.5';
-	}
+          	$fond_degrade = explode(";", $fond_degrade);
+          	foreach ($fond_degrade as $key => $value) $fond_degrade[$key] = trim($value);
+          	if (count($fond_degrade)<2) {
+          		$fond_degrade[0]='white@0.5';
+          		$fond_degrade[1]='orange@0.5';
+          	}
     }
     
     $legende =  explode(";", $legende); 
@@ -110,18 +106,18 @@ function filtre_jpgraph($str,
         case "courbe":      $graph = new Graph($largeur,$hauteur);
                             $graph->SetScale('textlin');
                             // Create the linear plot
-                            $plot=new LinePlot($donnee);
-			    $plot->SetColor($couleur);
-			    if ($style=='marches') $plot->SetStepStyle();
-			    if ($fond_degrade) $plot->SetFillGradient($fond_degrade[0],$fond_degrade[1]);
-			    if ($couleur_fond) $plot->SetFillColor($couleur_fond);
-			    if ($epaisseur) $plot->SetWeight($epaisseur);
-			    if ($marqueur_forme) {
-			    jpgraph_nom_marqueur($plot,$marqueur_forme);
-			    if ($marqueur_couleur) $plot->mark->SetColor($marqueur_couleur);
-			    if ($marqueur_couleur_fond) $plot->mark->SetFillColor($marqueur_couleur_fond);
-			    if ($marqueur_epaisseur)$plot->mark->SetWidth($marqueur_epaisseur);
-			    }
+                            $plot=new LinePlot($donnee);                            
+                            // style & couleur
+                  			    $plot->SetColor($couleur);
+                  			    if ($style=='marches') $plot->SetStepStyle();
+                  			    if ($fond_degrade) $plot->SetFillGradient($fond_degrade[0],$fond_degrade[1]);
+                  			    if ($couleur_fond) $plot->SetFillColor($couleur_fond);
+                  			    if ($epaisseur) $plot->SetWeight($epaisseur);
+                  			    if (isset($marqueur_formes[$marqueur_forme])) 
+                  			                         $plot->mark->SetType($marqueur_formes[$marqueur_forme]);                  			    
+                  			    if ($marqueur_couleur) $plot->mark->SetColor($marqueur_couleur);
+                      			if ($marqueur_couleur_fond) $plot->mark->SetFillColor($marqueur_couleur_fond);
+                      			if ($marqueur_epaisseur)$plot->mark->SetWidth($marqueur_epaisseur);  
 			    
                             // titre & legende 
                             $graph->title->Set(utf8_decode($titre));
@@ -143,7 +139,8 @@ function filtre_jpgraph($str,
          case "camembert":  $graph = new PieGraph($largeur,$hauteur);    
                             // Create the linear plot
                             $plot = new PiePlot($donnee);
-                            $plot->SetTheme("earth");    
+                            // style & couleur
+                            //$plot->SetTheme($style);    
                             // titre & legende 
                             $graph->title->Set(utf8_decode($titre));
                             if (count($legende)>1) 
