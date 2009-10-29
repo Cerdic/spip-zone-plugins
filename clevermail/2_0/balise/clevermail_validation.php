@@ -15,7 +15,7 @@ function balise_CLEVERMAIL_VALIDATION_dyn() {
           } else {
             $sub = sql_fetsel("*", "spip_cm_subscribers", "sub_id = ".intval($action['sub_id']));
             $list = sql_fetsel("*", "spip_cm_lists", "lst_id = ".intval($action['lst_id']));
-          	
+
             sql_insertq("spip_cm_lists_subscribers", array('lst_id' => $action['lst_id'], 'sub_id' => $action['sub_id'], 'lsr_mode' => $action['pnd_mode'], 'lsr_id' => $action['pnd_action_id']));
             $return = '<p>'._T('clevermail:inscription_validee', array('lst_name' => $list['lst_name'])).'</p>';
 
@@ -36,7 +36,7 @@ function balise_CLEVERMAIL_VALIDATION_dyn() {
             sql_delete("spip_cm_lists_subscribers", "lst_id = ".intval($action['lst_id'])." AND sub_id = ".intval($action['sub_id']));
             // remove posts from this list already queued
             sql_delete("spip_cm_posts_queued", "sub_id = ".intval($action['sub_id'])." AND pst_id IN (".implode(',', sql_fetsel("lst_id", "spip_cm_posts", "lst_id=".intval($action['lst_id']), "lst_id")).")");
-            
+
             $return = '<p>'._T('clevermail:desinscription_validee').'</p>';
 
             // E-mail d'alerte envoye au moderateur de la liste
@@ -49,13 +49,16 @@ function balise_CLEVERMAIL_VALIDATION_dyn() {
             $envoyer_mail = charger_fonction('envoyer_mail', 'inc');
             $envoyer_mail($destinataire, $sujet, $corps, $expediteur);
           }
-	      	
+
 		      $abonnement = sql_fetsel("sub_id, lst_id", "spip_cm_lists_subscribers", "lsr_id=".sql_quote($lsr_id));
 		      $abonne = sql_getfetsel("sub_email", "spip_cm_subscribers", "sub_id=".intval($abonnement['sub_id']));
 		      $liste = sql_getfetsel("lst_name", "spip_cm_lists", "lst_id=".intval($abonnement['lst_id']));
 		      if (sql_countsel("spip_cm_lists_subscribers", "sub_id=".intval($abonnement['sub_id'])) == 0) {
 		        // Plus aucun abonnement, on retire l'adresse complètement
-		        sql_delete("spip_cm_subscribers", "sub_id = ".intval($abonnement['sub_id']));
+		        //sql_delete("spip_cm_subscribers", "sub_id = ".intval($abonnement['sub_id']));
+		        sql_updateq("spip_cm_subscribers",
+		        	array('sub_email' => md5(substr($abonne,0,strpos($abonne, '@'))).substr($abonne,strpos($abonne, '@'))),
+					"sub_id = ".intval($abonnement['sub_id']));
 		      }
 		      spip_log('Suppression du l\'abonnement de « '.$abonne.' » de la liste « '.$liste.' » (id='.$abonnement['lst_id'].')', 'clevermail');
           break;
