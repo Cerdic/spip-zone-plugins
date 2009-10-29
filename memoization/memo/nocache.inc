@@ -11,8 +11,7 @@ bool  cache_lock(string key)
 bool  cache_unlock(string key)
 */
 
-function cache_get($key) {
-}
+function cache_get($key) {}
 
 function cache_set($key, $value, $ttl=null) {
 	return false;
@@ -34,12 +33,8 @@ function cache_dec($key, $value=null, $ttl=null) {
 	return 0;
 }
 
-function cache_lock($key) {
-	return false;
-}
+function cache_lock($key) {}
 
-function cache_unlock($key) {
-	return false;
-}
+function cache_unlock($key) {}
 
 ?>
