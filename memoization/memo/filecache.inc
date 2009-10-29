@@ -87,13 +87,13 @@ function cache_unset_by_prefix() {
 function cache_inc() {
 	$a = func_get_args();
 	$a[1] = intval(cache_get($a[0]))+1;
-	return call_user_func_array('xcache_set', $a);
+	return call_user_func_array('cache_set', $a);
 }
 
 function cache_dec() {
 	$a = func_get_args();
 	$a[1] = intval(cache_get($a[0]))-1;
-	return call_user_func_array('xcache_set', $a);
+	return call_user_func_array('cache_set', $a);
 }
 
 ?>
