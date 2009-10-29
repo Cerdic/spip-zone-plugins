@@ -10,12 +10,15 @@
 	dev
 	</etat>
 	<description>
-	Un outil de m&#233;moization, destin&#233; &#224; acc&#233;l&#233;rer
+	Un outil de m&#233;mo&#239;zation, destin&#233; &#224; acc&#233;l&#233;rer.
+
+	(icone : [laszlo-photo->http://www.flickr.com/photos/laszlo-photo/149047693/])
 	</description>
     <lien>http://zzz.rezo.net/Utiliser-xcache-pour-accelerer-n.html</lien>
 	<prefix>
 	Memoization
 	</prefix>
+    <icon>memoization.png</icon>
     <options>inc/memoization.php</options>
 	<chemin dir='' />
 	<necessite id="SPIP" version="[2.0.0;]" />
