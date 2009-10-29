@@ -3,9 +3,9 @@
 # xcache ?
 if (function_exists('cache_set')) {}
 elseif (function_exists('xcache_set'))
-	require_once dirname(__FILE__).'/'.'xcache.inc';
+	require_once dirname(dirname(__FILE__)).'/memo/xcache.inc';
 else
-	require_once dirname(__FILE__).'/'.'filecache.inc';
+	require_once dirname(dirname(__FILE__)).'/memo/filecache.inc';
 
 
 //
