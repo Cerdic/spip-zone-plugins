@@ -41,5 +41,5 @@
 	<options>fastcache_options.php</options>
 	<fonctions>fastcache_fonctions.php</fonctions>
 	<necessite id="SPIP" version="[2.0.0;]" />
-	<necessite id="xcache" />
+	<necessite id="memoization" version="[0.3;]" />
 </plugin>

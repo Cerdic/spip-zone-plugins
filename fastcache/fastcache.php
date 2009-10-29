@@ -16,7 +16,7 @@ AND !isset($_COOKIE[_FC_COOKIE_PREFIX.'_admin'])
 AND !isset($_COOKIE[_FC_COOKIE_PREFIX.'_session'])
 AND !isset($_SERVER['PHP_AUTH_USER'])
 )
-	define('_FC_KEY', $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
+	define('_FC_KEY', 'fastcache:'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
 
 function fc_testie() {
 	return
@@ -28,7 +28,7 @@ function fc_testie() {
 }
 
 if (defined('_FC_KEY'))
-	require_once _FC_XCACHE;
+	require_once _FC_MEMOIZATION;
 
 if (defined('_FC_KEY')
 AND $p = cache_get(_FC_KEY)

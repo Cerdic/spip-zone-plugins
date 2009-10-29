@@ -4,7 +4,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-# creer le lanceur dans tmp/pre_spip.inc
+# creer le lanceur dans tmp/fcconfig_domaine.inc
 function creer_fastcache() {
 
 	$cfg = @unserialize($GLOBALS['meta']['fastcache']);
@@ -22,7 +22,7 @@ function creer_fastcache() {
 	$meta = var_export(_FILE_META, true);
 	$prefix = var_export($GLOBALS['cookie_prefix'], true);
 
-	$xcache = var_export(find_in_path('inc/xcache.php'), true);
+	$memoization = var_export(find_in_path('inc/memoization.php'), true);
 
 	$contenu = '<'.'?php' .
 <<<CONFIG
@@ -36,7 +36,7 @@ function creer_fastcache() {
 @define ('_FC_META', $meta);
 @define ('_FC_IE_PNGHACK', $pnghack);
 @define ('_FC_COOKIE_PREFIX', $prefix);
-@define ('_FC_XCACHE', $xcache);
+@define ('_FC_MEMOIZATION', $memoization);
 
 CONFIG
 
