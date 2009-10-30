@@ -74,7 +74,6 @@ class Pile {
 	function creer_argument_balise($nom, $valeur = null) {
 		include_spip('public/interfaces');
 		$s = new Texte;
-		$s->type="texte";
 		$s->texte = $nom;
 		$s->ligne=0;
 		
@@ -116,7 +115,6 @@ class Pile {
 	function creer_balise($nom, $opt) {
 		include_spip('inc/interfaces');
 		$b = new Champ;
-		$b->type = 'champ';
 		$b->nom_champ = strtoupper($nom);
 		foreach ($opt as $o=>$val) {
 			if (isset($b->$o)) {
@@ -151,10 +149,10 @@ function balise_SAISIE_dist ($p) {
 	// on recupere les parametres sans les traduire en code d'execution php
 	$type_saisie = Pile::recuperer_et_supprimer_argument_balise(1, $p); // $type
 	$titre       = Pile::recuperer_et_supprimer_argument_balise(1, $p); // $titre
-	
+
 	// creer #ENV{$titre}
 	$env_titre   = Pile::creer_balise('ENV', array('param' => array($titre))); // #ENV{titre}
-	
+
 	// on modifie $p pour ajouter des arguments
 	// {nom=$titre, valeur=#ENV{$titre}, erreurs, type_saisie=$type, fond=saisies/_base}
 	$p = Pile::creer_et_ajouter_argument_balise($p, 'nom', $titre);
