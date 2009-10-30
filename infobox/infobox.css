@@ -3,10 +3,12 @@
  * Licence GPL (c) 2009 - Ateliers CYM
  */
 
-.infobox					{ position:fixed; top:10px; left:10px; width:250px !important; overflow:hidden !important; padding:4px; background:cyan; border:2px solid #1bdedf; }
+.infobox					{ position:fixed; top:10px; left:10px; width:250px !important; overflow:hidden !important; padding:4px; background:lime; border:2px solid #1bdedf; }
 .infobox fieldset 			{ border:1px solid #1bdedf; width:inherit; padding:8px; margin:8px; overflow:hidden !important; }
 .infobox fieldset pre		{ font-family: Arial; font-size: 0.8em; }
 .infobox legend				{ font-weight:bold; color:#008f8f; }
 .infobox span.copy			{ font-size:0.8em; }
 
+/*
 * html .infobox				{ display:none; }
+*/

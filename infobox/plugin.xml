@@ -23,6 +23,8 @@
 	
 	<icon>img_pack/picto_infobox_64x64.png</icon>
 	
+	<options>infobox_options.php</options>
+	
 	<pipeline>
 		<nom>insert_head</nom>
 		<action>insert_head</action>

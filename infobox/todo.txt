@@ -1,0 +1,33 @@
+
+
+1. trouver comment éviter le message "modeles/infobox : accès interdit"
+il apparait si je ne suis pas logué
+or le site doit etre accessible à tous même si le plugin est activé
+Exemple de plugs ou on peut activer sans etre logué : crayons
+=> qu'est-ce qui fait que l'accès soit interdit ? accès restreint ? non aucune zone active
+
+ça pose problème sur 
+- infobox
+- actunite
+
+ça ne le fait pas sur
+- reperes
+- spimine
+
+les droits sur le serveur sont :
+- des écarts donc non signifiant
+
+
+
+
+2. 	ordre d'exécution : insert_head puis balise
+cym>	j'a créé une balise qui fonctionne tres bien (et chu content :D)
+	mais... elle semble être calculée par SPIP AVANT que mon instruction insert_head ne soit exécutée...
+	du coup, comme la balise doit écrire à l'intérieur d'une div que construit le insert_head
+	elle cherche a écrire dans une div qui n'existe pas encore...
+	y a moyen de contourner ça ?
+	forcer un ordre (insert_head puis balise) ?
+	obliger la balise a attendre que la div soit tracée ?
+	
+	
+3. réglages dans CFG

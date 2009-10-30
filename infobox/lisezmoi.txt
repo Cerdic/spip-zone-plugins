@@ -1,0 +1,35 @@
+
+
+Actions effectuées au chargement du plugin :
+
+1. ajout des styles dans le head
+--------------------------------
+Méthode : on joue avec le pipeline insert_head :
+
+	<pipeline>
+		<nom>insert_head</nom>
+		<action>insert_head</action>
+		<inclure>infobox_fonctions.php</inclure>
+	</pipeline>
+
+Ensuite on (...)
+
+
+2. chargement de la nouvelle balise #INFOBOX
+--------------------------------------------
+Méthode : elle se charge au chargement du fichier infobox_fonctions.php
+
+
+3. Ajout de la div au bon endroit dans le html
+----------------------------------------------
+Méthode : instruction jQuery dans le infobox.js
+
+	$('div[(#ENV{bloc,'#page'})]').[(#ENV{insertion,'before'})]('<div id="infobox"></div>');
+
+
+4. 
+--
+
+
+Appel du modèle modeles/infobox
+où ?

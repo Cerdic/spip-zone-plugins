@@ -2,33 +2,30 @@
 <!-- affiche une petite boite d'infos pendant le développement -->
 
 <fieldset class="infobox petit arrondi">
-	<legend>Mise au Point Page</legend>
+
+	<legend><:infobox:legend_titre_boite:></legend>
+	
 	<fieldset class="general">
-		<legend>Infos g&eacute;n&eacute;rales</legend>
-		#SQUELETTE<br />
-		rubrique #ENV{id_rubrique}<br />
-		secteur #GET{sector}
+		<legend><:infobox:legend_general:></legend>
 	</fieldset>
 
-	<fieldset class="xiti">
-		<legend>Infos Xiti</legend>
+	<fieldset class="marqueurs">
+		<legend><:infobox:legend_marqueurs:></legend>
 	</fieldset>
 
 	<fieldset class="mots">
-		<legend>Mots clé</legend>
+		<legend><:infobox:legend_mots:></legend>
 	</fieldset>
 
 	<fieldset class="env">
-		<legend>Variable ENV</legend>
-		<pre>
-		[(#ENV**|unserialize|print_r{1})]
-		</pre>
+		<legend><:infobox:legend_env:></legend>
 	</fieldset>
 
 	<fieldset class="divers">
-		<legend>Divers</legend>
+		<legend><:infobox:legend_divers:></legend>
 	</fieldset>
 
 	<span class="copy">&copy; 2009 - Ateliers CYM</span>
-	<img class="logo" src="#CHEMIN{img_pack/picto_infobox_48x48.png}" width="24" height="24" alt="Pcito plugin infobox pour SPIP" />
+	<img class="logo" src="#CHEMIN{img_pack/picto_infobox_48x48_transparent.png}" width="24" height="24" alt="Picto plugin infobox pour SPIP" />
+	
 </fieldset>
