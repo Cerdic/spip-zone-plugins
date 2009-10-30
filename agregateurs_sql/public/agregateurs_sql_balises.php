@@ -91,6 +91,10 @@ function balise_EXPRESSION($p) {
       $p->code = "\$Pile[\$SP]['$alias']";
       $p->boucles[$b]->select[] = "$champ as $alias";
       $p->interdire_scripts = true;
+    } else {
+       erreur_squelette(
+         "pas de balises dans #EXPRESSION", $p->id_boucle);
+      $p->code = "''";
     }
   }
   return $p;
