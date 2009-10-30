@@ -6,7 +6,7 @@
 
 
 //
-// ajout feuille de stylle
+// Ajout de la feuille de style et du script javascript
 //
 function reperes_insert_head($flux){
   $flux .= '<!-- insertion de la css reperes --><link rel="stylesheet" type="text/css" href="'.find_in_path('reperes.css').'" media="all" />';
