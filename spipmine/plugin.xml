@@ -18,9 +18,9 @@
 
 	<lien>[Doc en ligne, forum, FAQ sur SPIP-Contrib->http://www.spip-contrib.net/Plugin-Spipmine?var_mode=preview]</lien>
 
-	<fonctions></fonctions>
-	<options></options>
-	<install></install>
+	<fonctions>spipmine_fonctions.php</fonctions>
+	<options>spipmine_options.php</options>
+	<install>base/spipmine_install.php</install>
 	
 	<pipeline>
 		<nom>declarer_tables_principales</nom>
