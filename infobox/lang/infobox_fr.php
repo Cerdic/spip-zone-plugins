@@ -9,7 +9,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	'legend_titre_boite'			=> 'Plugin Infobox pour SPIP',
+	'legend_titre_boite'			=> 'Vos squelettes s\'expriment !',
 	'legend_general'				=> 'Infos g&eacute;n&eacute;rales',
 	'legend_marqueurs'				=> 'Infos marqueurs',
 	'legend_mots'					=> 'Infos mots-cl&eacute;',
@@ -21,7 +21,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_texte_descriptif'			=> 'D&egrave;s l\'activation du plugin, les concepteurs de squelettes disposent d\'une nouvelle balise, la balise "#INFOBOX".<p>Cette balise accepte 2 param&egrave;tres : "class" qui indique la pseudo-class contenant le message, et "message" le message proprement dit.</p><p><a href="http://www.spip-contrib.net/Plugin-Infobox?var_mode=preview" class="spip_out">Doc en ligne, forum, FAQ sur SPIP-Contrib</a></p>',
 	'cfg_nom_boite'					=> 'Formulaire de configuration du plugin "Infobox"',
 	'cfg_nom_plugin'				=> 'infobox'
-	
 
 );
 
