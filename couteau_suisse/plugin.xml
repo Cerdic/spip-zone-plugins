@@ -1,5 +1,5 @@
 <plugin>
-	<nom><multi>Swiss Knife[fr]Le Couteau Suisse[ca]El Ganivet Su&#237;s[ar]&#1587;&#1603;&#1610;&#1606; &#1575;&#1604;&#1580;&#1610;&#1576;[nl]Het Zwitserland Mes[gl]A navalla su&#237;za[es]La Navaja Suiza[de]Schweizer Taschenmesser[tr]&#304;svi&#231;re &#199;ak&#305;s&#305;[br]Ar Gontell Suis[pt_br]Canivete Su&#237;&#231;o[ast]La Navaya Suiza[gl]A navalla su&#237;za[ro]Cu&#355;itul Elve&#355;ian</multi></nom>
+	<nom><multi>Swiss Knife[fr]Le Couteau Suisse[ca]El Ganivet Su&#237;s[ar]&#1587;&#1603;&#1610;&#1606; &#1575;&#1604;&#1580;&#1610;&#1576;[nl]Het Zwitserland Mes[gl]A navalla su&#237;za[es]La Navaja Suiza[de]Schweizer Taschenmesser[tr]&#304;svi&#231;re &#199;ak&#305;s&#305;[br]Ar Gontell Suis[pt_br]Canivete Su&#237;&#231;o[ast]La Navaya Suiza[gl]A navalla su&#237;za[ro]Cu&#355;itul Elve&#355;ian[it]Coltellino Svizzero</multi></nom>
 	<icon>img/couteau-50.gif</icon>
 	<version>1.8.09.14</version>
 	<auteur>Patrice Vanneufville
@@ -144,6 +144,17 @@ Descobra neste plugin as suas ferramentas favoritas: {Sobrescritos}, {Aspas tipo
 N&#227;o deixe de consultar os artigos de documenta&#231;&#227;o do plugin, publicados em: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
 Compatibilidade: SPIP 1.92x/2.0.x
+[it]Raccoglie in un solo plugin una serie di piccole funzioni nuove ed utili a migliorare la gestione del tuo sito SPIP.
+
+Ciascuna di queste funzioni pu&#242; essere attivata o meno dall'utente sulla [pagina di amministrazione dei plugin->./?exec=admin_couteau_suisse] ed impostata con un certo numero di variabili: clicca su {{Configurazione}}, poi scegli la scheda {{Coltellino Svizzero}}.
+
+Le categorie disponibili sono:Amministrazione, Miglioramenti tipografici, Scorciatoie tipografiche, Visualizzazione del sito pubblico, Segnaposti, filtri, criteri.
+
+Scopri in questo plugin le tue funzioni preferite: {Sopprimi il numero}, {Formato degli URL}, {Evidenziatori tipografici}, {Virgolette tipografiche}, {Simboli di spunta}, {Lotta contro lo SPAM}, {Mailcrypt}, {Belle URL}, {SPIP e i link... esterni}, {Smileys}, {Un sommario per i tuoi articoli}, {Dividi in pagine e schede}, ecc., ecc.
+
+Non esitare a leggere gli articoli di documentazione del plugin pubblicati su: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
+
+Compatibilit&#224; : SPIP v1.92x e v2.0.x
 	</multi></description>
 	<lien>[->http://www.spip-contrib.net/Le-Couteau-Suisse]</lien> <!-- URI de documentation -->
 	<options> <!-- fichier options (comme l'ancien mes_options.php) charge a chaque hit !! ne surtout pas l'appeler mes_options -->
