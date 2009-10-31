@@ -3,6 +3,7 @@
   <auteur>[Cedric->yterium.net]</auteur>
   <version>0.1.0</version>
   <etat>test</etat>
+	<icon>images/cache_cool.png</icon>
   <description>Servir le cache froid pour aller plus vite, et calculer en diff&eacute;r&eacute; en t&acirc;che de fond
 	Necessite la version de dev 2.1 ou le patch http://trac.rezo.net/trac/spip/changeset/14703
 	</description>
