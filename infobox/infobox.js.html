@@ -4,18 +4,21 @@
 ;if(window.jQuery) (function($){
 /*# AVOID COLLISIONS #*/
 
-$(document).ready(function(){ 
+$(document).ready(function(){
 
+	// a faire :
 	// ici lire la variable infobox/bloc pour remplacer le nom de la div
 	// lire aussi la variable infobox/insertion (pour remplacer after|before ou append) 
 	// voir en ligne : http://docs.jquery.com/Manipulation
 	
-	// trace une div nommée infobox juste avant le bloc page (dond juste apre body)
+	// trace une div nommee infobox juste avant le bloc page (donc juste apres body)
 	$('div[(#ENV{bloc,'#page'})]').[(#ENV{insertion,'before'})]('<div id="infobox"></div>');
+	alert('div infobox tracée');
 	
 	// remplit cette div avec le contenu du modele
 	$('div#infobox').load('spip.php?page=modeles/infobox');
-		
+	alert('div infobox remplie avec les fieldset');
+	
 });
 
 /*# AVOID COLLISIONS #*/

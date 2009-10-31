@@ -1,4 +1,4 @@
-
+infobox, c'est un peu ça : https://developer.mozilla.org/En
 
 1. trouver comment éviter le message "modeles/infobox : accès interdit"
 il apparait si je ne suis pas logué

@@ -1,9 +1,7 @@
-
-
 Actions effectuées au chargement du plugin :
 
-1. ajout des styles dans le head
---------------------------------
+1. ajout des css et js dans le head
+-----------------------------------
 Méthode : on joue avec le pipeline insert_head :
 
 	<pipeline>
@@ -12,7 +10,7 @@ Méthode : on joue avec le pipeline insert_head :
 		<inclure>infobox_fonctions.php</inclure>
 	</pipeline>
 
-Ensuite on (...)
+Nota : le script et la css sont des squelettes afin de pouvoir passer #CHEMIN, #ENV{bloc} et #ENV{page} en parametre.
 
 
 2. chargement de la nouvelle balise #INFOBOX
@@ -27,9 +25,12 @@ Méthode : instruction jQuery dans le infobox.js
 	$('div[(#ENV{bloc,'#page'})]').[(#ENV{insertion,'before'})]('<div id="infobox"></div>');
 
 
-4. 
---
+4. Chargement du modele modele/infobox
+--------------------------------------
+C'est lui qui trace la div infobox
 
 
-Appel du modèle modeles/infobox
-où ?
+
+Reste à faire :
+---------------
+- faire que la balise #INFOBOX soit calculée alors que la div #infobox soit déja tracée; pour l'instant on doit écrire le squelette en dur et pas en jQuery;

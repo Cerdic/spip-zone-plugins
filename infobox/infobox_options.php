@@ -4,83 +4,51 @@
  * Licence GPL (c) 2009 - Ateliers CYM
  */
  
-function balise_POUET($p) {
-	$message=interprete_argument_balise(1,$p);
-	$pouet="'<h1>'.$message.'</h1>'";
-	$p->code = "$pouet";
-	$p->interdire_scripts = false;
-	return $p;
-}
-
 function balise_INFOBOX($p) {
 
-	// $class		= interprete_argument_balise(1,$p);
-	// $message	= interprete_argument_balise(2,$p);
-
-	$class = 'general';
-	$message = 'Essai dans general';
-
-	$boite = "'<script type=\"text/javascript\">$(function(){
-	$(\'#infobox fieldset.infobox fieldset.$class\').append(\'$message\'); 
-	});</script>'";
+	$_id = interprete_argument_balise(1, $p);
 	
-	$toto = "'
-		<script type=\"text/javascript\">
-		$(document).ready(function(){ 
-			$(\'#infobox\').append(\'<h1>TOTO dans infobox</h1>\');
-			$(\'#page\').append(\'<h1>TOTO dans page</h1>\'); 
-		});
-		</script>
-	'";
+	if ($_id) {
+	
+		$_cc = 1;
+		$_tc = array();
+		
+		while(interprete_argument_balise($_cc,$p)) {
+			$_tc[$_cc] .= interprete_argument_balise($_cc,$p);
+			$_cc++;
+		}
+		$_tc[1] = substr($_tc[1],1,strlen($_tc[1])-2); // On efface les simple quote!
+		$_tc[2] = substr($_tc[2],1,strlen($_tc[2])-2); // On efface les simple quote!
 
-	$p->code = "$toto";
+		$class		= addslashes($_tc[1]);
+		$message	= "- ".addslashes($_tc[2])."<br/> ";
+		
+		$envoi 		= met_sous_enveloppe($class,$message);
+	
+	} else {
+		
+		$class 		= "divers";
+		$message 	= "<br/>Veuillez mettre des param&egrave;tres &agrave; la balise infobox...";
+		
+		$envoi 		= met_sous_enveloppe($class,$message);
+	}
+
+	$p->code = "$envoi";
 	$p->interdire_scripts = false;
 	return $p;
 }
 
-/*
-	$_id = interprete_argument_balise(1, $p);
-	if ($_id) {
+function met_sous_enveloppe($class,$message) {
 
-		$compteur_critere	=	1; // variable pour récuperer le nombre de criteres
-		$tab_critere		=	array() ; // variable tableau pour récuperer les criteres de la balise
-		
-		while(interprete_argument_balise($compteur_critere, $p)) {
-			
-			$tab_critere[$compteur_critere]	.=	interprete_argument_balise($compteur_critere, $p);
-			
-			$compteur_critere ++;
-		}
-	
-		$tab_critere[1] = substr($tab_critere[1],1,strlen($tab_critere[1])-2); // On efface les simple quote!
-		$tab_critere[2] = substr($tab_critere[2],1,strlen($tab_critere[2])-2); // On efface les simple quote!
-		//echo $tab_critere[1].":".$tab_critere[2]."<br/>";
-		
-		$class			=	addslashes($tab_critere[1]);
-		$message		=	"-	".addslashes($tab_critere[2])."<br/> ";
-		
-		$boite = "'<script type=\"text/javascript\">$(function(){
-		$(\'.infobox fieldset.$class\').append(\'$message\'); 
-		});</script>'";
-		
-		$p->code = "$boite";
-		
-		//echo $decoupe_tab[0].":".$decoupe_tab[1]."<br/>";
-		
-		
-	} 
-	else {
-		
-		$class			=	"divers";
-		$message		=	"<br/>Veuillez mettre des paramètres à la balise!";
-		
-		$boite = "'<script type=\"text/javascript\">$(function(){
-			$(\'.infobox fieldset.$class\').append(\'$message\');
-			});</script>'";
-	
-		$p->code = "$boite";
-	}
+	$envoi = "'<script type=\"text/javascript\">$(#document).ready(function(){
+		$(function(){
+			$(\'#infobox fieldset.infobox fieldset.$class\').append(\'$message\'); 
+		});
+		alert(\'message envoyé à infobox\');
+	});</script>'";
 
-*/
+	return $envoi;
+}
+
 
 ?>
