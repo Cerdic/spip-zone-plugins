@@ -118,6 +118,7 @@ function filtre_jpgraph($str,
     switch($type_graphe) {
         case "courbe":      require_once ('src/jpgraph_line.php'); break;
         case "barre":       require_once ('src/jpgraph_bar.php');  break;
+	case "accbarre":       require_once ('src/jpgraph_bar.php');  break;
         case "camembert":   require_once ('src/jpgraph_pie.php');  break;
         default:            $type_graphe = "courbe";
                             require_once ('src/jpgraph_line.php');  
@@ -227,8 +228,50 @@ function filtre_jpgraph($str,
 			if ($legendetrois[0]) $graph->xaxis->title->Set($legendetrois[0]);
 			if ($legendetrois[1]) $graph->yaxis->title->Set($legendetrois[1]);
                             break;
-                            
-         case "camembert":  $graph = new PieGraph($largeur,$hauteur);    
+	
+         case "accbarre":       $graph = new Graph($largeur,$hauteur);
+                            $graph->SetScale('textlin');
+                            // Create the linear plot
+                            $plot1 = new BarPlot($donnee);
+                            // style & couleur
+                      			if ($couleur['contour']) $plot1->SetColor($couleur['contour']);
+                      			// Le degrade pour les barres est tres specifique (un peu comme le modele de marqueur) et doit etre traite dans une fonction supplementaire, sera fait ulterieurement
+                      			// if ($couleur['degrade']) $plot->SetFillGradient($couleur['fond'],$couleur['degrade']);
+                      			
+                      			//petit patch en attendant d'uniformiser la doc : pour l'instant la doc indique que couleur=blue doit remplir en bleu les barres, alors que l'uniformisation des
+                      			// couleurs indiquera plutot qu'il s'agit d'une couleur de contour et non une couleur de fond
+                      			if (($couleur['contour']) AND (!$couleur['fond'])) $plot1->SetFillColor($couleur['contour']);
+                      			//Devra etre probablement supprime ulterieurement, ou alors on garde cela, dans le cas d'oubli de la couleur de fond
+                      			
+                      			if ($couleur['fond']) $plot1->SetFillColor($couleur['fond']);                             
+                           $group_plot[0]= $plot1;
+			   
+			   if ($donneedeux) {
+				$plot2 = new BarPlot($donneedeux);
+				if ($couleurdeux['contour']) $plot2->SetColor($couleurdeux['contour']);
+				if (($couleurdeux['contour']) AND (!$couleurdeux['fond'])) $plot2->SetFillColor($couleurdeux['contour']);
+                      		if ($couleurdeux['fond']) $plot2->SetFillColor($couleurdeux['fond']);
+				$group_plot[1]= $plot2;
+			   }
+
+			   if ($donneetrois) {
+				$plot3 = new BarPlot($donneetrois);
+				if ($couleurtrois['contour']) $plot3->SetColor($couleurtrois['contour']);
+				if (($couleurtrois['contour']) AND (!$couleurtrois['fond'])) $plot3->SetFillColor($couleurtrois['contour']);
+                      		if ($couleurtrois['fond']) $plot3->SetFillColor($couleurtrois['fond']);
+				$group_plot[2]= $plot3;
+			   }
+
+			    $plot = new AccBarPlot($group_plot);
+			    // titre & legende 
+                            $graph->title->Set(utf8_decode($titre));
+                            if (count($legende)>1)
+                                $graph->xaxis->SetTickLabels($legende);
+			if ($legendetrois[0]) $graph->xaxis->title->Set($legendetrois[0]);
+			if ($legendetrois[1]) $graph->yaxis->title->Set($legendetrois[1]);
+                            break;
+
+	 case "camembert":  $graph = new PieGraph($largeur,$hauteur);    
                             // Create the linear plot
                             $plot = new PiePlot($donnee);
                             // style & couleur
