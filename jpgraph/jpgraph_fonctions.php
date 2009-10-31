@@ -144,6 +144,40 @@ function filtre_jpgraph($str,
                       			if ($marqueur['fond']) $plot->mark->SetFillColor($marqueur['fond']);
                       			if ($marqueur['epaisseur'])$plot->mark->SetWidth($marqueur['epaisseur']);
                             // titre & legende 
+			    $plot->SetLegend($legendedeux[0]);
+			    
+			    if ($donneetrois) {
+				$plot3=new LinePlot($donneetrois);
+				if ($couleurtrois['contour']) $plot3->SetColor($couleurtrois['contour']);
+				if ($couleurtrois['degrade']) $plot3->SetFillGradient($couleurtrois['fond'],$couleurtrois['degrade']);
+				if ($couleurtrois['fond']) $plot3->SetFillColor($couleurtrois['fond']);
+				// L'epaisseur est sorti du modele, voir comment reintegrer ulterieurement
+				//   if ($epaisseur) $plot->SetWeight($epaisseur);
+				if (isset($marqueur_formes[$marqueurtrois['nom']])) 
+					$plot3->mark->SetType($marqueur_formes[$marqueurtrois['nom']]);
+				if ($marqueurtrois['couleur']) $plot3->mark->SetColor($marqueurtrois['couleur']);
+				if ($marqueurtrois['fond']) $plot3->mark->SetFillColor($marqueurtrois['fond']);
+				if ($marqueurtrois['epaisseur'])$plot3->mark->SetWidth($marqueurtrois['epaisseur']);
+				$graph->Add($plot3);
+				if ($legendedeux[2]) $plot3->SetLegend($legendedeux[2]);
+			    }
+			    
+			    if ($donneedeux) {
+				$plot2=new LinePlot($donneedeux);
+				if ($couleurdeux['contour']) $plot2->SetColor($couleurdeux['contour']);
+				if ($couleurdeux['degrade']) $plot2->SetFillGradient($couleurdeux['fond'],$couleurdeux['degrade']);
+				if ($$couleurdeux['fond']) $plot2->SetFillColor($couleurdeux['fond']);
+				// L'epaisseur est sorti du modele, voir comment reintegrer ulterieurement
+				//   if ($epaisseur) $plot->SetWeight($epaisseur);
+				if (isset($marqueur_formes[$marqueurdeux['nom']])) 
+					$plot2->mark->SetType($marqueur_formes[$marqueurdeux['nom']]);
+				if ($marqueurdeux['couleur']) $plot2->mark->SetColor($marqueurdeux['couleur']);
+				if ($marqueurdeux['fond']) $plot2->mark->SetFillColor($marqueurdeux['fond']);
+				if ($marqueurdeux['epaisseur'])$plot2->mark->SetWidth($marqueurdeux['epaisseur']);
+				$graph->Add($plot2);
+				if ($legendedeux[1]) $plot2->SetLegend($legendedeux[1]);
+			    }
+			    
                             $graph->title->Set(utf8_decode($titre));
                             if (count($legende)>1) 
                                 $graph->xaxis->SetTickLabels($legende);  
