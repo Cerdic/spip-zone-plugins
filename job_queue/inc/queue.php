@@ -31,6 +31,7 @@
  *	id of job
  */
 function queue_add_job($function, $description, $arguments = array(), $file = '', $no_duplicate = false, $time=0, $priority=0){
+	include_spip('base/abstract_sql');
 
 	// serialiser les arguments
 	$arguments = serialize($arguments);
@@ -77,6 +78,8 @@ function queue_add_job($function, $description, $arguments = array(), $file = ''
  * @return bool
  */
 function queue_remove_job($id_job){
+	include_spip('base/abstract_sql');
+
 	if ($row = sql_fetsel('fonction,inclure,date','spip_jobs','id_job='.intval($id_job))
 	 AND $res = sql_delete('spip_jobs','id_job='.intval($id_job))){
 		queue_unlink_job($id_job);
@@ -103,6 +106,8 @@ function queue_remove_job($id_job){
  *  or an array of simple array to link multiples objet in one time
  */
 function queue_link_job($id_job,$objets){
+	include_spip('base/abstract_sql');
+
 	if (is_array($objets) AND count($objets)){
 		if (is_array(reset($objets))){
 			foreach($objets as $k=>$o){
@@ -174,6 +179,8 @@ function queue_schedule(){
 	// rien a faire si le prochain job est encore dans le futur
 	if ($GLOBALS['meta']['queue_next_job_time']>$start)
 		return;
+
+	include_spip('base/abstract_sql');
 
 	$max_time = ini_get('max_execution_time')/2;
 	// valeur conservatrice si on a pas reussi a lire le max_execution_time
@@ -250,6 +257,8 @@ function queue_is_cron_job($function,$inclure){
  *	temps de la tache ajoutee ou 0 pour ASAP
  */
 function queue_update_next_job_time($next_time=null){
+	include_spip('base/abstract_sql');
+
 	if (is_null($next_time) OR !isset($GLOBALS['meta']['queue_next_job_time'])){
 		$date = sql_getfetsel('date','spip_jobs','','','date','0,1');
 		$next_time = strtotime($date);
