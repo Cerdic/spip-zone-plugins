@@ -238,21 +238,22 @@ function filtre_jpgraph($str,
                             // style & couleur
                       			if ($couleur['contour']) $plot1->SetColor($couleur['contour']);
                       			// Le degrade pour les barres est tres specifique (un peu comme le modele de marqueur) et doit etre traite dans une fonction supplementaire, sera fait ulterieurement
-                      			if ($couleur['degrade']) $plot1->SetFillGradient($couleur['fond'],$couleur['degrade'],GRAD_VER);
+                      			if ($couleur['degrade']) {$plot1->SetFillGradient($couleur['fond'],$couleur['degrade'],GRAD_VER); $plot1->SetWeight(0);}
                       			
                       			//petit patch en attendant d'uniformiser la doc : pour l'instant la doc indique que couleur=blue doit remplir en bleu les barres, alors que l'uniformisation des
                       			// couleurs indiquera plutot qu'il s'agit d'une couleur de contour et non une couleur de fond
                       			if (($couleur['contour']) AND (!$couleur['fond'])) $plot1->SetFillColor($couleur['contour']);
                       			//Devra etre probablement supprime ulterieurement, ou alors on garde cela, dans le cas d'oubli de la couleur de fond
                       			
-                      			if ($couleur['fond']) $plot1->SetFillColor($couleur['fond']);                             
+                      			if ($couleur['fond']) $plot1->SetFillColor($couleur['fond']);
+					
                            $group_plot[0]= $plot1;
 			   
 			   if ($donneedeux) {
 				$plot2 = new BarPlot($donneedeux);
 				if ($couleurdeux['contour']) $plot2->SetColor($couleurdeux['contour']);
 				if (($couleurdeux['contour']) AND (!$couleurdeux['fond'])) $plot2->SetFillColor($couleurdeux['contour']);
-				if ($couleurdeux['degrade']) $plot2->SetFillGradient($couleurdeux['fond'],$couleurdeux['degrade'],GRAD_VER);
+				if ($couleurdeux['degrade']) {$plot2->SetFillGradient($couleurdeux['fond'],$couleurdeux['degrade'],GRAD_VER); $plot2->SetWeight(0);}
                       		if ($couleurdeux['fond']) $plot2->SetFillColor($couleurdeux['fond']);
 				$group_plot[1]= $plot2;
 			   }
@@ -261,7 +262,7 @@ function filtre_jpgraph($str,
 				$plot3 = new BarPlot($donneetrois);
 				if ($couleurtrois['contour']) $plot3->SetColor($couleurtrois['contour']);
 				if (($couleurtrois['contour']) AND (!$couleurtrois['fond'])) $plot3->SetFillColor($couleurtrois['contour']);
-				if ($couleurtrois['degrade']) $plot3->SetFillGradient($couleurtrois['fond'],$couleurtrois['degrade'],GRAD_VER);
+				if ($couleurtrois['degrade']) {$plot3->SetFillGradient($couleurtrois['fond'],$couleurtrois['degrade'],GRAD_VER); $plot3->SetWeight(0);}
                       		if ($couleurtrois['fond']) $plot3->SetFillColor($couleurtrois['fond']);
 				$group_plot[2]= $plot3;
 			   }
