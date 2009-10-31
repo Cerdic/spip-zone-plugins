@@ -5,8 +5,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/meta');
 
-include_spip('inc/meta');
-
 // Installation et mise à jour
 function menus_upgrade($nom_meta_version_base, $version_cible){
 
