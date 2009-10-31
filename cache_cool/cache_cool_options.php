@@ -70,4 +70,24 @@ function public_produire_page($fond, $contexte, $use_cache, $chemin_cache, $cont
 	return public_produire_page_dist($fond, $contexte, $use_cache, $chemin_cache, $contexte_cache, $page, $lastinclude, $connect);
 }
 
+
+// Inserer jQuery sans test de doublon
+// incompatible avec le calcul multiple de squelettes sur un meme hit
+// http://doc.spip.org/@f_jQuery
+function f_jQuery_cool ($texte) {
+	$x = '';
+	foreach (pipeline('jquery_plugins',
+	array(
+		'javascript/jquery.js',
+		'javascript/jquery.form.js',
+		'javascript/ajaxCallback.js'
+	)) as $script)
+		if ($script = find_in_path($script))
+			$x .= "\n<script src=\"$script\" type=\"text/javascript\"></script>\n";
+	$texte = $x.$texte;
+	
+	return $texte;
+}
+
+$GLOBALS['spip_pipeline']['insert_head'] = str_replace('|f_jQuery','|f_jQuery_cool',$GLOBALS['spip_pipeline']['insert_head']);
 ?>
