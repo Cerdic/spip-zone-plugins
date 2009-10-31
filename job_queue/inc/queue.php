@@ -187,6 +187,10 @@ function queue_schedule(){
 	if (!$max_time) $max_time=5;
 	$max_time = min($max_time,15); // une valeur maxi en temps.
 
+	#spip_log("JQ schedule $start / $max_time",'jq');
+
+	$nbj=0;
+	$maxjobs = 100;
 	// attraper les jobs
 	// dont la date est passee (echus en attente),
 	// par odre :
@@ -195,11 +199,14 @@ function queue_schedule(){
 	// lorsqu'un job cron n'a pas fini, sa priorite est descendue
 	// pour qu'il ne bloque pas les autres jobs en attente
 	$now = date('Y-m-d H:i:s',$start);
-	$res = sql_select('*','spip_jobs','date<'.sql_quote($now),'','priorite DESC,date','0,10');
+	$res = sql_select('*','spip_jobs','date<'.sql_quote($now),'','priorite DESC,date','0,'.($maxjobs+1));
 	do {
 		if ($row = sql_fetch($res)){
+			$nbj++;
 			// il faut un verrou, a base de sql_delete ?
 			if (sql_delete('spip_jobs','id_job='.intval($row['id_job']))){
+				#spip_log("JQ schedule job ".$nbj." OK",'jq');
+
 				// on a la main sur le job :
 				// l'executer
 				$result = queue_start_job($row);
@@ -220,10 +227,15 @@ function queue_schedule(){
 				}
 			}
 		}
-	} while ($row AND time()<$start+$max_time);
+		#spip_log("JQ schedule job end time ".time(),'jq');
+	} while ($nbj<$maxjobs AND $row AND time()<$start+$max_time);
+
+	#spip_log("JQ schedule end time ".time(),'jq');
 	
-	if ($row = sql_fetch($res))
+	if ($row = sql_fetch($res)){
 		queue_update_next_job_time(0); // on sait qu'il y a encore des jobs a lancer ASAP
+		#spip_log("JQ encore !",'jq');
+	}
 	else
 		queue_update_next_job_time();
 
