@@ -7,10 +7,15 @@
 ******************************************************************/
 ]
 <BOUCLE_jclic(DOCUMENTS){id_document=#ENV**{doc}}>
+#URL_DOCUMENT
 <?php
 $Fichier="#URL_DOCUMENT";
 ?>
 </BOUCLE_jclic>
+<?php
+// Pour l'espace prive, ne pas tenir compte du retour a la racine car on s'en sort avec l'URL du site
+// $Fichier = str_replace("../","", $Fichier);
+?>
 <div style="text-align:[(#ENV**{aligner}|?{#ENV**{aligner},"center"})];">
 <script language="JavaScript">
 setJarBase('http://clic.xtec.net/dist/jclic');
