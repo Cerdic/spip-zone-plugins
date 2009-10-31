@@ -10,5 +10,5 @@
   <options>cache_cool_options.php</options>
 	<lien></lien> <!-- URI de documentation -->
   <prefix>cache_cool</prefix>
-	<necessite id="queue" version="[0.2.0;]" />
+	<necessite id="queue" version="[0.2.1;]" />
 </plugin>
