@@ -194,7 +194,23 @@ function filtre_jpgraph($str,
                             $plot = new PiePlot($donnee);
                             // style & couleur
                             if ($couleur['contour']) $plot->SetColor($couleur['contour']);
-                            //$plot->SetTheme("earth"); 		   
+                            switch ($couleur['fond']) {
+				case "earth":
+					$plot->SetTheme('earth');
+					break;
+				case "water":
+					$plot->SetTheme('water');
+					break;
+				case "sand":
+					$plot->SetTheme('sand');
+					break;
+				case "pastel":
+					$plot->SetTheme('pastel');
+					break;
+				default:
+					$plot->SetTheme('earth');
+					break;
+                            }	   
                             // titre & legende 
                             $graph->title->Set(utf8_decode($titre));
                             if (count($legende)>1) 
