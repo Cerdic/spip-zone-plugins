@@ -178,6 +178,9 @@ function filtre_jpgraph($str,
 				if ($legendedeux[1]) $plot2->SetLegend($legendedeux[1]);
 			    }
 			    
+			    if ($legendetrois[0]) $graph->xaxis->title->Set($legendetrois[0]);
+			    if ($legendetrois[1]) $graph->yaxis->title->Set($legendetrois[1]);
+			    
                             $graph->title->Set(utf8_decode($titre));
                             if (count($legende)>1) 
                                 $graph->xaxis->SetTickLabels($legende);  
@@ -220,7 +223,9 @@ function filtre_jpgraph($str,
 			    // titre & legende 
                             $graph->title->Set(utf8_decode($titre));
                             if (count($legende)>1)
-                                $graph->xaxis->SetTickLabels($legende);                                                
+                                $graph->xaxis->SetTickLabels($legende);
+			if ($legendetrois[0]) $graph->xaxis->title->Set($legendetrois[0]);
+			if ($legendetrois[1]) $graph->yaxis->title->Set($legendetrois[1]);
                             break;
                             
          case "camembert":  $graph = new PieGraph($largeur,$hauteur);    
