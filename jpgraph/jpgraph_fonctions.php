@@ -120,6 +120,7 @@ function filtre_jpgraph($str,
         case "barre":       require_once ('src/jpgraph_bar.php');  break;
 	case "accbarre":       require_once ('src/jpgraph_bar.php');  break;
         case "camembert":   require_once ('src/jpgraph_pie.php');  break;
+	case "baton":   require_once ('src/jpgraph_scatter.php');  break;
         default:            $type_graphe = "courbe";
                             require_once ('src/jpgraph_line.php');  
                             break;        
@@ -129,7 +130,36 @@ function filtre_jpgraph($str,
     
     // creation du graphe
     switch($type_graphe) {
-        case "courbe":      $graph = new Graph($largeur,$hauteur);
+        case "baton": $graph = new Graph($largeur,$hauteur);
+		$graph->SetScale("textlin");
+		$plot = new ScatterPlot($donnee);
+		// Bizarrement, le script de forme des marqueur est inopérant (marqueur invisible) pour les barres... On rétablit un test en dur qui fonctionne
+		if (isset($marqueur['nom'])) {
+			switch ($marqueur['nom']) {
+				case "triangle": $plot->mark->SetType(MARK_UTRIANGLE); break;
+				case "triangle_bas": $plot->mark->SetType(MARK_DTRIANGLE); break;
+				case "losange": $plot->mark->SetType(MARK_DIAMOND); break;
+				case "cercle": $plot->mark->SetType(MARK_CIRCLE); break;
+				case "disque": $plot->mark->SetType(MARK_FILLEDCIRCLE); break;
+				case "croix": $plot->mark->SetType(MARK_CROSS); break;
+				case "croix_x": $plot->mark->SetType(MARK_X); break;
+				case "etoile": $plot->mark->SetType(MARK_STAR); break;
+				default: $plot->mark->SetType(MARK_SQUARE); break;
+			}
+		}
+		if ($marqueur['epaisseur'])$plot->mark->SetWidth($marqueur['epaisseur']);
+		if ($marqueur['couleur']) $plot->mark->SetColor($marqueur['couleur']);
+		if ($marqueur['fond']) $plot->mark->SetFillColor($marqueur['fond']);
+		if ($couleur['contour']) $plot->SetColor($couleur['contour']);
+		if ($legendetrois[0]) $graph->xaxis->title->Set($legendetrois[0]);
+		if ($legendetrois[1]) $graph->yaxis->title->Set($legendetrois[1]);
+		$plot->SetImpuls();
+		$graph->title->Set(utf8_decode($titre));
+		if (count($legende)>1) 
+			$graph->xaxis->SetTickLabels($legende);  
+		break;
+	
+	case "courbe":      $graph = new Graph($largeur,$hauteur);
                             $graph->SetScale('textlin');
                             // Create the linear plot
                             $plot=new LinePlot($donnee);                            
@@ -145,7 +175,7 @@ function filtre_jpgraph($str,
                       			if ($marqueur['fond']) $plot->mark->SetFillColor($marqueur['fond']);
                       			if ($marqueur['epaisseur'])$plot->mark->SetWidth($marqueur['epaisseur']);
                             // titre & legende 
-			    $plot->SetLegend($legendedeux[0]);
+			    if ($legendedeux[0]) $plot->SetLegend($legendedeux[0]);
 			    
 			    if ($donneetrois) {
 				$plot3=new LinePlot($donneetrois);
@@ -201,7 +231,8 @@ function filtre_jpgraph($str,
                       			if (($couleur['contour']) AND (!$couleur['fond'])) $plot1->SetFillColor($couleur['contour']);
                       			//Devra etre probablement supprime ulterieurement, ou alors on garde cela, dans le cas d'oubli de la couleur de fond
                       			
-                      			if ($couleur['fond']) $plot1->SetFillColor($couleur['fond']);                             
+                      			if ($couleur['fond']) $plot1->SetFillColor($couleur['fond']);
+					if ($legendedeux[0]) $plot1->SetLegend($legendedeux[0]);
                            $group_plot[0]= $plot1;
 			   
 			   if ($donneedeux) {
@@ -210,6 +241,7 @@ function filtre_jpgraph($str,
 				if (($couleurdeux['contour']) AND (!$couleurdeux['fond'])) $plot2->SetFillColor($couleurdeux['contour']);
 				if ($couleurdeux['degrade']) $plot2->SetFillGradient($couleurdeux['fond'],$couleurdeux['degrade'],GRAD_VER);
                       		if ($couleurdeux['fond']) $plot2->SetFillColor($couleurdeux['fond']);
+				if ($legendedeux[1]) $plot2->SetLegend($legendedeux[1]);
 				$group_plot[1]= $plot2;
 			   }
 
@@ -219,6 +251,7 @@ function filtre_jpgraph($str,
 				if (($couleurtrois['contour']) AND (!$couleurtrois['fond'])) $plot3->SetFillColor($couleurtrois['contour']);
 				if ($couleurtrois['degrade']) $plot3->SetFillGradient($couleurtrois['fond'],$couleurtrois['degrade'],GRAD_VER);
                       		if ($couleurtrois['fond']) $plot3->SetFillColor($couleurtrois['fond']);
+				if ($legendedeux[2]) $plot3->SetLegend($legendedeux[2]);
 				$group_plot[2]= $plot3;
 			   }
 
@@ -246,6 +279,7 @@ function filtre_jpgraph($str,
                       			//Devra etre probablement supprime ulterieurement, ou alors on garde cela, dans le cas d'oubli de la couleur de fond
                       			
                       			if ($couleur['fond']) $plot1->SetFillColor($couleur['fond']);
+					if ($legendedeux[0]) $plot1->SetLegend($legendedeux[0]);
 					
                            $group_plot[0]= $plot1;
 			   
@@ -255,6 +289,7 @@ function filtre_jpgraph($str,
 				if (($couleurdeux['contour']) AND (!$couleurdeux['fond'])) $plot2->SetFillColor($couleurdeux['contour']);
 				if ($couleurdeux['degrade']) {$plot2->SetFillGradient($couleurdeux['fond'],$couleurdeux['degrade'],GRAD_VER); $plot2->SetWeight(0);}
                       		if ($couleurdeux['fond']) $plot2->SetFillColor($couleurdeux['fond']);
+				if ($legendedeux[1]) $plot2->SetLegend($legendedeux[1]);
 				$group_plot[1]= $plot2;
 			   }
 
@@ -264,6 +299,7 @@ function filtre_jpgraph($str,
 				if (($couleurtrois['contour']) AND (!$couleurtrois['fond'])) $plot3->SetFillColor($couleurtrois['contour']);
 				if ($couleurtrois['degrade']) {$plot3->SetFillGradient($couleurtrois['fond'],$couleurtrois['degrade'],GRAD_VER); $plot3->SetWeight(0);}
                       		if ($couleurtrois['fond']) $plot3->SetFillColor($couleurtrois['fond']);
+				if ($legendedeux[2]) $plot3->SetLegend($legendedeux[2]);
 				$group_plot[2]= $plot3;
 			   }
 
