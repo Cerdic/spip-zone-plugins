@@ -87,12 +87,12 @@ function public_produire_page($fond, $contexte, $use_cache, $chemin_cache, $cont
 	return $page;
 }
 
-$GLOBALS['spip_pipeline']['insert_head'] = str_replace('|f_jQuery','|f_jQuery_cool',$GLOBALS['spip_pipeline']['insert_head']);
+$GLOBALS['spip_pipeline']['insert_head'] = str_replace('|f_jQuery','|cache_cool_f_jQuery',$GLOBALS['spip_pipeline']['insert_head']);
 
 // Inserer jQuery sans test de doublon
 // incompatible avec le calcul multiple de squelettes sur un meme hit
 // http://doc.spip.org/@f_jQuery
-function f_jQuery_cool ($texte) {
+function cache_cool_f_jQuery ($texte) {
 	$x = '';
 	foreach (pipeline('jquery_plugins',
 	array(
