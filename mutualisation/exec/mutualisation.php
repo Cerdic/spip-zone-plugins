@@ -39,6 +39,17 @@ function exec_mutualisation_dist() {
 	<tbody>";
 
 	$nsite = 1;
+
+	# aliases pour l'affichage court
+	$alias = array();
+	foreach ($sites as $v) {
+		$redux = preg_replace(',^www\.|\..*$,', '', $v);
+		if (!in_array($redux, $alias))
+			$alias[$v] = $redux;
+		else
+			$alias[$v] = $v;
+	}
+
 	foreach ($sites as $v) {
 		$nom_site=$stats=$plugins=$erreur=$version_installee="";
 
@@ -49,14 +60,12 @@ function exec_mutualisation_dist() {
 			$nom_site = sinon($meta['nom_site'], $v);
 			$stats = intval($meta['popularite_total']);
 			if ($plugins = @unserialize($meta['plugin'])) {
-				$plugins = array_keys($plugins);
+				$plugins = array_map('strtolower', array_keys($plugins));
 				ksort($plugins);
 				foreach ($plugins as $plugin)
-					$lsplugs[$plugin][] = $v;
-				$plugins = count($plugins)
-				. ' <small>'
-				. strtolower(join(', ', $plugins))
-				. '</small>';
+					$lsplugs[$plugin][] = $alias[$v];
+				$cntplugins = count($plugins);
+				$plugins = join(', ', $plugins);
 			} else
 				$plugins = '-';
 
@@ -78,7 +87,7 @@ function exec_mutualisation_dist() {
 			<td><a href='${url}'>".typo($nom_site)."</a></td>
 			<td><a href='${url}ecrire/'>ecrire</a></td>
 			<td style='text-align:right;'><a href='${url}ecrire/index.php?exec=statistiques_visites'>${stats}</a></td>
-			<td><a href='${url}ecrire/index.php?exec=admin_plugin'>${plugins}</a></td>
+			<td><a href='${url}ecrire/index.php?exec=admin_plugin'>${cntplugins}</a> <small>${plugins}</small></td>
 			<td style='text-align:right;'>".date_creation_repertoire_site($v)."</td>
 			</tr>\n";
 		$nsite++;
