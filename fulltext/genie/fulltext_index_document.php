@@ -15,7 +15,7 @@ function genie_fulltext_index_document_dist($t) {
 				include_spip('inc/distant');
 				include_spip('inc/documents');
 				if (!$fichier = copie_locale(get_spip_doc($row['fichier']), 'test')) {
-					spip_log('Pas de copie locale de '.$fichier, 'extract');
+					spip_log('Pas de copie locale de '.$row['fichier'], 'extract');
 					return;
 				}
 				// par defaut, on pense que l'extracteur va retourner ce charset
