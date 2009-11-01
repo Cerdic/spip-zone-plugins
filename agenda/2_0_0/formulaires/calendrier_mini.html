@@ -28,13 +28,13 @@
 				Ainsi que ceux qui sont a cheval (commencent avant, et finissent apres le mois courant)
 			]
 			<BOUCLE_calendrier_debut(EVENEMENTS)
-			{id_article?}{id_mot?}
+			{id_article?}{id_mot?}{doublons}
 			{agenda date_debut, mois, (#ENV{#ENV{var_date},#ENV{date}}|annee), (#ENV{#ENV{var_date},#ENV{date}}|mois)}>[
 			(#DATE_DEBUT|Agenda_memo_full{#DATE_FIN,[(#TITRE|addslashes)],
 				#DESCRIPTIF,#LIEU,
 				[(#ENV{self}|parametre_url{#ENV{var_date},[(#DATE_DEBUT|affdate{'Y-m-d'})]})]})
 			]</BOUCLE_calendrier_debut><BOUCLE_calendrier_fin(EVENEMENTS)
-			{id_article?}{id_mot?}
+			{id_article?}{id_mot?}{doublons}
 			{agenda date_fin, mois, (#ENV{#ENV{var_date},#ENV{date}}|annee), (#ENV{#ENV{var_date},#ENV{date}}|mois)}>[
 			(#DATE_DEBUT|Agenda_memo_full{#DATE_FIN,[(#TITRE|addslashes)],
 				#DESCRIPTIF,#LIEU,
@@ -43,7 +43,7 @@
 			#SET{'borne_debut_mois', (#ENV{#ENV{var_date},#ENV{date}}|Agenda_moisdecal{0,'Y-m-d'})}
 			#SET{'borne_fin_mois', (#ENV{#ENV{var_date},#ENV{date}}|Agenda_moisdecal{1,'Y-m-d'})}
 			<BOUCLE_calendrier(EVENEMENTS)
-			{id_article?}{id_mot?}
+			{id_article?}{id_mot?}{doublons}
 			{date_debut < #GET{'borne_debut_mois'}} 
 			{date_fin >= #GET{'borne_fin_mois'}}>[
 			(#DATE_DEBUT|Agenda_memo_full{#DATE_FIN,[(#TITRE|addslashes)],
