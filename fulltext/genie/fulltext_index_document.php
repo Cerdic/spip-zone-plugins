@@ -33,9 +33,13 @@ function genie_fulltext_index_document_dist($t) {
 					sql_updateq("spip_documents", array('contenu' => $contenu, 'extrait' => 'oui'), "id_document=".intval($row['id_document']));
 				}
 			}
+			else {
+				// inutile de parcourir un par un tous les docs avec la meme extension !
+				sql_updateq('spip_documents', array('contenu' => '', 'extrait' => 'err'),"extrait = 'non' AND extension=".sql_quote($extension));
+			}
 		}
 		if ($row = sql_fetch($docLists)){
-			spip_log("il reste des docs a indexer...");
+			spip_log("il reste des docs a indexer...", 'extract');
 			return 0-$t; // il y a encore des docs a indexer
 		}
 	}
