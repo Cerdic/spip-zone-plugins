@@ -59,6 +59,24 @@ function jpgraph_traitement_marqueur($marqueur) {
 	return $marqueur;
 }
 
+// extrait option dans un tableau les options eventuelles
+// |option=truc;bidule=chouette;machin va creer le tableau suivant
+// option['truc']='truc' ; option['bidule']='chouette' ; option['machin']='machin'
+// Ainsi les paramètres d'option peuvent être des valeurs predefinies comme truc ou machin, ou plus concretement "histogramme" pour les courbes a tracer en histogrammes
+// ou bien des valeurs choisie par le redacteur du style bidule=chouette ou plus concretement couleur_fenetre=red si on decide de coder la couleur du bloc genere (bien souvent gris)
+function jpgraph_traitement_option($option) {
+	$option = explode(";", $option);
+	foreach ($option as $cle=>$val) {
+		$val=trim($val);
+		if (strpos($val,'=')!== false) {
+			$option[trim(substr($val,0,strpos($val,'=')-strlen($val)))]=trim(substr($val,strpos($val,'=')+1));
+		}
+		else {
+			$option[$val]=$val;
+		}
+	}
+	return $option;
+}
 
 //--------------------------------------------
 // filtre jgraph
@@ -79,7 +97,8 @@ function filtre_jpgraph($str,
 	$couleurtrois="",
 	$marqueur="",
 	$marqueurdeux="",
-	$marqueurtrois="")
+	$marqueurtrois="",
+	$option="")
 {
 	
 	  // constantes
@@ -109,6 +128,7 @@ function filtre_jpgraph($str,
     if ($marqueur) $marqueur = jpgraph_traitement_marqueur($marqueur);
     if ($marqueurdeux) $marqueurdeux = jpgraph_traitement_marqueur($marqueurdeux);
     if ($marqueurtrois) $marqueurtrois = jpgraph_traitement_marqueur($marqueurtrois);
+    $option=jpgraph_traitement_option($option);
 
     
     // retrouver jpgraph 
@@ -183,8 +203,8 @@ function filtre_jpgraph($str,
 		if ($legendetrois[1]) $graph->yaxis->title->Set($legendetrois[1]);
 		$plot->SetImpuls();
 		$graph->title->Set(utf8_decode($titre));
-		if (count($legende)>1) 
-			$graph->xaxis->SetTickLabels($legende);  
+		if (count($legende)>1)
+			$graph->xaxis->SetTickLabels($legende);
 		break;
 	
 	case "courbe":      $graph = new Graph($largeur,$hauteur);
@@ -202,6 +222,7 @@ function filtre_jpgraph($str,
                       			if ($marqueur['couleur']) $plot->mark->SetColor($marqueur['couleur']);
                       			if ($marqueur['fond']) $plot->mark->SetFillColor($marqueur['fond']);
                       			if ($marqueur['epaisseur'])$plot->mark->SetWidth($marqueur['epaisseur']);
+					if ($option['histogramme']) $plot->SetStepStyle();
                             // titre & legende 
 			    if ($legendedeux[0]) $plot->SetLegend($legendedeux[0]);
 			    
@@ -217,6 +238,7 @@ function filtre_jpgraph($str,
 				if ($marqueurtrois['couleur']) $plot3->mark->SetColor($marqueurtrois['couleur']);
 				if ($marqueurtrois['fond']) $plot3->mark->SetFillColor($marqueurtrois['fond']);
 				if ($marqueurtrois['epaisseur'])$plot3->mark->SetWidth($marqueurtrois['epaisseur']);
+				if ($option['histogramme']) $plot3->SetStepStyle();
 				$graph->Add($plot3);
 				if ($legendedeux[2]) $plot3->SetLegend($legendedeux[2]);
 			    }
@@ -233,6 +255,7 @@ function filtre_jpgraph($str,
 				if ($marqueurdeux['couleur']) $plot2->mark->SetColor($marqueurdeux['couleur']);
 				if ($marqueurdeux['fond']) $plot2->mark->SetFillColor($marqueurdeux['fond']);
 				if ($marqueurdeux['epaisseur'])$plot2->mark->SetWidth($marqueurdeux['epaisseur']);
+				if ($option['histogramme']) $plot2->SetStepStyle();
 				$graph->Add($plot2);
 				if ($legendedeux[1]) $plot2->SetLegend($legendedeux[1]);
 			    }
