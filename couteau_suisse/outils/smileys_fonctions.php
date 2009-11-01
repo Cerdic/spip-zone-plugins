@@ -6,6 +6,49 @@
 // dessin des frimousses : Sylvain Michel [http://www.guaph.net/]
 
 function balise_SMILEYS_dist($p) {
+	// Fonctions abandonnees par le plugin Porte Plume
+	$js_compat = !defined('_DIR_PLUGIN_PORTE_PLUME')?"":"<script type=\"text/javascript\">/*<![CDATA[*/
+// From SPIP 2.0 (spip_barre.js)
+if(typeof barre_inserer!='function') { function barre_inserer(text,champ) {
+	var txtarea = champ;
+	if(document.selection){
+		txtarea.focus();
+		var r = document.selection.createRange();
+		if (r == null) {
+			txtarea.selectionStart = txtarea.value.length;
+			txtarea.selectionEnd = txtarea.selectionStart;
+		} else {
+			var re = txtarea.createTextRange();
+			var rc = re.duplicate();
+			re.moveToBookmark(r.getBookmark());
+			rc.setEndPoint('EndToStart', re);
+			txtarea.selectionStart = rc.text.length;
+			txtarea.selectionEnd = rc.text.length + r.text.length;
+		}
+	} 
+	mozWrap(txtarea, '', text);
+}}
+// From http://www.massless.org/mozedit/
+if(typeof mozWrap!='function') { function mozWrap(txtarea, open, close) {
+	var selLength = txtarea.textLength;
+	var selStart = txtarea.selectionStart;
+	var selEnd = txtarea.selectionEnd;
+	if (selEnd == 1 || selEnd == 2)	selEnd = selLength;
+	var selTop = txtarea.scrollTop;
+	// Raccourcir la selection par double-clic si dernier caractere est espace	
+	if (selEnd - selStart > 0 && (txtarea.value).substring(selEnd-1,selEnd) == ' ') selEnd = selEnd-1;
+	var s1 = (txtarea.value).substring(0,selStart);
+	var s2 = (txtarea.value).substring(selStart, selEnd)
+	var s3 = (txtarea.value).substring(selEnd, selLength);
+	txtarea.value = s1 + open + s2 + close + s3;
+	selDeb = selStart + open.length;
+	selFin = selEnd + close.length;
+	window.setSelectionRange(txtarea, selDeb, selFin);
+	txtarea.scrollTop = selTop;
+	txtarea.focus();
+	return;
+}}
+/*]]>*/</script>\n";
 	// le tableau des smileys est present dans les metas
 	$smileys = unserialize($GLOBALS['meta']['cs_smileys']);
 	// valeurs par defaut
@@ -50,7 +93,7 @@ function balise_SMILEYS_dist($p) {
 	if ($i = $max % $nb_col) $html .= str_repeat('<td>&nbsp;</td>', $nb_col - $i) . '</tr>';
 
 	// accessibilite : alt et title avec le smiley en texte
-	$html = echappe_retour($html, 'SMILE');
+	$html = $js_compat . echappe_retour($html, 'SMILE');
 	$html = str_replace("'", "\'", $html);
 	$p->code = "'$html\n</table>\n'";
 	$p->interdire_scripts = true;
