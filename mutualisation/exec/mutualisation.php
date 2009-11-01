@@ -59,11 +59,13 @@ function exec_mutualisation_dist() {
 			$url .= '/';
 			$nom_site = sinon($meta['nom_site'], $v);
 			$stats = intval($meta['popularite_total']);
-			if ($plugins = @unserialize($meta['plugin'])) {
-				$plugins = array_map('strtolower', array_keys($plugins));
+			if ($cfg = @unserialize($meta['plugin'])) {
+				$plugins = array_keys($cfg);
 				ksort($plugins);
-				foreach ($plugins as $plugin)
-					$lsplugs[$plugin][] = $alias[$v];
+				foreach ($plugins as $plugin) {
+					$lsplugs[strtolower($plugin)][] = $alias[$v];
+					$versionplug[strtolower($plugin)] = $cfg[$plugin]['version'];
+				}
 				$cntplugins = count($plugins);
 				$plugins = join(', ', $plugins);
 			} else
@@ -100,12 +102,14 @@ function exec_mutualisation_dist() {
 		<tr>
 			<td>#</td>
 			<td>Plugins utilis&#233;s</td>
+			<td>Version</td>
 			<td>Sites</td>
 		</tr>
 	</thead>
 	<tbody>";
 		foreach ($lsplugs as $plugin => $c)
-			$plnum[count($c)] .= "<tr><td>".count($c)."</td><td>$plugin</td><td>".join(', ', $c).'</td></tr>';
+			$plnum[count($c)] .= "<tr><td>".count($c)."</td><td>$plugin</td>"
+				."<td>".$versionplug[$plugin]."</td><td>".join(', ', $c).'</td></tr>';
 		krsort($plnum);
 		$page .= join('', $plnum);
 		$page .= "</tbody></table>\n";
