@@ -479,7 +479,8 @@ function notifications_forumposte($quoi, $id_forum) {
 	if ($links)
 		$links = "\n\n".$links;
 	foreach (array_keys($destinataires) as $email) {
-		$msg = email_notification_forum($t, $email) . $links;
+		$msg = email_notification_forum($t, $email);
+		$msg['body'] .= $links;
 		Notifications_envoi($email, $msg['subject'], $msg['body']);
 	}
 
