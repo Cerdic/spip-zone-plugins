@@ -121,6 +121,7 @@ function filtre_jpgraph($str,
 	case "accbarre":       require_once ('src/jpgraph_bar.php');  break;
         case "camembert":   require_once ('src/jpgraph_pie.php');  break;
 	case "baton":   require_once ('src/jpgraph_scatter.php');  break;
+	case "point":   require_once ('src/jpgraph_scatter.php');  break;
         default:            $type_graphe = "courbe";
                             require_once ('src/jpgraph_line.php');  
                             break;        
@@ -130,7 +131,34 @@ function filtre_jpgraph($str,
     
     // creation du graphe
     switch($type_graphe) {
-        case "baton": $graph = new Graph($largeur,$hauteur);
+        case "point": $graph = new Graph($largeur,$hauteur);
+		$graph->SetScale("linlin");
+		$plot = new ScatterPlot($donnee,$donneedeux);
+		// Bizarrement, le script de forme des marqueur est inopérant (marqueur invisible) pour les barres... On rétablit un test en dur qui fonctionne
+		if (isset($marqueur['nom'])) {
+			switch ($marqueur['nom']) {
+				case "triangle": $plot->mark->SetType(MARK_UTRIANGLE); break;
+				case "triangle_bas": $plot->mark->SetType(MARK_DTRIANGLE); break;
+				case "losange": $plot->mark->SetType(MARK_DIAMOND); break;
+				case "cercle": $plot->mark->SetType(MARK_CIRCLE); break;
+				case "disque": $plot->mark->SetType(MARK_FILLEDCIRCLE); break;
+				case "croix": $plot->mark->SetType(MARK_CROSS); break;
+				case "croix_x": $plot->mark->SetType(MARK_X); break;
+				case "etoile": $plot->mark->SetType(MARK_STAR); break;
+				default: $plot->mark->SetType(MARK_SQUARE); break;
+			}
+		}
+		if ($marqueur['couleur']) $plot->mark->SetColor($marqueur['couleur']);
+		if ($marqueur['fond']) $plot->mark->SetFillColor($marqueur['fond']);
+		if ($marqueur['epaisseur'])$plot->mark->SetWidth($marqueur['epaisseur']);
+		$graph->title->Set(utf8_decode($titre));
+		if (count($legende)>1) 
+			$graph->xaxis->SetTickLabels($legende);
+		if ($legendetrois[0]) $graph->xaxis->title->Set($legendetrois[0]);
+		if ($legendetrois[1]) $graph->yaxis->title->Set($legendetrois[1]);
+		break;
+		
+	case "baton": $graph = new Graph($largeur,$hauteur);
 		$graph->SetScale("textlin");
 		$plot = new ScatterPlot($donnee);
 		// Bizarrement, le script de forme des marqueur est inopérant (marqueur invisible) pour les barres... On rétablit un test en dur qui fonctionne
@@ -166,7 +194,7 @@ function filtre_jpgraph($str,
                             // style & couleur
                             if ($couleur['contour']) $plot->SetColor($couleur['contour']);                      			
                       			if ($couleur['degrade']) $plot->SetFillGradient($couleur['fond'],$couleur['degrade']);
-                      			if ($$couleur['fond']) $plot->SetFillColor($couleur['fond']);
+                      			if ($couleur['fond']) $plot->SetFillColor($couleur['fond']);
                       			// L'epaisseur est sorti du modele, voir comment reintegrer ulterieurement
                       			//   if ($epaisseur) $plot->SetWeight($epaisseur);
                       			if (isset($marqueur_formes[$marqueur['nom']])) 
@@ -197,7 +225,7 @@ function filtre_jpgraph($str,
 				$plot2=new LinePlot($donneedeux);
 				if ($couleurdeux['contour']) $plot2->SetColor($couleurdeux['contour']);
 				if ($couleurdeux['degrade']) $plot2->SetFillGradient($couleurdeux['fond'],$couleurdeux['degrade']);
-				if ($$couleurdeux['fond']) $plot2->SetFillColor($couleurdeux['fond']);
+				if ($couleurdeux['fond']) $plot2->SetFillColor($couleurdeux['fond']);
 				// L'epaisseur est sorti du modele, voir comment reintegrer ulterieurement
 				//   if ($epaisseur) $plot->SetWeight($epaisseur);
 				if (isset($marqueur_formes[$marqueurdeux['nom']])) 
