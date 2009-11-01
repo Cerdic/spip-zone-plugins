@@ -36,6 +36,7 @@ function genie_fulltext_index_document_dist($t) {
 			else {
 				// inutile de parcourir un par un tous les docs avec la meme extension !
 				sql_updateq('spip_documents', array('contenu' => '', 'extrait' => 'err'),"extrait = 'non' AND extension=".sql_quote($extension));
+				spip_log("Impossible d'indexer tous les .$extension", 'extract');
 			}
 		}
 		if ($row = sql_fetch($docLists)){
