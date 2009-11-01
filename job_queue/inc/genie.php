@@ -86,8 +86,9 @@ function taches_generales($taches_generales = array()) {
 	// Optimisation de la base
 	$taches_generales['optimiser'] = 3600*48;
 
-	// cache (chaque 20 minutes => 1/16eme du repertoire cache)
-	$taches_generales['invalideur'] = 1200;
+	// cache (chaque 10 minutes => 1/16eme du repertoire cache,
+	// soit toutes les 2h40 sur le meme rep)
+	$taches_generales['invalideur'] = 600;
 
 	// nouveautes
 	if ($GLOBALS['meta']['adresse_neuf'] AND $GLOBALS['meta']['jours_neuf']
