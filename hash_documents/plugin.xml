@@ -14,7 +14,7 @@
 	<prefix>
 	hasher
 	</prefix>
-	<icon>hash.jpg</icon>
+	<icon>hash_documents.png</icon>
 
 	<pipeline>
 		<nom>post_edition</nom>
