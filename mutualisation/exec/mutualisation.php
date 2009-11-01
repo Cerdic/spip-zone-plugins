@@ -49,10 +49,13 @@ function exec_mutualisation_dist() {
 			$nom_site = sinon($meta['nom_site'], $v);
 			$stats = intval($meta['popularite_total']);
 			if ($plugins = @unserialize($meta['plugin'])) {
+				$plugins = array_keys($plugins);
 				ksort($plugins);
+				foreach ($plugins as $plugin)
+					$lsplugs[$plugin][] = $v;
 				$plugins = count($plugins)
 				. ' <small>'
-				. strtolower(join(', ', array_keys($plugins)))
+				. strtolower(join(', ', $plugins))
 				. '</small>';
 			} else
 				$plugins = '-';
@@ -81,7 +84,24 @@ function exec_mutualisation_dist() {
 		$nsite++;
 	}
 	$page .= "</tbody></table>";
-	
+
+	if ($lsplugs) {
+		$page .= "<br /><br /><table style='clear:both;'>
+	<thead>
+		<tr>
+			<td>#</td>
+			<td>Plugins utilis&#233;s</td>
+			<td>Sites</td>
+		</tr>
+	</thead>
+	<tbody>";
+		foreach ($lsplugs as $plugin => $c)
+			$plnum[count($c)] .= "<tr><td>".count($c)."</td><td>$plugin</td><td>".join(', ', $c).'</td></tr>';
+		krsort($plnum);
+		$page .= join('', $plnum);
+		$page .= "</tbody></table>\n";
+	}
+
 	$page .= '<div style="text-align:center;"><img src="'
 		. _DIR_IMG.'mutualiser.png'
 		. '" alt="" /></div>';
@@ -138,21 +158,8 @@ function date_creation_repertoire_site ($v) {
 // avec 'connect.php' ne changeant pas de nom
 function mutualisation_lister_sites_dist() {
 	$sites = array();
-# Code tres tres tres lent !
-#	foreach(preg_files('../'.$GLOBALS['mutualisation_dir'].'/', '.*/config/connect.php') as $s) {
-#		$sites[] = preg_replace(',^\.\./'.$GLOBALS['mutualisation_dir'].'/(.*)/config/connect.php,', '\1', $s);
-#	}
-# Code rapide
-	$dir = '../'.$GLOBALS['mutualisation_dir'].'/';	
-	if (is_dir($dir)) {
-		if ($dh = @opendir($dir)) {
-			while (($file = readdir($dh)) !== false) {
-				if ((filetype($dir . $file) == 'dir') OR (filetype($dir . $file) == 'link')) {
-					if (file_exists($dir . $file . '/config/'. _FILE_CONNECT_INS . '.php')) $sites[] = $file;
-				}
-			}
-			closedir($dh);
-		}
+	foreach(glob('../'.$GLOBALS['mutualisation_dir'].'/*/config/connect.php') as $s) {
+		$sites[] = preg_replace(',^\.\./'.$GLOBALS['mutualisation_dir'].'/(.*)/config/connect.php,', '\1', $s);
 	}
 	sort($sites);
 	return $sites;
