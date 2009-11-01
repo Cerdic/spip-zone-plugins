@@ -5,7 +5,7 @@
   <etat>test</etat>
 	<icon>images/cache_cool.png</icon>
   <description>Servir le cache froid pour aller plus vite, et calculer en diff&eacute;r&eacute; en t&acirc;che de fond
-	Necessite la version de dev 2.1 ou le patch http://trac.rezo.net/trac/spip/changeset/14703
+	Necessite la version de dev 2.1 ou le patch http://trac.rezo.net/trac/spip/changeset/14708
 	</description>
   <options>cache_cool_options.php</options>
 	<lien>http://www.spip-contrib.net/Cache-Cool</lien> <!-- URI de documentation -->
