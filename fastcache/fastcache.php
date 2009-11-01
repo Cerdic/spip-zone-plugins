@@ -34,8 +34,30 @@ if (defined('_FC_KEY')
 AND $p = cache_get(_FC_KEY)
 AND $p['time'] == @filemtime(_FC_META)
 ) {
-	eval($p['head']);
+	// choix du body
 	$b = (!is_null($p['ie']) AND fc_testie()) ? 'ie' : 'body';
+
+	// envoi des entetes
+	eval($p['head']);
+
+	// compression gzip
+	if (_FC_GZIP
+	AND strstr(@$_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip')) {
+		header('Content-Encoding: gzip');
+		$p[$b] = gzencode($p[$b]);
+	}
+
+	// cache navigateur ?
+	$etag = '"'.md5($p[$b]).'"';
+	header('ETag: '.$etag);
+	if (@$_SERVER['HTTP_IF_NONE_MATCH'] == $etag
+	OR (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) AND strstr($p['head'], $_SERVER['HTTP_IF_MODIFIED_SINCE']))
+	) {
+		header('HTTP/1.0 304 Not Modified');
+		exit;
+	}
+
+	// ultime entete : la longueur
 	header('Content-length: '.strlen($p[$b]));
 	header('Connection: close');
 	echo $p[$b];

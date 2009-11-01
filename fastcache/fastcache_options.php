@@ -17,8 +17,8 @@ function Fastcache_affichage_final($texte) {
 	global $page, $html; # dommage le pipeline ne connait pas les entetes...
 
 	if ($page['duree']
-	AND isset($page['entetes'])
-	AND isset($page['entetes']['X-Fast-Cache'])) {
+	AND ( _FC_TOUTES OR isset($page['entetes']['X-Fast-Cache']) )
+	) {
 
 		// verifier que le lanceur est OK
 		if (defined('_FC_LANCEUR')

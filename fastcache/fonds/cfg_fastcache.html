@@ -22,15 +22,23 @@ MSIE PNG Hack <small>(&#224; partir de SPIP 2.0&nbsp;: ajouter le code javascrip
 <br />
 <label>
 P&#233;riode (en secondes) de validit&#233; d'un cache rapide&nbsp;: <input type="text" name="periode" [value="(#ENV{periode}|sinon{180})"] /></label>
-
+<br />
+Par d&#233;faut le plugin ne s'applique qu'aux pages contenant la balise
+<kbd>#<span/>FASTCACHE</kbd>.
+<br />
+<label><input type="checkbox" name="toutes" [checked="(#ENV{toutes})"] />
+Appliquer &agrave; toutes les pages sans exception.</label>
 </p>
 </fieldset>
 
+<input type="submit" name="_cfg_ok" value="<:OK:>" style="float:#LANG_RIGHT;" />
+</form>
+
+<p />
+<br />
+<p />
 
 <?php
-	// Effacer le lanceur, pour qu'il reflete la nouvelle config
-	supprimer_fichier(_DIR_TMP.'pre_spip.inc');
-
 	echo debut_boite_info(true);
 	// Patcher spip.php a la racine
 	lire_fichier(_DIR_PLUGIN_FASTCACHE.'spip.php', $t);
@@ -53,10 +61,3 @@ P&#233;riode (en secondes) de validit&#233; d'un cache rapide&nbsp;: <input type
 	echo fin_boite_info(true);
 ?>
 
-
-
-<input type="submit" name="_cfg_ok" value="<:OK:>" style="float:#LANG_RIGHT;" />
-<!-- <input type="reset" value="<:Reset:>" />
-<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
--->
-</form>
