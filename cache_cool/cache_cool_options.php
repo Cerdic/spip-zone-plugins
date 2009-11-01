@@ -35,23 +35,29 @@
  * @return array 
  */
 function public_produire_page($fond, $contexte, $use_cache, $chemin_cache, $contexte_cache, $page, &$lastinclude, $connect=''){
+	static $processing = false;
+	$background = false;
 
 	// calcul differe du cache ?
-	// prend la main si c'est un calcul normal avec mise en cache
-	// et qu'un cache existe deja qui peut etre servi
-	if ($use_cache==1
-		AND $chemin_cache
-		AND is_array($page)
-		AND count($page)
+	// prend la main si
+	// - c'est un calcul normal avec mise en cache
+	// - un cache existe deja qui peut etre servi
+	// - c'est une visite anonyme (cache mutualise)
+	// - on est pas deja en train de traiter un calcul en background
+	if ($use_cache==1 AND $chemin_cache
+		AND is_array($page) AND count($page)
 		AND !$GLOBALS['visiteur_session']['id_auteur']
+		AND !$processing
 		) {
 		// on differe la maj du cache et on affiche le contenu du cache ce coup ci encore
 		$where = is_null($contexte_cache)?"principal":"inclure_page";
+		// on reprogramme avec un $use_cache=2 qui permettra de reconnaitre ces calculs
 		job_queue_add('public_produire_page',$c="Calcul du cache $fond [$where]",array($fond, $contexte, 2, $chemin_cache, $contexte_cache, NULL, $lastinclude, $connect),"",TRUE);
 		gunzip_page(&$page); // decomprimer la page si besoin
 		#spip_log($c,'cachedelai');
 		return $page;
 	}
+
 	// si c'est un cacul differe, verifier qu'on est dans le bon contexte
 	if ($use_cache==2){
 		$cacher = charger_fonction('cacher','public');
@@ -64,12 +70,24 @@ function public_produire_page($fond, $contexte, $use_cache, $chemin_cache, $cont
 			#spip_log($c,'cachedelai');
 			return;
 		}
+		$background = true;
+		$processing = true; // indiquer qu'on est deja en differe en cas de reentrance
 	}
 
 	include_spip('public/assembler');
-	return public_produire_page_dist($fond, $contexte, $use_cache, $chemin_cache, $contexte_cache, $page, $lastinclude, $connect);
+	$page = public_produire_page_dist($fond, $contexte, $use_cache, $chemin_cache, $contexte_cache, $page, $lastinclude, $connect);
+
+	if ($background){
+		// baisser le flag processing si c'est nous qui l'avons leve
+		$processing = false;
+		// baisser le flag qui sert a faire remonter une dependance de la session
+		// pour ne pas polluer les calculs suivants eventuels qui n'ont rien a voir
+		unset($GLOBALS['cache_utilise_session']);
+	}
+	return $page;
 }
 
+$GLOBALS['spip_pipeline']['insert_head'] = str_replace('|f_jQuery','|f_jQuery_cool',$GLOBALS['spip_pipeline']['insert_head']);
 
 // Inserer jQuery sans test de doublon
 // incompatible avec le calcul multiple de squelettes sur un meme hit
