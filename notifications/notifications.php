@@ -11,11 +11,6 @@ function Notifications_go($x) {
 	return $x;
 }
 
-function Notifications_taches_generales_cron($taches_generales){
-	$taches_generales['notifications'] = 60 * 20; // 20 minutes
-	return $taches_generales;
-}
-
 function Notifications_pre_edition($x) {
 	spip_log($x);
 
