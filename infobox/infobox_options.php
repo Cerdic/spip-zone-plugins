@@ -40,12 +40,14 @@ function balise_INFOBOX($p) {
 
 function met_sous_enveloppe($class,$message) {
 
-	$envoi = "'<script type=\"text/javascript\">$(#document).ready(function(){
+	$envoi = "'<script type=\"text/javascript\">
 		$(function(){
-			$(\'#infobox fieldset.infobox fieldset.$class\').append(\'$message\'); 
+			$(\'#infobox\').bind(\'infobox\',function(){
+        $(\'#infobox fieldset.infobox fieldset.$class\').append(\'$message\'); 
+  		  alert(\'message envoyÃ© Ã  infobox\');
+  		});
 		});
-		alert(\'message envoyé à infobox\');
-	});</script>'";
+	</script>'";
 
 	return $envoi;
 }
