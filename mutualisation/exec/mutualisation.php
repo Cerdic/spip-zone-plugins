@@ -67,7 +67,7 @@ function exec_mutualisation_dist() {
 					$versionplug[strtolower($plugin)] = $cfg[$plugin]['version'];
 				}
 				$cntplugins = count($plugins);
-				$plugins = join(', ', $plugins);
+				$plugins = strtolower(join(', ', $plugins));
 			} else
 				$plugins = '-';
 
