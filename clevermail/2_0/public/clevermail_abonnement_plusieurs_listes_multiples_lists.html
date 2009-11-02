@@ -1,0 +1,13 @@
+#SET{name,lst_ids}
+#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+#SET{obli,'obligatoire'}
+
+<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+  <label for="#GET{name}">#ENV{currentCat}</label>
+  [<span class='erreur_message'>(#GET{erreurs})</span>]
+  <select name="#GET{name}[]" id="#GET{name}" class="select" multiple="multiple" size="4">
+    <BOUCLE_lists(spip_cm_lists){lst_name LIKE (#ENV{currentCat})%} {par lst_name}>
+      <option value="#LST_ID"[(#LST_ID|in_array{#ENV{#GET{name}}}|oui) selected="selected"]>[(#LST_NAME|substr{#ENV{pos}})]</option>
+    </BOUCLE_lists>
+  </select>
+</li>
