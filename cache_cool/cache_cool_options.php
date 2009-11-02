@@ -70,8 +70,15 @@ function public_produire_page($fond, $contexte, $use_cache, $chemin_cache, $cont
 			#spip_log($c,'cachedelai');
 			return;
 		}
-		$background = true;
-		$processing = true; // indiquer qu'on est deja en differe en cas de reentrance
+		if (!$processing){
+			$background = true;
+			// vider la session pour calculer dans le bon contexte
+			$sessionv = $GLOBALS['visiteur_session'];
+			$sessiona = $GLOBALS['auteur_session'];
+			unset($GLOBALS['visiteur_session']);
+			unset($GLOBALS['auteur_session']);
+			$processing = true; // indiquer qu'on est deja en differe en cas de reentrance
+		}
 	}
 
 	include_spip('public/assembler');
@@ -83,6 +90,9 @@ function public_produire_page($fond, $contexte, $use_cache, $chemin_cache, $cont
 		// baisser le flag qui sert a faire remonter une dependance de la session
 		// pour ne pas polluer les calculs suivants eventuels qui n'ont rien a voir
 		unset($GLOBALS['cache_utilise_session']);
+		// restaurer la session
+		$GLOBALS['visiteur_session'] = $sessionv;
+		$GLOBALS['auteur_session'] = $sessiona;
 	}
 	return $page;
 }
