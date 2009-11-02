@@ -47,7 +47,7 @@
 	<bouton id='inscription2_adherents2' parent='bando_reactions'>
 		<icone>images/inscription2-16.png</icone>
 		<titre>inscription2:icone_afficher_utilisateurs</titre>
-		<url>inscription2_adherents2</url>
+		<url>inscription2_adherents</url>
 	</bouton>
 	<pipeline>
 		<nom>ajouter_boutons</nom>
