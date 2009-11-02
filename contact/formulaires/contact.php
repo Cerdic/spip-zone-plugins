@@ -228,7 +228,6 @@ function formulaires_contact_traiter_dist($id_auteur=''){
 	// Si oui on les ajoute avec le plugin Facteur
 	if ($pj_enregistrees_nom != null) {
 		//On rajoute des sauts de ligne pour différencier du message.
-		$texte .= "\n\n";
 		$texte = array(
 			'texte' => $texte
 		);
@@ -242,11 +241,71 @@ function formulaires_contact_traiter_dist($id_auteur=''){
 		}
 	}
 	
-	spip_log($texte);
+	
 	$envoyer_mail = charger_fonction('envoyer_mail','inc');
 	$envoyer_mail($mail, $sujet, $texte, $adres, "X-Originating-IP: ".$GLOBALS['ip']);
 	
-	// Maintenant que tout a été envoyé, s'il y avait des PJ il faut supprimer les fichiers
+	// Enregistrement des messages en base de données si on l'a demandé
+	if (lire_config('contact/sauvegarder_contacts')) {
+		//Où se trouve le texte du message ?
+		if ($pj_enregistrees_nom != null) {
+			$message = nl2br($texte['texte']);
+		}
+		else
+			$message = nl2br($texte);
+		
+		// Il s'agit d'un visiteur : on va donc l'enregistrer dans la table auteur pour garder son mail.
+		// Sauf s'il existe déjà.
+		$id_auteur = sql_getfetsel(
+			'id_auteur',
+			'spip_auteurs',
+			'email = '.sql_quote($adres)
+		);
+		if (!$id_auteur)
+			$id_auteur = sql_insertq(
+				'spip_auteurs',
+				array(
+					'email' => $adres,
+					'statut' => 'contact'
+				)
+			);
+		
+		// Ensuite on ajoute le message dans la base
+		$id_message = sql_insertq(
+			'spip_messages',
+			array(
+				'titre' => $sujet,
+				'statut' => 'publie',
+				'type' => 'contac',
+				'id_auteur' => $id_auteur,
+				'date_heure' => 'NOW()',
+				'texte' => $message,
+				'rv' => 'non'
+			)
+		);
+		
+		// S'il y a des pièces jointes on les ajoute aux documents de SPIP.
+		if ($pj_enregistrees_nom != null) {
+			//On charge la fonction pour ajouter le document là où il faut
+			$ajouter_document = charger_fonction('ajouter_documents', 'inc');
+			foreach ($pj_enregistrees_nom as $nom_pj) {
+				$id_doc = $ajouter_document($repertoire_temp_pj.$nom_pj, $nom_pj, 'message', $id_message, 'document', $id_document, $titrer=false);
+			}
+		}
+		
+		// On lie le message au(x) destinataire(s) concerné(s)
+		foreach ($destinataire as $id_destinataire) {
+			sql_insertq(
+				'spip_auteurs_messages',
+				array(
+					'id_auteur' => $id_destinataire,
+					'id_message' => $id_message,
+					'vu' =>'non')
+			);
+		}
+	}
+	
+	// Maintenant que tout a été envoyé ou enregistré, s'il y avait des PJ il faut supprimer les fichiers
 	if ($pj_enregistrees_nom != null) {
 		foreach ($pj_enregistrees_nom as $cle => $nom_pj) {
 			unlink($repertoire_temp_pj.$nom_pj);

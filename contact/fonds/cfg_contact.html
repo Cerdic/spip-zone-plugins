@@ -91,6 +91,18 @@
 	</fieldset>
 	
 	<fieldset>
+		<legend><:contact:sauv_message:></legend>
+		<ul>
+			<li class="choix editer_champ">
+				<p class="explication"><:contact:sauv_message_explication:></p>
+				
+				<input type="checkbox" name="sauvegarder_contacts" id="sauvegarder_contacts" class="checkbox" value="true" [checked="checked"(#ENV{sauvegarder_contacts}|=={true}|oui)] />
+				<label for="sauvegarder_contacts"><:contact:sauv_message_ok:></label>
+			</li>
+		</ul>
+	</fieldset>	
+	
+	<fieldset>
 		<legend><:contact:configuration_intro:></legend>
 		<ul>
 			<li class="editer_texte">

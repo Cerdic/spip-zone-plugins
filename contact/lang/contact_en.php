@@ -43,6 +43,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'form_pj_titre' => 'File title',
 	
 	'infos_supplementaires' => 'Additional Infos',
+	
+	'sauv_message' => 'Save contact messages',
+	'sauv_message_explication' => 'Allow to save messages from contacts, and display them in a dedicated interface.',
+	'sauv_message_ok' => 'Save contact messages',
+	
+	'msg_contact' => 'Message from contact',	
+	'msg_accueil' => 'Here are messages from contacts you have received.',
+	'msg_nouveaux' => 'New messages',
+	'msg_pas_nouveaux' => 'You havn\'t new messages.',
+	'msg_lus' => 'Messages already read',
+	'msg_expediteur' => 'Sender: ',
+	'msg_revenir_accueil' => 'Return to the list of contact messages.',
+	'msg_supprimer_message' => 'Delete this message',
+	'msg_messagerie' => 'Contact messaging',
+	
 	'titre' => 'Contact Form'
 );
 
