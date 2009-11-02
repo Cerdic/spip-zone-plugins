@@ -16,9 +16,8 @@ $(document).ready(function(){
 	
 	// remplit cette div avec le contenu du modele
 	//code a utiliser si version 14706 ou apres au place de l'appel a ajax
-  //$('div#infobox').load('spip.php?page=modeles/infobox',function(){$(this).trigger("infobox")});
-  $.ajax({url:'spip.php?page=modeles/infobox',success:function(data){
-  	alert('div infobox remplie avec les fieldset');
+	//$('div#infobox').load('spip.php?page=modeles/infobox',function(){$(this).trigger("infobox")});
+	$.ajax({url:'spip.php?page=modeles/infobox',success:function(data){
     $('div#infobox').html(data).trigger("infobox");
   }});
 });

@@ -43,9 +43,9 @@ function met_sous_enveloppe($class,$message) {
 	$envoi = "'<script type=\"text/javascript\">
 		$(function(){
 			$(\'#infobox\').bind(\'infobox\',function(){
-        $(\'#infobox fieldset.infobox fieldset.$class\').append(\'$message\'); 
-  		  alert(\'message envoyé à infobox\');
-  		});
+		        $(\'#infobox fieldset.infobox fieldset.$class\').append(\'$message\'); 
+				// alert(\'message envoyé à infobox\');
+  			});
 		});
 	</script>'";
 
