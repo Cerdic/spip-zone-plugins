@@ -15,9 +15,7 @@ function action_clevermail_list_subscriber_remove_dist() {
       if (sql_countsel("spip_cm_lists_subscribers", "sub_id=".intval($abonnement['sub_id'])) == 0) {
       	// No more subscription, subscriber address is removed
         //sql_delete("spip_cm_subscribers", "sub_id = ".intval($abonnement['sub_id']));
-        sql_updateq("spip_cm_subscribers",
-		        	array('sub_email' => md5(substr($abonne,0,strpos($abonne, '@'))).substr($abonne,strpos($abonne, '@'))),
-					"sub_id = ".intval($abonnement['sub_id']));
+        sql_updateq("spip_cm_subscribers", array('sub_email' => md5($abonne).'@example.com'), "sub_id = ".intval($abonnement['sub_id']));
       }
       	spip_log('Suppression du l\'abonnement de « '.$abonne.' » à la liste « '.$liste.' » (id='.$abonnement['lst_id'].')', 'clevermail');
 	  }
