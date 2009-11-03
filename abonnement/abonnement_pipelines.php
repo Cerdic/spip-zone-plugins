@@ -14,7 +14,7 @@ function abonnement_affiche_milieu($flux){
 /**
  *
  * Insertion dans le pipeline editer_contenu_objet
- * Ajoute les champs I2 sur le formulaire CVT editer_auteur
+ * Ajoute les champs abonnement sur le formulaire CVT editer_auteur
  *
  * @return array Le $flux complété
  * @param array $flux
@@ -28,7 +28,7 @@ function abonnement_editer_contenu_objet($flux){
 		 * Insertion des champs dans le formulaire aprs le textarea PGP
 		 *
 		 */
-		//spip_log($flux['args'], "tamere");
+
 		$abonnement = recuperer_fond('prive/abonnement_fiche_modif',array('id_auteur'=>$flux['args']['id']));
 
 		$flux['data'] = preg_replace('%(<li class="editer_pgp(.*?)</li>)%is', '$1'."\n".$abonnement, $flux['data']);
@@ -40,7 +40,7 @@ function abonnement_editer_contenu_objet($flux){
 /**
  *
  * Insertion dans le pipeline post_edition
- * ajouter les champs inscription2 soumis lors de la soumission du formulaire CVT editer_auteur
+ * ajouter les champs abonnement soumis lors de la soumission du formulaire CVT editer_auteur
  *
  * @return
  * @param object $flux
@@ -82,7 +82,7 @@ function abonnement_post_edition($flux){
 						$validite = date('Y-m-d H:i:s', mktime(date('H'),date('i'),date('s'),date('n')+$abonnement['duree'],date('j'),date('Y')));
 					}
 					
-					// attention au triple appel
+					// attention au triple appel, on verifie 
 					if ((!$id = sql_getfetsel('id_auteur','spip_auteurs_elargis_abonnements','id_auteur='.$id_auteur.' and id_abonnement='.sql_quote($id_abonnement).' and validite > NOW()')))
 						sql_insertq("spip_auteurs_elargis_abonnements",array('id_auteur'=> $id_auteur,'id_abonnement'=> $id_abonnement,'date'=>$date,'validite'=>$validite,'statut_paiement'=>'ok','montant'=>$abonnement['montant']));
 				
