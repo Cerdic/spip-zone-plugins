@@ -111,7 +111,9 @@
 				    <td class='tdoc_libelle'>[(#GET{tab_exemplaires}|pmb_tableau2_valeur{#CLE, tdoc_libelle})]</td>
 				    <td class='location_libelle'>[(#GET{tab_exemplaires}|pmb_tableau2_valeur{#CLE, location_libelle})]</td>
 				    <td class='section_libelle'>[(#GET{tab_exemplaires}|pmb_tableau2_valeur{#CLE, section_libelle})]</td>
-				    <td class='expl_situation'><strong>[(#GET{tab_exemplaires}|pmb_tableau2_valeur{#CLE, expl_situation})]</strong></td>
+				    <td class='expl_situation'><strong>[(#GET{tab_exemplaires}|pmb_tableau2_valeur{#CLE, expl_situation}|=={5}|?{'Sorti','Disponible'})]</strong></td>
+				    
+				
 			  </tr>
 
 		    </BOUCLE_tab_exemplaires>

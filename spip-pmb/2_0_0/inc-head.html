@@ -51,6 +51,8 @@
 			type: 'sequence', 
 			containerheight: '150px'
 		});
+		var maxheight=Math.max(parseInt($('#conteneur').height()),parseInt($('#navigation').height()));
+		$('#conteneur, #navigation').css('height', maxheight+'px');
 	});
 </script> 
 

@@ -10,15 +10,15 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-include_spip('inc/session');
 if (!defined("_ECRIRE_INC_VERSION")) return;
+include_spip('inc/session');
 
 	  
 	  error_reporting(E_ALL);
 // Authentifie via PMB et retourne la ligne SQL decrivant l'utilisateur si ok
 
 // http://doc.spip.org/@inc_auth_ldap_dist
-function auth_pmb_dist ($login, $pass) {
+function auth_pmb_dist ($login, $pass, $md5pass="", $md5next="") {
 
 	spip_log("pmb $login " . ($pass ? "mdp fourni" : "mdp absent"));
 	//connexion webservices pmb
@@ -27,7 +27,8 @@ function auth_pmb_dist ($login, $pass) {
 	// Securite 
 	if (!$login || !$pass) return array();
 
-
+spip_log("test1");
+		     
 	  
 
 	// Utilisateur connu ?
@@ -38,11 +39,11 @@ function auth_pmb_dist ($login, $pass) {
 		      // avec le statut par defaut a l'install
 		      // refuser d'importer n'importe qui 
 		      if (!$statut = $GLOBALS['pmb_statut_nouvel_auteur']) return array();
-
+		      spip_log("test2");
 
 		      if (!$resultpmb = $ws->pmbesOPACEmpr_get_account_info($session_id)) return array();  
 		      
-		    
+		      spip_log("test3");
 		      
 		      // Si l'utilisateur figure deja dans la base, y recuperer les infos
 		      if ($result = sql_fetsel("*", "spip_auteurs", "login=" . sql_quote($login) . " AND source='pmb'")) {
@@ -65,7 +66,7 @@ function auth_pmb_dist ($login, $pass) {
 				      'pmb_expiration_date' => importer_charset($resultpmb->expiration_date, 'utf-8')),
 				      "id_auteur=".$result['id_auteur']);
 
-
+			    spip_log("test4");
 			    return $result;
 		      }
 		      
@@ -85,7 +86,8 @@ function auth_pmb_dist ($login, $pass) {
 				      'bio' => $bio,
 				      'statut' => $statut,
 				      'pass' => ''));
-
+		       spip_log("Creation de l'auteur '$nom' dans spip_auteurs id->".$n);
+		     spip_log("test5");
 		     
 		      //renseigner les infos pmb de l'auteur
 		      $m = sql_insertq('spip_auteurs_pmb', array(
@@ -105,7 +107,8 @@ function auth_pmb_dist ($login, $pass) {
 				      'pmb_location_caption' => importer_charset($resultpmb->location_caption, 'utf-8'),
 				      'pmb_adhesion_date' => importer_charset($resultpmb->adhesion_date, 'utf-8'),
 				      'pmb_expiration_date' => importer_charset($resultpmb->expiration_date, 'utf-8')));
-
+		      spip_log("Creation de l'auteur '$nom' dans spip_auteurs_pmb id->".$m);
+		     spip_log("test6");
 		       if ($n)	return sql_fetsel("*", "spip_auteurs", "id_auteur=$n");
 
 

@@ -559,7 +559,9 @@ function pmb_parser_notice_apercu ($localdom, &$tresultat) {
 		if (($dernierTypeTrouve == "996") && ($dernierSousTypeTrouve == "e")) $gtresultat['tab_exemplaires'][$indice_exemplaire-1]['tdoc_libelle'] .= $texte;
 		if (($dernierTypeTrouve == "996") && ($dernierSousTypeTrouve == "v")) $gtresultat['tab_exemplaires'][$indice_exemplaire-1]['location_libelle'] .= $texte;
 		if (($dernierTypeTrouve == "996") && ($dernierSousTypeTrouve == "x")) $gtresultat['tab_exemplaires'][$indice_exemplaire-1]['section_libelle'] .= $texte;
-		if (($dernierTypeTrouve == "996") && ($dernierSousTypeTrouve == "1")) $gtresultat['tab_exemplaires'][$indice_exemplaire-1]['expl_situation'] .= $texte;
+		if (($dernierTypeTrouve == "996") && ($dernierSousTypeTrouve == "1")) $gtresultat['tab_exemplaires'][$indice_exemplaire-1]['empruntable'] .= $texte;
+		if (($dernierTypeTrouve == "996") && ($dernierSousTypeTrouve == "b")) $gtresultat['tab_exemplaires'][$indice_exemplaire-1]['expl_situation'] .= $texte;
+
 
 		
                 break;
