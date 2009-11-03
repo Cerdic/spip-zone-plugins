@@ -1,0 +1,32 @@
+<div class="formulaire_spip formulaire_tradlang_filtrer_traductions" id="formulaire_tradlang_filtrer_traductions">
+	<!-- <br class='bugajaxie' /> -->
+	[<p class='reponse_formulaire reponse_formulaire_ok'>(#ENV*{message_ok})</p>]
+	[<p class='reponse_formulaire reponse_formulaire_erreur'>(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			<li class="changer_module[(#ENV{erreurs}|table_valeur{module}|oui)erreur]">
+		    	<label><:tradlang:label_changer_module:></label>[
+				<span class="erreur_message">(#ENV{erreurs}|table_valeur{module})</span>]
+				<INCLURE{fond=noisettes/formulaires/tradlang_selecteur_module}{env}>
+		    </li>
+			<li class="changer_lang_orig[(#ENV{erreurs}|table_valeur{lang_orig}|oui)erreur]">
+		    	<label><:tradlang:label_changer_langue_orig:></label>[
+				<span class="erreur_message">(#ENV{erreurs}|table_valeur{lang_orig})</span>]
+				<INCLURE{fond=noisettes/formulaires/tradlang_selecteur_langue_module_dispo}{lang_exclue=#ENV{lang_orig}}{name=lang_orig}{option_vide=oui}{env}>
+		    </li>
+		    <li class="changer_lang_orig[(#ENV{erreurs}|table_valeur{lang_cible}|oui)erreur]">
+		    	<label><:tradlang:label_changer_langue_cible:></label>[
+				<span class="erreur_message">(#ENV{erreurs}|table_valeur{lang_cible})</span>]
+				<INCLURE{fond=noisettes/formulaires/tradlang_selecteur_langue_module_dispo}{lang_exclue=#ENV{lang_cible}}{name=lang_cible}{option_vide=oui}{env}>
+		    </li>
+		</ul>
+		<p class='boutons'>
+			<input type='submit' class='submit' value='<:bouton_valider:>' />
+		</p>
+	</div></form>
+	]
+</div>

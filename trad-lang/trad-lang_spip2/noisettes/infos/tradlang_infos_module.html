@@ -1,0 +1,38 @@
+<BOUCLE_module(TRADLANG_MODULES){nom_module=#ENV{module}}>
+#SET{str_mere,#ARRAY}
+<div>
+	<h3><:tradlang:infos_trad_module:></h3>
+<ul class="infos">
+<li class="odd">
+	<strong>[(#LANG_MERE|traduire_nom_langue)][ ((#LANG_MERE))] - <:tradlang:label_langue_mere:></strong>
+	<BOUCLE_langue_mere(TRADLANG){module}{lang=#LANG_MERE}{id != zz_timestamp_nepastraduire}>[(#SET{str_mere,[(#GET{str_mere}|push{#ID})]})] </BOUCLE_langue_mere>
+	#SET{total_mere,#TOTAL_BOUCLE}<p><:tradlang:items_total_nb:> : #TOTAL_BOUCLE</p>
+	</B_langue_mere>
+	<BOUCLE_total_item_langue_mere_new(TRADLANG){module}{status=NEW}{lang=#LANG}> </BOUCLE_total_item_langue_mere_new>
+	<p><:tradlang:items_new:> : #GRAND_TOTAL / #GET{total_mere}</p></B_total_item_langue_mere_new>
+	<BOUCLE_total_item_langue_mere_modif(TRADLANG){module}{status=MODIF}{lang=#LANG}> </BOUCLE_total_item_langue_mere_modif>
+	<p><:tradlang:items_modif:> : #GRAND_TOTAL / #GET{total_mere}</p></B_total_item_langue_mere_modif>
+</li>
+<BOUCLE_langues(TRADLANG){module}{fusion lang}{lang !IN #LANG_MERE,#ENV{lang_cible}}>
+#SET{str_cible,#ARRAY}
+#SET{total,0}
+<li class="[(#COMPTEUR_BOUCLE|alterner{even,odd})]">
+	<strong>[(#LANG|traduire_nom_langue)][ ((#LANG))]</strong>
+	<BOUCLE_total_item(TRADLANG){module}{lang=#LANG}{id != zz_timestamp_nepastraduire}>[(#SET{str_cible,#GET{str_cible}|push{#ID}})] </BOUCLE_total_item>
+	#SET{total,#TOTAL_BOUCLE}<p><:tradlang:items_total_nb:> : #TOTAL_BOUCLE</p></B_total_item>
+	<BOUCLE_total_item_new(TRADLANG){module}{status=NEW}{lang=#LANG}{id != zz_timestamp_nepastraduire}> </BOUCLE_total_item_new>
+	<p><:tradlang:items_new:> : #GRAND_TOTAL / #GET{total}[ ((#GRAND_TOTAL|div{#GET{total}}|mult{100}|round)%)]</p></B_total_item_new>
+	<BOUCLE_total_item_modif(TRADLANG){module}{status=MODIF}{lang=#LANG}> </BOUCLE_total_item_modif>
+	<p><:tradlang:items_modif:> : #GRAND_TOTAL / #GET{total}[ ((#GRAND_TOTAL|div{#GET{total}}|mult{100}|round)%)]</p></B_total_item_modif>
+	<BOUCLE_revise_inexistants(TRADLANG){module}{lang=#LANG_MERE}{!id IN #GET{str_cible}}> </BOUCLE_revise_inexistants>
+	[(#SET{nb_manquant,#TOTAL_BOUCLE})]
+	<p class="attention"><:tradlang:items_manquants{nb=#GET{nb_manquant}}:></p>
+	</B_revise_inexistants>
+	<BOUCLE_total_item_trop(TRADLANG){module}{lang=#LANG}{id != zz_timestamp_nepastraduire}{id !IN #GET{str_mere}}> </BOUCLE_total_item_trop>
+	#SET{nb_trop,#TOTAL_BOUCLE}
+	<p class="attention"><:tradlang:items_en_trop{nb=#GET{nb_trop}}:></p></B_total_item_trop>
+</li>
+</BOUCLE_langues>
+</ul>
+</div>
+</BOUCLE_module>

@@ -1,0 +1,100 @@
+<BOUCLE_langue_mere(TRADLANG_MODULES){nom_mod=#ENV{module}}>
+#SET{str_mere,#ARRAY}
+<BOUCLE_revise(TRADLANG){module}{lang=#LANG_MERE}{id != zz_timestamp_nepastraduire}{par id}>[(#SET{str_mere,[(#GET{str_mere}|push{#ID})]})] </BOUCLE_revise>
+#SET{total_mere,#GRAND_TOTAL}
+<p><:tradlang:nb_items_langue_mere{nb=#GET{total_mere}}:></p>
+</B_revise>
+
+#SET{str_cible,#ARRAY}
+<B_revise_cible>
+#SET{total,#GRAND_TOTAL}
+<p><:tradlang:nb_items_langue_cible{nb=#GET{total},langue=#ENV{lang_cible}}:></p>
+<table class="liste_traductions">
+	<thead>
+		<tr>
+			<th>
+				<:tradlang:codelangue:>
+			</th>
+			<th>
+				<:tradlang:traduction{lang=#ENV{lang_orig}}:>
+			</th>
+			<th>
+				<:tradlang:traduction{lang=#ENV{lang_cible}}:>
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+	[(#REM)on n'affiche que les id qui existent dans la langue mère] 
+	<BOUCLE_revise_cible(TRADLANG){module}{lang=#ENV{lang_cible}}{id IN #GET{str_mere}}>
+	#SET{str_cible,#GET{str_cible}|push{#ID}}
+	<tr class="[(#COMPTEUR_BOUCLE|alterner{odd,even})]">
+		<td>#ID</td>
+		<BOUCLE_revise_orig(TRADLANG){module}{lang=#ENV{lang_orig}}{id=#ID}>
+		<td>[&lt;(#STATUS)&gt; ][(#STR**)]</td>
+		</BOUCLE_revise_orig>
+		<td><:tradlang:str_existe_plus:></td>
+		<//B_revise_orig>
+		<td class="#EDIT{str_statut}">[&lt;(#STATUS)&gt; ][(#STR**)]</td>
+	</tr>
+	</BOUCLE_revise_cible>
+	</tbody>
+</table>
+</B_revise_cible>
+<//B_revise_cible>
+
+[(#REM) On affiche les id qui n'existent pas dans la langue cible]
+<B_revise_inexistants>
+#SET{total_inexistants,#GRAND_TOTAL}
+<p><:tradlang:nb_items_langue_inexistants{nb=#GET{total_inexistants},langue=#ENV{lang_cible}}:></p>
+<table class="liste_traductions">
+	<thead>
+		<tr>
+			<th>
+				<:tradlang:codelangue:>
+			</th>
+			<th>
+				<:tradlang:traduction{lang=#ENV{lang_orig}}:>
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_revise_inexistants(TRADLANG){module}{lang=#LANG_MERE}{id !IN #GET{str_cible}}>
+	<tr class="[(#COMPTEUR_BOUCLE|alterner{odd,even})]">
+		<td>#ID</td>
+		<BOUCLE_revise_inexistants_orig(TRADLANG){module}{lang=#ENV{lang_orig}}{id=#ID}>
+		<td>[&lt;(#STATUS)&gt; ][(#STR**)]</td>
+		</BOUCLE_revise_inexistants_orig>
+		<td><:tradlang:str_existe_pas_in_langue:></td>
+		<//B_revise_inexistants_orig>
+	</tr>
+	</BOUCLE_revise_inexistants>
+	</tbody>
+</table>
+</B_revise_inexistants>
+
+[(#REM) On affiche les id qui n'existent pas dans la langue cible]
+<B_revise_en_trop>
+#SET{total_en_trop,#GRAND_TOTAL}
+<p><:tradlang:nb_items_langue_en_trop{nb=#GET{total_en_trop},langue=#ENV{lang_cible}}:></p>
+<table class="liste_traductions">
+	<thead>
+		<tr>
+			<th>
+				<:tradlang:codelangue:>
+			</th>
+			<th>
+				<:tradlang:traduction{lang=#ENV{lang_cible}}:>
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_revise_en_trop(TRADLANG){module}{lang=#ENV{lang_cible}}{!id IN #GET{str_mere}}>
+	<tr class="[(#COMPTEUR_BOUCLE|alterner{odd,even})]">
+		<td>#ID</td>
+		<td>[&lt;(#STATUS)&gt; ][(#STR**)]</td>
+	</tr>
+	</BOUCLE_revise_en_trop>
+	</tbody>
+</table>
+</B_revise_en_trop>
+</BOUCLE_langue_mere>

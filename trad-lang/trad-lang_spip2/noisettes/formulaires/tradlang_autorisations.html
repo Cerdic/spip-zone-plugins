@@ -1,0 +1,62 @@
+[(#SET{legendes,[(#ARRAY{0,<:tradlang:cfg_legend_autorisation_configurer:>,1,<:tradlang:cfg_legende_autorisation_modifier:>,2,<:tradlang:cfg_legende_autorisation_voir:>})]})]
+#SET{prefixes,#ARRAY{0,configurer_,1,modifier_,2,voir_}}
+<B_bloc_autorisation>
+<ul>
+	<BOUCLE_bloc_autorisation(POUR){tableau #GET{legendes}}>
+	#SET{prefixe, #GET{prefixes}|table_valeur{#CLE}}
+	<li class="fieldset">
+		<fieldset>
+			<h3 class="legend">#VALEUR</h3>
+			<ul>
+			[(#REM) <!-- Choix de la methode d'autorisation --> ]
+				[(#SAISIE{radio, [(#GET{prefixe})]type,
+					label=<:tradlang:cfg_lbl_type_autorisation:>,
+					explication=<:tradlang:cfg_inf_type_autorisation:>,
+					datas=#ARRAY{
+						webmestre,<:tradlang:cfg_lbl_autorisation_webmestre:>,
+						par_statut,<:tradlang:cfg_lbl_autorisation_statuts:>,
+						par_auteur,<:tradlang:cfg_lbl_autorisation_auteurs:>},
+					defaut=webmestre})]
+			</ul>
+			[(#REM) <!-- Methode par statut d'auteurs (choix multiple) --> ]
+			<ul id="[(#GET{prefixe})]bloc_par_statut" class="[(#GET{prefixe})]bloc">
+	
+				[(#SAISIE{statuts_auteurs,[(#GET{prefixe})]statuts,
+					label=<:tradlang:cfg_lbl_statuts_auteurs:>,
+					afficher_tous=oui,
+					multiple=oui})]
+			</ul>
+			[(#REM) <!-- Methode par id d'auteurs (choix multiple) --> ]
+			<ul id="[(#GET{prefixe})]bloc_par_auteur" class="[(#GET{prefixe})]bloc">
+				[(#SAISIE{auteurs,[(#GET{prefixe})]auteurs,
+					label=<:tradlang:cfg_lbl_liste_auteurs:>,
+					multiple=oui,
+					option_statut=oui})]
+			</ul>
+			<script type="text/javascript">
+			//<![CDATA[
+				jQuery(document).ready(function() {
+					// on cache tous les blocs du meme prefixe
+					jQuery(".[(#GET{prefixe})]bloc").hide();
+					//on recupere la valeur de celui qui est deja selectionne
+					var checked = jQuery("input[name='[(#GET{prefixe})]type']:checked").val();
+					// pour l'afficher
+					jQuery("#[(#GET{prefixe})]bloc_"+checked).show();
+					// si une checkbox change
+					jQuery("input[name='[(#GET{prefixe})]type']").change(function() {
+						var inputval = $(this).val();
+						// on cache tous les blocs du meme prefixe
+						jQuery(".[(#GET{prefixe})]bloc").fadeOut('slow',function(){
+							// pour afficher celui qui correspond a la checkbox selectionnee
+							jQuery("#[(#GET{prefixe})]bloc_"+inputval).fadeIn();
+						});
+						jQuery(this).blur();
+					});
+				});
+			//]]>
+			</script>
+		</fieldset>
+	</li>
+	</BOUCLE_bloc_autorisation>
+</ul>
+</B_bloc_autorisation>

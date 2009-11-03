@@ -1,0 +1,27 @@
+[(#REM)
+
+	Controleur pour le crayon 'str_statut' , uniquement html
+
+]
+#CACHE{0}
+<B_a>
+<fieldset style="width:#ENV{largeur}px;#ENV{style}">
+<ul>
+<BOUCLE_a(TRADLANG){id_tradlang}>
+<li class="editer_status">
+	<label><:tradlang:label_tradlang_status:></label>
+	<select class="text crayon_active" name="#ENV{name_status}">
+		<option value=""[(#STATUS|=={''}|oui)selected="selected"]><:tradlang:str_status_traduit:></option>
+		<option value="NEW"[(#STATUS|=={NEW}|oui)selected="selected"]><:tradlang:str_status_new:></option>
+		<option value="MODIF"[(#STATUS|=={MODIF}|oui)selected="selected"]><:tradlang:str_status_modif:></option>
+	</select>
+</li>
+<li class="editer_str">
+	<label><:tradlang:label_tradlang_str:></label>
+	<input class="crayon-active" name="#ENV{name_str}"
+	 style="width:#ENV{largeur}px; height:#ENV{hauteur}px;#ENV{style}" value="[(#STR**|entites_html)]" />
+</li>
+</BOUCLE_a>
+</ul>
+</fieldset>
+</B_a>
