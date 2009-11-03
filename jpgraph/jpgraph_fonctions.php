@@ -168,7 +168,7 @@ function filtre_jpgraph($str,
 				default: $plot->mark->SetType(MARK_SQUARE); break;
 			}
 		}
-		if ($marqueur['couleur']) $plot->mark->SetColor($marqueur['couleur']);
+		if ($marqueur['contour']) $plot->mark->SetColor($marqueur['contour']);
 		if ($marqueur['fond']) $plot->mark->SetFillColor($marqueur['fond']);
 		if ($marqueur['epaisseur'])$plot->mark->SetWidth($marqueur['epaisseur']);
 		$graph->title->Set(utf8_decode($titre));
@@ -196,7 +196,7 @@ function filtre_jpgraph($str,
 			}
 		}
 		if ($marqueur['epaisseur'])$plot->mark->SetWidth($marqueur['epaisseur']);
-		if ($marqueur['couleur']) $plot->mark->SetColor($marqueur['couleur']);
+		if ($marqueur['contour']) $plot->mark->SetColor($marqueur['contour']);
 		if ($marqueur['fond']) $plot->mark->SetFillColor($marqueur['fond']);
 		if ($couleur['contour']) $plot->SetColor($couleur['contour']);
 		if ($legendetrois[0]) $graph->xaxis->title->Set($legendetrois[0]);
@@ -217,9 +217,20 @@ function filtre_jpgraph($str,
                       			if ($couleur['fond']) $plot->SetFillColor($couleur['fond']);
                       			// L'epaisseur est sorti du modele, voir comment reintegrer ulterieurement
                       			//   if ($epaisseur) $plot->SetWeight($epaisseur);
-                      			if (isset($marqueur_formes[$marqueur['nom']])) 
-                  			                         $plot->mark->SetType($marqueur_formes[$marqueur['nom']]); 
-                      			if ($marqueur['couleur']) $plot->mark->SetColor($marqueur['couleur']);
+                      			if (isset($marqueur['nom'])) {
+						switch ($marqueur['nom']) {
+							case "triangle": $plot->mark->SetType(MARK_UTRIANGLE); break;
+							case "triangle_bas": $plot->mark->SetType(MARK_DTRIANGLE); break;
+							case "losange": $plot->mark->SetType(MARK_DIAMOND); break;
+							case "cercle": $plot->mark->SetType(MARK_CIRCLE); break;
+							case "disque": $plot->mark->SetType(MARK_FILLEDCIRCLE); break;
+							case "croix": $plot->mark->SetType(MARK_CROSS); break;
+							case "croix_x": $plot->mark->SetType(MARK_X); break;
+							case "etoile": $plot->mark->SetType(MARK_STAR); break;
+							default: $plot->mark->SetType(MARK_SQUARE); break;
+						}
+					}
+                      			if ($marqueur['contour']) $plot->mark->SetColor($marqueur['contour']);
                       			if ($marqueur['fond']) $plot->mark->SetFillColor($marqueur['fond']);
                       			if ($marqueur['epaisseur'])$plot->mark->SetWidth($marqueur['epaisseur']);
 					if ($option['histogramme']) $plot->SetStepStyle();
@@ -233,9 +244,20 @@ function filtre_jpgraph($str,
 				if ($couleurtrois['fond']) $plot3->SetFillColor($couleurtrois['fond']);
 				// L'epaisseur est sorti du modele, voir comment reintegrer ulterieurement
 				//   if ($epaisseur) $plot->SetWeight($epaisseur);
-				if (isset($marqueur_formes[$marqueurtrois['nom']])) 
-					$plot3->mark->SetType($marqueur_formes[$marqueurtrois['nom']]);
-				if ($marqueurtrois['couleur']) $plot3->mark->SetColor($marqueurtrois['couleur']);
+				if (isset($marqueurtrois['nom'])) {
+					switch ($marqueurtrois['nom']) {
+						case "triangle": $plot3->mark->SetType(MARK_UTRIANGLE); break;
+						case "triangle_bas": $plot3->mark->SetType(MARK_DTRIANGLE); break;
+						case "losange": $plot3->mark->SetType(MARK_DIAMOND); break;
+						case "cercle": $plot3->mark->SetType(MARK_CIRCLE); break;
+						case "disque": $plot3->mark->SetType(MARK_FILLEDCIRCLE); break;
+						case "croix": $plot3->mark->SetType(MARK_CROSS); break;
+						case "croix_x": $plot3->mark->SetType(MARK_X); break;
+						case "etoile": $plot3->mark->SetType(MARK_STAR); break;
+						default: $plot3->mark->SetType(MARK_SQUARE); break;
+					}
+				}
+				if ($marqueurtrois['contour']) $plot3->mark->SetColor($marqueurtrois['contour']);
 				if ($marqueurtrois['fond']) $plot3->mark->SetFillColor($marqueurtrois['fond']);
 				if ($marqueurtrois['epaisseur'])$plot3->mark->SetWidth($marqueurtrois['epaisseur']);
 				if ($option['histogramme']) $plot3->SetStepStyle();
@@ -250,9 +272,20 @@ function filtre_jpgraph($str,
 				if ($couleurdeux['fond']) $plot2->SetFillColor($couleurdeux['fond']);
 				// L'epaisseur est sorti du modele, voir comment reintegrer ulterieurement
 				//   if ($epaisseur) $plot->SetWeight($epaisseur);
-				if (isset($marqueur_formes[$marqueurdeux['nom']])) 
-					$plot2->mark->SetType($marqueur_formes[$marqueurdeux['nom']]);
-				if ($marqueurdeux['couleur']) $plot2->mark->SetColor($marqueurdeux['couleur']);
+				if (isset($marqueurdeux['nom'])) {
+					switch ($marqueurdeux['nom']) {
+						case "triangle": $plot2->mark->SetType(MARK_UTRIANGLE); break;
+						case "triangle_bas": $plot2->mark->SetType(MARK_DTRIANGLE); break;
+						case "losange": $plot2->mark->SetType(MARK_DIAMOND); break;
+						case "cercle": $plot2->mark->SetType(MARK_CIRCLE); break;
+						case "disque": $plot2->mark->SetType(MARK_FILLEDCIRCLE); break;
+						case "croix": $plot2->mark->SetType(MARK_CROSS); break;
+						case "croix_x": $plot2->mark->SetType(MARK_X); break;
+						case "etoile": $plot2->mark->SetType(MARK_STAR); break;
+						default: $plot2->mark->SetType(MARK_SQUARE); break;
+					}
+				}
+				if ($marqueurdeux['contour']) $plot2->mark->SetColor($marqueurdeux['contour']);
 				if ($marqueurdeux['fond']) $plot2->mark->SetFillColor($marqueurdeux['fond']);
 				if ($marqueurdeux['epaisseur'])$plot2->mark->SetWidth($marqueurdeux['epaisseur']);
 				if ($option['histogramme']) $plot2->SetStepStyle();
