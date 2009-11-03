@@ -1,5 +1,6 @@
-<BOUCLE_auteurs(AUTEURS_ELARGIS_ABONNEMENTS ABONNEMENTS){id_auteur}{id_abonnement!=''}{tout}>
-	<h2 class='titrem'><:abo:abonnement:></h2>
+<B_actifs>
+<h2 class='titrem'><:abo:abonnements:></h2>
+<BOUCLE_actifs(AUTEURS_ELARGIS_ABONNEMENTS ABONNEMENTS){id_auteur}{id_abonnement!=''}{validite>#DATE}>
 	<div class='nettoyeur'></div>
 	<div id='abo_infos_voir_supp'>
 	<BOUCLE_abo(ABONNEMENTS){id_abonnement}>
@@ -7,4 +8,15 @@
 	</BOUCLE_abo> 
 	<p><strong><:abo:echeance:></strong> : [(#VALIDITE|affdate)]</p>
 	</div>
-</BOUCLE_auteurs>
+</BOUCLE_actifs>
+<B_echus>
+<h2 class='titrem'><:abo:abonnements_echus:></h2>
+<BOUCLE_echus(AUTEURS_ELARGIS_ABONNEMENTS ABONNEMENTS){id_auteur}{id_abonnement!=''}{validite<#DATE}>
+	<div class='nettoyeur'></div>
+	<div id='abo_infos_voir_supp'>
+	<BOUCLE_lib(ABONNEMENTS){id_abonnement}>
+	<p><strong><:abo:abonnement:></strong> : #LIBELLE</p>
+	</BOUCLE_lib> 
+	<p><strong><:abo:echeance:></strong> : [(#VALIDITE|affdate)]</p>
+	</div>
+</BOUCLE_echus>

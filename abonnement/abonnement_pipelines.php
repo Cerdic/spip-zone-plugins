@@ -11,6 +11,102 @@ function abonnement_affiche_milieu($flux){
 }
 
 
+/**
+ *
+ * Insertion dans le pipeline editer_contenu_objet
+ * Ajoute les champs I2 sur le formulaire CVT editer_auteur
+ *
+ * @return array Le $flux complété
+ * @param array $flux
+ */
+function abonnement_editer_contenu_objet($flux){
+
+	if ($flux['args']['type']=='auteur') {
+		include_spip('public/assembler');
+		/**
+		 *
+		 * Insertion des champs dans le formulaire aprs le textarea PGP
+		 *
+		 */
+		//spip_log($flux['args'], "tamere");
+		$abonnement = recuperer_fond('prive/abonnement_fiche_modif',array('id_auteur'=>$flux['args']['id']));
+
+		$flux['data'] = preg_replace('%(<li class="editer_pgp(.*?)</li>)%is', '$1'."\n".$abonnement, $flux['data']);
+	}
+	return $flux;
+}
+
+
+/**
+ *
+ * Insertion dans le pipeline post_edition
+ * ajouter les champs inscription2 soumis lors de la soumission du formulaire CVT editer_auteur
+ *
+ * @return
+ * @param object $flux
+ */
+function abonnement_post_edition($flux){
+	// va savoir pourquoi ce truc est appelé trois fois quand on valide le form...
+	if ($flux['args']['table']=='spip_auteurs') {
+		spip_log('ABONNEMENT : abonnement_post_edition','abonnement');
+		$id_auteur = $flux['args']['id_objet'];
+		
+		$abonnements = _request('abonnements') ;
+		$echeances = _request('validites') ;
+				
+			foreach($abonnements as $key => $id_abonnement)	{
+			  if($echeances[$key])	
+				if (($id = sql_getfetsel('id_auteur','spip_auteurs_elargis_abonnements','id_auteur='.$id_auteur.' and id_abonnement='.sql_quote($id_abonnement).' and validite > NOW()'))){
+				
+				sql_updateq("spip_auteurs_elargis_abonnements",array('validite'=>$echeances[$key]),'id_auteur='.$id_auteur.' and id_abonnement='.sql_quote($id_abonnement).' and validite > NOW()');
+				
+				}
+				
+				if($id_abonnement!='non' and !$echeances[$key]){
+				
+					// abonnement non trouve ?
+					$abonnement = sql_fetsel('*', 'spip_abonnements', 'id_abonnement = ' . $id_abonnement);
+					if (!$abonnement) {
+						spip_log("abonnement $id_abonnement inexistant");
+						die("abonnement $id_abonnement inexistant");
+					}
+					
+					$date = date('Y-m-d H:i:s');
+					
+					// jour
+					if ($abonnement['pediode'] == 'jours') {
+						$validite = date('Y-m-d H:i:s', mktime(date('H'),date('i'),date('s'),date('n'),date('j')+$abonnement['duree'],date('Y')));
+					}
+					// ou mois
+					else {
+						$validite = date('Y-m-d H:i:s', mktime(date('H'),date('i'),date('s'),date('n')+$abonnement['duree'],date('j'),date('Y')));
+					}
+					
+					// attention au triple appel
+					if ((!$id = sql_getfetsel('id_auteur','spip_auteurs_elargis_abonnements','id_auteur='.$id_auteur.' and id_abonnement='.sql_quote($id_abonnement).' and validite > NOW()')))
+						sql_insertq("spip_auteurs_elargis_abonnements",array('id_auteur'=> $id_auteur,'id_abonnement'=> $id_abonnement,'date'=>$date,'validite'=>$validite,'statut_paiement'=>'ok','montant'=>$abonnement['montant']));
+				
+				}
+		
+		
+			}	
+		
+		
+		// Notifications, gestion des revisions, reindexation...
+		pipeline('post_edition',
+			array(
+				'args' => array(
+					'table' => 'spip_auteurs_elargis',
+					'id_objet' => $id_auteur
+				),
+				'data' => $auteur
+			)
+		);
+	}
+
+	return $flux;
+}
+
 function abonnement_i2_cfg_form($flux) {
     $flux .= recuperer_fond('fonds/inscription2_abonnement');
 	return $flux;

@@ -2,6 +2,8 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// Exec abonnements
 	"abonnements" => "Abonnements",
+	"abonnements_echus" => "Abonnements &eacute;chus",
+	"ajouter_un_abonnement"=>"Ajouter un abonnement",
 	"liste_des_abonnements" => "Liste des abonnements",
 	"statistiques" => "Statistiques des abonnements",
 	

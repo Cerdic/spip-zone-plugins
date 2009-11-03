@@ -1,0 +1,30 @@
+<li class="editer_inscription2 fieldset">
+<fieldset>
+<h3 class='legend'><:abo:abonnements:></h3>
+<B_actifs>
+<ul>
+<BOUCLE_actifs(AUTEURS_ELARGIS_ABONNEMENTS ABONNEMENTS){id_auteur}{id_abonnement!=''}{validite>#DATE}>
+	<BOUCLE_abo(ABONNEMENTS){id_abonnement}>
+	<li><label><:abo:abonnement:></label></li>
+	<input type="hidden" value="#ID_ABONNEMENT" name="abonnements[]">#LIBELLE</option>
+	</li>
+	</BOUCLE_abo> 
+	<li><label><:abo:echeance:></label> 
+	<input type="text" value="[(#VALIDITE)]" name="validites[]" />
+	</li>
+</BOUCLE_actifs>
+</ul>
+</B_actifs>
+<ul>
+<li>
+<label><:abo:ajouter_un_abonnement:></label>
+<select name="abonnements[]">
+		<option value="non">Aucun</option>
+		<BOUCLE_lesabos(ABONNEMENTS)>
+		<option value="#ID_ABONNEMENT">#LIBELLE</option>
+		</BOUCLE_lesabos>
+</select>
+</li>
+</ul>
+</fieldset>
+</li>

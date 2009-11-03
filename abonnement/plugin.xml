@@ -61,6 +61,14 @@
 		<nom>affiche_milieu</nom>
 		<inclure>abonnement_pipelines.php</inclure>
 	</pipeline>
+	<pipeline>
+		<nom>editer_contenu_objet</nom>
+		<inclure>abonnement_pipelines.php</inclure>
+	</pipeline>
+ 	<pipeline>
+		<nom>post_edition</nom>
+		<inclure>abonnement_pipelines.php</inclure>
+	</pipeline>
 	<bouton id='abonnements' parent='configuration'>
 		<icone>img/abonnement_22.png</icone>
 		<titre>abo:abonnements</titre>
