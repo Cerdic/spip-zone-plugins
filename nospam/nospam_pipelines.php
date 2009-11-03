@@ -105,6 +105,18 @@ function nospam_pre_edition($flux){
 			$email = strlen($flux['data']['email_auteur']) ? " OR email_auteur=".sql_quote($flux['data']['email_auteur']):"";
 			$spammeur_connu = (sql_countsel('spip_forum','(ip='.sql_quote($GLOBALS['ip'])."$email) AND statut='spam'")>0);
 
+			// si c'est un spammeur connu,
+			// verifier que cette ip n'en est pas a son N-ieme spam en peu de temps
+			// a partir d'un moment on refuse carrement le spam massif
+			if ($spammeur_connu){
+				// plus de 10 spams dans les dernieres 2h, faut se calmer ...
+				if (($nb=sql_countsel('spip_forum','statut=\'spam\' AND (ip='.sql_quote($GLOBALS['ip']).$email.') AND maj>DATE_SUB(NOW(),INTERVAL 120 minute)'))>10){
+					$flux['data']['statut']=''; // on n'en veut pas !
+					spip_log("[Refuse] $nb spam pour (ip=".$GLOBALS['ip']."$email) dans les 2 dernieres heures",'nospam');
+					return $flux;
+				}
+			}
+
 			// si c'est un message bourre de liens, on le modere
 			// le seuil varie selon le champ et le fait que le spammeur est deja connu ou non
 			$seuils = array(
