@@ -454,6 +454,8 @@ function safehtml($t) {
 	if (strpos($t,'<')===false)
 		return str_replace("\x00", '', $t);
 
+	if (null!==$W=cache_me())return$W;
+
 	$t = interdire_scripts($t); // jolifier le php
 	$t = echappe_js($t);
 
@@ -900,6 +902,17 @@ define('_RACCOURCI_BALISE', ",</?[a-z!][^<>]*[".preg_quote(_RACCOURCI_PROTEGER).
 // Nettoie un texte, traite les raccourcis autre qu'URL, la typo, etc.
 // http://doc.spip.org/@traiter_raccourcis
 function traiter_raccourcis($letexte) {
+	list($letexte, $GLOBALS['les_notes']) = traiter_raccourcis2(
+		$letexte,
+		$GLOBALS['spip_lang'],
+		$GLOBALS['les_notes'],
+		$GLOBALS['meta']['derniere_modif']
+	);
+	return $letexte;
+}
+
+function traiter_raccourcis2($letexte) {
+	if (null!==$W=cache_me())return$W;
 
 	// Appeler les fonctions de pre_traitement
 	$letexte = pipeline('pre_propre', $letexte);
@@ -957,7 +970,7 @@ function traiter_raccourcis($letexte) {
 
 	if ($mes_notes) $notes($mes_notes);
 
-	return $letexte;
+	return array($letexte, $GLOBALS['les_notes']);
 }
 
 
