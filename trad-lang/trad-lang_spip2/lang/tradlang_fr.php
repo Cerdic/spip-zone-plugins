@@ -28,6 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_restaurer' => 'Restaurer',
 	'bouton_revenir2' => 'Revenir',
 	'bouton_revenir_2' => 'Revenir',
+	'bouton_supprimer_module' => 'Supprimer ce module',
 	'bouton_telecharger' => 'T&eacute;l&eacute;charger >>',
 	'bouton_traduire' => 'Traduire >>',
 	'bouton_valider' => 'Valider',
@@ -69,8 +70,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'gestion_des_traductions' => 'Gestion des traductions',
 	
 	// I
-	'idmodule' => 'ID du module',
-	'importermodule' => 'Importer module',
+	'importermodule' => 'Importer un module',
+	'importer_module' => 'Importation de nouveau module de langue',
 	'importer_module_etape' => 'Importation de nouveau module de langue,  &eacute;tape @etape@',
 	'infos_trad_module' => 'Informations sur les traductions',
 	'insertionlangue' => 'Insertion langue',
@@ -99,6 +100,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_changer_langue_orig' => 'Changer de langue d\'origine',
 	'label_changer_langue_cible' => 'Changer de langue cible',
 	'label_choisir_module_langue' => 'Choisir un module de langue',
+	'label_idmodule' => 'ID du module',
 	'label_langue_mere' => 'Langue m&egrave;re',
 	'label_langues_dispo_module_langue' => 'Langues d&eacute;j&agrave; disponibles pour ce module',
 	'label_nommodule' => 'Personnaliser le nom du module',
@@ -123,6 +125,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_traduction_vers' => ' vers ',
 	
 	// M
+	'message_module_langue_ajoutee' => 'La langue "@langue@" a &eacute;t&eacute; ajout&eacute;e au module "@module@".',
+	'message_module_updated' => 'Le module de langue "@module@" a &eacute;t&eacute; mis &agrave; jour.',
+	'message_suppression_module_ok' => 'Le module @module@ a &eacute;t&eacute; supprim&eacute;.',
+	'message_suppression_module_trads_ok' => 'Le module @module@ a &eacute;t&eacute; supprim&eacute;. @nb@ items de traductions lui appartenant ont &eacute;t&eacute; &eacute;galement supprim&eacute;s.',
 	'module_deja_importe' => 'Le module "@module@" est d&eacute;j&agrave; import&eacute;',
 	'moduletitre' => 'Modules disponibles',
 	'modulespresents' => 'Les fichiers de langue pr&eacute;sents dans ce r&eacute;pertoire',
@@ -137,7 +143,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// R
 	'readme' => 'Ce plugin permet de g&eacute;rer les fichiers langues',
 	'repertoirelangue' => 'Choix du r&eacute;pertoire langue',
-	'repertoirelangue2' => 'R&eacute;pertoire langue',
 	
 	// S
 	'sel_langue_cible' => 'La langue cible',

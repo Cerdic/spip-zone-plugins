@@ -14,30 +14,42 @@
  * @param object $module
  * @return 
  */
-function inc_tradlang_importer_module($module){
+function inc_tradlang_importer_module($module,$dir_lang=false,$new_only=false){
 	include_spip('inc/texte');
 	include_spip('inc/lang_liste');
 	$ret = '';
 
-	list($select_modules, $tous_modules) = tradlang_select_liste_rep_lang();
-	
 	/**
-	 * Insertion du module dans la base
+	 * On ne fournit pas de dir_lang donc on se base sur les fichiers du path
 	 */
-	$res = sql_insertq("spip_tradlang_modules",$module);
+	if(!$dir_lang){
+		list($select_modules, $tous_modules) = tradlang_select_liste_rep_lang();
+		$nom_mod = $module['nom_mod'];
+		$module_choisi = $tous_modules[$nom_mod];
+		$langues_module = explode(',',$module_choisi['langues']);
+	}
 	
-	if (!$res){
+	if(!($res = sql_getfetsel('idmodule','spip_tradlang_modules','nom_mod='.sql_quote($module['nom_mod'])))){
+		/**
+		 * Insertion du module dans la base
+		 */
+		$res = sql_insertq("spip_tradlang_modules",$module);
+		$mode = 'new';	
+	}else{
+		$mode = 'update';
+	}
+	
+	if ($new_only){
 		$ret .= propre(_T('tradlang:module_deja_importe',array('module'=>$module['nom_module'])));
 		return array($ret,false);
 	}
-
-	$nom_mod = $module['nom_mod'];
-	$module_choisi = $tous_modules[$nom_mod];
-	$langues_module = explode(',',$module_choisi['langues']);
 	
 	/**
 	 * Insertion de chaque fichier de langue existant dans la base
 	 */
+	$liste_id_orig = array();
+	array_unshift($langues_module, $module['lang_mere']);
+	array_unique($langues_module);
 	foreach($langues_module as $langue){
 		if($langue){
 			$fichier = $module_choisi[$langue]['fichier'];
@@ -46,28 +58,108 @@ function inc_tradlang_importer_module($module){
 			if ($langue == $module['lang_mere'])
 				$orig = 1;
 				
-			$ret .= _T('tradlang:insertionlangue')." : ".$langue."...";
+			$ret .= _T('tradlang:insertionlangue')." : ".$langue."<br />";
 			$nom_fichier = $module['dir_lang']."/".$fichier;
+			
 			include($nom_fichier);
 			$chs = $GLOBALS[$GLOBALS['idx_lang']];
+			if (is_null($chs)) {
+				spip_log("Erreur, fichier $module mal forme\n","tradlang");
+				return false;
+			}
+			
 			reset($chs);
-			while(list($id, $str) = each($chs)){
-				$res = sql_insertq('spip_tradlang',array(
-					'id' => $id,
-					'module' => $module["nom_mod"],
-					'str' => $str,
-					'lang' => $langue,
-					'orig' => $orig
-				));
-				if ($res === false) {	
-					$ret .= mysql_error();
-					return array($ret,false);
+			
+			// nettoyer le contenu de ses <MODIF>
+			$status = array();
+			foreach($chs as $id=>$v) {
+				if (preg_match(',^<(MODIF|NEW|PLUS_UTILISE)>,US', $v, $r)) {
+					$chs[$id] = preg_replace(',^(<(MODIF|NEW|PLUS_UTILISE)>)+,US', '', $v);
+					$status[$id] = $r[1];
+				}
+				else
+					$status[$id] = '';
+			}
+			
+			$res = sql_select("id, str, md5","spip_tradlang","module=".sql_quote($nom_mod)." AND lang=".sql_quote($langue));
+			if($mode == 'update'){
+				if(sql_count($res)>0){
+					spip_log("Fichier de langue $langue du module $nom_mod deja inclus dans la base\n","tradlang");
 				}
 			}
-			$ret .= _T('tradlang:insertionlangueok')."<br />";
-		
-			unset($GLOBALS[$GLOBALS['idx_lang']]);
-		
+			$existant = array();
+			while ($t = sql_fetch($res))
+				$existant[$t['id']] = $t['md5'];
+				
+			$ajoutees = $inchangees = $supprimees = $modifiees = $ignorees = 0;
+			
+			// Dans ce qui arrive, il y a 4 cas :
+			foreach (array_unique(
+						array_merge(array_keys($existant), array_keys($chs))
+					) as $id) {
+				if (isset($chs[$id]) AND !isset($existant[$id])){
+					unset($md5);
+					if ($orig) {
+						$md5 = md5($chs[$id]);
+					} else if (!isset($liste_id_orig[$id])) {
+						spip_log("!-- Chaine $id inconnue dans la langue principale\n","tradlang");
+						$ignorees++;
+					} else {
+						$md5 = $liste_id_orig[$id];
+					}
+	
+					if (isset($md5)){
+						sql_insertq('spip_tradlang',array(
+							'id' => $id,
+							'module' => $module["nom_mod"],
+							'str' => $chs[$id],
+							'lang' => $langue,
+							'orig' => $orig,
+							'md5' => $md5,
+							'status' => $status[$id]
+						));
+						$ajoutees++;
+					}
+				}
+				else
+				// * chaine existante
+				if (isset($chs[$id]) AND isset($existant[$id])){
+					// * identique ? => NOOP
+					$md5 = md5($chs[$id]);
+					if ($md5 == $existant[$id]) {
+						$inchangees++;
+					}
+					// * modifiee ? => UPDATE
+					else {
+						// modifier la chaine
+						$md5_new = $orig ? $md5 : $existant[$id];
+						sql_updateq("spip_tradlang",array(
+							'str' => $str,
+							'md5' => $md5_new,
+							'status' => '',
+							), "module=".sql_quote($nom_mod)." AND lang=".sql_quote($langue)." AND id=".sql_quote($id));
+						
+						// signaler le status MODIF de ses traductions
+						if ($orig){
+							sql_updateq("spip_tradlang",array('status'=>'MODIF'),"module=".sql_quote($nom_mod)." AND id=".sql_quote($id)." AND md5 !=".sql_quote($md5));
+						}
+						
+						$modifiees++;
+					}
+				}
+				else
+				// * chaine supprimee
+				if (!isset($chs[$id]) AND isset($existant[$id])){
+					// mettre au grenier
+					sql_updateq("spip_tradlang",array(
+						'id' => $nom_mod.'_'.$id,
+						'module' => 'attic'),"id=".sql_quote($id)." AND module=".sql_quote($nom_mod));
+					$supprimees++;
+				}
+	
+				if ($orig AND isset($chs[$id]))
+					$liste_id_orig[$id]=md5($chs[$id]);
+			}
 			// si le fichier est inscriptible, on sauvegarde le
 			// fichier depuis la base afin de tagguer le timestamp
 			if ($fd = @fopen($nom_fichier, "a")){
@@ -75,6 +167,8 @@ function inc_tradlang_importer_module($module){
 				$sauvegarde = charger_fonction('tradlang_sauvegarde_module','inc');
 				$sauvegarde($module,$langue);
 			}
+			unset($GLOBALS[$GLOBALS['idx_lang']]);
+			$ret .= _T('tradlang:insertionlangueok')."<br />";
 		}
 	}
 	return array($ret,true);

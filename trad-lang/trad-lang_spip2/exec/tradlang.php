@@ -63,19 +63,11 @@ function exec_tradlang() {
 
 		switch ($operation){
 			case "importermodule":
-				tradlang_importermodule1();
+				tradlang_importermodule();
 				break;
 			case "visumodule":
 				tradlang_visumodule();
 				break;
-			case "ajouterlangue":
-				tradlang_visumodule();
-				break;
-			case "creermodule":
-				break;
-			case "popup":
-				ob_clean();
-				include("tradlang_popup.php");
 			exit;
 		}
 		echo pipeline('affiche_milieu',array('args'=>array('exec'=>'tradlang'),'data'=>''));
@@ -88,8 +80,8 @@ function exec_tradlang() {
  * 
  * @return 
  */
-function tradlang_importermodule1(){   
-	debut_cadre_relief("", false, "", _T('tradlang:importer_module_etape',array('etape'=>1)));
+function tradlang_importermodule(){   
+	debut_cadre_relief("", false, "", _T('tradlang:importer_module'));
 	echo recuperer_fond('prive/contenu/tradlang_importer_module',$_GET);
 	fin_cadre_relief();
 }
@@ -114,7 +106,7 @@ function tradlang_visumodule(){
 	
 	debut_cadre_relief("", false, "", _T('tradlang:visumodule'));
 	
-	echo recuperer_fond('prive/contenu/tradlang_ajout_codelangue',array('nom_mod'=>$module));
+	echo recuperer_fond('prive/contenu/tradlang_modifier_module',array('nom_mod'=>$module));
 	
 	fin_cadre_relief();
 	
