@@ -38,6 +38,8 @@ function public_produire_page($fond, $contexte, $use_cache, $chemin_cache, $cont
 	static $processing = false;
 	$background = false;
 
+	$is_main_url = (strncmp(url_de_base(),$GLOBALS['meta']['adresse_site'],strlen($GLOBALS['meta']['adresse_site']))==0);
+
 	// calcul differe du cache ?
 	// prend la main si
 	// - c'est un calcul normal avec mise en cache
@@ -48,6 +50,7 @@ function public_produire_page($fond, $contexte, $use_cache, $chemin_cache, $cont
 		AND is_array($page) AND count($page)
 		AND !$GLOBALS['visiteur_session']['id_auteur']
 		AND !$processing
+		AND $is_main_url
 		) {
 		// on differe la maj du cache et on affiche le contenu du cache ce coup ci encore
 		$where = is_null($contexte_cache)?"principal":"inclure_page";
@@ -62,7 +65,7 @@ function public_produire_page($fond, $contexte, $use_cache, $chemin_cache, $cont
 	if ($use_cache==2){
 		$cacher = charger_fonction('cacher','public');
 		$cacher($contexte_cache, $use_cache, $chemin2, $page, $lastmodified);
-		if (intval($use_cache)!==1 OR !$chemin2){
+		if (intval($use_cache)!==1 OR !$chemin2 OR !$is_main_url){
 			// on n'est pas dans le bon contexte, il faut se reprogrammer !
 			$where = is_null($contexte_cache)?"principal":"inclure_page";
 			$args = func_get_args();
