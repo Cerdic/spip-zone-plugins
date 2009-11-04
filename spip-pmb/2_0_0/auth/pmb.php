@@ -10,8 +10,8 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/session');
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 	  
 	  error_reporting(E_ALL);
@@ -75,7 +75,7 @@ spip_log("test1");
 		      include_spip('inc/charsets');
 		      $nom = importer_charset($resultpmb->personal_information->firstname." ".$result->personal_information->lastname, 'utf-8');
 		      $email = importer_charset($resultpmb->personal_information->email, 'utf-8');
-		      $login = strtolower(importer_charset($resultpmb->cb, 'utf-8'));
+		      //$login = strtolower(importer_charset($resultpmb->cb, 'utf-8'));
 		      $bio = '';
 
 		      $n = sql_insertq('spip_auteurs', array(
