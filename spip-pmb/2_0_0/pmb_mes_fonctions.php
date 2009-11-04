@@ -724,7 +724,7 @@ function pmb_ws_recuperer_tab_notices ($listenotices, &$ws, &$tresultat) {
 		
 
 	} catch (SoapFault $fault) {
-		print("Erreur : ".$fault->faultcode." : ".$fault->faultstring);
+		//print("Erreur : ".$fault->faultcode." : ".$fault->faultstring);
 	} 
 
 	
@@ -753,10 +753,12 @@ function pmb_prets_extraire ($session_id, $url_base, $type_pret=0) {
 	$tableau_resultat = Array();
 	pmb_ws_charger_wsdl($ws, $url_base);
 	$loans = $ws->pmbesOPACEmpr_list_loans($session_id, $type_pret);
+	$liste_notices = Array();
 	$cpt = 0;
 	foreach ($loans as $loan) {
 	      $tableau_resultat[$cpt] = Array();
 	      $tableau_resultat[$cpt]['empr_id'] = $loan->empr_id;
+	      $liste_notices[] = $loan->notice_id;
 	      $tableau_resultat[$cpt]['notice_id'] = $loan->notice_id;
 	      $tableau_resultat[$cpt]['bulletin_id'] = $loan->bulletin_id;
 	      $tableau_resultat[$cpt]['expl_id'] = $loan->expl_id;
@@ -769,7 +771,17 @@ function pmb_prets_extraire ($session_id, $url_base, $type_pret=0) {
 	      $tableau_resultat[$cpt]['expl_libelle'] = $loan->expl_libelle;
 	      $tableau_resultat[$cpt]['loan_startdate'] = $loan->loan_startdate;
 	      $tableau_resultat[$cpt]['loan_returndate'] = $loan->loan_returndate;
+	      
 	      $cpt++;
+	}
+	if ($cpt>0) {
+	      $tableau_resultat['notice_ids'] = Array();
+	      pmb_ws_recuperer_tab_notices($liste_notices, $ws, $tableau_resultat['notice_ids']);  
+	}
+	$cpt=0;
+	foreach($liste_notices as $notice) {
+	    $tableau_resultat['notice_ids'][$cpt]['id'] = $notice;
+	    $cpt++;
 	}
 
 	return $tableau_resultat;
@@ -779,13 +791,15 @@ function pmb_reservations_extraire($pmb_session, $url_base) {
 	$tableau_resultat = Array();
 	pmb_ws_charger_wsdl($ws, $url_base);
 	$reservations = $ws->pmbesOPACEmpr_list_resas($pmb_session);
-
+	$liste_notices = Array();
+	
 	$cpt = 0;
 	foreach ($reservations as $reservation) {
 	      $tableau_resultat[$cpt] = Array();
 	      $tableau_resultat[$cpt]['resa_id'] = $reservation->resa_id;
 	      $tableau_resultat[$cpt]['empr_id'] = $reservation->empr_id;
 	      $tableau_resultat[$cpt]['notice_id'] = $reservation->notice_id;
+	      $liste_notices[] = $reservation->notice_id;
 	      $tableau_resultat[$cpt]['bulletin_id'] = $reservation->bulletin_id;
 	      $tableau_resultat[$cpt]['resa_rank'] = $reservation->resa_rank;
 	      $tableau_resultat[$cpt]['resa_dateend'] = $reservation->resa_dateend;
@@ -794,7 +808,15 @@ function pmb_reservations_extraire($pmb_session, $url_base) {
 	   
 	      $cpt++;
 	}
-
+	if ($cpt>0) {
+	      $tableau_resultat['notice_ids'] = Array();
+	      pmb_ws_recuperer_tab_notices($liste_notices, $ws, $tableau_resultat['notice_ids']);  
+	}
+	$cpt=0;
+	foreach($liste_notices as $notice) {
+	    $tableau_resultat['notice_ids'][$cpt]['id'] = $notice;
+	    $cpt++;
+	}
 	return $tableau_resultat;
 
 }

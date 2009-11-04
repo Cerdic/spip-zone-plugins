@@ -37,7 +37,7 @@
 			  </thead>
 			  <tbody>
 			  <BOUCLE_tab_resultat(POUR){tableau #GET{tab_prets}}>
-			  [(#SET{notice, [(#GET{tab_prets}|pmb_tableau2_valeur{#CLE,'notice_id'}|pmb_notice_extraire{#CONFIG{spip_pmb/url},'force'})]})]
+			  [(#SET{notice, [(#GET{tab_prets}|pmb_tableau2_valeur{'notice_ids',#CLE})]})]
 			    
 			      <tr[ class="(#COMPTEUR_BOUCLE|modulo{2}|?{row_even,row_odd})"]>
 			      <td> [(#REM|?{'','<img />'}|inserer_attribut{class,spip_logos}|inserer_attribut{src,[(#GET{notice}|pmb_notice_champ{'logo_src'}|copie_locale)]}image_reduire{60,0})]
@@ -65,7 +65,7 @@
 			  </thead>
 			  <tbody>
 			  <BOUCLE_tab_resultat2(POUR){tableau #GET{tab_prets}}>
-			      [(#SET{notice, [(#GET{tab_prets}|pmb_tableau2_valeur{#CLE,'notice_id'}|pmb_notice_extraire{#CONFIG{spip_pmb/url},'force'})]})]
+			      [(#SET{notice, [(#GET{tab_prets}|pmb_tableau2_valeur{'notice_ids',#CLE})]})]
 			    
 			      <tr[ class="(#COMPTEUR_BOUCLE|modulo{2}|?{row_even,row_odd})"]>
 			      <td> [(#REM|?{'','<img />'}|inserer_attribut{class,spip_logos}|inserer_attribut{src,[(#GET{notice}|pmb_notice_champ{'logo_src'}|copie_locale)]}image_reduire{60,0})]
@@ -94,7 +94,7 @@
 			  </thead>
 			  <tbody>
 			  <BOUCLE_tab_resultat3(POUR){tableau #GET{tab_reservations}}>
-			    [(#SET{notice, [(#GET{tab_reservations}|pmb_tableau2_valeur{#CLE,'notice_id'}|pmb_notice_extraire{#CONFIG{spip_pmb/url},'force'})]})]
+			    [(#SET{notice, [(#GET{tab_reservations}|pmb_tableau2_valeur{'notice_ids',#CLE})]})]
 			    <tr[ class="(#COMPTEUR_BOUCLE|modulo{2}|?{row_even,row_odd})"]>
 				<td> [(#REM|?{'','<img />'}|inserer_attribut{class,spip_logos}|inserer_attribut{src,[(#GET{notice}|pmb_notice_champ{'logo_src'}|copie_locale)]}image_reduire{60,0})]
 				</td>
