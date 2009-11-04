@@ -11,7 +11,7 @@ function tradlang_declarer_tables_interfaces($interface){
 	
 	$interface['table_des_tables']['tradlang'] = 'tradlang';
 	$interface['table_des_tables']['tradlang_modules'] = 'tradlang_modules';
-	$interface['table_titre']['tradlang'] = "id AS titre, '' AS lang";
+	$interface['table_titre']['tradlang'] = "CONCAT(module,' : ',id,' ','[',lang,']') AS titre";
 	return $interface;
 }
 
