@@ -6,7 +6,7 @@
 	[<p class="reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	<p class="explication"><:notifications:evenement_notification:></p>
 	<form method="post" action="#ENV{action}"><div>
-		#ACTION_FORMULAIRE{SELF}
+		#ACTION_FORMULAIRE{#ENV{action}}
 		<ul>
 			[(#REM) ------------------------ ARTICLES PRIVES ------------------------ ]
 			<li class="fieldset">
@@ -33,13 +33,16 @@
 								<input type="checkbox" name="prevenir_auteurs" [checked="(#ENV{prevenir_auteurs}?{checked})"] id="prevenir_auteurs" class="checkbox" />
 								<label for="prevenir_auteurs"><:notifications:forums_public_auteurs:></label>
 							</div>
+						</li>
+						<li>
 							<div class="choix">
 								<input type="checkbox" name="thread_forum" [checked="(#ENV{thread_forum}?{checked})"] id="thread_forum" class="checkbox" />
 								<label for="thread_forum"><:notifications:forums_public_thread:></label>
 							</div>
 						</li>
 						<li>
-							<label for="moderateurs_forum"><:notifications:forums_public_moderateur:></label>
+							<label for="moderateurs_forum"><:notifications:moderateur:></label>
+							<p class="explication"><:notifications:forums_public_moderateur:></p>
 							<input type="text" name="moderateurs_forum" value="[(#ENV{moderateurs_forum}|entites_html)]" id="moderateurs_forum" class="text" />
 							<p class="explication"><:notifications:forums_public_a_noter:></p>
 						</li>
@@ -57,13 +60,16 @@
 								<input type="checkbox" name="prevenir_auteurs_prive" [checked="(#ENV{prevenir_auteurs_prive}?{checked})"] id="prevenir_auteurs_prive" class="checkbox" />
 								<label for="prevenir_auteurs_prive"><:notifications:forum_prives_auteur:></label>
 							</div>
+						</li>
+						<li>
 							<div class="choix">
 								<input type="checkbox" name="thread_forum_prive" [checked="(#ENV{thread_forum_prive}?{checked})"] id="thread_forum_prive" class="checkbox" />
 								<label for="thread_forum_prive"><:notifications:forum_prives_thread:></label>
 							</div>
 						</li>
 						<li>
-								<label for="moderateurs_forum_prive"><:notifications:forum_prives_moderateur:></label>
+								<label for="moderateurs_forum_prive"><:notifications:moderateur:></label>
+								<p class="explication"><:notifications:forum_prives_moderateur:></p>
 								<input type="text" name="moderateurs_forum_prive" value="[(#ENV{moderateurs_forum_prive}|entites_html)]" id="moderateurs_forum_prive" class="text" />
 						</li>
 					</ul>
@@ -91,7 +97,8 @@
 					<h3 class="legend"><:notifications:signature_petition:></h3>
 					<ul>
 						<li>
-							<label for="moderateurs_signatures"><:notifications:signature_petition_moderateur:></label>
+							<label for="moderateurs_signatures"><:notifications:moderateur:></label>
+							<p class="explication"><:notifications:signature_petition_moderateur:></p>
 							<input type="text" name="moderateurs_signatures" value="[(#ENV{moderateurs_signatures}|entites_html)]" id="moderateurs_signatures" class="text" />
 						</li>
 					</ul>
