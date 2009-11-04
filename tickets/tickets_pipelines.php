@@ -89,7 +89,8 @@ function tickets_objets_extensibles($objets){
 }
 
 /**
- * Insertion dans le pipeline revisions_infos_tables_versions (plugin revisions en 2.1)
+ * Insertion dans le pipeline gouverneur_infos_tables_versions 
+ * (utile pour le plugin revisions en 2.1)
  * Permet de gérer les révisions sur les tickets
  *
  * @param object $array
@@ -103,7 +104,7 @@ function tickets_gouverneur_infos_tables($array){
 								'texte_retour' => 'tickets:icone_retour_ticket',
 								'url_edit' => 'ticket_editer',
 								'texte_modifier' => 'tickets:icone_modifier_ticket',
-								'icone_objet' => 'ticket-24.png',
+								'icone_objet' => 'ticket',
 								'texte_unique' => 'tickets:ticket',
 								'texte_multiple' => 'tickets:tickets',
 								'champs_versionnes' => array('titre','exemple', 'texte')
