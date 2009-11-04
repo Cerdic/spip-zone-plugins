@@ -100,18 +100,8 @@ function filtre_jpgraph($str,
 	$marqueurtrois="",
 	$option="")
 {
-	
-	  // constantes
-	  $marqueur_formes = array("carre"=>MARK_SQUARE,
-                     "triangle"=>MARK_UTRIANGLE,
-                     "triangle_bas"=>MARK_DTRIANGLE,
-                     "losange"=>MARK_DIAMOND,
-                     "cercle"=>MARK_CIRCLE,
-                     "disque"=>MARK_FILLEDCIRCLE,
-                     "croix"=>MARK_CROSS,
-                     "croix_x"=>MARK_X,
-                     "etoile"=>MARK_STAR);
-   
+
+
     // traiter les parametres en entree
     $type_graphe = strtolower(trim($type_graphe));  // pour pb avec les modeles si du blanc en fin de ligne
     $donnee = jpgraph_traitement_donnees($donnee);
@@ -149,26 +139,25 @@ function filtre_jpgraph($str,
     }
     chdir($cwd);
     
+     // constantes
+	  $marqueur_formes = array("carre"=>MARK_SQUARE,
+                     "triangle"=>MARK_UTRIANGLE,
+                     "triangle_bas"=>MARK_DTRIANGLE,
+                     "losange"=>MARK_DIAMOND,
+                     "cercle"=>MARK_CIRCLE,
+                     "disque"=>MARK_FILLEDCIRCLE,
+                     "croix"=>MARK_CROSS,
+                     "croix_x"=>MARK_X,
+                     "etoile"=>MARK_STAR); 
+    
     
     // creation du graphe
     switch($type_graphe) {
         case "point": $graph = new Graph($largeur,$hauteur);
 		$graph->SetScale("linlin");
 		$plot = new ScatterPlot($donnee,$donneedeux);
-		// Bizarrement, le script de forme des marqueur est inopérant (marqueur invisible) pour les barres... On rétablit un test en dur qui fonctionne
-		if (isset($marqueur['nom'])) {
-			switch ($marqueur['nom']) {
-				case "triangle": $plot->mark->SetType(MARK_UTRIANGLE); break;
-				case "triangle_bas": $plot->mark->SetType(MARK_DTRIANGLE); break;
-				case "losange": $plot->mark->SetType(MARK_DIAMOND); break;
-				case "cercle": $plot->mark->SetType(MARK_CIRCLE); break;
-				case "disque": $plot->mark->SetType(MARK_FILLEDCIRCLE); break;
-				case "croix": $plot->mark->SetType(MARK_CROSS); break;
-				case "croix_x": $plot->mark->SetType(MARK_X); break;
-				case "etoile": $plot->mark->SetType(MARK_STAR); break;
-				default: $plot->mark->SetType(MARK_SQUARE); break;
-			}
-		}
+		if (isset($marqueur_formes[$marqueur['nom']])) 
+			$plot->mark->SetType($marqueur_formes[$marqueur['nom']]);
 		if ($marqueur['contour']) $plot->mark->SetColor($marqueur['contour']);
 		if ($marqueur['fond']) $plot->mark->SetFillColor($marqueur['fond']);
 		if ($marqueur['epaisseur'])$plot->mark->SetWidth($marqueur['epaisseur']);
@@ -182,20 +171,8 @@ function filtre_jpgraph($str,
 	case "baton": $graph = new Graph($largeur,$hauteur);
 		$graph->SetScale("textlin");
 		$plot = new ScatterPlot($donnee);
-		// Bizarrement, le script de forme des marqueur est inopérant (marqueur invisible) pour les barres... On rétablit un test en dur qui fonctionne
-		if (isset($marqueur['nom'])) {
-			switch ($marqueur['nom']) {
-				case "triangle": $plot->mark->SetType(MARK_UTRIANGLE); break;
-				case "triangle_bas": $plot->mark->SetType(MARK_DTRIANGLE); break;
-				case "losange": $plot->mark->SetType(MARK_DIAMOND); break;
-				case "cercle": $plot->mark->SetType(MARK_CIRCLE); break;
-				case "disque": $plot->mark->SetType(MARK_FILLEDCIRCLE); break;
-				case "croix": $plot->mark->SetType(MARK_CROSS); break;
-				case "croix_x": $plot->mark->SetType(MARK_X); break;
-				case "etoile": $plot->mark->SetType(MARK_STAR); break;
-				default: $plot->mark->SetType(MARK_SQUARE); break;
-			}
-		}
+		if (isset($marqueur_formes[$marqueur['nom']])) 
+			$plot->mark->SetType($marqueur_formes[$marqueur['nom']]);
 		if ($marqueur['epaisseur'])$plot->mark->SetWidth($marqueur['epaisseur']);
 		if ($marqueur['contour']) $plot->mark->SetColor($marqueur['contour']);
 		if ($marqueur['fond']) $plot->mark->SetFillColor($marqueur['fond']);
@@ -218,19 +195,8 @@ function filtre_jpgraph($str,
                       			if ($couleur['fond']) $plot->SetFillColor($couleur['fond']);
                       			// L'epaisseur est sorti du modele, voir comment reintegrer ulterieurement
                       			//   if ($epaisseur) $plot->SetWeight($epaisseur);
-                      			if (isset($marqueur['nom'])) {
-						switch ($marqueur['nom']) {
-							case "triangle": $plot->mark->SetType(MARK_UTRIANGLE); break;
-							case "triangle_bas": $plot->mark->SetType(MARK_DTRIANGLE); break;
-							case "losange": $plot->mark->SetType(MARK_DIAMOND); break;
-							case "cercle": $plot->mark->SetType(MARK_CIRCLE); break;
-							case "disque": $plot->mark->SetType(MARK_FILLEDCIRCLE); break;
-							case "croix": $plot->mark->SetType(MARK_CROSS); break;
-							case "croix_x": $plot->mark->SetType(MARK_X); break;
-							case "etoile": $plot->mark->SetType(MARK_STAR); break;
-							default: $plot->mark->SetType(MARK_SQUARE); break;
-						}
-					}
+                      			if (isset($marqueur_formes[$marqueur['nom']])) 
+						$plot->mark->SetType($marqueur_formes[$marqueur['nom']]);
                       			if ($marqueur['contour']) $plot->mark->SetColor($marqueur['contour']);
                       			if ($marqueur['fond']) $plot->mark->SetFillColor($marqueur['fond']);
                       			if ($marqueur['epaisseur'])$plot->mark->SetWidth($marqueur['epaisseur']);
@@ -245,19 +211,8 @@ function filtre_jpgraph($str,
 				if ($couleurtrois['fond']) $plot3->SetFillColor($couleurtrois['fond']);
 				// L'epaisseur est sorti du modele, voir comment reintegrer ulterieurement
 				//   if ($epaisseur) $plot->SetWeight($epaisseur);
-				if (isset($marqueurtrois['nom'])) {
-					switch ($marqueurtrois['nom']) {
-						case "triangle": $plot3->mark->SetType(MARK_UTRIANGLE); break;
-						case "triangle_bas": $plot3->mark->SetType(MARK_DTRIANGLE); break;
-						case "losange": $plot3->mark->SetType(MARK_DIAMOND); break;
-						case "cercle": $plot3->mark->SetType(MARK_CIRCLE); break;
-						case "disque": $plot3->mark->SetType(MARK_FILLEDCIRCLE); break;
-						case "croix": $plot3->mark->SetType(MARK_CROSS); break;
-						case "croix_x": $plot3->mark->SetType(MARK_X); break;
-						case "etoile": $plot3->mark->SetType(MARK_STAR); break;
-						default: $plot3->mark->SetType(MARK_SQUARE); break;
-					}
-				}
+				if (isset($marqueur_formes[$marqueurtrois['nom']])) 
+					$plot3->mark->SetType($marqueur_formes[$marqueurtrois['nom']]);
 				if ($marqueurtrois['contour']) $plot3->mark->SetColor($marqueurtrois['contour']);
 				if ($marqueurtrois['fond']) $plot3->mark->SetFillColor($marqueurtrois['fond']);
 				if ($marqueurtrois['epaisseur'])$plot3->mark->SetWidth($marqueurtrois['epaisseur']);
@@ -273,19 +228,8 @@ function filtre_jpgraph($str,
 				if ($couleurdeux['fond']) $plot2->SetFillColor($couleurdeux['fond']);
 				// L'epaisseur est sorti du modele, voir comment reintegrer ulterieurement
 				//   if ($epaisseur) $plot->SetWeight($epaisseur);
-				if (isset($marqueurdeux['nom'])) {
-					switch ($marqueurdeux['nom']) {
-						case "triangle": $plot2->mark->SetType(MARK_UTRIANGLE); break;
-						case "triangle_bas": $plot2->mark->SetType(MARK_DTRIANGLE); break;
-						case "losange": $plot2->mark->SetType(MARK_DIAMOND); break;
-						case "cercle": $plot2->mark->SetType(MARK_CIRCLE); break;
-						case "disque": $plot2->mark->SetType(MARK_FILLEDCIRCLE); break;
-						case "croix": $plot2->mark->SetType(MARK_CROSS); break;
-						case "croix_x": $plot2->mark->SetType(MARK_X); break;
-						case "etoile": $plot2->mark->SetType(MARK_STAR); break;
-						default: $plot2->mark->SetType(MARK_SQUARE); break;
-					}
-				}
+				if (isset($marqueur_formes[$marqueurdeux['nom']])) 
+					$plot2->mark->SetType($marqueur_formes[$marqueurdeux['nom']]);
 				if ($marqueurdeux['contour']) $plot2->mark->SetColor($marqueurdeux['contour']);
 				if ($marqueurdeux['fond']) $plot2->mark->SetFillColor($marqueurdeux['fond']);
 				if ($marqueurdeux['epaisseur'])$plot2->mark->SetWidth($marqueurdeux['epaisseur']);
@@ -299,7 +243,7 @@ function filtre_jpgraph($str,
 			    
                             $graph->title->Set(utf8_decode($titre));
                             if (count($legende)>1) 
-                                $graph->xaxis->SetTickLabels($legende);  
+                                {$graph->xaxis->SetTickLabels($legende); $graph->legend->SetReverse();}  
                             break;
                             
         case "barre":       $graph = new Graph($largeur,$hauteur);
@@ -344,7 +288,7 @@ function filtre_jpgraph($str,
 			    // titre & legende 
                             $graph->title->Set(utf8_decode($titre));
                             if (count($legende)>1)
-                                $graph->xaxis->SetTickLabels($legende);
+                                {$graph->xaxis->SetTickLabels($legende); $graph->legend->SetReverse();}
 			if ($legendetrois[0]) $graph->xaxis->title->Set($legendetrois[0]);
 			if ($legendetrois[1]) $graph->yaxis->title->Set($legendetrois[1]);
                             break;
@@ -392,7 +336,7 @@ function filtre_jpgraph($str,
 			    // titre & legende 
                             $graph->title->Set(utf8_decode($titre));
                             if (count($legende)>1)
-                                $graph->xaxis->SetTickLabels($legende);
+                                {$graph->xaxis->SetTickLabels($legende); $graph->legend->SetReverse();}
 			if ($legendetrois[0]) $graph->xaxis->title->Set($legendetrois[0]);
 			if ($legendetrois[1]) $graph->yaxis->title->Set($legendetrois[1]);
                             break;
@@ -418,16 +362,19 @@ function filtre_jpgraph($str,
 				default:
 					$plot->SetTheme('earth');
 					break;
-                            }	   
+                            }
+			    //Option de resolution fine
+			    if ($option['resolution_fine']) $graph->SetAntiAliasing();
                             // titre & legende 
                             $graph->title->Set(utf8_decode($titre));
                             if (count($legende)>1) 
-                                $plot->SetLegends($legende);        
+                                $plot->SetLegends($legende);
                             break;
 	case "camembert3d":  $graph = new PieGraph($largeur,$hauteur);
 			    // Create the linear plot
                             $plot = new PiePlot3D($donnee);
-			    if ($option['angle']) $plot->SetAngle((int) $option['angle']);
+			    //Choisir un autre angle de visualisation en 3D
+			    if ($option['camembert_angle']) $plot->SetAngle((int) $option['camembert_angle']);
                             // style & couleur
                             switch ($couleur['fond']) {
 				case "earth":
@@ -445,7 +392,9 @@ function filtre_jpgraph($str,
 				default:
 					$plot->SetTheme('earth');
 					break;
-                            }	   
+                            }
+			    //Option de resolution fine
+			    if ($option['resolution_fine']) $graph->SetAntiAliasing();
                             // titre & legende 
                             $graph->title->Set(utf8_decode($titre));
                             if (count($legende)>1) 
@@ -453,14 +402,45 @@ function filtre_jpgraph($str,
                             break;
     }
     
-    //Options du graphe
-    if ($option['ombre']) $graph->SetShadow();
-    if ($option['graphe_couleur']) $graph->SetColor($option['graphe_couleur']);
-    if ($option['graphe_couleur_fond']) $graph->SetMarginColor($option['graphe_couleur_fond']);
-    if ($option['graphe_angle']) $graph->SetAngle((int)$option['graphe_angle']);
-    // if ($option['graphe_axe_style']=='double') $graph->SetAxisStyle(AXSTYLE_BOXIN);
+    //*********Options du graphe************
+    //Ombre du graphe
+    if ($option['graphe_ombre']) $graph->SetShadow();
+    //Couleur de la bordure du graphe
     if ($option['graphe_bordure_couleur']) $graph->SetFrame(true,$option['graphe_bordure_couleur'],2);
-    // $graph->SetBackgroundGradient('blue:1.5','blue:0.5',GRAD_CENTER,BGRAD_FRAME);
+    //Couleur de fond de la partie graphique du graphe
+    if ($option['graphe_couleur']) $graph->SetColor($option['graphe_couleur']);
+    //Couleur de fond des marges du graphe
+    if ($option['graphe_couleur_fond']) $graph->SetMarginColor($option['graphe_couleur_fond']);
+    //Dégradé en fond de graphe...
+    if (isset($option['graphe_couleur_degrade1']) AND isset($option['graphe_couleur_degrade2'])) 
+    {
+	$style_degrades=array('horizontal1'=>GRAD_VER,'horizontal2'=>GRAD_MIDVER,'vertical1'=>GRAD_HOR,'vertical2'=>GRAD_MIDHOR,'horizontal3'=>GRAD_LEFT_REFLECTION,'horizontal4'=>GRAD_RIGHT_REFLECTION,'centre1'=>GRAD_CENTER,'centre2'=>GRAD_WIDE_MIDHOR,'centre3'=>GRAD_WIDE_MIDVER,);
+	foreach ($style_degrades as $cle=>$val)
+	{
+		if ($option['graphe_style_degrade']==$cle)
+		{
+			if ($option['graphe_domaine_degrade']=='tout') {$graph->SetBackgroundGradient($option['graphe_couleur_degrade1'],$option['graphe_couleur_degrade2'],$val,BGRAD_FRAME);}
+			if ($option['graphe_domaine_degrade']=='marge') {$graph->SetBackgroundGradient($option['graphe_couleur_degrade1'],$option['graphe_couleur_degrade2'],$val,BGRAD_MARGIN);}
+			if ($option['graphe_domaine_degrade']=='graphique') {$graph->SetBackgroundGradient($option['graphe_couleur_degrade1'],$option['graphe_couleur_degrade2'],$val,BGRAD_PLOT);}
+		}
+	}
+    }
+    
+    //Effectuer une rotation du graphe
+    if ($option['graphe_angle']) $graph->SetAngle((int)$option['graphe_angle']);
+    //Style des axes...
+    // if ($option['graphe_axe_style']=='double') $graph->SetAxisStyle(AXSTYLE_BOXIN);
+    
+    //Espacement des graduations verticales
+    if ($option['graduation_verticale_espacement']=='proche') $graph->SetTickDensity(TICKD_DENSE);
+    if ($option['graduation_verticale_espacement']=='normal') $graph->SetTickDensity(TICKD_NORMAL);
+    if ($option['graduation_verticale_espacement']=='large') $graph->SetTickDensity(TICKD_SPARSE);
+    
+    // Couleur du titre
+    if ($option['titre_couleur']) $graph->title->SetColor($option['titre_couleur']);
+
+    //************Fin des options************
+    
     
     // Attacher le trace au graph
     $graph->Add($plot);  
