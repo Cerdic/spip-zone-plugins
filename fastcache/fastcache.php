@@ -35,7 +35,7 @@ AND $p = cache_get(_FC_KEY)
 AND $p['time'] == @filemtime(_FC_META)
 ) {
 	// choix du body
-	$b = (!is_null($p['ie']) AND fc_testie()) ? 'ie' : 'body';
+	$b = (strlen($p['ie']) AND fc_testie()) ? 'ie' : 'body';
 
 	// envoi des entetes
 	eval($p['head']);
