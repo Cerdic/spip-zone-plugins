@@ -12,7 +12,7 @@
 				<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label for="#GET{name}"><:clevermail:a_partir_csv:></label>
 					[<span class='erreur_message'>(#GET{erreurs})</span>]
-					<input type="file" class="file" name="#GET{name}" id="#GET{name}" size="30" maxlength="255" value="#ENV{#GET{name}}" /></li>
+					<input type="file" class="file" name="#GET{name}" id="#GET{name}" size="30" maxlength="255" value="#ENV{#GET{name}}" />
 				</li>
 				#SET{name,cm_subs}
 				#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
@@ -59,6 +59,6 @@
          </li>
 	     </ul>
 	   </fieldset> 
-	    <p class="boutons"><span class="image_loading"></span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	    <p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
 	</div></form>
 </div>
