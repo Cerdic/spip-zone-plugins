@@ -12,20 +12,23 @@
 
 		<div class="ps surlignable"><h2 class="pas_surlignable">Informations personnelles</h2>
 		<div>
-		      Pr&eacute;nom : #PMB_FIRSTNAME<br />
-		      Nom : #PMB_LASTNAME<br />
-		      Adresse 1 : #PMB_ADRESS_PART1<br />
-		      Adresse 2 : #PMB_ADRESS_PART2<br />
-		      CP : #PMB_ADRESS_CP<br />
-		      Ville : #PMB_ADRESS_CITY<br />
-		      T&eacute;l&eacute;phone 1 : #PMB_PHONE_NUMBER1<br />
-		      T&eacute;l&eacute;phone 2 : #PMB_PHONE_NUMBER2<br />
-		      Email : #PMB_EMAIL<br />
-		      Ann&eacute;e de naissance : #PMB_BIRTHYEAR<br />
-		      Localisation : #PMB_LOCATION_CAPTION<br />
-		      Date d'adh&eacute;sion : #PMB_ADHESION_DATE<br />
-		      Date d'expiration : #PMB_EXPIRATION_DATE<br />
-		      
+		       <table class="spip pmb-tableau">
+			  <tbody>
+			  [<tr><td>Pr&eacute;nom</td><td>(#PMB_FIRSTNAME)</td></tr>]
+			  [<tr><td>Nom</td><td>(#PMB_LASTNAME)</td></tr>]
+			  [<tr><td>Adresse 1</td><td>(#PMB_ADRESS_PART1)</td></tr>]
+			  [<tr><td>Adresse 2</td><td>(#PMB_ADRESS_PART2)</td></tr>]
+			  [<tr><td>CP</td><td>(#PMB_ADRESS_CP)</td></tr>]
+			  [<tr><td>Ville</td><td>(#PMB_ADRESS_CITY)</td></tr>]
+			  [<tr><td>T&eacute;l&eacute;phone 1</td><td>(#PMB_PHONE_NUMBER1)</td></tr>]
+			  [<tr><td>T&eacute;l&eacute;phone 2</td><td>(#PMB_PHONE_NUMBER2)</td></tr>]
+			  [<tr><td>Email</td><td>(#PMB_EMAIL)</td></tr>]
+			  [<tr><td>Ann&eacute;e de naissance</td><td>(#PMB_BIRTHYEAR)</td></tr>]
+			  [<tr><td>Localisation</td><td>(#PMB_LOCATION_CAPTION)</td></tr>]
+			  [<tr><td>Date d'adh&eacute;sion</td><td>(#PMB_ADHESION_DATE)</td></tr>]
+			  [<tr><td>Date d'expiration</td><td>(#PMB_EXPIRATION_DATE)</td></tr>]
+			  </tbody>
+		      </table>
 		</div></div>
 		<div class="ps surlignable"><h2 class="pas_surlignable">Pr&ecirc;ts en cours</h2>
 		<div>
@@ -42,7 +45,7 @@
 			      <tr[ class="(#COMPTEUR_BOUCLE|modulo{2}|?{row_even,row_odd})"]>
 			      <td> [(#REM|?{'','<img />'}|inserer_attribut{class,spip_logos}|inserer_attribut{src,[(#GET{notice}|pmb_notice_champ{'logo_src'}|copie_locale)]}image_reduire{60,0})]
 				</td><td>[(#GET{tab_prets}|pmb_tableau2_valeur{#CLE,'expl_cb'})]</td>
-				<td>[(#GET{tab_prets}|pmb_tableau2_valeur{#CLE,'expl_libelle'})]</td>
+				<td><a href="[(#URL_PAGE{notice_display,id=[(#GET{tab_prets}|pmb_tableau2_valeur{#CLE,'notice_id'})]})]">[(#GET{tab_prets}|pmb_tableau2_valeur{#CLE,'expl_libelle'})]</a></td>
 				<td>[(#GET{tab_prets}|pmb_tableau2_valeur{#CLE,'expl_support'})]</td>
 				<td>[(#GET{tab_prets}|pmb_tableau2_valeur{#CLE,'loan_startdate'})]</td>
 				<td>[(#GET{tab_prets}|pmb_tableau2_valeur{#CLE,'loan_returndate'})]</td></tr>
@@ -71,7 +74,7 @@
 			      <td> [(#REM|?{'','<img />'}|inserer_attribut{class,spip_logos}|inserer_attribut{src,[(#GET{notice}|pmb_notice_champ{'logo_src'}|copie_locale)]}image_reduire{60,0})]
 				</td>
 			      <td>[(#GET{tab_prets}|pmb_tableau2_valeur{#CLE,'expl_cb'})]</td>
-			      <td>[(#GET{tab_prets}|pmb_tableau2_valeur{#CLE,'expl_libelle'})]</td>
+			      <td><a href="[(#URL_PAGE{notice_display,id=[(#GET{tab_prets}|pmb_tableau2_valeur{#CLE,'notice_id'})]})]">[(#GET{tab_prets}|pmb_tableau2_valeur{#CLE,'expl_libelle'})]</a></td>
 			      <td>[(#GET{tab_prets}|pmb_tableau2_valeur{#CLE,'expl_support'})]</td>
 			      <td>[(#GET{tab_prets}|pmb_tableau2_valeur{#CLE,'loan_startdate'})]</td>
 			      <td>[(#GET{tab_prets}|pmb_tableau2_valeur{#CLE,'loan_returndate'})]</td></tr>
@@ -98,7 +101,7 @@
 			    <tr[ class="(#COMPTEUR_BOUCLE|modulo{2}|?{row_even,row_odd})"]>
 				<td> [(#REM|?{'','<img />'}|inserer_attribut{class,spip_logos}|inserer_attribut{src,[(#GET{notice}|pmb_notice_champ{'logo_src'}|copie_locale)]}image_reduire{60,0})]
 				</td>
-				<td>[(#GET{notice}|pmb_notice_champ{'titre'})]</td>
+				<td><a href="[(#URL_PAGE{notice_display,id=[(#GET{tab_reservations}|pmb_tableau2_valeur{#CLE,'notice_id'})]})]">[(#GET{notice}|pmb_notice_champ{'titre'})]</a></td>
 				<td>[(#GET{tab_reservations}|pmb_tableau2_valeur{#CLE,'resa_rank'})]</td>
 			    </tr>
 			 
