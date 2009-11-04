@@ -25,11 +25,11 @@
 	</thead>
 	<tbody>
 	[(#REM)on n'affiche que les id qui existent dans la langue mère] 
-	<BOUCLE_revise_cible(TRADLANG){module}{lang=#ENV{lang_cible}}{id IN #GET{str_mere}}>
+	<BOUCLE_revise_cible(TRADLANG){module}{lang=#ENV{lang_cible}}{id IN #GET{str_mere}}{id != zz_timestamp_nepastraduire}>
 	#SET{str_cible,#GET{str_cible}|push{#ID}}
 	<tr class="[(#COMPTEUR_BOUCLE|alterner{odd,even})]">
 		<td>#ID</td>
-		<BOUCLE_revise_orig(TRADLANG){module}{lang=#ENV{lang_orig}}{id=#ID}>
+		<BOUCLE_revise_orig(TRADLANG){module}{lang=#ENV{lang_orig}}{id=#ID}{id != zz_timestamp_nepastraduire}>
 		<td>[&lt;(#STATUS)&gt; ][(#STR**)]</td>
 		</BOUCLE_revise_orig>
 		<td><:tradlang:str_existe_plus:></td>
@@ -58,10 +58,10 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_revise_inexistants(TRADLANG){module}{lang=#LANG_MERE}{id !IN #GET{str_cible}}>
+	<BOUCLE_revise_inexistants(TRADLANG){module}{lang=#LANG_MERE}{id !IN #GET{str_cible}}{id != zz_timestamp_nepastraduire}>
 	<tr class="[(#COMPTEUR_BOUCLE|alterner{odd,even})]">
 		<td>#ID</td>
-		<BOUCLE_revise_inexistants_orig(TRADLANG){module}{lang=#ENV{lang_orig}}{id=#ID}>
+		<BOUCLE_revise_inexistants_orig(TRADLANG){module}{lang=#ENV{lang_orig}}{id=#ID}{id != zz_timestamp_nepastraduire}>
 		<td>[&lt;(#STATUS)&gt; ][(#STR**)]</td>
 		</BOUCLE_revise_inexistants_orig>
 		<td><:tradlang:str_existe_pas_in_langue:></td>
@@ -88,7 +88,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_revise_en_trop(TRADLANG){module}{lang=#ENV{lang_cible}}{!id IN #GET{str_mere}}>
+	<BOUCLE_revise_en_trop(TRADLANG){module}{lang=#ENV{lang_cible}}{!id IN #GET{str_mere}}{id != zz_timestamp_nepastraduire}>
 	<tr class="[(#COMPTEUR_BOUCLE|alterner{odd,even})]">
 		<td>#ID</td>
 		<td>[&lt;(#STATUS)&gt; ][(#STR**)]</td>

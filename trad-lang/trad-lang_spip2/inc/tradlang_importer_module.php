@@ -107,8 +107,12 @@ function inc_tradlang_importer_module($module,$dir_lang=false,$new_only=false){
 					} else {
 						$md5 = $liste_id_orig[$id];
 					}
-	
-					if (isset($md5)){
+
+					/**
+					 * zz_timestamp_nepastraduire est ce qui nous permet de vérifier la synchro
+					 * BDD / fichiers
+					 */
+					if (isset($md5) && ($id != 'zz_timestamp_nepastraduire')){
 						sql_insertq('spip_tradlang',array(
 							'id' => $id,
 							'module' => $module["nom_mod"],

@@ -62,25 +62,25 @@ function tradlang_testesynchro($idmodule, $langue){
 	foreach($modok2 as $cle=>$item){
 		if (strncmp($cle, "langue_", 7) == 0){
 			$sel = "";
-			$langue = substr($cle,7);
-			if (!array_key_exists($langue, $modok)){
-				$module["langue_".$langue] = $item;
+			$lang = substr($cle,7);
+			if (!array_key_exists($lang, $modok)){
+				$module["langue_".$lang] = $item;
 			}
 		}
 	}
 
 	// lit le timestamp fichier
 	$fic = $dir_lang."/".$module["langue_".$langue];
+	spip_log($fic);
 	include($fic);
 	$chs = $GLOBALS[$GLOBALS['idx_lang']];
 	$tsf = $chs["zz_timestamp_nepastraduire"];
 	unset($GLOBALS[$GLOBALS['idx_lang']]);
 
 	// lit le timestamp  base
-	$res = sql_select("MAX(ts) as ts","spip_tradlang","module =".sql_quote($nom_mod)." AND lang=".sql_quote($langue));
+	$res = sql_select("*","spip_tradlang","module =".sql_quote($nom_mod)." AND lang=".sql_quote($langue),"","ts DESC","0,1");
 	$row = sql_fetch($res);
 	$tsb = $row["ts"];
-
 	return ($tsb == $tsf);
 }
 

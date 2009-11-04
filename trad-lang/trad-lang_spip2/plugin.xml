@@ -7,6 +7,7 @@
 	<description>Un plugin pour g&#233;rer directement les fichiers langues depuis l'interface priv&#233;e.</description>
 	<lien></lien> <!-- URI de documentation -->
 	<icon>images/spip_lang.png</icon>
+	<options>tradlang_options.php</options>
 	<fonctions>tradlang_fonctions.php</fonctions>
 	<install>base/tradlang_install.php</install>
 	<pipeline>
@@ -19,6 +20,10 @@
 	</pipeline>
 	<pipeline>
 		<nom>ajouter_onglets</nom>
+        <inclure>tradlang_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_objets_surnoms</nom>
         <inclure>tradlang_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>

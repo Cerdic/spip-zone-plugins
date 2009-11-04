@@ -8,10 +8,10 @@ function formulaires_tradlang_choisir_module_charger($module="",$lang_orig="",$l
 		}
 	}
 	if(!$module){
-		$valeurs['module'] = sql_getfetsel('nom_module','spip_tradlang_modules','','','','0,1');
+		$valeurs['module'] = sql_getfetsel('nom_mod','spip_tradlang_modules','','','','0,1');
 	}
 	if(!$lang_orig){
-		$valeurs['lang_orig'] = sql_getfetsel('lang_mere','spip_tradlang_modules',"nom_module=".sql_quote($valeurs['module']));
+		$valeurs['lang_orig'] = sql_getfetsel('lang_mere','spip_tradlang_modules',"nom_mod=".sql_quote($valeurs['module']));
 	}
 	return $valeurs;
 }
