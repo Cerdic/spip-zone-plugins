@@ -103,14 +103,14 @@ function filtre_jpgraph($str,
 	
 	  // constantes
 	  $marqueur_formes = array("carre"=>MARK_SQUARE,
-                     "triangle"=> MARK_UTRIANGLE,
-                     "triangle_bas"=> MARK_DTRIANGLE,
-                     "losange"=> MARK_DIAMOND,
-                     "cercle"=> MARK_CIRCLE,
-                     "disque"=> MARK_FILLEDCIRCLE,
-                     "croix"=> MARK_CROSS,
-                     "croix_x" => MARK_X,
-                     "etoile" => MARK_STAR);
+                     "triangle"=>MARK_UTRIANGLE,
+                     "triangle_bas"=>MARK_DTRIANGLE,
+                     "losange"=>MARK_DIAMOND,
+                     "cercle"=>MARK_CIRCLE,
+                     "disque"=>MARK_FILLEDCIRCLE,
+                     "croix"=>MARK_CROSS,
+                     "croix_x"=>MARK_X,
+                     "etoile"=>MARK_STAR);
    
     // traiter les parametres en entree
     $type_graphe = strtolower(trim($type_graphe));  // pour pb avec les modeles si du blanc en fin de ligne
@@ -140,6 +140,7 @@ function filtre_jpgraph($str,
         case "barre":       require_once ('src/jpgraph_bar.php');  break;
 	case "accbarre":       require_once ('src/jpgraph_bar.php');  break;
         case "camembert":   require_once ('src/jpgraph_pie.php');  break;
+	case "camembert3d":   require_once ('src/jpgraph_pie.php'); require_once ('src/jpgraph_pie3d.php'); break;
 	case "baton":   require_once ('src/jpgraph_scatter.php');  break;
 	case "point":   require_once ('src/jpgraph_scatter.php');  break;
         default:            $type_graphe = "courbe";
@@ -423,7 +424,43 @@ function filtre_jpgraph($str,
                             if (count($legende)>1) 
                                 $plot->SetLegends($legende);        
                             break;
+	case "camembert3d":  $graph = new PieGraph($largeur,$hauteur);
+			    // Create the linear plot
+                            $plot = new PiePlot3D($donnee);
+			    if ($option['angle']) $plot->SetAngle((int) $option['angle']);
+                            // style & couleur
+                            switch ($couleur['fond']) {
+				case "earth":
+					$plot->SetTheme('earth');
+					break;
+				case "water":
+					$plot->SetTheme('water');
+					break;
+				case "sand":
+					$plot->SetTheme('sand');
+					break;
+				case "pastel":
+					$plot->SetTheme('pastel');
+					break;
+				default:
+					$plot->SetTheme('earth');
+					break;
+                            }	   
+                            // titre & legende 
+                            $graph->title->Set(utf8_decode($titre));
+                            if (count($legende)>1) 
+                                $plot->SetLegends($legende);        
+                            break;
     }
+    
+    //Options du graphe
+    if ($option['ombre']) $graph->SetShadow();
+    if ($option['graphe_couleur']) $graph->SetColor($option['graphe_couleur']);
+    if ($option['graphe_couleur_fond']) $graph->SetMarginColor($option['graphe_couleur_fond']);
+    if ($option['graphe_angle']) $graph->SetAngle((int)$option['graphe_angle']);
+    // if ($option['graphe_axe_style']=='double') $graph->SetAxisStyle(AXSTYLE_BOXIN);
+    if ($option['graphe_bordure_couleur']) $graph->SetFrame(true,$option['graphe_bordure_couleur'],2);
+    // $graph->SetBackgroundGradient('blue:1.5','blue:0.5',GRAD_CENTER,BGRAD_FRAME);
     
     // Attacher le trace au graph
     $graph->Add($plot);  
