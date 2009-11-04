@@ -15,10 +15,10 @@ http://listes.rezo.net/archives/spip-core/2005-10/msg00002.html -->
 	  Pierre Andrews (Mortimer), d'apr&#232;s un code propos&#233; par D&#233;esse A.
 	</auteur>
 	<version>
-	  2.0
+	  2.1
 	</version>
 	<etat>
-	  dev
+	  test
 	</etat>
 	<description>
 	<multi>
@@ -59,14 +59,20 @@ http://listes.rezo.net/archives/spip-core/2005-10/msg00002.html -->
 	  SquelettesMots
 	</prefix>
 	<pipeline>
-		<nom>ajouter_onglets</nom>
-		<inclure>SquelettesMots.php</inclure>
-	</pipeline>
-	<pipeline>
 	  <nom>header_prive</nom>
 	  <inclure>SquelettesMots.php</inclure>
 	</pipeline>
-
-	<necessite id="spip" version="[2.0.0;]" />
+	
+	<pipeline>
+	  <nom>styliser</nom>
+	  <inclure>SquelettesMots.php</inclure>
+	</pipeline>
+		
+	<onglet id='config_chercher_squelettes_mots' parent='configuration'>
+		<icone>spip_death.png</icone>
+		<titre>squelettesmots:titre_onglet</titre>
+	</onglet>
+	
+	<necessite id="spip" version="[2.0.6;]" />
 	<chemin dir='' />
 </plugin>

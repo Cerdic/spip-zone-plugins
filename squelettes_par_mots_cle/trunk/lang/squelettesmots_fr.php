@@ -2,6 +2,7 @@
 
 	$GLOBALS[$GLOBALS['idx_lang']] = array(
 	
+	'titre_onglet' => 'Squelettes par mots-cl&eacute;s',
 	'titre_page' => 'Configuration du choix du squelette',
 	'gros_titre' => 'Cr&eacute;er des r&egrave;gles pour choisir les squelettes en fonction des mots clef',
 	'help' => 'Cette page n\'est accesible qu\'aux administrateur. Vous pouvez creer des r&egrave;gles pour choisir les squelettes de vos page avec des mots clef.
