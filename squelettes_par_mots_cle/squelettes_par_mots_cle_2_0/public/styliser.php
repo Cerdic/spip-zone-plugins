@@ -19,6 +19,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('inc/vieilles_defs');
+
 // Ce fichier doit imperativement definir la fonction ci-dessous:
 
 function public_styliser($fond, $id_rubrique, $lang, $contexte) {
