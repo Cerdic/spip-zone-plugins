@@ -13,8 +13,8 @@
 						<h3 class="legend"><:savecfg:exporter_savecfg:></h3>						<ul>
 							<li>
 							<BOUCLE_savecfg_export(SAVECFG){" <br /> "}>
-								<label for="#ID_SAVECFG">#TITRE</label>
-								<input id="#ID_SAVECFG" type="checkbox" name="export[#ID_SAVECFG]" id="#ID_SAVECFG" />
+								<label for="export#ID_SAVECFG">#TITRE</label>
+								<input id="export#ID_SAVECFG" type="checkbox" name="export[#ID_SAVECFG]" />
 							</BOUCLE_savecfg_export>
 								[<p>(#ENV**{erreurs}|table_valeur{nom})</p>]
 							</li>
