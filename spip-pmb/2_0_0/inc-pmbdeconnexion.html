@@ -3,7 +3,7 @@
 	    <B_auteurpmb2>
 	    <BOUCLE_auteurpmb2(AUTEURS_PMB){id_auteur=#SESSION{id_auteur}}>
 	     [(#PMB_SESSION|oui)
-	     <li>Bonjour[ (#PMB_FIRSTNAME)], <a href="#URL_PAGE{moncompte}">acc&eacute;dez &agrave; votre compte de lecteur</a></li>
+	     <li>Bonjour[ (#PMB_FIRSTNAME)], <a href="#URL_PAGE{auteur,id_auteur=#ID_AUTEUR}">acc&eacute;dez &agrave; votre compte de lecteur</a></li>
 		<li class="boutons">
 		    <a href="#URL_LOGOUT">Se d&eacute;connecter</a>
 		</li>

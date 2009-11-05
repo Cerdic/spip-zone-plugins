@@ -1,10 +1,15 @@
-<BOUCLE_auteur_principal(AUTEURS) {id_auteur}>
+<BOUCLE_auteur_principal(AUTEURS) {id_auteur}{tout}>
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
 <head>
 <title>[(#NOM|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
 [<meta name="description" content="(#BIO|couper{150}|attribut_html)" />]
 <INCLURE{fond=inc-head}{favicon=#LOGO_AUTEUR} />
+<script type="text/javascript">
+$(document).ready(function () {
+  //$('#twits').twit('Arnault07');
+});
+</script>
 </head>
 
 <body class="page_auteur">
@@ -28,7 +33,8 @@
 		[<h1 class="#EDIT{qui} fn">(#NOM|image_typo{police=togase.ttf,taille=30,couleur=333300,largeur=600})</h1>]
         </div>
 
-        [(#LOGO_AUTEUR)]
+        [(#LOGO_AUTEUR||image_reduire{130,0})]
+
 
 		<div class="corps-conteneur surlignable">
 			[<div class="#EDIT{bio} texte note">(#BIO)</div>]
@@ -37,7 +43,26 @@
 		</div>	
 	</div>[(#REM) / vcard]
 
+	
+	
+	<B_auteurpmb>
+	<BOUCLE_auteurpmb(AUTEURS_PMB){id_auteur}{id_auteur=#SESSION{id_auteur}}>
+	    [(#PMB_SESSION|oui)
+	     <INCLURE{fond=inc-moncompte}{env}>
+	    ]
+	    [(#PMB_SESSION|non)
+		<div class="texte entry-content">Votre session a expir&eacute;, veuillez vous identifier de nouveau.</div>
+	    ]
 
+	</BOUCLE_auteurpmb>
+	</B_auteurpmb>
+	   
+	<//B_auteurpmb>
+	
+	<div class="texte entry-content">
+	  <div id="twits"></div>
+	</div>
+	
         [(#REM) Articles de l'auteur ]
         <B_articles>
         <div class="menu articles">
@@ -59,9 +84,14 @@
         </div>
         </B_articles>
 
-        #FORMULAIRE_ECRIRE_AUTEUR
+        [(#SESSION{id_auteur}|=={#ID_AUTEUR}|non)#FORMULAIRE_ECRIRE_AUTEUR]
+
+	
+	
 
         [<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
+
+
 
 	</div><!--#contenu-->
 	</div><!--#conteneur-->

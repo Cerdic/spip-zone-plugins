@@ -67,7 +67,7 @@
             
         </div>
 	[(#GET{notice}|pmb_notice_champ{'logo_src'}|oui)
-	    [(#REM|?{'','<img />'}|inserer_attribut{class,spip_logos}|inserer_attribut{src,[(#GET{notice}|pmb_notice_champ{'logo_src'}|copie_locale)]}image_reduire{130,0})]
+	    [(#REM|?{'','<img />'}|inserer_attribut{class,spip_logos}|inserer_attribut{src,[(#GET{notice}|pmb_notice_champ{'logo_src'}|copie_locale)]}|image_reduire{130,0})]
 	 ]
 	<div class="corps-conteneur surlignable">
 		
