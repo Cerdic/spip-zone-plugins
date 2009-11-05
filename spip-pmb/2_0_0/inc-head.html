@@ -53,7 +53,7 @@
 			containerheight: '150px'
 		});
 		<BOUCLE_auteurtwitter(AUTEURS){id_auteur}{tous}>
-		  $('#twits').twit('#TWITTER_USER');
+		  $('#twits').twit('#TWITTER_USER', { username: true, icon: false});
 		</BOUCLE_auteurtwitter>
 		var maxheight=Math.max(parseInt($('#conteneur').height()),parseInt($('#navigation').height()));
 		//$('#conteneur, #navigation').css('height', maxheight+'px');

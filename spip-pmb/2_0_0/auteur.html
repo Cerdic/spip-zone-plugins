@@ -65,7 +65,9 @@
 
 	</BOUCLE_auteurpmb>
 	</B_auteurpmb>
-	   	
+	   [(#SESSION{id_auteur}|oui)[(#SESSION{id_auteur}|=={#ID_AUTEUR}|oui)
+		      <div class="corps-conteneur surlignable"><div class="texte entry-content">Vous n'avez pas de compte de lecteur.</div></div>
+	    ]]
 	<//B_auteurpmb>
 	
 	<BOUCLE_auteurpmbtwitter(AUTEURS_PMB){id_auteur}>
