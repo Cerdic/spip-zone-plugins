@@ -1,13 +1,8 @@
 #CACHE{0}
 <BOUCLE_auteurpmb(AUTEURS_PMB){id_auteur=#SESSION{id_auteur}}>
 			
- 	 
-	<div class="corps-conteneur surlignable">
-		
-		<div class="#EDIT{texte} texte entry-content">Bonjour[ (#PMB_FIRSTNAME)], bienvenue dans votre compte de lecteur.</div>
 
-
-	</div>
+	
 
 
 		<div class="ps surlignable"><h2 class="pas_surlignable">Informations personnelles</h2>
@@ -27,9 +22,17 @@
 			  [<tr><td>Localisation</td><td>(#PMB_LOCATION_CAPTION)</td></tr>]
 			  [<tr><td>Date d'adh&eacute;sion</td><td>(#PMB_ADHESION_DATE)</td></tr>]
 			  [<tr><td>Date d'expiration</td><td>(#PMB_EXPIRATION_DATE)</td></tr>]
+			  <tr><td>Compte twitter</td>
+			    <td>
+				  <BOUCLE_auteur(AUTEURS){id_auteur}{tous}>
+					<span class="#EDIT{twitter_user}">[(#TWITTER_USER|sinon{'<i>double-cliquez ici pour ajouter votre identifiant twitter</i>'})]</span>
+				  </BOUCLE_auteur>	
+			    </td>
+			  </tr>
 			  </tbody>
 		      </table>
-		</div></div>
+		</div>
+		</div>
 		<div class="ps surlignable"><h2 class="pas_surlignable">Pr&ecirc;ts en cours</h2>
 		<div>
 		      [(#SET{tab_prets,[(#PMB_SESSION|pmb_prets_extraire{#CONFIG{spip_pmb/url},1})]})]

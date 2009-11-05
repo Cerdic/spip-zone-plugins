@@ -52,8 +52,11 @@
 			type: 'sequence', 
 			containerheight: '150px'
 		});
+		<BOUCLE_auteurtwitter(AUTEURS){id_auteur}{tous}>
+		  $('#twits').twit('#TWITTER_USER');
+		</BOUCLE_auteurtwitter>
 		var maxheight=Math.max(parseInt($('#conteneur').height()),parseInt($('#navigation').height()));
-		$('#conteneur, #navigation').css('height', maxheight+'px');
+		//$('#conteneur, #navigation').css('height', maxheight+'px');
 	});
 </script> 
 

@@ -4,12 +4,8 @@
 <head>
 <title>[(#NOM|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
 [<meta name="description" content="(#BIO|couper{150}|attribut_html)" />]
-<INCLURE{fond=inc-head}{favicon=#LOGO_AUTEUR} />
-<script type="text/javascript">
-$(document).ready(function () {
-  //$('#twits').twit('Arnault07');
-});
-</script>
+<INCLURE{fond=inc-head}{id_auteur}{favicon=#LOGO_AUTEUR} />
+
 </head>
 
 <body class="page_auteur">
@@ -26,27 +22,40 @@ $(document).ready(function () {
 
 	[(#REM) Fil d'Ariane ]
         <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:info_auteurs:>[ &gt; <strong class="on">(#NOM|couper{80})</strong>]</div>
+	
+	<div class="vcard">[(#REM) microformat vcard]
+		<div class="cartouche">
+			
+			[<h1 class="fn">(#NOM|image_typo{police=togase.ttf,taille=30,couleur=333300,largeur=600})</h1>]
+		</div>
 
-		<div class="vcard">[(#REM) microformat vcard]
-        <div class="cartouche">
+		[(#LOGO_AUTEUR||image_reduire{130,0})]
+
 		
-		[<h1 class="#EDIT{qui} fn">(#NOM|image_typo{police=togase.ttf,taille=30,couleur=333300,largeur=600})</h1>]
-        </div>
+		[(#SESSION{id_auteur}|=={#ID_AUTEUR}|oui)
+		    <div class="corps-conteneur surlignable">
+				<div class="texte entry-content">Bonjour[ (#PMB_FIRSTNAME)], bienvenue dans votre compte de lecteur.</div>
+				<p class="texte-modif-fiche">double-cliquez sur les champs pour modifier vos informations</p>
+				<div class="#EDIT{bio} note">Pr&eacute;sentation : [(#BIO|sinon{'<i>double-cliquez pour ajouter une pr&eacute;sentation</i>'})]</div>
+				
+				<p class="#EDIT{hyperlien} hyperlien"><:voir_en_ligne:> : <a href="[(#URL_SITE)]" class="url org spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]}|sinon{'<i>double-cliquez pour ajouter un site internet</i>'})]</a></p>
+				
+				
+		    </div>	
+		]
+		[(#SESSION{id_auteur}|=={#ID_AUTEUR}|non)
+		    <div class="corps-conteneur surlignable">
+				[<div class="texte note">(#BIO)</div>]
+				[<p class="hyperlien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="url org spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+		    </div>	
+		]
+		</div>[(#REM) / vcard]
 
-        [(#LOGO_AUTEUR||image_reduire{130,0})]
 
-
-		<div class="corps-conteneur surlignable">
-			[<div class="#EDIT{bio} texte note">(#BIO)</div>]
-	        	[<p class="#EDIT{hyperlien} hyperlien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="url org spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
-	
-		</div>	
-	</div>[(#REM) / vcard]
-
-	
-	
 	<B_auteurpmb>
 	<BOUCLE_auteurpmb(AUTEURS_PMB){id_auteur}{id_auteur=#SESSION{id_auteur}}>
+	    	
+
 	    [(#PMB_SESSION|oui)
 	     <INCLURE{fond=inc-moncompte}{env}>
 	    ]
@@ -56,13 +65,15 @@ $(document).ready(function () {
 
 	</BOUCLE_auteurpmb>
 	</B_auteurpmb>
-	   
+	   	
 	<//B_auteurpmb>
 	
-	<div class="texte entry-content">
+	<BOUCLE_auteurpmbtwitter(AUTEURS_PMB){id_auteur}>
+	[(#PMB_TWITTER|oui)
 	  <div id="twits"></div>
-	</div>
-	
+	]
+	</BOUCLE_auteurpmbtwitter>
+
         [(#REM) Articles de l'auteur ]
         <B_articles>
         <div class="menu articles">
