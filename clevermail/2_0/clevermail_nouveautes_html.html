@@ -3,7 +3,7 @@
 <B_test_contenu>
 <BOUCLE_test_contenu(AUTEURS){0,1}{tous}><BOUCLE_articles(ARTICLES){age_relatif<=0}{par date}{inverse}{0,20}>
 [(#COMPTEUR_BOUCLE|=={1}|oui)
-[<title>(#INCLURE{fond=inclure/sujet1,sujet})</title>]
+[<title>(#INCLURE{fond=inclure/sujet1,sujet=Les nouveautés depuis le #DATE|affdate})</title>]
 <h1>@@NOM_LETTRE@@</h1>
 
 <div>@@DESCRIPTION@@</div>
