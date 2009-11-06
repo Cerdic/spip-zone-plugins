@@ -12,7 +12,8 @@ function clevermail_post_create($lst_id) {
 	  $url_text = $list['lst_url_text'].(strpos($list['lst_url_html'], '?') !== false ? '&' : '?').'date='.date("Y-m-d",$last_create);
 	  $post['pst_text'] = recuperer_page($url_text);
 	  if (trim($post['pst_html']) != '' && trim($post['pst_text']) != '') {
-		  if (eregi("<title>(.*)</title>", $post['pst_html'], $regs)) {
+		  //if (eregi("<title>(.*)</title>", $post['pst_html'], $regs)) {
+		  if (preg_match(",<title>(.*)</title>,", $post['pst_html'], $regs)) {
 		    $post['pst_subject'] = trim($regs[1]);
 		  } else {
 		    $post['pst_subject'] = 'Aucun sujet';
