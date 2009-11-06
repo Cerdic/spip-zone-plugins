@@ -110,65 +110,10 @@ function tradlang_visumodule(){
 	
 	fin_cadre_relief();
 	
-	debut_cadre_relief("", false, "", _T('tradlang:traductions'));
+	debut_cadre_relief("", false, "", _T('tradlang:infos_trad_module'));
 	
-	// recupere la liste des traductions dans la base
-	// et sur le disque
-	$getmodules_fics = charger_fonction('tradlang_getmodules_fics','inc');
-	$modules2 = $getmodules_fics($modok["dir_lang"]);
-	$modok2 = $modules2[$module];
-	
-	// union entre modok et modok2
-	foreach($modok2 as $cle=>$item){
-		if (strncmp($cle, "langue_", 7) == 0){
-			$sel = "";
-			$langue = substr($cle,7);
-			if (!array_key_exists($langue, $modok)){
-				$modok["langue_".$langue] = $item;
-			}
-		}
-	}
-
-	// imprime la table des langues
-	echo "<table cellspacing='2' cellpadding='3'>\n";
-	echo "<tr>";
-	echo "<th>&nbsp;</th>\n";
-	echo "<th>"._T('tradlang:synchro')."</th>\n";
-	echo "<th>"._T('tradlang:traducok')."</th>\n";
-	echo "<th>"._T('tradlang:traducnok')."</th>\n";
-	echo "</tr>\n";
-	
-	foreach($modok as $cle=>$item){
-		if (strncmp($cle, "langue_", 7) == 0){
-			$sel = "";
-			$langue = substr($cle,7);
-			echo "<tr>\n";
-			echo "<td>".traduire_nom_langue($langue)." ($langue)</td>";
-			
-			if (tradlang_testesynchro($modok['idmodule'], $langue))
-				echo "<td><img src='"._DIR_PLUGIN_TRADLANG."img_pack/vert.gif' alt='' /></td>\n";
-			else
-				echo "<td><img src='"._DIR_PLUGIN_TRADLANG."img_pack/rouge.gif' alt='' /></td>\n";
-			
-			echo "<td>&nbsp;</td>\n";
-			echo "<td>&nbsp;</td>\n";
-			echo "</tr>\n";	  
-		}
-	}
-	echo "</table>";
+	echo recuperer_fond('prive/infos/tradlang_infos_module',array('module'=>$modok['nom_mod']));
 	 
 	fin_cadre_relief();
-}
-
-// verifie si le fichier passe en param
-// est bien un fichier de langue
-function tradlang_verif($fic){
-	include($fic);
-	// verifie si c'est un fichier langue
-	if (is_array($GLOBALS[$GLOBALS['idx_lang']])){
-		unset($GLOBALS[$GLOBALS['idx_lang']]);
-		return true;
-	}
-	return false;
 }
 ?>

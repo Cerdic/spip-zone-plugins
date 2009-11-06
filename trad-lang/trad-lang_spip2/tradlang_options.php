@@ -8,11 +8,11 @@
  * @return 
  */
 function revision_tradlang($id_tradlang,$c=false){
-	spip_log('Appel à tradlang_revision');
-	spip_log("id_tradlang = $id_tradlang");
-	spip_log($c);
+	$invalideur = "id='id_tradlang/$id_tradlang'";
+
 	return modifier_contenu('tradlang', $id_tradlang,
 		array(
+			'invalideur' => $invalideur,
 			'date_modif' => 'ts'
 		),
 		$c);

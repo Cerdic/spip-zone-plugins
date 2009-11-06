@@ -22,7 +22,7 @@
 		/**
 		 * On génère le fichier correspondant
 		 */
-    	$fichier = $module['dir_lang'].'/'.$module['nom_mod'].'_'.$lang.'.php';
+    	$fichier = _DIR_RACINE.$module['dir_lang'].'/'.$module['nom_mod'].'_'.$lang.'.php';
 		spip_log($fichier);
 		if ($fd = fopen($fichier, "a")){
 			fclose($fd);

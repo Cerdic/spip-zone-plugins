@@ -47,6 +47,7 @@ function tradlang_getmodules_base(){
  * @return 
  */
 function tradlang_testesynchro($idmodule, $langue){
+	spip_log("testesynchro $idmodule - $langue");
 	$module = sql_fetsel('*','spip_tradlang_modules','idmodule='.intval($idmodule));
 	$nom_module = $module["nom_module"];
 	$nom_mod = $module["nom_mod"];
@@ -57,7 +58,7 @@ function tradlang_testesynchro($idmodule, $langue){
 	$getmodules_fics = charger_fonction('tradlang_getmodules_fics','inc');
 	$modules2 = $getmodules_fics($dir_lang);
 	$modok2 = $modules2[$nom_mod];
-	
+
 	// union entre modok et modok2
 	foreach($modok2 as $cle=>$item){
 		if (strncmp($cle, "langue_", 7) == 0){
@@ -68,19 +69,25 @@ function tradlang_testesynchro($idmodule, $langue){
 			}
 		}
 	}
-
+	
+	// Le fichier n'existe pas
+	if(!$module["langue_".$langue]){
+		return false;
+	}
+	
 	// lit le timestamp fichier
-	$fic = $dir_lang."/".$module["langue_".$langue];
-	spip_log($fic);
+	$fic = _DIR_RACINE.$dir_lang."/".$module["langue_".$langue];
 	include($fic);
 	$chs = $GLOBALS[$GLOBALS['idx_lang']];
 	$tsf = $chs["zz_timestamp_nepastraduire"];
+	spip_log($tsf);
 	unset($GLOBALS[$GLOBALS['idx_lang']]);
 
 	// lit le timestamp  base
 	$res = sql_select("*","spip_tradlang","module =".sql_quote($nom_mod)." AND lang=".sql_quote($langue),"","ts DESC","0,1");
 	$row = sql_fetch($res);
 	$tsb = $row["ts"];
+	spip_log($tsb);
 	return ($tsb == $tsf);
 }
 

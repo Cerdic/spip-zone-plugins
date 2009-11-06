@@ -39,15 +39,14 @@ function formulaires_tradlang_importer_module_verifier(){
 
 function formulaires_tradlang_importer_module_traiter(){
 	if(_request('importer')){
-		include_spip('inc/tradlang_importer_module');
-		//$import = charger_fonction('tradlang_importer_module','inc');
+		$import = charger_fonction('tradlang_importer_module','inc');
 		$traiter['dir_lang'] = _request('dir_lang');
 		$traiter['nom_mod'] = _request('nom_mod');
 		$traiter['lang_mere'] = _request('lang_mere');
 		$traiter['nom_module'] = _request('nom_module') ? _request('nom_module') : _request('nom_mod');
 		$traiter['type_export'] = 'spip';
 		$traiter['lang_prefix'] = $traiter['nom_mod'];
-		list($retour,$etat) = inc_tradlang_importer_module($traiter);
+		list($retour,$etat) = $import($traiter);
 		$res['message_ok'] = $retour;
 		if($etat){
 			$res['editable'] = false;

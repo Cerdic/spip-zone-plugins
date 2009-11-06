@@ -19,20 +19,23 @@ function tradlang_upgrade($nom_meta_base_version,$version_cible){
 	if (   (!isset($GLOBALS['meta'][$nom_meta_base_version]) )
 			|| (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){
 		include_spip('base/tradlang');
+		include_spip('base/create');
 		if (version_compare($current_version,'0.0','<=')){
-			include_spip('base/create');
-			include_spip('base/abstract_sql');
 			creer_base();
 			echo "Installation des tables de tradlang r&eacute;alis&eacute;e<br/>";
 			ecrire_meta($nom_meta_base_version,$current_version=$version_cible,'non');
 		}
 		if (version_compare($current_version,'0.2','<=')){
-			include_spip('base/create');
 			sql_alter('TABLE spip_tradlang DROP PRIMARY KEY');
 			sql_alter('TABLE `spip_tradlang` ADD `id_tradlang` BIGINT(21) NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST');
 			sql_alter('TABLE `spip_tradlang` ADD UNIQUE (`id`,`module`,`lang`)');
 			echo "Modification des cl&eacute;s de la table tradlang<br/>";
 			ecrire_meta($nom_meta_base_version,$current_version='0.2','non');
+		}
+		if (version_compare($current_version,'0.3','<=')){
+			maj_tables ('spip_tradlang_modules');
+			echo "Upgrade des tables de Tradlang en version 0.3<br/>";
+			ecrire_meta($nom_meta_base_version,$current_version='0.3','non');
 		}
 	}
 }

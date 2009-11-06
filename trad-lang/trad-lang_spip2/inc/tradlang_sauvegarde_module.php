@@ -20,7 +20,7 @@ function inc_tradlang_sauvegarde_module_dist($module,$langue){
 	// Fin du fichier de langue
 	$lang_epilog = "\n\n?".">\n";
 
-	$fic_exp = $module["dir_lang"]."/".$module["nom_mod"]."_".$langue.".php";
+	$fic_exp = _DIR_RACINE.$module["dir_lang"]."/".$module["nom_mod"]."_".$langue.".php";
 	$tab = array();
 	$conflit = array();  
 	$tab = tradlang_lirelang($module, $langue);
@@ -71,17 +71,16 @@ function inc_tradlang_sauvegarde_module_dist($module,$langue){
  * @return 
  */
 function tradlang_lirelang($module, $langue, $type=""){
-	$prefix = $GLOBALS['table_prefix'];
 	$ret = array();
 
 	if ($type=="md5"){
-		$res = sql_select("id,md5","spip_tradlang","module='$nom_mod' AND lang='$lang_orig' AND !ISNULL(md5)");
+		$res = sql_select("id,md5","spip_tradlang","module='$nom_mod' AND lang='$lang_orig' AND !ISNULL(md5)","","id ASC");
 		while($row = sql_fetch($res))
 		$ret[$row["id"]] = $row["md5"];
 	}
 	else{
 		$nom_mod = $module["nom_mod"];
-		$res = sql_select("id,str,status","spip_tradlang","module = '$nom_mod' AND lang='$langue'","","id");
+		$res = sql_select("id,str,status","spip_tradlang","module = '$nom_mod' AND lang='$langue'","","id ASC");
 		
 		while($row = sql_fetch($res)){
 			if ($row["status"] != "")

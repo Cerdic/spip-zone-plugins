@@ -50,6 +50,7 @@ function tradlang_declarer_tables_principales($tables_principales){
 		"lang_mere" => "varchar(16) NOT NULL default 'fr'",
 		"type_export" => "varchar(16) NOT NULL default 'spip'",
 		"dir_lang" => "varchar(255) NOT NULL",
+		"texte" => "longtext DEFAULT '' NOT NULL",
 		"lang_prefix" => "varchar(16) NOT NULL");
 	
 	$spip_tradlang_modules_key = array(

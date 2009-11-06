@@ -1,10 +1,8 @@
+#CACHE{0}
 <BOUCLE_module(TRADLANG_MODULES){nom_mod=#ENV{module}}>
 #SET{str_mere,#ARRAY}
 <div>
-	<h3><:tradlang:infos_trad_module:></h3>
-<ul class="infos">
-<li class="odd">
-	<strong>[(#LANG_MERE|traduire_nom_langue)][ ((#LANG_MERE))] - <:tradlang:label_langue_mere:></strong>
+	<h4>[(#LANG_MERE|traduire_nom_langue)][ ((#LANG_MERE))] - <:tradlang:label_langue_mere:></h4>
 	<BOUCLE_langue_mere(TRADLANG){module}{lang=#LANG_MERE}{id != zz_timestamp_nepastraduire}>[(#SET{str_mere,[(#GET{str_mere}|push{#ID})]})] </BOUCLE_langue_mere>
 	#SET{total_mere,#TOTAL_BOUCLE}<p><:tradlang:items_total_nb:> : #TOTAL_BOUCLE</p>
 	</B_langue_mere>
@@ -12,22 +10,15 @@
 	<p><:tradlang:items_new:> : #GRAND_TOTAL / #GET{total_mere}</p></B_total_item_langue_mere_new>
 	<BOUCLE_total_item_langue_mere_modif(TRADLANG){module}{status=MODIF}{lang=#LANG}{id != zz_timestamp_nepastraduire}> </BOUCLE_total_item_langue_mere_modif>
 	<p><:tradlang:items_modif:> : #GRAND_TOTAL / #GET{total_mere}</p></B_total_item_langue_mere_modif>
-	[(#IDMODULE|tradlang_testesynchro{#LANG_MERE}|oui)
-		<p><img src="#CHEMIN{img_pack/vert.gif}" alt="" />&nbsp;<:tradlang:message_synchro_base_fichier_ok:></p>
-	]
-	[(#IDMODULE|tradlang_testesynchro{#LANG_MERE}|non)
-		<p><img src="#CHEMIN{img_pack/rouge.gif}" alt="" />&nbsp;<:tradlang:message_synchro_base_fichier_pas_ok:></p>
-		[(#AUTORISER{configurer,tradlang}|oui)
-			[(#BOUTON_ACTION{<:tradlang:label_synchro_base_fichier:>,#URL_ACTION_AUTEUR{tradlang_synchro_base_fichier,#ENV{module},#SELF}})]
-		]
-	]
-</li>
+	[(#IDMODULE|tradlang_testesynchro{#LANG_MERE}|oui)<p><img src="#CHEMIN{img_pack/vert.gif}" alt="" />&nbsp;<:tradlang:message_synchro_base_fichier_ok:></p>]
+	[(#IDMODULE|tradlang_testesynchro{#LANG_MERE}|non)<p><img src="#CHEMIN{img_pack/rouge.gif}" alt="" />&nbsp;<:tradlang:message_synchro_base_fichier_pas_ok:></p>]
+</div>
 <BOUCLE_langues(TRADLANG){module}{fusion lang}{lang !IN #LANG_MERE}>
 #SET{str_cible,#ARRAY}
 #SET{total,0}
-<li class="[(#COMPTEUR_BOUCLE|alterner{even,odd})]">
+<div>
 	#SET{update,non}
-	<strong>[(#LANG|traduire_nom_langue)][ ((#LANG))]</strong>
+	<h4>[(#LANG|traduire_nom_langue)][ ((#LANG))]</h4>
 	<BOUCLE_total_item(TRADLANG){module}{lang=#LANG}{id != zz_timestamp_nepastraduire}>[(#SET{str_cible,#GET{str_cible}|push{#ID}})] </BOUCLE_total_item>
 	#SET{total,#TOTAL_BOUCLE}<p><:tradlang:items_total_nb:> : #TOTAL_BOUCLE</p></B_total_item>
 	<BOUCLE_total_item_new(TRADLANG){module}{status=NEW}{lang=#LANG}{id != zz_timestamp_nepastraduire}> </BOUCLE_total_item_new>
@@ -50,14 +41,7 @@
 		]
 	]
 	[(#_module:IDMODULE|tradlang_testesynchro{#LANG}|oui)<p><img src="#CHEMIN{img_pack/vert.gif}" alt="" />&nbsp;<:tradlang:message_synchro_base_fichier_ok:></p>]
-	[(#_module:IDMODULE|tradlang_testesynchro{#LANG}|non)
-		<p><img src="#CHEMIN{img_pack/rouge.gif}" alt="" />&nbsp;<:tradlang:message_synchro_base_fichier_pas_ok:></p>
-		[(#AUTORISER{configurer,tradlang}|oui)
-			[(#BOUTON_ACTION{<:tradlang:label_synchro_base_fichier:>,#URL_ACTION_AUTEUR{tradlang_synchro_base_fichier,#ENV{module},#SELF}})]
-		]
-	]
-</li>
-</BOUCLE_langues>
-</ul>
+	[(#_module:IDMODULE|tradlang_testesynchro{#LANG}|non)<p><img src="#CHEMIN{img_pack/rouge.gif}" alt="" />&nbsp;<:tradlang:message_synchro_base_fichier_pas_ok:></p>]
 </div>
+</BOUCLE_langues>
 </BOUCLE_module>

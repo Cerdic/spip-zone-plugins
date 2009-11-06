@@ -21,7 +21,7 @@
 		    <li class='choisir_lang_cible[ (#ENV**{erreurs}|table_valeur{lang_cible}|oui)erreur]'>
 				<label for='lang_cible'><:tradlang:item_langue_cible:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{lang_cible})</span>
-				]<INCLURE{fond=noisettes/formulaires/tradlang_selecteur_langue_module_dispo}{env}{lang_select=#ENV{lang_cible}}{name=lang_cible}>
+				]<INCLURE{fond=noisettes/formulaires/tradlang_selecteur_langue_module_dispo}{env}{lang_select=#ENV{lang_cible}}{lang_exclue=#ENV{lang_mere}}{name=lang_cible}>
 		    </li>
 		</ul>
 		<p class='boutons'>
