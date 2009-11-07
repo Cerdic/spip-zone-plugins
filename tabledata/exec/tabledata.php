@@ -448,7 +448,7 @@ function tabledata_Fiche($table, $serveur, $field, $key , $idLigne, $modeFiche =
           }
           else
           {
-              ereg("^ *([A-Za-z]+) *(\(([^)]+)\))?(.*DEFAULT *'(.*)')?", $v, $m);
+              preg_match("/^ *([A-Za-z]+) *(\(([^)]+)\))?(.*DEFAULT *'(.*)')?/", $v, $m);
               $type = $m[1];
               $s = ($m[5] ? " value='$m[5]' " : '');
               $t = $m[3];
@@ -467,7 +467,7 @@ function tabledata_Fiche($table, $serveur, $field, $key , $idLigne, $modeFiche =
                   }
                   else
                   {
-                    ereg("^ *'?(.*[^'])'? *$", $t, $m2); $t = $m2[1];
+                    preg_match("/^ *'?(.*[^'])'? *$/", $t, $m2); $t = $m2[1];
                   }
               }
 
@@ -509,7 +509,7 @@ function tabledata_Fiche($table, $serveur, $field, $key , $idLigne, $modeFiche =
                 case ENUM:
                 case SET:    //ajout JFM
                   $s = "<td><select name='".$k."'".$txtReadonly.">\n";
-                  foreach (split("'? *, *'?",$t) as $v)
+                  foreach (preg_split("/'? *, *'?/",$t) as $v)
                   {
                      if ($tabUnEnregistrement[$k]==$v)
                      {
@@ -519,7 +519,7 @@ function tabledata_Fiche($table, $serveur, $field, $key , $idLigne, $modeFiche =
                      {
                         $s .= "<option>".$v."</option>\n";
                      }
-                  } //foreach (split("'? *, *'?",$t) as $v)
+                  } //foreach (preg_split("/'? *, *'?/",$t) as $v)
                   $s .= "</select></td>\n";
                   break;
                 case TIMESTAMP:
@@ -1057,12 +1057,12 @@ function exec_tabledata()
     spip_log("description ".$description);
     $field = $description['field'];
     $key = $description['key'];
-    //$intClefPrimaireNbChamp= (count($key)>0?count(split (",",$key["PRIMARY KEY"])):0);
+    //$intClefPrimaireNbChamp= (count($key)>0?count(preg_split ("/,/",$key["PRIMARY KEY"])):0);
 
     $intNbClef = count($key);
     if (array_key_exists("PRIMARY KEY",$key))
     {
-        $intClefPrimaireNbChamp= count(split (",",$key["PRIMARY KEY"]));
+        $intClefPrimaireNbChamp= count(preg_split ("/,/",$key["PRIMARY KEY"]));
     }
     else
     {
@@ -1126,7 +1126,7 @@ function exec_tabledata()
                 $txtMsgInfoTable= "";
                 //} //if (strpos($field[$key["PRIMARY KEY"]]
                 $boolFntModif = true;
-                $key["PRIMARY KEY"] = split (",",$key["PRIMARY KEY"]);
+                $key["PRIMARY KEY"] = preg_split ("/,/",$key["PRIMARY KEY"]);
             break;
 
             default :
@@ -1139,7 +1139,7 @@ function exec_tabledata()
                 //             ."<br/><I>(L'insertion est d&#233;sactiv&#233;e)</i><br/>";
                 $txtMsgInfoTable= "<br/>La clef primaire contient plusieurs champs: ".$key["PRIMARY KEY"];
 
-                $key["PRIMARY KEY"] = split (",",$key["PRIMARY KEY"]);
+                $key["PRIMARY KEY"] = preg_split ("/,/",$key["PRIMARY KEY"]);
         } //switch ($intClefPrimaireNbChamp)
 
         // CHOIX DE L'ACTION A REALISER => de l'affichage
