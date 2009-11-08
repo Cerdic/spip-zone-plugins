@@ -33,22 +33,23 @@ if (defined('_FC_KEY'))
 if (defined('_FC_KEY')
 AND $p = cache_get(_FC_KEY)
 AND $p['time'] == @filemtime(_FC_META)
+AND strlen($p['gz'])
 ) {
 	// choix du body
-	$b = (strlen($p['ie']) AND fc_testie()) ? 'ie' : 'body';
+	$b = (strlen($p['gzie']) AND fc_testie()) ? 'gzie' : 'gz';
 
 	// envoi des entetes
 	eval($p['head']);
 
 	// compression gzip
-	if (_FC_GZIP
-	AND strstr(@$_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip')) {
+	if (strstr(@$_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip')) {
 		header('Content-Encoding: gzip');
-		$p[$b] = gzencode($p[$b]);
-	}
+		$body = &$p[$b];
+	} else
+		$body = gzinflate(substr($p[$b], 10));
 
 	// cache navigateur ?
-	$etag = '"'.md5($p[$b]).'"';
+	$etag = '"'.md5($body).'"';
 	header('ETag: '.$etag);
 	if (@$_SERVER['HTTP_IF_NONE_MATCH'] == $etag
 	OR (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) AND strstr($p['head'], $_SERVER['HTTP_IF_MODIFIED_SINCE']))
@@ -58,9 +59,9 @@ AND $p['time'] == @filemtime(_FC_META)
 	}
 
 	// ultime entete : la longueur
-	header('Content-length: '.strlen($p[$b]));
+	header('Content-length: '.strlen($body));
 	header('Connection: close');
-	echo $p[$b];
+	echo $body;
 
 	// faire les stats ?
 	if (_FC_STATS_SPIP) {

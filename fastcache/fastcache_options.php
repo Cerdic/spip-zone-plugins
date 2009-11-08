@@ -4,17 +4,15 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function Fastcache_versionie($page) {
-	if (!_FC_IE_PNGHACK
-	OR strpos($page, 'BackgroundImageCache')
-	OR !include_spip('inc/msie'))
+	if (strpos($page, 'BackgroundImageCache')
+	OR !$msiefix = charger_fonction('msiefix', 'inc'))
 		return $page;
 	
-	$msiefix = charger_fonction('msiefix', 'inc');
 	return $msiefix($page);
 }
 
 function Fastcache_affichage_final($texte) {
-	global $page, $html; # dommage le pipeline ne connait pas les entetes...
+	global $page, $html, $flag_preserver; # dommage le pipeline ne connait pas les entetes...
 
 	if ($page['duree']
 	AND ( _FC_TOUTES OR isset($page['entetes']['X-Fast-Cache']) )
@@ -45,18 +43,21 @@ function Fastcache_affichage_final($texte) {
 					.var_export(intval($GLOBALS[$id]),true).";\n";
 
 			// version MSIE
-			$ie = (_FC_IE_PNGHACK AND $html)
-				? Fastcache_versionie($texte)
-				: null;
+			if (_FC_IE_PNGHACK AND $GLOBALS['html'] AND !$flag_preserver)
+				$ie = Fastcache_versionie($texte);
 
 			// stocker les caches
 			$ok = cache_set(_FC_KEY,
 				array(
 					'head' => $head,
-					'body' => $texte
-						.(_FC_DEBUG?"\n<!-- read "._FC_KEY." -->\n":''),
-					'ie' => $ie
-						.(_FC_DEBUG?"\n<!-- read "._FC_KEY." -->\n":''),
+					'gz' => gzencode(
+						$texte
+						.(_FC_DEBUG?"\n<!-- read "._FC_KEY." -->\n":'')
+						),
+					'gzie' => gzencode(
+						$ie
+						.(_FC_DEBUG?"\n<!-- read ie "._FC_KEY." -->\n":'')
+						),
 					'time' => @filemtime(_FILE_META)
 				),
 				_FC_PERIODE
