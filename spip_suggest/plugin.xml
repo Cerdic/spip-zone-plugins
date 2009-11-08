@@ -8,4 +8,5 @@
 		<nom>insert_head</nom>
 		<inclure>suggest_fonctions.php</inclure>
 	</pipeline>
+	<necessite id="Fulltext" version="[0.3;]" />
 </plugin>
