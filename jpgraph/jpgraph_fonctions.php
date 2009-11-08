@@ -200,7 +200,33 @@ function filtre_jpgraph($str,
 		if ($marqueur['contour']) $plot->mark->SetColor($marqueur['contour']);
 		if ($marqueur['fond']) $plot->mark->SetFillColor($marqueur['fond']);
 		if ($marqueur['epaisseur'])$plot->mark->SetWidth($marqueur['epaisseur']);
+		if ($legendedeux[0]) $plot->SetLegend($legendedeux[0]);
+
+		if ($donneetrois) {
+			$plot3 = new RadarPlot($donneetrois);
+			if ($couleurtrois['contour']) $plot3->SetColor($couleurtrois['contour']);
+			if ($couleurtrois['fond']) $plot3->SetFillColor($couleurtrois['fond']);
+			if (isset($marqueur_formes[$marqueurtrois['nom']])) $plot3->mark->SetType($marqueur_formes[$marqueurtrois['nom']]);
+			if ($marqueurtrois['contour']) $plot3->mark->SetColor($marqueurtrois['contour']);
+			if ($marqueurtrois['fond']) $plot3->mark->SetFillColor($marqueurtrois['fond']);
+			if ($marqueurtrois['epaisseur'])$plot3->mark->SetWidth($marqueurtrois['epaisseur']);
+			$graph->Add($plot3);
+			if ($legendedeux[2]) $plot3->SetLegend($legendedeux[2]);
+		}
 		
+		if ($donneedeux) {
+			$plot2 = new RadarPlot($donneedeux);
+			if ($couleurdeux['contour']) $plot2->SetColor($couleurdeux['contour']);
+			if ($couleurdeux['fond']) $plot2->SetFillColor($couleurdeux['fond']);
+			if (isset($marqueur_formes[$marqueurdeux['nom']])) $plot2->mark->SetType($marqueur_formes[$marqueurdeux['nom']]);
+			if ($marqueurdeux['contour']) $plot2->mark->SetColor($marqueurdeux['contour']);
+			if ($marqueurdeux['fond']) $plot2->mark->SetFillColor($marqueurdeux['fond']);
+			if ($marqueurdeux['epaisseur'])$plot2->mark->SetWidth($marqueurdeux['epaisseur']);
+			$graph->Add($plot2);
+			if ($legendedeux[1]) $plot2->SetLegend($legendedeux[1]);
+		}
+		if (count($legende)>1) $graph->legend->SetReverse();
+
 		break;
 	
 	case "courbe":      $graph = new Graph($largeur,$hauteur);
