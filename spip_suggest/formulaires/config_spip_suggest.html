@@ -1,0 +1,27 @@
+<!-- nom=spip_suggest -->
+<div class="formulaire_spip formulaire_configurer_suggest">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method="post" action="#ENV{action}">
+		<div>
+			#ACTION_FORMULAIRE{#ENV{action}}
+			<ul>
+				<li class="fieldset">
+					<fieldset>
+						<h3 class="legend">Base de donn&eacute;es</h3>
+						<ul>
+							<li>
+								<label for="nom_base">Nom de la base de donn&eacute;es</label>
+								<input type="text" name="db_name" id="nom_base" />
+							</li>
+						</ul>
+					</fieldset>
+				</li>
+			</ul>
+			<p class="boutons">
+				<input type="submit" name="_cfg_ok" value="<:cfg:bouton_mettre_a_jour:>" />
+				<input type="submit" name="_cfg_delete" value="<:cfg:supprimer:>" />
+			</p>
+		</div>
+	</form>
+</div>
