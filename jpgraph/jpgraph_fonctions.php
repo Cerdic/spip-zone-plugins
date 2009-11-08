@@ -133,6 +133,7 @@ function filtre_jpgraph($str,
 	case "camembert3d":   require_once ('src/jpgraph_pie.php'); require_once ('src/jpgraph_pie3d.php'); break;
 	case "baton":   require_once ('src/jpgraph_scatter.php');  break;
 	case "point":   require_once ('src/jpgraph_scatter.php');  break;
+	case "radar": require_once ('src/jpgraph_radar.php');  break;
         default:            $type_graphe = "courbe";
                             require_once ('src/jpgraph_line.php');  
                             break;        
@@ -183,6 +184,23 @@ function filtre_jpgraph($str,
 		$graph->title->Set(utf8_decode($titre));
 		if (count($legende)>1)
 			$graph->xaxis->SetTickLabels($legende);
+		break;
+	
+	case "radar": $graph = new RadarGraph($largeur,$hauteur);
+		// titre & legende
+		$graph->title->Set(utf8_decode($titre));
+		if ($legende[0]) $graph->SetTitles($legende);
+		//On montre la grille : on proposera cela dans une option ulterieurement
+		$graph->grid->Show();
+		
+		$plot = new RadarPlot($donnee);
+		if ($couleur['contour']) $plot->SetColor($couleur['contour']);
+		if ($couleur['fond']) $plot->SetFillColor($couleur['fond']);
+		if (isset($marqueur_formes[$marqueur['nom']])) $plot->mark->SetType($marqueur_formes[$marqueur['nom']]);
+		if ($marqueur['contour']) $plot->mark->SetColor($marqueur['contour']);
+		if ($marqueur['fond']) $plot->mark->SetFillColor($marqueur['fond']);
+		if ($marqueur['epaisseur'])$plot->mark->SetWidth($marqueur['epaisseur']);
+		
 		break;
 	
 	case "courbe":      $graph = new Graph($largeur,$hauteur);
