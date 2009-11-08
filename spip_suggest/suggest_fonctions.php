@@ -1,9 +1,9 @@
 <?php
 function spip_suggest_complete ($q) {
 	define('_MYSQL_DIR', '/var/lib/mysql/');
-	$services = array('mu_courskry83de' => array('spip_articles' => array('num' => 7)));
-	$t = 'spip_articles';
 	$s = lire_config('spip_suggest/db_name');
+	$services = array($s => array('spip_articles' => array('num' => 7)));
+	$t = 'spip_articles';
 	$num = $services[$s][$t]['num'];
 	# query a nettoyer (charset...)
 	
