@@ -36,7 +36,10 @@ AND $p['time'] == @filemtime(_FC_META)
 AND strlen($p['gz'])
 ) {
 	// choix du body
-	$b = (strlen($p['gzie']) AND fc_testie()) ? 'gzie' : 'gz';
+	if (fc_testie()
+	AND $ie = cache_get('ie'._FC_KEY)
+	)
+		$p['gz'] = $ie;
 
 	// envoi des entetes
 	eval($p['head']);
@@ -44,9 +47,9 @@ AND strlen($p['gz'])
 	// compression gzip
 	if (strstr(@$_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip')) {
 		header('Content-Encoding: gzip');
-		$body = &$p[$b];
+		$body = &$p['gz'];
 	} else
-		$body = gzinflate(substr($p[$b], 10));
+		$body = gzinflate(substr($p['gz'], 10));
 
 	// cache navigateur ?
 	$etag = '"'.md5($body).'"';

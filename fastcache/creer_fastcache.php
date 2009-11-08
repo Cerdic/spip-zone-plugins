@@ -11,7 +11,6 @@ function creer_fastcache() {
 	$debug = var_export($cfg['debug'] === 'on', true);
 	$pnghack = var_export($cfg['pnghack'] === 'on', true);
 	$toutes = var_export($cfg['toutes'] === 'on', true);
-#	$gzip = var_export($GLOBALS['meta']['auto_compress_http'] === 'oui', true);
 
 	if (!$periode = intval($cfg['periode']))
 		$periode = 180;
@@ -38,7 +37,6 @@ function creer_fastcache() {
 @define ('_FC_META', $meta);
 @define ('_FC_IE_PNGHACK', $pnghack);
 @define ('_FC_TOUTES', $toutes);
-#@define ('_FC_GZIP', $gzip);
 @define ('_FC_COOKIE_PREFIX', $prefix);
 @define ('_FC_MEMOIZATION', $memoization);
 

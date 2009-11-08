@@ -13,8 +13,8 @@ function Fastcache_versionie($page) {
 
 function Fastcache_affichage_final($texte) {
 	global $page, $html, $flag_preserver; # dommage le pipeline ne connait pas les entetes...
-
-	if ($page['duree']
+	if (isset($page['entetes']['X-Spip-Cache'])
+	AND $page['entetes']['X-Spip-Cache'] > 0
 	AND ( _FC_TOUTES OR isset($page['entetes']['X-Fast-Cache']) )
 	) {
 
@@ -28,6 +28,7 @@ function Fastcache_affichage_final($texte) {
 		if (defined('_FC_KEY')) {
 
 			// preparer les entetes
+			$preserver = !$html OR $flag_preserver;
 			$head = #'<'."?php\n".
 				"// ".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']."\n" .
 				"header('Vary: Cookie, Accept-Encoding');\n";
@@ -43,7 +44,7 @@ function Fastcache_affichage_final($texte) {
 					.var_export(intval($GLOBALS[$id]),true).";\n";
 
 			// version MSIE
-			if (_FC_IE_PNGHACK AND $GLOBALS['html'] AND !$flag_preserver)
+			if (_FC_IE_PNGHACK AND !$preserver)
 				$ie = Fastcache_versionie($texte);
 
 			// stocker les caches
@@ -52,19 +53,18 @@ function Fastcache_affichage_final($texte) {
 					'head' => $head,
 					'gz' => gzencode(
 						$texte
-						.(_FC_DEBUG?"\n<!-- read "._FC_KEY." -->\n":'')
-						),
-					'gzie' => gzencode(
-						$ie
-						.(_FC_DEBUG?"\n<!-- read ie "._FC_KEY." -->\n":'')
+						.((_FC_DEBUG AND !$preserver)? "\n<!-- read "._FC_KEY." -->\n":'')
 						),
 					'time' => @filemtime(_FILE_META)
 				),
 				_FC_PERIODE
 			);
+			
+			if (isset($ie))
+				$ok &= cache_set('ie'._FC_KEY, gzencode($ie), _FC_PERIODE);
 
 			return $texte
-				. (_FC_DEBUG
+				. ((_FC_DEBUG AND !$preserver)
 					? ($ok
 						? "\n<!-- stored "._FC_KEY." -->\n"
 						: "\n<!-- error "._FC_KEY." -->\n"
