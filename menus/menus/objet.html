@@ -5,6 +5,6 @@
 	<div class="infos">#ENV{type_objet}-#ENV{id_objet}</div>
 ]
 [(#ENV{appel_menu}|oui)
-	<li class="menu-entree[ (#ENV{css})][ (#ENV{id_objet}|exposer{#ENV{type_objet},#ENV*})]">
+	<li class="menu-entree[ (#ENV{css})][ (#ENV{id_objet}|menus_exposer{#ENV{type_objet},#ENV*{env}})]">
 		<a href="#INFO_URL{#ENV{type_objet}, #ENV{id_objet}}">#GET{titre}</a>
 ]
