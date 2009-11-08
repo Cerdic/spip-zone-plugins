@@ -1,0 +1,11 @@
+<plugin>
+	<nom>SPIP Suggest</nom>
+	<auteur>Yohann Prigent</auteur>
+	<prefix>spip_suggest</prefix>
+	<fonctions>suggest_fonctions.php</fonctions>
+	<version>1</version>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>suggest_fonctions.php</inclure>
+	</pipeline>
+</plugin>
