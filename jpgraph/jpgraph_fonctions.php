@@ -363,6 +363,23 @@ function filtre_jpgraph($str,
 					$plot->SetTheme('earth');
 					break;
                             }
+			    //Detacher une, plusieurs ou toutes les parties du camembert
+			    if ($option['camembert_detacher']) 
+			    {
+				$ecartement=20;
+				if (isset($option['camembert_ecart'])) $ecartement=(int) $option['camembert_ecart'];
+				if ($option['camembert_detacher']=='tout') $plot->ExplodeAll($ecartement);
+				else 
+				{
+					$detachement = explode(",", $option['camembert_detacher']);
+					foreach ($donnee as $key => $value)
+					{
+						$secteur[$key]=0;
+						foreach ($detachement as $key1 => $value1) {if ($key==((int)$value1-1)) $secteur[$key]=$ecartement;}
+					}
+					$plot->Explode($secteur);
+				}
+			    }
 			    //Option de resolution fine
 			    if ($option['resolution_fine']) $graph->SetAntiAliasing();
                             // titre & legende 
@@ -393,6 +410,23 @@ function filtre_jpgraph($str,
 					$plot->SetTheme('earth');
 					break;
                             }
+			    //Detacher une, plusieurs ou toutes les parties du camembert
+			    if ($option['camembert_detacher']) 
+			    {
+				$ecartement=20;
+				if (isset($option['camembert_ecart'])) $ecartement=(int) $option['camembert_ecart'];
+				if ($option['camembert_detacher']=='tout') $plot->ExplodeAll($ecartement);
+				else 
+				{
+					$detachement = explode(",", $option['camembert_detacher']);
+					foreach ($donnee as $key => $value)
+					{
+						$secteur[$key]=0;
+						foreach ($detachement as $key1 => $value1) {if ($key==((int)$value1-1)) $secteur[$key]=$ecartement;}
+					}
+					$plot->Explode($secteur);
+				}
+			    }
 			    //Option de resolution fine
 			    if ($option['resolution_fine']) $graph->SetAntiAliasing();
                             // titre & legende 
