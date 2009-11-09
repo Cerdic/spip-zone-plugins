@@ -12,7 +12,11 @@
 						<ul>
 							<li>
 								<label for="nom_base">Nom de la base de donn&eacute;es</label>
-								<input type="text" name="db_name" id="nom_base" />
+								<input type="text" name="db_name" id="nom_base" value="#ENV{db_name}" />
+							</li>
+							<li>
+								<label for="key_base">Table + Cl&eacute; Fulltext sous la forme table;champ/table;champ</label>
+								<textarea name="db_keys" id="key_base">#ENV{db_keys}</textarea>
 							</li>
 						</ul>
 					</fieldset>
