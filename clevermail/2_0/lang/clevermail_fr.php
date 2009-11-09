@@ -194,6 +194,9 @@
 	  'mail_info_inscription_sujet' => 'Inscription de @sub_email@',
 	  'mail_info_inscription_corps' => 'Alerte envoy&eacute;e par le plugin CleverMail du site @nom_site@ ( @url_site@ ) :'."\n\n".'Inscription de @sub_email@ &agrave; la liste « @lst_name@ »',
     'mail_info_desinscription_corps' => 'Alerte envoy&eacute;e par le plugin CleverMail du site @nom_site@ ( @url_site@ ) :'."\n\n".'D&eacute;sinscription de @sub_email@ de la liste « @lst_name@ »',
-	
+    'news1' => 'Les nouveaut&eacute;s n°1',
+    'news_depuis' => 'Les nouveaut&eacute;s depuis le ',
+	'mauvais_affichage' => 'Si vous ne visualisez pas cet email, lisez-le sur le site',
+	'lire_en_ligne' => 'Lire le message sur le site.'
 	);
 ?>

@@ -6,7 +6,7 @@
 <h1>@@NOM_LETTRE@@</h1>
 
 <div>@@DESCRIPTION@@</div>
-<p><a href="@@URL_LETTRE@@" title="Lire le message sur le site.">Si vous ne visualisez pas cet email, lisez-le sur le site</a>.</p>
+<p><a href="@@URL_LETTRE@@" title="<:clevermail:lire_en_ligne:>"><:clevermail:mauvais_affichage:></a>.</p>
 <BOUCLE_test_contenu(AUTEURS){0,1}{tous}><BOUCLE_articles(ARTICLES){age_relatif<=0}{par date}{inverse}{0,20}>
 [<h2><a href="[(#URL_ARTICLE|url_absolue)]">(#TITRE)</a></h2>]
 <p>[par (#LESAUTEURS|textebrut)][ le (#DATE|affdate)]</p>
