@@ -493,7 +493,6 @@ function pmb_parser_notice_apercu ($localdom, &$tresultat) {
        global $dernierTypeTrouve;
        global $dernierIdTrouve;
     global $gtresultat;
-    global $indice_exemplaire;
 
         // Selon les cas, nous affichons le texte
         // ou nous proposons un lien
@@ -543,20 +542,6 @@ function pmb_parser_notice_apercu ($localdom, &$tresultat) {
 		if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "a")) $gtresultat['id_auteur'] = $dernierIdTrouve;
 		
 		
-		//section996 mode tableau
-		if (($dernierTypeTrouve == "996") && ($dernierSousTypeTrouve == "f")) {
-			$indice_exemplaire++;
-			$gtresultat['tab_exemplaires'][$indice_exemplaire-1] = Array();
-			$gtresultat['tab_exemplaires'][$indice_exemplaire-1]['expl_cb'] .= $texte;
-		}
-
-		if (($dernierTypeTrouve == "996") && ($dernierSousTypeTrouve == "k")) $gtresultat['tab_exemplaires'][$indice_exemplaire-1]['expl_cote'] .= $texte;
-		if (($dernierTypeTrouve == "996") && ($dernierSousTypeTrouve == "e")) $gtresultat['tab_exemplaires'][$indice_exemplaire-1]['tdoc_libelle'] .= $texte;
-		if (($dernierTypeTrouve == "996") && ($dernierSousTypeTrouve == "v")) $gtresultat['tab_exemplaires'][$indice_exemplaire-1]['location_libelle'] .= $texte;
-		if (($dernierTypeTrouve == "996") && ($dernierSousTypeTrouve == "x")) $gtresultat['tab_exemplaires'][$indice_exemplaire-1]['section_libelle'] .= $texte;
-		if (($dernierTypeTrouve == "996") && ($dernierSousTypeTrouve == "1")) $gtresultat['tab_exemplaires'][$indice_exemplaire-1]['empruntable'] .= $texte;
-		if (($dernierTypeTrouve == "996") && ($dernierSousTypeTrouve == "b")) $gtresultat['tab_exemplaires'][$indice_exemplaire-1]['expl_situation'] .= $texte;
-
 
 		
                 break;
@@ -569,8 +554,7 @@ function pmb_ws_parser_notice_xml($id_notice, $value, &$tresultat) {
 	    include_spip("/inc/filtres_images");
 	    global $gtresultat;
 	    global $indice_exemplaire;
-	    $indice_exemplaire = 0;
-	    $gtresultat = array();
+	   $gtresultat = array();
 	
 	    // Création du parseur XML
 	    $parseurXML = xml_parser_create();
@@ -617,7 +601,6 @@ function pmb_ws_parser_notice_serialisee($id_notice, $value, &$tresultat) {
 	    $indice_exemplaire = 0;
 	    $tresultat = Array();
 	
-	    $tresultat['tab_exemplaires'] = Array();
 	    $noticecontent = Array();
 	    $unserialized = $value; 
 	    $unserialized = preg_replace('!s:(\d+):"(.*?)";!se', "'s:'.strlen('$2').':\"$2\";'", $unserialized );
@@ -663,20 +646,7 @@ function pmb_ws_parser_notice_serialisee($id_notice, $value, &$tresultat) {
 				if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "b")) $tresultat['lesauteurs'] .= " ".$texte;
 				if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "a")) $tresultat['id_auteur'] = $dernierIdTrouve;
 				
-				//section996 mode tableau
-				if (($dernierTypeTrouve == "996") && ($dernierSousTypeTrouve == "f")) {
-					$indice_exemplaire++;
-					$tresultat['tab_exemplaires'][$indice_exemplaire-1] = Array();
-					$tresultat['tab_exemplaires'][$indice_exemplaire-1]['expl_cb'] .= $texte;
-				}
-
-				if (($dernierTypeTrouve == "996") && ($dernierSousTypeTrouve == "k")) $tresultat['tab_exemplaires'][$indice_exemplaire-1]['expl_cote'] .= $texte;
-				if (($dernierTypeTrouve == "996") && ($dernierSousTypeTrouve == "e")) $tresultat['tab_exemplaires'][$indice_exemplaire-1]['tdoc_libelle'] .= $texte;
-				if (($dernierTypeTrouve == "996") && ($dernierSousTypeTrouve == "v")) $tresultat['tab_exemplaires'][$indice_exemplaire-1]['location_libelle'] .= $texte;
-				if (($dernierTypeTrouve == "996") && ($dernierSousTypeTrouve == "x")) $tresultat['tab_exemplaires'][$indice_exemplaire-1]['section_libelle'] .= $texte;
-				if (($dernierTypeTrouve == "996") && ($dernierSousTypeTrouve == "1")) $tresultat['tab_exemplaires'][$indice_exemplaire-1]['empruntable'] .= $texte;
-				if (($dernierTypeTrouve == "996") && ($dernierSousTypeTrouve == "b")) $tresultat['tab_exemplaires'][$indice_exemplaire-1]['expl_situation'] .= $texte;
-
+				
 				
 			    }
 		    }
@@ -697,6 +667,36 @@ function pmb_ws_parser_notice_serialisee($id_notice, $value, &$tresultat) {
 	  
 }
 
+function pmb_ws_dispo_exemplaire($id_notice, $id_session=0) {
+  
+	$tresultat = Array();
+	pmb_ws_charger_wsdl($ws, $url_base);
+	
+	try {	
+	     $r=$ws->pmbesItems_fetch_notice_items($id_notice, $id_session);
+	      $cpt = 0;
+	      foreach ($r as $exemplaire) {
+		    $tresultat[$cpt] = Array();
+		    $tresultat[$cpt]['id'] = $exemplaire->id;
+		    $tresultat[$cpt]['cb'] = $exemplaire->cb;
+		    $tresultat[$cpt]['cote'] = $exemplaire->cote;
+		    $tresultat[$cpt]['location_id'] = $exemplaire->location_id;
+		    $tresultat[$cpt]['location_caption'] = $exemplaire->location_caption;
+		    $tresultat[$cpt]['section_id'] = $exemplaire->section_id;
+		    $tresultat[$cpt]['section_caption'] = $exemplaire->section_caption;
+		    $tresultat[$cpt]['statut'] = $exemplaire->statut;
+		    $tresultat[$cpt]['support'] = $exemplaire->support;
+		    $tresultat[$cpt]['situation'] = $exemplaire->situation;
+		    
+		    $cpt++;
+	      }
+		
+
+	} catch (SoapFault $fault) {
+		print("Erreur : ".$fault->faultcode." : ".$fault->faultstring);
+	} 
+	return $tresultat;
+}
 
 //récuperer une notice en xml via les webservices
 function pmb_ws_recuperer_notice ($id_notice, &$ws, &$tresultat) {
