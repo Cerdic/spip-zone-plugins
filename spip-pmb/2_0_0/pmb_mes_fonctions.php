@@ -192,6 +192,8 @@ function pmb_collection_extraire($id_collection, $debut=0, $nbresult=5, $id_sess
 		    $cpt++;
 		  }
 		}
+	      
+
 	} catch (SoapFault $fault) {
 		print("Erreur : ".$fault->faultcode." : ".$fault->faultstring);
 	} 
@@ -540,14 +542,7 @@ function pmb_parser_notice_apercu ($localdom, &$tresultat) {
 		if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "b")) $gtresultat['lesauteurs'] .= " ".$texte;
 		if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "a")) $gtresultat['id_auteur'] = $dernierIdTrouve;
 		
-		//section996 mode html
-		if (($dernierTypeTrouve == "996") && ($dernierSousTypeTrouve == "f")) $gtresultat['exemplaires'] .= "<tr><td class='expl_cb'>".$texte."</td>";
-		if (($dernierTypeTrouve == "996") && ($dernierSousTypeTrouve == "k")) $gtresultat['exemplaires'] .= "<td class='expl_cote'>".$texte."</td>";
-		if (($dernierTypeTrouve == "996") && ($dernierSousTypeTrouve == "e")) $gtresultat['exemplaires'] .= "<td class='tdoc_libelle'>".$texte."</td>";
-		if (($dernierTypeTrouve == "996") && ($dernierSousTypeTrouve == "v")) $gtresultat['exemplaires'] .= "<td class='location_libelle'>".$texte."</td>";
-		if (($dernierTypeTrouve == "996") && ($dernierSousTypeTrouve == "x")) $gtresultat['exemplaires'] .= "<td class='section_libelle'>".$texte."</td>";
-		if (($dernierTypeTrouve == "996") && ($dernierSousTypeTrouve == "1")) $gtresultat['exemplaires'] .= "<td class='expl_situation'><strong>".$texte."</strong></td></tr>";
-
+		
 		//section996 mode tableau
 		if (($dernierTypeTrouve == "996") && ($dernierSousTypeTrouve == "f")) {
 			$indice_exemplaire++;
@@ -618,13 +613,15 @@ function pmb_ws_parser_notice_xml($id_notice, $value, &$tresultat) {
 
 //parsing d'une notice sérialisée
 function pmb_ws_parser_notice_serialisee($id_notice, $value, &$tresultat) {
-	    global $gtresultat;
-	    $gtresultat = array();
+	    include_spip("/inc/filtres_images");
+	    $indice_exemplaire = 0;
+	    $tresultat = Array();
 	
-	    $noticecontent = array();
+	    $tresultat['tab_exemplaires'] = Array();
+	    $noticecontent = Array();
 	    $unserialized = $value; 
 	    $unserialized = preg_replace('!s:(\d+):"(.*?)";!se', "'s:'.strlen('$2').':\"$2\";'", $unserialized );
-
+	    
 	    $noticecontent = unserialize($unserialized);
 	    foreach ( $noticecontent as $c1=>$v1) {
 	      //echo("<br />C1 -> ".$c1."=".$v1);
@@ -637,66 +634,79 @@ function pmb_ws_parser_notice_serialisee($id_notice, $value, &$tresultat) {
 				//echo("<br />attr=".$dernierTypeTrouve.",".$v4['c'].",".$v4['value']);
 				$dernierSousTypeTrouve = $v4['c'];
 				$texte = $v4['value'];
-				if (($dernierTypeTrouve == "010") && ($dernierSousTypeTrouve == "a")) $gtresultat['isbn'] .= $texte;
-				if (($dernierTypeTrouve == "010") && ($dernierSousTypeTrouve == "b")) $gtresultat['reliure'] .= $texte;
-				if (($dernierTypeTrouve == "010") && ($dernierSousTypeTrouve == "d")) $gtresultat['prix'] .= $texte;
+				if (($dernierTypeTrouve == "010") && ($dernierSousTypeTrouve == "a")) $tresultat['isbn'] .= $texte;
+				if (($dernierTypeTrouve == "010") && ($dernierSousTypeTrouve == "b")) $tresultat['reliure'] .= $texte;
+				if (($dernierTypeTrouve == "010") && ($dernierSousTypeTrouve == "d")) $tresultat['prix'] .= $texte;
 				
-				if (($dernierTypeTrouve == "101") && ($dernierSousTypeTrouve == "a")) $gtresultat['langues'] .= $texte;
+				if (($dernierTypeTrouve == "101") && ($dernierSousTypeTrouve == "a")) $tresultat['langues'] .= $texte;
 				
-				if (($dernierTypeTrouve == "102") && ($dernierSousTypeTrouve == "a")) $gtresultat['pays'] .= $texte;
+				if (($dernierTypeTrouve == "102") && ($dernierSousTypeTrouve == "a")) $tresultat['pays'] .= $texte;
 				
-				if (($dernierTypeTrouve == "200") && ($dernierSousTypeTrouve == "a")) $gtresultat['titre'] .= $texte;
-				if (($dernierTypeTrouve == "200") && ($dernierSousTypeTrouve == "f")) $gtresultat['auteur'] .= $texte;
+				if (($dernierTypeTrouve == "200") && ($dernierSousTypeTrouve == "a")) $tresultat['titre'] .= $texte;
+				if (($dernierTypeTrouve == "200") && ($dernierSousTypeTrouve == "f")) $tresultat['auteur'] .= $texte;
 				
-				if (($dernierTypeTrouve == "210") && ($dernierSousTypeTrouve == "c")) $gtresultat['editeur'] .= $texte;
-				if (($dernierTypeTrouve == "210") && ($dernierSousTypeTrouve == "a")) $gtresultat['editeur'] .= ' ('.$texte.')';
-				if (($dernierTypeTrouve == "210") && ($dernierSousTypeTrouve == "c")) $gtresultat['id_editeur'] = $dernierIdTrouve;
-				if (($dernierTypeTrouve == "210") && ($dernierSousTypeTrouve == "d")) $gtresultat['annee_publication'] .= $texte;
+				if (($dernierTypeTrouve == "210") && ($dernierSousTypeTrouve == "c")) $tresultat['editeur'] .= $texte;
+				if (($dernierTypeTrouve == "210") && ($dernierSousTypeTrouve == "a")) $tresultat['editeur'] .= ' ('.$texte.')';
+				if (($dernierTypeTrouve == "210") && ($dernierSousTypeTrouve == "c")) $tresultat['id_editeur'] = $dernierIdTrouve;
+				if (($dernierTypeTrouve == "210") && ($dernierSousTypeTrouve == "d")) $tresultat['annee_publication'] .= $texte;
 				
-				if (($dernierTypeTrouve == "215") && ($dernierSousTypeTrouve == "a")) $gtresultat['importance'] .= $texte;
-				if (($dernierTypeTrouve == "215") && ($dernierSousTypeTrouve == "c")) $gtresultat['presentation'] .= $texte;
-				if (($dernierTypeTrouve == "215") && ($dernierSousTypeTrouve == "d")) $gtresultat['format'] .= $texte;
+				if (($dernierTypeTrouve == "215") && ($dernierSousTypeTrouve == "a")) $tresultat['importance'] .= $texte;
+				if (($dernierTypeTrouve == "215") && ($dernierSousTypeTrouve == "c")) $tresultat['presentation'] .= $texte;
+				if (($dernierTypeTrouve == "215") && ($dernierSousTypeTrouve == "d")) $tresultat['format'] .= $texte;
 				
-				if (($dernierTypeTrouve == "225") && ($dernierSousTypeTrouve == "a")) $gtresultat['collection'] .= $texte;
-				if (($dernierTypeTrouve == "225") && ($dernierSousTypeTrouve == "a")) $gtresultat['id_collection'] = $dernierIdTrouve;
+				if (($dernierTypeTrouve == "225") && ($dernierSousTypeTrouve == "a")) $tresultat['collection'] .= $texte;
+				if (($dernierTypeTrouve == "225") && ($dernierSousTypeTrouve == "a")) $tresultat['id_collection'] = $dernierIdTrouve;
 				
-				if (($dernierTypeTrouve == "330") && ($dernierSousTypeTrouve == "a")) $gtresultat['resume'] .= str_replace("","&oelig;", stripslashes(str_replace("\n","<br />", $texte)));
+				if (($dernierTypeTrouve == "330") && ($dernierSousTypeTrouve == "a")) $tresultat['resume'] .= str_replace("","&oelig;", stripslashes(str_replace("\n","<br />", $texte)));
 				
-				if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "a")) $gtresultat['lesauteurs'] .= $texte;
-				if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "b")) $gtresultat['lesauteurs'] .= " ".$texte;
-				if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "a")) $gtresultat['id_auteur'] = $dernierIdTrouve;
+				if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "a")) $tresultat['lesauteurs'] .= $texte;
+				if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "b")) $tresultat['lesauteurs'] .= " ".$texte;
+				if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "a")) $tresultat['id_auteur'] = $dernierIdTrouve;
 				
+				//section996 mode tableau
+				if (($dernierTypeTrouve == "996") && ($dernierSousTypeTrouve == "f")) {
+					$indice_exemplaire++;
+					$tresultat['tab_exemplaires'][$indice_exemplaire-1] = Array();
+					$tresultat['tab_exemplaires'][$indice_exemplaire-1]['expl_cb'] .= $texte;
+				}
+
+				if (($dernierTypeTrouve == "996") && ($dernierSousTypeTrouve == "k")) $tresultat['tab_exemplaires'][$indice_exemplaire-1]['expl_cote'] .= $texte;
+				if (($dernierTypeTrouve == "996") && ($dernierSousTypeTrouve == "e")) $tresultat['tab_exemplaires'][$indice_exemplaire-1]['tdoc_libelle'] .= $texte;
+				if (($dernierTypeTrouve == "996") && ($dernierSousTypeTrouve == "v")) $tresultat['tab_exemplaires'][$indice_exemplaire-1]['location_libelle'] .= $texte;
+				if (($dernierTypeTrouve == "996") && ($dernierSousTypeTrouve == "x")) $tresultat['tab_exemplaires'][$indice_exemplaire-1]['section_libelle'] .= $texte;
+				if (($dernierTypeTrouve == "996") && ($dernierSousTypeTrouve == "1")) $tresultat['tab_exemplaires'][$indice_exemplaire-1]['empruntable'] .= $texte;
+				if (($dernierTypeTrouve == "996") && ($dernierSousTypeTrouve == "b")) $tresultat['tab_exemplaires'][$indice_exemplaire-1]['expl_situation'] .= $texte;
+
 				
 			    }
 		    }
 	      }
 	    }
 
-	    if ($gtresultat['lesauteurs'] == "")
-		  $gtresultat['lesauteurs'] = $gtresultat['auteur'];
-	     $gtresultat['logo_src'] = lire_config("spip_pmb/url","http://tence.bibli.fr/opac")."/getimage.php?url_image=http%3A%2F%2Fimages-eu.amazon.com%2Fimages%2FP%2F!!isbn!!.08.MZZZZZZZ.jpg&noticecode=".str_replace("-","",$gtresultat['isbn'])."&vigurl=";
+	    if ($tresultat['lesauteurs'] == "")
+		  $tresultat['lesauteurs'] = $tresultat['auteur'];
+	     $tresultat['logo_src'] = lire_config("spip_pmb/url","http://tence.bibli.fr/opac")."/getimage.php?url_image=http%3A%2F%2Fimages-eu.amazon.com%2Fimages%2FP%2F!!isbn!!.08.MZZZZZZZ.jpg&noticecode=".str_replace("-","",$tresultat['isbn'])."&vigurl=";
 
-	    //cas où il n'y a pas d'image pmb renvoie un carré de 1 par 1 transparent.
-	    $tmp_img = image_reduire("<img src=\"".copie_locale($gtresultat['logo_src'])."\" />", 130, 0);
+	     //cas où il n'y a pas d'image pmb renvoie un carré de 1 par 1 transparent.
+	    $tmp_img = image_reduire("<img src=\"".copie_locale($tresultat['logo_src'])."\" />", 130, 0);
 	    if (strpos($tmp_img, "L1xH1") !== false)  $gtresultat['logo_src'] = "";
-	    
-	    $gtresultat['id'] = $id_notice;
+
+	    $tresultat['id'] = $id_notice;
 	    
 
-	    $tresultat = $gtresultat ;
+	  
 }
 
 
 //récuperer une notice en xml via les webservices
 function pmb_ws_recuperer_notice ($id_notice, &$ws, &$tresultat) {
 	
-	
 	try {	
 	$listenotices = array(''.$id_notice);
 	$tresultat['id'] = $id_notice;
-		  $r=$ws->pmbesNotices_fetchNoticeList($listenotices,"pmb_xml_unimarc","utf8",true,true);
+		  $r=$ws->pmbesNotices_fetchNoticeList($listenotices,"serialized_unimarc","utf8",true,true);
 		  foreach($r as $value) {
-		      pmb_ws_parser_notice_xml($id_notice, $value, $tresultat);
+		        pmb_ws_parser_notice_serialisee($id_notice, $value, $tresultat);
 		  }
 		
 
@@ -714,11 +724,11 @@ function pmb_ws_recuperer_tab_notices ($listenotices, &$ws, &$tresultat) {
 	try {	
 	
 	$tresultat['id'] = $id_notice;
-		  $r=$ws->pmbesNotices_fetchNoticeList($listenotices,"pmb_xml_unimarc","utf8",true,true);
+		  $r=$ws->pmbesNotices_fetchNoticeList($listenotices,"serialized_unimarc","utf8",true,true);
 		  $cpt=0;
 		  foreach($r as $value) {
 		      $tresultat[$cpt] = Array();
-		      pmb_ws_parser_notice_xml($id_notice, $value, $tresultat[$cpt]);
+		      pmb_ws_parser_notice_serialisee($id_notice, $value, $tresultat[$cpt]);
 		      $cpt++;
 		  }
 		
