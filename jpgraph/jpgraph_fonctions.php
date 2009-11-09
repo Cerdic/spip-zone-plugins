@@ -156,7 +156,7 @@ function filtre_jpgraph($str,
     switch($type_graphe) {
         case "point": $graph = new Graph($largeur,$hauteur);
 		$graph->SetScale("linlin");
-		$plot = new ScatterPlot($donnee,$donneedeux);
+		$plot = new ScatterPlot($donneedeux,$donnee);
 		if (isset($marqueur_formes[$marqueur['nom']])) 
 			$plot->mark->SetType($marqueur_formes[$marqueur['nom']]);
 		if ($marqueur['contour']) $plot->mark->SetColor($marqueur['contour']);
