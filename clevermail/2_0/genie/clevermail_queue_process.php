@@ -33,6 +33,7 @@ function genie_clevermail_queue_process_dist($t, $verbose = 'no') {
 			$template = array();
 			$template['@@SUJET_LETTRE@@'] = $post['pst_subject'];
 			$template['@@ID_LETTRE@@'] = $message['pst_id'];
+			$template['@@URL_LETTRE@@'] = generer_url_public(_CLEVERMAIL_LETTRE_EN_LIGNE,'id='.$message['pst_id']);
 			$template['@@NOM_LETTRE@@'] = $list['lst_name'];
 			$template['@@DESCRIPTION@@'] = propre($list['lst_comment']);
 			$template['@@FORMAT_INSCRIPTION@@'] = $mode;
@@ -42,7 +43,8 @@ function genie_clevermail_queue_process_dist($t, $verbose = 'no') {
 			$template[dirname($list['lst_url_html']).'/@@URL_DESINSCRIPTION@@'] = '@@URL_DESINSCRIPTION@@';
 			$template[dirname($list['lst_url_txt']).'/@@URL_DESINSCRIPTION@@'] = '@@URL_DESINSCRIPTION@@';
 
-			$template['@@URL_DESINSCRIPTION@@'] = $GLOBALS['meta']['adresse_site'].'/spip.php?page=clevermail_rm&id='.$subscription['lsr_id'];
+			//$template['@@URL_DESINSCRIPTION@@'] = $GLOBALS['meta']['adresse_site'].'/spip.php?page=clevermail_rm&id='.$subscription['lsr_id'];
+			$template['@@URL_DESINSCRIPTION@@'] = generer_url_public(_CLEVERMAIL_INVALIDATION,'id='.$subscription['lsr_id']);
 			reset($template);
 			while (list($templateFrom, $templateTo) = each($template)) {
 				$text = str_replace($templateFrom, $templateTo, $text);

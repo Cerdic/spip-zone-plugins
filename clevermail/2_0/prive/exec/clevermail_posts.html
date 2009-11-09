@@ -1,4 +1,6 @@
 <h1 class="grostitre"><:clevermail:administration:></h1>
+#SET{preview_text,#EVAL{_CLEVERMAIL_PREVIEW_TEXTE}}
+#SET{preview_html,#EVAL{_CLEVERMAIL_PREVIEW_HTML}}
 <BOUCLE_list(spip_cm_lists){lst_id=#ENV{lst_id}}>
   <BOUCLE_subscribers(spip_cm_lists_subscribers){lst_id} />#SET{nbSubs,#TOTAL_BOUCLE}<//B_subscribers>
   <h2>#LST_NAME</h2>
@@ -15,8 +17,8 @@
 		      </div>
 			    <div class="actions">
 				    <:clevermail:actions:> :
-				    <a href="[(#URL_PAGE{clevermail_post_preview_text}|parametre_url{pst_id,#PST_ID})]" target="_blank"><:clevermail:apercu:> TXT</a>
-	          | <a href="[(#URL_PAGE{clevermail_post_preview_html}|parametre_url{pst_id,#PST_ID})]" target="_blank"><:clevermail:apercu:> HTML</a>
+				    <a href="[(#URL_PAGE{#GET{preview_text}}|parametre_url{pst_id,#PST_ID})]" target="_blank"><:clevermail:apercu:> TXT</a>
+	          | <a href="[(#URL_PAGE{#GET{preview_html}}|parametre_url{pst_id,#PST_ID})]" target="_blank"><:clevermail:apercu:> HTML</a>
 				    | <a href="[(#URL_ECRIRE{clevermail_post_edit}|parametre_url{pst_id,#PST_ID})]"><:clevermail:modifier:></a>
 		        | [(#BOUTON_ACTION{<:clevermail:supprimer:>,#URL_ACTION_AUTEUR{clevermail_post_remove,#PST_ID,#SELF,ajax}})]
 	          [(#GET{nbSubs}|>{0}|oui)
@@ -49,8 +51,8 @@
 	          </div>
             <div class="actions">
               <:clevermail:actions:> :
-              <a href="[(#URL_PAGE{clevermail_post_preview_text}|parametre_url{pst_id,#PST_ID})]" target="_blank"><:clevermail:apercu:> TXT</a>
-              | <a href="[(#URL_PAGE{clevermail_post_preview_html}|parametre_url{pst_id,#PST_ID})]" target="_blank"><:clevermail:apercu:> HTML</a>
+              <a href="[(#URL_PAGE{#GET{preview_text}}|parametre_url{pst_id,#PST_ID})]" target="_blank"><:clevermail:apercu:> TXT</a>
+              | <a href="[(#URL_PAGE{#GET{preview_html}}|parametre_url{pst_id,#PST_ID})]" target="_blank"><:clevermail:apercu:> HTML</a>
             </div>
 	        </li>
 	      </BOUCLE_post_queued>
@@ -78,8 +80,8 @@
             </div>
 	          <div class="actions">
 	            <:clevermail:actions:> :
-	            <a href="[(#URL_PAGE{clevermail_post_preview_text}|parametre_url{pst_id,#PST_ID})]" target="_blank"><:clevermail:apercu:> TXT</a>
-	            | <a href="[(#URL_PAGE{clevermail_post_preview_html}|parametre_url{pst_id,#PST_ID})]" target="_blank"><:clevermail:apercu:> HTML</a>
+	            <a href="[(#URL_PAGE{#GET{preview_text}}|parametre_url{pst_id,#PST_ID})]" target="_blank"><:clevermail:apercu:> TXT</a>
+	            | <a href="[(#URL_PAGE{#GET{preview_html}}|parametre_url{pst_id,#PST_ID})]" target="_blank"><:clevermail:apercu:> HTML</a>
               [(#BOUTON_ACTION{<:clevermail:supprimer:>,#URL_ACTION_AUTEUR{clevermail_post_remove,#PST_ID,#SELF,ajax}})]
             </div>
           </li>

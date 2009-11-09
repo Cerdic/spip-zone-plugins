@@ -98,7 +98,8 @@ function formulaires_clevermail_traiter_dist($lst_id = 0, $lsr_mode_force = fals
           $template['@@DESCRIPTION@@'] = $listData['lst_comment'];
           $template['@@FORMAT_INSCRIPTION@@']  = (intval($lsr_mode) == 1 ? _T('choix_version_html') : _T('choix_version_texte'));
           $template['@@EMAIL@@'] = _request('sub_email');
-          $template['@@URL_CONFIRMATION@@'] = $GLOBALS['meta']['adresse_site'].'/spip.php?page=clevermail_do&id='.$actionId;
+          //$template['@@URL_CONFIRMATION@@'] = $GLOBALS['meta']['adresse_site'].'/spip.php?page=clevermail_do&id='.$actionId;
+          $template['@@URL_CONFIRMATION@@'] = generer_url_public(_CLEVERMAIL_VALIDATION,'id='.$actionId);
           $body = $listData['lst_subscribe_text'];
           while (list($translateFrom, $translateTo) = each($template)) {
             $body = str_replace($translateFrom, $translateTo, $body);
