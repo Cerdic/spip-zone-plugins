@@ -163,7 +163,6 @@ function pmb_install($action){
 			pmb_location_caption  VARCHAR(255) NOT NULL,
 			pmb_adhesion_date  VARCHAR(255) NOT NULL,
 			pmb_expiration_date  VARCHAR(255) NOT NULL,
-			pmb_twitter  VARCHAR(255) NOT NULL
 			PRIMARY KEY  (id_auteur_pmb),
 			KEY id_syndic (id_auteur)) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=513 ");
 
