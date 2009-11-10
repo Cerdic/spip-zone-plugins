@@ -15,8 +15,27 @@
 								<input type="text" name="db_name" id="nom_base" value="#ENV{db_name}" />
 							</li>
 							<li>
-								<label for="key_base">Table + Cl&eacute; Fulltext sous la forme table;champ/table;champ</label>
+								<p class="explication">
+									 Mettre sous la forme table:champ,table:champ
+								</p>
+								<label for="key_base">Cl&eacute;s Fulltext</label>
 								<textarea name="db_keys" id="key_base">#ENV{db_keys}</textarea>
+							</li>
+						</ul>
+					</fieldset>
+					<fieldset>
+						<h3 class="legend">Javascript</h3>
+						<ul>
+							<li>
+								<label for="suggest_width">Largeur du champ de suggestion</label>
+								<input type="text" name="suggest_width" id="suggest_width" value="#ENV{suggest_width, 205}" />
+							</li>
+							<li>
+								<p class="explication">
+									Champ o&ugrave; afficher les suggestions
+								</p>
+								<label for="suggest_selecteur">S&eacute;l&eacute;cteur CSS</label>
+								<input type="text" name="suggest_selecteur" id="suggest_selecteur" value="#ENV{suggest_selecteur, #recherche}" />
 							</li>
 						</ul>
 					</fieldset>

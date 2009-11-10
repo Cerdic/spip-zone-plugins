@@ -1,6 +1,9 @@
+[(#REM)Cache à 0 comme les requetes sont différentes ?]
 #CACHE{0}
 #HTTP_HEADER{Content-Type: text/css; charset=utf-8}
 #HTTP_HEADER{Vary: Accept-Encoding}
+
+[(#REM)On passe la variable q envoyée par le javascript du formulaire au php]
 
 [(#ENV{q}|oui)
 [(#ENV{q}|spip_suggest_complete)]]
