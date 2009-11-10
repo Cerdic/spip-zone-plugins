@@ -124,7 +124,7 @@ function recherche_ldap($filtre){
 }
 
 /**
-* Insère les entrées a l'aide de la méthode auth_ldap_inserer de Spip
+* Insère les entrées 
 * Retourne le résultat de l'insertion :
 * 0 Echec
 * 1 Identifiant existant déjà
@@ -132,15 +132,20 @@ function recherche_ldap($filtre){
 */
 function insere_auteur($dn,$mail){
 		// Controle qu'un identifiant de connexion identique ne soit pas déjà présent
-        $select = sql_select(array("*"),array("spip_auteurs"),array("email=\"".strtolower($mail)."\""));
-        $cpt = sql_count($select);
-        if ($cpt > 0){
+
+	if (sql_countsel("spip_auteurs","email=".sql_quote(strtolower($mail))))
                 return 1;
-        }
-        if (auth_ldap_inserer($dn, $GLOBALS['meta']["ldap_statut_import"]))
-                return 2;
-        else
-                return 0;
+
+	if ($GLOBALS['meta']["ldap_statut_import"]
+	AND $desc = auth_ldap_retrouver($dn, array('login' => 'uid', 'nom' => 'cn', 'email' => 'mail'))) {
+	  // rajouter le statut indique  a l'install
+		$desc['statut'] = $GLOBALS['meta']["ldap_statut_import"];
+		$desc['source'] = 'ldap';
+		$desc['pass'] = '';
+
+		if (sql_insertq('spip_auteurs', $desc)) return 2;
+	}
+	return 0;
 }
 
 /*
