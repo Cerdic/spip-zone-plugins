@@ -11,8 +11,9 @@
             <input type="hidden" name="lsr_mode" value="[(#ENV{lsr_mode_force}|=={texte}|?{0,1})]" />
           ]
 	      <ul>
-	        [(#ENV{lst_id}|non)
-            <INCLURE{fond=public/clevermail_abonnement_plusieurs_listes}{env}>
+	        [(#ENV{lst_id}|non)	    
+            [(#ENV{cbox}|non)<INCLURE{fond=public/clevermail_abonnement_plusieurs_listes}{env}>]
+            [(#ENV{cbox}|oui)<INCLURE{fond=public/clevermail_abonnement_plusieurs_listes_checkbox,env} />]
           ]
 	        #SET{name,sub_email}
 	        #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
@@ -42,7 +43,7 @@
 		        </li>
 	        ]
 	      </ul>
-	      <p class="boutons"><span class="image_loading"></span><input type="submit" class="submit" value="<:clevermail:bouton_inscription:>" /></p>
+	      <p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:clevermail:bouton_inscription:>" /></p>
 	  </div></form>
 	]
 </div>
