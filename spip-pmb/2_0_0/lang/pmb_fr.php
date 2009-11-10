@@ -69,7 +69,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'publisher_country' => 'Pays',
 'publisher_web' => 'Site internet',
 'collection_issn' => 'ISSN',
-'collection_web' => 'Site internet'
+'collection_web' => 'Site internet',
+'notices_consultees' => 'Derniers ouvrages consult&eacute;s'
 
 );
 ?>

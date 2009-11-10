@@ -704,7 +704,7 @@ function pmb_ws_recuperer_notice ($id_notice, &$ws, &$tresultat) {
 	try {	
 	$listenotices = array(''.$id_notice);
 	$tresultat['id'] = $id_notice;
-		  $r=$ws->pmbesNotices_fetchNoticeList($listenotices,"serialized_unimarc","utf8",true,true);
+		  $r=$ws->pmbesNotices_fetchNoticeList($listenotices,"serialized_unimarc","utf8",true,false);
 		  foreach($r as $value) {
 		        pmb_ws_parser_notice_serialisee($id_notice, $value, $tresultat);
 		  }
@@ -724,7 +724,7 @@ function pmb_ws_recuperer_tab_notices ($listenotices, &$ws, &$tresultat) {
 	try {	
 	
 	$tresultat['id'] = $id_notice;
-		  $r=$ws->pmbesNotices_fetchNoticeList($listenotices,"serialized_unimarc","utf8",true,true);
+		  $r=$ws->pmbesNotices_fetchNoticeList($listenotices,"serialized_unimarc","utf8",true,false);
 		  $cpt=0;
 		  foreach($r as $value) {
 		      $tresultat[$cpt] = Array();

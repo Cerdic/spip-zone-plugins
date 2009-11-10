@@ -54,6 +54,19 @@
 </div>
 </B_rubriques>
 
+<B_tab_noticesconsultees>
+<div class="menu rubriques">
+	<h2><:pmb:notices_consultees:></h2>
+	<ul>
+	<BOUCLE_tab_noticesconsultees(POUR){tableau #SESSION{tab_noticesconsultees}}>
+		<li>
+					[(#SESSION{tab_noticesconsultees}|table_valeur{#CLE})]		
+		</li>
+	</BOUCLE_tab_noticesconsultees>
+	</ul>
+</div>
+</B_tab_noticesconsultees>
+
 <BOUCLE_rubriquesconferences(RUBRIQUES){titre_mot=conferences}>
 <div class="menu multimedia">
 	<h2>[(#TITRE)] <a href="#URL_RUBRIQUE">[<:pmb:en_savoir_plus:>]</a></h2>
