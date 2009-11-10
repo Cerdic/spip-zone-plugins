@@ -33,15 +33,21 @@
 	
 	function i2_spiplistes_i2_traiter_formulaire($flux){
 		$id_auteur = $flux['args']['id_auteur'];
-		$listes = _request('newsletters',array()); 
-		$listes_str = is_array($listes)? implode(',',$listes): '0';
-		sql_delete("spip_auteurs_listes","id_auteur=$id_auteur AND id_liste NOT IN ($listes_str)");
-		foreach($listes as $cle => $liste){
-			if(!$id_liste = sql_getfetsel("id_liste","spip_auteurs_listes","id_auteur=$id_auteur AND id_liste=$liste")){
-				$couple = array('id_auteur'=>$id_auteur,'id_liste'=>$liste,'date_inscription' => date("Y-m-d H:i:s",time()));
-				sql_insertq('spip_auteurs_listes',$couple);
+		$listes = _request('newsletters'); 
+		$format = _request('newsletter') ;
+		if(($format == "html") or ($format == "texte")){
+			// on maj le format de reception avec le format par defaut
+			sql_updateq("spip_auteurs_elargis",array('spip_listes_format'=>$format),"id_auteur=$id_auteur");
+			// on abonne aux listes
+			$listes_str = is_array($listes)? implode(',',$listes): '0';
+			sql_delete("spip_auteurs_listes","id_auteur=$id_auteur AND id_liste NOT IN ($listes_str)");
+			foreach($listes as $cle => $liste){
+				if(!$id_liste = sql_getfetsel("id_liste","spip_auteurs_listes","id_auteur=$id_auteur AND id_liste=$liste")){
+					$couple = array('id_auteur'=>$id_auteur,'id_liste'=>$liste,'date_inscription' => date("Y-m-d H:i:s",time()));
+					sql_insertq('spip_auteurs_listes',$couple);
+				}
 			}
-		}
+		}	
 		return $flux;
 	}
 	
