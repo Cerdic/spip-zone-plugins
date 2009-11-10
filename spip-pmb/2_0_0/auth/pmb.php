@@ -20,30 +20,30 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // http://doc.spip.org/@inc_auth_ldap_dist
 function auth_pmb_dist ($login, $pass, $md5pass="", $md5next="") {
 
-	spip_log("pmb $login " . ($pass ? "mdp fourni" : "mdp absent"));
+	spip_log("pmb $login " . ($pass ? "mdp fourni" : "mdp absent"). ($md5pass ? "md5mdp fourni" : "md5mdp absent"));
 	//connexion webservices pmb
 	if (!$ws=new SoapClient(lire_config('pmb/wsdl','http://tence.bibli.fr/pmbws/PMBWsSOAP_1?wsdl'))) return false;
 	
 	// Securite 
-	if (!$login || !$pass) return array();
+	if (!$login || (!$pass && !$md5pass)) return array();
 
-spip_log("test1");
 		     
-	  
+	 if (!$md5pass AND $pass) {
+		$md5pass = md5($pass);
+	} 
 
 	// Utilisateur connu ?
 	try {
-	      $session_id = $ws->pmbesOPACEmpr_login($login,$pass);
+	      //$session_id = $ws->pmbesOPACEmpr_login($login,$pass);
+	      $session_id = $ws->pmbesOPACEmpr_login_md5($login,$md5pass);
 	      if ($session_id) {
 		      // importer les infos depuis pmb, 
 		      // avec le statut par defaut a l'install
 		      // refuser d'importer n'importe qui 
 		      if (!$statut = $GLOBALS['pmb_statut_nouvel_auteur']) return array();
-		      spip_log("test2");
-
+		      
 		      if (!$resultpmb = $ws->pmbesOPACEmpr_get_account_info($session_id)) return array();  
 		      
-		      spip_log("test3");
 		      
 		      // Si l'utilisateur figure deja dans la base, y recuperer les infos
 		      if ($result = sql_fetsel("*", "spip_auteurs", "login=" . sql_quote($login) . " AND source='pmb'")) {
@@ -66,7 +66,6 @@ spip_log("test1");
 				      'pmb_expiration_date' => importer_charset($resultpmb->expiration_date, 'utf-8')),
 				      "id_auteur=".$result['id_auteur']);
 
-			    spip_log("test4");
 			    return $result;
 		      }
 		      
@@ -87,8 +86,7 @@ spip_log("test1");
 				      'statut' => $statut,
 				      'pass' => ''));
 		       spip_log("Creation de l'auteur '$nom' dans spip_auteurs id->".$n);
-		     spip_log("test5");
-		     
+		    
 		      //renseigner les infos pmb de l'auteur
 		      $m = sql_insertq('spip_auteurs_pmb', array(
 				      'id_auteur' => $n,
@@ -120,7 +118,7 @@ spip_log("test1");
 		      
 	      } else {
 		     //utilisateur inconnu
-		     return array();  
+		    return array();  
 	      }
 	} catch (SoapFault $fault) {
 		print("Erreur : ".$fault->faultcode." : ".$fault->faultstring);

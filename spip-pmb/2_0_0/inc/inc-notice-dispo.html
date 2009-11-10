@@ -1,0 +1,26 @@
+#CACHE{0}
+[(#SET{tab_exemplaires, [(#ENV{id}|pmb_ws_dispo_exemplaire)]})]
+
+	<B_tab_exemplaires>
+	<div class="spip pmb-exemplaires">
+		<h2><:pmb:exemplaires:></h2>
+		<table cellpadding='2' class='exemplaires' width='79%'>
+		    <tr class="row_first"><th class='expl_header_expl_cb'>Code barre</th><th class='expl_header_expl_cote'>Cote</th><th class='expl_header_tdoc_libelle'>Support</th><th class='expl_header_location_libelle'>Localisation</th><th class='expl_header_section_libelle'>Section</th><th>Disponibilité</th></tr>
+
+		    <BOUCLE_tab_exemplaires(POUR){tableau #GET{tab_exemplaires}}>
+			  <tr[ class="(#COMPTEUR_BOUCLE|modulo{2}|?{row_even,row_odd})"]>
+				    <td class='expl_cb'>[(#GET{tab_exemplaires}|pmb_tableau2_valeur{#CLE, cb})]</td>
+				    <td class='expl_cote'>[(#GET{tab_exemplaires}|pmb_tableau2_valeur{#CLE, cote})]</td>
+				    <td class='tdoc_libelle'>[(#GET{tab_exemplaires}|pmb_tableau2_valeur{#CLE, support})]</td>
+				    <td class='location_libelle'>[(#GET{tab_exemplaires}|pmb_tableau2_valeur{#CLE, location_caption})]</td>
+				    <td class='section_libelle'>[(#GET{tab_exemplaires}|pmb_tableau2_valeur{#CLE, section_caption})]</td>
+				    <td class='expl_situation'><strong>[(#GET{tab_exemplaires}|pmb_tableau2_valeur{#CLE, situation})]</strong></td>
+				    
+				
+			  </tr>
+
+		    </BOUCLE_tab_exemplaires>
+		</table>
+	</div>
+	</B_tab_exemplaires>
+	<//B_tab_exemplaires> 

@@ -1,0 +1,45 @@
+<div class="corps-conteneur surlignable">
+		<div class="pmb-ouvrage-infos">	
+			
+			    [<p><:pmb:collection_issn:> : (#ENV{tab_resultat}|pmb_notice_champ{'collection_issn'})</p>]
+			    [<p><:pmb:publisher_web:> : <a href="[(#ENV{tab_resultat}|pmb_notice_champ{'collection_web'})]">(#ENV{tab_resultat}|pmb_notice_champ{'collection_web'})</a></p>]
+		</div>
+	</div>
+		
+	<div class="menu articles ouvrages">
+			[(#SET{tab_notices,[(#ENV{tab_resultat}|pmb_notice_champ{'notice_ids'})]})]
+			<B_tab_resultat>
+				<br class="nettoyeur" />
+				[(#GET{tab_notices}|pmb_tableau2_valeur{0,nb_resultats}|>{1}|oui)
+				      [<p><:pmb:resultats:> [(#ENV{debut}|plus{1})] <:pmb:a:> [(#ENV{debut}|plus{[(#ENV{fin}|sinon{5})]}|min{[(#GET{tab_notices}|pmb_tableau2_valeur{0,nb_resultats})]})] <:pmb:sur:> (#GET{tab_notices}|pmb_tableau2_valeur{0,nb_resultats}) <:pmb:ouvrages_trouves:>.</p>]
+				 ]
+				[(#GET{tab_notices}|pmb_tableau2_valeur{0,nb_resultats}|>{1}|non)
+				      [<p>(#GET{tab_notices}|pmb_tableau2_valeur{0,nb_resultats}) <:pmb:ouvrage_trouve:> :</p>]
+				 ]
+				[(#GET{tab_notices}|pmb_tableau2_valeur{0,nb_resultats}|moins{5}|<={0}|non)<a class="pmb_pagination_suiv" href="[(#SELF|parametre_url{debut,[(#ENV{debut}|plus{5})]})]#resultats_recherche" title="<:pmb:resultats_suivants:>">>></a>]
+				[(#ENV{debut}|moins{5}|>={0}|oui)<a class="pmb_pagination_prec" href="[(#SELF|parametre_url{debut,[(#ENV{debut}|moins{5})]})]#resultats_recherche" title="<:pmb:resultats_precedents:>"><<</a>]
+				<br class="nettoyeur" />
+			<h2><:pmb:ouvrages:></h2>
+			<ul>
+				<BOUCLE_tab_resultat(POUR){tableau #GET{tab_notices}}>
+					[(#COMPTEUR_BOUCLE|>{1}|?{' ',''})
+					<li>
+						[(#GET{tab_notices}|pmb_tableau2_valeur{#CLE, logo_src}|oui)
+						    [(#REM|?{'','<img />'}|inserer_attribut{class,spip_logos}|inserer_attribut{src,[(#GET{tab_notices}|pmb_tableau2_valeur{#CLE, logo_src}|copie_locale)]}|image_reduire{130,0})]
+						]
+						<h3[(#ENV{look_TITLE}|oui) class="surlignable"]><a href="index.php?page=notice_display&id=[(#GET{tab_notices}|pmb_tableau2_valeur{#CLE, id})]">[(#GET{tab_notices}|pmb_tableau2_valeur{#CLE, titre})]</a></h3>
+                				[<small[(#ENV{look_AUTHOR}|oui) class="surlignable"]><:par_auteur:> (#GET{tab_notices}|pmb_tableau2_valeur{#CLE, lesauteurs})</small>]
+						[(#ENV{look_PUBLISHER}|oui)[[(#GET{tab_notices}|pmb_tableau2_valeur{#CLE, lesauteurs}|oui)<br />]<small class="surlignable">&eacute;diteur : (#GET{tab_notices}|pmb_tableau2_valeur{#CLE, editeur})</small>]]
+					
+						[<div class="introduction entry-content[(#ENV{look_ABSTRACT}|oui) surlignable]">(#GET{tab_notices}|pmb_tableau2_valeur{#CLE, resume}|couper{300,'...'})</div>]
+						<a class="lire-la-suite pas_surlignable" title="[(#GET{tab_notices}|pmb_tableau2_valeur{#CLE, titre})]" href="index.php?page=notice_display&id=[(#GET{tab_notices}|pmb_tableau2_valeur{#CLE, id})]"><:lire_la_suite:> +</a>
+
+					</li>]
+				</BOUCLE_tab_resultat>
+			</ul>
+
+			
+			</B_tab_resultat>
+				<:pmb:pas_d_ouvrages_trouves:>
+			<//B_tab_resultat>
+		</div> 
