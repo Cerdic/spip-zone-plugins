@@ -21,7 +21,7 @@
 }
 
 #spiplistes-formabo form {
-	padding:2em 4ex 0;
+	padding: 0 2em;
 }
 
 #spiplistes-formabo form fieldset {
@@ -45,6 +45,7 @@
 }
 #spiplistes-formabo .message-formulaire {
 	color:black;
+	padding: 0 2em;
 	/* font-size:90%; /*  */
 }
 #spiplistes-formabo form .spip_bouton {
