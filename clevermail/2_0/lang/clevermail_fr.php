@@ -27,6 +27,7 @@
 		'desinscription_validee' => 'Votre d&eacute;sinscription de la liste « @lst_name@ » est valid&eacute;e. A bientôt.',
 		'deja_validee' => 'Cette op&eacute;ration a d&eacute;j&agrave; &eacute;t&eacute; valid&eacute;e. D&eacute;sol&eacute;.',
 		'aucune_inscription' => 'Aucune inscription ne correspond &agrave; ce param&egrave;tre.',
+		'demande_transmise' => 'Votre demande d\'inscription &agrave; la liste « @lst_name@ » va &ecirc;tre examin&eacute;e dans les plus brefs d&eacute;lais.',
 		'desinscription_confirmation_debut' => 'D&eacute;sinscription de la lettre d\'information',
 		'desinscription_confirmation_fin' => 'demand&eacute;e. Vous allez recevoir un message demandant confirmation.',
 		'inscription_ok' => 'Vous allez recevoir un message de demande de confirmation de votre inscription &agrave; la liste « @lst_name@ ».',
@@ -36,6 +37,17 @@
 		'email_non_valide' => 'Adresse non valide.',
 	  'front_clevermail_action_validation' => 'Validation d\'une op&eacute;ration',
 	  'front_clevermail_unsubscription_query' => 'Demande de d&eacute;sinscription',
+	  'corps_mail_mod' => 'Bonjour,
+	  
+Vous recevez ce message en tant que mod&eacute;rateur de la liste @@NOM_LETTRE@@.
+
+Pour valider l\'inscription de @mail@ &agrave; cette lettre, veuillez cliquer sur ce lien :
+
+ @@URL_CONFIRMATION@@
+
+Merci',
+'sujet_mail_mod' => 'Mod&#233;ration de la liste @nom_lettre@',
+'inscription_encours' => 'Votre demande d\'inscription &agrave; la liste @nom_lettre@ est en cours d\'examen. Merci de patienter.',
 
 	  // Back Office : toutes pages
     'administration' => 'Administration de CleverMail',
