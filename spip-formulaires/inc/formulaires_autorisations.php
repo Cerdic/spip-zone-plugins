@@ -34,6 +34,10 @@
 				break;
 		}
 	}
+	
+	function autoriser_formulaires_tous_bouton_dist($faire, $type, $id, $qui, $opt) {
+		return autoriser_formulaires_dist($faire, $type, $id, $qui, $opt);
+	}
 
 
 ?>
