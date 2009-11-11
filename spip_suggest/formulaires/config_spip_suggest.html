@@ -40,6 +40,17 @@
 								<label for="suggest_selecteur">S&eacute;lecteur CSS</label>
 								<input type="text" name="suggest_selecteur" id="suggest_selecteur" value="#ENV{suggest_selecteur, #recherche}" />
 							</li>
+							<li>
+								<p class="explication">
+									Comment classer les r&eacute;sultats ?
+								</p>
+								<label>Type de classement</label>
+								<label for="suggest_classement_1">Par nom</label>
+								<input type="radio" name="suggest_classement" id="suggest_classement_1" value="nom"[ checked="checked"(#ENV{suggest_classement, nom}|=={nom})] />
+								<label for="suggest_classement_2">Par popularit&eacute;</label>
+								<input type="radio" name="suggest_classement" id="suggest_classement_2" value="popularite"[ checked="checked"(#ENV{suggest_classement, nom}|=={popularite})] />
+							</li>
+
 						</ul>
 					</fieldset>
 				</li>

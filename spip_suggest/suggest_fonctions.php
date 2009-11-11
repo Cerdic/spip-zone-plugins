@@ -35,7 +35,7 @@ function spip_suggest_insert_head ($flux) {
 	$(document).ready(function(){
 		function formatItem(row) {
 			if (row[1] == 1) {
-				return row[0] + " (<strong>" + row[1] + " r&eacute;sultat</strong>)";
+				return row[0] + " (" + row[1] + " r&eacute;sultat)";
 			}
 			else if (row[1] > 1) {
 				return row[0] + " (<strong>" + row[1] + " r&eacute;sultats</strong>)";
