@@ -1,0 +1,47 @@
+<BOUCLE_auteur(AUTEURS){tous} {id_auteur=(#ENV{id_auteur})}>
+<div class="message-formulaire">
+	<p class='nom'>#NOM</p>
+	<p class='souhait'><:spiplistes:effectuez_modif_validez:></p>
+</div>
+</BOUCLE_auteur>
+
+<div class="formulaire_spip formulaire_gestion_abonnement ajax">
+	<!-- <br class='bugajaxie' /> -->
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type="hidden" name="d" value="[(#ENV{d})]" />
+		<ul>
+		[(#INCLURE{fond=formulaires/inc-liste_des_listes}{env}
+			{explication=<:spiplistes:vous_etes_abonne_aux_listes_selectionnees_:>})]
+		<li class="bloc-formats fieldset">
+			<fieldset><h3 class="legend"><:spiplistes:format_de_reception:></h3>
+			<ul><li>
+				<div class="choix">
+					<input type="radio" class="radio" name="suppl_abo" [(#ENV{format}|=={html}|?{'checked="checked"',''})] value="html" id='fslhtml' />
+					<label for='fslhtml'><:spiplistes:html:><:spiplistes:html_description:></label>
+				</div>
+				<div class="choix">
+					<input type="radio" class="radio" name="suppl_abo" [(#ENV{format}|=={texte}|?{'checked="checked"',''})] value="texte" id='fsltexte' />
+					<label for='fsltexte'><:spiplistes:texte_brut:></label>
+				</div>
+			</li></ul>
+			</fieldset>
+		</li>
+		<li class="desabonnement fieldset">
+			<fieldset><h3 class="legend"><:spiplistes:suspendre_abonnement_:></h3>
+			<ul><li>
+				<div class="choix">
+					<input type="radio" class="radio" name="suppl_abo" value="non" id='fslnon' />
+					<label for='fslnon'><:spiplistes:desabonnement:></label>
+				</div>
+			</li></ul>
+			</fieldset>
+		</li>
+		<p class="spip_bouton">
+			<input type='submit' class='submit' name='valider' value='<:spiplistes:abonnement_bouton:>' />
+		</p>
+	</div></form>]
+</div>

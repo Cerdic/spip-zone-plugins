@@ -1,15 +1,16 @@
 <?php
 
-function formulaires_spip_listes_inscription_charger_dist ()
+function formulaires_spip_listes_inscription_charger_dist ($id_liste='')
 {
 	$valeurs = array(
-		'email' => ''
+		'email' => '',
+		'id_liste' => $id_liste
 	);
 	
 	return $valeurs;
 }
 
-function formulaires_spip_listes_inscription_verifier_dist ()
+function formulaires_spip_listes_inscription_verifier_dist ($id_liste='')
 {
 	$erreurs = array();
 	// verifier que les champs obligatoires sont bien la :
@@ -50,7 +51,7 @@ function formulaires_spip_listes_inscription_verifier_dist ()
 }
 
 
-function formulaires_spip_listes_inscription_traiter_dist(){
+function formulaires_spip_listes_inscription_traiter_dist($id_liste=''){
 	
 	// enregistre dans spip_auteurs, spip_auteurs_elargis, spip_auteurs_listes			
 			

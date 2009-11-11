@@ -31,36 +31,20 @@
 	<div class='bloc'>
 		
 		<h1>#NOM_SITE_SPIP</h1>	
-
-	
-[<!--(#REM)
-
-	####################################
-	SPIP-Listes : bloc formulaire abonnement
-	####################################
-
--->]<div id='spiplistes-formabo' class='formulaire_spip cadre'>
-[<!--(#REM)
-
-	Si (d) absent dans l'url, propose l'abonnement			
-
--->][(#ENV{d}|?{'',' '})
-		#FORMULAIRE_ABONNEMENT
-][<!--(#REM)
-
-	Si (d) present dans l'url, propose la modification de l'abonnement			
-
--->][(#ENV{d}|?{' ',''})
-		[(#SPIP_VERSION|>={2}|?{#FORMULAIRE_MODIF_ABONNEMENT2,#FORMULAIRE_ABONNEMENT})]
-		]
+		<div id='spiplistes-formabo' class='formulaire_spip cadre'>
+		
+		[(#REM) si un cookie est passé OU si un auteur est connecté
+				on affiche le formulaire de gestion d'abonnement ]
+		
+		[(#ENV{d}|oui|ou{#SESSION{id_auteur}|oui})
+			#FORMULAIRE_GESTION_ABONNEMENT]
+		
+		[(#REM) sinon formulaire d'inscription ]
+		
+		[(#ENV{d}|non|et{#SESSION{id_auteur}|non})
+			#FORMULAIRE_SPIP_LISTES_INSCRIPTION]
+		
 		</div>
-[<!--(#REM)
-
-	####################################
-	SPIP-Listes : fin de bloc formulaire abonnement
-	####################################
-
--->]
 		<p class="center"><a href='#URL_SITE_SPIP'><:pass_retour_public:></a></p>
 		<div class='spiplistes-cdt'><:spiplistes:abonnement_cdt:></div>
 	</div>
