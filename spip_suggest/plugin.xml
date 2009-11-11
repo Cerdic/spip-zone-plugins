@@ -1,10 +1,10 @@
 <plugin>
 	<nom>SPIP Suggest</nom>
-	<auteur>Yohann Prigent</auteur>
+	<auteur>Yohann Prigent, Fil</auteur>
 	<prefix>spip_suggest</prefix>
 	<fonctions>suggest_fonctions.php</fonctions>
 	<version>2.1</version>
-	<etat>stable</etat>
+	<etat>experimental</etat>
 	<description>SPIP Suggest permet d'afficher des suggestions pour le formulaire de recherche "&#224; la Google Suggest". Le plugin n&#233;cessite le programme
 	Myisam_fulltext disponible sous licence GPL. Plus d'infos sur la documentation</description>
 	<lien>http://www.spip-contrib.net/?rubrique1303</lien>
