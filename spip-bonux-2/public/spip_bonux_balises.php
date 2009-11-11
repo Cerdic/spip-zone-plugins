@@ -7,6 +7,23 @@
  * 
  */
 
+// recuperer le nom du serveur,
+// mais pas si c'est un serveur specifique (pour, connexion)
+// attention, en SPIP 2.1, on recupere 'POUR' et non plus 'pour' comme en 2.0
+// @param array $p, AST positionne sur la balise
+// @return string nom de la connexion
+function get_nom_serveur($p) {
+	if (isset($p->boucles[$p->id_boucle])) {
+		$s = $p->boucles[$p->id_boucle]->sql_serveur;
+		if ($serveur = strtolower($s)
+			AND $serveur!='pour'
+			AND $serveur!='condition') {
+				return $s;
+		}
+	}
+	return "";
+}
+
 //
 // #URL_ACTION_AUTEUR{converser,arg,redirect} -> ecrire/?action=converser&arg=arg&hash=xxx&redirect=redirect
 //
@@ -14,11 +31,8 @@
 function balise_URL_ACTION_AUTEUR($p) {
 	$p->descr['session'] = true;
 
-	// attention, en SPIP 2.1, on recupere 'POUR' et non plus 'pour' comme en 2.0
-	if (isset($p->boucles[$p->id_boucle])
-	AND $serveur = strtolower($p->boucles[$p->id_boucle]->sql_serveur)
-	AND $serveur!='pour'
-	AND $serveur!='condition') {
+	// si serveur externe, ce n'est pas possible
+	if (get_nom_serveur($p)) {
 		$p->code = 'generer_url_public("404")';
 		return $p;
 	}
@@ -42,11 +56,8 @@ function balise_URL_ACTION_AUTEUR($p) {
 // http://doc.spip.org/@balise_URL_ECRIRE_dist
 function balise_URL_ECRIRE($p) {
 
-	// attention, en SPIP 2.1, on recupere 'POUR' et non plus 'pour' comme en 2.0
-	if (isset($p->boucles[$p->id_boucle])
-	AND $serveur = strtolower($p->boucles[$p->id_boucle]->sql_serveur)
-	AND $serveur!='pour'
-	AND $serveur!='condition') {
+	// si serveur externe, ce n'est pas possible
+	if (get_nom_serveur($p)) {
 		$p->code = 'generer_url_public("404")';
 		return $p;
 	}
@@ -65,6 +76,43 @@ function balise_URL_ECRIRE($p) {
 	return $p;
 }
 
+
+
+// surplus de #URL_PAGE pour prendre en compte les boucles POUR et CONDITION
+/* // ceci n'est pas suffisant car il faudrait traiter les autres types aussi
+function generer_generer_url_pour($type, $code) {return 'generer_url_public(' . $code .')';}
+function generer_generer_url_condition($type, $code) {return 'generer_url_public(' . $code .')';}
+*/
+function balise_URL_PAGE($p) {
+
+	$p->code = interprete_argument_balise(1,$p);
+	$args = interprete_argument_balise(2,$p);
+	if ($args != "''" && $args!==NULL)
+		$p->code .= ','.$args;
+
+	// autres filtres (???)
+	array_shift($p->param);
+
+	if ($p->id_boucle
+	AND $s = get_nom_serveur($p)) {
+
+		if (!$GLOBALS['connexions'][$s]['spip_connect_version']) {
+			$p->code = "404";
+		} else {
+			// si une fonction de generation des url a ete definie pour ce connect l'utiliser
+			// elle devra aussi traiter le cas derogatoire type=page
+			if (function_exists($f = 'generer_generer_url_'.$s)){
+				$p->code = $f('page', $p->code, $s);
+				return $p;
+			}
+			$p->code .=  ", 'connect=" .  addslashes($s) . "'";
+		}
+	}
+
+	$p->code = 'generer_url_public(' . $p->code .')';
+	#$p->interdire_scripts = true;
+	return $p;
+}
 
 
 /**
