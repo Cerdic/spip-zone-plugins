@@ -24,6 +24,9 @@ function spip_suggest_complete ($q) {
 	$res = array();
 	foreach (array_map('strtolower',$lines) as $line)
 		$res[trim($line)]++;
+	if (lire_config('spip_suggest/suggest_classement', 'nom') == 'popularite') {
+		arsort($res);
+	}
 	foreach (array_map('strtolower',$res) as $key=>$value) {
 			echo "$key|$value\n";
 	}
