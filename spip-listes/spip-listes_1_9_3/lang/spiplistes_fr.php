@@ -44,6 +44,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'votre_format_de_reception_' => "Votre format de r&#233;ception "
 , '_cliquez_lien_formulaire' => "cliquez sur ce lien pour acc&#233;der au formulaire pr&#233;sent sur le site"
 , 'pour_modifier_votre_abo_' => "Pour modifier votre abonnement "
+, 'abonnement_explication' => "Entrez votre adresse email dans le champ ci-dessous et s&eacute;lectionnez la ou les listes auxquelles vous souhaitez vous abonner."
 , 'abonnement_presentation' => "
 	Entrez votre adresse email dans le champ ci-dessous.
 	Vous recevrez &#224; cette adresse un courrier de confirmation d&#39;inscription et un lien.
