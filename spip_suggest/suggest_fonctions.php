@@ -29,7 +29,7 @@ function spip_suggest_complete ($q) {
 	}
 }
 function spip_suggest_insert_head ($flux) {
-	$flux .= '<script type="text/javascript" src="'.find_in_path("javascript/jquery.autocomplete.js").'" type="text/javascript"></script>';
+	$flux .= '<script type="text/javascript" src="'.find_in_path("javascript/jquery.autocomplete.js").'"></script>';
 	$flux .= '
 <script type="text/javascript">
 	$(document).ready(function(){
