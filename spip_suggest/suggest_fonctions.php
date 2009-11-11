@@ -27,9 +27,10 @@ function spip_suggest_complete ($q) {
 	if (lire_config('spip_suggest/suggest_classement', 'nom') == 'popularite') {
 		arsort($res);
 	}
-	foreach (array_map('strtolower',$res) as $key=>$value) {
-			echo "$key|$value\n";
+	foreach ($res as $key=>$value) {
+	  $w .= strtolower($key).'|'.$value."\n";
 	}
+	return $w;
 }
 function spip_suggest_insert_head ($flux) {
 	$flux .= '<script type="text/javascript" src="'.find_in_path("javascript/jquery.autocomplete.js").'"></script>';
@@ -41,7 +42,7 @@ function spip_suggest_insert_head ($flux) {
 				return row[0] + " (" + row[1] + " r&eacute;sultat)";
 			}
 			else if (row[1] > 1) {
-				return row[0] + " (<strong>" + row[1] + " r&eacute;sultats</strong>)";
+				return row[0] + " (<strong>" + row[1] + " r&eacute;sultats<\/strong>)";
 			} 
 		 }
 		$("'.lire_config("spip_suggest/suggest_selecteur", "#recherche").'").autocomplete("'.generer_url_public("suggest").'", {

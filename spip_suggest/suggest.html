@@ -1,9 +1,9 @@
-[(#REM)Cache à 0 comme les requetes sont différentes ?]
+[(#REM)Cache a 0 comme les requetes sont differentes ?]
 #CACHE{0}
-#HTTP_HEADER{Content-Type: text/css; charset=utf-8}
+#HTTP_HEADER{Content-Type: text/plain; charset=#CHARSET}
 #HTTP_HEADER{Vary: Accept-Encoding}
 
-[(#REM)On passe la variable q envoyée par le javascript du formulaire au php]
+[(#REM)On passe la variable q envoyee par le javascript du formulaire au php]
 
 [(#ENV{q}|oui)
-[(#ENV{q}|spip_suggest_complete)]]
+[(#ENV*{q}|spip_suggest_complete)]]
