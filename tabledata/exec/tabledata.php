@@ -1057,12 +1057,12 @@ function exec_tabledata()
     spip_log("description ".$description);
     $field = $description['field'];
     $key = $description['key'];
-    //$intClefPrimaireNbChamp= (count($key)>0?count(preg_split ("/,/",$key["PRIMARY KEY"])):0);
+    //$intClefPrimaireNbChamp= (count($key)>0?count(explode(",",$key["PRIMARY KEY"])):0);
 
     $intNbClef = count($key);
     if (array_key_exists("PRIMARY KEY",$key))
     {
-        $intClefPrimaireNbChamp= count(preg_split ("/,/",$key["PRIMARY KEY"]));
+        $intClefPrimaireNbChamp= count(explode(",",$key["PRIMARY KEY"]));
     }
     else
     {
@@ -1126,7 +1126,7 @@ function exec_tabledata()
                 $txtMsgInfoTable= "";
                 //} //if (strpos($field[$key["PRIMARY KEY"]]
                 $boolFntModif = true;
-                $key["PRIMARY KEY"] = preg_split ("/,/",$key["PRIMARY KEY"]);
+                $key["PRIMARY KEY"] = explode(",",$key["PRIMARY KEY"]);
             break;
 
             default :
@@ -1139,7 +1139,7 @@ function exec_tabledata()
                 //             ."<br/><I>(L'insertion est d&#233;sactiv&#233;e)</i><br/>";
                 $txtMsgInfoTable= "<br/>La clef primaire contient plusieurs champs: ".$key["PRIMARY KEY"];
 
-                $key["PRIMARY KEY"] = preg_split ("/,/",$key["PRIMARY KEY"]);
+                $key["PRIMARY KEY"] = explode(",",$key["PRIMARY KEY"]);
         } //switch ($intClefPrimaireNbChamp)
 
         // CHOIX DE L'ACTION A REALISER => de l'affichage
