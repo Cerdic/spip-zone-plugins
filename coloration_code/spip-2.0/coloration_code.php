@@ -24,7 +24,13 @@ if (!defined('PLUGIN_COLORATION_CODE_TELECHARGE')) {
 
 // pour utiliser des styles inline (ou des classes css)
 if (!defined('PLUGIN_COLORATION_CODE_STYLES_INLINE')) {
-	define('PLUGIN_COLORATION_CODE_STYLES_INLINE', true);
+	define('PLUGIN_COLORATION_CODE_STYLES_INLINE', true); // false mettra des class et une css associe
+}
+
+// pour mettre des classes css MAIS ne mettre aucun style correspondant
+// cela suppose donc qu'une CSS externe a ce plugin s'occupe de les styler
+if (!defined('PLUGIN_COLORATION_CODE_SANS_STYLES')) {
+	define('PLUGIN_COLORATION_CODE_SANS_STYLES', false); // true mettra des class mais pas de css associe
 }
 
 // pouvoir definir la taille des tablations (defaut de geshi : 8)
@@ -69,9 +75,11 @@ function coloration_code_color($code, $language, $cadre='cadre') {
 	$geshi->set_code_style('');
 	
 	$stylecss = "";
-	if (defined('PLUGIN_COLORATION_CODE_STYLES_INLINE') and !PLUGIN_COLORATION_CODE_STYLES_INLINE) {
+	if (!PLUGIN_COLORATION_CODE_STYLES_INLINE OR PLUGIN_COLORATION_CODE_SANS_STYLES) {
 		$geshi->enable_classes();
-		$stylecss = "<style type='text/css'>".$geshi->get_stylesheet()."</style>";
+		if (!PLUGIN_COLORATION_CODE_SANS_STYLES) {
+			$stylecss = "<style type='text/css'>".$geshi->get_stylesheet()."</style>";
+		}
 	}
 
 
