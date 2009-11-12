@@ -112,6 +112,18 @@ function inscription2_upgrade($nom_meta_base_version,$version_cible){
 		echo "Inscription2 update @ 0.71 : installation de la table pays de geographie<br />";
 		ecrire_meta($nom_meta_base_version,$current_version=0.71);
 	}
+	if ($current_version<0.72){
+		spip_log('INSCRIPTION2 : upgrade en version 0.72 (langues des pays)');	
+		/*
+		 * Reinstaller les pays de Geographie
+		 * pour ne pas etre dependant de ce plugin
+		 */
+		i2_installer_pays();
+		$verifier_tables();
+		spip_log("Inscription2 update @ 0.72 : Modification de la table spip_pays (Neerlandais)", "maj");
+		echo "Inscription2 update @ 0.72 : Modification de la table spip_pays (Neerlandais)<br />";
+		ecrire_meta($nom_meta_base_version,$current_version=0.72);
+	}
 }
 
 
@@ -163,6 +175,7 @@ function i2_installer_pays() {
 		// pour redemarrer les insert a zero
 		$descpays = sql_showtable('spip_geo_pays', '', false);
 		if(isset($descpays['field'])){
+			spip_log('suppression de la table spip_geo_pays');
 			sql_drop_table("spip_geo_pays");
 		}
 		// 2) recreation de la table
@@ -172,6 +185,7 @@ function i2_installer_pays() {
 		// importer les pays
 		include_spip('imports/pays');
 		include_spip('inc/charset');
+		spip_log('Insertion des pays dans spip_geo_pays');
 		foreach($GLOBALS['liste_pays'] as $k=>$p)
 			sql_insertq('spip_geo_pays',array('id_pays'=>$k,'nom'=>unicode2charset(html2unicode($p))));
 	}
