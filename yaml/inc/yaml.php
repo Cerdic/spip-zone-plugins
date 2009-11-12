@@ -59,4 +59,21 @@ function yaml_decode($input) {
 	return $ret;
 }
 
+/*
+ * Decode un fichier en utilisant yaml_decode
+ * @param string $fichier
+ */
+function yaml_decode_file($fichier){
+	$yaml = '';
+	$retour = false;
+	
+	lire_fichier($fichier, $yaml);
+	// Si on recupere bien quelque chose
+	if ($yaml){
+		$retour = yaml_decode($yaml);
+	}
+	
+	return $retour;
+}
+
 ?>
