@@ -5,7 +5,7 @@
 	
 
 
-		<div class="ps surlignable"><h2 class="pas_surlignable">Informations personnelles</h2>
+		<div class="ps surlignable"><h2 class="pas_surlignable">Votre compte de lecteur</h2>
 		<div>
 		       <table class="spip pmb-tableau">
 			  <tbody>
@@ -25,7 +25,7 @@
 			  <tr><td>Compte twitter</td>
 			    <td>
 				  <BOUCLE_auteur(AUTEURS){id_auteur}{tous}>
-					<span class="#EDIT{twitter_user}">[(#TWITTER_USER|sinon{'<i>double-cliquez ici pour ajouter votre identifiant twitter</i>'})]</span>
+					<span class="#EDIT{twitter_user}">[(#TWITTER_USER|sinon{'<i>double-cliquez ici pour ajouter votre identifiant twitter</i>'})][(#TWITTER_USER|oui)<br /><i>(double-cliquez ici pour modifier votre identifiant twitter)</i>]</span>
 				  </BOUCLE_auteur>	
 			    </td>
 			  </tr>
