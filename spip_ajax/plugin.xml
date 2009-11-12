@@ -1,13 +1,17 @@
 <plugin>
 	<nom>Spip ajax</nom>
-	<auteur>Di carmine Fabrizio - Pix-l.fr</auteur>
-	<version>0.1</version>
+	<auteur>Di carmine Fabrizio</auteur>
+	<version>1.0</version>
 	<etat>stable</etat>
 	<description>
         {{Spip ajax permet de faire facilement de l'ajax dans l'admin de spip.
-        Un plugin de demo contenant un tutoriel sera bientot disponible}}
+        La version 2 integre également jquery ui.}}
 	</description>
 	<prefix>sa</prefix>
+	<necessite id="cfg" version="[1.13.0;]" />
+	<necessite id="SPIP" version="[2.0.0;]" />
+	<options>sa_options.php</options>
+	<fonctions>spip_ajax_fonctions.php</fonctions>
 	<pipeline>
         <nom>header_prive</nom>
         <inclure>sa_pipeline.php</inclure>

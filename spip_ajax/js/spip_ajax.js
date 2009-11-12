@@ -47,7 +47,7 @@ spip_ajax.get = function (nom){
 // en cas de succes on peux realiser certaines actions
 spip_ajax.ajax = function (){
 	if (spip_ajax.hash_env!="") spip_ajax.req.hash_env = spip_ajax.hash_env;
-	
+
 	$.ajax({
 	   type: "POST",
 	   url : "?exec=_spip_ajax",
@@ -82,4 +82,14 @@ spip_ajax.ajax = function (){
 
 // On appelle la fonction pour recupere le hash
 spip_ajax.get_hash_env();
+
+
+/* Ensemble des fonctionnalites pour spip ajax Pro*/
+/* Pour les equivalences php voir le site http://kevin.vanzonneveld.net/techblog/article/javascript_equivalent_for_phps_in_array/ */
+/*  equivalent de la fonction php in_array*/
+spip_ajax.in_array = function(array,val){
+	for(i = 0 ;  i < array.length ; i++) if(array[i] == val)return true;
+    return false;
+}
+
 

@@ -21,12 +21,6 @@ class spip_ajax{
 
 		global $auteur_session;
 		
-		/*
-		echo "<pre>";
-		print_r($auteur_session);
-		echo "</pre>";
-		return;
-		*/
 		
 		// on test s'il y a une demande de code de hash
 		if ($_POST['callback']=="spip_ajax.set_hash_env()"){
@@ -34,11 +28,7 @@ class spip_ajax{
 			return;
 		}
 		
-		// On test la validité du cookie
-		$cookie = $_COOKIE['spip_session'];
-		$spip_session = $GLOBALS["HTTP_COOKIE_VARS"]['spip_session'];
-	
-		if($spip_session != $cookie) die('pas les droits , desole');
+		
 		
 		// On valide le code de hash
 		if ($auteur_session["hash_env"] != $_POST['hash_env'])die("tentative de hack ...");
@@ -65,10 +55,11 @@ class spip_ajax{
 			if (!autoriser('acces','sa',$_POST["inc"]))	die("pas les droits");
 			
 			// on verifie que la fonction n'appartient pas au core de spip
-			if (file_exists("../ecrire/inc/".$_POST["inc"].".php"))	
+			if (file_exists("../"._DIR_RESTREINT_ABS."inc/".$_POST["inc"].".php"))	
 				die("Vous ne pouvez appeler un fichier du core de spip");
 				
 			include_spip("inc/".$_POST["inc"]);
+			
 		}
 
 		// appel a une fonction
@@ -80,7 +71,7 @@ class spip_ajax{
 			$taille = strlen((string)$a[1]);
 			$class = $a[0];
 			$method = $a[1];
-
+			
 			// on verifie que l'on appelle une classe et une methode
 			if (count($a)==1 || $taille ==0) {
 				echo "Vous avez appele une classe sans appele de methode ".$taille;
@@ -94,10 +85,10 @@ class spip_ajax{
 			}
 
 			if (class_exists($class)){
-
+				
 				// class et methode sans arguments
 				if (!isset($_POST["args_class"])&& !isset($_POST["args_method"])) $this->ajax_class_sans_arguments($class,$method);
-
+				
 				// Cas d'une classe sans argument et d'une methode avec argument
 				else if (!isset($_POST["args_class"])&& isset($_POST["args_method"])) $this->ajax_class_method_arguments($class,$method);
 
@@ -137,7 +128,6 @@ class spip_ajax{
 			if (isset($_POST["args_fct"])){
 				$tab = explode(",",$_POST["args_fct"]);
 				for ($i = 0; $i < count($tab); $i++) {$args []= $_POST[$tab[$i]];}
-
 				$reflection = new ReflectionFunction( $_POST["fct"] );
 				$a  = $reflection->invokeArgs( $args );
 				echo $a;
@@ -155,7 +145,7 @@ class spip_ajax{
 	private function ajax_class_sans_arguments($class,$method){
 		$a = new $class;
 		if (method_exists($a,$method)){
-			$a->$method();
+			echo $a->$method();
 		}else{
 			echo "la methode $method de $class est absent";
 		}
@@ -168,7 +158,7 @@ class spip_ajax{
 			$tab = explode(",",$_POST["args_method"]);
 			for ($i = 0; $i < count($tab); $i++) {$args []= $_POST[$tab[$i]];}
 			$reflection = new ReflectionMethod ($a , $method );
-			$reflection->invokeArgs( $a, $args );
+			echo $reflection->invokeArgs( $a, $args );
 		}else{
 			echo "la methode $method de $class est absent";
 		}
@@ -177,13 +167,14 @@ class spip_ajax{
 
 
 	private function ajax_class_class_arguments($class,$method){
+		
 		$tab = explode(",",$_POST["args_class"]);
 		for ($i = 0; $i < count($tab); $i++) {$args []= $_POST[$tab[$i]];}
 		$reflection = new ReflectionClass( $class );
 		$a  = $reflection->newInstanceArgs( $args );
 
 		if (method_exists($a,$method)){
-			$a->$method();
+			echo $a->$method();
 		}else{
 			echo "la methode $method de $class est absent";
 		}
@@ -202,7 +193,7 @@ class spip_ajax{
 			for ($i = 0; $i < count($tab); $i++) {$args []= $_POST[$tab[$i]];}
 
 			$reflection = new ReflectionMethod ($a , $method );
-			$reflection->invokeArgs( $a, $args );
+			echo $reflection->invokeArgs( $a, $args );
 		}else{
 			echo "la methode $method de $class est absent";
 		}

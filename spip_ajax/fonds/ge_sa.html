@@ -1,0 +1,75 @@
+<h1>Generateur spip ajax</h1>
+
+<style>
+	.red {color: red;cursor: pointer;} 
+	.green {color: green;cursor: pointer;font-weight: bold;} 
+	div#gen { width: 350px ; float: left; margin: 0 25px 0 200px 
+			; text-align: left;} 
+	div#gen div.type{background-color: #edf2f8; padding: 0px ; margin : 0}  
+	div.type p.ss_type {background-color: #d8e3ee; padding: 5px 0 0 15px ;font-size:14px;
+		font-style:italic; height:25px;margin: 6px 0; color : #0f4071}
+	div.type p { padding-left: 25px ; margin : 2px ; cursor : pointer}
+	
+	div#champ {background-color: #e2eed8;  padding: 15px 220px 10px 0; text-align: right; } 
+	div#champ div#final { margin-top : 15px ; margin-right:-10px;}
+	div#final p{ margin : 0px;}
+	div#col_centre { width: 540px ; float: left; }
+	div#generation { margin-top : 15px}
+	div#page h1{margin-bottom: 40px}
+</style>
+
+<div id='gen'>
+	<div class='type'>
+		<p class='ss_type'>Fonctions</p>
+		<p onclick="sa.value('fonction','sa')">sans args<span class='green'>  + <span></p>
+		<p onclick="sa.value('fonction','aa')">avec args<span class='green'>  + <span></p>
+	</div>
+
+	<div  class='type'>
+		<p class='ss_type'>Objets : constructeur sans argument</p>
+		<p onclick="sa.value('objet','sa_sa')">methode sans args<span class='green'>  + <span></p>
+		<p onclick="sa.value('objet','sa_aa')">methode avec args<span class='green'>  + <span></p>
+		<p class='ss_type'>Objets : constructeur avec arguments</p>
+		<p onclick="sa.value('objet','aa_sa')">methode sans args<span class='green'>  + <span></p>
+		<p onclick="sa.value('objet','aa_aa')">methode avec args<span class='green'>  + <span></p>
+	</div>
+	
+	<div class='type'>
+		<p class='ss_type'>fonds</p>
+		<p onclick="sa.value('fond','sa')">sans args<span class='green'>  + <span></p>
+		<p onclick="sa.value('fond','aa')">avec args<span class='green'>  + <span></p>
+	</div>
+	
+	<div class='type'>
+		<p class='ss_type'>action final</p>
+		<p onclick="sa.value('final','append')">Append<span class='green'>  + <span></p>
+		<p onclick="sa.value('final','refresh')">Refresh<span class='green'>  + <span></p>
+		<p onclick="sa.value('final','callback')">Callback<span class='green'>  + <span></p>
+	</div>
+
+</div>
+	
+<div id='col_centre'>
+	<div id='champ'>
+		<div id='php'>
+		
+		</div>
+		<div id='fond'>
+		
+		</div>
+		<div id='final'>
+		
+		</div>
+		<p><input type="button" value='generer' onclick="sa.generer()"></p>
+	</div>
+	
+	
+	
+	
+	<div id='generation'>
+		<textarea cols='70' rows='6' id='recup_sa'>
+		
+		</textarea>
+	</div>
+</div>
+

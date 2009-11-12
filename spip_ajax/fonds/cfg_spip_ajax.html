@@ -1,0 +1,90 @@
+#CACHE{0}
+<!-- boite=<multi>[fr]Test storage php pour le plugin cfg [en]php storage test for the cfg plugin</multi>-->
+<!-- depot=metapack -->
+
+#SET{test,#SESSION{id_auteur}|test_valid_global_admin_spip_ajax}
+
+<div>
+	<input type='text' id='entre_fast' value='' >
+	<input type="button" value="Rajouter" onclick="entre_liste_fast()"/>
+</div>
+<script>
+function entre_liste_fast(){
+	val = $("#entre_fast").val();
+	if (val=="")return;
+	$("#cfg_id").append("<option value='" + val + "'>" + val + "</option>");
+	$("#cfg_id").find('option:last').attr("selected","selected");
+	opaque();
+	$("#form_sub").submit();	
+}
+
+function opaque(){
+	$("#contenu").css('opacity','0.3');
+}
+
+var delete_item = false;
+
+function validate_form(){
+	if (!delete_item) return true;
+	if (confirm('souhaitez vous supprimer cet element ?')) return true;
+	$("#contenu").css('opacity','1');
+	return false;
+	
+}
+
+</script>
+
+#SET{choix,#REM|liste_param_spip_ajax}
+
+
+
+<form id='form_sub' action="./?exec=cfg&amp;cfg=spip_ajax" method="post">
+<select id="cfg_id" name="cfg_id" onchange="opaque();this.form.submit();">
+	#GET{choix}
+</select>
+<input type="submit" name="go" value="&gt;" />
+</form>
+
+
+
+[(#ENV{cfg_id}|oui)
+	<div id='params'>
+		<p>Vous allez mettre a jour ou creer des infos pour la page &nbsp;&nbsp;<b style="font-size: 15px">#ENV{cfg_id}</b></p>
+	
+		<form method="post" onsubmit="opaque();return validate_form();" >
+		[(#ENV{_cfg_}|form_hidden)]
+		
+		<fieldset style="padding:  15px">
+			<legend><b style="font-size: 15px">&nbsp;&nbsp;#ENV{cfg_id}&nbsp;&nbsp;</b></legend>
+			
+			<label style='display:  inline-block; width: 80px'>Statut :</label>
+				<select name="statut" style='width: 150px'>
+					<option value='tous' [(#ENV{statut}|=={tous}|oui) selected]>tous</option>
+					<option value='admin_restreint' [(#ENV{statut}|=={admin_restreint}|oui) selected]>admin_restreint</option>
+					<option value='admin' [(#ENV{statut}|=={admin}|oui) selected]>admin</option>
+					<option value='aucun' [(#ENV{statut}|=={aucun}|oui) selected]>aucun</option>
+				</select>
+	
+			<br /><br />
+			
+			<label style='display:  inline-block; width: 80px'>Allowed :</label>
+			<input type="text" name="allowed" value="#ENV{allowed}" size="50" style='width: 147px'/>
+			
+			<br><br />
+		</fieldset>
+		
+		<input type="submit" name="_cfg_ok" value="<:cfg:OK:>" onclick='delete_item=false;' />
+		<input type="submit" name="_cfg_delete" value="<:cfg:Supprimer:>" onclick='delete_item=true;' />
+		</form>
+	</div>
+
+]
+
+<script>
+<?php
+	if(isset($_POST['_cfg_delete'])) echo "$('#params').remove();";
+?>
+</script>
+
+
+
