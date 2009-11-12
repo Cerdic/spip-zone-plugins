@@ -33,13 +33,11 @@
 		
 		[(#SESSION{id_auteur}|=={#ID_AUTEUR}|oui)
 		    <span class="#EDIT{logo}">[(#LOGO_AUTEUR||image_reduire{130,0}|sinon{'double-cliquez ici pour ajouter un logo'})]</span>
+		    
 		    <div class="corps-conteneur surlignable">
 				<div class="texte entry-content">Bonjour[ (#PMB_FIRSTNAME|sinon{#NOM})].</div>
-				
-				 [(#FORMULAIRE_EDITER_AUTEUR{#SESSION{id_auteur},#SELF,env})]
-				
-				
 		    </div>	
+		     [<div class="ps"><h2>Informations personnelles</h2>(#FORMULAIRE_EDITER_AUTEUR{#SESSION{id_auteur},#SELF,env})</div>]
 		]
 		[(#SESSION{id_auteur}|=={#ID_AUTEUR}|non)
 		    [(#LOGO_AUTEUR||image_reduire{130,0})]
@@ -98,7 +96,9 @@
 
         [(#SESSION{id_auteur}|=={#ID_AUTEUR}|non)#FORMULAIRE_ECRIRE_AUTEUR]
 	
-	
+	[(#SESSION{id_auteur}|=={#ID_AUTEUR}|oui)
+		  <div class="ps"><h2>Proposer un article</h2>#FORMULAIRE_EDITER_ARTICLE</div>
+	]
 
         [<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
 
