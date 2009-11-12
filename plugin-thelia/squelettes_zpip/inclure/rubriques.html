@@ -1,0 +1,69 @@
+[(#REM)
+	Barre de navigation, ouverte sur la hierarchie courante
+
+	On fait un plan, et, quand on avance vers une rubrique,
+	on l'affiche si son parent est expose ou est la racine du site. ]
+
+<B_rubriques>
+<div class="menu rubriques">
+	<h2 class="h2"><:rubriques:></h2>
+	<ul class="menu-liste">
+	<BOUCLE_rubriques(RUBRIQUES) {racine} {par num titre, titre}>
+		<li class="menu-entree">
+			<a href="#URL_RUBRIQUE"[ class="(#EXPOSE)"]>[(#TITRE|couper{80})]</a>
+
+			<B_sous_rubriques>
+			<ul class="menu-liste">
+				<BOUCLE_sous_rubriques(RUBRIQUES) {id_parent} {par num titre, titre}><BOUCLE_test_expose(RUBRIQUES) {id_enfant}>#EXPOSE{' '}</BOUCLE_test_expose>
+					<li class="menu-entree"><a href="#URL_RUBRIQUE"[ class="(#EXPOSE)"]>[(#TITRE|couper{80})]</a><BOUCLE_re(BOUCLE_sous_rubriques)></BOUCLE_re>	</li>
+				</B_test_expose></BOUCLE_sous_rubriques>
+			</ul>
+			</B_sous_rubriques>
+
+		</li>
+	</BOUCLE_rubriques>
+
+	</ul>
+</div>
+</B_rubriques>
+
+	
+
+	<T_rubriquesthelia>
+		<h2 class="h2"><:spipthelia:boutique:></h2>
+		<ul class="menu-liste">
+		<THELIA_rubriquesthelia type="RUBRIQUE" parent="0">
+			<li class="menu-entree">
+				<a href="#URL_PAGE{rubrique_thelia,id_rubrique_thelia=THELIA-ID}">THELIA-TITRE</a>
+				<ul>
+					<THELIA_sous_rubriques type="RUBRIQUE" parent="THELIA-ID">
+						<li><a href="#URL_PAGE{rubrique_thelia,id_rubrique_thelia=THELIA-ID}">THELIA-TITRE</a></li>
+					</THELIA_sous_rubriques>
+				</ul>
+			</li>
+		</THELIA_rubriquesthelia>
+		</ul>
+
+	</T_rubriquesthelia>
+	<//T_rubriquesthelia>
+
+
+
+	<h2 class="h2"><:spipthelia:mon_compte:></h2>
+	<ul class="menu-liste">
+		<THELIA SI NON CONNECTE>
+			<li class="menu-entree"><a href="#URL_PAGE{connexion}"><:spipthelia:se_connecter:></a></li>
+			<li class="menu-entree"><a href="#URL_PAGE{mdpoublie}"><:spipthelia:mdp_oublie:></a></li>
+		</THELIA SI NON CONNECTE>
+		<THELIA SI CONNECTE>
+			<li class="menu-entree"><a href="#URL_PAGE{moncompte}"><:spipthelia:mon_compte:></a></li>
+			<li class="menu-entree"><a href="#URL_PAGE{sommaire, thelia_action=deconnexion}"><:spipthelia:se_deconnecter:></a></li>
+		</THELIA SI CONNECTE>
+		<T_PANIER>
+			<li class="menu-entree"><a href="#URL_PAGE{panier}"><:spipthelia:panier_contient:></a></li>
+		<THELIA_PANIER type="PANIER">
+		</THELIA_PANIER>
+		</T_PANIER>
+			<li class="menu-entree"><a href="#URL_PAGE{panier}"><:spipthelia:panier_vide:></a></li>
+		<//T_PANIER>
+	</ul>

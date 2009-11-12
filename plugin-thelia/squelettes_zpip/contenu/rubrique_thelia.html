@@ -1,0 +1,15 @@
+<THELIA_RUBRIQUECONTENU type="RUBRIQUE" id="#ENV{id_rubrique_thelia}">
+	[(#REM) Fil d'Ariane ]
+	<p id="hierarchie">
+			    <a href="#URL_SITE_SPIP/"><:accueil_site:></a>
+			    <THELIA_chemrub type="CHEMIN" rubrique="#ENV{id_rubrique_thelia}">
+				  <THELIA_rubdetchem type="RUBRIQUE" id="THELIA-ID">
+				       &gt; <a href="#URL_PAGE{rubrique_thelia, id_rubrique_thelia=THELIA-ID}" class="LIEN_chemin">THELIA-TITRE</a>
+				  </THELIA_rubdetchem>
+			    </THELIA_chemrub>
+			     &gt; THELIA-TITRE
+	</p> 
+	
+	<INCLURE{fond=inc/inc-rubrique_thelia}{env}>
+
+</THELIA_RUBRIQUECONTENU>
