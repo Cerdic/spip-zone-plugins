@@ -121,7 +121,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type_amelioration_long' => 'Les tickets demandant une am&eacute;lioration',
 	'type_probleme' => 'Probl&egrave;me',
 	'type_probleme_long' => 'Les probl&egrave;mes &agrave; r&eacute;soudre',
-	'type_tache' => 'T&agrave;che',
+	'type_tache' => 'T&acirc;che',
 	'type_tache_long' => 'Les t&acirc;ches &agrave; accomplir',
 
 	// V
