@@ -1,0 +1,56 @@
+<br class="nettoyeur"/>
+
+<BOUCLE_afficher_contenu(BANNIERES){id_banniere=#ENV{id}}{tout}>
+
+[(#LOGO_BANNIERE||non)
+<p><img src="[(#CHEMIN{images/warning.gif})]" alt=""> - <:bannieres:logo_absent:></p>
+]
+
+<p>[(#LOGO_BANNIERE||inserer_attribut{'alt',#ALT}|image_reduire{515})]</p>
+
+<div class="champ contenu_alt[ (#ALT*|strlen|?{'',vide})]">
+	<div dir='#LANG_DIR' class='#EDIT{alt} alt'>
+	<p><small><:bannieres:alt:> : #ALT</small></p></div>
+</div>
+
+<div class="champ contenu_email[ (#EMAIL*|strlen|?{'',vide})]">
+	<div dir='#LANG_DIR' class='#EDIT{email} email'>
+	<p><span class='titrem'><:bannieres:email_contact:> :</span> #EMAIL</p></div>
+</div>
+<div class="champ contenu_site[ (#SITE*|strlen|?{'',vide})]">
+	<div dir='#LANG_DIR' class='#EDIT{site} site'>
+	<p><span class='titrem'><:bannieres:url_site:> :</span> #SITE</p></div>
+</div>
+<div class="champ contenu_commentaires[ (#COMMENTAIRES*|strlen|?{'',vide})]">
+	<div><p class='titrem'><:bannieres:label_commentaires:></p></div>
+	<div dir='#LANG_DIR' class='#EDIT{commentaires} commentaires'>#COMMENTAIRES</div>
+</div>
+<div class="champ contenu_position[ (#POSITION*|strlen|?{'',vide})]">
+	<div dir='#LANG_DIR' class='#EDIT{position} position'>
+	<p><span class='titrem'><:bannieres:label_position_campagne:> :</span> #POSITION</p></div>
+</div>
+<div class="champ contenu_rayon[ (#RAYON*|strlen|?{'',vide})]">
+	<div dir='#LANG_DIR' class='#EDIT{rayon} rayon'>
+	<p><span class='titrem'><:bannieres:label_rayon:> :</span> #RAYON</p></div>
+</div>
+
+<div class="champ contenu_diffusion[ (#DIFFUSION*|strlen|?{'',vide})]">
+	<div dir='#LANG_DIR' class='#EDIT{diffusion} diffusion'>
+	<p><span class='titrem'><:bannieres:label_diffusion:> :</span>
+[(#RAYON|=={pays}|oui)
+	<INCLURE{fond=prive/contenu/pays}{id_pays=#DIFFUSION}>
+]
+[(#RAYON|=={region}|oui)
+	<INCLURE{fond=prive/contenu/region}{id_region=#DIFFUSION}>
+]
+[(#RAYON|=={departement}|oui)
+	<INCLURE{fond=prive/contenu/departement}{id_departement=#DIFFUSION}>
+]
+[(#RAYON|=={local}|oui)
+	#DIFFUSION
+]
+	 </p></div>
+</div>
+
+<p><small><:bannieres:creation:>#CREATION</small></p>
+</BOUCLE_afficher_contenu>

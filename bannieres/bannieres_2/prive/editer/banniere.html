@@ -1,0 +1,12 @@
+[(#ENV{rayon}|=={''}|et{
+[(#ENV{diffusion}|=={''})]}|non)
+#SET{choix_diffusion,#ARRAY{rayon,#ENV{rayon},diffusion,#ENV{diffusion}}}
+]
+
+<div class='cadre-formulaire-editer'>
+<div class="entete-formulaire">
+	#ENV**{icone_retour}
+	[<h1>(#ENV{titre,<:bannieres:texte_nouveau_banniere:>})</h1>]
+</div>
+#FORMULAIRE_EDITER_BANNIERE{#ENV{id_banniere,new},#ENV{redirect,#URL_ECRIRE{banniere_voir}},#GET{choix_diffusion}}
+</div>

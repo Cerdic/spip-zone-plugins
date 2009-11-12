@@ -1,0 +1,94 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_banniere,nouveau}'>
+	
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable}|oui)
+	<form method='post' action='#ENV{action}'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type='hidden' name='id_banniere' value='#ENV{id_banniere}' />
+		<input type='hidden' name='creation' value='#DATE' />
+		
+		<ul>
+		[(#SAISIE{input, nom,
+			label=<:bannieres:label_nom:>,
+			obligatoire=oui})]
+			
+		[(#SAISIE{input, email,
+			label=<:bannieres:label_email:>})]
+
+		[(#SAISIE{input, site,
+			label=<:bannieres:label_site:>})]		
+			
+		[(#SAISIE{input, debut,
+			label=<:bannieres:label_debut:>,
+			size=8})]
+
+		[(#SAISIE{input, fin,
+			label=<:bannieres:label_fin:>,
+			size=8})]
+
+		[(#SAISIE{input, alt,
+			label=<:bannieres:label_alt_campagne:>,
+			explication=<:bannieres:explication_alt:>})]
+
+		[(#SAISIE{textarea, commentaires,
+			label=<:bannieres:label_commentaires:>,
+			explication=<:bannieres:explication_commentaires:>})]			
+
+		[(#SAISIE{selection, position,
+			label=<:bannieres:label_position_campagne:>,
+			defaut=1,
+			size=4,
+			explication=<:bannieres:explication_position:>,
+			datas=#ARRAY{
+				1,1,
+				2,2,
+				3,3,
+				4,4,
+				5,5,
+				6,6,
+				7,7,
+				8,8,
+				9,9}
+			})]
+
+		[(#SAISIE{selection, rayon,
+			label=<:bannieres:label_rayon:>,
+			defaut=1,
+			explication=<:bannieres:explication_rayon:>,
+			option_intro=<:bannieres:choix_rayon:>,
+			datas=#ARRAY{
+				int,<:bannieres:action_ajouter_generique:>,
+				pays,<:bannieres:action_ajouter_pays:>,
+				region,<:bannieres:action_ajouter_region:>,
+				departement,<:bannieres:action_ajouter_departement:>,
+				local,<:bannieres:action_ajouter_local:>}
+			})]
+
+		[(#ENV{rayon}| == {'pays'}|oui)
+			<INCLURE{fond=formulaires/liste_pays}{env}>
+		]
+
+		[(#ENV{rayon}| == {'region'}|oui)
+			<INCLURE{fond=formulaires/liste_regions}{env}>
+		]
+		
+		[(#ENV{rayon}| == {'departement'}|oui)
+			<INCLURE{fond=formulaires/liste_departements}{env}>
+		]
+		
+		[(#ENV{rayon}| == {'local'}|oui)
+		[(#SAISIE{input, diffusion,
+			label=<:bannieres:label_diffusion_campagne:>,
+			explication=<:bannieres:explication_local:>,
+			size=4})]
+		]
+
+		</ul>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>

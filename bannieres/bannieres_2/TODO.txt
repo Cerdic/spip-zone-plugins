@@ -1,0 +1,5 @@
+- Régler le bug de la suppression de l'image
+- Possibilité de se passer de geographie si la geolocatisation n'est pas utile (CFG ?)
+- Une page pour les stats ?
+- Revoir les icones et le logo ?
+- Un sélecteur pour la date façon spip

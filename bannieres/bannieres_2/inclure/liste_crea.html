@@ -1,0 +1,62 @@
+<h2><:bannieres:action_ajouter:></h2>
+<p><a href="[(#URL_ECRIRE{banniere_edit}|parametre_url{new,oui}|parametre_url{rayon,int})]"><:bannieres:action_ajouter_generique:></a></p>
+
+<h3><:bannieres:action_ajouter_geolocalise:></h3>
+<div>
+  <form action="#" onsubmit="return AjaxSqueeze(this,'#','',event)" method="post" >
+  
+    <div class="choix">
+      <input name="choix_type" value="oui" id="label_activer_pays" onclick="changeVisible(this.checked, 'campagne_pays', 'block', 'none');" type="radio">
+      <label for="label_campagne_pays"><:bannieres:action_ajouter_pays:></label>
+      <div id="campagne_pays" style="display: none;">
+		  <B_pays>
+				<select name="pays" onChange="window.location='[(#URL_ECRIRE{banniere_edit}|parametre_url{new,oui}|parametre_url{rayon,pays})]&diffusion=' + this.form.pays.value">
+				<option value=''><:bannieres:choix_pays:></option>
+		  <BOUCLE_pays(GEO_PAYS)>
+				<option value="#ID_PAYS">[(#NOM|couper{21})]</option>
+		  </BOUCLE_pays>
+				</select>
+		  </B_pays>
+	  </div>
+    </div>
+	
+	
+    <div class="choix">
+      <input name="choix_type" value="oui" id="label_activer_region" onclick="changeVisible(this.checked, 'campagne_region', 'block', 'none');" type="radio">
+      <label for="label_campagne_region"><:bannieres:action_ajouter_region:></label>
+		<div id="campagne_region" style="display: none;">
+		  <B_regional>
+				<select name="region" onChange="window.location='[(#URL_ECRIRE{banniere_edit}|parametre_url{new,oui}|parametre_url{rayon,region})]&diffusion=' + this.form.region.value">
+				<option value=''><:bannieres:choix_region:></option>
+		  <BOUCLE_regional(GEO_REGIONS)>
+				<option value="#ID_REGION">[(#NOM|couper{20})]</option>
+		  </BOUCLE_regional>
+				</select>
+		  </B_regional>
+		</div>
+    </div>
+	
+	
+    <div class="choix">
+      <input name="choix_type" value="oui" id="label_activer_departement" onclick="changeVisible(this.checked, 'campagne_departement', 'block', 'none');" type="radio">
+      <label for="label_campagne_departement"><:bannieres:action_ajouter_departement:></label>
+      <div id="campagne_departement" style="display: none;">
+	  
+		  <B_departement>
+				<select name="departement" onChange="window.location='[(#URL_ECRIRE{banniere_edit}|parametre_url{new,oui}|parametre_url{rayon,departement})]&diffusion=' + this.form.departement.value">
+				<option value=''><:bannieres:choix_departement:></option>
+		  <BOUCLE_departement(GEO_DEPARTEMENTS){par nom}>
+				<option value="#ID_DEPARTEMENT">[(#ABBR)] [(#NOM|couper{17})]</option>
+		  </BOUCLE_departement>
+				</select>
+		  </B_departement>
+	  
+	  </div>
+    </div>
+    <div class="choix">
+    <input name="choix_type" value="oui" id="label_activer_local" onclick="changeVisible(this.checked, 'campagne_local', 'block', 'none');" type="radio">
+    <label for="label_campagne_local"><:bannieres:action_ajouter_local:></label>
+    <div id="campagne_local" style="display: none;"> <a href="[(#URL_ECRIRE{banniere_edit}|parametre_url{new,oui}|parametre_url{rayon,local})]"><:bannieres:action_ajouter_locale:></a> </div>
+	</div>
+  </form>
+</div>

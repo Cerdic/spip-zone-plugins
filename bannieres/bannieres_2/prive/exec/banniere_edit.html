@@ -1,0 +1,23 @@
+#CACHE{0}
+[(#SET{id_banniere,[(#VAL{id_banniere}|_request|sinon{new})]})]
+[(#SET{rayon,[(#VAL{#ENV{rayon}}|texte_script)]})]
+[(#SET{diffusion,[(#VAL{#ENV{diffusion}}|texte_script)]})]
+
+<BOUCLE_si_autorise(CONDITION){si (#AUTORISER{modifier,banniere,#GET{id_banniere}})}>
+
+	[(#SET{retour, #URL_ECRIRE{bannieres}})]
+	<BOUCLE_titre(bannieres){id_banniere=#GET{id_banniere}}{tout}>
+		[(#SET{titre, #NOM})]
+		[(#SET{retour, [(#URL_ECRIRE{banniere_voir}|parametre_url{id_banniere,#ID_BANNIERE})]})]
+	</BOUCLE_titre>
+		
+	[(#INCLURE{fond=prive/editer/banniere,
+		id_banniere=#GET{id_banniere},
+		rayon=#GET{rayon},
+		diffusion=#GET{diffusion},
+		icone_retour=[(#ENV{retour,#GET{retour}}
+			|icone{<:icone_retour:>, #CHEMIN{images/bannieres.png}, #LANG_LEFT })],
+		titre=#GET{titre}
+	})]
+	
+</BOUCLE_si_autorise>

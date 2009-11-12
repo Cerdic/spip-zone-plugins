@@ -1,0 +1,44 @@
+<BOUCLE_si_autorise(CONDITION){si (#ID_BANNIERE|intval|et{#AUTORISER{voir,banniere,#ID_BANNIERE}})}>
+<BOUCLE_banniere(BANNIERES){id_banniere}{tout}>
+<div class='fiche_objet'>
+	[(#AUTORISER{modifier,banniere,#ID_BANNIERE})
+		<div class='bandeau_actions'>
+			[(#URL_ECRIRE{banniere_edit}
+				|parametre_url{id_banniere,#ID_BANNIERE}
+				|parametre_url{retour,#SELF}
+				|icone{<:bannieres:action_modifier:>, #CHEMIN{images/banniere-24.png}, #LANG_RIGHT, edit.gif})]
+		</div>
+	]
+
+
+	<h1>#NOM</h1>
+	<div dir='#LANG_DIR'><p><:bannieres:periode_diffusion{debut=#DEBUT,fin=#FIN}:></p></div>
+
+	<div id='wysiwyg'>
+		[(#PIPELINE{afficher_contenu_objet,[(#ARRAY{
+			args,[(#ARRAY{
+				type,banniere,
+				id_objet,#ID_BANNIERE,
+				contexte,[(#ARRAY{
+					id_banniere,#ID_BANNIERE})]})],
+			data,[(#INCLURE{fond=prive/contenu/banniere,id=#ID_BANNIERE})]})]})]
+	</div>
+</div>
+
+<!--#navigation-->
+[(#REM) Ce pipeline charge prive/infos/$type ]
+[<div class='cadre cadre-info'>
+	(#PIPELINE{boite_infos,[(#ARRAY{
+		args,[(#ARRAY{
+			type,banniere,
+			id,#ID_BANNIERE})],
+		data,''})]})
+</div>]
+
+[(#REM) Charge la boite de chargement de l'image ]
+[<div class='iconifier-#ID_BANNIERE'>
+(#PIPELINE{encart,#ID_BANNIERE})
+</div>]
+<!--/#navigation-->
+</BOUCLE_banniere>
+</BOUCLE_si_autorise>

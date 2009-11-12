@@ -1,0 +1,19 @@
+[(#AUTORISER{voir,bannieres})
+	<h1><:bannieres:liste_des_bannieres:></h1>
+
+	<div class='ajax'>
+	<INCLURE{fond=inclure/liste_bannieres,env,ajax} />
+	</div>
+
+	<!--#navigation-->
+	<div class='cadre cadre-info'>
+		<p><:bannieres:description_bannieres:></p>
+	</div>
+
+	[(#AUTORISER{modifier,banniere})
+		<div class='cadre cadre-info'>
+			<INCLURE{fond=inclure/liste_crea,env,ajax} />
+		</div>
+	]
+	<!--/#navigation-->
+]

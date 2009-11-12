@@ -1,0 +1,9 @@
+<li>
+<label for="champ_diffusion"><:bannieres:label_diffusion:></label>
+<select name="diffusion" id="champ_diffusion">
+	<option value=""><:bannieres:choix_departement:></option>
+	<BOUCLE_departements(GEO_DEPARTEMENTS){tout}{par nom}>
+	<option value="#ID_DEPARTEMENT"[(#ID_DEPARTEMENT|=={#ENV{diffusion}}|?{' '}) selected="selected"]>#ABBR - #NOM</option>
+	</BOUCLE_departements>
+</select>
+</li>
