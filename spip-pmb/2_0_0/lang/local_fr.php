@@ -17,7 +17,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'isbn' => 'ISBN/ISSN/EAN',
 'recherche_catalogue' => 'Dans le catalogue',
 'recherche_portail_web' => 'Dans le site',
-'recherche_avancee' => 'Recherche avanc&eacute;e'
+'recherche_avancee' => 'Recherche avanc&eacute;e',
+'info_ps' => 'Notes'
 
 );
 

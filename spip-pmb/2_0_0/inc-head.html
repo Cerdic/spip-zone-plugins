@@ -56,7 +56,7 @@
 		  $('#twits').twit('#TWITTER_USER', { username: true, icon: false});
 		</BOUCLE_auteurtwitter>
 		var maxheight=Math.max(parseInt($('#conteneur').height()),parseInt($('#navigation').height()));
-		//$('#conteneur, #navigation').css('height', maxheight+'px');
+		$('body').not('.page_auteur').find('#conteneur, #navigation').css('height', maxheight+'px');
 	});
 </script> 
 

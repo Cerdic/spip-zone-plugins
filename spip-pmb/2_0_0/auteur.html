@@ -29,21 +29,20 @@
 			[<h1 class="fn">(#NOM|image_typo{police=togase.ttf,taille=30,couleur=333300,largeur=600})</h1>]
 		</div>
 
-		[(#LOGO_AUTEUR||image_reduire{130,0})]
-
+		
 		
 		[(#SESSION{id_auteur}|=={#ID_AUTEUR}|oui)
+		    <span class="#EDIT{logo}">[(#LOGO_AUTEUR||image_reduire{130,0}|sinon{'double-cliquez ici pour ajouter un logo'})]</span>
 		    <div class="corps-conteneur surlignable">
-				<div class="texte entry-content">Bonjour[ (#PMB_FIRSTNAME)], bienvenue dans votre compte de lecteur.</div>
-				<p class="texte-modif-fiche">double-cliquez sur les champs pour modifier vos informations</p>
-				<div class="#EDIT{bio} note">Pr&eacute;sentation : [(#BIO|sinon{'<i>double-cliquez pour ajouter une pr&eacute;sentation</i>'})]</div>
+				<div class="texte entry-content">Bonjour[ (#PMB_FIRSTNAME|sinon{#NOM})].</div>
 				
-				<p class="#EDIT{hyperlien} hyperlien"><:voir_en_ligne:> : <a href="[(#URL_SITE)]" class="url org spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]}|sinon{'<i>double-cliquez pour ajouter un site internet</i>'})]</a></p>
+				 [(#FORMULAIRE_EDITER_AUTEUR{#SESSION{id_auteur},#SELF,env})]
 				
 				
 		    </div>	
 		]
 		[(#SESSION{id_auteur}|=={#ID_AUTEUR}|non)
+		    [(#LOGO_AUTEUR||image_reduire{130,0})]
 		    <div class="corps-conteneur surlignable">
 				[<div class="texte note">(#BIO)</div>]
 				[<p class="hyperlien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="url org spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
@@ -98,7 +97,6 @@
         </B_articles>
 
         [(#SESSION{id_auteur}|=={#ID_AUTEUR}|non)#FORMULAIRE_ECRIRE_AUTEUR]
-
 	
 	
 
