@@ -88,7 +88,7 @@ function spipicious_insert_head($flux){
 			spipicious_call++;
 			// Hack pour le focus obligatoire de positionner
 			// Le selecteur generique ne se rechargeait pas
-			spipicious.blur().focus();
+			spipicious.blur();
 		};
 
 		$(function(){
