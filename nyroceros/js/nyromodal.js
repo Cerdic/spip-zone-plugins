@@ -5,7 +5,7 @@ var nyro_init = function() {
 	// passent par dessus la modale
 	if(!navigator.platform.match('Mac')){
 		$.fn.nyroModal.settings.processHandler = function(){
-			jQuery('embed[wmode!=transparent]').addClass('nyro_cache').css('visibility','hidden')
+			jQuery('embed[wmode!=transparent]:visible').addClass('nyro_cache').css('visibility','hidden')
 				.parents('object').addClass('nyro_cache').css('visibility','hidden');
 		}
 		$.fn.nyroModal.settings.endRemove = function(){
