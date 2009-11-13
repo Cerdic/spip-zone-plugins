@@ -65,7 +65,7 @@ var showlongdesc=function(c) {
 // cacher les embed sans wmode transparent
 var hideembed=function() {
 	if(!navigator.platform.match('Mac')){
-		jQuery('embed[wmode!=transparent]').addClass('fancy_cache').css('visibility','hidden')
+		jQuery('embed[wmode!=transparent]:visible').addClass('fancy_cache').css('visibility','hidden')
 			.parents('object').addClass('fancy_cache').css('visibility','hidden');
 	}
 }
