@@ -7,12 +7,12 @@ function genie_activite_editoriale_alerte_dist() {
 			$subject = 'Une rubrique doit etre mise a jour';
 			include_spip('activite_editoriale_fonctions');
 			$url = generer_url_entite($list['id_rubrique'], 'rubrique');
-			$body = 'Attention, la rubique "'.$list['texte'].'" n\'a pas ete mise a jour depuis '.age_rubrique($list['maj']).' jours. '."\n\n";
+			$body = 'Attention, la rubique "'.$list['titre'].'" n\'a pas ete mise a jour depuis '.age_rubrique($list['maj']).' jours. '."\n\n";
 			$body = $body.'Vous etes identifie comme faisant partie des gestionnaires de la rubrique'."\n\n";
 			$body = $body.$url;
 			if ($auteurLists = sql_select("*", "spip_auteurs", "id_auteur in (".$list['extras_identifiants'].")")) {
 				while($auteurs = sql_fetch($auteurLists)) {
-					$to = $auteurs['email']; 
+					$to = $auteurs['email'];
 					if ($envoyer_mail($to, $subject, $body)) {
 						spip_log("Message sent to ".$to, "activite_editoriale");
 					} else {
