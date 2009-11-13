@@ -23,8 +23,8 @@ var displaylongdesc=function(l) {
 	}
 }
 // Gestion du longdesc : chargement de la legende
-var showlongdesc=function() {
-	var l=this.itemArray[this.itemCurrent]
+var showlongdesc=function(c) {
+	var l=c.itemArray[c.itemCurrent]
 	if (l && l.orig && l.orig[0])
 		l = $(l.orig[0]).attr("longdesc");
 	else
@@ -62,6 +62,31 @@ var showlongdesc=function() {
 	}
 }
 
+// cacher les embed sans wmode transparent
+var hideembed=function() {
+	if(!navigator.platform.match('Mac')){
+		jQuery('embed[wmode!=transparent]').addClass('fancy_cache').css('visibility','hidden')
+			.parents('object').addClass('fancy_cache').css('visibility','hidden');
+	}
+}
+
+// afficher les embed sans wmode transparent
+var showembed=function() {
+	if(!navigator.platform.match('Mac')){
+		jQuery('.fancy_cache').removeClass('.fancy_cache').css('visibility','visible');
+	}
+}
+
+// fontion callback lancee a l'affichage de la box
+var fancyonshow=function() {
+	showlongdesc(this);
+	hideembed();
+}
+
+// fontion callback lancee a la fermeture de la box
+var fancyonclose=function() {
+	showembed();
+}
 
 // Inside the function "this" will be "document" when called by ready() 
 // and "the ajaxed element" when called because of onAjaxLoad 

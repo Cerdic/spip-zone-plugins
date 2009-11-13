@@ -37,7 +37,8 @@ var fb_commun_options = {
 	"hideOnContentClick": '.$config['hideoncontentclick'].',
 	"frameWidth": '.$config['communwidth'].',
 	"frameHeight": '.$config['communheight'].',
-	"callbackOnShow": showlongdesc
+	"callbackOnShow": fancyonshow,
+	"callbackOnClose": fancyonclose
 };
 var fb_frame_options = {
 	"frameWidth": '.$config['framewidth'].',
