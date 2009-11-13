@@ -21,7 +21,7 @@ function sparkstats_insert_head($flux){
         if(e)
         $("<span style=\'padding-left:20px\'>")
         .html(e)
-        .appendTo(".cartouche small:eq(0)")
+        .appendTo(".cartouche small,.info-publi:eq(0)")
         .sparkline();
       });
     }
