@@ -13,7 +13,7 @@ function zengarden_charge_themes($dir = _DIR_THEMES){
 	$files = array();
 	$files = preg_files($dir,"/plugin.xml$");
 
-	$get_infos = charger_fonction('get_infos','plugin');
+	$get_infos = charger_fonction('get_infos','plugins');
 	if (count($files))
 		foreach($files as $file){
 			$path = substr(dirname($file),strlen($dir));

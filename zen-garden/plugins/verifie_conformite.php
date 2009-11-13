@@ -8,7 +8,7 @@
 
 
 // http://doc.spip.org/@plugin_verifie_conformite
-function plugin_verifie_conformite_dist($plug, &$arbre, $dir_plugins = _DIR_PLUGINS){
+function plugins_verifie_conformite_dist($plug, &$arbre, $dir_plugins = _DIR_PLUGINS){
 	$silence = false;
 	if (isset($arbre['plugin']) AND is_array($arbre['plugin']))
 		$arbre = end($arbre['plugin']); // derniere def plugin

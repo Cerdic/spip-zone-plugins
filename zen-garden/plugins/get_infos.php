@@ -9,7 +9,7 @@
 
 // lecture du fichier de configuration d'un plugin
 // http://doc.spip.org/@plugin_get_infos
-function plugin_get_infos_dist($plug, $force_reload=false, $dir_plugins = _DIR_PLUGINS){
+function plugins_get_infos_dist($plug, $force_reload=false, $dir_plugins = _DIR_PLUGINS){
 	include_spip('inc/xml');
 	static $infos=array();
 	static $plugin_xml_cache=NULL;
@@ -42,7 +42,7 @@ function plugin_get_infos_dist($plug, $force_reload=false, $dir_plugins = _DIR_P
 					// pour arriver ici on l'a vraiment cherche...
 					$arbre = array('erreur' => array(_T('erreur_plugin_fichier_def_absent')." : $plug/plugin.xml"));
 				}
-				$verifie_conformite = charger_fonction('verifie_conformite','plugin');
+				$verifie_conformite = charger_fonction('verifie_conformite','plugins');
 				$verifie_conformite($plug,$arbre,$dir_plugins);
 
 				include_spip('inc/charsets');
