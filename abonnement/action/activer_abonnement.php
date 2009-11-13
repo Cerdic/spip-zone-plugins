@@ -56,7 +56,7 @@ function abo_traiter_activer_abonnement($id_abonnement, $id_auteur, $hash = fals
 	}
 
 	// jour
-	if ($abonnement['pediode'] == 'jours') {
+	if ($abonnement['periode'] == 'jours') {
 		$validite = date('Y-m-d H:i:s', mktime(date('H'),date('i'),date('s'),date('n'),date('j')+$abonnement['duree'],date('Y')));
 	}
 	// ou mois
