@@ -51,6 +51,10 @@ _ <multi>
 	<bouton id='corbeille' parent='configuration'>
 		<titre>corbeille:corbeille</titre>
 		<icone>img_pack/trash-full-24.png</icone>
+	</bouton>
+	<bouton id='corbeille2' parent='bando_configuration'>
+		<titre>corbeille:corbeille</titre>
+		<icone>images/trash-full-16.png</icone>
 	</bouton>	
 	<necessite id='SPIP' version='[2.0.0;]' />
 </plugin>

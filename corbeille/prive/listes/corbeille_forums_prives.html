@@ -6,7 +6,7 @@
 <li class='item'>
 <label for='forum-#ID_FORUM'><:corbeille:selectionner:></label><input type='checkbox' name='elements[]' value='#ID_FORUM'[ (#ID_FORUM|in_any{#ENV{elements}}|oui)checked='checked']/>
 <h3>[##ID_FORUM - (#TITRE|sinon{<:info_sans_titre:>})]</h3>
-<smal>[(#DATE|affdate)][ (#DATE|heures)]:[(#DATE|minutes)]</small>
+<small>[(#DATE|affdate)][ (#DATE|heures)]:[(#DATE|minutes)]</small>
 - #INTRODUCTION
 <p class='actions'>[<a href='#URL_ECRIRE{controle_forum,id_forum=#ID_FORUM}'><:corbeille:voir:></a>]</p>
 </li>

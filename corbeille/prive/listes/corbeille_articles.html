@@ -6,7 +6,7 @@
 <li class='item'>
 <label for='article-#ID_ARTICLE'><:corbeille:selectionner:></label><input type='checkbox' name='elements[]' value='#ID_ARTICLE'[ (#ID_ARTICLE|in_any{#ENV{elements}}|oui)checked='checked']/>
 <h3>[##ID_ARTICLE - (#TITRE|sinon{<:info_sans_titre:>})]</h3>
-<smal>[(#DATE|affdate)][ (#DATE|heures)]:[(#DATE|minutes)]</small>
+<small>[(#DATE|affdate)][ (#DATE|heures)]:[(#DATE|minutes)]</small>
 - #INTRODUCTION
 <p class='actions'>[<a href='#URL_ECRIRE{articles,id_article=#ID_ARTICLE}'><:corbeille:voir:></a>]</p>
 </li>

@@ -6,7 +6,7 @@
 <li class='item'>
 <label for='signature-#ID_SIGNATURE'><:corbeille:selectionner:></label><input type='checkbox' name='elements[]' value='#ID_SIGNATURE'[ (#ID_SIGNATURE|in_any{#ENV{elements}}|oui)checked='checked']/>
 <h3>[##ID_SIGNATURE - (#NOM_EMAIL|sinon{<:info_sans_titre:>})]</h3>
-<smal>#AD_EMAIL [(#DATE|affdate)][ (#DATE|heures)]:[(#DATE|minutes)]</small>
+<small>#AD_EMAIL [(#DATE|affdate)][ (#DATE|heures)]:[(#DATE|minutes)]</small>
 - #MESSAGE
 <p class='actions'>[<a href='#URL_ECRIRE{controle_petition,id_signature=#ID_SIGNATURE}'><:corbeille:voir:></a>]</p>
 </li>
