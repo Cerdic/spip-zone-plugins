@@ -41,11 +41,14 @@ function spip_thelia_header_prive($flux) {
 		}
 	}
 
+
 	//on restaure les variables session et request modifi�es pour les plugins suivants sur affichage final
 	$page = $sav_page;
 	$_SESSION['navig']->lang = $sav_session_navig_lang;
 	
-
+	if (function_exists('chemin')) {
+		echo ("erreur : la fonction chemin() dans ecrire/inc/utils.php doit &ecirc;tre mise en commentaire !");
+	}
 	if (!file_exists("../fonctions/moteur.php")&&($_REQUEST['exec']!="")) 
 		echo ("erreur : th&eacute;lia introuvable, v&eacute;rifiez que les sous-r&eacute;pertoires de th&eacute;lia et spip sont dans le m&ecirc;me r&eacute;pertoire.");
 	if (!function_exists('lire_config'))
