@@ -4,7 +4,41 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
+	// O
+	'option_attention_explication' => 'Un message plus important que l\'explication.',
+	'option_attention_label' => 'Avertissement',
+	'option_class_label' => 'Classes CSS suppl&eacute;mentaires',
+	'option_defaut_label' => 'Valeur par d&eacute;faut',
+	'option_disable_avec_post_explication' => 'Identique &agrave; l\'option pr&eacute;c&eacute;dente mais poste quand m&ecirc;me la valeur dans un champ cach&eacute;.',
+	'option_disable_avec_post_label' => 'D&eacute;sactiver mais poster',
+	'option_disable_explication' => 'Le champ ne peut plus obtenir le focus.',
+	'option_disable_label' => 'D&eacute;sactiver le champ',
+	'option_explication_explication' => 'Si besoin, une courte phrase d&eacute;crivant l\'objet du champ.',
+	'option_explication_label' => 'Explication',
+	'option_info_obligatoire_explication' => 'Vous pouvez modifier (ou supprimer) l\'indication d\'obligation par d&eacute;faut.',
+	'option_info_obligatoire_label' => 'Indication d\'obligation',
+	'option_label_explication' => 'Le titre qui sera affich&eacute;.',
+	'option_label_label' => 'Label',
+	'option_maxlength_explication' => 'L\'utilisateur ne pourra pas taper plus de caract&egrave;res que ce nombre.',
+	'option_maxlength_label' => 'Nombre de caract&egrave;res maximum',
+	'option_nom_explication' => 'La valeur de l\'attribut "name".',
+	'option_nom_label' => 'Nom du champ',
+	'option_obligatoire_label' => 'Champ obligatoire',
+	'option_readonly_explication' => 'Le champ peut &ecirc;tre lu, s&eacute;lectionn&eacute;, mais pas modifi&eacute;.',
+	'option_readonly_label' => 'Lecture seule',
+	'option_size_explication' => 'Largeur du champ en nombre de caract&egrave;res. Cette option n\'est pas toujours appliqu&eacute;e car les styles CSS de votre site peuvent l\'annuler.',
+	'option_size_label' => 'Taille du champ',
+	'option_type_explication' => 'En mode "mot de passe", le contenu du champ sera masqu&eacute;.',
+	'option_type_label' => 'Type du champ',
+	'option_type_text' => 'Normal',
+	'option_type_password' => 'Mot de passe',
+	
+	// S
+	'saisie_base_titre' => 'Param&egrave;tres g&eacute;n&eacute;raux',
+	'saisie_base_plus_titre' => 'Param&egrave;tres suppl&eacute;mentaires',
+	'saisie_input_explication' => 'Une simple ligne de texte, pouvant &ecirc;tre visible ou masqu&eacute;e (mot de passe).',
+	'saisie_input_titre' => 'Texte simple',
+	
 	// T
 	'tous_visiteurs' => 'Tous les visiteurs (m&ecirc;me non enregistr&eacute;s)',
 

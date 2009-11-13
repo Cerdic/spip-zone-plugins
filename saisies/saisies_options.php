@@ -18,13 +18,23 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  */
 function generer_saisie($champ, $env){
 	
+	// Si le parametre n'est pas bon, on genere du vide
+	if (!is_array($champ))
+		return '';
+	
 	$contexte = array();
 	
 	// On sélectionne le type de saisie
 	$contexte['type_saisie'] = $champ['saisie'];
 	
+	// Peut-être des transformations à faire sur les options textuelles
+	$options = $champ['options'];
+	foreach ($options as $option => $valeur){
+		$options[$option] = saisies_transformer_langue($valeur);
+	}
+	
 	// On ajoute les options propres à la saisie
-	$contexte = array_merge($contexte, $champ['options']);
+	$contexte = array_merge($contexte, $options);
 	
 	// Si env est définie dans les options, on ajoute tout l'environnement
 	if(isset($contexte['env'])){
@@ -46,6 +56,27 @@ function generer_saisie($champ, $env){
 		$contexte
 	);
 	
+}
+
+// Applique eventuellement certaines transformations de langue a une valeur
+function saisies_transformer_langue($valeur){
+	// Si la valeur est bien une chaine (et pas non plus un entier déguisé)
+	if (is_string($valeur) and !intval($valeur)){
+		// Si la chaine commence par lang: on passe à _T()
+		if (strpos($valeur, 'lang:') === 0)
+			$valeur = _T(substr($valeur, 5));
+		// Si la chaine contient du <multi> on appele typo() pour transformer
+		elseif (strpos($valeur, '<multi>') !== false)
+			$valeur = typo($valeur);
+	}
+	// Sinon si c'est un tableau, on fait les memes tests pour chaque valeur
+	elseif (is_array($valeur)){
+		foreach ($valeur as $cle => $valeur2){
+			$valeur[$cle] = saisies_transformer_langue($valeur2);
+		}
+	}
+	
+	return $valeur;
 }
 
 ?>

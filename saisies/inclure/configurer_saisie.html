@@ -1,0 +1,14 @@
+[(#REM) 
+  
+  ### /!\ necessite le plugin YAML ###
+  
+  Genere l'intérieur d'un formulaire permettant de configurer une saisie
+  
+  Exemples d'appels :
+    #INCLURE{fond=inclure/configurer_saisie, env, saisie=input}
+
+]
+
+[(#SET{config, #ENV{saisie}|construire_configuration_saisie})]
+
+#INCLURE{fond=inclure/generer_saisies, env, saisies=#GET{config}}

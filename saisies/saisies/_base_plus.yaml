@@ -1,0 +1,39 @@
+
+titre: 'lang:saisies:saisie_base_plus_titre'
+options:
+  -
+    saisie: 'input'
+    options:
+      nom: 'explication'
+      label: 'lang:saisies:option_explication_label'
+      explication: 'lang:saisies:option_explication_explication'
+  -
+    saisie: 'input'
+    options:
+      nom: 'attention'
+      label: 'lang:saisies:option_attention_label'
+      explication: 'lang:saisies:option_attention_explication'
+  -
+    saisie: 'input'
+    options:
+      nom: 'info_obligatoire'
+      label: 'lang:saisies:option_info_obligatoire_label'
+      explication: 'lang:saisies:option_info_obligatoire_explication'
+  -
+    saisie: 'oui_non'
+    options:
+      nom: 'disable'
+      label: 'lang:saisies:option_disable_label'
+      explication: 'lang:saisies:option_disable_explication'
+  -
+    saisie: 'oui_non'
+    options:
+      nom: 'disable_avec_post'
+      label: 'lang:saisies:option_disable_avec_post_label'
+      explication: 'lang:saisies:option_disable_avec_post_explication'
+  -
+    saisie: 'oui_non'
+    options:
+      nom: 'readonly'
+      label: 'lang:saisies:option_readonly_label'
+      explication: 'lang:saisies:option_readonly_explication'

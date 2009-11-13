@@ -5,6 +5,7 @@
   - type : type de l'input (defaut: text)
   - class : classe(s) css ajoutes a l'input
   - size : taille du champ
+  - maxlength : nombre de caracteres maximum
   - disable : champ insaisissable ? 'oui' (defaut : '')
   
   Exemple d'appel :
@@ -16,4 +17,4 @@
 
 
 #SET{type,#ENV{type,text}}
-<input type="#GET{type}" name="#ENV{nom}" class="#GET{type}[ (#ENV{class})]" id="champ_#ENV{nom}"[ value="(#ENV{valeur,#ENV{defaut}})"][ size="(#ENV{size})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"] />
+<input type="#GET{type}" name="#ENV{nom}" class="#GET{type}[ (#ENV{class})]" id="champ_#ENV{nom}"[ value="(#ENV{valeur,#ENV{defaut}})"][ size="(#ENV{size})"][ maxlength="(#ENV{maxlength})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"] />
