@@ -253,23 +253,26 @@ function spip_thelia_formulaire_article($id_article, $flag_editable, $script) {
 			else
 				$bouton = bouton_block_depliable($titre,false,"produitsarticle");
 		}
+		$out .= debut_cadre_enfonce("../"._DIR_PLUGIN_SPIP_THELIA."/img_pack/logo_thelia_petit.png", true, "", $bouton);
+	
 	} else {
 		if (_request('edit')||_request('neweven'))
 			$bouton = bouton_block_visible("produitsarticle").$titre;
 		else
-			$bouton = bouton_block_invisible("produitsarticle").$titre;		
+			$bouton = bouton_block_invisible("produitsarticle").$titre;	
+		$out .= debut_cadre_enfonce("../"._DIR_PLUGIN_SPIP_THELIA."/img_pack/logo_thelia_petit.png", true, "", $bouton);
+	
+		//
+		// Afficher les produits associes
+		//
+		$out .= afficher_rubriques_objet('article',$id_rubrique);
+
+		$out .= afficher_produits_objet('article',$id_article);
+
+		$out .= debut_block_invisible('produitsarticle');
 	}
 
-	$out .= debut_cadre_enfonce("../"._DIR_PLUGIN_SPIP_THELIA."/img_pack/logo_thelia_petit.png", true, "", $bouton);
 	
-	//
-	// Afficher les produits associes
-	//
-	$out .= afficher_rubriques_objet('article',$id_rubrique);
-
-	$out .= afficher_produits_objet('article',$id_article);
-
-	$out .= debut_block_invisible('produitsarticle');
 	
 	$link = generer_action_auteur('produits_article',"$id_article",generer_url_ecrire('articles','id_article='.$id_article));
 	$out .= "<form method='POST' action='$link'>\n";
@@ -337,23 +340,26 @@ function spip_thelia_formulaire_rubrique($id_rubrique, $flag_editable, $script) 
 			else
 				$bouton = bouton_block_depliable($titre,false,"produitsrubrique");
 		}
+		$out .= debut_cadre_enfonce("../"._DIR_PLUGIN_SPIP_THELIA."/img_pack/logo_thelia_petit.png", true, "", $bouton);
+
 	} else {
 		if (_request('edit')||_request('neweven'))
 			$bouton = bouton_block_visible("produitsrubrique").$titre;
 		else
 			$bouton = bouton_block_invisible("produitsrubrique").$titre;		
+		$out .= debut_cadre_enfonce("../"._DIR_PLUGIN_SPIP_THELIA."/img_pack/logo_thelia_petit.png", true, "", $bouton);
+
+		//
+		// Afficher les produits associes
+		//
+		$out .= afficher_rubriques_objet('rubrique',$id_rubrique);
+
+		$out .= afficher_produits_objet('rubrique',$id_rubrique);
+		
+		$out .= debut_block_invisible('produitsrubrique');
 	}
 
-	$out .= debut_cadre_enfonce("../"._DIR_PLUGIN_SPIP_THELIA."/img_pack/logo_thelia_petit.png", true, "", $bouton);
-
-	//
-	// Afficher les produits associes
-	//
-	$out .= afficher_rubriques_objet('rubrique',$id_rubrique);
-
-	$out .= afficher_produits_objet('rubrique',$id_rubrique);
 	
-	$out .= debut_block_invisible('produitsrubrique');
 	
 	$link = generer_action_auteur('produits_rubrique',"$id_rubrique",generer_url_ecrire('naviguer&id_rubrique='.$id_rubrique,"",false,true));
 	$out .= "<form method='POST' action='$link'>\n";
