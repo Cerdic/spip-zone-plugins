@@ -17,6 +17,9 @@ function balise_BANNIERE_dyn($position='1',$contexte='',$pays='') {
  * $contexte doit etre au format code postal France
  */
 
+if(!is_numeric($contexte)) {
+	$contexte='';
+}
 
 if ($pays=='70' and $contexte !=''){
 
