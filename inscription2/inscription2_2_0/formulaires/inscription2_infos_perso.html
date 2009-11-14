@@ -132,7 +132,9 @@ On teste la présence d'au moins un des champs pour l'afficher]
         [(#CONFIG{inscription2/pays}|=={on}|oui)
 			[(#SAISIE{pays,pays}{label=<:inscription2:pays:>}
 				{option_intro=-}
-				{obligatoire=[(#CONFIG{inscription2/pays_obligatoire}|=={on}|?{oui,non})]})]
+				{obligatoire=[(#CONFIG{inscription2/pays_obligatoire}|=={on}|?{oui,non})]}
+				{defaut=[(#CONFIG{inscription2/pays_defaut})]})]
+
 		]
 
         [(#CONFIG{inscription2/telephone}|=={on}|oui)

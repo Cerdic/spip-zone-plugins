@@ -1,8 +1,0 @@
-<select name="#ENV{name}" id="#ENV{name}" class="select">
-	<option value=""><:inscription2:pays:></option>
-	<BOUCLE_pays(SPIP_GEO_PAYS){tout}>
-		[<option value="#ID_PAYS"[(#ID_PAYS|=={#ENV{id_pays}}|?{' '}) selected="selected"]>
-		(#PAYS)
-		</option>]
-	</BOUCLE_pays>
-</select>

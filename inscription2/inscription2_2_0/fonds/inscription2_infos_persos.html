@@ -318,6 +318,24 @@
 							<div style="[(#CONFIG{inscription2/pays}|=={on}|?{display: block;, display:none;})]">
 								<input type="checkbox" name="pays_obligatoire" [checked="(#CONFIG{inscription2/pays_obligatoire}?{checked})"] id="pays_obligatoire" />
 								<span style="color:red">*</span>
+								<style>
+								select.select_defaut{
+								clear:left;
+								display:block;
+								float:none;
+								margin-left:-125px;
+								position:static;
+								width:110px;	
+								}
+								</style>
+								<div>
+								[(#SAISIE{pays,pays}
+								{label=<:inscription2:pays_defaut:>}
+								{nom=pays_defaut}
+								{class=select_defaut}
+								{valeur=[(#CONFIG{inscription2/pays_defaut})]}
+								)]
+								</div>
 							</div>
 						</td>
 						<td>

@@ -207,6 +207,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'password_obligatoire' => 'Le mot de passe est obligatoire.',
 	'password_retaper' => 'Confirmez le mot de passe',
 	'pays' => 'Pays',
+	'pays_defaut' => 'Pays par defaut',
 	'pays_pro' => 'Pays (Pro.)',
 	'pgp' => 'Cl&eacute; PGP',
 	'prenom' => 'Pr&eacute;nom',
