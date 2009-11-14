@@ -85,7 +85,7 @@ function abonnement_envoyer_mails_confirmation($validation_paiement,$id_auteur,$
 		
 		// résumé de l'abonnement
 		if($produit == "abonnement"){	
-		$message .=  "\n\nAbonnement : ".$libelle."\n\n" ;
+		$message .=  "Votre abonnement : ".textebrut($libelle)."\n\n" ;
 		}
 		
 		// envoyer un lien pour choisir son mdp le cas echeant
@@ -99,15 +99,15 @@ function abonnement_envoyer_mails_confirmation($validation_paiement,$id_auteur,$
 		}
 		
 		if($article['titre'] && $abonne['pass'] == "")
-			$message .= "\n\n Vous pourrez ensuite vous connecter et acceder a votre article en suivant ce lien \n\n"
+			$message .= "\n\n Vous pourrez ensuite vous connecter et accéder à votre article en suivant ce lien \n\n"
 			.$article['titre']." (".$adresse_site."/?page=article&id_article=".$article['id_article'].")";
 		
 		if($article['titre'] && $abonne['pass'] != "")
-			$message .= "\n\n Vous pouvez acceder a votre article en suivant ce lien \n\n"
+			$message .= "\n\n Vous pouvez accéder à votre article en suivant ce lien \n\n"
 			.$article['titre']." (".$adresse_site."/?page=article&id_article=".$article['id_article'].")";
 		
 		if($produit == "abonnement")
-		$message .=  "\n\nA tout moment, vous pouvez consulter les informations concernant votre abonnement sur la page : ".$adresse_site."/?page=mon_compte\n\n" ;
+		$message .=  "A tout moment, vous pouvez consulter les informations concernant votre abonnement sur la page : ".$adresse_site."/?page=mon_compte\n\n" ;
 
 			
 		$message .= "\n\n".$nom_expediteur."\r\n";
