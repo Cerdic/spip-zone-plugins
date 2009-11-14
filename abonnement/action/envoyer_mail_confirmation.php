@@ -45,7 +45,7 @@ function abonnement_envoyer_mails_confirmation($validation_paiement,$id_auteur,$
 		$message_ko = "Votre paiement est refuse" ;
 	}
 	
-	$expediteur = $nom_expediteur.'<'.$adresse_expediteur.'>';
+	$expediteur = '"'.$nom_expediteur.'" <'.$adresse_expediteur.'>';
 					
 	$entete .= "Reply-To: ".$adresse_expediteur."\n";     					 // réponse
 	$entete .= "MIME-Version: 1.0\n";
@@ -83,6 +83,11 @@ function abonnement_envoyer_mails_confirmation($validation_paiement,$id_auteur,$
 		$sujet = $sujet_message_ok ;
 		$message= $message_ok."\n\n";
 		
+		// résumé de l'abonnement
+		if($produit == "abonnement"){	
+		$message .=  "\n\nAbonnement : ".$libelle."\n\n" ;
+		}
+		
 		// envoyer un lien pour choisir son mdp le cas echeant
 		if($abonne['pass'] == ""){
 	 	include_spip('inc/acces'); # pour creer_uniqid
@@ -101,6 +106,9 @@ function abonnement_envoyer_mails_confirmation($validation_paiement,$id_auteur,$
 			$message .= "\n\n Vous pouvez acceder a votre article en suivant ce lien \n\n"
 			.$article['titre']." (".$adresse_site."/?page=article&id_article=".$article['id_article'].")";
 		
+		if($produit == "abonnement")
+		$message .=  "\n\nA tout moment, vous pouvez consulter les informations concernant votre abonnement sur la page : ".$adresse_site."/?page=mon_compte\n\n" ;
+
 			
 		$message .= "\n\n".$nom_expediteur."\r\n";
 		
