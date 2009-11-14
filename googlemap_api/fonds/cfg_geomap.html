@@ -116,21 +116,21 @@
 			<label><:geomap:api_version:></label>
 			<p class="explications"><:geomap:explication_api_version:></p>
 			<div class="choix">
-				<input type="radio" name="api_version" class="radio" value="2" id="current_version"[ (#ENV{api_version,2}|=={'2'}|?{'checked="checked"'})] />
+				<input type="radio" name="api_version" class="radio" value="2" id="current_version"[ (#ENV{api_version,2}|=={2}|?{'checked="checked"'})] />
 				<label for="current_version"><:geomap:current_version:></label>
 			</div>
 			<div class="choix">
-				<input type="radio" name="api_version" class="radio" value="2.x" id="lastest_version"[ (#ENV{api_version}|=={'2.x'}|?{'checked="checked"'})] />
+				<input type="radio" name="api_version" class="radio" value="2.x" id="lastest_version"[ (#ENV{api_version}|=={2.x}|?{'checked="checked"'})] />
 				<label for="lastest_version"><:geomap:lastest_version:></label>
 			</div>
 			<div class="choix">
-				<input type="radio" name="api_version" class="radio" value="2.s" id="stable_version"[ (#ENV{api_version}|=={'2.s'}|?{'checked="checked"'})] />
+				<input type="radio" name="api_version" class="radio" value="2.s" id="stable_version"[ (#ENV{api_version}|=={2.s}|?{'checked="checked"'})] />
 				<label for="stable_version"><:geomap:stable_version:></label>
 			</div>
 			<div class="choix">
-				<input type="radio" name="api_version" class="radio" value="2." id="other_version"[ (#ENV{api_version}|match{'^2\.\d+'}|?{'checked="checked"'})] />
+				<input type="radio" name="api_version" class="radio" value="2." id="other_version"[ (#ENV{api_version}|match{^2\.}|?{'checked="checked"'})] />
 				<label for="other_version"><:geomap:other_version:></label>
-				<div style="display:[(#ENV{api_version}|match{'^2\.\d+'}|?{'block','none'})]" class="num_other_version_container">
+				<div style="display:[(#ENV{api_version}|match{^2\.}|?{'block','none'})]" class="num_other_version_container">
 					<input type="text" name="num_other_version" class="text" value="#ENV*{num_other_version}" id="num_other_version" />
 				</div>
 			</div>
