@@ -33,9 +33,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// Formulaires CFG
 	"fieldset_securite" => "Securit&eacute;s",
 	"fieldset_inscription" => "Relations avec Inscription 2",
-	"fieldset_expediteur" => "Expediteur des mails automatiques",
+	"fieldset_expediteur" => "Exp&eacute;diteur des mails de confirmation",
 	"fieldset_confirmation" => "Mail de confirmation d'abonnement",
 	"fieldset_echec" => "Mail d'&eacute;chec de l'abonnement",
+	"fieldset_message_confirmation" => "Message affiché sur la page de retour de la banque",
 	"fieldset_articles_payants" => "Articles payants",
 	"fieldset_relance" => "Email de relance a &eacute;ch&eacute;ance",
 	"fieldset_relance_avant_1" => "Email de relance avant &eacute;ch&eacute;ance 1",

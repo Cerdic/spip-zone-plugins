@@ -74,6 +74,15 @@
 	
 	<li class="fieldset">
 		<fieldset>
+			<h3 class="legend"><:abo:fieldset_message_confirmation:></h3>
+			<ul>					
+				[(#SAISIE{textarea,message_confirmation,label=<:abo:label_texte:>,rows=10})]
+			</ul>
+		</fieldset>
+	</li>
+	
+	<li class="fieldset">
+		<fieldset>
 			<h3 class="legend"><:abo:fieldset_articles_payants:></h3>
 			<ul>
 				[(#SAISIE{input,prix_article,label=<:abo:label_tarif:>,explication=<:abo:explication_tarif:>})]
