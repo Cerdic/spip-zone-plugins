@@ -12,14 +12,11 @@ function balise_BANNIERE ($p) {
 function balise_BANNIERE_dyn($position='1',$contexte='',$pays='') {
 
 /*
- * geolocalisation limitée à la France (id_pays = 70 )-> voir plugin geographie
+ * geolocalisation limitée à la France -> voir plugin geographie
  * ToDO : tester le numero du pays
- * $contexte doit etre un nombre au format code postal France
+ * $contexte doit etre au format code postal France
  */
 
-if(!is_numeric($contexte)) {
-	$contexte='';
-}
 
 if ($pays=='70' and $contexte !=''){
 
@@ -141,10 +138,53 @@ return $data;
 }
 
 
-// afficher la banniere trouvée
+// afficher le document associe a la banniere
 function afficher_banniere($id_objet='',$id='',$alt='') {
 
-	// recherche du logo
+	// Chercher dans la base le document associe à la banniere
+	$type = "banniere";
+
+	$select = "D.id_document, D.extension, D.titre,  D.descriptif,  D.fichier, D.largeur, D.hauteur";
+	$from = "spip_documents AS D LEFT JOIN spip_documents_liens AS L ON  L.id_document=D.id_document"; 
+	$where = "L.id_objet=$id AND L.objet='$type' AND D.extension $img IN ('gif', 'jpg', 'png', 'swf')";
+	$order = "0+D.titre, D.date";
+
+	$document = sql_fetsel($select, $from, $where, '','RAND()', $limit = '1');
+
+if ($document){
+
+	// on a trouve quelque chose dans la base alors on l'affiche
+
+	// cas du flash
+	// TODO :trouver un moyen de creer un lien et comptabiliser le clic...
+	 
+	if ($document['extension'] == 'swf'){
+
+	$logo_banniere = '<a href="'.generer_url_action('visit_url','banniere='.$id).'" >
+	<object width="'.$document['largeur'].'" height="'.$document['hauteur'].'">
+	<param name="movie" value="'._DIR_IMG.$document['fichier'].'">
+	<embed src="'._DIR_IMG.$document['fichier'].'" width="'.$document['largeur'].'" height="'.$document['hauteur'].'">
+	</embed>
+	</object>
+	</a>
+	';
+
+	} else {
+
+	//Todo : s'assurer que c'est une image
+
+	// c'est une image
+	$logo_banniere = '<a href="'.generer_url_action('visit_url','banniere='.$id).'" >
+		<img src="'._DIR_IMG.$document['fichier'].'" alt="'.$alt.'">
+		</a>
+		';
+
+		}
+
+} else {
+
+// rien dans la base peut etre un logo ? - ancien systeme.
+
 	include_spip('inc/iconifier');
 	
 	$chercher_logo = charger_fonction('chercher_logo', 'inc');
@@ -152,12 +192,12 @@ function afficher_banniere($id_objet='',$id='',$alt='') {
 	
 	list($img, $clic) = decrire_logo($id_objet,'on',$id, 170, 170, $logo, $texteon, $script, $flag_modif AND !$logo_s);
 
-	// afficher l'image
+	// si on a trouve on l'affiche
 	$logo_banniere = '<a href="'.generer_url_action('visit_url','banniere='.$id).'" >
 		<img src="'.$logo['0'].'" alt="'.$alt.'">
 		</a>
 		';
-
+}
 return $logo_banniere;
 
 }

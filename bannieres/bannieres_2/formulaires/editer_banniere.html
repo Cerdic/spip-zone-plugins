@@ -1,3 +1,10 @@
+<!--#navigation-->
+[(#REM) test ]
+[<div class='iconifier-#ID_BANNIERE'>
+(#PIPELINE{encart,#ID_BANNIERE})
+</div>]
+<!--/#navigation-->
+
 <div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_banniere,nouveau}'>
 	
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
@@ -28,9 +35,11 @@
 			label=<:bannieres:label_fin:>,
 			size=8})]
 
+		[(#ENV{alt}|=={''}|non)
 		[(#SAISIE{input, alt,
 			label=<:bannieres:label_alt_campagne:>,
-			explication=<:bannieres:explication_alt:>})]
+			explication=<:bannieres:explication_alt_ancien:>})]
+		]
 
 		[(#SAISIE{textarea, commentaires,
 			label=<:bannieres:label_commentaires:>,

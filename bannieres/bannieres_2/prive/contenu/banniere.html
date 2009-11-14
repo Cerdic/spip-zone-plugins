@@ -1,17 +1,25 @@
 <br class="nettoyeur"/>
 
 <BOUCLE_afficher_contenu(BANNIERES){id_banniere=#ENV{id}}{tout}>
+		<BOUCLE_document(spip_documents spip_documents_liens){id_objet=#ID_BANNIERE}{objet=banniere}>
+		[(#EXTENSION|=={swf}|?{#MODELE{emb},<a href="#URL_DOCUMENT">[(#MODELE{img}|image_reduire{515}|#URL_DOCUMENT)]</a>})]
+		
+		<div dir='#LANG_DIR' class='#EDIT{titre} titre'>
+			<p><small><:bannieres:alt:> : #TITRE</small></p>
+		</div>
+		
+		<div dir='#LANG_DIR' class='#EDIT{descriptif} descriptif'>
+		[<p><:bannieres:descriptif:> : </p>
+		(#DESCRIPTIF)]
+		</div>
+		
+		</BOUCLE_document>
+			<p><img src="[(#CHEMIN{images/warning.gif})]" alt=""> - <:bannieres:logo_absent:></p>
+		<//B_document>
 
-[(#LOGO_BANNIERE||non)
-<p><img src="[(#CHEMIN{images/warning.gif})]" alt=""> - <:bannieres:logo_absent:></p>
-]
+[<p><:bannieres:logo_ancien:>(#LOGO_BANNIERE||inserer_attribut{'alt',#ALT})</p>]
 
-<p>[(#LOGO_BANNIERE||inserer_attribut{'alt',#ALT}|image_reduire{515})]</p>
-
-<div class="champ contenu_alt[ (#ALT*|strlen|?{'',vide})]">
-	<div dir='#LANG_DIR' class='#EDIT{alt} alt'>
-	<p><small><:bannieres:alt:> : #ALT</small></p></div>
-</div>
+[<p><small><:bannieres:alt_ancien:> : (#ALT)</small></p>]
 
 <div class="champ contenu_email[ (#EMAIL*|strlen|?{'',vide})]">
 	<div dir='#LANG_DIR' class='#EDIT{email} email'>

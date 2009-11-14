@@ -14,7 +14,6 @@
 	<thead>
 	<tr>
 		<th>&nbsp;
-			
 		</th>
 		<th>
 			<:bannieres:label_logo:>
@@ -69,7 +68,6 @@
 		<img src="[(#CHEMIN{images/puce-verte.gif})]" alt="<:bannieres:active:>">
 		]
 
-
 		[(#DATE| > {#FIN}|oui)
 		<img src="[(#CHEMIN{images/puce-rouge.gif})]" alt="<:bannieres:echue:>">
 		 ]
@@ -78,17 +76,19 @@
 		<img src="[(#CHEMIN{images/puce-blanche.gif})]" alt="<:bannieres:future:>">
 		 ]
 
-
-
-
 		</td>
 		<td>
-		[(#LOGO_BANNIERE||non)
-		<img src="[(#CHEMIN{images/banniere_ko.gif})]" alt="<:bannieres:logo_absent:>">
-		]
-		[(#LOGO_BANNIERE||oui)
-		<img src="[(#CHEMIN{images/banniere_ok.gif})]" alt="<:bannieres:logo_ok:>">
-		]
+		<BOUCLE_document(spip_documents spip_documents_liens){id_objet=#ID_BANNIERE}{objet=banniere}{0,1}>
+			<img src="[(#CHEMIN{images/banniere_ok.gif})]" alt="<:bannieres:logo_ok:>">
+		</BOUCLE_document>
+			[(#LOGO_BANNIERE||non)
+			<img src="[(#CHEMIN{images/banniere_ko.gif})]" alt="<:bannieres:logo_absent:>">
+			]
+			[(#LOGO_BANNIERE||oui)
+			<img src="[(#CHEMIN{images/banniere_ok.gif})]" alt="<:bannieres:logo_ok:>">
+			]
+		<//B_document>
+		
 		</td>
 		<td>#ID_BANNIERE</td>
 		<td>#NOM</td>

@@ -25,7 +25,6 @@ function bannieres_declarer_tables_principales($tables_principales){
 		"nom" 			=> "VARCHAR(100) DEFAULT '' NOT NULL",
 		"email" 		=> "VARCHAR(100) DEFAULT '' NOT NULL",
 		"site" 			=> "VARCHAR(255) DEFAULT '' NOT NULL",
-		"alt" 			=> "VARCHAR(255) DEFAULT '' NOT NULL",
 		"debut"			=> "date DEFAULT '0000-00-00' NOT NULL",
 		"fin"			=> "date DEFAULT '0000-00-00' NOT NULL",
 		"clics"			=> "int(11) DEFAULT '0' NOT NULL",

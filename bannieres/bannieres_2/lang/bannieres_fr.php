@@ -18,6 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'action_voir' => 'Voir',
 	'active' => 'Campagne active',
 	'alt' => 'Texte alternatif',
+	'alt_ancien' => 'Ancien texte alternatif (utilisez plut&ocirc;t le titre du document - voir doc)',
 	
 	// B
 	'bannieres' => 'bannieres',
@@ -37,6 +38,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'echue' => 'Campagne &eacute;chue',
 	'email_contact' => 'Email de contact',
 	'explication_alt' => 'Texte de remplacement en cas d\'image absente (utile aussi pour le r&eacute;f&eacute;rencement.',
+	'explication_alt_ancien' => 'Utilisez de pr&eacute;f&eacute;rence le champ "titre de l\'image". Supprimer ce texte pour ne plus le voir appara&icirc;tre (Voir doc).',
 	'explication_commentaires' => 'Un petit mot explicatif (espace priv&eacute; uniquement).',
 	'explication_local' => 'Pour une diffusion bas&eacute;e sur une campagne locale, saisir les codes postaux s&eacute;par&eacute;s par une virgule sans mettre d\'espace.',
 	'explication_position' => 'Position de la banniere dans la page(#BANNIERE{1} par exemple).',
@@ -70,6 +72,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legende' => 'L&eacute;gende des icones : ',
 	'local' => 'Local',
 	'logo_absent' => 'Image absente',
+	'logo_ancien' => 'Ancien syst&egrave;me de logo (utilisez plut&ocirc;t le nouveau syst&egrave;me - voir doc.)',
 	'logo_banniere' => 'LOGO DE LA BANNIERE',
 	'logo_ok' => 'Image pr&eacute;sente',
 
