@@ -1,0 +1,32 @@
+
+
+
+
+
+
+<BOUCLE_rers_dom(MOTS){tous}{type_mot="Domaine de savoirs"}>
+<h4> #_rers_dom:TITRE </h4>
+
+<h5> Offres</h5>
+<ul>
+ <BOUCLE_rers_art(ARTICLES){statut IN prop,publie}{id_mot}{id_rubrique=#CONFIG{rers/rers_rub_offres}}{par titre}>
+  <BOUCLE_rers_aut(AUTEURS){id_article}>
+<li> <b> #_rers_art:TITRE</b>	- #_rers_aut:NOM - [(#_rers_art:DATE|saison)] [(#_rers_art:DATE|annee)]<br/>
+    [(#_rers_art:TEXTE|textebrut|replace{\n,|})]
+</li>
+  </BOUCLE_rers_aut>
+ </BOUCLE_rers_art>
+</ul>
+<h5> Demandes</h5>
+<ul>
+ <BOUCLE_rers_art2(ARTICLES){statut IN prop,publie}{id_mot}{id_rubrique=#CONFIG{rers/rers_rub_demandes}}{par titre}>
+  <BOUCLE_rers_aut2(AUTEURS){id_article}>
+<li> <b> #_rers_art2:TITRE</b> - #_rers_aut2:NOM - [(#_rers_art2:DATE|saison)] [(#_rers_art2:DATE|annee)]<br/>
+    [(#_rers_art2:TEXTE|textebrut|replace{\n,|})]
+</li>
+  </BOUCLE_rers_aut2>
+ </BOUCLE_rers_art2>
+</ul>
+
+</BOUCLE_rers_dom>
+
