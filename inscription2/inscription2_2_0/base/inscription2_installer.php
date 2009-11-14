@@ -100,29 +100,27 @@ function inscription2_upgrade($nom_meta_base_version,$version_cible){
 		ecrire_meta($nom_meta_base_version,$current_version=0.63);
 	}
 
-	if ($current_version<0.71){
-		spip_log('INSCRIPTION2 : upgrade en version 0.71');	
+	if ($current_version<0.71){	
 		/*
 		 * Reinstaller les pays de Geographie
 		 * pour ne pas etre dependant de ce plugin
 		 */
 		i2_installer_pays();
 		$verifier_tables();
-		spip_log("Inscription2 update @ 0.71 : installation de la table pays de geographie", "maj");
 		echo "Inscription2 update @ 0.71 : installation de la table pays de geographie<br />";
 		ecrire_meta($nom_meta_base_version,$current_version=0.71);
 	}
 	if ($current_version<0.72){
-		spip_log('INSCRIPTION2 : upgrade en version 0.72 (langues des pays)');	
-		/*
-		 * Reinstaller les pays de Geographie
-		 * pour ne pas etre dependant de ce plugin
-		 */
 		i2_installer_pays();
 		$verifier_tables();
-		spip_log("Inscription2 update @ 0.72 : Modification de la table spip_pays (Neerlandais)", "maj");
 		echo "Inscription2 update @ 0.72 : Modification de la table spip_pays (Neerlandais)<br />";
 		ecrire_meta($nom_meta_base_version,$current_version=0.72);
+	}
+	if ($current_version<0.73){	
+		i2_installer_pays();
+		$verifier_tables();
+		echo "Inscription2 update @ 0.73 : Une erreur de la table spip_pays (Neerlandais)<br />";
+		ecrire_meta($nom_meta_base_version,$current_version=0.73);
 	}
 }
 
