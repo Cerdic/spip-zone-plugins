@@ -13,7 +13,7 @@
 	<ul>
 	<li>
 	<:abo:nombre_abonnes_a_jour:>
-	<BOUCLE_abonnes_a_jour(AUTEURS_ELARGIS_ABONNEMENTS){fusion 1=1}{validite>#DATE}{compte DISTINCT(id_auteur)}>
+	<BOUCLE_abonnes_a_jour(AUTEURS_ELARGIS_ABONNEMENTS){fusion 1=1}{statut_paiement=ok}{validite>#DATE}{compte DISTINCT(id_auteur)}>
 		<strong>#COMPTE{id_auteur}</strong>
 	</BOUCLE_abonnes_a_jour>
 		<strong>0</strong>
@@ -21,7 +21,7 @@
 	</li>
 	<li>
 	<:abo:nombre_abonnes_dechus:>
-	<BOUCLE_abonnes_dechus(AUTEURS_ELARGIS_ABONNEMENTS){fusion 1=1}{validite!=0}{validite<#DATE}{compte DISTINCT(id_auteur)}>
+	<BOUCLE_abonnes_dechus(AUTEURS_ELARGIS_ABONNEMENTS){fusion 1=1}{statut_paiement=ok}{validite!=0}{validite<#DATE}{compte DISTINCT(id_auteur)}>
 		<strong>#COMPTE{id_auteur}</strong>
 	</BOUCLE_abonnes_dechus>
 		<strong>0</strong>
@@ -29,7 +29,7 @@
 	</li>	
 	<li>
 	<:abo:nombre_abonnes_relances:>
-	<BOUCLE_abonnes_relances(AUTEURS_ELARGIS_ABONNEMENTS){fusion 1=1}{validite!=0}{validite<#DATE}{stade_relance>0}{compte DISTINCT(id_auteur)}>
+	<BOUCLE_abonnes_relances(AUTEURS_ELARGIS_ABONNEMENTS){fusion 1=1}{statut_paiement=ok}{validite!=0}{validite<#DATE}{stade_relance>0}{compte DISTINCT(id_auteur)}>
 		<strong>#COMPTE{id_auteur}</strong>
 	</BOUCLE_abonnes_relances>
 		<strong>0</strong>
@@ -60,7 +60,7 @@
 <BOUCLE_types(ABONNEMENTS){par id_abonnement}>
 <tr class="tr_liste">
 	<td>#LIBELLE</td>
-	<BOUCLE_nombre(AUTEURS_ELARGIS_ABONNEMENTS){id_abonnement}{somme montant}{compte montant}{fusion id_abonnement}>
+	<BOUCLE_nombre(AUTEURS_ELARGIS_ABONNEMENTS){id_abonnement}{statut_paiement=ok}{somme montant}{compte montant}{fusion id_abonnement}>
 		<td>#COMPTE{montant}</td>
 		<td>#SOMME{montant}</td>
 	</BOUCLE_nombre>
@@ -73,7 +73,7 @@
 <tfoot>
 <tr>
 	<th><:abo:total:></th>
-	<BOUCLE_nombre_total(AUTEURS_ELARGIS_ABONNEMENTS){somme montant}{compte montant}{fusion 1=1}>
+	<BOUCLE_nombre_total(AUTEURS_ELARGIS_ABONNEMENTS){statut_paiement=ok}{somme montant}{compte montant}{fusion 1=1}>
 		<td>#COMPTE{montant}</td>
 		<td>#SOMME{montant}</td>
 	</BOUCLE_nombre_total>
@@ -110,7 +110,7 @@
 <tfoot>
 <tr>
 	<th><:abo:total:></th>
-	<BOUCLE_nombre_art_total(AUTEURS_ELARGIS_ARTICLES){somme montant}{compte montant}{fusion 1=1}>
+	<BOUCLE_nombre_art_total(AUTEURS_ELARGIS_ARTICLES){statut_paiement=ok}{somme montant}{compte montant}{fusion 1=1}>
 		<td>#COMPTE{montant}</td>
 		<td>#SOMME{montant}</td>
 	</BOUCLE_nombre_art_total>
@@ -146,7 +146,7 @@
 <tr>
 	<th colspan="6">[(#DATE|annee) ][(#DATE|nom_mois)]</th>
 	<th colspan="2"><:abo:nouveaux_abonnes_depuis_7_jours:>
-		<BOUCLE_abonnes_nouveaux_7_jours(AUTEURS_ELARGIS_ABONNEMENTS){date>#GET{seven}}{validite>(#ENV{date})}{fusion 1=1}{compte DISTINCT(id_auteur)}>
+		<BOUCLE_abonnes_nouveaux_7_jours(AUTEURS_ELARGIS_ABONNEMENTS){statut_paiement=ok}{date>#GET{seven}}{validite>(#ENV{date})}{fusion 1=1}{compte DISTINCT(id_auteur)}>
 			<strong>#COMPTE{id_auteur}</strong>
 		</BOUCLE_abonnes_nouveaux_7_jours>
 			<strong>0</strong>
@@ -155,7 +155,7 @@
 </tr>
 </thead>
 <tbody>
-<BOUCLE_ce_mois_ci(AUTEURS_ELARGIS_ABONNEMENTS) {agenda date, mois, (#ENV{annee}|sinon{#DATE|annee}), (#ENV{mois}|sinon{#DATE|mois})} {fusion id_abonnement}{par id_abonnement}{!par date}>
+<BOUCLE_ce_mois_ci(AUTEURS_ELARGIS_ABONNEMENTS) {agenda date, mois, (#ENV{annee}|sinon{#DATE|annee}), (#ENV{mois}|sinon{#DATE|mois})} {statut_paiement=ok}{fusion id_abonnement}{par id_abonnement}{!par date}>
 <BOUCLE_labonnement(ABONNEMENTS){id_abonnement}>
 <tr class="tr_liste">
 	<th colspan="7">#LIBELLE</th><th>##ID_ABONNEMENT</th>
@@ -171,7 +171,7 @@
 	<th><:abo:label_date_expiration:></th>
 </tr>
 </BOUCLE_labonnement>
-<BOUCLE_inscrits_ce_mois_ci(AUTEURS_ELARGIS_ABONNEMENTS auteurs_elargis) {mois_relatif}{id_abonnement}{!par date}>
+<BOUCLE_inscrits_ce_mois_ci(AUTEURS_ELARGIS_ABONNEMENTS auteurs_elargis) {statut_paiement=ok} {mois_relatif}{id_abonnement}{!par date}>
 <tr class="tr_liste">
 	<td onclick="location.href='./?exec=auteur_infos&id_auteur=#ID_AUTEUR'">#PRENOM</td>
 	<td onclick="location.href='./?exec=auteur_infos&id_auteur=#ID_AUTEUR'">#NOM_FAMILLE</td>
