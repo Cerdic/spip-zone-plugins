@@ -1,6 +1,7 @@
 <?php
 
 	include_spip('inc/charsets');
+	include_spip('inc/filtres');
 	
 	if (intval(phpversion()) == 5) {
 		include_spip('phpmailer-php5/class.phpmailer');
@@ -20,7 +21,7 @@
 				$this->FromName	= $GLOBALS['meta']['facteur_adresse_envoi_nom'];
 			} else {
 				$this->From		= $GLOBALS['meta']['email_webmaster'];
-				$this->FromName	= $GLOBALS['meta']['nom_site'];
+				$this->FromName	= extraire_multi($GLOBALS['meta']['nom_site']);
 			}
 
 			$this->CharSet	= "utf-8";
