@@ -127,7 +127,7 @@ function abonnement_i2_charger_formulaire($flux) {
 		include_spip('inc/acces');
 		$hash = creer_uniqid();	
 		$flux['data']['hash'] = $hash ;
-		$flux['data']['type_commande'] = "abonnement" ;
+		$flux['data']['type_commande'] = "abonnement" ;	
 	}
 	return $flux;
 }
@@ -150,15 +150,15 @@ function abonnement_i2_traiter_formulaire($flux) {
 			$row = sql_fetsel(array('montant'), 'spip_abonnements', 'id_abonnement='.sql_quote($id_abonnement));
 			$montant = $row['montant'];
 			
-			// (verififier si ca emplile pas en mode edition)
-			sql_insertq('spip_auteurs_elargis_abonnements', array(
-				'id_auteur' => $id_auteur,
-				'id_abonnement' => $id_abonnement,
-				'date' => date("Y-m-d H:i:s"),
-				'hash'=>$hash,
-				'montant'=>$montant,
-				'statut_paiement' => 'a_confirmer')
-			);
+			if(!$flux['data']['modif']) 
+				sql_insertq('spip_auteurs_elargis_abonnements', array(
+					'id_auteur' => $id_auteur,
+					'id_abonnement' => $id_abonnement,
+					'date' => date("Y-m-d H:i:s"),
+					'hash'=>$hash,
+					'montant'=>$montant,
+					'statut_paiement' => 'a_confirmer')
+				);
 		}
 		$flux['data']['ne_pas_confirmer_par_mail'] = true ;
 		$flux['data']['message_ok'] = " " ;
@@ -174,6 +174,13 @@ function abonnement_i2_confirmation($flux) {
 		$row = sql_fetsel(array('id_auteur'), 'spip_auteurs', 'email='.sql_quote($env['email']));
 		$env['id_auteur'] = $row['id_auteur'] ;
 		$flux['data'] .= recuperer_fond('formulaires/abonnement_paiement',$env);
+	
+	// on pose une session permettant d'identifier l'abonne 
+	// si desfois il lui prenait l'idée de faire "retour" avec son navigateur
+	// on prend la date pour permettre la manip que pendant quelques minutes
+	include_spip("inc/inscription2_session");
+	i2_poser_session($row['id_auteur']);
+	
 	}
 	return $flux;
 }
