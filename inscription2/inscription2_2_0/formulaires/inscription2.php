@@ -218,6 +218,7 @@ function formulaires_inscription2_verifier_dist($id_auteur = null,$redirect = nu
 function formulaires_inscription2_traiter_dist($id_auteur = NULL,$redirect = null){
 
 	$retour = array();
+	$data = array();
 
 	if((is_numeric($id_auteur) && (lire_config('inscription2/pass_fiche_mod') != 'on'))
 		OR (is_numeric($id_auteur) && (lire_config('inscription2/pass_fiche_mod') == 'on')) && (strlen(_request('password')) == 0)){
@@ -322,8 +323,17 @@ function formulaires_inscription2_traiter_dist($id_auteur = NULL,$redirect = nul
 		unset($val['pass']);
 	}
 
+	// affecter $id_auteur avec la session si présent depuis moins de quelques minutes
+	include_spip("inc/inscription2_session");
+	if($id_inscrit = i2_session_valide()){
+		$id_auteur = $id_inscrit ;
+		$modif_par_session = true ;
+		$data["modif"] = true ;
+	}
+	
+
 	//inserer les donnees dans spip_auteurs -- si $id_auteur : mise a jour - autrement : nouvelle entree
-	if (!$new) {
+	if (!$new or $modif_par_session) {
 		$where = 'id_auteur = '.$id_auteur;
 		sql_updateq(
 			$table,
@@ -403,7 +413,7 @@ function formulaires_inscription2_traiter_dist($id_auteur = NULL,$redirect = nul
 				'id_auteur' => $id_auteur,
 				'champs' => $valeurs
 			),
-		'data' => null
+		'data' => $data
 		)
 	);
 

@@ -20,7 +20,16 @@ function inc_inscription2_valide_email_dist($email,$id_auteur=NULL) {
 		// Verifier si le mail est déjà connu
 		if (strlen($email) > 0 AND email_valide($email)) {
 			if (sql_getfetsel("id_auteur","spip_auteurs","id_auteur !='".intval($id_auteur)."' AND email = '$email'")) {
-				return _T('form_forum_email_deja_enregistre');
+				
+				// si un inscrit depuis moins de quelques minutes est dans la session
+				// c'est qu'il cherche a corriger sa fiche
+				// on le laisse passer
+				include_spip("inc/inscription2_session");
+				if($id_inscrit = i2_session_valide())
+					return ;
+				else
+					return _T('form_forum_email_deja_enregistre');	
+				
 			}
 		}
 	}
