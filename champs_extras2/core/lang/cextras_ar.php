@@ -2,7 +2,7 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'cextra_par_defaut' => 'قيمة إفتراضية',
+	'cextra_par_defaut' => 'قيمة تلقائية',
 	
 	//T
 	'table_article' => 'المقالات',
