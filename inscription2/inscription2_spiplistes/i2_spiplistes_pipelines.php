@@ -35,7 +35,7 @@
 		$id_auteur = $flux['args']['id_auteur'];
 		$listes = _request('newsletters'); 
 		$format = _request('newsletter') ;
-		if(($format == "html") or ($format == "texte")){
+		if((($format == "html") or ($format == "texte")) and is_array($listes)){
 			// on maj le format de reception avec le format par defaut
 			sql_updateq("spip_auteurs_elargis",array('spip_listes_format'=>$format),"id_auteur=$id_auteur");
 			// on abonne aux listes
