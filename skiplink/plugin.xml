@@ -1,4 +1,4 @@
-<plugin>
+﻿<plugin>
 <nom>SkipLink</nom>
 <icon>skiplink-64.png</icon>
 <auteur>[romy.tetue.net->http://romy.tetue.net] - 2009</auteur>
@@ -9,6 +9,7 @@
 <multi>
 [fr]Liens facilitant la navigation dans la page : liens d'acc&egrave;s rapide, retour en haut de page, et leurs ancres. Indispensables pour naviguer au clavier et tr&egrave;s appr&eacute;ciables sur t&eacute;l&eacute;phone portable.
 [en]Skip Navigation Links
+[ar] وصلات تسهل التنقل إلى أدوات الموقع الحيوية لاسيما محرك البحث وتخول للزائر تصفحا سلسا وسريعا خصوصا لمستخدمي الهواتف (أي بود) النقالة.
 </multi>
 </description>
 <prefix>skiplink</prefix>
