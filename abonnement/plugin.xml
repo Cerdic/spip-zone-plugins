@@ -73,7 +73,10 @@
 		<icone>img/abonnement_22.png</icone>
 		<titre>abo:abonnements</titre>
 	</bouton>
-	
+	<bouton id='abonnements_stats' parent='statistiques_visites'>
+		<icone>img/abonnement_22.png</icone>
+		<titre>abo:abonnements</titre>
+	</bouton>
 	<pipeline>
 		<nom>autoriser</nom>
 		<inclure>abonnement_autorisations.php</inclure>
