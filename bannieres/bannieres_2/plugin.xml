@@ -3,16 +3,18 @@
 	<auteur>
 		Jeannot, inspir&eacute; de Fran&ccedil;ois de Montlivault et Matthieu Marcillaud
 	</auteur>
-	<version>0.20</version>
-	<version_base>0.20</version_base>
+	<version>0.21</version>
+	<version_base>0.21</version_base>
+
+    <licence>&#169; 2009 GNU/GPL</licence>
+
 	<install>base/bannieres_upgrade.php</install>
 
-	
 	<etat>dev</etat>
 	<description>
 		Gestion de banni&egrave;res (spip 2.0)
 	</description>
-	<lien>                       </lien>
+	<lien>http://www.spip-contrib.net/Plugin-pour-bannieres-2</lien>
 	<icon>images/bannieres.png</icon>
 	<prefix>bannieres</prefix>
 	
@@ -32,6 +34,7 @@
 		<inclure>base/bannieres.php</inclure>
 	</pipeline>
 	
+	<!-- test iconifier -->
 	<pipeline>
 		<nom>encart</nom>
 		<inclure>bannieres_pipelines.php</inclure>
