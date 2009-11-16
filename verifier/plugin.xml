@@ -1,0 +1,13 @@
+<plugin>
+	<nom>API de vérification</nom>
+	<auteur>RastaPopoulos</auteur>
+	<licence>GPL v3</licence>
+	<version>0.1</version>
+	<etat>dev</etat>
+	<description>Fournit une fonction unique <code>verifier($valeur, $type, $options)</code> permettant de tester la validit&eacute; d'une valeur.</description>
+	
+	<prefix>verifier</prefix>
+	
+	<necessite id="SPIP" version="[2.0.10;]" />
+</plugin>
+

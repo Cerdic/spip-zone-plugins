@@ -1,0 +1,58 @@
+<html>
+<body>
+<h1>Test de vérification de valeurs</h1>
+
+<h2>Vérifions qu'un mot est un mot :</h2>
+<pre>
+<?php
+
+include_spip('inc/verifier');
+
+$un_mot = "poli4_EFSdq89";
+$un_autre_mot = "aqe  edioj o^";
+$modele = "/^[\w]+$/";
+
+echo "Modèle => $modele\n\n";
+echo "'$un_mot' ?";
+var_dump(verifier($un_mot, 'regex', array('modele'=>$modele)));
+echo "'$un_autre_mot' ?";
+var_dump(verifier($un_autre_mot, 'regex', array('modele'=>$modele)));
+
+?>
+</pre>
+
+<h2>Vérifions des entiers :</h2>
+</pre>
+<?php
+
+$un_entier = 568;
+$un_autre_entier = "-89";
+
+echo "$un_entier entre 0 et 1000 ?";
+var_dump(verifier($un_entier, 'entier', array('min'=>0, 'max'=>1000)));
+echo "$un_entier < 100 ?";
+var_dump(verifier($un_entier, 'entier', array('max'=>100)));
+echo "$un_autre_entier est positif ?";
+var_dump(verifier($un_autre_entier, 'entier', array('min'=>0)));
+echo "$un_autre_entier entre -100 et -50 ?";
+var_dump(verifier($un_autre_entier, 'entier', array('min'=>-100, 'max'=>-50)));
+
+?>
+</pre>
+
+<h2>Vérifions des emails :</h2>
+</pre>
+<?php
+
+$email = "test@test.fr";
+$email2 = "test";
+
+echo "$email ?";
+var_dump(verifier($email, 'email'));
+echo "$email2 ?";
+var_dump(verifier($email2, 'email'));
+
+?>
+</pre>
+</body>
+</html>
