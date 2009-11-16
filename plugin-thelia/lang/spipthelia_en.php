@@ -128,7 +128,24 @@ Write here information about the settlement by transfer ...<br /><br />',
 'mes_achats' => 'My purchases',
 'bonjour' => 'Hello',
 'actualiser' => 'refresh',
-'prix' => 'price'
+'prix' => 'price',
+'produit_en_ligne' => 'Produit en ligne',
+'produit_non_publie' => 'Produit non publi&eacute;',
+'rubriques_associees_article' => 'RUBRIQUES THELIA ASSOCI&Eacute;ES &Agrave; L\'ARTICLE',
+'rubriques_associees_rubrique' => 'RUBRIQUES THELIA ASSOCI&Eacute;ES &Agrave; LA RUBRIQUE SPIP',
+'produits_et_rubriques_associes_article' => 'PRODUITS ET RUBRIQUES THELIA ASSOCI&Eacute;S &Agrave; L\'ARTICLE',
+'produits_et_rubriques_associes_rubrique' => 'PRODUITS ET RUBRIQUES THELIA ASSOCI&Eacute;S &Agrave; LA RUBRIQUE SPIP',
+'nom_de_la_rubrique' => "Nom de la rubrique",
+'nom_du_produit' => "Nom du produit",
+'prix' => "Prix",
+'rubrique_en_ligne' => "Rubrique THELIA en ligne",
+'rubrique_non_publiee' => "Rubrique THELIA non publi&eacute;e",
+'etape_panier' => 'Panier',
+'etape_compte' => 'Compte',
+'etape_livraison' => 'Livraison',
+'etape_paiement' => 'Paiement',
+'etape_terminer' => 'Terminer'
+
 
 
 

@@ -146,7 +146,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'nom_du_produit' => "Nom du produit",
 'prix' => "Prix",
 'rubrique_en_ligne' => "Rubrique THELIA en ligne",
-'rubrique_non_publiee' => "Rubrique THELIA non publi&eacute;e"
+'rubrique_non_publiee' => "Rubrique THELIA non publi&eacute;e",
+'etape_panier' => 'Panier',
+'etape_compte' => 'Compte',
+'etape_livraison' => 'Livraison',
+'etape_paiement' => 'Paiement',
+'etape_terminer' => 'Terminer'
 
 );
 ?>

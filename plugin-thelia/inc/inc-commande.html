@@ -1,16 +1,14 @@
 
 				[(#REM) Afficher les étapes de la commande et visualiser l'étape courante ]
-				<div id="etapes-achat">
-				<h2 class="invisible"><:etapes_achat:></h2>
-				<ul>
-					<li><div><a href="[(#URL_PAGE{panier})]"><img src="[(#CHEMIN{img_pack/etape_1.jpg})]" alt="<:spipthelia:valider_panier:>" /></a></div></li>
-				<li><div><a href="[(#URL_PAGE{connexion})]"><img src="[(#CHEMIN{img_pack/etape_2.jpg})]" alt="<:spipthelia:identifiez_vous:>" /></a></div></li>					
-				<li><div><a href="[(#URL_PAGE{adresse})]"><img src="[(#CHEMIN{img_pack/etape_3.jpg})]" alt="<:spipthelia:choix_mode_livraison:>" /></a></div></li>						
-				<li class="etape-courante"><div><img src="[(#CHEMIN{img_pack/etape_4_on.jpg})]" alt="<:spipthelia:choix_paiement:>" /></div></li>			
-				<li class="derniere-etape"><div><img src="[(#CHEMIN{img_pack/etape_5.jpg})]" alt="<:spipthelia:envoyer_commande:>" /></div></li>
+				<ul id='infos_etapes' class='infos_etape_2'>
+				    <li class='valides'><div class='fond'><a href="[(#URL_PAGE{panier})]"><em>&Eacute;tape </em><span class='numero_etape'>1</span><em>&nbsp;: </em><:spipthelia:etape_panier:></a></div></li>
+				    <li class='valides'><div class='fond'><em>&Eacute;tape </em><span class='numero_etape'>2</span><em>&nbsp;: </em><:spipthelia:etape_compte:></div></li>
+				    <li class='valides'><div class='fond'><a href="[(#URL_PAGE{adresse})]"><em>&Eacute;tape </em><span class='numero_etape'>3</span><em>&nbsp;: </em><:spipthelia:etape_livraison:></a></div></li>
+				    <li class='on'><div class='fond'><strong><em>&Eacute;tape </em><span class='numero_etape'>4</span><em>&nbsp;: </em><:spipthelia:etape_paiement:></strong></div></li>
+				    <li class='prochains'><div class='fond'><em>&Eacute;tape </em><span class='numero_etape'>5</span><em>&nbsp;: </em><:spipthelia:etape_terminer:></div></li>
 				</ul>
-				<br class="nettoyeur" />
-				</div>
+
+				
 
 
 				<div class="titrePage">

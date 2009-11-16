@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 'valider_panier' => 'Validar mi cesta',
 'ajouter_panier' => 'a&ntilde;adir a la cesta',
@@ -123,7 +123,35 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'boutique' => 'Tienda',
 'site_realise_avec_spip' => 'Site r&eacute;alis&eacute; avec T&eacute;lia',
 'et' => 'y',
-'plugin_thelia' => 'con el plugin Th&eacute;lia para SPIP'
+'plugin_thelia' => 'con el plugin Th&eacute;lia para SPIP',
+'retour_boutique' => 'Retour &agrave; la boutique',
+'mes_achats' => 'Mes achats',
+'bonjour' => 'Bonjour',
+'produits_associes_article' => 'PRODUITS ASSOCI&Eacute;S &Agrave; L\'ARTICLE',
+'produits_associes_rubrique' => 'PRODUITS ASSOCI&Eacute;S &Agrave; LA RUBRIQUE SPIP',
+'mettre_a_jour' => 'Mettre &agrave; jour',
+'etapes_achat' => 'Les &eacute;tapes de ma commande :',
+'envoyer_commande' => 'J\'envoie ma commande',
+'paiement_desactive' => 'Le paiement est temporairement d&eacute;sactiv&eacute; sur ce site. Nous vous invitons &agrave; r&eacute;&eacute;ssayer ult&eacute;rieurement',
+'actualiser' => 'Actualiser',
+'pas_de_commande' => 'Vous n\'avez pas de commande enregistr&eacute;es ou en cours',
+'prix' => 'prix',
+'produit_en_ligne' => 'Produit en ligne',
+'produit_non_publie' => 'Produit non publi&eacute;',
+'rubriques_associees_article' => 'RUBRIQUES THELIA ASSOCI&Eacute;ES &Agrave; L\'ARTICLE',
+'rubriques_associees_rubrique' => 'RUBRIQUES THELIA ASSOCI&Eacute;ES &Agrave; LA RUBRIQUE SPIP',
+'produits_et_rubriques_associes_article' => 'PRODUITS ET RUBRIQUES THELIA ASSOCI&Eacute;S &Agrave; L\'ARTICLE',
+'produits_et_rubriques_associes_rubrique' => 'PRODUITS ET RUBRIQUES THELIA ASSOCI&Eacute;S &Agrave; LA RUBRIQUE SPIP',
+'nom_de_la_rubrique' => "Nom de la rubrique",
+'nom_du_produit' => "Nom du produit",
+'prix' => "Prix",
+'rubrique_en_ligne' => "Rubrique THELIA en ligne",
+'rubrique_non_publiee' => "Rubrique THELIA non publi&eacute;e",
+'etape_panier' => 'Panier',
+'etape_compte' => 'Compte',
+'etape_livraison' => 'Livraison',
+'etape_paiement' => 'Paiement',
+'etape_terminer' => 'Terminer'
 
 
 
