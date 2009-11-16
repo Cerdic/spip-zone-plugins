@@ -84,7 +84,7 @@ function recuperer_passage($livre='',$chapitre_debut='',$verset_debut='',$chapit
            
            $code = eregi_replace('class="versenum"','',$code);
            $code = eregi_replace("value='[0-9]*'",'',$code);
-           $code = eregi_replace(' id="'.$lang.'-'.$nom_trad.'-[0-9]*"  ','',$code);
+           $code = eregi_replace('  id="'.$lang.'-'.$nom_trad.'-[0-9]*"','',$code);
            
             
            
