@@ -6,7 +6,12 @@
 		</THELIA SI NON CONNECTE>
 		<THELIA SI CONNECTE>
 			<li class="menu-entree"><a href="#URL_PAGE{moncompte}"><:spipthelia:mon_compte:></a></li>
-			<li class="menu-entree"><a href="#URL_PAGE{sommaire, thelia_action=deconnexion}"><:spipthelia:se_deconnecter:></a></li>
+			[(#CONFIG{spip_thelia/auth_unique_spip_thelia}|=={"oui"}|oui)
+			      <li class="menu-entree"><a href="[(#URL_LOGOUT{[(#URL_SITE_SPIP|parametre_url{thelia_action,deconnexion})]})]"><:spipthelia:se_deconnecter:></a></li>
+			]
+			[(#CONFIG{spip_thelia/auth_unique_spip_thelia}|=={"oui"}|non)
+			      <li class="menu-entree"><a href="#URL_PAGE{sommaire,thelia_action=deconnexion}"><:spipthelia:se_deconnecter:></a></li>
+			]
 		</THELIA SI CONNECTE>
 		<T_PANIER>
 			<li class="menu-entree"><a href="#URL_PAGE{panier}"><:spipthelia:panier_contient:></a></li>
