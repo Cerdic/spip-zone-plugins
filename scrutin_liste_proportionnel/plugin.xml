@@ -34,6 +34,6 @@ GPL
 	</pipeline>
 	<fonctions>scrut_prop_fonctions.php</fonctions>
 	<necessite id="spip_bonux" />
-	<necessite id="Fonctions_images" />
+
 
 </plugin>

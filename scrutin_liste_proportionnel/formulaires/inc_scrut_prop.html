@@ -97,13 +97,14 @@
 
                 
                 </li>
-                
+                [(#REM)
                 <li>
                     <label for="graph">
                         Afficher un graphique de répartition des sièges
                     </label>
                     <input type="checkbox" value="graph" name="graph" [checked="(#ENV**{erreurs}|table_valeur{graph}|=={graph})"] />
                 </li>
+                ]
             </ul>
         </fieldset>
         

@@ -263,7 +263,7 @@ function formulaires_scrut_prop_traiter_dist(){
     $max = max($resultats);
     $return['liste_primee'] = array_search($max,$resultats);
     
-    $liste_sieges[$return['liste_prime']] = $liste_sieges[$return['liste_prime']] + $prime;
+    $liste_sieges[$return['liste_primee']] = $liste_sieges[$return['liste_primee']] + $prime;
     
     $return['sieges_par_liste'] = $liste_sieges;
     //appliquer un peu de typo
