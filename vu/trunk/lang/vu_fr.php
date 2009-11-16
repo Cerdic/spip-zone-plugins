@@ -78,15 +78,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'item_annonce_proposee' => 'Annonce propos&eacute;e',
 	'item_annonce_refusee' => 'NON - Annonce refus&eacute;e',
 	'item_annonce_validee' => 'OUI - Annonce valid&eacute;e',
+	'item_annonce_poubelle' => '&agrave; la poubelle',
 	'item_evenement_propose' => '&Eacute;v&eacute;nement propos&eacute;',
 	'item_evenement_refuse' => 'NON - &Eacute;v&eacute;nement refus&eacute;',
 	'item_evenement_valide' => 'OUI - &Eacute;v&eacute;nement valid&eacute;',
+	'item_evenement_poubelle' => '&agrave; la poubelle',
 	'item_mots_cles_association_annonces' => 'aux annonces relay&eacute;es (Vu!)',
 	'item_mots_cles_association_evenements' => 'aux &eacute;v&eacute;nements relay&eacute;s (Vu!)',
 	'item_mots_cles_association_publications' => 'aux publications relay&eacute;es (Vu!)',
 	'item_publication_proposee' => 'Publication propos&eacute;e',
 	'item_publication_refusee' => 'NON - Publication refus&eacute;e',
 	'item_publication_validee' => 'OUI - Publication valid&eacute;e',
+	'item_publication_poubelle' => '&agrave; la poubelle',
 
 // L
 	'liste_annonces' => 'Annonces',
@@ -95,10 +98,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // N
 	'naviguer_titre' => 'Veille',
+
 // R
 	'raccourcis_annonce' => 'Nouvelle annonce',
 	'raccourcis_evenement' => 'Nouvel &eacute;v&eacute;nement',
 	'raccourcis_publication' => 'Nouvelle publication',
+
+// S
+	'spiplistes_info_veille' => 'info_veille',
 
 // T
 	'titre_nouvelle_evenement' => 'Nouvel &eacute;v&eacute;nement',

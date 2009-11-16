@@ -63,11 +63,11 @@ function exec_veille_tous_dist(){
 	echo pipeline('affiche_milieu', array('args'=>array('exec'=>'veille_tous'),'data'=>''));
 
 	// Liste des annonces
-	echo afficher_objets('annonce',_T('vu:liste_annonces'), array("SELECT" => 'id_annonce, date, titre, statut', "FROM" => 'spip_vu_annonces AS annonces', 'WHERE' => "", 'ORDER BY' => "date DESC"),'',true);
+	echo afficher_objets('annonce',_T('vu:liste_annonces'), array("SELECT" => 'id_annonce, date, titre, statut', "FROM" => 'spip_vu_annonces AS annonces', 'WHERE' => "statut='publie' OR statut='refuse' OR statut='prop'", 'ORDER BY' => "date DESC"),'',true);
 	// Liste des evenements
-	echo afficher_objets('evenement',_T('vu:liste_evenements'), array("SELECT" => 'id_evenement, date, titre, statut', "FROM" => 'spip_vu_evenements AS evenements', 'WHERE' => "", 'ORDER BY' => "date DESC"),'',true);
+	echo afficher_objets('evenement',_T('vu:liste_evenements'), array("SELECT" => 'id_evenement, date, titre, statut', "FROM" => 'spip_vu_evenements AS evenements', 'WHERE' => "statut='publie' OR statut='refuse' OR statut='prop'", 'ORDER BY' => "date DESC"),'',true);
 	// Liste des publications
-	echo afficher_objets('publication',_T('vu:liste_publications'),	array("SELECT" => 'id_publication, date, titre, statut', "FROM" => 'spip_vu_publications AS publications', 'WHERE' => "", 'ORDER BY' => "date DESC"),'',true);
+	echo afficher_objets('publication',_T('vu:liste_publications'),	array("SELECT" => 'id_publication, date, titre, statut', "FROM" => 'spip_vu_publications AS publications', 'WHERE' => "statut='publie' OR statut='refuse' OR statut='prop'", 'ORDER BY' => "date DESC"),'',true);
 
 	
 

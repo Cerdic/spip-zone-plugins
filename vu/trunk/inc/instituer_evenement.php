@@ -21,7 +21,8 @@ function inc_instituer_evenement($id_objet, $statut=-1)
 	 	// statut => array(titre,image)
 		'prop' => array(_T('vu:item_'.$type_objet.'_propose'),''),	
 		'publie' => array(_T('vu:item_'.$type_objet.'_valide'),''),	
-		'refuse' => array(_T('vu:item_'.$type_objet.'_refuse'),'')	
+		'refuse' => array(_T('vu:item_'.$type_objet.'_refuse'),''),
+		'poubelle' => array(_T('vu:item_'.$type_objet.'_poubelle'),'')	
 	);
 
 	// Si le statut ne figure pas dans le tableau ci dessus,

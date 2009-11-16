@@ -1,18 +1,16 @@
 <plugin>
 	<nom>Vu !</nom>
-	<auteur>Jonathan Chibois</auteur>
+	<auteur>archi02</auteur>
 	<version>0.2</version>
 	<version_base>0.2</version_base>
 
 	<icon>img_pack/vu_logo_64.png</icon>
 	<description>
-		Publier le r&eacute;sultat d'une activit&eacute; de veille th&eacute;matique.
-
-		Ce plugin propose plusieurs nouveaux objets pour pallier à l'impossibilit&eacute; sur SPIP de publier de l'information sans contenu
-
 		<i>&laquo; Relayez l'information, plut&ocirc;t que de la (re)publier ! &raquo;</i>
+
+		Ce plugin propose plusieurs nouveaux objets pour pallier à l'impossibilit&eacute; sur SPIP de <i>relayer</i> simplement de l'information, c'est &agrave; dire publier sans contenu. Typiquement (mais ce n'est qu'un exemple) ceci est très utile pour une activit&eacute; de veille th&eacute;matique.
 	</description>
-	<lien>http://www.spip-contrib.net/article3066</lien>
+	<lien>[Pour une pr&eacute;sentation d&eacute;taill&eacute;e du plugin->http://www.spip-contrib.net/article3066]</lien>
 	<licence>&copy; 2009 - Distribu&eacute; sous licence GNU/LGPL</licence>
 
 	<etat>stable</etat>

@@ -21,7 +21,8 @@ function inc_instituer_annonce($id_objet, $statut=-1)
 	 	// statut => array(titre,image)
 		'prop' => array(_T('vu:item_'.$type_objet.'_proposee'),''),	
 		'publie' => array(_T('vu:item_'.$type_objet.'_validee'),''),	
-		'refuse' => array(_T('vu:item_'.$type_objet.'_refusee'),'')	
+		'refuse' => array(_T('vu:item_'.$type_objet.'_refusee'),''),
+		'poubelle' => array(_T('vu:item_'.$type_objet.'_poubelle'),'')
 	);
 
 	// Si le statut ne figure pas dans le tableau ci dessus,
