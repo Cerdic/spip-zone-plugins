@@ -7,7 +7,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function Grappes_declarer_tables_interfaces($interface){
+function grappes_declarer_tables_interfaces($interface){
 	$interface['tables_jointures']['spip_grappes'][] = 'grappes_liens';
 	$interface['tables_jointures']['spip_grappes_liens'][] = 'grappes';
 	$interface['tables_jointures']['spip_articles'][] = 'grappes_liens';
@@ -28,7 +28,7 @@ function Grappes_declarer_tables_interfaces($interface){
 	return $interface;
 }
 
-function Grappes_declarer_tables_principales($tables_principales){
+function grappes_declarer_tables_principales($tables_principales){
 	$spip_grappes = array(
 		"id_grappe" => "bigint(21) NOT NULL",
 		"titre" 	=> "varchar(255) NOT NULL DEFAULT ''",
@@ -47,7 +47,7 @@ function Grappes_declarer_tables_principales($tables_principales){
 	return $tables_principales;
 }
 
-function Grappes_declarer_tables_auxiliaires($tables_auxiliaires){
+function grappes_declarer_tables_auxiliaires($tables_auxiliaires){
 	$spip_grappes_liens = array(
 		"id_grappe" 	=> "bigint(21) NOT NULL",
 		"objet" 	=> "VARCHAR (25) DEFAULT '' NOT NULL",
