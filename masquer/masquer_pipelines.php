@@ -13,6 +13,10 @@ function masquer_pre_boucle($boucle) {
   if (!isset($id_mot)) {
     $id_mot = sql_getfetsel("id_mot", "spip_mots", "titre='masquer'");
   }
+  if (!isset($id_mot)) {
+    spip_log('[Plugin « Masquer »] Il n\'y a pas de mot clef « masquer »');
+    return $boucle;
+  }
   
   // Récupération de la liste des rubriques masquées et leurs branches
   // Hors du cas de la boucle RUBRIQUE, car utilisé aussi par le cas de la boucle ARTICLES
@@ -27,6 +31,9 @@ function masquer_pre_boucle($boucle) {
   
   // Cas de la boucle RUBRIQUES
   if ($boucle->type_requete == 'rubriques') {
+    if (count($liste_rubriques) == 0) {
+      return $boucle;
+    }
     $rub = $boucle->id_table . '.id_rubrique';
     $boucle->where[] = "array('NOT IN', '$rub', '(".implode(',', $liste_rubriques).")')";
   }
@@ -42,10 +49,15 @@ function masquer_pre_boucle($boucle) {
         $liste_articles[] = $row['id_article'];
       }
       // On masque les articles qui sont dans des rubriques masquées
-      $res = sql_select("id_article", "spip_articles", "id_rubrique IN (".implode(',', $liste_rubriques).")"); 
-      while($row = sql_fetch($res)) {
-        $liste_articles[] = $row['id_article'];
+      if (count($liste_rubriques) != 0) {
+        $res = sql_select("id_article", "spip_articles", "id_rubrique IN (".implode(',', $liste_rubriques).")"); 
+        while($row = sql_fetch($res)) {
+          $liste_articles[] = $row['id_article'];
+        }
       }
+    }
+    if (count($liste_articles) == 0) {
+      return $boucle;
     }
     $art = $boucle->id_table . '.id_article';
     $boucle->where[] = "array('NOT IN', '$art', '(".implode(',', $liste_articles).")')";
