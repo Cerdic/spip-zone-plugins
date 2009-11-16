@@ -7,8 +7,8 @@
 -->
 <form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
 	<p></p>
-	<fieldset><label for="version_thelia_spip_thelia">Version de Th&eacute;lia :</label>	
-		<br /><label for="produits_rubriques_spip_thelia">Associer des produits Th&eacute;lia aux rubriques SPIP :</label>	
+	<fieldset>
+		<label for="produits_rubriques_spip_thelia">Associer des produits Th&eacute;lia aux rubriques SPIP :</label>	
 		<select name="produits_rubriques_spip_thelia" id="produits_rubriques_spip_thelia">
 			<option value="non" [(#CONFIG{spip_thelia/produits_rubriques_spip_thelia}|=={"non"}|?{selected="selected",})]>non</option>		
 			<option value="oui" [(#CONFIG{spip_thelia/produits_rubriques_spip_thelia}|=={"oui"}|?{selected="selected",})]>oui</option>		
@@ -30,6 +30,11 @@
 		<select name="rubriques_articles_spip_thelia" id="rubriques_articles_spip_thelia">
 			<option value="non" [(#CONFIG{spip_thelia/rubriques_articles_spip_thelia}|=={"non"}|?{selected="selected",})]>non</option>		
 			<option value="oui" [(#CONFIG{spip_thelia/rubriques_articles_spip_thelia}|=={"oui"}|?{selected="selected",})]>oui</option>		
+		</select>
+		<br /><label for="auth_unique_spip_thelia">Activer l'authentification unique SPIP et Thélia (expérimentale) :</label>	
+		<select name="auth_unique_spip_thelia" id="auth_unique_spip_thelia">
+			<option value="non" [(#CONFIG{spip_thelia/auth_unique_spip_thelia}|=={"non"}|?{selected="selected",})]>non</option>		
+			<option value="oui" [(#CONFIG{spip_thelia/auth_unique_spip_thelia}|=={"oui"}|?{selected="selected",})]>oui</option>		
 		</select>
 	</fieldset>
 	<div>

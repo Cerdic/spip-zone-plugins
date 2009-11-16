@@ -1,6 +1,6 @@
 
 				
-				[(#REM) Afficher les étapes de la commande et visualiser l'étape courante ]
+				[(#REM) Afficher les Ã©tapes de la commande et visualiser l'Ã©tape courante ]
 				<div id="etapes-achat">
 				<h2 class="invisible"><:etapes_achat:></h2>
 				<ul>
@@ -25,29 +25,57 @@
 				<div class="sousTitrePage">
 				<h3><:spipthelia:deja_compte:></h3>
 				</div>
-				
-				<form action="#URL_PAGE{connexion,lang=#LANG}" method="post" id="connexion" class="formulaire-thelia">
-            			<fieldset>
-					<input type="hidden" name="thelia_action" value="connexion" />
-				
-				<table>
-				<tbody>
-					<tr>
-						<td class="ligneTableau"><:spipthelia:mon_email:> THELIA-ERRCONNEX[<span class="obligatoire">(<:spipthelia:err_emailmdp:>)</span>]</td>
-						<td class="ligneTableau"><input name="email" type="text" class="zoneDeSaisie"/></td>
-					</tr>
-				  	<tr>
-   						<td class="ligneTableau"><:spipthelia:mon_mdp:></td>
-    						<td class="ligneTableau"><input name="motdepasse" type="password"  class="zoneDeSaisie"/></td>
-  					</tr>
-				</tbody>
-				</table>
-				<div class="boutonMonCompteContenu">
-					<input type="submit" value="<:spipthelia:valider:>" />
-				</div>
-				</fieldset>
-				</form>
-				
+				[(#CONFIG{spip_thelia/auth_unique_spip_thelia}|=={"oui"}|oui)
+					[(#SESSION{id_auteur}|oui)
+						Vous &ecirc;tes connect&eacute; actuellement sans compte client associ&eacute;. Veuillez vous identifier sur la boutique ou cr&eacute;er un nouveau compte pour continuer. 
+						<form action="#URL_PAGE{connexion,lang=#LANG}" method="post" id="connexion" class="formulaire-thelia">
+						<fieldset>
+							<input type="hidden" name="thelia_action" value="connexion" />
+						
+						<table>
+						<tbody>
+							<tr>
+								<td class="ligneTableau"><:spipthelia:mon_email:> THELIA-ERRCONNEX[(#REM|sinon{&#91;}|html_entity_decode)]<span class="obligatoire">(<:spipthelia:err_emailmdp:>)</span>[(#REM|sinon{&#93;}|html_entity_decode)]</td>
+								<td class="ligneTableau"><input name="email" type="text" class="zoneDeSaisie"/></td>
+							</tr>
+							<tr>
+								<td class="ligneTableau"><:spipthelia:mon_mdp:></td>
+								<td class="ligneTableau"><input name="motdepasse" type="password"  class="zoneDeSaisie"/></td>
+							</tr>
+						</tbody>
+						</table>
+						<div class="boutonMonCompteContenu">
+							<input type="submit" value="<:spipthelia:valider:>" />
+						</div>
+						</fieldset>
+						</form>
+					]
+					
+					[(#LOGIN_PUBLIC{#URL_PAGE{adresse}})]
+				]
+				[(#CONFIG{spip_thelia/auth_unique_spip_thelia}|=={"oui"}|non)
+					<form action="#URL_PAGE{connexion,lang=#LANG}" method="post" id="connexion" class="formulaire-thelia">
+					<fieldset>
+						<input type="hidden" name="thelia_action" value="connexion" />
+					
+					<table>
+					<tbody>
+						<tr>
+							<td class="ligneTableau"><:spipthelia:mon_email:> THELIA-ERRCONNEX[(#REM|sinon{&#91;}|html_entity_decode)]<span class="obligatoire">(<:spipthelia:err_emailmdp:>)[(#REM|sinon{&#93;}|html_entity_decode)]</span></td>
+							<td class="ligneTableau"><input name="email" type="text" class="zoneDeSaisie"/></td>
+						</tr>
+						<tr>
+							<td class="ligneTableau"><:spipthelia:mon_mdp:></td>
+							<td class="ligneTableau"><input name="motdepasse" type="password"  class="zoneDeSaisie"/></td>
+						</tr>
+					</tbody>
+					</table>
+					<div class="boutonMonCompteContenu">
+						<input type="submit" value="<:spipthelia:valider:>" />
+					</div>
+					</fieldset>
+					</form>
+				]
 				<div class="separation">
 				</div>
 			

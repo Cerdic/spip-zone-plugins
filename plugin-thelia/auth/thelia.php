@@ -15,14 +15,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 	  
 	  error_reporting(E_ALL);
-// Authentifie via PMB et retourne la ligne SQL decrivant l'utilisateur si ok
+// Authentifie via Thélia et retourne la ligne SQL decrivant l'utilisateur si ok
 
 // http://doc.spip.org/@inc_auth_ldap_dist
 function auth_thelia_dist ($login, $pass, $md5pass="", $md5next="") {
 			
 	spip_log("thelia2 $login " . ($pass ? "mdp fourni" : "mdp absent"). ($md5pass ? "md5mdp fourni" : "md5mdp absent"));
-	//connexion webservices pmb
-	if (!file_exists("fonctions/action.php") ) {
+	if (!file_exists("fonctions/moteur.php") ) {
 	     spip_log("fichier thelia trouve");
 	      return array();
 	}
@@ -76,7 +75,6 @@ function auth_thelia_dist ($login, $pass, $md5pass="", $md5next="") {
 		      include_spip('inc/charsets');
 		      $nom = $client->nom.' '.$client->prenom;
 		      $email = $login;
-		      //$login = strtolower(importer_charset($resultpmb->cb, 'utf-8'));
 		      $bio = '';
 		      $n = sql_insertq('spip_auteurs', array(
 				      'source' => 'thelia',
@@ -88,7 +86,8 @@ function auth_thelia_dist ($login, $pass, $md5pass="", $md5next="") {
 				      'pass' => ''),0);
 		       spip_log("Creation de l'auteur '$nom' depuis thelia dans spip_auteurs id->".$n);
 		    
-		      
+		      if($_SESSION['navig']->urlpageret) redirige($_SESSION['navig']->urlpageret);
+				else redirige("index.php");
 		      spip_log("test6");
 		       if ($n)	return sql_fetsel("*", "spip_auteurs", "id_auteur=$n");
 
@@ -101,7 +100,8 @@ function auth_thelia_dist ($login, $pass, $md5pass="", $md5next="") {
 		      
 	      } else {
 		     //utilisateur inconnu
-		   spip_log("thelia $login utilisateur inconnu");
+		    spip_log("thelia $login utilisateur inconnu");
+		    redirige("connexion.php?errconnex=1");
 		    return array();  
 	      }
 	
