@@ -1,13 +1,22 @@
 <BOUCLE_sondage(SONDAGES) {id_sondage=#ENV{id_sondage}}>
-<p>
-<table>
-<BOUCLE_choix(CHOIX) {id_sondage}>
-<tr>
-<td>#TITRE</td>
-<B_resultats><td><img src="[(#CHEMIN{images/jauge-vert.gif})]" height="8" width="[(#TOTAL_BOUCLE|sondages_largeur{#ID_SONDAGE,200})]" alt="#TOTAL_BOUCLE" /></td><td>[(#POURCENTAGE)%]</td><BOUCLE_resultats(AVIS) {id_choix}><?php $dummy = ''; ?></BOUCLE_resultats><td></td><td></td><//B_resultats>
-</tr>
-</BOUCLE_choix>
-<B_nb_votes><tr><td colspan="3">#TOTAL_BOUCLE <:sondages:votes:></td></tr><BOUCLE_nb_votes(AVIS) {id_sondage}><?php $dummy = ''; ?></BOUCLE_nb_votes>
-</table>
-</p>
+<div>
+	<table>
+		<BOUCLE_choix(CHOIX) {id_sondage}>
+		<tr>
+			<td>#TITRE</td>
+			<B_resultats>
+				<td><img src="[(#CHEMIN{images/jauge-vert.gif})]" height="8" width="[(#TOTAL_BOUCLE|sondages_largeur{#ID_SONDAGE,200})]" alt="#TOTAL_BOUCLE" /></td>
+				<td>[(#POURCENTAGE)%]</td>
+			<BOUCLE_resultats(AVIS) {id_choix}><?php $dummy = ''; ?></BOUCLE_resultats>
+				<td colspan='2'></td>
+			<//B_resultats>
+		</tr>
+		</BOUCLE_choix>
+		<B_nb_votes>
+		<tr>
+			<td colspan="3">#TOTAL_BOUCLE <:sondages:votes:></td>
+		</tr>
+		<BOUCLE_nb_votes(AVIS) {id_sondage}><?php $dummy = ''; ?></BOUCLE_nb_votes>
+	</table>
+</div>
 </BOUCLE_sondage>
