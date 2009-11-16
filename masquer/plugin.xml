@@ -2,18 +2,16 @@
   <nom>Masquer</nom>
   <auteur>Nicolas Hoizey de [Clever Age->http://www.clever-age.com/]</auteur>
   <licence>GNU/GPL</licence>
-  <version>0.3</version>
-  <description>
-    Ce plugin permet de masquer sur le site public les contenus qui ont un mot clef dont le titre est « masquer ». Si une rubrique est masquée, toute sa branche l'est aussi.
-    
-    Seuls les rubriques et articles sont g&eacute;r&eacute;s dans un premier temps.
-    
-    Il suffit d'ajouter le critère <code>{tout_voir}</code> aux boucles pour forcer l'affichage des contenus masqu&eacute;s.
+  <version>0.4</version>
+  <description>Ce plugin permet de masquer sur le site public les contenus qui ont un mot clef dont le titre est « masquer ».
+Si une rubrique est masquée, toute sa branche l'est aussi.
 
-    Todo :
-    
-    -* g&eacute;rer les br&egrave;ves, sites, auteurs, etc.
-    
+Seuls les rubriques et articles sont g&eacute;r&eacute;s dans un premier temps.
+
+Il suffit d'ajouter le critère <code>{tout_voir}</code> aux boucles pour forcer l'affichage des contenus masqu&eacute;s.
+
+Todo :
+-* g&eacute;rer les br&egrave;ves, sites, auteurs, etc.    
   </description>
   <etat>test</etat>
   <prefix>masquer</prefix>
