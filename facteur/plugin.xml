@@ -19,4 +19,9 @@
 		<icone>prive/images/facteur-24.png</icone>
 		<titre>facteur:configuration_facteur</titre>
 	</onglet>
+	<bouton id='config_facteur' parent="bando_configuration">
+		<icone>images/facteur-16.png</icone>
+		<titre>facteur:configuration_facteur</titre>		
+		<url>facteur</url>
+	</bouton>
 </plugin>
