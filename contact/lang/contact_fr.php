@@ -31,6 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'courriel_de' => 'De',
 	'courriel_pour' => 'Pour',
 	
+	'deplacement_possible' => 'D&eacute;placement vertical possible par glisser-d&eacute;poser',
 	'form_destinataire' => 'Choisissez un destinataire',
 	'form_destinataires' => 'Choisissez les destinataires',
 	'form_pj_ajouter_pluriel' => 'Ajouter des pi&egrave;ces jointes',
