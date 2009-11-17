@@ -58,17 +58,17 @@ http://listes.rezo.net/archives/spip-core/2005-10/msg00002.html -->
 	  SquelettesMots
 	</prefix>
 	<pipeline>
-		<nom>ajouter_onglets</nom>
-		<inclure>SquelettesMots.php</inclure>
+          <nom>header_prive</nom>
+          <inclure>SquelettesMots.php</inclure>
 	</pipeline>
 	<pipeline>
-		<nom>ajouter_boite_gauche</nom>
-		<inclure>SquelettesMots.php</inclure>
+		<nom>styliser</nom>
+		<inclure>public/SquelettesMots_styliser.php</inclure>
 	</pipeline>
-	<pipeline>
-	  <nom>header_prive</nom>
-	  <inclure>SquelettesMots.php</inclure>
-	</pipeline>
-	<necessite id="spip" version="[1.9207;]" />
+	<onglet id='config_squelettesmots' parent='configuration'>
+		<icone>spip_death.png</icone>
+		<titre>squelettesmots:titre_onglet</titre>
+	</onglet>
+	<necessite id="spip" version="[2.0.6;]" />
 	<chemin dir='' />
 </plugin>
