@@ -26,57 +26,7 @@
 include_spip('base/pmb_tables');
 
 
-function pmb_transformer_nav_bar($nav_bar) {
-	//si une seule page, on retourne vide
-	if (strpos($nav_bar,"1/1")) return "";
 
-	//sinon, on transforme les liens vers les images locales
-	$nav_bar = str_replace("./images/first-grey.gif", find_in_path("img/pmb-first-grey.gif"), $nav_bar);
-	$nav_bar = str_replace("./images/prev-grey.gif", find_in_path("img/pmb-prev-grey.gif"), $nav_bar);
-	$nav_bar = str_replace("./images/first.gif", find_in_path("img/pmb-first.gif"), $nav_bar);
-	$nav_bar = str_replace("./images/prev.gif", find_in_path("img/pmb-prev.gif"), $nav_bar);
-	$nav_bar = str_replace("./images/next-grey.gif", find_in_path("img/pmb-next-grey.gif"), $nav_bar);
-	$nav_bar = str_replace("./images/last-grey.gif", find_in_path("img/pmb-last-grey.gif"), $nav_bar);
-	$nav_bar = str_replace("./images/next.gif", find_in_path("img/pmb-next.gif"), $nav_bar);
-	$nav_bar = str_replace("./images/last.gif", find_in_path("img/pmb-last.gif"), $nav_bar);
-	return $nav_bar;
-}
-
-
-function pmb_charger_page ($url_base, $file, $mode='auto') {
-	$resultat_recherche_locale = copie_locale($url_base.$file,$mode);
-	if($resultat_recherche_locale != false) {
-		$resultat_recherche_html = unicode2charset(charset2unicode(file_get_contents($resultat_recherche_locale), 'iso-8859-1'),'utf-8');
-		
-		$resultat_recherche_html = str_replace("page=", "pmb_page=", $resultat_recherche_html);
-		$resultat_recherche_html = str_replace("addtags.php", $url_base."addtags.php", $resultat_recherche_html);
-		$resultat_recherche_html = str_replace("avis.php", $url_base."avis.php", $resultat_recherche_html);
-		$resultat_recherche_html = str_replace("./do_resa.php", $url_base."do_resa.php", $resultat_recherche_html);
-		$resultat_recherche_html = str_replace("index.php?lvl=", "index.php?page=", $resultat_recherche_html);
-		require(find_in_path('simple_html_dom.php'));
-		$htmldom = str_get_html($resultat_recherche_html);	
-
-	}
-	return $htmldom;		
-					
-
-}
-
-function pmb_accueil_extraire($url_base, $mode='auto') {
-	$tableau_resultat = Array();
-	
-	if ($htmldom = pmb_charger_page($url_base, "index.php",$mode)) {
-			$resultats_recherche = $htmldom->find('#location-container td');
-			$i=0;
-			foreach($resultats_recherche as $res) {
-				$tableau_resultat[$i] = $res->find('a',1)->outertext;				
-				
-				$i++;
-			}	
-	}
-	return $tableau_resultat;
-
-}
 function pmb_section_extraire($id_section, $url_base) {
 	$tableau_sections = Array();
 	pmb_ws_charger_wsdl($ws, $url_base);
@@ -141,27 +91,7 @@ function pmb_notices_section_extraire($id_section, $url_base, $debut=0, $fin=5) 
 	return $tableau_resultat;
 }
 
-function pmb_serie_extraire($id_serie, $url_base, $pmb_page=1, $mode='auto') {
-	$tableau_resultat = Array();
-	
-	if ($htmldom = pmb_charger_page($url_base, "index.php?lvl=serie_see&page=".$pmb_page."&id=".$id_serie,$mode)) {
-			$tableau_resultat[0] = Array();
-			$tableau_resultat[0]['nav_bar'] = $htmldom->find('.navbar',0)->outertext;
-			$tableau_resultat[0]['nav_bar'] = pmb_transformer_nav_bar($tableau_resultat[0]['nav_bar']);
-			$tableau_resultat[0]['titre_serie'] = $htmldom->find('#aut_see h3',0)->innertext;
-			
-			$resultats_recherche = $htmldom->find('.notice-child');
-			$tableau_resultat[0]['nb_resultats'] = count($resultats_recherche);
-			$i = 1;
-			foreach($resultats_recherche as $res) {
-				$tableau_resultat[$i] = Array();				
-				pmb_parser_notice_apercu($res, $tableau_resultat[$i]);
-				$i++;
-			}	
-	}
-	return $tableau_resultat;
 
-}
 
 function pmb_collection_extraire($id_collection, $debut=0, $nbresult=5, $id_session=0) {
 	$tableau_resultat = Array();
