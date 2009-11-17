@@ -102,26 +102,26 @@ if ($GLOBALS['autorite']['espace_wiki']) {
 
 
 ##
-## une fonction qui gere les droits wiki géré par mot clef
+## une fonction qui gere les droits wiki gÃ©rÃ© par mot clef
 ##
 if ($GLOBALS['autorite']['espace_wiki_motsclef']) {
 	if (!function_exists('autorisation_wiki_motsclef_visiteur')) {
 	function autorisation_wiki_motsclef_visiteur($qui, $id_article) {
 
-	    //determine les mots clef affectés à l'article
+	    //determine les mots clef affectÃ©s Ã  l'article
 	    $s = spip_query(
 	    "SELECT id_mot FROM spip_mots_articles WHERE id_article=".$id_article);
 
-	    //obtient la liste des mots clefs affecté à l'article
+	    //obtient la liste des mots clefs affectÃ© Ã  l'article
         while ( $r = sql_fetch($s) ) { 
             $array_mot[] = $r['id_mot'];
         }	    
         
-        //aucun mot clef d'affecter à l'article, rien à faire
+        //aucun mot clef d'affecter Ã  l'article, rien Ã  faire
         if (is_null($array_mot))
             return false;
 	            	    	    
-	    //vérification que l'article posséde un mot clef correspondant au staut du visiteur
+	    //vÃ©rification que l'article possÃ©de un mot clef correspondant au staut du visiteur
 		switch($qui['statut']) {
 			case '0minirezo':
 			case '1comite':
@@ -474,7 +474,7 @@ function autoriser_signature_modifier($faire, $type, $id, $qui, $opt) {
 ## autoriser_configurer (pages de configuration)
 ##
 if ($GLOBALS['autorite']['configurer']
-OR false // autre possibilite de surcharge ?
+OR $GLOBALS['autorite']['configurer_plugin']
 ) {
 if (!function_exists('autoriser_configurer')) {
 function autoriser_configurer($faire, $type, $id, $qui, $opt) {
@@ -483,8 +483,10 @@ function autoriser_configurer($faire, $type, $id, $qui, $opt) {
 	// en mode 'webmestre', sinon on pourrait desactiver autorite.
 	// mais comment faire pour ne pas bloquer quelqu'un qui installe
 	// ce plugin alors qu'il est id_auteur > 1 ?
-#	if (in_array($type, array('plugins', 'admin_plugin')))
-#		return autoriser('webmestre');
+	if (in_array($type, array('plugins', 'admin_plugin'))) {
+		if ($GLOBALS['autorite']['configurer_plugin'] == 'webmestre')
+			return autoriser('webmestre');
+	}
 
 	if ($GLOBALS['autorite']['configurer'] == 'webmestre')
 		return autoriser('webmestre');

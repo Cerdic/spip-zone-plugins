@@ -314,6 +314,15 @@
 </label>
 </p>
 
+<p>
+<label><:autorite:config_plugin_qui:>
+<br />
+<select name="configurer_plugin">
+	<option value=""[ selected="(#ENV{configurer_plugin}|?{'',selected})"]><:autorite:admins:></option>
+	<option value="webmestre"[ selected="(#ENV{configurer_plugin}|=={webmestre}|?{selected})"]><:autorite:webmestre:></option>
+</select>
+</label>
+</p>
 
 <p>
 <label><:autorite:sauvegarde_qui:>

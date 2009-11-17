@@ -33,6 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'config_auteurs_statut' => 'A la cr&#233;ation d&#39;un auteur, quel est le <b>statut par d&#233;faut</b> ?',
 'config_site' => 'Configuration du site',
 'config_site_qui' => 'Qui peut <strong>modifier la configuration</strong> du site ?',
+'config_plugin_qui' => 'Qui peut <strong>modifier la configuration</strong> des plugins (activation...) ?',
 
 //D
 'descriptif_1' => 'Cette page de configuration est r&#233;serv&#233;e au webmestre du site :',
