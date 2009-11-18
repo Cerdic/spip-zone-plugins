@@ -1,0 +1,155 @@
+<!-- nom=contact -->
+<div class="formulaire_spip formulaire_editer">
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+<form method="post" action="#ENV{action}">
+<div>
+#ACTION_FORMULAIRE{#ENV{action}}
+	
+	<fieldset>
+		<legend><:contact:configuration_destinataires:></legend>
+		<ul class="decaler">
+			<li class="editer_texte">
+				<p class="explication"><:contact:configuration_destinataires_explication:></p>
+					<B_auteurs>
+					<select name="choix_destinataires[]" id="choix_destinataires" multiple="multiple" size="5">
+					<BOUCLE_auteurs(AUTEURS){tous}{email!=''}{par nom}>
+						<option value="#ID_AUTEUR" [(#ID_AUTEUR|in_array{#ENV{choix_destinataires,#ARRAY}}|oui)selected="selected"]>
+							#NOM (##ID_AUTEUR)
+						</option>
+					</BOUCLE_auteurs>
+				</select>
+				</B_auteurs>
+			</li>
+			<li class="choix baisser">
+				<div>
+					<input type="radio" name="type_choix" id="tous" class="radio" value="tous"[ checked="checked"(#ENV{type_choix}|=={tous}|ou{#ENV{type_choix}|non}|oui)] />
+					<label for="tous"><:contact:configuration_destinataires_tous:></label>
+				</div>
+				<div>
+					<input type="radio" name="type_choix" id="un" class="radio" value="un"[ checked="checked"(#ENV{type_choix}|=={un}|oui)] />
+					<label for="un"><:contact:configuration_destinataires_un:></label>
+				</div>
+				<div>
+					<input type="radio" name="type_choix" id="plusieurs" class="radio" value="plusieurs"[ checked="checked"(#ENV{type_choix}|=={plusieurs}|oui)] />
+					<label for="plusieurs"><:contact:configuration_destinataires_plusieurs:></label>
+				</div>
+			</li>
+		</ul>
+	</fieldset>
+	
+	[(#REM)
+		On récupère les champs possibles
+		Mais on divise en deux :
+			- d'abord les champs choisis
+			- puis les champs qui restent
+	]
+	#SET{champs_possibles, #VAL{rien}|contact_infos_supplementaires}
+	#SET{champs_choisis, #CONFIG{contact/champs,#ARRAY}|array_flip}
+	#SET_MERGE{champs, #GET{champs_choisis}, #GET{champs_possibles}}
+	<fieldset>
+		<legend><:contact:infos_supplementaires:></legend>
+		<ul id="editer_champs" class="decaler baisser10">
+			<BOUCLE_champs(POUR){tableau #GET{champs}}>
+			<li class="choix editer_champ agrondir" title="<:contact:deplacement_possible:>" style="border:1px dashed #ddd;background-image: url([(#COMPTEUR_BOUCLE|image_typo{police=dustismo_bold.ttf,couleur=dddddd}|extraire_attribut{src})]); background-position: 97% 20%;background-repeat: no-repeat;">
+				<input type="checkbox" name="champs[]" id="champ_#CLE" class="checkbox" value="#CLE"[ (#CLE|in_array{#ENV{champs,#ARRAY}}|oui)checked="checked"] />
+				<label for="champ_#CLE">#VALEUR</label>
+				<div class="aerer2">
+					<input type="checkbox" name="obligatoires[]" id="obli_#CLE" class="checkbox" value="#CLE"[ (#CLE|in_array{#ENV{obligatoires,#ARRAY}}|oui)checked="checked"] />
+					<label for="obli_#CLE"><:contact:champ_obligatoire:></label>
+				<br class="nettoyeur" />
+				</div>
+				
+			</li>
+			</BOUCLE_champs>
+		</ul>
+	</fieldset>
+	
+	<fieldset>
+		<legend><:contact:configuration_pj:></legend>
+		<ul class="decaler baisser10">
+			<li class="choix editer_champ">
+				[(#REM) : On teste si le plugin facteur est présent pour pourvoir envoyer les pièces jointes ]
+				[(#PLUGIN{facteur}|oui)
+				<input type="checkbox" name="autoriser_pj" id="autoriser_pj" class="checkbox" value="true" [checked="checked"(#ENV{autoriser_pj}|=={true}|oui)] />
+				<label for="autoriser_pj"><:contact:configuration_pj_autoriser:></label>
+			
+				<div>
+					<label for="nb_max_pj"><:contact:configuration_pj_nb_max:></label>
+					<select name="nb_max_pj" id="nb_max_pj">
+						<option value="1" [selected="selected" (#ENV{nb_max_pj}|=={1}|oui)]>1</option>
+						<option value="2" [selected="selected" (#ENV{nb_max_pj}|=={2}|oui)]>2</option>
+						<option value="3" [selected="selected" (#ENV{nb_max_pj}|=={3}|oui)]>3</option>
+						<option value="4" [selected="selected" (#ENV{nb_max_pj}|=={4}|oui)]>4</option>
+						<option value="5" [selected="selected" (#ENV{nb_max_pj}|=={5}|oui)]>5</option>
+					</select>
+				</div>
+				]
+				
+				[(#PLUGIN{facteur}|non)
+				<p class="explication"><:contact:configuration_pj_facteur_absent:></p>
+				]
+			</li>
+		</ul>
+	</fieldset>
+	
+	<fieldset>
+		<legend><:contact:sauv_message:></legend>
+		<ul class="decaler baisser10">
+			<li class="choix editer_champ">
+				<p class="explication"><:contact:sauv_message_explication:></p>				
+				<input type="checkbox" name="sauvegarder_contacts" id="sauvegarder_contacts" class="checkbox" value="true" [checked="checked"(#ENV{sauvegarder_contacts}|=={true}|oui)] />
+				<label for="sauvegarder_contacts"><:contact:sauv_message_ok:></label>
+			</li>
+		</ul>
+	</fieldset>	
+	
+	<fieldset>
+		<legend><:contact:configuration_intro:></legend>
+		<ul>
+			<li class="editer_texte">
+				<p class="explication"><:contact:configuration_intro_explication:></p>
+				<textarea name="texte" id="texte" rows="10">#ENV{texte}</textarea>
+			</li>
+		</ul>
+	</fieldset>
+	
+	<div class="boutons">
+		<input type="submit" name="_cfg_ok" value="<:valider:>" />		
+		<input type="submit" name="_cfg_delete" value="<:effacer:>" />		
+	</div>
+</div></form>
+</div>
+
+<script type="text/javascript">
+	$(function(){
+		$('li.editer_champ div').each(function(){
+			if (!$(this).siblings('input').is(':checked'))
+				$(this).hide();
+		});
+		
+		$('li.editer_champ input.checkbox')
+			.click(function(){
+				if ($(this).is(':checked'))
+					$(this).siblings('div')
+						.slideDown();
+				else
+					$(this).siblings('div')
+						.slideUp();
+			});
+		
+		$('ul#editer_champs')
+			.sortable({
+				cursor : 'move',
+				axis : 'y',
+				cancel : 'input, label',
+				forceHelperSize : true,
+				forcePlaceholderSize : true,
+				placeholder : 'cadre-couleur',
+				start : function(event, ui){
+				}
+			});
+	});
+</script>
