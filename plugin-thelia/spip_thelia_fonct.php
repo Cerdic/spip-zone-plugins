@@ -46,7 +46,7 @@ function spip_thelia_header_prive($flux) {
 	$page = $sav_page;
 	$_SESSION['navig']->lang = $sav_session_navig_lang;
 	
-	if (function_exists('chemin')) {
+	if (function_exists('chemin')&&($_REQUEST['exec']!="articles")&&($_REQUEST['exec']!="naviguer")) {
 		echo ("erreur : la fonction chemin() dans ecrire/inc/utils.php doit &ecirc;tre mise en commentaire !");
 	}
 	if (!file_exists("../fonctions/moteur.php")&&($_REQUEST['exec']!="")) 
