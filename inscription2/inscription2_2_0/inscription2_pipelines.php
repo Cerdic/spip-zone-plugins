@@ -155,6 +155,7 @@ function inscription2_i2_exceptions_des_champs_auteurs_elargis($array){
 	$array[] = 'reglement';
 	$array[] = 'reglement_article';
 	$array[] = 'validation_numero_international';
+	$array[] = 'pays_defaut';
 
 	return $array;
 }
