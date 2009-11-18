@@ -116,6 +116,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_page_publications_edit' => '&Eacute;diter une publication',
 
 
+// Compatibilite plugin Corbeille
+	'corbeille_annonces_tous' => "@nb@ annonces (Vu !) dans la corbeille",
+	'corbeille_annonces_un' => "1 annonce (Vu !) dans la corbeille",
+	'corbeille_evenements_tous' => "@nb@ &eacute;v&eacute;nements (Vu !) dans la corbeille",
+	'corbeille_evenements_n' => "1 &eacute;v&eacute;nement (Vu !) dans la corbeille",
+	'corbeille_publications_tous' => "@nb@ publications (Vu !) dans la corbeille",
+	'corbeille_publications_un' => "1 publication (Vu !) dans la corbeille",
 );
 
 ?>
