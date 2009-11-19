@@ -1,8 +1,12 @@
 <?php
 
-/* Fonction pour recuperer la liste des differentes pages gerer par fast_plugin */
-function liste_param_fast_plugin($val){
-	$page = get_fast_plugin();
+/* Fonction pour recuperer la liste des differentes pages, variables globales et 
+   elements inseres dans les colonnnes de l'admin de spip gerer par fast_plugin 
+*/
+function liste_param_fast_plugin($rem,$val){
+	$page = array();
+	include_spip('inc/cfg_config');
+	$page = lire_config("metapack::$val");
 	if(count($page)==0)return;
 	$choix = "";
 	if (isset($_POST["cfg_id"])) $choix = $_POST["cfg_id"];
@@ -16,26 +20,11 @@ function liste_param_fast_plugin($val){
 	return $retour;
 }
 
-/* Fonction pour recuperer la liste des differentes variables globales */
-/*  accessible dans les squelettes avec #CONFIG{php::global_vars/test/var0} */
-function liste_global_vars($val){
-	include_spip('inc/cfg_config');
-	$tab = lire_config("php::global_vars");
-	if(count($page)==0)return;
-	$choix = "";
-	if (isset($_POST["cfg_id"])) $choix = $_POST["cfg_id"];
-	$retour = "";
-	foreach ($tab as $cle=>$val) {
-		$select = "";
-		if ($choix==$cle) $select ="selected";
-		$retour .="<option value='$cle' $select >$cle</option>";
-	}
-	return $retour;
-}
 
-function set_valid_global_admin($id_auteur){
-	$msg = "Vous n'avez pas acces a cette partie de l'admin";
+function test_valid_global_admin_fast_plugin($id_auteur){
+	$msg = "Vous n'avez pas acces a cette partie de l'admin - fast plugin";
 	if($GLOBALS['unique_admin_fast_plugin']!=$id_auteur) die($msg);
 }
+
 
 ?>

@@ -1,11 +1,11 @@
 <plugin>
 	<nom>Fast plugin</nom>
-	<auteur>Di Carmine Fabrizio - Pix-l.fr</auteur>
-	<version>0.1</version>
+	<auteur>Di Carmine Fabrizio</auteur>
+	<version>2.0</version>
 	<etat>stable</etat>
 	<description>
         {{vous alllez pouvoir creer des pages dans la partie admin tres rapidement
-        grace &#224; une simple convention de nomage . 
+        grace à une simple convention de nomage . 
         
         }}
 	</description>
@@ -23,11 +23,23 @@
         <inclure>fast_pipeline.php</inclure>
     </pipeline>
     <pipeline>
-        <nom>fast_plug</nom>
+        <nom>affiche_milieu</nom>
+        <inclure>fast_pipeline.php</inclure>
+    </pipeline>
+    <pipeline>
+       	<nom>affiche_gauche</nom>
+        <inclure>fast_pipeline.php</inclure>
+    </pipeline>
+    <pipeline>
+        <nom>affiche_droite</nom>
         <inclure>fast_pipeline.php</inclure>
     </pipeline>
     <pipeline>
 		<nom>autoriser</nom>
 		<inclure>fast_pipeline.php</inclure>
 	</pipeline>
+    <pipeline>
+        <nom>fast_plug</nom>
+        <inclure>fast_pipeline.php</inclure>
+    </pipeline>
 </plugin>

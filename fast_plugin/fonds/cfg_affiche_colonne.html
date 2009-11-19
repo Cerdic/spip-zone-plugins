@@ -15,8 +15,6 @@
 	<input type='text' id='entre_fast' value='' >
 	<input type="button" value="Rajouter" onclick="entre_liste_fast()"/>
 </div>
-
-
 <script>
 function entre_liste_fast(){
 	val = $("#entre_fast").val();
@@ -42,72 +40,49 @@ function validate_form(){
 
 </script>
 
-#SET{choix,#REM|liste_param_fast_plugin{'global_vars'}}
+#SET{choix,#REM|liste_param_fast_plugin{'affiche_colonne'}}
 
 
-<form  id='form_sub' action="./?exec=cfg&amp;cfg=global_vars" method="post">
+<form  id='form_sub' action="./?exec=cfg&amp;cfg=affiche_colonne" method="post">
 <select id="cfg_id" name="cfg_id" onchange="opaque();this.form.submit();">
 	#GET{choix}
 </select>
 <input type="submit" name="go" value="&gt;" />
 </form>
 
+
+
 [(#ENV{cfg_id}|oui)
 	<div id='params'>
-		<p>Vous allez mettre a jour ou creer des variables globales <b>#ENV{cfg_id}</b></p>
+		<p>Vous allez mettre a jour ou creer des infos sur les pages 'exec' <b>#ENV{cfg_id}</b></p>
 	
-		<form method="post"  onsubmit="opaque();return validate_form();" >
+		<form method="post" onsubmit="opaque();return validate_form();" >
 		[(#ENV{_cfg_}|form_hidden)]
 		<fieldset><legend><b>#ENV{cfg_id}</b></legend>
 	
-		<label class='labels'>Var0 :</label>
-		<input type="text" name="var0" value="#ENV{var0}" size="50" class='inputs'/>
+	
+		<label class='labels'>exec :</label>
+		<input type="text" name="page" value="#ENV{page}" size="50"  class='inputs' />
 		<br /><br />
-		
-		<label class='labels'>Var1 :</label>
-		<input type="text" name="var1" value="#ENV{var1}" size="50" class='inputs'/>
+		<label class='labels'>colonne :</label>
+		<select name="colonne" class='selects'>
+			<option value='gauche' [(#ENV{colonne}|=={gauche}|oui) selected]>gauche</option>
+			<option value='milieu' [(#ENV{colonne}|=={milieu}|oui) selected]>milieu</option>
+			<option value='droite' [(#ENV{colonne}|=={droite}|oui) selected]>droite</option>
+		</select>
 		<br /><br />
-		
-		<label class='labels'>Var2 :</label>
-		<input type="text" name="var2" value="#ENV{var2}" size="50" class='inputs'/>
+		<label class='labels'>inc :</label>
+		<input type="text" name="inc" value="#ENV{inc}" size="50"  class='inputs' />
 		<br /><br />
-		
-		<label class='labels'>Var3 :</label>
-		<input type="text" name="var3" value="#ENV{var3}" size="50" class='inputs'/>
+		<label class='labels'>fonction :</label>
+		<input type="text" name="fonction" value="#ENV{fonction}" size="50"  class='inputs' />
 		<br /><br />
-		
-		<label class='labels'>Var4 :</label>
-		<input type="text" name="var4" value="#ENV{var4}" size="50" class='inputs'/>
-		<br /><br />
-		
-		<label class='labels'>Var5 :</label>
-		<input type="text" name="var5" value="#ENV{var5}" size="50" class='inputs'/>
-		<br /><br />
-		
-		<label class='labels'>Var6 :</label>
-		<input type="text" name="var6" value="#ENV{var6}" size="50" class='inputs'/>
-		<br /><br />
-		
-		<label class='labels'>Var7 :</label>
-		<input type="text" name="var7" value="#ENV{var7}" size="50" class='inputs'/>
-		<br /><br />
-		
-		<label class='labels'>Var8 :</label>
-		<input type="text" name="var8" value="#ENV{var8}" size="50" class='inputs'/>
-		<br /><br />
-		
-		<label class='labels'>Var9 :</label>
-		<input type="text" name="var9" value="#ENV{var9}" size="50" class='inputs'/>
-		<br /><br />
-		
-		
 		
 		
 		</fieldset>
 		<input type="submit" name="_cfg_ok" value="<:cfg:OK:>" onclick='delete_item=false;' />
 		<input type="submit" name="_cfg_delete" value="<:cfg:Supprimer:>" onclick='delete_item=true;' />
 		</form>
-	
 	</div>
 ]
 

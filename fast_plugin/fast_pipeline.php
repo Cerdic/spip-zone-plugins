@@ -1,86 +1,42 @@
 <?php
 
-/*
- Dans votre plugin vous creez un fichier exec :
-        
-          -sur fast_plugin : exec/demo.php 
-         - dans le repertoire fast_plugin/css/demo.css (mettez ici votre css)
-         - dans le repertoire fast_plugin/js/demo.js (mettez ici votre js)
-         - pour la page elle meme : fast_plugin/fonds/demo.html
-        
-Dans le fichier exec/demo.php Nous alolons avoir :
-
-if (!defined("_ECRIRE_INC_VERSION")) return;
-function exec_demo()
-	{
-		// ligne non obligatoire
-		// mais plus propre si on souhaite utiliser 
-		// correctement les pipelines
-		pipeline('exec_init',array('args'=>array('exec'=>'demo'),'data'=>''));
-		
-		// appel sur le pipeline fast_plug
-		// le type peut être simple(la page entière vient du html) ou
-		// complet -> on appelle les différents pipelines de presentation
-	 	pipeline('fast_plug',array('args'=>array('exec'=>'demo','type'=>'simple','template'=>'lnr'),'data'=>''));
- 
-}
-*/
-
-
-
-/* 
- * la fonction get_fast_plugin() retourne un tableau
- * avec la configuration des pages utilisant le plugin 
- * et donc le pipeline fast_plug.
- * 
- * Pour chacune des pages nous configurons certains parametres
- * "nom_de_la_page"=>array("plugin"=>"nom_plugin",
-							"statut"=>"0minirezo",
-							"allowed"=>"1,2"
-							"bouton"=>"sous_menu,chemin_image,titre")
-							
-Concernant le statut 4 valeurs sont possibles :
-	- tous 
-	- admin
-	- admin_restreint
-	- aucun
-
-Si le statut n'est pas renseigné on stop le traitement
-
-Dans allowed on liste : les autorisations specifiques délivré sur l'id de l'auteur 
-les valeurs sont separes par des virgules . Ces valeurs valeurs sont cumulatives avec
-'statut'. Par exemple si le statut est admin_complet et 'allowed'=> '2,7' cette 'page'
-sera accessible a tous les admin complet et auteurs ayant comme id 2 et 7. On peux 
-noter  que l'on peux mettre le statut a 'aucun' et allowed => '6,24' alors cette 'page'
-sera accessible aux auteurs ayant comme id 6 et 24. Ideal poru sécuriser une partie du site
-
-
- * 
- *  
- */
-
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function get_fast_plugin(){
-	return array("source"=>array("plugin"=>"test",
-								"statut"=>"tous",
-								"bouton"=>"naviguer,chemin_image,template"),
-				  "paul"=>array("plugin"=>"test",
-								"statut"=>"admin",
-								"allowed"=>"2",
-								"bouton"=>"naviguer,chemin_image,Paul"),
-					"totto"=>array("plugin"=>"test",
-								"statut"=>"aucun",
-								"allowed"=>"3,6",
-								"bouton"=>"auteurs,chemin_image,la page totto"),
-				"sylvain"=>array("plugin"=>"test",
-								 "statut"=>"admin",
-								 "bouton"=>"accueil,chemin_image,la page a sylvain"),
-	
-				);
+/* les 3 pipelines d'affichage passe par la meme fonction */
+function fast_plugin_affiche_milieu($flux){
+	$flux['data'] .= flux_data_fast_plugin('milieu');
+	return $flux;
 }
 
+function fast_plugin_affiche_droite($flux){
+	$flux['data'] .= flux_data_fast_plugin('droite');
+	return $flux;
+}
 
+function fast_plugin_affiche_gauche($flux){
+	$flux['data'] .= flux_data_fast_plugin('gauche');
+	return $flux;
+}
+
+function flux_data_fast_plugin($colonne){
+	include_spip('inc/cfg_config');
+	$page = lire_config("metapack::affiche_colonne");
+	$exec = _request('exec');
+	if (count($page)==0) $page = array();
+	foreach ($page as $cle=>$valeur) {
+		if($valeur['colonne']==$colonne){
+			$liste = explode(',',$valeur['page']);
+			if ($valeur['page']== $exec 	OR $valeur['page']== '*' OR in_array($exec,$liste)){
+				include_spip('inc/'.$valeur['inc']);
+				$retour .= $valeur['fonction']();
+			}
+		}
+	}
+	return $retour;
+}
+/* fin de la partie concernant les pipelines d'affichage */
+
+/* partie gerant la creation de page dans l'admin grace a fast_plugin */
 /* On renseigne les headers avec les js et les css */
 function fast_plugin_header_prive($flux){
 	$page = get_fast_plugin();
@@ -88,26 +44,32 @@ function fast_plugin_header_prive($flux){
 	
 	if (autoriser('acces','fast_plugin',$exec)) {
 		$plugin = $page[$exec]["plugin"];
-		$flux .="<script type='text/javascript' src='../plugins/$plugin/js/$exec.js'></script>";
-		$flux .="<link type='text/css' rel='stylesheet' href='../plugins/$plugin/css/$exec.css' />
-		";
+		
+		if (file_exists("../plugins/$plugin/js/$exec.js"))	$flux .="<script type='text/javascript' src='../plugins/$plugin/js/$exec.js'></script>";
+		if (file_exists("../plugins/$plugin/css/$exec.css"))$flux .="<link type='text/css' rel='stylesheet' href='../plugins/$plugin/css/$exec.css' />";
+		
+		/* ajout des css / jss */
+		if ($page[$exec]["addCss"]){
+			$a = explode(",",$page[$exec]["addCss"]);
+			for ($i = 0; $i < count($a); $i++) {
+				$file = $a[$i];
+				if (file_exists($file))$flux .="<link type='text/css' rel='stylesheet' href='$file' />";
+			}
+		}
+		
+	if ($page[$exec]["addJS"]){
+			$a = explode(",",$page[$exec]["addJS"]);
+			for ($i = 0; $i < count($a); $i++) {
+				$file = $a[$i];
+				if (file_exists($file)) $flux .="<script type='text/javascript' src='$file'></script>";;
+			}
+		}
+		
 	}
 	
 	return $flux;
 }
 
-/* On met en place les boutons si nécessaires */
-
-/* La liste des boutons
-- $boutons_admin[’accueil’] => A suivre
-- $boutons_admin[’naviguer’] => Edition
-- $boutons_admin[’forum’] => Forum
-- $boutons_admin[’auteurs’] => Auteurs
-- $boutons_admin[’statistiques_visites’] => Statistiques
-- $boutons_admin[’configuration’] => Configuration
-- $boutons_admin[’aide_index’] => Aide
-- $boutons_admin[’visiter’] => Visiter
- */
 
 
 function fast_plugin_ajouter_boutons($boutons_admin){
@@ -154,7 +116,7 @@ function fast_plugin_fast_plug($flux){
 	
 	
 	// On verifie que la personne a bien acces a cette page
-	$exec_get = $_GET["exec"];
+	$exec_get = _request("exec");
 	if (!autoriser('acces','fast_plugin',$exec_get)){
 		echo $commencer_page();
 		die("pas les droits");
@@ -163,7 +125,7 @@ function fast_plugin_fast_plug($flux){
 	if(!$fond) $fond = $exec;
 	
 	// on recupere la page 
-	$page =recuperer_fond("fonds/$fond");
+	$page =recuperer_fond("fonds/$fond",array_merge( $_GET, $_POST ));
 	
 	// utilisation d'un template ou utilisation classique
 	if ($template){
@@ -175,11 +137,13 @@ function fast_plugin_fast_plug($flux){
 		// position , un repertoire css a la racine ?
 		
 		echo $commencer_page();
-		$new_template =  recuperer_fond("fonds/template/$template/$template");
+		pipeline('exec_init',array('args'=>array('exec'=>"$exec"),'data'=>''));
+		$new_template =  recuperer_fond("fonds/template/$template/$template",array_merge( $_GET, $_POST ));
 		$new_template =  str_replace("<!-- content_here -->",$page,$new_template);
 		echo $new_template;
 	}else{
 		echo $commencer_page();
+		pipeline('exec_init',array('args'=>array('exec'=>"$exec"),'data'=>''));
 		if ($type=='complet'){
 			echo debut_gauche('', true);
 			echo pipeline('affiche_gauche',array('args'=>array('exec'=>$exec),'data'=>''));
@@ -214,34 +178,34 @@ function autoriser_fast_plugin_acces_dist($faire, $type, $exec){
 	$allowed = $pages[$exec]["allowed"];
 	if ($allowed) $allowed = explode(',',$allowed);
 	
-	// si allowed on test les droits de l'auteur
-	if ($allowed){
-		if(in_array($id,$allowed)) return true;
-	}
-	
-	// si les droits ne sont pas renseigne 
-	// on bloque le processus idem si droit='aucun' et allowed pas renseigne
+	// si les droits ne sont pas renseigne on bloque le processus 
 	if (!$droit) return false;
-	if ($droit=='aucun' && !$allowed) return false;
 	
+	// si allowed on test les droits de l'auteur
+	if ($allowed && in_array($id,$allowed))return true;
 	
-	// si les droits sont pour tous c'est bon
-	if ($droit=='tous') return true;
+	// pour les admin restreint 
+	if ($statut_type != 1 && $statut_auteur=="0minirezo") $statut_auteur = 'admin_restreint';
 
+	$acces = array(	"tous" => 0,"admin_restreint" => 1,"admin" => 2 ,"aucun" => 4);
+	$type_acces = array("1comite" => 0,"admin_restreint" => 1,"0minirezo" => 2 );
 	
-	// les droits admin
-	if ($droit=='admin' && $statut_auteur=="0minirezo" && $statut_type) return true;
-	if ($droit=='admin_restreint' && $statut_auteur=="0minirezo" && $statut_type) return true;
 	
-
-	// les droits admin_restreint
-	if ($droit=='admin_restreint' && $statut_auteur=="0minirezo") return true;
-	
-	 
+	if($type_acces[$statut_auteur] >= $acces[$droit]) return true;
 	
 	return false;
 	
 }
+
+
+function get_fast_plugin(){
+	include_spip('inc/cfg_config');
+	$tab = lire_config("metapack::fast_plugin");
+	if (count($tab)==0) return array();
+	return $tab;
+
+}
+
 
 
 
