@@ -19,6 +19,6 @@
     <icon>img_pack/logo_saisie_48.png</icon>
     
     <fonctions>balise/saisie.php</fonctions>
-    <options>saisies_options.php</options>
+    <fonctions>saisies_fonctions.php</fonctions>
 	<necessite id="SPIP" version="[2.0;]" />
 </plugin>
