@@ -66,6 +66,10 @@ function formulaires_clevermail_multiple_traiter_dist($lst_id = 0, $lsr_mode_for
   } else {
   	$lsr_mode = intval(_request('lsr_mode'));
   }
+
+  $actionId = md5('subscribe#'.$sub_id.'#'.time());
+  $nbLettre = 1;
+  $lists_name = "";
   foreach($lists as $list) {
   	$lst_id = intval($list);
     $listData = sql_fetsel("*", "spip_cm_lists", "lst_id=".intval($lst_id));
@@ -88,36 +92,53 @@ function formulaires_clevermail_multiple_traiter_dist($lst_id = 0, $lsr_mode_for
     			break;
     		case 'email':
     			// TODO : à finir
-          $actionId = md5('subscribe#'.$lst_id.'#'.$sub_id.'#'.time());
-          if (sql_countsel("spip_cm_pending", "lst_id=".intval($lst_id)." AND sub_id=".intval($sub_id)) == 0) {
-          	sql_insertq("spip_cm_pending", array('lst_id' => intval($lst_id), 'sub_id' => intval($sub_id), 'pnd_action' => 'subscribe', 'pnd_mode' => intval($lsr_mode), 'pnd_action_date' => time(), 'pnd_action_id' => $actionId));
-          }
-          // Composition du message de demande de confirmation
-          $template = array();
-          $template['@@NOM_LETTRE@@'] = $listData['lst_name'];
-          $template['@@DESCRIPTION@@'] = $listData['lst_comment'];
-          $template['@@FORMAT_INSCRIPTION@@']  = (intval($lsr_mode) == 1 ? _T('choix_version_html') : _T('choix_version_texte'));
-          $template['@@EMAIL@@'] = _request('sub_email');
-          ///$template['@@URL_CONFIRMATION@@'] = $GLOBALS['meta']['adresse_site'].'/spip.php?page=clevermail_do&id='.$actionId;
-          $template['@@URL_CONFIRMATION@@'] = generer_url_public(_CLEVERMAIL_VALIDATION,'id='.$actionId);
-          $body = $listData['lst_subscribe_text'];
-          while (list($translateFrom, $translateTo) = each($template)) {
-            $body = str_replace($translateFrom, $translateTo, $body);
-          }
-          $to = _request('sub_email');
-          $subject = (intval($listData['lst_subject_tag']) == 1 ? '['.$listData['lst_name'].'] ' : '').$listData['lst_subscribe_subject'];
-          $from = sql_getfetsel("set_value", "spip_cm_settings", "set_name='CM_MAIL_FROM'");
-          $return = sql_getfetsel("set_value", "spip_cm_settings", "set_name='CM_MAIL_RETURN'");
-
-          // message removed from queue, we can try to send it
-          // TODO : Et le charset ?
-          // TODO : Et le return-path ?
-          $envoyer_mail = charger_fonction('envoyer_mail', 'inc');
-          if ($envoyer_mail($to, $subject, $body, $from)) {
-            $message .= (strlen($message) > 0 ? '<br />' : '')._T('clevermail:inscription_ok', array('lst_name' => $listData['lst_name']));
-          } else {
-            $message .= (strlen($message) > 0 ? '<br />' : '')._T('clevermail:send_error', array('lst_name' => $listData['lst_name']));
-          }
+          		if (sql_countsel("spip_cm_pending", "lst_id=".intval($lst_id)." AND sub_id=".intval($sub_id)) == 0) {
+          			sql_insertq("spip_cm_pending", array('lst_id' => intval($lst_id), 'sub_id' => intval($sub_id), 'pnd_action' => 'subscribe', 'pnd_mode' => intval($lsr_mode), 'pnd_action_date' => time(), 'pnd_action_id' => $actionId));
+          		}
+          		$lists_name = $lists_name."- ".$listData['lst_name']."\n\n";
+				if($nbLettre <= count($lists)){
+          			if(count($lists) > 1){
+          				//Si inscription a plusieurs lettres, on envoie un seul mail avec la liste des lettres
+						// Composition du message de demande de confirmation
+		          		$template = array();
+		          		$template['@@NOM_LETTRE@@'] = $lists_name;
+		          		$template['@@DESCRIPTION@@'] = $listData['lst_comment'];
+		          		$template['@@FORMAT_INSCRIPTION@@']  = (intval($lsr_mode) == 1 ? _T('choix_version_html') : _T('choix_version_texte'));
+		          		$template['@@EMAIL@@'] = _request('sub_email');
+		          		//$template['@@URL_CONFIRMATION@@'] = $GLOBALS['meta']['adresse_site'].'/spip.php?page=alerte_mail_do&id='.$actionId;
+		          		$template['@@URL_CONFIRMATION@@'] = generer_url_public(_CLEVERMAIL_VALIDATION,'id='.$actionId);
+		          		$body = _T('alerte_mail:mail_inscription_multiple');
+          			} else {
+          				// Composition du message de demande de confirmation
+		          		$template = array();
+		          		$template['@@NOM_LETTRE@@'] = $listData['lst_name'];
+		          		$template['@@DESCRIPTION@@'] = $listData['lst_comment'];
+		          		$template['@@FORMAT_INSCRIPTION@@']  = (intval($lsr_mode) == 1 ? _T('choix_version_html') : _T('choix_version_texte'));
+		          		$template['@@EMAIL@@'] = _request('sub_email');
+		          		//$template['@@URL_CONFIRMATION@@'] = $GLOBALS['meta']['adresse_site'].'/spip.php?page=alerte_mail_do&id='.$actionId;
+		          		$template['@@URL_CONFIRMATION@@'] = generer_url_public(_CLEVERMAIL_VALIDATION,'id='.$actionId);
+		          		$body = $listData['lst_subscribe_text'];
+          			}
+					if($nbLettre == count($lists)){
+						while (list($translateFrom, $translateTo) = each($template)) {
+		            		$body = str_replace($translateFrom, $translateTo, $body);
+		          		}
+		          		$to = _request('sub_email');
+		          		$subject = (intval($listData['lst_subject_tag']) == 1 ? '['.$listData['lst_name'].'] ' : '').$listData['lst_subscribe_subject'];
+		          		$from = sql_getfetsel("set_value", "spip_cm_settings", "set_name='CM_MAIL_FROM'");
+		          		$return = sql_getfetsel("set_value", "spip_cm_settings", "set_name='CM_MAIL_RETURN'");
+						// message removed from queue, we can try to send it
+		          		// TODO : Et le charset ?
+		          		// TODO : Et le return-path ?
+		          		$envoyer_mail = charger_fonction('envoyer_mail', 'inc');
+		          		if ($envoyer_mail($to, $subject, $body, $from)) {
+		            		$message .= (strlen($message) > 0 ? '<br />' : '')._T('alerte_mail:inscription_ok', array('lst_name' => $listData['lst_name']));
+		          		} else {
+		            		$message .= (strlen($message) > 0 ? '<br />' : '')._T('alerte_mail:send_error', array('lst_name' => $listData['lst_name']));
+		          		}
+					}
+					$nbLettre++;
+          		}
     			break;
     		case 'mod':
           // TODO : à faire
