@@ -67,7 +67,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nb_etoiles' => 'Valeur des notes',
 	'info_etoiles' => 'Ce param&egrave;tre vous permet de modifier la valeure maximale de la note (le nombre d\'&eacute;toiles, entre 1 et 10, et 5 par d&eacute;faut).<br />
                     <strong style="color:red">/!\ Attention</strong> : vous ne devez pas toucher &agrave; ce param&egrave;tre une fois la notation engag&eacute;e car les notes ne seront pas recalul&eacute;es et cela peut provoquer des incoh&eacute;rences dans la notation...<br />
-                    Ce param&egrave;tres doit &ecirc;tre fix&eacute; une fois pour toute &agrave; la c&eacute;ation des notes.',
+                    Ce param&egrave;tres doit &ecirc;tre fix&eacute; une fois pour toute &agrave; la cr&eacute;ation des notes.',
 	'valeur_nb_etoiles' => 'Notation de 1 &agrave; ',
 
 	// Les erreurs
