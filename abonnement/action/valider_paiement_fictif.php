@@ -54,7 +54,7 @@ function action_valider_paiement_fictif_dist() {
 
 	// envoyer un mail de confirmation
 			include_spip('action/envoyer_mail_confirmation');
-			if (!abo_envoyer_mail_confirmation($reponse_banque,$id_auteur,$libelle,$type,$id_article='')) {
+			if (!abonnement_envoyer_mails_confirmation($reponse_banque,$id_auteur,$libelle,$type,$id_article='')) {
 				spip_log("Erreur de traitement - pas de mail de confirmation (abonnement)", 'abonnement');
 				$message = "erreur_mail";
 			}

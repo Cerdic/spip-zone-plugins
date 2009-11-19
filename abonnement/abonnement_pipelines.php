@@ -74,7 +74,7 @@ function abonnement_post_edition($flux){
 					$date = date('Y-m-d H:i:s');
 					
 					// jour
-					if ($abonnement['pediode'] == 'jours') {
+					if ($abonnement['periode'] == 'jours') {
 						$validite = date('Y-m-d H:i:s', mktime(date('H'),date('i'),date('s'),date('n'),date('j')+$abonnement['duree'],date('Y')));
 					}
 					// ou mois
