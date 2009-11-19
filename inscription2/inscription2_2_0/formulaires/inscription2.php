@@ -323,7 +323,8 @@ function formulaires_inscription2_traiter_dist($id_auteur = NULL,$redirect = nul
 		unset($val['pass']);
 	}
 
-	// affecter $id_auteur avec la session si présent depuis moins de quelques minutes
+	// affecter $id_auteur avec la session si dispo 
+	// présent depuis moins de quelques minutes ou inscrit partiel
 	include_spip("inc/inscription2_session");
 	if($id_inscrit = i2_session_valide()){
 		$id_auteur = $id_inscrit ;

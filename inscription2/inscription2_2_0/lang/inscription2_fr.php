@@ -82,7 +82,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'exp_statut' => 'Choisissez le statut que vous voulez attribuer aux nouveaux adh&eacute;rents',
 	'exp_statut_rel' => 'Champ diff&eacute;rent du statut de SPIP, celui-ci sert pour le controle interne d\'une institution',
 	'explication_affordance_form' => 'Champ affich&eacute; sur les formulaires d\'identification (#LOGIN_PUBLIC)',
-
+	'email_deja_enregistre' => 'Cette adresse email est d&eacute;j&agrave; enregistr&eacute;e. Utilisez le formulaire de connexion pour acc&eacute;der &agrave; votre compte.',
 	// F
 	'fax' => 'Fax',
 	'fax_pro' => 'Fax professionnel',
