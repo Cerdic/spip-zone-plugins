@@ -1,0 +1,23 @@
+<plugin>
+	<nom>#INCLURE{ajaxload}</nom>
+	<auteur>
+	Fil &#169; 2009 - GNU/GPL
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	experimental
+	</etat>
+	<description>
+	Ajoute une option <code>{ajaxload}</code> à la balise <code>#INCLURE</code>
+
+	Ce qui permet de différer le calcul du truc inclus sur un deuxième hit
+	</description>
+	<prefix>
+	INCLUREAJAXLOAD
+	</prefix>
+	<fonctions>inclure-ajaxload.php</fonctions>
+	<chemin dir='' />
+	<necessite id="SPIP" version="[2.0.0;]" />
+</plugin>
