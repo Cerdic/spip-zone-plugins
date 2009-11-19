@@ -14,8 +14,8 @@ include_spip('inc/filtres');
 function action_editer_grappe_dist()
 {
 
-	//$securiser_action = charger_fonction('securiser_action', 'inc');
-	//$id_grappe = intval($securiser_action());
+	$securiser_action = charger_fonction('securiser_action', 'inc');
+	$id_grappe = intval($securiser_action());
 
 	if (!$id_grappe) {
 		$id_grappe = sql_insertq("spip_grappes");

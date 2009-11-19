@@ -75,7 +75,8 @@ function exec_grappes_dist()
 		
 		// Affichage des options  de la grappe (types d'elements affectables...)
 		$res = '';
-		$tables_liees = explode(',',$liaisons);
+		
+		$tables_liees = $liaisons ? explode(',',$liaisons) : array();
 		
 		$libelles = array(
 			'articles'=>'grappes:info_lier_articles',
