@@ -33,4 +33,23 @@ function recuperer_fond_ajax() {
 	";
 }
 
+function INCLUREAJAXLOAD_affichage_final($page) {
+	if ($GLOBALS['html']
+	AND strpos($page, "class='includeajax'")
+	AND $a = strpos($page, "</head>")) {
+		$script = "
+<script type='text/javascript'>
+	$(function() {
+		$('.includeajax').each(function() {
+			var url = $('a', this).attr('href');
+			if (url) $(this).load(url);
+		});
+	});
+</script>
+";
+		$page = substr_replace($page, $script, $a, 0);
+	}
+	return $page;
+}
+
 ?>
