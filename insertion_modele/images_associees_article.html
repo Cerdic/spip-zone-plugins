@@ -1,0 +1,23 @@
+#HTTP_HEADER{Content-Type: text/html; charset=#CHARSET}
+<B_doc>
+<div class="explications">
+	<h1>Pr&eacute;cision</h1>
+	<p>Si une ou plusieurs photos n'apparaissent pas, fermer cette fen&ecirc;tre et r&eacute;-ouvrez la.</p>
+</div>
+<form method="post" action="" id="select_image">
+<div id="div_image_select" class="clearfix">
+<input type="hidden" value="#ENV{id_objet}" name="id_objet"/>
+<input type="hidden" value="#ENV{objet}" name="objet"/>
+<BOUCLE_doc(DOCUMENTS){id_article}{extension IN jpg,jpeg,gif,png}{par num titre}>
+<div class="image_select[ (#COMPTEUR_BOUCLE|alterner{first_photo,'',''})]">
+	[<label for="img_#ID_DOCUMENT">(#FICHIER||image_adaptee{120,90,[(#TITRE|textebrut)],img_presentation,''})</label>
+	<input type="radio" title="Image #ID_DOCUMENT" name="image_sel" id="img_#ID_DOCUMENT" value="#ID_DOCUMENT"/>]
+</div>
+</BOUCLE_doc>
+</div>
+<div class="inserer_images_boutons">
+	<a href="#" title="Fermer" class="close">Annuler</a>
+	<input type="submit" value="Valider">
+</div>
+</form>
+</B_doc>

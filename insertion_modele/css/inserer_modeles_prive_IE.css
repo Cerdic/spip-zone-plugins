@@ -1,0 +1,5 @@
+body {background: url(null) fixed ;} 
+.window {
+	position: absolute;
+	top:expression(documentElement.scrollTop+body.scrollTop);
+}

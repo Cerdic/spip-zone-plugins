@@ -1,0 +1,25 @@
+<plugin>
+	<nom>Insertion modèles</nom>
+	<auteur>Quentin</auteur>
+	<version>0.1</version>
+	<etat>dev</etat>
+	<description>Rajoute des boutons dans le porte-plume qui permettront d'insérer des modèles simplement</description>
+	<prefix>inserer_modeles</prefix>
+	<icon>images/inserer_modeles.gif</icon>
+	<options>inserer_modeles_fonctions.php</options>
+	<fonctions>inserer_modeles_fonctions.php</fonctions>
+	<pipeline>
+		<nom>porte_plume_barre_pre_charger</nom>
+		<inclure>inserer_modeles_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>porte_plume_lien_classe_vers_icone</nom>
+		<inclure>inserer_modeles_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>inserer_modeles_pipelines.php</inclure>
+	</pipeline>
+	<necessite id="SPIP" version="[2.0.0;]" ></necessite>
+	<necessite id="porte_plume" version="[1.2.2;]" />
+</plugin>

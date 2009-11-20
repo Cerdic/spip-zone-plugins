@@ -1,0 +1,33 @@
+#CACHE{0}
+<!-- descriptif=<h4>Configurer les dimensions des images insérées</h4>
+Image max : taille de la zone centre du site ou du maximum autorisé en cas de css "fluide"
+Taille par défaut des images à gauche et droite (largeur par défaut)
+-->
+<!-- titre=Dimensions des images -->
+<style>
+fieldset {margin:10px 0;padding:10px;border:1px solid grey;}
+fieldset legend {color:grey;font-weight:bold;}
+fieldset input {width:400px;}
+fieldset select {width:400px;}
+</style>
+<form method="post">
+[(#ENV{_cfg_}|form_hidden)]
+<fieldset>
+	<legend>Paramètres :</legend>
+	<div style="margin:5px 0;">
+		<label>Largeur MAX</label><br/>
+		<input type="text" name="largeur_max" value="[(#CONFIG{inserer_modeles/largeur_max})]" />
+	</div>
+	<div style="margin:5px 0;">
+		<label>Largeur par défaut</label><br/>
+		<input type="text" name="largeur_defaut" value="[(#CONFIG{inserer_modeles/largeur_defaut})]" />
+	</div>
+	<div style="margin:5px 0;">
+		<label>Classe(s) lien sur les images</label><br/>
+		<input type="text" name="classes_liens" value="[(#CONFIG{inserer_modeles/classes_liens})]" />
+	</div>
+</fieldset>
+<input type="submit" name="_cfg_ok" value="<:OK:>" />
+<input type="reset" value="<:Reset:>" />
+<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
+</form>

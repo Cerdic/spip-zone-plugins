@@ -1,0 +1,56 @@
+#HTTP_HEADER{Content-Type: text/html; charset=#CHARSET}
+<B_doc>
+<div class="explications">
+	<h1>Explications</h1>
+	<p><strong>Largeur : </strong>Correspond &agrave; la taille de l&rsquo;image lorsque le texte est align&eacute; avec l&rsquo;image.[ La taille par d&eacute;faut est de (#CONFIG{inserer_modeles/largeur_defaut})px (pixels)]<br/><em>Pr&eacute;cisions : Dans le cas d&rsquo;une image en taille maximum, ce n&rsquo;est pas pris en compte ([(#CONFIG{inserer_modeles/largeur_max})px]).</em></p>
+	<p><strong>Hauteur : </strong>Correspond &agrave; la hauteur de l&rsquo;image. Peut &ecirc;tre utilis&eacute; avec les 3 type d&rsquo;insertions d&rsquo;images.</p>
+	<p><strong>Zoom : </strong>Permet d&rsquo;activer un effet de zoom sur le clic d&rsquo;une image (si elle est trop petite, le d&eacute;sactiver)</p>
+	<p><strong>Titre / Description : </strong>Ajoute le texte et le titre de <em>l&rsquo;image</em> sous la photo.</p>
+</div>
+<form method="post" action="" id="edit_parametres">
+<div class="fadeOut">
+<div id="formulaire_gauche">
+	<input type="hidden" value="#ENV{id_document}" name="id_document"/>
+	<div class="ligne_form_input">
+		<label for="largeur">Largeur</label>
+		<input type="text" value="" name="largeur" class="input_text"/>
+	</div>
+	<div class="ligne_form_input">
+		<label for="hauteur">Hauteur</label>
+		<input type="text" value="" name="hauteur" class="input_text"/>
+	</div>
+	<div class="ligne_form_check">
+		<label for="dzoom">D&eacute;sactiver le zoom</label>
+		<input type="checkbox" value="1" name="dzoom" class="checkbox"/>
+	</div>
+	<div class="ligne_form_check">
+		<label for="titre_descri">Afficher titre/descriptif dessous</label>
+		<input type="checkbox" value="1" name="titre_descri" class="checkbox"/>
+	</div>
+</div>
+<div id="div_image_select" class="clearfix image_droite">
+<BOUCLE_doc(DOCUMENTS){id_document}{extension IN jpg,jpeg,gif,png}>
+[(#FICHIER||image_adaptee{120,90,[(#TITRE|textebrut)],img_presentation,''})]
+</BOUCLE_doc>
+</div>
+<div id="alignement">
+	<div class="image_select">
+		<label for="align_gauche"><img src="#CHEMIN{images/left.jpg}" alt="Texte &agrave; droite" class="img_presentation"/><span>Texte à droite de l'image</span></label>
+		<input type="radio" title="Texte &agrave; droite" name="image_align" id="align_gauche" value="gauche"/>
+	</div>
+	<div class="image_select">
+		<label for="align_droite"><img src="#CHEMIN{images/right.jpg}" alt="Texte &agrave; droite" class="img_presentation"/><span>Texte à gauche de l'image</span></label>
+		<input type="radio" title="Texte &agrave; gauche" name="image_align" id="align_droite" value="droite"/>
+	</div>
+	<div class="image_select">
+		<label for="align_center"><img src="#CHEMIN{images/full.jpg}" alt="Texte dessous" class="img_presentation"/><span>Image taille maximum</span></label>
+		<input type="radio" title="Texte dessous" name="image_align" id="align_center" value="centre"/>
+	</div>
+</div>
+<div class="inserer_images_boutons">
+	<a href="#" title="Fermer" class="close">Annuler</a>
+	<input type="submit" value="Valider">
+</div>
+</div>
+</form>
+</B_doc>
