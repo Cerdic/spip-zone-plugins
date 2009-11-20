@@ -59,6 +59,12 @@
       <icone>img_pack/agenda-24.png</icone>
       <titre>agenda:agenda</titre>
   </bouton>
+  <bouton id='calendrier2' parent='outils_collaboratifs'>
+      <icone>images/calendrier-16.png</icone>
+      <titre>agenda:agenda</titre>
+      <url>calendrier</url>
+      <args>type=semaine</args>
+  </bouton>
  	<necessite id='SPIP' version='[2.0.3;]' />
 	<necessite id='spip_bonux' version='[1.3;]' />
 </plugin>
