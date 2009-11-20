@@ -12,7 +12,7 @@
 [(#ENV{dzoom}|!={1}|oui)<a href="[(#FICHIER||image_reduire{1024}|extraire_attribut{src})]" title="[(#TITRE|attribut_html)]"[ class="(#GET{classes})"][ style="width:(#GET{largeur_finale})px;"]>]
 [(#ENV{dzoom}|=={1}|oui)<span[ class="(#GET{classes})"][ style="width:(#GET{largeur_finale})px;"]>]
 [(#GET{image})]
-[(#ENV{titre_descri}|=={1}|oui)[(#TITRE)][(#DESCRIPTIF|PtoBr)]]
+[(#ENV{titre_descri}|=={1}|oui)[(#TITRE)][ (#DESCRIPTIF|PtoBr)]]
 [(#ENV{dzoom}|=={1}|oui)</span>]
 [(#ENV{dzoom}|!={1}|oui)</a>]
 </BOUCLE_doc>
