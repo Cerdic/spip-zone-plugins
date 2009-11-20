@@ -56,7 +56,8 @@
 			<label for="descriptif"><:agenda:evenement_descriptif:></label>[
 			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{descriptif})</span>
 			]<textarea name='descriptif' rows='5' id='descriptif'>[(#ENV{descriptif})]</textarea>
-	    </li>
+	    </li>[
+		(#ENV{affiche_inscription,oui}|=={oui}|oui)
 	    <li class="editer_inscription[ (#ENV**{erreurs}|table_valeur{inscription}|oui)erreur]">
 		    <div class='choix inscription'>
 					[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{inscription})</span>]
@@ -67,7 +68,7 @@
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{places})</span>
 				]<input type='text' class='text' name='places' id='places' value="[(#ENV{places})]" />
 				</div>
-	    </li>
+	    </li>]
 	    <li class="editer_lieu[ (#ENV**{erreurs}|table_valeur{lieu}|oui)erreur]">
 			<label for="lieu"><:agenda:evenement_lieu:></label>[
 			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{lieu})</span>
