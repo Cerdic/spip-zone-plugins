@@ -1,0 +1,30 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	VIP : Autorisations dérogatoires
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	[Stephane LAURENT->mailto:stephane@rezo.net]
+_ &#169; 2009 - Distribue sous licence GNU/GPL
+	</auteur>
+  <version>0.2</version>
+  <version_base>0.2</version_base>
+  <icon>img_pack/vip-24.png</icon>
+  <etat>test</etat>
+	<description>
+	Autorisation spéciales pour les utilisateurs nominatifs (id_auteur) ou en fonction de leur statut.
+	</description>
+	<lien></lien> <!-- URI de documentation -->
+	<prefix> 
+	vip
+	</prefix>
+	<install>base/vip_upgrade.php</install>
+	<chemin dir='' />
+	<necessite id='cfg' version='[1.1.1;]' />
+	<options>vip_options.php</options>
+	<fonctions>base/vip.php</fonctions>
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<action>ajouterBoutons</action>
+		<inclure>vip_pipelines.php</inclure>
+	</pipeline>	
+</plugin>

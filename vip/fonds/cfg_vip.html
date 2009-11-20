@@ -1,0 +1,126 @@
+<!-- titre=<:vip:vip_cfg_titre:> -->
+<!-- descriptif=<:vip:vip_cfg_descriptif:> -->
+<!-- storage=table -->
+<!-- table=vips -->
+<!-- autoriser=configurer -->
+<!-- onglet=non -->
+<!-- autoriser_absence_id=oui -->
+#CACHE{0}
+<style type="text/css">
+.cfg_vip label {width: 170px;display:block;float:left;clear:left}
+.cfg_vip select,
+.cfg_vip input.formo {width: 275px;}
+.cfg_vip input.forml {width: 100px;}
+.cfg_vip option.minir {color:green}
+.cfg_vip option.comit {color:orange}
+.cfg_vip option.forum {color:blue}
+.cfg_vip input.cfg_vip_ok{float:right;margin:10px 5px;}
+.cfg_vip input.cfg_vip_del{float:left;margin:10px 5px;}
+form.cfg_vip_affiche{float:left;clear:left;margin-right:10px} 
+</style>
+<form method="post" class="cfg_vip"><div>[(#ENV{_cfg_}|form_hidden)]</div>
+<fieldset>
+<legend>[(#ENV{cfg_id}|?{' ',''})<:vip:vip_autorisations_modif:>[(#ENV{id_vip})]][(#ENV{cfg_id}|?{'',' '})<:vip:vip_autorisations_creation:>]</legend>
+[<input type="hidden" name="id_vip" id="id_vip" value="(#ENV{id_vip})" class="cfg_id" />]
+<label for="titre"><:vip:autorisation_label_titre:></label>
+<input type="text" name="titre" value="[(#ENV{titre})]" class="formo" /><br />
+<label for="qui"><:vip:autorisation_label_qui:></label>
+<select name="qui" id="qui" class="formo">
+	<option value="0minirezo" class="minir"[ (#ENV{qui}|=={'0minirezo'}|?{selected="selected"})]>=&gt; <:vip:tous_les_administrateurs:></option>
+	<option value="1comite" class="comit"[ (#ENV{qui}|=={'1comite'}|?{selected="selected"})]>=&gt; <:vip:tous_les_redacteurs:></option>
+	<option value="6forum" class="forum"[ (#ENV{qui}|=={'6forum'}|?{selected="selected"})]>=&gt; <:vip:tous_les_visiteurs:></option>
+	<option value="*" class="tous"[ (#ENV{qui}|=={'*'}|?{selected="selected"})]>=&gt; <:vip:tous_le_monde:></option>
+<BOUCLE_aut(AUTEURS){tout}{statut?}{par nom}>
+	<option class="[(#STATUT|substr{1,5}) titi] test" value="#ID_AUTEUR"[ (#ENV{qui}|=={#ID_AUTEUR}|?{selected="selected"})]>
+	#NOM ([(#LOGIN)])
+	</option>
+</BOUCLE_aut>
+</select><br/>
+<label for="faire"><:vip:autorisation_label_faire:></label>
+<select name="faire" id="faire" class="formo">
+	<option value="*" [(#ENV{faire}|=={'*'}|?{selected="selected"})]><:vip:faire_tout:></option>
+	<option value="voir" [(#ENV{faire}|=={voir}|?{selected="selected"})]><:vip:faire_voir:></option>
+	<option value="modifier" [(#ENV{faire}|=={modifier}|?{selected="selected"})]><:vip:faire_modifier:></option>
+	<option value="creer" [(#ENV{faire}|=={creer}|?{selected="selected"})]><:vip:faire_creer:></option>
+	<option value="instituer" [(#ENV{faire}|=={instituer}|?{selected="selected"})]><:vip:faire_instituer:></option>
+	<option value="supprimer" [(#ENV{faire}|=={supprimer}|?{selected="selected"})]><:vip:faire_supprimer:></option>
+	<option value="publierdans" [(#ENV{faire}|=={publierdans}|?{selected="selected"})]><:vip:faire_publierdans:></option>
+	<option value="attribuer" [(#ENV{faire}|=={attribuer}|?{selected="selected"})]><:vip:faire_attribuer:></option>
+	<option value="delier_donnee" [(#ENV{faire}|=={delier_donnee}|?{selected="selected"})]><:vip:faire_delier_donnee:></option>
+	<option value="structurer" [(#ENV{faire}|=={structurer}|?{selected="selected"})]><:vip:faire_structurer:></option>
+	<option value="administrer" [(#ENV{faire}|=={administrer}|?{selected="selected"})]><:vip:faire_administrer:></option>
+	<option value="configurer" [(#ENV{faire}|=={configurer}|?{selected="selected"})]><:vip:faire_configurer:></option>
+</select><br/>
+<label for="sur"><:vip:autorisation_label_sur:></label>
+<select name="sur" id="sur" class="formo">
+	<option value="*" [(#ENV{sur}|=={'*'}|?{selected="selected"})]><:vip:sur_tout:></option>
+	<option value="article" [(#ENV{sur}|=={article}|?{selected="selected"})]><:vip:sur_article:></option>
+	<option value="auteur" [(#ENV{sur}|=={auteur}|?{selected="selected"})]><:vip:sur_auteur:></option>
+	<option value="breve" [(#ENV{sur}|=={breve}|?{selected="selected"})]><:vip:sur_breve:></option>
+	<option value="rubrique" [(#ENV{sur}|=={rubrique}|?{selected="selected"})]><:vip:sur_rubrique:></option>
+	<option value="mot" [(#ENV{sur}|=={mot}|?{selected="selected"})]><:vip:sur_mot:></option>
+	<option value="message" [(#ENV{sur}|=={message}|?{selected="selected"})]><:vip:sur_message:></option>
+	<option value="auteur" [(#ENV{sur}|=={auteur}|?{selected="selected"})]><:vip:sur_forum:></option>
+	<option value="form" [(#ENV{sur}|=={form}|?{selected="selected"})]><:vip:sur_form:></option>
+	<option value="donnee" [(#ENV{sur}|=={donnee}|?{selected="selected"})]><:vip:sur_donnee:></option>
+</select><br/>
+<label for="quoi"><:vip:autorisation_label_quoi:></label>
+<input type="text" name="quoi" value="[(#ENV{quoi,'*'})]" class="formo" /><br />
+<label for="options"><:vip:autorisation_label_options:></label>
+<input type="text" name="options" value="[(#ENV{options})]" class="formo" /><br />
+</fieldset>
+<input type="submit" name="_cfg_ok" value="<:ok:>" class="forml cfg_vip_ok" />
+<input type="submit" name="_cfg_delete" value="<:supprimer:>" class="forml cfg_vip_del" />
+</div>
+</form>
+
+
+<br/><br/>
+<B_vips>
+<div class="liste">
+ <div style="position: relative;">
+  <div style="position: absolute; top: -12px; left: 3px;"><img alt="" src="[(#CHEMIN{img_pack/vip-24.png})]"/></div>
+  <div class="verdana2" style="border-bottom: 1px solid rgb(68, 68, 68); padding: 3px 3px 3px 30px; background-color: rgb(197, 228, 28); color: black;">
+	<b><:vip:vip_toutes_les_autorisations:></b>
+  </div>
+ </div>
+ <table width="100%" cellspacing="0" cellpadding="5" border="0">
+  <tbody>
+<BOUCLE_vips(VIPS){par titre}>
+   <tr class="tr_liste">
+   <form method="post"><input type="hidden" name="id_vip" class="cfg_id" value="[(#ID_VIP)]" />
+	<td class="arial1"><input title="<:vip:vip_autorisations_modif:>#ID_VIP" width="24" height="24" type="image" src="[(#CHEMIN{img_pack/editer-24.png})]" name="_cfg_affiche" value="<:editer:>"></td>
+	<td class="arial11"><span class="viplist[(#ID_VIP|=={[(#ENV{cfg_id})]}|?{' ',''})on]">#TITRE</span></td>
+	<td class="arial1"> 
+	<BOUCLE_vqui(AUTEURS){id_auteur=#QUI|is_numeric|?{#QUI,0}}{tout}{statut?}>#NOM</BOUCLE_vqui><b>#QUI</b><//B_vqui><br/>#FAIRE - #SUR - #QUOI
+	</td>
+	<td class="arial1"> 
+	[(#OPTIONS)]
+	</td>
+   </form>
+   </tr>
+</BOUCLE_vips>
+  </tbody>
+ </table>
+</div>
+</B_vips>
+<br/>
+<div style="text-align: right;">
+ <table width="100" cellspacing="0" cellpadding="0" border="0" class="pointeur">
+  <tbody>
+   <tr>
+    <td class="icone36">
+     <a href="[(#URL_ECRIRE{cfg,cfg=vip})]">
+      <img width="24" height="24" style="background: transparent url([(#CHEMIN{img_pack/vip-24.png})]) no-repeat scroll center center; -moz-background-clip: border; -moz-background-origin: padding; -moz-background-inline-policy: continuous;" alt="<:vip:vip_creer_nouveau:>" src="[(#CHEMIN{images/creer.gif})]"/>
+      <span><:vip:vip_creer_nouveau:></span>
+     </a>
+    </td>
+   </tr>
+  </tbody>
+ </table>
+</div>
+
+
+
+
+
