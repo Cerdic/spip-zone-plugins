@@ -5,93 +5,37 @@
 
 Featuring : Compteurs et agrégation sql (calculs statistiques). 
 
-Critères disponibles : 
 
-{compteur table} : permet de compter les elements d’une table associées à ceux d’une autre.
+Balise #EXPRESSION
 
-Exemple, pour afficher les auteurs avec leur nombre d’articles :
+La nouvelle balise #EXPRESSION{expression} permet d'ajouter des expressions sql au select.
 
-<BOUCLE1(AUTEURS){compteur articles}{par compteur_articles}>
-#ID_AUTEUR : #COMPTEUR{articles}
-</BOUCLE1>
+#EXPRESION{expression,alias} permet de trier {par alias}.
+Critères d'agrégation dans les boucles avec le critère {fusion}
 
-{compte champ}, {somme champ}, {minimum champ}, {maximum champ}, {moyenne champ} : calculs statistiques sans jointures.
-
-également disponible : {compte DISTINCT(champ)}
-
-Balises : 
-
-utiliser les balises homonymes. Exemple : #SOMME{champ}.
-
-Exemple :
-
-<BOUCLE_articles(ARTICLES){fusion statut}{moyenne id_article}{maximum id_article}{minimum id_article}{compte id_article}{somme id_article}>
-#ID_ARTICLE,
-somme : #SOMME{id_article} ,
-compte : #COMPTE{id_article},
-moyenne : #MOYENNE{id_article},
-minimum : #MINIMUM{id_article},
-maximum : #MAXIMUM{id_article}
-
-</BOUCLE_articles>
-
-<BOUCLE_articles2(ARTICLES){fusion statut}{stats id_article}>
-#ID_ARTICLE,
-somme : #STATS{id_article,somme} ,
-compte : #STATS{id_article,compte},
-moyenne : #STATS{id_article,moyenne},
-minimum : #STATS{id_article,minimum},
-maximum : #STATS{id_article,maximum}
-</BOUCLE_articles2>
-
-En test aussi, une autre possibilité : {stats champ} qui les calcule tous, mais récupérable par #STATS{champ, somme} (echec pour le moment de pouvoir utiliser les #SOMME{champ} et consoeur avec ...)
-
-Proposition Renato, sans critère
-
-<?php
-
-function balise_SUM($p) {
-  $t = $p->param[0][1][0]->texte;
-  $p->param[0][1][0]->texte = "SUM($t)";
-  $p->param[0][2][0]->texte = "sum_$t";
-  return balise_EXPRESSION($p); 
-}
-
-function balise_EXPRESSION($p) {
-  static $num = 1;
-	$b = $p->nom_boucle ? $p->nom_boucle : $p->descr['id_mere'];
-	if ($b === '' || !isset($p->boucles[$b])) {
-		erreur_squelette(
-			_T('zbug_champ_hors_boucle',
-				array('champ' => "#$b" . 'EXPRESSION')
-			), $p->id_boucle);
-		$p->code = "''";
-	} else {
-  	if (isset($p->param[0][1][0])
-  	AND $champ = ($p->param[0][1][0]->texte)
-    ) {
-  		if(isset($p->param[0][2][0]) AND $p->param[0][2][0]->texte)
-        $alias = $p->param[0][2][0]->texte;
-      else {
-        $alias = "expr_$num";
-        $num++;
-      }
-      $p->code = "\$Pile[\$SP]['$alias']";
-  		$p->boucles[$b]->select[] = "$champ as $alias";
-  		$p->interdire_scripts = true;
-  	}
-	}
-	return $p;
-}
-
-?>
-
-<BOUCLE_art(ARTICLES){fusion id_rubrique}>
-[(#SUM{id_article})]
+<BOUCLE_art(ARTICLES){fusion statut}>
+#EXPRESSION{expression}
 </BOUCLE_art>
 
-<BOUCLE_art(ARTICLES)>
-[(#EXPRESSION{CASE id_article WHEN 1 THEN 'one' WHEN 2 THEN 'two' ELSE 'more' END})]<br />
+Somme des id_article de statut publie
+    #EXPRESSION{SUM(id_article)} = 37. Equivalent à #SUM{id_article} qui vaut aussi 37
+Autres agrégateurs
+    #EXPRESSION{COUNT(id_article)} = 8 - nombre d'id_article de statut publie
+    #EXPRESSION{AVG(id_article)} = 4.6250 - moyenne des id_article de statut publie
+    #EXPRESSION{MIN(id_article)} = 1 - minimum des id_article de statut publie
+    #EXPRESSION{MAX(id_article)} = 9 - maximum des id_article de statut publie
+
+Exemple d'usage de la balise #EXPRESSION avec tri
+
+<BOUCLE_art(ARTICLES){fusion id_rubrique}{!par nombre_articles}>
+Rubrique : #EXPRESSION{COUNT(id_article), nombre_articles} art.
+Evaluation littérale : #EXPRESSION{CASE COUNT(id_article) WHEN 1 THEN 'one' WHEN 2 THEN 'two' ELSE 'more' END}
 </BOUCLE_art>
 
+Rubrique 3 : 7 art.
+    Evaluation littérale : more
+Rubrique 1 : 1 art.
+    Evaluation littérale : one 
+    
+    
 http://dev.mysql.com/doc/refman/5.1/en/control-flow-functions.html
