@@ -1,5 +1,5 @@
 <!-- nom=contact -->
-<div class="formulaire_spip formulaire_editer">
+<div class="formulaire_spip formulaire_editer formulaire_#FORM">
 
 [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
@@ -97,7 +97,7 @@
 	
 	<fieldset>
 		<legend><:contact:sauv_message:></legend>
-		<ul class="decaler baisser10">
+		<ul class="decaler10 baisser10">
 			<li class="choix editer_champ">
 				<p class="explication"><:contact:sauv_message_explication:></p>				
 				<input type="checkbox" name="sauvegarder_contacts" id="sauvegarder_contacts" class="checkbox" value="true" [checked="checked"(#ENV{sauvegarder_contacts}|=={true}|oui)] />
