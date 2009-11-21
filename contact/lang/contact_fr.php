@@ -27,7 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configuration_pj_autoriser' => 'Autoriser l\'envoi de pi&egrave;ces jointes',
 	'configuration_pj_nb_max' => 'Nombre maximal de pi&egrave;ces jointes',
 	'configuration_pj_facteur_absent' => 'Pour utiliser cette fonction, vous devez installer le plugin Facteur.',
-	
+	'consulter_memoire' => 'Ce message est enregistr&eacute; sur votre site :',
 	'courriel_de' => 'De',
 	'courriel_pour' => 'Pour',
 	
@@ -43,6 +43,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'form_pj_supprimer' => 'Supprimer',
 	'form_pj_titre' => 'Titre du fichier',
 	
+	'horodatage' => 'Formulaire posté le : @horodatage@.',
 	'infos_supplementaires' => 'Informations suppl&eacute;mentaires',
 	
 	'sauv_message' => 'Sauvegarder les messages de contact',

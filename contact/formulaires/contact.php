@@ -214,8 +214,14 @@ function formulaires_contact_traiter_dist($id_auteur=''){
 				$infos .= "\n".$champs_possibles[$champ]." : ".$reponse_champ;
 		}
 	}
-	$texte = $infos.$texte;
+	
+	// horodatons
+	$horodatage = date("d / m / y à H:i:s");
+	$horodatage = "\n\n"._T('contact:horodatage', array('horodatage'=>$horodatage))."\n\n";
+	
+	$texte = $horodatage.$infos.$texte;
 	$texte .= "\n\n-- "._T('envoi_via_le_site')." ".supprimer_tags(extraire_multi($GLOBALS['meta']['nom_site']))." (".$GLOBALS['meta']['adresse_site']."/) --\n";
+	
 	// On formate pour les accents
 	$texte = filtrer_entites($texte);
 	
@@ -240,10 +246,6 @@ function formulaires_contact_traiter_dist($id_auteur=''){
 			);
 		}
 	}
-	
-	
-	$envoyer_mail = charger_fonction('envoyer_mail','inc');
-	$envoyer_mail($mail, $sujet, $texte, $adres, "X-Originating-IP: ".$GLOBALS['ip']);
 	
 	// Enregistrement des messages en base de données si on l'a demandé
 	if (lire_config('contact/sauvegarder_contacts')) {
@@ -303,8 +305,14 @@ function formulaires_contact_traiter_dist($id_auteur=''){
 					'vu' =>'non')
 			);
 		}
-	}
 	
+		$memoire = generer_url_ecrire('contact_un_message', 'id_message='.$id_message);		
+		$texte .= "\n\n"._T('contact:consulter_memoire')."\n".$memoire;
+	}
+	// envoyer le mail maintenant
+	$envoyer_mail = charger_fonction('envoyer_mail','inc');
+	$envoyer_mail($mail, $sujet, $texte, $adres, "X-Originating-IP: ".$GLOBALS['ip']);
+		
 	// Maintenant que tout a été envoyé ou enregistré, s'il y avait des PJ il faut supprimer les fichiers
 	if ($pj_enregistrees_nom != null) {
 		foreach ($pj_enregistrees_nom as $cle => $nom_pj) {
