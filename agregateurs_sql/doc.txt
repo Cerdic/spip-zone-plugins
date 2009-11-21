@@ -11,6 +11,7 @@ Balise #EXPRESSION
 La nouvelle balise #EXPRESSION{expression} permet d'ajouter des expressions sql au select.
 
 #EXPRESION{expression,alias} permet de trier {par alias}.
+
 Critères d'agrégation dans les boucles avec le critère {fusion}
 
 <BOUCLE_art(ARTICLES){fusion statut}>
@@ -19,6 +20,7 @@ Critères d'agrégation dans les boucles avec le critère {fusion}
 
 Somme des id_article de statut publie
     #EXPRESSION{SUM(id_article)} = 37. Equivalent à #SUM{id_article} qui vaut aussi 37
+
 Autres agrégateurs
     #EXPRESSION{COUNT(id_article)} = 8 - nombre d'id_article de statut publie
     #EXPRESSION{AVG(id_article)} = 4.6250 - moyenne des id_article de statut publie
@@ -37,5 +39,14 @@ Rubrique 3 : 7 art.
 Rubrique 1 : 1 art.
     Evaluation littérale : one 
     
+
+Trier les articles en fonction de leur nombre de mots clés :
+
+<BOUCLE_articles(ARTICLES spip_mots_breves){statut ==.}{id_secteur = 1064}{id_mot >0}{fusion articles.id_article}{!par compteur_mots}>
+#ID_ARTICLE - [(#EXPRESION{(COUNT(id_mot,compteur_mots))})] mots-clés
+</BOUCLE_articles>
+
+ 
+ 
     
 http://dev.mysql.com/doc/refman/5.1/en/control-flow-functions.html
