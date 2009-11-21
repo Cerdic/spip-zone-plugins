@@ -14,7 +14,7 @@ function exec_zengarden(){
 		exit;
 	}
 	include_spip('inc/zengarden');
-	$themes = zengarden_charge_themes(_DIR_THEMES);
+	$themes = zengarden_charge_themes(_DIR_THEMES,_request('tous'));
 
 	$commencer_page = charger_fonction('commencer_page','inc');
 	echo $commencer_page(_T('zengarden:choix_theme'));

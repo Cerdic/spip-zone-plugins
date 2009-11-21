@@ -7,7 +7,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function zengarden_charge_themes($dir = _DIR_THEMES){
+function zengarden_charge_themes($dir = _DIR_THEMES, $tous = false){
 	$themes = array();
 
 	$files = array();
@@ -18,7 +18,8 @@ function zengarden_charge_themes($dir = _DIR_THEMES){
 		foreach($files as $file){
 			$path = substr(dirname($file),strlen($dir));
 			$infos = $get_infos($path,false,$dir);
-			if ($infos){
+			if ($infos
+			  AND ($tous OR $infos['etat']=='stable')){
 				$infos['chemin'] = $path;
 				$themes[$path] = $infos;
 			}
