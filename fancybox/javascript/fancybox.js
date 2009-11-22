@@ -77,16 +77,7 @@ var showembed=function() {
 	}
 }
 
-// fontion callback lancee a l'affichage de la box
-var fancyonshow=function() {
-	showlongdesc(this);
-	hideembed();
-}
 
-// fontion callback lancee a la fermeture de la box
-var fancyonclose=function() {
-	showembed();
-}
 
 // Inside the function "this" will be "document" when called by ready() 
 // and "the ajaxed element" when called because of onAjaxLoad 

@@ -26,6 +26,15 @@ function fancybox_insert_head($flux){
 	// Init de la fancybox suivant la configuration
 	$flux .='
 <script type="text/javascript">/* <![CDATA[ */
+// fontion callback lancee a l affichage de la box
+var fancyonshow=function() {
+	showlongdesc(this);
+	hideembed();
+}
+// fontion callback lancee a la fermeture de la box
+var fancyonclose=function() {
+	showembed();
+}
 var fb_selecteur_galerie="'.$config['selecteur_galerie'].'";
 var fb_selecteur_commun="'.$config['selecteur_commun'].'";
 var fb_selecteur_frame="'.$config['selecteur_frame'].'";
