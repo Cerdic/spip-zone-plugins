@@ -125,6 +125,12 @@ function formulaires_forum_prive_traiter_dist($id_rubrique, $id_forum, $id_artic
 	set_request('retour_forum',$url_param_retour);
 	
 	list($redirect,$id_forum) = $forum_insert($statut);
+
+	// Notification
+	if ($notifications = charger_fonction('notifications', 'inc')) {
+		$notifications('forumprive', $id_forum);
+	}
+
 	return array('redirect'=>$redirect,'id_forum'=>$id_forum);
 }
 
