@@ -1,6 +1,5 @@
 #HTTP_HEADER{'Content-Type: text/html'}
 
-<span>[(#ENV{url}|urldecode|afficher_pagerank|>{0}|?{" ",""})
-
+[(#ENV{url}|urldecode|afficher_pagerank|>{0}|?{" ",""})<span>
 	[<img src="#URL_SITE_SPIP/(#CHEMIN{[images/minipagerank(#ENV{url}|urldecode|afficher_pagerank).gif]})" alt="PR" />]
-]</span>
+</span>]
