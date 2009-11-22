@@ -42,7 +42,7 @@ function spip_suggest_insert_head ($flux) {
 				return row[0] + " (" + row[1] + " r&eacute;sultat)";
 			}
 			else if (row[1] > 1) {
-				return row[0] + " (<strong>" + row[1] + " r&eacute;sultats<\/strong>)";
+				return row[0] + " (" + row[1] + " r&eacute;sultats)";
 			} 
 		 }
 		$("'.lire_config("spip_suggest/suggest_selecteur", "#recherche").'").autocomplete("'.generer_url_public("suggest").'", {
