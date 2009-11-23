@@ -1,0 +1,9 @@
+#HTTP_HEADER{Content-Type: text/html; charset=#CHARSET}
+<B_doc>
+[<p class="pagination">(#GRAND_TOTAL|>{9}|?{' '})[(#PAGINATION{noancre,label=' '})]</p>]
+<BOUCLE_doc(DOCUMENTS){id_article}{extension IN jpg,jpeg,gif,png}{par num titre}{pagination 9}>
+<div class="image_select[ (#COMPTEUR_BOUCLE|alterner{first_photo,'',''})]">
+	[<label for="img_#ID_DOCUMENT">(#FICHIER||image_adaptee{120,90,[(#TITRE|textebrut)],img_presentation,''})</label>
+	<input type="radio" title="Image #ID_DOCUMENT" name="image_sel" id="img_#ID_DOCUMENT" value="#ID_DOCUMENT"/>]
+</div>
+</BOUCLE_doc>

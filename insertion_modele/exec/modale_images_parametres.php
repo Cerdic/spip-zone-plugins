@@ -1,7 +1,7 @@
 <?php
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function exec_modal_images_parametres_dist() {
+function exec_modale_images_parametres_dist() {
 	include_spip('inc/documents');
 
 	// Qui ?
@@ -15,7 +15,7 @@ function exec_modal_images_parametres_dist() {
 
 	if(!$temp)
 	{
-		$erreur = recuperer_fond("images_associees_"._request("objet"), array("objet" => _request("objet"),"id_"._request("objet") => _request("id_objet"),"id_objet" => _request("id_objet")));
+		$erreur = recuperer_fond("modale_images_select", array("objet" => _request("objet"),"id_"._request("objet") => _request("id_objet"),"id_objet" => _request("id_objet")));
 		echo("<div class=\"inserer_modeles_erreur\">Pas d'image sélectionnée : soit l'image n'est pas correcte, soit il y a eu un problème pendant le dialogue avec le serveur.</div>".$erreur);
 	}
 

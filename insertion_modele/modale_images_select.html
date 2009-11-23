@@ -1,0 +1,22 @@
+#HTTP_HEADER{Content-Type: text/html; charset=#CHARSET}
+<div class="explications">
+	<h1>Pr&eacute;cision</h1>
+	<p>Si une ou plusieurs photos n'apparaissent pas, fermer cette fen&ecirc;tre et r&eacute;-ouvrez la.</p>
+</div>
+<form method="post" action="" id="select_image">
+<div id="onglets">
+	<a href="modale_images_article" title="Images associ&eacute;es" class="on">Images associ&eacute;es</a>
+	<a href="modale_toutes_images" title="Images">Images du site</a>
+</div>
+<div id="div_image_select">
+<input type="hidden" value="#ENV{id_objet}" name="id_objet"/>
+<input type="hidden" value="#ENV{objet}" name="objet"/>
+<div id="list_images">
+<INCLURE{fond=modale_images_article}{id_article}{ajax}{env}>
+</div>
+</div>
+<div class="inserer_images_boutons">
+	<a href="#" title="Fermer" class="close">Annuler</a>
+	<input type="submit" value="Valider">
+</div>
+</form>

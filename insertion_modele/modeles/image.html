@@ -1,11 +1,11 @@
 #HTTP_HEADER{Content-Type: text/html; charset=#CHARSET}
 #SET{largeur,#ENV{largeur}}
 #SET{hauteur,#ENV{hauteur}}
-[(#ENV{align}|=={gauche}|oui)#SET{classe_align,is_document_gauche}]
-[(#ENV{align}|=={droite}|oui)#SET{classe_align,is_document_droite}]
+#SET{align,#ENV{align,centre}}
+#SET{classe_align,is_document_#GET{align}}
+[(#GET{align}|!={centre}|oui)[(#ENV{largeur}|non)[(#ENV{hauteur}|non)#SET{largeur,#CONFIG{inserer_modeles/largeur_defaut}}]]]
+[(#GET{align}|=={centre}|oui)#SET{largeur,#CONFIG{inserer_modeles/largeur_max}}]
 #SET{classes,#CONFIG{inserer_modeles/classes_liens}|concat{' image_texte'}|concat{' ',#GET{classe_align}}}
-[(#ENV{align}|!={centre}|oui)[(#ENV{largeur}|non)[(#ENV{hauteur}|non)#SET{largeur,#CONFIG{inserer_modeles/largeur_defaut}}]]]
-[(#ENV{align}|=={centre}|oui)#SET{largeur,#CONFIG{inserer_modeles/largeur_max}}]
 <BOUCLE_doc(DOCUMENTS){id_document=#ENV{id,#ENV{id_document,0}}}{extension IN jpg,jpeg,gif,png}>
 #SET{image,#FICHIER||image_adaptee{#GET{largeur},#GET{hauteur},#TITRE|attribut_html}}
 [(#ENV{titre_descri}|=={1}|oui)#SET{largeur_finale,#GET{image}||extraire_attribut{width}}]

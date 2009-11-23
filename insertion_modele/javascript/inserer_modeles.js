@@ -1,4 +1,65 @@
+/*
+ * jQuery plugin: fieldSelection - v0.1.0 - last change: 2006-12-16
+ * (c) 2006 Alex Brem <alex@0xab.cd> - http://blog.0xab.cd
+ */
+(function() {
+	var fieldSelection = {
+		getSelection: function() {
+			var e = this.jquery ? this[0] : this;
+			return (
+				/* mozilla / dom 3.0 */
+				('selectionStart' in e && function() {
+					var l = e.selectionEnd - e.selectionStart;
+					return { start: e.selectionStart, end: e.selectionEnd, length: l, text: e.value.substr(e.selectionStart, l) };
+				}) ||
+				/* exploder */
+				(document.selection && function() {
+					e.focus();
+					var r = document.selection.createRange();
+					if (r == null) {
+						return { start: 0, end: e.value.length, length: 0 }
+					}
+					var re = e.createTextRange();
+					var rc = re.duplicate();
+					re.moveToBookmark(r.getBookmark());
+					rc.setEndPoint('EndToStart', re);
+					return { start: rc.text.length, end: rc.text.length + r.text.length, length: r.text.length, text: r.text };
+				}) ||
+				/* browser not supported */
+				function() {
+					return { start: 0, end: e.value.length, length: 0 };
+				}
+			)();
+		},
+		replaceSelection: function() {
+			var e = this.jquery ? this[0] : this;
+			var text = arguments[0] || '';
+			return (
+				/* mozilla / dom 3.0 */
+				('selectionStart' in e && function() {
+					e.value = e.value.substr(0, e.selectionStart) + text + e.value.substr(e.selectionEnd, e.value.length);
+					return this;
+				}) ||
+				/* exploder */
+				(document.selection && function() {
+					e.focus();
+					document.selection.createRange().text = text;
+					return this;
+				}) ||
+				/* browser not supported */
+				function() {
+					e.value += text;
+					return this;
+				}
+			)();
+		}
+	};
+	jQuery.each(fieldSelection, function(i) { jQuery.fn[i] = this; });
+})();
+
 var curseur;
+var datas;
+
 $(document).ready(function() {
 	// Insertion du div de la modale
 	$("body").append('<div class="window" id="modale_images"></div><div id="inserer_modeles_mask"></div>');
@@ -24,19 +85,21 @@ $(document).ready(function() {
 			objet = "rubrique";
 		}
 		
-		// Mettre dans les pipeline de document la création des vignettes pour ne pas avoir une page vide !
+		datas = "objet=" + objet + "&id_objet=" + id_objet ;
+		
+		// TODO : Mettre dans les pipeline de document la création des vignettes pour ne pas avoir une page vide !
 		
 		// Recupérer les images en AJAX pour l'afficher dans la modal
 		$.ajax({
 			type: "GET",
-			url: "?exec=modal_images",
-			data: "objet=" + objet + "&id_objet=" + id_objet,
+			url: "?exec=modale_images_select",
+			data: datas,
 			success: function(r){$("#modale_images").html(r);},
 			async: false
 		}).responseText;
 
-		recalculTailleMask ()
-		
+		recalculTailleMask ();
+
 		// la transition du mask (simple fade)
 		$('#inserer_modeles_mask').fadeIn(500);
 		$('#inserer_modeles_mask').fadeTo("fast",0.8);
@@ -107,13 +170,23 @@ function submitInsererModelesSelectParams(){
 
 function submitInsererModelesSelectImage(){
 	$("#select_image").unbind("submit");
-	
+	$("#onglets a").unbind("click");
+
+	$("#onglets a").click(function(){
+		var url = $(this).attr("href");
+		ajaxIS(url,$("#list_images"),datas);
+		$("#onglets a.on").removeClass("on");
+		$(this).addClass("on");
+
+		return false;
+	});
+
 	$("#select_image").submit(function(){			
 		$("#div_image_select").fadeTo("fast",0.5);
 		var inputs = $("#select_image").serialize();
 		$.ajax({
 			type: "GET",
-			url: "?exec=modal_images_parametres",
+			url: "?exec=modale_images_parametres",
 			data: inputs,
 			success:function(r){
 				$("#modale_images").html(r).fadeTo("fast", 1);
@@ -133,5 +206,18 @@ function InsererModelesWindowClose(){
 		//Cancel the link behavior
 		e.preventDefault();
 		$('#inserer_modeles_mask, .window').hide();
+	});
+}
+
+function ajaxIS (url, conteneur, datas){
+	datas = "url=" + url + "&" + datas;
+	$.ajax({
+		type: "GET",
+		url: "?exec=modale_liste_images",
+		data: datas,
+		success:function(r){
+			conteneur.html(r).fadeTo("fast", 1);
+		},
+		async: false
 	});
 }

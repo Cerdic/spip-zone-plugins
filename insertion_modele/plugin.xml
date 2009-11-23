@@ -1,6 +1,6 @@
 <plugin>
 	<nom>Insertion modèles</nom>
-	<auteur>Quentin</auteur>
+	<auteur>Sephyria</auteur>
 	<version>0.1</version>
 	<etat>dev</etat>
 	<description>Rajoute des boutons dans le porte-plume qui permettront d'insérer des modèles simplement</description>
@@ -20,7 +20,12 @@
 		<nom>header_prive</nom>
 		<inclure>inserer_modeles_pipelines.php</inclure>
 	</pipeline>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>inserer_modeles_pipelines.php</inclure>
+	</pipeline>
 	<necessite id="SPIP" version="[2.0.0;]" />
 	<necessite id="porte_plume" version="[1.2.2;]" />
 	<necessite id="cfg" version="[1.14.1;]" />
+	<necessite id="spip_bonux" version="[1.8.5;]" />
 </plugin>

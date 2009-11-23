@@ -2,9 +2,9 @@
 <B_doc>
 <div class="explications">
 	<h1>Explications</h1>
-	<p><strong>Largeur : </strong>Correspond &agrave; la taille de l&rsquo;image lorsque le texte est align&eacute; avec l&rsquo;image.[ La taille par d&eacute;faut est de (#CONFIG{inserer_modeles/largeur_defaut})px (pixels)]<br/><em>Pr&eacute;cisions : Dans le cas d&rsquo;une image en taille maximum, ce n&rsquo;est pas pris en compte ([(#CONFIG{inserer_modeles/largeur_max})px]).</em></p>
-	<p><strong>Hauteur : </strong>Correspond &agrave; la hauteur de l&rsquo;image. Peut &ecirc;tre utilis&eacute; avec les 3 type d&rsquo;insertions d&rsquo;images.</p>
-	<p><strong>Zoom : </strong>Permet d&rsquo;activer un effet de zoom sur le clic d&rsquo;une image (si elle est trop petite, le d&eacute;sactiver)</p>
+	<p><strong>Largeur : </strong>Fixe la taille de l&rsquo;image dans les cas gauche et droite seulement.<br/><em>[La taille par d&eacute;faut est de (#CONFIG{inserer_modeles/largeur_defaut})px (pixels)] et la largeur maximum est[ (#CONFIG{inserer_modeles/largeur_max})px]</em></p>
+	<p><strong>Hauteur : </strong>Correspond &agrave; la hauteur de l&rsquo;image.</p>
+	<p><strong>Zoom : </strong>Permet de d&eacute;sactiver le zoom sur le clic de l&rsquo;image</p>
 	<p><strong>Titre / Description : </strong>Ajoute le texte et le titre de <em>l&rsquo;image</em> sous la photo.</p>
 </div>
 <form method="post" action="" id="edit_parametres">
@@ -28,7 +28,7 @@
 		<input type="checkbox" value="1" name="titre_descri" class="checkbox"/>
 	</div>
 </div>
-<div id="div_image_select" class="clearfix image_droite">
+<div id="div_image_select" class="image_droite">
 <BOUCLE_doc(DOCUMENTS){id_document}{extension IN jpg,jpeg,gif,png}>
 [(#FICHIER||image_adaptee{120,90,[(#TITRE|textebrut)],img_presentation,''})]
 </BOUCLE_doc>

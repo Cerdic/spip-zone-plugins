@@ -3,7 +3,6 @@ function image_adaptee ($fichier, $largeur = 0, $hauteur = 0, $alt= '', $class =
 {
 	include_spip('inc/filtres_images');
 
-	//	Si pas de fichier pas la peine de se faire du mal, il va rien se passer... =)
 	if (!$fichier) return '';
 
 	if ($largeur==0 && $hauteur==0)

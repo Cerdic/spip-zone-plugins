@@ -8,25 +8,35 @@
 /* ***************** */
 /* CSS CORPS MODAL
 /* ***************** */
-.img_presentation {display:block;padding:1px;border:1px solid #999966;}
-.image_select {display:block;float:left;text-align:center;margin:0px 0px 1px 4px;}
-.first_photo {margin-left:0px;}
-.clearfix {width:100%;overflow:auto;}
-.inserer_images_boutons {text-align:right;}
-.inserer_images_boutons input, .inserer_images_boutons a {margin:0 !important;display:inline-block;border:none;background:url(../images/back_bt.gif) no-repeat top left;color:black;font-size:10px;font-weight:bold;text-align:center;text-decoration:none;vertical-align:middle;}
-.inserer_images_boutons input {width:70px;height:20px;text-align:center;padding:0 0 3px 0;}
-.inserer_images_boutons a {width:60px;height:14px;padding:3px 5px;text-align:center;}
-.inserer_modeles_erreur {padding:5px;border:1px solid red;color:red;font-weight:bold;margin-bottom:10px;}
-.image_droite {float:right;width:124px;}
-#alignement {clear:both;padding:20px 0;overflow:auto;width:100%;}
-#alignement .image_select {width:94px;text-align:center;padding:0 15px;margin:0 !important;}
-#alignement .image_select label span{display:block;font-weight:bold;}
-#formulaire_gauche {float:left;width:245px;}
-#formulaire_gauche .ligne_form_input {position:relative;padding-left:85px;text-align:right;margin-bottom:10px;}
-#formulaire_gauche .ligne_form .input_text{width:160px;}
-#formulaire_gauche .ligne_form_input label {position:absolute;top:5px;left:0;font-weight:bold;font-size:11px;}
-#formulaire_gauche .ligne_form_check {position:relative;padding-left:190px;text-align:right;margin-bottom:10px;}
-#formulaire_gauche .ligne_form_check label {position:absolute;top:3px;left:0;font-weight:bold;font-size:11px;}
-.explications {color:#adadad;padding:10px;border:1px solid #adadad;-moz-border-radius:7px;-webkit-border-radius:5px;position:relative;font-size:10px;margin-bottom:20px;}
-.explications h1 {position:absolute;top:-13px;left:10px;padding:0 5px;border:1px solid #adadad;-moz-border-radius:5px;-webkit-border-radius:5px;background-color:#adadad;color:white;font-size:11px;font-weight:normal;}
-.explications p {margin:0;}
+#modale_images .img_presentation {display:block;padding:1px;border:1px solid #999966;}
+#modale_images .image_select {display:block;float:left;text-align:center;margin:0px 0px 1px 4px;}
+#modale_images .first_photo {margin-left:0px;}
+#modale_images .inserer_images_boutons {text-align:right;clear:both;}
+#modale_images .inserer_images_boutons input, .inserer_images_boutons a {margin:0 !important;display:inline-block;border:none;background:url(../images/back_bt.gif) no-repeat top left;color:black;font-size:10px;font-weight:bold;text-align:center;text-decoration:none;vertical-align:middle;}
+#modale_images .inserer_images_boutons input {width:70px;height:20px;text-align:center;padding:0 0 3px 0;}
+#modale_images .inserer_images_boutons a {width:60px;height:14px;padding:3px 5px;text-align:center;}
+#modale_images .inserer_modeles_erreur {padding:5px;border:1px solid red;color:red;font-weight:bold;margin-bottom:15px;-moz-border-radius:8px;-webkit-border-radius:8px;}
+#modale_images .image_droite {float:right;width:124px;}
+#modale_images #alignement {clear:both;padding:20px 0;overflow:auto;width:100%;}
+#modale_images #alignement .image_select {width:94px;text-align:center;padding:0 15px;margin:0 !important;}
+#modale_images #alignement .image_select label span{display:block;font-weight:bold;}
+#modale_images #formulaire_gauche {float:left;width:245px;}
+#modale_images #formulaire_gauche .ligne_form_input {position:relative;padding-left:85px;text-align:right;margin-bottom:10px;}
+#modale_images #formulaire_gauche .ligne_form .input_text{width:160px;}
+#modale_images #formulaire_gauche .ligne_form_input label {position:absolute;top:5px;left:0;font-weight:bold;font-size:11px;}
+#modale_images #formulaire_gauche .ligne_form_check {position:relative;padding-left:190px;text-align:right;margin-bottom:10px;}
+#modale_images #formulaire_gauche .ligne_form_check label {position:absolute;top:3px;left:0;font-weight:bold;font-size:11px;}
+#modale_images .explications {color:#adadad;padding:10px;border:1px solid #adadad;-moz-border-radius:7px;-webkit-border-radius:5px;position:relative;font-size:10px;margin-bottom:20px;}
+#modale_images .explications h1 {position:absolute;top:-13px;left:10px;padding:0 5px;border:1px solid #adadad;-moz-border-radius:5px;-webkit-border-radius:5px;background-color:#adadad;color:white;font-size:11px;font-weight:normal;}
+#modale_images .explications p {margin:0;}
+
+#modale_images #onglets {padding-left:30px;}
+#modale_images #onglets a {padding:3px 5px;display:inline-block;font-weight:bold;color:#999966;border-color:#999966;border-style:solid;border-width:1px 1px 0 1px;-moz-border-radius-topleft:5px;-moz-border-radius-topright:5px;-webkit-border-radius-topleft:5px;-webkit-border-radius-topright:5px;}
+#modale_images #onglets a:hover, #modale_images #onglets a.on {background-color:#D9D9D9;}
+
+/**********************/
+/* Pagination
+/**********************/
+#modale_images .pagination {text-align:center;margin:0 0 10px 0;padding:5px 0;border:1px solid #999966;background-color:#D9D9D9;-moz-border-radius:10px;-webkit-border-radius:10px;}
+#modale_images .pagination a, #modale_images .pagination span, #modale_images .pagination strong, #modale_images .pagination .separateur {color:white;vertical-align:middle;display:inline-block !important;padding:0 2px;font-weight:bold;}
+#modale_images .pagination .on {color:#999966;}
