@@ -195,20 +195,13 @@ function demarrer_site($site = '', $options = array()) {
 	 */
 	if (_request('exec') === 'mutualisation') {
 		if (!defined('_SITES_ADMIN_MUTUALISATION')
-		OR in_array($site, explode(',',_SITES_ADMIN_MUTUALISATION))) {
-			if (!defined('_ROOT_RACINE')) {
-				_chemin(dirname(__FILE__));
-			} else { // suite aux optimisations de SPIP 2.0.10++
-				// Pas certains que ca marche si mutualisation/ n'est pas à la racine de SPIP
-				// le remplacement de \ par / est necessaire sous Windows
-				_chemin('../' . str_replace(str_replace('\\', '/', _ROOT_RACINE), '', str_replace('\\', '/', dirname(__FILE__))));
-			}
-		}
+		OR in_array($site, explode(',',_SITES_ADMIN_MUTUALISATION)))
+			require_once dirname(__FILE__).'/exec/mutualisation.php';
 
 		// Si un upgrade est demande dans le site fils, et securise par md5
 		// depuis le panneau de controle, le faire directement
 		if (_request('upgrade') == 'oui') {
-			include_once dirname(__FILE__).'/mutualiser_upgrade.php';
+			require_once dirname(__FILE__).'/mutualiser_upgrade.php';
 			mutualiser_upgrade();
 		}
 	}
