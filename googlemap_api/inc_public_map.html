@@ -52,30 +52,33 @@
 			// facelo mapa
 			map[(#GET{id_carte_gis})] = new GMap2(document.getElementById("map[(#GET{id_carte_gis})]"));
 			map[(#GET{id_carte_gis})].getContainer().style.overflow='hidden'; 
-			[(#GET{control}|=={'custom'}|?{' '})
-				[(#ENV{control_type}|!={'non'}|?{' '})
+			[(#GET{control}|=={'custom'}|oui)
+				[(#ENV{control_type}|!={'non'}|oui)
 				map[(#GET{id_carte_gis})].addControl(new GMapTypeControl());
 				]
 			]
-			[(#GET{control}|=={'custom'}|?{' '})
-				[(#ENV{control_zoom}|!={'non'}|?{' '})
+			[(#GET{control}|=={'custom'}|oui)
+				[(#ENV{control_zoom}|!={'non'}|oui)
 				map[(#GET{id_carte_gis})].addControl(new mapZoomControl());
 				]
 			]
-			[(#GET{control}|=={'custom'}|?{' '})
-				[(#ENV{control_move}|!={'non'}|?{' '})
+			[(#GET{control}|=={'custom'}|oui)
+				[(#ENV{control_move}|!={'non'}|oui)
 				map[(#GET{id_carte_gis})].addControl(new mapMoveControl());
 				]
 			]
-			[(#GET{control}|=={'small'}|?{map[(#GET{id_carte_gis})].addControl(new GSmallMapControl());})]
-			[(#GET{control}|=={'small'}|?{' '})
-				[(#ENV{control_type}|!={'non'}|?{' '})
+			[(#ENV{control_type}|=={'complet'}|oui)
+				map[(#GET{id_carte_gis})].addMapType(G_PHYSICAL_MAP);
+			]
+			[(#GET{control}|=={'small'}|oui)
+			map[(#GET{id_carte_gis})].addControl(new GSmallMapControl());
+				[(#ENV{control_type}|!={'non'}|oui)
 				map[(#GET{id_carte_gis})].addControl(new GMapTypeControl());
 				]
 			]
-			[(#GET{control}|=={'large'}|?{map[(#GET{id_carte_gis})].addControl(new GLargeMapControl());})]
-			[(#GET{control}|=={'large'}|?{' '})
-				[(#ENV{control_type}|!={'non'}|?{' '})
+			[(#GET{control}|=={'large'}|oui)
+			map[(#GET{id_carte_gis})].addControl(new GLargeMapControl());
+				[(#ENV{control_type}|!={'non'}|oui)
 				map[(#GET{id_carte_gis})].addControl(new GMapTypeControl());
 				]
 			]
@@ -90,25 +93,25 @@
 			
 			// Chargement KML si attache a l'article
 			<BOUCLE_kml_art(documents){id_article}{0,1}{extension=kml}>
-			[(#ENV{id_article}|=={''}|?{'',
+			[(#ENV{id_article}|=={''}|non)
 			var kml = new GGeoXml("[(#URL_DOCUMENT|url_absolue)]");
 			map[(#GET{id_carte_gis})].addOverlay(kml);
-			})]
+			]
 			</BOUCLE_kml_art>
 			
 			// Chargement KML si attache a la rubrique
 			<BOUCLE_kml_rub(documents){id_rubrique}{0,1}{extension=kml}>
-			[(#ENV{id_rubrique}|=={''}|?{'',
+			[(#ENV{id_rubrique}|=={''}|non)
 			var kml = new GGeoXml("[(#URL_DOCUMENT|url_absolue)]");
 			map[(#GET{id_carte_gis})].addOverlay(kml);
-			})]
+			]
 			</BOUCLE_kml_rub>
 			<//B_kml_art>
 			
 			//leemo-lo documento dos marcadores
-			[(#ENV{recursive}|=={1}|?{' ',''})
+			[(#ENV{recursive}|=={1}|oui)
        			jQuery.get('[(#URL_PAGE{rss-gis-recursive})]', {[limit:(#ENV{limit, 50})][, id_rubrique:(#ID_RUBRIQUE)][, id_parent:(#ID_RUBRIQUE)][, id_secteur:(#ID_SECTEUR)][, id_mot:(#ID_MOT)][, id_auteur:(#ID_AUTEUR)][, recherche:(#RECHERCHE)][, id_article:(#ID_ARTICLE)][, id_groupe:(#ID_GROUPE)]}, function(xml[(#GET{id_carte_gis})]){
-    		][(#ENV{recursive}|=={1}|?{'',' '})
+    		][(#ENV{recursive}|=={1}|non)
 				jQuery.get('[(#URL_PAGE{rss-gis})]', {[limit:(#ENV{limit, 50})][, id_rubrique:(#ID_RUBRIQUE)][, id_secteur:(#ID_SECTEUR)][, id_mot:(#ID_MOT)][, id_auteur:(#ID_AUTEUR)][, recherche:(#RECHERCHE)][, id_article:(#ID_ARTICLE)][, id_groupe:(#ID_GROUPE)]}, function(xml[(#GET{id_carte_gis})]){
 			]
 				//xml almacena en un objeto xml los datos recogidos del documento leido
@@ -121,7 +124,7 @@
    				});
    			}
 		}
-		[(#ENV{load_map}|!={'non'}|?{' '})
+		[(#ENV{load_map}|!={'non'}|oui)
 		jQuery(document).ready(function(){
 			load[(#GET{id_carte_gis})]();
 			[(#ENV{attente}|=={1}|oui) $("#map[(#GET{id_carte_gis})]").append('<div id="attente[(#GET{id_carte_gis})]" style="position: absolute; z-index: 1000; top: 0; left: 0; background-color: #FFFFFF; filter:alpha(opacity=70); -moz-opacity: 0.7; opacity: 0.7;[ width: (#ENV{largeur});][ height: (#ENV{hauteur});]"><span style="display: block; width: 100%; height: 100%; background: transparent url([(#CHEMIN{img_pack/attente.gif})]) center center no-repeat;"></span></div>'); ]
