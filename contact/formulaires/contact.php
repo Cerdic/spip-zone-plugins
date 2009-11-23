@@ -3,9 +3,9 @@
 function formulaires_contact_charger_dist($id_auteur=''){	
 	$valeurs = array();
 	
-	$valeurs['email_contact'] = '';
-	$valeurs['sujet_contact'] = '';
-	$valeurs['texte_contact'] = '';
+	//$valeurs['mail'] = '';
+	//$valeurs['sujet'] = '';
+	//$valeurs['texte'] = '';
 	$valeurs['destinataire'] = array();
 	$valeurs['choix_destinataires'] = '';
 	
@@ -83,10 +83,10 @@ function formulaires_contact_verifier_dist($id_auteur=''){
 	
 	if (!_request('destinataire'))
 		$erreurs['destinataire'] = _T("info_obligatoire");
-	if (!$adres = _request('email_contact'))
-		$erreurs['email_contact'] = _T("info_obligatoire");
+	if (!$adres = _request('mail'))
+		$erreurs['mail'] = _T("info_obligatoire");
 	elseif(!email_valide($adres))
-		$erreurs['email_contact'] = _T('form_prop_indiquer_email');
+		$erreurs['mail'] = _T('form_prop_indiquer_email');
 	
 	$champs_choisis = lire_config('contact/champs');
 	$champs_obligatoires = lire_config('contact/obligatoires');
@@ -97,15 +97,17 @@ function formulaires_contact_verifier_dist($id_auteur=''){
 		}
 	}
 	
-	if (!$sujet=_request('sujet_contact'))
-		$erreurs['sujet_contact'] = _T("info_obligatoire");
-	elseif(!(strlen($sujet)>3))
-		$erreurs['sujet_contact'] = _T('forum_attention_trois_caracteres');
+	//if (!$sujet=_request('sujet'))
+	//	$erreurs['sujet'] = _T("info_obligatoire");
+	//else
+	if(!(strlen(_request('sujet'))>3))
+		$erreurs['sujet'] = _T('forum_attention_trois_caracteres');
 
-	if (!$texte=_request('texte_contact'))
-		$erreurs['texte_contact'] = _T("info_obligatoire");
-	elseif(!(strlen($texte)>10))
-		$erreurs['texte_contact'] = _T('forum_attention_dix_caracteres');
+	//if (!$texte=_request('texte'))
+	//	$erreurs['texte'] = _T("info_obligatoire");
+	//else
+	if(!(strlen(_request('texte'))>10))
+		$erreurs['texte'] = _T('forum_attention_dix_caracteres');
 	
 	if ($nobot=_request('nobot'))
 		$erreurs['nobot'] = 'Vous êtes un robot. Méchant robot.';
@@ -185,9 +187,9 @@ function formulaires_contact_traiter_dist($id_auteur=''){
 	
 	include_spip('base/abstract_sql');
 	
-	$adres = _request('email_contact');
-	$sujet = _request('sujet_contact');
-	$texte = "\n\n"._request('texte_contact');
+	//$adres = _request('mail');
+	//$sujet = _request('sujet');
+	//$texte = "\n\n"._request('texte');
 	$infos = '';
 	
 	// On récupère à qui ça va être envoyé
@@ -210,8 +212,13 @@ function formulaires_contact_traiter_dist($id_auteur=''){
 	$champs_choisis = lire_config('contact/champs');
 	if (is_array($champs_choisis)){
 		foreach($champs_choisis as $champ){
-			if ($reponse_champ = _request($champ))
-				$infos .= "\n".$champs_possibles[$champ]." : ".$reponse_champ;
+			if ($reponse_champ = _request($champ)){
+				if( ($champ=='mail') OR ($champ=='sujet') OR ($champ=='texte') ){
+					$posteur[$champ] = $reponse_champ;
+				}else{
+					$infos .= "\n".$champs_possibles[$champ]." : ".$reponse_champ;
+				}
+			}
 		}
 	}
 	
@@ -219,8 +226,9 @@ function formulaires_contact_traiter_dist($id_auteur=''){
 	$horodatage = date("d / m / y à H:i:s");
 	$horodatage = "\n\n"._T('contact:horodatage', array('horodatage'=>$horodatage))."\n\n";
 	
-	$texte = $horodatage.$infos.$texte;
-	$texte .= "\n\n-- "._T('envoi_via_le_site')." ".supprimer_tags(extraire_multi($GLOBALS['meta']['nom_site']))." (".$GLOBALS['meta']['adresse_site']."/) --\n";
+	$texte = $horodatage.$infos."\n\n".$posteur['texte'];
+	$nom_site = supprimer_tags(extraire_multi($GLOBALS['meta']['nom_site']));
+	$texte .= "\n\n-- "._T('envoi_via_le_site')." ".$nom_site." (".$GLOBALS['meta']['adresse_site']."/) --\n";
 	
 	// On formate pour les accents
 	$texte = filtrer_entites($texte);
@@ -261,13 +269,13 @@ function formulaires_contact_traiter_dist($id_auteur=''){
 		$id_auteur = sql_getfetsel(
 			'id_auteur',
 			'spip_auteurs',
-			'email = '.sql_quote($adres)
+			'email = '.sql_quote($posteur['mail'])
 		);
 		if (!$id_auteur)
 			$id_auteur = sql_insertq(
 				'spip_auteurs',
 				array(
-					'email' => $adres,
+					'email' => $posteur['mail'],
 					'statut' => 'contact'
 				)
 			);
@@ -276,11 +284,11 @@ function formulaires_contact_traiter_dist($id_auteur=''){
 		$id_message = sql_insertq(
 			'spip_messages',
 			array(
-				'titre' => $sujet,
+				'titre' => $posteur['sujet'],
 				'statut' => 'publie',
 				'type' => 'contac',
 				'id_auteur' => $id_auteur,
-				'date_heure' => 'NOW()',
+				'date_heure' => date('Y-m-d H:i:s'),
 				'texte' => $message,
 				'rv' => 'non'
 			)
@@ -311,7 +319,7 @@ function formulaires_contact_traiter_dist($id_auteur=''){
 	}
 	// envoyer le mail maintenant
 	$envoyer_mail = charger_fonction('envoyer_mail','inc');
-	$envoyer_mail($mail, $sujet, $texte, $adres, "X-Originating-IP: ".$GLOBALS['ip']);
+	$envoyer_mail($mail, $posteur['sujet'], $texte, $posteur['mail'], "X-Originating-IP: ".$GLOBALS['ip']);
 		
 	// Maintenant que tout a été envoyé ou enregistré, s'il y avait des PJ il faut supprimer les fichiers
 	if ($pj_enregistrees_nom != null) {
@@ -320,7 +328,7 @@ function formulaires_contact_traiter_dist($id_auteur=''){
 		}
 	}
 	
-	$message = _T("form_prop_message_envoye");
+	$message = _T('contact:succes', array("equipe_site" => $nom_site));
 	return array('message_ok'=>$message);
 }
 

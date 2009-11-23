@@ -19,12 +19,14 @@
 	<fieldset class="previsu">
 		<legend><:previsualisation:></legend>
 		<ul>
-			[<li><strong><:contact:courriel_de:></strong> : (#ENV{email_contact})</li>]
+			[<li><strong><:contact:courriel_de:></strong> : (#ENV{mail})</li>]
 			<BOUCLE_previsu_infos(POUR){tableau #ENV{champs}}>
+			[(#CLE|match{mail|sujet|texte}|non)
 			[<li><strong>#VALEUR</strong> : (#ENV{#CLE})</li>]
+			]
 			</BOUCLE_previsu_infos>
-			[<li><strong><:form_prop_sujet:></strong> : (#ENV{sujet_contact})</li>]
-			[<li><div><strong><:info_texte_message:></strong></div>(#ENV{texte_contact}|nl2br)</li>]
+			[<li><strong><:form_prop_sujet:></strong> : (#ENV{sujet})</li>]
+			[<li><div><strong><:info_texte_message:></strong></div>(#ENV{texte}|nl2br)</li>]
 			<B_previsu_pj>
 			<li>
 				[<strong>(#ENV{erreurs}|table_valeur{infos_pj}|count|>{1}|?{<:contact:form_pj_previsu_pluriel:>,<:contact:form_pj_previsu_singulier:>})</strong>]
@@ -92,15 +94,10 @@
 				BUG
 				<//B_destinataires>
 			<//B_choix>
-			<li class='saisie_email_contact obligatoire[ (#ENV*{erreurs}|table_valeur{email_contact}|oui)erreur]'>
-				<label for="email_contact"><:form_pet_votre_email:> <strong><:info_obligatoire_02:></strong></label>
-				[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{email_contact})</span>]
-				<input type="text" class="text" name="email_contact" id="email_contact" value="#ENV{email_contact}" size="30" />
-			</li>
 			
 			<BOUCLE_infos(POUR){tableau #ENV{champs}}>
 			#SET{existe, #CHEMIN{formulaires/contact_champ_#CLE.html}}
-			[(#GET{existe}|oui)
+			[(#GET{existe}|oui)[   (#REM) <!-- contact_champ_prenom ou cle=prenom et valeur= Prénom : interet pour gestion de champs different tel que newsletter --> ]
 			[(#INCLURE{fond=formulaires/contact_champ_#CLE}{env}{name=#CLE}{titre=#VALEUR})]
 			]
 			[(#GET{existe}|non)
@@ -111,17 +108,6 @@
 			</li>
 			]
 			</BOUCLE_infos>
-			
-			<li class='saisie_sujet_contact obligatoire[ (#ENV*{erreurs}|table_valeur{sujet_contact}|oui)erreur]'>
-				<label for="sujet_contact"><:form_prop_sujet:> <strong><:info_obligatoire_02:></strong></label>
-				[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{sujet_contact})</span>]
-				<input type="text" class="text" name="sujet_contact" id="sujet_contact" value="#ENV{sujet_contact}" size="30" />
-			</li>
-			<li class='saisie_texte_contact obligatoire[ (#ENV*{erreurs}|table_valeur{texte_contact}|oui)erreur]'>
-				<label for="texte_contact"><:info_texte_message:> <strong><:info_obligatoire_02:></strong></label>
-				[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{texte_contact})</span>]
-				<textarea name="texte_contact" id="texte_contact" rows="8" cols="60">#ENV{texte_contact}</textarea>
-			</li>
 			
 			<B_pj>
 			<li class ='pieces_jointes'>

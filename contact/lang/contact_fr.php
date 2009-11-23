@@ -14,6 +14,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_ville' => 'Ville',
 	'champ_etat' => '&Eacute;tat',
 	'champ_pays' => 'Pays',
+	'champ_infolettre' => 'Infolettre',
+	'champ_civilite' => 'Civilit&eacute;',
+	'champ_sujet' => 'Sujet',
+	'champ_texte' => 'Texte',
+	'champ_mail' => 'Mail',
+	'champ_impose' => 'champ impos&eacute;',
 	
 	'configuration_description' => 'Permet de configurer le formulaire de contact.',
 	'configuration_destinataires' => 'Destinataires',
@@ -31,7 +37,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'courriel_de' => 'De',
 	'courriel_pour' => 'Pour',
 	
-	'deplacement_possible' => 'D&eacute;placement vertical possible par glisser-d&eacute;poser',
+	'deplacement_possible' => 'D&eacute;placement vertical par gliss&eacute;-d&eacute;pos&eacute;',
 	'form_destinataire' => 'Choisissez un destinataire',
 	'form_destinataires' => 'Choisissez les destinataires',
 	'form_pj_ajouter_pluriel' => 'Ajouter des pi&egrave;ces jointes',
@@ -44,12 +50,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'form_pj_titre' => 'Titre du fichier',
 	
 	'horodatage' => 'Formulaire posté le : @horodatage@.',
+	'infos_collecte' => 'Informations collect&eacute;es',
 	'infos_supplementaires' => 'Informations suppl&eacute;mentaires',
+	'informez_moi' => 'J\'accepte de recevoir, par courrier &eacute;lectronique, des informations &eacute;manant de votre organisation.',
 	
 	'sauv_message' => 'Sauvegarder les messages de contact',
 	'sauv_message_explication' => 'Permet d\'enregistrer les messages de contacts et de les afficher dans une messagerie d&eacute;di&eacute;e.',
 	'sauv_message_ok' => 'Sauvegarder les messages de contacts',
+	'succes' => 'Merci, votre message a bien &#233;t&#233; envoy&#233;.<br />Nous vous r&#233;pondrons d&#232;s que possible.<br />L\'&#233;quipe de @equipe_site@',
 	
+	'madame' => 'Madame',
+	'monsieur' => 'Monsieur',
 	'msg_contact' => 'Message de contact',
 	'msg_accueil' => 'Vous trouverez ici les messages de contact que vous avez re&ccedil;u.',
 	'msg_nouveaux' => 'Nouveaux messages',
