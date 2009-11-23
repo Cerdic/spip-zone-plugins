@@ -1,7 +1,7 @@
 
 	[(#ENV{afficher_logo}|=={oui}|oui)
 	    [(#ENV{notice}|pmb_notice_champ{'logo_src'}|oui)
-	      [(#REM|?{'','<img />'}|inserer_attribut{class,spip_logos}|inserer_attribut{src,[(#ENV{notice}|pmb_notice_champ{'logo_src'}|copie_locale)]}|image_reduire{130,0})]
+	      [(#REM|?{'','<img />'}|inserer_attribut{class,spip_logos}|inserer_attribut{src,[(#ENV{notice}|pmb_notice_champ{'logo_src'}|copie_locale{'force'})]}|image_reduire{130,0})]
 	    ]
 	]
 	      <div class="corps-conteneur surlignable">

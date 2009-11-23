@@ -33,7 +33,7 @@
 					[(#COMPTEUR_BOUCLE|>{1}|?{' ',''})
 					<li>
 						[(#GET{tab_notices}|pmb_tableau2_valeur{#CLE, logo_src}|oui)
-						    [(#REM|?{'','<img />'}|inserer_attribut{class,spip_logos}|inserer_attribut{src,[(#GET{tab_notices}|pmb_tableau2_valeur{#CLE, logo_src}|copie_locale)]}|image_reduire{130,0})]
+						    [(#REM|?{'','<img />'}|inserer_attribut{class,spip_logos}|inserer_attribut{src,[(#GET{tab_notices}|pmb_tableau2_valeur{#CLE, logo_src}|copie_locale{'force'})]}|image_reduire{130,0})]
 						]
 						<h3[(#ENV{look_TITLE}|oui) class="surlignable"]><a href="index.php?page=notice_display&id=[(#GET{tab_notices}|pmb_tableau2_valeur{#CLE, id})]">[(#GET{tab_notices}|pmb_tableau2_valeur{#CLE, titre})]</a></h3>
                 				[<small[(#ENV{look_AUTHOR}|oui) class="surlignable"]><:par_auteur:> (#GET{tab_notices}|pmb_tableau2_valeur{#CLE, lesauteurs})</small>]

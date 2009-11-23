@@ -512,7 +512,7 @@ function pmb_ws_parser_notice_xml($id_notice, $value, &$tresultat) {
 
 	    if ($gtresultat['lesauteurs'] == "")
 		  $gtresultat['lesauteurs'] = $gtresultat['auteur'];
-	     $gtresultat['logo_src'] = lire_config("spip_pmb/url","http://tence.bibli.fr/opac")."/getimage.php?url_image=http%3A%2F%2Fimages-eu.amazon.com%2Fimages%2FP%2F!!isbn!!.08.MZZZZZZZ.jpg&noticecode=".str_replace("-","",$gtresultat['isbn'])."&vigurl=";
+	     $gtresultat['logo_src'] = lire_config("spip_pmb/url","http://tence.bibli.fr/opac")."/getimage.php?url_image=http%3A%2F%2Fimages-eu.amazon.com%2Fimages%2FP%2F!!isbn!!.08.MZZZZZZZ.jpg&noticecode=".str_replace("-","",$gtresultat['isbn']);
 
 	    //cas où il n'y a pas d'image pmb renvoie un carré de 1 par 1 transparent.
 	    $tmp_img = image_reduire("<img src=\"".copie_locale($gtresultat['logo_src'])."\" />", 130, 0);
@@ -585,7 +585,7 @@ function pmb_ws_parser_notice_serialisee($id_notice, $value, &$tresultat) {
 
 	    if ($tresultat['lesauteurs'] == "")
 		  $tresultat['lesauteurs'] = $tresultat['auteur'];
-	     $tresultat['logo_src'] = lire_config("spip_pmb/url","http://tence.bibli.fr/opac")."/getimage.php?url_image=http%3A%2F%2Fimages-eu.amazon.com%2Fimages%2FP%2F!!isbn!!.08.MZZZZZZZ.jpg&noticecode=".str_replace("-","",$tresultat['isbn'])."&vigurl=";
+	     $tresultat['logo_src'] = lire_config("spip_pmb/url","http://tence.bibli.fr/opac")."/getimage.php?url_image=http%3A%2F%2Fimages-eu.amazon.com%2Fimages%2FP%2F!!isbn!!.08.MZZZZZZZ.jpg&noticecode=".str_replace("-","",$tresultat['isbn']);
 
 	     //cas où il n'y a pas d'image pmb renvoie un carré de 1 par 1 transparent.
 	    $tmp_img = image_reduire("<img src=\"".copie_locale($tresultat['logo_src'])."\" />", 130, 0);
