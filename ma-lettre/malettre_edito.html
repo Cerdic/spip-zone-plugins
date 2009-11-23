@@ -1,4 +1,7 @@
-#CACHE{0}
+[(#REM)
+  noisette pour visualiser l'edito dans la partie privée
+
+]#CACHE{0}
 #HTTP_HEADER{Content-Type: text/html; charset=utf-8}[(#REM)pour supprimer les boutons admin]
      <BOUCLE_edito(ARTICLES){id_article}>		
 			[<div class="soustitre">(#SOUSTITRE|liens_absolus)</div>]

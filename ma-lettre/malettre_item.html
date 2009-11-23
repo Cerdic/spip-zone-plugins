@@ -1,8 +1,0 @@
-#CACHE{0}
-#HTTP_HEADER{Content-Type: text/html}[(#REM)pour supprimer les boutons admin]    
-    <BOUCLE_nv11(ARTICLES){id_article}>
-    [<h1><a href="#URL_SITE_SPIP/#URL_ARTICLE">(#TITRE|supprimer_numero)</a></h1>]      
-    [<a href="#URL_SITE_SPIP/#URL_ARTICLE"><img src="(#LOGO_ARTICLE||extraire_attribut{src}|url_absolue)" alt="#ID_ARTICLE"/></a><br />]
-    [(#INTRODUCTION|liens_absolus|couper{300})<br />]
-    <a href="#URL_SITE_SPIP/#URL_ARTICLE" class="outline">#URL_SITE_SPIP/#URL_ARTICLE</a><br /> 
-    </BOUCLE_nv11>

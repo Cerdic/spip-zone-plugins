@@ -114,7 +114,6 @@ function exec_malettre(){
             		include_spip('public/assembler');
                 include_spip('inc/charsets');
             
-                $add = _request('add');
     						$lettre_title = trim(strip_tags(_request('lettre_title'))); 
                 $lettre_title = str_replace("\"","'", $lettre_title);
                 
@@ -126,36 +125,26 @@ function exec_malettre(){
       					// VERSION HTML & TXT
       					$sourceHTML = "";
       					$sourceTXT  = "";
-      					
-								$sourceHTML .= malettre_get_contents("malettre_header",0,$lang);                 // header
-								$sourceTXT  .= malettre_get_contents("malettre_txt_header",0,$lang);             
-								
-                $sourceHTML .= malettre_get_contents("malettre_edito", $id_article_edito,$lang); // edito
-                $sourceTXT  .= malettre_get_contents("malettre_txt_edito", $id_article_edito,$lang);
+      					$selection = ""; // stocke les id des articles retenus separee par une virgule
                 
     						    
                 // radio button
-                if (strlen($add)>0) {   
-      							foreach ($add as $value) {
-      								    $sourceHTML .= malettre_get_contents("malettre_item",$value,$lang);
-      								    $sourceTXT  .= malettre_get_contents("malettre_txt_item",$value,$lang);
-      							}
-      					}  							
+                $add = _request('add');
+                if (is_array($add))   
+                    $selection = implode(",", $add);
       							
                 // csv							
       					$art_csv = _request('art_csv'); 
       					$csv = explode(",", $art_csv);
-      					if (strlen($csv)>0) {							  
+      					if (is_array($csv)) {							  
       							foreach ($csv as $value2) {								
-        						$value = trim($value2);								
-          						if ($value!="") 	{
-              								$sourceHTML .= malettre_get_contents("malettre_item",$value,$lang);
-              								$sourceTXT  .= malettre_get_contents("malettre_txt_item",$value,$lang);
-              				}
+        					   	$selection .= ",".trim($value2);
         						}
-      					}					
-    						$sourceHTML .= malettre_get_contents("malettre_footer",0,$lang);                 // foot
-    						$sourceTXT  .= malettre_get_contents("malettre_txt_footer",0,$lang); 
+      					}	
+                
+                // calcul du patron				
+    						$sourceHTML .= malettre_get_contents("malettre",$id_article_edito,$selection,$lang);                 
+    						$sourceTXT  .= malettre_get_contents("malettre_txt",$id_article_edito,$selection,$lang); 
       							
       					// ecriture fichier       											
     						if ($handle = fopen($path_archive_full."/.malettre.html", w)) { 						    
