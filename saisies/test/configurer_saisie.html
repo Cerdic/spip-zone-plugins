@@ -28,9 +28,20 @@
 <body>
 	<h1>Test pour générer le formulaire de configuration d'une saisie</h1>
 	
+	<h2>Par defaut, sans configuration du nom du champ</h2>
 	<form class="formulaire_spip" action="#SELF" method="post">
 		<ul>
-			#INCLURE{fond=inclure/configurer_saisie, env, saisie=#ENV{saisie, input}}
+			#CONFIGURER_SAISIE{#ENV{saisie, input}}
+			<li class="boutons">
+				<input type="submit" class="submit" />
+			</li>
+		</ul>
+	</form>
+	
+	<h2>En forçant la configuration du nom</h2>
+	<form class="formulaire_spip" action="#SELF" method="post">
+		<ul>
+			#CONFIGURER_SAISIE{#ENV{saisie, input}, avec_nom=oui}
 			<li class="boutons">
 				<input type="submit" class="submit" />
 			</li>

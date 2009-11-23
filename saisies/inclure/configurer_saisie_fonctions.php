@@ -3,7 +3,7 @@
 // Sécurité
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function construire_configuration_saisie($saisie){
+function construire_configuration_saisie($saisie, $avec_nom='non'){
 	include_spip('inc/yaml');
 	$config = array();
 	
@@ -12,6 +12,10 @@ function construire_configuration_saisie($saisie){
 	$configuration_saisie = yaml_decode_file(find_in_path('saisies/'.$saisie.'.yaml'));
 	
 	if (is_array($configuration_base) and is_array($configuration_base_plus) and is_array($configuration_saisie)){
+		// On ne garde le premier champ permettant de configurer le "name" seulement si on le demande explicitement
+		if (!$avec_nom or ($avec_nom == 'non'))
+			array_shift($configuration_base['options']);
+		
 		$config = array_merge(
 			array(
 				array(

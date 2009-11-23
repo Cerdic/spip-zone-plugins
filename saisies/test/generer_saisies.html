@@ -111,7 +111,7 @@
 	}
 	<form class="formulaire_spip" action="#SELF" method="post">
 		<ul>
-			#INCLURE{fond=inclure/generer_saisies, env, saisies=#GET{saisies}}
+			#GENERER_SAISIES{#GET{saisies}}
 			<li class="boutons">
 				<input type="submit" class="submit" />
 			</li>
