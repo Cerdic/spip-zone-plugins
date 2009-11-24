@@ -97,7 +97,7 @@
 			
 			<BOUCLE_infos(POUR){tableau #ENV{champs}}>
 			#SET{existe, #CHEMIN{formulaires/contact_champ_#CLE.html}}
-			[(#GET{existe}|oui)[   (#REM) <!-- contact_champ_prenom ou cle=prenom et valeur= Prénom : interet pour gestion de champs different tel que newsletter --> ]
+			[(#GET{existe}|oui)
 			[(#INCLURE{fond=formulaires/contact_champ_#CLE}{env}{name=#CLE}{titre=#VALEUR})]
 			]
 			[(#GET{existe}|non)

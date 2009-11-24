@@ -2,10 +2,7 @@
 
 function formulaires_contact_charger_dist($id_auteur=''){	
 	$valeurs = array();
-	
-	//$valeurs['mail'] = '';
-	//$valeurs['sujet'] = '';
-	//$valeurs['texte'] = '';
+
 	$valeurs['destinataire'] = array();
 	$valeurs['choix_destinataires'] = '';
 	
@@ -97,15 +94,9 @@ function formulaires_contact_verifier_dist($id_auteur=''){
 		}
 	}
 	
-	//if (!$sujet=_request('sujet'))
-	//	$erreurs['sujet'] = _T("info_obligatoire");
-	//else
 	if(!(strlen(_request('sujet'))>3))
 		$erreurs['sujet'] = _T('forum_attention_trois_caracteres');
 
-	//if (!$texte=_request('texte'))
-	//	$erreurs['texte'] = _T("info_obligatoire");
-	//else
 	if(!(strlen(_request('texte'))>10))
 		$erreurs['texte'] = _T('forum_attention_dix_caracteres');
 	
@@ -187,9 +178,6 @@ function formulaires_contact_traiter_dist($id_auteur=''){
 	
 	include_spip('base/abstract_sql');
 	
-	//$adres = _request('mail');
-	//$sujet = _request('sujet');
-	//$texte = "\n\n"._request('texte');
 	$infos = '';
 	
 	// On récupère à qui ça va être envoyé
