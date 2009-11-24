@@ -20,7 +20,7 @@ Il propose
 <li>Explorateur de fichier</li>
 </ul>
 	</description>
-	<lien>http://www.trevise.org</lien>
+	<lien></lien>
 	<options>atelier_options.php</options>
 	<fonctions>atelier_fonctions.php</fonctions>
 	<prefix>atelier</prefix>
