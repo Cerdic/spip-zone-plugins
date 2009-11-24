@@ -1,0 +1,14 @@
+<!-- Début du cadre "identification"   -->
+
+		<div>#FORMULAIRE_LOGIN{#SELF}</div>			
+		<p>[(#SESSION{id_auteur}|?{Bienvenue #SESSION{nom}})]</p>
+		<BOUCLE_test_logo(CONDITION){si #SESSION|?{' ',''}}>
+ 			<BOUCLE_logo(AUTEURS){id_auteur=#SESSION{id_auteur}}>[(#LOGO_AUTEUR|center||image_reduire{100})]</BOUCLE_logo>
+		</BOUCLE_test_logo>  
+		<p>[(#SESSION{statut}|=={0minirezo}?{Statut : administrateur})]
+		[(#SESSION{statut}|=={1comite}?{Statut : rédacteur})]
+		[(#SESSION{statut}|=={6forum}?{Statut : visiteur})]</p>
+		<p>[(#SESSION{id_auteur}|?{<a href="ecrire/?exec=articles_edit&amp;new=oui" title="Réservé aux rédacteurs">Ecrire un article</a>})]</p>
+		<p>[(#SESSION{id_auteur}|?{<a href="ecrire/" title="L'espace des auteurs et des administrateurs">Espace Privé</a>})]</p>
+		<p>[(#SESSION{id_auteur}|?{' '}) <a href="[(#URL_LOGOUT{spip.php?page=sommaire})]">Se déconnecter</a>]</p>
+<!-- A revoir pour alléger un peu http://superpratix.com/?Le-filtre-ou-appeller-SIOUI-SINON-->

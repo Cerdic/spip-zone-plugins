@@ -1,0 +1,35 @@
+<INCLURE{fond=entete}{type_page=agenda}{lang}>
+
+<h2>Les événements de la journée</h2>
+<div id="seminaire">
+<BOUCLE_evenements(EVENEMENTS) {agenda date_debut, mois, (#ENV{date}|annee), (#ENV{date}|mois)}{jour_relatif=0}{statut=publie}{par titre_mot}><!-- {agenda date_debut, mois, (#ENV{date}|annee), (#ENV{date}|mois)} -->
+  				<ul class='liste_items evenements'>
+					<li class='item[(#EXPOSE)][ (#ID_EVENEMENT_SOURCE|oui)repetition]'>
+						<BOUCLE_categorie(MOTS){id_article}>
+							<div class='categorie'>#TITRE</div>
+						</BOUCLE_categorie>
+						[(#MODELE{seminaire_acm}|trim|sinon{'?'})]
+						<p class='actions'>
+							<span class='lien_article'>[<a href='[(#URL_ARTICLE)]'><:seminaire:plus:></a>]</span>
+						</p>
+					</li>
+				</ul>
+</BOUCLE_evenements>
+<script type='text/javascript'>
+function set_vevent(){
+jQuery('ul.evenements li.item')
+.find('h3.summary')
+.parents('li.item').not('.on')
+.addClass('court')
+.end()
+.find('h3.summary').not('.clicable')
+.click(function(){
+var p=jQuery(this).parent().parent();
+p.toggleClass('court');
+})
+.addClass('clicable')
+;}
+jQuery('document').ready(function(){set_vevent();onAjaxLoad(set_vevent);});
+</script>
+</div>
+<INCLURE{fond=pied}{lang}>
