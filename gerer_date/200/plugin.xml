@@ -19,7 +19,7 @@
 	<prefix> 
 	gerer_date
 	</prefix>
-	<necessite id="SPIP" version='[1.9.3;]' />
+	<necessite id="SPIP" version='[2.0.10;]' />
 	<options>gerer_date_options.php</options>
 
 </plugin>
