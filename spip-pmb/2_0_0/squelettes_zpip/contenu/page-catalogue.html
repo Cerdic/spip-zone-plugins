@@ -8,5 +8,10 @@
 </div>]
 
 
+[(#ENV{id_section}|non)
+  <INCLURE{fond=inc/inc-catalogue}{env}>
+]
+[(#ENV{id_section}|oui)
+  <INCLURE{fond=inc/inc-catalogue}{env}>
+]
 
-<INCLURE{fond=inc/inc-catalogue}{env}{tab_sections=#GET{tab_sections}}{tab_locations=#GET{tab_locations}}>

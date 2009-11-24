@@ -1,4 +1,3 @@
-<div class="formulaire_spip formulaire_moncomptepmb">
 <h2><:pmb:mon_compte:></h2>
 [(#SESSION{id_auteur}|non)
       #LOGIN_PUBLIC
@@ -6,7 +5,8 @@
       <br class="nettoyeur" />     
 ]
 [(#SESSION{id_auteur}|oui)
-          <form name="myform" method="post" action="#SELF">
+        <div class="formulaire_spip formulaire_moncomptepmb">
+	<form name="myform" method="post" action="#SELF">
 	    <fieldset>
 	    <legend><:pmb:mon_compte:></legend>
 	    <input type="hidden" name="action" value="deconnexion_pmb" />
@@ -15,7 +15,6 @@
 	    <br class="nettoyeur" />
 	  </fieldset>
 	  </form>
-     
+     </div>
 ]
 
-</div> 

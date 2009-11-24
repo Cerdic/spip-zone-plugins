@@ -1,1 +1,8 @@
-<INCLURE{fond=layout}{env}{type=page}{composition=catalogue} />
+[(#ENV{id_section}|non)
+  [(#SET{tab_locations,[(#REM|pmb_liste_locations_extraire)]})]
+  <INCLURE{fond=layout}{env}{type=page}{composition=catalogue}{tab_locations=#GET{tab_locations}} />
+]
+[(#ENV{id_section}|oui)
+  [(#SET{tab_sections,[(#ENV{id_section}|pmb_section_extraire{' '})]})]
+  <INCLURE{fond=layout}{env}{type=page}{composition=catalogue}{tab_sections=#GET{tab_sections}} />
+]
