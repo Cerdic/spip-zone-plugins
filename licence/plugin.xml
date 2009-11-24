@@ -1,0 +1,31 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	  licence
+	</nom>
+	<icon>img_pack/licence_logo.png</icon>
+	<auteur>	<!-- Auteur du plugin -->
+	  fanouch - lesguppies@free.fr - <a href="http://www.spip-contrib.net/spip.php?article2147">Site du plugins</a>
+     <br />Sur une idée originale de :  <a href='http://www.spip-contrib.net/Filtre-Licence'>erational</a> 
+	</auteur>
+	<version>
+	  0.1
+	</version>
+	<etat>
+	  test
+	</etat>
+	<description>
+		Permet de relier une licence d'utilisation à un article
+	</description>
+	<lien>
+		
+	</lien>
+	<options> <!-- fichier charge a chaque hit -->
+		licence_mes_options.php
+	</options>
+	<prefix>licence</prefix>
+	<install>base/licence_install.php</install>
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<inclure>licence.php</inclure>
+	</pipeline>
+</plugin>
