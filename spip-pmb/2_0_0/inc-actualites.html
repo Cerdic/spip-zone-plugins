@@ -1,12 +1,12 @@
 [(#REM) Articles de la rubrique ]
         <B_articles>
-        <div class="menu articles">
+        <div class="liste menu articles">
             #ANCRE_PAGINATION
             [<p class="pagination">(#PAGINATION)</p>]
 	    <h2 class="invisible"><:articles_rubrique:></h2>
-            <ul>
+            <ul class="liste-items">
                 <BOUCLE_articles(ARTICLES) {titre_mot=actualite} {par date}{inverse} {pagination}>
-                <li>
+                <li class="item">
                     	[(#LOGO_ARTICLE|#URL_ARTICLE|image_reduire{120,140})]
                     	<h3><a href="#URL_ARTICLE">#TITRE</a></h3>
                 	[<small>(#SOUSTITRE)</small>]
