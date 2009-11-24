@@ -6,7 +6,7 @@
 			
 			<p class="p1"><span>Vous pouvez lancer une recherche portant sur un ou plusieurs mots (titre, auteur, &eacute;diteur, ...).</span></p>
 
-			<div class='row'>
+			<div class='formulaire_spip formulaire_recherche_avancee'>
 
 			<form name='search_input' action='#resultats_recherche' method='get' onSubmit="if (search_input.user_query.value.length == 0) { search_input.user_query.value='*'; return true; }">
 				[<input type='hidden' name='id_section' value='(#ENV{id_section})'/>]
@@ -32,7 +32,7 @@
 				<input type='hidden' name='page' value='[(#ENV{page}|sinon{recherche})]'/>
 				<input type='hidden' name='recherche_avancee' value='1'/>
 				<input type='hidden' name='look_PMB' value='1'/>
-				<input type='text' name='recherche' class='text_query' value="[(#ENV{recherche}|sinon{*})]" size='65' />
+				<input type='text' name='recherche' class='text_query' value="[(#ENV{recherche}|sinon{*})]" size='35' />
 
 				<input type='submit' name='ok' value='Rechercher' class='boutonrechercher'/>
 				<div id='simple_search_zone'><div class='row'>

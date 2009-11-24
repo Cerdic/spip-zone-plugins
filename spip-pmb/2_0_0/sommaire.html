@@ -46,78 +46,7 @@
 		</div>
 		
 		
-		[(#REM) Derniers articles ]
-		<B_articles_recents>
-		<div class="menu articles">
-			<h2>[(#REM|?{'',<:derniers_articles:>}|image_typo{police=togase.ttf,taille=26,couleur=333300})]</h2><a href="#URL_PAGE{actualites}" class="plus-de-liens"><:toute_actualite:> +</a>
-			[(#REM) Adapter la mise en page en fonction des 3 premiers articles ]
-			<ul class="mise-en-page<BOUCLE_testlogos(ARTICLES) {id_rubrique!=34}{titre_mot=actualite}{par date}{inverse}{0,3} >[(#LOGO_ARTICLE||?{'-logo','-sans'})]</BOUCLE_testlogos>">
-				
-				[(#REM) Encarts Actualités ]
-				<BOUCLE_articles_recents(ARTICLES) {id_rubrique!=34}{titre_mot=actualite}{par date}{inverse}{0,3}{doublons} >
-				<li class="hentry[ (#COMPTEUR_BOUCLE|=={1}|?{'premier',''})][ encart-(#COMPTEUR_BOUCLE)][ (#LOGO_ARTICLE||?{'avec-logo','sans-logo'})]">
-					[<div class="logo-encart">(#LOGO_ARTICLE|#URL_ARTICLE|image_reduire{0,130}|image_recadre{90,130,center})</div>]
-					[<p class="surtitre">(#SURTITRE)</p>]
-					<h3 class="entry-title"><a href="#URL_ARTICLE" rel="bookmark">[(#TITRE|couper{30,'...'})]</a></h3>
-					<small class="invisible"><abbr class="published"[ title="(#DATE|date_iso)"]>[(#DATE|affdate_jourcourt)]</abbr></small>
-					<small>[(#SOUSTITRE)]</small>
-					[<div class="#EDIT{intro} introduction entry-content">(#INTRODUCTION|couper{[(#REM|?{'','80'}|moins{[(#SOUSTITRE|strlen)]})],'...'})</div>]
-					<a class="lire-la-suite" title="[(#TITRE|texte_backend)]" href="#URL_ARTICLE"><:lire_la_suite:> +</a>
-				</li>
-				</BOUCLE_articles_recents>
-			</ul>
-			
-		</div>
-		</B_articles_recents>
-		
-		[(#REM) Nouveaux ouvrages ]
-		<B_syndic_pmb>
-		<div class="menu articles nouveautes">
-			<h2>[(#REM|?{'',<:nouveautes:>}|image_typo{police=togase.ttf,taille=26,couleur=333300})]</h2><a href="#URL_PAGE{nouveautes}" class="plus-de-liens"><:toutes_nouveautes:> +</a>
-			<ul>
-			<BOUCLE_syndic_pmb(SYNDIC_ARTICLES_PMB){descriptif!=""}{pmb_photo_src!=""} {par hasard} {0,2}>
-				[(#SET{notice, [(#PMB_ID_NOTICE|pmb_notice_extraire{#CONFIG{spip_pmb/url},'force'})]})]
-								<li class="hentry[ (#COMPTEUR_BOUCLE|=={1}|?{'premier',''})]">
-							
-								<div class="logo-encart"><a href="#URL_PAGE{notice_display,id=#PMB_ID_NOTICE&amp;seule=1}">
-								[(#GET{notice}|pmb_notice_champ{'logo_src'}|oui)
-								      [(#REM|?{'','<img />'}|inserer_attribut{class,spip_logos}|inserer_attribut{src,[(#GET{notice}|pmb_notice_champ{'logo_src'}|copie_locale{'force'})]}|image_reduire{101,0})]
-								]
-								</a></div>
-								<h3 class="entry-title"><a href="#URL_PAGE{notice_display,id=#PMB_ID_NOTICE}"[ title="(#NOM_SITE|texte_backend)"]>[(#GET{notice}|pmb_notice_champ{'titre'}|couper{30,'...'})]</a></h3> 
-								[<small>(#GET{notice}|pmb_notice_champ{'lesauteurs'})</small>]
-								[<small>	<:serie:> : (#GET{notice}|pmb_notice_champ{'serie'})</small>]
-								[<div class="introduction entry-content">(#GET{notice}|pmb_notice_champ{'resume'}|couper{150,'...'})</div>]
-								<a class="lire-la-suite" title="[(#TITRE|texte_backend)]" href="#URL_PAGE{notice_display,id=#PMB_ID_NOTICE}"><:lire_la_suite:> +</a>
-								</li>
-			</BOUCLE_syndic_pmb>
-			</ul>
-			
-		</div>
-		</B_syndic_pmb>
-				
-		[(#REM) Coups de coeur ]
-		<BOUCLE_rubriquecoupsdecoeur(RUBRIQUES){id_rubrique=34}>
-		<B_articles_coupsdecoeur>
-		<div class="menu articles">
-			<h2>[(#TITRE|ucfirst|image_typo{police=togase.ttf,taille=26,couleur=333300})]</h2><a href="#URL_RUBRIQUE" class="plus-de-liens"><:pmb:tous_coupsdecoeur:> +</a>
-			<ul class="mise-en-page<BOUCLE_testlogoscoupscoeur(ARTICLES) {id_rubrique} {par date}{inverse}{0,3} >[(#LOGO_ARTICLE||?{'-logo','-sans'})]</BOUCLE_testlogoscoupscoeur>">
-				[(#REM) Encarts Coups de coeur ]
-				<BOUCLE_articles_coupsdecoeur(ARTICLES) {id_rubrique} {par date} {inverse} {0,3} {doublons} >
-				<li class="hentry[ (#COMPTEUR_BOUCLE|=={1}|?{'premier',''})][ encart-(#COMPTEUR_BOUCLE)][ (#LOGO_ARTICLE||?{'avec-logo','sans-logo'})]">
-					[<div class="logo-encart">(#LOGO_ARTICLE|#URL_ARTICLE|image_reduire{0,130}|image_recadre{90,130,center})</div>]
-					<h3 class="entry-title"><a href="#URL_ARTICLE" rel="bookmark">[(#TITRE|couper{30,'...'})]</a></h3>
-					<small class="invisible"><abbr class="published"[ title="(#DATE|date_iso)"]>[(#DATE|affdate_jourcourt)]</abbr></small>
-					<small>[(#SOUSTITRE)]</small>
-					[<div class="#EDIT{intro} introduction entry-content">(#INTRODUCTION|couper{[(#REM|?{'','100'}|moins{[(#SOUSTITRE|strlen)]})],'...'})</div>]
-					<a class="lire-la-suite" title="[(#TITRE|texte_backend)]" href="#URL_ARTICLE"><:lire_la_suite:> +</a>
-				</li>
-				</BOUCLE_articles_coupsdecoeur>
-			</ul>
-			
-		</div>
-		</B_articles_coupsdecoeur>
-		</BOUCLE_rubriquecoupsdecoeur>
+		<INCLURE{fond=inc/inc-sommaire}>
 
 		[(#REM) Sur le Web ]
 		<B_syndic>

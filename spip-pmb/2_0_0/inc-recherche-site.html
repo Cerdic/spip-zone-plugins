@@ -2,10 +2,10 @@
 <B_articles>
 <div class="menu articles">
 	#ANCRE_PAGINATION
-	<h2><:articles:> (#GRAND_TOTAL)</h2>
-	<ul>
+	<h2 class="h2"><:articles:> (#GRAND_TOTAL)</h2>
+	<ul class="liste-items">
 		<BOUCLE_articles(ARTICLES) {recherche} {par points}{inverse} {pagination}>
-		<li>
+		<li class="item">
 			[(#LOGO_ARTICLE|#URL_ARTICLE|image_reduire{120,140})]
               		<h3><a href="#URL_ARTICLE">#TITRE</a></h3>
        			[<small>(#SOUSTITRE)</small>]

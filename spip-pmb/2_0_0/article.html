@@ -30,7 +30,7 @@
             <div class="surlignable">
 				[<p class="#EDIT{surtitre} surtitre">(#SURTITRE)</p>]
 				<h1 class="#EDIT{titre} entry-title[ (#TITRE|strlen|>{30}|?{'titre-long',''})]">[(#TITRE|ucfirst|image_typo{police=togase.ttf,taille=30,couleur=333300,largeur=600})]</h1>
-				[(#INCLURE{fond=noisettes/socialtags}{id_article})]
+				[(#PLUGIN{socialtags}|oui)[(#INCLURE{fond=noisettes/socialtags}{id_article})]]
             </div>
 
            

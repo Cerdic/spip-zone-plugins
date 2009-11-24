@@ -1,4 +1,4 @@
-[(#SET{tab_resultat, [(#ENV**{recherche}|pmb_prepare_recherche|sinon{*}|pmb_recherche_extraire{[(#CONFIG{spip_pmb/url})], [(#ENV{look_ALL}|sinon{0})], [(#ENV{look_AUTHOR}|sinon{0})], [(#ENV{look_PUBLISHER}|sinon{0})], [(#ENV{look_COLLECTION}|sinon{0})], [(#ENV{look_SUBCOLLECTION}|sinon{0})], [(#ENV{look_CATEGORY}|sinon{0})], [(#ENV{look_INDEXINT})], [(#ENV{look_KEYWORDS}|sinon{0})], [(#ENV{look_TITLE}|sinon{0})], [(#ENV{look_ABSTRACT}|sinon{0})], [(#ENV{id_section}|sinon{0})], [(#ENV{debut}|sinon{0})], [(#ENV{fin}|sinon{5})], })]})]
+[(#SET{tab_resultat, [(#ENV**{recherche}|pmb_prepare_recherche|sinon{*}|pmb_recherche_extraire{[(#CONFIG{spip_pmb/url})], [(#ENV{look_ALL}|sinon{0})], [(#ENV{look_AUTHOR}|sinon{0})], [(#ENV{look_PUBLISHER}|sinon{0})], [(#ENV{look_COLLECTION}|sinon{0})], [(#ENV{look_SUBCOLLECTION}|sinon{0})], [(#ENV{look_CATEGORY}|sinon{0})], [(#ENV{look_INDEXINT})], [(#ENV{look_KEYWORDS}|sinon{0})], [(#ENV{look_TITLE}|sinon{0})], [(#ENV{look_ABSTRACT}|sinon{0})], [(#ENV{id_section}|sinon{0})], [(#ENV{debut}|sinon{0})], [(#ENV{fin}|sinon{5})] })]})]
 
 
 <a id="resultats_recherche"></a>
@@ -13,14 +13,14 @@
 				[(#GET{tab_resultat}|pmb_tableau2_valeur{0,nb_resultats}|>{1}|non)
 				      [<p>(#GET{tab_resultat}|pmb_tableau2_valeur{0,nb_resultats}) <:pmb:ouvrage_trouve:> :</p>]
 				 ]
-				[(#GET{tab_resultat}|pmb_tableau2_valeur{0,nb_resultats}|moins{5}|<={0}|non)<a class="pmb_pagination_suiv" href="[(#SELF|parametre_url{debut,[(#ENV{debut}|plus{5})]})]#resultats_recherche" title="<:pmb:resultats_suivants:>">>></a>]
-				[(#ENV{debut}|moins{5}|>={0}|oui)<a class="pmb_pagination_prec" href="[(#SELF|parametre_url{debut,[(#ENV{debut}|moins{5})]})]#resultats_recherche" title="<:pmb:resultats_precedents:>"><<</a>]
+				[(#GET{tab_resultat}|pmb_tableau2_valeur{0,nb_resultats}|moins{5}|<={0}|non)<a style="float: right;" class="pmb_pagination_suiv" href="[(#SELF|parametre_url{debut,[(#ENV{debut}|plus{5})]})]#resultats_recherche" title="<:pmb:resultats_suivants:>">>></a>]
+				[(#ENV{debut}|moins{5}|>={0}|oui)<a style="float: left;"  class="pmb_pagination_prec" href="[(#SELF|parametre_url{debut,[(#ENV{debut}|moins{5})]})]#resultats_recherche" title="<:pmb:resultats_precedents:>"><<</a>]
 				<br class="nettoyeur" />
 			
-				<ul>
+				<ul class="liste-items">
 			]
 			[(#COMPTEUR_BOUCLE|>{1}|?{' ',''})
-			 	<li[ (#ENV{look_ALL}|oui)class="surlignable"]>
+			 	<li class="item[ (#ENV{look_ALL}|oui)surlignable]">
 						[(#GET{tab_resultat}|pmb_tableau2_valeur{#CLE, logo_src}|oui)
 						    [(#REM|?{'','<img />'}|inserer_attribut{class,spip_logos}|inserer_attribut{src,[(#GET{tab_resultat}|pmb_tableau2_valeur{#CLE, logo_src}|copie_locale)]}|image_reduire{130,0})]
 						]
