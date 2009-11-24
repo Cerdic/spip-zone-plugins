@@ -25,12 +25,11 @@
 	<dl>
 		<dt><:abo:donnees_correspondances:></dt>
 		<BOUCLE_correspondance(AUTEURS_ELARGIS auteurs){id_auteur}>
-		<dd class="abo_nom">[(#ENV{prenom})][ (#ENV{nom_famille})]<dd>
-		<dd class="abo_adresse">[(#ENV{adresse})]</dd>
-		<dd class="abo_cp">[(#ENV{code_postal})][ (#ENV{ville})]</dd>
-		[<dd class="abo_pays">(#ENV{pays}|id_pays_to_pays)</dd>]
-		[<dd class="abo_login"><strong><:login:>&nbsp;:</strong> (#ENV{login})</dd>]
-		[<dd class="abo_email"><strong><:email:>&nbsp;:</strong> (#ENV{email})</dd>]
+		<dd class="abo_nom">[(#PRENOM)][ (#NOM_FAMILLE)]<dd>
+		<dd class="abo_adresse">[(#ADRESSE)]</dd>
+		<dd class="abo_cp">[(#CODE_POSTAL)][ (#VILLE)]</dd>
+		[<dd class="abo_pays">(#PAYS|id_pays_to_pays)</dd>]
+		[<dd class="abo_email"><strong><:email:>&nbsp;:</strong> (#EMAIL)</dd>]
 		</BOUCLE_correspondance>
 	</dl>
 </BOUCLE_ma_correspondance>
