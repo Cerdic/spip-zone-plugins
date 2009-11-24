@@ -1,0 +1,43 @@
+
+
+	[(#REM) Locations ]
+        <B_tab_resultat1>
+        <div class="menu articles">
+            <h2 class="invisible"><:articles_rubrique:></h2>
+            <ul>
+              <BOUCLE_tab_resultat1(POUR){tableau #ENV{tab_locations}}>
+                <li>
+                    	<h3><a href="[(#SELF|parametre_url{id_section,[(#ENV{tab_locations}|pmb_tableau2_valeur{#CLE,'location_id'})]}|parametre_url{titre_section,[(#ENV{tab_locations}|pmb_tableau2_valeur{#CLE,'location_caption'})]}|parametre_url{look_ALL,1})]">[(#ENV{tab_locations}|pmb_tableau2_valeur{#CLE,'location_caption'})]</a></h3>
+                	<a class="lire-la-suite" title="[(#ENV{tab_locations}|pmb_tableau2_valeur{#CLE,'location_caption'}|texte_backend)]" href="[(#SELF|parametre_url{id_section,[(#ENV{tab_locations}|pmb_tableau2_valeur{#CLE,'location_id'})]}|parametre_url{titre_section,[(#ENV{tab_locations}|pmb_tableau2_valeur{#CLE,'location_caption'})]}|parametre_url{look_ALL,1})]"><:pmb:decouvrir:> +</a>
+                </li>
+                </BOUCLE_tab_resultat1>
+            </ul>
+        </div>
+        </B_tab_resultat1>
+
+      [(#REM) Sections ]
+        <B_tab_resultat2>
+        <div class="menu articles">
+            <h2 class="invisible"><:articles_rubrique:></h2>
+            <ul>
+              <BOUCLE_tab_resultat2(POUR){tableau #ENV{tab_sections}}>
+                <li>
+                    	[(#ENV{tab_sections}|pmb_tableau2_valeur{#CLE,'section_image'}|contient{rayonnage}|non)
+			  [(#REM|?{'','<img />'}|inserer_attribut{class,spip_logos}|inserer_attribut{src,[(#ENV{tab_sections}|pmb_tableau2_valeur{#CLE,'section_image'}|copie_locale)]}image_reduire{120,140})]
+			]
+                    	<h3><a href="[(#SELF|parametre_url{id_section,[(#ENV{tab_sections}|pmb_tableau2_valeur{#CLE,'section_id'})]}|parametre_url{titre_section,[(#ENV{tab_sections}|pmb_tableau2_valeur{#CLE,'section_caption'})]}|parametre_url{look_ALL,1})]">[(#ENV{tab_sections}|pmb_tableau2_valeur{#CLE,'section_caption'})]</a></h3>
+                	<a class="lire-la-suite" title="[(#ENV{tab_sections}|pmb_tableau2_valeur{#CLE,'section_caption'}|texte_backend)]" href="[(#SELF|parametre_url{id_section,[(#ENV{tab_sections}|pmb_tableau2_valeur{#CLE,'section_id'})]}|parametre_url{titre_section,[(#ENV{tab_sections}|pmb_tableau2_valeur{#CLE,'section_caption'})]}|parametre_url{look_ALL,1})]"><:pmb:decouvrir:> +</a>
+                </li>
+                </BOUCLE_tab_resultat2>
+            </ul>
+        </div>
+        </B_tab_resultat2>
+			<INCLURE{fond=inc-recherche-avancee}{recherche}{env}>
+		
+			<INCLURE{fond=inc-recherche-catalogue}{recherche}{env}>
+			
+		
+
+	<//B_tab_resultat2>
+
+      <//B_tab_resultat1> 

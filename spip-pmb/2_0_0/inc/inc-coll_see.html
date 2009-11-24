@@ -6,7 +6,7 @@
 		</div>
 	</div>
 		
-	<div class="menu articles ouvrages">
+	<div class="liste menu articles ouvrages">
 			[(#SET{tab_notices,[(#ENV{tab_resultat}|pmb_notice_champ{'notice_ids'})]})]
 			<B_tab_resultat>
 				<br class="nettoyeur" />
@@ -16,14 +16,14 @@
 				[(#GET{tab_notices}|pmb_tableau2_valeur{0,nb_resultats}|>{1}|non)
 				      [<p>(#GET{tab_notices}|pmb_tableau2_valeur{0,nb_resultats}) <:pmb:ouvrage_trouve:> :</p>]
 				 ]
-				[(#GET{tab_notices}|pmb_tableau2_valeur{0,nb_resultats}|moins{5}|<={0}|non)<a class="pmb_pagination_suiv" href="[(#SELF|parametre_url{debut,[(#ENV{debut}|plus{5})]})]#resultats_recherche" title="<:pmb:resultats_suivants:>">>></a>]
-				[(#ENV{debut}|moins{5}|>={0}|oui)<a class="pmb_pagination_prec" href="[(#SELF|parametre_url{debut,[(#ENV{debut}|moins{5})]})]#resultats_recherche" title="<:pmb:resultats_precedents:>"><<</a>]
+				[(#GET{tab_notices}|pmb_tableau2_valeur{0,nb_resultats}|moins{5}|<={0}|non)<a style="float: right;" class="pmb_pagination_suiv" href="[(#SELF|parametre_url{debut,[(#ENV{debut}|plus{5})]})]#resultats_recherche" title="<:pmb:resultats_suivants:>">>></a>]
+				[(#ENV{debut}|moins{5}|>={0}|oui)<a style="float: left;" class="pmb_pagination_prec" href="[(#SELF|parametre_url{debut,[(#ENV{debut}|moins{5})]})]#resultats_recherche" title="<:pmb:resultats_precedents:>"><<</a>]
 				<br class="nettoyeur" />
-			<h2><:pmb:ouvrages:></h2>
-			<ul>
+			<h2 class="h2"><:pmb:ouvrages:></h2>
+			<ul class="liste-items">
 				<BOUCLE_tab_resultat(POUR){tableau #GET{tab_notices}}>
 					[(#COMPTEUR_BOUCLE|>{1}|?{' ',''})
-					<li>
+					<li class="item">
 						[(#GET{tab_notices}|pmb_tableau2_valeur{#CLE, logo_src}|oui)
 						    [(#REM|?{'','<img />'}|inserer_attribut{class,spip_logos}|inserer_attribut{src,[(#GET{tab_notices}|pmb_tableau2_valeur{#CLE, logo_src}|copie_locale{'force'})]}|image_reduire{130,0})]
 						]

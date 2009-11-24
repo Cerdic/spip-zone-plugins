@@ -1,0 +1,12 @@
+		
+[(#REM) Fil d'Ariane ]
+<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt;[(#ENV{titre_section}|oui) <a href="#URL_PAGE{catalogue}"><:catalogue:></a> [(#ENV{hierarchie_catalogue})]&gt;] <strong class="on">[(#ENV{titre_section}|sinon{<:catalogue:>})]</strong></p>
+
+[<div class="cartouche">
+	<h1 class="h1">(#ENV{titre_section}|sinon{<:catalogue:>})</h1>
+	
+</div>]
+
+
+
+<INCLURE{fond=inc/inc-catalogue}{env}{tab_sections=#GET{tab_sections}}{tab_locations=#GET{tab_locations}}>
