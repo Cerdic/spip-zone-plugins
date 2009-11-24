@@ -20,7 +20,7 @@ include_spip('inc/date');
 // http://doc.spip.org/@inc_dater_dist
 function inc_dater_dist($id, $flag, $statut, $type, $script, $date, $date_redac='')
 {
-	global $spip_lang_left, $spip_lang_right;
+	global $spip_lang_left, $spip_lang_right, $debut_date_publication;
 
 	if (preg_match("/([0-9]{4})-([0-9]{2})-([0-9]{2})( ([0-9]{2}):([0-9]{2}))?/", $date_redac, $regs)) {
 		$annee_redac = $regs[1];
@@ -42,7 +42,7 @@ function inc_dater_dist($id, $flag, $statut, $type, $script, $date, $date_redac=
 	}
 
   if ($flag) {
-
+	//Modif plugin gerer_date
 	//if ($statut == 'publie') {
 	if ($statut) {
 		$js = "class='fondl'
@@ -51,14 +51,14 @@ onchange=\"findObj_forcer('valider_date').style.visibility='visible';\"";
 		$invite =  "<b><span class='verdana1'>"
 		. _T('texte_date_publication_article')
 		. '</span> '
-		.  majuscules(affdate($date))." - ". $heure ." h ". $minute
+		.  majuscules(affdate($date))." - ". $heure ." h ". $minute //modif plugin gerer_date ajoute heure minute
 		.  "</b>"
 		. aide('artdate');
 
 		$masque = 
-		  afficher_jour($jour, "name='jour' id='jour' $js", true)
+		  afficher_jour($jour, "name='jour' id='jour' $js", true) 
 		. afficher_mois($mois, "name='mois' id='mois' $js", true)
-		. afficher_annee($annee, "name='annee' id='annee' $js")
+		. afficher_annee($annee, "name='annee' id='annee' $js", $debut_date_publication)
 		. (($type != 'article')
 		   ? ''
 		   : (' - '
@@ -126,12 +126,10 @@ onchange=\"findObj_forcer('valider_date').style.visibility='visible';\"";
  ' :</label> ' .
  afficher_jour($jour_redac, "name='jour_redac' id='jour_redac' class='fondl' onchange=$js", true) .
  afficher_mois($mois_redac, "name='mois_redac' id='mois_redac' class='fondl' onchange=$js", true) .
-afficher_annee($annee_redac, "name='annee_redac' id='annee_redac' class='fondl' onchange=$js") .
-
+ "<input type='text' name='annee_redac' id='annee_redac' class='fondl' value='".$annee_redac."' size='5' maxlength='4' onclick=$js />" .
  '<div style="text-align: center; width: 80%;">' .
-  afficher_heure($heure_redac, "name='heure_redac' id='heure_redac' class='fondl' onchange=$js", true) .
+ afficher_heure($heure_redac, "name='heure_redac' id='heure_redac' class='fondl' onchange=$js", true) .
  afficher_minute($minute_redac, "name='minute_redac' id='minute_redac' class='fondl' onchange=$js", true) .
-
  "</div></div>";
 
 
@@ -156,7 +154,7 @@ afficher_annee($annee_redac, "name='annee_redac' id='annee_redac' class='fondl' 
 		? _T('texte_date_publication_article')
 		: _T('texte_date_creation_article'))
 	. "</span> "
-	.  majuscules(affdate($date))." - ". $heure ." h ". $minute."</b>".aide('artdate')."</div>";
+	.  majuscules(affdate($date))." - ". $heure ." h ". $minute."</b>".aide('artdate')."</div>";//modif plugin gerer_date
 
 	if ($possedeDateRedac) {
 		$res .= "<div style='text-align:center;'><b><span class='verdana1'>"
