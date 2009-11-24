@@ -52,7 +52,7 @@ function Fulltext_creer_index($table, $nom, $vals) {
     // On initialise l'indexation du contenu des documents
     sql_query("UPDATE spip_documents SET contenu='', extrait='non'");
   }
-		
+
 	if (!$s = sql_alter("TABLE ".table_objet_sql($table)
 	." ADD FULLTEXT ".$index))
 		return "<strong>"._T('spip:erreur')." ".mysql_errno()." ".mysql_error()."</strong><pre>$query</pre><p />\n";
@@ -89,6 +89,11 @@ function Fulltext_regenerer_index($table) {
       }
       return "<p><strong>"._T('fulltext:index_regenere')."</strong></p>";
   }
+}
+
+function Fulltext_reinitialiser_document() {
+  sql_updateq("spip_documents", array('contenu' => '', 'extrait' => 'non'), "extrait='err'");
+  return "<p><strong>"._T('fulltext:index_reinitialise')."</strong></p>";
 }
 
 function exec_fulltext()
@@ -146,6 +151,9 @@ function exec_fulltext()
 
     if (_request('regenerer') == $table OR _request('regenerer') == 'tous')
         echo Fulltext_regenerer_index($table);
+
+	 if (_request('reinitialise') == $table OR _request('reinitialise') == 'tous')
+        echo Fulltext_reinitialiser_document();
 
 		if (!$engine = Fulltext_trouver_engine_table($table)
 		OR strtolower($engine) != 'myisam') {
@@ -209,6 +217,9 @@ function exec_fulltext()
 
   $url = generer_url_ecrire(_request('exec'), 'regenerer=tous');
   echo "<p><b><a href='$url'>"._T('fulltext:regenerer_tous')."</a></b></p>\n";
+
+  $url = generer_url_ecrire(_request('exec'), 'reinitialise=document');
+  echo "<p><b><a href='$url'>"._T('fulltext:reinitialise_index_doc')."</a></b></p>\n";
 
   // signaler les incoherences de charset site/tables qui plantent les requetes avec accents...
   // ?exec=convert_sql_utf8 => conversion base | ?exec=convert_utf8 => conversion site
