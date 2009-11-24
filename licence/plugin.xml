@@ -1,31 +1,25 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
-	  licence
-	</nom>
+	<nom>Une Licence pour mes articles</nom>
 	<icon>img_pack/licence_logo.png</icon>
-	<auteur>	<!-- Auteur du plugin -->
+	<auteur>
 	  fanouch - lesguppies@free.fr - <a href="http://www.spip-contrib.net/spip.php?article2147">Site du plugins</a>
-     <br />Sur une idée originale de :  <a href='http://www.spip-contrib.net/Filtre-Licence'>erational</a> 
+    <br />Sur une idée originale de :  <a href='http://www.spip-contrib.net/Filtre-Licence'>erational</a> 
 	</auteur>
-	<version>
-	  0.1
-	</version>
-	<etat>
-	  test
-	</etat>
-	<description>
-		Permet de relier une licence d'utilisation à un article
-	</description>
-	<lien>
-		
-	</lien>
-	<options> <!-- fichier charge a chaque hit -->
-		licence_mes_options.php
-	</options>
+	<version>0.1</version>
+	<version_base>0.1</version_base>
+	<etat>test</etat>
+	<description>Permet de relier une licence d'utilisation à un article</description>
+	<lien>http://www.spip-contrib.net/Une-licence-pour-un-article</lien>
+	<fonctions>licence_fonctions.php</fonctions>
 	<prefix>licence</prefix>
-	<install>base/licence_install.php</install>
+	<install>base/licence.php</install>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/licence.php</inclure>
+	</pipeline>
 	<pipeline>
 		<nom>affiche_milieu</nom>
-		<inclure>licence.php</inclure>
+		<inclure>licence_pipelines.php</inclure>
 	</pipeline>
+	<necessite id="SPIP" version="[2.0.10;]" />
 </plugin>
