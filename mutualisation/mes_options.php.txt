@@ -3,8 +3,11 @@
 	if (!defined("_ECRIRE_INC_VERSION")) return;
 	require _DIR_RACINE.'mutualisation/mutualiser.php';
 
+	/* placer dans ce tableau les sites ou l'on ne veut pas la redirection canonique */ 
+	$www = array();
+	
 	$site = str_replace('www.', '', $_SERVER['HTTP_HOST']);
-	if ($site != $_SERVER['HTTP_HOST']) {
+	if ($site != $_SERVER['HTTP_HOST'] AND !in_array($site, $www)) {
 		include_spip('inc/headers');
 		redirige_par_entete('http://'.$site.'/');
 	}
