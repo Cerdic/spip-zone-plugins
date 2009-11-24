@@ -22,7 +22,7 @@
       <h2 class="h2"><:autres_groupes_mots_clefs:></h2>
       <ul class="liste-items">
           <BOUCLE_groupes_freres(GROUPES_MOTS) {!id_groupe} {par titre} {doublons}>
-          <BOUCLE_mot_cousin(MOTS) {id_groupe} {par titre} {0,1}>
+          <BOUCLE_mot_cousin(MOTS) {id_groupe} {titre!=actualite}{titre!=critiques}{par titre} {0,1}>
           <li class="item"><a href="#URL_MOT">#TYPE</a></li>
           </BOUCLE_mot_cousin>
           </BOUCLE_groupes_freres>

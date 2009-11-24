@@ -1,5 +1,5 @@
 [(#REM) Fil d'Ariane ]
-<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:catalogue:> &gt; <strong class="on">[(#GET{notice}|pmb_notice_champ{'titre'}|couper{80})]</strong></p>
+<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:catalogue:> &gt; <strong class="on">[(#ENV{notice}|pmb_notice_champ{'titre'}|couper{80})]</strong></p>
 	
 
 <div class="cartouche">
@@ -12,65 +12,5 @@
 	
 </div>
 
-<div class="surlignable">
-	[<div class="#EDIT{chapo} chapo">(#CHAPO|image_reduire{500,0})</div>]
-		      <div class="pmb-ouvrage-infos">	
-			      [<p><:pmb:auteur:> : [(#ENV{notice}|pmb_notice_champ{'id_auteur'}|oui)
-							<a href="[(#URL_PAGE{author_see}|parametre_url{id,[(#ENV{notice}|pmb_notice_champ{'id_auteur'})]})]">
-						    ]
-						  (#ENV{notice}|pmb_notice_champ{'lesauteurs'})
-						  [(#ENV{notice}|pmb_notice_champ{'id_auteur'}|oui)</a>]
-			      </p>]
-			      [<p><:pmb:serie:> : (#ENV{notice}|pmb_notice_champ{'serie'})</p>]
-			      [<p><:pmb:type:> : (#ENV{notice}|pmb_notice_champ{'type'})</p>]
-			      [<p><:pmb:editeur:> : [(#ENV{notice}|pmb_notice_champ{'id_editeur'}|oui)<a href="[(#URL_PAGE{publisher_see}|parametre_url{id,[(#ENV{notice}|pmb_notice_champ{'id_editeur'})]})]">](#ENV{notice}|pmb_notice_champ{'editeur'})[(#ENV{notice}|pmb_notice_champ{'id_editeur'}|oui)</a>]</p>]
-			      [<p><:pmb:collection:> : [(#ENV{notice}|pmb_notice_champ{'id_collection'}|oui)<a href="[(#URL_PAGE{coll_see}|parametre_url{id,[(#ENV{notice}|pmb_notice_champ{'id_collection'})]})]">](#ENV{notice}|pmb_notice_champ{'collection'})[(#ENV{notice}|pmb_notice_champ{'id_collection'}|oui)</a>]</p>]
-			      [<p><:pmb:format:> : (#ENV{notice}|pmb_notice_champ{'format'})</p>]
-			      [<p><:pmb:annee_publication:> : (#ENV{notice}|pmb_notice_champ{'annee_publication'})</p>]
-			      [<p><:pmb:importance:> : (#ENV{notice}|pmb_notice_champ{'importance'})</p>]
-			      [<p><:pmb:presentation:> : (#ENV{notice}|pmb_notice_champ{'presentation'})</p>]
-			      [<p><:pmb:isbn:> : (#ENV{notice}|pmb_notice_champ{'isbn'})</p>]
-		      </div>
-		  
-	[<div class="texte">(#ENV{notice}|pmb_notice_champ{'resume'})</div>]
-</div>
-
- [<div class="pmb-autreslecteurs">
-		      <h2 class="h2"><:pmb:autres_lecteurs:></h2>
-
-		      (#ENV{notice}|pmb_notice_champ{'autres_lecteurs'})
-	      </div>]
-	
-	
-		<div class="pmb-toolbox" id="compte-lecteur">
-			<h2 class="h2"><:pmb:compte_lecteur:></h2>
-			<B_auteurpmb>
-			<BOUCLE_auteurpmb(AUTEURS_PMB){id_auteur=#SESSION{id_auteur}}>
-			      [(#ENV{afficher_toolbox}|=={non}|non)
-				    [(#PMB_SESSION|oui)
-					[(#ENV{reserver}|=={1}|oui)
-						      <strong>
-
-
-						    [(#PMB_SESSION|pmb_reserver_ouvrage{[(#ENV{notice}|pmb_notice_champ{'id'})],'','',''}|?{<:pmb:reservation_ok:>,		<:pmb:reservation_ko:>})]
-						      </strong>
-					]
-					<ul>
-						<li><a href="[(#SELF|parametre_url{reserver,1})]#compte-lecteur"><:pmb:reserver_ouvrage:></a></li>
-						<li><a href="#CONFIG{spip_pmb/url}addtags.php?noticeid=#ENV{id}" class="lien-modal"><:pmb:ajouter_tag:></a></li>
-						<li><a href="#CONFIG{spip_pmb/url}avis.php?todo=liste&noticeid=#ENV{id}" class="lien-modal"><:pmb:donner_avis:></a></li>
-					</ul>
-				    ]
-				    [(#PMB_SESSION|non)
-				      <i>Identifiez-vous pour r&eacute;server cet ouvrage ou donner votre avis.</i>
-				    ]
-			      ]
-			</BOUCLE_auteurpmb>
-			</B_auteurpmb>
-			  [(#ENV{afficher_toolbox}|=={non}|non)
-				<i>Identifiez-vous pour r&eacute;server cet ouvrage ou donner votre avis.</i>
-			  ]
-			<//B_auteurpmb>
-			
-		</div>	
+<INCLURE{fond=inc/inc-notice_display}{env}{afficher_logo=non}>
 
