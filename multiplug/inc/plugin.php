@@ -330,7 +330,7 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 				}
 				if (isset($info[$charge])){
 					foreach($info[$charge] as $file){
-						$s .= "include_once _DIR_PLUGINS.'$plug/".trim($file)."';\n";
+						$s .= "include_once _ROOT_PLUGINS.'$plug/".trim($file)."';\n";
 						$liste_fichier_verif[] = "_DIR_PLUGINS.'$plug/".trim($file)."'";
 					}
 				}
@@ -340,9 +340,9 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 		if ($charge=='options'){
 			$s .= "function boutons_plugins(){return unserialize('".str_replace("'","\'",serialize($liste_boutons))."');}\n";
 			$s .= "function onglets_plugins(){return unserialize('".str_replace("'","\'",serialize($liste_onglets))."');}\n";
-		}
-		ecrire_fichier(_DIR_TMP."charger_plugins_$charge.php",
-			$start_file . $splugs . $s . $end_file);
+			$f = _CACHE_PLUGINS_OPT; 
+		} else  $f = _CACHE_PLUGINS_FCT; 
+		ecrire_fichier($f, $start_file . $splugs . $s . $end_file); 
 	}
 
 	if (is_array($infos)){
@@ -396,9 +396,10 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 	// dans le cas d'un plugin non declare, spip etant mis devant le fait accompli
 	// hackons donc avec un "../" en dur dans ce cas, qui ne manquera pas de nous embeter un jour...
 	foreach ($liste_fichier_verif as $k => $f)
-		$liste_fichier_verif[$k] = (_DIR_RACINE?"":"../") . _DIR_PLUGINS . preg_replace(",(_DIR_PLUGINS\.)?',", "", $f);
-	ecrire_fichier(_DIR_TMP.'verifier_plugins.txt',
+		$liste_fichier_verif[$k] = (_DIR_RACINE?"":"../") . _DIR_PLUGINS . preg_replace(",(_(DIR|ROOT)_PLUGINS\.)?',", "", $f);
+	ecrire_fichier(_CACHE_PLUGINS_VERIF,
 		serialize($liste_fichier_verif));
+	@spip_unlink(_CACHE_CHEMIN);
 }
 
 // precompilation des pipelines
@@ -426,7 +427,7 @@ function pipeline_precompile(){
 					$f = "";
 					if ($p)
 						$f .= "'".substr($file,0,$p)."'.";
-					$f .= "_DIR_PLUGINS.";
+					$f .= "_ROOT_PLUGINS.";
 					$f .= "'".substr($file,$p+12)."'";
 					$s_inc .= $f;
 					$liste_fichier_verif[] = $f;
@@ -446,8 +447,7 @@ function pipeline_precompile(){
 		$content .= $s_call;
 		$content .= "return \$val;\n}\n\n";
 	}
-	ecrire_fichier(_DIR_TMP."charger_pipelines.php",
-		$start_file . $content . $end_file);
+	ecrire_fichier(_CACHE_PIPELINES, $start_file . $content . $end_file);
 	return $liste_fichier_verif;
 }
 
@@ -511,7 +511,7 @@ function desinstalle_un_plugin($plug,$infos){
 	// faire les include qui vont bien
 	foreach($infos['install'] as $file){
 		$file = trim($file);
-		if (file_exists($f = _DIR_PLUGINS."$plug/$file")){
+		if (file_exists($f = _ROOT_PLUGINS."$plug/$file")){
 			include_once($f);
 		}
 	}
@@ -536,7 +536,7 @@ function installe_un_plugin($plug,$infos){
 	// faire les include qui vont bien
 	foreach($infos['install'] as $file){
 		$file = trim($file);
-		if (file_exists($f = _DIR_PLUGINS."$plug/$file")){
+		if (file_exists($f = _ROOT_PLUGINS."$plug/$file")){
 			include_once($f);
 		}
 	}
@@ -855,7 +855,7 @@ function verifie_include_plugins() {
 // http://doc.spip.org/@message_crash_plugins
 function message_crash_plugins() {
 	if (autoriser('configurer')
-	AND lire_fichier(_DIR_TMP.'verifier_plugins.txt',$l)
+	AND lire_fichier(_CACHE_PLUGINS_VERIF,$l)
 	AND $l = @unserialize($l)) {
 		$err = array();
 		foreach ($l as $fichier) {
