@@ -17,20 +17,23 @@ function balise_INCLURE($p) {
 // cree un appel ahah vers ce recuperer_fond
 function recuperer_fond_ajax() {
 	$args = func_get_args();
+
+	if (_request('var_no_ajax'))
+		return call_user_func_array('recuperer_fond', $args);
+
 	$cle = md5(serialize($args));
-	$ajax = urlencode(encoder_contexte_ajax($args[1]));
-	$url = "?var_ajax=recuperer\x26var_ajax_env=$ajax";
+	$ajax = entites_html(encoder_contexte_ajax($args[1]));
 	$alt = entites_html(sinon($args[1]['ajaxloadalt'],$args[1]['fond']));
 	$message = $args[1]['ajaxload'];
 
-	return 
+	$url = parametre_url(self(), 'var_no_ajax', 1);
+
+	return
 	"<div class='includeajax'>
-	<a href='$url'><img src='prive/images/searching.gif' alt='$alt' /></a>
+	<a href='$url' rel=\"$ajax\"><img src='prive/images/searching.gif' alt='$alt' /></a>
 	$message
 	</div>
-	<script type='text/javascript'>
-	</script>
-	";
+";
 }
 
 function INCLUREAJAXLOAD_affichage_final($page) {
@@ -41,8 +44,14 @@ function INCLUREAJAXLOAD_affichage_final($page) {
 <script type='text/javascript'>
 	$(function() {
 		$('.includeajax').each(function() {
-			var url = $('a', this).attr('href');
-			if (url) $(this).load(url);
+			var me = $(this);
+			var env = $('a', this).attr('rel');
+			if (env)
+				$.post(
+					'spip.php',
+					{ var_ajax: 'recuperer', var_ajax_env: env },
+					function(c) { me.html(c); }
+				);
 		});
 	});
 </script>
