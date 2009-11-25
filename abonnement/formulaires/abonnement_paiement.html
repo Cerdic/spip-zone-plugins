@@ -79,7 +79,7 @@
 		Il n'y a plus qu'a mettre le bon formulaire ici...
 	]
 	
-	[(#REM) boutons de validation de test simulant la banque 
+	[(#REM) boutons de validation de test simulant la banque ]
 	[(#FORMULAIRE_PAIEMENT_FICTIF{#ARRAY{
 		montant,#GET{montant},
 		libelle,#GET{libelle},
@@ -87,13 +87,4 @@
 		args,#GET{texteLibre},
 		redirect,#URL_PAGE{validation_banque},
 	}})]
-	]
-<div>
-
-<?php 
-$id_transaction="[(#ENV*{hash}|couper{5})]"; // hash unique max 5 char
-$amount="#GET{montant}00"; // en centimes...
-$data="#GET{texteLibre}";
-include('plugins/sips/call_request.php');
-?>
-</div>
+	
