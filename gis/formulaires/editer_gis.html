@@ -1,89 +1,79 @@
 #CACHE{0}
 <div id="formMap" name="formMap" style="width: 100%; height: 350px"></div>
 <script type="text/javascript">
-
 //<![CDATA[
+(function($){
 
-var letraNH = String.fromCharCode(241);
-var letraNHNH = String.fromCharCode(209);
-var letraAacute = String.fromCharCode(225);
-var letraAAacute = String.fromCharCode(193);
-var letraEacute = String.fromCharCode(233);
-var letraEEacute = String.fromCharCode(201);
-var letraIacute = String.fromCharCode(237);
-var letraIIacute = String.fromCharCode(205);
-var letraOacute = String.fromCharCode(243);
-var letraOOacute = String.fromCharCode(211);
-var letraUacute = String.fromCharCode(250);
-var letraUUacute = String.fromCharCode(218);
+	var initMap = function() {
+		if (GBrowserIsCompatible()) {
+			// creer la carte
+			var map = new GMap2(document.getElementById("formMap"));
+			map.addControl(new GLargeMapControl());
+			map.addControl(new GMapTypeControl());
+			map.setCenter(new GLatLng([(#ENV**{lat})],[(#ENV**{lonx})]), [(#ENV**{zoom})], G_NORMAL_MAP);
 
-fecha = new Date();
-if (GBrowserIsCompatible()) {
-    // creer la carte
-    var map = new GMap2(document.getElementById("formMap"));
-    map.addControl(new GLargeMapControl());
-    map.addControl(new GMapTypeControl());
-    map.setCenter(new GLatLng([(#ENV**{lat})],[(#ENV**{lonx})]), [(#ENV**{zoom})], G_NORMAL_MAP);
-
-    // mettre a jour les coordonnees quand on clique la carte
-    GEvent.addListener(map, "click", function(overlay, point){
-		map.clearOverlays();
-		if (point) {
-			map.addOverlay(new GMarker(point));
-			map.panTo(point);
-			jQuery("#formulaire_editer_gis #lat").val(point.y);
-			jQuery("#formulaire_editer_gis #lonx").val(point.x);
-		}
-    });
-	// mettre à jour le zoom quand on le modifie
-	GEvent.addListener(map, "zoomend", function(oldlevel, newlevel){
-		jQuery("#formulaire_editer_gis #zoom").val(newlevel);
-	});
-	[(#ENV**{lat}|oui)
-	map.addOverlay(new GMarker(new GLatLng([(#ENV**{lat})],[(#ENV**{lonx})])));
-	map.setCenter(new GLatLng([(#ENV**{lat})],[(#ENV**{lonx})]));
-	]
-	[(#ENV**{recherche}|oui)
-	jQuery(document).ready(function(){
-		$("#formulaire_adresse #rechercher").css("cursor","pointer");
-		$("#formulaire_adresse #rechercher").click(function(){
-			var adresse = $("#map_adresse").attr("value");
-			var geocoder = new GClientGeocoder();
-			if (geocoder) {
-				geocoder.getLatLng(adresse, function(point) {
-					if (!point) {
-						alert(adresse + " not found");
-					} else {
-						map.setCenter(point);
-						map.clearOverlays();
-						marker = new GMarker(point,{draggable:true});
-						map.addOverlay(marker);
-						marker.openInfoWindowHtml(adresse);
-						jQuery("#formulaire_editer_gis #lat").val(point.lat());
-						jQuery("#formulaire_editer_gis #lonx").val(point.lng());
-						jQuery("#formulaire_editer_gis #zoom").val(map.getZoom());
-						GEvent.addListener(marker, 'dragend', function(){
-							var center = marker.getPoint();
-							jQuery("#formulaire_editer_gis #lat").val(center.lat());
-							jQuery("#formulaire_editer_gis #lonx").val(center.lng());
+			// mettre a jour les coordonnees quand on clique la carte
+			GEvent.addListener(map, "click", function(overlay, point){
+				map.clearOverlays();
+				if (point) {
+					map.addOverlay(new GMarker(point));
+					map.panTo(point);
+					jQuery("#formulaire_editer_gis #lat").val(point.y);
+					jQuery("#formulaire_editer_gis #lonx").val(point.x);
+				}
+			});
+			// mettre à jour le zoom quand on le modifie
+			GEvent.addListener(map, "zoomend", function(oldlevel, newlevel){
+				jQuery("#formulaire_editer_gis #zoom").val(newlevel);
+			});
+			[(#ENV**{lat}|oui)
+			map.addOverlay(new GMarker(new GLatLng([(#ENV**{lat})],[(#ENV**{lonx})])));
+			map.setCenter(new GLatLng([(#ENV**{lat})],[(#ENV**{lonx})]));
+			]
+			[(#ENV**{recherche}|oui)
+			jQuery(document).ready(function(){
+				$("#formulaire_adresse #rechercher").css("cursor","pointer");
+				$("#formulaire_adresse #rechercher").click(function(){
+					var adresse = $("#map_adresse").attr("value");
+					var geocoder = new GClientGeocoder();
+					if (geocoder) {
+						geocoder.getLatLng(adresse, function(point) {
+							if (!point) {
+								alert(adresse + " not found");
+							} else {
+								map.setCenter(point);
+								map.clearOverlays();
+								marker = new GMarker(point,{draggable:true});
+								map.addOverlay(marker);
+								marker.openInfoWindowHtml(adresse);
+								jQuery("#formulaire_editer_gis #lat").val(point.lat());
+								jQuery("#formulaire_editer_gis #lonx").val(point.lng());
+								jQuery("#formulaire_editer_gis #zoom").val(map.getZoom());
+								GEvent.addListener(marker, 'dragend', function(){
+									var center = marker.getPoint();
+									jQuery("#formulaire_editer_gis #lat").val(center.lat());
+									jQuery("#formulaire_editer_gis #lonx").val(center.lng());
+								});
+							}
 						});
 					}
+					return false;
 				});
-			}
-			return false;
-		});
+			});
+			]
+		} else {
+			alert("Sorry, the Google Maps API is not compatible with this browser");
+		}
+	};
+
+	$(function(){
+		initMap();
+		onAjaxLoad(initMap);
 	});
-	]
-
-
-} else {
-    alert("Sorry, the Google Maps API is not compatible with this browser");
-}
-
+	
+})(jQuery);
 //]]>
-
 </script>
-
 
 <div class="formulaire_spip formulaire_editer formulaire_editer_gis">
 	<!-- br class='spacer' / -->
