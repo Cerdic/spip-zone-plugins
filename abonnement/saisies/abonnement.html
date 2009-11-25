@@ -1,6 +1,11 @@
 <BOUCLE_abo(ABONNEMENTS)>
+[(#REM) 
+
+affichage des abonnements au choix dans le formulaire
+
+]
 <div class="choix">
 	<input type="radio" name="#ENV{nom}" id='champ_#ENV{nom}_#ID_ABONNEMENT'[ (#ENV{valeur}|=={#ID_ABONNEMENT}|oui)checked='checked'] value='#ID_ABONNEMENT' /> 
-	<label for="champ_#ENV{nom}_#ID_ABONNEMENT">#LIBELLE - #MONTANT Euros</label> 
+	<label for="champ_#ENV{nom}_#ID_ABONNEMENT">#LIBELLE <p><strong>#MONTANT&nbsp;Euros</strong></p></label> 
 </div>
 </BOUCLE_abo>

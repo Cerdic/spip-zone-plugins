@@ -17,18 +17,18 @@
 ]
 #CACHE{0}
 
-
 <h2><:abo:paiement:></h2>
 
 
 <BOUCLE_ma_correspondance(CONDITION){si #ENV{type_commande}}>
 	<dl>
-		<dt><:abo:donnees_correspondances:></dt>
+		<dt><h3><:abo:donnees_correspondances:></h3></dt>
 		<BOUCLE_correspondance(AUTEURS_ELARGIS auteurs){id_auteur}>
 		<dd class="abo_nom">[(#PRENOM)][ (#NOM_FAMILLE)]<dd>
 		<dd class="abo_adresse">[(#ADRESSE)]</dd>
 		<dd class="abo_cp">[(#CODE_POSTAL)][ (#VILLE)]</dd>
 		[<dd class="abo_pays">(#PAYS|id_pays_to_pays)</dd>]
+		[(#SET{le_pays,#PAYS})]
 		[<dd class="abo_email"><strong><:email:>&nbsp;:</strong> (#EMAIL)</dd>]
 		</BOUCLE_correspondance>
 	</dl>
@@ -38,10 +38,29 @@
 		<BOUCLE_mon_abonnement(CONDITION){si #ENV{type_commande}|!={article}}>
 			[(#SET{texteLibre,[abonnement-(#ENV*{hash})]})]
 			<BOUCLE_abo(ABONNEMENTS){id_abonnement=#ENV{abonnement}}>
-				<dt><:abo:mon_abonnement:></dt>
-				<dd>#LIBELLE - #MONTANT euros</dd>
+				<table>
+				<tr><th colspan="2"><h3><:abo:mon_abonnement:></h3></th></tr>
+				<tr><td>#LIBELLE</td><td><strong>#MONTANT euros</strong></td></tr>
 				#SET{montant,#MONTANT}
 				#SET{libelle,#LIBELLE}
+				
+				<BOUCLE_frais_de_port_etranger(CONDITION){si (#GET{le_pays}|!={70})}>
+					[(#SET{europe,[(#GET{le_pays}|in_array{#VAL{"6,7,18,24,36,46,57,64,65,69,77,92,111,114,126,131,132,140,150,163,175,179,182,185,187,188,207,208,212,213"}|explode{","}})]})]
+						<BOUCLE_frais_de_port_europe(CONDITION){si #GET{europe}}>
+						[
+						<tr><td><:abo:fieldset_frais_de_port:> </td><td> <strong>(#CONFIG{abonnement/prix_frais_port_europe}) euros</strong></td></tr>
+						[(#SET{montant,[(#GET{montant}|plus{#CONFIG{abonnement/prix_frais_port_europe}})]})]
+						]
+						<tr><td>Total </td><td>  <strong>[(#GET{montant})] euros </strong></td></tr>
+						</BOUCLE_frais_de_port_europe>
+						[
+						<tr><td><:abo:fieldset_frais_de_port:> </td><td> <strong>(#CONFIG{abonnement/prix_frais_port_monde}) euros</strong></td></tr>
+						[(#SET{montant,[(#GET{montant}|plus{#CONFIG{abonnement/prix_frais_port_monde}})]})]
+						]
+						<tr><td>Total </td><td>  <strong>[(#GET{montant})] euros </strong></td></tr>
+						<//B_frais_de_port_europe>
+				</BOUCLE_frais_de_port_etranger>
+			</table>
 			</BOUCLE_abo>
 		</BOUCLE_mon_abonnement>
 
@@ -60,7 +79,7 @@
 		Il n'y a plus qu'a mettre le bon formulaire ici...
 	]
 	
-	[(#REM) boutons de validation de test simulant la banque ]
+	[(#REM) boutons de validation de test simulant la banque 
 	[(#FORMULAIRE_PAIEMENT_FICTIF{#ARRAY{
 		montant,#GET{montant},
 		libelle,#GET{libelle},
@@ -68,3 +87,13 @@
 		args,#GET{texteLibre},
 		redirect,#URL_PAGE{validation_banque},
 	}})]
+	]
+<div>
+
+<?php 
+$id_transaction="[(#ENV*{hash}|couper{5})]"; // hash unique max 5 char
+$amount="#GET{montant}00"; // en centimes...
+$data="#GET{texteLibre}";
+include('plugins/sips/call_request.php');
+?>
+</div>

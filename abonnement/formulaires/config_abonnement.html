@@ -34,7 +34,7 @@
 		<fieldset>
 			<h3 class="legend"><:abo:fieldset_inscription:></h3>
 			<ul>
-			[(#SAISIE{oui_non,proposer_paiement,label=<:abo:label_proposer_paiement:>,explication=<:abo:explication_proposer_paiement:>})]
+[(#SAISIE{oui_non,proposer_paiement,label=<:abo:label_proposer_paiement:>,explication=<:abo:explication_proposer_paiement:>})]
 			</ul>
 		</fieldset>
 	</li>
@@ -80,7 +80,14 @@
 			</ul>
 		</fieldset>
 	</li>
-	
+	<li class="fieldset">
+		<fieldset>
+			<h3 class="legend"><:abo:fieldset_frais_de_port:></h3>
+			<ul>			[(#SAISIE{input,prix_frais_port_europe,label=<:abo:label_frais_port_europe:>,explication=<:abo:explication_tarif:>})]
+				[(#SAISIE{input,prix_frais_port_monde,label=<:abo:label_frais_port_monde:>,explication=<:abo:explication_tarif:>})]
+			</ul>
+		</fieldset>
+	</li>
 	<li class="fieldset">
 		<fieldset>
 			<h3 class="legend"><:abo:fieldset_articles_payants:></h3>
