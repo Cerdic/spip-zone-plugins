@@ -1,0 +1,23 @@
+[(#REM)
+
+  Squelette
+  (c) 2009 xxx
+  Distribue sous licence GPL
+
+][(#HTTP_HEADER{Content-type: text/plain[; charset=(#CHARSET)]})]
+[[(#NOM_SITE_SPIP|textebrut)]] [<:forum_forum:>][ (#TITRE|nettoyer_titre_email)]
+
+<:form_forum_message_auto:>
+
+. $forum_poste_par[
+(#STATUT|=={publie})<:forum_ne_repondez_pas:>][
+(#STATUT|=={spam}) (SPAM)][
+(#URL|url_absolue)][
+
+
+** #TITRE **
+[(#TEXTE|textebrut)]
+
+[#NOM_SITE
+(#URL_SITE)]
+#FILTRE{supprimer_tags|filtrer_entites|trim}

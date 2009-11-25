@@ -1,16 +1,9 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
-	Notifications
-	</nom>
-	<auteur>	<!-- Auteur du plugin -->
-	fil@rezo.net
-	</auteur>
-	<version>
-	0.4
-	</version>
-	<etat>
-	dev
-	</etat>
+	<nom>Notifications</nom>
+	<auteur>fil@rezo.net</auteur>
+	<version>0.5.0</version>
+	<etat>dev</etat>
+	<icon>notifications.png</icon>
 	<description>
 		<multi>
 			[fr]
@@ -26,9 +19,7 @@
 				[Documentation sur Spip-Contrib->http://www.spip-contrib.net/Le-plugin-notifications] (Fr. not yet available in English)
 		</multi>
 	</description>
-	<prefix>
-	Notifications
-	</prefix>
+	<prefix>notifications</prefix>
 
 	<pipeline>
 		<nom>pre_edition</nom>
@@ -43,14 +34,12 @@
 		<inclure>notifications.php</inclure>
 	</pipeline>
 
-	<icon>notifications.png</icon>
-
 	<pipeline>
 		<nom>taches_generales_cron</nom>
 		<inclure>cron.php</inclure>
 	</pipeline>
 
-	<necessite id='spip' version='[1.9.2;]' />
+	<necessite id='spip' version='[2.0.10;]' />
 	<necessite id='cfg' version='[1.0;]' />
 
 </plugin>
