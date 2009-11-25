@@ -37,6 +37,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	"fieldset_confirmation" => "Mail de confirmation d'abonnement",
 	"fieldset_echec" => "Mail d'&eacute;chec de l'abonnement",
 	"fieldset_message_confirmation" => "Message affiché sur la page de retour de la banque",
+	"fieldset_frais_de_port" => "Participation aux frais de port",
 	"fieldset_articles_payants" => "Articles payants",
 	"fieldset_relance" => "Email de relance a &eacute;ch&eacute;ance",
 	"fieldset_relance_avant_1" => "Email de relance avant &eacute;ch&eacute;ance 1",
@@ -71,6 +72,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	"label_commentaire" => "Commentaires",
 	"label_tarif" => "Tarif",
 	"label_montant" => "Montant",
+	"label_frais_port_europe" => "Montant des frais de port pour l'europe",
+	"label_frais_port_monde" => "Montant des frais de port pour le reste du monde",
 	"explication_tarif" => "Indiquer le prix en euros.",
 	"label_proposer_paiement" => "Proposer le paiment à l'inscription",
 	"explication_proposer_paiement" => "Proposer un formulaire de paiement
@@ -114,7 +117,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// page de test de commande
 	"paiement" => "Paiement",
 	"donnees_correspondances" => "Mes donn&eacute;es de correspondance",
-	"mon_abonnement" => "Mon abonnement",
+	"mon_abonnement" => "Abonnement",
 	"mon_article" => "Mon article",
 	"simulation_paiement" => "Tester une simulation de paiement avec ces boutons",
 
