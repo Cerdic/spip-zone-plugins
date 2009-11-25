@@ -10,7 +10,7 @@
 	if(document.all)window.external.AddFavorite(u,t);
 };
 (function($) { $(function(){
-var selector = $('[(#CONFIG{socialtags/jsselector})]');
+var selector = $('[(#CONFIG{socialtags/jsselector}|sinon{#contenu})]');
 if (!selector.length) return;
 var socialtags = [(#CONFIG{socialtags/tags}|socialtags_json)];
 var title = $('title').text() ||'';
