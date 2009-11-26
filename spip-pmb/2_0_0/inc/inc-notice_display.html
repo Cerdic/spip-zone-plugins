@@ -9,21 +9,21 @@
 		      
 		     [(#ENV{afficher_info}|=={non}|non)
 		      <div class="pmb-ouvrage-infos">	
-			      [<p><:pmb:auteur:> : [(#ENV{notice}|pmb_notice_champ{'id_auteur'}|oui)
+			      [<p><strong><:pmb:auteur:></strong> : [(#ENV{notice}|pmb_notice_champ{'id_auteur'}|oui)
 							<a href="[(#URL_PAGE{author_see}|parametre_url{id,[(#ENV{notice}|pmb_notice_champ{'id_auteur'})]})]">
 						    ]
 						  (#ENV{notice}|pmb_notice_champ{'lesauteurs'})
 						  [(#ENV{notice}|pmb_notice_champ{'id_auteur'}|oui)</a>]
 			      </p>]
-			      [<p><:pmb:serie:> : (#ENV{notice}|pmb_notice_champ{'serie'})</p>]
-			      [<p><:pmb:type:> : (#ENV{notice}|pmb_notice_champ{'type'})</p>]
-			      [<p><:pmb:editeur:> : [(#ENV{notice}|pmb_notice_champ{'id_editeur'}|oui)<a href="[(#URL_PAGE{publisher_see}|parametre_url{id,[(#ENV{notice}|pmb_notice_champ{'id_editeur'})]})]">](#ENV{notice}|pmb_notice_champ{'editeur'})[(#ENV{notice}|pmb_notice_champ{'id_editeur'}|oui)</a>]</p>]
-			      [<p><:pmb:collection:> : [(#ENV{notice}|pmb_notice_champ{'id_collection'}|oui)<a href="[(#URL_PAGE{coll_see}|parametre_url{id,[(#ENV{notice}|pmb_notice_champ{'id_collection'})]})]">](#ENV{notice}|pmb_notice_champ{'collection'})[(#ENV{notice}|pmb_notice_champ{'id_collection'}|oui)</a>]</p>]
-			      [<p><:pmb:format:> : (#ENV{notice}|pmb_notice_champ{'format'})</p>]
-			      [<p><:pmb:annee_publication:> : (#ENV{notice}|pmb_notice_champ{'annee_publication'})</p>]
-			      [<p><:pmb:importance:> : (#ENV{notice}|pmb_notice_champ{'importance'})</p>]
-			      [<p><:pmb:presentation:> : (#ENV{notice}|pmb_notice_champ{'presentation'})</p>]
-			      [<p><:pmb:isbn:> : (#ENV{notice}|pmb_notice_champ{'isbn'})</p>]
+			      [<p><strong><:pmb:serie:></strong> : (#ENV{notice}|pmb_notice_champ{'serie'})</p>]
+			      [<p><strong><:pmb:type:></strong> : (#ENV{notice}|pmb_notice_champ{'type'})</p>]
+			      [<p><strong><:pmb:editeur:></strong> : [(#ENV{notice}|pmb_notice_champ{'id_editeur'}|oui)<a href="[(#URL_PAGE{publisher_see}|parametre_url{id,[(#ENV{notice}|pmb_notice_champ{'id_editeur'})]})]">](#ENV{notice}|pmb_notice_champ{'editeur'})[(#ENV{notice}|pmb_notice_champ{'id_editeur'}|oui)</a>]</p>]
+			      [<p><strong><:pmb:collection:></strong> : [(#ENV{notice}|pmb_notice_champ{'id_collection'}|oui)<a href="[(#URL_PAGE{coll_see}|parametre_url{id,[(#ENV{notice}|pmb_notice_champ{'id_collection'})]})]">](#ENV{notice}|pmb_notice_champ{'collection'})[(#ENV{notice}|pmb_notice_champ{'id_collection'}|oui)</a>]</p>]
+			      [<p><strong><:pmb:format:></strong> : (#ENV{notice}|pmb_notice_champ{'format'})</p>]
+			      [<p><strong><:pmb:annee_publication:></strong> : (#ENV{notice}|pmb_notice_champ{'annee_publication'})</p>]
+			      [<p><strong><:pmb:importance:></strong> : (#ENV{notice}|pmb_notice_champ{'importance'})</p>]
+			      [<p><strong><:pmb:presentation:></strong> : (#ENV{notice}|pmb_notice_champ{'presentation'})</p>]
+			      [<p><strong><:pmb:isbn:></strong> : (#ENV{notice}|pmb_notice_champ{'isbn'})</p>]
 		      </div>
 		      ]
 		      [(#ENV{afficher_resume}|=={oui}|oui)

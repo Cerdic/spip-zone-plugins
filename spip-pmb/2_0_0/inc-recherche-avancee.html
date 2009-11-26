@@ -34,7 +34,9 @@
 				<input type='hidden' name='look_PMB' value='1'/>
 				<input type='text' name='recherche' class='text_query' value="[(#ENV{recherche}|sinon{*})]" size='35' />
 
-				<input type='submit' name='ok' value='Rechercher' class='boutonrechercher'/>
+				<div class="boutons">
+					<input type='submit' name='ok' value='Rechercher' class='boutonrechercher'/>
+				</div>
 				<div id='simple_search_zone'><div class='row'>
 				
 						<span style='width: 30%; float: left;'><input type='checkbox' name='look_TITLE' id='look_TITLE' value='1'[(#ENV{look_TITLE}|=={1}|?{' ',''})checked="checked"]  /><label for='look_TITLE'> Titres </label></span>
