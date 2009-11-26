@@ -32,8 +32,8 @@
 			]
 			[(#ENV**{recherche}|oui)
 			jQuery(document).ready(function(){
-				$("#formulaire_adresse #rechercher").css("cursor","pointer");
-				$("#formulaire_adresse #rechercher").click(function(){
+				jQuery("#map_adresse").focus(function(){jQuery(this).val("");});
+				$(".rechercher_adresse #rechercher").css("cursor","pointer").click(function(){
 					var adresse = $("#map_adresse").attr("value");
 					var geocoder = new GClientGeocoder();
 					if (geocoder) {
@@ -80,20 +80,15 @@
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	[(#ENV{editable})
-	[(#ENV{recherche}|oui)
-	<form id="formulaire_adresse">
-	<ul>
-		<li>
-			<input type="text" class="text" name="map_adresse" id="map_adresse" value="<:gis:address:>" onfocus="this.value='';" style="width: 85%;" />
-			<a id="rechercher"><:gis:label_address:></a>
-		</li>
-	</ul>
-	</form>]
 	<form method='post' action='#ENV{action}' enctype='multipart/form-data' name='formulaire_editer_gis' id='formulaire_editer_gis'><div>
 		[(#REM) declarer les hidden qui declencheront le service du formulaire 
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
-		<ul>
+		<ul>[(#ENV{recherche}|oui)
+			<li class="rechercher_adresse">
+				<input type="text" class="text" name="map_adresse" id="map_adresse" value="<:gis:address:>" />
+				<a id="rechercher"><:gis:label_address:></a>
+			</li>]
 			<li class="editer_lat obligatoire[ (#ENV**{erreurs}|table_valeur{lat}|oui)erreur]">
 				<label for="lat">Latitude</label>
 				<input type="text" name="lat" id="lat" class="text" value="[(#ENV**{lat})]" />
