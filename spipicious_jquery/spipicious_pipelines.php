@@ -73,7 +73,7 @@ function spipicious_insert_head($flux){
 					},
 					formatResult: function(data, i, n, value) {
 						return data[1];
-					},
+					}
 				}
 			);
 			spipicious.result(function(event, data, formatted) {
