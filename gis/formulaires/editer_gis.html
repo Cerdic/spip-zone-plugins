@@ -31,36 +31,33 @@
 			map.setCenter(new GLatLng([(#ENV**{lat})],[(#ENV**{lonx})]));
 			]
 			[(#ENV**{recherche}|oui)
-			jQuery(document).ready(function(){
-				jQuery("#map_adresse").focus(function(){jQuery(this).val("");});
-				$(".rechercher_adresse #rechercher").css("cursor","pointer").click(function(){
-					var adresse = $("#map_adresse").attr("value");
-					var geocoder = new GClientGeocoder();
-					if (geocoder) {
-						geocoder.getLatLng(adresse, function(point) {
-							if (!point) {
-								alert(adresse + " not found");
-							} else {
-								map.setCenter(point);
-								map.clearOverlays();
-								marker = new GMarker(point,{draggable:true});
-								map.addOverlay(marker);
-								marker.openInfoWindowHtml(adresse);
-								jQuery("#formulaire_editer_gis #lat").val(point.lat());
-								jQuery("#formulaire_editer_gis #lonx").val(point.lng());
-								jQuery("#formulaire_editer_gis #zoom").val(map.getZoom());
-								GEvent.addListener(marker, 'dragend', function(){
-									var center = marker.getPoint();
-									jQuery("#formulaire_editer_gis #lat").val(center.lat());
-									jQuery("#formulaire_editer_gis #lonx").val(center.lng());
-								});
-							}
-						});
-					}
-					return false;
-				});
-			});
-			]
+			jQuery("#map_adresse").focus(function(){jQuery(this).val("");});
+			$(".rechercher_adresse #rechercher").css("cursor","pointer").click(function(){
+				var adresse = $("#map_adresse").attr("value");
+				var geocoder = new GClientGeocoder();
+				if (geocoder) {
+					geocoder.getLatLng(adresse, function(point) {
+						if (!point) {
+							alert(adresse + " not found");
+						} else {
+							map.setCenter(point);
+							map.clearOverlays();
+							marker = new GMarker(point,{draggable:true});
+							map.addOverlay(marker);
+							marker.openInfoWindowHtml(adresse);
+							jQuery("#formulaire_editer_gis #lat").val(point.lat());
+							jQuery("#formulaire_editer_gis #lonx").val(point.lng());
+							jQuery("#formulaire_editer_gis #zoom").val(map.getZoom());
+							GEvent.addListener(marker, 'dragend', function(){
+								var center = marker.getPoint();
+								jQuery("#formulaire_editer_gis #lat").val(center.lat());
+								jQuery("#formulaire_editer_gis #lonx").val(center.lng());
+							});
+						}
+					});
+				}
+				return false;
+			});]
 		} else {
 			alert("Sorry, the Google Maps API is not compatible with this browser");
 		}
