@@ -33,6 +33,11 @@
 		<action>go</action>
 		<inclure>notifications.php</inclure>
 	</pipeline>
+	
+	<pipeline>
+		<nom>notifications_destinataires</nom>
+		<inclure>notifications_pipelines.php</inclure>
+	</pipeline>
 
 	<pipeline>
 		<nom>taches_generales_cron</nom>
