@@ -21,8 +21,7 @@ $GLOBALS['notifications_post_edition']['spip_signatures'] = "petitionsignee";
 
 // Initialise les reglages sous forme de tableau
 function notifications_go($x) {
-	if (!is_array($GLOBALS['notifications']
-	= @unserialize($GLOBALS['meta']['notifications'])))
+	if (!is_array($GLOBALS['notifications']	= @unserialize($GLOBALS['meta']['notifications'])))
 		$GLOBALS['notifications'] = array();
 	return $x;
 }
@@ -36,12 +35,12 @@ function notifications_go($x) {
  * @return array
  */
 function notifications_post_edition($x) {
-	spip_log($x,'notifications');
-
+	#spip_log($x,'notifications');
 	if (isset($x['args']['table'])
-		AND $quoi=$GLOBALS['notification_post_edition'][$x['args']['table']]
-	  AND $notification = charger_fonction($quoi,'notifications',true)) {
-			$notification($quoi,$x['args']['id_objet']);
+		AND $quoi=$GLOBALS['notifications_post_edition'][$x['args']['table']]) {
+			// repasser par l'entree principale
+			$notifications = charger_fonction('notifications','inc');
+			$notifications($quoi,$x['args']['id_objet'],array());
 	}
 
 	return $x;
