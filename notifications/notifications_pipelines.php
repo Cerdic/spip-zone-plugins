@@ -8,6 +8,15 @@
 
 $GLOBALS['notifications_post_edition']['spip_signatures'] = "petitionsignee";
 
+// Initialise les reglages sous forme de tableau
+function notifications_go($x) {
+	if (!is_array($GLOBALS['notifications']
+	= @unserialize($GLOBALS['meta']['notifications'])))
+		$GLOBALS['notifications'] = array();
+	return $x;
+}
+
+
 /**
  * Pipeline post-edition
  * pour permettre de se pluger sur une modification en base non notifiee par defaut
@@ -108,7 +117,7 @@ function notifications_notifications_destinataires($flux) {
 	AND !$GLOBALS['visiteur_session']['id_auteur']) {
 		$msg = Notifications_jeuneposteur($t, $email);
 		if ($t['email_auteur'] == 'fil@rezo.net')
-			Notifications_envoi($t['email_auteur'], $msg['subject'], $msg['body']);
+			notifications_envoyer_mails($t['email_auteur'], $msg['body'],$msg['subject'])
 	}
 */
 ?>

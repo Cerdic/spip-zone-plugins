@@ -3,14 +3,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// Initialise les reglages sous forme de tableau
-function Notifications_go($x) {
-	if (!is_array($GLOBALS['notifications']
-	= @unserialize($GLOBALS['meta']['notifications'])))
-		$GLOBALS['notifications'] = array();
-	return $x;
-}
-
 
 // Regarder si l'auteur est dans la base de donnees, sinon l'ajouter
 // comme s'il avait demande a s'inscrire comme visiteur
@@ -18,6 +10,15 @@ function Notifications_go($x) {
 // pour ca on va regarder dans les forums existants
 // Si c'est la personne connectee, c'est plus facile
 function Notifications_creer_auteur($email) {
+			if ($GLOBALS['notifications']['suivi']) {
+			$a = Notifications_creer_auteur($email);
+			if (is_array($a)
+			AND isset($a['id_auteur']))
+				$url = url_absolue(generer_url_public('suivi'));
+
+			$bodyc .= "\n\n$url\n";
+		}
+
 	include_spip('base/abstract_sql');
 	if (!$a = sql_fetsel('*', 'spip_auteurs', 'email='.sql_quote($email))) {
 		if ($GLOBALS['visiteur_session']['session_email'] === $email
@@ -63,32 +64,6 @@ function Notifications_creer_auteur($email) {
 
 	return $a;
 }
-
-
-// Envoi des notifications
-function Notifications_envoi($emails, $subject, $body) {
-	$envoyer_mail = charger_fonction('envoyer_mail','inc');
-	include_spip('inc/filtres'); # pour email_valide()
-
-	// Attention $email peut etre une liste d'adresses, et on verifie qu'elle n'a pas de doublon
-	$emails = array_unique(array_filter(array_map('email_valide',array_map('trim', explode(',',$emails)))));
-	foreach ($emails as $email) {
-		$bodyc = $body;
-		if ($GLOBALS['notifications']['suivi']) {
-			$a = Notifications_creer_auteur($email);
-			if (is_array($a)
-			AND isset($a['id_auteur']))
-				$url = url_absolue(generer_url_public('suivi'));
-
-			$bodyc .= "\n\n$url\n";
-		}
-		if (!function_exists('job_queue_add'))
-			$envoyer_mail($email, $subject, $bodyc);
-		else
-			job_queue_add('envoyer_mail',"->$email : $subject",array($email, $subject, $bodyc),'inc/');
-	}
-}
-
 
 
 /*

@@ -22,16 +22,16 @@
 	<prefix>notifications</prefix>
 
 	<pipeline>
-		<nom>post_edition</nom>
-		<action>poost_edition</action>
-		<inclure>notifications_pipelines.php</inclure>
-	</pipeline>
-
-	<pipeline>
 		<nom>notifications</nom>
 		<!-- action vide pour provoquer l'inclusion de notifications.php -->
 		<action>go</action>
-		<inclure>notifications.php</inclure>
+		<inclure>notifications_pipelines.php</inclure>
+	</pipeline>
+	
+	<pipeline>
+		<nom>post_edition</nom>
+		<action>poost_edition</action>
+		<inclure>notifications_pipelines.php</inclure>
 	</pipeline>
 	
 	<pipeline>
