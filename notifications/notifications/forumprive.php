@@ -51,10 +51,11 @@ function notifications_forumprive_dist($quoi, $id_forum, $options) {
 		}
 	}
 
-	// 2. Les moderateurs
-	if ($GLOBALS['notifications']['moderateurs_forum_prive'])
-	foreach (explode(',', $GLOBALS['notifications']['moderateurs_forum_prive']) as $m) {
-		$tous[] = $m;
+// 2. Les moderateurs
+	if ($GLOBALS['notifications']['moderateurs_forum_prive']){
+		foreach (explode(',', $GLOBALS['notifications']['moderateurs_forum_prive']) as $m) {
+			$tous[] = $m;
+		}
 	}
 
 	$options['forum'] = $t;

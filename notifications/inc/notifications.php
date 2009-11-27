@@ -208,14 +208,14 @@ function email_notification_forum ($t, $email) {
 		 ($t['email_auteur'] ? ' <' . $t['email_auteur'] . '>' : ''));
 
 	$titre = textebrut(typo($t['titre_source']));
-	$forum_poste_par = $t['id_article']
+	$forum_poste_par = ($t['id_article']
 		? _T('forum_poste_par', array(
-			'parauteur' => $parauteur, 'titre' => $titre)). "\n\n"
-		: $parauteur . ' (' . $titre . ')';
+			'parauteur' => $parauteur, 'titre' => $titre))
+		: $parauteur . ' (' . $titre . ')');
 
 	$t['par_auteur'] = $forum_poste_par;
 
-	$corps = recuperer_fond("notifications/forum_poste",$contexte[$t['id_forum']]);
+	$corps = recuperer_fond("notifications/forum_poste",$t);
 
 	if ($l)
 		lang_select();

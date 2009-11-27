@@ -9,18 +9,21 @@
 
 <:form_forum_message_auto:>
 
-. $forum_poste_par[
+[(#ENV{par_auteur})
+][
 (#STATUT|=={publie})<:forum_ne_repondez_pas:>][
 (#STATUT|=={spam}) (SPAM)][
-(#URL|url_absolue)][
+(#ENV{url}|url_absolue)]
 
 
-** #TITRE **
-[(#TEXTE|textebrut)]
+** #TITRE **[
+(#TEXTE|textebrut)
+][
 
-[#NOM_SITE
-(#URL_SITE)][
+#NOM_SITE
+(#ENV{url_site})][
 
 ----
 (#LIENS)]
+
 #FILTRE{supprimer_tags|filtrer_entites|trim}
