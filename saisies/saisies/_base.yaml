@@ -1,12 +1,12 @@
 
-titre: 'lang:saisies:saisie_base_titre'
+titre: '<:saisies:saisie_base_titre:>'
 options:
   -
     saisie: 'input'
     options:
       nom: 'nom'
-      label: 'lang:saisies:option_nom_label'
-      explication: 'lang:saisies:option_nom_explication'
+      label: '<:saisies:option_nom_label:>'
+      explication: '<:saisies:option_nom_explication:>'
       obligatoire: 'oui'
     verifier:
       type: 'regex'
@@ -16,15 +16,15 @@ options:
     saisie: 'input'
     options:
       nom: 'label'
-      label: 'lang:saisies:option_label_label'
-      explication: 'lang:saisies:option_label_explication'
+      label: '<:saisies:option_label_label:>'
+      explication: '<:saisies:option_label_explication:>'
   -
     saisie: 'input'
     options:
       nom: 'defaut'
-      label: 'lang:saisies:option_defaut_label'
+      label: '<:saisies:option_defaut_label:>'
   -
     saisie: 'oui_non'
     options:
       nom: 'obligatoire'
-      label: 'lang:saisies:option_obligatoire_label'
+      label: '<:saisies:option_obligatoire_label:>'

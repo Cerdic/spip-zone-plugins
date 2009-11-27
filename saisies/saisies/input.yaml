@@ -1,27 +1,27 @@
 
-titre: 'lang:saisies:saisie_input_titre'
-explication: 'lang:saisies:saisie_input_explication'
+titre: '<:saisies:saisie_input_titre:>'
+explication: '<:saisies:saisie_input_explication:>'
 options:
   -
     saisie: 'selection'
     options:
       nom: 'type'
-      label: 'lang:saisies:option_type_label'
-      explication: 'lang:saisies:option_type_explication'
+      label: '<:saisies:option_type_label:>'
+      explication: '<:saisies:option_type_explication:>'
       datas:
-        text: 'lang:saisies:option_type_text'
-        password: 'lang:saisies:option_type_password'
+        text: '<:saisies:option_type_text:>'
+        password: '<:saisies:option_type_password:>'
   -
     saisie: 'input'
     options:
       nom: 'class'
-      label: 'lang:saisies:option_class_label'
+      label: '<:saisies:option_class_label:>'
   -
     saisie: 'input'
     options:
       nom: 'size'
-      label: 'lang:saisies:option_size_label'
-      explication: 'lang:saisies:option_size_explication'
+      label: '<:saisies:option_size_label:>'
+      explication: '<:saisies:option_size_explication:>'
     verifier:
       type: 'entier'
       options:
@@ -30,8 +30,8 @@ options:
     saisie: 'input'
     options:
       nom: 'maxlength'
-      label: 'lang:saisies:option_maxlength_label'
-      explication: 'lang:saisies:option_maxlength_explication'
+      label: '<:saisies:option_maxlength_label:>'
+      explication: '<:saisies:option_maxlength_explication:>'
     verifier:
       type: 'entier'
       options:

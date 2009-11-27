@@ -62,10 +62,10 @@ function generer_saisie($champ, $env){
 function saisies_transformer_langue($valeur){
 	// Si la valeur est bien une chaine (et pas non plus un entier déguisé)
 	if (is_string($valeur) and !intval($valeur)){
-		// Si la chaine commence par lang: on passe à _T()
-		if (strpos($valeur, 'lang:') === 0)
-			$valeur = _T(substr($valeur, 5));
-		// Si la chaine contient du <multi> on appele typo() pour transformer
+		// Si la chaine est du type <:truc:> on passe à _T()
+		if (preg_match('/^<:([\w:]+):>$/', $valeur, $captures))
+			$valeur = _T($captures[1]);
+		// OU BIEN si la chaine contient du <multi> on appele typo() pour transformer
 		elseif (strpos($valeur, '<multi>') !== false)
 			$valeur = typo($valeur);
 	}
