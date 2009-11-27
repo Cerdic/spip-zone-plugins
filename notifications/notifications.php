@@ -93,96 +93,6 @@ function Notifications_envoi($emails, $subject, $body) {
 
 
 
-function notifications_forumprive($quoi, $id_forum) {
-	include_spip('base/abstract_sql');
-	$s = sql_select("*","spip_forum","id_forum=".intval($id_forum));
-	if (!$t = sql_fetch($s))
-		return;
-
-	include_spip('inc/texte');
-	include_spip('inc/filtres');
-	include_spip('inc/autoriser');
-
-
-	// Qui va-t-on prevenir ?
-	$tous = array();
-
-	// 1. Prevenir les auteurs
-	if ($GLOBALS['notifications']['prevenir_auteurs_prive']) {
-
-		// 1.1. Les auteurs du message (si c'est un message)
-		if ($t['id_message']) {
-			$result = sql_select("auteurs.email","spip_auteurs AS auteurs, spip_auteurs_messages AS lien","lien.id_message=".intval($t['id_message'])." AND auteurs.id_auteur=lien.id_auteur");
-	
-			while ($qui = sql_fetch($result))
-				$tous[] = $qui['email'];
-	
-			if (function_exists('generer_url_entite')) {
-				$url = url_absolue(generer_url_entite($id_message, 'message'));
-			} else {
-				charger_generer_url(false);
-				$url = generer_url_ecrire('message', 'id_message='.$t['id_message']) .'#id'.$t['id_forum'];
-			}
-			$t['texte'] .= "\n\n"._T('forum_ne_repondez_pas')."\n<html>$url</html>";
-		}
-	
-		// 1.2. Les auteurs de l'article (si c'est un article)
-		elseif ($t['id_article']) {
-			$result = sql_select("auteurs.email","spip_auteurs AS auteurs, spip_auteurs_articles AS lien","lien.id_article=".intval($t['id_article'])." AND auteurs.id_auteur=lien.id_auteur");
-	
-			while ($qui = sql_fetch($result))
-				$tous[] = $qui['email'];
-		}
-	}
-
-	// 2. Les moderateurs
-	if ($GLOBALS['notifications']['moderateurs_forum_prive'])
-	foreach (explode(',', $GLOBALS['notifications']['moderateurs_forum_prive']) as $m) {
-		$tous[] = trim($m);
-	}
-
-	// 2. Tous les participants a ce *thread* (desactive pour l'instant)
-	// TODO: proposer une case a cocher ou un lien dans le message
-	// pour se retirer d'un troll (hack: replacer @ par % dans l'email)
-	if ($GLOBALS['notifications']['thread_forum_prive']) {
-		$s = sql_select("DISTINCT(email_auteur)","spip_forum","id_thread=".intval($t['id_thread'])." AND email_auteur != ''");
-		while ($r = sql_fetch($s))
-			$tous[] = $r['email_auteur'];
-	}
-
-/*
-	// 3. Tous les auteurs des messages qui precedent (desactive egalement)
-	// (possibilite exclusive de la possibilite precedente)
-	// TODO: est-ce utile, par rapport au thread ?
-	else if (defined('_SUIVI_FORUMS_REPONSES')
-	AND _SUIVI_FORUMS_REPONSES) {
-		$id_parent = $id_forum;
-		while ($r = spip_fetch_array(spip_query("SELECT email_auteur, id_parent FROM spip_forum WHERE id_forum=$id_parent AND statut='publie'"))) {
-			$tous[] = $r['email_auteur'];
-			$id_parent = $r['id_parent'];
-		}
-	}
-*/
-
-
-	// Nettoyer le tableau
-	// Ne pas ecrire au posteur du message !
-	$destinataires = array();
-	foreach ($tous as $m) {
-		if ($m = email_valide($m)
-		AND $m != trim($t['email_auteur']))
-			$destinataires[$m]++;
-	}
-
-	//
-	// Envoyer les emails
-	//
-	foreach (array_keys($destinataires) as $email) {
-		$msg = email_notification_forum($t, $email);
-		Notifications_envoi($email, $msg['subject'], $msg['body']);
-	}
-}
-
 
 // cette notification s'execute quand on valide un message 'prop'ose,
 // dans ecrire/inc/forum_insert.php ; ici on va notifier ceux qui ne l'ont
@@ -222,29 +132,6 @@ function notifications_forumvalide($quoi, $id_forum) {
 		}
 	}
 
-	// 2. Tous les participants a ce *thread* (desactive pour l'instant)
-	// TODO: proposer une case a cocher ou un lien dans le message
-	// pour se retirer d'un troll (hack: replacer @ par % dans l'email)
-	if ($GLOBALS['notifications']['thread_forum']) {
-		$s = sql_select("DISTINCT(email_auteur)","spip_forum","id_thread=".intval($t['id_thread'])." AND email_auteur != ''");
-		while ($r = sql_fetch($s))
-			$tous[] = $r['email_auteur'];
-	}
-
-/*
-	// 3. Tous les auteurs des messages qui precedent (desactive egalement)
-	// (possibilite exclusive de la possibilite precedente)
-	// TODO: est-ce utile, par rapport au thread ?
-	else if (defined('_SUIVI_FORUMS_REPONSES')
-	AND _SUIVI_FORUMS_REPONSES
-	AND $t['statut'] == 'publie') {
-		$id_parent = $id_forum;
-		while ($r = spip_fetch_array(spip_query("SELECT email_auteur, id_parent FROM spip_forum WHERE id_forum=$id_parent AND statut='publie'"))) {
-			$tous[] = $r['email_auteur'];
-			$id_parent = $r['id_parent'];
-		}
-	}
-*/
 
 	// Nettoyer le tableau
 	// Ne pas ecrire au posteur du message, ni au moderateur qui active le mail,

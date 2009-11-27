@@ -35,6 +35,8 @@ function notifications_post_edition($x) {
  */
 function notifications_notifications_destinataires($flux) {
 	$quoi = $flux['args']['quoi'];
+
+	// publication d'article : prevenir les auteurs
 	if ($quoi=='instituer_article'
 	  AND $GLOBALS['notifications']['prevenir_auteurs_articles']){
 		$id_article = $flux['args']['id'];
@@ -50,7 +52,40 @@ function notifications_notifications_destinataires($flux) {
 		}
 
 	}
-	
+
+	// forum valide ou prive : prevenir les autres contributeurs du thread
+	if (($quoi=='forumprive' AND $GLOBALS['notifications']['thread_forum_prive'])
+		OR ($quoi=='forumvalide' AND $GLOBALS['notifications']['thread_forum'])
+	  ){
+
+		$id_forum = $flux['args']['id'];
+		$options = $flux['args']['options'];
+		if ($t = $options['forum']
+			OR $t = sql_fetsel("*", "spip_forum", "id_forum=".intval($id_forum))){
+
+			// Tous les participants a ce *thread*
+			// TODO: proposer une case a cocher ou un lien dans le message
+			// pour se retirer d'un troll (hack: replacer @ par % dans l'email)
+			$s = sql_select("DISTINCT(email_auteur)","spip_forum","id_thread=".intval($t['id_thread'])." AND email_auteur != ''");
+			while ($r = sql_fetch($s))
+				$tous[] = $r['email_auteur'];
+
+			/*
+			// 3. Tous les auteurs des messages qui precedent (desactive egalement)
+			// (possibilite exclusive de la possibilite precedente)
+			// TODO: est-ce utile, par rapport au thread ?
+			else if (defined('_SUIVI_FORUMS_REPONSES')
+			AND _SUIVI_FORUMS_REPONSES) {
+				$id_parent = $id_forum;
+				while ($r = spip_fetch_array(spip_query("SELECT email_auteur, id_parent FROM spip_forum WHERE id_forum=$id_parent AND statut='publie'"))) {
+					$tous[] = $r['email_auteur'];
+					$id_parent = $r['id_parent'];
+				}
+			}
+			*/
+		}
+	}
+
 	return $flux;
 }
 ?>

@@ -14,7 +14,7 @@
  * @param int $id_forum
  */
 function notifications_forumposte_dist($quoi, $id_forum, $options) {
-	$t = sql_fetsel("*", "spip_forum", "id_forum=".sql_quote($id_forum));
+	$t = sql_fetsel("*", "spip_forum", "id_forum=".intval($id_forum));
 	if (!$t
 	  OR !$id_article = $t['id_article'])
 		return;
@@ -45,6 +45,7 @@ function notifications_forumposte_dist($quoi, $id_forum, $options) {
 		}
 	}
 
+	$options['forum'] = $t;
 	$destinataires = pipeline('notifications_destinataires',
 		array(
 			'args'=>array('quoi'=>$quoi,'id'=>$id_forum,'options'=>$options)

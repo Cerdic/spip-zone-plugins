@@ -19,10 +19,12 @@
  */
 function notifications_forumvalide_dist($quoi, $id_forum, $options) {
 
-	$t = sql_fetsel("*", "spip_forum", "id_forum=".sql_quote($id_forum));
-
-	// forum sur un message prive : pas de notification ici (cron)
-	if (!@$t['id_article'] OR @$t['statut'] == 'perso') return;
+	$t = sql_fetsel("*", "spip_forum", "id_forum=".intval($id_forum));
+	if (!$t
+	  OR !$id_article = $t['id_article']
+		// forum sur un message prive : pas de notification ici (cron)
+		OR @$t['statut'] == 'perso')
+		return;
 
 	$s = sql_getfetsel('accepter_forum','spip_articles',"id_article=" . $t['id_article']);
 	if (!$s)  $s = substr($GLOBALS['meta']["forums_publics"],0,3);
@@ -54,6 +56,7 @@ function notifications_forumvalide_dist($quoi, $id_forum, $options) {
 	}
 
 
+	$options['forum'] = $t;
 	$destinataires = pipeline('notifications_destinataires',
 		array(
 			'args'=>array('quoi'=>$quoi,'id'=>$id_forum,'options'=>$options)
