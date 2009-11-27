@@ -61,7 +61,7 @@ function public_produire_page($fond, $contexte, $use_cache, $chemin_cache, $cont
 			// on reprogramme avec un $use_cache=2 qui permettra de reconnaitre ces calculs
 			job_queue_add('public_produire_page',$c="Calcul du cache $fond [$where]",array($fond, $contexte, 2, $chemin_cache, $contexte_cache, NULL, $lastinclude, $connect),"",TRUE);
 		}
-		gunzip_page(&$page); // decomprimer la page si besoin
+		gunzip_page($page); // decomprimer la page si besoin
 		#spip_log($c,'cachedelai');
 		return $page;
 	}
