@@ -1,0 +1,32 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Menu de langues sous forme de liens
+	</nom>
+	<auteur><!-- Auteur du plugin -->
+[Jacques->http://www.spip-contrib.net/_Jacques-PYRAT_]
+
+&#169; 2009 - Distribu&#233; sous licence GNU/GPL
+	</auteur>
+	<lien>[Documentation sur Contrib->http://www.spip-contrib.net/ecrire/?exec=articles&id_article=3300]</lien>
+	<version>0.9.0</version>
+	<etat>
+	test
+	</etat>
+	<description>
+Remplace le menu d&eacute;roulant de langues de SPIP par un menu clicable.
+
+Ce menu n'est affich&eacute; {{que}} s'il y a au moins 2 langues vraiment utilis&eacute;es dans le site.
+	</description>
+	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
+	sur le mode Rien::
+	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
+	ce parametre est obligatoire et doit etre non vide
+	-->
+	<prefix> 
+	mll
+	</prefix>
+	<icon>
+	img_pack/menu_langues_liens.png
+	</icon>
+	<necessite id="SPIP" version="[2.0.10;]" />
+</plugin>
