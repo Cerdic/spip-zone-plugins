@@ -57,7 +57,7 @@ function notifications_notifications_destinataires($flux) {
 	$quoi = $flux['args']['quoi'];
 
 	// publication d'article : prevenir les auteurs
-	if ($quoi=='instituer_article'
+	if ($quoi=='instituerarticle'
 	  AND $GLOBALS['notifications']['prevenir_auteurs_articles']){
 		$id_article = $flux['args']['id'];
 		$options = $flux['args']['options'];

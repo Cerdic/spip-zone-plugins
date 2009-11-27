@@ -35,7 +35,7 @@
 	
 	<pipeline>
 		<nom>post_edition</nom>
-		<action>poost_edition</action>
+		<action>post_edition</action>
 		<inclure>notifications_pipelines.php</inclure>
 	</pipeline>
 	

@@ -84,7 +84,6 @@ function notifications_envoyer_mails($emails,$texte,$sujet=""){
 		// passer dans un pipeline qui permet un ajout eventuel
 		// (url de suivi des notifications par exemple)
 		$envoi = pipeline('notifications_envoyer_mails',array('email'=>$email,'sujet'=>$sujet,'texte'=>$texte));
-
 		$email = $envoi['email'];
 		$sujet = $envoi['sujet'];
 		$texte = $envoi['texte'];
@@ -93,6 +92,7 @@ function notifications_envoyer_mails($emails,$texte,$sujet=""){
 		else
 			$envoyer_mail($email, $sujet, $texte);
 	}
+
 }
 
 /**
@@ -107,13 +107,6 @@ function notifications_envoyer_mails($emails,$texte,$sujet=""){
 function email_notification_article($id_article, $modele) {
 
 	return recuperer_fond($modele,array('id_article'=>$id_article));
-
-
-	if ($GLOBALS['meta']["suivi_edito"] == "oui") {
-		$texte = recuperer_fond($modele,array('id_article'=>$id_article));
-		if ($texte)
-			notifications_envoyer_mails($adresse_suivi, $texte);
-	}
 }
 
 // Compatibilite, ne plus utiliser
