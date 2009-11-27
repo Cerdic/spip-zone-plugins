@@ -6,6 +6,17 @@
  *
  */
 
+/**
+ * 
+ * Declarer la tache cron de notification lente (messagerie de l'espace prive)
+ * @param array $taches_generales
+ * @return array 
+ */
+function notifications_taches_generales_cron($taches_generales){
+	$taches_generales['notifications'] = 60 * 10; // toutes les 10 minutes
+	return $taches_generales;
+}
+
 $GLOBALS['notifications_post_edition']['spip_signatures'] = "petitionsignee";
 
 // Initialise les reglages sous forme de tableau
@@ -106,6 +117,82 @@ function notifications_notifications_destinataires($flux) {
 }
 
 
+/**
+ * Pipeline notifications_envoyer_mails
+ * appele a chaque envoi de mails
+ * permet de gerer les contributeurs :
+ *  - inscription auto si activee
+ *  - url de suivi des forums
+ * 
+ * @param <type> $flux
+ * @return <type> 
+ */
+function notifications_notifications_envoyer_mails($flux){
+	if ($GLOBALS['notifications']['suivi']) {
+
+		// ajouter un acces a la page de suivi
+		$url = url_absolue(generer_url_public('suivi','email='.$flux['email']));
+		$flux['texte'] .= "\n\n" . _L('Gerer mes abonnements : ') . $url;
+
+		// ajouter les auteurs en base ?
+		// ici ou dans la page de suivi lorsqu'ils essayent vraiment de gerer
+		// leurs abonnements ?
+		// $a = notifications_creer_auteur($email);
+	}
+	
+	return $flux;
+}
+
+
+// Regarder si l'auteur est dans la base de donnees, sinon l'ajouter
+// comme s'il avait demande a s'inscrire comme visiteur
+// Pour l'historique il faut retrouver le nom de la personne,
+// pour ca on va regarder dans les forums existants
+// Si c'est la personne connectee, c'est plus facile
+function notifications_creer_auteur($email) {
+
+	include_spip('base/abstract_sql');
+	if (!$a = sql_fetsel('*', 'spip_auteurs', 'email='.sql_quote($email))) {
+		if ($GLOBALS['visiteur_session']['session_email'] === $email
+		AND isset($GLOBALS['visiteur_session']['session_nom'])) {
+			$nom = $GLOBALS['visiteur_session']['session_nom'];
+		} else {
+			if ($b = sql_fetsel('auteur', 'spip_forum',
+				'email_auteur='.sql_quote($email).' AND auteur!=""',
+				/* groupby */'', /* orderby */ array('date_heure DESC'),
+				/* limit */ '1')
+			) {
+				$nom = $b['auteur'];
+			} else {
+				$nom = $email;
+			}
+		}
+		// charger message_inscription()
+		if ($traiter = charger_fonction('traiter','formulaires/inscription',true)) {
+			// "pirater" les globals
+			$_GET['nom_inscription'] = $nom;
+			$_GET['email_inscription'] = $email;
+			$a = $traiter('6forum', null);
+		}
+		if (!is_array($a)) {
+			spip_log("erreur sur la creation d'auteur: $a",'notifications');
+			next;
+		}
+	}
+
+	// lui donner un cookie_oubli s'il n'en a pas deja un
+	if (!isset($a['cookie_oubli'])) {
+		include_spip('inc/acces'); # pour creer_uniqid
+		$a['cookie_oubli'] = creer_uniqid();
+		sql_updateq('spip_auteurs',
+			array('cookie_oubli' => $a['cookie_oubli']),
+			'id_auteur='.$a['id_auteur']
+		);
+	}
+
+	return $a;
+}
+
 /* TODO
 	// Envoyer un message de bienvenue/connexion au posteur du forum,
 	// dans le cas ou il ne s'est pas authentifie
@@ -120,4 +207,14 @@ function notifications_notifications_destinataires($flux) {
 			notifications_envoyer_mails($t['email_auteur'], $msg['body'],$msg['subject'])
 	}
 */
+
+
+/*
+// Creer un mail pour les forums envoyes par quelqu'un qui n'est pas authentifie
+// en lui souhaitant la bienvenue et avec un lien suivi&p= de connexion au site
+function Notifications_jeuneposteur($t, $email) {
+	return array('test', 'coucou');
+}
+*/
+
 ?>
