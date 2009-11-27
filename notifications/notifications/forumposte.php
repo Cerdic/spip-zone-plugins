@@ -15,9 +15,19 @@
  */
 function notifications_forumposte_dist($quoi, $id_forum, $options) {
 	$t = sql_fetsel("*", "spip_forum", "id_forum=".intval($id_forum));
-	if (!$t
-	  OR !$id_article = $t['id_article'])
+	if (!$t)
 		return;
+
+	// plugin notification si present
+	$prevenir_auteurs = isset($GLOBALS['notifications']['prevenir_auteurs']) AND $GLOBALS['notifications']['prevenir_auteurs'];
+	// sinon voie normale
+	if ($t['id_article'] AND !$prevenir_auteurs){
+		$s = sql_getfetsel('accepter_forum','spip_articles',"id_article=" . $t['id_article']);
+		if (!$s)  $s = substr($GLOBALS['meta']["forums_publics"],0,3);
+
+		$prevenir_auteurs = (strpos(@$GLOBALS['meta']['prevenir_auteurs'],",$s,")!==false
+			OR @$GLOBALS['meta']['prevenir_auteurs'] === 'oui'); // compat
+	}
 
 	include_spip('inc/texte');
 	include_spip('inc/filtres');
@@ -29,19 +39,13 @@ function notifications_forumposte_dist($quoi, $id_forum, $options) {
 	// 1. Les auteurs de l'article (si c'est un article), mais
 	// seulement s'ils ont le droit de le moderer (les autres seront
 	// avertis par la notifications_forumvalide).
-	if ($id_article) {
-		$s = sql_getfetsel('accepter_forum','spip_articles',"id_article=" . $id_article);
-		if (!$s)  $s = substr($GLOBALS['meta']["forums_publics"],0,3);
+	if ($t['id_article']
+	AND $prevenir_auteurs) {
+		$result = sql_select("auteurs.*","spip_auteurs AS auteurs, spip_auteurs_articles AS lien","lien.id_article=".intval($t['id_article'])." AND auteurs.id_auteur=lien.id_auteur");
 
-		if (strpos(@$GLOBALS['meta']['prevenir_auteurs'],",$s,")!==false
-		OR @$GLOBALS['meta']['prevenir_auteurs'] === 'oui') // compat
-		{
-			$result = sql_select("auteurs.id_auteur, auteurs.email", "spip_auteurs AS auteurs, spip_auteurs_articles AS lien", "lien.id_article=".sql_quote($id_article)." AND auteurs.id_auteur=lien.id_auteur");
-
-			while ($qui = sql_fetch($result)) {
-				if ($qui['email'] AND autoriser('modererforum', 'article', $id_article, $qui['id_auteur']))
-					$tous[] = $qui['email'];
-			}
+		while ($qui = sql_fetch($result)) {
+			if ($qui['email'] AND autoriser('modererforum', 'article', $t['id_article'], $qui['id_auteur']))
+				$tous[] = $qui['email'];
 		}
 	}
 

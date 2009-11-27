@@ -68,7 +68,7 @@ function notifications_notifications_destinataires($flux) {
 			// pour se retirer d'un troll (hack: replacer @ par % dans l'email)
 			$s = sql_select("DISTINCT(email_auteur)","spip_forum","id_thread=".intval($t['id_thread'])." AND email_auteur != ''");
 			while ($r = sql_fetch($s))
-				$tous[] = $r['email_auteur'];
+				$flux['data'][] = $r['email_auteur'];
 
 			/*
 			// 3. Tous les auteurs des messages qui precedent (desactive egalement)
@@ -86,6 +86,29 @@ function notifications_notifications_destinataires($flux) {
 		}
 	}
 
+	// Les moderateurs de forums public
+	if ($quoi=='forumpposte' AND $GLOBALS['notifications']['moderateurs_forum']){
+		foreach (explode(',', $GLOBALS['notifications']['moderateurs_forum']) as $m) {
+			$flux['data'][] = $m;
+		}
+	}
+
 	return $flux;
 }
+
+
+/* TODO
+	// Envoyer un message de bienvenue/connexion au posteur du forum,
+	// dans le cas ou il ne s'est pas authentifie
+	// Souci : ne pas notifier comme ca si on est deja present dans le thread
+	// (eviter d'avoir deux notificaitons pour ce message qu'on a, dans 99,99%
+	// des cas, poste nous-memes !)
+	if (strlen(trim($t['email_auteur']))
+	AND email_valide($t['email_auteur'])
+	AND !$GLOBALS['visiteur_session']['id_auteur']) {
+		$msg = Notifications_jeuneposteur($t, $email);
+		if ($t['email_auteur'] == 'fil@rezo.net')
+			Notifications_envoi($t['email_auteur'], $msg['subject'], $msg['body']);
+	}
+*/
 ?>
