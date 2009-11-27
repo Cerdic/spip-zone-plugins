@@ -30,18 +30,43 @@ function inc_notifications_dist($quoi, $id=0, $options=array()) {
 }
 
 /**
+ * Nettoyage des emails avant un envoi
+ * on passe par reference pour la perf
+ *
+ * les emails liste par $eclure seront exclus de la liste
+ * 
+ * @param array $emails
+ * @param array $exclure
+ */
+function notifications_nettoyer_emails(&$emails, $exclure = array()){
+	// filtrer et unifier
+	$emails = array_unique(array_filter(array_map('email_valide',array_map('trim', $emails))));
+	if ($exclure AND count($exclure)){
+		// nettoyer les exclusions d'abord
+		notifications_nettoyer_emails($exclure);
+		// faire un diff
+		$emails = array_diff($emails,$exclure);
+	}
+}
+
+/**
+ * Envoyer un email de notification
+ * Le sujet peut etre vide, dans ce cas il reprendra la premiere ligne non vide du texte
  *
  * @param array/string $emails
- * @param string $sujet
  * @param string $texte
+ * @param string $sujet
  */
-function notifier_envoyer_mails($emails,$sujet,$texte){
+function notifications_envoyer_mails($emails,$texte,$sujet=""){
+	// rien a faire si pas de texte !
+	if (!strlen($texte))
+		return;
+
 	// si on ne specifie qu'un email, le mettre dans un tableau
 	if (!is_array($emails))
 		$emails = explode(',',$emails);
 
-	// filtrer et unifier
-	$emails = array_unique(array_filter(array_map('email_valide',array_map('trim', $emails))));
+	notifications_nettoyer_emails($emails);
 
 	// si le sujet est vide, extraire la premiere ligne du corps
 	if (!strlen($sujet)){
@@ -79,31 +104,46 @@ function notifier_envoyer_mails($emails,$sujet,$texte){
  * @param int $id_article
  * @param string $modele
  */
-function notifier_article($id_article, $modele) {
+function email_notification_article($id_article, $modele) {
 
-	$adresse_suivi = $GLOBALS['meta']["adresse_suivi"];
+	return recuperer_fond($modele,array('id_article'=>$id_article));
+
 
 	if ($GLOBALS['meta']["suivi_edito"] == "oui") {
 		$texte = recuperer_fond($modele,array('id_article'=>$id_article));
 		if ($texte)
-			notifier_envoyer_mails($adresse_suivi, "", $texte);
+			notifications_envoyer_mails($adresse_suivi, $texte);
 	}
 }
 
 // Compatibilite, ne plus utiliser
 // http://doc.spip.org/@notifier_publication_article
 function notifier_publication_article($id_article) {
-	notifier_article($id_article, "notifications/article_publie");
+	if ($GLOBALS['meta']["suivi_edito"] == "oui") {
+		$adresse_suivi = $GLOBALS['meta']["adresse_suivi"];
+		$texte = email_notification_article($id_article, "notifications/article_publie");
+		notifications_envoyer_mails($adresse_suivi, $texte);
+	}
 }
 
 // Compatibilite, ne plus utiliser
 // http://doc.spip.org/@notifier_proposition_article
 function notifier_proposition_article($id_article) {
+	if ($GLOBALS['meta']["suivi_edito"] == "oui") {
+		$adresse_suivi = $GLOBALS['meta']["adresse_suivi"];
+		$texte = email_notification_article($id_article, "notifications/article_publie");
+		notifications_envoyer_mails($adresse_suivi, $texte);
+	}
 	notifier_article($id_article, "notifications/article_propose");
 }
 
-
-// http://doc.spip.org/@email_notification_forum
+/**
+ * Construitre l'email personalise de notification d'un forum
+ *
+ * @param array $t
+ * @param string $email
+ * @return string
+ */
 function email_notification_forum ($t, $email) {
 
 	// Rechercher eventuellement la langue du destinataire
@@ -171,7 +211,7 @@ function email_notification_forum ($t, $email) {
 	if ($l)
 		lang_select();
 
-	return array('subject' => "", 'body' => $corps);
+	return $corps;
 }
 
 

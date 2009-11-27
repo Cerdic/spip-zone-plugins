@@ -13,10 +13,10 @@
  * @param string $quoi
  * @param int $id_forum
  */
-function notifications_forumposte_dist($quoi, $id_forum) {
+function notifications_forumposte_dist($quoi, $id_forum, $options) {
 	$t = sql_fetsel("*", "spip_forum", "id_forum=".sql_quote($id_forum));
 	if (!$t
-	OR !$id_article = $t['id_article'])
+	  OR !$id_article = $t['id_article'])
 		return;
 
 	include_spip('inc/texte');
@@ -35,34 +35,37 @@ function notifications_forumposte_dist($quoi, $id_forum) {
 
 		if (strpos(@$GLOBALS['meta']['prevenir_auteurs'],",$s,")!==false
 		OR @$GLOBALS['meta']['prevenir_auteurs'] === 'oui') // compat
-		  {
+		{
 			$result = sql_select("auteurs.id_auteur, auteurs.email", "spip_auteurs AS auteurs, spip_auteurs_articles AS lien", "lien.id_article=".sql_quote($id_article)." AND auteurs.id_auteur=lien.id_auteur");
 
 			while ($qui = sql_fetch($result)) {
-			  if (autoriser('modererforum', 'article', $id_article, $qui['id_auteur']))
-				$tous[] = $qui['email'];
+				if ($qui['email'] AND autoriser('modererforum', 'article', $id_article, $qui['id_auteur']))
+					$tous[] = $qui['email'];
 			}
-		  }
+		}
 	}
+
+	$destinataires = pipeline('notifications_destinataires',
+		array(
+			'args'=>array('quoi'=>$quoi,'id'=>$id_forum,'options'=>$options)
+		,
+			'data'=>$tous)
+	);
 
 	// Nettoyer le tableau
 	// Ne pas ecrire au posteur du message !
-	$destinataires = array();
-	foreach ($tous as $m) {
-		if ($m = email_valide($m)
-		AND $m != trim($t['email_auteur']))
-			$destinataires[$m]++;
-	}
+	notifications_nettoyer_emails($destinataires,array($t['email_auteur']));
 
 	//
 	// Envoyer les emails
 	//
-	foreach (array_keys($destinataires) as $email) {
-		$msg = email_notification_forum($t, $email);
-		notifier_envoyer_mails($email, $msg['subject'], $msg['body']);
+	foreach ($destinataires as $email) {
+		$texte = email_notification_forum($t, $email);
+		notifications_envoyer_mails($email, $texte);
 	}
 
 	// Notifier les autres si le forum est valide
+	// est-ce que cet appel devrait bien etre la ?
 	if ($t['statut'] == 'publie') {
 		$notifications = charger_fonction('notifications', 'inc');
 		$notifications('forumvalide', $id_forum);

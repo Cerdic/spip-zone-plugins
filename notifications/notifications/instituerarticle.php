@@ -19,11 +19,28 @@ function notifications_instituerarticle_dist($quoi, $id_article, $options) {
 
 	include_spip('inc/texte');
 
-	if ($options['statut'] == 'publie')
-		notifier_publication_article($id_article);
+	if ($GLOBALS['meta']["suivi_edito"] == "oui") {
+		$modele = "";
+		if ($options['statut'] == 'publie')
+			$modele = "notifications/article_publie";
+		if ($options['statut'] == 'prop' AND $options['statut_ancien'] != 'publie')
+			$modele = "notifications/article_propose";
 
-	if ($options['statut'] == 'prop' AND $options['statut_ancien'] != 'publie')
-		notifier_proposition_article($id_article);
+		$destinataires = explode(',',$GLOBALS['meta']["adresse_suivi"]);
+
+		if ($modele){
+
+			$destinataires = pipeline('notifications_destinataires',
+				array(
+					'args'=>array('quoi'=>$quoi,'id'=>$id_article,'options'=>$options)
+				,
+					'data'=>$destinataires)
+			);
+
+			$texte = email_notification_article($id_article, $modele);
+			notifications_envoyer_mails($adresse_suivi, $texte);
+		}
+	}
 }
 
 ?>

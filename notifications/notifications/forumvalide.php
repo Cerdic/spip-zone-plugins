@@ -17,7 +17,7 @@
  * @param string $quoi
  * @param int $id_forum
  */
-function notifications_forumvalide_dist($quoi, $id_forum) {
+function notifications_forumvalide_dist($quoi, $id_forum, $options) {
 
 	$t = sql_fetsel("*", "spip_forum", "id_forum=".sql_quote($id_forum));
 
@@ -37,7 +37,8 @@ function notifications_forumvalide_dist($quoi, $id_forum) {
 
 	// Qui va-t-on prevenir ?
 	$tous = array();
-	$pasmoi = array();
+	// Ne pas ecrire au posteur du message, ni au moderateur qui active le mail,
+	$pasmoi = array($t['email_auteur'],$GLOBALS['visiteur_session']['email']);
 
 	// 1. Les auteurs de l'article qui n'ont pas le droit de le moderer
 	// (les autres l'ont recu plus tot)
@@ -48,28 +49,30 @@ function notifications_forumvalide_dist($quoi, $id_forum) {
 		if (!autoriser('modererforum', 'article', $t['id_article'], $qui['id_auteur']))
 				$tous[] = $qui['email'];
 		else
+				// Ne pas ecrire aux auteurs deja notifies precedemment
 				$pasmoi[] = $qui['email'];
 	}
 
+
+	$destinataires = pipeline('notifications_destinataires',
+		array(
+			'args'=>array('quoi'=>$quoi,'id'=>$id_forum,'options'=>$options)
+		,
+			'data'=>$tous)
+	);
+
 	// Nettoyer le tableau
-	// Ne pas ecrire au posteur du message, ni au moderateur qui active le mail,
-	// ni aux auteurs deja notifies precedemment
-	$destinataires = array();
-	foreach ($tous as $m) {
-		if ($m = email_valide($m)
-		AND $m != trim($t['email_auteur'])
-		AND $m != $GLOBALS['visiteur_session']['email']
-		AND !in_array($m, $pasmoi))
-			$destinataires[$m]++;
-	}
+	// en enlevant les exclus
+	notifications_nettoyer_emails($destinataires,$pasmoi);
 
 	//
 	// Envoyer les emails
 	//
-	foreach (array_keys($destinataires) as $email) {
-		$msg = email_notification_forum($t, $email);
-		notifier_envoyer_mails($email, $msg['subject'], $msg['body']);
+	foreach ($destinataires as $email) {
+		$texte = email_notification_forum($t, $email);
+		notifications_envoyer_mails($email, $texte);
 	}
+
 }
 
 ?>
