@@ -23,6 +23,7 @@
   	// Ligne contenant un fieldset
   	array(
   		'groupe' => 'Ceci est le titre du groupe de champs (fieldset)',
+  		'css' => 'eventuelles classes css',
   		'contenu' => array(
   			// On recommence ici suivant le même formalisme que le tableau général.
   		)
@@ -49,8 +50,9 @@
 
 [(#VAL{groupe}|array_key_exists{#VALEUR}|oui)
 #SET{titre, #VALEUR|table_valeur{groupe}}
+#SET{css, #VALEUR|table_valeur{css}}
 #SET{contenu, #VALEUR|table_valeur{contenu}}
-<li class="fieldset">
+<li class="fieldset[ (#GET{css})]">
 	<fieldset>
 		[<h3 class="legend">(#GET{titre}|saisies_transformer_langue)</h3>]
 		
