@@ -180,7 +180,7 @@ function email_notification_forum ($t, $email) {
 	}
 	
 	if (!$url) {
-		spip_log("forum $id_forum sans referent");
+		spip_log("forum $id_forum sans referent",'notifications');
 		$url = './';
 	}
 	if ($t['id_article']) {

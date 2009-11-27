@@ -22,9 +22,9 @@
 	<prefix>notifications</prefix>
 
 	<pipeline>
-		<nom>pre_edition</nom>
-		<action>pre_edition</action>
-		<inclure>notifications.php</inclure>
+		<nom>post_edition</nom>
+		<action>poost_edition</action>
+		<inclure>notifications_pipelines.php</inclure>
 	</pipeline>
 
 	<pipeline>

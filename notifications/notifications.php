@@ -11,19 +11,6 @@ function Notifications_go($x) {
 	return $x;
 }
 
-function Notifications_pre_edition($x) {
-	spip_log($x);
-
-	if (isset($x['args']['table'])) {
-		$notif = 'Notifications_'.$x['args']['table'];
-		if (function_exists($notif)) {
-			$x = $notif($x);
-		}
-	}
-
-	return $x;
-}
-
 
 // Regarder si l'auteur est dans la base de donnees, sinon l'ajouter
 // comme s'il avait demande a s'inscrire comme visiteur
@@ -59,7 +46,7 @@ function Notifications_creer_auteur($email) {
 			$a = formulaires_inscription_traiter_dist('6forum', null);
 		}
 		if (!is_array($a)) {
-			spip_log("erreur sur la creation d'auteur: $a");
+			spip_log("erreur sur la creation d'auteur: $a",'notifications');
 			next;
 		}
 	}
@@ -102,66 +89,6 @@ function Notifications_envoi($emails, $subject, $body) {
 	}
 }
 
-// insertion d'une nouvelle signature => mail aux moderateurs
-// definis par la constante _SPIP_MODERATEURS_PETITION
-function Notifications_spip_signatures($x) {
-	include_spip('base/abstract_sql');
-	if (!$GLOBALS['notifications']['moderateurs_signatures'])
-		return $x;
-
-	$id_signature = $x['args']['id_objet'];
-
-	$s = sql_select("*","spip_signatures","id_signature=".intval($id_signature));
-
-	if ($t = sql_fetch($s)) {
-
-		$a = sql_fetsel("titre,lang","spip_articles","id_article=".intval($t['id_article']));
-		lang_select($a['lang']);
-
-		if (function_exists('generer_url_entite')) {
-			$url = url_absolue(generer_url_entite($t['id_article'], 'article'));
-		} else {
-			charger_generer_url(false);
-			$url = url_absolue(suivre_lien(_DIR_RACINE,generer_url_article($t['id_article'], '','', 'publie')));
-		}
-
-
-		// creer la cle de suppression de la signature
-		include_spip('inc/securiser_action');
-		$cle = _action_auteur("supprimer signature $id_signature", '', '', 'alea_ephemere');
-		$url_suppr =
-			parametre_url(
-			parametre_url($url,
-				'var_confirm', $t['id_signature'], '&'),
-				'refus', $cle, '&').'#sp'.$t['id_article'];
-
-		$sujet = _L("Nouvelle signature pour la petition ").typo(supprimer_numero($a['titre']));
-
-		$texte = $sujet
-			. "\n\n** "
-			. url_absolue($url)
-			. "\n"
-			. "\nNom: ". $x['data']['nom_email']
-			. "\nemail: ". $x['data']['ad_email']
-			. "\nmessage: ". $x['data']['message']
-			. "\n\nnom_site: ". $x['data']['nom_site']
-			. "\nurl_site: ". $x['data']['url_site']
-			. "\n\n"
-			. "Cette signature n'a pas encore ete validee ;"
-			. "\nsi vous souhaitez la supprimer directement :"
-			. "\n"
-			. url_absolue($url_suppr)
-			;
-
-		Notifications_envoi($GLOBALS['notifications']['moderateurs_signatures'],
-			$sujet, $texte);
-
-		lang_dselect();
-
-	}
-
-	return $x;
-}
 
 
 

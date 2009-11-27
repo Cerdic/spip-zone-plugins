@@ -6,6 +6,26 @@
  *
  */
 
+$GLOBALS['notifications_post_edition']['spip_signatures'] = "petitionsignee";
+
+/**
+ * Pipeline post-edition
+ * pour permettre de se pluger sur une modification en base non notifiee par defaut
+ *
+ * @param array $x
+ * @return array
+ */
+function notifications_post_edition($x) {
+	spip_log($x,'notifications');
+
+	if (isset($x['args']['table'])
+		AND $quoi=$GLOBALS['notification_post_edition'][$x['args']['table']]
+	  AND $notification = charger_fonction($quoi,'notifications',true)) {
+			$notification($quoi,$x['args']['id_objet']);
+	}
+
+	return $x;
+}
 
 /**
  * Ajouter des destinataires dans une notification en lot
