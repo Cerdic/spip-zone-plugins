@@ -107,7 +107,7 @@ function notifications_notifications_destinataires($flux) {
 	}
 
 	// Les moderateurs de forums public
-	if ($quoi=='forumpposte' AND $GLOBALS['notifications']['moderateurs_forum']){
+	if ($quoi=='forumposte' AND $GLOBALS['notifications']['moderateurs_forum']){
 		foreach (explode(',', $GLOBALS['notifications']['moderateurs_forum']) as $m) {
 			$flux['data'][] = $m;
 		}
