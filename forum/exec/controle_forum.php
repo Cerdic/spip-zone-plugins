@@ -9,15 +9,14 @@
 
 function exec_controle_forum_dist()
 {
-	if (!autoriser('publierdans','rubrique',_request('id_rubrique'))
-	  OR ($id_article = _request('id_article') AND !autoriser('modererforum', 'article', $id_article))
+	if (autoriser('publierdans','rubrique',_request('id_rubrique'))
+	  OR ($id_article = _request('id_article') AND autoriser('modererforum', 'article', $id_article))
 	  ) {
+		exec_controle_forum_args(_request('type'),$_GET,'prive/controler_forum');
+	} 
+	else {
 		include_spip('inc/minipres');
 		echo minipres();
-	} 
-	else 
-	{
-		exec_controle_forum_args(_request('type'),$_GET,'prive/controler_forum');
 	}
 }
 
