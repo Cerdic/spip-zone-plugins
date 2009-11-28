@@ -41,6 +41,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'texte_en_cours_validation_forum' => " ",   // ecrire
 
 
+//--- exec=message
+'poster_message' => "Poster un message / Répondre",  // public
+'form_forum_message_auto' => "(ceci est un message automatique, répondez en cliquant sur le lien ci-dessous et non par e-mail)", // spip
+
 //--- exec/rers_aide.php
 // aide RERS espace privé  
 'rers_aide_titre' => "Guide du rédacteur RERS Sud de l'Aisne",
