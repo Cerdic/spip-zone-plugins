@@ -26,6 +26,7 @@ function notifications_petitionsignee_dist($quoi, $id_signature, $options) {
 	include_spip('inc/securiser_action');
 	$cle = _action_auteur("supprimer signature $id_signature", '', '', 'alea_ephemere');
 
+	$envoyer_mail = charger_fonction('envoyer_mail','inc'); // pour nettoyer_titre_email
 	$texte = recuperer_fond("notifications/petition_signee",array('id_signature'=>$id_signature,'cle'=>$cle));
 	
 	notifications_envoyer_mails($GLOBALS['notifications']['moderateurs_signatures'],$texte);

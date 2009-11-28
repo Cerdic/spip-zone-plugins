@@ -105,6 +105,7 @@ function notifications_envoyer_mails($emails,$texte,$sujet=""){
  * @param string $modele
  */
 function email_notification_article($id_article, $modele) {
+	$envoyer_mail = charger_fonction('envoyer_mail','inc'); // pour nettoyer_titre_email
 
 	return recuperer_fond($modele,array('id_article'=>$id_article));
 }
@@ -215,6 +216,7 @@ function email_notification_forum ($t, $email) {
 
 	$t['par_auteur'] = $forum_poste_par;
 
+	$envoyer_mail = charger_fonction('envoyer_mail','inc'); // pour nettoyer_titre_email
 	$corps = recuperer_fond("notifications/forum_poste",$t);
 
 	if ($l)
