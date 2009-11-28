@@ -22,13 +22,13 @@
 		<div class="infos">
 		<:info_numero_abbreviation:>#ID_DOCUMENT - #EXTENSION - [(#TAILLE|taille_en_octets)]
 		</div>
-		[<span class="mode">(#EXTENSION|match{^(jpg|gif|png)$}|et{#EVAL{_BOUTON_MODE_IMAGE}}|oui)
+		[<div class="mode">(#EXTENSION|match{^(jpg|gif|png)$}|et{#EVAL{_BOUTON_MODE_IMAGE}}|oui)
 			[(#MODE|=={image}|oui)
 			[(#BOUTON_ACTION{<:gestdoc:upload_info_mode_document:>,#URL_ACTION_AUTEUR{changer_mode_document,#ID_DOCUMENT-document,#SELF},ajax})]
 			][(#MODE|=={image}|non)
 			[(#BOUTON_ACTION{<:gestdoc:upload_info_mode_image:>,#URL_ACTION_AUTEUR{changer_mode_document,#ID_DOCUMENT-image,#SELF},ajax})]
 			]
-		</span>]
+		</div>]
 		<div class="actions">
 			<a href="[(#SELF|parametre_url{timestamp,#REM|time})]" class="refresh none ajax"><:gestdoc:bouton_refresh_document:></a>
 			<BOUCLE_compte(DOCUMENTS_LIENS){id_document}{0,2} />
