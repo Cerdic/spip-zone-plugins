@@ -38,6 +38,11 @@
 		<titre>menus:editer_menus_titre</titre>
 		<icone>images/menus-24.png</icone>
 	</bouton>
+	<bouton id='bando_menus_tous' parent="bando_edition">
+		<url>menus_tous</url>
+		<titre>menus:editer_menus_titre</titre>
+		<icone>images/menus-24.png</icone>
+	</bouton>
 	
 	<necessite id="SPIP" version="[2.0.9;]" />
 	<necessite id="spip_bonux" version="[1.8.3;]" />
