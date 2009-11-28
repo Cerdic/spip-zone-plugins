@@ -14,7 +14,7 @@
 </description>
 <prefix>skiplink</prefix>
 <pipeline>
-	<nom>affichage_final</nom>
-	<inclure>insere_skiplink.php</inclure>
+<nom>affichage_final</nom>
+<inclure>insere_skiplink.php</inclure>
 </pipeline>
 <necessite id='SPIP' version='[1.9.0;]' />
