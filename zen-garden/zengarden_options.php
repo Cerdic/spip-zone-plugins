@@ -24,4 +24,9 @@ if (!defined('_DIR_PLUGIN_THEME')){
 	}
 }
 
+// Déclaration des pipelines permettant d'ajouter traitements lors de la preview et de l'activiation
+$GLOBALS['spip_pipeline']['zengarden_apercevoir_theme'] = '';
+$GLOBALS['spip_pipeline']['zengarden_activer_theme'] = '';
+$GLOBALS['spip_pipeline']['zengarden_effacer_theme'] = '';
+
 ?>

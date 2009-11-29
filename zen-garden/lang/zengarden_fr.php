@@ -21,6 +21,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'info_page' => 'Vous pouvez choisir un th&egrave;me propos&eacute; ou simplement apercevoir son rendu sans modifier l\'affichage pour vos visiteurs',
+	'intitule_compatiblite_squelette' => 'Compatible uniquement avec les squelettes',
+	'intitule_version' => 'version',
 
 	// M
 

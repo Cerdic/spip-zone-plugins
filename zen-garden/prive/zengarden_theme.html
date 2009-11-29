@@ -4,18 +4,34 @@
 [<p class='pagination'>(#PAGINATION)</p>]
 <ul class='liste_items themes'>
 <BOUCLE_themes(POUR){tableau #ENV{themes}}{cle!=#ENV{selection}}{pagination 10}>
-<li class='item'>
-[(#EVAL{_DIR_THEMES}|concat{#VALEUR|table_valeur{chemin},'/',#VALEUR|table_valeur{icon}}|image_reduire{200,150}|inserer_attribut{class,spip_documents_left})]
-<h3>[(#VALEUR|table_valeur{nom}|typo|extraire_multi)]</h3>
-<div class='descriptif'>[(#VALEUR|table_valeur{description}|propre)]</div>
-<div class='auteur'>[(#VAL{info_les_auteurs_1}|_T{#ARRAY{les_auteurs,#VALEUR|table_valeur{auteur}|propre|PtoBR}})]</div>
-<div class='licence'>[<:intitule_licence:> (#VALEUR|table_valeur{licence}|propre|PtoBR)]</div>
-[<div class='bandeau'>(#VALEUR|table_valeur{bandeau}|?{<:zengarden:bandeau_personalisable:>})</div>]
-<p class='actions'>
-[<a target='_blank' href='#URL_ACTION_AUTEUR{zengarden_activer_theme,preview:#CLE,#EVAL{_DIR_RACINE}}'><:zengarden:apercevoir_ce_theme:></a>]
-[<a href='#URL_ACTION_AUTEUR{zengarden_activer_theme,#CLE,#SELF|parametre_url{debut_themes,''}}'><:zengarden:choisir_ce_theme:></a>]
-</p>
-</li>
+	<li class='item'>
+		[(#EVAL{_DIR_THEMES}|concat{#VALEUR|table_valeur{chemin},'/',#VALEUR|table_valeur{icon}}|image_reduire{200,150}|inserer_attribut{class,spip_documents_left})]
+		<h3>[(#VALEUR|table_valeur{nom}|typo|extraire_multi)]</h3>
+		<div class='descriptif'>[(#VALEUR|table_valeur{description}|propre)]</div>
+		<div class='auteur'>[(#VAL{info_les_auteurs_1}|_T{#ARRAY{les_auteurs,#VALEUR|table_valeur{auteur}|propre|PtoBR}})]</div>
+		<div class='licence'>[<:intitule_licence:> (#VALEUR|table_valeur{licence}|propre|PtoBR)]</div>
+		
+	<B_squelettes>
+		<div class='squelette'>
+			<:zengarden:intitule_compatiblite_squelette:>
+			<ul>
+	<BOUCLE_squelettes(POUR){tableau #VALEUR|table_valeur{utilise}}>
+				<li>
+					[(#VALEUR|table_valeur{name}|propre|PtoBR) ]
+					[: (#VALEUR|table_valeur{version}|zengarden_affiche_version_compatible|propre|PtoBR)]
+				</li>
+	</BOUCLE_squelettes>
+			</ul>
+		</div>
+		<br class="nettoyeur" />
+	</B_squelettes>
+		
+		[<div class='bandeau'>(#VALEUR|table_valeur{bandeau}|?{<:zengarden:bandeau_personalisable:>})</div>]
+		<p class='actions'>
+		[<a target='_blank' href='#URL_ACTION_AUTEUR{zengarden_activer_theme,apercu:#CLE,#EVAL{_DIR_RACINE}}'><:zengarden:apercevoir_ce_theme:></a>]
+		[<a href='#URL_ACTION_AUTEUR{zengarden_activer_theme,activation:#CLE,#SELF|parametre_url{debut_themes,''}}'><:zengarden:choisir_ce_theme:></a>]
+		</p>
+	</li>
 </BOUCLE_themes>
 </ul>
 [<p class='pagination'>(#PAGINATION)</p>]

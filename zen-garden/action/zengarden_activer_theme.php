@@ -9,17 +9,35 @@ function action_zengarden_activer_theme_dist(){
 	$securiser_action = charger_fonction('securiser_action','inc');
 	$arg = $securiser_action();
 
-	if ($arg=='-1'){
-		include_spip('inc/meta');
-		effacer_meta("zengarden_theme");
+	if (strncmp('defaut:',$arg,7) == 0){
+		$dir_theme = _DIR_THEMES . substr($arg,7);
+		$flux = pipeline('zengarden_effacer_theme', array('args' => array('dir' =>$dir_theme), 'data' => true));
+		if ($flux) {
+			include_spip('inc/meta');
+			effacer_meta("zengarden_theme");
+		}
 	}
-	elseif (strncmp('preview:',$arg,8)==0){
-		include_spip('inc/cookie');
-		spip_setcookie('spip_zengarden_theme',substr($arg,8));
+	elseif (strncmp('apercu:',$arg,7) == 0){
+		$theme = substr($arg,7);
+		$dir_theme = _DIR_THEMES . $theme;
+		if (is_dir($dir_theme)) {
+			$flux = pipeline('zengarden_apercevoir_theme', array('args' => array('dir' =>$dir_theme), 'data' => true));
+			if ($flux) {
+				include_spip('inc/cookie');
+				spip_setcookie('spip_zengarden_theme', $theme);
+			}
+		}
 	}
-	elseif (is_dir(_DIR_THEMES . $arg)) {
-		include_spip('inc/meta');
-		ecrire_meta("zengarden_theme",$arg);
+	elseif (strncmp('activation:',$arg,11) == 0) {
+		$theme = substr($arg,11);
+		$dir_theme = _DIR_THEMES . $theme;
+		if (is_dir($dir_theme)) {
+			$flux = pipeline('zengarden_activer_theme', array('args' => array('dir' => $dir_theme), 'data' => true));
+			if ($flux) {
+				include_spip('inc/meta');
+				ecrire_meta("zengarden_theme", $theme);
+			}
+		}
 	}
 }
 
