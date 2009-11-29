@@ -21,7 +21,7 @@
 ]
 <select name="#ENV{nom}[(#ENV{multiple}|?{[(#VAL{&#91;&#93;}|html_entity_decode)]})]" id="champ_#ENV{nom}"[ class="(#ENV{class})"][(#ENV{multiple}|oui) multiple="multiple"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"]>
 	[(#ENV{cacher_option_intro}|ou{#ENV{multiple}}|non)
-		<option value="0">[(#ENV{option_intro})]</option>]
+		<option value="">[(#ENV{option_intro})]</option>]
 	<BOUCLE_auteurs(AUTEURS){par num nom, nom}{statut ?}{statut != 5poubelle}{tout}>
 		[(#ENV{multiple}|oui)
 		<option value="#ID_AUTEUR"[(#ID_AUTEUR|in_array{#ENV{valeur,#ENV{defaut,#ARRAY}}}|oui) selected="selected"][ style="background:url(../prive/images/(#GET{bonhomme_statut}|table_valeur{#STATUT})) no-repeat left; padding-left: 20px;"]>#NOM</option>]
