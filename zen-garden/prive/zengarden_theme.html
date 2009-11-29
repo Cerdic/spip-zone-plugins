@@ -15,12 +15,12 @@
 		<div class='squelette'>
 			<:zengarden:intitule_compatiblite_squelette:>
 			<ul>
-	<BOUCLE_squelettes(POUR){tableau #VALEUR|table_valeur{utilise}}>
-				<li>
-					[(#VALEUR|table_valeur{name}|propre|PtoBR) ]
-					[: (#VALEUR|table_valeur{version}|zengarden_affiche_version_compatible|propre|PtoBR)]
-				</li>
-	</BOUCLE_squelettes>
+			<BOUCLE_squelettes(POUR){tableau #VALEUR|table_valeur{utilise}}>[(#VALEUR|table_valeur{id}|=={Z}|non)[
+						<li>
+							(#VALEUR|table_valeur{name}|propre|PtoBR)
+							[: (#VALEUR|table_valeur{version}|zengarden_affiche_version_compatible|propre|PtoBR)]
+						</li>
+			]]</BOUCLE_squelettes>
 			</ul>
 		</div>
 		<br class="nettoyeur" />
