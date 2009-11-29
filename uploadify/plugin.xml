@@ -1,0 +1,21 @@
+<plugin>
+	<nom>Uploadify</nom>
+	<auteur>Phil</auteur>
+	<version>0.1</version>
+	<etat>dev</etat>
+	<description>Permet de t&eacute;l&eacute;charger des documents par lots dans un article.
+  </description>
+	<icon>uploadify-24.png</icon>
+	<lien>http://www.spip-contrib.net/article3045</lien>
+	<prefix>uploadify</prefix>
+
+  <pipeline>
+		<nom>header_prive</nom>
+		<inclure>uploadify_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+    	<nom>affiche_milieu</nom>
+        <inclure>uploadify_pipelines.php</inclure>
+    </pipeline>
+	<necessite id="SPIP" version="[1.9.0;]" />
+</plugin>
