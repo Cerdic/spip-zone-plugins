@@ -43,7 +43,7 @@ function afficher_langues_choix($langues,$name,$id,$selected){
 	foreach ($langues as $l) {
 		$checked = ($l == $selected) ? ' checked=\'checked\'' : '';
 		$ret .= "<div class='choix'>"
-		 . "<input type='radio' name='$name' id='{$id}_$l' value='$l'$checked>"
+		 . "<input type='radio' name='$name' id='{$id}_$l' value='$l'$checked />"
 		 . "<label for='{$id}_$l'>" . traduire_nom_langue($l)."</label>"
 		 . "</div>";
 	}
