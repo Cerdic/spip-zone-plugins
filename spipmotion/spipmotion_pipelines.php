@@ -63,21 +63,23 @@ function spipmotion_taches_generales_cron($taches_generales){
  * @return $flux Le contexte de pipeline complété
  * @param array $flux Le contexte du pipeline
  */
-function spipmotion_post_edition($flux){	
-	spip_log("SPIPMOTION : pipeline post_edition","spipmotion");
-	spip_log($flux['args'],'spipmotion');
-	$id_document = $flux['args']['id_objet'];
-	
-	/**
-	 * Il n'est pas nécessaire de récupérer la vignette d'une vignette
-	 */
-	$infos_doc = sql_fetsel('fichier,mode,distant','spip_documents','id_document='.intval($id_document));
-	$mode = $infos_doc['mode'];
-	$fichier = $infos_doc['fichier'];
-	spip_log("SPIPMOTION : mode = $mode","spipmotion");
-	spip_log("SPIPMOTION : distant = ".$infos_doc['distant'],"spipmotion");
-	if(($mode != 'vignette') && ($infos_doc['distant'] == 'non')){
-		if(in_array($flux['args']['operation'],array('ajouter_document','document_copier_local'))){
+function spipmotion_post_edition($flux){
+	if(in_array($flux['args']['operation'],array('ajouter_document','document_copier_local'))){
+		spip_log("SPIPMOTION : pipeline post_edition","spipmotion");
+		spip_log($flux['args'],'spipmotion');
+		$id_document = $flux['args']['id_objet'];
+		
+		/**
+		 * Il n'est pas nécessaire de récupérer la vignette d'une vignette
+		 */
+		$infos_doc = sql_fetsel('fichier,mode,distant','spip_documents','id_document='.intval($id_document));
+		$mode = $infos_doc['mode'];
+		$fichier = $infos_doc['fichier'];
+		spip_log("SPIPMOTION : mode = $mode","spipmotion");
+		spip_log("SPIPMOTION : distant = ".$infos_doc['distant'],"spipmotion");
+		
+		if(($mode != 'vignette') && ($infos_doc['distant'] == 'non')){
+		
 			spip_log("operation = ajouter_docs","spipmotion");
 			$document = sql_fetsel("docs.id_document, docs.extension,docs.fichier,docs.id_orig,docs.mode,docs.distant, L.vu, L.objet, L.id_objet", "spip_documents AS docs INNER JOIN spip_documents_liens AS L ON L.id_document=docs.id_document","L.id_document=".intval($id_document));
 			spip_log('id_origine = '.$document['id_orig'],'emballe_medias');
