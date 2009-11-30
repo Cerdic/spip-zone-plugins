@@ -50,8 +50,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_sur_n_niveaux' => 'Sur @n@ niveau(x)',
 'entree_infini' => '&Agrave l\'infini',
 'entree_mapage' => 'Ma page perso',
+'entree_tri_num' => 'Crit&egrave;re de tri (num&eacute;rique)',
+'entree_tri_alpha' => 'Crit&egrave;re de tri (alphab&eacute;tique)',
 
 'info_numero_menu' => 'MENU NUM&Eacute;RO :',
+'info_tri' => 'Tri :',
+'info_tri_alpha' => '(alphab&eacute;tique)',
+'info_tri_num' => '(num&eacute;rique)',
 
 'nom_menu_accueil' => 'Accueil',
 'nom_menu_deconnecter' => 'Se d&eacute;connecter',
@@ -65,7 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'description_menu_lien' => 'Ajoute un lien arbitraire, en interne (URL relative) ou externe (http://...).',
 'description_menu_mapage' => 'Si le visiteur est connect&eacute;, ajoute un lien vers sa page auteur.',
 'description_menu_objet' => 'Cr&eacute;e un lien vers un objet de SPIP : article, rubrique ou autre. Par d&eacute;faut, l\'entr&eacute;e aura le titre de l\'objet.',
-'description_menu_rubriques' => 'Affiche automatiquement un menu listant les rubriques et, si on veut, les sous-rubriques sur plusieurs niveaux. Par d&eacute;faut, affiche toutes les rubriques depuis la racine.',
+'description_menu_rubriques' => 'Affiche automatiquement un menu listant les rubriques et, si on veut, les sous-rubriques sur plusieurs niveaux. Par d&eacute;faut, affiche toutes les rubriques depuis la racine, tri&eacute;es par titre (num&eacute;riquement puis alphab&eacute;tiquement).',
 );
 
 ?>
