@@ -28,7 +28,7 @@ function exec_jeux_edit(){
 	jeux_compat_boite('debut_droite');
 	echo gros_titre($gros_titre, '', false);
 	
-	if(defined('_SPIP19100')) debut_cadre_formulaire(); else echo debut_cadre_formulaire('', true);
+	echo debut_cadre_formulaire('', true);
 
 	echo "<form method='post' name='jeux_edit'>\n";
 //	debut_cadre_relief();
@@ -37,7 +37,7 @@ function exec_jeux_edit(){
 //	fin_cadre_relief();
 	echo "<p align='right'><input type='submit' name='valider' value='"._T('bouton_valider')."' class='fondo' /></p>";
 	echo '</form>';
-	if(defined('_SPIP19100')) fin_cadre_formulaire(); else echo fin_cadre_formulaire(true);
+	echo fin_cadre_formulaire(true);
 	echo fin_gauche(), fin_page();
 }
 
@@ -48,19 +48,12 @@ function jeux_ajouter_jeu($id_jeu=false, $contenu='', $titre_prive='', $type_res
 	$titre_prive = strlen($titre_prive)?$titre_prive:_T('jeux:sans_titre_prive');
 	$contenu = "<jeux>$contenu</jeux>";
 	if (!$id_jeu) {
-		if(defined('_SPIP19300'))
-			$id_jeu = sql_insertq('spip_jeux', array('date' => 'NOW()', 'statut'=>'publie', 'type_jeu'=>$type_jeu, 'titre_prive'=>$titre_prive, 'contenu'=>$contenu, 'type_resultat'=>$type_resultat));
-		else {
-			spip_query("INSERT into spip_jeux (date,statut,type_jeu,titre_prive,contenu,type_resultat) VALUES(NOW(),'publie',"._q($type_jeu).","._q($titre_prive).","._q($contenu).",'$type_resultat')");	
-			$id_jeu = mysql_insert_id();
-			spip_log("Le jeu #$id_jeu a ete insere par l'auteur #".$GLOBALS["auteur_session"]['id_auteur']);
-		}
+
+        $id_jeu = sql_insertq('spip_jeux', array('date' => 'NOW()', 'statut'=>'publie', 'type_jeu'=>$type_jeu, 'titre_prive'=>$titre_prive, 'contenu'=>$contenu, 'type_resultat'=>$type_resultat));
+		
 	} else {
-		if(defined('_SPIP19300'))
-			sql_updateq('spip_jeux', array('date' => 'NOW()', 'type_jeu'=>$type_jeu, 'titre_prive'=>$titre_prive, 'contenu'=>$contenu, 'type_resultat'=>$type_resultat), "id_jeu=$id_jeu");
-		else
-			spip_query("UPDATE spip_jeux SET date=NOW(),type_jeu="._q($type_jeu).",titre_prive="._q($titre_prive).",contenu="._q($contenu).",type_resultat="._q($type_resultat)." WHERE id_jeu=$id_jeu");
-			spip_log("Le jeu #$id_jeu a ete modifie par l'auteur #".$GLOBALS["auteur_session"]['id_auteur']);
+        sql_updateq('spip_jeux', array('date' => 'NOW()', 'type_jeu'=>$type_jeu, 'titre_prive'=>$titre_prive, 'contenu'=>$contenu, 'type_resultat'=>$type_resultat), "id_jeu=$id_jeu");
+        spip_log("Le jeu #$id_jeu a ete modifie par l'auteur #".$GLOBALS["auteur_session"]['id_auteur']);
 	}
 	return $id_jeu;
 }

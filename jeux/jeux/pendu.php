@@ -60,8 +60,7 @@ function pendu_pendu($js, $indexJeux) {
 // --></script>", 'JEUX', true);
  // scripts autorises ?
  if ((!_DIR_RESTREINT && $GLOBALS["filtrer_javascript"]!=1) || ($GLOBALS["filtrer_javascript"]==-1)) $js = _T('jeux:erreur_scripts');
- // les scripts etaient totalement interdits avant 1.92
- if (defined('_SPIP19100')) $js = _T('jeux:erreur_spip');
+
  return '<table class="pendu" border=0><tr><td align="center">'
  	. "<p align=\"center\"><div class=\"pendu_images\" align=center>$images</div><br/>\n$proposition</p></td>"
 	. "<td width=\"20\">&nbsp;</td><td valign=\"bottom\">\n" . affiche_un_clavier($indexJeux) . '<br/></td></tr>'

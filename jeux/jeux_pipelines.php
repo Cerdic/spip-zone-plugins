@@ -87,13 +87,6 @@ function jeux_insert_head($flux){
 }
 
 // pipeline affiche_gauche
-function jeux_affiche_gauche($flux) {
-// correction d'un bug d'affichage
- if (defined('_SPIP19100')) $flux['data'] .="<script type=\"text/javascript\"><!--
-document.getElementById('haut-page').childNodes[2].align='center';
-//--></script>";
-	return $flux;
-}
 
 // Le pipeline affichage_final, execute a chaque hit sur toute la page
 // Recherche tous les "title=JEUX-HEAD(...)" --> et incorporation a la place de _JEUX_HEAD2

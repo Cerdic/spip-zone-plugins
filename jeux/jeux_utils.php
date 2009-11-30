@@ -11,15 +11,6 @@
 
 include_spip('jeux_config');
 
-// sacree compatibilite...
- if (defined('_SPIP19100')) {
-	define(_DIR_VAR, _DIR_IMG);
-	function set_request($var, $val = NULL) {
-		unset($_GET[$var]);
-		unset($_POST[$var]);
-		if ($val !== NULL) $_GET[$var] = $val;
-	}
-}
 
 if (!defined('_DIR_PLUGIN_JEUX')){
 	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));

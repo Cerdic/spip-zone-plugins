@@ -15,32 +15,10 @@ function boucle_JEUX($id_boucle, &$boucles) {
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table;
 	$mstatut = $id_table .'.statut';
-	// non requis sous 1.93
-	if(!defined('_SPIP19300')) $boucle->from[] =  "spip_jeux AS $id_table";
-//	if (!($boucle->modificateur['criteres']['statut']))
-//		{$boucle->where[] = array("'='", "'$mstatut'", "'\\'publie\\''");}
+
 	return calculer_boucle($id_boucle, $boucles);
 }
 
-// non requis sous 1.93
-if(!defined('_SPIP19300')) {
-	function boucle_JEUX_RESULTATS($id_boucle, &$boucles) {
-		$boucle = &$boucles[$id_boucle];
-		$id_table = $boucle->id_table;
-		$boucle->from[] =  "spip_jeux_resultats AS $id_table";
-		return calculer_boucle($id_boucle, $boucles);
-	}
-	if(!function_exists('balise_AUTORISER_dist')) {
-		function balise_AUTORISER_dist($p) {
-			$_code = array();
-			$p->descr['session'] = true; // faire un cache par session
-			$n=1; while ($_v = interprete_argument_balise($n++,$p)) $_code[] = $_v;
-			$p->code = '(include_spip("inc/autoriser")&&autoriser(' . join(', ',$_code).')?" ":"")';
-			$p->interdire_scripts = false;
-			return $p;
-		}
-	}
-}
 
 // filtre retournant un lien cliquable si $nb!=0, sinon un simple tiret
 function jeux_lien_jeu($nb='0', $exec='', $id_jeu=0) {

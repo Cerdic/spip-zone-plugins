@@ -49,16 +49,14 @@ function jeux_ajouter_resultat($id_jeu, $resultat, $total, $resultat_long=''){
 
 function jeux_ajouter_resultat_base($id_resultat, $id_jeu, $id_auteur, $resultat, $resultat_long, $total, $type_resultat) {
 	if($id_resultat) {
-		if(defined('_SPIP19300'))
-			sql_updateq('spip_jeux_resultats', array('resultat_court'=>$resultat, 'resultat_long'=>$resultat_long, 'total'=>$total), "id_resultat=$id_resultat");
-		else
-			spip_query("UPDATE spip_jeux_resultats SET resultat_court=$resultat,resultat_long="._q($resultat_long).",total=$total WHERE id_resultat=$id_resultat");
+
+        sql_updateq('spip_jeux_resultats', array('resultat_court'=>$resultat, 'resultat_long'=>$resultat_long, 'total'=>$total), "id_resultat=$id_resultat");
+
 		spip_log("Le resultat #$id_resultat de l'auteur #$id_auteur au jeu #$id_jeu a ete modifie (type '$type_resultat')");
 	} else {
-		if(defined('_SPIP19300'))
-			sql_insertq('spip_jeux_resultats', array('id_jeu'=>$id_jeu, 'id_auteur'=>$id_auteur, 'resultat_court'=>$resultat, 'resultat_long'=>$resultat_long, 'total'=>$total));
-		else
-			spip_query("INSERT into spip_jeux_resultats (id_jeu,id_auteur,resultat_court,resultat_long,total) VALUES ($id_jeu,$id_auteur,$resultat,"._q($resultat_long).",$total)"); 
+
+        sql_insertq('spip_jeux_resultats', array('id_jeu'=>$id_jeu, 'id_auteur'=>$id_auteur, 'resultat_court'=>$resultat, 'resultat_long'=>$resultat_long, 'total'=>$total));
+ 
 		spip_log("Le resultat de l'auteur #$id_auteur au jeu #$id_jeu a ete enregistre (type '$type_resultat')");
 	}
 }

@@ -145,7 +145,7 @@ function gerer_resultat_jeux($id_jeu, $bouton){
 }
 
 function formulaire_suppression($bouton, $type){
-	if(defined('_SPIP19100'))debut_cadre_formulaire();else echo debut_cadre_formulaire('', true);
+	echo debut_cadre_formulaire('', true);
 	echo "<form method='post'  name='supprimer_resultat'>";
 	debut_cadre_relief();	
 	
@@ -205,7 +205,7 @@ function formulaire_suppression($bouton, $type){
 	fin_cadre_relief();
 	echo "</form>";
 	
-	if(defined('_SPIP19100'))fin_cadre_formulaire();else echo fin_cadre_formulaire(true);
+	echo fin_cadre_formulaire(true);
 }
 function interdit(){
 	jeux_debut_page(_T('avis_non_acces_page'));

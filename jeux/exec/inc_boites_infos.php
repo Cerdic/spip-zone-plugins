@@ -6,15 +6,11 @@ include_spip('public/assembler');
 
 // compatibilites
 function jeux_debut_page($titre="", $rubrique="accueil", $sous_rubrique="accueil") {
-	if(defined('_SPIP19100'))
-		debut_page($titre, $rubrique, $sous_rubrique);
-	else {
-		$commencer_page = charger_fonction('commencer_page', 'inc');
+        $commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page($titre, $rubrique, $sous_rubrique);
-	}
 }
-if(defined('_SPIP19100') && !function_exists('fin_gauche')) { function fin_gauche(){return '';} }
-function jeux_compat_boite($b) { if(defined('_SPIP19200')) echo $b('', true); else $b(); }
+
+function jeux_compat_boite($b) {echo $b('', true);}//un truc à virer après
 
 // Pagination sur les jeux disponibles
 function jeux_navigation_pagination() {
@@ -23,8 +19,8 @@ function jeux_navigation_pagination() {
 	$id_jeu = intval(_request('id_jeu'));
 
 	// liste des jeux disponibles
-	$fetch = defined('_SPIP19300')?'sql_fetch':'spip_fetch_array';
-	$q = defined('_SPIP19300')?sql_select('id_jeu', 'spip_jeux'):spip_query("SELECT id_jeu FROM spip_jeux");
+	$fetch = 'sql_fetch';
+	$q = sql_select('id_jeu', 'spip_jeux');
 	$ids = array(); $i = 0;
 	while($r = $fetch($q)) { 
 		$ids[$i++] = $r['id_jeu'];

@@ -6,17 +6,13 @@ include_spip('exec/inc_boites_infos');
 
 function exec_jeux_voir(){
 	$id_jeu = _request('id_jeu');
-
+    
 	include_spip('jeux_utils');
-
-//	TODO :
-//	include_spip('public/assembler');
-//	echo recuperer_fond('fonds/jeux_voir',array('id_jeu'=>$id_jeu));
 
 	$requete = jeux_fetsel('statut,contenu,id_jeu,type_jeu,titre_prive,date,type_resultat', 'spip_jeux', "id_jeu=$id_jeu");
 	list($statut, $contenu, $id_jeu, $type_jeu, $titre_prive, $date, $type_resultat) =
 		array($requete['statut'],$requete['contenu'], $requete['id_jeu'], $requete['type_jeu'], $requete['titre_prive'], $requete['date'], $requete['type_resultat']);
-
+    
 	$configuration_interne = jeux_trouver_configuration_interne($contenu);
 	$titre_public = jeux_trouver_titre_public($contenu);
 	if($titre_prive=='') $titre_prive = _T('jeux:sans_titre_prive');
@@ -25,7 +21,7 @@ function exec_jeux_voir(){
 		$titre_public = _T('jeux:jeu_titre_public_') . ' ' . $titre_public;
 	}
 	$contenu = $type_jeu==_T('jeux:jeu_vide')?_T('jeux:introuvable'):propre($contenu);
-	$puce = puce_compat192(puce_statut($statut));
+	$puce = puce_statut($statut);
 	
 	if(!$id_jeu){
 		jeux_debut_page(_T("jeux:pas_de_jeu"));
@@ -79,9 +75,6 @@ function exec_jeux_voir(){
 		echo gros_titre($puce." "._T("jeux:jeu_numero", array('id'=>$id_jeu,'nom'=>$type_jeu)), '', '', false);
 	echo '<br />', $contenu;
 
-//echo 'compacter (auteur=1) : NOT IN ',recuperer_fond('fonds/jeux_compacter', array('id_auteur'=>1));
-//echo "<br>compacter (jeu=$id_jeu) : NOT IN ",recuperer_fond('fonds/jeux_compacter', array('id_jeu'=>$id_jeu));
-//echo '<br>compacter (tout) : NOT IN ',recuperer_fond('fonds/jeux_compacter');
 
 	fin_cadre_relief();
 	echo jeux_navigation_pagination();

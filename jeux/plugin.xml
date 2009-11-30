@@ -64,11 +64,6 @@ Afin d'&#233;viter les mauvaises surprises de pr&#233;sentation (comme l'afficha
 		<action>header_prive</action>
 	</pipeline>
 	<pipeline>
-		<nom>affiche_gauche</nom>
-		<inclure>jeux_pipelines.php</inclure>
-		<action>affiche_gauche</action>
-	</pipeline>
-	<pipeline>
 		<nom>affichage_final</nom> 
 		<inclure>jeux_pipelines.php</inclure>
 		<action>affichage_final</action>
