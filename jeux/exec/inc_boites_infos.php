@@ -4,14 +4,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // pour tous les recuperer_fond()
 include_spip('public/assembler');
 
-// compatibilites
-function jeux_debut_page($titre="", $rubrique="accueil", $sous_rubrique="accueil") {
-        $commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page($titre, $rubrique, $sous_rubrique);
-}
-
-function jeux_compat_boite($b) {echo $b('', true);}//un truc à virer après
-
 // Pagination sur les jeux disponibles
 function jeux_navigation_pagination() {
 	$texte = ''; $href = 'jeux_voir'; $nb_aff = 1; $deb_aff = 1;

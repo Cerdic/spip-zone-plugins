@@ -16,16 +16,17 @@ function exec_jeux_edit(){
 	}
 
 	$gros_titre = _request('nouveau')?_T('jeux:nouveau_jeu'):_T('jeux:modifier_jeu', array('id'=>$id_jeu));
-	jeux_debut_page($gros_titre);
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo $commencer_page($gros_titre);
 	
-	jeux_compat_boite('debut_gauche');
+	echo debut_gauche('',true);
 	echo boite_infos_jeu($id_jeu);
 	
 	echo debut_cadre_relief();
 	echo _T('jeux:explication_jeu');
 	echo fin_cadre_relief();
-	jeux_compat_boite('creer_colonne_droite');
-	jeux_compat_boite('debut_droite');
+	echo creer_colonne_droite('',true);
+	echo debut_droite('',true);
 	echo gros_titre($gros_titre, '', false);
 	
 	echo debut_cadre_formulaire('', true);

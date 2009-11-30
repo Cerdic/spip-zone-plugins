@@ -11,22 +11,24 @@ function exec_jeux_resultats_auteur(){
 	$requete = jeux_fetsel('id_auteur,nom', 'spip_auteurs', "id_auteur=$id_auteur", '');
 	$nom = $requete['nom'];
 	$id_auteur = $requete['id_auteur'];
-
+    
+    $commencer_page = charger_fonction('commencer_page', 'inc');
 	if(!$id_auteur){
-		jeux_debut_page(_T("jeux:pas_d_auteur"));
+	   
+		echo $commencer_page(_T("jeux:pas_d_auteur"));
 		echo gros_titre(_T("jeux:pas_d_auteur"), '', false), fin_page();
 		return;
 	}
 
-	jeux_debut_page(_T("jeux:resultats_auteur",array('nom'=>$nom)));
+	echo $commencer_page(_T("jeux:resultats_auteur",array('nom'=>$nom)));
 
-	jeux_compat_boite('debut_gauche');
+	echo debut_gauche('',true);
 
 	echo boite_infos_auteur($id_auteur);
 	echo boite_infos_accueil($id_auteur);
 	
-	jeux_compat_boite('creer_colonne_droite');
-	jeux_compat_boite('debut_droite');
+	echo creer_colonne_droite('',true);
+	echo debut_droite('',true);
 	debut_cadre_relief();
 	
 	echo gros_titre(_T("jeux:resultats_auteur", array('nom'=>$nom)), '', false);

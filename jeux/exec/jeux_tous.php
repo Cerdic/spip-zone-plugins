@@ -7,14 +7,14 @@ include_spip('exec/inc_boites_infos');
 function exec_jeux_tous(){
 	$par = _request('par');
 	($par =='') ? $par='date' : $par = $par;
+    $commencer_page = charger_fonction('commencer_page', 'inc');
+	echo $commencer_page(_T("jeux:liste_jeux"));
 
-	jeux_debut_page(_T("jeux:liste_jeux"));
-
-	jeux_compat_boite('debut_gauche');
+	echo debut_gauche('',true);
 	echo boite_infos_accueil();
 
-	jeux_compat_boite('creer_colonne_droite');
-	jeux_compat_boite('debut_droite');
+	echo creer_colonne_droite('',true);
+	echo debut_droite('',true);
 	debut_cadre_relief();
 	
 	echo gros_titre(_T("jeux:liste_jeux"), '', false);

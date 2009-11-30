@@ -5,6 +5,7 @@ include_spip('inc/presentation');
 include_spip('exec/inc_boites_infos');
 
 function exec_jeux_voir(){
+	$commencer_page = charger_fonction('commencer_page', 'inc');
 	$id_jeu = _request('id_jeu');
     
 	include_spip('jeux_utils');
@@ -24,16 +25,16 @@ function exec_jeux_voir(){
 	$puce = puce_statut($statut);
 	
 	if(!$id_jeu){
-		jeux_debut_page(_T("jeux:pas_de_jeu"));
-		jeux_compat_boite('debut_gauche');
+		echo $commencer_page(_T("jeux:pas_de_jeu"));
+		echo debut_gauche('',true);
 		echo boite_infos_accueil();
 		echo fin_gauche(), _T("jeux:pas_de_jeu"), fin_page();
 		return;
 	}
 	
-	jeux_debut_page(_T("jeux:jeu_numero",array('id'=>$id_jeu,'nom'=>$type_jeu)));
+	echo $commencer_page(_T("jeux:jeu_numero",array('id'=>$id_jeu,'nom'=>$type_jeu)));
 			
-	jeux_compat_boite('debut_gauche');
+	echo debut_gauche('',true);
 	echo boite_infos_jeu($id_jeu);
 	echo boite_infos_accueil();
 
@@ -41,8 +42,8 @@ function exec_jeux_voir(){
 	echo "<strong>"._t("jeux:derniere_modif")."</strong><br />".affdate($date).' '.heures($date).":".minutes($date);
 	fin_cadre_relief();
 
-	jeux_compat_boite('creer_colonne_droite');
-	jeux_compat_boite('debut_droite');
+	echo creer_colonne_droite('',true);
+	echo debut_droite('',true);
 	debut_cadre_relief();
 
 	// changement de statut
