@@ -1,6 +1,6 @@
 <entree>
-	<nom>Objet de SPIP</nom>
-	<description>Cr&eacute;e un lien vers un objet de SPIP : article, rubrique ou autre. Par d&eacute;faut, l'entr&eacute;e aura le titre de l'objet.</description>
+	<nom>menus:nom_menu_objet</nom>
+	<description>menus:description_menu_objet</description>
 	<icone>images/menus_objet.png</icone>
 	<parametre nom="type_objet" label="menus:entree_type_objet" obligatoire="oui" />
 	<parametre nom="id_objet" label="menus:entree_id_objet" obligatoire="oui" />

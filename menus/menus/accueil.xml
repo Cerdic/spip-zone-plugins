@@ -1,6 +1,6 @@
 <entree>
-	<nom>Accueil</nom>
-	<description>Lien vers la page d'accueil du site.</description>
+	<nom>menus:nom_menu_accueil</nom>
+	<description>menus:description_menu_accueil</description>
 	<icone>images/menus_accueil.png</icone>
 	<parametre nom="titre" label="menus:entree_titre" />
 	<parametre nom="css" label="menus:entree_css" />

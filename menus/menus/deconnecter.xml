@@ -1,6 +1,6 @@
 <entree>
-	<nom>Se d&eacute;connecter</nom>
-	<description>Si le visiteur est connect&eacute;, ajoute une entr&eacute;e lui proposant la d&eacute;connexion.</description>
+	<nom>menus:nom_menu_deconnecter</nom>
+	<description>menus:description_menu_deconnecter</description>
 	<icone>images/menus_logout.png</icone>
 	<parametre nom="titre" label="menus:entree_titre" />
 	<parametre nom="css" label="menus:entree_css" />

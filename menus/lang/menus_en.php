@@ -52,6 +52,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_mapage' => 'My page',
 
 'info_numero_menu' => 'MENU NUMBER:',
+
+'nom_menu_accueil' => 'Home Page',
+
+'description_menu_accueil' => 'Link to website\'s home page.',
 );
 
 ?>

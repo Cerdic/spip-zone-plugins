@@ -1,6 +1,6 @@
 <entree>
-	<nom>Lien arbitraire</nom>
-	<description>Ajoute un lien arbitraire, en interne (URL relative) ou externe (http://...).</description>
+	<nom>menus:nom_menu_lien</nom>
+	<description>menus:description_menu_lien</description>
 	<icone>images/menus_lien.png</icone>
 	<parametre nom="titre" label="menus:entree_titre" obligatoire="oui" />
 	<parametre nom="url" label="menus:entree_url" obligatoire="oui" />

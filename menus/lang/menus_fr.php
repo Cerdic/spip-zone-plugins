@@ -52,6 +52,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_mapage' => 'Ma page perso',
 
 'info_numero_menu' => 'MENU NUM&Eacute;RO :',
+
+'nom_menu_accueil' => 'Accueil',
+'nom_menu_deconnecter' => 'Se d&eacute;connecter',
+'nom_menu_lien' => 'Lien arbitraire',
+'nom_menu_mapage' => 'Ma page',
+'nom_menu_objet' => 'Objet de SPIP',
+'nom_menu_rubriques' => 'Rubriques dynamiques',
+
+'description_menu_accueil' => 'Lien vers la page d\'accueil du site.',
+'description_menu_deconnecter' => 'Si le visiteur est connect&eacute;, ajoute une entr&eacute;e lui proposant la d&eacute;connexion.',
+'description_menu_lien' => 'Ajoute un lien arbitraire, en interne (URL relative) ou externe (http://...).',
+'description_menu_mapage' => 'Si le visiteur est connect&eacute;, ajoute un lien vers sa page auteur.',
+'description_menu_objet' => 'Cr&eacute;e un lien vers un objet de SPIP : article, rubrique ou autre. Par d&eacute;faut, l\'entr&eacute;e aura le titre de l\'objet.',
+'description_menu_rubriques' => 'Affiche automatiquement un menu listant les rubriques et, si on veut, les sous-rubriques sur plusieurs niveaux. Par d&eacute;faut, affiche toutes les rubriques depuis la racine.',
 );
 
 ?>

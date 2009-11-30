@@ -38,8 +38,8 @@ function menus_charger_infos($type, $info=""){
 		if ($xml = spip_xml_load($fichier, false)){
 			if (count($xml['entree'])){
 				$xml = reset($xml['entree']);
-				$entree['nom'] = typo(spip_xml_aplatit($xml['nom']));
-				$entree['description'] = isset($xml['description']) ? typo(spip_xml_aplatit($xml['description'])) : '';
+				$entree['nom'] = typo(_T(spip_xml_aplatit($xml['nom'])));
+				$entree['description'] = isset($xml['description']) ? typo(_T(spip_xml_aplatit($xml['description']))) : '';
 				$entree['icone'] = isset($xml['icone']) ? find_in_path(reset($xml['icone'])) : '';
 				$entree['refuser_sous_menu'] = isset($xml['refuser_sous_menu']);
 				// Décomposition des paramètres

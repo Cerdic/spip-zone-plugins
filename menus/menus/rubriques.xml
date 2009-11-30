@@ -1,6 +1,6 @@
 <entree>
-	<nom>Rubriques dynamiques</nom>
-	<description>Affiche automatiquement un menu listant les rubriques et, si on veut, les sous-rubriques sur plusieurs niveaux. Par d&eacute;faut, affiche toutes les rubriques depuis la racine.</description>
+	<nom>menus:nom_menu_rubriques</nom>
+	<description>menus:description_menu_rubriques</description>
 	<icone>images/menus_rubriques.png</icone>
 	<parametre nom="id_rubrique" label="menus:entree_id_rubrique" />
 	<parametre nom="niveau" label="menus:entree_niveau" />
