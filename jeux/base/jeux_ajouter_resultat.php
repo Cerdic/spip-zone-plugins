@@ -52,12 +52,12 @@ function jeux_ajouter_resultat_base($id_resultat, $id_jeu, $id_auteur, $resultat
 
         sql_updateq('spip_jeux_resultats', array('resultat_court'=>$resultat, 'resultat_long'=>$resultat_long, 'total'=>$total), "id_resultat=$id_resultat");
 
-		spip_log("Le resultat #$id_resultat de l'auteur #$id_auteur au jeu #$id_jeu a ete modifie (type '$type_resultat')");
+		spip_log("Le resultat #$id_resultat de l'auteur #$id_auteur au jeu #$id_jeu a ete modifie (type '$type_resultat')",'jeux');
 	} else {
 
         sql_insertq('spip_jeux_resultats', array('id_jeu'=>$id_jeu, 'id_auteur'=>$id_auteur, 'resultat_court'=>$resultat, 'resultat_long'=>$resultat_long, 'total'=>$total));
  
-		spip_log("Le resultat de l'auteur #$id_auteur au jeu #$id_jeu a ete enregistre (type '$type_resultat')");
+		spip_log("Le resultat de l'auteur #$id_auteur au jeu #$id_jeu a ete enregistre (type '$type_resultat')",'jeux');
 	}
 }
 ?>

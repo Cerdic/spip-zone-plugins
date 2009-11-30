@@ -53,7 +53,7 @@ function jeux_ajouter_jeu($id_jeu=false, $contenu='', $titre_prive='', $type_res
 		
 	} else {
         sql_updateq('spip_jeux', array('date' => 'NOW()', 'type_jeu'=>$type_jeu, 'titre_prive'=>$titre_prive, 'contenu'=>$contenu, 'type_resultat'=>$type_resultat), "id_jeu=$id_jeu");
-        spip_log("Le jeu #$id_jeu a ete modifie par l'auteur #".$GLOBALS["auteur_session"]['id_auteur']);
+        spip_log("Le jeu #$id_jeu a ete modifie par l'auteur #".$GLOBALS["auteur_session"]['id_auteur'],'jeux');
 	}
 	return $id_jeu;
 }
