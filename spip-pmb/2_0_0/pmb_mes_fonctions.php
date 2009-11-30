@@ -74,12 +74,14 @@ function pmb_notices_section_extraire($id_section, $url_base, $debut=0, $fin=5) 
 			$searchId=$r["searchId"];
 			$tableau_resultat[0][' '] = $r["nbResults"];
 	    
-			 $r=$ws->pmbesOPACAnonymous_fetchSearchRecords($searchId,$debut,$fin,"serialized_unimarc","utf8");
+			 //$r=$ws->pmbesOPACAnonymous_fetchSearchRecords($searchId,$debut,$fin,"serialized_unimarc","utf8");
+			 $r=$ws->pmbesOPACAnonymous_fetchSearchRecordsArray($searchId,$debut,$fin,"utf8");
 			  $i = 1;
 			  foreach($r as $value) {
 				    $tableau_resultat[$i] = Array();				
 				
-				    pmb_ws_parser_notice_serialisee($value['noticeId'], $value['noticeContent'], $tableau_resultat[$i]);
+				    //pmb_ws_parser_notice_serialisee($value['noticeId'], $value['noticeContent'], $tableau_resultat[$i]);
+				    pmb_ws_parser_notice_array($value, $tableau_resultat[$i]);
 				    $i++;
 			  }
 		
@@ -308,12 +310,14 @@ function pmb_recherche_extraire($recherche='*', $url_base, $look_ALL='', $look_A
 				convert:truc pour un passage pas admin/convert dans le format truc.
 				autre: renvoi l'id de la notice.
 			*/ 
-			  $r=$ws->pmbesOPACAnonymous_fetchSearchRecords($searchId,$debut,$fin,"serialized_unimarc","utf8");
+			  //$r=$ws->pmbesOPACAnonymous_fetchSearchRecords($searchId,$debut,$fin,"serialized_unimarc","utf8");
+			  $r=$ws->pmbesOPACAnonymous_fetchSearchRecordsArray($searchId,$debut,$fin,"utf8");
 			  $i = 1;
 			  foreach($r as $value) {
 				    $tableau_resultat[$i] = Array();				
 				
-				    pmb_ws_parser_notice_serialisee($value['noticeId'], $value['noticeContent'], $tableau_resultat[$i]);
+				    //pmb_ws_parser_notice_serialisee($value['noticeId'], $value['noticeContent'], $tableau_resultat[$i]);
+				    pmb_ws_parser_notice_array($value, $tableau_resultat[$i]);
 				    $i++;
 			  }
 		
@@ -592,6 +596,63 @@ function pmb_ws_parser_notice_serialisee($id_notice, $value, &$tresultat) {
 	    if (strpos($tmp_img, "L1xH1") !== false)  $gtresultat['logo_src'] = "";
 
 	    $tresultat['id'] = $id_notice;
+}
+//parsing d'une notice sérialisée
+function pmb_ws_parser_notice_array($value, &$tresultat) {
+	    include_spip("/inc/filtres_images");
+	    $indice_exemplaire = 0;
+	    $tresultat = Array();
+	    $id_notice = $value->id;
+	    foreach ( $value->f as $c1=>$v1) {
+		
+		foreach ( $v1->item as $c2=>$v2) {
+			if ($v2->key=="c") $dernierTypeTrouve = $v2->value;
+			foreach ( $v2->value as $c4=>$v4) {
+						  $dernierSousTypeTrouve=$v4['c'];
+						  $texte = $v4['value'];
+						  if (($dernierTypeTrouve == "010") && ($dernierSousTypeTrouve == "a")) $tresultat['isbn'] .= $texte;
+						  if (($dernierTypeTrouve == "010") && ($dernierSousTypeTrouve == "b")) $tresultat['reliure'] .= $texte;
+						  if (($dernierTypeTrouve == "010") && ($dernierSousTypeTrouve == "d")) $tresultat['prix'] .= $texte;
+						  
+						  if (($dernierTypeTrouve == "101") && ($dernierSousTypeTrouve == "a")) $tresultat['langues'] .= $texte;
+						  
+						  if (($dernierTypeTrouve == "102") && ($dernierSousTypeTrouve == "a")) $tresultat['pays'] .= $texte;
+						  
+						  if (($dernierTypeTrouve == "200") && ($dernierSousTypeTrouve == "a")) $tresultat['titre'] .= $texte;
+						  if (($dernierTypeTrouve == "200") && ($dernierSousTypeTrouve == "f")) $tresultat['auteur'] .= $texte;
+						  
+						  if (($dernierTypeTrouve == "210") && ($dernierSousTypeTrouve == "c")) $tresultat['editeur'] .= $texte;
+						  if (($dernierTypeTrouve == "210") && ($dernierSousTypeTrouve == "a")) $tresultat['editeur'] .= ' ('.$texte.')';
+						  if (($dernierTypeTrouve == "210") && ($dernierSousTypeTrouve == "c")) $tresultat['id_editeur'] = $dernierIdTrouve;
+						  if (($dernierTypeTrouve == "210") && ($dernierSousTypeTrouve == "d")) $tresultat['annee_publication'] .= $texte;
+						  
+						  if (($dernierTypeTrouve == "215") && ($dernierSousTypeTrouve == "a")) $tresultat['importance'] .= $texte;
+						  if (($dernierTypeTrouve == "215") && ($dernierSousTypeTrouve == "c")) $tresultat['presentation'] .= $texte;
+						  if (($dernierTypeTrouve == "215") && ($dernierSousTypeTrouve == "d")) $tresultat['format'] .= $texte;
+						  
+						  if (($dernierTypeTrouve == "225") && ($dernierSousTypeTrouve == "a")) $tresultat['collection'] .= $texte;
+						  if (($dernierTypeTrouve == "225") && ($dernierSousTypeTrouve == "a")) $tresultat['id_collection'] = $dernierIdTrouve;
+						  
+						  if (($dernierTypeTrouve == "330") && ($dernierSousTypeTrouve == "a")) $tresultat['resume'] .= str_replace("","&oelig;", stripslashes(str_replace("\n","<br />", str_replace("","'",$texte))));
+						  
+						  if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "a")) $tresultat['lesauteurs'] .= $texte;
+						  if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "b")) $tresultat['lesauteurs'] .= " ".$texte;
+						  if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "a")) $tresultat['id_auteur'] = $dernierIdTrouve;
+			}	
+		}
+	 
+	    }
+	
+
+	    if ($tresultat['lesauteurs'] == "")
+		  $tresultat['lesauteurs'] = $tresultat['auteur'];
+	     $tresultat['logo_src'] = lire_config("spip_pmb/url","http://tence.bibli.fr/opac")."/getimage.php?url_image=http%3A%2F%2Fimages-eu.amazon.com%2Fimages%2FP%2F!!isbn!!.08.MZZZZZZZ.jpg&noticecode=".str_replace("-","",$tresultat['isbn']);
+
+	     //cas où il n'y a pas d'image pmb renvoie un carré de 1 par 1 transparent.
+	    $tmp_img = image_reduire("<img src=\"".copie_locale($tresultat['logo_src'])."\" />", 130, 0);
+	    if (strpos($tmp_img, "L1xH1") !== false)  $gtresultat['logo_src'] = "";
+
+	    $tresultat['id'] = $id_notice;
 	    
 
 	  
@@ -634,9 +695,11 @@ function pmb_ws_recuperer_notice ($id_notice, &$ws, &$tresultat) {
 	try {	
 	$listenotices = array(''.$id_notice);
 	$tresultat['id'] = $id_notice;
-		  $r=$ws->pmbesNotices_fetchNoticeList($listenotices,"serialized_unimarc","utf8",true,false);
+		  //$r=$ws->pmbesNotices_fetchNoticeList($listenotices,"serialized_unimarc","utf8",true,false);
+		  $r=$ws->pmbesNotices_fetchNoticeListArray($listenotices,"utf8",true,false);
 		  foreach($r as $value) {
-		        pmb_ws_parser_notice_serialisee($id_notice, $value, $tresultat);
+		        //pmb_ws_parser_notice_serialisee($id_notice, $value, $tresultat);
+			pmb_ws_parser_notice_array($value, $tresultat);
 		  }
 		
 
@@ -654,11 +717,13 @@ function pmb_ws_recuperer_tab_notices ($listenotices, &$ws, &$tresultat) {
 	try {	
 	
 	$tresultat['id'] = $id_notice;
-		  $r=$ws->pmbesNotices_fetchNoticeList($listenotices,"serialized_unimarc","utf8",true,false);
+		  //$r=$ws->pmbesNotices_fetchNoticeList($listenotices,"serialized_unimarc","utf8",true,false);
+		  $r=$ws->pmbesNotices_fetchNoticeListArray($listenotices,"utf8",true,false);
 		  $cpt=0;
 		  foreach($r as $value) {
 		      $tresultat[$cpt] = Array();
-		      pmb_ws_parser_notice_serialisee($id_notice, $value, $tresultat[$cpt]);
+		      //pmb_ws_parser_notice_serialisee($id_notice, $value, $tresultat[$cpt]);
+		      pmb_ws_parser_notice_array($value, $tresultat[$cpt]);
 		      $cpt++;
 		  }
 		
