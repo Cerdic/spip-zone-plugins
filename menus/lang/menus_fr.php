@@ -64,6 +64,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'nom_menu_mapage' => 'Ma page',
 'nom_menu_objet' => 'Objet de SPIP',
 'nom_menu_rubriques' => 'Rubriques dynamiques',
+'nom_menu_secteurlangue' => 'Secteurs de langue',
 
 'description_menu_accueil' => 'Lien vers la page d\'accueil du site.',
 'description_menu_deconnecter' => 'Si le visiteur est connect&eacute;, ajoute une entr&eacute;e lui proposant la d&eacute;connexion.',
@@ -71,6 +72,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'description_menu_mapage' => 'Si le visiteur est connect&eacute;, ajoute un lien vers sa page auteur.',
 'description_menu_objet' => 'Cr&eacute;e un lien vers un objet de SPIP : article, rubrique ou autre. Par d&eacute;faut, l\'entr&eacute;e aura le titre de l\'objet.',
 'description_menu_rubriques' => 'Affiche automatiquement un menu listant les rubriques et, si on veut, les sous-rubriques sur plusieurs niveaux. Par d&eacute;faut, affiche toutes les rubriques depuis la racine, tri&eacute;es par titre (num&eacute;riquement puis alphab&eacute;tiquement).',
+'description_menu_secteurlangue' => 'Cette entr&eacute;e est sp&eacute;cifique aux sites utilisant un secteur par langue. Elle affiche automatiquement un menu listant les rubriques du secteur correspondant &agrave; la langue de la page et, si on veut, les sous-rubriques sur plusieurs niveaux. Par d&eacute;faut, affiche toutes les rubriques depuis la racine, tri&eacute;es par titre (num&eacute;riquement puis alphab&eacute;tiquement).',
 );
 
 ?>
