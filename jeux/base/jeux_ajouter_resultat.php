@@ -2,7 +2,7 @@
 function jeux_ajouter_resultat($id_jeu, $resultat, $total, $resultat_long=''){
 	$id_auteur = $GLOBALS["auteur_session"]['id_auteur'];
 	if (!$id_auteur) return;
-	$requete = jeux_fetsel('type_resultat', 'spip_jeux', "id_jeu=$id_jeu");
+	$requete = sql_fetsel('type_resultat', 'spip_jeux', "id_jeu=$id_jeu");
 	$type_resultat = $requete['type_resultat'];
 	// valeurs possibles : 'defaut', 'aucun', 'premier', 'dernier', 'meilleur', 'meilleurs', 'tous'
 	if($type_resultat=='defaut')
@@ -17,7 +17,7 @@ function jeux_ajouter_resultat($id_jeu, $resultat, $total, $resultat_long=''){
 
 	// on insere ou on remplace ?
 	// si on remplace, verifier quel type de resultat : le meilleur, le premier ou le dernier
-	$requete = jeux_fetsel('resultat_court,total,id_resultat', 'spip_jeux_resultats', "id_jeu=$id_jeu AND id_auteur=$id_auteur");
+	$requete = sql_fetsel('resultat_court,total,id_resultat', 'spip_jeux_resultats', "id_jeu=$id_jeu AND id_auteur=$id_auteur");
 	if (($type_resultat!='tous') && $requete) {
 		// ici on va probablement remplacer le score en base...
 		// valeurs possibles : 'premier', 'dernier', 'meilleur', 'meilleurs'

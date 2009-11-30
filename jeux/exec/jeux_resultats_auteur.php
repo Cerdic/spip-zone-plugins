@@ -8,7 +8,7 @@ function exec_jeux_resultats_auteur(){
 	$id_auteur 	= _request('id_auteur');
 	$par = _request('par');
 	
-	$requete = jeux_fetsel('id_auteur,nom', 'spip_auteurs', "id_auteur=$id_auteur", '');
+	$requete =  sql_fetsel('id_auteur,nom', 'spip_auteurs', "id_auteur=$id_auteur");
 	$nom = $requete['nom'];
 	$id_auteur = $requete['id_auteur'];
     

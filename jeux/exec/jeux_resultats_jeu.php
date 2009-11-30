@@ -8,7 +8,7 @@ function exec_jeux_resultats_jeu(){
 	$id_jeu	= _request('id_jeu');
 	$par = _request('par');
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	$requete = jeux_fetsel('id_jeu,type_jeu,titre_prive', 'spip_jeux', "id_jeu=$id_jeu");
+	$requete = sql_fetsel('id_jeu,type_jeu,titre_prive', 'spip_jeux', "id_jeu=$id_jeu");
 	$id_jeu = $requete['id_jeu'];
 	$type_jeu = $requete['type_jeu'];
 	$titre_prive = $requete['titre_prive'];

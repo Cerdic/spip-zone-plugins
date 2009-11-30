@@ -59,7 +59,7 @@ function gerer_resultat_tous($bouton){
 }
 
 function gerer_resultats_auteur($id_auteur, $bouton){
-	$requete = jeux_fetsel('id_auteur,nom', 'spip_auteurs', "id_auteur=$id_auteur", '');
+	$requete = sql_fetsel('id_auteur,nom', 'spip_auteurs', "id_auteur=$id_auteur", '');
 	$nom = $requete['nom'];
 	$id_auteur = $requete['id_auteur'];
     $commencer_page = charger_fonction('commencer_page', 'inc');
@@ -102,7 +102,7 @@ function gerer_resultats_auteur($id_auteur, $bouton){
 }
 
 function gerer_resultat_jeux($id_jeu, $bouton){
-	$requete = jeux_fetsel('id_jeu,type_jeu', 'spip_jeux', "id_jeu=$id_jeu");
+	$requete = sql_fetsel('id_jeu,type_jeu', 'spip_jeux', "id_jeu=$id_jeu");
 	$id_jeu = $requete['id_jeu'];
 	$type_jeu = $requete['type_jeu'];
 	$commencer_page = charger_fonction('commencer_page', 'inc');
