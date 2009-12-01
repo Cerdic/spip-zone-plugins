@@ -18,8 +18,8 @@ function jeux_install($install){
 
 function jeux_vider_tables() {
 	include_spip('base/abstract_sql');
-	spip_query("DROP TABLE jeux");
-	spip_query("DROP TABLE jeux_resultats");
+	sql_drop_table("spip_jeux");
+	sql_drop_table("spip_jeux_resultats");
 	effacer_meta('jeux_base_version');
 
 }

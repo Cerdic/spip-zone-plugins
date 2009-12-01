@@ -121,22 +121,7 @@ function jeux_taches_generales_cron($taches_generales){
 	return $taches_generales;
 }
 
-// compatibilite SPIP < 2.0
-function cron_jeux_nettoyer_base($t, $attente=86400){
-	$date = date("YmdHis", time() - $attente);
-	include_spip('inc/utils');
-	$sup = array();
-	$i = 0;
-	$requete = spip_query("SELECT id_jeu from spip_jeux WHERE statut='poubelle' and 'date'<".$date);
-	while ($ligne = spip_fetch_array($requete))
-		$sup[] = $ligne['id_jeu'];
-	if (count($sup)) {
-		$sup = '('.join(',',$sup).')';
-		spip_query('DELETE FROM spip_jeux WHERE `id_jeu` IN '.$sup);
-		spip_query('DELETE FROM spip_jeux_resultats WHERE `id_jeu` IN '.$sup);
-		spip_log('Le plugin Jeux vide la poubelle WHERE `id_jeu` IN '.$sup,'jeux');
-	}
-}
+
 
 // SPIP >= 2.0 : c'est genie_ et pas cron_
 function genie_jeux_nettoyer_base($t) {
