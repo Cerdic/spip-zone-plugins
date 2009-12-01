@@ -20,14 +20,14 @@
 	<BOUCLE_rubriques(RUBRIQUES){id_parent=#GET{id_rubrique}}{par num #GET{tri_num}}{par #GET{tri_alpha}}>
 		#SET{niveau_actuel,1}
 		<li class="menu-entree[ (#ID_RUBRIQUE|menus_exposer{rubrique,#ENV*{env}})]">
-			<a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a>
+			<a href="#URL_RUBRIQUE">#TITRE</a>
 			<BOUCLE_test_niveau(CONDITION){si #GET{niveau_actuel}|!={#GET{niveau}}}>
 			<B_sous_rubriques>
 			<ul class="menu-liste">
 				<BOUCLE_sous_rubriques(RUBRIQUES){id_parent}{par num #GET{tri_num}}{par #GET{tri_alpha}}>
 				#SET{niveau_actuel,#GET{niveau_actuel}|plus{1}}
 				<li class="menu-entree[ (#ID_RUBRIQUE|menus_exposer{rubrique,#ENV*{env}})]">
-					<a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a>
+					<a href="#URL_RUBRIQUE">#TITRE</a>
 					<BOUCLE_test_niveau2(CONDITION){si #GET{niveau_actuel}|!={#GET{niveau}}}>
 					<BOUCLE_sous_sous(BOUCLE_sous_rubriques)></BOUCLE_sous_sous>
 					</BOUCLE_test_niveau2>
