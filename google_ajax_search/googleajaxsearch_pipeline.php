@@ -21,6 +21,7 @@ function googleajaxsearch_insert_head($flux){
       siteSearch.setUserDefinedLabel("'.supprimer_tags($nom_site).'");
       siteSearch.setUserDefinedClassSuffix("siteSearch");
       siteSearch.setSiteRestriction("'.$adresse_site.'");
+	  searchControl.setResultSetSize(google.search.Search.LARGE_RESULTSET)
       options = new google.search.SearcherOptions();
       options.setExpandMode(google.search.SearchControl.EXPAND_MODE_OPEN);
       searchControl.addSearcher(siteSearch,options);
