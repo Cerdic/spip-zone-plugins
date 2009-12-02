@@ -48,6 +48,15 @@ function seo_insert_head($flux) {
 							$meta_tags['title'] = sql_getfetsel("titre", "spip_".$type_object."s", "id_$type_object = $id_object");
 						if ($name == 'description')
 							$meta_tags['description'] = sql_getfetsel("descriptif", "spip_".$type_object."s", "id_$type_object = $id_object");
+					} elseif ($option == 'page_sommaire') {
+						if ($name == 'title') {
+							$meta_tags['title'] = sql_getfetsel("titre", "spip_".$type_object."s", "id_$type_object = $id_object");
+							$meta_tags['title'] .= (($meta_tags['title']!='')?' - ':'') . $config['meta_tags']['tag'][$name];
+						}
+						if ($name == 'description') {
+							$meta_tags['description'] = sql_getfetsel("descriptif", "spip_".$type_object."s", "id_$type_object = $id_object");
+							$meta_tags['description'] .= (($meta_tags['description']!='')?' - ':'') . $config['meta_tags']['tag'][$name];
+						}
 					}
 				}
 				
@@ -65,7 +74,10 @@ function seo_insert_head($flux) {
 		// Print the result on the page
 		foreach ($meta_tags as $name => $content) {
 			if ($content != '')
-				$flux .= '<meta name="'. $name .'" content="'. htmlspecialchars($content) .'"/>';
+				if ($name=='title')
+					$flux .= '<title>'. htmlspecialchars(supprimer_numero($content)) .'</title>'."\n";
+				else
+					$flux .= '<meta name="'. $name .'" content="'. htmlspecialchars(textebrut($content)) .'"/>'."\n";
 		}
 	}
 	

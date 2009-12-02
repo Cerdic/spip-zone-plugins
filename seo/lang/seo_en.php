@@ -31,7 +31,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'meta_robots' => 'Robots:',
 	'meta_sommaire_value' => 'Home Page Meta Value',
 	'meta_page_title_value' => 'Page Title Value',
+	'meta_page_title_sommaire_value' => 'Page Title Value + Home Page Meta Value',
 	'meta_page_description_value' => 'Page Description Value',
+	'meta_page_description_sommaire_value' => 'Page Description Value + Home Page Meta Value',
 	
 	'canonical_url' => 'Canonical URL',
 	'canonical_url_activate' => 'Activate Canonical URL',
