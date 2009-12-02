@@ -60,6 +60,10 @@ function inc_inscription2_verifier_tables_dist(){
 		$tables_principales[$table]['field']['spip_listes_format'] = "VARCHAR(8) DEFAULT 'non' NOT NULL";
 
 	maj_tables($table);
+	
+	// vider le cache de la description sql
+	$trouver_table = charger_fonction('trouver_table','base');
+	$trouver_table('');
 	return;
 }
 ?>
