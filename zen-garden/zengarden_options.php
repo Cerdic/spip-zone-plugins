@@ -4,9 +4,17 @@ if (!defined('_DIR_PLUGIN_THEME')){
 		define('_DIR_THEMES',_DIR_RACINE."themes/");
 	
 	// si on est en mode apercu, il suffit de repasser dans l'espace prive pour desactiver l'apercu
-	if (test_espace_prive() AND isset($_COOKIE['spip_zengarden_theme'])){
-		include_spip('inc/cookie');
-		spip_setcookie('spip_zengarden_theme',$_COOKIE['spip_zengarden_theme']=='',-1);
+	if (test_espace_prive()){
+		if (isset($_COOKIE['spip_zengarden_theme'])){
+			include_spip('inc/cookie');
+			spip_setcookie('spip_zengarden_theme',$_COOKIE['spip_zengarden_theme']=='',-1);
+		}
+	}
+	elseif(defined('_ZEN_VAR_THEME')){
+		if (!is_null($arg = _request('var_theme'))){
+			include_spip('inc/cookie');
+			spip_setcookie('spip_zengarden_theme',$_COOKIE['spip_zengarden_theme'] = $arg);
+		}
 	}
 	
 	// ajouter le theme au path
