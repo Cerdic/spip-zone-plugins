@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'derniers_articles' => 'Actualit&eacute;s',
 'newsletter' => 'Newsletter',
 'toute_actualite' => 'toute l\'actualit&eacute;',
+'actualites' => 'Actualit&eacute;s',
 'lire_la_suite' => 'Lire la suite',
 'nouveautes' => 'Nouveaut&eacute;s',
 'toutes_nouveautes' => 'toutes les nouveaut&eacute;s',

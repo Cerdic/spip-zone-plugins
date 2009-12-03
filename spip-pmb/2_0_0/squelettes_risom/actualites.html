@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
 <head>
-<title><:derniers_articles:> - [(#NOM_SITE_SPIP|textebrut)]</title>
+<title><:pmb:actualites:> - [(#NOM_SITE_SPIP|textebrut)]</title>
 [<meta name="description" content="(#INTRODUCTION{150}|textebrut)" />]
 <INCLURE{fond=inc-head}>
 [(#REM) Lien vers le flux RSS de la rubrique ]
@@ -19,10 +19,10 @@
 	<INCLURE{fond=inc-entete}{env}>
 
 	[(#REM) Fil d'Ariane ]
-        <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:derniers_articles:></div>
+        <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:pmb:actualites:></div>
 
         <div class="cartouche">
-            <h1 class="#EDIT{titre}">[(#REM|?{'',<:derniers_articles:>}|image_typo{police=togase.ttf,taille=30,couleur=333300,largeur=600})]</h1>
+            <h1 class="#EDIT{titre}">[(#REM|?{'',<:pmb:actualites:>}|image_typo{police=togase.ttf,taille=30,couleur=333300,largeur=600})]</h1>
         </div>
 
        <INCLURE{fond=inc-actualites}{ajax}>

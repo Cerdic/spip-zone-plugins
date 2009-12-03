@@ -227,32 +227,36 @@ function pmb_recherche_extraire($recherche='*', $url_base, $look_ALL='', $look_A
 
 	
 	$search = array();
+	$searchType = 0;	
 	
-			
 	if ($look_ALL) {
 		  $search[] = array("inter"=>"or","field"=>42,"operator"=>"BOOLEAN", "value"=>$recherche);	
 		  if ($typdoc) $search[] = array("inter"=>"and","field"=>15,"operator"=>"EQ", "value"=>$typdoc);
 		  if ($id_section) $search[] = array("inter"=>"and","field"=>17,"operator"=>"EQ", "value"=>$id_section);
 	}
 	if ($look_TITLE) {
+		  $searchType = 1;
 		  $search[] = array("inter"=>"or","field"=>1,"operator"=>"BOOLEAN", "value"=>$recherche);
 		  if ($typdoc) $search[] = array("inter"=>"and","field"=>15,"operator"=>"EQ", "value"=>$typdoc);
 		  if ($id_section) $search[] = array("inter"=>"and","field"=>17,"operator"=>"EQ", "value"=>$id_section);
 	}
 
 	if ($look_AUTHOR) {
+		  $searchType = 2;
 		  $search[] = array("inter"=>"or","field"=>2,"operator"=>"BOOLEAN", "value"=>$recherche);
 		  if ($typdoc) $search[] = array("inter"=>"and","field"=>15,"operator"=>"EQ", "value"=>$typdoc);
 		  if ($id_section) $search[] = array("inter"=>"and","field"=>17,"operator"=>"EQ", "value"=>$id_section);
 	}
     
 	if ($look_PUBLISHER) {
+		  $searchType = 3;
 		  $search[] = array("inter"=>"or","field"=>3,"operator"=>"BOOLEAN", "value"=>$recherche);
 		  if ($typdoc) $search[] = array("inter"=>"and","field"=>15,"operator"=>"EQ", "value"=>$typdoc);
 		  if ($id_section) $search[] = array("inter"=>"and","field"=>17,"operator"=>"EQ", "value"=>$id_section);
 	}
 
 	if ($look_COLLECTION) {
+		  $searchType = 4;
 		  $search[] = array("inter"=>"or","field"=>4,"operator"=>"BOOLEAN", "value"=>$recherche);
 		  if ($typdoc) $search[] = array("inter"=>"and","field"=>15,"operator"=>"EQ", "value"=>$typdoc);
 		  if ($id_section) $search[] = array("inter"=>"and","field"=>17,"operator"=>"EQ", "value"=>$id_section);
@@ -265,6 +269,7 @@ function pmb_recherche_extraire($recherche='*', $url_base, $look_ALL='', $look_A
 	}
   
 	if ($look_CATEGORY) {
+		  $searchType = 6;
 		  $search[] = array("inter"=>"or","field"=>11,"operator"=>"BOOLEAN", "value"=>$recherche);
 		  if ($typdoc) $search[] = array("inter"=>"and","field"=>15,"operator"=>"EQ", "value"=>$typdoc);
 		  if ($id_section) $search[] = array("inter"=>"and","field"=>17,"operator"=>"EQ", "value"=>$id_section);
@@ -295,8 +300,12 @@ function pmb_recherche_extraire($recherche='*', $url_base, $look_ALL='', $look_A
 	try {	
 			$tableau_resultat[0] = Array();
 					
-			$r=$ws->pmbesOPACAnonymous_advancedSearch($search);
-			
+			//cas d'une recherche simple 
+			if (($look_ALL)&&(!$id_section)){
+			  $r=$ws->pmbesOPACAnonymous_simpleSearch($searchType,$recherche);
+			} else {
+			  $r=$ws->pmbesOPACAnonymous_advancedSearch($search);
+			}
 			$searchId=$r["searchId"];
 			$tableau_resultat[0]['nb_resultats'] = $r["nbResults"];
 	    
@@ -330,64 +339,6 @@ function pmb_recherche_extraire($recherche='*', $url_base, $look_ALL='', $look_A
 }
 
 
-function pmb_parser_notice_apercu ($localdom, &$tresultat) {
-	$tresultat['id'] = intval(substr($localdom->id,2));	
-	$tresultat['logo_src'] = $localdom->find('table td img',2)->src; 
-	$tablechamps = $localdom->find('table tr tr');
-	foreach($tablechamps as $tr) {
-		$libelle = htmlentities($tr->find('td',0)->innertext);
-		$valeur = $tr->find('td',1)->innertext;
-		if (strpos($libelle, 'Titre de s')) $tresultat['serie'] = $valeur; 
-		if (strpos($libelle, 'Titre')) $tresultat['titre'] = $valeur; 
-		else if (strpos($libelle, 'Type de document')) $tresultat['type'] = $valeur; 
-		else if (strpos($libelle, 'Editeur')) $tresultat['editeur'] = $valeur; 
-		else if (strpos($libelle, 'Auteurs')) $tresultat['lesauteurs'] = $valeur; 
-		else if (strpos($libelle, 'de publication')) $tresultat['annee_publication'] = $valeur; 
-		else if (strpos($libelle, 'Collection')) $tresultat['collection'] = $valeur; 
-		else if (strpos($libelle, 'Importance')) $tresultat['importance'] = $valeur; 
-		else if (strpos($libelle, 'Présentation')) $tresultat['presentation'] = $valeur; 
-		else if (strpos($libelle, 'Format')) $tresultat['format'] = $valeur; 
-		else if (strpos($libelle, 'Importance')) $tresultat['importance'] = $valeur; 
-		else if (strpos($libelle, 'ISBN')) $tresultat['isbn'] = $valeur; 
-		else if (strpos($libelle, 'Prix')) $tresultat['prix'] = $valeur; 
-		else if (strpos($libelle, 'Langues')) $tresultat['langues'] = $valeur; 
-		else if (strpos($libelle, 'sum')) $tresultat['resume'] = $valeur; 
-	}
-
-}
-
-
-
-//d�coupage d'une notice au d�part dans un div de class .parent
-/*function pmb_parser_notice ($id_notice, $localdom, &$tresultat) {
-	$tresultat['id'] = $id_notice;	
-	$tresultat['logo_src'] = $localdom->find('table td img',2)->src; 
-	$tresultat['exemplaires'] = $localdom->find('.exemplaires',0)->outertext;
-	if ($tmp = $localdom->find('.autres_lectures',0)) {
-			$tresultat['autres_lecteurs'] = $tmp->next_sibling()->outertext;
-	}				
-	$tablechamps = $localdom->find('#div_public'.$id_notice.' tr');
-	foreach($tablechamps as $tr) {
-		$libelle = htmlentities($tr->find('td',0)->innertext);
-		$valeur = $tr->find('td',1)->innertext;
-		if (strpos($libelle, 'Titre de s')) $tresultat['serie'] = $valeur; 
-		if (strpos($libelle, 'Titre')) $tresultat['titre'] = $valeur; 
-		else if (strpos($libelle, 'Type de document')) $tresultat['type'] = $valeur; 
-		else if (strpos($libelle, 'Editeur')) $tresultat['editeur'] = $valeur; 
-		else if (strpos($libelle, 'Auteurs')) $tresultat['lesauteurs'] = $valeur; 
-		else if (strpos($libelle, 'de publication')) $tresultat['annee_publication'] = $valeur; 
-		else if (strpos($libelle, 'Collection')) $tresultat['collection'] = $valeur; 
-		else if (strpos($libelle, 'Importance')) $tresultat['importance'] = $valeur; 
-		else if (strpos($libelle, 'Présentation')) $tresultat['presentation'] = $valeur; 
-		else if (strpos($libelle, 'Format')) $tresultat['format'] = $valeur; 
-		else if (strpos($libelle, 'Importance')) $tresultat['importance'] = $valeur; 
-		else if (strpos($libelle, 'ISBN')) $tresultat['isbn'] = $valeur; 
-		else if (strpos($libelle, 'Prix')) $tresultat['prix'] = $valeur; 
-		else if (strpos($libelle, 'Langues')) $tresultat['langues'] = $valeur; 
-		else if (strpos($libelle, 'sum')) $tresultat['resume'] = $valeur; 
-	}
-
-}*/
 
     // Traitement des balises ouvrantes
     function fonctionBaliseOuvrante($parseur, $nomBalise, $tableauAttributs)
@@ -472,7 +423,7 @@ function pmb_parser_notice_apercu ($localdom, &$tresultat) {
 		if (($dernierTypeTrouve == "330") && ($dernierSousTypeTrouve == "a")) $gtresultat['resume'] .= str_replace("","&oelig;", str_replace("\n","<br />", $texte));
 		
 		if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "a")) $gtresultat['lesauteurs'] .= $texte;
-		if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "b")) $gtresultat['lesauteurs'] .= " ".$texte;
+		if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "b")) $gtresultat['lesauteurs'] = $texte." ".$gtresultat['lesauteurs'];
 		if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "a")) $gtresultat['id_auteur'] = $dernierIdTrouve;
 		
 		
@@ -577,7 +528,7 @@ function pmb_ws_parser_notice_serialisee($id_notice, $value, &$tresultat) {
 				if (($dernierTypeTrouve == "330") && ($dernierSousTypeTrouve == "a")) $tresultat['resume'] .= str_replace("","&oelig;", stripslashes(str_replace("\n","<br />", $texte)));
 				
 				if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "a")) $tresultat['lesauteurs'] .= $texte;
-				if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "b")) $tresultat['lesauteurs'] .= " ".$texte;
+				if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "b")) $tresultat['lesauteurs'] = $texte." ".$tresultat['lesauteurs'];
 				if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "a")) $tresultat['id_auteur'] = $dernierIdTrouve;
 				
 				
@@ -636,7 +587,7 @@ function pmb_ws_parser_notice_array($value, &$tresultat) {
 						  if (($dernierTypeTrouve == "330") && ($dernierSousTypeTrouve == "a")) $tresultat['resume'] .= str_replace("","&oelig;", stripslashes(str_replace("\n","<br />", str_replace("","'",$texte))));
 						  
 						  if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "a")) $tresultat['lesauteurs'] .= $texte;
-						  if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "b")) $tresultat['lesauteurs'] .= " ".$texte;
+						  if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "b")) $tresultat['lesauteurs'] = $texte." ".$tresultat['lesauteurs'];
 						  if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "a")) $tresultat['id_auteur'] = $dernierIdTrouve;
 			}	
 		}
@@ -649,9 +600,9 @@ function pmb_ws_parser_notice_array($value, &$tresultat) {
 	     $tresultat['logo_src'] = lire_config("spip_pmb/url","http://tence.bibli.fr/opac")."/getimage.php?url_image=http%3A%2F%2Fimages-eu.amazon.com%2Fimages%2FP%2F!!isbn!!.08.MZZZZZZZ.jpg&noticecode=".str_replace("-","",$tresultat['isbn']);
 
 	     //cas où il n'y a pas d'image pmb renvoie un carré de 1 par 1 transparent.
-	    $tmp_img = image_reduire("<img src=\"".copie_locale($tresultat['logo_src'])."\" />", 130, 0);
+	   /* $tmp_img = image_reduire("<img src=\"".copie_locale($tresultat['logo_src'])."\" />", 130, 0);
 	    if (strpos($tmp_img, "L1xH1") !== false)  $gtresultat['logo_src'] = "";
-
+	    */
 	    $tresultat['id'] = $id_notice;
 	    
 
