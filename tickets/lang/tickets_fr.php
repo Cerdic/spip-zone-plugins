@@ -39,6 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_id' => 'Num&eacute;ro',
 	'champ_importance' => 'Importance',
 	'champ_jalon' => 'Jalon',
+	'champ_nouveau_commentaire' => 'Nouveau commentaire',
 	'champ_projet' => 'Projet',
 	'champ_severite' => 'S&eacute;v&eacute;rit&eacute;',
 	'champ_titre' => 'R&eacute;sum&eacute;',
@@ -88,6 +89,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// N
 	'no_assignation' => 'Personne',
 	'non_assignes' => 'Non assign&eacute;s',
+	'nouveau_commentaire_mail' => 'Nouveau commentaire sur ticket',
 	'nouveau_ticket' => 'Nouveau ticket',
 
 	// P

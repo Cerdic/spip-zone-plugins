@@ -88,7 +88,17 @@ function formulaires_forum_ticket_traiter($id_ticket=''){
 		include_spip('inc/headers');
 		$message['message_ok'] = _T('tickets:message_publie');
 		$message['redirect'] = self();
+		
+		if ($notifications = charger_fonction('notifications', 'inc')) {
+			$notifications('commenterticket', $id_ticket,
+				array(
+					'id_auteur' => id_assigne, 
+					'texte' => texte
+				)
+			);
+		}
 	}
+
 		
 	return $message;
 }
