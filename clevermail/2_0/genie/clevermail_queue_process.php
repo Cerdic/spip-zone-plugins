@@ -27,14 +27,16 @@ function genie_clevermail_queue_process_dist($t, $verbose = 'no') {
 
 			$html = $post['pst_html'];
 			$html = str_replace("(\r\n|\n|\n)", CM_NEWLINE, $html);
-			
+
 			include_spip('inc/texte');
 
 			$template = array();
 			$template['@@SUJET_LETTRE@@'] = $post['pst_subject'];
 			$template['@@ID_LETTRE@@'] = $message['pst_id'];
 			$template['@@URL_LETTRE@@'] = generer_url_public(_CLEVERMAIL_LETTRE_EN_LIGNE,'id='.$message['pst_id']);
-			$template['@@NOM_LETTRE@@'] = $list['lst_name'];
+			$template['@@NOM_LETTRE@@'] = substr($list['lst_name'], strpos($list['lst_name'], "/")+1);
+		    $template['@@NOM_CATEGORIE@@'] = substr($list['lst_name'],0 , strpos($list['lst_name'], "/"));
+		    $template['@@NOM_COMPLET@@'] = $list['lst_name'];
 			$template['@@DESCRIPTION@@'] = propre($list['lst_comment']);
 			$template['@@FORMAT_INSCRIPTION@@'] = $mode;
 			$template['@@EMAIL@@'] = $to;
@@ -62,7 +64,7 @@ function genie_clevermail_queue_process_dist($t, $verbose = 'no') {
 					$body = array('html' => $html, 'texte' => $text);
           break;
       }
-			
+
 			if (sql_delete("spip_cm_posts_queued", "pst_id = ".intval($message['pst_id'])." AND sub_id = ".intval($message['sub_id']))) {
 				// message removed from queue, we can try to send it
 				// TODO : Et le charset ?

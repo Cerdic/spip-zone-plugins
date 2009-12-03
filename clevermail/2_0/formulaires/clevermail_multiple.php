@@ -70,6 +70,8 @@ function formulaires_clevermail_multiple_traiter_dist($lst_id = 0, $lsr_mode_for
   $actionId = md5('subscribe#'.$sub_id.'#'.time());
   $nbLettre = 1;
   $lists_name = "";
+  $lists_name_categorie = "";
+  $lists_name_complet = "";
   foreach($lists as $list) {
   	$lst_id = intval($list);
     $listData = sql_fetsel("*", "spip_cm_lists", "lst_id=".intval($lst_id));
@@ -95,13 +97,19 @@ function formulaires_clevermail_multiple_traiter_dist($lst_id = 0, $lsr_mode_for
           		if (sql_countsel("spip_cm_pending", "lst_id=".intval($lst_id)." AND sub_id=".intval($sub_id)) == 0) {
           			sql_insertq("spip_cm_pending", array('lst_id' => intval($lst_id), 'sub_id' => intval($sub_id), 'pnd_action' => 'subscribe', 'pnd_mode' => intval($lsr_mode), 'pnd_action_date' => time(), 'pnd_action_id' => $actionId));
           		}
-          		$lists_name = $lists_name."- ".$listData['lst_name']."\n\n";
+          		$lettre = substr($listData['lst_name'], strpos($listData['lst_name'], "/")+1);
+          		$lists_name = $lists_name."- ".$lettre."\n\n";
+      			$categorie = substr($listData['lst_name'],0 , strpos($listData['lst_name'], "/"));
+          		$lists_name_categorie = $lists_name_categorie."- ".$categorie."\n\n";
+          		$lists_name_complet = $lists_name_complet."- ".$listData['lst_name']."\n\n";
 				if($nbLettre <= count($lists)){
           			if(count($lists) > 1){
           				//Si inscription a plusieurs lettres, on envoie un seul mail avec la liste des lettres
 						// Composition du message de demande de confirmation
 		          		$template = array();
 		          		$template['@@NOM_LETTRE@@'] = $lists_name;
+		          		$template['@@NOM_CATEGORIE@@'] = $lists_name_categorie;
+		          		$template['@@NOM_COMPLET@@'] = $lists_name_complet;
 		          		$template['@@DESCRIPTION@@'] = $listData['lst_comment'];
 		          		$template['@@FORMAT_INSCRIPTION@@']  = (intval($lsr_mode) == 1 ? _T('choix_version_html') : _T('choix_version_texte'));
 		          		$template['@@EMAIL@@'] = _request('sub_email');
@@ -111,7 +119,9 @@ function formulaires_clevermail_multiple_traiter_dist($lst_id = 0, $lsr_mode_for
           			} else {
           				// Composition du message de demande de confirmation
 		          		$template = array();
-		          		$template['@@NOM_LETTRE@@'] = $listData['lst_name'];
+		          		$template['@@NOM_LETTRE@@'] = substr($listData['lst_name'], strpos($listData['lst_name'], "/")+1);
+		          		$template['@@NOM_CATEGORIE@@'] = substr($listData['lst_name'],0 , strpos($listData['lst_name'], "/"));
+		          		$template['@@NOM_COMPLET@@'] = $listData['lst_name'];
 		          		$template['@@DESCRIPTION@@'] = $listData['lst_comment'];
 		          		$template['@@FORMAT_INSCRIPTION@@']  = (intval($lsr_mode) == 1 ? _T('choix_version_html') : _T('choix_version_texte'));
 		          		$template['@@EMAIL@@'] = _request('sub_email');

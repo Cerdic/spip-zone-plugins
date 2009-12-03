@@ -19,7 +19,9 @@ function balise_CLEVERMAIL_UNSUBSCRIBE_dyn() {
       $list = sql_fetsel("*", "spip_cm_lists", "lst_id=".intval($abonnement['lst_id']));
 
       $template = array();
-      $template['@@NOM_LETTRE@@'] = $list['lst_name'];
+      $template['@@NOM_LETTRE@@'] = substr($list['lst_name'], strpos($list['lst_name'], "/")+1);
+	  $template['@@NOM_CATEGORIE@@'] = substr($list['lst_name'],0 , strpos($list['lst_name'], "/"));
+	  $template['@@NOM_COMPLET@@'] = $list['lst_name'];
       $template['@@EMAIL@@'] = $sub['sub_email'];
       $template['@@FORMAT_INSCRIPTION@@']  = ($data['lsr_mode'] == 1 ? 'HTML' : 'texte');
       //$template['@@URL_CONFIRMATION@@'] = $GLOBALS['meta']['adresse_site'].'/spip.php?page=clevermail_do&id='.$actionId;
@@ -33,7 +35,7 @@ function balise_CLEVERMAIL_UNSUBSCRIBE_dyn() {
       }
       $from = sql_getfetsel("set_value", "spip_cm_settings", "set_name='CM_MAIL_FROM'");
       $return = sql_getfetsel("set_value", "spip_cm_settings", "set_name='CM_MAIL_RETURN'");
-          
+
       // TODO : Et le charset ?
       // TODO : Et le return-path ?
       $envoyer_mail = charger_fonction('envoyer_mail', 'inc');
