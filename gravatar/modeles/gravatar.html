@@ -1,1 +1,14 @@
-[(#LOGO_AUTEUR||sinon{#CHEMIN{images/gravatar.png}}|image_passe_partout{#ENV{largeur,60}}|image_recadre{#ENV{largeur,60},#ENV{largeur,60},center}|inserer_attribut{alt,''}|inserer_attribut{class,'photo avatar'})]
+[(#LOGO_AUTEUR||sinon{#CHEMIN{images/gravatar.png}}|largeur|<={#ENV{largeur,60}}|oui)
+	[(#LOGO_AUTEUR||sinon{#CHEMIN{images/gravatar.png}}
+		|image_passe_partout{60}
+		|image_recadre{60,60,center}
+		|inserer_attribut{alt,''}
+		|inserer_attribut{class,'photo avatar'})]
+]
+[(#LOGO_AUTEUR||sinon{#CHEMIN{images/gravatar.png}}|largeur|>{#ENV{largeur,60}}|oui)
+	[(#LOGO_AUTEUR||sinon{#CHEMIN{images/gravatar.png}}
+		|image_passe_partout{#ENV{largeur,60}}
+		|image_recadre{#ENV{largeur,60},#ENV{largeur,60},center}
+		|inserer_attribut{alt,''}
+		|inserer_attribut{class,'photo avatar'})]
+]
