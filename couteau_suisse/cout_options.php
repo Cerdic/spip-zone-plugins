@@ -124,23 +124,9 @@ else {
 	cs_log(" FIN : cout_options, cs_spip_options = $GLOBALS[cs_spip_options], cs_options = $GLOBALS[cs_options], cs_fonctions_essai = $GLOBALS[cs_fonctions_essai]");
 }
 
-// Fonction de compatibilite : droits pour configurer les plugins
-function cs_autoriser_plugins() {
-	if(!defined('_SPIP19300')) return $GLOBALS['connect_statut'] == '0minirezo' AND $GLOBALS['connect_toutes_rubriques'];
-	include_spip('inc/autoriser');
-	return autoriser('configurer', 'plugins');
-}
-// Fonction de compatibilite : droits pour configurer le Couteau Suisse 
-// Pour SPIP < 2.0, droits equivalents par defaut a : 'configurer' les 'plugins'
-function cs_autoriser() {
-	if(!defined('_SPIP19300')) return $GLOBALS['connect_statut'] == '0minirezo' AND $GLOBALS['connect_toutes_rubriques'];
-	include_spip('inc/autoriser');
-	return autoriser('configurer', 'cs');
-}
-// Droits pour configurer le CS (fonction utilisee <TODO>et surchargeable</TODO> en SPIP>=2.0)
-// Droits equivalents par defaut a : 'configurer' les 'plugins'
-// TODO : ajouter _dist (attention : bug SPIP ?)
-function autoriser_cs_configurer($faire, $type, $id, $qui, $opt) {
+// Droits pour configurer le Couteau Suisse (fonction surchargeable sans le _dist)
+// Droits par defaut equivalents a 'configurer' les 'plugins', donc tous les administrateurs non restreints
+function autoriser_cs_configurer_dist($faire, $type, $id, $qui, $opt) {
 	return autoriser('configurer', 'plugins', $id, $qui, $opt);
 }
 
@@ -170,9 +156,12 @@ function cs_log($variable, $prefixe='', $stat='') {
 	if (defined('_CS_REPORTALL')) echo '<br/>',htmlentities($variable);
 }
 
-// Message si non autorise
-function cs_minipres($exit=-1) { 
-	if($exit===-1) $exit=!cs_autoriser();
+// Message de sortie si la zone est non autorisee
+function cs_minipres($exit=-1) {
+	if($exit===-1) {
+		include_spip('inc/autoriser');
+		$exit = !autoriser('configurer', 'cs');
+	}
 	if($exit) {
 		include_spip('inc/minipres');
 		echo minipres();
