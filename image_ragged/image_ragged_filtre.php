@@ -91,7 +91,7 @@ function image_ragged ($img, $align, $margin=10, $coul=-1) {
 	}
 
 	if ($align == "left") $mrg = "margin-right";
-	else $mrg = "padding-left";
+	else $mrg = "margin-left";
 
 	// On ajoute un div pour forcer le margin vertical au dessus - ca evite notamment que la premiere ligne de texte passe sous l'image
     $forme .= "\n<div style='float: $align; clear: $align; $mrg: ".($add[0]*$rapport + $margin)."px; width:".($w - ($larg[0] * $rapport))."px ; height: ".max($margin,25)."px; overflow: hidden;'></div>";
