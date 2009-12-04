@@ -96,6 +96,8 @@ function formulaires_clevermail_multiple_traiter_dist($lst_id = 0, $lsr_mode_for
     			// TODO : à finir
           		if (sql_countsel("spip_cm_pending", "lst_id=".intval($lst_id)." AND sub_id=".intval($sub_id)) == 0) {
           			sql_insertq("spip_cm_pending", array('lst_id' => intval($lst_id), 'sub_id' => intval($sub_id), 'pnd_action' => 'subscribe', 'pnd_mode' => intval($lsr_mode), 'pnd_action_date' => time(), 'pnd_action_id' => $actionId));
+          		} else {
+          			sql_updateq("spip_cm_pending", array('pnd_action' => 'subscribe', 'pnd_mode' => intval($lsr_mode), 'pnd_action_date' => time(), 'pnd_action_id' => $actionId), "sub_id=".intval($sub_id)." AND lst_id=".intval($lst_id));
           		}
           		$lettre = substr($listData['lst_name'], strpos($listData['lst_name'], "/")+1);
           		$lists_name = $lists_name."- ".supprimer_numero($lettre)."\n\n";
