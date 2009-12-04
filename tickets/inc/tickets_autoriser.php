@@ -297,6 +297,6 @@ function tickets_verifier_webmestre($qui){
 	if(!$webmestre && ($qui['webmestre']=='oui')){
 		$webmestre =  true;
 	}
-	return $webmestres;
+	return $webmestre;
 }
 ?>
