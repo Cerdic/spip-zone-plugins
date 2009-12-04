@@ -6,6 +6,8 @@
  *
  */
 
+/* pour que le pipeline ne rale pas ! */
+function polyhier_autoriser(){}
 
 function polyhier_affiche_hierarchie($flux){
 	$objet = $flux['args']['objet'];
