@@ -14,7 +14,7 @@
 function spipmotion_editer_contenu_objet($flux){
 	if(is_array($flux['args']) && ($flux['args']['type']=='case_document')){
 		$id_document = $flux['args']['id'];
-		$document = sql_fetsel("docs.id_document, docs.id_orig, docs.extension, L.vu,L.objet,L.id_objet,doc.mode,doc.distant", "spip_documents AS docs INNER JOIN spip_documents_liens AS L ON L.id_document=docs.id_document","L.id_document=".sql_quote($id_document));
+		$document = sql_fetsel("docs.id_document, docs.id_orig, docs.extension,docs.mode,docs.distant, L.vu,L.objet,L.id_objet", "spip_documents AS docs INNER JOIN spip_documents_liens AS L ON L.id_document=docs.id_document","L.id_document=".sql_quote($id_document));
 		$extension = $document['extension'];
 		$type = $document['objet'];
 		$id = $document['id_objet'];
