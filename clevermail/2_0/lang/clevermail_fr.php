@@ -49,12 +49,12 @@ Merci',
 'sujet_mail_mod' => 'Mod&#233;ration de la liste @nom_lettre@',
 'inscription_encours' => 'Votre demande d\'inscription &agrave; la liste @nom_lettre@ est en cours d\'examen. Merci de patienter.',
 
-		'sujet_mail_inscription_multiple' => 'Validation',
+		'sujet_mail_inscription_multiple' => 'Confirmation de votre inscription',
 		'mail_inscription_multiple' => 'Bonjour,
 
 Pour confirmer votre inscription aux lettres d\'information suivantes :
 
- @@NOM_LETTRE@@
+ @@NOM_COMPLET@@
 
 veuillez cliquer sur ce lien :
 

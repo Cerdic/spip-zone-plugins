@@ -90,7 +90,7 @@ function formulaires_clevermail_multiple_traiter_dist($lst_id = 0, $lsr_mode_for
     		case 'open':
     			$actionId = md5('subscribe#'.$lst_id.'#'.$sub_id.'#'.time());
           sql_insertq("spip_cm_lists_subscribers", array('lst_id' => intval($lst_id), 'sub_id' => intval($sub_id), 'lsr_mode' => intval($lsr_mode), 'lsr_id' => $actionId));
-          $message .= (strlen($message) > 0 ? '<br />' : '')._T('clevermail:inscription_validee', array('lst_name' => $listData['lst_name']));
+          $message .= (strlen($message) > 0 ? '<br />' : '')._T('clevermail:inscription_validee', array('lst_name' => supprimer_numero($listData['lst_name'])));
     			break;
     		case 'email':
     			// TODO : à finir
@@ -98,10 +98,10 @@ function formulaires_clevermail_multiple_traiter_dist($lst_id = 0, $lsr_mode_for
           			sql_insertq("spip_cm_pending", array('lst_id' => intval($lst_id), 'sub_id' => intval($sub_id), 'pnd_action' => 'subscribe', 'pnd_mode' => intval($lsr_mode), 'pnd_action_date' => time(), 'pnd_action_id' => $actionId));
           		}
           		$lettre = substr($listData['lst_name'], strpos($listData['lst_name'], "/")+1);
-          		$lists_name = $lists_name."- ".$lettre."\n\n";
+          		$lists_name = $lists_name."- ".supprimer_numero($lettre)."\n\n";
       			$categorie = substr($listData['lst_name'],0 , strpos($listData['lst_name'], "/"));
-          		$lists_name_categorie = $lists_name_categorie."- ".$categorie."\n\n";
-          		$lists_name_complet = $lists_name_complet."- ".$listData['lst_name']."\n\n";
+          		$lists_name_categorie = $lists_name_categorie."- ".supprimer_numero($categorie)."\n\n";
+          		$lists_name_complet = $lists_name_complet."- ".supprimer_numero($categorie)." / ".supprimer_numero($lettre)."\n\n";
 				if($nbLettre <= count($lists)){
           			if(count($lists) > 1){
           				//Si inscription a plusieurs lettres, on envoie un seul mail avec la liste des lettres
@@ -115,6 +115,7 @@ function formulaires_clevermail_multiple_traiter_dist($lst_id = 0, $lsr_mode_for
 		          		$template['@@EMAIL@@'] = _request('sub_email');
 		          		$template['@@URL_CONFIRMATION@@'] = generer_url_public(_CLEVERMAIL_VALIDATION,'id='.$actionId);
 		          		$body = _T('clevermail:mail_inscription_multiple');
+		          		$subject = _T('clevermail:sujet_mail_inscription_multiple');
           			} else {
           				// Composition du message de demande de confirmation
 		          		$template = array();
@@ -126,13 +127,13 @@ function formulaires_clevermail_multiple_traiter_dist($lst_id = 0, $lsr_mode_for
 		          		$template['@@EMAIL@@'] = _request('sub_email');
 		          		$template['@@URL_CONFIRMATION@@'] = generer_url_public(_CLEVERMAIL_VALIDATION,'id='.$actionId);
 		          		$body = $listData['lst_subscribe_text'];
+		          		$subject = (intval($listData['lst_subject_tag']) == 1 ? '['.$listData['lst_name'].'] ' : '').$listData['lst_subscribe_subject'];
           			}
 					if($nbLettre == count($lists)){
 						while (list($translateFrom, $translateTo) = each($template)) {
 		            		$body = str_replace($translateFrom, $translateTo, $body);
 		          		}
 		          		$to = _request('sub_email');
-		          		$subject = (intval($listData['lst_subject_tag']) == 1 ? '['.$listData['lst_name'].'] ' : '').$listData['lst_subscribe_subject'];
 		          		$from = sql_getfetsel("set_value", "spip_cm_settings", "set_name='CM_MAIL_FROM'");
 		          		$return = sql_getfetsel("set_value", "spip_cm_settings", "set_name='CM_MAIL_RETURN'");
 						// message removed from queue, we can try to send it
