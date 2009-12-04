@@ -10,7 +10,9 @@
 	</div>	
 	<!--/#navigation-->
 
-	<div class="contenu">contenu</div>
+	<div class="contenu">
+		[(#VAL|lister_configs)]
+	</div>
 ]
 
 [(#REM)
@@ -30,9 +32,9 @@
 	]
 	
 	[(#CHEMIN{[fonds/cfg_(#ENV{cfg}).html]}|non)
-	
+
 		[(#ENV{onglet}|oui)
-			#SET{cfg,#ENV{cfg}|concat{_}|concat{#ENV{onglet}}}
+			[(#SET{cfg,[(#ENV{cfg}|concat{[_(#ENV{onglet})]})]})]
 		][(#ENV{onglet}|non)
 			#SET{cfg,#ENV{cfg}}
 		]
@@ -43,41 +45,42 @@
 		[(#REM)
 			Navigation : on affiche un descriptif si present, puis
 			recherche dans l'ordre (complete de $onglet si present) :
-			- cfg/nav-config_$nom.html
-			- cfg/nav-config_defaut.html
+			- cfg/nav_$nom.html
+			- cfg/nav_defaut.html
 		]
 		<!--#navigation-->
 		[<div class="cadre cadre-info">
 			(#TRAD{description,#ENV{cfg},#ENV{onglet}}|propre)
 		</div>]
 		[<div class="cadre cadre-info">
-			(#CHEMIN{[cfg/nav-config_(#ENV{cfg}).html]}|?{
-				[(#INCLURE{fond=cfg/nav-config_#ENV{cfg},cfg,onglet})]
+			(#CHEMIN{[cfg/nav_(#ENV{cfg}).html]}|?{
+				[(#INCLURE{fond=configurer/nav_#ENV{cfg},cfg,onglet})]
 				,
-				[(#INCLURE{fond=cfg/nav-config_defaut,cfg,onglet})]
+				[(#INCLURE{fond=configurer/nav_defaut,cfg,onglet})]
 			})
 		</div>]
 		<!--/#navigation-->
 
 		[(#REM)
 			recherche dans l'ordre  :
-			- cfg/cfg_$nom_onglet.html
-			- cfg/cfg_$nom.html
-			- #FORMULAIRE_CONFIG_$nom_onglet
+			- configurer/$nom_onglet.html
+			- configurer/$nom.html
+			- #FORMULAIRE_CONFIGURER{$nom_onglet} (soit configurer/form_$nom_onglet)
 		]
-		#SET{pas_de_fond,0}
-		[(#CHEMIN{[cfg/cfg_(#GET{cfg}).html]}|?{
-			[(#INCLURE{fond=cfg/cfg_#GET{cfg}}{cfg}{onglet})]
-			,
-			[(#CHEMIN{[cfg/cfg_(#ENV{cfg}).html]}|?{
-				[(#INCLURE{fond=cfg/cfg_#ENV{cfg}}{cfg}{onglet})]
-				,
-				#SET{pas_de_fond,1}
-			})]
-		})]
-		[(#GET{pas_de_fond}|=={1}|oui)[
+		#SET{trouve,0}
+		[(#CHEMIN{[configurer/(#GET{cfg}).html]}|oui)
+			#SET{trouve,1}
+			[(#INCLURE{fond=configurer/[(#GET{cfg})],cfg,onglet})]
+		]
+		[(#GET{trouve}|non)
+			[(#CHEMIN{[configurer/(#ENV{cfg}).html]}|oui)
+				#SET{trouve,1}
+				[(#INCLURE{fond=configurer/[(#ENV{cfg})],cfg,onglet})]
+			]
+		]
+		[(#GET{trouve}|non)[
 			<div class="ajax">
-				(#FORMULAIRE_{config_#GET{cfg}})
+				(#FORMULAIRE_CONFIGURER{#GET{cfg}})
 			</div>
 		]]
 	]

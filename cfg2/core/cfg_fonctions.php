@@ -53,16 +53,15 @@ function balise_CFG_CHEMIN_dist($p) {
 
 # CFG_ARBO
 
-
 /*
  * Affiche une arborescence du contenu d'un #CONFIG
- * 
- * #CFG_ARBO, 
- * #CFG_ARBO{ma_meta}, 
- * #CFG_ARBO{~toto}, 
+ *
+ * #CFG_ARBO,
+ * #CFG_ARBO{ma_meta},
+ * #CFG_ARBO{~toto},
  * #CFG_ARBO{ma_meta/mon_casier},
  * #CFG_ARBO{ma_table:mon_id/mon_champ}
- * 
+ *
  */
 function balise_CFG_ARBO_dist($p) {
 	if (!$arg = interprete_argument_balise(1,$p)) {
@@ -78,35 +77,35 @@ function cfg_affiche_arborescence($cfg='') {
 	$sortie = '';
 	$hash = substr(md5(rand()*rand()),0,6);
 
-	// integration du js	
+	// integration du js
 	$sortie .= "<script type='text/javascript'><!--
-				
-				$(document).ready(function(){
+
+				jQuery(document).ready(function(){
 					function cfg_arbo(){
 						jQuery('#cfg_arbo_$hash ul').hide();
+						jQuery('#cfg_arbo_$hash h5 strong').remove();
 						jQuery('#cfg_arbo_$hash h5')
 						.prepend('<strong>[+] <\/strong>')
-						.toggle(
+						.unbind().toggle(
 						  function () {
-							$(this).children('strong').text('[-] ');
-							$(this).next('ul').show();
+							jQuery(this).children('strong').text('[-] ');
+							jQuery(this).next('ul').show();
 						  },
 						  function () {
-							$(this).children('strong').text('[+] ');
-							$(this).next('ul').hide();
-						  });						
+							jQuery(this).children('strong').text('[+] ');
+							jQuery(this).next('ul').hide();
+						  });
 					}
 					setTimeout(cfg_arbo,100);
-
 				});
 				// --></script>\n";
-				
+
 	$tableau = lire_config($cfg);
 	if ($c = @unserialize($tableau)) $tableau = $c;
-	
+
 	if (empty($cfg)) $cfg = 'spip_meta';
 	// parcours des donnees
-	$sortie .= 
+	$sortie .=
 		"<div class='cfg_arbo' id='cfg_arbo_$hash'>\n" .
 		cfg_affiche_sous_arborescence($cfg, $tableau) .
 		"\n</div>\n";
@@ -121,19 +120,19 @@ function cfg_affiche_sous_arborescence($nom, $tableau){
 	if (is_array($tableau)){
 		ksort($tableau);
 		foreach ($tableau as $tab=>$val){
-			if (is_array($val)) 
+			if (is_array($val))
 				$sortie .= "<li>" . cfg_affiche_sous_arborescence($tab, $val) . "</li>";
 			elseif (false !== $v = @unserialize($val))
 				$sortie .= "<li>" . cfg_affiche_sous_arborescence($tab, $v) . "</li>";
 			else
 				$sortie .= "<li>$tab = " . htmlentities($val) ."</li>\n";
-			
+
 		}
 	} else {
 		$sortie .= "<li>$nom = " . htmlentities($tableau) . "</li>";
 	}
 	$sortie .= "</ul>\n";
-	return $sortie;	
+	return $sortie;
 }
 
 ?>

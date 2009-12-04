@@ -43,8 +43,6 @@ function cfg_formulaire_charger($flux){
 			'_cfg_fond' => 'formulaires/'.$form,
 			'_cfg_nom' => $form,
 			'id' => $cfg_id,
-			// passer aussi les arguments spécifiques a cfg
-			'_cfg_' => $config->creer_hash_cfg() // passer action=cfg pour avoir un hash formulaire correct
 		);
 
 		// il faut passer les noms des champs (input et consoeurs) de CFG dans l'environnement

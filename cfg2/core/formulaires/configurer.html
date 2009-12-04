@@ -1,0 +1,21 @@
+<div class='formulaire_spip formulaire_configurer formulaire_configurer_[(#ENV{id})]' id='formulaire_configurer_[(#ENV{id})]'>
+
+[<h3 class='titrem'>[(#CHEMIN_IMAGE{#ENV{image_titre}}|balise_img{'',cadre-icone})](#ENV{texte_titre})</h3>]
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+[(#ENV{editable}|oui)
+	<form action="#ENV{action}#formulaire_configurer_[(#ENV{id})]" method="post" ><div>
+		[(#ACTION_FORMULAIRE{#ENV{action}})]
+		<input type="hidden" name="_cfg_id" value="[(#ENV{id})]" class='hidden' />
+		<ul>
+			[(#INCLURE{fond=configurer/form_[(#ENV{id})], env})]
+		</ul>
+		
+		<p class='boutons'>
+			<input type="submit" name="_cfg_ok" value="<:bouton_enregistrer:>" class='submit' />
+		</p>
+	</div></form>
+]
+</div>

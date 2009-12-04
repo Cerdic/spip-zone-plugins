@@ -4,7 +4,6 @@ Interface pour CFG 2.x
 CFG 2.x fournit 3 choses :
 - la gestion de #FORMULAIRE_XX utilisant des parametres CFG
 - les fonctions (lire|ecrire|effacer)_config et une modification de #CONFIG
-- des #SAISIE
 
 CFG 2.x ne fournit plus la gestion des pages ?exec=cfg. C'est le rôle
 de ce plugin CFG Interface.

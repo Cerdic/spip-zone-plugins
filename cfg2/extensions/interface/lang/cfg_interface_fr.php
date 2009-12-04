@@ -9,12 +9,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configuration_cfg' => 'Configuration des extensions',
 	'choisir_module_a_configurer' => 'Choisissez le module &agrave; configurer.',
 	'configuration_modules' => 'Configuration des modules',
+	'configurer' => 'Configurer',
 
 	// D
 	'description_cfg' => 'CFG facilite la cr&eacute;ation d\'interface de configuration pour les extensions de SPIP.',
 	
 	// E
-	'erreur_compatibilite' => 'Installez le plugin de compatibilite pour lire cet ancien format.',
+	'erreur_compatibilite' => 'Installez le plugin de compatibilite (cfg_compat) pour lire cet ancien format de configuration CFG.',
 );
 
 ?>

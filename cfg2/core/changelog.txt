@@ -22,7 +22,6 @@ v2.0.0
   * Ce plugin ne gere plus que 3 choses :
     - #FORMULAIRE_XX avec des parametres CFG (+extensibilité)
 	- fonctions (lire|ecrire|effacer)_config() et balise #CONFIG
-	- des #SAISIE
 
   * Ce plugin ne permet d'écrire que dans spip_meta (dépot meta et metapack (=donnees serialisees))
   * Ce plugin ne fournit plus d'interface (cf. extension interface)

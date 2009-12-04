@@ -22,8 +22,6 @@ class cfg_formulaire_dist{
 	var $vue = '';
 // l'adresse du fond html (sans l'extension .html)
 	var $path_vue = '';
-// provient-on d'un formulaire de type CVT (charger/verifier/traiter) dans formulaires/ ?
-	var $depuis_cvt = false;
 // compte-rendu des mises a jour
 	var $messages = array('message_ok'=>array(), 'message_erreur'=>array(), 'erreurs'=>array());
 // les champs trouve dans le fond
@@ -60,13 +58,17 @@ class cfg_formulaire_dist{
 			'descriptif' => '', // descriptif
 			'icone' => '', // lien pour une icone
 			'interpreter' => 'oui', // si interpreter vaut 'non', le fond ne sera pas traite comme un fond cfg, mais comme une inclusion simple (pas de recherche des champs de formulaires). Cela permet d'utiliser des #FORMULAIRES_XX dans un fonds/ tout en utilisant la simplicite des parametres <!-- liens=.. --> par exemple.
-			'liens' => array(), // liens optionnels sur des sous-config <!-- liens*=xxx -->
-			'liens_multi' => array(), // liens optionnels sur des sous-config pour des fonds utilisant un champ multiple  <!-- liens_multi*=xxx -->
-			'onglet' => 'oui', // cfg doit-il afficher un lien vers le fond sous forme d'onglet dans la page ?exec=cfg
-			'presentation' => 'auto', // cfg doit-il encadrer le formulaire tout seul ?
 		);
+		
 		$this->param['nom'] = $this->vue = $nom;
 		$this->param['cfg_id'] = $cfg_id;
+
+		// exception flagrante : le formulaire 'configurer'
+		// si c'est un formulaire generique, le nom et l'id ne sont pas bon.
+		if ($this->vue == 'configurer') {
+			$this->param['nom'] = $cfg_id;
+			$this->param['cfg_id'] = '';
+		}
 		
 		// definition de l'alias params
 		$this->params = array(
@@ -110,23 +112,37 @@ class cfg_formulaire_dist{
 		return true;
 	}
 	
+	// il s'agit de recuperer le contenu du fichier
+	// (sert au plugin de compatibilite CFG1)
+	function trouver_formulaire(){
+		// si on appelle expressement un 'configurer/xx.html' pour
+		// simplement obtenir les <!-- param=valeur -->
+		if (false!==strpos($this->vue,'/')) {
+			$fichier = find_in_path($nom = $this->vue .'.html');
+			$this->param['interpreter'] = 'non'; // ne pas interpreter par defaut du coup.
+		} else {
+			// sinon recherche de formulaire normal
+			$fichier = find_in_path($nom = 'formulaires/' . $this->vue .'.html');
+		}
+		return array($fichier, $nom);
+	}
+
+	// utiliser securiser action ?
+	// pas la peine si uniquement CVT (sert au plugin de compatibilite CFG1).
+	function securiser() {}
 	
 	// pre-analyser le formulaire
 	// c'est a dire recuperer les parametres CFG 
 	// et les noms des champs du formulaire	
 	function charger(){
 		$ok = true;
-		
+
 		// si pas de fichier, rien a charger
 		if (!$this->vue) return false;
 
 		// lecture de la vue (fond cfg)
-		// il s'agit de recuperer le contenu du fichier
- 		if (!$fichier = find_in_path($nom = 'fonds/cfg_' . $this->vue .'.html')){
-			if ($fichier = find_in_path($nom = 'formulaires/' . $this->vue .'.html'))
-				$this->depuis_cvt = true;
-		}
-		
+		list($fichier, $nom) = $this->trouver_formulaire();
+
 		// si pas de fichier, rien a charger
 		if (!$fichier) return false;
 		
@@ -136,6 +152,7 @@ class cfg_formulaire_dist{
 		} else {
 			$this->path_vue = substr($fichier,0,-5);
 		}		
+
 
 		// recherche et stockage des parametres de cfg 
 		$this->recuperer_parametres();
@@ -152,7 +169,7 @@ class cfg_formulaire_dist{
 			$ok = false;
 			$this->messages['message_erreur'][] = $err;
 		}
-	    
+	    	    
 		// charger les champs particuliers si existants
 		$this->actionner_extensions('pre_charger');	  
 		  
@@ -187,11 +204,8 @@ class cfg_formulaire_dist{
 		// ce qui mettrait de fausses valeurs dans l'environnement
 		if  (!_request('_cfg_ok') && !_request('_cfg_delete')) return true;
 
-		// les formulaires CVT ont deja leurs securites
-		if (!$this->depuis_cvt) {
-			$securiser_action = charger_fonction('securiser_action', 'inc');
-			$securiser_action();
-		}
+		// securiser si besoin
+		$this->securiser();
 
 		// actions par champs speciaux, avant les tests des nouvelles valeurs
 		$this->actionner_extensions('pre_verifier');
@@ -239,12 +253,9 @@ class cfg_formulaire_dist{
 	
 		if (!_request('_cfg_ok') && !_request('_cfg_delete')) return false;
 		
-		// les formulaires CVT ont deja leurs securites
-		if (!$this->depuis_cvt) {
-			$securiser_action = charger_fonction('securiser_action', 'inc');
-			$securiser_action();
-		}
-		
+		// securiser si besoin
+		$this->securiser();
+				
 		$this->actionner_extensions('pre_traiter');	
 		
 		if ($this->erreurs()) return false;		
@@ -348,15 +359,14 @@ class cfg_formulaire_dist{
 
 		if (!$this->fond_compile OR $forcer){
 			include_spip('inc/presentation'); // offrir les fonctions d'espace prive
-			include_spip('public/assembler');
 			
 			// rendre editable systematiquement
 			// sinon, ceux qui utilisent les fonds CFG avec l'API des formulaires dynamiques
 			// et mettent des [(#ENV**{editable}|oui) ... ] ne verraient pas leurs variables
 			// dans l'environnement vu que CFG ne pourrait pas lire les champs du formulaire
-			if ($this->depuis_cvt)
-				if (!isset($contexte['editable'])) $contexte['editable'] = true; // plante 1.9.2 !!
-			
+
+			if (!isset($contexte['editable'])) $contexte['editable'] = true; // plante 1.9.2 !!
+
 			// passer cfg_id...
 			if (!isset($contexte['cfg_id']) && $this->param['cfg_id']) {
 				$contexte['cfg_id'] = $this->param['cfg_id'];
@@ -375,9 +385,15 @@ class cfg_formulaire_dist{
 			if (!isset($contexte['erreurs']) && $this->messages['erreurs']) {
 				$contexte['erreurs'] = $this->messages['erreurs'];
 			}
-			
-			$val = $this->val ? array_merge($contexte, $this->val) : $contexte;
+			// cas particulier du formulaire generique 'configurer'
+			if ($this->vue == 'configurer') {
+				if (!isset($contexte['id'])) {
+					$contexte['id'] = $this->param['nom'];
+				}
+			}		
 
+			$val = $this->val ? array_merge($contexte, $this->val) : $contexte;
+	
 			// si on est dans l'espace prive, $this->path_vue est
 			// de la forme ../plugins/mon_plugin/fonds/toto, d'ou le replace
 			$this->fond_compile = recuperer_fond(
@@ -484,9 +500,9 @@ class cfg_formulaire_dist{
 	{
 		if (!$this->path_vue)
 			return '';
-
-		if (!$this->depuis_cvt)
-			$contexte['_cfg_'] = $this->creer_hash_cfg();
+			
+		// ajouter le hash ici ne devrait pas nuire.
+		$contexte['_cfg_'] = $this->creer_hash_cfg();
 	
 		// recuperer le fond avec le contexte
 		// forcer le calcul.
@@ -496,7 +512,7 @@ class cfg_formulaire_dist{
 	}
 	
 	
-	//
+	// utilise par le pipeline charger
 	function creer_hash_cfg($action=''){
 		include_spip('inc/securiser_action');
 	    $arg = 'cfg0.0.0-' . $this->param['nom'] . '-' . $this->vue;
@@ -545,7 +561,10 @@ class cfg_formulaire_dist{
 		
 		if (empty($regs[3])) {
 		    $this->param[$regs[2]] = $regs[4];
-		} elseif (is_array($this->param[$regs[2]])) {
+		} else {
+			if (!is_array($this->param[$regs[2]])) {
+				$this->param[$regs[2]] = array();
+			}
 		    $this->param[$regs[2]][] = $regs[4];
 		}
 		// plus besoin de garder ca

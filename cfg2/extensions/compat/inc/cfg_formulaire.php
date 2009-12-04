@@ -15,17 +15,50 @@ include_spip('inc/cfg_formulaire_dist');
 
 class cfg_formulaire extends cfg_formulaire_dist {
 
+// provient-on d'un formulaire de type CVT (charger/verifier/traiter) dans formulaires/ ?
+	var $depuis_cvt = false;
 // y a t-il des extensions (classes css 'type_{nom}' ou 'cfg_{nom}' sur champs) a traiter ?
 	var $extensions = array();
 	
 	function cfg_formulaire($nom, $cfg_id = '', $opt = array()){
 		$this->cfg_formulaire_dist($nom, $cfg_id, $opt);
-		$this->param = array_merge($this->param, array(
+		$this->param = array_merge(array(
 			'head' => '', // partie du fond cfg a inserer dans le head par le pipeline header_prive
 			'inline' => '', // code qui sera insere apres le contenu du fond (peut servir pour inserer du js)
-		));
+			
+			'liens' => array(), // liens optionnels sur des sous-config <!-- liens*=xxx -->
+			'liens_multi' => array(), // liens optionnels sur des sous-config pour des fonds utilisant un champ multiple  <!-- liens_multi*=xxx -->
+			'onglet' => 'oui', // cfg doit-il afficher un lien vers le fond sous forme d'onglet dans la page ?exec=cfg
+			'presentation' => 'auto', // cfg doit-il encadrer le formulaire tout seul ?
+		), $this->param);
 	}
 
+	// il s'agit de recuperer le contenu du fichier
+	// on cherche aussi dans fonds/ comme avant
+	function trouver_formulaire(){
+		// si on appelle expressement un 'cfg/xx.html' pour
+		// simplement obtenir les <!-- param=valeur -->
+		if (false!==strpos($this->vue,'/')) {
+			$fichier = find_in_path($nom = $this->vue .'.html');
+			$this->param['interpreter'] = 'non'; // ne pas interpreter par defaut du coup.
+		} else {
+			// sinon recherche de formulaire normal
+			if (!$fichier = find_in_path($nom = 'fonds/cfg_' . $this->vue .'.html')){
+				if ($fichier = find_in_path($nom = 'formulaires/' . $this->vue .'.html'))
+					$this->depuis_cvt = true;
+			}
+		}
+		return array($fichier, $nom);
+	}
+
+	// securiser les actions des formulaires CFG non CVT.
+	function securiser() {
+		if (!$this->depuis_cvt) {
+			$securiser_action = charger_fonction('securiser_action', 'inc');
+			$securiser_action();
+		}
+	}
+	
 	// ajoute une extension (classe cfg_xx ou type_xx) 
 	// ce qui dit a cfg d'executer des fonctions particulieres
 	// si elles existent : ex: cfg_traiter_cfg_xx()

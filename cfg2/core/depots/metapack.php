@@ -104,7 +104,6 @@ class cfg_depot_metapack
   		// si pas de champs : on supprime directement (effacer_meta(metapack::nom))...
   		if (!$this->champs){
   			effacer_meta($this->param['nom']);
-  			if (defined('_COMPAT_CFG_192')) ecrire_metas();
   			return array(true, array());
   		}
   		
@@ -132,7 +131,6 @@ class cfg_depot_metapack
 		} else {
 		    ecrire_meta($this->param['nom'], serialize($this->_base));
 	    }		
-		if (defined('_COMPAT_CFG_192')) ecrire_metas();
 		
 		return array(true, array());
 	}
