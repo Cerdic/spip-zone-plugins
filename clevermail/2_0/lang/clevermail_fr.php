@@ -31,6 +31,7 @@
 		'desinscription_confirmation_debut' => 'D&eacute;sinscription de la lettre d\'information',
 		'desinscription_confirmation_fin' => 'demand&eacute;e. Vous allez recevoir un message demandant confirmation.',
 		'inscription_ok' => 'Vous allez recevoir un message de demande de confirmation de votre inscription &agrave; la liste « @lst_name@ ».',
+		'inscription_ok_multiple' => 'Vous allez recevoir un message de demande de confirmation de votre inscription aux listes « @lst_name@ ».',
 		'inscription_nok' => 'Inscription non authoris&eacute;e pour cette lettre d\'information',
 		'inscription_mok' => 'Votre demande d\'inscription &agrave; la liste « @lst_name@ » a &eacute;t&eacute; soumise au mod&eacute;rateur. Vous serez inform&eacute; de sa d&eacute;cision.',
 		'send_error' => 'Erreur lors de l\'envoi du message de demande de confirmation, veuillez r&eacute;essayer.',

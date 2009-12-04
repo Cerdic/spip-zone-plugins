@@ -104,6 +104,7 @@ function formulaires_clevermail_multiple_traiter_dist($lst_id = 0, $lsr_mode_for
       			$categorie = substr($listData['lst_name'],0 , strpos($listData['lst_name'], "/"));
           		$lists_name_categorie = $lists_name_categorie."- ".supprimer_numero($categorie)."\n\n";
           		$lists_name_complet = $lists_name_complet."- ".supprimer_numero($categorie)." / ".supprimer_numero($lettre)."\n\n";
+          		$msgInscription = "";
 				if($nbLettre <= count($lists)){
           			if(count($lists) > 1){
           				//Si inscription a plusieurs lettres, on envoie un seul mail avec la liste des lettres
@@ -118,6 +119,7 @@ function formulaires_clevermail_multiple_traiter_dist($lst_id = 0, $lsr_mode_for
 		          		$template['@@URL_CONFIRMATION@@'] = generer_url_public(_CLEVERMAIL_VALIDATION,'id='.$actionId);
 		          		$body = _T('clevermail:mail_inscription_multiple');
 		          		$subject = _T('clevermail:sujet_mail_inscription_multiple');
+		          		$msgInscription = _T('clevermail:inscription_ok_multiple', array('lst_name' => $lists_name_complet));
           			} else {
           				// Composition du message de demande de confirmation
 		          		$template = array();
@@ -130,6 +132,7 @@ function formulaires_clevermail_multiple_traiter_dist($lst_id = 0, $lsr_mode_for
 		          		$template['@@URL_CONFIRMATION@@'] = generer_url_public(_CLEVERMAIL_VALIDATION,'id='.$actionId);
 		          		$body = $listData['lst_subscribe_text'];
 		          		$subject = (intval($listData['lst_subject_tag']) == 1 ? '['.$listData['lst_name'].'] ' : '').$listData['lst_subscribe_subject'];
+		          		$msgInscription = _T('clevermail:inscription_ok', array('lst_name' => supprimer_numero($listData['lst_name'])));
           			}
 					if($nbLettre == count($lists)){
 						while (list($translateFrom, $translateTo) = each($template)) {
@@ -143,7 +146,7 @@ function formulaires_clevermail_multiple_traiter_dist($lst_id = 0, $lsr_mode_for
 		          		// TODO : Et le return-path ?
 		          		$envoyer_mail = charger_fonction('envoyer_mail', 'inc');
 		          		if ($envoyer_mail($to, $subject, $body, $from)) {
-		            		$message .= (strlen($message) > 0 ? '<br />' : '')._T('clevermail:inscription_ok', array('lst_name' => $listData['lst_name']));
+		            		$message .= (strlen($message) > 0 ? '<br />' : '').$msgInscription;
 		          		} else {
 		            		$message .= (strlen($message) > 0 ? '<br />' : '')._T('clevermail:send_error', array('lst_name' => $listData['lst_name']));
 		          		}
