@@ -30,9 +30,11 @@ function image_ragged ($img, $align, $margin=10, $coul=-1) {
   $dest = $image["fichier_dest"];
   $creer = $image["creer"];
 
+	$placer_fond = true;
+
   if (!$placer_fond) $ret = "<div style='position: relative; float: $align; width: 0px; height: 0px;'><img src='$im' class='format_png spip_ragged' alt='' style='position: absolute; $align: 0px;' /></div>";
 
-  if ($creer) {
+  if ($creer OR 1==1) {
 	include_spip('inc/logos'); // bicoz presence reduire_image
 	$im_n = extraire_attribut(image_reduire($im, 0, $precision), "src");
 	$nouveau = image_valeurs_trans($im_n, "reduction-$precision");
@@ -41,8 +43,11 @@ function image_ragged ($img, $align, $margin=10, $coul=-1) {
 	$x_i = $nouveau["largeur"];
 	$y_i = $nouveau["hauteur"];
 	$rapport = ($w / $x_i);
+	
 		
 	$im_n = $image["fonction_imagecreatefrom"]($im_n);
+
+
 
 	// une premiere passe
 	// pour recuperer les valeurs
@@ -64,11 +69,33 @@ function image_ragged ($img, $align, $margin=10, $coul=-1) {
 	  }			
 	}
 		
-	$larg[-1] = $w;
-	$larg[$y_i] = $w;
+	$larg[-1] = $x_i;
+	$larg[$y_i] = $x_i;
+	
 
+	// On reprend chaque larg pour appliquer le margin verticalement	
+	// La valeur "larg" de chaque ligne est inchangee,
+	// mais on calcule une valeur a ajouter si les lignes avant et apres sont plus longues
+	// le $add sera ensuite ajouté à la marge en "margin", sinon on a des caracteres masques sous IE.
+	// La valeur de l'espacement vertical est au moins 25px, parce que les lignes de texte se calculent non sur la ligne de base, mais sur leur premier pixel superieur
+	// il faut donc y aller large pour eviter les superpositions
+	$vertical = ceil(max($margin, 25) / 5);
+	for ($i = -1; $i <= $y_i; $i ++) {
+		
+		$add[$i] = 0;
+		
+		for ($j = max($i - $vertical, -1); $j <= min($i + $vertical, $y_i); $j++) {
+			$add[$i] = max($add[$i], ($larg[$i] - $larg[$j]));
+			
+			
+		}
+	}
+			
 	if ($align == "left") $mrg = "margin-right";
 	else $mrg = "margin-left";
+
+	// On ajoute un div pour forcer le margin vertical au dessus - ca evite notamment que la premiere ligne de texte passe sous l'image
+    $forme .= "\n<div style='float: $align; clear: $align; $mrg: ".($add[0]*$rapport + $margin)."px; width:".($larg[0] * $rapport)."px ; height: ".max($margin,25)."px; overflow: hidden;'></div>";
 
 	// une deuxieme passe
 	// pour appliquer les valeurs
@@ -78,14 +105,14 @@ function image_ragged ($img, $align, $margin=10, $coul=-1) {
 	  $haut_rest = $h - $haut_tot;
 	  $hauteur = round(($haut_rest) / $reste);
 	  $haut_tot = $haut_tot + $hauteur;
-	  $resultat = min($larg[$j-1],$larg[$j],$larg[$j+1]);
+	  $resultat = $larg[$j];
 
 	  // Placer l'image en fond de differentes tranches
 	  // uniquement si detourage par la couleur de fond
 	  if ($placer_fond && $haut_tot <= $h) $backg = " background: url($im) $align -".($haut_tot-$hauteur)."px no-repeat;";
 	  else $backg = "";
 
-	  $forme .= "\n<div style='float: $align; clear: $align; $mrg: ".$margin."px; width: ".round(($w - ($resultat)*$rapport))."px ; height: ".round($hauteur)."px; overflow: hidden;$backg'></div>";
+	  $forme .= "\n<div style='float: $align; clear: $align; $mrg: ".($add[$j] * $rapport + $margin)."px; width: ".round(($w - ($resultat)*$rapport))."px ; height: ".round($hauteur)."px; overflow: hidden;$backg'></div>";
 	}
 	// Ajouter un div de plus en dessous
 	$forme .= "\n<div style='float: $align; clear: $align; width: ".($margin+round(($w - ($resultat)*$rapport)))."px ; height: ".round($hauteur)."px; overflow: hidden;'></div>";
