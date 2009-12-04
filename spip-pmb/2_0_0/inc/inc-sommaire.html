@@ -1,41 +1,23 @@
 [(#REM) Derniers articles ]
 		<div class="menu articles liste sommaire">
 			<h2 class="h2">[(#CHEMIN{polices/police_titre.ttf}|oui)
-						[(#REM|?{'',<:derniers_articles:>}|image_typo{police=togase.ttf,taille=26,couleur=333300})]
+						[(#REM|?{'',<:pmb:actualites:>}|image_typo{police=togase.ttf,taille=26,couleur=333300})]
 					]
 					[(#CHEMIN{polices/police_titre.ttf}|non)
-						<:derniers_articles:>
+						<:pmb:actualites:>
 					]
-			</h2><a href="#URL_PAGE{actualites}" class="plus-de-liens"><:toute_actualite:> +</a>
+			</h2><a href="#URL_PAGE{actualites}" class="plus-de-liens"><:pmb:toute_actualite:> +</a>
 			[(#REM) Adapter la mise en page en fonction des 3 premiers articles ]
 			<ul class="liste-items mise-en-page<BOUCLE_testlogos(ARTICLES) {titre_mot=actualite}{par date}{inverse}{0,3} >[(#SET{nb_art_new,#COMPTEUR_BOUCLE})][(#LOGO_ARTICLE||?{'-logo','-sans'})]</BOUCLE_testlogos>">
 				[(#REM) Encarts Actualités ]
 				<B_actus_recents>
 				<BOUCLE_actus_recents(ARTICLES) {titre_mot=actualite}{par date}{inverse}{0,3}{doublons} >
-				<li class="item hentry[ (#COMPTEUR_BOUCLE|=={1}|?{'premier',''})][ encart-(#COMPTEUR_BOUCLE)][ (#LOGO_ARTICLE||?{'avec-logo','sans-logo'})]">
-					[<div class="logo-encart">(#LOGO_ARTICLE|#URL_ARTICLE|image_reduire{0,130}|image_recadre{90,130,center})</div>]
-					[<p class="surtitre">(#SURTITRE)</p>]
-					<h3 class="h3 entry-title"><a href="#URL_ARTICLE" rel="bookmark">[(#TITRE|couper{30,'...'})]</a></h3>
-					<small class="invisible"><abbr class="published"[ title="(#DATE|date_iso)"]>[(#DATE|affdate_jourcourt)]</abbr></small>
-					[<small>(#SOUSTITRE)</small>]
-					[<div class="#EDIT{intro} introduction entry-content">(#INTRODUCTION)</div>]
-					
-					<a class="lire-la-suite" title="[(#TITRE|texte_backend)]" href="#URL_ARTICLE"><:lire_la_suite:> +</a>
-				</li>
+				      #INCLURE{fond=inclure/article-resume,id_article}
 				</BOUCLE_actus_recents>
 				</B_actus_recents>
 				  [(#REM) sinon afficher les derniers articles ]
 				  <BOUCLE_articles_recents(ARTICLES) {titre_mot!=critiques}{par date}{inverse}{0,3}{doublons} >
-				  <li class="item hentry[ (#COMPTEUR_BOUCLE|=={1}|?{'premier',''})][ encart-(#COMPTEUR_BOUCLE)][ (#LOGO_ARTICLE||?{'avec-logo','sans-logo'})]">
-					[<div class="logo-encart">(#LOGO_ARTICLE|#URL_ARTICLE|image_reduire{0,130}|image_recadre{90,130,center})</div>]
-					[<p class="surtitre">(#SURTITRE)</p>]
-					<h3 class="h3 entry-title"><a href="#URL_ARTICLE" rel="bookmark">[(#TITRE|couper{30,'...'})]</a></h3>
-					<small class="invisible"><abbr class="published"[ title="(#DATE|date_iso)"]>[(#DATE|affdate_jourcourt)]</abbr></small>
-					[<small>(#SOUSTITRE)</small>]
-					[<div class="#EDIT{intro} introduction entry-content">(#INTRODUCTION)</div>]
-					
-					<a class="lire-la-suite" title="[(#TITRE|texte_backend)]" href="#URL_ARTICLE"><:lire_la_suite:> +</a>
-				  </li>
+					#INCLURE{fond=inclure/article-resume,id_article}
 				  </BOUCLE_articles_recents>
 				<//B_actus_recents>
 			</ul>
@@ -49,30 +31,18 @@
 		<B_syndic_pmb>
 		<div class="menu articles nouveautes liste sommaire">
 			<h2 class="h2">[(#CHEMIN{polices/police_titre.ttf}|oui)
-					    [(#REM|?{'',<:nouveautes:>}|image_typo{police=togase.ttf,taille=26,couleur=333300})]
+					    [(#REM|?{'',<:pmb:nouveautes:>}|image_typo{police=togase.ttf,taille=26,couleur=333300})]
 					]
 					[(#CHEMIN{polices/police_titre.ttf}|non)
-					    <:nouveautes:>
+					    <:pmb:nouveautes:>
 					]
 			</h2>
-				      <a href="#URL_PAGE{nouveautes}" class="plus-de-liens"><:toutes_nouveautes:> +</a>
+				      <a href="#URL_PAGE{nouveautes}" class="plus-de-liens"><:pmb:toutes_nouveautes:> +</a>
 			<ul class="liste-items">
 			
 			<BOUCLE_syndic_pmb(SYNDIC_ARTICLES_PMB){descriptif!=""}{pmb_photo_src!=""} {par hasard} {0,2}>
 				[(#SET{notice, [(#PMB_ID_NOTICE|pmb_notice_extraire{#CONFIG{spip_pmb/url},'force'})]})]
-								<li class="item hentry[ (#COMPTEUR_BOUCLE|=={1}|?{'premier',''})]">
-							
-								<div class="logo-encart"><a href="#URL_PAGE{notice_display,id=#PMB_ID_NOTICE&amp;seule=1}">
-								[(#GET{notice}|pmb_notice_champ{'logo_src'}|oui)
-								      [(#REM|?{'','<img />'}|inserer_attribut{class,spip_logos}|inserer_attribut{src,[(#GET{notice}|pmb_notice_champ{'logo_src'}|copie_locale{'force'})]}|image_reduire{101,0})]
-								]
-								</a></div>
-								<h3 class="h3 entry-title"><a href="#URL_PAGE{notice_display,id=#PMB_ID_NOTICE}"[ title="(#NOM_SITE|texte_backend)"]>[(#GET{notice}|pmb_notice_champ{'titre'}|couper{30,'...'})]</a></h3> 
-								[<small>(#GET{notice}|pmb_notice_champ{'lesauteurs'})</small>]
-								[<small>	<:serie:> : (#GET{notice}|pmb_notice_champ{'serie'})</small>]
-								[<div class="introduction entry-content">(#GET{notice}|pmb_notice_champ{'resume'}|couper{250,'...'})</div>]
-								<a class="lire-la-suite" title="[(#TITRE|texte_backend)]" href="#URL_PAGE{notice_display,id=#PMB_ID_NOTICE}"><:lire_la_suite:> +</a>
-								</li>
+								<INCLURE{fond=inc/inc-notice-resume}{notice=#GET{notice}}>
 
 			</BOUCLE_syndic_pmb>
 			
@@ -103,15 +73,7 @@
 				  [(#REM) Encarts Coups de coeur ]
 				  
 				   <BOUCLE_articles_coupsdecoeur(ARTICLES){id_rubrique} {par date}  {inverse} {0,3}{doublons}>
-				   <li class="item hentry[ (#COMPTEUR_BOUCLE|=={1}|?{'premier',''})][ encart-(#COMPTEUR_BOUCLE)][ (#LOGO_ARTICLE||?{'avec-logo','sans-logo'})]">
-					[<div class="logo-encart">(#LOGO_ARTICLE|#URL_ARTICLE|image_reduire{0,130}|image_recadre{90,130,center})</div>]
-					<h3 class="h3 entry-title"><a href="#URL_ARTICLE" rel="bookmark">[(#TITRE|couper{30,'...'})]</a></h3>
-					<small class="invisible"><abbr class="published"[ title="(#DATE|date_iso)"]>[(#DATE|affdate_jourcourt)]</abbr></small>
-					[<small>(#SOUSTITRE)</small>]
-					[<div class="#EDIT{intro} introduction entry-content">(#INTRODUCTION)</div>]
-					
-					<a class="lire-la-suite" title="[(#TITRE|texte_backend)]" href="#URL_ARTICLE"><:lire_la_suite:> +</a>
-				</li>
+				      #INCLURE{fond=inclure/article-resume,id_article}
 				  </BOUCLE_articles_coupsdecoeur>
 
 				

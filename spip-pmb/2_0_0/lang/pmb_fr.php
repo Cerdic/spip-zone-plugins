@@ -1,5 +1,6 @@
 <?php
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+
 'parametrage_plugin' => 'Param&eacute;trage du plugin',
 'url' => 'Adresse',
 'parametrage_catalogue' => 'Param&eacute;trage du catalogue',
@@ -17,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'toute_actualite' => 'toute l\'actualit&eacute;',
 'actualites' => 'Actualit&eacute;s',
 'lire_la_suite' => 'Lire la suite',
-'nouveautes' => 'Nouveaut&eacute;s',
+'nouveautes' => 'Nouveaut&eacute;s du catalogue',
 'toutes_nouveautes' => 'toutes les nouveaut&eacute;s',
 'auteur' => 'Auteur',
 'tous_coupsdecoeur' => 'toutes les critiques',
