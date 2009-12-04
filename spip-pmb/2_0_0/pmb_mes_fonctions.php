@@ -708,38 +708,41 @@ function pmb_notice_extraire ($id_notice, $url_base, $mode='auto') {
 function pmb_prets_extraire ($session_id, $url_base, $type_pret=0) {
 	$tableau_resultat = Array();
 	pmb_ws_charger_wsdl($ws, $url_base);
-	$loans = $ws->pmbesOPACEmpr_list_loans($session_id, $type_pret);
-	$liste_notices = Array();
-	$cpt = 0;
-	foreach ($loans as $loan) {
-	      $tableau_resultat[$cpt] = Array();
-	      $tableau_resultat[$cpt]['empr_id'] = $loan->empr_id;
-	      $liste_notices[] = $loan->notice_id;
-	      $tableau_resultat[$cpt]['notice_id'] = $loan->notice_id;
-	      $tableau_resultat[$cpt]['bulletin_id'] = $loan->bulletin_id;
-	      $tableau_resultat[$cpt]['expl_id'] = $loan->expl_id;
-	      $tableau_resultat[$cpt]['expl_cb'] = $loan->expl_cb;
-	      $tableau_resultat[$cpt]['expl_support'] = $loan->expl_support;
-	      $tableau_resultat[$cpt]['expl_location_id'] = $loan->expl_location_id;
-	      $tableau_resultat[$cpt]['expl_location_caption'] = $loan->expl_location_caption;
-	      $tableau_resultat[$cpt]['expl_section_id'] = $loan->expl_section_id;
-	      $tableau_resultat[$cpt]['expl_section_caption'] = $loan->expl_section_caption;
-	      $tableau_resultat[$cpt]['expl_libelle'] = $loan->expl_libelle;
-	      $tableau_resultat[$cpt]['loan_startdate'] = $loan->loan_startdate;
-	      $tableau_resultat[$cpt]['loan_returndate'] = $loan->loan_returndate;
-	      
-	      $cpt++;
-	}
-	if ($cpt>0) {
-	      $tableau_resultat['notice_ids'] = Array();
-	      pmb_ws_recuperer_tab_notices($liste_notices, $ws, $tableau_resultat['notice_ids']);  
-	}
-	$cpt=0;
-	foreach($liste_notices as $notice) {
-	    $tableau_resultat['notice_ids'][$cpt]['id'] = $notice;
-	    $cpt++;
-	}
-
+	try{
+	      $loans = $ws->pmbesOPACEmpr_list_loans($session_id, $type_pret);
+	      $liste_notices = Array();
+	      $cpt = 0;
+	      foreach ($loans as $loan) {
+		    $tableau_resultat[$cpt] = Array();
+		    $tableau_resultat[$cpt]['empr_id'] = $loan->empr_id;
+		    $liste_notices[] = $loan->notice_id;
+		    $tableau_resultat[$cpt]['notice_id'] = $loan->notice_id;
+		    $tableau_resultat[$cpt]['bulletin_id'] = $loan->bulletin_id;
+		    $tableau_resultat[$cpt]['expl_id'] = $loan->expl_id;
+		    $tableau_resultat[$cpt]['expl_cb'] = $loan->expl_cb;
+		    $tableau_resultat[$cpt]['expl_support'] = $loan->expl_support;
+		    $tableau_resultat[$cpt]['expl_location_id'] = $loan->expl_location_id;
+		    $tableau_resultat[$cpt]['expl_location_caption'] = $loan->expl_location_caption;
+		    $tableau_resultat[$cpt]['expl_section_id'] = $loan->expl_section_id;
+		    $tableau_resultat[$cpt]['expl_section_caption'] = $loan->expl_section_caption;
+		    $tableau_resultat[$cpt]['expl_libelle'] = $loan->expl_libelle;
+		    $tableau_resultat[$cpt]['loan_startdate'] = $loan->loan_startdate;
+		    $tableau_resultat[$cpt]['loan_returndate'] = $loan->loan_returndate;
+		    
+		    $cpt++;
+	      }
+	      if ($cpt>0) {
+		    $tableau_resultat['notice_ids'] = Array();
+		    pmb_ws_recuperer_tab_notices($liste_notices, $ws, $tableau_resultat['notice_ids']);  
+	      }
+	      $cpt=0;
+	      foreach($liste_notices as $notice) {
+		  $tableau_resultat['notice_ids'][$cpt]['id'] = $notice;
+		  $cpt++;
+	      }
+	} catch (SoapFault $fault) {
+		//print("Erreur : ".$fault->faultcode." : ".$fault->faultstring);
+	} 
 	return $tableau_resultat;
 			
 }

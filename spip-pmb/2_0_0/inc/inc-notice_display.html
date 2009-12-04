@@ -9,21 +9,25 @@
 		      
 		     [(#ENV{afficher_info}|=={non}|non)
 		      <div class="pmb-ouvrage-infos">	
-			      [<p><strong><:pmb:auteur:></strong> : [(#ENV{notice}|pmb_notice_champ{'id_auteur'}|oui)
+			   <table class="spip pmb-tableau">
+			      <tbody>
+			      [<tr><td><strong><:pmb:auteur:></strong></td><td>[(#ENV{notice}|pmb_notice_champ{'id_auteur'}|oui)
 							<a href="[(#URL_PAGE{author_see}|parametre_url{id,[(#ENV{notice}|pmb_notice_champ{'id_auteur'})]})]">
 						    ]
 						  (#ENV{notice}|pmb_notice_champ{'lesauteurs'})
 						  [(#ENV{notice}|pmb_notice_champ{'id_auteur'}|oui)</a>]
-			      </p>]
-			      [<p><strong><:pmb:serie:></strong> : (#ENV{notice}|pmb_notice_champ{'serie'})</p>]
-			      [<p><strong><:pmb:type:></strong> : (#ENV{notice}|pmb_notice_champ{'type'})</p>]
-			      [<p><strong><:pmb:editeur:></strong> : [(#ENV{notice}|pmb_notice_champ{'id_editeur'}|oui)<a href="[(#URL_PAGE{publisher_see}|parametre_url{id,[(#ENV{notice}|pmb_notice_champ{'id_editeur'})]})]">](#ENV{notice}|pmb_notice_champ{'editeur'})[(#ENV{notice}|pmb_notice_champ{'id_editeur'}|oui)</a>]</p>]
-			      [<p><strong><:pmb:collection:></strong> : [(#ENV{notice}|pmb_notice_champ{'id_collection'}|oui)<a href="[(#URL_PAGE{coll_see}|parametre_url{id,[(#ENV{notice}|pmb_notice_champ{'id_collection'})]})]">](#ENV{notice}|pmb_notice_champ{'collection'})[(#ENV{notice}|pmb_notice_champ{'id_collection'}|oui)</a>]</p>]
-			      [<p><strong><:pmb:format:></strong> : (#ENV{notice}|pmb_notice_champ{'format'})</p>]
-			      [<p><strong><:pmb:annee_publication:></strong> : (#ENV{notice}|pmb_notice_champ{'annee_publication'})</p>]
-			      [<p><strong><:pmb:importance:></strong> : (#ENV{notice}|pmb_notice_champ{'importance'})</p>]
-			      [<p><strong><:pmb:presentation:></strong> : (#ENV{notice}|pmb_notice_champ{'presentation'})</p>]
-			      [<p><strong><:pmb:isbn:></strong> : (#ENV{notice}|pmb_notice_champ{'isbn'})</p>]
+			      </td></tr>]
+			      [<tr><td><strong><:pmb:serie:></strong></td><td>(#ENV{notice}|pmb_notice_champ{'serie'})</td></tr>]
+			      [<tr><td><strong><:pmb:type:></strong></td><td>(#ENV{notice}|pmb_notice_champ{'type'})</td></tr>]
+			      [<tr><td><strong><:pmb:editeur:></strong></td><td>[(#ENV{notice}|pmb_notice_champ{'id_editeur'}|oui)<a href="[(#URL_PAGE{publisher_see}|parametre_url{id,[(#ENV{notice}|pmb_notice_champ{'id_editeur'})]})]">](#ENV{notice}|pmb_notice_champ{'editeur'})[(#ENV{notice}|pmb_notice_champ{'id_editeur'}|oui)</a>]</td></tr>]
+			      [<tr><td><strong><:pmb:collection:></strong></td><td>[(#ENV{notice}|pmb_notice_champ{'id_collection'}|oui)<a href="[(#URL_PAGE{coll_see}|parametre_url{id,[(#ENV{notice}|pmb_notice_champ{'id_collection'})]})]">](#ENV{notice}|pmb_notice_champ{'collection'})[(#ENV{notice}|pmb_notice_champ{'id_collection'}|oui)</a>]</td></tr>]
+			      [<tr><td><strong><:pmb:format:></strong></td><td>(#ENV{notice}|pmb_notice_champ{'format'})</td></tr>]
+			      [<tr><td><strong><:pmb:annee_publication:></strong></td><td>(#ENV{notice}|pmb_notice_champ{'annee_publication'})</td></tr>]
+			      [<tr><td><strong><:pmb:importance:></strong></td><td>(#ENV{notice}|pmb_notice_champ{'importance'})</td></tr>]
+			      [<tr><td><strong><:pmb:presentation:></strong></td><td>(#ENV{notice}|pmb_notice_champ{'presentation'})</td></tr>]
+			      [<tr><td><strong><:pmb:isbn:></strong></td><td>(#ENV{notice}|pmb_notice_champ{'isbn'})</td></tr>]
+			      </tbody>
+			  </table>
 		      </div>
 		      ]
 		      [(#ENV{afficher_resume}|=={oui}|oui)
@@ -59,7 +63,7 @@
 						    [(#PMB_SESSION|pmb_reserver_ouvrage{[(#ENV{notice}|pmb_notice_champ{'id'})],'','',''}|?{<:pmb:reservation_ok:>,		<:pmb:reservation_ko:>})]
 						      </strong>
 					]
-					<ul>
+					<ul class="spip">
 						<li><a href="[(#SELF|parametre_url{reserver,1})]#compte-lecteur"><:pmb:reserver_ouvrage:></a></li>
 						<li><a href="#CONFIG{spip_pmb/url}addtags.php?noticeid=#ENV{id}" class="lien-modal"><:pmb:ajouter_tag:></a></li>
 						<li><a href="#CONFIG{spip_pmb/url}avis.php?todo=liste&noticeid=#ENV{id}" class="lien-modal"><:pmb:donner_avis:></a></li>
