@@ -113,9 +113,8 @@ function formulaires_clevermail_multiple_traiter_dist($lst_id = 0, $lsr_mode_for
 		          		$template['@@DESCRIPTION@@'] = $listData['lst_comment'];
 		          		$template['@@FORMAT_INSCRIPTION@@']  = (intval($lsr_mode) == 1 ? _T('choix_version_html') : _T('choix_version_texte'));
 		          		$template['@@EMAIL@@'] = _request('sub_email');
-		          		//$template['@@URL_CONFIRMATION@@'] = $GLOBALS['meta']['adresse_site'].'/spip.php?page=alerte_mail_do&id='.$actionId;
 		          		$template['@@URL_CONFIRMATION@@'] = generer_url_public(_CLEVERMAIL_VALIDATION,'id='.$actionId);
-		          		$body = _T('alerte_mail:mail_inscription_multiple');
+		          		$body = _T('clevermail:mail_inscription_multiple');
           			} else {
           				// Composition du message de demande de confirmation
 		          		$template = array();
@@ -125,7 +124,6 @@ function formulaires_clevermail_multiple_traiter_dist($lst_id = 0, $lsr_mode_for
 		          		$template['@@DESCRIPTION@@'] = $listData['lst_comment'];
 		          		$template['@@FORMAT_INSCRIPTION@@']  = (intval($lsr_mode) == 1 ? _T('choix_version_html') : _T('choix_version_texte'));
 		          		$template['@@EMAIL@@'] = _request('sub_email');
-		          		//$template['@@URL_CONFIRMATION@@'] = $GLOBALS['meta']['adresse_site'].'/spip.php?page=alerte_mail_do&id='.$actionId;
 		          		$template['@@URL_CONFIRMATION@@'] = generer_url_public(_CLEVERMAIL_VALIDATION,'id='.$actionId);
 		          		$body = $listData['lst_subscribe_text'];
           			}
@@ -142,9 +140,9 @@ function formulaires_clevermail_multiple_traiter_dist($lst_id = 0, $lsr_mode_for
 		          		// TODO : Et le return-path ?
 		          		$envoyer_mail = charger_fonction('envoyer_mail', 'inc');
 		          		if ($envoyer_mail($to, $subject, $body, $from)) {
-		            		$message .= (strlen($message) > 0 ? '<br />' : '')._T('alerte_mail:inscription_ok', array('lst_name' => $listData['lst_name']));
+		            		$message .= (strlen($message) > 0 ? '<br />' : '')._T('clevermail:inscription_ok', array('lst_name' => $listData['lst_name']));
 		          		} else {
-		            		$message .= (strlen($message) > 0 ? '<br />' : '')._T('alerte_mail:send_error', array('lst_name' => $listData['lst_name']));
+		            		$message .= (strlen($message) > 0 ? '<br />' : '')._T('clevermail:send_error', array('lst_name' => $listData['lst_name']));
 		          		}
 					}
 					$nbLettre++;

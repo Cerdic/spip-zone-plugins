@@ -3,10 +3,10 @@
 #SET{obli,'obligatoire'}
 #SET{cat,''}
 <BOUCLE_category(spip_cm_lists){par lst_name}>
-	#SET{currentCat,#LST_NAME|substr{0,(#LST_NAME|strpos{"/"})}}
-	#SET{pos,#LST_NAME|strpos{"/"}|plus{1}}
+	#SET{currentCat,#LST_NAME|supprimer_numero|substr{0,(#LST_NAME|supprimer_numero|strpos{"/"})}}
+	#SET{pos,#LST_NAME|supprimer_numero|strpos{"/"}|plus{1}}
 	[(#GET{currentCat}|!={#GET{cat}}|oui)
 		<INCLURE{fond=public/clevermail_abonnement_plusieurs_listes_multiples_lists}{env}{currentCat=#GET{currentCat}}{pos=#GET{pos}}>
 	]
-	#SET{cat,#LST_NAME|substr{0,(#LST_NAME|strpos{"/"})}}
+	#SET{cat,#LST_NAME|supprimer_numero|substr{0,(#LST_NAME|supprimer_numero|strpos{"/"})}}
 </BOUCLE_category>

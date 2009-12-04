@@ -14,13 +14,13 @@
 	  'changements_mode_abonnement' => ' changements de mode d\'abonnement',
 	  'inscription_deja_abonne_meme_mode' => 'Vous &eacute;tiez d&eacute;j&agrave; inscrit &agrave; la liste « @lst_name@ » dans ce m&ecirc;me mode.',
 	  'inscription_deja_abonne_autre_mode' => 'Vous &eacute;tiez d&eacute;j&agrave; inscrit &agrave; la liste « @lst_name@ » dans un autre mode, changement op&eacute;r&eacute;.',
-	  'bouton_inscription' => 'S\'inscrire', 
+	  'bouton_inscription' => 'S\'inscrire',
 
 		// Front
 		'label_inscription_email' => 'Votre adresse e-mail :',
 		'label_inscription_version' => 'Type de message :',
-	  'choix_version_html' => 'HTML',
-	  'choix_version_texte' => 'Texte brut',
+	  	'choix_version_html' => 'HTML',
+	  	'choix_version_texte' => 'Texte brut',
 		'label_inscription_lettres' => 'Choisissez parmi ces lettres d\'information :',
 		'deja_inscrit' => 'Vous &eacute;tiez d&eacute;j&agrave; inscrit &agrave; la liste « @lst_name@ ». Votre mode d\'inscription a &eacute;t&eacute; mis &agrave; jour.',
 		'inscription_validee' => 'Votre inscription &agrave; la liste « @lst_name@ » est valid&eacute;e. Merci.',
@@ -38,7 +38,7 @@
 	  'front_clevermail_action_validation' => 'Validation d\'une op&eacute;ration',
 	  'front_clevermail_unsubscription_query' => 'Demande de d&eacute;sinscription',
 	  'corps_mail_mod' => 'Bonjour,
-	  
+
 Vous recevez ce message en tant que mod&eacute;rateur de la liste @@NOM_LETTRE@@.
 
 Pour valider l\'inscription de @mail@ &agrave; cette lettre, veuillez cliquer sur ce lien :
@@ -49,16 +49,29 @@ Merci',
 'sujet_mail_mod' => 'Mod&#233;ration de la liste @nom_lettre@',
 'inscription_encours' => 'Votre demande d\'inscription &agrave; la liste @nom_lettre@ est en cours d\'examen. Merci de patienter.',
 
+		'sujet_mail_inscription_multiple' => 'Validation',
+		'mail_inscription_multiple' => 'Bonjour,
+
+Pour confirmer votre inscription aux lettres d\'information suivantes :
+
+ @@NOM_LETTRE@@
+
+veuillez cliquer sur ce lien :
+
+ @@URL_CONFIRMATION@@
+
+Merci',
+
 	  // Back Office : toutes pages
     'administration' => 'Administration de CleverMail',
-	
+
 	  // Back Office : menu
     'liste_lettres' => 'Liste des lettres d\'information',
     'creer_lettre' => 'Cr&eacute;er une lettre d\'information',
     'liste_abonnes' => 'Liste des abonn&eacute;s',
     'ajouter_abonnes' => 'Ajouter des abonn&eacute;s',
     'parametres' => 'Param&egrave;tres',
-	
+
 		// Back Office : ?exec=clevermail
 		'aucun_message_en_attente' => 'aucun en attente',
     'un_message_en_attente' => '1 en attente',
@@ -69,7 +82,7 @@ Merci',
     'aucun_message_envoye' => 'aucun envoy&eacute;',
     'un_message_envoye' => '1 envoy&eacute;',
     'plusieurs_messages_envoyes' => '@nb@ envoy&eacute;s',
-	
+
 		// Back reste
 		'editer_lettre' => 'Editer la lettre d\'information',
 		'abonne' => 'abonn&eacute;',
@@ -201,7 +214,7 @@ Merci',
 		'desabonner_abonnes' => 'D&eacute;sabonner les abonn&eacute;s selectionn&eacute;s',
 		'confirme_suppression_multiple_base' => 'Vous &ecirc;tes sur le point de supprimer des abonn&eacute;s de la base. &Eacute;tes vous sur ?',
 		'confirme_desabonnement_multiple_lettre' => 'Vous &ecirc;tes sur le point de d&eacute;sabonner plusieurs abonn&eacute;s de cette liste. &Eacute;tes vous sur ?',
-	
+
 	  // Mails
 	  'mail_info_inscription_sujet' => 'Inscription de @sub_email@',
 	  'mail_info_inscription_corps' => 'Alerte envoy&eacute;e par le plugin CleverMail du site @nom_site@ ( @url_site@ ) :'."\n\n".'Inscription de @sub_email@ &agrave; la liste « @lst_name@ »',
