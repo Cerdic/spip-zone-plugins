@@ -4,14 +4,34 @@
 	<div id="search">
 
 			
-			<p class="p1"><span>Vous pouvez lancer une recherche portant sur un ou plusieurs mots (titre, auteur, &eacute;diteur, ...).</span></p>
+			<p class="p1"><span></span></p>
 
 			<div class='formulaire_spip formulaire_recherche_avancee'>
 
 			<form name='search_input' action='#resultats_recherche' method='get' onSubmit="if (search_input.user_query.value.length == 0) { search_input.user_query.value='*'; return true; }">
+				<div>
 				[<input type='hidden' name='id_section' value='(#ENV{id_section})'/>]
 				[<input type='hidden' name='titre_section' value='(#ENV{titre_section})'/>]
-				<select name='typdoc'>  
+				<input type='hidden' name='page' value='[(#ENV{page}|sinon{recherche})]'/>
+				<input type='hidden' name='recherche_avancee' value='1'/>
+				<input type='hidden' name='look_PMB' value='1'/>
+				</div>
+				<fieldset>
+				<legend><:pmb:recherche_avancee:></legend>
+				<ul>
+				[<li><strong><:pmb:recherche_dans:> : (#ENV{titre_section})</strong></li>]
+				
+				<li>Vous pouvez lancer une recherche portant sur un ou plusieurs mots (titre, auteur, &eacute;diteur, ...)</li>
+				<li>
+				    <input type='text' name='recherche' class='text_query' value="[(#ENV{recherche}|sinon{*})]" size='35' />
+				</li>
+				    
+
+				<li class="boutons">
+					<input type='submit' name='ok' value='Rechercher' class='boutonrechercher'/>
+				</li>
+				<li>
+				    <select name='typdoc'>  
 					  <option  value=''>tout type de document</option>
 					  
 					  <option  value='a'[(#ENV{typdoc}|=={a}|?{' ',''})selected="selected")]>texte imprim&eacute;</option>
@@ -27,18 +47,9 @@
 					  <option  value='m'[(#ENV{typdoc}|=={m}|?{' ',''})selected="selected")]>document multim&eacute;dia</option>
 					
 					  <option  value='r'[(#ENV{typdoc}|=={r}|?{' ',''})selected="selected")]>objet &agrave; 3 dimensions, artefacts, ...</option>
-				</select><br/>
-
-				<input type='hidden' name='page' value='[(#ENV{page}|sinon{recherche})]'/>
-				<input type='hidden' name='recherche_avancee' value='1'/>
-				<input type='hidden' name='look_PMB' value='1'/>
-				<input type='text' name='recherche' class='text_query' value="[(#ENV{recherche}|sinon{*})]" size='35' />
-
-				<div class="boutons">
-					<input type='submit' name='ok' value='Rechercher' class='boutonrechercher'/>
-				</div>
-				<div id='simple_search_zone'><div class='row'>
-				
+				    </select>
+				</li>
+				<li class="choix">
 						<span style='width: 30%; float: left;'><input type='checkbox' name='look_TITLE' id='look_TITLE' value='1'[(#ENV{look_TITLE}|=={1}|?{' ',''})checked="checked"]  /><label for='look_TITLE'> Titres </label></span>
 						<span style='width: 30%; float: left;'><input type='checkbox' name='look_AUTHOR' id='look_AUTHOR' value='1'[(#ENV{look_AUTHOR}|=={1}|?{' ',''})checked="checked"]  /><label for='look_AUTHOR'> Auteurs </label></span>
 						<span style='width: 30%; float: left;'><input type='checkbox' name='look_PUBLISHER' id='look_PUBLISHER' value='1'[(#ENV{look_PUBLISHER}|=={1}|?{' ',''})checked="checked"]  /><label for='look_PUBLISHER'> Editeurs </label></span>
@@ -50,7 +61,10 @@
 						<span style='width: 30%; float: left;'><input type='checkbox' name='look_KEYWORDS' id='look_KEYWORDS' value='1'[(#ENV{look_KEYWORDS}|=={1}|?{' ',''})checked="checked"]  /><label for='look_KEYWORDS'> Tags</label></span>
 						<span style='width: 30%; float: left;'><input type='checkbox' name='look_ABSTRACT' id='look_ABSTRACT' value='1'[(#ENV{look_ABSTRACT}|=={1}|?{' ',''})checked="checked"]  /><label for='look_ABSTRACT'> R&eacute;sum&eacute; et notes </label></span>
 						<span style='width: 30%; float: left;'><input type='checkbox' name='look_ALL' id='look_ALL' value='1'[(#ENV{look_ALL}|=={1}|?{' ',''})checked="checked"] /><label for='look_ALL'> Tous les champs </label></span></div><div style='clear: both;'><input type='hidden' name='look_FIRSTACCESS' value='1' />
-				</div></div>
+				</li>
+				</ul>
+
+				</fieldset>
 
 			</form>
 

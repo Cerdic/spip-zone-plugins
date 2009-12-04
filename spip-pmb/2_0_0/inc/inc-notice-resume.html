@@ -1,22 +1,27 @@
-<li class="item hentry">
-							
-								<div class="logo-encart"><a href="[(#URL_PAGE{notice_display,id=[(#ENV{notice}|pmb_notice_champ{'id'})]})]">
-								[(#ENV{notice}|pmb_notice_champ{'logo_src'}|oui)
-								      [(#REM|?{'','<img />'}|inserer_attribut{class,spip_logos}|inserer_attribut{src,[(#ENV{notice}|pmb_notice_champ{'logo_src'}|copie_locale{'force'})]}|image_reduire{101,0})]
+<li class="item hentry[ (#ENV{surlignable}|oui)surlignable]">
+	<div class="logo-encart"><a href="[(#URL_PAGE{notice_display,id=[(#ENV{notice}|pmb_notice_champ{'id'})]})]">
+	[(#ENV{notice}|pmb_notice_champ{'logo_src'}|oui)
+	      [(#ENV{'copieimage','non'}|=={'non'}|non)
+		    [(#REM|?{'','<img />'}|inserer_attribut{class,spip_logos}|inserer_attribut{src,[(#ENV{notice}|pmb_notice_champ{'logo_src'}|copie_locale{'force'})]}|image_reduire{101,0})]
+      ]
+								      [(#ENV{'copieimage','non'}|=={'non'}|oui)
+									    [(#REM|?{'','<img />'}|inserer_attribut{width,'100'}|inserer_attribut{class,spip_logos}|inserer_attribut{src,[(#ENV{notice}|pmb_notice_champ{'logo_src'})]})]
+								      ]
 								]
 								</a></div>
-								<h3 class="h3 entry-title"><a href="[(#URL_PAGE{notice_display,id=[(#ENV{notice}|pmb_notice_champ{'id'})]})]"[ title="(#NOM_SITE|texte_backend)"]>[(#ENV{notice}|pmb_notice_champ{'titre'}|couper{30,'...'})]</a></h3> 
-									    [<span class="auteurs"><:par_auteur:> 
+								<h3 class="h3 entry-title[ (#ENV{surlignable}|oui)surlignable]"><a href="[(#URL_PAGE{notice_display,id=[(#ENV{notice}|pmb_notice_champ{'id'})]})]"[ title="(#NOM_SITE|texte_backend)"]>[(#ENV{notice}|pmb_notice_champ{'titre'})]</a></h3> 
+									    [<span class="auteurs[ (#ENV{surlignable}|oui)surlignable]"><:par_auteur:> 
 										      [(#ENV{notice}|pmb_notice_champ{'id_auteur'}|oui)
 											  <a class="url fn spip_in" href="[(#URL_PAGE{author_see}|parametre_url{id,[(#ENV{notice}|pmb_notice_champ{'id_auteur'})]})]">
 										      ]
 										      (#ENV{notice}|pmb_notice_champ{'lesauteurs'})
 										      [(#ENV{notice}|pmb_notice_champ{'id_auteur'}|oui)</a>]
 									    </span>]
-								[<div class="introduction entry-content">(#ENV{notice}|pmb_notice_champ{'resume'}|couper{250,'...'})</div>]
+								[<div class="introduction entry-content[ (#ENV{surlignable}|oui)surlignable]">(#ENV{notice}|pmb_notice_champ{'resume'}|couper{250,'...'})</div>]
 								<div class="meta-publi">
 								    <a class="lire-la-suite" href="[(#URL_PAGE{notice_display,id=[(#ENV{notice}|pmb_notice_champ{'id'})]})]"><:zpip:lire_la_suite:><span class="lire-la-suite-titre"><:zpip:lire_la_suite_de:> <em>[(#ENV{notice}|pmb_notice_champ{'titre'})]</em></span></a>
 								    
 								</div>
 								
 								</li> 
+

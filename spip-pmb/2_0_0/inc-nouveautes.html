@@ -1,21 +1,28 @@
+	#SET{tab_ids, #ARRAY{}}
+	
+
+	
+
 	<B_syndic_pmb>
+	
+
 		<div class="liste menu articles nouveautes">
 			 #ANCRE_PAGINATION
             		[<p class="pagination">(#PAGINATION)</p>]
 	   		<ul class="liste-items">
-			<BOUCLE_syndic_pmb(SYNDIC_ARTICLES_PMB){pmb_photo_src!=""} {par date}{inverse}{pagination 50}>
-							
-								<li class="item hentry[ (#GET{nb_revues}|=={1}|?{'premier',''})]">
-							
-								<h3 class="entry-title"><a href="#URL_PAGE{notice_display,id=#PMB_ID_NOTICE}"[ title="(#NOM_SITE|texte_backend)"]>[(#TITRE)]</a></h3> 
-								[<small>	<:auteur:> : (#LESAUTEURS)</small>]
-								[<small>	<:serie:> : (#PMB_SERIE)</small>]
-								<div class="meta-publi">
-									<a class="lire-la-suite" title="[(#TITRE|texte_backend)]" href="#URL_PAGE{notice_display,id=#PMB_ID_NOTICE}"><:lire_la_suite:> +</a>
-								</div>
-								</li>
-							
+			
+			<BOUCLE_syndic_pmb(SYNDIC_ARTICLES_PMB){pmb_photo_src!=""} {par date}{inverse}{pagination 5}>
+					[(#SET{tab_ids, [(#GET{tab_ids}|push{#PMB_ID_NOTICE})]})]
+
+					
+				
 			</BOUCLE_syndic_pmb>
+			[(#SET{tab_notices,[(#GET{tab_ids}|pmb_tabnotices_extraire{#CONFIG{spip_pmb/url},'force'})]})]	
+			<BOUCLE_tab_resultat(POUR){tableau #GET{tab_notices}}>
+				[(#COMPTEUR_BOUCLE|>{1}|?{' ',''})
+					<INCLURE{fond=inc/inc-notice-resume}{notice=#VALEUR}>
+				]
+			</BOUCLE_tab_resultat>
 			</ul>
 			[<p class="pagination">(#PAGINATION)</p>]
 	   		

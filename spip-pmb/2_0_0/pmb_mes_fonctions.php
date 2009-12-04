@@ -87,7 +87,7 @@ function pmb_notices_section_extraire($id_section, $url_base, $debut=0, $fin=5) 
 		
 
 	} catch (SoapFault $fault) {
-		print("Erreur : ".$fault->faultcode." : ".$fault->faultstring);
+		//print("Erreur : ".$fault->faultcode." : ".$fault->faultstring);
 	} 
 
 	return $tableau_resultat;
@@ -127,7 +127,7 @@ function pmb_collection_extraire($id_collection, $debut=0, $nbresult=5, $id_sess
 	      
 
 	} catch (SoapFault $fault) {
-		print("Erreur : ".$fault->faultcode." : ".$fault->faultstring);
+		//print("Erreur : ".$fault->faultcode." : ".$fault->faultstring);
 	} 
 	return $tableau_resultat;
 }
@@ -166,7 +166,7 @@ function pmb_editeur_extraire($id_editeur, $debut=0, $nbresult=5, $id_session=0)
 		  }
 		}
 	} catch (SoapFault $fault) {
-		print("Erreur : ".$fault->faultcode." : ".$fault->faultstring);
+		//print("Erreur : ".$fault->faultcode." : ".$fault->faultstring);
 	} 
 	return $tableau_resultat;
 
@@ -215,13 +215,13 @@ function pmb_auteur_extraire($id_auteur, $debut=0, $nbresult=5, $id_session=0) {
 		  }
 		}
 	} catch (SoapFault $fault) {
-		print("Erreur : ".$fault->faultcode." : ".$fault->faultstring);
+		//print("Erreur : ".$fault->faultcode." : ".$fault->faultstring);
 	} 
 	return $tableau_resultat;
 
 }
 
-function pmb_recherche_extraire($recherche='*', $url_base, $look_ALL='', $look_AUTHOR='', $look_PUBLISHER='', $look_COLLECTION='', $look_SUBCOLLECTION='', $look_CATEGORY='', $look_INDEXINT='', $look_KEYWORDS='', $look_TITLE='', $look_ABSTRACT='', $id_section='', $debut=0, $fin=5) {
+function pmb_recherche_extraire($recherche='*', $url_base, $look_ALL='', $look_AUTHOR='', $look_PUBLISHER='', $look_COLLECTION='', $look_SUBCOLLECTION='', $look_CATEGORY='', $look_INDEXINT='', $look_KEYWORDS='', $look_TITLE='', $look_ABSTRACT='', $id_section='', $debut=0, $fin=5, $typdoc='') {
 	$tableau_resultat = Array();
 
 
@@ -301,7 +301,7 @@ function pmb_recherche_extraire($recherche='*', $url_base, $look_ALL='', $look_A
 			$tableau_resultat[0] = Array();
 					
 			//cas d'une recherche simple 
-			if (($look_ALL)&&(!$id_section)){
+			if (($look_ALL)&&(!$id_section)&&(!$typdoc)){
 			  $r=$ws->pmbesOPACAnonymous_simpleSearch($searchType,$recherche);
 			} else {
 			  $r=$ws->pmbesOPACAnonymous_advancedSearch($search);
@@ -332,7 +332,7 @@ function pmb_recherche_extraire($recherche='*', $url_base, $look_ALL='', $look_A
 		
 
 	} catch (SoapFault $fault) {
-		print("Erreur : ".$fault->faultcode." : ".$fault->faultstring);
+		//print("Erreur : ".$fault->faultcode." : ".$fault->faultstring);
 	} 
 
 	return $tableau_resultat;
@@ -569,7 +569,7 @@ function pmb_ws_parser_notice_array($value, &$tresultat) {
 						  
 						  if (($dernierTypeTrouve == "102") && ($dernierSousTypeTrouve == "a")) $tresultat['pays'] .= $texte;
 						  
-						  if (($dernierTypeTrouve == "200") && ($dernierSousTypeTrouve == "a")) $tresultat['titre'] .= $texte;
+						  if (($dernierTypeTrouve == "200") && ($dernierSousTypeTrouve == "a")) $tresultat['titre'] .= str_replace("","&oelig;", stripslashes(str_replace("\n","<br />", str_replace("","'",$texte))));
 						  if (($dernierTypeTrouve == "200") && ($dernierSousTypeTrouve == "f")) $tresultat['auteur'] .= $texte;
 						  
 						  if (($dernierTypeTrouve == "210") && ($dernierSousTypeTrouve == "c")) $tresultat['editeur'] .= $texte;
@@ -635,7 +635,7 @@ function pmb_ws_dispo_exemplaire($id_notice, $id_session=0) {
 		
 
 	} catch (SoapFault $fault) {
-		print("Erreur : ".$fault->faultcode." : ".$fault->faultstring);
+		//print("Erreur : ".$fault->faultcode." : ".$fault->faultstring);
 	} 
 	return $tresultat;
 }
@@ -655,7 +655,7 @@ function pmb_ws_recuperer_notice ($id_notice, &$ws, &$tresultat) {
 		
 
 	} catch (SoapFault $fault) {
-		print("Erreur : ".$fault->faultcode." : ".$fault->faultstring);
+		//print("Erreur : ".$fault->faultcode." : ".$fault->faultstring);
 	} 
 
 	
@@ -689,8 +689,11 @@ function pmb_ws_recuperer_tab_notices ($listenotices, &$ws, &$tresultat) {
 
 //charger les webservices
 function pmb_ws_charger_wsdl(&$ws, $url_base) {
-	$ws=new SoapClient(lire_config("spip_pmb/wsdl","http://tence.bibli.fr/pmbws/PMBWsSOAP_1?wsdl"));
-	
+	try {$ws=new SoapClient(lire_config("spip_pmb/wsdl","http://tence.bibli.fr/pmbws/PMBWsSOAP_1?wsdl"));
+	  } catch (SoapFault $fault) {
+		//print("Erreur : ".$fault->faultcode." : ".$fault->faultstring);
+	} 
+
 }
 
 
@@ -700,6 +703,20 @@ function pmb_notice_extraire ($id_notice, $url_base, $mode='auto') {
 	
 	pmb_ws_charger_wsdl($ws, $url_base);
 	pmb_ws_recuperer_notice($id_notice, $ws, $tableau_resultat);
+	return $tableau_resultat;
+			
+}
+
+// retourne un tableau associatif contenant tous les champs d'un tableau d'id de notices 
+function pmb_tabnotices_extraire ($tabnotices, $url_base, $mode='auto') {
+	$tableau_resultat = Array();
+	$listenotices = Array();
+	pmb_ws_charger_wsdl($ws, $url_base);
+	foreach($tabnotices as $cle=>$valeur){
+	    $listenotices[] = $valeur;
+	}
+	
+	pmb_ws_recuperer_tab_notices ($listenotices, $ws, $tableau_resultat);
 	return $tableau_resultat;
 			
 }
