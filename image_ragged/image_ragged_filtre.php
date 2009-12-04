@@ -34,7 +34,7 @@ function image_ragged ($img, $align, $margin=10, $coul=-1) {
 
   if (!$placer_fond) $ret = "<div style='position: relative; float: $align; width: 0px; height: 0px;'><img src='$im' class='format_png spip_ragged' alt='' style='position: absolute; $align: 0px;' /></div>";
 
-  if ($creer OR 1==1) {
+  if ($creer) {
 	include_spip('inc/logos'); // bicoz presence reduire_image
 	$im_n = extraire_attribut(image_reduire($im, 0, $precision), "src");
 	$nouveau = image_valeurs_trans($im_n, "reduction-$precision");
@@ -87,15 +87,14 @@ function image_ragged ($img, $align, $margin=10, $coul=-1) {
 		for ($j = max($i - $vertical, -1); $j <= min($i + $vertical, $y_i); $j++) {
 			$add[$i] = max($add[$i], ($larg[$i] - $larg[$j]));
 			
-			
 		}
 	}
-			
+
 	if ($align == "left") $mrg = "margin-right";
-	else $mrg = "margin-left";
+	else $mrg = "padding-left";
 
 	// On ajoute un div pour forcer le margin vertical au dessus - ca evite notamment que la premiere ligne de texte passe sous l'image
-    $forme .= "\n<div style='float: $align; clear: $align; $mrg: ".($add[0]*$rapport + $margin)."px; width:".($larg[0] * $rapport)."px ; height: ".max($margin,25)."px; overflow: hidden;'></div>";
+    $forme .= "\n<div style='float: $align; clear: $align; $mrg: ".($add[0]*$rapport + $margin)."px; width:".($w - ($larg[0] * $rapport))."px ; height: ".max($margin,25)."px; overflow: hidden;'></div>";
 
 	// une deuxieme passe
 	// pour appliquer les valeurs
