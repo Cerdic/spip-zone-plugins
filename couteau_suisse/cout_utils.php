@@ -222,16 +222,17 @@ function cs_aide_pipelines($outils_affiches_actifs) {
 		$nb=0; foreach($outils as $outil) if($outil['actif'] && (isset($outil['pipeline:'.$pipe]) || isset($outil['pipelinecode:'.$pipe]))) $nb++;
 		if ($nb) $aide[] = _T('couteauprive:outil_nb'.($nb>1?'s':''), array('pipe'=>$pipe, 'nb'=>$nb));
 	}
-	// nombre d'outils actifs
-	$nb=0; foreach($metas_outils as $o) if(isset($o['actif']) && $o['actif']) $nb++;
+	// nombre d'outils actifs / interdits par les autorisations (hors versionnage SPIP)
+	$nb = $ca2 = 0; 
+	foreach($metas_outils as $o) if(isset($o['actif']) && $o['actif']) $nb++;
+	foreach($outils as $o) if(isset($o['interdit']) && $o['interdit'] && !cs_version_erreur($o)) $ca2++;
 	// nombre d'outils caches de la configuration par l'utilisateur
 	$ca1 = isset($GLOBALS['meta']['tweaks_caches'])?count(unserialize($GLOBALS['meta']['tweaks_caches'])):0;
-	// nombre d'outils caches par les autorisations
-	$ca2 = $nb - $ca1 - $outils_affiches_actifs;
 	return '<p><b>' . _T('couteauprive:pipelines') . '</b> '.count($aide).'</p><p style="margin-left:1em;">' . join("<br/>", $aide) . '</p>'
-		. '<p><b>' . _T('couteauprive:outils_actifs') . "</b> $nb</p>"
-		. '<p><b>' . _T('couteauprive:outils_caches') . "</b> $ca1</p>"
-		. (!$ca2?'':('<p><b>' . _T('couteauprive:outils_non_parametrables') . "</b> $ca2</p>"));
+		. '<p><b>' . _T('couteauprive:outils_actifs') . "</b> $nb"
+		. '<br/><b>' . _T('couteauprive:outils_caches') . "</b> $ca1"
+		. (!$ca2?'':('<br/><b>' . _T('couteauprive:outils_non_parametrables') . "</b> $ca2"))
+		. '</p>';
 }
 
 // met en forme le fichier $f en vue d'un insertion en head
@@ -443,8 +444,7 @@ function cs_verif_FILE_OPTIONS($activer=false, $ecriture = false) {
 	$include = "@include_once \"$include\";\nif(\$GLOBALS['cs_spip_options']) define('_CS_SPIP_OPTIONS_OK',1);";
 	$inclusion = _CS_SPIP_OPTIONS_A."\n// Please don’t modify; this code is auto-generated\n$include\n"._CS_SPIP_OPTIONS_B;
 cs_log("cs_verif_FILE_OPTIONS($activer, $ecriture) : le code d'appel est $include");
-	$fo = strlen(_FILE_OPTIONS)? _FILE_OPTIONS:false;
-	if ($fo) {
+	if ($fo = cs_spip_file_options(1)) {
 		if (lire_fichier($fo, $t)) {
 			// verification du contenu inclu
 			$ok = preg_match('`\s*('.preg_quote(_CS_SPIP_OPTIONS_A,'`').'.*'.preg_quote(_CS_SPIP_OPTIONS_B,'`').')\s*`ms', $t, $regs);
@@ -464,7 +464,7 @@ cs_log(" -- fichier $fo present. Inclusion " . ($ok?" trouvee".($ecriture?" et r
 			return;
 		} else cs_log(" -- fichier $fo illisible. Inclusion non permise");
 	} else 
-		$fo = _DIR_RACINE._NOM_PERMANENTS_INACCESSIBLES._NOM_CONFIG.'.php';
+		$fo = cs_spip_file_options(2);
 	// creation
 	if($activer) {
 		if($ecriture) $ok=ecrire_fichier($fo, '<?'."php\n".$inclusion."\n\n?".'>');

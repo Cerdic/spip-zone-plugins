@@ -40,9 +40,11 @@ switch($contexte) {
 		break;
 	case 'cs_comportement':
 		@define('_CS_DIR_TMP', cs_canonicalize(_DIR_RESTREINT_ABS._DIR_TMP));
-		@define('_CS_FILE_OPTIONS', str_replace('../','',(defined('_FILE_OPTION') && strlen(_FILE_OPTION))
-			?_FILE_OPTION
-			:_DIR_RACINE._NOM_PERMANENTS_INACCESSIBLES._NOM_CONFIG.'.php'
+		@define('_CS_FILE_OPTIONS', cs_canonicalize(
+			// Mutualisation ?
+			str_replace('../', '', defined('_DIR_SITE')?_DIR_SITE:'')
+			._DIR_RESTREINT_ABS
+			.cs_spip_file_options(3)
 		));
 		break;
 	case 'auteur_forum':

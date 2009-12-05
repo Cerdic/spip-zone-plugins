@@ -81,7 +81,7 @@ cs_log(" -- appel de charger_fonction('description_outil', 'inc') et de descript
 
 	// cette valeur par defaut n'est pas definie sous SPIP 1.92
 	@define('_ID_WEBMESTRES', 1);
-	if(!strlen($outil['id']) || !autoriser('outiller', $outil))
+	if(!strlen($outil['id']) || !autoriser('configurer', 'outil', 0, NULL, $outil))
 		return $s . _T('info_acces_interdit') . '</div>';
 
 	$s .= "<h3 class='titrem'><img src='"._DIR_IMG_PACK."$puce' width='9' height='9' alt=\"$titre_etat\" title=\"$titre_etat\" />&nbsp;" . $outil['nom'] . '</h3>';
@@ -109,21 +109,28 @@ cs_log(" -- appel de charger_fonction('description_outil', 'inc') et de descript
 	return $s . propre($p) . detail_outil($outil_id) . '</div>';
 }
 
-// renvoie simplement deux liste des outils actifs/inactifs
+// met a jour les outils caches/interdits et renvoie deux listes d'outils actifs et inactifs
 function liste_outils() {
 	global $outils;
 	$id = $nb_actifs = 0;
 	$metas_caches = isset($GLOBALS['meta']['tweaks_caches'])?unserialize($GLOBALS['meta']['tweaks_caches']):array();
+	foreach($outils as $outil) {
+		// liste des categories
+		$categ[_T('couteauprive:categ:'.$outil['categorie'])] = $outil['categorie'];
+		// ressensement des autorisations
+		if(!autoriser('configurer', 'outil', 0, NULL, $outil))
+			$outils[$outil['id']]['interdit'] = $metas_caches[$outil['id']]['cache'] = 1;
+	}
+	// une constante : facon rapide d'interdire des lames a la manipulation
 	if(defined('_CS_OUTILS_CACHES'))
-		foreach (explode(':',_CS_OUTILS_CACHES) as $o) $metas_caches[$o]['cache'] = 1;
-	foreach($outils as $outil) $categ[_T('couteauprive:categ:'.$outil['categorie'])] = $outil['categorie']; ksort($categ);
+		foreach (explode(':',_CS_OUTILS_CACHES) as $o) $outils[$o]['interdit'] = $metas_caches[$o]['cache'] = 1;
+	ksort($categ);
 	$results_actifs = $results_inactifs = '';
 	foreach($categ as $c=>$i) {
 		$s_actifs = $s_inactifs = array();
 		foreach($outils as $outil) if ($outil['categorie']==$i) {
 			$test = $outil['actif']?'s_actifs':'s_inactifs';
-			$hide = (!$outil['actif'] && isset($metas_caches[$outil['id']]['cache']))
-				|| !autoriser('outiller', $outil);
+			$hide = !$outil['actif'] && isset($metas_caches[$outil['id']]['cache']);
 			if (!$hide)
 				${$test}[] .= $outil['nom'] . '|' . $outil['index'] . '|' . $outil['id'];
 		}

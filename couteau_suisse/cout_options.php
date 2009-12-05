@@ -131,12 +131,15 @@ function autoriser_cs_configurer_dist($faire, $type, $id, $qui, $opt) {
 }
 
 // Droits pour voir/manipuler un outil du Couteau Suisse
-// $type represente ici l'outil concerne : $outil
-// Si $outil['autoriser'] (code PHP) n'est pas renseigne, les droits sont toujours accordes
-function autoriser_outiller_dist($faire, $type, $id, $qui, $opt) {
-	$test = !cs_version_erreur($type);
-	if(isset($type['autoriser']))
-		eval('$test &= '.$type['autoriser'].';');
+// $opt represente ici l'outil concerne : $outil
+// Si $opt['autoriser'] (code PHP) n'est pas renseigne, les droits sont toujours accordes
+function autoriser_outil_configurer_dist($faire, $type, $id, $qui, $opt) {
+	if(!is_array($opt)) return autoriser('configurer', 'cs', $id, $qui, $opt);
+	$test = !cs_version_erreur($opt)
+		&& autoriser('configurer', 'outil_'.$opt['id'], $id, $qui, $opt)
+		&& autoriser('configurer', 'categorie_'.$opt['categorie'], $id, $qui, $opt);
+	if($test && isset($opt['autoriser']))
+		eval('$test &= '.$opt['autoriser'].';');
 	return $test;
 }
 
@@ -187,5 +190,13 @@ function cs_date_court($numdate) {
 	return _T('couteau:date_court', array('jour'=>$jour, 'mois'=>$mois, 'annee'=>substr($annee,2)));
 }
 
-
+// Fichier d'options
+function cs_spip_file_options($code) {
+	$fo = (defined('_FILE_OPTIONS') && strlen(_FILE_OPTIONS))?_FILE_OPTIONS:false;
+	if($code===1) return $fo;
+	// Attention a la mutualisation
+	$nfo = (defined('_DIR_SITE')?_DIR_SITE:_DIR_RACINE)._NOM_PERMANENTS_INACCESSIBLES._NOM_CONFIG.'.php';
+	if($code===2) return $nfo;
+	if($code===3) return $fo?$fo:$nfo;
+}
 ?>

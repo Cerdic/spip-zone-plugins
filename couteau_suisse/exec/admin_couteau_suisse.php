@@ -351,7 +351,7 @@ cs_log("INIT : enregistre_modif_outils()");
 	$_GET['outil'] = ($cmd!='hide' && count($toggle)==1)?$toggle[0]:'';
 	$i = $cmd=='hide'?'cache':'actif';
 	${$i} = isset($GLOBALS['meta']["tweaks_{$i}s"])?unserialize($GLOBALS['meta']["tweaks_{$i}s"]):array();
-	foreach($toggle as $o) if(autoriser('outiller', $outils[$o])) {
+	foreach($toggle as $o) if(autoriser('configurer', 'outil', 0, NULL, $outils[$o])) {
 		if(isset(${$i}[$o][$i]))
 			unset(${$i}[$o][$i]); 
 		else ${$i}[$o][$i] = 1;
@@ -440,7 +440,7 @@ cs_log("INIT : exec_admin_couteau_suisse()");
 		global $outils;
 		include_spip('cout_utils');
 		include_spip('config_outils');
-		if(autoriser('outiller', $outils[$_GET['outil']])) {
+		if(autoriser('configurer', 'outil', 0, NULL, $outils[$_GET['outil']])) {
 			include_spip('inc/cs_outils');
 			cs_initialisation_d_un_outil($_GET['outil'], charger_fonction('description_outil', 'inc'), true);
 			foreach ($outils[$_GET['outil']]['variables'] as $a) unset($metas_vars[$a]);
