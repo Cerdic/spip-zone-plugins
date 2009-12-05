@@ -31,7 +31,7 @@ function formulaires_notation_charger_dist($objet, $id_objet){
 	// si le visiteur a une session, on regarde s'il a deja vote
 	// sinon, non (la verification serieuse en cas de vote deja effectue
 	// se faisant dans verifier() )
-	if (session_get('a_vote')) {
+	if ($GLOBALS['visiteur_session'] AND session_get('a_vote')) {
 
 		// on recupere l'id de l'auteur connecte, sinon ip
 		if (!$id_auteur = $GLOBALS['visiteur_session']['id_auteur']) {
