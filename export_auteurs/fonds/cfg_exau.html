@@ -1,0 +1,22 @@
+#CACHE{0}
+
+<!-- descriptif=
+<h4><:exau:nom_plugin_complet:></h4>
+<img src='#CHEMIN{images/export_auteurs-64.png}' width='64' height='64' style='display:block;margin:0 auto' />
+<:exau:cfg_presentation_exau:><br />
+-->
+<!-- titre=Export Auteurs (ExAu) -->
+
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+
+<fieldset>
+	<legend><:exau:cfg_pos_bouton:></legend>
+	<p><:exau:cfg_bouton_visiteurs:></p>
+	<label>
+		<input type="checkbox" name="btneverywhere" [checked=(#ENV{btneverywhere}|=={on}|?{'checked',''})] />
+		<:exau:cfg_bouton_partout:>
+	</label>
+</fieldset>
+<p style='text-align:right'>
+<input type="submit" name="_cfg_ok" class='fondo' value="<:bouton_valider:>" />
+</form>
