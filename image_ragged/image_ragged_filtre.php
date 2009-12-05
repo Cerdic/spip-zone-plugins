@@ -94,7 +94,7 @@ function image_ragged ($img, $align, $margin=10, $coul=-1) {
 	else $mrg = "margin-left";
 
 	// On ajoute un div pour forcer le margin vertical au dessus - ca evite notamment que la premiere ligne de texte passe sous l'image
-    $forme .= "\n<div style='float: $align; clear: $align; $mrg: ".($add[0]*$rapport + $margin)."px; width:".($w - ($larg[0] * $rapport))."px ; height: ".max($margin,25)."px; overflow: hidden;'></div>";
+    $forme .= "\n<div class='ragged_ligne_vide' style='float: $align; clear: $align; $mrg: ".round($add[-1]*$rapport + $margin)."px; width:".round($w - ($larg[-1] * $rapport))."px ; height: ".max($margin,25)."px; overflow: hidden;'></div>";
 
 	// une deuxieme passe
 	// pour appliquer les valeurs
@@ -111,10 +111,10 @@ function image_ragged ($img, $align, $margin=10, $coul=-1) {
 	  if ($placer_fond && $haut_tot <= $h) $backg = " background: url($im) $align -".($haut_tot-$hauteur)."px no-repeat;";
 	  else $backg = "";
 
-	  $forme .= "\n<div style='float: $align; clear: $align; $mrg: ".($add[$j] * $rapport + $margin)."px; width: ".round(($w - ($resultat)*$rapport))."px ; height: ".round($hauteur)."px; overflow: hidden;$backg'></div>";
+	  $forme .= "\n<div class='ragged_ligne_image' style='float: $align; clear: $align; $mrg: ".round($add[$j] * $rapport + $margin)."px; width: ".round(($w - ($resultat)*$rapport))."px ; height: ".round($hauteur)."px; overflow: hidden;$backg'></div>";
 	}
 	// Ajouter un div de plus en dessous
-	$forme .= "\n<div style='float: $align; clear: $align; width: ".($margin+round(($w - ($resultat)*$rapport)))."px ; height: ".round($hauteur)."px; overflow: hidden;'></div>";
+	$forme .= "\n<div class='ragged_ligne_vide' style='float: $align; clear: $align; width: ".($margin+round(($w - ($resultat)*$rapport)))."px ; height: ".round($hauteur)."px; overflow: hidden;'></div>";
 
 	// Sauvegarder le fichier		
 	$handle = fopen($dest, 'w');
