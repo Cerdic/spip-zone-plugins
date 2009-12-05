@@ -6,6 +6,8 @@
 // $LastChangedBy$
 // $LastChangedDate$
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 include_spip('inc/exau_api');
 
 /**
@@ -20,7 +22,6 @@ function action_exau_export_auteurs () {
 		$auth = charger_fonction('auth', 'inc');
 		$auth = $auth();
 	}
-
 
 	if(autoriser('voir', 'auteur', $connect_id_auteur)) {
 	
@@ -41,4 +42,3 @@ function action_exau_export_auteurs () {
 	exit;
 }
 
-?>

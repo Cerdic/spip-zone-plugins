@@ -11,7 +11,7 @@
 	
 	 -->
 	 	
-	<nom>Export Auteurs</nom>
+	<nom>Export Auteurs (ExAu)</nom>
 	<auteur>
 		Christian Paulus
 _ &#169; 2009 - Distribu&#233; sous licences MIT et GPL
@@ -20,14 +20,15 @@ _ &#169; 2009 - Distribu&#233; sous licences MIT et GPL
 	<description>
 		Raccourci en espace priv&#233; pour exporter la table des auteurs.<br />
 		Le r&#233;sultat appara&#238;t dans une nouvelle fen&#234;tre.<br />
-		Pour personnaliser l'export, recopiez et adaptez le squelette {{lister_auteurs.html}} dans votre r&#233;pertoire de squelettes.
+		Pour personnaliser l'export, recopiez et adaptez le squelette {{lister_auteurs.html}} dans votre r&#233;pertoire de squelettes.<br style='margin-bottom:1em' />
+		Pour configurer ce plugin : voir [la page de configuration via cfg->/ecrire/?exec=cfg&cfg=exau].
 	</description>
 	
 	<icon>images/export_auteurs-64.png</icon>
 	
 	<etat>stable</etat>
 	
-	<version>1.01.03</version>
+	<version>1.02.00</version>
 	
 	<lien>[Documentation->http://www.quesaco.org/Exporter-les-auteurs]</lien>
 	

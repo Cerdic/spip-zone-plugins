@@ -11,6 +11,8 @@
 // $LastChangedBy$
 // $LastChangedDate$
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 /**
  * Exporter les champs specifies de la table des auteurs.
  * Pour ajouter/retirer un champ : modifier lister_auteurs.html
@@ -78,7 +80,10 @@ function exau_generer_nom_fichier ($statut) {
  */
 function exau_statut_correct ($statut) {
 	
-	$complet = (defined('EXAU_EXPORTER_TOUT') && EXAU_EXPORTER_TOUT);
+	$btn_partout = (($ii = lire_config('exau/btneverywhere')) && ($ii == 'on'));
+	
+	//$complet = (defined('EXAU_EXPORTER_TOUT') && EXAU_EXPORTER_TOUT);
+	$complet = $btn_partout;
 	
 	if(!$statut && $complet) 
 	{
@@ -99,4 +104,3 @@ function exau_statut_correct ($statut) {
 	return (false);
 }
 
-?>

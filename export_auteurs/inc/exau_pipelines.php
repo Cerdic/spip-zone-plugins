@@ -6,6 +6,8 @@
 // $LastChangedBy$
 // $LastChangedDate$
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 include_spip('inc/exau_api');
 
 /**
@@ -69,11 +71,10 @@ function exau_affiche_droite ($flux) {
 				. fin_cadre_enfonce(true)
 				;
 
-		}
+		} // else spip_log("statut KO");
 	}
 	
 	return($flux);
 }
 
 
-?>

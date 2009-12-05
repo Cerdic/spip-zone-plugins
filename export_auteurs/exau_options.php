@@ -12,18 +12,23 @@
 // $LastChangedBy$
 // $LastChangedDate$
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 // pour SPIP 1.9.1
 if(!defined('_DIR_PLUGIN_EXAU')) {
 	$p = explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
 	define('_DIR_PLUGIN_EXAU',(_DIR_PLUGINS.end($p)).'/');
 }
 
+/**
+ * Obsolète. La configuration passe maintenant par une page cfg. (CPA-20091205)
+ */
 /// Vous pouvez modifier EXAU_EXPORTER_TOUT
 //
 // si EXAU_EXPORTER_TOUT==FALSE ou absent, le raccourci n'apparait que dans la page "Visiteurs"
 // si EXAU_EXPORTER_TOUT==TRUE, le raccourci d'export apparait egalement dans la page "Auteurs"
 //define("EXAU_EXPORTER_TOUT", true);
-define("EXAU_EXPORTER_TOUT", false);
+//define("EXAU_EXPORTER_TOUT", false);
 
 
 
@@ -42,4 +47,3 @@ else
 }
 
 
-?>
