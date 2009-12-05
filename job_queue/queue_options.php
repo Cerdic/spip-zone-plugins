@@ -12,7 +12,8 @@
 @define('_JQ_NB_JOBS_OVERFLOW',10000); // nombre de jobs a partir duquel on force le traitement en fin de hit pour purger
 
 // on inhibe la balise #SPIP_CRON qui ne servira plus a rien
-function balise_SPIP_CRON ($p) { $p->code = ''; $p->interdire_scripts = false; return $p; }
+function balise_SPIP_CRON ($p) { $p->code = '\'\''; $p->interdire_scripts = false; 
+return $p; }
 
 
 /**

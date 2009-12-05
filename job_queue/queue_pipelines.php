@@ -52,10 +52,10 @@ function queue_affichage_final(&$texte){
 		generer_url_action('cron') .
 		'\');"></div>';
 
-	if ($p=strpos($texte,'</body>')!==FALSE)
+	if (($p=strpos($texte,'</body>'))!==FALSE)
 		$texte = substr($texte,0,$p).$code.substr($texte,$p);
 	else
-		$texte .= $p;
+		$texte .= $code;
 
 	return $texte;
 }
