@@ -392,6 +392,11 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:style_p' => 'Votre style :',
 	'label:suite_introduction' => 'Points de suite :',
 	'label:terminaison_urls_arbo' => '<:label:terminaison_urls_page:>',
+	'label:url_max_propres' => 'Longueur maximale des URLs (caract&egrave;res) :',
+	'label:url_max_arbo' => '<:label:url_max_propres:>',
+	'label:url_max_libres' => '<:label:url_max_propres:>',
+	'label:url_max_propres2' => '<:label:url_max_propres:>',
+	'label:url_max_propres_qs' => '<:label:url_max_propres:>',
 	'label:terminaison_urls_libres' => '<:label:terminaison_urls_page:>',
 	'label:terminaison_urls_page' => 'Terminaison des URLs (ex : &laquo;&nbsp;.html&nbsp;&raquo;) :',
 	'label:terminaison_urls_propres' => '<:label:terminaison_urls_page:>',
@@ -656,27 +661,27 @@ _ Exemple : <code>/spip.php?article123</code>[[%terminaison_urls_page%]][[%separ
 _ Exemple : <code>/article123.html</code></radio_type_urls3>
 
 <radio_type_urls3 valeur="propres">@puce@ {{URLs &laquo;propres&raquo;}} : les liens sont calcul&eacute;s gr&acirc;ce au titre des objets demand&eacute;s. Des marqueurs (_, -, +, @, etc.) encadrent les titres en fonction du type d\'objet.
-_ Exemples : <code>/Mon-titre-d-article</code> ou <code>/-Ma-rubrique-</code> ou <code>/@Mon-site@</code>[[%terminaison_urls_propres%]][[%debut_urls_propres%]][[%marqueurs_urls_propres%]]</radio_type_urls3>
+_ Exemples : <code>/Mon-titre-d-article</code> ou <code>/-Ma-rubrique-</code> ou <code>/@Mon-site@</code>[[%terminaison_urls_propres%]][[%debut_urls_propres%]][[%marqueurs_urls_propres%]][[%url_max_propres%]]</radio_type_urls3>
 
 <radio_type_urls3 valeur="propres2">@puce@ {{URLs &laquo;propres2&raquo;}} : l\'extension \'.html\' est ajout&eacute;e aux liens {&laquo;propres&raquo;}.
 _ Exemple : <code>/Mon-titre-d-article.html</code> ou <code>/-Ma-rubrique-.html</code>
-[[%debut_urls_propres2%]][[%marqueurs_urls_propres2%]]</radio_type_urls3>
+[[%debut_urls_propres2%]][[%marqueurs_urls_propres2%]][[%url_max_propres2%]]</radio_type_urls3>
 
 <radio_type_urls3 valeur="libres">@puce@ {{URLs &laquo;libres&raquo;}} : les liens sont {&laquo;propres&raquo;}, mais sans marqueurs dissociant les objets (_, -, +, @, etc.).
 _ Exemple : <code>/Mon-titre-d-article</code> ou <code>/Ma-rubrique</code>
-[[%terminaison_urls_libres%]][[%debut_urls_libres%]]</radio_type_urls3>
+[[%terminaison_urls_libres%]][[%debut_urls_libres%]][[%url_max_libres%]]</radio_type_urls3>
 
 <radio_type_urls3 valeur="arbo">@puce@ {{URLs &laquo;arborescentes&raquo;}} : les liens sont {&laquo;propres&raquo;}, mais de type arborescent.
 _ Exemple : <code>/secteur/rubrique1/rubrique2/Mon-titre-d-article</code>
-[[%url_arbo_minuscules%]][[%urls_arbo_sans_type%]][[%url_arbo_sep_id%]][[%terminaison_urls_arbo%]]</radio_type_urls3>
+[[%url_arbo_minuscules%]][[%urls_arbo_sans_type%]][[%url_arbo_sep_id%]][[%terminaison_urls_arbo%]][[%url_max_arbo%]]</radio_type_urls3>
 
 <radio_type_urls3 valeur="propres-qs">@puce@ {{URLs &laquo;propres-qs&raquo;}} : ce syst&egrave;me fonctionne en &quot;Query-String&quot;, c\'est-&agrave;-dire sans utilisation de .htaccess ; les liens sont {&laquo;propres&raquo;}.
 _ Exemple : <code>/?Mon-titre-d-article</code>
-[[%terminaison_urls_propres_qs%]]</radio_type_urls3>
+[[%terminaison_urls_propres_qs%]][[%url_max_propres_qs%]]</radio_type_urls3>
 
 <radio_type_urls3 valeur="propres_qs">@puce@ {{URLs &laquo;propres_qs&raquo;}} : ce syst&egrave;me fonctionne en &quot;Query-String&quot;, c\'est-&agrave;-dire sans utilisation de .htaccess ; les liens sont {&laquo;propres&raquo;}.
 _ Exemple : <code>/?Mon-titre-d-article</code>
-[[%terminaison_urls_propres_qs%]][[%marqueurs_urls_propres_qs%]]</radio_type_urls3>
+[[%terminaison_urls_propres_qs%]][[%marqueurs_urls_propres_qs%]][[%url_max_propres_qs%]]</radio_type_urls3>
 
 <radio_type_urls3 valeur="standard">@puce@ {{URLs &laquo;standard&raquo;}} : ces liens d&eacute;sormais obsol&egrave;tes &eacute;taient utilis&eacute;s par SPIP jusqu\'&agrave; sa version 1.8.
 _ Exemple : <code>article.php3?id_article=123</code>

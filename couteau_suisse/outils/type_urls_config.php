@@ -117,6 +117,11 @@ add_variables( array(
 	'defaut' => "'-'",
 	'code' => "define('_url_arbo_sep_id', %s);",
 ), array(
+	'nom' => 'url_max_arbo',
+	'format' => _format_NOMBRE,
+	'defaut' => 35,
+	'code' => "define('_URLS_ARBO_MAX', %s);",
+), array(
 	'nom' => 'terminaison_urls_arbo',
 	'format' => _format_CHAINE,
 	'defaut' => "'.html'",
@@ -131,6 +136,11 @@ add_variables( array(
 	'defaut' => "''",
 	'code:strlen(%s)' => "define('_terminaison_urls_propres', %s);",
 ), array(
+	'nom' => 'url_max_propres',
+	'format' => _format_NOMBRE,
+	'defaut' => 35,
+	'code' => "define('_URLS_PROPRES_MAX', %s);",
+), array(
 	'nom' => 'debut_urls_propres',
 	'format' => _format_CHAINE,
 	'defaut' => "''",
@@ -141,6 +151,11 @@ add_variables( array(
 	'radio' => array(1 => 'item_oui', 0 => 'item_non'),				
 	'defaut' => 1,
 	'code:!%s' => "define('_MARQUEUR_URL', false);"
+), array(
+	'nom' => 'url_max_propres2',
+	'format' => _format_NOMBRE,
+	'defaut' => 35,
+	'code' => "define('_URLS_PROPRES_MAX', %s);",
 ), array(
 	'nom' => 'debut_urls_propres2',
 	'format' => _format_CHAINE,
@@ -158,6 +173,11 @@ add_variables( array(
 	'defaut' => "''",
 	'code:strlen(%s)' => "define('_terminaison_urls_propres', %s);",
 ), array(
+	'nom' => 'url_max_libres',
+	'format' => _format_NOMBRE,
+	'defaut' => 35,
+	'code' => "define('_URLS_PROPRES_MAX', %s);",
+), array(
 	'nom' => 'debut_urls_libres',
 	'format' => _format_CHAINE,
 	'defaut' => "''",
@@ -168,12 +188,19 @@ add_variables( array(
 	'defaut' => "''",
 	'code:strlen(%s)' => "define('_terminaison_urls_propres', %s);",
 ), array(
+	'nom' => 'url_max_propres_qs',
+	'format' => _format_NOMBRE,
+	'defaut' => 35,
+	'code' => "define('_URLS_PROPRES_MAX', %s);",
+), array(
 	'nom' => 'marqueurs_urls_propres_qs',
 	'format' => _format_NOMBRE,
 	'radio' => array(1 => 'item_oui', 0 => 'item_non'),				
 	'defaut' => 1,
 	'code:!%s' => "define('_MARQUEUR_URL', false);",
-), array(
+));
+
+add_variables( array(
 	'nom' => 'urls_minuscules',
 	'check' => 'couteauprive:urls_minuscules',
 	'defaut' => 0,
