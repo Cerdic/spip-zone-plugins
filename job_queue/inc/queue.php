@@ -190,7 +190,7 @@ function queue_schedule(){
 	}
 	$end_time = $time + _JQ_MAX_JOBS_TIME_TO_EXECUTE;
 
-	#spip_log("JQ schedule $start / $max_time",'jq');
+	#spip_log("JQ schedule $time / $end_time",'jq');
 
 	if (!defined('_JQ_MAX_JOBS_EXECUTE'))
 		define('_JQ_MAX_JOBS_EXECUTE',200);
@@ -202,7 +202,7 @@ function queue_schedule(){
 	//	- de date
 	// lorsqu'un job cron n'a pas fini, sa priorite est descendue
 	// pour qu'il ne bloque pas les autres jobs en attente
-	$now = date('Y-m-d H:i:s',$start);
+	$now = date('Y-m-d H:i:s',$time);
 	$res = sql_select('*','spip_jobs','date<'.sql_quote($now),'','priorite DESC,date','0,'.(_JQ_MAX_JOBS_EXECUTE+1));
 	do {
 		if ($row = sql_fetch($res)){
@@ -232,7 +232,7 @@ function queue_schedule(){
 				}
 			}
 		}
-		#spip_log("JQ schedule job end time ".time(),'jq');
+		#spip_log("JQ schedule job end time ".$time,'jq');
 	} while ($nbj<_JQ_MAX_JOBS_EXECUTE AND $row AND $time<$end_time);
 
 	#spip_log("JQ schedule end time ".time(),'jq');
