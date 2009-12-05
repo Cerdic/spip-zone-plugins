@@ -478,7 +478,7 @@ Note : les paquets <code>.zip</code> n\'&eacute;tant pas reconstruits instantan&
 
 	// P
 	'pack_actuel' => 'Pack @date@',
-	'pack_actuel_avert' => 'Attention, les surcharges sur les define() ou les globales ne sont pas sp&eacute;cifi&eacute;es ici',
+	'pack_actuel_avert' => 'Attention, les surcharges sur les define(), les autorisations sp&eacute;cifiques ou les globales ne sont pas sp&eacute;cifi&eacute;es ici',
 	'pack_actuel_titre' => 'PACK ACTUEL DE CONFIGURATION DU COUTEAU SUISSE',
 	'pack_alt' => 'Voir les param&egrave;tres de configuration en cours',
 	'pack_delete' => 'Supression d\'un pack de configuration',

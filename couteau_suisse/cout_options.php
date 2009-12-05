@@ -192,11 +192,17 @@ function cs_date_court($numdate) {
 
 // Fichier d'options
 function cs_spip_file_options($code) {
-	$fo = (defined('_FILE_OPTIONS') && strlen(_FILE_OPTIONS))?_FILE_OPTIONS:false;
-	if($code===1) return $fo;
 	// Attention a la mutualisation
-	$nfo = (defined('_DIR_SITE')?_DIR_SITE:_DIR_RACINE)._NOM_PERMANENTS_INACCESSIBLES._NOM_CONFIG.'.php';
-	if($code===2) return $nfo;
-	if($code===3) return $fo?$fo:$nfo;
+	if(defined('_DIR_SITE')) {
+		$nfo = $fo = _DIR_SITE._NOM_PERMANENTS_INACCESSIBLES._NOM_CONFIG.'.php';
+	} else {
+		$fo = (defined('_FILE_OPTIONS') && strlen(_FILE_OPTIONS))?_FILE_OPTIONS:false;
+		$nfo = _DIR_RACINE._NOM_PERMANENTS_INACCESSIBLES._NOM_CONFIG.'.php';
+	}
+	switch($code) {
+		case 1: return $fo;
+		case 2: return $nfo;
+		case 3: return $fo?$fo:$nfo;
+	}
 }
 ?>
