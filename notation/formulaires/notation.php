@@ -27,51 +27,38 @@ function formulaires_notation_charger_dist($objet, $id_objet){
 		'_form_id' => "-$objet$id_objet"
 	);
 
-	
-	// on recupere l'id de l'auteur connecte, sinon ip
-	if (!$id_auteur = $GLOBALS['visiteur_session']['id_auteur']) {
-		$id_auteur = 0;
-		$ip	= $_SERVER['REMOTE_ADDR'];
-	}
-	
-	// on recupere la note ponderee de l'objet et le nombre de votes
-		// list($valeurs["total"], $valeurs["note"], $valeurs["note_ponderee"]) 
-		//	= notation_calculer_total($objet, $id_objet);
-	if ($row = sql_fetsel(
-			array("note", "note_ponderee", "nombre_votes"),
-			"spip_notations_objets",
-			array(
-				"objet=" . sql_quote(objet_type($objet)),
-				"id_objet=" . sql_quote($id_objet),
-				)
-		)) {
-		$valeurs["note"] = $row['note'];
-		$valeurs["note_ponderee"] = $row['note_ponderee'];
-		$valeurs["total"] = $row['nombre_votes'];
-	}
-	
-	
 	// l'auteur ou l'ip a-t-il deja vote ?
-	$where = array(
-		"objet=" . sql_quote(objet_type($objet)),
-		"id_objet=" . sql_quote($id_objet),
-		);
-	if ($id_auteur) 
-		$where[] = "id_auteur=" . sql_quote($id_auteur);
-	else 
-		$where[] = "ip=" . sql_quote($ip);
-	$id_notation = sql_getfetsel("id_notation","spip_notations",$where);
+	// si le visiteur a une session, on regarde s'il a deja vote
+	// sinon, non (la verification serieuse en cas de vote deja effectue
+	// se faisant dans verifier() )
+	if (session_get('a_vote')) {
 
-	if ($id_notation){
-		$valeurs['id_notation'] = $id_notation;
-	}
+		// on recupere l'id de l'auteur connecte, sinon ip
+		if (!$id_auteur = $GLOBALS['visiteur_session']['id_auteur']) {
+			$id_auteur = 0;
+			$ip	= $_SERVER['REMOTE_ADDR'];
+		}
+	
+		$where = array(
+			"objet=" . sql_quote(objet_type($objet)),
+			"id_objet=" . sql_quote($id_objet),
+			);
+		if ($id_auteur) 
+			$where[] = "id_auteur=" . sql_quote($id_auteur);
+		else 
+			$where[] = "ip=" . sql_quote($ip);
+		$id_notation = sql_getfetsel("id_notation","spip_notations",$where);
+		if ($id_notation){
+			$valeurs['id_notation'] = $id_notation;
+		}
 	
 
-	// peut il modifier son vote ?
-	include_spip('inc/autoriser');
-	if (!autoriser('modifier', 'notation', $id_notation, null, array('objet'=>$objet, 'id_objet'=>$id_objet))) {
-		$valeurs['editable']=false;
-	} 
+		// peut il modifier son vote ?
+		include_spip('inc/autoriser');
+		if (!autoriser('modifier', 'notation', $id_notation, null, array('objet'=>$objet, 'id_objet'=>$id_objet))) {
+			$valeurs['editable']=false;
+		}
+	}
 
 	return $valeurs;
 }
@@ -101,6 +88,15 @@ function formulaires_notation_verifier_dist($objet, $id_objet){
 }
 	
 function formulaires_notation_traiter_dist($objet, $id_objet){
+
+	// indiquer dans sa session que ce visiteur a vote
+	// grace a ce cookie on dira a charger() qu'il faut regarder
+	// de plus pres ce qu'il en est dans la base
+	session_set('a_vote', true);
+
+	// invalider les caches
+	include_spip('inc/invalideur');
+	suivre_invalideur("id='id_notation/$objet/$id_objet'");
 
 	if ($GLOBALS["auteur_session"]) {
 		$id_auteur = $GLOBALS['auteur_session']['id_auteur'];
