@@ -9,14 +9,14 @@ if (!defined('_DIR_PLUGIN_COUTEAU_SUISSE')){
 }
 
 // attention, ici il se peut que le plugin ne soit pas initialise (cas des .js/.css par exemple)
-cs_log("inclusion de cout_pipelines.php");
+if(defined('_LOG_CS')) cs_log("inclusion de cout_pipelines.php");
 
 /***********
  * INSTALL *
  ***********/
 
 function couteau_suisse_install($action){
-cs_log("couteau_suisse_install($action)");
+if(defined('_LOG_CS')) cs_log("couteau_suisse_install($action)");
 	include_spip('inc/meta');
 	switch ($action){
 		case 'test':
@@ -230,14 +230,14 @@ function couteau_suisse_bt_gadgets($params) {
 
 // callback pour la fonction cs_compile_pipe()
 function cs_compile_header_callback($matches) {
-cs_log(" -- compilation d'un header. Code CSS : $matches[1]");
+if(defined('_LOG_CS')) cs_log(" -- compilation d'un header. Code CSS : $matches[1]");
 	return cs_recuperer_code($matches[1]);
 }
 
 // recherche et compilation par SPIP du contenu d'un fichier .html : <cs_html>contenu</cs_html>
 function cs_compile_header() {
 	global $cs_metas_pipelines;
-//cs_log(" -- recherche de compilations CSS necessaires.");
+//if(defined('_LOG_CS')) cs_log(" -- recherche de compilations CSS necessaires.");
 	$cs_metas_pipelines['header'] = preg_replace_callback(',<cs_html>(.*)</cs_html>,Ums', 'cs_compile_header_callback', $cs_metas_pipelines['header']);
 	// sauvegarde en metas !
 	ecrire_meta('tweaks_pipelines', serialize($cs_metas_pipelines));
@@ -262,8 +262,8 @@ function cs_recuperer_code(&$code) {//, $contexte=array(), $options = array(), $
 
 
 /*
-cs_log("INIT : cout_pipelines, lgr=" . strlen($cs_metas_pipelines['pipelines']));
+if(defined('_LOG_CS')) cs_log("INIT : cout_pipelines, lgr=" . strlen($cs_metas_pipelines['pipelines']));
 if (!$GLOBALS['cs_pipelines']) include_once(_DIR_CS_TMP.'pipelines.php');
-cs_log(' -- sortie de cout_pipelines... cs_pipelines = ' . intval($GLOBALS['cs_pipelines']));
+if(defined('_LOG_CS')) cs_log(' -- sortie de cout_pipelines... cs_pipelines = ' . intval($GLOBALS['cs_pipelines']));
 */
 ?>

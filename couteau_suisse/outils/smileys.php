@@ -97,7 +97,7 @@ function cs_rempl_smileys($texte) {
 	$texte = str_replace(':'.chr(146).'-', ':&#8217;-', $texte);
 	// voila, on remplace tous les smileys d'un coup...
 	$texte = str_replace($smileys_rempl[0], $smileys_rempl[1], $texte);
-//cs_log('smileys traités : '.$texte);
+//cs_log('smileys traites : '.$texte);
 	return echappe_retour($texte, 'SMILE');
 }
 
@@ -106,7 +106,7 @@ function cs_smileys_pre_typo($texte) {
 	if (strpos($texte, ':')===false && strpos($texte, ')')===false) return $texte;
 	if (!isset($GLOBALS['meta']['cs_smileys']))
 		smileys_installe();
-//cs_log('smileys trouvés !');
+//cs_log('smileys trouves !');
 	// appeler cs_rempl_smileys() une fois que certaines balises ont ete protegees
 	return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'cs_rempl_smileys', $texte);
 }

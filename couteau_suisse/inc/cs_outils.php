@@ -19,7 +19,7 @@ cout_define('distant');
 function cs_init_plugins() {
 	@unlink(_DIR_TMP."couteau-suisse.plat");
 	include_spip('inc/plugin'); verif_plugin();
-	cs_log(" -- verif_plugin() effectue");
+	if(defined('_LOG_CS')) cs_log(" -- verif_plugin() effectue");
 }
 
 // initialise un outil, ses variables, et en renvoie la description compilee

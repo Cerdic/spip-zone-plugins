@@ -48,26 +48,26 @@ function cs_initialisation($forcer=false, $init_includes=true) {
 	static $deja_passe_ici;
 	$mysql=function_exists('mysql_get_client_info')?' - MYSQL v'.mysql_get_client_info():'';
 	if (!intval($deja_passe_ici))
-		cs_log("#### 1er PASSAGE $rand################################# - \$forcer = ".intval($forcer)
+		if(defined('_LOG_CS')) cs_log("#### 1er PASSAGE $rand################################# - \$forcer = ".intval($forcer)
 			. "\n{$rand}PHP v".phpversion()."$mysql - base SPIP v$GLOBALS[spip_version] - code SPIP v$GLOBALS[spip_version_code]");
 	$deja_passe_ici++;
 	// si les metas ne sont pas lus, on les lit
-cs_log("{$rand}cs_initialisation($forcer) : Passage #$deja_passe_ici");
+if(defined('_LOG_CS')) cs_log("{$rand}cs_initialisation($forcer) : Passage #$deja_passe_ici");
 	if (isset($GLOBALS['meta']['tweaks_pipelines'])) {
 		$cs_metas_pipelines = unserialize($GLOBALS['meta']['tweaks_pipelines']);
 
-cs_log("$rand -- cs_metas_pipelines = ".(is_array($cs_metas_pipelines)?join(', ',array_keys($cs_metas_pipelines)):''));
+if(defined('_LOG_CS')) cs_log("$rand -- cs_metas_pipelines = ".(is_array($cs_metas_pipelines)?join(', ',array_keys($cs_metas_pipelines)):''));
 
 		// liste des actifs & definition des constantes attestant qu'un outil est bien actif : define('_CS_monoutil', 'oui');
 		$liste = array();
 		foreach($metas_outils as $nom=>$o) if(isset($o['actif']) && $o['actif']) { $liste[]=$nom; @define('_CS_'.$nom, 'oui'); }
 		$liste2 = join(', ', $liste);
-cs_log("$rand -- ".count($liste).' outil(s) actif(s)'.(strlen($liste2)?" = ".$liste2:''));
+if(defined('_LOG_CS')) cs_log("$rand -- ".count($liste).' outil(s) actif(s)'.(strlen($liste2)?" = ".$liste2:''));
 		// Vanter notre art de la compilation...
 		// La globale $spip_header_silencieux permet de rendre le header absent pour raisons de securite
 		if (!headers_sent()) if (!isset($GLOBALS['spip_header_silencieux']) OR !$GLOBALS['spip_header_silencieux'])
 				@header('X-Outils-CS: '.$liste2);
-cs_log($rand.($forcer?"\$forcer = true":"cs_initialisation($forcer) : Sortie car les metas sont presents"));
+if(defined('_LOG_CS')) cs_log($rand.($forcer?"\$forcer = true":"cs_initialisation($forcer) : Sortie car les metas sont presents"));
 		// Les pipelines sont en meta, tout va bien on peut partir d'ici.
 		if (!$forcer) return;
 	}
@@ -92,7 +92,7 @@ cs_log($rand.($forcer?"\$forcer = true":"cs_initialisation($forcer) : Sortie car
 	// au cas ou un outil manipule des variables
 	$description_outil = charger_fonction('description_outil', 'inc');
 	// completer les variables manquantes et incorporer l'activite lue dans les metas
-cs_log("$rand -- foreach(\$outils) : cs_initialisation_d_un_outil()");
+if(defined('_LOG_CS')) cs_log("$rand -- foreach(\$outils) : cs_initialisation_d_un_outil()");
 
 	// initialiser chaque outil et construire la liste des contribs
 	$contribs = array();
@@ -104,7 +104,7 @@ cs_log("$rand -- foreach(\$outils) : cs_initialisation_d_un_outil()");
 	}
 	// installer $cs_metas_pipelines
 	$cs_metas_pipelines = array();
-cs_log("$rand -- cs_initialise_includes()... cout_fonctions.php sera peut-etre inclus.");
+if(defined('_LOG_CS')) cs_log("$rand -- cs_initialise_includes()... cout_fonctions.php sera peut-etre inclus.");
 	// creer les includes (config/mes_options, mes_options et mes_fonctions) et le fichier de controle pipelines.php
 	if($init_includes) cs_initialise_includes(count($metas_outils));
 	// verifier le fichier d'options _FILE_OPTIONS (ecrire/mes_options.php ou config/mes_options.php)
@@ -113,7 +113,7 @@ cs_log("$rand -- cs_initialise_includes()... cout_fonctions.php sera peut-etre i
 	// sauver la configuration
 	cs_sauve_configuration();
 	// en metas : outils actifs
-cs_log("$rand -- ecriture metas");
+if(defined('_LOG_CS')) cs_log("$rand -- ecriture metas");
 	ecrire_meta('tweaks_actifs', serialize($metas_outils));
 	// en metas : variables d'outils
 	ecrire_meta('tweaks_variables', serialize($metas_vars));
@@ -123,7 +123,7 @@ cs_log("$rand -- ecriture metas");
 	ecrire_meta('tweaks_contribs', serialize($contribs));
 	ecrire_metas();
 	$GLOBALS['cs_init'] = 0;
-cs_log("{$rand}cs_initialisation($forcer) : Sortie");
+if(defined('_LOG_CS')) cs_log("{$rand}cs_initialisation($forcer) : Sortie");
 }
 
 /*
@@ -208,15 +208,15 @@ function cs_ecrire_config($regexpr, $replace, $ajout_sinon='') {
 		if (lire_fichier($fo, $t) && strlen($t)) {
 			$t = preg_replace($regexpr, $replace, $t, 1);
 			if(ecrire_fichier($fo, $t)) return;
-			else cs_log("ERREUR : l'ecriture du fichier $fo a echoue !");
-		} else cs_log(" -- fichier $fo illisible. Inclusion non permise");
+			else if(defined('_LOG_CS')) cs_log("ERREUR : l'ecriture du fichier $fo a echoue !");
+		} else if(defined('_LOG_CS')) cs_log(" -- fichier $fo illisible. Inclusion non permise");
 		if(strlen($t)) return;
 	}
 	// creation
 	if(!strlen($ajout_sinon)) return;
 	$fo = cs_spip_file_options(2);
 	$ok = ecrire_fichier($fo, '<?'."php\n".$ajout_sinon."\n?".'>');
-cs_log(" -- fichier $fo absent ".($ok?'mais cree avec l\'inclusion':' et impossible a creer'));
+if(defined('_LOG_CS')) cs_log(" -- fichier $fo absent ".($ok?'mais cree avec l\'inclusion':' et impossible a creer'));
 }
 
 ?>

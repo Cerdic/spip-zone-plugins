@@ -44,8 +44,10 @@ elseif (in_array('reportall', $GLOBALS['cs_params']) && $auteur_session['statut'
 // on active tout de suite les logs, si l'outil est actif.
 if (($metas_outils['cs_comportement']['actif'] && $metas_vars['log_couteau_suisse'])
  || defined('_LOG_CS_FORCE') || in_array('log', $GLOBALS['cs_params']))	@define('_LOG_CS', 1);
-cs_log(str_repeat('-', 80), '', sprintf('COUTEAU-SUISSE. [#%04X]. ', rand()));
-cs_log('INIT : cout_options, '.$_SERVER['REQUEST_URI']);
+if(defined('_LOG_CS')) {
+	cs_log(str_repeat('-', 80), '', sprintf('COUTEAU-SUISSE. [#%04X]. ', rand()));
+	cs_log('INIT : cout_options, '.$_SERVER['REQUEST_URI']);
+}
 
 // on passe son chemin si un reset general est demande
 $zap = _request('cmd')=='resetall';
@@ -74,12 +76,12 @@ else {
 	// lancer l'initialisation du plugin. on force la compilation si cs=calcul
 	include_spip('cout_lancement');
 	cs_initialisation(!$cs_exists || in_array('calcul', $GLOBALS['cs_params']));
-	cs_log("PUIS : cout_options, initialisation terminee");
+	if(defined('_LOG_CS')) cs_log("PUIS : cout_options, initialisation terminee");
 
 	// inclusion des options hautes de SPIP, si ce n'est pas deja fait par config/mes_options.php
 	if (!$GLOBALS['cs_spip_options']) {
 		if(file_exists($f_mso)) {
-			cs_log(" -- inclusion de '$f_mso'");
+			if(defined('_LOG_CS')) cs_log(" -- inclusion de '$f_mso'");
 			include_once($f_mso);
 		} else
 			cs_log(" -- fichier '$f_mso' toujours introuvable !!");
@@ -89,7 +91,7 @@ else {
 	// inclusion des options pre-compilees du Couteau Suisse, si ce n'est pas deja fait...
 	if (!$GLOBALS['cs_options']) {
 		if(file_exists($f_mo)) {
-			cs_log(" -- inclusion de '$f_mo'");
+			if(defined('_LOG_CS')) cs_log(" -- inclusion de '$f_mo'");
 			include_once($f_mo);
 			// verification cardinale des metas : reinitialisation si une erreur est detectee
 			if (count($metas_outils)<>$GLOBALS['cs_verif']) {
@@ -107,7 +109,7 @@ else {
 	// si une recompilation a eu lieu...
 	if ($GLOBALS['cs_utils']) {
 		// lancer la procedure d'installation pour chaque outil
-		cs_log(' -- cs_installe_outils...');
+		if(defined('_LOG_CS')) cs_log(' -- cs_installe_outils...');
 		cs_installe_outils();
 		if(in_array('calcul', $GLOBALS['cs_params'])) {
 			include_spip('inc/headers');
@@ -117,11 +119,11 @@ else {
 
 	// a-t-on voulu inclure cout_fonctions.php ?
 	if ($GLOBALS['cs_fonctions_essai']) {
-		cs_log(" -- inclusion de : "._COUT_FONCTIONS_PHP);
+		if(defined('_LOG_CS')) cs_log(" -- inclusion de : "._COUT_FONCTIONS_PHP);
 		@include(_COUT_FONCTIONS_PHP);
 	}
 
-	cs_log(" FIN : cout_options, cs_spip_options = $GLOBALS[cs_spip_options], cs_options = $GLOBALS[cs_options], cs_fonctions_essai = $GLOBALS[cs_fonctions_essai]");
+	if(defined('_LOG_CS')) cs_log(" FIN : cout_options, cs_spip_options = $GLOBALS[cs_spip_options], cs_options = $GLOBALS[cs_options], cs_fonctions_essai = $GLOBALS[cs_fonctions_essai]");
 }
 
 // Droits pour configurer le Couteau Suisse (fonction surchargeable sans le _dist)
