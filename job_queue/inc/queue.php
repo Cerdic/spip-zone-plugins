@@ -174,23 +174,27 @@ function queue_start_job($row){
  * en memorisant en meta la date du prochain job
  */
 function queue_schedule(){
-	$start = time();
+	$time = time();
 
 	// rien a faire si le prochain job est encore dans le futur
-	if ($GLOBALS['meta']['queue_next_job_time']>$start)
+	if ($GLOBALS['meta']['queue_next_job_time']>$time)
 		return;
 
 	include_spip('base/abstract_sql');
 
-	$max_time = ini_get('max_execution_time')/2;
-	// valeur conservatrice si on a pas reussi a lire le max_execution_time
-	if (!$max_time) $max_time=5;
-	$max_time = min($max_time,15); // une valeur maxi en temps.
+	if (!defined('_JQ_MAX_JOBS_TIME_TO_EXECUTE')){
+		$max_time = ini_get('max_execution_time')/2;
+		// valeur conservatrice si on a pas reussi a lire le max_execution_time
+		if (!$max_time) $max_time=5;
+		define('_JQ_MAX_JOBS_TIME_TO_EXECUTE',min($max_time,15)); // une valeur maxi en temps.
+	}
+	$end_time = $time + _JQ_MAX_JOBS_TIME_TO_EXECUTE;
 
 	#spip_log("JQ schedule $start / $max_time",'jq');
 
+	if (!defined('_JQ_MAX_JOBS_EXECUTE'))
+		define('_JQ_MAX_JOBS_EXECUTE',200);
 	$nbj=0;
-	$maxjobs = 100;
 	// attraper les jobs
 	// dont la date est passee (echus en attente),
 	// par odre :
@@ -199,7 +203,7 @@ function queue_schedule(){
 	// lorsqu'un job cron n'a pas fini, sa priorite est descendue
 	// pour qu'il ne bloque pas les autres jobs en attente
 	$now = date('Y-m-d H:i:s',$start);
-	$res = sql_select('*','spip_jobs','date<'.sql_quote($now),'','priorite DESC,date','0,'.($maxjobs+1));
+	$res = sql_select('*','spip_jobs','date<'.sql_quote($now),'','priorite DESC,date','0,'.(_JQ_MAX_JOBS_EXECUTE+1));
 	do {
 		if ($row = sql_fetch($res)){
 			$nbj++;
@@ -214,6 +218,7 @@ function queue_schedule(){
 				// purger ses liens eventuels avec des objets
 				sql_delete("spip_jobs_liens","id_job=".intval($row['id_job']));
 
+				$time = time();
 				// est-ce une tache cron qu'il faut relancer ?
 				if ($periode = queue_is_cron_job($row['fonction'],$row['inclure'])){
 					// relancer avec les nouveaux arguments de temps
@@ -223,12 +228,12 @@ function queue_schedule(){
 						queue_genie_replan_job($row['fonction'],$periode,0-$result/*last*/,0/*ASAP*/,$row['priorite']-1);
 					else
 						// relancer avec la periode prevue
-						queue_genie_replan_job($row['fonction'],$periode,time());
+						queue_genie_replan_job($row['fonction'],$periode,$time);
 				}
 			}
 		}
 		#spip_log("JQ schedule job end time ".time(),'jq');
-	} while ($nbj<$maxjobs AND $row AND time()<$start+$max_time);
+	} while ($nbj<_JQ_MAX_JOBS_EXECUTE AND $row AND $time<$end_time);
 
 	#spip_log("JQ schedule end time ".time(),'jq');
 	
@@ -249,9 +254,12 @@ function queue_schedule(){
  * @return <type>
  */
 function queue_is_cron_job($function,$inclure){
-	if ($inclure=='genie/'){
-		include_spip('inc/genie');
-		$taches = taches_generales();
+	static $taches = null;
+	if (strncmp($inclure,'genie/',6)==0){
+		if (is_null($taches)){
+			include_spip('inc/genie');
+			$taches = taches_generales();
+		}
 		if (isset($taches[$function]))
 			return $taches[$function];
 	}
@@ -269,6 +277,7 @@ function queue_is_cron_job($function,$inclure){
  *	temps de la tache ajoutee ou 0 pour ASAP
  */
 function queue_update_next_job_time($next_time=null){
+	static $nb_jobs_pending = null;
 	include_spip('base/abstract_sql');
 
 	if (is_null($next_time) OR !isset($GLOBALS['meta']['queue_next_job_time'])){
@@ -276,6 +285,16 @@ function queue_update_next_job_time($next_time=null){
 		$next_time = strtotime($date);
 	}
 	else {
+		if ($next_time){
+			if (is_null($nb_jobs_pending))
+				$nb_jobs_pending = sql_countsel('spip_jobs',"date<".sql_quote(date('Y-m-d H:i:s')));
+			elseif ($next_time<=time())
+				$nb_jobs_pending++;
+			// si trop de jobs en attente, on force la purge en fin de hit
+			// pour assurer le coup
+			if ($nb_jobs_pending>_JQ_NB_JOBS_OVERFLOW)
+				define('_DIRECT_CRON_FORCE',true);
+		}
 		$next_time = min($GLOBALS['meta']['queue_next_job_time'],$next_time);
 	}
 	include_spip('inc/meta');
