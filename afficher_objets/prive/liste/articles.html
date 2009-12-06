@@ -2,7 +2,7 @@
 #ANCRE_PAGINATION
 <div class="liste-elements articles">
 <table class='spip liste'>
-<caption><:info_tous_articles_presents:></caption>
+[<caption>(#ENV*{titre,<:info_tous_articles_presents:>})</caption>]
 	<thead>
 		<tr class='first_row'>
 			<th class='statut'>Statut</th>
@@ -13,7 +13,7 @@
 		</tr>
 	</thead>
 	<tbody>
-<BOUCLE_liste_art(ARTICLES){id_rubrique?}{where?}{par #ENV{tri}}{inverse #ENV{senstri}}{pagination #ENV{nb,5}}>
+<BOUCLE_liste_art(ARTICLES){id_rubrique?}{where?}{statut?}{par #ENV{tri}}{inverse #ENV{senstri}}{pagination #ENV{nb,5}}>
 	<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 		<td class='statut'>[(#ID_ARTICLE|puce_statut{#STATUT,#ID_RUBRIQUE,article})]</td>
 		<td class='titre'><a href="[(#ID_ARTICLE|generer_url_entite{article})]">#TITRE</a></td>
