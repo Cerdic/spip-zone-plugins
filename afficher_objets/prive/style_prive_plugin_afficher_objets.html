@@ -5,18 +5,23 @@
 
 .liste-elements{
 	margin:1em 0;
-	border:1px solid #GET{claire};
-	background:#fcfcfc;
-	padding:.5em;
 	font-size:.85em;
 }
 .liste-elements .pagination{margin-top:0; padding-top:0;}
 .liste-elements table.spip {width:100%;}
 .liste-elements table.spip caption {margin:0; padding:.3em 28px 1em; text-align:left;}
-.liste-elements thead tr th.statut {position:absolute; left:-3000px;}
+.liste-elements thead th {background:white;}
+.liste-elements thead tr {border-top:1px solid #ccc; }
+
+.liste-elements thead th.statut {text-indent:-3000px;}
+
+.liste-elements table.spip td,
+.liste-elements table.spip th {border:0; border-bottom:1px solid #ccc;}
 .liste-elements tr .statut {width: 11px;}
 .liste-elements tr .auteur {width: 80px;}
 .liste-elements tr .date {width: 100px;}
 .liste-elements tr .id {width: 50px; text-align:right;}
+.liste-elements tbody tr:hover td {background:white;}
 
-.liste-elements.articles {background:url(#CHEMIN{images/article-24.gif}) no-repeat 5px 5px;}
+
+.liste-elements.articles {background:url(#CHEMIN{images/article-24.gif}) no-repeat;}
