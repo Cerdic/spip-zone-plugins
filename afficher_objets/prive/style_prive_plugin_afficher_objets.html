@@ -1,0 +1,17 @@
+#SET{claire,##ENV{couleur_claire,edf3fe}}
+#SET{foncee,##ENV{couleur_foncee,3874b0}}
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+
+.liste-elements{
+	margin:1em 0;
+	border:1px solid #GET{claire};
+	background:#fcfcfc;
+	padding:.5em;
+	font-size:.85em;
+}
+.liste-elements .pagination{margin-top:0; padding-top:0;}
+.liste-elements table.spip caption {margin:0; padding:.3em 28px 1em; text-align:left;}
+.liste-elements thead tr th:first-child span {position:absolute; left:-3000px;}
+
+.liste-elements.articles {background:url(#CHEMIN{images/article-24.gif}) no-repeat 5px 5px;}

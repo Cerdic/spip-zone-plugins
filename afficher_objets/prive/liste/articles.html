@@ -1,0 +1,28 @@
+<B_liste_art>
+#ANCRE_PAGINATION
+<div class="liste-elements articles">
+<table class='spip liste'>
+<caption><:info_tous_articles_presents:></caption>
+	<thead>
+		<tr class='first_row'>
+			<th><span>Statut</span></th><th>Titre</th><th>Auteur</th><th>Date</th><th>Id</th>
+		</tr>
+	</thead>
+	<tbody>
+<BOUCLE_liste_art(ARTICLES){id_rubrique?}{where?}{par #ENV{tri}}{inverse #ENV{senstri}}{pagination #ENV{nb,5}}>
+	<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+		<td>[(#ID_ARTICLE|puce_statut{#STATUT,#ID_RUBRIQUE,article})]</td>
+		<td><a href="[(#ID_ARTICLE|generer_url_entite{article})]">#TITRE</a></td>
+		<td><BOUCLE_auteurs(AUTEURS){id_article}{', '}><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#NOM</a></BOUCLE_auteurs></td>
+		<td>[(#DATE|affdate_court)]</td>
+		<td>[(#AUTORISER{modifier,article,#ID_ARTICLE}|?{
+			<a href="[(#URL_ECRIRE{article_edit,id_article=#ID_ARTICLE})]"><:info_numero_abbreviation:>#ID_ARTICLE</a>,
+			<:info_numero_abbreviation:>#ID_ARTICLE
+		})]</td>
+	</tr>
+</BOUCLE_liste_art>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION)</p>]
+</div>
+</B_liste_art>
