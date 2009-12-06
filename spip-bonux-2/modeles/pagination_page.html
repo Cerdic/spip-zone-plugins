@@ -6,11 +6,11 @@
 #SET{separateur,#ENV{separateur,'|'}}
 <B_pages>
 <span class='pagination_label'><:spip_bonux:pages:></span>
-[<a href='[(#ENV{url}|parametre_url{#ENV{debut},''})]##ENV{ancre}' class='lien_pagination' rel='nofollow'>(#GET{premiere}|>{1}|?{'...',''})</a> #GET*{separateur}]
+[<a href='[(#ENV{url}|parametre_url{#ENV{debut},''})]##ENV{ancre}' class='lien_pagination' rel='nofollow'>(#GET{premiere}|>{1}|?{'...',''})</a> [<span class='sep separateur'>(#GET*{separateur})</span>]]
 <BOUCLE_pages(POUR){tableau #GET{pages}}>
 [(#SET{item, #VALEUR|moins{1}|mult{#ENV{pas}} })]
 [(#ENV{url}|parametre_url{#ENV{debut},#GET{item}}|ancre_url{#ENV{ancre}}|aoustrong{#VALEUR,#VALEUR|=={#ENV{page_courante}},lien_pagination,'',nofollow})]
-[<span class='separateur'>(#VALEUR|<{#GET{derniere}}|?{#GET{separateur}})</span>]
+[<span class='sep separateur'>(#VALEUR|<{#GET{derniere}}|?{#GET{separateur}})</span>]
 </BOUCLE_pages>
-[#GET*{separateur} <a href='[(#ENV{url}|parametre_url{#ENV{debut},#ENV{nombre_pages}|moins{1}|mult{#ENV{pas}}})]##ENV{ancre}' class='lien_pagination' rel='nofollow'>(#GET{derniere}|<{#ENV{nombre_pages}}|?{'...',''})</a>]
+[[<span class='sep separateur'>(#GET*{separateur})</span>] <a href='[(#ENV{url}|parametre_url{#ENV{debut},#ENV{nombre_pages}|moins{1}|mult{#ENV{pas}}})]##ENV{ancre}' class='lien_pagination' rel='nofollow'>(#GET{derniere}|<{#ENV{nombre_pages}}|?{'...',''})</a>]
 </B_pages>
