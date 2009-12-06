@@ -11,10 +11,10 @@
 	<thead>
 		<tr class='first_row'>
 			<th class='statut'>[(#TRI{statut,<:statut:>,ajax})]</th>
-			<th class='titre'>[(#TRI{titre,<:titre:>,ajax})]</th>
-			<th class='auteur'>Auteur</th>
+			<th class='titre'>[(#TRI{titre,<:info_titre:>,ajax})]</th>
+			<th class='auteur'><:auteur:></th>
 			<th class='date'>[(#TRI{date,<:date:>,ajax})]</th>
-			<th class='id'>[(#TRI{id_article,<:id:>,ajax})]</th>
+			<th class='id'>[(#TRI{id_article,<:info_numero_abbreviation:>,ajax})]</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -25,8 +25,8 @@
 		<td class='auteur'><BOUCLE_auteurs(AUTEURS){id_article}{', '}><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#NOM</a></BOUCLE_auteurs></td>
 		<td class='date'>[(#DATE|affdate_court)]</td>
 		<td class='id'>[(#AUTORISER{modifier,article,#ID_ARTICLE}|?{
-			<a href="[(#URL_ECRIRE{article_edit,id_article=#ID_ARTICLE})]"><:info_numero_abbreviation:>#ID_ARTICLE</a>,
-			<:info_numero_abbreviation:>#ID_ARTICLE
+			<a href="[(#URL_ECRIRE{article_edit,id_article=#ID_ARTICLE})]">#ID_ARTICLE</a>,
+			#ID_ARTICLE
 		})]</td>
 	</tr>
 </BOUCLE_liste_art>
