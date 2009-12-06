@@ -182,7 +182,7 @@ function inc_afficher_objets_dist($type, $titre,$requete,$formater='', $force=fa
 	$table = table_objet($type);
 	$fond = "prive/liste/$table";
 	if (find_in_path("$fond.html")){
-		$contexte = array();
+		$contexte = $_GET;
 		// passer le where
 		foreach($requete as $k=>$v)
 			$contexte[strtolower($k)] = $v;
