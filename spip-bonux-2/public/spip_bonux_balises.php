@@ -316,6 +316,8 @@ function balise_TRI_dist($p, $liste='true') {
 	
 	$_libelle = interprete_argument_balise(2,$p);
 	$_libelle = $_libelle?$_libelle:$_champ;
+
+	$_class = interprete_argument_balise(3,$p);
 	// si champ = "<" c'est un lien vers le tri croissant : 1<2<3<4 ... ==> 1
 	// si champ = ">" c'est un lien vers le tri decroissant :.. 4>3>2>1 == -1
 	$_issens = "in_array($_champ,array('<','>'))";
@@ -325,7 +327,7 @@ function balise_TRI_dist($p, $liste='true') {
 	$_url = "parametre_url(self(),$_variable,\$s?$_sens:$_champ)";
 	$_on = "\$s?(".$boucle->modificateur['tri_sens']."==$_sens".'):('.$boucle->modificateur['tri_champ']."==$_champ)";
 	
-	$p->code = "aoustrong($_url,$_libelle,$_on)";
+	$p->code = "aoustrong($_url,$_libelle,$_on,$_class)";
 	//$p->code = "''";
 	$p->interdire_scripts = false;
 	return $p;
