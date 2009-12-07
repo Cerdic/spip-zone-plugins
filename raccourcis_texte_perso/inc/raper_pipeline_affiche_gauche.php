@@ -59,4 +59,3 @@ function raper_js_propre ($s) {
 	return($s);
 }
 
-?>

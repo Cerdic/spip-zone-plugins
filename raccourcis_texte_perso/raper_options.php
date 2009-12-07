@@ -94,4 +94,3 @@ define("_RAPER_DEFAULT_VALUES_ARRAY",
 );
 
 
-?>

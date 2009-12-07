@@ -264,4 +264,3 @@ function raper_boite_plugin_info () {
 	return($result);
 }
 
-?>

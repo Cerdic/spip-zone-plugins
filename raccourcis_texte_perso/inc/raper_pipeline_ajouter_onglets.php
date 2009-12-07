@@ -80,4 +80,3 @@ function raper_ajouter_onglets ($flux) {
 	return ($flux);
 }
 
-?>

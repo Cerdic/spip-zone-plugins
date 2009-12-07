@@ -108,4 +108,3 @@ function exec_raper_aide () {
 	}
 }
 
-?>

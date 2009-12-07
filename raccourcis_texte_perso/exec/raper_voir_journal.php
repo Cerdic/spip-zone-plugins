@@ -115,4 +115,3 @@ function exec_raper_voir_journal () {
 		, fin_gauche(), fin_page();
 }
 
-?>

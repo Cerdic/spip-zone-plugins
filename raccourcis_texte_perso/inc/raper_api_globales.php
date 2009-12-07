@@ -462,4 +462,3 @@ function raper_surcharger_langue ($lang, $module = _RAPER_LANG_FILENAME_PREFIX, 
 	return(false);
 }
 
-?>

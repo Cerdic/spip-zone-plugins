@@ -393,4 +393,3 @@ function raper_extraire_multi ($value, $raper_lang) {
 	return($value);
 }
 
-?>

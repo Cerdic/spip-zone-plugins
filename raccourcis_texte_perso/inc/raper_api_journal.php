@@ -343,4 +343,3 @@ function raper_compacter_script ($source, $format) {
 	return($source);
 } // end raper_compacter_script()
 
-?>

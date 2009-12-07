@@ -95,4 +95,3 @@ function raper_header_prive ($flux) {
 	return ($flux);
 }
 
-?>

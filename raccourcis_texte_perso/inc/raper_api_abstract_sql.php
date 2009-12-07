@@ -294,4 +294,3 @@ function compat_raper_defs_dist() {
 	return $defs;
 }
 
-?>

@@ -67,4 +67,3 @@ function raper_ajouter_boutons ($boutons_admin) {
 	return ($boutons_admin);
 }
 
-?>

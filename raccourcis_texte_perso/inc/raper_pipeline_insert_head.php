@@ -65,4 +65,3 @@ function raper_insert_head ($flux) {
 
 }
 
-?>

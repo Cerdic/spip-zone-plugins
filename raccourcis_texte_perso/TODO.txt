@@ -7,4 +7,5 @@
 // $LastChangedDate$
 
 
+- deplacer le fichier localise' du raper. En cas de mise a jour du plug, il faut fouiller :(. Soit placer le local_fr dans le meta du raper (c'est un blob, donc pas de soucis), soit le placer dans le repertoire des squelettes perso ?
 - permettre de sélectionner un (ou +) administrateur restreint pour la gestion

@@ -215,4 +215,3 @@ function raper_form_checkbox ($name, $title, $value, $checked, $class = '') {
 	return($result);
 }
 
-?>
