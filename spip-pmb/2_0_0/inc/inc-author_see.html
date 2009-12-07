@@ -1,12 +1,17 @@
 
 	<div class="corps-conteneur surlignable">
 		<div class="pmb-ouvrage-infos">	
-			
-			[<p><strong><:pmb:author_date:></strong> : (#ENV{tab_resultat}|pmb_notice_champ{'author_date'})</p>]
-			[<p><strong><:pmb:author_web:></strong> : <a class="spip_out" href="[(#ENV{tab_resultat}|pmb_notice_champ{'author_web'})]">(#ENV{tab_resultat}|pmb_notice_champ{'author_web'})</a></p>]
-			[<p><strong><:pmb:author_lieu:></strong> : (#ENV{tab_resultat}|pmb_notice_champ{'author_lieu'})</p>]
-			[<p><strong><:pmb:author_ville:></strong> : (#ENV{tab_resultat}|pmb_notice_champ{'author_ville'})</p>]
-			[<p><strong><:pmb:author_pays:></strong> : (#ENV{tab_resultat}|pmb_notice_champ{'author_pays'})</p>]
+			<table class="spip pmb-tableau">
+			      <tbody>
+			       [<tr><td><strong><:pmb:serie:></strong></td><td>(#ENV{notice}|pmb_notice_champ{'serie'})</td></tr>]
+			      
+			[<tr><td><strong><:pmb:author_date:></strong></td><td>(#ENV{tab_resultat}|pmb_notice_champ{'author_date'})</td></tr>]
+			[<tr><td><strong><:pmb:author_web:></strong></td><td><a class="spip_out" href="[(#ENV{tab_resultat}|pmb_notice_champ{'author_web'})]">(#ENV{tab_resultat}|pmb_notice_champ{'author_web'})</a></td></tr>]
+			[<tr><td><strong><:pmb:author_lieu:></strong></td><td>(#ENV{tab_resultat}|pmb_notice_champ{'author_lieu'})</td></tr>]
+			[<tr><td><strong><:pmb:author_ville:></strong></td><td>(#ENV{tab_resultat}|pmb_notice_champ{'author_ville'})</td></tr>]
+			[<tr><td><strong><:pmb:author_pays:></strong></td><td>(#ENV{tab_resultat}|pmb_notice_champ{'author_pays'})</td></td>]
+			      </tbody>
+			</table>
 			
 			
 		</div>
@@ -22,30 +27,23 @@
 				[(#GET{tab_notices}|pmb_tableau2_valeur{0,nb_resultats}|>{1}|non)
 				      [<p>(#GET{tab_notices}|pmb_tableau2_valeur{0,nb_resultats}) <:pmb:ouvrage_trouve:> :</p>]
 				 ]
-				[(#GET{tab_notices}|pmb_tableau2_valeur{0,nb_resultats}|moins{5}|<={0}|non)<a style="float: right;" class="pmb_pagination_suiv" href="[(#SELF|parametre_url{debut,[(#ENV{debut}|plus{5})]})]#resultats_recherche" title="<:pmb:resultats_suivants:>">>></a>]
-				[(#ENV{debut}|sinon{0}|moins{5}|>={0}|oui)<a style="float: left;" class="pmb_pagination_prec" href="[(#SELF|parametre_url{debut,[(#ENV{debut}|moins{5})]})]#resultats_recherche" title="<:pmb:resultats_precedents:>"><<</a>]
+				[(#GET{tab_notices}|pmb_tableau2_valeur{0,nb_resultats}|moins{5}|<={0}|non)<a style="float: right;" class="pmb_pagination_suiv" href="[(#SELF|parametre_url{debut,[(#ENV{debut}|plus{5})]})]#resultats_recherche"><:pmb:resultats_suivants:> >></a>]
+				[(#ENV{debut}|sinon{0}|moins{5}|>={0}|oui)<a style="float: left;" class="pmb_pagination_prec" href="[(#SELF|parametre_url{debut,[(#ENV{debut}|moins{5})]})]#resultats_recherche"><< <:pmb:resultats_precedents:></a>]
 				<br class="nettoyeur" />
 
 			<h2 class="h2"><:pmb:ouvrages:></h2>
 			<ul class="liste-items">
 				<BOUCLE_tab_resultat(POUR){tableau #GET{tab_notices}}>
-					[(#COMPTEUR_BOUCLE|>{1}|?{' ',''})
-					<li class="item">
-						[(#GET{tab_notices}|pmb_tableau2_valeur{#CLE, logo_src}|oui)
-						    [(#REM|?{'','<img />'}|inserer_attribut{class,spip_logos}|inserer_attribut{src,[(#GET{tab_notices}|pmb_tableau2_valeur{#CLE, logo_src}|copie_locale{'force'})]}|image_reduire{130,0})]
-						]
-						<h3[(#ENV{look_TITLE}|oui) class="surlignable"]><a href="index.php?page=notice_display&id=[(#GET{tab_notices}|pmb_tableau2_valeur{#CLE, id})]">[(#GET{tab_notices}|pmb_tableau2_valeur{#CLE, titre})]</a></h3>
-                				[<small[(#ENV{look_AUTHOR}|oui) class="surlignable"]><:par_auteur:> (#GET{tab_notices}|pmb_tableau2_valeur{#CLE, lesauteurs})</small>]
-						[(#ENV{look_PUBLISHER}|oui)[[(#GET{tab_notices}|pmb_tableau2_valeur{#CLE, lesauteurs}|oui)<br />]<small class="surlignable">&eacute;diteur : (#GET{tab_notices}|pmb_tableau2_valeur{#CLE, editeur})</small>]]
-					
-						[<div class="introduction entry-content[(#ENV{look_ABSTRACT}|oui) surlignable]">(#GET{tab_notices}|pmb_tableau2_valeur{#CLE, resume}|couper{300,'...'})</div>]
-						<div class="meta-publi">
-						      <a class="lire-la-suite pas_surlignable" title="[(#GET{tab_notices}|pmb_tableau2_valeur{#CLE, titre})]" href="index.php?page=notice_display&id=[(#GET{tab_notices}|pmb_tableau2_valeur{#CLE, id})]"><:lire_la_suite:> +</a>
-						</div>
-
-					</li>]
+					[(#COMPTEUR_BOUCLE|>{1}|oui)
+			 	
+						<INCLURE{fond=inc/inc-notice-resume}{notice=#VALEUR}{surlignable=1}>
+						
+					]
 				</BOUCLE_tab_resultat>
 			</ul>
+			<br class="nettoyeur" />
+			[(#GET{tab_notices}|pmb_tableau2_valeur{0,nb_resultats}|moins{5}|<={0}|non)<a style="float: right;" class="pmb_pagination_suiv" href="[(#SELF|parametre_url{debut,[(#ENV{debut}|plus{5})]})]#resultats_recherche"><:pmb:resultats_suivants:> >></a>]
+				[(#ENV{debut}|sinon{0}|moins{5}|>={0}|oui)<a style="float: left;" class="pmb_pagination_prec" href="[(#SELF|parametre_url{debut,[(#ENV{debut}|moins{5})]})]#resultats_recherche"><< <:pmb:resultats_precedents:></a>]
 
 			
 			</B_tab_resultat>

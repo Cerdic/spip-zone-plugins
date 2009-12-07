@@ -480,6 +480,7 @@ function pmb_ws_parser_notice_xml($id_notice, $value, &$tresultat) {
 	    $tresultat = $gtresultat;
 }
 
+
 //parsing d'une notice sérialisée
 function pmb_ws_parser_notice_serialisee($id_notice, $value, &$tresultat) {
 	    include_spip("/inc/filtres_images");
@@ -558,6 +559,7 @@ function pmb_ws_parser_notice_array($value, &$tresultat) {
 		
 		foreach ( $v1->item as $c2=>$v2) {
 			if ($v2->key=="c") $dernierTypeTrouve = $v2->value;
+			if ($v2->key=="id") $dernierIdTrouve = $v2->value;
 			foreach ( $v2->value as $c4=>$v4) {
 						  $dernierSousTypeTrouve=$v4['c'];
 						  $texte = $v4['value'];
@@ -589,6 +591,8 @@ function pmb_ws_parser_notice_array($value, &$tresultat) {
 						  if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "a")) $tresultat['lesauteurs'] .= $texte;
 						  if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "b")) $tresultat['lesauteurs'] = $texte." ".$tresultat['lesauteurs'];
 						  if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "a")) $tresultat['id_auteur'] = $dernierIdTrouve;
+						  
+						  
 			}	
 		}
 	 
@@ -607,6 +611,28 @@ function pmb_ws_parser_notice_array($value, &$tresultat) {
 	    
 
 	  
+}
+
+function pmb_ws_autres_lecteurs($id_notice) {
+
+	$tresultat = Array();
+	pmb_ws_charger_wsdl($ws, $url_base);
+	
+	try {	
+	     if ($ws->pmbesOPACGeneric_is_also_borrowed_enabled()) {
+		$r=$ws->pmbesOPACGeneric_also_borrowed($id_notice,0);
+		$listenotices = Array();
+		foreach ($r as $notice) {
+		    $listenotices[] = $notice->notice_id;
+		}
+		if (count($listenotices)>0) {
+		      pmb_ws_recuperer_tab_notices ($listenotices, &$ws, &$tresultat);
+		}
+	    }
+	} catch (SoapFault $fault) {
+		//print("Erreur : ".$fault->faultcode." : ".$fault->faultstring);
+	} 
+	return $tresultat;
 }
 
 function pmb_ws_dispo_exemplaire($id_notice, $id_session=0) {

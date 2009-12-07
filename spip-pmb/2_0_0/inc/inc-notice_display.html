@@ -43,11 +43,7 @@
 	      <INCLURE{fond=inc/inc-notice-dispo}{env}>
 	]
 	[(#ENV{afficher_autres}|=={non}|non)
-	      [<div class="pmb-autreslecteurs">
-		      <h2><:pmb:autres_lecteurs:></h2>
-
-		      (#ENV{notice}|pmb_notice_champ{'autres_lecteurs'})
-	      </div>]
+	      <INCLURE{fond=inc/inc-autreslecteurs}{env}>
 	]
 	
 		<div class="pmb-toolbox" id="compte-lecteur">

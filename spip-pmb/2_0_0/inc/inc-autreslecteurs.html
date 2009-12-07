@@ -1,0 +1,15 @@
+[(#SET{tab_notices,[(#ENV{id}|pmb_ws_autres_lecteurs)]})]	
+		
+<B_autres_lecteurs>
+<div class="pmb-autreslecteurs">
+	<h2><:pmb:autres_lecteurs:></h2>
+
+	<ul class="liste-items">
+		<BOUCLE_autres_lecteurs(POUR){tableau #GET{tab_notices}}>
+		[(#COMPTEUR_BOUCLE|>{1}|?{' ',''})
+			<INCLURE{fond=inc/inc-notice-resume}{notice=#VALEUR}>
+		]
+		</BOUCLE_autres_lecteurs>
+	</ul>
+</div> 
+</B_autres_lecteurs>
