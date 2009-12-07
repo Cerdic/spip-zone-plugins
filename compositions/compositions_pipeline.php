@@ -55,27 +55,56 @@ function autoriser_styliser_dist($faire, $type='', $id=0, $qui = NULL, $opt = NU
 function compositions_styliser($flux){
 	include_spip('compositions_fonctions');
 	if (compositions_styliser_auto()){
-		$type = $flux['args']['fond']; // on fait l'approximation fond=type
-		// si le type n'est pas l'objet d'une composition, ne rien faire
-		if (in_array($type,compositions_types())){
+		if (!defined('_DIR_PLUGIN_Z')){
+			$type = $flux['args']['fond']; // on fait l'approximation fond=type
+			// si le type n'est pas l'objet d'une composition, ne rien faire
+			if (in_array($type,compositions_types())){
+				$contexte = isset($flux['args']['contexte'])?$flux['args']['contexte']:$GLOBALS['contexte'];
+				$serveur = $flux['args']['connect'];
+
+				$ext = $flux['args']['ext'];
+				$table = table_objet($type);
+				$table_sql = table_objet_sql($type);
+				$_id_table = id_table_objet($type);
+
+				$trouver_table = charger_fonction('trouver_table', 'base');
+				$desc = $trouver_table($table,$serveur);
+				if (
+					isset($desc['field']['composition'])
+					AND isset($contexte[$_id_table])
+					AND $id = $contexte[$_id_table]
+					AND $composition = sql_getfetsel('composition',$table_sql,"$_id_table=".intval($id))){
+
+					if ($fond = compositions_selectionner($composition, $type, '', $ext, true, "")){
+						$flux['data'] = substr($fond, 0, - strlen(".$ext"));
+					}
+				}
+			}
+		}
+		else {
 			$contexte = isset($flux['args']['contexte'])?$flux['args']['contexte']:$GLOBALS['contexte'];
-			$serveur = $flux['args']['connect'];
+			if (preg_match(',contenu/([^/]*)$,i',$flux['args']['fond'],$regs)
+			  AND $type = $regs[1]
+			  AND in_array($type,compositions_types())){
+				$serveur = $flux['args']['connect'];
 
-			$ext = $flux['args']['ext'];
-			$table = table_objet($type);
-			$table_sql = table_objet_sql($type);
-			$_id_table = id_table_objet($type);
+				$ext = $flux['args']['ext'];
+				$table = table_objet($type);
+				$table_sql = table_objet_sql($type);
+				$_id_table = id_table_objet($type);
 
-			$trouver_table = charger_fonction('trouver_table', 'base');
-			$desc = $trouver_table($table,$serveur);
+				$trouver_table = charger_fonction('trouver_table', 'base');
+				$desc = $trouver_table($table,$serveur);
+				if (
+					isset($desc['field']['composition'])
+					AND isset($contexte[$_id_table])
+					AND $id = $contexte[$_id_table]
+					AND $composition = sql_getfetsel('composition',$table_sql,"$_id_table=".intval($id))){
 
-			if (
-				isset($desc['field']['composition'])
-				AND isset($contexte[$_id_table])
-				AND $id = $contexte[$_id_table]
-				AND $composition = sql_getfetsel('composition',$table_sql,"$_id_table=".intval($id))
-				AND $fond = compositions_selectionner($composition, $type, '', $ext, true, "")){
-				$flux['data'] = substr($fond, 0, - strlen(".$ext"));
+					if ($fond = compositions_selectionner($composition, $type, '', $ext, true, "")){
+						$flux['data'] = substr($fond, 0, - strlen(".$ext"));
+					}
+				}
 			}
 		}
 	}
