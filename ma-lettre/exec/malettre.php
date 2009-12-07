@@ -220,6 +220,7 @@ function exec_malettre(){
             // hash            
             $lettre_hash = substr(md5(time()),0,5);
             $url_lettre_archive = "$path_url/$path_archive/lettre_".date("Ymd")."_".$lettre_hash."_"._request('lang_select').".html";
+            $url_lettre_archive_txt = "$path_url/$path_archive/lettre_".date("Ymd")."_".$lettre_hash."_"._request('lang_select').".txt";
             
             // recup contenu HTML
             $texte = $path_archive_full."/.malettre.html";
