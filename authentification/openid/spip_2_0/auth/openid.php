@@ -14,7 +14,11 @@ function auth_openid_dist ($login, $pass, $md5pass="", $md5next="") {
 
 	// il faut un login non vide et qui contient au moins un point
 	// car c'est cense etre une url
-	if (!$login) return false;
+	// si on a rentre un mot de passe, alors ce n'est pas une tentative openid non plus
+	if (!$login 
+		OR strlen($pass) 
+		OR (strlen($md5pass) AND strlen($md5next)))
+		return false;
 	$auteur = false;
 	$idurl = "";
 
