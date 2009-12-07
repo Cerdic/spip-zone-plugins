@@ -92,7 +92,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'n_incorrect_mail' => "@n@ incorrect(s)"
 
 // exec/spiplistes_abonnes_tous.php
-, 'repartition_abonnes' => "R&#233;partition des abonn&#233;s"
+, 'repartition_abonnes' => "R&#233;partition des abonnements"
 , 'abonnes_titre' => 'Abonn&#233;s'
 , 'chercher_un_auteur' => "Chercher un auteur"
 , 'une_inscription' => 'Un abonn&#233; trouv&#233;'
@@ -363,8 +363,6 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 
 // exec/spiplistes_listes_toutes.php
 // exec/spiplistes_maintenance.php
-, 'abonnes' => 'abonn&#233;s'
-, '1_abonne' => '1 abonn&#233;'
 , 'annulation_chrono_' => "Annulation du chrono pour "
 , 'conseil_sauvegarder_avant' => "<strong>Conseil</strong>: faire une sauvegarde de la base avant de confirmer la suppression 
    @objet@. L&#39;annulation est impossible ici."
@@ -398,7 +396,12 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , '_n_abos_' => " @n@ abonnements "
 , '_1_abo_' => " 1 abonnement "
 , '_n_auteurs_' => " @n@ auteurs "
-, '_1_auteur_' => " 1 auteur "
+, '_1_auteur_' => ' 1 auteur '
+, 'abonnes' => 'abonn&#233;s'
+, '_n_abonnes_' => " @n@ abonn&#233;s "
+, '1_abonne' => '1 abonn&#233;'
+, 'aucun_abo' => 'aucun abonn&#233;.'
+
 
 // exec/spiplistes_menu_navigation.php
 // exec/spiplistes_voir_journal.php
@@ -477,6 +480,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'supprimer_un_abo' => "Supprimer un abonn&#233; de cette liste"
 , 'supprimer_cet_abo' => "Supprimer cet abonn&#233; de cette liste" // + pipeline
 , 'abon_ajouter' => "Ajouter un abonn&#233; "
+, '_au_format_s' => ' au format @s@'
 
 // inc/spiplistes_mail.inc.php
 // inc/spiplistes_meleuse.php
@@ -644,7 +648,9 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'Configuration' => 'Configuration'
 , 'courriers' => 'Courriers'
 , 'creation' => "Cr&#233;ation"
-, '_de_' => " de "
+, '_de_' => ' de '
+, '_dont_' => ' dont '
+, '_avec_' => ' avec '
 , 'email' => 'E-mail'
 , 'format' => 'Format'
 , 'modifier' => 'Modifier'

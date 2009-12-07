@@ -1185,6 +1185,37 @@ function spiplistes_return_path ($from) {
 	return($return_path);
 }
 
+function spiplistes_str_auteurs ($nb)
+{
+	$result =
+		($nb > 0)
+		? _T('spiplistes:' . (($nb > 1) ? '_n_auteurs_' : '_1_auteur_'), array('n' => $nb))
+		: 'erreur param'
+		;
+	return($result);
+}
+
+function spiplistes_str_abonnes ($nb) 
+{
+	$result =
+		($nb > 0)
+		? _T('spiplistes:' . (($nb > 1) ? '_n_abonnes_' : '1_abonne'), array('n' => $nb))
+		: _T('spiplistes:aucun_abo')
+		;
+	return($result);
+}
+
+
+function spiplistes_str_listes ($nb) 
+{
+	$result =
+		($nb > 0)
+		? _T('spiplistes:' . (($nb > 1) ? 'n_listes' : '1_liste'), array('n' => $nb))
+		: 'erreur param'
+		;
+	return($result);
+}
+
 /******************************************************************************************/
 /* SPIP-Listes est un systeme de gestion de listes d'abonnes et d'envoi d'information     */
 /* par email pour SPIP. http://bloog.net/spip-listes                                      */
@@ -1204,4 +1235,3 @@ function spiplistes_return_path ($from) {
 /* Free Software Foundation,                                                              */
 /* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.                   */
 /******************************************************************************************/
-?>

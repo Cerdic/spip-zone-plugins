@@ -395,8 +395,8 @@ function exec_spiplistes_maintenance () {
 		$nb_auteurs = $ii;
 		sort($nb_auteurs);
 		$nb_auteurs = count(array_unique($nb_auteurs));
-		$nb_abos = _T('spiplistes:' . (($nb_abos > 1) ? '_n_abos_' : '_1_abo_'), array('n' => $nb_abos));
-		$nb_auteurs = _T('spiplistes:' . (($nb_auteurs > 1) ? '_n_auteurs_' : '_1_auteur_'), array('n' => $nb_auteurs));
+		$nb_abos = spiplistes_str_abos($nb_abos);
+		$nb_auteurs = spiplistes_str_auteurs($nb_auteurs);
 		$page_result .= ""
 			. spiplistes_form_debut ($maintenance_url_action, true)
 			. spiplistes_form_description(_T('spiplistes:conseil_sauvegarder_avant', $objet), true)

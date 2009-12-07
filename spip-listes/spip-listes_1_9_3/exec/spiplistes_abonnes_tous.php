@@ -133,11 +133,11 @@ function exec_spiplistes_abonnes_tous () {
 	$page_result .= ""
 		. debut_cadre_trait_couleur("forum-interne-24.gif", true)
 		. spiplistes_titre_boite_info(_T('spiplistes:abonnes_titre'))
-		. "<div class='verdana2' style='position:relative;margin:1ex;height:8em;'>"
+		. "<div class='verdana2' style='position:relative;margin:1ex;height:9em'>"
 		// bloc de gauche. Répartition des abonnés.
-		. "<div style='position:absolute;top:0;left:0;width:250px;' id='info_abo'>"
+		. "<div style='position:absolute;top:0;left:0;width:250px' id='info_abo'>"
 		. "<p style='margin:0;'>"._T('spiplistes:repartition_abonnes')." : </p>"
-		. "<ul style='margin:0;padding:0 1ex;list-style: none;'>"
+		. "<ul style='margin:0;padding:0 1ex;list-style:none'>"
 
 		// Total des abonnés listes privées (internes)
 		. "<li>- "._T('spiplistes:Listes_diffusion_prive') . ": "
@@ -192,8 +192,8 @@ function exec_spiplistes_abonnes_tous () {
 
 	$id_boite_dest_ajax = 'auteurs';
 	
-	$page_result .= ""
-		. debut_cadre_relief('redacteurs-24.gif', true)
+	$page_result .= 
+		debut_cadre_relief('redacteurs-24.gif', true)
 		. "<div id='$id_boite_dest_ajax'>\n"
 		//. spiplistes_listes_boite_abonnes(0, $tri, $debut, _SPIPLISTES_EXEC_ABONNES_LISTE, $id_boite_dest_ajax)
 		. spiplistes_listes_boite_abonnements(

@@ -251,7 +251,7 @@ function compat_spiplistes_defs_dist() {
 
 		// n'existe pas en 1.9.2
 		// on cree la requete directement
-		# Nombre de lignes dans le r�sultat
+		# Nombre de lignes dans le resultat
 		'sql_count' => 
 			'(
 				$res, $serveur=\'\', $option=true

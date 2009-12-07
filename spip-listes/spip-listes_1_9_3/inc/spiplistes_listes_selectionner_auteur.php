@@ -119,6 +119,7 @@ function spiplistes_listes_boite_abonnes ($id_liste, $statut_liste, $tri, $debut
 	global $spip_lang_left, $spip_lang_right;
 	
 	$id_liste = intval($id_liste);
+	$legende_tableau = '';
 
 	// construction de la req SQL
 	$sql_select = "
@@ -131,7 +132,8 @@ function spiplistes_listes_boite_abonnes ($id_liste, $statut_liste, $tri, $debut
 		fmt.`spip_listes_format` AS format,
 		UPPER(aut.nom) AS unom,
 		COUNT(lien.id_liste) as compteur";
-	$sql_from = "spip_auteurs AS aut
+	$sql_from = "
+		spip_auteurs AS aut
 		LEFT JOIN spip_auteurs_listes AS lien ON aut.id_auteur=lien.id_auteur
 		LEFT JOIN spip_listes AS liste ON (lien.id_liste = liste.id_liste)
 		LEFT JOIN spip_auteurs_elargis AS fmt ON aut.id_auteur=fmt.id_auteur";
@@ -152,6 +154,52 @@ function spiplistes_listes_boite_abonnes ($id_liste, $statut_liste, $tri, $debut
 			$sql_order = array('unom');
 	}
 
+	$nb_auteurs = sql_countsel('spip_auteurs');
+	
+	if($sql_result = sql_select(array('id_auteur', 'format'), 'spip_auteurs_listes'))
+	{
+		$abonnes = array();
+		while($row = sql_fetch($sql_result))
+		{
+			if(!isset($abonnes[$row['id_auteur']])) { 
+				$abonnes[$row['id_auteur']] = array();
+				$nb_abonnes++; 
+			}
+			$abonnes[$row['id_auteur']][$row['format']]++;
+			$abonnes[$row['format']]++;
+		}
+	}
+	
+	if(!$id_liste)
+	{
+		$legende_tableau = trim(spiplistes_str_auteurs($nb_auteurs)) 
+		. ', '
+		. _T('spiplistes:_dont_')
+		. spiplistes_str_abonnes ($nb_abonnes) 
+		;
+		if(isset($abonnes['non']) && $abonnes['non'])
+		{
+			$legende_tableau .= _T('spiplistes:_dont_n_sans_format_reception', array('n' => $abonnes['non']));
+		}
+		else if($nb_abonnes)
+		{
+			$legende_tableau .= _T('spiplistes:_avec_');
+		}
+		$legende_tableau .= 
+			($ii = intval($abonnes['html']))
+			? spiplistes_str_listes(intval($abonnes['html'])) . _T('spiplistes:_au_format_s', array('s' => _T('spiplistes:html')))
+			: ''
+			;
+		$legende_tableau .= 
+			($jj = intval($abonnes['texte']))
+			? ($ii?', ':''). spiplistes_str_listes(intval($abonnes['texte'])) . _T('spiplistes:_au_format_s', array('s' => _T('spiplistes:texte')))
+			: ''
+			;
+		$legende_tableau .= ''
+			. '.'
+			;
+	}
+	
 	$nombre_abonnes = 
 		($id_liste > 0)
 		? spiplistes_abonnements_compter($id_liste ? "id_liste=".sql_quote($id_liste) : "")
@@ -211,10 +259,15 @@ function spiplistes_listes_boite_abonnes ($id_liste, $statut_liste, $tri, $debut
 		}
 	}
 	
+	$legende_tableau =
+		($id_liste)
+		? spiplistes_nb_abonnes_liste_str_get($id_liste)
+		: $legende_tableau
+		;
 	$result = ""
 		. "<div id='"._SPIPLISTES_ID_PETITE_BOITE."'>\n"
 		. "<div class='verdana2' id='legend-abos1-propre'>"
-		. "<small>".spiplistes_nb_abonnes_liste_str_get($id_liste)."</small>"
+		. '<small>' . $legende_tableau . '</small>'
 		. "</div>\n"
 		;
 		
@@ -754,7 +807,7 @@ function spiplistes_elligibles_select ($elligibles, $nb_elligibles, $type_ajout 
 }
 
 //CP20080603
-// la boite complete (abonnes et elligibles) enveloppée pour ajax
+// la boite complete (abonnes et elligibles) enveloppee pour ajax
 function spiplistes_listes_boite_abonnements ($id_liste, $statut_liste, $tri, $debut, $script_retour) {
 
 	$boite_abonnements = ""
@@ -770,7 +823,7 @@ function spiplistes_listes_boite_abonnements ($id_liste, $statut_liste, $tri, $d
 // boite construction des elligibles. Appelee aussi via action/ajax
 function spiplistes_listes_boite_elligibles ($id_liste, $statut_liste, $tri, $debut) {
 	
-	$result = "";
+	$result = '';
 	
 	// proposer les elligibles si id_liste (liste_gerer)
 	if($id_liste > 0) {
@@ -871,4 +924,3 @@ function spiplistes_corrige_img_pack ($img) {
 	return($img);
 }
 
-?>
