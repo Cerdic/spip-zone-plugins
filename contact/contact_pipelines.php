@@ -10,7 +10,7 @@ function contact_header_prive($flux){
 function contact_ajouter_boutons($boutons_admin) {
 	// On vérifie s'il faut enregistrer les contacts.
 	if (lire_config('contact/sauvegarder_contacts')) {
-		$menu='forum';
+		$menu='auteurs';
 		$icone='contact-24.png';
 		if (isset($boutons_admin['outils_collaboratifs'])){
 			$menu = "outils_collaboratifs";
