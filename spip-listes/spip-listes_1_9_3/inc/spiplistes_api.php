@@ -126,6 +126,21 @@ function spiplistes_courriers_statut_compter ($statut='tous') {
 	return(spiplistes_sql_compter('spip_courriers', $sql_where));
 }
 
+
+/**
+ * Date/time du serveur SQL
+ * CP-20091207
+ * @return string or bool
+ */
+function spiplistes_sql_now ()
+{
+	if($result = sql_fetsel('NOW() as maintenant'))
+	{
+		$result = $result['maintenant'];
+	}
+	return($result);
+}
+
 // CP-20080510
 function spiplistes_courriers_casier_premier ($sql_select, $sql_whereq) {
 	return(sql_select(
@@ -545,6 +560,7 @@ function spiplistes_courriers_en_queue_modifier ($array_set, $sql_whereq) {
 		)
 	);
 }
+
 
 // CP-20080510
 function spiplistes_courriers_en_queue_supprimer ($sql_whereq) {

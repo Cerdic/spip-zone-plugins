@@ -132,12 +132,18 @@ spiplistes_log($prefix_log."nb listes depart: ".$nb_listes_ok, _SPIPLISTES_LOG_D
 			
 			// Tampon date prochain envoi (dans 'date') et d'envoi (dans 'maj')
 			$sql_set = $next_time = false;
-			if(in_array($statut, explode(";", _SPIPLISTES_LISTES_STATUTS_PERIODIQUES))) {
-				$job_time = strtotime($envoyer_quand);
+			if(in_array($statut, explode(";", _SPIPLISTES_LISTES_STATUTS_PERIODIQUES))) 
+			{
+				// prendre la date du jour plutot que la dernier date choisie
+				// sinon, une lettre quotidienne du mois precedent
+				// se verra envoyee autant de fois que de jours en attente
+				//$job_time = strtotime($envoyer_quand);
+				$job_time = strtotime(spiplistes_sql_now());
+					
 				$job_heure = date("H", $job_time);
 				$job_minute = date("i", $job_time);
 				$job_mois = date("m", $job_time);
-				$job_jour = (($statut == _SPIPLISTES_MONTHLY_LIST) ? 1 : date("j", $job_time));
+				$job_jour = (($statut == _SPIPLISTES_MONTHLY_LIST) ? 1 : date('j', $job_time));
 				$job_an = date("Y"); // la date est forcee par celle du systeme (eviter erreurs)
 				switch($statut) {
 					case _SPIPLISTES_YEARLY_LIST:
