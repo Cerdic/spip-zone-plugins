@@ -1,0 +1,24 @@
+<plugin>
+	<nom>LangOnet</nom>
+	<auteur>_Eric_ avec le support d&eacute;vou&eacute; de Denisb et Kent1</auteur>
+	<version>0.1</version>
+	<etat>stable</etat>
+	<licence>GPL 3</licence>
+	<icon>images/langonet-64.png</icon>
+	<description>
+Ce plugin permet d'op&eacute;rer des actions de v&eacute;rification et de nettoyage des fichiers de langue de SPIP, de plugins ou de squelettes.
+_ Le plugin rajoute un onglet dans la page de gestion des langues.
+	</description>
+	<lien>http://www.spip-contrib.net/</lien>
+	<prefix>langonet</prefix>
+	<onglet id='langonet' parent='config_lang'>
+		<icone>images/langonet-24.png</icone>
+		<titre>langonet:titre_onglet</titre>
+	</onglet>
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>inc/langonet_autoriser.php</inclure>
+	</pipeline>
+	<necessite id="SPIP" version='[2.0.0;]' />
+	<necessite id='spip_bonux' version='[1.0;]' />
+</plugin>
