@@ -15,9 +15,11 @@
 		  </thead>
 		  <tbody>
 	      <BOUCLE_rubriques(RUBRIQUES){tout}{par maj}>
-	        [(#MAJ|age_rubrique|>={#EXTRAS_DELAI}|oui)
-	          <INCLURE{fond=prive/exec/activite_editoriale_rubrique}{id_rubrique}>
-	        ]
+	      	[(#EXTRAS_DELAI|!={''}|oui)
+	      		[(#MAJ|age_rubrique|>={#EXTRAS_DELAI}|oui)
+	          	<INCLURE{fond=prive/exec/activite_editoriale_rubrique}{id_rubrique}>
+	        	]
+	      	]
 	      </BOUCLE_rubriques>
 		  </tbody>
 		</table>
