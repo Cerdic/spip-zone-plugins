@@ -183,9 +183,31 @@ function inc_afficher_objets_dist($type, $titre,$requete,$formater='', $force=fa
 	$fond = "prive/liste/$table";
 	if (find_in_path("$fond.html")){
 		$contexte = $_GET;
+		unset($contexte['where']); // securite
 		// passer le where
 		foreach($requete as $k=>$v)
 			$contexte[strtolower($k)] = $v;
+		if (isset($contexte['limit'])){
+			$contexte['limit'] = explode(',',$contexte['limit']);
+			$contexte['nb'] = end($contexte['limit'])+1;
+			unset($contexte['limit']);
+		}
+		if (isset($contexte['order by'])){
+			$contexte['order by'] = explode(' ',$contexte['order by']);
+			$contexte['order by'] = explode(',',reset($contexte['order by']));
+			$contexte['order by'] = explode('.',reset($contexte['order by']));
+			$contexte['order'] = end($contexte['order by']);
+			unset($contexte['order by']);
+		}
+
+		// cas particuliers tordus avec jointures, en attendant la recriture
+		if (preg_match(",articles.id_article=lien.id_article AND lien.id_auteur=([0-9]+),i",$contexte['where'],$regs)){
+			$contexte['id_auteur'] = $regs[1];
+			$contexte['where'] = str_replace($regs[0],"(1=1)",$contexte['where']);
+		}
+
+		//$contexte['where'] = str_replace("$table.","",$contexte['where']);
+
 		$contexte['titre']=$titre;
 		return recuperer_fond($fond,$contexte,array('ajax'=>true));
 	}

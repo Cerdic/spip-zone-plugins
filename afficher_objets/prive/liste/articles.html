@@ -18,20 +18,20 @@
 		</tr>
 	</thead>
 	<tbody>
-<BOUCLE_liste_art(ARTICLES){id_rubrique?}{where?}{statut?}{tri date,#GET{defaut_tri}}{pagination #ENV{nb,5}}>
-	<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
-		<td class='statut'>[(#ID_ARTICLE|puce_statut{#STATUT,#ID_RUBRIQUE,article})]</td>
-		<td class='titre'><a href="[(#ID_ARTICLE|generer_url_entite{article})]">#TITRE</a></td>
-		<td class='auteur'><BOUCLE_auteurs(AUTEURS){id_article}{', '}><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#NOM</a></BOUCLE_auteurs></td>
-		<td class='date'>[(#DATE|affdate_court)]</td>
-		<td class='id'>[(#AUTORISER{modifier,article,#ID_ARTICLE}|?{
-			<a href="[(#URL_ECRIRE{article_edit,id_article=#ID_ARTICLE})]">#ID_ARTICLE</a>,
-			#ID_ARTICLE
-		})]</td>
-	</tr>
-</BOUCLE_liste_art>
+	<BOUCLE_liste_art(ARTICLES){id_rubrique?}{id_auteur?}{where?}{statut?}{tri #ENV{order,date},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='statut'>[(#ID_ARTICLE|puce_statut{#STATUT,#ID_RUBRIQUE,article})]</td>
+			<td class='titre'><a href="[(#ID_ARTICLE|generer_url_entite{article})]">#TITRE</a></td>
+			<td class='auteur'><BOUCLE_auteurs(AUTEURS){id_article}{', '}><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#NOM</a></BOUCLE_auteurs></td>
+			<td class='date'>[(#DATE|affdate_court)]</td>
+			<td class='id'>[(#AUTORISER{modifier,article,#ID_ARTICLE}|?{
+				<a href="[(#URL_ECRIRE{article_edit,id_article=#ID_ARTICLE})]">#ID_ARTICLE</a>,
+				#ID_ARTICLE
+			})]</td>
+		</tr>
+	</BOUCLE_liste_art>
 	</tbody>
 </table>
-[<p class='pagination'>(#PAGINATION)</p>]
+[<p class='pagination'>(#PAGINATION{prive})</p>]
 </div>
 </B_liste_art>
