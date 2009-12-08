@@ -1,23 +1,23 @@
-<form action="#formulaire_playtaliste" method="post" id="formulaire_playtaliste" class="formulaire_spip">
+<form action="#formulaire_playtaliste" method="post" id="formulaire_playtaliste_#ENV{id_document}" class="formulaire_spip formulaire_playtaliste">
 [(#ENV{doublon}|!={oui}|?{' '})
-<p style="display:none">
-	<input type="hidden" name="id_document" value="#ENV{id_document}" />
-</p>
-<div class="spip_bouton">
-	<input type="submit" id="ajouter" name="ajouter" value="Ajouter à votre playliste" alt="Ajouter à votre playliste" />
-</div>
+	<p style="display:none">
+		<input type="hidden" name="id_document" value="#ENV{id_document}" />
+	</p>
+	<div class="spip_bouton">
+		<input type="submit" id="ajouter_#ENV{id_document}" class="ajouter" name="ajouter_#ENV{id_document}" value="<:playtaliste:ajouter_liste:>" alt="<:playtaliste:ajouter_liste:>" />
+	</div>
 ]
 [(#ENV{doublon}|=={oui}|?{' '})
-<p style="display:none">
-	<input type="hidden" name="id_document" value="#ENV{id_document}" />
-</p>
-<div class="spip_bouton">
-	<input type="submit" id="supprimer" name="supprimer" value="Supprimer de votre playliste" alt="Supprimer de votre playliste" />
-</div>
+	<p style="display:none">
+		<input type="hidden" name="id_document" value="#ENV{id_document}" />
+	</p>
+	<div class="spip_bouton">
+		<input type="submit" id="supprimer_#ENV{id_document}" class="supprimer" name="supprimer_#ENV{id_document}" value="<:playtaliste:supprimer_liste:>" alt="<:playtaliste:supprimer_liste:>" />
+	</div>
 ]
 [(#ENV{cookie_vide}|=={non}|?{' '})
-<div class="spip_bouton">
-	<input type="submit" id="vider" name="vider" value="Vider votre playliste" alt="Vider votre playliste" />
-</div>
+	<div class="spip_bouton">
+		<input type="submit" class="vider" name="vider" value="<:playtaliste:vider_liste:>" alt="<:playtaliste:vider_liste:>" />
+	</div>
 ]
 </form>

@@ -12,8 +12,8 @@ function balise_formulaire_playtaliste_stat($args, $filtres) {
 
 function balise_formulaire_playtaliste_dyn($id_document) {
 	
-	$ajouter =  _request('ajouter');
-	$supprimer =  _request('supprimer');
+	$ajouter =  _request('ajouter_'.$id_document);
+	$supprimer =  _request('supprimer_'.$id_document);
 	$vider = _request('vider');
 	$cookie_vide = 'oui';
 	$doublon = 'non';
@@ -77,6 +77,7 @@ function balise_formulaire_playtaliste_dyn($id_document) {
         'formulaires/formulaire_playtaliste', 
         0, 
         array(
+        	'id_document' => $id_document,
         	'doublon' => $doublon,
 			'cookie_vide' => $cookie_vide
         )

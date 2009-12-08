@@ -1,5 +1,5 @@
-#formulaire_playtaliste .spip_bouton { text-align: left; margin-top: 0.5em; }
-#formulaire_playtaliste .spip_bouton input { float: none; background: #fff; border: none; padding-left: 22px; cursor: pointer; }
-#formulaire_playtaliste .spip_bouton input#ajouter { background: #fff url(images/liste-plus.png) left 50% no-repeat; }
-#formulaire_playtaliste .spip_bouton input#supprimer { background: #fff url(images/liste-moins.png) left 50% no-repeat; }
-#formulaire_playtaliste .spip_bouton input#vider { background: #fff url(images/liste-suppr.png) left 50% no-repeat; }
+.formulaire_playtaliste .spip_bouton { text-align: left; margin-top: 0.5em; }
+.formulaire_playtaliste .spip_bouton input { float: none; background: #fff; border: none; padding-left: 22px; cursor: pointer; }
+.formulaire_playtaliste .spip_bouton input.ajouter { background: #fff url(images/liste-plus.png) left 50% no-repeat; }
+.formulaire_playtaliste .spip_bouton input.supprimer { background: #fff url(images/liste-moins.png) left 50% no-repeat; }
+.formulaire_playtaliste .spip_bouton input.vider { background: #fff url(images/liste-suppr.png) left 50% no-repeat; }
