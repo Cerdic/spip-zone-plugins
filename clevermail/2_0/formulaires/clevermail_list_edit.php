@@ -4,6 +4,16 @@ function formulaires_clevermail_list_edit_charger_dist($lst_id = -1) {
 		$valeurs['lst_auto_week_days'] = explode(',', $valeurs['lst_auto_week_days']);
 	} else {
     $cm_mail_admin = sql_getfetsel('set_value', 'spip_cm_settings', 'set_name="CM_MAIL_ADMIN"');
+    	if (defined('_CLEVERMAIL_NOUVEAUTES_HTML_OPTION')) {
+			$url_html = generer_url_public(_CLEVERMAIL_NOUVEAUTES_HTML,_CLEVERMAIL_NOUVEAUTES_HTML_OPTION);
+		} else {
+			$url_html = generer_url_public(_CLEVERMAIL_NOUVEAUTES_HTML);
+		}
+		if (defined('_CLEVERMAIL_NOUVEAUTES_TEXT_OPTION')) {
+			$url_text = generer_url_public(_CLEVERMAIL_NOUVEAUTES_TEXT,_CLEVERMAIL_NOUVEAUTES_TEXT_OPTION);
+		} else {
+			$url_text = generer_url_public(_CLEVERMAIL_NOUVEAUTES_TEXT);
+		}
 		$valeurs = array(
 			'lst_id' => -1,
 			'lst_name' => '',
@@ -17,9 +27,9 @@ function formulaires_clevermail_list_edit_charger_dist($lst_id = -1) {
 			'lst_unsubscribe_text' => _T('clevermail:confirmation_votre_desinscription_text'),
 			'lst_subject_tag' => 1,
 			//'lst_url_html' => $GLOBALS['meta']['adresse_site'].'/?page=clevermail_nouveautes_html',
-			'lst_url_html' => generer_url_public(_CLEVERMAIL_NOUVEAUTES_HTML,_CLEVERMAIL_NOUVEAUTES_HTML_OPTION),
+			'lst_url_html' => $url_html,
 			//'lst_url_text' => $GLOBALS['meta']['adresse_site'].'/?page=clevermail_nouveautes_text',
-			'lst_url_text' => generer_url_public(_CLEVERMAIL_NOUVEAUTES_TEXT,_CLEVERMAIL_NOUVEAUTES_TEXT_OPTION),
+			'lst_url_text' => $url_text,
 		  'lst_auto_mode' => 'none',
 		  'lst_auto_hour' => 8,
       'lst_auto_week_days' => array(1),
@@ -116,7 +126,7 @@ function formulaires_clevermail_list_edit_traiter_dist($lst_id = -1) {
   if (isset($list['lst_subject_tag']) && ($list['lst_subject_tag'] == 'on' || $list['lst_subject_tag'] == 1)) {
     $champs['lst_subject_tag'] = 1;
   }
-  
+
   if (_request('lst_id') == -1) {
     sql_insertq('spip_cm_lists', $champs);
     // XXX : log en chaîne de langue
