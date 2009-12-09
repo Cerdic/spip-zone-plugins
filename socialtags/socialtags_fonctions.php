@@ -1,7 +1,7 @@
 <?php
  
 //
-// ajout feuille de stylle
+// ajout feuille de style
 //
 function socialtags_insert_head($flux){
   $flux .= '<link rel="stylesheet" type="text/css" href="'.find_in_path('socialtags.css').'" media="all" />';
