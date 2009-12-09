@@ -177,6 +177,7 @@ function afficher_complement_syndic_article($row){
 // Cas generique, utilise pour tout sauf article
 // http://doc.spip.org/@inc_afficher_objets_dist
 function inc_afficher_objets_dist($type, $titre,$requete,$formater='', $force=false){
+	$res = ""; // debug
 	// routage sur le squel de liste si besoin
 	include_spip('base/connect_sql');
 	$table = table_objet($type);
@@ -209,11 +210,13 @@ function inc_afficher_objets_dist($type, $titre,$requete,$formater='', $force=fa
 		//$contexte['where'] = str_replace("$table.","",$contexte['where']);
 
 		$contexte['titre']=$titre;
-		return recuperer_fond($fond,$contexte,array('ajax'=>true));
+		$res = recuperer_fond($fond,$contexte,array('ajax'=>true));
+		if (!_request('var_liste'))
+			return $res;
 	}
-
+	
 	if ($afficher = charger_fonction("afficher_{$type}s",'inc',true)){
-		return $afficher($titre,$requete,$formater);
+		return $res . $afficher($titre,$requete,$formater);
 	}
 
 	if (($GLOBALS['meta']['multi_rubriques'] == 'oui'
@@ -235,7 +238,7 @@ function inc_afficher_objets_dist($type, $titre,$requete,$formater='', $force=fa
 	$styles = array(array('arial11', 7), array('arial11'), array('arial1'), array('arial1'), array('arial1 centered', 100), array('arial1', 38));
 
 	$tableau = array(); // ne sert pas ici
-	return $presenter_liste($requete, $skel, $tableau, $arg, $force, $styles, $tmp_var, $titre, icone_table($type));
+	return $res . $presenter_liste($requete, $skel, $tableau, $arg, $force, $styles, $tmp_var, $titre, icone_table($type));
 }
 
 // http://doc.spip.org/@charger_fonction_logo_if
