@@ -206,9 +206,14 @@ function inc_afficher_objets_dist($type, $titre,$requete,$formater='', $force=fa
 			$contexte['id_auteur'] = $regs[1];
 			$contexte['where'] = str_replace($regs[0],"(1=1)",$contexte['where']);
 		}
+		if (preg_match(",lien.id_mot=([0-9]+),i",$contexte['where'],$regs)){
+			$contexte['id_mot'] = $regs[1];
+			$contexte['where'] = str_replace($regs[0],"(1=1)",$contexte['where']);
+		}
 
 		//$contexte['where'] = str_replace("$table.","",$contexte['where']);
 
+		#var_dump($contexte);
 		$contexte['titre']=$titre;
 		$res = recuperer_fond($fond,$contexte,array('ajax'=>true));
 		if (!_request('var_liste'))
