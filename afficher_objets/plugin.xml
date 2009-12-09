@@ -5,12 +5,16 @@
 
 	<etat>dev</etat>
 
-    <auteur>cerdic, marcimat</auteur>
-    <licence>GNU/GPL</licence>
-    <description></description>
-    
-    <fonctions>afficher_objets_fonctions.php</fonctions>
-    
+	<auteur>cerdic, marcimat</auteur>
+	<licence>GNU/GPL</licence>
+	<description></description>
+
+	<fonctions>afficher_objets_fonctions.php</fonctions>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>afficher_objets_fonctions.php</inclure>
+	</pipeline>
+
 	<necessite id="spip_bonux" version="[1.8.5;]" />
 	<necessite id="SPIP" version="[2.0.10;]" />
 </plugin>

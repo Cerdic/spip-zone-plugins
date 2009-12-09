@@ -21,7 +21,9 @@
 	<BOUCLE_liste_art(ARTICLES){id_rubrique?}{id_auteur?}{where?}{statut?}{tri #ENV{order,date},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class='statut'>[(#ID_ARTICLE|puce_statut{#STATUT,#ID_RUBRIQUE,article})]</td>
-			<td class='titre'><a href="[(#ID_ARTICLE|generer_url_entite{article})]">#TITRE</a></td>
+			<td class='titre'><a href="[(#ID_ARTICLE|generer_url_entite{article})]" class="qTip">#TITRE</a>
+				[<div class="qTipContent">(#INTRODUCTION)</div>]
+			</td>
 			<td class='auteur'><BOUCLE_auteurs(AUTEURS){id_article}{', '}><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#NOM</a></BOUCLE_auteurs></td>
 			<td class='date'>[(#DATE|affdate_court)]</td>
 			<td class='id'>[(#AUTORISER{modifier,article,#ID_ARTICLE}|?{
