@@ -17,7 +17,7 @@ function spam_action_rapide() {
 		'ar_message' => $msg,
 	));
 	// syntaxe : ajax_action_auteur($action, $id, $script, $args='', $corps=false, $args_ajax='', $fct_ajax='')
-	return ajax_action_auteur('action_rapide', 'test_spam', 'admin_couteau_suisse', "arg=retour_normal&modif=oui&cmd=descrip&outil=spam#cs_action_rapide", $fd)."\n";
+	return ajax_action_auteur('action_rapide', 'test_spam', 'admin_couteau_suisse', "arg=spam|description_outil&modif=oui&cmd=descrip#cs_action_rapide", $fd)."\n";
 }
 
 ?>

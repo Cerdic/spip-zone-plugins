@@ -24,7 +24,9 @@ switch(\$GLOBALS['type_urls']) {
 	case 'propres-qs':%%terminaison_urls_propres_qs%%break;
 }",
 	'categorie' => 'admin',
+	// TODO : Dependance du plugin "Urls Etendues" sous SPIP 2.1
 	'description' => '<:type_urls::>'
+		// Tronc commun sous SPIP 2.0
 		.(defined('_SPIP19300')?'<radio_type_urls3 valeur="propres/propres2/libres/arbo/propres_qs"><:type_urls:1:>[[%urls_avec_id%]][[->%urls_avec_id2%]][[->%urls_id_3_chiffres%]][[->%urls_id_sauf_rubriques%]]</radio_type_urls3>':''),
 	'pipelinecode:creer_chaine_url' => "\$id = \$flux['objet']['id_objet']; \$ok = true;
 if(%%urls_id_sauf_rubriques%%) {\$ok = \$flux['objet']['type']!='rubrique';}

@@ -27,7 +27,7 @@ function spip_cache_action_rapide() {
 	// <legend> : pour la description de l'outil inactif
 	// syntaxe : ajax_action_auteur($action, $id, $script, $args='', $corps=false, $args_ajax='', $fct_ajax='')
 	// on envoie une action 'action_rapide' car 'purger' n'existe pas (encore?) en exec/
-	return ajax_action_auteur('action_rapide', 'cache', 'admin_couteau_suisse', "arg=retour_normal&cmd=descrip&outil=spip_cache#cs_action_rapide",
+	return ajax_action_auteur('action_rapide', 'cache', 'admin_couteau_suisse', "arg=spip_cache|description_outil&cmd=descrip#cs_action_rapide",
 			"\n<fieldset class='cs_hidden'><legend>"._T('bouton_vider_cache')."</legend></fieldset><div style='text-align: center; padding:0.4em;'>$info<br /><input class='fondo' type='submit' value=\"" .
 			attribut_html(_T('bouton_vider_cache')) . '" /></div>');
 /*	// appel direct, sans ajax :

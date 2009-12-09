@@ -22,7 +22,7 @@ if (window.jQuery) jQuery(function(){
 			return;
 		}
 		var val = jQuery("#ar_type_objet").val();
-		var url = "./?exec=action_rapide&arg=type_urls_spip2&type_objet="+val+"&id_objet="+num;
+		var url = "./?exec=action_rapide&arg=type_urls|URL_objet&type_objet="+val+"&id_objet="+num;
 		jQuery("#ar_url_trouvee").load(url);
 	});
 

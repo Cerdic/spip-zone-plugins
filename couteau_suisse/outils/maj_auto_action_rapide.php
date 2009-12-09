@@ -74,7 +74,7 @@ jQuery(document).ready(function() {
 // premier formulaire non ajax, lancant directement charger_plugin
 	return redirige_action_post('charger_plugin', '', 'admin_couteau_suisse', "cmd=descrip&outil=maj_auto#cs_infos", $html1)
 // second formulaire ajax : lien d'actualisation forcee
-		. ajax_action_auteur('action_rapide', 'maj_auto_forcer', 'admin_couteau_suisse', "arg=retour_normal&cmd=descrip&outil=maj_auto#cs_action_rapide", $html2);
+		. ajax_action_auteur('action_rapide', 'maj_auto_forcer', 'admin_couteau_suisse', "arg=maj_auto|description_outil&cmd=descrip#cs_action_rapide", $html2);
 }
 
 // renvoie le pattern present dans la page distante

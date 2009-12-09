@@ -9,16 +9,10 @@
 if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
 
 function action_action_rapide_dist() {
-cs_log("INIT : action_action_rapide_dist() - Une action rapide a ete demandee !");
-	if (defined('_SPIP19200')) {
-		$securiser_action = charger_fonction('securiser_action', 'inc');
-		$arg = $securiser_action();
-	} else {
-		include_spip('inc/actions');
-		$var_f = charger_fonction('controler_action_auteur', 'inc');
-		$var_f();
-		$arg = _request('arg');
-	}
+	$arg = _request('arg');
+cs_log("INIT : action_action_rapide_dist() - Une action rapide '$arg' a ete demandee !");
+	$securiser_action = charger_fonction('securiser_action', 'inc');
+	$arg = $securiser_action();
 
 // pour redirige_par_entete()
 include_spip('inc/headers');
@@ -34,7 +28,7 @@ spip_log("action 'action_rapide' du Couteau suisse : $arg");
 		break;
 	// boite privee : tri les auteurs d'un article
 	case 'tri_auteurs':
-		include_spip('outils/boites_privees');
+		include_spip('outils/boites_privees_action_rapide');
 		action_rapide_tri_auteurs(_request('bp_article'), abs(_request('bp_auteur')), _request('bp_auteur')>0);
 		break;
 

@@ -21,8 +21,10 @@ if(!defined('_SPIP19300')) {
 
 function boites_privees_affiche_gauche($flux){
 	$exec = &$flux['args']['exec'];
-	if(defined('boites_privees_TRI_AUTEURS') && ($exec=='articles')) 
+	if(defined('boites_privees_TRI_AUTEURS') && ($exec=='articles')) {
+		include_spip('outils/boites_privees_action_rapide');
 		$flux['data'] .= action_rapide_tri_auteurs($flux['args']['id_article']);
+	}
 	if(defined('boites_privees_URLS_PROPRES')) 
 		switch($exec) {
 			case 'articles': $flux['data'] .= cs_urls_propres('article', $flux['args']['id_article']); break;
@@ -204,57 +206,10 @@ function cs_urls_propres($type, $id) {
 		. "|$res|\n"
 		. (strlen($url)
 			?"\n[<span>[". _T('couteau:urls_propres_lien'). "|{$url}->{$url}]</span>]\n\n"
-			:'<iframe src="./?exec=action_rapide&arg=type_urls_spip&format=iframe&type_objet='.$type.'&id_objet='.$id.'" width="100%" style="border:none; height:4em;"></iframe>')
+			:'<iframe src="./?exec=action_rapide&arg=type_urls|URL_objet&format=iframe&type_objet='.$type.'&id_objet='.$id.'" width="100%" style="border:none; height:4em;"></iframe>')
 	);
 	$GLOBALS['class_spip_plus']=$mem;
 	return cs_cadre_depliable(_T('couteau:urls_propres_titre'), 'bp_urls_propres', $res);
-}
-
-// fonction qui centralise : 
-//	- 1er affichage : action_rapide_tri_auteurs($id_article)
-//	- appel exec : action_rapide_tri_auteurs()
-// 	- appel action : action_rapide_tri_auteurs($id_article, $id_auteur, $monter)
-function action_rapide_tri_auteurs($id_article=0, $id_auteur=0, $monter=true) {
-spip_log("action_rapide_tri_auteurs : $id_article, $id_auteur, $monter");
-	// si appel action...
-	 if($id_auteur) {
-		$s = sql_select('id_auteur', 'spip_auteurs_articles', "id_article=$id_article");
-		$i=0; $j=0;
-		while ($a = sql_fetch($s)) {
-			if($a['id_auteur']==$id_auteur) { $i = $a['id_auteur']; break; }
-			$j = $a['id_auteur'];
-		}
-		if(!$monter && $i && ($a = sql_fetch($s))) $j = $a['id_auteur'];
-		spip_log("action_rapide_tri_auteurs, article $id_article : echange entre l'auteur $i et l'auteur $j");
-		if($i && $j) {
-			sql_update("spip_auteurs_articles", array('id_auteur'=>-99), "id_article=$id_article AND id_auteur=$i");
-			sql_update("spip_auteurs_articles", array('id_auteur'=>$i), "id_article=$id_article AND id_auteur=$j");
-			sql_update("spip_auteurs_articles", array('id_auteur'=>$j), "id_article=$id_article AND id_auteur=-99");
-		}
-		return;
-	 }
-	$id = $id_article?$id_article:_request('id_article');
-	include_spip('public/assembler'); // pour recuperer_fond(), SPIP < 2.0
-	$texte = trim(recuperer_fond('fonds/tri_auteurs', array('id_article'=>$id)));
-	// syntaxe : ajax_action_auteur($action, $id, $script, $args='', $corps=false, $args_ajax='', $fct_ajax='')
-	if(strlen($texte))
-		$texte = ajax_action_auteur('action_rapide', 'tri_auteurs', 'articles', "arg=boites_privees&fct=tri_auteurs&id_article=$id#bp_tri_auteurs_corps", $texte);
-	// si appel exec...
-	if(!$id_article) return $texte;
-	// ici, 1er affichage !
-	if(!strlen($texte)) return '';
-	// SPIP < 2.0
-	if(!defined('_SPIP19300')) return debut_cadre_relief(find_in_path('img/couteau-24.gif'), true)
-		. "<div class='verdana1' style='text-align: left;'>"
-		. block_parfois_visible('bp_ta', '<b>'._T('couteau:tri_auteurs').'</b>', "<div id='bp_tri_auteurs_corps'>$texte</div>", 'text-align: center;')
-		. "</div>"
-		. fin_cadre_relief(true);
-	// SPIP >= 2.0
-	return cadre_depliable(find_in_path('img/couteau-24.gif'),
-		'<b>'._T('couteau:tri_auteurs').'</b>',
-		false,	// true = deplie
-		"<div id='bp_tri_auteurs_corps'>$texte</div>",
-		'bp_tri_auteurs');
 }
 
 function cs_div_configuration() {

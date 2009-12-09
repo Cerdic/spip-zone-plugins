@@ -14,7 +14,7 @@ function corbeille_action_rapide() {
 		$objets[] = "<label><input type='checkbox' value='$table:$ids'".($nb?" checked='checked'":"")." name='$table'/>"._T($obj[libelle]).".
 <span class='ar_edit_info'>$infos</span></label>";
 	}
-	return ajax_action_auteur('action_rapide', 'corbeille', 'admin_couteau_suisse', "arg=retour_normal&cmd=descrip&outil=corbeille#cs_action_rapide",
+	return ajax_action_auteur('action_rapide', 'corbeille', 'admin_couteau_suisse', "arg=corbeille|description_outil&cmd=descrip#cs_action_rapide",
 			"\n<div style='padding:0.4em;'><fieldset><legend>"._T('couteauprive:corbeille_vider').'</legend>'
 			. join("<br/>\n",$objets) . "<div style='text-align: right;'><input class='fondo' type='submit' value=\""
 			. attribut_html(_T('couteauprive:corbeille_objets_vider'))
@@ -26,7 +26,7 @@ function corbeille_action_rapide() {
 	"statut" => nom du statut dans la base de donnees (bdd),
 	"table" => nom eventuel de la table, pour definir plusieurs noisettes avec une meme table mais des statuts differents,
 	"libelle" => libelle court,
-	"tableliee"  => tableau des tables spip à vider en meme temps    ) 
+	"tableliee"  => tableau des tables spip ï¿½ vider en meme temps    ) 
 */
 function cs_corbeille_table_infos($table=false) {
 	static $params = NULL;
@@ -44,14 +44,6 @@ function cs_corbeille_table_infos($table=false) {
 			"breves" => array( "statut" => "refuse", 
 				"libelle" => 'icone_breves',
 			),
-			"forums_publics" => array( "statut" => "off",
-				"table"=>"forum",
-				"libelle" => 'titre_forum',
-			),
-			"forums_prives" => array( "statut" => "privoff",
-				"table"=>"forum",
-				"libelle" => 'icone_forum_administrateur',
-			),
 			"signatures" => array( "statut" => "poubelle", 
 				"libelle" => 'couteau:objet_petitions',
 			),
@@ -60,6 +52,17 @@ function cs_corbeille_table_infos($table=false) {
 				"libelle" => 'couteau:objet_syndics',
 			),
 		);
+		// TODO: declaration de la corbeille dans le plugin _core/forum (SPIP 2.1)
+		if(!defined('_SPIP20100')) $params = array_merge($params, array(
+			"forums_publics" => array( "statut" => "off",
+				"table"=>"forum",
+				"libelle" => 'titre_forum',
+			),
+			"forums_prives" => array( "statut" => "privoff",
+				"table"=>"forum",
+				"libelle" => 'icone_forum_administrateur',
+			),
+		));
 		if(is_array($corbeille_params)) $params = array_merge($params, $corbeille_params);
 	}
 	if(!$table) return $params;

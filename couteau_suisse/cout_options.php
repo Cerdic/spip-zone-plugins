@@ -134,7 +134,7 @@ function autoriser_cs_configurer_dist($faire, $type, $id, $qui, $opt) {
 
 // Droits pour voir/manipuler un outil du Couteau Suisse
 // $opt represente ici l'outil concerne : $outil
-// Si $opt['autoriser'] (code PHP) n'est pas renseigne, les droits sont toujours accordes
+// Si $opt['autoriser'] (code PHP) n'est pas renseigne, ces droits natifs sont toujours accordes
 function autoriser_outil_configurer_dist($faire, $type, $id, $qui, $opt) {
 	if(!is_array($opt)) return autoriser('configurer', 'cs', $id, $qui, $opt);
 	$test = !cs_version_erreur($opt)
