@@ -20,13 +20,13 @@
  */
 (function($)
 {
-	jQuery(document).ready(function(){
-		jQuery("a.qTip").each(function(){
+	jQuery.fn.qtip_activate = function() {
+	  return this.each(function() {
 			var content = jQuery(this).siblings('.qTipContent');
 			if (content.length)
 				jQuery(this).qtip({
 					content: {
-						text: jQuery(this).siblings('.qTipContent')
+						text: content
 					},
 					style: {
 						tip: true,
@@ -37,6 +37,19 @@
 					 corner: { target: 'rightTop', tooltip: 'leftTop' }
 					}
 				});
+			jQuery(this).addClass('qTipDone');
 		});
+	}
+
+	jQuery(function() {
+		jQuery('a.qTip').qtip_activate();
 	});
+
+	// ... et a chaque fois que le DOM change
+	onAjaxLoad(function() {
+		if (jQuery){
+			jQuery('a.qTip',this).qtip_activate();
+		}
+	});
+
 })(jQuery);
