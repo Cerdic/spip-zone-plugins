@@ -327,7 +327,7 @@ function balise_TRI_dist($p, $liste='true') {
 	$_url = "parametre_url(self(),$_variable,\$s?$_sens:$_champ)";
 	$_on = "\$s?(".$boucle->modificateur['tri_sens']."==$_sens".'):('.$boucle->modificateur['tri_champ']."==$_champ)";
 	
-	$p->code = "aoustrong($_url,$_libelle,$_on,$_class)";
+	$p->code = "aoustrong($_url,$_libelle,$_on".($_class?",$_class":"").")";
 	//$p->code = "''";
 	$p->interdire_scripts = false;
 	return $p;
