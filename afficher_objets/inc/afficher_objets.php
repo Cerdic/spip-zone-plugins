@@ -202,7 +202,8 @@ function inc_afficher_objets_dist($type, $titre,$requete,$formater='', $force=fa
 		}
 
 		// cas particuliers tordus avec jointures, en attendant la recriture
-		if (preg_match(",articles.id_article=lien.id_article AND lien.id_auteur=([0-9]+),i",$contexte['where'],$regs)){
+		if (preg_match(",articles.id_article=lien.id_article AND lien.id_auteur=([0-9]+),i",$contexte['where'],$regs)
+		OR preg_match(",lien.id_auteur=([0-9]+),i",$contexte['where'],$regs)){
 			$contexte['id_auteur'] = $regs[1];
 			$contexte['where'] = str_replace($regs[0],"(1=1)",$contexte['where']);
 		}
@@ -216,6 +217,9 @@ function inc_afficher_objets_dist($type, $titre,$requete,$formater='', $force=fa
 		#var_dump($contexte);
 		$contexte['titre']=$titre;
 		$res = recuperer_fond($fond,$contexte,array('ajax'=>true));
+		if (_request('var_liste'))
+			var_dump($contexte);
+		
 		if (!_request('var_liste'))
 			return $res;
 	}
