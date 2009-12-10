@@ -54,6 +54,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_mode_vide' => 'Une chaine vide',
 
 // T
+	'titre_onglet' => 'LangOnet',
 	'titre_page_navigateur' => 'LangOnet',
 
 );
