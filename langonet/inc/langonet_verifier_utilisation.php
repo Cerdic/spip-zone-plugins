@@ -26,8 +26,9 @@ function inc_langonet_verifier_utilisation($module, $langue, $ou_langue, $ou_fic
 		
 	// On cherche l'ensemble des items utilises dans l'arborescence $ou_fichiers
 	$utilises_brut = array('items' => array(), 'suffixes' => array());
-	$regexp = ",(<:$module:|_T\('$module:)(\w*)('\s*\.\s*\\$*\w*)*,im";
-	foreach (preg_files(_DIR_RACINE.$ou_fichiers,'\.(html|php)$') as $_fichier) {
+// 	$regexp = ",(<:$module:|_T\('$module:)(\w*)('\s*\.\s*\\$*\w*)*,im";
+	$regexp = ",(<\w+>$module:|<:$module:|_T\('$module:)(\w*)('\s*\.\s*\\$*\w*)*,im";
+	foreach (preg_files(_DIR_RACINE.$ou_fichiers,'\.(html|php|xml)$') as $_fichier) {
 		lire_fichier($_fichier, $contenu);
 		if (preg_match_all($regexp, $contenu, $matches))
 			$utilises_brut['items'] = array_merge($utilises_brut['items'], $matches[2]);
