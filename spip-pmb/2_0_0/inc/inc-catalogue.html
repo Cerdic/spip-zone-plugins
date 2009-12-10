@@ -7,7 +7,10 @@
             <ul class="liste-items">
               <BOUCLE_tab_resultat1(POUR){tableau #ENV{tab_locations}}>
                 <li class="item">
-                    	<h3><a href="[(#SELF|parametre_url{id_section,[(#ENV{tab_locations}|pmb_tableau2_valeur{#CLE,'location_id'})]}|parametre_url{titre_section,[(#ENV{tab_locations}|pmb_tableau2_valeur{#CLE,'location_caption'})]}|parametre_url{look_ALL,1})]">[(#ENV{tab_locations}|pmb_tableau2_valeur{#CLE,'location_caption'}|ucfirst)]</a></h3>
+                    	<a href="[(#SELF|parametre_url{id_section,[(#ENV{tab_locations}|pmb_tableau2_valeur{#CLE,'location_id'})]}|parametre_url{titre_section,[(#ENV{tab_locations}|pmb_tableau2_valeur{#CLE,'location_caption'})]}|parametre_url{look_ALL,1})]">[(#REM|?{'','<img />'}|inserer_attribut{class,spip_logos}|inserer_attribut{src,[(#CHEMIN{img_pack/logo-localisation.png})]}|image_reduire{100,0})]
+			</a>
+
+			<h3><a href="[(#SELF|parametre_url{id_section,[(#ENV{tab_locations}|pmb_tableau2_valeur{#CLE,'location_id'})]}|parametre_url{titre_section,[(#ENV{tab_locations}|pmb_tableau2_valeur{#CLE,'location_caption'})]}|parametre_url{look_ALL,1})]">[(#ENV{tab_locations}|pmb_tableau2_valeur{#CLE,'location_caption'}|ucfirst)]</a></h3>
                 	
                 </li>
                 </BOUCLE_tab_resultat1>
@@ -22,9 +25,14 @@
 		    <ul class="liste-items">
 		      <BOUCLE_tab_resultat2(POUR){tableau #ENV{tab_sections}}>
 			<li class="item">
+				<a href="[(#SELF|parametre_url{id_section,[(#ENV{tab_sections}|pmb_tableau2_valeur{#CLE,'section_id'})]}|parametre_url{titre_section,[(#ENV{tab_sections}|pmb_tableau2_valeur{#CLE,'section_caption'})]}|parametre_url{look_ALL,1})]">
 				[(#ENV{tab_sections}|pmb_tableau2_valeur{#CLE,'section_image'}|contient{rayonnage}|non)
 				   [(#REM|?{'','<img />'}|inserer_attribut{width,'100'}|inserer_attribut{class,spip_logos}|inserer_attribut{src,[(#ENV{tab_sections}|pmb_tableau2_valeur{#CLE,'section_image'})]})]
 				]
+				[(#ENV{tab_sections}|pmb_tableau2_valeur{#CLE,'section_image'}|contient{rayonnage}|oui)
+				   [(#REM|?{'','<img />'}|inserer_attribut{class,spip_logos}|inserer_attribut{src,[(#CHEMIN{img_pack/logo-section.png})]}|image_reduire{100,0})]
+				]
+				</a>
 				<h3><a href="[(#SELF|parametre_url{id_section,[(#ENV{tab_sections}|pmb_tableau2_valeur{#CLE,'section_id'})]}|parametre_url{titre_section,[(#ENV{tab_sections}|pmb_tableau2_valeur{#CLE,'section_caption'})]}|parametre_url{look_ALL,1})]">[(#ENV{tab_sections}|pmb_tableau2_valeur{#CLE,'section_caption'}|ucfirst)]</a></h3>
 				
 			</li>

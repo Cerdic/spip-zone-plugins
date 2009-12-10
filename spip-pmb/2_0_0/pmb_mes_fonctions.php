@@ -576,7 +576,7 @@ function pmb_ws_parser_notice_array($value, &$tresultat) {
 						  
 						  if (($dernierTypeTrouve == "210") && ($dernierSousTypeTrouve == "c")) $tresultat['editeur'] .= $texte;
 						  if (($dernierTypeTrouve == "210") && ($dernierSousTypeTrouve == "a")) $tresultat['editeur'] .= ' ('.$texte.')';
-						  if (($dernierTypeTrouve == "210") && ($dernierSousTypeTrouve == "c")) $tresultat['id_editeur'] = $dernierIdTrouve;
+						  if (($dernierTypeTrouve == "210") && ($dernierSousTypeTrouve == "a")) $tresultat['id_editeur'] = $dernierIdTrouve;
 						  if (($dernierTypeTrouve == "210") && ($dernierSousTypeTrouve == "d")) $tresultat['annee_publication'] .= $texte;
 						  
 						  if (($dernierTypeTrouve == "215") && ($dernierSousTypeTrouve == "a")) $tresultat['importance'] .= $texte;
@@ -633,6 +633,30 @@ function pmb_ws_autres_lecteurs($id_notice) {
 		//print("Erreur : ".$fault->faultcode." : ".$fault->faultstring);
 	} 
 	return $tresultat;
+}
+function pmb_ws_documents_numeriques ($id_notice, $id_session=0) {
+
+	$tresultat = Array();
+	pmb_ws_charger_wsdl($ws, $url_base);
+	
+	try {	
+		$r=$ws->pmbesNotices_listNoticeExplNums($id_notice, $id_session);
+		$cpt = 0;
+		foreach ($r as $docnum) {
+		      $tresultat[$cpt] = Array();
+		      $tresultat[$cpt]['name'] = $docnum->name;
+		      $tresultat[$cpt]['mimetype'] = $docnum->mimetype;
+		      $tresultat[$cpt]['url'] = $docnum->url;
+		      $tresultat[$cpt]['downloadUrl'] = $docnum->downloadUrl;
+		      
+		      $cpt++;
+		}
+
+	} catch (SoapFault $fault) {
+		print("Erreur : ".$fault->faultcode." : ".$fault->faultstring);
+	} 
+	return $tresultat;
+
 }
 
 function pmb_ws_dispo_exemplaire($id_notice, $id_session=0) {
@@ -732,6 +756,7 @@ function pmb_notice_extraire ($id_notice, $url_base, $mode='auto') {
 	return $tableau_resultat;
 			
 }
+
 
 // retourne un tableau associatif contenant tous les champs d'un tableau d'id de notices 
 function pmb_tabnotices_extraire ($tabnotices, $url_base, $mode='auto') {

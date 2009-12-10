@@ -37,11 +37,14 @@
 	      <br class="nettoyeur" />
 	
 	
-	
+	[(#ENV{afficher_docnum}|=={non}|non)
+	      <INCLURE{fond=inc/inc-docnum}{env}>
+	]
 
 	[(#ENV{afficher_dispo}|=={non}|non)
 	      <INCLURE{fond=inc/inc-notice-dispo}{env}>
 	]
+	
 	[(#ENV{afficher_autres}|=={non}|non)
 	      <INCLURE{fond=inc/inc-autreslecteurs}{env}>
 	]
