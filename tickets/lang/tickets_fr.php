@@ -99,6 +99,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'revenir_gestion' => 'Revenir &agrave; la gestion des tickets',
 
 	// S
+	'sinscrire' => "S'inscrire",
 	'severite_bloquant' => 'Bloquant',
 	'severite_important' => 'Important',
 	'severite_normal' => 'Normal',
@@ -116,7 +117,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ticket' => 'Ticket',
 	'ticket_enregistre' => 'Ticket enregirtr&eacute;',
 	'tickets' => 'Tickets',
+	'tickets_derniers_commentaires' => 'Les derniers commentaires',
+	'tickets_sur_inscription' => "
+		L'&eacute;criture des tickets ou commentaires n'est
+		possible qu'aux personnes identifiées.
+	",
+	'tickets_traites' => 'Tous les tickets trait&eacute;s',
 	'titre' => 'Tickets, suivi de bugs',
+	'titre_identification' => 'Identification',
 	'titre_liste' => 'Liste des tickets',
 	'tous_tickets_ouverts' => 'Tous les tickets ouverts',
 	'type_amelioration' => 'Am&eacute;lioration',
