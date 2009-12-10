@@ -120,7 +120,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tickets_derniers_commentaires' => 'Les derniers commentaires',
 	'tickets_sur_inscription' => "
 		L'&eacute;criture des tickets ou commentaires n'est
-		possible qu'aux personnes identifiées.
+		possible qu'aux personnes identifi&eacute;es.
 	",
 	'tickets_traites' => 'Tous les tickets trait&eacute;s',
 	'titre' => 'Tickets, suivi de bugs',
