@@ -5,36 +5,29 @@
 
 	<div class="vcard">[(#REM) microformat vcard]
 	<div class="cartouche">
-		[(#LOGO_AUTEUR||image_reduire{200,200})]
+		[(#EDIT{twitter_user}|oui)
+			<span class="#EDIT{logo}">[(#LOGO_AUTEUR||image_reduire{200,200}|sinon{'<i>double-cliquez ici pour ajouter un logo</i>'})]</span>
+		]
+		[(#EDIT{twitter_user}|non)
+			<span >[(#LOGO_AUTEUR||image_reduire{200,200})]</span>
+		]							
 		<h1 class="h1 #EDIT{qui} fn">#NOM</h1>
 	</div>
 
-	[<div class="#EDIT{bio} texte note">(#BIO)</div>]
-	[<p class="#EDIT{hyperlien} hyperlien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="url org spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+	[(#SESSION{id_auteur}|=={#ID_AUTEUR}|non)
+		 [<div class="#EDIT{bio} texte note">(#BIO)</div>]
+		  [<p class="#EDIT{hyperlien} hyperlien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="url org spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+	]
 	</div>[(#REM) / vcard]
 
-	<B_auteurpmb>
-	<BOUCLE_auteurpmb(AUTEURS_PMB){id_auteur}{id_auteur=#SESSION{id_auteur}}>
-	    	
-
-	    [(#PMB_SESSION|oui)
-	     <INCLURE{fond=inc-moncompte}{env}>
-	    ]
-	    [(#PMB_SESSION|non)
-		<div class="texte entry-content">Votre session a expir&eacute;, veuillez vous identifier de nouveau.</div>
-	    ]
-
-	</BOUCLE_auteurpmb>
-	</B_auteurpmb>
-	   [(#SESSION{id_auteur}|oui)[(#SESSION{id_auteur}|=={#ID_AUTEUR}|oui)
-		      <div class="corps-conteneur surlignable"><div class="texte entry-content">Vous n'avez pas de compte de lecteur.</div></div>
-	    ]]
-	<//B_auteurpmb>
+	[(#SESSION{id_auteur}|=={#ID_AUTEUR}|oui)
+	    <INCLURE{fond=inc/inc-moncompte-lecteur}{env}>
+	]
 	
 	<BOUCLE_auteurpmbtwitter(AUTEURS){id_auteur}{tous}>
-	[(#TWITTER_USER|oui)
-	  <div id="twits"></div>
-	]
+		[(#TWITTER_USER|oui)
+		  <div id="twits"></div>
+		]
 	</BOUCLE_auteurpmbtwitter>
 
 	[(#REM) Articles de l'auteur ]
@@ -51,7 +44,8 @@
 	</div>
 	</B_articles>
 
-	#FORMULAIRE_ECRIRE_AUTEUR
+	[(#SESSION{id_auteur}|=={#ID_AUTEUR}|non)#FORMULAIRE_ECRIRE_AUTEUR]
+
 	
 	[<div class="notes"><h2 class="h2"><:info_notes:></h2>(#NOTES)</div>]
 

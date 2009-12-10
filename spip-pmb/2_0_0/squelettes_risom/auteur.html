@@ -24,54 +24,31 @@
         <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:info_auteurs:>[ &gt; <strong class="on">(#NOM|couper{80})</strong>]</div>
 	
 	<div class="vcard">[(#REM) microformat vcard]
-		<div class="cartouche">
-			
-			[<h1 class="fn">(#NOM|image_typo{police=togase.ttf,taille=30,couleur=333300,largeur=600})</h1>]
-		</div>
+				      <div class="cartouche">
+					      [(#EDIT{twitter_user}|oui)
+						      <span class="#EDIT{logo}">[(#LOGO_AUTEUR||image_reduire{200,200}|sinon{'<i>double-cliquez ici pour ajouter un logo</i>'})]</span>
+					      ]
+					      [(#EDIT{twitter_user}|non)
+						      <span >[(#LOGO_AUTEUR||image_reduire{200,200})]</span>
+					      ]							
+					      <h1 class="h1 #EDIT{qui} fn">#NOM</h1>
+				      </div>
 
-		
-		
-		[(#SESSION{id_auteur}|=={#ID_AUTEUR}|oui)
-		    <span class="#EDIT{logo}">[(#LOGO_AUTEUR||image_reduire{130,0}|sinon{'double-cliquez ici pour ajouter un logo'})]</span>
-		    
-		    <div class="corps-conteneur surlignable">
-				<div class="texte entry-content">Bonjour[ (#PMB_FIRSTNAME|sinon{#NOM})].</div>
-		    </div>	
-		     [<div class="ps"><h2>Informations personnelles</h2>(#FORMULAIRE_EDITER_AUTEUR{#SESSION{id_auteur},#SELF,env})</div>]
-		]
-		[(#SESSION{id_auteur}|=={#ID_AUTEUR}|non)
-		    [(#LOGO_AUTEUR||image_reduire{130,0})]
-		    <div class="corps-conteneur surlignable">
-				[<div class="texte note">(#BIO)</div>]
-				[<p class="hyperlien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="url org spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
-		    </div>	
-		]
-		</div>[(#REM) / vcard]
+				      [(#SESSION{id_auteur}|=={#ID_AUTEUR}|non)
+					      [<div class="#EDIT{bio} texte note">(#BIO)</div>]
+						[<p class="#EDIT{hyperlien} hyperlien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="url org spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+				      ]
+				      </div>[(#REM) / vcard]
 
-
-	<B_auteurpmb>
-	<BOUCLE_auteurpmb(AUTEURS_PMB){id_auteur}{id_auteur=#SESSION{id_auteur}}>
-	    	
-
-	    [(#PMB_SESSION|oui)
-	     <INCLURE{fond=inc-moncompte}{env}>
-	    ]
-	    [(#PMB_SESSION|non)
-		<div class="texte entry-content">Votre session a expir&eacute;, veuillez vous identifier de nouveau.</div>
-	    ]
-
-	</BOUCLE_auteurpmb>
-	</B_auteurpmb>
-	   [(#SESSION{id_auteur}|oui)[(#SESSION{id_auteur}|=={#ID_AUTEUR}|oui)
-		      <div class="corps-conteneur surlignable"><div class="texte entry-content">Vous n'avez pas de compte de lecteur.</div></div>
-	    ]]
-	<//B_auteurpmb>
-	
-	<BOUCLE_auteurpmbtwitter(AUTEURS){id_auteur}{tous}>
-	[(#TWITTER_USER|oui)
-	  <div id="twits"></div>
-	]
-	</BOUCLE_auteurpmbtwitter>
+				      [(#SESSION{id_auteur}|=={#ID_AUTEUR}|oui)
+					  <INCLURE{fond=inc/inc-moncompte-lecteur}{env}>
+				      ]
+				      
+				      <BOUCLE_auteurpmbtwitter(AUTEURS){id_auteur}{tous}>
+					      [(#TWITTER_USER|oui)
+						<div id="twits"></div>
+					      ]
+				      </BOUCLE_auteurpmbtwitter>
 
         [(#REM) Articles de l'auteur ]
         <B_articles>
@@ -94,11 +71,7 @@
         </div>
         </B_articles>
 
-        [(#SESSION{id_auteur}|=={#ID_AUTEUR}|non)#FORMULAIRE_ECRIRE_AUTEUR]
-	
-	[(#SESSION{id_auteur}|=={#ID_AUTEUR}|oui)
-		  <div class="ps"><h2>Proposer un article</h2>#FORMULAIRE_EDITER_ARTICLE</div>
-	]
+        
 
         [<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
 

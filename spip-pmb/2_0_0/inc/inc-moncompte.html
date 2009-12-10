@@ -1,6 +1,7 @@
 #CACHE{0}
+
 <BOUCLE_auteurpmb(AUTEURS_PMB){id_auteur=#SESSION{id_auteur}}>
-		<div class="ps surlignable"><h2 class="pas_surlignable">Votre compte de lecteur</h2>
+		<div class="ps surlignable">
 		<div>
 		       <table class="spip pmb-tableau">
 			  <tbody>
@@ -20,7 +21,12 @@
 			  <tr><td>Compte twitter</td>
 			    <td>
 				  <BOUCLE_auteur(AUTEURS){id_auteur}{tous}>
-					<span class="#EDIT{twitter_user}">[(#TWITTER_USER|sinon{'<i>double-cliquez ici pour ajouter votre identifiant twitter</i>'})][(#TWITTER_USER|oui)<br /><i>(double-cliquez ici pour modifier votre identifiant twitter)</i>]</span>
+					[(#EDIT{twitter_user}|oui)
+					    <span class="#EDIT{twitter_user}">[(#TWITTER_USER|sinon{'<i>double-cliquez ici pour ajouter votre identifiant twitter</i>'})][(#TWITTER_USER|oui)<br /><i>(double-cliquez ici pour modifier votre identifiant twitter)</i>]</span>
+					]
+					[(#EDIT{twitter_user}|non)
+					    <span>[(#TWITTER_USER|sinon{'<i>pas de compte twitter</i>'})]</spab>
+					]
 				  </BOUCLE_auteur>	
 			    </td>
 			  </tr>
