@@ -48,7 +48,7 @@ function INCLUREAJAXLOAD_affichage_final($page) {
 			var env = $('a', this).attr('rel');
 			if (env)
 				$.post(
-					'spip.php',
+					window.location.href,
 					{ var_ajax: 'recuperer', var_ajax_env: env },
 					function(c) { me.html(c); }
 				);
