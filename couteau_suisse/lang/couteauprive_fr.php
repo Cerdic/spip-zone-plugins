@@ -508,8 +508,13 @@ Si vous r&eacute;initialisez le plugin en cliquant sur un pack, le Couteau Suiss
 	'paragrapher2:description' => 'La fonction SPIP <code>paragrapher()</code> ins&egrave;re des balises &lt;p&gt; et &lt;/p&gt; dans tous les textes qui sont d&eacute;pourvus de paragraphes. Afin de g&eacute;rer plus finement vos styles et vos mises en page, vous avez la possibilit&eacute; d\'uniformiser l\'aspect des textes de votre site.[[%paragrapher%]]',
 	'paragrapher2:nom' => 'Paragrapher',
 	'pipelines' => 'Pipelines utilis&eacute;s&nbsp;:',
-	'pucesli:description' => 'Remplace les puces &laquo;-&raquo; (tiret simple) des articles par des listes not&eacute;es &laquo;-*&raquo; (traduites en HTML par : &lt;ul>&lt;li>&hellip;&lt;/li>&lt;/ul>) et dont le style peut &ecirc;tre personnalis&eacute; par css.',
+	'pucesli:description' => 'Remplace les puces &laquo;-&raquo; (tiret simple) des diff&eacute;rents contenus de votre site par des listes not&eacute;es &laquo;-*&raquo; (traduites en HTML par : &lt;ul>&lt;li>&hellip;&lt;/li>&lt;/ul>) et dont le style peut &ecirc;tre facilement personnalis&eacute; par css.
+
+Afin de conserver l\'acc&egrave;s &agrave; la puce image originale de SPIP (le petit triangle), un nouveau raccourci en d&eacute;but de ligne &laquo;*&raquo; peut &ecirc;tre propos&eacute; &agrave; vos r&eacute;dacteurs :[[%puceSPIP%]]',
 	'pucesli:nom' => 'Belles puces',
+	'puceSPIP_aide' => 'Une puce SPIP : <b>*</b>',
+	'puceSPIP' => 'Autoriser le raccourci &laquo;*&raquo;',
+	'label:puceSPIP' => '@_CS_CHOIX@',
 
 	// Q
 	'qui_webmestres' => 'Les webmestres SPIP',

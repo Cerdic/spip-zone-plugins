@@ -606,12 +606,22 @@ add_outil( array(
 	'pipeline:pre_typo' => 'ToutMulti_pre_typo',
 ));
 
+add_variable( array(	// variable utilisee par 'pipelinecode:insert_head'
+	'nom' => 'puceSPIP',
+	'check' => 'couteauprive:puceSPIP',
+	'defaut' => 0,
+	'format' => _format_NOMBRE,
+));
 add_outil( array(
 	'id' => 'pucesli',
 	'auteur' 	 => "J&eacute;r&ocirc;me Combaz pour l'id&eacute;e originale",
 	'categorie'	 => 'typo-corr',
-	'pipelinecode:pre_typo' => 'if (strpos($flux, "-")!==false) $flux = cs_echappe_balises("", "pucesli_remplace", $flux);',
-	'code:options' => 'function pucesli_remplace($texte) {	return preg_replace(\'/^-\s*(?![-*#])/m\', \'-* \', $texte); }',
+	'pipelinecode:pre_typo' => 'if (strpos($flux, "-")!==false OR strpos($flux, "*")!==false) $flux = cs_echappe_balises("", "pucesli_remplace", $flux);',
+	'code:options' => 'function pucesli_remplace($texte) {
+	if(%%puceSPIP%%) {$texte = preg_replace(\'/^[*]\s*/m\', \'- \', $texte);}
+	return preg_replace(\'/^-\s*(?![-*#])/m\', \'-* \', $texte);
+}
+if(%%puceSPIP%%) {function pucesli_raccourcis() {return _T(\'couteauprive:puceSPIP_aide\');}}',
 ));
 
 add_outil( array(
