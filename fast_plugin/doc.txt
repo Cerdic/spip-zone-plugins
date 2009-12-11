@@ -101,6 +101,13 @@ La liste des differents boutons pour l'admin
 
 
 
+<!-- Modification du repertoire de stockage pour cfg -->
+<!-- dans cfg/depot/php.php -->
 
-
+ligne 44 :
+	$f = _DIR_RACINE . 'IMG/cfg/' . $this->param['nom'] . '.php';
+	//$f = _DIR_VAR . 'cfg/' . $this->param['nom'] . '.php';
+ligne 165
+	$fichier = _DIR_RACINE . 'IMG/cfg/' . $fichier . '.php';
+	//$fichier = _DIR_VAR . 'cfg/' . $fichier . '.php';	
 
