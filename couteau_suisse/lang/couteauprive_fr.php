@@ -403,7 +403,8 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:terminaison_urls_propres_qs' => '<:label:terminaison_urls_page:>',
 	'label:titre_travaux' => 'Titre du message :',
 	'label:titres_etendus' => 'Activer l\'utilisation &eacute;tendue des balises #TITRE_XXX&nbsp;:',
-	'label:tri_articles' => 'Votre choix :',
+	'label:tri_articles' => '@_CS_CHOIX@',
+	'label:tri_groupes' => '@_CS_CHOIX@',
 	'label:url_arbo_minuscules' => 'Conserver la casse des titres dans les URLs :',
 	'label:url_arbo_sep_id' => 'Caract&egrave;re de s&eacute;paration \'titre-id\' en cas de doublon :<br/>(ne pas utiliser \'/\')',
 	'label:url_glossaire_externe2' => 'Lien vers le glossaire externe :',
@@ -633,15 +634,19 @@ La fonction SPIP utilis&eacute;e en PHP est <code>_T(\'chaine\')</code> sans arg
 	'travaux_prochainement' => 'Ce site sera r&eacute;tabli tr&egrave;s prochainement.
 _ Merci de votre compr&eacute;hension.',
 	'travaux_titre' => '@_CS_TRAVAUX_TITRE@',
-	'tri_articles:description' => 'En naviguant sur le site en partie priv&eacute;e ([->./?exec=auteurs]), choisissez ici le tri &agrave; utiliser pour afficher vos articles &agrave; l\'int&eacute;rieur de vos rubriques.
+	'tri_articles:description' => 'Pour personnaliser la navigation en partie priv&eacute;e et lorsque SPIP le permet, choisissez ici le tri &agrave; utiliser pour afficher certains types objets.
 
-Les propositions ci-dessous sont bas&eacute;es sur la fonctionnalit&eacute; SQL \'ORDER BY\' : n\'utilisez le tri personnalis&eacute; que si vous savez ce que vous faites (champs disponibles : {id_article, id_rubrique, titre, soustitre, surtitre, statut, date_redac, date_modif, lang, etc.})
-[[%tri_articles%]][[->%tri_perso%]]',
-	'tri_articles:nom' => 'Tri des articles',
+Les propositions ci-dessous sont bas&eacute;es sur la fonctionnalit&eacute; SQL \'ORDER BY\' : n\'utilisez le tri personnalis&eacute; que si vous savez ce que vous faites (champs disponibles par exemple pour les articles : {id_article, id_rubrique, titre, soustitre, surtitre, statut, date_redac, date_modif, lang, etc.})
+
+@puce@ {{Ordre des articles &agrave; l\'int&eacute;rieur des rubriques}} [[%tri_articles%]][[->%tri_perso%]]
+
+@puce@ {{Ordre des groupes dans le formulaire d\'ajout de mots-cl&eacute;s}} [[%tri_groupes%]][[->%tri_perso_groupes%]]',
+	'tri_articles:nom' => 'Les tris de SPIP',
 	'tri_modif' => 'Tri sur la date de modification (ORDER BY date_modif DESC)',
 	'tri_perso' => 'Tri SQL personnalis&eacute;, ORDER BY suivi de :',
 	'tri_publi' => 'Tri sur la date de publication (ORDER BY date DESC)',
 	'tri_titre' => 'Tri sur le titre (ORDER BY 0+titre,titre)',
+	'tri_groupe' => 'Tri sur l\'id du groupe (ORDER BY id_groupe)',
 	'trousse_balises:description' => 'Outil en cours de d&eacute;veloppement. Vous offre quelques balises tr&egrave;s simples et bien pratiques pour am&eacute;liorer la lisibilit&eacute; de vos squelettes.
 
 @puce@ {{#BOLO}} : g&eacute;n&egrave;re un faux texte d\'environ 3000 caract&egrave;res ("bolo" ou "[?lorem ipsum]") dans les squelettes pendant leur mise au point. L\'argument optionnel de cette fonction sp&eacute;cifie la longueur du texte voulu. Exemple : <code>#BOLO{300}</code>. Cette balise accepte tous les filtres de SPIP. Exemple : <code>[(#BOLO|majuscules)]</code>.

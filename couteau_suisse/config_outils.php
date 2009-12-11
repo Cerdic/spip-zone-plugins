@@ -25,8 +25,8 @@ add_outil( array(
 ));
 */
 
-	// ici on a besoin d'une case input. La variable est : dossier_squelettes
-	// a la toute premiere activation de l'outil, la valeur sera : $GLOBALS['dossier_squelettes']
+// ici on a besoin d'une case input. La variable est : dossier_squelettes
+// a la toute premiere activation de l'outil, la valeur sera : $GLOBALS['dossier_squelettes']
 add_variable( array(
 	'nom' => 'dossier_squelettes',
 	'format' => _format_CHAINE,
@@ -107,8 +107,8 @@ add_outil( array(
 	'categorie' => 'spip',
 ));
 
-	// ici on a besoin d'une case input. La variable est : suite_introduction
-	// a la toute premiere activation de l'outil, la valeur sera : '&nbsp;(...)'
+// ici on a besoin d'une case input. La variable est : suite_introduction
+// a la toute premiere activation de l'outil, la valeur sera : '&nbsp;(...)'
 add_variables( array(
 	'nom' => 'suite_introduction',
 	'format' => _format_CHAINE,
@@ -132,7 +132,7 @@ add_outil( array(
 	'categorie' => 'spip',
 ));
 
-	// ici on a besoin de deux boutons radio : _T('icone_interface_simple') et _T('icone_interface_complet')
+// ici on a besoin de deux boutons radio : _T('icone_interface_simple') et _T('icone_interface_complet')
 add_variable( array(
 	'nom' => 'radio_set_options4',
 	'format' => _format_CHAINE,
@@ -151,6 +151,9 @@ add_outil( array(
 	'version-max' => '1.9299',
 ));
 
+// code mort, voir le format xml : outils/interface_config.xml
+
+/*
 add_outil( array(
 	'id' => 'simpl_interface',
 	'code:spip_options' => "define('_ACTIVER_PUCE_RAPIDE', false);",
@@ -179,16 +182,32 @@ add_variables( array(
 	'nom' => 'tri_perso',
 	'format' => _format_CHAINE,
 	'defaut' => '',
-	'code:strlen(%s)' => "define('_TRI_ARTICLES_RUBRIQUE', %s);",
+	'code:strlen(%s)' => "define('_TRI_ARTICLES_RUBRIQUE', %s);\n",
+), array(
+	'nom' => 'tri_groupes',
+	'format' => _format_CHAINE,
+	'radio' => array(
+		'0+titre,titre' => 'couteauprive:tri_titre',
+		'id_groupe' => 'couteauprive:tri_publi', 
+		'perso' => 'couteauprive:tri_groupe' ),
+	'radio/ligne' => 1,
+	'defaut' => "'id_groupe'", //"'0+titre,titre'",
+	'code:%s!="perso"' => "define('_TRI_GROUPES_MOTS', %s);\n",
+), array(
+	'nom' => 'tri_perso_groupes',
+	'format' => _format_CHAINE,
+	'defaut' => '',
+	'code:strlen(%s)' => "define('_TRI_GROUPES_MOTS', %s);",
 ));
 add_outil( array(
 	'id' => 'tri_articles',
-	'code:spip_options' => "%%tri_articles%%%%tri_perso%%",
+	'code:spip_options' => "%%tri_articles%%%%tri_perso%%%%tri_groupes%%%%tri_perso_groupes%%",
 	'categorie' => 'interface',
 	'version-min' => '1.9300',
 ));
+*/
 
-	// ici on a besoin de trois boutons radio : _T('couteauprive:js_jamais'), _T('couteauprive:js_defaut') et _T('couteauprive:js_toujours')
+// ici on a besoin de trois boutons radio : _T('couteauprive:js_jamais'), _T('couteauprive:js_defaut') et _T('couteauprive:js_toujours')
 add_variable( array(
 	'nom' => 'radio_filtrer_javascript3',
 	'format' => _format_NOMBRE,
@@ -204,8 +223,8 @@ add_outil( array(
 	'version-min' => '1.9200',
 ));
 
-	// ici on a besoin d'une case input. La variable est : forum_lgrmaxi
-	// a la toute premiere activation de l'outil, la valeur sera : 0 (aucune limite)
+// ici on a besoin d'une case input. La variable est : forum_lgrmaxi
+// a la toute premiere activation de l'outil, la valeur sera : 0 (aucune limite)
 add_variable( array(
 	'nom' => 'forum_lgrmaxi',
 	'format' => _format_NOMBRE,
@@ -240,7 +259,7 @@ add_outil( array(
 	'code:js' => "var cs_verif_email = %%auteur_forum_email%%;\nvar cs_verif_nom = %%auteur_forum_nom%%;\nvar cs_verif_deux = %%auteur_forum_deux%%;",
 ));
 
-	// ici on a besoin de trois boutons radio : _T('couteauprive:par_defaut'), _T('couteauprive:sf_amont') et _T('couteauprive:sf_tous')
+// ici on a besoin de trois boutons radio : _T('couteauprive:par_defaut'), _T('couteauprive:sf_amont') et _T('couteauprive:sf_tous')
 add_variable( array(
 	'nom' => 'radio_suivi_forums3',
 	'format' => _format_CHAINE,
@@ -1033,7 +1052,7 @@ add_outil( array(
 	'contrib' => 3223,
 ));
 
-//reglage du nombre de case pour le brouteur
+// reglage du nombre de case pour le brouteur
 add_outil( array(
 	'id' => 'brouteur',
 	'categorie' => 'interface',
@@ -1045,6 +1064,11 @@ add_variable( array(
 	'defaut' => 20,
 	'code:%s' => "define('_SPIP_SELECT_RUBRIQUES', %s);"
 ));
+
+// Recuperer tous les outils (et leurs variables) de la forme outils/toto_config.xml
+foreach (find_all_in_path('outils/', '\w+_config\.xml$') as $f) {
+	add_outils_xml($f);
+}
 
 // Recuperer tous les outils de la forme outils/monoutil_config.php
 // y compris les lames perso dont on met le nom en italiques

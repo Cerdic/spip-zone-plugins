@@ -106,6 +106,69 @@ function add_variable($tableau) {
 // idem, arguments variables
 function add_variables() { foreach(func_get_args() as $t) add_variable($t); }
 
+// les 3 fonction suivantes decodent les fichiers de configuration xml
+// et les convertissent (pour l'instant car experimental) dans l'ancien format
+function add_outils_xml($f) {
+	include_spip('inc/xml');
+	$arbre = spip_xml_load($f);
+	if(isset($arbre['variable'])) foreach($arbre['variable'] as $a) 
+		add_variable(parse_variable_xml($a));
+	if(isset($arbre['outil'])) foreach($arbre['outil'] as $a) {
+		$out = parse_outil_xml($a);
+		if(strlen($out['nom']) && !preg_match(',couteau_suisse/outils/,', $f))
+			$outil['nom'] = "<i>$out[nom]</i>";
+		add_outil($out);
+	}
+}
+// Attention : conversion incomplete. ajouter les tests au fur et a mesure
+function parse_variable_xml(&$arbre) {
+//echo "<br/><br/>\n"; print_r($arbre);
+	$var = array();
+	if(isset($arbre['id'])) $var['nom'] = $arbre['id'][0];
+	if(isset($arbre['format'])) $var['format'] = $arbre['format'][0]=='string'?_format_CHAINE:_format_NOMBRE;
+	if(isset($arbre['radio'])) {	
+		$temp = &$arbre['radio'][0];
+		if(isset($temp['par_ligne'])) $var['radio/ligne'] = $temp['par_ligne'][0];
+		foreach($temp['item'] as $a) $var['radio'][$a['valeur'][0]] = $a['label'][0];
+	}
+	if(isset($arbre['defaut_php'])) $var['defaut'] = $arbre['defaut_php'][0];
+	if(isset($arbre['code'])) foreach($arbre['code'] as $a) {
+		$temp = isset($a['condition_php'])?'code:'.$a['condition_php'][0]:'code';
+		if(isset($a['script_php'])) $var[$temp] = str_replace('\n', "\n", $a['script_php'][0]);
+	}
+	return $var;
+//echo "\n<br/><br/>\n"; print_r($var);
+}
+// Attention : conversion incomplete. ajouter les tests au fur et a mesure
+function parse_outil_xml(&$arbre) {
+//echo "<br/><br/>\n"; print_r($arbre);
+	$out = array();
+	if(isset($arbre['id'])) $out['id'] = $arbre['id'][0];
+	if(isset($arbre['nom'])) $out['nom'] = $arbre['nom'][0];
+	if(isset($arbre['categorie'])) $out['categorie'] = $arbre['categorie'][0];
+	if(isset($arbre['auteur'])) $out['auteur'] = $arbre['auteur'][0];
+	if(isset($arbre['code'])) foreach($arbre['code'] as $a) {
+		$temp = isset($a['type'])?'code:'.$a['type'][0]:'code';
+		if(isset($a['script_php'])) $out[$temp] = str_replace('\n', "\n", $a['script_php'][0]);
+	}
+	if(isset($arbre['pipeline'])) foreach($arbre['pipeline'] as $a) {
+		if(isset($a['fonction'])) {
+			$temp = isset($a['nom'])?'pipeline:'.$a['nom'][0]:'pipeline';
+			$out[$temp] = $a['fonction'][0];
+		} elseif(isset($a['script_php'])) {
+			$temp = isset($a['nom'])?'pipelinecode:'.$a['nom'][0]:'pipelinecode';
+			$out[$temp] = $a['script_php'][0];
+		}
+	}
+	if(isset($arbre['version'])) {	
+		$temp = &$arbre['version'][0];
+		if(isset($temp['spip_min'])) $out['version-min'] = $temp['spip_min'][0];
+		if(isset($temp['spip_max'])) $out['version-max'] = $temp['spip_max'][0];
+	}
+//echo "\n<br/><br/>\n"; print_r($out);
+	return $out;
+}
+
 // retourne la valeur 'defaut' (format php) de la variable apres compilation du code
 // le resultat comporte des guillemets si c'est une chaine
 function cs_get_defaut($variable) {
