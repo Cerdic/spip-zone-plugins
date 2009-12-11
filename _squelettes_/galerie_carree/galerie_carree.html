@@ -1,6 +1,6 @@
 [(#REM)
 
-	Un portfolio des images (associees ou non a un article)
+	Un galerie des images (associees ou non a un article)
 	triees par date inverse
 	
 	ENV{pas} = pagination
@@ -13,7 +13,7 @@
 [(#SET{vu,[(#GET{id_article}|?{non,.})]})]
 
 <B_tof>
-<div id="portfolio">
+<div id="galerie_carree">
 	[(#TOTAL_BOUCLE|>{10}|?{' ',''})<p class="gentil_message"><:cliquer_pour_agrandir:></p>]
 	<BOUCLE_tof(DOCUMENTS)
 	{id_article?}
@@ -77,5 +77,5 @@
 	<//B_photos>
 
 	<br class="nettoyeur" />
-</div><!--#portfolio-->
+</div><!--#galerie_carree-->
 </B_tof>
