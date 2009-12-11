@@ -25,12 +25,15 @@ function recuperer_fond_ajax() {
 	$ajax = entites_html(encoder_contexte_ajax($args[1]));
 	$alt = entites_html(sinon($args[1]['ajaxloadalt'],$args[1]['fond']));
 	$message = $args[1]['ajaxload'];
+	$searching = sinon($args[1]['ajaxsearching'],
+		"<img src='".find_in_path('images/searching.gif')."' alt='$alt' />");
 
 	$url = parametre_url(self(), 'var_no_ajax', 1);
 
+
 	return
 	"<div class='includeajax'>
-	<a href='$url' rel=\"$ajax\"><img src='prive/images/searching.gif' alt='$alt' /></a>
+	<a href='$url' rel=\"$ajax\">$searching</a>
 	$message
 	</div>
 ";
@@ -46,12 +49,14 @@ function INCLUREAJAXLOAD_affichage_final($page) {
 		$('.includeajax').each(function() {
 			var me = $(this);
 			var env = $('a', this).attr('rel');
-			if (env)
+			if (env) {
+				$('a', this).attr('href','#');
 				$.post(
 					window.location.href,
 					{ var_ajax: 'recuperer', var_ajax_env: env },
 					function(c) { me.html(c); }
 				);
+			}
 		});
 	});
 </script>
