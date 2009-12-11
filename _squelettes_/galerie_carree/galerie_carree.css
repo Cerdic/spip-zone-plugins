@@ -1,8 +1,10 @@
 /* CSS */
 #galerie_carree { clear: both; }
 #galerie_carree h2 { display: none; }
-#galerie_carree .spip_logos { background: #fff; margin: 0 1em 2em 1em; padding: 0; border: 4px solid #dfdfdf; }
-#galerie_carree .spip_logos.modulo1 { margin-left: 0; }
-#galerie_carree .spip_logos a:focus .spip_logos,
-#galerie_carree .spip_logos a:hover .spip_logos,
-#galerie_carree .spip_logos a:active .spip_logos { border-color: #ccc; }
+#galerie_carree a { float: left; display: block; text-decoration: none; border: 0; }
+#galerie_carree a img { background: #fff; margin: 0 1em 2em 1em; padding: 0; border: 4px solid #dfdfdf; }
+#galerie_carree .first { margin-left: 0; }
+#galerie_carree .last { margin-right: 0; }
+#galerie_carree a:focus img,
+#galerie_carree a:hover img,
+#galerie_carree a:active img { border-color: #ccc; }
