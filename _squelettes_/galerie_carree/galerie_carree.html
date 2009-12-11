@@ -5,11 +5,13 @@
 	
 	ENV{pas} = pagination
 	ENV{taille} = taille du carre
+    ENV{last} = nombre de vignette par ligne
 	ENV{id_article} = limiter a un article (passer aussi ENV{vu}=non)
 
 ]
 #SET{pas,#ENV{pas,20}}
 #SET{taille,#ENV{taille,120}}
+#SET{last,#ENV{last,999}}
 [(#SET{vu,[(#GET{id_article}|?{non,.})]})]
 
 <B_tof>
@@ -32,7 +34,7 @@
 	{0,1}
 	>#SET{tof_titre,#TITRE}</BOUCLE_lien_article>
 	[(#COMPTEUR_BOUCLE|moins{#GET{pas}}|<={#ENV{debut_photos,0}}|?{#COMPTEUR_BOUCLE}|>{#ENV{debut_photos,0}}|?{
-		[(#SET{vignette,[(#FICHIER|copie_locale|image_passe_partout{#GET{taille},#GET{taille}}|image_recadre{#GET{taille},#GET{taille},center}|image_aplatir{jpg,ffffff}|inserer_attribut{class,spip_logos[ modulo(#COMPTEUR_BOUCLE|alterner{1,2,3,4,5})]})]})]
+		[(#SET{vignette,[(#FICHIER|copie_locale|image_passe_partout{#GET{taille},#GET{taille}}|image_recadre{#GET{taille},#GET{taille},center}|image_aplatir{jpg,ffffff}|inserer_attribut{class,spip_logos[ first(#COMPTEUR_BOUCLE|modulo{#GET{last}}|=={1}|oui)][ last(#COMPTEUR_BOUCLE|modulo{#GET{last}}|=={0}|oui)]})]})]
 	,
 		[(#SET{vignette,''})]
 	})]
