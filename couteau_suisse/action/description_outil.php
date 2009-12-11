@@ -5,15 +5,8 @@ include_spip('inc/filtres');
 
 function action_description_outil_dist() {
 cs_log("INIT : action_description_outil_dist() - Une modification de variable(s) a ete demandee !");
-	if (defined('_SPIP19200')) {
-		$securiser_action = charger_fonction('securiser_action', 'inc');
-		$arg = $securiser_action();
-	} else {
-		include_spip('inc/actions');
-		$var_f = charger_fonction('controler_action_auteur', 'inc');
-		$var_f();
-		$arg = _request('arg');
-	}
+	$securiser_action = charger_fonction('securiser_action', 'inc');
+	$arg = $securiser_action();
 	spip_log("action_description_outil du Couteau suisse : $arg / "._request('submit'));
 //	spip_log($_POST);
 
@@ -35,8 +28,12 @@ cs_log("Debut : action_description_outil_post($index) - On modifie la(les) varia
 	$outil = corriger_caracteres(_request('outil'));
 //cs_log($variables, '$variables = ');
 cs_log($metas_vars, 'metas_vars :');
+	// besoin des outils pour l'autorisation de modifier les variables
+	include_spip('cout_utils');
+	include_spip('config_outils');
+	global $outils;
 	// on traite chaque variable
-	foreach($variables as $var) {
+	foreach($variables as $var) if(autoriser('configurer', 'variable', 0, NULL, array('nom'=>$var, 'outil'=>$outils[$outil]))) {
 		// on recupere dans le POST la nouvelle valeur de la variable
 		$final = corriger_caracteres(_request($var));
 		if (in_array($var, $metas_vars['_nombres'])) $final = intval($final);
@@ -44,7 +41,8 @@ cs_log($metas_vars, 'metas_vars :');
 		$metas_vars[$var] = $final;
 cs_log(" -- outil $index ($outil) : %$var% prend la valeur '$final'");
 		spip_log("Outil du Couteau Suisse n°$index. Modification d'une variable par l'auteur id=$connect_id_auteur : %$var% = $final");
-	}
+	} else 
+		spip_log("Outil du Couteau Suisse n°$index. Modification interdite de la variable %$var% par l'auteur id=$connect_id_auteur !!");
 //cs_log($metas_vars, " -- metas_vars = ");
 	ecrire_meta('tweaks_variables', serialize($metas_vars));
 	ecrire_metas();

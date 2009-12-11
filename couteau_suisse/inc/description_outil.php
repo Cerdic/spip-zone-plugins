@@ -33,7 +33,10 @@ function description_outil_une_variable($index, $outil, $variable, $label) {
 	$valeur = cs_retire_guillemets($valeur);
 //cs_log(" -- description_outil_une_variable($index) - Traite %$variable%");
 	$cs_variable = &$cs_variables[$variable];
-
+	// autorisations de variables
+	include_spip('inc/autoriser');
+	$cs_variable['disabled'] = $disab 
+		= autoriser('configurer', 'variable', 0, NULL, array('nom'=>$cs_variable['nom'], 'outil'=>$outil))?'':' disabled="disabled"';
 	// si la variable necessite des boutons radio
 	if (is_array($radios = &$cs_variable['radio'])) {
 		if(!$actif) {
@@ -47,7 +50,7 @@ function description_outil_une_variable($index, $outil, $variable, $label) {
 			$br = (($nb>0) && ( ++$i % $nb == 0))?'</ul><ul>':''; 
 			$res .=
 				"<li><label><input id=\"label_{$variable}_$code\" class=\"cs_input_checkbox\" type=\"radio\""
-				.($valeur==$code?' checked="checked"':'')." value=\"$code\" name=\"$variable\" />"
+				.($valeur==$code?' checked="checked"':'')." value=\"$code\" name=\"$variable\"$disab />"
 				.($valeur==$code?'<b>':'')._T($traduc).($valeur==$code?'</b>':'')
 				."</label></li>$br";
 		}
@@ -57,7 +60,7 @@ function description_outil_une_variable($index, $outil, $variable, $label) {
 	if (isset($cs_variable['check'])) {
 		if(!$actif)
 			return $label._T($cs_variable['check'])._T($valeur?'couteauprive:2pts_oui':'couteauprive:2pts_non');
-		return $label.'<label><input type="checkbox" '.($valeur?' checked="checked"':'')." value=\"1\" name=\"$variable\" />"
+		return $label.'<label><input type="checkbox" '.($valeur?' checked="checked"':'')." value=\"1\" name=\"$variable\" $disab/>"
 			.($valeur?'<b>':'')._T($cs_variable['check']).($valeur?'</b>':'').'</label>'
 			. _VAR_OUTIL;
 	}
@@ -71,8 +74,8 @@ function description_outil_une_variable($index, $outil, $variable, $label) {
 		( $lignes < 2
 			// <html></html> empechera SPIP de modifier le contenu des <input> ou <textarea>
 			?"<html><input name='$variable' value=\""
-				. htmlspecialchars($valeur) . "\" type='text' size='$len' $width /></html>"
-			:"<html><textarea rows='$lignes' name='$variable' $width>"
+				. htmlspecialchars($valeur) . "\" type='text' size='$len' $width $disab/></html>"
+			:"<html><textarea rows='$lignes' name='$variable' $width$disab>"
 				. htmlspecialchars($valeur) . '</textarea></html>'
 		) . _VAR_OUTIL;
 }
@@ -139,7 +142,7 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 
 //cs_log("inc_description_outil_dist() - Parse la description de '$outil_'");
 	$res = '';
-	$nb_variables = 0; $variables = array();
+	$nb_disabled = $nb_variables = 0; $variables = array();
 	for($i=0;$i<count($t);$i+=2) if (isset($t[$i+1]) && strlen($var=trim($t[$i+1]))) {
 		// si la variable est presente on fabrique le input
 		if (isset($cs_variables[$var])) {
@@ -148,6 +151,7 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 				$outil, $var,
 				$t[$i]);
 			$variables[] = $var;
+			if($cs_variables[$var]['disabled']) ++$nb_disabled;
 		} else {
 			// probleme a regler dans config_outils.php !
 			$temp = $t[$i]."[$var?]"; $res .= $temp;
@@ -156,6 +160,7 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 		$res .= $t[$i];
 	$outil['variables'] = $variables;
 	$outil['nb_variables'] = $nb_variables;
+	$outil['nb_disabled'] = $nb_disabled;
 
 	// si ce n'est qu'une simple initialisation, on sort
 	if(!$modif) return;

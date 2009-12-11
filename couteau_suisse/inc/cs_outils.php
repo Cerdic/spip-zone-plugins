@@ -188,7 +188,8 @@ function detail_outil($outil_id) {
 	if (preg_match_all(',traitement:([A-Z_]+),', $serial, $regs, PREG_PATTERN_ORDER))
 		$details[] =  _T('couteauprive:detail_traitements') . ' #' . join(', #', array_unique($regs[1]));	
 	if (preg_match_all(',(pipeline|pipelinecode):([a-z_]+),', serialize(array_keys($outil)), $regs, PREG_PATTERN_ORDER))
-		$details[] = _T('couteauprive:detail_pipelines') . ' ' . join(', ', array_unique($regs[2]));	
+		$details[] = _T('couteauprive:detail_pipelines') . ' ' . join(', ', array_unique($regs[2]));
+	if($outil['nb_disabled']) $details[] = _T('couteauprive:detail_disabled') . ' ' . $outil['nb_disabled'];
 	if(count($details)) return $div . join('<br />', $details) . '</div>';
 	return '';
 }

@@ -133,7 +133,7 @@ function autoriser_cs_configurer_dist($faire, $type, $id, $qui, $opt) {
 }
 
 // Droits pour voir/manipuler un outil du Couteau Suisse
-// $opt represente ici l'outil concerne : $outil
+// $opt doit representer ici l'outil concerne : $outil
 // Si $opt['autoriser'] (code PHP) n'est pas renseigne, ces droits natifs sont toujours accordes
 function autoriser_outil_configurer_dist($faire, $type, $id, $qui, $opt) {
 	if(!is_array($opt)) return autoriser('configurer', 'cs', $id, $qui, $opt);
@@ -143,6 +143,14 @@ function autoriser_outil_configurer_dist($faire, $type, $id, $qui, $opt) {
 	if($test && isset($opt['autoriser']))
 		eval('$test &= '.$opt['autoriser'].';');
 	return $test;
+}
+
+// Droits pour modifier une variable du Couteau Suisse
+// $opt doit contenir le nom de la variable et le tableau de l'outil appelant
+function autoriser_variable_configurer_dist($faire, $type, $id, $qui, $opt) {
+	return autoriser('configurer', 'cs', $id, $qui, $opt)
+		&& autoriser('configurer', 'outil_'.$opt['outil']['id'], $id, $qui, $opt['outil'])
+		&& autoriser('configurer', 'variable_'.$opt['nom'], $id, $qui, $opt['outil']);
 }
 
 // TODO : revoir eventuellement tout ca avec la syntaxe de <necessite>

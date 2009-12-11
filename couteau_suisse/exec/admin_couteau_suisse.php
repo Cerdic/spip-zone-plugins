@@ -443,7 +443,10 @@ cs_log("INIT : exec_admin_couteau_suisse()");
 		if(autoriser('configurer', 'outil', 0, NULL, $outils[$_GET['outil']])) {
 			include_spip('inc/cs_outils');
 			cs_initialisation_d_un_outil($_GET['outil'], charger_fonction('description_outil', 'inc'), true);
-			foreach ($outils[$_GET['outil']]['variables'] as $a) unset($metas_vars[$a]);
+			foreach ($outils[$_GET['outil']]['variables'] as $a)
+				if(autoriser('configurer', 'variable', 0, NULL, array('nom'=>$a, 'outil'=>$outils[$_GET['outil']])))
+					unset($metas_vars[$a]);
+				else spip_log("Reset interdit de la variable %$a% !!");
 			ecrire_meta('tweaks_variables', serialize($metas_vars));
 		}
 		// tout recompiler

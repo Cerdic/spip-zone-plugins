@@ -1099,7 +1099,6 @@ if(isset($GLOBALS['mes_outils'])) {
 	unset($GLOBALS['mes_outils']);
 }
 
-
 // Idees d'ajouts :
 // http://archives.rezo.net/spip-core.mbox/
 // http://www.spip-contrib.net/Citations
