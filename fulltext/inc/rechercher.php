@@ -207,6 +207,12 @@ function recherche_en_base($recherche='', $tables=NULL, $options=array(), $serve
 		: array();
 
 	foreach ($tables as $table => $champs) {
+		# lock via memoization, si dispo
+		include_spip('inc/memoization');
+		if (function_exists('cache_lock')) {
+			$lock = 'fulltext '.$table.' '.$recherche;
+			cache_lock($lock);
+		}
 
 spip_timer('rech');
 
@@ -461,6 +467,8 @@ spip_timer('rech');
 			}
 		}
 		spip_log("recherche $table ($recherche_brute) : ".count($results[$table])." resultats ".spip_timer('rech'),'recherche');
+
+		if (isset($lock)) cache_unlock($lock);
 	}
 
 
