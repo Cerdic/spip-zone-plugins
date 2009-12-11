@@ -1,5 +1,6 @@
 <plugin>
 <nom>Galerie carr&eacute;e</nom>
+<icon>icon.jpg</icon>
 <description>Galerie d'images carr&eacute;es.</description>
 <auteur>[romy.tetue.net->http://romy.tetue.net], Fil</auteur>
 <licence>&copy; 2009 GPL</licence>
