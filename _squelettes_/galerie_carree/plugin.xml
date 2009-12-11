@@ -1,0 +1,10 @@
+<plugin>
+<nom>Galerie carr&eacute;e</nom>
+<description>Galerie d'images carr&eacute;es.</description>
+<auteur>[romy.tetue.net->http://romy.tetue.net], Fil</auteur>
+<licence>&copy; 2009 GPL</licence>
+<version>0.1</version>
+<etat>dev</etat>
+<prefix>galerie_carree</prefix>
+<necessite id='SPIP' version='[2.0.0;]' />
+</plugin>
