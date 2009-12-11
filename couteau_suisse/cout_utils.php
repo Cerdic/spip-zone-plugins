@@ -179,7 +179,8 @@ function cs_get_defaut($variable) {
 		return false;
 	}
 	$variable = &$cs_variables[$variable];
-	$defaut = !isset($variable['defaut'])?'':$variable['defaut'];
+	$defaut = function_exists($f='initialiser_variable_'.$variable['nom'])?$f()
+		:(!isset($variable['defaut'])?'':$variable['defaut']);
 	if(!strlen($defaut)) $defaut = "''";
 	if($variable['format']==_format_NOMBRE) $defaut = "intval($defaut)";
 		elseif($variable['format']==_format_CHAINE) $defaut = "strval($defaut)";
@@ -575,6 +576,7 @@ function cs_get_code_variable($variable, $valeur) {
 	return $code;
 }
 
+
 // remplace les valeurs marquees comme %%toto%% par le code reel prevu par $cs_variables['toto']['code:condition']
 // attention de bien declarer les variables a l'aide de add_variable()
 function cs_parse_code_php($code, $debut='%%', $fin='%%') {
@@ -591,6 +593,7 @@ function cs_parse_code_php($code, $debut='%%', $fin='%%') {
 			$rempl = cs_get_code_variable($nom, $defaut);
 			$code = "/* Valeur par defaut : {$nom} = $defaut */\n" . $code;
 		}
+//echo '<br>',$nom, ':',isset($metas_vars[$nom]), " - $code";
 		if ($cotes) $rempl = str_replace("'", "\'", $rempl);
 		$code = str_replace($matches[0], $matches[1].$rempl.$matches[3], $code);
 	}
