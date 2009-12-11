@@ -1,7 +1,7 @@
 <?php
 /*
- * Plugin xxx
- * (c) 2009 xxx
+ * Plugin Notifications
+ * (c) 2009 SPIP
  * Distribue sous licence GPL
  *
  */

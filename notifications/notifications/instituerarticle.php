@@ -20,8 +20,13 @@ function notifications_instituerarticle_dist($quoi, $id_article, $options) {
 	include_spip('inc/texte');
 
 	$modele = "";
-	if ($options['statut'] == 'publie')
-		$modele = "notifications/article_publie";
+	if ($options['statut'] == 'publie') {
+		if ($GLOBALS['meta']["post_dates"]=='non'
+			AND strtotime($options['date'])>time())
+			$modele = "notifications/article_valide";
+		else
+			$modele = "notifications/article_publie";
+
 	if ($options['statut'] == 'prop' AND $options['statut_ancien'] != 'publie')
 		$modele = "notifications/article_propose";
 
