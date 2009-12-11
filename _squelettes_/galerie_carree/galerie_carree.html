@@ -14,10 +14,10 @@
 #SET{last,#ENV{last,999}}
 [(#SET{vu,[(#GET{id_article}|?{non,.})]})]
 
-<B_tof>
-<div id="galerie_carree">
+<B_galerie_carree>
+<div class="galerie_carree">
 	[(#TOTAL_BOUCLE|>{10}|?{' ',''})<p class="gentil_message"><:cliquer_pour_agrandir:></p>]
-	<BOUCLE_tof(DOCUMENTS)
+	<BOUCLE_galerie_carree(DOCUMENTS)
 	{id_article?}
 	{vu?}
 	{extension IN jpg,gif,png}
@@ -60,7 +60,7 @@
 		[<h4 class="#EDIT{titre}">(#TITRE)</h4>]
 		[<div class="#EDIT{descriptif}">(#DESCRIPTIF)</div>]
 	</div>]
-	</BOUCLE_tof>
+	</BOUCLE_galerie_carree>
 
 	<BOUCLE_photos(DOCUMENTS)
 	{id_article?}
@@ -74,10 +74,10 @@
 	]
 	[(#ENV{pagination}|=={non}|?{'',' '})
 		[<p class="pagination">(#PAGINATION)[
-		((#_tof:TOTAL_BOUCLE)&nbsp;<:images:>)]</p>]
+		((#_galerie_carree:TOTAL_BOUCLE)&nbsp;<:images:>)]</p>]
 	]
 	<//B_photos>
 
 	<br class="nettoyeur" />
-</div><!--#galerie_carree-->
-</B_tof>
+</div><!--.galerie_carree-->
+</B_galerie_carree>
