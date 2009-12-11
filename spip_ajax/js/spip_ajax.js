@@ -1,95 +1,115 @@
 /* Fonctions generiques gerant des fonction ajax dans l'admin de spip */
-spip_ajax = {};
 
-// objet javascript servant a envoyer les requetes
-spip_ajax.req = {};
+var spip_ajax = {
+		
+		// objet javascript servant a envoyer les requetes
+		req : {},
+		
+		// On va récupérer le hash_env pour traiter la validite des requetes ajax
+		hash_env : "",
+		
+		set_hash_env : function(){
+			$sa.hash_env = $sa.retour;
+			for(i=0;i<$sa.array_onload.length;i++)eval($sa.array_onload[i]);
+		
+		},
+		
+		// valeur retourner par la requete ajax, cette valeur 
+		// est utilisable dans les fonctions de call-back
+		retour : "",
+		
+		
+		// tableau contenant les parametres de l'url
+		getter : new Array(),
+		
+		
+		// fonction qui recupere les parametres de l'url
+		set_get : function(){
+		    param = window.location.search.slice(1,window.location.search.length);
+		    first = param.split("&");
+		    for(i=0;i<first.length;i++){
+		        second = first[i].split("=");
+		        val = second[0];
+		        $sa.getter[val] = second[1];
+		    }
+		},
+		
+		
+		// recuperation d'un parametre particulier de l'url
+		get : function (nom){ 
+			return $sa.getter[nom];
+		},
+		
+		// liste des fonctions  a appele une fois le hash env recuperer
+		array_onload : new Array(),
+		onload : function(fonc){
+			$sa.array_onload.push(fonc+"()");
+			// gere le cas de IE ....
+			if ($sa.hash_env !="") eval(fonc+"()");
+		},
+	
+		
+		// fonction envoyant les requetes ajax
+		// en cas de succes on peux realiser certaines actions
+		ajax : function (obj){
+			
+			// on test si l'objet servant a la requete est present et correct
+			if (typeof obj=='object') $sa.req = obj;
+			
+			// on force le data type a html avant de tester si un autre type est demande
+			dataType = 'html';
+			if ($sa.req.dataType) dataType = $sa.req.dataType;
+						
+			if ($sa.hash_env!="") $sa.req.hash_env = $sa.hash_env;
 
-// On va récupérer le hash_env pour traiter la validite
-// de l'operation
-spip_ajax.hash_env="";
-spip_ajax.get_hash_env = function(){
-	spip_ajax.req = {hash_env : "hash_env" , callback : 'spip_ajax.set_hash_env()'	}
-	spip_ajax.ajax();
-}
+			$.ajax({
+			   type: "POST",
+			   url : "?exec=_spip_ajax",
+			   data: $sa.req,
+			   dataType : dataType,
+			   success: function(x){
+			       if ($sa.req.alert) alert($sa.req.alert + " \n" + x);
 
-spip_ajax.set_hash_env = function(){
-	spip_ajax.hash_env = spip_ajax.retour;
-}
+			       if ($sa.req.refresh) $($sa.req.refresh).html(x);
+
+			       if ($sa.req.append) $($sa.req.append).append(x);
 
 
-// valeur retourner par la requete ajax, cette valeur 
-// est utilisable dans les fonctions de call-back
-spip_ajax.retour = "";
+			       if ($sa.req.callback){
+			    	   $sa.retour = x;
+			       	 eval($sa.req.callback);
+			       }
 
-// tableau contenant les parametres de l'url
-spip_ajax.getter = new Array();
+			       // on verifie que le code n'a rien renvoye
+			       // si c'est le cas on affiche le message
+			       if ($sa.req.verif_succes) {
+			       		x = $.trim(x);
+			       		x!=1 ?  alert('Votre action n\'a pas renvoy\351e \'true\'') : alert($sa.req.verif_succes) ;
+			       }
 
-// fonction qui recupere les parametres de l'url
-spip_ajax.set_get = function(){
-    param = window.location.search.slice(1,window.location.search.length);
-    first = param.split("&");
-    for(i=0;i<first.length;i++){
-        second = first[i].split("=");
-        val = second[0];
-        spip_ajax.getter[val] = second[1];
-    }
-}
+			   },
+			   error : function(e){
+			   	  alert("une erreur est survenu dans votre requete ajax - Spip Ajax");
+			   }
+
+		 	});
+		},
+		
+		in_array : function(array,val){
+			for(i = 0 ;  i < array.length ; i++) if(array[i] == val)return true;
+		    return false;
+		}
+
+		
+	
+};
+
+// creation d'un alias pour spip_ajax
+var $sa= spip_ajax;
 
 // recuperation des parametres de l'url
-spip_ajax.set_get();
+$sa.set_get();
 
-// recuperation d'un parametre particulier de l'url
-spip_ajax.get = function (nom){ 
-	return spip_ajax.getter[nom];
-}
-
-// fonction envoyant les requetes ajax
-// en cas de succes on peux realiser certaines actions
-spip_ajax.ajax = function (){
-	if (spip_ajax.hash_env!="") spip_ajax.req.hash_env = spip_ajax.hash_env;
-
-	$.ajax({
-	   type: "POST",
-	   url : "?exec=_spip_ajax",
-	   data: spip_ajax.req,
-	   success: function(x){
-	       if (spip_ajax.req.alert) alert(spip_ajax.req.alert + " \n" + x);
-
-	       if (spip_ajax.req.refresh) $(spip_ajax.req.refresh).html(x);
-
-	       if (spip_ajax.req.append) $(spip_ajax.req.append).append(x);
-
-
-	       if (spip_ajax.req.callback){
-	       	 spip_ajax.retour = x;
-	       	 eval(spip_ajax.req.callback);
-	       }
-
-	       // on verifie que le code n'a rien renvoye
-	       // si c'est le cas on affiche le message
-	       if (spip_ajax.req.verif_succes) {
-	       		x = $.trim(x);
-	       		x=='' ? alert(spip_ajax.req.verif_succes) : alert(x);
-	       }
-
-	   },
-	   error : function(){
-	   	  alert("probleme");
-	   }
-
- 	});
-}
-
-// On appelle la fonction pour recupere le hash
-spip_ajax.get_hash_env();
-
-
-/* Ensemble des fonctionnalites pour spip ajax Pro*/
-/* Pour les equivalences php voir le site http://kevin.vanzonneveld.net/techblog/article/javascript_equivalent_for_phps_in_array/ */
-/*  equivalent de la fonction php in_array*/
-spip_ajax.in_array = function(array,val){
-	for(i = 0 ;  i < array.length ; i++) if(array[i] == val)return true;
-    return false;
-}
-
+// et on appelle la fonction pour recupere le hash
+$sa.ajax({hash_env : "hash_env" , callback : 'spip_ajax.set_hash_env()'	});
 

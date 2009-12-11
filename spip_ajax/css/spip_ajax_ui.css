@@ -1,2 +1,3 @@
 body .ui-widget { font-size : 0.74em !important ;}
+#ui-datepicker-div {z-index: 9999}
 

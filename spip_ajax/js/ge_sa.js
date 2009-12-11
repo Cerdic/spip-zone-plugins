@@ -6,6 +6,7 @@ sa.liste["fonction"]= { sa : "php,inc,fct" , aa : "php,inc,fct,args_fct" };
 sa.liste["objet"]= { sa_sa : "php,inc,class,method" , sa_aa : "php,inc,class,method,args_method" ,
 	aa_sa : "php,inc,class,args_class,method" , aa_aa : "php,inc,class,args_class,method,args_method" };
 sa.liste["fond"]= { sa : "fond,recup_fond" , aa : "fond,recup_fond,args_fond"};
+sa.liste["datatype"]= { datatype : "datatype,dataType" };
 sa.liste["final"]= {append : "final,append" , refresh : "final,refresh" , callback : "final,callback"};
 
 
@@ -52,8 +53,8 @@ sa.generer = function (){
 	sa.l_args = new Array();
 	test = true;
 	
-	chaine = "spip_ajax.req = { ";
-	provi ="";
+	chaine = "spip_ajax.req = ";
+	provi ="{ ";
 	
 	/* Construction de la requete */
 	$("#champ input").each(function(x){
@@ -61,6 +62,7 @@ sa.generer = function (){
 		name = $(this).attr("name");
 		val = $(this).val();
 		
+
 		if (x==taille-2) sep ="";
 		
 		/* recuperation des args si necessaire */
@@ -69,14 +71,25 @@ sa.generer = function (){
 			for (i=0; i<a.length ; i++){
 				if(!spip_ajax.in_array(sa.l_args,a[i])) sa.l_args.push(a[i]);
 				if ($.trim(a[i])==""){
-					alert("Vous avez un arguments vide sur " + name);
+					alert("Vous avez un argument vide sur " + name);
 					test = false;
 				}
 			}
 		}
-		/* construction de la requete */
-		if (x!=taille-1 && $.trim(val)!="") provi += " " + name + " : '" + val + "' " + sep;
-	
+		
+
+		
+		/* construction de la requete si ce n'est ni une methode nio une class */
+		if (x!=taille-1 && $.trim(val)!="" && name != 'method' && name != 'class') provi += " " + name + " : '" + val + "' " + sep;
+		
+		/* recuperation de la methode d'une classe */ 
+		if (x!=taille-1 && $.trim(val)!="" && name == 'class') {
+			method = $("#champ input[name='method']").val();
+			val += ':'+ method;
+			console.log(method + " test");
+			provi += " " + name + " : '" + val + "' " + sep;
+		}
+			
 	})
 	/* on test qu'il n'y a pas d'erreur */
 	if(!test)return;
@@ -93,8 +106,11 @@ sa.generer = function (){
 		}
 	}
 	
+	provi +=' }';
+	
 	/* renvoie de la requete spip ajax*/
-	chaine += args + provi + " }; \nspip_ajax.ajax();";
+	chaine += args + provi + "; \nspip_ajax.ajax();\n\n";
+	chaine += 'Ou en version abrégée \n\n$sa.spip_ajax(' + provi +  ')';
 	$("#recup_sa").html(chaine);
 }
 
