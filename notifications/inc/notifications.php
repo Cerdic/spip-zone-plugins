@@ -74,9 +74,10 @@ function notifications_envoyer_mails($emails,$texte,$sujet=""){
 		$texte = str_replace("\r\n", "\r", $texte);
 		$texte = str_replace("\r", "\n", $texte);
 		// decouper
-		$sujet = explode("\n",trim($texte));
+		$texte = explode("\n",trim($texte));
 		// extraire la premiere ligne
-		$sujet = reset($sujet);
+		$sujet = array_shift($texte);
+		$texte = trim(implode("\n",$texte));
 	}
 
 	$envoyer_mail = charger_fonction('envoyer_mail','inc');
