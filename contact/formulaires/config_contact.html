@@ -53,7 +53,7 @@
 		<legend><:contact:infos_collecte:></legend>
 		<ul id="editer_champs" class="decaler baisser10">
 			<BOUCLE_champs(POUR){tableau #GET{champs}}>
-			<li class="choix editer_champ agrondir" title="<:contact:deplacement_possible:>" style="border:1px dashed #ddd;background-image: url([(#COMPTEUR_BOUCLE|image_typo{police=dustismo_bold.ttf,couleur=dddddd}|extraire_attribut{src})]); background-position: 97% 20%;background-repeat: no-repeat;">
+			<li class="choix editer_champ agrondir img#COMPTEUR_BOUCLE" title="<:contact:deplacement_possible:>">
 				[(#CLE|match{mail|sujet|texte}|oui)
 				<input type="text" name="champs[(#VAL{&#91;&#93;}|html_entity_decode)]" id="champ_#CLE" class="text" style="width:29px;" value="#CLE" readonly='readonly' />								
 				<input type="text" name="obligatoires[(#VAL{&#91;&#93;}|html_entity_decode)]" id="obli_#CLE" class="text" style="width:29px;" value="#CLE" readonly='readonly' />
