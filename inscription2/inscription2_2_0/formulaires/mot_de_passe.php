@@ -52,10 +52,11 @@ function formulaires_mot_de_passe_charger_dist($id_auteur=null){
  * @param int $id_auteur
  */
 function formulaires_mot_de_passe_verifier_dist($id_auteur=null){
+	$pass_min = !defined('_PASS_MIN')?6:_PASS_MIN;
 	$erreurs = array();
 	if (!_request('oubli'))
 		$erreurs['oubli'] = _T('info_obligatoire');
-	else if (strlen(_request('oubli')) < 6)
+	else if (strlen(_request('oubli')) < $pass_min)
 		$erreurs['oubli'] = _T('info_passe_trop_court');
 
 	return $erreurs;

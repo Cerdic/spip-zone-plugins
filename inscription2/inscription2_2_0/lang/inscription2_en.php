@@ -149,6 +149,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mobile' => 'Mobile',
 	'mobile_pro' => 'Work mobile',
 	'modif_pass_titre' => 'Change your password',
+	'moins_seconde' => 'less than one second',
 	'mot_passe_reste_identique' => 'Your password has not been changed.',
 
 	// N
@@ -249,6 +250,14 @@ If you did not ask for this registration or do not want to take part in the site
 	'titre_confirmation' => 'Confirmation',
 
 	// U
+	'une_seconde' => '1 second',
+	'secondes' => 'seconds',
+	'une_minute' => '1 minute',
+	'une_heure' => '1 hour',
+	'un_jour' => '1 day',
+	'un_mois' => '1 month',
+	'un_an' => '1 year',
+	'ans' => 'years',
 	'url_site' => 'Website url',
 	'url_societe' => 'Company website',
 

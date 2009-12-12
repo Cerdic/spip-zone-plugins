@@ -20,6 +20,7 @@ document.write("'><img src='#CHEMIN{images/picto_close.gif}' alt='<:pass_quitter
 	<input type="hidden" name="p" value="(#ENV{p})" />
 	<label for="change_pass"><:pass_choix_pass:> </label>
 	<input type="password" name="change_pass" id="change_pass" />
+	<span id="info" style="display:block">&nbsp;</span>
 	][
 	(#ENV{p}|?{'',' '})
 	<p><:inscription2:pass_indiquez_cidessous:></p>
@@ -34,6 +35,12 @@ document.write("'><img src='#CHEMIN{images/picto_close.gif}' alt='<:pass_quitter
 </form>
 ]
 </div>
+<script src="[(#URL_PAGE{jquery.pwdstr-1.0.js}|parametre_url{lang,#ENV{lang}})]" type='text/javascript'></script>
+<script type='text/javascript'><!--
+$(document).ready(function($){				
+$('#password').pwdstr('#info');
+});
+//--></script>
 [<script type="text/javascript"><!--
 (#ENV*{message}|?{'',' '})
 document.getElementById('change_pass').focus()

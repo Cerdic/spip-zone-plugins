@@ -170,6 +170,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mobile' => 'Mobile',
 	'mobile_pro' => 'Mobile professionnel',
 	'modif_pass_titre' => 'Modifier votre mot de passe',
+	'moins_seconde' => 'moins d\'une seconde',
 	'mot_passe_reste_identique' => 'Votre mot de passe n\'a pas &eacute;t&eacute; modifi&eacute;.',
 
 	// N
@@ -277,6 +278,14 @@ Si vous n\'avez pas demand&eacute; cette inscription ou si vous ne voulez plus f
 	'titre_confirmation' => 'Confirmation',
 
 	// U
+	'une_seconde' => 'une seconde',
+	'secondes' => 'secondes',
+	'une_minute' => 'une minute',
+	'une_heure' => 'une heure',
+	'un_jour' => 'un jour',
+	'un_mois' => 'un mois',
+	'un_an' => 'un an',
+	'ans' => 'ans',
 	'url_site' => 'Url du site',
 	'url_societe' => 'Site soci&eacute;t&eacute;',
 

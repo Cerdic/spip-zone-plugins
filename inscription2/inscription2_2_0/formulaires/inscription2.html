@@ -62,3 +62,11 @@
 ]
 ]
 </div>
+<script src="[(#URL_PAGE{jquery.pwdstr-1.0.js}|parametre_url{lang,#ENV{lang}})]" type='text/javascript'></script>
+<script type='text/javascript'>
+// <![CDATA[	
+$(document).ready(function($){				
+$('#password').pwdstr('#info');
+});	
+// ]]>
+</script>

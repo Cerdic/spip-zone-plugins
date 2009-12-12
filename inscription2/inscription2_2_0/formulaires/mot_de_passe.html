@@ -14,6 +14,7 @@
 				<label for="oubli"><:pass_choix_pass:></label>
 				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{oubli})</span>]
 				<input type='password' name='oubli' id='oubli' value="#ENV**{oubli}" />
+				<span id="info" style="display:block">&nbsp;</span>
 			</li>
 		</ul>
 	</fieldset>
@@ -27,5 +28,12 @@
 <script type='text/javascript'>/*<!#EVAL{chr(91)}CDATA#EVAL{chr(91)}*/
  document.getElementById('oubli').focus()
 /*#EVAL{chr(93)}[(#EVAL{chr(93)})]>*/</script>
+<script src="[(#URL_PAGE{jquery.pwdstr-1.0.js}|parametre_url{lang,#ENV{lang}})]" type='text/javascript'></script>
+<script type='text/javascript'>/*<!#EVAL{chr(91)}CDATA#EVAL{chr(91)}*/
+$(document).ready(function($){				
+$('#password').pwdstr('#info');
+});
+/*#EVAL{chr(93)}[(#EVAL{chr(93)})]>*/</script>
+]
 ]
 </div>

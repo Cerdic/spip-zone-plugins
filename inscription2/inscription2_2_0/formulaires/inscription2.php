@@ -167,7 +167,8 @@ function formulaires_inscription2_verifier_dist($id_auteur = null,$redirect = nu
 		}
 		if($p){
 			if(strlen($p)){
-				if (strlen($p) < 6) {
+				$pass_min = !defined('_PASS_MIN') ? 6 : _PASS_MIN; 
+				if (strlen($p) < $pass_min) {
 					$erreurs['pass'] = _T('info_passe_trop_court');
 					$erreurs['message_erreur'] .= _T('info_passe_trop_court')."<br />";
 				} elseif ($p != _request('password1')) {

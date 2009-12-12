@@ -1,5 +1,8 @@
 <?php
 
+// Minima requis pour le champs password, penser a gerer le passé
+//define('_PASS_MIN','8');
+
 include_spip('base/abstract_sql');
 
 /**
