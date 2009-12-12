@@ -48,6 +48,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'form_pj_previsu_singulier' => 'Pi&egrave;ce jointe',
 	'form_pj_supprimer' => 'Supprimer',
 	'form_pj_titre' => 'Titre du fichier',
+	'forum_attention_nbre_caracteres' => '<b>Attention&nbsp;!</b> votre message doit contenir au moins @nbre_caract@ caract&egrave;res.',
 	
 	'horodatage' => 'Formulaire posté le : @horodatage@.',
 	'infos_collecte' => 'Informations collect&eacute;es',

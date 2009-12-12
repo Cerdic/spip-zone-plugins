@@ -97,8 +97,9 @@ function formulaires_contact_verifier_dist($id_auteur=''){
 	if(!(strlen(_request('sujet'))>3))
 		$erreurs['sujet'] = _T('forum_attention_trois_caracteres');
 
-	if(!(strlen(_request('texte'))>10))
-		$erreurs['texte'] = _T('forum_attention_dix_caracteres');
+	$texte_min = !defined('_TEXTE_MIN')?10:_TEXTE_MIN;
+	if(!(strlen(_request('texte'))>$texte_min))
+		$erreurs['texte'] = _T('contact:forum_attention_nbre_caracteres',array('nbre_caract'=>$texte_min));
 	
 	if ($nobot=_request('nobot'))
 		$erreurs['nobot'] = 'Vous êtes un robot. Méchant robot.';

@@ -48,6 +48,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'form_pj_previsu_singulier' => 'Attachment',
 	'form_pj_supprimer' => 'Entfernen',
 	'form_pj_titre' => 'File-Titel',
+	'forum_attention_nbre_caracteres' => '<b>Achtung!</b> Ihr Beitrag ist muss mindestens @nbre_caract@ Zeichen lang sein.',
 	
 	'horodatage' => 'Formular erstellt am: @horodatage@.',
 	'infos_collecte' => 'Informationen gesammelt',

@@ -47,6 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'form_pj_previsu_singulier' => 'Attachement',
 	'form_pj_supprimer' => 'Delete',
 	'form_pj_titre' => 'File title',
+	'forum_attention_nbre_caracteres' => '<b>Warning!</b> Your message needs to be at least @nbre_caract@ characters in length.',
 	
 	'horodatage' => 'Form posted on: @horodatage@.',
 	'infos_collecte' => 'Information collected',

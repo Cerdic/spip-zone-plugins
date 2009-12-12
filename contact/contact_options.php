@@ -2,6 +2,9 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// Minima requis pour le champs texte; a definir dans un mes_options
+//define('_TEXTE_MIN','3');
+
 $GLOBALS['spip_pipeline']['contact_infos_supplementaires'] = '';
 function contact_infos_supplementaires(){
 	$champs = array(

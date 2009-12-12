@@ -48,6 +48,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'form_pj_previsu_singulier' => 'Documento adjunto',
 	'form_pj_supprimer' => 'Suprimir',
 	'form_pj_titre' => 'Titulo del fichero',
+	'forum_attention_nbre_caracteres' => '<b>&iexcl;Atenci&oacute;n!</b> tu mensaje debe tener al menos @nbre_caract@ caracteres.',
 	
 	'horodatage' => 'Impreso echado el: @horodatage@.',
 	'infos_collecte' => 'Informaciones colectadas',
