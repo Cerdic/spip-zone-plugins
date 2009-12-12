@@ -45,4 +45,30 @@ function vu_libelle_association_mots($flux){
 	return $flux;
 }
 
+// Pipeline. Pour permettre la recherche dans les nouveaux objets
+function vu_rechercher_liste_des_champs($tables){
+	// Prendre en compte les champs des annonces
+	$tables['vu_annonce']['titre'] = 3;
+	$tables['vu_annonce']['annonceur'] = 3;
+	$tables['vu_annonce']['type'] = 3;
+	$tables['vu_annonce']['descriptif'] = 3;
+	$tables['vu_annonce']['source_nom'] = 3;
+	// Prendre en compte les champs des evenements
+	$tables['vu_evenement']['titre'] = 3;
+	$tables['vu_evenement']['organisateur'] = 3;
+	$tables['vu_evenement']['lieu_evenement'] = 3;
+	$tables['vu_evenement']['type'] = 3;
+	$tables['vu_evenement']['descriptif'] = 3;
+	$tables['vu_evenement']['source_nom'] = 3;
+	// Prendre en compte les champs des publications
+	$tables['vu_publication']['titre'] = 3;
+	$tables['vu_publication']['auteur'] = 3;
+	$tables['vu_publication']['editeur'] = 3;
+	$tables['vu_publication']['type'] = 3;
+	$tables['vu_publication']['descriptif'] = 3;
+	$tables['vu_publication']['source_nom'] = 3;
+
+	return $tables;
+}
+
 ?>

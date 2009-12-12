@@ -40,12 +40,6 @@ function vu_declarer_tables_principales($tables_principales){
 	        "id_annonce" => "id_annonce"
 	);
 
-	$tables_principales['spip_vu_annonces'] = array(
-		'field' => &$annonces,
-		'key' => &$annonces_key,
-		'join' => &$annonces_join
-	);
-
 	// Table 'spip_vu_evenements'
 	$evenements = array(		// quels sont les differents champs de la tables
         	"id_evenement" => "bigint(21) NOT NULL auto_increment",
@@ -98,6 +92,11 @@ function vu_declarer_tables_principales($tables_principales){
 
 	// Table des tables
 
+	$tables_principales['spip_vu_annonces'] = array(
+		'field' => &$annonces,
+		'key' => &$annonces_key,
+		'join' => &$annonces_join
+	);
 	
 	$tables_principales['spip_vu_evenements'] = array(
 		'field' => &$evenements,
@@ -163,36 +162,37 @@ function vu_declarer_tables_auxiliaires($tables_auxiliaires){
 // ---------- 3/3 - Declatation des interfaces, modalites d'utilisation des tables
 
 function vu_declarer_tables_interfaces($interface){
-	
+
 	// Definir le nom des nouvelles boucles
 		// La table ['vu_*'] aura en fait pour nom 'vu_*'
 		$interface['table_des_tables']['vu_annonces']= 'vu_annonces';
 		$interface['table_des_tables']['vu_evenements'] = 'vu_evenements';
 		$interface['table_des_tables']['vu_publications'] = 'vu_publications';
 
-	// Definir les jointures possibles
-		// de tables vu_* vers vu_*_mots : sur le champ id_*
-		$interface['tables_jointures']['spip_vu_annonces']['id_annonce'] = 'vu_annonces_mots';
-        	$interface['tables_jointures']['spip_vu_evenements']['id_evenement'] = 'vu_evenements_mots';
-        	$interface['tables_jointures']['spip_vu_publications']['id_publication'] = 'vu_publications_mots';
+		// de tables vu_* vers mots_vu_* : sur le champ id_*
+		$interface['tables_jointures']['spip_vu_annonces']['id_annonce'] = 'mots_vu_annonces';
+        	$interface['tables_jointures']['spip_vu_evenements']['id_evenement'] = 'mots_vu_evenements';
+        	$interface['tables_jointures']['spip_vu_publications']['id_publication'] = 'mots_vu_publications';
 
-		// de tables vu_*_mots vers vu_* : sur le champ id_*
-	        $interface['tables_jointures']['spip_vu_annonces_mots']['id_annonce'] = 'vu_annonces';
-	        $interface['tables_jointures']['spip_vu_evenements_mots']['id_evenement'] = 'vu_evenements';
-	        $interface['tables_jointures']['spip_vu_publications_mots']['id_publication'] = 'vu_publications';
+		// de tables mots_vu_* vers vu_* : sur le champ id_*
+	        $interface['tables_jointures']['spip_mots_vu_annonces']['id_annonce'] = 'vu_annonces';
+	        $interface['tables_jointures']['spip_mots_vu_evenements']['id_evenement'] = 'vu_evenements';
+	        $interface['tables_jointures']['spip_mots_vu_publications']['id_publication'] = 'vu_publications';
 
-		// de spip_mots vers vu_*_mots : sur le champ id_mot
+		// de spip_mots vers mots_vu_* : sur le champ id_mot
 	        $interface['tables_jointures']['spip_mots']['id_mot'] = 'spip_mots_vu_annonces';
-	        $interface['tables_jointures']['spip_mots']['id_mot'] = 'spip_vu_evenements_mots';
-	        $interface['tables_jointures']['spip_mots']['id_mot'] = 'spip_vu_publications_mots';
+	        $interface['tables_jointures']['spip_mots']['id_mot'] = 'spip_mots_vu_evenements';
+	        $interface['tables_jointures']['spip_mots']['id_mot'] = 'spip_mots_vu_publications';
 
 		// de vu_*_mots vers spip_mots : sur le champ id_mot
 		$interface['tables_jointures']['spip_mots_vu_annonces']['id_mot'] = 'spip_mots';
-		$interface['tables_jointures']['spip_vu_evenements_mots']['id_mot'] = 'spip_mots';
-		$interface['tables_jointures']['spip_vu_publications_mots']['id_mot'] = 'spip_mots';
+		$interface['tables_jointures']['spip_mots_vu_evenements']['id_mot'] = 'spip_mots';
+		$interface['tables_jointures']['spip_mots_vu_publications']['id_mot'] = 'spip_mots';
 
         // Titre pour url
         $interface['table_titre']['spip_vu_annonces'] = "titre, '' AS lang";
+        $interface['table_titre']['spip_vu_evenements'] = "titre, '' AS lang";
+        $interface['table_titre']['spip_vu_publications'] = "titre, '' AS lang";
 
 	// On definit les traitements par défaut sur les champs qui le necessitent
 	//$interface['table_des_traitements']['MON_CHAMPS'][]= 'ma_fonction(%s)';
@@ -204,7 +204,7 @@ function vu_declarer_tables_interfaces($interface){
 		$interface['table_date']['spip_vu_evenement'] = 'date_evenement';
 		$interface['table_date']['spip_vu_evenement'] = 'date';
 
-		$interface['table_date']['spip_vu_evenement'] = 'date_publication';
+		$interface['table_date']['spip_vu_publications'] = 'date_publication';
 		$interface['table_date']['spip_vu_publications'] = 'date';
 
        return $interface;

@@ -52,6 +52,13 @@
   	      <inclure>base/vu_base.php</inclure>
 	</pipeline> 
 	
+	<!-- Pipeline : declarer a SPIP les surnoms -->
+	<pipeline>
+  	      <nom>rechercher_liste_des_champs</nom>
+  	      <inclure>base/vu_base.php</inclure>
+	</pipeline> 
+
+
 	<pipeline>
                 <nom>insert_head</nom>
                 <inclure>vu_pipelines.php</inclure>
