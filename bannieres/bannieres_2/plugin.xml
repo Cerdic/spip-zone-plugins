@@ -3,7 +3,7 @@
 	<auteur>
 		Jeannot, inspir&eacute; de Fran&ccedil;ois de Montlivault et Matthieu Marcillaud
 	</auteur>
-	<version>0.21</version>
+	<version>0.22</version>
 	<version_base>0.21</version_base>
 
     <licence>&#169; 2009 GNU/GPL</licence>
@@ -52,5 +52,5 @@
 	<!-- filtre |icone et boucles CONDITIONS -->
 	<necessite id="spip_bonux" version="[1.8.4;]" />
 	<!-- Pour la geolocalisation -->
-	<necessite id="geographie" version="[0.2;]" />
+	<!--<necessite id="geographie" version="[0.2;]" />-->
 </plugin>

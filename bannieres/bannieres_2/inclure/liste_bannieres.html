@@ -43,6 +43,7 @@
 				<:bannieres:label_position:>
 			</a>
 		</th>
+	[(#PLUGIN{geographie}|oui)
 		<th class="[(#ENV{ordre}|=={rayon}|?{[on (#GET{class_desc})],'both'})]">
 			<a href="[(#SELF|parametre_url{'ordre','rayon'}|parametre_url{'desc',#GET{desc}})]">
 				<:bannieres:label_rayon:>
@@ -53,6 +54,7 @@
 				<:bannieres:label_diffusion:>
 			</a>
 		</th>
+	]
 		<th>
 			  <:bannieres:label_actions:>
 		</th>
@@ -95,6 +97,7 @@
 		<td>#DEBUT</td>
 		<td>#FIN</td>
 		<td>#POSITION</td>
+	[(#PLUGIN{geographie}|oui)
 		<td>#RAYON</td>
 		<td>
 		[(#RAYON|=={pays}|oui)
@@ -110,6 +113,7 @@
 			#DIFFUSION
 		]
 		</td>
+	]
 		<td>
 			[(#AUTORISER{voir,banniere,#ID_BANNIERE})
 				<a href='[(#URL_ECRIRE{banniere_voir}|parametre_url{id_banniere,#ID_BANNIERE})]'>

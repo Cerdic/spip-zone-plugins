@@ -62,6 +62,7 @@
 				9,9}
 			})]
 
+		[(#PLUGIN{geographie}|oui)
 		[(#SAISIE{selection, rayon,
 			label=<:bannieres:label_rayon:>,
 			defaut=1,
@@ -74,7 +75,12 @@
 				departement,<:bannieres:action_ajouter_departement:>,
 				local,<:bannieres:action_ajouter_local:>}
 			})]
-
+		]
+		
+		[(#PLUGIN{geographie}|non)
+		<input type='hidden' name='rayon' value='int' />
+		]
+		
 		[(#ENV{rayon}| == {'pays'}|oui)
 			<INCLURE{fond=formulaires/liste_pays}{env}>
 		]

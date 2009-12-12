@@ -20,8 +20,9 @@ function balise_BANNIERE_dyn($position='1',$contexte='',$pays='') {
 if(!is_numeric($contexte)) {
 	$contexte='';
 }
+if (defined('_DIR_PLUGIN_GEOGRAPHIE')) $geo = 'oui';
 
-if ($pays=='70' and $contexte !=''){
+if ($geo=='oui' and $pays=='70' and $contexte !=''){
 
 	// On est en 'France'
 
@@ -113,7 +114,7 @@ return afficher_banniere($id_objet , $id , $alt);
 function chercher_banniere($position='', $rayon ='', $diffusion ='') {
 
 	// Champs à récupérer
-	$champs = array('id_banniere', 'alt');
+	// $champs = array('id_banniere', 'alt');
 	
 	
 	// dans le cas du local il peut y avoir plusieurs codes postaux séparés par des virgules
@@ -134,7 +135,8 @@ function chercher_banniere($position='', $rayon ='', $diffusion ='') {
 	);
 	
 	// On récupère les données dans la base 
-	$data=sql_fetsel($champs, "spip_bannieres", $where,'','RAND()', $limit = '1');
+	// $data=sql_fetsel($champs, "spip_bannieres", $where,'','RAND()', $limit = '1');
+	$data=sql_fetsel("*", "spip_bannieres", $where,'','RAND()', $limit = '1');
 
 return $data;
 
