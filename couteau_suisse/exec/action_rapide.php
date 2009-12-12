@@ -42,16 +42,17 @@ cs_log(" -- Preparation de l'affichage de la description de l'outil");
 cs_log(" FIN : exec_action_rapide_dist() - Appel maintenant de ajax_retour() pour afficher le formulaire de '$outil'");	
 			ajax_retour($res);
 			break;
-	
+
 		// pour le reste (ex : 'sauve_pack' en mode non ajax), rien a faire.
 		case 'retour_nul':
 cs_log("FIN : exec_action_rapide_dist() - Retour nul");
 			break;
+
 		default:
 			// fonction mon_outil_argument_exec() suite a l'appel de ?exec=action_rapide&arg=mon_outil|argument
 cs_log("FIN : exec_action_rapide_dist() - Appel de {$outil}_{$arg}_exec()");
 			include_spip('outils/'.$outil.'_action_rapide');
-			if(function_exists($fct = $outil.'_'.$arg.'_exec')) { $fct(); return; }
+			if(function_exists($fct = $outil.'_'.$arg.'_exec')) $fct();
 			break;
 	}
 }

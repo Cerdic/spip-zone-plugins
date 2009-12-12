@@ -57,8 +57,10 @@ if (window.jQuery) jQuery(function(){
 			.attribut_html(_T('couteauprive:pack_sauver')) . "\" /></div></div>"); 
 }
 
+// fonction {$outil}_{$arg}_action() appelee par action/action_rapide.php
 // clic "Sauver la configuration actuelle"
-function action_rapide_sauve_pack() {
+function pack_sauve_pack_action() {
+	// pour inserer un pack de config dans config/mes_options.php
 	$titre0 = $titre = _T('couteauprive:pack_actuel', array('date'=>cs_date())); $n=0;
 	if(isset($GLOBALS['cs_installer'][$titre]))
 		while(isset($GLOBALS['cs_installer']["$titre (".++$n.')']));

@@ -136,4 +136,11 @@ function plugin_get_infos_maj($p, $force = false) {
 	return $infos;
 }
 
+// fonction {$outil}_{$arg}_action() appelee par action/action_rapide.php
+function maj_auto_maj_auto_forcer_action() {
+	// forcer la lecture des revisions distantes de plugins
+	ecrire_meta('tweaks_maj_auto', serialize(array()));
+	ecrire_metas();
+}
+
 ?>

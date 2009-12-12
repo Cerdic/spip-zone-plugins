@@ -14,7 +14,7 @@ function corbeille_action_rapide() {
 		$objets[] = "<label><input type='checkbox' value='$table:$ids'".($nb?" checked='checked'":"")." name='$table'/>"._T($obj[libelle]).".
 <span class='ar_edit_info'>$infos</span></label>";
 	}
-	return ajax_action_auteur('action_rapide', 'corbeille', 'admin_couteau_suisse', "arg=corbeille|description_outil&cmd=descrip#cs_action_rapide",
+	return ajax_action_auteur('action_rapide', 'purge_corbeille', 'admin_couteau_suisse', "arg=corbeille|description_outil&cmd=descrip#cs_action_rapide",
 			"\n<div style='padding:0.4em;'><fieldset><legend>"._T('couteauprive:corbeille_vider').'</legend>'
 			. join("<br/>\n",$objets) . "<div style='text-align: right;'><input class='fondo' type='submit' value=\""
 			. attribut_html(_T('couteauprive:corbeille_objets_vider'))
@@ -112,7 +112,9 @@ function cs_corbeille_gerer($table, $ids=array(), $vider=false) {
 	return array($nb, $vider?'-1':$nb_lies, $ids);
 }
 
-function action_rapide_purge_corbeille() {
+// fonction {$outil}_{$arg}_action() appelee par action/action_rapide.php
+function corbeille_purge_corbeille_action() {
+	// purger la corbeille
 	foreach(cs_corbeille_table_infos() as $table=>$objet)	
 		if(preg_match(',^(.*?):(.*)$,', _request($table), $regs)) {
 			$ids = explode(',', $regs[2]);
@@ -120,5 +122,4 @@ function action_rapide_purge_corbeille() {
 			cs_corbeille_gerer($regs[1], $ids, true);
 		}
 }
-
 ?>

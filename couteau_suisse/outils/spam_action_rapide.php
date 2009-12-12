@@ -20,4 +20,11 @@ function spam_action_rapide() {
 	return ajax_action_auteur('action_rapide', 'test_spam', 'admin_couteau_suisse', "arg=spam|description_outil&modif=oui&cmd=descrip#cs_action_rapide", $fd)."\n";
 }
 
+// fonction {$outil}_{$arg}_action() appelee par action/action_rapide.php
+function spam_test_spam_action() {
+	// tester l'anti-spam
+	// aucune action, le test est pris en charge par ?exec=action_rapide
+	redirige_par_entete(parametre_url(urldecode(_request('redirect')), 'ar_message', _request('ar_message'), '&'));
+}
+
 ?>

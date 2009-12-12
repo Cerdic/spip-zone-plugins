@@ -55,7 +55,7 @@ function type_urls_URL_objet_exec() {
 	echo $url2.'||'.charset2unicode($row[trim($champ_titre)]).'||'.$url.'||'.$type_urls.'||'.$row2['url'];
 }
 
-// Fonction appelee par exec/action_rapide : ?exec=action_rapide&arg=type_urls|URL_objet_191 (pipe obligatoire)
+// Fonction {$outil}_{$arg}_exec() appelee par exec/action_rapide : ?exec=action_rapide&arg=type_urls|URL_objet_191 (pipe obligatoire)
 // Renvoie les caracteristiques URLs d'un objet (cas SPIP < 2.0)
 function type_urls_URL_objet_191_exec() {
 	$type = _request('type_objet');
@@ -77,6 +77,55 @@ function type_urls_URL_objet_191_exec() {
 	echo _request('format')=='iframe'
 		?"<span style='font-family:Verdana,Arial,Sans,sans-serif; font-size:10px;'>[<a href='../$url' title='$url' target='_blank'>"._T('couteau:urls_propres_lien').'</a>]</span>'
 		:$url_1.'||'.charset2unicode($titre).'||'.$url.'||'.$type_urls.'||'.$url_2;
+}
+
+// fonction {$outil}_{$arg}_action() appelee par action/action_rapide.php
+function type_urls_edit_urls_0_action() {
+	// forms[0] : tout purger (cas SPIP < 2.0)
+	foreach(array('articles', 'rubriques', 'breves', 'auteurs', 'mots', 'syndic') as $t)
+		if($table=_request("purger_$t")) spip_query("UPDATE spip_$table SET url_propre = ''");
+	spip_log("OK purge");
+}
+// fonction {$outil}_{$arg}_action() appelee par action/action_rapide.php
+function type_urls_edit_urls2_0_action() {
+	// forms[0] : tout purger (cas SPIP >= 2.0)
+	sql_delete ('spip_urls');
+	spip_log("OK purge");
+}
+// fonction {$outil}_{$arg}_action() appelee par action/action_rapide.php
+function type_urls_edit_urls_1_action() {
+	// forms[1] : editer un objet (cas SPIP < 2.0)
+	$type = _request('ar_type_objet');
+	$table = $type.($type=='syndic'?'':'s');
+	$id = intval(_request('ar_num_objet'));
+	$url = trim(_request('ar_url_objet'));
+	$q = "UPDATE spip_$table SET url_propre="._q($url)." WHERE id_$type=$id";
+	spip_query($q);
+	redirige_par_entete(parametre_url(parametre_url(urldecode(_request('redirect')),
+		'ar_num_objet', _request('ar_num_objet'), '&'), 'ar_type_objet', _request('ar_type_objet'), '&'));
+}
+// fonction {$outil}_{$arg}_action() appelee par action/action_rapide.php
+function type_urls_edit_urls2_1_action() {
+	// forms[1] : editer un objet (cas SPIP >= 2.0)
+	$type = _request('ar_type_objet');
+	$id = intval(_request('ar_num_objet'));
+	$url = trim(_request('ar_url_objet'));
+	$where = 'id_objet='.$id.' AND type='.sql_quote($type);
+	if(!$url) {
+		sql_delete('spip_urls', $where);
+		spip_log("L'URL $type#$id est supprimee");
+	} else {
+		$row = sql_fetsel("id_objet", "spip_urls", $where);
+		if($row) {
+			sql_updateq('spip_urls', array('date'=>date('Y-m-d H:i:s'), 'url'=>$url), $where);
+			spip_log("L'URL $type#$id est remplacee par : $url");
+		} else {
+			sql_insertq('spip_urls', array('date'=>date('Y-m-d H:i:s'), 'url'=>$url, 'id_objet'=>$id, 'type'=>$type));
+			spip_log("L'URL $type#$id a ete cree : $url");
+		}
+	}
+	redirige_par_entete(parametre_url(parametre_url(urldecode(_request('redirect')),
+		'ar_num_objet', _request('ar_num_objet'), '&'), 'ar_type_objet', _request('ar_type_objet'), '&'));
 }
 
 ?>
