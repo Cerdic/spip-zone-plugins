@@ -12,7 +12,7 @@ function exec_jeux_voir(){
 
 	$requete =    sql_fetsel('statut,contenu,id_jeu,type_jeu,titre_prive,date,type_resultat', 'spip_jeux', "id_jeu=$id_jeu");
 	list($statut, $contenu, $id_jeu, $type_jeu, $titre_prive, $date, $type_resultat) =
-		array($requete['statut'],$requete['contenu'], $requete['id_jeu'], $requete['type_jeu'], $requete['titre_prive'], $requete['date'], $requete['type_resultat']);
+		array($requete['statut'], $requete['contenu'], $requete['id_jeu'], $requete['type_jeu'], $requete['titre_prive'], $requete['date'], $requete['type_resultat']);
     
 	$configuration_interne = jeux_trouver_configuration_interne($contenu);
 	$titre_public = jeux_trouver_titre_public($contenu);

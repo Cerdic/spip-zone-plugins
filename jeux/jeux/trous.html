@@ -8,6 +8,8 @@
 		texte (pret a l'emploi)
 		indices (bloc div)
 		fond_score (resultat de 'fonds/jeu_score.html')
+		
+		bizarre : #SELF ne prend pas en compte id_jeu en backoffice... d'ou : #REM|nettoyer_uri
 
 ]<div class="jeux_cadre jeux_trous">
 	@@FORM_JEUX_DEBUT@@
@@ -15,6 +17,8 @@
 	#ENV*{texte}
 	[(#REM|sinon{'jeux:indices'}|_T|jeux_block_depliable{#ENV*{indices}})]
 	[(#ENV**{correction}|?{'',' '})<div style="text-align:center;"><input type="submit" value="<:jeux:corriger:>" class="jeux_bouton"></div>]
-	[(#ENV**{correction}|?{' ',''})#ENV*{fond_score}<div class="jeux_bouton_reset">&#091; <a href="[(#SELF|parametre_url{var_mode,calcul})]"><:jeux:recommencer:></a> &#093;</div>]
+	[(#ENV**{correction}|?{' ',''})
+		#ENV*{fond_score}<div class="jeux_bouton_reset">&#091; <a href="[(#REM|nettoyer_uri|parametre_url{var_mode,calcul})]"><:jeux:recommencer:></a> &#093;</div>
+	]
 	@@FORM_JEUX_FIN@@
 </div>

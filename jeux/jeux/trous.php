@@ -167,11 +167,11 @@ function jeux_trous($texte, $indexJeux) {
 	// recuperation du fond 'jeux/trous.html'
 	include_spip('public/assembler');
 	$fond = recuperer_fond('jeux/trous', 
-		array('id_jeu' => $_POST['id_jeu'], 'titre' => $titre,
+		array('id_jeu' => _request('id_jeu'), 'titre' => $titre,
 			'texte' => $texte, 'correction' => $correction,
 			'indices' => jeux_config('indices')?trous_afficher_indices($indexJeux):'',
 			'fond_score' => !$correction?''
-				:jeux_afficher_score($scoreTROUS, $indexTrou, $_POST['id_jeu'], join(', ', $score_detailTROUS), $categ_score),
+				:jeux_afficher_score($scoreTROUS, $indexTrou, _request('id_jeu'), join(', ', $score_detailTROUS), $categ_score),
 		)
 	);
 	// mise en place du formulaire

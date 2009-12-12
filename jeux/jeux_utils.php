@@ -98,6 +98,8 @@ function jeux_minuscules($texte) {
 	return init_mb_string()?mb_strtolower($texte,$GLOBALS['meta']['charset']):strtolower($texte);
 }
 function jeux_in_liste($texte, $liste=array()) {
+	// eviter un pb d'apostrophe par exemple
+	$texte = filtrer_entites(corriger_typo($texte));
 	$texte_m = jeux_minuscules($texte);
 	foreach($liste as $expr) {
 		// interpretation des expressions regulieres grace aux virgules : ,un +mot,i
@@ -144,13 +146,14 @@ function jeux_commentaire_score($categ, $score, $total) {
 }
 
 // fonctions qui retournent des boutons
-function jeux_bouton_reinitialiser() {
+function jeux_bouton_reinitialiser($item='jeux:reinitialiser') {
+	$self = self(); // nettoyer_uri();
+	if($id_jeu = _request('id_jeu')) $self = parametre_url($self, 'id_jeu', $id_jeu);
 	return '<div class="jeux_bouton_reset">&#091; <a href="'
-	 . parametre_url(self(),'var_mode','recalcul').'">'._T('jeux:reinitialiser').'</a> &#093;</div>';
+	 . parametre_url($self, 'var_mode', 'recalcul').'">' . _T($item) . '</a> &#093;</div>';
 }
 function jeux_bouton_recommencer() {
-	return '<div class="jeux_bouton_reset">&#091; <a href="'
-	 . parametre_url(self(),'var_mode','recalcul').'">'._T('jeux:recommencer').'</a> &#093;</div>';
+	return jeux_bouton_reinitialiser('jeux:recommencer');
 }
 
 // ajoute un module jeu a la bibliotheque
