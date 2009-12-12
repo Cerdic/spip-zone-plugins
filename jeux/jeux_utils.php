@@ -147,8 +147,7 @@ function jeux_commentaire_score($categ, $score, $total) {
 
 // fonctions qui retournent des boutons
 function jeux_bouton_reinitialiser($item='jeux:reinitialiser') {
-	$self = self(); // nettoyer_uri();
-	if($id_jeu = _request('id_jeu')) $self = parametre_url($self, 'id_jeu', $id_jeu);
+	$self = nettoyer_uri(); // self(); 
 	return '<div class="jeux_bouton_reset">&#091; <a href="'
 	 . parametre_url($self, 'var_mode', 'recalcul').'">' . _T($item) . '</a> &#093;</div>';
 }
