@@ -101,13 +101,18 @@ if ($geo=='oui' and $pays=='70' and $contexte !=''){
 	
 }
 
+if ($data) {
+	// on recupere les données trouvées pour afficher la bonne bannière
+	$id_objet		= 'id_banniere';
+	$id				= $data['id_banniere'];
+	$alt			= $data['alt'];
+	
+	return afficher_banniere($id_objet , $id , $alt);
 
-// on recupere les données trouvées pour afficher la bonne bannière
-$id_objet		= 'id_banniere';
-$id				= $data['id_banniere'];
-$alt			= $data['alt'];
+} else {
+	return;
+}
 
-return afficher_banniere($id_objet , $id , $alt);
 }
 	
 // chercher la bonne banniere
