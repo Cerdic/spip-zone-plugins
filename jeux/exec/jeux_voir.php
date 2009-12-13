@@ -13,7 +13,8 @@ function exec_jeux_voir(){
 	$requete =    sql_fetsel('statut,contenu,id_jeu,type_jeu,titre_prive,date,type_resultat', 'spip_jeux', "id_jeu=$id_jeu");
 	list($statut, $contenu, $id_jeu, $type_jeu, $titre_prive, $date, $type_resultat) =
 		array($requete['statut'], $requete['contenu'], $requete['id_jeu'], $requete['type_jeu'], $requete['titre_prive'], $requete['date'], $requete['type_resultat']);
-    
+	$modules_jeux = jeux_liste_des_jeux($contenu);
+	$configuration_defaut = jeux_configuration_generale($modules_jeux);
 	$configuration_interne = jeux_trouver_configuration_interne($contenu);
 	$titre_public = jeux_trouver_titre_public($contenu);
 	if($titre_prive=='') $titre_prive = _T('jeux:sans_titre_prive');
@@ -32,7 +33,7 @@ function exec_jeux_voir(){
 		return;
 	}
 	
-	echo $commencer_page(_T("jeux:jeu_numero",array('id'=>$id_jeu,'nom'=>$type_jeu)));
+	echo $commencer_page(_T("jeux:jeu_numero", array('id'=>$id_jeu,'nom'=>$type_jeu)));
 			
 	echo debut_gauche('',true);
 	echo boite_infos_jeu($id_jeu);
@@ -65,8 +66,11 @@ function exec_jeux_voir(){
 		echo '<option value="refuse"'.($statut=='refuse'?' selected="selected"':'').'>'._T('texte_statut_refuse').'</option>';
 		echo "</select>&nbsp;<input type='submit' name='valider' value='"._T('bouton_valider')."' class='fondo' /></li></ul>\n";
 		echo "</form>";
-		echo "<span class='titrem'>"._T('jeux:type_resultat')
+		echo "<span class='titrem'>"._T('jeux:cfg_type_resultat')
 			."</span><ul><li>"._T("jeux:resultat2_$type_resultat")."</li></ul>";
+		if(count($configuration_defaut))
+			echo "<span class='titrem'>"._T('jeux:configuration_defaut')
+				."</span><ul><li>".join('</li><li>', $configuration_defaut)."</li></ul>";
 		if(count($configuration_interne))
 			echo "<span class='titrem'>"._T('jeux:configuration_interne')
 				."</span><ul><li>".join('</li><li>', $configuration_interne)."</li></ul>";

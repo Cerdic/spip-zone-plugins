@@ -187,21 +187,23 @@ function affichage_definitions($horizontal, $vertical) {
 		._T('motscroises:verticalement')."</h4>\n".jeux_listes($vertical).'</div>';
 }
 
-
-// decode une grille de mots croises 
-function jeux_mots_croises($texte, $indexJeux) {
-	$horizontal = $vertical = $solution = $html = false;
-	$titre = _T('motscroises:titre');
-	
-    // parcourir tous les #SEPARATEURS
-	$tableau = jeux_split_texte('mots_croises', $texte);
-	// configuration par defaut
-	jeux_config_init("
+// configuration par defaut : jeu_{mon_jeu}_init()
+function jeux_mots_croises_init() {
+	return "
 		solution=oui	// Afficher la solution ?
 		fondnoir=noir	// couleur des cases noires
 		compact=non		// Definitions en format compact ?
 		type=0			// types de grilles : 0 ou 1
-	", false);
+	";
+}
+	
+// decode une grille de mots croises 
+// traitement du jeu : jeu_{mon_jeu}()
+function jeux_mots_croises($texte, $indexJeux) {
+	$horizontal = $vertical = $solution = $html = false;
+	$titre = _T('motscroises:titre');
+    // parcourir tous les #SEPARATEURS
+	$tableau = jeux_split_texte('mots_croises', $texte);
 	foreach($tableau as $i => $valeur) if ($i & 1) {
 	 if ($valeur==_JEUX_TITRE) $titre = $tableau[$i+1];
 	  elseif ($valeur==_JEUX_HORIZONTAL) $horizontal = $tableau[$i+1];

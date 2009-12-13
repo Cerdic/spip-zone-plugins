@@ -212,7 +212,6 @@ function jeux_diag_echecs($texte, $indexJeux) {
 	
 	// decodage du texte
 	$tableau = jeux_split_texte('diag_echecs', $texte);
-	diag_echecs_config_default();
 	diag_echecs_config_supplementaire();
 	foreach($tableau as $i => $valeur) if ($i & 1) {
 	 if ($valeur==_JEUX_TITRE) $html .= "<p class=\"jeux_titre diag_echecs_titre\">{$tableau[$i+1]}</p>";

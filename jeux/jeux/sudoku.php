@@ -176,16 +176,19 @@ function calcul_erreurs_sudoku($tableau_sudoku, $solution, $indexJeux) {
 	}
 }
 
+// configuration par defaut : jeu_{mon_jeu}_init()
+function jeux_sudoku_init() {
+	return "
+		solution=oui	// Afficher la solution ?
+		regle=non	// Afficher la regle ?
+	";
+}
+
 // decode une grille de sudoku 
 function jeux_sudoku($texte, $indexJeux) { 
 	$sudoku = $solution = $titre = $html = false;
     // parcourir tous les #SEPARATEURS
 	$tableau = jeux_split_texte('sudoku', $texte);
-	// configuration par defaut
-	jeux_config_init("
-		solution=oui	// Afficher la solution ?
-		regle=non	// Afficher la regle ?
-	", false);
 	foreach($tableau as $i => $valeur) if ($i & 1) {
 	 if ($valeur==_JEUX_TITRE) $titre = $tableau[$i+1];
 	  elseif ($valeur==_JEUX_SUDOKU) $sudoku = calcul_tableau_sudoku($tableau[$i+1]);

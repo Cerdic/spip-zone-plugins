@@ -9,12 +9,23 @@
 [(#REM|sinon{<:jeux:doc_scores:>}|icone_horizontale{http://www.spip-contrib.net/Des-jeux-avec-des-scores,#CHEMIN{img/jeu-24.png},'',0})]
 
 -->
+<style type="text/css">
+<!--
+form p {margin:0.2em 0;}
+form fieldset {margin:1em 0;}
+-->
+</style>
+
 
 [(#REM) icone=img/jeu-cfg.png]
 #CACHE{0}
 <form method="post">[(#ENV{_cfg_}|form_hidden)]
-<h2 style="text-align:center;"><:jeux:configuration_generale:></h2><hr/>
-<label><:jeux:type_resultat:><br/>
+<h2 style="text-align:center;"><:jeux:configuration_generale:></h2>
+<hr/>
+<p><:jeux:cfg_introduction:></p>
+
+<fieldset><legend><:jeux:cfg_scores:> </legend>
+<p><label><:jeux:cfg_type_resultat:><br/>
 <select name="type_resultat"> 
     <option value="dernier"[ selected="(#CONFIG{jeux/type_resultat}|=={dernier}|?{selected})"]><:jeux:resultat2_dernier:></option>
 	<option value="premier"[ selected="(#CONFIG{jeux/type_resultat}|=={premier}|?{selected})"]><:jeux:resultat2_premier:></option>
@@ -23,7 +34,20 @@
 	<option value="tous"[ selected="(#CONFIG{jeux/type_resultat}|=={tous}|?{selected})"]><:jeux:resultat2_tous:></option>
 	<option value="aucun"[ selected="(#CONFIG{jeux/type_resultat}|=={aucun}|?{selected})"]><:jeux:resultat2_aucun:></option>
 </select>
-
-</label>
+</label></p>
+</fieldset>
+[(#REM) Attention, important : 
+	les options de config par defaut doivent etre nommees sous la forme 'cfg_uneOption'
+]
+<fieldset><legend><:jeux:cfg_affichage:> </legend>
+<p><label><input type="checkbox" name="cfg_reponse" [checked="(#CONFIG{jeux/cfg_reponse}|!={''}|?{'checked'})"] class="fondl" />
+	<:jeux:cfg_donner_reponse:></label></p>
+<p><label><input type="checkbox" name="cfg_indices" [checked="(#CONFIG{jeux/cfg_indices}|!={''}|?{'checked'})"] class="fondl" />
+	<:jeux:cfg_donner_indices:></label></p>
+</fieldset>
+<fieldset><legend><:jeux:cfg_correction:> </legend>
+<p><label><input type="checkbox" name="cfg_solution" [checked="(#CONFIG{jeux/cfg_solution}|!={''}|?{'checked'})"] class="fondl" />
+	<:jeux:cfg_donner_solution:></label></p>
+</fieldset>
 <p align="right"><input class="fondo"  type="submit" name="_cfg_ok" value="<:valider:>" /></p>
 </form>

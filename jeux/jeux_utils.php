@@ -23,25 +23,32 @@ global $jeux_config;
 function jeux_config($param) {
   global $jeux_config;
   $p = trim($jeux_config[$param]);
-  if (in_array($p, array('true', 'vrai', 'oui', 'yes', '1', 'si', 'ja', strtolower(_T('item_oui'))))) return true;
-  if (in_array($p, array('false', 'faux', 'non', 'no', '0', 'nein', strtolower(_T('item_non'))))) return false;
+  if (in_array($p, array('true', 'vrai', 'oui', 'yes', 'on', '1', 'si', 'ja', strtolower(_T('item_oui'))))) return true;
+  if (in_array($p, array('false', 'faux', 'non', 'no', 'off', '0', 'nein', strtolower(_T('item_non'))))) return false;
   return $p;
 }
 function jeux_config_set($param, $valeur) {
   global $jeux_config;
   if ($param!='') $jeux_config[$param] = $valeur;
 }
-function jeux_config_init($texte, $ecrase) {
+function jeux_config_init($texte, $ecrase=false) {
  global $jeux_config;
  $lignes = preg_split("/[\r\n]+/", $texte);
  foreach ($lignes as $ligne) {
-  $ligne = preg_replace(',\/\*(.*)\*\/,','', $ligne);
-  $ligne = preg_replace(',\/\/(.*)$,','', $ligne);
-  if (preg_match('/([^=]+)=(.+)/', $ligne, $regs)) {
-    list($p, $v) = array(trim($regs[1]), trim($regs[2]));
-	if ($ecrase || ($jeux_config[$p]=='')) $jeux_config[$p] = $v;
+  if ($regs = jeux_parse_ligne_config($ligne)) {
+    list($p, $v) = array($regs[1], $regs[2]);
+	// au moment de la config initiale, preferer les valeurs de CFG
+	if(!$ecrase && !isset($jeux_config[$p])) {
+		if(function_exists('lire_config'))
+			$jeux_config[$p] = lire_config('jeux/cfg_'.$p, NULL);
+		else $jeux_config[$p] = $v;
+	}
+	if ($ecrase || !isset($jeux_config[$p])) $jeux_config[$p] = $v;
   }
  }
+}
+function jeux_config_ecrase($texte) { 
+	jeux_config_init($texte, true); 
 }
 function jeux_config_reset() {
   global $jeux_config;
@@ -53,13 +60,14 @@ function jeux_config_reset() {
 function jeux_split_texte($jeu, &$texte) {
   global $jeux_caracteristiques;
   jeux_config_reset();
+  if (function_exists($init = 'jeux_'.$jeu.'_init')) jeux_config_init($init());
   $texte = '['._JEUX_TEXTE.']'.trim($texte).' ';
   $expr = '/(\['.join('\]|\[', $jeux_caracteristiques['SEPARATEURS'][$jeu]).'\])/';
   $tableau = preg_split($expr, $texte, -1, PREG_SPLIT_DELIM_CAPTURE);
 //  foreach($tableau as $i => $valeur) $tableau[$i] = preg_replace('/^\[(.*)\]$/', '\\1', trim($valeur));
   foreach($tableau as $i => $valeur) if (($i & 1) && preg_match('/^\[(.*)\]$/', trim($valeur), $reg)) {
    $tableau[$i] = strtolower(trim($reg[1]));
-   if ($reg[1]==_JEUX_CONFIG && $i+1<count($tableau)) jeux_config_init($tableau[$i+1], true); 
+   if ($reg[1]==_JEUX_CONFIG && $i+1<count($tableau)) jeux_config_ecrase($tableau[$i+1]); 
   }
   return $tableau;
 }  
@@ -211,13 +219,55 @@ function jeux_trouver_configuration_interne($texte) {
 		$lignes = preg_split(",[\r\n]+,", $tableau[$i+1]);
 		foreach ($lignes as $ligne) {
 			$ligne = trim($ligne);
-		 	if(strlen($ligne)) $configuration_interne[] = $ligne;
+		 	if(strlen($ligne)) $configuration_interne[] = preg_replace(',\s*=\s*,', ' = ', $ligne);
 		}
 	}
   }
+  sort($configuration_interne);
   return $configuration_interne;
 }
 
+// retourne la configuration par defaut d'un jeu
+function jeux_trouver_configuration_defaut($jeu) {
+	if (!function_exists($fonc = 'jeux_'.$jeu))
+		include_spip('jeux/'.$jeu);
+	if (function_exists($init = $fonc.'_init'))
+		return jeux_trouver_configuration_interne('['._JEUX_CONFIG.']'.$init());
+}
+
+// retourne la configuration generale du plugin (options par defaut gerees par CFG)
+function jeux_configuration_generale($modules_jeux=array()) {
+	$configuration_generale = $options_cfg = array();
+	if(function_exists('lire_config')) {
+		// liste des options disponibles par CFG
+		if(is_array($liste_cfg2 = lire_config('jeux')))
+			$adr = generer_url_ecrire('cfg', 'cfg=jeux');
+			foreach($liste_cfg2 as $o=>$v) if(preg_match(',^cfg_(.*)$,', $o, $regs)) {
+				if($v===true || $v==='on') $v = strtolower(_T('item_oui'));
+				elseif($v===false) $v = strtolower(_T('item_non'));
+				$options_cfg[$regs[1]] = "[<a href='$adr'>CFG</a>] $regs[1] = $v";
+			}
+	}
+	if(!count($modules_jeux)) return $configuration_generale;
+	// renvoyer la config par defaut du premier jeu decele
+	$defaut = jeux_trouver_configuration_defaut($modules_jeux[0]);
+	foreach($defaut as $ligne) {
+		if ($regs = jeux_parse_ligne_config($ligne)) {
+			// ajout de l'option si CFG ne l'a pas deja
+			$configuration_generale[] = isset($options_cfg[$regs[1]])?$options_cfg[$regs[1]]:"$regs[1] = $regs[2]";
+		}
+	}
+	sort($configuration_generale);
+	return $configuration_generale;
+}
+
+// decoder une ligne de config (retrait des comentaires facon PHP)
+function jeux_parse_ligne_config($ligne) {
+	$ligne = preg_replace(',\/\*(.*)\*\/,','', $ligne);
+	$ligne = trim(preg_replace(',\/\/(.*)$,','', $ligne));
+	if (!preg_match('/([^=\s]+)\s*=\s*(.+)$/', $ligne, $regs)) return false;
+	return $regs;
+}
 
 // pour placer des commentaires
 function jeux_rem($rem, $index=false, $jeu='', $balise='div') {

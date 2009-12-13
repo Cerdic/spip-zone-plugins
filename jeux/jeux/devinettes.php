@@ -72,17 +72,20 @@ function devinettes_reponse($texte, $id) {
  return $texte?"<div class=\"devinettes_reponse\">$texte</div>":'';
 }
 
+// configuration par defaut : jeu_{mon_jeu}_init()
+function jeux_devinettes_init() {
+	return "
+		reponse=oui	// Afficher la reponse ?
+		taille=10	// taille de la police utilisee
+	";
+}
+
 // fonction principale 
 function jeux_devinettes($texte, $indexJeux) {
   $html = false;
   
   // parcourir tous les #SEPARATEURS
   $tableau = jeux_split_texte('devinettes', $texte);
-  // configuration par defaut
-  jeux_config_init("
-	reponse=oui	// Afficher la reponse ?
-	taille=10	// taille de la police utilisee
-  ", false);
   foreach($tableau as $i => $valeur) if ($i & 1) {
 	 if ($valeur==_JEUX_TITRE) $html .= devinettes_titre($tableau[$i+1]);
 	  elseif ($valeur==_JEUX_DEVINETTE) $html .= devinettes_devinette($tableau[$i+1]);

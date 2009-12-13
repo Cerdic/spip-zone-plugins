@@ -47,10 +47,9 @@ $diag_echecs_globales = Array(
 */
 );
 
-
-// parametres par defaut
-function diag_echecs_config_default() {
-	jeux_config_init("
+// configuration par defaut : jeu_{mon_jeu}_init()
+function jeux_diag_echecs_init() {
+	return "
 		taille=29		// Taille des images en pixels (29 ou 35)
 		blancs=blanc	// Couleur des cases 'blanches'
 		noirs=brun		// Couleur des cases 'noires'
@@ -59,8 +58,9 @@ function diag_echecs_config_default() {
 		police=5		// Code de la police utilisee pour les coordonnees (1 a 5)
 		flip=non		// Faut-il retourner l'echiquier ?
 		coords=oui		// Afficher les coordonnees ?
-	", false);
+	";
 }
+
 
 function diag_echecs_config_supplementaire() {
 	jeux_config_set('base_url', _DIR_PLUGIN_JEUX.'img/diag_echecs'.jeux_config('taille').'/');

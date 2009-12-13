@@ -314,10 +314,23 @@ function qcm_inserer_les_qcm(&$chaine, $indexJeux, $gestionPoints) {
   return $chaine;
 }
 
+// configuration par defaut : jeu_{mon_jeu}_init()
+function jeux_qcm_init() {
+	return "
+		trou=auto	// taille du trou affiche en cas de proposition unique
+		une_par_une=non // affiche les questions une par une
+		solution=non	// donne la(les) bonne(s) reponse(s) lors de la correction
+		points=oui // affiche eventuellement les points dans les questions
+		max_radios=5 // nombre maximal de boutons radios affiches avant le choix d'une liste deroulante
+		colonnes=1 // nombre de boutons par ligne
+	";
+}
+
+// traitement du jeu : jeu_{mon_jeu}()
 function jeux_qcm($texte, $indexJeux) {
   // initialisation  
   global $qcms, $qcm_score, $qcm_score_detaille;
- 
+
   $qcms = array(); $indexQCM = $qcm_score = 0;
   $qcm_score_detaille = array();
   $qcms['nbquestions'] = $qcms['totalscore'] = $qcms['totalpropositions'] = 0;
@@ -325,15 +338,6 @@ function jeux_qcm($texte, $indexJeux) {
 
   // parcourir tous les #SEPARATEURS
   $tableau = jeux_split_texte('qcm', $texte);
-  // configuration par defaut
-  jeux_config_init("
-	trou=auto	// taille du trou affiche en cas de proposition unique
-	une_par_une=non // affiche les questions une par une
-	solution=non	// donne la(les) bonne(s) reponse(s) lors de la correction
-	points=oui // affiche eventuellement les points dans les questions
-	max_radios=5 // nombre maximal de boutons radios affiches avant le choix d'une liste deroulante
-	colonnes=1 // nombre de boutons par ligne
-  ", false);
   foreach($tableau as $i => $valeur) if ($i & 1) {
 	 if ($valeur==_JEUX_TITRE) $titre = $tableau[$i+1];
 	  elseif ($valeur==_JEUX_QCM || $valeur==_JEUX_QUIZ || $valeur==_JEUX_QRM) {
@@ -354,7 +358,7 @@ function jeux_qcm($texte, $indexJeux) {
 
   // reinserer les qcms mis en forme
   $texte = qcm_inserer_les_qcm($html, $indexJeux, $gestionPoints);
-	
+
   // calcul des extremes
   $tete = '<div class="jeux_cadre qcm">'.($titre?'<div class="jeux_titre qcm_titre">'.$titre.'<hr /></div>':'');
   if (!isset($_POST["var_correction_".$indexJeux])) {
@@ -364,13 +368,13 @@ function jeux_qcm($texte, $indexJeux) {
       $pied = jeux_afficher_score($qcm_score, $qcms['totalscore'], $_POST['id_jeu'], join(', ', $qcm_score_detaille), $categ_score)
 			. jeux_bouton_reinitialiser();
   }
-  
+
   // ajout du javascript si on doit afficher une par une
   if (jeux_config('une_par_une'))
   	$js = '<script type="text/javascript">qcm_affichage_une_par_une();</script>';
   else
   	$js = '';
-  
+
   unset($qcms, $qcm_score, $qcm_score_detaille);
   return $tete.$texte.$pied.'</div>'.$js;
 }

@@ -76,22 +76,25 @@ function affiche_un_clavier($indexJeux) {
  return "\n<table class=\"pendu_clavier\" border=0><tr><td class=\"pendu_clavier\" >$clav</td></tr></table>";
 }
 
+// configuration par defaut : jeu_{mon_jeu}_init()
+function jeux_pendu_init() {
+	return "
+		pendu=1		// dessin du pendu a utiliser dans : /jeux/img/pendu?
+		regle=non	// Afficher la regle du jeu ?
+		indices=non // Afficher les premieres et dernieres lettres?
+	";
+}
+
 // fonction principale 
 function jeux_pendu($texte, $indexJeux) {
   $html = false;
 
   // parcourir tous les #SEPARATEURS
   $tableau = jeux_split_texte('pendu', $texte);
-  // configuration par defaut
-  jeux_config_init("
-	pendu=1		// dessin du pendu a utiliser dans : /jeux/img/pendu?
-	regle=non	// Afficher la regle du jeu ?
-	indices=non // Afficher les premieres et dernieres lettres?
-  ", false);
   // initialisation des images de pendu
   $path = _DIR_PLUGIN_JEUX.'img/pendu'.jeux_config('pendu').'/';
   lire_fichier ($path.'config.ini', $images);
-  jeux_config_init($images, false);
+  jeux_config_init($images);
   $i=1; $c=0; $js2=false;
   $extremes = jeux_config('indices')?'true':'false'; // Affiche-t-on les lettres extremes?
   $js="\n\tpendu_Extremes[$indexJeux]=$extremes;\n\tpendu_Paths[$indexJeux]='$path';\n\tpendu_Images[$indexJeux]=new Array(\n\t";

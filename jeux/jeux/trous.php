@@ -133,6 +133,17 @@ function trous_liste_reponses($mots) {
 	return join(' / ', $reponses) . $etc;
 }
 
+// configuration par defaut : jeu_{mon_jeu}_init()
+function jeux_trous_init() {
+	return "
+		taille=auto	// taille des trous
+		indices=oui	// afficher les indices ?
+		couleurs=oui	// afficher les indices ?
+		solution=non // donne la(les) bonne(s) réponse(s) lors de la correction
+	";
+}
+
+// traitement du jeu : jeu_{mon_jeu}()
 function jeux_trous($texte, $indexJeux) {
 	global $propositionsTROUS, $scoreTROUS, $score_detailTROUS;
 	$titre = $html = false;
@@ -141,14 +152,7 @@ function jeux_trous($texte, $indexJeux) {
 	
 	// parcourir tous les #SEPARATEURS
 	$tableau = jeux_split_texte('trous', $texte); 
-	// configuration par defaut
-	jeux_config_init("
-	taille=auto	// taille des trous
-	indices=oui	// afficher les indices ?
-	couleurs=oui	// afficher les indices ?
-	solution=non // donne la(les) bonne(s) réponse(s) lors de la correction
-  ", false);
-  foreach($tableau as $i => $valeur) if ($i & 1) {
+	foreach($tableau as $i => $valeur) if ($i & 1) {
 	 if ($valeur==_JEUX_TITRE) $titre = $tableau[$i+1];
 	  elseif ($valeur==_JEUX_TEXTE) $html .= $tableau[$i+1];
 	  elseif ($valeur==_JEUX_SCORE) $categ_score = $tableau[$i+1];

@@ -93,7 +93,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'gerer_resultats' => 'Ergebnisse verwalten',
 'gerer_ses_resultats' => 'Eigene Ergebnisse verwalten',
 'voir_resultats' => 'Ergebnisse ansehen',
-'type_resultat' => 'Enregistrement des scores&nbsp;:',
+'cfg_type_resultat' => 'Enregistrement des scores&nbsp;:',
+'cfg_donner_solution' => 'Donner les bonnes r&eacute;ponses',
+'cfg_introduction'=> 'Les param&egrave;tres regroup&eacute;s ici correspondent &agrave; la configuration par d&eacute;faut de l\'ensemble des jeux du site. Ils peuvent &ecirc;tre surcharg&eacute;es au cas par cas gr&acirc;ce &agrave; la configuration interne des jeux (s&eacute;parateur [config]).<br/><br/>Il est possible que certains jeux n\'utilisent pas certains des param&egrave;tres list&eacute;s ci-dessous.',
+'cfg_scores' => "Les scores du jeu",
+'cfg_correction' => "La correction du jeu",
+'configuration_defaut' => 'Configuration par d&eacute;faut&nbsp;:',
+'cfg_affichage' => 'L\'affichage du jeu',
+'cfg_donner_indices' => 'Afficher des indices',
+'cfg_donner_reponse' => 'Afficher la r&eacute;ponse',
+
 'gerer_resultats_jeu' => 'Ergebnisse von Spiel no. @id@ (@nom@) verwalten',
 'aucun_resultat' => 'Kein Ergebnis',
 
@@ -133,7 +142,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'compacter_confirmer' => 'Komprimieren der Ergebnisse best&auml;tigen',
 'statut_jeu'  	=> 'Status des Spiels: ',
 'titres_jeu'  	=> 'Titre(s) du jeu&nbsp;: ',
-'configuration_interne' => 'Configuration interne&nbsp;: ',
+'configuration_interne' => 'Configuration interne du jeu&nbsp;: ',
 'configuration_generale' => 'Configuration g&eacute;n&eacute;rale du plugin',
 
 'resultat_defaut' => 'Par d&eacute;faut',
