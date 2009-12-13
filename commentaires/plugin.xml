@@ -7,8 +7,8 @@
 <description>PLUGIN INSTABLE, encore en d&eacute;veloppement&nbsp;!
 _ Remplace le traditionnel #FORMULAIRE_FORUM de SPIP par un formulaire de commentaires (plus succint) et affiche une liste des commentaires.</description>
 <lien>http://www.spip-contrib.net/?article3173</lien>
-<prefix>commentaires</prefix>
-<fonctions>commentaires_fonctions.php</fonctions>
+<prefix>comments</prefix>
+<fonctions>comments_fonctions.php</fonctions>
 <necessite id='SPIP' version='[2.0.9;]' />
 <utilise id='Z' version="[;]" />
 </plugin>

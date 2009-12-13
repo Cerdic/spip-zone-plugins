@@ -1,13 +1,13 @@
 [(#REM) Cette balise (invisible) provoque le recalcul du forum la premiere fois qu'un message est poste (cf. inc/invalideur). ]
 [(#PARAMETRES_FORUM|?{''})]
-<B_commentaires>
+<B_comments>
 <div class="comments" id="comments">
-    <h2 class="h2"><:commentaires:commentaires_titre:></h2>
+    <h2 class="h2"><:comments:commentaires_titre:></h2>
     <ul>
-        <BOUCLE_commentaires(FORUMS) {statut IN publie} {id_rubrique ?}{id_article ?}{id_breve ?}{id_syndic ?} {plat} {par date}>
+        <BOUCLE_comments(FORUMS) {statut IN publie} {id_rubrique ?}{id_article ?}{id_breve ?}{id_syndic ?} {plat} {par date}>
         <li class="comment[ (#COMPTEUR_BOUCLE|alterner{'odd','even'})][ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#EXPOSE)]" id="forum#ID_FORUM">
         	<p class="comment-meta">
-                <a rel="self bookmark" href="#forum#ID_FORUM" title="<:commentaires:permalink_pour:> <:commentaire:> #ID_FORUM" class="ancre permalink comment-number">#COMPTEUR_BOUCLE</a>
+                <a rel="self bookmark" href="#forum#ID_FORUM" title="<:comments:permalink_pour:> <:commentaire:> #ID_FORUM" class="ancre permalink comment-number">#COMPTEUR_BOUCLE</a>
                 [<abbr class="dtposted"[ title="(#DATE_DEBUT|date_iso)"]>Le (#DATE|affdate_jourcourt)[ &agrave;&nbsp;(#DATE|heures)][:(#DATE|minutes)]</abbr>]
                 <BOUCLE_auteur(AUTEURS){tout}{id_auteur}>
                 [<span class="poster">, <:par_auteur:> <a rel="nofollow" href="#URL_AUTEUR" class="url spip_in"><strong class="fn n">(#NOM)</strong></a>[(#PLUGIN{gravatar}|oui)[ (#MODELE{gravatar}|image_reduire{32})]]</span>]
@@ -27,7 +27,7 @@
                 </BOUCLE_doc>
             </div>
         </li>
-        </BOUCLE_commentaires>
+        </BOUCLE_comments>
     </ul>
 </div>
-</B_commentaires>
+</B_comments>
