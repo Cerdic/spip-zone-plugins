@@ -120,7 +120,7 @@ function trous_afficher_indices($indexJeux) {
 	foreach ($propositionsTROUS as $prop) 
 		$indices[] = strpos($prop[0], '/M')===($len=strlen($prop[0])-2) ?substr($prop[0],0,$len):$prop[0];
 	shuffle($indices);
-	return '<div class="jeux_indices">'.charset2unicode(join(' -&nbsp;', $indices)).'</div>';
+	return '<div class="jeux_indices">'.str_replace(array("'",'&#8217;'),"&#039;",charset2unicode(join(' -&nbsp;', $indices))).'</div>';
 }
 
 // revoyer une liste de reponses possibles
