@@ -51,10 +51,8 @@
 		<li>[CFG Babbibel Dropdown->./?exec=cfg&cfg=babbi]</li>
 	</ul>
 	</multi></description>
-
 	<!-- URI de documentation -->
 	<lien>Doc [spip-contrib.net->http://www.spip-contrib.net/Le-menu-deroulant-Babbibel]</lien>
-
 	
 	<fonctions>fonctions_menu.php</fonctions>
 

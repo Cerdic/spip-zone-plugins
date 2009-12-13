@@ -2,10 +2,10 @@
 	<li>
 		<a href="#URL_SITE_SPIP/" title="[(#NOM_SITE_SPIP|textebrut)]"><:accueil_site:></a>
 	</li>
-	<BOUCLE_lang(RUBRIQUES) {racine} {lang}>
 	<BOUCLE_exclus_babbi(RUBRIQUES) {titre_mot=exclu_menu_der}{doublons A}></BOUCLE_exclus_babbi>
+	<BOUCLE_lang(RUBRIQUES) {racine}{doublons A} {lang}>
 	<BOUCLE_exclus_art_babbi(ARTICLES) {titre_mot=exclu_menu_der} {doublons B}></BOUCLE_exclus_art_babbi>
-	<BOUCLE_menus_bab(RUBRIQUES){id_parent}{lang} {par num titre, date, titre}>
+	<BOUCLE_menus_bab(RUBRIQUES){id_parent}{doublons A}{lang} {par num titre, date, titre}>
 		<li><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero|couper{80})]</a>
 				<B_sous_menus_bab>
 					<ul>
