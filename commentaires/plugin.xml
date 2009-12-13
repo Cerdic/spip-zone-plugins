@@ -2,10 +2,15 @@
 <nom>Commentaires</nom>
 <auteur>[romy.tetue.net->http://romy.tetue.net] - 2009</auteur>
 <licence>GPL</licence>
-<version>0.2</version>
+<version>0.3</version>
 <etat>dev</etat>
 <description>PLUGIN INSTABLE, encore en d&eacute;veloppement&nbsp;!
-_ Remplace le traditionnel #FORMULAIRE_FORUM de SPIP par un formulaire de commentaires (plus succint) et affiche une liste des commentaires.</description>
+_ Tout pour construire des commentaires !
+- Noisette &laquo;&nbsp;<code>comments</code>&nbsp;&raquo; pour afficher une liste de commentaires et le forum ad hoc, &agrave; la suite d'un article par exemple.
+- Ce plugin remplace le traditionnel <code>#FORMULAIRE_FORUM</code> de SPIP par un formulaire de commentaires (plus succint) ;
+- noisette &laquo;&nbsp;<code>comments-list</code>&nbsp;&raquo; pour afficher une liste des commentaires ; 
+- noisette &laquo;&nbsp;<code>comments-links</code>&nbsp;&raquo; pour afficher une liste de liens vers les derniers commentaires.
+</description>
 <lien>http://www.spip-contrib.net/?article3173</lien>
 <prefix>comments</prefix>
 <fonctions>comments_fonctions.php</fonctions>
