@@ -238,6 +238,59 @@ add_outil( array(
 	'version-min' => '1.9200',
 ));
 
+
+add_variables( array(
+	'nom' => 'logo_Hmax',
+	'format' => _format_NOMBRE,
+	'defaut' => 0,
+	'code:%s' => "@define('_LOGO_MAX_HEIGHT', %s);\n",
+), array(
+	'nom' => 'logo_Wmax',
+	'format' => _format_NOMBRE,
+	'defaut' => 0,
+	'code:%s' => "@define('_LOGO_MAX_WIDTH', %s);\n",
+), array(
+	'nom' => 'logo_Smax',
+	'format' => _format_NOMBRE,
+	'defaut' => 0,
+	'code:%s' => "@define('_LOGO_MAX_SIZE', %s);\n",
+), array(
+	'nom' => 'img_Hmax',
+	'format' => _format_NOMBRE,
+	'defaut' => 0,
+	'code:%s' => "@define('_IMG_MAX_HEIGHT', %s);\n",
+), array(
+	'nom' => 'img_Wmax',
+	'format' => _format_NOMBRE,
+	'defaut' => 0,
+	'code:%s' => "@define('_IMG_MAX_WIDTH', %s);\n",
+), array(
+	'nom' => 'img_Smax',
+	'format' => _format_NOMBRE,
+	'defaut' => 0,
+	'code:%s' => "@define('_IMG_MAX_SIZE', %s);\n",
+), array(
+	'nom' => 'doc_Smax',
+	'format' => _format_NOMBRE,
+	'defaut' => 0,
+	'code:%s' => "@define('_DOC_MAX_SIZE', %s);\n",
+), array(
+	'nom' => 'img_GDmax',
+	'format' => _format_NOMBRE,
+	'defaut' => 0,
+	'code:%s' => "@define('_IMG_GD_MAX_PIXELS', %s);\n",
+), array(
+	'nom' => 'copie_Smax',
+	'format' => _format_NOMBRE,
+	'defaut' => 16,
+	'code:%s' => "@define('_COPIE_LOCALE_MAX_SIZE', %s*1048576);\n",
+));
+add_outil( array(
+	'id' => 'SPIP_tailles',
+	'code:spip_options' => "%%logo_Hmax%%%%logo_Wmax%%%%logo_Smax%%%%img_Hmax%%%%img_Wmax%%%%img_Smax%%%%doc_Smax%%%%img_GDmax%%%%copie_Smax%%",
+	'categorie' => 'admin',
+));
+
 add_variables( array(
 	'nom' => 'auteur_forum_nom',
 	'check' => 'couteauprive:auteur_forum_nom',

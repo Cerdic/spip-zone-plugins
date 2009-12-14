@@ -17,6 +17,26 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 _ Lien de test : [->test@test.com] (rechargez la page enti&egrave;rement).[[%enveloppe_mails%]]',
 	'SPIP_liens:nom' => 'SPIP et les liens&hellip; externes',
 
+	'SPIP_tailles:nom' => 'Limites m&eacute;moire',
+	'SPIP_tailles:description' => '@puce@ Afin d\'all&eacute;ger la m&eacute;moire de votre serveur, SPIP vous permet de limiter les dimensions (hauteur et largeur) et la taille du fichier des images, logos ou documents joints aux divers contenus de votre site. Si un fichier d&eacute;passe la taille indiqu&eacute;e, le formulaire enverra bien les donn&eacute;es mais elles seront d&eacute;truites et SPIP n\'en tiendra pas compte, ni dans le r&eacute;pertoire IMG/, ni en base de donn&eacute;es. Un message d\'avertissement sera alors envoy&eacute; &agrave; l\'utilisateur.
+
+Une valeur nulle ou non renseign&eacute;e correspond &agrave; une valeur illimit&eacute;e.
+[[Hauteur : %img_Hmax% pixels]][[->Largeur : %img_Wmax% pixels]][[->Poids du fichier : %img_Smax% Ko]]
+[[Hauteur : %logo_Hmax% pixels]][[->Largeur : %logo_Wmax% pixels]][[->Poids du fichier : %logo_Smax% Ko]]
+[[Poids du fichier : %doc_Smax% Ko]]
+
+@puce@ D&eacute;finissez ici l\'espace maximal r&eacute;serv&eacute; aux fichiers distants que SPIP pourrait t&eacute;l&eacute;charger (de serveur &agrave; serveur) et stocker sur votre site. La valeur par d&eacute;faut est ici de 16 Mo.[[%copie_Smax% Mo]]
+
+@puce@ Afin d\'&eacute;viter un d&eacute;passement de m&eacute;moire PHP dans le traitement des grandes images par la librairie GD2, SPIP teste les capacit&eacute;s du serveur et peut donc refuser de traiter les trop grandes images. Il est possible de d&eacute;sactiver ce test en d&eacute;finissant manuellement le nombre maximal de pixels support&eacute;s pour les calculs.
+
+La valeur de 1~000~000 pixels semble correcte pour une configuration avec peu de m&eacute;moire. Une valeur nulle ou non renseign&eacute;e entra&icirc;nera le test du serveur.
+[[%img_GDmax% pixels au maximum]]',
+	'label:logo_Hmax' => 'Taille maximale des logos :',
+	'label:img_Hmax' => 'Taille maximale des images :',
+	'label:doc_Smax' => 'Taille maximale des documents :',
+	'label:img_GDmax' => 'Calculs d\'images avec GD :',
+	'label:copie_Smax' => 'Espace maximal r&eacute;serv&eacute; aux copies locales :',
+
 	// A
 	'acces_admin' => 'Acc&egrave;s administrateurs :',
 	'action_rapide' => 'Action rapide, uniquement si vous savez ce que vous faites !',

@@ -67,7 +67,7 @@ function description_outil_une_variable($index, $outil, $variable, $label) {
 	// ... ou un textarea ... ou une case input
 	if(!$actif)
 		return $label.'<html>'.(strlen($valeur)?nl2br(echapper_tags($valeur)):'&nbsp;'._T('couteauprive:variable_vide')).'</html>';
-	$len = $cs_variable['format']==_format_NOMBRE?4:0;
+	$len = $cs_variable['format']==_format_NOMBRE?6:0;
 	$width = $len?'':'style="width:100%;" ';
 	$lignes = !isset($cs_variable['lignes']) || ($cs_variable['format']==_format_NOMBRE)?0:strval($cs_variable['lignes']);
 	return $label .
