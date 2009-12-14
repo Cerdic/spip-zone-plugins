@@ -47,7 +47,12 @@
 	59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.
 	
 	*****************************************************/
-	
+
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
+// Pour activer (forcer) le mode debug, valider la ligne suivante
+// define('_FMP3_DEBUG', true);
+
 include_spip('inc/fmp3_api_globales');
 
 define("_FMP3_PREFIX", "fmp3");

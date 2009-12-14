@@ -6,6 +6,8 @@
 // $LastChangedBy$
 // $LastChangedDate$
 
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 // fonctions utilises en espace privé
 // presentation
 

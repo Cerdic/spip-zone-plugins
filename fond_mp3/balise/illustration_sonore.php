@@ -47,7 +47,10 @@
 	59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.
 	
 	*****************************************************/
-	
+
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
+
 include_spip('inc/fmp3_api_globales');
 
 /*
@@ -56,7 +59,6 @@ include_spip('inc/fmp3_api_globales');
  *   (exemple: inc-pied.html dans le répertoire du plugin)
  */
 function balise_ILLUSTRATION_SONORE ($p) {
-
 	return calculer_balise_dynamique($p,'ILLUSTRATION_SONORE', array());
 }
 
@@ -106,7 +108,7 @@ function balise_ILLUSTRATION_SONORE_dyn ($opt) {
 				}
 			}
 		}
-		
+
 		fmp3_log("balise: cherche son pour $objet $id_objet", null, _FMP3_DEBUG);
 		
 		if(!empty($objet))
