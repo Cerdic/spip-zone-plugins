@@ -766,7 +766,7 @@ add_variables( array(
 	'defaut' => 0,
 	'code' => '$GLOBALS["liens_orphelins"]=%s;',
 		// empeche SPIP de convertir les URLs orphelines (URLs brutes)
-	'code:%s<>-2' => defined('_SPIP19300')?"\$GLOBALS['spip_pipeline']['pre_liens']=str_replace('|traiter_raccourci_liens','',\$GLOBALS['spip_pipeline']['pre_liens']);
+	'code:%s<>-2' => defined('_SPIP19300')?"\n\$GLOBALS['spip_pipeline']['pre_liens']=str_replace('|traiter_raccourci_liens','',\$GLOBALS['spip_pipeline']['pre_liens']);
 @define('_EXTRAIRE_LIENS',',^\$,');":'',
 ));
 // attention : liens_orphelins doit etre place avant mailcrypt ou liens_en_clair
@@ -774,7 +774,8 @@ add_outil( array(
 	'id' => 'liens_orphelins',
 	'categorie'	 => 'typo-corr',
 	'contrib'	=> 2443,
-	'code:options' => '%%liens_interrogation%%%%liens_orphelins%%',
+	'code:options' => '%%liens_interrogation%%',
+	'code:spip_options' => '%%liens_orphelins%%',
 	'pipeline:pre_propre' => 'liens_orphelins_pipeline',
 	'traitement:EMAIL' => 'expanser_liens(liens_orphelins',
  	'pipeline:pre_typo'   => 'interro_pre_typo',
