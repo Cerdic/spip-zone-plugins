@@ -6,7 +6,7 @@ function genie_activite_editoriale_alerte_dist() {
 			$envoyer_mail = charger_fonction('envoyer_mail', 'inc');
 			$subject = 'Une rubrique doit etre mise a jour';
 			include_spip('activite_editoriale_fonctions');
-			$url = generer_url_entite($list['id_rubrique'], 'rubrique');
+			$url = $GLOBALS['meta']['adresse_site'].'/ecrire/?exec=naviguer&id_rubrique='.$list['id_rubrique'];
 			$body = 'Attention, la rubique "'.$list['titre'].'" n\'a pas ete mise a jour depuis '.age_rubrique($list['maj']).' jours. '."\n\n";
 			$body = $body.'Vous etes identifie comme faisant partie des gestionnaires de la rubrique'."\n\n";
 			$body = $body.$url;
