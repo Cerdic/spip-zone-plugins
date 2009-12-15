@@ -245,11 +245,12 @@ function cs_action_fichiers_distant(&$outil, $force=false) {
 		$a[] = "[{$f}->{$outil[$i]}]\n_ $statut";
 	}
 	$a = '<ul style="margin:0.6em 0 0.6em 4em;"><li>' . join("</li><li style='margin-top:0.4em;'>", $a) . '</li></ul>';
+	$b = $outil['actif']?"\n<p class='cs_sobre'><input class='cs_sobre' type='submit' value=\" ["
+			. attribut_html(_T('couteauprive:rss_actualiser')).']" /></p>':'';
 	return ajax_action_auteur('action_rapide', 'fichiers_distants', 'admin_couteau_suisse', "arg=$outil[id]|fichiers_distants&cmd=descrip#cs_action_rapide",
 			'<p>' . _T('couteauprive:distant_aide') . '</p>'
 			. '<p style="margin-top:1em"><strong>' . definir_puce() . '&nbsp;' . _T('couteauprive:detail_fichiers_distant') . '</strong></p>'
-			. '<div>' . propre($a) . "</div>\n<p class='cs_sobre'><input class='cs_sobre' type='submit' value=\" ["
-			. attribut_html(_T('couteauprive:rss_actualiser')).']" /></p>');
+			. '<div>' . propre($a) . '</div>' . $b);
 	
 }
 
