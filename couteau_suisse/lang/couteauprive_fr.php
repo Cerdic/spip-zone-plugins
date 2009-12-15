@@ -11,7 +11,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'distant_charge' => 'Fichier correctement t&eacute;l&eacute;charg&eacute; et install&eacute; en librairie.',
 	'distant_present' => 'Fichier pr&eacute;sent en librairie depuis le @date@.',
 	'distant_echoue' => 'Erreur sur le chargement distant, cet outil risque de ne pas fonctionner !',
-	'distant_inactif' => 'Fichier absent. Activer cet outil.',
+	'distant_inactif' => 'Fichier introuvable (outil inactif).',
+	'distant_charger' => 'Lancer le t&eacute;l&eacute;chargement',
 	'distant_aide' => 'Cet outil requiert des fichiers distants qui doivent tous &ecirc;tre correctement install&eacute;s en librairie. Avant d\'activer cet outil ou d\'actualiser ce cadre, assurez-vous que les fichiers requis sont bien pr&eacute;sents sur le serveur distant.',
 	
 	'previsualisation:description' => 'Par d&eacute;faut, SPIP permet de pr&eacute;visualiser les articles dans leur version publique, mais uniquement lorsque ceux-ci ont &eacute;t&eacute; &laquo; propos&eacute; &agrave; l&rsquo;&eacute;valuation &raquo;. Hors cet outil permet aux auteurs de pr&eacute;visualiser &eacute;galement les articles pendant leur r&eacute;daction. Chacun peut alors pr&eacute;visualiser et modifier son texte &agrave; sa guise.

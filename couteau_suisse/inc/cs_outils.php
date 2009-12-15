@@ -227,12 +227,13 @@ function cs_action_fichiers_distant(&$outil, $force=false) {
 	$lib = sous_repertoire(_DIR_PLUGIN_COUTEAU_SUISSE, 'lib');
 	$a = array();
 	foreach($outil['fichiers_distants'] as $i) {
+		$erreur = false;
 		$dir = sous_repertoire($lib, $outil['id']);
 		$f = $i . '_' . basename($outil[$i]);
 		$file = $dir.$f;
 		$size = ($force || @(!file_exists($file)) ? 0 : filesize($file));
 		if($size) $statut = _T('couteauprive:distant_present', array('date'=>cs_date_long(date('Y-m-d H:i:s', filemtime($file)))));
-		elseif($outil['actif']) {
+		elseif($outil['actif'] || $force) {
 			include_spip('inc/distant');
 			if($distant = recuperer_page($outil[$i])) {
 				$test = preg_replace(',^.*?\<\?php|\?\>.*?$,', '', $distant);
@@ -240,13 +241,14 @@ function cs_action_fichiers_distant(&$outil, $force=false) {
 				else $distant = ecrire_fichier($file, '<'."?php\n\n".trim($test)."\n\n?".'>');
 			}
 			if($distant) $statut = '<span style="color:green">'._T('couteauprive:distant_charge').'</span>';
-			else $statut = '<span style="color:red">'._T('couteauprive:distant_echoue').'</span>';
-		} else $statut = _T('couteauprive:distant_inactif');
+			else $erreur = $statut = '<span style="color:red">'._T('couteauprive:distant_echoue').'</span>';
+		} else $erreur = $statut = _T('couteauprive:distant_inactif');
 		$a[] = "[{$f}->{$outil[$i]}]\n_ $statut";
 	}
 	$a = '<ul style="margin:0.6em 0 0.6em 4em;"><li>' . join("</li><li style='margin-top:0.4em;'>", $a) . '</li></ul>';
-	$b = $outil['actif']?"\n<p class='cs_sobre'><input class='cs_sobre' type='submit' value=\" ["
-			. attribut_html(_T('couteauprive:rss_actualiser')).']" /></p>':'';
+	$b = ($outil['actif'] || !$erreur)?'rss_actualiser':($erreur?'distant_charger':false);
+	$b = $b?"\n<p class='cs_sobre'><input class='cs_sobre' type='submit' value=\" ["
+			. attribut_html(_T('couteauprive:'.$b)).']" /></p>':'';
 	return ajax_action_auteur('action_rapide', 'fichiers_distants', 'admin_couteau_suisse', "arg=$outil[id]|fichiers_distants&cmd=descrip#cs_action_rapide",
 			'<p>' . _T('couteauprive:distant_aide') . '</p>'
 			. '<p style="margin-top:1em"><strong>' . definir_puce() . '&nbsp;' . _T('couteauprive:detail_fichiers_distant') . '</strong></p>'
