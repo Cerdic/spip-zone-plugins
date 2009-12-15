@@ -85,6 +85,8 @@ function add_outil($tableau) {
 	$outils[$tableau['id']] = isset($GLOBALS['mes_outils'][$perso]) && is_array($GLOBALS['mes_outils'][$perso])
 		?array_merge($tableau, $GLOBALS['mes_outils'][$perso])
 		:$tableau;
+	if(defined('_CS_PAS_D_OUTIL_DISTANT') && isset($tableau['fichiers_distants']))
+		$outils[$tableau['id']]['version-max'] = '0';
 }
 
 // ajoute une variable a $cs_variables et fabrique une liste des chaines et des nombres

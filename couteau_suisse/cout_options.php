@@ -139,8 +139,6 @@ function autoriser_outil_configurer_dist($faire, $type, $id, $qui, $opt) {
 	if(!is_array($opt)) return autoriser('configurer', 'cs', $id, $qui, $opt);
 	// test sur la version de SPIP
 	$test = !cs_version_erreur($opt)
-		// autorisation des outils distants
-		&& (!defined('_CS_PAS_D_OUTIL_DISTANT') || !isset($opt['fichiers_distants']))
 		// autorisation d'un outil en particulier
 		&& autoriser('configurer', 'outil_'.$opt['id'], $id, $qui, $opt)
 		// autorisation de la categorie de l'outil
