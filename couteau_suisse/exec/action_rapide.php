@@ -31,14 +31,29 @@ cs_log(" -- script = $script - outil = $outil - arg = $arg");
 	// verification du format de l'argument
 	cs_minipres(!isset($arg));
 	if(!strlen($arg)) $arg = 'retour_nul';
+	cs_minipres(!preg_match('/^\w+$/', $script));
 
 	switch ($arg) {
 		// retour normal des actions rapides du couteau suisse : affichage du bloc au sein de la description d'un outil
 		case 'description_outil':
 cs_log(" -- Preparation de l'affichage de la description de l'outil");
-			cs_minipres(!preg_match('/^\w+$/', $script));
 			include_spip('inc/cs_outils');
 			$res = cs_action_rapide($outil);
+cs_log(" FIN : exec_action_rapide_dist() - Appel maintenant de ajax_retour() pour afficher le formulaire de '$outil'");	
+			ajax_retour($res);
+			break;
+
+		// mettre a jour les fichiers distants d'un outil...
+		case 'fichiers_distants':
+			global $outils;
+			include_spip('cout_utils');
+			include_spip('config_outils');
+			if(autoriser('configurer', 'outil', 0, NULL, $outil)) {
+				include_spip('inc/cs_outils');
+				cs_initialisation_d_un_outil($outil, charger_fonction('description_outil', 'inc'), false);
+				// mise a jour forcee
+				$res = cs_action_fichiers_distant($outils[$outil], true);
+			}
 cs_log(" FIN : exec_action_rapide_dist() - Appel maintenant de ajax_retour() pour afficher le formulaire de '$outil'");	
 			ajax_retour($res);
 			break;

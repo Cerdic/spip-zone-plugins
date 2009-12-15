@@ -6,7 +6,7 @@
 #  Contact : patrice¡.!vanneufville¡@!laposte¡.!net   #
 #  Infos : http://www.spip-contrib.net/?article2166   #
 #-----------------------------------------------------#
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if(!defined("_ECRIRE_INC_VERSION")) return;
 
 // Noter :
 // outils/mon_outil.php : inclus par les pipelines de l'outil
@@ -283,12 +283,22 @@ add_variables( array(
 	'nom' => 'copie_Smax',
 	'format' => _format_NOMBRE,
 	'defaut' => 16,
-	'code:%s' => "@define('_COPIE_LOCALE_MAX_SIZE', %s*1048576);\n",
+	'code' => "@define('_COPIE_LOCALE_MAX_SIZE', %s*1048576);",
 ));
 add_outil( array(
 	'id' => 'SPIP_tailles',
 	'code:spip_options' => "%%logo_Hmax%%%%logo_Wmax%%%%logo_Smax%%%%img_Hmax%%%%img_Wmax%%%%img_Smax%%%%doc_Smax%%%%img_GDmax%%%%copie_Smax%%",
 	'categorie' => 'admin',
+));
+
+add_outil( array(
+	'id' => 'previsualisation',
+	'categorie' => 'admin',
+	'auteur' => '[C&eacute;dric Morin->http://www.yterium.net]',
+	'pipeline:pre_boucle' => 'previsu_redac_pre_boucle',
+	'pipeline:boite_infos' => 'previsu_redac_boite_infos',
+	// fichier distant pour les pipelines
+	'distant' => 'http://zone.spip.org/trac/spip-zone/export/32230/_plugins_/previsu_redaction/previsu_redac_pipelines.php',
 ));
 
 add_variables( array(
@@ -494,8 +504,8 @@ add_variables( array(
 	'radio/ligne' => 1,
 	'defaut' => 0,
 //	'code:!%s' => "@define('AUTEURS_DEFAUT', join(\$temp_auteurs,','));",
-	'code:!%s' => "if (_request('exec')=='auteurs' && !_request('statut')) \$_GET['statut'] = join(\$temp_auteurs,',');",
-	'code:%s' => "if (_request('exec')=='auteurs' && !_request('statut')) \$_GET['statut'] = '!foo';",
+	'code:!%s' => "if(_request('exec')=='auteurs' && !_request('statut')) \$_GET['statut'] = join(\$temp_auteurs,',');",
+	'code:%s' => "if(_request('exec')=='auteurs' && !_request('statut')) \$_GET['statut'] = '!foo';",
 ));
 add_outil( array(
 	'id' => 'auteurs',
@@ -688,7 +698,7 @@ add_outil( array(
 	'id' => 'pucesli',
 	'auteur' 	 => "J&eacute;r&ocirc;me Combaz pour l'id&eacute;e originale",
 	'categorie'	 => 'typo-corr',
-	'pipelinecode:pre_typo' => 'if (strpos($flux, "-")!==false OR strpos($flux, "*")!==false) $flux = cs_echappe_balises("", "pucesli_remplace", $flux);',
+	'pipelinecode:pre_typo' => 'if(strpos($flux, "-")!==false OR strpos($flux, "*")!==false) $flux = cs_echappe_balises("", "pucesli_remplace", $flux);',
 	'code:options' => 'function pucesli_remplace($texte) {
 	if(%%puceSPIP%%) {$texte = preg_replace(\'/^[*]\s*/m\', \'- \', $texte);}
 	return preg_replace(\'/^-\s*(?![-*#])/m\', \'-* \', $texte);
@@ -710,13 +720,13 @@ add_outil( array(
 	/* IE */
 	* html q { font-style: italic; }
 	*+html q { font-style: italic; }', 
-    'pipelinecode:pre_propre' => 'if (strpos($flux, "<qu")!==false) $flux=cs_echappe_balises("", "citations_bb_rempl", $flux);',
+    'pipelinecode:pre_propre' => 'if(strpos($flux, "<qu")!==false) $flux=cs_echappe_balises("", "citations_bb_rempl", $flux);',
 	// Remplacer <quote> par <q> quand il n'y a pas de retour a la ligne (3 niveaux, preg sans l'option s) 
     'code:options' => 'function citations_bb_rempl($texte){
 	$texte = preg_replace($a="/<quote>(.*?)<\/quote>/", $b="<q>\$1</q>", $texte);
-	if (strpos($texte, "<qu")!==false) {
+	if(strpos($texte, "<qu")!==false) {
 		$texte = preg_replace($a, $b, $texte);
-		if (strpos($texte, "<qu")!==false) $texte = preg_replace($a, $b, $texte);
+		if(strpos($texte, "<qu")!==false) $texte = preg_replace($a, $b, $texte);
 	}
 	return $texte;
 }',
@@ -1032,7 +1042,7 @@ add_outil( array(
 	'categorie' => 'admin',
 	'version-min' => '1.9300',
 	'code:options' => '%%moderation_admin%%%%moderation_redac%%%%moderation_visit%%',
-	'code:jq_init' => 'if (window.location.search.match(/page=forum/)!=null) jQuery("legend:contains(\''.addslashes(unicode2charset(html2unicode(_T('bouton_radio_modere_priori')))).'\')", this).next().html(\''.addslashes(_T('couteauprive:moderation_message')).'\');',
+	'code:jq_init' => 'if(window.location.search.match(/page=forum/)!=null) jQuery("legend:contains(\''.addslashes(unicode2charset(html2unicode(_T('bouton_radio_modere_priori')))).'\')", this).next().html(\''.addslashes(_T('couteauprive:moderation_message')).'\');',
 	'pipeline:pre_edition' => 'moderation_vip',
 ));
 add_variables( array(
@@ -1128,7 +1138,7 @@ foreach (find_all_in_path('outils/', '\w+_config\.xml$') as $f) {
 // Recuperer tous les outils de la forme outils/monoutil_config.php
 // y compris les lames perso dont on met le nom en italiques
 foreach (find_all_in_path('outils/', '\w+_config\.php$') as $f) 
-if (preg_match(',^([^.]*)_config$,', basename($f, '.php'),$regs)){
+if(preg_match(',^([^.]*)_config$,', basename($f, '.php'),$regs)){
 	include $f;
 	if(function_exists($cs_temp=$regs[1].'_add_outil')) {
 		$cs_temp = $cs_temp();

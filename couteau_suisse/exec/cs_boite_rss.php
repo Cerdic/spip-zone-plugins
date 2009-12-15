@@ -5,7 +5,7 @@
 #  Contact : patrice¡.!vanneufville¡@!laposte¡.!net   #
 #  Infos : http://www.spip-contrib.net/?article2166   #
 #-----------------------------------------------------#
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if(!defined("_ECRIRE_INC_VERSION")) return;
 
 // compatibilite spip 1.9
 if(!function_exists(ajax_retour)) { 
@@ -27,14 +27,14 @@ function exec_cs_boite_rss_dist() {
 	$force = _request('force')=='oui';
 	if(!$force) {
 		$lastmodified = @file_exists(_DIR_RSS_TMP)?@filemtime(_DIR_RSS_TMP):0;
-		if (time()-$lastmodified < _CS_RSS_UPDATE) lire_fichier(_DIR_RSS_TMP, $p);
+		if(time()-$lastmodified < _CS_RSS_UPDATE) lire_fichier(_DIR_RSS_TMP, $p);
 	}
 	if(strlen($p)) { ajax_retour($p); return; }
 	include_spip('inc/filtres');
 	include_spip('action/editer_site');
 	include_spip('inc/xml');
 	$r = spip_xml_load(_CS_RSS_SOURCE);
-	if (function_exists('spip_xml_match_nodes')) $c = spip_xml_match_nodes(',^item$,', $r, $r2);
+	if(function_exists('spip_xml_match_nodes')) $c = spip_xml_match_nodes(',^item$,', $r, $r2);
 	else {
 		$r2 = !is_array($r)?array():array_shift(array_shift(array_shift(array_shift($r))));
 		$c = count($r2);

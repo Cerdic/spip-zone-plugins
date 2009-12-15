@@ -5,7 +5,7 @@
 #  Contact : patrice¡.!vanneufville¡@!laposte¡.!net   #
 #  Infos : http://www.spip-contrib.net/?article2166   #
 #-----------------------------------------------------#
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if(!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('cout_define');
 cout_define('description_outils');
@@ -28,7 +28,7 @@ function description_outil_une_variable($index, $outil, $variable, $label) {
 	global $cs_variables, $metas_vars;
 	$actif = $outil['actif'];
 	// la valeur de la variable n'est stockee dans les metas qu'au premier post
-	if (isset($metas_vars[$variable])) $valeur = $metas_vars[$variable];
+	if(isset($metas_vars[$variable])) $valeur = $metas_vars[$variable];
 		else $valeur = cs_get_defaut($variable);
 	$valeur = cs_retire_guillemets($valeur);
 //cs_log(" -- description_outil_une_variable($index) - Traite %$variable%");
@@ -38,7 +38,7 @@ function description_outil_une_variable($index, $outil, $variable, $label) {
 	$cs_variable['disabled'] = $disab 
 		= autoriser('configurer', 'variable', 0, NULL, array('nom'=>$cs_variable['nom'], 'outil'=>$outil))?'':' disabled="disabled"';
 	// si la variable necessite des boutons radio
-	if (is_array($radios = &$cs_variable['radio'])) {
+	if(is_array($radios = &$cs_variable['radio'])) {
 		if(!$actif) {
 			$code = _T($radios[$valeur]);
 			return "<input type=\"hidden\" name=\"$variable\" class=\"cs_hidden_checkbox\" value=\"$code\" />"
@@ -57,7 +57,7 @@ function description_outil_une_variable($index, $outil, $variable, $label) {
 		return $res.'</ul>'._VAR_OUTIL;
 	}
 	// ... ou une case a cocher
-	if (isset($cs_variable['check'])) {
+	if(isset($cs_variable['check'])) {
 		if(!$actif)
 			return $label._T($cs_variable['check'])._T($valeur?'couteauprive:2pts_oui':'couteauprive:2pts_non');
 		return $label.'<label><input type="checkbox" '.($valeur?' checked="checked"':'')." value=\"1\" name=\"$variable\" $disab/>"
@@ -143,9 +143,9 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 //cs_log("inc_description_outil_dist() - Parse la description de '$outil_'");
 	$res = '';
 	$nb_disabled = $nb_variables = 0; $variables = array();
-	for($i=0;$i<count($t);$i+=2) if (isset($t[$i+1]) && strlen($var=trim($t[$i+1]))) {
+	for($i=0;$i<count($t);$i+=2) if(isset($t[$i+1]) && strlen($var=trim($t[$i+1]))) {
 		// si la variable est presente on fabrique le input
-		if (isset($cs_variables[$var])) {
+		if(isset($cs_variables[$var])) {
 			$res .= description_outil_une_variable(
 				$index + (++$nb_variables),
 				$outil, $var,
@@ -161,13 +161,18 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 	$outil['variables'] = $variables;
 	$outil['nb_variables'] = $nb_variables;
 	$outil['nb_disabled'] = $nb_disabled;
+	// liste des fichiers distants
+	unset($outil['fichiers_distants']);
+	if(preg_match_all(',distant(?:_(?:options|fonctions|js|css))?,',  serialize(array_keys($outil)), $regs, PREG_PATTERN_ORDER)) {
+		foreach($regs[0] as $v) $outil['fichiers_distants'][] = $v;
+	}
 
 	// si ce n'est qu'une simple initialisation, on sort
 	if(!$modif) return;
 
 	// bouton 'Modifier' : en dessous du texte s'il y a plusieurs variables, a la place de _VAR_OUTIL s'il n'y en a qu'une.
 	// attention : on ne peut pas modifier les variables si l'outil est inactif
-	if ($actif) {
+	if($actif) {
 		$bouton = "<input type='submit' class='fondo' style='margin-left:1em;' value=\"".($nb_variables>1?_T('couteauprive:modifier_vars_0'):_T('bouton_modifier'))."\" />";
 		if($nb_variables>1) $res .= "<div class=\"cs_bouton\">$bouton</div>";
 			else $res = str_replace(_VAR_OUTIL, $bouton, $res);

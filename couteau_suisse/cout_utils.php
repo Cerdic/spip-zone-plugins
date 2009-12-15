@@ -8,7 +8,7 @@
 #  Fichier contenant les fonctions utilisees pendant  #
 #  la configuration du plugin                         #
 #-----------------------------------------------------#
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if(!defined("_ECRIRE_INC_VERSION")) return;
 
 cs_log("chargement de cout_utils.php");
 $GLOBALS['cs_utils']++;
@@ -29,17 +29,11 @@ define('_format_NOMBRE', 20);
 /* COMPATIBILITE */
 /*****************/
 
-if (!defined('_DIR_PLUGIN_COUTEAU_SUISSE')){
-	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
-	$p=_DIR_PLUGINS.end($p); if ($p[strlen($p)-1]!='/') $p.='/';
-	define('_DIR_PLUGIN_COUTEAU_SUISSE', $p);
-}
-
 function cs_suppr_metas_var($meta, $new = false) {
  global $metas_vars;
- if (!isset($metas_vars[$meta])) return;
- if ($new) {
- 	if (preg_match(',([0-9A-Za-z_-]*)\(('.'[0-9A-Za-z_-]*=[A-Za-z_:-]+\|[0-9A-Za-z_:=>|-]+'.')\),', $metas_vars[$meta], $reg)) $metas_vars[$new] = $reg[1];
+ if(!isset($metas_vars[$meta])) return;
+ if($new) {
+ 	if(preg_match(',([0-9A-Za-z_-]*)\(('.'[0-9A-Za-z_-]*=[A-Za-z_:-]+\|[0-9A-Za-z_:=>|-]+'.')\),', $metas_vars[$meta], $reg)) $metas_vars[$new] = $reg[1];
 	else $metas_vars[$new] = $metas_vars[$meta];
  }
  unset($metas_vars[$meta]);
@@ -80,7 +74,7 @@ function add_outil($tableau) {
 		foreach($a as $b) $tableau[trim($b)] = $v;
 		unset($tableau[$i]);
 	}
-	if (!isset($tableau['id'])) { $tableau['id']='erreur'.count($outils); $tableau['nom'] = _T('couteauprive:erreur_id'); }
+	if(!isset($tableau['id'])) { $tableau['id']='erreur'.count($outils); $tableau['nom'] = _T('couteauprive:erreur_id'); }
 	$tableau['index'] = $index;
 	$perso = $tableau['id'] . '_perso';
 	$outils[$tableau['id']] = isset($GLOBALS['mes_outils'][$perso]) && is_array($GLOBALS['mes_outils'][$perso])
@@ -174,7 +168,7 @@ function parse_outil_xml(&$arbre) {
 function cs_get_defaut($variable) {
 	global $cs_variables;
 	// si la variable n'est pas declaree, serieux pb dans config_outils !
-	if (!isset($cs_variables[$variable])) {
+	if(!isset($cs_variables[$variable])) {
 		spip_log("Erreur - variable '$variable' non declaree dans config_outils.php !");
 		return false;
 	}
@@ -194,9 +188,9 @@ function cs_get_defaut($variable) {
 // $type ici est egal a 'spip_options', 'options' ou 'fonctions'
 function ecrire_fichier_en_tmp(&$infos_fichiers, $type) {
 	$code = '';
-	if (isset($infos_fichiers['inc_'.$type]))
+	if(isset($infos_fichiers['inc_'.$type]))
 		foreach ($infos_fichiers['inc_'.$type] as $inc) $code .= "include_spip('outils/$inc');\n";
-	if (isset($infos_fichiers['code_'.$type]))
+	if(isset($infos_fichiers['code_'.$type]))
 		foreach ($infos_fichiers['code_'.$type] as $inline) $code .= $inline."\n";
 	// on optimise avant...
 	$code = str_replace(array('intval("")',"intval('')"), '0', $code);
@@ -214,9 +208,11 @@ function set_cs_metas_pipelines(&$infos_pipelines) {
 	foreach($infos_pipelines as $pipe=>$infos) {
 		$code = "\n# Copie du code utilise en eval() pour le pipeline '$pipe(\$flux)'\n";
 		// compilation des differentes facon d'utiliser un pipeline
-		if(is_array($infos['inclure'])) foreach ($infos['inclure'] as $inc) $code .= "include_spip('outils/$inc');\n";
+		if(is_array($infos['inclure'])) foreach ($infos['inclure'] as $inc) {
+			$code .= "include_spip('$inc');\n";
+		}
 		if(is_array($infos['inline'])) foreach ($infos['inline'] as $inc) $code .= "$inc\n";
-		if(is_array($infos['fonction'])) foreach ($infos['fonction'] as $fonc) $code .= "if (function_exists('$fonc')) \$flux=$fonc(\$flux);\n\telse spip_log('Erreur - $fonc(\$flux) non definie !');\n";
+		if(is_array($infos['fonction'])) foreach ($infos['fonction'] as $fonc) $code .= "if(function_exists('$fonc')) \$flux=$fonc(\$flux);\n\telse spip_log('Erreur - $fonc(\$flux) non definie !');\n";
 		$controle .= $cs_metas_pipelines[$pipe] = $code;
 	}
 	$nb = count($infos_pipelines);
@@ -227,21 +223,21 @@ cs_log("$nb pipeline(s) actif(s) : strlen=".strlen($controle));
 
 // est-ce que $pipe est un pipeline ?
 function is_pipeline_outil($pipe, &$set_pipe) {
-	if ($ok = preg_match(',^pipeline:(.*?)$,', $pipe, $t)) $set_pipe = trim($t[1]);
+	if($ok = preg_match(',^pipeline:(.*?)$,', $pipe, $t)) $set_pipe = trim($t[1]);
 	return $ok;
 }
 // est-ce que $pipe est un pipeline inline?
 function is_pipeline_outil_inline($pipe, &$set_pipe) {
-	if ($ok = preg_match(',^pipelinecode:(.*?)$,', $pipe, $t)) $set_pipe = trim($t[1]);
+		if($ok = preg_match(',^pipelinecode:(.*?)$,', $pipe, $t)) $set_pipe = trim($t[1]);
 	return $ok;
 }
 
 // est-ce que $traitement est un traitement ?
 function is_traitements_outil($traitement, $fonction, &$set_traitements_utilises) {
-	if ($ok = preg_match(',^traitement:([A-Z_]+)/?([a-z]+)?:(pre|post)_([a-zA-Z0-9_-]+)$,', $traitement, $t)) {
+	if($ok = preg_match(',^traitement:([A-Z_]+)/?([a-z]+)?:(pre|post)_([a-zA-Z0-9_-]+)$,', $traitement, $t)) {
 		if(!strlen($t[2])) $t[2] = 0;
 		$set_traitements_utilises[$t[1]][$t[2]][$t[4]][$t[3]][] = $fonction;
-	} elseif ($ok = preg_match(',^traitement:([A-Z]+)$,', $traitement, $t))
+	} elseif($ok = preg_match(',^traitement:([A-Z]+)$,', $traitement, $t))
 		$set_traitements_utilises[$t[1]][0][0][] = $fonction;
 	return $ok;
 }
@@ -249,8 +245,8 @@ function is_traitements_outil($traitement, $fonction, &$set_traitements_utilises
 // lire un fichier php et retirer si possible les balises ?php
 function cs_lire_fichier_php($file) {
 	$file=find_in_path($file);
-	if ($file && lire_fichier($file, $php)) {
-		if (preg_match(',^<\?php(.*)?\?>$,msi', trim($php), $regs)) return trim($regs[1]);
+	if($file && lire_fichier($file, $php)) {
+		if(preg_match(',^<\?php(.*)?\?>$,msi', trim($php), $regs)) return trim($regs[1]);
 		return "\n"."?>\n".trim($php)."\n<"."?php\n";
 	}
 	return false;
@@ -262,11 +258,11 @@ function cs_aide_raccourcis() {
 	$aide = array();
 	foreach ($outils as $outil) {
 		// stockage de la liste des fonctions par pipeline, si l'outil est actif...
-		if ($outil['actif']) {
+		if($outil['actif']) {
 			$id = $outil['id'];
 			include_spip('outils/'.$id);	
-			if (function_exists($f = $id.'_raccourcis')) $aide[] = '<li style="margin: 0.7em 0 0 0;">&bull; ' . $f() . '</li>';
-			elseif (!preg_match(',:aide$,', _T("couteauprive:$id:aide") ))
+			if(function_exists($f = $id.'_raccourcis')) $aide[] = '<li style="margin: 0.7em 0 0 0;">&bull; ' . $f() . '</li>';
+			elseif(!preg_match(',:aide$,', _T("couteauprive:$id:aide") ))
 				$aide[] = '<li style="margin: 0.7em 0 0 0;">&bull; ' .  _T("couteauprive:$id:aide") . '</li>';
 		}
 	}
@@ -284,7 +280,7 @@ function cs_aide_pipelines($outils_affiches_actifs) {
 	foreach (array_keys($cs_metas_pipelines) as $pipe) {
 		// stockage de la liste des pipelines et du nombre d'outils actifs concernes
 		$nb=0; foreach($outils as $outil) if($outil['actif'] && (isset($outil['pipeline:'.$pipe]) || isset($outil['pipelinecode:'.$pipe]))) $nb++;
-		if ($nb) $aide[] = _T('couteauprive:outil_nb'.($nb>1?'s':''), array('pipe'=>$pipe, 'nb'=>$nb));
+		if($nb) $aide[] = _T('couteauprive:outil_nb'.($nb>1?'s':''), array('pipe'=>$pipe, 'nb'=>$nb));
 	}
 	// nombre d'outils actifs / interdits par les autorisations (hors versionnage SPIP)
 	$nb = $ca2 = 0; 
@@ -301,10 +297,10 @@ function cs_aide_pipelines($outils_affiches_actifs) {
 
 // met en forme le fichier $f en vue d'un insertion en head
 function cs_insert_header($f, $type) {
-	if ($type=='css') {
+	if($type=='css') {
 		include_spip('inc/filtres');
 		return '<link rel="stylesheet" href="'.url_absolue(direction_css($f)).'" type="text/css" media="projection, screen" />';
-	} elseif ($type=='js')
+	} elseif($type=='js')
 		return '<script type="text/javascript" src="'.url_absolue($f).'"></script>';
 }
 // sauve la configuration dans un fichier tmp/couteau-suisse/config.php
@@ -351,48 +347,58 @@ function cs_initialise_includes($count_metas_outils) {
 	// variables temporaires
 	$temp_js_html = $temp_css_html = $temp_css = $temp_js = $temp_jq = $temp_jq_init = $temp_filtre_imprimer = array();
 	// inclure d'office outils/cout_fonctions.php
-	if ($temp=cs_lire_fichier_php("outils/cout_fonctions.php"))
+	if($temp=cs_lire_fichier_php("outils/cout_fonctions.php"))
 		$infos_fichiers['code_fonctions'][] = $temp;
 	// variable de verification
 	$infos_fichiers['code_options'][] = "\$GLOBALS['cs_verif']=$count_metas_outils;";
 	// parcours de tous les outils
 	foreach ($outils as $i=>$outil) {
 		// stockage de la liste des fonctions par pipeline, si l'outil est actif...
-		if ($outil['actif']) {
+		if($outil['actif']) {
 			$inc = $outil['id']; $pipe2 = '';
 			foreach ($outil as $pipe=>$fonc) {
-				if (is_pipeline_outil($pipe, $pipe2)) {
+				if(is_pipeline_outil($pipe, $pipe2)) {
 					// module a inclure
-					$infos_pipelines[$pipe2]['inclure'][] = $inc;
+					if(find_in_path("outils/$inc.php"))
+						$infos_pipelines[$pipe2]['inclure'][] = "outils/$inc";
+					if(isset($outil['distant']) && find_in_path("lib/$inc/distant_".basename($outil['distant'])))
+						$infos_pipelines[$pipe2]['inclure'][] = "lib/$inc/distant_".basename($outil['distant'],'.php');
 					// fonction a appeler
 					$infos_pipelines[$pipe2]['fonction'][] = $fonc;
-				} elseif (is_pipeline_outil_inline($pipe, $pipe2)) {
+				} elseif(is_pipeline_outil_inline($pipe, $pipe2)) {
 					// code inline
 					$infos_pipelines[$pipe2]['inline'][] = cs_optimise_if(cs_parse_code_js($fonc));
-				} elseif (is_traitements_outil($pipe, $fonc, $traitements_utilises)) {
+				} elseif(is_traitements_outil($pipe, $fonc, $traitements_utilises)) {
 					// rien a faire : $traitements_utilises est rempli par is_traitements_outil()
 				}
 			}
 			// recherche d'un fichier .css, .css.html et/ou .js eventuellement present dans outils/
-			if ($f=find_in_path($_css = "outils/$inc.css")) $cs_metas_pipelines['header'][] = cs_insert_header($f, 'css');
-			if ($f=find_in_path("outils/$inc.js")) $cs_metas_pipelines['header'][] = cs_insert_header($f, 'js');
+			// TODO : librairies distantes placees dans lib/
+			foreach(array('css', 'js') as $f) {
+				if($file=find_in_path("outils/$inc.$f")) $cs_metas_pipelines['header'][] = cs_insert_header($file, $f);
+/*				if(isset($outil['distant_'.$type]) && (file=find_in_path("lib/$inc/distant_{$f}_".basename($outil["distant_$f"]))))
+					$cs_metas_pipelines['header'][] = cs_insert_header($file, $f);
+*/			}
 			// en fait on peut pas compiler ici car les balises vont devoir etre traitees et les traitements ne sont pas encore dispo !
 			// le code est mis de cote. il sera compile plus tard au moment du pipeline grace a cs_compile_header()
-			if ($f=find_in_path("outils/$inc.css.html")) { lire_fichier($f, $ff); $temp_css_html[] = $ff; }
-			if ($f=find_in_path("outils/$inc.js.html")) { lire_fichier($f, $ff); $temp_js_html[] = $ff; }
+			if($f=find_in_path("outils/$inc.css.html")) { lire_fichier($f, $ff); $temp_css_html[] = $ff; }
+			if($f=find_in_path("outils/$inc.js.html")) { lire_fichier($f, $ff); $temp_js_html[] = $ff; }
 			// recherche d'un code inline eventuellement propose
-			if (isset($outil['code:spip_options'])) $infos_fichiers['code_spip_options'][] = $outil['code:spip_options'];
-			if (isset($outil['code:options'])) $infos_fichiers['code_options'][] = $outil['code:options'];
-			if (isset($outil['code:fonctions'])) $infos_fichiers['code_fonctions'][] = $outil['code:fonctions'];
-			if (isset($outil['code:css'])) $temp_css[] = cs_optimise_if(cs_parse_code_js($outil['code:css']));
-			if (isset($outil['code:js'])) $temp_js[] = cs_optimise_if(cs_parse_code_js($outil['code:js']));
-			if (isset($outil['code:jq_init'])) $temp_jq_init[] = cs_optimise_if(cs_parse_code_js($outil['code:jq_init']));
-			if (isset($outil['code:jq'])) $temp_jq[] = cs_optimise_if(cs_parse_code_js($outil['code:jq']));
+			if(isset($outil['code:spip_options'])) $infos_fichiers['code_spip_options'][] = $outil['code:spip_options'];
+			if(isset($outil['code:options'])) $infos_fichiers['code_options'][] = $outil['code:options'];
+			if(isset($outil['code:fonctions'])) $infos_fichiers['code_fonctions'][] = $outil['code:fonctions'];
+			if(isset($outil['code:css'])) $temp_css[] = cs_optimise_if(cs_parse_code_js($outil['code:css']));
+			if(isset($outil['code:js'])) $temp_js[] = cs_optimise_if(cs_parse_code_js($outil['code:js']));
+			if(isset($outil['code:jq_init'])) $temp_jq_init[] = cs_optimise_if(cs_parse_code_js($outil['code:jq_init']));
+			if(isset($outil['code:jq'])) $temp_jq[] = cs_optimise_if(cs_parse_code_js($outil['code:jq']));
 			// recherche d'un fichier monoutil_options.php ou monoutil_fonctions.php pour l'inserer dans le code
-			if ($temp=cs_lire_fichier_php("outils/{$inc}_options.php")) 
-				$infos_fichiers['code_options'][] = $temp;
-			if ($temp=cs_lire_fichier_php("outils/{$inc}_fonctions.php"))
-				$infos_fichiers['code_fonctions'][] = $temp;
+			// TODO : librairies distantes placees dans lib/
+			foreach(array('options', 'fonctions') as $f) {
+				if($temp=cs_lire_fichier_php("outils/{$inc}_{$f}.php")) $infos_fichiers['code_'.$f][] = $temp;
+/*				if(isset($outil['distant_'.$f]) && find_in_path("lib/$inc/distant_{$f}_".basename($outil["distant_$f"])))
+					if($temp=cs_lire_fichier_php("lib/$inc/distant_{$f}_$outil[distant_$f].php")) 
+						$infos_fichiers['code_'.$f][] = $temp;
+*/			}
 		}
 	}
 	// insertion du css pour la BarreTypo
@@ -409,22 +415,22 @@ span.cs_BTg {font-size:140%; padding:0 0.3em;}';
 		unset($temp_js_html);
 	}
 	// concatenation des css inline, js inline et filtres trouves
-	if (count($temp_css)) {
+	if(count($temp_css)) {
 		$temp_css = join("\n", $temp_css);
 		if(function_exists('compacte_css')) $temp_css = compacte_css($temp_css);
 		$temp = array("<style type=\"text/css\">\n$temp_css\n</style>");
 		unset($temp_css);
 		$cs_metas_pipelines['header'] = is_array($cs_metas_pipelines['header'])?array_merge($temp, $cs_metas_pipelines['header']):$temp;
 	}
-	if (count($temp_jq_init)) {
+	if(count($temp_jq_init)) {
 		$temp_js[] = "var cs_init = function() {\n\t".join("\n\t", $temp_jq_init)."\n}\nif(typeof onAjaxLoad=='function') onAjaxLoad(cs_init);";
 		$temp_jq[] = "cs_init.apply(document);";
 		unset($temp_jq_init);
 	}
 	$temp_jq = count($temp_jq)?"\njQuery(document).ready(function(){\n\t".join("\n\t", $temp_jq)."\n});":'';
-	$temp_js[] = "if (window.jQuery) {\nvar cs_sel_jQuery=typeof jQuery(document).selector=='undefined'?'@':'';\nvar cs_CookiePlugin=\"".url_absolue(find_in_path('javascript/jquery.cookie.js'))."\";$temp_jq\n}";
+	$temp_js[] = "if(window.jQuery) {\nvar cs_sel_jQuery=typeof jQuery(document).selector=='undefined'?'@':'';\nvar cs_CookiePlugin=\"".url_absolue(find_in_path('javascript/jquery.cookie.js'))."\";$temp_jq\n}";
 	unset($temp_jq);
-	if (count($temp_js)) {
+	if(count($temp_js)) {
 		$temp_js = join("\n", $temp_js);
 		if(function_exists('compacte_js')) $temp_js = compacte_js($temp_js);
 		$temp = array("<script type=\"text/javascript\"><!--
@@ -455,7 +461,7 @@ $temp_js\n// --></script>\n");
 			$traitements_type_objet = &$traitements_utilises[$bal][$obj];
 			foreach($type_objet as $f=>$fonction)  {
 				// pas d'objet precis
-				if ($f===0)	$traitements_type_objet[$f] = cs_fermer_parentheses(join("(", array_reverse($fonction)).'(%s');
+				if($f===0)	$traitements_type_objet[$f] = cs_fermer_parentheses(join("(", array_reverse($fonction)).'(%s');
 				// un objet precis
 				else {
 					if(!isset($liste_pivots[$f])) $liste_pivots[$f] = $f . '(%s)';
@@ -482,9 +488,9 @@ $temp_js\n// --></script>\n");
 	if(count($traitements_utilises))
 		$infos_fichiers['code_options'][] = "\n// Table des traitements\n" . join("\n", $traitements_utilises);
 	// effacement du repertoire temporaire de controle
-	if (@file_exists(_DIR_CS_TMP) && ($handle = @opendir(_DIR_CS_TMP))) {
+	if(@file_exists(_DIR_CS_TMP) && ($handle = @opendir(_DIR_CS_TMP))) {
 		while (($fichier = @readdir($handle)) !== false)
-			if ($fichier[0] != '.')	supprimer_fichier(_DIR_CS_TMP.$fichier);
+			if($fichier[0] != '.')	supprimer_fichier(_DIR_CS_TMP.$fichier);
 		closedir($handle);
 	} else spip_log('Erreur - cs_initialise_includes() : '._DIR_CS_TMP.' introuvable !');
 	// ecriture des fichiers mes_options et mes_fonctions
@@ -508,14 +514,14 @@ function cs_verif_FILE_OPTIONS($activer=false, $ecriture = false) {
 	$include = "@include_once \"$include\";\nif(\$GLOBALS['cs_spip_options']) define('_CS_SPIP_OPTIONS_OK',1);";
 	$inclusion = _CS_SPIP_OPTIONS_A."\n// Please don’t modify; this code is auto-generated\n$include\n"._CS_SPIP_OPTIONS_B;
 cs_log("cs_verif_FILE_OPTIONS($activer, $ecriture) : le code d'appel est $include");
-	if ($fo = cs_spip_file_options(1)) {
-		if (lire_fichier($fo, $t)) {
+	if($fo = cs_spip_file_options(1)) {
+		if(lire_fichier($fo, $t)) {
 			// verification du contenu inclu
 			$ok = preg_match('`\s*('.preg_quote(_CS_SPIP_OPTIONS_A,'`').'.*'.preg_quote(_CS_SPIP_OPTIONS_B,'`').')\s*`ms', $t, $regs);
 			// s'il faut une inclusion
-			if ($activer) {
+			if($activer) {
 				// pas besoin de reecrire si le contenu est identique a l'inclusion
-				if (($regs[1]==$inclusion)) $ecriture = false;
+				if(($regs[1]==$inclusion)) $ecriture = false;
 				$t2 = $ok?str_replace($regs[0], "\n$inclusion\n\n", $t):preg_replace(',<\?(?:php)?\s*,', '<?'."php\n$inclusion\n\n", $t);
 			} else {
 				$t2 = $ok?str_replace($regs[0], "\n", $t):$t;
@@ -539,9 +545,9 @@ cs_log(" -- fichier $fo absent. Fichier '$fo' et inclusion ".((!$ecriture || !$o
 // retire les guillemets extremes s'il y en a
 function cs_retire_guillemets($valeur) {
 	$valeur = trim($valeur);
-	if (preg_match(',^\'(.*)\'$,s', $valeur, $matches)) 
+	if(preg_match(',^\'(.*)\'$,s', $valeur, $matches)) 
 		return str_replace("\'", "'", $matches[1]);
-	if (preg_match(',^"(.*)"$,s', $valeur, $matches))
+	if(preg_match(',^"(.*)"$,s', $valeur, $matches))
 		return str_replace('\"', '"', $matches[1]);
 	return $valeur;
 }
@@ -567,7 +573,7 @@ function cs_get_code_variable($variable, $valeur) {
 	} else
 		$valeur = cs_php_format($valeur, $cs_variable['format']!=_format_NOMBRE);
 	$code = '';
-	foreach($cs_variable as $type=>$param) if (preg_match(',^code(:(.*))?$,', $type, $regs)) {
+	foreach($cs_variable as $type=>$param) if(preg_match(',^code(:(.*))?$,', $type, $regs)) {
 		$eval = '$test = ' . (isset($regs[2])?str_replace('%s', $valeur, $regs[2]):'true') . ';';
 		$test = false;
 		eval($eval);
@@ -585,7 +591,7 @@ function cs_parse_code_php($code, $debut='%%', $fin='%%') {
 		$cotes = $matches[1]=="'" && $matches[3]=="'";
 		$nom = $matches[2];
 		// la valeur de la variable n'est stockee dans les metas qu'au premier post
-		if (isset($metas_vars[$nom])) {
+		if(isset($metas_vars[$nom])) {
 			$rempl = cs_get_code_variable($nom, $metas_vars[$nom]);
 		} else {
 			// tant que le webmestre n'a pas poste, on prend la valeur (dynamique) par defaut
@@ -594,7 +600,7 @@ function cs_parse_code_php($code, $debut='%%', $fin='%%') {
 			$code = "/* Valeur par defaut : {$nom} = $defaut */\n" . $code;
 		}
 //echo '<br>',$nom, ':',isset($metas_vars[$nom]), " - $code";
-		if ($cotes) $rempl = str_replace("'", "\'", $rempl);
+		if($cotes) $rempl = str_replace("'", "\'", $rempl);
 		$code = str_replace($matches[0], $matches[1].$rempl.$matches[3], $code);
 	}
 	return $code;
@@ -610,7 +616,7 @@ function cs_parse_code_js($code) {
 	// parse ensuite %%toto%% pour la valeur reelle de la variable
 	while(preg_match(',%%([a-zA-Z_][a-zA-Z0-9_]*)%%,U', $code, $matches)) {
 		// la valeur de la variable n'est stockee dans les metas qu'au premier post
-		if (isset($metas_vars[$matches[1]])) {
+		if(isset($metas_vars[$matches[1]])) {
 			// la valeur de la variable est directement inseree dans le code js
 			$rempl = $metas_vars[$matches[1]];
 		} else {
@@ -630,11 +636,11 @@ function cs_optimise_if($code, $root=true) {
 		$code = str_replace(array('if(false){', 'if(!1){'), 'if(0){', $code);
 		$code = str_replace(array('if(true){', 'if(!0){'), 'if(1){', $code);
 	}
-	if (preg_match_all(',if\(([0-9])+\){(.*)$,msS', $code, $regs, PREG_SET_ORDER))
+	if(preg_match_all(',if\(([0-9])+\){(.*)$,msS', $code, $regs, PREG_SET_ORDER))
 	foreach($regs as $r) {
 		$temp = $r[2]; $ouvre = $ferme = -1; $nbouvre = 1;
 		do {
-			if ($ouvre===false) $min = $ferme + 1; else $min = min($ouvre, $ferme) + 1;
+			if($ouvre===false) $min = $ferme + 1; else $min = min($ouvre, $ferme) + 1;
 			$ouvre=strpos($temp, '{', $min);
 			$ferme=strpos($temp, '}', $min);
 			if($ferme!==false) { if($ouvre!==false && $ouvre<$ferme) $nbouvre++; else $nbouvre--; }
@@ -656,7 +662,7 @@ function cs_installe_outils() {
 	global $metas_outils;
 	foreach($metas_outils as $nom=>$o) if(isset($o['actif']) && $o['actif']) {
 		include_spip('outils/'.$nom);
-		if (function_exists($f = $nom.'_installe')) {
+		if(function_exists($f = $nom.'_installe')) {
 			$f();
 cs_log(" -- $f() : OK !");
 		}

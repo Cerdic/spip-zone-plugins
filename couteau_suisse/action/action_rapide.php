@@ -27,6 +27,11 @@ cs_log("INIT : action_action_rapide_dist() - Une action rapide '$arg' a ete dema
 
 	switch($arg) {
 
+		case 'fichiers_distants':
+			// mettre a jour les fichiers distants d'un outil...
+			// rien a faire :-)
+			break;
+
 		default: if($outil) {
 			// fonction mon_outil_argument_action() suite a l'appel de ?action=action_rapide&arg=mon_outil|argument
 			$fct = $outil.'_'.$arg.'_action';

@@ -1,13 +1,23 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 // Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/couteau_suisse/lang/
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if(!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// 2
 	'2pts_non' => '&nbsp;:&nbsp;non',
 	'2pts_oui' => '&nbsp;:&nbsp;oui',
+	'distant_charge' => 'Fichier correctement t&eacute;l&eacute;charg&eacute; et install&eacute; en librairie.',
+	'distant_present' => 'Fichier pr&eacute;sent en librairie depuis le @date@.',
+	'distant_echoue' => 'Erreur sur le chargement distant, cet outil risque de ne pas fonctionner !',
+	'distant_inactif' => 'Fichier absent. Activer cet outil.',
+	'distant_aide' => 'Cet outil requiert des fichiers distants qui doivent tous &ecirc;tre correctement install&eacute;s en librairie. Avant d\'actualiser ce cadre, assurez-vous que les fichiers requis sont bien pr&eacute;sents sur le serveur distant.',
+	
+	'previsualisation:description' => 'Par d&eacute;faut, SPIP permet de pr&eacute;visualiser les articles dans leur version publique, mais uniquement lorsque ceux-ci ont &eacute;t&eacute; &laquo; propos&eacute; &agrave; l&rsquo;&eacute;valuation &raquo;. Hors cet outil permet aux auteurs de pr&eacute;visualiser &eacute;galement les articles pendant leur r&eacute;daction. Chacun peut alors pr&eacute;visualiser et modifier son texte &agrave; sa guise.
+
+@puce@ Attention : cette fonctionnalit&eacute; ne modifie pas les droits de pr&eacute;visualisation. Pour que vos r&eacute;dacteurs aient effectivement le droit de pr&eacute;visualiser leurs articles &laquo; en cours de r&eacute;daction &raquo;, vous devez l&rsquo;autoriser (dans le menu {[Configuration&gt;Fonctions avanc&eacute;es->./?exec=config_fonctions]} de l&rsquo;espace priv&eacute;).',
+	'previsualisation:nom' => 'Pr&eacute;visualisation des articles',
 
 	// S
 	'SPIP_liens:description' => '@puce@ Tous les liens du site s\'ouvrent par d&eacute;faut dans la fen&ecirc;tre de navigation en cours. Mais il peut &ecirc;tre utile d\'ouvrir les liens externes au site dans une nouvelle fen&ecirc;tre ext&eacute;rieure -- cela revient &agrave; ajouter {target=&quot;_blank&quot;} &agrave; toutes les balises &lt;a&gt; dot&eacute;es par SPIP des classes {spip_out}, {spip_url} ou {spip_glossaire}. Il est parfois n&eacute;cessaire d\'ajouter l\'une de ces classes aux liens du squelette du site (fichiers html) afin d\'&eacute;tendre au maximum cette fonctionnalit&eacute;.[[%radio_target_blank3%]]
@@ -222,6 +232,7 @@ Cet outil peut &ecirc;tre coupl&eacute; avec &laquo;&nbsp;[.->sommaire]&nbsp;&ra
 	'desactiver_flash:nom' => 'D&eacute;sactive les objets flash',
 	'detail_balise_etoilee' => '{{Attention}} : V&eacute;rifiez bien l\'utilisation faite par vos squelettes des balises &eacute;toil&eacute;es. Les traitements de cet outil ne s\'appliqueront pas sur : @bal@.',
 	'detail_fichiers' => 'Fichiers :',
+	'detail_fichiers_distant' => 'Fichiers distants :',
 	'detail_inline' => 'Code inline :',
 	'detail_disabled' => 'Param&egrave;tres non modifiables :',
 	'detail_jquery2' => 'Cet outil utilise la librairie {jQuery}.',

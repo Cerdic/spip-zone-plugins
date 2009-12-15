@@ -5,7 +5,7 @@
 #  Contact : patrice¡.!vanneufville¡@!laposte¡.!net   #
 #  Infos : http://www.spip-contrib.net/?article2166   #
 #-----------------------------------------------------#
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if(!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/autoriser');
 include_spip('inc/texte');
@@ -104,7 +104,7 @@ div.categorie span.light {
 	font-weight:normal;
 }
 
-div.cs_sobre, input.cs_sobre {
+.cs_sobre {
 	background:transparent none repeat scroll 0%;
 	border:medium none;
 	color:#000099;
@@ -118,6 +118,9 @@ div.cs_sobre, input.cs_sobre {
 	width:180px;
 }
 
+.cs_droite {
+	text-align:right;
+}
 /* classes de description */
 .q1 { margin:0 2em; }
 .q2 { margin-left:2em; }
@@ -153,7 +156,7 @@ function outils_toggle() {
 		msg=\"".cs_javascript('couteauprive:outil_permuter')."\";
 		msg=msg.replace(/@text@/, jQuery('a.outil_on').text());
 	}
-	if (!confirm(msg)) return false;
+	if(!confirm(msg)) return false;
 	jQuery('#cs_selection').attr('value', cs_selected.join(','));
 	document.csform.submit();
 }
@@ -174,12 +177,12 @@ function cs_href_click(this_) {
 	return false;
 }
 
-if (window.jQuery) jQuery(function(){
+if(window.jQuery) jQuery(function(){
 	// decalage a supprimer sur FF2
-	if (jQuery.browser.mozilla) jQuery('input.cs_sobre').css('margin-left','-3px');
+	if(jQuery.browser.mozilla) jQuery('input.cs_sobre').css('margin-left','-3px');
 	
 	jQuery('div.sous_liste').each(cs_Categorie2);
-	if (window.location.search.match(/cmd=pack/)!=null) 
+	if(window.location.search.match(/cmd=pack/)!=null) 
 		jQuery(\"div.cs_aide a[\"+cs_sel_jQuery+\"href*='cmd=pack']\")
 			.click( function() { window.location.reload(true); return false; });
 	jQuery(\"div.cs_aide a[\"+cs_sel_jQuery+\"href*='cmd=install']\").click( function() { 
@@ -305,7 +308,7 @@ function cs_EcrireCookie(nom, valeur){
 }
 function cs_getCookieVal(offset){
 	var endstr=document.cookie.indexOf (';', offset);
-	if (endstr==-1) endstr=document.cookie.length;
+	if(endstr==-1) endstr=document.cookie.length;
 	return unescape(document.cookie.substring(offset, endstr)); 
 }
 function cs_LireCookie(nom){
@@ -315,9 +318,9 @@ function cs_LireCookie(nom){
 	var i=0;
 	while (i<clen){
 		var j=i+alen;
-		if (document.cookie.substring(i, j)==arg) return cs_getCookieVal(j);
+		if(document.cookie.substring(i, j)==arg) return cs_getCookieVal(j);
 		i=document.cookie.indexOf(' ',i)+1;
-		if (i==0) break;
+		if(i==0) break;
 	}
 	return null; 
 }
@@ -399,7 +402,7 @@ cs_log("INIT : exec_admin_couteau_suisse()");
 		else global $connect_id_auteur;
 
 	// reset general
-	if ($cmd=='resetall'){
+	if($cmd=='resetall'){
 		spip_log("Reset General du Couteau Suisse par l'auteur id=$connect_id_auteur");
 		foreach(array_keys($GLOBALS['meta']) as $meta) {
 			if(strpos($meta, 'tweaks_') === 0) effacer_meta($meta);
@@ -412,7 +415,7 @@ cs_log("INIT : exec_admin_couteau_suisse()");
 	}
 	// installation personnalisee
 	if(isset($_GET['pack']) && isset($GLOBALS['cs_installer'][$_GET['pack']]['outils'])) {
-		if ($cmd=='install'){
+		if($cmd=='install'){
 			spip_log("Installation peronnalisee de '$_GET[pack]' par l'auteur id=$connect_id_auteur");
 			$pack = &$GLOBALS['cs_installer'][$_GET['pack']];
 			effacer_meta('tweaks_actifs');
@@ -423,7 +426,7 @@ cs_log("INIT : exec_admin_couteau_suisse()");
 			ecrire_meta('tweaks_variables', serialize($metas_vars));
 			// tout recompiler
 			cout_exec_redirige();
-		} elseif ($cmd=='delete'){
+		} elseif($cmd=='delete'){
 			spip_log("Suppression de '$_GET[pack]' par l'auteur id=$connect_id_auteur");
 			$p = preg_quote($_GET[pack],',');
 			$r = "[$]GLOBALS\['cs_installer'\]\['$p'\] *= *array *\(";
@@ -435,7 +438,7 @@ cs_log("INIT : exec_admin_couteau_suisse()");
 		}
 	}
 	// reset des variables d'un outil
-	if ($cmd=='reset' && strlen($_GET['outil'])){
+	if($cmd=='reset' && strlen($_GET['outil'])){
 		spip_log("Reset des variables de '$_GET[outil]' par l'auteur id=$connect_id_auteur");
 		global $outils;
 		include_spip('cout_utils');
@@ -453,7 +456,7 @@ cs_log("INIT : exec_admin_couteau_suisse()");
 		cout_exec_redirige("cmd=descrip&outil={$_GET[outil]}#cs_infos");
 	}
 	// reset de l'affichage
-	if ($cmd=='showall'){
+	if($cmd=='showall'){
 		spip_log("Reset de tous les affichages du Couteau Suisse par l'auteur id=$connect_id_auteur");
 		effacer_meta('tweaks_caches');
 		cout_exec_redirige();
@@ -468,7 +471,7 @@ cs_log("INIT : exec_admin_couteau_suisse()");
 
 	// mise a jour des donnees si envoi via formulaire
 	// sinon fait une passe de verif sur les outils
-	if ($cmd=='switch' OR $cmd=='hide'){
+	if($cmd=='switch' OR $cmd=='hide'){
 		enregistre_modif_outils($cmd);
 		cout_exec_redirige(strlen($_GET['outil'])?"cmd=descrip&outil={$_GET[outil]}#cs_infos":'');
 	}
@@ -507,9 +510,9 @@ $resultat = function_exists('spip_fetch_array')?spip_fetch_array($res):sql_fetch
 if($resultat['Type']!='text') echo "<p style=\"color:red;\">Attention : votre base semble ancienne et le Couteau Suisse ne va pas bien fonctionner.</p><p>La table 'spip_meta' a pour type de valeur '$resultat[Type]' au lieu de 'text'.</p>";
 // verification de la barre typo V2
 $mini = '2.5.3';
-if (strlen($bt_version) and (version_compare($bt_version,$mini,'<'))) echo "<p>"._T('couteauprive:erreur:bt', array('version'=>$bt_version, 'mini'=>$mini))."</p>";
+if(strlen($bt_version) and (version_compare($bt_version,$mini,'<'))) echo "<p>"._T('couteauprive:erreur:bt', array('version'=>$bt_version, 'mini'=>$mini))."</p>";
 echo "<script type=\"text/javascript\"><!-- 
-if (!window.jQuery) document.write('".str_replace('/','\/',addslashes(propre('<p>'._T('couteauprive:erreur:jquery').'</p>')))."');
+if(!window.jQuery) document.write('".str_replace('/','\/',addslashes(propre('<p>'._T('couteauprive:erreur:jquery').'</p>')))."');
 //--></script>";
 	echo '</div>';
 

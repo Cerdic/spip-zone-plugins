@@ -9,7 +9,7 @@
 #  description des outils.                            #
 #-----------------------------------------------------#
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if(!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/autoriser');
 include_spip('cout_define');
@@ -26,18 +26,18 @@ function cs_init_plugins() {
 function cs_initialisation_d_un_outil($outil_, $description_outil, $modif) {
 	global $outils, $metas_outils;
 	$outil = &$outils[$outil_];
-	if (!isset($outil['categorie'])) $outil['categorie'] = 'divers';
-	if (!isset($outil['nom'])) $outil['nom'] = _T('couteauprive:'.$outil['id'].':nom');
-	if (isset($outil['code:jq'])) $outil['jquery']='oui';
+	if(!isset($outil['categorie'])) $outil['categorie'] = 'divers';
+	if(!isset($outil['nom'])) $outil['nom'] = _T('couteauprive:'.$outil['id'].':nom');
+	if(isset($outil['code:jq'])) $outil['jquery']='oui';
 	$outil['actif'] = isset($metas_outils[$outil['id']])?$metas_outils[$outil['id']]['actif']:0;
 	// Si Spip est trop ancien ou trop recent...
-	if (cs_version_erreur($outil)) { $metas_outils[$outil['id']]['actif'] = $outil['actif'] = 0; }
+	if(cs_version_erreur($outil)) { $metas_outils[$outil['id']]['actif'] = $outil['actif'] = 0; }
 	// au cas ou des variables sont presentes dans le code
 	$outil['variables'] = array(); $outil['nb_variables'] = 0;
 	// ces 2 lignes peuvent initialiser des variables dans $metas_vars ou $metas_vars_code
-	if (isset($outil['code:spip_options'])) $outil['code:spip_options'] = cs_parse_code_php($outil['code:spip_options']);
-	if (isset($outil['code:options'])) $outil['code:options'] = cs_parse_code_php($outil['code:options']);
-	if (isset($outil['code:fonctions'])) $outil['code:fonctions'] = cs_parse_code_php($outil['code:fonctions']);
+	if(isset($outil['code:spip_options'])) $outil['code:spip_options'] = cs_parse_code_php($outil['code:spip_options']);
+	if(isset($outil['code:options'])) $outil['code:options'] = cs_parse_code_php($outil['code:options']);
+	if(isset($outil['code:fonctions'])) $outil['code:fonctions'] = cs_parse_code_php($outil['code:fonctions']);
 	// cette ligne peut utiliser des variables dans $metas_vars ou $metas_vars_code
 	return $description_outil($outil_, 'admin_couteau_suisse', $modif);
 }
@@ -86,24 +86,25 @@ cs_log(" -- appel de charger_fonction('description_outil', 'inc') et de descript
 
 	$s .= "<h3 class='titrem'><img src='"._DIR_IMG_PACK."$puce' width='9' height='9' alt=\"$titre_etat\" title=\"$titre_etat\" />&nbsp;" . $outil['nom'] . '</h3>';
 	$s .= '<div class="cs_menu_outil">';
-	if ($nb_var)
+	if($nb_var)
 		$s .= '<a href="'.generer_url_ecrire(_request('source'),'cmd=reset&outil='.$outil_id).'" title="' . _T('couteauprive:par_defaut') . '">' . _T('couteauprive:par_defaut') . '</a>&nbsp;|&nbsp;';
-	if (!$actif)
+	if(!$actif)
 		$s .= '<a href="'.generer_url_ecrire(_request('source'),'cmd=hide&outil='.$outil_id).'" title="' . _T('couteauprive:outil_cacher') . '">' . _T('couteauprive:outil_cacher') . '</a>&nbsp;|&nbsp;';
 	$act = $actif?'des':'';
 	$s .= '<a href="'.generer_url_ecrire(_request('source'),'cmd=switch&outil='.$outil_id).'" title="'._T("couteauprive:outil_{$act}activer_le").'">'._T("couteauprive:outil_{$act}activer")."</a></div>";
-	if(strlen($temp = cs_action_rapide($outil_id, $actif))) $s .= "<div class='cs_action_rapide' id='cs_action_rapide'>$temp</div>";
+	if(strlen($temp = cs_action_fichiers_distant($outil) . cs_action_rapide($outil_id, $actif))) 
+		$s .= "<div class='cs_action_rapide' id='cs_action_rapide'>$temp</div>";
 	$s .= propre($descrip);
 
 	$serial = serialize(array_keys($outil));
 	$p = '';
-	if (preg_match_all(',traitement:([A-Z_]+),', $serial, $regs, PREG_PATTERN_ORDER))
+	if(preg_match_all(',traitement:([A-Z_]+),', $serial, $regs, PREG_PATTERN_ORDER))
 		$p .=  _T('couteauprive:detail_balise_etoilee', array('bal' => '#'.join('*, #', array_unique($regs[1])).'*'));	
-	if (isset($outil['jquery']) && $outil['jquery']=='oui')
+	if(isset($outil['jquery']) && $outil['jquery']=='oui')
 		$p .= '<p>' . _T('couteauprive:detail_jquery2') . '</p>';
-	if (isset($outil['auteur']) && strlen($outil['auteur']))
+	if(isset($outil['auteur']) && strlen($outil['auteur']))
 		$p .= '<p>' . _T('auteur') .' '. ($outil['auteur']) . '</p>';
-	if (isset($outil['contrib']) && strlen($outil['contrib']))
+	if(isset($outil['contrib']) && strlen($outil['contrib']))
 		$p .= '<p>' . _T('couteauprive:contrib', array('url'=>'[->'._URL_CONTRIB.$outil['contrib'].']')) . '</p>';
 
 	return $s . propre($p) . detail_outil($outil_id) . '</div>';
@@ -128,10 +129,10 @@ function liste_outils() {
 	$results_actifs = $results_inactifs = '';
 	foreach($categ as $c=>$i) {
 		$s_actifs = $s_inactifs = array();
-		foreach($outils as $outil) if ($outil['categorie']==$i) {
+		foreach($outils as $outil) if($outil['categorie']==$i) {
 			$test = $outil['actif']?'s_actifs':'s_inactifs';
 			$hide = !$outil['actif'] && isset($metas_caches[$outil['id']]['cache']);
-			if (!$hide)
+			if(!$hide)
 				${$test}[] .= $outil['nom'] . '|' . $outil['index'] . '|' . $outil['id'];
 		}
 		$nb_actifs += count($s_actifs);
@@ -145,7 +146,7 @@ function liste_outils() {
 			foreach(${$temp} as $j=>$v)
 				${$temp}[$j] = preg_replace(',^(.*)\|(.*)\|(.*)$,', '<a class="cs_href" id="$3" href="'.$href.'$3">$1</a>', $v);
 			${$temp} = join("<br/>\n", ${$temp});
-			if (strlen(${$temp})) ${'result'.$temp} .= $titre
+			if(strlen(${$temp})) ${'result'.$temp} .= $titre
 				. "<div id='sous_liste_$id' class='sous_liste'>" . ${$temp} . '</div>';
 			$id++;
 		}
@@ -175,21 +176,27 @@ function detail_outil($outil_id) {
 	global $outils;
 	$outil = &$outils[$outil_id];
 	$div = '<div class="cs_details_outil">';
-	if (cs_version_erreur($outil)) return $div . _T('couteauprive:erreur:version') . '</div>';
+	if(cs_version_erreur($outil)) return $div . _T('couteauprive:erreur:version') . '</div>';
 	$details = $a = array();
 	foreach(array('spip_options', 'options', 'fonctions', 'js', 'jq', 'css') as $in)
 		if(isset($outil['code:'.$in])) $a[] = _T('couteauprive:code_'.$in);
 	if(count($a)) $details[] = _T('couteauprive:detail_inline') . ' ' . join(', ', $a);
 	$a = array();
 	foreach(array('.php', '_options.php', '_fonctions.php', '.js', '.js.html', '.css', '.css.html') as $ext)
-		if (find_in_path('outils/'.($temp=$outil_id.$ext))) $a[] = $temp;
+		if(find_in_path('outils/'.($temp=$outil_id.$ext))) $a[] = $temp;
 	if(count($a)) $details[] = _T('couteauprive:detail_fichiers') . ' ' . join(', ', $a);
 	$serial = serialize(array_keys($outil));
-	if (preg_match_all(',traitement:([A-Z_]+),', $serial, $regs, PREG_PATTERN_ORDER))
+	if(preg_match_all(',traitement:([A-Z_]+),', $serial, $regs, PREG_PATTERN_ORDER))
 		$details[] =  _T('couteauprive:detail_traitements') . ' #' . join(', #', array_unique($regs[1]));	
-	if (preg_match_all(',(pipeline|pipelinecode):([a-z_]+),', serialize(array_keys($outil)), $regs, PREG_PATTERN_ORDER))
+	$serkeys = serialize(array_keys($outil));
+	if(preg_match_all(',(pipeline|pipelinecode):([a-z_]+),', $serkeys, $regs, PREG_PATTERN_ORDER))
 		$details[] = _T('couteauprive:detail_pipelines') . ' ' . join(', ', array_unique($regs[2]));
 	if($outil['nb_disabled']) $details[] = _T('couteauprive:detail_disabled') . ' ' . $outil['nb_disabled'];
+	$a = array();
+	if(isset($outil['fichiers_distants'])) {
+		foreach($outil['fichiers_distants'] as $i) $a[] = basename($outil[$i]);
+		$details[] = _T('couteauprive:detail_fichiers_distant') . ' ' . join(', ', $a);
+	}
 	if(count($details)) return $div . join('<br />', $details) . '</div>';
 	return '';
 }
@@ -200,11 +207,10 @@ function cs_action_rapide($outil_id, $actif=true) {
 	$f = "{$outil_id}_action_rapide";
 	include_spip("outils/$f");
 	if(!function_exists($f)) return '';
-	$f = trim($f());
-	if(strlen($f)) {
+	if(strlen($f = trim($f()))) {
 		// si inactif...
 		if(!$actif) {
-			if (preg_match_all(',<legend[^>]*>(.*?):?\s*</legend>,', $f, $regs))
+			if(preg_match_all(',<legend[^>]*>(.*?):?\s*</legend>,', $f, $regs))
 				// on ne conserve que les <legend>
 				$f = '<ul><li>' . join("</li><li>", $regs[1]) . '</li></ul>';
 				// on ne conserve que les value
@@ -213,6 +219,38 @@ function cs_action_rapide($outil_id, $actif=true) {
 		return "<div>$info</div><div>$f</div>";
 	}
 	return '';
+}
+
+// gere les fichiers distants d'un outil
+function cs_action_fichiers_distant(&$outil, $force=false) {
+	if(!isset($outil['fichiers_distants'])) return '';
+	$lib = sous_repertoire(_DIR_PLUGIN_COUTEAU_SUISSE, 'lib');
+	$a = array();
+	foreach($outil['fichiers_distants'] as $i) {
+		$dir = sous_repertoire($lib, $outil['id']);
+		$f = $i . '_' . basename($outil[$i]);
+		$file = $dir.$f;
+		$size = ($force || @(!file_exists($file)) ? 0 : filesize($file));
+		if($size) $statut = _T('couteauprive:distant_present', array('date'=>cs_date_long(date('Y-m-d H:i:s', filemtime($file)))));
+		elseif($outil['actif']) {
+			include_spip('inc/distant');
+			if($distant = recuperer_page($outil[$i])) {
+				$test = preg_replace(',^.*?\<\?php|\?\>.*?$,', '', $distant);
+				if(!@eval("return true; $test")) $distant = false;
+				else $distant = ecrire_fichier($file, '<'."?php\n\n".trim($test)."\n\n?".'>');
+			}
+			if($distant) $statut = '<span style="color:green">'._T('couteauprive:distant_charge').'</span>';
+			else $statut = '<span style="color:red">'._T('couteauprive:distant_echoue').'</span>';
+		} else $statut = _T('couteauprive:distant_inactif');
+		$a[] = "[{$f}->{$outil[$i]}]\n_ $statut";
+	}
+	$a = '<ul style="margin:0.6em 0 0.6em 4em;"><li>' . join("</li><li style='margin-top:0.4em;'>", $a) . '</li></ul>';
+	return ajax_action_auteur('action_rapide', 'fichiers_distants', 'admin_couteau_suisse', "arg=$outil[id]|fichiers_distants&cmd=descrip#cs_action_rapide",
+			'<p>' . _T('couteauprive:distant_aide') . '</p>'
+			. '<p style="margin-top:1em"><strong>' . definir_puce() . '&nbsp;' . _T('couteauprive:detail_fichiers_distant') . '</strong></p>'
+			. '<div>' . propre($a) . "</div>\n<p class='cs_sobre'><input class='cs_sobre' type='submit' value=\" ["
+			. attribut_html(_T('couteauprive:rss_actualiser')).']" /></p>');
+	
 }
 
 ?>
