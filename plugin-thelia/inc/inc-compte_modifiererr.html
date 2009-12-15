@@ -12,28 +12,25 @@
 				<h3><:spipthelia:modifier_mdp:></h3>
 				</div>
 									
-			<form action="#URL_PAGE{moncompte,lang=#LANG}" method="post" id="modifier1" class="formulaire-thelia">
-            		<fieldset>
-			<input type="hidden" name="thelia_action" value="modifiercompte" />
-			<table>
- 				<tbody>
-				<tr>
-    					<td class="ligneTableau"><:spipthelia:mon_mdp:> THELIA-MOTDEPASSE[<span class="obligatoire">(<:spipthelia:verifiez_mdp:>)</span>]</td>
-   					<td class="ligneTableau"><input name="motdepasse1" type="password" class="zoneDeSaisie" /></td>
-  				</tr>
-  				<tr>
-    					<td class="ligneTableau"><:spipthelia:confirmation_mdp:></td>
-    					<td class="ligneTableau"><input name="motdepasse2" type="password" class="zoneDeSaisie" /></td>
-  				</tr>
-				</tbody>
-			</table>
-			
-			<div class="boutonMonCompteContenu">
-				<input type="submit" value="<:spipthelia:valider:>" />
-			</div>
-			</fieldset>
-			</form>
-				
+            <form action="#URL_PAGE{moncompte,lang=#LANG}" method="post" id="modifier1" class="formulaire_spip">
+               <fieldset>
+                  <input type="hidden" name="thelia_action" value="modifiercompte" />
+                  <ul>
+                     <li>
+                        <label for="motdepasse1"><:spipthelia:mon_mdp:> THELIA-MOTDEPASSE[<span class="obligatoire">(<:spipthelia:verifiez_mdp:>)</span>]</label>
+                        <input name="motdepasse1" id="motdepasse1" type="password" class="text" />
+                     </li>
+                     <li>
+                        <label for="motdepasse2"><:spipthelia:confirmation_mdp:></label>
+                        <input name="motdepasse2" id="motdepasse2" type="password" class="text" />
+                     </li>
+                     <li class="boutonMonCompteContenu">
+                        <input type="submit" class="submit" value="<:spipthelia:valider:>" />
+                     </li>
+                  </ul>
+               </fieldset>
+            </form>
+               
 				<div class="separation">
 				</div>
 				
@@ -43,80 +40,75 @@
 				<h3><:spipthelia:nouveau_client:></h3>
 				</div>
 				
-		   	<form action="#URL_PAGE{compte_modifier,lang=#LANG}" method="post" id="modifier2" class="formulaire-thelia">
+		   	<form action="#URL_PAGE{compte_modifier,lang=#LANG}" method="post" id="modifier2" class="formulaire_spip">
            		<fieldset>
-			<input type="hidden" name="thelia_action" value="modifiercompte" /> 
-			<table>
-			<tbody>
-  				<tr>
-    				<td class="ligneTableau"><:spipthelia:civilite:> THELIA-RAISON[<span class="obligatoire">(<:spipthelia:obligatoire:>)</span>]</td>
-    				<td class="ligneTableau">
-					<select name="raison" size="1" class="zoneDeSaisie">
-                    <option value=""><:spipthelia:choisissez:></option>
-                    <option value="1" THELIA-CLIENT_RAISON1F><:spipthelia:madame:></option>
-                    <option value="2" THELIA-CLIENT_RAISON2F><:spipthelia:mademoiselle:></option>
-                    <option value="3" THELIA-CLIENT_RAISON3F><:spipthelia:monsieur:></option>
-              		</select>					</td>
-  				</tr>
-  				<tr>
-    				<td class="ligneTableau"><:spipthelia:nom:> THELIA-NOM[<span class="obligatoire">(<:spipthelia:obligatoire:>)</span>]</td>
-    				<td class="ligneTableau"><input type="text" name="nom"   value="THELIA-CLIENT_NOM" class="zoneDeSaisie" /></td>
-  				</tr>
-  				<tr>
-  				  <td class="ligneTableau"><:spipthelia:prenom:> THELIA-PRENOM[<span class="obligatoire">(<:spipthelia:obligatoire:>)</span>]</td>
-  				  <td class="ligneTableau"><input type="text" name="prenom"   value="THELIA-CLIENT_PRENOM" class="zoneDeSaisie" /></td>
-			  </tr>
-  				<tr>
-  				  <td class="ligneTableau"><:spipthelia:adresse:> THELIA-ADRESSE1[<span class="obligatoire">(<:spipthelia:obligatoire:>)</span>]</td>
-  				  <td class="ligneTableau"><input type="text" name="adresse1" class="zoneDeSaisie"  value="THELIA-CLIENT_ADRESSE1" /></td>
-			  </tr>
-  				<tr>
-  				  <td class="ligneTableau"><:spipthelia:adresse_suite:></td>
-  				  <td class="ligneTableau"><input type="text" name="adresse2" class="zoneDeSaisie"  value="THELIA-CLIENT_ADRESSE2"/></td>
-			  </tr>
-  				<tr>
-  				  <td class="ligneTableau"><:spipthelia:complement_adresse:></td>
-  				  <td class="ligneTableau"><input type="text" name="adresse3" class="zoneDeSaisie"  value="THELIA-CLIENT_ADRESSE3"/></td>
-			  </tr>
-  				<tr>
-  				  <td class="ligneTableau"><:spipthelia:code_postal:> THELIA-CPOSTAL[<span class="obligatoire">(<:spipthelia:obligatoire:>)</span>] </td>
-  				  <td class="ligneTableau"><input type="text" name="cpostal" class="zoneDeSaisie"   value="THELIA-CLIENT_CPOSTAL"/></td>
-			  </tr>
-  				<tr>
-  				  <td class="ligneTableau"><:spipthelia:ville:> THELIA-VILLE[<span class="obligatoire">(<:spipthelia:obligatoire:>)</span>]</td>
-  				  <td class="ligneTableau"><input type="text" name="ville" class="zoneDeSaisie"   value="THELIA-CLIENT_VILLE"/></td>
-			  </tr>
-  				<tr>
-  				  <td class="ligneTableau"><:spipthelia:pays:> THELIA-PAYS[<span class="obligatoire">(<:spipthelia:obligatoire:>)</span>]</td>
-  				  <td class="ligneTableau">
-				  <select name="pays" size="1" class="zoneDeSaisie">
-				  <option value="" selected="selected"><:spipthelia:choisissez:></option>
-				  <THELIA_pays type="PAYS" zdefinie="1">           
-                  <option value="THELIA-ID"  THELIA-SELECTED>THELIA-TITRE</option>
-				  </THELIA_pays>
-				  </select>
-				  </td>
-			  </tr>
-  				<tr>
-  				  <td class="ligneTableau"><:spipthelia:telephone_fixe:> THELIA-TELFIXE[<span class="obligatoire">(<:spipthelia:obligatoire:>)</span>] </td>
-  				  <td class="ligneTableau"><input type="text" name="telfixe"   value="THELIA-CLIENT_TELFIXE"  class="zoneDeSaisie" /></td>
-			  </tr>
-  				<tr>
-  				  <td class="ligneTableau"><:spipthelia:telephone_portable:></td>
-  				  <td class="ligneTableau"><input type="text" name="telport" class="zoneDeSaisie"   value="THELIA-CLIENT_TELPORT"/></td>
-			  </tr>
-  				<tr>
-  				  <td class="ligneTableau"><:spipthelia:email:> THELIA-EMAIL[<span class="obligatoire">(<:spipthelia:verifiez_email:>)</span>]</td>
-  				  <td class="ligneTableau"><input type="text" name="email1" class="zoneDeSaisie"  value="THELIA-CLIENT_EMAIL"/></td>
-			  </tr>
-  				<tr>
-  				  <td class="ligneTableau"><:spipthelia:confirmation_email:></td>
-  				  <td class="ligneTableau"><input type="text" name="email2" class="zoneDeSaisie"  value="THELIA-CLIENT_EMAIL"/></td>
-			  </tr>
-			</tbody>
-			</table>
-				<div class="boutonMonCompteContenu">
-				<input type="submit" value="<:spipthelia:valider:>" />
-				</div>
-			</fieldset>
+                  <input type="hidden" name="thelia_action" value="modifiercompte" /> 
+                  <ul>
+                     <li>
+                        <label for="raison"><:spipthelia:civilite:> THELIA-RAISON[<span class="obligatoire">(<:spipthelia:obligatoire:>)</span>]</label>
+                        <select name="raison" id="raison" size="1" class="text">
+                           <option value=""><:spipthelia:choisissez:></option>
+                           <option value="1" THELIA-CLIENT_RAISON1F><:spipthelia:madame:></option>
+                           <option value="2" THELIA-CLIENT_RAISON2F><:spipthelia:mademoiselle:></option>
+                           <option value="3" THELIA-CLIENT_RAISON3F><:spipthelia:monsieur:></option>
+                        </select>				
+                     </li>
+                     <li>
+                        <label for="nom"><:spipthelia:nom:> THELIA-NOM[<span class="obligatoire">(<:spipthelia:obligatoire:>)</span>]</label>
+                        <input type="text" name="nom" id="nom"  value="THELIA-CLIENT_NOM" class="text" />
+                     </li>
+                     <li>
+                        <label for="prenom"><:spipthelia:prenom:> THELIA-PRENOM[<span class="obligatoire">(<:spipthelia:obligatoire:>)</span>]</label>
+                        <input type="text" name="prenom" id="prenom" value="THELIA-CLIENT_PRENOM" class="text" />
+                     </li>
+                     <li>
+                        <label for="adresse1"><:spipthelia:adresse:> THELIA-ADRESSE1[<span class="obligatoire">(<:spipthelia:obligatoire:>)</span>]</label>
+                        <input type="text" name="adresse1" id="adresse1" class="text"  value="THELIA-CLIENT_ADRESSE1" />
+                     </li>
+                     <li>
+                        <label for="adresse2"><:spipthelia:adresse_suite:></label>
+                        <input type="text" name="adresse2"  id="adresse2" class="text"  value="THELIA-CLIENT_ADRESSE2"/>
+                     </li>
+                     <li>
+                        <label for="adresse3"><:spipthelia:complement_adresse:></label>
+                        <input type="text" name="adresse3" id="adresse3" class="text"  value="THELIA-CLIENT_ADRESSE3"/>
+                     </li>
+                     <li>
+                        <label for="cpostal"><:spipthelia:code_postal:> THELIA-CPOSTAL[<span class="obligatoire">(<:spipthelia:obligatoire:>)</span>] </label>
+                        <input type="text" name="cpostal" id="cpostal" class="text"   value="THELIA-CLIENT_CPOSTAL"/>
+                     </li>
+                     <li>
+                        <label for="ville"><:spipthelia:ville:> THELIA-VILLE[<span class="obligatoire">(<:spipthelia:obligatoire:>)</span>]</label>
+                        <input type="text" name="ville" id="ville" class="text"   value="THELIA-CLIENT_VILLE"/>
+                     </li>
+                     <li>
+                        <label for="pays"><:spipthelia:pays:> THELIA-PAYS[<span class="obligatoire">(<:spipthelia:obligatoire:>)</span>]</label>
+                        <select name="pays" id="pays" size="1" class="text">
+                        <option value="" selected="selected"><:spipthelia:choisissez:></option>
+                        <THELIA_pays type="PAYS" zdefinie="1">           
+                        <option value="THELIA-ID"  THELIA-SELECTED>THELIA-TITRE</option>
+                        </THELIA_pays>
+                        </select>
+                     </li>
+                     <li>
+                        <label for="telfixe"><:spipthelia:telephone_fixe:> THELIA-TELFIXE[<span class="obligatoire">(<:spipthelia:obligatoire:>)</span>] </label>
+                        <input type="text" name="telfixe" id="telfixe"  value="THELIA-CLIENT_TELFIXE"  class="text" />
+                     </li>
+                     <li>
+                        <label for="telport"><:spipthelia:telephone_portable:></label>
+                        <input type="text" name="telport" id="telport" class="text"   value="THELIA-CLIENT_TELPORT"/>
+                     </li>
+                     <li>
+                        <label for="email1"><:spipthelia:email:> THELIA-EMAIL[<span class="obligatoire">(<:spipthelia:verifiez_email:>)</span>]</label>
+                        <input type="text" name="email1" id="email1" class="text"  value="THELIA-CLIENT_EMAIL"/>
+                     </li>
+                     <li>
+                        <label for="email2"><:spipthelia:confirmation_email:></label>
+                        <input type="text" name="email2" id="email2" class="text"  value="THELIA-CLIENT_EMAIL"/>
+                     </li>
+                     <li class="boutonMonCompteContenu">
+                        <input type="submit" class="submit" value="<:spipthelia:valider:>" />
+                     </li>
+                  </ul>
+            </fieldset>
 			</form>
