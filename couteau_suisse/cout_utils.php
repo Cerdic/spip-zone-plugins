@@ -69,10 +69,15 @@ function cs_compatibilite_ascendante() {
 function add_outil($tableau) {
 	global $outils;
 	static $index; $index = isset($index)?$index + 10:0;
-	foreach($tableau as $i=>$v) if(strpos($i,',')!==false) {
-		$a = explode(',', $i);
-		foreach($a as $b) $tableau[trim($b)] = $v;
-		unset($tableau[$i]);
+	foreach($tableau as $i=>$v) {
+		// parametres multiples separes par des virgules
+		if(strpos($i,',')!==false) {
+			$a = explode(',', $i);
+			foreach($a as $b) $tableau[trim($b)] = $v;
+			unset($tableau[$i]);
+		}
+		// liste des fichiers distants eventuels
+		if(strncmp('distant', $i, 7)==0) $tableau['fichiers_distants'][] = $i;
 	}
 	if(!isset($tableau['id'])) { $tableau['id']='erreur'.count($outils); $tableau['nom'] = _T('couteauprive:erreur_id'); }
 	$tableau['index'] = $index;

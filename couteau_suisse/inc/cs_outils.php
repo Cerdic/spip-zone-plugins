@@ -192,8 +192,8 @@ function detail_outil($outil_id) {
 	if(preg_match_all(',(pipeline|pipelinecode):([a-z_]+),', $serkeys, $regs, PREG_PATTERN_ORDER))
 		$details[] = _T('couteauprive:detail_pipelines') . ' ' . join(', ', array_unique($regs[2]));
 	if($outil['nb_disabled']) $details[] = _T('couteauprive:detail_disabled') . ' ' . $outil['nb_disabled'];
-	$a = array();
 	if(isset($outil['fichiers_distants'])) {
+		$a = array();
 		foreach($outil['fichiers_distants'] as $i) $a[] = basename($outil[$i]);
 		$details[] = _T('couteauprive:detail_fichiers_distant') . ' ' . join(', ', $a);
 	}

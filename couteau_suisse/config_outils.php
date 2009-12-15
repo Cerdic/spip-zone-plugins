@@ -380,10 +380,15 @@ add_variables( array(
 	'check' => 'couteauprive:cs_distant_off',
 	'defaut' => 0,
 	'code:%s' => "define('_CS_PAS_DE_DISTANT','oui');",
+), array(
+	'nom' => 'distant_outils_off',
+	'check' => 'couteauprive:cs_distant_outils_off',
+	'defaut' => 0,
+	'code:%s' => "define('_CS_PAS_D_OUTIL_DISTANT','oui');",
 ));
 add_outil( array(
 	'id' => 'cs_comportement',
-	'code:spip_options' => "%%distant_off%%",
+	'code:spip_options' => "%%distant_off%% %%distant_outils_off%%",
 ));
 
 

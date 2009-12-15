@@ -161,11 +161,6 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 	$outil['variables'] = $variables;
 	$outil['nb_variables'] = $nb_variables;
 	$outil['nb_disabled'] = $nb_disabled;
-	// liste des fichiers distants
-	unset($outil['fichiers_distants']);
-	if(preg_match_all(',distant(?:_(?:options|fonctions|js|css))?,',  serialize(array_keys($outil)), $regs, PREG_PATTERN_ORDER)) {
-		foreach($regs[0] as $v) $outil['fichiers_distants'][] = $v;
-	}
 
 	// si ce n'est qu'une simple initialisation, on sort
 	if(!$modif) return;
