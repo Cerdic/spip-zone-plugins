@@ -137,8 +137,8 @@ function parse_variable_xml(&$arbre) {
 		$temp = isset($a['condition_php'])?'code:'.$a['condition_php'][0]:'code';
 		if(isset($a['script_php'])) $var[$temp] = str_replace('\n', "\n", $a['script_php'][0]);
 	}
-	return $var;
 //echo "\n<br/><br/>\n"; print_r($var);
+	return $var;
 }
 // Attention : conversion incomplete. ajouter les tests au fur et a mesure
 function parse_outil_xml(&$arbre) {

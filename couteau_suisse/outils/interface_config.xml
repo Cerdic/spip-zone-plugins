@@ -37,7 +37,7 @@
 	<code>
 		<!-- ![CDATA[ non encore supporte par SPIP ! -->
 		<condition_php>strlen(%s)</condition_php>
-		<script_php>define('_TRI_ARTICLES_RUBRIQUE', %s);\n</script_php>
+		<script_php>@define('_TRI_ARTICLES_RUBRIQUE', %s);\n</script_php>
 	</code>
 </variable>
 <variable>
@@ -72,7 +72,7 @@
 	<code>
 		<!-- ![CDATA[ non encore supporte par SPIP ! -->
 		<condition_php>strlen(%s)</condition_php>
-		<script_php>define('_TRI_GROUPES_MOTS', %s);</script_php>
+		<script_php>@define('_TRI_GROUPES_MOTS', %s);</script_php>
 	</code>
 </variable>
 

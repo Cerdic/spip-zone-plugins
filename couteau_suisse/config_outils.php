@@ -182,7 +182,7 @@ add_variables( array(
 	'nom' => 'tri_perso',
 	'format' => _format_CHAINE,
 	'defaut' => '',
-	'code:strlen(%s)' => "define('_TRI_ARTICLES_RUBRIQUE', %s);\n",
+	'code:strlen(%s)' => "@define('_TRI_ARTICLES_RUBRIQUE', %s);\n",
 ), array(
 	'nom' => 'tri_groupes',
 	'format' => _format_CHAINE,
@@ -197,7 +197,7 @@ add_variables( array(
 	'nom' => 'tri_perso_groupes',
 	'format' => _format_CHAINE,
 	'defaut' => '',
-	'code:strlen(%s)' => "define('_TRI_GROUPES_MOTS', %s);",
+	'code:strlen(%s)' => "@define('_TRI_GROUPES_MOTS', %s);",
 ));
 add_outil( array(
 	'id' => 'tri_articles',
