@@ -8,10 +8,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
-	'ie6msg_info' => '<MODIF>Para navegar da mellor maneira este web (e tam&eacute;n o resto da Rede), recomend&aacute;moslle proceder a unha actualizaci&oacute;n do seu navegador.
-A&nbsp;version actual &eacute; <a href="http://www.microsoft.com/france/windows/downloads/ie/getitnow.mspx">Internet Explorer&nbsp;7</a> e <a href="http://www.microsoft.com/windows/Internet-explorer/beta/">Internet Explorer&nbsp;8</a> est&aacute; dispo&ntilde;ible en version beta. A actualizaci&oacute;n &eacute; de balde.
-<br />Se&nbsp;utiliza un PC no traballo, contacte co seu servizo inform&aacute;tico.
-<br />Se&nbsp;o desexa, tam&eacute;n pode probar outros navegadores web populares como <a href="http://www.mozilla-europe.org/fr/firefox/">Firefox</a>, <a href="http://www.opera.com">Opera</a> ou <a href="http://www.apple.com/fr/safari/download/">Safari</a>.',
+	'ie6msg_info' => 'Para navegar da mellor maneira este web (e tam&eacute;n o resto da Rede), recomend&aacute;moslle proceder a unha actualizaci&oacute;n gratu&iacute;ta do seu navegador.
+Actualice o seu navegador <a href="http://www.microsoft.com/spain/windows/internet-explorer/download-ie.aspx">Internet Explorer</a>. Tam&eacute;n pode probar outros navegadores cada vez m&aacute;is populares como <a href="http://www.mozilla.com/gl/">Firefox</a>, <a href="http://www.opera.com/">Opera</a> ou <a href="http://www.apple.com/fr/safari/">Safari</a>.
+<br />Se emprega un PC no traballo, contacte co seu servizo inform&aacute;tico.',
 	'ie6msg_titre' => 'Sabe que o seu navegador est&aacute; anticuado&nbsp;?',
 
 	// T
