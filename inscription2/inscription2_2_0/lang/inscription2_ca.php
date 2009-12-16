@@ -18,6 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_modifier_auteur_supp' => 'Informacions suplement&agrave;ries',
 	'adresse' => 'Adre&ccedil;a',
 	'adresse_pro' => 'Adre&ccedil;a professional (Pro.)',
+	'afficher_tous' => 'Mostrar tots els usuaris',
 	'ajouter_adherent' => 'Crear un nou usuari',
 	'aout' => 'agost',
 	'aucun_resultat_recherche' => 'La vostra cerca no ha donat cap resultat.',
@@ -62,7 +63,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'decembre' => 'desembre',
 	'delete_user_select' => 'Suprimir el(s) usuari(s) seleccionats ',
 	'demande_password' => 'La vostra contrasenya:',
-	'descriptif_plugin' => '<MODIF>Trobareu aqu&iacute; tots els usuaris inscrits al lloc. El seu estatus est&agrave; indicat pel color de la seva icona.<br /><br />Podeu configurar camps suplementaris, proposats en opci&oacute; als visitants al moment de la inscripci&oacute;.',
+	'descriptif_plugin' => 'Trobareu aqu&iacute; tots els usuaris inscrits al lloc. El seu estatus est&agrave; indicat pel color de la seva icona.<br /><br />Podeu configurar camps suplementaris, proposats en opci&oacute; als visitants al moment de la inscripci&oacute;.',
 	'description_cfg' => 'Parametritzar els camps suplementaris pels usuaris',
 	'description_page' => 'Aqu&iacute; podeu verificar la vostra configuraci&oacute; escollida tal i com est&agrave; emmagatzemada',
 	'divers' => 'Divers',
@@ -76,6 +77,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'email_bonjour' => 'Bon dia @nom@,',
 	'email_obligatoire' => 'El camp correu electr&ograve;nic &eacute;s obligatori',
 	'email_valide' => 'Vulgueu introduir un correu electr&ograve;nic v&agrave;lid',
+	'erreur_reglement_obligatoire' => 'Heu d\'acceptar el reglament',
 	'exp_divers' => 'Camp que ser&agrave; proposat als visitants amb el nom de comentari',
 	'exp_publication' => 'Autoritzaci&oacute; de publicaci&oacute; de les dades personals',
 	'exp_statut' => 'Escolliu l\'estat que voleu atribuir als nous adherents',
@@ -114,6 +116,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'html' => 'HTML',
 
 	// I
+	'icone_afficher_utilisateurs' => 'Mostrar els usuaris',
 	'icone_menu_config' => 'Configuraci&oacute; avan&ccedil;ada d\'usuaris',
 	'identification' => 'Identificaci&oacute;',
 	'info_connection' => 'Informacions de connexi&oacute;',
@@ -139,14 +142,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_affordance_form' => 'Configuraci&oacute; dels formularis d\'identificaci&oacute;',
+	'label_public_reglement' => 'He llegit i accepto el reglament',
+	'label_public_reglement_url' => 'He llegit i accepto el <a href="@url@" class="spip_in reglement">reglament</a>',
+	'label_reglement' => 'Reglament a validar',
+	'label_reglement_article' => 'Article original del lloc corresponent al reglament',
+	'label_validation_numero_international' => 'For&ccedil;ar que els n&uacute;meros de tel&egrave;fon tinguin format internacional',
 	'latitude' => 'Latitud',
 	'legend_affordance_form' => 'Formulari d\'identificaci&oacute;',
 	'legend_oubli_pass' => 'Sense contrasenya / contrasenya oblidada ',
+	'legend_reglement' => 'Reglament del lloc',
+	'legend_validation' => 'Validacions',
 	'legende' => 'Llegenda',
 	'lisez_mail' => 'Us acabem d\'enviar un correu electr&ograve;nic a l\'adre&ccedil;a donada. Per activar el vostre compte seguiu les instruccions.',
 	'liste_adherents' => 'Veure la llista d\'usuaris',
 	'liste_comptes_titre' => 'Llista d\'usuaris',
 	'login' => 'Nom d\'usuari (login)',
+	'logo_auteur' => 'Logo',
 	'longitude' => 'Longitud ',
 
 	// M
@@ -174,6 +185,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'non_renseignee' => 'no informada.',
 	'novembre' => 'novembre',
 	'numero_valide' => 'Introdu&iuml;u un n&uacute;mero v&agrave;lid',
+	'numero_valide_international' => 'Aquest n&uacute;mero ha de tenir format internacional (ex: +34 475 123 456)',
 
 	// O
 	'octobre' => 'octubre',

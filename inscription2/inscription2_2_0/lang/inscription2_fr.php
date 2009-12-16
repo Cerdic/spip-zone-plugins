@@ -18,6 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'adresse_pro' => 'Adresse professionnelle (Pro.)',
 	'afficher_tous' => 'Afficher tous les utilisateurs',
 	'ajouter_adherent' => 'Cr&eacute;er un nouvel utilisateur',
+	'ans' => 'ans',
 	'aout' => 'ao&ucirc;t',
 	'aucun_resultat_recherche' => 'Il n\'y a aucun r&eacute;sultat pour votre recherche.',
 	'auteur' => 'Auteur',
@@ -36,8 +37,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_obligatoire' => 'Ce champ est obligatoire',
 	'choisir_categories' => 'Choisissez-les ci-dessous&nbsp;:',
 	'choisir_nouveau_password' => 'Vous pourrez choisir un nouveau mot de passe en cliquant le lien suivant',
-	'choisissez' =>'Choisissez',
 	'choisir_zones' => 'Veuillez choisir les zones auxquelles vous voulez que les nouveaux adh&eacute;rents soient affect&eacute;s',
+	'choisissez' => 'Choisissez',
 	'choix_affordance_email' => 'Email',
 	'choix_affordance_login' => 'Login (par d&eacute;faut dans SPIP)',
 	'choix_affordance_login_email' => 'Login et email',
@@ -74,6 +75,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'effacement_auto_impossible' => 'Le compte ne peut &ecirc;tre effac&eacute; automatiquement, contactez-nous.',
 	'email' => 'E-Mail',
 	'email_bonjour' => 'Bonjour @nom@,',
+	'email_deja_enregistre' => 'Cette adresse email est d&eacute;j&agrave; enregistr&eacute;e. Utilisez le formulaire de connexion pour acc&eacute;der &agrave; votre compte.',
 	'email_obligatoire' => 'Le champ email est obligatoire',
 	'email_valide' => 'Veuillez ins&eacute;rer un email valide',
 	'erreur_reglement_obligatoire' => 'Vous devez accepter le r&egrave;glement',
@@ -82,7 +84,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'exp_statut' => 'Choisissez le statut que vous voulez attribuer aux nouveaux adh&eacute;rents',
 	'exp_statut_rel' => 'Champ diff&eacute;rent du statut de SPIP, celui-ci sert pour le controle interne d\'une institution',
 	'explication_affordance_form' => 'Champ affich&eacute; sur les formulaires d\'identification (#LOGIN_PUBLIC)',
-	'email_deja_enregistre' => 'Cette adresse email est d&eacute;j&agrave; enregistr&eacute;e. Utilisez le formulaire de connexion pour acc&eacute;der &agrave; votre compte.',
+
 	// F
 	'fax' => 'Fax',
 	'fax_pro' => 'Fax professionnel',
@@ -129,11 +131,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_perso_desc' => 'Informations personnelles qui seront demand&eacute;es aux nouveaux adh&eacute;rents du site',
 	'info_pro' => 'Informations professionnelles',
 	'infos_adherent' => 'Informations suppl&eacute;mentaires',
+	'infos_complementaires' => 'Informations compl&eacute;mentaires',
 	'infos_personnelles' => 'Informations personnelles',
 	'inscription2' => 'Inscription 2.0',
 	'inscriptions' => 'Inscriptions',
 	'inserez_infos' => 'Veuillez saisir les informations demand&eacute;es',
-	'infos_complementaires' => 'Informations compl&eacute;mentaires',
 
 	// J
 	'janvier' => 'janvier',
@@ -230,6 +232,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'saisir_email_valide' => 'Veuillez saisir une adresse email valide',
+	'secondes' => 'secondes',
 	'secteur' => 'Secteur',
 	'septembre' => 'septembre',
 	'sexe' => 'Civilit&eacute;',
@@ -278,14 +281,12 @@ Si vous n\'avez pas demand&eacute; cette inscription ou si vous ne voulez plus f
 	'titre_confirmation' => 'Confirmation',
 
 	// U
-	'une_seconde' => 'une seconde',
-	'secondes' => 'secondes',
-	'une_minute' => 'une minute',
-	'une_heure' => 'une heure',
+	'un_an' => 'un an',
 	'un_jour' => 'un jour',
 	'un_mois' => 'un mois',
-	'un_an' => 'un an',
-	'ans' => 'ans',
+	'une_heure' => 'une heure',
+	'une_minute' => 'une minute',
+	'une_seconde' => 'une seconde',
 	'url_site' => 'Url du site',
 	'url_societe' => 'Site soci&eacute;t&eacute;',
 
