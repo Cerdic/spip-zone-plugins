@@ -28,6 +28,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'lutte_spam' => 'Lucha contra el SPAM',
 
+	// M
+	'maj_actu' => '<NEW>Forcer l\'actualisation',
+	'maj_liste' => '<NEW>Liste des plugins d&eacute;tect&eacute;s :',
+	'maj_maj' => '<NEW>Mettre &agrave; jour le plugin s&eacute;lectionn&eacute;',
+	'maj_ok' => '<NEW>Ce [plugin->@zip@] semble [&agrave; jour->@url@].',
+	'maj_rev' => '<NEW>R&eacute;v.&nbsp;@revision@',
+	'maj_rev_ko' => '<NEW>La [r&eacute;vision distante->@url@] n\'a pas pu &ecirc;tre trouv&eacute;e.',
+	'maj_rev_ok' => '<NEW>La r&eacute;vision [@revision@->@url@] est [disponible->@zip@].',
+	'maj_svn' => '<NEW>Ce plugin SVN semble [&agrave; jour->@url@].',
+	'maj_verif' => '<NEW>V&eacute;rifiez pr&eacute;alablement l\'archive qui vous convient :',
+	'maj_verif2' => '<NEW>Attention : apr&egrave;s avoir cliqu&eacute; sur le bouton ci-dessus, v&eacute;rifiez bien que l\'archive t&eacute;l&eacute;charg&eacute;e correspond au plugin qu\'il vous faut mettre &agrave; jour.',
+
 	// N
 	'nom_email_forum' => 'Por favor, ingresa tu nombre o tu email!',
 	'nom_forum' => '&iexcl;Por favor, especifica tu nombre!',
@@ -55,6 +67,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_lien' => 'P&aacute;gina @page@: @title@',
 	'page_precedente' => 'P&aacute;gina anterior',
 	'page_suivante' => 'P&aacute;gina siguiente',
+	'plug_actifs' => '<NEW>Plugins actifs',
+	'plug_inactifs' => '<NEW>Plugins inactifs',
 	'plugin_xml' => '<MODIF>Re&uacute;ne en un solo plugin una lista de peque&ntilde;as caracter&iacute;sticas nuevas y &uacute;tiles para mejorar la gesti&oacute;n de tu sitio SPIP.
 
 Cada herramienta puede activarse o no por el usuario en [la p&aacute;gina de administraci&oacute;n del plugin->./?exec=admin_couteau_suisse] y manejar cierto n&uacute;mero de variables: pulsa en {{Configuraci&oacute;n}}, y selecciona la pesta&ntilde;a {{La Navaja Suiza}}.

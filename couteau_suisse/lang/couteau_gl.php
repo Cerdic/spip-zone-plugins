@@ -15,19 +15,33 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'configurer' => 'Configurar A Navalla Su&iacute;za',
-	'connections' => '<MODIF>Conexi&oacute;ns',
+	'connections' => 'Conexi&oacute;ns',
 
 	// D
 	'date_court' => '@jour@/@mois@/@annee@',
 	'derniers_connectes' => '&Uacute;ltimos conectados :',
 
 	// E
+	'email_forum' => 'Grazas por especificar o seu correo',
 	'explique_spam' => 'Atenci&oacute;n : vostede utilizou balizas, caracteres ou palabras prohibidas.<br /><br />Volva atr&aacute;s !',
 
 	// L
 	'lutte_spam' => 'Loita contra o SPAM',
 
+	// M
+	'maj_actu' => 'Forzar a actualizaci&oacute;n',
+	'maj_liste' => 'Lista de m&oacute;dulos detectados :',
+	'maj_maj' => 'Actualizar o m&oacute;dulo selecccionado',
+	'maj_ok' => 'Este [m&oacute;dulo->@zip@] parece [actualizado->@url@].',
+	'maj_rev' => 'Rev.&nbsp;@revision@',
+	'maj_rev_ko' => 'A [revisi&oacute;n remota ->@url@] non foi pos&iacute;bel encontrala.',
+	'maj_rev_ok' => 'A revisi&oacute;n [@revision@->@url@] est&aacute; [dispo&ntilde;&iacute;bel->@zip@].',
+	'maj_svn' => 'Este m&oacute;dulo SVN parece [actualizado->@url@].',
+	'maj_verif' => 'Verifique previamente o arquivo que corresponda :',
+	'maj_verif2' => 'Atenci&oacute;n : despois de ter premido sobre o bot&oacute;n seguinte, comprobe que o arquivo descargado corresponde co m&oacute;dulo que c&oacute;mpre actualizar.',
+
 	// N
+	'nom_email_forum' => 'Grazas por especificar o seu nome ou o seu correo !',
 	'nom_forum' => 'Grazas por especificar o seu nome !',
 	'non_confirmes' => 'Non confirmados :',
 
@@ -53,13 +67,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_lien' => 'P&aacute;xina @page@ : @title@',
 	'page_precedente' => 'P&aacute;xina anterior',
 	'page_suivante' => 'P&aacute;xina seguinte',
-	'plugin_xml' => '<MODIF>Re&uacute;ne nun s&oacute; m&oacute;dulo unha lista de pequenas funcionalidades novas e &uacute;tiles que melloran a xesti&oacute;n do seu web SPIP.
+	'plug_actifs' => 'Complementos activos',
+	'plug_inactifs' => 'Complementos inactivos',
+	'plugin_xml' => 'Re&uacute;ne nun s&oacute; m&oacute;dulo unha lista de pequenas funcionalidades novas e &uacute;tiles que melloran a xesti&oacute;n do seu web SPIP.
 
 Cada unha destas ferramentas pode ser activada ou non polo usuario en  [p&aacute;xina de administraci&oacute;n do m&oacute;dulo->./?exec=admin_couteau_suisse] e xestionar un certo n&uacute;mero de variables : Premer en {{Configuraci&oacute;n}}, logo escoller o separador {{A Navalla Su&iacute;za}}.
 
-As categor&iacute;as dispo&ntilde;ibles son : Administraci&oacute;n, Melloras tipogr&aacute;ficas, Atallos tipogr&aacute;ficos, Presentaci&oacute;n p&uacute;blica, Balizas, Filtros, Criterios.
+As categor&iacute;as dispo&ntilde;ibles son : Administraci&oacute;n, melloras tipogr&aacute;ficas, atallos tipogr&aacute;ficos, presentaci&oacute;n p&uacute;blica, balizas, filtros, criterios.
 
-Descubra neste m&oacute;dulos as s&uacute;as ferramentas favoritas : {Suprimir o num&eacute;ro}, {Formato das URL}, {Super&iacute;ndices  tipogr&aacute;ficos}, {V&iacute;rgulas tipogr&aacute;ficas}, {Vi&ntilde;etas fermosas}, {Riso&ntilde;os}, {Mailcrypt}, {SPIP e as ligaz&oacute;ns... externas}, {Ning&uacute;n foro an&oacute;nimo}, {Un sumario para os seus artigos}, {Partir en p&aacute;xinas e separadores}, etc., etc.
+Descubra neste m&oacute;dulo as s&uacute;as ferramentas favoritas : {Suprimir o num&eacute;ro}, {Formato dos URL}, {Super&iacute;ndices  tipogr&aacute;ficos}, {V&iacute;rgulas tipogr&aacute;ficas}, {Vi&ntilde;etas fermosas}, {Loita contra o SPAM}, {URL fermosos} {Mailcrypt}, {SPIP e as ligaz&oacute;ns... externas}, {Emoticonas}, {Un sumario para os seus artigos}, {Partir en p&aacute;xinas e separadores}, etc., etc.
 
 Non dubide en consultar os artigos de documentaci&oacute;n do m&oacute;dulo publicados en  : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 

@@ -67,6 +67,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_lien' => 'Pagina @page@ : @title@',
 	'page_precedente' => 'Pagina precedente',
 	'page_suivante' => 'Pagina successiva',
+	'plug_actifs' => 'Plugins attivi',
+	'plug_inactifs' => 'Plugins non attivi',
 	'plugin_xml' => 'Raccoglie in un solo plugin una serie di piccole funzioni nuove ed utili a migliorare la gestione del tuo sito SPIP.
 
 Ciascuna di queste funzioni pu&ograve; essere attivata o meno dall\'utente sulla [pagina di amministrazione dei plugin->./?exec=admin_couteau_suisse] ed impostata con un certo numero di variabili: clicca su {{Configurazione}}, poi scegli la scheda {{Coltellino Svizzero}}.
@@ -78,8 +80,6 @@ Scopri in questo plugin le tue funzioni preferite: {Sopprimi il numero}, {Format
 Non esitare a leggere gli articoli di documentazione del plugin pubblicati su: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
 Compatibilit&agrave; : SPIP v1.92x e v2.0.x',
-	'plug_actifs' => 'Plugins attivi',
-	'plug_inactifs' => 'Plugins non attivi',
 
 	// S
 	'smileys_dispos' => 'Smiley disponibili:',
@@ -90,8 +90,8 @@ Compatibilit&agrave; : SPIP v1.92x e v2.0.x',
 	'stats_date' => '@jour@/@mois@/@annee@&nbsp;alle&nbsp;@h@h@m@',
 
 	// T
-	'textes_formatspip' => 'TESTI ORIGINALI NEL FORMATO SPIP',
 	'texte_formatspip' => 'TESTO ORIGINALE NEL FORMATO SPIP',
+	'textes_formatspip' => 'TESTI ORIGINALI NEL FORMATO SPIP',
 	'titre' => 'Coltellino svizzero',
 	'tri_auteurs' => 'ORDINE DEGLI AUTORI',
 	'tri_descendre' => 'Sposta in basso questo autore',
