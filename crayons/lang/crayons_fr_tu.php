@@ -34,6 +34,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'sauvegarder' => 'Sauvegarder les modifications ?',
 	'svp_copier_coller' => 'D&eacute;sol&eacute;, copie/colle tes changements et recommence',
 
+	// U
+	'update_impossible' => 'La mise &agrave; jour a &eacute;chou&eacute;.',
+
 	// V
 	'veuillez_patienter' => 'Patiente stp...'
 );
