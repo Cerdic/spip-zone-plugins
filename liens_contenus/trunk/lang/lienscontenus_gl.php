@@ -8,14 +8,14 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'alerte_publie_contenant' => '<MODIF>Aviso, este contido ten &copy; p&uacute;blico, mais cont&eacute;n ligaz&oacute;ns a contidos que non o son!',
+	'alerte_publie_contenant' => 'Aviso, este contido ten &copy; p&uacute;blico, mais cont&eacute;n ligaz&oacute;ns a contidos que non o son!',
 	'aucun_objets_avec_lien_depuis_courant' => 'Este contido non ten ningunha ligaz&oacute;n sobre ning&uacute;n outro contido.',
 	'aucun_objets_avec_lien_vers_courant' => 'Ning&uacute;n outro contido ten ligaz&oacute;n sobre este.',
 
 	// C
-	'confirmation_depublication' => '<MODIF>Aviso, un contido con &copy; p&uacute;blico apunta sobre este, e o &copy; ser&aacute; afectado se vostede o despublica !\\n\\nSeguro que quere cambiarlle o estado?',
-	'confirmation_publication' => '<MODIF>Aviso, un contido ao cal apunta este non ten un &copy; p&uacute;blico !\\n\\nSeguro que quere cambiar o estado?',
-	'confirmation_suppression' => '<MODIF>Aviso, un contido con &copy; p&uacute;blico apunta sobre este, e &copy; ser&aacute; afectado se o suprime!\\n\\nSeguro que o quere suprimir?',
+	'confirmation_depublication' => 'Aviso, un contido con &copy; p&uacute;blico apunta sobre este, e o &copy; ser&aacute; afectado se vostede o despublica !nnSeguro que quere cambiarlle o estado?',
+	'confirmation_publication' => 'Aviso, un contido ao cal apunta este non ten un &copy; p&uacute;blico !nnSeguro que quere cambiar o estado?',
+	'confirmation_suppression' => 'Aviso, un contido con &copy; p&uacute;blico apunta sobre este, e &copy; ser&aacute; afectado se o suprime!nnSeguro que o quere suprimir?',
 
 	// I
 	'information_element_contenu' => 'Aviso, outro contido apunta sobre este!',
