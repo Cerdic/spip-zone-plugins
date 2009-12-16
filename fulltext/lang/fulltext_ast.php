@@ -31,7 +31,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'il_faut_myisam' => 'fai falta MyISAM',
 	'incoherence_charset' => 'Una incoherencia ente\'l xuegu de carauteres del to sitiu y el de les tables de la base de datos amenaza con dar fallos nes guetes con carauteres acentuaos:',
 	'index_regenere' => '&iacute;ndices de la tabla rexeneraos',
-	'index_reinitialise' => 'Les documents en erreur ont &#233;t&#233; r&#233;initialis&#233;s',
 	'index_supprime' => 'indiz desanici&aacute;u',
 
 	// L
@@ -50,7 +49,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'regenerer_tous' => 'Rexenerar tolos &iacute;ndices FULLTEXT',
 	'reserve_webmestres' => 'P&aacute;xina acutada pa los webmasters',
 	'retourne' => 'Tornar los testos que contengan',
-	'reinitialise_index_doc' => '',
 
 	// S
 	'sequence_exacte' => 'exautamente la secuencia de pallabres',

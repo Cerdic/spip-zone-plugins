@@ -31,7 +31,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'il_faut_myisam' => 'MyISAM gerekli',
 	'incoherence_charset' => 'Sitenizin karakter setiyle veritaban&#305; tablolar&#305;n&#305;z&#305;nki aras&#305;ndaki uyu&#351;mazl&#305;k aksanl&#305; karakterlerle yap&#305;lan aramalar&#305; ge&ccedil;ersiz k&#305;labilir :',
 	'index_regenere' => 'yeniden olu&#351;turulan tablolar&#305;n endeksi',
-	'index_reinitialise' => 'Les documents en erreur ont &#233;t&#233; r&#233;initialis&#233;s',
 	'index_supprime' => 'endeks silindi',
 
 	// L
@@ -50,7 +49,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'regenerer_tous' => 'T&uuml;m FULLTEXT endekslerini yeniden olu&#351;tur',
 	'reserve_webmestres' => 'Site y&ouml;neticilerine ayr&#305;lm&#305;&#351; sayfa',
 	'retourne' => '&#304;&ccedil;eren metinleri getirir',
-	'reinitialise_index_doc' => '',
 
 	// S
 	'sequence_exacte' => 'tam olarak s&ouml;zc&uuml;k serisini',

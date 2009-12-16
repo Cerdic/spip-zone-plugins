@@ -31,7 +31,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'il_faut_myisam' => 'trebuie MyISAM',
 	'incoherence_charset' => 'O incoeren&#355;&#259; intre charset-ul site-ului &#351;i cel al tabelelor din baza de date risc&#259; s&#259; dea rezultate de c&#259;utare false &icirc;n cazul caracterelor accentuate:',
 	'index_regenere' => 'index-ul tabelei regenerat',
-	'index_reinitialise' => 'Les documents en erreur ont &#233;t&#233; r&#233;initialis&#233;s',
 	'index_supprime' => 'index &#351;ters',
 
 	// L
@@ -50,7 +49,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'regenerer_tous' => 'Regenera&#355;i to&#355;i indec&#351;ii FULLTEXT',
 	'reserve_webmestres' => 'Pagin&#259; rezervat&#259; webmaster-ilor',
 	'retourne' => '&Icirc;ntoarce textele care con&#355;in',
-	'reinitialise_index_doc' => '',
 
 	// S
 	'sequence_exacte' => 'exact secven&#355;a de cuvinte',

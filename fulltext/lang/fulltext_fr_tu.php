@@ -40,7 +40,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'il_faut_myisam' => 'il faut MyISAM',
 	'incoherence_charset' => 'Une incoh&eacute;rence entre le charset de ton site et celui des tables de ta base de donn&eacute;es risque de fausser les recherches avec caract&egrave;res accentu&eacute;s :',
 	'index_regenere' => 'index de la table r&eacute;g&eacute;n&eacute;r&eacute;s',
-	'index_reinitialise' => 'Les documents en erreur ont &#233;t&#233; r&#233;initialis&#233;s',
 	'index_supprime' => 'index supprim&eacute;',
 
 	// L
@@ -60,7 +59,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'regenerer_tous' => 'R&eacute;g&eacute;n&eacute;rer tous les index FULLTEXT',
 	'reserve_webmestres' => 'Page r&eacute;serv&eacute;e aux webmestres',
 	'retourne' => 'Retourne les textes qui contiennent',
-	'reinitialise_index_doc' => '',
 
 	// S
 	'sequence_exacte' => 'exactement la s&eacute;quence de mots',

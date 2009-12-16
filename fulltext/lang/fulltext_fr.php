@@ -56,9 +56,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// R
 	'regenerer_tous' => 'R&#233;g&#233;n&#233;rer tous les index FULLTEXT',
+	'reinitialise_index_doc' => 'R&#233;initialiser l\'indexation des documents en erreur',
 	'reserve_webmestres' => 'Page r&#233;serv&#233;e aux webmestres',
 	'retourne' => 'Retourne les textes qui contiennent',
-	'reinitialise_index_doc' => 'R&#233;initialiser l\'indexation des documents en erreur',
 
 	// S
 	'sequence_exacte' => 'exactement la s&#233;quence de mots',
