@@ -25,7 +25,7 @@ function balise_BOLO_dist($p) {
 function balise_MAINTENANT_dist($p) {
 	$format = sinon(interprete_argument_balise(1,$p), "'Y-m-d H:i:s'");
 	$p->code = "date($format)";
-	$p->type = 'php';  
+	$p->interdire_scripts = false;
 	return $p;
 }
 

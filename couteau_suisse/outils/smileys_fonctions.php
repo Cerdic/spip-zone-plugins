@@ -96,7 +96,7 @@ if(typeof mozWrap!='function') { function mozWrap(txtarea, open, close) {
 	$html = $js_compat . echappe_retour($html, 'SMILE');
 	$html = str_replace("'", "\'", $html);
 	$p->code = "'$html\n</table>\n'";
-	$p->interdire_scripts = true;
+	$p->interdire_scripts = false;
 	$p->type = 'html';
 	return $p;
 }

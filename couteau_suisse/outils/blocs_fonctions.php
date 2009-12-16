@@ -17,22 +17,26 @@ Mon bloc depliable        / qui est aussi l'emplacement pour l'Ajax si le fragme
 // Un bloc replie, titre numerote : #BLOC_TITRE_NUM{numero} ou #BLOC_TITRE_NUM{numero, fragment}
 function balise_BLOC_TITRE_NUM($p) {
 	$p->code = blocs_balise_titre(interprete_argument_balise(2, $p), interprete_argument_balise(1, $p));
+	$p->interdire_scripts = false;
 	return $p;
 }
 // Un bloc deplie, titre numerote : #BLOC_VISIBLE_TITRE_NUM{numero} ou #BLOC_VISIBLE_TITRE_NUM{numero, fragment}
 function balise_BLOC_VISIBLE_TITRE_NUM($p) {
 	$p->code = blocs_balise_titre(interprete_argument_balise(2, $p), interprete_argument_balise(1, $p), -1);
+	$p->interdire_scripts = false;
 	return $p;
 }
 
 // Un bloc replie, titre simple : #BLOC_TITRE ou #BLOC_TITRE{fragment}
 function balise_BLOC_TITRE($p) {
 	$p->code = blocs_balise_titre(interprete_argument_balise(1, $p));
+	$p->interdire_scripts = false;
 	return $p;
 }
 // Un bloc deplie, titre simple : #BLOC_VISIBLE_TITRE ou #BLOC_VISIBLE_TITRE{fragment}
 function balise_BLOC_VISIBLE_TITRE($p) {
 	$p->code = blocs_balise_titre(interprete_argument_balise(1, $p), NULL, -1);
+	$p->interdire_scripts = false;
 	return $p;
 }
 
@@ -46,7 +50,7 @@ function balise_BLOC_RESUME($p) {
 		die("erreur de compilation #BLOC_RESUME sans #BLOC_TITRE_($stade)");
 	$p->code = "'</a></"._BLOC_TITRE_H."><div class=\"blocs_resume$class\">'";
 	$bloc_stade[$k]=$bloc_stade[$k]>0?3:-3;	/* 3 = resume */
-	
+	$p->interdire_scripts = false;
 	return $p;
 }
 
@@ -65,6 +69,7 @@ function balise_BLOC_DEBUT($p) {
 		$p->code = "'</a></"._BLOC_TITRE_H."><div class=\"blocs_destination$class\">'";
 		}
 	$bloc_stade[$k]=$bloc_stade[$k]>0?4:-4; /* 4=debut */
+	$p->interdire_scripts = false;
 	return $p;
 }
 
@@ -75,6 +80,7 @@ function balise_BLOC_FIN($p) {
 		die("erreur de compilation #BLOC_FIN sans #BLOC_DEBUT_($k)");
 
 	$p->code = "'</div></div>'";
+	$p->interdire_scripts = false;
 	return $p;
 }
 
@@ -83,6 +89,7 @@ function balise_BLOC_FIN($p) {
 function balise_BLOC_DEPLIER($p) {
 	$eq = interprete_argument_balise(1, $p);
 	$p->code = "bloc_deplier_script(intval($eq))";
+	$p->interdire_scripts = false;
 	return $p;
 }
 // Renvoie un code JQuery pour deplier un bloc numerote au chargement de la page.
@@ -90,6 +97,7 @@ function balise_BLOC_DEPLIER($p) {
 function balise_BLOC_DEPLIER_NUM($p) {
 	$eq = interprete_argument_balise(1, $p);
 	$p->code = "bloc_num_deplier_script(intval($eq))";
+	$p->interdire_scripts = false;
 	return $p;
 }
 
@@ -98,6 +106,7 @@ function balise_BLOC_DEPLIER_NUM($p) {
 function balise_BLOC_UNIQUE($p) {
 	$arg = interprete_argument_balise(1, $p);
 	$p->code = "bloc_unique_script($arg)";
+	$p->interdire_scripts = false;
 	return $p;
 }
 

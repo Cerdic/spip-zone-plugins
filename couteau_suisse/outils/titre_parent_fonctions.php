@@ -75,12 +75,14 @@ function balise_TITRE_PARENT_dist($p) {
 	$id = champ_sql($id, $p);
 	// le code php a executer
 	$p->code = "cs_titre_id(intval($id), '$table_parent', '$champ_parent')";
+	$p->interdire_scripts = false;
 	return $p;
 }
 
 // juste le groupe d'un mot-clef
 function balise_TITRE_GROUPE_dist($p) {
 	$p->code = "''";
+	$p->interdire_scripts = false;
 	return $p->type_requete=='mots'?balise_TITRE_PARENT_dist($p):$p;
 }
 

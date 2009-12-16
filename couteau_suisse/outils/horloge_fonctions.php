@@ -13,7 +13,7 @@ function balise_HORLOGE_dist($p) {
 	while(($a = interprete_argument_balise($i++,$p)) != NULL) $ar[] = $a;
 	$ar = count($ar)?join(".'|'.", $ar):"''";
 	$p->code = "'<span class=\"jclock\" title=\"'.$ar.'\">99:99</span> '";
-	$p->type = 'php';  
+	$p->interdire_scripts = false;
 	return $p;
 }
 
