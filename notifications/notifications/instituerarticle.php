@@ -26,6 +26,7 @@ function notifications_instituerarticle_dist($quoi, $id_article, $options) {
 			$modele = "notifications/article_valide";
 		else
 			$modele = "notifications/article_publie";
+	}
 
 	if ($options['statut'] == 'prop' AND $options['statut_ancien'] != 'publie')
 		$modele = "notifications/article_propose";
