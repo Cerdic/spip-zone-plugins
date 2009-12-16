@@ -18,7 +18,8 @@ function balise_INCLURE($p) {
 function recuperer_fond_ajax() {
 	$args = func_get_args();
 
-	if (_request('var_no_ajax'))
+	if (_request('var_no_ajax')
+	OR _request('var_mode') == 'inclure')
 		return call_user_func_array('recuperer_fond', $args);
 
 	$cle = md5(serialize($args));
