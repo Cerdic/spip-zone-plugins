@@ -1,0 +1,12 @@
+* 0.3 (11/12/2009) :
+   - suppression des erreurs php dans l'interface d'administration
+
+* 0.2 (9/12/2009) :
+   - possibilite d'afficher des panoramas 360° en projection cylindrique
+   - verification de la coherence des parametres d'entree
+   - changement du repertoire de stockage des fichiers .xml vers /local
+   - ajout du filtre |test
+   - suppression du lien en bas a droite de l'image
+
+* 0.1 (6/12/2009) :
+   - version initiale

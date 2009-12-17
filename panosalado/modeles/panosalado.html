@@ -1,0 +1,311 @@
+<BOUCLE_prevue(DOCUMENTS){id_document=#ENV{prevue}}>
+<?php
+$ps_prevue = "#URL_DOCUMENT";
+if($ps_prevue != "") {
+   $ps_pos = strpos($ps_prevue, "IMG");
+   if($ps_pos)
+      $ps_prevue = substr($ps_prevue, $ps_pos);
+   $ps_prevue = "#URL_SITE_SPIP/" . $ps_prevue;
+}
+?>
+</BOUCLE_prevue>
+<BOUCLE_avant(DOCUMENTS){id_document=#ENV{avant}}>
+<?php
+$ps_avant = "#URL_DOCUMENT";
+if($ps_avant != "") {
+   $ps_pos = strpos($ps_avant, "IMG");
+   if($ps_pos)
+      $ps_avant = substr($ps_avant, $ps_pos);
+   $ps_avant = "#URL_SITE_SPIP/" . $ps_avant;
+}
+?>
+</BOUCLE_avant>
+<BOUCLE_droite(DOCUMENTS){id_document=#ENV{droite}}>
+<?php
+$ps_droite = "#URL_DOCUMENT";
+if($ps_droite != "") {
+   $ps_pos = strpos($ps_droite, "IMG");
+   if($ps_pos)
+      $ps_droite = substr($ps_droite, $ps_pos);
+   $ps_droite = "#URL_SITE_SPIP/" . $ps_droite;
+}
+?>
+</BOUCLE_droite>
+<BOUCLE_arriere(DOCUMENTS){id_document=#ENV{arriere}}>
+<?php
+$ps_arriere = "#URL_DOCUMENT";
+if($ps_arriere != "") {
+   $ps_pos = strpos($ps_arriere, "IMG");
+   if($ps_pos)
+      $ps_arriere = substr($ps_arriere, $ps_pos);
+   $ps_arriere = "#URL_SITE_SPIP/" . $ps_arriere;
+}
+?>
+</BOUCLE_arriere>
+<BOUCLE_gauche(DOCUMENTS){id_document=#ENV{gauche}}>
+<?php
+$ps_gauche = "#URL_DOCUMENT";
+if($ps_gauche != "") {
+   $ps_pos = strpos($ps_gauche, "IMG");
+   if($ps_pos)
+      $ps_gauche = substr($ps_gauche, $ps_pos);
+   $ps_gauche = "#URL_SITE_SPIP/" . $ps_gauche;
+}
+?>
+</BOUCLE_gauche>
+<BOUCLE_haut(DOCUMENTS){id_document=#ENV{haut}}>
+<?php
+$ps_haut = "#URL_DOCUMENT";
+if($ps_haut != "") {
+   $ps_pos = strpos($ps_haut, "IMG");
+   if($ps_pos)
+      $ps_haut = substr($ps_haut, $ps_pos);
+   $ps_haut = "#URL_SITE_SPIP/" . $ps_haut;
+}
+?>
+</BOUCLE_haut>
+<BOUCLE_bas(DOCUMENTS){id_document=#ENV{bas}}>
+<?php
+$ps_bas = "#URL_DOCUMENT";
+if($ps_bas != "") {
+   $ps_pos = strpos($ps_bas, "IMG");
+   if($ps_pos)
+      $ps_bas = substr($ps_bas, $ps_pos);
+   $ps_bas = "#URL_SITE_SPIP/" . $ps_bas;
+}
+?>
+</BOUCLE_bas>
+<BOUCLE_image(DOCUMENTS){id_document=#ENV{image}}>
+<?php
+$ps_image = "#URL_DOCUMENT";
+if($ps_image != "") {
+   $ps_pos = strpos($ps_image, "IMG");
+   if($ps_pos)
+      $image = substr($ps_image, $ps_pos);
+   $ps_image = "#URL_SITE_SPIP/" . $ps_image;
+}
+?>
+</BOUCLE_image>
+
+<?php
+$ps_nom = "#ENV{nom}";
+$ps_spherique = ($ps_nom != "") && isset($ps_prevue) && isset($ps_avant) && isset($ps_droite) && isset($ps_arriere) && isset($ps_gauche) && isset($ps_haut) && isset($ps_bas);
+$ps_cylindrique = ($ps_nom != "") && isset($ps_image);
+
+if( $ps_spherique xor $ps_cylindrique) {
+   $ps_pleinecran = "#ENV{pleinecran}"?"true":"false";
+   $ps_test = "#ENV{test}"?true:false;
+   
+   #si on est dans l'interface d'admnistration la racine du site est un cran plus haut !
+   $ps_cwd = getcwd();
+   $ps_dossier = basename(rtrim($ps_cwd, '/'));
+   if($ps_dossier == "ecrire")
+      $ps_urlprefix = "..";
+   else
+      $ps_urlprefix = ".";
+
+   $ps_nompanoweb = "#URL_SITE_SPIP/local/Panosalado-$ps_nom.xml";
+   $ps_nompanofs = "$ps_urlprefix/local/Panosalado-$ps_nom.xml";
+   if(!file_exists($ps_nompanofs) || $ps_test) {
+      $ps_grille = "#ENV{grille}"?true:false;
+   
+      $ps_xml = "
+<PanoSalado>
+        <layer id=\"Interface\" url=\"#URL_SITE_SPIP/plugins/panosalado/scripts/UserInterface.swf\" depth=\"1\"/>
+        <layer id=\"PanoSalado\" url=\"#URL_SITE_SPIP/plugins/panosalado/scripts/PanoSalado.swf\" depth=\"0\">
+        <!--// parameter attributes set in the spaces element can be overridden in the individual space elements //-->
+
+                <spaces\n";
+      if($ps_spherique)
+         $ps_xml .= "
+                        onStart=\"loadSpace:preview\"\n";
+      if($ps_cylindrique)
+         $ps_xml .= "
+                        onStart=\"loadSpace:panorama\"\n";
+
+      $ps_xml .= "
+                        cameraRetainsLastValues=\"false\" 
+                        cameraZoom=\"7\"
+                        cameraFocus=\"100\"
+                        cameraZoomIncrement=\"0.2\"
+                        cameraKeyIncrement=\"75\"
+                        cameraSensitivity=\"60\"
+                        cameraFriction=\"0.2\"
+                        cameraRestThreshold=\"0.0001\"
+                        cameraMinimumZoom=\"6\"
+                        cameraMaximumZoom=\"12\"
+                        
+                        autorotator=\"false\"
+                        autorotatorIncrement=\"0.25\"
+                        autorotatorDelay=\"15000\"
+                        
+                        dynamicQualityAdjustment=\"true\"
+                        
+                        preciseOnAcceleration=\"true\"
+                        precisionOnAcceleration=\"4\"
+                        smoothOnAcceleration=\"false\"
+                        
+                        preciseOnDeceleration=\"true\"
+                        precisionOnDeceleration=\"4\"
+                        smoothOnDeceleration=\"true\"
+                        
+                        preciseAtRest=\"true\"
+                        precisionAtRest=\"1\"
+                        smoothAtRest=\"true\"
+                >\n";
+
+      if($ps_spherique)
+         $ps_xml .= "
+                        <space id=\"preview\"
+                                label=\"preview\"
+                                interactive=\"false\"
+                                segments=\"8\"
+                                transition=\"tween:currentSpace.viewport.alpha from 0 over 1.5 seconds using Expo.easeInOut\"
+                                onTransitionEnd=\"loadSpace:panorama\"
+                        >
+                                <sphere id=\"preview_pano\">
+                                        <file>$ps_prevue</file>
+                                </sphere>
+                        </space>\n";
+
+      $ps_xml .= "
+                        <space id=\"panorama\"
+                                label=\"panorama\"
+                                interactive=\"true\"
+                                segments=\"16\"
+                                transition=\"tween:currentSpace.viewport.alpha from 0 over 1.5 seconds using Expo.easeIn\"
+                                onTransitionEnd=\"removeLastSpace\"
+                                smoothOnAcceleration=\"true\"
+                        >\n";
+      if($ps_spherique)
+         $ps_xml .= "
+                                <cube id=\"panorama_pano\">
+                                        <file face=\"front\">$ps_avant</file>
+                                        <file face=\"right\">$ps_droite</file>
+                                        <file face=\"back\">$ps_arriere</file>
+                                        <file face=\"left\">$ps_gauche</file>
+                                        <file face=\"top\">$ps_haut</file>
+                                        <file face=\"bottom\">$ps_bas</file>
+                                </cube>\n";
+      if($ps_cylindrique)
+         $ps_xml .= "
+				<cylinder id=\"panorama_pano\" segments=\"15\"  autoFOV=\"true\">
+					<file id=\"front\">$ps_image</file>
+				</cylinder>\n";
+      if($ps_grille)
+         $ps_xml .= "
+                                <hotspot id=\"grid\" pan=\"0\" tilt=\"0\"><file>#URL_SITE_SPIP/plugins/panosalado/scripts/images/numbers/000.png</file></hotspot>
+                                <hotspot id=\"grid\" pan=\"10\" tilt=\"0\"><file>#URL_SITE_SPIP/plugins/panosalado/scripts/images/numbers/010.png</file></hotspot>
+                                <hotspot id=\"grid\" pan=\"20\" tilt=\"0\"><file>#URL_SITE_SPIP/plugins/panosalado/scripts/images/numbers/020.png</file></hotspot>
+                                <hotspot id=\"grid\" pan=\"30\" tilt=\"0\"><file>#URL_SITE_SPIP/plugins/panosalado/scripts/images/numbers/030.png</file></hotspot>
+                                <hotspot id=\"grid\" pan=\"40\" tilt=\"0\"><file>#URL_SITE_SPIP/plugins/panosalado/scripts/images/numbers/040.png</file></hotspot>
+                                <hotspot id=\"grid\" pan=\"50\" tilt=\"0\"><file>#URL_SITE_SPIP/plugins/panosalado/scripts/images/numbers/050.png</file></hotspot>
+                                <hotspot id=\"grid\" pan=\"60\" tilt=\"0\"><file>#URL_SITE_SPIP/plugins/panosalado/scripts/images/numbers/060.png</file></hotspot>
+                                <hotspot id=\"grid\" pan=\"70\" tilt=\"0\"><file>#URL_SITE_SPIP/plugins/panosalado/scripts/images/numbers/070.png</file></hotspot>
+                                <hotspot id=\"grid\" pan=\"80\" tilt=\"0\"><file>#URL_SITE_SPIP/plugins/panosalado/scripts/images/numbers/080.png</file></hotspot>
+                                <hotspot id=\"grid\" pan=\"90\" tilt=\"0\"><file>#URL_SITE_SPIP/plugins/panosalado/scripts/images/numbers/090.png</file></hotspot>
+                               
+                                <hotspot id=\"grid\" pan=\"100\" tilt=\"0\"><file>#URL_SITE_SPIP/plugins/panosalado/scripts/images/numbers/100.png</file></hotspot>
+                                <hotspot id=\"grid\" pan=\"110\" tilt=\"0\"><file>#URL_SITE_SPIP/plugins/panosalado/scripts/images/numbers/110.png</file></hotspot>
+                                <hotspot id=\"grid\" pan=\"120\" tilt=\"0\"><file>#URL_SITE_SPIP/plugins/panosalado/scripts/images/numbers/120.png</file></hotspot>
+                                <hotspot id=\"grid\" pan=\"130\" tilt=\"0\"><file>#URL_SITE_SPIP/plugins/panosalado/scripts/images/numbers/130.png</file></hotspot>
+                                <hotspot id=\"grid\" pan=\"140\" tilt=\"0\"><file>#URL_SITE_SPIP/plugins/panosalado/scripts/images/numbers/140.png</file></hotspot>
+                                <hotspot id=\"grid\" pan=\"150\" tilt=\"0\"><file>#URL_SITE_SPIP/plugins/panosalado/scripts/images/numbers/150.png</file></hotspot>
+                                <hotspot id=\"grid\" pan=\"160\" tilt=\"0\"><file>#URL_SITE_SPIP/plugins/panosalado/scripts/images/numbers/160.png</file></hotspot>
+                                <hotspot id=\"grid\" pan=\"170\" tilt=\"0\"><file>#URL_SITE_SPIP/plugins/panosalado/scripts/images/numbers/170.png</file></hotspot>
+                                <hotspot id=\"grid\" pan=\"180\" tilt=\"0\"><file>#URL_SITE_SPIP/plugins/panosalado/scripts/images/numbers/180.png</file></hotspot>
+                                <hotspot id=\"grid\" pan=\"190\" tilt=\"0\"><file>#URL_SITE_SPIP/plugins/panosalado/scripts/images/numbers/190.png</file></hotspot>
+                               
+                                <hotspot id=\"grid\" pan=\"200\" tilt=\"0\"><file>#URL_SITE_SPIP/plugins/panosalado/scripts/images/numbers/200.png</file></hotspot>
+                                <hotspot id=\"grid\" pan=\"210\" tilt=\"0\"><file>#URL_SITE_SPIP/plugins/panosalado/scripts/images/numbers/210.png</file></hotspot>
+                                <hotspot id=\"grid\" pan=\"220\" tilt=\"0\"><file>#URL_SITE_SPIP/plugins/panosalado/scripts/images/numbers/220.png</file></hotspot>
+                                <hotspot id=\"grid\" pan=\"230\" tilt=\"0\"><file>#URL_SITE_SPIP/plugins/panosalado/scripts/images/numbers/230.png</file></hotspot>
+                                <hotspot id=\"grid\" pan=\"240\" tilt=\"0\"><file>#URL_SITE_SPIP/plugins/panosalado/scripts/images/numbers/240.png</file></hotspot>
+                                <hotspot id=\"grid\" pan=\"250\" tilt=\"0\"><file>#URL_SITE_SPIP/plugins/panosalado/scripts/images/numbers/250.png</file></hotspot>
+                                <hotspot id=\"grid\" pan=\"260\" tilt=\"0\"><file>#URL_SITE_SPIP/plugins/panosalado/scripts/images/numbers/260.png</file></hotspot>
+                                <hotspot id=\"grid\" pan=\"270\" tilt=\"0\"><file>#URL_SITE_SPIP/plugins/panosalado/scripts/images/numbers/270.png</file></hotspot>
+                                <hotspot id=\"grid\" pan=\"280\" tilt=\"0\"><file>#URL_SITE_SPIP/plugins/panosalado/scripts/images/numbers/280.png</file></hotspot>
+                                <hotspot id=\"grid\" pan=\"290\" tilt=\"0\"><file>#URL_SITE_SPIP/plugins/panosalado/scripts/images/numbers/290.png</file></hotspot>
+                               
+                                <hotspot id=\"grid\" pan=\"300\" tilt=\"0\"><file>#URL_SITE_SPIP/plugins/panosalado/scripts/images/numbers/300.png</file></hotspot>
+                                <hotspot id=\"grid\" pan=\"310\" tilt=\"0\"><file>#URL_SITE_SPIP/plugins/panosalado/scripts/images/numbers/310.png</file></hotspot>
+                                <hotspot id=\"grid\" pan=\"320\" tilt=\"0\"><file>#URL_SITE_SPIP/plugins/panosalado/scripts/images/numbers/320.png</file></hotspot>
+                                <hotspot id=\"grid\" pan=\"330\" tilt=\"0\"><file>#URL_SITE_SPIP/plugins/panosalado/scripts/images/numbers/330.png</file></hotspot>
+                                <hotspot id=\"grid\" pan=\"340\" tilt=\"0\"><file>#URL_SITE_SPIP/plugins/panosalado/scripts/images/numbers/340.png</file></hotspot>
+                                <hotspot id=\"grid\" pan=\"350\" tilt=\"0\"><file>#URL_SITE_SPIP/plugins/panosalado/scripts/images/numbers/350.png</file></hotspot>
+                               
+                                                                               
+                                <hotspot id=\"grid\" pan=\"0\" tilt=\"5\"><file>#URL_SITE_SPIP/plugins/panosalado/scripts/images/numbers/005.png</file></hotspot>
+                                <hotspot id=\"grid\" pan=\"0\" tilt=\"10\"><file>#URL_SITE_SPIP/plugins/panosalado/scripts/images/numbers/010.png</file></hotspot>
+                                <hotspot id=\"grid\" pan=\"0\" tilt=\"-5\"><file>#URL_SITE_SPIP/plugins/panosalado/scripts/images/numbers/neg005.png</file></hotspot>
+                                <hotspot id=\"grid\" pan=\"0\" tilt=\"-10\"><file>#URL_SITE_SPIP/plugins/panosalado/scripts/images/numbers/neg010.png</file></hotspot>
+                               
+                                <hotspot id=\"grid\" pan=\"45\" tilt=\"5\"><file>#URL_SITE_SPIP/plugins/panosalado/scripts/images/numbers/005.png</file></hotspot>
+                                <hotspot id=\"grid\" pan=\"45\" tilt=\"10\"><file>#URL_SITE_SPIP/plugins/panosalado/scripts/images/numbers/010.png</file></hotspot>
+                                <hotspot id=\"grid\" pan=\"45\" tilt=\"-5\"><file>#URL_SITE_SPIP/plugins/panosalado/scripts/images/numbers/neg005.png</file></hotspot>
+                                <hotspot id=\"grid\" pan=\"45\" tilt=\"-10\"><file>#URL_SITE_SPIP/plugins/panosalado/scripts/images/numbers/neg010.png</file></hotspot>
+                               
+                                <hotspot id=\"grid\" pan=\"90\" tilt=\"5\"><file>#URL_SITE_SPIP/plugins/panosalado/scripts/images/numbers/005.png</file></hotspot>
+                                <hotspot id=\"grid\" pan=\"90\" tilt=\"10\"><file>#URL_SITE_SPIP/plugins/panosalado/scripts/images/numbers/010.png</file></hotspot>
+                                <hotspot id=\"grid\" pan=\"90\" tilt=\"-5\"><file>#URL_SITE_SPIP/plugins/panosalado/scripts/images/numbers/neg005.png</file></hotspot>
+                                <hotspot id=\"grid\" pan=\"90\" tilt=\"-10\"><file>#URL_SITE_SPIP/plugins/panosalado/scripts/images/numbers/neg010.png</file></hotspot>
+                               
+                                <hotspot id=\"grid\" pan=\"135\" tilt=\"5\"><file>#URL_SITE_SPIP/plugins/panosalado/scripts/images/numbers/005.png</file></hotspot>
+                                <hotspot id=\"grid\" pan=\"135\" tilt=\"10\"><file>#URL_SITE_SPIP/plugins/panosalado/scripts/images/numbers/010.png</file></hotspot>
+                                <hotspot id=\"grid\" pan=\"135\" tilt=\"-5\"><file>#URL_SITE_SPIP/plugins/panosalado/scripts/images/numbers/neg005.png</file></hotspot>
+                                <hotspot id=\"grid\" pan=\"135\" tilt=\"-10\"><file>#URL_SITE_SPIP/plugins/panosalado/scripts/images/numbers/neg010.png</file></hotspot>
+                               
+                                <hotspot id=\"grid\" pan=\"180\" tilt=\"5\"><file>#URL_SITE_SPIP/plugins/panosalado/scripts/images/numbers/005.png</file></hotspot>
+                                <hotspot id=\"grid\" pan=\"180\" tilt=\"10\"><file>#URL_SITE_SPIP/plugins/panosalado/scripts/images/numbers/010.png</file></hotspot>
+                                <hotspot id=\"grid\" pan=\"180\" tilt=\"-5\"><file>#URL_SITE_SPIP/plugins/panosalado/scripts/images/numbers/neg005.png</file></hotspot>
+                                <hotspot id=\"grid\" pan=\"180\" tilt=\"-10\"><file>#URL_SITE_SPIP/plugins/panosalado/scripts/images/numbers/neg010.png</file></hotspot>
+                               
+                                <hotspot id=\"grid\" pan=\"215\" tilt=\"5\"><file>#URL_SITE_SPIP/plugins/panosalado/scripts/images/numbers/005.png</file></hotspot>
+                                <hotspot id=\"grid\" pan=\"215\" tilt=\"10\"><file>#URL_SITE_SPIP/plugins/panosalado/scripts/images/numbers/010.png</file></hotspot>
+                                <hotspot id=\"grid\" pan=\"215\" tilt=\"-5\"><file>#URL_SITE_SPIP/plugins/panosalado/scripts/images/numbers/neg005.png</file></hotspot>
+                                <hotspot id=\"grid\" pan=\"215\" tilt=\"-10\"><file>#URL_SITE_SPIP/plugins/panosalado/scripts/images/numbers/neg010.png</file></hotspot>
+                               
+                                <hotspot id=\"grid\" pan=\"270\" tilt=\"5\"><file>#URL_SITE_SPIP/plugins/panosalado/scripts/images/numbers/005.png</file></hotspot>
+                                <hotspot id=\"grid\" pan=\"270\" tilt=\"10\"><file>#URL_SITE_SPIP/plugins/panosalado/scripts/images/numbers/010.png</file></hotspot>
+                                <hotspot id=\"grid\" pan=\"270\" tilt=\"-5\"><file>#URL_SITE_SPIP/plugins/panosalado/scripts/images/numbers/neg005.png</file></hotspot>
+                                <hotspot id=\"grid\" pan=\"270\" tilt=\"-10\"><file>#URL_SITE_SPIP/plugins/panosalado/scripts/images/numbers/neg010.png</file></hotspot>
+                               
+                                <hotspot id=\"grid\" pan=\"315\" tilt=\"5\"><file>#URL_SITE_SPIP/plugins/panosalado/scripts/images/numbers/005.png</file></hotspot>
+                                <hotspot id=\"grid\" pan=\"315\" tilt=\"10\"><file>#URL_SITE_SPIP/plugins/panosalado/scripts/images/numbers/010.png</file></hotspot>
+                                <hotspot id=\"grid\" pan=\"315\" tilt=\"-5\"><file>#URL_SITE_SPIP/plugins/panosalado/scripts/images/numbers/neg005.png</file></hotspot>
+                                <hotspot id=\"grid\" pan=\"315\" tilt=\"-10\"><file>#URL_SITE_SPIP/plugins/panosalado/scripts/images/numbers/neg010.png</file></hotspot>\n";
+      $ps_xml .= "
+                        </space>
+
+                </spaces>
+        
+        </layer>
+</PanoSalado>\n";
+
+      $ps_resfic = fopen( $ps_nompanofs, "w");
+      fwrite($ps_resfic, $ps_xml);
+      fclose($ps_resfic);
+   }
+}
+else
+   echo "<h2>Panosalado : param&egrave;tres incorrects !</h2>\n";
+?>
+
+<table align="#env{align,center}" border="0" cellpadding="0" cellspacing="10">
+<tr><td>
+
+<div id="flashcontent">
+<h3 align="center">We have detected that your Flash Player is either missing or not fully up to date.</h3>
+<h3 align="center">For the best viewing experience please click on the icon below to install <a href="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash">Adobe's Latest Flash Player</a>.</h3><br />
+</div>
+<!-- Missing Flash Player HTML Code END -->        
+
+<script type="text/javascript">
+   var so = new SWFObject("#URL_SITE_SPIP/plugins/panosalado/scripts/ModuleLoader.swf?xml=<?php echo $ps_nompanoweb; ?>", "pano", "#ENV{largeur,400}", "#ENV{hauteur,250}", "9", "#000000");
+   so.addParam("allowFullScreen","<?php echo $ps_pleinecran; ?>");
+   so.addParam("allowScriptAccess","sameDomain");
+   so.write("flashcontent");
+</script>
+
+</td></tr>
+</table>

@@ -1,0 +1,21 @@
+<plugin>
+    <nom>Panosalado Modele</nom>
+    <auteur>Franck Barbenoire</auteur>
+    <version>0.3</version>
+    <etat>dev</etat>
+    <description>
+    Ce plugin propose un mod&egrave;le permettant d'afficher un panorama.
+    </description>
+    <licence>GNU/GPL</licence>
+    <icon>img_pack/panosalado_logo.png</icon>
+    <lien>http://www.spip.net</lien>
+    <prefix>panosaladomodele</prefix>
+    <pipeline>
+    <nom>insert_head</nom>
+    <inclure>panosaladomodele_pipeline.php</inclure>
+    </pipeline>
+    <pipeline>
+    <nom>header_prive</nom>
+    <inclure>panosaladomodele_pipeline.php</inclure>
+    </pipeline>
+</plugin>
