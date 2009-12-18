@@ -10,6 +10,8 @@ Autre solution a creuser.. ROUGE-GRIS    :  FOND = gris 444444  , BACKGROUND MEN
 
 
 
+.formulaire_recherche input.text {color:#000} /* pour éviter que ceux qui utilisent les couleurs système avec écriture jaune sur fond vert ne voient "jaune sur fond blanc"  VOIR squelettes-dist/spip_formulaires.css*/ 
+/*.formulaire_login input.text { background-color: red ; color:blue}  NE FONCTIONNE PAS CAR SUR LA PAGE DE LOGIN, IL N'Y A PAS D'APPEL A PERSO.CSS*/
 
 
 body {
