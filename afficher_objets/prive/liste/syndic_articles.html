@@ -7,7 +7,7 @@
 #ANCRE_PAGINATION
 <div class="liste-elements syndic_articles">
 <table class='spip liste'>
-[<caption>(#ENV*{titre,<:titre_articles_syndiques:>})</caption>]
+[<caption><strong class="caption">(#ENV*{titre,<:titre_articles_syndiques:>})</strong></caption>]
 	<thead>
 		<tr class='first_row'>
 			<th class='statut'>[(#TRI{statut,<:statut:>,ajax})]</th>
@@ -47,4 +47,6 @@
 </table>
 [<p class='pagination'>(#PAGINATION{prive})</p>]
 </div>
-</B_liste_art>
+</B_liste_art>[
+<div class="liste-elements syndic_articles"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_art>

@@ -216,6 +216,7 @@ function inc_afficher_objets_dist($type, $titre,$requete,$formater='', $force=fa
 
 		#var_dump($contexte);
 		$contexte['titre']=$titre;
+		$contexte['sinon']=($force ? $titre:'');
 		$res = recuperer_fond($fond,$contexte,array('ajax'=>true));
 		if (_request('var_liste'))
 			var_dump($contexte);

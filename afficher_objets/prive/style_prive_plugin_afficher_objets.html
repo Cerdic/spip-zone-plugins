@@ -10,7 +10,9 @@
 }
 .liste-elements .pagination{margin-top:0; padding-top:0;}
 .liste-elements table.spip {width:100%;}
-.liste-elements table.spip caption {margin:0; padding:.3em 28px 1em; text-align:left;}
+.liste-elements table.spip caption {margin:0;text-align:left;}
+.liste-elements .caption {display:block;background:#fff;color:#333;font-size:1.1em;padding:6px;padding-left:28px;background-repeat:no-repeat;background-position: top left;}
+
 .liste-elements thead th {background:white;}
 .liste-elements thead th .on {text-decoration:underline;}
 .liste-elements thead tr {border-top:1px solid #ccc; }
@@ -33,8 +35,10 @@
 
 .liste-elements tbody tr:hover td {background:white;}
 
-.liste-elements.articles {background:url(#CHEMIN{images/article-24.gif}) no-repeat top left;}
-.liste-elements.syndic_articles {background:url(#CHEMIN{images/site-24.gif}) no-repeat top left;}
+.liste-elements.articles .caption {background-image:url(#CHEMIN{images/article-24.gif});}
+.liste-elements.breves .caption {background-image:url(#CHEMIN{images/breve-24.gif});}
+.liste-elements.sites .caption {background-image:url(#CHEMIN{images/site-24.gif});}
+.liste-elements.syndic_articles .caption {background-image:url(#CHEMIN{images/site-24.gif});}
 
 /* tips */
 .qTipContent {display:none;}

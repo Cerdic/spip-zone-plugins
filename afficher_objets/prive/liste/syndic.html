@@ -5,9 +5,9 @@
 }})
 ]<B_liste_sites>
 #ANCRE_PAGINATION
-<div class="liste-elements articles">
+<div class="liste-elements sites">
 <table class='spip liste'>
-[<caption>(#ENV*{titre,<:info_tous_articles_presents:>})</caption>]
+[<caption><strong class="caption">(#ENV*{titre,<:info_tous_articles_presents:>})</strong></caption>]
 	<thead>
 		<tr class='first_row'>
 			<th class='statut'>[(#TRI{statut,<:statut:>,ajax})]</th>
@@ -46,4 +46,6 @@
 </table>
 [<p class='pagination'>(#PAGINATION{prive})</p>]
 </div>
-</B_liste_sites>
+</B_liste_sites>[
+<div class="liste-elements sites"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_sites>
