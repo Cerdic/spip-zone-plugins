@@ -52,10 +52,10 @@
   	      <inclure>base/vu_base.php</inclure>
 	</pipeline> 
 	
-	<!-- Pipeline : declarer a SPIP les surnoms -->
+	<!-- Pipeline : declarer a SPIP les champs de recherche des nouveaux objets -->
 	<pipeline>
   	      <nom>rechercher_liste_des_champs</nom>
-  	      <inclure>base/vu_base.php</inclure>
+  	      <inclure>vu_pipelines.php</inclure>
 	</pipeline> 
 
 
@@ -88,6 +88,12 @@
 		<nom>libelle_association_mots</nom>
 		<inclure>vu_pipelines.php</inclure>
 	</pipeline>   
+
+	<!-- Pipeline : compatibilité avec plugin champs extras 2 -->
+	<pipeline>
+		<nom>objets_extensibles</nom>
+		<inclure>vu_pipelines.php</inclure>
+	</pipeline>
 
 
 	<necessite id="spip" version="[2.0.0;]" />

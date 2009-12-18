@@ -71,4 +71,13 @@ function vu_rechercher_liste_des_champs($tables){
 	return $tables;
 }
 
+//Pipeline. Compatibilite avec le plugin ChampsExtra2
+function vu_objets_extensibles($objets){
+        return array_merge($objets, array(
+		'vu_annonce' => _T('vu:info_vu_libelle_annonce'), 
+		'vu_evenement' => _T('vu:info_vu_libelle_evenement'), 
+		'vu_publication' => _T('vu:info_vu_libelle_publication')
+	));
+}
+
 ?>

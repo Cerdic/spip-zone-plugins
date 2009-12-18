@@ -169,6 +169,7 @@ function vu_declarer_tables_interfaces($interface){
 		$interface['table_des_tables']['vu_evenements'] = 'vu_evenements';
 		$interface['table_des_tables']['vu_publications'] = 'vu_publications';
 
+	// Indiquer les jointures possibles
 		// de tables vu_* vers mots_vu_* : sur le champ id_*
 		$interface['tables_jointures']['spip_vu_annonces']['id_annonce'] = 'mots_vu_annonces';
         	$interface['tables_jointures']['spip_vu_evenements']['id_evenement'] = 'mots_vu_evenements';
