@@ -324,13 +324,8 @@ function crayons_boutons($boutons = array()) {
 
 	$html = '';
 	foreach ($boutons as $bnam => $bdef) if ($bdef) {
-		$html .= '<a class="crayon-' . $bnam .
-			'" title="' . $bdef[1] . '"';
-		if (!empty($bdef[2])) {
-			$html .= ' href="' . $bdef[2] . '"';
-		}
-		$html .= '><img src="' . $crayonsImgPath . '/' .
-			$bdef[0] . '.png" width="20" height="20" /></a>';
+		$html .= '<button type="button" class="crayon-' . $bnam .
+			'" title="' . $bdef[1] . '">' . $bdef[1] . '</button>';
 	}
 
 	if ($html)
