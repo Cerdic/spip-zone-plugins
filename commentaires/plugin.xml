@@ -13,6 +13,8 @@ _ Tout pour construire des commentaires !
 </description>
 <lien>http://www.spip-contrib.net/?article3173</lien>
 <prefix>comments</prefix>
+<chemin dir="" />
+<chemin dir="feed/" />
 <fonctions>comments_fonctions.php</fonctions>
 <necessite id='SPIP' version='[2.0.9;]' />
 <utilise id='Z' version="[;]" />

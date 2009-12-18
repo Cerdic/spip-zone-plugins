@@ -1,0 +1,79 @@
+<?php
+   @header("Content-type: application/atom+xml");
+   echo '<'.'?xml version="1.0" encoding="#CHARSET"?'.'>';
+?>
+<feed version="0.3" xmlns="http://purl.org/atom/ns#" xml:lang="#LANG">
+
+<title >[(#NOM_SITE_SPIP|textebrut|entites_html|entites_unicode)]<?php echo $type == "co" ? " (commentaires)":""; ?></title>
+	<link rel="alternate" type="text/html" href="#URL_SITE_SPIP"></link>
+	
+
+	<BOUCLE_date_du_dernier_article_de_la_rubrique(ARTICLES){id_rubrique}{par date}{inverse}{0,1}>
+		<modified>[(#DATE|date_iso)]</modified>
+	</BOUCLE_date_du_dernier_article_de_la_rubrique>
+
+
+
+
+<?php 
+if ($GLOBALS['type'] == "co") {
+?>
+
+<BOUCLE_1(FORUMS){id_article}{plat}{par date}{inverse}{0,20}>
+		<item>
+			<entry>
+				<title>[(#TITRE|texte_backend)]</title>
+				<link rel="alternate" type="text/html" href="[(#URL_FORUM|url_absolue)]"></link>
+				<issued>[(#DATE|date_iso)]</issued>
+				<id>[(#URL_FORUM|url_absolue)]</id>
+				<modified>[(#DATE|date_iso)]</modified>
+				<summary>[(#TEXTE|texte_backend)]</summary>
+			</entry>
+		</item>
+</BOUCLE_1>
+
+<BOUCLE_2(FORUMS){plat}{par date}{inverse}{0,20}>
+		<item>
+			<entry>
+				<title>[(#TITRE|texte_backend)]</title>
+				<link rel="alternate" type="text/html" href="[(#URL_FORUM|url_absolue)]"></link>
+				<issued>[(#DATE|date_iso)]</issued>
+				<id[(#URL_FORUM|url_absolue)]</id>
+				<modified>[(#DATE|date_iso)]</modified>
+				<summary>[(#TEXTE|texte_backend)]</summary>
+			</entry>
+		</item>
+</BOUCLE_2>
+
+<//B_1>		
+
+<?php
+}
+else
+{
+?>
+
+	
+	<BOUCLE_rub(RUBRIQUES){id_rubrique}>
+		<BOUCLE3(ARTICLES){branche}{par date}{inverse}{0,10}>
+			<entry>
+				<title>[(#TITRE|texte_backend)]</title>
+				<link rel="alternate" type="text/html" href="[(#URL_ARTICLE|url_absolue)]"></link>
+				<issued>[(#DATE|date_iso)]</issued>
+				<id>[(#URL_ARTICLE|url_absolue)]</id>
+				<modified>[(#DATE|date_iso)]</modified>
+				<summary>[(#INTRODUCTION|texte_backend)]</summary>
+				<author><name><BOUCLE23(AUTEURS){id_article}{", "}>[(#NOM|texte_backend)]</BOUCLE23>Inconnu<//B23></name></author>
+			</entry>
+		</BOUCLE3>
+	</BOUCLE_rub>
+	<//B_rub>
+
+
+
+<?php 
+}
+?>
+
+
+</feed>
