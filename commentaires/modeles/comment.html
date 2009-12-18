@@ -1,8 +1,10 @@
 <BOUCLE_comment(FORUMS){id_forum}>
-<div class="comment" id="forum#ID_FORUM">
+<div class="comment">
+	<a href="#comment#ID_FORUM" name="comment#ID_FORUM" id="comment#ID_FORUM"></a>
+    <a href="#forum#ID_FORUM" name="forum#ID_FORUM" id="forum#ID_FORUM"></a>
     <p class="comment-meta">
-        <a rel="self bookmark" href="#forum#ID_FORUM" title="<:comments:permalink_pour:> <:commentaire:> #ID_FORUM" class="ancre permalink comment-number">#ENV{compteur}</a>
-        [<abbr class="dtposted"[ title="(#DATE|date_iso)"]>Le (#DATE|affdate_jourcourt)[ &agrave;&nbsp;(#DATE|heures)][:(#DATE|minutes)]</abbr>]
+        [<a rel="self bookmark" href="#forum#ID_FORUM" title="<:comments:permalink_pour:> <:commentaire:> #ID_FORUM" class="ancre permalink comment-number">(#ENV{compteur}|sinon{#})</a>]
+		[<abbr class="dtposted"[ title="(#DATE|date_iso)"]>Le (#DATE|affdate_jourcourt)[ &agrave;&nbsp;(#DATE|heures)][:(#DATE|minutes)]</abbr>]
         <BOUCLE_auteur(AUTEURS){tout}{id_auteur}>
         [<span class="poster">, <:par_auteur:> <a rel="nofollow" href="#URL_AUTEUR" class="url spip_in"><strong class="fn n">(#NOM)</strong></a>[(#PLUGIN{gravatar}|oui)[ (#MODELE{gravatar}|image_reduire{32})]]</span>]
         </BOUCLE_auteur>
