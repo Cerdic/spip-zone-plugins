@@ -48,11 +48,9 @@ if (window.jQuery) jQuery(function(){
 	});
 }); //--></script>\n";
 	}
-	// pour la constante _CS_FILE_OPTIONS
-	cout_define('cs_comportement');
 	// appel direct, sans ajax, histoire de mettre a jour le menu :
 	return redirige_action_post('action_rapide', 'sauve_pack', 'admin_couteau_suisse', "cmd=pack#cs_infos",
-			"\n$script<div style='padding:0.4em;'><p>$info</p>$liste<p>"._T('couteauprive:pack_sauver_descrip', array('file' => _CS_FILE_OPTIONS))
+			"\n$script<div style='padding:0.4em;'><p>$info</p>$liste<p>"._T('couteauprive:pack_sauver_descrip', array('file' => show_file_options()))
 			."</p><div style='text-align: center;'><input class='fondo' type='submit' value=\""
 			.attribut_html(_T('couteauprive:pack_sauver')) . "\" /></div></div>"); 
 }
