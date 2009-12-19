@@ -5,7 +5,7 @@
 <ul class='liste_items themes'>
 <BOUCLE_themes(POUR){tableau #ENV{themes}}{cle!=#ENV{selection}}{pagination 10}>
 	<li class='item'>
-		[(#EVAL{_DIR_THEMES}|concat{#VALEUR|table_valeur{chemin},'/',#VALEUR|table_valeur{icon}}|image_reduire{200,150}|inserer_attribut{class,spip_documents_left})]
+		[(#EVAL{_DIR_THEMES}|concat{#VALEUR|table_valeur{chemin},'/',#VALEUR|table_valeur{icon}}|image_reduire{200,150}|inserer_attribut{class,spip_documents_left}|inserer_attribut{alt,#VALEUR|table_valeur{nom}|typo|extraire_multi})]
 		<h3>[(#VALEUR|table_valeur{nom}|typo|extraire_multi)]</h3>
 		<div class='descriptif'>[(#VALEUR|table_valeur{description}|propre)]</div>
 		<div class='auteur'>[(#VAL{info_les_auteurs_1}|_T{#ARRAY{les_auteurs,#VALEUR|table_valeur{auteur}|propre|PtoBR}})]</div>

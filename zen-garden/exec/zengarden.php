@@ -22,7 +22,7 @@ function exec_zengarden(){
 	echo debut_gauche("choix_theme",true);
 	
 	echo debut_boite_info(true);
-	echo "<img src='"._DIR_PLUGIN_ZENGARDEN."img_pack/themes-128.png' width='128' height='128' />";
+	echo "<img src='"._DIR_PLUGIN_ZENGARDEN."img_pack/themes-128.png' width='128' height='128' alt='Zen Garden' />";
 	echo propre(_T('zengarden:info_page'));	
 	echo fin_boite_info(true);
 	#echo recuperer_fond('prive/zengarden_theme_actif',array('themes'=>$themes,'selection'=>$GLOBALS['meta']['zengarden_theme']?$GLOBALS['meta']['zengarden_theme']:''));
