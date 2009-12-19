@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Des jeux dans vos articles</nom>
 	<etat>test</etat>
-	<version>1.9.1</version>
+	<version>2.0.0</version>
 	<icon>img/jeux-48.png</icon>
 	<auteur>Patrice VANNEUFVILLE
 _ Icones : Jonathan Roche
@@ -30,7 +30,6 @@ Syntaxe compl&#232;te : [->http://www.spip-contrib.net/Des-jeux-dans-vos-article
 
 Ce plugin fonctionne de fa&#231;on optimale sur les squelettes disposant de la balise [#INSERT_HEAD->http://www.spip.net/fr_article1902.html] et peut &#233;galement &#234;tre test&#233; dans l'espace priv&#233;.
 
-_ Si vous avez une version de Spip inf&#233;rieure ou &#233;gale &#224; {{1.9.1}}, certains jeux n&#233;cessiteront l'activation du plugin [jQuery->http://files.spip.org/spip-zone/jqueryplugin.zip].
 _ Pour les jeux graphiques, il faut avoir les librairies {{GD}} install&#233;es sur votre server.
 _ Ce plugin est encore en &#233;volution, proc&#233;dez r&#233;guli&#232;rement &#224; vos mises &#224; jours.
   
@@ -101,4 +100,5 @@ Afin d'&#233;viter les mauvaises surprises de pr&#233;sentation (comme l'afficha
 	</bouton>
 	<install>base/jeux_upgrade.php</install>
 	<necessite id="SPIP" version="[2.0.0;]" />
+	<utilise id="cfg" version="[1.10.5;]" />
 </plugin>
