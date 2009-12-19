@@ -12,8 +12,8 @@
 if(!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/autoriser');
+// Constantes distantes
 include_spip('cout_define');
-cout_define('distant');
 
 // initialiser les plugins, les pipelines, etc.
 function cs_init_plugins() {

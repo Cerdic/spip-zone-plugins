@@ -5,6 +5,15 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Pour forcer les logs du plugin, outil actif ou non :
 // define('_LOG_CS_FORCE', 'oui');
 
+// Declaration des pipelines qui permettent d'interpreter la description d'un outil issue d'une chaine de langue
+// init_description_outil : pipeline d'initialisation, texte brut sorti du fichier de langue
+// les variables de l'outil ne sont pas encore interpretees
+#$GLOBALS['spip_pipeline']['init_description_outil']='';
+// pre_description_outil : 1er pipeline de pre_affichage, indispensable d'y mettre par exemple certaines constantes
+$GLOBALS['spip_pipeline']['pre_description_outil']='';
+// post_description_outil : 2e pipeline de pre_affichage, ici le texte est quasi définitif
+#$GLOBALS['spip_pipeline']['post_description_outil']='';
+
 // liste des outils et des variables
 global $metas_vars, $metas_outils;
 if (!isset($GLOBALS['meta']['tweaks_actifs'])) {

@@ -7,14 +7,13 @@
 #-----------------------------------------------------#
 if(!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('cout_define');
-cout_define('description_outils');
-
 include_spip('inc/actions');
 include_spip('inc/texte');
 include_spip('inc/layer');
 include_spip('inc/presentation');
 include_spip('inc/message_select');
+
+define('_VAR_OUTIL', '@@CS_VAR_OUTIL@@');
 
 function cs_ajax_outil_greffe($idom, $corps)	{
 	// en fait, ajax uniquement si une modif est demandee...
@@ -23,20 +22,23 @@ function cs_ajax_outil_greffe($idom, $corps)	{
 		:"\n<div id='$idom'>$corps\n</div>\n";
 }
 
-// retourne le code html qu'il faut pour fabriquer le formulaire de l'outil proprietaire
-function description_outil_une_variable($index, $outil, $variable, $label) {
+// initialise une variable et ne retourne rien si !$modif
+// sinon, cette fonction retourne le code html qu'il faut pour fabriquer le formulaire de l'outil proprietaire
+function description_outil_une_variable($index, &$outil, &$variable, &$label, &$modif) {
 	global $cs_variables, $metas_vars;
 	$actif = $outil['actif'];
 	// la valeur de la variable n'est stockee dans les metas qu'au premier post
 	if(isset($metas_vars[$variable])) $valeur = $metas_vars[$variable];
 		else $valeur = cs_get_defaut($variable);
 	$valeur = cs_retire_guillemets($valeur);
-//cs_log(" -- description_outil_une_variable($index) - Traite %$variable%");
+//cs_log(" -- description_outil_une_variable($index) - Traite %$variable% = $valeur");
 	$cs_variable = &$cs_variables[$variable];
 	// autorisations de variables
 	include_spip('inc/autoriser');
 	$cs_variable['disabled'] = $disab 
 		= autoriser('configurer', 'variable', 0, NULL, array('nom'=>$cs_variable['nom'], 'outil'=>$outil))?'':' disabled="disabled"';
+	// si ce n'est qu'une simple initialisation, on sort
+	if(!$modif) return '';
 	// si la variable necessite des boutons radio
 	if(is_array($radios = &$cs_variable['radio'])) {
 		if(!$actif) {
@@ -83,7 +85,6 @@ function description_outil_une_variable($index, $outil, $variable, $label) {
 // callback sur les labels de zones input ; format : [[label->qq chose]]
 // regexpr : ,\[\[([^][]*)->([^]]*)\]\],msS
 function description_outil_input1_callback($matches) {
-	global $cs_input_variable;
 	// pas de label : [[->qq chose]]
 	if(!strlen($matches[1])) return "<fieldset><div>$matches[2]</div></fieldset>";
 	// retour a la ligne : [[-->qq chose]]
@@ -92,8 +93,9 @@ function description_outil_input1_callback($matches) {
 	return "<fieldset><legend>$matches[1]</legend><div>$matches[2]</div></fieldset>";
 }
 
-// callback sur les label de zones input en utilisant _T('couteauprive:label:variable') ; format [[qq chose %variable% qq chose]]
+// callback sur les labels de zones input en utilisant _T('couteauprive:label:variable') ; format [[qq chose %variable% qq chose]]
 // regexpr : ,\[\[((.*?)%([a-zA-Z_][a-zA-Z0-9_]*)%(.*?))\]\],msS
+// ici, renseignement de la globale $cs_input_variable
 function description_outil_input2_callback($matches) {
 	global $cs_input_variable;
 	$cs_input_variable[] = $matches[3];
@@ -118,29 +120,25 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 	$outil = &$outils[$outil_];
 	$actif = $outil['actif'];
 	$index = $outil['index'];
-	cout_define($outil_);
+//cs_log("inc_description_outil_dist() - Parse la description de '$outil_'");
 	// la description de base est a priori dans le fichier de langue
 	$descrip = isset($outil['description'])?$outil['description']:_T('couteauprive:'.$outil['id'].':description');
 	// reconstitution d'une description eventuellement morcelee
 	// exemple : <:mon_outil:3:> est remplace par _T('couteauprive:mon_outil:description3')
 	$descrip = preg_replace_callback(',<:([a-zA-Z_][a-zA-Z0-9_-]*):([0-9]*):>,', 
 		create_function('$matches','return _T("couteauprive:$matches[1]:description$matches[2]");'), $descrip);
-	global $cs_input_variable;
-	$cs_input_variable = array();
+	// envoi de la description en pipeline
+#	list(,$descrip) = pipeline('init_description_outil', array($outil_, $descrip));
+	// globale pour la callback description_outil_input2_callback
+	global $cs_input_variable;	$cs_input_variable = array();
 	// remplacement des zones input de format [[label->qq chose]]
 	$descrip = preg_replace_callback(',\[\[([^][]*)->([^]]*)\]\],msS', 'description_outil_input1_callback' , $descrip);
 	// remplacement des zones input de format [[qq chose %variable% qq chose]] en utilisant _T('couteauprive:label:variable') comme label
+	// la fonction description_outil_input2_callback renseigne la globale $cs_input_variable
 	$descrip = preg_replace_callback(',\[\[((.*?)%([a-zA-Z_][a-zA-Z0-9_]*)%(.*?))\]\],msS', 'description_outil_input2_callback', $descrip);
 
-	// recherche des blocs <variable></variable> eventuels associes pour du masquage/demasquage
-	foreach($cs_input_variable as $v) {
-		$descrip = str_replace("</$v>", '</div>', preg_replace_callback(",<($v)\s+valeur=(['\"])(.*?)\\2\s*>,", 'cs_input_variable_callback', $descrip));
-	}
-	unset($cs_input_variable);
-	// remplacement des variables de format : %variable%
+	// initialisation et remplacement des variables de format : %variable%
 	$t = preg_split(',%([a-zA-Z_][a-zA-Z0-9_]*)%,', $descrip, -1, PREG_SPLIT_DELIM_CAPTURE);
-
-//cs_log("inc_description_outil_dist() - Parse la description de '$outil_'");
 	$res = '';
 	$nb_disabled = $nb_variables = 0; $variables = array();
 	for($i=0;$i<count($t);$i+=2) if(isset($t[$i+1]) && strlen($var=trim($t[$i+1]))) {
@@ -149,7 +147,7 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 			$res .= description_outil_une_variable(
 				$index + (++$nb_variables),
 				$outil, $var,
-				$t[$i]);
+				$t[$i], $modif);
 			$variables[] = $var;
 			if($cs_variables[$var]['disabled']) ++$nb_disabled;
 		} else {
@@ -163,8 +161,16 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 	$outil['nb_disabled'] = $nb_disabled;
 
 	// si ce n'est qu'une simple initialisation, on sort
-	if(!$modif) return;
+	if(!$modif) {unset($cs_input_variable); return;}
 
+	// envoi de la description courante en pipeline
+	list(,$res) = pipeline('pre_description_outil', array($outil_, $res));
+	// recherche des blocs <variable></variable> eventuels associes pour du masquage/demasquage
+	foreach($cs_input_variable as $v) {
+		$res = preg_replace_callback(",<($v)\s+valeur=(['\"])(.*?)\\2\s*>,", 'cs_input_variable_callback', $res);
+		$res = str_replace("</$v>", '</div>', $res);
+	}
+	unset($cs_input_variable);
 	// bouton 'Modifier' : en dessous du texte s'il y a plusieurs variables, a la place de _VAR_OUTIL s'il n'y en a qu'une.
 	// attention : on ne peut pas modifier les variables si l'outil est inactif
 	if($actif) {
@@ -188,14 +194,20 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 	$res = preg_replace(',</q(\d)>,','</div>', preg_replace(',<q(\d)>,','<div class="q$1">', $res));
 	// remplacement des inputs successifs sans label : [[%var1%]][[->%var2%]] ou [[%var1%]][[-->%var2%]]
 	$res = preg_replace(',(<br />)?</fieldset><fieldset>( ?<div>),', '$2', $res);
-	// remplacement des puces
-	$res = str_replace('@puce@', definir_puce(), $res);
-	// remplacement des constantes de forme @_CS_XXXX@
-	$res = preg_replace_callback(',@(_CS_[a-zA-Z0-9_]+)@,', 
-		create_function('$matches','return defined($matches[1])?constant($matches[1]):"";'), $res);
-	// remplacement des liens sur un outil
-	$res = preg_replace_callback(',\[\.->([a-zA-Z_][a-zA-Z0-9_-]*)\],', 'description_outil_liens_callback', $res);
+	// remplacement de diverses constantes
+	$res = str_replace(array('@puce@', '@_CS_CHOIX@','@_CS_ASTER@','@_CS_PLUGIN_JQUERY192@'),
+		array(definir_puce(), _T('couteauprive:votre_choix'), '<sup>(*)</sup>', defined('_SPIP19300')?'':_T('couteauprive:detail_jquery3')), $res);
 
+	// remplacement des constantes qui restent de forme @_CS_XXXX@
+	if(strpos($res,'@_CS')!==false) 
+		$res = preg_replace_callback(',@(_CS_[a-zA-Z0-9_]+)@,', 
+			create_function('$matches','return defined($matches[1])?constant($matches[1]):"";'), $res);
+	// remplacement des liens vers un autre outil
+	if(strpos($res,'[.->')!==false) 
+		$res = preg_replace_callback(',\[\.->([a-zA-Z_][a-zA-Z0-9_-]*)\],', 'description_outil_liens_callback', $res);
+
+	// envoi de la description finale en pipeline
+#	list(,$res) = pipeline('post_description_outil', array($outil_, $res));
 	return cs_ajax_outil_greffe("description_outil-$index", $res);
 }
 ?>

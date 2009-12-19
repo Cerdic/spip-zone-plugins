@@ -91,6 +91,8 @@ add_variables( array(
 	'defaut' => '"1"',
 	'code:strlen(%s)' => "define('_ID_WEBMESTRES', %s);",
 	'code:!strlen(%s)' => "define('_ID_WEBMESTRES', 1);",
+	'pipelinecode:pre_description_outil' => 'if($flux[0]=="webmestres")
+		$flux[1]=str_replace(array("@_CS_LISTE_WEBMESTRES@","@_CS_LISTE_ADMINS@"),get_liste_administrateurs()),$flux[1]);',
 ));
 add_outil( array(
 	'id' => 'webmestres',
@@ -321,6 +323,8 @@ add_outil( array(
 	'jquery'	=> 'oui',
 	'code:jq_init' => 'cs_auteur_forum.apply(this);',
 	'code:js' => "var cs_verif_email = %%auteur_forum_email%%;\nvar cs_verif_nom = %%auteur_forum_nom%%;\nvar cs_verif_deux = %%auteur_forum_deux%%;",
+	'pipelinecode:pre_description_outil' => 'if($flux[0]=="auteur_forum") $flux[1]=str_replace(array("@_CS_FORUM_NOM@","@_CS_FORUM_EMAIL@"),
+	array(preg_replace(\',:$,\',"",_T("forum_votre_nom")),preg_replace(\',:$,\',"",_T("forum_votre_email"))),$flux[1]);',
 ));
 
 // ici on a besoin de trois boutons radio : _T('couteauprive:par_defaut'), _T('couteauprive:sf_amont') et _T('couteauprive:sf_tous')
@@ -389,6 +393,8 @@ add_variables( array(
 add_outil( array(
 	'id' => 'cs_comportement',
 	'code:spip_options' => "%%distant_off%% %%distant_outils_off%%",
+	'pipelinecode:pre_description_outil' => 'if($flux[0]=="cs_comportement") $flux[1]=str_replace(array("@_CS_DIR_TMP@","@_CS_FILE_OPTIONS@"),
+		array(cs_canonicalize(_DIR_RESTREINT_ABS._DIR_TMP),show_file_options()),$flux[1]);',
 ));
 
 
@@ -418,6 +424,7 @@ add_variables( array(
 	'nom' => 'admin_travaux',
 	'format' => _format_NOMBRE,
 	'radio' => array(0 => 'couteauprive:tous', 1 => 'couteauprive:sauf_admin', 2 => 'couteauprive:sauf_admin_redac', 3 => 'couteauprive:sauf_identifies'),
+	'radio/ligne' => 1,
 	'defaut' => 0,
 	'code' => "define('_en_travaux_PUBLIC', %s);\n",
 ), array(
@@ -444,6 +451,8 @@ add_outil( array(
 	'categorie' => 'admin',
 	'auteur' => "Arnaud Ventre pour l'id&eacute;e originale",
 	'pipeline:affichage_final' => 'en_travaux_affichage_final',
+	'pipelinecode:pre_description_outil' => 'if($flux[0]=="en_travaux") $flux[1]=str_replace(array("@_CS_TRAVAUX_TITRE@","@_CS_NOM_SITE@"),
+	array("["._T("info_travaux_titre")."]","[".$GLOBALS["meta"]["nom_site"]."]"),$flux[1]);',
 ));
 
 add_variables( array(
@@ -486,6 +495,8 @@ add_outil( array(
 	'pipeline:affiche_milieu' => 'boites_privees_affiche_milieu',
 	'pipeline:affiche_droite' => 'boites_privees_affiche_droite',
 	'pipeline:affiche_gauche' => 'boites_privees_affiche_gauche',
+	// Pour la constante _CS_RSS_SOURCE
+#	'pipelinecode:pre_description_outil' => 'if($flux[0]=="boites_privees") include_spip("cout_define");',
 ));
 
 add_variables( array(
@@ -790,6 +801,7 @@ add_outil( array(
 	'pipeline:pre_typo' => 'couleurs_pre_typo',
 	'pipeline:nettoyer_raccourcis_typo' => 'couleurs_nettoyer_raccourcis',
 	'pipeline:bt_toolbox' => 'couleurs_BarreTypo',
+	'pipeline:pre_description_outil' => 'couleurs_pre_description_outil',
 	'code:options' => "%%couleurs_fonds%%%%set_couleurs%%%%couleurs_perso%%",
 	'code:fonctions' => "// aide le Couteau Suisse a calculer la balise #INTRODUCTION
 include_spip('outils/couleurs');

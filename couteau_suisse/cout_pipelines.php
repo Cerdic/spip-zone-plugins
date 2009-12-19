@@ -234,6 +234,15 @@ function couteau_suisse_bt_gadgets($params) {
 	return $params;
 }
 
+// pipeline maison : pre-affichage de la description d'un outil
+// flux[0] est l'id de l'outil, flux[1] est le texte de description
+function couteau_suisse_pre_description_outil($flux) {
+	global $cs_metas_pipelines;
+	if(isset($cs_metas_pipelines['pre_description_outil']))
+		eval($cs_metas_pipelines['pre_description_outil']);
+	return $flux;
+}
+
 // callback pour la fonction cs_compile_pipe()
 function cs_compile_header_callback($matches) {
 if(defined('_LOG_CS')) cs_log(" -- compilation d'un header. Code CSS : $matches[1]");

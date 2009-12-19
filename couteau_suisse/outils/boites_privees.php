@@ -96,9 +96,9 @@ function cs_infos_webmasters() {
 	include_spip('inc/autoriser');
 	if (!defined('boites_privees_WEBMASTERS') || !autoriser('configurer','csinfoswebmasters')) return '';
 	include_spip('cout_define');
-	def_liste_adminsitrateurs();
+	list($w) = get_liste_administrateurs();
 	return cs_cadre_depliable(_T('couteau:webmestres'), 'bp_infos_webmasters', 
-	"<p>".(strlen(_CS_LISTE_WEBMESTRES)?'&bull; '.str_replace(', ','<br/>&bull; ',_CS_LISTE_WEBMESTRES):_T('couteau:variable_vide'))."</p>");
+	"<p>".(strlen($w)?'&bull; '.str_replace(', ','<br/>&bull; ',$w):_T('couteau:variable_vide'))."</p>");
 }
 
 function cs_infos_connection() {

@@ -20,8 +20,8 @@ if(!function_exists(ajax_retour)) {
 
 function exec_cs_boite_rss_dist() {
 	cs_minipres();
+	// Constantes distantes
 	include_spip('cout_define');
-	cout_define('distant');
 	if(defined('_CS_PAS_DE_DISTANT')) { ajax_retour(_T('couteauprive:version_distante_off')); return; }
 	$p = '';
 	// on cherche le flux rss toutes les _CS_RSS_UPDATE minutes

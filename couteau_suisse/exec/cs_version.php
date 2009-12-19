@@ -8,7 +8,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('cout_define');
-cout_define('distant');
 
 // compatibilite spip 1.9
 if(!function_exists(ajax_retour)) { 
