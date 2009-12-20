@@ -20,6 +20,10 @@
 
 	<prefix>catalogue</prefix>
 	
+	<fonctions>catalogue_fonctions.php</fonctions>
+	
+	<options>catalogue_options.php</options>
+
 	<pipeline>
 		<nom>declarer_tables_interfaces</nom>
 		<inclure>base/catalogue.php</inclure>
