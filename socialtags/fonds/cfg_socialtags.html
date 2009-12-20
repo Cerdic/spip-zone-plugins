@@ -84,8 +84,10 @@ SVP, veuillez activer Javascript.
 
 <p>Si vous avez un Badge Facebook (<a href="http://www.facebook.com/facebook-widgets/" target="_fb">aide sur le site FB</a>), indiquez ci-dessous son contenu, soit en JS, soit en HTML.</p>
 
-<strong>Badge HTML</strong> (ajouter dans votre squelette <code>&#35;CONFIG{socialtags/badgehtml}</code>):
-<textarea name="badgecode" class="textarea" rows="6">#ENV{badgehtml}
+<strong>Badge HTML</strong> (ajouter dans votre squelette
+<code>&#35;CONFIG{socialtags/badge}</code>, ou dans un article
+<code>&lt;socialtags|badge&gt;):
+<textarea name="badge" class="textarea" rows="6">#ENV{badge}
 </textarea>
 
 <strong>Badge JS</strong> (automatiquement inclus dans <code>?page=socialtags.js</code>):
