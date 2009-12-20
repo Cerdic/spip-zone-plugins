@@ -1,0 +1,47 @@
+<plugin>
+
+	<nom>Catologue</nom>
+
+	<auteur>Cyril Marion</auteur>
+
+	<version>1.0</version>
+
+	<etat>dev</etat>
+
+	<description>
+		Ce plugin permet la gestion simple d'un catalogue de produits, avec catégories et variantes
+	</description>
+
+	<lien>http://event.concurrences.com</lien>
+
+	<icon>images/cat-128.png</icon>
+
+	<prefix>catalogue</prefix>
+	
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/catalogue.php</inclure>
+	</pipeline>
+
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/catalogue.php</inclure>
+	</pipeline>
+
+	<version_base>1.0</version_base>
+	
+	<install>base/catalogue_upgrade.php</install>
+	
+	<bouton id='cat' parent='naviguer'>
+		<icone>images/cat-24.png</icone>
+		<titre>catalogue:catalogue</titre>
+	</bouton>
+
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>catalogue_autorisations.php</inclure>
+	</pipeline>	
+	
+	<necessite id="SPIP" version="[2.0.9;]" />
+
+</plugin>
