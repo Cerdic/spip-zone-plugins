@@ -13,7 +13,8 @@
 include_spip('base/jeux_tables');
 include_spip('inc/jeux_autoriser');
 
-// Declaration du pipeline "jeux_caracteristiques" qui permet de declarer au plugin des jeux tierces
-$GLOBALS['spip_pipeline']['jeux_caracteristiques']=''; 
+// Declaration du pipeline "jeux_caracteristiques" qui permet d'ajouter au plugin des jeux tierces
+if (!isset($GLOBALS['spip_pipeline']['jeux_caracteristiques']))
+	$GLOBALS['spip_pipeline']['jeux_caracteristiques']=''; 
 
 ?>
