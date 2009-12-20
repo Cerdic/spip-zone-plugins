@@ -10,8 +10,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // les variables de l'outil ne sont pas encore interpretees
 #$GLOBALS['spip_pipeline']['init_description_outil']='';
 // pre_description_outil : 1er pipeline de pre_affichage, indispensable d'y mettre par exemple certaines constantes
-$GLOBALS['spip_pipeline']['pre_description_outil']='';
-// post_description_outil : 2e pipeline de pre_affichage, ici le texte est quasi définitif
+if (!isset($GLOBALS['spip_pipeline']['pre_description_outil']))
+	$GLOBALS['spip_pipeline']['pre_description_outil']='';
+// post_description_outil : 2e pipeline de pre_affichage, ici le texte est quasi definitif
 #$GLOBALS['spip_pipeline']['post_description_outil']='';
 
 // liste des outils et des variables
