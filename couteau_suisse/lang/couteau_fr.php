@@ -14,6 +14,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'configurer' => 'Configurer le Couteau Suisse',
 	'connections' => 'Connexions',
+	'couleur_icone_texte' => 'T',
+	'couleur_icone_fond' => 'F',
+	'couleur_texte' => 'Texte @couleur@',
+	'couleur_fond' => 'Fond @couleur@',
+	'colorer_texte' => 'Colorer le texte',
+	'colorer_fond' => 'Colorer le fond',
 
 	// D
 	'date_court' => '@jour@/@mois@/@annee@',

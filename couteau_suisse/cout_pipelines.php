@@ -33,11 +33,10 @@ if(defined('_LOG_CS')) cs_log("couteau_suisse_install($action)");
 				if(strpos($meta, 'cs_') === 0) effacer_meta($meta);
 			}
 			ecrire_metas();
-			// effacement du repertoire temporaire tmp/couteau-suisse
-			if(@file_exists(_DIR_CS_TMP)) {
-				include_spip('inc/getdocument');
-				effacer_repertoire_temporaire(_DIR_CS_TMP);
-			}
+			// effacement des repertoires temporaires
+			include_spip('inc/getdocument');
+			foreach(array(_DIR_CS_TMP, _DIR_VAR.'couteau-suisse') as $dir) 
+				if(@file_exists($dir)) effacer_repertoire_temporaire($dir);
 			@unlink(_DIR_RSS_TMP);
 			// retrait de l'inclusion eventuelle dans config/mes_options.php
 			include_spip('cout_utils');
@@ -232,6 +231,20 @@ function couteau_suisse_bt_gadgets($params) {
 	if(!isset($cs_metas_pipelines['bt_toolbox'])) return $params;
 	$params['flux'] .= bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['couteau_suisse']."','');", _DIR_PLUGIN_COUTEAU_SUISSE."/img/couteau-24.gif", _T('couteauprive:raccourcis_barre'), $params['help']);
 	return $params;
+}
+
+function couteau_suisse_porte_plume_barre_pre_charger($flux){
+	global $cs_metas_pipelines;
+	if (isset($cs_metas_pipelines['porte_plume_barre_pre_charger']))
+		eval($cs_metas_pipelines['porte_plume_barre_pre_charger']);
+	return $flux;
+}
+
+function couteau_suisse_porte_plume_lien_classe_vers_icone($flux){
+	global $cs_metas_pipelines;
+	if (isset($cs_metas_pipelines['porte_plume_lien_classe_vers_icone']))
+		eval($cs_metas_pipelines['porte_plume_lien_classe_vers_icone']);
+	return $flux;
 }
 
 // pipeline maison : pre-affichage de la description d'un outil

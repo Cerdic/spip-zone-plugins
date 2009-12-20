@@ -35,15 +35,19 @@ cs_log("couleurs_installe()");
 		'white', 'azure', 'bisque', 'brown', 'blueviolet', 'chocolate', 'cornsilk',
 		'darkgreen', 'darkorange', 'darkorchid', 'deepskyblue', 'gold', 'ivory', 'orange',
 		'lavender', 'pink', 'plum', 'salmon', 'snow', 'turquoise', 'wheat', 'yellow') );
-	foreach ($couleurs[0] as $c=>$val) $couleurs[2][$val] = $couleurs[1][$c];
 
-	$perso = trim(_COULEURS_PERSO);
+	$html = array('aliceblue'=>'F0F8FF','antiquewhite'=>'FAEBD7','aqua'=>'00FFFF','aquamarine'=>'7FFFD4','azure'=>'F0FFFF','beige'=>'F5F5DC','bisque'=>'FFE4C4','black'=>'000000','blanchedalmond'=>'FFEBCD','blue'=>'0000FF','blueviolet'=>'8A2BE2','brown'=>'A52A2A','burlywood'=>'DEB887','cadetblue'=>'5F9EA0','chartreuse'=>'7FFF00','chocolate'=>'D2691E','coral'=>'FF7F50','cornflowerblue'=>'6495ED','cornsilk'=>'FFF8DC','crimson'=>'DC143C','cyan'=>'00FFFF','darkblue'=>'00008B','darkcyan'=>'008B8B','darkgoldenrod'=>'B8860B','darkgray'=>'A9A9A9','darkgreen'=>'006400','darkkhaki'=>'BDB76B','darkmagenta'=>'8B008B','darkolivegreen'=>'556B2F','darkorange'=>'FF8C00','darkorchid'=>'9932CC','darkred'=>'8B0000','darksalmon'=>'E9967A','darkseagreen'=>'8FBC8F','darkslateblue'=>'483D8B','darkturqoise'=>'00CED1','darkslategray'=>'2F4F4F','darkviolet'=>'9400D3','deeppink'=>'FF1493','deepskyblue'=>'00BFFF','dimgray'=>'696969','dodgerblue'=>'1E90FF','firebrick'=>'B22222','floralwhite'=>'FFFAF0','forestgreen'=>'228B22','fuchsia'=>'FF00FF','gainsboro'=>'DCDCDC','ghostwhite'=>'F8F8FF','gold'=>'FFD700','goldenrod'=>'DAA520','gray'=>'808080','green'=>'008000','greenyellow'=>'ADFF2F','honeydew'=>'F0FFF0','hotpink'=>'FF69B4','indianred'=>'CD5C5C','indigo'=>'4B0082','ivory'=>'FFFFF0','khaki'=>'F0E68C','lavender'=>'E6E6FA','lavenderblush'=>'FFF0F5','lawngreen'=>'7CFC00','lemonchiffon'=>'FFFACD','lightblue'=>'ADD8E6','lightcoral'=>'F08080','lightcyan'=>'E0FFFF','lightgoldenrodyellow'=>'FAFAD2','lightgreen'=>'90EE90','lightgrey'=>'D3D3D3','lightpink'=>'FFB6C1','lightsalmon'=>'FFA07A','lightseagreen'=>'20B2AA','lightskyblue'=>'87CEFA','lightslategray'=>'778899','lisghtsteelblue'=>'B0C4DE','lightyellow'=>'FFFFE0','lime'=>'00FF00','limegreen'=>'32CD32','linen'=>'FAF0E6','magenta'=>'FF00FF','maroon'=>'800000','mediumaquamarine'=>'66CDAA','mediumblue'=>'0000CD','mediumorchid'=>'BA55D3','mediumpurple'=>'9370DB','mediumseagreen'=>'3CB371','mediumslateblue'=>'7B68EE','mediumspringgreen'=>'00FA9A','mediumturquoise'=>'48D1CC','mediumvioletred'=>'C71585','midnightblue'=>'191970','mintcream'=>'F5FFFA','mistyrose'=>'FFE4E1','moccasin'=>'FFE4B5','navajowhite'=>'FFDEAD','navy'=>'000080','navyblue'=>'9FAFDF','oldlace'=>'FDF5E6','olive'=>'808000','olivedrab'=>'6B8E23','orange'=>'FFA500','orangered'=>'FF4500','orchid'=>'DA70D6','palegoldenrod'=>'EEE8AA','palegreen'=>'98FB98','paleturquoise'=>'AFEEEE','palevioletred'=>'DB7093','papayawhip'=>'FFEFD5','peachpuff'=>'FFDAB9','peru'=>'CD853F','pink'=>'FFC0CB','plum'=>'DDA0DD','powderblue'=>'B0E0E6','purple'=>'800080','red'=>'FF0000','rosybrown'=>'BC8F8F','royalblue'=>'4169E1','saddlebrown'=>'8B4513','salmon'=>'FA8072','sandybrown'=>'F4A460','seagreen'=>'2E8B57','seashell'=>'FFF5EE','sienna'=>'A0522D','silver'=>'C0C0C0','skyblue'=>'87CEEB','slateblue'=>'6A5ACD','snow'=>'FFFAFA','springgreen'=>'00FF7F','steelblue'=>'4682B4','tan'=>'D2B48C','teal'=>'008080','thistle'=>'D8BFD8','tomato'=>'FF6347','turquoise'=>'40E0D0','violet'=>'EE82EE','wheat'=>'F5DEB3','white'=>'FFFFFF','whitesmoke'=>'F5F5F5','yellow'=>'FFFF00','yellowgreen'=>'9ACD32');
+	
+	foreach ($couleurs[0] as $c=>$val)
+		$couleurs[2][$val] = isset($html[$couleurs[1][$c]])?'#'.$html[$couleurs[1][$c]]:$couleurs[1][$c];
+
 	if (_COULEURS_SET===1) {
-		$perso = preg_replace('^\s*(=|,)\s*^','\1', $perso);
+		$perso = preg_replace('^\s*(=|,)\s*^','\1', trim(_COULEURS_PERSO));
 		$perso = explode(',', $perso);
 		$couleurs_perso = $aide = array();
 		foreach($perso as $p) {
 			list($a, $b) = explode('=', $p, 2);
+			$b = isset($html[$b])?'#'.$html[$b]:$b;
 			if (strlen($a) && strlen($b)) {
 				if(in_array($b, $couleurs[0])) $b = $couleurs[2][$b];
 				$couleurs_perso[$a] = $b;
@@ -60,11 +64,34 @@ cs_log("couleurs_installe()");
 		$couleurs[0] = join('|', $couleurs[0]);
 		$couleurs[1] = join('|', $couleurs[1]);
 	}
+
+	if(defined('_DIR_PLUGIN_PORTE_PLUME')) {
+		foreach(array('texte','fond') as $x) {
+			$texte = _T('couteau:couleur_icone_'.$x);
+			foreach ($couleurs[2] as $i=>$c) {
+				// icone de la couleur $i
+				$color = isset($html[$c])?$html[$c]:str_replace('#','',$c);
+				$couleurs[3]['couleur_'.$x.'_'.str_replace(' ','_',$i)] = couleurs_creer_icone_barre($texte, $color);
+			}
+		}
+	}
+
 	// sauvegarde en meta : aide
 	ecrire_meta('cs_couleurs_racc', $aide);
 	// sauvegarde en meta : couleurs
 	ecrire_meta('cs_couleurs', serialize($couleurs));
 	ecrire_metas();
+}
+
+// creation d'icone pour le plugin porte-plume
+function couleurs_creer_icone_barre($texte, $color) {
+	static $icones_barre;
+	if(!isset($icones_barre))
+		$icones_barre = sous_repertoire(sous_repertoire(_DIR_VAR, 'couteau-suisse'), 'icones_barre');
+	$img = image_typo($texte, 'couleur='.$color, 'taille=12', 'police=dustismo_bold.ttf');
+	$nom = basename($src = extraire_attribut($img, 'src'));
+	@copy($src, $icones_barre.$nom);
+	return $nom;
 }
 
 // cette fonction est appelee automatiquement a chaque affichage de la page privee du Couteau Suisse
@@ -153,6 +180,70 @@ function couleurs_BarreTypo($tr) {
 		$r2 = ' '._T('couteauprive:fonds').' '.join(' ', $r2).''; 
 	} else $r2='';
 	return $tr.'<tr><td><p style="margin:0; line-height:1.9em;">'._T('couteauprive:couleurs:nom')."&nbsp;$r1$r2</div></td></tr>";
+}
+
+// les 2 fonctions suivantes inserent les boutons pour le plugin Porte Plume, s'il est present (SPIP>=2.0)
+function couleurs_PP_pre_charger($flux) {
+	// les raccoucis de couleur sont-il dispo ?
+	if (!isset($GLOBALS['meta']['cs_couleurs'])) couleurs_installe();
+	// le tableau des couleurs est present dans les metas
+	$couleurs = unserialize($GLOBALS['meta']['cs_couleurs']);
+	$r1 = $r2 = array();
+	foreach($couleurs[2] as $i=>$v) {
+		$id = 'couleur_texte_'.str_replace(' ','_',$i);
+		$r1[] = array(
+				"id"          => $id,
+				"name"        => _T('couteau:couleur_texte', array('couleur'=>$i)),
+				"className"   => $id, 
+				"openWith" => "[$i]", 
+				"closeWith" => "[/$i]",
+				"selectionType" => "word",
+				"display"     => true);
+	}
+	if(_COULEURS_FONDS===1) foreach($couleurs[2] as $i=>$v) {
+		$id = 'couleur_fond_'.str_replace(' ','_',$i);
+		$r2[] = array(
+				"id"          => $id,
+				"name"        => _T('couteau:couleur_fond', array('couleur'=>$i)),
+				"className"   => $id, 
+				"openWith" => "[fond $i]", 
+				"closeWith" => "[/fond $i]",
+				"selectionType" => "word",
+				"display"     => true);
+	}
+
+	$barre = &$flux['edition'];
+	$barre->ajouterApres('stroke_through', array(
+		"id"          => 'cs_couleur_texte',
+		"name"        => _T('couteau:colorer_texte'),
+		"className"   => 'cs_couleur_texte',
+		"replaceWith" => '',
+		"display"     => true,
+		"dropMenu"	=> $r1,
+	));
+	if(count($r2)) $barre->ajouterApres('cs_couleur_texte', array(
+		"id"          => 'cs_couleur_fond',
+		"name"        => _T('couteau:colorer_fond'),
+		"className"   => 'cs_couleur_fond',
+		"replaceWith" => '',
+		"display"     => true,
+		"dropMenu"	=> $r2,
+	));
+
+	return $flux;
+}
+function couleurs_PP_icones($flux){
+	// les raccoucis de couleur sont-il dispo ?
+	if (!isset($GLOBALS['meta']['cs_couleurs'])) couleurs_installe();
+	$couleurs = unserialize($GLOBALS['meta']['cs_couleurs']);
+	// chemin des icones-typo de couleur
+	_chemin(sous_repertoire(_DIR_VAR, 'couteau-suisse'));
+	// icones utilisees. Attention : mettre les drop-boutons en premier !!
+	$flux = array_merge($flux, array(
+		'cs_couleur_texte' => couleurs_creer_icone_barre(_T('couteau:couleur_icone_texte'), '00BFFF'),//'color_swatch.png',
+		'cs_couleur_fond' => couleurs_creer_icone_barre(_T('couteau:couleur_icone_fond'), '00BFFF'),//'color_swatch.png',
+	), $couleurs[3]);
+	return $flux;
 }
 
 function couleurs_nettoyer_raccourcis($texte) {

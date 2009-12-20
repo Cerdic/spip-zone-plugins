@@ -801,6 +801,8 @@ add_outil( array(
 	'pipeline:pre_typo' => 'couleurs_pre_typo',
 	'pipeline:nettoyer_raccourcis_typo' => 'couleurs_nettoyer_raccourcis',
 	'pipeline:bt_toolbox' => 'couleurs_BarreTypo',
+	'pipeline:porte_plume_barre_pre_charger' => 'couleurs_PP_pre_charger',
+	'pipeline:porte_plume_lien_classe_vers_icone' => 'couleurs_PP_icones',
 	'pipeline:pre_description_outil' => 'couleurs_pre_description_outil',
 	'code:options' => "%%couleurs_fonds%%%%set_couleurs%%%%couleurs_perso%%",
 	'code:fonctions' => "// aide le Couteau Suisse a calculer la balise #INTRODUCTION
