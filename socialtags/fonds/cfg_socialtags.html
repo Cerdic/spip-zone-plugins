@@ -7,7 +7,10 @@ Ici vous pouvez choisir les sites de partages de vos articles.<br /><br />
 [(#REM) titre=Social tags]
 #CACHE{0}
 
-<form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]
+<form method="post" action="#SELF">
+<div>
+[(#ENV{_cfg_}|form_hidden)]
+
 <fieldset id="sc_list"><legend>Social tags</legend>
 
 <input type="hidden" name="tags[]" value="" />
@@ -52,7 +55,7 @@ Ici vous pouvez choisir les sites de partages de vos articles.<br /><br />
 //]]>
 </script>
 <noscript>
-Svp, veuillez activer Javascript.
+SVP, veuillez activer Javascript.
 </noscript>
 
 <p style="font-size:90%">
@@ -74,7 +77,25 @@ Svp, veuillez activer Javascript.
 <dt><tt>#socialtags</tt></dt>
 <dd>Sous la div nomm&#233;e id=socialtags</dd>
 </dl>
+</small>
 </fieldset>
+
+<fieldset id="fanbadge"><legend>Badge/Widget Facebook</legend>
+
+<p>Si vous avez un Badge Facebook (<a href="http://www.facebook.com/facebook-widgets/" target="_fb">aide sur le site FB</a>), indiquez ci-dessous son contenu, soit en JS, soit en HTML.</p>
+
+<strong>Badge HTML</strong> (ajouter dans votre squelette <code>&#35;CONFIG{socialtags/badgehtml}</code>):
+<textarea name="badgecode" class="textarea" rows="6">#ENV{badgehtml}
+</textarea>
+
+<strong>Badge JS</strong> (automatiquement inclus dans <code>?page=socialtags.js</code>):
+<textarea name="badgejs" class="textarea" rows="8">#ENV{badgejs}
+</textarea>
+
+</fieldset>
+
+<label><input type="checkbox" name="ifreferer"[ checked="(#ENV{ifreferer}|?{checked})"] />N'afficher le badge et les boutons que pour les visiteurs originaires des sites concern&#233;s.</label>
+
 
 </div>
 

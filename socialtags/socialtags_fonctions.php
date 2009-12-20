@@ -1,15 +1,15 @@
 <?php
- 
+
 //
 // ajout feuille de style
 //
 function socialtags_insert_head($flux){
-  $flux .= '<link rel="stylesheet" type="text/css" href="'.find_in_path('socialtags.css').'" media="all" />';
+	$flux .= '<link rel="stylesheet" type="text/css" href="'.find_in_path('socialtags.css').'" media="all" />'."\n";
 
-  $jsFile = generer_url_public('socialtags.js');
-  $flux .= "<script src='$jsFile' type='text/javascript'></script>";
+	$jsFile = generer_url_public('socialtags.js');
+	$flux .= "<script src='$jsFile' type='text/javascript'></script>\n";
 
-  return $flux;
+	return $flux;
 }
 
 

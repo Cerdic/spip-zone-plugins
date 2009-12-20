@@ -26,6 +26,9 @@ var esc = function(x){return encodeURIComponent(x).replace(/\s/g,' ');};
 $.each(socialtags, function(){ if (this.u) {
 	if (this.a == 'bookmark' && !document.all) return;
 
+	[(#CONFIG{socialtags/ifreferer}|?{"
+	if (!document.cookie.match('social_'+this.a+'=1;')) return;"})]
+
 	$('<a rel="nofollow"><img class="socialtags-hovers" src="'+ this.i +'"\/><\/a>')
 	.attr('href',
 		this.u
@@ -39,5 +42,7 @@ $.each(socialtags, function(){ if (this.u) {
 }});
 
 selector.after(ul.wrap('<div class="socialtags"><\/div>').parent());
+
+#CONFIG{socialtags/badgejs}
 
 }); })(jQuery);

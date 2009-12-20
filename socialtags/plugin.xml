@@ -6,7 +6,7 @@
 	phil@yaquoi.com
 	</auteur>
 	<version>
-	0.7
+	0.8
 	</version>
 	<etat>
 	stable
@@ -28,6 +28,7 @@
     <icon>
     socialtags.png
     </icon>
+	<options>socialtags_options.php</options>
 	<necessite id="SPIP" version="[1.9.0;]" />
 	<necessite id='cfg' version='[1.0;]' />
 </plugin>
