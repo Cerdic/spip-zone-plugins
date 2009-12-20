@@ -7,11 +7,10 @@
 
 			
 			[(#REM) Contenu de la page ]
-
 			<form action="#URL_PAGE{adresse,lang=#LANG}" method="post" id="modifier" class="formulaire-thelia">
 			<fieldset>
 			<input type="hidden" name="thelia_action" value="modifierlivraison" />
-			<THELIA_adr type="ADRESSE" Adresse="THELIA-ADRESSE_ID" client="THELIA-CLIENT_ID">
+			<THELIA_adr type="ADRESSE" adresse="#ENV{adresse}" client="THELIA-CLIENT_ID">
 			<input name="id" type="hidden" value="THELIA-ID" />
 			<input name="adresse" type="hidden" value="THELIA-ID" />
 				
