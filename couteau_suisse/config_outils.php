@@ -882,6 +882,8 @@ add_outil( array(
 	'code:css' => "table.cs_smileys td {text-align:center; font-size:90%; font-weight:bold;}",
 	'pipeline:pre_typo' => 'cs_smileys_pre_typo',
 	'pipeline:bt_toolbox' => 'cs_smileys_BarreTypo',
+	'pipeline:porte_plume_barre_pre_charger' => 'cs_smileys_PP_pre_charger',
+	'pipeline:porte_plume_lien_classe_vers_icone' => 'cs_smileys_PP_icones',
 ));
 
 add_outil( array(
