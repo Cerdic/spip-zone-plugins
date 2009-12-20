@@ -1,2 +1,2 @@
-[(#ENV{id_jeu}|?{' ',''})<INCLURE{fond=fonds/jeu_details}{id_jeu=#ENV{id_jeu}}{ajax}{par=#ENV{par}}>] 
-[(#ENV{id_auteur}|?{' ',''})<INCLURE{fond=fonds/auteur_details}{id_auteur=#ENV{id_auteur}}{ajax}{par=#ENV{par}}>] 
+[(#ENV{id_jeu}|oui)<INCLURE{fond=fonds/jeu_details}{id_jeu=#ENV{id_jeu}}{ajax}{par=#ENV{par}}>] 
+[(#ENV{id_auteur}|oui)<INCLURE{fond=fonds/auteur_details}{id_auteur=#ENV{id_auteur}}{ajax}{par=#ENV{par}}>] 

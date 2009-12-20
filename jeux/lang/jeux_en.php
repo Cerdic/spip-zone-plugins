@@ -144,6 +144,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'resultat_meilleur' => 'Le meilleur',
 'resultat_meilleurs' => 'Les meilleurs',
 'resultat_tous' => 'Tous',
+'resultat2_' => 'Non d&eacute;fini ?',
 'resultat2_defaut' => 'Selon la configuration g&eacute;n&eacute;rale du plugin',
 'resultat2_aucun' => 'Pas d\'enregistrement',
 'resultat2_premier' => 'Pour chaque auteur, le premier r&eacute;sultat uniquement',

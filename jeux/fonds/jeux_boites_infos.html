@@ -1,29 +1,30 @@
-[(#REM|sinon{' '}|debut_boite_info)]
+[(#VAL{1}|debut_boite_info)]
 <BOUCLE_jeu(JEUX){id_jeu}{0,1}>
-	[<strong>(#REM|sinon{<:jeux:jeu_court:>}|replace{@id@,#ID_JEU}|replace{@nom@,#TYPE_JEU})</strong><br />]
-	[(#ENV{exec}|=={jeux_edit}|?{' '})
-		[(#REM|sinon{<:jeux:retourner_jeu:>}|icone_horizontale{#URL_ECRIRE{jeux_voir,id_jeu=#ID_JEU},#CHEMIN{img/jeu-loupe.png},'',0})]
-		[(#REM|sinon{<:jeux:liste_jeux:>}|icone_horizontale{#URL_ECRIRE{jeux_tous},#CHEMIN{img/jeux-tous.png},'',0})]
+	<strong><:jeux:jeu_court|replace{@id@,#ID_JEU}|replace{@nom@,#TYPE_JEU}:></strong><br />
+	[(#ENV{exec}|=={jeux_edit}|oui)
+		<:jeux:retourner_jeu|icone_horizontale{#URL_ECRIRE{jeux_voir,id_jeu=#ID_JEU},#CHEMIN{img/jeu-loupe.png},'',0}:>
+		<:jeux:liste_jeux|icone_horizontale{#URL_ECRIRE{jeux_tous},#CHEMIN{img/jeux-tous.png},'',0}:>
 	]
-	[(#ENV{exec}|!={jeux_edit}|?{' '})
-		[(#ENV{exec}|=={jeux_voir}|?{' '})
-			[(#STATUT|=={publie}|?{' '})
-				[(#REM|sinon{<:jeux:voir_en_ligne:>}|icone_horizontale{[(#URL_PAGE{jeu,id_jeu=#ID_JEU}|parametre_url{var_mode,calcul})],racine-24.gif,'',0})]
+	[(#ENV{exec}|!={jeux_edit}|oui)
+		[(#ENV{exec}|=={jeux_voir}|oui)
+			[(#STATUT|=={publie}|oui)
+				[(#SET{url,[(#URL_PAGE{jeu,id_jeu=#ID_JEU}|parametre_url{var_mode,calcul})]})]
+				<:jeux:voir_en_ligne|icone_horizontale{#GET{url},racine-24.gif,'',0}:>
 			]
 		]
-		[(#ENV{exec}|!={jeux_voir}|?{' '})
-			[(#REM|sinon{<:jeux:voir_jeu:>}|icone_horizontale{#URL_ECRIRE{jeux_voir,id_jeu=#ID_JEU},#CHEMIN{img/jeu-loupe.png},'',0})]
+		[(#ENV{exec}|!={jeux_voir}|oui)
+			<:jeux:voir_jeu|icone_horizontale{#URL_ECRIRE{jeux_voir,id_jeu=#ID_JEU},#CHEMIN{img/jeu-loupe.png},'',0}:>
 		]
-		[(#REM|sinon{<:jeux:modifier_ce_jeu:>}|icone_horizontale{#URL_ECRIRE{jeux_edit,id_jeu=#ID_JEU},#CHEMIN{img/jeu-crayon.png},'',0})]
+		<:jeux:modifier_ce_jeu|icone_horizontale{#URL_ECRIRE{jeux_edit,id_jeu=#ID_JEU},#CHEMIN{img/jeu-crayon.png},'',0}:>
 	]
 	<BOUCLE_resultats(JEUX_RESULTATS){id_jeu}{0,1}>
-	[(#ENV{exec}|!={jeux_edit}|?{' '})
-		[(#ENV{exec}|!={jeux_resultats_jeu}|?{' '})
-			[(#REM|sinon{<:jeux:voir_ses_resultats:>}|icone_horizontale{#URL_ECRIRE{jeux_resultats_jeu,id_jeu=#ID_JEU},#CHEMIN{img/jeu-laurier.png},'',0})]
+	[(#ENV{exec}|!={jeux_edit}|oui)
+		[(#ENV{exec}|!={jeux_resultats_jeu}|oui)
+			<:jeux:voir_ses_resultats|icone_horizontale{#URL_ECRIRE{jeux_resultats_jeu,id_jeu=#ID_JEU},#CHEMIN{img/jeu-laurier.png},'',0}:>
 		]
-		[(#ENV{exec}|!={jeux_gerer_resultats}|?{' '})
+		[(#ENV{exec}|!={jeux_gerer_resultats}|oui)
 			[(#AUTORISER{gererresultats})
-				[(#REM|sinon{<:jeux:gerer_ses_resultats:>}|icone_horizontale{#URL_ECRIRE{jeux_gerer_resultats,id_jeu=#ID_JEU},#CHEMIN{img/jeu-laurier.png},'',0})]
+				<:jeux:gerer_ses_resultats|icone_horizontale{#URL_ECRIRE{jeux_gerer_resultats,id_jeu=#ID_JEU},#CHEMIN{img/jeu-laurier.png},'',0}:>
 			]
 		]
 	]
@@ -33,13 +34,13 @@
 
 <BOUCLE_auteur(AUTEURS){tous}{id_auteur}{0,1}>
 	<strong>#NOM</strong><br />
-	[(#REM|sinon{<:jeux:infos_auteur:>}|icone_horizontale{#URL_ECRIRE{auteur_infos,id_auteur=#ID_AUTEUR},#CHEMIN{images/auteur-24.gif},'',0})]
-	[(#ENV{exec}|=={jeux_gerer_resultats}|?{' '})
-		[(#REM|sinon{<:jeux:voir_ses_resultats:>}|icone_horizontale{#URL_ECRIRE{jeux_resultats_auteur,id_auteur=#ID_AUTEUR},#CHEMIN{img/jeu-laurier.png},'',0})]
+	<:jeux:infos_auteur|icone_horizontale{#URL_ECRIRE{auteur_infos,id_auteur=#ID_AUTEUR},#CHEMIN{images/auteur-24.gif},'',0}:>
+	[(#ENV{exec}|=={jeux_gerer_resultats}|oui)
+		<:jeux:voir_ses_resultats|icone_horizontale{#URL_ECRIRE{jeux_resultats_auteur,id_auteur=#ID_AUTEUR},#CHEMIN{img/jeu-laurier.png},'',0}:>
 	]
-	[(#ENV{exec}|!={jeux_gerer_resultats}|?{' '})
+	[(#ENV{exec}|!={jeux_gerer_resultats}|oui)
 		[(#AUTORISER{gererresultats})
-			[(#REM|sinon{<:jeux:gerer_ses_resultats:>}|icone_horizontale{#URL_ECRIRE{jeux_gerer_resultats,id_auteur=#ID_AUTEUR},#CHEMIN{img/jeu-laurier.png},'',0})]
+			<:jeux:gerer_ses_resultats|icone_horizontale{#URL_ECRIRE{jeux_gerer_resultats,id_auteur=#ID_AUTEUR},#CHEMIN{img/jeu-laurier.png},'',0}:>
 		]
 	]
 </BOUCLE_auteur>
@@ -47,28 +48,28 @@
 #SET{resultats,non}
 <BOUCLE_tous_resultats(JEUX_RESULTATS){0,1}>[(#AUTORISER{gererresultats}) #SET{resultats,oui}]</BOUCLE_tous_resultats>
 
-[(#ENV{exec}|=={jeux_edit}|?{' '})
-	[(#REM|sinon{<:jeux:liste_jeux:>}|icone_horizontale{#URL_ECRIRE{jeux_tous},#CHEMIN{img/jeux-tous.png},'',0})]
+[(#ENV{exec}|=={jeux_edit}|oui)
+	<:jeux:liste_jeux|icone_horizontale{#URL_ECRIRE{jeux_tous},#CHEMIN{img/jeux-tous.png},'',0}:>
 ]
 
-[(#ENV{boite}|=={accueil}|?{' '})
-	[(#ENV{exec}|=={jeux_tous}|?{' '})
-		[(#REM|sinon{<:jeux:nouveau_jeu:>}|icone_horizontale{#URL_ECRIRE{jeux_edit,nouveau=oui},#CHEMIN{img/jeu-nouveau.png},'',0})]
+[(#ENV{boite}|=={accueil}|oui)
+	[(#ENV{exec}|=={jeux_tous}|oui)
+		<:jeux:nouveau_jeu|icone_horizontale{#URL_ECRIRE{jeux_edit,nouveau=oui},#CHEMIN{img/jeu-nouveau.png},'',0}:>
 	]
-	[(#ENV{exec}|!={jeux_tous}|?{' '})
-		[(#REM|sinon{<:jeux:liste_jeux:>}|icone_horizontale{#URL_ECRIRE{jeux_tous},#CHEMIN{img/jeux-tous.png},'',0})]
+	[(#ENV{exec}|!={jeux_tous}|oui)
+		<:jeux:liste_jeux|icone_horizontale{#URL_ECRIRE{jeux_tous},#CHEMIN{img/jeux-tous.png},'',0}:>
 	]
-	[(#GET{resultats}|=={oui}|?{' '})
-		[(#ENV{exec}|match{'^jeux_gerer_resultats|jeux_resultats_jeu|jeux_resultats_auteur$'}|?{[(#ENV{id_foo}|>{0}|?{' ',''})]})
-			[(#REM|sinon{<:jeux:gerer_resultats:>}|icone_horizontale{#URL_ECRIRE{jeux_gerer_resultats},#CHEMIN{img/jeu-laurier.png},'',0})]
+	[(#GET{resultats}|=={oui}|oui)
+		[(#ENV{exec}|match{'^jeux_gerer_resultats|jeux_resultats_jeu|jeux_resultats_auteur$'}|?{[(#ENV{id_foo}|>{0}|oui)]})
+			<:jeux:gerer_resultats|icone_horizontale{#URL_ECRIRE{jeux_gerer_resultats},#CHEMIN{img/jeu-laurier.png},'',0}:>
 		]
 	]
-	[(#ENV{exec}|=={jeux_tous}|?{' '})
-		[(#ENV{config}|=={oui}|?{' '})
-			[(#REM|sinon{<:jeux:configurer_jeux:>}|icone_horizontale{#URL_ECRIRE{cfg,cfg=jeux},#CHEMIN{img/jeu-cfg.png},'',0})]
+	[(#ENV{exec}|=={jeux_tous}|oui)
+		[(#ENV{config}|=={oui}|oui)
+			<:jeux:configurer_jeux|icone_horizontale{#URL_ECRIRE{cfg,cfg=jeux},#CHEMIN{img/jeu-cfg.png},'',0}:>
 		]
-		[(#REM|sinon{<:jeux:doc_jeux:>}|icone_horizontale{http://www.spip-contrib.net/Des-jeux-dans-vos-articles,#CHEMIN{img/jeu-24.png},'',0})]
-		[(#REM|sinon{<:jeux:doc_scores:>}|icone_horizontale{http://www.spip-contrib.net/Des-jeux-avec-des-scores,#CHEMIN{img/jeu-24.png},'',0})]
+		<:jeux:doc_jeux|icone_horizontale{http://www.spip-contrib.net/Des-jeux-dans-vos-articles,#CHEMIN{img/jeu-24.png},'',0}:>
+		<:jeux:doc_scores|icone_horizontale{http://www.spip-contrib.net/Des-jeux-avec-des-scores,#CHEMIN{img/jeu-24.png},'',0}:>
 	]
 	<br /><i><b>Attention</b> : partie du plugin en cours de d&eacute;veloppement.
 	Merci de rapporter les bugs &eacute;ventuels et/ou de contribuer aux am&eacute;liorations.</i>
@@ -76,4 +77,4 @@
 
 <//B_auteur>
 <//B_jeu>
-[(#REM|sinon{' '}|fin_boite_info)]
+[(#VAL{1}|fin_boite_info)]

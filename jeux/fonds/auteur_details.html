@@ -3,11 +3,11 @@
 <table  class='arial2' cellpadding='2' cellspacing='0' style='width: 100%; border: 0px;'>
 	<thead>
 		<tr class="titrem" style="text-align:center">
-			<th>[(#ENV{par}|!=={id_jeu}|?{' '})<a class="ajax" href="[(#SELF|parametre_url{par,id_jeu})]">]<:jeux:jeu_numero_court:>[(#ENV{par}|!=={date}|?{' '})</a>]</th>
-			<th>[(#ENV{par}|!={id_jeu}|?{' '})<a class="ajax" href="[(#SELF|parametre_url{par,id_jeu})]">]<:jeux:jeu_type:>[(#ENV{par}|!={id_jeu}|?{' '})</a>]</th>
+			<th>[(#ENV{par}|!=={id_jeu}|oui)<a class="ajax" href="[(#SELF|parametre_url{par,id_jeu})]">]<:jeux:jeu_numero_court:>[(#ENV{par}|!=={date}|oui)</a>]</th>
+			<th>[(#ENV{par}|!={id_jeu}|oui)<a class="ajax" href="[(#SELF|parametre_url{par,id_jeu})]">]<:jeux:jeu_type:>[(#ENV{par}|!={id_jeu}|oui)</a>]</th>
 			<th><:jeux:jeu_titre_prive:></th>
-			<th>[(#ENV{par}|!=={date}|?{' '})<a class="ajax" href="[(#SELF|parametre_url{par,date})]">]<:date:>[(#ENV{par}|!=={date}|?{' '})</a>]</th>
-			<th>[(#ENV{par}|?{' '})<a class="ajax" href="[(#SELF|parametre_url{par,''})]">]<:jeux:resultat:>[(#ENV{par}|?{' '})</a>]</th>
+			<th>[(#ENV{par}|!=={date}|oui)<a class="ajax" href="[(#SELF|parametre_url{par,date})]">]<:date:>[(#ENV{par}|!=={date}|oui)</a>]</th>
+			<th>[(#ENV{par}|oui)<a class="ajax" href="[(#SELF|parametre_url{par,''})]">]<:jeux:resultat:>[(#ENV{par}|oui)</a>]</th>
 		</tr>
 	</thead>
 	<tbody>

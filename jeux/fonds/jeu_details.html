@@ -1,9 +1,9 @@
 <B_resultats>
 <table  class='arial2' cellpadding='2' cellspacing='0' style='width: 100%; border: 0px;'>
 <tr class="titrem">
-		<th>[(#ENV{par}|!=={nom}|?{' '})<a class='ajax' href="[(#SELF|parametre_url{par,nom})]">]<:jeux:auteur:>[(#ENV{par}|!=={nom}|?{' '})</a>]</th>
-		<th>[(#ENV{par}|!=={date}|?{' '})<a class='ajax' href="[(#SELF|parametre_url{par,date})]">]<:date:>[(#ENV{par}|!=={date}|?{' '})</a>]</th>
-		<th style="text-align:center">[(#ENV{par}|?{' '})<a class='ajax' href="[(#SELF|parametre_url{par,''})]">]<:jeux:resultat:>[(#ENV{par}|?{' '})</a>]</th>
+		<th>[(#ENV{par}|!=={nom}|oui)<a class='ajax' href="[(#SELF|parametre_url{par,nom})]">]<:jeux:auteur:>[(#ENV{par}|!=={nom}|oui)</a>]</th>
+		<th>[(#ENV{par}|!=={date}|oui)<a class='ajax' href="[(#SELF|parametre_url{par,date})]">]<:date:>[(#ENV{par}|!=={date}|oui)</a>]</th>
+		<th style="text-align:center">[(#ENV{par}|oui)<a class='ajax' href="[(#SELF|parametre_url{par,''})]">]<:jeux:resultat:>[(#ENV{par}|oui)</a>]</th>
 		
 </tr></thead>
 #PAGINATION

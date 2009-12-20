@@ -2,10 +2,10 @@
 <table  class='arial2'cellpadding='2' cellspacing='0' style='width: 100%; border: 0px;'>
 <tr class="titrem" style="text-align:center">
 	<th></th>
-	<th>[(#ENV{par}|!={id_jeu}|?{' '})<a href="[(#SELF|parametre_url{par,id_jeu})]">]<:jeux:jeu_numero_court:>[(#ENV{par}|!={id_jeu}|?{' '})</a>]</th>
-	<th>[(#ENV{par}|!={nom}|?{' '})<a href="[(#SELF|parametre_url{par,nom})]">]<:jeux:jeu_type:>[(#ENV{par}|!={nom}|?{' '})</a>]</th>
+	<th>[(#ENV{par}|!={id_jeu}|oui)<a href="[(#SELF|parametre_url{par,id_jeu})]">]<:jeux:jeu_numero_court:>[(#ENV{par}|!={id_jeu}|oui)</a>]</th>
+	<th>[(#ENV{par}|!={jeu_type}|oui)<a href="[(#SELF|parametre_url{par,type_jeu})]">]<:jeux:jeu_type:>[(#ENV{par}|!={jeu_type}|oui)</a>]</th>
 	<th><:jeux:jeu_titre_prive:></th>
-	<th>[(#ENV{par}|!={date}|?{' '})<a href="[(#SELF|parametre_url{par,date})]">]<:jeux:derniere_modif:>[(#ENV{par}|!={date}|?{' '})</a>]</th>
+	<th>[(#ENV{par}|!={date}|oui)<a href="[(#SELF|parametre_url{par,date})]">]<:jeux:derniere_modif:>[(#ENV{par}|!={date}|oui)</a>]</th>
 	<th><:jeux:nb_resultats:></th>
 	<th style="text-align:center"><:jeux:type_resultat:></th>
 </tr></thead>

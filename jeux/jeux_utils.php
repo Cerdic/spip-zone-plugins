@@ -238,15 +238,14 @@ function jeux_trouver_configuration_defaut($jeu) {
 // retourne la configuration generale du plugin (options par defaut gerees par CFG)
 function jeux_configuration_generale($modules_jeux=array()) {
 	$configuration_generale = $options_cfg = array();
-	if(function_exists('lire_config')) {
+	if(function_exists('lire_config') && is_array($liste_cfg2 = lire_config('jeux'))) {
 		// liste des options disponibles par CFG
-		if(is_array($liste_cfg2 = lire_config('jeux')))
-			$adr = generer_url_ecrire('cfg', 'cfg=jeux');
-			foreach($liste_cfg2 as $o=>$v) if(preg_match(',^cfg_(.*)$,', $o, $regs)) {
-				if($v===true || $v==='on') $v = strtolower(_T('item_oui'));
-				elseif($v===false) $v = strtolower(_T('item_non'));
-				$options_cfg[$regs[1]] = "[<a href='$adr'>CFG</a>] $regs[1] = $v";
-			}
+		$adr = generer_url_ecrire('cfg', 'cfg=jeux');
+		foreach($liste_cfg2 as $o=>$v) if(preg_match(',^cfg_(.*)$,', $o, $regs)) {
+			if($v===true || $v==='on') $v = strtolower(_T('item_oui'));
+			elseif($v===false) $v = strtolower(_T('item_non'));
+			$options_cfg[$regs[1]] = "[<a href='$adr'>CFG</a>] $regs[1] = $v";
+		}
 	}
 	if(!count($modules_jeux)) return $configuration_generale;
 	// renvoyer la config par defaut du premier jeu decele
