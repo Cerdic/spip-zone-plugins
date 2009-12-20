@@ -9,10 +9,12 @@
 	<etat>dev</etat>
 
 	<description>
-		Ce plugin permet la gestion simple d'un catalogue de produits, avec catégories et variantes
+		Ce plugin permet la gestion simple d'un catalogue de produits, avec catÃ©gories et variantes
 	</description>
 
-	<lien>http://event.concurrences.com</lien>
+	<lien>http://events.concurrences.com</lien>
+	
+	<lien>http://spipmine.cym.fr</lien>
 
 	<icon>images/cat-128.png</icon>
 

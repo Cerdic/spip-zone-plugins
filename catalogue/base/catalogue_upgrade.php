@@ -5,6 +5,8 @@ include_spip('inc/meta');
 include_spip('base/create');
 
 function catalogue_upgrade($nom_meta_base_version, $version_cible){
+//	echo('<script type="text/javascript">alert(\'function catalogue_upgrade !\');</script>');
+
 	$current_version = "0.0";
 	if (isset($GLOBALS['meta'][$nom_meta_base_version]))
 		$current_version = $GLOBALS['meta'][$nom_meta_base_version];
@@ -13,6 +15,7 @@ function catalogue_upgrade($nom_meta_base_version, $version_cible){
 		creer_base();
 		ecrire_meta($nom_meta_base_version, $current_version=$version_cible);
 	}
+	creer_base();
 }
 
 function catalogue_vider_tables($nom_meta_base_version) {
