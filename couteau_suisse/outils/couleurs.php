@@ -236,8 +236,6 @@ function couleurs_PP_icones($flux){
 	// les raccoucis de couleur sont-il dispo ?
 	if (!isset($GLOBALS['meta']['cs_couleurs'])) couleurs_installe();
 	$couleurs = unserialize($GLOBALS['meta']['cs_couleurs']);
-	// chemin des icones-typo de couleur
-	_chemin(sous_repertoire(_DIR_VAR, 'couteau-suisse'));
 	// icones utilisees. Attention : mettre les drop-boutons en premier !!
 	$flux = array_merge($flux, array(
 		'cs_couleur_texte' => couleurs_creer_icone_barre(_T('couteau:couleur_icone_texte'), '00BFFF'),//'color_swatch.png',

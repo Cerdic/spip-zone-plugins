@@ -242,8 +242,11 @@ function couteau_suisse_porte_plume_barre_pre_charger($flux){
 
 function couteau_suisse_porte_plume_lien_classe_vers_icone($flux){
 	global $cs_metas_pipelines;
-	if (isset($cs_metas_pipelines['porte_plume_lien_classe_vers_icone']))
+	if (isset($cs_metas_pipelines['porte_plume_lien_classe_vers_icone'])) {
+		// chemin des icones-typo de couleur
+		_chemin(_chemin(sous_repertoire(_DIR_VAR, 'couteau-suisse')));
 		eval($cs_metas_pipelines['porte_plume_lien_classe_vers_icone']);
+	}
 	return $flux;
 }
 

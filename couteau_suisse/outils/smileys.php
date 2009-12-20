@@ -181,9 +181,6 @@ function cs_smileys_PP_icones($flux){
 	if (!isset($GLOBALS['meta']['cs_smileys']))	smileys_installe();
 	// le tableau des smileys est present dans les metas
 	$smileys = unserialize($GLOBALS['meta']['cs_smileys']);
-
-	// chemin des icones-typo de couleur
-	_chemin(sous_repertoire(_DIR_VAR, 'couteau-suisse'));
 	// icones utilisees. Attention : mettre les drop-boutons en premier !!
 	$flux = array_merge($flux, array(
 		'cs_smileys_drop' => smileys_creer_icone_barre('mort_de_rire.png', find_in_path('img/smileys').'/')
