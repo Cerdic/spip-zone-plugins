@@ -197,7 +197,7 @@ function typoenluminee_porte_plume_lien_classe_vers_icone($flux){
 		'outil_intertitre2' => 'intertitre2.png',
 		'outil_intertitre3' => 'intertitre3.png',
 		'outil_alignerdroite' => 'right.png',
-		'alignergauche' => 'left.png',
+		'outil_alignergauche' => 'left.png',
 		'outil_stroke_through_et' => 'text_strikethrough.png',
 		'outil_cadretexte' => 'cadretexte.png',
 		'outil_speciaux' => 'tag.png',
