@@ -1,4 +1,10 @@
 <?php
+/**
+ * Plugin Zen-Garden pour Spip 2.0
+ * Licence GPL (c) 2006-2009 Cedric Morin
+ *
+ */
+
 if (!defined('_DIR_PLUGIN_THEME')){
 	if (!defined('_DIR_THEMES'))
 		define('_DIR_THEMES',_DIR_RACINE."themes/");

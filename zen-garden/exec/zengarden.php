@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Zen-Garden pour Spip 2.0
- * Licence GPL (c) 2006-2008 Cedric Morin
+ * Licence GPL (c) 2006-2009 Cedric Morin
  *
  */
 
@@ -13,8 +13,6 @@ function exec_zengarden(){
 		echo minipres();
 		exit;
 	}
-	include_spip('inc/zengarden');
-	$themes = zengarden_charge_themes(_DIR_THEMES,_request('tous'));
 
 	$commencer_page = charger_fonction('commencer_page','inc');
 	echo $commencer_page(_T('zengarden:choix_theme'));
@@ -30,7 +28,7 @@ function exec_zengarden(){
 	echo debut_droite("choix_theme",true);
 
 
-	$contexte = array('themes'=>$themes,'selection'=>$GLOBALS['meta']['zengarden_theme']?$GLOBALS['meta']['zengarden_theme']:'');
+	$contexte = array('selection'=>$GLOBALS['meta']['zengarden_theme']?$GLOBALS['meta']['zengarden_theme']:'');
 	$contexte = array_merge($contexte,$_GET);
 	echo recuperer_fond('prive/zengarden_theme',$contexte,array('ajax'=>true));
 	echo fin_gauche(),fin_page();
