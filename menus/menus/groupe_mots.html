@@ -36,7 +36,7 @@
 </B_mots>
 	<BOUCLE_groupe_mots(GROUPES_MOTS){par num #GET{tri_num}}{par #GET{tri_alpha}}>
 	<li class="menu-entree">
-		<a[(#CHEMIN{groupes_mots.html}|oui) href="#URL_PAGE{groupes_mots,id_groupe=#ID_GROUPE}"][(#CHEMIN{groupes_mots.html}|non) href="#"]>#TITRE</a>
+		<a[(#CHEMIN{groupes_mots.html}|oui) href="#URL_GROUPES_MOTS{#ID_GROUPE}"][(#CHEMIN{groupes_mots.html}|non) href="#"]>#TITRE</a>
 		<B_mots_tous>
 			<ul class="menu-liste">
 				<BOUCLE_mots_tous(MOTS){id_groupe}{par num #GET{tri_num}}{par #GET{tri_alpha}}>
@@ -44,7 +44,7 @@
 					<a href="#URL_MOT">#TITRE</a>
 						<B_mots_articles_mots>
 							<ul class="menu-liste">
-								<BOUCLE_mots_articles_mots(ARTICLES){id_mot=#ID_MOT}{0,#GET{nombre_articles_mot}}>
+								<BOUCLE_mots_articles_mots(ARTICLES){id_mot=#ID_MOT}{par num #GET{tri_num}}{par #GET{tri_alpha}}{0,#GET{nombre_articles_mot}}>
 									<li class="menu-entree">
 									<a href="#URL_ARTICLE">#TITRE</a>
 									</li>
