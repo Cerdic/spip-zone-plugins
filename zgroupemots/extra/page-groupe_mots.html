@@ -1,0 +1,12 @@
+<BOUCLE_principale(GROUPES_MOTS) {id_groupe}>
+  <B_groupes_freres>
+  <div class="liste groupes_mots">
+      <h2 class="h2"><:autres_groupes_mots_clefs:></h2>
+      <ul class="liste-items">
+          <BOUCLE_groupes_freres(GROUPES_MOTS) {!id_groupe} {par titre} {doublons}>
+          <li class="item"><a href="#URL_PAGE{groupes_mot,id_groupe=#ID_GROUPE}">#TITRE</a></li>
+          </BOUCLE_groupes_freres>
+      </ul>
+  </div>
+  </B_groupes_freres>
+</BOUCLE_principale>
