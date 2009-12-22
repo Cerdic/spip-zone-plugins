@@ -16,7 +16,7 @@ define('_COMPOSITIONS_MATCH','-([^0-9][^.]*)');
  * @return string
  */
 function compositions_chemin(){
-	$config_chemin = 'compositions/';
+	$config_chemin = defined('_DIR_PLUGIN_Z')?'contenu/':'compositions/';
 	if (isset($GLOBALS['meta']['compositions'])){
 		$config = unserialize($GLOBALS['meta']['compositions']);
 		$config_chemin = rtrim($config['chemin_compositions'],'/').'/';

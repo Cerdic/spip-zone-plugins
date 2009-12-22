@@ -89,6 +89,7 @@ function compositions_vider_tables($nom_meta_base_version) {
 	sql_alter("TABLE spip_breves DROP composition_lock");
 	sql_alter("TABLE spip_mots DROP composition_lock");
 	sql_alter("TABLE spip_syndic DROP composition_lock");
+	effacer_meta('compositions');
 	effacer_meta($nom_meta_base_version);
 }
 ?>
