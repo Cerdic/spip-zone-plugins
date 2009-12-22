@@ -1,0 +1,11 @@
+<plugin>
+  <nom>groupe_mots pour Zpip</nom>
+  <auteur>Denis Chenu et surtout Matthieu Marcillaud, C&eacute;dric Morin, Romy Tetue, Collectif SPIP</auteur>
+  <version>0.1.0</version>
+  <etat>test</etat>
+  <description>Un ajout de la page groupe_mots pour zpip et squelettes compatible
+	</description>
+	<lien>http://www.spip-contrib.net/</lien>
+  <prefix>zgroupemots</prefix>
+	<necessite id="Z" version="[1.0.0;]" />
+</plugin>
