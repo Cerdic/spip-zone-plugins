@@ -5,6 +5,8 @@
  *
  */
 
+include_spip('inc/zengarden');
+
 /**
  * Lister les thèmes
  * 
@@ -12,7 +14,6 @@
  * @return array
  */
 function 	zengarden_liste_themes($tous){
-	include_spip('inc/zengarden');
 	return zengarden_charge_themes(_DIR_THEMES,$tous);
 }
 
