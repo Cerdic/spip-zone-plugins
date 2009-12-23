@@ -142,7 +142,7 @@
 		echo '</div>';
 		echo '</div>';
 
-		echo '<h1>'.$formulaire->titre.'</h1>';
+		echo '<h1>'.extraire_multi($formulaire->titre).'</h1>';
 		
 		echo '<br class="nettoyeur" />';
 
