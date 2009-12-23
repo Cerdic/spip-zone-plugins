@@ -2,11 +2,11 @@
 /**
  * Ecriture des fichiers de langue
  * 
- * @param object $module
- * @param object $langue_source
- * @param object $ou_langue
- * @param object $langue_cible [optional]
- * @param object $mode [optional]
+ * @param string $module
+ * @param string $langue_source
+ * @param string $ou_langue
+ * @param string $langue_cible [optional]
+ * @param string $mode [optional]
  * @return 
  */
 function inc_langonet_generer_fichier($module, $langue_source, $ou_langue, $langue_cible='en', $mode='index') {
@@ -55,9 +55,9 @@ function inc_langonet_generer_fichier($module, $langue_source, $ou_langue, $lang
 			else if ($mode == 'new_index')
 				$valeur_cible = '<NEW>'.$_item;
 			else if ($mode == 'new_valeur')
-				$valeur_cible = '<NEW>'.$_valeur;
+				$valeur_cible = '<NEW>'.addslashes($_valeur);
 			else if ($mode == 'valeur')
-				$valeur_cible = $_valeur;
+				$valeur_cible = addslashes($_valeur);
 			else if ($mode == 'vide')
 				$valeur_cible = '';
 			else

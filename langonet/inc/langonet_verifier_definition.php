@@ -2,10 +2,10 @@
 /**
  * Vérification de la bonne definition des items de langue utilises par le module
  * 
- * @param object $module
- * @param object $langue
- * @param object $ou_langue
- * @param object $ou_fichiers
+ * @param string $module
+ * @param string $langue
+ * @param string $ou_langue
+ * @param string $ou_fichiers
  * @return 
  */
 function inc_langonet_verifier_definition($module, $langue, $ou_langue, $ou_fichiers) {
