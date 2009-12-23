@@ -12,6 +12,7 @@
 - <a href="#renvois"><:opconfig:gestion_renvois:></a>
 -->
 <!-- titre=Publication Ouverte-->
+
 <!-- boite=Configuration de la publication ouverte-->
 <!-- nom=op-->
 
@@ -22,7 +23,9 @@
 
 <a name="rubriques"></a>
 <fieldset style="background:#F5EDED;"><legend><b><:opconfig:titre_rubrique_op:></b></legend>
+<B_rubrique>
 
+<p><a href="?exec=rubriques_edit&new=oui&retour=nav"><:opconfig:creer_rubrique:></a></p>
 <p style="background:#fff; border: 1px dotted #000;">
 <BOUCLE_rubrique(RUBRIQUES){tout}{par titre}>
 <input type="checkbox" name="op_#ID_RUBRIQUE" value="openPublishing" [(#ENV{op_#ID_RUBRIQUE}|=={openPublishing}|?{checked="yes"})]/>#TITRE<br />
@@ -35,6 +38,11 @@
 <p><:opconfig:expliq_rubrique_squelette:></p>
 
 <input type="submit" name="_cfg_ok" value="<:OK:>" />
+</B_rubrique>
+<p><:opconfig:expliq_rubrique_absent:></p>
+<a href="?exec=rubriques_edit&new=oui&retour=nav"><:opconfig:creer_rubrique:></a>
+<//B_rubrique>
+
 </fieldset>
 
 
@@ -44,6 +52,7 @@
 <a name="anonyme"></a>
 <fieldset style="background:#F5EDED;"><legend><b><:opconfig:titre_auteur_anonyme:></b></legend>
 <p><:opconfig:expliq_auteur_anonyme:></p>
+<p><a href="?exec=auteur_infos&new=oui"><:opconfig:creer_auteur:></a></p>
 
 <p style="background:#fff; border: 1px dotted #000;">
 <select name="IDAuteur" onMouseUp="this.form.id.value = this.options[this.selectedIndex].value;">
@@ -118,7 +127,10 @@
 <BOUCLE_groupe(GROUPES_MOTS){par titre}>
 <input type="checkbox" name="groupe_#ID_GROUPE" value="openPublishing" [(#ENV{groupe_#ID_GROUPE}|=={openPublishing}|?{checked="yes"})]/>#TITRE<br />
 </BOUCLE_groupe>
+<:opconfig:expliq_groupes_absent:>
+<//B_groupe>
 </p>
+<p><a href="?exec=mots_type&new=oui"><:opconfig:creer_groupe:></a></p>
 <input type="submit" name="_cfg_ok" value="<:OK:>" />
 </fieldset>
 
@@ -130,7 +142,10 @@
 <p><:opconfig:expliq_agenda:></p>
 
 <p style="background:#fff; border: 1px dotted #000;">
-<input type="checkbox" name="Agenda" value="yes"  [(#ENV{Agenda}|=={yes}|?{checked="yes"})] /><label><:opconfig:utiliser_agenda:></label><br />
+<input type="checkbox" name="AgendaBreve" value="yes"  [(#ENV{AgendaBreve}|=={yes}|?{checked="yes"})]
+/><label><:opconfig:utiliser_agenda_breve:></label><br />
+<input type="checkbox" name="AgendaArticle" value="yes" [(#ENV{AgendaArticle}|=={yes}|?{checked="yes"})]
+/><label><:opconfig:utiliser_agenda_article:></label><br />
 <br />
 <label><:opconfig:choix_agenda:></label><br />
 <select name="RubAgenda" onMouseUp="this.form.id.value = this.options[this.selectedIndex].value;">

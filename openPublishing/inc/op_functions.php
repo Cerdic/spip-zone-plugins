@@ -3,6 +3,76 @@
 /* Ce fichier contient toutes les fonctions utilisé par la balise #FORMULAIRE_ARTICLE
  */
 
+// fonction testant la validite de la configuration du plugin
+// prend en entree le tableau de configuration
+// retourne un tableau contenant deux valeurs :
+//   - code : si true, la configuration est valide, sinon elle ne l'est pas.
+//   - message : les messages explicatif pour rendre la configuration valide.
+function test_configuration($config)
+{
+	$tab = array(
+		'code' => false,
+		'message' => array()
+	);
+	
+	/*
+	 * Test prealable : si pas de configuration, on jette
+	 */
+	if (!is_array($config))
+	{
+		$tab['message'][] = _T('opconfig:erreur_die');
+		return $tab;
+	}
+	
+	
+	/*
+	 * Premier test : si pas d'auteur "anonyme", on jette.
+	 */
+	  
+	if(!$config['IDAuteur']) $tab['message'][] = _T('opconfig:erreur_auteur_anonyme');
+	
+	
+	/*
+	 * Second test : si pas de rubrique "openPublishing", on jette.
+	 */
+	$rubrique = false; 
+        foreach ($config as $key => $val) 
+        {
+        	if ((substr($key,0,3)) == "op_") 
+        	{
+	        	if ($val == "openPublishing") 
+	        	{
+	        		$rubrique = true;
+			}
+		}
+	}
+	if (!$rubrique) $tab['message'][] = _T('opconfig:erreur_rubrique');
+	
+	
+	/*
+	 *Troisieme test : si la gestion des mots-cles est active alors qu'aucun mot-cle n'a ete choisi
+	 */
+	if ($config['MotCle']=="yes")
+	{
+		$groupe = false;
+		foreach ($config as $key => $val)
+		{
+	                if ((substr($key,0,7)) == "groupe_")
+	                {
+	                	if ($val == "openPublishing")
+	                	{
+	                		$groupe = true;
+	                	}
+			}
+		}
+		if (!$groupe) $tab['message'][] = _T('opconfig:erreur_groupe');
+	}
+	                                                    
+	if (count($tab['message']) == 0) $tab['code'] = true;
+	
+	return $tab;
+}
+
 // fonction recherchant des formulaires Publication ouverte appartenant à d'autres plugin
 function recherche_formulaire($env) {
 	$env = @unserialize($env);

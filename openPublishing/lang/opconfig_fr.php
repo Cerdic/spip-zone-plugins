@@ -4,6 +4,35 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+// v 0.5
+
+// C
+
+'creer_rubrique' => 'Cr&eacute;er une nouvelle rubrique.',
+'creer_auteur' => 'Cr&eacute;er un nouvel auteur.',
+'creer_groupe' => 'Cr&eacute;er un nouveau groupe.',
+
+// E
+
+'erreur_auteur_anonyme' => 'Aucun auteur anonyme n\'est d&eacute;fini. Vous devez obligatoirement choisir un auteur lors de la configuration du plugin "Publication Ouverte".',
+'erreur_rubrique' => 'Aucune rubrique n\'est d&eacute;finie. Vous devez obligatoirement choisir une rubrique lors de la configuration du plugin "Publication Ouverte".',
+'erreur_configuration' => 'Attention, la configuration du plugin "Publication Ouverte" comporte des erreurs :',
+'erreur_configuration_page' => 'Page de configuration : <a href="ecrire/?exec=cfg&cfg=op">Configurer le plugin Publication Ouverte</a>',
+'erreur_groupe' => 'Aucun groupe de mot-cl&eacute; n\'est d&eacute;fini. Si vous avez permettez aux redacteurs de choisir des mots-cl&eacute;s, vous devez obligatoirement choisir des groupes de mots-cl&eacute;s lors de la configuration du plugin "Publication Ouverte". ',
+
+'expliq_groupes_absent' => 'Attention, aucun groupe de mot-cl&eacute; n\'est d&eacute;fini. Veuillez ajouter des groupes de mots-cl&eacute;s (activez les mot-cl&eacute;s puis cr&eacute;ez les groupes necessaires. N\'oubliez pas de cr&eacute;er des mots-cl&eacute;s dans ces nouveaux groupes.).',
+'expliq_rubrique_absent' => 'Attention, aucune rubrique n\'est d&eacute;finie. Veuillez ajouter des rubriques (Menu "Edition" de votre interface priv&eacute;e).',
+
+// P
+'publie_motscles' => 'Choisir des mots-cl&eacute;s',
+'publie_motscles_explique' => 'Les mots-cl&eacute;s sont utiles pour r&eacute;f&eacute;rencer votre article sur ce site et
+pour le retrouver lors d\'une recherche par th&eacute;matique.',
+'publie_rubrique' => 'Choisissez votre rubrique',
+'publie_texte' => 'Texte :',
+'publie_titre' => 'Titre :',
+
+
+/**
 // v 0.4
 
 // A
@@ -52,13 +81,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'expliq_auteur_squelette' => 'Afin de r&eacute;cup&eacute;rer les donn&eacute;es d\'identification du r&eacute;dacteur, vous pouvez utiliser dans une boucle ARTICLES la balise EXTRA avec le filtre OP_pseudo ou OP_mail.',
 'expliq_composition_article' => 'Un article peut &ecirc;tre compos&eacute; de plusieurs champs qui ne sont pas forc&eacute;ment utilis&eacute; par tous les sites. Vous pouvez donc activer ou pas les champs ci-dessous. L\'espace de r&eacute;daction ne proposera aux r&eacute;dacteurs que les champs coch&eacute;s (ainsi que, \'&eacute;videmment, le titre et le texte de l\'article).',
 'expliq_options' => 'Ces options permettre d\'&eacute;tendre ou de restreindre les fonctionnalit&eacute;s du plugin "Publication Ouverte". Les options coch&eacute;es seront disponibles dans l\'espace de r&eacute;daction',
-'expliq_agenda' => 'Si vous cochez l\'option "gestion de Agenda du plugin Publication Ouverte", le plugin "Publication Ouverte" proposera aux r&eacute;dacteurs de publier leurs articles sous forme de "date" dans l\'agenda. Il s\'agit en r&eacute;alit&eacute; de publier le contenu de l\'article sous forme de br&egrave;ve dans une rubrique sp&eacute;cifique. Cette m&eacute;thode correspond au m&eacute;canisme des version pr&eacute;c&eacute;dente du plugin. Vous pouvez &agrave; la place utiliser l\'option "utiliser des articles post-dat&eacute;s" qui publiera vos articles avec une date de publication dans le future',
+'expliq_agenda' => 'Si vous cochez l\'une des options "gestion de Agenda du plugin Publication Ouverte", le plugin "Publication Ouverte" proposera aux r&eacute;dacteurs de publier leurs articles sous forme de "date" dans l\'agenda.<br />Il s\'agit en r&eacute;alit&eacute; soit de publier le contenu de l\'article sous forme de br&egrave;ve dans une rubrique sp&eacute;cifique, soit de publier  l\'article dans une rubrique sp&eacute;cifique sans transformation en br&egrave;ve.<br /> La premi&egrave;re m&eacute;thode correspond au m&eacute;canisme des version pr&eacute;c&eacute;dente du plugin, la seconde permet de transf&eacute;rer rapidement un &eacute;venement de l\'agenda vers une autre rubrique.',
 'expliq_statut' => 'Une fois que le r&eacute;dacteur a valid&eacute; son article, celui-ci appara&icirc;tra dans l\'espace priv&eacute;e de votre site avec le statut suivant :',
 'expliq_posttraitement' => 'Il s\'agit ici d\'effectuer des traitements de protection sur l\'article. Ces options s\'appliqueront apr&egrave;s la validation de l\'article par le r&eacute;dacteur.',
 'expliq_renvois' => 'Lorsqu\'un r&eacute;dacteur valide un article ou abandonne, le formulaire affiche un message et redirige le r&eacute;dacteur au bout de quelques secondes vers une autre page du site. Les options ci-dessous permettent de configurer cela. Attention, il faut indiquer des urls de type : &laquo; /spip.php?page=ma_page &raquo;, le plugin compl&eacute;tera automatiquement l\'url.',
 'exemple_trois_auteurs' => 'Exemple avec trois auteurs :',
 'expliq_balise' => 'le code donn&eacute; en-dessous de votre image est a placer dans le texte de votre article si vous souhaitez inclure l\'image ou la vignette du document dans votre texte (right, center, left renseigne l\'alignement que prendra votre image  ou vignette).',
-'erreur_die' => 'veuillez verifier votre installation du plugin openPublishing',
+'erreur_die' => 'Veuillez effectuer la configuration du plugin openPublishing.',
 'erreur_protection' => 'tentative de modification d\'un article d&eacute;j&agrave; publi&eacute;',
 'erreur_min_len' => 'Attention, votre titre doit contenir au minimum ',
 'erreur_upload' => 'erreur d\'upload, le fichier temporaire est introuvable, il ce peut que vous tentiez d\'uploader un fichier trop volumineux. La taille maximale autoris&eacute;e est de 5 Mo',
@@ -147,6 +176,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'utiliser_descriptif' => 'Utiliser le champ Descriptif',
 'utiliser_ps' => 'Utiliser le champ Post-Scriptum',
 'utiliser_agenda' => 'utiliser la gestion Agenda du plugin "Publication Ouverte"',
+'utiliser_agenda_breve' => 'utiliser la gestion Agenda "Publication Ouverte" (&eacute;v&eacute;nements sous forme de br&egrave;ves).',
+'utiliser_agenda_article' => 'utiliser la gestion Agenda "Publication Ouverte" (&eacute;v&eacute;nements sous forme d\'articles).',
 'utiliser_article_agenda' => 'utiliser des articles post-dat&eacute;',
 
 
@@ -239,12 +270,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // M
 'min_len' => 'Longueur minimal du titre',
-'motclefs' => 'Choisir des mots-cl&eacute;s',
+
 'motclefs_active' => 'Autoriser la gestion des mots-cl&eacute;s ?&nbsp;',
 'motclefs_oui' => 'Les utilisateurs pourront choisir leurs mot-cl&eacute;s',
 'motclefs_non' => 'Les utilisateurs ne pourront pas choisir leurs mot-cl&eacute;s',
-'motclefs_explique' => 'Les mots-cl&eacute;s sont utiles pour r&eacute;f&eacute;rencer votre article sur ce site et
-pour le retrouver lors d\'une recherche par th&eacute;matique.',
 'motclefs_explique2' => 'Pour choisir plusieurs mots-cl&eacute;s, maintenir la touche SHIFT ou CTRL (Pomme sur les Macs) enfonc&eacute;e',
 'motclefs_liste' => 'Liste des mots-cl&eacute;s associ&eacute;s &agrave; votre article :',
 'motclefs_ajouter' => '&nbsp;&nbsp;Ajouter un mot-cl&eacute;s',
@@ -296,14 +325,13 @@ pour le retrouver lors d\'une recherche par th&eacute;matique.',
 'optionel' => 'optionel',
 
 // P
-'publie_texte' => 'Texte :',
-'publie_titre' => 'Titre :',
+
+
 'publie_surtitre' => 'Sur-titre :',
 'publie_soustitre' => 'Sous-titre :',
 'publie_chapo' => 'Chapeau :',
 'publie_descriptif' => 'Descriptif rapide :',
 'publie_ps' => 'Post-scriptum :',
-'publie_rubrique' => 'Choisissez votre rubrique',
 'previsualisation' => 'Pr&eacute;visualisation',
 'previsualiser' => 'Pr&eacute;visualiser',
 'post_traitement' => 'Post-traitement des textes',
@@ -356,6 +384,7 @@ pour le retrouver lors d\'une recherche par th&eacute;matique.',
 'votre_mail' => 'Votre email',
 'votre_groupe' => 'Votre groupe &eacute;ventuel',
 'votre_phone' => 'Votre num&eacute;ro de tel'
+**/
 );
 
 ?>

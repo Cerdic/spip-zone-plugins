@@ -10,17 +10,16 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/ajouter_documents'); // pour l'ajout de documents
 include_spip('inc/barre');
 
+
 /* 
  * Les includes propre au plugin
  */
 
-if (version_compare($GLOBALS['spip_version_code'],'1.9300','<'))
-	include_spip('inc/compat_op.php');
-
 include_spip('inc/op_functions'); // fonctions diverses
 
+
 spip_connect();
-charger_generer_url();
+generer_url_entite();
 
 function balise_FORMULAIRE_ARTICLE ($p) {
 
@@ -46,17 +45,34 @@ function balise_FORMULAIRE_ARTICLE_dyn() {
 global $_FILES, $_HTTP_POST_FILES;
 $config = lire_config('op');
 
+
 /*
- * Premier test : si pas d'auteur "anonyme", on jette.
+ * on test la validite de la configuration du plugin
+ * si celle-ci n'est pas valide, alors on sort en affichant les messages d'aides
  */
 
-if(!$config['IDAuteur']) return _T('opconfig:erreur_die');
+$ret = test_configuration($config);
+if (!$ret['code'])
+{
+	$message = '<p>'._T('opconfig:erreur_configuration').'</p>';
+	$message .= '<ul>';
+	foreach($ret['message'] as $m)
+	{
+		$message .='<li>'.$m.'</li>';
+	}
+	$message .='</ul><p>'._T('opconfig:erreur_configuration_page').'</p>';
+	
+	return $message;
+}
+
+
 
 /*
  * Si tentative d'attaquer un article déjà existant, on jette.
  */
 
 if (isset($_GET['id_article'])) return _T('opconfig:erreur_protection');
+
 
 /*
  *  récapitulatif des pipelines :
@@ -100,7 +116,6 @@ $variables['actions']['previsualiser'] = '';
 $variables['actions']['valider'] = '';
 $variables['actions']['sup_logo'] = '';
 $variables['actions']['media'] = '';
-$variables['actions']['mots'] = '';
 $variables['actions']['abandonner'] = '';
 
 // definition des champs principaux du formulaire
@@ -129,7 +144,9 @@ $variables['champs_aux']['annee'] = '';
 $variables['champs_aux']['mois'] = '';
 $variables['champs_aux']['jour'] = '';
 $variables['champs_aux']['heure'] = '';
-if (!empty($_POST["motschoix"])) $variables['champs_aux']['motschoix'] = $_POST["motschoix"];
+
+
+if (!empty($_POST['mots'])) $variables['champs_aux']['mots'] = $_POST['mots'];
 
 // définition des types(permet de faire passer ces champs par entities_html
 $variables['type']['titre'] = 'texte';
@@ -272,7 +289,7 @@ if ($identifiant == true) {
 
 
 // l'auteur demande la publication de son article
-// Action Abandonner
+// Action Valider
 if(!empty($variables['actions']['valider'])) {
 	// vérification avant mise en Base de donnée
 	

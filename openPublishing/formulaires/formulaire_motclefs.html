@@ -1,31 +1,25 @@
 #CACHE{0}
 
-<fieldset><legend><b><:opconfig:motclefs:></b></legend>
+<B_groupes>
 
-	<p><:opconfig:motclefs_explique:></p>
-	<p><:opconfig:motclefs_explique2:></p>
+<fieldset><legend><b><:opconfig:publie_motscles:></b></legend>
 
-	<select name='motschoix[]' multiple size='20'>
-	<BOUCLE_groupes(GROUPES_MOTS){openKey}>
-		<option value="">[(#TITRE|majuscules)]</option>
+	<p><:opconfig:publie_motscles_explique:></p>
+
+	<BOUCLE_groupes(GROUPES_MOTS){openKey}>	
+		<div style="float:left;display:block;">
+		<h4>[(#TITRE|majuscules)]</h4>
 		<BOUCLE_mots(MOTS){par titre}{id_groupe}>
-			<option value="#ID_MOT">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#TITRE</option>
+			<input type="checkbox" name='mots[]' value="#ID_MOT"
+			[(#ENV*{mots_#ID_MOT}|=={yes}|?{checked="yes"})]>#TITRE</input><br />
 		</BOUCLE_mots>
+		</div>
 	</BOUCLE_groupes>
-	</select>
-
-	<small>
-	<p>
-	<input name='mots' type='submit' VALUE='#ENV*{bouton}' CLASS='spip_bouton'>
-	<input type="hidden" name="id_article" value="#ENV*{id_article}">
-	</p>
-	</small>
-	<p>
-	<B_motarticle>
-	<b><:opconfig:motclefs_liste:></b><br />
-	<BOUCLE_motarticle(MOTS){par titre}{id_article = #ENV*{id_article} }>
-		[(#TITRE),&nbsp;]
-	</BOUCLE_motarticle>
-	</B_motarticle>
-	</p>
+	
 </fieldset>
+
+</B_groupes>
+
+<p><:opconfig:expliq_groupes_absent:></p>
+
+<//B_groupes>
