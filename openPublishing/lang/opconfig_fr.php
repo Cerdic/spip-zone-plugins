@@ -42,6 +42,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'expliq_posttraitement' => 'Il s\'agit ici d\'effectuer des traitements de protection sur l\'article. Ces options s\'appliqueront apr&egrave;s la validation de l\'article par le r&eacute;dacteur.',
 'expliq_renvois' => 'Lorsqu\'un r&eacute;dacteur valide un article ou abandonne, le formulaire affiche un message et redirige le r&eacute;dacteur au bout de quelques secondes vers une autre page du site. Les options ci-dessous permettent de configurer cela. Attention, il faut indiquer des urls de type : &laquo; /spip.php?page=ma_page &raquo;, le plugin compl&eacute;tera automatiquement l\'url.',
 
+'explication_chapo' => 'Le chapeau est totalement optionnel. Si vous n’en avez pas besoin, laissez-le vide, la pr&eacute;sentation du site s’adaptera automatiquement &agrave; sa pr&eacute;sence ou absence.',
+'explication_ps' => 'Le post-scriptum est totalement optionnel. Si vous n’en avez pas besoin, laissez-le vide, la pr&eacute;sentation du site s’adaptera automatiquement &agrave; sa pr&eacute;sence ou absence.',
+'explication_surtitre' => 'Le surtitre est totalement optionnel. Si vous n’en avez pas besoin, laissez-le vide, la pr&eacute;sentation du site s’adaptera automatiquement &agrave; sa pr&eacute;sence ou absence.',
+'explication_soustitre' => 'Le soustitre est totalement optionnel. Si vous n’en avez pas besoin, laissez-le vide, la pr&eacute;sentation du site s’adaptera automatiquement &agrave; sa pr&eacute;sence ou absence.',
+'explication_descriptif' => 'Le descriptif est totalement optionnel. Si vous n’en avez pas besoin, laissez-le vide, la pr&eacute;sentation du site s’adaptera automatiquement &agrave; sa pr&eacute;sence ou absence.',
+
 // G
 'gestion_rubrique' => 'Gestion des rubriques',
 'gestion_auteur' => 'l\'auteur "anonyme"',
@@ -69,8 +75,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'publie_motscles_explique' => 'Les mots-cl&eacute;s sont utiles pour r&eacute;f&eacute;rencer votre article sur ce site et
 pour le retrouver lors d\'une recherche par th&eacute;matique.',
 'publie_rubrique' => 'Choisissez votre rubrique',
-'publie_texte' => 'Texte :',
-'publie_titre' => 'Titre :',
+'publie_texte' => 'Texte',
+'publie_titre' => 'Titre',
+'publie_surtitre' => 'Sur-titre :',
+'publie_soustitre' => 'Sous-titre :',
+'publie_chapo' => 'Chapeau :',
+'publie_descriptif' => 'Descriptif rapide :',
+'publie_ps' => 'Post-scriptum :',
 'post_traitement' => 'Post-traitement',
 'post_notification' => 'Activer la notification mail lors de la publication des articles (vous devez avoir activ&eacute; "Suivi de l\'activit&eacute; &eacute;ditoriale" dans votre configuration SPIP)',
 'post_majuscule' => 'Autoriser les majuscules dans les titres',
@@ -283,11 +294,8 @@ pour le retrouver lors d\'une recherche par th&eacute;matique.',
 'explication_agenda' => 'Pour ajouter votre article dans l\'agenda (dans le cas d\'un &eacute;v&eacute;nement), cochez la case ci-dessous et choisissez la date et l\'heure correspondant &agrave; l\'&eacute;v&eacute;nement. Votre article sera publi&eacute; dans l\'agenda (et non dans une des rubriques "contributions").',
 'explication_rubrique' => 'La rubrique "locale" concerne uniquement les articles traitant de Lille et de ses environs (nord-pas de calais), La rubrique "non locale" concerne les autres parties du monde, et la rubrique "analyse" concerne les articles sans attaches g&eacute;ographiques particuli&egrave;res',
 'explication_titre' => 'Evitez les majuscules, choississez un titre court et repr&eacute;sentatif du contenu de l\'article.',
-'explication_surtitre' => 'Le surtitre est totalement optionnel. Si vous n’en avez pas besoin, laissez-le vide, la pr&eacute;sentation du site s’adaptera automatiquement &agrave; sa pr&eacute;sence ou absence.',
-'explication_soustitre' => 'Le soustitre est totalement optionnel. Si vous n’en avez pas besoin, laissez-le vide, la pr&eacute;sentation du site s’adaptera automatiquement &agrave; sa pr&eacute;sence ou absence.',
-'explication_descriptif' => 'Le descriptif est totalement optionnel. Si vous n’en avez pas besoin, laissez-le vide, la pr&eacute;sentation du site s’adaptera automatiquement &agrave; sa pr&eacute;sence ou absence.',
-'explication_chapo' => 'Le chapeau est totalement optionnel. Si vous n’en avez pas besoin, laissez-le vide, la pr&eacute;sentation du site s’adaptera automatiquement &agrave; sa pr&eacute;sence ou absence.',
-'explication_ps' => 'Le post-scriptum est totalement optionnel. Si vous n’en avez pas besoin, laissez-le vide, la pr&eacute;sentation du site s’adaptera automatiquement &agrave; sa pr&eacute;sence ou absence.',
+
+
 'explication_article' => 'A FAIRE : placer ici des conseil de r&eacute;daction d\'article ...',
 'extensions_acceptees' => 'Les extensions de fichier accept&eacute;es sont :',
 'erreur_anonymous' => 'erreur, pas d\'auteur anonymous dans la base, publication impossible',
@@ -379,11 +387,7 @@ pour le retrouver lors d\'une recherche par th&eacute;matique.',
 // P
 
 
-'publie_surtitre' => 'Sur-titre :',
-'publie_soustitre' => 'Sous-titre :',
-'publie_chapo' => 'Chapeau :',
-'publie_descriptif' => 'Descriptif rapide :',
-'publie_ps' => 'Post-scriptum :',
+
 'previsualisation' => 'Pr&eacute;visualisation',
 'previsualiser' => 'Pr&eacute;visualiser',
 'post_traitement' => 'Post-traitement des textes',

@@ -640,7 +640,7 @@ if(!empty($variables['actions']['valider'])) {
 			if (($config['StatutArt'] == "prop") ||  ($config['StatutArt'] == "redac")) {
 				notifier_proposition_article($variables['champs_pri']['id_article']);
 			}
-			if ($config['StatutArt'] == "valid") {
+			else if ($config['StatutArt'] == "publie") {
 				notifier_publication_article($variables['champs_pri']['id_article']);
 			}
 		}
