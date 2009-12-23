@@ -8,7 +8,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'articles_lies' => 'Connectar un art&iacute;culo',
 	
 	// L
-	'lier_un_article_a_celui_ci' => 'Connectar',
 	'lier_cet_article' => 'Connectar',
 	
 	// P
@@ -16,6 +15,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'pas_de_resultat' => 'No resultados',
 	
 	// R
+	'rang_moins' => 'Abajo',
+	'rang_plus' => 'Arriba',
 	'rechercher' => 'Buscar',
 	'rechercher_un_article_a_lier' => 'Buscar un art&iacute;culo',
 	

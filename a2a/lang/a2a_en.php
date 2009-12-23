@@ -8,7 +8,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'articles_lies' => 'Connect an article',
 	
 	// L
-	'lier_un_article_a_celui_ci' => 'Connect',
 	'lier_cet_article' => 'Connect',
 	
 	// P
