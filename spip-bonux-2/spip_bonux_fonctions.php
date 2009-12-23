@@ -58,10 +58,24 @@ function timestamp($fichier){
 	return "$fichier?$m";
 }
 
-
-function picker_selected($selected,$type){
+/**
+ * Transformer un tableau d'entrees array("rubrique|9","article|8",...)
+ * en un tableau contenant uniquement les identifiants d'un type donne.
+ * Accepte aussi que les valeurs d'entrees soient une chaine brute
+ * "rubrique|9,article|8,..." 
+ *
+ * @param array/string $selected liste des entrees : tableau ou chaine separee par des virgules
+ * @param string $type type de valeur a recuperer ('rubrique', 'article')
+ * 
+ * @return array liste des identifiants trouves.
+**/
+function picker_selected($selected, $type){
 	$select = array();
 	$type = preg_replace(',\W,','',$type);
+
+	if ($selected and !is_array($selected)) 
+		$selected = explode(',', $selected);
+		
 	if (is_array($selected))
 		foreach($selected as $value)
 			if (preg_match(",".$type."[|]([0-9]+),",$value,$match)
