@@ -164,7 +164,8 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 	if(!$modif) {unset($cs_input_variable); return;}
 
 	// envoi de la description courante en pipeline
-	list(,$res) = pipeline('pre_description_outil', array($outil_, $res));
+	$res = pipeline('pre_description_outil', array('outil'=>$outil_, 'texte'=>$res));
+	$res = $res['texte'];
 	// recherche des blocs <variable></variable> eventuels associes pour du masquage/demasquage
 	foreach($cs_input_variable as $v) {
 		$res = preg_replace_callback(",<($v)\s+valeur=(['\"])(.*?)\\2\s*>,", 'cs_input_variable_callback', $res);
