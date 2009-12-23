@@ -1,0 +1,24 @@
+<plugin>
+	<nom>Date d'inscription</nom>
+	<auteur>b_b</auteur>
+	<version>0.1</version>
+	<version_base>0.1</version_base>
+	<etat>test</etat>
+	<prefix>date_inscription</prefix>
+	<description>
+	Un champ suppl&eacute;mentaire pour la table auteurs : date_inscription
+	</description>
+	<lien></lien>
+	<licence>GPL</licence>
+	<icon></icon>
+	<install>base/date_inscription.php</install>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/date_inscription.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>formulaire_traiter</nom>
+		<inclure>date_inscription_pipelines.php</inclure>
+	</pipeline>
+ 	<necessite id='SPIP' version='[2.0.10;]' />
+</plugin>
