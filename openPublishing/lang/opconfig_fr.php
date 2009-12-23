@@ -6,11 +6,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // v 0.5
 
+// A
+'attention_minimum' => 'Attention : vous devez au minimum avoir coch&eacute; une rubrique.',
+
 // C
 
 'creer_rubrique' => 'Cr&eacute;er une nouvelle rubrique.',
 'creer_auteur' => 'Cr&eacute;er un nouvel auteur.',
 'creer_groupe' => 'Cr&eacute;er un nouveau groupe.',
+'composition_article' => 'Composition d\'un article',
+'choix_agenda' => 'Choix de la rubrique Agenda',
+
+// D
+'description_plugin' => 'Le plugin <b>Publication Ouverte</b> permet la publication d\'articles par les visiteurs de votre site depuis l\'espace publique, sans qu\'il soit n&eacute;cessaire de s\'identifier. Les options ci-dessous permettent d\'adapter le fonctionnement du plugin &agrave; votre site.',
 
 // E
 
@@ -20,8 +28,41 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_configuration_page' => 'Page de configuration : <a href="ecrire/?exec=cfg&cfg=op">Configurer le plugin Publication Ouverte</a>',
 'erreur_groupe' => 'Aucun groupe de mot-cl&eacute; n\'est d&eacute;fini. Si vous avez permettez aux redacteurs de choisir des mots-cl&eacute;s, vous devez obligatoirement choisir des groupes de mots-cl&eacute;s lors de la configuration du plugin "Publication Ouverte". ',
 
+'expliq_agenda' => 'Si vous cochez l\'une des options "gestion de Agenda du plugin Publication Ouverte", le plugin "Publication Ouverte" proposera aux r&eacute;dacteurs de publier leurs articles sous forme de "date" dans l\'agenda.<br />Il s\'agit en r&eacute;alit&eacute; soit de publier le contenu de l\'article sous forme de br&egrave;ve dans une rubrique sp&eacute;cifique, soit de publier  l\'article dans une rubrique sp&eacute;cifique sans transformation en br&egrave;ve.<br /> La premi&egrave;re m&eacute;thode correspond au m&eacute;canisme des version pr&eacute;c&eacute;dente du plugin, la seconde permet de transf&eacute;rer rapidement un &eacute;venement de l\'agenda vers une autre rubrique.',
+'expliq_auteur_anonyme' =>'L\'auteur "anonyme" est l\'auteur au nom du quel les r&eacute;dacteurs publieront leurs articles. Cr&eacute;ez cet auteur dans votre liste d\'auteur (remplissez uniquement le champ "Signature" et laissez son statut en "r&eacute;dacteur"), puis s&eacute;lectionnez le ci-dessous.',
+'expliq_auteur_squelette' => 'Afin de r&eacute;cup&eacute;rer les donn&eacute;es d\'identification du r&eacute;dacteur, vous pouvez utiliser dans une boucle ARTICLES la balise EXTRA avec le filtre OP_pseudo ou OP_mail.',
 'expliq_groupes_absent' => 'Attention, aucun groupe de mot-cl&eacute; n\'est d&eacute;fini. Veuillez ajouter des groupes de mots-cl&eacute;s (activez les mot-cl&eacute;s puis cr&eacute;ez les groupes necessaires. N\'oubliez pas de cr&eacute;er des mots-cl&eacute;s dans ces nouveaux groupes.).',
+'expliq_groupes' => 'Si vous avez activ&eacute; l\'option "permettre aux r&eacute;dacteurs de choisir leurs mots-cl&eacute;s", vous pouvez alors choisir les diff&eacute;rents groupes de mot-cl&eacute;s qui leur serons propos&eacute;s. Cochez ou d&eacute;cochez les groupes de mots-cl&eacute;s i-dessous.',
 'expliq_rubrique_absent' => 'Attention, aucune rubrique n\'est d&eacute;finie. Veuillez ajouter des rubriques (Menu "Edition" de votre interface priv&eacute;e).',
+'expliq_rubrique_op' => 'Lorsqu\'un r&eacute;dacteur utilise le formulaire de publication ouverte, Il pourra choisir de ranger son article parmi les rubriques que vous lui proposez. Pour choisir ces rubriques, cochez les dans la liste ci-dessus.',
+'expliq_rubrique_squelette' => 'Dans votre squelette, pour lister toutes vos rubriques "Publication ouverte", vous pouvez utiliser le crit&egrave;re {openPublishing} dans une boucle RUBRIQUES',
+'expliq_options' => 'Ces options permettre d\'&eacute;tendre ou de restreindre les fonctionnalit&eacute;s du plugin "Publication Ouverte". Les options coch&eacute;es seront disponibles dans l\'espace de r&eacute;daction',
+'expliq_composition_article' => 'Un article peut &ecirc;tre compos&eacute; de plusieurs champs qui ne sont pas forc&eacute;ment utilis&eacute; par tous les sites. Vous pouvez donc activer ou pas les champs ci-dessous. L\'espace de r&eacute;daction ne proposera aux r&eacute;dacteurs que les champs coch&eacute;s (ainsi que, \'&eacute;videmment, le titre et le texte de l\'article).',
+'expliq_statut' => 'Une fois que le r&eacute;dacteur a valid&eacute; son article, celui-ci appara&icirc;tra dans l\'espace priv&eacute;e de votre site avec le statut suivant :',
+'expliq_posttraitement' => 'Il s\'agit ici d\'effectuer des traitements de protection sur l\'article. Ces options s\'appliqueront apr&egrave;s la validation de l\'article par le r&eacute;dacteur.',
+'expliq_renvois' => 'Lorsqu\'un r&eacute;dacteur valide un article ou abandonne, le formulaire affiche un message et redirige le r&eacute;dacteur au bout de quelques secondes vers une autre page du site. Les options ci-dessous permettent de configurer cela. Attention, il faut indiquer des urls de type : &laquo; /spip.php?page=ma_page &raquo;, le plugin compl&eacute;tera automatiquement l\'url.',
+
+// G
+'gestion_rubrique' => 'Gestion des rubriques',
+'gestion_auteur' => 'l\'auteur "anonyme"',
+'gestion_agenda' => 'Gestion de l\'agenda',
+'gestion_renvois' => 'Gestion des renvois',
+
+// I
+'info_motclefs' => 'Mots-cl&eacute;s : ',
+'info_rubrique' => 'Rubrique : ',
+
+// O
+'options_dispos' => 'Les options disponibles',
+'option_motclef' => 'Permettre aux r&eacute;dacteurs de choisir les mots clefs',
+'option_document' => 'Permettre aux r&eacute;dacteurs d\'inclure des documents dans l\'article',
+'option_logo' => '... de type "logo"',
+'option_auteur_spip' => 'Permettre aux r&eacute;dacteurs enregistr&eacute;s en tant que "auteur Spip" de publier les articles en leur nom',
+'option_doc_distant' => 'Permettre aux r&eacute;dacteurs d\'inclure des documents distants',
+'option_authentification' => 'Permettre aux r&eacute;dacteurs de s\'identifier (mail et pseudo).',
+'option_docimage' => '... de type "image"',
+'option_docdocument' => '... de type "document"',
+'option_docauto' => 'imposer un type de document automatiquement (image, document ou logo).',
 
 // P
 'publie_motscles' => 'Choisir des mots-cl&eacute;s',
@@ -30,7 +71,47 @@ pour le retrouver lors d\'une recherche par th&eacute;matique.',
 'publie_rubrique' => 'Choisissez votre rubrique',
 'publie_texte' => 'Texte :',
 'publie_titre' => 'Titre :',
+'post_traitement' => 'Post-traitement',
+'post_notification' => 'Activer la notification mail lors de la publication des articles (vous devez avoir activ&eacute; "Suivi de l\'activit&eacute; &eacute;ditoriale" dans votre configuration SPIP)',
+'post_majuscule' => 'Autoriser les majuscules dans les titres',
+'post_antispam' => 'Protection anti-spam sur les adresses mails',
+'post_taille_min' => 'Taille minimal du titre :',
+'post_pipeline' => 'Activer l\'interactivit&eacute; avec les autres plugins (cf. documentation sur spip-contrib)',
+'post_char' => 'caract&egrave;res',
 
+// R
+'revenir_haut' => 'Revenir en haut.',
+'renvois_url_validation' => 'Url de retour en cas de validation',
+'renvois_url_abandon' => 'Url de retour en cas d\'abandon',
+'renvois_texte_abandon' => 'Texte en cas d\'abandon',
+'renvois_texte_validation' => 'Texte en cas de validation',
+'renvois_temps' => 'Temps d\'attente avant le renvoi (exprim&eacute; en secondes)',
+
+// S
+'statut_article' => 'Statut des articles',
+'statut_en_redaction' => 'En R&eacute;daction',
+'statut_proposer' => 'Proposer &agrave; la validation',
+'statut_valide' => 'Valid&eacute;',
+
+// T
+'titre_rubrique_op' => 'Gestion des rubriques "Publication Ouverte"',
+'titre_auteur_anonyme' => 'L\'auteur "anonyme"',
+'titre_composition_article' => 'Composition d\'un article',
+'titre_options' => 'Options disponibles aux r&eacute;dacteurs',
+'titre_groupes' => 'Choix des groupes de mot-cl&eacute;s a utiliser',
+'titre_posttraitement' => 'Post-traitement des articles',
+'titre_statut_op' => 'Statut des articles apr&egrave;s la r&eacute;daction',
+'titre_renvois' => 'Gestion des renvois',
+'titre_agenda_op' => 'Gestion de l\'agenda par le plugin "Publication Ouverte"',
+
+// U
+'utiliser_surtitre' => 'Utiliser le champ Sur-titre',
+'utiliser_soustitre' => 'Utiliser le champ Sous-titre',
+'utiliser_chapo' => 'Utiliser le champ Chapeau',
+'utiliser_descriptif' => 'Utiliser le champ Descriptif',
+'utiliser_ps' => 'Utiliser le champ Post-Scriptum',
+'utiliser_agenda_breve' => 'utiliser la gestion Agenda "Publication Ouverte" (&eacute;v&eacute;nements sous forme de br&egrave;ves).',
+'utiliser_agenda_article' => 'utiliser la gestion Agenda "Publication Ouverte" (&eacute;v&eacute;nements sous forme d\'articles).'
 
 /**
 // v 0.4
@@ -42,7 +123,7 @@ pour le retrouver lors d\'une recherche par th&eacute;matique.',
 
 'attention_temps' => 'Attention, cette op&eacute;ration peut prendre un certain temps (en fonction du nombres d\'articles publi&eacute; en openPublishing dans votre base).',
 
-'attention_minimum' => 'Attention : vous devez au minimum avoir coch&eacute; une rubrique.',
+
 'auteur' => 'auteur',
 
 // B
@@ -54,8 +135,8 @@ pour le retrouver lors d\'une recherche par th&eacute;matique.',
 'cas_neuve' => 'Cas d\'une installation "neuve"',
 'cas_mise_a_jour' => 'Cas d\'une mise &agrave; jour du plugin',
 'correction_num_id' => 'Correction des num&eacute;ros d\'identifications des auteurs',
-'composition_article' => 'Composition d\'un article',
-'choix_agenda' => 'Choix de la rubrique Agenda',
+
+
 'configuration' => 'Configuration Publication Ouverte',
 'caracteres' => ' caract&eacute;res',
 'choix_auteur_spip' => 'Publier de mani&egrave;re anonyme.',
@@ -63,7 +144,7 @@ pour le retrouver lors d\'une recherche par th&eacute;matique.',
 // D
 
 'documents_lies' => 'Les documents attach&eacute;s &agrave; votre article',
-'description_plugin' => 'Le plugin <b>Publication Ouverte</b> permet la publication d\'articles par les visiteurs de votre site depuis l\'espace publique, sans qu\'il soit n&eacute;cessaire de s\'identifier. Les options ci-dessous permettent d\'adapter le fonctionnement du plugin &agrave; votre site.',
+
 'document_inclusion' => 'Document (le fichier apparaitra sous forme de vignette cliquable)',
 'document_explique' => 'Cette option permet de charger des documents provenant de votre ordinateur et de les lier &agrave; votre article. Si vous choississez l\'option "image", vous pourrez alors inclure votre image directement dans le texte de votre article. Si vous choisissez l\'option "document", vous pourrez alors inclure votre document sous forme de vignette cliquable directement dans le texte de votre article.',
 'document_distant' => 'OU incluez un document distant',
@@ -75,16 +156,15 @@ pour le retrouver lors d\'une recherche par th&eacute;matique.',
 'expliq_sup_table' => 'La version 0.4 du plugin "Publication Ouverte" n\'utilise plus les tables spip_op_config et spip_op_rubriques. Si votre ancienne version du plugin &eacute;tait la 0.3 ou la 0.2.2, il vous faut supprimer totalement ces tables et refaire la configuration de votre plugin :',
 'expliq_transfert_auteurs' => 'La version 0.4 du plugin "Publication Ouverte" n\'utilise plus la table spip_op_auteurs pour stocker les donn&eacute;es d\'identifications des r&eacute;dacteurs, mais utilise les champs "extras" de la table spip_articles. L\'option suivante va vous permettre de mettre &agrave; jour tous les articles ayant eu un r&eacute;dacteur s\'&eacute;tant identifi&eacute; via ce syst&egrave;me. Cela vous permettra de conserver les donn&eacute;es identifications de vos r&eacute;dacteurs et donc de supprimer la table spip_op_auteurs devenue obsol&eacute;te',
 'expliq_num_id' => 'La version 0.3 du plugin openPublishing utilisait par d&eacute;faut l\'auteur "anonymous" portant le num&eacute;ro d\'identification 999. Cela &eacute;tait une tr&agrave;s mauvaise id&eacute;e, car pour tout auteur cr&eacute;&eacute; par la suite, l\'identification automatique d&eacute;marait &agrave; partir du num&eacute;ro 1000 ce qui pouvais causer de multiples bugs dans l\'utilisation de spip. L\'outil ci-dessous va vous permettre, si vous &ecirc;tes dans ce cas, de supprimer l\'auteur portant l\'identification 999 (le fameux auteur anonymous) et de re-donner aux auteurs portant l\'identification 1000 ou plus leur v&eacute;ritable num&eacute;ro id.',
-'expliq_rubrique_op' => 'Lorsqu\'un r&eacute;dacteur utilise le formulaire de publication ouverte, Il pourra choisir de ranger son article parmi les rubriques que vous lui proposez. Pour choisir ces rubriques, cochez les dans la liste ci-dessus.',
-'expliq_rubrique_squelette' => 'Dans votre squelette, pour lister toutes vos rubriques "Publication ouverte", vous pouvez utiliser le crit&egrave;re {openPublishing} dans une boucle RUBRIQUES',
-'expliq_auteur_anonyme' =>'L\'auteur "anonyme" est l\'auteur au nom du quel les r&eacute;dacteurs publieront leurs articles. Cr&eacute;ez cet auteur dans votre liste d\'auteur (remplissez uniquement le champ "Signature" et laissez son statut en "r&eacute;dacteur"), puis s&eacute;lectionnez le ci-dessous.',
-'expliq_auteur_squelette' => 'Afin de r&eacute;cup&eacute;rer les donn&eacute;es d\'identification du r&eacute;dacteur, vous pouvez utiliser dans une boucle ARTICLES la balise EXTRA avec le filtre OP_pseudo ou OP_mail.',
-'expliq_composition_article' => 'Un article peut &ecirc;tre compos&eacute; de plusieurs champs qui ne sont pas forc&eacute;ment utilis&eacute; par tous les sites. Vous pouvez donc activer ou pas les champs ci-dessous. L\'espace de r&eacute;daction ne proposera aux r&eacute;dacteurs que les champs coch&eacute;s (ainsi que, \'&eacute;videmment, le titre et le texte de l\'article).',
-'expliq_options' => 'Ces options permettre d\'&eacute;tendre ou de restreindre les fonctionnalit&eacute;s du plugin "Publication Ouverte". Les options coch&eacute;es seront disponibles dans l\'espace de r&eacute;daction',
-'expliq_agenda' => 'Si vous cochez l\'une des options "gestion de Agenda du plugin Publication Ouverte", le plugin "Publication Ouverte" proposera aux r&eacute;dacteurs de publier leurs articles sous forme de "date" dans l\'agenda.<br />Il s\'agit en r&eacute;alit&eacute; soit de publier le contenu de l\'article sous forme de br&egrave;ve dans une rubrique sp&eacute;cifique, soit de publier  l\'article dans une rubrique sp&eacute;cifique sans transformation en br&egrave;ve.<br /> La premi&egrave;re m&eacute;thode correspond au m&eacute;canisme des version pr&eacute;c&eacute;dente du plugin, la seconde permet de transf&eacute;rer rapidement un &eacute;venement de l\'agenda vers une autre rubrique.',
-'expliq_statut' => 'Une fois que le r&eacute;dacteur a valid&eacute; son article, celui-ci appara&icirc;tra dans l\'espace priv&eacute;e de votre site avec le statut suivant :',
-'expliq_posttraitement' => 'Il s\'agit ici d\'effectuer des traitements de protection sur l\'article. Ces options s\'appliqueront apr&egrave;s la validation de l\'article par le r&eacute;dacteur.',
-'expliq_renvois' => 'Lorsqu\'un r&eacute;dacteur valide un article ou abandonne, le formulaire affiche un message et redirige le r&eacute;dacteur au bout de quelques secondes vers une autre page du site. Les options ci-dessous permettent de configurer cela. Attention, il faut indiquer des urls de type : &laquo; /spip.php?page=ma_page &raquo;, le plugin compl&eacute;tera automatiquement l\'url.',
+
+
+
+
+
+
+
+
+
 'exemple_trois_auteurs' => 'Exemple avec trois auteurs :',
 'expliq_balise' => 'le code donn&eacute; en-dessous de votre image est a placer dans le texte de votre article si vous souhaitez inclure l\'image ou la vignette du document dans votre texte (right, center, left renseigne l\'alignement que prendra votre image  ou vignette).',
 'erreur_die' => 'Veuillez effectuer la configuration du plugin openPublishing.',
@@ -93,13 +173,9 @@ pour le retrouver lors d\'une recherche par th&eacute;matique.',
 'erreur_upload' => 'erreur d\'upload, le fichier temporaire est introuvable, il ce peut que vous tentiez d\'uploader un fichier trop volumineux. La taille maximale autoris&eacute;e est de 5 Mo',
 'erreur_extension' => 'erreur d\'upload. L\'extention de votre fichier n\'est pas autoris&eacute;e ...',
 'expliq_spip_auteur' => 'Vous &ecirc;tes actuellement logg&eacute;. Si vous voulez publier cet article de mani&egrave;re anonyme, cochez la case ci-dessous.',
-'expliq_groupes' => 'Si vous avez activ&eacute; l\'option "permettre aux r&eacute;dacteurs de choisir leurs mots-cl&eacute;s", vous pouvez alors choisir les diff&eacute;rents groupes de mot-cl&eacute;s qui leur serons propos&eacute;s. Cochez ou d&eacute;cochez les groupes de mots-cl&eacute;s i-dessous.',
 
-// G
-'gestion_rubrique' => 'Gestion des rubriques',
-'gestion_auteur' => 'l\'auteur "anonyme"',
-'gestion_agenda' => 'Gestion de l\'agenda',
-'gestion_renvois' => 'Gestion des renvois',
+
+
 
 // L
 'logo_article' => 'Le logo de votre article',
@@ -107,37 +183,23 @@ pour le retrouver lors d\'une recherche par th&eacute;matique.',
 'logo_existe_deja' =>'Le logo existe d&eacute;j&agrave; !',
 
 // O
-'options_dispos' => 'Les options disponibles',
-'option_motclef' => 'Permettre aux r&eacute;dacteurs de choisir les mots clefs',
+
+
 'option_tagmachine' => 'Permettre aux r&eacute;dacteurs d\'utiliser le plugin tag-machine',
-'option_document' => 'Permettre aux r&eacute;dacteurs d\'inclure des documents dans l\'article',
-'option_logo' => '... de type "logo"',
-'option_auteur_spip' => 'Permettre aux r&eacute;dacteurs enregistr&eacute;s en tant que "auteur Spip" de publier les articles en leur nom',
-'option_doc_distant' => 'Permettre aux r&eacute;dacteurs d\'inclure des documents distants',
-'option_authentification' => 'Permettre aux r&eacute;dacteurs de s\'identifier (mail et pseudo).',
-'option_docimage' => '... de type "image"',
-'option_docdocument' => '... de type "document"',
-'option_docauto' => 'imposer un type de document automatiquement (image, document ou logo).',
+
 'op_base_titre' => 'openPublishing : base de donn&eacute;e',
 
 // P
 'premiere_fois' => 'C\'est la premi&egrave;re fois que vous installez le plugin "Publication Ouverte" (anciennement openPublishing), et vous l\'utilisez pour la premi&egrave;re fois.',
-'post_traitement' => 'Post-traitement',
-'post_majuscule' => 'Autoriser les majuscules dans les titres',
-'post_antispam' => 'Protection anti-spam sur les adresses mails',
-'post_char' => 'caract&egrave;res',
-'post_taille_min' => 'Taille minimal du titre :',
-'post_pipeline' => 'Activer/d&eacute;sactiver l\'interactivit&eacute; avec les autres plugins (cf. documentation sur spip-contrib)',
-'post_notification' => 'Activer la notification mail lors de la publication des articles (vous devez avoir activ&eacute; "Suivi de l\'activit&eacute; &eacute;ditoriale" dans votre configuration SPIP)',
+
+
+
+
+
 
 // R
 'rien_a_faire' => 'Vous n\'avez rien &agrave; faire (r&eacute;jouissez vous !), ne touchez surtout pas aux options ci-dessous, celles ci concernent les personnes ayant install&eacute;es une version du plugin openPublishing, et mettant &agrave; jour leur plugin.',
-'revenir_haut' => 'Revenir en haut.',
-'renvois_url_validation' => 'Url de retour en cas de validation',
-'renvois_url_abandon' => 'Url de retour en cas d\'abandon',
-'renvois_texte_abandon' => 'Texte en cas d\'abandon',
-'renvois_texte_validation' => 'Texte en cas de validation',
-'renvois_temps' => 'Temps d\'attente avant le renvoi (exprim&eacute; en secondes)',
+
 'retour' => 'Retour',
 
 // S
@@ -146,23 +208,18 @@ pour le retrouver lors d\'une recherche par th&eacute;matique.',
 'sup_auteur_anonymous' => 'Supprimez l\'auteur portant le num&eacute;ro id 999',
 'sup_table' => 'Supprimer les tables obsol&eacute;tes (op_config et op_rubriques)',
 'sup_logo' => 'Supprimer le logo',
-'statut_article' => 'Statut des articles',
-'statut_en_redaction' => 'En R&eacute;daction',
-'statut_proposer' => 'Proposer &agrave; la validation',
-'statut_valide' => 'Valid&eacute;',
 
 // T
 'telecharge_install' => 'Vous venez de t&eacute;l&eacute;charger la version 0.4 du plugin "Publication Ouverte". Vous avez supprim&eacute; votre ancienne version openPublishing dans votre r&eacute;pertoire "plugins/" et vous l\'avez remplac&eacute; par celle-ci.',
-'titre_rubrique_op' => 'Gestion des rubriques "Publication Ouverte"',
-'titre_auteur_anonyme' => 'L\'auteur "anonyme"',
-'titre_composition_article' => 'Composition d\'un article',
-'titre_options' => 'Options disponibles aux r&eacute;dacteurs',
-'titre_agenda_op' => 'Gestion de l\'agenda par le plugin "Publication Ouverte"',
-'titre_statut_op' => 'Statut des articles apr&egrave;s la r&eacute;daction',
-'titre_posttraitement' => 'Post-traitement des articles',
-'titre_renvois' => 'Gestion des renvois',
+
+
+
+
+
+
+
 'titre_doc' => 'Titre',
-'titre_groupes' => 'Choix des groupes de mot-cl&eacute;s a utiliser',
+
 'transfert_auteurs' => 'Mettre &agrave; jours les champs extra de la table spip_articles.',
 'transfert_auteurs_suite' => '(&agrave; partir des informations de la table spip_op_auteurs).',
 'telecharger_document' => 'T&eacute;l&eacute;chargez votre document',
@@ -170,14 +227,9 @@ pour le retrouver lors d\'une recherche par th&eacute;matique.',
 'type_document' => 'Le type de votre document',
 
 // U
-'utiliser_surtitre' => 'Utiliser le champ Sur-titre',
-'utiliser_soustitre' => 'Utiliser le champ Sous-titre',
-'utiliser_chapo' => 'Utiliser le champ Chapeau',
-'utiliser_descriptif' => 'Utiliser le champ Descriptif',
-'utiliser_ps' => 'Utiliser le champ Post-Scriptum',
+
 'utiliser_agenda' => 'utiliser la gestion Agenda du plugin "Publication Ouverte"',
-'utiliser_agenda_breve' => 'utiliser la gestion Agenda "Publication Ouverte" (&eacute;v&eacute;nements sous forme de br&egrave;ves).',
-'utiliser_agenda_article' => 'utiliser la gestion Agenda "Publication Ouverte" (&eacute;v&eacute;nements sous forme d\'articles).',
+
 'utiliser_article_agenda' => 'utiliser des articles post-dat&eacute;',
 
 
@@ -259,7 +311,7 @@ pour le retrouver lors d\'une recherche par th&eacute;matique.',
 'info_statut' => 'Statut des articles : ',
 'info_motclefstag' => 'Gestion des mots-cl&eacute;s',
 'info_tagmachine' => 'Plugin Tag Machine : ',
-'info_motclefs' => 'Mots-cl&eacute;s : ',
+
 'info_minlen' => 'Longueur minimal du titre : ',
 'info_traitement' => 'Post-traitement',
 'info_titre' => 'Titre en minuscule : ',

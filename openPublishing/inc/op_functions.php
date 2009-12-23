@@ -3,12 +3,46 @@
 /* Ce fichier contient toutes les fonctions utilisé par la balise #FORMULAIRE_ARTICLE
  */
 
+// fonction insérant les mots clés pour un article
+function OP_insert_mots($mots,$id_article)
+{
+	sql_delete( 'spip_mots_articles', 'id_article = '.sql_quote($id_article));
+
+	if (is_array($mots))
+	{	
+		foreach($mots as $mot)
+		{
+			//protection contre mots-clefs vide
+			$row = sql_fetch(sql_select(
+				array('titre'),
+				array('spip_mots'),
+				array('id_mot='.$mot.' LIMIT 1'))
+				);
+	
+			$titremot = $row['titre'];
+	
+			if (!(strcmp($titremot,"")==0)) {
+				if ($mot) {
+					// on lie l'article aux mots clefs choisis
+					sql_insertq(
+						'spip_mots_articles',
+						array(
+							'id_mot' => $mot,
+							'id_article' => $id_article
+						)
+					);
+				}
+			}
+		}
+	}
+}
+
 // fonction testant la validite de la configuration du plugin
 // prend en entree le tableau de configuration
 // retourne un tableau contenant deux valeurs :
 //   - code : si true, la configuration est valide, sinon elle ne l'est pas.
 //   - message : les messages explicatif pour rendre la configuration valide.
-function test_configuration($config)
+function OP_test_configuration($config)
 {
 	$tab = array(
 		'code' => false,

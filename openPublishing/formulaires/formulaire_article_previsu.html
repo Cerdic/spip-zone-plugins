@@ -1,7 +1,7 @@
 #CACHE{0}
 
 <p>
-<fieldset><legend><:opconfig:previsualisation:></legend>
+<fieldset style="background-color:#eee;"><legend><:opconfig:previsualisation:></legend>
 
 [<p><b>&nbsp;&nbsp;(#ENV*{surtitre})</b></p>>]
 [<p><b>&nbsp;&nbsp;(#ENV*{titre})</b></p>]
@@ -16,11 +16,31 @@
 
 [<p>(#ENV*{ps})</p>]
 
+
+<div style="border:1px dashed #000; background-color:#fff; margin:5px; padding-left:5px;">
 <p>
-	le&nbsp;[(#ENV*{date_redac}|affdate)][, <:par_auteur:> (#LESAUTEURS)]
+	publi&eacute; le&nbsp;[(#ENV*{date_redac}|affdate)][, <:par_auteur:> (#LESAUTEURS)]
 		[, &nbsp;Auteur : (#ENV*{nom_inscription})]
 		[, &nbsp;Mail : (#ENV*{mail_inscription})]
 </p>
+
+<p>
+	<:opconfig:info_motclefs:>
+	<BOUCLE_groupes(GROUPES_MOTS){openKey}>	
+		<BOUCLE_mots(MOTS){par titre}{id_groupe}>
+			<span style="[(#ENV*{mots_#ID_MOT}|!={yes}|?{display:none;})]">#TITRE</span>&nbsp;
+		</BOUCLE_mots>
+	</BOUCLE_groupes>
+</p>
+
+<p>
+	<:opconfig:info_rubrique:>
+	<BOUCLE_rubrique(RUBRIQUES){openPublishing}{tout}>
+		<span style="[(#ENV**{id_rubrique}|!={#ID_RUBRIQUE}|?{display:none;})]">#TITRE</span>
+	</BOUCLE_rubrique>
+</p>
+</div>
+
 
 </fieldset>
 </p>

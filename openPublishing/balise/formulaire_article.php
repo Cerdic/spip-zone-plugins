@@ -51,7 +51,7 @@ $config = lire_config('op');
  * si celle-ci n'est pas valide, alors on sort en affichant les messages d'aides
  */
 
-$ret = test_configuration($config);
+$ret = OP_test_configuration($config);
 if (!$ret['code'])
 {
 	$message = '<p>'._T('opconfig:erreur_configuration').'</p>';
@@ -489,6 +489,12 @@ if(!empty($variables['actions']['valider'])) {
 
 		// préparation de la mise en base de donnée
 
+
+		// si la configuration autorise les auteurs spip
+		// on lie l'article aux éventuels mots-clés choisi par l'utilisateur :
+		if ($config['MotCle'] == 'yes') OP_insert_mots($variables['champs_aux']['mots'],$variables['champs_pri']['id_article']);
+
+
 		// on recupere le secteur et la langue associée
 		$row = sql_fetch(sql_select(
 			array('lang, id_secteur'),
@@ -670,6 +676,9 @@ $variables = pipeline('OP_action', array(
 			'data'=>$variables
 			));
 
+// si la configuration autorise les auteurs spip
+// on lie l'article aux éventuels mots-clés choisi par l'utilisateur :
+if ($config['MotCle'] == 'yes') OP_insert_mots($variables['champs_aux']['mots'],$variables['champs_pri']['id_article']);
 
 if ($config['AuteurSpip'] == 'yes') { // si la configuration autorise les auteurs spip
 	// l'auteur est identifié et a coché la case Auteur SPIP
@@ -699,53 +708,35 @@ if(!empty($variables['actions']['previsualiser'])) {
 		$variables['champs_pri']['mess_error'] = _T('opconfig:erreur_min_len') . $config['TitreMin'] . _T('opconfig:caracteres');
 	}
 
-	
-	// on rempli le formulaire de prévisualisation
-	$variables['champs_pri']['formulaire_article_previsu'] = 
-		inclure_balise_dynamique(
-			array('formulaires/formulaire_article_previsu', 0,
-				array(
-					'date_redac' => $date_redac,
-					'surtitre' => interdire_scripts(typo($variables['champs_pri']['surtitre'])),
-					'soustitre' => interdire_scripts(typo($variables['champs_pri']['soustitre'])),
-					'chapo' => propre($variables['champs_pri']['chapo']),
-					'descriptif' => propre($variables['champs_pri']['descriptif']),
-					'ps' => propre($variables['champs_pri']['ps']),
-					'titre' => interdire_scripts(typo($variables['champs_pri']['titre'])),
-					'texte' => propre($variables['champs_pri']['texte']),
-					'nom_inscription' => interdire_scripts(typo($variables['champs_pri']['nom_inscription'])),
-					'mail_inscription' => interdire_scripts(typo($variables['champs_pri']['mail_inscription']))
-				)
-			), false);
-}
+	// préparation du tableau contenant les variables d'environnement
+	$tab_env  = array(
+		'date_redac' => $date_redac,
+		'surtitre' => interdire_scripts(typo($variables['champs_pri']['surtitre'])),
+		'soustitre' => interdire_scripts(typo($variables['champs_pri']['soustitre'])),
+		'chapo' => propre($variables['champs_pri']['chapo']),
+		'descriptif' => propre($variables['champs_pri']['descriptif']),
+		'ps' => propre($variables['champs_pri']['ps']),
+		'titre' => interdire_scripts(typo($variables['champs_pri']['titre'])),
+		'texte' => propre($variables['champs_pri']['texte']),
+		'nom_inscription' => interdire_scripts(typo($variables['champs_pri']['nom_inscription'])),
+		'mail_inscription' => interdire_scripts(typo($variables['champs_pri']['mail_inscription'])),
+		'id_rubrique' => $variables['champs_pri']['id_rubrique']
+	);
 
-// si l'auteur demande des mots-clefs
-if(!empty($variables['actions']['mots'])) {
-	if (!empty($variables['champs_aux']['motschoix'])) {
-		foreach($variables['champs_aux']['motschoix'] as $mot){
-			//protection contre mots-clefs vide
-			$row = sql_fetch(sql_select(
-				array('titre'),
-				array('spip_mots'),
-				array('id_mot='.$mot.' LIMIT 1'))
-				);
-
-			$titremot = $row['titre'];
-
-			if (!(strcmp($titremot,"")==0)) {
-				if ($mot) {
-					// on lie l'article aux mots clefs choisis
-					sql_insertq(
-						'spip_mots_articles',
-						array(
-							'id_mot' => $mot,
-							'id_article' => $variables['champs_pri']['id_article'])
-					);
-				}
-			}
+	// on ajoute aux variables d'environnement les mots-cles choisis
+	if (is_array($variables['champs_aux']['mots']))
+	{
+		foreach($variables['champs_aux']['mots'] as $mot)
+		{
+			$tab_env['mots_'.$mot] = 'yes';
 		}
 	}
+
+	// on rempli le formulaire de prévisualisation
+	$variables['champs_pri']['formulaire_article_previsu'] = 
+		inclure_balise_dynamique(array('formulaires/formulaire_article_previsu', 0, $tab_env ), false);
 }
+
 	
 // si l'auteur ajoute un documents
 if(!empty($variables['actions']['media'])) {
@@ -907,14 +898,18 @@ if ($config['DocInc'] == 'yes') {
 // Gestion des mot-clefs
 if ($config['MotCle'] == 'yes') {
 
+	// on ajoute aux variables d'environnement les mots-cles choisis
+	$tab_env = array();
+	if (is_array($variables['champs_aux']['mots']))
+	{
+		foreach($variables['champs_aux']['mots'] as $mot)
+		{
+			$tab_env['mots_'.$mot] = 'yes';
+		}
+	}
+
 	$variables['champs_pri']['formulaire_motclefs'] =
-		inclure_balise_dynamique(
-			array('formulaires/formulaire_motclefs', 0,
-				array(
-					'id_article' => $variables['champs_pri']['id_article'] ,
-					'bouton' => "Ajouter les nouveaux mot-clefs"
-				)
-			), false);
+		inclure_balise_dynamique(array('formulaires/formulaire_motclefs', 0, $tab_env), false);
 }
 
 if ($config['AuteurSpip'] == 'yes') {
