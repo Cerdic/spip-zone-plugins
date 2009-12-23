@@ -74,7 +74,7 @@ function compositions_cacher($liste=null){
 		include_spip('compositions_fonctions');
 		$liste = compositions_lister_disponibles('',false);
 	}
-	include_spip('inc/metas');
+	include_spip('inc/meta');
 	ecrire_meta('compositions_types',implode(',',array_keys($liste)));
 	spip_log('compositions: maj des compositions_types ['.$GLOBALS['meta']['compositions_types'].']');
 }
