@@ -50,7 +50,7 @@ function catalogue_declarer_tables_principales($tables_principales){
 		"PRIMARY KEY"	=> "id_variante",
 		);
 	
-	$tables_principales['cat_familles'] =
+	$tables_principales['familles'] =
 		array('field' => &$cat_familles, 'key' => &$cat_familles_key);
 		
 	$tables_principales['cat_produits'] =
@@ -64,12 +64,15 @@ function catalogue_declarer_tables_principales($tables_principales){
 
 // xxx_declarer_tables_interfaces est l'endroit ou l'on indique les raccourcis à utiliser comme table de boucle SPIP
 function catalogue_declarer_tables_interfaces($interface){
-	$interface['table_des_tables']['cat_familles'] = 'cat_familles';
+	$interface['table_des_tables']['familles'] = 'cat_familles';
+	// $interface['table_des_tables']['cat_familles'] = 'cat_familles';
 	$interface['table_des_tables']['cat_produits'] = 'cat_produits';
 	$interface['table_des_tables']['cat_variantes'] = 'cat_variantes';
 	$interface['table_des_traitements']['titre']['cat_familles'] = _TRAITEMENT_TYPO;
 	$interface['table_des_traitements']['titre']['cat_produits'] = _TRAITEMENT_TYPO;
 	$interface['table_des_traitements']['titre']['cat_variantes'] = _TRAITEMENT_TYPO;
+	
+	$interface['table_des_traitements']['descriptif'][] = _TRAITEMENT_TYPO;
 	
 	$interface['tables_jointures']['spip_tickets_forum'][] = 'tickets';
 	

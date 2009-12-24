@@ -1,16 +1,48 @@
-[(#AUTORISER{voir, catalogue})
-	<h1><:catalogue:liste_des_familles:></h1>
-	<div class='ajax'>
-	<INCLURE{fond=inc/liste_familles,env,ajax} />
-	</div>
-	<!--#navigation-->
-	<div class='cadre cadre-info'>
-		<p><:catalogue:description_famille:></p>
-		[(#AUTORISER{modifier, catalogue})
-			[(#URL_ECRIRE{catalogue_edit}
-				|parametre_url{new,oui}
-				|icone{<:catalogue:action_ajouter:>, #CHEMIN{img/catalogue_24x24.jpg}, center, creer.gif})]
-		]
-	</div>
-	<!--/#navigation-->
-]
+
+
+<fieldset class="cat">
+
+	<legend>Familles</legend>
+	
+	<BOUCLE_f(CAT_FAMILLES)>
+	<dl>
+		<dt>#TITRE</dt>
+		<dd>#DESCRIPTIF</dd>
+		
+		<B_produits>
+		<dd>
+		<fieldset>
+			<legend>Produits</legend>
+			<BOUCLE_produits(CAT_PRODUITS){id_famille}>
+			<dl>
+				<dt>#TITRE</dt>
+				<dd>#DESCRIPTIF</dd>
+				
+				<B_variantes>
+				<dd>
+				<BOUCLE_variantes(CAT_VARIANTES){id_produit}>
+				<dl>
+					<dt>#TITRE</dt>
+					<dd>#DESCRIPTIF</dd>
+					<dd>#PRIX_HT</dd>
+				</dl>
+				</BOUCLE_variantes>
+				</dd>
+				</B_variantes>
+				<//B_variantes>
+				
+			</dl>			
+			</BOUCLE_produits>
+		</dd>
+		</B_produits>
+		</B_produits>
+		Aucun produit trouvé
+		<//B_produits>
+		
+	</dl>
+	</BOUCLE_f>
+	</B_f>
+	Aucune famille trouvée
+	<//B_f>
+	
+</fieldset>
