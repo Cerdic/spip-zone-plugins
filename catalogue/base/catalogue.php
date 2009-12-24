@@ -81,13 +81,9 @@ function catalogue_declarer_tables_interfaces($interface){
 	 * Objectif : autoriser les traitements SPIP sur certains champs texte...
 	 *
 	 */
-	$interface['table_des_traitements']['titre']['cat_familles'] = _TRAITEMENT_TYPO;
-	$interface['table_des_traitements']['titre']['cat_produits'] = _TRAITEMENT_TYPO;
-	$interface['table_des_traitements']['titre']['cat_variantes'] = _TRAITEMENT_TYPO;
+	$interface['table_des_traitements']['TITRE'][] = _TRAITEMENT_TYPO;
+	$interface['table_des_traitements']['DESCRIPTIF'][] = _TRAITEMENT_RACCOURCIS;
 
-	$interface['table_des_traitements']['descriptif']['cat_familles'] = _TRAITEMENT_TYPO;
-	$interface['table_des_traitements']['descriptif']['cat_produits'] = _TRAITEMENT_TYPO;
-	$interface['table_des_traitements']['descriptif']['cat_variantes'] = _TRAITEMENT_TYPO;
 	
 	return $interface;
 }
