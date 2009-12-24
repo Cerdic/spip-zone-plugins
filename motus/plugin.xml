@@ -1,0 +1,34 @@
+<plugin>
+	<nom>Motus : groupes de mots par rubrique</nom>
+	<auteur>Matthieu Marcillaud [->magraine.net]</auteur>
+	<licence>GNU/GPL</licence>
+	<version>0.1</version>
+	<version_base>0.1</version_base>
+	<description>
+	Ce plugin permet de restreindre dans l'interface priv&eacute;e
+	l'ajout des certains groupes de mots
+	&agrave; certaines rubriques (et leurs enfants et objets).
+
+	Ce qui peut faciliter la prise en main d'un site par des r&eacute;dacteurs
+	en n'affichant uniquement les groupes de mots utiles
+	sur un espace d&eacute;termin&eacute;.
+	</description>
+	<etat>test</etat>
+	<prefix>motus</prefix>
+	
+	<necessite id="cextras" version="[0.7;]" />
+	<necessite id="saisies" version="[1.6.6;]" />
+	<necessite id="spip_bonux" version="[1.8.6;]" />
+
+	<install>base/motus_install.php</install>
+	
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>motus_autorisations.php</inclure>
+	</pipeline>
+		
+	<pipeline>
+		<nom>declarer_champs_extras</nom>
+		<inclure>base/motus.php</inclure>
+	</pipeline>
+</plugin>
