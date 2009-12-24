@@ -671,7 +671,7 @@ add_outil( array(
 	'description' => '<:SPIP_liens::>'.(defined('_SPIP19300')?'<:SPIP_liens:1:>':''),
 	'code:options' => "%%radio_target_blank3%%\n%%url_glossaire_externe2%%",
 	'code:jq_init' => 'if(%%radio_target_blank3%%) { if(!cs_prive) jQuery("a.spip_out,a.spip_url,a.spip_glossaire",this).attr("target", "_blank"); }',
-	'code:css' => defined('_SPIP19300')?'[[%enveloppe_mails%]]':'',
+	'code:css' => defined('_SPIP19300')?'[[%enveloppe_mails%]]':NULL,
 ));
 
 //-----------------------------------------------------------------------------//
