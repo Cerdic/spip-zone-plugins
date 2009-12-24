@@ -20,18 +20,22 @@ function catalogue_peupler_base() {
 	sql_insertq_multi('cat_produits', array(
 		array(
 			'id_produit' => 1,
+			'id_famille' => 1,
 			'titre' => 'New Frontiers of Antitrust auto'
 			),
 		array(
 			'id_produit' => 2,
+			'id_famille' => 2,
 			'titre' => 'Formule voyage + s&eacute;jour semaine + congr&egrave;s'
 			),
 		array(
 			'id_produit' => 3,
+			'id_famille' => 2,
 			'titre' => 'Formule voyage + s&eacute;jour weekend + congr&egrave;s'
 			),
 		array(
 			'id_produit' => 4,
+			'id_famille' => 2,			
 			'titre' => 'Formule Full-Pass congr&egrave;s'
 			)
 		)
