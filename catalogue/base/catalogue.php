@@ -51,13 +51,13 @@ function catalogue_declarer_tables_principales($tables_principales){
 		);
 	
 
-	$tables_principales['spip_cat_familles'] =
+	$tables_principales['cat_familles'] =
 		array('field' => &$cat_familles, 'key' => &$cat_familles_key);
 		
-	$tables_principales['spip_cat_produits'] =
+	$tables_principales['cat_produits'] =
 		array('field' => &$cat_produits, 'key' => &$cat_produits_key);
 
-	$tables_principales['spip_cat_variantes'] =
+	$tables_principales['cat_variantes'] =
 		array('field' => &$cat_variantes, 'key' => &$cat_variantes_key);
 				
 	return $tables_principales;
@@ -66,22 +66,37 @@ function catalogue_declarer_tables_principales($tables_principales){
 // xxx_declarer_tables_interfaces est l'endroit ou l'on indique les raccourcis à utiliser comme table de boucle SPIP
 function catalogue_declarer_tables_interfaces($interface){
 	
+	// $tables_interfaces['table_des_tables']['nouvelletable'] = 'nouvelleboucle';
+	
 	/*
-	 * Objectif : pouvoir utiliser des boucles "FAMILLES"
+	 * Objectif : pouvoir utiliser les noms de boucles "FAMILLES", "PRODUITS", "VARIANTES"...
 	 *
 	 */
-	$interface['table_des_tables']['familles'] = 'cat_familles';
-	$interface['table_des_tables']['cat_produits'] = 'cat_produits';
-	$interface['table_des_tables']['cat_variantes'] = 'cat_variantes';
+	$interface['table_des_tables']['familles'] = 'familles';
+	$interface['table_des_tables']['produits'] = 'produits';
+	$interface['table_des_tables']['variantes'] = 'variantes';
+	
+	
+	/*
+	 * Objectif : autoriser les traitements SPIP sur certains champs texte...
+	 *
+	 */
 	$interface['table_des_traitements']['titre']['cat_familles'] = _TRAITEMENT_TYPO;
 	$interface['table_des_traitements']['titre']['cat_produits'] = _TRAITEMENT_TYPO;
 	$interface['table_des_traitements']['titre']['cat_variantes'] = _TRAITEMENT_TYPO;
-	
-	$interface['table_des_traitements']['descriptif'][] = _TRAITEMENT_TYPO;
-	
-	$interface['tables_jointures']['spip_tickets_forum'][] = 'tickets';
+
+	$interface['table_des_traitements']['descriptif']['cat_familles'] = _TRAITEMENT_TYPO;
+	$interface['table_des_traitements']['descriptif']['cat_produits'] = _TRAITEMENT_TYPO;
+	$interface['table_des_traitements']['descriptif']['cat_variantes'] = _TRAITEMENT_TYPO;
 	
 	return $interface;
+}
+
+function boucle_FAMILLES($id_boucle, &$boucles) {
+        $boucle = &$boucles[$id_boucle];
+        $id_table = $boucle->id_table;
+        $boucle->from[$id_table] =  "zozo";  
+        return calculer_boucle($id_boucle, $boucles);
 }
 
 

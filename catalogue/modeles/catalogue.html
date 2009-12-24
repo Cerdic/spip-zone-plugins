@@ -1,13 +1,14 @@
 
+<!-- squelette modeles/catalogue.html -->
 
 <fieldset class="cat">
 
 	<legend>Familles</legend>
 	
-	<BOUCLE_f(CAT_FAMILLES)>
+	<BOUCLE_familles(CAT_FAMILLES){tout}>
 	<dl>
-		<dt>#TITRE</dt>
-		<dd>#DESCRIPTIF</dd>
+		[<dt>(#TITRE)</dt>]
+		[<dd>(#DESCRIPTIF)</dd>]
 		
 		<B_produits>
 		<dd>
@@ -15,16 +16,16 @@
 			<legend>Produits</legend>
 			<BOUCLE_produits(CAT_PRODUITS){id_famille}>
 			<dl>
-				<dt>#TITRE</dt>
-				<dd>#DESCRIPTIF</dd>
+				[<dt>(#TITRE)</dt>]
+				[<dd>(#DESCRIPTIF)</dd>]
 				
 				<B_variantes>
 				<dd>
 				<BOUCLE_variantes(CAT_VARIANTES){id_produit}>
 				<dl>
-					<dt>#TITRE</dt>
-					<dd>#DESCRIPTIF</dd>
-					<dd>#PRIX_HT</dd>
+					[<dt>(#TITRE)</dt>]
+					[<dd>(#DESCRIPTIF)</dd>]
+					[<dd>(#PRIX_HT)</dd>]
 				</dl>
 				</BOUCLE_variantes>
 				</dd>
@@ -33,16 +34,16 @@
 				
 			</dl>			
 			</BOUCLE_produits>
+		</fieldset>
 		</dd>
-		</B_produits>
 		</B_produits>
 		Aucun produit trouvé
 		<//B_produits>
 		
 	</dl>
-	</BOUCLE_f>
-	</B_f>
+	</BOUCLE_familles>
+	</B_familles>
 	Aucune famille trouvée
-	<//B_f>
+	<//B_familles>
 	
 </fieldset>
