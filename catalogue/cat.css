@@ -1,0 +1,11 @@
+fieldset.cat,
+fieldset.cat fieldset 		{ border:1px solid white !important; padding:12px; }
+fieldset.cat dt 			{ font-weight:bold;}
+fieldset.cat dl 			{ clear:both; background:none; paddin:0; margin:0; }
+fieldset.cat dl:after 		{ }
+fieldset.cat dd 			{ float:left; line-height:19px; padding:auto; margin:0 1%;}
+fieldset.cat dd.radio 		{ width:5%}
+fieldset.cat dd.desc 		{ width:77%}
+fieldset.cat dd.prix 		{ width:12%; text-align:right;}
+
+.italique 					{font-style:italic}

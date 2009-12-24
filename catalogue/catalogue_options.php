@@ -1,3 +1,7 @@
 <?php
-// echo('<script type="text/javascript">alert(\'Je passe dans catalogue options\');</script>');
+/**
+ * Plugin Catalogue pour Spip 2.0
+ * Licence GPL (c) 2009 - Ateliers CYM
+ */
+
 ?>
