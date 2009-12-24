@@ -1,6 +1,6 @@
 <?php
 
-function gma_autoriser(){}
+function motus_autoriser(){}
 
 
 
