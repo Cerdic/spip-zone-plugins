@@ -27,8 +27,8 @@ function exec_cs_boite_rss_dist() {
 	// on cherche le flux rss toutes les _CS_RSS_UPDATE minutes
 	$force = _request('force')=='oui';
 	if(!$force) {
-		$lastmodified = @file_exists(_DIR_RSS_TMP)?@filemtime(_DIR_RSS_TMP):0;
-		if(time()-$lastmodified < _CS_RSS_UPDATE) lire_fichier(_DIR_RSS_TMP, $p);
+		$lastmodified = @file_exists(_CS_TMP_RSS)?@filemtime(_CS_TMP_RSS):0;
+		if(time()-$lastmodified < _CS_RSS_UPDATE) lire_fichier(_CS_TMP_RSS, $p);
 	}
 	if(strlen($p)) { ajax_retour($p); return; }
 	include_spip('inc/filtres');
@@ -66,7 +66,7 @@ function exec_cs_boite_rss_dist() {
 		._T('couteauprive:rss_actualiser').'</a> | <a href="'
 		._CS_RSS_SOURCE.'">'
 		._T('couteauprive:rss_source').'</a></p>';
-	if($c) ecrire_fichier(_DIR_RSS_TMP, $p);
+	if($c) ecrire_fichier(_CS_TMP_RSS, $p);
 	
 	ajax_retour($p);
 }

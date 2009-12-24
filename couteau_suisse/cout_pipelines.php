@@ -32,12 +32,14 @@ if(defined('_LOG_CS')) cs_log("couteau_suisse_install($action)");
 				if(strpos($meta, 'tweaks_') === 0) effacer_meta($meta);
 				if(strpos($meta, 'cs_') === 0) effacer_meta($meta);
 			}
-			ecrire_metas();
+			ecrire_metas(); # Pour SPIP 1.92
 			// effacement des repertoires temporaires
 			include_spip('inc/getdocument');
 			foreach(array(_DIR_CS_TMP, _DIR_VAR.'couteau-suisse') as $dir) 
 				if(@file_exists($dir)) effacer_repertoire_temporaire($dir);
-			@unlink(_DIR_RSS_TMP);
+			// fichier RSS temporaire
+			include_spip('cout_define');
+			@unlink(_CS_TMP_RSS);
 			// retrait de l'inclusion eventuelle dans config/mes_options.php
 			include_spip('cout_utils');
 			cs_verif_FILE_OPTIONS(false, true);
@@ -251,7 +253,7 @@ function couteau_suisse_porte_plume_lien_classe_vers_icone($flux){
 }
 
 // pipeline maison : pre-affichage de la description d'un outil
-// flux[0] est l'id de l'outil, flux[1] est le texte de description
+// flux['outil'] est l'id de l'outil, flux['texte'] est le texte de description
 function couteau_suisse_pre_description_outil($flux) {
 	global $cs_metas_pipelines;
 	if(isset($cs_metas_pipelines['pre_description_outil']))

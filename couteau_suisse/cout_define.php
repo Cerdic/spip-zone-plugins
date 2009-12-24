@@ -15,10 +15,12 @@ if(!defined("_ECRIRE_INC_VERSION")) return;
 @define('_URL_CONTRIB', 'http://www.spip-contrib.net/?article');
 // Revisions du CS
 @define('_URL_CS_PLUGIN_XML', 'http://zone.spip.org/trac/spip-zone/browser/_plugins_/couteau_suisse/plugin.xml?format=txt');
-// on met a jour le flux rss toutes les 2 heures
-// contrib ici qui devra passer en fond et utiliser le cache de SPIP !
+// On met a jour le flux rss toutes les 2 heures
 define('_CS_RSS_UPDATE', 2*3600);
 define('_CS_RSS_COUNT', 15);
+// Fichier 
+define('_CS_TMP_RSS', _DIR_TMP.'rss_couteau_suisse.html');
+
 
 // Qui sont les webmestres et les administrateurs ?
 function get_liste_administrateurs() {
