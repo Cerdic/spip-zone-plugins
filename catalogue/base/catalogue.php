@@ -50,13 +50,14 @@ function catalogue_declarer_tables_principales($tables_principales){
 		"PRIMARY KEY"	=> "id_variante",
 		);
 	
-	$tables_principales['cat_familles'] =
+
+	$tables_principales['spip_cat_familles'] =
 		array('field' => &$cat_familles, 'key' => &$cat_familles_key);
 		
-	$tables_principales['cat_produits'] =
+	$tables_principales['spip_cat_produits'] =
 		array('field' => &$cat_produits, 'key' => &$cat_produits_key);
 
-	$tables_principales['cat_variantes'] =
+	$tables_principales['spip_cat_variantes'] =
 		array('field' => &$cat_variantes, 'key' => &$cat_variantes_key);
 				
 	return $tables_principales;
@@ -69,12 +70,7 @@ function catalogue_declarer_tables_interfaces($interface){
 	 * Objectif : pouvoir utiliser des boucles "FAMILLES"
 	 *
 	 */
-
-	// $interface['table_des_tables']['familles'] = 'familles';
-	// $interface['table_des_tables']['cat_familles'] = 'cat_familles';
-	// $interface['table_des_tables']['cat_familles'] = 'familles';
 	$interface['table_des_tables']['familles'] = 'cat_familles';
-	
 	$interface['table_des_tables']['cat_produits'] = 'cat_produits';
 	$interface['table_des_tables']['cat_variantes'] = 'cat_variantes';
 	$interface['table_des_traitements']['titre']['cat_familles'] = _TRAITEMENT_TYPO;
