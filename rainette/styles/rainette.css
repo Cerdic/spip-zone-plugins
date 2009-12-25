@@ -5,8 +5,8 @@
 .rainette_infos {
 	float: left;
 	width: 400px;
-	background: #FFFFFF;
-	border: 2px solid #798F74;
+	background: #ffffff;
+	border: 2px solid #dddddd;
 	margin: 4px 0 17px 0;
 	padding: 0 0 5px 0;
 }
@@ -17,15 +17,15 @@
 .rainette_conditions {
 	float: left;
 	width: 400px;
-	background: #C9EFC2;
-	border: 2px solid #798F74;
-	margin: 0 0 20px 0;
+	background: #fcfcfc;
+	border: 2px solid #dddddd;
+	margin: 5px 0 20px 0;
 	padding:0 0 5px 0;}
 .rainette_conditions .statut {float: left; width: 260px;}
 .rainette_conditions .cadre {
 	float: left;
 	width: 234px;
-	border: 1px solid #AFCFA8;
+	border: 1px solid #dddddd;
 	background: #ffffff;
 	margin: 11px 0 0 11px;
 	padding:0 0 5px 0;}
@@ -58,24 +58,24 @@
 /* PREVISIONS: Styles utilises par le modele rainette_previsions, sur 1 jour presente en 2x12h */
 .rainette_previsions_2x12h {
 	float: left;
-	border: 2px solid #798F74;
-	border-right: 1px solid #798F74;
+	border: 2px solid #dddddd;
+	border-right: 1px solid #dddddd;
 	width: 596px;
-	margin: 0 0 20px 0;
+	margin: 5px 0 20px 0;
 }
 .rainette_previsions_2x12h .entete {
 	float: left;
 	height: 19px;
 	width: 297px;
 	font-weight: bold;
-	background: #C9EFC2;
-	border-bottom: 1px solid #798F74;
-	border-right: 1px solid #798F74;
+	background: #fcfcfc;
+	border-bottom: 1px solid #dddddd;
+	border-right: 1px solid #dddddd;
 	padding: 5px 0 0 0;
 	text-align: center;
 }
 .rainette_previsions_2x12h .cadre {float: left; background: #FFFFFF;}
-.rainette_previsions_2x12h .cellule {float: left; width: 297px; border-right: 1px solid #798F74;}
+.rainette_previsions_2x12h .cellule {float: left; width: 297px; border-right: 1px solid #dddddd;}
 .rainette_previsions_2x12h .contenu {float: left; width: 277px; margin: 5px 10px 10px 10px;}
 .rainette_previsions_2x12h .icone {float: left; width: 110px; height:110px; padding: 0 10px 0 10px;}
 .rainette_previsions_2x12h .t_reelle {
@@ -98,8 +98,8 @@
 .rainette_previsions_2x12h .details li {margin-left: 130px; clear:both;} 
 .rainette_previsions_2x12h .details li span {margin-left:-130px; float:left; display:inline; font-weight: bold;}
 .rainette_previsions_2x12h .maj {
-	border-top: 1px solid #798F74;
-	border-right: 1px solid #798F74;
+	border-top: 1px solid #dddddd;
+	border-right: 1px solid #dddddd;
 	color: #333333;
 	float: left;
 	font-size: 10px;
@@ -111,29 +111,29 @@
 /* PREVISIONS: Styles utilises par le modele rainette_previsions, sur x jours presente en 24h simple */
 .rainette_previsions_24h {
 	float: left;
-	border: 1px solid #798F74;
+	border: 1px solid #dddddd;
 	width: 120px;
-	margin: 0 5px 20px 0;
+	margin: 5px 5px 20px 0;
 }
 .rainette_previsions_24h .jour {
 	height: 19px;
 	font-weight: bold;
-	background: #C9EFC2;
+	background: #fcfcfc;
 	width: 120px;
-	border-bottom: 1px solid #798F74;
+	border-bottom: 1px solid #dddddd;
 	padding: 5px 0 0 0;
 	text-align: center;
 }
 .rainette_previsions_24h .date {
 	height: 19px;
 	font-weight: bold;
-	background: #C9EFC2;
+	background: #fcfcfc;
 	width: 120px;
-	border-bottom: 1px solid #798F74;
+	border-bottom: 1px solid #dddddd;
 	padding: 5px 0 0 0;
 	text-align: center;
 }
-.rainette_previsions_24h .contenu {width: 118px; border: 0; padding: 10px 0 10px 0; text-align: center;}
+.rainette_previsions_24h .contenu {width: 120px; border: 0; padding: 10px 0 10px 0; text-align: center;}
 .rainette_previsions_24h .icone {margin-bottom: 10px;}
 .rainette_previsions_24h .t_reelle {font-weight: bold; margin: 0 5px 10px 5px; min-height: 35px}
 .rainette_previsions_24h .resume {font-weight: bold; margin: 0 5px 10px 5px; min-height: 45px}

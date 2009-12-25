@@ -88,7 +88,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'meteo_8' => 'bruine vergla&ccedil;ante',
 	'meteo_9' => 'bruine',
 	'meteo_conditions' => 'conditions actuelles',
+	'meteo_consultation' => 'Consultez la m&eacute;t&eacute;o de @ville@',
 	'meteo_na' => 'inconnu',
+	'meteo_previsions_aujourdhui' => 'pr&eacute;visions pour aujourd\'hui',
+	'meteo_previsions_n_jours' => 'pr&eacute;visions &agrave; @nbj@ jours',
 	'meteo_previsions' => 'pr&eacute;visions du',
 
 	// N
