@@ -3,32 +3,63 @@
 // Sécurité
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// Lister les types d'entrée de menus disponibles dans les dossiers menus/
+/**
+ * Lister les types d'entrée de menus disponibles dans les dossiers menus/
+ *
+ * @staticvar array $resultats
+ * @param bool $informer
+ * @return array
+ */
 function menus_lister_disponibles($informer=true){
-	// rechercher les skel du type truc.html
-	$match = ".+[.]html$";
+	static $resultats = null;
 
-	// lister les entrées disponibles
-	$liste = find_all_in_path('menus/', $match);
-	$resultats = array();
-	if (count($liste)){
-		foreach($liste as $squelette=>$chemin) {
-			$type = preg_replace(',[.]html$,i', '', $squelette);
-			$dossier = str_replace($squelette, '', $chemin);
-			// On ne garde que les squelettes ayant un XML de config
-			if (file_exists("$dossier$type.xml")
-				and(
-					$entree = !$informer
-					or ($entree = menus_charger_infos($dossier.$type))
-				)
-			)
-				$resultats[$type] = $entree;
+	if (is_null($resultats[$informer])){
+		$resultats[$informer] = array();
+		// rechercher les skel du type truc.html
+		$match = ".+[.]html$";
+
+		// lister les entrées disponibles
+		$liste = find_all_in_path('menus/', $match);
+		if (count($liste)){
+			foreach($liste as $squelette=>$chemin) {
+				$type = preg_replace(',[.]html$,i', '', $squelette);
+				$dossier = str_replace($squelette, '', $chemin);
+				// On ne garde que les squelettes ayant un XML de config
+				if (file_exists("$dossier$type.xml")
+					AND (
+						$entree = !$informer OR ($entree = menus_charger_infos($dossier.$type))
+					)){
+					$resultats[$informer][$type] = $entree;
+				}
+			}
 		}
 	}
-	return $resultats;
+	return $resultats[$informer];
 }
 
- // Charger les informations contenues dans le xml d'une entrée de menu
+/**
+ * Decrire un type de menu
+ *
+ * @staticvar array $infos
+ * @param string $type
+ * @return array
+ */
+function menus_informer($type){
+	static $infos = array();
+	if (!isset($infos[$type])){
+		$fichier = find_in_path("menus/$type.html");
+		$infos[$type] = menus_charger_infos($fichier);
+	}
+	return $infos[$type];
+}
+
+/**
+ * Charger les informations contenues dans le xml d'une entrée de menu
+ *
+ * @param string $type
+ * @param string $info
+ * @return array
+ */
 function menus_charger_infos($type, $info=""){
 		// on peut appeler avec le nom du squelette
 		$fichier = preg_replace(',[.]html$,i','',$type).".xml";

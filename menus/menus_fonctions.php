@@ -5,14 +5,14 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function menus_type_entree($nom){
 	include_spip('inc/menus');
-	$dispo = menus_lister_disponibles();
-	return $dispo[$nom]['nom'];
+	$infos = menus_informer($nom);
+	return $infos['nom'];
 }
 
 function menus_type_refuser_sous_menu($nom){
 	include_spip('inc/menus');
-	$dispo = menus_lister_disponibles();
-	return $dispo[$nom]['refuser_sous_menu'];
+	$infos = menus_informer($nom);
+	return $infos['refuser_sous_menu'];
 }
 
 function menus_exposer($id_objet, $objet, $env, $on='on', $off=''){
