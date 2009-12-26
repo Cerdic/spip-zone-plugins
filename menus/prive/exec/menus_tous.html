@@ -3,18 +3,15 @@
 <p><:menus:editer_menus_explication:></p>
 
 <B_menus_principaux>
-<ul>
+<ul class="liste_items">
 	<BOUCLE_menus_principaux(MENUS){par titre}>
-	<li>
+	<li class="item">
 		<a href="[(#URL_ECRIRE{menus_editer}|parametre_url{id_menu,#ID_MENU})]">#TITRE (#IDENTIFIANT)</a>
 	</li>
 	</BOUCLE_menus_principaux>
 </ul>
 </B_menus_principaux>
 
-<a href="[(#URL_ECRIRE{menus_editer}|parametre_url{nouveau,oui})]" class="icone36" style="display:block; margin:1em auto;">
-	<img width="48" height="48" src="#CHEMIN{images/menus-nouveau-48.png}" />
-	<span><:menus:editer_menus_nouveau:></span>
-</a>
+[(#URL_ECRIRE{menus_editer}|parametre_url{nouveau,oui}|icone{<:menus:editer_menus_nouveau:>,#CHEMIN{images/menus-nouveau-24.png},#LANG_RIGHT,creer.gif})]
 
 <div class="nettoyeur" />
