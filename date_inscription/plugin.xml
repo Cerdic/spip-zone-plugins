@@ -20,5 +20,9 @@
 		<nom>formulaire_traiter</nom>
 		<inclure>date_inscription_pipelines.php</inclure>
 	</pipeline>
+	<pipeline>
+		<nom>afficher_contenu_objet</nom>
+		<inclure>date_inscription_pipelines.php</inclure>
+	</pipeline>
  	<necessite id='SPIP' version='[2.0.10;]' />
 </plugin>

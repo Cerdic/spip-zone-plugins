@@ -22,4 +22,20 @@ function date_inscription_formulaire_traiter($flux){
 	return $flux;
 }
 
+/**
+ * Afficher la date d'inscription sur la fiche de l'auteur
+ * @param array $flux 
+ */
+function date_inscription_afficher_contenu_objet($flux){
+	if ($flux['args']['type']=='auteur'
+		AND $id_auteur = $flux['args']['id_objet']
+		AND $date_inscription = sql_getfetsel('date_inscription','spip_auteurs','id_auteur='.intval($id_auteur))
+	){
+		$flux['data'] .= propre("<div>" . _T('date_inscription:date_inscription') . " : " . affdate($date_inscription) . "</div>");
+
+	}
+
+	return $flux;
+}
+
 ?>
