@@ -4,7 +4,9 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-'date_inscription' => 'Date d\'inscription'
+'date_inscription' => 'Date d\'inscription',
+
+'non_renseignee' => 'non renseign&eacute;e'
 
 );
 
