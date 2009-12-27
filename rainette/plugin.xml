@@ -1,6 +1,6 @@
 <plugin>
 	<nom>Rainette</nom>
-	<auteur>Cedric Morin et SarkASmeL, d'apr&egrave;s une id&eacute;e originale de Art&eacute;go et touti (plugin Grenouille)</auteur>
+	<auteur>Cedric Morin et Eric Lupinacci, d'apr&egrave;s une id&eacute;e originale de Art&eacute;go et touti (plugin Grenouille)</auteur>
 	<version>1.2</version>
 	<etat>stable</etat>
 	<licence>GPL 3</licence>
@@ -12,9 +12,11 @@ L'affichage des donn&eacute;es m&eacute;t&eacute;orologiques se fait principalem
 mod&egrave;les par d&eacute;faut comme {{rainette_previsions}} et {{rainette_conditions}}. Il est possible aussi d'afficher les informations sur la ville choisie soit via le mod&egrave;le {{rainette_infos}},
 soit via la balise {{RAINETTE_INFOS}}. Tous les affichages propos&eacute;s par Rainette sont personnalisables (ic&ocirc;nes, libell&eacute;s, unit&eacute;s, pr&eacute;sentation...).
 
+Une page &#171; Meteo &#187; compatible avec le squelette ZPIP est disponible et propose les conditions et pr&eacute;visions &agrave; 10 jours d'une ville donn&eacute;ee.
+
 Essayez le fichier {rainette_demo.html} pour des exemples d'utilisation et consultez le site SPIP-Contrib pour une documentation compl&egrave;te des fonctions de Rainette.
 	</description>
-	<lien>[Documentation sur SPIP-Contrib->http://www.spip-contrib.net/Rainette]</lien>
+	<lien>http://www.spip-contrib.net/Rainette</lien>
 	<prefix>rainette</prefix>
 	<icon>rainette-64.png</icon>
 	<fonctions>rainette_fonctions.php</fonctions>
