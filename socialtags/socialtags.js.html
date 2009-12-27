@@ -22,12 +22,15 @@ var cano = $('link['+jqss+'rel=canonical]')[0];
 var url = cano ? cano.href : document.location.href;
 var ul = $('<ul><\/ul>');
 var esc = function(x){return encodeURIComponent(x).replace(/\s/g,' ');};
+var ref = document.referrer.match(/^.*\/\/([^\/]+)\//);
+if (ref && ref[1].match(/\.facebook\./))
+	$.cookie('social_facebook', 1, { path: '/', expires: 30 }); // 30 jours
 
 $.each(socialtags, function(){ if (this.u) {
 	if (this.a == 'bookmark' && !document.all) return;
 
 	[(#CONFIG{socialtags/ifreferer}|?{"
-	if (!document.cookie.match('social_'+this.a+'=1')) return;"})]
+	if ($.cookie('social_'+this.a)!=1) return;"})]
 
 	$('<a rel="nofollow"><img class="socialtags-hovers" src="'+ this.i +'"\/><\/a>')
 	.attr('href',

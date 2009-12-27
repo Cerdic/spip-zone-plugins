@@ -6,6 +6,9 @@
 function socialtags_insert_head($flux){
 	$flux .= '<link rel="stylesheet" type="text/css" href="'.find_in_path('socialtags.css').'" media="all" />'."\n";
 
+	// on a besoin de jquery.cookie
+	if (!strpos($flux, 'jquery.cookie.js'))
+		$flux .= "<script type='text/javascript' src='".find_in_path('javascript/jquery.cookie.js')."'></script>\n";
 	$jsFile = generer_url_public('socialtags.js');
 	$flux .= "<script src='$jsFile' type='text/javascript'></script>\n";
 
