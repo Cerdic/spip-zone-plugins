@@ -43,7 +43,7 @@
 					},
 					style: {
 						tip: true,
-						name: 'cream' // Inherit from preset style
+						name: 'light' // Inherit from preset style
 						/*width: { max:220}*/
 					},
 					position: {
