@@ -17,6 +17,7 @@
 	</bouton>
 	<bouton id='theme21' parent='bando_configuration'>
 		<titre>zengarden:themes</titre>
+		<icone>images/themes-16.png</icone>
 		<url>zengarden</url>
 	</bouton>
 </plugin>
