@@ -7,7 +7,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'editer_menus_titre' => 'Menus du site',
 'editer_menus_explication' => 'Cr&eacute;ez et configurez ici les menus de votre site.',
 'editer_menus_nouveau' => 'Cr&eacute;er un nouveau menu',
-'editer_menus_editer' => '&Eacute;diter ce menu',
 'editer_menus_exporter' => 'Exporter ce menu',
 
 'erreur_autorisation' => 'Vous n\'&ecirc;tes pas autoris&eacute; &agrave; modifier les menus.',
@@ -31,12 +30,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'formulaire_ajouter_entree' => 'Ajouter une entr&eacute;e',
 'formulaire_modifier_entree' => 'Modifier cette entr&eacute;e',
 'formulaire_supprimer_entree' => 'Supprimer cette entr&eacute;e',
-'formulaire_supprimer_menu' => 'Supprimer le menu',
 'formulaire_supprimer_sous_menu' => 'Supprimer ce sous-menu',
 'formulaire_deplacer_haut' => 'D&eacute;placer vers le haut',
 'formulaire_deplacer_bas' => 'D&eacute;placer vers le bas',
 'formulaire_ajouter_sous_menu' => 'Cr&eacute;er un sous-menu',
-'formulaire_attacher_sous_menu' => 'Attacher un sous-menu &agrave; cette entr&eacute;e',
 'formulaire_facultatif' => 'Facultatif',
 
 'entree_choisir' => 'Choisissez le type d\'entr&eacute;e que vous voulez ajouter :',
@@ -49,7 +46,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_id_objet' => 'Num&eacute;ro',
 'entree_id_rubrique' => 'Num&eacute;ro de la rubrique parente',
 'entree_niveau' => 'Niveau des sous-rubriques',
-'entree_nombre' => 'Nombre de mots au maximum (0 pour infini)',
 'entree_nombre_articles' => 'Nombre d\'articles au maximum (0 par défaut)',
 'entree_page' => 'Nom de la page',
 'entree_parametres' => 'Liste des param&egrave;tres',
@@ -63,7 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_tri_alpha' => 'Crit&egrave;re de tri (alphab&eacute;tique)',
 
 'info_numero_menu' => 'MENU NUM&Eacute;RO :',
-'info_page_speciale' => 'Lien ver la page &#171; @page@ &#187;',
+'info_page_speciale' => 'Lien vers la page &#171; @page@ &#187;',
 'info_tri' => 'Tri :',
 'info_tri_alpha' => '(alphab&eacute;tique)',
 'info_tri_num' => '(num&eacute;rique)',
@@ -77,7 +73,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'nom_menu_mots' => 'Articles d\'un Mot-cl&eacute;',
 'nom_menu_objet' => 'Article, rubrique ou autre objet SPIP',
 'nom_menu_rubriques' => 'Liste ou arborescence de rubriques',
-'nom_menu_page_speciale' => 'Lien vers une page sp&eacute;ciale',
+'nom_menu_page_speciale' => 'Lien vers un squelette page',
 'nom_menu_secteurlangue' => 'Secteurs de langue',
 
 'description_menu_accueil' => 'Lien vers la page d\'accueil du site.',
@@ -87,7 +83,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'description_menu_mapage' => 'Si le visiteur est connect&eacute;, ajoute un lien vers sa page auteur.',
 'description_menu_mots' => 'Affiche automatiquement un menu listant les articles li&eacute;s au mot cl&eacute;.',
 'description_menu_objet' => 'Cr&eacute;e un lien vers un objet de SPIP : article, rubrique ou autre. Par d&eacute;faut, l\'entr&eacute;e aura le titre de l\'objet.',
-'description_menu_page_speciale' => 'Ajoute un lien vers une page sp&eacute;ciale accessible par une url du type <code>spip.php?page=nom&param1=xx&param2=yyy...</code> Ces pages sont souvent fournies par des plugins.',
+'description_menu_page_speciale' => 'Ajoute un lien vers un squelette page accessible par une url du type <code>spip.php?page=nom&param1=xx&param2=yyy...</code> Ces pages sont souvent fournies par des plugins.',
 'description_menu_rubriques' => 'Affiche une liste de rubriques et, si on veut, les sous-rubriques sur plusieurs niveaux. Par d&eacute;faut, affiche toutes les rubriques depuis la racine, tri&eacute;es par titre (num&eacute;riquement puis alphab&eacute;tiquement).',
 'description_menu_secteurlangue' => 'Cette entr&eacute;e est sp&eacute;cifique aux sites utilisant un secteur par langue. Elle affiche automatiquement un menu listant les rubriques du secteur correspondant &agrave; la langue de la page et, si on veut, les sous-rubriques sur plusieurs niveaux. Par d&eacute;faut, affiche toutes les rubriques depuis la racine, tri&eacute;es par titre (num&eacute;riquement puis alphab&eacute;tiquement).',
 );
