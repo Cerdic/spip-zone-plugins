@@ -51,6 +51,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_niveau' => 'Niveau des sous-rubriques',
 'entree_nombre' => 'Nombre de mots au maximum (0 pour infini)',
 'entree_nombre_articles' => 'Nombre d\'articles au maximum (0 par défaut)',
+'entree_page' => 'Nom de la page',
+'entree_parametres' => 'Liste des param&egrave;tres',
 'entree_sur_n_niveaux' => 'Sur @n@ niveau(x)',
 'entree_sur_n_mots' => '@n@ mots affich&eacute;(s)',
 'entree_sur_n_articles' => '@n@ articles affich&eacute;(s)',
@@ -61,6 +63,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_tri_alpha' => 'Crit&egrave;re de tri (alphab&eacute;tique)',
 
 'info_numero_menu' => 'MENU NUM&Eacute;RO :',
+'info_page_speciale' => 'Page sp&eacute;ciale &#171; @page@ &#187;',
 'info_tri' => 'Tri :',
 'info_tri_alpha' => '(alphab&eacute;tique)',
 'info_tri_num' => '(num&eacute;rique)',
@@ -73,6 +76,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'nom_menu_mapage' => 'Ma page',
 'nom_menu_mots' => 'Mots cl&eacute;s dynamiques',
 'nom_menu_objet' => 'Objet de SPIP',
+'nom_menu_page_speciale' => 'Page sp&eacute;ciale',
 'nom_menu_rubriques' => 'Rubriques dynamiques',
 'nom_menu_secteurlangue' => 'Secteurs de langue',
 
@@ -81,8 +85,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'description_menu_groupes_mots' => 'Affiche automatiquement un menu listant les mots du groupe et les articles liés. Par d&eacute;faut, affiche la liste des groupes de mots et les mots li&eacute;s. Si un squelette groupes_mots.html existe, le lien vers le groupe est utilis&eacute;.',
 'description_menu_lien' => 'Ajoute un lien arbitraire, en interne (URL relative) ou externe (http://...).',
 'description_menu_mapage' => 'Si le visiteur est connect&eacute;, ajoute un lien vers sa page auteur.',
-'description_menu_mots' => 'Affiche automatique un menu listant les articles li&eacute;s au mot cl&eacute;.',
+'description_menu_mots' => 'Affiche automatiquement un menu listant les articles li&eacute;s au mot cl&eacute;.',
 'description_menu_objet' => 'Cr&eacute;e un lien vers un objet de SPIP : article, rubrique ou autre. Par d&eacute;faut, l\'entr&eacute;e aura le titre de l\'objet.',
+'description_menu_page_speciale' => 'Ajoute un lien vers une page sp&eacute;ciale accessible par une url du type <code>spip.php?page=nom&param1=xx&param2=yyy...</code> Ces pages sont souvent fournies par des plugins.',
 'description_menu_rubriques' => 'Affiche automatiquement un menu listant les rubriques et, si on veut, les sous-rubriques sur plusieurs niveaux. Par d&eacute;faut, affiche toutes les rubriques depuis la racine, tri&eacute;es par titre (num&eacute;riquement puis alphab&eacute;tiquement).',
 'description_menu_secteurlangue' => 'Cette entr&eacute;e est sp&eacute;cifique aux sites utilisant un secteur par langue. Elle affiche automatiquement un menu listant les rubriques du secteur correspondant &agrave; la langue de la page et, si on veut, les sous-rubriques sur plusieurs niveaux. Par d&eacute;faut, affiche toutes les rubriques depuis la racine, tri&eacute;es par titre (num&eacute;riquement puis alphab&eacute;tiquement).',
 );
