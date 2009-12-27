@@ -1,4 +1,4 @@
 [(#REM)<!-- 
-	Afficher les lectures demandees pour le jour requis dans la langue du contexte courant
+	Afficher la lecture demandee pour le jour requis dans la langue du contexte courant
  -->]
-[(#ENV{langue, #LANG}|spiperipsum_lire{#ENV{jour}, #ENV{lecture}})]
+[(#ENV{langue, #LANG}|spiperipsum_afficher{#ENV{jour}, #ENV{lecture}, #ENV{mode}})]

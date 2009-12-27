@@ -70,7 +70,7 @@ function date2jour_semaine($date){
 	return $infos['wday'];
 }
 
-// Charger le fichier des lectures du jour j
+// Charger le fichier des lectures et du saint du jour j
 // - si le fichier existe on retourne directement son nom complet
 // - sinon on le cree dans le cache du plugin
 function charger_lectures($langue, $jour){
@@ -128,6 +128,27 @@ function charger_lectures($langue, $jour){
 		$tableau['psaume'] = preg_replace(',</?font\b.*>,UimsS', '', $tableau['psaume']);
 		$tableau['psaume'] = preg_replace(',</?br\b.*>,UimsS', '<br />', $tableau['psaume']);
 		$tableau['psaume'] = str_replace('©', '&copy;', $tableau['psaume']);
+
+		// traitement du saint du jour
+		// -- Traitement du nom seul et de l'url permettant de recuperer les textes
+		$url = "http://feed.evangelizo.org/reader.php?lang=".$code_langue."&type=saint&date=".date("Ymd", strtotime($date));
+		$page = recuperer_page($url);
+		$balise = extraire_balises($page, 'a');
+		$tableau['saint']['titre'] = preg_replace(',</?a\b.*>,UimsS', '', $balise[0]);
+		// -- Traitement des textes
+		$attribut = extraire_attribut($balise, 'onclick');
+		preg_match(';window.open\(\'(.[^\s,\']+);i', $attribut[0], $url_texte);
+ 		$page = recuperer_page($url_texte[1]);
+		$textes = extraire_balises(extraire_balise($page, 'div'), 'p');
+		$tableau['saint']['texte'] = '';		
+ 		foreach($textes as $p) {
+ 			if ((!extraire_attribut($p, 'align')) AND (!extraire_attribut($p, 'style')))
+				$tableau['saint']['texte'] .= $p;		
+		}
+		if (!$tableau['saint']['texte'])
+			$tableau['saint']['texte'] = preg_replace(',</?div\b.*>,UimsS', '', extraire_balise($page, 'div'));
+		$tableau['saint']['texte'] = trim(str_replace('&nbsp;', '', $tableau['saint']['texte']));
+		$tableau['saint']['url'] = $url_texte[1];
 
  		ecrire_fichier($f, serialize($tableau));
 	}

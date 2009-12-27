@@ -2,11 +2,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
 <head>
-	<title>PERIPSUM - Demo</title>
+	<title>SPIPERIPSUM - Demo</title>
 </head>
 <body style="color: #000000;font-family: Arial,Helvetica,sans-serif;font-size: 11px;margin: auto;width: 640px;">
 	<span style="float: left; margin-right: 20px;">
-		<img height="32" width="32" title="Plugin Peripsum" alt="Plugin Peripsum" src="plugins/peripsum/peripsum-64.gif"/>
+		<img height="32" width="32" title="Plugin SPIPeripsum" alt="Plugin SPIPeripsum" src="plugins/spiperipsum/spiperipsum-64.gif"/>
 	</span>
 	<h1 style="margin-bottom: 20px; color: #798F74;">PLUGIN SPIPER IPSUM</h1>
 	<p style="font-size: 12px;">Pour appeler la page de demo:</p>
@@ -27,11 +27,13 @@
 		<br /><br />
 	
 		<p style="font-size: 12px;">&gt;&gt;&nbsp;Utilisation de la balise <strong>SPIPERIPSUM</strong></p>
-<!-- 
 		<ul>
-			<li>Essai:&nbsp;<strong>#PERIPSUM_EVANGILE{tout, aujourdhui}</strong></li>
+			<li>Titre de l'Evangile du 24 D&eacute;cembre 2009 en anglais:&nbsp;<strong>#SPIPERIPSUM{en, 2009-12-24, evangile, titre}</strong></li>
+			<li>Texte de l'Evangile du 24 D&eacute;cembre 2009 en anglais:&nbsp;#SPIPERIPSUM{en, 2009-12-24, evangile, texte}</li>
+			<li>Texte du saint du jour en br&eacute;silien (la langue sera automatiquement chang&eacute;e en portugais):&nbsp;#SPIPERIPSUM{pt_br, aujourdhui, saint, texte}</li>
 		</ul>
- -->
+		<p>Et l'inclusion du lien du saint du jour dans la langue du contexte</p>
+		[(#INCLURE{fond=inclure/saint_lien, langue=#LANG})]
 	</div>
 </body>
 </html>
