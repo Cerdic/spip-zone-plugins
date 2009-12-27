@@ -7,6 +7,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'editer_menus_titre' => 'Menus du site',
 'editer_menus_explication' => 'Cr&eacute;ez et configurez ici les menus de votre site.',
 'editer_menus_nouveau' => 'Cr&eacute;er un nouveau menu',
+'editer_menus_editer' => 'Modifier ce menu',
 'editer_menus_exporter' => 'Exporter ce menu',
 
 'erreur_autorisation' => 'Vous n\'&ecirc;tes pas autoris&eacute; &agrave; modifier les menus.',
@@ -30,6 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'formulaire_ajouter_entree' => 'Ajouter une entr&eacute;e',
 'formulaire_modifier_entree' => 'Modifier cette entr&eacute;e',
 'formulaire_supprimer_entree' => 'Supprimer cette entr&eacute;e',
+'formulaire_supprimer_menu' => 'Supprimer le menu',
 'formulaire_supprimer_sous_menu' => 'Supprimer ce sous-menu',
 'formulaire_deplacer_haut' => 'D&eacute;placer vers le haut',
 'formulaire_deplacer_bas' => 'D&eacute;placer vers le bas',

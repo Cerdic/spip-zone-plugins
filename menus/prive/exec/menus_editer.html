@@ -18,14 +18,19 @@
 	[(#ENV{id_menu,0}|intval|oui)
 		<div class="ajax">#FORMULAIRE_EDITER_MENU_ENTREES{#ENV{id_menu}}</div>
 	]
+
 </div>
 
+[<div class="actions">
+(#URL_ACTION_AUTEUR{supprimer_menu,#ENV{id_menu},#URL_ECRIRE{menus_tous}}|icone{<:menus:formulaire_supprimer_menu:>,#CHEMIN{images/menus-24.png},center,supprimer.gif})
+</div>]
+
 <!--#navigation-->
-[(#VAL{id_menu}|_request|>{0}|oui)
+[(#ENV{id_menu,0}|invtal|oui)
 <div class="cadre infos cadre-info">
 	<div class="numero">
 		<:menus:info_numero_menu:>
-		<p>[(#VAL{id_menu}|_request)]</p>
+		<p>[(#ENV{id_menu})]</p>
 	</div>
 	<div>
 		<a href="[(#URL_ECRIRE{menus_editer}|parametre_url{action,redirect}|parametre_url{type,menu}|parametre_url{id,#VAL{id_menu}|_request}|parametre_url{var_mode,calcul})]" class="cellule-h">
