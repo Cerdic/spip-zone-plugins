@@ -1,5 +1,6 @@
 <entree>
 	<nom>menus:nom_menu_accueil</nom>
+	<rang>01</rang>
 	<description>menus:description_menu_accueil</description>
 	<icone>images/menus_accueil.png</icone>
 	<parametre nom="titre" label="menus:entree_titre" />

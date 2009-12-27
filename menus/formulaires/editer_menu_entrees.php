@@ -41,6 +41,8 @@ function formulaires_editer_menu_entrees_verifier($id_menu){
 			$erreurs['id_menu_nouvelle_entree'] = $id_menu;
 			// On charge les différents types d'entrées disponibles
 			$erreurs['entrees'] = menus_lister_disponibles();
+			if (_request('suivant'))
+				$erreurs['type'] = "Vous devez choisir un type de menu";
 		}
 		// Si on a choisi un type d'entree
 		else{

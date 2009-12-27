@@ -45,20 +45,22 @@
 	</li>
 	#SET{rang_suivant,(#RANG|plus{1})}
 	</BOUCLE_entrees>
-	<li class="editer_texte">
+	<li class="editer_entree fieldset">
 		#SET{id_menu_nouvelle_entree, (#ENV{erreurs}|table_valeur{id_menu_nouvelle_entree})}
 		#SET{type_entree, (#ENV{erreurs}|table_valeur{type_entree})}
 
 		<BOUCLE_pas_demande_entree(CONDITION){si #GET{id_menu_nouvelle_entree}|=={#ENV{id_menu}}|non}>
+			<div class="boutons">
 			[(#ENV{sous_menu}|non)<span class="image_loading"></span>]
+			[<button type="submit" class="submit link" name="supprimer_menu" value="#ENV{id_menu}">
+				[<img src="(#CHEMIN{images/menus_action_supprimer.png})" />]
+				(#ENV{sous_menu}|?{<:menus:formulaire_supprimer_sous_menu:>,''})
+			</button>]
 			<button type="submit" class="submit" name="demander_nouvelle_entree" value="#ENV{id_menu}">
 				[<img src="(#CHEMIN{images/menus_action_ajouter.png})" />]
 				<:menus:formulaire_ajouter_entree:>
 			</button>
-			<button type="submit" class="submit" name="supprimer_menu" value="#ENV{id_menu}">
-				[<img src="(#CHEMIN{images/menus_action_supprimer.png})" />]
-				[(#ENV{sous_menu}|?{<:menus:formulaire_supprimer_sous_menu:>,<:menus:formulaire_supprimer_menu:>})]
-			</button>
+			</div>
 		</BOUCLE_pas_demande_entree>
 			[(#GET{type_entree}|non)
 				#INCLURE{fond=formulaires/inc-nouvelle_entree-1, env, id_menu_nouvelle_entree=#GET{id_menu_nouvelle_entree}}

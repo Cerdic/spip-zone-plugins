@@ -1,5 +1,6 @@
 <entree>
 	<nom>menus:nom_menu_rubriques</nom>
+	<rang>04</rang>
 	<description>menus:description_menu_rubriques</description>
 	<icone>images/menus_rubriques.png</icone>
 	<parametre nom="id_rubrique" label="menus:entree_id_rubrique" />

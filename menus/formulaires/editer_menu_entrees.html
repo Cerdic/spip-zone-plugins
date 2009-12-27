@@ -1,5 +1,4 @@
-
-<div class="formulaire_editer [formulaire_(#ENV{form})][ formulaire_(#ENV{form})-#ENV{id_menu,nouveau}]">
+<div class="formulaire_spip formulaire_editer [formulaire_(#ENV{form})][ formulaire_(#ENV{form})-#ENV{id_menu,nouveau}]">
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	
@@ -14,6 +13,7 @@
 			<li class="fieldset">
 				<fieldset>
 					<h3 class="legend"><:menus:formulaire_partie_construction:></h3>
+					<input style="display:none;" type="submit" class="submit" name="enregistrer" value="<:bouton_enregistrer:>" />
 
 					#INCLURE{fond=formulaires/inc-menus_entrees, env}
 				</fieldset>

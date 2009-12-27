@@ -14,7 +14,10 @@
 			<//B_menu>
 		</h1>
 	</div>
-	#FORMULAIRE_EDITER_MENU{#VAL{id_menu}|_request|sinon{0}, #VAL{nouveau}|_request|sinon{''}}
+	#FORMULAIRE_EDITER_MENU{#ENV{id_menu,0}, #ENV{nouveau,''}}
+	[(#ENV{id_menu,0}|intval|oui)
+		<div class="ajax">#FORMULAIRE_EDITER_MENU_ENTREES{#ENV{id_menu}}</div>
+	]
 </div>
 
 <!--#navigation-->

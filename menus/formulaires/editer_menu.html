@@ -64,9 +64,14 @@
 				</li>
 			</ul>
 		</div></form>
-	
-		[(#ENV{id_menu}|oui)
-			<div class="ajax">#FORMULAIRE_EDITER_MENU_ENTREES{#ENV{id_menu}}</div>
 		]
-	]
 </div>
+<script type="text/javascript">
+	$(function(){
+		$('.formulaire_#ENV{form}'+' .boutons').hide();
+		$('.formulaire_#ENV{form}'+' input')
+			.change(function(){$('.formulaire_#ENV{form}'+' .boutons').slideDown();})
+			.keydown(function(){$('.formulaire_#ENV{form}'+' .boutons').slideDown();});
+	});
+</script>
+
