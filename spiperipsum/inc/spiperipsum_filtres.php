@@ -10,7 +10,9 @@ function spiperipsum_afficher($langue, $jour, $lecture, $mode){
 	lire_fichier($nom_fichier,$tableau);
 	$tableau = unserialize($tableau);
 	
-	$contexte = $tableau[$lecture];
+	$contexte = array();
+	if ($tableau[$lecture])
+		$contexte = $tableau[$lecture];
 	$contexte = array_merge($contexte, array('mode' => $mode));
 	
 	if ($lecture == _SPIPERIPSUM_LECTURE_SAINT)
