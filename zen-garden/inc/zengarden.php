@@ -20,7 +20,7 @@ function zengarden_charge_themes($dir = _DIR_THEMES, $tous = false){
 			$infos = $get_infos($path,false,$dir);
 			if ($infos
 			  AND ($tous OR $infos['etat']=='stable')){
-				$infos['chemin'] = $path;
+				$infos['chemin'] = strtolower($path);
 				$themes[$path] = $infos;
 			}
 		}
