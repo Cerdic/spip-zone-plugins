@@ -16,8 +16,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer' => '&Eacute;diter',
 	'editer_@type@_@id@' => '&Eacute;diter @type@ @id@ en entier',
 	'editer_tout' => '&Eacute;diter tout',
+	'effets' => 'Effets',
 
 	// M
+	'messages' => 'Messages',
 	'modifie_par_ailleurs' => 'Modifi&eacute; par ailleurs',
 
 	// N
