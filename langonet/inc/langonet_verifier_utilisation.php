@@ -28,7 +28,7 @@ function inc_langonet_verifier_utilisation($module, $langue, $ou_langue, $ou_fic
 	$utilises_brut = array('items' => array(), 'suffixes' => array());
 // 	$regexp = ",(<:$module:|_T\('$module:)(\w*)('\s*\.\s*\\$*\w*)*,im";
 //	$regexp = ",(<\w+>$module:|<:$module:|_T\('$module:)(\w*)('\s*\.\s*\\$*\w*)*,im";
-	$regexp = ",(=\"$module:|='$module:|<\w+>$module:|<:$module:|_T\('$module:)(\w*)('\s*\.\s*\\$*\w*)*,im";
+	$regexp = ",(=\"$module:|='$module:|<\w+>$module:|<:$module:|_T\('$module:|_U\('$module:)(\w*)('\s*\.\s*\\$*\w*)*,im";
 	foreach (preg_files(_DIR_RACINE.$ou_fichiers,'\.(html|php|xml)$') as $_fichier) {
 		lire_fichier($_fichier, $contenu);
 		if (preg_match_all($regexp, $contenu, $matches))
