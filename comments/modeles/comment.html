@@ -11,16 +11,16 @@
         [<span class="poster">, <:par_auteur:> [<a rel="external nofollow" href="(#URL_SITE)"[ title="(#NOM_SITE*|attribut_html)"] class="#EDIT{hyperlien} url spip_out">]<strong class="#EDIT{qui} fn n">(#NOM|sinon{[(#PLUGIN{gravatar}|oui)?]})</strong>[</a>(#URL_SITE|oui)][(#PLUGIN{gravatar}|oui)[ (#MODELE{gravatar}{email=#EMAIL}|image_reduire{32})]]</span>]
         <//B_auteur>
     </p>
-    <div class="comment-content">
-        [<div class="#EDIT{texte} comment-texte">(#TEXTE|lignes_longues)</div>]
+    <div class="comment-content description">
+        [<div class="comment-texte #EDIT{texte}">(#TEXTE|lignes_longues)</div>]
         [<div class="comment-notes">(#NOTES|safehtml|lignes_longues)</div>]
-        <BOUCLE_doc(DOCUMENTS){id_forum}>
+        <B_doc><div class="comment-doc"><BOUCLE_doc(DOCUMENTS){id_forum}>
         [(#EXTENSION|match{'^(gif|jpg|png)$'}|?{
             [(#MODELE{emb}|image_reduire{300})]
         ,
             [(#LOGO_DOCUMENT|#URL_DOCUMENT)]
         })]
-        </BOUCLE_doc>
+        </BOUCLE_doc></div></B_doc>
     </div>
 </div><!--.comment-->
 </BOUCLE_comment>
