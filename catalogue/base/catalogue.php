@@ -41,13 +41,25 @@ function catalogue_declarer_tables_principales($tables_principales){
 		"id_produit" 	=> "bigint(21) NOT NULL DEFAULT 0",
 		"titre" 		=> "tinytext DEFAULT '' NOT NULL",
 		"descriptif" 	=> "tinytext DEFAULT '' NOT NULL",
+		"statut"		=> "VARCHAR(10) NOT NULL DEFAULT 0",
 		"prix_ht" 		=> "decimal(6,2) default NULL",
 		"date" 			=> "datetime NOT NULL default '0000-00-00 00:00:00'",
+		"date_redac" 	=> "datetime NOT NULL default '0000-00-00 00:00:00'",
 		"maj"			=> "TIMESTAMP"
 		);
 	
 	$cat_variantes_key = array(
 		"PRIMARY KEY"	=> "id_variante",
+		);
+
+	//-- Table cat_transactions ------------------------------------------
+	$cat_transactions = array(
+		"id_transaction"=> "bigint(21) NOT NULL auto_increment",
+		"date" 			=> "datetime NOT NULL default '0000-00-00 00:00:00'",
+		);
+	
+	$cat_transactions_key = array(
+		"PRIMARY KEY"	=> "id_transaction",
 		);
 	
 
@@ -58,6 +70,9 @@ function catalogue_declarer_tables_principales($tables_principales){
 		array('field' => &$cat_produits, 'key' => &$cat_produits_key);
 
 	$tables_principales['cat_variantes'] =
+		array('field' => &$cat_variantes, 'key' => &$cat_variantes_key);
+
+	$tables_principales['cat_transactions'] =
 		array('field' => &$cat_variantes, 'key' => &$cat_variantes_key);
 				
 	return $tables_principales;

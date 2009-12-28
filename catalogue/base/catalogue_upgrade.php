@@ -19,12 +19,12 @@ function catalogue_upgrade($nom_meta_base_version, $version_cible){
 		catalogue_peupler_base();
 		ecrire_meta($nom_meta_base_version, $current_version=$version_cible);
 	}
-	if (version_compare($current_version,"1.2","<")){
+	if (version_compare($current_version,"1.3","<")){
 		// ajout fictif
 		maj_tables('cat_familles');
 		maj_tables('cat_produits');
 		maj_tables('cat_variantes');				
-		ecrire_meta($nom_meta_base_version,$current_version="1.2");
+		ecrire_meta($nom_meta_base_version,$current_version="1.3");
 	}
 }
 

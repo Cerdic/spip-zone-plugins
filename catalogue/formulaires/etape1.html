@@ -1,0 +1,31 @@
+
+<!-- squelette formulaires/etape_1.html -->
+
+<h2>Fiche d'inscription</h2>
+
+#INCLURE{fond=inc/etapes,etape=1}
+
+<form name="choix_formule" action="" >
+<fieldset class="cat">
+	<legend>1. Choix de la formule</legend>
+	
+	[(#REM) la famille passée en paramètres, sinon 1 ]
+	<BOUCLE_produits(CAT_PRODUITS){id_famille=#ENV{id,1}}>
+	<fieldset class="">
+		<legend class="#EDIT{titre}">#TITRE</legend>
+		[<div class="descriptif #EDIT{descriptif}">(#DESCRIPTIF|PtoBR|sinon{'ajouter descriptif au produit...'})</div>]
+		<BOUCLE_variantes(CAT_VARIANTES){id_produit}{statut=publie}{!par prix_ht}>
+		<dl[ class=(#COMPTEUR_BOUCLE|<{3}|?{'"off"','"on"'})]>
+			<dd class="radio"><input type="radio" name="formule" value="#ID_VARIANTE" /></dd>
+			<dd class="desc #EDIT{titre}">#TITRE<span class="italique #EDIT{descriptif}">[(#DESCRIPTIF|PtoBR|sinon{'ajouter descriptif à la variante...'})]</span></dd>
+			<dd class="prix #EDIT{prix_ht}">#PRIX_HT</dd>
+		</dl>
+		</BOUCLE_variantes>
+	</fieldset>
+	</BOUCLE_produits>
+
+	
+	<input type="submit" value ="étape suivante" />
+</fieldset>
+</form>
+
