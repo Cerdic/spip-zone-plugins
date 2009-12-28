@@ -19,7 +19,7 @@ function sommaire_d_une_page(&$texte, &$nbh3, $page=0, $num_pages=0) {
 	$hierarchie = preg_match(',<h(\d),',$GLOBALS['debut_intertitre'],$regs)?$regs[1]:'3';
 	@define('_sommaire_NB_CARACTERES', 30);
 	// traitement des intertitres <hx>
-	preg_match_all(",(<h{$hierarchie}[^>]*)>(.*)</h{$hierarchie}>,Umsi",$texte, $regs);
+	preg_match_all(",(<h{$hierarchie}[^>]*)>(.*)</h{$hierarchie}>,Umsi", $texte, $regs);
 	$nbh3 += count($regs[0]);
 	$pos = 0; $sommaire = '';
 	// calcul de la page
@@ -42,11 +42,14 @@ function sommaire_d_une_page(&$texte, &$nbh3, $page=0, $num_pages=0) {
 			// pas de glossaire
 			if(function_exists('cs_retire_glossaire')) $brut = cs_retire_glossaire($brut);
 			// texte brut
-			$brut = preg_replace(',[\n\r]+,',' ',textebrut($brut));
-			$lien = cs_propre(couper($brut, _sommaire_NB_CARACTERES));
+			$brut2 = preg_replace(',[\n\r]+,',' ',textebrut($brut));
+			// cas des intertitres en image_typo
+			if(!strlen($brut2)) $brut2 = extraire_attribut($brut, 'alt');
+			// pas trop long quand meme...
+			$lien = cs_propre(couper($brut2, _sommaire_NB_CARACTERES));
 			// eviter une ponctuation a la fin, surtout si la page est precisee
 			$lien = preg_replace('/(&nbsp;|\s)*'.($page?'[!?,;.:]+$/':'[,;.:]+$/'), '', $lien);
-			$titre = attribut_html(couper($brut, 100));
+			$titre = attribut_html(couper($brut2, 100));
 			// si la decoupe en page est active...
 			$artpage = (function_exists('decoupe_url') && (strlen(_request('artpage')) || $page>1) )
 				?decoupe_url($self, $page, $num_pages):$self;
