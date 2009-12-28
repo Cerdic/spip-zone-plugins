@@ -92,6 +92,7 @@ function formulaires_notation_traiter_dist($objet, $id_objet){
 	// indiquer dans sa session que ce visiteur a vote
 	// grace a ce cookie on dira a charger() qu'il faut regarder
 	// de plus pres ce qu'il en est dans la base
+	include_spip('inc/session');
 	session_set('a_vote', true);
 
 	// invalider les caches
