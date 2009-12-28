@@ -35,7 +35,7 @@ function maj_auto_action_rapide() {
 			$maj_lib = _T('couteau:maj_rev_ko', array('url'=>$infos['url_origine']));
 		// eventuels liens morts
 		$maj_lib = preg_replace(',\[([^[]+)->\],', '$1', $maj_lib);
-		$nom = trim($infos['nom']). '&nbsp;(v' .$infos['version'] . ')' . ($maj_lib?"\n_ {{".$maj_lib.'}}':'');
+		$nom = str_replace("\n",' ',$infos['nom']). '&nbsp;(v' .$infos['version'] . ')' . ($maj_lib?"\n_ {{".$maj_lib.'}}':'');
 		$rev = $infos['rev_local']?_T('couteau:maj_rev', array('revision' => $infos['rev_local'])):'';
 		if(strlen($infos['commit'])) $rev .= (strlen($rev)?'<br/>':'') . cs_date_court($infos['commit']);
 		if($infos['svn']) $rev .= '<br/>SVN';		
