@@ -12,6 +12,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'commentaires_titre' => 'Vos commentaires',
 'commentaires_tout' => 'Tous vos commentaires',
 'permalink_pour' => 'Lien permanent vers',
+'le_date_jour' => 'Le', /* verifier que ca n'existe pas deja dans SPIP */
+'a_date_heure' => '&agrave;', /* verifier que ca n'existe pas deja dans SPIP */
 
 // Formulaire de commentaires
 'form_pet_message_commentaire' => 'Ajoutez votre commentaire ici',
