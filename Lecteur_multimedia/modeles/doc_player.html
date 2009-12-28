@@ -96,11 +96,13 @@ Sinon, utiliser le comportement normal.
 
 
 -->][(#TYPE_DOCUMENT|=={Flash Video}|?{' '})
+#SET{largeur,#ENV{largeur,#LARGEUR|sinon{400}}}
+#SET{hauteur,#ENV{hauteur,#HAUTEUR|sinon{300}}}
 <dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
 <dt class='spip_doc_titre'>
-<object type="application/x-shockwave-flash" data="#CHEMIN{flash/player_flv_maxi.swf}" width="[(#LARGEUR|=={0}|?{400,#LARGEUR})]" height="[(#HAUTEUR|=={0}|?{300,#HAUTEUR})]">
+<object type="application/x-shockwave-flash" data="#CHEMIN{flash/player_flv_maxi.swf}" width="#GET{largeur}" height="#GET{hauteur}">
 <param name="movie" value="#CHEMIN{flash/player_flv_maxi.swf}" />
-<param name="FlashVars" value="flv=[(#URL_DOCUMENT|url_absolue)]&amp;width=[(#LARGEUR|=={0}|?{400,#LARGEUR})]&amp;height=[(#HAUTEUR|=={0}|?{300,#HAUTEUR})]&amp;bgcolor1=ffffff&amp;bgcolor2=cccccc&amp;buttoncolor=999999&amp;buttonovercolor=0&amp;slidercolor1=cccccc&amp;slidercolor2=999999&amp;sliderovercolor=666666&amp;textcolor=0&amp;showstop=1&amp;title=[(#TITRE|urlencode)][(#LOGO_DOCUMENT||extraire_attribut{src}|match{flv.png$}|?{'',' '})&amp;startimage=[(#LOGO_DOCUMENT||extraire_attribut{src})]]&amp;ondoubleclick=fullscreen&amp;showfullscreen=1&amp;autoplay=[(#ENV{autoplay}|?{1,0})]" />
+<param name="FlashVars" value="flv=[(#URL_DOCUMENT|url_absolue)]&amp;width=#GET{largeur}&amp;height=#GET{hauteur}&amp;bgcolor1=ffffff&amp;bgcolor2=cccccc&amp;buttoncolor=999999&amp;buttonovercolor=0&amp;slidercolor1=cccccc&amp;slidercolor2=999999&amp;sliderovercolor=666666&amp;textcolor=0&amp;showstop=1&amp;title=[(#TITRE|urlencode)][(#LOGO_DOCUMENT||extraire_attribut{src}|match{flv.png$}|?{'',' '})&amp;startimage=[(#LOGO_DOCUMENT||extraire_attribut{src})]]&amp;ondoubleclick=fullscreen&amp;showfullscreen=1&amp;autoplay=[(#ENV{autoplay}|?{1,0})]" />
 <param name="allowFullScreen" value="true" />
 <param name="wmode" value="transparent" />
 [<strong>(#TITRE)</strong>]
