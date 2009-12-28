@@ -105,14 +105,14 @@ div.categorie span.light {
 }
 
 .cs_sobre {
-	background:transparent none repeat scroll 0%;
-	border:medium none;
-	color:#000099;
+	background:transparent none repeat scroll 0% !important;
+	border:medium none !important;
+	color:#000099 !important;
 	display:inline;
 	font-size:100%;
-	font-weight:normal;
-	margin:0pt;
-	padding:0pt;
+	font-weight:normal !important;
+	margin:0pt !important;
+	padding:0pt !important;
 	cursor:pointer;
 	text-align:left;
 	width:180px;
