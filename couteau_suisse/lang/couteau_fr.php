@@ -12,14 +12,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'attente_confirmation' => 'En attente de confirmation',
 
 	// C
+	'colorer_fond' => 'Colorer le fond',
+	'colorer_texte' => 'Colorer le texte',
 	'configurer' => 'Configurer le Couteau Suisse',
 	'connections' => 'Connexions',
-	'couleur_icone_texte' => 'T',
-	'couleur_icone_fond' => 'F',
-	'couleur_texte' => 'Texte @couleur@',
 	'couleur_fond' => 'Fond @couleur@',
-	'colorer_texte' => 'Colorer le texte',
-	'colorer_fond' => 'Colorer le fond',
+	'couleur_icone_fond' => 'F',
+	'couleur_icone_texte' => 'T',
+	'couleur_texte' => 'Texte @couleur@',
 
 	// D
 	'date_court' => '@jour@/@mois@/@annee@',
