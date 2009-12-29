@@ -22,7 +22,7 @@ soundManager.debugMode = false;
 
 var seljQ = '@';
 if (jQuery.fn.jquery>="1.3.0")
-	sel='';
+	seljQ='';
 
 jQuery(document).ready(function(){
 	//lecteur_debug();
