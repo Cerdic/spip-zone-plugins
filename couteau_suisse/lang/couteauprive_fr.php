@@ -578,6 +578,9 @@ Afin de conserver l\'acc&egrave;s &agrave; la puce image originale de SPIP (le p
 	'sf_tous' => 'Tous',
 	'simpl_interface:description' => 'D&eacute;sactive le menu de changement rapide de statut d\'un article au survol de sa puce color&eacute;e. Cela est utile si vous cherchez &agrave; obtenir une interface priv&eacute;e la plus d&eacute;pouill&eacute;e possible afin d\'optimiser les performances client.',
 	'simpl_interface:nom' => 'All&egrave;gement de l\'interface priv&eacute;e',
+	'spip_ecran:description' => 'D&eacute;termine la largeur d\'&eacute;cran impos&eacute;e &agrave; tous en partie priv&eacute;e. Un &eacute;cran &eacute;troit pr&eacute;sentera deux colonnes et un &eacute;cran large en pr&eacute;sentera trois. Le r&eacute;glage par d&eacute;faut laisse l\'utilisateur choisir, son choix &eacute;tant stock&eacute; dans un cookie.[[%spip_ecran%]]',
+	'spip_ecran:nom' => 'Largeur d\'&eacute;cran',
+	'label:spip_ecran' => '@_CS_CHOIX@',
 	'smileys:aide' => 'Smileys : @liste@',
 	'smileys:description' => 'Ins&egrave;re des smileys dans tous les textes o&ugrave; appara&icirc;t un raccourci du genre <acronym>:-)</acronym>. Id&eacute;al pour les  forums.
 _ Une balise est disponible pour afficher un tableau de smileys dans vos squelettes : #SMILEYS.

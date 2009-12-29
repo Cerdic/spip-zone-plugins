@@ -89,6 +89,40 @@
 </outil>
 
 
+<!--	--------- Largeur d'ecran ---------	-->
+<variable>
+	<id>spip_ecran</id>
+	<format>string</format>
+	<radio>
+		<item>
+			<valeur>defaut</valeur>
+			<label>couteauprive:par_defaut</label>
+		</item>
+		<item>
+			<valeur>large</valeur>
+			<label>spip:info_grand_ecran</label>
+		</item>
+		<item>
+			<valeur>etroit</valeur>
+			<label>spip:info_petit_ecran</label>
+		</item>
+	</radio>
+	<defaut_php>defaut</defaut_php>
+	<code>
+		<!-- ![CDATA[ non encore supporte par SPIP ! -->
+		<condition_php>%s!='defaut'</condition_php>
+		<script_php>$GLOBALS['spip_ecran']=$_COOKIE['spip_ecran']=%s;</script_php>
+	</code>
+</variable>
+<outil>
+	<id>spip_ecran</id>
+	<categorie>interface</categorie>
+	<code>
+		<type>spip_options</type>
+		<script_php>%%spip_ecran%%</script_php>
+	</code>
+</outil>
+
 <!--	--------- Allegement de l'interface privee ---------	-->
 <outil>
 	<id>simpl_interface</id>
@@ -101,6 +135,7 @@
 		<spip_min>1.9300</spip_min>
 	</version>
 </outil>
+
 
 <!--	--------- Bouton « Visiter » ---------	-->
 <outil>
