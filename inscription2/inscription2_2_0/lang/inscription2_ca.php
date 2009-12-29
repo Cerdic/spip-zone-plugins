@@ -20,6 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'adresse_pro' => 'Adre&ccedil;a professional (Pro.)',
 	'afficher_tous' => 'Mostrar tots els usuaris',
 	'ajouter_adherent' => 'Crear un nou usuari',
+	'ans' => 'anys',
 	'aout' => 'agost',
 	'aucun_resultat_recherche' => 'La vostra cerca no ha donat cap resultat.',
 	'auteur' => 'Autor',
@@ -39,6 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'choisir_categories' => 'Escolliu-les a sota:',
 	'choisir_nouveau_password' => 'Podreu escollir una nova contrasenya clicant al seg&uuml;ent enlla&ccedil;',
 	'choisir_zones' => 'Escolliu les zones a les que voleu que els nous adherents estiguin assignats',
+	'choisissez' => 'Escolliu',
 	'choix_affordance_email' => 'Correu electr&ograve;nic ',
 	'choix_affordance_login' => 'Login (per defecte a SPIP)',
 	'choix_affordance_login_email' => 'Login i correu electr&ograve;nic',
@@ -75,6 +77,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'effacement_auto_impossible' => 'El compte no es pot esborrar autom&agrave;ticament, contacteu-nos.',
 	'email' => 'Correu electr&ograve;nic',
 	'email_bonjour' => 'Bon dia @nom@,',
+	'email_deja_enregistre' => 'Aquest correu electr&ograve;nic ja est&agrave; registrat. Utilitzeu el formulari de connexi&oacute; per accedir al vostre compte.',
 	'email_obligatoire' => 'El camp correu electr&ograve;nic &eacute;s obligatori',
 	'email_valide' => 'Vulgueu introduir un correu electr&ograve;nic v&agrave;lid',
 	'erreur_reglement_obligatoire' => 'Heu d\'acceptar el reglament',
@@ -130,6 +133,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_perso_desc' => 'Informacions personals que es demanaran als nous adherents del lloc',
 	'info_pro' => 'Informacions professionals',
 	'infos_adherent' => 'Informacions suplement&agrave;ries',
+	'infos_complementaires' => 'Informacions complement&agrave;ries',
 	'infos_personnelles' => 'Informacions personals',
 	'inscription2' => 'Inscripci&oacute; 2.0',
 	'inscriptions' => 'Inscripcions',
@@ -170,6 +174,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mobile' => 'M&ograve;bil',
 	'mobile_pro' => 'M&ograve;bil professional',
 	'modif_pass_titre' => 'Modificar la vostra contrasenya',
+	'moins_seconde' => 'menys d\'un segon',
 	'mot_passe_reste_identique' => 'La vostra contrasenya no s\'ha modificat.',
 
 	// N
@@ -207,6 +212,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'password_obligatoire' => 'La contrasenya &eacute;s obligat&ograve;ria.',
 	'password_retaper' => 'Confirmeu la contrasenya',
 	'pays' => 'Pa&iacute;s',
+	'pays_defaut' => 'Pa&iacute;s per defecte',
 	'pays_pro' => 'Pa&iacute;s (Pro.)',
 	'pgp' => 'Clau PGP',
 	'prenom' => 'Nom',
@@ -228,6 +234,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'saisir_email_valide' => 'Introdu&iuml;u una adre&ccedil;a de correu v&agrave;lida ',
+	'secondes' => 'segons',
 	'secteur' => 'Sector',
 	'septembre' => 'setembre ',
 	'sexe' => 'Estat civil',
@@ -276,6 +283,12 @@ Si no heu demanat aquesta inscripci&oacute; o si no voleu, a partir d\'ara, form
 	'titre_confirmation' => 'Confirmaci&oacute;',
 
 	// U
+	'un_an' => 'un any',
+	'un_jour' => 'un dia',
+	'un_mois' => 'un mes',
+	'une_heure' => 'una hora',
+	'une_minute' => 'un minut',
+	'une_seconde' => 'un segon',
 	'url_site' => 'URL del lloc',
 	'url_societe' => 'Lloc associat',
 
