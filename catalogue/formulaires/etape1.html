@@ -1,31 +1,32 @@
 
 <!-- squelette formulaires/etape_1.html -->
-
 <h2>Fiche d'inscription</h2>
 
-#INCLURE{fond=inc/etapes,etape=1}
 
-<form name="choix_formule" action="" >
+[(#ENV*{message_ok}|oui)<div class='ajax'>#FORMULAIRE_ETAPE2{#ENV*}</div>]
+
+
+[(#ENV{editable})
+
+[(#INCLURE{fond=inc/etapes,etape=#ENV{etape,1}})]
+
+<form action='#ENV{action}' method='post'>
 <fieldset class="cat">
+
+	#ACTION_FORMULAIRE{#ENV{action}}
+
 	<legend>1. Choix de la formule</legend>
 	
-	[(#REM) la famille passée en paramètres, sinon 1 ]
-	<BOUCLE_produits(CAT_PRODUITS){id_famille=#ENV{id,1}}>
-	<fieldset class="">
-		<legend class="#EDIT{titre}">#TITRE</legend>
-		[<div class="descriptif #EDIT{descriptif}">(#DESCRIPTIF|PtoBR|sinon{'ajouter descriptif au produit...'})</div>]
-		<BOUCLE_variantes(CAT_VARIANTES){id_produit}{statut=publie}{!par prix_ht}>
-		<dl[ class=(#COMPTEUR_BOUCLE|<{3}|?{'"off"','"on"'})]>
-			<dd class="radio"><input type="radio" name="formule" value="#ID_VARIANTE" /></dd>
-			<dd class="desc #EDIT{titre}">#TITRE<span class="italique #EDIT{descriptif}">[(#DESCRIPTIF|PtoBR|sinon{'ajouter descriptif à la variante...'})]</span></dd>
-			<dd class="prix #EDIT{prix_ht}">#PRIX_HT</dd>
-		</dl>
-		</BOUCLE_variantes>
-	</fieldset>
-	</BOUCLE_produits>
-
+	[<dl class='formulaire_erreur clearfix'>
+		<dd>(#ENV*{message_erreur})</dd>
+		[<dd>(#ENV**{erreurs}|table_valeur{id_variante})</dd>]
+	</dl>]
 	
-	<input type="submit" value ="étape suivante" />
+	[(#INCLURE{fond=inc/liste_formules,env})]
+
+	<input type="hidden" name="montant" value="[(#EVAL{_request('montant')})]" />
+	<input type="submit" class="suivant" value ="<:catalogue:etape_suivante:>" />
+	
 </fieldset>
 </form>
-
+]

@@ -2,6 +2,7 @@
 /**
  * Plugin Catalogue pour Spip 2.0
  * Licence GPL (c) 2009 - Ateliers CYM
+ *
  */
 
 include_spip('inc/meta');
@@ -19,29 +20,23 @@ function catalogue_upgrade($nom_meta_base_version, $version_cible){
 		catalogue_peupler_base();
 		ecrire_meta($nom_meta_base_version, $current_version=$version_cible);
 	}
-	if (version_compare($current_version,"1.3","<")){
-		// ajout fictif
-		maj_tables('cat_familles');
-		maj_tables('cat_produits');
-		maj_tables('cat_variantes');				
-		ecrire_meta($nom_meta_base_version,$current_version="1.3");
+	if (version_compare($current_version,"1.6","<")){
+		maj_tables('spip_variantes');
+		maj_tables('spip_options');
+		maj_tables('spip_options_articles');
+		maj_tables('spip_transactions');
+		
+		ecrire_meta($nom_meta_base_version,$current_version="1.6");
 	}
 }
 
 
 function catalogue_vider_tables($nom_meta_base_version) {
-	sql_drop_table("cat_variantes");
-	sql_drop_table("cat_produits");
-	sql_drop_table("cat_familles");
-	sql_drop_table("variantes");
-	sql_drop_table("produits");
-	sql_drop_table("familles");
-	sql_drop_table("spip_cat_variantes");
-	sql_drop_table("spip_cat_produits");
-	sql_drop_table("spip_cat_familles");
-	sql_drop_table("toto");
-	sql_drop_table("titi");
-	sql_drop_table("tata");
+	sql_drop_table("spip_transactions");
+	sql_drop_table("spip_options_articles");
+	sql_drop_table("spip_options");
+	sql_drop_table("spip_variantes");
+
 	effacer_meta($nom_meta_base_version);
 }
 

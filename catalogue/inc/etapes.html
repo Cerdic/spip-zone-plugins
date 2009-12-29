@@ -9,9 +9,12 @@
     <div class='fond'><em>&Eacute;tape </em><span class='numero_etape'>2</span><em>&nbsp;: </em>Informations personnelles</div>
   </li>
   <li[(#ENV{etape}|=={3}|?{' ',''}) class='on'][(#ENV{etape}|>{3}|?{' ',''}) class='valides'][(#ENV{etape}|<{3}|?{' ',''})  class='prochains']>
-    <div class='fond'><em>&Eacute;tape </em><span class='numero_etape'>3</span><em>&nbsp;: </em>Mode de r&egrave;glement</div>
+    <div class='fond'><em>&Eacute;tape </em><span class='numero_etape'>3</span><em>&nbsp;: </em>Vos pr&eacute;f&eacute;rences</div>
   </li>
   <li[(#ENV{etape}|=={4}|?{' ',''}) class='on'][(#ENV{etape}|>{4}|?{' ',''}) class='valides'][(#ENV{etape}|<{4}|?{' ',''})  class='prochains']>
-    <div class='fond'><em>&Eacute;tape </em><span class='numero_etape'>4</span><em>&nbsp;: </em>C&#8217;est termin&eacute;&nbsp;!</div>
+    <div class='fond'><em>&Eacute;tape </em><span class='numero_etape'>4</span><em>&nbsp;: </em>Mode de r&egrave;glement</div>
+  </li>
+  <li[(#ENV{etape}|=={5}|?{' ',''}) class='on'][(#ENV{etape}|>{5}|?{' ',''}) class='valides'][(#ENV{etape}|<{5}|?{' ',''})  class='prochains']>
+    <div class='fond'><em>&Eacute;tape </em><span class='numero_etape'>5</span><em>&nbsp;: </em>C&#8217;est termin&eacute;&nbsp;!</div>
   </li>
 </ul>

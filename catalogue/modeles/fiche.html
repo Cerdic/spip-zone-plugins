@@ -1,0 +1,18 @@
+<!-- squelette modeles/fiche.html -->
+
+[(#REM) Affiche une fiche produit, avec ses options et ses variantes ]
+
+<B_a>
+<fieldset class="fiche">
+
+	<legend><:catalogue:info_prix:><legend>
+	<BOUCLE_a(ARTICLES){id_article=#ID}>
+	#MODELE{variantes,id_article}
+	#MODELE{options,id_article}
+	</BOUCLE_a>
+	
+	<input type="button" class="suivant" value="<:catalogue:ok:>" onclick="javascript:location='#URL_ARTICLE{79}'" />
+	<label class="suivant"><:catalogue:aller_fiche:>&nbsp;:&nbsp;</label>
+	
+</fieldset>
+</B_a>

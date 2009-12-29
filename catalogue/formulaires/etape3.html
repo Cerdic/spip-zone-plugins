@@ -1,0 +1,91 @@
+<!-- squelette formulaires/etape_3.html -->
+
+[(#ENV*{message_ok}|oui)<div class='ajax'>#FORMULAIRE_ETAPE4{#ENV*}</div>]
+
+[(#INCLURE{fond=inc/etapes,etape=#ENV{etape,3}})]
+
+[(#ENV{editable})
+<form action='#ENV{action}' method='post'>
+	#ACTION_FORMULAIRE{#ENV{action}}
+
+	<fieldset class="cat">
+	
+		<legend>3. Vos pr&eacute;f&eacute;rences</legend>
+
+
+	<fieldset>
+		<legend>Vos pr&eacute;f&eacute;rences salsa</legend>
+		<dl>
+			<dd class="label"><:catalogue:votre_niveau:></dd>
+			<dd>
+			<input type="radio" name="niveau_salsa" value="0"[ (#ENV{niveau_salsa}|=={0}|oui)selected="selected"] />D&eacute;butant
+			<input type="radio" name="niveau_salsa" value="1"[ (#ENV{niveau_salsa}|=={1}|oui)selected="selected"] />Int&eacute;rm&eacute;diaire
+			<input type="radio" name="niveau_salsa" value="2"[ (#ENV{niveau_salsa}|=={2}|oui)selected="selected"] />Avancé
+			</dd>
+		</dl>
+		<dl>
+			<dd class="label"><:catalogue:votre_style:></dd>
+			<!--dd>
+			<input type="checkbox" name="style_salsa" value="#ENV{style_salsa}" [ (#ENV{style_salsa}|=={porto}|oui)checked="checked"]/>Portoricaine
+			<input type="checkbox" name="style_salsa" value="#ENV{style_salsa}" [ (#ENV{style_salsa}|=={cubaine}|oui)checked="checked"]/>Cubaine
+			</dd-->
+			<dd>
+			<input type="radio" name="style_salsa" value="0"[ (#ENV{style_salsa}|=={0}|oui)selected="selected"] />Portoricaine
+			<input type="radio" name="style_salsa" value="1"[ (#ENV{style_salsa}|=={1}|oui)selected="selected"] />Cubaine
+			<input type="radio" name="style_salsa" value="2"[ (#ENV{style_salsa}|=={2}|oui)selected="selected"] />Indiff&eacute;rent
+			</dd>
+		</dl>
+	</fieldset>
+	
+	<fieldset>
+		<legend>Vos pr&eacute;f&eacute;rences s&eacute;jour</legend>
+		<dl>
+			<dd class="long"><:catalogue:activites_explications:></dd>
+			<dd class="oui_non">
+			<input type="radio" name="activites" value="0"[ (#ENV{activites}|=={0}|oui)selected="selected"] />Oui
+			<input type="radio" name="activites" value="1"[ (#ENV{activites}|=={1}|oui)selected="selected"] />Non
+			</dd>
+		</dl>
+		<dl>
+			<dd class="label"><:catalogue:activites_type:>&nbsp;</dd>
+			<dd class="champ"><textarea name="activites_type"  cols="80" rows="2" >#ENV{activites_type}</textarea></dd>
+		</dl>
+		<dl>
+			<dd class="long"><:catalogue:partage_explications:></dd>
+			<dd class="oui_non">
+			<input type="radio" name="partage" value="0"[ (#ENV{partage}|=={0}|oui)selected="selected"] />Oui
+			<input type="radio" name="partage" value="1"[ (#ENV{partage}|=={1}|oui)selected="selected"] />Non
+			</dd>
+		</dl>
+		<dl>
+			<dd class="label"><:catalogue:partage_nom:>&nbsp;</dd>
+			<dd class="champ"><textarea name="partage_nom"  cols="80" rows="2" >#ENV{partage_nom}</textarea></dd>
+		</dl>
+		
+		<dl>
+			<dd class="long"><:catalogue:contre_indication_explications:></dd>
+			<dd class="oui_non">
+			<input type="radio" name="contre_indication" value="0"[ (#ENV{contre_indication}|=={0}|oui)selected="selected"] />Oui
+			<input type="radio" name="contre_indication" value="1"[ (#ENV{contre_indication}|=={1}|oui)selected="selected"] />Non
+			</dd>
+		</dl>
+		<dl>
+			<dd class="label"><:catalogue:contre_indication_nature:>&nbsp;</dd>
+			<dd class="champ"><textarea name="contre_indication_nature" cols="80" rows="2" >#ENV{contre_indication_nature}</textarea></dd>
+		</dl>
+	</fieldset>
+
+	<input type="hidden" name="[(#EVAL{_request('id_variante')})]" />
+	<input type="hidden" name="montant" value="[(#EVAL{_request('montant')})]" />
+	<input type="hidden" name="nom" value="[(#EVAL{_request('nom')})]" />
+	<input type="submit" class="suivant" value ="<:catalogue:etape_suivante:>" />
+	
+	</fieldset>
+	
+</form>
+<!-- Vérifications :
+- s'il y a un type d'activité, un nom de personne ou une contre-indication, mettre la réponse correspondante à "oui"
+-->
+[(#INCLURE{fond=inc/recapitulatif_transaction,env})]
+
+]

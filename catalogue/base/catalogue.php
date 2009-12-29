@@ -4,110 +4,104 @@
  * Licence GPL (c) 2009 - Ateliers CYM
  */
 
-function catalogue_declarer_tables_principales($tables_principales){
-
-	//-- Table cat_familles ------------------------------------------
-	$cat_familles = array(
-		"id_famille"	=> "bigint(21) NOT NULL auto_increment",
-		"id_parent" 	=> "bigint(21) NOT NULL DEFAULT 0",
-		"titre" 		=> "tinytext DEFAULT '' NOT NULL",
-		"descriptif" 	=> "tinytext DEFAULT '' NOT NULL",
-		"date" 			=> "datetime NOT NULL default '0000-00-00 00:00:00'",
-		"maj"			=> "TIMESTAMP"
-		);
-	
-	$cat_familles_key = array(
-		"PRIMARY KEY"	=> "id_famille",
-		);
-
-	//-- Table cat_produits ------------------------------------------
-	$cat_produits = array(
-		"id_produit" 	=> "bigint(21) NOT NULL auto_increment",
-		"id_famille"	=> "bigint(21) NOT NULL DEFAULT 0",
-		"titre" 		=> "tinytext DEFAULT '' NOT NULL",
-		"descriptif" 	=> "tinytext DEFAULT '' NOT NULL",
-		"prix_ht" 		=> "decimal(6,2) default NULL",
-		"date" 			=> "datetime NOT NULL default '0000-00-00 00:00:00'",
-		"maj"			=> "TIMESTAMP"
-		);
-	
-	$cat_produits_key = array(
-		"PRIMARY KEY"	=> "id_produit",
-		);
-
-	//-- Table cat_variantes ------------------------------------------
-	$cat_variantes = array(
-		"id_variante" 	=> "bigint(21) NOT NULL auto_increment",
-		"id_produit" 	=> "bigint(21) NOT NULL DEFAULT 0",
-		"titre" 		=> "tinytext DEFAULT '' NOT NULL",
-		"descriptif" 	=> "tinytext DEFAULT '' NOT NULL",
-		"statut"		=> "VARCHAR(10) NOT NULL DEFAULT 0",
-		"prix_ht" 		=> "decimal(6,2) default NULL",
-		"date" 			=> "datetime NOT NULL default '0000-00-00 00:00:00'",
-		"date_redac" 	=> "datetime NOT NULL default '0000-00-00 00:00:00'",
-		"maj"			=> "TIMESTAMP"
-		);
-	
-	$cat_variantes_key = array(
-		"PRIMARY KEY"	=> "id_variante",
-		);
-
-	//-- Table cat_transactions ------------------------------------------
-	$cat_transactions = array(
-		"id_transaction"=> "bigint(21) NOT NULL auto_increment",
-		"date" 			=> "datetime NOT NULL default '0000-00-00 00:00:00'",
-		);
-	
-	$cat_transactions_key = array(
-		"PRIMARY KEY"	=> "id_transaction",
-		);
-	
-
-	$tables_principales['cat_familles'] =
-		array('field' => &$cat_familles, 'key' => &$cat_familles_key);
-		
-	$tables_principales['cat_produits'] =
-		array('field' => &$cat_produits, 'key' => &$cat_produits_key);
-
-	$tables_principales['cat_variantes'] =
-		array('field' => &$cat_variantes, 'key' => &$cat_variantes_key);
-
-	$tables_principales['cat_transactions'] =
-		array('field' => &$cat_variantes, 'key' => &$cat_variantes_key);
-				
-	return $tables_principales;
-}
-
 // xxx_declarer_tables_interfaces est l'endroit ou l'on indique les raccourcis à utiliser comme table de boucle SPIP
 function catalogue_declarer_tables_interfaces($interface){
 	
-	// $tables_interfaces['table_des_tables']['nouvelletable'] = 'nouvelleboucle';
+	$interface['table_des_tables']['variantes'] = 'variantes';
+	$interface['table_des_tables']['options'] = 'options';
+	$interface['table_des_tables']['options_articles'] = 'options_articles';
+	$interface['table_des_tables']['transactions'] = 'transactions';
 	
-	/*
-	 * Objectif : pouvoir utiliser les noms de boucles "FAMILLES", "PRODUITS", "VARIANTES"...
+	/**
+	 * Objectif : pouvoir utiliser les champs liés dans les boucles...
 	 *
 	 */
-	$interface['table_des_tables']['familles'] = 'familles';
-	$interface['table_des_tables']['produits'] = 'produits';
-	$interface['table_des_tables']['variantes'] = 'variantes';
+	$interface['tables_jointures']['spip_auteurs']['id_auteur']= 'auteurs';	 
+	$interface['tables_jointures']['spip_articles']['id_auteur']= 'auteurs';
 	
+	$interface['tables_jointures']['spip_articles'][]= 'variantes';
+	$interface['tables_jointures']['spip_variantes'][]= 'articles';
+	$interface['tables_jointures']['spip_options']['id_option']= 'spip_options_articles';
+	$interface['tables_jointures']['spip_articles']['id_article']= 'spip_options_articles';
+
 	
-	/*
+	/**
 	 * Objectif : autoriser les traitements SPIP sur certains champs texte...
 	 *
 	 */
 	$interface['table_des_traitements']['TITRE'][] = _TRAITEMENT_TYPO;
 	$interface['table_des_traitements']['DESCRIPTIF'][] = _TRAITEMENT_RACCOURCIS;
 
-	
 	return $interface;
 }
 
-function boucle_FAMILLES($id_boucle, &$boucles) {
-        $boucle = &$boucles[$id_boucle];
-        $id_table = $boucle->id_table;
-        $boucle->from[$id_table] =  "zozo";  
-        return calculer_boucle($id_boucle, $boucles);
+
+function catalogue_declarer_tables_principales($tables_principales){
+
+	//-- Table cat_variantes ------------------------------------------
+	$variantes = array(
+		"id_variante" 	=> "bigint(21) NOT NULL auto_increment",
+		"id_article" 	=> "bigint(21) NOT NULL DEFAULT 0",
+		"titre" 		=> "tinytext DEFAULT '' NOT NULL",
+		"descriptif" 	=> "tinytext DEFAULT '' NOT NULL",
+		"statut"		=> "VARCHAR(10) NOT NULL DEFAULT 0",
+		"prix_ht" 		=> "decimal(6,2) default NULL",
+		"tva"			=> "decimal(4,2) default '0.196'",
+		"date" 			=> "datetime NOT NULL default '0000-00-00 00:00:00'",
+		"date_redac" 	=> "datetime NOT NULL default '0000-00-00 00:00:00'",
+		"maj"			=> "TIMESTAMP"
+		);
+	$variantes_key = array(
+		"PRIMARY KEY"	=> "id_variante",
+		"KEY id_article" => "id_article"
+		);
+
+	//-- Table cat_options ------------------------------------------
+	$options = array(
+		"id_option" 	=> "bigint(21) NOT NULL auto_increment",
+		"titre" 		=> "tinytext DEFAULT '' NOT NULL",
+		"descriptif" 	=> "tinytext DEFAULT '' NOT NULL",
+		"statut"		=> "VARCHAR(10) NOT NULL DEFAULT 0",
+		"prix_ht" 		=> "decimal(6,2) default NULL",
+		"tva"			=> "decimal(4,2) default '0.196'",
+		"date" 			=> "datetime NOT NULL default '0000-00-00 00:00:00'",
+		"maj"			=> "TIMESTAMP"
+		);
+	$options_key = array(
+		"PRIMARY KEY"	=> "id_option"
+		);
+
+	//-- Table cat_options_articles ------------------------------------------
+	$options_articles = array(
+		"id_option" 	=> "bigint(21) NOT NULL DEFAULT 0",
+		"id_article" 	=> "bigint(21) NOT NULL DEFAULT 0",
+		);
+	$options_articles_key = array(
+		"PRIMARY KEY"	=> "id_option, id_article"
+		);
+
+	//-- Table cat_transactions ------------------------------------------
+	$transactions = array(
+		"id_transaction"=> "bigint(21) NOT NULL auto_increment",
+		"date" 			=> "datetime NOT NULL default '0000-00-00 00:00:00'",
+		);
+	$transactions_key = array(
+		"PRIMARY KEY"	=> "id_transaction",
+		);
+
+	$tables_principales['spip_variantes'] =
+		array('field' => &$variantes,'key' => &$variantes_key,'join' => array('id_variante'=>'id_variante','id_article'=>'id_article'));
+		
+	$tables_principales['spip_options'] =
+		array('field' => &$options, 'key' => &$options_key);
+
+	$tables_principales['spip_options_articles'] =
+		array('field' => &$options_articles, 'key' => &$options_articles_key);
+		
+	$tables_principales['spip_transactions'] =
+		array('field' => &$transactions, 'key' => &$transactions_key);
+
+	return $tables_principales;
 }
 
 

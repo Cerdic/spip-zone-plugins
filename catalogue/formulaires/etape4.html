@@ -1,0 +1,39 @@
+<!-- squelette formulaires/etape_4.html -->
+
+[(#ENV*{message_ok}|oui)<div class='ajax'>#FORMULAIRE_ETAPE5{#ENV*}</div>]
+
+[(#INCLURE{fond=inc/etapes,etape=#ENV{etape,4}})]
+
+[(#ENV{editable})
+<form action='#ENV{action}' method='post'>
+	#ACTION_FORMULAIRE{#ENV{action}}
+
+	<fieldset class="cat">
+	
+		<legend>4. Votre mode de règlement</legend>
+		
+		<p><strong>Attention ! </strong>Vos chèques doivent impérativement être libéllés au nom de </p>
+		<h2>L PLUS EVENTS</h2>
+		
+		<p>Ils doivent être envoyés à l'adresse suivante :</p>
+		<blockquote>LARTIST EVENT<br />
+		Rue Feydeau<br />
+		75002 PARIS
+		</blockquote>
+
+		<fieldset>
+		
+			<ul>
+				<li>Chèques</li>
+				<li>Virement</li>
+				<li>Prélèvement bancaire</li>
+			</ul>
+		
+		</fieldset>
+
+		<input type="submit" class="suivant" value ="<:catalogue:etape_suivante:>" />
+	
+	</fieldset>
+	
+</form>
+]

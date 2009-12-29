@@ -1,0 +1,23 @@
+
+<!-- squelette modeles/variantes.html -->
+
+[(#REM)
+
+	Affiche la liste des variantes de produit, associées à un article
+	
+]
+
+
+
+<BOUCLE_variantes(VARIANTES){id_article=#ID}{statut=publie}{!par prix_ht}>
+<dl class='ajax fiche'>
+	<dd class="radio"><input type="radio" name="id_variante" value="#ID_VARIANTE"[ (#ENV{id_variante}|=={#ID_VARIANTE}|oui)checked='checked'] /></dd>
+	<dd class="desc #EDIT{titre}">#TITRE<span class="italique #EDIT{descriptif}">[(#DESCRIPTIF|PtoBR|sinon{'ajouter descriptif &agrave; la variante...'})]</span></dd>
+	[<dd class="prix #EDIT{prix_ht}">(#PRIX_HT|monetaire)</dd>]
+	[<!--dd class="prix">(#EVAL{[(#EVAL{1+#TVA})]*[(#PRIX_HT)]}|monetaire)</dd-->]
+</dl>
+</BOUCLE_variantes>
+</B_variantes>
+<!-- Aucune variante trouv&eacute;e pour ce produit -->
+<//B_variantes>
+<//B_variantes>

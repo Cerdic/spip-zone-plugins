@@ -44,7 +44,7 @@
 	
 	<options>catalogue_options.php</options>
 	
-	<bouton id='cat' parent='naviguer'>
+	<bouton id='catalogue' parent='naviguer'>
 		<icone>img/catalogue_24x24.jpg</icone>
 		<titre>catalogue:catalogue</titre>
 	</bouton>
