@@ -15,8 +15,15 @@ function inc_langonet_verifier_utilisation($module, $langue, $ou_langue, $ou_fic
 	include_spip('inc/traduire');
 	$var_source = "i18n_".$module."_".$langue;
 	if (empty($GLOBALS[$var_source]))
-		if (find_in_path($module.'_'.$langue.'.php', $ou_langue))
+		if (find_in_path($module.'_'.$langue.'.php', $ou_langue)) {
 			charger_langue($langue, $module);
+			if (!$GLOBALS[$var_source]) {
+				$resultats['statut'] = false;
+				$resultats['erreur'] = _T('langonet:message_nok_plugin_inactif', 
+										array('module' => $module));
+				return $resultats;
+			}
+		}
 		else{
 			$resultats['statut'] = false;
 			$resultats['erreur'] = _T('langonet:message_nok_fichier_langue', 
@@ -26,8 +33,6 @@ function inc_langonet_verifier_utilisation($module, $langue, $ou_langue, $ou_fic
 		
 	// On cherche l'ensemble des items utilises dans l'arborescence $ou_fichiers
 	$utilises_brut = array('items' => array(), 'suffixes' => array());
-// 	$regexp = ",(<:$module:|_T\('$module:)(\w*)('\s*\.\s*\\$*\w*)*,im";
-//	$regexp = ",(<\w+>$module:|<:$module:|_T\('$module:)(\w*)('\s*\.\s*\\$*\w*)*,im";
 	$regexp = ",(=\"$module:|='$module:|<\w+>$module:|<:$module:|_T\('$module:|_U\('$module:)(\w*)('\s*\.\s*\\$*\w*)*,im";
 	foreach (preg_files(_DIR_RACINE.$ou_fichiers,'\.(html|php|xml)$') as $_fichier) {
 		lire_fichier($_fichier, $contenu);

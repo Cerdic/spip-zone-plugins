@@ -44,6 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_ok_n_non_definis' => 'Les @nberr@ items de langue ci-dessous sont utilis&eacute;s mais ne sont pas d&eacute;finis dans le fichier de langue choisi:',
 	'message_ok_n_non_utilises' => 'Les @nberr@ items de langue ci-dessous sont d&eacute;finis dans le fichier de langue choisi mais ne sont pas utilis&eacute;s :',
 	'message_ok_n_utilises_incertains' => 'Les @nberr@ items de langue ci-dessous sont peut-&ecirc;tre utilis&eacute;s dans un contexte complexe. Nous vous invitons &agrave; les v&eacute;rifier un par un :',
+	'message_nok_plugin_inactif' => 'Le plugin de pr&eacute;fixe @module@ n\'est pas activ&eacute;. Activez le avant de continuer les v&eacute;rifications',
 
 // O
 	'option_mode_index' => 'Item de la langue source',
