@@ -47,7 +47,8 @@ function Player_insert_head($flux){
 function Player_affichage_final($flux){
 	if (defined('_PLAYER_AFFICHAGE_FINAL') AND _PLAYER_AFFICHAGE_FINAL){
 		// inserer le head seulement si presente d'un rel='enclosure'
-		if ((strpos($flux,'rel="enclosure"')!==FALSE)){
+		if ((strpos($flux,'rel="enclosure"')!==FALSE)
+		  OR (strpos($flux,'playliste_video')!==FALSE)){
 			$flux = str_replace('</head>', Player_head().'</head>', $flux);
 		}
 	}
