@@ -1,0 +1,18 @@
+<plugin>
+	<nom>Slideshow</nom>
+	<auteur>Yves copstiou</auteur>
+	<version>1.0</version>
+	<etat>dev</etat>
+	<licence>GPL 3</licence>
+	<description>
+Ce plugin permet d'afficher un slideshow de l ensemble des images du site
+	</description>
+	<lien>http://www.spip-contrib.net/Rainette</lien>
+	<prefix>slideshow</prefix>
+	<icon>rainette-64.png</icon>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>slideshow_pipelines.php</inclure>
+	</pipeline>
+	<necessite id="SPIP" version="[1.9.0;]" />
+</plugin>

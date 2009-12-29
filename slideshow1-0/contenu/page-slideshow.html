@@ -1,0 +1,7 @@
+<div id="slideshow" class="imageflow">
+<BOUCLE_slideshow(DOCUMENTS){extension==jpeg|jpg|png|gif}>
+<img src="#URL_SITE_SPIP/#URL_DOCUMENT" alt="[(#TITRE|couper{80}|texte_backend)]" longdesc="#URL_SITE_SPIP/#URL_DOCUMENT" width="20px" height="20px"  />
+</BOUCLE_slideshow>
+</div>
+<? echo $outpout ?> 
+#CHEMIN{js/imageflow.js}
