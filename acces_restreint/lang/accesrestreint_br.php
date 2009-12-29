@@ -8,53 +8,68 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'ajouter_droits_auteur' => 'Ouzhpenna&ntilde; gwirio&ugrave;-done din war an dachenn-ma&ntilde;',
+	'ajouter_droits_auteur' => 'Ouzhpenna&ntilde; gwirio&ugrave; moned din-me evit an takad-ma&ntilde;',
 	'auteurs' => 'skridaozerien',
 
 	// B
-	'bouton_creer_la_zone' => 'Kroui&ntilde; an dachenn nevez',
+	'bouton_creer_la_zone' => 'Kroui&ntilde; an takad nevez',
 
 	// C
-	'colonne_id' => 'Niv',
-	'creer_zone' => 'Kroui&ntilde; un dachenn nevez',
+	'colonne_id' => 'Niv.',
+	'confirmer_retirer_auteur_zone' => 'Ha sur oc\'h e fell deoc\'h lemel kuit an aozer-ma&ntilde; eus an takad ?',
+	'confirmer_retirer_auteurs' => 'Ha sur oc\'h e fell deoc\'h lemel kuit an holl aozerien eus an takad ?',
+	'confirmer_supprimer_zone' => 'Ha sur oc\'h e fell deoc\'h diverka&ntilde; an takad ?',
+	'creer_zone' => 'Kroui&ntilde; un takad nevez',
 
 	// D
 	'descriptif' => 'Deskrivadur',
 
 	// I
-	'icone_menu_config' => 'Done bevennet',
-	'icone_supprimer_zone' => 'Dilemel an dachenn-ma&ntilde;',
-	'info_ajouter_zones' => 'Ouzhpenna&ntilde; an holl dachenno&ugrave;',
-	'info_auteurs_lies_zone' => 'Ar skridaozerien hag a c\'hell mont war an dachenn-ma&ntilde;',
-	'info_page' => 'Gant ar bajenn-ma&ntilde; e c\'hellit mera&ntilde; lodenno&ugrave; ouzh ho lec\'hienn a vez bevennet an done warno.',
-	'info_retirer_zone' => 'Tenna&ntilde; diouzh an dachenn',
-	'info_retirer_zones' => 'Tenna&ntilde; diouzh an holl dachenno&ugrave;',
+	'icone_menu_config' => 'Moned bevennet',
+	'icone_supprimer_zone' => 'Diverka&ntilde; an takad-ma&ntilde;',
+	'info_ajouter_auteur' => 'Ouzhpenna&ntilde; an aozer-ma&ntilde;',
+	'info_ajouter_auteurs' => 'Ouzhpenna&ntilde; an holl aozerien',
+	'info_ajouter_zones' => 'Ouzhpenna&ntilde; an holl dakado&ugrave;',
+	'info_aucun_acces' => 'Moned ebet aotreet',
+	'info_aucun_auteur' => 'Aozer ebet en takad',
+	'info_aucune_zone' => 'Takad ebet',
+	'info_auteurs_lies_zone' => 'Ar skridaozerien ganto ur moned war-zu an takad-ma&ntilde;',
+	'info_page' => 'Gant ar bajenn-ma&ntilde; e c\'hellit mera&ntilde; takado&ugrave; eus ho lec\'hienn bevennet ar moned outo.',
+	'info_retirer_auteurs' => 'Lemel kuit an holl aozerien',
+	'info_retirer_zone' => 'Lemel kuit eus an takad',
+	'info_retirer_zones' => 'Lemel kuit eus an holl dakado&ugrave;',
+
+	// M
+	'modifier_zone' => 'Kemma&ntilde; an takad',
 
 	// P
-	'page_zones_acces' => 'Done bevennet',
+	'page_zones_acces' => 'Moned bevennet',
+	'par_titre' => 'Dre ditlo&ugrave;',
 	'privee' => 'Prevez',
-	'publique' => 'Digor',
+	'publique' => 'Foran',
 
 	// R
-	'rubriques' => 'rummado&ugrave;',
-	'rubriques_zones_acces' => 'Rummado&ugrave; an dachenn',
+	'rubriques' => 'rubrikenno&ugrave;',
+	'rubriques_zones_acces' => 'Rubrikenno&ugrave; an takad',
 
 	// S
-	'selectionner_une_zone' => 'Diuz un dachenn',
+	'selectionner_une_zone' => 'Diuza&ntilde; un takad',
 
 	// T
 	'titre' => 'Titl',
-	'titre_ajouter_zone' => 'Tizhout an dchenn',
-	'titre_table' => 'An holl dachenno&ugrave;',
-	'titre_zones_acces' => 'Tachenn bevennet he zone',
+	'titre_ajouter_zone' => 'Tizhout an takad',
+	'titre_cadre_modifier_zone' => 'Kemma&ntilde; un takad',
+	'titre_table' => 'An holl dakado&ugrave; moned',
+	'titre_zones_acces' => 'Takad bevennet ar moned outa&ntilde;',
+	'toutes' => 'An holl',
 
 	// V
-	'voir_toutes' => 'Gwelet an holl dachenno&ugrave;',
+	'voir_toutes' => 'Gwelet an holl dakado&ugrave;',
 
 	// Z
-	'zone_numero' => 'TAHCENN NIVERENN&nbsp;:',
-	'zone_restreinte_espace_prive' => 'Bevenni&ntilde; an done d\'an dachenn-ma&ntilde; el lodenn brevez',
-	'zone_restreinte_publique' => 'Bevenni&ntilde; an done d\'an dachenn-ma&ntilde; el lodenn foran'
+	'zone_numero' => 'TAKAD NIVERENN&nbsp;:',
+	'zone_restreinte_espace_prive' => 'Bevenni&ntilde; ar moned ouzh an takad-ma&ntilde; el lodenn brevez',
+	'zone_restreinte_publique' => 'Bevenni&ntilde; ar moned ouzh an takad-ma&ntilde; el lodenn foran'
 );
 
 ?>
