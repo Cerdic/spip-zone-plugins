@@ -137,7 +137,7 @@ Fon rengini de&#287;i&#351;tirmek i&ccedil;in (e&#287;er yukar&#305;daki se&cced
 @_CS_ASTER@Bu ki&#351;iselle&#351;tirilmi&#351; komutlar&#305;n format&#305; mevcut renkleri listelemeli veya &laquo;komut=renk&raquo; ikililerini virg&uuml;lle ayr&#305;lm&#305;&#351; bi&ccedil;imde tan&#305;mlamal&#305;d&#305;r. &Ouml;rnek : &laquo;gris, rouge&raquo;, &laquo;faible=jaune, fort=rouge&raquo;, &laquo;bas=#99CC11, haut=brown&raquo; veya &laquo;gris=#DDDDCC, rouge=#EE3300&raquo;. &#304;lk ve son &ouml;rnekler i&ccedil;in izin verilen komutlar &#351;unlard&#305;r : <code>[gris]</code> ve <code>[rouge]</code> (<code>[fond gris]</code> ve <code>[fond rouge]</code> - e&#287;er fona izin verilmi&#351;se -).',
 	'couleurs:nom' => 'Hepsi renkli',
 	'couleurs_fonds' => ', <b>[fond&nbsp;coul]metin[/coul]</b>, <b>[bg&nbsp;coul]metin[/coul]</b>',
-	'cs_comportement:description' => '@puce@ {{Log\'lar.}} {@_CS_DIR_TMP@} [[%log_couteau_suisse%]] dizininde  bulabilece&#287;iniz {spip.log} dosyalar&#305;nda &#304;svi&ccedil;re &Ccedil;ak&#305;s&#305;\'n&#305;n i&#351;leyi&#351;i hakk&#305;nda &ccedil;ok say&#305;da bilgi edinebilirsiniz.
+	'cs_comportement:description' => '<MODIF>@puce@ {{Log\'lar.}} {@_CS_DIR_TMP@} [[%log_couteau_suisse%]] dizininde  bulabilece&#287;iniz {spip.log} dosyalar&#305;nda &#304;svi&ccedil;re &Ccedil;ak&#305;s&#305;\'n&#305;n i&#351;leyi&#351;i hakk&#305;nda &ccedil;ok say&#305;da bilgi edinebilirsiniz.
 
 @puce@ {{SPIP se&ccedil;enekleri.}} SPIP eklentileri belirli bir s&#305;rada d&uuml;zenler. &#304;svi&ccedil;re &Ccedil;ak&#305;s&#305;\'n&#305;n en ba&#351;ta  olmas&#305;n&#305; baz&#305; SPIP se&ccedil;eneklerini idare etmesini sa&#287;lamak i&ccedil;in &#351;u se&ccedil;ene&#287;i i&#351;aretleyiniz. E&#287;er hizmet biriminiz izin veriyorsa {@_CS_FILE_OPTIONS@} dosyas&#305; otomatik olarak de&#287;i&#351;tirilecek ve {@_CS_DIR_TMP@couteau-suisse/mes_spip_options.php} dosyas&#305;n&#305;n eklenmesine izin verecektir.
 [[%spip_options_on%]]
@@ -148,7 +148,7 @@ Fon rengini de&#287;i&#351;tirmek i&ccedil;in (e&#287;er yukar&#305;daki se&cced
 	'cs_log_couteau_suisse' => '&#304;svi&ccedil;re &Ccedil;ak&#305;s&#305;n&#305;n detayl&#305; kay&#305;tlar&#305;',
 	'cs_reset' => '&#304;svi&ccedil;re &Ccedil;ak&#305;s&#305;\'n&#305; ba&#351;tan ba&#351;latmak istedi&#287;inizden emin misiniz ?',
 	'cs_reset2' => '&#350;u anda aktif olan t&uuml;m gere&ccedil;ler pasif hale getirilecek ve parametreleri s&#305;f&#305;rlanacakt&#305;r.',
-	'cs_spip_options_on' => '&laquo;@_CS_FILE_OPTIONS@&raquo; i&ccedil;indeki SPIP se&ccedil;enekleri',
+	'cs_spip_options_on' => '<MODIF>&laquo;@_CS_FILE_OPTIONS@&raquo; i&ccedil;indeki SPIP se&ccedil;enekleri',
 
 	// D
 	'decoration:aide' => 'Dekorasyon&nbsp;: <b>&lt;balise&gt;test&lt;/balise&gt;</b> ile <b>balise</b> = @liste@',
@@ -360,7 +360,7 @@ Dikkat, bu gere&ccedil; &ccedil;al&#305;&#351;mak i&ccedil;in {Round Corners} {j
 	'label:terminaison_urls_propres_qs' => '<:label:terminaison_urls_page:>',
 	'label:titre_travaux' => 'Mesaj&#305;n ba&#351;l&#305;&#287;&#305; :',
 	'label:titres_etendus' => '#TITRE_XXX komutlar&#305;n&#305;n geni&#351; kullan&#305;m&#305;n&#305; etkinle&#351;tir&nbsp; :',
-	'label:tri_articles' => 'Se&ccedil;iminiz :',
+	'label:tri_articles' => '<MODIF>Se&ccedil;iminiz :',
 	'label:url_arbo_minuscules' => 'URL\'lerde k&uuml;&ccedil;&uuml;k b&uuml;y&uuml;k harfleri koru :',
 	'label:url_arbo_sep_id' => 'Tekrarlama durumunda kullan&#305;lacak ayra&ccedil; \'titre-id\' :<br/>(\'/\' kullanmay&#305;n)',
 	'label:url_glossaire_externe2' => 'D&#305;&#351; s&ouml;zl&uuml;&#287;e ba&#287; :',
@@ -433,7 +433,7 @@ _ • {Yayg&#305;n} : &#351;u tipteki ba&#287;lar da de&#287;i&#351;tirilir {<ht
 
 	// P
 	'pack_actuel' => '@date@ paketi',
-	'pack_actuel_avert' => 'Dikkat, define()\'lar ve global\'ler &uuml;zerindeki y&uuml;k burada belirtilmez',
+	'pack_actuel_avert' => '<MODIF>Dikkat, define()\'lar ve global\'ler &uuml;zerindeki y&uuml;k burada belirtilmez',
 	'pack_actuel_titre' => '&#304;SV&#304;&Ccedil;RE &Ccedil;AKISI\'NIN G&Uuml;NCEL KONF&#304;G&Uuml;RASYON PAKET&#304;',
 	'pack_alt' => 'Aktif konfig&uuml;rasyonun parametrelerini g&ouml;ster',
 	'pack_descrip' => '"G&uuml;ncel konfig&uuml;rasyon paketiniz" &#304;svi&ccedil;re &Ccedil;ak&#305;s&#305;\'n&#305;n parametrelerini i&ccedil;erir : gere&ccedil;lerin etkinle&#351;tirilmesi ve olas&#305; de&#287;i&#351;kenlerin de&#287;erleri.
@@ -456,7 +456,7 @@ E&#287;er eklentiyi bir pakete t&#305;klayarak s&#305;f&#305;rlarsan&#305;z &#30
 	'paragrapher2:description' => '<code>paragrapher()</code> SPIP fonksiyonu &lt;p&gt; ve &lt;/p&gt; komutlar&#305;n&#305; paragraf i&ccedil;ermeyen t&uuml;m metinlere ekler. Stillerinizi ve sayfa d&uuml;zenlemelerinizi daha zarif bi&ccedil;imde y&ouml;netmek i&ccedil;in sitenizdeki metinleri tektip hale getirme olana&#287;&#305; tan&#305;r.[[%paragrapher%]]',
 	'paragrapher2:nom' => 'Paragrafla',
 	'pipelines' => 'Kullan&#305;lan boru hatlar&#305;&nbsp;:',
-	'pucesli:description' => 'Makalelerdeki &laquo;-&raquo; (basit tire) i&#351;aretlerini &laquo;-*&raquo; ile de&#287;i&#351;tirir (HTML\'e : &lt;ul>&lt;li>…&lt;/li>&lt;/ul> olarak &ccedil;evrilir). Bunlar&#305;n bi&ccedil;imi css ile ki&#351;iselle&#351;tirilebilir.',
+	'pucesli:description' => '<MODIF>Makalelerdeki &laquo;-&raquo; (basit tire) i&#351;aretlerini &laquo;-*&raquo; ile de&#287;i&#351;tirir (HTML\'e : &lt;ul>&lt;li>…&lt;/li>&lt;/ul> olarak &ccedil;evrilir). Bunlar&#305;n bi&ccedil;imi css ile ki&#351;iselle&#351;tirilebilir.',
 	'pucesli:nom' => 'G&uuml;zel simgeler',
 
 	// Q
@@ -566,16 +566,16 @@ Bu gere&ccedil; arg&uuml;man da kab&ucirc;l eder. &Ouml;rne&#287;in <code><:chai
 	'travaux_prochainement' => 'Bu site &ccedil;ok yak&#305;nda tekrar yay&#305;na ba&#351;layacak.
 _ Anlay&#305;&#351;&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler.',
 	'travaux_titre' => '@_CS_TRAVAUX_TITRE@',
-	'tri_articles:description' => 'Sitenin &ouml;zel alan&#305;nda gezinirken ([->./?exec=auteurs]) ba&#351;l&#305;klar&#305;n i&ccedil;inde makalelerinizi s&#305;ralamak i&ccedil;in kullan&#305;lacak y&ouml;netmi burada se&ccedil;in.
+	'tri_articles:description' => '<MODIF>Sitenin &ouml;zel alan&#305;nda gezinirken ([->./?exec=auteurs]) ba&#351;l&#305;klar&#305;n i&ccedil;inde makalelerinizi s&#305;ralamak i&ccedil;in kullan&#305;lacak y&ouml;netmi burada se&ccedil;in.
 
 A&#351;a&#287;&#305;daki &ouml;neriler SQL \'ORDER BY\' fonksiyonuna dayanmaktad&#305;r: bu ki&#351;isel s&#305;ralamay&#305; yaln&#305;zca ne yapt&#305;&#287;&#287;&#305;n&#305;z&#305; biliyorsan&#305;z kullan&#305;n (olas&#305; alanlar : {id_article, id_rubrique, titre, soustitre, surtitre, statut, date_redac, date_modif, lang, etc.})
 [[%tri_articles%]][[->%tri_perso%]]',
-	'tri_articles:nom' => 'Makalelerin s&#305;ralanmas&#305;',
+	'tri_articles:nom' => '<MODIF>Makalelerin s&#305;ralanmas&#305;',
 	'tri_modif' => 'De&#287;i&#351;iklik tarihine g&ouml;re s&#305;ralama (ORDER BY date_modif DESC)',
 	'tri_perso' => 'Ki&#351;iselle&#351;tirilmi&#351; SQL s&#305;ralamas&#305; ORDER BY :',
 	'tri_publi' => 'Yay&#305;n tarihine g&ouml;re s&#305;ralama (ORDER BY date DESC)',
 	'tri_titre' => 'Ba&#351;l&#305;&#287;a g&ouml;re s&#305;ralama (ORDER BY 0+titre,titre)',
-	'trousse_balises:description' => '<NEW>Outil en cours de d&eacute;veloppement. Vous offre quelques balises tr&egrave;s simples et bien pratiques pour am&eacute;liorer la lisibilit&eacute; de vos squelettes.
+	'trousse_balises:description' => '<MODIF><NEW>Outil en cours de d&eacute;veloppement. Vous offre quelques balises tr&egrave;s simples et bien pratiques pour am&eacute;liorer la lisibilit&eacute; de vos squelettes.
 
 @puce@ {{#BOLO}} : g&eacute;n&egrave;re un faux texte d\'environ 3000 caract&egrave;res ("bolo" ou "[?lorem ipsum]") dans les squelettes pendant leur mise au point. L\'argument optionnel de cette fonction sp&eacute;cifie la longueur du texte voulu. Exemple : <code>#BOLO{300}</code>. Cette balise accepte tous les filtres de SPIP. Exemple : <code>[(#BOLO|majuscules)]</code>.
 _ Un mod&egrave;le est &eacute;galement disponible pour vos contenus : placez <code><bolo300></code> dans n\'importe quelle zone de texte (chapo, descriptif, texte, etc.) pour obtenir 300 caract&egrave;res de faux texte.
@@ -586,7 +586,7 @@ _ Un mod&egrave;le est &eacute;galement disponible pour vos contenus : placez <c
 
 @puce@ {{#LESMOTS}} : ',
 	'trousse_balises:nom' => 'Komut kutusu',
-	'type_urls:description' => '@puce@ SPIP, sitenizin sayfalar&#305;na eri&#351;ime izin veren ba&#287;lant&#305;lar &uuml;retmek i&ccedil;in i&ccedil;in  bir tak&#305;m URL\'ler sunar. 
+	'type_urls:description' => '<MODIF>@puce@ SPIP, sitenizin sayfalar&#305;na eri&#351;ime izin veren ba&#287;lant&#305;lar &uuml;retmek i&ccedil;in i&ccedil;in  bir tak&#305;m URL\'ler sunar. 
 
 Daha fazla bilgi i&ccedil;in : [->http://www.spip.net/fr_article765.html]. &laquo;&nbsp;[.->boites_privees]&nbsp;&raquo; gereci size her SPIP nesnesinin sayfas&#305;nda ona ba&#287;l&#305; &ouml;zel URL\'yi g&ouml;rme olana&#287;&#305; tan&#305;r.
 [[%radio_type_urls3%]]

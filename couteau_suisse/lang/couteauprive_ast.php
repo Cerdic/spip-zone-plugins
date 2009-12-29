@@ -150,7 +150,7 @@ Idem pa camudar el fondu, si la opci&oacute;n d\'embaxo lo permite:@_CS_EXEMPLE_
 @_CS_ASTER@El formatu d\'estes balices personalizaes tien que llistar les colores esistentes o definir pareyes &laquo;baliza=color&raquo;, too separtao por comes. Exemplos : &laquo;gris, bermeyo&raquo;, &laquo;suave=mariello, fuerte=bermeyo&raquo;, &laquo;baxu=#99CC11, altu=brown&raquo; o tambi&eacute;n &laquo;gris=#DDDDCC, bermeyo=#EE3300&raquo;. Pal primer y l\'&uacute;ltimu exemplu, les balices autorizaes son: <code>[gris]</code> y <code>[bermeyo]</code> (<code>[fond gris]</code> y <code>[fond bermeyo]</code> si los fondos tan permit&iacute;os).',
 	'couleurs:nom' => 'Too en collores',
 	'couleurs_fonds' => ', <b>[fond&nbsp;coul]testu[/coul]</b>, <b>[bg&nbsp;coul]testu[/coul]</b>',
-	'cs_comportement:description' => '@puce@ {{Logs.}} Atopa bayurosa informaci&oacute;n tocante al funcionamentu de la Navaya Suiza nos archivos {spip.log} que puen alcontrase nel direutoriu: {@_CS_DIR_TMP@}[[%log_couteau_suisse%]]
+	'cs_comportement:description' => '<MODIF>@puce@ {{Logs.}} Atopa bayurosa informaci&oacute;n tocante al funcionamentu de la Navaya Suiza nos archivos {spip.log} que puen alcontrase nel direutoriu: {@_CS_DIR_TMP@}[[%log_couteau_suisse%]]
 
 @puce@ {{Opciones SPIP.}} SPIP ordena los plugins siguiendo un orde espec&iacute;ficu. A la fin de tar seguru que la Navaya Suiza sea el primeru pa remanar dende eh&iacute; delles opciones de SPIP, marca la opci&oacute;n siguiente. Si los permisos del sirvidor lo permiten, l\'archivu {@_CS_FILE_OPTIONS@} camudarase autom&aacute;ticamente pa amesta-y l\'archivu {@_CS_DIR_TMP@couteau-suisse/mes_spip_options.php}.
 [[%spip_options_on%]]
@@ -161,7 +161,7 @@ Idem pa camudar el fondu, si la opci&oacute;n d\'embaxo lo permite:@_CS_EXEMPLE_
 	'cs_log_couteau_suisse' => 'Los rexistros detallaos de la Navaya Suiza',
 	'cs_reset' => '&iquest;Confirmes que qui&eacute;s reaniciar dafechu la Navaya Suiza?',
 	'cs_reset2' => 'Toles ferramientes actualmente actives van desactivase y van reaniciase sos par&aacute;metros.',
-	'cs_spip_options_on' => 'Les opciones de SPIP en &laquo;@_CS_FILE_OPTIONS@&raquo;',
+	'cs_spip_options_on' => '<MODIF>Les opciones de SPIP en &laquo;@_CS_FILE_OPTIONS@&raquo;',
 
 	// D
 	'decoration:aide' => 'Decoraci&oacute;n: <b>&lt;baliza&gt;test&lt;/baliza&gt;</b>, con <b>baliza</b> = @liste@',
@@ -385,7 +385,7 @@ Atenci&oacute;n, esta ferramienta necesita pa funcionar el plugin {jQuery} : {Ro
 	'label:terminaison_urls_propres_qs' => '<:label:terminaison_urls_page:>',
 	'label:titre_travaux' => 'T&iacute;tulu del mensaxe:',
 	'label:titres_etendus' => 'Activar l\'usu estend&iacute;u de les balices #TITRE_XXX:',
-	'label:tri_articles' => 'To seleici&oacute;n:',
+	'label:tri_articles' => '<MODIF>To seleici&oacute;n:',
 	'label:url_arbo_minuscules' => 'Conservar les may&uacute;scules de los t&iacute;tulos nes URLs:',
 	'label:url_arbo_sep_id' => 'Carauter de separaci&oacute;n \'titre-id\' en casu de duplicaos :<br/>(nun uses \'/\')',
 	'label:url_glossaire_externe2' => 'Enllaz al glosariu esternu:',
@@ -459,7 +459,7 @@ _ • {Predetermin&aacute;u}: reemplazu autom&aacute;ticu d\'orixe (a partir de 
 
 	// P
 	'pack_actuel' => 'Paquete @date@',
-	'pack_actuel_avert' => 'Atenci&oacute;n, les sobrecargues nos define() o les globales nun se conse&ntilde;en equ&iacute;',
+	'pack_actuel_avert' => '<MODIF>Atenci&oacute;n, les sobrecargues nos define() o les globales nun se conse&ntilde;en equ&iacute;',
 	'pack_actuel_titre' => 'PAQUETE DE CONFIGURACI&Oacute;N ACTUAL DE LA NAVAYA SUIZA',
 	'pack_alt' => 'Ver los par&aacute;metros de configuraci&oacute;n en cursu',
 	'pack_descrip' => 'El &laquo;Paquete de configuraci&oacute;n actual&raquo; axunta el conxuntu de par&aacute;metros de configuraci&oacute;n en cursu de La Navaya Suiza: l\'activaci&oacute;n de les ferramientes y el valor de les variables, si ye\'l casu.
@@ -482,7 +482,7 @@ Si reanicies el plugin calcando nun paquete, la Navaya Suiza reconfigurarase aut
 	'paragrapher2:description' => 'La funci&oacute;n de SPIP <code>paragrapher()</code> amesta-yos balices &lt;p&gt; y &lt;/p&gt; a tolos testos que nun tengan p&aacute;rrafos. A la fin d\'iguar m&aacute;s finamente los estilos y les paxinaciones, tienes la posibilid&aacute; d\'uniformizar l\'aspeutu de los testos del sitiu Web.[[%paragrapher%]]',
 	'paragrapher2:nom' => 'Amestar p&aacute;rrafos',
 	'pipelines' => 'Tuber&iacute;es (pipelines) utiliz&aacute;es:',
-	'pucesli:description' => 'Reemplaza les marques &laquo;-&raquo; (gui&oacute;n simple) de los art&iacute;culos por llistes anot&aacute;es &laquo;-*&raquo; (traduc&iacute;es en HTML como: &lt;ul>&lt;li>…&lt;/li>&lt;/ul>) nes que l\'estilu pue personalizase con css.',
+	'pucesli:description' => '<MODIF>Reemplaza les marques &laquo;-&raquo; (gui&oacute;n simple) de los art&iacute;culos por llistes anot&aacute;es &laquo;-*&raquo; (traduc&iacute;es en HTML como: &lt;ul>&lt;li>…&lt;/li>&lt;/ul>) nes que l\'estilu pue personalizase con css.',
 	'pucesli:nom' => 'Marques guapes',
 
 	// Q
@@ -599,16 +599,16 @@ La funci&oacute;n SPIP usada en PHP ye <code>_T(\'cadena\')</code> ensin argumen
 	'travaux_prochainement' => 'Esti sitiu volver&aacute; a tar en llinia pronto.
 _ Agradec&eacute;moste la comprensi&oacute;n.',
 	'travaux_titre' => '@_CS_TRAVAUX_TITRE@',
-	'tri_articles:description' => 'Al &ntilde;avegar pola parte privada del sitiu ([->./?exec=auteurs]), equ&iacute; escueyes la ordenaci&oacute;n a utilizar pa amosar los art&iacute;culos dientro de les estayes.
+	'tri_articles:description' => '<MODIF>Al &ntilde;avegar pola parte privada del sitiu ([->./?exec=auteurs]), equ&iacute; escueyes la ordenaci&oacute;n a utilizar pa amosar los art&iacute;culos dientro de les estayes.
 
 Les propuestes d\'embaxo b&aacute;sense na funci&oacute;n SQL \'ORDER BY\': nun utilices l\'orde personaliz&aacute;u m&aacute;s que si sabes lo que tas faciendo (campos disponibles: {id_article, id_rubrique, titre, soustitre, surtitre, statut, date_redac, date_modif, lang, etc.})
 [[%tri_articles%]][[->%tri_perso%]]',
-	'tri_articles:nom' => 'Orde de los art&iacute;culos',
+	'tri_articles:nom' => '<MODIF>Orde de los art&iacute;culos',
 	'tri_modif' => 'Guetar pola fecha d\'igua (ORDER BY date_modif DESC)',
 	'tri_perso' => 'Gueta SQL personalizada, ORDER BY sigu&iacute;o por:',
 	'tri_publi' => 'Guetar pola fecha d\'espublizamientu (ORDER BY date DESC)',
 	'tri_titre' => 'Guetar pol t&iacute;tulu (ORDER BY 0+titre,titre)',
-	'trousse_balises:description' => 'Ferramienta en cursu de desendolcu. Ufre delles balices mui cencielles y enforma pr&aacute;ctiques pa les cadarmes.
+	'trousse_balises:description' => '<MODIF>Ferramienta en cursu de desendolcu. Ufre delles balices mui cencielles y enforma pr&aacute;ctiques pa les cadarmes.
 
 @puce@ {{#BOLO}}: xenera un testu falsu d\'unos 3000 carauteres ("bolo" o "[?lorem ipsum]") nes cadarmes enantes de poneles nel so llugar. L\'argumentu opcional d\'esta funci&oacute;n conse&ntilde;a el llargor que se quier pal testu. Exemplu: <code>#BOLO{300}</code>. Esta baliza acepta toles pe&ntilde;eres de SPIP. Exemplu: <code>[(#BOLO|majuscules)]</code>.
 _ Tami&eacute;n hai disponible un modelu pa los conten&iacute;os: pon <code><bolo300></code> en cualquier zona de testu (cabecera, descripci&oacute;n, testu, etc.) pa tener 300 carauteres de testu falsu.
@@ -619,7 +619,7 @@ _ Tami&eacute;n hai disponible un modelu pa los conten&iacute;os: pon <code><bol
 
 @puce@ {{#LESMOTS}}: ',
 	'trousse_balises:nom' => 'Cax&oacute;n de balices',
-	'type_urls:description' => '@puce@ SPIP ufre una esbilla de xuegos d\'URLs pa fabricar los enllaces d\'accesu a les p&aacute;xines del sitiu Web.
+	'type_urls:description' => '<MODIF>@puce@ SPIP ufre una esbilla de xuegos d\'URLs pa fabricar los enllaces d\'accesu a les p&aacute;xines del sitiu Web.
 
 M&aacute;s info: [->http://www.spip.net/fr_article765.html]. La ferramienta &laquo;&nbsp;[.->boites_privees]&nbsp;&raquo; te permite ver na p&aacute;xina de cada oxetu SPIP la URL propia asociada.
 [[%radio_type_urls3%]]

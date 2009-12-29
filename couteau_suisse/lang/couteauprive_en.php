@@ -78,7 +78,7 @@ _ Test link:[->test@test.com] (Reload the page to test.)[[%enveloppe_mails%]]',
 	'boites_privees:nom' => 'Private boxes',
 	'bp_tri_auteurs' => 'Order of authors',
 	'bp_urls_propres' => 'See clean URLs',
-	'brouteur:description' => 'Use the AJAX section selector when there are more than %rubrique_brouteur% section(s)',
+	'brouteur:description' => '<MODIF>Use the AJAX section selector when there are more than %rubrique_brouteur% section(s)',
 	'brouteur:nom' => 'Configuration of the section selector',
 
 	// C
@@ -98,7 +98,7 @@ _ Test link:[->test@test.com] (Reload the page to test.)[[%enveloppe_mails%]]',
 	'chatons:description' => 'Replace <code>:name</code> with smiley images in the text.
 _ This tool will replace the shortcuts by the images of the same name found in the directory <code>mon_squelette_toto/img/chatons/</code>, or else, by default, in <code>couteau_suisse/img/chatons/</code>.',
 	'chatons:nom' => 'Smileys',
-	'citations_bb:description' => 'In order to respect the HTML usages in the SPIP content of your site (articles, sections, etc.), this tool replaces the markup &lt;quote&gt; by the markup &lt;q&gt; when there is no line return. ',
+	'citations_bb:description' => '<MODIF>In order to respect the HTML usages in the SPIP content of your site (articles, sections, etc.), this tool replaces the markup &lt;quote&gt; by the markup &lt;q&gt; when there is no line return. ',
 	'citations_bb:nom' => 'Well delimited citations',
 	'class_spip:description1' => 'Here you can define some SPIP shortcuts. An empty value is equivalent to using the default.[[%racc_hr%]]',
 	'class_spip:description2' => '@puce@ {{SPIP shortcuts}}.
@@ -155,7 +155,7 @@ In the same way, to change the font if the following option allows:@_CS_EXEMPLE_
 @_CS_ASTER@The format of this personalised tags have to be of existing colours or define pairs &laquo;tag=colour&raquo;, separated by comas. Examples : &laquo;grey, red&raquo;, &laquo;smooth=yellow, strong=red&raquo;, &laquo;low=#99CC11, high=brown&raquo; but also &laquo;grey=#DDDDCC, red=#EE3300&raquo;. For the first and last example, the allowed tags are: <code>[grey]</code> et <code>[red]</code> (<code>[fond grey]</code> et <code>[fond red]</code> if the backgrounds are allowed).',
 	'couleurs:nom' => 'Coloured text',
 	'couleurs_fonds' => ', <b>[fond&nbsp;coul]text[/coul]</b>, <b>[bg&nbsp;coul]text[/coul]</b>',
-	'cs_comportement:description' => '@puce@ {{Logs.}} Record a lot of information about the working of the Penknife in the {spip.log} files which can be found in this directory: {@_CS_DIR_TMP@}[[%log_couteau_suisse%]]
+	'cs_comportement:description' => '<MODIF>@puce@ {{Logs.}} Record a lot of information about the working of the Penknife in the {spip.log} files which can be found in this directory: {@_CS_DIR_TMP@}[[%log_couteau_suisse%]]
 
 @puce@ {{SPIP options.}} SPIP places plugins in order. To be sure that the Penknife is at the head and is thus able to control certain SPIP options, check the following option. If the permissions on your server allow it, the file {@_CS_FILE_OPTIONS@} will be modified to include {@_CS_DIR_TMP@couteau-suisse/mes_spip_options.php}.
 [[%spip_options_on%]]
@@ -166,7 +166,7 @@ In the same way, to change the font if the following option allows:@_CS_EXEMPLE_
 	'cs_log_couteau_suisse' => 'Detailed logs of the Penknife',
 	'cs_reset' => 'Are you sure you wish to completely reset the Penknife?',
 	'cs_reset2' => 'All activated tools will be deactivated and their options reset.',
-	'cs_spip_options_on' => 'SPIP options in "@_CS_FILE_OPTIONS@"',
+	'cs_spip_options_on' => '<MODIF>SPIP options in "@_CS_FILE_OPTIONS@"',
 
 	// D
 	'decoration:aide' => 'D&eacute;coration: <b>&lt;tag&gt;test&lt;/tag&gt;</b>, with<b>tag</b> = @liste@',
@@ -391,7 +391,7 @@ N.B. This tool requires the {Round Corners} jQuery plugin in order to function. 
 	'label:terminaison_urls_propres_qs' => '<:label:terminaison_urls_page:>',
 	'label:titre_travaux' => 'Message title:',
 	'label:titres_etendus' => 'Activate the extended use of the tags #TITRE_XXX:',
-	'label:tri_articles' => 'Your choice:',
+	'label:tri_articles' => '<MODIF>Your choice:',
 	'label:url_arbo_minuscules' => 'Preserve the case of titles in URLs:',
 	'label:url_arbo_sep_id' => 'Separation character \'title-id\', used in the event of homonyms:<br/>(do not use \'/\')',
 	'label:url_glossaire_externe2' => 'Link to external glossary:',
@@ -465,7 +465,7 @@ _ • {By default}: automatic replacement (from SPIP version 2.0).
 
 	// P
 	'pack_actuel' => 'Pack @date@',
-	'pack_actuel_avert' => 'Warning: the overrides of globals and of "define()" are not specified here',
+	'pack_actuel_avert' => '<MODIF>Warning: the overrides of globals and of "define()" are not specified here',
 	'pack_actuel_titre' => 'UP-TO-DATE CONFIGURATION PACK OF THE PENKNIFE',
 	'pack_alt' => 'See the current configuration parameters',
 	'pack_descrip' => 'Your "Current configuration pack" brings together all the parameters activated for the Penknife plugin. It remembers both whether a tool is activated or not and, if so, what options have been chosen.
@@ -488,7 +488,7 @@ If you reset the plugin by clicking on a pack, the Penknife will reconfigure its
 	'paragrapher2:description' => 'The SPIP function <code>paragrapher()</code> inserts the tags &lt;p&gt; and &lt;/p&gt; around all texts which do not have paragraphs. In order to have a finer control over your styles and layout, you can give a uniform look to your texts throughout the site.[[%paragrapher%]]',
 	'paragrapher2:nom' => 'Insert paragraphs',
 	'pipelines' => 'Entry points used:',
-	'pucesli:description' => 'Replaces bullets &laquo;-&raquo; (simple dash) in articles with ordered lists &laquo;-*&raquo; (transformed into  &lt;ul>&lt;li>…&lt;/li>&lt;/ul> in HTML) whose style may be customised using CSS.',
+	'pucesli:description' => '<MODIF>Replaces bullets &laquo;-&raquo; (simple dash) in articles with ordered lists &laquo;-*&raquo; (transformed into  &lt;ul>&lt;li>…&lt;/li>&lt;/ul> in HTML) whose style may be customised using CSS.',
 	'pucesli:nom' => 'Beautiful bullets',
 
 	// Q
@@ -603,16 +603,16 @@ Do not forget to check that the variable used <code>\'a_text\'</code> is defined
 	'travaux_prochainement' => 'This site will be back online soon.
 _ Thank you for your understanding.',
 	'travaux_titre' => '@_CS_TRAVAUX_TITRE@',
-	'tri_articles:description' => 'Choose the sort order to be used for displaying articles in the editing interface ([->./?exec=auteurs]), within the sections.
+	'tri_articles:description' => '<MODIF>Choose the sort order to be used for displaying articles in the editing interface ([->./?exec=auteurs]), within the sections.
 
 The options below use the SQL function \'ORDER BY\'. Only use the customised option if you know what you are doing (the available fields are: {id_article, id_rubrique, titre, soustitre, surtitre, statut, date_redac, date_modif, lang, etc.})
 [[%tri_articles%]][[->%tri_perso%]]',
-	'tri_articles:nom' => 'Article sort order',
+	'tri_articles:nom' => '<MODIF>Article sort order',
 	'tri_modif' => 'Sort by last modified date (ORDER BY date_modif DESC)',
 	'tri_perso' => 'Sort by customised SQL, ORDER BY:',
 	'tri_publi' => 'Sort by publication date (ORDER BY date DESC)',
 	'tri_titre' => 'Sort by title (ORDER BY 0+titre,titre)',
-	'trousse_balises:description' => 'Tool in development. It offers a few simple tags for templates.
+	'trousse_balises:description' => '<MODIF>Tool in development. It offers a few simple tags for templates.
 
 @puce@ {{#BOLO}}: generates a dummy text of about 3000 characters ("bolo" ou "lorem ipsum") for use with templates in development. An optional argument specifies the length of the text, e.g. <code>#BOLO{300}</code>. The tag accepts all SPIP\'s filters. For example, <code>[(#BOLO|majuscules)]</code>.
 _ It can also be used as a model in content. Place <code><bolo300></code> in any text zone in order to obtain 300 characters of dummy text.
@@ -623,7 +623,7 @@ _ It can also be used as a model in content. Place <code><bolo300></code> in any
 
 @puce@ {{#LESMOTS}}: ',
 	'trousse_balises:nom' => 'Box of tags',
-	'type_urls:description' => '@puce@ SPIP offers a choice between several types of URLs for your site:
+	'type_urls:description' => '<MODIF>@puce@ SPIP offers a choice between several types of URLs for your site:
 
 More information: [->http://www.spip.net/en_article3588.html] The "[.->boites_privees]" tool allows you to see on the page of each SPIP object the clean URL which is associated with it.
 [[%radio_type_urls3%]]

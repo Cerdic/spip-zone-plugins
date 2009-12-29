@@ -1,24 +1,13 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 // Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/couteau_suisse/lang/
-if(!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// 2
 	'2pts_non' => '&nbsp;:&nbsp;non',
 	'2pts_oui' => '&nbsp;:&nbsp;oui',
-	'distant_charge' => 'Fichier correctement t&eacute;l&eacute;charg&eacute; et install&eacute; en librairie.',
-	'distant_present' => 'Fichier pr&eacute;sent en librairie depuis le @date@.',
-	'distant_echoue' => 'Erreur sur le chargement distant, cet outil risque de ne pas fonctionner !',
-	'distant_inactif' => 'Fichier introuvable (outil inactif).',
-	'distant_charger' => 'Lancer le t&eacute;l&eacute;chargement',
-	'distant_aide' => 'Cet outil requiert des fichiers distants qui doivent tous &ecirc;tre correctement install&eacute;s en librairie. Avant d\'activer cet outil ou d\'actualiser ce cadre, assurez-vous que les fichiers requis sont bien pr&eacute;sents sur le serveur distant.',
-	
-	'previsualisation:description' => 'Par d&eacute;faut, SPIP permet de pr&eacute;visualiser un article dans sa version publique et styl&eacute;e, mais uniquement lorsque celui-ci a &eacute;t&eacute; &laquo; propos&eacute; &agrave; l&rsquo;&eacute;valuation &raquo;. Hors cet outil permet aux auteurs de pr&eacute;visualiser &eacute;galement les articles pendant leur r&eacute;daction. Chacun peut alors pr&eacute;visualiser et modifier son texte &agrave; sa guise.
-
-@puce@ Attention : cette fonctionnalit&eacute; ne modifie pas les droits de pr&eacute;visualisation. Pour que vos r&eacute;dacteurs aient effectivement le droit de pr&eacute;visualiser leurs articles &laquo; en cours de r&eacute;daction &raquo;, vous devez l&rsquo;autoriser (dans le menu {[Configuration&gt;Fonctions avanc&eacute;es->./?exec=config_fonctions]} de l&rsquo;espace priv&eacute;).',
-	'previsualisation:nom' => 'Pr&eacute;visualisation des articles',
 
 	// S
 	'SPIP_liens:description' => '@puce@ Tous les liens du site s\'ouvrent par d&eacute;faut dans la fen&ecirc;tre de navigation en cours. Mais il peut &ecirc;tre utile d\'ouvrir les liens externes au site dans une nouvelle fen&ecirc;tre ext&eacute;rieure -- cela revient &agrave; ajouter {target=&quot;_blank&quot;} &agrave; toutes les balises &lt;a&gt; dot&eacute;es par SPIP des classes {spip_out}, {spip_url} ou {spip_glossaire}. Il est parfois n&eacute;cessaire d\'ajouter l\'une de ces classes aux liens du squelette du site (fichiers html) afin d\'&eacute;tendre au maximum cette fonctionnalit&eacute;.[[%radio_target_blank3%]]
@@ -27,8 +16,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'SPIP_liens:description1' => '@puce@ SPIP a pr&eacute;vu un style CSS pour les liens &laquo;~mailto:~&raquo; : une petite enveloppe devrait appara&icirc;tre devant chaque lien li&eacute; &agrave; un courriel; mais puisque tous les navigateurs ne peuvent pas l\'afficher (notamment IE6, IE7 et SAF3), &agrave; vous de voir s\'il faut conserver cet ajout.
 _ Lien de test : [->test@test.com] (rechargez la page enti&egrave;rement).[[%enveloppe_mails%]]',
 	'SPIP_liens:nom' => 'SPIP et les liens&hellip; externes',
-
-	'SPIP_tailles:nom' => 'Limites m&eacute;moire',
 	'SPIP_tailles:description' => '@puce@ Afin d\'all&eacute;ger la m&eacute;moire de votre serveur, SPIP vous permet de limiter les dimensions (hauteur et largeur) et la taille du fichier des images, logos ou documents joints aux divers contenus de votre site. Si un fichier d&eacute;passe la taille indiqu&eacute;e, le formulaire enverra bien les donn&eacute;es mais elles seront d&eacute;truites et SPIP n\'en tiendra pas compte, ni dans le r&eacute;pertoire IMG/, ni en base de donn&eacute;es. Un message d\'avertissement sera alors envoy&eacute; &agrave; l\'utilisateur.
 
 Une valeur nulle ou non renseign&eacute;e correspond &agrave; une valeur illimit&eacute;e.
@@ -42,11 +29,7 @@ Une valeur nulle ou non renseign&eacute;e correspond &agrave; une valeur illimit
 
 La valeur de 1~000~000 pixels semble correcte pour une configuration avec peu de m&eacute;moire. Une valeur nulle ou non renseign&eacute;e entra&icirc;nera le test du serveur.
 [[%img_GDmax% pixels au maximum]]',
-	'label:logo_Hmax' => 'Taille maximale des logos :',
-	'label:img_Hmax' => 'Taille maximale des images :',
-	'label:doc_Smax' => 'Taille maximale des documents :',
-	'label:img_GDmax' => 'Calculs d\'images avec GD :',
-	'label:copie_Smax' => 'Espace maximal r&eacute;serv&eacute; aux copies locales :',
+	'SPIP_tailles:nom' => 'Limites m&eacute;moire',
 
 	// A
 	'acces_admin' => 'Acc&egrave;s administrateurs :',
@@ -235,14 +218,20 @@ Cet outil peut &ecirc;tre coupl&eacute; avec &laquo;&nbsp;[.->sommaire]&nbsp;&ra
 	'desactiver_flash:description' => 'Supprime les objets flash des pages de votre site et les remplace par le contenu alternatif associ&eacute;.',
 	'desactiver_flash:nom' => 'D&eacute;sactive les objets flash',
 	'detail_balise_etoilee' => '{{Attention}} : V&eacute;rifiez bien l\'utilisation faite par vos squelettes des balises &eacute;toil&eacute;es. Les traitements de cet outil ne s\'appliqueront pas sur : @bal@.',
+	'detail_disabled' => 'Param&egrave;tres non modifiables :',
 	'detail_fichiers' => 'Fichiers :',
 	'detail_fichiers_distant' => 'Fichiers distants :',
 	'detail_inline' => 'Code inline :',
-	'detail_disabled' => 'Param&egrave;tres non modifiables :',
 	'detail_jquery2' => 'Cet outil utilise la librairie {jQuery}.',
 	'detail_jquery3' => '{{Attention}} : cet outil n&eacute;cessite le plugin [jQuery pour SPIP 1.92->http://files.spip.org/spip-zone/jquery_192.zip] pour fonctionner correctement avec cette version de SPIP.',
 	'detail_pipelines' => 'Pipelines :',
 	'detail_traitements' => 'Traitements :',
+	'distant_aide' => 'Cet outil requiert des fichiers distants qui doivent tous &ecirc;tre correctement install&eacute;s en librairie. Avant d\'activer cet outil ou d\'actualiser ce cadre, assurez-vous que les fichiers requis sont bien pr&eacute;sents sur le serveur distant.',
+	'distant_charge' => 'Fichier correctement t&eacute;l&eacute;charg&eacute; et install&eacute; en librairie.',
+	'distant_charger' => 'Lancer le t&eacute;l&eacute;chargement',
+	'distant_echoue' => 'Erreur sur le chargement distant, cet outil risque de ne pas fonctionner !',
+	'distant_inactif' => 'Fichier introuvable (outil inactif).',
+	'distant_present' => 'Fichier pr&eacute;sent en librairie depuis le @date@.',
 	'dossier_squelettes:description' => 'Modifie le dossier du squelette utilis&eacute;. Par exemple : &quot;squelettes/monsquelette&quot;. Vous pouvez inscrire plusieurs dossiers en les s&eacute;parant par les deux points <html>&laquo;&nbsp;:&nbsp;&raquo;</html>. En laissant vide la case qui suit (ou en tapant &quot;dist&quot;), c\'est le squelette original &quot;dist&quot; fourni par SPIP qui sera utilis&eacute;.[[%dossier_squelettes%]]',
 	'dossier_squelettes:nom' => 'Dossier du squelette',
 
@@ -369,6 +358,7 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:bloc_unique' => 'Un seul bloc ouvert sur la page :',
 	'label:blocs_cookie' => 'Utilisation des cookies :',
 	'label:blocs_slide' => 'Type d\'animation&nbsp;:',
+	'label:copie_Smax' => 'Espace maximal r&eacute;serv&eacute; aux copies locales :',
 	'label:couleurs_fonds' => 'Permettre les fonds :',
 	'label:cs_rss' => 'Activer :',
 	'label:debut_urls_libres' => '<:label:debut_urls_propres:>',
@@ -377,6 +367,7 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:decoration_styles' => 'Vos balises de style personnalis&eacute; :',
 	'label:derniere_modif_invalide' => 'Recalculer juste apr&egrave;s une modification :',
 	'label:distant_off' => 'D&eacute;sactiver :',
+	'label:doc_Smax' => 'Taille maximale des documents :',
 	'label:dossier_squelettes' => 'Dossier(s) &agrave; utiliser :',
 	'label:duree_cache' => 'Dur&eacute;e du cache local :',
 	'label:duree_cache_mutu' => 'Dur&eacute;e du cache en mutualisation :',
@@ -386,6 +377,8 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:glossaire_groupes' => 'Groupe(s) utilis&eacute;(s) :',
 	'label:glossaire_js' => 'Technique utilis&eacute;e :',
 	'label:glossaire_limite' => 'Nombre maximal de liens cr&#233;&#233;s :',
+	'label:img_GDmax' => 'Calculs d\'images avec GD :',
+	'label:img_Hmax' => 'Taille maximale des images :',
 	'label:insertions' => 'Corrections automatiques :',
 	'label:jcorner_classes' => 'Am&eacute;liorer les coins des s&eacute;lecteurs suivants :',
 	'label:jcorner_plugin' => 'Installer le plugin {jQuery} suivant :',
@@ -395,6 +388,7 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:liens_interrogation' => 'Prot&eacute;ger les URLs :',
 	'label:liens_orphelins' => 'Liens cliquables :',
 	'label:log_couteau_suisse' => 'Activer :',
+	'label:logo_Hmax' => 'Taille maximale des logos :',
 	'label:marqueurs_urls_propres' => 'Ajouter les marqueurs dissociant les objets (SPIP>=2.0) :<br/>(ex. : &laquo;&nbsp;-&nbsp;&raquo; pour -Ma-rubrique-, &laquo;&nbsp;@&nbsp;&raquo; pour @Mon-site@) ',
 	'label:marqueurs_urls_propres2' => '<:label:marqueurs_urls_propres:>',
 	'label:marqueurs_urls_propres_qs' => '<:label:marqueurs_urls_propres:>',
@@ -406,6 +400,7 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:paragrapher' => 'Toujours paragrapher :',
 	'label:prive_travaux' => 'Accessibilit&eacute; de l\'espace priv&eacute; pour :',
 	'label:puce' => 'Puce publique &laquo;<html>-</html>&raquo; :',
+	'label:puceSPIP' => '@_CS_CHOIX@',
 	'label:quota_cache' => 'Valeur du quota :',
 	'label:racc_g1' => 'Entr&eacute;e et sortie de la mise en &laquo;<html>{{gras}}</html>&raquo; :',
 	'label:racc_h1' => 'Entr&eacute;e et sortie d\'un &laquo;<html>{{{intertitre}}}</html>&raquo; :',
@@ -422,17 +417,13 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:separateur_urls_page' => 'Caract&egrave;re de s&eacute;paration \'type-id\'<br/>(ex. : ?article-123) :',
 	'label:set_couleurs' => 'Set &agrave; utiliser :',
 	'label:spam_mots' => 'S&eacute;quences interdites :',
+	'label:spip_ecran' => '@_CS_CHOIX@',
 	'label:spip_options_on' => 'Inclure :',
 	'label:spip_script' => 'Script d\'appel :',
 	'label:style_h' => 'Votre style :',
 	'label:style_p' => 'Votre style :',
 	'label:suite_introduction' => 'Points de suite :',
 	'label:terminaison_urls_arbo' => '<:label:terminaison_urls_page:>',
-	'label:url_max_propres' => 'Longueur maximale des URLs (caract&egrave;res) :',
-	'label:url_max_arbo' => '<:label:url_max_propres:>',
-	'label:url_max_libres' => '<:label:url_max_propres:>',
-	'label:url_max_propres2' => '<:label:url_max_propres:>',
-	'label:url_max_propres_qs' => '<:label:url_max_propres:>',
 	'label:terminaison_urls_libres' => '<:label:terminaison_urls_page:>',
 	'label:terminaison_urls_page' => 'Terminaison des URLs (ex : &laquo;&nbsp;.html&nbsp;&raquo;) :',
 	'label:terminaison_urls_propres' => '<:label:terminaison_urls_page:>',
@@ -444,6 +435,11 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:url_arbo_minuscules' => 'Conserver la casse des titres dans les URLs :',
 	'label:url_arbo_sep_id' => 'Caract&egrave;re de s&eacute;paration \'titre-id\' en cas de doublon :<br/>(ne pas utiliser \'/\')',
 	'label:url_glossaire_externe2' => 'Lien vers le glossaire externe :',
+	'label:url_max_arbo' => '<:label:url_max_propres:>',
+	'label:url_max_libres' => '<:label:url_max_propres:>',
+	'label:url_max_propres' => 'Longueur maximale des URLs (caract&egrave;res) :',
+	'label:url_max_propres2' => '<:label:url_max_propres:>',
+	'label:url_max_propres_qs' => '<:label:url_max_propres:>',
 	'label:urls_arbo_sans_type' => 'Afficher le type d\'objet SPIP dans les URLs :',
 	'label:urls_avec_id' => 'Un id syst&eacute;matique, mais...',
 	'label:urls_minuscules' => '@_CS_CHOIX@',
@@ -545,13 +541,16 @@ Si vous r&eacute;initialisez le plugin en cliquant sur un pack, le Couteau Suiss
 	'paragrapher2:description' => 'La fonction SPIP <code>paragrapher()</code> ins&egrave;re des balises &lt;p&gt; et &lt;/p&gt; dans tous les textes qui sont d&eacute;pourvus de paragraphes. Afin de g&eacute;rer plus finement vos styles et vos mises en page, vous avez la possibilit&eacute; d\'uniformiser l\'aspect des textes de votre site.[[%paragrapher%]]',
 	'paragrapher2:nom' => 'Paragrapher',
 	'pipelines' => 'Pipelines utilis&eacute;s&nbsp;:',
+	'previsualisation:description' => 'Par d&eacute;faut, SPIP permet de pr&eacute;visualiser un article dans sa version publique et styl&eacute;e, mais uniquement lorsque celui-ci a &eacute;t&eacute; &laquo; propos&eacute; &agrave; l&rsquo;&eacute;valuation &raquo;. Hors cet outil permet aux auteurs de pr&eacute;visualiser &eacute;galement les articles pendant leur r&eacute;daction. Chacun peut alors pr&eacute;visualiser et modifier son texte &agrave; sa guise.
+
+@puce@ Attention : cette fonctionnalit&eacute; ne modifie pas les droits de pr&eacute;visualisation. Pour que vos r&eacute;dacteurs aient effectivement le droit de pr&eacute;visualiser leurs articles &laquo; en cours de r&eacute;daction &raquo;, vous devez l&rsquo;autoriser (dans le menu {[Configuration&gt;Fonctions avanc&eacute;es->./?exec=config_fonctions]} de l&rsquo;espace priv&eacute;).',
+	'previsualisation:nom' => 'Pr&eacute;visualisation des articles',
+	'puceSPIP' => 'Autoriser le raccourci &laquo;*&raquo;',
+	'puceSPIP_aide' => 'Une puce SPIP : <b>*</b>',
 	'pucesli:description' => 'Remplace les puces &laquo;-&raquo; (tiret simple) des diff&eacute;rents contenus de votre site par des listes not&eacute;es &laquo;-*&raquo; (traduites en HTML par : &lt;ul>&lt;li>&hellip;&lt;/li>&lt;/ul>) et dont le style peut &ecirc;tre facilement personnalis&eacute; par css.
 
 Afin de conserver l\'acc&egrave;s &agrave; la puce image originale de SPIP (le petit triangle), un nouveau raccourci en d&eacute;but de ligne &laquo;*&raquo; peut &ecirc;tre propos&eacute; &agrave; vos r&eacute;dacteurs :[[%puceSPIP%]]',
 	'pucesli:nom' => 'Belles puces',
-	'puceSPIP_aide' => 'Une puce SPIP : <b>*</b>',
-	'puceSPIP' => 'Autoriser le raccourci &laquo;*&raquo;',
-	'label:puceSPIP' => '@_CS_CHOIX@',
 
 	// Q
 	'qui_webmestres' => 'Les webmestres SPIP',
@@ -578,9 +577,6 @@ Afin de conserver l\'acc&egrave;s &agrave; la puce image originale de SPIP (le p
 	'sf_tous' => 'Tous',
 	'simpl_interface:description' => 'D&eacute;sactive le menu de changement rapide de statut d\'un article au survol de sa puce color&eacute;e. Cela est utile si vous cherchez &agrave; obtenir une interface priv&eacute;e la plus d&eacute;pouill&eacute;e possible afin d\'optimiser les performances client.',
 	'simpl_interface:nom' => 'All&egrave;gement de l\'interface priv&eacute;e',
-	'spip_ecran:description' => 'D&eacute;termine la largeur d\'&eacute;cran impos&eacute;e &agrave; tous en partie priv&eacute;e. Un &eacute;cran &eacute;troit pr&eacute;sentera deux colonnes et un &eacute;cran large en pr&eacute;sentera trois. Le r&eacute;glage par d&eacute;faut laisse l\'utilisateur choisir, son choix &eacute;tant stock&eacute; dans un cookie.[[%spip_ecran%]]',
-	'spip_ecran:nom' => 'Largeur d\'&eacute;cran',
-	'label:spip_ecran' => '@_CS_CHOIX@',
 	'smileys:aide' => 'Smileys : @liste@',
 	'smileys:description' => 'Ins&egrave;re des smileys dans tous les textes o&ugrave; appara&icirc;t un raccourci du genre <acronym>:-)</acronym>. Id&eacute;al pour les  forums.
 _ Une balise est disponible pour afficher un tableau de smileys dans vos squelettes : #SMILEYS.
@@ -633,6 +629,8 @@ _ &bull; {Cache permanent} : les d&eacute;lais d\'invalidation du cache sont ign
 _ &bull; {Pas de cache} : d&eacute;sactiver temporairement le cache peut aider au d&eacute;veloppement du site. Ici, rien n\'est stock&eacute; sur le disque.
 _ &bull; {Contr&ocirc;le du cache} : option identique &agrave; la pr&eacute;c&eacute;dente, avec une &eacute;criture sur le disque de tous les r&eacute;sultats afin de pouvoir &eacute;ventuellement les contr&ocirc;ler.</q1>[[%radio_desactive_cache4%]]',
 	'spip_cache:nom' => 'SPIP et le cache&hellip;',
+	'spip_ecran:description' => 'D&eacute;termine la largeur d\'&eacute;cran impos&eacute;e &agrave; tous en partie priv&eacute;e. Un &eacute;cran &eacute;troit pr&eacute;sentera deux colonnes et un &eacute;cran large en pr&eacute;sentera trois. Le r&eacute;glage par d&eacute;faut laisse l\'utilisateur choisir, son choix &eacute;tant stock&eacute; dans un cookie.[[%spip_ecran%]]',
+	'spip_ecran:nom' => 'Largeur d\'&eacute;cran',
 	'stat_auteurs' => 'Les auteurs en stat',
 	'statuts_spip' => 'Uniquement les statuts SPIP suivants :',
 	'statuts_tous' => 'Tous les statuts',
@@ -681,11 +679,11 @@ Les propositions ci-dessous sont bas&eacute;es sur la fonctionnalit&eacute; SQL 
 
 @puce@ {{Ordre des groupes dans le formulaire d\'ajout de mots-cl&eacute;s}} [[%tri_groupes%]][[->%tri_perso_groupes%]]',
 	'tri_articles:nom' => 'Les tris de SPIP',
+	'tri_groupe' => 'Tri sur l\'id du groupe (ORDER BY id_groupe)',
 	'tri_modif' => 'Tri sur la date de modification (ORDER BY date_modif DESC)',
 	'tri_perso' => 'Tri SQL personnalis&eacute;, ORDER BY suivi de :',
 	'tri_publi' => 'Tri sur la date de publication (ORDER BY date DESC)',
 	'tri_titre' => 'Tri sur le titre (ORDER BY 0+titre,titre)',
-	'tri_groupe' => 'Tri sur l\'id du groupe (ORDER BY id_groupe)',
 	'trousse_balises:description' => 'Outil en cours de d&eacute;veloppement. Vous offre quelques balises tr&egrave;s simples et bien pratiques pour am&eacute;liorer la lisibilit&eacute; de vos squelettes.
 
 @puce@ {{#BOLO}} : g&eacute;n&egrave;re un faux texte d\'environ 3000 caract&egrave;res ("bolo" ou "[?lorem ipsum]") dans les squelettes pendant leur mise au point. L\'argument optionnel de cette fonction sp&eacute;cifie la longueur du texte voulu. Exemple : <code>#BOLO{300}</code>. Cette balise accepte tous les filtres de SPIP. Exemple : <code>[(#BOLO|majuscules)]</code>.

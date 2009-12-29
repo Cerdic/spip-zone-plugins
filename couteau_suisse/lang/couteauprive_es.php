@@ -136,7 +136,7 @@ Lo mismo para cambiar el fondo, si la opci&oacute;n de abajo lo permite:@_CS_EXE
 @_CS_ASTER@El formato de estas balizas personalizadas debe listar colores existentes o definir parejas &laquo;baliza=color&raquo;, todo ello separado por comas. Ejemplos: &laquo;gris, rouge&raquo;, &laquo;suave=jaune, fuerte=rouge&raquo;, &laquo;bajo=#99CC11, alto=brown&raquo; o incluso &laquo;gris=#DDDDCC, rouge=#EE3300&raquo;. Para el primer y el &uacute;ltimo ejemplo, las balizas autorizadas son: <code>[gris]</code> y <code>[rouge]</code> (<code>[fond gris]</code> y <code>[fond rouge]</code> si se permiten los fondos).',
 	'couleurs:nom' => 'Todo en colores',
 	'couleurs_fonds' => ', <b>[fond&nbsp;coul]texto[/coul]</b>, <b>[bg&nbsp;coul]texto[/coul]</b>',
-	'cs_comportement:description' => '@puce@ {{Logs.}} Obtener abundante informaci&oacute;n sobre el funcionamiento de la Navaja Suiza en los archivos {spip.log} que se pueden encontrar en el directorio: {@_CS_DIR_TMP@}[[%log_couteau_suisse%]]
+	'cs_comportement:description' => '<MODIF>@puce@ {{Logs.}} Obtener abundante informaci&oacute;n sobre el funcionamiento de la Navaja Suiza en los archivos {spip.log} que se pueden encontrar en el directorio: {@_CS_DIR_TMP@}[[%log_couteau_suisse%]]
 
 @puce@ {{Opciones de SPIP.}} SPIP ordena los plugins en un orden determinado. Para asegurarse de que la Navaja Suiza sea el primero y gestione desde el principio ciertas opciones de SPIP, marca la opci&oacute;n siguiente. Si los permisos de tu servidor lo permiten, se modificar&aacute; autom&aacute;ticamente el archivo {@_CS_FILE_OPTIONS@} para incluir el archivo {@_CS_DIR_TMP@couteau-suisse/mes_spip_options.php}.
 [[%spip_options_on%]]
@@ -146,7 +146,7 @@ Lo mismo para cambiar el fondo, si la opci&oacute;n de abajo lo permite:@_CS_EXE
 	'cs_distant_off' => 'Las comprobaciones de versiones externas',
 	'cs_log_couteau_suisse' => 'Los registros detallados de la Navaja Suiza',
 	'cs_reset' => '&iquest;Confirmas que deseas reinicializar totalmente la Navaja Suiza?',
-	'cs_spip_options_on' => 'Las opciones de SPIP en &laquo;@_CS_FILE_OPTIONS@&raquo;',
+	'cs_spip_options_on' => '<MODIF>Las opciones de SPIP en &laquo;@_CS_FILE_OPTIONS@&raquo;',
 
 	// D
 	'decoration:aide' => 'Decoraci&oacute;n: <b>&lt;balise&gt;prueba&lt;/balise&gt;</b>, con <b>balise</b> = @liste@',
@@ -363,7 +363,7 @@ Atenci&oacute;n, esta herramienta necesita el plugin {jQuery} : {Round Corners} 
 	'label:terminaison_urls_propres_qs' => '<:label:terminaison_urls_page:>',
 	'label:titre_travaux' => 'T&iacute;tulo del mensaje:',
 	'label:titres_etendus' => 'Activar el uso extendido de las balizas #TITRE_XXX:',
-	'label:tri_articles' => 'Tu elecci&oacute;n:',
+	'label:tri_articles' => '<MODIF>Tu elecci&oacute;n:',
 	'label:url_arbo_minuscules' => 'Conservar los espacios de los t&iacute;tulos en las URLs:',
 	'label:url_arbo_sep_id' => 'Car&aacute;cter de separaci&oacute;n \'titre-id\' en caso de duplicidad:<br/>(no utilizar \'/\')',
 	'label:url_glossaire_externe2' => 'Enlace al glosario externo:',
@@ -434,7 +434,7 @@ _ • {Extendido}: se reemplazan adem&aacute;s los enlaces del tipo {<html>yo@sp
 
 	// P
 	'pack_actuel' => 'Paquete @date@',
-	'pack_actuel_avert' => 'Atenci&oacute;n, las sobrecargas para los define() o los globales no se especifican aqu&iacute;',
+	'pack_actuel_avert' => '<MODIF>Atenci&oacute;n, las sobrecargas para los define() o los globales no se especifican aqu&iacute;',
 	'pack_actuel_titre' => 'PAQUETE ACTUAL DE CONFIGURACI&Oacute;N DE LA NAVAJA SUIZA',
 	'pack_alt' => 'Ver los par&aacute;metros de configuraci&oacute;n actual',
 	'pack_descrip' => 'Tu &laquo;Paquete de configuraci&oacute;n actual&raquo; re&uacute;ne el conjunto de par&aacute;metros de configuraci&oacute;n actuales relativos a la Navaja Suiza: la activaci&oacute;n de los &uacute;tiles y el valor de sus eventuales variables.
@@ -457,7 +457,7 @@ Si reinicializas el plugin pulsando en un paquete, la Navaja Suiza volver&aacute
 	'paragrapher2:description' => 'La funci&oacute;n SPIP <code>paragrapher()</code> inserta balizas &lt;p&gt; y &lt;/p&gt; en todos los textos desprovistos de p&aacute;rrafo. Para de un ajuste m&aacute;s fino de tus estilos y compaginaciones, tienes la posibilidad de uniformizar el aspecto de los textos de tu sitio.[[%paragrapher%]]',
 	'paragrapher2:nom' => 'P&aacute;rrafos',
 	'pipelines' => 'Pipelines utilizadas:',
-	'pucesli:description' => 'Reemplaza las vi&ntilde;etas &laquo;-&raquo; (gui&oacute;n simple) de los art&iacute;culos por listas anotadas &laquo;-*&raquo; (traducidas en HTML como: &lt;ul>&lt;li>…&lt;/li>&lt;/ul>) cuyo estilo puede personalizars mediante css.',
+	'pucesli:description' => '<MODIF>Reemplaza las vi&ntilde;etas &laquo;-&raquo; (gui&oacute;n simple) de los art&iacute;culos por listas anotadas &laquo;-*&raquo; (traducidas en HTML como: &lt;ul>&lt;li>…&lt;/li>&lt;/ul>) cuyo estilo puede personalizars mediante css.',
 	'pucesli:nom' => 'Vi&ntilde;etas mejoradas',
 
 	// R
@@ -565,16 +565,16 @@ No te olvides de verificar que la clave <code>\'cadena\'</code> est&eacute; bien
 	'travaux_prochainement' => 'Este sitio se reactivar&aacute; en breve.
 _ Gracias por la comprensi&oacute;n.',
 	'travaux_titre' => '@_CS_TRAVAUX_TITRE@',
-	'tri_articles:description' => 'Elige aqu&iacute; la ordenaci&oacute;n que se usar&aacute; para mostrar tus art&iacute;culos dentro de las secciones cuando navegues por la parte privada del sitio ([->./?exec=auteurs]).
+	'tri_articles:description' => '<MODIF>Elige aqu&iacute; la ordenaci&oacute;n que se usar&aacute; para mostrar tus art&iacute;culos dentro de las secciones cuando navegues por la parte privada del sitio ([->./?exec=auteurs]).
 
 Las propuestas siguientes se basan en la funci&oacute;n SQL \'ORDER BY\': utiliza la ordenaci&oacute;n personalizada s&oacute;lo si sabes muy bien lo que haces (campos disponibles: {id_article, id_rubrique, titre, soustitre, surtitre, statut, date_redac, date_modif, lang, etc.})
 [[%tri_articles%]][[->%tri_perso%]]',
-	'tri_articles:nom' => 'Ordenaci&oacute;n de los art&iacute;culos',
+	'tri_articles:nom' => '<MODIF>Ordenaci&oacute;n de los art&iacute;culos',
 	'tri_modif' => 'Ordenar por fecha de modificaci&oacute;n (ORDER BY date_modif DESC)',
 	'tri_perso' => 'Ordenaci&oacute;n SQL personalizada, ORDER BY seguido por:',
 	'tri_publi' => 'Ordenar por fecha de publicaci&oacute;n (ORDER BY date DESC)',
 	'tri_titre' => 'Ordenar por t&iacute;tulo (ORDER BY 0+titre,titre)',
-	'type_urls:description' => '@puce@ SPIP te permite elegir entre varios tipos de URLs para crear los enlaces de acceso a las p&aacute;ginas de tu sitio:
+	'type_urls:description' => '<MODIF>@puce@ SPIP te permite elegir entre varios tipos de URLs para crear los enlaces de acceso a las p&aacute;ginas de tu sitio:
 
 M&aacute;s informaci&oacute;n: [->http://www.spip.net/es_article2024.html]. La utilidad &laquo;&nbsp;[.->boites_privees]&nbsp;&raquo; te permite ver en la p&aacute;gina de cada objeto SPIP la URL propia asociada.
 [[%radio_type_urls3%]]
