@@ -1,4 +1,3 @@
-<B_doc>
 [<!--(#REM)
 
 	Modele pour <doc> modifie pour le plugin Lecteur Flash pour MP3
@@ -25,6 +24,7 @@ eval(args);
 	[#playliste_video{ width:(#ENV{largeur,''})px;}]
 </style>
 
+[
 <div id="playliste_video">
 	<object id="myFlash" type="application/x-shockwave-flash" data="#CHEMIN{flash/player_flv_js.swf}" width="#ENV{largeur,480}" height="#ENV{hauteur,360}">
 		<param name="movie" value="#CHEMIN{flash/player_flv_js.swf}" />
@@ -48,7 +48,7 @@ eval(args);
 			<div id="vposition"></div>
 		</div>
 
-		#MODELE{video_liste,id_rubrique,id_article}
+		(#MODELE{video_liste,id_rubrique,id_article})
 	</div>	
 </div>
-</B_doc>
+]
