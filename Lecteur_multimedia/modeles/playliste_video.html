@@ -7,73 +7,7 @@
 	afficher une playliste
 
 -->]
- <script type="text/javascript">
-	var myListener = new Object();
-	
-	/**
-	 * Initialisation
-	 */
-	myListener.onInit = function()
-	{
-		
-	};
-	/**
-	 * onClick event on the video
-	 */
-	myListener.onClick = function()
-	{
-		var total = document.getElementById("info_click").innerHTML;
-		document.getElementById("info_click").innerHTML = Number(total)+1;
-	};
-	/**
-	 * onKeyUp event on the video
-	 */
-	myListener.onKeyUp = function(pKey)
-	{
-		document.getElementById("info_key").innerHTML = pKey;
-	};
-	/**
-	 * onComplete event
-	 */
-	myListener.onFinished = function()
-	{
-		video_next();
-	};
-	/**
-	 * Update
-	 */
-	myListener.onUpdate = function()
-	{
-		/*
-		document.getElementById("info_playing").innerHTML = this.isPlaying;
-    	document.getElementById("info_url").innerHTML = this.url;
-    	document.getElementById("info_volume").innerHTML = this.volume;
-    	document.getElementById("info_position").innerHTML = this.position;
-    	document.getElementById("info_duration").innerHTML = this.duration;
-    	// prevoir un preload de la prochaine video
-		document.getElementById("info_buffer").innerHTML = this.bufferLength + "/" + this.bufferTime;
-    	document.getElementById("info_bytes").innerHTML = this.bytesLoaded + "/" + this.bytesTotal + " (" + this.bytesPercent + "%)";
-    	*/
-    	var timer = this.bytesPercent ;
-    	
-    	$("#vloading").css({width:Math.round(timer) +"%"});
-    	
-    	var isPlaying = (this.isPlaying == "true");
-    	isVideoPlaying = "true" ;
-   		document.getElementById("playerplay").style.display = (isPlaying)?"none":"block";
-   		document.getElementById("playerpause").style.display = (isPlaying)?"block":"none";
-   		
-    	var timer2 = this.position / this.duration * 100 ;
-    	$("#vposition").css({width:Math.round(timer2) +"%"});
-           
-	};
-	
-	function getFlashObject()
-	{
-		return document.getElementById("myFlash");
-	}
-                
-</script>
+<script type="text/javascript" src="#CHEMIN{javascript/video_playlist.js}"></script>
 <!--[if IE]>
 <script type="text/javascript" event="FSCommand(command,args)" for="myFlash">
 eval(args);
@@ -85,108 +19,10 @@ eval(args);
 	[(#CONFIG{player_preferences}|unserialize|var_dump)]
 
 -->]
-
 <style type="text/css">
-
-	#vscrollbar{
-		clear:both;
-		height:5px;
-		margin:5px 0px;
-		border:1px solid white;
-		background-color:white;
-		position:relative;
-	}
-	#vloading{
-		margin:0px;
-		padding:0px;
-		height:5px;
-		background-color:#ccc;
-		width:0%;
-		position:absolute;
-		left:0px;
-		top:0px;
-		font-size:0.3em;
-		z-index:10;
-	}
-	#vposition{
-		margin:0px;
-		padding:0px;
-		height:5px;
-		background-color:#e74455;
-		width:0%;
-		position:absolute;
-		left:0px;
-		top:0px;
-		font-size:0.3em;
-		z-index:20;
-	}
-
-	#vscrollbar {
-		clear:none;
-	}
-	
-	#playerv a{
-	display:block;
-	width:64px;
-	height:64px;
-	overflow:hidden;	text-indent:-100em;
-	}
-	
-	#playerv .button {
-		float:left;
-		width:64px;
-		height:64px;
-	}
-	#playerv .play {
-		background-image: url(#CHEMIN{skins/la-bas/play.png});
-		
-	}
-	#playerv .play:hover {
-		background-image: url(#CHEMIN{skins/la-bas/play.png});
-	}
-	#playerv .next {
-		background-image: url(#CHEMIN{skins/la-bas/forward.png});
-	}
-	#playerv .next:hover {
-		background-image: url(#CHEMIN{skins/la-bas/forward.png});
-	}
-	#playerv .prev {
-		background-image: url(#CHEMIN{skins/la-bas/backward.png});
-	}
-	#player .prev:hover {
-		background-image: url(#CHEMIN{skins/la-bas/backward.png});
-	}
-	#playerv .pause {
-		background-image: url(#CHEMIN{skins/la-bas/pause.png});
-		display: none;
-	}
-	#playerv .pause:hover {
-		background-image: url(#CHEMIN{skins/la-bas/pause.png});
-	}
-	#playerv .stop {
-		background-image: url(#CHEMIN{skins/la-bas/stop.png});
-	}
-	#playerv .stop:hover {
-		background-image: url(#CHEMIN{skins/la-bas/stop.png});
-	}
-	#videobox{
-		padding:10px; 
-	}
-
-	#playliste_video{ 
-		clear:both; 
-		margin : 20px auto; 
-		padding:0px; 
-		background-color:#3E4040; 
-		border:none; 
-		width:#ENV{largeur,480}px;
-
-	}
-
-	ul.video { clear:both; margin : 10px 20px; padding:10px 0px; border:none;text-align:left; }
-	ul.video a { color:#fff; }
-	ul.video li.over{ background-color:#eeeeee; }
-	ul.video li.play_on { background-color:#a22c38; }
+	#SET{skin,#ENV{skin,skins/la-bas}|concat{'/skin.css'}}
+	[(#INCLURE{fond=#GET{skin}}|compacte_css)]
+	[#playliste_video{ width:(#ENV{largeur,''})px;}]
 </style>
 
 <div id="playliste_video">
@@ -211,14 +47,8 @@ eval(args);
 			<div id="vloading"></div>
 			<div id="vposition"></div>
 		</div>
-	
-		<ul class="playliste video">
-			<BOUCLE_doc (DOCUMENTS) {id_rubrique ?} {id_article ?} {extension==flv} {fichier == (flv$)} {!par date}{0,10}>
-			<li class="play_">
-				<a href="[(#FICHIER|replace{"\?key=(.)*$",""})]" type="#TYPE" rel="video">[(#TITRE|sinon{[(#FICHIER|joli_titre|couper{50})]})]</a>
-			</li>
-			</BOUCLE_doc>
-		</ul>
+
+		#MODELE{video_liste,id_rubrique,id_article}
 	</div>	
 </div>
 </B_doc>
