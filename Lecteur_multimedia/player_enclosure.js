@@ -23,7 +23,6 @@ soundManager.debugMode = false;
 var seljQ = '@';
 if (jQuery.fn.jquery>="1.3.0")
 	sel='';
-alert(jQuery.fn.jquery);
 
 jQuery(document).ready(function(){
 	//lecteur_debug();
