@@ -26,7 +26,7 @@ function Player_head(){
 		. 'var image_pause="'.find_in_path('images/pausel.gif').'";'."\n"
 		. 'soundManager.url = "'.find_in_path('soundmanager/soundmanager2.swf').'";'."\n"
   		. 'soundManager.nullURL = "'.find_in_path('soundmanager/null.mp3').'";'."\n"
-		. 'var videoNullUrl = "'._DIR_PLUGIN_PLAYER.'null.flv";'."\n"
+		. 'var videoNullUrl = "null.flv";'."\n"
 		. 'var DIR_PLUGIN_PLAYER = "' . _DIR_PLUGIN_PLAYER . '";'
 		. "//--></script>\n"
 		. '<script type="text/javascript" src="'._DIR_PLUGIN_PLAYER.'javascript/jscroller.js"></script>'."\n"
