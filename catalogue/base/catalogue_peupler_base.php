@@ -8,44 +8,44 @@ function catalogue_peupler_base() {
 	// Attention, spécifier le NOM des TABLES et non le nom des BOUCLES !
 	sql_insertq_multi('spip_variantes', array(
 		array(
-			'id_article' => 1,
+			'id_article' => 2,
 			'titre' => 'Standard price',
 			'descriptif' => '',
 			'prix_ht' => '850.00',
 			'tva' => '0.196',
-			'statut' => 'prepa'
+			'statut' => 'publie'
 			),
 		array(
-			'id_article' => 1,
+			'id_article' => 2,
 			'titre' => 'Early Bird',
 			'descriptif' => '',
 			'prix_ht' => '750.00',
 			'tva' => '0.196',
-			'statut' => 'prepa'
+			'statut' => 'publie'
 			),
 		array(
-			'id_article' => 1,
+			'id_article' => 2,
 			'titre' => 'Concurrences subscribers',
 			'descriptif' => '',
 			'prix_ht' => '680.00',
 			'tva' => '0.196',
-			'statut' => 'prepa'
+			'statut' => 'publie'
 			),
 		array(
-			'id_article' => 1,
+			'id_article' => 2,
 			'titre' => 'Professor',
 			'descriptif' => '',
 			'prix_ht' => '380.00',
 			'tva' => '0.196',
-			'statut' => 'prepa'
+			'statut' => 'publie'
 			),
 		array(
-			'id_article' => 1,
+			'id_article' => 2,
 			'titre' => 'Student',
 			'descriptif' => '',
 			'prix_ht' => '250.00',
 			'tva' => '0.196',
-			'statut' => 'prepa'
+			'statut' => 'publie'
 			),
 		array(
 			'id_article' => 80,

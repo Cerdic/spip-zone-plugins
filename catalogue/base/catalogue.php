@@ -38,7 +38,7 @@ function catalogue_declarer_tables_interfaces($interface){
 
 function catalogue_declarer_tables_principales($tables_principales){
 
-	//-- Table cat_variantes ------------------------------------------
+	//-- Table variantes ------------------------------------------
 	$variantes = array(
 		"id_variante" 	=> "bigint(21) NOT NULL auto_increment",
 		"id_article" 	=> "bigint(21) NOT NULL DEFAULT 0",
@@ -46,7 +46,7 @@ function catalogue_declarer_tables_principales($tables_principales){
 		"descriptif" 	=> "tinytext DEFAULT '' NOT NULL",
 		"statut"		=> "VARCHAR(10) NOT NULL DEFAULT 0",
 		"prix_ht" 		=> "decimal(6,2) default NULL",
-		"tva"			=> "decimal(4,2) default '0.196'",
+		"tva"			=> "decimal(4,3) default '0.196'",
 		"date" 			=> "datetime NOT NULL default '0000-00-00 00:00:00'",
 		"date_redac" 	=> "datetime NOT NULL default '0000-00-00 00:00:00'",
 		"maj"			=> "TIMESTAMP"
@@ -56,14 +56,14 @@ function catalogue_declarer_tables_principales($tables_principales){
 		"KEY id_article" => "id_article"
 		);
 
-	//-- Table cat_options ------------------------------------------
+	//-- Table options ------------------------------------------
 	$options = array(
 		"id_option" 	=> "bigint(21) NOT NULL auto_increment",
 		"titre" 		=> "tinytext DEFAULT '' NOT NULL",
 		"descriptif" 	=> "tinytext DEFAULT '' NOT NULL",
 		"statut"		=> "VARCHAR(10) NOT NULL DEFAULT 0",
 		"prix_ht" 		=> "decimal(6,2) default NULL",
-		"tva"			=> "decimal(4,2) default '0.196'",
+		"tva"			=> "decimal(4,3) default '0.196'",
 		"date" 			=> "datetime NOT NULL default '0000-00-00 00:00:00'",
 		"maj"			=> "TIMESTAMP"
 		);
@@ -71,7 +71,7 @@ function catalogue_declarer_tables_principales($tables_principales){
 		"PRIMARY KEY"	=> "id_option"
 		);
 
-	//-- Table cat_options_articles ------------------------------------------
+	//-- Table options_articles ------------------------------------------
 	$options_articles = array(
 		"id_option" 	=> "bigint(21) NOT NULL DEFAULT 0",
 		"id_article" 	=> "bigint(21) NOT NULL DEFAULT 0",
@@ -80,7 +80,7 @@ function catalogue_declarer_tables_principales($tables_principales){
 		"PRIMARY KEY"	=> "id_option, id_article"
 		);
 
-	//-- Table cat_transactions ------------------------------------------
+	//-- Table transactions ------------------------------------------
 	$transactions = array(
 		"id_transaction"=> "bigint(21) NOT NULL auto_increment",
 		"date" 			=> "datetime NOT NULL default '0000-00-00 00:00:00'",
