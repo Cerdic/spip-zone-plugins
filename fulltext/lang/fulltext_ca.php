@@ -40,6 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'il_faut_myisam' => 'cal MyISAM',
 	'incoherence_charset' => 'Una incoher&egrave;ncia entre el joc de car&agrave;cters del vostre lloc i el de les taules de la vostra base de dades pot falsejar les cerques amb car&agrave;cters accentuats:',
 	'index_regenere' => '&iacute;ndex de la taula reconstru&iuml;da',
+	'index_reinitialise' => 'Els documents amb error s\'han reinicialitzat',
 	'index_supprime' => '&iacute;ndex suprimit',
 
 	// L
@@ -57,6 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// R
 	'regenerer_tous' => 'Renovar tots els &iacute;ndex FULLTEXT',
+	'reinitialise_index_doc' => 'Tornar a iniciar la indexaci&oacute; dels documents amb errors',
 	'reserve_webmestres' => 'P&agrave;gina reservada als webmestres',
 	'retourne' => 'Retorna els texts que contenen',
 
