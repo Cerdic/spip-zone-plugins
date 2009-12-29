@@ -93,9 +93,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'meteo_consultation' => 'Consultez la m&eacute;t&eacute;o de @ville@',
 	'meteo_de' => 'M&eacute;t&eacute;o de @ville@',
 	'meteo_na' => 'inconnu',
+	'meteo_previsions' => 'pr&eacute;visions du',
 	'meteo_previsions_aujourdhui' => 'pr&eacute;visions pour aujourd\'hui',
 	'meteo_previsions_n_jours' => 'pr&eacute;visions &agrave; @nbj@ jours',
-	'meteo_previsions' => 'pr&eacute;visions du',
 
 	// N
 	'nuit' => 'nuit',
