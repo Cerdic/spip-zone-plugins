@@ -81,6 +81,7 @@ function formulaires_joindre_document_charger_dist($id_document='new',$id_objet=
 		$valeurs['objet'] = $objet;
 		$valeurs['refdoc_joindre'] = '';
 		if ($valeurs['editable']){
+			include_spip('inc/autoriser');
 			$valeurs['editable'] = autoriser('modifier',$objet,$id_objet)?' ':'';
 		}
 	}
