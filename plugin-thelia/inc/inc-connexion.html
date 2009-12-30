@@ -78,7 +78,7 @@
 				<form action="#URL_PAGE{nouveau,lang=#LANG}" method="post" name="nouveau" id="nouveau" class="formulaire_spip" >
 					<input type="hidden" name="thelia_action" value="creercompte" /> 
 					<fieldset>
-					<legend><:spipthelia:mes_coordonnes:></legend>
+					<legend><:spipthelia:mes_coordonnees:></legend>
 					<ul>
 				            <li>
 				                <label for="civilite"><:spipthelia:civilite:> *</label>
@@ -161,11 +161,13 @@
 				        	    	<input name="motdepasse2" id="motdepasse2" type="password"  class="text"/>
 					            </li>
 				            
-  	        	           		    <span class="commentaires">* <:spipthelia:champs_obligatoires:></span>
-						    <li>
-							<input type="submit" value="<:spipthelia:valider:>"   class="submit"/>
-						</li>
+  	        	           		    
+						    
 						</ul>
+						<span class="commentaires">* <:spipthelia:champs_obligatoires:></span>
+						<p class="boutons">
+							<input type="submit" value="<:spipthelia:valider:>"   class="submit"/>
+						</p>
 					</fieldset>
 						
 			            </form>
