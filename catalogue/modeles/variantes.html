@@ -11,8 +11,8 @@
 
 <BOUCLE_variantes(VARIANTES){id_article=#ID}{statut=publie}{!par prix_ht}>
 <dl class='ajax fiche'>
-	<dd class="radio"><input type="radio" name="id_variante" value="#ID_VARIANTE"[ (#ENV{id_variante}|=={#ID_VARIANTE}|oui)checked='checked'] /></dd>
-	<dd class="desc #EDIT{titre}">#TITRE<span class="italique #EDIT{descriptif}">[(#DESCRIPTIF|PtoBR|sinon{'ajouter descriptif &agrave; la variante...'})]</span></dd>
+	<dd class="radio"><input type="radio" name="id_variante" id="variante_#ID_VARIANTE" value="#ID_VARIANTE"[ (#ENV{id_variante}|=={#ID_VARIANTE}|oui)checked='checked'] /></dd>
+	<dd class="desc #EDIT{titre}"><label for="variante_#ID_VARIANTE">#TITRE[<span class="italique #EDIT{descriptif}">&nbsp;(#DESCRIPTIF|PtoBR|sinon{'ajouter descriptif &agrave; la variante...'})</span>]</label></dd>
 	[<dd class="prix #EDIT{prix_ht}">(#PRIX_HT|monetaire)</dd>]
 	[<!--dd class="prix">(#EVAL{[(#EVAL{1+#TVA})]*[(#PRIX_HT)]}|monetaire)</dd-->]
 </dl>
