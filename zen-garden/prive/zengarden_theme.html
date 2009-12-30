@@ -4,11 +4,11 @@
 <h2><:zengarden:choix_theme:></h2>
 [<p class='pagination'>(#PAGINATION)</p>]
 <ul class='liste_themes'>
-<BOUCLE_themes(POUR){tableau #GET{themes}}{cle!=#ENV{selection}}{par chemin}{pagination 15}>
+<BOUCLE_themes(POUR){tableau #GET{themes}}{cle!=#ENV{selection}}{par chemin_tri}{pagination 20}>
 	<li class='theme'>
 		<div class="qTip target_leftMiddle tooltip_rightMiddle">
 		[(#EVAL{_DIR_THEMES}|concat{#VALEUR|table_valeur{chemin},'/',#VALEUR|table_valeur{icon}}
-		|image_reduire{170,128}
+		|image_reduire{100,75}
 		|inserer_attribut{class,''}
 		|inserer_attribut{alt,#VALEUR|table_valeur{nom}|typo|extraire_multi})]
 		<h3 class="">[(#VALEUR|table_valeur{nom}|typo|extraire_multi)]</h3>
