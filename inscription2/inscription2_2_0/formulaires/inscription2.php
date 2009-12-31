@@ -149,8 +149,6 @@ function formulaires_inscription2_verifier_dist($id_auteur = null,$redirect = nu
 	 * Il se peut que l'on active pas le password à l'inscription
 	 * mais uniquement à la modification ...
 	 * On le test ici en créant la variable $pass_actif
-	 * pass et password1 sont les variables a la creation du compte
-	 * password et password1 sont les variables a la modification du compte
 	 */  
 	$pass_actif = false;
 	if(is_numeric($id_auteur) && (lire_config('inscription2/pass_fiche_mod') == 'on')){
@@ -295,8 +293,6 @@ function formulaires_inscription2_traiter_dist($id_auteur = NULL,$redirect = nul
 	if(($mode == 'inscription_pass') || ($mode == 'modification_auteur_pass')){
 		if (strlen(_request('password')) != 0)
 			$new_pass = _request('password');
-		elseif($mode == 'inscription_pass')
-			$new_pass = _request('pass'); 
 
 		if (strlen($new_pass)>0) {
 			include_spip('inc/acces');
@@ -393,7 +389,7 @@ function formulaires_inscription2_traiter_dist($id_auteur = NULL,$redirect = nul
 		);
 	}
 
-	if(isset($_FILES['logo_auteur'])){
+	if(isset($_FILES['logo_auteur']) && ($_FILES['logo_auteur']['error'] == 0)){
 		$chercher_logo = charger_fonction('chercher_logo', 'inc');
 		
 		// supprimer l'ancien logo
