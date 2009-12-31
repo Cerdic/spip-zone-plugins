@@ -27,6 +27,8 @@ function action_dissocier_document_dist(){
 		$check = true;
 	if ($id_objet=intval($id_objet)	AND autoriser('modifier',$objet,$id_objet))
 		dissocier_document($document, $objet, $id_objet, $suppr, $check);
+	else
+		spip_log("Interdit de modifier $objet $id_objet","spip");
 }
 
 // http://doc.spip.org/@supprimer_lien_document
