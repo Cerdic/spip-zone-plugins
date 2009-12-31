@@ -35,10 +35,10 @@ function inc_langonet_verifier_definition($module, $langue, $ou_langue, $ou_fich
 
 	// On cherche l'ensemble des items utilises dans l'arborescence $ou_fichiers
 	$utilises_brut = array('items' => array(), 'suffixes' => array());
-	$regexp = ",(=\"$module:|='$module:|<\w+>$module:|<:$module:|_T\('$module:|_U\('$module:)(\w*)('\s*\.\s*\\$*\w*)*,im";
+//	$regexp = ",(=\"$module:|='$module:|<\w+>$module:|<:$module:|_T\('$module:|_U\('$module:)(\w*)('\s*\.\s*\\$*\w*)*,im";
 	foreach (preg_files(_DIR_RACINE.$ou_fichiers,'\.(html|php|xml)$') as $_fichier) {
 		lire_fichier($_fichier, $contenu);
-		if (preg_match_all($regexp, $contenu, $matches)) {
+		if (preg_match_all(_TROUVER_ITEM, $contenu, $matches)) {
 			$utilises_brut['items'] = array_merge($utilises_brut['items'], $matches[2]);
 			$utilises_brut['suffixes'] = array_merge($utilises_brut['suffixes'], $matches[3]);
 		}
