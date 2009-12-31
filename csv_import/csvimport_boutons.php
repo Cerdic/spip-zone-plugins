@@ -25,8 +25,8 @@ function csvimport_ajouterBoutons($boutons_admin) {
 
 	  // on voit le bouton dans la barre "naviguer"
 		$boutons_admin['naviguer']->sousmenu["csvimport_tous"]= new Bouton(
-		"../"._DIR_PLUGIN_CSVIMPORT."img_pack/csvimport-24.gif",  // icone
-		_T("csvimport:csvimport") //titre
+			_DIR_PLUGIN_CSVIMPORT."img_pack/csvimport-24.gif",  // icone
+			_T("csvimport:csvimport") //titre
 		);
 	}
 	return $boutons_admin;
