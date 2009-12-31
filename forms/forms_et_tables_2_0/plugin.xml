@@ -5,9 +5,9 @@
 	<icon>img_pack/form-24.png</icon>
 	<auteur>	<!-- Auteur du plugin -->
 		<multi>[ar]&#1575;&#1606;&#1591;&#1608;&#1575;&#1606; &#1576;&#1578;&#1585;&#1608;&#1548; &#1587;&#1610;&#1583;&#1585;&#1610;&#1603; &#1605;&#1608;&#1585;&#1575;&#1606;&#1548; &#1585;&#1610;&#1606;&#1575;&#1578;&#1608;
-		[fr]Antoine Pitrou, Cedric Morin, Renato Formato, Jérome Escoffier (adaptation à SPIP2)
-		[it]Antoine Pitrou, Cedric Morin, Renato Formato, Jérome Escoffier (adaptation à SPIP2)
-	  [es]Antoine Pitrou, Cedric Morin, Renato Formato, Jérome Escoffier (adaptation à SPIP2)
+		[fr]Antoine Pitrou, Cedric Morin, Renato Formato, Jerome Escoffier (adaptation à SPIP2)
+		[it]Antoine Pitrou, Cedric Morin, Renato Formato, Jerome Escoffier (adaptation à SPIP2)
+	  [es]Antoine Pitrou, Cedric Morin, Renato Formato, Jerome Escoffier (adaptation à SPIP2)
 		</multi>
 	</auteur>
 	<version>
@@ -44,7 +44,7 @@
 	Este plugin tambi&#233;n permite la publicaci&oacute;n de sondeos y encuestas, la colecta de las respuestas en la base de datos y su descarga en formato CSV (Comma Sepparated Variables).
 	</multi>
 	</description>
-	<lien>http://icp.ge.ch/sem/cms-spip/spip.php?article900</lien> <!-- URI de documentation -->
+	<lien>http://www.spip-contrib.net/Forms-Tables-2-0</lien> <!-- URI de documentation -->
 	<options> <!-- fichier charge a chaque hit -->
 	forms_options.php
 	</options>
