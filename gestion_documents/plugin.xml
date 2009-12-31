@@ -64,6 +64,12 @@
 		<icone>img_pack/portfolio-24.png</icone>
 		<url>portfolio</url>
 	</bouton>	
-	<necessite id="SPIP" version="[2.0.9;]" />
+	<bouton id='documents21' parent='bando_edition'>
+		<titre>gestdoc:documents</titre>
+		<icone>images/portfolio-16.png</icone>
+		<url>portfolio</url>
+	</bouton>
+	<necessite id="SPIP" version="[2.0.10;]" />
 	<necessite id="spip_bonux" version="[1.8;]" />
+	<necessite id="Z" version="[1.2.1;]" />
 </plugin>
