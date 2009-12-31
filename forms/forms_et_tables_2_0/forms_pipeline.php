@@ -115,6 +115,7 @@
 			if (!_request('var_noajax'))
 				$flux .= "<script src='"._DIR_PLUGIN_FORMS."javascript/forms_lier_donnees.js' type='text/javascript'></script>\n";
 		}
+
 		if (_request('exec')=='forms_edit'){
 			$flux .= "<script src='"._DIR_PLUGIN_FORMS."javascript/interface.js' type='text/javascript'></script>";
 			if (!_request('var_noajax'))

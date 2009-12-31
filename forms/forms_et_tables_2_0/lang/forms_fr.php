@@ -148,6 +148,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'modifiable_donnees' => 'Donn&eacute;s modifiables dans l\'espace public&nbsp;:',
 	'monetaire_invalide' => 'Champ mon&eacute;taire invalide',
 	'monnaie_euro' => 'Euro (&euro;)',
+	'monnaie_dollar' => 'Dollar (&#36;)',
+	'monnaie_livre' => 'Livre Sterling (&pound;)',
+	'monnaie_chf' => 'CHF (Franc suisse)',
 	'multiple_donnees' => 'Saisie des donn&eacute;es dans l\'espace public&nbsp;:',
 
 	// N
@@ -176,6 +179,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reponse_retrovez' => 'Retrouvez cette r&eacute;ponse dans l\'interface d\'administration :',
 	'reponses' => 'r&eacute;ponses',
 	'resultats' => 'R&eacute;sultats : ',
+	'retour_edition' => 'Retour &eacute;dition ',
 
 	// S
 	'site_introuvable' => 'Ce site n\'a pas &eacute;t&eacute; trouv&eacute;.',

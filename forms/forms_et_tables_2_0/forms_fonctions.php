@@ -58,7 +58,9 @@
 		  FROM spip_forms_donnees_donnees AS l
 		  JOIN spip_forms_donnees AS d ON d.id_donnee=l.id_donnee_liee
 		  WHERE $in AND l.id_donnee="._q($id_donnee));
-		$cpt = spip_num_rows($res);
+		//adapatation SPIP2
+		//$cpt = spip_num_rows($res);
+		$cpt =  sql_count($res);
 		$out = "";
 		if (!$etoile){
 			if ($cpt==0) $out .= "";//_T("$pre:aucune_reponse");

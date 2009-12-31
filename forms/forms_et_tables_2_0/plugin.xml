@@ -1,20 +1,20 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	<multi>[ar]&#1575;&#1604;&#1575;&#1587;&#1578;&#1605;&#1575;&#1585;&#1575;&#1578;[en]Forms[fr]Formulaires&amp;Tables[it] Forms[es] Formularios</multi> (SPIP 1.9.1+)
+	<multi>[ar]&#1575;&#1604;&#1575;&#1587;&#1578;&#1605;&#1575;&#1585;&#1575;&#1578;[en]Forms[fr]Formulaires&amp;Tables[it] Forms[es] Formularios</multi> (SPIP 2.0+)
 	</nom>
 	<icon>img_pack/form-24.png</icon>
 	<auteur>	<!-- Auteur du plugin -->
 		<multi>[ar]&#1575;&#1606;&#1591;&#1608;&#1575;&#1606; &#1576;&#1578;&#1585;&#1608;&#1548; &#1587;&#1610;&#1583;&#1585;&#1610;&#1603; &#1605;&#1608;&#1585;&#1575;&#1606;&#1548; &#1585;&#1610;&#1606;&#1575;&#1578;&#1608;
-		[fr]Antoine Pitrou, Cedric Morin, Renato Formato
-		[it]Antoine Pitrou, Cedric Morin, Renato Formato
-	  [es]Antoine Pitrou, Cedric Morin, Renato Formato
+		[fr]Antoine Pitrou, Cedric Morin, Renato Formato, Jérome Escoffier (adaptation à SPIP2)
+		[it]Antoine Pitrou, Cedric Morin, Renato Formato, Jérome Escoffier (adaptation à SPIP2)
+	  [es]Antoine Pitrou, Cedric Morin, Renato Formato, Jérome Escoffier (adaptation à SPIP2)
 		</multi>
 	</auteur>
 	<version>
-	0.304
+	0.304 pour SPIP2
 	</version>
 	<etat>
-	stable
+	test
 	</etat>
 	<description>
 	<multi>
@@ -23,14 +23,28 @@
 	[en]editable forms management an administration.
 	This plugin can also publish polls and surveys, store the replies in the database and upload them in CSV format
       [fr]Gestion et administration de formulaires &#233;ditables.
-	Ce plugin permet &#233;galement la publication de sondages et enqu&#232;tes, la collecte des reponses dans la base de donn&#233;es et le t&#233;l&#233;chargement au format csv
+	Ce plugin permet &#233;galement la publication de sondages et enqu&#232;tes, la collecte des reponses dans la base de donn&#233;es et le t&#233;l&#233;chargement au format csv. 
+<br /><br />Adaptation SPIP2 :
+<br /><br />Quelques remarques concernant cette adaptation :
+<br /><br />1-champ de type monetaire : 
+<br /><br />l'unite saisie en administration est exploitee uniquement dans le tableau des reponses. Il serait interessant de voir si on ne peut pas laisser un choix a la saisie (soit au moment de la construction du formulaire soit au moment de la saisie par l'utilisateur). Il serait ensuite interessant d'exploiter cette donnee ailleurs (export, suivi des reponses).
+<br /><br />To do : faire ces modifications pour utiliser la donnee monetaire.
+<br /><br />	
+2- nous avons reactive le tableau des resultats (nous ne le voyons pas en SPIP 1.9+ ): 
+<br /><br />Par contre, dans ce tableau les tris sur ‘id’ et ‘date’ marchent. Ca ne marche pas sur les autres champs.
+<br /><br />To do : generaliser le tri sur les autres champs
+<br /><br />	
+3- probleme confirmation d'une reponse a un sondage (a voir)
+<br /><br />la fonction de confirmation d'une reponse dans un sondage est pour l'instant by passee, la reponse est automatiquement valide sans passage par confirmation = attente. Cette fonction doit servir a traiter des  multiple via des robots ou quelque chose comme ça.
+<br /><br />To do : faire marcher cette fonction de confirmation de la reponse, sur SPIP2, et enlever le by pass decrit ci-dessus.
+<br /><br /><a href="http://zone.spip.org/trac/spip-zone/wiki/SpipForms" target="_new">documentation</a> 
 	[it]Gestione ed amministrazione di form modificabili.
 	Questo plugin consente anche la publicazione di sondaggi ed inchieste, la raccolta delle risposte all'interno della base dati e le mette a disposizione per lo scaricamento in formato csv
       [es]Gesti&oacute;n y administraci&oacute;n de formularios editables.
 	Este plugin tambi&#233;n permite la publicaci&oacute;n de sondeos y encuestas, la colecta de las respuestas en la base de datos y su descarga en formato CSV (Comma Sepparated Variables).
 	</multi>
 	</description>
-	<lien>http://zone.spip.org/trac/spip-zone/wiki/SpipForms</lien> <!-- URI de documentation -->
+	<lien>http://icp.ge.ch/sem/cms-spip/spip.php?article900</lien> <!-- URI de documentation -->
 	<options> <!-- fichier charge a chaque hit -->
 	forms_options.php
 	</options>

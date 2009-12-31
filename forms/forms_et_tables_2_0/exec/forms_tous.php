@@ -11,6 +11,7 @@
  *
  */
 
+
 include_spip('inc/forms');
 
 function exec_forms_tous(){
@@ -20,17 +21,31 @@ function exec_forms_tous(){
 
   _Forms_install();
 	
-	debut_page(_T("forms:tous_formulaires"), "documents", "forms");
-	debut_gauche();
-	debut_boite_info();
-	echo _T("forms:boite_info");
-	fin_boite_info();
+	/* adaptation SPIP2 */
+	/*debut_page(_T("forms:tous_formulaires"), "documents", "forms");*/
+	$commencer_page = charger_fonction("commencer_page", "inc") ; 
+ 	echo $commencer_page(_T("forms:tous_formulaires"), "documents", "forms") ;
+	/* fin adaptation SPIP2 */
 	
-	creer_colonne_droite();
+	/* adaptation SPIP2 */
+	/*debut_gauche();*/
+	echo debut_gauche('', true);
+	/*debut_boite_info();*/
+	echo debut_boite_info(true);
+	echo _T("forms:boite_info");
+	/*fin_boite_info();*/
+	echo fin_boite_info(true);
+	/* fin adaptation SPIP2 */
+	
+	/*creer_colonne_droite();*/
+	echo creer_colonne_droite('',true);
 	if (include_spip('inc/snippets'))
 		echo boite_snippets(_T('forms:formulaire'),_DIR_PLUGIN_FORMS."img_pack/form-24.gif",'forms','forms');
 	
-	debut_droite();
+	/* adaptation SPIP2 */
+	/*debut_droite();*/
+	echo debut_droite('',true);
+	/* fin adaptation SPIP2 */
 	
 	/*$contexte = array('couleur_claire'=>$GLOBALS['couleur_claire'],'couleur_foncee'=>$GLOBALS['couleur_foncee']);
 	echo recuperer_fond("exec/forms_tous",$contexte);	*/

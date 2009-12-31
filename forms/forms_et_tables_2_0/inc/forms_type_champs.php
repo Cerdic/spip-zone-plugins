@@ -10,7 +10,9 @@
  *  2005,2006 - Distribue sous licence GNU/GPL
  *
  */
-
+	
+	
+	
 	$GLOBALS['forms_types_champs_etendus']=array();
 	Forms_importe_types_etendus();
 
@@ -34,14 +36,19 @@
 					$contenu = "";
 					lire_fichier ($f, $contenu);
 					$GLOBALS['forms_types_champs_etendus']=array();
-					$data = parse_plugin_xml($contenu);
+					/* adaptation SPIP2 */
+					/*$data = parse_plugin_xml($contenu);*/
+					$data = spip_xml_parse($contenu);
+					/* fin adaptation SPIP2 */
 					if (isset($data['types']))
 						foreach($data['types'] as $types)
 							if (isset($types['type'])) 
 								foreach($types['type'] as $type){
 									if (isset($type['field'])){
 										$champ = end($type['field']);
-										$libelle = isset($type['label'])?trim(applatit_arbre($type['label'])):$champ;
+										// adapation SPIP2
+										/*$libelle = isset($type['label'])?trim(applatit_arbre($type['label'])):$champ;*/
+										$libelle = isset($type['label'])?trim(spip_xml_aplatit($type['label'])):$champ;
 										$match = isset($type['match'])?trim(end($type['match'])):"";
 										$format = array();
 										if (isset($type['formate'])){

@@ -47,10 +47,12 @@ function Forms_insere_nouveau_champ($id_form,$type,$titre,$champ=""){
 		$rang = $row['rangmax'];
 	$rang++;
 	include_spip('base/abstract_sql');
-	spip_abstract_insert(
+	//adapatation SPIP2
+	/*spip_abstract_insert(
 		'spip_forms_champs',
 		'(id_form,champ,rang,titre,type,obligatoire,extra_info)',
-		'('._q($id_form).','._q($champ).','._q($rang).','._q($titre).','._q($type).",'non','')");
+		'('._q($id_form).','._q($champ).','._q($rang).','._q($titre).','._q($type).",'non','')");*/
+		sql_insert('spip_forms_champs', '(id_form,champ,rang,titre,type,obligatoire,extra_info)', '('._q($id_form).','._q($champ).','._q($rang).','._q($titre).','._q($type).",'non','')");
 	return $champ;
 }
 function Forms_nouveau_choix($id_form,$champ){
@@ -72,7 +74,9 @@ function Forms_insere_nouveau_choix($id_form,$champ,$titre){
 		$rang = $row['rangmax'];
 	$rang++;
 	include_spip('base/abstract_sql');
-	spip_abstract_insert("spip_forms_champs_choix","(id_form,champ,choix,titre,rang)","("._q($id_form).","._q($champ).","._q($choix).","._q($titre).","._q($rang).")");
+	//adapatation SPIP2
+	//spip_abstract_insert("spip_forms_champs_choix","(id_form,champ,choix,titre,rang)","("._q($id_form).","._q($champ).","._q($choix).","._q($titre).","._q($rang).")");
+	sql_insert("spip_forms_champs_choix","(id_form,champ,choix,titre,rang)","("._q($id_form).","._q($champ).","._q($choix).","._q($titre).","._q($rang).")");
 	return $choix;
 }
 
@@ -196,6 +200,10 @@ function Forms_bloc_edition_champ($row, $action_link, $redirect, $idbloc) {
 		$out .= "<label for='unite_monetaire_$champ'>"._T("forms:unite_monetaire")."</label> :";
 		$out .= " &nbsp;<select name='unite_monetaire' id='unite_monetaire_$champ' class='fondo verdana2'>\n";
 		$out .= "<option value='euro'".($unite=='euro'?"selected='selected'":"").">"._T("forms:monnaie_euro")."</option>\n";
+		// A voir pour ajouter des choix de monnaies
+		//$out .= "<option value='dollar'".($unite=='dollar'?"selected='selected'":"").">"._T("forms:monnaie_dollar")."</option>\n";
+		//$out .= "<option value='livre'".($unite=='livre'?"selected='selected'":"").">"._T("forms:monnaie_livre")."</option>\n";
+		//$out .= "<option value='chf'".($unite=='chf'?"selected='selected'":"").">"._T("forms:monnaie_chf")."</option>\n";
 		$out .= "</select>";
 		$out .= "<br />\n";
 	}

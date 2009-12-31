@@ -28,13 +28,17 @@ function Forms_creer_table($structure_xml,$type=NULL, $unique = true, $c=NULL){
 						if ($type)
 							$xml[$k1][$k2][$k3][$k4][$prop] = array($type);
 						else 
-							$type = trim(applatit_arbre($datas));
+							$type = trim(spip_xml_aplatit($datas));
+							/*$type = trim(applatit_arbre($datas));*/
+							// ADAPTATION SPIP2
 					}
 
 	if (!$type) return;
 	if ($unique){
 		$res = spip_query("SELECT id_form FROM spip_forms WHERE type_form="._q($type));
-		if (spip_num_rows($res))
+		//adaptation SPIP2
+		//if (spip_num_rows($res))
+		if (sql_count($res))
 			return;
 	}
 	// ok on peut creer la table
@@ -223,7 +227,9 @@ function Forms_delier_donnee($id_donnee,$id_donnee_liee=0,$type_form_lie = ""){
 function Forms_arbre_inserer_donnee($id_form,$id_parent,$position="fils_cadet",$c=NULL){
 	if (!$id_parent>0){
 		if ($res = spip_query("SELECT id_donnee FROM spip_forms_donnees WHERE id_form="._q($id_form)." AND statut!='poubelle' LIMIT 0,1")
-		  AND spip_num_rows($res)==0){
+		  //adapation SPIP2
+		  //AND spip_num_rows($res)==0){
+		  AND sql_count($res)==0){
 		  // pas d'elements existants, c'est la racine, on l'insere toujours
 			if ($position=='fils_aine' OR $position=='fils_cadet'){
 				spip_log("Insertion impossible dans un arbre pour un fils sans pere dans table $id_form");

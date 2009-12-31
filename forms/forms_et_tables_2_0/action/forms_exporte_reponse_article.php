@@ -65,10 +65,13 @@ function action_forms_exporte_reponse_article(){
 			}
 			// creer un article
 			include_spip('base/abstract_sql');
-			$id_article = spip_abstract_insert("spip_articles",
+			//adapatation SPIP2
+			/*$id_article = spip_abstract_insert("spip_articles",
+			"(titre,soustitre,texte,date,statut)",
+			"("._q($titre).","._q($soustitre).","._q($texte).","._q($date).",'prepa')");*/
+			$id_article = sql_insert("spip_articles",
 			"(titre,soustitre,texte,date,statut)",
 			"("._q($titre).","._q($soustitre).","._q($texte).","._q($date).",'prepa')");
-			
 			if ($id_article!=0){
 				spip_query("UPDATE spip_forms_donnees SET id_article_export=$id_article WHERE id_donnee="._q($id_donnee));
 			}

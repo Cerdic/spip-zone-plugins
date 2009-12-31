@@ -26,7 +26,11 @@ function Forms_formulaire_confirme_suppression($id_form,$nb_reponses,$redirect,$
 		$out .= "<br />";
 		$out .= _T("$prefixei18n:info_supprimer_formulaire")."</p>\n";
 	}
-	$link = generer_action_auteur('forms_supprime',"$id_form",_DIR_RESTREINT_ABS.($retour?(str_replace('&amp;','&',$retour)):generer_url_ecrire('forms_tous',"",false,true)));
+	// ADAPTATION SPIP 2
+	if ($GLOBALS['spip_version_code']<2)
+		$link = generer_action_auteur('forms_supprime',"$id_form",_DIR_RESTREINT_ABS.($retour?(str_replace('&amp;','&',$retour)):generer_url_ecrire('forms_tous',"",false,true)));
+	else
+		$link = generer_action_auteur('forms_supprime',"$id_form",($retour?(str_replace('&amp;','&',$retour)):generer_url_ecrire('forms_tous',"",false,true)));
 	$out .= "<form method='POST' action='$link' style='float:$spip_lang_right'>";
 	$out .= form_hidden($link);
 	$out .= "<div style='text-align:$spip_lang_right'>";
@@ -101,7 +105,12 @@ function contenu_boite_resume($id_form, $row, &$apercu){
 	$out .= fin_block();
 
 	if ($GLOBALS['spip_version_code']<1.92)		ob_start(); // des echo direct en 1.9.1
-	$liste = afficher_articles(_T("$prefixei18n:articles_utilisant"),
+	//adapatation SPIP2
+	/*$liste = afficher_articles(_T("$prefixei18n:articles_utilisant"),
+		array('FROM' => 'spip_articles AS articles, spip_forms_articles AS lien',
+		'WHERE' => "lien.id_article=articles.id_article AND id_form="._q($id_form)." AND statut!='poubelle'",
+		'ORDER BY' => "titre"));*/
+	$liste = afficher_objets('article',_T("$prefixei18n:articles_utilisant"),
 		array('FROM' => 'spip_articles AS articles, spip_forms_articles AS lien',
 		'WHERE' => "lien.id_article=articles.id_article AND id_form="._q($id_form)." AND statut!='poubelle'",
 		'ORDER BY' => "titre"));
@@ -125,7 +134,9 @@ function exec_forms_edit(){
 	if (!include_spip('inc/autoriser'))
 		include_spip('inc/autoriser_compat');
 	if (!autoriser('structurer','form',$id_form)) {
-		echo debut_page("&laquo; $titre &raquo;", "documents", "forms","");
+		/*echo debut_page("&laquo; $titre &raquo;", "documents", "forms","");*/
+		$commencer_page = charger_fonction("commencer_page", "inc") ; 
+ 		echo $commencer_page("&laquo; $titre &raquo;", "documents", "forms","") ;
 		echo _T('acces_interdit');
 		echo fin_page();
 		exit();
@@ -152,7 +163,6 @@ function exec_forms_edit(){
 		if ($row = spip_fetch_array(spip_query("SELECT COUNT(*) AS num FROM spip_forms_donnees WHERE id_form="._q($id_form)." AND confirmation='valide' and statut!='poubelle'")))
 			$nb_reponses = $row['num'];
 
-
 	$redirect = generer_url_ecrire('forms_edit',(intval($id_form)?"id_form=$id_form":""));
 	if ($retour)
 		$redirect = parametre_url($redirect,"retour",urlencode($retour));
@@ -176,29 +186,36 @@ function exec_forms_edit(){
 	$bloc = _request('bloc');
 	if ($ajax_charset && $bloc=='dummy') {
 		ajax_retour("");
+		exit;
 	}
 	if ($ajax_charset && $bloc=='apercu') {
 		include_spip('public/assembler');
 		$GLOBALS['var_mode']='calcul';
 		$apercu = recuperer_fond('modeles/form',array('id_form'=>$id_form,'var_mode'=>'calcul'));
 		ajax_retour($apercu);
+		exit;
 	}
 	if ($ajax_charset && $bloc=='resume') {
 		include_spip('public/assembler');
 		$GLOBALS['var_mode']='calcul';
 		$apercu = recuperer_fond('modeles/form',array('id_form'=>$id_form,'var_mode'=>'calcul'));
 		ajax_retour(contenu_boite_resume($id_form, $row, $apercu));
+		exit;
 	}
 	if ($ajax_charset && $bloc=='proprietes') {
 		ajax_retour(boite_proprietes($id_form, $row, $focus, $action_link, $redirect));
+		exit;
 	}
 	$bloc = explode("-",$bloc);
 	if ($ajax_charset && $bloc[0]=='champs') {
 		ajax_retour(Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ,$redirect,isset($bloc[2])?$bloc[2]:false));
+		exit;
 	}
 
 
-	debut_page("&laquo; $titre &raquo;", "documents", "forms","");
+	/*debut_page("&laquo; $titre &raquo;", "documents", "forms","");*/
+	$commencer_page = charger_fonction("commencer_page", "inc") ; 
+ 	echo $commencer_page("&laquo; $titre &raquo;", "documents", "forms","") ;
 
 	// Recupere les donnees ---------------------------------------------------------------
 	if ($new == 'oui' && !$titre) {
@@ -236,22 +253,28 @@ function exec_forms_edit(){
 	$is_form = 	$prefixei18n=='form';
 
 	// gauche raccourcis ---------------------------------------------------------------
-	debut_gauche();
+	/*debut_gauche();*/
+	echo debut_gauche('', true);
 
 	echo "<br /><br />\n";
-	debut_boite_info();
+	/*debut_boite_info();*/
+	echo debut_boite_info(true);
 	if ($id_form>0)
 		echo "<div align='center' style='font-size:3em;font-weight:bold;'>$id_form</div>\n";
 	if ($retour) {
-		icone_horizontale(_T('icone_retour'), $retour, "../"._DIR_PLUGIN_FORMS."img_pack/form-24.png", "rien.gif",'right');
+		echo icone_horizontale(_T('icone_retour'), $retour, "../"._DIR_PLUGIN_FORMS."img_pack/form-24.png", "rien.gif",false);
 	}
 	if (autoriser('administrer','form',$id_form)) {
 		$nretour = urlencode(self());
-		icone_horizontale(_T("forms:suivi_reponses")."<br />".(($nb_reponses==0)?_T("forms:aucune_reponse"):(($nb_reponses==1)?_T("forms:une_reponse"):_T("forms:nombre_reponses",array('nombre'=>$nb_reponses)))),
-		generer_url_ecrire(in_array($row['type_form'],array('','sondage'))?'forms_reponses':'donnees_tous',"id_form=$id_form"), "../"._DIR_PLUGIN_FORMS."img_pack/donnees-24.png", "rien.gif");
+		echo icone_horizontale(_T("forms:suivi_reponses")."<br />".(($nb_reponses==0)?_T("forms:aucune_reponse"):(($nb_reponses==1)?_T("forms:une_reponse"):_T("forms:nombre_reponses",array('nombre'=>$nb_reponses)))),
+		generer_url_ecrire('forms_reponses',"id_form=$id_form"), "../"._DIR_PLUGIN_FORMS."img_pack/donnees-24.png", "rien.gif",false);
+			
+		echo icone_horizontale(_T("forms:Tableau_des_reponses"),
+		generer_url_ecrire('donnees_tous',"id_form=$id_form&retour=$nretour"), "../"._DIR_PLUGIN_FORMS."img_pack/donnees-24.png", "rien.gif",false);
+		
 		if ($nb_reponses){
-			icone_horizontale(_T("forms:telecharger_reponses"),
-				generer_url_ecrire('forms_telecharger',"id_form=$id_form&retour=$nretour"), _DIR_PLUGIN_FORMS."img_pack/donnees-exporter-24.png", "rien.gif");
+			echo icone_horizontale(_T("forms:telecharger_reponses"),
+				generer_url_ecrire('forms_telecharger',"id_form=$id_form&retour=$nretour"), _DIR_PLUGIN_FORMS."img_pack/donnees-exporter-24.png", "rien.gif",false);
 		}
 
 		if (include_spip('inc/snippets'))
@@ -262,11 +285,12 @@ function exec_forms_edit(){
 		if (!$retour) {
 			$link=parametre_url($link,'retour', urlencode(generer_url_ecrire('form_tous')));
 		}
-		echo "<p>";
-		icone_horizontale(_T("$prefixei18n:supprimer_formulaire"), $link, "../"._DIR_PLUGIN_FORMS."img_pack/supprimer-24.png", "rien.gif");
-		echo "</p>";
+		/*echo "<p>";*/
+		echo icone_horizontale(_T("$prefixei18n:supprimer_formulaire"), $link, "../"._DIR_PLUGIN_FORMS."img_pack/supprimer-24.png", "rien.gif",false);
+		/*echo "</p>";*/
 	}
-	fin_boite_info();
+	/*fin_boite_info();*/
+	echo fin_boite_info(true);
 
 	// gauche apercu ---------------------------------------------------------------
 	echo "<div id='apercu_gauche'>";
@@ -279,8 +303,9 @@ function exec_forms_edit(){
 
 
 	// droite ---------------------------------------------------------------
-	creer_colonne_droite();
-	debut_droite();
+	echo creer_colonne_droite('',true);
+	/*debut_droite();*/
+	echo debut_droite('',true);
 
 	if (!$new){
 		echo gros_titre($row['titre'],'',false);
