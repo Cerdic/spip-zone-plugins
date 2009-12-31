@@ -32,6 +32,8 @@ function formulaires_langonet_verifier_traiter(){
 	foreach($champs as $_champ){
 		$champs[$_champ] = _request($_champ);
 	}
+	// La REGEXP de recherche de l'item de langue
+	define("_TROUVER_ITEM", ",(?:=[\"']|<\w+>|<:|_[UT]\(')(" . $champs['module'] . ":)(\w*)('\s*\.\s*\\$*\w*)*,im");
 	// Verification et formatage des resultats pour l'affichage dans le formulaire
 	$resultats = $langonet_verifier_langue($champs['module'], $champs['langue'], $champs['chemin_langue'], $champs['chemin_fichier']);
 	if (!$resultats['statut']) {
