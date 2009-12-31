@@ -16,9 +16,6 @@ function catalogue_declarer_tables_interfaces($interface){
 	 * Objectif : pouvoir utiliser les champs liés dans les boucles...
 	 *
 	 */
-	$interface['tables_jointures']['spip_auteurs']['id_auteur']= 'auteurs';	 
-	$interface['tables_jointures']['spip_articles']['id_auteur']= 'auteurs';
-	
 	$interface['tables_jointures']['spip_articles'][]= 'variantes';
 	$interface['tables_jointures']['spip_variantes'][]= 'articles';
 	$interface['tables_jointures']['spip_options']['id_option']= 'spip_options_articles';
