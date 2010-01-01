@@ -50,19 +50,21 @@ function inc_langonet_generer_fichier($module, $langue_source, $ou_langue, $lang
 			$texte .= "\t'" . $_item . "' => '" . addslashes($valeur_cible) . "',\n";
 		}
 		else {
-			if ($mode == 'new')
-				$valeur_cible = '<NEW>';
-			else if ($mode == 'new_index')
-				$valeur_cible = '<NEW>'.$_item;
-			else if ($mode == 'new_valeur')
-				$valeur_cible = '<NEW>'.addslashes($_valeur);
-			else if ($mode == 'valeur')
-				$valeur_cible = addslashes($_valeur);
-			else if ($mode == 'vide')
-				$valeur_cible = '';
-			else
-				$valeur_cible = $_item;
-			$texte .= "\t'" . $_item . "' => '" . $valeur_cible . "',\n";
+			if ($mode != 'pas_item') {
+				if ($mode == 'new')
+					$valeur_cible = '<NEW>';
+				else if ($mode == 'new_index')
+					$valeur_cible = '<NEW>'.$_item;
+				else if ($mode == 'new_valeur')
+					$valeur_cible = '<NEW>'.addslashes($_valeur);
+				else if ($mode == 'valeur')
+					$valeur_cible = addslashes($_valeur);
+				else if ($mode == 'vide')
+					$valeur_cible = '';
+				else
+					$valeur_cible = $_item;
+				$texte .= "\t'" . $_item . "' => '" . $valeur_cible . "',\n";
+			}
 		}
 	}
 	
