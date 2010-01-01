@@ -9,8 +9,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_verifier' => 'V&eacute;rifier',
 
 // I
-	'info_chemin_fichier' => 'Racine de l\'arborescence des fichiers. Ne pas oublier le / de fin: <em>ecrire/</em> ou <em>plugins/rainette/</em>.',
-	'info_chemin_langue' => 'Dossier dans lequel est install&eacute; le fichier de langue. Ne pas oublier le / de fin: <em>ecrire/lang/</em> ou <em>plugins/rainette/lang/</em>.',
+	'info_chemin_fichier' => 'Racine de l\'arborescence des fichiers.',
+	'info_chemin_langue' => 'Dossier dans lequel est install&eacute; le fichier de langue.',
 	'info_generer' => 'Cette option vous permet de g&eacute;n&eacute;rer, &agrave; partir d\'une langue source, le fichier de langue d\'un module donn&eacute; dans une langue cible. Si le fichier cible existe d&eacute;j&agrave; son contenu est r&eacute;utilis&eacute; pour construire le nouveau fichier.',
 	'info_langue' => 'Abr&eacute;viation de la langue: <em>fr</em>, <em>en</em>, <em>es</em>...',
 	'info_mode' => 'Correspond &agrave; la chaine qui sera ins&eacute;r&eacute;e lors de la cr&eacute;ation d\'un nouvel item pour la langue cible.',
