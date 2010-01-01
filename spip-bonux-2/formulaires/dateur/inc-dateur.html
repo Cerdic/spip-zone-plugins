@@ -8,7 +8,7 @@ Date.abbrDayNames = ['<:date_jour_1_abbr:>', '<:date_jour_2_abbr:>', '<:date_jou
 Date.monthNames = ['<:date_mois_1:>', '<:date_mois_2:>', '<:date_mois_3:>', '<:date_mois_4:>', '<:date_mois_5:>', '<:date_mois_6:>', '<:date_mois_7:>', '<:date_mois_8:>', '<:date_mois_9:>', '<:date_mois_10:>', '<:date_mois_11:>', '<:date_mois_12:>'];
 Date.abbrMonthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 Date.firstDayOfWeek = 1;
-Date.format = 'dd/mm/yyyy';
+Date.format = '#ENV{dateFormat,'dd/mm/yyyy'}';
 jQuery.dpText = {
 	TEXT_PREV_YEAR		:	'<:spip_bonux:annee_precedente|texte_script:>',
 	TEXT_PREV_MONTH		:	'<:spip_bonux:mois_precedent|texte_script:>',
@@ -20,7 +20,7 @@ jQuery.dpText = {
 }
 jQuery(function()
 {
-	jQuery('input.date').datePicker({startDate:'01/01/1900'}).dpSetPosition(jQuery.dpConst.POS_TOP, jQuery.dpConst.POS_RIGHT);
+	jQuery('input.date').datePicker({startDate:'#ENV{startDate,'01/01/1900'}'[,endDate:'(#ENV{endDate})']}).dpSetPosition(jQuery.dpConst.POS_TOP, jQuery.dpConst.POS_RIGHT);
 	jQuery("input.heure").timePicker();
 });
 </script>
