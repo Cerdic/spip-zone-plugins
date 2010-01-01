@@ -20,7 +20,7 @@ function inc_langonet_verifier_utilisation($module, $langue, $ou_langue, $ou_fic
 			if (!$GLOBALS[$var_source]) {
 				$resultats['statut'] = false;
 				$resultats['erreur'] = _T('langonet:message_nok_plugin_inactif', 
-										array('module' => $module));
+										array('arbo_verif' => $ou_fichiers));
 				return $resultats;
 			}
 		}
