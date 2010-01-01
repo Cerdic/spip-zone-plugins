@@ -26,6 +26,9 @@ function formulaires_langonet_generer_traiter(){
 	foreach($champs as $_champ){
 		$champs[$_champ] = _request($_champ);
 	}
+	if (substr($champs['chemin_langue'],-1) != '/') {
+		$champs['chemin_langue'] .= '/';
+	}
 	// Generation du fichier
 	$langonet_generer = charger_fonction('langonet_generer_fichier','inc');
 	$resultats = $langonet_generer($champs['module'], $champs['langue_source'], $champs['chemin_langue'], $champs['langue_cible'], $champs['mode']);
