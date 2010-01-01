@@ -1,7 +1,7 @@
 <plugin>
     <nom>Panosalado Modele</nom>
     <auteur>Franck Barbenoire</auteur>
-    <version>0.3</version>
+    <version>0.3.1</version>
     <etat>dev</etat>
     <description>
     Ce plugin propose un mod&egrave;le permettant d'afficher un panorama.

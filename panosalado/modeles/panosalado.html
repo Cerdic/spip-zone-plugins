@@ -81,7 +81,7 @@ $ps_image = "#URL_DOCUMENT";
 if($ps_image != "") {
    $ps_pos = strpos($ps_image, "IMG");
    if($ps_pos)
-      $image = substr($ps_image, $ps_pos);
+      $ps_image = substr($ps_image, $ps_pos);
    $ps_image = "#URL_SITE_SPIP/" . $ps_image;
 }
 ?>

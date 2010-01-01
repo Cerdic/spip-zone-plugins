@@ -1,3 +1,6 @@
+* 0.3.1 (11/12/2009) :
+   - correction d'un nom de variable
+
 * 0.3 (11/12/2009) :
    - suppression des erreurs php dans l'interface d'administration
 
