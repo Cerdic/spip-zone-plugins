@@ -32,7 +32,7 @@ function switcher_affichage_final($texte){
 
 			
 		// On rajoute le code du selecteur de squelettes avant la balise </body>
-		$texte=eregi_replace("</body>","$code</body>",$texte);
+		$texte=preg_replace("</body>","$code</body>",$texte);
 	}
 	return($texte);
 }
