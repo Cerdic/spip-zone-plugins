@@ -68,6 +68,45 @@
 			<input type="text" name="overlayopacity" class="text" id="fancy_overlayopacity" size="8" value="#ENV{overlayopacity, 0.3}" />	
 		</li>
 
+		<li class="editer_fancybox_enableescapebutton[ (#ENV**{erreurs}|table_valeur{enableescapebutton}|oui)erreur]">
+			<label><:fancybox:cfg_lbl_enableescapebutton:></label>
+			<p class="explication"><:fancybox:cfg_inf_enableescapebutton:></p>
+			<div class="choix">
+				<input type="radio" name="enableescapebutton" class="radio" id="fancy_enableescapebutton_on" value="true" [(#ENV{enableescapebutton,true}|=={true}|oui) checked="checked"] />
+				<label for='fancy_enableescapebutton_on'><:oui:></label>
+			</div>
+			<div class="choix">
+				<input type="radio" name="enableescapebutton" class="radio" id="fancy_enableescapebutton_off" value="false" [(#ENV{enableescapebutton,true}|=={false}|oui) checked="checked"] />
+				<label for='fancy_enableescapebutton_off'><:non:></label>
+			</div>
+		</li>
+		
+		<li class="editer_fancybox_showclosebutton[ (#ENV**{erreurs}|table_valeur{showclosebutton}|oui)erreur]">
+			<label><:fancybox:cfg_lbl_showclosebutton:></label>
+			<p class="explication"><:fancybox:cfg_inf_showclosebutton:></p>
+			<div class="choix">
+				<input type="radio" name="showclosebutton" class="radio" id="fancy_showclosebutton_on" value="true" [(#ENV{showclosebutton,true}|=={true}|oui) checked="checked"] />
+				<label for='fancy_showclosebutton_on'><:oui:></label>
+			</div>
+			<div class="choix">
+				<input type="radio" name="showclosebutton" class="radio" id="fancy_showclosebutton_off" value="false" [(#ENV{showclosebutton,true}|=={false}|oui) checked="checked"] />
+				<label for='fancy_showclosebutton_off'><:non:></label>
+			</div>
+		</li>
+		
+		<li class="editer_fancybox_hideonoverlayclick[ (#ENV**{erreurs}|table_valeur{hideonoverlayclick}|oui)erreur]">
+			<label><:fancybox:cfg_lbl_hideonoverlayclick:></label>
+			<p class="explication"><:fancybox:cfg_inf_hideonoverlayclick:></p>
+			<div class="choix">
+				<input type="radio" name="hideonoverlayclick" class="radio" id="fancy_hideonoverlayclick_on" value="true" [(#ENV{hideonoverlayclick,true}|=={true}|oui) checked="checked"] />
+				<label for='fancy_hideonoverlayclick_on'><:oui:></label>
+			</div>
+			<div class="choix">
+				<input type="radio" name="hideonoverlayclick" class="radio" id="fancy_hideonoverlayclick_off" value="false" [(#ENV{hideonoverlayclick,true}|=={false}|oui) checked="checked"] />
+				<label for='fancy_hideonoverlayclick_off'><:non:></label>
+			</div>
+		</li>
+		
 		<li class="editer_fancybox_hideoncontentclick[ (#ENV**{erreurs}|table_valeur{hideoncontentclick}|oui)erreur]">
 			<label><:fancybox:cfg_lbl_hideoncontentclick:></label>
 			<p class="explication"><:fancybox:cfg_inf_hideoncontentclick:></p>
@@ -78,6 +117,19 @@
 			<div class="choix">
 				<input type="radio" name="hideoncontentclick" class="radio" id="fancy_hideoncontentclick_off" value="false" [(#ENV{hideoncontentclick,true}|=={false}|oui) checked="checked"] />
 				<label for='fancy_hideoncontentclick_off'><:non:></label>
+			</div>
+		</li>
+		
+		<li class="editer_fancybox_centeronscroll[ (#ENV**{erreurs}|table_valeur{centeronscroll}|oui)erreur]">
+			<label><:fancybox:cfg_lbl_centeronscroll:></label>
+			<p class="explication"><:fancybox:cfg_inf_centeronscroll:></p>
+			<div class="choix">
+				<input type="radio" name="centeronscroll" class="radio" id="fancy_centeronscroll_on" value="true" [(#ENV{centeronscroll,true}|=={true}|oui) checked="checked"] />
+				<label for='fancy_centeronscroll_on'><:oui:></label>
+			</div>
+			<div class="choix">
+				<input type="radio" name="centeronscroll" class="radio" id="fancy_centeronscroll_off" value="false" [(#ENV{centeronscroll,true}|=={false}|oui) checked="checked"] />
+				<label for='fancy_centeronscroll_off'><:non:></label>
 			</div>
 		</li>
 

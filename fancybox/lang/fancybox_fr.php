@@ -18,7 +18,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_inf_imagescale' => 'Redimensionner automatiquement les images &agrave; la taille de la fen&ecirc;tre ?',
 	'cfg_inf_overlayshow' => 'Afficher l\'arri&egrave;re plan de la fen&ecirc;tre ?',
 	'cfg_inf_overlayopacity' => 'Opacit&eacute; de l\'arri&egrave;re-plan (de 0 &agrave; 1).',
-	'cfg_inf_hideoncontentclick' => 'Fermer la fen&ecirc;tre lors d\'un clic sur celle-ci ou à l\'ext&eacute;rieur ?',
+	'cfg_inf_enableescapebutton' => 'Fermer la fen&ecirc;tre avec la touche ESC du clavier ?',
+	'cfg_inf_showclosebutton' => 'Afficher le bouton de fermeture de la fen&ecirc;tre ?',
+	'cfg_inf_hideonoverlayclick' => 'Fermer la fen&ecirc;tre lors d\'un clic à l\'ext&eacute;rieur de celle-ci ?',
+	'cfg_inf_hideoncontentclick' => 'Fermer la fen&ecirc;tre lors d\'un clic sur son contenu ?',
+	'cfg_inf_centeronscroll' => 'Centrer la fen&ecirc;tre lors du d&eacute;filement de la page ?',
 
 	
 	'cfg_lbl_selecteur_commun' => 'En g&eacute;n&eacute;ral',
@@ -33,7 +37,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_imagescale' => '&Eacute;chelle',
 	'cfg_lbl_overlayshow' => 'Arri&egrave;re-plan',
 	'cfg_lbl_overlayopacity' => 'Opacit&eacute;',
-	'cfg_lbl_hideoncontentclick' => 'Fermer au clic',
+	'cfg_lbl_enableescapebutton' => 'Touche ESC',
+	'cfg_lbl_showclosebutton' => 'Bouton fermer',
+	'cfg_lbl_hideonoverlayclick' => 'Fermer au clic (ext&eacute;rieur)',
+	'cfg_lbl_hideoncontentclick' => 'Fermer au clic (contenu)',
+	'cfg_lbl_centeronscroll' => 'Centrer',
 	'cfg_titre_fancybox' => 'FancyBox'
 	
 );

@@ -13,7 +13,11 @@ function fancybox_insert_head($flux){
 		'imagescale' => 'true',
 		'overlayshow' => 'true',
 		'overlayopacity' => '0.3',
+		'enableescapebutton' => 'true',
+		'showclosebutton' => 'true',
+		'hideonoverlayclick' => 'true',
 		'hideoncontentclick' => 'true',
+		'centeronscroll' => 'true',
 		'selecteur_frame' => '.iframe',
 		'communwidth' => '425',
 		'communheight' => '355',
@@ -21,7 +25,7 @@ function fancybox_insert_head($flux){
 		'frameheight' => '700'	
 	), $config);
 	// Insertion des librairies js
-	$flux .='<script src="'.url_absolue(find_in_path('javascript/jquery.fancybox-1.2.1.js')).'" type="text/javascript"></script>';
+	$flux .='<script src="'.url_absolue(find_in_path('javascript/jquery.fancybox-1.2.6.js')).'" type="text/javascript"></script>';
 	$flux .='<script src="'.url_absolue(find_in_path('javascript/fancybox.js')).'" type="text/javascript"></script>';
 	// Init de la fancybox suivant la configuration
 	$flux .='
@@ -43,7 +47,11 @@ var fb_commun_options = {
 	"imageScale": '.$config['imagescale'].',
 	"overlayShow": '.$config['overlayshow'].',
 	"overlayOpacity": '.$config['overlayopacity'].',
+	"enableEscapeButton": '.$config['enableescapebutton'].',
+	"showCloseButton": '.$config['showclosebutton'].',
+	"hideOnOverlayClick": '.$config['hideonoverlayclick'].',
 	"hideOnContentClick": '.$config['hideoncontentclick'].',
+	"centerOnScroll": '.$config['centeronscroll'].',
 	"frameWidth": '.$config['communwidth'].',
 	"frameHeight": '.$config['communheight'].',
 	"callbackOnShow": fancyonshow,
@@ -64,7 +72,7 @@ if (window.jQuery)
  })(jQuery);
 /* ]]> */</script>';
 	// Inclusion des styles propres a fancybox
-	$flux .='<link rel="stylesheet" href="'.url_absolue(find_in_path('styles/jquery.fancybox.css')).'" type="text/css" />';
+	$flux .='<link rel="stylesheet" href="'.url_absolue(find_in_path('styles/jquery.fancybox-1.2.6.css')).'" type="text/css" />';
 
 	return $flux;
 }

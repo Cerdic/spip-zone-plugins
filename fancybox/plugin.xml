@@ -1,10 +1,10 @@
 <plugin>
 	<nom>FancyBox</nom>
 	<auteur>
-	FancyBox par [klade.lv->http://fancy.klade.lv]
+	FancyBox par [fancybox.net->http://fancybox.net/]
 _ Mis en plugin par b_b
 	</auteur>
-	<version>0.3.1</version>
+	<version>0.4</version>
 	<icon></icon>
 	<etat>test</etat>
 	<description>
