@@ -6,7 +6,7 @@
 
 include_spip('inc/meta');
 include_spip('base/create');
-include_spip('base/catalogue_peupler_base');
+include_spip('base/peupler_base');
 
 
 function comptes_upgrade($nom_meta_base_version, $version_cible){
@@ -16,7 +16,7 @@ function comptes_upgrade($nom_meta_base_version, $version_cible){
 	
 	if ($current_version=="0.0") {
 		creer_base();
-		// comptes_peupler_base();
+		peupler_base();
 		ecrire_meta($nom_meta_base_version, $current_version=$version_cible);
 	}
 	if (version_compare($current_version,"1.6","<")){

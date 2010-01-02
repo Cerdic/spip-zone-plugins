@@ -9,16 +9,16 @@ function comptes_declarer_tables_interfaces($interface){
 	
 	$interface['table_des_tables']['comptes'] = 'comptes';
 	$interface['table_des_tables']['contacts'] = 'contacts';
-	$interface['table_des_tables']['liens'] = 'liens';
+	$interface['table_des_tables']['coordonnees'] = 'coordonnees';
 	
 	/**
 	 * Objectif : pouvoir utiliser les champs liés dans les boucles...
 	 *
 	 */
-	$interface['tables_jointures']['spip_auteurs']['id_auteur']= 'contacts';
-	$interface['tables_jointures']['spip_contacts']['id_auteur']= 'auteurs';
-	$interface['tables_jointures']['spip_comptes']['id_compte']= 'contacts';
-	$interface['tables_jointures']['spip_contacts']['id_compte']= 'comptes';
+	$interface['tables_jointures']['spip_auteurs'][]= 'contacts';
+	$interface['tables_jointures']['spip_contacts'][]= 'auteurs';
+	$interface['tables_jointures']['spip_comptes'][]= 'contacts';
+	$interface['tables_jointures']['spip_contacts'][]= 'comptes';
 
 	
 	/**
@@ -39,8 +39,8 @@ function comptes_declarer_tables_principales($tables_principales){
 		"id_auteur" 	=> "bigint(21) NOT NULL DEFAULT 0",
 		"id_compte" 	=> "bigint(21) NOT NULL DEFAULT 0",
 		"civilite" 		=> "tinytext DEFAULT '' NOT NULL",
-		"nom" 			=> "tinytext DEFAULT '' NOT NULL",
 		"prenom"		=> "VARCHAR(10) NOT NULL DEFAULT 0",
+		"nom" 			=> "tinytext DEFAULT '' NOT NULL",
 		"naissance"		=> "datetime NOT NULL default '0000-00-00 00:00:00'",
 		"descriptif" 	=> "tinytext DEFAULT '' NOT NULL",
 		"date" 			=> "datetime NOT NULL default '0000-00-00 00:00:00'",
