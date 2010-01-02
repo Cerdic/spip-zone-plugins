@@ -99,13 +99,18 @@ function description_outil_input1_callback($matches) {
 function description_outil_input2_callback($matches) {
 	global $cs_input_variable;
 	$cs_input_variable[] = $matches[3];
-	return '<fieldset><legend>'._T('couteauprive:label:'.$matches[3]).'</legend><div>'.$matches[1].'</div></fieldset>';
+	return "<fieldset><legend><:label:$matches[3]:></legend><div>$matches[1]</div></fieldset>";
 }
 
 function description_outil_liens_callback($matches) {
 	$nom = _T("couteauprive:$matches[1]:nom");
 	return '<a href="'.generer_url_ecrire('admin_couteau_suisse', 'cmd=descrip&outil='.$matches[1])
 		."\" id=\"href_$matches[1]\" onclick=\"javascript:return cs_href_click(this);\">$nom</a>";
+}
+
+function description_outil_label_callback($matches) { 
+	global $cs_variables; 
+	return isset($cs_variables[$matches[1]]['label'])?$cs_variables[$matches[1]]['label']:_T('couteauprive:label:'.$matches[1]);
 }
 
 function cs_input_variable_callback($matches) {
@@ -123,6 +128,22 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 //cs_log("inc_description_outil_dist() - Parse la description de '$outil_'");
 	// la description de base est a priori dans le fichier de langue
 	$descrip = isset($outil['description'])?$outil['description']:_T('couteauprive:'.$outil['id'].':description');
+	// ajout des variables liees a la barre typo
+	if(defined('_DIR_PLUGIN_PORTE_PLUME') 
+	 && strpos(serialize($outil),':porte_plume_barre_pre_charger"')!==false
+	 && count($barres = cs_pp_liste_barres())) {
+		$descrip .= "\n\n@puce@ "._T('couteauprive:barres_typo_intro');
+		$i=0;
+		foreach($barres as $f=>$b) {
+			$descrip .= ($i?'[[->':'[[')."%pp_{$b}_$outil[id]%]]";
+			add_variables( array(
+				'nom' => "pp_{$b}_$outil[id]",
+				'check' => ($b=='edition' || $b=='forum')?'couteauprive:barres_typo_'.$b:$f,
+				'defaut' => 1, // par defaut les boutons seront toujours inseres
+				'label' => $i++?NULL:'@_CS_CHOIX@',
+			));
+		}
+	}
 	// reconstitution d'une description eventuellement morcelee
 	// exemple : <:mon_outil:3:> est remplace par _T('couteauprive:mon_outil:description3')
 	$descrip = preg_replace_callback(',<:([a-zA-Z_][a-zA-Z0-9_-]*):([0-9]*):>,', 
@@ -188,9 +209,11 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 			"\n<input type='hidden' value='$variables' name='variables' /><input type='hidden' value='$outil_' name='outil' />"	. $res);
 	}
 //cs_log(" FIN : inc_description_outil_dist({$outil['id']}) - {$outil['nb_variables']} variables(s) trouvee(s)");
-	// remplacement des labels en doublon
-	$res = preg_replace_callback(',<:label:([a-zA-Z_][a-zA-Z0-9_-]*):>,', 
-		create_function('$matches','return _T("couteauprive:label:$matches[1]");'), $res);
+	// remplacement en deux passes des labels en doublon
+	if(strpos($res,'<:label:')!==false) 
+		$res = preg_replace_callback(',<:label:([a-zA-Z_][a-zA-Z0-9_-]*):>,', 'description_outil_label_callback', $res);
+	if(strpos($res,'<:label:')!==false) 
+		$res = preg_replace_callback(',<:label:([a-zA-Z_][a-zA-Z0-9_-]*):>,', 'description_outil_label_callback', $res);
 	// remplacement des blocs avec style. ex : <q2>bla bla</q2>
 	$res = preg_replace(',</q(\d)>,','</div>', preg_replace(',<q(\d)>,','<div class="q$1">', $res));
 	// remplacement des inputs successifs sans label : [[%var1%]][[->%var2%]] ou [[%var1%]][[-->%var2%]]

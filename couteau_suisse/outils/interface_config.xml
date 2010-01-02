@@ -23,6 +23,7 @@
 		</item>
 		<par_ligne>1</par_ligne>
 	</radio>
+	<label>@_CS_CHOIX@</label>
 	<defaut_php>'date DESC'</defaut_php>
 	<code>
 		<!-- ![CDATA[ non encore supporte par SPIP ! -->
@@ -58,6 +59,7 @@
 		</item>
 		<par_ligne>1</par_ligne>
 	</radio>
+	<label>@_CS_CHOIX@</label>
 	<defaut_php>'id_groupe'</defaut_php>
 	<code>
 		<!-- ![CDATA[ non encore supporte par SPIP ! -->
@@ -107,6 +109,7 @@
 			<label>spip:info_petit_ecran</label>
 		</item>
 	</radio>
+	<label>@_CS_CHOIX@</label>
 	<defaut_php>defaut</defaut_php>
 	<code>
 		<!-- ![CDATA[ non encore supporte par SPIP ! -->

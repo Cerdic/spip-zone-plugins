@@ -164,16 +164,16 @@ function cs_smileys_PP_pre_charger($flux) {
 				"replaceWith" => $smileys[0][$i],
 				"display"     => true);
 	}
-	$barre = &$flux['edition'];
-	$barre->ajouterApres('grpCaracteres', array(
+	$a = array(
 		"id"          => 'cs_smileys_drop',
 		"name"        => _T('couteau:smileys_inserer', array('smiley'=>'')),
 		"className"   => 'cs_smileys_drop',
 		"replaceWith" => '',
 		"display"     => true,
 		"dropMenu"	=> $r,
-	));
-
+	);
+	foreach(cs_pp_liste_barres('smileys') as $b)
+		$flux[$b]->ajouterApres('grpCaracteres', $a);
 	return $flux;
 }
 function cs_smileys_PP_icones($flux){

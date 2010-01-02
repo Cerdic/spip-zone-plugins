@@ -132,6 +132,7 @@ function parse_variable_xml(&$arbre) {
 		if(isset($temp['par_ligne'])) $var['radio/ligne'] = $temp['par_ligne'][0];
 		foreach($temp['item'] as $a) $var['radio'][$a['valeur'][0]] = $a['label'][0];
 	}
+	if(isset($arbre['label'])) $var['label'] = $arbre['label'][0];
 	if(isset($arbre['defaut_php'])) $var['defaut'] = $arbre['defaut_php'][0];
 	if(isset($arbre['code'])) foreach($arbre['code'] as $a) {
 		$temp = isset($a['condition_php'])?'code:'.$a['condition_php'][0]:'code';

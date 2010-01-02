@@ -122,11 +122,13 @@ add_variables( array(
 	'nom' => 'url_max_arbo',
 	'format' => _format_NOMBRE,
 	'defaut' => 35,
+	'label' => '<:label:url_max_propres:>',
 	'code' => "define('_URLS_ARBO_MAX', %s);",
 ), array(
 	'nom' => 'terminaison_urls_arbo',
 	'format' => _format_CHAINE,
 	'defaut' => "'.html'",
+	'label' => '<:label:terminaison_urls_page:>',
 	'code' => "define('_terminaison_urls_arbo', %s);",
 ));
 
@@ -136,6 +138,7 @@ add_variables( array(
 	'nom' => 'terminaison_urls_propres',
 	'format' => _format_CHAINE,
 	'defaut' => "''",
+	'label' => '<:label:terminaison_urls_page:>',
 	'code:strlen(%s)' => "define('_terminaison_urls_propres', %s);",
 ), array(
 	'nom' => 'url_max_propres',
@@ -157,54 +160,64 @@ add_variables( array(
 	'nom' => 'url_max_propres2',
 	'format' => _format_NOMBRE,
 	'defaut' => 35,
+	'label' => '<:label:url_max_propres:>',
 	'code' => "define('_URLS_PROPRES_MAX', %s);",
 ), array(
 	'nom' => 'debut_urls_propres2',
 	'format' => _format_CHAINE,
 	'defaut' => "''",
+	'label' => '<:label:debut_urls_propres:>',
 	'code:strlen(%s)' => "define('_debut_urls_propres', %s);",
 ), array(
 	'nom' => 'marqueurs_urls_propres2',
 	'format' => _format_NOMBRE,
 	'radio' => array(1 => 'item_oui', 0 => 'item_non'),				
 	'defaut' => 1,
+	'label' => '<:label:marqueurs_urls_propres:>',
 	'code:!%s' => "define('_MARQUEUR_URL', false);"
 ), array(
 	'nom' => 'terminaison_urls_libres',
 	'format' => _format_CHAINE,
 	'defaut' => "''",
+	'label' => '<:label:terminaison_urls_page:>',
 	'code:strlen(%s)' => "define('_terminaison_urls_propres', %s);",
 ), array(
 	'nom' => 'url_max_libres',
 	'format' => _format_NOMBRE,
 	'defaut' => 35,
+	'label' => '<:label:url_max_propres:>',
 	'code' => "define('_URLS_PROPRES_MAX', %s);",
 ), array(
 	'nom' => 'debut_urls_libres',
 	'format' => _format_CHAINE,
 	'defaut' => "''",
+	'label' => '<:label:debut_urls_propres:>',
 	'code:strlen(%s)' => "define('_debut_urls_propres', %s);",
 ), array(
 	'nom' => 'terminaison_urls_propres_qs',
 	'format' => _format_CHAINE,
 	'defaut' => "''",
+	'label' => '<:label:terminaison_urls_page:>',
 	'code:strlen(%s)' => "define('_terminaison_urls_propres', %s);",
 ), array(
 	'nom' => 'url_max_propres_qs',
 	'format' => _format_NOMBRE,
 	'defaut' => 35,
+	'label' => '<:label:url_max_propres:>',
 	'code' => "define('_URLS_PROPRES_MAX', %s);",
 ), array(
 	'nom' => 'marqueurs_urls_propres_qs',
 	'format' => _format_NOMBRE,
 	'radio' => array(1 => 'item_oui', 0 => 'item_non'),				
 	'defaut' => 1,
+	'label' => '<:label:marqueurs_urls_propres:>',
 	'code:!%s' => "define('_MARQUEUR_URL', false);",
 ));
 
 add_variables( array(
 	'nom' => 'urls_minuscules',
 	'check' => 'couteauprive:urls_minuscules',
+	'label' => '@_CS_CHOIX@',
 	'defaut' => 0,
 ), array(
 	'nom' => 'urls_avec_id',

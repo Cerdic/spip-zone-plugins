@@ -212,24 +212,28 @@ function couleurs_PP_pre_charger($flux) {
 				"display"     => true);
 	}
 
-	$barre = &$flux['edition'];
-	$barre->ajouterApres('stroke_through', array(
+	$a = array(
 		"id"          => 'cs_couleur_texte',
 		"name"        => _T('couteau:colorer_texte'),
 		"className"   => 'cs_couleur_texte',
 		"replaceWith" => '',
 		"display"     => true,
 		"dropMenu"	=> $r1,
-	));
-	if(count($r2)) $barre->ajouterApres('cs_couleur_texte', array(
+	);
+	foreach($barres = cs_pp_liste_barres('couleurs') as $b)
+		$flux[$b]->ajouterApres('stroke_through', $a);
+	if(!count($r2)) return $flux;
+
+	$a = array(
 		"id"          => 'cs_couleur_fond',
 		"name"        => _T('couteau:colorer_fond'),
 		"className"   => 'cs_couleur_fond',
 		"replaceWith" => '',
 		"display"     => true,
 		"dropMenu"	=> $r2,
-	));
-
+	);
+	foreach($barres as $b)
+		$flux[$b]->ajouterApres('cs_couleur_texte', $a);
 	return $flux;
 }
 function couleurs_PP_icones($flux){

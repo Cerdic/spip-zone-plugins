@@ -140,6 +140,7 @@ add_variable( array(
 	'format' => _format_CHAINE,
 	'radio' => array('basiques' => 'icone_interface_simple', 'avancees' => 'icone_interface_complet'),
 	'defaut' => '"avancees"',
+	'label' => '@_CS_CHOIX@',
 	'code' => "\$_GET['set_options']=\$GLOBALS['set_options']=%s;",
 ));
 add_outil( array(
@@ -179,6 +180,7 @@ add_variables( array(
 		'perso' => 'couteauprive:tri_perso' ),
 	'radio/ligne' => 1,
 	'defaut' => "'date DESC'", //"'0+titre,titre'",
+	'label' => '@_CS_CHOIX@',
 	'code:%s!="perso"' => "define('_TRI_ARTICLES_RUBRIQUE', %s);\n",
 ), array(
 	'nom' => 'tri_perso',
@@ -215,6 +217,7 @@ add_variable( array(
 	'format' => _format_NOMBRE,
 	'radio' => array(-1 => 'couteauprive:js_jamais', 0 => 'couteauprive:js_defaut', 1 => 'couteauprive:js_toujours'),
 	'defaut' => 0,
+	'label' => '@_CS_CHOIX@',
 	// si la variable est non nulle, on code...
 	'code:%s' => "\$GLOBALS['filtrer_javascript']=%s;",
 ));
@@ -333,6 +336,7 @@ add_variable( array(
 	'format' => _format_CHAINE,
 	'radio' => array('defaut' => 'couteauprive:par_defaut', '_SUIVI_FORUMS_REPONSES' => 'couteauprive:sf_amont', '_SUIVI_FORUM_THREAD' => 'couteauprive:sf_tous'),
 	'defaut' => '"defaut"',
+	'label' => '@_CS_CHOIX@',
 	// si la variable est differente de 'defaut' alors on codera le define
 	'code:%s!=="defaut"' => "define(%s, true);",
 ));
@@ -520,6 +524,7 @@ add_variables( array(
 	'radio' => array(1 => 'couteauprive:statuts_tous', 0 => 'couteauprive:statuts_spip'),
 	'radio/ligne' => 1,
 	'defaut' => 0,
+	'label' => '@_CS_CHOIX@',
 //	'code:!%s' => "@define('AUTEURS_DEFAUT', join(\$temp_auteurs,','));",
 	'code:!%s' => "if(_request('exec')=='auteurs' && !_request('statut')) \$_GET['statut'] = join(\$temp_auteurs,',');",
 	'code:%s' => "if(_request('exec')=='auteurs' && !_request('statut')) \$_GET['statut'] = '!foo';",
@@ -709,7 +714,7 @@ add_variable( array(	// variable utilisee par 'pipelinecode:insert_head'
 	'nom' => 'puceSPIP',
 	'check' => 'couteauprive:puceSPIP',
 	'defaut' => 0,
-	'format' => _format_NOMBRE,
+	'label' => '@_CS_CHOIX@',
 ));
 add_outil( array(
 	'id' => 'pucesli',
