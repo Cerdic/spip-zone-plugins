@@ -72,7 +72,7 @@ if (window.jQuery)
  })(jQuery);
 /* ]]> */</script>';
 	// Inclusion des styles propres a fancybox
-	$flux .='<link rel="stylesheet" href="'.url_absolue(find_in_path('styles/jquery.fancybox-1.2.6.css')).'" type="text/css" />';
+	$flux .='<link rel="stylesheet" href="'.url_absolue(find_in_path('styles/jquery.fancybox.css')).'" type="text/css" />';
 
 	return $flux;
 }
