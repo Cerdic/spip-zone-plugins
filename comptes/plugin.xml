@@ -1,0 +1,55 @@
+<plugin>
+
+	<nom>Comptes &amp; Contacts - Extension des auteurs SPIP</nom>
+
+	<auteur>Cyril Marion</auteur>
+
+	<version>1.0</version>
+
+	<etat>dev</etat>
+
+	<description>
+		Ce plugin permet la gestion de comptes et contacts pour les inscriptions, les transactions. Utilise et &ecute;tend la structure des auteurs SPIP.
+	</description>
+
+	<icon>img/comptes_128x128.png</icon>
+
+	<prefix>comptes</prefix>
+	
+	<pipeline>
+		<nom>insert_head</nom>
+		<action>insert_head</action>
+		<inclure>comptes_fonctions.php</inclure>
+	</pipeline>
+
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/comptes.php</inclure>
+	</pipeline>
+	
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/comptes.php</inclure>
+	</pipeline>
+
+	<version_base>1.0</version_base>
+	
+	<install>base/comptes_upgrade.php</install>
+	
+	<fonctions>comptes_fonctions.php</fonctions>
+	
+	<options>comptes_options.php</options>
+	
+	<bouton id='comptes' parent='naviguer'>
+		<icone>img/comptes_24x24.jpg</icone>
+		<titre>comptes:comptes</titre>
+	</bouton>
+
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>comptes_autorisations.php</inclure>
+	</pipeline>	
+	
+	<necessite id="SPIP" version="[2.0.9;]" />
+
+</plugin>
