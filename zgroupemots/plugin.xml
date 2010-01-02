@@ -3,11 +3,11 @@
   <auteur>Denis Chenu et surtout Matthieu Marcillaud, C&eacute;dric Morin, Romy Tetue, Collectif SPIP</auteur>
 	<licence>GNU/GPL</licence>
 	<icon>groupe-mots.png</icon>
-  <version>1.0.1</version>
+  <version>1.1.0</version>
   <etat>stable</etat>
   <description>Un ajout de la page groupe_mots pour zpip et squelettes compatible
 	</description>
 	<lien>http://www.spip-contrib.net/?article3341</lien>
   <prefix>zgroupemots</prefix>
-	<necessite id="Z" version="[1.0.0;]" />
+	<necessite id="Z" version="[1.2.1;]" />
 </plugin>
