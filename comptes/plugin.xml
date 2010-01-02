@@ -9,7 +9,7 @@
 	<etat>dev</etat>
 
 	<description>
-		Ce plugin permet la gestion de comptes et contacts pour les inscriptions, les transactions. Utilise et &ecute;tend la structure des auteurs SPIP.
+		Ce plugin permet la gestion de comptes et contacts pour les inscriptions, les transactions. Utilise et &eacute;tend la structure des auteurs SPIP.
 	</description>
 
 	<icon>img/comptes_128x128.png</icon>
@@ -45,10 +45,10 @@
 		<titre>comptes:comptes</titre>
 	</bouton>
 
-	<pipeline>
+	<!--pipeline>
 		<nom>autoriser</nom>
 		<inclure>comptes_autorisations.php</inclure>
-	</pipeline>	
+	</pipeline-->	
 	
 	<necessite id="SPIP" version="[2.0.9;]" />
 
