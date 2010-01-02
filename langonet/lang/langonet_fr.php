@@ -50,6 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_mode_index' => 'Item de la langue source',
 	'option_mode_new_index' => 'Item de la langue source pr&eacute;c&eacute;d&eacute; de &lt;NEW&gt;',
 	'option_mode_new_valeur' => 'Chaine dans la langue source pr&eacute;c&eacute;d&eacute;e de &lt;NEW&gt;',
+	'option_mode_pas_item' => 'Ne pas cr&eacute;er d\'item',
 	'option_mode_new' => 'Balise &lt;NEW&gt; uniquement',
 	'option_mode_valeur' => 'Chaine dans la langue source',
 	'option_mode_vide' => 'Une chaine vide',
