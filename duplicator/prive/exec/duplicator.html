@@ -1,0 +1,9 @@
+#SET{tri,#ENV{tri}|sinon{nom}}
+#SET{ordre,#ENV{ordre}|sinon{''}}
+
+<h1 class="grostitre">Dupliquer une rubrique</h1>
+
+
+<h2>Duplication de la rubrique [(#ENV{id_objet})] (<BOUCLE_NomRub(RUBRIQUES){id_rubrique=#ENV{id_objet}}>#TITRE</BOUCLE_NomRub>)</h2>
+
+<div class="ajax">#FORMULAIRE_DUPLICATOR_CONFIRM{#ENV{id_objet}}</div>

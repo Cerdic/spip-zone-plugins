@@ -1,0 +1,3 @@
+- Prendre en compte les logos des articles (dupliquer dans le dossier img donc)
+- Automatiser la descente de l'arbre pour les sous-rubriques
+- Restreindre aux administrateurs
