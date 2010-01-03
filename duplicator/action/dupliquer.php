@@ -23,6 +23,7 @@ function dupliquer_article($article,$rubrique){
 	);
 	$infos = sql_allfetsel($champs, $from, $where);
 	// On choisi les champs que l'on veut conserver
+	// TODO éventuellement passer cette variable en CFG pour choisir depuis SPIP les champs à conserver ?
 	$champs_dupliques = array(
 		'surtitre','titre','soustitre','descriptif','chapo','texte','ps','accepter_forum','lang','langue_choisie','nom_site','url_site'
 	);
@@ -31,33 +32,20 @@ function dupliquer_article($article,$rubrique){
 	}
 	
 	// On cherche ses mots clefs
-	$champs = array('id_mot');
-	$from = 'spip_mots_articles';
-	$where = array( 
-		"id_article=".$article
-	);
-	$mots_clefs_de_l_article = sql_allfetsel($champs, $from, $where);
+	$mots_clefs_de_l_article = lire_les_mots_clefs($article,'article');
 
-	/*
-	 * On duplique !
-	 */
-	// On le clone, il sera NON publié par défaut
+	//////////////
+	// ON DUPLIQUE
+	//////////////
+	// On le clone avec les champs choisis ci-dessus, il sera NON publié par défaut
 	$id_article = insert_article($rubrique);
 	revision_article($id_article, $infos_de_l_article);
 	
-	// On lui rend ses infos
+	// On lui rend son statut
 	$maj_statut_article = sql_updateq("spip_articles", array('statut' => $infos[0]['statut']), "id_article=".$id_article);
-	
+
 	// On lui remet ses mots clefs
-	foreach($mots_clefs_de_l_article as $champ => $valeur){
-		$n = sql_insertq(
-			'spip_mots_articles',
-			array(
-				'id_mot' => $valeur['id_mot'],
-				'id_article' => $id_article
-			)
-		);
-	}
+	remettre_les_mots_clefs($mots_clefs_de_l_article,$id_article,'article');
 	
 	return $id_article;
 }
@@ -90,12 +78,7 @@ function dupliquer_rubrique($rubrique){
 		);
 
 		// On cherche ses mots clefs
-		$champs = array('id_mot');
-		$from = 'spip_mots_rubriques';
-		$where = array( 
-			"id_rubrique=".$rubrique
-		);
-		$mots_clefs_de_la_rubrique = sql_allfetsel($champs, $from, $where);
+		$mots_clefs_de_la_rubrique = lire_les_mots_clefs($rubrique,'rubrique');
 
 		// On cherche ses articles
 		$champs = array('id_article');
@@ -116,15 +99,7 @@ function dupliquer_rubrique($rubrique){
 		$maj_statut_rubrique = sql_updateq("spip_rubriques", array('statut' => 'publie'), "id_rubrique=".$id_nouvelle_rubrique);
 
 		// On lui remet ses mots clefs
-		foreach($mots_clefs_de_la_rubrique as $champ => $valeur){
-			$n = sql_insertq(
-				'spip_mots_rubriques',
-				array(
-					'id_mot' => $valeur['id_mot'],
-					'id_rubrique' => $id_nouvelle_rubrique
-				)
-			);
-		}
+		remettre_les_mots_clefs($mots_clefs_de_la_rubrique,$id_nouvelle_rubrique,'rubrique');
 
 		// On lui remet ses articles
 		foreach($articles_de_la_rubrique as $champ => $valeur){
@@ -161,12 +136,7 @@ function dupliquer_sous_rubrique($rubrique,$cible){
 		);
 
 		// On cherche ses mots clefs
-		$champs = array('id_mot');
-		$from = 'spip_mots_rubriques';
-		$where = array( 
-			"id_rubrique=".$rubrique
-		);
-		$mots_clefs_de_la_rubrique = sql_allfetsel($champs, $from, $where);
+		$mots_clefs_de_la_rubrique = lire_les_mots_clefs($rubrique,'rubrique');
 
 		// On cherche ses articles
 		$champs = array('id_article');
@@ -187,15 +157,7 @@ function dupliquer_sous_rubrique($rubrique,$cible){
 		$maj_statut_rubrique = sql_updateq("spip_rubriques", array('statut' => 'publie'), "id_rubrique=".$id_nouvelle_rubrique);
 
 		// On lui remet ses mots clefs
-		foreach($mots_clefs_de_la_rubrique as $champ => $valeur){
-			$n = sql_insertq(
-				'spip_mots_rubriques',
-				array(
-					'id_mot' => $valeur['id_mot'],
-					'id_rubrique' => $id_nouvelle_rubrique
-				)
-			);
-		}
+		remettre_les_mots_clefs($mots_clefs_de_la_rubrique,$id_nouvelle_rubrique,'rubrique');
 		
 		// On lui remet ses articles
 		foreach($articles_de_la_rubrique as $champ => $valeur){
@@ -203,4 +165,29 @@ function dupliquer_sous_rubrique($rubrique,$cible){
 		}
 	
 	return $id_nouvelle_rubrique;
+}
+
+
+function lire_les_mots_clefs($id,$type){
+	$champs = array('id_mot');
+	$from = 'spip_mots_'.$type.'s';
+	$where = array( 
+		"id_$type=".$id
+	);
+	$mots_clefs = sql_allfetsel($champs, $from, $where);
+	
+	return $mots_clefs;
+}
+function remettre_les_mots_clefs($mots,$id,$type){
+	foreach($mots as $champ => $valeur){
+		$n = sql_insertq(
+			'spip_mots_'.$type.'s',
+			array(
+				'id_mot' => $valeur['id_mot'],
+				'id_'.$type => $id
+			)
+		);
+	}
+	
+	return true;
 }
