@@ -29,19 +29,6 @@ function formulaires_duplicator_confirm_traiter_dist($rubrique){
 		// On duplique la rubrique
 		$nouvelle_rubrique = dupliquer_rubrique($rubrique);
 
-		// On liste les sous-rubriques de la rubrique d'origine
-		$champs = array('id_rubrique');
-		$from = 'spip_rubriques';
-		$where = array( 
-			"id_parent=".$rubrique
-		);
-		$rubriques_de_la_rubrique = sql_allfetsel($champs, $from, $where);
-
-		// On lui remet ses sous-rubrique de niveau 1 (+ mots clefs + articles)
-		foreach($rubriques_de_la_rubrique as $champ => $valeur){
-			$rubrique = $valeur['id_rubrique'];
-			$nouvelle_sous_rubrique = dupliquer_rubrique($rubrique,$nouvelle_rubrique,' ');
-		}
 		$message = array('message_ok'=>array(
 										'message'=>_T('duplicator:operation_executee'),
 										'cible'=>$nouvelle_rubrique,

@@ -90,6 +90,14 @@ function dupliquer_rubrique($rubrique,$cible=null,$titre=' (copie)'){
 	);
 	$articles_de_la_rubrique = sql_allfetsel($champs, $from, $where);
 
+	// On cherche ses sous-rubriques
+	$champs = array('id_rubrique');
+	$from = 'spip_rubriques';
+	$where = array( 
+		"id_parent=".$rubrique
+	);
+	$rubriques_de_la_rubrique = sql_allfetsel($champs, $from, $where);
+
 	/*
 	 * Traitement
 	 * On duplique les données
@@ -106,6 +114,12 @@ function dupliquer_rubrique($rubrique,$cible=null,$titre=' (copie)'){
 	// On lui remet ses articles
 	foreach($articles_de_la_rubrique as $champ => $valeur){
 		$id_article = dupliquer_article($valeur['id_article'],$id_nouvelle_rubrique);
+	}
+
+	// On lui remet ses sous-rubrique (+ mots clefs + articles + sous rubriques)
+	foreach($rubriques_de_la_rubrique as $champ => $valeur){
+		$rubrique = $valeur['id_rubrique'];
+		$nouvelle_sous_rubrique = dupliquer_rubrique($rubrique,$id_nouvelle_rubrique,' sousRub ');
 	}
 	
 	return $id_nouvelle_rubrique;
