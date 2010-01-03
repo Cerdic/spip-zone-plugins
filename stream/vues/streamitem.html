@@ -1,0 +1,52 @@
+﻿[(#SET{admin,#AUTORISER{modifier,syndic_article,#ID_SYNDIC_ARTICLE}|?{…}})]
+<BOUCLE_item(SYNDIC_ARTICLES){id_syndic_article}{statut?}>
+<div class="#STATUT">
+	[<p class="statut">(#STATUT|replace{publie})</p>]
+
+	[<div style="float:right">(#LOGO_SYNDIC_ARTICLE|image_reduire{80,80})</div>]
+
+	<h4 class="h4">
+	<a href="#URL_PAGE{stream,id_syndic_article=#ID_SYNDIC_ARTICLE}"[
+		title="(#DATE|date_iso)"]><?php
+			include_spip('inc/filtres');
+			echo date_relative('#DATE');
+			?></a>
+	[ &gt; <a href="[(#URL_PAGE{stream,lesauteurs=#LESAUTEURS*})]">(#LESAUTEURS)</a>]
+	</h4>
+
+	<h3 class="titre h3 spip_out">
+	[<a href="(#URL_ARTICLE)" class="spip_out">#SET{a,a}][(#TITRE|sinon{<span class="spip_url">#URL_ARTICLE</span>})][</(#GET{a})>]</h3>
+
+	[<div class="introduction">(#DESCRIPTIF|image_reduire{300}
+	|lignes_longues)</div>
+	]
+
+	[<div class="enclosures">(#TAGS|afficher_enclosures
+		|replace{(.*flickr.*)_m.jpg,\1.jpg}
+		)</div>]
+
+	[<div class="small url spip_url">
+	<a href="#URL_ARTICLE">(#URL_ARTICLE|couper{40,…})</a>
+	</div>]
+
+	[<div class="small tags">
+		 (#TAGS|stream_tags)</em>
+	</div>
+	]
+
+	[(#REM{admin}|oui)
+		<div class="small buzz">
+		#del
+		#tw
+		#fb
+		</div>
+	]
+
+	<!--
+		Quand on saura faire des forums sur les articles syndiques
+		"#-PARAMETRES_FORUM"
+		<div class="small jaime">#j'aime #commenter</div>
+	-->
+
+</div>
+</BOUCLE_item>

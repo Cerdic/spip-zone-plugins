@@ -1,0 +1,32 @@
+[(#REM)
+
+	Le stream consiste :
+
+	1) un formulaire de saisie
+
+	2) la liste des items
+		* avec les commentaires
+
+
+
+]
+
+<style type='text/css'>
+	#hierarchie {display: block}
+	li.item {margin-bottom: 2em}
+	.introduction img { float:left; margin: 0 14px 9px 0; }
+	p.tri { text-align: right; }
+</style>
+
+
+[(#REM) Fil d'Ariane ]
+<p id="hierarchie">
+<a href="#URL_SITE_SPIP/"><:accueil_site:></a>
+&gt; <a href="#URL_PAGE{stream}">Stream</a>
+[ &gt; <strong class="on">(#ENV{lesauteurs})</strong>]
+[ &gt; <strong class="on">(#RECHERCHE)</strong>]
+</p> 
+
+[(#SET{composition,page-stream-[(#SESSION{statut}|=={0minirezo}|?{admin,visiteur})]})]
+<INCLURE{fond=contenu/#GET{composition}}{env} />
+

@@ -1,0 +1,41 @@
+<B_sources>
+<div class="menu sources">
+<h2 class="h2">Sources</h2>
+<ul class="menu-liste">
+<BOUCLE_sources(SYNDIC){par num nom_site, nom_site}>
+<li class="menu-entree"><a href="[(#URL_PAGE{stream,id_syndic=#ID_SYNDIC})]" class="#EXPOSE">#NOM_SITE</a>
+
+[(#REM)
+	Si on est autorise a resyndiquer, mettre un bouton + ajax
+]
+<a class="ajax" href="#URL_ACTION_AUTEUR{editer_site,#ID_SYNDIC,#SELF}&amp;reload=oui"><img src="#CHEMIN{images/refresh.gif}" /></a>
+
+</li>
+</BOUCLE_sources>
+</ul>
+
+[(#AUTORISER{""}|oui)
+<ul><li><strong>bookmarklet:</strong>
+<a href="javascript:void(location.href='#URL_PAGE{stream}&amp;url='+encodeURIComponent(location.href)+'&titre='+encodeURIComponent(document.title))"
+onclick="alert('bookmarklet a installer dans la barre'); return false;">+Stream</a>
+</li>
+</ul>
+]
+
+<script type='text/javascript'>
+$('.menu.sources a.ajax')
+.bind('click', function() {
+	var me = this;
+	var ori = $(me).html();
+	$(me).empty().append(
+	'<img src="prive/images/loader.gif" />'
+	);
+	$.get(me.href, function() {
+		$(me).html(ori);
+	});
+	return false;
+});
+</script>
+
+</div>
+</B_sources>

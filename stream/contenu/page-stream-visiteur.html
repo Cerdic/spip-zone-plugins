@@ -1,0 +1,32 @@
+#CACHE{5}
+
+<B_stream>
+
+<div class="liste stream">
+[<p class="pagination">(#PAGINATION)</p>]
+
+<ul class="liste-items">
+
+
+<BOUCLE_stream(SYNDIC_ARTICLES)
+	{id_syndic_article?}
+	{id_syndic?}
+	{lesauteurs?}
+	{recherche?}
+	{pagination 50}
+	{!par date}
+>
+	<li class="item">
+	<INCLURE{fond=vues/streamitem}{id_syndic_article}{env}{maj} />
+	</li>
+
+</BOUCLE_stream>
+
+</ul>
+
+[<p class="pagination">(#PAGINATION)</p>]
+
+</div>
+
+</B_stream>
+

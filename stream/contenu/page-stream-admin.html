@@ -1,0 +1,82 @@
+#CACHE{5}
+
+<style type='text/css'>
+/* statut non prevu */
+li.item>div { border: solid 1px green; padding: 10px;}
+/* statuts prevus */
+li.item>div.publie { border: none; padding: 0; }
+li.item>div.dispo { border: solid 2px yellow; }
+li.item>div.prepa { border: solid 2px yellow; }
+li.item>div.refuse { border: solid 1px black; height: 2em; overflow: hidden; }
+li.item>div.refuse > * {font-size: 78%;}
+li.item p.statut {float: right; border: dashed 1px black;}
+
+</style>
+
+#FORMULAIRE_STREAM
+
+<script>
+var showform = $('#formulaire_stream fieldset>*:visible,#formulaire_stream  button').hide();
+$('#formulaire_stream .show')
+.bind('focus click', function(){
+	showform.show();
+})
+.parents('*')
+.show();
+</script>
+
+<div class="liste stream">
+
+<p class="tri">Par statut : <a href="#URL_PAGE{stream}"[ class="(#ENV{statut}|?{'',on})"]>tous</a>
+<BOUCLE_statuts(SYNDIC_ARTICLES){fusion statut}{statut!=prepa}>
+| <a href="#URL_PAGE{stream}&amp;statut=#STATUT*"[ class="(#STATUT|=={#ENV{statut}}|?{on})"]>#STATUT</a>
+</BOUCLE_statuts></p>
+
+<!-- 
+<p class="tri">Par langue : <a href="#URL_PAGE{stream}"[ class="(#ENV{lang}|?{'',on})"]>toutes</a>
+< BOUCLE_lang(SYNDIC_ARTICLES){statut=publie}{fusion lang}{lang>''}>
+| <a href="#URL_PAGE{stream}&amp;lang=#LANG*"[ class="(#LANG|=={#ENV{lang}}|?{on})"]>#LANG</a>
+< /BOUCLE_lang></p>
+-->
+
+
+<B_stream>
+<p class="tri">tri par&nbsp;: <span class="on">[(#ENV{tri,date})]</span> <a href="[(#SELF
+	|parametre_url{debut_stream,0}
+	|parametre_url{tri,[(#ENV{tri}|?{'',maj})]})"
+]>[(#ENV{tri}|?{date,maj})]</a></p>
+
+<p class="tri"><a href="#URL_PAGE{stream-visiteur}">stream visiteur</a></p>
+
+[<p class="pagination">(#PAGINATION)</p>]
+
+
+<ul class="liste-items">
+
+
+<BOUCLE_stream(SYNDIC_ARTICLES)
+	{id_syndic_article?}
+	{id_syndic?}
+	{lesauteurs?}
+	{recherche?}
+	{pagination 50}
+	{statut!=prepa}
+	{statut?}
+	{!par #ENV{tri,date}}
+>
+	
+	<li class="#EDIT{streamitem} item">
+	<INCLURE{fond=vues/streamitem}{id_syndic_article}{env}{maj} />
+	</li>
+
+</BOUCLE_stream>
+
+</ul>
+
+[<p class="pagination">(#PAGINATION)</p>]
+
+
+</B_stream>
+
+
+</div>

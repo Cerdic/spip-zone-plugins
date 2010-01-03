@@ -1,0 +1,21 @@
+#CACHE{0}
+<div class="formulaire_spip formulaire_stream" id="formulaire_stream">
+
+<BOUCLE_a(SYNDIC_ARTICLES){id_syndic_article}{statut?}>
+<form action="spip.php" method="post" enctype="multipart/form-data">
+<input type="hidden" name="action" value="crayons" />
+<input type="hidden" name="redirect" value="#SELF" />
+
+#CRAYON{streamitem}
+
+
+<div class="crayon-boutons">
+<div>
+<button title="Enregistrer" class="crayon-submit" type="submit">Enregistrer</button>
+</div>
+</div>
+
+</form>
+</BOUCLE_a>
+
+</div>

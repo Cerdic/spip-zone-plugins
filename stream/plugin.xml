@@ -1,0 +1,35 @@
+<plugin>
+	<nom>Stream</nom>
+	<auteur>
+	Fil
+	&#169; 2010 - GNU/GPL
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	dev
+	</etat>
+	<description>
+	GŽrer un flux / stream de nouvelles
+	</description>
+	<lien></lien>
+	<prefix>
+	Stream
+	</prefix>
+	<!--
+	<fonctions>tetecrayons.php</fonctions>
+	<pipeline>
+		<nom>affichage_final</nom>
+		<inclure>tetecrayons.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<action>insert_head</action>
+		<inclure>tetecrayons.php</inclure>
+	</pipeline>
+	-->
+	<options>stream_options.php</options>
+	<chemin dir='' />
+	<necessite id="SPIP" version="[2.0.0;]" />
+</plugin>

@@ -1,0 +1,134 @@
+[(#REM)
+
+	Controleur pour le crayon 'stream' , uniquement html
+
+]
+#CACHE{0}
+#SET{now,#DATE}
+
+<BOUCLE_a(SYNDIC_ARTICLES){id_syndic_article}{statut?}>
+#SET{titre,#TITRE*}
+#SET{auteurs,#LESAUTEURS*}
+#SET{url_rub,#URL_RUBRIQUE}
+
+<style type='text/css'>
+.streamset label.micro {
+	width: 50px;
+	text-align:right;
+	margin-#LANG_RIGHT: 4px;
+	vertical-align:top;
+	float:#LANG_LEFT;
+}
+
+.formulaire_spip fieldset.streamset {
+	border: 4px solid #ccd1cc;
+	padding: 3px;
+}
+
+/* lutter contre http://trac.rezo.net/trac/spip/changeset/12225 +
+ * http://zone.spip.org/trac/spip-zone/changeset/28648
+ */
+.streamset select {width: auto;}
+
+</style>
+
+
+<fieldset
+class="streamset #STATUT" style='width: 450px; color: rgb(51, 51, 51); font-size: 14.0833px; font-family: museosans,"Luxi sans","Lucida Grande",Lucida,"Lucida Sans Unicode",sans-serif; font-weight: 400; line-height: 18px; background-color: rgb(251, 251, 208);'>
+<legend><strong><a href="#URL_PAGE{stream,id_syndic_article=#ID_SYNDIC_ARTICLE}">##ID_SYNDIC_ARTICLE</a></strong></legend>
+<div>
+<a rel="bookmark"[ href="(#URL_ARTICLE)" target="_blank"]><strong class="entry-title">[(#GET{titre}|sinon{#URL_ARTICLE}|sinon{Sans titre}|typo)]</strong></a>
+</div>
+[<span class="source">((#SOURCE)[<span class="datehm">
+	<abbr class="updated"[ title="(#DATE|date_iso)]">(#DATE|affdate_court)]</abbr></span>)</span>]
+
+[(#REM) Titre, auteur et source ]
+<p>
+<label class="micro">Titre&nbsp;:</label> <input class="crayon-active show" name="#ENV{name_titre}"
+ style="width:380px; font-weight: bold;" value="[(#GET**{titre}|entites_html)]" />
+</p>
+
+<p>
+<label class="micro">URL&nbsp;:</label> <input class="crayon-active" name="#ENV{name_url}"
+ style="width:380px; font-family: courier;" value="[(#URL**|entites_html)]" /></p>
+
+
+<div style='clear:both'></div>
+
+
+[(#REM) Descriptif ]
+<label class="micro">Descriptif&nbsp;:</label>
+<textarea class="crayon-active" name="#ENV{name_descriptif}"
+ style="width:380px;height:90px;">
+[(#DESCRIPTIF**|entites_html)]</textarea>
+
+
+<p>
+<label class="micro">Tags&nbsp;:</label> <input class="crayon-active" name="#ENV{name_tags}"
+ style="width:380px;" value="[(#TAGS**|entites_html)]" /></p>
+
+<B_source>
+<p>
+<label class="micro">Source&nbsp;:</label>
+<select name="#ENV{name_id_syndic}">
+<BOUCLE_source(SITES){par num nom_site,nom_site}>
+<option value="#ID_SYNDIC"[ selected="(#ID_SYNDIC|=={#_a:ID_SYNDIC}|?{selected})"]>#NOM_SITE</option>
+</BOUCLE_source>
+</select>
+</p>
+</B_source>
+
+
+<!--
+[<div style="float:#LANG_RIGHT;">(#INCLURE{fond=controleurs/logo}{env})
+<!-- input class="crayon-active" namexxxxx="#ENV{name_logo}" type="hidden" / -- >
+</div>
+]
+-->
+
+
+<div>
+	<label class="micro">Statut&nbsp;:</label>
+	[(#SET{id,#STATUT})]
+	<select class="crayon-active" name="#ENV{name_statut}">
+	<option value="publie"[
+		(#GET{id}|=={publie}|?{selected})="selected"]>publi&#233;</option>
+	[<option value="dispo"
+		(#GET{id}|match{prepa|dispo}|?{selected})="selected">&#224; valider</option>]
+	<option value="refuse"[
+		(#GET{id}|match{poubelle|refuse}|?{selected})="selected"]>refus&#233;</option>
+	</select>
+
+
+<br />
+
+<label class="micro">Langue&nbsp;:</label>
+	#SET{id,#LANG}
+	<select class="crayon-active" name="#ENV{name_lang}">
+	<option value="fr"[
+		(#GET{id}|=={fr}|?{selected})="selected"]>fran&#231;ais</option>
+	<option value="en"[
+		(#GET{id}|=={en}|?{selected})="selected"]>anglais</option>
+	<option value="es"[
+		(#GET{id}|=={dispo}|?{selected})="selected"]>espagnol</option>
+	</select>
+	
+ </div><!-- float -->
+
+<br />
+
+[(#REM) La date est modifiee auto des lors que l'article n'est pas publie ]
+<label class="micro">Date&nbsp;:</label>
+<input class="crayon-active" name="#ENV{name_date}"
+ style="width:12em;" value="[(#STATUT|match{publie|refuse}|?{#DATE**,#GET{now}}|entites_html)]" />
+
+<br />
+
+[(#REM) La date est modifiee auto des lors que l'article n'est pas publie ]
+<label class="micro">Auteur&nbsp;:</label>
+<input class="crayon-active" name="#ENV{name_lesauteurs}"
+ style="width:12em;" value="[(#LESAUTEURS**|entites_html)]" />
+
+
+</fieldset>
+</BOUCLE_a>
