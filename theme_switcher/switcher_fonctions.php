@@ -10,7 +10,7 @@ function switcher_affichage_final($texte){
 		if (SWITCHER_AFFICHER) {
 			
 			// Insertion du Javascript de rechargement de page
-			$code='<script type="text/javascript">
+			$code='script type="text/javascript">
 						//<![CDATA[
 						function gotof(url) {
 						window.location=url;
@@ -32,7 +32,7 @@ function switcher_affichage_final($texte){
 
 			
 		// On rajoute le code du selecteur de squelettes avant la balise </body>
-		$texte=preg_replace("</body>","$code</body>",$texte);
+		$texte=preg_replace("</body>","$code</body",$texte);
 	}
 	return($texte);
 }
