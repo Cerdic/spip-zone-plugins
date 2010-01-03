@@ -9,12 +9,12 @@
 	<etat>dev</etat>
 
 	<description>
-		Ce plugin permet la gestion simple d'un catalogue de produits, avec catégories et variantes
+		Ce plugin permet la gestion simple d'un catalogue de produits, avec cat&eacute;gories et variantes
 	</description>
 
-	<lien>http://events.concurrences.com</lien>
+	<lien>[Un exemple de conf&eacute;rence en ligne->http://events.concurrences.com/article2.html?var_mode=recalcul]</lien>
 	
-	<lien>http://spipmine.cym.fr</lien>
+	<lien>[Un exemple de voyage en ligne->http://www.tunisiasalsacongress.com/spip.php?page=transaction&env]</lien>
 
 	<icon>img/catalogue_128x128.png</icon>
 
