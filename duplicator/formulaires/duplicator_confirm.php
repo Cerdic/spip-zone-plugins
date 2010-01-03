@@ -40,7 +40,7 @@ function formulaires_duplicator_confirm_traiter_dist($rubrique){
 		// On lui remet ses sous-rubrique de niveau 1 (+ mots clefs + articles)
 		foreach($rubriques_de_la_rubrique as $champ => $valeur){
 			$rubrique = $valeur['id_rubrique'];
-			$nouvelle_sous_rubrique = dupliquer_sous_rubrique($rubrique,$nouvelle_rubrique);
+			$nouvelle_sous_rubrique = dupliquer_rubrique($rubrique,$nouvelle_rubrique,' ');
 		}
 		$message = array('message_ok'=>array(
 										'message'=>_T('duplicator:operation_executee'),
