@@ -149,7 +149,7 @@ function cs_smileys_BarreTypo($tr) {
 
 // les 2 fonctions suivantes inserent les boutons pour le plugin Porte Plume, s'il est present (SPIP>=2.0)
 function cs_smileys_PP_pre_charger($flux) {
-	// les raccoucis de couleur sont-il dispo ?
+	// les smileys sont-il dispo ?
 	if (!isset($GLOBALS['meta']['cs_smileys']))	smileys_installe();
 	// le tableau des smileys est present dans les metas
 	$smileys = smileys_uniques(unserialize($GLOBALS['meta']['cs_smileys']));
@@ -177,7 +177,7 @@ function cs_smileys_PP_pre_charger($flux) {
 	return $flux;
 }
 function cs_smileys_PP_icones($flux){
-	// les raccoucis de couleur sont-il dispo ?
+	// les smileys sont-il dispo ?
 	if (!isset($GLOBALS['meta']['cs_smileys']))	smileys_installe();
 	// le tableau des smileys est present dans les metas
 	$smileys = unserialize($GLOBALS['meta']['cs_smileys']);

@@ -776,6 +776,8 @@ add_outil( array(
 	'code:options' => "%%decoration_styles%%",
 	'pipeline:pre_typo' => 'decoration_pre_typo',
 	'pipeline:bt_toolbox' => 'decoration_BarreTypo',
+	'pipeline:porte_plume_barre_pre_charger' => 'decoration_PP_pre_charger',
+	'pipeline:porte_plume_lien_classe_vers_icone' => 'decoration_PP_icones',
 ));
 
 add_variables( array(

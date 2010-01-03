@@ -130,14 +130,15 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 	$descrip = isset($outil['description'])?$outil['description']:_T('couteauprive:'.$outil['id'].':description');
 	// ajout des variables liees a la barre typo
 	if(defined('_DIR_PLUGIN_PORTE_PLUME') 
-	 && strpos(serialize($outil),':porte_plume_barre_pre_charger"')!==false
+	 && isset($outil['pipeline:porte_plume_barre_pre_charger'])
 	 && count($barres = cs_pp_liste_barres())) {
 		$descrip .= "\n\n@puce@ "._T('couteauprive:barres_typo_intro');
 		$i=0;
 		foreach($barres as $f=>$b) {
-			$descrip .= ($i?'[[->':'[[')."%pp_{$b}_$outil[id]%]]";
+			$nom = "pp_{$b}_$outil[id]";
+			$descrip .= ($i?'[[->':'[[')."%$nom%]]";
 			add_variables( array(
-				'nom' => "pp_{$b}_$outil[id]",
+				'nom' => $nom,
 				'check' => ($b=='edition' || $b=='forum')?'couteauprive:barres_typo_'.$b:$f,
 				'defaut' => 1, // par defaut les boutons seront toujours inseres
 				'label' => $i++?NULL:'@_CS_CHOIX@',

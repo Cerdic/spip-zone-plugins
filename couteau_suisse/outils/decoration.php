@@ -16,13 +16,10 @@ cs_log("decoration_installe()");
 	foreach ($deco_balises as $balise) {
 		if (preg_match('/(span|div|auto)\.([^.]+)\.(class|lang)\s*=(.+)$/', $balise, $regs)) {
 			// les class/lang
-			list($div, $racc, $attr, $valeur) = array($regs[1], trim($regs[2]), trim($regs[3]), trim($regs[4]));
+			list($auto, $div, $racc, $attr, $valeur) = array($regs[1]=='auto', $regs[1], trim($regs[2]), trim($regs[3]), trim($regs[4]));
+			$BT[] = array($racc, $auto, $div);
 			$attr="$attr=\"$valeur\"";
-			$BT[] = array(
-				$racc,//$div=='div'?strtoupper($racc):$racc,
-				$div=='auto'?"('<$racc>','</$racc>'":"_etendu('<$racc>','</$racc>','<$racc/>'",
-			);
-			if ($div=='auto') {
+			if ($auto) {
 				$auto_balises[] = $racc; 
 				$auto_remplace[$racc] = "$attr>";
 			} else {
@@ -33,13 +30,10 @@ cs_log("decoration_installe()");
 			}
 		} elseif (preg_match('/(span|div|auto)\.([^=]+)=(.+)$/', $balise, $regs)) {
 			// les styles inline
-			list($div, $racc, $style) = array($regs[1], trim($regs[2]), trim($regs[3]));
+			list($auto, $div, $racc, $style) = array($regs[1]=='auto', $regs[1], trim($regs[2]), trim($regs[3]));
+			$BT[] = array($racc, $auto, $div);
 			$attr="style=\"$style\"";
-			$BT[] = array(
-				$racc,//$div=='span'?"<$div $attr>$racc</$div>":($div=='div'?strtoupper($racc):$racc),
-				$div=='auto'?"('<$racc>','</$racc>'":"_etendu('<$racc>','</$racc>','<$racc/>'",
-			);
-			if ($div=='auto') {
+			if ($auto) {
 				$auto_balises[] = $racc; 
 				$auto_remplace[$racc] = "$attr>";
 			} else {
@@ -72,7 +66,7 @@ cs_log("decoration_installe()");
 	ecrire_meta('cs_decoration', serialize(array(
 		// balises fixes a trouver
 		$trouve, 
-		// replacement des balises fixes
+		// remplacement des balises fixes
 		$remplace,
 		// RegExpr pour les balises automatiques
 		count($auto_balises)?',<('.join('|', $auto_balises).')>(.*?)</\1>,ms':'',
@@ -131,15 +125,74 @@ function decoration_pre_typo($texte) {
 function decoration_BarreTypo($tr) {
 	// les raccoucis de couleur sont-il dispo ?
 	if (!isset($GLOBALS['meta']['cs_decoration'])) decoration_installe();
-	// le tableau des smileys est present dans les metas
-decoration_installe();
+	// le tableau des decorations est present dans les metas
+	decoration_installe();
 	$balises = unserialize($GLOBALS['meta']['cs_decoration']);
-//print_r($balises);die();
 	$res = array(); 
-	foreach($balises[4] as $v)
-		$res[] = "<a href=\"javascript:barre_raccourci$v[1],@@champ@@)\"><span class=\"cs_BT\">$v[0]</span></a>";
+	foreach($balises[4] as $v) {
+		$tmp = $v[1]?"('<$v[0]>','</$v[0]>'":"_etendu('<$v[0]>','</$v[0]>','<$v[0]/>'";
+		$res[] = "<a href=\"javascript:barre_raccourci$tmp,@@champ@@)\"><span class=\"cs_BT\">$v[0]</span></a>";
+	}
 	$res = join(' ', $res); 
 	return $tr.'<tr><td><p style="margin:0; line-height:1.8em;">'._T('couteauprive:decoration:nom')."&nbsp;$res</p></td></tr>";
+}
+
+// les 2 fonctions suivantes inserent les boutons pour le plugin Porte Plume, s'il est present (SPIP>=2.0)
+function decoration_PP_pre_charger($flux) {
+	// les raccoucis sont-il dispo ?
+	if (!isset($GLOBALS['meta']['cs_decoration'])) decoration_installe();
+	// le tableau des decorations est present dans les metas
+	$balises = unserialize($GLOBALS['meta']['cs_decoration']);
+	$max = count($balises[4]);
+	$r = array();
+	foreach($balises[4] as $b) {
+		$id = 'decoration_'.$b[0];
+		$r[] = array(
+				"id"          => $id,
+				"name"        => _T('couteau:decoration_inserer', array('racc'=>$b[0], 'balise'=>$b[2])),
+				"className"   => $id,
+				"selectionType" => $b[2]=='div'?"line":"word",
+				// $b[1] est vrai si la balise <racc/> est interdite
+				"replaceWith" => "function(h){ return outil_decoration(h.selection, '$b[0]', '$b[2]', '".($b[1]?'':"<$b[0]/>")."'); }",
+				"display"     => true);
+	}
+	$a = array(
+		"id"	=> 'cs_decoration_drop',
+		"name"	=> _T('couteau:decoration_inserer_drop'),
+		"className"	=> 'cs_decoration_drop',
+		"replaceWith"	=> '',
+		"display"	=> true,
+		"dropMenu"	=> $r,
+
+	);
+	foreach(cs_pp_liste_barres('decoration') as $b) {
+		$flux[$b]->ajouterApres('stroke_through', $a);
+		$flux[$b]->ajouterFonction("function outil_decoration(sel, racc, balise, defaut) {
+			if(sel) {
+				r='<'+racc+'>'+sel+'</'+racc+'>';
+				return balise=='span'?r.replace(/(\\n\\n|\\r\\n\\r\\n|\\r\\r)/g,'</'+racc+'>\$1<'+racc+'>'):r;
+			}
+			return defaut;
+		}");
+	}
+	return $flux;
+}
+function decoration_PP_icones($flux){
+	// les raccoucis sont-il dispo ?
+	if (!isset($GLOBALS['meta']['cs_decoration'])) decoration_installe();
+	// le tableau des decorations est present dans les metas
+	$balises = unserialize($GLOBALS['meta']['cs_decoration']);
+	$icones = array();
+	foreach($balises[4] as $b) {
+		$id = 'decoration_'.$b[0];
+		$icones[$id] = find_in_path("icones_barre/{$id}.png")?$id.'.png'
+			:"decoration_{$b[2]}.png";
+	}
+	// icones utilisees. Attention : mettre les drop-boutons en premier !!
+	$flux = array_merge($flux, array(
+		'cs_decoration_drop' => 'decoration_div.png',
+	), $icones);
+	return $flux;
 }
 
 ?>

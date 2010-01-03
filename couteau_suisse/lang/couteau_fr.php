@@ -23,6 +23,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'date_court' => '@jour@/@mois@/@annee@',
+	'decoration_inserer' => 'D&eacute;coration &laquo;&nbsp;@balise@.@racc@&nbsp;&raquo;',
+	'decoration_inserer_drop' => 'Appliquer au texte une &laquo;&nbsp;d&eacute;coration&nbsp;&raquo; personnalis&eacute;e',
 	'derniers_connectes' => 'Derniers connect&eacute;s :',
 
 	// E
