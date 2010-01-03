@@ -52,6 +52,9 @@ function catalogue_declarer_tables_principales($tables_principales){
 		"PRIMARY KEY"	=> "id_variante",
 		"KEY id_article" => "id_article"
 		);
+	$tables_principales['spip_variantes'] =
+		array('field' => &$variantes,'key' => &$variantes_key,'join' => array('id_variante'=>'id_variante','id_article'=>'id_article'));
+
 
 	//-- Table options ------------------------------------------
 	$options = array(
@@ -67,6 +70,9 @@ function catalogue_declarer_tables_principales($tables_principales){
 	$options_key = array(
 		"PRIMARY KEY"	=> "id_option"
 		);
+	$tables_principales['spip_options'] =
+		array('field' => &$options, 'key' => &$options_key);
+
 
 	//-- Table options_articles ------------------------------------------
 	$options_articles = array(
@@ -76,6 +82,9 @@ function catalogue_declarer_tables_principales($tables_principales){
 	$options_articles_key = array(
 		"PRIMARY KEY"	=> "id_option, id_article"
 		);
+	$tables_principales['spip_options_articles'] =
+		array('field' => &$options_articles, 'key' => &$options_articles_key);
+		
 
 	//-- Table transactions ------------------------------------------
 	$transactions = array(
@@ -85,18 +94,9 @@ function catalogue_declarer_tables_principales($tables_principales){
 	$transactions_key = array(
 		"PRIMARY KEY"	=> "id_transaction",
 		);
-
-	$tables_principales['spip_variantes'] =
-		array('field' => &$variantes,'key' => &$variantes_key,'join' => array('id_variante'=>'id_variante','id_article'=>'id_article'));
-		
-	$tables_principales['spip_options'] =
-		array('field' => &$options, 'key' => &$options_key);
-
-	$tables_principales['spip_options_articles'] =
-		array('field' => &$options_articles, 'key' => &$options_articles_key);
-		
 	$tables_principales['spip_transactions'] =
 		array('field' => &$transactions, 'key' => &$transactions_key);
+
 
 	return $tables_principales;
 }
