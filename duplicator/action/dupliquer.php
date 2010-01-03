@@ -22,21 +22,42 @@ function dupliquer_article($article,$rubrique){
 		"id_article=".$article
 	);
 	$infos = sql_allfetsel($champs, $from, $where);
-	
-	// On vide les champs qu'on ne veut pas conserver
-	$on_vide = array(
-		'id_article','id_rubrique','date','id_secteur','maj','date_redac','visites','referers','popularite','date_modif','id_trad'
+	// On choisi les champs que l'on veut conserver
+	$champs_dupliques = array(
+		'surtitre','titre','soustitre','descriptif','chapo','texte','ps','accepter_forum','lang','langue_choisie','nom_site','url_site'
 	);
-	
-	foreach ($on_vide as $key => $value) {
-		$info[0][$value]='';
+	foreach ($champs_dupliques as $key => $value) {
+		$infos_de_l_article[$value] = $infos[0][$value];
 	}
 	
+	// On cherche ses mots clefs
+	$champs = array('id_mot');
+	$from = 'spip_mots_articles';
+	$where = array( 
+		"id_article=".$article
+	);
+	$mots_clefs_de_l_article = sql_allfetsel($champs, $from, $where);
+
+	/*
+	 * On duplique !
+	 */
 	// On le clone, il sera NON publié par défaut
 	$id_article = insert_article($rubrique);
-	revision_article($id_article, $infos[0]);
-	// On lui rend son statut
+	revision_article($id_article, $infos_de_l_article);
+	
+	// On lui rend ses infos
 	$maj_statut_article = sql_updateq("spip_articles", array('statut' => $infos[0]['statut']), "id_article=".$id_article);
+	
+	// On lui remet ses mots clefs
+	foreach($mots_clefs_de_l_article as $champ => $valeur){
+		$n = sql_insertq(
+			'spip_mots_articles',
+			array(
+				'id_mot' => $valeur['id_mot'],
+				'id_article' => $id_article
+			)
+		);
+	}
 	
 	return $id_article;
 }
