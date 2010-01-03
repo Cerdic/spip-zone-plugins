@@ -14,12 +14,17 @@ function comptes_declarer_tables_interfaces($interface){
 	/**
 	 * Objectif : pouvoir utiliser les champs liés dans les boucles...
 	 *
+	 * 1. liaisons simples entre auteurs et contacts par le id_auteur
+	 * 2. liaison complexe entre auteurs et coordonnées par le id_coordonnee -> id_contact -> id_auteur
 	 */
 	$interface['tables_jointures']['spip_auteurs'][]= 'contacts';
 	$interface['tables_jointures']['spip_contacts'][]= 'auteurs';
+
 	$interface['tables_jointures']['spip_comptes'][]= 'contacts';
 	$interface['tables_jointures']['spip_contacts'][]= 'comptes';
 
+	$interface['exceptions_des_jointures']['prenom'] = array('spip_contacts', 'prenom');
+	$interface['exceptions_des_jointures']['id_contact'] = array('spip_contacts', 'id_contact');
 	
 	/**
 	 * Objectif : autoriser les traitements SPIP sur certains champs texte...
