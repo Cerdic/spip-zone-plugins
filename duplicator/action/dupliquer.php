@@ -47,6 +47,10 @@ function dupliquer_article($article,$rubrique){
 	// On lui remet ses mots clefs
 	remettre_les_mots_clefs($mots_clefs_de_l_article,$id_article,'article');
 	
+	// On lui copie ses logos
+	dupliquer_logo($article,$id_article,'article',false);
+	dupliquer_logo($article,$id_article,'article',true);
+	
 	return $id_article;
 }
 
@@ -116,6 +120,10 @@ function dupliquer_rubrique($rubrique,$cible=null,$titre=' (copie)'){
 		$id_article = dupliquer_article($valeur['id_article'],$id_nouvelle_rubrique);
 	}
 
+	// On lui copie ses logos
+	dupliquer_logo($rubrique,$id_nouvelle_rubrique,'rubrique',false);
+	dupliquer_logo($rubrique,$id_nouvelle_rubrique,'rubrique',true);
+
 	// On lui remet ses sous-rubrique (+ mots clefs + articles + sous rubriques)
 	foreach($rubriques_de_la_rubrique as $champ => $valeur){
 		$rubrique = $valeur['id_rubrique'];
@@ -146,5 +154,35 @@ function remettre_les_mots_clefs($mots,$id,$type){
 		);
 	}
 	
+	return true;
+}
+
+/* FONCTION HONTEUSEMENT ADAPTEE DE DOCUCOPIEUR ==> http://www.spip-contrib.net/DocuCopieur */
+/* cette fonction realise la copie d'un logo d'article/rubrique et de son logo de survol */
+/* vers le nouvel article/rubrique. */
+function dupliquer_logo($id_source, $id_destination, $type='article', $bsurvol = false ){
+	include_spip('action/iconifier');
+	global $formats_logos;
+
+	if ( $bsurvol == true )
+	{
+		$logo_type = 'off';	// logo survol
+	} else  $logo_type = 'on';	// logo 
+
+	$chercher_logo = charger_fonction('chercher_logo', 'inc');
+
+	$logo_source = $chercher_logo($id_source, 'id_'.$type, $logo_type );
+	$logo_source = $logo_source[0];
+	if ( !file_exists($logo_source) ) return false;
+
+	$size = @getimagesize($logo_source);
+	$mime = !$size ? '': $size['mime'];
+	$source['name'] = basename($logo_source);
+	$source['type'] = $mime;
+	$source['tmp_name'] = $logo_source;
+	$source['error'] = 0;
+	$source['size'] = @filesize($logo_source);
+
+	action_spip_image_ajouter_dist(substr($type,0,3). $logo_type .$id_destination, 'local', $source );
 	return true;
 }
