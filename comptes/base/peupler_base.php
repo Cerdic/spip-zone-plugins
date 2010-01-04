@@ -31,45 +31,84 @@ function peupler_base() {
 		)
 	);
   
-	sql_insertq_multi('spip_coordonnees', array(
+	sql_insertq_multi('spip_champs', array(
 		array(
-			'id_coordonnee' => 1,
-			'type' => 'niveau',
-			'titre' => 'niveau',
+			'id_champ' => 1,
+			'type_champ' => 'niveau',
 			'descriptif' => 'intermediaire'
 			),
 		array(
-			'id_coordonnee' => 2,
-			'type' => 'niveau',
-			'titre' => 'niveau',
+			'id_champ' => 2,
+			'type_champ' => 'niveau',
 			'descriptif' => 'debutant'
 			),
 		array(
-			'id_coordonnee' => 3,
-			'type' => 'niveau',
-			'titre' => 'niveau',
+			'id_champ' => 3,
+			'type_champ' => 'niveau',
 			'descriptif' => 'professeur'
 			),
 		)
 	);
 	
-	sql_insertq_multi('spip_coordonnees_liens', array(
+	sql_insertq_multi('spip_champs_liens', array(
 		array(
+			'id_champ' => 1,
 			'id_objet' => 1,
 			'objet' => 'contact'
 			),
 		array(
-			'id_objet' => 2,
+			'id_champ' => 2,
+			'id_objet' => 3,
 			'objet' => 'contact'
 			),
 		array(
-			'id_objet' => 3,
+			'id_champ' => 3,
+			'id_objet' => 4,
 			'objet' => 'contact'
 			)
 		)
 	);
-	
 
+	sql_insertq_multi('spip_adresses', array(
+		array(
+			'id_adresse' => 1,
+			'type_adresse' => 'perso',
+			'code_postal' => '75012',
+			'ville'	=> 'PARIS'
+			),
+		array(
+			'id_adresse' => 2,
+			'type_adresse' => 'perso',
+			'code_postal' => '92100',
+			'ville'	=> 'BOULOGNE'
+			),
+		array(
+			'id_adresse' => 3,
+			'type_adresse' => 'perso',
+			'code_postal' => '93000',
+			'ville'	=> 'SAINT-DENIS'
+			),
+		)
+	);
+	
+	sql_insertq_multi('spip_adresses_liens', array(
+		array(
+			'id_adresse' => 1,
+			'id_objet' => 1,
+			'objet' => 'contact'
+			),
+		array(
+			'id_adresse' => 2,
+			'id_objet' => 3,
+			'objet' => 'contact'
+			),
+		array(
+			'id_adresse' => 3,
+			'id_objet' => 4,
+			'objet' => 'contact'
+			)
+		)
+	);
 }
 
 ?>
