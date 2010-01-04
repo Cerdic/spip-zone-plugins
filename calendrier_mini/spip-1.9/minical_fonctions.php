@@ -113,9 +113,16 @@ function http_calendrier_mini($annee, $mois, $jour, $echelle, $partie_cal, $scri
 		}
 		$ligne .= "\n\t<td".($amj == date("Ymd")?' class="today"':'').">" . $evts . "\n\t</td>";
 	}
+
 	// affichage de la fin de semaine hors periode
-	for($j=$jour_semaine ? $jour_semaine+(1-$jour_semaine_lang) : 7; $j<7; $j++) {
-		$ligne .= "\n\t<td>&nbsp;</td>";
+	if ($lang=='en') {
+		for($j=($jour_semaine != 6) ? $jour_semaine + 1 : 7; $j<7; $j++) {
+			$ligne .= "\n\t<td>&nbsp;</td>";
+		}
+	} else {
+		for($j=$jour_semaine ? $jour_semaine : 7; $j<7; $j++) {
+			$ligne .= "\n\t<td>&nbsp;</td>";
+		}
 	}
 
 	return $total . ($ligne ? "\n<tr>$ligne\n</tr>" : '');
