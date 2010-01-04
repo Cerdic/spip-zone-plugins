@@ -9,7 +9,7 @@ function comptes_declarer_tables_interfaces($interface){
 	
 	$interface['table_des_tables']['comptes'] = 'comptes';
 	$interface['table_des_tables']['contacts'] = 'contacts';
-	$interface['table_des_tables']['coordonnees'] = 'coordonnees';
+	$interface['table_des_tables']['numeros'] = 'numeros';
 	
 	/**
 	 * Objectif : pouvoir utiliser les champs liés dans les boucles...
@@ -74,33 +74,64 @@ function comptes_declarer_tables_principales($tables_principales){
 		array('field' => &$comptes, 'key' => &$comptes_key);
 
 
-	//-- Table coordonnees ------------------------------------------
-	$coordonnees = array(
-		"id_coordonnee"	=> "bigint(21) NOT NULL auto_increment",
-		"type"			=> "VARCHAR(10) DEFAULT '' NOT NULL",
-		"titre" 		=> "tinytext DEFAULT '' NOT NULL",
-		"descriptif"	=> "tinytext DEFAULT '' NOT NULL",
-		"date" 			=> "datetime NOT NULL default '0000-00-00 00:00:00'",
+
+
+	//-- Table adresses ------------------------------------------
+	$adresses = array(
+		"id_adresse"	=> "bigint(21) NOT NULL auto_increment",
+		"type_adresse"	=> "VARCHAR(10) DEFAULT '' NOT NULL", // perso, pro, vacance...
+		"numero" 		=> "VARCHAR(10) DEFAULT '' NOT NULL", // p.ex 21
+		"voie"			=> "tinytext DEFAULT '' NOT NULL", // rue de cotte
+		"complement"	=> "tinytext DEFAULT '' NOT NULL", // 3è étage
+		"boite_postale"	=> "VARCHAR(10) DEFAULT '' NOT NULL", 
+		"code_postal"	=> "VARCHAR(5) DEFAULT '' NOT NULL",
+		"ville"			=> "tinytext DEFAULT '' NOT NULL",
+		"pays"			=> "tinytext DEFAULT '' NOT NULL",
 		"maj"			=> "TIMESTAMP"
 		);
-	$coordonnees_key = array(
-		"PRIMARY KEY"	=> "id_coordonnee"
+	$adresses_key = array(
+		"PRIMARY KEY"	=> "id_adresse"
 		);
-	$tables_principales['spip_coordonnees'] =
-		array('field' => &$coordonnees, 'key' => &$coordonnees_key);
+	$tables_principales['spip_adresses'] =
+		array('field' => &$adresses, 'key' => &$adresses_key);
+	//-- Table adresses_liens ---------------------------------------
+	$adresses_liens = array(
+		"id_adresse"	=> "BIGINT(21) NOT NULL",
+		"id_objet"		=> "BIGINT(21) NOT NULL",
+		"type_objet"	=> "varchar(25) NOT NULL" // peut etre un compte ou un contact
+	);
+	$adresses_liens_key = array(
+		"PRIMARY KEY"	=> "id_adresse, id_objet"
+		);
+	$tables_principales['spip_adresses_liens'] =
+		array('field' => &$adresses_liens, 'key' => &$adresses_liens_key);
+		
+		
+		
 
-
-	//-- Table coordonnees_liens ------------------------------------------
-	$coordonnees_liens = array(
-		"id_coordonnee"	=> "bigint(21) NOT NULL DEFAULT 0",
+	//-- Table numeros ------------------------------------------
+	$numeros = array(
+		"id_numero"		=> "bigint(21) NOT NULL auto_increment",
+		"type_numero"	=> "VARCHAR(10) DEFAULT '' NOT NULL", // peut etre domicile, bureau, portable
+		"numero" 		=> "tinytext DEFAULT '' NOT NULL",
+		"maj"			=> "TIMESTAMP"
+		);
+	$numeros_key = array(
+		"PRIMARY KEY"	=> "id_numero"
+		);
+	$tables_principales['spip_numeros'] =
+		array('field' => &$numeros, 'key' => &$numeros_key);
+	//-- Table numeros_liens ------------------------------------------
+	$numeros_liens = array(
+		"id_numero"		=> "bigint(21) NOT NULL DEFAULT 0",
 		"id_objet"		=> "bigint(21) NOT NULL DEFAULT 0", 
-		"objet"			=> "tinytext DEFAULT '' NOT NULL" // peut etre un contact ou un compte
+		"type_objet"	=> "tinytext DEFAULT '' NOT NULL" // peut etre un contact ou un compte
 		);
-	$coordonnees_liens_key = array(
-		"PRIMARY KEY"	=> "id_coordonnee, id_objet"
+	$numeros_liens_key = array(
+		"PRIMARY KEY"	=> "id_numero, id_objet"
 		);
-	$tables_principales['spip_coordonnees_liens'] =
-		array('field' => &$coordonnees_liens, 'key' => &$coordonnees_liens_key);
+	$tables_principales['spip_numeros_liens'] =
+		array('field' => &$numeros_liens, 'key' => &$numeros_liens_key);
 
 
 	return $tables_principales;
