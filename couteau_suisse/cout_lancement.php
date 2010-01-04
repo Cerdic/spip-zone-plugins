@@ -226,7 +226,8 @@ function cs_pp_liste_barres($outil=false) {
 	if (!$sets = barre_outils_liste()) return array();
 	if($outil) foreach($sets as $f=>$b) {
 		$v = 'pp_'.$b.'_'.$outil;
-		if(!isset($metas_vars[$v]) || !$metas_vars[$v]) unset($sets[$f]);
+		// par defaut le bouton est present dans toutes les barres
+		if(isset($metas_vars[$v]) && !$metas_vars[$v]) unset($sets[$f]);
 	}
 	return $sets;
 }

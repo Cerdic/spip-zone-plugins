@@ -156,7 +156,7 @@ function decoration_PP_pre_charger($flux) {
 				"replaceWith" => "function(h){ return outil_decoration(h.selection, '$b[0]', '$b[2]', '".($b[1]?'':"<$b[0]/>")."'); }",
 				"display"     => true);
 	}
-	$a = array(
+	$r = array(
 		"id"	=> 'cs_decoration_drop',
 		"name"	=> _T('couteau:decoration_inserer_drop'),
 		"className"	=> 'cs_decoration_drop',
@@ -166,7 +166,7 @@ function decoration_PP_pre_charger($flux) {
 
 	);
 	foreach(cs_pp_liste_barres('decoration') as $b) {
-		$flux[$b]->ajouterApres('stroke_through', $a);
+		$flux[$b]->ajouterApres('stroke_through', $r);
 		$flux[$b]->ajouterFonction("function outil_decoration(sel, racc, balise, defaut) {
 			if(sel) {
 				r='<'+racc+'>'+sel+'</'+racc+'>';

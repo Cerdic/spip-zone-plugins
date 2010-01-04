@@ -410,7 +410,7 @@ function cs_initialise_includes($count_metas_outils) {
 		}
 	}
 	// insertion du css pour la BarreTypo
-	if(isset($infos_pipelines['bt_toolbox']))
+	if(isset($infos_pipelines['bt_toolbox']) && defined('_DIR_PLUGIN_BARRETYPOENRICHIE'))
 		$temp_css[] = 'span.cs_BT {background-color:#FFDDAA; font-weight:bold; border:1px outset #CCCC99; padding:0.2em 0.3em;}
 span.cs_BTg {font-size:140%; padding:0 0.3em;}';
 	// prise en compte des css.html et js.html qu'il faudra compiler plus tard

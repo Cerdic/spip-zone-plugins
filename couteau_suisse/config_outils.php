@@ -883,7 +883,7 @@ add_outil( array(
 
 add_outil( array(
 	'id' => 'smileys',
-	'auteur' 	 => "Sylvain pour l'id&eacute;e originale",
+	'auteur' 	 => "Sylvain, Pat",
 	'categorie'	 => 'typo-corr',
 	'contrib'	=> 1561,
 	'code:css' => "table.cs_smileys td {text-align:center; font-size:90%; font-weight:bold;}",
@@ -895,10 +895,12 @@ add_outil( array(
 
 add_outil( array(
 	'id' => 'chatons',
-	'auteur' 	 => "BoOz pour l'id&eacute;e originale",
+	'auteur' 	 => "BoOz, Pat",
 	'categorie'	 => 'typo-racc',
 	'pipeline:pre_typo' => 'chatons_pre_typo',
 	'pipeline:bt_toolbox' => 'chatons_BarreTypo',
+	'pipeline:porte_plume_barre_pre_charger' => 'chatons_PP_pre_charger',
+	'pipeline:porte_plume_lien_classe_vers_icone' => 'chatons_PP_icones',
 ));
 
 add_variables( array(

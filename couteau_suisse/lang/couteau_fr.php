@@ -89,7 +89,9 @@ Compatibilit&#233; : SPIP v1.92x et v2.0.x',
 
 	// S
 	'smileys_dispos' => 'Frimousses disponibles :',
-	'smileys_inserer' => 'In&eacute;rer une jolie frimousse @smiley@',
+	'smileys_inserer' => 'Ins&eacute;rer une frimousse @smiley@',
+	'chatons_inserer_drop' => 'Ins&eacute;rer un chaton dans votre texte',
+	'chatons_inserer' => 'Ins&eacute;rer le chaton &laquo;&nbsp;@chaton@&nbsp;&raquo;',
 	'sommaire_page' => ',&nbsp;p@page@',
 	'sommaire_page_long' => ',&nbsp;page&nbsp;@page@',
 	'sommaire_titre' => 'Sommaire',
