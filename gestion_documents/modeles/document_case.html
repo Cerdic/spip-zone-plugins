@@ -10,7 +10,7 @@
 	<div class="item #MODE" id="doc#ID_DOCUMENT">
 		<h3 class="titrem">[<span class="fichier">(#FICHIER*|basename)</span>]
 			<span class="image_loading"></span>
-			[<span class="#EDIT{titre} titre">(#TITRE|sinon{<i>vide</i>})</span>]
+			[<span class="#EDIT{titre} titre">(#TITRE|sinon{<i class="sanstitre"><:info_sans_titre:></i>})</span>]
 			[(#CHEMIN{#MODE|=={image}|?{images/image-24.gif,images/doc-24.gif}}|balise_img{'',cadre-icone})]
 		</h3>
 		<div class="infos">
