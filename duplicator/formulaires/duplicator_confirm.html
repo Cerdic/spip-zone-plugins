@@ -1,11 +1,17 @@
 [<div style='color:red; text-align: center;padding:10px; border: 1px solid red; font-weight: bold'>
 	<p><strong>(#ENV*{message_ok}|table_valeur{message})</strong></p>
 	<p><a href="[(#URL_ECRIRE{naviguer}|parametre_url{'id_rubrique',[(#ENV*{message_ok}|table_valeur{cible})]})]" title="Rafraichir">[(#ENV*{message_ok}|table_valeur{type_retour})]</a></p>
+	<p><small>Utilisiez-vous SPIP Sondages ? <a href="[(#URL_ECRIRE{admin_plugin})]">Pensez à le réactiver !</a></small></p>
 </div>]
 
 [(#EDITABLE)
 <div style='color:red; text-align: center;padding:10px; border: 1px solid red; font-weight: bold'>
 	<h2>/!\ ATTENTION /!\</h2>
+	[(#PLUGIN{sondages}|oui)
+	<p>Cette fonctionnalité n'est pas compatible avec le plugin SPIP Sondages !</p>
+	<p><a href="[(#URL_ECRIRE{admin_plugin})]">Vous devez le désactiver</a> le temps de réaliser votre duplication.</p>
+	]
+	[(#PLUGIN{sondages}|non)
 	<p>Ses sous-rubriques, articles et mots clefs seront également dupliqués.</p>
 	<p>Cette opération ne peut être annulée.</p>
 
@@ -13,5 +19,6 @@
 	 	#ACTION_FORMULAIRE{#ENV{action}}
 		<input type="submit" value="<:duplicator:message_annuler:>" name='annuler' /> <input type="submit" value="<:duplicator:message_confirmer:>" name='confirmer' />
 	</form>
+	]
 </div>
 ]

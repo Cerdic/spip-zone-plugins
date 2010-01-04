@@ -3,7 +3,7 @@
 	<multi>[fr]Duplicator</multi>
 	</nom>
 	<icon>images/apsulis.png</icon>
-	<auteur>[duplicator@apsulis.com->http://demo.apsulis.com]</auteur>
+	<auteur>[Apsulis->http://demo.apsulis.com]</auteur>
 	<licence>GPL &#169; 2010</licence>
 	<version>0.1</version>
 	<version_base>0.1</version_base>
@@ -15,6 +15,7 @@ _ Avec sous-rubriques
 _ Avec ou sans articles
 	</multi>
 	</description>
+	<lien>[http://www.spip-contrib.net/Plugin-Duplicator->http://www.spip-contrib.net/Plugin-Duplicator]</lien>
 	<prefix>duplicator</prefix>
 	
 	<pipeline>
