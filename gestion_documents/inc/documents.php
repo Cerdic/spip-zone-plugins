@@ -92,7 +92,10 @@ function generer_url_document_dist($id_document, $args='', $ancre='') {
 
 	$f = $r['fichier'];
 
-	if ($r['distant'] == 'oui') return $f;
+	if ($r['distant'] == 'oui') 
+		// on passe quand meme par get_spip_doc car un document distant
+		// peut avoir une url locale suite a une rotation
+		return get_spip_doc($f);
 
 	// Si droit de voir tous les docs, pas seulement celui-ci
 	// il est inutilement couteux de rajouter une protection

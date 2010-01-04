@@ -66,7 +66,11 @@ function action_tourner_post($id_document,$angle)
 
 	// succes !
 	if ($largeur>0 AND $hauteur>0) {
-		$set = array('fichier' => set_spip_doc($dest), 'largeur'=>$largeur, 'hauteur'=>$hauteur);
+		$set = array(
+			'fichier' => set_spip_doc($dest),
+			'largeur'=>$largeur, 'hauteur'=>$hauteur,
+			'distant'=>'non' // le document n'est plus distant apres une transformation
+			);
 		if ($taille = @filesize($dest))
 			$set['taille'] = $taille;
 		sql_updateq('spip_documents', $set, "id_document=".intval($id_document));
@@ -83,11 +87,11 @@ function action_tourner_post($id_document,$angle)
 					'spip_table_objet' => 'spip_documents',
 					'type' =>'document',
 					'id_objet' => $arg,
-					'champs' => array('rotation'=>$r[2],'orientation'=>$var_rot,'fichier'=>$row),
+					'champs' => array('rotation'=>$r[2],'orientation'=>$var_rot,'fichier'=>$row['fichier']),
 					'serveur' => $serveur,
 					'action'=>'tourner',
 				),
-				'data' => array('fichier'=>$row)
+				'data' => $set
 			)
 		);
 	}
