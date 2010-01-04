@@ -60,7 +60,7 @@
             <input type="checkbox" class="checkbox" name="#GET{name}" id="#GET{name}" value="1" [(#ENV{#GET{name}}|=={1}|oui) checked="checked"] />
           </li>
         </ul>
-      </fieldset> 
+      </fieldset>
       <fieldset>
         <legend><:clevermail:confirmation_inscription:></legend>
         <ul>
@@ -81,7 +81,28 @@
             <textarea name="#GET{name}" id="#GET{name}" cols="50" rows="5" wrap="virtual" class="textarea">#ENV{#GET{name}}</textarea>
           </li>
         </ul>
-      </fieldset> 
+      </fieldset>
+      <fieldset>
+        <legend><:clevermail:confirmation_inscription_multiple:></legend>
+        <ul>
+          #SET{name,lst_subscribe_subject_multiple}
+          #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+          #SET{obli,''}
+          <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+            <label for="#GET{name}"><:clevermail:sujet:></label>
+            [<span class='erreur_message'>(#GET{erreurs})</span>]
+            <input type="text" class="text" name="#GET{name}" id="#GET{name}" size="50" maxlength="255" value="#ENV{#GET{name}}" />
+          </li>
+          #SET{name,lst_subscribe_text_multiple}
+          #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+          #SET{obli,''}
+          <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+            <label for="#GET{name}"><:clevermail:description:></label>
+            [<span class='erreur_message'>(#GET{erreurs})</span>]
+            <textarea name="#GET{name}" id="#GET{name}" cols="50" rows="5" wrap="virtual" class="textarea">#ENV{#GET{name}}</textarea>
+          </li>
+        </ul>
+      </fieldset>
       <fieldset>
         <legend><:clevermail:confirmation_desinscription:></legend>
         <ul>
@@ -102,7 +123,7 @@
             <textarea name="#GET{name}" id="#GET{name}" cols="50" rows="5" wrap="virtual" class="textarea">#ENV{#GET{name}}</textarea>
           </li>
         </ul>
-      </fieldset> 
+      </fieldset>
       <fieldset>
         <legend><:clevermail:url_templates:></legend>
         <ul>
@@ -123,7 +144,7 @@
             <input type="text" class="text" name="#GET{name}" id="#GET{name}" size="50" maxlength="255" value="#ENV{#GET{name}}" />
           </li>
         </ul>
-      </fieldset> 
+      </fieldset>
       <fieldset>
         <legend><:clevermail:automatisation:></legend>
         <ul>
@@ -324,7 +345,7 @@
              </div>
           </li>
         </ul>
-      </fieldset> 
+      </fieldset>
       <p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
     </div></form>
     <script language="javascript" type="text/javascript" src="[(#CHEMIN{js/clevermail_list_edit.js}|timestamp)]"></script>
