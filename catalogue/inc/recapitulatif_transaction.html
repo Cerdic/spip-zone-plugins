@@ -1,6 +1,12 @@
 <fieldset class="cat">
+
 <legend>R&eacute;capitulatif commande</legend>
-[<p>id_variante = (#EVAL{_request('id_variante')})</p>]
-[<p>montant = (#EVAL{_request('montant')})</p>]
+<BOUCLE_choix(VARIANTES){id_variante=#EVAL{_request('id_variante')}}>
+<BOUCLE_article(ARTICLES){id_article}>
+<p>Votre choix = #TITRE, #_choix:TITRE[, montant (#PRIX_HT|monetaire)]</p>
+</BOUCLE_article>
+</BOUCLE_choix>
+
+
 [<p>nom = (#EVAL{_request('nom')})</p>]
 </fieldset>
