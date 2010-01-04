@@ -10,8 +10,10 @@
 
 function duplicator_boite_infos($flux){
 	$type = $flux['args']['type'];
-	if ($id = intval($flux['args']['id']))
+	if(autoriser("webmestre")){
+	if (($id = intval($flux['args']['id'])) && ($type=='rubrique'))
 		$flux['data'] .= icone_horizontale(_T('duplicator:icone_dupliquer'), generer_url_ecrire('duplicator',"id_objet=$id&type=$type"), "", "../"._DIR_PLUGIN_DUPLICATOR."/images/duplicator.gif", false);
+	}
 	return $flux;
 }
 ?>
