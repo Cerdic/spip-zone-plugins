@@ -1,3 +1,4 @@
-- Prendre en compte les logos des articles (dupliquer dans le dossier img donc)
-- Automatiser la descente de l'arbre pour les sous-rubriques
-- Restreindre aux administrateurs
+-  Rajouter des logs (spip_log) c’est sûrement plus propre 
+-  Restreindre aux administrateurs 
+-  Faire le distingo dupli article/rubrique (ouvrir la possibilité de ne copier QUE un article, dans ce cas changer le titrage dans colonne de gauche) 
+-  Prendre en charge les traductions qui ne sont pas dans le même dossier (en cas de rubricage racine : langue1/langue2, suivre les liens entre articles pour dupliquer les rubriques "liées").
