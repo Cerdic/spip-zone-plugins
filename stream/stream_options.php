@@ -11,7 +11,7 @@ define('_PERIODE_SYNDICATION_SUSPENDUE', 60); // 1h
 
 
 # transformer les tags en recherche dans le stream
-function stream_tags($tags, $rels='tag,directory') {
+function stream_tags($tags, $rels='tag,directory,external') {
 	$mots = array();
 
 	// les mots en balise <a rel="tag,directory"> (donc pas les fichiers joints)
@@ -29,7 +29,7 @@ function stream_tags($tags, $rels='tag,directory') {
 	$tags = array();
 	foreach(array_unique(array_filter($mots)) as $mot) {
 		$url = generer_url_public('stream', 'recherche='.urlencode($mot));
-		$tags[] = '<a href="'.$url.'" rel="tag">'.$mot."</a>";
+		$tags[] = '<a href="'.$url.'" rel="tag nofollow">'.$mot."</a>";
 	}
 
 	return join(', ',$tags);

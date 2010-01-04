@@ -15,7 +15,7 @@
 	#hierarchie {display: block}
 	li.item {margin-bottom: 2em}
 	.introduction img { float:left; margin: 0 14px 9px 0; }
-	p.tri { text-align: right; }
+	div.tri { display: inline; float: right; margin-left: 2em; }
 </style>
 
 
@@ -27,6 +27,6 @@
 [ &gt; <strong class="on">(#RECHERCHE)</strong>]
 </p> 
 
-[(#SET{composition,page-stream-[(#SESSION{statut}|=={0minirezo}|?{admin,visiteur})]})]
-<INCLURE{fond=contenu/#GET{composition}}{env} />
+[(#SET{composition,page-stream-[(#SESSION{statut}|=={0minirezo}|?{#ENV{vue,admin},visiteur})]})]
+<INCLURE{fond=inclure/#GET{composition}}{env} />
 

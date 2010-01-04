@@ -19,6 +19,7 @@
 	vertical-align:top;
 	float:#LANG_LEFT;
 }
+.streamset .delicious { margin-left: 10px; }
 
 .formulaire_spip fieldset.streamset {
 	border: 4px solid #ccd1cc;
@@ -37,14 +38,12 @@
 class="streamset #STATUT" style='width: 450px; color: rgb(51, 51, 51); font-size: 14.0833px; font-family: museosans,"Luxi sans","Lucida Grande",Lucida,"Lucida Sans Unicode",sans-serif; font-weight: 400; line-height: 18px; background-color: rgb(251, 251, 208);'>
 <legend><strong><a href="#URL_PAGE{stream,id_syndic_article=#ID_SYNDIC_ARTICLE}">##ID_SYNDIC_ARTICLE</a></strong></legend>
 <div>
-<a rel="bookmark"[ href="(#URL_ARTICLE)" target="_blank"]><strong class="entry-title">[(#GET{titre}|sinon{#URL_ARTICLE}|sinon{Sans titre}|typo)]</strong></a>
+<a rel="bookmark"[ href="(#URL_ARTICLE)" target="_blank"]><strong class="entry-title">[(#GET{titre}|sinon{#URL_ARTICLE})]</strong></a>
 </div>
-[<span class="source">((#SOURCE)[<span class="datehm">
-	<abbr class="updated"[ title="(#DATE|date_iso)]">(#DATE|affdate_court)]</abbr></span>)</span>]
 
-[(#REM) Titre, auteur et source ]
+[(#REM) Titre ]
 <p>
-<label class="micro">Titre&nbsp;:</label> <input class="crayon-active show" name="#ENV{name_titre}"
+<label class="micro">Titre&nbsp;:</label> <input class="crayon-active show titre" name="#ENV{name_titre}"
  style="width:380px; font-weight: bold;" value="[(#GET**{titre}|entites_html)]" />
 </p>
 
@@ -64,7 +63,7 @@ class="streamset #STATUT" style='width: 450px; color: rgb(51, 51, 51); font-size
 
 
 <p>
-<label class="micro">Tags&nbsp;:</label> <input class="crayon-active" name="#ENV{name_tags}"
+<label class="micro">Tags&nbsp;:</label> <input class="crayon-active tags" name="#ENV{name_tags}"
  style="width:380px;" value="[(#TAGS**|entites_html)]" /></p>
 
 <B_source>
@@ -131,4 +130,34 @@ class="streamset #STATUT" style='width: 450px; color: rgb(51, 51, 51); font-size
 
 
 </fieldset>
+
+<a class="delicious" href="http://feeds.delicious.com/v2/json/urlinfo/[(#URL**|md5)]"
+></a>
+<script>
+// si l'article n'a pas de titre ou de tag, mais a une url
+// choper des infos sur delicious
+(function(){
+var me = $('a.delicious');
+var url = $(me).attr('href');
+var crayon = me.parents('fieldset');
+//me.remove();
+if (url) {
+	$.getJSON(url+'?callback=?', {}, function(c) {
+		var u = crayon.find('input.titre');
+		if (u.val()=='') u.val(c[0].title);
+		var suggest='';
+		for (var i in c[0].top_tags)
+			suggest+=', '+i;
+		crayon
+		.find('input.tags')
+		.after(suggest.replace(/^, /,''));
+	});
+}
+
+console.log(me);
+console.log(crayon);
+
+)();
+</script>
+
 </BOUCLE_a>
