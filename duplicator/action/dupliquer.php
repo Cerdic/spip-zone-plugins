@@ -9,6 +9,7 @@
 /**
  * Duplique un article dans la rubrique cible
  * - Conserve le contenu de l'article source
+ * - Conserve les logos de l'article source
  * - Conserve le statut de publication de l'article source
  */
 function dupliquer_article($article,$rubrique){
@@ -63,25 +64,24 @@ function dupliquer_article($article,$rubrique){
 function dupliquer_rubrique($rubrique,$cible=null,$titre=' (copie)'){
 	include_spip('action/editer_rubrique');
 
-	/*
-	 * Pré traitement
-	 * On prépare les données
-	 */
-	// On lit la rubrique qui va etre dupliquee
-	$champs = array('titre', 'texte', 'descriptif', 'id_parent');
+	// On lit la rubrique qui va etre dupliqué
+	$champs = array('*');
 	$from = 'spip_rubriques';
 	$where = array( 
 		"id_rubrique=".$rubrique
 	);
 	$infos = sql_allfetsel($champs, $from, $where);
-	$infos_de_la_rubrique = array(
-		'titre'=>$infos[0]['titre'].$titre,
-		'texte'=>$infos[0]['texte'],
-		'descriptif'=>$infos[0]['descriptif'],
-		'id_parent'=>$infos[0]['id_parent']
+	// On choisi les champs que l'on veut conserver
+	// TODO éventuellement passer cette variable en CFG pour choisir depuis SPIP les champs à conserver ?
+	$champs_dupliques = array(
+		'id_parent','titre','descriptif','texte','lang','langue_choisie'
 	);
+	foreach ($champs_dupliques as $key => $value) {
+		$infos_de_la_rubrique[$value] = $infos[0][$value];
+	}
 	// Si une cible est spécifiée, on ecrase le champ id_parent
 	if($cible) $infos_de_la_rubrique['id_parent'] = $cible;
+	$infos_de_la_rubrique['titre'] .= $titre;
 
 	// On cherche ses mots clefs
 	$mots_clefs_de_la_rubrique = lire_les_mots_clefs($rubrique,'rubrique');
@@ -102,11 +102,9 @@ function dupliquer_rubrique($rubrique,$cible=null,$titre=' (copie)'){
 	);
 	$rubriques_de_la_rubrique = sql_allfetsel($champs, $from, $where);
 
-	/*
-	 * Traitement
-	 * On duplique les données
-	 */
-	// On la duplique !
+	//////////////
+	// ON DUPLIQUE
+	//////////////
 	$id_nouvelle_rubrique = insert_rubrique($infos_de_la_rubrique['id_parent']);
 	revisions_rubriques($id_nouvelle_rubrique,$infos_de_la_rubrique);
 	// On la publie (pour activer l'aperçu)
