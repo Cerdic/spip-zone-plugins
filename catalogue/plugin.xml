@@ -9,7 +9,7 @@
 	<etat>dev</etat>
 
 	<description>
-		Ce plugin permet la gestion simple d'un catalogue de produits, avec cat&eacute;gories et variantes.
+		Ce plugin permet la gestion simple d'un catalogue de produits, en ajoutant des cat&eacute;gories et des variantes aux articles SPIP.
 _ Il n&eacute;cessite le plugin Comptes &amp; Contacts pour pouvoir effectuer la saisie d'une transaction.
 	</description>
 
