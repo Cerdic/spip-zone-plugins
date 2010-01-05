@@ -11,7 +11,7 @@
 <B_options>
 <h3><:catalogue:options_dispo:></h3>
 <BOUCLE_options(OPTIONS){id_article=#ID}{statut=publie}{!par prix_ht}>
-<dl class='ajax fiche'>
+<dl class='fiche'>
 	<dd class="radio"><input type="checkbox" name="id_option[]" id="option_#ID_OPTION" value="[(#ENV{id_option})]" /></dd>
 	<dd class="desc #EDIT{titre}"><label for="option_#ID_OPTION">#TITRE[<span class="italique #EDIT{descriptif}">&nbsp;(#DESCRIPTIF|PtoBR)</span>]</label></dd>
 	[<dd class="prix #EDIT{prix_ht}">(#PRIX_HT|monetaire)</dd>]

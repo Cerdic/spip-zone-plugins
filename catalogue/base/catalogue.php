@@ -87,6 +87,14 @@ function catalogue_declarer_tables_principales($tables_principales){
 		
 
 	//-- Table transactions ------------------------------------------
+	/**
+	 * Une transaction est une opération, effectuée par une personne, concernant un ou des objets
+	 * La personne est le id_contact; éventuellement le id_compte si la teransaction est effectuée au nom d'une personne morale
+	 * Pour l'objet, il peut s'agir du N° d'article, du N° de variante, et du ou des N° d'options
+	 * La transaction peut avoir différents statuts (en cours, validée, expédiée, traitée...)
+	 * Elle a eu lieu à une certaine date
+	 * elle pourrait etre extensible
+	 */
 	$transactions = array(
 		"id_transaction"=> "bigint(21) NOT NULL auto_increment",
 		"date" 			=> "datetime NOT NULL default '0000-00-00 00:00:00'",

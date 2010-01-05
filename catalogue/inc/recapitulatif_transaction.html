@@ -1,12 +1,18 @@
 <fieldset class="cat">
 
-<legend>R&eacute;capitulatif commande</legend>
+<legend>R&eacute;capitulatif de votre inscription</legend>
 <BOUCLE_choix(VARIANTES){id_variante=#EVAL{_request('id_variante')}}>
 <BOUCLE_article(ARTICLES){id_article}>
 <p>Votre choix = #TITRE, #_choix:TITRE[, montant (#PRIX_HT|monetaire)]</p>
 </BOUCLE_article>
 </BOUCLE_choix>
 
+[(#EVAL{_request('nom')}|oui)
+<p>Vos infos personnelles= [(#EVAL{_request('nom')})][ (#EVAL{_request('prenom')})][, (#EVAL{_request('courriel')})]</p>
+]
 
-[<p>nom = (#EVAL{_request('nom')})</p>]
+[(#EVAL{_request('niveau_salsa')}|oui)
+<p>Vos préférences = [(#EVAL{_request('niveau_salsa')})][, (#EVAL{_request('style_salsa')})][, (#EVAL{_request('activites')})]</p>
+]
+
 </fieldset>

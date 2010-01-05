@@ -7,7 +7,7 @@
 function formulaires_etape2_charger_dist(){
 
 	$valeurs = array(
-		'id_variante'=>'',
+		'choix_formule'=>unserialize($env),
 		'civilite' => '',
 		'nom'=>'',
 		'prenom' => '',
@@ -30,18 +30,18 @@ function formulaires_etape2_verifier_dist(){
 	
 	$erreurs = array();
 	
-	/* VERIF SUR LES CHAMPS OBLIGATOIRES */
+	// lister les champs obligatoires
 	$champs_obligatoires = array(
 		// nouveaux champs
 		'nom'=>'',
+		/*
 		'prenom' => '',
 		'courriel' => '',
 		'voie' => '',
 		'code_postal' => '',
 		'ville' => '',
 		'pays' => '',
-		// chammps precedents
-		'id_variante'=>''
+		*/
 	);
 	
 	// verifier la presence de tous les champs obligatoires

@@ -11,28 +11,33 @@
 	<fieldset class="cat">
 	
 		<legend>3. Vos pr&eacute;f&eacute;rences</legend>
-
+		
+		[<dl class='formulaire_erreur clearfix'>
+			<dd>(#ENV*{message_erreur})</dd>
+		</dl>]
 
 	<fieldset>
 		<legend>Vos pr&eacute;f&eacute;rences salsa</legend>
 		<dl>
+			[<dd class='erreur'>(#ENV**{erreurs}|table_valeur{niveau_salsa})</dd>]
 			<dd class="label"><:catalogue:votre_niveau:></dd>
 			<dd>
-			<input type="radio" name="niveau_salsa" value="0"[ (#ENV{niveau_salsa}|=={0}|oui)selected="selected"] />D&eacute;butant
-			<input type="radio" name="niveau_salsa" value="1"[ (#ENV{niveau_salsa}|=={1}|oui)selected="selected"] />Int&eacute;rm&eacute;diaire
-			<input type="radio" name="niveau_salsa" value="2"[ (#ENV{niveau_salsa}|=={2}|oui)selected="selected"] />Avancé
+			<input type="radio" name="niveau_salsa" id="debutant" value="debutant"[ (#ENV{niveau_salsa}|=={debutant}|oui)selected="selected"] /><label for="debutant">D&eacute;butant</label>
+			<input type="radio" name="niveau_salsa" id="inter" value="inter"[ (#ENV{niveau_salsa}|=={inter}|oui)selected="selected"] /><label for="inter">Int&eacute;rm&eacute;diaire</label>
+			<input type="radio" name="niveau_salsa" id="avance" value="avance"[ (#ENV{niveau_salsa}|=={avance}|oui)selected="selected"] /><label for="avance">Avancé</label>
 			</dd>
 		</dl>
 		<dl>
+			[<dd class='erreur'>(#ENV**{erreurs}|table_valeur{style_salsa})</dd>]
 			<dd class="label"><:catalogue:votre_style:></dd>
 			<!--dd>
 			<input type="checkbox" name="style_salsa" value="#ENV{style_salsa}" [ (#ENV{style_salsa}|=={porto}|oui)checked="checked"]/>Portoricaine
 			<input type="checkbox" name="style_salsa" value="#ENV{style_salsa}" [ (#ENV{style_salsa}|=={cubaine}|oui)checked="checked"]/>Cubaine
 			</dd-->
 			<dd>
-			<input type="radio" name="style_salsa" value="0"[ (#ENV{style_salsa}|=={0}|oui)selected="selected"] />Portoricaine
-			<input type="radio" name="style_salsa" value="1"[ (#ENV{style_salsa}|=={1}|oui)selected="selected"] />Cubaine
-			<input type="radio" name="style_salsa" value="2"[ (#ENV{style_salsa}|=={2}|oui)selected="selected"] />Indiff&eacute;rent
+			<input type="radio" name="style_salsa" id="porto" value="porto"[ (#ENV{style_salsa}|=={porto}|oui)selected="selected"] /><label for="porto">Portoricaine</label>
+			<input type="radio" name="style_salsa" id="cubaine" value="cubaine"[ (#ENV{style_salsa}|=={cubaine}|oui)selected="selected"] /><label for="cubaine">Cubaine</label>
+			<input type="radio" name="style_salsa" id="indifferent" value="indifferent"[ (#ENV{style_salsa}|=={indifferent}|oui)selected="selected"] /><label for="indifferent">Indiff&eacute;rent</label>
 			</dd>
 		</dl>
 	</fieldset>
@@ -40,37 +45,37 @@
 	<fieldset>
 		<legend>Vos pr&eacute;f&eacute;rences s&eacute;jour</legend>
 		<dl>
-			<dd class="long"><:catalogue:activites_explications:></dd>
+			<dd class="long"><label for=""><:catalogue:activites_explications:></label></dd>
 			<dd class="oui_non">
-			<input type="radio" name="activites" value="0"[ (#ENV{activites}|=={0}|oui)selected="selected"] />Oui
-			<input type="radio" name="activites" value="1"[ (#ENV{activites}|=={1}|oui)selected="selected"] />Non
+			<input type="radio" name="activites" value="oui"[ (#ENV{activites}|=={oui}|oui)selected="selected"] /><label for="">Oui</label>
+			<input type="radio" name="activites" value="non"[ (#ENV{activites}|=={non}|oui)selected="selected"] /><label for="">Non</label>
 			</dd>
 		</dl>
 		<dl>
-			<dd class="label"><:catalogue:activites_type:>&nbsp;</dd>
+			<dd class="label"><label for=""><:catalogue:activites_type:></label>&nbsp;</dd>
 			<dd class="champ"><textarea name="activites_type"  cols="80" rows="2" >#ENV{activites_type}</textarea></dd>
 		</dl>
 		<dl>
 			<dd class="long"><:catalogue:partage_explications:></dd>
 			<dd class="oui_non">
-			<input type="radio" name="partage" value="0"[ (#ENV{partage}|=={0}|oui)selected="selected"] />Oui
-			<input type="radio" name="partage" value="1"[ (#ENV{partage}|=={1}|oui)selected="selected"] />Non
+			<input type="radio" name="partage" value="oui"[ (#ENV{partage}|=={oui}|oui)selected="selected"] /><label for="">Oui</label>
+			<input type="radio" name="partage" value="non"[ (#ENV{partage}|=={non}|oui)selected="selected"] /><label for="">Non</label>
 			</dd>
 		</dl>
 		<dl>
-			<dd class="label"><:catalogue:partage_nom:>&nbsp;</dd>
+			<dd class="label"><label for=""><:catalogue:partage_nom:></label>&nbsp;</dd>
 			<dd class="champ"><textarea name="partage_nom"  cols="80" rows="2" >#ENV{partage_nom}</textarea></dd>
 		</dl>
 		
 		<dl>
 			<dd class="long"><:catalogue:contre_indication_explications:></dd>
 			<dd class="oui_non">
-			<input type="radio" name="contre_indication" value="0"[ (#ENV{contre_indication}|=={0}|oui)selected="selected"] />Oui
-			<input type="radio" name="contre_indication" value="1"[ (#ENV{contre_indication}|=={1}|oui)selected="selected"] />Non
+			<input type="radio" name="contre_indication" value="oui"[ (#ENV{contre_indication}|=={oui}|oui)selected="selected"] /><label for="">Oui</label>
+			<input type="radio" name="contre_indication" value="non"[ (#ENV{contre_indication}|=={non}|oui)selected="selected"] /><label for="">Non</label>
 			</dd>
 		</dl>
 		<dl>
-			<dd class="label"><:catalogue:contre_indication_nature:>&nbsp;</dd>
+			<dd class="label"><label for=""><:catalogue:contre_indication_nature:>&nbsp;</label></dd>
 			<dd class="champ"><textarea name="contre_indication_nature" cols="80" rows="2" >#ENV{contre_indication_nature}</textarea></dd>
 		</dl>
 	</fieldset>

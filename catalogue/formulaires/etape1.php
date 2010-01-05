@@ -5,7 +5,11 @@
  */
 
 function formulaires_etape1_charger_dist(){
-	$valeurs = array('id_variante'=>'');
+	$valeurs = array(
+		'id_variante'=>'',
+		'montant'=>''
+	);
+
 	return $valeurs;
 }
 
@@ -24,6 +28,13 @@ function formulaires_etape1_verifier_dist(){
 }
 
 function formulaires_etape1_traiter_dist(){
+	/**
+	 * Il faut maintenant calculer le montant de la transaction
+	 * à partir de la somme du montant de la variante sélectionnée
+	 * additionnée au montant de la ou des options choisies
+	 * On place cette valeur dans la variable $montant
+	 */
+	$montant = 20;
 	$message_ok = "<p>Merci pour votre choix; veuillez maintenant saisir vos informations personnelles.</p>";
 	return array('message_ok'=>$message_ok);
 }

@@ -1,5 +1,8 @@
 
 <!-- squelette formulaires/etape_1.html -->
+
+[(#INCLURE{fond=inc/travaux})]
+
 <h2>Fiche d'inscription</h2>
 
 
@@ -9,7 +12,7 @@
 
 [(#INCLURE{fond=inc/etapes,etape=#ENV{etape,1}})]
 
-<form action='#ENV{action}' method='post'>
+<form action='#ENV{action}' name="choix_formule" method='post'>
 <fieldset class="cat">
 
 	#ACTION_FORMULAIRE{#ENV{action}}

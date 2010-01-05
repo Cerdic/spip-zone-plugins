@@ -6,13 +6,18 @@
 <fieldset class="fiche">
 
 	<legend><:catalogue:info_prix:></legend>
+	
+	<form action="[(#URL_PAGE{transaction}{env})]" name="fiche" method="post">
+
 	<BOUCLE_a(ARTICLES){id_article=#ID}>
 	#MODELE{variantes,id_article}
 	#MODELE{options,id_article}
 	</BOUCLE_a>
 	
-	<input type="button" class="suivant" value="<:catalogue:ok:>" onclick="javascript:location='#URL_PAGE{transaction,env}'" />
-	<label class="suivant"><:catalogue:aller_fiche:>&nbsp;:&nbsp;</label>
+	<input type="submit" class="suivant" id="suivant" value="<:catalogue:ok:>"  />
+	<label for="suivant" class="suivant"><:catalogue:aller_fiche:>&nbsp;:&nbsp;</label>
+	
+	</form>
 	
 </fieldset>
 </B_a>
