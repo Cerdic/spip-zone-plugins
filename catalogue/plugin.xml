@@ -10,7 +10,7 @@
 
 	<description>
 		Ce plugin permet la gestion simple d'un catalogue de produits, en ajoutant des cat&eacute;gories et des variantes aux articles SPIP.
-_ Il n&eacute;cessite le plugin Comptes &amp; Contacts pour pouvoir effectuer la saisie d'une transaction.
+_ Il n&eacute;cessite le plugin [Comptes &amp; Contacts->http://files.spip.org/spip-zone/comptes.zip] pour pouvoir effectuer la saisie d'une transaction.
 	</description>
 
 	<lien>[Un exemple de conf&eacute;rence en ligne->http://events.concurrences.com/article2.html?var_mode=recalcul]</lien>
@@ -56,6 +56,6 @@ _ Il n&eacute;cessite le plugin Comptes &amp; Contacts pour pouvoir effectuer la
 	</pipeline>	
 	
 	<necessite id="SPIP" version="[2.0.9;]" />
-	<necessite id="Comptes &amp Contacts" src="http://files.spip.org/spip-zone/comptes.zip" />
+	<utilise id="comptes" version="[1.0]" src="http://files.spip.org/spip-zone/comptes.zip" />
 </plugin>
 
