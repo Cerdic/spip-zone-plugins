@@ -99,12 +99,12 @@ function peupler_base() {
 			),
 		array(
 			'id_adresse' => 2,
-			'id_objet' => 3,
+			'id_objet' => 2,
 			'objet' => 'contact'
 			),
 		array(
 			'id_adresse' => 3,
-			'id_objet' => 4,
+			'id_objet' => 3,
 			'objet' => 'contact'
 			)
 		)

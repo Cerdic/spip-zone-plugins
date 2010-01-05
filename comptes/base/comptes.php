@@ -19,8 +19,8 @@ function comptes_declarer_tables_interfaces($interface){
 	 * 1. liaisons simples entre auteurs et contacts par le id_auteur
 	 * 2. liaison complexe entre auteurs et adresses par le id_adresse -> id_contact -> id_auteur
 	 */
-	$interface['tables_jointures']['spip_auteurs'][]= 'contacts';
 	$interface['tables_jointures']['spip_contacts'][]= 'auteurs';
+	$interface['tables_jointures']['spip_auteurs'][]= 'contacts';
 
 	$interface['tables_jointures']['spip_comptes'][]= 'contacts';
 	$interface['tables_jointures']['spip_contacts'][]= 'comptes';
@@ -72,7 +72,7 @@ function comptes_declarer_tables_principales($tables_principales){
 		"KEY id_auteur" => "id_auteur"
 		);
 	$tables_principales['spip_contacts'] =
-		array('field' => &$contacts, 'key' => &$contacts_key);
+		array('field' => &$contacts, 'key' => &$contacts_key, 'join' => &$contacts_join);
 
 
 	//-- Table comptes ------------------------------------------
@@ -109,7 +109,8 @@ function comptes_declarer_tables_principales($tables_principales){
 		"PRIMARY KEY"	=> "id_adresse"
 		);
 	$tables_principales['spip_adresses'] =
-		array('field' => &$adresses, 'key' => &$adresses_key);
+		array(
+			'field' => &$adresses, 'key' => &$adresses_key, 'join' => &$adresses_join);
 		
 		
 		
@@ -125,7 +126,7 @@ function comptes_declarer_tables_principales($tables_principales){
 		"PRIMARY KEY"	=> "id_numero"
 		);
 	$tables_principales['spip_numeros'] =
-		array('field' => &$numeros, 'key' => &$numeros_key);
+		array('field' => &$numeros, 'key' => &$numeros_key, 'join' => &$numeros_join);
 
 
 
@@ -141,7 +142,7 @@ function comptes_declarer_tables_principales($tables_principales){
 		"PRIMARY KEY"	=> "id_champ"
 		);
 	$tables_principales['spip_champs'] =
-		array('field' => &$champs, 'key' => &$champs_key);
+		array('field' => &$champs, 'key' => &$champs_key, 'join' => &$champs_join);
 
 
 
