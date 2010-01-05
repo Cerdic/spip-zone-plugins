@@ -13,7 +13,9 @@
   </etat>
   <description>
   <multi>[it]Mostra un box per consentire agli utenti di memorizzare i link preferiti del proprio sito
-	[en]A box to let your users store their favourite links of your own site</multi>
+	[en]A box to let your users store their favourite links of your own site
+        [fr]Une bo&icirc;te qui permet aux utilisateurs de m&eacute;moriser leurs liens pr&eacute;f&eacute;r&eacute;s sur votre site.
+  </multi>
   </description>
 	<lien></lien> <!-- URI de documentation -->
   <prefix>
