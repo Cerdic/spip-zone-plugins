@@ -39,7 +39,7 @@ function comptes_declarer_tables_interfaces($interface){
 
 	$interface['exceptions_des_jointures']['prenom'] = array('spip_contacts', 'prenom');
 	$interface['exceptions_des_jointures']['id_contact'] = array('spip_contacts', 'id_contact');
-	
+		
 	/**
 	 * Objectif : autoriser les traitements SPIP sur certains champs texte...
 	 *
