@@ -5,31 +5,36 @@
 [(#INCLURE{fond=inc/etapes,etape=#ENV{etape,2}})]
 
 [(#ENV{editable})
-<form action='#ENV{action}' method='post'>
+<form action="[(#ENV{action})]" method="post">
+
 	#ACTION_FORMULAIRE{#ENV{action}}
 
 	<fieldset class="cat">
 	
 		<legend>2. Vos informations personnelles</legend>
 		
+		[<dl class='formulaire_erreur clearfix'>
+			<dd>(#ENV*{message_erreur})</dd>
+		</dl>]
+		
 		<fieldset>
 		
 			<legend>Vos coodonnées</legend>
 		
 		<dl>
+			[<dd class='erreur'>(#ENV**{erreurs}|table_valeur{civilite})</dd>]
 			<dd class="label">&nbsp;</dd>
 			<dd>
-			<input type="radio" name="civilite" value="Mme."[ (#ENV{civilite}|=={Mme.}|oui)selected="selected"] />Mme.
-			<input type="radio" name="civilite" value="Mlle"[ (#ENV{civilite}|=={Mlle}|oui)selected="selected"] />Mlle
-			<input type="radio" name="civilite" value="M."[ (#ENV{civilite}|=={M.}|oui)selected="selected"] />M.
+			<input type="radio" name="civilite" value="Mme."[ (#ENV{civilite}|=={'Mme.'}|oui)checked="checked"] />Mme.
+			<input type="radio" name="civilite" value="Mlle"[ (#ENV{civilite}|=={'Mlle'}|oui)checked="checked"] />Mlle
+			<input type="radio" name="civilite" value="M."[ (#ENV{civilite}|=={'M.'}|oui)checked="checked"] />M.
 			</dd>
-			[<dd class='erreur'>(#ENV**{erreurs}|table_valeur{civilite})</dd>]
 		</dl>
 		
 		<dl>
-			<dd class="label"><:catalogue:votre_nom:></dd>
-			<dd class="champ"><input type="text" name="nom" value="#ENV{nom}" /></dd>
 			[<dd class='erreur'>(#ENV**{erreurs}|table_valeur{nom})</dd>]
+			<dd class="label"><:catalogue:votre_nom:></dd>
+			<dd class="champ"><input type="text" name="nom" id="nom" value="#ENV{nom}" /></dd>
 		</dl>
 		<dl>
 			[<dd class='erreur'>(#ENV**{erreurs}|table_valeur{prenom})</dd>]
@@ -37,13 +42,17 @@
 			<dd class="champ"><input type="text" name="prenom" value="#ENV{prenom}" /></dd>
 		</dl>
 		<dl>
-			[<dd class='erreur'>(#ENV**{erreurs}|table_valeur{adresse})</dd>]
-			<dd class="label"><:catalogue:votre_adresse:></dd>
-			<dd class="champ"><input type="text" name="adresse" value="#ENV{adresse}" /></dd>
+			<dd class="label"><:catalogue:numero:></dd>
+			<dd class="champ"><input type="text" name="numero" value="#ENV{numero}" /></dd>
 		</dl>
 		<dl>
-			<dd class="label"><:catalogue:adresse_suite:></dd>
-			<dd class="champ"><input type="text" name="adresse_suite" value="#ENV{adresse_suite}" /></dd>
+			[<dd class='erreur'>(#ENV**{erreurs}|table_valeur{voie})</dd>]
+			<dd class="label"><:catalogue:voie:></dd>
+			<dd class="champ"><input type="text" name="voie" value="#ENV{voie}" /></dd>
+		</dl>
+		<dl>
+			<dd class="label"><:catalogue:complement:></dd>
+			<dd class="champ"><input type="text" name="complement" value="#ENV{complement}" /></dd>
 		</dl>
 		
 		<dl>
@@ -55,6 +64,10 @@
 			<input class="ville" type="text" name="ville" value="#ENV{ville}" />
 			</dd>
 		</dl>
+		<dl>
+			<dd class="label"><:catalogue:pays:></dd>
+			<dd class="champ"><input type="text" name="pays" value="#ENV{pays}" /></dd>
+		</dl>
 	</fieldset>
 
 	<fieldset>
@@ -62,29 +75,23 @@
 		<dl>
 			[<dd class='erreur'>(#ENV**{erreurs}|table_valeur{courriel})</dd>]
 			<dd class="label"><:catalogue:votre_courriel:></dd>
-			<dd class="champ"><input type="text" name="nom" value="#ENV{courriel}" /></dd>
-		</dl>
-		<dl>
-			[<dd class='erreur'>(#ENV**{erreurs}|table_valeur{telephone})</dd>]
-			<dd class="label"><:catalogue:tel_perso:></dd>
-			<dd class="champ"><input type="text" name="nom" value="#ENV{tel_perso}" /></dd>
+			<dd class="champ"><input type="text" name="courriel" value="#ENV{courriel}" /></dd>
 		</dl>
 		<dl>
 			<dd class="label"><:catalogue:tel_bureau:></dd>
-			<dd class="champ"><input type="text" name="nom" value="#ENV{tel_bureau}" /></dd>
+			<dd class="champ"><input type="text" name="tel_bureau" value="#ENV{tel_bureau}" /></dd>
+		</dl>
+		<dl>
+			[<dd class='erreur'>(#ENV**{erreurs}|table_valeur{tel_maison})</dd>]
+			<dd class="label"><:catalogue:tel_maison:></dd>
+			<dd class="champ"><input type="text" name="tel_maison" value="#ENV{tel_maison}" /></dd>
 		</dl>
 		<dl>
 			<dd class="label"><:catalogue:tel_portable:></dd>
-			<dd class="champ"><input type="text" name="nom" value="#ENV{tel_portable}" /></dd>
+			<dd class="champ"><input type="text" name="tel_portable" value="#ENV{tel_portable}" /></dd>
 		</dl>
 
 	</fieldset>
-	
-
-	[<dl class='formulaire_erreur clearfix'>
-		<dd>(#ENV*{message_erreur})</dd>
-		[<dd>(#ENV**{erreurs}|table_valeur{id_variante})</dd>]
-	</dl>]
 	
 	<input type="hidden" name="id_variante" value="[(#EVAL{_request('id_variante')})]" />
 	<input type="hidden" name="montant" value="[(#EVAL{_request('montant')})]" />
