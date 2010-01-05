@@ -9,7 +9,8 @@
 	<etat>dev</etat>
 
 	<description>
-		Ce plugin permet la gestion simple d'un catalogue de produits, avec cat&eacute;gories et variantes
+		Ce plugin permet la gestion simple d'un catalogue de produits, avec cat&eacute;gories et variantes.
+_ Il n&eacute;cessite le plugin Comptes &amp; Contacts pour pouvoir effectuer la saisie d'une transaction.
 	</description>
 
 	<lien>[Un exemple de conf&eacute;rence en ligne->http://events.concurrences.com/article2.html?var_mode=recalcul]</lien>
@@ -55,5 +56,6 @@
 	</pipeline>	
 	
 	<necessite id="SPIP" version="[2.0.9;]" />
-
+	<necessite id="comptes"  />
 </plugin>
+
