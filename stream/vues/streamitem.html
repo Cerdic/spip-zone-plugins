@@ -34,11 +34,19 @@
 	</div>
 	]
 
-	[(#REM{admin}|oui)
+	[(#GET{admin}|oui)
 		<div class="small buzz">
-		#del
-		#tw
-		#fb
+		[<a rel="nofollow"
+		href="http://delicious.com/save?v=4;url=(#URL*|rawurlencode)[;title=(#TITRE|rawurlencode)][;notes=(#DESCRIPTIF*|textebrut|couper{900}|rawurlencode)]"
+		>#del</a>]
+
+		<a rel="nofollow"
+		href="http://twitter.com/home?status=[(#TITRE*|couper{[(#VAL{135}|moins{[(#URL*|strlen)]})],'…'}|rawurlencode) ][(#URL*|rawurlencode)]"
+		>#tw</a>
+
+		<a rel="nofollow"
+		href="http://www.facebook.com/sharer.php?src=bm&amp;v=4[&amp;u=(#URL*|rawurlencode)[&amp;t=(#TITRE|rawurlencode)]"
+		>#fb</a>]
 		</div>
 	]
 
