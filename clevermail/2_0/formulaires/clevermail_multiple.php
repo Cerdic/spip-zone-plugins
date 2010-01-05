@@ -119,22 +119,21 @@ function formulaires_clevermail_multiple_traiter_dist($lst_id = 0, $lsr_mode_for
 		          		$template['@@FORMAT_INSCRIPTION@@']  = (intval($lsr_mode) == 1 ? _T('choix_version_html') : _T('choix_version_texte'));
 		          		$template['@@EMAIL@@'] = _request('sub_email');
 		          		$template['@@URL_CONFIRMATION@@'] = generer_url_public(_CLEVERMAIL_VALIDATION,'id='.$actionId);
-		          		$body = ($listData['lst_subscribe_text_multiple'] != '' ? $listData['lst_subscribe_text_multiple'] : _T('clevermail:mail_inscription_multiple'));
-		          		$subject = ($listData['lst_subscribe_subject_multiple'] != '' ? $listData['lst_subscribe_subject_multiple'] : _T('clevermail:sujet_mail_inscription_multiple'));
+		          		$body = sql_getfetsel("set_value", "spip_cm_settings", "set_name='CM_MAIL_TEXT'");
+		          		$subject = sql_getfetsel("set_value", "spip_cm_settings", "set_name='CM_MAIL_SUBJECT'");
 		          		$msgInscription = _T('clevermail:inscription_ok_multiple', array('lst_name' => $lists_name_complet));
           			} else {
           				// Composition du message de demande de confirmation
 		          		$template = array();
 		          		$template['@@NOM_LETTRE@@'] = supprimer_numero(substr($listData['lst_name'], strpos($listData['lst_name'], "/")+1));
 		          		$template['@@NOM_CATEGORIE@@'] = supprimer_numero(substr($listData['lst_name'],0 , strpos($listData['lst_name'], "/")));
-		          		$template['@@NOM_COMPLET@@'] = $listData['lst_name'];
+		          		$template['@@NOM_COMPLET@@'] = ($template['@@NOM_CATEGORIE@@'] != '' ? $template['@@NOM_CATEGORIE@@'].' / '.$template['@@NOM_LETTRE@@'] : $template['@@NOM_LETTRE@@']);
 		          		$template['@@DESCRIPTION@@'] = $listData['lst_comment'];
 		          		$template['@@FORMAT_INSCRIPTION@@']  = (intval($lsr_mode) == 1 ? _T('choix_version_html') : _T('choix_version_texte'));
 		          		$template['@@EMAIL@@'] = _request('sub_email');
 		          		$template['@@URL_CONFIRMATION@@'] = generer_url_public(_CLEVERMAIL_VALIDATION,'id='.$actionId);
 		          		$body = $listData['lst_subscribe_text'];
-		          		$prefix = ($template['@@NOM_CATEGORIE@@'] != '' ? '['.$template['@@NOM_CATEGORIE@@'].' / '.$template['@@NOM_LETTRE@@'].'] ' : '['.$template['@@NOM_LETTRE@@'].'] ');
-		          		$subject = (intval($listData['lst_subject_tag']) == 1 ? $prefix : '').$listData['lst_subscribe_subject'];
+		          		$subject = (intval($listData['lst_subject_tag']) == 1 ? '['.$template['@@NOM_COMPLET@@'].'] ' : '').$listData['lst_subscribe_subject'];
 		          		$msgInscription = _T('clevermail:inscription_ok', array('lst_name' => supprimer_numero($listData['lst_name'])));
           			}
 					if($nbLettre == count($lists)){

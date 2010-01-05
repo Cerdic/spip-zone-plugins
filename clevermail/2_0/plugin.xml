@@ -1,8 +1,8 @@
 <plugin>
 	<nom>CleverMail pour SPIP 2.0</nom>
 	<auteur>Thomas Beaumanoir et Nicolas Hoizey de [Clever Age->http://www.clever-age.com/]</auteur>
-	<version>2.3.3</version>
-  <version_base>0.7</version_base>
+	<version>2.3.4</version>
+  <version_base>0.8</version_base>
 	<etat>stable</etat>
 	<description>
 Gestion de {{lettres d'information}} assurant les fonctionnalit&eacute;s suivantes :

@@ -83,27 +83,6 @@
         </ul>
       </fieldset>
       <fieldset>
-        <legend><:clevermail:confirmation_inscription_multiple:></legend>
-        <ul>
-          #SET{name,lst_subscribe_subject_multiple}
-          #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-          #SET{obli,''}
-          <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-            <label for="#GET{name}"><:clevermail:sujet:></label>
-            [<span class='erreur_message'>(#GET{erreurs})</span>]
-            <input type="text" class="text" name="#GET{name}" id="#GET{name}" size="50" maxlength="255" value="#ENV{#GET{name}}" />
-          </li>
-          #SET{name,lst_subscribe_text_multiple}
-          #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-          #SET{obli,''}
-          <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-            <label for="#GET{name}"><:clevermail:description:></label>
-            [<span class='erreur_message'>(#GET{erreurs})</span>]
-            <textarea name="#GET{name}" id="#GET{name}" cols="50" rows="5" wrap="virtual" class="textarea">#ENV{#GET{name}}</textarea>
-          </li>
-        </ul>
-      </fieldset>
-      <fieldset>
         <legend><:clevermail:confirmation_desinscription:></legend>
         <ul>
           #SET{name,lst_unsubscribe_subject}

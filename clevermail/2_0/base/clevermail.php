@@ -9,8 +9,6 @@ function clevermail_declarer_tables_principales($tables_principales) {
 	    "lst_moderator_email" => "VARCHAR(255) NOT NULL",
 	    "lst_subscribe_subject" => "VARCHAR(255) NOT NULL",
 	    "lst_subscribe_text" => "TEXT NOT NULL",
-	    "lst_subscribe_subject_multiple" => "VARCHAR(255) NOT NULL",
-	    "lst_subscribe_text_multiple" => "TEXT NOT NULL",
 	    "lst_subject" => "VARCHAR(255) NOT NULL",
 	    "lst_unsubscribe_subject" => "VARCHAR(255) NOT NULL",
 	    "lst_unsubscribe_text" => "TEXT NOT NULL",
@@ -243,6 +241,17 @@ function clevermail_upgrade($nom_meta_base_version, $version_cible) {
       maj_tables('spip_cm_lists');
       ecrire_meta($nom_meta_base_version,$current_version="0.7",'non');
       spip_log('Mise à jour des tables du plugin CleverMail en version 0.7', 'clevermail');
+    }
+    if (version_compare($current_version,'0.8','<')) {
+      include_spip('base/abstract_sql');
+      include_spip('base/create');
+      maj_tables('spip_cm_lists');
+      sql_alter("TABLE spip_cm_lists DROP lst_subscribe_subject_multiple");
+      sql_alter("TABLE spip_cm_lists DROP lst_subscribe_text_multiple");
+      sql_insertq('spip_cm_settings',  array('set_name' => 'CM_MAIL_SUBJECT', 'set_value' => _T('clevermail:confirmation_votre_inscription_multiple')));
+      sql_insertq('spip_cm_settings',  array('set_name' => 'CM_MAIL_TEXT', 'set_value' => _T('clevermail:confirmation_votre_inscription_text_multiple')));
+      ecrire_meta($nom_meta_base_version,$current_version="0.8",'non');
+      spip_log('Mise à jour des tables du plugin CleverMail en version 0.8', 'clevermail');
     }
   }
 }
