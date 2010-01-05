@@ -4,7 +4,7 @@
 
 	<auteur>Cyril Marion</auteur>
 
-	<version>1.1</version>
+	<version>1.2</version>
 
 	<etat>dev</etat>
 
@@ -56,6 +56,6 @@ _ Il n&eacute;cessite le plugin Comptes &amp; Contacts pour pouvoir effectuer la
 	</pipeline>	
 	
 	<necessite id="SPIP" version="[2.0.9;]" />
-	<necessite id="comptes" version="[1.0]" src="http://files.spip.org/spip-zone/comptes.zip" />
+	<necessite id="Comptes &amp Contacts" src="http://files.spip.org/spip-zone/comptes.zip" />
 </plugin>
 
