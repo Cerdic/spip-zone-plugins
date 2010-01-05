@@ -9,8 +9,8 @@ function comptes_declarer_tables_interfaces($interface){
 	
 	$interface['table_des_tables']['comptes'] = 'comptes';
 	$interface['table_des_tables']['contacts'] = 'contacts';
-	$interface['table_des_tables']['numeros'] = 'numeros';
 	$interface['table_des_tables']['adresses'] = 'adresses';
+	$interface['table_des_tables']['numeros'] = 'numeros';
 	$interface['table_des_tables']['champs'] = 'champs';
 	
 	/**
@@ -96,9 +96,9 @@ function comptes_declarer_tables_principales($tables_principales){
 	$adresses = array(
 		"id_adresse"	=> "bigint(21) NOT NULL auto_increment",
 		"type_adresse"	=> "VARCHAR(10) DEFAULT '' NOT NULL", // perso, pro, vacance...
-		"numero" 		=> "VARCHAR(10) DEFAULT '' NOT NULL", // p.ex 21
-		"voie"			=> "tinytext DEFAULT '' NOT NULL", // rue de cotte
-		"complement"	=> "tinytext DEFAULT '' NOT NULL", // 3è étage
+		"numero" 		=> "VARCHAR(10) DEFAULT '' NOT NULL", // p. ex. 21
+		"voie"			=> "tinytext DEFAULT '' NOT NULL", // p. ex. rue de cotte
+		"complement"	=> "tinytext DEFAULT '' NOT NULL", // p. ex. 3è étage
 		"boite_postale"	=> "VARCHAR(10) DEFAULT '' NOT NULL", 
 		"code_postal"	=> "VARCHAR(5) DEFAULT '' NOT NULL",
 		"ville"			=> "tinytext DEFAULT '' NOT NULL",
