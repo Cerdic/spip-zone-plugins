@@ -184,8 +184,10 @@ function formulaires_joindre_document_traiter_dist($id_document='new',$id_objet=
 		}
 		if (count($messages_erreur))
 			$res['message_erreur'] = implode('<br />',$messages_erreur);
-		if ($nb_docs)
-			$res['message_ok'] = $nb_docs==1? _T('gestdoc:document_installe_succes'):_T('gestdoc:nb_documents_installe_succes',array('nb'=>$nb_docs));
+		if ($nb_docs){
+			$autoopen = "<script type='text/javascript'>setTimeout(function(){if (window.jQuery) jQuery('#doc$ancre a.editbox').get(0).focus();},30);</script>";
+			$res['message_ok'] = $nb_docs==1? _T('gestdoc:document_installe_succes').$autoopen:_T('gestdoc:nb_documents_installe_succes',array('nb'=>$nb_docs));
+		}
 		if ($ancre)
 			$res['redirect'] = "#doc$ancre";
 	}

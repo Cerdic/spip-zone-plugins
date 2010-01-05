@@ -14,7 +14,7 @@
 function editbox_init(){
 	jQuery('a.editbox:not(.nobox)')
 	.attr("onclick","").addClass('nobox').click(function(){
-		var casedoc = jQuery(this).parents('div.document').eq(0);
+		var casedoc = jQuery(this).parents('div.item.document,div.item.image').eq(0);
 		jQuery(casedoc).animeajax();
 		jQuery.modalboxload(jQuery(this).attr('href'),{
 			maxWidth: 500,
