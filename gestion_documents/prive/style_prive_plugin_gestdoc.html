@@ -142,8 +142,8 @@ p.actions {clear:both;}
 #portfolios .item .titrem .fichier {font-weight:normal;font-size:0.9em;font-style:italic;}
 #portfolios .item .titrem .titre {display:block;font-size:1.1em;}
 #portfolios .item .infos {display:block;float:#GET{left};}
-#portfolios .item div.mode {display:block;float:#GET{right};clear:#GET{right};margin-top:-1.7em;}
-#portfolios .item .actions {display:block;float:#GET{right};clear:#GET{right};font-size:x-small;}
+#portfolios .item div.mode {display:block;float:#GET{right};clear:#GET{right};margin-top:-1.7em;position:relative;padding:5px 5px 0;padding-#GET{right}:0;}
+#portfolios .item .actions {display:block;float:#GET{right};clear:#GET{right};font-size:x-small;position:relative;}
 
 #portfolios .item .actions > *,
 #portfolios .item .tourner,
@@ -151,12 +151,12 @@ p.actions {clear:both;}
 #portfolios .item .actions a.editbox {visibility:visible;opacity:1;-moz-opacity:1;font-weight:bold;}
 #portfolios .item:hover .actions > *,
 #portfolios .item:hover .tourner,
-#portfolios .item:hover .mode {visibility:visible;opacity:1;-moz-opacity:1;}
+#portfolios .item:hover .mode {visibility:visible;opacity:1;-moz-opacity:1;z-index:1000;background:[#(#GET{claire}|couleur_eclaircir|couleur_eclaircir)];}
 
 #portfolios .item .titre > .sanstitre {opacity:0.1;-moz-opacity:0.1;}
 
 #portfolios .tout_supprimer span {display:block;text-align:#GET{right};}
 
-.item.vu_oui {background:#f9f9f9 url(#CHEMIN{images/vu-16.png}) no-repeat 64px 5px;}
+.item.vu_oui {background:#f9f9f9;}
 
 [(#INCLURE{fond=modalbox/style_prive_plugin_modalbox}{env})]
