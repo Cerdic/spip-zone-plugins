@@ -6,7 +6,9 @@
 		[(#REM) declarer les hidden qui declencheront le service du formulaire
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
-	  [<ul>(#INCLURE{fond=inc-selecteur-parents}{env})</ul>]
+	  <input type='hidden' name='id_parent' value='#ENV{id_parent}' />
+	  <input type='hidden' name='_polyhier' value='#ENV{objet}' />
+	  [<ul>(#INCLURE{fond=formulaires/inc-selecteur-parents}{env})</ul>]
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 	  <!--extra-->
 	  <p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
