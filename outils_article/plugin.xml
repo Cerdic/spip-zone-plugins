@@ -3,7 +3,7 @@
         <nom> <!-- Nom du plugin -->
 			<multi>
 					[fr]Boite &agrave; outils pour articles
-					[es]Cojee a herramientas
+					[es]Caja de herramientas
 			</multi>		
         </nom>
         <auteur>        <!-- Auteur du plugin -->
@@ -11,7 +11,7 @@
           
 										[fr]christophe vallois
 _ &#169; 2007 - Distribu&#233; sous licence GNU/LGPL
-					[es] [christophe vallois->http://www.spip-contrib.net/_vcris_] - distributed under GNU/GPL licence
+					[es] [christophe vallois->http://www.spip-contrib.net/_vcris_] - distribuido bajo licencia GNU/GPL
 					[en] [christophe vallois->http://www.spip-contrib.net/_vcris_] - distributed under GNU/GPL licence
 					
 			</multi>		
