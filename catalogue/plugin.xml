@@ -56,6 +56,6 @@ _ Il n&eacute;cessite le plugin Comptes &amp; Contacts pour pouvoir effectuer la
 	</pipeline>	
 	
 	<necessite id="SPIP" version="[2.0.9;]" />
-	<necessite id="comptes"  />
+	<necessite id="comptes" version="[1.0]" src="http://files.spip.org/spip-zone/comptes.zip" />
 </plugin>
 
