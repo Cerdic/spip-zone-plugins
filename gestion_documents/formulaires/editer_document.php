@@ -121,7 +121,9 @@ function formulaires_editer_document_traiter_dist($id_document='new', $id_parent
 	}
 
 	$res = formulaires_editer_objet_traiter('document',$id_document,$id_parent,$lier_trad,$retour,$config_fonc,$row,$hidden);
+	$autoclose = "<script type='text/javascript'>jQuery.modalboxclose();</script>";
 	if (_request('copier_local') OR _request('joindre_upload') OR _request('joindre_ftp') OR _request('joindre_distant')){
+		$autoclose = "";
 		if (_request('copier_local')){
 			$copier_local = charger_fonction('copier_local','action');
 			$res = array('editable'=>true);
@@ -151,6 +153,7 @@ function formulaires_editer_document_traiter_dist($id_document='new', $id_parent
 		if (_request('tourner180') OR _request('tourner180_x'))
 			$angle = 180;
 		if ($angle){
+			$autoclose = "";
 			$tourner = charger_fonction('tourner','action');
 			action_tourner_post($id_document,$angle);
 		}
@@ -159,7 +162,7 @@ function formulaires_editer_document_traiter_dist($id_document='new', $id_parent
 	if (!isset($res['redirect']))
 		$res['editable'] = true;
 	if (!isset($res['message_erreur']))
-		$res['message_ok'] = _L('Votre modification a &eacute;t&eacute; enregistr&eacute;e');
+		$res['message_ok'] = _L('Votre modification a &eacute;t&eacute; enregistr&eacute;e').$autoclose;
 
 	return $res;
 }

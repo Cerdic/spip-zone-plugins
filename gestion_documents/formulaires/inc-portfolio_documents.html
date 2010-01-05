@@ -51,6 +51,7 @@ function editbox_init(){
 		jQuery.modalboxload(jQuery(this).attr('href'),{
 			maxWidth: 500,
 			minHeight: 600,
+			autoResize: true,
 			onClose: function (dialog) {var a = jQuery(casedoc).find('a.refresh');if (a.length) a.click();}
 		});
 		return false;
