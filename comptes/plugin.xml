@@ -4,6 +4,8 @@
 
 	<auteur>Cyril Marion</auteur>
 
+	<prefix>comptes</prefix>
+	
 	<version>1.0</version>
 
 	<etat>dev</etat>
@@ -14,7 +16,6 @@
 
 	<icon>img/comptes_128x128.png</icon>
 
-	<prefix>comptes</prefix>
 	
 	<pipeline>
 		<nom>insert_head</nom>
