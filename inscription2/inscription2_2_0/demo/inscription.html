@@ -33,7 +33,17 @@
 		</div>
 
 		<div class="texte ajax">
-			#FORMULAIRE_INSCRIPTION2
+			[(#ENV{mode}|=={profil}|oui)
+				[(#SESSION{id_auteur}|oui)
+					#FORMULAIRE_INSCRIPTION2{#SESSION{id_auteur}}
+				]
+				[(#SESSION{id_auteur}|non)
+					#LOGIN_PUBLIC
+				]
+			]
+			[(#ENV{mode}|=={profil}|non)
+				#FORMULAIRE_INSCRIPTION2
+			]
 		</div>
 	</div><!--#contenu-->
 	</div><!--#conteneur-->
