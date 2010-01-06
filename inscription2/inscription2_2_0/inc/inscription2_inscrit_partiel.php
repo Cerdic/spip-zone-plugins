@@ -18,7 +18,7 @@ function i2_inscrit_partiel($id){
 	/**
 	 * Champs de l'inscrit dans les tables spip_auteurs et spip_auteurs_elargis
 	 */
-	$res = sql_fetsel($champs,"spip_auteurs as aut LEFT JOIN spip_auteurs_elargis as autelar USING(id_auteur)","aut.id_auteur = $id");
+	$res = sql_fetsel("*","spip_auteurs as aut LEFT JOIN spip_auteurs_elargis as autelar USING(id_auteur)","aut.id_auteur = $id");
 
 	foreach($champs as $val){
 		/**
