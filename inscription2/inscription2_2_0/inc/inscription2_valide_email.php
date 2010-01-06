@@ -34,8 +34,8 @@ function inc_inscription2_valide_email_dist($email,$id_auteur=NULL) {
 				// Il parrait q'un admin spip peut créer un compte avec un email existant...
 				// Ne faites pas ca, si vous êtes sain d'esprit et comptez utiliser ce code !
 				include_spip("inc/inscription2_inscrit_partiel");
-				if(i2_inscrit_partiel($id))
-					return;
+				//if(i2_inscrit_partiel($id))
+				//	return;
 
 				return _T('inscription2:email_deja_enregistre');
 
