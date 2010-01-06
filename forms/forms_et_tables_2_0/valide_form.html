@@ -37,7 +37,7 @@ function valide_sondage()
 			$nom_cookie = Forms_nom_cookie_form($id_form);
 			// D'abord verifier que l'URL est legitime, donc que la demande a bien
 			// ete generee par SPIP
-			$hash_verif = md5("forms valide reponse sondage $id_donnee $cookie ".hash_env());
+			$hash_verif = md5("forms valide reponse sondage $id_donnee $cookie".hash_env());
 			
 			if ($cookie && $cookie == $_COOKIE[$nom_cookie]
 				&& ($hash_verif==$hash)) {
@@ -47,7 +47,7 @@ function valide_sondage()
 				//adapatation SPIP2
 				//if (!spip_num_rows(spip_query($query))) {
 				//if (!sql_count(spip_query($query))) {
-				if(!sql_countsel("spip_forms_donnees","id_form=".intval($id_form)." AND id_donnee!=".intval($id_donnee)." AND confirmation='valide' AND cookie='".addslashes($cookie)."'"))
+				if(!sql_countsel("spip_forms_donnees","id_form=".intval($id_form)." AND id_donnee!=".intval($id_donnee)." AND confirmation='valide'"))
 					//adaptation SPIP2
 					//$query = "UPDATE spip_forms_donnees SET confirmation='valide' WHERE id_donnee=$id_donnee";
 					//spip_query($query);
@@ -80,7 +80,7 @@ function valide_sondage()
 		$image = pack("H*", $image);
 		$size = strlen($image);
 
-		//Header("Content-Type: image/gif");
+		Header("Content-Type: image/gif");
 		Header("Content-Length: ".$size);
 		Header("Cache-Control: no-cache,no-store");
 		Header("Pragma: no-cache");
