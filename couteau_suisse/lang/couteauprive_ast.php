@@ -179,7 +179,7 @@ El par&aacute;metru {type} d\'enriba pue tener tres valores:
 
 [[%decoration_styles%]]',
 	'decoration:nom' => 'Decoraci&oacute;n',
-	'decoupe:aide' => 'Bloque de lling&uuml;etes : <b>&lt;onglets>&lt;/onglets></b><br/>Separtador de p&aacute;xines o de lling&uuml;etes: @sep@',
+	'decoupe:aide' => 'Bloque de lling&uuml;etes : <b>&lt;onglets>&lt;/onglets></b><br />Separtador de p&aacute;xines o de lling&uuml;etes: @sep@',
 	'decoupe:aide2' => 'Alias:&nbsp;@sep@',
 	'decoupe:description' => '@puce@ Divide la presentaci&oacute;n p&uacute;blica d\'un art&iacute;culu en delles p&aacute;xines gracies a una paxinaci&oacute;n autom&aacute;tica. Nam&aacute;i pon nel art&iacute;culu cuatro signos m&aacute;s consecutivos (<code>++++</code>) nel llugar u vaya tar el corte.
 
@@ -268,7 +268,7 @@ Los bloques multi s\'amuesen siempre na llingua pid&iacute;a pol visitante.',
 	// H
 	'help' => '{{Esta p&aacute;xina &uacute;nicamente ye accesible pa los responsables del sitiu.}}<p>Da accesu a les diferentes funciones suplementaries aport&aacute;es pol plugin &laquo;{{La&nbsp;Navaya&nbsp;Suiza}}&raquo;.',
 	'help2' => 'Versi&oacute;n local: @version@',
-	'help3' => '<p>Enllaces de documentaci&oacute;n :<br/>• [La&nbsp;Navaya&nbsp;Suiza->http://www.spip-contrib.net/?article2166]@contribs@</p><p>Reentamos:
+	'help3' => '<p>Enllaces de documentaci&oacute;n :<br />• [La&nbsp;Navaya&nbsp;Suiza->http://www.spip-contrib.net/?article2166]@contribs@</p><p>Reentamos:
 _ • [De les ferramientes tapec&iacute;es|Tornar a l\'apariencia inicial d\'esta p&aacute;xina->@hide@]
 _ • [De tol plugin|Tornar a l\'est&aacute;u inicial del plugin->@reset@]@install@
 </p>',
@@ -346,7 +346,7 @@ Atenci&oacute;n, esta ferramienta necesita pa funcionar el plugin {jQuery} : {Ro
 	'label:liens_interrogation' => 'Protexer les URLs:',
 	'label:liens_orphelins' => 'Enllaces calcables:',
 	'label:log_couteau_suisse' => 'Activar:',
-	'label:marqueurs_urls_propres' => 'Amestar los marcadores que dixebren los oxetos (SPIP>=2.0) :<br/>(ex. : &laquo;&nbsp;-&nbsp;&raquo; pa -Mio-estaya-, &laquo;&nbsp;@&nbsp;&raquo; pa @Mio-sitiu@) ',
+	'label:marqueurs_urls_propres' => 'Amestar los marcadores que dixebren los oxetos (SPIP>=2.0) :<br />(ex. : &laquo;&nbsp;-&nbsp;&raquo; pa -Mio-estaya-, &laquo;&nbsp;@&nbsp;&raquo; pa @Mio-sitiu@) ',
 	'label:marqueurs_urls_propres2' => '<:label:marqueurs_urls_propres:>',
 	'label:marqueurs_urls_propres_qs' => '<:label:marqueurs_urls_propres:>',
 	'label:max_auteurs_page' => 'Autores por p&aacute;xina:',
@@ -370,7 +370,7 @@ Atenci&oacute;n, esta ferramienta necesita pa funcionar el plugin {jQuery} : {Ro
 	'label:radio_target_blank3' => 'Ventanu nuevu pa los enllaces esternos:',
 	'label:radio_type_urls3' => 'Formatu de les URLs:',
 	'label:scrollTo' => 'Instalar los plugins {jQuery} siguientes:',
-	'label:separateur_urls_page' => 'Carauter de separaci&oacute;n \'type-id\'<br/>(p.ex.: ?article-123):',
+	'label:separateur_urls_page' => 'Carauter de separaci&oacute;n \'type-id\'<br />(p.ex.: ?article-123):',
 	'label:set_couleurs' => 'Xuegu a utilizar:',
 	'label:spam_mots' => 'Secuencies torg&aacute;es:',
 	'label:spip_options_on' => 'Incluir:',
@@ -387,7 +387,7 @@ Atenci&oacute;n, esta ferramienta necesita pa funcionar el plugin {jQuery} : {Ro
 	'label:titres_etendus' => 'Activar l\'usu estend&iacute;u de les balices #TITRE_XXX:',
 	'label:tri_articles' => '<MODIF>To seleici&oacute;n:',
 	'label:url_arbo_minuscules' => 'Conservar les may&uacute;scules de los t&iacute;tulos nes URLs:',
-	'label:url_arbo_sep_id' => 'Carauter de separaci&oacute;n \'titre-id\' en casu de duplicaos :<br/>(nun uses \'/\')',
+	'label:url_arbo_sep_id' => 'Carauter de separaci&oacute;n \'titre-id\' en casu de duplicaos :<br />(nun uses \'/\')',
 	'label:url_glossaire_externe2' => 'Enllaz al glosariu esternu:',
 	'label:urls_arbo_sans_type' => 'Amosar el tipu d\'oxetu SPIP nes URLs:',
 	'label:urls_avec_id' => 'Una id sistem&aacute;tica, sicas&iacute;...',
@@ -442,8 +442,8 @@ _ • {Predetermin&aacute;u}: reemplazu autom&aacute;ticu d\'orixe (a partir de 
 	'outil_inactif' => 'Ferramienta inactiva',
 	'outil_intro' => 'Esta p&aacute;xina llista les carauter&iacute;stiques que ufre\'l plugin.<br /><br />Calcando nel nome de les ferramientes d\'embaxo, seleiciones los que vas poder camuda-yos l\'estau con l\'aida del bot&ograve;n central: les ferramientes actives desact&iacute;vense y <i>viceversa</i>. A cada clic, apaez la descripci&oacute;n embaxo de les llistes. Les categor&iacute;es son desplegables y les ferramientes puen tapecese. El doble-clic permite cambear r&aacute;pidamente de ferramienta.<br /><br />Pal primer usu, encami&eacute;ntase activar les ferramientes una a una, por si acasu apaecen incompatibilidaes cola to cadarma, con SPIP o con otros plugins.<br /><br />Nota: la simple carga d\'esta p&aacute;xina recompila dafechu toes les ferramientes de La Navaya Suiza.',
 	'outil_intro_old' => 'Esta interfaz ye antigua.<br /><br />Si alcuentres problemes cola utilizaci&oacute;n de la <a href=\'./?exec=admin_couteau_suisse\'>interfaz nueva</a>, afal&aacute;moste a coment&aacute;noslo nel foru de <a href=\'http://www.spip-contrib.net/?article2166\'>Spip-Contrib</a>.',
-	'outil_nb' => '@pipe@ : @nb@ ferramienta',
-	'outil_nbs' => '@pipe@ : @nb@ ferramientes',
+	'outil_nb' => '@pipe@&nbsp;: @nb@&nbsp;ferramienta',
+	'outil_nbs' => '@pipe@&nbsp;: @nb@&nbsp;ferramientes',
 	'outil_permuter' => '&iquest;Camudar la ferramienta: &laquo;@text@&raquo;?',
 	'outils_actifs' => 'Ferramientes actives:',
 	'outils_caches' => 'Ferramientes tapec&iacute;es:',

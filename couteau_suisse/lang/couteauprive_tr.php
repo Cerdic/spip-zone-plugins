@@ -166,7 +166,7 @@ Le param&egrave;tre {type} ci-dessus peut prendre trois valeurs :
 
 [[%decoration_styles%]]',
 	'decoration:nom' => 'Dekorasyon',
-	'decoupe:aide' => 'T&#305;rnak blo&#287;u : <b>&lt;onglets>&lt;/onglets></b><br/>Sayfa veya t&#305;rnak ayrac&#305;&nbsp;: @sep@',
+	'decoupe:aide' => 'T&#305;rnak blo&#287;u : <b>&lt;onglets>&lt;/onglets></b><br />Sayfa veya t&#305;rnak ayrac&#305;&nbsp;: @sep@',
 	'decoupe:aide2' => 'Alias&nbsp;:&nbsp;@sep@',
 	'decoupe:description' => 'Bir makalenin, otomatik bir sayfalama ile kamusal alanda bir ka&ccedil; sayfaya b&ouml;l&uuml;nerek g&ouml;sterilmesini sa&#287;lar. Makalenizde sadece pe&#351;pe&#351;e art&#305; i&#351;aretlerini(<code>++++</code>) kesinti yap&#305;lacak yerde kullan&#305;n.
 _ E&#287;er bu ayrac&#305; &lt;onglets&gt; ve &lt;/onglets&gt; komutlar&#305;yla kullan&#305;rsan&#305;z bir &ccedil;ift t&#305;rnak elde edersiniz.
@@ -243,7 +243,7 @@ Dikkat : forumlarda, dilek&ccedil;elerde, payla&#351;&#305;lan ak&#305;larda ve 
 	// H
 	'help' => '{{Bu sayfa yaln&#305;z site sorumlular&#305;n&#305;n eri&#351;imine a&ccedil;&#305;kt&#305;r.}} &laquo;{{&#304;svi&ccedil;re&nbsp;&Ccedil;ak&#305;s&#305;}}&raquo; eklentisinin getirdi&#287;i farkl&#305; bir &ccedil;ok ek i&#351;levin d&uuml;zenlenmesine izin verir .',
 	'help2' => 'Yerel s&uuml;r&uuml;m : @version@',
-	'help3' => 'Belgelendirme ba&#287;lant&#305;lar&#305; :<br/>• [&#304;svi&ccedil;re&nbsp;&Ccedil;ak&#305;s&#305;->http://www.spip-contrib.net/?article2166]@contribs@</p><p>Yeniden ba&#351;lat&#305;lmas&#305; :
+	'help3' => 'Belgelendirme ba&#287;lant&#305;lar&#305; :<br />• [&#304;svi&ccedil;re&nbsp;&Ccedil;ak&#305;s&#305;->http://www.spip-contrib.net/?article2166]@contribs@</p><p>Yeniden ba&#351;lat&#305;lmas&#305; :
 _ • [Gizli gere&ccedil;lerin|Bu sayfan&#305;n ilk g&ouml;r&uuml;n&uuml;m&uuml;ne d&ouml;n&uuml;lmesi->@hide@]
 _ • [T&uuml;m eklentinin|Eklentini ilk durumuna d&ouml;n&uuml;lmesi->@reset@]@install@
 </p>',
@@ -321,7 +321,7 @@ Dikkat, bu gere&ccedil; &ccedil;al&#305;&#351;mak i&ccedil;in {Round Corners} {j
 	'label:liens_interrogation' => '&#350;u URL\'leri koru :',
 	'label:liens_orphelins' => 'T&#305;klanabilir ba&#287;lar :',
 	'label:log_couteau_suisse' => 'Aktive et :',
-	'label:marqueurs_urls_propres' => 'Nesneleri ay&#305;ran ayra&ccedil;lar&#305; ekle (SPIP>=2.0) :<br/>(&ouml;r. : &laquo;&nbsp;-&nbsp;&raquo; -Benim-ba&#351;l&#305;&#287;&#305;m- i&ccedil;in, &laquo;&nbsp;@&nbsp;&raquo; @Benim-sitem@ i&ccedil;in) ',
+	'label:marqueurs_urls_propres' => 'Nesneleri ay&#305;ran ayra&ccedil;lar&#305; ekle (SPIP>=2.0) :<br />(&ouml;r. : &laquo;&nbsp;-&nbsp;&raquo; -Benim-ba&#351;l&#305;&#287;&#305;m- i&ccedil;in, &laquo;&nbsp;@&nbsp;&raquo; @Benim-sitem@ i&ccedil;in) ',
 	'label:marqueurs_urls_propres2' => '<:label:marqueurs_urls_propres:>',
 	'label:marqueurs_urls_propres_qs' => '<:label:marqueurs_urls_propres:>',
 	'label:max_auteurs_page' => 'Bir sayfadaki yazar adedi :',
@@ -345,7 +345,7 @@ Dikkat, bu gere&ccedil; &ccedil;al&#305;&#351;mak i&ccedil;in {Round Corners} {j
 	'label:radio_target_blank3' => 'D&#305;&#351; ba&#287;lar i&ccedil;in yeni pencere:',
 	'label:radio_type_urls3' => 'URL\'lerin format&#305; :',
 	'label:scrollTo' => 'Eklentileri {jQuery} kur :',
-	'label:separateur_urls_page' => 'Ayra&ccedil; \'type-id\'<br/>(&ouml;r. : ?article-123) :',
+	'label:separateur_urls_page' => 'Ayra&ccedil; \'type-id\'<br />(&ouml;r. : ?article-123) :',
 	'label:set_couleurs' => 'Kullan&#305;lacak set :',
 	'label:spam_mots' => 'Yasaklanan diziler :',
 	'label:spip_options_on' => 'Ekle :',
@@ -362,7 +362,7 @@ Dikkat, bu gere&ccedil; &ccedil;al&#305;&#351;mak i&ccedil;in {Round Corners} {j
 	'label:titres_etendus' => '#TITRE_XXX komutlar&#305;n&#305;n geni&#351; kullan&#305;m&#305;n&#305; etkinle&#351;tir&nbsp; :',
 	'label:tri_articles' => '<MODIF>Se&ccedil;iminiz :',
 	'label:url_arbo_minuscules' => 'URL\'lerde k&uuml;&ccedil;&uuml;k b&uuml;y&uuml;k harfleri koru :',
-	'label:url_arbo_sep_id' => 'Tekrarlama durumunda kullan&#305;lacak ayra&ccedil; \'titre-id\' :<br/>(\'/\' kullanmay&#305;n)',
+	'label:url_arbo_sep_id' => 'Tekrarlama durumunda kullan&#305;lacak ayra&ccedil; \'titre-id\' :<br />(\'/\' kullanmay&#305;n)',
 	'label:url_glossaire_externe2' => 'D&#305;&#351; s&ouml;zl&uuml;&#287;e ba&#287; :',
 	'label:urls_arbo_sans_type' => 'URL\'lerde SPIP nesnesinin tipini g&ouml;ster :',
 	'label:urls_avec_id' => 'Sistematik bir kimlik, ama ...',
@@ -416,8 +416,8 @@ _ • {Yayg&#305;n} : &#351;u tipteki ba&#287;lar da de&#287;i&#351;tirilir {<ht
 	'outil_inactif' => '&#304;naktif aktif',
 	'outil_intro' => 'Bu sayfa size sunulan eklenti i&#351;levlerini listeler. <br /><br />A&#351;a&#287;&#305;daki gere&ccedil; isimlerine t&#305;klayarak merkez&icirc; d&uuml;&#287;me ile durumlar&#305;n&#305; de&#287;i&#351;tirebilece&#287;iniz gere&ccedil;leri se&ccedil;ebilirsiniz : etkinle&#351;tirilen gere&ccedil;ler pasifle&#351;tirilecektir veya <i>tam tersi</i>. Her t&#305;klamada tan&#305;mlama listenin alt&#305;nda g&ouml;r&uuml;l&uuml;r. Kategoriler katlanabilir ve gere&ccedil;ler saklanabilir. &Ccedil;ift t&#305;klama bir gerecin durumunu h&#305;zl&#305;ca de&#287;i&#351;tirmeye olanak tan&#305;r. <br /><br />&#304;lk kullan&#305;m i&ccedil;in, SPIP iskeletinizle veya di&#287;er eklentilerle &ccedil;ak&#305;&#351;ma olabilece&#287;i sebebiyle gere&ccedil;leri birer birer etkinle&#351;tirmeniz &ouml;nerilir.<br /><br />Not : bu sayfan&#305;n tekrar y&uuml;klenmesi &#304;svi&ccedil;re &Ccedil;ak&#305;s&#305;\'n&#305; tekrardan derler.',
 	'outil_intro_old' => 'Bu aray&uuml;z eski.<br /><br />E&#287;er <a href=\'./?exec=admin_couteau_suisse\'>yeni aray&uuml;z</a>\'&uuml;n kullan&#305;m&#305;nda sorunla kar&#351;&#305;la&#351;&#305;rsan&#305;z, bizle <a href=\'http://www.spip-contrib.net/?article2166\'>Spip-Contrib</a> forumunda payla&#351;maktan &ccedil;ekinmeyin.',
-	'outil_nb' => '@pipe@ : @nb@ alet',
-	'outil_nbs' => '@pipe@ : @nb@ alet',
+	'outil_nb' => '@pipe@&nbsp;: @nb@&nbsp;alet',
+	'outil_nbs' => '@pipe@&nbsp;: @nb@&nbsp;alet',
 	'outil_permuter' => '&laquo; @text@ &raquo; gereci de&#287;i&#351;tirilsin mi ?',
 	'outils_actifs' => 'Aktif aletler :',
 	'outils_caches' => 'Sakl&#305; aletler :',

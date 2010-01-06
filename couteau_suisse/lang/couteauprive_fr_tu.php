@@ -187,7 +187,7 @@ Le param&egrave;tre {type} ci-dessus peut prendre trois valeurs :
 
 [[%decoration_styles%]]',
 	'decoration:nom' => 'D&eacute;coration',
-	'decoupe:aide' => 'Bloc d\'onglets : <b>&lt;onglets>&lt;/onglets></b><br/>S&eacute;parateur de pages ou d\'onglets&nbsp;: @sep@',
+	'decoupe:aide' => 'Bloc d\'onglets : <b>&lt;onglets>&lt;/onglets></b><br />S&eacute;parateur de pages ou d\'onglets&nbsp;: @sep@',
 	'decoupe:aide2' => 'Alias&nbsp;:&nbsp;@sep@',
 	'decoupe:description' => '@puce@ D&eacute;coupe l\'affichage public d\'un article en plusieurs pages gr&acirc;ce &agrave; une pagination automatique. Place simplement dans ton article quatre signes plus cons&eacute;cutifs (<code>++++</code>) &agrave; l\'endroit qui doit recevoir la coupure.
 
@@ -276,7 +276,7 @@ Les blocs multi s\'affichent alors toujours dans la langue demand&eacute;e par l
 	// H
 	'help' => '{{Cette page est uniquement accessible aux responsables du site.}} Elle permet la configuration des diff&eacute;rentes fonctions suppl&eacute;mentaires apport&eacute;es par le plugin &laquo;{{Le&nbsp;Couteau&nbsp;Suisse}}&raquo;.',
 	'help2' => 'Version locale : @version@',
-	'help3' => '<p>Liens de documentation :<br/>• [Le&nbsp;Couteau&nbsp;Suisse->http://www.spip-contrib.net/?article2166]@contribs@</p><p>R&eacute;initialisations :
+	'help3' => '<p>Liens de documentation :<br />• [Le&nbsp;Couteau&nbsp;Suisse->http://www.spip-contrib.net/?article2166]@contribs@</p><p>R&eacute;initialisations :
 _ • [Des outils cach&eacute;s|Revenir &agrave; l\'apparence initiale de cette page->@hide@]
 _ • [De tout le plugin|Revenir &agrave; l\'&eacute;tat initial du plugin->@reset@]@install@
 </p>',
@@ -361,7 +361,7 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:liens_interrogation' => 'Prot&eacute;ger les URLs :',
 	'label:liens_orphelins' => 'Liens cliquables :',
 	'label:log_couteau_suisse' => 'Activer :',
-	'label:marqueurs_urls_propres' => 'Ajouter les marqueurs dissociant les objets (SPIP>=2.0) :<br/>(ex. : &laquo;&nbsp;-&nbsp;&raquo; pour -Ma-rubrique-, &laquo;&nbsp;@&nbsp;&raquo; pour @Mon-site@) ',
+	'label:marqueurs_urls_propres' => 'Ajouter les marqueurs dissociant les objets (SPIP>=2.0) :<br />(ex. : &laquo;&nbsp;-&nbsp;&raquo; pour -Ma-rubrique-, &laquo;&nbsp;@&nbsp;&raquo; pour @Mon-site@) ',
 	'label:marqueurs_urls_propres2' => '<:label:marqueurs_urls_propres:>',
 	'label:marqueurs_urls_propres_qs' => '<:label:marqueurs_urls_propres:>',
 	'label:max_auteurs_page' => 'Auteurs par page :',
@@ -385,7 +385,7 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:radio_target_blank3' => 'Nouvelle fen&ecirc;tre pour les liens externes :',
 	'label:radio_type_urls3' => 'Format des URLs :',
 	'label:scrollTo' => 'Installer les plugins {jQuery} suivants :',
-	'label:separateur_urls_page' => 'Caract&egrave;re de s&eacute;paration \'type-id\'<br/>(ex. : ?article-123) :',
+	'label:separateur_urls_page' => 'Caract&egrave;re de s&eacute;paration \'type-id\'<br />(ex. : ?article-123) :',
 	'label:set_couleurs' => 'Set &agrave; utiliser :',
 	'label:spam_mots' => 'S&eacute;quences interdites :',
 	'label:spip_options_on' => 'Inclure :',
@@ -402,7 +402,7 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:titres_etendus' => 'Activer l\'utilisation &eacute;tendue des balises #TITRE_XXX&nbsp;:',
 	'label:tri_articles' => '<MODIF>Ton choix :',
 	'label:url_arbo_minuscules' => 'Conserver la casse des titres dans les URLs :',
-	'label:url_arbo_sep_id' => 'Caract&egrave;re de s&eacute;paration \'titre-id\' en cas de doublon :<br/>(ne pas utiliser \'/\')',
+	'label:url_arbo_sep_id' => 'Caract&egrave;re de s&eacute;paration \'titre-id\' en cas de doublon :<br />(ne pas utiliser \'/\')',
 	'label:url_glossaire_externe2' => 'Lien vers le glossaire externe :',
 	'label:urls_arbo_sans_type' => 'Afficher le type d\'objet SPIP dans les URLs :',
 	'label:urls_avec_id' => 'Un id syst&eacute;matique, mais...',
@@ -463,8 +463,8 @@ Note : les paquets <code>.zip</code> n\'&eacute;tant pas reconstruits instantan&
 	'outil_inactif' => 'Outil inactif',
 	'outil_intro' => 'Cette page liste les fonctionnalit&eacute;s du plugin mises &agrave; ta disposition.<br /><br />En cliquant sur le nom des outils ci-dessous, tu s&eacute;lectionnes ceux dont tu pourras permuter l\'&eacute;tat &agrave; l\'aide du bouton central : les outils activ&eacute;s seront d&eacute;sactiv&eacute;s et <i>vice versa</i>. &Agrave; chaque clic, la description appara&icirc;t au-dessous des listes. Les cat&eacute;gories sont repliables et les outils peuvent &ecirc;tre cach&eacute;s. Le double-clic permet de permuter rapidement un outil.<br /><br />Pour une premi&egrave;re utilisation, il est recommand&eacute; d\'activer les outils un par un, au cas o&ugrave; appara&icirc;traient certaines incompatibilit&eacute;s avec ton squelette, avec SPIP ou avec d\'autres plugins.<br /><br />Note : le simple chargement de cette page recompile l\'ensemble des outils du Couteau Suisse.',
 	'outil_intro_old' => 'Cette interface est ancienne.<br /><br />Si tu rencontres des probl&egrave;mes dans l\'utilisation de la <a href=\'./?exec=admin_couteau_suisse\'>nouvelle interface</a>, n\'h&eacute;site pas &agrave; nous en faire part sur le forum de <a href=\'http://www.spip-contrib.net/?article2166\'>Spip-Contrib</a>.',
-	'outil_nb' => '@pipe@ : @nb@ outil',
-	'outil_nbs' => '@pipe@ : @nb@ outils',
+	'outil_nb' => '@pipe@&nbsp;: @nb@&nbsp;outil',
+	'outil_nbs' => '@pipe@&nbsp;: @nb@&nbsp;outils',
 	'outil_permuter' => 'Permuter l\'outil : &laquo; @text@ &raquo; ?',
 	'outils_actifs' => 'Outils actifs :',
 	'outils_caches' => 'Outils cach&eacute;s :',

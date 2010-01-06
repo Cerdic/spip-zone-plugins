@@ -123,7 +123,7 @@ function add_outils_xml($f) {
 }
 // Attention : conversion incomplete. ajouter les tests au fur et a mesure
 function parse_variable_xml(&$arbre) {
-//echo "<br/><br/>\n"; print_r($arbre);
+//echo "<br /><br />\n"; print_r($arbre);
 	$var = array();
 	if(isset($arbre['id'])) $var['nom'] = $arbre['id'][0];
 	if(isset($arbre['format'])) $var['format'] = $arbre['format'][0]=='string'?_format_CHAINE:_format_NOMBRE;
@@ -138,12 +138,12 @@ function parse_variable_xml(&$arbre) {
 		$temp = isset($a['condition_php'])?'code:'.$a['condition_php'][0]:'code';
 		if(isset($a['script_php'])) $var[$temp] = str_replace('\n', "\n", $a['script_php'][0]);
 	}
-//echo "\n<br/><br/>\n"; print_r($var);
+//echo "\n<br /><br />\n"; print_r($var);
 	return $var;
 }
 // Attention : conversion incomplete. ajouter les tests au fur et a mesure
 function parse_outil_xml(&$arbre) {
-//echo "<br/><br/>\n"; print_r($arbre);
+//echo "<br /><br />\n"; print_r($arbre);
 	$out = array();
 	if(isset($arbre['id'])) $out['id'] = $arbre['id'][0];
 	if(isset($arbre['nom'])) $out['nom'] = $arbre['nom'][0];
@@ -167,7 +167,7 @@ function parse_outil_xml(&$arbre) {
 		if(isset($temp['spip_min'])) $out['version-min'] = $temp['spip_min'][0];
 		if(isset($temp['spip_max'])) $out['version-max'] = $temp['spip_max'][0];
 	}
-//echo "\n<br/><br/>\n"; print_r($out);
+//echo "\n<br /><br />\n"; print_r($out);
 	return $out;
 }
 
@@ -285,9 +285,11 @@ function cs_aide_raccourcis() {
 function cs_aide_pipelines($outils_affiches_actifs) {
 	global $cs_metas_pipelines, $outils, $metas_outils;
 	$aide = array();
-	foreach (array_keys($cs_metas_pipelines) as $pipe) {
+	$keys = array_keys($cs_metas_pipelines); sort($keys);
+	foreach ($keys as $pipe) {
 		// stockage de la liste des pipelines et du nombre d'outils actifs concernes
 		$nb=0; foreach($outils as $outil) if($outil['actif'] && (isset($outil['pipeline:'.$pipe]) || isset($outil['pipelinecode:'.$pipe]))) $nb++;
+		if(($len=strlen($pipe))>25) $pipe = substr($pipe, 0, 8).'...'.substr($pipe, $len - 14);
 		if($nb) $aide[] = _T('couteauprive:outil_nb'.($nb>1?'s':''), array('pipe'=>$pipe, 'nb'=>$nb));
 	}
 	// nombre d'outils actifs / interdits par les autorisations (hors versionnage SPIP)
@@ -296,11 +298,11 @@ function cs_aide_pipelines($outils_affiches_actifs) {
 	foreach($outils as $o) if(isset($o['interdit']) && $o['interdit'] && !cs_version_erreur($o)) $ca2++;
 	// nombre d'outils caches de la configuration par l'utilisateur
 	$ca1 = isset($GLOBALS['meta']['tweaks_caches'])?count(unserialize($GLOBALS['meta']['tweaks_caches'])):0;
-	return '<p><b>' . _T('couteauprive:pipelines') . '</b> '.count($aide).'</p><p style="margin-left:1em;">' . join("<br/>", $aide) . '</p>'
-		. '<p><b>' . _T('couteauprive:outils_actifs') . "</b> $nb"
-		. '<br/><b>' . _T('couteauprive:outils_caches') . "</b> $ca1"
-		. (!$ca2?'':('<br/><b>' . _T('couteauprive:outils_non_parametrables') . "</b> $ca2"))
-		. '</p>';
+	return '<p><b>' . _T('couteauprive:outils_actifs') . "</b> $nb"
+		. '<br /><b>' . _T('couteauprive:outils_caches') . "</b> $ca1"
+		. (!$ca2?'':('<br /><b>' . _T('couteauprive:outils_non_parametrables') . "</b> $ca2"))
+		.'<br /><b>' . _T('couteauprive:pipelines') . '</b> '.count($aide)
+		. '</p><p style="font-size:80%; margin-left:0.4em;">' . join("<br />", $aide) . '</p>';
 }
 
 // met en forme le fichier $f en vue d'un insertion en head

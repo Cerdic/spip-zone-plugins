@@ -203,7 +203,7 @@ El par&agrave;metre {tipus} de m&eacute;s amunt pot agafar tres valors:
 
 [[%decoration_styles%]]',
 	'decoration:nom' => 'Decoraci&oacute;',
-	'decoupe:aide' => 'Bloc de pestanyes: <b>&lt;pestanyes>&lt;/pestanyes></b><br/>Separador  de p&agrave;gines o de pestanyes: @sep@',
+	'decoupe:aide' => 'Bloc de pestanyes: <b>&lt;pestanyes>&lt;/pestanyes></b><br />Separador  de p&agrave;gines o de pestanyes: @sep@',
 	'decoupe:aide2' => '&Agrave;lies:&nbsp;@sep@',
 	'decoupe:description' => '@puce@ Talla la visualitzaci&oacute; p&uacute;blica d\'un article en diverses p&agrave;gines gr&agrave;cies a una paginaci&oacute; autom&agrave;tica. Situeu simplement a dins del vostre article quatre signes m&eacute;s consecutius (<code>++++</code>) a l\'indret on s\'hagi de realitzar el tall.
 
@@ -300,7 +300,7 @@ Aleshores, els blocs multi es mostren sempre en la llengua demanada pel visitant
 	// H
 	'help' => '{{Aquesta p&agrave;gina nom&eacute;s &eacute;s accessible pels responsables del lloc.}}<p>Permet la configuraci&oacute; de les diferents funcions suplement&agrave;ries aportades pel plugin &laquo;{{Le&nbsp;Couteau&nbsp;Suisse}}&raquo;.',
 	'help2' => 'Versi&oacute; local: @version@',
-	'help3' => '<p>Enlla&ccedil;os de documentaci&oacute;:<br/>•[Le&nbsp;Couteau&nbsp;Suisse->http://www.spip-contrib.net/?article2166]@contribs@</p><p>Reiniciacions:
+	'help3' => '<p>Enlla&ccedil;os de documentaci&oacute;:<br />•[Le&nbsp;Couteau&nbsp;Suisse->http://www.spip-contrib.net/?article2166]@contribs@</p><p>Reiniciacions:
 _ • [Eines amagades|Tornar a l\'aparen&ccedil;a inicial d\'aquesta p&agrave;gina->@hide@]
 _ • [De tot el plugin|Tornar a l\'estat inicial del plugin->@reset@]@install@
 </p></p>',
@@ -390,7 +390,7 @@ Atenci&oacute;, aquesta eina necessita per funcionar el plugin {jQuery}: {Round 
 	'label:liens_orphelins' => 'Enlla&ccedil;os clicables:',
 	'label:log_couteau_suisse' => 'Activar:',
 	'label:logo_Hmax' => 'Mida m&agrave;xima dels logos:',
-	'label:marqueurs_urls_propres' => 'Afegir els marcadors dissociant els objectes (SPIP>=2.0) :<br/>(ex.: &laquo;&nbsp;-&nbsp;&raquo; per -Ma-rubrique-, &laquo;&nbsp;@&nbsp;&raquo; per @Mon-site@) ',
+	'label:marqueurs_urls_propres' => 'Afegir els marcadors dissociant els objectes (SPIP>=2.0) :<br />(ex.: &laquo;&nbsp;-&nbsp;&raquo; per -Ma-rubrique-, &laquo;&nbsp;@&nbsp;&raquo; per @Mon-site@) ',
 	'label:marqueurs_urls_propres2' => '<:label:marqueurs_urls_propres:>',
 	'label:marqueurs_urls_propres_qs' => '<:label:marqueurs_urls_propres:>',
 	'label:max_auteurs_page' => 'Autors per p&agrave;gina:',
@@ -415,7 +415,7 @@ Atenci&oacute;, aquesta eina necessita per funcionar el plugin {jQuery}: {Round 
 	'label:radio_target_blank3' => 'Nova finestra pels enlla&ccedil;os externs:',
 	'label:radio_type_urls3' => 'Format dels URLs:',
 	'label:scrollTo' => 'Instal&middot;lar els plugins {jQuery} seg&uuml;ents:',
-	'label:separateur_urls_page' => 'Car&agrave;cter de separaci&oacute; \'type-id\'<br/>(ex. : ?article-123) :',
+	'label:separateur_urls_page' => 'Car&agrave;cter de separaci&oacute; \'type-id\'<br />(ex. : ?article-123) :',
 	'label:set_couleurs' => 'Set per utilitzar:',
 	'label:spam_mots' => 'Seq&uuml;&egrave;ncies prohibides:',
 	'label:spip_options_on' => 'Incloure :',
@@ -433,7 +433,7 @@ Atenci&oacute;, aquesta eina necessita per funcionar el plugin {jQuery}: {Round 
 	'label:tri_articles' => '@_CS_CHOIX@',
 	'label:tri_groupes' => '@_CS_CHOIX@',
 	'label:url_arbo_minuscules' => 'Conservar els tipus dels t&iacute;tols en els URLs:',
-	'label:url_arbo_sep_id' => 'Car&agrave;cter de separaci&oacute; \'titre-id\' en cas de doublon :<br/>(no utilitzar \'/\')',
+	'label:url_arbo_sep_id' => 'Car&agrave;cter de separaci&oacute; \'titre-id\' en cas de doublon :<br />(no utilitzar \'/\')',
 	'label:url_glossaire_externe2' => 'Enlla&ccedil; al glossari extern:',
 	'label:url_max_arbo' => '<:label:url_max_propres:>',
 	'label:url_max_libres' => '<:label:url_max_propres:>',
@@ -499,8 +499,8 @@ Nota: com que els paquets <code>.zip</code> no es poden reconstruir instant&agra
 	'outil_inactif' => 'Eina inactiva',
 	'outil_intro' => 'Aquesta p&agrave;gina llista les funcionalitats del plugin que teniu disponibles.<br /><br />Fent un clic damunt del nom de les eines que hi ha m&eacute;s avall, seleccioneu aquells als que podreu canviar l\'estat amb l\'ajuda del bot&oacute; central: les eines activades es desactivaran i <i>viceversa</i>. A cada clic, la descripci&oacute; apareix a sota de les llistes. Les categories s&oacute;n plegables i les eines es poden amagar.  El doble-clic permet de canviar l\'ordre r&agrave;pidament d\'una eina.<br /><br />Quan s\'usa per primer cop, &eacute;s recomanable activar les eines una a una, per si apareixen algunes incompatibilitats amb el vostre esquelet, amb SPIP o amb altres plugins.<br /><br />Nota: la simple c&agrave;rrega d\'aquesta p&agrave;gina torna a compilar el conjunt d\'eines del Ganivet Su&iacute;s.',
 	'outil_intro_old' => 'Aquesta interf&iacute;cie &eacute;s antiga.<br /><br />Si trobeu problemes en l\'&uacute;s de la <a href=\'./?exec=admin_couteau_suisse\'>nova interf&iacute;cie</a>, no dubteu de dir-nos-ho al f&ograve;rum de <a href=\'http://www.spip-contrib.net/?article2166\'>Spip-Contrib</a>.',
-	'outil_nb' => '@pipe@: @nb@ eina',
-	'outil_nbs' => '@pipe@: @nb@ eines',
+	'outil_nb' => '@pipe@: @nb@&nbsp;eina',
+	'outil_nbs' => '@pipe@: @nb@&nbsp;eines',
 	'outil_permuter' => 'Intercanviar l\'eina: &laquo;@text@&raquo;?',
 	'outils_actifs' => 'Eines actives:',
 	'outils_caches' => 'Eines amagades:',

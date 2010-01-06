@@ -187,7 +187,7 @@ O par&aacute;metro {type} seguinte pode ter tres valores:
 
 [[%decoration_styles%]]',
 	'decoration:nom' => 'Decoraci&oacute;n',
-	'decoupe:aide' => 'Bloque de pestanas : <b>&lt;onglets>&lt;/onglets></b><br/>Separador de p&aacute;xinas ou pestanas&nbsp;: @sep@',
+	'decoupe:aide' => 'Bloque de pestanas : <b>&lt;onglets>&lt;/onglets></b><br />Separador de p&aacute;xinas ou pestanas&nbsp;: @sep@',
 	'decoupe:aide2' => 'Alias&nbsp;:&nbsp;@sep@',
 	'decoupe:description' => '@puce@ Parte a presentaci&oacute;n p&uacute;blica dun artigo en varias p&aacute;xinas mediante unha paxinaci&oacute;n autom&aacute;tica. Sit&uacute;e simplemente no seu artigo catro signos de m&aacute;is consecutivos (<code>++++</code>) no lugar que debe recibir o corte.
 
@@ -275,7 +275,7 @@ Os bloques multi m&oacute;stranse ent&oacute;n sempre na lingua demandada polo v
 	// H
 	'help' => '{{Esta p&aacute;xina s&oacute; &eacute; accesible para o responsable do web.}}<p>D&aacute; acceso &aacute;s diferentes funci&oacute;ns suplementarias achegadas polo m&oacute;dulo &laquo;{{Le&nbsp;Couteau&nbsp;Suisse}}&raquo;.',
 	'help2' => 'Versi&oacute;n local: @version@',
-	'help3' => '<p>Ligaz&oacute;ns de documentaci&oacute;n:<br/>• [A&nbsp;Navalla&nbsp;Suiza->http://www.spip-contrib.net/?article2166]@contribs@</p><p>Reinicios:
+	'help3' => '<p>Ligaz&oacute;ns de documentaci&oacute;n:<br />• [A&nbsp;Navalla&nbsp;Suiza->http://www.spip-contrib.net/?article2166]@contribs@</p><p>Reinicios:
 _ • [Ferramentas cacheadas|Volver &aacute; apariencia inicial desta p&aacute;xina->@hide@]
 _ • [De todo o m&oacute;dulo|Volver ao estado inicial do m&oacute;dulo->@reset@]@install@
 </p>',
@@ -360,7 +360,7 @@ Atenci&oacute;n, esta ferramenta, precisa para funcionar do m&oacute;dulo {jQuer
 	'label:liens_interrogation' => 'Protexer os URL :',
 	'label:liens_orphelins' => 'Ligaz&oacute;ns activas :',
 	'label:log_couteau_suisse' => 'Activar :',
-	'label:marqueurs_urls_propres' => 'Engadir os marcadores disociando os obxectos (SPIP>=2.0) :<br/>(ex. : &laquo;&nbsp;-&nbsp;&raquo; para -Mi&ntilde;a-seccion-, &laquo;&nbsp;@&nbsp;&raquo; para @Meu-web@) ',
+	'label:marqueurs_urls_propres' => 'Engadir os marcadores disociando os obxectos (SPIP>=2.0) :<br />(ex. : &laquo;&nbsp;-&nbsp;&raquo; para -Mi&ntilde;a-seccion-, &laquo;&nbsp;@&nbsp;&raquo; para @Meu-web@) ',
 	'label:marqueurs_urls_propres2' => '<:label:marqueurs_urls_propres:>',
 	'label:marqueurs_urls_propres_qs' => '<:label:marqueurs_urls_propres:>',
 	'label:max_auteurs_page' => 'Autors por p&aacute;xina :',
@@ -384,7 +384,7 @@ Atenci&oacute;n, esta ferramenta, precisa para funcionar do m&oacute;dulo {jQuer
 	'label:radio_target_blank3' => 'Nova xanela para as ligaz&oacute;ns externas :',
 	'label:radio_type_urls3' => 'Formato dos URL :',
 	'label:scrollTo' => 'Instalar os m&oacute;dulos {jQuery} seguintes :',
-	'label:separateur_urls_page' => 'Car&aacute;cter de separaci&oacute;n \'type-id\'<br/>(ex. : ?article-123) :',
+	'label:separateur_urls_page' => 'Car&aacute;cter de separaci&oacute;n \'type-id\'<br />(ex. : ?article-123) :',
 	'label:set_couleurs' => 'Conxunto para usar :',
 	'label:spam_mots' => 'Secuencias prohibidas :',
 	'label:spip_options_on' => 'Inclu&iacute;r :',
@@ -401,7 +401,7 @@ Atenci&oacute;n, esta ferramenta, precisa para funcionar do m&oacute;dulo {jQuer
 	'label:titres_etendus' => 'Activr a utilizaci&oacute;n estendida das balizas #TITRE_XXX&nbsp;:',
 	'label:tri_articles' => '<MODIF>A s&uacute;a elecci&oacute;n :',
 	'label:url_arbo_minuscules' => 'Conservar a altura tipogr&aacute;fica dos t&iacute;tulos nos URL :',
-	'label:url_arbo_sep_id' => 'Car&aacute;cter de separaci&oacute;n \'titulo-id\' para o caso de repetici&oacute;n (doublon) :<br/>(non empregue \'/\')',
+	'label:url_arbo_sep_id' => 'Car&aacute;cter de separaci&oacute;n \'titulo-id\' para o caso de repetici&oacute;n (doublon) :<br />(non empregue \'/\')',
 	'label:url_glossaire_externe2' => 'Ligaz&oacute;n sobre o glosario externo :',
 	'label:urls_arbo_sans_type' => 'Mostrar o tipo de obxecto SPIP nos URL :',
 	'label:urls_avec_id' => 'Un id sistem&aacute;ticos, mais...',
@@ -438,7 +438,7 @@ Nota : os paquetes <code>.zip</code> non son reconstru&iacute;dos instantaneamen
 	'message_perso' => 'Un profundo reco&ntilde;ecemento para os tradutores que pasaran por aqu&iacute;. Pat ;-)',
 	'moderation_admins' => 'administradores autenticados',
 	'moderation_message' => 'Este foro est&aacute; moderado a priori&nbsp;: o seu comentario non aparecer&aacute; ata que sexa validada por un administrador do web, salvante o caso de que vostede xa estea identificado e autorizado para publicar comentarios directamente.',
-	'moderation_moderee:description' => 'Permite moderar a moderaci&oacute;n dos foros p&uacute;blicos <b>configurados a priori</b> para os usuarios inscritos.<br/> Exemplo: Eu son o webm&aacute;ster do meu web, e respondo a unha mensaxe dunha persoa, por qu&eacute; debo validar a mi&ntilde;a propia mensaxe ?Moderaci&oacute;n moderada faino por min. [[%moderation_admin%]][[-->%moderation_redac%]][[-->%moderation_visit%]]',
+	'moderation_moderee:description' => 'Permite moderar a moderaci&oacute;n dos foros p&uacute;blicos <b>configurados a priori</b> para os usuarios inscritos.<br /> Exemplo: Eu son o webm&aacute;ster do meu web, e respondo a unha mensaxe dunha persoa, por qu&eacute; debo validar a mi&ntilde;a propia mensaxe ?Moderaci&oacute;n moderada faino por min. [[%moderation_admin%]][[-->%moderation_redac%]][[-->%moderation_visit%]]',
 	'moderation_moderee:nom' => 'Moderaci&oacute;n moderada',
 	'moderation_redacs' => 'redactores autenticados',
 	'moderation_visits' => 'visitantes autenticados',
@@ -462,8 +462,8 @@ Nota : os paquetes <code>.zip</code> non son reconstru&iacute;dos instantaneamen
 	'outil_inactif' => 'Utilidade inactiva',
 	'outil_intro' => 'Esta p&aacute;xina lista as caracter&iacute;sticas do m&oacute;dulo postas &aacute; s&uacute;a disposici&oacute;n. <br /> <br /> Ao premer sobre o nome das ferramentas que aparecen a seguir, seleccione, as que pode cambiar o estado usando o bot&oacute;n central: as ferramentas activadas ser&aacute;n desactivadas e <i> viceversa </ i>. Con cada clic, a descrici&oacute;n aparece a seguir das listas. As categor&iacute;as son pregables e as ferramentas p&oacute;dense ocultar. O dobre clic permite trocar rapidamente unha ferramenta. <br /> <br /> Nun primeiro uso, recom&eacute;ndase activar as ferramentas unha por unha, no caso de apareceren certas incompatibilidades co seu esqueleto, con SPIP ou con outros m&oacute;dulos. <br /> <br /> Nota: a simple carga desta p&aacute;xina compila o conxunto das ferramentas da Navalla Su&iacute;za .',
 	'outil_intro_old' => 'Esta interface &eacute; antiga.<br /><br />Se vostede encontra problema coa utilizaci&oacute;n da <a href=\'./?exec=admin_couteau_suisse\'>nova     interface</a>, non dubide en fac&eacute;rnolo saber no foro <a href=\'http://www.spip-contrib.net/?article2166\'>Spip-Contrib</a>.',
-	'outil_nb' => '@pipe@ : @nb@ ferramenta',
-	'outil_nbs' => '@pipe@ : @nb@ ferramentas',
+	'outil_nb' => '@pipe@&nbsp;: @nb@&nbsp;ferramenta',
+	'outil_nbs' => '@pipe@&nbsp;: @nb@&nbsp;ferramentas',
 	'outil_permuter' => 'Cambiar a ferramenta : &laquo; @text@ &raquo; ?',
 	'outils_actifs' => 'Ferramentas activas :',
 	'outils_caches' => 'Ferramentas ocultas :',

@@ -183,7 +183,7 @@ function cs_log($variable, $prefixe='', $stat='') {
 	if(!defined('_LOG_CS') /*|| !defined('_CS_REPORTALL')*/ || !strlen($variable)) return;
 	if (!is_string($variable)) $variable = var_export($variable, true);
 	spip_log($variable = $rand.$prefixe.$variable);
-	if (defined('_CS_REPORTALL')) echo '<br/>',htmlentities($variable);
+	if (defined('_CS_REPORTALL')) echo '<br />',htmlentities($variable);
 }
 
 // Message de sortie si la zone est non autorisee

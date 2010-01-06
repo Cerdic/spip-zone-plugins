@@ -13,7 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'SPIP_liens:description' => '@puce@ begint Alle band van de plaats bij verstek in het lopende venster van scheepvaart. Maar het kan nuttig zijn om de externe band te openen aan de plaats in een nieuw buitenlands venster  dat komt terug om {target toe te voegen ="_blank"} aan alle bakens &lt;a&gt; voorzien door SPIP van klasse {spip_out}, {spip_url} of {spip_glossaire}. Het is soms noodzakelijk om &eacute;&eacute;n van deze klassen toe te voegen aan de band van het skelet van de plaats (bestanden HTML) teneinde deze functionaliteit zoveel mogelijk uit te breiden. [[%radio_target_blank3%]]
-@puce@ SPIP maakt het mogelijk om woorden te verbinden met hun definitie dank zij de typografische kortere weg <code> [? woord] </code>. Per gebrek (of als u leegte het hokje hieronder laat), stuurt het externe glossarium naar de vrije encyclopedie wikipedia.org terug. Om het te gebruiken adres te kiezen. <br/>Band van test: [? SPIP] [[%url_glossaire_externe2%]]',
+@puce@ SPIP maakt het mogelijk om woorden te verbinden met hun definitie dank zij de typografische kortere weg <code> [? woord] </code>. Per gebrek (of als u leegte het hokje hieronder laat), stuurt het externe glossarium naar de vrije encyclopedie wikipedia.org terug. Om het te gebruiken adres te kiezen. <br />Band van test: [? SPIP] [[%url_glossaire_externe2%]]',
 	'SPIP_liens:description1' => '<REVIEW>@puce@ SPIP voorziet een CSS stijl voor de &laquo;~mailto:~&raquo; linken : een briefje komtzich plaatsen voor ieder maillink; aangezien een aantal browsers kunnen die stijl niet aanpassen (o.a. IE6, IE7 et SAF3), besluit hier dit stijl te houden of niet.
 _ Testlink : [->test@test.com] (herlaad het hele pagina).[[%enveloppe_mails%]]',
 	'SPIP_liens:nom' => 'SPIP en de externe band…',
@@ -185,7 +185,7 @@ De parameter {type} hieronder kan drie verschillende waarden:
 
 [[%decoration_styles%]]',
 	'decoration:nom' => 'Versiering',
-	'decoupe:aide' => 'Blok tabben : <b>&lt;onglets>&lt;/onglets></b><br/>S&eacute;parateur van bladzijdes of tabben&nbsp;: @sep@',
+	'decoupe:aide' => 'Blok tabben : <b>&lt;onglets>&lt;/onglets></b><br />S&eacute;parateur van bladzijdes of tabben&nbsp;: @sep@',
 	'decoupe:aide2' => 'Alias&nbsp;:&nbsp;@sep@',
 	'decoupe:description' => '<MODIF>@puce@ D&eacute;coupe l\'affichage public d\'un article en plusieurs pages gr&acirc;ce &agrave; une pagination automatique. Placez simplement dans votre article quatre signes plus cons&eacute;cutifs (<code>++++</code>) &agrave; l\'endroit qui doit recevoir la coupure.
 
@@ -262,12 +262,12 @@ Opgelet: in de forums, petities, georganiseerde stromen, enz., het beleid van ja
 	'guillemets:nom' => 'Typografische aanhalingstekens',
 
 	// H
-	'help' => '<MODIF>{{Deze bladzijde is alleen toegankelijk voor de verantwoordelijken voor de site.}}<p>Zij geeft toegang tot de verschillende aanvullende functies die door plugin worden gebracht&laquo;{{Le&nbsp;Couteau&nbsp;Suisse}}&raquo;.</p><p>Plaatselijke versie : @version@@distant@<br/>@pack@</p><p>Band van documentatie :<br/>• [Le&nbsp;Couteau&nbsp;Suisse->http://www.spip-contrib.net/?article2166]@contribs@</p><p>R&eacute;initialisations :
+	'help' => '<MODIF>{{Deze bladzijde is alleen toegankelijk voor de verantwoordelijken voor de site.}}<p>Zij geeft toegang tot de verschillende aanvullende functies die door plugin worden gebracht&laquo;{{Le&nbsp;Couteau&nbsp;Suisse}}&raquo;.</p><p>Plaatselijke versie : @version@@distant@<br />@pack@</p><p>Band van documentatie :<br />• [Le&nbsp;Couteau&nbsp;Suisse->http://www.spip-contrib.net/?article2166]@contribs@</p><p>R&eacute;initialisations :
 _ • [Verborgen werktuigen|Aan de eerste schijn van deze bladzijde terugkomen->@hide@]
 _ • [Van hele plugin|Aan de eerste stand van plugin terugkomen->@reset@]@install@
 </p>',
 	'help2' => '<NEW>Version locale : @version@',
-	'help3' => '<NEW><p>Liens de documentation :<br/>&bull; [Le&nbsp;Couteau&nbsp;Suisse->http://www.spip-contrib.net/?article2166]@contribs@</p><p>R&eacute;initialisations :
+	'help3' => '<NEW><p>Liens de documentation :<br />&bull; [Le&nbsp;Couteau&nbsp;Suisse->http://www.spip-contrib.net/?article2166]@contribs@</p><p>R&eacute;initialisations :
 _ &bull; [Des outils cach&eacute;s|Revenir &agrave; l\'apparence initiale de cette page->@hide@]
 _ &bull; [De tout le plugin|Revenir &agrave; l\'&eacute;tat initial du plugin->@reset@]@install@
 </p>',
@@ -352,7 +352,7 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:liens_interrogation' => 'URLs beschermen :',
 	'label:liens_orphelins' => 'Band cliquables :',
 	'label:log_couteau_suisse' => 'Activeren :',
-	'label:marqueurs_urls_propres' => '<NEW>Ajouter les marqueurs dissociant les objets (SPIP>=2.0) :<br/>(ex. : &laquo;&nbsp;-&nbsp;&raquo; pour -Ma-rubrique-, &laquo;&nbsp;@&nbsp;&raquo; pour @Mon-site@) ',
+	'label:marqueurs_urls_propres' => '<NEW>Ajouter les marqueurs dissociant les objets (SPIP>=2.0) :<br />(ex. : &laquo;&nbsp;-&nbsp;&raquo; pour -Ma-rubrique-, &laquo;&nbsp;@&nbsp;&raquo; pour @Mon-site@) ',
 	'label:marqueurs_urls_propres2' => '<:label:marqueurs_urls_propres:>',
 	'label:marqueurs_urls_propres_qs' => '<:label:marqueurs_urls_propres:>',
 	'label:max_auteurs_page' => 'Auteurs per bladzijde :',
@@ -376,7 +376,7 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:radio_target_blank3' => 'Nieuw venster voor de externe band :',
 	'label:radio_type_urls3' => 'Formaat van URLs :',
 	'label:scrollTo' => 'Plaatsen volgend {jQuery} plugins :',
-	'label:separateur_urls_page' => '<NEW>Caract&egrave;re de s&eacute;paration \'type-id\'<br/>(ex. : ?article-123) :',
+	'label:separateur_urls_page' => '<NEW>Caract&egrave;re de s&eacute;paration \'type-id\'<br />(ex. : ?article-123) :',
 	'label:set_couleurs' => 'Te gebruiken set :',
 	'label:spam_mots' => 'Verboden sequenties :',
 	'label:spip_options_on' => '<NEW>Inclure :',
@@ -393,7 +393,7 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:titres_etendus' => '<NEW>Activer l\'utilisation &eacute;tendue des balises #TITRE_XXX&nbsp;:',
 	'label:tri_articles' => '<MODIF>Uw keus :',
 	'label:url_arbo_minuscules' => 'Het breken van de titels in URLs behouden :',
-	'label:url_arbo_sep_id' => 'Het scheidingskarakter \'titel-idem\' in geval van doublon: <br/>(niet gebruiken \'/\')',
+	'label:url_arbo_sep_id' => 'Het scheidingskarakter \'titel-idem\' in geval van doublon: <br />(niet gebruiken \'/\')',
 	'label:url_glossaire_externe2' => 'Band naar het externe glossarium :',
 	'label:urls_arbo_sans_type' => 'Het soort onderwerp SPIP in URLs te kennen geven :',
 	'label:urls_avec_id' => '<NEW>Un id syst&eacute;matique, mais...',
@@ -453,8 +453,8 @@ Note : les paquets <code>.zip</code> n\'&eacute;tant pas reconstruits instantan&
 	'outil_inactif' => 'Inactief werktuig',
 	'outil_intro' => '<MODIF>Deze bladzijde zet de functies van plugin op een lijst die uw ter beschikking worden gesteld.<br /><br />Door op de naam van de werktuigen te klikken hieronder, selecteert u degenen waarvan zult kunnen verwisselen u de stand met behulp van de centrale knoop: de geactiveerde werktuigen d&eacute;sactiv&eacute;s en <i>vice versa</i>. Aan elke klik, blijkt de beschrijving onder de lijsten. De categorie&euml;n zijn opvouwbaar en de werktuigen kunnen verborgen worden. Het dubbele-Voor een eerste gebruik, wordt hij aanbevolen om de werktuigen &eacute;&eacute;n voor &eacute;&eacute;n te activeren, ingeval zeker de onverenigbaarheden met uw skelet, SPIP of anderen plugins zouden blijkenklik maakt het mogelijk om een werktuig snel te verwisselen.<br /><br />.<br /><br />Nota : de eenvoudige lading van deze bladzijde compileert het geheel van de werktuigen van het Zwitserland Mes opnieuw.',
 	'outil_intro_old' => 'Deze interface is oud.<br /><br />Als u problemen in het gebruik van <a href=\' ./? exec=admin_couteau_suisse\'> nieuwe interface ondervindt</a>, aarzelt niet aandeel ervan doen over het forum van <a href=\'http://www.spip-contrib.net/?article2166\'>Spip-Contrib</a>.',
-	'outil_nb' => '@pipe@ : @nb@ werktuig',
-	'outil_nbs' => '@pipe@ : @nb@ werktuigen',
+	'outil_nb' => '@pipe@&nbsp;: @nb@&nbsp;werktuig',
+	'outil_nbs' => '@pipe@&nbsp;: @nb@&nbsp;werktuigen',
 	'outil_permuter' => 'Het werktuig verwisselen : &laquo; @text@ &raquo; ?',
 	'outils_actifs' => 'Actieve werktuigen :',
 	'outils_caches' => 'Verborgen werktuigen :',

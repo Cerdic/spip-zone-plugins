@@ -16,7 +16,7 @@ if(defined('_LOG_CS')) cs_log("couteau_suisse_install($action)");
 		case 'test':
 			// affichage d'un lien ici, puisque le pipeline 'affiche_gauche' n'est pas pris en compte dans 'admin_plugin'...
 			if(_request('exec') == 'admin_plugin') {
-				if(!defined('_SPIP19300')) echo '<br/>';
+				if(!defined('_SPIP19300')) echo '<br />';
 				include_spip('inc/presentation');
 				echo debut_cadre_enfonce('', true),
 					icone_horizontale(_T('couteau:titre'), generer_url_ecrire('admin_couteau_suisse'), find_in_path('img/couteau-24.gif'), '', false),

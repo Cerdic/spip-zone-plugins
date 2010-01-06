@@ -184,7 +184,7 @@ The parameter {type} above can be one of three values:
 
 [[%decoration_styles%]]',
 	'decoration:nom' => 'Decoration',
-	'decoupe:aide' => 'Tabbed block: <b>&lt;onglets>&lt;/onglets></b><br/>Page or tab separator: @sep@',
+	'decoupe:aide' => 'Tabbed block: <b>&lt;onglets>&lt;/onglets></b><br />Page or tab separator: @sep@',
 	'decoupe:aide2' => 'Alias:&nbsp;@sep@',
 	'decoupe:description' => '@puce@ Divides the display of an article into pages using automatic page numbering. Simply place four consecutive + signes (<code>++++</code>) where you wish a page break to occur.
 
@@ -273,7 +273,7 @@ Thus multi blocks are always displayed in the language requested by the visitor.
 	// H
 	'help' => '{{This page is only accessible to main site administrators.}} It gives access to the configuration of some additional functions of the {{Penknife}}.',
 	'help2' => 'Local version: @version@',
-	'help3' => '<p>Documentation links:<br/>• [Le&nbsp;Couteau&nbsp;Suisse->http://www.spip-contrib.net/?article2166]@contribs@</p><p>Resets :
+	'help3' => '<p>Documentation links:<br />• [Le&nbsp;Couteau&nbsp;Suisse->http://www.spip-contrib.net/?article2166]@contribs@</p><p>Resets :
 _ • [Hidden tools|Return to the original appearance of this page->@hide@]
 _ • [Whole plugin|Reset to the original state of the plugin->@reset@]@install@
 </p>',
@@ -352,7 +352,7 @@ N.B. This tool requires the {Round Corners} jQuery plugin in order to function. 
 	'label:liens_interrogation' => 'Protect URLs:',
 	'label:liens_orphelins' => 'Clickable links:',
 	'label:log_couteau_suisse' => 'Activate:',
-	'label:marqueurs_urls_propres' => 'Add markers to distinguish between objects (SPIP>=2.0) :<br/>(e.g.. : "&nbsp;-&nbsp;" for -My-section-, "&nbsp;@&nbsp;" for @My-site@) ',
+	'label:marqueurs_urls_propres' => 'Add markers to distinguish between objects (SPIP>=2.0) :<br />(e.g.. : "&nbsp;-&nbsp;" for -My-section-, "&nbsp;@&nbsp;" for @My-site@) ',
 	'label:marqueurs_urls_propres2' => '<:label:marqueurs_urls_propres:>',
 	'label:marqueurs_urls_propres_qs' => '<:label:marqueurs_urls_propres:>',
 	'label:max_auteurs_page' => 'Authors per page:',
@@ -376,7 +376,7 @@ N.B. This tool requires the {Round Corners} jQuery plugin in order to function. 
 	'label:radio_target_blank3' => 'New window for external links:',
 	'label:radio_type_urls3' => 'URL format:',
 	'label:scrollTo' => 'Instal the following {jQuery} plugins:',
-	'label:separateur_urls_page' => 'Separating character \'type-id\'<br/>(eg.: ?article-123):',
+	'label:separateur_urls_page' => 'Separating character \'type-id\'<br />(eg.: ?article-123):',
 	'label:set_couleurs' => 'Set to be used ',
 	'label:spam_mots' => 'Prohibited sequences:',
 	'label:spip_options_on' => 'Include',
@@ -393,7 +393,7 @@ N.B. This tool requires the {Round Corners} jQuery plugin in order to function. 
 	'label:titres_etendus' => 'Activate the extended use of the tags #TITRE_XXX:',
 	'label:tri_articles' => '<MODIF>Your choice:',
 	'label:url_arbo_minuscules' => 'Preserve the case of titles in URLs:',
-	'label:url_arbo_sep_id' => 'Separation character \'title-id\', used in the event of homonyms:<br/>(do not use \'/\')',
+	'label:url_arbo_sep_id' => 'Separation character \'title-id\', used in the event of homonyms:<br />(do not use \'/\')',
 	'label:url_glossaire_externe2' => 'Link to external glossary:',
 	'label:urls_arbo_sans_type' => 'Show the type of SPIP object in URLs:',
 	'label:urls_avec_id' => 'A systematic id, but ...',
@@ -448,8 +448,8 @@ _ • {By default}: automatic replacement (from SPIP version 2.0).
 	'outil_inactif' => 'Inactive tool',
 	'outil_intro' => 'This page lists the functionalities which the plugin makes available to you.<br /><br />By clicking on the names of the tools below, you choose the ones which you can then switch on/off using the central button: active tools will be disabled and <i>vice versa</i>. When you click, the tools description is shown above the list. The tool categories are collapsible to hide the tools they contain. A double-click allows you to directly switch a tool on/off.<br /><br />For first use, it is recommended to activate tools one by one, thus reavealing any incompatibilites with your templates, with SPIP or with other plugins.<br /><br />N.B.: simply loading this page recompiles all the Penknife tools.',
 	'outil_intro_old' => 'This is the old interface.<br /><br />If you have difficulties in using <a href=\\\'./?exec=admin_couteau_suisse\\\'>the new interface</a>, please let us know in the forum of <a href=\\\'http://www.spip-contrib.net/?article2166\\\'>Spip-Contrib</a>.',
-	'outil_nb' => '@pipe@ : @nb@ tool',
-	'outil_nbs' => '@pipe@ : @nb@ tools',
+	'outil_nb' => '@pipe@&nbsp;: @nb@&nbsp;tool',
+	'outil_nbs' => '@pipe@&nbsp;: @nb@&nbsp;tools',
 	'outil_permuter' => 'Switch the tool: &laquo; @text@ &raquo; ?',
 	'outils_actifs' => 'Activated tools:',
 	'outils_caches' => 'Hidden tools:',
