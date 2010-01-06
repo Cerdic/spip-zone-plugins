@@ -71,19 +71,19 @@ function chatons_PP_pre_charger($flux) {
 		$c = &$chatons[0][$i];
 		$id = 'chaton_'.str_replace(':','',$c);
 		$r[] = array(
-				"id"          => $id,
-				"name"        => _T('couteau:chatons_inserer', array('chaton'=>$c)),
-				"className"   => $id,
-				"replaceWith" => $c,
-				"display"     => true);
+			"id" => $id,
+			"name" => _T('couteau:pp_chatons_inserer', array('chaton'=>$c)),
+			"className" => $id,
+			"replaceWith" => $c,
+			"display" => true);
 	}
 	$r = array(
-		"id"          => 'cs_chatons_drop',
-		"name"        => _T('couteau:chatons_inserer_drop'),
-		"className"   => 'cs_chatons_drop',
+		"id" => 'cs_chatons_drop',
+		"name" => _T('couteau:pp_chatons_inserer_drop'),
+		"className" => 'cs_chatons_drop',
 		"replaceWith" => '',
-		"display"     => true,
-		"dropMenu"	=> $r,
+		"display" => true,
+		"dropMenu" => $r,
 	);
 	foreach(cs_pp_liste_barres('chatons') as $b)
 		$flux[$b]->ajouterApres('grpCaracteres', $r);

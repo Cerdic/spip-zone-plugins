@@ -79,7 +79,7 @@ function cs_supprime_notes($texte) {
 }
 
 // filtre appliquant les traitements SPIP d'un champ (et eventuellement d'un type d'objet) sur un texte
-// (voir la fonction champs_traitements($p) dans : public/refereces.php)
+// (voir la fonction champs_traitements($p) dans : public/references.php)
 // => permet d'utiliser les balises etoilees : #TEXTE*|mon_filtre|cs_traitements{TEXTE,articles}
 // ce mecanisme est a preferer au traditionnel #TEXTE*|mon_filtre|propre
 // cs_traitements() consulte simplement la globale $table_des_traitements et applique le traitement adequat

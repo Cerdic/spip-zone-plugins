@@ -143,7 +143,6 @@ function cs_smileys_BarreTypo($tr) {
 	$res = '';
 	for ($i=0; $i<$max; $i++)
 		$res .= "<a href=\"javascript:barre_inserer('{$smileys[0][$i]}',@@champ@@)\">{$smileys[1][$i]}</a>";
-
 	return $tr.'<tr><td><@@span@@>'._T('couteauprive:smileys:nom').'</span>&nbsp;'.echappe_retour($res, 'SMILE').'</td></tr>';
 }
 
@@ -158,18 +157,18 @@ function cs_smileys_PP_pre_charger($flux) {
 	for ($i=0; $i<$max; $i++) {
 		$id = 'smiley_'.str_replace('.png','',$smileys[2][$i]);
 		$r[] = array(
-				"id"          => $id,
-				"name"        => _T('couteau:smileys_inserer', array('smiley'=>$smileys[0][$i])),
-				"className"   => $id,
+				"id" => $id,
+				"name" => _T('couteau:pp_smileys_inserer', array('smiley'=>$smileys[0][$i])),
+				"className" => $id,
 				"replaceWith" => $smileys[0][$i],
-				"display"     => true);
+				"display" => true);
 	}
 	$r = array(
-		"id"          => 'cs_smileys_drop',
-		"name"        => _T('couteau:smileys_inserer', array('smiley'=>'')),
-		"className"   => 'cs_smileys_drop',
+		"id" => 'cs_smileys_drop',
+		"name" => _T('couteau:pp_smileys_inserer', array('smiley'=>'')),
+		"className" => 'cs_smileys_drop',
 		"replaceWith" => '',
-		"display"     => true,
+		"display" => true,
 		"dropMenu"	=> $r,
 	);
 	foreach(cs_pp_liste_barres('smileys') as $b)

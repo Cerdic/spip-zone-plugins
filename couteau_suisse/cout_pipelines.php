@@ -239,16 +239,37 @@ function couteau_suisse_porte_plume_barre_pre_charger($flux){
 	global $cs_metas_pipelines;
 	if (isset($cs_metas_pipelines['porte_plume_barre_pre_charger']))
 		eval($cs_metas_pipelines['porte_plume_barre_pre_charger']);
+	$barres = pipeline('porte_plume_cs_pre_charger', array());
+	$r = array(
+		"id" => 'couteau_suisse_drop',
+		"name" => _T('couteau:pp_couteau_suisse_drop'),
+		"className" => 'couteau_suisse_drop',
+		"replaceWith" => '',
+		"display" => true,
+	);
+	foreach($barres as $barre=>$menu) {
+		$r["dropMenu"] = $menu;
+		$flux[$barre]->ajouterApres('grpCaracteres', $r);
+	}
 	return $flux;
 }
 
 function couteau_suisse_porte_plume_lien_classe_vers_icone($flux){
 	global $cs_metas_pipelines;
 	if (isset($cs_metas_pipelines['porte_plume_lien_classe_vers_icone'])) {
+		$flux['couteau_suisse_drop'] = 'couteau-19.png';
 		// chemin des icones-typo de couleur
 		_chemin(_chemin(sous_repertoire(_DIR_VAR, 'couteau-suisse')));
 		eval($cs_metas_pipelines['porte_plume_lien_classe_vers_icone']);
 	}
+	return $flux;
+}
+
+// pipeline maison : bouton sous un drop Couteau Suisse
+function couteau_suisse_porte_plume_cs_pre_charger($flux){
+	global $cs_metas_pipelines;
+	if (isset($cs_metas_pipelines['porte_plume_cs_pre_charger']))
+		eval($cs_metas_pipelines['porte_plume_cs_pre_charger']);
 	return $flux;
 }
 

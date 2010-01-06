@@ -148,17 +148,17 @@ function decoration_PP_pre_charger($flux) {
 	foreach($balises[4] as $b) {
 		$id = 'decoration_'.$b[0];
 		$r[] = array(
-				"id"          => $id,
-				"name"        => _T('couteau:decoration_inserer', array('racc'=>$b[0], 'balise'=>$b[2])),
-				"className"   => $id,
+				"id" => $id,
+				"name" => _T('couteau:pp_decoration_inserer', array('racc'=>$b[0], 'balise'=>$b[2])),
+				"className" => $id,
 				"selectionType" => $b[2]=='div'?"line":"word",
 				// $b[1] est vrai si la balise <racc/> est interdite
 				"replaceWith" => "function(h){ return outil_decoration(h.selection, '$b[0]', '$b[2]', '".($b[1]?'':"<$b[0]/>")."'); }",
-				"display"     => true);
+				"display" => true);
 	}
 	$r = array(
 		"id"	=> 'cs_decoration_drop',
-		"name"	=> _T('couteau:decoration_inserer_drop'),
+		"name"	=> _T('couteau:pp_decoration_inserer_drop'),
 		"className"	=> 'cs_decoration_drop',
 		"replaceWith"	=> '',
 		"display"	=> true,

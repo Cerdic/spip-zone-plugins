@@ -587,8 +587,9 @@ span.cs_pagination_off {color: lightgrey; font-weight: bold; text-decoration: un
 	 traitement:TEXTE/breves:pre_propre,
 	 traitement:TEXTE/rubriques:pre_propre' => 'cs_onglets',
 	'categorie' => 'typo-racc',
-	'pipeline:bt_toolbox' => 'decoupe_BarreTypo',
 	'pipeline:nettoyer_raccourcis_typo' => 'decoupe_nettoyer_raccourcis',
+	'pipeline:porte_plume_cs_pre_charger' => 'decoupe_CS_pre_charger',
+	'pipeline:porte_plume_lien_classe_vers_icone' => 'decoupe_PP_icones',
 ));
 
 // couplage avec l'outil 'decoupe', donc 'sommaire' doit etre place juste apres :

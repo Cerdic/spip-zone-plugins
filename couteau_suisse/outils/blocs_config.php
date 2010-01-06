@@ -20,7 +20,8 @@ var blocs_slide = [[%blocs_slide%]];
 		jQuery.getScript(cs_CookiePlugin, cs_blocs_cookie); }',
 	'jquery' => 'oui',
 	'pipeline:pre_typo' => 'blocs_pre_typo',
-	'pipeline:bt_toolbox' => 'blocs_BarreTypo',
+	'pipeline:porte_plume_cs_pre_charger' => 'blocs_CS_pre_charger',
+	'pipeline:porte_plume_lien_classe_vers_icone' => 'blocs_PP_icones',
 );}
 
 # Definition des variables utilisee ci-dessus

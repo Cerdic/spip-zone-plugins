@@ -16,15 +16,35 @@ function decoupe_raccourcis() {
 	return _T('couteauprive:decoupe:aide', array('sep' => '<b>'._decoupe_SEPARATEUR.'</b>')).$compat;
 }
 
-// cette fonction renvoie une ligne de tableau entre <tr></tr> afin de l'inserer dans la Barre Typo V2, si elle est presente
-function decoupe_BarreTypo($tr) {
-	return $tr.'<tr><td>'._T('couteauprive:decoupe:nom').' (en projet)</td></tr>';
-}
-
 function decoupe_nettoyer_raccourcis($texte) {
 	if (defined('_decoupe_COMPATIBILITE'))
 		return str_replace(array(_decoupe_SEPARATEUR, _decoupe_COMPATIBILITE), '<p>&nbsp;</p>', $texte);
 	return str_replace(_decoupe_SEPARATEUR, '<p>&nbsp;</p>', $texte);
+}
+
+// 2 fonctions pour le plugin Porte Plume, s'il est present (SPIP>=2.0)
+function decoupe_CS_pre_charger($flux) {
+	$r = array(array(
+		"id" => 'decoupe_pages',
+		"name" => _T('couteau:pp_decoupe_separateur'),
+		"className" => 'decoupe_pages',
+		"replaceWith" => "\n"._decoupe_SEPARATEUR."\n",
+		"display" => true), array(
+		"id" => 'decoupe_onglets',
+		"name" => _T('couteau:pp_decoupe_onglets'),
+		"className" => 'decoupe_onglets',
+		"replaceWith" => "\n<onglets>"._T('couteau:pp_votre_titre', array('nb'=>1))."\n\n"._T('couteau:pp_votre_texte')."\n\n"
+			._decoupe_SEPARATEUR._T('couteau:pp_votre_titre', array('nb'=>2))."\n\n"._T('couteau:pp_votre_texte')."\n\n"
+			._decoupe_SEPARATEUR._T('couteau:pp_votre_titre', array('nb'=>3))."\n\n"._T('couteau:pp_votre_texte')."\n\n</onglets>\n",
+		"display" => true));
+	foreach(cs_pp_liste_barres('decoupe') as $b)
+		$flux[$b] = array_merge($flux[$b], $b=='forum'?array($r[1]):$r);
+	return $flux;
+}
+function decoupe_PP_icones($flux) {
+	$flux['decoupe_pages'] = 'decoupe_pages.png';
+	$flux['decoupe_onglets'] = 'decoupe_onglets.png';
+	return $flux;
 }
 
 ?>

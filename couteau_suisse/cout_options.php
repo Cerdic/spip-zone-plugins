@@ -15,6 +15,10 @@ if (!isset($GLOBALS['spip_pipeline']['pre_description_outil']))
 // post_description_outil : 2e pipeline de pre_affichage, ici le texte est quasi definitif
 #$GLOBALS['spip_pipeline']['post_description_outil']='';
 
+// Declaration d'un pipeline servant a inserer un bouton sous la baniere du Couteau Suisse
+if (!isset($GLOBALS['spip_pipeline']['porte_plume_cs_pre_charger']))
+	$GLOBALS['spip_pipeline']['porte_plume_cs_pre_charger']='';
+
 // liste des outils et des variables
 global $metas_vars, $metas_outils;
 if (!isset($GLOBALS['meta']['tweaks_actifs'])) {

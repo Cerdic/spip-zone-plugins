@@ -60,9 +60,27 @@ function blocs_pre_typo($texte) {
 	return cs_echappe_balises('', 'blocs_rempl', $texte);
 }
 
-// cette fonction renvoie une ligne de tableau entre <tr></tr> afin de l'inserer dans la Barre Typo V2, si elle est presente
-function blocs_BarreTypo($tr) {
-	return $tr.'<tr><td>'._T('couteauprive:blocs:nom').' (en projet)</td></tr>';
+// 2 fonctions pour le plugin Porte Plume, s'il est present (SPIP>=2.0)
+function blocs_CS_pre_charger($flux) {
+	$r = array(array(
+		"id" => 'blocs_bloc',
+		"name" => _T('couteau:pp_blocs_bloc'),
+		"className" => 'blocs_bloc',
+		"replaceWith" => "\n<bloc>"._T('couteau:pp_un_titre')."\n\n"._T('couteau:pp_votre_texte')."\n</bloc>\n",
+		"display" => true), array(
+		"id" => 'blocs_visible',
+		"name" => _T('couteau:pp_blocs_visible'),
+		"className" => 'blocs_visible',
+		"replaceWith" => "\n<visible>"._T('couteau:pp_un_titre')."\n\n"._T('couteau:pp_votre_texte')."\n</visible>\n",
+		"display" => true));
+	foreach(cs_pp_liste_barres('blocs') as $b)
+		$flux[$b] = array_merge($flux[$b], $r);
+	return $flux;
+}
+function blocs_PP_icones($flux) {
+	$flux['blocs_bloc'] = 'bloc_invisible.png';
+	$flux['blocs_visible'] = 'bloc_visible.png';
+	return $flux;
 }
 
 ?>

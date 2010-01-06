@@ -67,7 +67,7 @@ cs_log("couleurs_installe()");
 
 	if(defined('_DIR_PLUGIN_PORTE_PLUME')) {
 		foreach(array('texte','fond') as $x) {
-			$texte = _T('couteau:couleur_icone_'.$x);
+			$texte = _T('couteau:pp_couleur_icone_'.$x);
 			foreach ($couleurs[2] as $i=>$c) {
 				// icone de la couleur $i
 				$color = isset($html[$c])?$html[$c]:str_replace('#','',$c);
@@ -192,32 +192,32 @@ function couleurs_PP_pre_charger($flux) {
 	foreach($couleurs[2] as $i=>$v) {
 		$id = 'couleur_texte_'.str_replace(' ','_',$i);
 		$r1[] = array(
-				"id"          => $id,
-				"name"        => _T('couteau:couleur_texte', array('couleur'=>$i)),
-				"className"   => $id, 
+				"id" => $id,
+				"name" => _T('couteau:pp_couleur_texte', array('couleur'=>$i)),
+				"className" => $id, 
 				"openWith" => "[$i]", 
 				"closeWith" => "[/$i]",
 				"selectionType" => "word",
-				"display"     => true);
+				"display" => true);
 	}
 	if(_COULEURS_FONDS===1) foreach($couleurs[2] as $i=>$v) {
 		$id = 'couleur_fond_'.str_replace(' ','_',$i);
 		$r2[] = array(
-				"id"          => $id,
-				"name"        => _T('couteau:couleur_fond', array('couleur'=>$i)),
-				"className"   => $id, 
+				"id" => $id,
+				"name" => _T('couteau:pp_couleur_fond', array('couleur'=>$i)),
+				"className" => $id, 
 				"openWith" => "[fond $i]", 
 				"closeWith" => "[/fond $i]",
 				"selectionType" => "word",
-				"display"     => true);
+				"display" => true);
 	}
 
 	$a = array(
-		"id"          => 'cs_couleur_texte',
-		"name"        => _T('couteau:colorer_texte'),
-		"className"   => 'cs_couleur_texte',
+		"id" => 'cs_couleur_texte',
+		"name" => _T('couteau:colorer_texte'),
+		"className" => 'cs_couleur_texte',
 		"replaceWith" => '',
-		"display"     => true,
+		"display" => true,
 		"dropMenu"	=> $r1,
 	);
 	foreach($barres = cs_pp_liste_barres('couleurs') as $b)
@@ -225,11 +225,11 @@ function couleurs_PP_pre_charger($flux) {
 	if(!count($r2)) return $flux;
 
 	$a = array(
-		"id"          => 'cs_couleur_fond',
-		"name"        => _T('couteau:colorer_fond'),
-		"className"   => 'cs_couleur_fond',
+		"id" => 'cs_couleur_fond',
+		"name" => _T('couteau:colorer_fond'),
+		"className" => 'cs_couleur_fond',
 		"replaceWith" => '',
-		"display"     => true,
+		"display" => true,
 		"dropMenu"	=> $r2,
 	);
 	foreach($barres as $b)
@@ -242,8 +242,8 @@ function couleurs_PP_icones($flux){
 	$couleurs = unserialize($GLOBALS['meta']['cs_couleurs']);
 	// icones utilisees. Attention : mettre les drop-boutons en premier !!
 	$flux = array_merge($flux, array(
-		'cs_couleur_texte' => couleurs_creer_icone_barre(_T('couteau:couleur_icone_texte'), '00BFFF'),//'color_swatch.png',
-		'cs_couleur_fond' => couleurs_creer_icone_barre(_T('couteau:couleur_icone_fond'), '00BFFF'),//'color_swatch.png',
+		'cs_couleur_texte' => couleurs_creer_icone_barre(_T('couteau:pp_couleur_icone_texte'), '00BFFF'),//'color_swatch.png',
+		'cs_couleur_fond' => couleurs_creer_icone_barre(_T('couteau:pp_couleur_icone_fond'), '00BFFF'),//'color_swatch.png',
 	), $couleurs[3]);
 	return $flux;
 }
