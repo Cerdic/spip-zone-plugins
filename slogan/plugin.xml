@@ -8,7 +8,7 @@
 	{{Ajouter balise #SLOGAN_SITE_SPIP}}<br /><br />
 	Ce plugin vous permet d'ajouter une balise ind&#233;pendante propre au site spip : #SLOGAN_SITE_SPIP.
 	</description>
-	<lien></lien>
+	<lien>http://www.spip-contrib.net/Un-slogan-pour-votre-site-SPIP-2-0</lien>
 	<prefix>slogan</prefix>
 	<fonctions>slogan_balise.php</fonctions>
 	<necessite id="SPIP" version="[2.0.0;]" />
