@@ -24,13 +24,9 @@ function valide_sondage()
 	$mel_confirm = _request('mel_confirm');
 
 	$renvoyer_image = false;
-	
+
 	if ($verif_cookie == 'oui' AND ($id_donnee = intval($id_donnee))) {
-		//$query = "SELECT * FROM spip_forms_donnees WHERE id_donnee=$id_donnee AND confirmation='attente'";
-		//$result = spip_query($query);
-		
 		//adaptation SPIP2
-		//if ($row = spip_fetch_array($result)) {
 		if ($row = sql_fetsel("*","spip_forms_donnees","id_donnee=".inval($id_donnee)." AND confirmation='attente'")) {
 			$id_form = $row['id_form'];
 			$cookie = $row['cookie'];
@@ -44,26 +40,15 @@ function valide_sondage()
 				// Ensuite verifier que le cookie n'a pas deja ete utilise pour le meme formulaire
 				$query = "SELECT id_donnee FROM spip_forms_donnees ".
 					"WHERE id_form=$id_form AND id_donnee!=$id_donnee AND confirmation='valide' AND cookie='".addslashes($cookie)."'";
-				//adapatation SPIP2
-				//if (!spip_num_rows(spip_query($query))) {
-				//if (!sql_count(spip_query($query))) {
-				if(!sql_countsel("spip_forms_donnees","id_form=".intval($id_form)." AND id_donnee!=".intval($id_donnee)." AND confirmation='valide'"))
-					//adaptation SPIP2
-					//$query = "UPDATE spip_forms_donnees SET confirmation='valide' WHERE id_donnee=$id_donnee";
-					//spip_query($query);
-					sql_update("spip_forms_donnees",array('confirmation'=>'valide'),"id_donnee=".intval($id_donnee))
+				if (!sql_countsel("spip_forms_donnees","id_form=".intval($id_form)." AND id_donnee!=".intval($id_donnee)." AND confirmation='valide'")) {
+					sql_update("spip_forms_donnees",array('confirmation'=>'valide'),"id_donnee=".intval($id_donnee));
 				}
 			}
 		}
 		$renvoyer_image = true;
-	}
-	else if ($mel_confirm == 'oui' AND ($id_donnee = intval($id_donnee))) {
-		//$query = "SELECT * FROM spip_forms_donnees WHERE id_donnee=$id_donnee";
-		//$result = spip_query($query);
-		//if ($row = spip_fetch_array($result)) {
+	} else if ($mel_confirm == 'oui' AND ($id_donnee = intval($id_donnee))) {
 		if ($row = sql_fetsel("*","spip_forms_donnees","id_donnee=".intval($id_donnee))) {
 			$id_form = $row['id_form'];
-			$cookie = $row['cookie'];
 			// D'abord verifier que l'URL est legitime, donc que la demande a bien
 			// ete generee par SPIP
 			$hash_verif = md5("forms confirme reponse $id_donnee".hash_env());
@@ -80,7 +65,6 @@ function valide_sondage()
 		$image = pack("H*", $image);
 		$size = strlen($image);
 
-		Header("Content-Type: image/gif");
 		Header("Content-Length: ".$size);
 		Header("Cache-Control: no-cache,no-store");
 		Header("Pragma: no-cache");
