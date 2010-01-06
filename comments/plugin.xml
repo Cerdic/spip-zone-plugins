@@ -5,11 +5,12 @@
 <version>0.3</version>
 <etat>dev</etat>
 <description>PLUGIN INSTABLE, encore en d&eacute;veloppement&nbsp;!
-_ Tout pour construire des commentaires !
-- Noisette &laquo;&nbsp;<code>comments</code>&nbsp;&raquo; pour afficher une liste de commentaires et le forum ad hoc, &agrave; la suite d'un article par exemple.
-- Ce plugin remplace le traditionnel <code>#FORMULAIRE_FORUM</code> de SPIP par un formulaire de commentaires (plus succint) ;
-- noisette &laquo;&nbsp;<code>comments-list</code>&nbsp;&raquo; pour afficher une liste des commentaires ; 
+_ Tout pour construire des commentaires&nbsp;:
+- Noisette &laquo;&nbsp;<code>comments</code>&nbsp;&raquo; prete a l'emploi, pour afficher la totale : une liste de commentaires et le forum ad hoc, &agrave; la suite d'un article par exemple.
+- noisette &laquo;&nbsp;<code>comments-list</code>&nbsp;&raquo; pour afficher une liste des commentaires seulement ; 
 - noisette &laquo;&nbsp;<code>comments-links</code>&nbsp;&raquo; pour afficher une liste de liens vers les derniers commentaires.
+- Ce plugin remplace le traditionnel <code>#FORMULAIRE_FORUM</code> de SPIP par un formulaire de commentaires (plus succint).
+- Et peut-etre d'autres choses en vrac et en preparation...
 </description>
 <lien>[Notes de d&eacute;veloppement du plugin->http://www.spip-contrib.net/?article3173]</lien>
 <prefix>comments</prefix>

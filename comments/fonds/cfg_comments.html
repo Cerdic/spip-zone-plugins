@@ -1,0 +1,69 @@
+<!-- descriptif=
+<img src='#CHEMIN{icon-64.png}' alt='' style="float:#LANG_RIGHT;" />
+<strong>Configuration des commentaires</strong>
+<p class="explication">ATTENTION !<br />Ce panneau de configuration est en construction et ne fonctionne pas !</p>
+<p><a href="http://www.spip-contrib.net/plugin-comments-notes-de" class="spip_out">Notes de developpement du plugin</a></p>
+<p class="explication" style="display: none;">Pour toute autre personnalisation, modifiez les fichiers.</p>
+-->
+
+[(#REM) titre=Commentaires]
+[(#REM) icone=icon-20.png]
+
+#CACHE{0}
+
+<div class="formulaire_spip">
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+	<fieldset>
+    	<legend><:comments:forum_longueur:></legend>
+		<ul>
+			<li class="comments_forum_longueur_mini">
+				<label for="forum_longueur_mini"><:comments:forum_longueur_mini:></label>
+				<input type="text" name="forum_longueur_mini"[ value="(#ENV{forum_longueur_mini}|sinon{10})"] id="forum_longueur_mini" style="width: 4em;" disabled="disabled" />
+			</li>
+			<li class="comments_forum_longueur_maxi">
+				<label for="forum_longueur_maxi"><:comments:forum_longueur_maxi:></label>
+				<input type="text" name="forum_longueur_maxi"[ value="(#ENV{forum_longueur_maxi}|sinon{1500})"] id="forum_longueur_maxi" style="width: 4em;" />
+			</li>
+		</ul>
+	</fieldset>
+	<fieldset>
+    	<legend>Avatars</legend>
+		<ul>
+			<li class="comments_avatars">
+				<label for="avatars">Afficher la trombine de l'auteur</label>
+				<input type="checkbox" name="avatars"[ checked="(#ENV{avatars}|sinon{'checked'})"] id="avatars" />
+			</li>
+			<li class="comments_avatar_size">
+				<label for="avatar_size">Taille des avatars (en&nbsp;pixels)</label>
+				<input type="text" name="avatar_size"[ value="(#ENV{avatar_size}|sinon{32})"] disabled="disabled" id="avatar_size" style="width: 4em;" />
+			</li>
+		</ul>
+	</fieldset>
+	<fieldset style="display: none;">
+    	<legend>Permalien</legend>
+        <p>Afficher le lien permanent (permalink) vers le commentaire</p>
+		<ul>
+			<li class="comments_permalink">
+				<label for="comments_permalink">#</label>
+				<input type="radio" name="comments_permalink" disabled="disabled" id="comments_permalink_diese" />
+			</li>
+			<li class="comments_permalink">
+				<label for="comments_permalink">Picto</label>
+				<input type="radio" name="comments_permalink" disabled="disabled" id="comments_permalink_picto" />
+			</li>
+			<li class="comments_permalink">
+				<label for="comments_permalink">Compteur</label>
+				<input type="radio" name="comments_permalink" checked="checked" id="comments_permalink_compteur" />
+			</li>
+			<li class="comments_permalink">
+				<label for="comments_permalink">Aucun</label>
+				<input type="radio" name="comments_permalink" disabled="disabled" id="comments_permalink_none" />
+			</li>
+		</ul>
+	</fieldset>
+	<div class="boutons">
+		<input type="submit" name="_cfg_ok" value="<:OK:>" />
+		<input type="submit" name="_cfg_delete" value="<:reset:>" />
+	</div>
+</form>
+</div>

@@ -29,6 +29,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'forum_voir_avant' => 'Pr&eacute;visualiser',
 'forum_message_definitif' => 'Confirmer l\'envoi',
 
+// Panneau CFG
+'forum_longueur' => 'Longueur des messages',
+'forum_longueur_mini' => 'Longueur minimale',
+'forum_longueur_maxi' => 'Longueur maximale',
+
+
 );
 
 ?>
