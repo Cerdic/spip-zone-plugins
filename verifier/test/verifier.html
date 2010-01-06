@@ -59,6 +59,10 @@ echo "$un_autre_chaine 5 caractères max ?";
 var_dump(verifier($un_autre_chaine, 'taille', array('max'=>5)));
 echo "$un_autre_chaine 4 caractères mini ?";
 var_dump(verifier($un_autre_chaine, 'taille', array('min'=>4)));
+echo "$une_chaine de 3 caractères ?";
+var_dump(verifier($une_chaine, 'taille', array('egal'=>3)));
+echo "$un_autre_chaine de 3 caractères ?";
+var_dump(verifier($un_autre_chaine, 'taille', array('egal'=>3)));
 
 ?>
 </pre>

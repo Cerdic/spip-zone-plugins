@@ -16,6 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_siren' => 'Le num&eacute;ro de SIREN n\'est pas valide.',
 'erreur_siret' => 'Le num&eacute;ro de SIRET n\'est pas valide.',
 'erreur_taille_entre' => 'La valeur doit comprendre entre @min@ et @max@ caract&egrave;res.',
+'erreur_taille_egal' => 'La valeur doit comprendre exactement @egal@ caract&egrave;res.',
 'erreur_taille_max' => 'La valeur doit comprendre au maximum @max@ caract&egrave;res.',
 'erreur_taille_min' => 'La valeur doit comprendre au minimum @min@ caract&egrave;res.',
 'erreur_telephone' => "Le numéro n'est pas valide.",
