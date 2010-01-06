@@ -732,7 +732,7 @@
 						$mailconfirm = $row['valeur'];
 				if (($email) || ($mailconfirm)) {
 					include_spip("inc/session");
-					$hash = md5("forms confirme reponse $id_donnee $cookie ".hash_env());
+					$hash = md5("forms confirme reponse $id_donnee".hash_env());
 					$url = generer_url_public($script_validation,"mel_confirm=oui&id_donnee=$id_donnee&hash=$hash".($script_args?"&$script_args":""));
 					$r = $url;
 					if ($mailconfirm) $reponse = $mailconfirm;
