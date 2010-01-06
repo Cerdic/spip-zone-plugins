@@ -4,9 +4,9 @@
 			<BOUCLE_chemin(HIERARCHIE){id_rubrique}> &gt; <a href='[(#SELF|parametre_url{id_r,#ID_RUBRIQUE})]' class='ajax'>#TITRE</a></BOUCLE_chemin> &gt; <strong class='on'>#TITRE</strong>
 		</div>#SET{n,0}
 		<B_contenu>
-		[(#REM) afficher la racine si la profondeur le permer]
+		[(#REM) afficher la racine si la profondeur le permet]
 		[(#GRAND_TOTAL|<{#TOTAL_BOUCLE}|oui)
-		<div class='frame[ total_(#GRAND_TOTAL|max{#TOTAL_BOUCLE|moins{1}})]frame_0'><h2>[<a(#ENV{rubriques,0}|oui) href='#' onclick="jQuery(this).item_pick('rubrique|0','#ENV{name,id_item}','<:info_racine_site|texte_script|attribut_html:>','rubrique');return false;"
+		<div class='frame[ total_(#GRAND_TOTAL|max{#TOTAL_BOUCLE|moins{1}})] frame_0'><h2>[<a(#ENV{rubriques,0}|oui) href='#' onclick="jQuery(this).item_pick('rubrique|0','#ENV{name,id_item}','<:info_racine_site|texte_script|attribut_html:>','rubrique');return false;"
 ><img class='add' src='#CHEMIN{img_pack/item-add.png}' /></a>]<:info_racine_site:></h2>
 		[(#INCLURE{fond=formulaires/selecteur/inc-nav-rubriques}{id_rubrique=0}{env})]</div>]
 		<BOUCLE_contenu(HIERARCHIE){id_rubrique}{tout}{n-4,4}>#SET{n,0}
