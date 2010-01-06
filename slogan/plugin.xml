@@ -10,5 +10,6 @@
 	</description>
 	<lien></lien>
 	<prefix>slogan</prefix>
+	<fonctions>slogan_balise.php</fonctions>
 	<necessite id="SPIP" version="[2.0.0;]" />
 </plugin>
