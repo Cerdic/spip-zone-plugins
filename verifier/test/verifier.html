@@ -22,7 +22,7 @@ var_dump(verifier($un_autre_mot, 'regex', array('modele'=>$modele)));
 </pre>
 
 <h2>Vérifions des entiers :</h2>
-</pre>
+<pre>
 <?php
 
 $un_entier = 568;
@@ -40,19 +40,110 @@ var_dump(verifier($un_autre_entier, 'entier', array('min'=>-100, 'max'=>-50)));
 ?>
 </pre>
 
-<h2>Vérifions des emails :</h2>
-</pre>
+<h2>V&eacute;rifions une taille d'une cha&icirc;ne :</h2>
+<pre>
 <?php
 
-$email = "test@test.fr";
-$email2 = "test";
+$une_chaine = "123456";
+$un_autre_chaine = "abc";
 
-echo "$email ?";
-var_dump(verifier($email, 'email'));
-echo "$email2 ?";
-var_dump(verifier($email2, 'email'));
+echo "$une_chaine de 1 à 3 caractères ?";
+var_dump(verifier($une_chaine, 'taille', array('min'=>1, 'max'=>3)));
+echo "$une_chaine 5 caractères max ?";
+var_dump(verifier($une_chaine, 'taille', array('max'=>5)));
+echo "$une_chaine 4 caractères mini ?";
+var_dump(verifier($une_chaine, 'taille', array('min'=>4)));
+echo "$un_autre_chaine de 1 à 3 caractères ?";
+var_dump(verifier($un_autre_chaine, 'taille', array('min'=>1, 'max'=>3)));
+echo "$un_autre_chaine 5 caractères max ?";
+var_dump(verifier($un_autre_chaine, 'taille', array('max'=>5)));
+echo "$un_autre_chaine 4 caractères mini ?";
+var_dump(verifier($un_autre_chaine, 'taille', array('min'=>4)));
 
 ?>
 </pre>
+
+
+<h2>Vérifions des emails :</h2>
+<pre>
+<?php
+
+$email = "test@test.fr";
+$email2 = "test@b";
+$email3 = "test";
+
+echo "Valide SPIP : $email ?";
+var_dump(verifier($email, 'email'));
+echo "Valide SPIP : $email2 ?";
+var_dump(verifier($email2, 'email'));
+echo "Valide SPIP : $email3 ?";
+var_dump(verifier($email3, 'email'));
+
+echo "Valide Strict : $email ?";
+var_dump(verifier($email, 'email_strict'));
+echo "Valide Strict : $email2 ?";
+var_dump(verifier($email2, 'email_strict'));
+echo "Valide Strict : $email3 ?";
+var_dump(verifier($email3, 'email_strict'));
+
+
+?>
+</pre>
+
+<h2>Vérifions des téléphones :</h2>
+<pre>
+<?php
+
+$telephone = "01.01/01-02 03";
+$telephone2 = "090909";
+$telephone3 = "10 01 01 01 01";
+
+echo "Téléphone : $telephone ?";
+var_dump(verifier($telephone, 'telephone_fr'));
+echo "Téléphone : $telephone2 ?";
+var_dump(verifier($telephone2, 'telephone_fr'));
+echo "Téléphone : $telephone3 ?";
+var_dump(verifier($telephone3, 'telephone_fr'));
+
+
+?>
+</pre>
+
+
+<h2>Vérifions des SIREN/SIRET :</h2>
+<pre>
+<?php
+
+$siren_valide = "321227852";
+$siren_non_valide = "321227822";
+$siret_valide = "32122785200019";
+$siret_non_valide = "32122785200033";
+
+echo "SIREN : $siren_valide ?";
+var_dump(verifier($siren_valide, 'siren'));
+echo "SIREN : $siren_non_valide ?";
+var_dump(verifier($siren_non_valide, 'siren'));
+
+echo "SIRET : $siret_valide ?";
+var_dump(verifier($siret_valide, 'siret'));
+echo "SIRET : $siret_non_valide ?";
+var_dump(verifier($siret_non_valide, 'siret'));
+?>
+</pre>
+
+<h2>Vérifions des DATES :</h2>
+<pre>
+<?php
+$date_valide = "30/01/2009";
+$date_non_valide = "321227822";
+
+echo "Date JJ/MM/AAAA : $date_valide ?";
+var_dump(verifier($date_valide, 'date'));
+echo "Date JJ/MM/AAAA : $date_non_valide ?";
+var_dump(verifier($date_non_valide, 'date'));
+?>
+</pre>
+
+
 </body>
 </html>
