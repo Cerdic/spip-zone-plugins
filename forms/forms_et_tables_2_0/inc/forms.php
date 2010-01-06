@@ -740,7 +740,7 @@
 				
 				if ($row['type_form']=='sondage') {
 					include_spip("inc/session");
-					$hash = md5("forms valide reponse sondage $id_donnee $cookie ".hash_env());
+					$hash = md5("forms valide reponse sondage $id_donnee $cookie".hash_env());
 					// SPIP2 probleme avec cet url de confirmation de la réponse du sondage.
 					$url = generer_url_public($script_validation,"verif_cookie=oui&id_donnee=$id_donnee&hash=$hash".($script_args?"&$script_args":""));
 					$r = $url;
