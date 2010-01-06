@@ -17,7 +17,7 @@ _ Il n&eacute;cessite le plugin [Comptes &amp; Contacts->http://files.spip.org/s
 	
 	<lien>[Un exemple de voyage en ligne->http://www.tunisiasalsacongress.com/spip.php?page=transaction&env]</lien>
 
-	<icon>img/catalogue_128x128.png</icon>
+	<icon>img/picto_catalogue_128x128.png</icon>
 
 	<prefix>catalogue</prefix>
 	
@@ -46,7 +46,7 @@ _ Il n&eacute;cessite le plugin [Comptes &amp; Contacts->http://files.spip.org/s
 	<options>catalogue_options.php</options>
 	
 	<bouton id='catalogue' parent='naviguer'>
-		<icone>img/catalogue_24x24.jpg</icone>
+		<icone>img/picto_catalogue_32x32.png</icone>
 		<titre>catalogue:catalogue</titre>
 	</bouton>
 

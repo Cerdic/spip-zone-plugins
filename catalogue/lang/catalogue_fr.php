@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aller_fiche' => 'Aller &agrave; la fiche d\'inscription',
 	
 	// C
-	'catalogue' => 'Catalogue',
+	'catalogue' => 'Plugin Catalogue',
 	'code_ville' => 'Code postal + Ville',
 	'contre_indication_explications' => 'Avez-vous une contre-indication quelconque (r&eacute;gime alimentaire, allergie...)',
 	'contre_indication_nature' => 'Si oui, nature de la contre-indication',
