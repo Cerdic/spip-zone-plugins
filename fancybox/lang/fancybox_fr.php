@@ -42,6 +42,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_hideonoverlayclick' => 'Fermer au clic (ext&eacute;rieur)',
 	'cfg_lbl_hideoncontentclick' => 'Fermer au clic (contenu)',
 	'cfg_lbl_centeronscroll' => 'Centrer',
+
+	'cfg_effacer' => 'Effacer',
 	'cfg_titre_fancybox' => 'FancyBox'
 	
 );
