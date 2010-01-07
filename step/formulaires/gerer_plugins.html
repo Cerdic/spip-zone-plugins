@@ -29,23 +29,23 @@
 	[(#REM|oui)
 		[<div class="reponse_formulaire reponse_formulaire_ok">
 			<strong>Demande :</strong>
-			<ul>(#ENV**{erreurs}|table_valeur{decideur_demandes}|foreach)</ul>
+			<ul>(#ENV**{erreurs}|table_valeur{decideur_demandes}|foreach{foreach_li})</ul>
 		</div>]
 
 		[<div class="reponse_formulaire reponse_formulaire_ok">
 			<strong>Propositions :</strong>
-			<ul>(#ENV**{erreurs}|table_valeur{decideur_propositions}|foreach)</ul>
+			<ul>(#ENV**{erreurs}|table_valeur{decideur_propositions}|foreach{foreach_li})</ul>
 		</div>]
 
 		[<div class="reponse_formulaire reponse_formulaire_ok">
 			<strong>Actions :</strong>
-			<ul>(#ENV**{erreurs}|table_valeur{decideur_actions}|foreach)</ul>
+			<ul>(#ENV**{erreurs}|table_valeur{decideur_actions}|foreach{foreach_li})</ul>
 		</div>]
 	]
 	
 	[<div class="reponse_formulaire reponse_formulaire_erreur">
 		<strong>Erreurs :</strong>
-		<ul>(#ENV**{erreurs}|table_valeur{decideur_erreurs}|foreach)</ul>
+		<ul>(#ENV**{erreurs}|table_valeur{decideur_erreurs}|foreach{foreach_li})</ul>
 	</div>]
 
 	

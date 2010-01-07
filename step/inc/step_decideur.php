@@ -231,6 +231,16 @@ class Decideur {
 	}
 
 
+	function est_presente_lib($lib) {
+		static $libs = false;
+		if ($libs === false) {
+			include_spip('inc/step');
+			$libs = step_lister_librairies();
+		}
+		return isset($libs[$lib]) ? $libs[$lib] : false;
+	}
+
+
 	/* Ajouter les actions demandees */
 	function actionner($todo = null) {
 		if (is_array($todo)) {
@@ -383,11 +393,27 @@ class Decideur {
 				if (strtoupper($p) == 'SPIP') {
 					if (!step_verifier_plugin_compatible_version_spip($v)) {
 						$this->invalider($info);
-						$this->erreur($id, _L("$p n'est pas compatible avec cette version de SPIP !"));	
+						$this->erreur($id, _L("$info[p] n'est pas compatible avec cette version de SPIP !"));	
 						// est-ce qu'on quitte tout de suite, ou teste-t-on tout ?
 						// pour l'instant, essayons de tout tester quand meme
 						// nous verrons par la suite si c'est judicieux ou pas
 					}
+				} elseif (strpos($p,'lib:')===0) {
+					$lib = substr($p, 4);
+					// l'identifiant commence par "lib:", c'est une librairie dont il s'agit.
+					// on verifie sa presence OU le fait qu'on pourra la telecharger
+					if ($lib and !$this->est_presente_lib($lib)) {
+						// peut on ecrire ?
+						if (!is_writable(_DIR_LIB)) {
+							$this->invalider($info);
+							$this->erreur($id, _L("&laquo;$info[p]&raquo; a besion de la librairie <a href='$n[src]'>$lib</a>
+								plac&eacute; dans le r&eacute;pertoire <var>lib/</var> à la racine de votre SPIP.
+								Cependant, ce r&eacute;pertoire n'est pas accessible en &eacute;criture.
+								Vous devez l'installer manuellement ou donner des permissions d'&eacute;criture
+								&agrave; ce r&eacute;pertoire."));	
+						}
+					}
+					
 				} else {
 					$this->log("-- verifier $p");
 					// nous sommes face a une dependance de plugin

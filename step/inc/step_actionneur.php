@@ -16,6 +16,7 @@ class Actionneur {
 	// actions en cours d'analyse
 	var $middle = array(
 		'off' => array(),
+		'lib' => array(),
 		'on' => array(),
 		'neutre' => array(),
 	);
@@ -41,6 +42,7 @@ class Actionneur {
 	function clear() {
 		$this->middle = array(
 			'off' => array(),
+			'lib' => array(),
 			'on' => array(),
 			'neutre' => array(),
 		);
@@ -56,6 +58,28 @@ class Actionneur {
 		$this->ordonner_actions();
 	}
 
+
+	// ajouter une librairie a installer.
+	function add_lib($nom, $source) {
+		if (!$this->decideur->est_presente_lib($nom)) {
+			if (is_writable(_DIR_LIB)) {
+				$this->middle['lib'][$nom] = array(
+					'todo'=>'lib',
+					'n'=>$nom,
+					'p'=>$nom,
+					'v'=>$source,
+					's'=>$source,
+				);
+			} else {
+				// erreur : impossible d'ecrire dans _DIR_LIB !
+				// TODO : message et retour d'erreur a gerer...
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	
 	function ordonner_actions() {
 		// il faut deja definir quels sont des
 		// actions graduellement realisables.
@@ -123,7 +147,19 @@ class Actionneur {
 		$in = $out = array();
 		// raz des cles pour avoir les memes que $out (utile reellement ?)
 		$this->middle['on'] = array_values($this->middle['on']);
-		foreach ($info['dn'] as $dep) 			{if ($dep['id'] != 'SPIP') {$in[]  = $dep['id'];}}
+		// ajout des dependance et des librairies si besion
+		foreach ($info['dn'] as $dep) {
+			if ($dep['id'] != 'SPIP') {
+				if (strpos($dep['id'],'lib:')===0) {
+					if ($lib = substr($dep['id'], 4)) {
+						// il faudrait gerer un retour d'erreur eventuel !
+						$this->add_lib($lib, $dep['src']);
+					}
+				} else {
+					$in[]  = $dep['id'];
+				}
+			}
+		}
 		foreach ($this->middle['on'] as $inf) 	{$out[] = $inf['p'];}
 		
 		if (!$in) {
@@ -169,7 +205,11 @@ class Actionneur {
 		$in = $out = array();
 		// raz des cles pour avoir les memes que $out (utile reellement ?)
 		$this->middle['off'] = array_values($this->middle['off']);
-		foreach ($info['dn'] as $dep) 			{if ($dep['id'] != 'SPIP') {$in[]  = $dep['id'];}}
+		foreach ($info['dn'] as $dep) 			{
+			if (($dep['id'] != 'SPIP') and (strpos($dep['id'],'lib:')!==0)) {
+				$in[]  = $dep['id'];
+			}
+		}
 		foreach ($this->middle['off'] as $inf) 	{$out[] = $inf['p'];}
 		
 		if (!$in) {
@@ -401,6 +441,29 @@ class Actionneur {
 			}
 		}
 			
+		return false;
+	}
+
+
+	// installer une librairie
+	function do_lib($info) {
+		if (!defined('_DIR_LIB') or !_DIR_LIB or !is_writable(_DIR_LIB)) {
+			$this->log("Pas de _DIR_LIB defini !");
+			return false;
+		}
+
+		$zip = $info['s'];
+		if ($files = $this->get_zip($zip, _DIR_LIB)) {
+			$dest = $files[0]['stored_filename'];
+			$dest = rtrim($dest, '/');
+			$dir = _DIR_LIB . $dest;
+					
+			$this->log("Suppression des anciens fichiers de $dir");
+			$this->remove_older_files($dir, $files);
+
+			return true;
+		}
+		
 		return false;
 	}
 
@@ -650,7 +713,7 @@ class Actionneur {
 	}
 	
 }
-}
+
 
 
 // scandir pour php4
@@ -668,6 +731,7 @@ function scandir($dir, $listDirectories=false, $skipDots=true) {
         closedir($handle);
     }
     return $dirArray;
+}
 }
 
 ?>
