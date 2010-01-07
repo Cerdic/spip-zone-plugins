@@ -24,7 +24,7 @@ function formulaires_editer_document_charger_dist($id_document='new', $id_parent
 	$valeurs['_hidden'] = "";
 	$parents = sql_allfetsel('objet,id_objet','spip_documents_liens','id_document='.intval($id_document));
 	foreach($parents as $p){
-		if (in_array($p['objet'],array('article','rubrique')))
+		if (in_array($p['objet'],array('article','rubrique')) AND $p['id_objet']>0)
 			$valeurs['parents'][] = $p['objet'].'|'.$p['id_objet'];
 		else 
 			$valeurs['_hidden'] .= "<input type='hidden' name='parents[]' value='".$p['objet'].'|'.$p['id_objet']."' />";
