@@ -29,6 +29,11 @@ _ &#169; 2008 2009
 		<icone>images/step-paquet-24.png</icone>
 		<titre>STEP</titre>
 	</bouton>
+	<bouton id='step2' parent='bando_configuration'>
+		<icone>images/step-paquet-16.png</icone>
+		<titre>STEP</titre>
+		<url>step</url>
+	</bouton>
 
 
 	<pipeline>
