@@ -42,7 +42,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'documents_tous'=> 'Todo',
 	'documents_brises' => 'Bris&eacute;s',
 	'documents_orphelins' => 'No utilizados',
-	'descriptif'=>'Descripción',
+	'descriptif'=>'Descripciï¿½n',
 	'des_documents'=>'@nb@ documentos',
 	'des_files'=>'@nb@ documentos',
 	'des_images'=>'@nb@ im&#225;genes',
@@ -61,7 +61,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_aucun_fichier'=>'No se encontraron archivos',
 	'erreur_upload_type_interdit'=> "	La descarga de archivos de tipo @nom@ no permitido",
 	'erreur_chemin_ftp'=>'El archivo especificado no se encuentra en el servidor',
-	'erreur_chemin_distant' => 'El archivo remoto @nom@ no se encontró',
+	'erreur_chemin_distant' => 'El archivo remoto @nom@ no se encontrï¿½',
 	'erreur_copie_fichier' => 'No se puede copiar el archivo @nom@',
 	'erreur_format_fichier_image' => 'El formato de @nom@ no es adecuado para una imagen',
 	'erreur_upload_vignette' => 'Error al cargar miniatura @nom@',
@@ -86,7 +86,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'logo' => 'Logo',
-	'label_id_joindre' => 'Documento n&#250;mero',
+	'label_refdoc_joindre' => 'Documento n&#250;mero',
 	'label_parents' => 'Este documento est&#225; relacionado con',
 	'label_fichier' => 'Archivo',
 	'label_fichier_vignette' => 'Miniatura',
