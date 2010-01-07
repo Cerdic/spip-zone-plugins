@@ -13,7 +13,7 @@
 	//version actuelle du plugin à changer en cas de maj
 	$GLOBALS['association_version'] = 0.64;	
 		
-	function association_verifier_base(){			
+function association_verifier_base(){			
 		$version_base = $GLOBALS['association_version'];
 		$current_version = 0.0;
 		
@@ -73,7 +73,8 @@
 			
 			if ($current_version<0.64){
 				$query=spip_query("SELECT * FROM spip_auteurs_elargis");
-				if(!$query) {echo 'Installer les plugins cfg et Inscription2 avant d\'installer ce plugin!!!';exit;}
+				if(!$query) return false;
+
 				spip_query("ALTER TABLE spip_auteurs_elargis ADD validite date NOT NULL default '0000-00-00', ADD montant float NOT NULL default '0', ADD 
 date date NOT NULL default '0000-00-00' ");
 				ecrire_meta('asso_base_version',$current_version=0.64);
@@ -81,9 +82,10 @@ date date NOT NULL default '0000-00-00' ");
 					
 			ecrire_metas();
 		}
+		return true;
 	}
 
-	function association_effacer_tables(){
+function association_effacer_tables(){
 		include_spip('base/abstract_sql');
 		spip_query("DROP TABLE spip_asso_adherents");
 		spip_query("DROP TABLE spip_asso_activites");
@@ -99,19 +101,24 @@ date date NOT NULL default '0000-00-00' ");
 		ecrire_metas();
 	}	
 	
-	function association_install($action){
-		$version_base = $GLOBALS['association_version'];
-		switch ($action){
-			case 'test':
-				return (isset($GLOBALS['meta']['asso_base_version']) 
+function association_install($action){
+	$version_base = $GLOBALS['association_version'];
+	switch ($action){
+		case 'test':
+			return (isset($GLOBALS['meta']['asso_base_version']) 
 				AND ($GLOBALS['meta']['asso_base_version']>=$version_base));
-				break;
-			case 'install':
-				association_verifier_base();
-				break;
-			case 'uninstall':
-				association_effacer_tables();
-				break;
-		}
-	}	
+			break;
+		case 'install':
+			if (!association_verifier_base()) {
+				unset($GLOBALS['meta']['asso_base_version']);
+				echo debut_cadre_enfonce('',true);
+				echo _L('Installer les plugins cfg et Inscription2 avant d\'installer ce plugin!!!'); 
+				echo fin_cadre_enfonce(true);
+			}
+			break;
+	case 'uninstall':
+			association_effacer_tables();
+			break;
+	}
+}	
 ?>
