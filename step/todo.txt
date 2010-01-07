@@ -1,0 +1,11 @@
+Todo possibles :
+- discuter de l'interface et l'améliorer
+- améliorer l'API et créer une API pour un appel extérieur (comme "apt-get")
+- gerer les "librairies" (necessite id='lib:...)
+- tenter de gérer les retours d'erreurs suite à l'installation / mise à jour d'un plugin qui echoue à cause d'une erreur PHP ? est-ce possible ?
+- correctement gérer le dossier Extensions, l'absence de réportoire auto/ et lib/ et les autorisations
+- pouvoir récupérer les actions à executer en cas de problème
+- ne pas pouvoir lancer des actions par 2 admins en même temps.
+- fonctionner en php4 (suffit de définir la fonction scandir)
+- pouvoir charger un plugin par téléchargement de zip local ou par une url
+- pouvoir télécharger en local les fichiers zip des plugins SI de dossier auto/ n'est pas présent

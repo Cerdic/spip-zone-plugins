@@ -1,0 +1,22 @@
+<B_zones>		
+#ANCRE_PAGINATION
+<div class="liste-elements zones_plugins">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,<:step:info_toutes_zones_presentes:>})</strong></caption>]
+
+	<tbody>
+	<BOUCLE_zones(ZONES_PLUGINS){par nom}{pagination #ENV{nb,10}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='adresse'>#NOM (<:step:nb_plugins{nb=#NOMBRE_PLUGINS}:>)</td>
+			<td class='actions'>[(#URL_ACTION_AUTEUR{step_zones, supprimer_zone/#ID_ZONE, #ENV{action}}
+				|step_btn_action{supprimer-12.png, <:step:zone_supprimer:>, '', danger,12})]</td>
+		</tr>
+	</BOUCLE_zones>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+<p class='boutons'><input type="submit" name="actualiser" value = "<:actualiser:>" /></p>
+</B_zones>[
+<div class="liste-elements zones_plugins"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_zones>

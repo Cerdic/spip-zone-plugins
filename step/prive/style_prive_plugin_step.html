@@ -1,0 +1,158 @@
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+#SET{claire,##ENV{couleur_claire,edf3fe}}
+#SET{foncee,##ENV{couleur_foncee,3874b0}}
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+
+.gestion_des_plugins ul { padding-left:2em;}
+.gestion_des_plugins li {list-style-type:none; padding:1px 0;}
+.gestion_des_plugins li img {vertical-align:top; margin-top:1px;}
+
+/**
+ Pris dans Bonux !
+**/
+ 
+/* Titre d'une boite */
+.titrem { font-weight: bold; }
+div.titrem,h3.titrem { display: block; padding-top: 6px; padding-bottom: 4px; background-repeat: no-repeat;padding-[(#GET{left})]:16px;}
+div.titrem a.titremancre {padding:15px 0 0 16px;background-position: [(#GET{left})] top;background-repeat: no-repeat; position:relative;float:[(#GET{left})];margin-[(#GET{left})]:-16px;}
+
+/* dans les formulaires de configuration */
+h3.titrem {position:relative;}
+.formulaire_spip h3.titrem,#navigation .formulaire_spip h3.titrem,#extra .formulaire_spip h3.titrem {background-color: #GET{foncee};color: #fff; }
+
+
+
+/**
+ Pris dans afficher_objets !
+**/
+
+.liste-elements{
+	margin:1em 0;
+}
+.liste-elements .pagination{margin-top:0; padding-top:0;}
+.liste-elements table.spip {width:100%;}
+.liste-elements table.spip caption {margin:0;text-align:left;}
+.liste-elements .caption {display:block;background:#fff;color:#333;font-size:1.1em;padding:6px;padding-left:28px;background-repeat:no-repeat;background-position: top left;}
+
+.liste-elements thead th {background:white;}
+.liste-elements thead th .on {text-decoration:underline;}
+.liste-elements thead tr {border-top:1px solid #ccc; }
+
+.liste-elements thead th.statut {text-indent:-3000px;}
+
+.liste-elements table.spip td,
+.liste-elements table.spip th {border:0; border-bottom:1px solid #ccc; }
+.liste-elements tr .action {width: 90px; text-align:right;}
+.liste-elements tr .action input {font-size:0.9em;}
+.liste-elements tbody tr:hover td {background:white;}
+
+/** specifite STEP */
+.liste-elements tbody tr.replier td {background:white; border-bottom:0;}
+.liste-elements.plugins_dispos {/*max-height:320px; height:320px;*/ overflow:auto;}
+
+.liste-elements.plugins_dispos .caption {background-image:url(#CHEMIN{images/step-paquet-24.png});}
+.liste-elements.zones_plugins  .caption {background-image:url(#CHEMIN{images/step-zone-24.png});}
+
+.liste-elements.zones_plugins td img {margin-top:2px;}
+.liste-elements.plugins_dispos td img {}
+.liste-elements .actions a {padding:0;}
+
+.liste-elements.plugins_dispos tr th.logo {width: 50px;}
+.liste-elements.plugins_dispos tr th.actif {width: 26px;}
+.liste-elements.plugins_dispos tr th.actions {width: 20px; padding-left:16px;}
+.liste-elements.plugins_dispos tr th.nom {width: auto;}
+.liste-elements.plugins_dispos tr th.info {width: 16px;}
+
+.gestion_des_plugins li:hover {background-color:#eee;}
+
+/** actions des plugins */
+.plugins_dispos table.spip th,
+.plugins_dispos table.spip td {padding:0px 2px;}
+.liste-elements.plugins_dispos td button.info {cursor:pointer; padding:0px; display:block; background:transparent; margin:0; border:0;}
+
+.plugins_dispos table.spip tr,
+.plugins_dispos table.spip tr.row_odd,
+.plugins_dispos table.spip tr.row_even {background-color:#fff;}
+.plugins_dispos table.spip tbody tr.actif_non td * {opacity:.7;}
+.plugins_dispos table.spip tbody tr.replier td * {opacity:1;}
+
+.plugins_dispos table.spip tr td {background-color:#fff;}
+.plugins_dispos table.spip tr:hover td {background-color:#f3f3f3;}
+
+.plugins_dispos table.spip td {vertical-align:middle;}
+.plugins_dispos tr td.logo {text-align:center; height:38px; padding-top:2px;}
+
+.plugins_dispos td.nom div.nom h4 {padding:0; margin:0; font-size:120%; font-weight:normal;}
+.plugins_dispos td.nom div.nom p { padding:0; margin:0; color:#666;}
+
+.plugins_dispos .super tr {cursor:pointer;}
+.plugins_dispos .super tr.step_plugin_info {cursor:auto;}
+
+
+.plugins_dispos tbody tr.replier td,
+.plugins_dispos tbody tr.replier:hover td {background-color:#888; color:white;}
+.plugins_dispos tbody tr.replier td div.nom p {color:white;}
+
+.plugins_dispos table.spip td.actions {padding-top:5px; padding-left:20px; background-repeat:no-repeat !important; background-position: 4px 6px !important;}
+.plugins_dispos td.actions.a_on {background-image:url([(#CHEMIN{images/action-activer-12.png})]);}
+.plugins_dispos td.actions.a_off {background-image:url([(#CHEMIN{images/action-desactiver-12.png})]);}
+.plugins_dispos td.actions.a_up {background-image:url([(#CHEMIN{images/action-maj-12.png})]);}
+.plugins_dispos td.actions.a_upon {background-image:url([(#CHEMIN{images/action-maj-activer-12.png})]); padding-left:30px;}
+.plugins_dispos td.actions.a_get {background-image:url([(#CHEMIN{images/action-telecharger-12.png})]);}
+.plugins_dispos td.actions.a_stop {background-image:url([(#CHEMIN{images/action-desinstaller-12.png})]);}
+.plugins_dispos td.actions.a_kill {}
+.plugins_dispos td.actions.a_null {}
+
+.plugins_dispos .menu_actions {margin:1em .5em;}
+
+
+/** recherche de plugins */
+.editer_recherche_paquet {display:block; padding:0 5px; overflow:auto;}
+.editer_recherche_paquet ul {border-top:1px solid #ddd;}
+.editer_recherche_paquet li {clear:none; float:left; padding-left:0; border-top:0;}
+.editer_recherche_paquet li label {display:block; margin-left:0; width:auto; }
+.editer_recherche_paquet li select { width:100px; display:block; clear:left;}
+
+.editer_recherche_paquet li input.text { width:200px; display:block; clear:left;}
+
+.editer_recherche_paquet li.editer_present select { width:160px; }
+.editer_recherche_paquet li.editer_categorie select { width:240px; }
+.editer_recherche_paquet li.editer_more {width:20px; float:right;}
+.editer_recherche_paquet li button.rechercher_plus {padding:0px; display:block; clear:left;}
+.editer_recherche_paquet li input.submit { font-weight:normal; padding:1px;
+	font-size:96%; display:block; clear:left;}
+
+
+.editer_recherche_paquet li.editer_actif select,
+.editer_recherche_paquet li.editer_etat select,
+.editer_recherche_paquet li.editer_superieur select,
+.editer_recherche_paquet li.editer_obsolete select,
+.editer_recherche_paquet li.editer_zone select { width:80px;}
+
+.editer_recherche_paquet ul {clear:both;}
+.editer_recherche_paquet ul.cacher {display:none;}
+
+/** info d'un plugin */
+.plugins_dispos table.spip tr.step_plugin_info td {vertical-align:top; background-color:#888;}
+.step_plugin_info dl {overflow:auto; margin:.2em .5em .5em; padding:.6em; border:1px solid #fff; background:#fff;
+	border-radius:5px; -moz-border-radius:5px; -moz-border-radius:5px; 
+}
+.step_plugin_info dt {font-weight:bold; width:35px; float:left; display:block; padding-top:2px;}
+.step_plugin_info dd {padding-top:2px; float:left; width:130px; margin-right:20px;}
+.step_plugin_info dd.description {clear:left; width:100%; margin:0 0 .5em 0; border-bottom:1px solid #ddd;}
+.step_plugin_info dd.description > p:first-child {margin-top:0;}
+.step_plugin_info dt.description {display:none;}
+
+/** formulaires d'actions */
+.formulaire_step_actions {margin:1em 2em;}
+.formulaire_step_actions .done_ok {font-weight:bold; color:green;}
+.formulaire_step_actions .done_err {font-weight:bold; color:red;}
+.formulaire_step_actions ul {margin:1em 1em 1em 3em; list-style-type:disc;}
+.formulaire_step_actions li {padding:0; border:0; overflow:visible;}
+
+/** roue ajax */
+.image_loading {background:url('[(#CHEMIN{images/searching.gif}|url_absolue)]'); width:12px; height:12px; display:inline-block;}
+.image_loading.right {float:right;}

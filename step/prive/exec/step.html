@@ -1,0 +1,64 @@
+[(#AUTORISER{configurer,plugins})
+
+	<h1><:step:gestion_des_plugins:></h1>
+
+
+	<!--#navigation-->
+	<div class="cadre cadre-info gestion_des_plugins">
+		<:info_gauche_admin_tech:>
+		<ul>
+			<li class='actif_oui'>[(#CHEMIN{images/plugin-actif-12.png}|balise_img|inserer_attribut{title,<:step:statut_actif:>}|inserer_attribut{alt,<:step:statut_actif:>})] <:step:statut_actif:></li>
+			<li class='actif_non zone_0'>[(#CHEMIN{images/plugin-inactif-present-12.png}|balise_img|inserer_attribut{title,<:step:statut_inactif_present:>}|inserer_attribut{alt,<:step:statut_inactif_present:>})] <:step:statut_inactif_present:></li>
+			<li class='actif_non'>[(#CHEMIN{images/plugin-inactif-12.png}|balise_img|inserer_attribut{title,<:step:statut_inactif:>}|inserer_attribut{alt,<:step:statut_inactif:>})] <:step:statut_inactif:></li>
+		</ul>
+		<ul>
+			<li class='maj_oui'>[(#CHEMIN{images/plugin-upgrade-12.png}|balise_img|inserer_attribut{title,<:step:plugin_upgrade_possible:>}|inserer_attribut{alt,<:step:plugin_upgrade_possible:>})] <:step:plugin_upgrade_possible:></li>
+		</ul>
+		<ul>
+			<li class='etat_stable'>[(#CHEMIN{images/plugin-stable-12.png}|balise_img|inserer_attribut{title,<:step:etat_stable:>}|inserer_attribut{alt,<:step:etat_stable:>})] <:step:etat_stable:></li>
+			<li class='etat_test'>[(#CHEMIN{images/plugin-en-test-12.png}|balise_img|inserer_attribut{title,<:step:etat_test:>}|inserer_attribut{alt,<:step:etat_test:>})] <:step:etat_test:></li>
+			<li class='etat_dev'>[(#CHEMIN{images/plugin-en-developpement-12.png}|balise_img|inserer_attribut{title,<:step:etat_developpement:>}|inserer_attribut{alt,<:step:etat_developpement:>})] <:step:etat_developpement:></li>
+			<li class='etat_experimental'>[(#CHEMIN{images/plugin-experimental-12.png}|balise_img|inserer_attribut{title,<:step:etat_experimental:>}|inserer_attribut{alt,<:step:etat_experimental:>})] <:step:etat_experimental:></li>
+		</ul>
+
+	</div>
+
+	<div class="cadre cadre-info">
+		<:plugin_librairies_installees:>
+		[(#VAL|step_html_liste_librairies_presentes)]
+	</div>
+	<!--/#navigation-->
+
+
+	#FORMULAIRE_GERER_PLUGINS
+	<br />
+	#FORMULAIRE_GERER_ZONES_PLUGINS
+
+	<script type="text/javascript"><!--
+	(function ($){
+	$(document).ready(function() {
+		$('.gestion_des_plugins li').css('cursor','pointer').click(function(){
+			if ($(this).is('.on')) {
+				$(this).removeClass('on');
+				hide_plugs();
+			} else {
+				$(this).siblings('.on').removeClass('on');
+				$(this).addClass('on');
+				hide_plugs();
+			}
+		});
+		function hide_plugs(){
+			$('.plugins_dispos tbody tr').show();
+			$('.gestion_des_plugins li.on').each(function(){
+				classes = $(this).removeClass('on').attr('class').split(' ');
+				$(this).addClass('on');
+				$.each(classes,function(){
+					$('.plugins_dispos tbody tr').not('.' + this).hide();
+				});
+			});
+		}
+	})
+	})(jQuery);
+	//--></script>
+	
+]

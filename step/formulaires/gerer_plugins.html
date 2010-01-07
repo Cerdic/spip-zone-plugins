@@ -1,0 +1,213 @@
+<div class='formulaire_spip formulaire_#FORM'>
+
+	<h3 class='titrem'>[(#CHEMIN{images/step-paquet-24.png}|balise_img{'',cadre-icone})]<:step:paquets_liste:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[<div class="ajax">(#ENV{_todo}|oui)
+		[(#FORMULAIRE_STEP_ACTIONS{[(#ENV*{_todo}|unserialize)]})]
+	</div>
+	<script type="text/javascript"><!--
+		(function ($){
+		$(document).ready(function() {
+			function autosubmit(){
+				go = $('.formulaire_step_actions form.ok');
+				if (go.is(':visible')) {
+					go.removeClass('ok');
+					setTimeout (function(){
+						$('.formulaire_step_actions form').submit();
+					}, 500);
+				}
+			}
+			onAjaxLoad(autosubmit);
+		})
+		})(jQuery);
+		//--></script>
+	]
+
+	[(#REM|oui)
+		[<div class="reponse_formulaire reponse_formulaire_ok">
+			<strong>Demande :</strong>
+			<ul>(#ENV**{erreurs}|table_valeur{decideur_demandes}|foreach)</ul>
+		</div>]
+
+		[<div class="reponse_formulaire reponse_formulaire_ok">
+			<strong>Propositions :</strong>
+			<ul>(#ENV**{erreurs}|table_valeur{decideur_propositions}|foreach)</ul>
+		</div>]
+
+		[<div class="reponse_formulaire reponse_formulaire_ok">
+			<strong>Actions :</strong>
+			<ul>(#ENV**{erreurs}|table_valeur{decideur_actions}|foreach)</ul>
+		</div>]
+	]
+	
+	[<div class="reponse_formulaire reponse_formulaire_erreur">
+		<strong>Erreurs :</strong>
+		<ul>(#ENV**{erreurs}|table_valeur{decideur_erreurs}|foreach)</ul>
+	</div>]
+
+	
+	<form method='post' action='#ENV{action}'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+		<p class='explication'>
+			<:step:paquets_activer_info:>
+			[(#AUTORISER{telecharger, plugins})<:step:paquets_telecharger_info:>]
+		</p>
+
+
+		<BOUCLE_plugs(PLUGINS){0,1}>
+
+		<div class="editer_recherche_paquet">
+			<ul>
+				<li class="editer_recherche">
+					<label for='step_selection'><:step:rechercher:></label>
+					<input type='text' name='recherche' class='text' id='step_selection' value='#ENV{recherche}' />
+				</li>	
+
+				
+				<li class="editer_gogogo">	
+					<label for="rechercher">&nbsp;</label>
+					<input type='submit' name='rechercher' class='submit' value='<:info_rechercher:>' />
+				</li>
+				
+				[(#SET{afficher,[(#ENV{actif}|!={''}
+					|ou{[(#ENV{present}|!={''})]}
+					|ou{[(#ENV{categorie}|!={''})]}
+					|ou{[(#ENV{id_zone}|!={''})]}
+					|ou{[(#ENV{obsolete}|!={non})]}
+					|ou{[(#ENV{superieur}|!={non})]}
+					|?{afficher,cacher})]})]
+				<li class="editer_more">
+					[(#GET{afficher}|=={cacher}|oui)
+					<label for="rechercher">&nbsp;</label>
+					<button name='more' class='button rechercher_plus' title="<:step:rechercher_plus:>" onClick="$('.editer_recherche_paquet ul.more').removeClass('cacher'); $(this).parent().html(''); return false;">
+						[(#CHEMIN{images/rechercher-plus-16.png}|image_reduire{12}|inserer_attribut{alt,<:step:rechercher_plus:>})]
+					</button>
+					]
+				</li>
+			</ul>
+			<ul class="more[ (#GET{afficher})]">
+
+				<li class="editer_present">
+					<label for="step_ou"><:step:ou:></label>
+					<select name="present" id="step_ou">
+						<option value=""><:step:ou_tous:></option>
+						<option value="oui"[ (#ENV{present}|=={oui}|oui)selected='selected']><:step:ou_local:></option>
+						<option value="non"[ (#ENV{present}|=={non}|oui)selected='selected']><:step:ou_distant:></option>
+					</select>
+				</li>
+				
+				<li class="editer_categorie">	
+					#REM{ 
+						Des categories au Pif ...
+						A prendre dans un tableau quelque part ?
+					}
+					<label for="step_categorie"><:step:categorie:></label>
+					<select name="categorie" id="step_categorie">
+						<option value=""><:step:categorie_tous:></option>
+						<option value="agenda"[ (#ENV{categorie}|=={agenda}|oui)selected='selected']><:tag:agenda:></option>
+						<option value="authentification"[ (#ENV{categorie}|=={authentification}|oui)selected='selected']><:tag:authentification:></option>
+						<option value="configuration"[ (#ENV{categorie}|=={configuration}|oui)selected='selected']><:tag:configuration:></option>
+						<option value="communication"[ (#ENV{categorie}|=={communication}|oui)selected='selected']><:tag:communication:></option>
+						<option value="developpement"[ (#ENV{categorie}|=={developpement}|oui)selected='selected']><:tag:developpement:></option>
+						<option value="media"[ (#ENV{categorie}|=={media}|oui)selected='selected']><:tag:media:></option>
+						<option value="navigation"[ (#ENV{categorie}|=={navigation}|oui)selected='selected']><:tag:navigation:></option>
+						<option value="objet"[ (#ENV{categorie}|=={objet}|oui)selected='selected']><:tag:objet:></option>
+						<option value="redaction"[ (#ENV{categorie}|=={redaction}|oui)selected='selected']><:tag:redaction:></option>
+						<option value="service"[ (#ENV{categorie}|=={service}|oui)selected='selected']><:tag:service:></option>
+						<option value="seo"[ (#ENV{categorie}|=={seo}|oui)selected='selected']><:tag:seo:></option>
+						<option value="securite"[ (#ENV{categorie}|=={securite}|oui)selected='selected']><:tag:securite:></option>
+						<option value="squelette"[ (#ENV{categorie}|=={squelette}|oui)selected='selected']><:tag:squelette:></option>
+						<option value="theme"[ (#ENV{categorie}|=={theme}|oui)selected='selected']><:tag:theme:></option>
+					</select>
+				</li>
+
+			
+
+				
+				[(#SET{afficher,[(#ENV{etat}
+					|ou{[(#ENV{actif}|!={''})]}
+					|ou{[(#ENV{zone}|!={''})]}
+					|ou{[(#ENV{obsolete}|!={non})]}
+					|ou{[(#ENV{superieur}|!={non})]}
+					|?{afficher,cacher})]})]
+				<li class="editer_more">
+					[(#GET{afficher}|=={cacher}|oui)
+					<label for="rechercher">&nbsp;</label>
+					<button name='more' class='button rechercher_plus' title="<:step:rechercher_plus:>" onClick="$('.editer_recherche_paquet ul.more2').removeClass('cacher'); $(this).parent().html(''); return false;">
+						[(#CHEMIN{images/rechercher-plus-16.png}|image_reduire{12}|inserer_attribut{alt,<:step:rechercher_plus:>})]
+					</button>
+					]
+				</li>
+			</ul>
+			<ul class="more2[ (#GET{afficher})]">			
+
+				<li class="editer_actif">
+					<label for="step_statut"><:step:statut:></label>
+					<select name="actif" id="step_statut">
+						<option value=""><:step:statut_tous:></option>
+						<option value="oui"[ (#ENV{actif}|=={oui}|oui)selected='selected']><:step:statut_actif:></option>
+						<option value="non"[ (#ENV{actif}|=={non}|oui)selected='selected']><:step:statut_inactif:></option>
+					</select>
+				</li>
+								
+				<li class="editer_etat">	
+					<label for="step_etat"><:step:etat:></label>
+					<select name="etat" id="step_statut">
+						<option value=""><:step:etat_tous:></option>
+						<option value="stable"[ (#ENV{etat}|=={stable}|oui)selected='selected']><:step:etat_stable:></option>
+						<option value="test"[ (#ENV{etat}|=={test}|oui)selected='selected']><:step:etat_test:></option>
+						<option value="dev"[ (#ENV{etat}|=={dev}|oui)selected='selected']><:step:etat_developpement:></option>
+						<option value="experimental"[ (#ENV{etat}|=={experimental}|oui)selected='selected']><:step:etat_experimental:></option>
+					</select>
+				</li>
+
+				<li class="editer_zone">	
+					<label for="step_zone"><:step:zone:></label>
+					<select name="id_zone" id="step_zone">
+						<option value=""[ (#ENV{id_zone}|=={''}|oui)selected='selected']><:step:zone_tous:></option>
+						<BOUCLE_zones(ZONES_PLUGINS)><option value="#ID_ZONE"[ (#ENV{id_zone}|=={#ID_ZONE}|oui)selected='selected']>#NOM</option></BOUCLE_zones>
+					</select>
+				</li>
+				
+				<li class="editer_obsolete">
+					<label for="step_obsolete"><:step:obsolete:></label>
+					<select name="obsolete" id="step_obsolete">
+						<option value=""><:step:obsolete_tous:></option>
+						<option value="oui"[ (#ENV{obsolete}|=={oui}|oui)selected='selected']><:step:obsolete_oui:></option>
+						<option value="non"[ (#ENV{obsolete}|=={non}|oui)selected='selected']><:step:obsolete_non:></option>
+					</select>
+				</li>
+
+				<li class="editer_superieur">
+					<label for="step_superieur"><:step:superieur:></label>
+					<select name="superieur" id="step_superieur">
+						<option value=""><:step:superieur_tous:></option>
+						<option value="oui"[ (#ENV{superieur}|=={oui}|oui)selected='selected']><:step:superieur_oui:></option>
+						<option value="non"[ (#ENV{superieur}|=={non}|oui)selected='selected']><:step:superieur_non:></option>
+					</select>
+				</li>								
+			</ul>	
+		</div>
+
+		<input type="hidden" name="_todo" class='hidden' value="[(#ENV{_todo})]" />
+		[(#REM) supprime par javascript si present]
+		<input type="hidden" name="nojs" id='input_nojs' class='hidden' value="1" />
+		[(#REM) conserver l'affichage des recents tant que pas de recherche faite ]
+		[(#SET{recent,[(#ENV{rechercher,#ENV{recent}}|=={1}|?{1,''})]})]
+		<input type="hidden" name="recent" class='hidden' value="[(#GET{recent}|?{1,0})]" />
+		[(#SET{titre,[(#GET{recent}|=={1}|?{<:step:plugins_utilises_recemment:>,''})]})]
+		<INCLURE{fond=prive/liste/plugins_dispos}{env}{sinon=<:step:pas_de_plugin_trouve:>}{titre=#GET{titre}}{recent=#GET{recent}} />
+
+		<p class='boutons'>
+			<input type="submit" name="upgrade" value = "<:step:selectionner_maj:>" />
+			<input type="submit" name="update_local" value = "<:step:actualiser:>" />
+		</p>
+
+		</BOUCLE_plugs>
+		</div></form>
+		
+</div>

@@ -1,0 +1,86 @@
+[(#SET{totodo,[(#ENV**{_todo}|unserialize)]})]<B_plugins>		
+<div class="liste-elements plugins_dispos">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,<:step:plugins_trouves:> : #GRAND_TOTAL})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='logo'></th>
+			<th class='nom'><:step:plugin_nom:></th>
+			<th class='actions'></th>
+			<th class='info'></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_plugins(PLUGINS){!par points}{par multi nom}{etat?}{statut?}{categorie?}{tags?}{actif?}{recherche?}{superieur?}{obsolete?}{id_zone?}{recent?}{present?}>
+		<tr  id="plug#ID_PLUGIN" class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ actif_(#ACTIF)][ etat_(#ETAT)][ maj_(#MAJ_VERSION|?{oui,''})][ zone_(#ID_ZONE)][ (#ID_ZONE|>{0}|?{absent})]">
+			[(#SET{todo,[(#GET*{totodo}|table_valeur{#ID_PLUGIN})]})]
+			<td class='logo'>
+				[(#DOSSIER|et{#CHAMP_SQL{logo}})
+					[(#CONSTANTE|constant|concat{#DOSSIER}|concat{#CHAMP_SQL{logo}}|image_reduire{36,48})]
+				]
+			</td>
+			
+			<td class='nom'>
+				<div class='nom[ (#SHORTDESC|oui)desc]'>
+					<h4>#NOM</h4>[<p>(#SHORTDESC)</p>]
+				</div>
+			</td>
+
+			<td class='actions[ a_(#GET{todo})]'>
+				[(#MAJ_VERSION|oui)
+					[(#CHEMIN{images/plugin-upgrade-24.png}
+						|balise_img
+						|inserer_attribut{title,<:step:plugin_upgrade_possible_version{version=#MAJ_VERSION}:>}
+						|inserer_attribut{alt,<:step:plugin_upgrade_possible_version{version=#MAJ_VERSION}:>})]]
+			</td>
+			
+			<td class='info'>
+				<button class='info' name='id_plugin_info' value='#ID_PLUGIN'>
+				[(#CHEMIN{images/info-12.png}
+					|balise_img
+					|inserer_attribut{title,''}
+					|inserer_attribut{alt,''})]
+				</button>
+			</td>
+		</tr>
+		[(#ID_PLUGIN_INFO|=={#ID_PLUGIN}|oui)
+			<INCLURE{fond=inc_information_plugin}{id_plugin=#ID_PLUGIN} />
+		]
+	</BOUCLE_plugins>
+	</tbody>
+</table>
+</div>
+		<script type="text/javascript"><!--
+		(function ($){
+		$(document).ready(function() {
+			$('#input_nojs').remove();
+			// charger en ajax le descriptif si on clique le titre du plugin
+			// virer le bouton pour consultation hors js
+			
+			$('.plugins_dispos tbody tr td.info button').remove();
+			$('.plugins_dispos tbody').addClass('super')
+			.find('tr:not(.step_plugin_info)')
+			.click(function() {
+				$('.plugins_dispos tr.replier').removeClass('replier');
+				me = $(this);
+				if (!me.next('.step_plugin_info').is(':visible')) {
+					me.addClass('replier').find('td.info').append('<span class="image_loading right"></span>');
+					$('.step_plugin_info').remove();
+					id_plugin = me.attr('id').substr(4);
+					hash = me.attr('class');
+					$.get('#URL_PAGE{inc_information_plugin}',{'id_plugin':id_plugin,'hash':hash},function(data){
+						me.after(data);
+						me.find('.image_loading').remove();
+					});
+				} else {	
+					$('.step_plugin_info').remove();
+				}
+				return false;	
+			});
+		})
+		})(jQuery);
+		//--></script>
+		
+</B_plugins>[
+<div class="liste-elements plugins_dispos"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_plugins>
