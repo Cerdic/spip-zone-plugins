@@ -79,6 +79,7 @@ function agenda_action_update_repetitions($id_evenement,$repetitions,$liste_mots
 		$descriptif = $row['descriptif'];
 		$horaire = $row['horaire'];
 		$lieu = $row['lieu'];
+		$adresse = $row['adresse'];
 		$date_debut = strtotime($row['date_debut']);
 		$date_fin = strtotime($row['date_fin']);
 		$duree = $date_fin - $date_debut;
@@ -102,6 +103,7 @@ function agenda_action_update_repetitions($id_evenement,$repetitions,$liste_mots
 				$update_titre = $titre;
 				$update_descriptif = $descriptif;
 				$update_lieu = $lieu;
+				$update_adresse = $adresse;
 
 				// mettre a jour l'evenement					
 				sql_updateq('spip_evenements',
@@ -109,6 +111,7 @@ function agenda_action_update_repetitions($id_evenement,$repetitions,$liste_mots
 						"titre" => $update_titre,
 						"descriptif" => $update_descriptif,
 						"lieu" => $update_lieu,
+						"adresse" => $update_adresse,
 						"horaire" => $horaire,
 						"date_debut" => $update_date_debut,
 						"date_fin" => $update_date_fin,
@@ -131,6 +134,7 @@ function agenda_action_update_repetitions($id_evenement,$repetitions,$liste_mots
 				$update_titre = $titre;
 				$update_descriptif = $descriptif;
 				$update_lieu = $lieu;
+				$update_adresse = $adresse;
 
 				if ($id_evenement_new = agenda_action_insert_evenement($id_article,$id_evenement)) {
 					// mettre a jour l'evenement					
@@ -139,6 +143,7 @@ function agenda_action_update_repetitions($id_evenement,$repetitions,$liste_mots
 							"titre" => $update_titre,
 							"descriptif" => $update_descriptif,
 							"lieu" => $update_lieu,
+							"adresse" => $update_adresse,
 							"horaire" => $horaire,
 							"date_debut" => $update_date_debut,
 							"date_fin" => $update_date_fin,
