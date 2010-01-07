@@ -407,7 +407,7 @@ class Decideur {
 						if (!is_writable(_DIR_LIB)) {
 							$this->invalider($info);
 							$this->erreur($id, _L("&laquo;$info[p]&raquo; a besion de la librairie <a href='$n[src]'>$lib</a>
-								plac&eacute; dans le r&eacute;pertoire <var>lib/</var> à la racine de votre SPIP.
+								plac&eacute; dans le r&eacute;pertoire <var>lib/</var> &agrave; la racine de votre SPIP.
 								Cependant, ce r&eacute;pertoire n'est pas accessible en &eacute;criture.
 								Vous devez l'installer manuellement ou donner des permissions d'&eacute;criture
 								&agrave; ce r&eacute;pertoire."));	
