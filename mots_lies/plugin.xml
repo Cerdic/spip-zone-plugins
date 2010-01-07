@@ -1,0 +1,53 @@
+<plugin>
+	<nom>Mots li&eacute;s</nom>
+	<auteur>Cyril Marion</auteur>
+	<prefix>mots_lies</prefix>
+	<version>0.0</version>
+	<version_base>0.0</version_base>
+	<etat>dev</etat>
+	<description>Exp&eacute;rimentation d'une extension de la table spip_mots, &agrave; la mani&egrave;re de spip_documents.
+	</description>
+
+	<!--icon>img/picto_mots_lies_128x128.png</icon-->
+
+	<pipeline>
+		<nom>insert_head</nom>
+		<action>insert_head</action>
+		<inclure>mots_lies_fonctions.php</inclure>
+	</pipeline>
+
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/mots_lies.php</inclure>
+	</pipeline>
+	
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/mots_lies.php</inclure>
+	</pipeline>
+	
+	<pipeline>
+		<nom>declarer_tables_auxiliaires</nom>
+		<inclure>base/mots_lies.php</inclure>
+	</pipeline>
+
+	
+	<install>base/mots_lies_upgrade.php</install>
+	
+	<fonctions>mots_lies_fonctions.php</fonctions>
+	
+	<options>mots_lies_options.php</options>
+	
+	<bouton id='comptes' parent='naviguer'>
+		<icone>img/picto_mots_lies_32x32.png</icone>
+		<titre>mots_lies:mots_lies</titre>
+	</bouton>
+
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>mots_lies_autorisations.php</inclure>
+	</pipeline>
+	
+	<necessite id="SPIP" version="[2.0.9;]" />
+
+</plugin>
