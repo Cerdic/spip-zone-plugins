@@ -14,7 +14,7 @@ function verifier_date_dist($valeur, $options=array()){
 	$erreur = _T('verifier:erreur_date');
 	$ok = '';
 	// On tolère différents séparateurs
-	$valeur = ereg_replace("\.|/| ",'-',$valeur);
+	$valeur = ereg_replace("#\.|/| #i",'-',$valeur);
 	
 	// On vérifie la validité du format
 	if(!preg_match('#^[0-9]{2}-[0-9]{2}-[0-9]{4}$#',$valeur)) return $erreur;

@@ -11,7 +11,7 @@ function verifier_telephone_fr_dist($valeur, $options=array()){
 	$erreur = _T('verifier:erreur_telephone');
 	$ok = '';
 	// On accepte differentes notations, les points, les tirets, les espaces, les slashes
-	$tel = ereg_replace("\.|/|-| ",'',$valeur);
+	$tel = preg_replace("#\.|/|-| #i",'',$valeur);
 
 	// On interdit les 000 etc. mais je pense qu'on peut faire plus malin
 	// TODO finaliser les numéros à la con

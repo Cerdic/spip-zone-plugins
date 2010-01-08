@@ -138,10 +138,10 @@ var_dump(verifier($siret_non_valide, 'siret'));
 <h2>Vérifions des DATES :</h2>
 <pre>
 <?php
-$date_valide = "30/01/2009";
+$date_valide = "30-01-2009";
 $date_non_valide = "321227822";
 
-echo "Date JJ/MM/AAAA : $date_valide ?";
+echo "Date JJ/MM/AAAA (avec séparateur /.-) : $date_valide ?";
 var_dump(verifier($date_valide, 'date'));
 echo "Date JJ/MM/AAAA : $date_non_valide ?";
 var_dump(verifier($date_non_valide, 'date'));
