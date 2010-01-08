@@ -255,7 +255,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_email_confirmation' => 'Votre compte est actif, vous pouvez d&egrave;s maintenant vous connecter au site en utilisant vos identifiants personnels.
 
 Votre login est&nbsp;: @login@
-et vous venez choisir votre mot de passe.
+et vous venez de choisir votre mot de passe.
 
 Merci de votre confiance
 
