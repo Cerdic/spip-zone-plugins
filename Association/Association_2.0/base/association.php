@@ -191,25 +191,4 @@
 		'field' => &$spip_asso_activites, 
 		'key' => &$spip_asso_activites_key
 	);
-
-	//-- Relations ----------------------------------------------------
-
-	global $tables_jointures;
-
-	//$tables_jointures['spip_asso_adherents'][]= 'auteurs';
-	//$tables_jointures['spip_asso_adherents'][]= 'auteurs_elargis';
-	//$tables_jointures['spip_auteurs'][]= 'asso_adherents';
-	//$tables_jointures['spip_auteurs_elargis'][]= 'asso_adherents';
-
-	//-- Table des tables ----------------------------------------------------
-
-	global $table_des_tables;
-	$table_des_tables['asso_dons'] = 'asso_dons';
-	$table_des_tables['asso_ventes'] = 'asso_ventes';
-	$table_des_tables['asso_comptes'] = 'asso_comptes';
-	$table_des_tables['asso_categories'] = 'asso_categories';
-    $table_des_tables['asso_plan'] = 'asso_plan';
-	$table_des_tables['asso_ressources'] = 'asso_ressources';
-	$table_des_tables['asso_prets'] = 'asso_prets';
-	$table_des_tables['asso_activites'] = 'asso_activites';
 ?>

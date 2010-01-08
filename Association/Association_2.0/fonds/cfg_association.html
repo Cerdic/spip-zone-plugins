@@ -45,7 +45,7 @@
 		<label><strong><:asso:config_libelle_classe_banques:></strong> </label>	
 		<B_classe_banques>
 		<select name="classe_banques" id="classe_banques" /> 
-		<BOUCLE_classe_banques(SPIP_ASSO_PLAN){fusion classe}{par classe}>
+		<BOUCLE_classe_banques(ASSO_PLAN){fusion classe}{par classe}>
 		<option value="#CLASSE" [(#ENV{classe_banques}|=={#CLASSE}|?{selected="selected"})]>#CLASSE </option>
 		</BOUCLE_classe_banques>
 		</select>
@@ -57,7 +57,7 @@
 		<label><strong><:asso:config_libelle_num_pc:></strong> </label>	
 		<B_pc_cotisations>
 		<select name="pc_cotisations" id="pc_cotisations" /> 
-		<BOUCLE_pc_cotisations(SPIP_ASSO_PLAN){par classe}{par code}{classe!=#ENV{classe_banques}}>
+		<BOUCLE_pc_cotisations(ASSO_PLAN){par classe}{par code}{classe!=#ENV{classe_banques}}>
 		<option value="#CODE" [(#ENV{pc_cotisations}|=={#CODE}|?{selected="selected"})]>#CLASSE - #CODE - #INTITULE</option>
 		</BOUCLE_pc_cotisations>
 		</select>
@@ -69,7 +69,7 @@
 		<label><strong><:asso:config_libelle_num_pc:></strong> </label>	
 		<B_pc_dons>
 		<select name="pc_dons" id="pc_dons" /> 
-		<BOUCLE_pc_dons(SPIP_ASSO_PLAN){par classe}{par code}>
+		<BOUCLE_pc_dons(ASSO_PLAN){par classe}{par code}>
 		<option value="#CODE" [(#ENV{pc_dons}|=={#CODE}|?{selected="selected"})]>#CLASSE - #CODE - #INTITULE</option>
 		</BOUCLE_pc_dons>
 		</select>
@@ -83,7 +83,7 @@
 		<label><strong><:asso:config_libelle_num_pc:></strong> </label>	
 		<B_pc_ventes>
 		<select name="pc_ventes" id="pc_ventes" /> 
-		<BOUCLE_pc_ventes(SPIP_ASSO_PLAN){par classe}{par code}>
+		<BOUCLE_pc_ventes(ASSO_PLAN){par classe}{par code}>
 		<option value="#CODE" [(#ENV{pc_ventes}|=={#CODE}|?{selected="selected"})]>#CLASSE - #CODE - #INTITULE</option>
 		</BOUCLE_pc_ventes>
 		</select>
@@ -97,7 +97,7 @@
 		<label><strong><:asso:config_libelle_num_pc:></strong> </label>	
 		<B_pc_activites>
 		<select name="pc_activites" id="pc_activites" /> 
-		<BOUCLE_pc_activites(SPIP_ASSO_PLAN){par classe}{par code}>
+		<BOUCLE_pc_activites(ASSO_PLAN){par classe}{par code}>
 		<option value="#CODE" [(#ENV{pc_activites}|=={#CODE}|?{selected="selected"})]>#CLASSE - #CODE - #INTITULE</option>
 		</BOUCLE_pc_activites>
 		</select>
@@ -111,7 +111,7 @@
 		<label><strong><:asso:config_libelle_num_pc:></strong> </label>	
 		<B_pc_prets>
 		<select name="pc_prets" id="pc_prets" /> 
-		<BOUCLE_pc_prets(SPIP_ASSO_PLAN){par classe}{par code}>
+		<BOUCLE_pc_prets(ASSO_PLAN){par classe}{par code}>
 		<option value="#CODE" [(#ENV{pc_prets}|=={#CODE}|?{selected="selected"})]>#CLASSE - #CODE - #INTITULE</option>
 		</BOUCLE_pc_prets>
 		</select>

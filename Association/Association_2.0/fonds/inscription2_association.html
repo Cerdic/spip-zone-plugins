@@ -14,7 +14,7 @@
 <br />
 <B_categories>
 <select name="categories[]" multiple="multiple" size="[(#TOTAL_BOUCLE|<{6}|?{ [(#TOTAL_BOUCLE|plus{1})] , 5 })]" id="categories">
-<BOUCLE_categories(SPIP_ASSO_CATEGORIES)>
+<BOUCLE_categories(ASSO_CATEGORIES)>
 	<option value="#ID_CATEGORIE"[(#ID_CATEGORIE|in_array{#GET{selected}}|?{ selected="selected"})]>
 	#LIBELLE
 	</option>

@@ -16,12 +16,10 @@
 function association_verifier_base(){			
 		$version_base = $GLOBALS['association_version'];
 		$current_version = 0.0;
-		
 		if (   (!isset($GLOBALS['meta']['asso_base_version']) )
 		|| (($current_version = $GLOBALS['meta']['asso_base_version'])!=$version_base)) {
 			
 			include_spip('base/association');
-			
 			if ($current_version==0.0){
 				include_spip('base/create');
 				include_spip('base/abstract_sql');
@@ -80,7 +78,6 @@ date date NOT NULL default '0000-00-00' ");
 				ecrire_meta('asso_base_version',$current_version=0.64);
 			}
 					
-			ecrire_metas();
 		}
 		return true;
 	}
@@ -98,7 +95,7 @@ function association_effacer_tables(){
 		spip_query("DROP TABLE spip_asso_ventes");
 		effacer_meta('asso_base_version');
 		effacer_meta('association');
-		ecrire_metas();
+		spip_log("plugin assoc desinstallee");
 	}	
 	
 function association_install($action){
@@ -121,4 +118,5 @@ function association_install($action){
 			break;
 	}
 }	
+#association_effacer_tables();
 ?>

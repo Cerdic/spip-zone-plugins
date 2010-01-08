@@ -33,4 +33,16 @@
 		$flux .= '<link rel="stylesheet" type="text/css" href="'.direction_css(find_in_path('association.css')).'" />';
 		return $flux;
 	}
+
+	//-- Table des tables ----------------------------------------------------
+
+	global $table_des_tables;
+	$table_des_tables['asso_dons'] = 'asso_dons';
+	$table_des_tables['asso_ventes'] = 'asso_ventes';
+	$table_des_tables['asso_comptes'] = 'asso_comptes';
+	$table_des_tables['asso_categories'] = 'asso_categories';
+	$table_des_tables['asso_plan'] = 'asso_plan';
+	$table_des_tables['asso_ressources'] = 'asso_ressources';
+	$table_des_tables['asso_prets'] = 'asso_prets';
+	$table_des_tables['asso_activites'] = 'asso_activites';
 ?>
