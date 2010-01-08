@@ -1,8 +1,0 @@
-#CACHE{0}
-<B_favoris>
-<BOUCLE_favoris(spip_favtextes){ id_auth = #SESSION{id_auteur} }{ id_texte = #ID_ARTICLE }>
-<img src="plugins/mesfavoris/image/fav_del.png" title="Remove from favorites" alt="Remove from favorites" width="30" height="30" onclick="location.href='?action=mesfavoris_delfavorite&id_article=#ID_ARTICLE&redirect=#SELF'"> 
-</BOUCLE_favoris>
-</B_favoris>
-<img src="plugins/mesfavoris/image/fav_add.png" title="Add to favorites" alt="Add to favorites" width="30" height="30" onclick="location.href='?action=mesfavoris_addfavorite&id_article=#ID_ARTICLE&redirect=#SELF'">
-<//B_favoris>
