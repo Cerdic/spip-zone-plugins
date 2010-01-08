@@ -10,6 +10,6 @@
 	</description>
 	<lien>http://www.spip-contrib.net/Un-slogan-pour-votre-site-SPIP-2-0</lien>
 	<prefix>slogan</prefix>
-	<fonctions>slogan_balise.php</fonctions>
+	<fonctions>slogan_fonctions.php</fonctions>
 	<necessite id="SPIP" version="[2.0.0;]" />
 </plugin>
