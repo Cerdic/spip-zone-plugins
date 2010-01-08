@@ -635,6 +635,41 @@ add_outil( array(
 	'pipeline:nettoyer_raccourcis_typo' => 'sommaire_nettoyer_raccourcis',
 ));
 
+// intertitres typo, outil compatible avec 'sommaire' :
+add_variables( array(
+	'nom' => 'i_align',
+	'radio' => array('left' => 'left', 'right' => 'right', 'center' => 'center'),
+	'defaut' => "'left'",
+), array(
+	'nom' => 'i_padding',
+	'format' => _format_NOMBRE,
+	'defaut' => 0,
+), array(
+	'nom' => 'i_hauteur',
+	'format' => _format_NOMBRE,
+	'defaut' => 0,
+), array(
+	'nom' => 'i_largeur',
+	'format' => _format_NOMBRE,
+	'defaut' => 600,
+), array(
+	'nom' => 'i_taille',
+	'format' => _format_NOMBRE,
+	'defaut' => 16,
+), array(
+	'nom' => 'i_couleur',
+	'defaut' => "'black'",
+), array(
+	'nom' => 'i_police',
+	'defaut' => "'dustismo.ttf'",
+));
+add_outil( array(
+	'id' => 'titres_typo',
+	'categorie'   => 'typo-corr',
+	'code:options' => 'define("_titres_typo_ARG", "couleur=%%i_couleur%%,taille=%%i_taille%%,police=%%i_police%%,largeur=%%i_largeur%%,hauteur_ligne=%%i_hauteur%%,padding=%%i_padding%%,align=%%i_align%%");',
+	'pipeline:pre_typo'   => 'titres_typo_pre_typo',
+));
+
 //-----------------------------------------------------------------------------//
 //                               PUBLIC                                        //
 //-----------------------------------------------------------------------------//

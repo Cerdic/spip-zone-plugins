@@ -12,6 +12,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'2pts_non' => '&nbsp;:&nbsp;non',
 	'2pts_oui' => '&nbsp;:&nbsp;oui',
 
+	'titres_typo:nom'         => 'Intertitres en image',
+	'titres_typo:description' => 'Transforme tous les intertitres <html>&laquo; {{{Mon intertitre}}} &raquo;</html> en image typographique param&eacute;trable.[[%i_taille% pt]][[%i_couleur%]][[%i_police%]][[%i_largeur% px]][[%i_hauteur% pt]][[%i_padding% px]][[%i_align%]]',
+'label:i_taille' => 'Taille de la police&nbsp;:',
+'label:i_couleur' => 'Couleur de la police&nbsp;:',
+'label:i_police' => 'Nom du fichier de la police (dossiers {polices/})&nbsp;:',
+'label:i_largeur' => 'Largeur maximale de la ligne de texte&nbsp;:',
+'label:i_hauteur' => 'Hauteur de la ligne de texte (&eacute;q. &agrave; {line-height})&nbsp;:',
+'label:i_padding' => 'Espacement autour du texte (&eacute;q. &agrave; {padding})&nbsp;:',
+'label:i_align' => 'Alignement du texte&nbsp;:',
+
 	// S
 	'SPIP_liens:description' => '@puce@ Tous les liens du site s\'ouvrent par d&eacute;faut dans la fen&ecirc;tre de navigation en cours. Mais il peut &ecirc;tre utile d\'ouvrir les liens externes au site dans une nouvelle fen&ecirc;tre ext&eacute;rieure -- cela revient &agrave; ajouter {target=&quot;_blank&quot;} &agrave; toutes les balises &lt;a&gt; dot&eacute;es par SPIP des classes {spip_out}, {spip_url} ou {spip_glossaire}. Il est parfois n&eacute;cessaire d\'ajouter l\'une de ces classes aux liens du squelette du site (fichiers html) afin d\'&eacute;tendre au maximum cette fonctionnalit&eacute;.[[%radio_target_blank3%]]
 
