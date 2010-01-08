@@ -26,4 +26,18 @@
 	  [(#ENV{editable}|oui)
 	  <p class='boutons'><input type='submit' name="save" class='submit' value='<:bouton_enregistrer:>' /></p>]
 	</div></form>
+<script type="text/javascript">
+(function($){
+	var form_init = function(){
+		$('.formulaire_editer_licence input.submit').hide();
+		$('.formulaire_editer_licence #id_licence').change(function(){
+			$('.formulaire_editer_licence input.submit').show();
+		});
+	};
+	$(function(){
+		form_init();
+		onAjaxLoad(form_init);
+	});
+})(jQuery);
+</script>
 </div>
