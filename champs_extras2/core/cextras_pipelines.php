@@ -342,7 +342,8 @@ function cextras_rechercher_liste_des_champs($tables){
 				// Plus le chiffre est grand, plus les points de recherche 
 				// attribues pour ce champ seront eleves
 				if ($c->rechercher === true 
-				OR  $c->rechercher === 'oui') {
+				OR  $c->rechercher === 'oui'
+				OR  $c->rechercher === 'on') {
 					$priorite = 2;
 				} else {
 					$priorite = intval($c->rechercher);
@@ -354,6 +355,7 @@ function cextras_rechercher_liste_des_champs($tables){
 		}
 		// les ajouter
 		if ($t) {
+			spip_log($t,'extra');
 			$tables = array_merge_recursive($tables, $t);
 		}
 	}

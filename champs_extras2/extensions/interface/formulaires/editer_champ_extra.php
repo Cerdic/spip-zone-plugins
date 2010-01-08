@@ -26,6 +26,10 @@ function formulaires_editer_champ_extra_charger_dist($extra_id='new', $redirect=
 	// remplir les valeurs avec infos de celui-ci
 	if (!$new) {
 		$extra = iextra_get_extra($extra_id);
+		// si l'identifiant n'est pas trouve, c'est que le champ n'existe plus
+		// une ancienne url d'un marque page ?
+		if (!$extra) return false;
+		
 		$valeurs = array_merge($valeurs, $extra->toArray());
 		// compatibilite le temps de migrer vers cextras 1.4.0
 		if (isset($valeurs['precisions']) and $valeurs['precisions']) {
