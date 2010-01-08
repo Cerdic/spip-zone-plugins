@@ -12,14 +12,15 @@
 	stable
 	</etat>
 	<description>
-	Active les r&eacute;seaux sociaux de partage de liens.
-
+	<multi>[fr]Active les r&eacute;seaux sociaux de partage de liens.
+	
 	[Configuration par CFG->./index.php?exec=cfg&amp;cfg=socialtags]
-	</description>
+	[en]Activate the social link sharing network buttons.
+	
+	[Configure via CFG->./index.php?exec=cfg&amp;cfg=socialtags]
+	</multi>	</description>
 	<lien>http://www.spip-contrib.net/Social-tags</lien>
-	<prefix>
-	socialtags
-	</prefix>
+	<prefix>socialtags</prefix>
 	<pipeline>
 		<nom>insert_head</nom>
 		<action>insert_head</action>

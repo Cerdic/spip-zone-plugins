@@ -59,44 +59,44 @@ SVP, veuillez activer Javascript.
 </noscript>
 
 <p style="font-size:90%">
-	<a href="#sc_list" onclick="$.sc_cocher_decocher_tout(true);">Tout cocher</a> / 
-	<a  href="#sc_list" onclick="$.sc_cocher_decocher_tout(false);">Tout d&#233;cocher</a></p>
+	<a href="#sc_list" onclick="$.sc_cocher_decocher_tout(true);"><:socialtags:cfg_tout_cocher:></a> / 
+	<a  href="#sc_list" onclick="$.sc_cocher_decocher_tout(false);"><:socialtags:cfg_tout_decocher:></a></p>
 </fieldset>
 
-<fieldset><legend>Insertion dans les pages :</legend>
+<fieldset><legend><:socialtags:cfg_insertion:></legend>
 
-<br />Ins&#233;rer le bloc social-tags en-dessous du bloc suivant :
+<br /><:socialtags:cfg_inserer:>
 <br />
-<label>S&#233;lecteur : <input type="text" name="jsselector" value="[(#ENV{jsselector}|sinon{'#contenu'})]" size="50" /></label>
-<p><small><b>Exemples (sur les squelettes dist) :</b>
+<label><:socialtags:cfg_selector:> <input type="text" name="jsselector" value="[(#ENV{jsselector}|sinon{'#contenu'})]" size="50" /></label>
+<p><small><b><:socialtags:cfg_exemples:></b>
 <dl>
 <dt><tt>#contenu</tt></dt>
-<dd>En bas de chaque page</dd>
+<dd><:socialtags:cfg_en_bas:></dd>
 <dt><tt>.page_article .cartouche:first</tt></dt>
-<dd>Sous le bloc de titre des pages article</dd>
+<dd><:socialtags:cfg_sous_bloc:></dd>
 <dt><tt>#socialtags</tt></dt>
-<dd>Sous la div nomm&#233;e id=socialtags</dd>
+<dd><:socialtags:cfg_sous_div:></dd>
 </dl>
 </small>
 </fieldset>
 
-<fieldset id="fanbadge"><legend>Badge/Widget Facebook</legend>
+<fieldset id="fanbadge"><legend><:socialtags:cfg_badge_fb:></legend>
 
-<p>Si vous avez un Badge Facebook (<a href="http://www.facebook.com/facebook-widgets/" target="_fb">aide sur le site FB</a>), indiquez ci-dessous son contenu, soit en JS, soit en HTML.</p>
+<p><:socialtags:cfg_badge_fb_existe:><a href="http://www.facebook.com/facebook-widgets/" target="_fb"><:socialtags:cfg_badge_fb_aide:></a><:socialtags:cfg_badge_fb_style:></p>
 
-<strong>Badge HTML</strong> (ajouter dans votre squelette
-<code>&#35;MODELE{socialtags_badge}</code>, ou dans un article
+<strong><:socialtags:cfg_badge_html:></strong> <:socialtags:cfg_badge_html_ajouter_1:>
+<code>&#35;MODELE{socialtags_badge}</code><:socialtags:cfg_badge_html_ajouter_2:>
 <code>&lt;socialtags|badge&gt;):
 <textarea name="badge" class="textarea" rows="6">#ENV{badge}
 </textarea>
 
-<strong>Badge JS</strong> (automatiquement inclus dans <code>?page=socialtags.js</code>):
+<strong><:socialtags:cfg_badge_js:></strong> <:socialtags:cfg_badge_js_1:><code>?page=socialtags.js</code>):
 <textarea name="badgejs" class="textarea" rows="8">#ENV{badgejs}
 </textarea>
 
 </fieldset>
 
-<label><input type="checkbox" name="ifreferer"[ checked="(#ENV{ifreferer}|?{checked})"] />N'afficher le badge et les boutons que pour les visiteurs originaires des sites concern&#233;s.</label>
+<label><input type="checkbox" name="ifreferer"[ checked="(#ENV{ifreferer}|?{checked})"] /><:socialtags:cfg_referer:></label>
 
 
 </div>
