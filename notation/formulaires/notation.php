@@ -50,11 +50,11 @@ function formulaires_notation_charger_dist($objet, $id_objet){
 		}
 	
 
-		// peut il modifier son vote ?
-		include_spip('inc/autoriser');
-		if (!autoriser('modifier', 'notation', $id_notation, null, array('objet'=>$objet, 'id_objet'=>$id_objet))) {
-			$valeurs['editable']=false;
-		}
+	}
+	// peut voter ou modifier son vote ?
+	include_spip('inc/autoriser');
+	if (!autoriser('modifier', 'notation', $id_notation, null, array('objet'=>$objet, 'id_objet'=>$id_objet))) {
+		$valeurs['editable']=false;
 	}
 
 	return $valeurs;
