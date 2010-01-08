@@ -14,7 +14,10 @@
 
 
 	$GLOBALS[$GLOBALS['idx_lang']] = array(
+		'add_to' => 'Add to favorites',
+		'remove_from' => 'Remove from favorites',
 		'login_first' => 'Sorry, action required to be logged, please login first'
+
 	);
 
 ?>
