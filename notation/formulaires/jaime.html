@@ -1,8 +1,11 @@
-#CACHE{0}
 <!--formulaire_notation-->
+<BOUCLE_note(spip_notations_objets){objet=(#ENV{objet}|objet_type)}{id_objet}>
+#SET{note_ponderee,#NOTE_PONDEREE}
+#SET{total,#NOMBRE_VOTES}
+</BOUCLE_note>
 <div class="formulaire_notation formulaire_#FORM ajax">
-	[(#NOTATION_ETOILE{[(#ENV*{note_ponderee})],[(#ENV*{objet})][(#ENV*{id_objet})]})]
-	[<span class="note">(#ENV*{total}) [(#ENV*{total}|>{1}|?{<:notation:votes:>,<:notation:vote:>})]</span>]
+	[(#NOTATION_ETOILE{[(#GET{note_ponderee})],[(#ENV*{objet})][(#ENV*{id_objet})]})]
+	[<span class="note">(#GET{total}) [(#GET{total}|>{1}|?{<:notation:votes:>,<:notation:vote:>})]</span>]
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	[(#ENV**{editable}|oui)

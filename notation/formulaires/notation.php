@@ -20,9 +20,6 @@ function formulaires_notation_charger_dist($objet, $id_objet){
 		'objet'=>$objet,
 		'id_objet'=>$id_objet,
 		'editable'=>true,
-		'note'=>0,
-		'note_ponderee'=>0,
-		'total'=>0,
 		'_note_max' => notation_get_nb_notes(),
 		'_form_id' => "-$objet$id_objet"
 	);
