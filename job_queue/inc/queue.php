@@ -33,6 +33,10 @@
 function queue_add_job($function, $description, $arguments = array(), $file = '', $no_duplicate = false, $time=0, $priority=0){
 	include_spip('base/abstract_sql');
 
+	// cas pourri de ecrire/action/editer_site avec l'option reload=oui
+	if (defined('_GENIE_SYNDIC_NOW'))
+		$arguments['id_syndic'] = _GENIE_SYNDIC_NOW;
+
 	// serialiser les arguments
 	$arguments = serialize($arguments);
 
