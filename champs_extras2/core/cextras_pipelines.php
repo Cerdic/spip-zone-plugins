@@ -355,7 +355,6 @@ function cextras_rechercher_liste_des_champs($tables){
 		}
 		// les ajouter
 		if ($t) {
-			spip_log($t,'extra');
 			$tables = array_merge_recursive($tables, $t);
 		}
 	}
