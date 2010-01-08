@@ -1,11 +1,12 @@
 <plugin>
 	<nom>Selection de favoris</nom>
+	<icon>images/mesfavoris-128.png</icon>
 	<version>1.0.0</version>
 	<version_base>1.0.0</version_base>
+	<etat>dev</etat>
 	<prefix>mesfavoris</prefix>
 	<auteur>Olivier Sallou, [Cedric Morin->yterium.net]</auteur>
 	<description>(De)Selectionne un article pour g&eacute;rer des articles favoris pour un visiteur authentifi&eacute;</description>
-	<options>manageFavorites.php</options>
 	<install>base/mesfavoris.php</install>
 
 	<pipeline>

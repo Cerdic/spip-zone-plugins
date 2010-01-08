@@ -22,7 +22,7 @@ function action_ajouter_favori_dist(){
 		AND $id_objet = intval($id_objet)
 		AND preg_match(",^\w+$,",$objet)){
 
-		sql_insertq("spip_favoris",array('id_auteur'=>$id_auteur,'id_objet'=>$id_objet,'id_objet'=>$id_objet));
+		sql_insertq("spip_favoris",array('id_auteur'=>$id_auteur,'id_objet'=>$id_objet,'objet'=>$objet));
 		suivre_invalideur("favori/$objet/$id_objet");
 		suivre_invalideur("favori/auteur/$id_auteur");
 		
