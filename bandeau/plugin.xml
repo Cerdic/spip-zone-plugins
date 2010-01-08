@@ -9,7 +9,7 @@
  
  	<necessite id="SPIP" version="[2.0.3;2.1.0 dev)" />
 
- 	<fonctions>public/slogan_balise.php</fonctions>
+ 	<fonctions>bando_fonctions.php</fonctions>
  	<options>bando_options.php</options>
  	<pipeline>
  		<nom>autoriser</nom>
