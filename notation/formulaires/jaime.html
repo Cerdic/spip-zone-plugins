@@ -19,9 +19,9 @@
 			<input type="hidden" name="notation_id_donnees" id="id_donnees[(#ENV*{_form_id})]" value="[(#ENV*{id_objet})]" />
 			<input type="hidden" name="content" id="content[(#ENV*{_form_id})]" value="" />
 			[(#ENV{id_notation}|non)
-			<input type="submit" class="submit" name="jaime[(#ENV*{_form_id})]" value="<:notation:jaime|attribut_html:>"/>
+			<input type="submit" class="submit jaime" name="jaime[(#ENV*{_form_id})]" value="<:notation:jaime|attribut_html:>"/>
 			][(#ENV{id_notation}|oui)
-			<input type="submit" class="submit" name="retirer[(#ENV*{_form_id})]" value="<:notation:jaimeplus|attribut_html:>"/>
+			<input type="submit" class="submit jaimeplus" name="retirer[(#ENV*{_form_id})]" value="<:notation:jaimeplus|attribut_html:>"/>
 			]
 		</div>
 	</form>
