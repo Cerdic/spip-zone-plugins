@@ -1,0 +1,29 @@
+<div class="formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_article,nouveau}">
+	<!-- <br class='bugajaxie' /> -->
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,'obligatoire'}
+			<li class="editer_licence[ (#ENV**{erreurs}|table_valeur{id_licence}|oui)erreur]">
+				<label for="id_licence"><:licence:label_select_licence:></label>
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{id_licence})</span>]
+				<select name="id_licence" id="id_licence"[(#ENV{editable}|non)readonly="true"]>
+				<option value="0"[(#ENV{id_licence}|=={0}|oui) selected="selected"]><:licence:aucune_licence:></option>
+				<BOUCLE_selection(POUR){tableau #ENV{licences}}>
+					<BOUCLE_id_licence(POUR){tableau #VALEUR}{cle=id}>#SET{id_licence,#VALEUR}</BOUCLE_id_licence>
+					<BOUCLE_name_licence(POUR){tableau #VALEUR}{cle=name}>#SET{name_licence,#VALEUR}</BOUCLE_name_licence>
+					<option value="#GET{id_licence}"[(#GET{id_licence}|=={#ENV{id_licence}}|oui) selected="selected"]>#GET{name_licence}</option>
+				</BOUCLE_selection>
+				</select>
+			</li>
+		</ul>
+	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
+	  [(#ENV{editable}|oui)
+	  <p class='boutons'><input type='submit' name="save" class='submit' value='<:bouton_enregistrer:>' /></p>]
+	</div></form>
+</div>

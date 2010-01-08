@@ -6,37 +6,6 @@
  *
  */
 
-function licence_formulaire_article ($id_article){
-	include_spip('inc/presentation');
-	include_spip('base/abstract_sql');
-	$article = sql_fetsel("*","spip_articles","id_article=".intval($id_article));
-
-	$out = "";
-	$out .= debut_cadre_relief("../"._DIR_PLUGIN_LICENCE."/img_pack/licence_logo24.png", true, "");
-
-	$securiser_action = charger_fonction('securiser_action','inc');
-	$action = $securiser_action('licence_ajouter',$id_article,self());
-
-	$out .= "<form action=\"$action\" method=\"POST\">"
-				.form_hidden($action)
-				."<div align=\"center\"><b>Choix de la licence :</b>&nbsp;";
-				
-	$out .= "<select name=\"id_licence\" size=\"1\" class=\"fondl\" onchange=\"jQuery('#valider_licence').css('visibility','visible');\">";
-	$out .= "<option value=\"0\"".(($article["id_licence"] == 0)? "selected=\"selected\"":"").">Aucune licence</option>";
-	foreach ($GLOBALS['licence_licences'] as $key => $value)
-	{
-		$out .= "<option value=\"".$value["id"]."\"".(($article["id_licence"] == $value["id"])? "selected=\"selected\"":"").">".$value["name"]."</option>";
-	}
-
-	$out .= "</select> &nbsp;
-				<span class=\"visible_au_chargement\" id=\"valider_licence\"><input value=\"Valider\" class=\"fondo\" type=\"submit\"></span></form></div>";
-	
-	$out .= fin_cadre_relief(true);
-	
-	return $out;
-}
-
-
 $GLOBALS['licence_licences'] = array (
 			"1" 	=> array(
 				# nom de la licence
