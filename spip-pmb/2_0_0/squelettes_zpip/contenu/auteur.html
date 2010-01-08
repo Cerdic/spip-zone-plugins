@@ -21,7 +21,8 @@
 	</div>[(#REM) / vcard]
 
 	[(#SESSION{id_auteur}|=={#ID_AUTEUR}|oui)
-	    <INCLURE{fond=inc/inc-moncompte-lecteur}{env}>
+	  <INCLURE{fond=inc/inc-moncompte-lecteur}{env}>
+	  
 	]
 	
 	<BOUCLE_auteurpmbtwitter(AUTEURS){id_auteur}{tous}>

@@ -420,7 +420,7 @@ function pmb_recherche_extraire($recherche='*', $url_base, $look_ALL='', $look_A
 		if (($dernierTypeTrouve == "225") && ($dernierSousTypeTrouve == "a")) $gtresultat['collection'] .= $texte;
 		if (($dernierTypeTrouve == "225") && ($dernierSousTypeTrouve == "a")) $gtresultat['id_collection'] = $dernierIdTrouve;
 		
-		if (($dernierTypeTrouve == "330") && ($dernierSousTypeTrouve == "a")) $gtresultat['resume'] .= str_replace("","&oelig;", str_replace("\n","<br />", $texte));
+		if (($dernierTypeTrouve == "330") && ($dernierSousTypeTrouve == "a")) $gtresultat['resume'] .= str_replace("","\"",str_replace("","\"",str_replace("","&oelig;", str_replace("\n","<br />", $texte))));
 		
 		if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "a")) $gtresultat['lesauteurs'] .= $texte;
 		if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "b")) $gtresultat['lesauteurs'] = $texte." ".$gtresultat['lesauteurs'];
@@ -526,7 +526,7 @@ function pmb_ws_parser_notice_serialisee($id_notice, $value, &$tresultat) {
 				if (($dernierTypeTrouve == "225") && ($dernierSousTypeTrouve == "a")) $tresultat['collection'] .= $texte;
 				if (($dernierTypeTrouve == "225") && ($dernierSousTypeTrouve == "a")) $tresultat['id_collection'] = $dernierIdTrouve;
 				
-				if (($dernierTypeTrouve == "330") && ($dernierSousTypeTrouve == "a")) $tresultat['resume'] .= str_replace("","&oelig;", stripslashes(str_replace("\n","<br />", $texte)));
+				if (($dernierTypeTrouve == "330") && ($dernierSousTypeTrouve == "a")) $tresultat['resume'] .= str_replace("","\"",str_replace("","\"",str_replace("","&oelig;", stripslashes(str_replace("\n","<br />", $texte)))));
 				
 				if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "a")) $tresultat['lesauteurs'] .= $texte;
 				if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "b")) $tresultat['lesauteurs'] = $texte." ".$tresultat['lesauteurs'];
@@ -571,7 +571,7 @@ function pmb_ws_parser_notice_array($value, &$tresultat) {
 						  
 						  if (($dernierTypeTrouve == "102") && ($dernierSousTypeTrouve == "a")) $tresultat['pays'] .= $texte;
 						  
-						  if (($dernierTypeTrouve == "200") && ($dernierSousTypeTrouve == "a")) $tresultat['titre'] .= str_replace("","&oelig;", stripslashes(str_replace("\n","<br />", str_replace("","'",$texte))));
+						  if (($dernierTypeTrouve == "200") && ($dernierSousTypeTrouve == "a")) $tresultat['titre'] .= str_replace("","\"",str_replace("","\"",str_replace("","&oelig;", stripslashes(str_replace("\n","<br />", str_replace("","'",$texte))))));
 						  if (($dernierTypeTrouve == "200") && ($dernierSousTypeTrouve == "f")) $tresultat['auteur'] .= $texte;
 						  
 						  if (($dernierTypeTrouve == "210") && ($dernierSousTypeTrouve == "c")) $tresultat['editeur'] .= $texte;
@@ -586,7 +586,7 @@ function pmb_ws_parser_notice_array($value, &$tresultat) {
 						  if (($dernierTypeTrouve == "225") && ($dernierSousTypeTrouve == "a")) $tresultat['collection'] .= $texte;
 						  if (($dernierTypeTrouve == "225") && ($dernierSousTypeTrouve == "a")) $tresultat['id_collection'] = $dernierIdTrouve;
 						  
-						  if (($dernierTypeTrouve == "330") && ($dernierSousTypeTrouve == "a")) $tresultat['resume'] .= str_replace("","&oelig;", stripslashes(str_replace("\n","<br />", str_replace("","'",$texte))));
+						  if (($dernierTypeTrouve == "330") && ($dernierSousTypeTrouve == "a")) $tresultat['resume'] .= str_replace("","\"",str_replace("","\"",str_replace("","&oelig;", stripslashes(str_replace("\n","<br />", str_replace("","'",$texte))))));
 						  
 						  if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "a")) $tresultat['lesauteurs'] .= $texte;
 						  if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "b")) $tresultat['lesauteurs'] = $texte." ".$tresultat['lesauteurs'];
@@ -623,10 +623,10 @@ function pmb_ws_autres_lecteurs($id_notice) {
 		$r=$ws->pmbesOPACGeneric_also_borrowed($id_notice,0);
 		$listenotices = Array();
 		foreach ($r as $notice) {
-		    $listenotices[] = $notice->notice_id;
+		    $listenotices[] = $notice['notice_id'];
 		}
 		if (count($listenotices)>0) {
-		      pmb_ws_recuperer_tab_notices ($listenotices, &$ws, &$tresultat);
+		      pmb_ws_recuperer_tab_notices ($listenotices, $ws, $tresultat);
 		}
 	    }
 	} catch (SoapFault $fault) {
@@ -644,7 +644,7 @@ function pmb_ws_documents_numeriques ($id_notice, $id_session=0) {
 		$cpt = 0;
 		foreach ($r as $docnum) {
 		      $tresultat[$cpt] = Array();
-		      $tresultat[$cpt]['name'] = $docnum->name;
+		      $tresultat[$cpt]['name'] = str_replace("","\"",str_replace("","\"",str_replace("","&oelig;", stripslashes(str_replace("\n","<br />", str_replace("","'",$docnum->name))))));
 		      $tresultat[$cpt]['mimetype'] = $docnum->mimetype;
 		      $tresultat[$cpt]['url'] = $docnum->url;
 		      $tresultat[$cpt]['downloadUrl'] = $docnum->downloadUrl;
@@ -739,13 +739,48 @@ function pmb_ws_recuperer_tab_notices ($listenotices, &$ws, &$tresultat) {
 
 //charger les webservices
 function pmb_ws_charger_wsdl(&$ws, $url_base) {
-	try {$ws=new SoapClient(lire_config("spip_pmb/wsdl","http://tence.bibli.fr/pmbws/PMBWsSOAP_1?wsdl"));
+	try {
+		$ws=new SoapClient(lire_config("spip_pmb/wsdl","http://tence.bibli.fr/pmbws/PMBWsSOAP_1?wsdl"));
 	  } catch (SoapFault $fault) {
 		//print("Erreur : ".$fault->faultcode." : ".$fault->faultstring);
 	} 
 
 }
-
+function pmb_ws_liste_tri_recherche() {
+	//retourne un tableau contenant la liste des tris possibles
+	/* Exemple de retour:
+	  Array
+	  (
+	  [0] => Array
+	  (
+	  [sort_name] => text_1
+	  [sort_caption] => Titre
+	  )
+	  
+	  [1] => Array
+	  (
+	  [sort_name] => num_2
+	  [sort_caption] => Indexation décimale
+	  )
+	  
+	  [2] => Array
+	  (
+	  [sort_name] => text_3
+	  [sort_caption] => Auteur
+	  )
+	...
+      )*/
+	$tresultat = Array();
+	pmb_ws_charger_wsdl($ws, $url_base);
+	
+	try {	
+	     $tresultat=$ws->pmbesSearch_get_sort_types();
+	 
+	} catch (SoapFault $fault) {
+		print("Erreur : ".$fault->faultcode." : ".$fault->faultstring);
+	} 
+	return $tresultat;
+}
 
 // retourne un tableau associatif contenant tous les champs d'une notice 
 function pmb_notice_extraire ($id_notice, $url_base, $mode='auto') {
@@ -814,6 +849,7 @@ function pmb_prets_extraire ($session_id, $url_base, $type_pret=0) {
 	return $tableau_resultat;
 			
 }
+
 function pmb_reservations_extraire($pmb_session, $url_base) {
 	$tableau_resultat = Array();
 	pmb_ws_charger_wsdl($ws, $url_base);

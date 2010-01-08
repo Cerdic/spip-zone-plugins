@@ -7,7 +7,27 @@
 
 	<a rel="start" href="#URL_SITE_SPIP/">[(#LOGO_SITE_SPIP||image_reduire{500,100}|inserer_attribut{alt,#NOM_SITE_SPIP}|inserer_attribut{title,#NOM_SITE_SPIP}) ]<span id="nom_site_spip">[(#NOM_SITE_SPIP)]</span></a>
 
-<INCLURE{fond=inc/inc-connexionpmb}{env}>
+<div class="formulaire_spip formulaire_moncomptepmb">
+<h2><:pmb:mon_compte:></h2>
+[(#SESSION{id_auteur}|non)
+      #LOGIN_PUBLIC
+      
+      <br class="nettoyeur" />     
+]
+[(#SESSION{id_auteur}|oui)
+          <form name="myform" method="post" action="#SELF">
+	    <fieldset>
+	    <legend><:pmb:mon_compte:></legend>
+	    <input type="hidden" name="action" value="deconnexion_pmb" />
+	    <input type="hidden" name="redirect" value="#SELF" />
+	    <INCLURE{fond=inc-pmbdeconnexion}{env}>
+	    <br class="nettoyeur" />
+	  </fieldset>
+	  </form>
+     
+]
+
+</div>
 
 <br class="nettoyeur" />
 

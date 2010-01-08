@@ -20,6 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'lire_la_suite' => 'Lire la suite',
 'nouveautes' => 'Nouveaut&eacute;s du catalogue',
 'toutes_nouveautes' => 'toutes les nouveaut&eacute;s',
+'titre' => 'Titre',
 'auteur' => 'Auteur',
 'tous_coupsdecoeur' => 'toutes les critiques',
 'serie' => 'S&eacute;rie',
@@ -73,7 +74,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'collection_issn' => 'ISSN',
 'collection_web' => 'Site internet',
 'notices_consultees' => 'Notices consult&eacute;es',
-'recherche_dans' => 'Recherche dans'
-
+'recherche_dans' => 'Recherche dans',
+'localisation' => 'Localisation',
+'localisation_abbr' => 'Loc.',
+'cote' => 'Cote',
+'disponiblite' => 'Disponibilit&eacute;',
+'disponiblite_abbr' => 'Disp.',
+'section' => 'Section',
+'support' => 'Support',
+'prets_en_cours' => 'Pr&ecirc;ts en cours',
+'prets_en_retard' => 'Pr&ecirc;ts en retard',
+'reservations' => 'R&eacute;servations',
+'session_expire' => 'Votre session de lecteur a expir&eacute;. Veuillez vous d&eacute;connecter, puis vous identifier de nouveau.'
 );
 ?>
