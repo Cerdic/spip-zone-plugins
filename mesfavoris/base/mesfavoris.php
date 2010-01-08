@@ -6,6 +6,13 @@
  *
  */
 
+function mesfavoris_declarer_tables_interfaces($interface){
+	// 'spip_' dans l'index de $tables_principales
+	$interface['table_des_tables']['favoris']='favoris';
+
+	return $interface;
+}
+
 /**
  * Declaration des tables principales
  *
@@ -23,7 +30,7 @@ function mesfavoris_declarer_tables_principales($tables_principales){
 
 	$spip_favoris_key = array(
 		"PRIMARY KEY"		=> "id_favori",
-		"KEY"	=> "id_auteur,id_objet,objet",
+		"KEY auteur_objet"	=> "id_auteur,id_objet,objet",
 		"KEY id_auteur"	=> "id_auteur"
 	);
 
@@ -48,7 +55,8 @@ function mesfavoris_upgrade($nom_meta_base_version,$version_cible){
 			include_spip('base/create');
 			include_spip('base/abstract_sql');
 			include_spip('base/serial');
-			creer_base();
+			creer_ou_upgrader_table("spip_favoris",$GLOBALS['tables_principales']['spip_favoris'],true);
+			
 			// recuperer l'ancienne base si possible (hum)
 			$trouver_table = charger_fonction("trouver_table","base");
 			$trouver_table(''); // vider le cache

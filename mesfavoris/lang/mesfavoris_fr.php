@@ -14,8 +14,13 @@
 
 
 	$GLOBALS[$GLOBALS['idx_lang']] = array(
+		'add' => 'Ajouter',
+		'remove' => 'Retirer',
+
 		'add_to' => 'Ajouter &agrave; ma s&eacute;lection',
 		'remove_from' => 'Retirer de ma selection',
+
+		'mes_favoris' => 'Mes favoris',
 
 		'login_first' => 'Désolé l\'action requiert d\être enregistré, authentifiez-vous d\'abord'
 	);
