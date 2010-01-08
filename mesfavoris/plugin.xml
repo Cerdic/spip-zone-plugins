@@ -3,7 +3,7 @@
  <version>1.0</version>
  <prefix>mesFavoris</prefix>
  <auteur>Olivier Sallou</auteur>
- <description>(De)Selectionne un article pour gérer des articles favoris pour un visiteur authentifié</description>
+ <description>(De)Selectionne un article pour g&eacute;rer des articles favoris pour un visiteur authentifi&eacute;</description>
  <options>manageFavorites.php</options>
  <install>base/mesFavoris_init.php</install>
 
