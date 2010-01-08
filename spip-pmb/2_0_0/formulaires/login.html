@@ -1,7 +1,7 @@
 #HTTP_HEADER{"Cache-Control: no-store, no-cache, must-revalidate"}
 #HTTP_HEADER{"Pragma: no-cache"}
 
-	<div class="formulaire_spip formulaire_moncomptepmb">
+	<div class="formulaire_spip formulaire_login formulaire_moncomptepmb">
 		[(#REM) pour IE qui sinon se perd dans l'ajax !, ne pas retirer]<br class='bugajaxie' />
 		[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{_deja_loge})</p>]
 		[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
@@ -23,12 +23,12 @@
 			<ul class="pmb-connexion">
 				<li>
 					<label for="var_login"><:pmb:pmb_login:></label>
-					<input type='text' class='text' name='var_login' id='var_login' value="[(#ENV**{var_login})]" size='12' />
+					<input type='text' class='text' name='var_login' id='var_login' value="[(#ENV**{var_login})]" size='40' style='width: 150px;' />
 					[<span class="erreur_message invisible">(#ENV**{erreurs}|table_valeur{var_login})</span>]
 				</li>
 				<li>
 					<label for="password"><:pmb:pmb_motdepasse:></label>
-					<input type='password' class='password' name='password' id='password' value="" size='12' />
+					<input type='password' class='password' name='password' id='password' value='' size='40' style='width: 150px;' />
 					[<span class="erreur_message invisible">(#ENV**{erreurs}|table_valeur{password})</span>]
 					<span class='details invisible'>&#91;<a href="#URL_PAGE{spip_pass}" id='spip_pass'><:login_motpasseoublie:></a>&#93;</span>
 				</li>

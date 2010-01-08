@@ -931,4 +931,5 @@ function contient($texte, $findme) {
 	return (strpos($texte, $findme) !== false);
 }
 
+
 ?>

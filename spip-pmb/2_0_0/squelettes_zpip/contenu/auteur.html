@@ -1,24 +1,33 @@
-<BOUCLE_contenu_auteur(AUTEURS){id_auteur}{tous}>
+#CACHE{0}
+  <BOUCLE_contenu_auteur(AUTEURS){id_auteur}{tous}>
     
 	[(#REM) Fil d'Ariane ]
 	<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:info_auteurs:>[ &gt; <strong class="on">(#NOM|couper{80})</strong>]</p>
 
 	<div class="vcard">[(#REM) microformat vcard]
 	<div class="cartouche">
-		[(#EDIT{twitter_user}|oui)
-			<span class="#EDIT{logo}">[(#LOGO_AUTEUR||image_reduire{200,200}|sinon{'<i>double-cliquez ici pour ajouter un logo</i>'})]</span>
-		]
-		[(#EDIT{twitter_user}|non)
-			<span >[(#LOGO_AUTEUR||image_reduire{200,200})]</span>
-		]							
+		
 		<h1 class="h1 #EDIT{qui} fn">#NOM</h1>
 	</div>
+	<B_doculogo>
+	<BOUCLE_doculogo(DOCUMENTS){id_auteur>0}{id_article?}{id_rubrique?}{id_breve?}{tout}{pagination}{!par date}{0,1}>
+		[(#REM) vérifier si une photo n'a pas été mise en document joint à l'auteur (via le plugin FORMULAIRE_UPLOAD]
+		[(#LOGO_DOCUMENT||image_reduire{150,200})]	
+	</BOUCLE_doculogo>
+	</B_doculogo>
+	      [(#REM) sinon afficher le logo]
+	      [(#LOGO_AUTEUR||image_reduire{150,200})]		
+	<//B_doculogo>
 
 	[(#SESSION{id_auteur}|=={#ID_AUTEUR}|non)
-		 [<div class="#EDIT{bio} texte note">(#BIO)</div>]
+		
+		[<div class="#EDIT{bio} texte note">(#BIO)</div>]
 		  [<p class="#EDIT{hyperlien} hyperlien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="url org spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
 	]
+	
 	</div>[(#REM) / vcard]
+
+	
 
 	[(#SESSION{id_auteur}|=={#ID_AUTEUR}|oui)
 	  <INCLURE{fond=inc/inc-moncompte-lecteur}{env}>
