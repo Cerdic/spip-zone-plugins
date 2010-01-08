@@ -1,5 +1,6 @@
 <plugin>
 <nom>Commentaires</nom>
+<icon>icon.png</icon>
 <auteur>[romy.tetue.net->http://romy.tetue.net] - 2009</auteur>
 <licence>GPL</licence>
 <version>0.3</version>
