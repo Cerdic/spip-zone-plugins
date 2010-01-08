@@ -21,7 +21,7 @@ function inscription2_declarer_tables_principales($tables_principales){
 		}
 		foreach(lire_config('inscription2',array()) as $cle => $val) {
 			$cle = preg_replace("/_(obligatoire|fiche|table).*/", "", $cle);
-			if($val!='' and !in_array($cle,$exceptions_des_champs_auteurs_elargis) and !ereg("^(categories|zone|newsletter).*$", $cle) ){
+			if($val!='' and !in_array($cle,$exceptions_des_champs_auteurs_elargis) and !preg_match("/^(categories|zone|newsletter).*$/", $cle) ){
 				if($cle == 'naissance' )
 					$spip_auteurs_elargis[$cle] = "DATE DEFAULT '0000-00-00' NOT NULL";
 				elseif($cle == 'validite' )
