@@ -1,49 +1,56 @@
 <?php
 /**
- * Vérification de la bonne definition des items de langue utilises par le module
+ * Vérification de la definition des items de langue utilises
  * 
+ * @param string $rep
  * @param string $module
  * @param string $langue
  * @param string $ou_langue
- * @param string $ou_fichiers
- * @return 
+ * @param string $ou_fichier
+ * @return array
  */
-function inc_langonet_verifier_definition($module, $langue, $ou_langue, $ou_fichiers) {
 
-	$resultats = array();
+// $rep        => nom du repertoire parent de lang/
+// $module     => prefixe du fichier de langue
+// $langue     => index du nom de langue
+// $ou_lang    => chemin vers le fichier de langue a verifier
+// $ou_fichier => racine de l'arborescence a verifier
+function inc_langonet_verifier_definition($rep, $module, $langue, $ou_langue, $ou_fichier) {
 
-	// On charge le fichier de langue a verifier si il existe dans l'arborescence $ou_langue 
+	// On charge le fichier de langue a verifier
+	// si il existe dans l'arborescence $ou_langue 
 	// (evite le mecanisme standard de surcharge SPIP)
 	include_spip('inc/traduire');
 	$var_source = "i18n_".$module."_".$langue;
-	if (empty($GLOBALS[$var_source]))
-		if (find_in_path($module.'_'.$langue.'.php', $ou_langue)) {
-			charger_langue($langue, $module);
-			if (!$GLOBALS[$var_source]) {
-				$resultats['statut'] = false;
-				$resultats['erreur'] = _T('langonet:message_nok_plugin_inactif', 
-										array('arbo_verif' => $ou_fichiers));
-				return $resultats;
+	if (empty($GLOBALS[$var_source])) {
+		$GLOBALS['idx_lang'] = $var_source;
+		include(_DIR_RACINE.$ou_langue.$module.'_'.$langue.'.php');
+	}
+
+	// On cherche l'ensemble des items utilises dans l'arborescence $ou_fichier
+	$utilises_brut = array('items' => array(), 'suffixes' => array());
+	// On ne scanne pas dans les ultimes sous-repertoires charsets/ ,
+	// lang/ , req/ . On ne scanne que les fichiers php, html ou xml
+	// (voir le fichier regexp.txt).
+	foreach (preg_files(_DIR_RACINE.$ou_fichier, '(?<!/charsets|/lang|/req)(/[^/]*\.(html|php|xml))$') as $_fichier) {
+		foreach ($contenu = file($_fichier) as $ligne => $texte) {
+			if (strpos($_fichier, '.xml')) {
+				$trouver_item = _TROUVER_ITEM_X;
+			}
+			else {
+				$trouver_item = _TROUVER_ITEM_HP;
+			}
+			if (preg_match_all($trouver_item, $texte, $matches)) {
+				$utilises_brut['items'] = array_merge($utilises_brut['items'], $matches[2]);
+				$utilises_brut['suffixes'] = array_merge($utilises_brut['suffixes'], $matches[3]);
+				foreach ($matches[2] as $item_val) {
+					$item_tous[$item_val][$_fichier][$ligne][] = trim($texte);
+				}
 			}
 		}
-		else {
-			$resultats['statut'] = false;
-			$resultats['erreur'] = _T('langonet:message_nok_fichier_langue', 
-									array('langue' => $langue, 'module' => $module, 'dossier' => $ou_langue));
-			return $resultats;
-		}
-
-	// On cherche l'ensemble des items utilises dans l'arborescence $ou_fichiers
-	$utilises_brut = array('items' => array(), 'suffixes' => array());
-//	$regexp = ",(=\"$module:|='$module:|<\w+>$module:|<:$module:|_T\('$module:|_U\('$module:)(\w*)('\s*\.\s*\\$*\w*)*,im";
-	foreach (preg_files(_DIR_RACINE.$ou_fichiers,'\.(html|php|xml)$') as $_fichier) {
-		lire_fichier($_fichier, $contenu);
-		if (preg_match_all(_TROUVER_ITEM, $contenu, $matches)) {
-			$utilises_brut['items'] = array_merge($utilises_brut['items'], $matches[2]);
-			$utilises_brut['suffixes'] = array_merge($utilises_brut['suffixes'], $matches[3]);
-		}
 	}
-	// On rafine le tableau resultant en virant les doublons
+
+	// On affine le tableau resultant en supprimant les doublons
 	$utilises = array('items' => array(), 'suffixes' => array());
 	foreach ($utilises_brut['items'] as $_cle => $_valeur) {
 		if (!in_array($_valeur, $utilises['items'])) {
@@ -51,6 +58,7 @@ function inc_langonet_verifier_definition($module, $langue, $ou_langue, $ou_fich
 			$utilises['suffixes'][] = (!$utilises_brut['suffixes'][$_cle]) ? false : true;
 		}
 	}
+
 	// On construit la liste des items utilises mais non definis
 	$non_definis = array();
 	$a_priori_definis = array();
@@ -64,8 +72,9 @@ function inc_langonet_verifier_definition($module, $langue, $ou_langue, $ou_fich
 			}
 			else {
 				// L'item trouve est utilise dans un contexte variable (ie _T('meteo_'.$statut))
-				// il ne peut etre trouve directement dans le fichier de langue
-				// Donc on verifie que des items de ce "type" existe dans le fichier de langue
+				// Il ne peut etre trouve directement dans le fichier de langue,
+				// donc on verifie que des items de ce "type" existent dans
+				// le fichier de langue
 				$defini = false;
 				foreach($GLOBALS[$var_source] as $_item => $_traduction) {
 					if (substr($_item, 0, strlen($_valeur)) == $_valeur) {
@@ -77,15 +86,26 @@ function inc_langonet_verifier_definition($module, $langue, $ou_langue, $ou_fich
 		}
 		if (!$defini) {
 			$non_definis[] = $_valeur;
+			if (is_array($item_tous[$_valeur])) {
+				$item_non[$_valeur] = $item_tous[$_valeur];
+			}
 		}
 		if (!$avec_certitude) {
-				$a_priori_definis[] = $_valeur;
+			$a_priori_definis[] = $_valeur;
+			if (is_array($item_tous[$_valeur])) {
+				$item_peut_etre[$_valeur] = $item_tous[$_valeur];
+			}
 		}
 	}
 
 	// On prepare le tableau des resultats
+	$resultats['module'] = $module;
+	$resultats['ou_fichier'] = $ou_fichier;
+	$resultats['langue'] = $ou_langue.$module.'_'.$langue.'.php';
 	$resultats['non_definis'] = $non_definis;
+	$resultats['fichier_non'] = $item_non;
 	$resultats['a_priori_definis'] = $a_priori_definis;
+	$resultats['fichier_peut_etre'] = $item_peut_etre;
 	$resultats['statut'] = true;
 	
 	return $resultats;
