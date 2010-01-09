@@ -1,47 +1,61 @@
 <?php
 
-function formulaires_langonet_verifier_charger(){
-	$valeurs = array();
-	$champs = array('module', 'langue', 'chemin_fichier', 'chemin_langue');
-	foreach($champs as $_champ){
-		$valeurs[$_champ] = _request($_champ);
-	}
-	return $valeurs;
+function formulaires_langonet_verifier_charger() {
+	return array('verification' => _request('verification'),
+				'mode' => _request('mode'),
+				'fichier_langue' => _request('fichier_langue'),
+				'dossier_scan' => _request('dossier_scan'));
 }
 
-function formulaires_langonet_verifier_verifier(){
+function formulaires_langonet_verifier_verifier() {
 	$erreurs = array();
-	$obligatoires = array('module', 'langue', 'chemin_fichier', 'chemin_langue');
-	foreach($obligatoires as $_obligatoire){
-		if(!_request($_obligatoire)){
-			$erreurs[$_obligatoire] = _T('langonet:message_nok_champ_obligatoire');
-		}
+	if (_request('fichier_langue') == '0') {
+		$erreurs['fichier_langue'] = _T('langonet:message_choisir_langue');
+	}
+	if (_request('dossier_scan') == '0') {
+		$erreurs['dossier_scan'] = _T('langonet:message_choisir_dossier');
 	}
 	return $erreurs;
 }
 
-function formulaires_langonet_verifier_traiter(){
+function formulaires_langonet_verifier_traiter() {
 	// Determination du type de verification et appel de la fonction idoine
 	$verification = _request('verification');
-	if ($verification == 'definition')
+	if ($verification == 'definition') {
 		$langonet_verifier_langue = charger_fonction('langonet_verifier_definition','inc');
-	else
+	}
+	else {
 		$langonet_verifier_langue = charger_fonction('langonet_verifier_utilisation','inc');
+	}
+
 	// Recuperation des champs du formulaire
-	$champs = array('module', 'langue', 'chemin_fichier', 'chemin_langue');
-	foreach($champs as $_champ){
-		$champs[$_champ] = _request($_champ);
-	}
-	if (substr($champs['chemin_fichier'],-1) != '/') {
-		$champs['chemin_fichier'] .= '/';
-	}
-	if (substr($champs['chemin_langue'],-1) != '/') {
-		$champs['chemin_langue'] .= '/';
-	}
-	// La REGEXP de recherche de l'item de langue
-	define("_TROUVER_ITEM", ",(?:=[\"']|<\w+>|<:|_[UT]\(')(" . $champs['module'] . ":)(\w*)('\s*\.\s*\\$*\w*)*,im");
-	// Verification et formatage des resultats pour l'affichage dans le formulaire
-	$resultats = $langonet_verifier_langue($champs['module'], $champs['langue'], $champs['chemin_langue'], $champs['chemin_fichier']);
+	//   $rep        -> nom du repertoire parent de lang/
+	//                  'langonet' pour 'langonet/lang/'
+	//                  correspond generalement au 'nom' du plugin
+	//   $module     -> prefixe du fichier de langue
+	//                  'langonet' pour 'langonet_fr.php'
+	//                  parfois different du 'nom' du plugin
+	//   $langue     -> index du nom de langue
+	//                  'fr' pour 'langonet_fr.php'
+	//   $ou_langue  -> chemin vers le fichier de langue a verifier
+	//                  'plugins/auto/langonet/lang'
+	//   $ou_fichier -> racine de l'arborescence a verifier
+	//                  'plugins/auto/langonet'
+	$retour_select_langue = explode(':', _request('fichier_langue'));
+	$rep = $retour_select_langue[0];
+	$module = $retour_select_langue[1];
+	$langue = $retour_select_langue[2];
+	$ou_langue = $retour_select_langue[3];
+	$ou_fichier = _request('dossier_scan');
+
+	// Les REGEXP de recherche de l'item de langue (voir le fichier regexp.txt)
+	// pour les fichiers .html et .php
+	define("_TROUVER_ITEM_HP", ",(?:<:|_[T|U]\(['\"])(?:([a-z0-9_]+):)?([a-z0-9_]+)((?:{(?:[^\|=>]*=[^\|>]*)})?(?:(?:\|[^>]*)?)(?:['\"]\s*\.\s*\\$[a-z0-9_]+)?),iS");
+	// pour les fichiers .xml
+	define("_TROUVER_ITEM_X", ",<[a-z0-9_]+>[\n|\t|\s]*([a-z0-9_]+):([a-z0-9_]+)[\n|\t|\s]*</[a-z0-9_]+()>,iS");
+
+	// Verification et formatage des resultats pour affichage
+	$resultats = $langonet_verifier_langue($rep, $module, $langue, $ou_langue, $ou_fichier);
 	if (!$resultats['statut']) {
 		$retour['message_erreur'] = $resultats['erreur'];
 	}
@@ -52,53 +66,91 @@ function formulaires_langonet_verifier_traiter(){
 	return $retour;
 }
 
-function formater_resultats($resultats, $verification='definition'){
+function formater_resultats($resultats, $verification='definition') {
 	$texte = '';
 	if ($verification == 'definition') {
 		// Liste des items non definis avec certitude
 		if (count($resultats['non_definis']) > 0) {
-			$texte .= _T('langonet:message_ok_n_non_definis', array(nberr => count($resultats['non_definis']))) . '<br /><br />';
-			foreach($resultats['non_definis'] as $_cle => $_item) {
-				$texte .= '&raquo; ' . $_item . '<br />';
+			if (count($resultats['non_definis']) == 1) {
+				$texte .= _T('langonet:message_ok_non_definis_1', array('ou_fichier' => $resultats['ou_fichier'], 'langue' => $resultats['langue'])) . "\n<br /><br />\n";
 			}
+			else {
+				$texte .= _T('langonet:message_ok_non_definis_n', array('nberr' => count($resultats['non_definis']), 'ou_fichier' => $resultats['ou_fichier'], 'langue' => $resultats['langue'])) . "\n<br /><br />\n";
+			}
+			$texte .= afficher_lignes($resultats['fichier_non']);
 		}
-		else
-			$texte .= _T('langonet:message_ok_0_non_defini');
-		$texte .= '<br /><br />';
+		else {
+			$texte .= _T('langonet:message_ok_non_definis_0', array('module' => $resultats['module'], 'ou_fichier' => $resultats['ou_fichier'], 'langue' => $resultats['langue']));
+		}
+		$texte .= "\n<br /><br />\n";
 		// Liste des items definis sans certitude
 		if (count($resultats['a_priori_definis']) > 0) {
-			$texte .= _T('langonet:message_ok_n_definis_incertains', array(nberr => count($resultats['a_priori_definis']))) . '<br /><br />';
-			foreach($resultats['a_priori_definis'] as $_cle => $_item) {
-				$texte .= '&raquo; ' . $_item . '<br />';
+			if (count($resultats['a_priori_definis']) == 1) {
+				$texte .= _T('langonet:message_ok_definis_incertains_1', array('langue' => $resultats['langue'])) . "\n<br /><br />\n";
 			}
+			else {
+				$texte .= _T('langonet:message_ok_definis_incertains_n', array('nberr' => count($resultats['a_priori_definis']), 'langue' => $resultats['langue'])) . "\n<br /><br />\n";
+			}
+			$texte .= afficher_lignes($resultats['fichier_peut_etre']);
 		}
-		else
-			$texte .= _T('langonet:message_ok_0_defini_incertain');
+		else {
+			$texte .= _T('langonet:message_ok_definis_incertains_0');
+		}
 	}
 	else {
 		// Liste des items non utilises avec certitude
 		if (count($resultats['non_utilises']) > 0) {
-			$texte .= _T('langonet:message_ok_n_non_utilises', array(nberr => count($resultats['non_utilises']))) . '<br /><br />';
+			if (count($resultats['non_utilises']) == 1) {
+				$texte .= _T('langonet:message_ok_non_utilises_1', array('ou_fichier' => $resultats['ou_fichier'], 'langue' => $resultats['langue'])) . "\n<br /><br />\n";
+			}
+			else {
+				$texte .= _T('langonet:message_ok_non_utilises_n', array('nberr' => count($resultats['non_utilises']), 'ou_fichier' => $resultats['ou_fichier'], 'langue' => $resultats['langue'])) . "\n<br /><br />\n";
+			}
+			asort($resultats['non_utilises'], SORT_STRING);
 			foreach($resultats['non_utilises'] as $_cle => $_item) {
-				$texte .= '&raquo; ' . $_item . '<br />';
+				$texte .= '&#8226; ' . $_item . '<br />';
 			}
 		}
-		else
-			$texte .= _T('langonet:message_ok_0_non_utilise');
-		$texte .= '<br /><br />';
+		else {
+			$texte .= _T('langonet:message_ok_non_utilises_0', array('ou_fichier' => $resultats['ou_fichier'], 'langue' => $resultats['langue']));
+		}
+		$texte .= "\n<br /><br />\n";
 		// Liste des items utilises sans certitude
 		if (count($resultats['a_priori_utilises']) > 0) {
-			$texte .= _T('langonet:message_ok_n_utilises_incertains', array(nberr => count($resultats['a_priori_utilises']))) . '<br /><br />';
-			foreach($resultats['a_priori_utilises'] as $_cle => $_item) {
-				$texte .= '&raquo; ' . $_item . '<br />';
+			if (count($resultats['a_priori_utilises']) == 1) {
+				$texte .= _T('langonet:message_ok_utilises_incertains_1') . "\n<br /><br />\n";
 			}
+			else {
+				$texte .= _T('langonet:message_ok_utilises_incertains_n', array('nberr' => count($resultats['a_priori_utilises']))) . "\n<br /><br />\n";
+			}
+			$texte .= afficher_lignes($resultats['fichier_peut_etre']);
 		}
-		else
-			$texte .= _T('langonet:message_ok_0_utilise_incertain');
+		else {
+			$texte .= _T('langonet:message_ok_utilises_incertains_0');
+		}
 	}
-	$texte .= '<br /><br />';
+	$texte .= "\n<br /><br />\n";
 
 	return $texte;
 }
 
+function afficher_lignes($tableau) {
+	// la liste des lignes des fichiers contenant les items de langue
+	$liste_lignes = '';
+	ksort($tableau);
+	foreach ($tableau as $item => $detail) {
+		$liste_lignes .= "<br />\n&#8226; " .$item. "\n</p>\n";
+		foreach ($tableau[$item] as $fichier => $ligne) {
+			$liste_lignes .= "<p style=\"padding-left:3em;font-weight:bold;\">" .$fichier. "</p>\n";
+			foreach ($tableau[$item][$fichier] as $ligne_n => $ligne_t) {
+				$L = intval($ligne_n+1);
+				$liste_lignes .= "<p style=\"padding-left:9em;text-indent: -5em;\">L.". sprintf("%04s", $L) .":<span style=\"padding-left:1em;\">".htmlentities($ligne_t[0]). "</span></p>\n";
+			}
+			$liste_lignes .= "<p class=\"reponse_formulaire reponse_formulaire_ok\">\n";
+		}
+	}
+	$liste_lignes .= "\n<br /><br />\n";
+	
+	return $liste_lignes;
+}
 ?>
