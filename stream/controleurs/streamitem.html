@@ -131,18 +131,18 @@ class="streamset #STATUT" style='width: 450px; color: rgb(51, 51, 51); font-size
 
 </fieldset>
 
-<a class="delicious" href="http://feeds.delicious.com/v2/json/urlinfo/[(#URL**|md5)]"
-></a>
-<script>
+[(#URL**|oui)<a class="delicious" href="http://feeds.delicious.com/v2/json/urlinfo/[(#URL**|md5)]"
+></a>]
+<script tpe="text/javascript">
 // si l'article n'a pas de titre ou de tag, mais a une url
 // choper des infos sur delicious
 (function(){
-var me = $('a.delicious');
-var url = $(me).attr('href');
-var crayon = me.parents('fieldset');
-//me.remove();
-if (url) {
+	var me = $('a.delicious');
+	var url = $(me).attr('href');
+	var crayon = me.parents('fieldset');
+	if (url)
 	$.getJSON(url+'?callback=?', {}, function(c) {
+		if (!c || !c[0]) return; 
 		var u = crayon.find('input.titre');
 		if (u.val()=='') u.val(c[0].title);
 		var suggest='';
@@ -152,12 +152,7 @@ if (url) {
 		.find('input.tags')
 		.after(suggest.replace(/^, /,''));
 	});
-}
-
-console.log(me);
-console.log(crayon);
-
-)();
+})();
 </script>
 
 </BOUCLE_a>

@@ -8,7 +8,7 @@
 [(#REM)
 	Si on est autorise a resyndiquer, mettre un bouton + ajax
 ]
-<a class="ajax" href="#URL_ACTION_AUTEUR{editer_site,#ID_SYNDIC,#SELF}&amp;reload=oui"><img src="#CHEMIN{images/refresh.gif}" /></a>
+[<a class="(#SYNDICATION|=={oui}|?{syndication})" href="#URL_ACTION_AUTEUR{editer_site,#ID_SYNDIC,#SELF}&amp;reload=oui"><img src="#CHEMIN{images/refresh.gif}" /></a>]
 
 </li>
 </BOUCLE_sources>
@@ -23,7 +23,7 @@ onclick="alert('bookmarklet a installer dans la barre'); return false;">+Stream<
 ]
 
 <script type='text/javascript'>
-$('.menu.sources a.ajax')
+$('.menu.sources a.syndication')
 .bind('click', function() {
 	var me = this;
 	var ori = $(me).html();
