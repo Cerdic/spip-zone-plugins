@@ -43,7 +43,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_ok_fichier_genere' => 'Le fichier de langue &laquo;<em>@langue@</em>&raquo; du module &laquo;<em>@module@</em>&raquo; a &eacute;t&eacute; g&eacute;n&eacute;r&eacute; correctement (voir fichier &laquo;<em>@fichier@</em>&raquo;).',
 	'message_ok_definis_incertains_n' => 'Les @nberr@ items de langue ci-dessous sont utilis&eacute;s dans un contexte complexe et pourraient &ecirc;tre non d&eacute;finis dans le fichier de langue  &laquo;<em>@langue@</em>&raquo;. Nous vous invitons &agrave; les v&eacute;rifier un par un :',
 	'message_ok_definis_incertains_1' => 'L\'item de langue ci-dessous est utilis&eacute; dans un contexte complexe et pourrait &ecirc;tre non d&eacute;fini dans le fichier de langue  &laquo;<em>@langue@</em>&raquo;. Nous vous invitons &agrave; le v&eacute;rifier :',
-	'message_ok_definis_incertains_0' => 'Aucun item de langue n\'est utilis&eacute; dans un contexte complexe (par exemple :  _T(\'meteo_\'.$statut)).',
+	'message_ok_definis_incertains_0' => 'Aucun item de langue n\'est utilis&eacute; dans un contexte complexe (par exemple :  _T(\'@module@_\'.$statut)).',
 	'message_ok_non_definis_n' => 'Les @nberr@ items de langue ci-dessous sont utilis&eacute;s dans des fichiers du r&eacute;pertoire &laquo;<em>@ou_fichier@</em>&raquo; mais ne sont pas d&eacute;finis dans le fichier de langue &laquo;<em>@langue@</em>&raquo; :',
 	'message_ok_non_definis_1' => 'L\'item de langue ci-dessous est utilis&eacute; dans des fichiers du r&eacute;pertoire &laquo;<em>@ou_fichier@</em>&raquo; mais n\'est pas d&eacute;fini dans le fichier de langue &laquo;<em>@langue@</em>&raquo; :',
 	'message_ok_non_definis_0' => 'Tous les items de langue du module    &laquo;<em>@module@</em>&raquo; utilis&eacute;s dans les fichiers du r&eacute;pertoire &laquo;<em>@ou_fichier@</em>&raquo; sont bien d&eacute;finis dans le fichier de langue &laquo;<em>@langue@</em>&raquo;.',
@@ -52,9 +52,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_ok_non_utilises_0' => 'Tous les items de langue d&eacute;finis  dans le fichier de langue &laquo;<em>@langue@</em>&raquo; sont bien utilis&eacute;s dans les fichiers du r&eacute;pertoire &laquo;<em>@ou_fichier@</em>&raquo;.',
 	'message_ok_utilises_incertains_n' => 'Les @nberr@ items de langue ci-dessous sont peut-&ecirc;tre utilis&eacute;s dans un contexte complexe. Nous vous invitons &agrave; les v&eacute;rifier un par un :',
 	'message_ok_utilises_incertains_1' => 'L\'item de langue ci-dessous est peut-&ecirc;tre utilis&eacute; dans un contexte complexe. Nous vous invitons &agrave; le v&eacute;rifier :',
-	'message_ok_utilises_incertains_0' => 'Aucun item de langue n\'est utilis&eacute; dans un contexte complexe (par exemple :  _T(\'meteo_\'.$statut)).',
+	'message_ok_utilises_incertains_0' => 'Aucun item de langue n\'est utilis&eacute; dans un contexte complexe (par exemple :  _T(\'@module@_\'.$statut)).',
 	'message_nok_plugin_inactif' => 'Le plugin &laquo;<em>@plugin@</em>&raquo; n\'est pas activ&eacute;. Activez-le avant de continuer les v&eacute;rifications.',
-	'meteo_test' => 'test d\'utilisation en "contexte complexe" : $statut = \'test\'; echo _T(\'meteo_\'.$statut));',
+	'test_item_non_utilise' => 'TEST : Cet item de langue est bien d&eacute;fini dans le fichier de langue (), mais n\'est pas utilis&eacute; dans les fichiers du r&eacute;pertoire scann&eacute; ().',
 
 // O
 	'option_mode_index' => 'Item de la langue source',
