@@ -691,3 +691,7 @@ div.post legend {
   border: none;
   white-space: nowrap;
 }
+
+/* persos spipclear*/
+
+#comment-form p.field input { color: #fff; }
