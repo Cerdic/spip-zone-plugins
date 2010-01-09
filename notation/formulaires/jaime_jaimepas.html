@@ -6,7 +6,7 @@
 </BOUCLE_note>
 <div class="formulaire_notation formulaire_#FORM ajax">
 	[(#NOTATION_ETOILE{[(#GET{note_ponderee})],[(#ENV*{objet})][(#ENV*{id_objet})]})]
-	[<span class="note">(GET{total}) [(GET{total}|>{1}|?{<:notation:votes:>,<:notation:vote:>})]</span>]
+	[<span class="note">(#GET{total}) [(#GET{total}|>{1}|?{<:notation:votes:>,<:notation:vote:>})]</span>]
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	[(#ENV**{editable}|oui)
