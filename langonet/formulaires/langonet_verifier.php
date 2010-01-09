@@ -21,12 +21,7 @@ function formulaires_langonet_verifier_verifier() {
 function formulaires_langonet_verifier_traiter() {
 	// Determination du type de verification et appel de la fonction idoine
 	$verification = _request('verification');
-	if ($verification == 'definition') {
-		$langonet_verifier_langue = charger_fonction('langonet_verifier_definition','inc');
-	}
-	else {
-		$langonet_verifier_langue = charger_fonction('langonet_verifier_utilisation','inc');
-	}
+	$langonet_verifier_items = charger_fonction('langonet_verifier_items','inc');
 
 	// Recuperation des champs du formulaire
 	//   $rep        -> nom du repertoire parent de lang/
@@ -55,7 +50,7 @@ function formulaires_langonet_verifier_traiter() {
 	define("_TROUVER_ITEM_X", ",<[a-z0-9_]+>[\n|\t|\s]*([a-z0-9_]+):([a-z0-9_]+)[\n|\t|\s]*</[a-z0-9_]+()>,iS");
 
 	// Verification et formatage des resultats pour affichage
-	$resultats = $langonet_verifier_langue($rep, $module, $langue, $ou_langue, $ou_fichier);
+	$resultats = $langonet_verifier_items($rep, $module, $langue, $ou_langue, $ou_fichier, $verification);
 	if (!$resultats['statut']) {
 		$retour['message_erreur'] = $resultats['erreur'];
 	}
@@ -70,12 +65,12 @@ function formater_resultats($resultats, $verification='definition') {
 	$texte = '';
 	if ($verification == 'definition') {
 		// Liste des items non definis avec certitude
-		if (count($resultats['non_definis']) > 0) {
-			if (count($resultats['non_definis']) == 1) {
+		if (count($resultats['item_non']) > 0) {
+			if (count($resultats['item_non']) == 1) {
 				$texte .= _T('langonet:message_ok_non_definis_1', array('ou_fichier' => $resultats['ou_fichier'], 'langue' => $resultats['langue'])) . "\n<br /><br />\n";
 			}
 			else {
-				$texte .= _T('langonet:message_ok_non_definis_n', array('nberr' => count($resultats['non_definis']), 'ou_fichier' => $resultats['ou_fichier'], 'langue' => $resultats['langue'])) . "\n<br /><br />\n";
+				$texte .= _T('langonet:message_ok_non_definis_n', array('nberr' => count($resultats['item_non']), 'ou_fichier' => $resultats['ou_fichier'], 'langue' => $resultats['langue'])) . "\n<br /><br />\n";
 			}
 			$texte .= afficher_lignes($resultats['fichier_non']);
 		}
@@ -84,30 +79,30 @@ function formater_resultats($resultats, $verification='definition') {
 		}
 		$texte .= "\n<br /><br />\n";
 		// Liste des items definis sans certitude
-		if (count($resultats['a_priori_definis']) > 0) {
-			if (count($resultats['a_priori_definis']) == 1) {
+		if (count($resultats['item_peut_etre']) > 0) {
+			if (count($resultats['item_peut_etre']) == 1) {
 				$texte .= _T('langonet:message_ok_definis_incertains_1', array('langue' => $resultats['langue'])) . "\n<br /><br />\n";
 			}
 			else {
-				$texte .= _T('langonet:message_ok_definis_incertains_n', array('nberr' => count($resultats['a_priori_definis']), 'langue' => $resultats['langue'])) . "\n<br /><br />\n";
+				$texte .= _T('langonet:message_ok_definis_incertains_n', array('nberr' => count($resultats['item_peut_etre']), 'langue' => $resultats['langue'])) . "\n<br /><br />\n";
 			}
 			$texte .= afficher_lignes($resultats['fichier_peut_etre']);
 		}
 		else {
-			$texte .= _T('langonet:message_ok_definis_incertains_0');
+			$texte .= _T('langonet:message_ok_definis_incertains_0', array('module' => $resultats['module']));
 		}
 	}
 	else {
 		// Liste des items non utilises avec certitude
-		if (count($resultats['non_utilises']) > 0) {
-			if (count($resultats['non_utilises']) == 1) {
+		if (count($resultats['item_non']) > 0) {
+			if (count($resultats['item_non']) == 1) {
 				$texte .= _T('langonet:message_ok_non_utilises_1', array('ou_fichier' => $resultats['ou_fichier'], 'langue' => $resultats['langue'])) . "\n<br /><br />\n";
 			}
 			else {
-				$texte .= _T('langonet:message_ok_non_utilises_n', array('nberr' => count($resultats['non_utilises']), 'ou_fichier' => $resultats['ou_fichier'], 'langue' => $resultats['langue'])) . "\n<br /><br />\n";
+				$texte .= _T('langonet:message_ok_non_utilises_n', array('nberr' => count($resultats['item_non']), 'ou_fichier' => $resultats['ou_fichier'], 'langue' => $resultats['langue'])) . "\n<br /><br />\n";
 			}
-			asort($resultats['non_utilises'], SORT_STRING);
-			foreach($resultats['non_utilises'] as $_cle => $_item) {
+			asort($resultats['item_non'], SORT_STRING);
+			foreach($resultats['item_non'] as $_cle => $_item) {
 				$texte .= '&#8226; ' . $_item . '<br />';
 			}
 		}
@@ -116,17 +111,17 @@ function formater_resultats($resultats, $verification='definition') {
 		}
 		$texte .= "\n<br /><br />\n";
 		// Liste des items utilises sans certitude
-		if (count($resultats['a_priori_utilises']) > 0) {
-			if (count($resultats['a_priori_utilises']) == 1) {
+		if (count($resultats['item_peut_etre']) > 0) {
+			if (count($resultats['item_peut_etre']) == 1) {
 				$texte .= _T('langonet:message_ok_utilises_incertains_1') . "\n<br /><br />\n";
 			}
 			else {
-				$texte .= _T('langonet:message_ok_utilises_incertains_n', array('nberr' => count($resultats['a_priori_utilises']))) . "\n<br /><br />\n";
+				$texte .= _T('langonet:message_ok_utilises_incertains_n', array('nberr' => count($resultats['item_peut_etre']))) . "\n<br /><br />\n";
 			}
 			$texte .= afficher_lignes($resultats['fichier_peut_etre']);
 		}
 		else {
-			$texte .= _T('langonet:message_ok_utilises_incertains_0');
+			$texte .= _T('langonet:message_ok_utilises_incertains_0', array('module' => $resultats['module']));
 		}
 	}
 	$texte .= "\n<br /><br />\n";
