@@ -8,7 +8,7 @@
 	<auteur>Olivier Sallou, [Cedric Morin->yterium.net]</auteur>
 	<description>(De)Selectionne un article pour g&eacute;rer des articles favoris pour un visiteur authentifi&eacute;</description>
 	<install>base/mesfavoris.php</install>
-
+	<lien>http://www.spip-contrib.net/Mes-Favoris-2-0</lien>
 	<pipeline>
 		<nom>declarer_tables_principales</nom>
 		<inclure>base/mesfavoris.php</inclure>
