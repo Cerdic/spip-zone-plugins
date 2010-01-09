@@ -54,7 +54,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_ok_utilises_incertains_1' => 'L\'item de langue ci-dessous est peut-&ecirc;tre utilis&eacute; dans un contexte complexe. Nous vous invitons &agrave; le v&eacute;rifier :',
 	'message_ok_utilises_incertains_0' => 'Aucun item de langue n\'est utilis&eacute; dans un contexte complexe (par exemple :  _T(\'@module@_\'.$statut)).',
 	'message_nok_plugin_inactif' => 'Le plugin &laquo;<em>@plugin@</em>&raquo; n\'est pas activ&eacute;. Activez-le avant de continuer les v&eacute;rifications.',
-	'test_item_non_utilise' => 'TEST : Cet item de langue est bien d&eacute;fini dans le fichier de langue (), mais n\'est pas utilis&eacute; dans les fichiers du r&eacute;pertoire scann&eacute; ().',
+	'meteo_test' => 'TEST : Cet item de langue est bien d&eacute;fini dans le fichier de langue, mais est utilis&eacute; sous forme "complexe" dans les fichiers du r&eacute;pertoire scann&eacute;.',
 
 // O
 	'option_mode_index' => 'Item de la langue source',
@@ -67,6 +67,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // T
+	'test_item_non_utilise' => 'TEST : Cet item de langue est bien d&eacute;fini dans le fichier de langue (), mais n\'est pas utilis&eacute; dans les fichiers du r&eacute;pertoire scann&eacute; ().',
 	'titre_onglet' => 'LangOnet',
 	'titre_page_navigateur' => 'LangOnet'
 
