@@ -15,6 +15,7 @@ _ Le plugin rajoute un onglet dans la page de gestion des langues.
 		<icone>images/langonet-24.png</icone>
 		<titre>langonet:titre_onglet</titre>
 	</onglet>
+	<options>langonet_options.php</options>
 	<pipeline>
 		<nom>autoriser</nom>
 		<inclure>inc/langonet_autoriser.php</inclure>
