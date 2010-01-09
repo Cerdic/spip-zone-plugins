@@ -21,30 +21,19 @@
 								<input type="radio" value="utilisation" id="verification_utilisation" class="radio" name="verification" [(#ENV{verification, definition}|=={utilisation}|oui) checked="checked"] />
 								<label for="verification_utilisation"><:langonet:label_verification_utilisation:></label>
 							</div>
+						<li class="editer_mode[(#ENV{erreurs}|table_valeur{mode}|oui) erreur]">
+							<label><:langonet:label_mode_utilisation:></label>
+							<div class="choix">
+								<input type="radio" value="normal" id="mode_normal" class="radio" name="mode" [(#ENV{mode, normal}|=={normal}|oui) checked="checked"] />
+								<label for="mode_normal"><:langonet:label_mode_normal:> </label>
+								<input type="radio" value="complet" id="mode_complet" class="radio" name="mode" [(#ENV{mode, normal}|=={complet}|oui) checked="checked"] />
+								<label for="mode_complet"><:langonet:label_mode_complet:></label>
+							</div>
 						</li>
-						<li class="editer_module obligatoire[(#ENV{erreurs}|table_valeur{module}|oui) erreur]">
-							<label for="module_a_verifier"><:langonet:label_module:></label>
-							<p class="explication"><:langonet:info_module:></p>
-							[<span class="erreur_message">(#ENV{erreurs}|table_valeur{module})</span>]
-							<input type="text" class="text" name="module" id="module_a_verifier" value="#ENV{module}" />
-						</li>
-						<li class="editer_langue obligatoire[(#ENV{erreurs}|table_valeur{langue}|oui) erreur]">
-							<label for="langue"><:langonet:label_langue:></label>
-							<p class="explication"><:langonet:info_langue:></p>
-							[<span class="erreur_message">(#ENV{erreurs}|table_valeur{langue})</span>]
-							<input type="text" class="text" name="langue" id="langue" value="#ENV{langue}" />
-						</li>
-						<li class="editer_chemin_fichier obligatoire[(#ENV{erreurs}|table_valeur{chemin_fichier}|oui) erreur]">
-							<label for="chemin_fichier_a_verifier"><:langonet:label_chemin_fichier:></label>
-							<p class="explication"><:langonet:info_chemin_fichier:></p>
-							[<span class="erreur_message">(#ENV{erreurs}|table_valeur{chemin_fichier})</span>]
-							<input type="text" class="text" name="chemin_fichier" id="chemin_fichier_a_verifier" value="#ENV{chemin_fichier}" />
-						</li>
-						<li class="editer_chemin_langue obligatoire[(#ENV{erreurs}|table_valeur{chemin_langue}|oui) erreur]">
-							<label for="chemin_langue"><:langonet:label_chemin_langue:></label>
-							<p class="explication"><:langonet:info_chemin_langue:></p>
-							[<span class="erreur_message">(#ENV{erreurs}|table_valeur{chemin_langue})</span>]
-							<input type="text" class="text" name="chemin_langue" id="chemin_langue" value="#ENV{chemin_langue}" />
+						<li class="editer_fichier_langue obligatoire[(#ENV{erreurs}|table_valeur{fichier_langue}|oui) erreur][(#ENV{erreurs}|table_valeur{dossier_scan}|oui) erreur]">
+							[<span class="erreur_message">(#ENV{erreurs}|table_valeur{fichier_langue})</span>]
+							[<span class="erreur_message">(#ENV{erreurs}|table_valeur{dossier_scan})</span>]
+							[(#ENV{mode, normal}|langonet_creer_selects{#ENV{fichier_langue, 0}, #ENV{dossier_scan, 0}})]
 						</li>
 					</ul>
 				</fieldset>
