@@ -3,7 +3,7 @@
 <div id="documents_portfolio">
 	<h3><:info_portfolio:></h3>
 	<BOUCLE_documents_portfolio(DOCUMENTS) {id_article} {mode=document}{extension IN png,jpg,gif} {par num titre, date}{doublons}{vu=non}>[
-	<a href="(#URL_DOCUMENT)" type="#MIME_TYPE" onclick="location.href='[(#URL_ARTICLE
+	<a href="(#URL_DOCUMENT)" type="#MIME_TYPE" rel="portfolio" onclick="location.href='[(#URL_ARTICLE
 		|parametre_url{id_document,#ID_DOCUMENT}
 		)]#documents_portfolio';return false;"[ class="(#EXPOSER)"][ title="(#TITRE|attribut_html|couper{80})"]>[(#FICHIER
 		|image_reduire{0,100}
