@@ -21,19 +21,8 @@
 								<input type="radio" value="utilisation" id="verification_utilisation" class="radio" name="verification" [(#ENV{verification, definition}|=={utilisation}|oui) checked="checked"] />
 								<label for="verification_utilisation"><:langonet:label_verification_utilisation:></label>
 							</div>
-						<li class="editer_mode[(#ENV{erreurs}|table_valeur{mode}|oui) erreur]">
-							<label><:langonet:label_mode_utilisation:></label>
-							<div class="choix">
-								<input type="radio" value="normal" id="mode_normal" class="radio" name="mode" [(#ENV{mode, normal}|=={normal}|oui) checked="checked"] />
-								<label for="mode_normal"><:langonet:label_mode_normal:> </label>
-								<input type="radio" value="complet" id="mode_complet" class="radio" name="mode" [(#ENV{mode, normal}|=={complet}|oui) checked="checked"] />
-								<label for="mode_complet"><:langonet:label_mode_complet:></label>
-							</div>
-						</li>
 						<li class="editer_fichier_langue obligatoire[(#ENV{erreurs}|table_valeur{fichier_langue}|oui) erreur][(#ENV{erreurs}|table_valeur{dossier_scan}|oui) erreur]">
-							[<span class="erreur_message">(#ENV{erreurs}|table_valeur{fichier_langue})</span>]
-							[<span class="erreur_message">(#ENV{erreurs}|table_valeur{dossier_scan})</span>]
-							[(#ENV{mode, normal}|langonet_creer_selects{#ENV{fichier_langue, 0}, #ENV{dossier_scan, 0}})]
+							[(#ENV{fichier_langue, 0}|langonet_creer_selects{#ENV{dossier_scan, 0}, [(#ENV{erreurs}|table_valeur{fichier_langue})], [(#ENV{erreurs}|table_valeur{dossier_scan})]})]
 						</li>
 					</ul>
 				</fieldset>

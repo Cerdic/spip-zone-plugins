@@ -2,7 +2,6 @@
 
 function formulaires_langonet_verifier_charger() {
 	return array('verification' => _request('verification'),
-				'mode' => _request('mode'),
 				'fichier_langue' => _request('fichier_langue'),
 				'dossier_scan' => _request('dossier_scan'));
 }
@@ -67,24 +66,25 @@ function formater_resultats($resultats, $verification='definition') {
 		// Liste des items non definis avec certitude
 		if (count($resultats['item_non']) > 0) {
 			if (count($resultats['item_non']) == 1) {
-				$texte .= _T('langonet:message_ok_non_definis_1', array('ou_fichier' => $resultats['ou_fichier'], 'langue' => $resultats['langue'])) . "\n<br /><br />\n";
+				$texte .= _T('langonet:message_ok_non_definis_1', array('ou_fichier' => $resultats['ou_fichier'], 'langue' => $resultats['langue'])) . "\n";
 			}
 			else {
-				$texte .= _T('langonet:message_ok_non_definis_n', array('nberr' => count($resultats['item_non']), 'ou_fichier' => $resultats['ou_fichier'], 'langue' => $resultats['langue'])) . "\n<br /><br />\n";
+				$texte .= _T('langonet:message_ok_non_definis_n', array('nberr' => count($resultats['item_non']), 'ou_fichier' => $resultats['ou_fichier'], 'langue' => $resultats['langue'])) . "\n";
 			}
 			$texte .= afficher_lignes($resultats['fichier_non']);
+			$texte .= "<br />\n";
 		}
 		else {
 			$texte .= _T('langonet:message_ok_non_definis_0', array('module' => $resultats['module'], 'ou_fichier' => $resultats['ou_fichier'], 'langue' => $resultats['langue']));
 		}
-		$texte .= "\n<br /><br />\n";
+		$texte .= "\n</p>\n<p class=\"reponse_formulaire reponse_formulaire_ok\">\n";
 		// Liste des items definis sans certitude
 		if (count($resultats['item_peut_etre']) > 0) {
 			if (count($resultats['item_peut_etre']) == 1) {
-				$texte .= _T('langonet:message_ok_definis_incertains_1', array('langue' => $resultats['langue'])) . "\n<br /><br />\n";
+				$texte .= _T('langonet:message_ok_definis_incertains_1', array('langue' => $resultats['langue'])) . "\n";
 			}
 			else {
-				$texte .= _T('langonet:message_ok_definis_incertains_n', array('nberr' => count($resultats['item_peut_etre']), 'langue' => $resultats['langue'])) . "\n<br /><br />\n";
+				$texte .= _T('langonet:message_ok_definis_incertains_n', array('nberr' => count($resultats['item_peut_etre']), 'langue' => $resultats['langue'])) . "\n";
 			}
 			$texte .= afficher_lignes($resultats['fichier_peut_etre']);
 		}
@@ -96,29 +96,30 @@ function formater_resultats($resultats, $verification='definition') {
 		// Liste des items non utilises avec certitude
 		if (count($resultats['item_non']) > 0) {
 			if (count($resultats['item_non']) == 1) {
-				$texte .= _T('langonet:message_ok_non_utilises_1', array('ou_fichier' => $resultats['ou_fichier'], 'langue' => $resultats['langue'])) . "\n<br /><br />\n";
+				$texte .= _T('langonet:message_ok_non_utilises_1', array('ou_fichier' => $resultats['ou_fichier'], 'langue' => $resultats['langue'])) . "\n";
 			}
 			else {
-				$texte .= _T('langonet:message_ok_non_utilises_n', array('nberr' => count($resultats['item_non']), 'ou_fichier' => $resultats['ou_fichier'], 'langue' => $resultats['langue'])) . "\n<br /><br />\n";
+				$texte .= _T('langonet:message_ok_non_utilises_n', array('nberr' => count($resultats['item_non']), 'ou_fichier' => $resultats['ou_fichier'], 'langue' => $resultats['langue'])) . "\n";
 			}
 			$texte .= "</p>\n";
 			asort($resultats['item_non'], SORT_STRING);
 			foreach($resultats['item_non'] as $_cle => $_item) {
 				$texte .= "<div class=\"titrem\">" . $_item . "</div>\n";
 			}
+			$texte .= "<br />\n";
 		}
 		else {
 			$texte .= _T('langonet:message_ok_non_utilises_0', array('ou_fichier' => $resultats['ou_fichier'], 'langue' => $resultats['langue']));
 		}
-		$texte .= "\n<br /><br />\n</p>\n";
+		$texte .= "\n</p>\n";
 		$texte .= "<p class=\"reponse_formulaire reponse_formulaire_ok\">\n";
 		// Liste des items utilises sans certitude
 		if (count($resultats['item_peut_etre']) > 0) {
 			if (count($resultats['item_peut_etre']) == 1) {
-				$texte .= _T('langonet:message_ok_utilises_incertains_1') . "\n<br /><br />\n";
+				$texte .= _T('langonet:message_ok_utilises_incertains_1') . "\n";
 			}
 			else {
-				$texte .= _T('langonet:message_ok_utilises_incertains_n', array('nberr' => count($resultats['item_peut_etre']))) . "\n<br /><br />\n";
+				$texte .= _T('langonet:message_ok_utilises_incertains_n', array('nberr' => count($resultats['item_peut_etre']))) . "\n";
 			}
 			$texte .= afficher_lignes($resultats['fichier_peut_etre']);
 		}
@@ -126,14 +127,12 @@ function formater_resultats($resultats, $verification='definition') {
 			$texte .= _T('langonet:message_ok_utilises_incertains_0', array('module' => $resultats['module']));
 		}
 	}
-	$texte .= "\n<br /><br />\n";
 
 	return $texte;
 }
 function afficher_lignes($tableau) {
 	include_spip('inc/layer');
 	// detail des fichiers utilisant les items de langue
-	$liste_lignes = "</p>\n";
 	ksort($tableau);
 	foreach ($tableau as $item => $detail) {
 		$liste_lignes .= bouton_block_depliable($item, false);
@@ -147,7 +146,6 @@ function afficher_lignes($tableau) {
 		}
 		$liste_lignes .= fin_block();
 	}
-	$liste_lignes .= "<p class=\"reponse_formulaire reponse_formulaire_ok\">\n";
 	
 	return $liste_lignes;
 }

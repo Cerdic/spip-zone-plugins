@@ -4,42 +4,38 @@
  *   - le fichier de langue dont on veut verifier les items
  *   - le repertoire dont l'arborescence sera scannee
  *
- * @param string $mode
  * @param string $sel_l
  * @param string $sel_d
+ * @param string $err_l
+ * @param string $err_d
  * @return string
  */
 
-// $mode   => 'normal' pour ne travailler que sur les plugins
-//            'complet' pour y ajouter ecrire/, prive/, squelettes-dist/,
-//                      $dossier_squelettes
 // $sel_l  => option du select des langues
 // $sel_d  => option du select des repertoires
-function langonet_creer_selects($mode = 'normal', $sel_l = '0', $sel_d = '0') {
-
-	// par defaut on ne scanne que plugins/
+// $err_l  => affecte si pas de choix de fichier
+// $err_d  => affecte si pas de choix de repertoire
+function langonet_creer_selects($sel_l = '0', $sel_d = '0', $err_l, $err_d) {
 	include_spip('inc/plugin');
 	$rep_normal = liste_plugin_files();
-	if ($mode == 'normal') {
-		$rep_scan = $rep_normal;
+	if (strlen($GLOBALS['dossier_squelettes'])) {
+		$rep_complet = explode(':', $GLOBALS['dossier_squelettes']);
 	}
-	// les autres repertoires a scanner ($mode = complet)
 	else {
-		if (strlen($GLOBALS['dossier_squelettes'])) {
-			$rep_complet = explode(':', $GLOBALS['dossier_squelettes']);
-		}
-		else {
-			$rep_complet[] = 'squelettes';
-		}
-		$rep_complet[] = rtrim(_DIR_RESTREINT_ABS, '/');
-		$rep_complet[] = 'prive';
-		$rep_complet[] = 'squelettes-dist';
-		$rep_scan = array_merge($rep_complet, $rep_normal);
+		$rep_complet[] = 'squelettes';
 	}
+	$rep_complet[] = rtrim(_DIR_RESTREINT_ABS, '/');
+	$rep_complet[] = 'prive';
+	$rep_complet[] = 'squelettes-dist';
+	$rep_scan = array_merge($rep_complet, $rep_normal);
 
 	// construction des <select>
-	$sel_lang = '<select name="fichier_langue" id="fichier_langue">' . "\n";
-	$sel_dossier = '<select name="dossier_scan" id="dossier_scan">' . "\n";
+	$sel_lang = '<p class='.($err_l?'"erreur_message"':'"explication"').'>'.
+				"\n"._T('langonet:message_choisir_langue')."</p>\n".
+				'<select name="fichier_langue" id="fichier_langue" style="margin-bottom:1em;">'."\n";
+	$sel_dossier = '<p class='.($err_d?'"erreur_message"':'"explication"').'>'.
+				"\n"._T('langonet:message_choisir_dossier')."</p>\n".
+				'<select name="dossier_scan" id="dossier_scan">' . "\n";
 	$sel_lang .= '<option value="0"';
 	$sel_dossier .= '<option value="0"';
 	$sel_lang .= ($sel_l == '0') ? ' selected="selected">' : '>';
@@ -65,7 +61,7 @@ function langonet_creer_selects($mode = 'normal', $sel_l = '0', $sel_d = '0') {
 			$ou_fichier = $rep . '/';
 		}
 		if (is_dir($reel_dir . '/lang/')) {
-			$sel_lang .= '<optgroup label="' . $rep . '">' . "\n";
+			$sel_lang .= '<optgroup label="' . str_replace('../', '', $reel_dir) . '/">' . "\n";
 			// on recupere tous les fichiers de langue directement places
 			// dans lang/ sans parcourir d'eventuels sous-repertoires
 			foreach ($fic_lang = preg_files($reel_dir . '/lang/', '.php$', 250, false) as $le_module) {
@@ -82,7 +78,7 @@ function langonet_creer_selects($mode = 'normal', $sel_l = '0', $sel_d = '0') {
 		}
 		$sel_dossier .= '<option value="' . $ou_fichier;
 		$sel_dossier .= ($sel_d == $ou_fichier) ? '" selected="selected">' : '">';
-		$sel_dossier .= $ou_fichier . '</option>' . "\n";
+		$sel_dossier .= str_replace('../', '', $reel_dir) . '/</option>' . "\n";
 	}
 
 	$sel_lang .= '</select>' . "\n";
