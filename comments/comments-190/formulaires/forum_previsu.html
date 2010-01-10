@@ -1,0 +1,18 @@
+<fieldset class="previsu">
+    <legend><:previsualisation:></legend>
+    [(#ENV*{erreur}|?{
+    	[<p class="reponse_formulaire">(#ENV*{erreur})</p>]
+    ,
+        <p>[(#ENV*{auteur}|?{<:par_auteur:>
+            [(#ENV{url_site}|?{
+            	[<a href="(#ENV{url_site}|attribut_html)" class="spip_out">[<strong>(#ENV*{auteur})</strong>]</a>]
+            ,
+            	[<strong>(#ENV*{auteur})</strong>]
+            })]
+        ,
+        	<blink class="reponse_formulaire" style="text-decoration: blink;"><:par_auteur:> ?</blink>
+        })]</p>
+        [(#ENV*{texte}|lignes_longues)]
+        [<p class="spip_bouton"><input type="submit" name="confirmer_forum" value="(#ENV*{bouton}|?{<:comments:forum_message_definitif:>,''})" /></p>]
+    })]
+</fieldset>
