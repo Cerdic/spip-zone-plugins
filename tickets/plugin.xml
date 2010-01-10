@@ -64,6 +64,18 @@ Il est con&ccedil;u pour faciliter la phase de d&eacute;veloppement du site (not
 		<nom>revisions_liste_objets</nom>
 		<inclure>tickets_pipelines.php</inclure>
 	</pipeline>
+	<pipeline>
+		<nom>accueil_gadgets</nom>
+		<inclure>tickets_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>accueil_informations</nom>
+		<inclure>tickets_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<inclure>tickets_pipelines.php</inclure>
+	</pipeline>
 
 	<bouton id='tickets' parent='bando_publication'>
 		<icone>images/ticket-16.png</icone>

@@ -77,9 +77,13 @@ function tickets_fin_block() {
 	include_spip('inc/layer');
 	return fin_block();
 }
-function tickets_bouton_block_depliable($texte,$deplie,$ids=""){
+function tickets_bouton_block_depliable($texte,$deplie,$page="",$ids=""){
 	include_spip('inc/layer');
-	return bouton_block_depliable($texte,$deplie,$ids);
+	if ($page)
+		return bouton_block_depliable(afficher_plus(generer_url_ecrire($page)).$texte,$deplie,$ids);
+	else
+		return bouton_block_depliable($texte,$deplie,$ids);
+	
 }
 
 // creation des fonction de selection de texte

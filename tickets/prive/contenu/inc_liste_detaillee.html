@@ -4,7 +4,8 @@
 
 <B_detaillee>
 <div class="cadre cadre-liste">
-[(#ENV{titre}|tickets_bouton_block_depliable{#GET{visible}|=={true}})]
+<img class="cadre-icone" alt="" src="#CHEMIN{prive/themes/spip/images/ticket-24.png}"/>
+[(#ENV{titre}|tickets_bouton_block_depliable{#GET{visible}|=={true}, #ENV{lien}})]
 [(#GET{visible}|=={true}|tickets_debut_block_depliable)]
 [<div class="arial1 tranches pagination">(#PAGINATION)</div>]
 <table width="100%" cellpadding="2" cellspacing="0" border="0">

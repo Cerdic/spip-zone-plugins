@@ -4,7 +4,7 @@
 
 <B_simple>
 <div class="cadre cadre-liste">
-	[(#ENV{titre}|tickets_bouton_block_depliable{#GET{visible,true}|=={true}})]
+	[(#ENV{titre}|tickets_bouton_block_depliable{#GET{visible,true}|=={true}, #ENV{lien}})]
 	[(#GET{visible,true}|=={true}|tickets_debut_block_depliable)]
 	[<div class="arial1 tranches pagination">(#PAGINATION)</div>]
 	<table width="100%" cellpadding="2" cellspacing="0" border="0">

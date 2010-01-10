@@ -6,14 +6,14 @@ function tickets_ajouterBoutons($boutons_admin) {
 		// affiche le bouton dans "Forum" si les forums sont activés, tout le monde peut voir cette page
 		if($boutons_admin['forum']){
 			$boutons_admin['forum']->sousmenu['tickets'] = new Bouton(
-				find_in_path('bugs.png', 'imgs/', false),
+				find_in_path('ticket-24.png', 'prive/themes/spip/images/', false),
 				_T('tickets:titre'),
 				generer_url_ecrire('tickets')
 			);
 		}else{
 			// Sinon affiche les tickets en sous menu de Edition, aussi accessible pour tout le monde
 			$boutons_admin['naviguer']->sousmenu['tickets'] = new Bouton(
-				find_in_path('bugs.png', 'imgs/', false),
+				find_in_path('ticket-24.png', 'prive/themes/spip/images/', false),
 				_T('tickets:titre'),
 				generer_url_ecrire('tickets')
 			);
@@ -25,7 +25,7 @@ function tickets_ajouterBoutons($boutons_admin) {
 // Menu des tickets presente a droite ou a gauche de la page
 function menu_colonne () {
 	$ret = "<div class='cadre cadre-e'><div class='cadre_padding'>";
-	$ret .= icone_horizontale(_T('tickets:afficher_tickets'), generer_url_ecrire("tickets"), _DIR_PLUGIN_TICKETS."imgs/bugs.png", "", false);
+	$ret .= icone_horizontale(_T('tickets:afficher_tickets'), generer_url_ecrire("tickets"), chemin("prive/themes/spip/images/ticket-24.png"), "", false);
 
 	$contexte = array("titre"=>_T('tickets:vos_tickets_en_cours'), "id_auteur"=>$connect_id_auteur, "statut"=>"redac", "bloc"=>"_bloc1");
 	$options = array("ajax"=>true);
@@ -39,7 +39,7 @@ function menu_colonne () {
 
 	include_spip('inc/tickets_autoriser');
 	if (autoriser('ecrire', 'ticket')) {
-		$ret .= icone_horizontale(_T('tickets:creer_ticket'), generer_url_ecrire("ticket_editer","id_ticket=new"), _DIR_PLUGIN_TICKETS."imgs/bugs.png", "creer.gif", false);
+		$ret .= icone_horizontale(_T('tickets:creer_ticket'), generer_url_ecrire("ticket_editer","id_ticket=new"), chemin("prive/themes/spip/images/ticket-24.png"), "creer.gif", false);
 	}
 	$ret .= "</div></div>";
 
@@ -50,13 +50,13 @@ function menu_colonne () {
 function tickets_droite ($flux) {
 	$exec = $flux["args"]["exec"];
 
-	if ($exec == "accueil") {
-		$data = $flux["data"];
-
-		$ret = menu_colonne();
-
-		$flux["data"] = $data.$ret;
-	}
+// 	if ($exec == "accueil") {
+// 		$data = $flux["data"];
+// 
+// 		$ret = menu_colonne();
+// 
+// 		$flux["data"] = $data.$ret;
+// 	}
 	return $flux;
 }
 
@@ -121,5 +121,86 @@ function tickets_gouverneur_infos_tables($array){
 function tickets_revisions_liste_objets($array){
 	$array['tickets'] = 'tickets:tickets';
 	return $array;
+}
+
+/**
+ * Insertion dans le pipeline accueil informations de l'etat des tickets
+ * @param string $flux
+ * @return string $flux
+ */
+function tickets_accueil_informations($flux){
+	global $spip_lang_left;
+
+	$q = sql_select("COUNT(*) AS cnt, statut", 'spip_tickets', '', 'statut', '','', "COUNT(*)<>0");
+
+	$cpt = array();
+	$cpt2 = array();
+	$defaut = $where ? '0/' : '';
+	while($row = sql_fetch($q)) {
+	  $cpt[$row['statut']] = $row['cnt'];
+	  $cpt2[$row['statut']] = $defaut;
+	}
+ 
+	if ($cpt) {
+		if ($where) {
+			$q = sql_select("COUNT(*) AS cnt, statut", 'spip_tickets', $where, "statut");
+			while($row = sql_fetch($q)) {
+				$r = $row['statut'];
+				$cpt2[$r] = intval($row['cnt']) . '/';
+			}
+		}
+		$res .= afficher_plus(generer_url_ecrire("tickets",""))."<b>"._T('tickets:info_tickets')."</b>";
+		$res .= "<ul style='margin:0px; padding-$spip_lang_left: 20px; margin-bottom: 5px;'>";
+		if (isset($cpt['redac'])) $res .= "<li>"._T('tickets:info_tickets_redac').": ".$cpt2['redac'].$cpt['redac'] . '</li>';
+		if (isset($cpt['ouvert'])) $res .= "<li><b>"._T('tickets:info_tickets_ouvert').": ".$cpt2['ouvert'] .$cpt['ouvert'] . "</b>" .'</li>';
+		$res .= "</ul>";
+	}
+
+	$flux .= "<div class='verdana1'>" . $res . "</div>";
+	return $flux;
+}
+
+/**
+ * Insertion dans le pipeline accueil gadgets le bouton de creation d'un ticket
+ * @param string $gadget
+ * @return string $gadget
+ */
+function tickets_accueil_gadgets($gadget){
+
+	include_spip('inc/tickets_autoriser');
+	if (autoriser('ecrire', 'ticket')) {
+		$icone = icone_horizontale(_T('tickets:creer_ticket'), generer_url_ecrire("ticket_editer","id_ticket=new"), chemin("prive/themes/spip/images/ticket-24.png"), "creer.gif", false);
+
+		$colonnes = extraire_balises($gadget, 'td');
+		$derniere_colonne = fmod(floor(count($colonnes)/2), 4) == 0 ? true : false;
+		if ($derniere_colonne) {
+			$gadget .= "<table><tr><td>$icone</td></tr></table>";
+		}
+		else {
+			$gadget = preg_replace(",</tr></table>$,is", "<td>$icone</td></tr></table>", $gadget); 
+		}
+	}
+	return $gadget;
+}
+
+/**
+ * Insertion dans le pipeline affiche milieu de la liste des tickets en cours de rédaction
+ * @param string $gadget
+ * @return string $gadget
+ */
+function tickets_affiche_milieu($flux){
+
+	$exec = $flux["args"]["exec"];
+	if ($exec == "accueil") {
+		$flux['data'] .= recuperer_fond('prive/contenu/inc_classement_accueil', array());
+	}
+
+	return $flux;
+}
+function tickets_accueil_encours($flux){
+
+// 	$flux .= recuperer_fond('prive/contenu/inc_classement_accueil', array());
+
+	return $flux;
 }
 ?>

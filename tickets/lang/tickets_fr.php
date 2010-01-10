@@ -76,6 +76,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'info_numero_ticket' => 'TICKET NUM&Eacute;RO&nbsp;:',
+	'info_tickets_ouvert' => 'ouverts et discut&eacute;s',
+	'info_tickets_redac' => 'en cours de r&eacute;daction',
+	'info_tickets' => 'Tickets',
 	'icone_modifier_ticket' => 'Modifier ce ticket',
 	'icone_retour_ticket' => 'Retour au ticket',
 
