@@ -260,20 +260,24 @@ function cs_lire_fichier_php($file) {
 	return false;
 }
 
-// retourne une aide concernant les raccourcis ajoutes par l'outil
+// retourne les raccourcis ajoutes par l'outil, s'il est actif
+function cs_aide_raccourci($id) {
+	global $outils;
+	// stockage de la liste des fonctions par pipeline, si l'outil est actif...
+	if($outils[$id]['actif']) {
+		include_spip('outils/'.$id);	
+		if(function_exists($f = $id.'_raccourcis')) return $f();
+		if(!preg_match(',:aide$,', _T("couteauprive:$id:aide") )) return _T("couteauprive:$id:aide");
+	}
+	return '';
+}
+	
+// retourne la liste des raccourcis disponibles
 function cs_aide_raccourcis() {
 	global $outils;
 	$aide = array();
-	foreach ($outils as $outil) {
-		// stockage de la liste des fonctions par pipeline, si l'outil est actif...
-		if($outil['actif']) {
-			$id = $outil['id'];
-			include_spip('outils/'.$id);	
-			if(function_exists($f = $id.'_raccourcis')) $aide[] = '<li style="margin: 0.7em 0 0 0;">&bull; ' . $f() . '</li>';
-			elseif(!preg_match(',:aide$,', _T("couteauprive:$id:aide") ))
-				$aide[] = '<li style="margin: 0.7em 0 0 0;">&bull; ' .  _T("couteauprive:$id:aide") . '</li>';
-		}
-	}
+	foreach ($outils as $outil) 
+		if($a = cs_aide_raccourci($outil['id'])) $aide[] = '<li style="margin: 0.7em 0 0 0;">&bull; ' . $a . '</li>';
 	if(!count($aide)) return '';
 	// remplacement des constantes de forme @_CS_XXXX@
 	$aide = preg_replace_callback(',@(_CS_[a-zA-Z0-9_]+)@,', 

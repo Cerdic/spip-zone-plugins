@@ -16,29 +16,33 @@ function sommaire_d_une_page(&$texte, &$nbh3, $page=0, $num_pages=0) {
 		$self = str_replace('&', '&amp;', nettoyer_uri());//self();//$GLOBALS['REQUEST_URI'];
 	if($page===false) return;
 	// trouver quel <hx> est utilise
-	$hierarchie = preg_match(',<h(\d),',$GLOBALS['debut_intertitre'],$regs)?$regs[1]:'3';
+	$niveau = $match = preg_match(',<h(\d),',$GLOBALS['debut_intertitre'],$regs)?$regs[1]:'3';
 	@define('_sommaire_NB_CARACTERES', 30);
+	@define('_sommaire_PROFONDEUR', 1);
+	if(_sommaire_PROFONDEUR>1)
+		$match = $match .'-' . ($match+_sommaire_PROFONDEUR-1);
 	// traitement des intertitres <hx>
-	preg_match_all(",(<h{$hierarchie}[^>]*)>(.*)</h{$hierarchie}>,Umsi", $texte, $regs);
+	preg_match_all(",(<h([$match])[^>]*)>(.*)</h\\2>,Umsi", $texte, $regs);
 	$nbh3 += count($regs[0]);
 	$pos = 0; $sommaire = '';
 	// calcul de la page
 	$suffixe = $page?_T('couteau:sommaire_page', array('page'=>$page)):'';
 	$fct_lien_retour = function_exists('sommaire_lien_retour')?'sommaire_lien_retour':'sommaire_lien_retour_dist';
 	for($i=0;$i<count($regs[0]);$i++,$index++){
-		$ancre = " id=\"outil_sommaire_$index\">";
-		if (($pos2 = strpos($texte, $regs[0][$i], $pos))!==false) {
-			$titre = preg_replace(',^<p[^>]*>(.*)</p>$,Umsi', '\\1', trim($regs[2][$i]));
+		$id = " id=\"outil_sommaire_$index\">";
+		$w = &$regs[0][$i]; $h = &$regs[1][$i]; $n = &$regs[2][$i]; $t = &$regs[3][$i];
+		if (($pos2 = strpos($texte, $w, $pos))!==false) {
+			//$titre = preg_replace(',^<p[^>]*>(.*)</p>$,Umsi', '\\1', trim($t));
 			// ancre 'retour au sommaire', sauf :
-			// si on imprime, ou si les blocs depliables utilisent h{$hierarchie}...
-			$haut = (defined('_CS_PRINT') OR (strpos($regs[0][$i], 'blocs_titre')!==false))
-				?''
-				:$fct_lien_retour($self, $titre);
-			$texte = substr($texte, 0, $pos2) . $regs[1][$i] . $ancre . $haut
-				. substr($texte, $pos2 + strlen($regs[1][$i])+1 + strlen($regs[2][$i]));
-			$pos = $pos2 + strlen($ancre) + strlen($regs[0][$i]);
+			// si on imprime, ou si les blocs depliables utilisent h{$n}...
+			$titre = (defined('_CS_PRINT') OR (strpos($w, 'blocs_titre')!==false))
+				?$t//$titre
+				:$fct_lien_retour($self, $t);//$titre);
+			$texte = substr($texte, 0, $pos2) . $h . $id . $titre
+				. substr($texte, $pos2 + strlen($h)+1 + strlen($t));
+			$pos = $pos2 + strlen($id) + strlen($w);
 			// tout le texte, sans les notes
-			$brut = preg_replace(',\[<a href=["\']#nb.*?</a>\],','', echappe_retour($regs[2][$i],'CS'));
+			$brut = preg_replace(',\[<a href=["\']#nb.*?</a>\],','', echappe_retour($t,'CS'));
 			// pas de glossaire
 			if(function_exists('cs_retire_glossaire')) $brut = cs_retire_glossaire($brut);
 			// texte brut
@@ -53,7 +57,10 @@ function sommaire_d_une_page(&$texte, &$nbh3, $page=0, $num_pages=0) {
 			// si la decoupe en page est active...
 			$artpage = (function_exists('decoupe_url') && (strlen(_request('artpage')) || $page>1) )
 				?decoupe_url($self, $page, $num_pages):$self;
-			$sommaire .= "<li><a $st title=\"$titre\" href=\"{$artpage}#outil_sommaire_$index\">$lien</a>$suffixe</li>";
+			$artpage = "<li><a $st title=\"$titre\" href=\"{$artpage}#outil_sommaire_$index\">$lien</a>$suffixe</li>";
+			$sommaire .= $niveau<$n?'<ul>'.$artpage
+				:($niveau>$n?$artpage.'</ul>':$artpage);
+			$niveau = $n;
 		}
 	}
 	return $sommaire;

@@ -99,7 +99,7 @@ cs_log(" -- appel de charger_fonction('description_outil', 'inc') et de descript
 	$serial = serialize(array_keys($outil));
 	$p = '';
 	if(preg_match_all(',traitement:([A-Z_]+),', $serial, $regs, PREG_PATTERN_ORDER))
-		$p .=  _T('couteauprive:detail_balise_etoilee', array('bal' => '#'.join('*, #', array_unique($regs[1])).'*'));	
+		$p .=  _T('couteauprive:detail_balise_etoilee', array('bal' => '#'.join('*, #', array_unique($regs[1])).'*'));
 	if(isset($outil['jquery']) && $outil['jquery']=='oui')
 		$p .= '<p>' . _T('couteauprive:detail_jquery2') . '</p>';
 	if(isset($outil['auteur']) && strlen($outil['auteur']))

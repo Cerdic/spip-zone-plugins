@@ -238,6 +238,7 @@ Cet outil peut &ecirc;tre coupl&eacute; avec &laquo;&nbsp;[.->sommaire]&nbsp;&ra
 	'detail_jquery2' => 'Cet outil utilise la librairie {jQuery}.',
 	'detail_jquery3' => '{{Attention}} : cet outil n&eacute;cessite le plugin [jQuery pour SPIP 1.92->http://files.spip.org/spip-zone/jquery_192.zip] pour fonctionner correctement avec cette version de SPIP.',
 	'detail_pipelines' => 'Pipelines :',
+	'detail_raccourcis' => 'Voici la liste des raccourcis typographiques reconnus par cet outil.',
 	'detail_traitements' => 'Traitements :',
 	'distant_aide' => 'Cet outil requiert des fichiers distants qui doivent tous &ecirc;tre correctement install&eacute;s en librairie. Avant d\'activer cet outil ou d\'actualiser ce cadre, assurez-vous que les fichiers requis sont bien pr&eacute;sents sur le serveur distant.',
 	'distant_charge' => 'Fichier correctement t&eacute;l&eacute;charg&eacute; et install&eacute; en librairie.',
@@ -394,6 +395,7 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:jcorner_plugin' => 'Installer le plugin {jQuery} suivant :',
 	'label:lgr_introduction' => 'Longueur du r&eacute;sum&eacute; :',
 	'label:lgr_sommaire' => 'Largeur du sommaire (9 &agrave; 99) :',
+	'label:prof_sommaire' => 'Profondeur retenue (1 &agrave; 4) :',
 	'label:lien_introduction' => 'Points de suite cliquables :',
 	'label:liens_interrogation' => 'Prot&eacute;ger les URLs :',
 	'label:liens_orphelins' => 'Liens cliquables :',
@@ -579,20 +581,24 @@ _ Dessins : [Sylvain Michel->http://www.guaph.net/]',
 Attention, cet outil a besoin pour fonctionner de pages au &laquo;DOCTYPE XHTML&raquo; (non HTML !) et de deux plugins {jQuery} : {ScrollTo} et {LocalScroll}. Le Couteau Suisse peut les installer directement si vous cochez les cases suivantes. [[%scrollTo%]][[-->%LocalScroll%]]
 @_CS_PLUGIN_JQUERY192@',
 	'soft_scroller:nom' => 'Ancres douces',
-	'sommaire:description' => 'Construit un sommaire pour le texte de vos articles et de vos rubriques afin d&rsquo;acc&eacute;der rapidement aux gros titres (balises HTML &lt;h3>Un intertitre&lt;/h3> ou raccourcis SPIP : intertitres de la forme :<code>{{{Un gros titre}}}</code>).
+	'sommaire:description' => 'Construit un sommaire pour le texte de vos articles et de vos rubriques afin d&rsquo;acc&eacute;der rapidement aux gros titres (balises HTML &lt;@h3@>Un gros titre&lt;/@h3@>) ou aux intertitres SPIP (de syntaxe <code>{{{Un intertitre}}}</code>).
 
-@puce@ Vous pouvez d&eacute;finir ici le nombre maximal de caract&egrave;res retenus des intertitres pour construire le sommaire :[[%lgr_sommaire% caract&egrave;res]]
+Pour information, l\'outil &laquo;&nbsp;[.->class_spip]&nbsp;&raquo; permet de choisir la balise &lt;hN> utilis&eacute;e pour les intertitres de SPIP.
 
-@puce@ Vous pouvez aussi fixer le comportement du plugin concernant la cr&eacute;ation du sommaire: 
+@puce@ D&eacute;finissez ici la profondeur retenue sur les intertitres pour construire le sommaire (1 = &lt;@h3@>, 2 = &lt;@h3@> et &lt;@h4@>, etc.) :[[%prof_sommaire%]]
+
+@puce@ D&eacute;finissez ici le nombre maximal de caract&egrave;res retenus par intertitre :[[%lgr_sommaire% caract&egrave;res]]
+
+@puce@ Fixez ici le comportement du plugin concernant la cr&eacute;ation du sommaire: 
 _ &bull; Syst&eacute;matique pour chaque article (une balise <code>@_CS_SANS_SOMMAIRE@</code> plac&eacute;e n&rsquo;importe o&ugrave; &agrave; l&rsquo;int&eacute;rieur du texte de l&rsquo;article cr&eacute;era une exception).
 _ &bull; Uniquement pour les articles contenant la balise <code>@_CS_AVEC_SOMMAIRE@</code>.
 
 [[%auto_sommaire%]]
 
-@puce@ Par d&eacute;faut, le Couteau Suisse ins&egrave;re le sommaire en t&ecirc;te d\'article automatiquement. Mais vous avez la possibilit&eacute; de placer ce sommaire ailleurs dans votre squelette gr&acirc;ce &agrave; une balise #CS_SOMMAIRE que vous pouvez activer ici :
+@puce@ Par d&eacute;faut, le Couteau Suisse ins&egrave;re automatiquement le sommaire en t&ecirc;te d\'article. Mais vous avez la possibilit&eacute; de placer ce sommaire ailleurs dans votre squelette gr&acirc;ce &agrave; une balise #CS_SOMMAIRE que vous pouvez activer ici :
 [[%balise_sommaire%]]
 
-Ce sommaire peut &ecirc;tre coupl&eacute; avec : &laquo;&nbsp;[.->decoupe]&nbsp;&raquo;.',
+Ce sommaire est compatible avec : &laquo;&nbsp;[.->decoupe]&nbsp;&raquo;.',
 	'sommaire:nom' => 'Un sommaire automatique',
 	'sommaire_avec' => 'Un texte avec sommaire&nbsp;: <b>@_CS_AVEC_SOMMAIRE@</b>',
 	'sommaire_sans' => 'Un texte sans sommaire&nbsp;: <b>@_CS_SANS_SOMMAIRE@</b>',

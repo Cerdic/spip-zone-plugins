@@ -595,6 +595,11 @@ span.cs_pagination_off {color: lightgrey; font-weight: bold; text-decoration: un
 // couplage avec l'outil 'decoupe', donc 'sommaire' doit etre place juste apres :
 // il faut inserer le sommaire dans l'article et ensuite seulement choisir la page
 add_variables( array(
+	'nom' => 'prof_sommaire',
+	'format' => _format_NOMBRE,
+	'defaut' => 1,
+	'code:%s>=2 && %s<=4' => "define('_sommaire_PROFONDEUR', %s);\n",
+), array(
 	'nom' => 'lgr_sommaire',
 	'format' => _format_NOMBRE,
 	'defaut' => 30,
@@ -617,7 +622,7 @@ add_outil( array(
 	'id' => 'sommaire',
 	'contrib'	=> 2378,
 	// Le separateur <span class='csfoo xxxx'></span> est supprime en fin de calcul de page
-	'code:options' => "define('_sommaire_REM', '<span class=\'csfoo somm\'></span>');\ndefine('_CS_SANS_SOMMAIRE', '[!sommaire]');\ndefine('_CS_AVEC_SOMMAIRE', '[sommaire]');\n%%lgr_sommaire%%%%auto_sommaire%%%%balise_sommaire%%",
+	'code:options' => "define('_sommaire_REM', '<span class=\'csfoo somm\'></span>');\ndefine('_CS_SANS_SOMMAIRE', '[!sommaire]');\ndefine('_CS_AVEC_SOMMAIRE', '[sommaire]');\n%%prof_sommaire%%%%lgr_sommaire%%%%auto_sommaire%%%%balise_sommaire%%",
 	'code:jq' => 'if(jQuery("div.cs_sommaire").length) {
 		// s\'il y a un sommaire, on cache la navigation haute sur les pages
 		jQuery("div.decoupe_haut").css("display", "none");
@@ -633,6 +638,7 @@ add_outil( array(
 	'traitement:CS_SOMMAIRE:post_propre' => 'sommaire_d_article_balise',
 	'categorie' => 'typo-corr',
 	'pipeline:nettoyer_raccourcis_typo' => 'sommaire_nettoyer_raccourcis',
+	'pipeline:pre_description_outil' => 'sommaire_description_outil',
 ));
 
 // intertitres typo, outil compatible avec 'sommaire' :

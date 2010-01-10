@@ -185,6 +185,8 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 	// si ce n'est qu'une simple initialisation, on sort
 	if(!$modif) {unset($cs_input_variable); return;}
 
+	// information sur les raccourcis disponibles
+	if($a=cs_aide_raccourci($outil_)) $res .= '<p>@puce@ '._T('couteauprive:detail_raccourcis').'<br /><html>'.$a.'.</html></p>';
 	// envoi de la description courante en pipeline
 	$res = pipeline('pre_description_outil', array('outil'=>$outil_, 'texte'=>$res));
 	$res = $res['texte'];
@@ -222,7 +224,6 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 	// remplacement de diverses constantes
 	$res = str_replace(array('@puce@', '@_CS_CHOIX@','@_CS_ASTER@','@_CS_PLUGIN_JQUERY192@'),
 		array(definir_puce(), _T('couteauprive:votre_choix'), '<sup>(*)</sup>', defined('_SPIP19300')?'':_T('couteauprive:detail_jquery3')), $res);
-
 	// remplacement des constantes qui restent de forme @_CS_XXXX@
 	if(strpos($res,'@_CS')!==false) 
 		$res = preg_replace_callback(',@(_CS_[a-zA-Z0-9_]+)@,', 

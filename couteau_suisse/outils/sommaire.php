@@ -24,4 +24,11 @@ function sommaire_nettoyer_raccourcis($texte) {
 	return str_replace(array(_sommaire_SANS_FOND, _CS_SANS_SOMMAIRE, _CS_AVEC_SOMMAIRE), '', $texte);
 }
 
+// informer dans la description de l'outil de la balise utilisee par SPIP
+function sommaire_description_outil($flux) {
+	if($flux['outil']=='sommaire' && preg_match(',<h(\d),', $GLOBALS['debut_intertitre'], $r))
+		$flux['texte'] = str_replace(array('@h3@','@h4@'), array('h'.$r[1],'h'.($r[1]+1)), $flux['texte']);
+	return $flux;
+}
+
 ?>
