@@ -1,0 +1,11 @@
+<plugin>
+<nom>Commentaires</nom>
+<icon>icon.png</icon>
+<auteur>[romy.tetue.net->http://romy.tetue.net] - GPL 2009</auteur>
+<version>1.0</version>
+<etat>dev</etat>
+<description>Remplace le traditionnel #FORMULAIRE_FORUM de SPIP par un formulaire de commentaires simplifi&eacute;.</description>
+<lien>[Notes de d&eacute;veloppement du plugin->http://www.spip-contrib.net/?article3173]</lien>
+<prefix>comments</prefix>
+<necessite id='SPIP' version='[1.9.2;]' />
+</plugin>
