@@ -45,7 +45,7 @@ function formulaires_langonet_verifier_traiter() {
 
 	// Les REGEXP de recherche de l'item de langue (voir le fichier regexp.txt)
 	// pour les fichiers .html et .php
-	define("_TROUVER_ITEM_HP", ",(?:<:|_[T|U]\(['\"])(?:([a-z0-9_]+):)?([a-z0-9_]+)((?:{(?:[^\|=>]*=[^\|>]*)})?(?:(?:\|[^>]*)?)(?:['\"]\s*\.\s*\\$[a-z0-9_]+)?),iS");
+	define("_TROUVER_ITEM_HP", ",(?:<:|_[T|U]\(['\"])(?:([a-z0-9_]+):)?([a-z0-9_]+)((?:{(?:[^\|=>]*=[^\|>]*)})?(?:(?:\|[^>]*)?)(?:['\"]\s*\.\s*[^\s]+)?),iS");
 	// pour les fichiers .xml
 	define("_TROUVER_ITEM_X", ",<[a-z0-9_]+>[\n|\t|\s]*([a-z0-9_]+):([a-z0-9_]+)[\n|\t|\s]*</[a-z0-9_]+()>,iS");
 
@@ -101,15 +101,17 @@ function formater_resultats($resultats, $verification='definition') {
 			else {
 				$texte .= _T('langonet:message_ok_non_utilises_n', array('nberr' => count($resultats['item_non']), 'ou_fichier' => $resultats['ou_fichier'], 'langue' => $resultats['langue'])) . "\n<br /><br />\n";
 			}
+			$texte .= "</p>\n";
 			asort($resultats['item_non'], SORT_STRING);
 			foreach($resultats['item_non'] as $_cle => $_item) {
-				$texte .= '&#8226; ' . $_item . '<br />';
+				$texte .= "<div class=\"titrem\">" . $_item . "</div>\n";
 			}
 		}
 		else {
 			$texte .= _T('langonet:message_ok_non_utilises_0', array('ou_fichier' => $resultats['ou_fichier'], 'langue' => $resultats['langue']));
 		}
-		$texte .= "\n<br /><br />\n";
+		$texte .= "\n<br /><br />\n</p>\n";
+		$texte .= "<p class=\"reponse_formulaire reponse_formulaire_ok\">\n";
 		// Liste des items utilises sans certitude
 		if (count($resultats['item_peut_etre']) > 0) {
 			if (count($resultats['item_peut_etre']) == 1) {
@@ -128,23 +130,24 @@ function formater_resultats($resultats, $verification='definition') {
 
 	return $texte;
 }
-
 function afficher_lignes($tableau) {
-	// la liste des lignes des fichiers contenant les items de langue
-	$liste_lignes = '';
+	include_spip('inc/layer');
+	// detail des fichiers utilisant les items de langue
+	$liste_lignes = "</p>\n";
 	ksort($tableau);
 	foreach ($tableau as $item => $detail) {
-		$liste_lignes .= "<br />\n&#8226; " .$item. "\n</p>\n";
+		$liste_lignes .= bouton_block_depliable($item, false);
+		$liste_lignes .= debut_block_depliable(false);
 		foreach ($tableau[$item] as $fichier => $ligne) {
-			$liste_lignes .= "<p style=\"padding-left:3em;font-weight:bold;\">" .$fichier. "</p>\n";
+			$liste_lignes .= "<p style=\"padding-left:2em;font-weight:bold;\">" .$fichier. "</p>\n";
 			foreach ($tableau[$item][$fichier] as $ligne_n => $ligne_t) {
 				$L = intval($ligne_n+1);
 				$liste_lignes .= "<p style=\"padding-left:9em;text-indent: -5em;\">L.". sprintf("%04s", $L) .":<span style=\"padding-left:1em;\">".htmlentities($ligne_t[0]). "</span></p>\n";
 			}
-			$liste_lignes .= "<p class=\"reponse_formulaire reponse_formulaire_ok\">\n";
 		}
+		$liste_lignes .= fin_block();
 	}
-	$liste_lignes .= "\n<br /><br />\n";
+	$liste_lignes .= "<p class=\"reponse_formulaire reponse_formulaire_ok\">\n";
 	
 	return $liste_lignes;
 }

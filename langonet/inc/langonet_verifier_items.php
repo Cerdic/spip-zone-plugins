@@ -63,54 +63,39 @@ function inc_langonet_verifier_items($rep, $module, $langue, $ou_langue, $ou_fic
 
 	if ($verification == 'definition') {
 		// On construit la liste des items utilises mais non definis
-		$item_non = array();
-		$item_peut_etre = array();
 		foreach ($utilises['items'] as $_cle => $_valeur) {
-			$defini = true;
-			$avec_certitude = true;
 			if (!$GLOBALS[$var_source][$_valeur]) {
 				if (!$utilises['suffixes'][$_cle]) {
 					// L'item est vraiment non defini et c'est une erreur
-					$defini = false;
-				}
-				else {
-					// L'item trouve est utilise dans un contexte variable (ie _T('meteo_'.$statut))
-					// Il ne peut etre trouve directement dans le fichier de langue,
-					// donc on verifie que des items de ce "type" existent dans
-					// le fichier de langue
-					$defini = false;
-					foreach($GLOBALS[$var_source] as $_item => $_traduction) {
-						if (substr($_item, 0, strlen($_valeur)) == $_valeur) {
-							$defini = true;
-							$avec_certitude = false;
-						}
+					$item_non[] = $_valeur;
+					if (is_array($item_tous[$_valeur])) {
+						$fichier_non[$_valeur] = $item_tous[$_valeur];
 					}
 				}
-			}
-			if (!$defini) {
-				$item_non[] = $_valeur;
-				if (is_array($item_tous[$_valeur])) {
-					$fichier_non[$_valeur] = $item_tous[$_valeur];
-				}
-			}
-			if (!$avec_certitude) {
-				$item_peut_etre[] = $_valeur;
-				if (is_array($item_tous[$_valeur])) {
-					$fichier_peut_etre[$_valeur] = $item_tous[$_valeur];
+				else {
+					// L'item trouve est utilise dans un contexte variable
+					// (par exemple : _T('langonet_'.$variable))
+					// Il ne peut etre trouve directement dans le fichier de
+					// langue, donc on verifie que des items de ce "type"
+					// existent dans le fichier de langue
+					foreach($GLOBALS[$var_source] as $_item => $_traduction) {
+						if (substr($_item, 0, strlen($_valeur)) == $_valeur) {
+							$item_peut_etre[] = $_valeur;
+							if (is_array($item_tous[$_valeur])) {
+								$fichier_peut_etre[$_item] = $item_tous[$_valeur];
+							}
+						}
+					}
 				}
 			}
 		}
 	}
 	else {
 		// On construit la liste des items definis mais plus utilises
-		$item_non = array();
-		$item_peut_etre = array();
-		$fichier_non = array();
 		foreach ($GLOBALS[$var_source] as $_item => $_traduction) {
-			$utilise = true;
-			$avec_certitude = true;
 			if (!in_array ($_item, $utilises['items'])) {
-				// L'item est soit non utilise, soit utilise dans un contexte variable (ie _T('meteo_'.$statut))
+				// L'item est soit non utilise, soit utilise dans un contexte
+				// variable (par exemple : _T('langonet_'.$variable))
 				$contexte_variable = false;
 				foreach($utilises['items'] as $_cle => $_valeur) {
 					if ($utilises['suffixes'][$_cle]) {
@@ -121,20 +106,15 @@ function inc_langonet_verifier_items($rep, $module, $langue, $ou_langue, $ou_fic
 					}
 				}
 				if (!$contexte_variable) {
-					// L'item est vraiment non utilise et c'est une erreur
-					$utilise = false;
+					// L'item est vraiment non utilise
+					$item_non[] = $_item;
 				}
 				else {
-					$avec_certitude = false;
-				}
-			}
-			if (!$utilise) {
-				$item_non[] = $_item;
-			}
-			if (!$avec_certitude) {
-				$item_peut_etre[] = $_item;
-				if (is_array($item_tous[$_valeur])) {
-					$fichier_peut_etre[$_item] = $item_tous[$_valeur];
+					// L'item est utilise dans un contexte variable
+					$item_peut_etre[] = $_item;
+					if (is_array($item_tous[$_valeur])) {
+						$fichier_peut_etre[$_item] = $item_tous[$_valeur];
+					}
 				}
 			}
 		}
