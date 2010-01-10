@@ -19,5 +19,14 @@ function licence_affiche_milieu($flux) {
 	return $flux;
 }
 
+function licence_formulaire_traiter($flux){
+	// si creation d'un nouvel article lui attribuer la licence par defaut de la config
+	if ($flux['args']['form']=='editer_article' AND $flux['args']['args'][0]=='new') {
+		$id_article = $flux['data']['id_article'];
+		$licence_defaut = lire_config('licence/licence_defaut');
+		sql_updateq('spip_articles',array('id_licence'=>$licence_defaut),'id_article='.intval($id_article));
+	}
+	return $flux;
+}
 
 ?>

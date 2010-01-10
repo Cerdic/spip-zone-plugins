@@ -21,6 +21,10 @@
 		<nom>affiche_milieu</nom>
 		<inclure>licence_pipelines.php</inclure>
 	</pipeline>
+	<pipeline>
+		<nom>formulaire_traiter</nom>
+		<inclure>licence_pipelines.php</inclure>
+	</pipeline>
 	<necessite id="SPIP" version="[2.0.10;]" />
 	<necessite id="spip_bonux" version="[1.8.7;]" />
 </plugin>
