@@ -86,9 +86,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'prets_en_retard' => 'Pr&ecirc;ts en retard',
 'reservations' => 'R&eacute;servations',
 'session_expire' => 'Votre session de lecteur a expir&eacute;. Veuillez vous d&eacute;connecter, puis vous identifier de nouveau.',
-'info_upload_logo' => 'Logo en .jpg (taille maxi 550px X 550px)',
-'changer_logo' => 'Changez votre photo',
-'uploader' => 'Enregistrer',
+'changer_logo' => 'Votre photo',
 
 );
 ?>

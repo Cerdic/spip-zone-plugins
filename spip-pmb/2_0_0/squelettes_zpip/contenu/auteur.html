@@ -10,7 +10,7 @@
 		<h1 class="h1 #EDIT{qui} fn">#NOM</h1>
 	</div>
 	<B_doculogo>
-	<BOUCLE_doculogo(DOCUMENTS){id_auteur>0}{id_article?}{id_rubrique?}{id_breve?}{tout}{pagination}{!par date}{0,1}>
+	<BOUCLE_doculogo(DOCUMENTS){id_auteur=#ID_AUTEUR}{tout}{!par date}{0,1}>
 		[(#REM) vérifier si une photo n'a pas été mise en document joint à l'auteur (via le plugin FORMULAIRE_UPLOAD]
 		[(#LOGO_DOCUMENT||image_reduire{150,200})]	
 	</BOUCLE_doculogo>

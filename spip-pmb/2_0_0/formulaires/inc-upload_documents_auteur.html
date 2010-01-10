@@ -1,6 +1,6 @@
 <input type="hidden" value="#ID_AUTEUR" name="id_auteur" />
 <B_docs>
-<BOUCLE_docs(DOCUMENTS){id_auteur?}{id_article?}{id_breve?}{id_rubrique?}{!par id_document}{tout}>
+<BOUCLE_docs(DOCUMENTS){id_auteur=#ID_AUTEUR}{!par id_document}{tout}>
 <div class="bord_formup">
 	<div class="spip_doc_descriptif spip_doc_logo float#LANG_RIGHT">
 		[(#SET{logo,[(#LOGO_DOCUMENT|#URL_DOCUMENT
