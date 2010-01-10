@@ -9,7 +9,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_licence_defaut' => 'Licence par d&eacute;faut',
 	'cfg_titre_licence' => 'Licence',
 	
-	'label_select_licence' => 'Choisissez une licence'
+	'label_select_licence' => 'Choisissez une licence',
+	
+	'sans_licence' => 'Sans licence'
 	
 );
 
