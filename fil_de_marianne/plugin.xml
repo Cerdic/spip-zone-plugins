@@ -1,0 +1,14 @@
+<plugin>
+	<nom>Le Fil de Marianne</nom>
+	<auteur>Kaiser, Teddy Payet</auteur>
+	<licence>GPL</licence>
+	<version>1.0</version>
+	<etat>stable</etat>
+	<description>Squelettes d&eacute;di&eacute; &agrave; la syndication d articles bas&eacute; sur le th&egrave;me Arthemia de Wordpress. <br />
+	Adaptation de la premi&egrave;re version du Fil de Marianne par Kaiser <br />
+	Mise en plugin et corrections par Teddy Payet
+	</description>
+	<prefix>fildemarianne</prefix>
+	<necessite id='spip' version='[2.0.10;]' />
+	<utilise id='bannieres' version='[0.22;]' />
+</plugin>

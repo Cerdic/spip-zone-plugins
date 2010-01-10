@@ -1,0 +1,40 @@
+<!-- debut #front-popular -->
+<div id="front-popular" class="clearfloat">
+	[(#REM) Cette boucle permet de ne garder que 1 articles par site ]
+	<BOUCLE_sites(SITES)>
+	<BOUCLE_syndic_tt_sf_trois(SYNDIC_ARTICLES){id_syndic}{par date}{0,n-1}{unique}> </BOUCLE_syndic_tt_sf_trois>
+	</BOUCLE_sites>
+	<div id="recentpost" class="clearfloat">
+		<h3><:articles_recents:></h3>
+		<ul>
+		<B_syndiclist_recent>
+		<BOUCLE_syndiclist_recent(SYNDIC_ARTICLES) {!par date} {0,5}>
+		<li><a href="[(#ID_SYNDIC|generer_url_entite{'site'})]" title="#TITRE">[(#TITRE|couper{45})]</a></li>
+		</BOUCLE_syndiclist_recent>
+		</B_syndiclist_recent>
+		</ul>	
+	</div> 		
+
+	<div id="mostcommented" class="clearfloat">
+		<h3><:articles_plus_consultes:></h3>
+		<ul>
+		<B_syndiclist_hasard>
+		<BOUCLE_syndiclist_hasard(SYNDIC_ARTICLES){age<5}{par hasard} {0,5}>
+		<li><a href="[(#ID_SYNDIC|generer_url_entite{'site'})]" title="#TITRE">[(#TITRE|couper{45})]</a></li>
+		</BOUCLE_syndiclist_hasard>
+		</B_syndiclist_hasard>
+		</ul>	
+	</div>
+
+	<div id="recent_comments" class="clearfloat">
+		<h3><:articles_moins_consultes:></h3>
+		<ul>
+		<B_syndiclist_moins>
+		<BOUCLE_syndiclist_moins(SYNDIC_ARTICLES){par date}{doublons} {0,5}>
+		<li><a href="[(#ID_SYNDIC|generer_url_entite{'site'})]" title="#TITRE">[(#TITRE|couper{45})]</a></li>
+		</BOUCLE_syndiclist_moins>
+		</B_syndiclist_moins>
+		</ul>	
+	</div>
+</div>
+<!-- fin #front-popular -->

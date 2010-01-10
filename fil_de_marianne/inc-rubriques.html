@@ -1,0 +1,51 @@
+<div id="sidebar">
+	<div id="sidebar-ads">
+	[(#PLUGIN{bannieres}|non)[<img width="300px" height="250px" alt="" src="(#CHEMIN{css/images/banners/square.jpg})"/>]]
+	[(#PLUGIN{bannieres}|oui)[(#BANNIERE{2})]]
+	</div>
+
+	<B_mots_cles><div id="sidebar-top"> 
+	<h3><:mots_cles:></h3>
+	<BOUCLE_mots_cles(MOTS){par titre}{", "}><a href="[(#URL_MOT)]" rel="tag" class="tag-link[-(#ID_MOT)]" title="[(#TITRE|attribut_html)]">[(#TITRE)]</a></BOUCLE_mots_cles>
+	</div></B_mots_cles>
+
+	<div class="clearfloat" id="sidebar-middle"> 
+		<div id="sidebar-left">
+		<B_secteurs_coldroite>
+		<h3><:rubriques:></h3>
+		<ul>
+		<BOUCLE_secteurs_coldroite(RUBRIQUES){racine}{0,20}{par num titre} >
+		<li class="cat-item[ cat-item-(#ID_RUBRIQUE)]"><a href="#URL_RUBRIQUE" title="[(#TITRE|attribut_html)]">[(#TITRE|supprimer_numero)]</a></li></BOUCLE_secteurs_coldroite>
+		</ul>
+		</B_secteurs_coldroite>
+
+		<h3><:administration:></h3>
+		<ul>
+		<li><a href="ecrire/" title="<:espace_prive:>"><:espace_prive:></a></li>
+		[<li><a href="(#ENV{skel})" title="<:voir_squelette:>" rel="nofollow"><:squelette:></a></li>]
+		</ul>
+
+		<B_chrono>
+		<h3><:archives:></h3>
+		<ul>
+		<BOUCLE_chrono(SYNDIC_ARTICLES){par date}{inverse}>
+		[<li><a href="[(#URL_SITE_SPIP|parametre_url{mois,[(#DATE|affdate{'m'})]}|parametre_url{annee,[(#DATE|affdate{'Y'})]})]">(#DATE|affdate_mois_annee|unique)</a></li>]</BOUCLE_chrono>
+		</ul>
+		</B_chrono>
+
+		</div><!-- fin div#sidebar-left -->
+
+		<div id="sidebar-right">
+		<B_sites_references><h3><:sites_web:></h3>
+		<ul>
+		<BOUCLE_sites_references(SITES){par nom_site}{pagination 20}>
+		<li><a href="[(#ID_SYNDIC|generer_url_entite{'site'})]" title="#NOM_SITE">#NOM_SITE</a></li></BOUCLE_sites_references>
+		</ul>
+		<div class="pagination">
+		#PAGINATION
+		</div>
+		</B_sites_references>
+		</div><!-- fin div#sidebar-right -->
+
+	</div><!-- fin div#sidebar-middle -->
+</div><!-- fin div#sidebar -->

@@ -1,0 +1,38 @@
+<div class="clearfloat" id="head">
+
+<div class="clearfloat">
+	<div class="left" id="logo">
+		[(#LOGO_SITE_SPIP||oui)<a href="[(#URL_SITE_SPIP)]">[(#LOGO_SITE_SPIP||image_passe_partout{177,39,center})]</a>]
+		[(#LOGO_SITE_SPIP||non)<h1 id="nom_site_spip"><a href="[(#URL_SITE_SPIP)]">[(#NOM_SITE_SPIP)]</a></h1>]
+		[<div id="tagline">(#SLOGAN|sinon{#DESCRIPTIF_SITE_SPIP})</div>]
+	</div>
+
+	<div class="right">
+		[(#PLUGIN{bannieres}|non)[<img width="468px" height="60px" alt="" src="(#CHEMIN{css/images/banners/wide.jpg})"/>]]
+		[(#PLUGIN{bannieres}|oui)[(#BANNIERE{1})]]
+	</div>
+
+</div>
+
+<div class="clearfloat" id="navbar">
+
+<ul class="left clearfloat" id="page-bar">
+
+[<li><a href="(#URL_SITE_SPIP)" title="<:accueil:>"><:accueil:></a></li>]
+
+<BOUCLE_secteurs(RUBRIQUES){racine}{0,20}{par num titre, titre} >
+<li class="page_item page-item-#ID_RUBRIQUE"><a href="#URL_RUBRIQUE" title="[(#TITRE|attribut_html)]">[(#TITRE|supprimer_numero)]</a><B_sousrub>
+<ul>
+	<BOUCLE_sousrub(RUBRIQUES){id_parent}{par num titre, titre}>
+	<li class="page_item page-item-#ID_RUBRIQUE"><a href="#URL_RUBRIQUE" title="[(#TITRE|attribut_html)]">[(#TITRE|supprimer_numero)]</a></li>
+	</BOUCLE_sousrub>
+</ul>
+</B_sousrub></li>
+</BOUCLE_secteurs>
+</ul><!-- fin ul#page-bar -->
+
+[(#FORMULAIRE_RECHERCHE)]
+
+</div><!-- fin navbar -->
+
+</div><!-- fin head -->

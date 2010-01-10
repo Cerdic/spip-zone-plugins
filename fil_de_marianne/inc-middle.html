@@ -1,0 +1,9 @@
+<div class="clearfloat" id="middle">
+	<span class="titre_zone"><:parcourir_sites:></span>
+	<BOUCLE_site(SITES){par hasard}{unique}{doublons}{0,5}>
+	<div class="category" id="cat-[(#COMPTEUR_BOUCLE)]">
+		<span class="cat_title"><a href="[(#URL_SITE)]">[(#NOM_SITE)]</a></span>
+		[<p><a href="[(#URL_SITE)]">(#DESCRIPTIF|couper{100})</a></p>]
+	</div>
+	</BOUCLE_site>
+</div>

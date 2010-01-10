@@ -1,0 +1,76 @@
+/* Theme original :
++----------------------------------------------------------------+
+|																|
+|	WordPress 2.5 Plugin: WP-PageNavi 2.30						|
+|	Copyright (c) 2008 Lester "GaMerZ" Chan						|
+|																|
+|	File Written By:											|
+|	- Lester "GaMerZ" Chan										|
+|	- http://lesterchan.net										|
+|																|
+|	File Information:											|
+|	- Page Navigation CSS Style									|
+|	- wp-content/plugins/pagination/pagenavi-css.css			|
+|																|
++----------------------------------------------------------------+
+*/
+
+/* 
+Portage pour SPIP : Teddy Payet
+*/
+
+.pagination .separateur	{
+	visibility:hidden;
+	display:none;
+	}
+.pagination a, .pagination a:link {
+	padding: 2px 4px 2px 4px; 
+	margin: 2px;
+	text-decoration: none;
+	border: 1px solid #3c78a7;
+	color: #3c78a7;
+	background-color: #FFFFFF;	
+}
+.pagination a:visited {
+	padding: 2px 4px 2px 4px; 
+	margin: 2px;
+	text-decoration: none;
+	border: 1px solid #3c78a7;
+	color: #3c78a7;
+	background-color: #FFFFFF;	
+}
+.pagination a:hover {	
+	border: 1px solid #303030;
+	color: #303030;
+	background-color: #FFFFFF;
+}
+.pagination a:active {
+	padding: 2px 4px 2px 4px; 
+	margin: 2px;
+	text-decoration: none;
+	border: 1px solid #3c78a7;
+	color: #3c78a7;
+	background-color: #FFFFFF;	
+}
+.pagination span.pages {
+	padding: 2px 4px 2px 4px; 
+	margin: 2px 2px 2px 2px;
+	color: #303030;
+	border: 1px solid #303030;
+	background-color: #FFFFFF;
+}
+.pagination .on {
+	padding: 2px 4px 2px 4px; 
+	margin: 2px;
+	font-weight: bold;
+	border: 1px solid #303030;
+	color: #303030;
+	background-color: #FFFFFF;
+}
+.pagination span.extend {
+	padding: 2px 4px 2px 4px; 
+	margin: 2px;	
+	border: 1px solid #303030;
+	color: #303030;
+	background-color: #FFFFFF;
+}

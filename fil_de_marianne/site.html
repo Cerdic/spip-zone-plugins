@@ -1,0 +1,68 @@
+[(#REM)
+	Un cache plus court, pour la boucle syndic_articles
+]#CACHE{3600}
+<BOUCLE_site(SITES){id_syndic}>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+[(#REM) Les sites n'ont pas de "lang" a proprement parler ; on se base donc sur la langue de la rubrique qui les contient. Les articles syndiques, eux, ont une "lang". ]
+<BOUCLE_lang(RUBRIQUES){id_rubrique}><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR"></BOUCLE_lang>
+<head>
+<title>[(#NOM_SITE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#DESCRIPTIF|couper{150}|textebrut)" />]
+<INCLURE{fond=inc-head}>
+[(#REM) On demande aux moteurs de ne pas indexer cette page pour ne pas passer devant le site qu'on reference.
+]<meta name="robots" content="noindex" />
+</head>
+
+<body class="page_site">
+	<INCLURE{fond=inc-entete}{env}>
+<div id="page" class="clearfloat">
+    <div id="content">
+	[(#REM) Fil d'Ariane ]
+	<span class="breadcrumbs"><a href="#URL_SITE_SPIP/"><:accueil_site:></a>
+	<BOUCLE_nom_rubrique(RUBRIQUES){id_rubrique}> &raquo; <a href="#URL_RUBRIQUE" title="[(#TITRE|supprimer_numero|attribut_html)]">#TITRE</a></BOUCLE_nom_rubrique>
+	[ &raquo; (#NOM_SITE|couper{80})]</span>
+	[(#REM) Contenu principal : Article(s) issus de la syndication ]
+	<B_articles>
+	#ANCRE_PAGINATION
+	<BOUCLE_articles(SYNDIC_ARTICLES) {id_syndic}{par date}{inverse} {pagination 1}>
+	<div class="post" id="post-#ID_SYNDIC_ARTICLE">
+	    <h2 class="title"><a href="#URL_ARTICLE" title="[(#TITRE|attribut_html)]">#TITRE</a></h2>
+	    <div id="stats">
+	    <span>[(#DATE|affdate)]</span>
+	    <span>[(#DATE|heures)]h[(#DATE|minutes)]</span>
+	    <span>[<:par_auteur:> (#LESAUTEURS)]</span>
+	    <span>[(#TAGS|afficher_tags)]</span></div>
+		<div class="entry clearfloat">
+		[(#DESCRIPTIF|reduire_image{600,600})]<br />
+		&raquo; <a href="#URL_ARTICLE"><:lire_la_suite:><:sur:> #NOM_SITE.</a><br />
+		</div>
+	</div>
+	</BOUCLE_articles>
+	<!-- debut compteur votes -->
+	<script language='JavaScript'>
+	var OutbrainPermaLink='#URL_SITE';
+	var OB_demoMode = false;
+	var OB_langJS ='http://widgets.outbrain.com/lang_fr.js';
+	if ( typeof(OB_Script)!='undefined' )
+		OutbrainStart();
+	else {
+		var OB_Script = true;
+		var str = '<script src="http://widgets.outbrain.com/OutbrainRater.js" type="text/javascript"><\/script>';
+		document.write(str);
+	}
+	</script>
+	<!-- fin compteur votes -->
+	<div class="pagination">
+	#PAGINATION
+	</div>
+	</B_articles>
+    </div><!-- #content -->
+
+    <INCLURE{fond=inc-rubriques}{env}{skel=#ENV{skel}}>
+
+</div><!--#page-->
+	<INCLURE{fond=inc-front-popular}{env}>
+	<INCLURE{fond=inc-pied}{env}>
+</body>
+</html>
+</BOUCLE_site>
