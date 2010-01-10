@@ -25,13 +25,15 @@ function catalogue_upgrade($nom_meta_base_version, $version_cible){
 		maj_tables('spip_options');
 		maj_tables('spip_options_articles');
 		maj_tables('spip_transactions');
-		
+		maj_tables('spip_lignes_transactions');
+				
 		ecrire_meta($nom_meta_base_version,$current_version="1.6");
 	}
 }
 
 
 function catalogue_vider_tables($nom_meta_base_version) {
+	sql_drop_table("spip_lignes_transactions");
 	sql_drop_table("spip_transactions");
 	sql_drop_table("spip_options_articles");
 	sql_drop_table("spip_options");

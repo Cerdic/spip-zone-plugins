@@ -174,5 +174,54 @@ function catalogue_peupler_base() {
 		)
 	);
 
+	sql_insertq_multi('spip_transactions', array(
+		array(
+			'id_transaction'=> 1,
+			'id_contact'	=> 1,
+			'titre' 		=> 'Commande conference ANTITRUST',
+			'descriptif' 	=> 'Celle de fevrier.',
+			'date' 			=> '2010-01-10 22:00:00'
+			),
+		array(
+			'id_transaction'=> 2,
+			'id_contact'	=> 6,
+			'titre' 		=> 'Voyage tunisie',
+			'descriptif' 	=> '',
+			'date' 			=> '2010-01-10 22:10:00'
+			)
+		)
+	);
+
+	sql_insertq_multi('spip_lignes_transactions', array(
+		array( // insciption tarif prof
+			'id_ligne'		=> 1,
+			'id_transaction'=> 1,
+			'id_objet'		=> 4,
+			'objet'			=> 'variante',
+			'quantite'		=> 1,
+			'prix_ht' 		=> 250,
+			'tva'			=> 0.196
+			),
+		array( // commande voyage
+			'id_ligne'		=> 2,
+			'id_transaction'=> 2,
+			'id_objet'		=> 6,
+			'objet'			=> 'variante',
+			'quantite'		=> 1,
+			'prix_ht' 		=> 795,
+			'tva'			=> 0
+			),
+		array( // commande option
+			'id_ligne'		=> 3,
+			'id_transaction'=> 2,
+			'id_objet'		=> 2,
+			'objet'			=> 'option',
+			'quantite'		=> 1,
+			'prix_ht' 		=> 119,
+			'tva'			=> 0
+			)
+		)
+	);
+
 }
 ?>
