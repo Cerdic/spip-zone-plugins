@@ -29,6 +29,9 @@ function formulaires_editer_licence_traiter_dist($id_article='new', $retour=''){
 
 	sql_updateq('spip_articles',array('id_licence'=>_request('id_licence')),'id_article='.intval($id_article));
 	
+	include_spip('inc/invalideur');
+	suivre_invalideur("id='id_article/$id_article'");
+	
 	if ($retour) {
 		include_spip('inc/headers');
 		$message .= redirige_formulaire($retour);
