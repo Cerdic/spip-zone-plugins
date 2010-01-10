@@ -19,6 +19,7 @@
 					<option value="#GET{id_licence}"[(#GET{id_licence}|=={#ENV{id_licence}}|oui) selected="selected"]>#GET{name_licence}</option>
 				</BOUCLE_selection>
 				</select>
+				[(#ENV{editable}|non)<input type='hidden' name='id_licence' value='#ENV{id_licence}' />]
 			</li>
 		</ul>
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
