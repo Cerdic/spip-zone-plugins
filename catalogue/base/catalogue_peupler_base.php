@@ -177,15 +177,15 @@ function catalogue_peupler_base() {
 	sql_insertq_multi('spip_transactions', array(
 		array(
 			'id_transaction'=> 1,
-			'id_contact'	=> 1,
+			'id_contact'	=> 1, // CM
 			'titre' 		=> 'Commande conference ANTITRUST',
 			'descriptif' 	=> 'Celle de fevrier.',
 			'date' 			=> '2010-01-10 22:00:00'
 			),
 		array(
 			'id_transaction'=> 2,
-			'id_contact'	=> 6,
-			'titre' 		=> 'Voyage tunisie',
+			'id_contact'	=> 3, // DL
+			'titre' 		=> 'Voyage Tunisie',
 			'descriptif' 	=> '',
 			'date' 			=> '2010-01-10 22:10:00'
 			)

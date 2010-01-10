@@ -1,0 +1,3 @@
+Pouvoir créer une boucle transactions 
+et la filtrer pour une rubrique
+ou un client/auteur ?
