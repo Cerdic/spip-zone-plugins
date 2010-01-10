@@ -11,8 +11,6 @@ function balise_LICENCE_dist ($p){
 		$logo = 'oui';
 	if (($lien = interprete_argument_balise (2, $p))==NULL)
 		$lien = 'oui';
-	spip_log("logo : $logo","bb");
-	spip_log("lien : $lien","bb");
 	$p->code = "licence_affiche(".champ_sql('id_licence', $p).",".$logo.",".$lien.")";
 	$p->interdire_scripts = false;
 	return $p;
