@@ -13,7 +13,6 @@
    	Ce plugin est un fork du core pour int&#233;grer les multi dossiers pour les plugins en 2.0
 _ Les SPIP autoris&#233;s &#224; avoir un dossier /plugins sp&#233;cifique doivent &#202;tres d&#233;clar&#233;s dans le mes_options.php central par:
 _ $GLOBALS['multiplug_autorise'] = array('nom_dossier_spip1','nom_dossier_spip2', ...);    
-    </multi>
     </description>
     <prefix>
     multiplugin
