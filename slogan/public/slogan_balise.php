@@ -22,9 +22,20 @@ function slogan_aleatoire($titre,$lang=null){
 	}
 	if (isset($slogan[$lang]))
 		return $slogan[$lang];
-	if (!$slogan_aleatoire = charger_fonction("slogan_aleatoire_".$lang,"public",true)){
-		$slogan_aleatoire = charger_fonction("slogan_aleatoire_fr","public");
-		return $slogan[$lang] = "<span lang='$lang'>".$slogan_aleatoire($titre)."</span>";
+
+	// si un fichier cache slogans_xx.txt existe, on l'utilise
+	if ($f = find_in_path("slogans/slogans_$lang.txt")
+			AND lire_fichier($f, $slogans)
+			AND trim($slogans)
+			AND ($n = count($slogans = explode("\n",$slogans)))>1){
+		return $slogan[$lang] = str_replace("@slogan@",$titre,$slogans[rand(0, $n)]);
+	}
+
+	// sinon on se rabat sur la fonction
+	if (!$slogan_aleatoire = charger_fonction("slogan_aleatoire_".$lang,"public",true)
+		AND $lang!='fr'){
+		// sinon on se rabat sur le slogan en francais
+		return $slogan[$lang] = "<span lang='$lang'>".slogan_aleatoire($titre,'fr')."</span>";
 	}
 	return $slogan[$lang] = $slogan_aleatoire($titre);
 }
@@ -69,6 +80,21 @@ function public_slogan_aleatoire_de_dist($titre){
 		$slogan = trim(textebrut($res));
 	}
 	return $slogan;
+}
+
+function slogan_cache($lang,$fichier,$n=100){
+	lire_fichier($fichier, $contenu);
+	$slogans = explode("\n",trim($contenu));
+
+	var_dump(count($slogans));
+
+	$slogan_aleatoire = charger_fonction("slogan_aleatoire_$lang","public");
+	while ($n-->0){
+		$slogans[] = $slogan_aleatoire("@slogan@");
+	}
+	$slogans = array_unique($slogans);
+	var_dump(count($slogans));
+	ecrire_fichier($fichier, implode("\n",$slogans));
 }
 
 
