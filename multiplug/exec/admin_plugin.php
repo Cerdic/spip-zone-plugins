@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2009                                                *
+ *  Copyright (c) 2001-2010                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -31,18 +31,12 @@ function exec_admin_plugin_dist($retour='') {
 	if (_request('format')!==NULL)
 		$format = _request('format');
 
-	verif_plugin();
-
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('icone_admin_plugin'), "configuration", "plugin");
-	
-
 	echo "<br />\n";
 	echo "<br />\n";
-
 
 	echo gros_titre(_T('icone_admin_plugin'),'',false);
-
 	
 	echo debut_gauche('plugin',true);
 	echo debut_boite_info(true);
@@ -55,9 +49,13 @@ function exec_admin_plugin_dist($retour='') {
 	echo $s;
 	echo fin_boite_info(true);
 
-	// on fait l'installation ici, cela permet aux scripts d'install de faire des affichages ...
-	installe_plugins();
-
+	// on fait l'installation ici,
+	// cela permet aux scripts d'install de faire des affichages (moches...) 
+	verif_plugin(); 
+	installe_plugins(); 
+	// la valeur de retour de la fonction ci-dessus n'est pas compatible 
+	// avec ce que fait verif_plugin, il faut recalculer. A revoir. 
+	$lcpa = liste_chemin_plugin_actifs();  
 
 	// Si on a CFG, ajoute un lien (oui c'est mal)
 	if (defined('_DIR_PLUGIN_CFG')) {
@@ -80,7 +78,6 @@ function exec_admin_plugin_dist($retour='') {
 	echo debut_droite('plugin', true);
 
 	$lpf = liste_plugin_files();
-	$lcpa = liste_chemin_plugin_actifs();
 	$plugins_interessants = @array_keys(unserialize($GLOBALS['meta']['plugins_interessants']));
 	if (!is_array($plugins_interessants))
 		$plugins_interessants = array();
