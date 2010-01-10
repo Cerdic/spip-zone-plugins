@@ -192,15 +192,11 @@ function tickets_affiche_milieu($flux){
 
 	$exec = $flux["args"]["exec"];
 	if ($exec == "accueil") {
+		$flux['data'] .= '<br class="nettoyeur" />';
 		$flux['data'] .= recuperer_fond('prive/contenu/inc_classement_accueil', array());
 	}
 
 	return $flux;
 }
-function tickets_accueil_encours($flux){
 
-// 	$flux .= recuperer_fond('prive/contenu/inc_classement_accueil', array());
-
-	return $flux;
-}
 ?>
