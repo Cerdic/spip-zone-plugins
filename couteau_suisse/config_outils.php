@@ -639,6 +639,7 @@ add_outil( array(
 	'categorie' => 'typo-corr',
 	'pipeline:nettoyer_raccourcis_typo' => 'sommaire_nettoyer_raccourcis',
 	'pipeline:pre_description_outil' => 'sommaire_description_outil',
+	'pipeline:pre_propre' => 'sommaire_intertitres',
 ));
 
 // intertitres typo, outil compatible avec 'sommaire' :

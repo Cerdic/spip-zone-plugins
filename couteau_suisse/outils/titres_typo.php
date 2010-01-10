@@ -22,7 +22,7 @@ function titres_typo_rempl($texte){
 			$arguments .= '","couleur='.$c;
 		}
 	}
-	return preg_replace_callback(",\{\{\{(.*?)\}\}\},is", create_function('$match', 'return "{{{".image_typo($match[1],"'.$arguments.'")."}}}";'), $texte);
+	return preg_replace_callback(",(\{\{\{\**)(.*?)\}\}\},is", create_function('$match', 'return $match[1].image_typo($match[2],"'.$arguments.'")."}}}";'), $texte);
 }
 
 ?>

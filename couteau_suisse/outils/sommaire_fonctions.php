@@ -59,7 +59,7 @@ function sommaire_d_une_page(&$texte, &$nbh3, $page=0, $num_pages=0) {
 				?decoupe_url($self, $page, $num_pages):$self;
 			$artpage = "<li><a $st title=\"$titre\" href=\"{$artpage}#outil_sommaire_$index\">$lien</a>$suffixe</li>";
 			$sommaire .= $niveau<$n?'<ul>'.$artpage
-				:($niveau>$n?$artpage.'</ul>':$artpage);
+				:($niveau>$n?'</ul>'.$artpage:$artpage);
 			$niveau = $n;
 		}
 	}

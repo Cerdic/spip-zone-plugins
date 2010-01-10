@@ -602,6 +602,7 @@ Ce sommaire est compatible avec : &laquo;&nbsp;[.->decoupe]&nbsp;&raquo;.',
 	'sommaire:nom' => 'Un sommaire automatique',
 	'sommaire_avec' => 'Un texte avec sommaire&nbsp;: <b>@_CS_AVEC_SOMMAIRE@</b>',
 	'sommaire_sans' => 'Un texte sans sommaire&nbsp;: <b>@_CS_SANS_SOMMAIRE@</b>',
+	'sommaire_titres' => 'Intertitres hi&eacute;rarchis&eacute;s&nbsp;: <b><html>{{{*Titre}}}</html></b>, <b><html>{{{**Sous-titre}}}</html></b>, etc.',
 	'spam:description' => 'Tente de lutter contre les envois de messages automatiques et malveillants en partie publique. Certains mots, tout comme les balises en clair &lt;a>&lt;/a>, sont interdits : veuillez inciter vos r&eacute;dacteurs &agrave; utiliser les raccourcis de liens SPIP.
 
 Listez ici les s&eacute;quences interdites en les s&eacute;parant par des espaces. [[%spam_mots%]]
