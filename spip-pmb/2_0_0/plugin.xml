@@ -6,10 +6,10 @@
 	<auteur>	<!-- Auteur du plugin -->
 	Arnault PACHOT 
  	[OpenStudio->http://www.openstudio.fr]
-_ &#169; 2008 - Licence GPL
+_ &#169; 2010 - Licence GPL
 	</auteur>
 	<version>
-	0.5 BETA
+	0.6 BETA
 	</version>
 	<etat>
 	test
@@ -43,6 +43,6 @@ _ &#169; 2008 - Licence GPL
 
  	<necessite id="CFG" version="[1.0;]" />
 	<necessite id="spip_bonux" version="[1.2;]" />
-	<necessite id='spip' version='[2.0.0 dev;]' />
+	<necessite id='spip' version='[2.0.10;]' />
 
 </plugin>
