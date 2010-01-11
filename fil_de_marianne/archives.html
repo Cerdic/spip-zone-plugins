@@ -1,0 +1,50 @@
+[(#REM)
+	Un cache plus court, pour la boucle syndic_articles
+]#CACHE{3600}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+<title>[(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)" />]
+<INCLURE{fond=inc-head}>
+</head>
+
+<body class="page_archives">
+	<INCLURE{fond=inc-entete}{env}>
+<div id="page" class="clearfloat">
+    <div id="content">
+	[(#REM) Fil d'Ariane ]
+	<span class="breadcrumbs"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &raquo; <:archives:> &raquo;[ (#VAL{2010-#ENV{mois}}|nom_mois)][ (#ENV{annee})]</span>
+
+[(#REM) le chiffre 2010 de la balise VAL correspond à une année arbitraire pour pouvoir avoir le nom du mois grâce au filtre |nom_mois ]
+	<h2 class="title"><:archives:>[ (#VAL{2010-#ENV{mois}}|nom_mois)][ (#ENV{annee})]</h2>
+	<B_syndiclist_centre>
+	#ANCRE_PAGINATION
+	<div id="archive">
+	<BOUCLE_syndiclist_centre(SYNDIC_ARTICLES) {mois ?}{annee ?}{!par date}{unique}{doublons}{pagination 5}>
+	<div class="clearfloat">
+	<h3 class="cat_title"><a rel="category tag" title="<:voir_tous_articles_dans:> #NOM_SITE" href="[(#ID_SYNDIC|generer_url_entite{'site'})]">#NOM_SITE</a> &raquo;</h3>
+	<div class="title"><a rel="bookmark" href="[(#URL_PAGE{syndic_article}|parametre_url{id_syndic_article,#ID_SYNDIC_ARTICLE})]" title="[(#TITRE|attribut_html)]">[(#TITRE|couper{120})]</a></div>
+	<div class="meta">[[(#DATE|affdate)] - [(#DATE|heures)]:[(#DATE|minutes)] | <a href="[(#ID_SYNDIC|generer_url_entite{'site'})]">#NOM_SITE</a>]</div>
+	<div class="spoiler">
+		<a title="[(#TITRE|attribut_html)]" rel="bookmark" href="[(#URL_PAGE{syndic_article}|parametre_url{id_syndic_article,#ID_SYNDIC_ARTICLE})]">
+		[(#DESCRIPTIF|extraire_balise{img}||?{[(#DESCRIPTIF|extraire_balise{img}|image_passe_partout{150,150,center}|image_recadre{150,150,center}|inserer_attribut{'class','left'}|inserer_attribut{'alt',[(#TITRE|attribut_html)]}|inserer_attribut{'style',''})],
+		[(#LOGO_SITE_SPIP||image_passe_partout{150,150,center}|image_recadre{150,150,center}|inserer_attribut{'class','left'}|inserer_attribut{'alt',[(#TITRE|attribut_html)]}|inserer_attribut{'style',''})]})]</a>
+		[<p>(#DESCRIPTIF|couper{630}|sinon{<:site_pas_description:>})</p>]
+	</div>
+	</div>
+	</BOUCLE_syndiclist_centre>
+	</div>
+	<div class="pagination">
+	#PAGINATION
+	</div>
+	</B_syndiclist_centre>
+    </div><!-- #content -->
+
+    <INCLURE{fond=inc-rubriques}{env}{skel=#SQUELETTE}>
+
+</div><!--#page-->
+	<INCLURE{fond=inc-front-popular}{env}>
+	<INCLURE{fond=inc-pied}{env}>
+</body>
+</html>
