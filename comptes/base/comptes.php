@@ -11,6 +11,7 @@ function comptes_declarer_tables_interfaces($interface){
 	$interface['table_des_tables']['contacts'] = 'contacts';
 	$interface['table_des_tables']['adresses'] = 'adresses';
 	$interface['table_des_tables']['numeros'] = 'numeros';
+	$interface['table_des_tables']['emails'] = 'emails';
 	$interface['table_des_tables']['champs'] = 'champs';
 	
 	/**
@@ -33,6 +34,10 @@ function comptes_declarer_tables_interfaces($interface){
 	$interface['tables_jointures']['spip_contacts']['id_objet'] = 'numeros_liens';
 	$interface['tables_jointures']['spip_numeros_liens'][] = 'numeros';
 	
+	$interface['tables_jointures']['spip_emails'][] = 'emails_liens';
+	$interface['tables_jointures']['spip_contacts']['id_objet'] = 'emails_liens';
+	$interface['tables_jointures']['spip_emails_liens'][] = 'emails';
+
 	$interface['tables_jointures']['spip_champs'][] = 'champs_liens';
 	$interface['tables_jointures']['spip_contacts']['id_objet'] = 'champs_liens';
 	$interface['tables_jointures']['spip_champs_liens'][] = 'champs';
@@ -130,6 +135,20 @@ function comptes_declarer_tables_principales($tables_principales){
 
 
 
+	//-- Table emails ------------------------------------------
+	$emails = array(
+		"id_email"		=> "bigint(21) NOT NULL auto_increment",
+		"type_email"	=> "VARCHAR(10) DEFAULT '' NOT NULL", // peut etre perso, boulot, etc.
+		"emails" 		=> "tinytext DEFAULT '' NOT NULL",
+		"maj"			=> "TIMESTAMP"
+		);
+	$emails_key = array(
+		"PRIMARY KEY"	=> "id_email"
+		);
+	$tables_principales['spip_emails'] =
+		array('field' => &$emails, 'key' => &$emails_key, 'join' => &$emails_join);
+
+
 
 	//-- Table champs ------------------------------------------
 	$champs = array(
@@ -182,6 +201,21 @@ function comptes_declarer_tables_auxiliaires($tables_auxiliaires){
 		array('field' => &$numeros_liens, 'key' => &$numeros_liens_key);
 
 
+	//-- Table emails_liens ------------------------------------------
+	$emails_liens = array(
+		"id_email"		=> "bigint(21) NOT NULL DEFAULT 0",
+		"id_objet"		=> "bigint(21) NOT NULL DEFAULT 0", 
+		"objet"			=> "varchar(25) NOT NULL" // peut etre un contact ou un compte
+		);
+	$emails_liens_key = array(
+		"PRIMARY KEY"	=> "id_email, id_objet, objet",
+		"KEY"			=> "id_email"
+		);
+	$tables_auxiliaires['spip_emails_liens'] =
+		array('field' => &$emails_liens, 'key' => &$emails_liens_key);
+
+
+
 
 	//-- Table champs_liens ------------------------------------------
 	$champs_liens = array(
@@ -196,7 +230,6 @@ function comptes_declarer_tables_auxiliaires($tables_auxiliaires){
 	$tables_auxiliaires['spip_champs_liens'] =
 		array('field' => &$champs_liens, 'key' => &$champs_liens_key);
 	
-
 
 
 	return $tables_auxiliaires;

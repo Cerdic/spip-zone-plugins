@@ -6,7 +6,9 @@
 
 	<prefix>comptes</prefix>
 	
-	<version>1.0</version>
+	<version>1.0.1</version>
+
+	<version_base>1.0.1</version_base>
 
 	<etat>dev</etat>
 
@@ -37,7 +39,6 @@
 		<inclure>base/comptes.php</inclure>
 	</pipeline>
 
-	<version_base>1.0</version_base>
 	
 	<install>base/comptes_upgrade.php</install>
 	
