@@ -130,6 +130,7 @@ function catalogue_declarer_tables_principales($tables_principales){
 		"id_objet"		=> "bigint(21) NOT NULL DEFAULT 0",
  		"objet"			=> "varchar(25) NOT NULL", // peut etre une variante ou une option
 		"quantite"		=> "float default NULL",
+		"titre" 		=> "tinytext DEFAULT '' NOT NULL", // peut varier; on fait un cliché à l'intant t
 		"prix_ht" 		=> "decimal(6,2) default 0",
 		"tva"			=> "decimal(4,3) default '0.196'",
 		"maj"			=> "TIMESTAMP"		
