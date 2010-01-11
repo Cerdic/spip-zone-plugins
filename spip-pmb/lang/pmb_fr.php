@@ -87,6 +87,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'reservations' => 'R&eacute;servations',
 'session_expire' => 'Votre session de lecteur a expir&eacute;. Veuillez vous d&eacute;connecter, puis vous identifier de nouveau.',
 'changer_logo' => 'Votre photo',
-
+'vous_etes_identifies' => 'Vous &ecirc;tes identifi&eacute;',
+'ecrire_a' => '&Eacute;crire &agrave;'
 );
 ?>

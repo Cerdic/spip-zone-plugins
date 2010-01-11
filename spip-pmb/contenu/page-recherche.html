@@ -9,10 +9,10 @@
 
 
 
-		<INCLURE{fond=inc-recherche-avancee}{recherche}{env}>
+		<INCLURE{fond=inc/inc-recherche-avancee}{recherche}{env}>
 		[(#ENV{look_SITE}|=={1}|?{' ',''})
-			<INCLURE{fond=inc-recherche-site}{recherche}{env}>
+			<INCLURE{fond=inc/inc-recherche-site}{recherche}{env}>
 		]
 		[(#ENV{look_PMB}|=={1}|?{' ',''})
-			<INCLURE{fond=inc-recherche-catalogue}{recherche}{env}>
+			<INCLURE{fond=inc/inc-recherche-catalogue}{recherche}{env}>
 		]
