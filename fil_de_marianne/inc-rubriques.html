@@ -29,7 +29,7 @@
 		<h3><:archives:></h3>
 		<ul>
 		<BOUCLE_chrono(SYNDIC_ARTICLES){par date}{inverse}>
-		[<li><a href="[(#URL_SITE_SPIP|parametre_url{mois,[(#DATE|affdate{'m'})]}|parametre_url{annee,[(#DATE|affdate{'Y'})]})]">(#DATE|affdate_mois_annee|unique)</a></li>]</BOUCLE_chrono>
+		[<li><a href="[(#URL_PAGE{archives}|parametre_url{mois,[(#DATE|affdate{'m'})]}|parametre_url{annee,[(#DATE|affdate{'Y'})]})]">(#DATE|affdate_mois_annee|unique)</a></li>]</BOUCLE_chrono>
 		</ul>
 		</B_chrono>
 

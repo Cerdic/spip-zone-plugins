@@ -21,37 +21,27 @@
 	<span class="breadcrumbs"><a href="#URL_SITE_SPIP/"><:accueil_site:></a>
 	<BOUCLE_nom_rubrique(RUBRIQUES){id_rubrique}> &raquo; <a href="#URL_RUBRIQUE" title="[(#TITRE|supprimer_numero|attribut_html)]">#TITRE</a></BOUCLE_nom_rubrique>
 	[ &raquo; (#NOM_SITE|couper{80})]</span>
+
+	<h2 class="title">#NOM_SITE</h2>
+
 	[(#REM) Contenu principal : Article(s) issus de la syndication ]
 	<B_articles>
 	#ANCRE_PAGINATION
-	<BOUCLE_articles(SYNDIC_ARTICLES) {id_syndic}{par date}{inverse} {pagination 1}>
-	<div class="post" id="post-#ID_SYNDIC_ARTICLE">
-	    <h2 class="title"><a href="#URL_ARTICLE" title="[(#TITRE|attribut_html)]">#TITRE</a></h2>
-	    <div id="stats">
-	    <span>[(#DATE|affdate)]</span>
-	    <span>[(#DATE|heures)]h[(#DATE|minutes)]</span>
-	    <span>[<:par_auteur:> (#LESAUTEURS)]</span>
-	    <span>[(#TAGS|afficher_tags)]</span></div>
-		<div class="entry clearfloat">
-		[(#DESCRIPTIF|reduire_image{600,600})]<br />
-		&raquo; <a href="#URL_ARTICLE"><:lire_la_suite:><:sur:> #NOM_SITE.</a><br />
-		</div>
+	<div id="archive">
+	<BOUCLE_articles(SYNDIC_ARTICLES) {id_syndic}{par date}{inverse} {pagination 5}>
+	<div class="clearfloat">
+	<div class="title"><a rel="bookmark" href="[(#URL_PAGE{syndic_article}|parametre_url{id_syndic_article,#ID_SYNDIC_ARTICLE})]" title="[(#TITRE|attribut_html)]">[(#TITRE|couper{120})]</a></div>
+	<div class="meta">[[(#DATE|affdate)] - [(#DATE|heures)]:[(#DATE|minutes)] | <a href="[(#ID_SYNDIC|generer_url_entite{'site'})]">#NOM_SITE</a>]</div>
+	<div class="spoiler">
+		<a title="[(#TITRE|attribut_html)]" rel="bookmark" href="[(#URL_PAGE{syndic_article}|parametre_url{id_syndic_article,#ID_SYNDIC_ARTICLE})]">
+		[(#DESCRIPTIF|extraire_balise{img}||?{[(#DESCRIPTIF|extraire_balise{img}|image_passe_partout{150,150,center}|image_recadre{150,150,center}|inserer_attribut{'class','left'}|inserer_attribut{'alt',[(#TITRE|attribut_html)]}|inserer_attribut{'style',''})],
+		[(#LOGO_SITE_SPIP||image_passe_partout{150,150,center}|image_recadre{150,150,center}|inserer_attribut{'class','left'}|inserer_attribut{'alt',[(#TITRE|attribut_html)]}|inserer_attribut{'style',''})]})]</a>
+		[<p>(#DESCRIPTIF|couper{630}|sinon{<:site_pas_description:>})</p>]
+	</div>
 	</div>
 	</BOUCLE_articles>
-	<!-- debut compteur votes -->
-	<script language='JavaScript'>
-	var OutbrainPermaLink='#URL_SITE';
-	var OB_demoMode = false;
-	var OB_langJS ='http://widgets.outbrain.com/lang_fr.js';
-	if ( typeof(OB_Script)!='undefined' )
-		OutbrainStart();
-	else {
-		var OB_Script = true;
-		var str = '<script src="http://widgets.outbrain.com/OutbrainRater.js" type="text/javascript"><\/script>';
-		document.write(str);
-	}
-	</script>
-	<!-- fin compteur votes -->
+
+	</div>
 	<div class="pagination">
 	#PAGINATION
 	</div>
