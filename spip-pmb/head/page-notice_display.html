@@ -22,3 +22,11 @@
 <title>[(#ENV{notice}|pmb_notice_champ{'titre'}|textebrut) - ][(#NOM_SITE_SPIP|textebrut)][ - (#SLOGAN_SITE_SPIP|typo|textebrut)]</title>[
 <meta name="description" content="(#ENV{notice}|pmb_notice_champ{'resume'}|couper{150}|attribut_html)" />
 ]
+<link rel="stylesheet" href="#CHEMIN{nyroModal.full.css}" type="text/css" media="projection, screen, tv" />
+<script type="text/javascript" src="#CHEMIN{javascript/jquery.nyroModal-1.2.8.pack.js}" ></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('a.lien-modal').nyroModal({bgColor: '#E6E8D5', minWidth: 400, minHeight: 400});
+	});
+</script>
+
