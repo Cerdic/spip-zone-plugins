@@ -5,6 +5,8 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // B
+	'bak_date_crea' => 'Fichier g&eacute;n&eacute;r&eacute; le @bak_date_jour@ &agrave; @bak_date_heure@.',
+	'bak_info' => 'Le fichier &laquo;<em>@bak_fichier@</em>&raquo; a &eacute;t&eacute; cr&eacute;&eacute; pour sauvegarder ces r&eacute;sultats.',
 	'bouton_generer' => 'G&eacute;n&eacute;rer',
 	'bouton_verifier' => 'V&eacute;rifier',
 

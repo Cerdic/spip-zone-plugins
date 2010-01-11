@@ -128,8 +128,25 @@ function formater_resultats($resultats, $verification='definition') {
 		}
 	}
 
+	// generation du fichier texte des resultats
+	$bak_nom = md5($verification{0}.$resultats['langue'].$resultats['ou_fichier']).'.txt';
+	$bak_rep = sous_repertoire(_DIR_TMP, "langonet");
+	$bak_fichier = $bak_rep . $bak_nom;
+	$bak_texte = "langOnet : ";
+	$bak_texte .= html_entity_decode(_T('langonet:bak_date_crea', array('bak_date_jour' => affdate(date('Y-m-d H:i:s')), 'bak_date_heure' => date('H:i:s'))))."\n\n";
+	$bak_texte .= html_entity_decode(strip_tags($texte));
+	$ok = ecrire_fichier($bak_fichier, $bak_texte);
+	if (!$ok) {
+		spip_log("echec de creation du fichier $bak_nom\n", "langonet", $bak_rep);
+	}
+	else {
+		$texte .= "\n<br /></p>\n<p class=\"reponse_formulaire reponse_formulaire_ok\">\n";
+		$texte .= _T('langonet:bak_info', array('bak_fichier' => $bak_rep.$bak_nom));
+	}
+
 	return $texte;
 }
+
 function afficher_lignes($tableau) {
 	include_spip('inc/layer');
 	// detail des fichiers utilisant les items de langue
