@@ -6,14 +6,14 @@
 ]
 [(#SESSION{id_auteur}|oui)
         <div class="formulaire_spip formulaire_moncomptepmb">
-	<form name="myform" method="post" action="#SELF">
+	<form name="formulaire_moncomptepmb" method="post" action="#SELF">
 	    <fieldset>
-	    <legend><:pmb:mon_compte:></legend>
-	    <input type="hidden" name="action" value="deconnexion_pmb" />
-	    <input type="hidden" name="redirect" value="#SELF" />
-	    <INCLURE{fond=inc-pmbdeconnexion}{env}>
-	    <br class="nettoyeur" />
-	  </fieldset>
+		<legend><:pmb:vous_etes_identifies:></legend>
+		<input type="hidden" name="action" value="deconnexion_pmb" />
+		<input type="hidden" name="redirect" value="#SELF" />
+		<INCLURE{fond=inc/inc-pmbdeconnexion}{env}>
+		<br class="nettoyeur" />
+	    </fieldset>
 	  </form>
      </div>
 ]

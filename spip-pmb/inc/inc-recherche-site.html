@@ -1,0 +1,20 @@
+[(#REM) Articles trouves ]
+<B_articles>
+<div class="menu articles">
+	#ANCRE_PAGINATION
+	<h2 class="h2"><:articles:> (#GRAND_TOTAL)</h2>
+	<ul class="liste-items">
+		<BOUCLE_articles(ARTICLES) {recherche} {par points}{inverse} {pagination}>
+		<li class="item">
+			[(#LOGO_ARTICLE|#URL_ARTICLE|image_reduire{120,140})]
+              		<h3><a href="#URL_ARTICLE">#TITRE</a></h3>
+       			[<small>(#SOUSTITRE)</small>]
+			[<small>(#DATE|affdate_jourcourt)[, <:par_auteur:> (#LESAUTEURS)]</small>]
+			[<div class="#EDIT{intro} introduction entry-content">(#INTRODUCTION|couper{300,'...'})</div>]
+			<a class="lire-la-suite" title="[(#TITRE|texte_backend)]" href="#URL_ARTICLE"><:lire_la_suite:> +</a>
+		</li>
+		</BOUCLE_articles>
+	</ul>
+	[<p class="pagination">(#PAGINATION)</p>]
+	</div>
+</B_articles>
