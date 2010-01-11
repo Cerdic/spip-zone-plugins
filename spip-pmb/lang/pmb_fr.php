@@ -88,6 +88,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'session_expire' => 'Votre session de lecteur a expir&eacute;. Veuillez vous d&eacute;connecter, puis vous identifier de nouveau.',
 'changer_logo' => 'Votre photo',
 'vous_etes_identifies' => 'Vous &ecirc;tes identifi&eacute;',
-'ecrire_a' => '&Eacute;crire &agrave;'
+'ecrire_a' => '&Eacute;crire &agrave;',
+'accedez_compte' => 'Acc&eacute;dez &agrave; votre compte',
+'se_deconnecter' => 'Se d&eacute;connecter',
+'session_expire' => 'votre session a expir&eacute;',
+'bonjour' => 'Bonjour'
 );
 ?>
