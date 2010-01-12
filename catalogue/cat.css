@@ -9,22 +9,25 @@ fieldset.cat fieldset 					{ border:1px solid white !important; padding:12px; ma
 fieldset.cat dt 						{ font-weight:bold;}
 label.suivant,
 input.suivant							{ float:right; }
-dl.fiche  								{ clear:both; background:none; paddin:0; margin:0; }
-dl.fiche:after 							{ content:".";clear:both;height:0;line-height:0;font-size:0;display:block;visibility:hidden; margin-bottom:8px;}
 
-dl.fiche dd 							{ float:left; line-height:19px; padding:auto; margin:0 1%; }
-dl.fiche dd.radio 						{ width:5%}
-dl.fiche dd.desc 						{ width:77%}
-dl.fiche dd.prix 						{ width: 12%; text-align:right;}
-dl.fiche dd.label						{ width: 25%; }
-dl.fiche dd.champ						{ width: 50%; }
-dl.fiche dd.champ input[type=text]		{ width: 97%; }
-dl.fiche dd input.code_postal 			{ width: 25% !important;}
-dl.fiche dd input.ville					{ width: 69% !important; }
-dl.fiche dd.champ textarea				{ width: 100%; }
-dl.fiche dd.long						{ width: 70%; }
-dl.fiche dd.oui_non						{ width: 25%; }
+.cat dl 								{ border:1px dashed orange; } /* indique qu'on est en travaux ... */
+.cat dl:after 							{ content:".";clear:both;height:0;line-height:0;font-size:0;display:block;visibility:hidden; margin-bottom:8px;}
 
+.cat dd 								{ float:left; line-height:19px; padding:auto; margin:0 1%; }
+.cat dd.radio 							{ width: 5%}
+.cat dd.desc 							{ width: 77%}
+.cat dd.prix 							{ width: 12%; text-align:right;}
+.cat dd.label							{ width: 25%; }
+.cat dd.champ							{ width: 50%; }
+.cat dd.champ input[type=text]			{ width: 97%; }
+.cat dd input.numero					{ width: 10% !important;}	
+.cat dd input.voie						{ width: 84% !important;}	
+.cat dd input.code_postal 				{ width: 25% !important;}
+.cat dd input.ville						{ width: 69% !important;}
+.cat dd.champ textarea					{ width: 100%; }
+.cat dd.long							{ width: 70%; }
+.cat dd.oui_non							{ width: 25%; }
+.cat dd select.pays						{ width: 99%; }
 
 #etapes { display: block; position: absolute; top: 10px; left: 10px; }
 #etapes span { display: block; margin-top: -0.50em; padding: 12px 14px; margin-bottom: 5px; }
@@ -47,3 +50,4 @@ dl.fiche dd.oui_non						{ width: 25%; }
 #infos_etapes li.prochains .fond { background-color: #dbdbdb;background-image: url(img/degrade-etapes-clair-left.gif); }
 
 dl.formulaire_erreur { font-size:1.1em; font-weight:bold;}
+dd.erreur {color:red}

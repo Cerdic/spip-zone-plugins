@@ -1,3 +1,4 @@
+#CACHE{0}
 <!-- squelette formulaires/etape_4.html [(#EVAL{_request('prix_ht')})]-->
 
 [(#ENV*{message_ok}|oui)<div class='ajax'>#FORMULAIRE_ETAPE5{#ENV*}</div>]
@@ -7,6 +8,8 @@
 [(#ENV{editable})
 
 #SET{montant,  795  }
+
+[(#INCLURE{fond=inc/recapitulatif_transaction,env})]
 
 <form action='#ENV{action}' method='post'>
 	#ACTION_FORMULAIRE{#ENV{action}}
@@ -31,7 +34,7 @@
 
 		<p>Les règlements par chèque doivent être envoyés à l'adresse suivante :</p>
 		<blockquote>LARTIST EVENT<br />
-		Rue Feydeau<br />
+		24 rue Feydeau<br />
 		75002 PARIS
 		</blockquote>
 		</fieldset>
@@ -40,8 +43,8 @@
 		<legend><:virement:></legend>
 		<label for="virement">
 		<input type="radio" name="reglement" value="virement" /><:virement:></label>
-			<p>Voici les coordonnées bancaires (RIB) de L+ EVENTS:<br />
-			12356 | 09876 | 123456789101 | 26</p>
+			<p>Voici les coordonnées bancaires (RIB) de L PLUS EVENTS:<br />
+			99999 | 99999 | 9999999999 | 99</p>
 		</fieldset>
 
 		<fieldset>
@@ -58,6 +61,5 @@
 	
 </form>
 
-[(#INCLURE{fond=inc/recapitulatif_transaction,env})]
 
 ]

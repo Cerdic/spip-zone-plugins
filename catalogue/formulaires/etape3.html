@@ -1,3 +1,4 @@
+#CACHE{0}
 <!-- squelette formulaires/etape_3.html -->
 
 [(#ENV*{message_ok}|oui)<div class='ajax'>#FORMULAIRE_ETAPE4{#ENV*}</div>]
@@ -5,6 +6,9 @@
 [(#INCLURE{fond=inc/etapes,etape=#ENV{etape,3}})]
 
 [(#ENV{editable})
+
+[(#INCLURE{fond=inc/recapitulatif_transaction,env})]
+
 <form action='#ENV{action}' method='post'>
 	#ACTION_FORMULAIRE{#ENV{action}}
 
@@ -91,6 +95,5 @@
 <!-- Vérifications :
 - s'il y a un type d'activité, un nom de personne ou une contre-indication, mettre la réponse correspondante à "oui"
 -->
-[(#INCLURE{fond=inc/recapitulatif_transaction,env})]
 
 ]

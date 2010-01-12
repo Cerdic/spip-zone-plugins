@@ -1,3 +1,4 @@
+#CACHE{0}
 <!-- squelette formulaires/etape_5.html -->
 
 [(#ENV*{message_ok}|oui)]
@@ -5,6 +6,7 @@
 [(#INCLURE{fond=inc/etapes,etape=#ENV{etape,5}})]
 
 [(#ENV{editable})
+[(#INCLURE{fond=inc/recapitulatif_transaction,env})]
 <form action='#ENV{action}' method='post'>
 	#ACTION_FORMULAIRE{#ENV{action}}
 
@@ -27,6 +29,5 @@
 	
 </form>
 
-[(#INCLURE{fond=inc/recapitulatif_transaction,env})]
 
 ]

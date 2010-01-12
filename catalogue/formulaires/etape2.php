@@ -34,14 +34,12 @@ function formulaires_etape2_verifier_dist(){
 	$champs_obligatoires = array(
 		// nouveaux champs
 		'nom'=>'',
-		/*
 		'prenom' => '',
 		'courriel' => '',
 		'voie' => '',
 		'code_postal' => '',
 		'ville' => '',
 		'pays' => '',
-		*/
 	);
 	
 	// verifier la presence de tous les champs obligatoires
