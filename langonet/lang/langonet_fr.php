@@ -7,8 +7,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // B
 	'bak_date_crea' => 'Fichier g&eacute;n&eacute;r&eacute; le @bak_date_jour@ &agrave; @bak_date_heure@.',
 	'bak_info' => 'Le fichier &laquo;<em>@bak_fichier@</em>&raquo; a &eacute;t&eacute; cr&eacute;&eacute; pour sauvegarder ces r&eacute;sultats.',
+	// 'bak_info' => 'Le fichier &laquo;<em><a href="@bak_fichier@">@bak_fichier@</a></em>&raquo; a &eacute;t&eacute; cr&eacute;&eacute; pour sauvegarder ces r&eacute;sultats.',
 	'bouton_generer' => 'G&eacute;n&eacute;rer',
 	'bouton_verifier' => 'V&eacute;rifier',
+
+// D
+	'definition_possible' => '<em>d&eacute;fini dans :</em>',
 
 // I
 	'info_chemin_fichier' => 'Racine de l\'arborescence des fichiers (exemple : <em>plugins/rainette/</em>, ou <em>ecrire/</em>)',
@@ -18,6 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_mode' => 'Correspond &agrave; la chaine qui sera ins&eacute;r&eacute;e lors de la cr&eacute;ation d\'un nouvel item pour la langue cible.',
 	'info_module' => 'Correspond au pr&eacute;fixe du fichier de langue hors abr&eacute;viation de la langue (exemple : <em>rainette</em> pour le plugin de m&ecirc;me nom, ou <em>ecrire</em> pour SPIP)',
 	'info_verifier' => 'Cette option vous permet de v&eacute;rifier les fichiers de langue d\'un module donn&eacute; sous deux angles compl&eacute;mentaires. Il est possible, soit de v&eacute;rifier si des items de langue utilis&eacute;s dans un groupe de fichiers (un plugin, par exemple) ne sont pas d&eacute;finis dans le fichier de langue idoine, soit que certains items de langue d&eacute;finis ne sont plus utilis&eacute;s.',
+	'item_utilise_ou' => '<em>utilis&eacute; dans :</em>',
 
 // L
 	'label_chemin_fichier' => 'Arborescence &agrave; v&eacute;rifier',
@@ -68,13 +73,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_mode_valeur' => 'Chaine dans la langue source',
 	'option_mode_vide' => 'Une chaine vide',
 
-
 // T
 	'test_item_non_utilise' => 'TEST : Cet item de langue est bien d&eacute;fini dans le fichier de langue (), mais n\'est pas utilis&eacute; dans les fichiers du r&eacute;pertoire scann&eacute; ().',
 	'titre_onglet' => 'LangOnet',
 	'titre_page_navigateur' => 'LangOnet'
 
 );
-
 
 ?>

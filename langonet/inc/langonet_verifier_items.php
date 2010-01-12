@@ -1,7 +1,8 @@
 <?php
+
 /**
  * Vérification de l'utilisation des items de langue
- * 
+ *
  * @param string $rep
  * @param string $module
  * @param string $langue
@@ -20,7 +21,7 @@
 function inc_langonet_verifier_items($rep, $module, $langue, $ou_langue, $ou_fichier, $verification) {
 
 	// On charge le fichier de langue a verifier
-	// si il existe dans l'arborescence $ou_langue 
+	// si il existe dans l'arborescence $ou_langue
 	// (evite le mecanisme standard de surcharge SPIP)
 	include_spip('inc/traduire');
 	$var_source = "i18n_".$module."_".$langue;
@@ -46,7 +47,8 @@ function inc_langonet_verifier_items($rep, $module, $langue, $ou_langue, $ou_fic
 				$utilises_brut['items'] = array_merge($utilises_brut['items'], $matches[2]);
 				$utilises_brut['suffixes'] = array_merge($utilises_brut['suffixes'], $matches[3]);
 				foreach ($matches[2] as $item_val) {
-					$item_tous[$item_val][$_fichier][$ligne][] = trim($texte);
+					preg_match("#.{0,18}".$item_val.".{0,10}#is", $texte, $extrait);
+					$item_tous[$item_val][$_fichier][$ligne][] = trim($extrait[0]);
 				}
 			}
 		}
@@ -62,12 +64,27 @@ function inc_langonet_verifier_items($rep, $module, $langue, $ou_langue, $ou_fic
 	}
 
 	if ($verification == 'definition') {
+		// On construit la liste de tous les items definis
+		// dans tous les fichiers de langue presents sur le site.
+		// Par economie, on se limite au scan des '/lang/xxxx_fr.php'
+		foreach (preg_files(_DIR_RACINE, '/lang/[^/]+_fr\.php$') as $_fichier) {
+			foreach ($contenu = file($_fichier) as $ligne => $texte) {
+				if (preg_match_all("#^[\s\t]*['\"]([a-z0-9_]+)['\"][\s\t]*=>#i", $texte, $matches)) {
+					foreach ($matches[1] as $cet_item) {
+						$tous_lang[$cet_item][] = $_fichier;
+					}
+				}
+			}
+		}
 		// On construit la liste des items utilises mais non definis
 		foreach ($utilises['items'] as $_cle => $_valeur) {
 			if (!$GLOBALS[$var_source][$_valeur]) {
 				if (!$utilises['suffixes'][$_cle]) {
 					// L'item est vraiment non defini et c'est une erreur
 					$item_non[] = $_valeur;
+					if (array_key_exists($_valeur, $tous_lang)) {
+						$definition_possible[$_valeur] = $tous_lang[$_valeur];
+					}
 					if (is_array($item_tous[$_valeur])) {
 						$fichier_non[$_valeur] = $item_tous[$_valeur];
 					}
@@ -128,6 +145,7 @@ function inc_langonet_verifier_items($rep, $module, $langue, $ou_langue, $ou_fic
 	$resultats['fichier_non'] = $fichier_non;
 	$resultats['item_peut_etre'] = $item_peut_etre;
 	$resultats['fichier_peut_etre'] = $fichier_peut_etre;
+	$resultats['definition_possible'] = $definition_possible;
 	$resultats['statut'] = true;
 
 	return $resultats;

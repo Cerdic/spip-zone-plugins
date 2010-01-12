@@ -60,6 +60,25 @@ function formulaires_langonet_verifier_traiter() {
 	return $retour;
 }
 
+/**
+ * Vérification de l'utilisation des items de langue
+ *
+ * @param string $resultats
+ * @param string $verification
+ * @return string
+ */
+
+// $resultats    => tableau des resultats (9 sous-tableaux) :
+//                    ["module"] => intitule module
+//                    ["ou_fichier"] => rep plugin
+//                    ["langue"] => nom fichier de lang
+//                    ["item_non"][] => intitule item
+//                    ["fichier_non"][item][fichier utilisant][num de la ligne][] => extrait ligne
+//                    ["item_peut_etre"][] => intitule partiel item
+//                    ["fichier_peut_etre"][item][fichier utilisant][num de la ligne][] => extrait ligne
+//                    ["definition_possible"][item][] =>nom fichier de lang
+//                    ["statut"] => (bool)
+// $verification => type de verification effectuee
 function formater_resultats($resultats, $verification='definition') {
 	$texte = '';
 	if ($verification == 'definition') {
@@ -71,13 +90,17 @@ function formater_resultats($resultats, $verification='definition') {
 			else {
 				$texte .= _T('langonet:message_ok_non_definis_n', array('nberr' => count($resultats['item_non']), 'ou_fichier' => $resultats['ou_fichier'], 'langue' => $resultats['langue'])) . "\n";
 			}
-			$texte .= afficher_lignes($resultats['fichier_non']);
-			$texte .= "<br />\n";
+			// on ferme le <p> ouvert dans langonet_verifier.html
+			// car ce qui suit est un <div>
+			$texte .= "\n</p>\n";
+			$texte .= afficher_lignes($resultats['fichier_non'], $resultats['definition_possible']);
 		}
 		else {
-			$texte .= _T('langonet:message_ok_non_definis_0', array('module' => $resultats['module'], 'ou_fichier' => $resultats['ou_fichier'], 'langue' => $resultats['langue']));
+			$texte .= _T('langonet:message_ok_non_definis_0', array('module' => $resultats['module'], 'ou_fichier' => $resultats['ou_fichier'], 'langue' => $resultats['langue'])) . "\n";
+			$texte .= "</p>\n"; // <p> ouvert dans langonet_verifier.html
 		}
-		$texte .= "\n</p>\n<p class=\"reponse_formulaire reponse_formulaire_ok\">\n";
+
+		$texte .= "<p class=\"reponse_formulaire reponse_formulaire_ok\">\n<br />";
 		// Liste des items definis sans certitude
 		if (count($resultats['item_peut_etre']) > 0) {
 			if (count($resultats['item_peut_etre']) == 1) {
@@ -86,12 +109,18 @@ function formater_resultats($resultats, $verification='definition') {
 			else {
 				$texte .= _T('langonet:message_ok_definis_incertains_n', array('nberr' => count($resultats['item_peut_etre']), 'langue' => $resultats['langue'])) . "\n";
 			}
+			// on ferme le <p> ouvert au-dessus car ce qui suit est un <div>
+			$texte .= "\n</p>\n";
 			$texte .= afficher_lignes($resultats['fichier_peut_etre']);
+			// on ouvre un <p> ici qui sera ferme dans langonet_verifier.html
+			$texte .= "\n<p>\n";
 		}
 		else {
-			$texte .= _T('langonet:message_ok_definis_incertains_0', array('module' => $resultats['module']));
+			$texte .= _T('langonet:message_ok_definis_incertains_0', array('module' => $resultats['module'])) . "\n";
+			// pas de </p> ici : il sera ferme dans langonet_verifier.html
 		}
 	}
+
 	else {
 		// Liste des items non utilises avec certitude
 		if (count($resultats['item_non']) > 0) {
@@ -101,18 +130,20 @@ function formater_resultats($resultats, $verification='definition') {
 			else {
 				$texte .= _T('langonet:message_ok_non_utilises_n', array('nberr' => count($resultats['item_non']), 'ou_fichier' => $resultats['ou_fichier'], 'langue' => $resultats['langue'])) . "\n";
 			}
+			// on ferme le <p> ouvert dans langonet_verifier.html
+			// car ce qui suit sont des <div>
 			$texte .= "</p>\n";
 			asort($resultats['item_non'], SORT_STRING);
 			foreach($resultats['item_non'] as $_cle => $_item) {
-				$texte .= "<div class=\"titrem\">" . $_item . "</div>\n";
+				$texte .= "<div class=\"titrem\">\n" . $_item . "</div>\n";
 			}
-			$texte .= "<br />\n";
 		}
 		else {
-			$texte .= _T('langonet:message_ok_non_utilises_0', array('ou_fichier' => $resultats['ou_fichier'], 'langue' => $resultats['langue']));
+			$texte .= _T('langonet:message_ok_non_utilises_0', array('ou_fichier' => $resultats['ou_fichier'], 'langue' => $resultats['langue'])) . "\n";
+			$texte .= "</p>\n"; // <p> ouvert dans langonet_verifier.html
 		}
-		$texte .= "\n</p>\n";
-		$texte .= "<p class=\"reponse_formulaire reponse_formulaire_ok\">\n";
+
+		$texte .= "<p class=\"reponse_formulaire reponse_formulaire_ok\">\n<br />";
 		// Liste des items utilises sans certitude
 		if (count($resultats['item_peut_etre']) > 0) {
 			if (count($resultats['item_peut_etre']) == 1) {
@@ -121,10 +152,15 @@ function formater_resultats($resultats, $verification='definition') {
 			else {
 				$texte .= _T('langonet:message_ok_utilises_incertains_n', array('nberr' => count($resultats['item_peut_etre']))) . "\n";
 			}
+			// on ferme le <p> ouvert au-dessus car ce qui suit est un <div>
+			$texte .= "\n</p>\n";
 			$texte .= afficher_lignes($resultats['fichier_peut_etre']);
+			// on ouvre un <p> ici qui sera ferme dans langonet_verifier.html
+			$texte .= "\n<p>\n";
 		}
 		else {
-			$texte .= _T('langonet:message_ok_utilises_incertains_0', array('module' => $resultats['module']));
+			$texte .= _T('langonet:message_ok_utilises_incertains_0', array('module' => $resultats['module'])) . "\n";
+			// pas de </p> ici : il sera ferme dans langonet_verifier.html
 		}
 	}
 
@@ -137,33 +173,54 @@ function formater_resultats($resultats, $verification='definition') {
 	$bak_texte .= html_entity_decode(strip_tags($texte));
 	$ok = ecrire_fichier($bak_fichier, $bak_texte);
 	if (!$ok) {
-		spip_log("echec de creation du fichier $bak_nom\n", "langonet", $bak_rep);
+		spip_log("echec de creation du fichier $bak_nom", "langonet", $bak_rep);
 	}
 	else {
-		$texte .= "\n<br /></p>\n<p class=\"reponse_formulaire reponse_formulaire_ok\">\n";
+		$texte .= "\n<br /></p>\n<p class=\"reponse_formulaire reponse_formulaire_ok\"><br />\n";
 		$texte .= _T('langonet:bak_info', array('bak_fichier' => $bak_rep.$bak_nom));
 	}
 
 	return $texte;
 }
 
-function afficher_lignes($tableau) {
+/**
+ * Formate une liste de resultats
+ *
+ * @param array $tableau
+ * @param array $possibles
+ * @return string
+ */
+
+// $tableau   => [item][fichier utilisant][num ligne][] => extrait ligne
+// $possibles => [item][] => fichier de langue ou item est defini
+function afficher_lignes($tableau, $possibles=array()) {
 	include_spip('inc/layer');
 	// detail des fichiers utilisant les items de langue
 	ksort($tableau);
 	foreach ($tableau as $item => $detail) {
 		$liste_lignes .= bouton_block_depliable($item, false);
 		$liste_lignes .= debut_block_depliable(false);
+		$liste_lignes .= "<p style=\"padding-left:2em;\">\n  "._T('langonet:item_utilise_ou')."\n<br />";	
 		foreach ($tableau[$item] as $fichier => $ligne) {
-			$liste_lignes .= "<p style=\"padding-left:2em;font-weight:bold;\">" .$fichier. "</p>\n";
+			$liste_lignes .= "\t<span style=\"font-weight:bold;padding-left:2em;\">" .$fichier. "</span><br />\n";
 			foreach ($tableau[$item][$fichier] as $ligne_n => $ligne_t) {
 				$L = intval($ligne_n+1);
-				$liste_lignes .= "<p style=\"padding-left:9em;text-indent: -5em;\">L.". sprintf("%04s", $L) .":<span style=\"padding-left:1em;\">".htmlentities($ligne_t[0]). "</span></p>\n";
+				$T = '... '.htmlentities($ligne_t[0]).' ...';
+				$liste_lignes .= "\t\t<span style=\"padding-left:4em;text-indent: -5em;\">L.". sprintf("%04s", $L) .":</span><span style=\"padding-left:1em;\">".$T. "</span><br />\n";
 			}
+		}
+		$liste_lignes .= "</p>";
+
+		if (is_array($possibles[$item])) {
+			$liste_lignes .= "<p style=\"padding-left:2em;\">  "._T('langonet:definition_possible')."\n<br />";
+			foreach ($possibles[$item] as $fichier_def) {
+				$liste_lignes .= "\t<span style=\"font-weight:bold;padding-left:2em;\">" .$fichier_def. "</span><br />\n";
+			}
+			$liste_lignes .= "</p>\n";
 		}
 		$liste_lignes .= fin_block();
 	}
-	
+
 	return $liste_lignes;
 }
 ?>
