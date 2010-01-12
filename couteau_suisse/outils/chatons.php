@@ -40,8 +40,7 @@ function chatons_installe() {
 	ecrire_metas();
 }
 
-// cette fonction est appelee automatiquement a chaque affichage de la page privee du Couteau Suisse
-// le resultat est une chaine apportant des informations sur les nouveaux raccourcis ajoutes par l'outil
+// liste des nouveaux raccourcis ajoutes par l'outil
 // si cette fonction n'existe pas, le plugin cherche alors  _T('couteauprive:un_outil:aide');
 function chatons_raccourcis() {
 	return _T('couteauprive:chatons:aide', array('liste' => $GLOBALS['meta']['cs_chatons_racc']));
