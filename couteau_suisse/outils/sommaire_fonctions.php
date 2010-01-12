@@ -28,10 +28,14 @@ function sommaire_d_une_page(&$texte, &$nbh3, $page=0, $num_pages=0) {
 	// calcul de la page
 	$suffixe = $page?_T('couteau:sommaire_page', array('page'=>$page)):'';
 	$fct_lien_retour = function_exists('sommaire_lien_retour')?'sommaire_lien_retour':'sommaire_lien_retour_dist';
+	$fct_id_ancre = function_exists('sommaire_id_ancre')?'sommaire_id_ancre':'sommaire_id_ancre_dist';
 	for($i=0;$i<count($regs[0]);$i++,$index++){
-		$id = " id=\"outil_sommaire_$index\">";
-		$w = &$regs[0][$i]; $h = &$regs[1][$i]; $n = &$regs[2][$i]; $t = &$regs[3][$i];
+		$w = &$regs[0][$i]; $h = &$regs[1][$i]; $n = &$regs[2][$i];
 		if (($pos2 = strpos($texte, $w, $pos))!==false) {
+			$t = $regs[3][$i];
+			// calcul de l'ancre, $t peut etre modifie
+			$ancre = $fct_id_ancre($index, $t, $n);
+			$id = " id=\"$ancre\">";
 			//$titre = preg_replace(',^<p[^>]*>(.*)</p>$,Umsi', '\\1', trim($t));
 			// ancre 'retour au sommaire', sauf :
 			// si on imprime, ou si les blocs depliables utilisent h{$n}...
@@ -39,31 +43,36 @@ function sommaire_d_une_page(&$texte, &$nbh3, $page=0, $num_pages=0) {
 				?$t//$titre
 				:$fct_lien_retour($self, $t);//$titre);
 			$texte = substr($texte, 0, $pos2) . $h . $id . $titre
-				. substr($texte, $pos2 + strlen($h)+1 + strlen($t));
+				. substr($texte, $pos2 + strlen($h)+1 + strlen($regs[3][$i]));
 			$pos = $pos2 + strlen($id) + strlen($w);
-			// tout le texte, sans les notes
-			$brut = preg_replace(',\[<a href=["\']#nb.*?</a>\],','', echappe_retour($t,'CS'));
-			// pas de glossaire
-			if(function_exists('cs_retire_glossaire')) $brut = cs_retire_glossaire($brut);
-			// texte brut
-			$brut2 = preg_replace(',[\n\r]+,',' ',textebrut($brut));
-			// cas des intertitres en image_typo
-			if(!strlen($brut2)) $brut2 = extraire_attribut($brut, 'alt');
+			$brut = sommaire_nettoyer_titre($t);
 			// pas trop long quand meme...
-			$lien = cs_propre(couper($brut2, _sommaire_NB_CARACTERES));
+			$lien = cs_propre(couper($brut, _sommaire_NB_CARACTERES));
 			// eviter une ponctuation a la fin, surtout si la page est precisee
 			$lien = preg_replace('/(&nbsp;|\s)*'.($page?'[!?,;.:]+$/':'[,;.:]+$/'), '', $lien);
-			$titre = attribut_html(couper($brut2, 100));
+			$titre = attribut_html(couper($brut, 100));
 			// si la decoupe en page est active...
 			$artpage = (function_exists('decoupe_url') && (strlen(_request('artpage')) || $page>1) )
 				?decoupe_url($self, $page, $num_pages):$self;
-			$artpage = "<li><a $st title=\"$titre\" href=\"{$artpage}#outil_sommaire_$index\">$lien</a>$suffixe</li>";
+			$artpage = "<li><a $st title=\"$titre\" href=\"{$artpage}#$ancre\">$lien</a>$suffixe</li>";
 			$sommaire .= $niveau<$n?'<ul>'.$artpage
 				:($niveau>$n?'</ul>'.$artpage:$artpage);
 			$niveau = $n;
 		}
 	}
 	return $sommaire;
+}
+
+function sommaire_nettoyer_titre($t) {
+	// pas de notes
+	$brut = preg_replace(',\[<a href=["\']#nb.*?</a>\],','', echappe_retour($t,'CS'));
+	// pas de glossaire
+	if(function_exists('cs_retire_glossaire')) $brut = cs_retire_glossaire($brut);
+	// texte brut
+	$brut2 = trim(preg_replace(',[\n\r]+,',' ',textebrut($brut)));
+	// cas des intertitres en image_typo
+	if(!strlen($brut2)) $brut2 = trim(extraire_attribut($brut, 'alt'));
+	return $brut2;
 }
 
 /*
@@ -80,6 +89,28 @@ function sommaire_lien_retour_dist($self, $titre) {
 		$haut = '<a title="'._T('couteau:sommaire_titre').'" href="'.$self.'#outil_sommaire" class="sommaire_ancre">&nbsp;</a>';
 	return $haut . $titre;
 }
+
+/*
+ Fonction surchargeable qui calcule l'ancre d'un intertitre 
+ La fonction de surcharge a placer dans config/mes_options.php est : 
+   sommaire_id_ancre($index, &$titre, $hn)
+ $titre peut etre modifie par cette fonction : utile pour traiter le format {{{Mon titre<mon_ancre>}}}
+*/
+function sommaire_id_ancre_dist($index, &$titre, $hn) {
+	return 'outil_sommaire_'.$index;
+}
+
+/*// Exemple de surcharge
+function sommaire_id_ancre($index, &$titre, $hn) {
+	// traiter le format {{{Mon titre<mon_ancre>}}}
+	if(preg_match(',<(\w+)>$,', $titre, $r)) {
+		$titre = str_replace($r[0], '', $titre);
+		return $r[1];
+	}
+	$a = strtolower(translitteration(sommaire_nettoyer_titre($titre)));
+	$a = preg_replace(',[^a-z0-9_]+,', '_', $a);
+	return strlen($a)>2?$a:"sommaire_$index";
+}*/
 
 // fonction appellee sur les parties du textes non comprises entre les balises : html|code|cadre|frame|script|acronym|cite
 function sommaire_d_article_rempl($texte0, $sommaire_seul=false) {

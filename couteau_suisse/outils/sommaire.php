@@ -22,6 +22,7 @@ function sommaire_raccourcis() {
 
 // pipeline 'nettoyer_raccourcis'
 function sommaire_nettoyer_raccourcis($texte) {
+	$texte = preg_replace(',\{\{\{\*+,', '{{{', $texte);
 	return str_replace(array(_sommaire_SANS_FOND, _CS_SANS_SOMMAIRE, _CS_AVEC_SOMMAIRE), '', $texte);
 }
 
