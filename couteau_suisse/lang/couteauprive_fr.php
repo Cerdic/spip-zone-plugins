@@ -13,7 +13,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'2pts_oui' => '&nbsp;:&nbsp;oui',
 
 	'titres_typo:nom'         => 'Intertitres en image',
-	'titres_typo:description' => 'Transforme tous les intertitres <html>&laquo; {{{Mon intertitre}}} &raquo;</html> en image typographique param&eacute;trable.[[%i_taille% pt]][[%i_couleur%]][[%i_police%]][[%i_largeur% px]][[%i_hauteur% pt]][[%i_padding% px]][[%i_align%]]',
+	'titres_typo:description' => 'Transforme tous les intertitres <html>&laquo; {{{Mon intertitre}}} &raquo;</html> en image typographique param&eacute;trable.[[%i_taille% pt]][[%i_couleur%]][[%i_police%]][[%i_largeur% px]][[%i_hauteur% pt]][[%i_padding% px]][[%i_align%]]
+
+Cet outil est compatible avec : &laquo;&nbsp;[.->sommaire]&nbsp;&raquo;.',
 'label:i_taille' => 'Taille de la police&nbsp;:',
 'label:i_couleur' => 'Couleur de la police&nbsp;:',
 'label:i_police' => 'Nom du fichier de la police (dossiers {polices/})&nbsp;:',
@@ -396,6 +398,7 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:lgr_introduction' => 'Longueur du r&eacute;sum&eacute; :',
 	'label:lgr_sommaire' => 'Largeur du sommaire (9 &agrave; 99) :',
 	'label:prof_sommaire' => 'Profondeur retenue (1 &agrave; 4) :',
+	'label:jolies_ancres' => 'Calculer de jolies ancres :',
 	'label:lien_introduction' => 'Points de suite cliquables :',
 	'label:liens_interrogation' => 'Prot&eacute;ger les URLs :',
 	'label:liens_orphelins' => 'Liens cliquables :',
@@ -589,20 +592,23 @@ Pour information, l\'outil &laquo;&nbsp;[.->class_spip]&nbsp;&raquo; permet de c
 
 @puce@ D&eacute;finissez ici le nombre maximal de caract&egrave;res retenus par intertitre :[[%lgr_sommaire% caract&egrave;res]]
 
+@puce@ Les ancres du sommaire peuvent &ecirc;tre calcul&eacute;es &agrave; partir du titre et non ressembler &agrave; : {outil_sommaire_NN}. Cette option donne &eacute;galement acc&egrave;s &agrave; la syntaxe <code>{{{Mon titre<mon_ancre>}}}</code> qui permet de choisir l\'ancre utilis&eacute;e.[[%jolies_ancres%]]
+
 @puce@ Fixez ici le comportement du plugin concernant la cr&eacute;ation du sommaire: 
 _ &bull; Syst&eacute;matique pour chaque article (une balise <code>@_CS_SANS_SOMMAIRE@</code> plac&eacute;e n&rsquo;importe o&ugrave; &agrave; l&rsquo;int&eacute;rieur du texte de l&rsquo;article cr&eacute;era une exception).
 _ &bull; Uniquement pour les articles contenant la balise <code>@_CS_AVEC_SOMMAIRE@</code>.
 
 [[%auto_sommaire%]]
 
-@puce@ Par d&eacute;faut, le Couteau Suisse ins&egrave;re automatiquement le sommaire en t&ecirc;te d\'article. Mais vous avez la possibilit&eacute; de placer ce sommaire ailleurs dans votre squelette gr&acirc;ce &agrave; une balise #CS_SOMMAIRE que vous pouvez activer ici :
+@puce@ Par d&eacute;faut, le Couteau Suisse ins&egrave;re automatiquement le sommaire en t&ecirc;te d\'article. Mais vous avez la possibilit&eacute; de placer ce sommaire ailleurs dans votre squelette gr&acirc;ce &agrave; une balise #CS_SOMMAIRE.
 [[%balise_sommaire%]]
 
-Ce sommaire est compatible avec : &laquo;&nbsp;[.->decoupe]&nbsp;&raquo;.',
-	'sommaire:nom' => 'Un sommaire automatique',
+Ce sommaire est compatible avec &laquo;&nbsp;[.->decoupe]&nbsp;&raquo; et &laquo;&nbsp;[.->titres_typo]&nbsp;&raquo;.',
+	'sommaire:nom' => 'Sommaire automatique',
 	'sommaire_avec' => 'Un texte avec sommaire&nbsp;: <b>@_CS_AVEC_SOMMAIRE@</b>',
 	'sommaire_sans' => 'Un texte sans sommaire&nbsp;: <b>@_CS_SANS_SOMMAIRE@</b>',
 	'sommaire_titres' => 'Intertitres hi&eacute;rarchis&eacute;s&nbsp;: <b><html>{{{*Titre}}}</html></b>, <b><html>{{{**Sous-titre}}}</html></b>, etc.',
+	'sommaire_ancres' => 'Ancres choisies : <b><html>{{{Mon Titre&lt;mon_ancre&gt;}}}</html></b>',
 	'spam:description' => 'Tente de lutter contre les envois de messages automatiques et malveillants en partie publique. Certains mots, tout comme les balises en clair &lt;a>&lt;/a>, sont interdits : veuillez inciter vos r&eacute;dacteurs &agrave; utiliser les raccourcis de liens SPIP.
 
 Listez ici les s&eacute;quences interdites en les s&eacute;parant par des espaces. [[%spam_mots%]]

@@ -28,7 +28,8 @@ function sommaire_d_une_page(&$texte, &$nbh3, $page=0, $num_pages=0) {
 	// calcul de la page
 	$suffixe = $page?_T('couteau:sommaire_page', array('page'=>$page)):'';
 	$fct_lien_retour = function_exists('sommaire_lien_retour')?'sommaire_lien_retour':'sommaire_lien_retour_dist';
-	$fct_id_ancre = function_exists('sommaire_id_ancre')?'sommaire_id_ancre':'sommaire_id_ancre_dist';
+	$fct_id_ancre = defined('_sommaire_JOLIES_ANCRES')?'sommaire_id_ancre_ex'
+		:(function_exists('sommaire_id_ancre')?'sommaire_id_ancre':'sommaire_id_ancre_dist');
 	for($i=0;$i<count($regs[0]);$i++,$index++){
 		$w = &$regs[0][$i]; $h = &$regs[1][$i]; $n = &$regs[2][$i];
 		if (($pos2 = strpos($texte, $w, $pos))!==false) {
@@ -100,17 +101,18 @@ function sommaire_id_ancre_dist($index, &$titre, $hn) {
 	return 'outil_sommaire_'.$index;
 }
 
-/*// Exemple de surcharge
-function sommaire_id_ancre($index, &$titre, $hn) {
-	// traiter le format {{{Mon titre<mon_ancre>}}}
-	if(preg_match(',<(\w+)>$,', $titre, $r)) {
+// Surcharge compatible avec les intertitres en image : jolies ancres
+function sommaire_id_ancre_ex($index, &$titre, $hn) {
+	// traiter le format {{{Mon titre<mon_ancre>}}} (ou alt='Mon titre&lt;mon_ancre&gt;')
+	if(preg_match(',<(\w+)>$,', $titre, $r) || preg_match(',&lt;(\w+)&gt;(?=\'),', $titre, $r)) {
 		$titre = str_replace($r[0], '', $titre);
 		return $r[1];
 	}
+	// calculer les ancres d'apres le titre
 	$a = strtolower(translitteration(sommaire_nettoyer_titre($titre)));
-	$a = preg_replace(',[^a-z0-9_]+,', '_', $a);
+	$a = trim(preg_replace(',[^a-z0-9_]+,', '_', $a), '_');
 	return strlen($a)>2?$a:"sommaire_$index";
-}*/
+}
 
 // fonction appellee sur les parties du textes non comprises entre les balises : html|code|cadre|frame|script|acronym|cite
 function sommaire_d_article_rempl($texte0, $sommaire_seul=false) {

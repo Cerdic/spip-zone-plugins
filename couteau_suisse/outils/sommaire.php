@@ -17,7 +17,8 @@
 // cette fonction est appelee automatiquement a chaque affichage de la page privee du Couteau Suisse
 function sommaire_raccourcis() {
 	return _T('couteauprive:sommaire_'.(defined('_sommaire_AUTOMATIQUE')?'sans':'avec'))
-	.'<br/>'._T('couteauprive:sommaire_titres');
+	.'<br />'._T('couteauprive:sommaire_titres')
+	.(defined('_sommaire_JOLIES_ANCRES')?'<br />'._T('couteauprive:sommaire_ancres'):'');
 }
 
 // pipeline 'nettoyer_raccourcis'
