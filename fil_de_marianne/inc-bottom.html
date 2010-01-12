@@ -9,7 +9,7 @@
 	#ANCRE_PAGINATION
 	<BOUCLE_syndiclist_centre(SYNDIC_ARTICLES){annee ?} {mois ?} {par date}{inverse} {unique}{doublons}{pagination 5}>
 	<div class="clearfloat">
-	<h3 class="cat_title"><a href="[(#ID_SYNDIC|generer_url_entite{'site'})]" rel="category tag" title="<:voir_tous_articles_dans:> #NOM_SITE">#NOM_SITE</a> &raquo</h3>
+	<h3 class="cat_title"><a href="[(#ID_SYNDIC|generer_url_entite{'site'})]" rel="category tag" title="<:voir_tous_articles_dans:> #NOM_SITE">#NOM_SITE</a> &raquo;</h3>
 	<div class="title"><a rel="bookmark" href="[(#URL_PAGE{syndic_article}|parametre_url{id_syndic_article,#ID_SYNDIC_ARTICLE})]">[(#TITRE)]</a></div>
 	<div class="meta">[[(#DATE|affdate)] - [(#DATE|heures)]:[(#DATE|minutes)] | <a href="[(#ID_SYNDIC|generer_url_entite{'site'})]">#NOM_SITE</a>]</div>
 	

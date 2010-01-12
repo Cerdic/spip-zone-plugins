@@ -9,7 +9,7 @@
 		<ul>
 		<B_syndiclist_recent>
 		<BOUCLE_syndiclist_recent(SYNDIC_ARTICLES) {!par date} {0,5}>
-		<li><a href="[(#URL_PAGE{syndic_article}|parametre_url{id_syndic_article,#ID_SYNDIC_ARTICLE})]" title="#TITRE">[(#TITRE|couper{45})]</a></li>
+		<li><a href="[(#URL_PAGE{syndic_article}|parametre_url{id_syndic_article,#ID_SYNDIC_ARTICLE})]" title="[(#TITRE|attribut_html)]">[(#TITRE|couper{45})]</a></li>
 		</BOUCLE_syndiclist_recent>
 		</B_syndiclist_recent>
 		</ul>	
@@ -20,7 +20,7 @@
 		<ul>
 		<B_syndiclist_hasard>
 		<BOUCLE_syndiclist_hasard(SYNDIC_ARTICLES){age<5}{par hasard} {0,5}>
-		<li><a href="[(#URL_PAGE{syndic_article}|parametre_url{id_syndic_article,#ID_SYNDIC_ARTICLE})]" title="#TITRE">[(#TITRE|couper{45})]</a></li>
+		<li><a href="[(#URL_PAGE{syndic_article}|parametre_url{id_syndic_article,#ID_SYNDIC_ARTICLE})]" title="[(#TITRE|attribut_html)]">[(#TITRE|couper{45})]</a></li>
 		</BOUCLE_syndiclist_hasard>
 		</B_syndiclist_hasard>
 		</ul>	
@@ -31,7 +31,7 @@
 		<ul>
 		<B_syndiclist_moins>
 		<BOUCLE_syndiclist_moins(SYNDIC_ARTICLES){par date}{doublons} {0,5}>
-		<li><a href="[(#URL_PAGE{syndic_article}|parametre_url{id_syndic_article,#ID_SYNDIC_ARTICLE})]" title="#TITRE">[(#TITRE|couper{45})]</a></li>
+		<li><a href="[(#URL_PAGE{syndic_article}|parametre_url{id_syndic_article,#ID_SYNDIC_ARTICLE})]" title="[(#TITRE|attribut_html)]">[(#TITRE|couper{45})]</a></li>
 		</BOUCLE_syndiclist_moins>
 		</B_syndiclist_moins>
 		</ul>	
