@@ -74,7 +74,7 @@ function blocs_CS_pre_charger($flux) {
 		"replaceWith" => "\n<visible>"._T('couteau:pp_un_titre')."\n\n"._T('couteau:pp_votre_texte')."\n</visible>\n",
 		"display" => true));
 	foreach(cs_pp_liste_barres('blocs') as $b)
-		$flux[$b] = array_merge($flux[$b], $r);
+		$flux[$b] = isset($flux[$b])?array_merge($flux[$b], $r):$r;
 	return $flux;
 }
 function blocs_PP_icones($flux) {

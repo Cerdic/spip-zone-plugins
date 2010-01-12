@@ -37,8 +37,11 @@ function decoupe_CS_pre_charger($flux) {
 			._decoupe_SEPARATEUR._T('couteau:pp_votre_titre', array('nb'=>2))."\n\n"._T('couteau:pp_votre_texte')."\n\n"
 			._decoupe_SEPARATEUR._T('couteau:pp_votre_titre', array('nb'=>3))."\n\n"._T('couteau:pp_votre_texte')."\n\n</onglets>\n",
 		"display" => true));
-	foreach(cs_pp_liste_barres('decoupe') as $b)
-		$flux[$b] = array_merge($flux[$b], $b=='forum'?array($r[1]):$r);
+	foreach(cs_pp_liste_barres('decoupe') as $b) {
+		// pas de decoupe dans les forums
+		$r2 = $b=='forum'?array($r[1]):$r;
+		$flux[$b] = isset($flux[$b])?array_merge($flux[$b], $r2):$r2;
+	}
 	return $flux;
 }
 function decoupe_PP_icones($flux) {
