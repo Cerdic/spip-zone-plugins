@@ -40,7 +40,7 @@ function cs_titre_champ($table) {
 function cs_titre_sql($table, $where) {
 	$titre = cs_titre_champ($table);
 	// Utiliser la bonne requete en fonction de la version de SPIP
-	if(function_exists('sql_getfetsel')) {
+	if(function_exists('sql_getfetsel') && function_exists('table_objet_sql')) {
 		// SPIP 2.0
 		if($r = sql_getfetsel($titre, table_objet_sql($table), $where))
 			return $r;
