@@ -5,7 +5,7 @@
  */
 function formater_date_poursql($date){
 	// On tolère différents séparateurs
-	$date = ereg_replace("\.|/| ",'-',$date);
+	$date = preg_replace("#\.|/| #i",'-',$date);
 	list($jour,$mois,$annee) = explode('-',$date);
 	$date = $annee.'-'.$mois.'-'.$jour;
 	return $date;
