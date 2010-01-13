@@ -10,7 +10,7 @@
 	<icon>img_pack/portfolio-64.png</icon>
 	<auteur>[Cedric MORIN->http://www.yterium.net] &amp; [romy.tetue.net->http://romy.tetue.net] &amp; superyms--(traduction)
 	</auteur>
-	<version>1.1</version>
+	<version>1.1.1</version>
 	<version_base>0.8</version_base>
 	<etat>stable</etat>
 	<description><multi>
@@ -63,7 +63,7 @@
 		<titre>gestdoc:documents</titre>
 		<icone>img_pack/portfolio-24.png</icone>
 		<url>portfolio</url>
-	</bouton>	
+	</bouton>
 	<bouton id='documents21' parent='bando_edition'>
 		<titre>gestdoc:documents</titre>
 		<icone>images/portfolio-16.png</icone>
