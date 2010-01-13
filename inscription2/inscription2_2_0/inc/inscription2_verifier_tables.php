@@ -37,7 +37,7 @@ function inc_inscription2_verifier_tables_dist(){
 		foreach(lire_config('inscription2',array()) as $clef => $val) {
 			$cle = preg_replace("/_(obligatoire|fiche|table).*/", "", $clef);
 			if(!in_array($cle,$clef_passee)){
-				if(!in_array($cle,$exceptions_des_champs_auteurs_elargis) and !ereg("^(categories|zone|newsletter).*$", $cle) ){
+				if(!in_array($cle,$exceptions_des_champs_auteurs_elargis) and !preg_match("/^(categories|zone|newsletter).*$/", $cle) ){
 					if($cle == 'naissance' and !isset($tables_principales[$table]['field'][$cle]) and _request($clef)!=''){
 						$tables_principales[$table]['field'][$cle] = "DATE DEFAULT '0000-00-00' NOT NULL";
 					}elseif(_request($clef)!='' and !isset($tables_principales[$table]['field'][$cle]) and $cle == 'validite'){
