@@ -4,7 +4,7 @@
  * Le plugin qui lave plus SPIP que SPIP
  * (c) 2008 Mathieu Marcillaud, Cedric Morin, Romy Tetue
  * Licence GPL
- * 
+ *
  */
 
 // recuperer le nom du serveur,
@@ -119,8 +119,8 @@ function balise_URL_PAGE($p) {
  * #SET
  * Affecte une variable locale au squelette
  * #SET{nom,valeur}
- * 
- * SURCHARGE DU CORE : 
+ *
+ * SURCHARGE DU CORE :
  * 		Affecte un filtre a une variable locale au squelette
  * 		#SET{nom,filtre,param1,param2,...,paramN}
  *
@@ -129,8 +129,8 @@ function balise_URL_PAGE($p) {
 **/
 /*
 function balise_SET($p){
-	$_code = array();	
-	
+	$_code = array();
+
 	$n=1;
 	while ($_v = interprete_argument_balise($n++,$p))
 		$_code[] = $_v;
@@ -166,7 +166,7 @@ function balise_SET_PUSH_dist($p){
 	if ($_nom AND $_valeur)
 		// si le tableau n'existe pas encore, on le cree
 		// on ajoute la valeur ensuite (sans passer par array_push)
-		$p->code = "vide((\$cle=$_nom) 
+		$p->code = "vide((\$cle=$_nom)
 			. (is_array(\$Pile['vars'][\$cle])?'':\$Pile['vars'][\$cle]=array())
 			. (\$Pile['vars'][\$cle][]=$_valeur))";
 	else
@@ -180,11 +180,11 @@ function balise_SET_PUSH_dist($p){
  * Si 3 arguments : Cree un tableau nom_tableau de t1 + t2
  * #SET_MERGE{nom_tableau,t1,t2}
  * #SET_MERGE{nom_tableau,#GET{tableau},#ARRAY{cle,valeur}}
- * 
+ *
  * Si 2 arguments : Merge t1 dans nom_tableau
  * #SET_MERGE{nom_tableau,t1}
  * #SET_MERGE{nom_tableau,#GET{tableau}}
- * 
+ *
  * @param object $p : objet balise
  * @return ""
 **/
@@ -196,18 +196,18 @@ function balise_SET_MERGE_dist($p){
 	if ($_nom AND $_t1 AND !$_t2)
 		// 2 arguments : merge de $_nom et $_t1 dans $_nom
 		// si le tableau n'existe pas encore, on le cree
-		$p->code = "vide((\$cle=$_nom) 
+		$p->code = "vide((\$cle=$_nom)
 			. (is_array(\$Pile['vars'][\$cle])?'':\$Pile['vars'][\$cle]=array())
 			. (is_array(\$new=$_t1)?'':\$new=array(\$new))
 			. (\$Pile['vars'][\$cle] = array_merge(\$Pile['vars'][\$cle],\$new)))";
 	elseif ($_nom AND $_t1 AND $_t2)
 		// 3 arguments : merge de $_t1 et $_t2 dans $_nom
 		// si le tableau n'existe pas encore, on le cree
-		$p->code = "vide((\$cle=$_nom) 
+		$p->code = "vide((\$cle=$_nom)
 			. (is_array(\$Pile['vars'][\$cle])?'':\$Pile['vars'][\$cle]=array())
 			. (is_array(\$new1=$_t1)?'':\$new1=array(\$new1))
 			. (is_array(\$new2=$_t2)?'':\$new2=array(\$new2))
-			. (\$Pile['vars'][\$cle] = array_merge(\$new1,\$new2)))";	
+			. (\$Pile['vars'][\$cle] = array_merge(\$new1,\$new2)))";
 	else
 		$p->code = "''";
 
@@ -313,7 +313,7 @@ function balise_TRI_dist($p, $liste='true') {
 		$p->code = "''";
 		return $p;
 	}
-	
+
 	$_libelle = interprete_argument_balise(2,$p);
 	$_libelle = $_libelle?$_libelle:$_champ;
 
@@ -322,11 +322,11 @@ function balise_TRI_dist($p, $liste='true') {
 	// si champ = ">" c'est un lien vers le tri decroissant :.. 4>3>2>1 == -1
 	$_issens = "in_array($_champ,array('<','>'))";
 	$_sens = "(strpos('> <',$_champ)-1)";
-	
+
 	$_variable = "((\$s=$_issens)?'sens':'tri').".$boucle->modificateur['tri_nom'];
 	$_url = "parametre_url(self(),$_variable,\$s?$_sens:$_champ)";
 	$_on = "\$s?(".$boucle->modificateur['tri_sens']."==$_sens".'):('.$boucle->modificateur['tri_champ']."==$_champ)";
-	
+
 	$p->code = "aoustrong($_url,$_libelle,$_on".($_class?",$_class":"").")";
 	//$p->code = "''";
 	$p->interdire_scripts = false;
@@ -339,9 +339,9 @@ function balise_TRI_dist($p, $liste='true') {
  * #BOUTON_ACTION{libelle,url}
  * ou
  * #BOUTON_ACTION{libelle,url,ajax} pour que l'action soit ajax comme un lien class='ajax'
- * ou 
+ * ou
  * #BOUTON_ACTION{libelle,url,ajax,img_src} pour utiliser une image comme bouton
- * ou 
+ * ou
  * #BOUTON_ACTION{libelle,url,ajax,img_src,message_confirmation} pour utiliser un message de confirmation
  *
  * @param unknown_type $p
@@ -351,7 +351,7 @@ function balise_BOUTON_ACTION($p){
 
 	$_label = interprete_argument_balise(1,$p);
 	if (!$_label) $_label="''";
-	
+
 	$_url = interprete_argument_balise(2,$p);
 	if (!$_url) $_url="''";
 
@@ -360,10 +360,10 @@ function balise_BOUTON_ACTION($p){
 
 	$_img = interprete_argument_balise(4,$p);
 	if (!$_img) $_img="''";
-	
+
 	$_confirm = interprete_argument_balise(5,$p);
 	if (!$_confirm){ $_confirm="''"; $_onclick=''; }
-	else $_onclick = " onclick=\'return confirm(".attribut_html($_confirm).");\'";
+	else $_onclick = " onclick=\'return confirm(\"' . attribut_html($_confirm) . '\");\'";
 
 	$p->code = "'<form class=\'bouton_action_post '.$_class.'\' method=\'post\' action=\''.(\$u=$_url).'\'><span>'.form_hidden(\$u)
 .($_img?'<input type=\'image\' class=\'image\' alt=\''.attribut_html($_label).'\' src=\''.attribut_html($_img).'\'$_onclick />':'<input type=\'submit\' class=\'submit\' value=\''.attribut_html($_label).'\'$_onclick />')
@@ -401,9 +401,9 @@ function balise_INFO__dist($p){
 
 /**
  * Savoir si on objet est publie ou non
- * 
+ *
  * @param <type> $p
- * @return <type> 
+ * @return <type>
  */
 function balise_PUBLIE_dist($p) {
 
