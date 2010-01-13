@@ -340,9 +340,7 @@ function balise_TRI_dist($p, $liste='true') {
  * ou
  * #BOUTON_ACTION{libelle,url,ajax} pour que l'action soit ajax comme un lien class='ajax'
  * ou
- * #BOUTON_ACTION{libelle,url,ajax,img_src} pour utiliser une image comme bouton
- * ou
- * #BOUTON_ACTION{libelle,url,ajax,img_src,message_confirmation} pour utiliser un message de confirmation
+ * #BOUTON_ACTION{libelle,url,ajax,message_confirmation} pour utiliser un message de confirmation
  *
  * @param unknown_type $p
  * @return unknown
@@ -358,15 +356,12 @@ function balise_BOUTON_ACTION($p){
 	$_class = interprete_argument_balise(3,$p);
 	if (!$_class) $_class="''";
 
-	$_img = interprete_argument_balise(4,$p);
-	if (!$_img) $_img="''";
-
-	$_confirm = interprete_argument_balise(5,$p);
+	$_confirm = interprete_argument_balise(4,$p);
 	if (!$_confirm){ $_confirm="''"; $_onclick=''; }
 	else $_onclick = " onclick=\'return confirm(\"' . attribut_html($_confirm) . '\");\'";
 
 	$p->code = "'<form class=\'bouton_action_post '.$_class.'\' method=\'post\' action=\''.(\$u=$_url).'\'><span>'.form_hidden(\$u)
-.($_img?'<input type=\'image\' class=\'image\' alt=\''.attribut_html($_label).'\' src=\''.attribut_html($_img).'\'$_onclick />':'<input type=\'submit\' class=\'submit\' value=\''.attribut_html($_label).'\'$_onclick />')
+.'<button type=\'submit\' class=\'submit\' $_onclick>' . attribut_html($_label) . '</button>'
 .'</span></form>'";
 	$p->interdire_scripts = false;
 	return $p;
