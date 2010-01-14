@@ -31,6 +31,26 @@
 					<input type='submit' name='ok' value='Rechercher' class='boutonrechercher'/>
 				</li>
 				<li>
+				    [(#SET{tab_resultat, [(#REM|sinon{0}|pmb_recuperer_champs_recherche)]})]
+				    <B_tab_resultat>
+				    <BOUCLE_tab_resultat(POUR){tableau #GET{tab_resultat}}>
+						[(#SET{valeur_sav,#VALEUR})]
+						[(#GET{valeur_sav}|table_valeur{id}|=={17}|oui)
+							[(#SET{valeurs_champs,[(#GET{valeur_sav}|table_valeur{values})]})]
+							<select name='typdoctemp' class="invisible">
+							<option  value=''>tout type de document</option>
+						]
+						<BOUCLE_valeurs_champs(POUR){tableau #GET{valeurs_champs}}>
+							[(#GET{valeur_sav}|table_valeur{id}|=={17}|oui)
+							  <option  value='[(#VALEUR|table_valeur{value_id})]'[(#ENV{typdoc}|=={[(#GET{valeurs_champs|pmb_tableau2_valeur{#CLE,value_id})]}|?{' ',''})selected="selected")]>[(#VALEUR|table_valeur{value_caption})]</option>
+							]
+						</BOUCLE_valeurs_champs> 
+						[(#GET{valeur_sav}|table_valeur{id}|=={17}|oui)
+							</select>
+						]
+				    </BOUCLE_tab_resultat>
+				    </B_tab_resultat>
+
 				    <select name='typdoc'>  
 					  <option  value=''>tout type de document</option>
 					  

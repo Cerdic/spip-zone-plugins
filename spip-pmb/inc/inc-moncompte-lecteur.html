@@ -1,9 +1,9 @@
 <BOUCLE_auteur(AUTEURS){id_auteur}{id_auteur=#SESSION{id_auteur}}{tous}>	
 <ul class="liste-items infos-compte-lecteur">
-<li class="item">
+[<li class="item">
       <h2><:pmb:changer_logo:></h2>
-      [(#FORMULAIRE_UPLOAD{auteur,#SESSION{id_auteur},inc-upload_documents_auteur})]	
-</li>
+     (#FORMULAIRE_UPLOAD{auteur,#SESSION{id_auteur},inc-upload_documents_auteur})	
+</li>]
 
 <B_auteurpmb>
 <li class="item">

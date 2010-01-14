@@ -478,7 +478,36 @@ function pmb_ws_parser_notice_xml($id_notice, $value, &$tresultat) {
 	    $tresultat = $gtresultat;
 }
 
+function pmb_recuperer_champs_recherche($langue=0) {
+	$tresultat = Array();
+	
+	pmb_ws_charger_wsdl($ws, $url_base);
+	try {
+	     $result = $ws->pmbesSearch_getAdvancedSearchFields('opac|search_fields',$langue,true);
+	     $cpt=0;
+	     foreach ($result as $res) {
+			$tresultat[$cpt] = Array();
+			$tresultat[$cpt]['id'] = $res->id;
+			$tresultat[$cpt]['label'] = $res->label;
+			$tresultat[$cpt]['type'] = $res->type;
+			$tresultat[$cpt]['operators'] = $res->operators;
+			$tresultat[$cpt]['values'] = Array();
+			$cpt2=0;
+			foreach ($res->values as $value) {
+				$tresultat[$cpt]['values'][$cpt2]['value_id'] = $value->value_id;
+				$tresultat[$cpt]['values'][$cpt2]['value_caption'] = $value->value_caption;
+				$cpt2++;
+			}
 
+			$cpt++;
+	     }
+	    
+
+	} catch (SoapFault $fault) {
+		//print("Erreur : ".$fault->faultcode." : ".$fault->faultstring);
+	} 
+	return $tresultat;
+}
 //parsing d'une notice sérialisée
 function pmb_ws_parser_notice_serialisee($id_notice, $value, &$tresultat) {
 	    include_spip("/inc/filtres_images");
