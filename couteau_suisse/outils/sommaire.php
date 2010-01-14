@@ -40,10 +40,21 @@ function sommaire_intertitres_callback($matches) {
 	static $racc = array();
 	$niv = strlen($matches[1])-1;
 	if(!isset($racc[$niv])) {
-		if(preg_match(',<h(\d),', $GLOBALS['debut_intertitre'], $r))	
+		$cfg = $niv+1;
+		// compatibilite avec les enluminures typo
+		// double emploi ici, mais le sommaire a besoin que les titres soient transformes
+		if($cfg>1 && isset($GLOBALS['debut_intertitre_'.$cfg]))
+			$racc[$niv][0] = $GLOBALS['debut_intertitre_'.$cfg];
+		// si pas d'enluminures, copie sur les <h3>
+		elseif(preg_match(',<h(\d),', $GLOBALS['debut_intertitre'], $r))	
 			$racc[$niv][0] = str_replace($r[0], '<h'.($r[1]+$niv), $GLOBALS['debut_intertitre']);
-		if(preg_match(',/h(\d)>,', $GLOBALS['fin_intertitre'], $r))
+		// au pire, pas de sous-titres !
+		else $racc[$niv][0] = $GLOBALS['debut_intertitre'];
+		if($cfg>1 && isset($GLOBALS['fin_intertitre_'.$cfg]))
+			$racc[$niv][1] = $GLOBALS['fin_intertitre_'.$cfg];
+		elseif(preg_match(',/h(\d)>,', $GLOBALS['fin_intertitre'], $r))
 			$racc[$niv][1] = str_replace($r[0], '/h'.($r[1]+$niv).'>', $GLOBALS['fin_intertitre']);
+		else $racc[$niv][1] = $GLOBALS['fin_intertitre'];
 	}
 	return $racc[$niv][0].$matches[2].$racc[$niv][1];
 }
