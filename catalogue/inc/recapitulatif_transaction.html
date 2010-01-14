@@ -7,7 +7,7 @@
 
 <BOUCLE_choix(VARIANTES){id_variante=#EVAL{_request('id_variante')}}>
 <BOUCLE_article(ARTICLES){id_article}>
-<p>Votre choix : "#TITRE", "#_choix:TITRE"[, Montant transaction : (#EVAL{_request('montant_total')}|monetaire)]</p>
+<p>Votre choix : "#TITRE", "#_choix:TITRE"[, (#EVAL{_request('options')}|sinon{aucune option})][, montant total transaction : (#EVAL{_request('montant_total')}|monetaire)]</p>
 </BOUCLE_article>
 </BOUCLE_choix>
 

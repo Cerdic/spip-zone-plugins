@@ -108,14 +108,17 @@ function formulaires_inscriptions_3_traiter_dist($env){
 	$informations[] = 'Moyen de paiement : '.corriger_caracteres(textebrut(_request('reglement')));
 	$informations[] = 'Adresse de facturation différente : '.corriger_caracteres(textebrut(_request('adresse_facturation')));
 	
+	
+	echo('<script type="text/javascript">alert("Montant variante : '.$montant_variante.'")</script>');
+	
 	// On adresse un mail de confirmation
 	$email = corriger_caracteres(textebrut($formulaire['formulaire1']['email']));
 	$envoyer_mail = charger_fonction('envoyer_mail','inc');
-	$email_to = $GLOBALS['meta']['email_webmaster'];
+	$email_to = "cyril@cym.fr";// $GLOBALS['meta']['email_webmaster'];
 	$email_from = $email;
 	$reply = $email;
 	
-	$sujet = "[5è Rencontres Nationales du etourisme] Inscription";
+	$sujet = "TEST INSCRIPTION";
 	$message = "<table width='575' border='0' cellspacing='0' cellpadding='0'>
 	  <tr>
 	    <td colspan='3'><img src='http://www.etourisme-ardesi.fr/squelettes/includes/img/mail-tete.jpg' width='575' height='129' /></td>

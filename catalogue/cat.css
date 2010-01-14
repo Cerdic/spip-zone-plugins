@@ -10,7 +10,7 @@ fieldset.cat dt 						{ font-weight:bold;}
 label.suivant,
 input.suivant							{ float:right; }
 
-.cat dl 								{ border:1px dashed orange; } /* indique qu'on est en travaux ... */
+.cat dl 								{ /* border:1px dashed orange; indique qu'on est en travaux ... */} 
 .cat dl:after 							{ content:".";clear:both;height:0;line-height:0;font-size:0;display:block;visibility:hidden; margin-bottom:8px;}
 
 .cat dd 								{ float:left; line-height:19px; padding:auto; margin:0 1%; }
@@ -20,11 +20,12 @@ input.suivant							{ float:right; }
 .cat dd.label							{ width: 25%; }
 .cat dd.champ							{ width: 50%; }
 .cat dd.champ input[type=text]			{ width: 97%; }
-.cat dd input.numero					{ width: 10% !important;}	
+.cat dd input.numero					{ width: 9% !important;}	/* 9% pour ie */
 .cat dd input.voie						{ width: 84% !important;}	
-.cat dd input.code_postal 				{ width: 25% !important;}
+.cat dd input.code_postal 				{ width: 24% !important;}	/* 24% pour ie */
 .cat dd input.ville						{ width: 69% !important;}
 .cat dd.champ textarea					{ width: 100%; }
+.textarea {width:100%;}
 .cat dd.long							{ width: 70%; }
 .cat dd.oui_non							{ width: 25%; }
 .cat dd select.pays						{ width: 99%; }
@@ -49,5 +50,6 @@ input.suivant							{ float:right; }
 #infos_etapes li.prochains { background-image: url(img/degrade-etapes-clair-left.gif); }
 #infos_etapes li.prochains .fond { background-color: #dbdbdb;background-image: url(img/degrade-etapes-clair-left.gif); }
 
-dl.formulaire_erreur { font-size:1.1em; font-weight:bold;}
+.formulaire_erreur, span.erreur { font-size:1.1em; font-weight:bold; color:orange}
 dd.erreur {color:red}
+dl.prop * {color:#5FC6FF;font-style:italic;}

@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'activites_type' => 'Si oui, quel type d\'activit&eacute;s ?',
 	'adresse_suite' => '(adresse suite)',
 	'ajouter_panier' => 'S\'inscrire avec cette option',
-	'aller_fiche' => 'Aller &agrave; la fiche d\'inscription',
+	'aller_fiche' => 'S\'inscrire en ligne pour cette formule',
 	
 	// C
 	'catalogue' => 'Plugin Catalogue',
@@ -24,7 +24,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'go' => 'Go !',
 	
 	// I
-	'info_prix' => 'Info Prix',
+	'info_prix' => 'Prix d&eacute;taill&eacute;s de cette formule',
+	
+	// N
+	'neant' => 'n&eacute;ant',
 	
 	// O
 	'ok' => 'OK !',

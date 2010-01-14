@@ -1,21 +1,20 @@
-<!-- squelette modeles/fiche.html -->
-
+#CACHE{0}
 [(#REM) Affiche une fiche produit, avec ses options et ses variantes ]
 
 <B_a>
-<fieldset class="fiche">
+<fieldset class="cat">
 
 	<legend><:catalogue:info_prix:></legend>
 	
-	<form action="[(#URL_PAGE{transaction}{env})]" name="fiche" method="post">
+	<form action="[(#URL_PAGE{transaction})]" name="fiche" method="post">
 
 	<BOUCLE_a(ARTICLES){id_article=#ID}>
 	#MODELE{variantes,id_article}
 	#MODELE{options,id_article}
 	</BOUCLE_a>
 	
-	<input type="submit" class="suivant" id="suivant" value="<:catalogue:ok:>"  />
-	<label for="suivant" class="suivant"><:catalogue:aller_fiche:>&nbsp;:&nbsp;</label>
+	<input type="submit" class="suivant" value="<:catalogue:ok:>" />
+	<label class="suivant"><:catalogue:aller_fiche:>&nbsp;</label>
 	
 	</form>
 	
