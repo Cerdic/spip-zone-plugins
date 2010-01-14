@@ -56,6 +56,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'document_attache_succes' => 'Le document a bien &eacute;t&eacute; ajout&eacute;',
 	
 	// E
+	'erreurs' => '@nb@ erreurs',
+	'erreurs_voir' => 'Voir les @nb@ erreurs',
 	'erreur_indiquez_un_fichier'=>'Indiquez un fichier !',
 	'erreur_aucun_document'=>'Ce document n\'existe pas dans la mediath&egrave;que',
 	'erreur_aucun_fichier'=>'Aucun fichier n\'a &eacute;t&eacute; trouv&eacute;',

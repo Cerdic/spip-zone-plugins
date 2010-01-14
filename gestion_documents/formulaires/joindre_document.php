@@ -288,6 +288,9 @@ function joindre_liste_contenu_tailles_archive($files) {
 function joindre_liste_erreurs_to_li($erreurs){
 	$res = implode("</li><li>",$erreurs);
 	if (strlen($res)) $res = "<li>$res</li>";
+	if (count($erreurs)>4){
+		$res = "<li><span style='cursor:pointer;' onclick='jQuery(this).siblings(\"ul\").toggle();return false;'>"._T("gestdoc:erreurs_voir",array('nb'=>count($erreurs)))."</span><ul style='display:none;'>".$res."</ul></li>";
+	}
 	return $res;
 }
 
