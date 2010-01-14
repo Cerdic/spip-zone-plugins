@@ -1,0 +1,19 @@
+
+titre: 'Destinataires'
+explication: 'Permet de choisir un ou plusieurs destinataires parmis des auteurs pré-sélectionnée.'
+options:
+  -
+    saisie: 'auteurs'
+    options:
+      nom: 'choix_destinataires'
+      label: 'Destinataires possibles'
+      explication: 'Un ou plusieurs auteurs parmis lesquels l'utilisateur pourra faire son choix. Si rien n'est sélectionné, c'est l'auteur qui a installé le site qui sera choisi.'
+      multiple: 'oui'
+  -
+    saisie: 'checkbox'
+    options:
+      nom: 'type_choix'
+      datas:
+        tous: 'Mettre <b>tous</b> ces auteurs en destinataires. L'utilisateur n'aura aucun choix.'
+        un: 'Permettre à l'utilisateur de choisir <b>un seul</b> destinataire.'
+        plusieurs: 'Permettre à l'utilisateur de choisir <b>plusieurs</b> destinataires.'

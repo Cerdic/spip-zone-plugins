@@ -1,0 +1,46 @@
+
+#SET{type_choix, #ENV{type_choix,tous}}
+#SET{choix_destinataires, #ENV*{choix_destinataires,#ARRAY}}
+<BOUCLE_choix(CONDITION){si #GET{choix_destinataires}|count|<{2}|ou{#GET{type_choix}|=={tous}}}>
+	[(#REM) Si 0 ou 1 destinataire possible ou si c'est tous, le destinataire est défini automatiquement ]
+	<BOUCLE_tous(POUR){tableau #GET*{choix_destinataires}}>
+	<input type="hidden" name="#ENV{nom}[]" value="#VALEUR" />
+	</BOUCLE_tous>
+	<input type="hidden" name="#ENV{nom}[]" value="1" />
+	<//B_tous>
+</BOUCLE_choix>
+	[(#REM) Sinon on propose le choix, en select ou en checkbox suivant l'option "type_choix" ]
+	<B_destinataires>
+		[(#GET{type_choix}|=={plusieurs}|oui)
+			<ul class="choix_mots">
+		]
+		[(#GET{type_choix}|=={un}|oui)
+			<select name="#ENV{nom}&#91;&#93;" id="champ_#ENV{nom}">
+		]
+		<BOUCLE_destinataires(AUTEURS){tous}{id_auteur IN #GET*{choix_destinataires}}{par num nom,nom}>
+			[(#GET{type_choix}|=={plusieurs}|oui)
+				<li class="choix">
+					<input
+						type="checkbox" class="checkbox"
+						name="#ENV{nom}&#91;&#93;" id="destinataire#ID_AUTEUR"
+						value="#ID_AUTEUR"[ (#ID_AUTEUR|in_array{#ENV*{valeur,#ENV*{defaut,#ARRAY}}}|oui)checked="checked"]
+					/>
+					<label for="destinataire#ID_AUTEUR">#NOM</label>
+				</li>
+			]
+			[(#GET{type_choix}|=={un}|oui)
+				<option value="#ID_AUTEUR"[ (#ID_AUTEUR|in_array{#ENV*{valeur,#ENV*{defaut,#ARRAY}}}|oui)selected="selected"]>#NOM</option>
+			]
+		</BOUCLE_destinataires>
+		[(#GET{type_choix}|=={plusieurs}|oui)
+			</ul>
+			<div class="nettoyeur"></div>
+		]
+		[(#GET{type_choix}|=={un}|oui)
+			</select>
+		]
+	</li>
+	</B_destinataires>
+	BUG
+	<//B_destinataires>
+<//B_choix>
