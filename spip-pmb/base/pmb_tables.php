@@ -166,7 +166,7 @@ function pmb_install($action){
 			PRIMARY KEY  (id_auteur_pmb),
 			KEY id_syndic (id_auteur)) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=513 ");
 
-		spip_query("ALTER TABLE `".$GLOBALS['table_prefix']."_auteurs` ADD `twitter_user` VARCHAR( 255 ) NOT NULL");
+		//spip_query("ALTER TABLE `".$GLOBALS['table_prefix']."_auteurs` ADD `twitter_user` VARCHAR( 255 ) NOT NULL");
 
 		break;
 	case 'uninstall':

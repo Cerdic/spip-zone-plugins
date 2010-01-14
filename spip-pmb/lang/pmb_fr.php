@@ -92,6 +92,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'accedez_compte' => 'Acc&eacute;dez &agrave; votre compte',
 'se_deconnecter' => 'Se d&eacute;connecter',
 'session_expire' => 'votre session a expir&eacute;',
-'bonjour' => 'Bonjour'
+'bonjour' => 'Bonjour',
+'numero' => 'Num&eacute;ro',
+'date' => 'Date',
+'retour' => 'Retour',
+'rang' => 'Rang'
 );
 ?>

@@ -8,16 +8,9 @@
 
 [(#REM) Lien vers le flux RSS des articles de l'auteur ]
 <link rel="alternate" type="application/rss+xml" title="[(#NOM|textebrut)]" href="[(#URL_PAGE{backend}|parametre_url{id_auteur,#ID_AUTEUR})]" />
-
-<script type='text/javascript' src='#CHEMIN{javascript/jquery.twit.0.1.1.min.js}'></script>
-
-<script type="text/javascript">  
-	$(document).ready( function(){ 
-		<BOUCLE_auteurtwitter(AUTEURS){id_auteur}{tous}>
-		  $('#twits').twit('#TWITTER_USER', { username: true, icon: false});
-		</BOUCLE_auteurtwitter>
-		
-	});
-</script> 
-
+[(#ID_AUTEUR|=={#SESSION{id_auteur}}|oui)
+<style type="text/css">
+li.editer_pgp, li.editer_identification { display: none; }
+</style>
+]
 </BOUCLE_auteur_head>

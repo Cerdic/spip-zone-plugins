@@ -23,18 +23,7 @@
 			  [<tr><td><strong>Localisation</strong></td><td>(#PMB_LOCATION_CAPTION)</td></tr>]
 			  [<tr><td><strong>Date d'adh&eacute;sion</strong></td><td>(#PMB_ADHESION_DATE)</td></tr>]
 			  [<tr><td><strong>Date d'expiration</strong></td><td>(#PMB_EXPIRATION_DATE)</td></tr>]
-			  <tr><td><strong>Compte twitter</strong></td>
-			    <td>
-				  <BOUCLE_auteur(AUTEURS){id_auteur}{tous}>
-					[(#EDIT{twitter_user}|oui)
-					    <span class="#EDIT{twitter_user}">[(#TWITTER_USER|sinon{'<i>double-cliquez ici pour ajouter votre identifiant twitter</i>'})][(#TWITTER_USER|oui)<br /><i>(double-cliquez ici pour modifier votre identifiant twitter)</i>]</span>
-					]
-					[(#EDIT{twitter_user}|non)
-					    <span>[(#TWITTER_USER|sinon{'<i>pas de compte twitter</i>'})]</spab>
-					]
-				  </BOUCLE_auteur>	
-			    </td>
-			  </tr>
+			  
 			  </tbody>
 		      </table>
 		</div>
@@ -45,7 +34,7 @@
 		      <B_tab_resultat>
 		      <table class="spip pmb-tableau">
 			  <thead>
-			    <tr class="row_first"><th></th><th>Num&eacute;ro</th><th>Titre</th><th>Support</th><th>Date</th><th>Retour</th></tr>
+			    <tr class="row_first"><th></th><th><:pmb:numero:></th><th><:pmb:titre:></th><th><pmb:support:></th><th><:pmb:date:></th><th><:pmb:retour:></th></tr>
 			  </thead>
 			  <tbody>
 			  <BOUCLE_tab_resultat(POUR){tableau #GET{tab_prets}}>
@@ -72,7 +61,7 @@
 		      <B_tab_resultat2>
 		      <table class="spip pmb-tableau">
 			  <thead>
-			    <tr class="row_first"><th></th><th>Num&eacute;ro</th><th>Titre</th><th>Support</th><th>Date</th><th>Retour</th></tr>
+			    <tr class="row_first"><th></th><th><:pmb:numero:></th><th><:pmb:titre:></th><th><pmb:support:></th><th><:pmb:date:></th><th><:pmb:retour:></th></tr>
 			  </thead>
 			  <tbody>
 			  <BOUCLE_tab_resultat2(POUR){tableau #GET{tab_prets}}>
@@ -100,7 +89,7 @@
 		      <B_tab_resultat3>
 		      <table class="spip pmb-tableau">
 			  <thead>
-			    <tr class="row_first"><th></th><th>Titre</th><th>Rang</th></tr>
+			    <tr class="row_first"><th></th><th><:pmb:titre:></th><th><:pmb:rang:></th></tr>
 			  </thead>
 			  <tbody>
 			  <BOUCLE_tab_resultat3(POUR){tableau #GET{tab_reservations}}>
