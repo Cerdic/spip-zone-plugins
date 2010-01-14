@@ -7,16 +7,16 @@ include_spip('inc/presentation');
 
 function exec_ticket_editer() {
 	global $spip_lang_left;
-	
+
 	$id_ticket = _request('id_ticket') ? _request('id_ticket') : 'new';
 	$retour = _request('retour');
-	
+
 	if($retour){
-		$icone = icone_inline(_L('Retour'), $retour, chemin("imgs/bugs.png"), "", $spip_lang_left);
+		$icone = icone_inline(_L('Retour'), $retour, find_in_path("imgs/bugs.png"), "", $spip_lang_left);
 	}else if(intval($id_ticket)){
-		$icone = icone_inline(_L('Retour'), generer_url_ecrire("ticket_afficher","id_ticket=$id_ticket"), chemin("imgs/bugs.png"), "", $spip_lang_left);
+		$icone = icone_inline(_L('Retour'), generer_url_ecrire("ticket_afficher","id_ticket=$id_ticket"), find_in_path("imgs/bugs.png"), "", $spip_lang_left);
 	}
-	
+
 	$contexte = array('id_ticket'=>$id_ticket,'icone' => $icone);
 
 	if(intval($id_ticket)){

@@ -25,7 +25,7 @@ function tickets_ajouterBoutons($boutons_admin) {
 // Menu des tickets presente a droite ou a gauche de la page
 function menu_colonne () {
 	$ret = "<div class='cadre cadre-e'><div class='cadre_padding'>";
-	$ret .= icone_horizontale(_T('tickets:afficher_tickets'), generer_url_ecrire("tickets"), chemin("prive/themes/spip/images/ticket-24.png"), "", false);
+	$ret .= icone_horizontale(_T('tickets:afficher_tickets'), generer_url_ecrire("tickets"), find_in_path("prive/themes/spip/images/ticket-24.png"), "", false);
 
 	$contexte = array("titre"=>_T('tickets:vos_tickets_en_cours'), "id_auteur"=>$connect_id_auteur, "statut"=>"redac", "bloc"=>"_bloc1");
 	$options = array("ajax"=>true);
@@ -39,7 +39,7 @@ function menu_colonne () {
 
 	include_spip('inc/tickets_autoriser');
 	if (autoriser('ecrire', 'ticket')) {
-		$ret .= icone_horizontale(_T('tickets:creer_ticket'), generer_url_ecrire("ticket_editer","id_ticket=new"), chemin("prive/themes/spip/images/ticket-24.png"), "creer.gif", false);
+		$ret .= icone_horizontale(_T('tickets:creer_ticket'), generer_url_ecrire("ticket_editer","id_ticket=new"), find_in_path("prive/themes/spip/images/ticket-24.png"), "creer.gif", false);
 	}
 	$ret .= "</div></div>";
 
@@ -52,9 +52,9 @@ function tickets_droite ($flux) {
 
 // 	if ($exec == "accueil") {
 // 		$data = $flux["data"];
-// 
+//
 // 		$ret = menu_colonne();
-// 
+//
 // 		$flux["data"] = $data.$ret;
 // 	}
 	return $flux;
@@ -89,7 +89,7 @@ function tickets_objets_extensibles($objets){
 }
 
 /**
- * Insertion dans le pipeline gouverneur_infos_tables_versions 
+ * Insertion dans le pipeline gouverneur_infos_tables_versions
  * (utile pour le plugin revisions en 2.1)
  * Permet de gérer les révisions sur les tickets
  *
@@ -140,7 +140,7 @@ function tickets_accueil_informations($flux){
 	  $cpt[$row['statut']] = $row['cnt'];
 	  $cpt2[$row['statut']] = $defaut;
 	}
- 
+
 	if ($cpt) {
 		if ($where) {
 			$q = sql_select("COUNT(*) AS cnt, statut", 'spip_tickets', $where, "statut");
@@ -169,7 +169,7 @@ function tickets_accueil_gadgets($gadget){
 
 	include_spip('inc/tickets_autoriser');
 	if (autoriser('ecrire', 'ticket')) {
-		$icone = icone_horizontale(_T('tickets:creer_ticket'), generer_url_ecrire("ticket_editer","id_ticket=new"), chemin("prive/themes/spip/images/ticket-24.png"), "creer.gif", false);
+		$icone = icone_horizontale(_T('tickets:creer_ticket'), generer_url_ecrire("ticket_editer","id_ticket=new"), find_in_path("prive/themes/spip/images/ticket-24.png"), "creer.gif", false);
 
 		$colonnes = extraire_balises($gadget, 'td');
 		$derniere_colonne = fmod(floor(count($colonnes)/2), 4) == 0 ? true : false;
@@ -177,7 +177,7 @@ function tickets_accueil_gadgets($gadget){
 			$gadget .= "<table><tr><td>$icone</td></tr></table>";
 		}
 		else {
-			$gadget = preg_replace(",</tr></table>$,is", "<td>$icone</td></tr></table>", $gadget); 
+			$gadget = preg_replace(",</tr></table>$,is", "<td>$icone</td></tr></table>", $gadget);
 		}
 	}
 	return $gadget;
