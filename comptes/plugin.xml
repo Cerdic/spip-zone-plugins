@@ -38,7 +38,6 @@
 		<nom>declarer_tables_auxiliaires</nom>
 		<inclure>base/comptes.php</inclure>
 	</pipeline>
-
 	
 	<install>base/comptes_upgrade.php</install>
 	
@@ -58,5 +57,6 @@
 	
 	<necessite id="SPIP" version="[2.0.9;]" />
 	<necessite id="verifier" version="[0.1;]" />
+	<necessite id="inscription2" version="[0.71;]" />
 
 </plugin>

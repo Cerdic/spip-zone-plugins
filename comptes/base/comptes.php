@@ -107,7 +107,7 @@ function comptes_declarer_tables_principales($tables_principales){
 		"boite_postale"	=> "VARCHAR(10) DEFAULT '' NOT NULL", 
 		"code_postal"	=> "VARCHAR(5) DEFAULT '' NOT NULL",
 		"ville"			=> "tinytext DEFAULT '' NOT NULL",
-		"pays"			=> "tinytext DEFAULT '' NOT NULL",
+		"pays"			=> "bigint(21) DEFAULT 0 NOT NULL",
 		"maj"			=> "TIMESTAMP"
 		);
 	$adresses_key = array(
@@ -139,11 +139,12 @@ function comptes_declarer_tables_principales($tables_principales){
 	$emails = array(
 		"id_email"		=> "bigint(21) NOT NULL auto_increment",
 		"type_email"	=> "VARCHAR(10) DEFAULT '' NOT NULL", // peut etre perso, boulot, etc.
-		"emails" 		=> "tinytext DEFAULT '' NOT NULL",
+		"email" 		=> "VARCHAR(40) DEFAULT '' NOT NULL",
 		"maj"			=> "TIMESTAMP"
 		);
 	$emails_key = array(
-		"PRIMARY KEY"	=> "id_email"
+		"PRIMARY KEY"	=> "id_email",
+		"KEY email"	=> "email" // on ne met pas unique pour le cas ou 2 contacts partagent le meme mail générique
 		);
 	$tables_principales['spip_emails'] =
 		array('field' => &$emails, 'key' => &$emails_key, 'join' => &$emails_join);
