@@ -93,12 +93,10 @@ class cfg_depot{
 		}
 		
 		include_spip('depots/'.$depot);
-		if (class_exists($class = 'cfg_depot_'.$depot)) {
-			$this->depot = &new $class($params);
-		} else {
+		if (!class_exists($class = 'cfg_depot_'.$depot)) {
 			die("CFG ne trouve pas le d&eacute;pot $depot");
 		}
-		
+		$this->depot = new $class($params);
 		$this->version = $this->depot->version;
 		$this->nom = $depot;
 	}

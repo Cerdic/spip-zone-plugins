@@ -43,7 +43,7 @@ function cfg_header_prive($flux){
 
 	include_spip('inc/filtres');
 	include_spip('inc/cfg_formulaire');
-	$config = &new cfg_formulaire(
+	$config = new cfg_formulaire(
 				sinon(_request('cfg'), ''),
 				sinon(_request('cfg_id'),''));
 	
@@ -85,7 +85,7 @@ function cfg_formulaire_charger($flux){
 		include_spip('inc/cfg_formulaire');
 		#$config = &new cfg_formulaire($cfg, $cfg_id);
 		$cfg_id = isset($flux['args']['args'][0]) ? $flux['args']['args'][0] : '';
-		$config = &new cfg_formulaire($form, $cfg_id);
+		$config = new cfg_formulaire($form, $cfg_id);
 
 		$valeurs = array(
 			'_cfg_fond' => 'formulaires/'.$form,
@@ -130,7 +130,7 @@ function cfg_formulaire_verifier($flux){
 		include_spip('inc/cfg_formulaire');
 		#$config = &new cfg_formulaire($cfg, $cfg_id);
 		$cfg_id = isset($flux['args']['args'][0]) ? $flux['args']['args'][0] : '';
-		$config = &new cfg_formulaire($form, $cfg_id);
+		$config = new cfg_formulaire($form, $cfg_id);
 		
 		$err = array();
 
