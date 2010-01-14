@@ -52,9 +52,9 @@ function onglets_init() {
 }
 
 function get_onglet(url) {
- tab=url.match(/[?&]onglet=([0-9]*)/);
+ tab=url.search.match(/[?&]onglet=([0-9]*)/) || url.hash.match(/#onglet([0-9]*)/);
  if (tab==null) return false;
  return tab[1];
 }
 
-var onglet_get = get_onglet(window.location.search);
+var onglet_get = get_onglet(window.location);
