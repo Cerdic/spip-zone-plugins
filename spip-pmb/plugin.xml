@@ -9,7 +9,7 @@
 _ &#169; 2010 - Licence GPL
 	</auteur>
 	<version>
-	0.7 BETA
+	0.8 BETA
 	</version>
 	<etat>
 	test
@@ -27,11 +27,7 @@ _ &#169; 2010 - Licence GPL
 	pmb_mes_fonctions.php</fonctions>
 	<install>base/pmb_tables.php</install>
 	
-	<pipeline>
-  		<nom>post_syndication</nom>
-  		<action>traitement_flux</action>
-  		<inclure>pmb_parsing.php</inclure>
- 	</pipeline>
+	
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
 	sur le mode Rien::
 	ainsi les fonctions hors espace de nommage ne peuvent etre appelees

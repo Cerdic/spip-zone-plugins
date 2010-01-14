@@ -30,13 +30,14 @@
 			</h2>
 				      <a href="#URL_PAGE{nouveautes}" class="plus-de-liens"><:pmb:toutes_nouveautes:> +</a>
 			<ul class="liste-items">
-			
-			<BOUCLE_syndic_pmb(SYNDIC_ARTICLES_PMB){descriptif!=""}{pmb_photo_src!=""} {par hasard} {0,2}>
-				[(#SET{notice, [(#PMB_ID_NOTICE|pmb_notice_extraire{#CONFIG{spip_pmb/url},'force'})]})]
-								<INCLURE{fond=inc/inc-notice-resume}{notice=#GET{notice}}>
-
-			</BOUCLE_syndic_pmb>
-		</ul>
+			<BOUCLE_syndic_pmb(SYNDIC_ARTICLES){par hasard} {0,2}>[(#URL_ARTICLE|match{opac}|oui)
+				
+				[(#SET{notice_id,[(#URL_ARTICLE|extraire_attribut_url{id})]})]
+				[(#SET{notice, [(#GET{notice_id}|pmb_notice_extraire{#CONFIG{spip_pmb/url},'force'})]})]
+				<INCLURE{fond=inc/inc-notice-resume}{notice=#GET{notice}}>
+		
+			]</BOUCLE_syndic_pmb>
+			</ul>
 </div>
 </B_syndic_pmb>
 
