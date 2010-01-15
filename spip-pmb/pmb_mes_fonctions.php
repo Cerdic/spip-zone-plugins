@@ -511,7 +511,7 @@ function pmb_ws_parser_notice_xml($id_notice, $value, &$tresultat) {
 	    // Ouverture du fichier
 	    xml_parse($parseurXML, $value, true);
 	  
-	   $gtresultat['exemplaires'] .= "</table>";
+	    $gtresultat['exemplaires'] .= "</table>";
 	    // echo("<br/><br />version brute : <br/><br />".$value);
 	    xml_parser_free($parseurXML);
 
@@ -524,7 +524,6 @@ function pmb_ws_parser_notice_xml($id_notice, $value, &$tresultat) {
 	    $tmp_img = image_reduire("<img src=\"".copie_locale($gtresultat['logo_src'])."\" />", 130, 0);
 	    if (strpos($tmp_img, "L1xH1") !== false)  $gtresultat['logo_src'] = "";
 	    
-
 	    $gtresultat['id'] = $id_notice;
 	    
 
@@ -638,49 +637,53 @@ function pmb_ws_parser_notice_array($value, &$tresultat) {
 	    $indice_exemplaire = 0;
 	    $tresultat = Array();
 	    $id_notice = $value->id;
-	    foreach ( $value->f as $c1=>$v1) {
-		
-		foreach ( $v1->item as $c2=>$v2) {
-			if ($v2->key=="c") $dernierTypeTrouve = $v2->value;
-			if ($v2->key=="id") $dernierIdTrouve = $v2->value;
-			foreach ( $v2->value as $c4=>$v4) {
-						  $dernierSousTypeTrouve=$v4['c'];
-						  $texte = $v4['value'];
-						  if (($dernierTypeTrouve == "010") && ($dernierSousTypeTrouve == "a")) $tresultat['isbn'] .= $texte;
-						  if (($dernierTypeTrouve == "010") && ($dernierSousTypeTrouve == "b")) $tresultat['reliure'] .= $texte;
-						  if (($dernierTypeTrouve == "010") && ($dernierSousTypeTrouve == "d")) $tresultat['prix'] .= $texte;
-						  
-						  if (($dernierTypeTrouve == "101") && ($dernierSousTypeTrouve == "a")) $tresultat['langues'] .= $texte;
-						  
-						  if (($dernierTypeTrouve == "102") && ($dernierSousTypeTrouve == "a")) $tresultat['pays'] .= $texte;
-						  
-						  if (($dernierTypeTrouve == "200") && ($dernierSousTypeTrouve == "a")) $tresultat['titre'] .= str_replace("","\"",str_replace("","\"",str_replace("","&oelig;", stripslashes(str_replace("\n","<br />", str_replace("","'",$texte))))));
-						  if (($dernierTypeTrouve == "200") && ($dernierSousTypeTrouve == "f")) $tresultat['auteur'] .= $texte;
-						  
-						  if (($dernierTypeTrouve == "210") && ($dernierSousTypeTrouve == "c")) $tresultat['editeur'] .= $texte;
-						  if (($dernierTypeTrouve == "210") && ($dernierSousTypeTrouve == "a")) $tresultat['editeur'] .= ' ('.$texte.')';
-						  if (($dernierTypeTrouve == "210") && ($dernierSousTypeTrouve == "a")) $tresultat['id_editeur'] = $dernierIdTrouve;
-						  if (($dernierTypeTrouve == "210") && ($dernierSousTypeTrouve == "d")) $tresultat['annee_publication'] .= $texte;
-						  
-						  if (($dernierTypeTrouve == "215") && ($dernierSousTypeTrouve == "a")) $tresultat['importance'] .= $texte;
-						  if (($dernierTypeTrouve == "215") && ($dernierSousTypeTrouve == "c")) $tresultat['presentation'] .= $texte;
-						  if (($dernierTypeTrouve == "215") && ($dernierSousTypeTrouve == "d")) $tresultat['format'] .= $texte;
-						  
-						  if (($dernierTypeTrouve == "225") && ($dernierSousTypeTrouve == "a")) $tresultat['collection'] .= $texte;
-						  if (($dernierTypeTrouve == "225") && ($dernierSousTypeTrouve == "a")) $tresultat['id_collection'] = $dernierIdTrouve;
-						  
-						  if (($dernierTypeTrouve == "330") && ($dernierSousTypeTrouve == "a")) $tresultat['resume'] .= str_replace("","\"",str_replace("","\"",str_replace("","&oelig;", stripslashes(str_replace("\n","<br />", str_replace("","'",$texte))))));
-						  
-						  if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "a")) $tresultat['lesauteurs'] .= $texte;
-						  if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "b")) $tresultat['lesauteurs'] = $texte." ".$tresultat['lesauteurs'];
-						  if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "a")) $tresultat['id_auteur'] = $dernierIdTrouve;
-						  
-						  
-			}	
-		}
-	 
+	    if (is_array($value->f)){
+	      foreach ( $value->f as $c1=>$v1) {
+		  if (is_array($v1->item)){
+	      
+		      foreach ( $v1->item as $c2=>$v2) {
+			      if ($v2->key=="c") $dernierTypeTrouve = $v2->value;
+			      if ($v2->key=="id") $dernierIdTrouve = $v2->value;
+			      if (is_array($v2->value)){
+				  foreach ( $v2->value as $c4=>$v4) {
+							    $dernierSousTypeTrouve=$v4['c'];
+							    $texte = $v4['value'];
+							    if (($dernierTypeTrouve == "010") && ($dernierSousTypeTrouve == "a")) $tresultat['isbn'] .= $texte;
+							    if (($dernierTypeTrouve == "010") && ($dernierSousTypeTrouve == "b")) $tresultat['reliure'] .= $texte;
+							    if (($dernierTypeTrouve == "010") && ($dernierSousTypeTrouve == "d")) $tresultat['prix'] .= $texte;
+							    
+							    if (($dernierTypeTrouve == "101") && ($dernierSousTypeTrouve == "a")) $tresultat['langues'] .= $texte;
+							    
+							    if (($dernierTypeTrouve == "102") && ($dernierSousTypeTrouve == "a")) $tresultat['pays'] .= $texte;
+							    
+							    if (($dernierTypeTrouve == "200") && ($dernierSousTypeTrouve == "a")) $tresultat['titre'] .= str_replace("","\"",str_replace("","\"",str_replace("","&oelig;", stripslashes(str_replace("\n","<br />", str_replace("","'",$texte))))));
+							    if (($dernierTypeTrouve == "200") && ($dernierSousTypeTrouve == "f")) $tresultat['auteur'] .= $texte;
+							    
+							    if (($dernierTypeTrouve == "210") && ($dernierSousTypeTrouve == "c")) $tresultat['editeur'] .= $texte;
+							    if (($dernierTypeTrouve == "210") && ($dernierSousTypeTrouve == "a")) $tresultat['editeur'] .= ' ('.$texte.')';
+							    if (($dernierTypeTrouve == "210") && ($dernierSousTypeTrouve == "a")) $tresultat['id_editeur'] = $dernierIdTrouve;
+							    if (($dernierTypeTrouve == "210") && ($dernierSousTypeTrouve == "d")) $tresultat['annee_publication'] .= $texte;
+							    
+							    if (($dernierTypeTrouve == "215") && ($dernierSousTypeTrouve == "a")) $tresultat['importance'] .= $texte;
+							    if (($dernierTypeTrouve == "215") && ($dernierSousTypeTrouve == "c")) $tresultat['presentation'] .= $texte;
+							    if (($dernierTypeTrouve == "215") && ($dernierSousTypeTrouve == "d")) $tresultat['format'] .= $texte;
+							    
+							    if (($dernierTypeTrouve == "225") && ($dernierSousTypeTrouve == "a")) $tresultat['collection'] .= $texte;
+							    if (($dernierTypeTrouve == "225") && ($dernierSousTypeTrouve == "a")) $tresultat['id_collection'] = $dernierIdTrouve;
+							    
+							    if (($dernierTypeTrouve == "330") && ($dernierSousTypeTrouve == "a")) $tresultat['resume'] .= str_replace("","\"",str_replace("","\"",str_replace("","&oelig;", stripslashes(str_replace("\n","<br />", str_replace("","'",$texte))))));
+							    
+							    if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "a")) $tresultat['lesauteurs'] .= $texte;
+							    if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "b")) $tresultat['lesauteurs'] = $texte." ".$tresultat['lesauteurs'];
+							    if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "a")) $tresultat['id_auteur'] = $dernierIdTrouve;
+							    
+							    
+				  }
+			    }
+		      }
+		  }
+	     }
 	    }
-	
 
 	    if ($tresultat['lesauteurs'] == "")
 		  $tresultat['lesauteurs'] = $tresultat['auteur'];
