@@ -17,13 +17,13 @@ function cs_sommaire_init() {
 // pour SPIP < 2.0, il faut le plugin jquery.cookie.js
 function cs_sommaire_cookie() {
 	if(typeof jQuery.cookie!='function') return;
-	var replie = jQuery.cookie('cs_commaire');
-	jQuery.cookie('cs_commaire', null);
+	var replie = jQuery.cookie('cs_sommaire');
+	jQuery.cookie('cs_sommaire', null);
 	if (Number(replie))
 		jQuery(sommaire_sel).eq(0).addClass('cs_sommaire_replie')
 			.next().toggleClass('cs_sommaire_invisible');
 	jQuery(window).bind('unload', function() {
-		jQuery.cookie('cs_commaire',
+		jQuery.cookie('cs_sommaire',
 			Number(jQuery(sommaire_sel).eq(0).hasClass('cs_sommaire_replie'))
 		);
 	});
