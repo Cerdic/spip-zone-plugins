@@ -35,4 +35,5 @@ _ &#169; 2009 - Distribu&#233; sous licence GPL
 	</pipeline>
 	<necessite id="SPIP" version='[2.0.0;]' />
 	<chemin dir='' />
+	<categorie>auteur</categorie>
 </plugin>

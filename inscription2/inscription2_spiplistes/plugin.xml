@@ -34,4 +34,5 @@ _ &#169; 2009 - Distribu&#233; sous licence GPL
 	<necessite id='inscription2' version='[0.71;]' />
 	<necessite id='spiplistes' version='[2.0101;]' />
 	<chemin dir='' />
+	<categorie>auteur</categorie>
 </plugin>

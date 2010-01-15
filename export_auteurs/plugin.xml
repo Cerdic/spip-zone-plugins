@@ -51,4 +51,5 @@ _ &#169; 2009 - Distribu&#233; sous licences MIT et GPL
 	
 	<necessite id="SPIP" version="[1.9.2;]" />
 	<necessite id="cfg" version="[1.14.0;]" />
+	<categorie>auteur</categorie>
 </plugin>

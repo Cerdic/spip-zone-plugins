@@ -18,4 +18,5 @@ _ &#169; 2009 - Licence GPL
 	</pipeline>
 	<necessite id="SPIP" version='[2.0.0;]' />
 	<necessite id='inscription2' version='[0.71;]' />
+	<categorie>auteur</categorie>
 </plugin>

@@ -64,6 +64,7 @@
 		<nom>recuperer_fond</nom>
 		<inclure>openid_pipelines.php</inclure>
 	</pipeline>
+	<categorie>auteur</categorie>
 </plugin>
 
 
@@ -128,4 +129,5 @@
 		<nom>recuperer_fond</nom>
 		<inclure>openid_pipelines.php</inclure>
 	</pipeline>
+	<categorie>auteur</categorie>
 </plugin>

@@ -76,4 +76,5 @@
 	<necessite id='spip_bonux' version='[1.8.2;]' />
 	<necessite id='saisies' version='[1.1;]' />
 	<necessite id="lib:jquery-validate" src="http://plugins.jquery.com/files/jquery.validate_15.zip" />
+	<categorie>auteur</categorie>
 </plugin>

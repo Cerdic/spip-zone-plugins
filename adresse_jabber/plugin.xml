@@ -25,4 +25,5 @@ balise correspondante est <code>#JID</code> (appellation standard de l'identifia
 		<nom>declarer_champs_extras</nom>
 		<inclure>base/jabberid.php</inclure>
 	</pipeline>
+	<categorie>auteur</categorie>
 </plugin>
