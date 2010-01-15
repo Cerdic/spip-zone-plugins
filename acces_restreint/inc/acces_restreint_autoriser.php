@@ -69,7 +69,16 @@ function autoriser_article_voir($faire, $type, $id, $qui, $opt) {
 		$article = quete_parent_lang('spip_articles',$id);
 		$id_rubrique = $article['id_rubrique'];
 	}
-	return autoriser_rubrique_voir('voir','rubrique',$id_rubrique,$qui,$opt);
+	if (autoriser_rubrique_voir('voir','rubrique',$id_rubrique,$qui,$opt)){
+		if ($qui['statut'] == '0minirezo') return true;
+		// un article 'prepa' ou 'poubelle' dont on n'est pas auteur : interdit
+		$r = sql_getfetsel("statut", "spip_articles", "id_article=".sql_quote($id));
+		include_spip('inc/auth'); // pour auteurs_article si espace public
+		return
+			in_array($r, array('prop', 'publie'))
+			OR auteurs_article($id, "id_auteur=".$qui['id_auteur']);
+	}
+	return false;
 }
 }
 if(!function_exists('autoriser_breve_voir')) {
