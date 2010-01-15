@@ -15,7 +15,7 @@ _ &#169; 2006 - Licence GPL
 	</etat>
 	<description>
 	D&#233;tection et ajout des d&#233;finitions des acronymes &#224; partir d'une base syndiqu&#233;e ou d'une rubrique.
-	Les acronymes sont d&#233;finis dans des articles, le titre correspond &#224; l'acronyme 
+	Les acronymes sont d&#233;finis dans des articles, le titre correspond &#224; l'acronyme
 	(en majuscule, sans point de s&#233;paration) et le descriptif au contenu &#224; ajouter dans la balise.
 	Les d&#233;finitions peuvent &#234;tre regroup&#233;es dans une rubrique ou sur un site distant syndiqu&#233;
 
@@ -24,7 +24,7 @@ _ &#169; 2006 - Licence GPL
 	Une page de test ([spip.php?page=acronymes_voir->../spip.php?page=acronymes_voir]) boucle sur l'ensemble des articles du site et rep&#232;re tout ce qui ressemble de pr&#232;s ou de loin a un accronyme. Elle permet de v&#233;rifier la compl&#232;tude de votre base.
 	</description>
 	<lien></lien> <!-- URI de documentation -->
-	<prefix> 
+	<prefix>
 	acronymes
 	</prefix>
 	<fonctions>
@@ -52,4 +52,5 @@ _ &#169; 2006 - Licence GPL
 	<necessite id="SPIP" version="[1.9.0;]" />
 	<necessite id="forms" version="[0.301;]" />
 	<chemin dir='' />
+	<categorie>edition</categorie>
 </plugin>

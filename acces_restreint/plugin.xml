@@ -63,11 +63,12 @@ _ All SPIP's loops are loaded with the necessary tools to filter the results acc
 		<nom>affiche_milieu</nom>
 		<inclure>acces_restreint_pipelines.php</inclure>
 	</pipeline>
-	
+
 	<pipeline>
 		<nom>autoriser</nom>
 		<inclure>inc/acces_restreint_autoriser.php</inclure>
 	</pipeline>
 	<necessite id="SPIP" version='[2.0.0;]' />
 	<necessite id='spip_bonux' version='[1.0;]' />
+	<categorie>auteur</categorie>
 </plugin>
