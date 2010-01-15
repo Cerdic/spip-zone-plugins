@@ -332,7 +332,7 @@ function cs_EffaceCookie(nom){
 
 function cs_Categorie2(i,e){
 	var c=cs_LireCookie(this.id);
-	if(c===null || c=='+cs_hidden') {
+	if(c===null || c.match('cs_hidden')) {
 		var j=jQuery(this);
 		j.addClass('cs_hidden');
 		j.prev().children('span.light').removeClass('cs_hidden');
