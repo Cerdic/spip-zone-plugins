@@ -1,49 +1,75 @@
 
 
-	[(#REM) Locations ]
+	[(#REM) Locations à la racine ]
         <B_tab_resultat1>
         <div class="liste menu articles">
             <h2 class="invisible"><:articles_rubrique:></h2>
             <ul class="liste-items">
               <BOUCLE_tab_resultat1(POUR){tableau #ENV{tab_locations}}>
                 <li class="item">
-                    	<a href="[(#SELF|parametre_url{id_section,[(#ENV{tab_locations}|pmb_tableau2_valeur{#CLE,'location_id'})]}|parametre_url{titre_section,[(#ENV{tab_locations}|pmb_tableau2_valeur{#CLE,'location_caption'})]}|parametre_url{look_ALL,1})]">[(#REM|?{'','<img />'}|inserer_attribut{class,spip_logos}|inserer_attribut{src,[(#CHEMIN{img_pack/logo-localisation.png})]}|image_reduire{0,50})]
+                    	<a href="[(#URL_PAGE{catalogue}|parametre_url{id_location,[(#ENV{tab_locations}|pmb_tableau2_valeur{#CLE,'location_id'})]})]">[(#REM|?{'','<img />'}|inserer_attribut{class,spip_logos}|inserer_attribut{src,[(#CHEMIN{img_pack/logo-localisation.png})]}|image_reduire{0,50})]
 			</a>
 
-			<h3><a href="[(#SELF|parametre_url{id_section,[(#ENV{tab_locations}|pmb_tableau2_valeur{#CLE,'location_id'})]}|parametre_url{titre_section,[(#ENV{tab_locations}|pmb_tableau2_valeur{#CLE,'location_caption'})]}|parametre_url{look_ALL,1})]">[(#ENV{tab_locations}|pmb_tableau2_valeur{#CLE,'location_caption'}|ucfirst)]</a></h3>
+			<h3><a href="[(#URL_PAGE{catalogue}|parametre_url{id_location,[(#ENV{tab_locations}|pmb_tableau2_valeur{#CLE,'location_id'})]})]">[(#ENV{tab_locations}|pmb_tableau2_valeur{#CLE,'location_caption'}|ucfirst)]</a></h3>
                 	
                 </li>
                 </BOUCLE_tab_resultat1>
             </ul>
         </div>
         </B_tab_resultat1>
-
-	      [(#REM) Sections ]
+	      
+	      [(#REM) Une location et ses sections ]
 	      <B_tab_resultat2>
 		<div class="liste menu articles">
 		    <h2 class="invisible"><:articles_rubrique:></h2>
 		    <ul class="liste-items">
-		      <BOUCLE_tab_resultat2(POUR){tableau #ENV{tab_sections}}>
-			<li class="item">
-				<a href="[(#SELF|parametre_url{id_section,[(#ENV{tab_sections}|pmb_tableau2_valeur{#CLE,'section_id'})]}|parametre_url{titre_section,[(#ENV{tab_sections}|pmb_tableau2_valeur{#CLE,'section_caption'})]}|parametre_url{look_ALL,1})]">
-				[(#ENV{tab_sections}|pmb_tableau2_valeur{#CLE,'section_image'}|contient{rayonnage}|non)
-				   [(#REM|?{'','<img />'}|inserer_attribut{width,'100'}|inserer_attribut{class,spip_logos}|inserer_attribut{src,[(#ENV{tab_sections}|pmb_tableau2_valeur{#CLE,'section_image'})]})]
-				]
-				[(#ENV{tab_sections}|pmb_tableau2_valeur{#CLE,'section_image'}|contient{rayonnage}|oui)
-				   [(#REM|?{'','<img />'}|inserer_attribut{class,spip_logos}|inserer_attribut{src,[(#CHEMIN{img_pack/logo-section.png})]}|image_reduire{0,50})]
-				]
-				</a>
-				<h3><a href="[(#SELF|parametre_url{id_section,[(#ENV{tab_sections}|pmb_tableau2_valeur{#CLE,'section_id'})]}|parametre_url{titre_section,[(#ENV{tab_sections}|pmb_tableau2_valeur{#CLE,'section_caption'})]}|parametre_url{look_ALL,1})]">[(#ENV{tab_sections}|pmb_tableau2_valeur{#CLE,'section_caption'}|ucfirst)]</a></h3>
-				
-			</li>
+		      <BOUCLE_tab_resultat2(POUR){tableau #ENV{tab_locationsections}}>
+			[(#COMPTEUR_BOUCLE|>{1}|oui)
+			    <li class="item">
+				    <a href="[(#URL_PAGE{catalogue}|parametre_url{look_ALL,1}|parametre_url{id_section,[(#ENV{tab_locationsections}|pmb_tableau2_valeur{#CLE,'section_id'})]})]">
+				    [(#ENV{tab_locationsections}|pmb_tableau2_valeur{#CLE,'section_image'}|contient{rayonnage}|non)
+				      [(#REM|?{'','<img />'}|inserer_attribut{width,'100'}|inserer_attribut{class,spip_logos}|inserer_attribut{src,[(#ENV{tab_locationsections}|pmb_tableau2_valeur{#CLE,'section_image'})]})]
+				    ]
+				    [(#ENV{tab_locationsections}|pmb_tableau2_valeur{#CLE,'section_image'}|contient{rayonnage}|oui)
+				      [(#REM|?{'','<img />'}|inserer_attribut{class,spip_logos}|inserer_attribut{src,[(#CHEMIN{img_pack/logo-section.png})]}|image_reduire{0,50})]
+				    ]
+				    </a>
+				    <h3><a href="[(#URL_PAGE{catalogue}|parametre_url{look_ALL,1}|parametre_url{id_section,[(#ENV{tab_locationsections}|pmb_tableau2_valeur{#CLE,'section_id'})]})]">[(#ENV{tab_locationsections}|pmb_tableau2_valeur{#CLE,'section_caption'}|ucfirst)]</a></h3>
+				    
+			    </li>
+			  ]
 			</BOUCLE_tab_resultat2>
 		    </ul>
 		</div>
 		</B_tab_resultat2>
-				
-				<INCLURE{fond=inc/inc-recherche-avancee}{recherche}{env}>
-			    
-				<INCLURE{fond=inc/inc-recherche-catalogue}{recherche}{env}>
+					    [(#REM) Sections ]
+					    <B_tab_resultat3>
+					      <div class="liste menu articles">
+						  <h2 class="invisible"><:articles_rubrique:></h2>
+						  <ul class="liste-items">
+						    <BOUCLE_tab_resultat3(POUR){tableau #ENV{tab_sections}}>[(#COMPTEUR_BOUCLE|>{1}|oui)
+						      <li class="item">
+							      <a href="[(#URL_PAGE{catalogue}|parametre_url{id_section,[(#ENV{tab_sections}|pmb_tableau2_valeur{#CLE,'section_id'})]})]">
+							      [(#ENV{tab_sections}|pmb_tableau2_valeur{#CLE,'section_image'}|contient{rayonnage}|non)
+								[(#REM|?{'','<img />'}|inserer_attribut{width,'100'}|inserer_attribut{class,spip_logos}|inserer_attribut{src,[(#ENV{tab_sections}|pmb_tableau2_valeur{#CLE,'section_image'})]})]
+							      ]
+							      [(#ENV{tab_sections}|pmb_tableau2_valeur{#CLE,'section_image'}|contient{rayonnage}|oui)
+								[(#REM|?{'','<img />'}|inserer_attribut{class,spip_logos}|inserer_attribut{src,[(#CHEMIN{img_pack/logo-section.png})]}|image_reduire{0,50})]
+							      ]
+							      </a>
+							      <h3><a href="[(#URL_PAGE{catalogue}|parametre_url{id_section,[(#ENV{tab_sections}|pmb_tableau2_valeur{#CLE,'section_id'})]})]">[(#ENV{tab_sections}|pmb_tableau2_valeur{#CLE,'section_caption'}|ucfirst)]</a></h3>
+							      
+						      </li>
+						      ]</BOUCLE_tab_resultat3>
+						  </ul>
+					      </div>
+					      </B_tab_resultat3>
+							      
+							      <INCLURE{fond=inc/inc-recherche-avancee}{recherche}{env}>
+							  
+							      <INCLURE{fond=inc/inc-recherche-catalogue}{recherche}{env}>
+					      <//B_tab_resultat3>
+			
 		<//B_tab_resultat2>
 
       <//B_tab_resultat1> 

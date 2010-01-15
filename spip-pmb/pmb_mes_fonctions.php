@@ -27,11 +27,19 @@ include_spip('base/pmb_tables');
 
 
 
-function pmb_section_extraire($id_section, $url_base) {
+function pmb_section_extraire($id_section, $url_base='') {
 	$tableau_sections = Array();
 	pmb_ws_charger_wsdl($ws, $url_base);
+	//récupérer les infos sur la section parent
+	$section_parent = $ws->pmbesOPACGeneric_get_section_information($id_section);
+	$tableau_sections[0] = Array();
+	$tableau_sections[0]['section_id'] = $section_parent->section_id;
+	$tableau_sections[0]['section_location'] = $section_parent->section_location;
+	$tableau_sections[0]['section_caption'] = $section_parent->section_caption;
+	$tableau_sections[0]['section_image'] = lire_config("spip_pmb/url","http://tence.bibli.fr/opac").'/'.$section_parent->section_image;
+
 	$tab_sections = $ws->pmbesOPACGeneric_list_sections($id_section);
-	$cpt = 0;
+	$cpt = 1;
 	foreach ($tab_sections as $section) {
 	      $tableau_sections[$cpt] = Array();
 	      $tableau_sections[$cpt]['section_id'] = $section->section_id;
@@ -42,10 +50,32 @@ function pmb_section_extraire($id_section, $url_base) {
 	      
 	      $cpt++;
 	}
+	
 	return $tableau_sections;
 }
+function pmb_location_extraire($id_location, $url_base='') {
+	$tableau_locationsections = Array();
+	pmb_ws_charger_wsdl($ws, $url_base);
+	$tab_locations = $ws->pmbesOPACGeneric_get_location_information_and_sections($id_location);
+	//récupérer les infos sur la localisation parent
+	$tableau_locationsections[0] = Array();
+	$tableau_locationsections[0]['location_id'] = $tab_locations['location']->location_id;
+	$tableau_locationsections[0]['location_caption'] = $tab_locations['location']->location_caption;
 
-function pmb_liste_locations_extraire($url_base) {
+	$cpt = 1;
+	foreach ($tab_locations['sections'] as $section) {
+	      $tableau_locationsections[$cpt] = Array();
+	      $tableau_locationsections[$cpt]['section_id'] = $section->section_id;
+	      $tableau_locationsections[$cpt]['section_location'] = $section->section_location;
+	      $tableau_locationsections[$cpt]['section_caption'] = $section->section_caption;
+	      $tableau_locationsections[$cpt]['section_image'] = lire_config("spip_pmb/url","http://tence.bibli.fr/opac").'/'.$section->section_image;
+
+	      
+	      $cpt++;
+	}
+	return $tableau_locationsections;
+}
+function pmb_liste_afficher_locations($url_base) {
 	$tableau_sections = Array();
 	pmb_ws_charger_wsdl($ws, $url_base);
 	$tab_locations = $ws->pmbesOPACGeneric_list_locations();

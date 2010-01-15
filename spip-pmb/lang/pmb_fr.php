@@ -96,6 +96,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'numero' => 'Num&eacute;ro',
 'date' => 'Date',
 'retour' => 'Retour',
-'rang' => 'Rang'
+'rang' => 'Rang',
+'code_barre' => 'Code barre',
+'code_barre_abbr' => 'CB'
 );
 ?>
