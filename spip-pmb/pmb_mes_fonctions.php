@@ -40,15 +40,17 @@ function pmb_section_extraire($id_section, $url_base='') {
 
 	$tab_sections = $ws->pmbesOPACGeneric_list_sections($id_section);
 	$cpt = 1;
-	foreach ($tab_sections as $section) {
-	      $tableau_sections[$cpt] = Array();
-	      $tableau_sections[$cpt]['section_id'] = $section->section_id;
-	      $tableau_sections[$cpt]['section_location'] = $section->section_location;
-	      $tableau_sections[$cpt]['section_caption'] = $section->section_caption;
-	      $tableau_sections[$cpt]['section_image'] = lire_config("spip_pmb/url","http://tence.bibli.fr/opac").'/'.$section->section_image;
+	if (is_array($tab_sections)) {
+		    foreach ($tab_sections as $section) {
+			  $tableau_sections[$cpt] = Array();
+			  $tableau_sections[$cpt]['section_id'] = $section->section_id;
+			  $tableau_sections[$cpt]['section_location'] = $section->section_location;
+			  $tableau_sections[$cpt]['section_caption'] = $section->section_caption;
+			  $tableau_sections[$cpt]['section_image'] = lire_config("spip_pmb/url","http://tence.bibli.fr/opac").'/'.$section->section_image;
 
-	      
-	      $cpt++;
+			  
+			  $cpt++;
+		    }
 	}
 	
 	return $tableau_sections;
@@ -63,15 +65,17 @@ function pmb_location_extraire($id_location, $url_base='') {
 	$tableau_locationsections[0]['location_caption'] = $tab_locations['location']->location_caption;
 
 	$cpt = 1;
-	foreach ($tab_locations['sections'] as $section) {
-	      $tableau_locationsections[$cpt] = Array();
-	      $tableau_locationsections[$cpt]['section_id'] = $section->section_id;
-	      $tableau_locationsections[$cpt]['section_location'] = $section->section_location;
-	      $tableau_locationsections[$cpt]['section_caption'] = $section->section_caption;
-	      $tableau_locationsections[$cpt]['section_image'] = lire_config("spip_pmb/url","http://tence.bibli.fr/opac").'/'.$section->section_image;
+	if (is_array($tab_locations['sections'])) {
+		foreach ($tab_locations['sections'] as $section) {
+		      $tableau_locationsections[$cpt] = Array();
+		      $tableau_locationsections[$cpt]['section_id'] = $section->section_id;
+		      $tableau_locationsections[$cpt]['section_location'] = $section->section_location;
+		      $tableau_locationsections[$cpt]['section_caption'] = $section->section_caption;
+		      $tableau_locationsections[$cpt]['section_image'] = lire_config("spip_pmb/url","http://tence.bibli.fr/opac").'/'.$section->section_image;
 
-	      
-	      $cpt++;
+		      
+		      $cpt++;
+		}
 	}
 	return $tableau_locationsections;
 }
@@ -80,11 +84,13 @@ function pmb_liste_afficher_locations($url_base) {
 	pmb_ws_charger_wsdl($ws, $url_base);
 	$tab_locations = $ws->pmbesOPACGeneric_list_locations();
 	$cpt = 0;
-	foreach ($tab_locations as $location) {
-	      $tableau_locations[$cpt] = Array();
-	      $tableau_locations[$cpt]['location_id'] = $location->location_id;
-	      $tableau_locations[$cpt]['location_caption'] = $location->location_caption;
-	      $cpt++;
+	if (is_array($tab_locations)) {
+		foreach ($tab_locations as $location) {
+		      $tableau_locations[$cpt] = Array();
+		      $tableau_locations[$cpt]['location_id'] = $location->location_id;
+		      $tableau_locations[$cpt]['location_caption'] = $location->location_caption;
+		      $cpt++;
+		}
 	}
 	return $tableau_locations;
 }
@@ -107,12 +113,14 @@ function pmb_notices_section_extraire($id_section, $url_base, $debut=0, $fin=5) 
 			 //$r=$ws->pmbesOPACAnonymous_fetchSearchRecords($searchId,$debut,$fin,"serialized_unimarc","utf8");
 			 $r=$ws->pmbesOPACAnonymous_fetchSearchRecordsArray($searchId,$debut,$fin,"utf8");
 			  $i = 1;
-			  foreach($r as $value) {
-				    $tableau_resultat[$i] = Array();				
-				
-				    //pmb_ws_parser_notice_serialisee($value['noticeId'], $value['noticeContent'], $tableau_resultat[$i]);
-				    pmb_ws_parser_notice_array($value, $tableau_resultat[$i]);
-				    $i++;
+			  if (is_array($r)) {
+			      foreach($r as $value) {
+					$tableau_resultat[$i] = Array();				
+				    
+					//pmb_ws_parser_notice_serialisee($value['noticeId'], $value['noticeContent'], $tableau_resultat[$i]);
+					pmb_ws_parser_notice_array($value, $tableau_resultat[$i]);
+					$i++;
+			      }
 			  }
 		
 
@@ -141,17 +149,21 @@ function pmb_collection_extraire($id_collection, $debut=0, $nbresult=5, $id_sess
 
 		$liste_notices = Array();
 		  $cpt=0;
-		  foreach($result['notice_ids'] as $cle=>$valeur) {
-		    if (($cpt>=$debut) && ($cpt<$nbresult+$debut)) $liste_notices[] = $valeur;
-		    $cpt++;
+		  if (is_array($result['notice_ids'])) {
+			      foreach($result['notice_ids'] as $cle=>$valeur) {
+				if (($cpt>=$debut) && ($cpt<$nbresult+$debut)) $liste_notices[] = $valeur;
+				$cpt++;
+			      }
 		  }
 		  pmb_ws_recuperer_tab_notices($liste_notices, $ws, $tableau_resultat['notice_ids']);
 		  $tableau_resultat['notice_ids'][0]['nb_resultats'] = $cpt;
 
 		  $cpt=0;
-		  foreach($liste_notices as $notice) {
-		    $tableau_resultat['notice_ids'][$cpt]['id'] = $notice;
-		    $cpt++;
+		  if (is_array($liste_notices)) {
+			foreach($liste_notices as $notice) {
+			    $tableau_resultat['notice_ids'][$cpt]['id'] = $notice;
+			    $cpt++;
+			  }
 		  }
 		}
 	      
@@ -182,17 +194,21 @@ function pmb_editeur_extraire($id_editeur, $debut=0, $nbresult=5, $id_session=0)
 
 		  $liste_notices = Array();
 		  $cpt=0;
-		  foreach($result['notice_ids'] as $cle=>$valeur) {
-		    if (($cpt>=$debut) && ($cpt<$nbresult+$debut)) $liste_notices[] = $valeur;
-		    $cpt++;
+		  if (is_array($result['notice_ids'])) {
+			foreach($result['notice_ids'] as $cle=>$valeur) {
+			  if (($cpt>=$debut) && ($cpt<$nbresult+$debut)) $liste_notices[] = $valeur;
+			  $cpt++;
+			}
 		  }
 		  pmb_ws_recuperer_tab_notices($liste_notices, $ws, $tableau_resultat['notice_ids']);
 		  $tableau_resultat['notice_ids'][0]['nb_resultats'] = $cpt;
 
 		  $cpt=0;
-		  foreach($liste_notices as $notice) {
-		    $tableau_resultat['notice_ids'][$cpt]['id'] = $notice;
-		    $cpt++;
+		  if (is_array($liste_notices)) {
+			foreach($liste_notices as $notice) {
+			  $tableau_resultat['notice_ids'][$cpt]['id'] = $notice;
+			  $cpt++;
+			}
 		  }
 		}
 	} catch (SoapFault $fault) {
@@ -232,17 +248,21 @@ function pmb_auteur_extraire($id_auteur, $debut=0, $nbresult=5, $id_session=0) {
 
 		  $liste_notices = Array();
 		  $cpt=0;
-		  foreach($result['notice_ids'] as $cle=>$valeur) {
-		    if (($cpt>=$debut) && ($cpt<$nbresult+$debut)) $liste_notices[] = $valeur;
-		    $cpt++;
+		  if (is_array($result['notice_ids'])) {
+			foreach($result['notice_ids'] as $cle=>$valeur) {
+			  if (($cpt>=$debut) && ($cpt<$nbresult+$debut)) $liste_notices[] = $valeur;
+			  $cpt++;
+			}
 		  }
 		  pmb_ws_recuperer_tab_notices($liste_notices, $ws, $tableau_resultat['notice_ids']);
 		   $tableau_resultat['notice_ids'][0]['nb_resultats'] = $cpt;
 		  $cpt=0;
-		  foreach($liste_notices as $notice) {
-		    $tableau_resultat['notice_ids'][$cpt]['id'] = $notice;
-		    $cpt++;
-		  }
+		  if (is_array($liste_notices)) {
+			foreach($liste_notices as $notice) {
+			  $tableau_resultat['notice_ids'][$cpt]['id'] = $notice;
+			  $cpt++;
+			}
+		   }
 		}
 	} catch (SoapFault $fault) {
 		//print("Erreur : ".$fault->faultcode." : ".$fault->faultstring);
@@ -350,12 +370,14 @@ function pmb_recherche_extraire($recherche='*', $url_base, $look_ALL='', $look_A
 			  //$r=$ws->pmbesOPACAnonymous_fetchSearchRecords($searchId,$debut,$fin,"serialized_unimarc","utf8");
 			  $r=$ws->pmbesOPACAnonymous_fetchSearchRecordsArray($searchId,$debut,$fin,"utf8");
 			  $i = 1;
-			  foreach($r as $value) {
+			  if (is_array($r)) {
+			      foreach($r as $value) {
 				    $tableau_resultat[$i] = Array();				
 				
 				    //pmb_ws_parser_notice_serialisee($value['noticeId'], $value['noticeContent'], $tableau_resultat[$i]);
 				    pmb_ws_parser_notice_array($value, $tableau_resultat[$i]);
 				    $i++;
+			      }
 			  }
 		
 
@@ -516,22 +538,25 @@ function pmb_recuperer_champs_recherche($langue=0) {
 	try {
 	     $result = $ws->pmbesSearch_getAdvancedSearchFields('opac|search_fields',$langue,true);
 	     $cpt=0;
-	     foreach ($result as $res) {
-			$tresultat[$cpt] = Array();
-			$tresultat[$cpt]['id'] = $res->id;
-			$tresultat[$cpt]['label'] = $res->label;
-			$tresultat[$cpt]['type'] = $res->type;
-			$tresultat[$cpt]['operators'] = $res->operators;
-			$tresultat[$cpt]['values'] = Array();
-			$cpt2=0;
-			foreach ($res->values as $value) {
-				$tresultat[$cpt]['values'][$cpt2]['value_id'] = $value->value_id;
-				$tresultat[$cpt]['values'][$cpt2]['value_caption'] = $value->value_caption;
-				$cpt2++;
-			}
-
-			$cpt++;
-	     }
+	     if (is_array($result)) {
+			      foreach ($result as $res) {
+					    $tresultat[$cpt] = Array();
+					    $tresultat[$cpt]['id'] = $res->id;
+					    $tresultat[$cpt]['label'] = $res->label;
+					    $tresultat[$cpt]['type'] = $res->type;
+					    $tresultat[$cpt]['operators'] = $res->operators;
+					    $tresultat[$cpt]['values'] = Array();
+					    $cpt2=0;
+					    if (is_array($res->values)) {
+						    foreach ($res->values as $value) {
+							$tresultat[$cpt]['values'][$cpt2]['value_id'] = $value->value_id;
+							$tresultat[$cpt]['values'][$cpt2]['value_caption'] = $value->value_caption;
+							$cpt2++;
+						    }
+					    }
+					    $cpt++;
+				}
+	      }
 	    
 
 	} catch (SoapFault $fault) {
@@ -682,8 +707,12 @@ function pmb_ws_autres_lecteurs($id_notice) {
 	     if ($ws->pmbesOPACGeneric_is_also_borrowed_enabled()) {
 		$r=$ws->pmbesOPACGeneric_also_borrowed($id_notice,0);
 		$listenotices = Array();
-		foreach ($r as $notice) {
-		    $listenotices[] = $notice['notice_id'];
+		if (is_array($r)) {
+		    if (is_array($r)) {
+			foreach ($r as $notice) {
+			    $listenotices[] = $notice['notice_id'];
+			}
+		    }
 		}
 		if (count($listenotices)>0) {
 		      pmb_ws_recuperer_tab_notices ($listenotices, $ws, $tresultat);
@@ -702,14 +731,16 @@ function pmb_ws_documents_numeriques ($id_notice, $id_session=0) {
 	try {	
 		$r=$ws->pmbesNotices_listNoticeExplNums($id_notice, $id_session);
 		$cpt = 0;
-		foreach ($r as $docnum) {
-		      $tresultat[$cpt] = Array();
-		      $tresultat[$cpt]['name'] = str_replace("","\"",str_replace("","\"",str_replace("","&oelig;", stripslashes(str_replace("\n","<br />", str_replace("","'",$docnum->name))))));
-		      $tresultat[$cpt]['mimetype'] = $docnum->mimetype;
-		      $tresultat[$cpt]['url'] = $docnum->url;
-		      $tresultat[$cpt]['downloadUrl'] = $docnum->downloadUrl;
-		      
-		      $cpt++;
+		if (is_array($r)) {
+			foreach ($r as $docnum) {
+			    $tresultat[$cpt] = Array();
+			    $tresultat[$cpt]['name'] = str_replace("","\"",str_replace("","\"",str_replace("","&oelig;", stripslashes(str_replace("\n","<br />", str_replace("","'",$docnum->name))))));
+			    $tresultat[$cpt]['mimetype'] = $docnum->mimetype;
+			    $tresultat[$cpt]['url'] = $docnum->url;
+			    $tresultat[$cpt]['downloadUrl'] = $docnum->downloadUrl;
+			    
+			    $cpt++;
+		      }
 		}
 
 	} catch (SoapFault $fault) {
@@ -727,21 +758,23 @@ function pmb_ws_dispo_exemplaire($id_notice, $id_session=0) {
 	try {	
 	     $r=$ws->pmbesItems_fetch_notice_items($id_notice, $id_session);
 	      $cpt = 0;
-	      foreach ($r as $exemplaire) {
-		    $tresultat[$cpt] = Array();
-		    $tresultat[$cpt]['id'] = $exemplaire->id;
-		    $tresultat[$cpt]['cb'] = $exemplaire->cb;
-		    $tresultat[$cpt]['cote'] = $exemplaire->cote;
-		    $tresultat[$cpt]['location_id'] = $exemplaire->location_id;
-		    $tresultat[$cpt]['location_caption'] = $exemplaire->location_caption;
-		    $tresultat[$cpt]['section_id'] = $exemplaire->section_id;
-		    $tresultat[$cpt]['section_caption'] = $exemplaire->section_caption;
-		    $tresultat[$cpt]['statut'] = $exemplaire->statut;
-		    $tresultat[$cpt]['support'] = $exemplaire->support;
-		    $tresultat[$cpt]['situation'] = $exemplaire->situation;
-		    
-		    $cpt++;
-	      }
+	      if (is_array($r)) {
+			foreach ($r as $exemplaire) {
+			    $tresultat[$cpt] = Array();
+			    $tresultat[$cpt]['id'] = $exemplaire->id;
+			    $tresultat[$cpt]['cb'] = $exemplaire->cb;
+			    $tresultat[$cpt]['cote'] = $exemplaire->cote;
+			    $tresultat[$cpt]['location_id'] = $exemplaire->location_id;
+			    $tresultat[$cpt]['location_caption'] = $exemplaire->location_caption;
+			    $tresultat[$cpt]['section_id'] = $exemplaire->section_id;
+			    $tresultat[$cpt]['section_caption'] = $exemplaire->section_caption;
+			    $tresultat[$cpt]['statut'] = $exemplaire->statut;
+			    $tresultat[$cpt]['support'] = $exemplaire->support;
+			    $tresultat[$cpt]['situation'] = $exemplaire->situation;
+			    
+			    $cpt++;
+		      }
+		}
 		
 
 	} catch (SoapFault $fault) {
@@ -758,9 +791,11 @@ function pmb_ws_recuperer_notice ($id_notice, &$ws, &$tresultat) {
 	$tresultat['id'] = $id_notice;
 		  //$r=$ws->pmbesNotices_fetchNoticeList($listenotices,"serialized_unimarc","utf8",true,false);
 		  $r=$ws->pmbesNotices_fetchNoticeListArray($listenotices,"utf8",true,false);
-		  foreach($r as $value) {
-		        //pmb_ws_parser_notice_serialisee($id_notice, $value, $tresultat);
-			pmb_ws_parser_notice_array($value, $tresultat);
+		  if (is_array($r)) {
+		      foreach($r as $value) {
+			      //pmb_ws_parser_notice_serialisee($id_notice, $value, $tresultat);
+			      pmb_ws_parser_notice_array($value, $tresultat);
+			}
 		  }
 		
 
@@ -781,11 +816,13 @@ function pmb_ws_recuperer_tab_notices ($listenotices, &$ws, &$tresultat) {
 		  //$r=$ws->pmbesNotices_fetchNoticeList($listenotices,"serialized_unimarc","utf8",true,false);
 		  $r=$ws->pmbesNotices_fetchNoticeListArray($listenotices,"utf8",true,false);
 		  $cpt=0;
-		  foreach($r as $value) {
-		      $tresultat[$cpt] = Array();
-		      //pmb_ws_parser_notice_serialisee($id_notice, $value, $tresultat[$cpt]);
-		      pmb_ws_parser_notice_array($value, $tresultat[$cpt]);
-		      $cpt++;
+		  if (is_array($r)) {
+		      foreach($r as $value) {
+			    $tresultat[$cpt] = Array();
+			    //pmb_ws_parser_notice_serialisee($id_notice, $value, $tresultat[$cpt]);
+			    pmb_ws_parser_notice_array($value, $tresultat[$cpt]);
+			    $cpt++;
+			}
 		  }
 		
 
@@ -858,8 +895,10 @@ function pmb_tabnotices_extraire ($tabnotices, $url_base, $mode='auto') {
 	$tableau_resultat = Array();
 	$listenotices = Array();
 	pmb_ws_charger_wsdl($ws, $url_base);
-	foreach($tabnotices as $cle=>$valeur){
-	    $listenotices[] = $valeur;
+	if (is_array($tabnotices)) {
+		foreach($tabnotices as $cle=>$valeur){
+		    $listenotices[] = $valeur;
+		}
 	}
 	
 	pmb_ws_recuperer_tab_notices ($listenotices, $ws, $tableau_resultat);
@@ -875,33 +914,37 @@ function pmb_prets_extraire ($session_id, $url_base, $type_pret=0) {
 	      $loans = $ws->pmbesOPACEmpr_list_loans($session_id, $type_pret);
 	      $liste_notices = Array();
 	      $cpt = 0;
-	      foreach ($loans as $loan) {
-		    $tableau_resultat[$cpt] = Array();
-		    $tableau_resultat[$cpt]['empr_id'] = $loan->empr_id;
-		    $liste_notices[] = $loan->notice_id;
-		    $tableau_resultat[$cpt]['notice_id'] = $loan->notice_id;
-		    $tableau_resultat[$cpt]['bulletin_id'] = $loan->bulletin_id;
-		    $tableau_resultat[$cpt]['expl_id'] = $loan->expl_id;
-		    $tableau_resultat[$cpt]['expl_cb'] = $loan->expl_cb;
-		    $tableau_resultat[$cpt]['expl_support'] = $loan->expl_support;
-		    $tableau_resultat[$cpt]['expl_location_id'] = $loan->expl_location_id;
-		    $tableau_resultat[$cpt]['expl_location_caption'] = $loan->expl_location_caption;
-		    $tableau_resultat[$cpt]['expl_section_id'] = $loan->expl_section_id;
-		    $tableau_resultat[$cpt]['expl_section_caption'] = $loan->expl_section_caption;
-		    $tableau_resultat[$cpt]['expl_libelle'] = $loan->expl_libelle;
-		    $tableau_resultat[$cpt]['loan_startdate'] = $loan->loan_startdate;
-		    $tableau_resultat[$cpt]['loan_returndate'] = $loan->loan_returndate;
-		    
-		    $cpt++;
+	      if (is_array($loans)) {
+		foreach ($loans as $loan) {
+			$tableau_resultat[$cpt] = Array();
+			$tableau_resultat[$cpt]['empr_id'] = $loan->empr_id;
+			$liste_notices[] = $loan->notice_id;
+			$tableau_resultat[$cpt]['notice_id'] = $loan->notice_id;
+			$tableau_resultat[$cpt]['bulletin_id'] = $loan->bulletin_id;
+			$tableau_resultat[$cpt]['expl_id'] = $loan->expl_id;
+			$tableau_resultat[$cpt]['expl_cb'] = $loan->expl_cb;
+			$tableau_resultat[$cpt]['expl_support'] = $loan->expl_support;
+			$tableau_resultat[$cpt]['expl_location_id'] = $loan->expl_location_id;
+			$tableau_resultat[$cpt]['expl_location_caption'] = $loan->expl_location_caption;
+			$tableau_resultat[$cpt]['expl_section_id'] = $loan->expl_section_id;
+			$tableau_resultat[$cpt]['expl_section_caption'] = $loan->expl_section_caption;
+			$tableau_resultat[$cpt]['expl_libelle'] = $loan->expl_libelle;
+			$tableau_resultat[$cpt]['loan_startdate'] = $loan->loan_startdate;
+			$tableau_resultat[$cpt]['loan_returndate'] = $loan->loan_returndate;
+			
+			$cpt++;
+		  }
 	      }
 	      if ($cpt>0) {
 		    $tableau_resultat['notice_ids'] = Array();
 		    pmb_ws_recuperer_tab_notices($liste_notices, $ws, $tableau_resultat['notice_ids']);  
 	      }
 	      $cpt=0;
-	      foreach($liste_notices as $notice) {
-		  $tableau_resultat['notice_ids'][$cpt]['id'] = $notice;
-		  $cpt++;
+	      if (is_array($liste_notices)) {
+		foreach($liste_notices as $notice) {
+		      $tableau_resultat['notice_ids'][$cpt]['id'] = $notice;
+		      $cpt++;
+		  }
 	      }
 	} catch (SoapFault $fault) {
 		//print("Erreur : ".$fault->faultcode." : ".$fault->faultstring);
@@ -917,28 +960,32 @@ function pmb_reservations_extraire($pmb_session, $url_base) {
 	$liste_notices = Array();
 	
 	$cpt = 0;
-	foreach ($reservations as $reservation) {
-	      $tableau_resultat[$cpt] = Array();
-	      $tableau_resultat[$cpt]['resa_id'] = $reservation->resa_id;
-	      $tableau_resultat[$cpt]['empr_id'] = $reservation->empr_id;
-	      $tableau_resultat[$cpt]['notice_id'] = $reservation->notice_id;
-	      $liste_notices[] = $reservation->notice_id;
-	      $tableau_resultat[$cpt]['bulletin_id'] = $reservation->bulletin_id;
-	      $tableau_resultat[$cpt]['resa_rank'] = $reservation->resa_rank;
-	      $tableau_resultat[$cpt]['resa_dateend'] = $reservation->resa_dateend;
-	      $tableau_resultat[$cpt]['resa_retrait_location_id '] = $reservation->resa_retrait_location_id ;
-	      $tableau_resultat[$cpt]['resa_retrait_location'] = $reservation->resa_retrait_location;
-	   
-	      $cpt++;
+	if (is_array($reservations)) {
+		foreach ($reservations as $reservation) {
+		      $tableau_resultat[$cpt] = Array();
+		      $tableau_resultat[$cpt]['resa_id'] = $reservation->resa_id;
+		      $tableau_resultat[$cpt]['empr_id'] = $reservation->empr_id;
+		      $tableau_resultat[$cpt]['notice_id'] = $reservation->notice_id;
+		      $liste_notices[] = $reservation->notice_id;
+		      $tableau_resultat[$cpt]['bulletin_id'] = $reservation->bulletin_id;
+		      $tableau_resultat[$cpt]['resa_rank'] = $reservation->resa_rank;
+		      $tableau_resultat[$cpt]['resa_dateend'] = $reservation->resa_dateend;
+		      $tableau_resultat[$cpt]['resa_retrait_location_id '] = $reservation->resa_retrait_location_id ;
+		      $tableau_resultat[$cpt]['resa_retrait_location'] = $reservation->resa_retrait_location;
+		  
+		      $cpt++;
+		}
 	}
 	if ($cpt>0) {
 	      $tableau_resultat['notice_ids'] = Array();
 	      pmb_ws_recuperer_tab_notices($liste_notices, $ws, $tableau_resultat['notice_ids']);  
 	}
 	$cpt=0;
-	foreach($liste_notices as $notice) {
-	    $tableau_resultat['notice_ids'][$cpt]['id'] = $notice;
-	    $cpt++;
+	if (is_array($liste_notices)) {
+		foreach($liste_notices as $notice) {
+		    $tableau_resultat['notice_ids'][$cpt]['id'] = $notice;
+		    $cpt++;
+		}
 	}
 	return $tableau_resultat;
 
