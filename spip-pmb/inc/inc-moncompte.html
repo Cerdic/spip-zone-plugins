@@ -28,88 +28,95 @@
 		      </table>
 		</div>
 		</div>
-		<div class="ps surlignable"><h2 class="pas_surlignable"><:pmb:prets_en_cours:></h2>
-		<div>
-		      [(#SET{tab_prets,[(#PMB_SESSION|pmb_prets_extraire{#CONFIG{spip_pmb/url},1})]})]
-		      <B_tab_resultat>
-		      <table class="spip pmb-tableau">
-			  <thead>
-			    <tr class="row_first"><th></th><th><:pmb:numero:></th><th><:pmb:titre:></th><th><pmb:support:></th><th><:pmb:date:></th><th><:pmb:retour:></th></tr>
-			  </thead>
-			  <tbody>
-			  <BOUCLE_tab_resultat(POUR){tableau #GET{tab_prets}}>
-			   [(#SET{notice, [(#GET{tab_prets}|pmb_tableau2_valeur{'notice_ids',#CLE})]})]
-			    
-			      <tr[ class="(#COMPTEUR_BOUCLE|modulo{2}|?{row_even,row_odd})"]>
-			      <td><a href="[(#URL_PAGE{notice_display,id=[(#GET{notice}|pmb_notice_champ{'id'})]})]">[(#REM|?{'','<img />'}|inserer_attribut{height,'80'}|inserer_attribut{class,spip_logos}|inserer_attribut{src,[(#GET{notice}|pmb_notice_champ{'logo_src'})]})]</a></td>
-			      <td>[(#GET{tab_prets}|pmb_tableau2_valeur{#CLE,'expl_cb'})]</td>
-			      <td><a href="[(#URL_PAGE{notice_display,id=[(#GET{tab_prets}|pmb_tableau2_valeur{#CLE,'notice_id'})]})]">[(#GET{tab_prets}|pmb_tableau2_valeur{#CLE,'expl_libelle'})]</a></td>
-			      <td>[(#GET{tab_prets}|pmb_tableau2_valeur{#CLE,'expl_support'})]</td>
-			      <td>[(#GET{tab_prets}|pmb_tableau2_valeur{#CLE,'loan_startdate'})]</td>
-			      <td>[(#GET{tab_prets}|pmb_tableau2_valeur{#CLE,'loan_returndate'})]</td></tr>
-		      </BOUCLE_tab_resultat>
-		       </tbody>
-			 </table>
-		      </B_tab_resultat>
-			Pas de pr&ecirc;t en cours
-		      <//B_tab_resultat>
-		      
-		</div></div>
+		
+		<div id="tabs">
+			<ul>
+			    <li><a href="#pmb-pretscours"><span><:pmb:prets_en_cours:></span></a></li>
+			    <li><a href="#pmb-pretsretard"><span><:pmb:prets_en_retard:></span></a></li>
+			    <li><a href="#pmb-reservations"><span><:pmb:reservations:></span></a></li>
+			</ul>
+		
+   
+			<div id="pmb-pretscours" class="ps surlignable"><h2 class="pas_surlignable"><:pmb:prets_en_cours:></h2>
+			<div>
+			      [(#SET{tab_prets,[(#PMB_SESSION|pmb_prets_extraire{#CONFIG{spip_pmb/url},1})]})]
+			      <B_tab_resultat>
+			      <table class="spip pmb-tableau">
+				  <thead>
+				    <tr class="row_first"><th><:pmb:code_barre:></th><th><:pmb:titre:></th><th><:pmb:support:></th><th><:pmb:date:></th><th><:pmb:retour:></th></tr>
+				  </thead>
+				  <tbody>
+				  <BOUCLE_tab_resultat(POUR){tableau #GET{tab_prets}}>
+				  [(#SET{notice, [(#GET{tab_prets}|pmb_tableau2_valeur{'notice_ids',#CLE})]})]
+				    
+				      <tr[ class="(#COMPTEUR_BOUCLE|modulo{2}|?{row_even,row_odd})"]>
+				      <td><a href="[(#URL_PAGE{notice_display,id=[(#GET{notice}|pmb_notice_champ{'id'})]})]">[(#REM|?{'','<img />'}|inserer_attribut{height,'80'}|inserer_attribut{class,spip_logos}|inserer_attribut{src,[(#GET{notice}|pmb_notice_champ{'logo_src'})]})]</a> [(#GET{tab_prets}|pmb_tableau2_valeur{#CLE,'expl_cb'})]</td>
+				      <td><a href="[(#URL_PAGE{notice_display,id=[(#GET{tab_prets}|pmb_tableau2_valeur{#CLE,'notice_id'})]})]">[(#GET{tab_prets}|pmb_tableau2_valeur{#CLE,'expl_libelle'})]</a></td>
+				      <td>[(#GET{tab_prets}|pmb_tableau2_valeur{#CLE,'expl_support'})]</td>
+				      <td>[(#GET{tab_prets}|pmb_tableau2_valeur{#CLE,'loan_startdate'})]</td>
+				      <td>[(#GET{tab_prets}|pmb_tableau2_valeur{#CLE,'loan_returndate'})]</td></tr>
+			      </BOUCLE_tab_resultat>
+			      </tbody>
+				</table>
+			      </B_tab_resultat>
+				Pas de pr&ecirc;t en cours
+			      <//B_tab_resultat>
+			      
+			</div></div>
 
-		<div class="ps surlignable"><h2 class="pas_surlignable"><:pmb:prets_en_retard:></h2><div>
-			[(#SET{tab_prets,[(#PMB_SESSION|pmb_prets_extraire{#CONFIG{spip_pmb/url},0})]})]
-		      <B_tab_resultat2>
-		      <table class="spip pmb-tableau">
-			  <thead>
-			    <tr class="row_first"><th></th><th><:pmb:numero:></th><th><:pmb:titre:></th><th><pmb:support:></th><th><:pmb:date:></th><th><:pmb:retour:></th></tr>
-			  </thead>
-			  <tbody>
-			  <BOUCLE_tab_resultat2(POUR){tableau #GET{tab_prets}}>
-			      [(#SET{notice, [(#GET{tab_prets}|pmb_tableau2_valeur{'notice_ids',#CLE})]})]
-			    
-			      <tr[ class="(#COMPTEUR_BOUCLE|modulo{2}|?{row_even,row_odd})"]>
-			      <td><a href="[(#URL_PAGE{notice_display,id=[(#GET{notice}|pmb_notice_champ{'id'})]})]">[(#REM|?{'','<img />'}|inserer_attribut{height,'80'}|inserer_attribut{class,spip_logos}|inserer_attribut{src,[(#GET{notice}|pmb_notice_champ{'logo_src'})]})]</a></td>
-			      <td>[(#GET{tab_prets}|pmb_tableau2_valeur{#CLE,'expl_cb'})]</td>
-			      <td><a href="[(#URL_PAGE{notice_display,id=[(#GET{tab_prets}|pmb_tableau2_valeur{#CLE,'notice_id'})]})]">[(#GET{tab_prets}|pmb_tableau2_valeur{#CLE,'expl_libelle'})]</a></td>
-			      <td>[(#GET{tab_prets}|pmb_tableau2_valeur{#CLE,'expl_support'})]</td>
-			      <td>[(#GET{tab_prets}|pmb_tableau2_valeur{#CLE,'loan_startdate'})]</td>
-			      <td>[(#GET{tab_prets}|pmb_tableau2_valeur{#CLE,'loan_returndate'})]</td></tr>
-			 
-			  </BOUCLE_tab_resultat2>
-		       </tbody>
-			 </table>
-		      </B_tab_resultat2>
-			Pas de pr&ecirc;t en retard
-		      <//B_tab_resultat2>
+			<div id="pmb-pretsretard" class="ps surlignable"><h2 class="pas_surlignable"><:pmb:prets_en_retard:></h2><div>
+				[(#SET{tab_prets,[(#PMB_SESSION|pmb_prets_extraire{#CONFIG{spip_pmb/url},0})]})]
+			      <B_tab_resultat2>
+			      <table class="spip pmb-tableau">
+				  <thead>
+				    <tr class="row_first"><th><:pmb:code_barre:></th><th><:pmb:titre:></th><th><:pmb:support:></th><th><:pmb:date:></th><th><:pmb:retour:></th></tr>
+				  </thead>
+				  <tbody>
+				  <BOUCLE_tab_resultat2(POUR){tableau #GET{tab_prets}}>
+				      [(#SET{notice, [(#GET{tab_prets}|pmb_tableau2_valeur{'notice_ids',#CLE})]})]
+				    
+				      <tr[ class="(#COMPTEUR_BOUCLE|modulo{2}|?{row_even,row_odd})"]>
+				      <td><a href="[(#URL_PAGE{notice_display,id=[(#GET{notice}|pmb_notice_champ{'id'})]})]">[(#REM|?{'','<img />'}|inserer_attribut{height,'80'}|inserer_attribut{class,spip_logos}|inserer_attribut{src,[(#GET{notice}|pmb_notice_champ{'logo_src'})]})]</a> [(#GET{tab_prets}|pmb_tableau2_valeur{#CLE,'expl_cb'})]</td>
+				      <td><a href="[(#URL_PAGE{notice_display,id=[(#GET{tab_prets}|pmb_tableau2_valeur{#CLE,'notice_id'})]})]">[(#GET{tab_prets}|pmb_tableau2_valeur{#CLE,'expl_libelle'})]</a></td>
+				      <td>[(#GET{tab_prets}|pmb_tableau2_valeur{#CLE,'expl_support'})]</td>
+				      <td>[(#GET{tab_prets}|pmb_tableau2_valeur{#CLE,'loan_startdate'})]</td>
+				      <td>[(#GET{tab_prets}|pmb_tableau2_valeur{#CLE,'loan_returndate'})]</td></tr>
+				
+				  </BOUCLE_tab_resultat2>
+			      </tbody>
+				</table>
+			      </B_tab_resultat2>
+				Pas de pr&ecirc;t en retard
+			      <//B_tab_resultat2>
 
-		</div></div>
+			</div></div>
 
-		<div class="ps surlignable"><h2 class="pas_surlignable"><:pmb:reservations:></h2><div>
-			[(#SET{tab_reservations,[(#PMB_SESSION|pmb_reservations_extraire{})]})]
-		      <B_tab_resultat3>
-		      <table class="spip pmb-tableau">
-			  <thead>
-			    <tr class="row_first"><th></th><th><:pmb:titre:></th><th><:pmb:rang:></th></tr>
-			  </thead>
-			  <tbody>
-			  <BOUCLE_tab_resultat3(POUR){tableau #GET{tab_reservations}}>
-			    [(#SET{notice, [(#GET{tab_reservations}|pmb_tableau2_valeur{'notice_ids',#CLE})]})]
-			    <tr[ class="(#COMPTEUR_BOUCLE|modulo{2}|?{row_even,row_odd})"]>
-				 <td><a href="[(#URL_PAGE{notice_display,id=[(#GET{notice}|pmb_notice_champ{'id'})]})]">[(#REM|?{'','<img />'}|inserer_attribut{height,'80'}|inserer_attribut{class,spip_logos}|inserer_attribut{src,[(#GET{notice}|pmb_notice_champ{'logo_src'})]})]</a></td>
-				<td><a href="[(#URL_PAGE{notice_display,id=[(#GET{tab_reservations}|pmb_tableau2_valeur{#CLE,'notice_id'})]})]">[(#GET{notice}|pmb_notice_champ{'titre'})]</a></td>
-				<td>[(#GET{tab_reservations}|pmb_tableau2_valeur{#CLE,'resa_rank'})]</td>
-			    </tr>
-			 
-			  </BOUCLE_tab_resultat3>
-		       </tbody>
-			 </table>
-		      </B_tab_resultat3>
-			Pas de r&eacute;servations
-		      <//B_tab_resultat3>
+			<div id="pmb-reservations" class="ps surlignable"><h2 class="pas_surlignable"><:pmb:reservations:></h2><div>
+				[(#SET{tab_reservations,[(#PMB_SESSION|pmb_reservations_extraire{})]})]
+			      <B_tab_resultat3>
+			      <table class="spip pmb-tableau">
+				  <thead>
+				    <tr class="row_first"><th></th><th><:pmb:titre:></th><th><:pmb:rang:></th></tr>
+				  </thead>
+				  <tbody>
+				  <BOUCLE_tab_resultat3(POUR){tableau #GET{tab_reservations}}>
+				    [(#SET{notice, [(#GET{tab_reservations}|pmb_tableau2_valeur{'notice_ids',#CLE})]})]
+				    <tr[ class="(#COMPTEUR_BOUCLE|modulo{2}|?{row_even,row_odd})"]>
+					<td><a href="[(#URL_PAGE{notice_display,id=[(#GET{notice}|pmb_notice_champ{'id'})]})]">[(#REM|?{'','<img />'}|inserer_attribut{height,'80'}|inserer_attribut{class,spip_logos}|inserer_attribut{src,[(#GET{notice}|pmb_notice_champ{'logo_src'})]})]</a></td>
+					<td><a href="[(#URL_PAGE{notice_display,id=[(#GET{tab_reservations}|pmb_tableau2_valeur{#CLE,'notice_id'})]})]">[(#GET{notice}|pmb_notice_champ{'titre'})]</a></td>
+					<td>[(#GET{tab_reservations}|pmb_tableau2_valeur{#CLE,'resa_rank'})]</td>
+				    </tr>
+				
+				  </BOUCLE_tab_resultat3>
+			      </tbody>
+				</table>
+			      </B_tab_resultat3>
+				Pas de r&eacute;servations
+			      <//B_tab_resultat3>
 
-  
-		</div></div>
-
+	  
+			</div></div>
+		</div>
 
 		<br class="nettoyeur" />
 </BOUCLE_auteurpmb>

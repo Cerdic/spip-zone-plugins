@@ -1,24 +1,23 @@
 	#SET{tab_ids, #ARRAY{}}
 	
-
-	
-
 	<B_syndic_pmb>
+	<BOUCLE_syndic_pmb(SYNDIC_ARTICLES){par date}{inverse}>[(#URL_ARTICLE|match{opac}|oui)
+				[(#SET{tab_ids, [(#GET{tab_ids}|push{[(#URL_ARTICLE|extraire_attribut_url{id})]})]})]
+			]</BOUCLE_syndic_pmb>
 	
 
+	</B_syndic_pmb>
+	
+[(#SET{tab_notices,[(#GET{tab_ids}|pmb_tabnotices_extraire{#CONFIG{spip_pmb/url},'force'})]})]	
+			
+		<B_tab_resultat>
 		<div class="liste menu articles nouveautes">
 			 #ANCRE_PAGINATION
             		[<p class="pagination">(#PAGINATION)</p>]
 	   		<ul class="liste-items">
 			
-			<BOUCLE_syndic_pmb(SYNDIC_ARTICLES_PMB){pmb_photo_src!=""} {par date}{inverse}{pagination 5}>
-					[(#SET{tab_ids, [(#GET{tab_ids}|push{#PMB_ID_NOTICE})]})]
-
-					
-				
-			</BOUCLE_syndic_pmb>
-			[(#SET{tab_notices,[(#GET{tab_ids}|pmb_tabnotices_extraire{#CONFIG{spip_pmb/url},'force'})]})]	
-			<BOUCLE_tab_resultat(POUR){tableau #GET{tab_notices}}>
+			
+			<BOUCLE_tab_resultat(POUR){tableau #GET{tab_notices}}{pagination 5}>
 				[(#COMPTEUR_BOUCLE|>{1}|?{' ',''})
 					<INCLURE{fond=inc/inc-notice-resume}{notice=#VALEUR}>
 				]
@@ -29,4 +28,5 @@
 			
 			
 		</div>
-	</B_syndic_pmb>
+		</B_tab_resultat>
+		
