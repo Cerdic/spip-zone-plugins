@@ -12,4 +12,5 @@
 	<lien>http://www.spip-contrib.net/Gestion-de-dates-et-calendriers</lien>
 	<necessite id="SPIP" version="[1.9.0;]" />
 	<necessite id="CFG" version="[1.0;]" />
+	<categorie>date</categorie>
 </plugin>

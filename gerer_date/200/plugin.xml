@@ -21,5 +21,6 @@
 	</prefix>
 	<necessite id="SPIP" version='[2.0.10;]' />
 	<options>gerer_date_options.php</options>
+	<categorie>date</categorie>
 
 </plugin>

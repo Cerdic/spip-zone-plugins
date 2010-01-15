@@ -10,4 +10,5 @@
 </auteur>
  <description>Ce plugin int&egrave;gre un agenda google calendar &agrave; spip. Il est distribu&eacute; sous licence GNU/GPL</description>
  <necessite id='cfg' version='[1.4;]' />
+ <categorie>date</categorie>
 </plugin>

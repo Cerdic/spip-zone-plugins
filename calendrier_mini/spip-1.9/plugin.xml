@@ -13,4 +13,5 @@ _ Une fois activ&#233;, vous pouvez consulter le squelette d'exemple sur cette [
 	<options>minical_options.php</options>
 	<prefix>CalendrierMini</prefix>
 	<necessite id="SPIP" version="[1.9.0;]" />
+	<categorie>date</categorie>
 </plugin>
