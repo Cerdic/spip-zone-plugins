@@ -116,6 +116,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	// T
 	'tous_les_medias'=>'Tous les medias',
+	'titre_page_documents_edit' => 'Modifier le document : @titre@',
 	
 	// U
 	'un_document' => '1 document',
