@@ -1,5 +1,5 @@
 <plugin>
-	<!--  
+	<!--
 
 	// amocles plugin.xml
 
@@ -14,13 +14,13 @@
 	<icon>images/amocles.png</icon>
 	<description>Permet de :<ul><li>d&#233;l&#233;guer l'administration des mots-cl&#233;s</li><li>importer et exporter vos mots-cl&#233;s via un fichier texte.</li></ul></description>
 	<lien>[Documentation->http://www.quesaco.org/Administrer-les-mots-cles]</lien>
-	
+
 	<prefix>amocles</prefix>
 
 	<options>amocles_options.php</options>
-	
+
 	<fonctions>amocles_fonctions.php</fonctions>
-	
+
 	<install>base/amocles_install.php</install>
 
 	<pipeline>
@@ -38,11 +38,12 @@
 		<nom>affiche_milieu</nom>
 		<inclure>inc/amocles_pipeline_affiche_milieu.php</inclure>
 	</pipeline>
-	
+
 	<pipeline>
 		<nom>header_prive</nom>
 		<inclure>inc/amocles_pipeline_header_prive.php</inclure>
 	</pipeline>
-	
+
 	<necessite id="SPIP" version="[1.9.0;]" />
+	<categorie>maintenance</categorie>
 </plugin>
