@@ -41,7 +41,8 @@ function sommaire_intertitres_callback($matches) {
 	$niv = strlen($matches[1])-1;
 	if(!isset($racc[$niv])) {
 		$cfg = $niv+1;
-		// compatibilite avec les enluminures typo
+		// compatibilite avec les Enluminures Typo v3 et initialisation des variables
+		if(function_exists('typoenluminee_pre_propre')) typoenluminee_pre_propre('');
 		// double emploi ici, mais le sommaire a besoin que les titres soient transformes
 		if($cfg>1 && isset($GLOBALS['debut_intertitre_'.$cfg]))
 			$racc[$niv][0] = $GLOBALS['debut_intertitre_'.$cfg];
