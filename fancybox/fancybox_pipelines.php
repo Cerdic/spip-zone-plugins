@@ -64,6 +64,7 @@ var fb_frame_options = {
 	"imageScale": '.$config['imagescale'].',
 	"overlayShow": '.$config['overlayshow'].',
 	"overlayOpacity": '.$config['overlayopacity'].',
+	"centerOnScroll": '.$config['centeronscroll'].',
 	"hideOnContentClick": '.$config['hideoncontentclick'].'
 };
 if (window.jQuery)
