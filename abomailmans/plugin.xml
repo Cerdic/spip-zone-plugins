@@ -37,4 +37,5 @@
 		<titre>abomailmans:bouton_listes_diffusion</titre>
 	</bouton>
 	<necessite id="SPIP" version="[2.0.0;]" />
+	<categorie>communication</categorie>
 </plugin>

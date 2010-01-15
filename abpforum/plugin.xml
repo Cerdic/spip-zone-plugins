@@ -13,23 +13,24 @@
 		Per Spip 1.9
 	[en]
 		This plugin allow to have forum both on inscription and with a priori moderation
-		
+
 		Once plugin has been activated the relative option will appear in the site configuration and in the forum configuration panels
-		
-		Actually Spip 1.9 version ONLY	
-	</multi>	
+
+		Actually Spip 1.9 version ONLY
+	</multi>
 		{{{Info tecniche}}}
 		Surcharge di file:
--* balise/formulaire_forum.php 
+-* balise/formulaire_forum.php
 -** To control the login/inscription form and the nìmoderation message in the form
--* exec/config_contenu.php 
+-* exec/config_contenu.php
 -** To add the button to the interactivity/site config
--* inc/forum_insert.php 
+-* inc/forum_insert.php
 -** To set forum in statut=prop in case of abp forum
--* inc regler_moderation 
+-* inc regler_moderation
 -** To add the button to the article forum config
-		
+
 	</description>
 	<etat>stable</etat>
 	<prefix>abpforum</prefix>
+	<categorie>communication</categorie>
 </plugin>

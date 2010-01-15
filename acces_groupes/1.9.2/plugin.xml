@@ -72,6 +72,7 @@ pour afficher les contenus restreints aux utilisateurs n'ayant pas acc&#232;s da
 -->
 <chemin dir='' />
 	<necessite id="SPIP" version="[1.9.0;]" />
+	<categorie>auteur</categorie>
 </plugin>
 
 

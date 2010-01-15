@@ -17,7 +17,7 @@
 	Cette inscription se fait via l&rsquo;interface priv&eacute;e de SPIP par le menu &laquo; Edition &gt; Abomailmans &gt; les listes de diffusions mailman &raquo;
 	Ensuite il vous est possible de s&eacute;lectionner des articles de votre SPIP, par des crit&egrave;res de date, de rubrique et/ou de mot cl&eacute; et envoyer leurs contenus &agrave; ces listes, en utilisant des squelettes de mise en page du contenu.
     Le lien avec les listes Mailman et Sympa se fait par des envois d&rsquo;e-mail.
-	
+
 	</description>
 	<lien>[Spip-Contrib->http://www.spip-contrib.net/Abomailmans-pour-s-abonner-a-des]</lien> <!-- URI de documentation -->
 	<options> <!-- fichier charge a chaque hit -->
@@ -26,7 +26,7 @@
 	<fonctions> <!-- fichier charge a chaque hit -->
 		abomailmans_fonctions.php
 	</fonctions>
-	<prefix> 
+	<prefix>
 		abomailmans
 	</prefix>
 	<install>base/abomailmans_upgrade.php</install>
@@ -47,4 +47,5 @@
 	</pipeline>
 
 	<necessite id="SPIP" version="[1.9.0;]" />
+	<categorie>communication</categorie>
 </plugin>

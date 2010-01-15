@@ -19,7 +19,7 @@
 	<options>abonnement_options.php</options>
 	<fonctions>abonnement_fonctions.php</fonctions>
 	<install>base/abonnement_upgrade.php</install>
-	
+
 	<pipeline>
 		<nom>taches_generales_cron</nom>
 		<inclure>abonnement_pipelines.php</inclure>
@@ -81,10 +81,12 @@
 		<nom>autoriser</nom>
 		<inclure>abonnement_autorisations.php</inclure>
 	</pipeline>
-		
+
 	<chemin dir='' />
 	<necessite id="SPIP" version="[2.0.6;]" />
 	<necessite id="inscription2" version="[0.68;]" />
-	<necessite id="cfg" version="[1.12.2;]" /> 
-	<necessite id="spip_bonux" version="[1.7;]" /> 
+	<necessite id="cfg" version="[1.12.2;]" />
+	<necessite id="spip_bonux" version="[1.7;]" />
+
+	<categorie>auteur</categorie>
 </plugin>
