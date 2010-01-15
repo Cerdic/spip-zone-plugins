@@ -10,12 +10,12 @@
 	</description>
 	<icon></icon>
 	<prefix>activites</prefix>
-	<fonctions>activites_mes_fonctions.php</fonctions> 
+	<fonctions>activites_mes_fonctions.php</fonctions>
 	<necessite id="SPIP" version="[1.9.0;]" />
 	<necessite id='cfg' version='[1.5.0;]' />
 	<necessite id="WCalendar" version="[0.11;]" />
 	<necessite id="Agenda" version="[0.14;]" />
 	<necessite id="Inscription2" version="[0.1;]" />
 	<install>base/activites_installer.php</install>
-	
+	<categorie>date</categorie>
 </plugin>
