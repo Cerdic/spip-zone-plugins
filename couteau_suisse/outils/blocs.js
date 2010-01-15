@@ -4,10 +4,12 @@ if(typeof jQuery.fn.hasClass=="undefined")
 		return this.is( "." + selector );
 	};
 
-// Gestion du slide jQuery
-jQuery.fn.blocs_toggle_slide = function( selector ) {
-	return this.toggleClass('blocs_slide')
-		.is(".blocs_slide")?this.slideUp(blocs_slide):this.slideDown(blocs_slide);
+// fonction surchargeable : gestion du slide jQuery
+jQuery.fn.blocs_toggle_slide_dist = function( selector ) {
+	this.toggleClass('blocs_slide');
+	return typeof jQuery.fn.blocs_toggle_slide=='function'
+		?this.blocs_toggle_slide()
+		:(this.is(".blocs_slide")?this.slideUp(blocs_slide):this.slideDown(blocs_slide));
 };
 
 // fonction de de/re-pliement
@@ -17,16 +19,15 @@ jQuery.fn.blocs_toggle = function() {
 	var cible = this.hasClass('cs_blocs')? this.children('.blocs_titre').eq(0) : this;
 	// on replie/deplie la cible...
 	cible.toggleClass('blocs_replie');
-	var dest = ((this[0].id==='') || this[0].id.match('outil_sommaire_'))
-		?cible.next():jQuery('div.'+this[0].id);
+	var dest = this[0].id.match('^cs_bloc_id_')?jQuery('div.'+this[0].id):cible.next();
 	if(blocs_slide==='aucun') {
 		dest.toggleClass('blocs_invisible');
 		// est-on sur un resume ?
 		if (dest.is('div.blocs_resume')) dest.next().toggleClass('blocs_invisible');
 	} else {
-		dest.blocs_toggle_slide();
+		dest.blocs_toggle_slide_dist();
 		// est-on sur un resume ?
-		if (dest.is('div.blocs_resume')) dest.next().blocs_toggle_slide();
+		if (dest.is('div.blocs_resume')) dest.next().blocs_toggle_slide_dist();
 	}
 	// est-on sur un bloc ajax ?
 	var url = cible.children().attr("href");
