@@ -134,7 +134,7 @@ function formulaires_clevermail_multiple_traiter_dist($lst_id = 0, $lsr_mode_for
 		          		$template['@@URL_CONFIRMATION@@'] = generer_url_public(_CLEVERMAIL_VALIDATION,'id='.$actionId);
 		          		$body = $listData['lst_subscribe_text'];
 		          		$subject = (intval($listData['lst_subject_tag']) == 1 ? '['.$template['@@NOM_COMPLET@@'].'] ' : '').$listData['lst_subscribe_subject'];
-		          		$msgInscription = _T('clevermail:inscription_ok', array('lst_name' => supprimer_numero($listData['lst_name'])));
+		          		$msgInscription = _T('clevermail:inscription_ok', array('lst_name' => $template['@@NOM_COMPLET@@']));
           			}
 					if($nbLettre == count($lists)){
 						while (list($translateFrom, $translateTo) = each($template)) {
