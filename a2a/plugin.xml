@@ -14,9 +14,10 @@
 	<necessite id="SPIP" version="[2.0.9;]" />
 	<necessite id="cfg" version="[1.14.1;]" />
 	<necessite id="spip_bonux" version="[1.8.7;]" />
-	<pipeline> 
-		<nom>affiche_milieu</nom> 
-		<action>affiche_milieu</action> 
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<action>affiche_milieu</action>
 		<inclure>a2a_pipelines.php</inclure>
-	</pipeline> 
+	</pipeline>
+	<categorie>navigation</categorie>
 </plugin>
