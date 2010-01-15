@@ -131,7 +131,9 @@ function typoenluminee_pre_propre($texte) {
 			/* 21 */	$remplacer_raccourcis[]="&trade;";
 			/* 22 */	$remplacer_raccourcis[]="&hellip;";
 	}
-	
+
+	if(!$texte) return $texte;
+
 	// Conversion des intertitres d'enluminures type {ß{titre}ß}
 	// ou ß est un nombre en intertitres avec des étoiles type {{{* (avec ß étoiles)
 	// {1{ sera converti en {{{* ; {2{ sera converti en {{{** ; etc.
@@ -188,7 +190,7 @@ function typoenluminee_post_propre($texte) {
 		$remplace1[] = /* 25 */ 	"<sub>";
 		$remplace1[] = /* 26 */	"</sub>";
 	}
-
+	if(!$texte) return $texte;
 	$texte = preg_replace($cherche1, $remplace1, $texte);
 	$texte = paragrapher($texte,$GLOBALS['toujours_paragrapher']); // il faut reparagrapher a cause des raccourcis typo que l'on a ajoute (block div)
 	return $texte;
@@ -245,6 +247,7 @@ function typoenluminee_pre_typo($texte) {
 			/* 22 */ 	"&hellip;",
 		);
 	}
+	if(!$texte) return $texte;
 
 	if ($local_barre_typo_pas_de_fausses_puces === true) {
 		$texte =  preg_replace('/^-\s+/m','-* ',$texte);
@@ -294,6 +297,7 @@ function typoenluminee_post_typo($texte) {
 			/* 26 */	"</sub>",
 		);
 	}
+	if(!$texte) return $texte;
 	$texte = preg_replace($cherche1, $remplace1, $texte);
 	// Correction des & en &amp;
 	$texte = preg_replace('/&([A-Za-z#0-9]*);/','@@@amp:\1:amp@@@',$texte); // echapement des entites html deja presentes
@@ -307,8 +311,9 @@ function typoenluminee_post_typo($texte) {
 }
 
 function typoenluminee_nettoyer_raccourcis_typo($texte){
-	$texte = preg_replace(',{[1-5]{,','',$texte);
-	$texte = preg_replace(',}[1-5]},','',$texte);
+	$texte = preg_replace(',\{[1-5]\{,','',$texte);
+	$texte = preg_replace(',\}[1-5]\},','',$texte);
+	$texte = preg_replace(',\{\{\{\*+,','{{{',$texte);
 	$texte = str_replace('&hellip;','...',$texte);
 	return $texte;
 }
