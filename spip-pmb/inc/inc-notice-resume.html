@@ -1,12 +1,18 @@
 <li class="item hentry[ (#ENV{surlignable}|oui)surlignable]">
 	<div class="logo-encart"><a href="[(#URL_PAGE{notice_display,id=[(#ENV{notice}|pmb_notice_champ{'id'})]})]">
-	[(#ENV{notice}|pmb_notice_champ{'logo_src'}|oui)
-	      [(#ENV{'copieimage','non'}|=={'non'}|non)
-		    [(#REM|?{'','<img />'}|inserer_attribut{class,spip_logos}|inserer_attribut{src,[(#ENV{notice}|pmb_notice_champ{'logo_src'}|copie_locale{'force'})]}|image_reduire{101,0})]
-      ]
-								      [(#ENV{'copieimage','non'}|=={'non'}|oui)
-									    [(#REM|?{'','<img />'}|inserer_attribut{width,'100'}|inserer_attribut{class,spip_logos}|inserer_attribut{src,[(#ENV{notice}|pmb_notice_champ{'logo_src'})]})]
-								      ]
+								[(#ENV{notice}|pmb_notice_champ{'logo_src'}|oui)
+										[(#ENV{'copieimage','non'}|=={'non'}|non)
+											      [(#REM|?{'','<img />'}|inserer_attribut{class,spip_logos}|inserer_attribut{src,[(#ENV{notice}|pmb_notice_champ{'logo_src'}|copie_locale{'force'})]}|image_reduire{100,0})]
+										]
+										[(#ENV{'copieimage','non'}|=={'non'}|oui)
+											    [(#REM|?{'','<img />'}|inserer_attribut{width,'100'}|inserer_attribut{class,spip_logos}|inserer_attribut{src,[(#ENV{notice}|pmb_notice_champ{'logo_src'})]})]
+										]
+								]
+								[(#ENV{notice}|pmb_notice_champ{'logo_src'}|non)
+								    [(#REM) pas de logo, on regarde si une image est en document joint ]
+								    [(#SET{tab_docnum, [(#ENV{notice}|pmb_notice_champ{'id'}|pmb_ws_documents_numeriques)]})]
+								    <INCLURE{fond=inc/inc-image-doc-joint}{tab_docnum=#GET{tab_docnum}}{env}>
+
 								]
 								</a></div>
 								<h3 class="h3 entry-title[ (#ENV{surlignable}|oui)surlignable]"><a href="[(#URL_PAGE{notice_display,id=[(#ENV{notice}|pmb_notice_champ{'id'})]})]"[ title="(#NOM_SITE|texte_backend)"]>[(#ENV{notice}|pmb_notice_champ{'titre'})]</a></h3> 
