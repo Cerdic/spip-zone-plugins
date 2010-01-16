@@ -42,13 +42,13 @@
 			<ul>(#ENV**{erreurs}|table_valeur{decideur_actions}|foreach{foreach_li})</ul>
 		</div>]
 	]
-	
+
 	[<div class="reponse_formulaire reponse_formulaire_erreur">
 		<strong>Erreurs :</strong>
 		<ul>(#ENV**{erreurs}|table_valeur{decideur_erreurs}|foreach{foreach_li})</ul>
 	</div>]
 
-	
+
 	<form method='post' action='#ENV{action}'><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 
@@ -65,14 +65,14 @@
 				<li class="editer_recherche">
 					<label for='step_selection'><:step:rechercher:></label>
 					<input type='text' name='recherche' class='text' id='step_selection' value='#ENV{recherche}' />
-				</li>	
+				</li>
 
-				
-				<li class="editer_gogogo">	
+
+				<li class="editer_gogogo">
 					<label for="rechercher">&nbsp;</label>
 					<input type='submit' name='rechercher' class='submit' value='<:info_rechercher:>' />
 				</li>
-				
+
 				[(#SET{afficher,[(#ENV{actif}|!={''}
 					|ou{[(#ENV{present}|!={''})]}
 					|ou{[(#ENV{categorie}|!={''})]}
@@ -99,35 +99,34 @@
 						<option value="non"[ (#ENV{present}|=={non}|oui)selected='selected']><:step:ou_distant:></option>
 					</select>
 				</li>
-				
-				<li class="editer_categorie">	
-					#REM{ 
+
+				<li class="editer_categorie">
+					#REM{
 						Des categories au Pif ...
 						A prendre dans un tableau quelque part ?
 					}
 					<label for="step_categorie"><:step:categorie:></label>
 					<select name="categorie" id="step_categorie">
 						<option value=""><:step:categorie_tous:></option>
-						<option value="agenda"[ (#ENV{categorie}|=={agenda}|oui)selected='selected']><:tag:agenda:></option>
-						<option value="authentification"[ (#ENV{categorie}|=={authentification}|oui)selected='selected']><:tag:authentification:></option>
-						<option value="configuration"[ (#ENV{categorie}|=={configuration}|oui)selected='selected']><:tag:configuration:></option>
+						<option value="date"[ (#ENV{categorie}|=={date}|oui)selected='selected']><:tag:date:></option>
+						<option value="auteur"[ (#ENV{categorie}|=={auteur}|oui)selected='selected']><:tag:auteur:></option>
+						<option value="divers"[ (#ENV{categorie}|=={divers}|oui)selected='selected']><:tag:divers:></option>
 						<option value="communication"[ (#ENV{categorie}|=={communication}|oui)selected='selected']><:tag:communication:></option>
-						<option value="developpement"[ (#ENV{categorie}|=={developpement}|oui)selected='selected']><:tag:developpement:></option>
-						<option value="media"[ (#ENV{categorie}|=={media}|oui)selected='selected']><:tag:media:></option>
+						<option value="multimedia"[ (#ENV{categorie}|=={multimedia}|oui)selected='selected']><:tag:multimedia:></option>
+						<option value="maintenance"[ (#ENV{categorie}|=={maintenance}|oui)selected='selected']><:tag:maintenance:></option>
 						<option value="navigation"[ (#ENV{categorie}|=={navigation}|oui)selected='selected']><:tag:navigation:></option>
-						<option value="objet"[ (#ENV{categorie}|=={objet}|oui)selected='selected']><:tag:objet:></option>
-						<option value="redaction"[ (#ENV{categorie}|=={redaction}|oui)selected='selected']><:tag:redaction:></option>
-						<option value="service"[ (#ENV{categorie}|=={service}|oui)selected='selected']><:tag:service:></option>
-						<option value="seo"[ (#ENV{categorie}|=={seo}|oui)selected='selected']><:tag:seo:></option>
-						<option value="securite"[ (#ENV{categorie}|=={securite}|oui)selected='selected']><:tag:securite:></option>
+						<option value="outil"[ (#ENV{categorie}|=={outil}|oui)selected='selected']><:tag:outil:></option>
+						<option value="performance"[ (#ENV{categorie}|=={performance}|oui)selected='selected']><:tag:performance:></option>
+						<option value="edition"[ (#ENV{categorie}|=={edition}|oui)selected='selected']><:tag:edition:></option>
 						<option value="squelette"[ (#ENV{categorie}|=={squelette}|oui)selected='selected']><:tag:squelette:></option>
+						<option value="statistique"[ (#ENV{categorie}|=={statistique}|oui)selected='selected']><:tag:statistique:></option>
 						<option value="theme"[ (#ENV{categorie}|=={theme}|oui)selected='selected']><:tag:theme:></option>
 					</select>
 				</li>
 
-			
 
-				
+
+
 				[(#SET{afficher,[(#ENV{etat}
 					|ou{[(#ENV{actif}|!={''})]}
 					|ou{[(#ENV{zone}|!={''})]}
@@ -143,7 +142,7 @@
 					]
 				</li>
 			</ul>
-			<ul class="more2[ (#GET{afficher})]">			
+			<ul class="more2[ (#GET{afficher})]">
 
 				<li class="editer_actif">
 					<label for="step_statut"><:step:statut:></label>
@@ -153,8 +152,8 @@
 						<option value="non"[ (#ENV{actif}|=={non}|oui)selected='selected']><:step:statut_inactif:></option>
 					</select>
 				</li>
-								
-				<li class="editer_etat">	
+
+				<li class="editer_etat">
 					<label for="step_etat"><:step:etat:></label>
 					<select name="etat" id="step_statut">
 						<option value=""><:step:etat_tous:></option>
@@ -165,14 +164,14 @@
 					</select>
 				</li>
 
-				<li class="editer_zone">	
+				<li class="editer_zone">
 					<label for="step_zone"><:step:zone:></label>
 					<select name="id_zone" id="step_zone">
 						<option value=""[ (#ENV{id_zone}|=={''}|oui)selected='selected']><:step:zone_tous:></option>
 						<BOUCLE_zones(ZONES_PLUGINS)><option value="#ID_ZONE"[ (#ENV{id_zone}|=={#ID_ZONE}|oui)selected='selected']>#NOM</option></BOUCLE_zones>
 					</select>
 				</li>
-				
+
 				<li class="editer_obsolete">
 					<label for="step_obsolete"><:step:obsolete:></label>
 					<select name="obsolete" id="step_obsolete">
@@ -189,8 +188,8 @@
 						<option value="oui"[ (#ENV{superieur}|=={oui}|oui)selected='selected']><:step:superieur_oui:></option>
 						<option value="non"[ (#ENV{superieur}|=={non}|oui)selected='selected']><:step:superieur_non:></option>
 					</select>
-				</li>								
-			</ul>	
+				</li>
+			</ul>
 		</div>
 
 		<input type="hidden" name="_todo" class='hidden' value="[(#ENV{_todo})]" />
@@ -209,5 +208,5 @@
 
 		</BOUCLE_plugs>
 		</div></form>
-		
+
 </div>

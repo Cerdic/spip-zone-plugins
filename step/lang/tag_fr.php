@@ -5,13 +5,13 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // categories
-'auteur' => 'Auteurs, authentification, autorisation',
-'communication' => 'Interactivit&eacute;, communication, messagerie',
 'date' => 'Agendas, calendrier, dates',
+'auteur' => 'Auteurs, authentification, autorisation',
 'divers' => 'Divers',
+'communication' => 'Interactivit&eacute;, communication, messagerie',
+'multimedia' => 'Galerie, multim&eacute;dia, images',
 'edition' => 'R&eacute;daction, &eacute;dition, impression',
 'maintenance' => 'Maintenance, configuration',
-'multimedia' => 'Galerie, multim&eacute;dia, images',
 'navigation' => 'Navigation, recherche, organisation',
 'outil' => 'Outils de d&eacute;veloppement',
 'performance' => 'S&eacute;curit&eacute;, optimisation, performances',
