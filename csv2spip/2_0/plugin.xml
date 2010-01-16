@@ -30,6 +30,7 @@
         		<nom>ajouter_boutons</nom>
             <inclure>csv2spip_pipelines.php</inclure>
         </pipeline>
+		<categorie>edition</categorie>
 		<necessite id="SPIP" version="[2.0.0;]" />
 		<install>inc/csv2spip_install.php</install>
 </plugin>

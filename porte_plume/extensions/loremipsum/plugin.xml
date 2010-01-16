@@ -20,4 +20,5 @@ _ &#169; 2007 - Distribu&#233; sous licence GPL
 		<inclure>pp_loremipsum_pipelines.php</inclure>
 	</pipeline>
 	<necessite id="porte_plume" />
+	<categorie>edition</categorie>
 </plugin>

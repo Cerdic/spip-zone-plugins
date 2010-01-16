@@ -38,5 +38,6 @@ Ce plug-in est sous licence GNU/GPL v2</description>
 		<inclure>intertitres_tdm_fonctions_typo.php</inclure>
 	</pipeline>
  <fonctions>intertitres_tdm_fonctions.php</fonctions>
+	<categorie>edition</categorie>
 	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

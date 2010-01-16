@@ -29,5 +29,6 @@
   	<nom>boite_infos</nom>
   	<inclure>previsu_redac_pipelines.php</inclure>
   </pipeline>
+	<categorie>edition</categorie>
 	<necessite id='SPIP' version='[2.0.0;]' />
 </plugin>

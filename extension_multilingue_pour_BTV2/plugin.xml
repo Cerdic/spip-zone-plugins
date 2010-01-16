@@ -57,6 +57,7 @@
 		<nom>header_prive</nom>
 		<inclure>extension_multilingue.php</inclure>
 	</pipeline>
+	<categorie>edition</categorie>
 	<necessite id="CFG" version="[1.0;]" />
 	<necessite id="BarreTypoEnrichie" version="[2.3.1;]" />
 	<necessite id="barre_typo_generalisee" version="[1.4;]" />

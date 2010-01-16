@@ -33,5 +33,6 @@
 	<install>inc/ortho_install.php</install>
 
 	<chemin dir='' type='prive' />
+	<categorie>edition</categorie>
 	<necessite id='spip' version='[1.9.2;]' />
 </plugin>

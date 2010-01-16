@@ -105,6 +105,7 @@ Vous pouvez aussi installer le plugin cfg et utiliser [ecrire/?exec=cfg&amp;cfg=
 		<nom>porte_plume_lien_classe_vers_icone</nom>
 		<inclure>enluminures_typo_pipelines.php</inclure>
 	</pipeline>
+	<categorie>edition</categorie>
 	<necessite id="SPIP" version="[2.0.3;]" />
 	<necessite id="porte_plume" version="[1.2.2;]" />
 </plugin>

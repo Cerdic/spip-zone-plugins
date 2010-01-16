@@ -47,6 +47,7 @@ Un simple clic sur une ic&ocirc;ne propos&#233;e permet d'ajouter dans le texte 
 		<nom>porte_plume_lien_classe_vers_icone</nom>
 		<inclure>iconespedago.php</inclure>
 	</pipeline>
+	<categorie>edition</categorie>
 	<necessite id="SPIP" version="[2.0.3;]" />
 	<necessite id="porte_plume" version="[1.2.2;]" />
 </plugin>

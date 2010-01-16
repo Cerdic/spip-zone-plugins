@@ -23,6 +23,7 @@ _ La conversion des formules math&#233;matiques repose sur la librairie XSLT {{M
     	<nom>affiche_droite</nom>
         <inclure>odt2spip_pipelines.php</inclure>
     </pipeline>
+	<categorie>edition</categorie>
 	<necessite id="SPIP" version="[2.0.5;]" />
     <necessite id="snippets" version="[0.1;]" />
 </plugin>

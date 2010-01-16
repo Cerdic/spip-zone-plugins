@@ -28,5 +28,6 @@ _ Pour l'utiliser, il suffit d'ajouter la balise #IMPRIMIR_DOCUMENTO** dans les 
 	<prefix> 
 	imprimir_documento
 	</prefix>
+	<categorie>edition</categorie>
 	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

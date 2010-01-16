@@ -36,6 +36,7 @@
 		<inclure>inc/cital_pipeline_insert_head.php</inclure>
 	</pipeline>
 	
+	<categorie>edition</categorie>
 	<necessite id='spip' version='[1.9.1;]' />
 	
 </plugin>

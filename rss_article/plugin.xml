@@ -14,5 +14,6 @@
 		<nom>taches_generales_cron</nom>
 		<inclure>rssarticle_pipelines.php</inclure>
 	</pipeline>
+	<categorie>edition</categorie>
 	<necessite id="SPIP" version="[2.0;]" />
 </plugin>

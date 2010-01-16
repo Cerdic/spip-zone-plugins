@@ -33,5 +33,6 @@ _ &#169; 2005 - Distribu&#233; sous licence GNU/GPL
 	</pipeline>
 	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
 
+	<categorie>edition</categorie>
 	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

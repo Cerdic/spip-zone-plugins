@@ -38,5 +38,6 @@ _ F&uuml;gen Sie den Tag #ARTICLE_PDF in Ihr Skelett ein um über einen Link zum 
     <prefix> 
     article_pdf
     </prefix>
+    <categorie>edition</categorie>
 	<necessite id="SPIP" version='[2.0.0;]' />
 </plugin>

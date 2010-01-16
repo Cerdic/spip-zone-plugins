@@ -24,6 +24,7 @@ Ajoute aussi un raccourci &#91;&#63;ecrire/inc_versions.php#trac].
 		<nom>porte_plume_lien_classe_vers_icone</nom>
 		<inclure>pp_codes_pipelines.php</inclure>
 	</pipeline>
+	<categorie>edition</categorie>
 	<necessite id="porte_plume" />
 	<utilise id="cfg" version='[1.14;]' />
 	<utilise id="saisies" version='[1.2;]' />
