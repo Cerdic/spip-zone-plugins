@@ -10,4 +10,5 @@
     </description>
     <prefix>cfg_depots</prefix>
 	<necessite id="SPIP" version="[1.9.2;]" />
+	<categorie>maintenance</categorie>
 </plugin>

@@ -21,4 +21,5 @@
 		<icone>images/logo-24.png</icone>
 		<titre>Multidomaines</titre>
 	</bouton>
+	<categorie>maintenance</categorie>
 </plugin>

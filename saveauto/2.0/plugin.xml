@@ -51,4 +51,5 @@ vengono automaticamente cancellati.
 	<necessite id="SPIP" version="[1.9.0;]" />
 	<necessite id="cfg" version="[1.0.0;]" />
 	<chemin dir='' type='prive' />
+	<categorie>maintenance</categorie>
 </plugin>

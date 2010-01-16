@@ -33,4 +33,5 @@
 	<necessite id='spip' version='[1.9.2;]' />
 
 	<chemin dir='' type='aucun' />
+	<categorie>maintenance</categorie>
 </plugin>

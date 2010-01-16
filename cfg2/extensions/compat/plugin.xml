@@ -27,4 +27,5 @@
 	<necessite id="SPIP" version="[1.9.2;]" />
 	<necessite id="cfg" version="[1.99.0;]" />
 	<necessite id="cfg_interface" version="[1.0;]" />
+	<categorie>maintenance</categorie>
 </plugin>

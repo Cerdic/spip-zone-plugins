@@ -53,4 +53,5 @@
 				<necessite id="cfg" version="[1.0.0;]" />
 				<chemin dir='' type='prive' />
 
+	<categorie>maintenance</categorie>
 </plugin>

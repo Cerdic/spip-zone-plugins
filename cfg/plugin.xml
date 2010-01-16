@@ -65,4 +65,5 @@ Es wird von vielen Plugins verwendet, kann aber auch anderen Nutzen finden wie d
         <inclure>cfg_pipeline.php</inclure>
     </pipeline>    
 	<necessite id="SPIP" version="[1.9.0;]" />
+	<categorie>maintenance</categorie>
 </plugin>

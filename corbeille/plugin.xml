@@ -57,4 +57,5 @@ _ <multi>
 		<icone>images/trash-full-16.png</icone>
 	</bouton>	
 	<necessite id='SPIP' version='[2.0.0;]' />
+	<categorie>maintenance</categorie>
 </plugin>

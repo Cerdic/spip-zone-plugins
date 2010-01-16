@@ -23,4 +23,5 @@
 	</pipeline>
 	<necessite id="SPIP" version='[2.0.9;]' />
 	<necessite id='cfg' version='[1.14.0;]' />
+	<categorie>maintenance</categorie>
 </plugin>

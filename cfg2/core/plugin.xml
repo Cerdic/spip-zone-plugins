@@ -52,4 +52,5 @@ Es wird von vielen Plugins verwendet, kann aber auch anderen Nutzen finden wie d
         <inclure>cfg_autorisations.php</inclure>
     </pipeline>    
 	<necessite id="SPIP" version="[2.0.6;]" />
+	<categorie>maintenance</categorie>
 </plugin>

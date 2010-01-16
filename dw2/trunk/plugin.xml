@@ -49,4 +49,5 @@
 		<inclure>base/dw2_tables.php</inclure>
 	</pipeline>	
 	<necessite id="SPIP" version="[1.9.0;]" />
+	<categorie>maintenance</categorie>
 </plugin>

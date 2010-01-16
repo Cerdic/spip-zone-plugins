@@ -38,4 +38,5 @@ et si probl&egrave;me zip [Codes d'erreur pclzip->http://trac.rezo.net/trac/spip
 	chargeur
 	</prefix>
 	<necessite id="SPIP" version="[1.9.0;]" />
+	<categorie>maintenance</categorie>
 </plugin>

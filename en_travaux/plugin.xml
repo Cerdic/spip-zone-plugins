@@ -36,4 +36,5 @@ _ Attention : seul le webmestre accede encore &agrave; l'espace prive et au site
 	</pipeline>
 
 	<necessite id="SPIP" version="[2.0.7;]" />
+	<categorie>maintenance</categorie>
 </plugin>

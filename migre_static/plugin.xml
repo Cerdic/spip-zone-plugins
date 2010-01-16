@@ -44,5 +44,5 @@ _ and if cfg plugin is installed: [Configuration->.?exec=cfg&amp;cfg=migrestatic
 	<necessite id="SPIP" version="[1.9.0;]" />
 	<necessite id="cfg" version="[1.0.0;]" />
 	<chemin dir='' />
-
+	<categorie>maintenance</categorie>
 </plugin>
