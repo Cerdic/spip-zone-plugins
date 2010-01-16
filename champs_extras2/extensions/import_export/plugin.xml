@@ -16,4 +16,5 @@
 		<nom>affiche_gauche</nom>
 		<inclure>ie_extras_pipelines.php</inclure>
 	</pipeline>	
+	<categorie>outil</categorie>
 </plugin>

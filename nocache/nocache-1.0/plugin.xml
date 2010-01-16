@@ -28,4 +28,5 @@
   <lien>http://www.spip-contrib.net/NoCache</lien>
 
   <options>nocache_options.php</options>
+	<categorie>outil</categorie>
 </plugin>

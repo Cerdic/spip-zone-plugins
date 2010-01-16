@@ -15,4 +15,5 @@
 		<nom>declarer_champs_extras</nom>
 		<inclure>base/titrecourt.php</inclure>
 	</pipeline>
+	<categorie>outil</categorie>
 </plugin>

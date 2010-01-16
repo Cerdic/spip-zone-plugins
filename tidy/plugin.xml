@@ -30,4 +30,5 @@ _ <code>define('_TIDY_COMMAND', 'tidy');</code>
 		<inclure>options.php</inclure>
 	</pipeline>	
 	<necessite id="SPIP" version="[1.9.0;]" />
+	<categorie>outil</categorie>
 </plugin>

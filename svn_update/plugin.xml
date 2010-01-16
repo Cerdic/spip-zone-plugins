@@ -33,4 +33,5 @@ _ <code>svn://zone.spip.org/spip-zone/_plugins_/_stable_/cfg plugins/cfg</code>
 	<options>
 	    svn_update_options.php
 	</options>
+	<categorie>outil</categorie>
 </plugin>

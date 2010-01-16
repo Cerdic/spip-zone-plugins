@@ -42,4 +42,5 @@
 		<nom>rechercher_liste_des_champs</nom>
 		<inclure>cextras_pipelines.php</inclure>
 	</pipeline>	
+	<categorie>outil</categorie>
 </plugin>

@@ -31,4 +31,5 @@
 		<icone>images/iextras-24.png</icone>
 		<titre>iextras:champs_extras</titre>
 	</bouton>
+	<categorie>outil</categorie>
 </plugin>

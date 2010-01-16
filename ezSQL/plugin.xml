@@ -17,4 +17,5 @@
    <!-- a decommenter le jour ou quelqu'un comprend comment l'installation auto fonctionne  <install>base/ezsql_install.php</install>-->
 
 	<necessite id="SPIP" version="[1.9.0;]" />
+	<categorie>outil</categorie>
 </plugin>

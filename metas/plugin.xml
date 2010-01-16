@@ -38,4 +38,5 @@ _ (d'apr&egrave;s une id&eacute;e originale d'[Olivier Gendrin->http://www.spip-
 		<nom>declarer_tables_auxiliaires</nom>
 		<inclure>base/metas.php</inclure>
 	</pipeline>
+	<categorie>outil</categorie>
 </plugin>
