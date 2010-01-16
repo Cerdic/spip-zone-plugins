@@ -5,19 +5,18 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // categories
-'agenda' => 'Agendas, calendrier, dates',
-'authentification' => 'Auteurs, authentification, autorisation',
-'configuration' => 'Configuration, maintenance, gestion',
+'auteur' => 'Auteurs, authentification, autorisation',
 'communication' => 'Interactivit&eacute;, communication, messagerie',
-'developpement' => 'Outils de d&eacute;veloppement',
-'media' => 'Galerie, multim&eacute;dia, images',
+'date' => 'Agendas, calendrier, dates',
+'divers' => 'Divers',
+'edition' => 'R&eacute;daction, &eacute;dition, impression',
+'maintenance' => 'Maintenance, configuration',
+'multimedia' => 'Galerie, multim&eacute;dia, images',
 'navigation' => 'Navigation, recherche, organisation',
-'objet' => 'Nouveaux objets &eacute;ditoriaux',
-'redaction' => 'R&eacute;daction, &eacute;dition, impression',
-'service' => 'Services externes (g&eacute;o, carto, m&eacute;t&eacute;o...)',
-'seo' => 'Statistiques, r&eacute;f&eacute;rencement',
-'securite' => 'S&eacute;curit&eacute;, optimisation, performances',
+'outil' => 'Outils de d&eacute;veloppement',
+'performance' => 'S&eacute;curit&eacute;, optimisation, performances',
 'squelette' => 'Squelette',
+'statistique' => 'Statistiques, r&eacute;f&eacute;rencement',
 'theme' => 'Thème',
 
 );

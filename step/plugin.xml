@@ -7,13 +7,13 @@ _ &#169; 2008 2009
 	</auteur>
 	<licence>GPL</licence>
 	<lien></lien>
-	<version>0.9.1</version>
+	<version>0.9.2</version>
 	<version_base>0.4</version_base>
 	<install>base/step_install.php</install>
-	
+
 	<icon>images/step-128.png</icon>
-	
-	
+
+
 	<etat>dev</etat>
     <description>
 	Ce plugin permet de de gerer les plugins de SPIP ainsi que leur
@@ -48,8 +48,8 @@ _ &#169; 2008 2009
 	<pipeline>
 		<nom>rechercher_liste_des_champs</nom>
 		<inclure>step_pipelines.php</inclure>
-	</pipeline>		
-	
+	</pipeline>
+
 	<necessite id="SPIP" version="[2.0.10;]" />
 
 	<categorie>configuration</categorie>
