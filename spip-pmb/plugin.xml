@@ -4,15 +4,15 @@
 	Portail Web pour PMB
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
-	Arnault PACHOT 
- 	[OpenStudio->http://www.openstudio.fr]
+	[OpenStudio->http://www.openstudio.fr]
 _ &#169; 2010 - Licence GPL
 	</auteur>
 	<version>
-	0.8 BETA
+	0.9 BETA
 	</version>
+	<icon>img_pack/logo-spip-pmb.png</icon>
 	<etat>
-	test
+	stable
 	</etat>
 	<description>
 	Ce plugin permet d'utiliser SPIP comme portail web du logiciel PMB. <br />
