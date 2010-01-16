@@ -11,6 +11,7 @@
 		<inclure>typo_phptypo_fonctions.php</inclure>
 	</pipeline>
 	<lien>http://kingdesk.com/projects/php-typography/</lien>
+	<categorie>edition</categorie>
 	<necessite id="SPIP" version="[2.0.0;]" />
 	<necessite id="lib:php-typography" src="http://kingdesk.com/wp-content/uploads/php-typography-1-12.zip" />
 </plugin>
