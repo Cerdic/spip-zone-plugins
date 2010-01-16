@@ -98,6 +98,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'retour' => 'Retour',
 'rang' => 'Rang',
 'code_barre' => 'Code barre',
-'code_barre_abbr' => 'CB'
+'code_barre_abbr' => 'CB',
+'titre_lien_pmb' => 'PMB, un SIGB enti&egrave;rement libre'
 );
 ?>

@@ -5,7 +5,7 @@
 											      [(#REM|?{'','<img />'}|inserer_attribut{class,spip_logos}|inserer_attribut{src,[(#ENV{notice}|pmb_notice_champ{'logo_src'}|copie_locale{'force'})]}|image_reduire{100,0})]
 										]
 										[(#ENV{'copieimage','non'}|=={'non'}|oui)
-											    [(#REM|?{'','<img />'}|inserer_attribut{width,'100'}|inserer_attribut{class,spip_logos}|inserer_attribut{src,[(#ENV{notice}|pmb_notice_champ{'logo_src'})]})]
+											    [(#REM|?{'','<img />'}|inserer_attribut{width,'100'}|inserer_attribut{class,spip_logos}|inserer_attribut{alt,''}|inserer_attribut{src,[(#ENV{notice}|pmb_notice_champ{'logo_src'})]})]
 										]
 								]
 								[(#ENV{notice}|pmb_notice_champ{'logo_src'}|non)

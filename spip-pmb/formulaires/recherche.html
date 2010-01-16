@@ -7,11 +7,11 @@
 		
 	</div>
 	<fieldset>
-		<ul>
+	    <ul>
 		<li><input type='checkbox' name='look_PMB' id='look_PMB' value='1' checked='checked' /><label for='look_PMB' style="display: inline;"> <:pmb:recherche_catalogue:> </label>
 		<br /></li>
 		<li><input type='checkbox' name='look_SITE' id='look_SITE' value='1'  /><label for='look_SITE' style="display: inline;"> <:pmb:recherche_portail_web:> </label></li>
-		<ul>
+		
 		      
 		<li class="champ-recherche">
 			<label for="recherche" style="display: none;"><:info_rechercher_02:></label>
@@ -19,8 +19,9 @@
 			<input type="submit" class="submit" value="Ok" />
 		</li>
 		<li class="recherche-avancee">
-			<a href="[(#URL_PAGE{recherche})&look_ALL=1]"><:pmb:recherche_avancee:> +</a>
+			<a href="[(#URL_PAGE{recherche}|parametre_url{look_ALL,1})]"><:pmb:recherche_avancee:> +</a>
 		</li>
+	     </ul>
 	</fieldset>
 </form>
 </div>
