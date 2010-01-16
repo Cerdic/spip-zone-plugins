@@ -52,4 +52,5 @@ _ Attention, la licence de ces trois derniers lecteurs est semi-commerciale, c&r
 		<nom>header_prive</nom>
 		<inclure>xspf_pipeline.php</inclure>
 	</pipeline>
+	<categorie>multimedia</categorie>
 </plugin>

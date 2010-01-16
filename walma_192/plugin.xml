@@ -42,5 +42,6 @@ walma
 	<action>insert_walma</action>
 	</pipeline>
 	<necessite id="SPIP" version="[1.9.0;]" />
+	<categorie>multimedia</categorie>
 </plugin>
 

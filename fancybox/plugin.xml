@@ -24,4 +24,5 @@ _ Ce plugin fonctionne sur les squelettes disposant de la balise <code>#INSERT_H
 		<action>insert_head</action>
 		<inclure>fancybox_pipelines.php</inclure>
 	</pipeline>
+	<categorie>multimedia</categorie>
 </plugin>

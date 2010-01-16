@@ -16,5 +16,5 @@ Ce plugin permet d'ajouter le player mp3 de Y et ainsi d'avoir un lecteur plus l
 	</pipeline>
 	<icon>ymediaplayer.png</icon>
 		<necessite id="SPIP" version="[1.9.2;]" />
-
+	<categorie>multimedia</categorie>
 </plugin>

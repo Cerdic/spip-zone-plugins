@@ -21,4 +21,5 @@ _ &#169; 2006-2009 - Distribu&#233; sous licence GNU/GPL.</auteur>
 		<inclure>album_pipeline.php</inclure>
 	</pipeline>
 	<necessite id="SPIP" version="[1.9.0;]" />
+	<categorie>multimedia</categorie>
 </plugin>

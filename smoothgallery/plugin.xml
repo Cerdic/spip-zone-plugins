@@ -31,4 +31,5 @@
 	</pipeline>
 	<necessite id="SPIP" version="[1.9.0;]" />
 	<necessite id='cfg' version='[1.0.4;]' />
+	<categorie>multimedia</categorie>
 </plugin>

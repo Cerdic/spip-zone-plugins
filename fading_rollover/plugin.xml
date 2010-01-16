@@ -24,4 +24,5 @@
   	<inclure>fadingrollover_pipelines.php</inclure>
   </pipeline>
 	<necessite id="SPIP" version="[1.9.0;]" />
+	<categorie>multimedia</categorie>
 </plugin>

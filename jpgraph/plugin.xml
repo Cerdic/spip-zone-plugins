@@ -14,4 +14,5 @@
 	<lien>http://www.spip-contrib.net/plugin-JpGraph</lien>
 	<necessite id="lib:jpgraph-3.0.6" src="http://hem.bredband.net/jpgraph2/jpgraph-3.0.6.tar.bz2" />
 	<fonctions>jpgraph_fonctions.php</fonctions>
+	<categorie>multimedia</categorie>
 </plugin>

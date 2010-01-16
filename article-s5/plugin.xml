@@ -32,4 +32,5 @@ _ &#169; 2007 - Distribu&#233; sous licence GNU/LGPL
         </prefix>
 				<fonctions>s5_fonctions.php</fonctions>
         <chemin dir='' />
+	<categorie>multimedia</categorie>
 </plugin>

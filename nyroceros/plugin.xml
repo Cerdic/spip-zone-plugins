@@ -20,4 +20,5 @@ _ Ce plugin fonctionne sur les squelettes disposant de la balise <code>#INSERT_H
 		<nom>insert_head</nom>
 		<inclure>nyroceros_pipelines.php</inclure>
 	</pipeline>
+	<categorie>multimedia</categorie>
 </plugin>

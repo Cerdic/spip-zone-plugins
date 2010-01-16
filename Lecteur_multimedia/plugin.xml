@@ -66,4 +66,5 @@ _ <a href="?exec=player_admin">configurer le plugin</a> ||
 	<!-- Le parametre action est facultatif : en son absence la fonction portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
 
 	<necessite id="SPIP" version="[1.9.2;]" />
+	<categorie>multimedia</categorie>
 </plugin>

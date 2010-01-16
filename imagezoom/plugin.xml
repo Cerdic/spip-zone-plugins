@@ -45,4 +45,5 @@ Si vous utilisez SPIP 1.9.2, il faut t&eacute;l&eacute;charger la biblioth&egrav
 	<necessite id="SPIP" version="[1.9.0;]" />
 	<necessite id='CFG' version='[1.10.3;]' />
 	<necessite id="lib:tjpzoom" src="http://valid.tjp.hu/tjpzoom/tjpzoom.zip" />
+	<categorie>multimedia</categorie>
 </plugin>

@@ -36,5 +36,5 @@
 		<nom>insert_head</nom>
 		<inclure>jflipbook_head.php</inclure>
 	</pipeline>
-	  
+	<categorie>multimedia</categorie>
 </plugin>

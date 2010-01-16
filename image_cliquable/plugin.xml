@@ -19,4 +19,5 @@
 	<lien>http://www.spip-contrib.net/Plugin-Image-Cliquable</lien> <!-- URI de documentation -->	
 	<prefix>image_cliquable</prefix>
 	<necessite id="SPIP" version="[1.9.0;]" />
+	<categorie>multimedia</categorie>
 </plugin>

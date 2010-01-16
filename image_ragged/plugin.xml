@@ -31,4 +31,5 @@ Utilisation:
 	  image_ragged
 	</prefix>
 	<necessite id="SPIP" version="[1.9.0;]" />
+	<categorie>multimedia</categorie>
 </plugin>
