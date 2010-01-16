@@ -40,6 +40,7 @@
 	<icon>icon-fastcache.png</icon>
 	<options>fastcache_options.php</options>
 	<fonctions>fastcache_fonctions.php</fonctions>
+	<categorie>performance</categorie>
 	<necessite id="SPIP" version="[2.0.0;]" />
 	<necessite id="memoization" version="[0.3;]" />
 </plugin>

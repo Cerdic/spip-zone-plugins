@@ -19,6 +19,7 @@ _ Cette extension, bas&eacute;e sur la classe PHP4 d'[Alex Potsides->http://www.
 	</description>
 	<lien>http://www.spip-contrib.net/Akismet</lien>
 	<prefix>akismet</prefix>
+	<categorie>performance</categorie>
 	<necessite id='cfg' version='[1.0;]' />
 	<necessite id='spip' version='[2.0.0;]' />
 </plugin>

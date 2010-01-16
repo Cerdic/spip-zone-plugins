@@ -21,5 +21,6 @@
     <icon>memoization.png</icon>
     <options>inc/memoization.php</options>
 	<chemin dir='' />
+	<categorie>performance</categorie>
 	<necessite id="SPIP" version="[2.0.0;]" />
 </plugin>

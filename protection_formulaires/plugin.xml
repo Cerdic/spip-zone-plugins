@@ -25,6 +25,7 @@
 	<pipeline>
 		<nom>header_prive</nom>
 		<action>proteger</action>
+		<categorie>performance</categorie>
 		<inclure>protection_formulaires.php</inclure>
 	</pipeline>
 

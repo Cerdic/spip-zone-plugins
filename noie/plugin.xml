@@ -12,5 +12,6 @@
 	<nom>affichage_final</nom>
 	<inclure>insere_campagne.php</inclure>
 </pipeline>
+<categorie>performance</categorie>
 <necessite id='SPIP' version='[1.9.0;]' />
 </plugin>

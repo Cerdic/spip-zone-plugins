@@ -59,6 +59,7 @@ _ You can also use this plugin to limit the access to your site for the visitors
 
   <install>base/honeypot_upgrade.php</install>
 
+	<categorie>performance</categorie>
 	<necessite id="SPIP" version="[1.9.0;]" />
   <necessite id='cfg' version='[1.0.8;]' />
   <necessite id="compat" version='[1.9.3;]' />

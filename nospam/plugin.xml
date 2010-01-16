@@ -24,5 +24,6 @@
 	<nom>formulaire_verifier</nom>
 	<inclure>nospam_pipelines.php</inclure>
 </pipeline>
+<categorie>performance</categorie>
 <necessite id="SPIP" version="[2.0.0;]" />
 </plugin>

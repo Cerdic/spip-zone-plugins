@@ -19,5 +19,6 @@
 
 	<fonctions>fonctions_recaptcha.php</fonctions>
 	<chemin dir='' />
+	<categorie>performance</categorie>
 	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

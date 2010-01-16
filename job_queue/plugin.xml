@@ -29,5 +29,7 @@
 		<nom>affichage_final</nom>
 		<inclure>queue_pipelines.php</inclure>
 	</pipeline>
+	
+	<categorie>performance</categorie>
 
 </plugin>
