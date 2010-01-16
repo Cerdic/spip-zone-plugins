@@ -99,6 +99,7 @@ Afin d'&#233;viter les mauvaises surprises de pr&#233;sentation (comme l'afficha
 		<args>nouveau=oui</args>
 	</bouton>
 	<install>base/jeux_upgrade.php</install>
+	<categorie>divers</categorie>
 	<necessite id="SPIP" version="[2.0.0;]" />
 	<utilise id="cfg" version="[1.10.5;]" />
 </plugin>

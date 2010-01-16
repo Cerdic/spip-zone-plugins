@@ -52,6 +52,8 @@ Ces options sont :
     </pipeline>
 	<options>bibles_options.php</options>
 	<fonctions>bible_fonctions.php</fonctions>
+	
+	<categorie>divers</categorie>
    
  
 </plugin>

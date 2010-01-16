@@ -24,5 +24,6 @@
     eva_geometrie
     </prefix>
     <install>eva_geometrie_install.php</install>
+    <categorie>divers</categorie>
     <necessite id="SPIP" version="[2.0.0;]" />
 </plugin>

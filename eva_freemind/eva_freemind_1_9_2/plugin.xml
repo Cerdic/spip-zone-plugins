@@ -7,6 +7,7 @@
 	<a rel="Spip-edu" class="spip_out" href="http://www.eva-web.edres74.ac-grenoble.fr/">http://www.eva-web.edres74.ac-grenoble.fr/</a><br/>
 	Cette r&eacute;alisation est mise &agrave; disposition sous licence GNU GPL.
 	<br />&nbsp;<br /><div style="text-align:center;"><a rel="licence" class="spip_out" href="http://www.april.org/gnu/gpl_french.html"><img alt="Licence GNU GPL" style="border-width:0" width="80" height="100" src="http://www.fsf.org/graphics/philosophical-gnu-sm.jpg"/></a></div>
+
 	Avec l'aide de Gilles Quiniou
 	</auteur>
 	<version>
@@ -26,5 +27,6 @@
     eva_freemind
     </prefix>
     <install>eva_freemind_install.php</install>
+	<categorie>divers</categorie>
 	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

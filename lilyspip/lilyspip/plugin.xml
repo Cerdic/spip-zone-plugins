@@ -46,5 +46,6 @@ _ &#169; 2006 - Distribu&eacute; sous licence GPL
 		<inclure>lilypond.php</inclure>
 	</pipeline>
 
+	<categorie>divers</categorie>
 	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

@@ -25,6 +25,7 @@
 	<fonctions>cahier-de-texte-fonctions.php</fonctions>
 	<prefix>bonbon</prefix>
 	
+    <categorie>divers</categorie>
     <necessite id='cfg' version='[1.10.3;]' />
     <necessite id='spip' version='[2.0.0;]' /> 
     

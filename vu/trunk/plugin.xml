@@ -66,9 +66,13 @@
 
 	<!-- Pipeline : entete des pages de l'espace prive -->
 	<pipeline>
+
 		<nom>header_prive</nom>
+
 		<action>header_prive</action>
+
 		<inclure>vu_pipelines.php</inclure>
+
 	</pipeline>
 
 	<!-- Pipeline : boites d'infos des objets dans 'exec/veille_voir' -->
@@ -107,5 +111,7 @@
 		<!-- action a effectuer lors du clic : ici, execution de exec/veille_tous.php -->
 		<url>veille_tous</url>	
 	</bouton>
+	
+	<categorie>divers</categorie>
 
 </plugin>

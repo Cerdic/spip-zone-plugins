@@ -37,6 +37,7 @@ _ En plus d'avoir ses cours en ligne, on peut donc faire des tests not&#233;s, v
 		<inclure>inc/elearning_zones.php</inclure>
 	</pipeline>
 	
+	<categorie>divers</categorie>
 	<!-- Le e-learning dans SPIP nécessite les plugins suivant -->
 	<necessite id='cfg' version="[1.10.5;]" />
 	<necessite id='AccesRestreint' version="[0.3.0.3;]" />

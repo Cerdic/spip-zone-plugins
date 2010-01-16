@@ -56,6 +56,7 @@ _ Configuration: [->/ecrire/?exec=cfg&amp;cfg=gis]
 		<action>gismot</action>
 		<inclure>gis_pipeline.php</inclure>
 	</pipeline>
+	<categorie>divers</categorie>
 	<necessite id="SPIP" version="[1.9.0;]" />
 	<necessite id='cfg' version='[1.10.4;]' />
 	<chemin dir='' />

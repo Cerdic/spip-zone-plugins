@@ -59,4 +59,5 @@
 		<icone>images/grappe-16.png</icone>
 		<titre>grappes:titre_page_grappes</titre>
 	</bouton>
+	<categorie>divers</categorie>
 </plugin>

@@ -37,6 +37,7 @@
 	
 	<options>mon_diplome_options.php</options>
 	
+	<categorie>divers</categorie>
 	<necessite id="SPIP" version="[1.9.2;]" />
 	
 </plugin>

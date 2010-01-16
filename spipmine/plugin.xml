@@ -37,4 +37,6 @@
 		<inclure>base/spipmine_tables_interfaces.php</inclure>
 	</pipeline>
 	
+	<categorie>divers</categorie>
+	
 </plugin>

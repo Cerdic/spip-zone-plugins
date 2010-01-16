@@ -16,5 +16,6 @@ via des pages sp&eacute;ciales &#171; Evangile &#187; et &#171; Saint &#187; com
 	<icon>spiperipsum-64.png</icon>
 	<fonctions>spiperipsum_fonctions.php</fonctions>
 	<options>spiperipsum_options.php</options>
+	<categorie>divers</categorie>
 	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

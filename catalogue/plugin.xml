@@ -53,6 +53,7 @@ _ Il n&eacute;cessite le plugin [Comptes &amp; Contacts->http://files.spip.org/s
 		<inclure>catalogue_autorisations.php</inclure>
 	</pipeline>	
 	
+	<categorie>divers</categorie>
 	<necessite id="SPIP" version="[2.0.9;]" />
 	<utilise id="comptes" version="[1.0]" src="http://files.spip.org/spip-zone/comptes.zip" />
 	
