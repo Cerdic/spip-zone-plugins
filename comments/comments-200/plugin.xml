@@ -1,8 +1,7 @@
 <plugin>
 <nom>Commentaires</nom>
 <icon>icon.png</icon>
-<auteur>[romy.tetue.net->http://romy.tetue.net] - 2009</auteur>
-<licence>GPL</licence>
+<auteur>[romy.tetue.net->http://romy.tetue.net] - 2009 - Licence GPL</auteur>
 <version>0.3</version>
 <etat>dev</etat>
 <description>PLUGIN INSTABLE, encore en d&eacute;veloppement&nbsp;!
@@ -18,7 +17,7 @@ _ Tout pour construire des commentaires&nbsp;:
 <chemin dir="" />
 <chemin dir="feed/" />
 <fonctions>comments_fonctions.php</fonctions>
-<necessite id='SPIP' version='[2.0.9;]' />
+<necessite id="SPIP" version="[2.0.9;]" />
 <utilise id='Z' version="[;]" />
 <categorie>communication</categorie>
 </plugin>
