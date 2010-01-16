@@ -41,4 +41,5 @@
 	</pipeline>
 
 	<necessite id="SPIP" version="[1.9.2;]" />
+	<categorie>communication</categorie>
 </plugin>

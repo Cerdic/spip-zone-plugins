@@ -34,5 +34,5 @@
 	<necessite id="SPIP" version="[1.9.0;]" /-->
 
 	<necessite id='cfg' version='[1.0;]' />
-	<categorie>multimedia</categorie>
+	<categorie>communication</categorie>
 </plugin>

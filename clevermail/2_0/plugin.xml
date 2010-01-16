@@ -14,6 +14,7 @@ Gestion de {{lettres d'information}} assurant les fonctionnalit&eacute;s suivant
 -* R&eacute;cup&eacute;ration des contenus HTML et texte brut &agrave; partir de deux URL, donc {{utilisation de squelettes SPIP}} d&eacute;di&eacute;s possible
 -* {{Automatisation des envois}} avec une fr&eacute;quence quotidienne, hebdomadaire (multiples jours de la semaine possibles) ou mensuelle
 -* {{Automatisation des inscriptions}} depuis un fichier distant
+
 -* Possibilit&eacute; de regrouper les lettres par cat&eacute;gories en pr&eacute;fixant le nom de la lettre avec le nom de la cat&eacute;gorie suivi d'un "/", et utilisation du formulaire #FORMULAIRE_CLEVERMAIL_MULTIPLE
 
 &Eacute;volutions envisag&eacute;es :
@@ -61,4 +62,5 @@ Gestion de {{lettres d'information}} assurant les fonctionnalit&eacute;s suivant
     <titre>CleverMail</titre>
     <url>clevermail</url>
   </bouton>
+	<categorie>communication</categorie>
 </plugin>

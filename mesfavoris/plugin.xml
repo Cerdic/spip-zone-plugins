@@ -18,5 +18,5 @@
 		<nom>declarer_tables_interfaces</nom>
 		<inclure>base/mesfavoris.php</inclure>
 	</pipeline>
-
+	<categorie>navigation</categorie>
 </plugin>

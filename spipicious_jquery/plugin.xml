@@ -50,4 +50,5 @@ _ Icon from [Wolfgang Bartelme and Chris Messina->http://www.factorycity.net/pro
 	<necessite id="SPIP" version='[2.0.9;]' />
 	<necessite id="saisies" version='[1.1;]' />
 	<chemin dir='' />
+	<categorie>communication</categorie>
 </plugin>

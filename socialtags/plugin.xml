@@ -31,4 +31,5 @@
     </icon>
 	<necessite id="SPIP" version="[1.9.0;]" />
 	<necessite id='cfg' version='[1.0;]' />
+	<categorie>communication</categorie>
 </plugin>

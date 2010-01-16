@@ -51,5 +51,5 @@
 
 	<necessite id='spip' version='[2.0.10;]' />
 	<necessite id='cfg' version='[1.0;]' />
-
+	<categorie>communication</categorie>
 </plugin>

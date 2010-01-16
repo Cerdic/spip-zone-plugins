@@ -28,12 +28,14 @@ GPL
 	</description>
 
 	<prefix>scrut_prop</prefix>
+	
 	<pipeline>
-	   <nom>insert_head</nom>
-	   <inclure>scrut_prop_pip.php</inclure>
+	   
+		<nom>insert_head</nom>
+		<inclure>scrut_prop_pip.php</inclure>
 	</pipeline>
 	<fonctions>scrut_prop_fonctions.php</fonctions>
 	<necessite id="spip_bonux" />
 
-
+	<categorie>communication</categorie>
 </plugin>

@@ -43,4 +43,5 @@
 	<necessite id="cfg" version="[1.10.5;]" />
 	<necessite id="spip_bonux" version="[1.2;]" />
 	<utilise id="facteur" />
+	<categorie>communication</categorie>
 </plugin>

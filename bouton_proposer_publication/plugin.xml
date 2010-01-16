@@ -17,5 +17,6 @@
 		<action>interface</action>
 		<inclure>bouton_proposer.php</inclure>
 	</pipeline>
+	<categorie>communication</categorie>
 </plugin>
 

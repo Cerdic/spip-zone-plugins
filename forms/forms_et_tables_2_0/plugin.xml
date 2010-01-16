@@ -101,4 +101,5 @@
 		<inclure>forms_pipeline.php</inclure>
 	</pipeline>
 	<chemin dir='' />
+	<categorie>communication</categorie>
 </plugin>

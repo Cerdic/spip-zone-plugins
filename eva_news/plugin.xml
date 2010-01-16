@@ -39,5 +39,5 @@
 		<nom>insert_head</nom>
 		<inclure>evanews_head.php</inclure>
 	</pipeline>
-	  
+	<categorie>communication</categorie>
 </plugin>

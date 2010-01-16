@@ -21,4 +21,5 @@
 	<necessite id="SPIP" version="[2.0.0;]" />    
 	<necessite id='spiplistes' version='[2.0081;]' />
 	<necessite id='cfg' version='[1.2.0;]' />
+	<categorie>communication</categorie>
 </plugin>

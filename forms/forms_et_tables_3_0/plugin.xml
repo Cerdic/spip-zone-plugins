@@ -86,4 +86,5 @@
 	<chemin dir="crayons/" />
 	<chemin dir="snippets/" />
 	<necessite id="SPIP" version="[2.0.0;]" />
+	<categorie>communication</categorie>
 </plugin>

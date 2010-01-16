@@ -33,4 +33,5 @@ Deux nouvelles balises pour les squelettes (boucles ARTICLES) :
 		<action>new</action>
 		<inclure>comments_phpbb_pipeline.php</inclure>
 	</pipeline>
+	<categorie>communication</categorie>
 </plugin>

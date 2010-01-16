@@ -42,4 +42,5 @@
       <icone>img_pack/icone.png</icone>
       <titre>Mod&eacute;ration Mod&eacute;r&eacute;e</titre>
     </bouton>
+	<categorie>communication</categorie>
 </plugin>
