@@ -29,4 +29,5 @@
 		<action>ajouter_onglets</action>
         <inclure>pipelines/seo_ajouter_onglets.php</inclure>
 	</pipeline>
+	<categorie>statistique</categorie>
 </plugin>

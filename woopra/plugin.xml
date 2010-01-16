@@ -22,4 +22,5 @@ _ &#169; 2009 - GPL
 	</pipeline>
 	<chemin dir='' />
 	<necessite id="SPIP" version="[1.9.0;]" />
+	<categorie>statistique</categorie>
 </plugin>

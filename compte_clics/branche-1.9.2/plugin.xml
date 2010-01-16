@@ -34,4 +34,5 @@ _ [Preview on your website->../spip.php?page=clic_demo]
 	<prefix>compteclics</prefix>
 	<install>base/compteclics_init.php</install>
 	<necessite id="SPIP" version="[1.9.2;]" />
+	<categorie>statistique</categorie>
 </plugin>

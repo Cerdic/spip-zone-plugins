@@ -44,5 +44,5 @@
 		<nom>ajouter_boutons</nom>
 		<inclure>inc/geoipcc_pipelines.php</inclure>
 	</pipeline>
-	
+	<categorie>statistique</categorie>
 </plugin>
