@@ -1,6 +1,7 @@
 <plugin>
 	<nom>Motus : groupes de mots par rubrique</nom>
 	<auteur>Matthieu Marcillaud [->magraine.net]</auteur>
+	<icon>images/motus.png</icon>
 	<licence>GNU/GPL</licence>
 	<version>0.1</version>
 	<version_base>0.1</version_base>
