@@ -44,6 +44,7 @@
 		<icone>images/menus-16.png</icone>
 	</bouton>
 	
+	<categorie>navigation</categorie>
 	<necessite id="SPIP" version="[2.0.9;]" />
 	<necessite id="spip_bonux" version="[1.8.3;]" />
 	<utilise id="Z" />

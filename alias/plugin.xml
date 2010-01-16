@@ -10,5 +10,6 @@
 		<nom>affiche_droite</nom>
 		<inclure>alias_pipeline.php</inclure>
 	</pipeline>
+	<categorie>navigation</categorie>
 	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

@@ -13,5 +13,6 @@
 		<inclure>nuage_pipelines_public.php</inclure>
 	</pipeline>
 	<noisette>modeles/nuage.html</noisette>
+	<categorie>navigation</categorie>
 	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

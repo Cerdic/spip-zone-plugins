@@ -38,5 +38,6 @@ Reste &agrave; faire :
 		<action>header_prive</action>
 		<inclure>lienscontenus_pipelines.php</inclure>
 	</pipeline>
+	<categorie>navigation</categorie>
 	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

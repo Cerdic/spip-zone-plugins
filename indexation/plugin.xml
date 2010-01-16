@@ -43,5 +43,6 @@
 	<install>base/indexation_upgrade.php</install>
 
 	<chemin dir='' />
+	<categorie>navigation</categorie>
 	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

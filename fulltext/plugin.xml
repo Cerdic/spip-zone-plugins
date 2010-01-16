@@ -45,4 +45,5 @@ Pour un fonctionnement optimal, il faut installer des programmes compl&eacute;me
 		<nom>taches_generales_cron</nom>
 		<inclure>fulltext_pipelines.php</inclure>
 	</pipeline>
+	<categorie>navigation</categorie>
 </plugin>

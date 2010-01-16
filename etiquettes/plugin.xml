@@ -40,4 +40,5 @@ _ (si vous avez le plugin S&eacute;lecteur g&eacute;n&eacute;rique)
 		<nom>autoriser</nom> 
 		<inclure>inc/etiquettes_autoriser.php</inclure>
 	</pipeline>
+	<categorie>navigation</categorie>
 </plugin>

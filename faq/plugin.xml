@@ -13,4 +13,5 @@
 	<nom>insert_head</nom>
 	<inclure>faq_pipelines.php</inclure>
 </pipeline>
+<categorie>navigation</categorie>
 </plugin>

@@ -62,6 +62,7 @@
 	<inclure>fonctions_menu.php</inclure>
 	</pipeline>
 
+	<categorie>navigation</categorie>
 	<necessite id="SPIP" version="[1.9.2x;)" />
 	<necessite id="cfg" version="[1.14.0;)" />
 	<utilise id="jQuery pour SPIP 1.9.2x" version="1.1.0">

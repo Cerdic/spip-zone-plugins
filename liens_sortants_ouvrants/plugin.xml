@@ -13,4 +13,5 @@
 	<nom>insert_head</nom>
 	<inclure>liens_sortants_ouvrants_pipelines.php</inclure>
 </pipeline>
+<categorie>navigation</categorie>
 </plugin>

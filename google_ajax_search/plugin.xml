@@ -19,5 +19,6 @@ _ {{R&eacute;f&eacute;rence :}} [API Google Search.->http://code.google.com/apis
 		<action>insert_head</action>
 		<inclure>googleajaxsearch_pipeline.php</inclure>
 	</pipeline>	
+	<categorie>navigation</categorie>
 	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

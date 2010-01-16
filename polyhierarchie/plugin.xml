@@ -56,6 +56,7 @@ _ &#169; 2009
 
 
 
+ 	<categorie>navigation</categorie>
  	<necessite id='SPIP' version='[2.0.7;]' />
 	<necessite id='spip_bonux' version='[1.8;]' />
 </plugin>

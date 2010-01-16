@@ -9,5 +9,6 @@
 	</description>
 	<lien>http://www.spip-contrib.net/?article3341</lien>
   <prefix>zgroupemots</prefix>
+	<categorie>navigation</categorie>
 	<necessite id="Z" version="[1.2.1;]" />
 </plugin>

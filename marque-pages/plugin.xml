@@ -58,6 +58,7 @@ N&eacute;cessite le plugin &#201;tiquettes et CFG.
 		<inclure>inc/marquepages_autoriser.php</inclure>
 	</pipeline>
 	
+	<categorie>navigation</categorie>
 	<necessite id="SPIP" version="[2.0.8;]" />
 	<necessite id='cfg' version='[1.10;]' />
 	<necessite id='etiquettes' version='[0.6.5;]' />

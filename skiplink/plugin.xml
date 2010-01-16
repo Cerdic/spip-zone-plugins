@@ -17,5 +17,6 @@
 <nom>affichage_final</nom>
 <inclure>insere_skiplink.php</inclure>
 </pipeline>
+<categorie>navigation</categorie>
 <necessite id='SPIP' version='[1.9.0;]' />
 </plugin>
