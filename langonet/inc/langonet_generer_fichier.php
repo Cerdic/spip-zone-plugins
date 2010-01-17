@@ -83,7 +83,7 @@ $GLOBALS[$GLOBALS[\'idx_lang\']] = array(
 ?>';
 	$ok = ecrire_fichier($f, $texte);
 
-	if (!ok) {
+	if (!$ok) {
 		$resultats['statut'] = false;
 		$resultats['erreur'] = _T('langonet:message_nok_ecriture_fichier', 
 								array('langue' => $langue_cible, 'module' => $module));
