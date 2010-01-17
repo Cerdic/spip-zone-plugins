@@ -19,7 +19,13 @@ if(!$GLOBALS['cs_init']) {
 			@include(_DIR_CS_TMP.'mes_fonctions.php');
 			//if(defined('_LOG_CS')) cs_log("FIN INCL : "._DIR_CS_TMP.'mes_fonctions.php');
 		} // else cs_log(' FIN : cout_fonctions deja inclus');
-	} else cs_log('ESSAI : cout_fonctions, mais cout_options n\'est pas inclus');
-} else cs_log('ESSAI : cout_fonctions, mais initialisation en cours');
+	} else {
+		$cs_log = function_exists('cs_log') ? 'cs_log' : 'spip_log';
+		$cs_log('ESSAI : cout_fonctions, mais cout_options n\'est pas inclus');
+	}
+} else {
+	$cs_log = function_exists('cs_log') ? 'cs_log' : 'spip_log';
+	$cs_log('ESSAI : cout_fonctions, mais initialisation en cours');
+}
 
 ?>
