@@ -227,7 +227,7 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 	// remplacement des constantes qui restent de forme @_CS_XXXX@
 	if(strpos($res,'@_CS')!==false) 
 		$res = preg_replace_callback(',@(_CS_[a-zA-Z0-9_]+)@,', 
-			create_function('$matches','return defined($matches[1])?constant($matches[1]):"";'), $res);
+			create_function('$matches','return defined($matches[1])?constant($matches[1]):_T(\'couteauprive:variable_vide\');'), $res);
 	// remplacement des liens vers un autre outil
 	if(strpos($res,'[.->')!==false) 
 		$res = preg_replace_callback(',\[\.->([a-zA-Z_][a-zA-Z0-9_-]*)\],', 'description_outil_liens_callback', $res);

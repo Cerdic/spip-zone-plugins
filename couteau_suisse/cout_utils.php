@@ -95,8 +95,9 @@ function add_variable($tableau) {
 	$nom = $tableau['nom'];
 	if(isset($tableau['check'])) $tableau['format'] = _format_NOMBRE;
 	// code '%s' par defaut si aucun code n'est defini
-	$test=false; 
-	foreach(array_keys($tableau) as $key) if($test=preg_match(',^code(:(.*))?$,', $key)) break;
+	$test=isset($tableau['code']); 
+	if(!$test) foreach(array_keys($tableau) as $key)
+		if($test=(strncmp('code:', $key, 5)==0)) break;
 	if(!$test) $tableau['code'] = '%s';
 	// enregistrement
 	$cs_variables[$nom] = $tableau;
@@ -231,17 +232,18 @@ cs_log("$nb pipeline(s) actif(s) : strlen=".strlen($controle));
 
 // est-ce que $pipe est un pipeline ?
 function is_pipeline_outil($pipe, &$set_pipe) {
-	if($ok = preg_match(',^pipeline:(.*?)$,', $pipe, $t)) $set_pipe = trim($t[1]);
+	if($ok=(strncmp('pipeline:', $pipe, 9)==0)) $set_pipe = trim(substr($pipe, 9));
 	return $ok;
 }
 // est-ce que $pipe est un pipeline inline?
 function is_pipeline_outil_inline($pipe, &$set_pipe) {
-		if($ok = preg_match(',^pipelinecode:(.*?)$,', $pipe, $t)) $set_pipe = trim($t[1]);
+	if($ok=(strncmp('pipelinecode:', $pipe, 13)==0)) $toto = trim(substr($pipe, 13));
 	return $ok;
 }
 
 // est-ce que $traitement est un traitement ?
 function is_traitements_outil($traitement, $fonction, &$set_traitements_utilises) {
+	if(strncmp('traitement', $traitement, 10)!=0) return false;
 	if($ok = preg_match(',^traitement:([A-Z_]+)/?([a-z]+)?:(pre|post)_([a-zA-Z0-9_-]+)$,', $traitement, $t)) {
 		if(!strlen($t[2])) $t[2] = 0;
 		$set_traitements_utilises[$t[1]][$t[2]][$t[4]][$t[3]][] = $fonction;
