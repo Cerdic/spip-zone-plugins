@@ -128,7 +128,8 @@ function sommaire_d_article_rempl($texte0, $sommaire_seul=false) {
 	$texte = sommaire_nettoyer_raccourcis($texte0);
 	// on masque les onglets s'il y en a
 	if(defined('_onglets_FIN'))
-		$texte = preg_replace_callback(',<div class="onglets_bloc_initial.*'._onglets_FIN.',Ums', 'sommaire_echappe_onglets_callback', $texte);
+		$texte = preg_replace_callback(',<div class="onglets_bloc_initial.*'._onglets_FIN.',Ums',
+			create_function('$matches','return cs_code_echappement($matches[0], \'SOMM\');'), $texte);
 	// et la, on y va...
 	$sommaire = ''; $i = 1; $nbh3 = 0;
 	// reinitialisation de l'index interne de la fonction
@@ -155,13 +156,9 @@ function sommaire_d_article_rempl($texte0, $sommaire_seul=false) {
 	// si on ne veut que le sommaire, on renvoie le sommaire
 	// sinon, on n'insere ce sommaire en tete de texte que si la balise #CS_SOMMAIRE n'est pas activee
 	if($sommaire_seul) return $sommaire;
+	if(defined('_onglets_FIN')) $texte = echappe_retour($texte, 'SOMM');
 	if(defined('_sommaire_BALISE')) return $texte;
 	return _sommaire_REM.$sommaire._sommaire_REM.$texte;
-}
-
-// fonction de callback qui echappe les onglets
-function sommaire_echappe_onglets_callback($matches) {
- return cs_code_echappement($matches[0], 'CS');
 }
 
 // fonction appelee par le traitement de #TEXTE/articles

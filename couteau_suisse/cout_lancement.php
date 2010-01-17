@@ -147,9 +147,12 @@ function cs_block($texte) {
 
 // fonction de tracage des balises <html></html>
 // SPIP echappe ces balises dans les pipelines. Les traitements de balises ne les voient donc jamais...
+// Note : les modeles sont egalement echappes
 function cs_trace_balises_html(&$flux) {
-	if(strpos($flux, 'base64')!==false)
+	if(strpos($flux, '<span class="base64"')!==false)
 		$flux = preg_replace(',<span class="base64"[^>]+></span>,', _CS_HTMLA.'$0'._CS_HTMLB, $flux);
+	if(strpos($flux, '<div class="base64"')!==false)
+		$flux = preg_replace(',<div class="base64"[^>]+></div>,', _CS_HTMLA.'$0'._CS_HTMLB, $flux);
 }
 // fonction callback pour cs_echappe_balises
 function cs_echappe_html_callback($matches) {
@@ -172,7 +175,6 @@ function cs_echappe_balises($balises, $fonction, $texte, $arg=NULL){
 	// trace d'anciennes balises <html></html> ?
 	if(strpos($texte, _CS_HTMLA)!==false)
 		$texte = preg_replace_callback(','._CS_HTMLA.'(.*?)(?='._CS_HTMLB.'),s', 'cs_echappe_html_callback', $texte);
-
 	// protection du texte
 	if($balises!==false) {
 		if(!strlen($balises)) $balises = 'html|code|cadre|frame|script';
@@ -182,11 +184,11 @@ function cs_echappe_balises($balises, $fonction, $texte, $arg=NULL){
 	}
 	// retour du texte simplement protege
 	if ($fonction===false) return $texte;
-	// retour du texte transforme par $fonction puis deprotege
-	$texte = echappe_retour($arg==NULL?$fonction($texte):$fonction($texte, $arg), 'CS');
+	// transformation par $fonction
+	$texte = $arg==NULL?$fonction($texte):$fonction($texte, $arg);
 	// deprotection en abime, notamment des modeles...
-	if(strpos($texte, 'base64CS')!==false)
-		return echappe_retour($texte, 'CS');
+	if(strpos($texte, 'base64CS')!==false) $texte = echappe_retour($texte, 'CS');
+	if(strpos($texte, 'base64CS')!==false) return echappe_retour($texte, 'CS');
 	return $texte;
 }
 
