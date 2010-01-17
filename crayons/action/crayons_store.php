@@ -244,14 +244,23 @@ function crayons_store_set_modifs($modifs, $return) {
 	foreach ($updates as $type => $idschamps)
 	foreach ($idschamps as $fun => $ids) {
 		foreach ($ids as $id => $champsvaleurs) {
-	        // Enregistrer dans la base
-	        // $updok = ... quand on aura un retour
-	        // -- revisions_articles($id_article, $c) --
-			spip_log("$fun($id ...)", 'crayons');
-			$updok = $fun($id, $champsvaleurs['chval'], $type, $champsvaleurs['wdg']);
-			//Renvoyer erreur si update base distante echoue, on ne regarde pas les updates base local car ils ne revoient rien
-			list($distant,$table) = distant_table($type);
-			$distant AND !$updok ? $return['$erreur'] = "$type: " . _U('crayons:update_impossible'):pass;
+			/* cas particulier du logo dans un crayon complexe :
+			   ce n'est pas un champ de la table */
+			if (isset($champsvaleurs['chval']['logo'])) {
+				spip_log('revision logo', 'crayons');
+				logo_revision($id, $champsvaleurs['chval'], $type, $champsvaleurs['wdg']);
+				unset($champsvaleurs['chval']['logo']);
+			}
+
+			if (count($champsvaleurs['chval'])) {
+				// -- revisions_articles($id_article, $c) --
+				spip_log("$fun($id ...)", 'crayons');
+				$updok = $fun($id, $champsvaleurs['chval'], $type, $champsvaleurs['wdg']);
+				// Renvoyer erreur si update base distante echoue, on ne regarde pas les updates base local car ils ne renvoient rien
+				list($distant,$table) = distant_table($type);
+				if ($distant AND !$updok)
+					$return['$erreur'] = "$type: " . _U('crayons:update_impossible');
+			}
 	    }
 	}
 
