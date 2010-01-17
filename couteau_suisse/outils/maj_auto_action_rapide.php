@@ -6,7 +6,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
 include_spip('inc/actions');
 
 define('_MAJ_SVN_DEBUT', 'svn://zone.spip.org/spip-zone/');
-define('_MAJ_SVN_TRAC', 'svn://trac.rezo.net/spip-zone/');
+define('_MAJ_SVN_TRAC', 'svn://trac.rezo.net/spip-zone/'); // ancienne URL
 define('_MAJ_LOG_DEBUT', 'http://zone.spip.org/trac/spip-zone/log/');
 define('_MAJ_LOG_FIN', '?format=changelog');
 define('_MAJ_ZIP', 'http://files.spip.org/spip-zone/');
@@ -122,8 +122,9 @@ function plugin_get_infos_maj($p, $force = false) {
 		?intval($regs[1]):version_svn_courante(_DIR_PLUGINS.$p);
 	if($infos['svn'] = $rev_local<0) { 
 		// fichier SVN
-		if (lire_fichier(_DIR_PLUGINS.$p.'/.svn/entries', $svn) && preg_match(',('.preg_quote(_MAJ_SVN_TRAC).'[^\n\r]+),ms', $svn, $regs)) {
-			$url_origine = str_replace(_MAJ_SVN_TRAC, _MAJ_LOG_DEBUT, $regs[1]);
+		if (lire_fichier(_DIR_PLUGINS.$p.'/.svn/entries', $svn) 
+				&& preg_match(',(?:'.preg_quote(_MAJ_SVN_TRAC).'|'.preg_quote(_MAJ_SVN_DEBUT).')[^\n\r]+,ms', $svn, $regs)) {
+			$url_origine = str_replace(array(_MAJ_SVN_TRAC,_MAJ_SVN_DEBUT), _MAJ_LOG_DEBUT, $regs[0]);
 			// prise en compte du recent demenagement de la Zone...
 			$url_origine = preg_replace(',/_plugins_/_(?:stable|dev|test)_/,','/_plugins_/', $url_origine);
 		}
