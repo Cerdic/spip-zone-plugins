@@ -23,5 +23,6 @@ _ Avec ou sans articles
 		<inclure>duplicator_pipeline.php</inclure>
 	</pipeline>
 	
+    <categorie>edition</categorie> 
 	<necessite id="SPIP" version='[2.0.0;]' />
 </plugin>
