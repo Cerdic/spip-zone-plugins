@@ -237,7 +237,7 @@ function is_pipeline_outil($pipe, &$set_pipe) {
 }
 // est-ce que $pipe est un pipeline inline?
 function is_pipeline_outil_inline($pipe, &$set_pipe) {
-	if($ok=(strncmp('pipelinecode:', $pipe, 13)==0)) $toto = trim(substr($pipe, 13));
+	if($ok=(strncmp('pipelinecode:', $pipe, 13)==0)) $set_pipe = trim(substr($pipe, 13));
 	return $ok;
 }
 
