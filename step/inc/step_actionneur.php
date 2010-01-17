@@ -9,7 +9,7 @@ class Actionneur {
 
 	// loggue t'on ?
 	var $log = false;
-	
+
 	// actions au debut (avant analyse)
 	var $start = array();
 
@@ -20,12 +20,12 @@ class Actionneur {
 		'on' => array(),
 		'neutre' => array(),
 	);
-		
+
 	// actions a la fin (apres analyse, et dans l'ordre)
 	var $end = array();  // a faire...
 	var $done = array(); // faites
 	var $work = array(); // en cours
-	
+
 	function Actionneur(){
 		include_spip('inc/step_decideur');
 		$this->decideur = new Decideur();
@@ -38,7 +38,7 @@ class Actionneur {
 			spip_log($quoi,'actionneur');
 		}
 	}
-	
+
 	function clear() {
 		$this->middle = array(
 			'off' => array(),
@@ -50,7 +50,7 @@ class Actionneur {
 		$this->done = array();
 		$this->work = array();
 	}
-	
+
 	function ajouter_actions($todo) {
 		foreach ($todo as $id => $action) {
 			$this->start[$id] = $action;
@@ -78,8 +78,8 @@ class Actionneur {
 		}
 		return true;
 	}
-	
-	
+
+
 	function ordonner_actions() {
 		// il faut deja definir quels sont des
 		// actions graduellement realisables.
@@ -114,7 +114,7 @@ class Actionneur {
 					break;
 				case 'upon':
 					$this->on($i, $action);
-					break;				
+					break;
 				case 'off':
 				case 'stop':
 					$this->off($i, $action);
@@ -137,7 +137,7 @@ class Actionneur {
 	// a chaque fois qu'une action arrive,
 	// on compare avec celles deja presentes
 	// pour savoir si on doit la traiter avant ou apres
-	
+
 	function on($info, $action) {
 		$info['todo'] = $action;
 		$p = $info['p'];
@@ -161,7 +161,7 @@ class Actionneur {
 			}
 		}
 		foreach ($this->middle['on'] as $inf) 	{$out[] = $inf['p'];}
-		
+
 		if (!$in) {
 			// pas de dependance, on le met en premier !
 			$this->log("- placer $p tout en haut");
@@ -186,9 +186,9 @@ class Actionneur {
 		}
 		unset($diff, $in, $out);
 	}
-	
 
-	
+
+
 	function neutre($info, $action) {
 		$info['todo'] = $action;
 		$this->log("NEUTRE:  $info[p] $action");
@@ -211,7 +211,7 @@ class Actionneur {
 			}
 		}
 		foreach ($this->middle['off'] as $inf) 	{$out[] = $inf['p'];}
-		
+
 		if (!$in) {
 			// pas de dependance, on le met en dernier !
 				$this->log("- placer $p tout en bas");
@@ -246,7 +246,7 @@ class Actionneur {
 			}
 			foreach ($this->end as $i) {
 				$affiche .= "\t<li>$i[todo] de «" . typo($i['n']) . "» ($i[v])</li>\n";
-			}	
+			}
 			$affiche .= "</ul>\n";
 		}
 		return $affiche;
@@ -338,19 +338,10 @@ class Actionneur {
 				if ($dirs = $this->get_paquet_id($maj)) {
 					// Si le plugin a jour n'est pas dans le meme dossier que l'ancien...
 					// il faut :
-					// - activer le plugin sur son nouvel emplacement (uniquement si l'ancien est actif)... 
+					// - activer le plugin sur son nouvel emplacement (uniquement si l'ancien est actif)...
 					// - supprimer l'ancien (si faisable)
 					if (($dirs['dossier'] . '/') != $i['dossier']) {
 						if ($i['actif'] == 'oui') {
-							// dans ce cas precis, il faut absolument que tous les fichiers de cache
-							// soient inclus avant modification, sinon un appel ulterieur risquerait
-							// de charger des fichiers dejas charges par un autre !
-							// C'est surtout le ficher de fonction le probleme (options et pipelines
-							// sont normalement deja charges).
-							if (@is_readable(_CACHE_PLUGINS_OPT)) {include_once(_CACHE_PLUGINS_OPT);}
-							if (@is_readable(_CACHE_PLUGINS_FCT)) {include_once(_CACHE_PLUGINS_FCT);}
-							if (@is_readable(_CACHE_PIPELINES))   {include_once(_CACHE_PIPELINES);}
-							
 							$this->activer_plugin_dossier($dirs['dossier'], $maj);
 						}
 
@@ -374,8 +365,8 @@ class Actionneur {
 		$i = sql_fetsel('*','spip_plugins','id_plugin='.sql_quote($info['i']));
 		if ($dirs = $this->do_up($info)) {
 			$this->activer_plugin_dossier($dirs['dossier'], $i, '_DIR_PLUGINS');
-			return true;			
-		}	
+			return true;
+		}
 		return false;
 	}
 
@@ -417,14 +408,14 @@ class Actionneur {
 					return true;
 				}
 				// echec de la desinstallation
-			} 
-			// pas de desinstallation possible !	
+			}
+			// pas de desinstallation possible !
 		}
 		$this->actualiser_plugin_interessants();
 		return false;
 	}
 
-	
+
 	// effacer les fichiers d'un plugin
 	function do_kill($info) {
 		// on reverifie que c'est bien un plugin auto !
@@ -440,7 +431,7 @@ class Actionneur {
 				return true;
 			}
 		}
-			
+
 		return false;
 	}
 
@@ -457,13 +448,13 @@ class Actionneur {
 			$dest = $files[0]['stored_filename'];
 			$dest = rtrim($dest, '/');
 			$dir = _DIR_LIB . $dest;
-					
+
 			$this->log("Suppression des anciens fichiers de $dir");
 			$this->remove_older_files($dir, $files);
 
 			return true;
 		}
-		
+
 		return false;
 	}
 
@@ -474,7 +465,7 @@ class Actionneur {
 			$this->log("Pas de _DIR_PLUGINS_AUTO defini !");
 			return false;
 		}
-		
+
 		$i = sql_fetsel('*','spip_plugins','id_plugin='.sql_quote($info['i']));
 		if ($i['paquet']) {
 			if ($adresse = sql_getfetsel('adresse','spip_zones_plugins','id_zone='.sql_quote($i['id_zone']))) {
@@ -491,28 +482,53 @@ class Actionneur {
 					// ne sert pas a grand chose... a ameliorer
 					return true;
 				}
-			}	
+			}
 		}
-		
+
 		return false;
 	}
 
 
 
+	// lancer l'installation d'un plugin
+	function do_install($info) {
+		include_spip('inc/plugin');
+		$dossier = $info['dossier'];
+		$this->installe_plugin($dossier);
+		return true;
+	}
+
+
 	// adresse du dossier, et row SQL du plugin en question
 	function activer_plugin_dossier($dossier, $i, $constante="") {
 		include_spip('inc/plugin');
+
+		//il faut absolument que tous les fichiers de cache
+		// soient inclus avant modification, sinon un appel ulterieur risquerait
+		// de charger des fichiers deja charges par un autre !
+		// C'est surtout le ficher de fonction le probleme (options et pipelines
+		// sont normalement deja charges).
+		if (@is_readable(_CACHE_PLUGINS_OPT)) {include_once(_CACHE_PLUGINS_OPT);}
+		if (@is_readable(_CACHE_PLUGINS_FCT)) {include_once(_CACHE_PLUGINS_FCT);}
+		if (@is_readable(_CACHE_PIPELINES))   {include_once(_CACHE_PIPELINES);}
+
 		ecrire_plugin_actifs(array($dossier), false, 'ajoute');
 		$installe = $i['version_base'] ? 'oui' : 'non';
 		if ($installe == 'oui') {
-			$this->installe_plugin($dossier);
+			// installer le plugin au prochain tour
+			$new_action = array_merge($this->work, array(
+				'todo'=>'install',
+				'dossier'=>$dossier,
+			));
+			array_unshift($this->end, $new_action);
+			#$this->installe_plugin($dossier);
 		}
 
 		$this->ajouter_plugin_interessants_meta($dossier);
 		$this->actualiser_plugin_interessants();
 	}
-	
- 
+
+
 	// actualiser les plugins interessants
 	function actualiser_plugin_interessants() {
 		// Chaque fois que l'on valide des plugins,
@@ -535,9 +551,9 @@ class Actionneur {
 				sql_updateq('spip_plugins',array('recent'=>0),'dossier='.sql_quote($p));
 			}
 		}
-		
+
 		$plugs = sql_select('dossier','spip_plugins','actif='.sql_quote('oui'));
-		
+
 		while ($plug = sql_fetch($plugs)) {
 			$dossiers[$plug['dossier']] = true;
 			$plugins_interessants[ rtrim($plug['dossier'],'/') ] = 30; // score initial
@@ -555,14 +571,14 @@ class Actionneur {
 			$plugins_interessants = array();
 		}
 		$plugins_interessants[$dir] = 30;
-		ecrire_meta('plugins_interessants', serialize($plugins_interessants));		
+		ecrire_meta('plugins_interessants', serialize($plugins_interessants));
 	}
-	
+
 
 	function installe_plugin($dossier){
 		$infos = plugin_get_infos($dossier);
 		if (isset($infos['install'])) {
-			if (installe_un_plugin($plug,$infos)) {
+			if (installe_un_plugin($dossier, $infos)) {
 				$meta_plug_installes = @unserialize($GLOBALS['meta']['plugin_installes']);
 				if (!$meta_plug_installes) $meta_plug_installes=array();
 				$meta_plug_installes[] = $dossier;
@@ -602,7 +618,7 @@ class Actionneur {
 			$i = $id_or_row;
 		}
 		unset($id_or_row);
-		
+
 		if ($i['paquet']) {
 			if ($adresse = sql_getfetsel('adresse','spip_zones_plugins','id_zone='.sql_quote($i['id_zone']))) {
 				$adresse = dirname($adresse);
@@ -612,7 +628,7 @@ class Actionneur {
 					$dest = $files[0]['stored_filename'];
 					$dest = 'auto/' . rtrim($dest, '/');
 					$dir = _DIR_PLUGINS . $dest;
-					
+
 					// la c'est ennuyant : il faut supprimer les vieux fichiers...
 					$this->log("Suppression des anciens fichiers de $dir");
 					$this->remove_older_files($dir, $files);
@@ -622,17 +638,17 @@ class Actionneur {
 						'dossier'=>$dest,
 					);
 				}
-			}	
+			}
 		}
 		return false;
 	}
-	
+
 
 	function get_zip($zip, $dir_dest) {
 
 		# si premiere lecture, destination temporaire des fichiers
 		$tmp = sous_repertoire(_DIR_CACHE, 'chargeur');
-		
+
 		# $extract = sous_repertoire($tmp, 'extract');
 		$extract = $dir_dest;
 
@@ -647,7 +663,7 @@ class Actionneur {
 		include_spip('inc/pclzip');
 		$uzip = new PclZip($fichier);
 
-		// On extrait, mais dans tmp/ 
+		// On extrait, mais dans tmp/
 		$ok = $uzip->extract(
 			PCLZIP_OPT_PATH,
 			$extract,
@@ -668,7 +684,7 @@ class Actionneur {
 		// ainsi que leur localisation et quelques infos.
 		// [0] est le nom du premier repertoire
 		/*
-			  0 => 
+			  0 =>
 			  array (
 				'filename' => '../plugins/auto/aa/',
 				'stored_filename' => 'aa/',
@@ -708,10 +724,10 @@ class Actionneur {
 			if ($item == '.' || $item == '..') continue;
 			$this->remove_older_files($dir . "/" . $item);
 		}
-		
+
 		return true;
 	}
-	
+
 }
 
 

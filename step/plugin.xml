@@ -1,13 +1,13 @@
 <plugin>
 	<nom>Step</nom>
-	<shortdesc>Système de t&#233;l&#233;chargement de plugins</shortdesc>
+	<shortdesc>Syst&egrave;me de t&#233;l&#233;chargement de plugins</shortdesc>
 	<auteur>
 	Matthieu Marcillaud
 _ &#169; 2008 2009
 	</auteur>
 	<licence>GPL</licence>
 	<lien></lien>
-	<version>0.9.2</version>
+	<version>0.9.3</version>
 	<version_base>0.4</version_base>
 	<install>base/step_install.php</install>
 

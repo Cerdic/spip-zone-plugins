@@ -5,13 +5,15 @@ include_spip('inc/step');
 include_spip('inc/step_presentation');
 
 function formulaires_gerer_plugins_charger_dist(){
-	
+
 	// mettre a jour les plugins locaux si necessaire...
 	if (!_request('traitement_fait')
 	or  _request('update_local')) {
 		// pas le meme nombre : on met a jour
 		include_spip('inc/step');
 		if (!_request('update_local')) {
+			include_spip('inc/plugin');
+			verif_plugin();
 			$nb = sql_countsel('spip_plugins',array('actif=' . sql_quote('oui')));
 			$nb2 = count(step_liste_plugin_actifs());
 			$do = $nb != $nb2;
@@ -46,7 +48,7 @@ function formulaires_gerer_plugins_charger_dist(){
 function formulaires_gerer_plugins_verifier_dist(){
 	set_request('traitement_fait', 1);
 	$erreurs = array();
-	
+
 	$add = _request('add');
 	$_todo = _request('_todo');
 	$_todo = @unserialize($_todo);
@@ -76,9 +78,9 @@ function formulaires_gerer_plugins_verifier_dist(){
 				// sinon : souci... la demande ne peut pas se realiser.
 			}
 		}
-		
+
 	}
-	
+
 	// on demande a executer les actions demandees
 	if ($verif) {
 
@@ -86,7 +88,7 @@ function formulaires_gerer_plugins_verifier_dist(){
 		$decideur = new Decideur;
 		$decideur->log = true;
 		$decideur->verifier_dependances($_todo);
-		
+
 		if (!$decideur->ok) {
 			$erreurs['message_erreur'] = "c'est pas ok !";
 			$erreurs['decideur_erreurs'] = array();
@@ -100,13 +102,13 @@ function formulaires_gerer_plugins_verifier_dist(){
 		$erreurs['decideur_propositions'] 	= $decideur->presenter_actions('changes');
 		$erreurs['decideur_demandes'] 		= $decideur->presenter_actions('ask');
 		$erreurs['decideur_actions'] 		= $decideur->presenter_actions('todo');
-		
+
 		// c'est pas vraiment des erreurs... a suivre...
 		$_todo = array();
 		foreach ($decideur->todo as $info) {
 			$_todo[$info['i']] = $info['todo'];
-		}	
-			
+		}
+
 	}
 
 	if (_request('update_local')) set_request('update_local', 1);
