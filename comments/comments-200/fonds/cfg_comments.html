@@ -44,11 +44,11 @@
 		<ul>
 			<li class="comments_permalink">
 				<label for="permalink">Apparence du lien permanent (permalink) vers le commentaire</label>
-                <select name="permalink" id="permalink">
-                    <option value="picto"[(#CONFIG{comments/permalink}|=={picto}|oui) selected="selected"]>Picto</option>
-                    <option value="compteur"[(#CONFIG{comments/permalink}|=={compteur}|oui) selected="selected"]>Compteur</option>
-                    <option value="diese"[(#CONFIG{comments/permalink}|=={diese}|oui) selected="selected"]>#</option>
-                    <option value="aucun"[(#CONFIG{comments/permalink}|=={aucun}|oui) selected="selected"]>Aucun</option>
+                <select name="permalink" id="permalink" style="width: 12em;">
+                    <option value="picto"[(#ENV{permalink,diese}|=={picto}|oui) selected="selected"]>Picto</option>
+                    <option value="compteur"[(#ENV{permalink,diese}|=={compteur}|oui) selected="selected"]>Compteur (1.)</option>
+                    <option value="diese"[(#ENV{permalink,diese}|=={diese}|oui) selected="selected"]>Di&egrave;se (#)</option>
+                    <option value="aucun"[(#ENV{permalink,diese}|=={aucun}|oui) selected="selected"]>Aucun</option>
                 </select>
 			</li>
 		</ul>

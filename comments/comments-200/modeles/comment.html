@@ -4,7 +4,15 @@
     <a href="#forum#ID_FORUM" name="forum#ID_FORUM" id="forum#ID_FORUM"></a>
     <p class="comment-meta">
     	[(#CONFIG{comments/permalink}|=={aucun}|non)
-        <a rel="self bookmark" href="#forum#ID_FORUM" title="<:comments:permalink_pour:> <:commentaire:> #ID_FORUM" class="permalink">[(#CONFIG{comments/permalink}|=={picto}|oui)[<img src="(#CHEMIN{../img/permalink.gif})" alt="<:permalink:> #ID_FORUM" />]][(#CONFIG{comments/permalink}|=={compteur}|oui)[(#ENV{compteur}).]][(#CONFIG{comments/permalink}|=={diese}|oui)#]</a>
+        <a rel="self bookmark" href="#forum#ID_FORUM" title="<:comments:permalink_pour:> <:commentaire:> #ID_FORUM" class="permalink">[(#CONFIG{comments/permalink}|=={picto}|?{
+        	[<img src="(#CHEMIN{../img/permalink.gif})" alt="#" />]
+        ,
+            [(#CONFIG{comments/permalink}|=={compteur}|?{
+            	[(#ENV{compteur}).]
+            ,
+            	#
+            })]
+        })]</a>
 		]<BOUCLE_auteur(AUTEURS){tout}{id_auteur}>
         [<abbr class="dtreviewed"[ title="(#DATE|date_iso)"]><:comments:le_date_jour:> (#DATE|affdate_jourcourt)[ <:comments:a_date_heure:>&nbsp;(#DATE|heures)][:(#DATE|minutes)]</abbr>][<span class="item reviewer vcard">, <:par_auteur:> <a rel="nofollow" href="#URL_AUTEUR" class="url spip_in"><strong class="fn n">(#NOM)</strong></a>[(#PLUGIN{gravatar}|oui)[ (#MODELE{gravatar}|image_reduire{32})]]</span>]
         </BOUCLE_auteur>
