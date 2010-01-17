@@ -165,6 +165,7 @@ class Crayon {
 
 	// calcul du md5 associe aux valeurs
 	function md5() {
+		#spip_log($this->texts, 'crayons');
 		return md5(serialize($this->texts));
 	}
 

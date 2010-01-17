@@ -24,7 +24,8 @@ function post_crayons() {
             	if ($_FILES['content_'.$crayon.'_'.$field]['size']>0)
             		$content[$field] = $_FILES['content_'.$crayon.'_'.$field];
             	else
-            		unset($name);
+            		$content[$field] = false;
+            		# cf. valeur passee dans crayon->md5() : false ou filemtime() du logo
             } else {
             	$content[$field] = $_POST['content_'.$crayon.'_'.$field];
             	// Compatibilite charset autre que utf8 ; en effet on recoit
@@ -251,7 +252,6 @@ function crayons_store_set_modifs($modifs, $return) {
 				logo_revision($id, $champsvaleurs['chval'], $type, $champsvaleurs['wdg']);
 				unset($champsvaleurs['chval']['logo']);
 			}
-
 			if (count($champsvaleurs['chval'])) {
 				// -- revisions_articles($id_article, $c) --
 				spip_log("$fun($id ...)", 'crayons');
