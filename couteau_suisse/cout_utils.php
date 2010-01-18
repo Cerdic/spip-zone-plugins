@@ -431,8 +431,7 @@ span.cs_BTg {font-size:140%; padding:0 0.3em;}';
 		unset($temp_js_html);
 	}
 	// concatenation des css inline, js inline et filtres trouves
-	if(count($temp_css)) {
-		$temp_css = join("\n", $temp_css);
+	if(strlen(trim($temp_css = join("\n", $temp_css)))) {
 		if(function_exists('compacte_css')) $temp_css = compacte_css($temp_css);
 		$temp = array("<style type=\"text/css\">\n$temp_css\n</style>");
 		unset($temp_css);
