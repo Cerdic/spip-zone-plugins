@@ -1,22 +1,20 @@
 #HTTP_HEADER{content-type:text/calendar; charset=#CHARSET}
 BEGIN:VCALENDAR
+VERSION:2.0
 CALSCALE:GREGORIAN
+PRODID:-//SPIP/Plugin #PLUGIN{AGENDA,nom}//NONSGML v1.0//FR
 X-WR-CALNAME;VALUE=TEXT:<BOUCLE_article (ARTICLES) {id_article}>[(#TITRE|filtrer_ical)] </BOUCLE_article>[[(#NOM_SITE_SPIP|filtrer_ical)]]
 X-WR-RELCALID:#URL_SITE_SPIP
-
-<BOUCLE_evemnt (EVENEMENTS) {id_article ?}>
-BEGIN:VEVENT
-SUMMARY:[(#TITRE|filtrer_ical|textebrut)]
+<BOUCLE_evemnt (EVENEMENTS) {id_article ?}>BEGIN:VEVENT
+SUMMARY:[(#TITRE|textebrut|filtrer_ical)]
 UID:evenement#ID_EVENEMENT @ [(#URL_SITE_SPIP|filtrer_ical)]
 DTSTAMP:[(#DATE_DEBUT|date_ical)][(#HORAIRE|=={oui}|?{[
 DTSTART:(#DATE_DEBUT|date_ical)][
 DTEND:(#DATE_FIN|date_ical)],[
 DTSTART;VALUE=DATE:(#DATE_DEBUT|affdate{Ymd})][
 DTEND;VALUE=DATE:(#DATE_FIN|agenda_jourdecal{1,Ymd})]})]
-<B_article2>CATEGORIES:<BOUCLE_article2 (ARTICLES) {id_article=#ID_ARTICLE}>[(#TITRE|filtrer_ical|textebrut)]</BOUCLE_article2>
-DESCRIPTION:[(#DESCRIPTIF|filtrer_ical|textebrut)]\n[<:lieu:>(#LIEU|filtrer_ical|textebrut)]
+<B_article2>CATEGORIES:<BOUCLE_article2 (ARTICLES) {id_article=#ID_ARTICLE}>[(#TITRE|textebrut|filtrer_ical)]</BOUCLE_article2>
+DESCRIPTION:[(#DESCRIPTIF|textebrut|filtrer_ical)]\n[<:lieu:>: (#LIEU|textebrut|filtrer_ical)]
 STATUS:CONFIRMED
 END:VEVENT
-</BOUCLE_evemnt>
-
-END:VCALENDAR
+</BOUCLE_evemnt>END:VCALENDAR
