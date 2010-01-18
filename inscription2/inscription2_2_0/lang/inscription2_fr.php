@@ -216,7 +216,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'prenom' => 'Pr&eacute;nom',
 	'probleme_email' => 'Probl&egrave;me de mail&nbsp;: l\'email d\'activation ne peut pas &ecirc;tre envoy&eacute;.',
 	'profession' => 'Profession',
-	'profil_droits_insuffisants' => 'Desol&eacute; vous n\'avez pas le droit de modifier cet auteur<br/>',
+	'profil_droits_insuffisants' => 'Desol&eacute; vous n\'avez pas le droit de modifier cet auteur<br />',
 	'profil_modifie_ok' => 'Les modifications de votre profil ont bien &eacute;t&eacute; prises en compte.',
 	'publication' => 'Publication',
 
