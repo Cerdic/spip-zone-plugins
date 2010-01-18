@@ -66,7 +66,7 @@ add_outil( array(
 	'categorie' => 'public',
 ));
 
-add_variables( array(
+add_variable( array(
 	'nom' => 'paragrapher',
 	'format' => _format_NOMBRE,
 	'radio' => array(1 => 'item_oui', 0 => 'item_non', -1 => 'couteauprive:par_defaut'),
@@ -85,7 +85,7 @@ add_outil( array(
 	'categorie' => 'public',
 ));
 
-add_variables( array(
+add_variable( array(
 	'nom' => 'webmestres',
 	'format' => _format_CHAINE,
 	'defaut' => '"1"',
@@ -1170,8 +1170,8 @@ if(preg_match(',^([^.]*)_config$,', basename($f, '.php'),$regs)){
 			$cs_temp['nom'] = "<i>$cs_temp[nom]</i>";
 		add_outil($cs_temp);
 	}
-	if(function_exists($cs_temp='add_variable_'.$regs[1])) add_variable($cs_temp());
-	if(function_exists($cs_temp='add_variables_'.$regs[1])) add_variables($cs_temp());
+	if(function_exists($cs_temp=$regs[1].'_add_variable')) add_variable($cs_temp());
+	if(function_exists($cs_temp.='s')) foreach($cs_temp() as $v) add_variable($v);
 }
 
 // Nettoyage

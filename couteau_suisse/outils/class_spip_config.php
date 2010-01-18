@@ -10,19 +10,18 @@ function class_spip_add_outil() { return array(
 	'code:fonctions'=>"%%ouvre_ref%%%%ferme_ref%%%%ouvre_note%%%%ferme_note%%",
 	'categorie' => 'public',
 	'description' => 
-	// avant SPIP 1.93 : <hr/> seulement
+	// avant SPIP 2.0 : <hr/> seulement
 	// et apres : <hr/> + puce
 		(!defined('_SPIP19300')?'<:class_spip:1:>':'<:class_spip:2:>').
 	// des SPIP 1.91 : les intertitres
 		'<:class_spip:3:>'.
-	// des SPIP 1.93 : les italiques, les gras + les styles
+	// des SPIP 2.0 : les italiques, les gras + les styles
 		(!defined('_SPIP19300')?'':'<:class_spip:4:>'),
 );}
 
-# Definition des variables utilisee ci-dessus
-# -------------------------------------------
-
-add_variables( array(
+// Fonction d'ajout des variables utilisees ci-dessus
+function class_spip_add_variables() { return array(
+array(
 	'nom' => 'style_p',
 	'format' => _format_CHAINE,
 	'defaut' =>  "''",
@@ -99,4 +98,4 @@ add_variables( array(
 	'format' => _format_CHAINE,
 	'defaut' => defined('_SPIP19300')?"''":'"AUTO"',
 	'code:strlen(%s)' => "\$GLOBALS['puce']=%s;",
-));
+));}

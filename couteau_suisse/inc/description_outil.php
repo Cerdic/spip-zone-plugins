@@ -137,7 +137,7 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 		foreach($barres as $f=>$b) {
 			$nom = "pp_{$b}_$outil[id]";
 			$descrip .= ($i?'[[->':'[[')."%$nom%]]";
-			add_variables( array(
+			add_variable( array(
 				'nom' => $nom,
 				'check' => ($b=='edition' || $b=='forum')?'couteauprive:barres_typo_'.$b:$f,
 				'defaut' => 1, // par defaut les boutons seront toujours inseres

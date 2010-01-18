@@ -2,7 +2,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 # Fichier de configuration pris en compte par config_outils.php et specialement dedie a la configuration des blocs depliables
-# -----------------------------------------------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------------------------------------------------
 
 // Fonction d'ajout de l'outil 'class_spip'
 function blocs_add_outil() { return array(
@@ -24,10 +24,9 @@ var blocs_slide = [[%blocs_slide%]];
 	'pipeline:porte_plume_lien_classe_vers_icone' => 'blocs_PP_icones',
 );}
 
-# Definition des variables utilisee ci-dessus
-# -------------------------------------------
-
-add_variables( array(
+// Fonction d'ajout des variables utilisees ci-dessus
+function blocs_add_variables() { return array(
+array(
 	'nom' => 'bloc_h4',
 	'format' => _format_CHAINE,
 	'defaut' => '"h4"',
@@ -55,4 +54,4 @@ add_variables( array(
 	'nom' => 'blocs_millisec',
 	'format' => _format_NOMBRE,
 	'defaut' => 100,
-));
+));}

@@ -12,11 +12,11 @@ function spip_cache_add_outil() { return array(
 	'description' => (defined('_SPIP19300')?'<:spip_cache:2:>':'<:spip_cache:1:>').'<:spip_cache::>',
 );}
 
-# Definition des variables utilisee ci-dessus
-# -------------------------------------------
+// Fonction d'ajout des variables utilisees ci-dessus
+function spip_cache_add_variables() { return array(
 
 // SPIP<=1.92
-add_variable( array(
+array(
 	'nom' => 'radio_desactive_cache3',
 	'format' => _format_NOMBRE,
 	'radio' => array(0 => 'couteauprive:cache_nornal', 1 => 'couteauprive:cache_sans'),
@@ -24,7 +24,8 @@ add_variable( array(
 	// si la variable est egale a 1, on code (jquery.js et forms_styles.css restent en cache)
 	'code:%s' => defined('_SPIP19300')?'':"\$cs_fond = isset(\$GLOBALS['fond'])?\$GLOBALS['fond']:_request('page');
 if (!in_array(\$cs_fond, array('jquery.js','forms_styles.css'))) \$_SERVER['REQUEST_METHOD']='POST';\n",
-));
+),
+
 /*
 pour SPIP 2.0 :
  define('_NO_CACHE',0); -> toujours prendre tous les fichiers en cache
@@ -33,7 +34,7 @@ pour SPIP 2.0 :
  La fonction cache_valide() retourne :
 	'1' si il faut mettre le cache a jour, '0' si le cache est valide, '-1' s'il faut calculer sans stocker en cache
 */
-add_variables( array(
+array(
 	'nom' => 'radio_desactive_cache4',
 	'format' => _format_NOMBRE,
 	'radio' => array(2 => 'couteauprive:cache_nornal', 0 => 'couteauprive:cache_permanent', -1 => 'couteauprive:cache_sans', 1 => 'couteauprive:cache_controle'),
@@ -61,6 +62,6 @@ add_variables( array(
 	'radio' => array(0 => 'item_oui', 1 => 'item_non'),
 	'defaut' => 0,
 	'code' => "\$GLOBALS['derniere_modif_invalide']=%s;\n",
-));
+));}
 
 ?>

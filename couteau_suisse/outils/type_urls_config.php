@@ -36,11 +36,11 @@ if(%%urls_avec_id%%) {@define('_CS_URL_SEP',','); if(\$ok) \$flux['data'].=_CS_U
 if(%%urls_minuscules%%) {\$flux['data']=strtolower(\$flux['data']);}",
 );}
 
-# Definition des variables utilisee ci-dessus
-# -------------------------------------------
+// Fonction d'ajout des variables utilisees ci-dessus
+function type_urls_add_variables() { return array(
 
 // ici on a besoin de boutons radio : 'page', 'html', 'propres', 'propres2, 'arbo', 'libres', 'standard' et 'propres-qs'
-add_variable( array(
+array(
 	'nom' => 'radio_type_urls3',
 	'format' => _format_CHAINE,
 	'radio' => defined('_SPIP19300')
@@ -63,17 +63,17 @@ add_variable( array(
 	'radio/ligne' => 4,
 	'defaut' => "'page'",
 	'code' => "\$GLOBALS['type_urls']=%s;\n",
-));
+),
 
 # Utilise par 'page' (toutes les URLs) et 'propre' 'propre2' 'libres' et 'arbo' pour les objets non reconnus
 # fonction d'appel dans inc/utils.php : get_spip_script()
 
-add_variable( array(
+array(
 	'nom' => 'spip_script',
 	'format' => _format_CHAINE,
 	'defaut' => "'spip.php'",
 	'code' => "define('_SPIP_SCRIPT', %s);\n",
-));
+),
 
 ///////////  define('URLS_PAGE_EXEMPLE', 'spip.php?article12'); /////////////////
 
@@ -87,7 +87,7 @@ add_variable( array(
 #define ('_debut_urls_page', get_spip_script('./').'?');
 #######
 
-add_variables( array(
+array(
 	'nom' => 'terminaison_urls_page',
 	'format' => _format_CHAINE,
 	'defaut' => "''",
@@ -97,11 +97,11 @@ add_variables( array(
 	'format' => _format_CHAINE,
 	'defaut' => "''",
 	'code:strlen(%s)' => "define('_separateur_urls_page', %s);",
-));
+),
 
 ///////////  define('URLS_ARBO_EXEMPLE', '/article/Titre'); /////////////////
 
-add_variables( array(
+array(
 	'nom' => 'url_arbo_minuscules',
 	'format' => _format_NOMBRE,
 	'radio' => array(0 => 'item_oui', 1 => 'item_non'),				
@@ -130,11 +130,11 @@ add_variables( array(
 	'defaut' => "'.html'",
 	'label' => '<:label:terminaison_urls_page:>',
 	'code' => "define('_terminaison_urls_arbo', %s);",
-));
+),
 
 ///////////  define('URLS_PROPRES_EXEMPLE', 'Titre-de-l-article -Rubrique-'); /////////////////
 
-add_variables( array(
+array(
 	'nom' => 'terminaison_urls_propres',
 	'format' => _format_CHAINE,
 	'defaut' => "''",
@@ -212,9 +212,9 @@ add_variables( array(
 	'defaut' => 1,
 	'label' => '<:label:marqueurs_urls_propres:>',
 	'code:!%s' => "define('_MARQUEUR_URL', false);",
-));
+),
 
-add_variables( array(
+array(
 	'nom' => 'urls_minuscules',
 	'check' => 'couteauprive:urls_minuscules',
 	'label' => '@_CS_CHOIX@',
@@ -235,6 +235,6 @@ add_variables( array(
 	'nom' => 'urls_id_sauf_rubriques',
 	'check' => 'couteauprive:urls_id_sauf_rubriques',
 	'defaut' => 0,
-));
+));}
 
 ?>
