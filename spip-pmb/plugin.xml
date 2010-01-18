@@ -8,7 +8,7 @@
 _ &#169; 2010 - Licence GPL
 	</auteur>
 	<version>
-	0.9 BETA
+	1.0
 	</version>
 	<icon>img_pack/logo-spip-pmb.png</icon>
 	<etat>
@@ -16,9 +16,9 @@ _ &#169; 2010 - Licence GPL
 	</etat>
 	<description>
 	Ce plugin permet d'utiliser SPIP comme portail web du logiciel PMB. <br />
-	[acc&egrave;s au panneau de configuration pour param&eacute;trer le plugin->.?exec=cfg&amp;cfg=spip_pmb] 
+	[Param&eacute;trage du plugin->.?exec=cfg&amp;cfg=spip_pmb] 
 	</description>
-	<lien>http://www.spip-contrib.net/Interface-PMB-pour-SPIP</lien> <!-- URI de documentation -->
+	<lien>http://www.spip-contrib.net/Portail-Web-pour-PMB</lien> <!-- URI de documentation -->
 	<options> <!-- fichier charge a chaque hit -->
 	pmb_mes_options.php
 	</options>

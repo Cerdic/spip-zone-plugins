@@ -21,14 +21,8 @@
 [(#REM) Nouveaux ouvrages ]
 <B_syndic_pmb>
 <div class="menu articles nouveautes liste sommaire">
-<h2 class="h2">[(#CHEMIN{polices/police_titre.ttf}|oui)
-	  [(#REM|?{'',<:pmb:nouveautes:>}|image_typo{police=togase.ttf,taille=26,couleur=333300})]
-					]
-					[(#CHEMIN{polices/police_titre.ttf}|non)
-					    <:pmb:nouveautes:>
-					]
-			</h2>
-				      <a href="#URL_PAGE{nouveautes}" class="plus-de-liens"><:pmb:toutes_nouveautes:> +</a>
+<h2 class="h2"><:pmb:nouveautes:></h2>
+			<a href="#URL_PAGE{nouveautes}" class="plus-de-liens"><:pmb:toutes_nouveautes:> +</a>
 			<ul class="liste-items">
 			[(#SET{compteur_nouveautes,0})]
 			<BOUCLE_syndic_pmb(SYNDIC_ARTICLES){par hasard}{url==opac}{0,2}>
