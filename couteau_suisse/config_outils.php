@@ -154,63 +154,6 @@ add_outil( array(
 	'version-max' => '1.9299',
 ));
 
-// code mort, voir le format xml : outils/interface_config.xml
-
-/*
-add_outil( array(
-	'id' => 'simpl_interface',
-	'code:spip_options' => "define('_ACTIVER_PUCE_RAPIDE', false);",
-	'categorie' => 'interface',
-	'version-min' => '1.9300',
-));
-
-add_outil( array(
-	'id' => 'icone_visiter',
-	'categorie' => 'interface',
-	'pipeline:header_prive' => 'icone_visiter_header_prive',
-));
-
-add_variables( array(
-	'nom' => 'tri_articles',
-	'format' => _format_CHAINE,
-	'radio' => array(
-		'date_modif DESC' => 'couteauprive:tri_modif',
-		'0+titre,titre' => 'couteauprive:tri_titre',
-		'date DESC' => 'couteauprive:tri_publi', 
-		'perso' => 'couteauprive:tri_perso' ),
-	'radio/ligne' => 1,
-	'defaut' => "'date DESC'", //"'0+titre,titre'",
-	'label' => '@_CS_CHOIX@',
-	'code:%s!="perso"' => "define('_TRI_ARTICLES_RUBRIQUE', %s);\n",
-), array(
-	'nom' => 'tri_perso',
-	'format' => _format_CHAINE,
-	'defaut' => '',
-	'code:strlen(%s)' => "@define('_TRI_ARTICLES_RUBRIQUE', %s);\n",
-), array(
-	'nom' => 'tri_groupes',
-	'format' => _format_CHAINE,
-	'radio' => array(
-		'0+titre,titre' => 'couteauprive:tri_titre',
-		'id_groupe' => 'couteauprive:tri_publi', 
-		'perso' => 'couteauprive:tri_groupe' ),
-	'radio/ligne' => 1,
-	'defaut' => "'id_groupe'", //"'0+titre,titre'",
-	'code:%s!="perso"' => "define('_TRI_GROUPES_MOTS', %s);\n",
-), array(
-	'nom' => 'tri_perso_groupes',
-	'format' => _format_CHAINE,
-	'defaut' => '',
-	'code:strlen(%s)' => "@define('_TRI_GROUPES_MOTS', %s);",
-));
-add_outil( array(
-	'id' => 'tri_articles',
-	'code:spip_options' => "%%tri_articles%%%%tri_perso%%%%tri_groupes%%%%tri_perso_groupes%%",
-	'categorie' => 'interface',
-	'version-min' => '1.9300',
-));
-*/
-
 // ici on a besoin de trois boutons radio : _T('couteauprive:js_jamais'), _T('couteauprive:js_defaut') et _T('couteauprive:js_toujours')
 add_variable( array(
 	'nom' => 'radio_filtrer_javascript3',

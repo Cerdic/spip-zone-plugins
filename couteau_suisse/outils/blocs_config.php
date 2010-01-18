@@ -15,7 +15,7 @@ var blocs_millisec = %%blocs_millisec%%;
 var blocs_slide = [[%blocs_slide%]];
 ",
 	'code:jq_init' => 'blocs_init.apply(this);',
-	// utilisation des cookies pour conserver l\'etat des blocs numerotes si on quitte la page
+	// utilisation des cookies pour conserver l'etat des blocs numerotes si on quitte la page
 	'code:jq' => 'if(%%blocs_cookie%%) { if(jQuery("div.cs_blocs").length)
 		jQuery.getScript(cs_CookiePlugin, cs_blocs_cookie); }',
 	'jquery' => 'oui',
@@ -48,7 +48,7 @@ add_variables( array(
 	'radio' => array('aucun' => 'couteauprive:jslide_aucun', 'normal' => 'couteauprive:jslide_normal', 'slow' => 'couteauprive:jslide_lent', 'rapide' => 'couteauprive:jslide_fast', 'millisec' => 'couteauprive:jslide_millisec' ),
 	'radio/ligne' => 2,
 	'defaut' => '"aucun"',
-	// si la variable est 'millisec' alors on prends directement les millisecondes
+	// si la variable est 'millisec' alors on prend directement les millisecondes
 	'code:%s==="millisec"' => "blocs_millisec",
 	'code:%s!=="millisec"' => "%s",
 ), array(
