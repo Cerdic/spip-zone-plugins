@@ -247,7 +247,7 @@ function exec_malettre(){
             
             // envoi lettre
             $exp_email = _request('expediteur_more');
-            if ($exp=="") {
+            if ($exp_email=="") {
                 $expediteur = _request('expediteur');                
                 if (isset($expediteurs[$expediteur])) {
                    $exp_name = $expediteur;
