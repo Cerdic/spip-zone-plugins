@@ -2,7 +2,7 @@
 
 	<nom>Comptes &amp; Contacts - Extension des auteurs SPIP</nom>
 
-	<auteur>Cyril Marion</auteur>
+	<auteur>Cyril Marion - [Ateliers CYM->http://www.cym.fr]</auteur>
 
 	<prefix>comptes</prefix>
 	
@@ -26,17 +26,17 @@
 
 	<pipeline>
 		<nom>declarer_tables_principales</nom>
-		<inclure>base/comptes.php</inclure>
+		<inclure>base/comptes_tables.php</inclure>
 	</pipeline>
 	
 	<pipeline>
 		<nom>declarer_tables_interfaces</nom>
-		<inclure>base/comptes.php</inclure>
+		<inclure>base/comptes_tables.php</inclure>
 	</pipeline>
 	
 	<pipeline>
 		<nom>declarer_tables_auxiliaires</nom>
-		<inclure>base/comptes.php</inclure>
+		<inclure>base/comptes_tables.php</inclure>
 	</pipeline>
 	
 	<install>base/comptes_upgrade.php</install>
