@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'newsletter_label' => 'Abonnement aux listes de diffusion',
 	
 	// O
-	'optout' => 'Cases &agrave; coch&#233;es non pr&#233;coch&#233;es (optout)',
+	'optout' => 'Cases &agrave; cocher non pr&#233;coch&#233;es (optout)',
 	
 	// S
 	'select_listes' => '(vous pouvez s&#233;lectionner plusieurs listes avec la touche shift)',
