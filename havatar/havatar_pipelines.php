@@ -15,7 +15,7 @@ function havatar_affiche_gauche($flux) {
 				$bouton = bouton_block_depliable(_T('havatar:titre_havatar_auteur'), false, "havatar-$id_auteur");
 
 				$cadre_havatar = '<div id="iconifier-havatar-' . $id_auteur . '" class="iconifier">';
-				$cadre_havatar .= debut_cadre('r', find_in_path('images/havatar-24.gif'), '', $bouton, '', '', false);
+				$cadre_havatar .= debut_cadre('r', find_in_path('images/micro-smiley-24.png'), '', $bouton, '', '', false);
 				$cadre_havatar .= '<div><a href="' . $havatar_cache . '">'. $img . '</a></div>';
 				$cadre_havatar .= debut_block_depliable(false,"havatar-$id_auteur") 
 					. '<div class="cadre_padding">'

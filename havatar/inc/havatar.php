@@ -56,9 +56,12 @@ function havatar($url) {
 			$h = new hKit;
 			//$h->tidy_mode = 'proxy'; // 'proxy', 'exec', 'php' or 'none'
 			$hcards = $h->getByURL('hcard', $url);
-			foreach ($hcards as $hcard) {
-				if (($url_image = $hcard['photo'])) {
-					break;
+			$url_image = '';
+			if ($hcards) {
+				foreach ($hcards as $hcard) {
+					if (($url_image = $hcard['photo'])) {
+						break;
+					}
 				}
 			}
 			include_spip("inc/distant");
