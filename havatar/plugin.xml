@@ -1,0 +1,24 @@
+<plugin>
+	<nom>hAvatar</nom>
+	<auteur><a href="http://da.weeno.net/">davux</a></auteur>
+	<icon>images/micro-smiley-64.png</icon>
+	<version>0.1</version>
+	<etat>dev</etat>
+	<description>
+Syst&egrave;me de r&eacute;cup&eacute;ration d'avatars via hcard (microformats).
+
+&Eacute;tend la balise #LOGO_AUTEUR de mani&egrave;re &agrave; prendre en compte l'avatar hcard d'un auteur s'il existe, y compris dans les forums et p&#233;titions.
+
+Fournit le filtre <code>|havatar</code>, &agrave; utiliser par exemple comme 
+<code>[(#URL_AUTEUR|havatar|image_reduire{80})]</code>.
+	</description>
+	<prefix>havatar</prefix>
+	<fonctions>inc/havatar.php</fonctions>
+	<pipeline>
+		<nom>affiche_gauche</nom>
+		<action>affiche_gauche</action>
+		<inclure>havatar_pipelines.php</inclure>
+	</pipeline>
+	<necessite id="SPIP" version="[1.9.0;]" />
+	<categorie>communication</categorie>
+</plugin>
