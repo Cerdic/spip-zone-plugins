@@ -5,7 +5,7 @@
  */
 
 // chemin pour les fichiers squelettes
-_chemin(_DIR_PLUGIN_SPIPMINE.'squelettes/');
+//_chemin(_DIR_PLUGIN_SPIPMINE.'squelettes/');
 
 
 ?>
