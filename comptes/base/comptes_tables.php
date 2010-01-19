@@ -171,8 +171,9 @@ function comptes_declarer_tables_auxiliaires($tables_auxiliaires){
         "id_compte"     => "BIGINT(21) NOT NULL",
         "id_contact"    => "BIGINT(21) NOT NULL"
     );
-    $comptes_contacts = array(
-        "PRIMARY KEY"	=> "id_compte, id_contact"
+    $comptes_contacts_key = array(
+        "PRIMARY KEY"	=> "id_compte, id_contact",
+		"KEY id_compte"	=> "id_compte"
     );
 	$tables_auxiliaires['spip_comptes_contacts'] =
 		array('field' => &$comptes_contacts, 'key' => &$comptes_contacts_key);
@@ -180,13 +181,13 @@ function comptes_declarer_tables_auxiliaires($tables_auxiliaires){
 
 	//-- Table adresses_liens ---------------------------------------
 	$adresses_liens = array(
-		"id_adresse"	=> "BIGINT(21) NOT NULL",
-		"id_objet"		=> "BIGINT(21) NOT NULL",
-		"objet"			=> "varchar(25) NOT NULL" // peut etre un compte ou un contact
+		"id_adresse"		=> "BIGINT(21) NOT NULL",
+		"id_objet"			=> "BIGINT(21) NOT NULL",
+		"objet"				=> "varchar(25) NOT NULL" // peut etre un compte ou un contact
 	);
 	$adresses_liens_key = array(
-		"PRIMARY KEY"	=> "id_adresse, id_objet, objet",
-		"KEY"			=> "id_adresse"
+		"PRIMARY KEY"		=> "id_adresse, id_objet, objet",
+		"KEY id_adresse"	=> "id_adresse"
 	);
 	$tables_auxiliaires['spip_adresses_liens'] =
 		array('field' => &$adresses_liens, 'key' => &$adresses_liens_key);
@@ -194,13 +195,13 @@ function comptes_declarer_tables_auxiliaires($tables_auxiliaires){
 
 	//-- Table numeros_liens ------------------------------------------
 	$numeros_liens = array(
-		"id_numero"		=> "bigint(21) NOT NULL DEFAULT 0",
-		"id_objet"		=> "bigint(21) NOT NULL DEFAULT 0", 
-		"objet"			=> "varchar(25) NOT NULL" // peut etre un contact ou un compte
+		"id_numero"			=> "bigint(21) NOT NULL DEFAULT 0",
+		"id_objet"			=> "bigint(21) NOT NULL DEFAULT 0", 
+		"objet"				=> "varchar(25) NOT NULL" // peut etre un contact ou un compte
 		);
 	$numeros_liens_key = array(
-		"PRIMARY KEY"	=> "id_numero, id_objet, objet",
-		"KEY"			=> "id_numero"
+		"PRIMARY KEY"		=> "id_numero, id_objet, objet",
+		"KEY id_numero"		=> "id_numero"
 		);
 	$tables_auxiliaires['spip_numeros_liens'] =
 		array('field' => &$numeros_liens, 'key' => &$numeros_liens_key);
@@ -208,27 +209,27 @@ function comptes_declarer_tables_auxiliaires($tables_auxiliaires){
 
 	//-- Table emails_liens ------------------------------------------
 	$emails_liens = array(
-		"id_email"		=> "bigint(21) NOT NULL DEFAULT 0",
-		"id_objet"		=> "bigint(21) NOT NULL DEFAULT 0", 
-		"objet"			=> "varchar(25) NOT NULL" // peut etre un contact ou un compte
+		"id_email"			=> "bigint(21) NOT NULL DEFAULT 0",
+		"id_objet"			=> "bigint(21) NOT NULL DEFAULT 0", 
+		"objet"				=> "varchar(25) NOT NULL" // peut etre un contact ou un compte
 		);
 	$emails_liens_key = array(
-		"PRIMARY KEY"	=> "id_email, id_objet, objet",
-		"KEY"			=> "id_email"
+		"PRIMARY KEY"		=> "id_email, id_objet, objet",
+		"KEY id_email"		=> "id_email"
 		);
 	$tables_auxiliaires['spip_emails_liens'] =
 		array('field' => &$emails_liens, 'key' => &$emails_liens_key);
 
 
-//-- Table champs_liens ------------------------------------------
+	//-- Table champs_liens ------------------------------------------
 	$champs_liens = array(
-		"id_champ"		=> "bigint(21) NOT NULL DEFAULT 0",
-		"id_objet"		=> "bigint(21) NOT NULL DEFAULT 0", 
-		"objet"			=> "varchar(25) NOT NULL" // peut etre un contact ou un compte ou n'importe quoi
+		"id_champ"			=> "bigint(21) NOT NULL DEFAULT 0",
+		"id_objet"			=> "bigint(21) NOT NULL DEFAULT 0", 
+		"objet"				=> "varchar(25) NOT NULL" // peut etre un contact ou un compte ou n'importe quoi
 		);
 	$champs_liens_key = array(
-		"PRIMARY KEY"	=> "id_champ, id_objet, objet",
-		"KEY"			=> "id_champ"
+		"PRIMARY KEY"		=> "id_champ, id_objet, objet",
+		"KEY id_champ"		=> "id_champ"
 		);
 	$tables_auxiliaires['spip_champs_liens'] =
 		array('field' => &$champs_liens, 'key' => &$champs_liens_key);
