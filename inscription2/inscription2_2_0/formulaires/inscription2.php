@@ -149,8 +149,8 @@ function formulaires_inscription2_verifier_dist($id_auteur = null,$redirect = nu
 	 * Il se peut que l'on active pas le password à l'inscription
 	 * mais uniquement à la modification ...
 	 * On le test ici en créant la variable $pass_actif
-	 * pass et password1 sont les variables a la creation du compte 
-	 * password et password1 sont les variables a la modification du compte 
+	 * pass et password1 sont les variables a la creation du compte
+	 * password et password1 sont les variables a la modification du compte
 	 */  
 	$pass_actif = false;
 	if(is_numeric($id_auteur) && (lire_config('inscription2/pass_fiche_mod') == 'on')){
@@ -168,7 +168,7 @@ function formulaires_inscription2_verifier_dist($id_auteur = null,$redirect = nu
 		if($p){
 			if(strlen($p)){
 				$pass_min = !defined('_PASS_MIN') ? 6 : _PASS_MIN; 
-				if (strlen($p) < $pass_min) {
+	            if (strlen($p) < $pass_min) {
 					$erreurs['pass'] = _T('info_passe_trop_court');
 					$erreurs['message_erreur'] .= _T('info_passe_trop_court')."<br />";
 				} elseif ($p != _request('password1')) {
@@ -295,8 +295,8 @@ function formulaires_inscription2_traiter_dist($id_auteur = NULL,$redirect = nul
 	if(($mode == 'inscription_pass') || ($mode == 'modification_auteur_pass')){
 		if (strlen(_request('password')) != 0)
 			$new_pass = _request('password');
-		elseif($mode == 'inscription_pass') 
-            $new_pass = _request('pass');  
+		elseif($mode == 'inscription_pass')
+			$new_pass = _request('pass'); 
 
 		if (strlen($new_pass)>0) {
 			include_spip('inc/acces');
@@ -326,13 +326,12 @@ function formulaires_inscription2_traiter_dist($id_auteur = NULL,$redirect = nul
 
 	// affecter $id_auteur avec la session si dispo 
 	// présent depuis moins de quelques minutes ou inscrit partiel
+
 	include_spip("inc/inscription2_session");
 	if($id_inscrit = i2_session_valide()){
 		$id_auteur = $id_inscrit ;
 		$modif_par_session = true ;
-		$data["modif"] = true ;
-	}
-	
+	}	
 
 	//inserer les donnees dans spip_auteurs -- si $id_auteur : mise a jour - autrement : nouvelle entree
 	if (!$new or $modif_par_session) {
@@ -393,8 +392,9 @@ function formulaires_inscription2_traiter_dist($id_auteur = NULL,$redirect = nul
 		);
 	}
 
-	if(isset($_FILES['logo_auteur']) && ($_FILES['logo_auteur']['error'] == 0)){
-		$chercher_logo = charger_fonction('chercher_logo', 'inc');
+
+	if(isset($_FILES['logo_auteur']) && ($_FILES['logo_auteur']['error'] == 0))
+	    $chercher_logo = charger_fonction('chercher_logo', 'inc');
 		
 		// supprimer l'ancien logo
 		$on = $chercher_logo($id_auteur, 'id_auteur', 'on');
