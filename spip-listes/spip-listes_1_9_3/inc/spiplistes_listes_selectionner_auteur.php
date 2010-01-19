@@ -187,12 +187,12 @@ function spiplistes_listes_boite_abonnes ($id_liste, $statut_liste, $tri, $debut
 		}
 		$legende_tableau .= 
 			($ii = intval($abonnes['html']))
-			? spiplistes_str_listes(intval($abonnes['html'])) . _T('spiplistes:_au_format_s', array('s' => _T('spiplistes:html')))
+			? spiplistes_str_abonnements(intval($abonnes['html'])) . _T('spiplistes:_au_format_s', array('s' => _T('spiplistes:html')))
 			: ''
 			;
 		$legende_tableau .= 
 			($jj = intval($abonnes['texte']))
-			? ($ii?', ':''). spiplistes_str_listes(intval($abonnes['texte'])) . _T('spiplistes:_au_format_s', array('s' => _T('spiplistes:texte')))
+			? ($ii?', ':''). spiplistes_str_abonnements(intval($abonnes['texte'])) . _T('spiplistes:_au_format_s', array('s' => _T('spiplistes:texte')))
 			: ''
 			;
 		$legende_tableau .= ''

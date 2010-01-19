@@ -1205,6 +1205,16 @@ function spiplistes_str_abonnes ($nb)
 	return($result);
 }
 
+function spiplistes_str_abonnements ($nb) 
+{
+	$result =
+		($nb > 0)
+		? _T('spiplistes:' . (($nb > 1) ? '_n_abos_' : '_1_abo_'), array('n' => $nb))
+		: _T('spiplistes:aucun_abonmt')
+		;
+	return($result);
+}
+
 
 function spiplistes_str_listes ($nb) 
 {

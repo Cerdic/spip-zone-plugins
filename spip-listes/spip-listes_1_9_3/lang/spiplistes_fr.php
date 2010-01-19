@@ -395,6 +395,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'pas_de_pb_abonnements' => "Pas d&#39;erreur rencontr&#233;e sur la table des abonnements."
 , '_n_abos_' => " @n@ abonnements "
 , '_1_abo_' => " 1 abonnement "
+, 'aucun_abonmt' => 'aucun abonnement.'
 , '_n_auteurs_' => " @n@ auteurs "
 , '_1_auteur_' => ' 1 auteur '
 , 'abonnes' => 'abonn&#233;s'
