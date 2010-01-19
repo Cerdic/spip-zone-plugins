@@ -43,6 +43,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'votre_prenom' => 'Votre pr&eacute;nom',
 	'votre_adresse' => 'Votre adresse',
 	'votre_niveau' => 'Votre niveau salsa',
-	'votre_style' => 'Votre style'
+	'votre_style' => 'Votre style',
+	
 );
 ?>
