@@ -1,37 +1,61 @@
 <?php
 /**
  * Plugin Comptes pour Spip 2.0
- * Licence GPL (c) 2010 - Ateliers CYM
+ * Licence GPL
+ * Auteur Cyril MARION - Ateliers CYM
+ * 
  */
 
 function peupler_base() {
-	// Attention, spécifier le NOM des TABLES et non le nom des BOUCLES !
+	// Attention, specifier le NOM des TABLES et non le nom des BOUCLES !
 	sql_insertq_multi('spip_contacts', array(
 		array(
 			'id_auteur' => 1,
 			'civilite' => 'M.',
-			'prenom' => 'Cyril',
 			'nom' => 'MARION',
-			'naissance' => '1963-04-06'
+			'prenom' => 'Cyril',
+			'date_naissance' => '1963-04-06'
 			),
 		array(
 			'id_auteur' => 3,
 			'civilite' => 'M.',
-			'prenom' => 'Fred',
 			'nom' => 'XAVIER',
-			'naissance' => ''
+			'prenom' => 'Fred',
+			'date_naissance' => ''
 			),
 		array(
 			'id_auteur' => 4,
 			'civilite' => 'M.',
-			'prenom' => 'David',
 			'nom' => 'LARTIST',
-			'naissance' => ''
+			'prenom' => 'David',
+			'date_naissance' => ''
+			)
+		)
+	);
+
+    sql_insertq_multi('spip_comptes', array(
+		array(
+			'id_auteur' => 14,
+			'nom' => 'Ateliers CYM',
+			'type' => 'SARL',
+			'date_creation' => '2002-01-01'
 			)
 		)
 	);
   
-	sql_insertq_multi('spip_champs', array(
+    sql_insertq_multi('spip_comptes_contacts', array(
+		array(
+			'id_compte' => 14,
+			'id_contact' => 1,
+			),
+        array(
+            'id_compte' => 14,
+            'id_contact' => 3,
+            )
+        )
+	);
+
+    sql_insertq_multi('spip_champs', array(
 		array(
 			'id_champ' => 1,
 			'type_champ' => 'niveau',
@@ -54,17 +78,17 @@ function peupler_base() {
 		array(
 			'id_champ' => 1,
 			'id_objet' => 1,
-			'objet' => 'contact'
+			'objet' => 'auteur'
 			),
 		array(
 			'id_champ' => 2,
 			'id_objet' => 3,
-			'objet' => 'contact'
+			'objet' => 'auteur'
 			),
 		array(
 			'id_champ' => 3,
 			'id_objet' => 4,
-			'objet' => 'contact'
+			'objet' => 'auteur'
 			)
 		)
 	);
@@ -95,17 +119,17 @@ function peupler_base() {
 		array(
 			'id_adresse' => 1,
 			'id_objet' => 1,
-			'objet' => 'contact'
+			'objet' => 'auteur'
 			),
 		array(
 			'id_adresse' => 2,
 			'id_objet' => 2,
-			'objet' => 'contact'
+			'objet' => 'auteur'
 			),
 		array(
 			'id_adresse' => 3,
 			'id_objet' => 3,
-			'objet' => 'contact'
+			'objet' => 'auteur'
 			)
 		)
 	);

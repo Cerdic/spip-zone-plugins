@@ -1,7 +1,9 @@
 <?php
 /**
  * Plugin Comptes pour Spip 2.0
- * Licence GPL (c) 2010 - Ateliers CYM
+ * Licence GPL
+ * Auteur Cyril MARION - Ateliers CYM
+ * 
  */
 
 
@@ -15,31 +17,37 @@ function comptes_declarer_tables_interfaces($interface){
 	$interface['table_des_tables']['champs'] = 'champs';
 	
 	/**
-	 * Objectif : pouvoir utiliser les champs liés dans les boucles...
+	 * Objectif : pouvoir utiliser les champs lies dans les boucles...
 	 *
 	 * 1. liaisons simples entre auteurs et contacts par le id_auteur
-	 * 2. liaison complexe entre auteurs et adresses par le id_adresse -> id_contact -> id_auteur
+     * 2. liaisons entre comptes et auteurs
+     * 3. liaisons entre comptes et contacts
+	 * 4. liaison complexe entre auteurs et adresses par le id_adresse -> id_contact -> id_auteur
 	 */
 	$interface['tables_jointures']['spip_contacts'][]= 'auteurs';
 	$interface['tables_jointures']['spip_auteurs'][]= 'contacts';
 
-	$interface['tables_jointures']['spip_comptes'][]= 'contacts';
-	$interface['tables_jointures']['spip_contacts'][]= 'comptes';
+	$interface['tables_jointures']['spip_comptes'][]= 'auteurs';
+	$interface['tables_jointures']['spip_auteurs'][]= 'comptes';
 
 	$interface['tables_jointures']['spip_adresses'][] = 'adresses_liens';
 	$interface['tables_jointures']['spip_contacts'][] = 'adresses_liens';
+    $interface['tables_jointures']['spip_comptes'][] = 'adresses_liens';
 	$interface['tables_jointures']['spip_adresses_liens'][] = 'adresses';
 
 	$interface['tables_jointures']['spip_numeros'][] = 'numeros_liens';
 	$interface['tables_jointures']['spip_contacts']['id_objet'] = 'numeros_liens';
+    $interface['tables_jointures']['spip_comptes']['id_objet'] = 'numeros_liens';
 	$interface['tables_jointures']['spip_numeros_liens'][] = 'numeros';
 	
 	$interface['tables_jointures']['spip_emails'][] = 'emails_liens';
 	$interface['tables_jointures']['spip_contacts']['id_objet'] = 'emails_liens';
+	$interface['tables_jointures']['spip_comptes']['id_objet'] = 'emails_liens';
 	$interface['tables_jointures']['spip_emails_liens'][] = 'emails';
 
 	$interface['tables_jointures']['spip_champs'][] = 'champs_liens';
 	$interface['tables_jointures']['spip_contacts']['id_objet'] = 'champs_liens';
+	$interface['tables_jointures']['spip_comptes']['id_objet'] = 'champs_liens';
 	$interface['tables_jointures']['spip_champs_liens'][] = 'champs';
 
 	$interface['exceptions_des_jointures']['prenom'] = array('spip_contacts', 'prenom');
@@ -59,43 +67,37 @@ function comptes_declarer_tables_interfaces($interface){
 
 
 function comptes_declarer_tables_principales($tables_principales){
-	//-- Table contacts ------------------------------------------
-	$contacts = array(
-		"id_contact" 	=> "bigint(21) NOT NULL auto_increment",
-		"id_auteur" 	=> "bigint(21) NOT NULL DEFAULT 0",
-		"id_compte" 	=> "bigint(21) NOT NULL DEFAULT 0",
-		"civilite" 		=> "tinytext DEFAULT '' NOT NULL",
-		"prenom"		=> "VARCHAR(10) NOT NULL DEFAULT 0",
-		"nom" 			=> "tinytext DEFAULT '' NOT NULL",
-		"naissance"		=> "datetime NOT NULL default '0000-00-00 00:00:00'",
-		"descriptif" 	=> "tinytext DEFAULT '' NOT NULL",
-		"date" 			=> "datetime NOT NULL default '0000-00-00 00:00:00'",
-		"maj"			=> "TIMESTAMP"
-		);
-	$contacts_key = array(
-		"PRIMARY KEY"	=> "id_contact",
-		"KEY id_auteur" => "id_auteur"
-		);
-	$tables_principales['spip_contacts'] =
-		array('field' => &$contacts, 'key' => &$contacts_key, 'join' => &$contacts_join);
-
-
 	//-- Table comptes ------------------------------------------
 	$comptes = array(
-		"id_compte" 	=> "bigint(21) NOT NULL auto_increment",
-		"titre" 		=> "tinytext DEFAULT '' NOT NULL",
+		"id_auteur"		=> "bigint(21) NOT NULL",
+		"nom" 			=> "tinytext DEFAULT '' NOT NULL",
+        "type"          => "tinytext DEFAULT '' NOT NULL", // SA, SARL, association
+        "siret"         => "tinytext DEFAULT '' NOT NULL",
+		"date_creation"	=> "datetime NOT NULL default '0000-00-00 00:00:00'",
 		"descriptif"	=> "tinytext DEFAULT '' NOT NULL",
-		"date" 			=> "datetime NOT NULL default '0000-00-00 00:00:00'",
 		"maj"			=> "TIMESTAMP"
 		);
 	$comptes_key = array(
-		"PRIMARY KEY"	=> "id_compte"
+		"PRIMARY KEY"	=> "id_auteur"
 		);
 	$tables_principales['spip_comptes'] =
 		array('field' => &$comptes, 'key' => &$comptes_key);
 
-
-
+	//-- Table contacts ------------------------------------------
+	$contacts = array(
+		"id_auteur"		=> "bigint(21) NOT NULL",
+		"civilite" 		=> "tinytext DEFAULT '' NOT NULL",
+		"nom" 			=> "tinytext DEFAULT '' NOT NULL",
+		"prenom"		=> "VARCHAR(10) NOT NULL DEFAULT 0",
+		"date_naissance"=> "datetime NOT NULL default '0000-00-00 00:00:00'",
+		"descriptif" 	=> "tinytext DEFAULT '' NOT NULL",
+		"maj"			=> "TIMESTAMP"
+		);
+	$contacts_key = array(
+		"PRIMARY KEY"	=> "id_auteur"
+		);
+	$tables_principales['spip_contacts'] =
+		array('field' => &$contacts, 'key' => &$contacts_key, 'join' => &$contacts_join);
 
 	//-- Table adresses ------------------------------------------
 	$adresses = array(
@@ -103,7 +105,7 @@ function comptes_declarer_tables_principales($tables_principales){
 		"type_adresse"	=> "VARCHAR(10) DEFAULT '' NOT NULL", // perso, pro, vacance...
 		"numero" 		=> "VARCHAR(10) DEFAULT '' NOT NULL", // p. ex. 21
 		"voie"			=> "tinytext DEFAULT '' NOT NULL", // p. ex. rue de cotte
-		"complement"	=> "tinytext DEFAULT '' NOT NULL", // p. ex. 3è étage
+		"complement"	=> "tinytext DEFAULT '' NOT NULL", // p. ex. 3? ?tage
 		"boite_postale"	=> "VARCHAR(10) DEFAULT '' NOT NULL", 
 		"code_postal"	=> "VARCHAR(5) DEFAULT '' NOT NULL",
 		"ville"			=> "tinytext DEFAULT '' NOT NULL",
@@ -116,9 +118,6 @@ function comptes_declarer_tables_principales($tables_principales){
 	$tables_principales['spip_adresses'] =
 		array(
 			'field' => &$adresses, 'key' => &$adresses_key, 'join' => &$adresses_join);
-		
-		
-		
 
 	//-- Table numeros ------------------------------------------
 	$numeros = array(
@@ -133,8 +132,6 @@ function comptes_declarer_tables_principales($tables_principales){
 	$tables_principales['spip_numeros'] =
 		array('field' => &$numeros, 'key' => &$numeros_key, 'join' => &$numeros_join);
 
-
-
 	//-- Table emails ------------------------------------------
 	$emails = array(
 		"id_email"		=> "bigint(21) NOT NULL auto_increment",
@@ -144,12 +141,10 @@ function comptes_declarer_tables_principales($tables_principales){
 		);
 	$emails_key = array(
 		"PRIMARY KEY"	=> "id_email",
-		"KEY email"	=> "email" // on ne met pas unique pour le cas ou 2 contacts partagent le meme mail générique
+		"KEY email"	=> "email" // on ne met pas unique pour le cas ou 2 contacts partagent le meme mail g?n?rique
 		);
 	$tables_principales['spip_emails'] =
 		array('field' => &$emails, 'key' => &$emails_key, 'join' => &$emails_join);
-
-
 
 	//-- Table champs ------------------------------------------
 	$champs = array(
@@ -164,16 +159,25 @@ function comptes_declarer_tables_principales($tables_principales){
 	$tables_principales['spip_champs'] =
 		array('field' => &$champs, 'key' => &$champs_key, 'join' => &$champs_join);
 
-
-
-
-
 	return $tables_principales;
 
 }
 
 
 function comptes_declarer_tables_auxiliaires($tables_auxiliaires){
+
+    //-- Table comptes_contacts -------------------------------------
+    $comptes_contacts = array(
+        "id_compte"     => "BIGINT(21) NOT NULL",
+        "id_contact"    => "BIGINT(21) NOT NULL"
+    );
+    $comptes_contacts = array(
+        "PRIMARY KEY"	=> "id_compte, id_contact"
+    );
+	$tables_auxiliaires['spip_comptes_contacts'] =
+		array('field' => &$comptes_contacts, 'key' => &$comptes_contacts_key);
+
+
 	//-- Table adresses_liens ---------------------------------------
 	$adresses_liens = array(
 		"id_adresse"	=> "BIGINT(21) NOT NULL",
@@ -183,7 +187,7 @@ function comptes_declarer_tables_auxiliaires($tables_auxiliaires){
 	$adresses_liens_key = array(
 		"PRIMARY KEY"	=> "id_adresse, id_objet, objet",
 		"KEY"			=> "id_adresse"
-		);
+	);
 	$tables_auxiliaires['spip_adresses_liens'] =
 		array('field' => &$adresses_liens, 'key' => &$adresses_liens_key);
 
@@ -216,9 +220,7 @@ function comptes_declarer_tables_auxiliaires($tables_auxiliaires){
 		array('field' => &$emails_liens, 'key' => &$emails_liens_key);
 
 
-
-
-	//-- Table champs_liens ------------------------------------------
+//-- Table champs_liens ------------------------------------------
 	$champs_liens = array(
 		"id_champ"		=> "bigint(21) NOT NULL DEFAULT 0",
 		"id_objet"		=> "bigint(21) NOT NULL DEFAULT 0", 
@@ -231,8 +233,6 @@ function comptes_declarer_tables_auxiliaires($tables_auxiliaires){
 	$tables_auxiliaires['spip_champs_liens'] =
 		array('field' => &$champs_liens, 'key' => &$champs_liens_key);
 	
-
-
 	return $tables_auxiliaires;
 }
 

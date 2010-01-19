@@ -13,7 +13,7 @@
 	<etat>dev</etat>
 
 	<description>
-		Ce plugin permet la gestion de comptes et contacts pour les inscriptions, les transactions. Utilise et &eacute;tend la structure des auteurs SPIP.
+		Ce plugin permet la gestion de Comptes et de Contacts pour les inscriptions, les r&eacute;servations, les achats. Utilise et &eacute;tend la structure des auteurs SPIP.
 	</description>
 
 	<icon>img/picto_comptes_128x128.png</icon>
