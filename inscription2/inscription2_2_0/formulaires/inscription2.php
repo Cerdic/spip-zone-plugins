@@ -393,7 +393,7 @@ function formulaires_inscription2_traiter_dist($id_auteur = NULL,$redirect = nul
 	}
 
 
-	if(isset($_FILES['logo_auteur']) && ($_FILES['logo_auteur']['error'] == 0))
+	if(isset($_FILES['logo_auteur']) && ($_FILES['logo_auteur']['error'] == 0)){
 	    $chercher_logo = charger_fonction('chercher_logo', 'inc');
 		
 		// supprimer l'ancien logo
