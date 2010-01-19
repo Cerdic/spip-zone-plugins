@@ -34,7 +34,7 @@
 	<ul class="menu-liste">
 	      <BOUCLE_locations(POUR){tableau #GET{tab_locations}}>
                 <li class="menu-entree">
-                    	<a href="[(#URL_PAGE{catalogue}|parametre_url{id_section,[(#GET{tab_locations}|pmb_tableau2_valeur{#CLE,'location_id'})]}|parametre_url{titre_section,[(#GET{tab_locations}|pmb_tableau2_valeur{#CLE,'location_caption'})]}|parametre_url{look_ALL,1})]">[(#GET{tab_locations}|pmb_tableau2_valeur{#CLE,'location_caption'})]</a>
+                    	<a href="[(#URL_PAGE{catalogue}|parametre_url{id_location,[(#GET{tab_locations}|pmb_tableau2_valeur{#CLE,'location_id'})]})]">[(#GET{tab_locations}|pmb_tableau2_valeur{#CLE,'location_caption'})]</a>
                 </li>
                 </BOUCLE_locations>
 			
