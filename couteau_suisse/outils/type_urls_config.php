@@ -11,8 +11,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 # Fichier de configuration pris en compte par config_outils.php et specialement dedie a la configuration des URLs
 # ---------------------------------------------------------------------------------------------------------------
 
-// Fonction d'ajout de l'outil 'type_urls'
-function type_urls_add_outil() { return array(
+function outils_type_urls_config_dist() {
+
+// Ajout de l'outil 'type_urls'
+add_outil(array(
+	'id' => 'type_urls',
 	'code:spip_options' => "%%radio_type_urls3%%%%spip_script%%
 switch(\$GLOBALS['type_urls']) {
 	case 'page':%%terminaison_urls_page%%%%separateur_urls_page%%break;
@@ -34,9 +37,9 @@ if(%%urls_id_3_chiffres%%) {\$id = sprintf('%03d', \$id);}
 if(%%urls_avec_id2%%) {@define('_CS_URL_SEP','-'); if(\$ok) \$flux['data']=\$id._CS_URL_SEP.\$flux['data'];}
 if(%%urls_avec_id%%) {@define('_CS_URL_SEP',','); if(\$ok) \$flux['data'].=_CS_URL_SEP.\$id;}
 if(%%urls_minuscules%%) {\$flux['data']=strtolower(\$flux['data']);}",
-);}
+));}
 
-// Fonction d'ajout des variables utilisees ci-dessus
+// Ajout des variables utilisees ci-dessus
 function type_urls_add_variables() { return array(
 
 // ici on a besoin de boutons radio : 'page', 'html', 'propres', 'propres2, 'arbo', 'libres', 'standard' et 'propres-qs'

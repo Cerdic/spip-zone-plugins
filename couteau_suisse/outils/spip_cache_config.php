@@ -4,16 +4,19 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 # Fichier de configuration pris en compte par config_outils.php et specialement dedie a la configuration du cache SPIP
 # --------------------------------------------------------------------------------------------------------------------
 
-// Fonction d'ajout de l'outil 'spip_cache'
-function spip_cache_add_outil() { return array(
+function outils_spip_cache_config_dist() {
+
+// Ajout de l'outil 'spip_cache'
+add_outil(array(
+	'id' => 'spip_cache',
 	'code:spip_options' => "%%radio_desactive_cache".(defined('_SPIP19300')?'4':'3')
 		."%%%%duree_cache%%%%duree_cache_mutu%%%%quota_cache%%%%derniere_modif_invalide%%",
 	'categorie' => 'admin',
 	'description' => (defined('_SPIP19300')?'<:spip_cache:2:>':'<:spip_cache:1:>').'<:spip_cache::>',
-);}
+));
 
-// Fonction d'ajout des variables utilisees ci-dessus
-function spip_cache_add_variables() { return array(
+// Ajout des variables utilisees ci-dessus
+add_variables(
 
 // SPIP<=1.92
 array(
@@ -62,6 +65,8 @@ array(
 	'radio' => array(0 => 'item_oui', 1 => 'item_non'),
 	'defaut' => 0,
 	'code' => "\$GLOBALS['derniere_modif_invalide']=%s;\n",
-));}
+));
+
+}
 
 ?>

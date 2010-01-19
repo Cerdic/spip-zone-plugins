@@ -1160,18 +1160,22 @@ foreach (find_all_in_path('outils/', '\w+_config\.xml$') as $f) {
 
 // Recuperer tous les outils de la forme outils/monoutil_config.php
 // y compris les lames perso dont on met le nom en italiques
+global $outils;
 foreach (find_all_in_path('outils/', '\w+_config\.php$') as $f) 
 if(preg_match(',^([^.]*)_config$,', basename($f, '.php'),$regs)){
-	include $f;
-	if(function_exists($cs_temp=$regs[1].'_add_outil')) {
-		$cs_temp = $cs_temp();
-		$cs_temp['id'] = $regs[1];
-		if(strlen($cs_temp['nom']) && !preg_match(',couteau_suisse/outils/,', $f))
-			$cs_temp['nom'] = "<i>$cs_temp[nom]</i>";
-		add_outil($cs_temp);
-	}
-	if(function_exists($cs_temp=$regs[1].'_add_variable')) add_variable($cs_temp());
-	if(function_exists($cs_temp.='s')) foreach($cs_temp() as $v) add_variable($v);
+	if($outil = charger_fonction($regs[0], 'outils'))
+		$outil(preg_match(',couteau_suisse/outils/,', $f));
+	/*else {
+		// compatibilite ...	
+		include $f;
+		if(function_exists($cs_temp=$regs[1].'_add_outil')) {
+			$cs_temp = $cs_temp();
+			$cs_temp['id'] = $regs[1];
+			add_outil($cs_temp);
+		}
+	}*/
+	if(isset($outils[$regs[1]]) && strpos($f, '/couteau_suisse/outils/'.$regs[1], $f)===false)
+		$outils[$regs[1]]['perso'] = 1;
 }
 
 // Nettoyage
@@ -1181,7 +1185,7 @@ unset($cs_temp);
 if(isset($GLOBALS['mes_outils'])) {
 	foreach($GLOBALS['mes_outils'] as $id=>$outil) {
 		$outil['id'] = $id;
-		if(strlen($outil['nom'])) $outil['nom'] = "<i>$outil[nom]</i>";
+		$outil['perso'] = 1;
 		add_outil($outil);
 	}
 	unset($GLOBALS['mes_outils']);

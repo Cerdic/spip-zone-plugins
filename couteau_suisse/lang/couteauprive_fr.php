@@ -174,7 +174,7 @@ Notez bien : en modifiant ce deuxi&egrave;me style, vous perdez alors les styles
 	'corbeille_objets_vider' => 'Supprimer les objets s&eacute;lectionn&eacute;s',
 	'corbeille_vider' => 'Vider la corbeille&nbsp;:',
 	'couleurs:aide' => 'Mise en couleurs : <b>[coul]texte[/coul]</b>@fond@ avec <b>coul</b> = @liste@',
-	'couleurs:description' => 'Permet d\'appliquer facilement des couleurs &agrave; tous les textes du site (articles, br&egrave;ves, titres, forum, &hellip;) en utilisant des balises en raccourcis.
+	'couleurs:description' => 'Permet d\'appliquer facilement des couleurs &agrave; tous les textes du site (articles, br&egrave;ves, titres, forum, &hellip;) en utilisant des balises &agrave; crochets en raccourcis : <code>[couleur]texte[/couleur]</code>.
 
 Deux exemples identiques pour changer la couleur du texte :@_CS_EXEMPLE_COULEURS2@
 
