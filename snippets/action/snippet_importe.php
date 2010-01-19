@@ -5,7 +5,7 @@
  *
  * Auteurs :
  * Cedric Morin
- * © 2006 - Distribue sous licence GNU/GPL
+ * Â© 2006 - Distribue sous licence GNU/GPL
  *
  */
 
@@ -44,6 +44,7 @@ function action_snippet_importe(){
 		if ($unlink)
 			@unlink($source);
 	}
+	$redirect = str_replace("ecrire/./","./",$redirect);
 	redirige_par_entete(str_replace("&amp;","&",urldecode($redirect)));
 }
 
