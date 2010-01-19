@@ -16,35 +16,33 @@ function comptes_declarer_tables_interfaces($interface){
 	$interface['table_des_tables']['emails'] = 'emails';
 	$interface['table_des_tables']['champs'] = 'champs';
 	
-	/**
-	 * Objectif : pouvoir utiliser les champs lies dans les boucles...
-	 *
-	 * 1. liaisons simples entre auteurs et contacts par le id_auteur
-     * 2. liaisons entre comptes et auteurs
-     * 3. liaisons entre comptes et contacts
-	 * 4. liaison complexe entre auteurs et adresses par le id_adresse -> id_contact -> id_auteur
-	 */
+	// -- Liaisons comptes/auteurs, contacts/auteurs et comptes/contacts
 	$interface['tables_jointures']['spip_contacts'][]= 'auteurs';
 	$interface['tables_jointures']['spip_auteurs'][]= 'contacts';
-
 	$interface['tables_jointures']['spip_comptes'][]= 'auteurs';
 	$interface['tables_jointures']['spip_auteurs'][]= 'comptes';
-
+	$interface['tables_jointures']['spip_comptes_contacts'][]= 'contacts';
+	$interface['tables_jointures']['spip_comptes_contacts'][]= 'comptes';
+		
+	// -- Liaisons adresses
 	$interface['tables_jointures']['spip_adresses'][] = 'adresses_liens';
 	$interface['tables_jointures']['spip_contacts'][] = 'adresses_liens';
     $interface['tables_jointures']['spip_comptes'][] = 'adresses_liens';
 	$interface['tables_jointures']['spip_adresses_liens'][] = 'adresses';
 
+	// -- Liaisons numeros
 	$interface['tables_jointures']['spip_numeros'][] = 'numeros_liens';
 	$interface['tables_jointures']['spip_contacts']['id_objet'] = 'numeros_liens';
     $interface['tables_jointures']['spip_comptes']['id_objet'] = 'numeros_liens';
 	$interface['tables_jointures']['spip_numeros_liens'][] = 'numeros';
 	
+	// -- Liaisons emails
 	$interface['tables_jointures']['spip_emails'][] = 'emails_liens';
 	$interface['tables_jointures']['spip_contacts']['id_objet'] = 'emails_liens';
 	$interface['tables_jointures']['spip_comptes']['id_objet'] = 'emails_liens';
 	$interface['tables_jointures']['spip_emails_liens'][] = 'emails';
 
+	// -- Liaisons autres champs
 	$interface['tables_jointures']['spip_champs'][] = 'champs_liens';
 	$interface['tables_jointures']['spip_contacts']['id_objet'] = 'champs_liens';
 	$interface['tables_jointures']['spip_comptes']['id_objet'] = 'champs_liens';
