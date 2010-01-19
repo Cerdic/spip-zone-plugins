@@ -6,9 +6,9 @@
 	
 	<prefix>spipmine</prefix>
 
-	<auteur>Cyril MARION</auteur>
+	<auteur>Cyril MARION - &#169; 2009, 2010 - [Ateliers CYM->http://www.cym.fr]</auteur>
 	
-    <licence>&#169; 2009 Ateliers CYM - PARIS - Licence GNU/GPL</licence>
+    <licence>Licence GNU/GPL</licence>
 
 	<etat>dev</etat>
 
@@ -19,7 +19,9 @@
 	<lien>[Doc en ligne, forum, FAQ sur SPIP-Contrib->http://www.spip-contrib.net/Plugin-Spipmine?var_mode=preview]</lien>
 
 	<fonctions>spipmine_fonctions.php</fonctions>
+	
 	<options>spipmine_options.php</options>
+	
 	<install>base/spipmine_install.php</install>
 	
 	<pipeline>

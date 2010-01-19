@@ -1,11 +1,30 @@
 <?php
-
 /**
  * Plugin Spipmine pour Spip 2.0
- * Licence GPL (c) 2009 - Ateliers CYM
+ * Licence GPL (c) 2009 - 2010
+ * Auteur Cyril MARION - Ateliers CYM
+ *
  */
 
+include_spip('inc/meta');
+include_spip('base/create');
+
 $GLOBALS['spipmine_base_version'] = 0.10;
+
+function spipmine_install($action){
+	$version_base = $GLOBALS['spipmine_base_version'];
+	switch ($action){
+		case 'test':
+			return (isset($GLOBALS['meta']['spipmine_base_version']) AND ($GLOBALS['meta']['spipmine_base_version']>=$version_base));
+			break;
+		case 'install':
+			spipmine_verifier_base();
+			break;
+		case 'uninstall':
+			spipmine_vider_tables();
+			break;
+	}
+}
 
 function spipmine_verifier_base(){
 	$version_base = $GLOBALS['spipmine_base_version'];
@@ -16,13 +35,7 @@ function spipmine_verifier_base(){
 		// Cas d'une install toute neuve : la version
 		if ($current_version==0.0){
 			include_spip('base/create');
-			include_spip('base/abstract_sql');
 			creer_base();
-			if (file_exists(_DIR_PLUGIN_SPIPMINE.'/base/spipmine.sql')) {
-				$sql = trim(file_get_contents(_DIR_PLUGIN_SPIPMINE.'/base/spipmine.sql'));
-				// sql_query($sql);
-				echo $sql;
-			} else echo "fichier sql non trouv&eacute;";
 			ecrire_meta('spipmine_base_version',$current_version=$version_base,'non');
 		}
 		
@@ -32,12 +45,8 @@ function spipmine_verifier_base(){
 	}
 }
 
+
 function spipmine_vider_tables() {
-	include_spip('base/spipmine');
-	include_spip('base/abstract_sql');
-	/*
-	sql_drop_table('spipmine_%');
-	*/
 	sql_drop_table('spipmine_actions');
 	sql_drop_table('spipmine_clients');
 	sql_drop_table('spipmine_clients_rubriques');
@@ -56,18 +65,5 @@ function spipmine_vider_tables() {
 	effacer_meta('spipmine_base_version');
 }
 
-function spipmine_install($action){
-	$version_base = $GLOBALS['spipmine_base_version'];
-	switch ($action){
-		case 'test':
-			return (isset($GLOBALS['meta']['spipmine_base_version']) AND ($GLOBALS['meta']['spipmine_base_version']>=$version_base));
-			break;
-		case 'install':
-			spipmine_verifier_base();
-			break;
-		case 'uninstall':
-			spipmine_vider_tables();
-			break;
-	}
-}
+
 ?>

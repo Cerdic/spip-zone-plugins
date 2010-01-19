@@ -3,19 +3,21 @@
 <table class="spip">
 
 	<thead>
-	<tr>
+	<tr class="row_first">
 		<th>ID</th>
 		<th>NOM</th>
 		<th>PRENOM</th>
+		<th>EMAIL</th>
 	</tr>
 	</thead>
 	<tbody>
 
-	<BOUCLE_c(CONTACTS){par nom}>
+	<BOUCLE_c(CONTACTS auteurs){par nom}{tout}>
 	<tr>
 		<td>#ID_AUTEUR</td>
 		<td>#NOM</td>
 		<td>#PRENOM</td>
+		<td>#EMAIL</td>
 	</tr>
 	</BOUCLE_c>
 	

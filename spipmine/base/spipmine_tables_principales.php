@@ -1,17 +1,16 @@
 <?php
-
 /**
  * Plugin Spipmine pour Spip 2.0
- * Licence GPL (c) 2009 - Ateliers CYM
+ * Licence GPL (c) 2009 - 2010
+ * Auteur Cyril MARION - Ateliers CYM
+ *
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-/***********************************************************************************/
-/* DECLARATION DES TABLES PRINCIPALES
-/***********************************************************************************/
 function spipmine_declarer_tables_principales($tables_principales){
 
+	// -- Table actions ----------------------------------------------
 	$spipmine_actions = array(
 		"id_action"				=>	"int(11) NOT NULL auto_increment",
 		"id_projet"				=>	"int(11) default NULL",
@@ -35,59 +34,12 @@ function spipmine_declarer_tables_principales($tables_principales){
 		"KEY id_type_action"	=>	"id_type_action"
 	);
 	$tables_principales['spipmine_actions'] = array(
-		'field' => &$spipmine_actions,
-		'key' => &$spipmine_actions_key
+		"field" => &$spipmine_actions,
+		"key" => &$spipmine_actions_key
 	);
 
 	
-	// déclaration de la table clients
-	$spipmine_clients = array(
-		"id_client"				=>	"int(11) NOT NULL auto_increment",
-		"nom_client"			=>	"varchar(125) default NULL",
-		"nom_court"				=>	"varchar(8) default NULL",
-		"adresse_1"				=>	"varchar(125) default NULL",
-		"adresse_2"				=>	"varchar(125) default NULL",
-		"boite_postale"			=>	"varchar(20) default NULL",
-		"code_postal"			=>	"varchar(50) default NULL",
-		"ville"					=>	"varchar(50) default NULL",
-		"commentaires"			=>	"blob"
-	);
-	$spipmine_clients_key = array(
-		"PRIMARY KEY"			=>	"id_client",
-		"KEY nom_client"		=>	"nom_client"
-	);
-	$tables_principales['spipmine_clients'] = array(
-		'field' => &$spipmine_clients,
-		'key' => &$spipmine_clients_key
-	);
-
-
-
-	// déclaration de la table contacts	
-	$spipmine_contacts = array(
-		"id_contact"			=>	"int(11) NOT NULL auto_increment",
-		"id_compte"				=>	"int(11) default NULL",
-		"titre"					=>	"varchar(50) default NULL",
-		"prenom"				=>	"varchar(50) default NULL",
-		"nom"					=>	"varchar(50) default NULL",
-		"fonction"				=>	"varchar(50) default NULL",
-		"telephone" 			=>	"varchar(25) default NULL",
-		"email"					=>	"varchar(50) default NULL",
-		"facture"				=>	"tinyint(1) default NULL",
-		"commentaire"			=>	"mediumtext"
-	);
-	$spipmine_contacts_key = array(
-		"PRIMARY KEY"			=>	"id_contact",
-		"KEY id_compte"			=>	"id_compte"
-	);
-	$tables_principales['spipmine_contacts'] = array(
-		'field' => &$spipmine_contacts,
-		'key' => &$spipmine_contacts_key
-	);
-
-	
-	
-	// structure de la table spipmine_factures
+	// -- Table factures ----------------------------------------------
 	$spipmine_factures = array(
 		"id_facture"			=>	"int(11) NOT NULL auto_increment",
 		"num_facture"			=>	"varchar(50) default NULL",
@@ -119,12 +71,12 @@ function spipmine_declarer_tables_principales($tables_principales){
 		"KEY num_facture"		=>	"num_facture"
 	);
 	$tables_principales['spipmine_factures'] = array(
-		'field' => &$spipmine_factures,
-		'key' => &$spipmine_factures_key
+		"field" => &$spipmine_factures,
+		"key" => &$spipmine_factures_key
 	);
 	
 	
-	// structure de la table spipmine_projets
+	// -- Table projets ----------------------------------------------
 	$spipmine_projets = array(
 		"id_projet"					=>	"int(11) NOT NULL auto_increment",
 		"id_parent"					=>	"int(11) default NULL",
@@ -164,12 +116,12 @@ function spipmine_declarer_tables_principales($tables_principales){
 		"KEY id_client"				=>	"id_client"
 	);
 	$tables_principales['spipmine_projets'] = array(
-		'field' => &$spipmine_projets,
-		'key' => &$spipmine_projets_key
+		"field" => &$spipmine_projets,
+		"key" => &$spipmine_projets_key
 	);
 
 
-	// structure de la table spipmine_reglements
+	// -- Table reglements ----------------------------------------------
 	$spipmine_reglements = array(
 		"id_reglement"		=> "int(11) NOT NULL auto_increment",
 		"id_type_reglement"	=> "int(11) default NULL",
@@ -182,12 +134,62 @@ function spipmine_declarer_tables_principales($tables_principales){
 		"PRIMARY KEY"		=> "id_reglement"
 	);
 	$tables_principales['spipmine_reglements'] = array(
-		'field' => &$spipmine_reglements,
-		'key' => &$spipmine_reglements_key
+		"field" => &$spipmine_reglements,
+		"key" => &$spipmine_reglements_key
 	);
 
-	
-	// structure de la table spipmine_users
+	/**
+	 * Tables clients, contacts
+	 * à remplacer des que possible par le plugin Comptes & Contacts
+	 *
+	 */
+	// -- Table clients ----------------------------------------------
+	$spipmine_clients = array(
+		"id_client"				=>	"int(11) NOT NULL auto_increment",
+		"nom_client"			=>	"varchar(125) default NULL",
+		"nom_court"				=>	"varchar(8) default NULL",
+		"adresse_1"				=>	"varchar(125) default NULL",
+		"adresse_2"				=>	"varchar(125) default NULL",
+		"boite_postale"			=>	"varchar(20) default NULL",
+		"code_postal"			=>	"varchar(50) default NULL",
+		"ville"					=>	"varchar(50) default NULL",
+		"commentaires"			=>	"blob"
+	);
+	$spipmine_clients_key = array(
+		"PRIMARY KEY"			=>	"id_client",
+		"KEY nom_client"		=>	"nom_client"
+	);
+	$tables_principales['spipmine_clients'] = array(
+		"field" => &$spipmine_clients,
+		"key" => &$spipmine_clients_key
+	);
+	// -- Table contacts ----------------------------------------------
+	$spipmine_contacts = array(
+		"id_contact"			=>	"int(11) NOT NULL auto_increment",
+		"id_compte"				=>	"int(11) default NULL",
+		"titre"					=>	"varchar(50) default NULL",
+		"prenom"				=>	"varchar(50) default NULL",
+		"nom"					=>	"varchar(50) default NULL",
+		"fonction"				=>	"varchar(50) default NULL",
+		"telephone" 			=>	"varchar(25) default NULL",
+		"email"					=>	"varchar(50) default NULL",
+		"facture"				=>	"tinyint(1) default NULL",
+		"commentaire"			=>	"mediumtext"
+	);
+	$spipmine_contacts_key = array(
+		"PRIMARY KEY"			=>	"id_contact",
+		"KEY id_compte"			=>	"id_compte"
+	);
+	$tables_principales['spipmine_contacts'] = array(
+		"field" => &$spipmine_contacts,
+		"key" => &$spipmine_contacts_key
+	);
+	/**
+	 * Table users
+	 * à remplacer des que possible par un lien vers spip_auteurs
+	 *
+	 */
+	// -- Table users ----------------------------------------------
 	$spipmine_users = array(
 		"id_user"		=> "int(11) NOT NULL auto_increment",
 		"nom_user"		=> "varchar(50) default NULL",
@@ -200,15 +202,12 @@ function spipmine_declarer_tables_principales($tables_principales){
 		"PRIMARY KEY"	=>	"id_user"
 	);
 	$tables_principales['spipmine_users'] = array(
-		'field' => &$spipmine_users,
-		'key' => &$spipmine_users_key
-	);
-
-
+		"field" => &$spipmine_users,
+		"key" => &$spipmine_users_key
+	);	
 	
 	return $tables_principales;
 	
 }
-
 
 ?>
