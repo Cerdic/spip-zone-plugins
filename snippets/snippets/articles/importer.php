@@ -5,7 +5,7 @@
  *
  * Auteurs :
  * Cedric Morin
- * © 2006 - Distribue sous licence GNU/GPL
+ * � 2006 - Distribue sous licence GNU/GPL
  *
  */
 
@@ -18,9 +18,9 @@ function snippets_articles_importer($id_target,$arbre,$contexte){
 	$table_prefix = $GLOBALS['table_prefix'] ;
 
 	$champs_non_importables = array("id_article","id_rubrique","id_secteur","maj","export","visites","referers","popularite","id_trad","idx","id_version","url_propre");
-	$champs_non_ajoutables = array('titre',"statut",'date','date_redac','lang');
+	$champs_non_ajoutables = array('titre','date','date_redac','lang');
 	$champs_jointures = array('auteur','mot');
-	$champs_defaut_values = array('statut'=>'publie');
+	$champs_defaut_values = array('statut'=>'lememe');
 	$table = 'spip_articles';
 	$primary = 'id_article';
 	$fields = $GLOBALS['tables_principales']['spip_articles']['field'];
@@ -42,8 +42,7 @@ function snippets_articles_importer($id_target,$arbre,$contexte){
 				// mettre a jour des articles deja en bdd avec le xml fournit
 				if($forcer_maj){
 				$id_target = '';
-				$id_article_trouve = spip_fetch_array(spip_query("SELECT id_article FROM $table WHERE titre="._q($objet['titre'][0])));
-				//$id_article_trouve = sql_fetsel("id_article","spip_articles","titre=".sql_quote($objet['titre'][0])); // ajouter la rub courrante
+				$id_article_trouve = sql_fetsel("id_article","spip_articles","titre=".sql_quote($objet['titre'][0])); // ajouter la rub courrante
 				$id_target = $id_article_trouve['id_article'] ;
 				if(!intval($id_target))
 					spip_log($objet['titre'][0].$id_target,"snippets_titres_erreur");
@@ -90,9 +89,7 @@ function snippets_articles_importer($id_target,$arbre,$contexte){
 				
 				if ( $objet['auteur'] AND ($creation OR $forcer_maj)){
 					$auteur_connu = true ;
-					$sql = "DELETE FROM spip_auteurs_articles WHERE id_article= '$id_article'";
-					spip_query($sql);
-					//sql_delete("spip_auteurs_articles","id_article=".sql_quote($id_article));
+					sql_delete("spip_auteurs_articles","id_article=".sql_quote($id_article));
 					foreach($objet['auteur'] as $nom){
 					// ajouter l'auteur
 						spip_log($nom,"snippets");
@@ -114,15 +111,14 @@ function snippets_articles_importer($id_target,$arbre,$contexte){
         		
         		// statut de l'article
         		if($champs_defaut_values['statut'] != 'prepa'){
-        		$sql = "UPDATE ".$table_prefix."_articles SET statut = '".$champs_defaut_values['statut']."' WHERE id_article = '$id_article'";
+        		$sql = "UPDATE ".$table_prefix."_articles SET statut = '".$objet['statut'][0]."' WHERE id_article = '$id_article'";
         		spip_query($sql); 
         		}
         		
         		
         		if ( $objet['mot'] AND ($creation OR $forcer_maj)){
-					$sql = "DELETE FROM spip_mots_articles WHERE id_article= '$id_article'";
-					spip_query($sql);
-					//sql_delete("spip_mots_articles","id_article=".sql_quote($id_article));
+			
+					sql_delete("spip_mots_articles","id_article=".sql_quote($id_article));
 					foreach($objet['mot'] as $mot){
 					spip_log($mot,"snippets");
 					// ajouter le mot cle
@@ -134,8 +130,56 @@ function snippets_articles_importer($id_target,$arbre,$contexte){
         				 spip_query($sql);                              				              	
         				}                   							
 					}
+				}	
+        		
+        		
+        		
+        		if ( $objet['document'] AND ($creation OR $forcer_maj)){
+			
+					sql_delete("spip_documents_liens","id_objet=".sql_quote($id_article)." and objet='article'");
+					foreach($objet['document'] as $doc){
+					spip_log("--> ".$doc,"snippets");
+					// ajouter le doc
+					list($id,$fichier,$extension,$titre,$descriptif) = explode('|',$doc) ;
+					spip_log("--- $id,$fichier,$extension,$titre","snippets");
+					spip_log("hop ".$fichier,"snippets");
+					$table_prefix = $GLOBALS['table_prefix'] ;
+						 $id_doc  = get_id_doc($fichier);
+  				         if ($id_doc) {  				                
+        				 spip_log("hop doc".$fichier."trouve".$id_doc,"snippets");
+        				 $sql="INSERT INTO ".$table_prefix."_documents_liens (id_document, id_objet, objet) VALUES ($id_doc, $id_article,'article')";
+        				 spip_query($sql);                              				              	
+        				 }else{
+        				 // au cas ou, on creer un doc, mais il vaut mieux transferer les doc avec toutes les infos avant de snippet
+        				 $a =  array(
+							'date' => 'NOW()',
+							'distant' => 'non',
+							'mode' => 'image',
+							'titre'=> $titre,
+							'descriptif'=> $descriptif,
+							'extension'=> $extension,
+							'fichier' => $fichier );
+							
+							//'largeur' => $largeur,
+							//'hauteur' => $hauteur,
+							//'taille' => $taille,
+							
+						if($forcer_id) $a['id_document'] = $id ;	
+			 	    	
+			 	    	$id = sql_insertq("spip_documents", $a);
+        				spip_log ("ajout du document $fichier $titre  (M 'image' T 'article' L '$id_article' D '$id')","snippets");
+        				
+        				sql_insertq("spip_documents_articles",
+   	                    	array('id_document' => $id,
+    	                    'id_article' => $id_article));
+        				 
+        				 }
+        				
+					}
 				}
-				
+        	
+        		
+        		
 			}
 		}
 	return $translations;

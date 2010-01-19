@@ -194,7 +194,6 @@ function get_id_auteur($name) {
 }
 
 // recupere un id_mot selon le type|titre ou le creer
-
 function get_id_mot($name) {
   
    if (trim($name)=="") return false; 
@@ -220,6 +219,21 @@ function get_id_mot($name) {
      spip_log("creation mot : ".$titre."groupe ".$id_groupe,"snippets");
     return  sql_insertq('spip_mots',array('type'=>$type, 'titre'=>$titre , 'id_groupe' => $id_groupe)) ;
 
+}
+
+// recupere id d'un document
+function get_id_doc($fichier) {
+    if (trim($fichier)=="") return false;   
+    spip_log("get_id_doc cherche : ".$fichier,"snippets"); 
+    $sql = "SELECT id_document FROM spip_documents WHERE fichier='".addslashes(filtrer_entites($fichier))."'";
+    $result = spip_query($sql);
+    while ($row = spip_fetch_array($result)) {
+       spip_log("get_id_doc trouve : ".$row['id_document'],"snippets");
+       return $row['id_document'];
+    }
+    // inconnu  ...
+    spip_log("get_id_doc trouve pas :( ","snippets");
+    return false ;
 }
 
 ?>

@@ -37,6 +37,9 @@
 				<BOUCLE_mots(MOTS){id_article}>
 				<mot>#TYPE*|#TITRE*</mot>
 				</BOUCLE_mots>
+				<BOUCLE_docs(DOCUMENTS){id_article}>
+				<document>#ID_DOCUMENT|spip_jouve/#FICHIER*|#EXTENSION|#TITRE*|#DESCRIPTIF*</document>
+				</BOUCLE_docs>
 			</article>
 			</BOUCLE_article>
 			</articles>
@@ -79,6 +82,9 @@
 				<BOUCLE_mots(MOTS){id_article}>
 				<mot>#TYPE*|#TITRE*</mot>
 				</BOUCLE_mots>
+				<BOUCLE_docs2(DOCUMENTS){id_article}>
+				<document>#ID_DOCUMENT|spip_jouve/#FICHIER*|#EXTENSION|#TITRE*|#DESCRIPTIF*</document>
+				</BOUCLE_docs2>
 			</article>
 			</BOUCLE_article2>
 			</articles>
