@@ -221,7 +221,8 @@ function set_cs_metas_pipelines(&$infos_pipelines) {
 			$code .= "include_spip('$inc');\n";
 		}
 		if(is_array($infos['inline'])) foreach ($infos['inline'] as $inc) $code .= "$inc\n";
-		if(is_array($infos['fonction'])) foreach ($infos['fonction'] as $fonc) $code .= "if(function_exists('$fonc')) \$flux=$fonc(\$flux);\n\telse spip_log('Erreur - $fonc(\$flux) non definie !');\n";
+		if(is_array($infos['fonction'])) foreach ($infos['fonction'] as $fonc)
+			$code .= "function_exists('$fonc')?\$flux=$fonc(\$flux):cs_deferr('$fonc');\n";
 		$controle .= $cs_metas_pipelines[$pipe] = $code;
 	}
 	$nb = count($infos_pipelines);
@@ -648,7 +649,7 @@ function cs_parse_code_js($code) {
 function cs_optimise_if($code, $root=true) {
 	if($root) {
 		$code = preg_replace(',if\s*\(\s*([^)]*\s*)\)\s*{\s*,imsS', 'if(\\1){', $code);
-		$code = str_replace(array('if(false){', 'if(!1){'), 'if(0){', $code);
+		$code = str_replace(array('if(false){', 'if(!1){', 'if()'), 'if(0){', $code);
 		$code = str_replace(array('if(true){', 'if(!0){'), 'if(1){', $code);
 	}
 	if(preg_match_all(',if\(([0-9])+\){(.*)$,msS', $code, $regs, PREG_SET_ORDER))

@@ -5,6 +5,11 @@ if(!defined("_ECRIRE_INC_VERSION")) return;
 // attention, ici il se peut que le plugin ne soit pas initialise (cas des .js/.css par exemple)
 if(defined('_LOG_CS')) cs_log("inclusion de cout_pipelines.php");
 
+// fonction d'erreur indispensable a tous les pipelines
+function cs_deferr($f) {
+	spip_log(_L("Pipeline CS : fonction '$f' non definie !"));
+}
+
 /***********
  * INSTALL *
  ***********/
