@@ -100,9 +100,12 @@ global $connect_statut,$connect_toutes_rubriques;
 if ($GLOBALS['connect_statut'] == "0minirezo" || $GLOBALS["connect_toutes_rubriques"]) {
 	if ($args['exec']=='articles') {
 	$bouton = _T('swfupload:titre_swfupload');
-	$out .= debut_cadre_enfonce(_DIR_PLUGIN_SWFUPLOAD.'images/swfupload-24.png', true, "", 
-			bouton_block_depliable($bouton,$flag === 'ajax','swfupload'))
-		. debut_block_depliable($flag === 'ajax','swfupload');
+	if(function_exists('bouton_block_depliable')) 
+      $out .= debut_cadre_enfonce(_DIR_PLUGIN_SWFUPLOAD.'images/swfupload-24.png', true, "", 
+			    bouton_block_depliable($bouton,$flag === 'ajax','swfupload'))
+		    . debut_block_depliable($flag === 'ajax','swfupload');
+  else 
+  	  $out .= debut_cadre_enfonce(_DIR_PLUGIN_SWFUPLOAD.'images/swfupload-24.png', true, "", "");
 	
 
 $out .= '<form id="form1" action="index.php" method="post" enctype="multipart/form-data">
