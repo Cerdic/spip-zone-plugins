@@ -676,6 +676,10 @@ function pmb_ws_parser_notice_array($value, &$tresultat) {
 							    if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "a")) $tresultat['lesauteurs'] .= $texte;
 							    if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "b")) $tresultat['lesauteurs'] = $texte." ".$tresultat['lesauteurs'];
 							    if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "a")) $tresultat['id_auteur'] = $dernierIdTrouve;
+
+							    if (($dernierTypeTrouve == "701") && ($dernierSousTypeTrouve == "a")) $tresultat['lesauteurs2'] .= $texte;
+							    if (($dernierTypeTrouve == "701") && ($dernierSousTypeTrouve == "b")) $tresultat['lesauteurs2'] = $texte." ".$tresultat['lesauteurs2'];
+							    if (($dernierTypeTrouve == "701") && ($dernierSousTypeTrouve == "a")) $tresultat['id_auteur2'] = $dernierIdTrouve;
 							    
 							    
 				  }

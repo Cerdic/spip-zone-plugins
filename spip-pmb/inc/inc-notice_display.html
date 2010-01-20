@@ -16,6 +16,12 @@
 						    ]
 						  (#ENV{notice}|pmb_notice_champ{'lesauteurs'})
 						  [(#ENV{notice}|pmb_notice_champ{'id_auteur'}|oui)</a>]
+
+						  [, (#ENV{notice}|pmb_notice_champ{'id_auteur2'}|oui)
+							<a href="[(#URL_PAGE{author_see}|parametre_url{id,[(#ENV{notice}|pmb_notice_champ{'id_auteur2'})]})]">
+						    ]
+						  [(#ENV{notice}|pmb_notice_champ{'lesauteurs2'})]
+						  [(#ENV{notice}|pmb_notice_champ{'id_auteur2'}|oui)</a>]
 			      </td></tr>]
 			      [<tr><td><strong><:pmb:serie:></strong></td><td>(#ENV{notice}|pmb_notice_champ{'serie'})</td></tr>]
 			      [<tr><td><strong><:pmb:type:></strong></td><td>(#ENV{notice}|pmb_notice_champ{'type'})</td></tr>]
