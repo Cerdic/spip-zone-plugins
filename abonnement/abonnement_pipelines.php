@@ -150,7 +150,9 @@ function abonnement_i2_traiter_formulaire($flux) {
 			$row = sql_fetsel(array('montant'), 'spip_abonnements', 'id_abonnement='.sql_quote($id_abonnement));
 			$montant = $row['montant'];
 			
-			if(!$flux['data']['modif']) 
+			// Ne pas mettre deux fois le meme abo ici. (refresh par ex ou retour)
+			// avec le meme hash
+				sql_delete("spip_auteurs_elargis_abonnements","hash=".sql_quote($hash)." and statut_paiement='a_confirmer'");
 				sql_insertq('spip_auteurs_elargis_abonnements', array(
 					'id_auteur' => $id_auteur,
 					'id_abonnement' => $id_abonnement,
