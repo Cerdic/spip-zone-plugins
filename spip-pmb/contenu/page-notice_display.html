@@ -7,7 +7,7 @@
 	      [(#REM|?{'','<img />'}|inserer_attribut{class,spip_logos}|inserer_attribut{src,[(#ENV{notice}|pmb_notice_champ{'logo_src'}|copie_locale{'force'})]}|image_reduire{200,200})]
 	]
 	<h1 class="h1">[(#ENV{notice}|pmb_notice_champ{'titre'})]</h1>
-	
+	[<p class="soustitre">(#ENV{notice}|pmb_notice_champ{'soustitre'})</p>]
 
 	
 </div>

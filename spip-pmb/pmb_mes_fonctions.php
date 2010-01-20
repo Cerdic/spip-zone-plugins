@@ -273,7 +273,7 @@ function pmb_auteur_extraire($id_auteur, $debut=0, $nbresult=5, $id_session=0) {
 
 function pmb_recherche_extraire($recherche='*', $url_base, $look_ALL='', $look_AUTHOR='', $look_PUBLISHER='', $look_COLLECTION='', $look_SUBCOLLECTION='', $look_CATEGORY='', $look_INDEXINT='', $look_KEYWORDS='', $look_TITLE='', $look_ABSTRACT='', $id_section='', $debut=0, $fin=5, $typdoc='') {
 	$tableau_resultat = Array();
-	$recherche = strtolower($recherche);
+	//$recherche = strtolower($recherche);
 	$search = array();
 	$searchType = 0;	
 	
@@ -658,6 +658,8 @@ function pmb_ws_parser_notice_array($value, &$tresultat) {
 							    if (($dernierTypeTrouve == "102") && ($dernierSousTypeTrouve == "a")) $tresultat['pays'] .= $texte;
 							    
 							    if (($dernierTypeTrouve == "200") && ($dernierSousTypeTrouve == "a")) $tresultat['titre'] .= str_replace("","\"",str_replace("","\"",str_replace("","&oelig;", stripslashes(str_replace("\n","<br />", str_replace("","'",$texte))))));
+							    if (($dernierTypeTrouve == "200") && ($dernierSousTypeTrouve == "e")) $tresultat['soustitre'] .= str_replace("","\"",str_replace("","\"",str_replace("","&oelig;", stripslashes(str_replace("\n","<br />", str_replace("","'",$texte))))));
+
 							    if (($dernierTypeTrouve == "200") && ($dernierSousTypeTrouve == "f")) $tresultat['auteur'] .= $texte;
 							    
 							    if (($dernierTypeTrouve == "210") && ($dernierSousTypeTrouve == "c")) $tresultat['editeur'] .= $texte;
@@ -680,7 +682,6 @@ function pmb_ws_parser_notice_array($value, &$tresultat) {
 										      $tresultat['liensauteurs'].="</a>, ";
 										}
 										$tresultat['liensauteurs'].="<a href=\"?page=author_see&id=".$dernierIdTrouve."\">".$texte;
-										$premierIdTrouve = 1;
 										$tresultat['lesauteurs'] .= $texte;
 										$avantDernierTypeTrouve = $dernierTypeTrouve;
 										
@@ -695,7 +696,6 @@ function pmb_ws_parser_notice_array($value, &$tresultat) {
 										      $tresultat['liensauteurs2'].="</a>, ";
 										}
 										$tresultat['liensauteurs2'].="<a href=\"?page=author_see&id=".$dernierIdTrouve."\">".$texte;
-										$premierIdTrouve = 1;
 										$tresultat['lesauteurs2'] .= $texte;
 										$avantDernierTypeTrouve = $dernierTypeTrouve;
 										
@@ -710,7 +710,6 @@ function pmb_ws_parser_notice_array($value, &$tresultat) {
 										      $tresultat['liensauteurs3'].="</a>, ";
 										}
 										$tresultat['liensauteurs3'].="<a href=\"?page=author_see&id=".$dernierIdTrouve."\">".$texte;
-										$premierIdTrouve = 1;
 										$tresultat['lesauteurs3'] .= $texte;
 										$avantDernierTypeTrouve = $dernierTypeTrouve;
 										
