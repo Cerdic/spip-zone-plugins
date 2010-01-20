@@ -37,10 +37,10 @@ if(%%urls_id_3_chiffres%%) {\$id = sprintf('%03d', \$id);}
 if(%%urls_avec_id2%%) {@define('_CS_URL_SEP','-'); if(\$ok) \$flux['data']=\$id._CS_URL_SEP.\$flux['data'];}
 if(%%urls_avec_id%%) {@define('_CS_URL_SEP',','); if(\$ok) \$flux['data'].=_CS_URL_SEP.\$id;}
 if(%%urls_minuscules%%) {\$flux['data']=strtolower(\$flux['data']);}",
-));}
+));
 
 // Ajout des variables utilisees ci-dessus
-function type_urls_add_variables() { return array(
+add_variables(
 
 // ici on a besoin de boutons radio : 'page', 'html', 'propres', 'propres2, 'arbo', 'libres', 'standard' et 'propres-qs'
 array(
