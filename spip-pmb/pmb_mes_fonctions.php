@@ -273,7 +273,7 @@ function pmb_auteur_extraire($id_auteur, $debut=0, $nbresult=5, $id_session=0) {
 
 function pmb_recherche_extraire($recherche='*', $url_base, $look_ALL='', $look_AUTHOR='', $look_PUBLISHER='', $look_COLLECTION='', $look_SUBCOLLECTION='', $look_CATEGORY='', $look_INDEXINT='', $look_KEYWORDS='', $look_TITLE='', $look_ABSTRACT='', $id_section='', $debut=0, $fin=5, $typdoc='') {
 	$tableau_resultat = Array();
-
+	$recherche = strtolower($recherche);
 	$search = array();
 	$searchType = 0;	
 	
@@ -634,6 +634,7 @@ function pmb_ws_parser_notice_serialisee($id_notice, $value, &$tresultat) {
 //parsing d'une notice sérialisée
 function pmb_ws_parser_notice_array($value, &$tresultat) {
 	    include_spip("/inc/filtres_images");
+	    
 	    $indice_exemplaire = 0;
 	    $tresultat = Array();
 	    $id_notice = $value->id;
@@ -673,13 +674,51 @@ function pmb_ws_parser_notice_array($value, &$tresultat) {
 							    
 							    if (($dernierTypeTrouve == "330") && ($dernierSousTypeTrouve == "a")) $tresultat['resume'] .= str_replace("","\"",str_replace("","\"",str_replace("","&oelig;", stripslashes(str_replace("\n","<br />", str_replace("","'",$texte))))));
 							    
-							    if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "a")) $tresultat['lesauteurs'] .= $texte;
-							    if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "b")) $tresultat['lesauteurs'] = $texte." ".$tresultat['lesauteurs'];
-							    if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "a")) $tresultat['id_auteur'] = $dernierIdTrouve;
-
-							    if (($dernierTypeTrouve == "701") && ($dernierSousTypeTrouve == "a")) $tresultat['lesauteurs2'] .= $texte;
-							    if (($dernierTypeTrouve == "701") && ($dernierSousTypeTrouve == "b")) $tresultat['lesauteurs2'] = $texte." ".$tresultat['lesauteurs2'];
-							    if (($dernierTypeTrouve == "701") && ($dernierSousTypeTrouve == "a")) $tresultat['id_auteur2'] = $dernierIdTrouve;
+							    if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "a")) {
+										$tresultat['id_auteur'] = $dernierIdTrouve;
+										if ($avantDernierTypeTrouve == $dernierTypeTrouve){
+										      $tresultat['liensauteurs'].="</a>, ";
+										}
+										$tresultat['liensauteurs'].="<a href=\"?page=author_see&id=".$dernierIdTrouve."\">".$texte;
+										$premierIdTrouve = 1;
+										$tresultat['lesauteurs'] .= $texte;
+										$avantDernierTypeTrouve = $dernierTypeTrouve;
+										
+							    }
+							    if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "b")) {
+										$tresultat['lesauteurs'] = $texte." ".$tresultat['lesauteurs'];
+										$tresultat['liensauteurs'] .= " ".$texte;
+							    }
+							    if (($dernierTypeTrouve == "701") && ($dernierSousTypeTrouve == "a")) {
+										$tresultat['id_auteur2'] = $dernierIdTrouve;
+										if ($avantDernierTypeTrouve == $dernierTypeTrouve){
+										      $tresultat['liensauteurs2'].="</a>, ";
+										}
+										$tresultat['liensauteurs2'].="<a href=\"?page=author_see&id=".$dernierIdTrouve."\">".$texte;
+										$premierIdTrouve = 1;
+										$tresultat['lesauteurs2'] .= $texte;
+										$avantDernierTypeTrouve = $dernierTypeTrouve;
+										
+							    }
+							    if (($dernierTypeTrouve == "701") && ($dernierSousTypeTrouve == "b")) {
+										$tresultat['lesauteurs2'] = $texte." ".$tresultat['lesauteurs2'];
+										$tresultat['liensauteurs2'] .= " ".$texte;
+							    }
+							    if (($dernierTypeTrouve == "702") && ($dernierSousTypeTrouve == "a")) {
+										$tresultat['id_auteur3'] = $dernierIdTrouve;
+										if ($avantDernierTypeTrouve == $dernierTypeTrouve){
+										      $tresultat['liensauteurs3'].="</a>, ";
+										}
+										$tresultat['liensauteurs3'].="<a href=\"?page=author_see&id=".$dernierIdTrouve."\">".$texte;
+										$premierIdTrouve = 1;
+										$tresultat['lesauteurs3'] .= $texte;
+										$avantDernierTypeTrouve = $dernierTypeTrouve;
+										
+							    }
+							    if (($dernierTypeTrouve == "702") && ($dernierSousTypeTrouve == "b")) {
+										$tresultat['lesauteurs3'] = $texte." ".$tresultat['lesauteurs3'];
+										$tresultat['liensauteurs3'] .= " ".$texte;
+							    }
 							    
 							    
 				  }
@@ -688,7 +727,7 @@ function pmb_ws_parser_notice_array($value, &$tresultat) {
 		  }
 	     }
 	    }
-
+	    
 	    if ($tresultat['lesauteurs'] == "")
 		  $tresultat['lesauteurs'] = $tresultat['auteur'];
 	     $tresultat['logo_src'] = lire_config("spip_pmb/url","http://tence.bibli.fr/opac")."/getimage.php?url_image=http%3A%2F%2Fimages-eu.amazon.com%2Fimages%2FP%2F!!isbn!!.08.MZZZZZZZ.jpg&noticecode=".str_replace("-","",$tresultat['isbn']);

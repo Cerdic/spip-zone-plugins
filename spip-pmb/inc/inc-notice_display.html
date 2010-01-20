@@ -11,17 +11,8 @@
 		      <div class="pmb-ouvrage-infos">	
 			   <table class="spip pmb-tableau">
 			      <tbody>
-			      [<tr><td><strong><:pmb:auteur:></strong></td><td>[(#ENV{notice}|pmb_notice_champ{'id_auteur'}|oui)
-							<a href="[(#URL_PAGE{author_see}|parametre_url{id,[(#ENV{notice}|pmb_notice_champ{'id_auteur'})]})]">
-						    ]
-						  (#ENV{notice}|pmb_notice_champ{'lesauteurs'})
-						  [(#ENV{notice}|pmb_notice_champ{'id_auteur'}|oui)</a>]
+			      [<tr><td><strong><:pmb:auteur:></strong></td><td>(#ENV{notice}|pmb_notice_champ{'liensauteurs'})</a>[, (#ENV{notice}|pmb_notice_champ{'liensauteurs2'})</a>][, (#ENV{notice}|pmb_notice_champ{'liensauteurs23'})]</a>
 
-						  [, (#ENV{notice}|pmb_notice_champ{'id_auteur2'}|oui)
-							<a href="[(#URL_PAGE{author_see}|parametre_url{id,[(#ENV{notice}|pmb_notice_champ{'id_auteur2'})]})]">
-						    ]
-						  [(#ENV{notice}|pmb_notice_champ{'lesauteurs2'})]
-						  [(#ENV{notice}|pmb_notice_champ{'id_auteur2'}|oui)</a>]
 			      </td></tr>]
 			      [<tr><td><strong><:pmb:serie:></strong></td><td>(#ENV{notice}|pmb_notice_champ{'serie'})</td></tr>]
 			      [<tr><td><strong><:pmb:type:></strong></td><td>(#ENV{notice}|pmb_notice_champ{'type'})</td></tr>]
@@ -87,3 +78,5 @@
 			
 		</div>	
 	
+
+
