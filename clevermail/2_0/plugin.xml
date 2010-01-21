@@ -1,7 +1,7 @@
 <plugin>
 	<nom>CleverMail pour SPIP 2.0</nom>
-	<auteur>Thomas Beaumanoir et Nicolas Hoizey de [Clever Age->http://www.clever-age.com/]</auteur>
-	<version>2.3.4</version>
+	<auteur>Thomas Beaumanoir, Nicolas Hoizey et Stéphanie Caron de [Clever Age->http://www.clever-age.com/]</auteur>
+	<version>2.3.5</version>
   <version_base>0.8</version_base>
 	<etat>stable</etat>
 	<description>
@@ -26,7 +26,7 @@ Gestion de {{lettres d'information}} assurant les fonctionnalit&eacute;s suivant
 -* Utilisation de CFG pour la configuration ? (bof, une d&eacute;pendance en plus)
 -* Vos id&eacute;es ?
 	</description>
-	<lien>[Documentation->http://www.clever-age.com/veille/blog/plugin-clevermail-pour-spip-pour-une-gestion-simple-de-lettres-d-informations.html]</lien>
+	<lien>[Documentation->http://www.spip-contrib.net/CleverMail]</lien>
 	<icon>img_pack/lettre-24.png</icon>
 	<install>base/clevermail.php</install>
 	<options>clevermail_options.php</options>
