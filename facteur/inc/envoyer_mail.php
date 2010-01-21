@@ -4,7 +4,7 @@
 	include_spip('inc/facteur_classes');
 
 
-	function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = "") {
+	function inc_envoyer_mail_dist($destinataire, $sujet, $corps, $from = "", $headers = "") {
 		$message_html	= '';
 		$message_texte	= '';
 		if (is_array($corps)) {
