@@ -1,19 +1,21 @@
 
-titre: 'Destinataires'
-explication: 'Permet de choisir un ou plusieurs destinataires parmis des auteurs pré-sélectionnée.'
+titre: '<:saisies:saisie_destinataires_titre:>'
+explication: '<:saisies:saisie_destinataires_explication:>'
 options:
   -
     saisie: 'auteurs'
     options:
       nom: 'choix_destinataires'
-      label: 'Destinataires possibles'
-      explication: 'Un ou plusieurs auteurs parmis lesquels l'utilisateur pourra faire son choix. Si rien n'est sélectionné, c'est l'auteur qui a installé le site qui sera choisi.'
+      label: '<:saisies:option_choix_destinataires_label:>'
+      explication: '<:saisies:option_choix_destinataires_explication:>'
       multiple: 'oui'
+      option_statut: 'oui'
   -
-    saisie: 'checkbox'
+    saisie: 'radio'
     options:
       nom: 'type_choix'
       datas:
-        tous: 'Mettre <b>tous</b> ces auteurs en destinataires. L'utilisateur n'aura aucun choix.'
-        un: 'Permettre à l'utilisateur de choisir <b>un seul</b> destinataire.'
-        plusieurs: 'Permettre à l'utilisateur de choisir <b>plusieurs</b> destinataires.'
+        tous: '<:saisies:option_type_choix_tous:>'
+        un: '<:saisies:option_type_choix_un:>'
+        plusieurs: '<:saisies:option_type_choix_plusieurs:>'
+      defaut: 'tous'

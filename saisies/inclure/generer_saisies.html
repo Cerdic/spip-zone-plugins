@@ -59,7 +59,7 @@
 		[<h3 class="legend">(#GET{titre}|saisies_transformer_langue)</h3>]
 		
 		[(#GET{contenu}|is_array|oui)
-		<ul [class="(#GET{pliable}[ (#GET{plie})]"]>
+		<ul [class="(#GET{pliable})[ (#GET{plie})]"]>
 			#INCLURE{fond=inclure/generer_saisies, env, saisies=#GET{contenu}}
 		</ul>
 		]
