@@ -58,7 +58,7 @@
 	</pipeline>
 	    
 	<necessite id="SPIP" version="[2.0.9;]" />
-	<necessite id="spip_bonux" version="[1.2;]" />
+	<necessite id="spip_bonux" version="[1.8.8;]" />
 	<necessite id="verifier" version="[0.1;]" />
 	<necessite id="inscription2" version="[0.71;]" />
 	
