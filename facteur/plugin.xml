@@ -3,6 +3,7 @@
 	<nom>Facteur</nom>
 	<auteur>[Art&#233;go->http://www.artego.fr]</auteur>
 	<version>1.1</version>
+	<version_base>1.1</version_base>
 	<etat>stable</etat>
 	<licence>[GPLv3->http://www.gnu.org/licenses/gpl-3.0.html]</licence>
 	<description>Facteur s'occupe de la livraison des notifications au format HTML, texte ou mixte ; via SMTP ou non</description>
@@ -10,7 +11,6 @@
  	<necessite id="SPIP" version="[2.0.3;]" />
 	<install>base/facteur.php</install>
 	<icon>prive/images/facteur-48.png</icon>
-	<options>facteur_options.php</options>
 	<prefix>facteur</prefix>
 	<pipeline>
 		<nom>autoriser</nom>
