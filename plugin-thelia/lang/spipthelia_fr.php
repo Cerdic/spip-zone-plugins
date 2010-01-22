@@ -153,7 +153,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'etape_compte' => 'Compte',
 'etape_livraison' => 'Livraison',
 'etape_paiement' => 'Paiement',
-'etape_terminer' => 'Terminer'
+'etape_terminer' => 'Terminer',
+'message_envoye' => 'Votre demande a &eacute;t&eacute; prise en compte. Vous allez recevoir par mail votre nouveau mot de passe.',
+'mail_inexistant' => 'mail inexistant'
 
 );
 ?>

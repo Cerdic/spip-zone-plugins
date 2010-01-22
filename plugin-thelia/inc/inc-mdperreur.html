@@ -1,0 +1,29 @@
+
+			[(#REM) Titre de la page ]
+
+				<div class="titrePage">
+				<h1><:spipthelia:mdp_oublie:></h1>
+				</div>
+
+			
+				[(#REM) Contenu de la page ]
+
+				<div class="sousTitrePage">
+				<h3><:spipthelia:mdp_oublie_message:></h3>
+				</div>
+				
+			<form action="#URL_PAGE{mdpoublieok,lang=#LANG}" method="post" id="formmdp" class="formulaire-thelia">
+			<fieldset>
+
+			      <input type="hidden" name="thelia_action" value="chmdp" />
+			      <label class="petit"><:spipthelia:votre_email:> <span class="obligatoire"><:spipthelia:mail_inexistant:></span></label>
+			      <input name="email" type="text" />
+			      
+				<div class="boutonMonCompteContenu">
+				  <input type="submit" value="<:spipthelia:valider:>" />
+				</div>
+
+				
+			</fieldset>
+			</form>
+
