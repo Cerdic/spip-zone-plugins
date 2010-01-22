@@ -6,6 +6,17 @@
  *
  */
 
+function nospam_hash_env() {
+	static $res ='';
+	if ($res) return $res;
+	$ip = explode('.',$GLOBALS['ip']);
+	array_pop($ip);
+	$ip = implode('.',$ip).".xxx";
+	$res = md5($ip. $_SERVER['HTTP_USER_AGENT']);
+	#spip_log("jeton $res pour ".$ip. $_SERVER['HTTP_USER_AGENT'],"jetons");
+	return $res;
+}
+
 
 /**
  * Calcule une cle de jeton pour un formulaire
@@ -20,7 +31,7 @@ function creer_jeton($form, $qui=NULL) {
 			$qui = ":".$GLOBALS['visiteur_session']['id_auteur'].":".$GLOBALS['visiteur_session']['nom'];
 		else {
 			include_spip('inc/session');
-			$qui = hash_env();
+			$qui = nospam_hash_env();
 		}
 	}
 	include_spip('inc/securiser_action');
@@ -45,7 +56,7 @@ function verifier_jeton($jeton, $form, $qui=NULL) {
 			$qui = ":".$GLOBALS['visiteur_session']['id_auteur'].":".$GLOBALS['visiteur_session']['nom'];
 		else {
 			include_spip('inc/session');
-			$qui = hash_env();
+			$qui = nospam_hash_env();
 		}
 	}
 	
