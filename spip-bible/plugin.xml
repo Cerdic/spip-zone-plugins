@@ -37,6 +37,7 @@ Ces options sont :
 	
 		 
 	</description>
+	<utilise id="spip_bonux" />
     <prefix>
     bible
     </prefix>

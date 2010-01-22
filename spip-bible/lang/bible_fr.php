@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'deutero'=>'Livres Deut&eacute;rocanoniques',
 	'historique'=>'Historique',
 	'version_dispo'=>'Traductions de la Bible disponibles',
-	'neccessitesvn'=>'Cette page nécéssite une site sous SPIP 2.0 et le plugin Spip 2.0 Reloaded',
+	'neccessitesvn'=>'Cette page nécéssite une site sous SPIP 2.0 et le plugin Spip 2.0 Bonux',
 	//la config
 	'livres_bibles'		=>	'Liste des livres disponibles dans la Bible version  «@trad@ »',
 	'cfg_ref'			=>	'Afficher la r&eacute;f&eacute;rences du passage cit&eacute;',
