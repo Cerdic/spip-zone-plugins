@@ -49,8 +49,11 @@ function verifier_jeton($jeton, $form, $qui=NULL) {
 		}
 	}
 	
-	return (verifier_cle_action("jeton$form$time$qui",$jeton)
+	$ok = (verifier_cle_action("jeton$form$time$qui",$jeton)
 			or verifier_cle_action("jeton$form$time_old$qui",$jeton));
+	#if (!$ok)
+	#	spip_log("Erreur form:$form qui:$qui agent:".$_SERVER['HTTP_USER_AGENT']." ip:".$GLOBALS['ip'],'fauxjeton');
+	return $ok;
 }
 
 
