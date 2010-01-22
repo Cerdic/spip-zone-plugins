@@ -13,7 +13,9 @@
 	<etat>dev</etat>
 
 	<description>
-		Ce plugin permet la gestion de Comptes et de Contacts pour les inscriptions, les r&eacute;servations, les achats. Utilise et &eacute;tend la structure des auteurs SPIP.
+		<multi>
+			[Fr] Ce plugin permet la gestion de Comptes et de Contacts pour les inscriptions, les r&eacute;servations, les achats. Utilise et &eacute;tend la structure des auteurs SPIP.
+		</multi>
 	</description>
 
 	<icon>img/picto_comptes_128x128.png</icon>
@@ -54,9 +56,11 @@
 		<nom>autoriser</nom>
 		<inclure>comptes_autorisations.php</inclure>
 	</pipeline>
-	
+	    
 	<necessite id="SPIP" version="[2.0.9;]" />
+	<necessite id="spip_bonux" version="[1.2;]" />
 	<necessite id="verifier" version="[0.1;]" />
 	<necessite id="inscription2" version="[0.71;]" />
-
+	
+	<categorie>auteur</categorie>
 </plugin>
