@@ -360,9 +360,9 @@ function balise_BOUTON_ACTION($p){
 	if (!$_confirm){ $_confirm="''"; $_onclick=''; }
 	else $_onclick = " onclick=\'return confirm(\"' . attribut_html($_confirm) . '\");\'";
 
-	$p->code = "'<form class=\'bouton_action_post '.$_class.'\' method=\'post\' action=\''.(\$u=$_url).'\'><span>'.form_hidden(\$u)
+	$p->code = "'<form class=\'bouton_action_post '.$_class.'\' method=\'post\' action=\''.(\$u=$_url).'\'><div>'.form_hidden(\$u)
 .'<button type=\'submit\' class=\'submit\' $_onclick>' . $_label . '</button>'
-.'</span></form>'";
+.'</div></form>'";
 	$p->interdire_scripts = false;
 	return $p;
 }
