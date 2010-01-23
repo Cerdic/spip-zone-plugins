@@ -52,10 +52,12 @@ function balise_BIBLE_TRADUCTIONS($p){
 	
 	$lang = interprete_argument_balise(1,$p);
 	$domaine_public = interprete_argument_balise(2,$p);
-    gettype($lang) == 'NULL' ? $lang = 'tous' : $lang = $lang;
-    gettype($lang) == 'NULL' ? $domaine_public = false : $domaine_public = true;
 
-	$p->code = "bible_traductions($lang)";
+    gettype($lang) == 'NULL' ? $lang = 'tous' : $lang = $lang;
+    gettype($domaine_public) == 'NULL' ? $domaine_public = false : $domaine_public = true;
+    
+
+	$p->code = "bible_traductions($lang,$domaine_public)";
 
 	$p->interdire_scripts=true;
 	return $p;
@@ -68,7 +70,7 @@ function bible_traductions($lang,$domaine_public){
 	$tableau_separateur = bible_tableau('separateur');
 	$tableau_original = bible_tableau('original');
 	$tableau_lang = array_merge($tableau_separateur,$tableau_original);
-    
+
     
 	$lang = eregi_replace("'",'',$lang);
 	foreach ($tableau_lang as $lang1=>$i){
