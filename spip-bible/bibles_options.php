@@ -54,11 +54,10 @@ function balise_BIBLE_TRADUCTIONS($p){
 	$domaine_public = interprete_argument_balise(2,$p);
     gettype($lang) == 'NULL' ? $lang = 'tous' : $lang = $lang;
     gettype($lang) == 'NULL' ? $domaine_public = false : $domaine_public = true;
-    $i = 0;
-    $j = 2;
+
 	$p->code = "bible_traductions($lang)";
-	//$p->code = "range($i,$j)";
-	$p->interdire_scripts=false;
+
+	$p->interdire_scripts=true;
 	return $p;
 
 }
@@ -163,7 +162,7 @@ function balise_LIVRES_BIBLIQUES($p) {
 	
 	$p->code = "afficher_livres($trad,$modele)";
 	
-	#$p->interdire_scripts = true;
+	$p->interdire_scripts = true;
 	
 	return $p;
 	
