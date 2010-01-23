@@ -1,4 +1,20 @@
-#SET{tableau,#BIBLE_TRADUCTIONS{tous,oui}}
+#SET{langues,#VAL{langues}|bible_tableau}
+
+[(#REM) accepte-t-on les langues morts ?]
+[(#CONFIG{bible_pp/lang_morte}|non)
+#SET{langues,#VAL{separateur}|bible_tableau|array_keys}
+]
+[(#REM) accepte-t-on les langues pas dans l'articles ?]
+[(#CONFIG{bible_pp/lang_pas_art}|non)
+#SET{langues,#ARRAY{0,#LANG}|array_merge{#GET{langues}|array_diff{#VAL{separateur}|bible_tableau|array_keys}}}
+]
+
+
+#SET{tableau_lang,#GET{langues}}
+
+
+[(#SET{tableau,#BIBLE_TRADUCTIONS{#GET{tableau_lang},oui}})]
+
 [(#REM) on fait ici les test pour savoir ce qui doit être checké, selon qu'on soit au premier chargement ou au second)]
 [(#ENV{erreurs}|table_valeur{erreur}|oui)
 #SET{version,#ENV{erreurs}|table_valeur{version}}

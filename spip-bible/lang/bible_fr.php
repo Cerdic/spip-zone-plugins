@@ -55,6 +55,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_pp_numeros'           => "D'afficher ou non les num&eacute;ros",
 	'cfg_pp_ref'               => "D'afficher ou non les r&eacute;f&eacute;rences",
 	'cfg_pp_retour'            => "De mettre ou non des retours &agrave; la ligne",
+	'cfg_pp_lang_pas_art'      => "De choisir une version dans une langue - non morte - autre que celle de l'article ?",
+	'cfg_pp_lang_morte'      => "De choisir une version dans une langue morte"
 );
 
 

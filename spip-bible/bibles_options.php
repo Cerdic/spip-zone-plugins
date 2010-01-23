@@ -73,7 +73,7 @@ function bible_traductions($lang,$domaine_public=false){
     
     gettype($lang) == 'string' ? $lang = array($lang) : $lang = $lang;
 
-	foreach ($tableau_lang as $lang1=>$i){
+	foreach ($tableau_lang as $lang1){
 		
 		foreach ($tableau_trad as $trad=>$inf){
 			if  ((in_array($inf['lang'],$lang) or $lang[0]=='tous') and $inf['lang']==$lang1){
