@@ -134,7 +134,7 @@
 <p>
 <BOUCLE_annee(AUTEURS_ELARGIS_ABONNEMENTS){!par date}{fusion YEAR(date)}{' | '}>
 <BOUCLE_mois(AUTEURS_ELARGIS_ABONNEMENTS){annee_relatif}{!par date}{fusion MONTH(date)}{' | '}>
-<a href="[(#SELF|parametre_url{annee,#DATE|annee}|parametre_url{mois,#DATE|mois})]">[(#DATE|annee)][ (#DATE|nom_mois)]</a>
+<a href="[(#SELF|parametre_url{annee,#DATE|annee}|parametre_url{mois,#DATE|mois})]">[(#DATE|nom_mois)][ (#DATE|annee)]</a>
 </BOUCLE_mois>
 </BOUCLE_annee>
 </p>
