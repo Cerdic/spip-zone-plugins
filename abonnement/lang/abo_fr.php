@@ -81,14 +81,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// stats
 	'nombre_abonnements' => "Nb.",
-	"stats_montant" => "&yen;&euro;$",
+	"stats_montant" => "&euro;",
 	'total' => "Total",
 	"numeros_payants" => "Articles payants",
 	"nombre_acheteurs_differents" => "acheteurs diff&eacute;rents : ",
 	"diffusion_payee" => "Nb.",
 	"abonnes" => "Abonn&eacute;s",
 	"nombre_abonnes_a_jour" => "abonn&eacute;s &agrave; jour :",
-	"nombre_abonnes_dechus" => "abonn&eacute;s &eacute;chus :",
+	"nombre_abonnes_dechus" => "abonnements &eacute;chus :",
 	"nombre_abonnes_relances" => "abonn&eacute;s relanc&eacute;s :",
 	"nombre_abonnes_inscrits" => "abonn&eacute;s inscrits :",
 	"nouveaux_abonnes_depuis_7_jours" => "Nouveaux abonn&eacute;s depuis 7 jours :",

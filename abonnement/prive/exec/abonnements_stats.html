@@ -62,7 +62,7 @@
 	<td>#LIBELLE</td>
 	<BOUCLE_nombre(AUTEURS_ELARGIS_ABONNEMENTS){id_abonnement}{statut_paiement=ok}{somme montant}{compte montant}{fusion id_abonnement}>
 		<td>#COMPTE{montant}</td>
-		<td>#SOMME{montant}</td>
+		<td>[(#SOMME{montant}|number_format{2, ',', ' '}|replace{' ','&nbsp;'})]</td>
 	</BOUCLE_nombre>
 		<td>0</td>
 		<td>0</td>
@@ -75,7 +75,7 @@
 	<th><:abo:total:></th>
 	<BOUCLE_nombre_total(AUTEURS_ELARGIS_ABONNEMENTS){statut_paiement=ok}{somme montant}{compte montant}{fusion 1=1}>
 		<td>#COMPTE{montant}</td>
-		<td>#SOMME{montant}</td>
+		<td>[(#SOMME{montant}|number_format{2, ',', ' '}|replace{' ','&nbsp;'})]</td>
 	</BOUCLE_nombre_total>
 		<td>0</td>
 		<td>0</td>
@@ -85,6 +85,7 @@
 </table>
 </B_types>
 
+<B_acheteurs>
 <strong><:abo:numeros_payants:></strong>
 <:abo:nombre_acheteurs_differents:>
 <BOUCLE_acheteurs(AUTEURS_ELARGIS_ARTICLES){fusion 1=1}{statut_paiement=ok}{compte DISTINCT(id_auteur_elargi)}>
