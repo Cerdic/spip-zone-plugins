@@ -29,6 +29,9 @@ body { background-color: #f8f7f3; margin: 0; border: 0; color: #000; scrollbar-f
 body, body * { font-family: Verdana, Geneva, Sans, sans-serif; }
 body { font-size:0.625em; }
 
+/*-- spip-admin pour le debug --*/
+#INCLURE{prive/spip_admin.css}
+
 
 /* Espaceur de blocs */
 .nettoyeur { clear: both; height: 0; margin: 0; padding: 0; border: 0; line-height: 1px; font-size: 1px; }
@@ -699,6 +702,7 @@ td.message, a.message { background: url(#GET{chemin_img_pack}m_envoi[(#GET{rtl})
 .liste-plugins .liste-items .item {position:relative;padding-left:70px;}
 .liste-plugins .liste-items .item.actif {background:#eee;}
 .liste-plugins .liste-items .item.actif:hover {background:#e8e8e8;}
+.liste-plugins .liste-items .item.on {background:[#(#GET{claire}|couleur_eclaircir)];}
 .liste-plugins .liste-items .item.erreur {background:#fdd;}
 .liste-plugins .liste-items .item.erreur .erreur {color:red;font-weight:bold;}
 .liste-plugins .liste-items .item .short {color:#666;font-size:0.95em;}
@@ -715,10 +719,20 @@ td.message, a.message { background: url(#GET{chemin_img_pack}m_envoi[(#GET{rtl})
 .liste-plugins .liste-items .item .actions {float:#GET{right};visibility:hidden;}
 .liste-plugins .liste-items .item:hover .actions {visibility:visible;}
 
-.liste-plugins .liste-items .item .details .desc {padding:5px 0 2px;}
-.liste-plugins .liste-items .item .details .auteurs {font-style:italic;padding-bottom:5px;}
+.liste-plugins .liste-items .item .version,
+.liste-plugins .liste-items .item .etat {font-weight: normal;}
+.liste-plugins .liste-items .item .cfg_link {position:absolute;top:4px;#GET{right}:4px;}
+.liste-plugins .liste-items .item .details .desc {padding:5px 0 2px;font-weight:normal;}
+.liste-plugins .liste-items .item .details .auteurs {display:inline;font-style:italic;padding-bottom:5px;font-weight:normal;}
+.liste-plugins .liste-items .item .details .licence {display:inline;font-weight:normal;}
+.liste-plugins .liste-items .item .details .site {font-weight:bold;margin-top:0.5em;}
 .liste-plugins .liste-items .item .details .tech {font-size:0.9em;float:#GET{right};text-align:#GET{right};}
 
+.install-plugins {background:#ddd;border:1px solid black;color:#555;font-size:0.85em;padding:10px;}
+.install-plugins .ok {color:green;font-weight:bold;}
+.install-plugins .erreur {color:red;font-weight:bold;}
+
+.erreur_message-plugins {border:1px solid red;background:#f0d0d0;font-weight:bold;padding:10px;font-size:0.9em;}
 
 /* exec=admin_plugin 2.0 */
 .liste_plugins ul li { list-style: none; border-bottom: 1px solid #fff; }
