@@ -6,6 +6,13 @@
 fieldset.cat,
 fieldset.fiche,
 fieldset.cat fieldset 					{ border:1px solid white !important; padding:12px; margin:8px auto; }
+/*
+fieldset.cat ul							{ float:left; }*/
+fieldset.cat ul.colonne li label				{ width:150px; float:left;}
+
+fieldset.cat ul li input,
+fieldset.cat ul li select				{ border:1px solid black }
+
 fieldset.cat dt 						{ font-weight:bold;}
 label.suivant,
 input.suivant							{ float:right; }
