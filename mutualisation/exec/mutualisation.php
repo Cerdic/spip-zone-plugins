@@ -113,6 +113,17 @@ function exec_mutualisation_dist() {
 		krsort($plnum);
 		$page .= join('', $plnum);
 		$page .= "</tbody></table>\n";
+
+
+		$inutile = array();
+		foreach ( glob(_DIR_PLUGINS.'*/plugin.xml') as $pl) {
+			if (preg_match(',<prefix>([^<]+),ims', file_get_contents($pl), $r)
+			AND !$lsplugs[strtolower(trim($r[1]))])
+				$inutile[] = trim($r[1]);
+		}
+		if ($inutile) {
+			$page .= "<p>"._L('Plugins inutilis&#233;s :')." ".join(', ', $inutile)."</p>";
+		}
 	}
 
 	$page .= '<div style="text-align:center;"><img src="'
