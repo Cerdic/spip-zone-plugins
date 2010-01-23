@@ -759,6 +759,8 @@ $tableau_separateur = array(
 			return $nombre_chapitres;
 		case 'deutero':
 			return $deutero;
+        case 'langues':
+            return array_merge($tableau_separateur,$tableau_langue_original);
 		case 'petit_livre':
 			$petit_livre=array(38,64,70,71,72);
 			$petit_livre_2 = array();

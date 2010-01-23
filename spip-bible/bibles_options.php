@@ -68,9 +68,7 @@ function bible_traductions($lang,$domaine_public=false){
     $domaine_public == 'non' ? $domaine_public = false : $domaine_public=$domaine_public;
     
     $tableau_trad  = bible_tableau('traduction');
-	$tableau_separateur = bible_tableau('separateur');
-	$tableau_original = bible_tableau('original');
-	$tableau_lang = array_merge($tableau_separateur,$tableau_original);
+	$tableau_lang = bible_tableau('langues');;
     
     
     gettype($lang) == 'string' ? $lang = array($lang) : $lang = $lang;
