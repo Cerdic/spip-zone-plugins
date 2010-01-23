@@ -85,7 +85,7 @@ function bible_traductions($lang,$domaine_public){
 		}
 	}
 
-	return join(', ',$_code);
+	return $_code;
 
 }
 
