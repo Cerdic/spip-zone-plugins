@@ -1,0 +1,38 @@
+<div class="formulaire_spip">
+
+<!-- titre=Configurer le presse papier du plugin Spip-Bible -->
+<!-- icone=bible_cfg.jpg -->
+
+			<form action="#SELF" method="post">
+[<div>(#ENV{_cfg_}|form_hidden)</div>]
+	<fieldset>
+    <legend><:bible:cfg_pp_choix_laisses:></legend>
+	<ul>
+            <li>
+					<label for="numeros"><:bible:cfg_pp_numeros:></label>
+					<input type="checkbox" name="numeros"  id="numeros" [checked="(#ENV{numeros})"]  value="oui" />
+				
+			</li>
+			
+			<li>
+					<label for="retour"><:bible:cfg_pp_retour:></label>
+					<input type="checkbox" name="retour"  id="retour" [checked="(#ENV{retour})"]  value="oui" />
+				
+			</li>
+			
+			<li>
+					<label for="ref"><:bible:cfg_pp_ref:></label>
+					<input type="checkbox" name="ref"  id="ref" [checked="(#ENV{ref})"]  value="oui" />
+				
+			</li>
+			
+			
+    </ul>
+	</fieldset>
+	<p class="boutons"><input type="submit" name="_cfg_ok" value="<:OK:>" />
+	<input type="submit" name="_cfg_delete" value="<:Supprimer:>" /></p>
+   
+</form>
+</div>
+			
+			

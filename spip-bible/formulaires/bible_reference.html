@@ -49,25 +49,32 @@
         </select>
         </B_test20>
         </li>
+        [(#CONFIG{bible_pp/numeros}|oui)	
         <li>
 					<label for="numeros"><:bible:form_numeros:></label>
 					<input type="checkbox" name="numeros"  id="numeros" [checked="(#GET{numeros})"]  value="oui" />
 				
         </li>
-			
+        ]
+		[(#CONFIG{bible_pp/retour}|oui)		
         <li>
 					<label for="retour"><:bible:form_retour:></label>
 					<input type="checkbox" name="retour"  id="retour" [checked="(#GET{retour})"]  value="oui" />
 				
         </li>
-			
+		]
+		[(#CONFIG{bible_pp/ref}|oui)	
         <li>
 					<label for="ref"><:bible:form_ref:></label>
 					<input type="checkbox" name="ref"  id="ref" [checked="(#GET{ref})"]  value="oui" />
 				
         </li>
-
-    
+        ]
+        
+        [(#REM) si on ne laisse pas le choix au rédacteur, prendre version par défaut)]
+        [(#CONFIG{bible_pp/numeros}|non)[(#CONFIG{bible/numeros}|oui)<input type="hidden" name="numeros" id="numeros" value="oui"/>]]
+        [(#CONFIG{bible_pp/ref}|non)[(#CONFIG{bible/ref}|oui)<input type="hidden" name="ref" id="ref" value="oui"/>]]
+[(#CONFIG{bible_pp/retour}|non)[(#CONFIG{bible/retour}|oui)<input type="hidden" name="retour" id="retour" value="oui"/>]]
     </ul>
             <p class="boutons"><input type="submit" name="ok" value="<:ok:>" /></p>
     </div>

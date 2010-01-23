@@ -47,7 +47,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'form_retour'              => 'Retour-ligne entre v.',
 	'form_ref'                 => 'Mettre r&eacute;f&eacute;rences',
 	'form_passage'             => 'Passage',
-	'form_ref_incorrecte'          => 'R&eacute;f&eacute;rence incorrecte'
+	'form_ref_incorrecte'          => 'R&eacute;f&eacute;rence incorrecte',
+	
+	/*cfg du presse-papier*/
+	
+	'cfg_pp_choix_laisses'     => 'Laisser le choix aux r&eacute;dacteurs',
+	'cfg_pp_numeros'           => "D'afficher ou non les num&eacute;ros",
+	'cfg_pp_ref'               => "D'afficher ou non les r&eacute;f&eacute;rences",
+	'cfg_pp_retour'            => "De mettre ou non des retours &agrave; la ligne",
 );
 
 
