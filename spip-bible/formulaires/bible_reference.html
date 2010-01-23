@@ -14,6 +14,7 @@
 
 
 [(#SET{tableau,#BIBLE_TRADUCTIONS{#GET{tableau_lang},oui}})]
+[(#SET{tableau,#GET{tableau}|array_intersect{#CONFIG{bible_pp/trad_prop}}})]
 
 [(#REM) on fait ici les test pour savoir ce qui doit être checké, selon qu'on soit au premier chargement ou au second)]
 [(#ENV{erreurs}|table_valeur{erreur}|oui)
