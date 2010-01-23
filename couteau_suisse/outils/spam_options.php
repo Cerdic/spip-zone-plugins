@@ -75,7 +75,8 @@ if ( count($_POST)
 	// on compile $spam_POST en fonction des variables $_POST trouvees
 	$spam_POST_compile = array();
 	foreach (array_keys($_POST) as $key)
-	 if (preg_match($spam_POST_reg, $key)) $spam_POST_compile[] = $key;
+		if (preg_match($spam_POST_reg, $key) && strpos($key, 'password')===false)
+			$spam_POST_compile[] = $key;
 
 	// boucle de censure
 	foreach ($spam_POST_compile as $var) 
@@ -87,12 +88,10 @@ if ( count($_POST)
 
 	function action_cs_spam(){
 		include_spip('inc/minipres');
-		$page = minipres(
+		echo minipres(
 			_T('couteau:lutte_spam'),
 			_T('couteau:explique_spam')
 		);
-		// a partir de spip 1.9.2 ces fonctions ne font plus l'echo directement
-		if (defined('_SPIP19200')) echo $page;
 		return true;
 	}
 }
