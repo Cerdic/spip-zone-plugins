@@ -1,5 +1,6 @@
 <?php
 function lm2_insert_head($flux){
+	if (!defined('_DIR_LIB_SM')) define('_DIR_LIB_SM', _DIR_RACINE . 'lib/soundmanagerv295a-20090717/');
 	$flux .= '<script type="text/javascript" src="'.find_in_path(_DIR_LIB_SM.'script/soundmanager2.js').'"></script>'."\n";
 	$flux .= '<script type="text/javascript" src="'.find_in_path('javascript/lm2_playlist_jquery.js').'"></script>'."\n";
 	$flux .= '<link rel="stylesheet" href="'.generer_url_public('lm2_player.css').'" type="text/css" media="all" />'."\n";
