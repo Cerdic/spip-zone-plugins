@@ -143,21 +143,19 @@
 [(#SET{seven,[(#VAL{Y-m-d H:i:s}|date{[(#VAL{0}|mktime{0,0,[(#VAL{m}|date)],[(#VAL{d}|date|moins{7})],[(#VAL{Y}|date)]})]})]})]
 <B_ce_mois_ci>
 <table class="spip">
+<BOUCLE_ce_mois_ci(AUTEURS_ELARGIS_ABONNEMENTS) {agenda date, mois, (#ENV{annee}|sinon{#DATE|annee}), (#ENV{mois}|sinon{#DATE|mois})} {statut_paiement=ok}{fusion id_abonnement}{par id_abonnement}{!par date}>
+<BOUCLE_labonnement(ABONNEMENTS){id_abonnement}>
 <thead>
 <tr>
-	<th colspan="6">[(#DATE|annee) ][(#DATE|nom_mois)]</th>
+	<th colspan="6">[(#DATE|nom_mois)] [(#DATE|annee) ]</th>
+	<BOUCLE_abonnes_nouveaux_7_jours(AUTEURS_ELARGIS_ABONNEMENTS){statut_paiement=ok}{date>#GET{seven}}{validite>(#ENV{date})}{fusion 1=1}{compte DISTINCT(id_auteur)}>
 	<th colspan="2"><:abo:nouveaux_abonnes_depuis_7_jours:>
-		<BOUCLE_abonnes_nouveaux_7_jours(AUTEURS_ELARGIS_ABONNEMENTS){statut_paiement=ok}{date>#GET{seven}}{validite>(#ENV{date})}{fusion 1=1}{compte DISTINCT(id_auteur)}>
-			<strong>#COMPTE{id_auteur}</strong>
-		</BOUCLE_abonnes_nouveaux_7_jours>
-			<strong>0</strong>
-		<//B_abonnes_nouveaux_7_jours>
+		<strong>[(#COMPTE{id_auteur}|sinon{0})]</strong>
 	</th>
+	</BOUCLE_abonnes_nouveaux_7_jours>
 </tr>
 </thead>
 <tbody>
-<BOUCLE_ce_mois_ci(AUTEURS_ELARGIS_ABONNEMENTS) {agenda date, mois, (#ENV{annee}|sinon{#DATE|annee}), (#ENV{mois}|sinon{#DATE|mois})} {statut_paiement=ok}{fusion id_abonnement}{par id_abonnement}{!par date}>
-<BOUCLE_labonnement(ABONNEMENTS){id_abonnement}>
 <tr class="tr_liste">
 	<th colspan="7">#LIBELLE</th><th>##ID_ABONNEMENT</th>
 </tr>
