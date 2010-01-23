@@ -84,7 +84,8 @@ else {
 	// recherche des fichiers a inclure : si les fichiers sont absent, on recompilera le plugin
 	// fichiers testes : tmp/couteau-suisse/mes_options.php et tmp/couteau-suisse/mes_spip_options.php
 	$cs_exists = file_exists($f_mo = _DIR_CS_TMP.'mes_options.php');
-	if(!$GLOBALS['cs_spip_options']) $cs_exists &= file_exists($f_mso = _DIR_CS_TMP.'mes_spip_options.php');
+	$f_mso = _DIR_CS_TMP.'mes_spip_options.php';
+	if(!$GLOBALS['cs_spip_options']) $cs_exists &= file_exists($f_mso);
 	if(!$cs_exists) cs_log(" -- '$f_mo' ou '$f_mso' introuvable !");
 
 	// lancer l'initialisation du plugin. on force la compilation si cs=calcul
