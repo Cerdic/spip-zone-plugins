@@ -474,6 +474,7 @@ function bible_generer_doc($lang){
 			$unbound = $traduction['unbound'];
 			$at = $traduction['at'];
 			$nt = $traduction['nt'];
+			$domaine_public = $traduction['domaine_public'];
 			$deutero = $traduction['deutero'];
 			$lire = $traduction['lire'];
 			
@@ -501,11 +502,11 @@ function bible_generer_doc($lang){
 			}
 			
 			$texte.= ' {source} : '.$url;
-			$texte.='<br>- {valeur du paramètre traduction} : «'.$abrev.'»'; 		
-			$at == true ? $texte.='<br>- {Ancien Testament} : oui ' : $texte.='<br>- {Ancien Testament} : non ';
-			$deutero == true ? $texte.='<br>- {Deutérocanoniques} : oui ' : $texte.='<br>- {Deutérocanoniques} : non ';
-			$nt == true ? $texte.='<br>- {Nouveau Testament} : oui <br/>' : $texte.='<br>- {Nouveau Testament} : non <br/>';
-		
+			$texte.='<br />- {valeur du paramètre traduction} : «'.$abrev.'»'; 		
+			$at == true ? $texte.='<br />- {Ancien Testament} : oui ' : $texte.='<br />- {Ancien Testament} : non ';
+			$deutero == true ? $texte.='<br />- {Deutérocanoniques} : oui ' : $texte.='<br />- {Deutérocanoniques} : non ';
+			$nt == true ? $texte.='<br />- {Nouveau Testament} : oui' : $texte.='<br />- {Nouveau Testament} : non';
+			$domaine_public == true ? $texte.= '<br />- {Domaine Public} : oui <br  />' :  $texte.= '<br />- {Domaine Public} : non <br  />' ;
 		}
 	
 	

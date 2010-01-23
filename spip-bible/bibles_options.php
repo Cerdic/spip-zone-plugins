@@ -52,24 +52,23 @@ function balise_BIBLE_TRADUCTIONS($p){
 	$tableau_lang = array_merge($tableau_separateur,$tableau_original);
 	
 	$lang = interprete_argument_balise(1,$p);
+	$domaine_public = !!interprete_argument_balise(2,$p);
 	
 	gettype($lang) == 'NULL' ? $lang = 'tous' : $lang = $lang;
-	
 	$lang = eregi_replace("'",'',$lang);
 	foreach ($tableau_lang as $lang1=>$i){
 		
 		foreach ($tableau_trad as $trad=>$inf){
 			
 			if  (($lang == $inf['lang'] or $lang=='tous') and $inf['lang']==$lang1){
-				$_code[] = "$trad";
-			
+			     if ($inf["domaine_public"] or $domaine_public){             //test si dans le domaine public
+				    $_code[] = "$trad";
+			     }
 			}
 		
 		}
 	}
 	
-	
-	$code = array();
 	
 	
 	$p->code = 'array(' . join(', ',$_code).')';

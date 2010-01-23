@@ -28,6 +28,7 @@ function bible_tableau($i,$lang=''){
 	's17'		=>array(
 		'gateway'=>   array(44,'SVL'),
 		'traduction'=> 'Svenska 1917',
+		'domaine_public' => true,
 		'lang'=>'sv',
 		'nt'=> true,
 		'at'=> true	
@@ -36,25 +37,29 @@ function bible_tableau($i,$lang=''){
 		'gateway'=>array (21,'BULG'),
 		'traduction'=> 'Bulgarian Bible',
 		'lang'=>'bg',
+		'domaine_public' => true,
 		'nt'=> true,
 		'at'=> true	
 	),
 	'bb40'		=>array(
 		'gateway'=>array (82,'BG1940'),
 		'traduction'=> '1940 Bulgarian Bible',
+		'domaine_public' => true,                 //"It may be reproduced electronically only in its entirety, except in cases of direct quotation accompanied with complete bibliographical note."   => Je comprend qu'on peut donc le reproduire, pas le modifier. Le terme "domaine_public" n'est pas ici le bon, mais pour la technique ca passe.
 		'lang'=>'bg',
 		'nt'=> true,
 		'at'=> true	
 	),
 	'lb_sv'		=>array(
 		'gateway'=>array(7,'SV1917'),
-		'traduction'=> 'Levande Bibeln',
+		'traduction'=> 'Svenska 1917',
+		'domaine_public' => true,
 		'lang'=>'sv',
 		'nt'=> true,
 		'at'=> true		
 	),
 	'dnb30'		=>array(
 		'gateway'=>array(5,'DNB1930'),
+		'domaine_public' => true,
 		'traduction'=> 'Det Norsk Bibelselskap 1930',
 		'lang'=>'no',
 		'nt'=> true,
@@ -63,6 +68,7 @@ function bible_tableau($i,$lang=''){
 	'lb_no'		=>array(
 		'gateway'=>array(35,'LB'),
 		'traduction'=> 'Levande Bibeln',
+		'domaine_public' => false,
 		'lang'=>'no',
 		'nt'=> true,
 		'at'=> false
@@ -70,6 +76,7 @@ function bible_tableau($i,$lang=''){
 	),
 	'ol'		=>array(
 		'gateway'=>array(37,'OL'),
+		'domaine_public' => false,
 		'traduction'=> 'O Livro',
 		'lang'=>'pt',
 		'nt'=> true,
@@ -78,6 +85,7 @@ function bible_tableau($i,$lang=''){
 	),
 	'jfaa'		=>array(
 		'gateway'=>array(25,'AA'),
+		'domaine_public' => true,
 		'traduction'=> 'João Ferreira de Almeida Atualizada',
 		'lang'=>'pt',
 		'nt'=> true,
@@ -86,6 +94,7 @@ function bible_tableau($i,$lang=''){
 	),
 	'hb'		=>array(
 		'gateway'=>array(30,'HTB'),
+		'domaine_public' => false,
 		'traduction'=> 'Het Boek',
 		'lang'=>'nl',
 		'nt'=> true,
@@ -94,6 +103,7 @@ function bible_tableau($i,$lang=''){
 	),
 	'dbpd'		=>array(
 		'gateway'=>array(11,'DN1933'),
+		'domaine_public' => true,
 		'traduction'=> 'Dette Er Biblen Pã¥ Dansk',
 		'lang'=>'da',
 		'nt'=> true,
@@ -102,54 +112,52 @@ function bible_tableau($i,$lang=''){
 	),
 	'hk'		=>array(
 		'gateway'=>array(17,'KAR'),
+		'domaine_public' => true,
 		'traduction'=> 'Hungarian Kã¡Roli',
 		'lang'=>'hu',
 		'nt'=> true,
 		'at'=> true
 		
 	),
-	'bty'		=>array(
-		'gateway'=>array(12,'BT'),
-		'traduction'=> 'Biblia Tysiaclecia',
-		'lang'=>'pl',
-		'nt'=> true,
-		'at'=> true,
-		'deutero'=> true
-	),
 	'pev'		=>array(
-			'gateway'=>array(34,'LM'),
-			'traduction'=> 'La Parola è Vita',
-			'lang'=>'it',
+        'gateway'=>array(34,'LM'),
+        'domaine_public' => false,
+        'traduction'=> 'La Parola è Vita',
+        'lang'=>'it',
 		'nt'=> true
 		
 			
 				
 					),
 	'lnd'		=>array(
-			'gateway'=>array(55,'LND'),
-			'traduction'=> 'La Nuova Diodati',
-			'lang'=>'it',
+        'gateway'=>array(55,'LND'),
+        'domaine_public' => false, // "All this material may be freely copied and shared with your friends. If you wish to use this material for other purposes, please contact us to obtain the latest accurate copy."
+        'traduction'=> 'La Nuova Diodati',
+        'lang'=>'it',
 		'nt'=> true,
 		'at'=> true	
 					),
 	'cei'		=>array(
-			'gateway'=>array(3,'CEI'),
-			'traduction'=> 'Conferenza Episcopale Italiana',
-			'lang'=>'it',
+        'gateway'=>array(3,'CEI'),
+        'domaine_public' => true,
+        'traduction'=> 'Conferenza Episcopale Italiana',
+        'lang'=>'it',
 		'nt'=> true,
 		'at'=> true,
 		'deutero'=> true	
 					),
 	
 	'rvantigua'		=>array(
-			'gateway'=>array(6,'RVA'),
-			'traduction'=> 'Reina-Valera Antigua',
-			'lang'=>'es',
+        'gateway'=>array(6,'RVA'),
+        'domaine_public' => true,
+        'traduction'=> 'Reina-Valera Antigua',
+        'lang'=>'es',
 		'nt'=> true,
 		'at'=> true	
 					),
 	'rv95'		=>array(
 			'gateway'=>array(61,'RVR1995'),
+			'domaine_public' => false,
 			'traduction'=> 'Reina-Valera 1995',
 			'lang'=>'es',
 		'nt'=> true,
@@ -159,12 +167,14 @@ function bible_tableau($i,$lang=''){
 	'rv60'		=>array(
 			'gateway'=>array(60,'RVR1960'),
 			'traduction'=> 'Reina-Valera 1960',
+			'domaine_public' => false,
 			'lang'=>'es',
 		'nt'=> true,
 		'at'=> true	
 					),
 	'nvi'		=>array(
 			'gateway'=>array(42,'NVI'),
+        'domaine_public' => false,
 			'traduction'=> 'Nueva Versión Internacional',
 			'lang'=>'es',
 		'nt'=> true,
@@ -172,6 +182,7 @@ function bible_tableau($i,$lang=''){
 					),
 	'americas'		=>array(
 			'gateway'=>array(59,'LBLA'),
+        'domaine_public' => false,
 			'traduction'=> 'La Biblia De Las Américas',
 			'lang'=>'es',
 		'nt'=> true,
@@ -179,6 +190,7 @@ function bible_tableau($i,$lang=''){
 					),
 	'bls'		=>array(
 			'gateway'=>array(57,'BLS'),
+        'domaine_public' => false,
 			'traduction'=> 'Biblia en lenguaje sencillo',
 			'lang'=>'es',
 		'nt'=> true
@@ -186,6 +198,7 @@ function bible_tableau($i,$lang=''){
 					),
 	'cast'		=>array(
 			'gateway'=>array(41,'CST'),
+        'domaine_public' => true,
 			'traduction'=> 'Castilian',
 			'lang'=>'es',
 		'nt'=> true
@@ -193,6 +206,7 @@ function bible_tableau($i,$lang=''){
 					),
 	'dhh'		=>array(
 			'gateway'=>array(58,'DHH'),
+        'domaine_public' => false,
 			'traduction'=> 'Dios Habla Hoy',
 			'lang'=>'es',
 		'nt'=> true,
@@ -204,6 +218,7 @@ function bible_tableau($i,$lang=''){
 			'lire'=>'TOB',
 			'traduction'=> 'Traduction Œcuménique de la Bible',
 			'lang'=>'fr',
+        'domaine_public' => false,
 		'nt'=> true,
 		'at'=> true,
 		'isaie'=>'Es',
@@ -213,6 +228,7 @@ function bible_tableau($i,$lang=''){
 			'lire'=>'BFC',
 			'traduction'=> 'Bible en Français Courant',
 			'lang'=>'fr',
+        'domaine_public' => false,
 		'nt'=> true,
 		'at'=> true,
 		'isaie'=>'Es',
@@ -221,6 +237,7 @@ function bible_tableau($i,$lang=''){
 	'nbs'		=>array(
 			'lire'=>'NBS',
 			'traduction'=> 'Nouvelle Bible Segond',
+        'domaine_public' => false,
 			'lang'=>'fr',
         'isaie'=>'Es',
 		'nt'=> true,
@@ -229,6 +246,7 @@ function bible_tableau($i,$lang=''){
 	'pdv'		=>array(
 			'lire'=>'PDV',
 			'traduction'=> 'La Bible Parole de Vie',
+        'domaine_public' => false,
 			'lang'=>'fr',
 		'nt'=> true,
 		'at'=> true,
@@ -238,6 +256,7 @@ function bible_tableau($i,$lang=''){
 	'colombe'		=>array(
 			'lire'=>'Colombe',
 			'traduction'=> 'Bible de la Colombe',
+        'domaine_public' => false,
 			'lang'=>'fr',
             'isaie'=>'Es',
 		'nt'=> true,
@@ -277,7 +296,8 @@ function bible_tableau($i,$lang=''){
 		'traduction'=> 'Bibel von Luther (1912)',
 		'lang'		=>'de',
 		'nt'=> true,
-		'at'=> true
+		'at'=> true,
+        'domaine_public' => true
 			),
 	'luther1545'		=> array(
 		
@@ -286,7 +306,8 @@ function bible_tableau($i,$lang=''){
 		'lang'		=>'de',
 		'nt'=> true,
 		'at'=> true,
-		'historique'=>'La fameuse Bible que Luther publia en langue vulgaire en 1545.'
+		'historique'=>'La fameuse Bible que Luther publia en langue vulgaire en 1545.',
+		'domaine_public'  => true
 			),
 	'pr38'		=> array(
 		
@@ -294,23 +315,26 @@ function bible_tableau($i,$lang=''){
 		'traduction'=> 'Pyhä Raamattu (1933/1938)',
 		'lang'		=>'fi',
 		'nt'=> true,
-		'at'=> true
+		'at'=> true,
+        'domaine_public' => true
 			),
-		'pr38'		=> array(
+		'син76'		=> array(
 		
-		'сп'=>'russian_synodal_1876_ucs2',
+		'unbound'=>'russian_synodal_1876_ucs2',
 		'traduction'=> 'синодальний переклад (1876)',
 		'lang'		=>'ru',
 		'nt'=> true,
-		'at'=> true
+		'at'=> true,
+        'domaine_public' => true
 			),
 		'пм'		=> array(
 		
 		'unbound'=>'russian_makarij_ucs2',
 		'traduction'=> 'Переклад Макарія (Пентатеуч) (1825)',
 		'lang'		=>'ru',
-		'nt'=> true,
-		'at'=> true
+		'nt'=> false,
+		'at'=> true,
+        'domaine_public' => true
 			),
 		'вж'		=> array(
 		
@@ -318,7 +342,8 @@ function bible_tableau($i,$lang=''){
 		'traduction'=> 'НЗ Віктора Журомського',
 		'lang'		=>'ru',
 		'nt'=> true,
-		'at'=> true
+		'at'=> false,
+        'domaine_public' => true
 			),
 	'pr92'		=> array(
 		
@@ -326,7 +351,8 @@ function bible_tableau($i,$lang=''){
 		'traduction'=> 'Pyhä Raamattu (1992)',
 		'lang'		=>'fi',
 		'nt'=> true,
-		'at'=> true
+		'at'=> true,
+		'domaine_public'  => false
 			),
 	'lxx'		=> array(
 		'wissen' 	=> 'septuaginta-lxx',
@@ -355,7 +381,17 @@ function bible_tableau($i,$lang=''){
 		'nt'=> true,
 		'at'=> true,
 		'isaie'=>'Is',
-		'deutero'=> true
+		'historique' => ' Nova Vulgata
+Bibliorum Sacrorum Editio
+
+Sacrosancti Oecumenici Concilii Vaticani II
+_ Ratione Habita
+_ Iussu Pauli PP. VI Recognita
+_ Auctoritate Ioannis Pauli PP. II Promulgata
+
+Editio Typica Altera ',
+		'deutero'=> true,
+		'domaine_public' => true
 			),
     'vulgc'		=> array(
 		'unbound' 	=> 'latin_vulgata_clementina_ucs2',
@@ -365,7 +401,8 @@ function bible_tableau($i,$lang=''){
 		'nt'=> true,
 		'at'=> true,
 		'isaie'=>'Is',
-		'deutero'=> true
+		'deutero'=> true,
+		'domaine_public' => true
 			),
 		
 	'bhs'		=> array(
@@ -384,7 +421,7 @@ function bible_tableau($i,$lang=''){
 		'nt'=> true)
 		,
 	'jerusalem' => array(
-		'traduction'=> 'Bible de J&eacute;rusalem',
+		'traduction'=> 'Bible de J&eacute;rusalem (1973)',
 		'gateway'	=> false,
 		'unbound'   => 'french_jerusalem_ucs2',
 		'lang'		=> 'fr',
@@ -392,11 +429,13 @@ function bible_tableau($i,$lang=''){
 		'at'=> true,
 		'deutero'=> true,
 		'isaie'=>'Is',
+		'domaine_public' => false,
 		'historique'=>'[Voir ici->http://fr.wikipedia.org/wiki/Bible_de_Jérusalem]'),
     'darb_fr' => array(
 		'traduction'=> 'Darby',
 		'gateway'	=> false,
 		'unbound'   => 'french_darby_ucs2',
+		'domaine_public' => false,
 		'lang'		=> 'fr',
 		'nt'=> true,
 		'at'=> true,
@@ -408,6 +447,7 @@ function bible_tableau($i,$lang=''){
 		'gateway'	=> false,
 		'unbound'   => 'french_martin_1744_ucs2',
 		'lang'		=> 'fr',
+		'domaine_public' => true,
 		'nt'=> true,
 		'at'=> true,
 		'deutero'=> false,
@@ -417,6 +457,7 @@ function bible_tableau($i,$lang=''){
 		'traduction'=> 'Ostervald (R&eacute;vision de 1996)',
 		'gateway'	=> false,
 		'unbound'   => 'french_ostervald_1996_ucs2',
+        'domaine_public' => true,                           // Je pense, mais ce n'est pas clair
 		'lang'		=> 'fr',
 		'nt'=> true,
 		'at'=> true,
@@ -426,12 +467,14 @@ function bible_tableau($i,$lang=''){
 	'lsg' => array(
 		'traduction'=> 'Louis Segond 1910',
 		'gateway'	=> array(2,'LSG'),
+        'domaine_public' => true,
 		'lang'		=> 'fr',
 		'isaie'     => 'Es',
 		'nt'=> true,
 		'at'=> true),
 	'bds' => array(
 		'traduction'=> 'Bible du Semeur',
+        'domaine_public' => false,
 		'gateway'	=> array(32, 'BDS'),
 		'lang'		=> 'fr',
 		'isaie'     => 'Es',
@@ -439,18 +482,21 @@ function bible_tableau($i,$lang=''){
 		'at'=> true),
 	'kj21' => array(
 		'traduction'=> 'The 21st Century King James',
+        'domaine_public' => false,
 		'gateway'	=> array(48,'KJ21'),
 		'lang'		=> 'en',
 		'nt'=> true,
 		'at'=> true),
 	'darb_en' => array(
 		'traduction'=> 'Darby',
+        'domaine_public' => true,
 		'gateway'	=> array(16,'DARBY'),
 		'lang'		=> 'en',
 		'nt'=> true,
 		'at'=> true),
 	'kj'		=> array(
 		'traduction'=>'King Jame',
+        'domaine_public' => true,
 		'gateway'	=>array(9,'KJV'),
 		'lang'		=>'en',
 		'nt'=> true,
