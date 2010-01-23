@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'neccessitesvn'=>'Cette page nécéssite une site sous SPIP 2.0 et le plugin Spip 2.0 Bonux',
 	//la config
 	'livres_bibles'		=>	'Liste des livres disponibles dans la Bible version  «@trad@ »',
-	'cfg_ref'			=>	'Afficher la r&eacute;f&eacute;rences du passage cit&eacute;',
+	'cfg_ref'			=>	'Afficher la r&eacute;f&eacute;rence du passage cit&eacute;',
 	'cfg_retour'		=>	'Faire des retour à la ligne entre les versets',
 	'cfg_traduction_fr'	=>	'Traduction francaise par d&eacute;faut',
 	'cfg_traduction_da' =>	'Traduction danoise par d&eacute;faut',
@@ -37,9 +37,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traduction_pas_dispo'	=> "La traduction de la Bible demand&eacute;e n'existe pas",
 	
 	/* le presse papier biblique */
-	'presse_papier_titre'    => 'Presse Papier Biblique',
-	'presse_papier'          => 'Taper ici le code d\'appel &agrave; un passage biblique',
-	'presse_papier_resultat' => 'Texte correspondant'
+	'presse_papier_titre'      => 'Presse Papier Biblique',
+	'presse_papier'            => 'Taper ici le code d\'appel &agrave; un passage biblique',
+	'presse_papier_resultat'   => 'Texte correspondant',
+	
+	/* Le formulaire d'obtention de référence (PP V2)*/
+	'form_version'             => 'Version',
+	'form_numeros'             => 'Afficher num&eacute;ros chap./v.',
+	'form_retour'              => 'Retour-ligne entre v.',
+	'form_ref'                 => 'Mettre r&eacute;f&eacute;rences',
+	'form_passage'             => 'Passage',
+	'form_ref_incorrecte'          => 'R&eacute;f&eacute;rence incorrecte'
 );
 
 

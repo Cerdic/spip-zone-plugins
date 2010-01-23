@@ -1,0 +1,75 @@
+#SET{tableau,#BIBLE_TRADUCTIONS{tous,oui}}
+[(#REM) on fait ici les test pour savoir ce qui doit être checké, selon qu'on soit au premier chargement ou au second)]
+[(#ENV{erreurs}|table_valeur{erreur}|oui)
+#SET{version,#ENV{erreurs}|table_valeur{version}}
+#SET{numeros,#ENV{erreurs}|table_valeur{numeros}}
+#SET{ref,#ENV{erreurs}|table_valeur{ref}}
+#SET{retour,#ENV{erreurs}|table_valeur{retour}}
+]
+[(#ENV{erreurs}|table_valeur{erreur}|non)
+#SET{version,#ENV{version}}
+#SET{numeros,#ENV{numeros}}
+#SET{ref,#ENV{ref}}
+#SET{retour,#ENV{retour}}
+]
+[(#ENV{message_ok}|oui)
+#SET{version,#ENV{message_ok}|table_valeur{version}}
+#SET{numeros,#ENV{message_ok}|table_valeur{numeros}}
+#SET{ref,#ENV{message_ok}|table_valeur{ref}}
+#SET{retour,#ENV{message_ok}|table_valeur{retour}}
+]
+
+<form action="#ENV{action}" method="post" style="border: 0px none ; margin: 0px;">
+<div class="cadre cadre-r formulaire_spip" style="margin-top: 20px;">
+    <div class="entete-formulaire titrem">
+    <:bible:presse_papier_titre:>
+    </div>
+    
+#ACTION_FORMULAIRE{#ENV{action}}
+    
+    <div class="formulaire_spip formulaire_editer">
+    <ul>
+    
+    [<li> <textarea rows="50" name="bible_resultat" id="bible_resultat">(#ENV*{message_ok}|table_valeur{resultat})</textarea></li>]
+    
+    <li[ class="erreur"(#ENV{erreurs}|table_valeur{erreur}|oui)]>
+        <label for="passage"><:bible:form_passage:></label>
+        <input type="text" class="text" size="80" name="passage" id="passage" value="[(#ENV{erreurs}|table_valeur{erreur})]"/>
+        
+    </li>
+    <li>
+
+        <B_test20>
+        <label for="version"><:bible:form_version:></label>
+
+        <select name="version" id="version">
+        <BOUCLE_test20(POUR){tableau #GET{tableau} }>
+        <option value="#VALEUR" lang="#INFO_BIBLE_TRADUCTION{#VALEUR,lang_abrev}"[ selected="selected"(#GET{version}|=={#VALEUR}|oui)]>#INFO_BIBLE_TRADUCTION{#VALEUR,traduction}  &nbsp;&#091;#INFO_BIBLE_TRADUCTION{#VALEUR,lang_abrev}&#093;</option>
+        </BOUCLE_test20>
+        </select>
+        </B_test20>
+        </li>
+        <li>
+					<label for="numeros"><:bible:form_numeros:></label>
+					<input type="checkbox" name="numeros"  id="numeros" [checked="(#GET{numeros})"]  value="oui" />
+				
+        </li>
+			
+        <li>
+					<label for="retour"><:bible:form_retour:></label>
+					<input type="checkbox" name="retour"  id="retour" [checked="(#GET{retour})"]  value="oui" />
+				
+        </li>
+			
+        <li>
+					<label for="ref"><:bible:form_ref:></label>
+					<input type="checkbox" name="ref"  id="ref" [checked="(#GET{ref})"]  value="oui" />
+				
+        </li>
+
+    
+    </ul>
+            <p class="boutons"><input type="submit" name="ok" value="<:ok:>" /></p>
+    </div>
+</div>
+</form>
