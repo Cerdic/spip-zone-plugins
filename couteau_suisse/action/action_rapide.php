@@ -14,6 +14,7 @@ cs_log("INIT : action_action_rapide_dist() - Une action rapide '$arg' a ete dema
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 	$redirect = _request('redirect');
+	if(!defined('_SPIP19300')) $redirect = urldecode($redirect)
 	$outil = (
 		preg_match(',&arg=([\w_]+)\|[\w_]+,', $redirect, $regs)
 		|| preg_match(',&outil=([\w_]+),', $redirect, $regs)
@@ -23,7 +24,7 @@ cs_log("INIT : action_action_rapide_dist() - Une action rapide '$arg' a ete dema
 	// au cas ou, pour redirige_par_entete()
 	include_spip('inc/headers');
 	spip_log("action 'action_rapide' du Couteau suisse : $outil|$arg");
-//	cs_log($_POST, 'action POST='); cs_log($_GET, 'action GET=');
+//cs_log($_POST, 'action POST='); cs_log($_GET, 'action GET=');
 
 	switch($arg) {
 

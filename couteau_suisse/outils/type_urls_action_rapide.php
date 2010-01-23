@@ -28,6 +28,7 @@ function type_urls_action_rapide() {
 // Fonction appelee par exec/action_rapide : ?exec=action_rapide&arg=type_urls|URL_objet (pipe obligatoire)
 // Renvoie les caracteristiques URLs d'un objet (cas SPIP >= 2.0)
 function type_urls_URL_objet_exec() {
+	global $type_urls;
 	$type = _request('type_objet');
 	$trouver_table = charger_fonction('trouver_table', 'base');
 	$desc = $trouver_table(table_objet($type));
@@ -58,13 +59,13 @@ function type_urls_URL_objet_exec() {
 // Fonction {$outil}_{$arg}_exec() appelee par exec/action_rapide : ?exec=action_rapide&arg=type_urls|URL_objet_191 (pipe obligatoire)
 // Renvoie les caracteristiques URLs d'un objet (cas SPIP < 2.0)
 function type_urls_URL_objet_191_exec() {
+	global $type_urls;
 	$type = _request('type_objet');
 	$table = $type.($type=='syndic'?'':'s');
 	$id_objet = intval(_request('id_objet'));
 	$r0 = "SELECT url_propre, titre FROM spip_$table WHERE id_$type=$id_objet";
 	$r = spip_query($r0);
 	if ($r AND $r = spip_fetch_array($r)) { $url_1 = $r['url_propre']; $titre = $r['titre']; }
-	/*charger_generer_url();*/
 	if(!function_exists($fct = 'generer_url_'.($type=='syndic'?'site':$type))) {
 		if($f = include_spip('urls/'.$type_urls, false))
 			include_once($f);
