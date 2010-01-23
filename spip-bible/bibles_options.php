@@ -49,15 +49,28 @@ function info_bible_version($trad,$info){
 	
 }
 function balise_BIBLE_TRADUCTIONS($p){
-	$tableau_trad  = bible_tableau('traduction');
+	
+	$lang = interprete_argument_balise(1,$p);
+	$domaine_public = interprete_argument_balise(2,$p);
+    gettype($lang) == 'NULL' ? $lang = 'tous' : $lang = $lang;
+    gettype($lang) == 'NULL' ? $domaine_public = false : $domaine_public = true;
+    $i = 0;
+    $j = 2;
+	$p->code = "bible_traductions($lang)";
+	//$p->code = "range($i,$j)";
+	$p->interdire_scripts=false;
+	return $p;
+
+}
+
+function bible_traductions($lang,$domaine_public){
+
+    $tableau_trad  = bible_tableau('traduction');
 	$tableau_separateur = bible_tableau('separateur');
 	$tableau_original = bible_tableau('original');
 	$tableau_lang = array_merge($tableau_separateur,$tableau_original);
-	
-	$lang = interprete_argument_balise(1,$p);
-	$domaine_public = !!interprete_argument_balise(2,$p);
-	
-	gettype($lang) == 'NULL' ? $lang = 'tous' : $lang = $lang;
+    
+    
 	$lang = eregi_replace("'",'',$lang);
 	foreach ($tableau_lang as $lang1=>$i){
 		
@@ -71,18 +84,12 @@ function balise_BIBLE_TRADUCTIONS($p){
 		
 		}
 	}
-	
-	
-	
-	$p->code = 'array(' . join(', ',$_code).')';
-	
-	$p->interdire_scripts=false;
-	return $p;
+
+	return join(', ',$_code);
 
 }
 
 function afficher_livres($trad,$modele='standard'){
-	
 	$tableau_trad  = bible_tableau('traduction');
 	$tableau_livre = bible_tableau('livres');
 	$livres_deutero = bible_tableau('deutero');
