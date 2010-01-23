@@ -1,6 +1,7 @@
 <?php
 
 // notre fonction de recherche de logo
+// SPIP 2.0
 function calcule_logo_ou_gravatar($email) {
 	$a = func_get_args();
 	$email = array_shift($a);
@@ -13,6 +14,15 @@ function calcule_logo_ou_gravatar($email) {
 		$c[0] = gravatar($email);
 
 	return $c;
+}
+
+// pour 2.1 on se contente de produire un tag IMG
+function gravatar_img($email) {
+	if (!$email OR !$g = gravatar($email))
+		return '';
+
+	return '<img src="'.$g.'" alt="" class="spip_logos" />';
+
 }
 
 function gravatar_verifier_index($tmp) {

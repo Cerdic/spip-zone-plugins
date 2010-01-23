@@ -15,7 +15,15 @@ function balise_LOGO_AUTEUR($p) {
 
 	$p = $balise_logo_($p);
 
-	$p->code = str_replace('calcule_logo(', 'calcule_logo_ou_gravatar(sinon((is_null('.$_email1.')?'.$_emailsql.':'.$_email1.'),sinon('.$_email2.', sinon('.$_email3.', '.$_email4.'))), ', $p->code);
+	# spip 2.0
+	if (preg_match(',calcule_logo,', $p->code))
+		$p->code = str_replace('calcule_logo(', 'calcule_logo_ou_gravatar(sinon((is_null('.$_email1.')?'.$_emailsql.':'.$_email1.'),sinon('.$_email2.', sinon('.$_email3.', '.$_email4.'))), ', $p->code);
+
+	# spip 2.1
+	else
+		$p->code = '(($a = '
+		. $p->code
+		.') ? $a : gravatar_img( sinon((is_null('.$_email1.')?'.$_emailsql.':'.$_email1.'),sinon('.$_email2.', sinon('.$_email3.', '.$_email4.')))))';
 
 	return $p;
 }
