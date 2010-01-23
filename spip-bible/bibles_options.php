@@ -54,9 +54,9 @@ function balise_BIBLE_TRADUCTIONS($p){
 	$domaine_public = interprete_argument_balise(2,$p);
 
     gettype($lang) == 'NULL' ? $lang = 'tous' : $lang = $lang;
-    gettype($domaine_public) == 'NULL' ? $domaine_public = false : $domaine_public = true;
+    gettype($domaine_public) == 'NULL' ? $domaine_public = 'non' : $domaine_public = true;
     
-
+    
 	$p->code = "bible_traductions($lang,$domaine_public)";
 
 	$p->interdire_scripts=true;
@@ -64,20 +64,22 @@ function balise_BIBLE_TRADUCTIONS($p){
 
 }
 
-function bible_traductions($lang,$domaine_public){
-
+function bible_traductions($lang,$domaine_public=false){
+    $domaine_public == 'non' ? $domaine_public = false : $domaine_public=$domaine_public;
+    
     $tableau_trad  = bible_tableau('traduction');
 	$tableau_separateur = bible_tableau('separateur');
 	$tableau_original = bible_tableau('original');
 	$tableau_lang = array_merge($tableau_separateur,$tableau_original);
-
     
-	$lang = eregi_replace("'",'',$lang);
+    
+    gettype($lang) == 'string' ? $lang = array($lang) : $lang = $lang;
+
 	foreach ($tableau_lang as $lang1=>$i){
 		
 		foreach ($tableau_trad as $trad=>$inf){
-			
-			if  (($lang == $inf['lang'] or $lang=='tous') and $inf['lang']==$lang1){
+			if  ((in_array($inf['lang'],$lang) or $lang[0]=='tous') and $inf['lang']==$lang1){
+			     
 			     if ($inf["domaine_public"] or $domaine_public){             //test si dans le domaine public
 				    $_code[] = "$trad";
 			     }
