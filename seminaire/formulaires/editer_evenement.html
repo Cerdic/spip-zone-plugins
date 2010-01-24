@@ -61,8 +61,19 @@
 	    </li>
 	  </ul>
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
-	  <!--extra-->
-	  <p class='boutons'><input type='submit' class='submit' value='[(#ENV{id_evenement}|?{<:bouton_enregistrer:>,<:bouton_ajouter:>})]' /></p>
+	<!--extra-->
+	<li class="editer_inscription[ (#ENV**{erreurs}|table_valeur{inscription}|oui)erreur]">
+		    <div class='choix inscription'>
+					[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{inscription})</span>]
+					<input type='checkbox' class='checkbox' name='inscription' id='inscription' value="1"[ (#ENV{inscription}|oui)checked="checked"] />
+					<label for="inscription"><:agenda:label_inscription:></label>
+				</div><div class='choix places'>
+				<label for="places"><:agenda:label_places:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{places})</span>
+				]<input type='text' class='text' name='places' id='places' value="[(#ENV{places})]" />
+				</div>
+	    </li>
+	<p class='boutons'><input type='submit' class='submit' value='[(#ENV{id_evenement}|?{<:bouton_enregistrer:>,<:bouton_ajouter:>})]' /></p>
 	</div></form>
 	#INCLURE{fond=formulaires/inc-editer_evenement_pickers}
 	]
