@@ -39,7 +39,8 @@ function balise_SWFUPLOAD_dyn($str="")
 
 	$upload_dir = _DIR_TRANSFERT;
 	$nom=$upload_dir.$_FILES['Filedata']['name'];
-	@move_uploaded_file($_FILES['Filedata']['tmp_name'],$nom);	
+	@move_uploaded_file($_FILES['Filedata']['tmp_name'],$nom);
+  @chmod($nom, 0777);
 	spip_log("swfupload: $nom");  
 
 	$file_id = md5($_FILES["Filedata"]["tmp_name"] + rand()*100000);	
