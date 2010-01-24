@@ -1,11 +1,14 @@
 [(#REM) 
 	Modele licence, parametres :
 	id_licence : id de la licence a afficher
+	id_article : id de l'article dont on souhaite afficher la licence
 	lien : si non n'affiche pas le lien vers la description de la licence
 	logo : si non n'affiche pas le logo de la licence
 ]
+#SET{id_licence,#ENV{id_licence}}
+<BOUCLE_article(ARTICLES){id_article}>#SET{id_licence,#ID_LICENCE}</BOUCLE_article>
 #SET{licence,#EVAL{$GLOBALS['licence_licences']}}
-<BOUCLE_selection(POUR){tableau #GET{licence}}{cle=#ENV{id_licence}}>
+<BOUCLE_selection(POUR){tableau #GET{licence}}{cle=#GET{id_licence}}>
 	<BOUCLE_name_licence(POUR){tableau #VALEUR}{cle=name}>#SET{name_licence,#VALEUR}</BOUCLE_name_licence>
 	<BOUCLE_link_licence(POUR){tableau #VALEUR}{cle=link}>#SET{link_licence,#VALEUR}</BOUCLE_link_licence>
 	<BOUCLE_icon_licence(POUR){tableau #VALEUR}{cle=icon}>#SET{icon_licence,#VALEUR}</BOUCLE_icon_licence>
