@@ -1,12 +1,31 @@
 <form action="#SELF" method="post">
 [<div>(#ENV{_cfg_}|form_hidden)</div>]
     
+    <script type="text/javascript">
+    // <![CDATA[
+
+    $(document).ready(function() {
+        $(".version legend").after('<p><a class="coche" href="#">Tout cocher</a> | <a class="decoche" href="#">Tout decocher</a> </p>');
+        $("a.decoche").click(function() {
+                $(this).parents("fieldset").find(":checkbox").removeAttr("checked");
+                return false;
+        });
+        $("a.coche").click(function() {
+                $(this).parents("fieldset").find(":checkbox").attr("checked","checked");
+                return false;
+        });
+});
+    // ]]>
+    </script>
+    
     #SET{langues,#VAL{langues}|bible_tableau}
 
     <BOUCLE_langues(POUR){tableau #GET{langues}}>
-    <fieldset>
+    <fieldset class="version">
     #SET{lang,#VALEUR|traduire_nom_langue}
     <legend><:bible:cfg_pp_version_par_lang{lang=#GET{lang}}:></legend>
+    
+    
     
     #SET{traduction,#BIBLE_TRADUCTIONS{#VALEUR,tous}}
     
