@@ -3,18 +3,21 @@
 	GetId3 pour SPIP 2.0
 	</nom>
 	<auteur>
- 	BoOz, booz@rezo.net	
+ 	BoOz, booz@rezo.net
 	_ Kent1, kent1@arscenic.info
 	</auteur>
 	<version>
 	0.2
 	</version>
+	<version_base>
+	0.2
+	</version_base>
 	<etat>
 	test
 	</etat>
 	<description>
 	Lire et ecrire les tag sur les documents audio
-	_ http://getid3.sourceforge.net/
+	_ [->http://getid3.sourceforge.net/]
 	_ getID3() is a PHP script that extracts useful information (such as ID3 tags, bitrate, playtime, etc.) from MP3s &amp; other multimedia file formats (Ogg, WMA, WMV, ASF, WAV, AVI, AAC, VQF, FLAC, MusePack, Real, QuickTime, Monkey's Audio, MIDI and more).
 	</description>
 	<options>
@@ -23,9 +26,13 @@
 	<fonctions>
 	getid3_fonctions.php
 	</fonctions>
-	<prefix> 
+	<prefix>
 	getid3
 	</prefix>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/getid3.php</inclure>
+	</pipeline>
 	<pipeline>
 		<nom>editer_contenu_objet</nom>
 		<action>editer_contenu_objet</action>

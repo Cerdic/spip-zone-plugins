@@ -4,13 +4,13 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'recuperer_infos' => 'R&eacute;cup&eacute;rer les informations du fichier',
-	
+
 	'son_infos_techniques' => 'Infos techniques',
 	'son_nom_fichier' => 'Nom du fichier',
 	'son_extension' => 'Extension :',
 	'son_format' => 'Mime-Type :',
 	'son_duree' => 'Dur&eacute;e :',
-	'son_bitrate' => 'Bitrate :', 
+	'son_bitrate' => 'Bitrate :',
 	'son_bitratemode' => 'Mode :',
 	'son_bitrate_cbr' => 'Bitrate constant',
 	'son_bitrate_vbr' => 'Bitrate variable',
@@ -19,7 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'son_bits' => 'Bits :',
 	'canaux' => 'Canaux :',
 	'verifier_formulaire' => 'V&eacute;rifiez le remplissage du formulaire.',
-	
+
 	// Les tags
 	'title' => 'Titre',
 	'artist' => 'Artiste',
@@ -44,7 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'channel_mode' => 'Mode (channel)',
 	'source' => 'Source',
 	'mime' => 'Type mime',
-	
+
 	// Tags trouvés sur Jamendo
 	'copyright_message' => 'Message de copyright',
 	'original_filename' => 'Nom original',
@@ -60,8 +60,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'url_station' => 'Url de station (?)',
 	'url_publisher' => 'Url du site de publication',
 
-	'mise_a_jour_base' => 'Mise &agrave; jour de la base de getid3 en @version@',
-	
+	'install_mise_a_jour_base' => 'Mise &agrave; jour de la base de getid3 en @version@',
+	'install_ajout_champs_documents' => 'GetID3 : Ajout des champs sur spip_documents',
+
 );
 
 
