@@ -7,6 +7,7 @@ function formulaires_bible_reference_charger_dist($lang='fr'){
 	$valeurs = array(
 	   'action'    => $script,
 	   'version'      =>  lire_config('bible/traduction_'.$lang),
+	   'lang'      =>$lang;
 	   'numeros'   => lire_config('bible/numeros'),
 	   'retour'    => lire_config('bible/retour'),
 	   'ref'       => lire_config('bible/ref'),
