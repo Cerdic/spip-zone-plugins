@@ -78,6 +78,11 @@ function bible_install($action){
 				ecrire_config('bible/traduction_fi','pr92');
 				ecrire_config('bible/traduction_ru','вж');
 				ecrire_config('bible/traduction_bg','bb');
+            include_spip('inc/plugin');
+            $liste=liste_plugin_actifs();
+			if ($liste['SPIP_BONUX']){
+			     bible_initialise_pp();
+			}
 				
 				}
 			break;
@@ -104,10 +109,20 @@ function bible_install($action){
 				effacer_config('bible/traduction_fi');
 				effacer_config('bible/traduction_ru');
 				effacer_config('bible/traduction_bg');
+				effacer_config('bible_pp/trad_prop');
 			}
 			break;
 			
 	}
+}
+function bible_initialise_pp(){
+    $tableau = array_keys(bible_tableau('traduction'));
+    ecrire_config('bible_pp/trad_prop',$tableau);
+    ecrire_config('bible_pp/numeros','oui');
+    ecrire_config('bible_pp/retour','oui');
+    ecrire_config('bible_pp/ref','oui');
+    ecrire_config('bible_pp/lang_pas_art','oui');
+    ecrire_config('bible_pp/lang_morte','oui');
 }
 
 function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$ref='non'){
