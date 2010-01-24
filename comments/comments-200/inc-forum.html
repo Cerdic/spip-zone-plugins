@@ -1,1 +1,1 @@
-<INCLURE{fond=comments-list}{env}>
+[(#CONFIG{comments/comments_fil}|=={thread}|?{[(#INCLURE{fond=comments-thread}{env})],[(#INCLURE{fond=comments-list}{env})]})]
