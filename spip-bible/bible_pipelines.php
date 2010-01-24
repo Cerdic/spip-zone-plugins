@@ -13,8 +13,11 @@ function bible_affiche_droite($flux){
     if (ereg('edit',$flux['args']['exec'])==false or ereg('^1',$spip_version_affichee) == true){
             return $flux;
     }
-    
-    $fond = recuperer_fond('fonds/bible_presse_papier');
+
+    $type = str_replace('s_edit','',$flux['args']['exec']);
+    $id   = 'id_'.$type;
+
+    $fond = recuperer_fond('fonds/bible_presse_papier', array($id=>$flux['args'][$id],'id_syndic'=>$flux['args']['id_syndic']));
     $flux['data'] .= $fond;
     return $flux;
 }

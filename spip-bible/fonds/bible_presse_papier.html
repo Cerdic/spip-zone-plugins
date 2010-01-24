@@ -1,6 +1,16 @@
+<BOUCLE_art(ARTICLES){statut==prop|prepa|publie|refuse|poubelle}{id_article}>
+#SET{lang,#LANG}
+</BOUCLE_art>
+<BOUCLE_rub(RUBRIQUES){tout}{id_rubrique}>
+#SET{lang,#LANG}
+</BOUCLE_rub>
+<BOUCLE_site(SITES){statut==prop|publie|poubelle}{id_syndic}>
+#SET{lang,#LANG}
+</BOUCLE_site>
+
 <div class="ajax">
 [(#PLUGIN{SPIP_BONUX}|oui)
-#FORMULAIRE_BIBLE_REFERENCE
+#FORMULAIRE_BIBLE_REFERENCE{#GET{lang}}
 ]
 [(#PLUGIN{SPIP_BONUX}|non)
 #FORMULAIRE_BIBLE_PRESSE_PAPIER
