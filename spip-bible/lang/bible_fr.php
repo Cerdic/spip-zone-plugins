@@ -11,6 +11,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'version_dispo'=>'Traductions de la Bible disponibles',
 	'neccessitesvn'=>'Cette page nécéssite une site sous SPIP 2.0 et le plugin Spip 2.0 Bonux',
 	//la config
+	'cfg'               =>  'Spip-Bible',
+	'cfg_descriptif'    =>  'Page de configuration générale de Spip-Bible. Vous pouvez aussi configurer celle du [presse-papier->?exec=cfg&cfg=bible_pp].',
 	'livres_bibles'		=>	'Liste des livres disponibles dans la Bible version  «@trad@ »',
 	'cfg_ref'			=>	'Afficher la r&eacute;f&eacute;rence du passage cit&eacute;',
 	'cfg_retour'		=>	'Faire des retour à la ligne entre les versets',
@@ -58,7 +60,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_pp_lang_pas_art'      => "De choisir une version dans une langue - non morte - autre que celle de l'article ?",
 	'cfg_pp_lang_morte'      => "De choisir une version dans une langue morte",
 	"cfg_pp_version_par_lang" => "@lang@ : traductions propos&eacute;es",
-	'cfg_pp_pas_bonux'        => 'Cette configuration nécéssite le plugin "SPIP-BONUX"'
+	'cfg_pp_pas_bonux'        => 'Cette configuration nécéssite le plugin "SPIP-BONUX"',
+	'cfg_pp_descriptif'       => 'Cette page vous permet de configurer le presse-papier de Spip-Bible. Voici comment il s\'affiche avec le configuration actuelle.',
+	'cfg_pp'                  => 'Presse-papier de Spip-Bible'
 );
 
 
