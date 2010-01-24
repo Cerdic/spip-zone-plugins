@@ -5,7 +5,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function Fastcache_versionie($page) {
 	if (strpos($page, 'BackgroundImageCache')
-	OR !$msiefix = charger_fonction('msiefix', 'inc'))
+	OR !$msiefix = charger_fonction('msiefix', 'inc', true))
 		return $page;
 	
 	return $msiefix($page);
