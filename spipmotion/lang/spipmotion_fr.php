@@ -5,7 +5,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'choix_encodage_auto' => 'Les fichiers seront ajout&eacute;s automatiquement dans la file d\'attente d\'encodage d&egrave; leur insertion dans la base de donn&eacute;e',
 	// D
 	'document_dans_file_attente' => 'Ce document est dans la file d\'attente pour l\'encodage',
-	
+
 	// E
 	'encoder_video' => '(R&eacute;)encoder cette vid&eacute;o',
 	'encoder_son' => '(R&eacute;)encoder ce son',
@@ -14,28 +14,33 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explications_extensions_sortie' => 'Ces extensions sont les formats vers lesquels les fichiers seront encod&eacute;s, vous pouvez en choisir plusieurs par type (attention &agrave; la lourdeur pour le serveur cependant).',
 	'extensions_audio' => 'Formats audios',
 	'extensions_video' => 'Formats vid&eacute;os',
-	
+
 	// G
 	'gestion_format_entree' => 'Gestion des formats d\'entr&eacute;e',
 	'gestion_format_sortie' => 'Gestion des formats de sortie',
-	
+
+	// I
+	'install_ajout_champs_documents' => 'Ajout des champs sur spip_documents',
+	'install_creation_base' => 'Cr&eacute;ation de la base de spipmotion',
+	'install_maj_base' => 'Mise &agrave; jour de la base de spipmotion &agrave la version @version@',
+
 	// L
 	'label_encodage_auto' => 'Encoder automatiquement',
 	'label_extensions_prises_en_charge_encodage' => 'Formats pris en charge pour l\'encodage',
 	'label_extensions_prises_en_charge' => 'Formats pris en charge de base',
 	'label_extensions_sortie' => 'Formats d\'encodage',
-	
+
 	// P
 	'profil_encodage' => 'Profil d\'encodage pour le format : @format@',
 	'profils_encodage_son' => 'Profil(s) d\'encodage (Son)',
 	'profils_encodage_video' => 'Profil(s) d\'encodage (Vid&eacute;o)',
-	
+
 	// S
 	'select_all' => 'Tout s&eacute;lectionner',
-	
+
 	// U
 	'unselect_all' => 'Tout d&eacute;s&eacute;lectionner',
-	
+
 	// CFG
 	'titre' => 'SPIPmotion',
 	'spipmotion_boite' => 'Configuration de SPIPmotion',
@@ -63,7 +68,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_encoder_videos' => 'VID&Eacute;OS &Agrave; ENCODER',
 	'verifier_droits' => 'V&eacute;rifiez les droits du fichier "script_bash/spipmotion.sh". Les droits sur ce fichier doivent &ecirc;tre en 777.',
 	'encodage_en_cours' => 'ENCODAGE EN COURS...',
-	
+
 	// V
 	'version_encodee_de' => 'Ce document est une version encod&eacute;e du document @id_orig@',
 	'video_infos_techniques' => 'Informations techniques...',
@@ -80,7 +85,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'video_videocodec' => 'Codec vid&eacute;o : ',
 	'video_audiocodec' => 'Codec audio : ',
 	'video_audiochannels' => 'Nombre de canaux audios : ',
-	
+
 	// R
 	'recuperer_logo' => 'R&eacute;cup&eacute;rer un logo depuis la vid&eacute;o',
 	'recuperer_infos' => 'R&eacute;cup&eacute;rer des informations techniques sur la vid&eacute;o',
