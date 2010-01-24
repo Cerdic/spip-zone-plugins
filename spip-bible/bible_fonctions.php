@@ -125,7 +125,7 @@ function bible_initialise_pp(){
     ecrire_config('bible_pp/lang_morte','oui');
 }
 
-function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$ref='non'){
+function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$ref='non',$mode_test=false){
 	$verset_debut = '';
 	
 	$tableau_traduction = bible_tableau('traduction');
@@ -143,8 +143,8 @@ function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$re
 	if ($erreur) { 
 		return _T('bible:traduction_pas_dispo');
 	}
-	
-	
+
+		
 	
 	$gateway = $tableau_traduction[$traduction]['gateway'];
 	$wissen  = $tableau_traduction[$traduction]['wissen'];
@@ -197,7 +197,11 @@ function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$re
 	if (array_key_exists($livre,$livres) == false){
 		return _T('bible:pas_livre');
 	
-	};
+	}
+    if ($mode_test){
+	   return;
+	}
+	
 	
 	$debut = eregi_replace($livre,'',$debut);
 	

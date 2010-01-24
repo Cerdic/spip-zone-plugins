@@ -22,7 +22,7 @@ function formulaires_bible_reference_verifier_dist(){
     $retour     = _request('retour');
     $ref        = _request('ref');
     include_spip('bible_fonctions');
-    $resultat = bible($passage,$version);
+    $resultat = bible($passage,$version,$retour,$numeros,$ref,true);
 
     if ($resultat == _T('bible:pas_livre')){
         return array('erreur'   =>  _T('bible:form_ref_incorrecte'),
