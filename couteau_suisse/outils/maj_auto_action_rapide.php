@@ -99,7 +99,8 @@ function maj_auto_rev_distante($url, $pattern, $lastmodified = 0, $force = false
 }
 
 function plugin_get_infos_maj($p, $force = false) {
-	$infos = plugin_get_infos($p);
+	$get_infos = defined('_SPIP20100')?charger_fonction('get_infos','plugins'):'plugin_get_infos';
+	$infos = $get_infos($p);
 	$p2 = preg_match(',^auto/(.*)$,', $p, $regs)?$regs[1]:'';
 	if(strlen($p2)) {
 		// supposition du nom d'archive sur files.spip.org
