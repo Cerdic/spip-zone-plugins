@@ -96,8 +96,8 @@ Sinon, utiliser le comportement normal.
 
 
 -->][(#TYPE_DOCUMENT|=={Flash Video}|?{' '})
-#SET{largeur,#ENV{largeur,#LARGEUR|sinon{400}}}
-#SET{hauteur,#ENV{hauteur,#HAUTEUR|sinon{300}}}
+#SET{largeur,#ENV{largeur,#LARGEUR|=={0}|?{400,#LARGEUR}}}
+#SET{hauteur,#ENV{hauteur,#HAUTEUR|=={0}|?{300,#HAUTEUR}}}
 <dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
 <dt class='spip_doc_titre'>
 <object type="application/x-shockwave-flash" data="#CHEMIN{flash/player_flv_maxi.swf}" width="#GET{largeur}" height="#GET{hauteur}">
