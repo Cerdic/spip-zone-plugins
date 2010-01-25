@@ -58,10 +58,10 @@ if(!function_exists('nettoyer_chapo')) {
 function cs_glossaire_titres($titre) {
 	if(strpos($titre, ',')===false) return $titre;
 	$mots = array();
-	foreach (explode(_GLOSSAIRE_TITRE_BASE_SEP, $titre) as $m)
+	foreach (explode(_GLOSSAIRE_TITRE_BASE_SEP, str_replace('</','@@tag@@',$titre)) as $m)
 		// interpretation des expressions regulieres grace aux virgules : ,un +mot,i
 		if(strpos($m = trim($m), ',')===false) $mots[] = $m;
-	return count($mots)?join(_GLOSSAIRE_TITRE_SEP, $mots):'??';
+	return count($mots)?str_replace('@@tag@@','</',join(_GLOSSAIRE_TITRE_SEP, $mots)):'??';
 }
 
 // Cette fonction retire du texte les boites de definition et les liens du glossaire
@@ -136,9 +136,10 @@ function cs_rempl_glossaire($texte) {
 		// prendre en compte les formes du mot : architrave/architraves
 		// contexte de langue a prendre en compte ici
 		$les_mots = $les_regexp = $les_titres = array();
-		foreach (explode(_GLOSSAIRE_TITRE_BASE_SEP, $titre = extraire_multi($mot['titre'])) as $m) {
+		foreach (explode(_GLOSSAIRE_TITRE_BASE_SEP, str_replace('</','@@tag@@',$titre = extraire_multi($mot['titre']))) as $m) {
 			// interpretation des expressions regulieres grace aux virgules : ,un +mot,i
-			if(strpos($m = trim($m), ',')===0) $les_regexp[] = $m;
+			$m = trim(str_replace('@@tag@@','</',$m));
+			if(strncmp($m,',',1)===0) $les_regexp[] = $m;
 			else {
 				$les_mots[] = charset2unicode($m);
 				$les_titres[] = $m;
