@@ -91,8 +91,6 @@ add_variable( array(
 	'defaut' => '"1"',
 	'code:strlen(%s)' => "define('_ID_WEBMESTRES', %s);",
 	'code:!strlen(%s)' => "define('_ID_WEBMESTRES', 1);",
-	'pipelinecode:pre_description_outil' => 'if($flux["outil"]=="webmestres")
-		$flux["texte"]=str_replace(array("@_CS_LISTE_WEBMESTRES@","@_CS_LISTE_ADMINS@"),get_liste_administrateurs()),$flux["texte"]);',
 ));
 add_outil( array(
 	'id' => 'webmestres',
@@ -101,6 +99,8 @@ add_outil( array(
 	// non supporte avant la version 1.92
 	'version-min' => '1.9200',
 	'autoriser' => "autoriser('webmestre')",
+	'pipelinecode:pre_description_outil' => 'if($flux["outil"]=="webmestres")
+		$flux["texte"]=str_replace(array("@_CS_LISTE_WEBMESTRES@","@_CS_LISTE_ADMINS@"),get_liste_administrateurs(),$flux["texte"]);',
 ));
 
 add_outil( array(
