@@ -1,6 +1,4 @@
 <?php
-include_spip('inc/texte');
-include_spip('inc/lien');
 
 function formulaires_bible_reference_charger_dist($lang='fr'){
     

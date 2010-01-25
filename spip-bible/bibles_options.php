@@ -1,5 +1,5 @@
 <?php
-include_spip('inc/bible_tableau.php');
+include_spip('inc/bible_tableau');
 function balise_INFO_BIBLE_TRADUCTION($p){
 	$trad = str_replace("'",'',interprete_argument_balise(1,$p));
 	$info = str_replace("'",'',interprete_argument_balise(2,$p));
