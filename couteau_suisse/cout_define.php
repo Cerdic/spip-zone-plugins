@@ -34,7 +34,9 @@ function get_liste_administrateurs() {
 		if(autoriser('webmestre','','',$qui)) $webmestres[$qui['id_auteur']] = $nom;
 		else if(autoriser('configurer','plugins','',$qui)) $admins[$qui['id_auteur']] = $nom;
 	}
-	return(array(join(', ', $webmestres), join(', ', $admins)));
+	return array(
+		count($webmestres)?join(', ', $webmestres):_T('couteauprive:variable_vide'), 
+		count($admins)?join(', ', $admins):_T('couteauprive:variable_vide'));
 }
 
 // Montrer le fichier mes_options.php en cours
