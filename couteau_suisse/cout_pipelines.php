@@ -20,7 +20,7 @@ if(defined('_LOG_CS')) cs_log("couteau_suisse_install($action)");
 	switch ($action){
 		case 'test':
 			// affichage d'un lien ici, puisque le pipeline 'affiche_gauche' n'est pas pris en compte dans 'admin_plugin'...
-			if(_request('exec') == 'admin_plugin') {
+			if(!defined('_SPIP20100') && _request('exec') == 'admin_plugin') {
 				if(!defined('_SPIP19300')) echo '<br />';
 				include_spip('inc/presentation');
 				echo debut_cadre_enfonce('', true),
@@ -59,8 +59,9 @@ if(defined('_LOG_CS')) cs_log("couteau_suisse_install($action)");
 // ajout d'un onglet sur la page de configuration de SPIP
 function couteau_suisse_ajouter_onglets($flux){
 	include_spip('inc/autoriser');
+	$arg = $flux['args']=='configuration' || $flux['args']=='plugins';
 	// si on est admin...
-	if($flux['args']=='configuration' && autoriser('configurer', 'cs'))
+	if($arg && autoriser('configurer', 'cs'))
 		$flux['data']['couteau_suisse']= new Bouton(find_in_path('img/couteau-24.gif'), _T('couteau:titre'), generer_url_ecrire('admin_couteau_suisse'));
 	return $flux;
 }

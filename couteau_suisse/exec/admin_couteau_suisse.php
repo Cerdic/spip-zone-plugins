@@ -366,7 +366,7 @@ cs_log("INIT : enregistre_modif_outils()");
 	if($cmd=='switch') $metas_outils = ${$i};
 
 	include_spip('inc/plugin');
-	verif_plugin();	
+	defined('_SPIP20100')?actualise_plugins_actifs():verif_plugin();
 
 cs_log(" FIN : enregistre_modif_outils()");
 }
@@ -493,8 +493,9 @@ cs_log("INIT : exec_admin_couteau_suisse()");
 	}
 	if(!strlen($dir)) $dir = 'couteau_suisse';
 	if(!strlen($bt_dir)) $bt_dir = 'barre_typo_v2';
-	if(!strlen($cs_version)) { $cs_version = plugin_get_infos($dir); $cs_version = $cs_version['version']; }
-	if(!strlen($bt_version)) { $bt_version = plugin_get_infos($bt_dir); $bt_version = $bt_version['version']; }
+	$get_infos = defined('_SPIP20100')?charger_fonction('get_infos','plugins'):'plugin_get_infos';
+	if(!strlen($cs_version)) { $cs_version = $get_infos($dir); $cs_version = $cs_version['version']; }
+	if(!strlen($bt_version)) { $bt_version = $get_infos($bt_dir); $bt_version = $bt_version['version']; }
 	
 	$cs_revision = ((lire_fichier(_DIR_PLUGIN_COUTEAU_SUISSE.'svn.revision',$t)) && (preg_match(',<revision>(\d+)</revision>,',$t,$r)))
 		?'<br/>'._T('couteauprive:version_revision', array('revision'=>$r[1])):"";

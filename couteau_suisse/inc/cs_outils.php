@@ -18,8 +18,9 @@ include_spip('cout_define');
 // initialiser les plugins, les pipelines, etc.
 function cs_init_plugins() {
 	@unlink(_DIR_TMP."couteau-suisse.plat");
-	include_spip('inc/plugin'); verif_plugin();
-	if(defined('_LOG_CS')) cs_log(" -- verif_plugin() effectue");
+	include_spip('inc/plugin'); 
+	defined('_SPIP20100')?actualise_plugins_actifs():verif_plugin();
+	if(defined('_LOG_CS')) cs_log(" -- actualise_plugins_actifs() effectue");
 }
 
 // initialise un outil, ses variables, et en renvoie la description compilee
