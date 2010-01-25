@@ -292,19 +292,28 @@ add_outil( array(
 	'version-max' => '1.9299',
 ));
 
-add_variable( array(
+add_variables( array(
 	'nom' => 'spam_mots',
 	'format' => _format_CHAINE,
 	'lignes' => 8,
 	'defaut' => '"sucking blowjob superbabe ejakulation fucking (asses)"',
 	'code' => "define('_spam_MOTS', %s);",
+), array(
+	'nom' => 'spam_ips',
+	'format' => _format_CHAINE,
+	'lignes' => 6,
+	'defaut' => '""',
+	'code' => "define('_spam_IPS', %s);",
 ));
 add_outil( array(
 	'id' => 'spam',
-	'code:options' => '%%spam_mots%%',
+	'code:options' => "%%spam_mots%%\n%%spam_ips%%",
+	// sauvegarde de l'IP pour tests
+	'code:spip_options' => '$ip_=$ip;',
 	'categorie' => 'admin',
 ));
 
+// a placer apres l'outil 'spam' pour compatibilite IP
 add_outil( array(
 	'id' => 'no_IP',
 	'code:spip_options' => '$ip = substr(md5($ip),0,16);',
@@ -1034,14 +1043,15 @@ add_outil( array(
 add_variables( array(
 	'nom' => 'insertions',
 	'format' => _format_CHAINE,
-	'lignes' => 8,
-	'defaut' => '"coeur = c&oelig;ur
-manoeuvre = man&oelig;uvre
-(oeuvre(s?|r?)) = &oelig;uvre$1
-(O(E|e)uvre(s?|r?)\b/ = &OElig;uvre$2
-((h|H)uits) = $1uit
-/\b(c|C|m.c|M.c|rec|Rec)onn?aiss?a(nce|nces|nt|nts|nte|ntes|ble)\b/ = $1onnaissa$2
-/\boeuf(s?)\b/ = &oelig;uf$1
+	'lignes' => 10,
+	'defaut' => '"oeuf = &oelig;uf
+cceuil = ccueil
+(a priori) = {a priori}
+(([hH])uits) = $1uit
+/([cC]h?)oeur/ = $1&oelig;ur
+/oeuvre/ = &oelig;uvre
+(O[Ee]uvre([rs]?)) = &OElig;uvre$1
+/\b([cC]|[mM].c|[rR]ec)on+ais+a((?:n(?:ce|te?)|ble)s?)\b/ = $1onnaissa$2
 "',
 	'code' => "define('_insertions_LISTE', %s);",
 ));

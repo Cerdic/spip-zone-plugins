@@ -3,7 +3,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Pour forcer les logs du plugin, outil actif ou non :
-// define('_LOG_CS_FORCE', 'oui');
+#define('_LOG_CS_FORCE', 'oui');
 
 // Declaration des pipelines qui permettent d'interpreter la description d'un outil issue d'une chaine de langue
 // init_description_outil : pipeline d'initialisation, texte brut sorti du fichier de langue

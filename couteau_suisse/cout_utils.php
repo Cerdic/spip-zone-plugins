@@ -558,23 +558,24 @@ cs_log(" -- fichier $fo absent. Fichier '$fo' et inclusion ".((!$ecriture || !$o
 	}
 }
 
-// retire les guillemets extremes s'il y en a
 function cs_retire_guillemets($valeur) {
 	$valeur = trim($valeur);
-	if(preg_match(',^\'(.*)\'$,s', $valeur, $matches)) 
-		return str_replace("\'", "'", $matches[1]);
-	if(preg_match(',^"(.*)"$,s', $valeur, $matches))
-		return str_replace('\"', '"', $matches[1]);
-	return $valeur;
+	return (strncmp($valeur,$g="'",1)===0 || strncmp($valeur,$g='"',1)===0)
+			&& preg_match(",^$g(.*)$g$,s", $valeur, $matches)
+		?stripslashes($matches[1])
+		:$valeur;
 }
 
-// met en forme une valeur dans le stype php
+// met en forme une valeur dans le style php
 function cs_php_format($valeur, $is_chaine = true) {
-	$valeur = cs_retire_guillemets($valeur);
+	$valeur = trim($valeur);
+	if( (strncmp($valeur,$g="'",1)===0 || strncmp($valeur,$g='"',1)===0)
+			&& preg_match(",^$g(.*)$g$,s", $valeur, $matches)) {
+		if($is_chaine) return $valeur;
+		$valeur = stripslashes($matches[1]);		
+	}
 	if(!strlen($valeur)) return $is_chaine?"''":0;
-	if(!$is_chaine) return $valeur;
-	$valeur = str_replace("\\", "\\\\", $valeur);
-	return "'".str_replace("'", "\\'", $valeur)."'";
+	return $is_chaine?var_export($valeur, true):$valeur;
 }
 
 // retourne le code compile d'une variable en fonction de sa valeur

@@ -1,12 +1,15 @@
 #CACHE{0}
 #SET{test, #ENV{ar_message}|spam_filtre_de_test}
-<div style='text-align: center; padding:0.4em;'>
-	<fieldset><legend><:couteauprive:spam_tester_label:> </legend>
-	<div style="text-align:center">
+#SET{test_ip, #ENV{ar_message}|spam_filtre_de_test_ip}
+<div style='text-align:center; padding:0.4em;'>
+	<fieldset>
+	<p style='text-align:left;' ><:couteauprive:spam_tester_label:></p>
+	<div>
 		<textarea name="ar_message" id="ar_message" style="width:100%;">#ENV{ar_message}</textarea>
 		<input name="submit" class='fondo' type='submit' value="<:couteauprive:spam_tester:>" />
 	</div>
 	</fieldset>
 	[<div style="color:#22BB22; font-weight:bold;">(#GET{test}|=={ok}|oui)<:couteauprive:spam_test_ok:></div>]
 	[<div style="color:red; font-weight:bold;">(#GET{test}|=={ko}|oui)<:couteauprive:spam_test_ko:></div>]
+	[<div style="color:blue; font-weight:bold;">(#GET{test_ip})</div>]
 </div>

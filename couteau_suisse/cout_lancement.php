@@ -169,8 +169,12 @@ function cs_echappe_html_callback($matches) {
 function cs_echappe_balises($balises, $fonction, $texte, $arg=NULL){
 	if(!strlen($texte)) return '';
 	if (($fonction!==false) && !function_exists($fonction)) {
-		spip_log("Erreur - cs_echappe_balises() : $fonction() non definie !");
-		return $texte;
+		// chargement des fonctions
+		include_spip('cout_fonctions');
+		if (!function_exists($fonction)) {
+			spip_log("Erreur - cs_echappe_balises() : $fonction() non definie dans : ".$_SERVER['REQUEST_URI']);
+			return $texte;
+		}
 	}
 	// trace d'anciennes balises <html></html> ?
 	if(strpos($texte, _CS_HTMLA)!==false)

@@ -10,6 +10,16 @@ function spam_filtre_de_test($texte) {
 	return preg_match($GLOBALS['meta']['cs_spam_mots'], $texte)?'ko':'ok';
 }
 
+function spam_filtre_de_test_ip($texte) {
+	if (!strlen($texte)) return '';
+	if (!isset($GLOBALS['meta']['cs_spam_ips'])) spam_installe();
+	if(!preg_match_all(',\d+\.\d+\.\d+\.\d+,', $texte, $regs, PREG_PATTERN_ORDER)) return '';
+	$res = array();
+	foreach($regs[0] as $r)
+		$res[] = _T('couteauprive:spam_ip', array('ip'=>$r)).' '._T(preg_match($GLOBALS['meta']['cs_spam_ips'], "$r")?'item_oui':'item_non');
+	return join('<br />', $res);
+}
+
 function spam_action_rapide() {
 	$msg = _request('ar_message');
 	include_spip('public/assembler'); // pour recuperer_fond()

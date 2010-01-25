@@ -426,6 +426,7 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:separateur_urls_page' => 'Caract&egrave;re de s&eacute;paration \'type-id\'<br />(ex. : ?article-123) :',
 	'label:set_couleurs' => 'Set &agrave; utiliser :',
 	'label:spam_mots' => 'S&eacute;quences interdites :',
+	'label:spam_ips' => 'Adresses IP &agrave; bloquer :',
 	'label:spip_options_on' => 'Inclure :',
 	'label:spip_script' => 'Script d\'appel :',
 	'label:style_h' => 'Votre style :',
@@ -609,17 +610,24 @@ Ce sommaire est compatible avec &laquo;&nbsp;[.->decoupe]&nbsp;&raquo; et &laquo
 	'sommaire_sans' => 'Un texte sans sommaire&nbsp;: <b>@_CS_SANS_SOMMAIRE@</b>',
 	'sommaire_titres' => 'Intertitres hi&eacute;rarchis&eacute;s&nbsp;: <b><html>{{{*Titre}}}</html></b>, <b><html>{{{**Sous-titre}}}</html></b>, etc.',
 	'sommaire_ancres' => 'Ancres choisies : <b><html>{{{Mon Titre&lt;mon_ancre&gt;}}}</html></b>',
-	'spam:description' => 'Tente de lutter contre les envois de messages automatiques et malveillants en partie publique. Certains mots, tout comme les balises en clair &lt;a>&lt;/a>, sont interdits : veuillez inciter vos r&eacute;dacteurs &agrave; utiliser les raccourcis de liens SPIP.
+	'spam:description' => 'Tente de lutter contre les envois de messages automatiques et malveillants en partie publique. Certains mots, tout comme les balises en clair &lt;a>&lt;/a>, sont interdits : veuillez inciter vos r&eacute;dacteurs &agrave; utiliser les raccourcis de liens au format SPIP.
 
-Listez ici les s&eacute;quences interdites en les s&eacute;parant par des espaces. [[%spam_mots%]]
-&bull; Pour une expression avec des espaces, placez-la entre guillemets.
+@puce@ Listez ici les s&eacute;quences interdites en les s&eacute;parant par des espaces.[[%spam_mots%]]
+<q1>&bull; Pour une expression avec des espaces, placez-la entre guillemets.
 _ &bull; Pour sp&eacute;cifier un mot entier, mettez-le entre parenth&egrave;ses. Exemple~:~{(asses)}.
-_ &bull; Pour une expression r&eacute;guli&egrave;re, v&eacute;rifiez bien la syntaxe et placez-la entre slashes et entre guillemets. Exemple~:~{<html>"/@test\\.(com|fr)/"</html>}.',
+_ &bull; Pour une expression r&eacute;guli&egrave;re, v&eacute;rifiez bien la syntaxe et placez-la entre slashes puis entre guillemets.
+_ Exemple~:~{<html>"/@test\\.(com|fr)/"</html>}.
+_ &bull; Pour une expression r&eacute;guli&egrave;re devant agir sur des caract&egrave;res HTML, placez le test entre &laquo;&#&raquo; et &laquo;;&raquo;.
+_ Exemple~:~{<html>"/&#(?:1[4-9][0-9]{3}|[23][0-9]{4});/"</html>}.</q1>
+
+@puce@ Certaines adresses IP peuvent &eacute;galement &ecirc;tre bloqu&eacute;es &agrave; la source. Sachez toutefois que derri&egrave;re ces adresses (souvent variables), il peut y avoir plusieurs utilisateurs, voire un r&eacute;seau entier.[[%spam_ips%]]
+<q1>&bull; Utilisez le caract&egrave;re &laquo;*&raquo; pour plusieurs chiffres, &laquo;?&raquo; pour un seul et les crochets pour des classes de chiffres.</q1>',
 	'spam:nom' => 'Lutte contre le SPAM',
 	'spam_test_ko' => 'Ce message serait bloqu&eacute; par le filtre anti-SPAM !',
 	'spam_test_ok' => 'Ce message serait accept&eacute; par le filtre anti-SPAM.',
 	'spam_tester' => 'Lancer le test !',
-	'spam_tester_label' => 'Testez ici votre liste de s&eacute;quences interdites :',
+	'spam_ip' => 'Blocage IP de @ip@ :',
+	'spam_tester_label' => 'Testez ici votre liste de s&eacute;quences interdites ou d\'adresses IP :',
 	'spip_cache:description' => '@puce@ Le cache occupe un certain espace disque et SPIP peut en limiter l\'importance. Une valeur vide ou &eacute;gale &agrave; 0 signifie qu\'aucun quota ne s\'applique.[[%quota_cache% Mo]]
 
 @puce@ Lorsqu\'une modification du contenu du site est faite, SPIP invalide imm&eacute;diatement le cache sans attendre le calcul p&eacute;riodique suivant. Si votre site a des probl&egrave;mes de performance face &agrave; une charge tr&egrave;s &eacute;lev&eacute;e, vous pouvez cocher &laquo;&nbsp;non&nbsp;&raquo; &agrave; cette option.[[%derniere_modif_invalide%]]
