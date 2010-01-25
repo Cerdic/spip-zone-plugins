@@ -16,26 +16,27 @@ function outils_la_meuh_config_dist() {
 		'code:js'     => "
 			jQuery.getScript('$chemin_js_transform');
 			jQuery.getScript('$chemin_js_rotate');
-			jQuery(document).ready(function(){
-				jQuery('img').mouseover(function(){
-					if ('$libsm') {
-						if (typeof(soundManager) == 'undefined') {
-							jQuery.getScript('$libsm', function(){
-								soundManager.debugMode = false;
-								soundManager.url = '". _DIR_LIB_SM ."swf/';
-								soundManager.onready(function(){
-									soundManager.play('meuh', '$chanson');
-								});
-							});
-						} else {
+			",
+		'code:jq'     => "
+			jQuery('img').mouseover(function(){
+				if ('$libsm') {
+					if (typeof(soundManager) == 'undefined') {
+						jQuery.getScript('$libsm', function(){
+							soundManager.debugMode = false;
+							soundManager.url = '". _DIR_LIB_SM ."swf/';
 							soundManager.onready(function(){
 								soundManager.play('meuh', '$chanson');
 							});
-						}
+						});
+					} else {
+						soundManager.onready(function(){
+							soundManager.play('meuh', '$chanson');
+						});
 					}
-					jQuery(this).animate({rotate: '+=180deg'}, 1000);
-				});
-			});",
+				}
+				jQuery(this).animate({rotate: '+=180deg'}, 1000);
+			});
+			",
 	));
 	
 }

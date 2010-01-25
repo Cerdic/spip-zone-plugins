@@ -7,10 +7,9 @@ function outils_lame_invisible_config_dist() {
 		'nom'         => _T("blagoulames:invisible_nom"),
 		'description' => _T("blagoulames:invisible_description"),
 		'categorie'   => 'blagoulames',
-		'code:js'     => "
-			jQuery(document).ready(function(){
-				jQuery('#lame_invisible').remove();
-			});",
+		'code:jq'     => "
+			jQuery('#lame_invisible').remove();
+		",
 	));
 	
 }

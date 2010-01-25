@@ -7,10 +7,9 @@ function outils_lame_en_table_config_dist() {
 		'nom'         => _T("blagoulames:en_table_nom"),
 		'description' => _T("blagoulames:en_table_description"),
 		'categorie'   => 'blagoulames',
-		'code:js'     => "
-			jQuery(document).ready(function(){
-				jQuery('table:not(.spip)').remove();
-			});",
+		'code:jq'     => "
+			jQuery('table:not(.spip)').remove();
+			",
 	));
 	
 }

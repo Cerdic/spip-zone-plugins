@@ -11,24 +11,22 @@ function outils_slam_config_dist() {
 		'nom'         => _T("blagoulames:slam_nom"),
 		'description' => _T("blagoulames:slam_description"),
 		'categorie'   => 'blagoulames',
-		'code:js'     => "
-			jQuery(document).ready(function(){
-				if ('$libsm') {
-					if (typeof(soundManager) == 'undefined') {
-						jQuery.getScript('$libsm', function(){
-							soundManager.debugMode = false;
-							soundManager.url = '". _DIR_LIB_SM ."swf/';
-							soundManager.onready(function(){
-								soundManager.play('sm2movie', '$chanson');
-							});
-						});
-					} else {
+		'code:jq'     => "
+			if ('$libsm') {
+				if (typeof(soundManager) == 'undefined') {
+					jQuery.getScript('$libsm', function(){
+						soundManager.debugMode = false;
+						soundManager.url = '". _DIR_LIB_SM ."swf/';
 						soundManager.onready(function(){
 							soundManager.play('sm2movie', '$chanson');
 						});
-					}
+					});
+				} else {
+					soundManager.onready(function(){
+						soundManager.play('sm2movie', '$chanson');
+					});
 				}
-			});
+			}
 			",
 	));
 	

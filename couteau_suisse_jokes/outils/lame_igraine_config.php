@@ -22,9 +22,10 @@ function outils_lame_igraine_config_dist() {
 				},wait);
 
 			}
-			jQuery(document).ready(function(){
-				migraine();
-			});",
+			",
+		'code:jq'     => "
+			migraine();
+			",
 	));
 	
 }
