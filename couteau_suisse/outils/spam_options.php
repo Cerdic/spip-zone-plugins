@@ -44,7 +44,10 @@ unset($ip_);
 function cs_test_spam(&$spam, &$texte, &$test) {
 	foreach($spam[0] as $m) $test |= strpos($texte, $m)!==false;
 	if(!$test && $spam[1]) $test = preg_match($spam[1], $texte);
-	if(!$test && $spam[2]) $test = preg_match($spam[2], charset2unicode($texte));
+	if(!$test && $spam[2]) {
+		include_spip('inc/charsets');
+		$test = preg_match($spam[2], charset2unicode($texte));
+	}
 	return $test;
 }
 
