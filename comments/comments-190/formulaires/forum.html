@@ -26,11 +26,11 @@
         <input type="text" class="forml" name="email_auteur" id="email_auteur" value="#ENV{email_auteur}" size="40"[ readonly="(#ENV{readonly})"] /></p>
         <p><label for="url_site"><:comments:forum_url:></label>
         <input type="text" class="forml" name="url_site" id="url_site" style="text-align:left;" dir="ltr" size="40" value="#ENV{url_site}" /></p>
-        <p class="explication gravatar_info_forum"><small><:comments:gravatar_info_forum:></small></p>
+        <p class="explication gravatar_info_forum"><:comments:gravatar_info_forum:></p>
         [<input type="hidden" name="titre" value="(#ENV{titre})" />]
-		<label><:comments:forum_texte:></label>
-        [(#ENV**{texte}|barre_textarea{12,40})]
-        <p class="explication info_creation_paragraphe"><small><:comments:info_creation_paragraphe:></small></p>
+		<p><label><:comments:forum_texte:></label>
+        [(#ENV**{texte}|barre_textarea{12,40})]</p>
+        <p class="explication info_creation_paragraphe"><:comments:info_creation_paragraphe:></p>
 	</fieldset>
 
 	[(#REM) Piege a robots spammeurs ]
