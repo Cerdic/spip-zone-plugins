@@ -6,17 +6,20 @@ include_spip('inc/actions');
 
 function spam_filtre_de_test($texte) {
 	if (!strlen($texte)) return '';
-	if (!isset($GLOBALS['meta']['cs_spam_mots'])) spam_installe();
-	return preg_match($GLOBALS['meta']['cs_spam_mots'], $texte)?'ko':'ok';
+	if (!isset($GLOBALS['meta']['cs_spam_mots'])) { include_spip('outils/spam'); spam_installe(); }
+	$spam = unserialize($GLOBALS['meta']['cs_spam_mots']);
+	$test = false;
+	return cs_test_spam($spam, $texte, $test)?'ko':'ok';
 }
 
 function spam_filtre_de_test_ip($texte) {
 	if (!strlen($texte)) return '';
-	if (!isset($GLOBALS['meta']['cs_spam_ips'])) spam_installe();
 	if(!preg_match_all(',\d+\.\d+\.\d+\.\d+,', $texte, $regs, PREG_PATTERN_ORDER)) return '';
 	$res = array();
+	if (!isset($GLOBALS['meta']['cs_spam_mots'])) { include_spip('outils/spam'); spam_installe(); }
+	$spam = unserialize($GLOBALS['meta']['cs_spam_mots']);
 	foreach($regs[0] as $r)
-		$res[] = _T('couteauprive:spam_ip', array('ip'=>$r)).' '._T(preg_match($GLOBALS['meta']['cs_spam_ips'], "$r")?'item_oui':'item_non');
+		$res[] = _T('couteauprive:spam_ip', array('ip'=>$r)).' '._T(preg_match($spam[3], "$r")?'item_oui':'item_non');
 	return join('<br />', $res);
 }
 

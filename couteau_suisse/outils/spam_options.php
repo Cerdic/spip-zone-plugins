@@ -20,15 +20,15 @@ if ( count($_POST)
 		if (preg_match($spam_POST_reg, $key) && strpos($key, 'password')===false)
 			$spam_POST_compile[] = $key;
 	// boucle de censure
-	foreach ($spam_POST_compile as $var) 
-		if (preg_match($GLOBALS['meta']['cs_spam_mots'], $_POST[$var])) {
-			$_GET['action'] = "cs_spam";
-			$_GET['var'] = $var;
-		}
+
+	$spam_mots = unserialize($GLOBALS['meta']['cs_spam_mots']);
 	// test IP compatible avec l'outil 'no_IP'
-	if(preg_match($GLOBALS['meta']['cs_spam_ips'], $ip_)) $_GET['action'] = "cs_spam";
+	$test = $spam_mots[3]?preg_match($spam_mots[3], $ip_):false;
+	foreach ($spam_POST_compile as $var) if(!$test)
+		if(cs_test_spam($spam_mots, $_POST[$var], $test)) $_GET['var'] = $var;
+	if($test) $_GET['action'] = "cs_spam";
 	// nettoyage
-	unset($spam_POST_reg, $spam_POST_compile);
+	unset($test, $spam_mots, $spam_POST_reg, $spam_POST_compile);
 
 	function action_cs_spam(){
 		include_spip('inc/minipres');
@@ -40,4 +40,12 @@ if ( count($_POST)
 	}
 }
 unset($ip_);
+
+function cs_test_spam(&$spam, &$texte, &$test) {
+	foreach($spam[0] as $m) $test |= strpos($texte, $m)!==false;
+	if(!$test && $spam[1]) $test = preg_match($spam[1], $texte);
+	if(!$test && $spam[2]) $test = preg_match($spam[2], charset2unicode($texte));
+	return $test;
+}
+
 ?>

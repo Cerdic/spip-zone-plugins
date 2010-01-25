@@ -7,39 +7,31 @@
 // cette fonction est appelee automatiquement a chaque affichage de la page privee du Couteau Suisse
 function spam_installe() {
 	// tableau des mots interdits
-	/*
-	 ATTENTION :
-	  	ce sont des portions de texte, sans delimitateur particulier : 
-		si vous mettez 'asses' alors 'tasses' sera un mot interdit aussi !
-		les parentheses servent de delimitateurs de mots : '(asses)'
-	*/
-	$spam_mots = array_merge(array(
+	$t = array(
 		// des liens en dur ou simili...
-		'<a href=', '</a>',
-		'[url=', '[/url]',
-		'[link=', '[/link]',
-		// certains mots...
-		// 'ejakulation', 'fucking', '(asses)',
-
-	), defined('_spam_MOTS')?spam_liste_mots(_spam_MOTS):array());
-	array_walk($spam_mots, 'spam_walk');
-	ecrire_meta('cs_spam_mots', '/' . join('|', $spam_mots) . '/i');
+		array('<a href=', '</a>', '[url=', '[/url]', '[link=', '[/link]',),
+		// des regexpr ou ips (sans delimiteurs)
+		array(), array(), array()
+	);
+	// repere les mots entiers entre parentheses, les regexpr entre slashes et les caracteres unicodes
+	$spam_mots = defined('_spam_MOTS')?spam_liste_mots(_spam_MOTS):array();
+	foreach($spam_mots as $v) {
+		if(preg_match(',^\((.+)\)$,', $v, $reg))
+			$t[1][] = '\b'.preg_quote($reg[1], '/').'\b';
+		elseif(preg_match(',^\/(&#x?)?(.*?)(;?)\/$,', $v, $reg))
+			$t[($reg[2] && $reg[3])?2:1][]=$reg[2];
+		else $t[0][] = $v;
+	}
+	$t[1] = count($t[1])?'/'.join('|',$t[1]).'/i':'';
+	$t[2] = count($t[2])?'/&#(?:'.join('|',$t[2]).');/i':'';
 	$spam_mots = defined('_spam_IPS')?spam_liste_mots(_spam_IPS):array();
-	array_walk($spam_mots, 'spam_walk2');
-	ecrire_meta('cs_spam_ips', '/^(?:' . join('|', $spam_mots) . ')$/');
+	array_walk($spam_mots, 'spam_walk');
+	$t[3] = count($spam_mots)?'/^(?:' . join('|', $spam_mots) . ')$/':'';
+	ecrire_meta('cs_spam_mots', serialize($t));
 	ecrire_metas();
 }
 
-// protege les expressions en vue d'une regexpr
-// repere les mots entiers entre parentheses et les regexpr entre slashes
 function spam_walk(&$item) {
-	if(preg_match(',^\((.+)\)$,', $item, $reg))
-		$item = '\b'.preg_quote($reg[1], '/').'\b';
-	elseif(preg_match(',^\/(.+)\/$,', $item, $reg))
-		$item = '('.$reg[1].')';
-	else $item = preg_quote($item, '/');
-}
-function spam_walk2(&$item) {
 	$item = preg_replace(',[^\d\.\*\?\[\]\-],', '', $item);
 	if(preg_match(',^\/(.+)\/$,', $item, $reg))
 		$item = '('.$reg[1].')';
