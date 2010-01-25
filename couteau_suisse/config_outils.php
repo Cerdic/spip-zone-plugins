@@ -1184,7 +1184,7 @@ if(preg_match(',^([^.]*)_config$,', basename($f, '.php'),$regs)){
 			add_outil($cs_temp);
 		}
 	}*/
-	if(isset($outils[$regs[1]]) && strpos($f, '/couteau_suisse/outils/'.$regs[1], $f)===false)
+	if(isset($outils[$regs[1]]) && strpos($f, '/couteau_suisse/outils/'.$regs[1])===false)
 		$outils[$regs[1]]['perso'] = 1;
 }
 
