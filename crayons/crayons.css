@@ -30,3 +30,4 @@ em.crayon-img-changed { cursor: pointer; border:0; }
 .crayon-invalide p { margin:0; padding: 1%; font-style: italic; font-size: 80%; }
 /* resizer */
 .resizehandle { background:transparent url("images/resizer.png") no-repeat scroll 45%; cursor:ns-resize; font-size:0.1em; }
+.resizehandle_boutons { margin-top: -16px; }

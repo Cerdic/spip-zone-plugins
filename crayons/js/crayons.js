@@ -411,7 +411,7 @@ $.fn.activatecrayon = function(percent) {
 					// decaler les boutons qui suivent un resizer de 16px vers le haut
 					.next('.resizehandle')
 						.next('.crayon-boutons')
-						.css('margin-top', '-16px');
+						.addClass('resizehandle_boutons');
 			})
 		.end();
 		// Declencher le onAjaxLoad normal de SPIP
