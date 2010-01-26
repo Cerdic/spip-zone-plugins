@@ -1,0 +1,37 @@
+<plugin>
+    <nom>Publier Netvibes</nom>
+    <auteur>cy_altern
+_ &#169; 2009 - distribu&#233; sous licence GNU/LGPL
+    </auteur>
+    <version>0.1</version>
+    <etat>dev</etat>
+    <description>
+        <multi>
+        [fr]Publier les liens et fils RSS de comptes Netvibes
+_ N&#233;cessite le plugin [Boucles XML->http://files.spip.org/spip-zone/boucles_xml.zip] 
+<!--et [Spip-Bonux->http://files.spip.org/spip-zone/spip-bonux.zip] install&#233; et activ&#233;  -->
+        [en]
+        </multi>
+    </description>
+    <lien></lien>
+    <icon>plugin-24.gif</icon>
+    <prefix>
+      pubnetvibes
+    </prefix>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>pubnetvibes_pipelines.php</inclure>
+	</pipeline>
+
+    <necessite id="xml" version="[0.1;]" />
+<!--    <necessite id="spip_bonux" version="[1.8;]" />  -->
+    <necessite id="SPIP" version="[2.0.9;]" />
+    
+<!-- pour utiliser ce plugin en SPIP version 2.0.*   -->    
+    <necessite id="lib:jquery.ui-1.6" src="http://jquery-ui.googlecode.com/files/jquery.ui-1.6.zip" />
+    
+<!-- pour utiliser ce plugin en SPIP version 2.1: possibilite de themes pour les onglets jquery  
+    <necessite id="lib:jquery-ui-1.7.2" src="http://jquery-ui.googlecode.com/files/jquery-ui-1.7.2.zip" />
+    <necessite id="lib:jquery-ui-themes-1.7.2" src="http://jquery-ui.googlecode.com/files/jquery-ui-themes-1.7.2.0.zip" />
+-->
+</plugin>

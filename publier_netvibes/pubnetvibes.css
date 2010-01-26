@@ -1,0 +1,11 @@
+/* ce fichier permet la surcharge des styles fournis par jquery.ui.tabs */
+
+/* le conteneur general */
+.tabs_netvibes { width: 100%; padding: 0; margin: 0; }
+
+/* les onglets */
+.ui-tabs-nav ul { font-size:75%; }
+.ui-tabs-nav li a { padding:0.3em 1.7em; }
+
+/* le contenu des onglets */
+.contenu_onglet { width: 100%; }

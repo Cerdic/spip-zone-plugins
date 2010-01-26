@@ -1,0 +1,58 @@
+<html><head>
+  <INCLURE{fond=inc-head}>
+[(#SPIP_VERSION|match{2.1}|?{' '})
+  [<link href="(#CHEMIN{lib/jquery-ui-themes-1.7.2/themes/cupertino/jquery-ui.css})" type="text/css" rel="Stylesheet"/>]
+  [<script src="(#CHEMIN{lib/jquery-ui-1.7.2/ui/jquery-ui.js})" type="text/javascript"></script>]
+]
+[(#SPIP_VERSION|match{2.0}|?{' '})
+  [<link href="(#CHEMIN{lib/jquery.ui-1.6/themes/default/ui.all.css})" type="text/css" rel="Stylesheet"/>]
+  [<script src="(#CHEMIN{lib/jquery.ui-1.6/ui/ui.core.js})" type="text/javascript"></script>]
+  [<script src="(#CHEMIN{lib/jquery.ui-1.6/ui/ui.tabs.js})" type="text/javascript"></script>]
+]
+  [<link type="text/css" href="(#CHEMIN{pubnetvibes.css})" rel="Stylesheet"/>]
+  <script language="JavaScript" type="text/javascript">
+    jQuery(document).ready(function() {
+        $("#tabs").tabs();
+    });
+  </script>
+
+</head><body>
+
+[(#SET{url_xml, http://rest.netvibes.com/universe/fbarth?format=xml})]
+[(#SET{fic_xml, [(#EVAL{_DIR_CACHE}|concat{fbarth_}|concat{[(#GET{url_xml}|md5)]}|concat{.xml})] })]
+[(#GET{url_xml}|recuperer_page{[(#GET{fic_xml})]})]
+
+<br>fic_xml: #GET{fic_xml}
+
+<div id="tabs" class="tabs_netvibes">
+    <B_onglets>
+    <ul>
+    <BOUCLE_onglets(XML){xml=#GET{fic_xml}}{noeud=tab}>
+      <li><a href="#onglet_[(#ATTRIBUTS|extraire{id})]">
+        <BOUCLE_icone_onglet(XML){id_parent}{noeud=link}{attributs==rel=['"]icon['"]}>[<img src="(#ATTRIBUTS|extraire{href})" alt=""/>]</BOUCLE_icone_onglet>
+            <img src="http://www.netvibes.com/img/favicon.png" alt="">
+        <//B_icone_onglet>
+        <BOUCLE_titre_onglet(XML){id_parent}{noeud=title}>#TEXTE**</BOUCLE_titre_onglet>
+      </a></li>
+    </BOUCLE_onglets>
+    </ul>
+    </B_onglets>
+
+<BOUCLE_total(XML){noeud=tab}>
+    <div id="onglet_[(#ATTRIBUTS|extraire{id})]">
+    <BOUCLE_widgets(XML){noeud=widget}{id_parent}>
+        <BOUCLE_titre(XML){noeud=title}{id_parent}>
+            [(#SET{titre_site, [(#TEXTE**|replace{'&amp;' , '&'})] })]
+        </BOUCLE_titre>
+        <BOUCLE_url(XML){noeud=data}{attributs==name=['"]url['"]}{id_parent}>
+            <a href="#TEXTE**">[(#THUMBSHOT{#TEXTE**, 32})] [(#GET{titre_site})]</a>
+        </BOUCLE_url>
+        <br/>        
+    </BOUCLE_widgets>
+    </div>
+</BOUCLE_total>
+</div>
+
+[(#REM) http://rest.netvibes.com/universe/fbarth/tab/154773914?format=xml ] 
+
+</body></html>

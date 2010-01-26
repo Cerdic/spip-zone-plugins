@@ -1,0 +1,51 @@
+[(#CACHE{0})]
+[(#REM) modele pour afficher un univers netvibes ]
+
+[(#REM) recuperer le seul parametre indispensable: le netvibesId
+        choper le fichier REST au format xml et l'enregistrer dans le cache
+]
+[(#SET{url_xml, [(#NOOP{http://rest.netvibes.com/universe/}|concat{[(#UNIVERS)],?format=xml})]})]
+[(#SET{fic_xml, [(#EVAL{_DIR_CACHE}|concat{[(#UNIVERS)],_,[(#GET{url_xml}|md5)],.xml})] })]
+[(#GET{url_xml}|recuperer_page{[(#GET{fic_xml})]})]
+
+url_xml: #GET{url_xml}<br>
+fic_xml: #GET{fic_xml}<br>
+<br>
+
+<div class="tabs_netvibes">
+[(#REM) la liste des onglets ]
+    <B_onglets>
+    <ul>
+    <BOUCLE_onglets(XML){xml=#GET{fic_xml}}{noeud=tab}>
+      <li><a href="#onglet_[(#ATTRIBUTS|extraire{id})]">
+        <BOUCLE_icone_onglet(XML){id_parent}{noeud=link}{attributs==rel=['"]icon['"]}>[<img src="(#ATTRIBUTS|extraire{href})" alt=""/>]</BOUCLE_icone_onglet>
+            <img src="http://www.netvibes.com/img/favicon.png" alt="">
+        <//B_icone_onglet>
+        <BOUCLE_titre_onglet(XML){id_parent}{noeud=title}>#TEXTE**</BOUCLE_titre_onglet>
+      </a></li>
+    </BOUCLE_onglets>
+    </ul>
+    </B_onglets>
+
+[(#REM) le contenu des onglets ]
+<BOUCLE_total(XML){xml=#GET{fic_xml}}{noeud=tab}>
+    <div id="onglet_[(#ATTRIBUTS|extraire{id})]" class="contenu_onglet">
+    <BOUCLE_widgets(XML){noeud=widget}{id_parent}>
+        <BOUCLE_titre(XML){noeud=title}{id_parent}>
+            [(#SET{titre_site, [(#TEXTE**|replace{'&amp;' , '&'})] })]
+        </BOUCLE_titre>
+        <BOUCLE_url(XML){noeud=data}{id_parent}{attributs==name=['"]url['"]}>
+            <a href="#TEXTE**">[(#THUMBSHOT{#TEXTE**, 32})] [(#GET{titre_site})]</a>
+        </BOUCLE_url>
+        <BOUCLE_feedurl(XML){noeud=data}{id_parent}{attributs==name=['"]feedUrl['"]}>
+            <a href="#TEXTE**">[(#THUMBSHOT{#TEXTE**, 32})] [(#GET{titre_site})]</a>
+        </BOUCLE_feedurl>
+        <BOUCLE_texte(XML){noeud=data}{id_parent}{attributs==name=['"]text['"]}>
+            [(#GET{titre_site})] #TEXTE
+        </BOUCLE_texte>
+        <br/>        
+    </BOUCLE_widgets>
+    </div>
+</BOUCLE_total>
+
+</div>
