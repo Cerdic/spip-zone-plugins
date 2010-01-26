@@ -11,7 +11,7 @@
 	<fonctions>lm2_fonctions.php</fonctions>
 	<options>lm2_options.php</options>
 	<install>base/lm2_install.php</install>
-	<lien>http://www.spip-contrib.net/Lecteur-multimedia-2</lien>
+	<lien>http://multimedia.spip-zone.info/</lien>
 	<pipeline>
 		<nom>insert_head</nom>
 		<inclure>lm2_pipelines.php</inclure>
