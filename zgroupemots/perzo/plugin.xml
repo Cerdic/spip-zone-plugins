@@ -1,0 +1,26 @@
+<plugin>
+    <nom>Styles perZo</nom>
+    <auteur>cy_altern
+_ &#169; 2009 - distribu&#233; sous licence GNU/LGPL
+    </auteur>
+    <version>0.1</version>
+    <etat>test</etat>
+    <description>
+        <multi>
+        [fr]ajoute la feuille de style perso.css aux squelette Zpip
+        [en]
+        </multi>
+    </description>
+    <lien></lien>
+    <icon>plugin-24.gif</icon>
+    <prefix>
+      perzo
+    </prefix>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>perzo_pipelines.php</inclure>
+	</pipeline>
+	
+    <necessite id="SPIP" version="[2.0.9;]" />
+    <necessite id="Z" version="[1.0.0;]" />
+</plugin>
