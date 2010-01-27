@@ -18,7 +18,7 @@ function spam_installe() {
 	foreach($spam_mots as $v) {
 		if(preg_match(',^\((.+)\)$,', $v, $reg))
 			$t[1][] = '\b'.preg_quote($reg[1], '/').'\b';
-		elseif(preg_match(',^\/(&#x?)?(.*?)(;?)\/$,', $v, $reg))
+		elseif(preg_match(',^\/(&#)?(.*?)(;?)\/$,', $v, $reg))
 			$t[($reg[2] && $reg[3])?2:1][]=$reg[2];
 		else $t[0][] = $v;
 	}
