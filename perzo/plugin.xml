@@ -3,11 +3,12 @@
     <auteur>cy_altern
 _ &#169; 2009 - distribu&#233; sous licence GNU/LGPL
     </auteur>
-    <version>0.1</version>
+    <version>0.2</version>
     <etat>test</etat>
     <description>
         <multi>
-        [fr]ajoute la feuille de style perso.css aux squelette Zpip
+        [fr]appelle une feuille de style calcul&#233;e {{perso.css.html}} dans le head des pages publiques
+        (fichier &#224; cr&#233;er dans /squelettes par exemple)
         [en]
         </multi>
     </description>
@@ -22,5 +23,4 @@ _ &#169; 2009 - distribu&#233; sous licence GNU/LGPL
 	</pipeline>
 	
     <necessite id="SPIP" version="[2.0.9;]" />
-    <necessite id="Z" version="[1.0.0;]" />
 </plugin>
