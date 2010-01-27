@@ -50,4 +50,42 @@ function accesrestreint_affiche_milieu($flux){
 	return $flux;
 }
 
+/**
+ * Detecter les demande d'acces aux pages restreintes
+ * et re-orienter vers une 401 si necessaire
+ *
+ * @param <type> $contexte
+ * @return <type>
+ */
+function accesrestreint_page_indisponible($contexte){
+	if ($contexte['status']=='404' AND isset($contexte['type'])){
+		$objet = $contexte['type'];
+		$table_sql = table_objet_sql($objet);
+		$id_table_objet = id_table_objet($objet);
+		if ($id = intval($contexte[$id_table_objet])){
+
+			$publie = true;
+			$restreint = false;
+
+			$trouver_table = charger_fonction('trouver_table','base');
+			$desc = $trouver_table($table_sql);
+			if (isset($desc['field']['statut'])){
+				$statut = sql_getfetsel('statut', $table_sql, "$id_table_objet=".intval($id));
+				if ($statut!='publie')
+					$publie = false;
+			}
+			
+			include_spip('inc/autoriser');
+			if ($publie AND !autoriser('voir',$objet,$id)){
+				// c'est un contenu restreint
+				$contexte['status'] = '401';
+				$contexte['code'] = '401 Unauthorized';
+				$contexte['fond'] = '401';
+				$contexte['erreur'] = _T('accesrestreint:info_acces_restreint');
+				$contexte['cible'] = self();
+			}
+		}
+	}
+	return $contexte;
+}
 ?>

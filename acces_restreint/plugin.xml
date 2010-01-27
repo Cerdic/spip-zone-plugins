@@ -6,7 +6,7 @@
 	<auteur>[cedric.morin@yterium.com->http://www.yterium.net]</auteur>
 	<licence>GPL &#169; 2007-2008</licence>
 	<version>3.0.0</version>
-	<version_base>3.0.0</version_base>
+	<version_base>0.3.0.2</version_base>
 	<etat>stable</etat>
 	<description>
 	<multi>
@@ -61,6 +61,10 @@ _ All SPIP's loops are loaded with the necessary tools to filter the results acc
 	</pipeline>
 	<pipeline>
 		<nom>affiche_milieu</nom>
+		<inclure>acces_restreint_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>page_indisponible</nom>
 		<inclure>acces_restreint_pipelines.php</inclure>
 	</pipeline>
 
