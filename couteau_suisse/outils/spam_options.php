@@ -11,9 +11,11 @@ if ( count($_POST)
 	if (!isset($GLOBALS['meta']['cs_spam_mots'])) { include_spip('outils/spam'); spam_installe(); }
 
 	// champs du formulaire a visiter
-	//    un message en forum : texte, titre, auteur
-	//    un message a un auteur : texte_message_auteur_XX, sujet_message_auteur_XX, email_message_auteur_XX
-	$spam_POST_reg = ',^(?:texte|titre|sujet|auteur|email|session),i';
+	//	un message en forum : texte, titre, auteur
+	//	un message a un auteur : texte_message_auteur_XX, sujet_message_auteur_XX, email_message_auteur_XX
+	//	inscription : nom_inscription, mail_inscription
+	//	login : session_*
+	$spam_POST_reg = ',^(?:texte|titre|sujet|auteur|nom|e?mail|session),i';
 	// on compile $spam_POST en fonction des variables $_POST trouvees
 	$spam_POST_compile = array();
 	foreach (array_keys($_POST) as $key)
