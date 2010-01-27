@@ -2,7 +2,7 @@
 <B_msgs>
 <div style="color:red; font-weight:bold;">
 <BOUCLE_msgs(FORUMS){statut?}{plat}{par id_forum}>
-	#SET{test, #TEXTE|concat{" ",#TITRE," ",#AUTEUR," ",#EMAIL_AUTEUR}|spam_filtre_de_test|=={ko}}
+	#SET{test, #TEXTE*|concat{" ",#TITRE*," ",#AUTEUR*," ",#EMAIL_AUTEUR*}|spam_filtre_de_test|=={ko}}
 	[(#GET{test}|non)
 		#SET{test, #IP|spam_filtre_de_test_ip|=={ko}}
 	]
