@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<plugin>
+	<nom>Choix police typo</nom>
+	<auteur>cy_altern 
+_ &#169; 2010 - Distribu&#233; sous licence GPL
+	</auteur>
+	<lien></lien>
+	<icon>choix_police-64.png</icon>
+	<version>0.1</version>
+	<etat>dev</etat>
+  <description>
+Ce plugin permet de choisir une police pour les images typo 
+parmi toutes celles disponibles et de configurer ses param&#232;tres par d&#233;faut via une [interface cfg->?exec=cfg&amp;cfg=choix_police].
+_ Les polices disponibles sont celles du dossier {{/squelettes/polices}} du SPIP ou, s'il n'existe pas, celui du plugin.
+_ Ce plugin fourni un mod&#232;le &lt;typo|texte=bla bla bla&gt; (ou [(#MODELE&#123;typo&#125;&#123;texte=bla bla bla&#125;)]) qui accepte les param&#232;tres suivants:
+-* |texte= le texte &#224; passer en image ({{obligatoire!}})
+-* |taille= taille de la police (sans unite)
+-* |couleur= couleur du texte (de la forme #EE0000, avec ou sans #)
+-* |largeur= largeur occup&#233;e par l'image avant retour &#224; la ligne (sans unit&#233;)
+-* |padding= padding autour du texte pour les polices qui d&#233;bordent (sans unit&#233;)
+-* |margev= marge au-dessus et dessous de l'image (avec unit&#233;: px ou em au choix)
+-* |margeh= marge &#224; droite et &#224; gauche de l'image (avec unit&#233;: px ou em au choix)
+
+Exemple: 
+_ &lt;typo|texte=bla bla bla
+_ |couleur=DDDDDD
+_ |largeur=720
+_ |padding=5
+_ |margev=30px
+_ |margeh=0px&gt;
+	</description>
+	<prefix>choix_police</prefix>
+  <fonctions>choix_police_fonctions.php</fonctions>
+	<necessite id="SPIP" version="[2.0.10;]" />
+	<necessite id="cfg" version="[1.10.2;]" />
+	<necessite id="spip_bonux" version="[1.8;]" />
+	<chemin dir='' />
+</plugin>
