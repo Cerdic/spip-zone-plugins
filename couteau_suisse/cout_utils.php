@@ -560,7 +560,7 @@ cs_log(" -- fichier $fo absent. Fichier '$fo' et inclusion ".((!$ecriture || !$o
 
 function cs_retire_guillemets($valeur) {
 	$valeur = trim($valeur);
-	return (strncmp($valeur,$g="'",1)===0 || strncmp($valeur,$g='"',1)===0)
+	return (strncmp($valeur,$g="'",1)===0 /*|| strncmp($valeur,$g='"',1)===0*/)
 			&& preg_match(",^$g(.*)$g$,s", $valeur, $matches)
 		?stripslashes($matches[1])
 		:$valeur;
