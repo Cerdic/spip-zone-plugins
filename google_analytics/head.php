@@ -4,7 +4,7 @@
 function GoogleAnalytics_insert_head($flux){
 $id_google = lire_config('googleanalytics/idGoogle');
 if (!$id_google || $id_google == '_' || $id_google == 'UA-xxxxxx') {
-		return '';
+		return $flux;
 	}
 	else {
 
