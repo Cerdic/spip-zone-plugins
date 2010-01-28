@@ -204,24 +204,24 @@ class cfg
 		if (($exi = lire_config($lien)) && is_array($exi)) {
 			foreach ($exi as $compte => $info) {
 				$lid = $lien . "_" . $compte;
-				$dedans .= "\n<p><label for='$lid'>$compte</label>\n"
+				$dedans .= "\n<label for='$lid'>$compte</label>\n"
 						.  "<input type='image' id='$lid' name='cfg_id' value='$compte' "
-						.  "src='../dist/images/triangle.gif' style='vertical-align: text-top;'/></p>\n";
+						.  "src='".find_in_path('images/triangle.gif')."' style='vertical-align: text-top;'/><br />\n";
 			}
 		}
 		// On ajoute un bouton 'nouveau'
-		return    "<form method='post' action='".generer_url_ecrire('')."'><div>\n"
+		return    "<form method='get' action='".generer_url_ecrire('')."'><div>\n"
 				. "<h4>$nom</h4>\n"
 				. "<input type='hidden' name='exec' value='cfg' />\n"
 				. "<input type='hidden' name='cfg' value='$lien' />\n"
 				. "<label for='$lien" . "_'>" . _T('cfg:nouveau') . "</label>\n"
 				. "<input type='image' id='$lien" . "_' name='nouveau' value='1' "
-				. "src='../dist/images/creer.gif' style='vertical-align: text-top;'/></p>\n" 
+				. "src='".find_in_path('images/creer.gif')."' style='vertical-align: text-top;'/><br />\n" 
 				. $dedans
 				. "\n</div></form>\n";
 	
 	}
-		
+	
 	//
 	// Affiche la liste des onglets de CFG
 	// 
