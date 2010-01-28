@@ -166,11 +166,11 @@ function cfg_affiche_sous_arborescence($nom, $tableau){
 			elseif (false !== $v = @unserialize($val))
 				$sortie .= "<li>" . cfg_affiche_sous_arborescence($tab, $v) . "</li>";
 			else
-				$sortie .= "<li>$tab = " . htmlentities($val) ."</li>\n";
+				$sortie .= "<li>$tab = " . htmlentities($val, ENT_COMPAT, $GLOBALS['meta']['charset']) ."</li>\n";
 
 		}
 	} else {
-		$sortie .= "<li>$nom = " . htmlentities($tableau) . "</li>";
+		$sortie .= "<li>$nom = " . htmlentities($val, ENT_COMPAT, $GLOBALS['meta']['charset']) . "</li>";
 	}
 	$sortie .= "</ul>\n";
 	return $sortie;
