@@ -2,7 +2,7 @@
 #SET{test, #ENV{ar_message}|spam_filtre_de_test}
 #SET{test_ip, #ENV{ar_message}|spam_filtre_de_test_ip{1}}
 <div style='text-align:center; padding:0.4em;'>
-	<fieldset>
+	<fieldset><lgend>1. <:couteau:test_manuel:> </legend>
 	<p style='text-align:left;'><:couteauprive:spam_tester_label:></p>
 	<div>
 		<textarea name="ar_message" id="ar_message" style="width:100%;">#ENV{ar_message}</textarea>
@@ -19,7 +19,7 @@
 @@CS_FORM@@
 
 <div style='text-align:center; padding:0.4em;'>
-	<fieldset>
+	<fieldset><lgend>2. <:couteau:base_donnees:> </legend>
 	<p style='text-align:left;'><:couteauprive:spam_tester_bd:></p>
 	<div>
 		<input name="submit" class='fondo' type='submit' value="<:couteauprive:spam_tester:>" />

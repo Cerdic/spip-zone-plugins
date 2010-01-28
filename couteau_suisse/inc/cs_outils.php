@@ -212,10 +212,10 @@ function cs_action_rapide($outil_id, $actif=true) {
 	if(strlen($f = trim($f()))) {
 		// si inactif...
 		if(!$actif) {
-			if(preg_match_all(',<legend[^>]*>(.*?):?\s*</legend>,', $f, $regs))
-				// on ne conserve que les <legend>
+			if(preg_match_all(',<legend[^>]*>(.*?):?\s*</legend>,', $f, $regs)	
+				|| preg_match_all(',<p[^>]*>(.*?):?\s*</p>,', $f, $regs))
+				// on ne conserve que les <legend> ou <p>
 				$f = '<ul><li>' . join("</li><li>", $regs[1]) . '</li></ul>';
-				// on ne conserve que les value
 		}
 		$info = '<strong>' . definir_puce() . '&nbsp;' . _T('couteauprive:action_rapide'.($actif?'':'_non')) . "</strong>";
 		return "<div>$info</div><div>$f</div>";

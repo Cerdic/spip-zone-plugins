@@ -7,6 +7,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// 2
 	'2pts' => '@objet@&nbsp;:',
+	'test_manuel'=>'Test manuel',
+	'base_donnees'=>'Base de donn&eacute;es',
 
 	// A
 	'attente_confirmation' => 'En attente de confirmation',

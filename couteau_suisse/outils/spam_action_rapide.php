@@ -18,10 +18,10 @@ function spam_filtre_de_test_ip($texte, $liste=false) {
 	$res = array();
 	if (!isset($GLOBALS['meta']['cs_spam_mots'])) { include_spip('outils/spam'); spam_installe(); }
 	$spam = unserialize($GLOBALS['meta']['cs_spam_mots']);
-	if($spam[3]) foreach($regs[0] as $r) {
-		$test = preg_match($spam[3], "$r");
+	foreach($regs[0] as $r) {
+		$test = $spam[3]?preg_match($spam[3], "$r"):false;
 		if(!$liste) { if($test) return 'ko'; }
-		else $res[] = _T('couteauprive:spam_ip', array('ip'=>$r)).' '._T($test?'item_oui':'item_non');
+		else $res[] = _T('couteauprive:spam_ip', array('ip'=>$r)).' '.strtolower(_T($test?'item_oui':'item_non'));
 	}
 	return $liste?join('<br />', $res):'ok';
 }
