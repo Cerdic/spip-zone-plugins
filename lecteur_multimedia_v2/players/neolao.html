@@ -17,5 +17,8 @@
 <param name="FlashVars" value="mp3=#URL_DOCUMENT&amp;bgcolor1=ffffff&amp;bgcolor2=cccccc&amp;buttoncolor=999999&amp;buttonovercolor=0&amp;slidercolor1=cccccc&amp;slidercolor2=999999&amp;loadingcolor=ffff00&amp;sliderovercolor=666666&amp;textcolor=0&amp;showstop=1&amp;showinfo=0&amp;width=200&amp;height=20[&amp;autoplay=(#ENV{autostart,0})]" />
 [<span><a href='(#URL_DOCUMENT)' rel='enclosure'>#URL_DOCUMENT</a></span>]
 </object>
+<dd class='spip_doc_download'><a href="#URL_DOCUMENT" type="#MIME_TYPE"[ class="(#ENV{lien_class})"] title='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets|texte_backend)]'>
+<img src='[(#CHEMIN{players/download.png})]' width='16' height='16' alt='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets|texte_backend)]' style="vertical-aling: text-top;" /> <:bouton_telecharger:></a></dd>
+</dl>
 </dl>
 </BOUCLE_doc>
