@@ -1,6 +1,6 @@
 <?php
 
-function formulaires_contact_charger_dist($id_auteur=''){	
+function formulaires_contact_charger_dist($id_auteur='',$tracer=''){	
 	$valeurs = array();
 
 	$valeurs['destinataire'] = array();
@@ -72,12 +72,17 @@ function formulaires_contact_charger_dist($id_auteur=''){
 	return $valeurs;
 }
 
-function formulaires_contact_verifier_dist($id_auteur=''){
+function formulaires_contact_verifier_dist($id_auteur='',$tracer=''){
 	$erreurs = array();
 	include_spip('inc/filtres');
 	include_spip('inc/documents');
 	include_spip('inc/charsets');
-	
+	if($tracer){
+		$trace=explode('-',$tracer);
+		if( !(count($trace)==2) or !(intval($trace[1])>0) ){
+			$erreurs['message_erreur'] = 'Une erreur de transmission s\'est produite, merci de renouveller vôtre demande.';
+		}
+	}
 	if (!_request('destinataire'))
 		$erreurs['destinataire'] = _T("info_obligatoire");
 	if (!$adres = _request('mail'))
@@ -175,7 +180,7 @@ function formulaires_contact_verifier_dist($id_auteur=''){
 	return $erreurs;
 }
 
-function formulaires_contact_traiter_dist($id_auteur=''){
+function formulaires_contact_traiter_dist($id_auteur='',$tracer=''){
 	
 	include_spip('base/abstract_sql');
 	
@@ -210,12 +215,27 @@ function formulaires_contact_traiter_dist($id_auteur=''){
 			}
 		}
 	}
-	
+	if($tracer){
+		$trace=explode('-',$tracer);
+		if( (count($trace)==2) and (intval($trace[1])>0) ){
+			$url = generer_url_entite(intval($trace[1]),$trace[0]);
+			if($url){
+				$inforigine= $GLOBALS['meta']['adresse_site']."/".$url;
+			}else{
+				$inforigine= 'info trace non comprise';
+			}
+		}else{
+			$inforigine= 'info trace non comprise';
+		}
+			$inforigine= _T('contact:inforigine')."\n".$inforigine."\n\n";
+		
+	}
+		
 	// horodatons
 	$horodatage = date("d / m / y à H:i:s");
 	$horodatage = "\n\n"._T('contact:horodatage', array('horodatage'=>$horodatage))."\n\n";
 	
-	$texte = $horodatage.$infos."\n\n".$posteur['texte'];
+	$texte = $horodatage.$inforigine.$infos."\n\n".$posteur['texte'];
 	$nom_site = supprimer_tags(extraire_multi($GLOBALS['meta']['nom_site']));
 	$texte .= "\n\n-- "._T('envoi_via_le_site')." ".$nom_site." (".$GLOBALS['meta']['adresse_site']."/) --\n";
 	

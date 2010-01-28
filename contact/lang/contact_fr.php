@@ -51,6 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forum_attention_nbre_caracteres' => '<b>Attention&nbsp;!</b> votre message doit contenir au moins @nbre_caract@ caract&egrave;res.',
 	
 	'horodatage' => 'Formulaire posté le : @horodatage@.',
+	'inforigine' => 'Information transmise par le formulaire : ',
 	'infos_collecte' => 'Informations collect&eacute;es',
 	'infos_supplementaires' => 'Informations suppl&eacute;mentaires',
 	'informez_moi' => 'J\'accepte de recevoir, par courrier &eacute;lectronique, des informations &eacute;manant de votre organisation.',
