@@ -57,6 +57,13 @@
 					});
 				}
 				return false;
+			});
+			// ne pas soumettre le formulaire si on presse Entree depuis le champ de recherche
+			$('#map_adresse').keypress(function(e){
+				if (e.which == 13) {
+					$('a#rechercher').trigger("click");
+					return false;
+				}
 			});]
 		} else {
 			alert("Sorry, the Google Maps API is not compatible with this browser");
