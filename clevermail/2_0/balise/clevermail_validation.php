@@ -22,11 +22,11 @@ function balise_CLEVERMAIL_VALIDATION_dyn() {
 				switch ($action['pnd_action']) {
 			        case 'subscribe':
 			          if (sql_countsel("spip_cm_lists_subscribers", "lst_id = ".intval($action['lst_id'])." AND sub_id = ".intval($action['sub_id'])) == 1) {
-			            sql_updateq("spip_cm_lists_subscribers", array('lsr_mode' => $action['pnd_mode'], 'lsr_id' => $action['pnd_action_id']), "lst_id = ".$action['lst_id']." AND sub_id = ".$action['sub_id']);
+			            sql_updateq("spip_cm_lists_subscribers", array('lsr_mode' => $action['pnd_mode'], 'lsr_id' => md5('subscribe#'.intval($action['lst_id']).'#'.intval($action['sub_id']).'#'.time())), "lst_id = ".$action['lst_id']." AND sub_id = ".$action['sub_id']);
 			            $return = $return.'<p>'._T('clevermail:deja_inscrit', array('lst_name' => $lists_name_complet)).'</p>';
 			          } else {
 			            $sub = sql_fetsel("*", "spip_cm_subscribers", "sub_id = ".intval($action['sub_id']));
-			            sql_insertq("spip_cm_lists_subscribers", array('lst_id' => $action['lst_id'], 'sub_id' => $action['sub_id'], 'lsr_mode' => $action['pnd_mode'], 'lsr_id' => $action['pnd_action_id']));
+			            sql_insertq("spip_cm_lists_subscribers", array('lst_id' => $action['lst_id'], 'sub_id' => $action['sub_id'], 'lsr_mode' => $action['pnd_mode'], 'lsr_id' => md5('subscribe#'.intval($action['lst_id']).'#'.intval($action['sub_id']).'#'.time())));
 			            $return = $return.'<p>'._T('clevermail:inscription_validee', array('lst_name' => $lists_name_complet)).'</p>';
 
 			            // E-mail d'alerte envoye au moderateur de la liste
