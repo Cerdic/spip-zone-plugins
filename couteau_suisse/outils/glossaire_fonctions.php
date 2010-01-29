@@ -39,19 +39,12 @@ function glossaire_generer_url_dist($id_mot, $titre) {
 
 // surcharge possible de cette fonction glossaire_generer_mot_dist par : glossaire_generer_mot($id_mot, $mot) 
 // si elle existe, elle sera utilisee pour remplacer le mot detecte dans la phrase
-/* exemple pour utiliser un fond personnalise, inserer un logo par exemple :
+/* exemple pour utiliser un fond personnalise, mettre une couleur de groupe ou inserer un logo par exemple :
 	function glossaire_generer_mot($id_mot, $mot) { 
 		return recuperer_fond('/fonds/mon_glossaire', array('id_mot'=>$id_mot, 'mot'=>$mot));
 	}*/
 function glossaire_generer_mot_dist($id_mot, $mot) {
 	return $mot;
-}
-
-// compatibilite pour SPIP 1.91
-include_spip('inc/texte');
-if(!function_exists('nettoyer_chapo')) {
-	// Ne pas renvoyer le chapo si article virtuel
-	function nettoyer_chapo($chapo){ return (substr($chapo,0,1) == "=") ? '' : $chapo; }
 }
 
 // traitement pour #TITRE/mots : retrait des expressions regulieres
