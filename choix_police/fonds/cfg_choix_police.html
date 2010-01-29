@@ -1,6 +1,6 @@
 <!-- titre=<:choix_police:choix_police:> -->
 <!-- icone=choix_police-32.png-->
-<!-- boite=<:choix_police:configuration_choix_police:> -->
+<!-- boite=<:choix_police:configuration_parametres_par_defaut:> -->
 
 [(#PLUGIN{autorite}|oui)
 <!-- autoriser=webmestre -->
@@ -59,7 +59,7 @@ modifier ces param&#232;tres.  -->
 
 [(#REM) ------------------------ MARGES -------------------------------------- ]
 <fieldset>
-    <legend><:choix_police:marges_image_typo:></legend>
+    <legend><:choix_police:style_css_image_typo:></legend>
     <small><:choix_police:explication_marges:></small>
     <p>
         <label><:choix_police:marge_verticale:>:</label>
@@ -70,6 +70,15 @@ modifier ces param&#232;tres.  -->
         <label><:choix_police:marge_horizontale:>:</label>
         <input type="text" name="marge_horizontale" 
         value="[(#ENV{marge_horizontale}|?{[(#ENV{marge_horizontale})],0px})]" style="width: 80px" />
+    </p>
+    <p>
+        <label><:choix_police:alignement_vertical:>:</label>
+        <select name="vertical_align">
+        	<option value="bottom"[ (#ENV{vertical_align}|=={bottom}|oui)selected="selected"]>bottom</option>
+            <option value="baseline"[ (#ENV{vertical_align}|=={baseline}|oui)selected="selected"]>baseline</option>
+            <option value="middle"[ (#ENV{vertical_align}|=={middle}|oui)selected="selected"]>middle</option>
+            <option value="top"[ (#ENV{vertical_align}|=={top}|oui)selected="selected"]>top</option>
+        </select>
     </p>
 </fieldset>
 

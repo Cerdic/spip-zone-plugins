@@ -1,10 +1,20 @@
 [(#REM) le modèle pour afficher un texte en image typo 
-			le texte à afficher est passé par le paramètre |texte=
-        seul le choix de police et la suppression des accents
-        ne sont pas surchargeable par les paramètres passés au modèle ]
-        
-[(#TEXTE|remplacer_accents{#CONFIG{choix_police/supprimer_accents}}
-        |image_typo{police=[(#CONFIG{choix_police/police_typo})],
+	      paramètres: 
+				|texte= le texte à afficher
+				|police= le nom du fichier de police (avec l'extension)
+				|accents=non (si la police ne gère pas les caractères accentués)
+				|taille= taille de la police (sans unite)
+				|couleur= couleur du texte (de la forme #EE0000, avec ou sans #)
+				|largeur= largeur occupée par l'image avant retour à la ligne (sans unité)
+				|padding= padding autour du texte pour les polices qui débordent (sans unité)
+				|margev= marge au-dessus et dessous de l'image (avec unité: px ou em au choix)
+				|margeh= marge à droite et à gauche de l'image (avec unité: px ou em au choix)
+            |valign= alignement vertical de l'image typo (valeurs possibles: bottom, baseline, middle, top)
+]
+[(#SET{pt,[(#CHEMIN{polices/#POLICE}|choixsivide{[(#CONFIG{choix_police/police_typo})],#POLICE})]})]
+[(#SET{sa,[(#ACCENTS|=={non}|?{on,[(#CONFIG{choix_police/supprimer_accents})]})]})]
+[(#TEXTE|remplacer_accents{#GET{sa}}
+        |image_typo{police=#GET{pt},
          		  	taille=[(#TAILLE|sinon{[(#CONFIG{choix_police/taille_typo})]})],
                   	couleur=[(#COULEUR|sinon{[(#CONFIG{choix_police/couleur_typo})]}|suprime_diese)],
                   	padding=[(#PADDING|sinon{[(#CONFIG{choix_police/padding_typo})]})],
@@ -13,7 +23,6 @@
         |inserer_attribut{style, [margin-top: (#MARGEV|sinon{[(#CONFIG{choix_police/marge_verticale})]});]
         						 [margin-bottom: (#MARGEV|sinon{[(#CONFIG{choix_police/marge_verticale})]});]
                                  [margin-right: (#MARGEH|sinon{[(#CONFIG{choix_police/marge_horizontale})]});]
-                                 [margin-left: (#MARGEH|sinon{[(#CONFIG{choix_police/marge_horizontale})]});] }
-
+                                 [margin-left: (#MARGEH|sinon{[(#CONFIG{choix_police/marge_horizontale})]});]
+                                 [vertical-align: (#VALIGN|sinon{[(#CONFIG{choix_police/vertical_align})]});] }
 )]
-  

@@ -1,5 +1,5 @@
 <?php
-// retourne un array avec la liste les polices disponibles dans le dossier /polices du plugin
+// retourne un array avec la liste les polices disponibles dans le dossier /polices du plugin ou du squelette
 function polices_disponibles($chemin) {
     $Tpolices = array();
     if (is_dir($chemin) AND $pointeur = opendir($chemin)) {
@@ -21,10 +21,9 @@ function suprime_diese($txt) {
 
 // si $config est à "on", remplace les caractères accentués par leur équivalent pas accentué
 function remplacer_accents($string, $config='on'){ 
-    if ($config == 'on')
+    if (trim($config) == 'on')
   	    $string = strtr(utf8_decode($string), "ÀÁÂÃÄÅàáâãäåÒÓÔÕÖØòóôõöøÈÉÊËèéêëÇçÌÍÎÏìíîïÙÚÛÜùúûüÿÑñ","AAAAAAaaaaaaooooooooooooEEEEeeeeCcIIIIiiiiUUUUuuuuyNn");
     return $string; 
 } 
-
 
 ?>
