@@ -85,8 +85,8 @@ function textes_recueil($texte) {
  return $texte?"<p class=\"textes_recueil\">$texte</p>":'';
 }
 
-// fonction principale
-function jeux_textes($texte, $indexJeux) {
+// fonction principale, pas de formulaire
+function jeux_textes($texte, $indexJeux, $form=true) {
   $html = false;
 
   // parcourir tous les #SEPARATEURS

@@ -1,8 +1,7 @@
 /* Mise en forme des QCM
  */
 
-.qcm
-{ 
+.qcm{ 
  text-align:left;
  font-size: 90%;
  font-family: arial, helvetica, sans-serif;
@@ -15,7 +14,6 @@
 }
 
 .qcm_titre{ 
- text-align: center;
 /* color: #3F5264; */
 }
 

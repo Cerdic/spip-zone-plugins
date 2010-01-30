@@ -144,7 +144,7 @@ function jeux_trous_init() {
 }
 
 // traitement du jeu : jeu_{mon_jeu}()
-function jeux_trous($texte, $indexJeux) {
+function jeux_trous($texte, $indexJeux, $form=true) {
 	global $propositionsTROUS, $scoreTROUS, $score_detailTROUS;
 	$titre = $html = false;
 	$indexTrou = $scoreTROUS = 0;
@@ -180,8 +180,8 @@ function jeux_trous($texte, $indexJeux) {
 	);
 	// mise en place du formulaire
 	$fond = str_replace(
-		array('@@FORM_JEUX_DEBUT@@', '@@FORM_JEUX_FIN@@'), 
-		$correction?'':array(jeux_form_debut('trous', $indexJeux), jeux_form_fin()), 
+		array('@@FORM_JEUX_DEBUT@@', '@@FORM_JEUX_FIN@@', '@@FORM_CORRIGER@@', '@@RECOMMENCER@@'), 
+		($correction || !$form)?'':array(jeux_form_debut('trous', $indexJeux), jeux_form_fin(), jeux_bouton_corriger(), bouton_recommencer()), 
 		$fond
 	);
 	// nettoyage

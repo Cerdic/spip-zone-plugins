@@ -42,7 +42,7 @@ Exemple de syntaxe dans l'article :
 
 */
 // affiche la grille de sudoku, en format solution au cas ou...
-function affichage_sudoku($tableau_sudoku, $indexJeux, $solution=false){
+function affichage_sudoku($tableau_sudoku, $indexJeux, $form=true, $solution=false){
 
 	// les variables de la grille
 	$largeur = $hauteur = sizeof($tableau_sudoku);
@@ -55,7 +55,8 @@ function affichage_sudoku($tableau_sudoku, $indexJeux, $solution=false){
     $grille='';
 
     // entetes : formulaire + grille
-    $grille .= (!$solution)? jeux_form_debut('sudoku', $indexJeux, 'jeux_grille', 'post', self())
+    $grille .= (!$solution)
+		? ($form?jeux_form_debut('sudoku', $indexJeux, 'jeux_grille', 'post', self()):'')
 		: '<p class="jeux_solution">'._T('jeux:solution').' : </p>' ;
     $grille .= '<table class="jeux_grille  sudoku" cellspacing="0" border="0" summary="'
 		. _T('sudoku:table_summary',Array('hauteur'=>$hauteur,'largeur'=>$largeur)) . "\">\n";
@@ -86,18 +87,17 @@ function affichage_sudoku($tableau_sudoku, $indexJeux, $solution=false){
 					. "</td>\n" ;
 			}
 		} // foreach
-                                                    
-        $grille = $grille."\t</tr>\n";}		
-	
-	// fin affichage des lignes
-	
-	$grille.="</table>\n";
 
+        $grille = $grille."\t</tr>\n";}		
+
+	// fin affichage des lignes
+	$grille.="</table>\n";
 	
 	if (!$solution) $grille .= 
 		(jeux_config('regle')?'<p class="jeux_regle">'.definir_puce()._T('sudoku:regle',Array('hauteur'=>$li,'largeur'=>$lj, 'max'=>$largeur)).'</p>' : '')
 		.(jeux_config('solution')?"<p><input id=\"affiche_solution_$indexJeux\" name=\"affiche_solution_{$indexJeux}[]\" type=\"checkbox\" class=\"jeux_cocher\" value=\"1\" /><label for=\"affiche_solution_$indexJeux\" >"._T('jeux:afficher_solution')."</label></p>\n":'')
-		.'<p><input type="submit" value="'._T('jeux:verifier_validite')."\" name=\"bouton_envoi_$indexJeux\" /></p>".jeux_form_fin();
+		.'<p><input type="submit" value="'._T('jeux:verifier_validite')."\" name=\"bouton_envoi_$indexJeux\" /></p>"
+		.($form?jeux_form_fin():'');
 
 	return $grille;
 }
@@ -185,7 +185,7 @@ function jeux_sudoku_init() {
 }
 
 // decode une grille de sudoku 
-function jeux_sudoku($texte, $indexJeux) { 
+function jeux_sudoku($texte, $indexJeux, $form=true) { 
 	$sudoku = $solution = $titre = $html = false;
     // parcourir tous les #SEPARATEURS
 	$tableau = jeux_split_texte('sudoku', $texte);
@@ -198,8 +198,8 @@ function jeux_sudoku($texte, $indexJeux) {
 	
 	return  ($titre?"<p class=\"jeux_titre sudoku_titre\">$titre</p>":'')
 			. calcul_erreurs_sudoku($sudoku, $solution, $indexJeux)
-			. affichage_sudoku($sudoku, $indexJeux)
+			. affichage_sudoku($sudoku, $indexJeux, $form)
 	// solution
-			. (($_POST['affiche_solution_'.$indexJeux][0] == 1)? affichage_sudoku($solution, $indexJeux, true) : '');
+			. (($_POST['affiche_solution_'.$indexJeux][0] == 1)? affichage_sudoku($solution, $indexJeux, $form, true) : '');
 }
 ?>

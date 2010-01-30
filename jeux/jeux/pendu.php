@@ -86,7 +86,7 @@ function jeux_pendu_init() {
 }
 
 // fonction principale 
-function jeux_pendu($texte, $indexJeux) {
+function jeux_pendu($texte, $indexJeux, $form=true) {
   $html = false;
 
   // parcourir tous les #SEPARATEURS
@@ -113,7 +113,9 @@ function jeux_pendu($texte, $indexJeux) {
   }
   $js .= "\n\tpendu_Mots[$indexJeux]=new Array('".join("','",$mots)."');";
   $html .= pendu_pendu($js, $indexJeux);
-  return jeux_form_debut('pendu', $indexJeux).$html.jeux_form_fin();
+  return $form
+  	?jeux_form_debut('pendu', $indexJeux).$html.jeux_form_fin()
+	:$html;
 }
 
 

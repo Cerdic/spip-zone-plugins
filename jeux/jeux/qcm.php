@@ -327,7 +327,7 @@ function jeux_qcm_init() {
 }
 
 // traitement du jeu : jeu_{mon_jeu}()
-function jeux_qcm($texte, $indexJeux) {
+function jeux_qcm($texte, $indexJeux, $form=true) {
   // initialisation  
   global $qcms, $qcm_score, $qcm_score_detaille;
 
@@ -361,14 +361,16 @@ function jeux_qcm($texte, $indexJeux) {
 
   // calcul des extremes
   $tete = '<div class="jeux_cadre qcm">'.($titre?'<div class="jeux_titre qcm_titre">'.$titre.'<hr /></div>':'');
+  $pied = '';
   if (!isset($_POST["var_correction_".$indexJeux])) {
-	$tete .= jeux_form_debut('qcm', $indexJeux);
-	$pied = '<br /><div style="text-align:center;"><input type="submit" value="'._T('jeux:corriger').'" class="jeux_bouton" /></div>'.jeux_form_fin();
+	if($form) {
+		$pied = '<br />'.jeux_bouton_corriger().jeux_form_fin();
+		$tete .= jeux_form_debut('qcm', $indexJeux);
+	}
   } else {
-      $pied = jeux_afficher_score($qcm_score, $qcms['totalscore'], $_POST['id_jeu'], join(', ', $qcm_score_detaille), $categ_score)
-			. jeux_bouton_reinitialiser();
+	$pied = jeux_afficher_score($qcm_score, $qcms['totalscore'], _request('id_jeu'), join(', ', $qcm_score_detaille), $categ_score);
+	if($form) $pied .= jeux_bouton_reinitialiser();
   }
-
   // ajout du javascript si on doit afficher une par une
   if (jeux_config('une_par_une'))
   	$js = '<script type="text/javascript">qcm_affichage_une_par_une();</script>';

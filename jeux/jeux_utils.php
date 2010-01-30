@@ -162,25 +162,28 @@ function jeux_bouton_reinitialiser($item='jeux:reinitialiser') {
 function jeux_bouton_recommencer() {
 	return jeux_bouton_reinitialiser('jeux:recommencer');
 }
+function jeux_bouton_corriger() {
+	return '<div style="text-align:center;"><input type="submit" value="'._T('jeux:corriger').'" class="jeux_bouton" /></div>';
+}
 
 // ajoute un module jeu a la bibliotheque
-function jeux_include_jeu($jeu, &$texte, $indexJeux) {
+function jeux_include_jeu($jeu, &$texte, $indexJeux, $form=true) {
 	if (!function_exists($fonc = 'jeux_'.$jeu))
 		include_spip('jeux/'.$jeu);
 	if (function_exists($fonc))
-		$texte = $fonc($texte, $indexJeux);
+		$texte = $fonc($texte, $indexJeux, $form);
 }	
 
 // decode les jeux, si le module jeux/lejeu.php est present
 // retourne la liste des jeux trouves et inclut la bibliotheque si $indexJeux existe
-function jeux_liste_des_jeux(&$texte, $indexJeux=NULL) {
+function jeux_liste_des_jeux(&$texte, $indexJeux=NULL, $form=true) {
 	global $jeux_caracteristiques;
 	$liste = array();
 	foreach($jeux_caracteristiques['SIGNATURES'] as $jeu=>$signatures) {
 		$ok = false;
 		foreach($signatures as $s) $ok |= (strpos($texte, "[$s]")!==false);
-		if ($ok) { 
-		 if ($indexJeux) jeux_include_jeu($jeu, $texte, $indexJeux);
+		if ($ok) {
+		 if ($indexJeux) jeux_include_jeu($jeu, $texte, $indexJeux, $form);
 		 $liste[]=$jeu;
 		}
 	}
@@ -200,6 +203,8 @@ function jeux_trouver_nom($texte) {
 function jeux_trouver_titre_public($texte) {
   $texte = str_replace(array('<jeux>','</jeux>'), '', $texte);
   $titre_public = false;
+  // cas particulier des multi-jeux
+  if($p=strpos($texte,'['._JEUX_MULTI_JEUX.']')) $texte = substr($texte,0,$p);
   // parcourir tous les #SEPARATEURS
   $tableau = jeux_split_texte('la_totale', $texte);
   foreach($tableau as $i => $valeur) if ($i & 1) {
@@ -212,6 +217,8 @@ function jeux_trouver_titre_public($texte) {
 function jeux_trouver_configuration_interne($texte) {
   $texte = str_replace(array('<jeux>','</jeux>'), '', $texte);
   $configuration_interne = array();
+  // cas particulier des multi-jeux
+  if($p=strpos($texte,'['._JEUX_MULTI_JEUX.']')) $texte = substr($texte,0,$p);
   // parcourir tous les #SEPARATEURS
   $tableau = jeux_split_texte('la_totale', $texte);
   foreach($tableau as $i => $valeur) if ($i & 1) {

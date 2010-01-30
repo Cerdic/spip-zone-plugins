@@ -80,8 +80,8 @@ function jeux_devinettes_init() {
 	";
 }
 
-// fonction principale 
-function jeux_devinettes($texte, $indexJeux) {
+// fonction principale, pas de formulaire
+function jeux_devinettes($texte, $indexJeux, $form=true) {
   $html = false;
   
   // parcourir tous les #SEPARATEURS

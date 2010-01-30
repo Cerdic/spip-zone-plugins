@@ -15,7 +15,8 @@ include_spip('jeux_utils');
 global $jeux_config;
 
 // fonction pre-traitement, pipeline pre_propre
-function jeux_pre_propre($chaine) { 
+// insersion de quelques balises de reconnaissance
+function jeux_pre_propre($texte) { 
 	// s'il n'est pas present dans un formulaire envoye,
 	// l'identifiant du jeu est choisi au hasard...
 	// ca peut servir en cas d'affichage de plusieurs articles par page.
@@ -24,16 +25,16 @@ function jeux_pre_propre($chaine) {
 	if(!isset($GLOBALS['debut_index_jeux']))
 		$GLOBALS['debut_index_jeux'] = isset($_POST['debut_index_jeux'])?$_POST['debut_index_jeux']:rand(10000, 99999);
 
-	if (strpos($chaine, _JEUX_DEBUT)===false || strpos($chaine, _JEUX_FIN)===false) return $chaine;
+	if (strpos($texte, _JEUX_DEBUT)===false || strpos($texte, _JEUX_FIN)===false) return $texte;
 	if(isset($indexJeux)) ++$indexJeux;
 		else $indexJeux = $GLOBALS['debut_index_jeux'];
 
 	// isoler le jeu...
-	list($texteAvant, $suite) = explode(_JEUX_DEBUT, $chaine, 2); 
-	list($chaine, $texteApres) = explode(_JEUX_FIN, $suite, 2); 
+	list($texteAvant, $suite) = explode(_JEUX_DEBUT, $texte, 2); 
+	list($texte, $texteApres) = explode(_JEUX_FIN, $suite, 2); 
 
 	// ...decoder le texte obtenu en fonction des signatures et inclure le jeu
-	$liste = jeux_liste_des_jeux($chaine, $indexJeux);
+	$liste = jeux_liste_des_jeux($texte, $indexJeux);
 	// calcul des fichiers necessaires pour le header
 	if(count($liste)) {
 		// on oblige qd meme jeux.css et jeux.js si un jeu est detecte
@@ -47,26 +48,26 @@ function jeux_pre_propre($chaine) {
 
 	return $texteAvant . $header
 		.jeux_rem('PLUGIN-DEBUT', $indexJeux, join('/', $liste))
-		."<div id=\"JEU$indexJeux\" class=\"jeux_global\">$chaine</div>"
-#		."<div id=\"JEU$indexJeux\" class=\"jeux_global ajax\">$chaine</div>"
+		."<div id=\"JEU$indexJeux\" class=\"jeux_global\">$texte</div>"
+#		."<div id=\"JEU$indexJeux\" class=\"jeux_global ajax\">$texte</div>"
 		.jeux_rem('PLUGIN-FIN', $indexJeux).jeux_pre_propre($texteApres);
 }
 
 // fonction post-traitement, pipeline post_propre
-function jeux_post_propre($chaine) { 
-	$chaine = echappe_retour($chaine, 'JEUX');
+// les jeux sont reellement decryptes
+function jeux_post_propre($texte) { 
+	$texte = echappe_retour($texte, 'JEUX');
 
 	$sep1 = '['._JEUX_POST.'|'; $sep2 = '@@]';
-	if (strpos($chaine, $sep1)===false || strpos($chaine, $sep2)===false) return $chaine;
+	if (strpos($texte, $sep1)===false || strpos($texte, $sep2)===false) return $texte;
 	
 	// isoler les parametres...
-	list($texteAvant, $suite) = explode( $sep1, $chaine, 2);
-	list($chaine, $texteApres) = explode($sep2, $suite, 2);
-	$params = explode('|', $chaine, 3);
-	$fonc = $params[0];
-	if (function_exists($fonc)) $chaine = $fonc($params[1], $params[2]);
+	list($texteAvant, $suite) = explode($sep1, $texte, 2);
+	list($texte, $texteApres) = explode($sep2, $suite, 2);
+	list($fonc, $texteJeu, $indexJeux) = explode('|', $texte, 3);
+	if (function_exists($fonc)) $texte = $fonc($texteJeu, $indexJeux);
 
-	return $texteAvant.$chaine.jeux_post($texteApres);
+	return $texteAvant.$texte.jeux_post_propre($texteApres);
 }
 
 

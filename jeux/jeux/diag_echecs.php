@@ -205,8 +205,8 @@ second */
 	return $image;
 }
 
-// decode un diagramme d'echecs 
-function jeux_diag_echecs($texte, $indexJeux) { 
+// decode un diagramme d'echecs, pas de formulaire
+function jeux_diag_echecs($texte, $indexJeux, $form=true) { 
 	// qq initialisations
 	$html = false;
 	

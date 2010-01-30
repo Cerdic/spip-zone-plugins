@@ -48,17 +48,20 @@ define('_JEUX_AUTEUR', 'auteur');
 define('_JEUX_RECUEIL', 'recueil');
 define('_JEUX_PENDU', 'pendu');
 define('_JEUX_DIAG_ECHECS', 'diag_echecs');
+define('_JEUX_MULTI_JEUX', 'jeu');
 
 // globale stockant les carateristiques d'un jeu :
 //   - les separateurs autorises
 //   - les signatures permettant de reconnaitre un jeu
 //   - le nom du jeu
+// multi_jeux doit toujours etre en premier...
 global $jeux_caracteristiques;
 $jeux_caracteristiques = array(
 // liste des separateurs autorises dans les jeux.
 // tous les jeux doivent etre listes ci-apres.
 // monjeu est le jeu traite dans le fichier jeux/monjeu.php
  'SEPARATEURS' => array(
+	'multi_jeux' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_MULTI_JEUX, _JEUX_CONFIG, _JEUX_SCORE),
 	'sudoku' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_SUDOKU, _JEUX_SOLUTION, _JEUX_CONFIG),
 	'kakuro' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_KAKURO, _JEUX_SOLUTION, _JEUX_CONFIG),
 	'mots_croises' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_HORIZONTAL, _JEUX_VERTICAL, _JEUX_SOLUTION, _JEUX_CONFIG),
@@ -78,6 +81,7 @@ $jeux_caracteristiques = array(
 // " le jeu est charge si on trouve _JEUX_SEPAR_3 ou _JEUX_SEPAR_4
 //   a l'interieur de <jeu> et </jeu> "
   'SIGNATURES' => array(
+	'multi_jeux' => array(_JEUX_MULTI_JEUX),
 	'sudoku' => array(_JEUX_SUDOKU),
 	'kakuro' => array(_JEUX_KAKURO),
 	'mots_croises' => array(_JEUX_HORIZONTAL, _JEUX_VERTICAL),
@@ -91,6 +95,7 @@ $jeux_caracteristiques = array(
 
 // nom court a donner aux jeux
   'TYPES' => array(
+	'multi_jeux' => _L('Multi Jeux'),
 	'sudoku' => _T('sudoku:titre_court'),
 	'kakuro' => _T('kakuro:titre_court'),
 	'mots_croises' => _T('motscroises:titre_court'),
@@ -99,7 +104,7 @@ $jeux_caracteristiques = array(
 	'devinettes' => _L('Devinettes'),
 	'trous' => _L('Trous'),
 	'pendu' => _T('pendu:titre_court'),
-	'diag_echecs' => _L('Echecs')
+	'diag_echecs' => _L('Echecs'),
   ),
 
 );
