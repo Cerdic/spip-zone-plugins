@@ -5,6 +5,7 @@
 	<version_base>0.1</version_base>
 	<etat>test</etat>
 	<prefix>grappes</prefix>
+	<icon>images/grappe-24.gif</icon>
 	<description>
 	Permet de regrouper des &eacute;l&eacute;ments de SPIP
 	comme des auteurs, rubriques, articles (lorsque l'interface existe pour)...
