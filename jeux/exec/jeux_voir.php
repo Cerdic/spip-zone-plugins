@@ -5,6 +5,7 @@ include_spip('inc/presentation');
 include_spip('exec/inc_boites_infos');
 
 function exec_jeux_voir(){
+	global $jeux_caracteristiques;
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	$id_jeu = _request('id_jeu');
     
@@ -13,9 +14,27 @@ function exec_jeux_voir(){
 	$requete =    sql_fetsel('statut,contenu,id_jeu,type_jeu,titre_prive,date,type_resultat', 'spip_jeux', "id_jeu=$id_jeu");
 	list($statut, $contenu, $id_jeu, $type_jeu, $titre_prive, $date, $type_resultat) =
 		array($requete['statut'], $requete['contenu'], $requete['id_jeu'], $requete['type_jeu'], $requete['titre_prive'], $requete['date'], $requete['type_resultat']);
-	$modules_jeux = jeux_liste_des_jeux($contenu);
-	$configuration_defaut = jeux_configuration_generale($modules_jeux);
+	$liste = jeux_liste_les_jeux($contenu);
+	if(count($liste)==1)
+		$configuration_defaut = jeux_configuration_generale($liste[0]);
+	else {
+		$configuration_defaut = array();
+		foreach($liste as $jeu)
+			if(count($t = jeux_configuration_generale($jeu)))
+				$configuration_defaut[] = $jeux_caracteristiques['TYPES'][$jeu].'<ul><li>'.join('</li><li>', $t).'</li></ul>';
+	}
 	$configuration_interne = jeux_trouver_configuration_interne($contenu);
+	// cas particulier des multi-jeux
+	if(count($liste) && $liste[0]=='multi_jeux') {
+		$configuration_interne = array($jeux_caracteristiques['TYPES']['multi_jeux'].'<ul><li>'.join('</li><li>', $configuration_interne).'</li></ul>');
+		$textes = explode('['._JEUX_MULTI_JEUX.']', $contenu);
+		unset($textes[0]);
+		foreach($textes as $t) {
+			$jeu = jeux_trouver_nom($t);
+			if(count($t = jeux_trouver_configuration_interne($t)))
+				$configuration_interne[] = $jeu.'<ul><li>'.join('</li><li>', $t).'</li></ul>';
+		}
+	} else $configuration_interne = jeux_trouver_configuration_interne($contenu);
 	$titre_public = jeux_trouver_titre_public($contenu);
 	if($titre_prive=='') $titre_prive = _T('jeux:sans_titre_prive');
 	if($titre_public) {
@@ -67,13 +86,13 @@ function exec_jeux_voir(){
 		echo "</select>&nbsp;<input type='submit' name='valider' value='"._T('bouton_valider')."' class='fondo' /></li></ul>\n";
 		echo "</form>";
 		echo "<span class='titrem'>"._T('jeux:cfg_type_resultat')
-			."</span><ul><li>"._T("jeux:resultat2_$type_resultat")."</li></ul>";
+			."</span><ul><li>"._T("jeux:resultat2_$type_resultat").'</li></ul>';
 		if(count($configuration_defaut))
 			echo "<span class='titrem'>"._T('jeux:configuration_defaut')
-				."</span><ul><li>".join('</li><li>', $configuration_defaut)."</li></ul>";
+				."</span><ul><li>".join('</li><li>', $configuration_defaut).'</li></ul>';
 		if(count($configuration_interne))
 			echo "<span class='titrem'>"._T('jeux:configuration_interne')
-				."</span><ul><li>".join('</li><li>', $configuration_interne)."</li></ul>";
+				."</span><ul><li>".join('</li><li>', $configuration_interne).'</li></ul>';
 		fin_cadre_relief();
 	}
 	else

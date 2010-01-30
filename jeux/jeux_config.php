@@ -149,4 +149,6 @@ $jeux_couleurs = array(
 	'brunclair' => array(255,243,217),
 );
 
+global $scoreMULTIJEUX; $scoreMULTIJEUX = array();
+
 ?>

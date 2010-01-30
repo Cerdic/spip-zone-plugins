@@ -20,12 +20,16 @@ if (!defined('_DIR_PLUGIN_JEUX')){
 
 // 4 fonctions pour traiter la valeur du parametre de configuration place apres le separateur [config]
 global $jeux_config;
-function jeux_config($param) {
+function jeux_config($param, $config=false) {
   global $jeux_config;
-  $p = trim($jeux_config[$param]);
+  $p = trim($config===false?$jeux_config[$param]:$config[$param]);
   if (in_array($p, array('true', 'vrai', 'oui', 'yes', 'on', '1', 'si', 'ja', strtolower(_T('item_oui'))))) return true;
   if (in_array($p, array('false', 'faux', 'non', 'no', 'off', '0', 'nein', strtolower(_T('item_non'))))) return false;
   return $p;
+}
+function jeux_config_tout() {
+  global $jeux_config;
+  return $jeux_config;
 }
 function jeux_config_set($param, $valeur) {
   global $jeux_config;
@@ -122,9 +126,18 @@ function jeux_in_liste($texte, $liste=array()) {
 	return false;
 }
 
-// retourne la boite de score
+// retourne la boite de score et ajoute le resultat en base
 function jeux_afficher_score($score, $total, $id_jeu=false, $resultat_long='', $categories='') {
-	if ($id_jeu){
+	global $scoreMULTIJEUX;
+	if(isset($scoreMULTIJEUX['config'])) {
+		// mode 'multi_jeux' : enregistrement des scores dans la globale $scoreMULTIJEUX, mais pas en base
+		$scoreMULTIJEUX['score'][] = $score;
+		$scoreMULTIJEUX['total'][] = $total;
+		$scoreMULTIJEUX['details'][] = $resultat_long;
+		if(!jeux_config('scores_intermediaires', $scoreMULTIJEUX['config'])) return '';
+	}
+	elseif($id_jeu){
+		// mode 'jeu simple'
 		// ici, #CONTENU* est passe par le filtre |traite_contenu_jeu{#ID_JEU}
 		include_spip('base/jeux_ajouter_resultat');
 		jeux_ajouter_resultat($id_jeu, $score, $total, $resultat_long);
@@ -134,8 +147,7 @@ function jeux_afficher_score($score, $total, $id_jeu=false, $resultat_long='', $
 		array('id_jeu'=>$id_jeu, 'score'=>$score, 'total'=>$total,
 			'resultat_long'=>$resultat_long, 
 			'commentaire'=>jeux_commentaire_score($categories, $score, $total)
-		)
-	);
+		));
 }
 
 function jeux_commentaire_score($categ, $score, $total) {
@@ -166,25 +178,34 @@ function jeux_bouton_corriger() {
 	return '<div style="text-align:center;"><input type="submit" value="'._T('jeux:corriger').'" class="jeux_bouton" /></div>';
 }
 
-// ajoute un module jeu a la bibliotheque
-function jeux_include_jeu($jeu, &$texte, $indexJeux, $form=true) {
-	if (!function_exists($fonc = 'jeux_'.$jeu))
-		include_spip('jeux/'.$jeu);
-	if (function_exists($fonc))
-		$texte = $fonc($texte, $indexJeux, $form);
-}	
-
-// decode les jeux, si le module jeux/lejeu.php est present
-// retourne la liste des jeux trouves et inclut la bibliotheque si $indexJeux existe
-function jeux_liste_des_jeux(&$texte, $indexJeux=NULL, $form=true) {
+// liste les jeux trouves, si le module jeux/lejeu.php est present
+function jeux_liste_les_jeux(&$texte) {
 	global $jeux_caracteristiques;
 	$liste = array();
 	foreach($jeux_caracteristiques['SIGNATURES'] as $jeu=>$signatures) {
 		$ok = false;
 		foreach($signatures as $s) $ok |= (strpos($texte, "[$s]")!==false);
+		if ($ok) $liste[] = $jeu;
+	}
+	return array_unique($liste);
+}
+
+// decode les jeux, si le module jeux/lejeu.php est present
+// retourne la liste des jeux trouves et inclut la bibliotheque si $indexJeux existe
+function jeux_decode_les_jeux(&$texte, $indexJeux=NULL) {
+	global $jeux_caracteristiques, $scoreMULTIJEUX;
+	$liste = array();
+	foreach($jeux_caracteristiques['SIGNATURES'] as $jeu=>$signatures) {
+		$ok = false;
+		foreach($signatures as $s) $ok |= (strpos($texte, "[$s]")!==false);
 		if ($ok) {
-		 if ($indexJeux) jeux_include_jeu($jeu, $texte, $indexJeux, $form);
-		 $liste[]=$jeu;
+		 $liste[] = $jeu;
+		 if ($indexJeux) {
+			if (!function_exists($fonc = 'jeux_'.$jeu))
+				include_spip('jeux/'.$jeu);
+			if (function_exists($fonc))
+				$texte = $fonc($texte, $indexJeux, !isset($scoreMULTIJEUX));
+		 }
 		}
 	}
 	return array_unique($liste);
@@ -193,9 +214,9 @@ function jeux_liste_des_jeux(&$texte, $indexJeux=NULL, $form=true) {
 // retourne les types de jeu trouves dans le $texte
 function jeux_trouver_nom($texte) {
 	global $jeux_caracteristiques;
-	$liste = jeux_liste_des_jeux($texte);
+	$liste = jeux_liste_les_jeux($texte);
 	foreach($liste as $i=>$jeu)
-		$liste[$i]=$jeux_caracteristiques['TYPES'][$jeu];
+		$liste[$i] = $jeux_caracteristiques['TYPES'][$jeu];
 	return join(', ', $liste);
 }
 
@@ -243,8 +264,7 @@ function jeux_trouver_configuration_defaut($jeu) {
 }
 
 // retourne la configuration generale du plugin (options par defaut gerees par CFG)
-function jeux_configuration_generale($modules_jeux=array()) {
-	$configuration_generale = $options_cfg = array();
+function jeux_configuration_generale($jeu='') {
 	if(function_exists('lire_config') && is_array($liste_cfg2 = lire_config('jeux'))) {
 		// liste des options disponibles par CFG
 		$adr = generer_url_ecrire('cfg', 'cfg=jeux');
@@ -254,9 +274,9 @@ function jeux_configuration_generale($modules_jeux=array()) {
 			$options_cfg[$regs[1]] = "[<a href='$adr'>CFG</a>] $regs[1] = $v";
 		}
 	}
-	if(!count($modules_jeux)) return $configuration_generale;
+	if($jeu=='') return $configuration_generale;
 	// renvoyer la config par defaut du premier jeu decele
-	$defaut = jeux_trouver_configuration_defaut($modules_jeux[0]);
+	$defaut = jeux_trouver_configuration_defaut($jeu);
 	foreach($defaut as $ligne) {
 		if ($regs = jeux_parse_ligne_config($ligne)) {
 			// ajout de l'option si CFG ne l'a pas deja

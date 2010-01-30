@@ -34,7 +34,8 @@ function jeux_pre_propre($texte) {
 	list($texte, $texteApres) = explode(_JEUX_FIN, $suite, 2); 
 
 	// ...decoder le texte obtenu en fonction des signatures et inclure le jeu
-	$liste = jeux_liste_des_jeux($texte, $indexJeux);
+	$liste = jeux_liste_les_jeux($texte);
+	jeux_decode_les_jeux($texte, $indexJeux);
 	// calcul des fichiers necessaires pour le header
 	if(count($liste)) {
 		// on oblige qd meme jeux.css et jeux.js si un jeu est detecte
