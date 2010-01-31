@@ -8,3 +8,6 @@
 .galerie_carree a:focus img,
 .galerie_carree a:hover img,
 .galerie_carree a:active img { border-color: #ccc; }
+
+/* pagination */
+.galerie_carree .pagination a { float: none; display: inline; }
