@@ -8,9 +8,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
-	'ie6msg_info' => 'Pour naviguer de fa&ccedil;on plus satisfaisante sur ce site (et sur le reste du Web), nous te recommandons de proc&eacute;der &agrave; une mise &agrave; jour de ton navigateur. Actualise gratuitement votre <a href="http://www.microsoft.com/france/windows/products/winfamily/ie/">Internet Explorer</a>. Tu&nbsp;peux aussi essayer d\'autres navigateurs populaires comme par exemple <a href="http://www.mozilla-europe.org/fr/firefox/">Firefox</a>, <a href="http://www.opera.com/">Opera</a> ou <a href="http://www.apple.com/fr/safari/">Safari</a>.
+	'noie_info' => 'Pour naviguer de fa&ccedil;on plus satisfaisante sur ce site (et sur le reste du Web), nous te recommandons de proc&eacute;der &agrave; une mise &agrave; jour de ton navigateur. Actualise gratuitement votre <a href="http://www.microsoft.com/france/windows/products/winfamily/ie/">Internet Explorer</a>. Tu&nbsp;peux aussi essayer d\'autres navigateurs populaires comme par exemple <a href="http://www.mozilla-europe.org/fr/firefox/">Firefox</a>, <a href="http://www.opera.com/">Opera</a> ou <a href="http://www.apple.com/fr/safari/">Safari</a>.
 <br />Si&nbsp;tu utilises un PC au travail, contacte ton service informatique.',
-	'ie6msg_titre' => 'Sais-tu que votre navigateur est obsol&egrave;te&nbsp;?',
+	'noie_titre' => 'Sais-tu que votre navigateur est obsol&egrave;te&nbsp;?',
 
 	// T
 	'toocool_alt' => 'Trop cool pour IE',

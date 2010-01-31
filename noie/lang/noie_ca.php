@@ -8,9 +8,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
-	'ie6msg_info' => 'Per navegar de la manera m&eacute;s satisfact&ograve;ria per aquest lloc (i per la resta de la Web), us recomanem que actualitzeu el vostre navegador. Actualitzeu-lo gratu&iuml;tament a <a href="http://www.microsoft.com/spain/windows/internet-explorer/worldwide-sites.aspx</a>. Tamb&eacute; podeu provar altres navegadors populars com per exemple <a href="http://www.mozilla-europe.org/ca/">Firefox</a>, <a href="http://www.opera.com/">&Ograve;pera</a> o <a href="http://www.apple.com/es/safari/">Safari</a>.
+	'noie_info' => 'Per navegar de la manera m&eacute;s satisfact&ograve;ria per aquest lloc (i per la resta de la Web), us recomanem que actualitzeu el vostre navegador. Actualitzeu-lo gratu&iuml;tament a <a href="http://www.microsoft.com/spain/windows/internet-explorer/worldwide-sites.aspx</a>. Tamb&eacute; podeu provar altres navegadors populars com per exemple <a href="http://www.mozilla-europe.org/ca/">Firefox</a>, <a href="http://www.opera.com/">&Ograve;pera</a> o <a href="http://www.apple.com/es/safari/">Safari</a>.
 <br />Si&nbsp;utilitzeu un PC al vostre treball, contacteu amb el vostre servei inform&agrave;tic.',
-	'ie6msg_titre' => 'Sabeu que el vostre navegador &eacute;s obsolet?',
+	'noie_titre' => 'Sabeu que el vostre navegador &eacute;s obsolet?',
 
 	// T
 	'toocool_alt' => 'Massa cool per IE',

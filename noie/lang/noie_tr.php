@@ -8,11 +8,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
-	'ie6msg_info' => '<MODIF>Bu sitede (ve Web\'in geri kalan&#305;nda) en doyurucu bi&ccedil;imde gezinmek i&ccedil;in size gezgininizi g&uuml;ncellemenizi &ouml;neriyoruz.
+	'noie_info' => '<MODIF>Bu sitede (ve Web\'in geri kalan&#305;nda) en doyurucu bi&ccedil;imde gezinmek i&ccedil;in size gezgininizi g&uuml;ncellemenizi &ouml;neriyoruz.
 &#350;u anki g&uuml;ncel s&uuml;r&uuml;m<a href="http://www.microsoft.com/france/windows/downloads/ie/getitnow.mspx">Internet Explorer&nbsp;7</a> ve <a href="http://www.microsoft.com/windows/Internet-explorer/beta/">Internet Explorer&nbsp;8</a> beta s&uuml;r&uuml;m olarak mevcut. G&uuml;ncelleme &uuml;cretsizdir. 
 <br />E&#287;er i&#351;yerinde bir pc kullan&#305;yorsan&#305;z bilgisayar sorumlusuna ba&#351;vurun.
 <br />E&#287;er arzu ederseniz ba&#351;ka pop&uuml;ler gezginler de deneyebilirsiniz &ouml;rne&#287;in <a href="http://www.mozilla-europe.org/fr/firefox/">Firefox</a>, <a href="http://www.opera.com">Opera</a> veya <a href="http://www.apple.com/fr/safari/download/">Safari</a>.',
-	'ie6msg_titre' => 'Kulland&#305;&#287;&#305;n&#305;z gezginin nuh-u nebi\'den kald&#305;&#287;&#305;n&#305; biliyor musunuz&nbsp;?',
+	'noie_titre' => 'Kulland&#305;&#287;&#305;n&#305;z gezginin nuh-u nebi\'den kald&#305;&#287;&#305;n&#305; biliyor musunuz&nbsp;?',
 
 	// T
 	'toocool_alt' => 'IE i&ccedil;in a&#351;&#305;r&#305; "cool"',

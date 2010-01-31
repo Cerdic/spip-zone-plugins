@@ -8,10 +8,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
-	'ie6msg_info' => 'Para navegar da mellor maneira este web (e tam&eacute;n o resto da Rede), recomend&aacute;moslle proceder a unha actualizaci&oacute;n gratu&iacute;ta do seu navegador.
+	'noie_info' => 'Para navegar da mellor maneira este web (e tam&eacute;n o resto da Rede), recomend&aacute;moslle proceder a unha actualizaci&oacute;n gratu&iacute;ta do seu navegador.
 Actualice o seu navegador <a href="http://www.microsoft.com/spain/windows/internet-explorer/download-ie.aspx">Internet Explorer</a>. Tam&eacute;n pode probar outros navegadores cada vez m&aacute;is populares como <a href="http://www.mozilla.com/gl/">Firefox</a>, <a href="http://www.opera.com/">Opera</a> ou <a href="http://www.apple.com/fr/safari/">Safari</a>.
 <br />Se emprega un PC no traballo, contacte co seu servizo inform&aacute;tico.',
-	'ie6msg_titre' => 'Sabe que o seu navegador est&aacute; anticuado&nbsp;?',
+	'noie_titre' => 'Sabe que o seu navegador est&aacute; anticuado&nbsp;?',
 
 	// T
 	'toocool_alt' => 'Demasiado avanzado para IE',

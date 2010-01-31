@@ -8,9 +8,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
-	'ie6msg_info' => 'Pro snadn&eacute; pou&#382;&iacute;v&aacute;n&iacute; tphoto webu v&aacute;m doporu&#269;ujeme aktulizovat v&aacute;&#353; prohl&iacute;&#382;e&#269; na nov&#283;j&#353;&iacute; verzi.Aktualizujte <a href="http://www.microsoft.com/windows/internet-explorer/default.aspx">Internet Explorer</a> nebo zkuste jin&eacute; popul&aacute;rn&iacute; prohl&iacute;&#382;e&#269;e jako nap&#345;&iacute;klad <a href="http://mozilla.com/en-US/firefox/firefox.html">FireFox</a>, <a href="http://www.opera.com">Opera</a> nebo <a href="http://www.apple.com/safari/">Safari</a>.
+	'noie_info' => 'Pro snadn&eacute; pou&#382;&iacute;v&aacute;n&iacute; tphoto webu v&aacute;m doporu&#269;ujeme aktulizovat v&aacute;&#353; prohl&iacute;&#382;e&#269; na nov&#283;j&#353;&iacute; verzi.Aktualizujte <a href="http://www.microsoft.com/windows/internet-explorer/default.aspx">Internet Explorer</a> nebo zkuste jin&eacute; popul&aacute;rn&iacute; prohl&iacute;&#382;e&#269;e jako nap&#345;&iacute;klad <a href="http://mozilla.com/en-US/firefox/firefox.html">FireFox</a>, <a href="http://www.opera.com">Opera</a> nebo <a href="http://www.apple.com/safari/">Safari</a>.
 <br />Pokud pracujete na PC v zam&#283;stn&aacute;n&iacute;, po&#382;&aacute;dejte sv&eacute;ho spr&aacute;vce IT.',
-	'ie6msg_titre' => 'Je v&aacute;m zn&aacute;mo, &#382;e v&aacute;&#353; prohl&iacute;&#382;e&#269; je zastaral&yacute;?',
+	'noie_titre' => 'Je v&aacute;m zn&aacute;mo, &#382;e v&aacute;&#353; prohl&iacute;&#382;e&#269; je zastaral&yacute;?',
 
 	// T
 	'toocool_alt' => 'P&#345;&iacute;li&#353; cool pro IE',
