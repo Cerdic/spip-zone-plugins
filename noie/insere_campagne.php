@@ -4,9 +4,10 @@
 function noie_affichage_final(&$page) {
 	// ne pas se fatiguer si pas HTML ou pas IE
 	if (!($GLOBALS['html']
-	AND strpos(strtolower($_SERVER['HTTP_USER_AGENT']), 'msie')
-	AND preg_match('/MSIE /i', $_SERVER['HTTP_USER_AGENT'])
-	AND !strpos($page, '<div id="noie">') # pas deux fois, au cas ou !
+	AND ((strpos(strtolower($_SERVER['HTTP_USER_AGENT']), 'msie')
+			AND preg_match('/MSIE /i', $_SERVER['HTTP_USER_AGENT']))
+		OR isset($_GET['var_noie']))
+	AND !strpos($page, '<div id="ie6msg">') # pas deux fois, au cas ou !
 	))
 		return $page;
   
@@ -14,6 +15,11 @@ function noie_affichage_final(&$page) {
 	$campagne = recuperer_fond('noie', array('lang'=>$GLOBALS['spip_lang']));
 	preg_match(',<div id=[\'"]noie[\'"].*?>,', $page, $regs)
 	|| preg_match(',<body\b.*?>,i', $page, $regs);
+
+	// en mode test on vire "<!--[if lte IE 6]>"
+	if (isset($_GET['var_noie']))
+		$campagne = str_replace('<!--[if lte IE 6]>', '<!-- -->', $campagne);
+
 	if ($regs)
 		$page = substr_replace($page, $campagne, (strpos($page, $regs[0]) + strlen($regs[0])), 0);
 
