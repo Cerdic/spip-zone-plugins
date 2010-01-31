@@ -38,6 +38,11 @@ function openid_upgrade($nom_meta_base_version,$version_cible){
 			}
 			ecrire_meta($nom_meta_base_version,$current_version="0.2",'non');
 		}
+		if (version_compare($current_version,"0.3","<")){
+			// un index ne peut pas etre mis sur un champ de type texte (dixit mysql)
+			sql_alter("TABLE spip_auteurs DROP INDEX openid");
+			ecrire_meta($nom_meta_base_version,$current_version="0.3",'non');
+		}		
 	}
 }
 
