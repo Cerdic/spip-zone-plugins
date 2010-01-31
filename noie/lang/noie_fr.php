@@ -6,9 +6,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
-	'noie_info' => 'Pour naviguer de fa&ccedil;on plus satisfaisante sur ce site (et sur le reste du Web), nous vous recommandons de proc&eacute;der &agrave; une mise &agrave; jour de votre navigateur. Actualisez gratuitement votre <a href="http://www.microsoft.com/france/windows/products/winfamily/ie/">Internet Explorer</a>. Vous&nbsp;pouvez aussi essayer d\'autres navigateurs populaires comme par exemple <a href="http://www.mozilla-europe.org/fr/firefox/">Firefox</a>, <a href="http://www.opera.com/">Opera</a> ou <a href="http://www.apple.com/fr/safari/">Safari</a>.
-<br />Si&nbsp;vous utilisez un PC au travail, veuillez contacter votre service informatique.',
-	'noie_titre' => 'Savez-vous que votre navigateur est obsol&egrave;te&nbsp;?',
+	'noie_info' => 'Pour naviguer de fa&ccedil;on plus satisfaisante sur ce site et sur le reste du Web, nous vous recommandons une mise &agrave; jour&nbsp;: <strong>actualisez gratuitement votre <a href="http://www.microsoft.com/france/windows/internet-explorer/">Internet Explorer</a></strong>.
+<br /><small>Ou essayez d\'autres navigateurs populaires comme <a href="http://www.mozilla-europe.org/fr/firefox/">Firefox</a>, <a href="http://www.opera.com/">Opera</a> ou <a href="http://www.apple.com/fr/safari/">Safari</a>.
+<br />Si&nbsp;vous utilisez un PC au travail, veuillez contacter votre service informatique.</small>',
+	'noie_titre' => 'Attention, votre Internet Explorer n\'est pas &agrave; jour&nbsp;!',
 
 	// T
 	'toocool_alt' => 'Trop cool pour IE',
