@@ -10,7 +10,7 @@
 	</description>
 	<fonctions>lm2_fonctions.php</fonctions>
 	<options>lm2_options.php</options>
-	<install>base/lm2_install.php</install>
+	<install>base/lm2_upgrade.php</install>
 	<lien>http://multimedia.spip-zone.info/</lien>
 	<pipeline>
 		<nom>insert_head</nom>
@@ -22,5 +22,6 @@
 	</pipeline>
 	<necessite id="lib:soundmanagerv295a-20090717" src="http://www.schillmania.com/projects/soundmanager2/download/soundmanagerv295a-20090717.zip" />
 	<necessite id="lib:jquery-ui-1.7.2.custom" src="http://jqueryui.com/download/jquery-ui-1.7.2.custom.zip" />
+	<necessite id="cfg" version="[1.14.1;]" />
 	<categorie>multimedia</categorie>
 </plugin>
