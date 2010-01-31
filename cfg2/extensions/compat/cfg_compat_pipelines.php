@@ -11,7 +11,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 /*
  *  Ajoute le bouton d'amin aux webmestres
  */
-function cfg_ajouter_boutons($flux) {
+function cfg_compat_ajouter_boutons($flux) {
 	// si on est admin
 	// et pas en SPIP 2 (qui gere deja le bouton)
 	if (defined('_COMPAT_CFG_192') AND autoriser('configurer','cfg')) {
@@ -30,7 +30,7 @@ function cfg_ajouter_boutons($flux) {
  * - ajouter la css pour cfg_arbo
  * 
  */
-function cfg_header_prive($flux){
+function cfg_compat_header_prive($flux){
 	
 	if (!_request('cfg') || (!_request('exec') == 'cfg')) {
 		return $flux;
