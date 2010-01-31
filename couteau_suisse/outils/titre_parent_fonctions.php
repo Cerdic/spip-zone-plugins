@@ -106,8 +106,8 @@ if(defined('_SPIP19300') && defined('_PARENTS_ETENDUS')) {
 		if ($f = charger_fonction($champ, 'balise', true))
 			return $f($p);
 		$code = champ_sql($champ, $p);
-		// si le champ est bien present
 		if (strpos($code, '@$Pile[0]') !== false) {
+			// le champ est absent de la base, on peut calculer la balise
 			preg_match(",^TITRE_([A-Z_]+)?$,i", $champ, $regs);
 			$objet = strtolower($regs[1]);
 			$table = cs_table_objet($objet);
@@ -117,7 +117,8 @@ if(defined('_SPIP19300') && defined('_PARENTS_ETENDUS')) {
 			// le code php a executer, avant de le passer aux traitements
 			$p->code = cs_titre_traitements("cs_titre_id(intval($id), '$table', '$champ_parent')", $table);
 		} else 
-			$p->code = "''";
+			// puisque le champ est present dans la base, on le renvoie
+			$p->code = champ_sql($champ, $p);
 		$p->interdire_scripts = false;
 		return $p;
 	}
