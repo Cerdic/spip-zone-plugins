@@ -16,7 +16,6 @@ include_spip('inc/meta');
  */
 function openid_upgrade($nom_meta_base_version,$version_cible){
 	$current_version = 0.0;
-	$version_base = 0.1;
 
 	if (   (!isset($GLOBALS['meta'][$nom_meta_base_version]) )
 			|| (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){
@@ -24,7 +23,7 @@ function openid_upgrade($nom_meta_base_version,$version_cible){
 		if ($current_version==0.0){
 			include_spip('base/create');
 			maj_tables('spip_auteurs');
-			ecrire_meta($nom_meta_base_version,$current_version=$version_base,'non');
+			ecrire_meta($nom_meta_base_version,$current_version=$version_cible,'non');
 		}
 		if (version_compare($current_version,"0.2","<")){
 			$res = sql_select('id_auteur,openid','spip_auteurs',"openid<>''");
