@@ -27,8 +27,10 @@
 			[<dt><:tickets:champ_jalon:> :</dt><dd>(#JALON)</dd>]
 		</dl>			
 		[(#REM) Bloc de choix du statut et de l'assignation]
-		[(#AUTORISER{ecrire, ticket, #ID_TICKET}|oui)
+		[(#AUTORISER{modifier,ticket, #ID_TICKET}|oui)
 			#FORMULAIRE_STATUT_TICKET{#ID_TICKET}
+		]
+		[(#AUTORISER{assigner,ticket, #ID_TICKET}|oui)
 			#FORMULAIRE_ASSIGNER_TICKET{#ID_TICKET}
 		]
 	</div>
