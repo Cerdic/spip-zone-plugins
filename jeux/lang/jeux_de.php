@@ -93,6 +93,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'gerer_resultats' => 'Ergebnisse verwalten',
 'gerer_ses_resultats' => 'Eigene Ergebnisse verwalten',
 'voir_resultats' => 'Ergebnisse ansehen',
+'type_resultat' => 'Type de r&eacute;sultats',
 'cfg_type_resultat' => 'Enregistrement des scores&nbsp;:',
 'cfg_donner_solution' => 'Donner les bonnes r&eacute;ponses',
 'cfg_introduction'=> 'Les param&egrave;tres regroup&eacute;s ici correspondent &agrave; la configuration par d&eacute;faut de l\'ensemble des jeux du site. Ils peuvent &ecirc;tre surcharg&eacute;es au cas par cas gr&acirc;ce &agrave; la configuration interne des jeux (s&eacute;parateur [config]).<br/><br/>Il est possible que certains jeux n\'utilisent pas certains des param&egrave;tres list&eacute;s ci-dessous.',
