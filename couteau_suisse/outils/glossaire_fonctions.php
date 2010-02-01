@@ -143,7 +143,7 @@ function cs_rempl_glossaire($texte) {
 		if(count($les_regexp)) {
 			// a chaque expression reconnue, on pose une balise temporaire cryptee
 			// ce remplacement est puissant, attention aux balises HTML ; par exemple, eviter : ,div,i
-			$texte = preg_replace_callback($les_regexp, "glossaire_echappe_mot_callback", $texte, $limit);
+			$texte = preg_replace_callback($les_regexp, "glossaire_echappe_mot_callback", " $texte ", $limit);
 			// TODO 1 : sous PHP 5.0, un parametre &$count permet de savoir si un remplacement a eu lieu
 			// et s'il faut construire la fenetre de glossaire.
 			// TODO 2 : decrementer le parametre $limit pour $les_mots, si &$count est renseigne.
@@ -167,7 +167,7 @@ function cs_rempl_glossaire($texte) {
 					$texte = preg_replace_callback(",(?:$les_mots)&(?:"._GLOSSAIRE_ACCENTS.');,i', 'glossaire_echappe_balises_callback', $texte);
 				}
 				// a chaque mot reconnu, on pose une balise temporaire cryptee
-				$texte = preg_replace_callback(",(?<=\W)(?:$les_mots)(?=\W),i", "glossaire_echappe_mot_callback", $texte, $limit);
+				$texte = preg_replace_callback(",(?<=\W)(?:$les_mots)(?=\W),i", "glossaire_echappe_mot_callback", " $texte ", $limit);
 				$mot_present = true;
 			}
 		}
@@ -186,11 +186,11 @@ function cs_rempl_glossaire($texte) {
 	$GLOBALS['toujours_paragrapher'] = $mem;
 	// remplacement final des balises posees ci-dessus
 	$GLOBALS['gl_i']=0;
-	return preg_replace(",@@GLOSS(.*?)#([0-9]+)@@,e", $glossaire_generer_mot, echappe_retour($texte, 'GLOSS'));
+	return trim(preg_replace(",@@GLOSS(.*?)#([0-9]+)@@,e", $glossaire_generer_mot, echappe_retour($texte, 'GLOSS')));
 }
 
 function cs_glossaire($texte) {
-	return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite|a', 'cs_rempl_glossaire', " $texte ");
+	return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite|a', 'cs_rempl_glossaire', $texte);
 }
 
 ?>
