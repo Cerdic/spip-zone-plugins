@@ -178,21 +178,26 @@ function cs_urls_propres($type, $id) {
 	// SPIP >= 2.0
 	if(defined('_SPIP19300')) {
 		$url = generer_url_entite_absolue($id, $type, '', '', true);
+		$lien_public = "\n[<span>[". _T('couteau:urls_propres_lien'). "|{$url}->{$url}]</span>]\n\n";
 		$s = sql_select("url", "spip_urls", "id_objet=$id AND type='$type'", '', 'date DESC');
 		while ($t = sql_fetch($s)) $res .= "&bull;&nbsp;$t[url]\n";
 	// SPIP < 2.0
 	} else {
 		// impossible de calculer l'url publique d'ici.
-		$url = '';
 		$table = $type.($type=='syndic'?'':'s');
 		$r = spip_query("SELECT url_propre FROM spip_$table WHERE id_$type=$id");
-		if ($r AND $r = spip_fetch_array($r)) $res .= "&bull;&nbsp;$r[url_propre]\n";
+		if ($r && $r = spip_fetch_array($r) ) {
+			if(!strlen($r=$r['url_propre'])) $r=_T('couteauprive:variable_vide');
+			$res .= "&bull;&nbsp;$r\n";
+		}
+		$lien_public = './?exec=action_rapide&arg=type_urls|URL_objet_191&format=iframe&type_objet='.$type.'&id_objet='.$id.'&script=foo';
+		$lien_public = '<iframe src="'.$lien_public.'" width="100%" style="border:none; height:4em;"></iframe>';
 	}
 
 	$format = in_array($type_urls, array('page', 'standard', 'html'))
 		?_T('couteau:urls_propres_erreur')
 		:_T('couteau:urls_propres_objet');
-	$mem=$GLOBALS['class_spip_plus'];
+	$mem = $GLOBALS['class_spip_plus'];
 	$GLOBALS['class_spip_plus']=' class="spip"';
 	$res = propre(
 		_T('couteau:urls_propres_format', array(
@@ -204,11 +209,9 @@ function cs_urls_propres($type, $id) {
 			'objet'=>strtoupper(filtrer_entites(_T('couteau:objet_'.$type))).' '.$id
 		))."}}|\n"
 		. "|$res|\n"
-		. (strlen($url)
-			?"\n[<span>[". _T('couteau:urls_propres_lien'). "|{$url}->{$url}]</span>]\n\n"
-			:'<iframe src="./?exec=action_rapide&arg=type_urls|URL_objet&format=iframe&type_objet='.$type.'&id_objet='.$id.'" width="100%" style="border:none; height:4em;"></iframe>')
+		. $lien_public
 	);
-	$GLOBALS['class_spip_plus']=$mem;
+	$GLOBALS['class_spip_plus'] = $mem;
 	return cs_cadre_depliable(_T('couteau:urls_propres_titre'), 'bp_urls_propres', $res);
 }
 
