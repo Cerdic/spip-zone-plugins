@@ -56,7 +56,8 @@ class cfg_formulaire_dist{
 			'cfg_id' => '', // pour une config multiple , l'id courant
 			
 			'descriptif' => '', // descriptif
-			'icone' => '', // lien pour une icone
+			'icone' => '', // chemin pour une icone (compat cfg1 - 24px max)
+			'logo' => '', // chemin pour un logo (pour la presentation des config - 128px max)
 			'interpreter' => 'oui', // si interpreter vaut 'non', le fond ne sera pas traite comme un fond cfg, mais comme une inclusion simple (pas de recherche des champs de formulaires). Cela permet d'utiliser des #FORMULAIRES_XX dans un fonds/ tout en utilisant la simplicite des parametres <!-- liens=.. --> par exemple.
 		);
 		

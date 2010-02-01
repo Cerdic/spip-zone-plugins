@@ -52,13 +52,17 @@
 		[<div class="cadre cadre-info">
 			(#TRAD{description,#ENV{cfg},#ENV{onglet}}|propre)
 		</div>]
+		#SET{trouve,0}
 		[<div class="cadre cadre-info">
-			(#CHEMIN{[cfg/nav_(#ENV{cfg}).html]}|?{
+			(#CHEMIN{[configurer/nav_(#ENV{cfg}).html]}|oui)
+				#SET{trouve,1}
 				[(#INCLURE{fond=configurer/nav_#ENV{cfg},cfg,onglet})]
-				,
-				[(#INCLURE{fond=configurer/nav_defaut,cfg,onglet})]
-			})
 		</div>]
+		[(#GET{trouve}|non)
+		<div class="cadre cadre-info">
+			[(#INCLURE{fond=configurer/nav_defaut,cfg,onglet})]
+		</div>]
+		
 		<!--/#navigation-->
 
 		[(#REM)

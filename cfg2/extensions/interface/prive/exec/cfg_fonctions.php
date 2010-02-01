@@ -3,6 +3,7 @@
 // function pour compatibilite avec les anciens fonds/cfg_xx.html
 function balise_CFG_EXEC_dist($p) {
 	$p->code = '((($exec = charger_fonction("cfg","exec",true)) and $exec) ? $exec() . \' \' : \'\')';
+	$p->interdire_scripts = false;
 	return $p;
 }
 
@@ -54,11 +55,17 @@ function lister_configs() {
 				}
 				$titre = $tmp->param["titre"] ? $tmp->param["titre"] : calculer_cfg_trad('titre',$nom);
 				$descriptif = $tmp->param["descriptif"] ? $tmp->param["descriptif"] : calculer_cfg_trad('descriptif',$nom);
-				$icone = $tmp->param["icone"] ? $tmp->param["icone"] : '';
+				if ($tmp->param["logo"]) {
+					$logo = $tmp->param["logo"];
+				} elseif ($tmp->param["icone"]) {
+					$logo = $tmp->param["icone"];
+				} else {
+					$logo = '';
+				}
 				$rendu .= recuperer_fond('inclure/presentation_config', array(
 					'titre' => $titre,
 					'descriptif' => $descriptif,
-					'icone' => $icone,
+					'logo' => $logo,
 					'lien' => generer_url_ecrire('configurer','cfg='.$nom),
 				));
 			}

@@ -1,0 +1,18 @@
+#SET{claire,##ENV{couleur_claire,edf3fe}}
+#SET{foncee,##ENV{couleur_foncee,3874b0}}
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+
+/*  Affichage de exec=configurer  */
+.config{
+	width:200px;
+	height:170px; overflow:auto;
+	margin:1em .5em 0; padding:.5em;
+	float:#GET{left};
+	border:1px solid #GET{claire};
+	background:#fafafa;
+}
+.config h1 {margin:0; padding:0;}
+.config a:hover {text-decoration:underline;}
+.config .logo {float:#GET{right}; padding:.5em;}
+.config p {font-size:.9em; margin:.5em 0 0;}
