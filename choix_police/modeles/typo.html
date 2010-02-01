@@ -11,7 +11,7 @@
 				|margeh= marge à droite et à gauche de l'image (avec unité: px ou em au choix)
             |valign= alignement vertical de l'image typo (valeurs possibles: bottom, baseline, middle, top)
 ]
-[(#SET{pt,[(#CHEMIN{polices/#POLICE}|choixsivide{[(#CONFIG{choix_police/police_typo})],#POLICE})]})]
+[(#SET{pt,[(#POLICE|?{[(#CHEMIN{polices/#POLICE}|choixsivide{[(#CONFIG{choix_police/police_typo})],#POLICE})],[(#CONFIG{choix_police/police_typo})]})]})]
 [(#SET{sa,[(#ACCENTS|=={non}|?{on,[(#CONFIG{choix_police/supprimer_accents})]})]})]
 [(#TEXTE|remplacer_accents{#GET{sa}}
         |image_typo{police=#GET{pt},
