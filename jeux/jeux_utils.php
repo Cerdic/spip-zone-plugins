@@ -204,7 +204,7 @@ function jeux_decode_les_jeux(&$texte, $indexJeux=NULL) {
 			if (!function_exists($fonc = 'jeux_'.$jeu))
 				include_spip('jeux/'.$jeu);
 			if (function_exists($fonc))
-				$texte = $fonc($texte, $indexJeux, !isset($scoreMULTIJEUX));
+				$texte = $fonc($texte, $indexJeux, !isset($scoreMULTIJEUX['config']));
 		 }
 		}
 	}
