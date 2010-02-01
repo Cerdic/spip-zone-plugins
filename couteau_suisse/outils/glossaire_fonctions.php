@@ -190,7 +190,7 @@ function cs_rempl_glossaire($texte) {
 }
 
 function cs_glossaire($texte) {
-	return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite|a', 'cs_rempl_glossaire', $texte);
+	return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite|a', 'cs_rempl_glossaire', " $texte ");
 }
 
 ?>
