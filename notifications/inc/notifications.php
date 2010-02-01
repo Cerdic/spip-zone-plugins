@@ -126,10 +126,9 @@ function notifier_publication_article($id_article) {
 function notifier_proposition_article($id_article) {
 	if ($GLOBALS['meta']["suivi_edito"] == "oui") {
 		$adresse_suivi = $GLOBALS['meta']["adresse_suivi"];
-		$texte = email_notification_article($id_article, "notifications/article_publie");
+		$texte = email_notification_article($id_article, "notifications/article_propose");
 		notifications_envoyer_mails($adresse_suivi, $texte);
 	}
-	notifier_article($id_article, "notifications/article_propose");
 }
 
 /**
