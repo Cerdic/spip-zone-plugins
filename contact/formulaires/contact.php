@@ -1,31 +1,55 @@
 <?php
 
-function formulaires_contact_charger_dist($id_auteur='',$tracer=''){	
+function formulaires_contact_charger_dist($id_auteur='',$tracer=''){
 	$valeurs = array();
 
 	$valeurs['destinataire'] = array();
 	$valeurs['choix_destinataires'] = '';
 	
 	// La liste dans laquelle on pourra éventuellement choisir
-	$choix_destinataires = lire_config('contact/choix_destinataires');
-	// Le type de choix
+	$choix_destinataires = array_map('intval',lire_config('contact/choix_destinataires'));
+
+	// tableau des type_choix necessitant la prise en compte de $id_auteur
+	$t_c = array('tous_et', 'tous_ou', 'un_et', 'un_ou', 'plusieurs_et', 'plusieurs_ou');
 	$valeurs['type_choix'] = $type_choix = lire_config('contact/type_choix');
-	
-	// Rien n'a été défini, on utilise l'auteur 1
-	if (count($choix_destinataires) == 0){
-		$valeurs['destinataire'][] = 1;
+	if( in_array($type_choix,$t_c) ){
+		if(!is_array($id_auteur)){
+			$id_auteur = explode(',',$id_auteur);
+			if(!is_numeric($id_auteur[0]))$id_auteur=array();
+		}	
 	}
-	// S'il n'y a qu'un seul choix OU que le type est "tous", on l'utilise directement
-	else if ((count($choix_destinataires) == 1) or ($type_choix == 'tous')){
+	
+	$nb_d = count($choix_destinataires);
+	// Rien n'a été défini, on utilise l'auteur 1
+	if ($nb_d == 0){
+		$valeurs['destinataire'][] = 1;
+	}else{
 		$valeurs['destinataire'] = $choix_destinataires;
 	}
-	// S'il y a plusieurs choix, on s'assure que ce sont tous des entiers
-	else{
-		$valeurs['choix_destinataires'] = array_map('intval', $choix_destinataires);
-		// Et on met le paramètre éventuel en choix par défaut
-		$valeurs['destinataire'] = array($id_auteur);
-	}
 	
+	if ($type_choix == 'tous_ou' and $id_auteur){
+		$valeurs['destinataire'] = $id_auteur;
+	}else if ($type_choix == 'tous_et' and $id_auteur){
+		$valeurs['destinataire'] = array_unique(array_merge($valeurs['destinataire'],$id_auteur));
+	}else if (($type_choix == 'un' or $type_choix == 'plusieurs') and $nb_d>1){
+	$valeurs['choix_destinataires'] = $valeurs['destinataire'];
+	}else if ($type_choix == 'un_et' or $type_choix == 'plusieurs_et'){
+			$c_d = array_unique(array_merge($valeurs['destinataire'],$id_auteur));
+		if(count($c_d)>1){
+			$valeurs['choix_destinataires'] = $c_d;
+		}else{
+			$valeurs['destinataire'] = $c_d;			
+		}
+	}else if ($type_choix == 'un_ou' or $type_choix == 'plusieurs_ou'){
+		if(count($id_auteur)>1){
+			$valeurs['choix_destinataires'] = $id_auteur;
+		}elseif(count($id_auteur)==1){
+			$valeurs['destinataire'] = $id_auteur;			
+		}elseif(count($valeurs['destinataire'])>1){
+			$valeurs['choix_destinataires'] = $valeurs['destinataire'];
+		}
+	}
+
 	// Les infos supplémentaires
 	$champs_possibles = contact_infos_supplementaires();
 	if (!is_array($champs_choisis = lire_config('contact/champs')))
@@ -68,7 +92,7 @@ function formulaires_contact_charger_dist($id_auteur='',$tracer=''){
 	$valeurs['pj_nom_enregistrees'] = array();
 	$valeurs['pj_cle_enregistrees'] = array();
 	$valeurs['pj_mime_enregistrees'] = array();
-	
+
 	return $valeurs;
 }
 
@@ -275,13 +299,13 @@ function formulaires_contact_traiter_dist($id_auteur='',$tracer=''){
 		
 		// Il s'agit d'un visiteur : on va donc l'enregistrer dans la table auteur pour garder son mail.
 		// Sauf s'il existe déjà.
-		$id_auteur = sql_getfetsel(
+		$id_aut = sql_getfetsel(
 			'id_auteur',
 			'spip_auteurs',
 			'email = '.sql_quote($posteur['mail'])
 		);
-		if (!$id_auteur)
-			$id_auteur = sql_insertq(
+		if (!$id_aut)
+			$id_aut = sql_insertq(
 				'spip_auteurs',
 				array(
 					'email' => $posteur['mail'],
@@ -296,7 +320,7 @@ function formulaires_contact_traiter_dist($id_auteur='',$tracer=''){
 				'titre' => $posteur['sujet'],
 				'statut' => 'publie',
 				'type' => 'contac',
-				'id_auteur' => $id_auteur,
+				'id_auteur' => $id_aut,
 				'date_heure' => date('Y-m-d H:i:s'),
 				'texte' => $message,
 				'rv' => 'non'

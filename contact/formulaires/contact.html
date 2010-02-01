@@ -58,35 +58,35 @@
 				[(#REM) Sinon on propose le choix, en select ou en checkbox suivant l'option "type_choix" ]
 				<B_destinataires>
 				<li class="obligatoire[ (#ENV*{erreurs}|table_valeur{destinataire}|oui)erreur]">
-					[(#ENV{type_choix}|=={plusieurs}|oui)
+					[(#ENV{type_choix}|match{plusieurs|plusieurs_et|plusieurs_ou}|oui)
 						<label><:contact:form_destinataires:></label>
 						[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{destinataire})</span>]
 						<ul class="choix_mots">
 					]
-					[(#ENV{type_choix}|=={un}|oui)
+					[(#ENV{type_choix}|match{un|un_et|un_ou}|oui)
 						<label for="destinataire"><:contact:form_destinataire:></label>
 						[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{destinataire})</span>]
 						<select name="destinataire&#91;&#93;" id="destinataire">
 					]
 					<BOUCLE_destinataires(AUTEURS){tous}{id_auteur IN #ENV**{choix_destinataires}}{par num nom,nom}>
-						[(#ENV{type_choix}|=={plusieurs}|oui)
+						[(#ENV{type_choix}|match{plusieurs|plusieurs_et|plusieurs_ou}|oui)
 							<li class="choix">
 								<input
 									type="checkbox" class="checkbox"
 									name="destinataire&#91;&#93;" id="destinataire#ID_AUTEUR"
-									value="#ID_AUTEUR"[ (#ID_AUTEUR|in_array{#ENV*{destinataire,#ARRAY}}|oui)checked="checked"]
+									value="#ID_AUTEUR"[ (#ID_AUTEUR|in_array{#ENV*{destinataire,#ARRAY}}|ou{[(#ID_AUTEUR|in_array{#ENV*{choix_destinataires,#ARRAY}})]}|oui)checked="checked"]
 								/>
 								<label for="destinataire#ID_AUTEUR">#NOM</label>
 							</li>
 						]
-						[(#ENV{type_choix}|=={un}|oui)
+						[(#ENV{type_choix}|match{un|un_et|un_ou}|oui)
 							<option value="#ID_AUTEUR"[ (#ID_AUTEUR|in_array{#ENV*{destinataire,#ARRAY}}|oui)selected="selected"]>#NOM</option>
 						]
 					</BOUCLE_destinataires>
-					[(#ENV{type_choix}|=={plusieurs}|oui)
+					[(#ENV{type_choix}|match{plusieurs|plusieurs_et|plusieurs_ou}|oui)
 						</ul>
 					]
-					[(#ENV{type_choix}|=={un}|oui)
+					[(#ENV{type_choix}|match{un|un_et|un_ou}|oui)
 						</select>
 					]
 				</li>
@@ -98,7 +98,7 @@
 			<BOUCLE_infos(POUR){tableau #ENV{champs}}>
 			#SET{existe, #CHEMIN{formulaires/contact_champ_#CLE.html}}
 			[(#GET{existe}|oui)
-			[(#INCLURE{fond=formulaires/contact_champ_#CLE}{env}{name=#CLE}{titre=#VALEUR})]
+			[(#INCLURE{fond=formulaires/contact_champ_#CLE,env,name=#CLE,titre=#VALEUR})]
 			]
 			[(#GET{existe}|non)
 			<li class="saisie_#CLE[ (#CLE|in_array{#ENV{obligatoires,#ARRAY}}|oui)obligatoire][ (#ENV*{erreurs}|table_valeur{#CLE}|oui)erreur]">
