@@ -27,7 +27,8 @@
         <p class="saisie_url_site"><label for="url_site"><:comments:forum_url:></label>
         <input type="text" class="forml" name="url_site" id="url_site" style="text-align:left;" dir="ltr" size="40" value="#ENV{url_site}" /></p>
         <p class="explication gravatar_info_forum"><:comments:gravatar_info_forum:></p>
-        [<input type="hidden" name="titre" value="(#ENV{titre})" />]
+		<p class="saisie_titre" style="display:none;"><label for="titre"><:forum_titre:></label>
+		<input type="text" class="forml" name="titre" id="titre"[ value="(#ENV{titre})"] size="40" /></p>
 		<p class="saisie_texte"><label><:comments:forum_texte:></label>
         [(#ENV**{texte}|barre_textarea{12,40})]</p>
         <p class="explication info_creation_paragraphe"><:comments:info_creation_paragraphe:></p>
