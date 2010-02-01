@@ -181,7 +181,7 @@ function jeux_trous($texte, $indexJeux, $form=true) {
 	// mise en place du formulaire
 	$fond = str_replace(
 		array('@@FORM_JEUX_DEBUT@@', '@@FORM_JEUX_FIN@@', '@@FORM_CORRIGER@@', '@@RECOMMENCER@@'), 
-		($correction || !$form)?'':array(jeux_form_debut('trous', $indexJeux), jeux_form_fin(), jeux_bouton_corriger(), bouton_recommencer()), 
+		($correction || !$form)?'':array(jeux_form_debut('trous', $indexJeux), jeux_form_fin(), jeux_bouton_corriger(), jeux_bouton_recommencer()), 
 		$fond
 	);
 	// nettoyage
