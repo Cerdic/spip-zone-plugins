@@ -57,6 +57,7 @@ function boites_privees_tri_auteurs_action() {
 	$id_auteur = abs(_request('bp_auteur'));
 	$monter = _request('bp_auteur')>0;
 
+	if(!defined('_SPIP19300')) include_spip('outils/boites_privees'); // pour les fonctions sql
 	$s = sql_select('id_auteur', 'spip_auteurs_articles', "id_article=$id_article");
 	$i=0; $j=0;
 	while ($a = sql_fetch($s)) {
