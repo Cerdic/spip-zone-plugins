@@ -681,7 +681,7 @@ function pmb_ws_parser_notice_array($value, &$tresultat) {
 										if ($avantDernierTypeTrouve == $dernierTypeTrouve){
 										      $tresultat['liensauteurs'].="</a>, ";
 										}
-										$tresultat['liensauteurs'].="<a href=\"?page=author_see&id=".$dernierIdTrouve."\">".$texte;
+										$tresultat['liensauteurs'].="<a href=\"?page=author_see&amp;id=".$dernierIdTrouve."\">".$texte;
 										$tresultat['lesauteurs'] .= $texte;
 										$avantDernierTypeTrouve = $dernierTypeTrouve;
 										
@@ -695,7 +695,7 @@ function pmb_ws_parser_notice_array($value, &$tresultat) {
 										if ($avantDernierTypeTrouve == $dernierTypeTrouve){
 										      $tresultat['liensauteurs2'].="</a>, ";
 										}
-										$tresultat['liensauteurs2'].="<a href=\"?page=author_see&id=".$dernierIdTrouve."\">".$texte;
+										$tresultat['liensauteurs2'].="<a href=\"?page=author_see&amp;id=".$dernierIdTrouve."\">".$texte;
 										$tresultat['lesauteurs2'] .= $texte;
 										$avantDernierTypeTrouve = $dernierTypeTrouve;
 										
@@ -709,7 +709,7 @@ function pmb_ws_parser_notice_array($value, &$tresultat) {
 										if ($avantDernierTypeTrouve == $dernierTypeTrouve){
 										      $tresultat['liensauteurs3'].="</a>, ";
 										}
-										$tresultat['liensauteurs3'].="<a href=\"?page=author_see&id=".$dernierIdTrouve."\">".$texte;
+										$tresultat['liensauteurs3'].="<a href=\"?page=author_see&amp;id=".$dernierIdTrouve."\">".$texte;
 										$tresultat['lesauteurs3'] .= $texte;
 										$avantDernierTypeTrouve = $dernierTypeTrouve;
 										
