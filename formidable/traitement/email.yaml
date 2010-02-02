@@ -1,0 +1,29 @@
+
+titre: 'Envoyer par courriel'
+explication: 'Poste le résultat du formulaire par courriel à une liste de destinataires.'
+options:
+  -
+    saisie: 'champ'
+    options:
+      nom: 'champ_destinataires'
+      label: 'Champ des destinataires'
+      explication: 'L\'envoi par courriel nécessite un champ "destinataire" qui indiquera à qui sera envoyé le résultat du formulaire.'
+      obligatoire: 'oui'
+  -
+    saisie: 'champ'
+    options:
+      nom: 'champ_courriel'
+      label: 'Champ qui contiendra le courriel de l\'envoyeur'
+      obligatoire: 'oui'
+  -
+    saisie: 'champ'
+    options:
+      nom: 'champ_nom'
+      label: 'Champ qui contiendra le nom de l\envoyeur'
+      explication: 'Ce champ n\'est pas obligatoire. S\'il n\'est pas présent, c\'est le courriel qui sera utilisé.'
+  -
+    saisie: 'champ'
+    options:
+       nom: 'champ_sujet'
+       label: 'Champ qui contiendra le sujet du message'
+       explication: 'Ce champ n\'est pas obligatoire. Le sujet sera construit automatiquement le cas échéant.'

@@ -1,0 +1,86 @@
+
+À faire :
+---------
+- Avoir une liste des types de champs (saisies)
+- Générer une liste de champs à partir d'une description de saisies
+- Décrire les saisies elles-mêmes
+- Générer une liste de champs permettant la configuration d'une saisie
++ Avoir une liste des traitements possibles
++ Générer un formulaire complet à partir d'une description de saisies + une description de traitements
+
+Description d'une liste de saisies :
+------------------------------------
+array(
+	// Ligne de type "explication"
+	array(
+		'explication' => 'Ceci est un bloc d'explication général.'
+	),
+	// Ligne classique, cad un champ de formulaire
+	array(
+		'saisie' => 'input',
+		'options => array(
+			'nom' => 'mon_champ',
+			'label' => 'Un joli titre',
+			'obligatoire' => 'oui'
+		),
+		'verifier' => array(
+			'type' => 'entier',
+			'options' => array(
+				'min' => 1
+			)
+		)
+	),
+	// Ligne contenant un fieldset
+	array(
+		'groupe' => 'Ceci est le titre du groupe de champs (fieldset)',
+		'css' => 'autres classes en plus',
+		'pliable' => 'oui',
+		'plie' => 'oui',
+		'contenu' => array(
+			// On recommence ici suivant le même formalisme que le tableau général.
+		)
+	)
+)
+
+Description d'une liste de traitements :
+----------------------------------------
+
+array(
+	'email' => array(
+		'champ_destinataires' => 'champ13',
+		'champ_courriel' => 'champ15'
+	),
+	'enregistrement' => array(
+		
+	)
+)
+
+Test d'autre chose :
+--------------------
+
+array(
+	array(
+		'explication' => 'Une explication possible.',
+	),
+	array(
+		'type_saisie' => 'input',
+		'nom' => 'nb_trucs',
+		'label' => 'Combien ?',
+		'obligatoire' => 'oui',
+		'verifier' => array(
+			'type' => 'entier',
+			'options' => array(
+				'min' => 0
+			)
+		)
+	),
+	array(
+		'groupe' => 'Titre du fieldset',
+		'css' => 'autres classes css',
+		'pliable' => 'oui',
+		'plie' => 'oui',
+		'contenu' => array(
+			...
+		)
+	)
+)

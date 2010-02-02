@@ -1,0 +1,32 @@
+<plugin>
+	<nom>Formidable, générateur de formulaires</nom>
+	<auteur>RastaPopoulos</auteur>
+	<licence>GPL v3</licence>
+	<version>0.1</version>
+	<version_base>0.1</version_base>
+	<etat>dev</etat>
+	<description>Génère des formulaires à partir de descriptions sérialisées.</description>
+	
+	<prefix>formidable</prefix>
+	
+<!--	<install>base/formidable_installation.php</install>-->
+<!--	-->
+<!--	<pipeline>-->
+<!--		<nom>autoriser</nom>-->
+<!--		<inclure>formidable_autoriser.php</inclure>-->
+<!--	</pipeline>-->
+<!--	<pipeline>-->
+<!--		<nom>declarer_tables_principales</nom>-->
+<!--		<inclure>base/formidable_tables.php</inclure>-->
+<!--	</pipeline>-->
+<!--	<pipeline>-->
+<!--		<nom>declarer_tables_interfaces</nom>-->
+<!--		<inclure>base/formidable_tables.php</inclure>-->
+<!--	</pipeline>-->
+	
+	<necessite id="SPIP" version="[2.0.10;]" />
+	<necessite id="cfg" version="[1.14.0;]" />
+	<necessite id="saisies" version="[1.6.6;]" />
+	<necessite id="verifier" version="[0.1;]" />
+</plugin>
+
