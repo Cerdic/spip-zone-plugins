@@ -82,6 +82,11 @@ function spicasa_add_photo($id_image, $id_article, $id_album, $user){
 	$largeur = $image->getWidth();
 	$hauteur = $image->getHeight();
    
+   
+  
+	echo "<script>alert('url: ".$url."');</script><br><br>";
+
+
 	$img_local = copie_locale($url);
 	
 	$taille = filesize($img_local);
