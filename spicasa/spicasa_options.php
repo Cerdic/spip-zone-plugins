@@ -57,7 +57,7 @@ function spicasa_resultados($query, $id_article, $debut=1, $max_results=250, $it
 
 
 function spicasa_add_photo($id_image, $id_article, $id_album, $user){
-    /* This function download the given image and attach it to the articule in course.*/
+    /* This function download the given image and attach it to the article in course.*/
     spicasa_init();    
 	$pic = new Picasa();
 	$image = $pic->getImageById($user, $id_album, $id_image, null, 800);
@@ -84,7 +84,7 @@ function spicasa_add_photo($id_image, $id_article, $id_album, $user){
    
    
   
-	echo "<script>alert('url: ".$url."');</script><br><br>";
+	//echo "<script>alert('url: ".$url."');</script><br><br>";
 
 
 	$img_local = copie_locale($url);
