@@ -5,12 +5,12 @@
 		#ACTION_FORMULAIRE{#SELF}
 		<div>
 			[(#ENV{_deja_favori}|non)
-			<button class="submit ajouter_favori" name="ajouter" value="<:mesfavoris:add_to|attribut_html:>" title="<:mesfavoris:add_to|attribut_html:>">
+			<button type='submit' class="submit ajouter_favori" name="ajouter" value="<:mesfavoris:add_to|attribut_html:>" title="<:mesfavoris:add_to|attribut_html:>">
 				<span><:mesfavoris:add|attribut_html:></span>
 				[<img height="16" width="16" src="(#CHEMIN{images/favoris-add-16.png})" alt="<:mesfavoris:add_to|attribut_html:>" />]
 			</button>
 			][(#ENV{_deja_favori}|oui)
-			<button class="submit retirer_favori" name="retirer" value="<:mesfavoris:remove_from|attribut_html:>" title="<:mesfavoris:remove_from|attribut_html:>">
+			<button type='submit' class="submit retirer_favori" name="retirer" value="<:mesfavoris:remove_from|attribut_html:>" title="<:mesfavoris:remove_from|attribut_html:>">
 				<span><:mesfavoris:remove|attribut_html:></span>
 				[<img height="16" width="16" src="(#CHEMIN{images/favoris-remove-16.png})" alt="<:mesfavoris:remove_from|attribut_html:>" />]
 			</button>
