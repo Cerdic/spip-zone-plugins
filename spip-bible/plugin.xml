@@ -19,7 +19,14 @@
     bible.jpg
     </icon>
     <description>
-Permet de faire rapidment des citation de la Bible		
+    
+    Permet de faire rapidment des citation de la Bible		
+    
+    Sous SPIP 2.0 avec SPIP-Bonux, propose une "presse-papier" biblique &agrave; c&ocirc;t&eacute; des formulaires d'&eacute;ditions.
+    
+    Vous pouvez aussi utilisez un mod&eacute;le, mais cette m&eacute;thode est d&eacute;su&eacute;te et d&eacute;conseill&eacute;e.
+    
+
 Ex : &lt;bible|passage=Gn1,2-2,1&gt; citera la Gen&egrave;se du chapitre 1, verset 2 au chapitre 2, verset 1 inclu.
 		
 On peut passer des options au mod&eacute;le. La valeur des options est "non" ou "oui", sauf pour traduction.
@@ -31,7 +38,7 @@ Ces options sont :
 -* "traduction"	=> Pour choisir la traduction.
 	La liste des traductions disponibles est sur [Spip-Contrib->http://www.spip-contrib.net/Spip-Bible-traductions-disponibles]
 	
-	La documentation de la fonction "presse-papier" [est sur contrib-http://www.spip-contrib.net/Spip-Bible-le-presse-papier].
+
 	En l'absence des ces param&eacute;tres, les valeurs seront celle d&eacute;finies [sur la page de configuration->?exec=cfg&amp;cfg=bible].
 	
 	
@@ -55,6 +62,6 @@ Ces options sont :
 	<fonctions>bible_fonctions.php</fonctions>
 	
 	<categorie>divers</categorie>
-   
+   <lien>http://www.spip-contrib.net/Spip-Bible,1125</lien>
  
 </plugin>
