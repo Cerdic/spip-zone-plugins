@@ -37,23 +37,23 @@ modifier ces param&#232;tres.  -->
     <p>
     	<label><:choix_police:couleur_typo:></label>
     	<input type="text" name="couleur_typo" class="palette"
-            value="[(#ENV{couleur_typo}|?{[(#ENV{couleur_typo})],#000000})]" style="width: 80px" />
+            value="[(#ENV{couleur_typo,#000000})]" style="width: 80px" />
     	<br/><small><:choix_police:explication_palette:></small>
     </p>
     <p>
         <label><:choix_police:taille_typo:>:</label>
         <input type="text" name="taille_typo" 
-        value="[(#ENV{taille_typo}|?{[(#ENV{taille_typo})],45})]" style="width: 80px" />
+        value="[(#ENV{taille_typo,45})]" style="width: 80px" />
     </p>
     <p>
         <label><:choix_police:padding_typo:>:</label>
         <input type="text" name="padding_typo" 
-        value="[(#ENV{padding_typo}|?{[(#ENV{padding_typo})],5})]" style="width: 80px" />
+        value="[(#ENV{padding_typo,5})]" style="width: 80px" />
     </p>
     <p>
         <label><:choix_police:largeur_typo:>:</label>
         <input type="text" name="largeur_typo" 
-        value="[(#ENV{largeur_typo}|?{[(#ENV{largeur_typo})],520})]" style="width: 80px" />
+        value="[(#ENV{largeur_typo,520})]" style="width: 80px" />
     </p>
 </fieldset>
 
@@ -64,12 +64,12 @@ modifier ces param&#232;tres.  -->
     <p>
         <label><:choix_police:marge_verticale:>:</label>
         <input type="text" name="marge_verticale" 
-        value="[(#ENV{marge_verticale}|?{[(#ENV{marge_verticale})],0px})]" style="width: 80px" />
+        value="[(#ENV{marge_verticale,0px})]" style="width: 80px" />
     </p>
     <p>
         <label><:choix_police:marge_horizontale:>:</label>
         <input type="text" name="marge_horizontale" 
-        value="[(#ENV{marge_horizontale}|?{[(#ENV{marge_horizontale})],0px})]" style="width: 80px" />
+        value="[(#ENV{marge_horizontale,0px})]" style="width: 80px" />
     </p>
     <p>
         <label><:choix_police:alignement_vertical:>:</label>
