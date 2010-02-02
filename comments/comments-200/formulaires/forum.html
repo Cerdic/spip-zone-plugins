@@ -50,8 +50,8 @@
     
 	<fieldset>
 	<legend><:comments:form_pet_message_commentaire:></legend>
+		<input type="hidden" name="titre" id="titre"[ value="(#ENV{titre})"] />
         <ul>
-            <input type="hidden" name="titre" id="titre"[ value="(#ENV{titre})"] />
         [(#CONFIG{forums_texte}|!={non}|?{
             <li class='saisie_texte[ (#ENV**{erreurs}|table_valeur{texte}|oui)erreur]'>
                 <label for='texte'><:forum_texte|typo:></label>
