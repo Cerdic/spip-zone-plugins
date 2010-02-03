@@ -1,4 +1,11 @@
 <?php
+/**
+ * Plugin SkelEditor
+ * Editeur de squelette en ligne
+ * (c) 2007-2010 erational
+ * Licence GPL-v3
+ *
+ */
 
 // variante repliee de la fonction de l'affichage de l'arbre des repertoires
 // http://doc.spip.org/@tree_open_close_dir
@@ -222,66 +229,6 @@ function skel_parser_param($str,$output='') {
         } */  
   } 
   return $output; 
-}
-
-// security
-function check_file_allowed($file,$files_editable,$new = false) {
-	if (in_array($file,$files_editable))	return true;  // known file
-	 else if ($new){ // new file ?	   
-		 if (in_array(dirname($file),array_map('dirname',$files_editable)))	return true; // known directory    
-	}
-	return false;
-}
-
-// recupere le chemin du squelette a editer: dist ? plugin squelette ou squelettes ?
-function get_spip_path(){
-	static $path_a = array();
-	static $c = '';
-
-	// on calcule le chemin si le nombre de plugins a change
-	if ($c != count($GLOBALS['plugins']).$GLOBALS['dossier_squelettes']) {	
-		$c = count($GLOBALS['plugins']).$GLOBALS['dossier_squelettes'];
-	
-		// Chemin standard depuis l'espace public
-		$path = defined('_SPIP_PATH') ? _SPIP_PATH : 
-			_DIR_RACINE.':'.
-			_DIR_RACINE.'squelettes-dist/:'.
-			_DIR_RACINE.'formulaires/:'.
-			_DIR_RESTREINT;
-			
-    // Ajouter dist/
-		$path = _DIR_RACINE.'squelettes-dist/:' . $path;
-
-		// Ajouter les repertoires des plugins 
-    /*	solution trop globale: il faut ajouter seulement les plugins de type "squelettes"
-		if ($GLOBALS['plugins'])
-			$path = _DIR_PLUGINS
-				. join(':'._DIR_PLUGINS, $GLOBALS['plugins'])
-				. ':' . $path;
-		*/	
-    if (count(get_plugin_squelette())>0) 
-        $path = join(':', get_plugin_squelette()).':'.$path;
-    
-		// Ajouter squelettes/
-		if (@is_dir(_DIR_RACINE.'squelettes'))
-			$path = _DIR_RACINE.'squelettes/:' . $path;
-		
-		// Et le(s) dossier(s) des squelettes nommes
-		if ($GLOBALS['dossier_squelettes'])
-			foreach (explode(':', $GLOBALS['dossier_squelettes']) as $d)
-				$path = 
-					($d[0] == '/' ? '' : _DIR_RACINE) . $d . '/:' . $path;
-
-		// nettoyer les / du path
-		$path_a = array();
-		foreach (explode(':', $path) as $dir) {
-			if (strlen($dir) AND substr($dir,-1) != '/')
-				$dir .= "/";
-			$path_a[] = $dir;
-		}
-				
-	}
-	return $path_a;
 }
 
 // recupere les plugins de type squelette

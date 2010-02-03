@@ -24,13 +24,14 @@
 	</description>
 	<lien>http://www.spip-contrib.net/Editeur-de-squelettes-Skel-editor</lien>
 	<prefix>skeleditor</prefix>
-	<fonctions>skeleditor_fonctions.php</fonctions>
+	
 	<!-- bouton prive -->
   <bouton id="skeleditor" parent="naviguer">
       <icone>img_pack/icon.png</icone>
       <titre>skeleditor:editer_skel</titre>   
       <url>skeleditor</url>   
-  </bouton> 
+  </bouton>
+
   <!-- pipeline -->
   <pipeline>
       <nom>autoriser</nom>
