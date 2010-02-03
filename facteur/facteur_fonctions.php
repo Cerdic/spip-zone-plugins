@@ -1,11 +1,8 @@
 <?php
 
 
-	include_spip('inc/plugin');
+
 	include_spip('inc/texte');
-	include_spip('base/create');
-	include_spip('base/abstract_sql');
-	include_spip('base/facteur');
 	include_spip('inc/facteur_classes');
 
 
