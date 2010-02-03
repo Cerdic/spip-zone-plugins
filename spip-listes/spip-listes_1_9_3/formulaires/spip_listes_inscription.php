@@ -46,18 +46,20 @@ function formulaires_spip_listes_inscription_verifier_dist ($id_liste='')
 		$erreurs['email'] = _T('spiplistes:cet_email_pas_valide');
 	}
 	
-	// Verifier si le mail est deja connu
 	$email = _request('email') ;
-	if(email_valide(_request('email')))
+	
+	// Verifier si le mail est deja connu
+	if(email_valide(_request('email'))) {
 		if (sql_getfetsel("id_auteur","spip_auteurs","id_auteur !='".intval($id_auteur)."' AND email = '$email'")) {
 			$erreurs['email'] = _T('spiplistes:cet_email_deja_enregistre');
 		}
-	
+	}
 
-	if (count($erreurs))
-		$erreurs['message_erreur'] = 'Votre saisie contient des erreurs !';
-		
-    return $erreurs; // si c'est vide, traiter sera appele, sinon le formulaire sera re-soumis
+	if (count($erreurs)) {
+		$erreurs['message_erreur'] = _T('spiplistes:saisie_erreurs');
+	}
+	
+    return ($erreurs); // si c'est vide, traiter sera appele, sinon le formulaire sera re-soumis
 }
 
 
@@ -65,9 +67,11 @@ function formulaires_spip_listes_inscription_traiter_dist($id_liste=''){
 	
 	// enregistre dans spip_auteurs, spip_auteurs_elargis, spip_auteurs_listes			
 			
+	include_spip('inc/acces');
+	include_spip('inc/spiplistes_api');
+
 	$val['email'] = _request('email');
 	$val['nom'] = _request('email');
-	include_spip('inc/acces');
 	$alea_actuel = creer_uniqid();
 	$alea_futur = creer_uniqid();
 	$val['alea_actuel'] = $alea_actuel;
@@ -89,6 +93,20 @@ function formulaires_spip_listes_inscription_traiter_dist($id_liste=''){
 			
 	// envoyer mail de confirmation
 	
+	if(spiplistes_envoyer_mail(
+		$val['email']
+		, _T('spiplistes:confirmation_inscription')
+		, _T('spiplistes:inscription_reponses_s', array('s' => $GLOBALS['meta']["nom_site"]))
+							   )) {
+		$contexte = array('message_ok'=>_T('spiplistes:demande_ok'),'editable' => false,);
+	}
+	else {
+		$contexte = array('message_ok'=>_T('spiplistes:demande_ko'),'editable' => false,);
+	}
+	/*
+	 // CP-20100203
+	 // ne prend pas en compte les prefs d'envoi SMTP
+	 // code à supprimer
 	$envoyer_mail = charger_fonction('envoyer_mail','inc');
 	$email_to = _request('email');
 	$email_from = _request('email');
@@ -96,7 +114,10 @@ function formulaires_spip_listes_inscription_traiter_dist($id_liste=''){
 	$message = _T('spiplistes:inscription_reponses_s', array('s' => $GLOBALS['meta']["nom_site"])) ;
 
 	$envoyer_mail($email_to,$sujet,$message,$email_from);
+*/
 	
-	return array('message_ok'=>_T('spiplistes:demande_ok'),'editable' => false,);
+	
+	
+	return ($contexte);
 }
 

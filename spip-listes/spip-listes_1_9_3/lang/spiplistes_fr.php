@@ -56,7 +56,10 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'vous_etes_redact' => "Vous &#234;tes inscrit en tant que r&#233;dacteur."
 , 'vous_etes_membre' => "Vous &#234;tes membre abonn&#233; aux listes de diffusion de ce site.
 	Il est parfois n&#233;cessaire de s&#39;authentifier pour avoir acc&#232;s &#224; ces listes."
+, 'saisie_erreurs' => 'Votre saisie contient des erreurs !'
 , 'demande_ok' => 'Votre demande a bien &#233;t&#233; prise en compte. Vous recevrez prochainement une confirmation.'
+, 'demande_ko' => 'D&#233;sol&#233;, mais une erreur a &#233;t&#233; rencontr&#233;e lors de l\'envoi de la confirmation d\'abonnement.
+		SVP, essayez de vous inscrire plus tard.'
 
 // balise/formulaire_modif_abonnement.php
 , 'abonnement_modifie' => 'Vos modifications sont prises en compte'
