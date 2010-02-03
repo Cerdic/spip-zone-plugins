@@ -1,13 +1,11 @@
 <plugin>
 	<nom>Metadonn&eacute;es photo (EXIF, IPTC et histogramme)</nom>
 	<auteur>ARNO*</auteur>
-	<version>1.1.1</version>
+	<version>1.2</version>
 	<icon>imgs_photo/logo-pb_plugin.png</icon>
 	<etat>stable</etat>
 	<description>
-		Ce plugin permet d'afficher l'histogramme ainsi que les informations EXIF, GPS et IPTC d'un fichier JPEG. 
-
-		La fonction histogramme requiert GD2.
+		Ce plugin permet d'afficher les informations EXIF, GPS et IPTC d'un fichier JPEG. 
 
 		Les informations EXIF sont manipul&eacute;es, sans recours &agrave; l'extension EXIF de PHP, gr&acirc;ce au script de Vinay Yadav (sous licence LGPL).
 

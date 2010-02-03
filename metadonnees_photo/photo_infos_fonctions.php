@@ -14,10 +14,10 @@ function lire_aux_lens ($filename) {
     $xmplenght = $xmpdata_end-$xmpdata_start;
     $xmpdata = substr($source,$xmpdata_start,$xmplenght+12);
     
-    if (eregi("aux:Lens=\"([^\"]*)\"", $xmpdata, $regs)) {
+    if (mb_eregi("aux:Lens=\"([^\"]*)\"", $xmpdata, $regs)) {
 		return $regs[1];
     }
-    if (eregi("<aux:Lens>([^<]*)<\/aux:Lens>", $xmpdata, $regs)) {
+    if (mb_eregi("<aux:Lens>([^<]*)<\/aux:Lens>", $xmpdata, $regs)) {
 		return $regs[1];
     }
 }
@@ -202,7 +202,7 @@ function lire_iptc ($fichier, $type=false) {
 	$iptc = extraire_iptc($fichier);
 	
 
-	if ($iptc["copyright"]) $iptc["copyright"] = eregi_replace("\(c\)", "©", $iptc["copyright"]);
+	if ($iptc["copyright"]) $iptc["copyright"] = mb_eregi_replace("\(c\)", "©", $iptc["copyright"]);
 	
 	if ($type) return $iptc["$type"];
 	else return $iptc;

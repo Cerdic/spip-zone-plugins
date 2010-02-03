@@ -89,7 +89,7 @@ class phpExifWriter extends phpExifReader {
 
           if(is_array($val)) continue;
 
-          if(eregi("0x",$tag)) {
+          if(mb_eregi("0x",$tag)) {
 
             // format
             $fmt = $this->getFormat($tag);
