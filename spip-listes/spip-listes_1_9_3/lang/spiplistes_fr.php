@@ -22,6 +22,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 
 // action/spiplistes_supprimer_abonne.php
 // balise/formulaire_abonnement.php
+// formulaires/spip_listes_inscriptions.php
 , 'inscription_liste_f' => 'Vous avez choisi de recevoir les courriers adress&#233;s &#224; la liste suivante en format @f@ : '
 , 'inscription_listes_f' => 'Vous avez choisi de recevoir les courriers adress&#233;s aux listes suivantes en format @f@ : '
 , 'inscription_reponse_s' => "Vous &#234;tes abonn&#233; &#224; la liste d&#39;information du site @s@"
@@ -55,6 +56,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'vous_etes_redact' => "Vous &#234;tes inscrit en tant que r&#233;dacteur."
 , 'vous_etes_membre' => "Vous &#234;tes membre abonn&#233; aux listes de diffusion de ce site.
 	Il est parfois n&#233;cessaire de s&#39;authentifier pour avoir acc&#232;s &#224; ces listes."
+, 'demande_ok' => 'Votre demande a bien &#233;t&#233; prise en compte. Vous recevrez prochainement une confirmation.'
 
 // balise/formulaire_modif_abonnement.php
 , 'abonnement_modifie' => 'Vos modifications sont prises en compte'

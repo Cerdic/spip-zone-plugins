@@ -1,5 +1,14 @@
 <?php
 
+	// formulaires/spip_listes_inscriptions.php
+	
+	// $LastChangedRevision: 26478 $
+	// $LastChangedBy: paladin@quesaco.org $
+	// $LastChangedDate: 2009-02-09 11:25:06 +0100 (Lun 09 fév 2009) $
+	
+	// formulaire d'inscription
+	// necessite SPIP >= 2
+	
 function formulaires_spip_listes_inscription_charger_dist ($id_liste='')
 {
 	$valeurs = array(
@@ -88,6 +97,6 @@ function formulaires_spip_listes_inscription_traiter_dist($id_liste=''){
 
 	$envoyer_mail($email_to,$sujet,$message,$email_from);
 	
-	return array('message_ok'=>'Votre demande a bien été prise en compte. Vous recevrez prochainement une confirmation.','editable' => false,);
+	return array('message_ok'=>_T('spiplistes:demande_ok'),'editable' => false,);
 }
 
