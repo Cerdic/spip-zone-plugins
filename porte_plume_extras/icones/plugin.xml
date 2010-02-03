@@ -1,0 +1,16 @@
+<plugin>
+	<nom>Extension Icones, pour Porte Plume</nom>
+	<auteur>Matthieu Marcillaud
+_ &#169; 2007 - Distribu&#233; sous licence GPL
+	</auteur>
+	<lien></lien>
+	<version>1.0</version>
+	<etat>stable</etat>
+    <description>
+	Cette extension ajoute 1001 icones pour le porte plume (icones [FamFamFam->http://www.famfamfam.com/])
+	ou pour toute autre utilisation.
+	</description>
+	<prefix>pp_icones</prefix>
+	<utilise id="porte_plume" />
+	<categorie>edition</categorie>
+</plugin>
