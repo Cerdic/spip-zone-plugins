@@ -5,7 +5,10 @@
 	<version>1.0.0</version>
 	<icon>images/configure_toolbars-48.png</icon>
 
-	<description>Porte Plume Partout sert &agrave; ajouter la barre d'outil aux champs DESCRIPTIF, CHAPO et PS</description>
+	<description>
+		Porte Plume Partout sert &agrave; ajouter la barre
+		d'outil aux champs DESCRIPTIF, CHAPO et PS
+	</description>
 	<etat>test</etat>
 	<prefix>ppp</prefix> <!--important, sert de lien au fichier de pipeline et aussi dans la définition de la fonction incluse-->
 	<pipeline>
