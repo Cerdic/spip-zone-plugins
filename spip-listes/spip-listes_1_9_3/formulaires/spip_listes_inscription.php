@@ -14,8 +14,9 @@ function formulaires_spip_listes_inscription_verifier_dist ($id_liste='')
 {
 	$erreurs = array();
 	// verifier que les champs obligatoires sont bien la :
-	foreach(array('email') as $obligatoire)
+	foreach(array('email') as $obligatoire) {
 		if (!_request($obligatoire)) $erreurs[$obligatoire] = 'Ce champ est obligatoire';
+	}
 	
 	if(!in_array(_request('format_abo'),array('html','texte')))
 		$erreurs['format'] = "format inconnu";
@@ -55,24 +56,27 @@ function formulaires_spip_listes_inscription_traiter_dist($id_liste=''){
 	
 	// enregistre dans spip_auteurs, spip_auteurs_elargis, spip_auteurs_listes			
 			
-			$val['email'] = _request('email');
-			$val['nom'] = _request('email');
-			include_spip('inc/acces');
-			$alea_actuel = creer_uniqid();
-			$alea_futur = creer_uniqid();
-			$val['alea_actuel'] = $alea_actuel;
-			$val['alea_futur'] = $alea_futur;
-			$val['low_sec'] = '';
-			$val['statut'] = 'aconfirmer';
-
-			$format = _request('format_abo') ;
-			$listes = _request('listes');
-
-			$id_auteur = sql_insertq("spip_auteurs",$val);			
-			$ok = sql_insertq("spip_auteurs_elargis",array('id_auteur'=>$id_auteur,'spip_listes_format'=>$format));
-			
-			foreach($listes as $liste)
-				$ok = sql_insertq("spip_auteurs_listes",array('id_auteur'=>$id_auteur,'id_liste'=>$liste));
+	$val['email'] = _request('email');
+	$val['nom'] = _request('email');
+	include_spip('inc/acces');
+	$alea_actuel = creer_uniqid();
+	$alea_futur = creer_uniqid();
+	$val['alea_actuel'] = $alea_actuel;
+	$val['alea_futur'] = $alea_futur;
+	$val['low_sec'] = '';
+	$val['statut'] = 'aconfirmer';
+	
+	$format = _request('format_abo') ;
+	$listes = _request('listes');
+	
+	$id_auteur = sql_insertq("spip_auteurs",$val);			
+	$ok = sql_insertq("spip_auteurs_elargis",array('id_auteur'=>$id_auteur,'spip_listes_format'=>$format));
+	
+	if($listes) {
+		foreach($listes as $liste) {
+			$ok = sql_insertq("spip_auteurs_listes",array('id_auteur'=>$id_auteur,'id_liste'=>$liste));
+		}
+	}
 			
 	// envoyer mail de confirmation
 	
