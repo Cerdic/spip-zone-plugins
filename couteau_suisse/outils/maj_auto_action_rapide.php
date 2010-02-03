@@ -4,6 +4,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
 include_spip('inc/actions');
+include_spip('inc/distant');
 
 define('_MAJ_SVN_DEBUT', 'svn://zone.spip.org/spip-zone/');
 define('_MAJ_SVN_TRAC', 'svn://trac.rezo.net/spip-zone/'); // ancienne URL
@@ -78,7 +79,8 @@ jQuery(document).ready(function() {
 }
 
 // renvoie le pattern present dans la page distante
-function maj_auto_rev_distante($url, $pattern, $lastmodified = 0, $force = false) {
+// si le pattern est NULL, renvoie un 'is_file_exists'
+function maj_auto_rev_distante($url, $pattern=NULL, $lastmodified = 0, $force = false) {
 	$force |= in_array(_request('var_mode'), array('calcul', 'recalcul'));
 
 	// pour la version distante, on regarde toutes les 24h00 (meme en cas d'echec)
@@ -88,9 +90,11 @@ function maj_auto_rev_distante($url, $pattern, $lastmodified = 0, $force = false
 	// prendre le cache si svn.revision n'est pas modifie recemment, si les 24h ne sont pas ecoulee, et si on ne force pas
 	if (!$force && $maj[1]!==false && ($lastmodified<$maj[0]) && (time()-$maj[0] < 24*3600)) $distant = $maj[1];
 	else {
-		include_spip('inc/distant');
-		$distant = recuperer_page($url);
-		$distant = $maj[1] = $distant?(preg_match($pattern, $distant, $regs)?$regs[1]:'-2'):'-1';
+		$distant = $maj[1] = ($pattern!==NULL)
+			?(($distant = recuperer_page($url))
+				?(preg_match($pattern, $distant, $regs)?$regs[1]:'-2')
+				:'-1')
+			:strlen(recuperer_page($url, false, true, 0));
 		$maj[0] = time();
 		ecrire_meta('tweaks_maj_auto', serialize($maj_));
 		ecrire_metas();
@@ -101,15 +105,6 @@ function maj_auto_rev_distante($url, $pattern, $lastmodified = 0, $force = false
 function plugin_get_infos_maj($p, $force = false) {
 	$get_infos = defined('_SPIP20100')?charger_fonction('get_infos','plugins'):'plugin_get_infos';
 	$infos = $get_infos($p);
-	$p2 = preg_match(',^auto/(.*)$,', $p, $regs)?$regs[1]:'';
-	if(strlen($p2)) {
-		// supposition du nom d'archive sur files.spip.org
-		$infos['zip_trac'] = _MAJ_ZIP . $p2. '.zip';
-		// nom de l'archive recemment installee par chargeur
-		$ok = lire_fichier(sous_repertoire(_DIR_CACHE, 'chargeur').$p2.'/install.log', $log);
-		$infos['zip_log'] = ($ok && preg_match(',[\n\r]source: *([^\n\r]+),msi', $log, $regs))
-			?$regs[1]:'';
-	} else $infos['zip_log'] = $infos['zip_trac'] = '';
 	// fichier svn.revision
 	$ok = lire_fichier($svn_rev = _DIR_PLUGINS.$p.'/svn.revision', $svn);
 	$lastmodified = @file_exists($svn_rev)?@filemtime($svn_rev):0;
@@ -135,6 +130,20 @@ function plugin_get_infos_maj($p, $force = false) {
 	$infos['rev_local'] = abs($rev_local);
 	$infos['rev_rss'] = maj_auto_rev_distante($infos['url_origine'], ', \[(\d+)\],', $lastmodified, $force);
 	$infos['maj_dispo'] = $infos['rev_rss']>0 && $infos['rev_local']>0 && $infos['rev_rss']>$infos['rev_local'];
+	// fichiers zip
+	$infos['zip_log'] = $infos['zip_trac'] = '';
+	$p2 = preg_match(',^auto/(.*)$,', $p, $regs)?$regs[1]:'';
+	if(strlen($p2)) {
+		// supposition du nom d'archive sur files.spip.org
+		if(maj_auto_rev_distante($f = _MAJ_ZIP.$p2.'.zip')) $infos['zip_trac'] = $f;
+		// nom de l'archive recemment installee par chargeur
+		if(lire_fichier(sous_repertoire(_DIR_CACHE, 'chargeur').$p2.'/install.log', $log)
+				&& preg_match(',[\n\r]source: *([^\n\r]+),msi', $log, $regs)
+				&& maj_auto_rev_distante($regs[1]))
+			$infos['zip_log'] = $regs[1];
+		// au final on prend le bon
+		if(!$infos['zip_trac']) $infos['zip_trac'] = $infos['zip_log'];
+	}
 	return $infos;
 }
 
