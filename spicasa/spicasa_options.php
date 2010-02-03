@@ -1,4 +1,5 @@
 <?php
+
 function spicasa_init(){
 $p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
 define('_DIR_PLUGIN_SPICASA',(_DIR_PLUGINS.end($p))."/");
@@ -9,16 +10,18 @@ ini_set('include_path',
 require_once 'Picasa.php';
 
 include_spip('inc/distant'); // pour 'copie_locale'
-}
 
+}
 
 function spicasa_resultados($query, $id_article, $debut=1, $max_results=250, $items_page=50){
         /*Return images for a general query*/
         spicasa_init();    
 
+
+
 		$pic = new Picasa();
 		$query = str_replace(" ", "+", $query);
-		$images = $pic->getImages(null, $debut+$items_page, $debut, $query, null, "public", null, 800);
+		$images = $pic->getImages(null, $items_page, $debut, $query, null, "public", null, lire_config('spicasa/imgmax',1024));
 
 		if($images->getTotalResults() < $max_results) $max_results=$images->getTotalResults();
 		
@@ -60,7 +63,7 @@ function spicasa_add_photo($id_image, $id_article, $id_album, $user){
     /* This function download the given image and attach it to the article in course.*/
     spicasa_init();    
 	$pic = new Picasa();
-	$image = $pic->getImageById($user, $id_album, $id_image, null, 800);
+	$image = $pic->getImageById($user, $id_album, $id_image, null, lire_config('spicasa/imgmax',1024));
 	foreach($image->getContentUrlMap() as $value) $url = $value; //just one
 
 	$type = $image->getImageType();
@@ -173,7 +176,7 @@ function spicasa_lists_albums($email, $pic){
 function spicasa_add_album($id_album, $user, $id_article){
          spicasa_init();
     	 $pic = new Picasa();
-	     $album = $pic->getAlbumById($user, $id_album, null, null, null, null, null, 800);
+	     $album = $pic->getAlbumById($user, $id_album, null, null, null, null, null, lire_config('spicasa/imgmax',1024));
          foreach($album->getImages() as $img){    
             	$id_image = $img->getIdnum();
     	        spicasa_add_photo($id_image, $id_article, $id_album, $user);
@@ -187,7 +190,7 @@ function spicasa_add_album($id_album, $user, $id_article){
 function spicasa_show_album($id_album, $user, $id_article){
      spicasa_init();
 	 $pic = new Picasa();
-     $album = $pic->getAlbumById($user, $id_album, null, null, null, null, null, 800);
+     $album = $pic->getAlbumById($user, $id_album, null, null, null, null, null, lire_config('spicasa/imgmax',1024));
      foreach($album->getImages() as $img){    
             	$id_image = $img->getIdnum();
 				$id_album = $img->getAlbumid(); 

@@ -1,0 +1,29 @@
+#CACHE{0}
+
+<!-- descriptif=<h4>Spicasa configuration</h4>
+From here you can set a few variables.<br />
+-->
+<!-- titre=Spicasa-->
+
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+
+<fieldset><legend>General</legend>
+
+   <label>Maximum results: </label>
+   <input type="text" name="max_results" value="[(#CONFIG{spicasa/max_results}|?{#CONFIG{spicasa/max_results},250})]" /> <br>
+
+
+   <label>Items per page: </label>
+   <input type="text" name="items_page" value="[(#CONFIG{spicasa/items_page}|?{#CONFIG{spicasa/items_page},50})]" /> <br>
+     
+</fieldset>
+
+
+<fieldset><legend>Photo</legend>
+   <label>Image size (width max): </label>
+   <input type="text" name="imgmax" value="[(#CONFIG{spicasa/imgmax}|?{#CONFIG{spicasa/imgmax},1024})]" /> <span class="spip_xx-small">Valid size are 94, 110, 128, 200, 220, 288, 320, 400, 512, 576, 640, 720, 800, 912, 1024, 1152, 1280, 1440 or 1600</span>  
+</fieldset>
+
+<input type="submit" name="_cfg_ok" value="<:OK:>" />
+</form>
+

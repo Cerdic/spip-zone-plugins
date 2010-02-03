@@ -1,1 +1,1 @@
-#CACHE{0}[(#HTTP_HEADER{Content-type: text/html[; charset=(#CHARSET)]})][(#ENV{buscar}|spicasa_resultados{#ENV{id_article},#ENV{debut}})]
+#CACHE{0}[(#HTTP_HEADER{Content-type: text/html[; charset=(#CHARSET)]})][(#ENV{buscar}|spicasa_resultados{#ENV{id_article},#ENV{debut}, #CONFIG{'spicasa/max_results'}, #CONFIG{'spicasa/items_page'}})]
