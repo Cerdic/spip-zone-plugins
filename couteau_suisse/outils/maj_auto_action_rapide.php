@@ -79,14 +79,14 @@ jQuery(document).ready(function() {
 }
 
 // renvoie le pattern present dans la page distante
-// si le pattern est NULL, renvoie un 'is_file_exists'
+// si le pattern est NULL, renvoie un simple 'is_file_exists'
 function maj_auto_rev_distante($url, $pattern=NULL, $lastmodified = 0, $force = false) {
 	$force |= in_array(_request('var_mode'), array('calcul', 'recalcul'));
 
 	// pour la version distante, on regarde toutes les 24h00 (meme en cas d'echec)
 	$maj_ = isset($GLOBALS['meta']['tweaks_maj_auto'])?unserialize($GLOBALS['meta']['tweaks_maj_auto']):array();
-	if(!isset($maj_[$url])) $maj_[$url] = array(0, false);
-	$maj = &$maj_[$url];
+	if(!isset($maj_[$url_=md5($url)])) $maj_[$url_] = array(0, false);
+	$maj = &$maj_[$url_];
 	// prendre le cache si svn.revision n'est pas modifie recemment, si les 24h ne sont pas ecoulee, et si on ne force pas
 	if (!$force && $maj[1]!==false && ($lastmodified<$maj[0]) && (time()-$maj[0] < 24*3600)) $distant = $maj[1];
 	else {
