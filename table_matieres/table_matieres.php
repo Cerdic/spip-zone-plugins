@@ -70,11 +70,23 @@ function TableMatieres_LienRetour($texte, $affiche_table = false) {
 	'<img alt="'._T('tdm:retour_table_matiere').'" title="'._T('tdm:retour_table_matiere').'"',
 	_RETOUR_TDM);
 	$_table = recuperer_fond('modeles/table_matieres');
+
+	# version en javascript (pas tres propre, a refaire avec un js externe)
+	if (TDM_JAVASCRIPT AND $_table) {
+		$_table = inserer_attribut('<div class="encart"></div>',
+			'rel', $_table)
+			.'<script type="text/javascript"><!--
+			$("div.encart").html($("div.encart").attr("rel"));
+			--></script>';
+		$_RETOUR_TDM = '<script type="text/javascript"><!--
+		document.write("'.str_replace('"', '\\"', $_RETOUR_TDM).'");
+		--></script>';
+	}
+
 	return $affiche_table ?
 		$_table :
 		(((TableMatieres_BalisePresente() OR !strlen(trim($_table))) ? //calcul :)
-			'' :
-			'<div class="encart">'.$_table."</div>\n\n") .
+			'' : $_table."\n\n").
 		str_replace('@@RETOUR_TDM@@', $_RETOUR_TDM, $texte));
 }
 
