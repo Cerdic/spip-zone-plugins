@@ -5,6 +5,7 @@
   <version_base>0.2.0</version_base>
   <etat>test</etat>
   <description>Gestion d'une queue de Jobs</description>
+  <icon>img_pack/job_queue_48.png</icon>
   <install>base/queue.php</install>
   <options>queue_options.php</options>
 	<lien></lien> <!-- URI de documentation -->
