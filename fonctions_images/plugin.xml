@@ -30,6 +30,7 @@ Une page de test permet de voir <a href="../?page=tests_fonctions_images">les fi
 - image_podpod
 - image_saturer
 	</description>
+	<icon>img_pack/fonctions_images_48.png</icon>
 	<prefix>Fonctions_images</prefix>
     <fonctions>fonctions_images_fonctions.php</fonctions>
 	<chemin dir='' />
