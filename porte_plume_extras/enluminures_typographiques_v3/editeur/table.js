@@ -1,4 +1,4 @@
-﻿/* ce code s'inspire du travail de http://www.spip-contrib.net/_courcy_ 
+/* ce code s'inspire du travail de http://www.spip-contrib.net/_courcy_ 
   * il a été en grande partie ré-écrit pour : 
   * - générer une syntaxe de tableau SPIP et non HTML (l'éditeur de couleur de cellules disparaît donc aussi)
   * - pour permettre non seulement de créer un tableau mais aussi de modifier un tableau existant
