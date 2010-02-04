@@ -12,10 +12,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   'effacer'=>"effacer",
   'effacer_confirme'=>'Voulez vous vraiment effacer ce fichier ?',
 	'erreur_fichier_supprime' => 'Ce fichier a &eacute;t&eacute; supprim&eacute; pendant que vous l\'editiez. Copiez le contenu et creez un nouveau fichier si necessaire.',
-  'erreur_ouverture_fichier'=>"erreur: impossible d\'ouvrir le fichier",
-  'erreur_ecriture_fichier'=>"erreur: impossible d\'&eacute;crire dans le fichier",
+	'erreur_fichier_modif_coucourante' => 'Ce fichier a &eacute;t&eacute; modifi&eacute; pendant votre modification. Voici la nouvelle version&nbsp;:',
+	'erreur_fichier_modif_coucourante_votre_version' => 'Fusionnez avec votre version et enregistrez&nbsp;:',
+
+	'erreur_ouverture_fichier'=>"erreur: impossible d\'ouvrir le fichier",
+  'erreur_ecriture_fichier'=>"Impossible d\'&eacute;crire dans le fichier",
   'erreur_edition_ecriture'=>"erreur: fichier non &eacute;ditable en &ecute;criture",
-  'erreur_ouvert_ecrit'=>"Erreur: impossible d'ouvrir ou d'éditer ce fichier.",
+  'erreur_ouvert_ecrit'=>"Erreur: impossible d'ouvrir ou d'&eacute;diter ce fichier.",
   'erreur_droits'=>"erreur: impossible de cr&eacute;er le fichier. V&eacute;rifier les droits en &eacute;critutre de votre r&eacute;pertoire squelette",
   'erreur_overwrite'=>"erreur: ce fichier existe d&eacute;j&agrave;",
   'erreur_sansgene'=>'Erreur: action non autoris&eacute;e',
@@ -23,6 +26,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   
   // F
   'fichier'=>"fichier",
+  'fichier_enregistre'=>"Le fichier a &eacute;t&eacute; enregistr&eacute;",
+	
   'fichier_sauvegarde_date'=>"fichier sauvegard&eacute; @ ",    
   'fichier_efface_ok'=>'Fichier effac&eacute; avec succ&egrave;s!',
   'fichier_choix'=>'Choississez le fichier que vous voulez &eacute;diter ou visualiser.',

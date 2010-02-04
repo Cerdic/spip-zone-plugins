@@ -1,6 +1,4 @@
 <div class='formulaire_spip formulaire_editer formulaire_#FORM'>
-	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
-	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	<div class="actions">
 		[(#AUTORISER{download,squelette,#ENV{fichier}}|oui)
 			[(#BOUTON_ACTION{#CHEMIN{img_pack/action_dl.png}|balise_img{'download'}|concat{' ',<:skeleditor:telecharger:>},#URL_ACTION_AUTEUR{skeleditor_dl,#ENV{fichier}}})]
@@ -9,15 +7,19 @@
 			[(#BOUTON_ACTION{#CHEMIN{img_pack/action_del.png}|balise_img{'delete'}|concat{' ',<:skeleditor:effacer:>},#URL_ACTION_AUTEUR{skeleditor_delete,#ENV{fichier},#SELF},'',<:skeleditor:effacer_confirme:>})]
 		]
 	</div>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{type}|=={txt}|oui)
 	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
 		[(#REM) declarer les hidden qui declencheront le service du formulaire 
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 	  <ul>
 	    <li class="editer_texte[ (#ENV**{erreurs}|table_valeur{texte}|oui)erreur]">
+				<em class="infos">[(#ENV{date}|affdate)[ (#ENV{date}|heures)h][(#ENV{date}|minutes)]][- (#ENV{size}|taille_en_octets) ]</em>
 				<label for="text_area"><:skeleditor:label_texte:></label>[
-				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{texte})</span>
-				]<textarea[ (#ENV{editable}|non)readonly='readonly'] name='texte' class='no_barre' id='text_area' cols='80' rows='50'>[(#ENV**{texte})]</textarea>
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{texte})</span>]
+				<textarea[ (#ENV{editable}|non)readonly='readonly'] name='texte' class='no_barre' id='text_area' cols='80' rows='50'>[(#ENV**{texte})]</textarea>
 	    </li>
 	  </ul>
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
@@ -26,4 +28,9 @@
 	  <p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
 		]
 	</div></form>
+	]
+	[(#ENV{type}|=={img}|oui)
+		<em class="infos">[(#ENV{date}|affdate) ][- (#ENV{size}|taille_en_octets) ]</em>
+		[(#ENV{fichier}|balise_img)]
+	]
 </div>

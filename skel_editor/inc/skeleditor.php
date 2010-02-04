@@ -38,4 +38,18 @@ function sort_directory_first($files,$root) {
   }
   return array_merge($files_root,$files_directory);
 }
+
+function skeleditor_get_file_content_type_ctrl($fichier){
+	if (preg_match(",("._SE_EXTENSIONS_IMG.")$,ims",$fichier)){
+		$type = 'img';
+		$ctrl = md5(filemtime($fichier));
+		$content = null;
+	}
+	else {
+		$type = 'txt';
+		lire_fichier($fichier, $content);
+		$ctrl = md5($content);
+	}
+	return array($content,$type,$ctrl);
+}
 ?>
