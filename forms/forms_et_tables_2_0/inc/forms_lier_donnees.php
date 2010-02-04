@@ -33,13 +33,16 @@ function inc_forms_lier_donnees($type, $id, $script, $deplie=false, $type_table 
 	$out = "";
 	$out .= "<a name='tables'></a>";
 	if (_request('cherche_donnee') || _request('ajouter') || $deplie){
-		$bouton = bouton_block_visible("tables_$type_$id");
-		$debut_block = 'debut_block_visible';
+		//adaptation SPIP 2
+		//$bouton = bouton_block_visible("tables_$type_$id");
+		$bouton = bouton_block_depliable(true,"tables_$type_$id");
+		//$debut_block = 'debut_block_visible';
+		$debut_block = 'debut_block_depliable';
 	}
 	else{
 		//adpatation SPIP2
 		//$bouton = bouton_block_invisible("tables_$type_$id");
-		$bouton = bouton_block_depliable(_T("info_sans_titre"),false,"tables_$type_$id");
+		$bouton = bouton_block_depliable(false,"tables_$type_$id");
 		//$debut_block = 'debut_block_invisible';
 		$debut_block = 'bouton_block_depliable';
 	}
@@ -53,7 +56,7 @@ function inc_forms_lier_donnees($type, $id, $script, $deplie=false, $type_table 
 
 	$out .= $s;
 	
-	$out .= $debut_block(_T("info_sans_titre"),false,"tables_$type_$id");
+	$out .= $debut_block(false,"tables_$type_$id");
 	
 	//
 	// Afficher le formulaire de recherche des donnees des tables

@@ -31,7 +31,7 @@ function Forms_nouveau_champ($id_form,$type){
 	$n = 1;
 	$champ = $type.'_'.strval($n);
 	while ($row = spip_fetch_array($res)){
-		$lenumero = preg_split('/_/', $row['champ'] );
+		$lenumero = split('_', $row['champ'] );
 		$lenumero = intval(end($lenumero));
 		if ($lenumero>= $n) $n=$lenumero+1;
 	}
@@ -59,7 +59,7 @@ function Forms_nouveau_choix($id_form,$champ){
 	$n = 1;
 	$res = spip_query("SELECT choix FROM spip_forms_champs_choix WHERE id_form="._q($id_form)." AND champ="._q($champ));
 	while ($row = spip_fetch_array($res)){
-		$lenumero = preg_split('/_/', $row['choix']);
+		$lenumero = split('_', $row['choix']);
 		$lenumero = intval(end($lenumero));
 		if ($lenumero>= $n) $n=$lenumero+1;
 	}
@@ -444,11 +444,11 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 		else {
 			$formulaire =
 				"<div style='padding: 2px; background-color: $couleur_claire; color: black;'>&nbsp;"
-				. ($visible ? bouton_block_visible("champ_$champ") : bouton_block_invisible("champ_$champ"))
+				. ($visible ? bouton_block_depliable(true,"champ_$champ") : bouton_block_depliable(false,"champ_$champ"))
 				. "<strong id='titre_nom_$champ'>".typo($row['titre'])."</strong>"
 				. "<br /></div>"
 				. "(".typo(Forms_nom_type_champ($row['type'])).")\n"
-				. ($visible ? debut_block_visible("champ_$champ") : debut_block_invisible("champ_$champ"))
+				. ($visible ? debut_block_depliable(true,"champ_$champ") : debut_block_depliable(true,"champ_$champ"))
 				. $formulaire
 				. fin_block();
 		}

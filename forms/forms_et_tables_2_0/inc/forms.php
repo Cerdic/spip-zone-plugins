@@ -25,7 +25,7 @@
 			Forms_upgrade();
 		}
 	}
-
+	
 	function Forms_structure($id_form, $complete = true){
 		include_spip('inc/texte'); # typo et textebrut
 		// Preparer la table de traduction code->valeur & mise en table de la structure pour eviter des requettes
@@ -419,12 +419,12 @@
 			$s .= debut_cadre_relief("../"._DIR_PLUGIN_FORMS."img_pack/form-24.png", true);
 
 			$s .= "<div style='padding: 2px; background-color: $couleur_claire; text-align: center; color: black;'>";
-			$s .= bouton_block_invisible("ajouter_form");
+			$s .= bouton_block_depliable(false,"ajouter_form");
 			$s .= "<strong class='verdana3' style='text-transform: uppercase;'>"
 				._T("forms:article_inserer_un_formulaire")."</strong>";
 			$s .= "</div>\n";
 
-			$s .= debut_block_invisible("ajouter_form");
+			$s .= debut_block_depliable(false,"ajouter_form");
 			$s .= $out;
 			$s .= fin_block();
 
@@ -740,7 +740,7 @@
 				
 				if ($row['type_form']=='sondage') {
 					include_spip("inc/session");
-					$hash = md5("forms valide reponse sondage $id_donnee $cookie".hash_env());
+					$hash = md5("forms valide reponse sondage $id_donnee $cookie ".hash_env());
 					// SPIP2 probleme avec cet url de confirmation de la réponse du sondage.
 					$url = generer_url_public($script_validation,"verif_cookie=oui&id_donnee=$id_donnee&hash=$hash".($script_args?"&$script_args":""));
 					$r = $url;
@@ -901,6 +901,69 @@ function Forms_obligatoire($row,$forms_obligatoires){
 		$i++;
 	}
 	return $returned;
+}
+
+//ajout SPIP 2
+function afficher_liste($largeurs, $table, $styles = '') {
+	global $spip_display;
+
+	if (!is_array($table)) return "";
+
+	if ($spip_display != 4) {
+		$res = '';
+		foreach ($table as $t) {
+			$res .= afficher_liste_display_neq4($largeurs, $t, $styles);
+		}
+	} else {
+		$res = "\n<ul style='text-align: $spip_lang_left; background-color: white;'>";
+		foreach ($table as $t) {
+			$res .= afficher_liste_display_eq4($largeurs, $t, $styles);
+		}
+		$res .= "\n</ul>";
+	}
+
+	return $res;
+}
+
+// http://doc.spip.org/@afficher_liste_display_neq4
+function afficher_liste_display_neq4($largeurs, $t, $styles = '') {
+	global $spip_lang_left,$browser_name;
+	if (!is_array($t) or !count($t)) return "";
+
+	$evt = (preg_match(",msie,i", $browser_name) ? " onmouseover=\"changeclass(this,'tr_liste_over');\" onmouseout=\"changeclass(this,'tr_liste');\"" :'');
+
+	reset($largeurs);
+	if ($styles) reset($styles);
+	$res ='';
+	while (list(, $texte) = each($t)) {
+		$style = $largeur = "";
+		list(, $largeur) = each($largeurs);
+		if ($styles) list(, $style) = each($styles);
+		if (!trim($texte)) $texte .= "&nbsp;";
+		$res .= "\n<td" .
+			($largeur ? (" style='width: $largeur" ."px;'") : '') .
+			($style ? " class=\"$style\"" : '') .
+			">" . lignes_longues($texte) . "\n</td>";
+	}
+
+	return "\n<tr class='tr_liste'$evt>$res</tr>";
+}
+
+// http://doc.spip.org/@afficher_liste_display_eq4
+function afficher_liste_display_eq4($largeurs, $t, $styles = '') {
+	global $spip_lang_left;
+	if (!is_array($t) or !count($t)) return "";
+
+	$res = "\n<li>";
+	reset($largeurs);
+	if ($styles) reset($styles);
+	while (list(, $texte) = each($t)) {
+		$style = $largeur = "";
+		list(, $largeur) = each($largeurs);
+		if (!$largeur) $res .= $texte." ";
+	}
+	$res .= "</li>\n";
+	return $res;
 }
 
 function Forms_afficher_liste_donnees_liees($type_source, $id, $type_lie, $type_table, $script, $bloc_id, $arg_ajax, $retour){
