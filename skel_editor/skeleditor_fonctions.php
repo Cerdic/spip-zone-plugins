@@ -7,68 +7,6 @@
  *
  */
 
-// variante repliee de la fonction de l'affichage de l'arbre des repertoires
-// http://doc.spip.org/@tree_open_close_dir
-function skeleditor_tree_open_close_dir(&$current,$target,$current_file){
-	if ($current == $target) return "";
-	$tcur = explode("/",$current);
-	$ttarg = explode("/",$target);
-	$tcom = array();
-	$output = "";
-	// la partie commune
-	while (reset($tcur)==reset($ttarg)){
-		$tcom[] = array_shift($tcur);
-		array_shift($ttarg);
-	}
-	// fermer les repertoires courant jusqu'au point de fork
-	while($close = array_pop($tcur)){
-		$output .= fin_block();		
-	}
-	$chemin = implode("/",$tcom)."/";
-	// ouvrir les repertoires jusqu'a la cible
-	while($open = array_shift($ttarg)){
-		$chemin .= $open . "/";
-		$closed = ((strncmp($current_file, ltrim($chemin,'/'), strlen(ltrim($chemin,'/')))==0)?"":" closed");
-
-		$output .= bouton_block_depliable("<img src='"._DIR_PLUGIN_SKELEDITOR."/img_pack/folder.png' alt='directory'/> $open",!$closed,md5($chemin));
-		$output .= "<div class='dir$closed' id='".md5($chemin)."'>\n";
-	}
-	$current = $target;
-	return $output;
-}
-
-function skeleditor_afficher_dir_skel($path_base,$current_file) {
-	$file_list = skeleditor_files_editables($path_base);
-	$current_file = substr($current_file,strlen($path_base));
-
-  $output = "<div id='arbo'><div class='dir'>\n";
-	$init_dir = $current_dir = "";
-	foreach($file_list as $file){
-		$dir = substr(dirname($file),strlen($path_base));
-		$file = substr($file,strlen($path_base));
-
-		if ($dir != $current_dir)
-			$output .= skeleditor_tree_open_close_dir($current_dir,$dir,$current_file);
-
-		$class="fichier";
-		if (!is_writable($path_base.$dir))
-			$class .= " readonly";
-
-		$class .= ($file==$current_file?" on":'');
-		
-		$icon = "file";
-		if (preg_match(',('._SE_EXTENSIONS_IMG.')$,',$file))
-			$icon = "img";
-		
-		$output .= "<a href='".generer_url_ecrire('skeleditor','f='.urlencode($path_base.$file))."' class='$class'>"
-						. "<img src='"._DIR_PLUGIN_SKELEDITOR."/img_pack/$icon.png' alt='$icon' /> "
-						.basename($file)."</a>";
-	}
-	$output .= skeleditor_tree_open_close_dir($current_dir,$init_dir,$current_file);
-  $output .= "</div></div>\n";
-  return $output;
-}
-
 // build select menu to choose directory
 function editor_form_directory($path,$depth="") {
 	$output = "";
