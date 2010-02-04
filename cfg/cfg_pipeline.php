@@ -27,6 +27,16 @@ function cfg_ajouter_boutons($flux) {
 	return $flux;
 }
 
+function cfg_affiche_gauche($flux){
+	if ($flux['args']['exec']=='admin_plugin'){
+		$flux['data'] = 
+			debut_cadre_enfonce('',true)
+			. icone_horizontale('CFG &ndash; '._T('configuration'), generer_url_ecrire('cfg'), _DIR_PLUGIN_CFG.'cfg-22.png', '', false)
+			. fin_cadre_enfonce(true)
+			. $flux['data'];
+	}
+	return $flux;
+}
 
 /*
  * Gerer l'option <!-- head= xxx --> des fonds CFG
