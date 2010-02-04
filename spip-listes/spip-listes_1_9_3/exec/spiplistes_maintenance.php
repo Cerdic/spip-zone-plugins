@@ -388,14 +388,14 @@ function exec_spiplistes_maintenance () {
 	// Boite maintenance des abonnements
 	$objet = array('objet' => _T('spiplistes:des_abonnements'));
 	$page_result .= ""
-		. debut_cadre_trait_couleur("administration-24.gif", true, "", _T('spiplistes:maintenance_objet', $objet))
+		. debut_cadre_trait_couleur('administration-24.gif', true, '', _T('spiplistes:maintenance_objet', $objet))
 		;
 	$ii = spiplistes_abonnements_zombies();
 	if(($nb_abos = count($ii)) > 0) {
 		$nb_auteurs = $ii;
 		sort($nb_auteurs);
 		$nb_auteurs = count(array_unique($nb_auteurs));
-		$nb_abos = spiplistes_str_abos($nb_abos);
+		$nb_abos = spiplistes_str_abonnes($nb_abos);
 		$nb_auteurs = spiplistes_str_auteurs($nb_auteurs);
 		$page_result .= ""
 			. spiplistes_form_debut ($maintenance_url_action, true)
