@@ -22,7 +22,7 @@ function auth_pmb_dist ($login, $pass, $md5pass="", $md5next="") {
 
 	spip_log("pmb $login " . ($pass ? "mdp fourni" : "mdp absent"). ($md5pass ? "md5mdp fourni" : "md5mdp absent"));
 	//connexion webservices pmb
-	if (!$ws=new SoapClient(lire_config('pmb/wsdl','http://tence.bibli.fr/pmbws/PMBWsSOAP_1?wsdl'))) return false;
+	if (!$ws=new SoapClient(lire_config('spip_pmb/wsdl','http://tence.bibli.fr/pmbws/PMBWsSOAP_1?wsdl'))) return false;
 	
 	// Securite 
 	if (!$login || (!$pass && !$md5pass)) return array();
