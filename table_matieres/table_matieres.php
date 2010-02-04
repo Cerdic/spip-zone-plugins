@@ -72,7 +72,7 @@ function TableMatieres_LienRetour($texte, $affiche_table = false) {
 	$_table = recuperer_fond('modeles/table_matieres');
 
 	# version en javascript (pas tres propre, a refaire avec un js externe)
-	if (TDM_JAVASCRIPT AND $_table) {
+	if (TDM_JAVASCRIPT AND $_table AND !test_espace_prive()) {
 		$_table = inserer_attribut('<div class="encart"></div>',
 			'rel', $_table)
 			.'<script type="text/javascript"><!--
