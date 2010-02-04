@@ -25,6 +25,7 @@ _ <multi>[fr]ATTENTION: Necessite jQuery et la balise <code>#INSERT_HEAD</code> 
   <prefix>
 	boutonstexte
   </prefix>
+	<icon>images/fontsizeup.png</icon>
 	<options>boutonstexte_options.php</options>
   <pipeline>
 	  <nom>insert_head</nom>
