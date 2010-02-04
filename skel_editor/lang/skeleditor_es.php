@@ -1,9 +1,8 @@
 <?php
 
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// Traducción -- Fernando Toledo <ftoledo@docksud.com.ar>
+// Traduccion -- Fernando Toledo <ftoledo@docksud.com.ar>
 
-//$GLOBALS['i18n_skeleditor_fr'] = array( ??
 $GLOBALS[$GLOBALS['idx_lang']] = array(
   // C
   'creer'=>'Crear', 

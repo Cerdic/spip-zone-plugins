@@ -21,7 +21,7 @@ function autoriser_skeleditor_dist($faire, $type, $id, $qui, $opt){
 }
 
 // autorisation des boutons
-function autoriser_skeleditor_ajout_bouton_dist($faire, $type, $id, $qui, $opt) {
+function autoriser_skeleditor_ajout_bouton_dist($faire, $type, $file, $qui, $opt) {
 
   return (autoriser('skeleditor','','',$qui));
 }
@@ -30,24 +30,25 @@ function autoriser_skeleditor_ajout_bouton_dist($faire, $type, $id, $qui, $opt) 
  * Autoriser a supprimer un squelette
  *
  */
-function autoriser_squelette_supprimer_dist($faire, $type, $id, $qui, $opt) {
+function autoriser_squelette_supprimer_dist($faire, $type, $file, $qui, $opt) {
 
-  return (autoriser('modifier','squelette',$id,$qui));
+  return (autoriser('modifier','squelette',$file,$qui));
 }
 
 /**
  * Autoriser a download un squelette
  *
  */
-function autoriser_squelette_download_dist($faire, $type, $id, $qui, $opt) {
-  return (autoriser('modifier','squelette',$id,$qui));
+function autoriser_squelette_download_dist($faire, $type, $file, $qui, $opt) {
+  return (autoriser('modifier','squelette',$file,$qui));
 }
 
 /**
  * Autoriser a editer un squelette
  *
  */
-function autoriser_squelette_modifier_dist($faire, $type, $id, $qui, $opt) {
+function autoriser_squelette_modifier_dist($faire, $type, $file, $qui, $opt) {
+	include_spip('inc/skeleditor');
 	$files_editable = skeleditor_files_editables();
   return (autoriser('skeleditor','','',$qui) AND in_array($file,$files_editable));
 }
@@ -56,21 +57,22 @@ function autoriser_squelette_modifier_dist($faire, $type, $id, $qui, $opt) {
  * Autoriser a creer un squelette
  *
  */
-function autoriser_squelette_creer_dist($faire, $type, $id, $qui, $opt) {
+function autoriser_squelette_creer_dist($faire, $type, $file, $qui, $opt) {
 
   return (autoriser('skeleditor','','',$qui)
-					AND autoriser('creerdans','squelette',dirname($id)));
+					AND autoriser('creerdans','squelette',dirname($file)));
 }
 
 /**
  * Autoriser a creer dans un dossier squelette
  *
  */
-function autoriser_squelette_creerdans_dist($faire, $type, $id, $qui, $opt) {
+function autoriser_squelette_creerdans_dist($faire, $type, $file, $qui, $opt) {
+	include_spip('inc/skeleditor');
 	$files_editable = skeleditor_files_editables();
 
   return (autoriser('skeleditor','','',$qui)
-					AND in_array($id,array_map('dirname',$files_editable)));
+					AND in_array($file,array_map('dirname',$files_editable)));
 }
 
 

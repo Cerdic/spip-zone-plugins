@@ -16,11 +16,11 @@ include_spip('inc/skeleditor');
 function exec_skeleditor_dist(){
   
   global $spip_lang_right;
-  $img_extension = explode(',',_SE_EXTENSIONS_IMG);
-  $listed_extension = explode(',',_SE_EXTENSIONS);
+  $img_extension = explode('|',_SE_EXTENSIONS_IMG);
+  $listed_extension = explode('|',_SE_EXTENSIONS);
 
   // check rights
-  if (!autoriser('webmestre')) {
+  if (!autoriser('skeleditor')) {
 		$commencer_page = charger_fonction('commencer_page', 'inc');
     echo $commencer_page(_T("skeleditor:editer_skel"),_T("skeleditor:editer_skel"),_T("skeleditor:editer_skel"));
 		echo _T('avis_non_acces_page');
@@ -32,24 +32,7 @@ function exec_skeleditor_dist(){
 	$files_editable = skeleditor_files_editables();
 	$path_list = array_keys(array_flip(array_map('dirname',$files_editable)));
 
-	// --------------------------------------------------------------------------- 
-	// operation ? 
-	// ---------------------------------------------------------------------------
-	$log = "";
-	$safe_flag = false;
-   
-  // GET request ?
-  $operation = "";
-	if (isset($_GET['f'])) {
-	    $file_name = $_GET['f'];
-	    
-
-  } else {
-      $file_name = "";  
-  }
   
-  
-
   // ---------------------------------------------------------------------------
   // HTML output 
   // ---------------------------------------------------------------------------
@@ -63,8 +46,12 @@ function exec_skeleditor_dist(){
   
 	$out .=  debut_droite('', true);
 
+	echo $out;
+
 	// something to do ?	
-	if ($file_name!="") { 
+	/*
+	 if ($file_name!="") {
+
        if ($safe_flag) {         
          $out .= "<div>"._T("skeleditor:fichier")."<strong>$file_name</strong> $log</div>\n"; // add extra infos on file:  size ? date ? ...
 				 // tools bar
@@ -102,8 +89,10 @@ function exec_skeleditor_dist(){
   } else {
       $out .= "<p>"._T("skeleditor:fichier_choix")."</p>\n";
   }
-  
+  */
+	
   // pied
-  echo $out, fin_gauche(), fin_page();
+	echo recuperer_fond('prive/editer/squelette',array('fichier'=>$_GET['f']));
+  echo fin_gauche(), fin_page();
 }
 ?>

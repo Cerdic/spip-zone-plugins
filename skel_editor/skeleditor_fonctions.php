@@ -245,21 +245,5 @@ function get_plugin_squelette() {
   return $plugin_squelette;
 }
 
-function parse_path($dir,$extensions){
-	$pattern = "\.(".implode("|",$extensions).")$";
-	$liste = preg_files($dir, $pattern);
-	return $liste;
-}
-
-// tri la liste des fichiers en placant ceux a la racine en premier
-function sort_directory_first($files,$root) {
-  $files_root = array();
-  $files_directory = array();
-  foreach($files as $file) {
-      if (dirname($file)."/" != $root) $files_directory[] = $file;
-                                  else $files_root[] = $file;
-  }
-  return array_merge($files_root,$files_directory);
-}
 
 ?>

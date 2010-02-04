@@ -2,7 +2,6 @@
 
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 
-//$GLOBALS['i18n_skeleditor_fr'] = array( ??
 $GLOBALS[$GLOBALS['idx_lang']] = array(
   // C
   'creer'=>'Create', 

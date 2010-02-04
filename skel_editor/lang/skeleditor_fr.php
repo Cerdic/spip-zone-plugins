@@ -2,7 +2,6 @@
 
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 
-//$GLOBALS['i18n_skeleditor_fr'] = array( ??
 $GLOBALS[$GLOBALS['idx_lang']] = array(
   // C
   'creer'=>'Cr&eacute;er', 
@@ -12,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   'editer_skel_debug' =>'Editer le squelette (mode debug)',
   'effacer'=>"effacer",
   'effacer_confirme'=>'Voulez vous vraiment effacer ce fichier ?',
+	'erreur_fichier_supprime' => 'Ce fichier a &eacute;t&eacute; supprim&eacute; pendant que vous l\'editiez. Copiez le contenu et creez un nouveau fichier si necessaire.',
   'erreur_ouverture_fichier'=>"erreur: impossible d\'ouvrir le fichier",
   'erreur_ecriture_fichier'=>"erreur: impossible d\'&eacute;crire dans le fichier",
   'erreur_edition_ecriture'=>"erreur: fichier non &eacute;ditable en &ecute;criture",
@@ -29,7 +29,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   'fichier_nouveau'=>'Nouveau fichier',
   'fichier_upload'=>'Uploader un fichier',
   'fichier_upload_ok'=>'Fichier upload&eacute; avec succ&egrave;s!',
-  
+
+	// L
+	'label_texte' => 'Contenu',
+
   // P
   'parseur_titre' => 'Analyseur des boucles',
   'parseur_contenu' => 'Contenu :',

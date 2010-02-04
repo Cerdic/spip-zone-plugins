@@ -7,8 +7,8 @@
  *
  */
 
-define('_SE_EXTENSIONS_IMG',"jpg,png,gif,ico,bmp");
-define('_SE_EXTENSIONS',_SE_EXTENSIONS_IMG.",htm,html,xml,svg,php,php3,php4,py,sh,sql,css,rdf,txt,nfo,log,js,as,csv,");
+define('_SE_EXTENSIONS_IMG',"jpg|png|gif|ico|bmp");
+define('_SE_EXTENSIONS',_SE_EXTENSIONS_IMG."|htm|html|xml|svg|php|php3|php4|py|sh|sql|css|rdf|txt|nfo|log|js|as|csv");
 
 /**
  * Lister les fichiers editables
@@ -22,10 +22,20 @@ function skeleditor_files_editables(){
 	$path = creer_chemin();
   $dossier_squelettes = reset($path);
 
-
-	$files_editable = parse_path($dossier_squelettes,explode(',',_SE_EXTENSIONS));
-	$files_editable = sort_directory_first($files_editable,$dossier_squelettes); // utile ?
+	$files_editable = preg_files($dossier_squelettes,'[.]('._SE_EXTENSIONS.')$');
+	#$files_editable = sort_directory_first($files_editable,$dossier_squelettes); // utile ?
 	return $files_editable;
 }
 
+
+// tri la liste des fichiers en placant ceux a la racine en premier
+function sort_directory_first($files,$root) {
+  $files_root = array();
+  $files_directory = array();
+  foreach($files as $file) {
+      if (dirname($file)."/" != $root) $files_directory[] = $file;
+                                  else $files_root[] = $file;
+  }
+  return array_merge($files_root,$files_directory);
+}
 ?>
