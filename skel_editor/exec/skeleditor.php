@@ -35,6 +35,8 @@ function exec_skeleditor_dist(){
 	$commencer_page = charger_fonction('commencer_page', 'inc');
   $out = $commencer_page(_T("skeleditor:editer_skel"),_T("skeleditor:editer_skel"),_T("skeleditor:editer_skel"));
   $filename = _request('f');
+	if (strncmp($filename, _DIR_RACINE, strlen(_DIR_RACINE)!==0))
+		$filename = _DIR_RACINE . $filename;
 
   $out .= gros_titre(_T('skeleditor:editer_skel'),'',false);
   $out .= debut_gauche('', true);
@@ -53,6 +55,10 @@ function exec_skeleditor_dist(){
 	echo $out;
 	
   // pied
+	if ($retour=_request('retour')){
+		$retour = url_absolue($retour);
+		echo "<a href='$retour'>"._T('retour').' '.$retour.'</a>';
+	}
 	echo recuperer_fond('prive/editer/squelette',array('fichier'=>$filename));
   echo fin_gauche(), fin_page();
 }

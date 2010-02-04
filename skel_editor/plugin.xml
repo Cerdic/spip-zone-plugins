@@ -37,6 +37,11 @@
       <nom>autoriser</nom>
       <inclure>inc/skeleditor_autoriser.php</inclure>
   </pipeline>
+  <pipeline>
+      <nom>affichage_final</nom>
+      <inclure>skeleditor_pipelines.php</inclure>
+  </pipeline>
+
   <!-- necessite -->
 	<necessite id="SPIP" version="[2.0.0;]" />
 </plugin>

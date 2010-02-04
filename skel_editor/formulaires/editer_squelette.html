@@ -19,7 +19,7 @@
 				<em class="infos">[(#ENV{date}|affdate)[ (#ENV{date}|heures)h][(#ENV{date}|minutes)]][- (#ENV{size}|taille_en_octets) ]</em>
 				<label for="text_area"><:skeleditor:label_texte:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{texte})</span>]
-				<textarea[ (#ENV{editable}|non)readonly='readonly'] name='texte' class='no_barre' id='text_area' cols='80' rows='50'>[(#ENV**{texte})]</textarea>
+				<textarea[ (#ENV{editable}|non)readonly='readonly'] name='texte' class='no_barre[ (#ENV{editable}|non)readonly]' id='text_area' cols='80' rows='50'>[(#ENV**{texte})]</textarea>
 	    </li>
 	  </ul>
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
