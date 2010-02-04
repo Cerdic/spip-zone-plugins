@@ -15,10 +15,8 @@ include_spip('inc/skeleditor');
 
 function exec_skeleditor_dist(){
   
-  $img_extension = explode('|',_SE_EXTENSIONS_IMG);
-
-  // check rights
-  if (!autoriser('skeleditor')) {
+	// check rights
+	if (!autoriser('skeleditor')) {
 		$commencer_page = charger_fonction('commencer_page', 'inc');
     echo $commencer_page(_T("skeleditor:editer_skel"),_T("skeleditor:editer_skel"),_T("skeleditor:editer_skel"));
 		echo _T('avis_non_acces_page');
@@ -44,7 +42,7 @@ function exec_skeleditor_dist(){
 	  ._T('skeleditor:skeleditor_description')
 	  ."<p>"._T("skeleditor:skeleditor_dossier")
 	  ." <strong>$dossier_squelettes</strong></p>"
-	  .skeleditor_afficher_dir_skel($files_editable,$filename,$img_extension)
+	  .skeleditor_afficher_dir_skel(skeleditor_path_editable(),$filename)
 	  .skeleditor_addfile($path_list)
 	  .skeleditor_uploadfile($path_list);
 	

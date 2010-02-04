@@ -28,51 +28,44 @@ function skeleditor_tree_open_close_dir(&$current,$target,$current_file){
 	// ouvrir les repertoires jusqu'a la cible
 	while($open = array_shift($ttarg)){
 		$chemin .= $open . "/";
-		if(!strstr($current_file,$chemin)){
-      $output .= bouton_block_depliable("<img src='"._DIR_PLUGIN_SKELEDITOR."/img_pack/folder.png' alt='directory' style='float:left;' /> $open",false,md5($chemin));			
-		}
-		else {
-      $output .= bouton_block_depliable("<img src='"._DIR_PLUGIN_SKELEDITOR."/img_pack/folder.png' alt='directory' style='float:left;' /> $open",false,md5($chemin));	
-		}
-		$output .= "<div style='line-height: 12px;border:1px solid #ededed;padding:4px;margin:4px 0;display:none;' id='".md5($chemin)."'>\n";
+		$closed = ((strncmp($current_file, ltrim($chemin,'/'), strlen(ltrim($chemin,'/')))==0)?"":" closed");
+
+		$output .= bouton_block_depliable("<img src='"._DIR_PLUGIN_SKELEDITOR."/img_pack/folder.png' alt='directory'/> $open",!$closed,md5($chemin));
+		$output .= "<div class='dir$closed' id='".md5($chemin)."'>\n";
 	}
 	$current = $target;
 	return $output;
 }
 
-function skeleditor_afficher_dir_skel($file_list,$current_file,$img_extension) {
+function skeleditor_afficher_dir_skel($path_base,$current_file) {
+	$file_list = skeleditor_files_editables($path_base);
+	$current_file = substr($current_file,strlen($path_base));
 
-  $output = "<div style='line-height: 12px;border:1px solid #ededed;padding:4px;margin:4px 0'>\n";  
-	$init_dir = $current_dir = dirname(reset($file_list));
+  $output = "<div id='arbo'><div class='dir'>\n";
+	$init_dir = $current_dir = "";
 	foreach($file_list as $file){
-		$dir = dirname($file);
-			
+		$dir = substr(dirname($file),strlen($path_base));
+		$file = substr($file,strlen($path_base));
+
 		if ($dir != $current_dir)
 			$output .= skeleditor_tree_open_close_dir($current_dir,$dir,$current_file);
-		if (!is_writable($dir))
-			$output .= "<div style='background:#3ff'>";
-		else
-			$output .= "<div>";
 
-		if ($file==$current_file)
-			$expose=" style='background:#ff6'";
-		else 
-			$expose="";
-		$path_parts = pathinfo($file);
-		$extension =  $path_parts['extension'];
-		$base = $path_parts['basename'];
+		$class="fichier";
+		if (!is_writable($path_base.$dir))
+			$class .= " readonly";
+
+		$class .= ($file==$current_file?" on":'');
 		
-		if (in_array($extension,$img_extension)) {
-			 $output .= "<img src='"._DIR_PLUGIN_SKELEDITOR."/img_pack/img.png' alt='image' /> ";
-			 $output .= "<a href='".generer_url_ecrire('skeleditor','f='.urlencode($file))."'$expose>$base</a>";
-		} else {
-		   $output .= "<img src='"._DIR_PLUGIN_SKELEDITOR."/img_pack/file.png' alt='file' /> ";
-			 $output .= "<a href='".generer_url_ecrire('skeleditor','f='.urlencode($file))."'$expose>$base</a>";
-		}
-		$output .= "</div>\n";
+		$icon = "file";
+		if (preg_match(',('._SE_EXTENSIONS_IMG.')$,',$file))
+			$icon = "img";
+		
+		$output .= "<a href='".generer_url_ecrire('skeleditor','f='.urlencode($path_base.$file))."' class='$class'>"
+						. "<img src='"._DIR_PLUGIN_SKELEDITOR."/img_pack/$icon.png' alt='$icon' /> "
+						.basename($file)."</a>";
 	}
 	$output .= skeleditor_tree_open_close_dir($current_dir,$init_dir,$current_file);
-  $output .= "</div>\n";
+  $output .= "</div></div>\n";
   return $output;
 }
 
