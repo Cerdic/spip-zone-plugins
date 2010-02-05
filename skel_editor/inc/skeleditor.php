@@ -27,11 +27,11 @@ function skeleditor_path_editable(){
 	$c = creer_chemin();
 	while (!$path AND count($c)){
 		$d = array_shift($c);
-		if (is_writable($d)
-			AND strncmp($d,_DIR_PLUGINS,strlen(_DIR_PLUGINS))!==0
+		if (strncmp($d,_DIR_PLUGINS,strlen(_DIR_PLUGINS))!==0
 			AND strncmp($d,_DIR_EXTENSIONS,strlen(_DIR_EXTENSIONS))!==0
 			AND strncmp($d,_DIR_RACINE.'prive/',strlen(_DIR_RACINE.'prive/'))!==0
-			AND strncmp($d,_DIR_RACINE,strlen(_DIR_RACINE))!==0
+			AND $d!==_DIR_RACINE
+			AND sous_repertoire($d,'',false,true)
 			)
 			$path = $d;
 	}
