@@ -30,6 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   'erreur_sansgene'=>'Erreur: action non autoris&eacute;e',
   'erreur_parsing'=>'Erreur fatale lors de l\'analyse des boucles',
   
+	'exlications_creer_dossier_squelettes' => 'Pour utiliser l\'editeur de squelettes, creez un dossier <b>squelettes/</b> &agrave; la racine de votre site.',
   // F
   'fichier'=>"fichier",
   'fichier_enregistre'=>"Le fichier a &eacute;t&eacute; enregistr&eacute;",

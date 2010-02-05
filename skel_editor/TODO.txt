@@ -2,21 +2,13 @@
 TODO plugin skel_editor
 ---------------------------------------------
 
-a faire:
+ajout de fonctionnalites:
 ----------------------------
-- portage SPIP 2
-... mise en page
-... renprendre les appels generer_url_xxxx
-... integrer autoriser ?
-... integrer formulaire via CVT
+- fonction renommer / deplacer -> A faire
 
-ajout de fonctionnalités:
-----------------------------
-- télécharger l'ensemble du squelette en .zip ?
-- fonction renommer / déplacer ?
-- documentation des boucles
-- preview "live"
-- integrer geishi ?
+- telecharger l'ensemble du squelette en .zip ?
+- documentation des boucles ?
+- preview "live" ?
 
 des commentaires ?
 http://www.spip-contrib.net/Plugin-editeur-de-squelettes-Skel

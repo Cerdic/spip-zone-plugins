@@ -17,7 +17,8 @@ function skeleditor_autoriser(){}
  *
  */
 function autoriser_skeleditor_dist($faire, $type, $id, $qui, $opt){
-  return (autoriser('webmestre','','',$qui));
+	include_spip('inc/skeleditor');
+  return (skeleditor_path_editable() AND autoriser('webmestre','','',$qui));
 }
 
 // autorisation des boutons

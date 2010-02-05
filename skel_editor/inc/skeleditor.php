@@ -16,13 +16,35 @@ define('_SE_EXTENSIONS',_SE_EXTENSIONS_IMG."|htm|html|xml|svg|php|php3|php4|py|s
  * @return string
  */
 function skeleditor_path_editable(){
+	static $path = null;
+	if (!is_null($path))
+		return $path;
 	// charger les plugin qui peuvent definir un squelette
 	if (@is_readable(_DIR_SESSIONS."charger_plugins_fonctions.php")){
 		// chargement optimise precompile
 		include_once(_DIR_SESSIONS."charger_plugins_fonctions.php");
 	}
-	$path = creer_chemin();
-  return reset($path);
+	$c = creer_chemin();
+	while (!$path AND count($c)){
+		$d = array_shift($c);
+		if (is_writable($d)
+			AND strncmp($d,_DIR_PLUGINS,strlen(_DIR_PLUGINS))!==0
+			AND strncmp($d,_DIR_EXTENSIONS,strlen(_DIR_EXTENSIONS))!==0
+			AND strncmp($d,_DIR_RACINE.'prive/',strlen(_DIR_RACINE.'prive/'))!==0
+			AND strncmp($d,_DIR_RACINE,strlen(_DIR_RACINE))!==0
+			)
+			$path = $d;
+	}
+
+	// si pas de dossier skel mais qu'on peut creer squelettes/ c'est ok
+	
+	if (!$path
+		AND !is_dir(_DIR_RACINE."squelettes")
+		AND sous_repertoire(_DIR_RACINE, "squelettes", false, true)){
+		$path = _DIR_RACINE."squelettes/";
+	}
+
+	return $path;
 }
 
 /**
@@ -31,6 +53,7 @@ function skeleditor_path_editable(){
 function skeleditor_files_editables($path=null){
 	if (is_null($path))
 		$path = skeleditor_path_editable();
+	if (!$path) return array();
 
 	$files_editable = preg_files($path,'[.]('._SE_EXTENSIONS.')$');
 	#$files_editable = sort_directory_first($files_editable,$dossier_squelettes); // utile ?
@@ -102,7 +125,7 @@ function skeleditor_cree_chemin($path_base,$file){
 	$chemin_ok = "";
 	while($chemin AND count($sous) AND $s = array_shift($sous)){
 		$chemin_ok = $chemin;
-		$chemin = sous_repertoire($chemin, $s);
+		$chemin = sous_repertoire($chemin, $s, false, true);
 	}
 
 	return array($chemin, $chemin?'':"$chemin_ok/$s");
