@@ -13,7 +13,7 @@
  * si oui applique _T()
  * si non applique typo()
  */
-function _TT($texte, $args=array()) {
+function _T_ou_typo($texte, $args=array()) {
 	
 	if (preg_match('/^\<:(.*?):\>$/',$texte,$match)) {
 		static $traduire=false ;
