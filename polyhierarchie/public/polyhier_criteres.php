@@ -46,7 +46,7 @@ function critere_enfants($idb, &$boucles, $crit, $tous=true) {
 	if ($tous!=='directs'
 	  AND in_array($boucle->type_requete,array('rubriques','articles'))){
 		$type = objet_type($boucle->type_requete);
-		$cond = "is_array(\$r=$arg)?sql_in('rl.id_parent',\$r):'rl.id_parent='.\$r)";
+		$cond = "is_array(\$r=$arg)?sql_in('rl.id_parent',\$r):'rl.id_parent='.\$r";
 		$sous = "sql_get_select('rl.id_objet','spip_rubriques_liens as rl',$cond.' AND objet=\'$type\'')";
 		$where[] = "array('IN', '".$boucle->id_table.".".$boucle->primary."', '('.$sous.')')";
 	}
