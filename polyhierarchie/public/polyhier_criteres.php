@@ -41,7 +41,7 @@ function critere_enfants($idb, &$boucles, $crit, $tous=true) {
 	$where = array();
 
 	if ($tous!=='indirects')
-		$where[] = array("'='", "'$mparent'", $arg);
+		$where[] = "is_array(\$r=$arg)?sql_in('$mparent',\$r):array('=', '$mparent', \$r)";
 
 	if ($tous!=='directs'
 	  AND in_array($boucle->type_requete,array('rubriques','articles'))){
@@ -89,7 +89,7 @@ function critere_parents($idb, &$boucles, $crit, $tous=true) {
 
 	if ($tous!=='indirects'){
 		$argp = kwote(calculer_argument_precedent($idb, $boucle_parent->type_requete == 'rubriques' ? 'id_parent' : 'id_rubrique', $boucles));
-		$where[] = array("'='", "'$primary'", $argp);
+		$where[] = "is_array(\$r=$argp)?sql_in('$primary',\$r):array('=', '$primary', \$r)";
 	}
 
 	if ($tous!=='directs'
