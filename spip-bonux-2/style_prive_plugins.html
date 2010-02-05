@@ -24,17 +24,16 @@
 
 h2.titrem { display: block; padding-top: 6px; padding-bottom: 4px; background-repeat: no-repeat;padding-[(#GET{left})]:16px;background-color: #GET{claire};font-size:14px;}
 
-
 /* listes */
-.liste_items {list-style:none;margin:1em 0;padding:0;border-top:1px solid #ddd;clear:both;}
-.liste_items .item {border-bottom:1px solid #ddd;padding:0.4em 0; font-size: 11px;overflow:hidden;clear:both;}
-.liste_items .item.odd {background-color:#eee;}
-.liste_items .item:hover,
-.liste_items .item.odd:hover {background-color:[#(#GET{claire}|couleur_eclaircir|couleur_eclaircir)];}
-.liste_items li.court:hover {background-color:#eee;}
-.liste_items .item.on {background-color:[#(#GET{claire}|couleur_eclaircir|couleur_eclaircir)];font-weight:normal;}
-.liste_items .item.on:hover {background-color:[#(#GET{claire}|couleur_eclaircir)];}
-.liste_items .item h3 {margin:0;}
+.liste_items,.liste-items {list-style:none;margin:1em 0;padding:0;border-top:1px solid #ddd;clear:both;}
+.liste_items .item,.liste-items .item  {border-bottom:1px solid #ddd;padding:0.4em 0; font-size: 11px;overflow:hidden;clear:both;}
+.liste_items .item.odd,.liste-items .item.odd  {background:#eee;}
+.liste_items .item:hover,.liste-items .item:hover,
+.liste_items .item.odd:hover,.liste-items .item.odd:hover {background-color:[#(#GET{claire}|couleur_eclaircir|couleur_eclaircir)];}
+.liste_items .court:hover,.liste-items .court:hover  {background-color:#eee;}
+.liste_items .item.on,.liste-items .item.on  {background-color:[#(#GET{claire}|couleur_eclaircir|couleur_eclaircir)];font-weight:normal;}
+.liste_items .item.on:hover,.liste-items .item.on:hover  {background-color:[#(#GET{claire}|couleur_eclaircir)];}
+.liste_items .item h3,.liste-items .item h3  {margin:0;}
 
 
 .liste_items .item .actions {float:none;margin:0;clear:both;text-align:#GET{right};}

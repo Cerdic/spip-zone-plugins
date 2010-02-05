@@ -699,7 +699,7 @@ td.message, a.message { background: url(#GET{chemin_img_pack}m_envoi[(#GET{rtl})
 /* exec=admin_plugin  2.1 */
 .liste-plugins.formulaire_spip {border:0;background:none;padding:0;}
 .liste-plugins .liens {padding:5px;background:#ddd;}
-.liste-plugins .liste-items .item {position:relative;padding-left:70px;}
+.liste-plugins .liste-items .item {position:relative;padding-left:70px;border-top:0;}
 .liste-plugins .liste-items .item.actif {background:#eee;}
 .liste-plugins .liste-items .item.actif:hover {background:#e8e8e8;}
 .liste-plugins .liste-items .item.on {background:[#(#GET{claire}|couleur_eclaircir)];}
@@ -711,11 +711,13 @@ td.message, a.message { background: url(#GET{chemin_img_pack}m_envoi[(#GET{rtl})
 .liste-plugins .liste-items .item .check input {margin:0;}
 .liste-plugins .liste-items .item .check label {display:none;}
 
+.liste-plugins .liste-items .item .download {float:#GET{left};margin-#GET{left}:-70px;position:relative;display:inline;}
+
 .liste-plugins .liste-items .item .nom {font-size:1.2em;display:inline;}
-.liste-plugins .liste-items .item .nom a {color:#444;}
+.liste-plugins .liste-items .item .nom a {color:#444;text-decoration:none;}
 .liste-plugins .liste-items .item.actif .nom a {color:#[(#GET{foncee}|couleur_foncer)];}
 
-.liste-plugins .liste-items .item .icon {position:absolute;top:3px;left:28px;}
+.liste-plugins .liste-items .item .icon {position:absolute;top:3px;left:28px;width:32px;height:32px;overflow:hidden;}
 .liste-plugins .liste-items .item .actions {float:#GET{right};visibility:hidden;}
 .liste-plugins .liste-items .item:hover .actions {visibility:visible;}
 
