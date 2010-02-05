@@ -225,4 +225,98 @@ function get_plugin_squelette() {
 }
 
 
+function skeleditor_codemirror($filename){
+	if (!$filename)
+		return "";
+
+	$infos = pathinfo($filename);
+	switch($infos['extension']){
+		case 'sh':
+		case 'txt':
+		case 'nfo':
+		case 'log':
+		case 'csv':
+			$parsers = null;
+			break;
+		case 'as':
+		case 'js':
+			$parsers = array("tokenizejavascript.js", "parsejavascript.js");
+			$css = array("css/jscolors.css");
+			// autoMatchParens: true
+			break;
+		case 'css':
+			$parsers = array("parsecss.js");
+			$css = array("css/csscolors.css");
+			break;
+		case 'xml':
+		case 'svg':
+		case 'rdf':
+			$parsers = array("parsexml.js");
+			$css = array("css/xmlcolors.css");
+			#continuousScanning: 500,
+			break;
+		case 'sql':
+			$parsers = array("../contrib/sql/js/parsesql.js");
+			$css = array("css/sqlcolors.css");
+			#textWrapping: false,
+			break;
+		case 'py':
+			$parsers = array("../contrib/python/js/parsepython.js");
+			$css = array("css/pythoncolors.css");
+      #  lineNumbers: true,
+      #  textWrapping: false,
+      #  indentUnit: 4,
+      #  parserConfig: {'pythonVersion': 2, 'strictErrors': true}
+			break;
+
+		case 'php':
+		case 'html':
+		case 'htm':
+		default:
+			$parsers = array("parsexml.js", "parsecss.js", "tokenizejavascript.js", "parsejavascript.js",
+                     "../contrib/php/js/tokenizephp.js", "../contrib/php/js/parsephp.js",
+                     "../contrib/php/js/parsephphtmlmixed.js");
+			$css = array("css/xmlcolors.css", "css/jscolors.css", "css/csscolors.css", "contrib/php/css/phpcolors.css");
+			break;
+	}
+
+	if (is_null($parsers))
+		return "";
+	$dir = _DIR_PLUGIN_SKELEDITOR.'codemirror/';
+	$dirjs = _DIR_PLUGIN_SKELEDITOR.'codemirror/js/';
+
+	$script = '<script src="'._DIR_PLUGIN_SKELEDITOR.'codemirror/js/codemirror.js" type="text/javascript"></script>
+<script type="text/javascript">
+var editor;
+function init_code_edit(){
+	if (jQuery("#code").is(":visible")){
+		editor = CodeMirror.fromTextArea(\'code\', {
+			height: "550px",
+			parserfile: ["'.implode('", "',$parsers).'"],
+			stylesheet: ["'.$dir.implode('", "'.$dir,$css).'"],
+			path: "'._DIR_PLUGIN_SKELEDITOR.'codemirror/js/",
+			continuousScanning: 500,
+			textWrapping: false,
+			lineNumbers: true
+		});
+	}
+}
+init_code_edit();
+</script>
+<style>
+.codewrap {border:1px solid #333;background:#fff;font-size:11px;}
+.CodeMirror-line-numbers {
+        width: 2.2em;
+        color: #aaa;
+        background-color: #eee;
+        text-align: right;
+        padding-right: .3em;
+        font-size: 10pt;
+        font-family: monospace;
+        padding-top: .4em;
+      }
+</style>
+';
+	return $script;
+}
 ?>
