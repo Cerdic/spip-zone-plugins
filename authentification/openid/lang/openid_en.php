@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// O
   'openid' => 'OpenID',
 	// U
-  'utilisateur_inconnu' => 'Unknown user'
+  'utilisateur_inconnu' => 'Unknown user',
 	// V
   'verif_refusee' => 'Authentication request cancelled',
 	
