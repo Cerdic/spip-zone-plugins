@@ -5,6 +5,7 @@
 	<version_base>0.1</version_base>
 	<etat>dev</etat>
 	<prefix>lm2</prefix>
+	<icon>images/lecteur_multimedia-128.png</icon>
 	<description>
 	Permet la lecture de sons et de vidéos avec SPIP par l'utilisation de la librairie [Soundmanager 2->http://www.schillmania.com/projects/soundmanager2/]
 	</description>
