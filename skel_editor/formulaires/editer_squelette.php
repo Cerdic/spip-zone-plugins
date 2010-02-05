@@ -15,7 +15,7 @@ function formulaires_editer_squelette_charger_dist($fichier){
 
 	$path = pathinfo($fichier);
 	if (!preg_match(",("._SE_EXTENSIONS.")$,ims",$fichier))
-		return false; // interdit de toucher a ce type de fichier
+		return false; // interdit de toucher a ce type de fichier ni meme de le voir
 
 	$valeurs = array('fichier'=>$fichier);
 

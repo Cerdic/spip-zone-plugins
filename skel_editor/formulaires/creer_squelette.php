@@ -26,27 +26,20 @@ function formulaires_creer_squelette_verifier_dist($path_base){
 	elseif (file_exists($path_base.$nom))
 		$erreurs['nom'] = _T('skeleditor:erreur_overwrite'); // fichier existe deja
 	else{
-		$chemin = $path_base;
-		$sous = explode('/',$nom);
-		$filename = array_pop($sous);
+		$filename = basename($nom);
 
 		if (!preg_match(",("._SE_EXTENSIONS.")$,", $filename)
 			OR preg_match(",("._SE_EXTENSIONS_IMG.")$,", $filename))
 			$erreurs['nom'] = _T('skeleditor:erreur_type_interdit');
 
 		else {
-			$chemin_ok = "";
-			while($chemin AND count($sous) AND $s = array_shift($sous)){
-				$chemin_ok = $chemin;
-				$chemin = sous_repertoire($chemin, $s);
-			}
+			list($chemin,$echec) = skeleditor_cree_chemin($path_base,$nom);
 			if (!$chemin)
-				$erreurs['nom'] = _T('skeleditor:erreur_creation_sous_dossier',array('dir'=>joli_repertoire("$chemin_ok/$s")));
+				$erreurs['nom'] = _T('skeleditor:erreur_creation_sous_dossier',array('dir'=>joli_repertoire("$echec")));
 		}
 	}
 	return $erreurs;
 }
-
 
 function formulaires_creer_squelette_traiter_dist($path_base){
 	$res = array();

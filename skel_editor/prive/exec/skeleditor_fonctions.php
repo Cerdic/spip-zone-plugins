@@ -43,10 +43,10 @@ function skeleditor_afficher_dir_skel($path_base,$current_file) {
 
 		$icon = "file";
 		if (preg_match(',('._SE_EXTENSIONS_IMG.')$,',$file))
-			$icon = "img";
+			$icon = "image";
 
 		$output .= "<a href='".generer_url_ecrire('skeleditor','f='.urlencode($path_base.$file))."' class='$class'>"
-						. "<img src='"._DIR_PLUGIN_SKELEDITOR."/img_pack/$icon.png' alt='$icon' /> "
+						. "<img src='"._DIR_PLUGIN_SKELEDITOR."/img_pack/se-$icon-16.png' alt='$icon' /> "
 						.basename($file)."</a>";
 	}
 	$output .= skeleditor_tree_open_close_dir($current_dir,$init_dir,$current_file);

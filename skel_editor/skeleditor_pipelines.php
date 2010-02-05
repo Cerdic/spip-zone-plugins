@@ -9,7 +9,7 @@
 
 function skeleditor_affichage_final($texte){
 	if ($GLOBALS['var_inclure']){
-		$url = generer_url_ecrire('skeleditor','retour='.parametre_url('../'.self(),'var_mode','inclure').'&f=');
+		$url = generer_url_ecrire('skeleditor','retour='.parametre_url(self(),'var_mode','inclure').'&f=');
 		$texte .= "<script>jQuery(function(){jQuery('.inclure_blocs h6:first-child').each(function(){
 			jQuery(this).html(\"<a href='$url\"+jQuery(this).html()+\"'>\"+jQuery(this).html()+'</a>');
 		})});</script>";

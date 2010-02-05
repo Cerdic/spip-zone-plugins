@@ -4,7 +4,10 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
   // C
-  'creer'=>'Cr&eacute;er', 
+  'creer'=>'Cr&eacute;er',
+
+	'copy_comment' => '  Copie du @date@ par @nom@
+  Fichier original @source@',
   
   // E  
   'editer_skel'=>'Editer le squelette',
