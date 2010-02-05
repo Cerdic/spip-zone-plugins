@@ -67,12 +67,14 @@ function autoriser_squelette_creer_dist($faire, $type, $file, $qui, $opt) {
  * Autoriser a creer dans un dossier squelette
  *
  */
-function autoriser_squelette_creerdans_dist($faire, $type, $file, $qui, $opt) {
+function autoriser_squelette_creerdans_dist($faire, $type, $path, $qui, $opt) {
 	include_spip('inc/skeleditor');
-	$files_editable = skeleditor_files_editables();
-
+	$path = rtrim($path,'/');
+	$path_editable = skeleditor_path_editable();
+	$files_editable = skeleditor_files_editables($path_editable);
+	
   return (autoriser('skeleditor','','',$qui)
-					AND in_array($file,array_map('dirname',$files_editable)));
+					AND ($path==rtrim($path_editable,'/') OR in_array($path,array_map('dirname',$files_editable))));
 }
 
 

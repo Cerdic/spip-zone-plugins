@@ -14,13 +14,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_fichier_supprime' => 'Ce fichier a &eacute;t&eacute; supprim&eacute; pendant que vous l\'editiez. Copiez le contenu et creez un nouveau fichier si necessaire.',
 	'erreur_fichier_modif_coucourante' => 'Ce fichier a &eacute;t&eacute; modifi&eacute; pendant votre modification. Voici la nouvelle version&nbsp;:',
 	'erreur_fichier_modif_coucourante_votre_version' => 'Fusionnez avec votre version et enregistrez&nbsp;:',
+	'explications_nom_fichier_chemin' => 'Vous pouvez indiquer le chemin complet pour placer le fichier dans un sous dossier (ex "modeles/document.html")',
+  'erreur_overwrite'=>"Impossible, ce fichier existe d&eacute;j&agrave;",
+	'erreur_type_interdit' => 'Ce type de fichier n\'est pas autoris&eacute;',
+	'erreur_creation_sous_dossier' => 'Impossible de cr&eacute;er le sous dossier @dir@',
 
 	'erreur_ouverture_fichier'=>"erreur: impossible d\'ouvrir le fichier",
   'erreur_ecriture_fichier'=>"Impossible d\'&eacute;crire dans le fichier",
   'erreur_edition_ecriture'=>"erreur: fichier non &eacute;ditable en &ecute;criture",
   'erreur_ouvert_ecrit'=>"Erreur: impossible d'ouvrir ou d'&eacute;diter ce fichier.",
   'erreur_droits'=>"erreur: impossible de cr&eacute;er le fichier. V&eacute;rifier les droits en &eacute;critutre de votre r&eacute;pertoire squelette",
-  'erreur_overwrite'=>"erreur: ce fichier existe d&eacute;j&agrave;",
   'erreur_sansgene'=>'Erreur: action non autoris&eacute;e',
   'erreur_parsing'=>'Erreur fatale lors de l\'analyse des boucles',
   
@@ -36,7 +39,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   'fichier_upload_ok'=>'Fichier upload&eacute; avec succ&egrave;s!',
 
 	// L
+	'label_creer_fichier' => 'Cr&eacute;er un fichier',
 	'label_texte' => 'Contenu',
+	'label_nom_squelette' => 'Nom',
 
   // P
   'parseur_titre' => 'Analyseur des boucles',

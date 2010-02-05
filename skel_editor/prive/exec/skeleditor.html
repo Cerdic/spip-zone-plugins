@@ -1,0 +1,32 @@
+[(#REM)
+
+  Squelette
+  (c) 2009 xxx
+  Distribue sous licence GPL
+
+]
+#SET{file,#ENV{f}}
+[(#GET{file}|strncmp{#EVAL{_DIR_RACINE},#EVAL{_DIR_RACINE}|strlen}|=={0}|non)
+#SET{file,#EVAL{_DIR_RACINE}|concat{#GET{file}}}
+]
+
+<h3>[(#GET{file}|substr{#EVAL{_DIR_RACINE}|strlen})]</h3>
+<div class="ajax">
+#FORMULAIRE_EDITER_SQUELETTE{#GET{file}}
+</div>
+#SET{path,#REM|skeleditor_dossier}
+<!--#navigation-->
+<h1><:skeleditor:editer_skel:></h1>
+<div class="cadre cadre-info">
+<:skeleditor:skeleditor_description:>
+<p><strong>[(#GET{path}|joli_repertoire)]</strong></p>
+[(#GET{path}|skeleditor_afficher_dir_skel{#GET{file}})]
+</div>
+
+<div class="ajax">
+#FORMULAIRE_CREER_SQUELETTE{#GET{path}}
+</div>
+
+#FORMULAIRE_UPLOAD_SQUELETTE
+
+<!--/#navigation-->
