@@ -1,68 +1,14 @@
-<!-- descriptif=
-<h4>
+<!-- descriptif=<h4>
 Ici vous pouvez configurer le plugin Crayons.
 </h4>
 <a href="http://www.spip-contrib.net/Les-Crayons" class="spip_out">Documentation sur contrib</a>
 -->
 
-<!-- titre=Les Crayons-->
-<!-- icone=images/crayon20.png-->
+<!-- titre=Les Crayons -->
+<!-- icone=images/crayon-24.png -->
+<!-- logo=images/crayon-128.png -->
 
 #CACHE{0}
-
-<form method="post" action="#SELF">[<div>(#ENV{_cfg_}|form_hidden)</div>]
-
-<fieldset><legend>Barre typographique</legend>
-<p>
-<label><input type="checkbox" name="barretypo"[ checked="(#ENV{barretypo}|!={''}|?{'checked'})"] class="fondl" />
-Activer la barre typo dans les crayons.</label>
-</p>
-</fieldset>
-
-
-<fieldset><legend><:crayons:messages:></legend>
-<p>
-<label><input type="checkbox" name="msgNoChange" [checked="(#ENV{msgNoChange}|!={''}|?{'checked'})"] class="fondl" />
-Si pas de changement</label>
-<br />
-<label><input type="checkbox" name="msgAbandon" [checked="(#ENV{msgAbandon}|!={''}|?{'checked'})"] class="fondl" />
-Sur abandon</label>
-</p>
-</fieldset>
-
-<fieldset><legend><:crayons:effets:></legend>
-<p>
-<label><input type="checkbox" name="filet" [checked="(#ENV{filet}|!={''}|?{'checked'})"] class="fondl" /> Filet</label>
-<br />
-<label><input type="checkbox" name="yellow_fade" [checked="(#ENV{yellow_fade}|!={''}|?{'checked'})"] class="fondl" />
-Fade</label>
-
-<br />
-<label>
-<input type="checkbox" name="clickhide" [checked="(#ENV{clickhide}|!={''}|?{'checked'})"] class="fondl" />
-Un clic en-dehors masque les crayons
-</label>
-</p>
-</fieldset>
-
-<fieldset><legend>Pour le crayon &#171;&nbsp;logo&nbsp;&#187;</legend>
-<label>R&#233;duire le logo s'il d&#233;passe la taille maximale de&nbsp;:</label>  <label><input type="text" name="reduire_logo" value="[(#ENV{reduire_logo}|intval)]" size="3" class="fondl" />&nbsp;pixels (0 = jamais).</label>
-</fieldset>
-
-<fieldset><legend>(Experimental) Editer l'espace privé</legend>
-<p>
-<label><input type="checkbox" name="espaceprive"[ checked="(#ENV{espaceprive}|!={''}|?{'checked'})"] class="fondl" />
-Activer crayons pour la partie privée.</label>
-<br/>
-<label>Pages autorisées à la modification (?exec=...) : (, pour séparer les exec).<br /><input type="text" name="exec_autorise" value="[(#ENV{exec_autorise})]" size="80" class="fondl" /></label>
-</p>
-</fieldset>
-
-
-<div>
-	<input type="submit" name="_cfg_ok" value="<:oK:>" class="fondo" />
-	<input type="reset" value="<:reset:>" class="fondo" />
-	<input type="submit" name="_cfg_delete" value="<:supprimer:>" class="fondo" />
+<div class="ajax">
+#FORMULAIRE_CONFIG_CRAYONS
 </div>
-</form>
-
