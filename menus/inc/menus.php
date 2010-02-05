@@ -69,10 +69,10 @@ function menus_charger_infos($type, $info=""){
 		if ($xml = spip_xml_load($fichier, false)){
 			if (count($xml['entree'])){
 				$xml = reset($xml['entree']);
-				$entree['nom'] = _TT(spip_xml_aplatit($xml['nom']));
+				$entree['nom'] = _T_ou_typo(spip_xml_aplatit($xml['nom']));
 				$entree['rang'] = intval(trim(spip_xml_aplatit($xml['rang'])));
 				$entree['rang'] = ($entree['rang'] ? $entree['rang'] : 1000);
-				$entree['description'] = isset($xml['description']) ? _TT(spip_xml_aplatit($xml['description'])) : '';
+				$entree['description'] = isset($xml['description']) ? _T_ou_typo(spip_xml_aplatit($xml['description'])) : '';
 				$entree['icone'] = isset($xml['icone']) ? find_in_path(reset($xml['icone'])) : '';
 				$entree['refuser_sous_menu'] = isset($xml['refuser_sous_menu']);
 				// Décomposition des paramètres
