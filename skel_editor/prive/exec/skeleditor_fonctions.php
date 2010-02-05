@@ -225,7 +225,7 @@ function get_plugin_squelette() {
 }
 
 
-function skeleditor_codemirror($filename){
+function skeleditor_codemirror($filename,$editable=true){
 	if (!$filename)
 		return "";
 
@@ -282,6 +282,11 @@ function skeleditor_codemirror($filename){
 
 	if (is_null($parsers))
 		return "";
+
+	$readonly = "";
+	if (!$editable)
+		$readonly = "readonly: true,\n";
+
 	$dir = _DIR_PLUGIN_SKELEDITOR.'codemirror/';
 	$dirjs = _DIR_PLUGIN_SKELEDITOR.'codemirror/js/';
 
@@ -297,6 +302,7 @@ function init_code_edit(){
 			path: "'._DIR_PLUGIN_SKELEDITOR.'codemirror/js/",
 			continuousScanning: 500,
 			textWrapping: false,
+			readOnly: jQuery("#code").attr("readonly"),
 			lineNumbers: true
 		});
 	}
@@ -305,6 +311,7 @@ init_code_edit();
 </script>
 <style>
 .codewrap {border:1px solid #333;background:#fff;font-size:11px;}
+.codewrap.readonly {background:#ddd;}
 .CodeMirror-line-numbers {
         width: 2.2em;
         color: #aaa;
