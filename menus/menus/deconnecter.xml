@@ -1,7 +1,7 @@
 <entree>
-	<nom>menus:nom_menu_deconnecter</nom>
+	<nom><:menus:nom_menu_deconnecter:></nom>
 	<rang>21</rang>
-	<description>menus:description_menu_deconnecter</description>
+	<description><:menus:description_menu_deconnecter:></description>
 	<icone>images/menus_logout.png</icone>
 	<parametre nom="titre" label="menus:entree_titre" />
 	<parametre nom="css" label="menus:entree_css" />

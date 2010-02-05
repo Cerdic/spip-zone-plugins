@@ -1,7 +1,7 @@
 <entree>
-	<nom>menus:nom_menu_page_speciale</nom>
+	<nom><:menus:nom_menu_page_speciale:></nom>
 	<rang>10</rang>
-	<description>menus:description_menu_page_speciale</description>
+	<description><:menus:description_menu_page_speciale:></description>
 	<icone>images/menus_page_speciale.png</icone>
 	<parametre nom="titre" label="menus:entree_titre" obligatoire="oui" />
 	<parametre nom="nom" label="menus:entree_page" obligatoire="oui" />

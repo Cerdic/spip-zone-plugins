@@ -1,7 +1,7 @@
 <entree>
-	<nom>menus:nom_menu_groupes_mots</nom>
+	<nom><:menus:nom_menu_groupes_mots:></nom>
 	<rang>05</rang>
-	<description>menus:description_menu_groupes_mots</description>
+	<description><:menus:description_menu_groupes_mots:></description>
 	<icone>images/menus_groupes_mots.png</icone>
 	<parametre nom="id_groupe" label="menus:entree_id_groupe" />
 	<parametre nom="tri_num" label="menus:entree_tri_num" />

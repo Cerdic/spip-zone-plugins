@@ -1,7 +1,7 @@
 <entree>
-	<nom>menus:nom_menu_objet</nom>
+	<nom><:menus:nom_menu_objet:></nom>
 	<rang>02</rang>
-	<description>menus:description_menu_objet</description>
+	<description><:menus:description_menu_objet:></description>
 	<icone>images/menus_objet.png</icone>
 	<parametre nom="type_objet" label="menus:entree_type_objet" obligatoire="oui" />
 	<parametre nom="id_objet" label="menus:entree_id_objet" obligatoire="oui" />

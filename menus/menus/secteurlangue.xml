@@ -1,6 +1,6 @@
 <entree>
-	<nom>menus:nom_menu_secteurlangue</nom>
-	<description>menus:description_menu_secteurlangue</description>
+	<nom><:menus:nom_menu_secteurlangue:></nom>
+	<description><:menus:description_menu_secteurlangue:></description>
 	<icone>images/menus_secteurlangue.png</icone>
 	<parametre nom="niveau" label="menus:entree_niveau" />
 	<parametre nom="tri_num" label="menus:entree_tri_num" />
