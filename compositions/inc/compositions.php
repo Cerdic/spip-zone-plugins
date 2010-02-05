@@ -43,8 +43,8 @@ function compositions_charger_infos($nom,$info=""){
 		if ($xml = spip_xml_load($nom,false)){
 			if (count($xml['composition'])){
 				$xml = reset($xml['composition']);
-				$composition['nom'] = _TT(spip_xml_aplatit($xml['nom']));
-				$composition['description'] = isset($xml['description'])?_TT(spip_xml_aplatit($xml['description'])):'';
+				$composition['nom'] = _T_ou_typo(spip_xml_aplatit($xml['nom']));
+				$composition['description'] = isset($xml['description'])?_T_ou_typo(spip_xml_aplatit($xml['description'])):'';
 				$composition['icon'] = isset($xml['icon'])?find_in_path(reset($xml['icon'])):'';
 				$composition['configuration'] = isset($xml['configuration'])?spip_xml_aplatit($xml['configuration']):'';
 			}
