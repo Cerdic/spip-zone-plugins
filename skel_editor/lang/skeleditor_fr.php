@@ -17,8 +17,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_fichier_supprime' => 'Ce fichier a &eacute;t&eacute; supprim&eacute; pendant que vous l\'editiez. Copiez le contenu et creez un nouveau fichier si necessaire.',
 	'erreur_fichier_modif_coucourante' => 'Ce fichier a &eacute;t&eacute; modifi&eacute; pendant votre modification. Voici la nouvelle version&nbsp;:',
 	'erreur_fichier_modif_coucourante_votre_version' => 'Fusionnez avec votre version et enregistrez&nbsp;:',
-	'explications_nom_fichier_chemin' => 'Vous pouvez indiquer le chemin complet pour placer le fichier dans un sous dossier (ex "modeles/document.html")',
-  'erreur_overwrite'=>"Impossible, ce fichier existe d&eacute;j&agrave;",
+
+	'erreur_overwrite'=>"Impossible, ce fichier existe d&eacute;j&agrave;",
 	'erreur_type_interdit' => 'Ce type de fichier n\'est pas autoris&eacute;',
 	'erreur_creation_sous_dossier' => 'Impossible de cr&eacute;er le sous dossier @dir@',
 
@@ -30,6 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   'erreur_sansgene'=>'Erreur: action non autoris&eacute;e',
   'erreur_parsing'=>'Erreur fatale lors de l\'analyse des boucles',
   
+	'explications_filename_fichier_chemin' => 'Vous pouvez indiquer le chemin complet pour placer le fichier dans un sous dossier (ex "modeles/document.html")',
 	'exlications_creer_dossier_squelettes' => 'Pour utiliser l\'editeur de squelettes, creez un dossier <b>squelettes/</b> &agrave; la racine de votre site.',
   // F
   'fichier'=>"fichier",
@@ -45,7 +46,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_creer_fichier' => 'Cr&eacute;er un fichier',
 	'label_code' => 'Contenu',
-	'label_nom_squelette' => 'Nom',
+	'label_filename_squelette' => 'Nom',
+	'label_renommer_squelette' => 'Renommer ou d&eacute;placer',
 
   // P
   'parseur_titre' => 'Analyseur des boucles',

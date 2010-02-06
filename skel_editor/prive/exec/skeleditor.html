@@ -11,13 +11,14 @@
 	[(#GET{file}|strlen|et{#GET{file}|strncmp{#EVAL{_DIR_RACINE},#EVAL{_DIR_RACINE}|strlen}|=={0}|non})
 	#SET{file,#EVAL{_DIR_RACINE}|concat{#GET{file}}}
 	]
+	#SET{path,#REM|skeleditor_dossier}
+	
 	<h3>[(#GET{file}|substr{#EVAL{_DIR_RACINE}|strlen})]</h3>
 	[<a href="(#ENV{retour,''})"><:retour:> [(#ENV{retour}|joli_repertoire)]</a>]
 	<div class="noajax">
-	#FORMULAIRE_EDITER_SQUELETTE{#GET{file}}
+	#FORMULAIRE_EDITER_SQUELETTE{#GET{path},#GET{file}}
 	</div>
 	[(#GET{file}|skeleditor_codemirror)]
-	#SET{path,#REM|skeleditor_dossier}
 
 	<!--#navigation-->
 	<h1><:skeleditor:editer_skel:></h1>

@@ -24,6 +24,13 @@
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{code})</span>]
 				<div class="codewrap[ (#ENV{editable}|non)readonly]"><textarea[ (#ENV{editable}|non)readonly='readonly'] name='code' class='no_barre[ (#ENV{editable}|non)readonly]' id='code' cols='80' rows='50'>[(#ENV**{code})]</textarea></div>
 	    </li>
+			[ (#ENV{editable}|oui)
+	    <li class="editer_filename[ (#ENV**{erreurs}|table_valeur{filename}|oui)erreur]">
+				<label for="text_area"><:skeleditor:label_renommer_squelette:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{filename})</span>]
+				<input type="text" name='filename' class='text' id='filename' value="#ENV{filename}" />
+				<p class="explication"><:skeleditor:explications_filename_fichier_chemin:></p>
+	    </li>]
 	  </ul>
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 	  <!--extra-->

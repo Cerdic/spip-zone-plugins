@@ -117,6 +117,27 @@ function skeleditor_tree_open_close_dir(&$current,$target,$current_file){
 	return $output;
 }
 
+function skeleditor_verifie_nouveau_nom($path_base,$filename){
+	$erreur = "";
+	if (strpos($filename,'../')!==FALSE){
+		$erreurs = _T('skeleditor:erreur_sansgene'); // fichier existe deja
+	}
+	elseif (file_exists($path_base.$filename))
+		$erreurs = _T('skeleditor:erreur_overwrite'); // fichier existe deja
+	else{
+		if (!preg_match(",("._SE_EXTENSIONS.")$,", $filename)
+			OR preg_match(",("._SE_EXTENSIONS_IMG.")$,", $filename))
+			$erreurs = _T('skeleditor:erreur_type_interdit');
+
+		else {
+			list($chemin,$echec) = skeleditor_cree_chemin($path_base,$filename);
+			if (!$chemin)
+				$erreurs = _T('skeleditor:erreur_creation_sous_dossier',array('dir'=>joli_repertoire("$echec")));
+		}
+	}
+	return $erreur;
+}
+
 function skeleditor_cree_chemin($path_base,$file){
 	$chemin = $path_base;
 	$sous = explode('/',$file);

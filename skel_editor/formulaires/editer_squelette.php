@@ -9,7 +9,7 @@
 
 include_spip('inc/skeleditor');
 
-function formulaires_editer_squelette_charger_dist($fichier){
+function formulaires_editer_squelette_charger_dist($path_base, $fichier){
 
 	if (!$fichier OR !file_exists($fichier)) return false; // rien a editer
 
@@ -23,7 +23,8 @@ function formulaires_editer_squelette_charger_dist($fichier){
 
 	$valeurs['date'] = filemtime($fichier);
 	$valeurs['size'] = filesize($fichier);
-	#$valeurs['_highlight'] = skeleditor_codemirror($fichier);
+
+	$valeurs['filename'] = substr($fichier,strlen($path_base)); // pour le renommage
 	
 	include_spip('inc/autoriser');
 	$valeurs['editable'] = autoriser('modifier','squelette',$fichier);
@@ -31,7 +32,7 @@ function formulaires_editer_squelette_charger_dist($fichier){
 	return $valeurs;
 }
 
-function formulaires_editer_squelette_verifier_dist($fichier){
+function formulaires_editer_squelette_verifier_dist($path_base, $fichier){
 	$erreurs = array();
 	
 	if (!file_exists($fichier))
@@ -51,13 +52,19 @@ function formulaires_editer_squelette_verifier_dist($fichier){
 						._T('skeleditor:erreur_fichier_modif_coucourante_votre_version');
 			}
 		}
+		if ($filename = _request('filename') AND $filename!=substr($fichier,strlen($path_base))){
+			if (!autoriser('modifier','squelette',$fichier))
+				$erreurs['filename'] = _T('erreur_sansgene');
+			elseif ($e=skeleditor_verifie_nouveau_nom($path_base,$filename))
+				$erreurs['filename'] = $e;
+		}
 	}
 
 	return $erreurs;
 }
 
 
-function formulaires_editer_squelette_traiter_dist($fichier){
+function formulaires_editer_squelette_traiter_dist($path_base, $fichier){
 	$res = array();
 	list($content,$type,$ctrl) = skeleditor_get_file_content_type_ctrl($fichier);
 	if ($type=='txt'){
@@ -65,6 +72,14 @@ function formulaires_editer_squelette_traiter_dist($fichier){
 			$res['message_ok'] = _T('skeleditor:fichier_enregistre');
 		else
 			$res['message_erreur'] = _T('skeleditor:erreur_ecriture_fichier');
+	}
+	if (!isset($res['message_erreur'])
+		AND $filename=_request('filename')
+		AND $filename!=substr($fichier,strlen($path_base))
+		AND autoriser('modifier','squelette',$fichier)){
+		if (rename($fichier, $path_base.$filename)){
+			$res['redirect'] = parametre_url(self(),'f',$path_base.$filename);
+		}
 	}
 
 	return $res;

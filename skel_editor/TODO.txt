@@ -4,8 +4,6 @@ TODO plugin skel_editor
 
 ajout de fonctionnalites:
 ----------------------------
-- fonction renommer / deplacer -> A faire
-
 - telecharger l'ensemble du squelette en .zip ?
 - documentation des boucles ?
 - preview "live" ?

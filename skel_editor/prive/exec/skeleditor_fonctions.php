@@ -319,9 +319,14 @@ init_code_edit();
         text-align: right;
         padding-right: .3em;
         font-size: 10pt;
-        font-family: monospace;
+        font-family: monospace !important;
         padding-top: .4em;
+				line-height:15px;
       }
+.CodeMirror-line-numbers *{
+		font-family: monospace !important;
+}
+
 </style>
 ';
 	return $script;
