@@ -62,7 +62,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   'repertoire'=>'r&eacute;pertoire',
   
   // S
-	'squelette' => 'Squelette',
+	'squelettes' => 'Squelettes&amp;CSS',
   'sauver'=>'Sauver', 
   'skeleditor_description'=>"Permet d'&eacute;diter les fichiers du squelette en cours",
   'skeleditor_dossier'=>"dossier squelette: ",

@@ -24,6 +24,7 @@
 	</description>
 	<lien>http://www.spip-contrib.net/Editeur-de-squelettes-Skel-editor</lien>
 	<prefix>skeleditor</prefix>
+	<options>skeleditor_pipelines.php</options>
 	
 	<!-- bouton prive -->
   <bouton id="skeleditor" parent="naviguer">
@@ -39,7 +40,6 @@
   </pipeline>
   <pipeline>
       <nom>affichage_final</nom>
-      <inclure>skeleditor_pipelines.php</inclure>
   </pipeline>
 
   <!-- necessite -->
