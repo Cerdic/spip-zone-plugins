@@ -19,7 +19,10 @@ function action_skeleditor_new_from_dist(){
 	// permet aussi de s'assurer que le fichier qu'on copie provient uniquement
 	// du path, et pas d'autre part sur le serveur
 	$file = "";
-	foreach(creer_chemin() as $dir) {
+	$spip_path = creer_chemin();
+	$spip_path = array_diff($spip_path, array(_DIR_RACINE));
+	$spip_path[] = _DIR_RACINE;
+	foreach($spip_path as $dir) {
 		if (strncmp($arg,$dir,strlen($dir))==0){
 			$file = substr($arg,strlen($dir));
 			break;
