@@ -13,6 +13,7 @@ _ Ce plugin fonctionne sur les squelettes disposant de la balise <code>#INSERT_H
 	</description>
 	<lien>http://www.spip-contrib.net/FancyBox</lien>
 	<prefix>fancybox</prefix>
+	<icon>images/fancybox-32.png</icon>
 	<necessite id="SPIP" version="[2.0;]" />
 	<utilise id="cfg" version="[1.12;]" />
 	<pipeline>
