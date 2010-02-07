@@ -42,11 +42,10 @@ function type_urls_URL_objet_exec() {
 	include_spip('base/abstract_sql');
 	//  Recuperer une URL propre correspondant a l'objet.
 	$row = sql_fetsel("U.url, O.$champ_titre", "$table AS O LEFT JOIN spip_urls AS U ON (U.type='$type' AND U.id_objet=O.$col_id)", "O.$col_id=$id_objet", '', 'U.date DESC', 1);
-
 	if (!$row) return false; # Quand $id_objet n'est pas un numero connu
 	list($champ_titre,) = explode(',', $champ_titre, 2);
 	// Calcul de l'URL complete
-	$url = generer_url_entite($id_objet, $type, '', '', true);
+	$url = str_replace('.././','../',generer_url_entite($id_objet, $type, '', '', true));
 	$row2 = !strlen($url2 = $row['url'])
 		// si l'URL n'etait pas presente en base, maintenant elle l'est !
 		?sql_fetsel("url", "spip_urls", "id_objet=$id_objet AND type='$type'", '', 'date DESC', 1)
@@ -78,6 +77,34 @@ function type_urls_URL_objet_191_exec() {
 	echo _request('format')=='iframe'
 		?"<span style='font-family:Verdana,Arial,Sans,sans-serif; font-size:10px;'>[<a href='../$url' title='$url' target='_blank'>"._T('couteau:urls_propres_lien').'</a>]</span>'
 		:$url_1.'||'.charset2unicode($titre).'||'.$url.'||'.$type_urls.'||'.$url_2;
+}
+
+// Fonction appelee par exec/action_rapide : ?exec=action_rapide&arg=type_urls|liste_URLS (pipe obligatoire)
+// Renvoie la liste des URLs d'un objet (cas SPIP >= 2.0)
+function type_urls_liste_URLS_exec() {
+	global $type_urls;
+	$res = $id = '';
+	// chercher dans la table des URLS
+	include_spip('base/abstract_sql');
+	if($s=_request('suppr')) {
+		$s = unserialize(base64_decode($s));
+		sql_delete("spip_urls", $a="id_objet=$s[id_objet] AND type=".sql_quote($s['type']).' AND date='.sql_quote($s['date']).' AND url='.sql_quote($s['url']));
+	}
+	//  Recuperer une URL propre correspondant a l'objet.
+	$row = sql_allfetsel('*', 'spip_urls', '', '', 'type, id_objet, date DESC');
+	$res .= _T('couteau:urls_propres_objet')."\n\n|{{"._T('couteau:urls_propres_titre').'}}|<';
+	$self = str_replace('|', urlencode('|'), self());
+	$fin = '" title='._T('lien_supprimer').'>x</a>';
+	foreach($row as $r) {
+		$id2 = "$r[type] #$r[id_objet]";
+		$s = parametre_url($self, 'suppr', base64_encode(serialize($r)));
+		$url = generer_url_entite($r['id_objet'], $r['type'], '', '', true);
+		$res .= ($id2==$id?"\n_ $r[url]":"|\n|[{$id2}->$url]|$r[url]").' <a href="'.$s.$fin;
+		$id = $id2;
+	}
+	include_spip('inc/texte');
+	include_spip('inc/presentation');
+	echo '<html><head>'.envoi_link(_T('couteau:urls_propres_titre')).'</head><body style="text-align:center">'.propre($res."|\n").'</body></html>';
 }
 
 // fonction {$outil}_{$arg}_action() appelee par action/action_rapide.php

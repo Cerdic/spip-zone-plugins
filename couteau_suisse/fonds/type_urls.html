@@ -61,7 +61,8 @@ function ar_load() {
 [(#SET{cpt, #VAL{couteauprive:urls_base_vide}|_T})]
 <BOUCLE_compte(URLS) />
 [(#TOTAL_BOUCLE|>{0}|oui)
- [(#SET{cpt, #VAL{couteauprive:urls_base_total}|_T|replace{@nb@,#TOTAL_BOUCLE}})]
+ [(#SET{total, #VAL{<a href="}|concat{#URL_ECRIRE{action_rapide,arg=type_urls|liste_URLS&script=foo},'" target="_blank">',#TOTAL_BOUCLE,'</a>'}})]
+ [(#SET{cpt, #VAL{couteauprive:urls_base_total}|_T|replace{@nb@,#GET{total}}})]
 ]
 <//B_compte>
 
