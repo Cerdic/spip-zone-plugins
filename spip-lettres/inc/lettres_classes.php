@@ -17,7 +17,7 @@
 	include_spip('public/assembler');
 	include_spip('inc/distant');
 	include_spip('inc/rubriques');
-
+	include_spip('base/lettres');
 
 	/**
 	 * abonne - classe pour la gestion des abonnes
@@ -121,6 +121,7 @@
 													'format' => $this->format
 													)
 												);
+
 				if (!intval($this->id_objet))
 					$this->id_objet = $this->id_abonne;
 				sql_updateq('spip_abonnes', array('id_objet' => intval($this->id_objet)), 'id_abonne='.intval($this->id_abonne));
