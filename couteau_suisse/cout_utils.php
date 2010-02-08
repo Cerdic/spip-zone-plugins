@@ -370,9 +370,10 @@ function cs_initialise_includes($count_metas_outils) {
 	$infos_fichiers['code_options'][] = "\$GLOBALS['cs_verif']=$count_metas_outils;";
 	// parcours de tous les outils
 	foreach ($outils as $i=>$outil) {
-		// stockage de la liste des fonctions par pipeline, si l'outil est actif...
+		$inc = $outil['id'];
+		// stockage de la liste des fonctions par pipeline
 		if($outil['actif']) {
-			$inc = $outil['id']; $pipe2 = '';
+			$pipe2 = '';
 			foreach ($outil as $pipe=>$fonc) {
 				if(is_pipeline_outil($pipe, $pipe2)) {
 					// module a inclure
@@ -416,6 +417,15 @@ function cs_initialise_includes($count_metas_outils) {
 					if($temp=cs_lire_fichier_php("lib/$inc/distant_{$f}_$outil[distant_$f].php")) 
 						$infos_fichiers['code_'.$f][] = $temp;
 */			}
+		} else {
+			// outil inactif
+			if(isset($outil[$t='pipelinecode:pre_description_outil'])) 	
+				$infos_pipelines['pre_description_outil']['inline'][] 
+					= cs_optimise_if(cs_parse_code_js($outil[$t]));
+			if(isset($outil[$t='pipeline:pre_description_outil'])) {
+				$infos_pipelines['pre_description_outil']['inclure'][] = "outils/$inc";
+				$infos_pipelines['pre_description_outil']['fonction'][] = $outil[$t];
+			}
 		}
 	}
 	// insertion du css pour la BarreTypo

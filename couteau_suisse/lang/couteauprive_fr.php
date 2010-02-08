@@ -188,7 +188,7 @@ Idem pour changer le fond, si l\'option ci-dessous le permet :@_CS_EXEMPLE_COULE
 	'cs_comportement:description' => '@puce@ {{Logs.}} Obtenez de nombreux renseignements &agrave; propos du fonctionnement du Couteau Suisse dans les fichiers {spip.log} que l\'on peut trouver dans le r&eacute;pertoire : {<html>@_CS_DIR_TMP@</html>}[[%log_couteau_suisse%]]
 
 @puce@ {{Options SPIP.}} SPIP ordonne les plugins dans un ordre sp&eacute;cifique. Afin d\'&ecirc;tre s&ucirc;r que le Couteau Suisse soit en t&ecirc;te et g&egrave;re en amont certaines options de SPIP, alors cochez l\'option suivante. Si les droits de votre serveur le permettent, le fichier {<html>@_CS_FILE_OPTIONS@</html>} sera automatiquement modifi&eacute; pour inclure le fichier {<html>@_CS_DIR_TMP@couteau-suisse/mes_spip_options.php</html>}.
-[[%spip_options_on%]]
+[[%spip_options_on%]]@_CS_FILE_OPTIONS_ERR@
 
 @puce@ {{Requ&ecirc;tes externes.}} D\'une part, le Couteau Suisse v&eacute;rifie r&eacute;guli&egrave;rement l\'existence d\'une version plus r&eacute;cente de son code et informe sur sa page de configuration d\'une mise &agrave; jour &eacute;ventuellement disponible. D\'autre part, ce plugin comporte certains outils qui peuvent n&eacute;cessiter d\'importer des librairies distantes.
 
@@ -200,6 +200,7 @@ Si les requ&ecirc;tes externes de votre serveur posent des probl&egrave;mes ou p
 	'cs_reset' => '&Ecirc;tes-vous s&ucirc;r de vouloir r&eacute;initialiser totalement le Couteau Suisse ?',
 	'cs_reset2' => 'Tous les outils actuellement actifs seront d&eacute;sactiv&eacute;s et leurs param&egrave;tres r&eacute;initialis&eacute;s.',
 	'cs_spip_options_on' => 'Les options SPIP dans &laquo;<html>@_CS_FILE_OPTIONS@</html>&raquo;',
+	'cs_spip_options_erreur' => 'Attention : la modification du ficher &laquo;<html>@_CS_FILE_OPTIONS@</html>&raquo; a &eacute;chou&eacute; !',
 
 	// D
 	'decoration:aide' => 'D&eacute;coration&nbsp;: <b>&lt;balise&gt;test&lt;/balise&gt;</b>, avec <b>balise</b> = @liste@',

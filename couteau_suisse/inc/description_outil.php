@@ -188,7 +188,8 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 	// information sur les raccourcis disponibles
 	if($a=cs_aide_raccourci($outil_)) $res .= '<p>@puce@ '._T('couteauprive:detail_raccourcis').'<br /><html>'.$a.'.</html></p>';
 	// envoi de la description courante en pipeline
-	$res = pipeline('pre_description_outil', array('outil'=>$outil_, 'texte'=>$res));
+	include_spip("cout_define");
+	$res = pipeline('pre_description_outil', array('outil'=>$outil_, 'texte'=>$res, 'actif'=>$actif));
 	$res = $res['texte'];
 	// recherche des blocs <variable></variable> eventuels associes pour du masquage/demasquage
 	foreach($cs_input_variable as $v) {
