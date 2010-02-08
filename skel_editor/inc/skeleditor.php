@@ -73,7 +73,12 @@ function sort_directory_first($files,$root) {
 }
 
 function skeleditor_get_file_content_type_ctrl($fichier){
-	if (preg_match(",("._SE_EXTENSIONS_IMG.")$,ims",$fichier)){
+	if (!$fichier){
+		$type = 'txt';
+		$content='';
+		$ctrl = md5($content);
+	}
+	elseif (preg_match(",("._SE_EXTENSIONS_IMG.")$,ims",$fichier)){
 		$type = 'img';
 		$ctrl = md5(filemtime($fichier));
 		$content = null;
@@ -117,22 +122,22 @@ function skeleditor_tree_open_close_dir(&$current,$target,$current_file){
 	return $output;
 }
 
-function skeleditor_verifie_nouveau_nom($path_base,$filename){
+function skeleditor_verifie_nouveau_nom($path_base,$filename,$img=false){
 	$erreur = "";
 	if (strpos($filename,'../')!==FALSE){
-		$erreurs = _T('skeleditor:erreur_sansgene'); // fichier existe deja
+		$erreur = _T('skeleditor:erreur_sansgene'); // fichier existe deja
 	}
 	elseif (file_exists($path_base.$filename))
-		$erreurs = _T('skeleditor:erreur_overwrite'); // fichier existe deja
+		$erreur = _T('skeleditor:erreur_overwrite'); // fichier existe deja
 	else{
-		if (!preg_match(",("._SE_EXTENSIONS.")$,", $filename)
-			OR preg_match(",("._SE_EXTENSIONS_IMG.")$,", $filename))
-			$erreurs = _T('skeleditor:erreur_type_interdit');
+		if (!preg_match(",[.]("._SE_EXTENSIONS.")$,i", $filename)
+			OR (!$img AND preg_match(",[.]("._SE_EXTENSIONS_IMG.")$,i", $filename)))
+			$erreur = _T('skeleditor:erreur_type_interdit');
 
 		else {
 			list($chemin,$echec) = skeleditor_cree_chemin($path_base,$filename);
 			if (!$chemin)
-				$erreurs = _T('skeleditor:erreur_creation_sous_dossier',array('dir'=>joli_repertoire("$echec")));
+				$erreur = _T('skeleditor:erreur_creation_sous_dossier',array('dir'=>joli_repertoire("$echec")));
 		}
 	}
 	return $erreur;
@@ -151,5 +156,49 @@ function skeleditor_cree_chemin($path_base,$file){
 
 	return array($chemin, $chemin?'':"$chemin_ok/$s");
 }
+
+/**
+ * retrouver le chemin dont il vient pour extraire la racine
+ * permet aussi de s'assurer que le fichier qu'on copie provient uniquement
+ * du path, et pas d'autre part sur le serveur
+ *
+ * @param string $source
+ * @return string
+ */
+function skeleditor_nom_copie($source){
+	$file = "";
+	$spip_path = creer_chemin();
+	$spip_path = array_diff($spip_path, array(_DIR_RACINE));
+	$spip_path[] = _DIR_RACINE;
+	foreach($spip_path as $dir) {
+		if (strncmp($source,$dir,strlen($dir))==0){
+			$file = substr($source,strlen($dir));
+			break;
+		}
+	}
+	return $file;
+}
+
+/**
+ * Commenter l'entete d'un fichier copie
+ *
+ * @param string $source
+ * @param string $content
+ * @return string
+ */
+function skeleditor_commente_copie($source,$content){
+	/* preparer un commenaite */
+	$comment = _T('skeleditor:copy_comment',array('date'=>date('Y-m-d H:i:s'),'nom'=>$GLOBALS['visiteur_session']['nom'],'source'=>joli_repertoire($source)));
+	$infos = pathinfo($source);
+	if (in_array($infos['extension'],array('php','php3','php4','php5','php6','css','js','as')))
+		$comment = "/*\n$comment\n*/\n";
+	elseif ($infos['extension']==_EXTENSION_SQUELETTES AND preg_match(',(<BOUCLE|<INCLU[RD]E|#ENV|#ID_|#REM|#INCLU[RD]E|#TITRE|#[F-Z][A-Z]*),Ums',$content))
+		$comment = "[(#REM)\n$comment\n]\n";
+	elseif (in_array($infos['extension'],array('htm','html','xml','svg','rdf')))
+		$comment = "<!--\n$comment\n-->\n";
+	else $comment='';
+	return $comment.$content;
+}
+
 
 ?>

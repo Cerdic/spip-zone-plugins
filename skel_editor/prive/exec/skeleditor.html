@@ -13,23 +13,18 @@
 	]
 	#SET{path,#REM|skeleditor_dossier}
 	
-	<h3>[(#GET{file}|substr{#EVAL{_DIR_RACINE}|strlen})]</h3>
-	[<a href="(#ENV{retour,''})"><:retour:> [(#ENV{retour}|joli_repertoire)]</a>]
+	<h1><:skeleditor:fichier:>[ (#GET{file}|basename|sinon{<:info_sans_titre:>})]</h1>
 	<div class="noajax">
 	#FORMULAIRE_EDITER_SQUELETTE{#GET{path},#GET{file}}
 	</div>
 	[(#GET{file}|skeleditor_codemirror)]
 
 	<!--#navigation-->
-	<h1><:skeleditor:editer_skel:></h1>
+	[<a href="(#ENV{retour,''})"><:retour:> [(#ENV{retour}|joli_repertoire)]</a>]
 	<div class="cadre cadre-info">
 	<:skeleditor:skeleditor_description:>
 	<p><strong>[(#GET{path}|joli_repertoire)]</strong></p>
 	[(#GET{path}|skeleditor_afficher_dir_skel{#GET{file}})]
-	</div>
-
-	<div class="ajax">
-	#FORMULAIRE_CREER_SQUELETTE{#GET{path}}
 	</div>
 
 	#FORMULAIRE_UPLOAD_SQUELETTE

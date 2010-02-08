@@ -20,8 +20,13 @@
 #SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
 #SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
 
-.formulaire_editer_squelette .actions {text-align:#GET{right};}
+.formulaire_editer_squelette .actions {padding:2px;overflow:hidden;}
+.formulaire_editer_squelette .actions .add {float:#GET{left};}
+.formulaire_editer_squelette .actions .context {float:#GET{right};}
 .formulaire_editer_squelette .infos {float:#GET{right};}
+.formulaire_editer_squelette .rename {display:block;padding:2px 4px;}
+.formulaire_editer_squelette .rename span {font-weight:bold;}
+.formulaire_editer_squelette .rename a {display:block;float:#GET{right};}
 .formulaire_editer_squelette textarea {padding:5px;}
 .formulaire_editer_squelette textarea.readonly {background:#eee;color:#666;}
 

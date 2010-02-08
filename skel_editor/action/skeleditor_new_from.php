@@ -15,20 +15,8 @@ function action_skeleditor_new_from_dist(){
 	if (strncmp($arg,_DIR_RACINE,strlen(_DIR_RACINE)!==0))
 		$arg = _DIR_RACINE.$arg;
 
-	// retrouver le chemin dont il vient pour extraire la racine
-	// permet aussi de s'assurer que le fichier qu'on copie provient uniquement
-	// du path, et pas d'autre part sur le serveur
-	$file = "";
-	$spip_path = creer_chemin();
-	$spip_path = array_diff($spip_path, array(_DIR_RACINE));
-	$spip_path[] = _DIR_RACINE;
-	foreach($spip_path as $dir) {
-		if (strncmp($arg,$dir,strlen($dir))==0){
-			$file = substr($arg,strlen($dir));
-			break;
-		}
-	}
-
+	include_spip('inc/skeleditor');
+	$file = skeleditor_nom_copie($arg);
 	if ($file){
 		include_spip('inc/skeleditor');
 		$path_base = skeleditor_path_editable();
@@ -37,16 +25,8 @@ function action_skeleditor_new_from_dist(){
 			$file = basename($file);
 
 			if (!file_exists($chemin . $file)) {
-				/* preparer un commenaite */
-				$comment = _T('skeleditor:copy_comment',array('date'=>date('Y-m-d H:i:s'),'nom'=>$GLOBALS['visiteur_session']['nom'],'source'=>joli_repertoire($arg)));
-				$infos = pathinfo($file);
-				if (in_array($infos['extension'],array('php','php3','php4','php5','php6','css','js','as')))
-					$comment = "/*\n$comment\n*/\n";
-				elseif (in_array($infos['extension'],array('htm','html','xml','svg','rdf')))
-					$comment = "<!--\n$comment\n-->\n";
-				else $comment='';
 				lire_fichier($arg, $contenu);
-				ecrire_fichier($chemin . $file, $comment . $contenu);
+				ecrire_fichier($chemin . $file, skeleditor_commente_copie($arg,$contenu));
 			}
 
 			if (file_exists($f=$chemin.$file))

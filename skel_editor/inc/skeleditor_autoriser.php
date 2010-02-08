@@ -27,6 +27,24 @@ function autoriser_skeleditor_ajout_bouton_dist($faire, $type, $file, $qui, $opt
   return (autoriser('skeleditor','','',$qui));
 }
 
+
+function autoriser_squelette_voir_dist($faire, $type, $file, $qui, $opt) {
+	if (!preg_match(",[.]("._SE_EXTENSIONS.")$,ims",$file)
+		OR strpos(substr($file,strlen(_DIR_RACINE)),'../')!==FALSE
+		OR substr($file,0,1)=='/')
+		return false;
+  if (!autoriser('skeleditor','','',$qui))
+		return false;
+
+	$dirs = creer_chemin();
+	foreach($dirs as $d){
+		if (strncmp($d,$file,strlen($d))==0)
+			return true;
+	}
+
+  return false;
+}
+
 /**
  * Autoriser a supprimer un squelette
  *
@@ -34,6 +52,14 @@ function autoriser_skeleditor_ajout_bouton_dist($faire, $type, $file, $qui, $opt
 function autoriser_squelette_supprimer_dist($faire, $type, $file, $qui, $opt) {
 
   return (autoriser('modifier','squelette',$file,$qui));
+}
+
+/**
+ * Autoriser a upload un squelette
+ *
+ */
+function autoriser_squelette_upload_dist($faire, $type, $path, $qui, $opt) {
+  return (autoriser('creerdans','squelette',$path,$qui));
 }
 
 /**
@@ -61,7 +87,8 @@ function autoriser_squelette_modifier_dist($faire, $type, $file, $qui, $opt) {
 function autoriser_squelette_creer_dist($faire, $type, $file, $qui, $opt) {
 
   return (autoriser('skeleditor','','',$qui)
-					AND autoriser('creerdans','squelette',dirname($file)));
+		AND (preg_match(",[.]("._SE_EXTENSIONS.")$,i",$file)) // extension autorisee
+		AND autoriser('creerdans','squelette',dirname($file))); // dans un chemin autorise
 }
 
 /**
