@@ -4,7 +4,7 @@
 _ &#169; 2008 - <multi>[fr]Distribu&#233; sous licence[en]Released under license[de]Vertrieb unter Lizenz</multi> GNU/LGPL
     </auteur>
     <version>
-    1.2.1
+    1.2.2
     </version>
     <etat>
     stable
@@ -17,8 +17,9 @@ _ &#169; 2008 - <multi>[fr]Distribu&#233; sous licence[en]Released under license
     palette
     </prefix>
     <icon>
-    images/palette.png
+    images/palette-128.png
     </icon>
+    <lien>http://www.spip-contrib.net/Palette</lien>
 	<options>palette_options.php</options>
     <pipeline>
         <nom>insert_head</nom>
