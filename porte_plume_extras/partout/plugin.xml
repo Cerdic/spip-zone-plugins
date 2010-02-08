@@ -2,7 +2,7 @@
 	<nom>Porte Plume Partout</nom>
 	<auteur>Pascal M&eacute;chin - Matthieu Marcillaud</auteur>
 	<licence>GPLv3</licence>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<icon>images/configure_toolbars-48.png</icon>
 	<lien>http://www.spip-contrib.net/Plugin-Porte-plume-partout</lien>
 
@@ -16,6 +16,6 @@
 		<nom>jquery_plugins</nom> <!--Choix du pipeline appelé et EXISTANT (voir la liste adéquate)-->
 		<inclure>ppp_pipelines.php</inclure>
 	</pipeline>
-	<necessite id='porte_plume' version='[1.6.1;]' />
+	<necessite id='porte_plume' version='[1.6.4;]' />
 	<necessite id='spip' version='[2.0;]' />
 </plugin>
