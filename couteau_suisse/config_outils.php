@@ -364,7 +364,7 @@ add_outil( array(
 
 add_outil( array(
 	'id' => 'f_jQuery',
-	'code:options' => "\$GLOBALS['spip_pipeline']['insert_head'] = str_replace('|f_jQuery', '', \$GLOBALS['spip_pipeline']['insert_head']);",
+	'code:spip_options' => "\$GLOBALS['spip_pipeline']['insert_head'] = str_replace('|f_jQuery', '', \$GLOBALS['spip_pipeline']['insert_head']);",
 	'auteur' => 'Fil',
 	'categorie' =>'public',
 	'version-min' => '1.9200',
