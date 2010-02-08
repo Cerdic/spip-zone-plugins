@@ -1,8 +1,8 @@
 <plugin>
 	<nom>Porte Plume Partout</nom>
-	<auteur>Pascal M&eacute;chin - Matthieu Marcillaud</auteur>
+	<auteur>Pascal M&eacute;chin - Matthieu Marcillaud - Jacques Pyrat</auteur>
 	<licence>GPLv3</licence>
-	<version>1.0.1</version>
+	<version>1.0.2</version>
 	<icon>images/configure_toolbars-48.png</icon>
 	<lien>http://www.spip-contrib.net/Plugin-Porte-plume-partout</lien>
 
@@ -19,4 +19,6 @@
 	</pipeline>
 	<necessite id='porte_plume' version='[1.6.4;]' />
 	<necessite id='spip' version='[2.0.10;]' />
+	<necessite id="cfg" version="[1.14.3;]" />
+	<necessite id="saisies" version="[1.1;]" />
 </plugin>
