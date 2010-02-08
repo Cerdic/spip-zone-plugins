@@ -349,8 +349,11 @@ add_variables( array(
 add_outil( array(
 	'id' => 'cs_comportement',
 	'code:spip_options' => "%%distant_off%% %%distant_outils_off%%",
-	'pipelinecode:pre_description_outil' => 'if($flux["outil"]=="cs_comportement") $flux["texte"]=str_replace(array("@_CS_DIR_TMP@","@_CS_FILE_OPTIONS@"),
-		array(cs_canonicalize(_DIR_RESTREINT_ABS._DIR_TMP),show_file_options()),$flux["texte"]);',
+	'pipelinecode:pre_description_outil' => 'if($flux["outil"]=="cs_comportement") {
+$tmp=(!%%spip_options_on%%||!$flux["actif"]||defined("_CS_SPIP_OPTIONS_OK"))?"":"<span style=\"color:red\">"._T("couteauprive:cs_spip_options_erreur")."</span>";
+$flux["texte"]=str_replace(array("@_CS_FILE_OPTIONS_ERR@","@_CS_DIR_TMP@","@_CS_FILE_OPTIONS@"),
+	array($tmp,cs_canonicalize(_DIR_RESTREINT_ABS._DIR_TMP),show_file_options()),$flux["texte"]);
+}',
 ));
 
 
