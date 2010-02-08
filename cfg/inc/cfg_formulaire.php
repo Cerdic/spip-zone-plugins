@@ -269,6 +269,12 @@ class cfg_formulaire{
 		$this->messages = pipeline('cfg_post_edition',array('args'=>array('nom_config'=>$this->nom_config()),'data'=>$this->messages));
 
 		$this->actionner_extensions('post_traiter');
+
+		// annuler le cache de SPIP
+		include_spip('inc/invalideur');
+		suivre_invalideur('cfg/' . $this->param['nom'] .
+			($this->param['casier'] ? '/' . $this->param['casier'] : '') .
+			($this->param['cfg_id'] ? '/' . $this->param['cfg_id'] : ''));		
 	}
 
 
