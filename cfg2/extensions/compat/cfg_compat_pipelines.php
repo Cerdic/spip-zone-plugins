@@ -16,8 +16,8 @@ function cfg_compat_ajouter_boutons($flux) {
 	// et pas en SPIP 2 (qui gere deja le bouton)
 	if (defined('_COMPAT_CFG_192') AND autoriser('configurer','cfg')) {
 	  // on voit le bouton dans la barre "configuration"
-		$flux['configuration']->sousmenu['cfg']= new Bouton(
-		"../"._DIR_PLUGIN_CFG."cfg-22.png",  // icone
+		$flux['configuration']->sousmenu['configurer']= new Bouton(
+		"../"._DIR_PLUGIN_CFG."images/cfg-22.png",  // icone
 		_T('cfg:CFG'));
 	}
 	return $flux;

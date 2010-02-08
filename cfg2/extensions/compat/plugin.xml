@@ -2,7 +2,7 @@
     <nom>Comptabilite : fonctionnalites de CFG 1.10</nom>
     <auteur>bertrand Gugger [->http://toggg.com/], Matthieu Marcillaud</auteur>
 	<licence>GNU/GPL</licence>
-    <version>1.0.4</version>
+    <version>1.0.5</version>
     <etat>stable</etat>
     <description>
 	Assure une comptabilit&eacute; avec les fonds CFG 1.10.x

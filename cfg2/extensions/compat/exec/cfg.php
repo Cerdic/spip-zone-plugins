@@ -35,13 +35,16 @@ function exec_cfg_dist()
 	}
 
 	$out .= "<h1>".$config->get_titre()."</h1>";
-	$out .=  $config->barre_onglets();
+	#$out .=  $config->barre_onglets();
+	$out .=  $config->barre_hierarchie();
 	$out .=  "<br /><br />\n";
 	
 	// colonne gauche
 	$out .= "\n<!--#navigation-->";
 	// si un formulaire cfg est demande
-	if ($s = $config->descriptif()) $out .= debut_boite_info(true) . $s . fin_boite_info(true);
+	if ($s = $config->logo() . $config->descriptif()) {
+		$out .= debut_boite_info(true) . $s . fin_boite_info(true);
+	}
 	$out .= "\n<!--/#navigation-->";
 
 	

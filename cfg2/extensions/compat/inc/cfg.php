@@ -47,7 +47,7 @@ function icone_lien_cfg($dir) {
 		foreach ($onglets as $fonds=>$ong){
 			if ($ong['afficher'])
 				$ret .= '<a href="'.$ong['url'].'">'
-					.'<img src="'._DIR_PLUGIN_CFG.'cfg-16.png"
+					.'<img src="'._DIR_PLUGIN_CFG.'images/cfg-16.png"
 						width="16" height="16"
 						alt="'._T('icone_configuration_site').' '.$fonds.'"
 						title="'._T('icone_configuration_site').' '.$fonds.'"
@@ -83,7 +83,7 @@ function lister_onglets_cfg($dir=''){
 
 			if ($tmp->autoriser()){
 				$args['onglet'] = $tmp->form->param['onglet'];
-				$args['url'] = generer_url_ecrire('cfg', 'cfg='.$fonds);
+				$args['url'] = generer_url_ecrire('configurer', 'cfg='.$fonds);
 				// titre
 				if (!$args['titre'] = $tmp->form->param['titre'])
 					$args['titre'] = $fonds;
@@ -92,10 +92,8 @@ function lister_onglets_cfg($dir=''){
 				$args['icone'] = '';
 				if ($tmp->form->param['icone'])
 					$args['icone'] = $path.'/'.$tmp->form->param['icone'];
-				else if (file_exists($path.'/plugin.xml'))
-					$args['icone'] = 'plugin-24.gif';
 				else
-					$args['icone'] = _DIR_PLUGIN_CFG.'cfg-doc-22.png';	
+					$args['icone'] = _DIR_PLUGIN_CFG.'images/cfg-22.png';	
 				
 				// l'afficher ?
 				if ($tmp->form->param['onglet'] == 'oui')
@@ -221,7 +219,52 @@ class cfg
 				. "\n</div></form>\n";
 	
 	}
-		
+
+	// changement de strategie :
+	// on cree une hierarchie
+	// configuration > cfg > [onglet_parent >] onglet
+	function barre_hierarchie() {
+
+		$hierarchie = "<div class='table_page'>";
+		$hierarchie .= $this->debut_hierarchie(_T("cfg_interface:configurer"), generer_url_ecrire("configurer"), '', '', 'chemin');
+
+			$fin_onglet = false;
+			if ($onglet = $this->form->param['onglet']
+			and !in_array($onglet, array('oui','non'))) {
+				include_spip('inc/cfg');
+				$tmp = new cfg($onglet);
+				if ($tmp->autoriser()){
+					$parent = ($tmp->form->param['titre']) ? $tmp->form->param['titre'] :  $tmp->form->param['nom'];
+					$hierarchie .= $this->debut_hierarchie($parent, generer_url_ecrire('configurer', 'cfg=' . $onglet), true);
+					$fin_onglet = true;
+				}
+			};
+
+				$titre = ($this->form->param['titre']) ? $this->form->param['titre'] :  $this->form->param['nom'];
+				$hierarchie .= $this->debut_hierarchie($titre, '', true);	
+				$hierarchie .= $this->fin_hierarchie();
+				
+			if ($fin_onglet) {
+				$hierarchie .= $this->fin_hierarchie();
+			}
+			
+		$hierarchie .= $this->fin_hierarchie();
+		$hierarchie .= "</div>";
+		return $hierarchie;
+	}
+
+	function debut_hierarchie( $titre, $url='', $ligature = false, $class='', $id='') {
+		$id = $id ? " id='$id'" : '';
+		$ligature = $ligature ? "<em> &gt; </em>" : "";
+		$class = $class ? " class='$class'" : "";
+		$titre = $url ? "<a $class href=" . $url . ">$titre</a>" : $titre;
+		return "<ul$id><li><span class='block'>$ligature$titre</span>";
+	}
+	
+	function fin_hierarchie() {
+		return "</li></ul>\n";
+	}
+	
 	//
 	// Affiche la liste des onglets de CFG
 	// 
@@ -282,7 +325,17 @@ class cfg
 		return $res;
 	}
 	
-
+	// affiche le logo du formulaire
+	function logo()  {
+		if ($logo = $this->form->param['logo']
+		or  $logo = $this->form->param['icone']) {
+			include_spip("inc/filtres_images_mini");
+			return "<div class='logo_config'>" . image_reduire(find_in_path($logo), 64) . "</div>";
+		} else {
+			return "";
+		}
+	}
+	
 	// affiche le descriptif du formulaire
 	function descriptif(){
 		if ($d = $this->form->param['descriptif'])
@@ -316,7 +369,7 @@ class cfg
 		$retour = "";	
 		if (!$formulaire = $this->form->formulaire()) {
 			// Page appellee sans formulaire valable
-			$retour .= "<img src='"._DIR_PLUGIN_CFG.'cfg.png'."' style='float:right' alt='' />\n";
+			$retour .= "<img src='"._DIR_PLUGIN_CFG.'images/cfg.png'."' style='float:right' alt='' />\n";
 			$retour .=  "<h3>" . _T("cfg_interface:choisir_module_a_configurer") . "</h3>";
 		} else {
 			$retour .= $formulaire;

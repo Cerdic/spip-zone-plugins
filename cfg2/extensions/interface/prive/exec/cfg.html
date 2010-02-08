@@ -6,6 +6,9 @@
 
 	<!--#navigation-->
 	<div class="cadre cadre-info">
+		<div class="logo_config">
+			[(#CHEMIN{images/cfg-128.png}|image_reduire{64})]
+		</div>
 		<:cfg_interface:description_cfg:>
 	</div>	
 	<!--/#navigation-->
@@ -40,6 +43,49 @@
 		]
 
 		[<h1>(#TRAD{configuration,#ENV{cfg},#ENV{onglet}}|sinon{#GET{cfg}})</h1>]
+
+		[(#REM) Hierarchie : on affiche le fil d'ariane
+			Huhu, vivement un fil plus simple !!!
+		]
+		<div class='table_page'>
+			<ul id='chemin'>
+				<li>
+					<span class='block'>
+						<a href="[(#URL_ECRIRE{configurer})]"><:cfg_interface:configurer:></a>
+					</span>
+					[(#ENV{onglet}|non)
+						<ul>
+							<li>
+								<span class='block'>
+									<em> &gt; </em>
+									[(#TRAD{configuration,#ENV{cfg}}|sinon{#ENV{cfg}})]
+								</span>
+							</li>
+						</ul>					
+					]
+					[(#ENV{onglet}|oui)
+						<ul>
+							<li>
+								<span class='block'>
+									<em> &gt; </em>
+									<a href="[(#URL_ECRIRE{configurer}|parametre_url{cfg,#ENV{cfg}})]">
+										[(#TRAD{configuration,#ENV{cfg}}|sinon{#ENV{cfg}})]
+									</a>
+								</span>
+								<ul>
+									<li>
+										<span class='block'>
+											<em> &gt; </em>
+											[(#TRAD{configuration,#ENV{cfg},#ENV{onglet}}|sinon{#GET{cfg}})]
+										</span>
+									</li>
+								</ul>	
+							</li>
+						</ul>				
+					]
+				</li>
+			</ul>
+		</div>
 
 
 		[(#REM)
@@ -89,3 +135,7 @@
 		]]
 	]
 ]
+[(#REM) on remet le chemin a son veritable emplacement. ]
+<script type='text/javascript'>
+jQuery(document).ready(function(){jQuery('#chemin').parent().prependTo('#page');});
+</script>

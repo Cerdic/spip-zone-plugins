@@ -2,7 +2,7 @@
     <nom>Interface pour CFG</nom>
     <auteur>bertrand Gugger [->http://toggg.com/], Matthieu Marcillaud</auteur>
 	<licence>GNU/GPL</licence>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
     <etat>stable</etat>
     <description>
 	Permet de donner une interface pour les formulaires CFG
@@ -11,8 +11,8 @@
     <prefix>cfg_interface</prefix>
     <chemin dir='' />
 
-	<bouton id='cfg' parent="configuration">
-		<icone>cfg-22.png</icone>
+	<bouton id='configurer' parent="configuration">
+		<icone>images/cfg-22.png</icone>
 		<titre>cfg:CFG</titre>		
 	</bouton>
 	
