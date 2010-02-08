@@ -13,9 +13,10 @@
 	<etat>test</etat>
 	<prefix>ppp</prefix> <!--important, sert de lien au fichier de pipeline et aussi dans la définition de la fonction incluse-->
 	<pipeline>
-		<nom>jquery_plugins</nom> <!--Choix du pipeline appelé et EXISTANT (voir la liste adéquate)-->
+		<nom>header_prive</nom>
+		<action>insert_head_prive</action>
 		<inclure>ppp_pipelines.php</inclure>
 	</pipeline>
 	<necessite id='porte_plume' version='[1.6.4;]' />
-	<necessite id='spip' version='[2.0;]' />
+	<necessite id='spip' version='[2.0.10;]' />
 </plugin>
