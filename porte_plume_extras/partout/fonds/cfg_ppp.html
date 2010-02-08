@@ -3,39 +3,19 @@
 <!-- icone=images/configure_toolbars-22.png-->
 <!-- descriptif=
 <p><b>Attention : </b>en fonction de vos squelettes, veillez à n'activer le Porte Plume que sur des champs pour lesquels l'utilisation des raccourcis n'engendrera pas d'erreur xhtml.</p>
-<p>En cas de doute, activez simplement la barre typographique sur les descriptifs et les textes (champs marqués d'une astérisque).</p>
 -->
 <form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
-	<p>Activer la barre typographique sur :</p>
-	<fieldset><legend><:articles:></legend>	
+	<fieldset><legend>Activer la barre typographique sur :</legend>	
 		<label><input type="checkbox" name="articles_descriptif_ppp" [checked="(#CONFIG{ppp/articles_descriptif_ppp}|!={''}|?{'checked'})"] />&nbsp;[(#CONFIG{ppp/articles_descriptif_ppp}|!={''}|?{'<strong>'})]<:ecrire:texte_descriptif_rapide:> [(#CONFIG{ppp/articles_descriptif_ppp}|!={''}|?{'</strong>'})]</label><br />
-		<label><input type="checkbox" name="articles_chapo_ppp" [checked="(#CONFIG{ppp/articles_chapo_ppp}|!={''}|?{'checked'})"] />&nbsp;[(#CONFIG{ppp/articles_chapo_ppp}|!={''}|?{'<strong>'})]<:ecrire:info_chapeau:> *[(#CONFIG{ppp/articles_chapo_ppp}|!={''}|?{'</strong>'})]</label><br />
+		<label><input type="checkbox" name="articles_chapo_ppp" [checked="(#CONFIG{ppp/articles_chapo_ppp}|!={''}|?{'checked'})"] />&nbsp;[(#CONFIG{ppp/articles_chapo_ppp}|!={''}|?{'<strong>'})]<:ecrire:info_chapeau:>[(#CONFIG{ppp/articles_chapo_ppp}|!={''}|?{'</strong>'})]</label><br />
 		<:ecrire:info_texte:> : toujours pr&eacute;sente.<br />
-		<label><input type="checkbox" name="articles_ps_ppp" [checked="(#CONFIG{ppp/articles_ps_ppp}|!={''}|?{'checked'})"] />&nbsp;[(#CONFIG{ppp/articles_ps_ppp}|!={''}|?{'<strong>'})]<:ecrire:info_post_scriptum:> *[(#CONFIG{ppp/articles_ps_ppp}|!={''}|?{'</strong>'})]</label>
-	</fieldset>	
-	<fieldset><legend><:rubriques:></legend>	
-		<label><input type="checkbox" name="rubriques_descriptif_ppp" [checked="(#CONFIG{ppp/rubriques_descriptif_ppp}|!={''}|?{'checked'})"] />&nbsp;[(#CONFIG{ppp/rubriques_descriptif_ppp}|!={''}|?{'<strong>'})]<:ecrire:texte_descriptif_rapide:> [(#CONFIG{ppp/rubriques_descriptif_ppp}|!={''}|?{'</strong>'})]</label><br />
-		<label><input type="checkbox" name="rubriques_texte_ppp" [checked="(#CONFIG{ppp/rubriques_texte_ppp}|!={''}|?{'checked'})"] />&nbsp;[(#CONFIG{ppp/rubriques_texte_ppp}|!={''}|?{'<strong>'})]<:ecrire:info_texte:> *[(#CONFIG{ppp/rubriques_texte_ppp}|!={''}|?{'</strong>'})]</label>
-	</fieldset>	
-	<fieldset><legend><:ecrire:titre_groupe_mots:></legend>	
-		<label><input type="checkbox" name="groupesmots_descriptif_ppp" [checked="(#CONFIG{ppp/groupesmots_descriptif_ppp}|!={''}|?{'checked'})"] />&nbsp;[(#CONFIG{ppp/groupesmots_descriptif_ppp}|!={''}|?{'<strong>'})]<:ecrire:texte_descriptif_rapide:> [(#CONFIG{ppp/groupesmots_descriptif_ppp}|!={''}|?{'</strong>'})]</label><br />
-		<label><input type="checkbox" name="groupesmots_texte_ppp" [checked="(#CONFIG{ppp/groupesmots_texte_ppp}|!={''}|?{'checked'})"] />&nbsp;[(#CONFIG{ppp/groupesmots_texte_ppp}|!={''}|?{'<strong>'})]<:ecrire:info_texte_explicatif:> *[(#CONFIG{ppp/groupesmots_texte_ppp}|!={''}|?{'</strong>'})]</label>
-	</fieldset>	
-	<fieldset><legend><:mots_clefs:></legend>	
-		<label><input type="checkbox" name="mots_descriptif_ppp" [checked="(#CONFIG{ppp/mots_descriptif_ppp}|!={''}|?{'checked'})"] />&nbsp;[(#CONFIG{ppp/mots_descriptif_ppp}|!={''}|?{'<strong>'})]<:ecrire:texte_descriptif_rapide:> [(#CONFIG{ppp/mots_descriptif_ppp}|!={''}|?{'</strong>'})]</label><br />
-		<label><input type="checkbox" name="mots_texte_ppp" [checked="(#CONFIG{ppp/mots_texte_ppp}|!={''}|?{'checked'})"] />&nbsp;[(#CONFIG{ppp/mots_texte_ppp}|!={''}|?{'<strong>'})]<:ecrire:info_texte_explicatif:> *[(#CONFIG{ppp/mots_texte_ppp}|!={''}|?{'</strong>'})]</label>
-	</fieldset>	
-	<fieldset><legend><:ecrire:titre_page_sites_tous:></legend>	
-		<label><input type="checkbox" name="sites_description_ppp" [checked="(#CONFIG{ppp/sites_description_ppp}|!={''}|?{'checked'})"] />&nbsp;[(#CONFIG{ppp/sites_description_ppp}|!={''}|?{'<strong>'})]<:ecrire:texte_descriptif_rapide:> [(#CONFIG{ppp/sites_description_ppp}|!={''}|?{'</strong>'})]</label><br />
-	</fieldset>	
-	<fieldset><legend><:breves:></legend>	
-		<:ecrire:info_texte:> : toujours pr&eacute;sente.<br />
+		<label><input type="checkbox" name="articles_ps_ppp" [checked="(#CONFIG{ppp/articles_ps_ppp}|!={''}|?{'checked'})"] />&nbsp;[(#CONFIG{ppp/articles_ps_ppp}|!={''}|?{'<strong>'})]<:ecrire:info_post_scriptum:>[(#CONFIG{ppp/articles_ps_ppp}|!={''}|?{'</strong>'})]</label>
 	</fieldset>	
 	<fieldset><legend><:ecrire:titre_config_fonctions:></legend>	
-		<label><input type="checkbox" name="configuration_description_ppp" [checked="(#CONFIG{ppp/configuration_description_ppp}|!={''}|?{'checked'})"] />&nbsp;[(#CONFIG{ppp/configuration_description_ppp}|!={''}|?{'<strong>'})]<:ecrire:entree_description_site:> *[(#CONFIG{ppp/configuration_description_ppp}|!={''}|?{'</strong>'})]</label>
+		<label><input type="checkbox" name="configuration_description_ppp" [checked="(#CONFIG{ppp/configuration_description_ppp}|!={''}|?{'checked'})"] />&nbsp;[(#CONFIG{ppp/configuration_description_ppp}|!={''}|?{'<strong>'})]<:ecrire:entree_description_site:>[(#CONFIG{ppp/configuration_description_ppp}|!={''}|?{'</strong>'})]</label>
 	</fieldset>	
 	<fieldset><legend><:spip:icone_auteurs:></legend>	
-		<label><input type="checkbox" name="auteurs_quietesvous_ppp" [checked="(#CONFIG{ppp/auteurs_quietesvous_ppp}|!={''}|?{'checked'})"] />&nbsp;[(#CONFIG{ppp/auteurs_quietesvous_ppp}|!={''}|?{'<strong>'})]<:ecrire:entree_infos_perso:> *[(#CONFIG{ppp/auteurs_quietesvous_ppp}|!={''}|?{'</strong>'})]</label>
+		<label><input type="checkbox" name="auteurs_quietesvous_ppp" [checked="(#CONFIG{ppp/auteurs_quietesvous_ppp}|!={''}|?{'checked'})"] />&nbsp;[(#CONFIG{ppp/auteurs_quietesvous_ppp}|!={''}|?{'<strong>'})]<:ecrire:entree_infos_perso:>[(#CONFIG{ppp/auteurs_quietesvous_ppp}|!={''}|?{'</strong>'})]</label>
 	</fieldset>
 	
 	<div>
