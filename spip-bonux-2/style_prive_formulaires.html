@@ -217,8 +217,7 @@ textarea {
 	border-color: #C30;
 }
 .formulaire_spip .erreur .erreur_message,
-.formulaire_spip em.attention,
-.formulaire_spip .reponse_formulaire_erreur{
+.formulaire_spip em.attention {
 	color: #C30;
 	font-weight: bold;
 }
@@ -226,14 +225,21 @@ textarea {
 	display:block;
 }
 
-.formulaire_spip .reponse_formulaire_erreur{
+.formulaire_spip .reponse_formulaire{
 	margin-#GET{left}:0.5em;
+	margin-#GET{right}:0.5em;
+	font-weight: bold;
+	border:1px solid black;
+	padding:5px;
 }
 /* message reussite ? */
 .formulaire_spip .reponse_formulaire_ok{
-	color: #53AD20;
-	font-weight: bold;
-	margin-#GET{left}:0.5em;
+	border-color: #53AD20;
+	background:#E0FFCF;
+}
+.formulaire_spip .reponse_formulaire_erreur{
+	border-color: #C30;
+	background:#FFD0BF;
 }
 
 /* commentaires */
