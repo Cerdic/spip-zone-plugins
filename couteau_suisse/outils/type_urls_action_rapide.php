@@ -79,32 +79,24 @@ function type_urls_URL_objet_191_exec() {
 		:$url_1.'||'.charset2unicode($titre).'||'.$url.'||'.$type_urls.'||'.$url_2;
 }
 
-// Fonction appelee par exec/action_rapide : ?exec=action_rapide&arg=type_urls|liste_URLS (pipe obligatoire)
-// Renvoie la liste des URLs d'un objet (cas SPIP >= 2.0)
-function type_urls_liste_URLS_exec() {
+// Fonction appelee par exec/action_rapide : ?exec=action_rapide&arg=type_urls|liste_urls (pipe obligatoire)
+// Renvoie la liste de toutes les URLs propres de la base (SPIP >= 2.0)
+function type_urls_liste_urls_exec() {
 	global $type_urls;
 	$res = $id = '';
-	// chercher dans la table des URLS
 	include_spip('base/abstract_sql');
 	if($s=_request('suppr')) {
-		$s = unserialize(base64_decode($s));
-		sql_delete("spip_urls", $a="id_objet=$s[id_objet] AND type=".sql_quote($s['type']).' AND date='.sql_quote($s['date']).' AND url='.sql_quote($s['url']));
-	}
-	//  Recuperer une URL propre correspondant a l'objet.
-	$row = sql_allfetsel('*', 'spip_urls', '', '', 'type, id_objet, date DESC');
-	$res .= _T('couteau:urls_propres_objet')."\n\n|{{"._T('couteau:urls_propres_titre').'}}|<';
-	$self = str_replace('|', urlencode('|'), self());
-	$fin = '" title='._T('lien_supprimer').'>x</a>';
-	foreach($row as $r) {
-		$id2 = "$r[type] #$r[id_objet]";
-		$s = parametre_url($self, 'suppr', base64_encode(serialize($r)));
-		$url = generer_url_entite($r['id_objet'], $r['type'], '', '', true);
-		$res .= ($id2==$id?"\n_ $r[url]":"|\n|[{$id2}->$url]|$r[url]").' <a href="'.$s.$fin;
-		$id = $id2;
+		$s = explode(',', base64_decode($s), 3);
+		sql_delete("spip_urls", $a="id_objet=$s[0] AND type=".sql_quote($s[1]).' AND url='.sql_quote($s[2]));
 	}
 	include_spip('inc/texte');
 	include_spip('inc/presentation');
-	echo '<html><head>'.envoi_link(_T('couteau:urls_propres_titre')).'</head><body style="text-align:center">'.propre($res."|\n").'</body></html>';
+	include_spip('public/assembler');
+	echo '<html><head>'.f_jQuery(envoi_link(_T('couteau:urls_propres_titre')))
+		.'</head><body style="text-align:center">'
+		.propre(recuperer_fond('fonds/type_urls_liste', array('type'=>_request('type'))))
+		.'</body></html>';
+;
 }
 
 // fonction {$outil}_{$arg}_action() appelee par action/action_rapide.php
@@ -156,4 +148,7 @@ function type_urls_edit_urls2_1_action() {
 		'ar_num_objet', _request('ar_num_objet'), '&'), 'ar_type_objet', _request('ar_type_objet'), '&'));
 }
 
+function cs_url_publique($id, $type) {
+	return generer_url_entite($id, $type, '', '', true);
+}
 ?>
