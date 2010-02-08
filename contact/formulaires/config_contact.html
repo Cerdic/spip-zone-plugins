@@ -97,7 +97,28 @@
 			</BOUCLE_champs>
 		</ul>
 	</fieldset>
-	
+[(#PLUGIN{porte_plume}|oui)	
+	<fieldset>
+		<legend><:contact:configuration_champs_message:></legend>
+		<ul>
+			<li class="choix baisser">
+				<p class="explication"><:contact:configuration_champs_message_explication:></p>
+				<div>
+					<input type="radio" name="barre" id="no_b" class="radio" value="no_barre"[ checked="checked"(#ENV{barre}|=={no_barre}|oui)] />
+					<label for="no_b"><:contact:configuration_no_barre:></label>
+				</div>
+				<div>
+					<input type="radio" name="barre" id="no_p" class="radio" value="no_previsualisation"[ checked="checked"(#ENV{barre}|=={no_previsualisation}|oui)] />
+					<label for="no_p"><:contact:configuration_no_previsualisation:></label>
+				</div>
+				<div>
+					<input type="radio" name="barre" id="b" class="radio" value=""[ checked="checked"(#ENV{barre}|non)] />
+					<label for="b"><:contact:configuration_barre_oui:></label>
+				</div>
+			</li>
+		</ul>
+	</fieldset>
+]	
 	<fieldset>
 		<legend><:contact:configuration_pj:></legend>
 		<ul class="decaler baisser10">
