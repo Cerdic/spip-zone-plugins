@@ -88,6 +88,8 @@ function type_urls_liste_urls_exec() {
 	if($s=_request('suppr')) {
 		$s = explode(',', base64_decode($s), 3);
 		sql_delete("spip_urls", $a="id_objet=$s[0] AND type=".sql_quote($s[1]).' AND url='.sql_quote($s[2]));
+		include_spip('inc/headers');
+		redirige_par_entete(parametre_url(self(),'suppr','','&'));
 	}
 	include_spip('inc/texte');
 	include_spip('inc/presentation');
