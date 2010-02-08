@@ -51,15 +51,19 @@
 			<input type='text' class='text date' name='peremption' id='peremption' value="[(#ENV{peremption})]" />
 		</li>
 
+[(#REM) Les champs optionnels ont leur affichage conditionnés par le plugin CFG. Si le champ n'est pas explicitement désactivé (valeur=off),
+	il s'affiche. Ce qui est donc le cas en l'absence de CFG, et avec CFG mais non configuré. ]
 
-	[(#REM) 'Type' est un champ optionnel]
+	[(#REM) 'Type' est un champ optionnel ]
+		[(#CONFIG{vu/type_annonce}|!={off}|oui) 
 	 	<li class="editer_type[ (#ENV**{erreurs}|table_valeur{type}|oui)erreur]">
 			<label for="type"><:vu:info_type:></label>
 			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{type})</span>]
 			<input type='text' class='text' name='type' id='type' value="[(#ENV**{type})]" />
-		</li>
+		</li> ]
 
 	[(#REM) 'Descriptif' est un champ optionnel]
+		[(#CONFIG{vu/descriptif_annonce}|!={off}|oui)
 		<li class="editer_descriptif[ (#ENV**{erreurs}|table_valeur{descriptif}|oui)erreur]">
 	      		<label for="text_area"><:vu:info_descriptif:></label>
 			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{descriptif})</span>
@@ -67,9 +71,10 @@
 			][(#ENV**{config}|table_valeur{afficher_barre}|?{#VAL{text_area}|barre_typo{#LANG}})]
 			<textarea name='descriptif' id='text_area' class='barre_inserer' rows='[(#ENV**{config}|table_valeur{lignes}|plus{2})]' cols='40'[
 			(#ENV**{_browser_caret,''})]>[(#ENV**{descriptif})]</textarea>
-		</li>
+		</li> ]
 
 	[(#REM) 'Sources' sont des champs optionnels]
+		[(#CONFIG{vu/source_annonce}|!={off}|oui)
 	  	<li class="editer_source fieldset">
 			<fieldset>
 			<h3 class="legend"><:vu:info_legend_source:></h3>
@@ -86,9 +91,10 @@
 				</li>
 			</ul>
 	    	</fieldset>
-	    </li>
+	    </li> ]
 
 	    
+
 	    [(#SESSION{statut}|=={0minirezo}|oui)
 	 	<li class="fieldset">
 			<fieldset>

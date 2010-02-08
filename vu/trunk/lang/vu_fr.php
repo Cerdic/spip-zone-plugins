@@ -21,6 +21,26 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'apercu_publie' => 'Publi&eacute;',
 	'apercu_source' => 'source : ',
 
+// C
+	'cfg_descriptif' => '<h4>Configurer le plugin Vu !</h4> <p>Vous pouvez ici choisir quels sont les types d\'objets actifs ainsi que les champs optionnels &agrave; utiliser pour chacun d\'entre eux.</p><p><b>Par défaut</b>, tous les objets et tous les champs optionnels sont activ&eacute;s.</p><p><b>Nota : </b>d&eacute;sactiver un objet ou un champ n\'a aucune incidence sur le contenu de la base de donn&eacute;e. On se contente simplement de retirer les formulaires superflux de l\'interface priv&eacute;e. Par cons&eacute;quent, quelque soit le param&eacute;trage choisi le contenu reste disponible depuis l\'interface publique, si le squelette le permet.</p><p><a href="http://www.spip-contrib.net/Vu-la-documentation" class="spip_out">Documentation</a>',
+	'cfg_titre' => 'Vu !',
+	'cfg_soustitre1' => 'Les objets actifs',
+	'cfg_soustitre2' => 'Les champs optionnels',
+	'cfg_explication1' => 'Le plugin <i>Vu!</i> propose (actuellement) trois types d\'objets pour relayer de l\'information : les annonces, les &eacute;v&eacute;nements et les publications. Vous avez ici la possibilit&eacute; de choisir quels objets seront utilis&eacute;s sur votre site.',
+	'cfg_explication2' => 'En plus des champs obligatoires (requis pour une utilisation minimale de chacun des objets <i>Vu!</i>), quelques champs optionnels sont ici mis &agrave; disposition afin que vous puissiez adapter plus finement le plugin &agrave; votre site.',
+	'cfg_concernant_annonce' => 'Concernant les annonces',
+	'cfg_concernant_evenement' => 'Concernant les événements',	
+	'cfg_concernant_publication' => 'Concernant les publications',
+	'cfg_label_type' => 'Type :',
+	'cfg_label_descriptif' => 'Descriptif :',
+	'cfg_label_source' => 'Source :',
+	'cfg_label_langue' => 'Langue :',
+	'cfg_label_annonce' => 'Les annonces :',
+	'cfg_label_evenement' => 'Les &eacute;v&eacute;nements :',
+	'cfg_label_publication' => 'Les publications :',
+	'cfg_zero_objet' => '<b>Aucun objet de veille n\'est actuellement activ&eacute;.</b><br />Pour rem&eacute;dier &agrave ce probl&egrave;me, rendez-vous sur la page de <a href="?exec=cfg&cfg=vu">configuration</a>.',
+
+
 // D
 	'description_plugin' => 'Relayez l\'information plutôt que de la (re)publier !',
 

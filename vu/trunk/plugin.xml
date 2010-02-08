@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Vu !</nom>
 	<auteur>archi02</auteur>
-	<version>0.2</version>
+	<version>0.4</version>
 	<version_base>0.2</version_base>
 
 	<icon>img_pack/vu_logo_64.png</icon>
@@ -9,6 +9,8 @@
 		<i>&laquo; Relayez l'information, plut&ocirc;t que de la (re)publier ! &raquo;</i>
 
 		Ce plugin propose plusieurs nouveaux objets pour pallier à l'impossibilit&eacute; sur SPIP de <i>relayer</i> simplement de l'information, c'est &agrave; dire publier sans contenu. Typiquement (mais ce n'est qu'un exemple) ceci est très utile pour une activit&eacute; de veille th&eacute;matique.
+
+		[Configuration possible par CFG->?exec=cfg&amp;cfg=vu]
 	</description>
 	<lien>[Pour une pr&eacute;sentation d&eacute;taill&eacute;e du plugin->http://www.spip-contrib.net/article3066]</lien>
 	<licence>&copy; 2009 - Distribu&eacute; sous licence GNU/LGPL</licence>
@@ -66,13 +68,9 @@
 
 	<!-- Pipeline : entete des pages de l'espace prive -->
 	<pipeline>
-
 		<nom>header_prive</nom>
-
 		<action>header_prive</action>
-
 		<inclure>vu_pipelines.php</inclure>
-
 	</pipeline>
 
 	<!-- Pipeline : boites d'infos des objets dans 'exec/veille_voir' -->
@@ -101,6 +99,7 @@
 
 
 	<necessite id="spip" version="[2.0.0;]" />
+	<utilise id='CFG' version='[1.0;]' /> 
 
 	<!-- Ajouter bouton de navigation dans l'interface privee -->
 	<bouton id="vu_tous" parent="naviguer">

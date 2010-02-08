@@ -142,6 +142,18 @@ function exec_veille_voir(){
 		. "</span></li></ul></li></ul>";
 	echo fin_grand_cadre(true);
 
+	// On choisit quels boutons seront affiches dans le 'bloc des raccourcis'
+	// (dépends des autorisations donnees par CFG)
+	$quels_boutons = "";
+	if (function_exists('lire_config')) {	
+		if ( lire_config('vu/objet_annonce') != "off" )
+			$quels_boutons.= icone_horizontale(_T('vu:raccourcis_annonce'), generer_url_ecrire("veille_edit","type=annonce&new=oui"), _DIR_VU_IMG_PACK."annonce-24.gif", "creer.gif", false);
+		if( lire_config('vu/objet_evenement') != "off")
+			$quels_boutons.= icone_horizontale(_T('vu:raccourcis_evenement'), generer_url_ecrire("veille_edit","type=evenement&new=oui"), _DIR_VU_IMG_PACK."evenement-24.gif", "creer.gif", false);
+		if( lire_config('vu/objet_publication') != "off")
+			$quels_boutons.= icone_horizontale(_T('vu:raccourcis_publication'), generer_url_ecrire("veille_edit","type=publication&new=oui"), _DIR_VU_IMG_PACK."publication-24.gif", "creer.gif", false);
+	}
+
 		
 
 
@@ -171,11 +183,7 @@ function exec_veille_voir(){
 	// On cree une colonne a droite
 	echo creer_colonne_droite('', true)
 		// On ouvre un bloc de raccourcis
-		. bloc_des_raccourcis(
-			// On y ajoute un lien vers chaque type d'objet que nous avons
-			icone_horizontale(_T('vu:raccourcis_annonce'), generer_url_ecrire("veille_edit","type=annonce&new=oui"), _DIR_VU_IMG_PACK."annonce-24.gif", "creer.gif", false)
-			. icone_horizontale(_T('vu:raccourcis_evenement'), generer_url_ecrire("veille_edit","type=evenement&new=oui"), _DIR_VU_IMG_PACK."evenement-24.gif", "creer.gif", false)
-			. icone_horizontale(_T('vu:raccourcis_publication'), generer_url_ecrire("veille_edit","type=publication&new=oui"), _DIR_VU_IMG_PACK."publication-24.gif", "creer.gif", false));
+		. bloc_des_raccourcis($quels_boutons);
 
 	// On a fini, mais on laisse la possibilite a d'autres
 	// d'afficher du contenu ici
