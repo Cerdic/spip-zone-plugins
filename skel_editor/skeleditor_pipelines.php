@@ -76,7 +76,7 @@ function skeleditor_affichage_final($texte){
 			."id='inclure'>"._T('skeleditor:squelettes')."</a>";
 		}
 		if ($lienplus)
-			$texte .= "<script>jQuery(function(){jQuery('#spip-admin').append(\"$lienplus\");});</script>";
+			$texte .= "<script type='text/javascript'>/*<![CDATA[*/jQuery(function(){jQuery('#spip-admin').append(\"$lienplus\");});/*]]>*/</script>";
 	}
 	return $texte;
 }
