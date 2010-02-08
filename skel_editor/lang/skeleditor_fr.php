@@ -53,6 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_creer_fichier' => 'Cr&eacute;er un fichier',
 	'label_code' => 'Contenu',
+	'label_file' => 'Fichier',
 	'label_filename_squelette' => 'Nom',
 	'label_renommer_fichier' => 'Renommer ou d&eacute;placer',
 	'label_nouveau_fichier' => 'Nouveau fichier',

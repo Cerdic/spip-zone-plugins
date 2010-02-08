@@ -12,12 +12,18 @@
 	#SET{file,#EVAL{_DIR_RACINE}|concat{#GET{file}}}
 	]
 	#SET{path,#REM|skeleditor_dossier}
-	
-	<h1><:skeleditor:fichier:>[ (#GET{file}|basename|sinon{<:info_sans_titre:>})]</h1>
-	<div class="noajax">
-	#FORMULAIRE_EDITER_SQUELETTE{#GET{path},#GET{file}}
-	</div>
-	[(#GET{file}|skeleditor_codemirror)]
+
+	[(#ENV{upload}|non)
+		<h1><:skeleditor:fichier:>[ (#GET{file}|basename|sinon{<:info_sans_titre:>})]</h1>
+		<div class="noajax">
+		#FORMULAIRE_EDITER_SQUELETTE{#GET{path},#GET{file}}
+		</div>
+		[(#GET{file}|skeleditor_codemirror)]
+	]
+	[(#ENV{upload}|oui)
+		<h1><:skeleditor:action_upload:></h1>
+		#FORMULAIRE_UPLOAD_SQUELETTE{#GET{path}}
+	]
 
 	<!--#navigation-->
 	[<a href="(#ENV{retour,''})"><:retour:> [(#ENV{retour}|joli_repertoire)]</a>]
@@ -26,8 +32,6 @@
 	<p><strong>[(#GET{path}|joli_repertoire)]</strong></p>
 	[(#GET{path}|skeleditor_afficher_dir_skel{#GET{file}})]
 	</div>
-
-	#FORMULAIRE_UPLOAD_SQUELETTE
 
 	<!--/#navigation-->
 ]
