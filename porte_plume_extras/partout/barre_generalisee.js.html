@@ -8,7 +8,7 @@ $(document).ready(function(){
 		.barre_outils('edition');
 	[(#CONFIG{ppp/configuration_description_ppp,on}|oui)$('#descriptif_site')
 		.barre_outils('edition');]
-	/*$('#text_area').height(($(window).height()/2.2)+'px');*/
+	[(#CONFIG{ppp/hauteurtexte_ppp,on}|oui)$('#text_area').height(($(window).height()/2.2)+'px');]
 	}
 	addbarre();
 	onAjaxLoad(addbarre);
