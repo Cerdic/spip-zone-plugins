@@ -208,9 +208,9 @@ function cs_urls_propres($type, $id) {
 		. '|{{'. _T('couteau:2pts', array(
 			'objet'=>strtoupper(filtrer_entites(_T('couteau:objet_'.$type))).' '.$id
 		))."}}|\n"
-		. "|$res|\n"
-		. $lien_public
-	);
+		. "|$res|")
+		// bug SPIP ?
+		. propre($lien_public);
 	$GLOBALS['class_spip_plus'] = $mem;
 	return cs_cadre_depliable(_T('couteau:urls_propres_titre'), 'bp_urls_propres', $res);
 }
