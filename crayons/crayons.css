@@ -5,7 +5,7 @@ em.crayon-edit,
 em.crayon-crayon { display: none; }
 .crayon-boutons,
 .crayon-searching { float: right; }
-.crayon-boutons button { width: 20px; height: 20px; border: 0; text-indent: -3000em; cursor: pointer; }
+.crayon-boutons button { width: 20px; height: 20px; border: 0; text-indent: -3000em; cursor: pointer;display:block;float:left; }
 .crayon-boutons .crayon-submit { background: transparent url(images/ok.png) left top no-repeat; }
 .crayon-boutons .crayon-cancel { background: transparent url(images/cancel.png) left top no-repeat; }
 .crayon-icones { float: right; width: 20px; text-align: right; position: relative; top:0; left:0; z-index:4999; }
@@ -20,7 +20,7 @@ em.crayon-img-changed { cursor: pointer; border:0; }
 .crayon-icones em.crayon-edit { background: url(images/edit.png) no-repeat; height: 20px; width: 20px; }
 .crayon-icones em.crayon-img-changed { background: url(images/changed.png) no-repeat; height: 20px; width: 20px; }
 
-.formulaire_crayon .crayon-active { padding: 1px; border: 1px inset; font: inherit; }
+.formulaire_crayon .crayon-active { padding: 1px; border: 1px inset; font: inherit; display:block; }
 .crayon-html .formulaire_crayon { max-width: 703px; }
 .crayon-html textarea { overflow: auto; font: inherit; }
 .crayon-html { z-index:5000; }
