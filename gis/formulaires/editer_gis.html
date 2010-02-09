@@ -82,6 +82,8 @@
 								var center = marker.getPoint();
 								jQuery("#formulaire_editer_gis #lat").val(center.lat());
 								jQuery("#formulaire_editer_gis #lonx").val(center.lng());
+								[(#CONFIG{gis/geocoding}|oui)
+								geocode(center.lat(),center.lng());]
 							});
 						}
 					});
