@@ -3,14 +3,14 @@
 	http://www.jeroenwijering.com/extras/readme.html
 	http://www.longtailvideo.com/players/jw-image-rotator/
 	This script is licensed under a Creative Commons License.
-	It allows you to use and modify the script for noncommercial purposes. 
-	For commercial use, Jeroenwijering distribute licenses of the script for 15 euros. 
+	It allows you to use and modify the script for noncommercial purposes.
+	For commercial use, Jeroenwijering distribute licenses of the script for 15 euros.
 	For more info and instant ordering, please advance to his online order page!
 	http://www.jeroenwijering.com/?order=form
-	
+
 	Modele spip mis au point sur irc a l'initiative d'alexandra
 	avec la participation de kent1, cy_altern, marcimat, renato et toggg.
-	
+
 	Methode classique <template><rotator123></template> ou 123 est l'id article fournissant les documents attaches
 	Methode par rubrique (on prend les videos parmis les documents de la rubrique) :
 	<template><rotator|rubrique=123></template>
@@ -18,17 +18,17 @@
 	<template><rotator|secteur=123></template>
 	Methode par document unique (on prend un seul document) :
 	<template><rotator|document=123></template>
-	
+
 	Pour les options, voir http://www.jeroenwijering.com/extras/readme.html
-	
-	- align : left|center|right,center : 
+
+	- align : left|center|right,center :
 	- wmode : transparent|opaque ... gère le paramètre flash wmode (pour utilisation avec thickbox notamment)
 	- menu: boolean true|false : Affiche ou cache le menu du lecteur au clic droit
-		
+
 	Définition du Layout :
 	- width : px|%,100% : Largeur du lecteur
-	- height : px|%,100% : hauteur du lecteur
-	
+	- height : px|%,200px : hauteur du lecteur
+
 	Définition des couleurs :
 	- backcolor : string : couleur héxadécimale
 	- frontcolor : string : couleur héxadécimale
@@ -44,8 +44,8 @@
 
 	Définition de l'apparence de la barre de contôles :
 	- shownavigation : true|false,true Active/désactive la barre de navigation.
-	- usefullscreen : true|false,true 
-	
+	- usefullscreen : true|false,true
+
 	Définition du comportement lors de la lecture :
 	- audio : string,url : Url d'un fichier audio à lire lors de la lecture des images
 	- autostart
@@ -55,83 +55,83 @@
 
 	Communication externe :
 	- enablejs : boolean true|false,true
-	- javascriptid : string,player 
+	- javascriptid : string,player
 	- link: url
 	- linkfromdisplay: true|false, false
 	- linktarget: _blanl|_self|_parent|_top|framename, _self
 ]
 
-[(#ENV{donnee}|oui) 
+[(#ENV{donnee}|oui)
   [(#SET{objet_spip,id_donnee})]
   [(#SET{objet_val,[(#ENV{donnee})]})]
 ]
-[(#ENV{rubrique}|oui) 
+[(#ENV{rubrique}|oui)
   [(#SET{objet_spip,id_rubrique})]
   [(#SET{objet_val,[(#ENV{rubrique})]})]
 ]
-[(#ENV{secteur}|oui) 
+[(#ENV{secteur}|oui)
   [(#SET{objet_spip,id_secteur})]
   [(#SET{objet_val,[(#ENV{secteur})]})]
 ]
-[(#ENV{document}|oui) 
+[(#ENV{document}|oui)
   [(#SET{objet_spip,id_document})]
   [(#SET{objet_val,[(#ENV{document})]})]
 ]
-[(#ENV{mot}|oui) 
+[(#ENV{mot}|oui)
   [(#SET{objet_spip,id_mot})]
   [(#SET{objet_val,[(#ENV{mot})]})]
 ]
-[(#ENV{breve}|oui) 
+[(#ENV{breve}|oui)
   [(#SET{objet_spip,id_breve})]
   [(#SET{objet_val,[(#ENV{breve})]})]
 ]
-[(#ENV{article}|oui) 
+[(#ENV{article}|oui)
   [(#SET{objet_spip,id_article})]
   [(#SET{objet_val,[(#ENV{article})]})]
 ]
-[(#GET{objet_spip}|non) 
+[(#GET{objet_spip}|non)
   [(#SET{objet_spip,id_article})]
   [(#SET{objet_val,[(#ENV{id_rotator})]})]
 ]
 
 [(#SET{align,#ENV{align,center}})]
 [(#SET{wmode,#ENV{wmode,#CONFIG{xspf/wmode}|sinon{transparent}}})]
-[(#SET{menu,#ENV{menu,#CONFIG{xspf/rotmenu}|sinon{false}}})]
+[(#SET{menu,#ENV{menu,#CONFIG{xspf_rotator/rotmenu}|sinon{false}}})]
 
-[(#SET{width,#ENV{width,#CONFIG{xspf/rotwidth}|sinon{100%}}})]
-[(#SET{height,#ENV{height,#CONFIG{xspf/rotheigth}|sinon{100%}}})]
+[(#SET{width,#ENV{width,#CONFIG{xspf_rotator/rotwidth}|sinon{100%}}})]
+[(#SET{height,#ENV{height,#CONFIG{xspf_rotator/rotheight}|sinon{200}}})]
 
-[(#SET{backcolor,#CONFIG{xspf/rotbackcolor}|replace{#,0x}|sinon{0xFFFFFF}})]
-[(#SET{frontcolor,#CONFIG{xspf/rotfrontcolor}|replace{#,0x}|sinon{0x000000}})]
-[(#SET{lightcolor,#CONFIG{xspf/rotlightcolor}|replace{#,0x}|sinon{0xCC0000}})]
-[(#SET{screencolor,#CONFIG{xspf/rotscreencolor}|replace{#,0x}|sinon{0x000000}})]
+[(#SET{backcolor,#CONFIG{xspf_rotator/rotbackcolor}|replace{#,0x}|sinon{0xFFFFFF}})]
+[(#SET{frontcolor,#CONFIG{xspf_rotator/rotfrontcolor}|replace{#,0x}|sinon{0x000000}})]
+[(#SET{lightcolor,#CONFIG{xspf_rotator/rotlightcolor}|replace{#,0x}|sinon{0xCC0000}})]
+[(#SET{screencolor,#CONFIG{xspf_rotator/rotscreencolor}|replace{#,0x}|sinon{0x000000}})]
 
-[(#SET{jwlogo,#ENV{logo,#CONFIG{xspf/rotlogo}}})]
-[(#SET{overstretch,#ENV{overstretch,#CONFIG{xspf/rotoverstretch}|sinon{none}}})]
-[(#SET{showeq,#ENV{showeq,#CONFIG{xspf/rotshoweq}|sinon{false}}})]
-[(#SET{showicons,#ENV{showicons,#CONFIG{xspf/rotshowicons}|sinon{true}}})]
-[(#SET{transition,#ENV{transition,#CONFIG{xspf/rottransition}|sinon{fade}}})]
+[(#SET{jwlogo,#ENV{logo,#CONFIG{xspf_rotator/rotlogo}}})]
+[(#SET{overstretch,#ENV{overstretch,#CONFIG{xspf_rotator/rotoverstretch}|sinon{none}}})]
+[(#SET{showeq,#ENV{showeq,#CONFIG{xspf_rotator/rotshoweq}|sinon{false}}})]
+[(#SET{showicons,#ENV{showicons,#CONFIG{xspf_rotator/rotshowicons}|sinon{true}}})]
+[(#SET{transition,#ENV{transition,#CONFIG{xspf_rotator/rottransition}|sinon{fade}}})]
 
-[(#SET{shownavigation,#ENV{shownavigation,#CONFIG{xspf/rotshownavigation}|sinon{true}}})]
-[(#SET{usefullscreen,#ENV{usefullscreen,#CONFIG{xspf/rotusefullscreen}|sinon{true}}})]
+[(#SET{shownavigation,#ENV{shownavigation,#CONFIG{xspf_rotator/rotshownavigation}|sinon{true}}})]
+[(#SET{usefullscreen,#ENV{usefullscreen,#CONFIG{xspf_rotator/rotusefullscreen}|sinon{true}}})]
 
-[(#SET{audio,#ENV{audio,#CONFIG{xspf/rotaudio}}})]
-[(#SET{autostart,#ENV{autostart,#CONFIG{xspf/rotautostart}|sinon{false}}})]
-[(#SET{repeat,#ENV{repeat,#CONFIG{xspf/rotrepeat}|sinon{true}}})]
-[(#SET{rotatetime,#ENV{rotatetime,#CONFIG{xspf/rotrotate}|sinon{5}}})]
-[(#SET{shuffle,#ENV{shuffle,#CONFIG{xspf/rotshuffle}|sinon{false}}})]
-[(#SET{volume,#ENV{volume,#CONFIG{xspf/rotvolume}|sinon{90}}})]
+[(#SET{audio,#ENV{audio,#CONFIG{xspf_rotator/rotaudio}}})]
+[(#SET{autostart,#ENV{autostart,#CONFIG{xspf_rotator/rotautostart}|sinon{false}}})]
+[(#SET{repeat,#ENV{repeat,#CONFIG{xspf_rotator/rotrepeat}|sinon{true}}})]
+[(#SET{rotatetime,#ENV{rotatetime,#CONFIG{xspf_rotator/rotrotate}|sinon{5}}})]
+[(#SET{shuffle,#ENV{shuffle,#CONFIG{xspf_rotator/rotshuffle}|sinon{false}}})]
+[(#SET{volume,#ENV{volume,#CONFIG{xspf_rotator/rotvolume}|sinon{90}}})]
 
 [(#SET{enablejs,#ENV{enablejs,#CONFIG{xspf/enablejs}}})]
-[(#SET{javascriptid,#ENV{javascriptid,#CONFIG{xspf/rotjavascriptid}}})]
-[(#SET{link,#ENV{link,#CONFIG{xspf/rotlink}}})]
-[(#SET{linkfromdisplay,#ENV{linkfromdisplay,#CONFIG{xspf/rotlinkfromdisplay}}})]
-[(#SET{linktarget,#ENV{linktarget,#CONFIG{xspf/rotlinktarget}}})]
+[(#SET{javascriptid,#ENV{javascriptid,#CONFIG{xspf_rotator/rotjavascriptid}}})]
+[(#SET{link,#ENV{link,#CONFIG{xspf_rotator/rotlink}}})]
+[(#SET{linkfromdisplay,#ENV{linkfromdisplay,#CONFIG{xspf_rotator/rotlinkfromdisplay}}})]
+[(#SET{linktarget,#ENV{linktarget,#CONFIG{xspf_rotator/rotlinktarget}}})]
 
 <noscript><p><:xspf:js_necessaire:></p></noscript>
 <!-- alternative texte pour ceux qui ont le js desactive -->
 
-<div id="rotator_container_[(#GET{objet_spip})]_[(#GET{objet_val})][_(#ENV{id})]" class="xspf_player" style="[(#GET{align}|=={center}|?{margin:auto; text-align:center;,float:[(#GET{align})]})]">
+<div id="rotator_container[_(#ENV{id})][_(#GET{objet_spip})][_(#GET{objet_val})]" class="xspf_player" style="[(#GET{align}|=={center}|?{margin:auto; text-align:center;,float:[(#GET{align})]})]">
 	<p>
 		<:xspf:get_player{url=http://get.adobe.com/fr/flashplayer/}:>
 	</p>
@@ -148,49 +148,49 @@
 	var attributes[_(#ENV{id})][_(#GET{objet_val})] = {};
   		attributes[_(#ENV{id})][_(#GET{objet_val})].id= "rotator_[(#GET{objet_spip})]_[(#GET{objet_val})][_(#ENV{id})]";
   		attributes[_(#ENV{id})][_(#GET{objet_val})].name= "rotator_[(#GET{objet_spip})]_[(#GET{objet_val})][_(#ENV{id})]";
-		
-		
+
+
 	var flashvars[_(#ENV{id})][_(#GET{objet_val})] = {};
 		flashvars[_(#ENV{id})][_(#GET{objet_val})].file = encodeURIComponent("[(#URL_PAGE{xspf}|parametre_url{type,'jpg|png|gif','&'}|parametre_url{[(#GET{objet_spip})],[(#GET{objet_val})],'&'}|url_absolue)]");
-	
+
 		// Layout
 		flashvars[_(#ENV{id})][_(#GET{objet_val})].height = "#GET{height}";
 		flashvars[_(#ENV{id})][_(#GET{objet_val})].width = "#GET{width}";
-	
+
 		// Colors
 		flashvars[_(#ENV{id})][_(#GET{objet_val})].backcolor = "#GET{backcolor}";
 		flashvars[_(#ENV{id})][_(#GET{objet_val})].frontcolor = "#GET{frontcolor}";
 		flashvars[_(#ENV{id})][_(#GET{objet_val})].lightcolor = "#GET{lightcolor}";
 		flashvars[_(#ENV{id})][_(#GET{objet_val})].screencolor = "#GET{screencolor}";
-		
+
 		[(#GET{jwlogo}|!={''}|oui)flashvars[_(#ENV{id})][_(#GET{objet_val})].logo = "#GET{jwlogo}";]
 		flashvars[_(#ENV{id})][_(#GET{objet_val})].overstretch = "#GET{overstretch}";
 		flashvars[_(#ENV{id})][_(#GET{objet_val})].showeq = "#GET{showeq}";
 		flashvars[_(#ENV{id})][_(#GET{objet_val})].showicons = "#GET{showicons}";
 		flashvars[_(#ENV{id})][_(#GET{objet_val})].transition = "#GET{transition}";
-	
+
 		flashvars[_(#ENV{id})][_(#GET{objet_val})].shownavigation = "#GET{shownavigation}";
 		flashvars[_(#ENV{id})][_(#GET{objet_val})].usefullscreen = "#GET{usefullscreen}";
-	
+
 		[(#GET{audio}|!={''}|oui)flashvars[_(#ENV{id})][_(#GET{objet_val})].audio = "#GET{audio}";]
 		flashvars[_(#ENV{id})][_(#GET{objet_val})].autostart = "#GET{autostart}";
 		flashvars[_(#ENV{id})][_(#GET{objet_val})].repeat = "#GET{repeat}";
 		flashvars[_(#ENV{id})][_(#GET{objet_val})].rotatetime = "#GET{rotatetime}";
 		flashvars[_(#ENV{id})][_(#GET{objet_val})].shuffle = "#GET{shuffle}";
 		flashvars[_(#ENV{id})][_(#GET{objet_val})].volume = "#GET{volume}";
-	
+
 		flashvars[_(#ENV{id})][_(#GET{objet_val})].enablejs = "#GET{enablejs}";
 		flashvars[_(#ENV{id})][_(#GET{objet_val})].linktarget = "#GET{linktarget}";
-		flashvars[_(#ENV{id})][_(#GET{objet_val})].linkfromdisplay = "#GET{linkfromdisplay}";	
-	
+		flashvars[_(#ENV{id})][_(#GET{objet_val})].linkfromdisplay = "#GET{linkfromdisplay}";
+
 	$(document).ready(function() {
-		swfobject.embedSWF("#CHEMIN{lib/imagerotator/imagerotator.swf}", "rotator_container_[(#GET{objet_spip})]_[(#GET{objet_val})][_(#ENV{id})]", "#GET{width}", "#GET{height}", "9.0.0","#CHEMIN{lib/swfobject/expressInstall.swf}", flashvars[_(#ENV{id})][_(#GET{objet_val})], params[_(#ENV{id})][_(#GET{objet_val})], attributes[_(#ENV{id})][_(#GET{objet_val})]);
+		swfobject.embedSWF("#CHEMIN{lib/imagerotator/imagerotator.swf}", "rotator_container[_(#ENV{id})][_(#GET{objet_spip})][_(#GET{objet_val})]", "#GET{width}", "#GET{height}", "9.0.0","#CHEMIN{lib/swfobject/expressInstall.swf}", flashvars[_(#ENV{id})][_(#GET{objet_val})], params[_(#ENV{id})][_(#GET{objet_val})], attributes[_(#ENV{id})][_(#GET{objet_val})]);
 	});
 // ]]>
 </script>
 
 [(#REM)
-Toutes les options du flash image rotator des flashvars sont disponibles ici 
+Toutes les options du flash image rotator des flashvars sont disponibles ici
 http://developer.longtailvideo.com/trac/wiki/Flashvars3
 Les transitions disponibles :
 fade,bgfade,blocks,bubbles,circles,fluids,lines,random,slowfade]
