@@ -167,6 +167,9 @@ function skeleditor_cree_chemin($path_base,$file){
  */
 function skeleditor_nom_copie($source){
 	$file = "";
+	// cas particulier des squelettes obtenus par scaffolding
+	if (strncmp($source,_DIR_CACHE."scaffold/",$l=strlen(_DIR_CACHE."scaffold/"))==0)
+		return substr($source,$l);
 	$spip_path = creer_chemin();
 	$spip_path = array_diff($spip_path, array(_DIR_RACINE));
 	$spip_path[] = _DIR_RACINE;
