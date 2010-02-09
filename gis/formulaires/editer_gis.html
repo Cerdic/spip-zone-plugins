@@ -73,6 +73,8 @@
 							marker = new GMarker(point,{draggable:true});
 							map.addOverlay(marker);
 							marker.openInfoWindowHtml(adresse);
+							[(#CONFIG{gis/geocoding}|oui)
+							geocode(point.lat(),point.lng());]
 							jQuery("#formulaire_editer_gis #lat").val(point.lat());
 							jQuery("#formulaire_editer_gis #lonx").val(point.lng());
 							jQuery("#formulaire_editer_gis #zoom").val(map.getZoom());
