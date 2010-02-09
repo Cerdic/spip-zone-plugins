@@ -56,7 +56,7 @@ function cs_compatibilite_ascendante() {
 	cs_suppr_metas_var('');
 	effacer_meta('cs_decoupe');
 	if(defined('_SPIP19300')) {
-		if($metas_vars['radio_desactive_cache3']==1) $metas_vars['radio_desactive_cache4']=-1;
+		if(@$metas_vars['radio_desactive_cache3']==1) $metas_vars['radio_desactive_cache4']=-1;
 		cs_suppr_metas_var('radio_desactive_cache3');
 	}
 }
@@ -102,8 +102,8 @@ function add_variable($tableau) {
 	// enregistrement
 	$cs_variables[$nom] = $tableau;
 	// on fabrique ici une liste des chaines et une liste des nombres
-	if($tableau['format']==_format_NOMBRE) $cs_variables['_nombres'][] = $nom;
-		elseif($tableau['format']==_format_CHAINE) $cs_variables['_chaines'][] = $nom;
+	if(@$tableau['format']==_format_NOMBRE) $cs_variables['_nombres'][] = $nom;
+		elseif(@$tableau['format']==_format_CHAINE) $cs_variables['_chaines'][] = $nom;
 }
 // idem, arguments variables
 function add_variables() { foreach(func_get_args() as $t) add_variable($t); }
@@ -117,7 +117,7 @@ function add_outils_xml($f) {
 		add_variable(parse_variable_xml($a));
 	if(isset($arbre['outil'])) foreach($arbre['outil'] as $a) {
 		$out = parse_outil_xml($a);
-		if(strlen($out['nom']) && !preg_match(',couteau_suisse/outils/,', $f))
+		if(strlen(@$out['nom']) && !preg_match(',couteau_suisse/outils/,', $f))
 			$outil['nom'] = "<i>$out[nom]</i>";
 		add_outil($out);
 	}
@@ -185,11 +185,11 @@ function cs_get_defaut($variable) {
 	$defaut = function_exists($f='initialiser_variable_'.$variable['nom'])?$f()
 		:(!isset($variable['defaut'])?'':$variable['defaut']);
 	if(!strlen($defaut)) $defaut = "''";
-	if($variable['format']==_format_NOMBRE) $defaut = "intval($defaut)";
-		elseif($variable['format']==_format_CHAINE) $defaut = "strval($defaut)";
+	if(@$variable['format']==_format_NOMBRE) $defaut = "intval($defaut)";
+		elseif(@$variable['format']==_format_CHAINE) $defaut = "strval($defaut)";
 //cs_log("cs_get_defaut() - \$defaut[{$variable['nom']}] = $defaut");
 	eval("\$defaut=$defaut;");
-	$defaut2 = cs_php_format($defaut, $variable['format']!=_format_NOMBRE);
+	$defaut2 = cs_php_format($defaut, @$variable['format']!=_format_NOMBRE);
 //cs_log(" -- cs_get_defaut() - \$defaut[{$variable['nom']}] est devenu : $defaut2");
 	return $defaut2;
 }
@@ -217,11 +217,11 @@ function set_cs_metas_pipelines(&$infos_pipelines) {
 	foreach($infos_pipelines as $pipe=>$infos) {
 		$code = "\n# Copie du code utilise en eval() pour le pipeline '$pipe(\$flux)'\n";
 		// compilation des differentes facon d'utiliser un pipeline
-		if(is_array($infos['inclure'])) foreach ($infos['inclure'] as $inc) {
+		if(is_array(@$infos['inclure'])) foreach ($infos['inclure'] as $inc) {
 			$code .= "include_spip('$inc');\n";
 		}
-		if(is_array($infos['inline'])) foreach ($infos['inline'] as $inc) $code .= "$inc\n";
-		if(is_array($infos['fonction'])) foreach ($infos['fonction'] as $fonc)
+		if(is_array(@$infos['inline'])) foreach ($infos['inline'] as $inc) $code .= "$inc\n";
+		if(is_array(@$infos['fonction'])) foreach ($infos['fonction'] as $fonc)
 			$code .= "function_exists('$fonc')?\$flux=$fonc(\$flux):cs_deferr('$fonc');\n";
 		$controle .= $cs_metas_pipelines[$pipe] = $code;
 	}
@@ -351,7 +351,7 @@ function cs_sauve_configuration() {
 		. "\t'variables' => array(\n\t" . join(",\n\t", $metas_actifs) . "\n\t)\n); # $nom_pack #\n";
 
 	ecrire_fichier(_DIR_CS_TMP.'config.php', '<'."?php\n// Configuration de controle pour le plugin 'Couteau Suisse'\n\n$sauve?".'>');
-	if($_GET['cmd']=='pack') $GLOBALS['cs_pack_actuel'] = $temp;
+	if(@$_GET['cmd']=='pack') $GLOBALS['cs_pack_actuel'] = $temp;
 }
 
 // cree les tableaux $infos_pipelines et $infos_fichiers, puis initialise $cs_metas_pipelines
@@ -597,7 +597,7 @@ function cs_get_code_variable($variable, $valeur) {
 	if(!strlen($valeur)) {
 		if($cs_variable['format']==_format_NOMBRE) $valeur='0'; else $valeur='""';
 	} else
-		$valeur = cs_php_format($valeur, $cs_variable['format']!=_format_NOMBRE);
+		$valeur = cs_php_format($valeur, @$cs_variable['format']!=_format_NOMBRE);
 	$code = '';
 	foreach($cs_variable as $type=>$param) if(preg_match(',^code(:(.*))?$,', $type, $regs)) {
 		$eval = '$test = ' . (isset($regs[2])?str_replace('%s', $valeur, $regs[2]):'true') . ';';

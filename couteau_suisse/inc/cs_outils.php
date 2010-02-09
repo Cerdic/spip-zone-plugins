@@ -31,7 +31,7 @@ function cs_initialisation_d_un_outil($outil_, $description_outil, $modif) {
 	if(!isset($outil['nom'])) $outil['nom'] = _T('couteauprive:'.$outil['id'].':nom');
 	if(isset($outil['perso'])) $outil['nom'] = '<i>'.$outil['nom'].'</i>';
 	if(isset($outil['code:jq'])) $outil['jquery']='oui';
-	$outil['actif'] = isset($metas_outils[$outil['id']])?$metas_outils[$outil['id']]['actif']:0;
+	$outil['actif'] = isset($metas_outils[$outil['id']])?@$metas_outils[$outil['id']]['actif']:0;
 	// Si Spip est trop ancien ou trop recent...
 	if(cs_version_erreur($outil)) { $metas_outils[$outil['id']]['actif'] = $outil['actif'] = 0; }
 	// au cas ou des variables sont presentes dans le code

@@ -49,7 +49,7 @@ function cs_initialisation($forcer=false, $init_includes=true) {
 	$mysql=function_exists('mysql_get_client_info')?' - MYSQL v'.mysql_get_client_info():'';
 	if (!intval($deja_passe_ici))
 		if(defined('_LOG_CS')) cs_log("#### 1er PASSAGE $rand################################# - \$forcer = ".intval($forcer)
-			. "\n{$rand}PHP v".phpversion()."$mysql - base SPIP v$GLOBALS[spip_version] - code SPIP v$GLOBALS[spip_version_code]");
+			. "\n{$rand}PHP v".phpversion()."$mysql - base SPIP v$GLOBALS[spip_version_base] - code SPIP v$GLOBALS[spip_version_code]");
 	$deja_passe_ici++;
 	// si les metas ne sont pas lus, on les lit
 if(defined('_LOG_CS')) cs_log("{$rand}cs_initialisation($forcer) : Passage #$deja_passe_ici");
