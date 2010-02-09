@@ -30,6 +30,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'identifier' => 'Pour ajouter des tags sur cet article, vous devez vous identifier',
 
+	// L
+	'label_tags' => 'Tags :',
+
 	// M
 	'message_aucun_tags' => 'Aucun tag n\'est associ&eacute;',
 	'message_installation_activation' => 'Installation des tables et configuration par d&eacute;faut de spip.icio.us',
