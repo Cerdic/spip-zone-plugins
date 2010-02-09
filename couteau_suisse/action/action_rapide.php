@@ -8,6 +8,12 @@
 #-----------------------------------------------------#
 if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
 
+function redirige_vers_exec($params=array()) {
+	$url = urldecode(_request('redirect'));
+	foreach($params as $p=>$v) $url = parametre_url($url, $p, $v, '&');
+	redirige_par_entete($url);
+}
+
 function action_action_rapide_dist() {
 	$arg = _request('arg');
 cs_log("INIT : action_action_rapide_dist() - Une action rapide '$arg' a ete demandee !");

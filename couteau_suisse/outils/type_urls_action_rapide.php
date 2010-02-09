@@ -123,8 +123,7 @@ function type_urls_edit_urls_1_action() {
 	$url = trim(_request('ar_url_objet'));
 	$q = "UPDATE spip_$table SET url_propre="._q($url)." WHERE id_$type=$id";
 	spip_query($q);
-	redirige_par_entete(parametre_url(parametre_url(urldecode(_request('redirect')),
-		'ar_num_objet', _request('ar_num_objet'), '&'), 'ar_type_objet', _request('ar_type_objet'), '&'));
+	redirige_vers_exec(array('ar_num_objet' => _request('ar_num_objet'), 'ar_type_objet' => _request('ar_type_objet')));
 }
 // fonction {$outil}_{$arg}_action() appelee par action/action_rapide.php
 function type_urls_edit_urls2_1_action() {
@@ -146,8 +145,7 @@ function type_urls_edit_urls2_1_action() {
 			spip_log("L'URL $type#$id a ete cree : $url");
 		}
 	}
-	redirige_par_entete(parametre_url(parametre_url(urldecode(_request('redirect')),
-		'ar_num_objet', _request('ar_num_objet'), '&'), 'ar_type_objet', _request('ar_type_objet'), '&'));
+	redirige_vers_exec(array('ar_num_objet' => _request('ar_num_objet'), 'ar_type_objet' => _request('ar_type_objet')));
 }
 
 function cs_url_publique($id, $type) {

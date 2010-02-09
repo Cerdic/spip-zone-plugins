@@ -44,14 +44,14 @@ function spam_action_rapide() {
 
 // fonction {$outil}_{$arg}_action() appelee par action/action_rapide.php
 function spam_test_0_action() {
-	// tester l'anti-spam
+	// lancer le test de l'anti-spam
 	// aucune action, le test est pris en charge par ?exec=action_rapide
-	redirige_par_entete(parametre_url(urldecode(_request('redirect')), 'ar_message', _request('ar_message'), '&'));
+	redirige_vers_exec(array('ar_message' =>_request('ar_message')));
 }
 
 function spam_test_1_action() {
-	// tester l'anti-spam sur les messages de la base
-	redirige_par_entete(parametre_url(urldecode(_request('redirect')), 'test_bd', 1, '&'));
+	// lancer le test sur les messages de la base
+	redirige_vers_exec(array('test_bd'=>1));
 }
 
 
