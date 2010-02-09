@@ -44,7 +44,8 @@
 					map.panTo(point);
 					jQuery("#formulaire_editer_gis #lat").val(point.y);
 					jQuery("#formulaire_editer_gis #lonx").val(point.x);
-					geocode(point.y,point.x);
+					[(#CONFIG{gis/geocoding}|oui)
+					geocode(point.y,point.x);]
 				}
 			});
 			// mettre à jour le zoom quand on le modifie
@@ -54,7 +55,8 @@
 			[(#ENV**{lat}|oui)
 			map.addOverlay(new GMarker(new GLatLng([(#ENV**{lat})],[(#ENV**{lonx})])));
 			map.setCenter(new GLatLng([(#ENV**{lat})],[(#ENV**{lonx})]));
-			geocode([(#ENV**{lat})],[(#ENV**{lonx})]);
+			[(#CONFIG{gis/geocoding}|oui)
+			geocode([(#ENV**{lat})],[(#ENV**{lonx})]);]
 			]
 			[(#ENV**{recherche}|oui)
 			jQuery("#map_adresse").focus(function(){jQuery(this).val("");});
