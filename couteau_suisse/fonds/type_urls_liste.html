@@ -3,7 +3,7 @@
 <:couteau:urls_propres_objet:>
 
 <B_u>#GET{a}<BOUCLE_u(URLS){fusion type}{' - '}>[ (#ENV{type}|=={#TYPE}|?{#TYPE})][(#ENV{type}|=={#TYPE}|non)
-	#GET{a}#TYPE->[(#SELF|parametre_url{type,#TYPE})]#GET{b}]
+	#GET{a}#TYPE->[(#SELF|parametre_url{debut_urls,''}|parametre_url{type,#TYPE})]#GET{b}]
 </BOUCLE_u>[ - #GET{a}(#ENV{type}|?{<:couteauprive:tous|strtolower:>})->[(#SELF|parametre_url{type,''})]#GET{b}] #GET{b}</B_u>
 
 <BOUCLE_urls(URLS){type?=#ENV{type}}{par type,id_objet}{fusion concat(type,id_objet)}{pagination 50}>
