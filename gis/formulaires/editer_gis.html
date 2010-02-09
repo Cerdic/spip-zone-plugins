@@ -11,7 +11,31 @@
 			map.addControl(new GLargeMapControl());
 			map.addControl(new GMapTypeControl());
 			map.setCenter(new GLatLng([(#ENV**{lat})],[(#ENV**{lonx})]), [(#ENV**{zoom})], G_NORMAL_MAP);
-
+			[(#CONFIG{gis/geocoding}|oui)
+			// reverse geocoding
+			var geocode = function(lat,lonx) {
+				var geocoder;
+				geocoder = new GClientGeocoder();
+				function showAddress(response) {
+					if (!response || response.Status.code != 200) {
+						return false;
+					} else {
+						place = response.Placemark[(#VAL{91}|chr)]0[(#VAL{93}|chr)];
+						$("#map_adresse").val(place.address);
+						if (place.AddressDetails.Accuracy > 0)
+							$("#pays").val(place.AddressDetails.Country.CountryName);
+						if (place.AddressDetails.Accuracy > 0)
+							$("#code_pays").val(place.AddressDetails.Country.CountryNameCode);
+						if (place.AddressDetails.Accuracy > 1)
+							$("#region").val(place.AddressDetails.Country.AdministrativeArea.AdministrativeAreaName);
+						if (place.AddressDetails.Accuracy > 3)
+							$("#ville").val(place.AddressDetails.Country.AdministrativeArea.SubAdministrativeArea.Locality.LocalityName);
+						if (place.AddressDetails.Accuracy > 4)
+							$("#code_postal").val(place.AddressDetails.Country.AdministrativeArea.SubAdministrativeArea.Locality.PostalCode.PostalCodeNumber);
+					}
+				}
+				geocoder.getLocations(new GLatLng(lat,lonx), showAddress);
+			};]
 			// mettre a jour les coordonnees quand on clique la carte
 			GEvent.addListener(map, "click", function(overlay, point){
 				map.clearOverlays();
@@ -20,6 +44,7 @@
 					map.panTo(point);
 					jQuery("#formulaire_editer_gis #lat").val(point.y);
 					jQuery("#formulaire_editer_gis #lonx").val(point.x);
+					geocode(point.y,point.x);
 				}
 			});
 			// mettre à jour le zoom quand on le modifie
@@ -29,6 +54,7 @@
 			[(#ENV**{lat}|oui)
 			map.addOverlay(new GMarker(new GLatLng([(#ENV**{lat})],[(#ENV**{lonx})])));
 			map.setCenter(new GLatLng([(#ENV**{lat})],[(#ENV**{lonx})]));
+			geocode([(#ENV**{lat})],[(#ENV**{lonx})]);
 			]
 			[(#ENV**{recherche}|oui)
 			jQuery("#map_adresse").focus(function(){jQuery(this).val("");});
@@ -88,6 +114,11 @@
 		[(#REM) declarer les hidden qui declencheront le service du formulaire 
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type='hidden' name='pays' id='pays' value='' />
+		<input type='hidden' name='code_pays' id='code_pays' value='' />
+		<input type='hidden' name='region' id='region' value='' />
+		<input type='hidden' name='ville' id='ville' value='' />
+		<input type='hidden' name='code_postal' id='code_postal' value='' />
 		<ul>[(#ENV{recherche}|oui)
 			<li class="rechercher_adresse">
 				<input type="text" class="text" name="map_adresse" id="map_adresse" value="<:gis:address:>" />
@@ -100,11 +131,11 @@
 			<li class="editer_lonx obligatoire[ (#ENV**{erreurs}|table_valeur{lonx}|oui)erreur]">
 				<label for="lonx">Longitude</label>
 				<input type="text" name="lonx" id="lonx" class="text" value="[(#ENV**{lonx})]" />
-			</li>	
+			</li>
 			<li class="editer_zoom obligatoire[ (#ENV**{erreurs}|table_valeur{zoom}|oui)erreur]">
 				<label for="zoom">Zoom</label>
 				<input type="text" name="zoom" id="zoom" class="text" value="[(#ENV**{zoom})]" />
-			</li>	
+			</li>
 		</ul>
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->

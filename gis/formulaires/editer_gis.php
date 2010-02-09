@@ -45,14 +45,30 @@ function formulaires_editer_gis_traiter_dist($id_article, $recherche='', $retour
 	
 	include_spip('base/abstract_sql');
 	
+	$c = array(
+		"id_article" => $id_article ,
+		"lat" => $lat,
+		"lonx" => $lonx,
+		"zoom" => $zoom
+	);
+	
+	if(lire_config('gis/geocoding') == 'oui'){
+		$geocoding = array(
+			"pays" => _request('pays'),
+			"code_pays" => _request('code_pays'),
+			"region" => _request('region'),
+			"ville" => _request('ville'),
+			"code_postal" => _request('code_postal')
+		);
+		$c = array_merge($c,$geocoding);
+	}
+	
 	// mise a jour ou creation ?
 	if ($id_gis = sql_getfetsel("id_gis", "spip_gis", "id_article=$id_article")) {
-		sql_updateq("spip_gis",
-					array("id_article" => $id_article , "lat" => $lat, "lonx" => $lonx, "zoom" => $zoom),
-					"id_gis=$id_gis");
+		sql_updateq("spip_gis", $c, "id_gis=$id_gis");
 		$res['message_ok'] = _T('gis:coord_maj');
 	}else{
-		sql_insertq("spip_gis",  array("id_article" => $id_article , "lat" => $lat, "lonx" => $lonx, "zoom" => $zoom));
+		sql_insertq("spip_gis", $c);
 		$res['message_ok'] = _T('gis:coord_enregistre');
 	}
 	if ($retour){

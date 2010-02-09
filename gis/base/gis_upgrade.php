@@ -88,6 +88,14 @@
 				spip_query("ALTER TABLE spip_gis ADD zoom int(4) NULL NULL AFTER lonx");
 				ecrire_meta($nom_meta_base_version,$current_version="0.1.6");
 			}
+			if (version_compare($current_version,"0.1.7","<")){
+				spip_query("ALTER TABLE spip_gis ADD pays text NOT NULL DEFAULT '' AFTER zoom");
+				spip_query("ALTER TABLE spip_gis ADD code_pays varchar(255) NOT NULL DEFAULT '' AFTER pays");
+				spip_query("ALTER TABLE spip_gis ADD region text NOT NULL DEFAULT '' AFTER code_pays");
+				spip_query("ALTER TABLE spip_gis ADD ville text NOT NULL DEFAULT '' AFTER region");
+				spip_query("ALTER TABLE spip_gis ADD code_postal varchar(255) NOT NULL DEFAULT '' AFTER ville");
+				ecrire_meta($nom_meta_base_version,$current_version="0.1.7");
+			}
 			/*se encaga de trasladar las variables generales de geomap a gis*/
 			ecrire_metas();
 		}

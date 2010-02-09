@@ -19,7 +19,12 @@ $spip_gis = array(
 	"id_rubrique" => "int(11) NULL NULL",
 	"lat" => "float(21)  NULL NULL",
 	"lonx" => "float(21)  NULL NULL",
-	"zoom" => "tinyint(4)  NULL NULL"
+	"zoom" => "tinyint(4)  NULL NULL",
+	"pays" => "text NOT NULL DEFAULT ''",
+	"code_pays" => "varchar(255) NOT NULL DEFAULT ''",
+	"region" => "text NOT NULL DEFAULT ''",
+	"ville" => "text NOT NULL DEFAULT ''",
+	"code_postal" => "varchar(255) NOT NULL DEFAULT ''"
 	);
 	
 $spip_gis_key = array(

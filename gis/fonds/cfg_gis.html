@@ -48,6 +48,14 @@ Choisissez dans quelles rubriques activer le plugin.
 				<label for="swfobject_non"><:gis:desactiver_swfobject:></label>
 			</div>
 		</li>
+		<li class="editer_geocoding_gis">
+			<label><:gis:geocoding:></label>
+			<p class="explications"><:gis:explication_geocoding:></p>
+			<div class="choix">
+				<input type="checkbox" name="geocoding" class="checkbox" value="oui" id="geocoding"[ (#ENV{geocoding}|=={oui}|?{'checked="checked"'})] />
+				<label for="geocoding"><:gis:activer_geocoding:></label>
+			</div>
+		</li>
 	</ul>
 	<fieldset>
 		<legend><:gis:parametres_formulaire:></legend>
