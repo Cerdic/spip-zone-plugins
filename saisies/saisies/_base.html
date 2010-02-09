@@ -33,8 +33,8 @@
 #SET{disable,#ENV{disable,#ENV{disable_avec_post}}|et{#ENV{disable,#ENV{disable_avec_post}}|!={non}}|?{disabled,''}}
 #SET{readonly,#ENV{readonly}|et{#ENV{readonly}!={non}}|?{readonly,''}}
 #SET{masquer_li, #ENV{type_saisie}|=={destinataires}|et{#ENV*{choix_destinataires}|count|<{2}|ou{#ENV{type_choix}|=={tous}}}}
-<li class="editer_[(#ENV{nom})][ (#GET{obligatoire})][ (#GET{erreurs}|oui)erreur][ (#GET{li_class})][ (#ENV{li_class})]"[ (#GET{masquer_li}|oui)style="display:none;"]>
-	[<label[(#ENV{type_saisie}|match{oui_non|radio|checkbox}|non) for="champ_#ENV{nom}"][ class="(#ENV{type_saisie})"]>(#ENV*{label})[<span class='obligatoire'>(#GET{obligatoire}|oui)[(#ENV*{info_obligatoire}|is_null|?{<:info_obligatoire_02:>,#ENV*{info_obligatoire}})]</span>]</label>]
+<li class="editer_[(#ENV{nom})][ (#GET{obligatoire})][ (#GET{erreurs}|oui)erreur][ (#GET{li_class})][ (#ENV{li_class})][ saisie_(#ENV{type_saisie})]"[ (#GET{masquer_li}|oui)style="display:none;"]>
+	[<label[(#ENV{type_saisie}|match{oui_non|radio|checkbox}|non) for="champ_#ENV{nom}"]>(#ENV*{label})[<span class='obligatoire'>(#GET{obligatoire}|oui)[(#ENV*{info_obligatoire}|is_null|?{<:info_obligatoire_02:>,#ENV*{info_obligatoire}})]</span>]</label>]
 	[<span class='erreur_message'>(#GET{erreurs})</span>]
 	[<p class='explication'>(#ENV*{explication})</p>]
 	[<em class='attention'>(#ENV*{attention})</em>]
