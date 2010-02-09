@@ -10,6 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'test_manuel'=>'Test manuel',
 	'test_base'=>'Test de la base de donn&eacute;es',
 	'base_donnees'=>'Base de donn&eacute;es',
+	'lancer_test' => 'Lancer le test !',
 
 	// A
 	'attente_confirmation' => 'En attente de confirmation',

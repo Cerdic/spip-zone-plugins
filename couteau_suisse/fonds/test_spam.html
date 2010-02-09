@@ -7,7 +7,7 @@
 	<div>
 		<textarea name="ar_message" id="ar_message" style="width:100%;">#ENV{ar_message}</textarea>
 		<input name="test_bd" type="hidden" value="1" />
-		<input name="submit" class='fondo' type='submit' value="<:couteauprive:spam_tester:>" />
+		<input name="submit" class='fondo' type='submit' value="<:couteau:lancer_test:>" />
 	</div>
 	</fieldset>
 	[<div style="color:#22BB22; font-weight:bold;">(#GET{test}|=={ok}|oui)<:couteauprive:spam_test_ok:></div>]
@@ -22,7 +22,7 @@
 	<fieldset><legend>2. <:couteau:base_donnees:> </legend>
 	<p style='text-align:left;'><:couteauprive:spam_tester_bd:></p>
 	<div>
-		<input name="submit" class='fondo' type='submit' value="<:couteauprive:spam_tester:>" />
+		<input name="submit" class='fondo' type='submit' value="<:couteau:lancer_test:>" />
 	</div>
 	</fieldset>
 	[(#ENV{test_bd}|oui)#INCLURE{fond=fonds/test_spam_bd}]

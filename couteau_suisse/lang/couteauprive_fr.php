@@ -629,7 +629,6 @@ _ Exemple~:~{<html>"/&#(?:1[4-9][0-9]{3}|[23][0-9]{4});/"</html>}.</q1>
 	'spam:nom' => 'Lutte contre le SPAM',
 	'spam_test_ko' => 'Ce message serait bloqu&eacute; par le filtre anti-SPAM !',
 	'spam_test_ok' => 'Ce message serait accept&eacute; par le filtre anti-SPAM.',
-	'spam_tester' => 'Lancer le test !',
 	'spam_ip' => 'Blocage IP de @ip@ :',
 	'spam_tester_label' => 'Afin de tester votre liste de s&eacute;quences interdites ou d\'adresses&nbsp;IP, utilisez le cadre suivant :',
 	'spam_tester_bd' => 'Testez &eacute;galement votre votre base de donn&eacute;es et listez les messages qui auraient &eacute;t&eacute; bloqu&eacute;s par la configuration actuelle de l\'outil.',

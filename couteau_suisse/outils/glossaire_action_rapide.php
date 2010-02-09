@@ -39,7 +39,7 @@ function glossaire_action_rapide() {
 	} else $info = '';
 	return ajax_action_auteur('action_rapide', 'test', 'admin_couteau_suisse', "arg=glossaire|description_outil&cmd=descrip#cs_action_rapide",
 		"\n<fieldset><legend>"._T('couteau:test_base')."</legend><div style='text-align: center; padding:0.4em;'><input class='fondo' type='submit' value=\""
-		. attribut_html(_T('couteauprive:spam_tester')) . "\" /></div></fieldset>$info");
+		. attribut_html(_T('couteau:lancer_test')) . "\" /></div></fieldset>$info");
 }
 
 // fonction {$outil}_{$arg}_action() appelee par action/action_rapide.php
