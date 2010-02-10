@@ -26,6 +26,8 @@ function formidable_declarer_tables_principales($tables_principales){
 		"message_ok" => "varchar(255) NOT NULL",
 		"contenu" => "text NOT NULL",
 		"traitement" => "text NOT NULL",
+		"public" => "enum('non', 'oui') DEFAULT 'non' NOT NULL",
+		"statut" => "varchar(10) NOT NULL",
 		"modifiable" => "ENUM('non', 'oui') DEFAULT 'non'",
 		"multiple" => "ENUM('non', 'oui') DEFAULT 'non'",
 		"moderation" => "VARCHAR(10) DEFAULT 'posteriori'",

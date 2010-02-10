@@ -3,7 +3,7 @@
 // Sécurité
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function traitement_email_dist($contenu, $options, $retours){
+function traiter_email_dist($contenu, $options, $retours){
 	$saisies = formidable_chercher_saisies($contenu);
 	
 	// On récupère les destinataires

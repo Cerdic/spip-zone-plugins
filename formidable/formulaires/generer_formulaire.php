@@ -50,7 +50,7 @@ function formulaires_generer_formulaire_traiter($contenu, $traitements){
 	
 	if (is_array($traitements) and !empty($traitements))
 		foreach($traitements as $traitement=>$options){
-			if ($appliquer_traitement = charger_fonction($traitement, 'traitement/'))
+			if ($appliquer_traitement = charger_fonction($traitement, 'traiter/'))
 				$retours = array_merge($retours, $appliquer_traitement($contenu, $options, $retours));
 		}
 	else{
