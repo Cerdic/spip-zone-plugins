@@ -16,7 +16,7 @@
 function _T_ou_typo($texte, $args=array()) {
 	
 	if (preg_match('/^\<:(.*?):\>$/',$texte,$match)) 
-		$text = _T($texte,$args);
+		$text = _T($match[1],$args);
 	else {
 		include_spip('inc/texte');
 		$text = typo($texte);
