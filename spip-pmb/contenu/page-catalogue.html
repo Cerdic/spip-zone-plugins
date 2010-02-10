@@ -1,6 +1,6 @@
 		
 [(#REM) Fil d'Ariane ]
-<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt;[(#ENV{titre_section}|oui) <a href="#URL_PAGE{catalogue}"><:pmb:catalogue:></a> [(#ENV{hierarchie_catalogue})]&gt;] <strong class="on">[(#ENV{titre_section}|sinon{<:pmb:catalogue:>})]</strong></p>
+<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <a href="#URL_PAGE{catalogue}"><:pmb:catalogue:></a> &gt; [<a href="[(#URL_PAGE{catalogue}|parametre_url{id_location,[(#ENV{tab_locationsections_memo}|pmb_tableau2_valeur{0,location_id})]})]">(#ENV{tab_locationsections_memo}|pmb_tableau2_valeur{0,location_caption}|ucfirst)</a> &gt; ] <strong class="on">[(#ENV{tab_locationsections}|pmb_tableau2_valeur{0,location_caption}|ucfirst|sinon{[(#ENV{tab_sections}|pmb_tableau2_valeur{0,section_caption}|ucfirst)]})]</strong></p>
 
 <div class="cartouche">
 	[(#ENV{tab_sections}|pmb_tableau2_valeur{0,section_image}|oui)
@@ -9,7 +9,7 @@
 	      ]
 	]
 
-	<h1 class="h1">[(#ENV{tab_locationsections}|pmb_tableau2_valeur{0,location_caption}|ucfirst|sinon{[(#ENV{tab_sections}|pmb_tableau2_valeur{0,section_caption}|ucfirst)]}|sinon{<:pmb:catalogue:>})]</h1>
+	<h1 class="h1">[(#ENV{tab_locationsections}|pmb_tableau2_valeur{0,location_caption}|ucfirst|sinon{[(#ENV{tab_locationsections_memo}|pmb_tableau2_valeur{0,location_caption}|ucfirst) / ][(#ENV{tab_sections}|pmb_tableau2_valeur{0,section_caption}|ucfirst)]}|sinon{<:pmb:catalogue:>})]</h1>
 	
 </div>
 

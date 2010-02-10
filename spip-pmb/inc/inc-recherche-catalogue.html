@@ -1,10 +1,11 @@
-[(#SET{tab_resultat, [(#ENV**{recherche}|pmb_prepare_recherche|sinon{*}|pmb_recherche_extraire{[(#CONFIG{spip_pmb/url})], [(#ENV{look_ALL}|sinon{0})], [(#ENV{look_AUTHOR}|sinon{0})], [(#ENV{look_PUBLISHER}|sinon{0})], [(#ENV{look_COLLECTION}|sinon{0})], [(#ENV{look_SUBCOLLECTION}|sinon{0})], [(#ENV{look_CATEGORY}|sinon{0})], [(#ENV{look_INDEXINT})], [(#ENV{look_KEYWORDS}|sinon{0})], [(#ENV{look_TITLE}|sinon{0})], [(#ENV{look_ABSTRACT}|sinon{0})], [(#ENV{id_section}|sinon{0})], [(#ENV{debut}|sinon{0})], [(#ENV{fin}|sinon{5})], [(#ENV{typdoc}|sinon{''})]})]})]
+[(#SET{tab_resultat, [(#ENV**{recherche}|pmb_prepare_recherche|sinon{*}|pmb_recherche_extraire{[(#CONFIG{spip_pmb/url})], [(#ENV{look_ALL}|sinon{0})], [(#ENV{look_AUTHOR}|sinon{0})], [(#ENV{look_PUBLISHER}|sinon{0})], [(#ENV{look_COLLECTION}|sinon{0})], [(#ENV{look_SUBCOLLECTION}|sinon{0})], [(#ENV{look_CATEGORY}|sinon{0})], [(#ENV{look_INDEXINT})], [(#ENV{look_KEYWORDS}|sinon{0})], [(#ENV{look_TITLE}|sinon{0})], [(#ENV{look_ABSTRACT}|sinon{0})], [(#ENV{id_section}|sinon{0})], [(#ENV{debut}|sinon{0})], [(#ENV{fin}|sinon{5})], [(#ENV{typdoc}|sinon{''})], [(#ENV{id_location_memo}|sinon{''})]})]})]
 
 
 <a id="resultats_recherche"></a>
 			
 		<div class="menu articles">
 			<B_tab_resultat>
+			<h2 class="h2"><:pmb:resultats_dans_catalogue:></h2>
 			<BOUCLE_tab_resultat(POUR){tableau #GET{tab_resultat}}>
 			[(#COMPTEUR_BOUCLE|=={2}|?{' ',''})
 				[(#GET{tab_resultat}|pmb_tableau2_valeur{0,nb_resultats}|>{1}|oui)
@@ -21,7 +22,7 @@
 			]
 			[(#COMPTEUR_BOUCLE|>{1}|oui)
 			 	
-				<INCLURE{fond=inc/inc-notice-resume}{notice=#VALEUR}{surlignable=1}>
+				<INCLURE{fond=inc/inc-notice-resume}{notice=#VALEUR}{surlignable=1}{compteur=#COMPTEUR_BOUCLE|moins{1}}>
 				
 			]
 			</BOUCLE_tab_resultat>

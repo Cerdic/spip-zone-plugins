@@ -35,7 +35,7 @@
 			<ul class="liste-items">
 				<BOUCLE_tab_resultat(POUR){tableau #GET{tab_notices}}>
 					[(#COMPTEUR_BOUCLE|>{1}|oui)
-						<INCLURE{fond=inc/inc-notice-resume}{notice=#VALEUR}{surlignable=1}>
+						<INCLURE{fond=inc/inc-notice-resume}{notice=#VALEUR}{surlignable=1}{compteur=#COMPTEUR_BOUCLE|moins{1}}>
 					]
 				</BOUCLE_tab_resultat>
 			</ul>

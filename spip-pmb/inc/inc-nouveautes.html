@@ -19,7 +19,7 @@
 			
 			<BOUCLE_tab_resultat(POUR){tableau #GET{tab_notices}}{pagination 5}>
 				[(#COMPTEUR_BOUCLE|>{1}|?{' ',''})
-					<INCLURE{fond=inc/inc-notice-resume}{notice=#VALEUR}>
+					<INCLURE{fond=inc/inc-notice-resume}{notice=#VALEUR}{compteur=#COMPTEUR_BOUCLE|moins{1}}>
 				]
 			</BOUCLE_tab_resultat>
 			</ul>

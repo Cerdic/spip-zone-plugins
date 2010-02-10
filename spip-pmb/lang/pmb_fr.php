@@ -99,6 +99,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'rang' => 'Rang',
 'code_barre' => 'Code barre',
 'code_barre_abbr' => 'CB',
-'titre_lien_pmb' => 'PMB, un SIGB enti&egrave;rement libre'
+'titre_lien_pmb' => 'PMB, un SIGB enti&egrave;rement libre',
+'resultats_dans_site' => 'R&eacute;sultats dans le site',
+'resultats_dans_catalogue' => 'R&eacute;sultats dans le catalogue',
+'info_recherche_avancee' => 'Vous pouvez lancer une recherche portant sur un ou plusieurs mots<br />(titre, auteur, &eacute;diteur, ...)'
+
 );
 ?>

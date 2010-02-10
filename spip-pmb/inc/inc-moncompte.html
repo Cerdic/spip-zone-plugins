@@ -3,10 +3,11 @@
 <BOUCLE_auteurpmb(AUTEURS_PMB){id_auteur=#SESSION{id_auteur}}>
 		
 	   [(#PMB_SESSION|pmb_tester_session{#ID_AUTEUR}|non)
-		  <:pmb:session_expire:>
+		  <:pmb:session_expire:>[(#SET{session_expire,1})]
 	   ]
 	  
-	    <div class="ps surlignable">
+	   [(#SET{session_expire}|non)
+		<div class="ps surlignable">
 		<div>
 		       <table class="spip pmb-tableau">
 			  <tbody>
@@ -28,14 +29,15 @@
 		      </table>
 		</div>
 		</div>
-		
+	  ]
 		<div id="tabs">
+			[(#SET{session_expire}|non)
 			<ul>
 			    <li><a href="#pmb-pretscours"><span><:pmb:prets_en_cours:></span></a></li>
 			    <li><a href="#pmb-pretsretard"><span><:pmb:prets_en_retard:></span></a></li>
 			    <li><a href="#pmb-reservations"><span><:pmb:reservations:></span></a></li>
 			</ul>
-		
+			]
    
 			<div id="pmb-pretscours" class="ps surlignable"><h2 class="pas_surlignable"><:pmb:prets_en_cours:></h2>
 			<div>

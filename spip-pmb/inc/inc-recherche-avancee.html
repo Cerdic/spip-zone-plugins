@@ -1,6 +1,7 @@
 
-
-
+      <br class="nettoyeur" />
+      [<h2><:pmb:recherche_dans:> : (#ENV{tab_sections}|pmb_tableau2_valeur{0,section_caption}|ucfirst)</h2>]
+				
 	<div id="search">
 
 			
@@ -19,9 +20,8 @@
 				<fieldset>
 				<legend><:pmb:recherche_avancee:></legend>
 				<ul>
-				[<li><strong><:pmb:recherche_dans:> : (#ENV{tab_sections}|pmb_tableau2_valeur{0,section_caption}|ucfirst)</strong></li>]
 				
-				<li>Vous pouvez lancer une recherche portant sur un ou plusieurs mots (titre, auteur, &eacute;diteur, ...)</li>
+				<li class="infos-recherche-avancee"><:pmb:info_recherche_avancee:></li>
 				<li>
 				    <input type='text' name='recherche' class='text_query' value="[(#ENV{recherche}|sinon{*})]" size='35' />
 				</li>
