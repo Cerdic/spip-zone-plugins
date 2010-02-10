@@ -228,6 +228,12 @@ add_variables( array(
 	'defaut' => 0,
 	'code:%s' => "@define('_IMG_GD_MAX_PIXELS', %s);\n",
 ), array(
+	'nom' => 'img_GDqual',
+	'format' => _format_NOMBRE,
+	'defaut' => 85,
+	'code:%s' => "@define('_IMG_GD_QUALITE', %s);\n",
+	'label' => '@_CS_CHOIX@',
+), array(
 	'nom' => 'copie_Smax',
 	'format' => _format_NOMBRE,
 	'defaut' => 16,
@@ -235,7 +241,7 @@ add_variables( array(
 ));
 add_outil( array(
 	'id' => 'SPIP_tailles',
-	'code:spip_options' => "%%logo_Hmax%%%%logo_Wmax%%%%logo_Smax%%%%img_Hmax%%%%img_Wmax%%%%img_Smax%%%%doc_Smax%%%%img_GDmax%%%%copie_Smax%%",
+	'code:spip_options' => "%%logo_Hmax%%%%logo_Wmax%%%%logo_Smax%%%%img_Hmax%%%%img_Wmax%%%%img_Smax%%%%doc_Smax%%%%img_GDmax%%%%img_GDqual%%%%copie_Smax%%",
 	'categorie' => 'admin',
 ));
 

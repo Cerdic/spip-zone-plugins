@@ -43,7 +43,10 @@ Une valeur nulle ou non renseign&eacute;e correspond &agrave; une valeur illimit
 @puce@ Afin d\'&eacute;viter un d&eacute;passement de m&eacute;moire PHP dans le traitement des grandes images par la librairie GD2, SPIP teste les capacit&eacute;s du serveur et peut donc refuser de traiter les trop grandes images. Il est possible de d&eacute;sactiver ce test en d&eacute;finissant manuellement le nombre maximal de pixels support&eacute;s pour les calculs.
 
 La valeur de 1~000~000 pixels semble correcte pour une configuration avec peu de m&eacute;moire. Une valeur nulle ou non renseign&eacute;e entra&icirc;nera le test du serveur.
-[[%img_GDmax% pixels au maximum]]',
+[[%img_GDmax% pixels au maximum]]
+
+@puce@ La librairie GD2 permet d\'ajuster la qualit&eacute; de compression des images JPG. Un pourcentage &eacute;lev&eacute; correspond &agrave; une qualit&eacute; &eacute;lev&eacute;e.
+[[%img_GDqual% %]]',
 	'SPIP_tailles:nom' => 'Limites m&eacute;moire',
 
 	// A
