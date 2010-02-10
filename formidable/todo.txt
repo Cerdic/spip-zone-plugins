@@ -39,7 +39,19 @@ array(
 		'contenu' => array(
 			// On recommence ici suivant le même formalisme que le tableau général.
 		)
-	)
+	),
+	// Ligne contenant un fieldset
+	array(
+		'saisie' => 'fieldset',
+		'options' => array(
+			'css' => 'autres classes en plus',
+			'pliable' => 'oui',
+			'plie' => 'oui',
+			'saisies' => array(
+				// On recommence ici suivant le même formalisme que le tableau général.
+			)
+		)
+	),
 )
 
 Description d'une liste de traitements :

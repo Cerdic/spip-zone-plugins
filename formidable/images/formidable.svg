@@ -16,9 +16,9 @@
    sodipodi:version="0.32"
    inkscape:version="0.47pre4 r22446"
    sodipodi:docname="formidable.svg"
-   inkscape:export-filename="/home/vincent/public_html/collectivite/plugins/formidable/images/formidable-24.png"
-   inkscape:export-xdpi="33.75"
-   inkscape:export-ydpi="33.75"
+   inkscape:export-filename="/home/vincent/public_html/collectivite/plugins/formidable/images/formidable-128.png"
+   inkscape:export-xdpi="180"
+   inkscape:export-ydpi="180"
    version="1.1">
   <svg:defs
      id="defs9993">
@@ -991,7 +991,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </svg:metadata>
