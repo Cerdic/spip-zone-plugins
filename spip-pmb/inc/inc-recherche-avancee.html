@@ -12,6 +12,7 @@
 			<form name='search_input' action='#resultats_recherche' method='get' onSubmit="if (search_input.user_query.value.length == 0) { search_input.user_query.value='*'; return true; }">
 				<div>
 				[<input type='hidden' name='id_section' value='(#ENV{id_section})'/>]
+				[<input type='hidden' name='id_location_memo' value='(#ENV{id_location_memo})'/>]
 				[<input type='hidden' name='titre_section' value='(#ENV{titre_section})'/>]
 				<input type='hidden' name='page' value='[(#ENV{page}|sinon{recherche})]'/>
 				<input type='hidden' name='recherche_avancee' value='1'/>
