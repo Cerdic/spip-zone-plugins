@@ -1,0 +1,22 @@
+<plugin>
+	<nom>securizator</nom>
+	<auteur>denisb</auteur>
+	<licence>GNU/GPL</licence>
+	<version>1.0.0</version>
+	<description>
+	<multi>[fr]securizator (sortez couvert !) informe le webmestre du site en cas
+	d'inefficacit&eacute; des fichiers .htaccess plac&eacute;s dans
+	les r&eacute;pertoires tmp/ et config/
+	[en]securizator (No shirt, no flirt!) inform the webmaster of the site in case of inefficiency of .htaccess files placed in the directories tmp/ and config/</multi>
+	</description>
+	<lien></lien>
+	<etat>stable</etat>
+	<prefix>securizator</prefix>
+  	<icon></icon>
+ 	<pipeline>
+		<nom>header_prive</nom>
+		<action>insert_head_prive</action>
+		<inclure>securizator_pipelines.php</inclure>
+	</pipeline>
+	<necessite id="SPIP" version="[2.0;]" />
+</plugin>
