@@ -43,7 +43,7 @@ function maj_auto_action_rapide() {
 		if(!strlen($rev)) $rev = '&nbsp;';
 		$zip_log = (strlen($infos['zip_log']) && $infos['zip_log']!=$infos['zip_trac'])
 			?"<label><input type='radio' value='$infos[zip_log]'$checked name='url_zip_plugin'/>[->$infos[zip_log]]</label>":'';
-		$bouton = $auto			
+		$bouton = ($auto && strlen($infos['zip_trac']))
 			?"<input type='radio' value='$infos[zip_trac]'$checked name='url_zip_plugin'/>"
 			:'&nbsp;';
 		if(strlen($zip_log)) {
