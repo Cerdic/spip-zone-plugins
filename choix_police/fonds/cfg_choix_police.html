@@ -90,12 +90,12 @@ modifier ces param&#232;tres.  -->
     	<label><:choix_police:supprimer_accents:> :</label>
     	<input type="checkbox" name="supprimer_accents" [checked="(#ENV{supprimer_accents})"] />
     </p>
-    [(#SET{Tpolices, [(#NOOP{#CHEMIN{polices}}|polices_disponibles)]})]
+    [(#SET{Tpolices, [(#NOOP{#CHEMIN{polices}}|choix_police_polices_disponibles)]})]
     <BOUCLE_polices2(pour){tableau #GET{Tpolices}}>
     <p style="border: 1px solid #000;">
         <input type="radio" name="police_typo" value="#VALEUR" id="#CLE" [(#ENV{police_typo}|=={#VALEUR}|?{checked="checked",''})]>
         <label for="#CLE">#CLE: 
-        [(#NOM_SITE_SPIP|remplacer_accents{#ENV{supprimer_accents}}
+        [(#NOM_SITE_SPIP|choix_police_remplacer_accents{#ENV{supprimer_accents}}
         				|couper{20}
                         |image_typo{police=#VALEUR,taille=25,padding=5}
                         |inserer_attribut{style,"vertical-align:middle;"})]

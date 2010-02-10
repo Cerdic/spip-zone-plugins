@@ -1,6 +1,6 @@
 <?php
 // retourne un array avec la liste les polices disponibles dans le dossier /polices du plugin ou du squelette
-function polices_disponibles($chemin) {
+function choix_police_polices_disponibles($chemin) {
     $Tpolices = array();
     if (is_dir($chemin) AND $pointeur = opendir($chemin)) {
         while (false !== ($fich = readdir($pointeur))) {
@@ -15,12 +15,12 @@ function polices_disponibles($chemin) {
 }
 
 // supprimer le # dans une chaîne (cf couleurs pour image_typo
-function suprime_diese($txt) {
+function choix_police_suprime_diese($txt) {
     return str_replace('#', '', $txt);
 }
 
 // si $config est à "on", remplace les caractères accentués par leur équivalent pas accentué
-function remplacer_accents($string, $config='on'){ 
+function choix_police_remplacer_accents($string, $config='on'){ 
     if (trim($config) == 'on')
   	    $string = strtr(utf8_decode($string), "ÀÁÂÃÄÅàáâãäåÒÓÔÕÖØòóôõöøÈÉÊËèéêëÇçÌÍÎÏìíîïÙÚÛÜùúûüÿÑñ","AAAAAAaaaaaaooooooooooooEEEEeeeeCcIIIIiiiiUUUUuuuuyNn");
     return $string; 

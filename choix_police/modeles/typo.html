@@ -13,10 +13,10 @@
 ]
 [(#SET{pt,[(#POLICE|?{[(#CHEMIN{polices/#POLICE}|choixsivide{[(#CONFIG{choix_police/police_typo})],#POLICE})],[(#CONFIG{choix_police/police_typo})]})]})]
 [(#SET{sa,[(#ACCENTS|=={non}|?{on,[(#CONFIG{choix_police/supprimer_accents})]})]})]
-[(#TEXTE|remplacer_accents{#GET{sa}}
+[(#TEXTE|choix_police_remplacer_accents{#GET{sa}}
         |image_typo{police=#GET{pt},
          		  	taille=[(#TAILLE|sinon{[(#CONFIG{choix_police/taille_typo})]})],
-                  	couleur=[(#COULEUR|sinon{[(#CONFIG{choix_police/couleur_typo})]}|suprime_diese)],
+                  	couleur=[(#COULEUR|sinon{[(#CONFIG{choix_police/couleur_typo})]}|choix_police_suprime_diese)],
                   	padding=[(#PADDING|sinon{[(#CONFIG{choix_police/padding_typo})]})],
                     largeur=[(#LARGEUR|sinon{[(#CONFIG{choix_police/largeur_typo})]})] }
 		    |inserer_attribut{alt, #TEXTE|attribut_html}
