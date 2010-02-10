@@ -66,6 +66,10 @@ function maj_auto_action_rapide() {
 jQuery(document).ready(function() {
 	var ch = jQuery('#maj_auto_div .maj_checked');
 	if(ch.length) ch[0].checked = true;
+	else {
+		jQuery('#maj_auto_div :submit').parent().remove();
+		jQuery('#maj_auto_div :radio').attr('disabled','disabled');
+	}
 	if(!jQuery('#maj_auto_div :radio:checked').length)
 		jQuery('#maj_auto_div :radio:first')[0].checked = true;
 });");
