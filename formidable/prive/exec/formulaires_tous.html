@@ -1,0 +1,24 @@
+
+<div class="fiche_objet">
+	<h1>
+		<:formidable:bouton_formulaires:>
+	</h1>
+	
+	<B_tous>
+	<ul>
+	<BOUCLE_tous(FORMULAIRES)>
+		<li><a href="#URL_ECRIRE{formulaires_editer, id_formulaire=#ID_FORMULAIRE}">#TITRE</a></li>
+	</BOUCLE_tous>
+	</ul>
+	</B_tous>
+	<p><:formidable:formulaires_aucun:></p>
+	<//B_tous>
+</div>
+
+<!--#navigation-->
+Du contenu en colonne de navigation.
+<!--/#navigation-->
+
+<!--#extra-->
+Du contenu en colonne extra.
+<!--/#extra-->

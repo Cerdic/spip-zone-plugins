@@ -37,7 +37,7 @@
 	<bouton id="formulaires" parent="naviguer">
 		<icone>images/formidable-24.png</icone>
 		<titre>formidable:bouton_formulaires</titre>	
-		<url>formulaires</url>	
+		<url>formulaires_tous</url>	
 	</bouton>
 	
 	<necessite id="SPIP" version="[2.0.10;]" />

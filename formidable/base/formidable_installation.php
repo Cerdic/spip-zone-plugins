@@ -46,10 +46,10 @@ function formidable_vider_tables($nom_meta_version_base){
 	include_spip('base/abstract_sql');
 	
 	// On efface les tables du plugin
-	sql_drop_table('spip_formidables');
-	sql_drop_table('spip_formidables_reponses');
-	sql_drop_table('spip_formidables_reponses_champs');
-	sql_drop_table('spip_formidables_liens');
+	sql_drop_table('spip_formulaires');
+	sql_drop_table('spip_formulaires_reponses');
+	sql_drop_table('spip_formulaires_reponses_champs');
+	sql_drop_table('spip_formulaires_liens');
 		
 	// On efface la version entregistrée
 	effacer_meta($nom_meta_version_base);
