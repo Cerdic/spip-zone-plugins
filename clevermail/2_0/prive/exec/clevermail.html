@@ -43,10 +43,10 @@
 	      <:clevermail:supprimer:>
 	    ]
 	    [(#GET{nbSubs}|>{0}|non)
-        [(#BOUTON_ACTION{<:clevermail:supprimer:>,#URL_ACTION_AUTEUR{clevermail_list_remove,#LST_ID,#SELF,ajax}})]
+        [(#BOUTON_ACTION{<:clevermail:supprimer:>,#URL_ACTION_AUTEUR{clevermail_list_remove,#LST_ID,#SELF},ajax})]
 	    ]
 	    |
-      [(#BOUTON_ACTION{<:clevermail:nouveau_message:>,#URL_ACTION_AUTEUR{clevermail_post_create,#LST_ID,#SELF,ajax}})]
+      [(#BOUTON_ACTION{<:clevermail:nouveau_message:>,#URL_ACTION_AUTEUR{clevermail_post_create,#LST_ID,#SELF},ajax})]
     </div>
   </li>
 </BOUCLE_lists>

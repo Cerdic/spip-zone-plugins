@@ -20,9 +20,9 @@
 				    <a href="[(#URL_PAGE{#GET{preview_text}}|parametre_url{pst_id,#PST_ID})]" target="_blank"><:clevermail:apercu:> TXT</a>
 	          | <a href="[(#URL_PAGE{#GET{preview_html}}|parametre_url{pst_id,#PST_ID})]" target="_blank"><:clevermail:apercu:> HTML</a>
 				    | <a href="[(#URL_ECRIRE{clevermail_post_edit}|parametre_url{pst_id,#PST_ID})]"><:clevermail:modifier:></a>
-		        | [(#BOUTON_ACTION{<:clevermail:supprimer:>,#URL_ACTION_AUTEUR{clevermail_post_remove,#PST_ID,#SELF,ajax}})]
+		        | [(#BOUTON_ACTION{<:clevermail:supprimer:>,#URL_ACTION_AUTEUR{clevermail_post_remove,#PST_ID,#SELF},ajax})]
 	          [(#GET{nbSubs}|>{0}|oui)
-  	          | [(#BOUTON_ACTION{<:clevermail:envoyer:>,#URL_ACTION_AUTEUR{clevermail_post_queue,#PST_ID,#SELF,ajax}})]
+  	          | [(#BOUTON_ACTION{<:clevermail:envoyer:>,#URL_ACTION_AUTEUR{clevermail_post_queue,#PST_ID,#SELF},ajax})]
   	        ]
 	          [(#GET{nbSubs}|>{0}|non)
 	            | <span title="<:clevermail:envoyer_non_aucun_abonne:>"><:clevermail:envoyer:></span>
@@ -85,7 +85,7 @@
 	            <:clevermail:actions:> :
 	            <a href="[(#URL_PAGE{#GET{preview_text}}|parametre_url{pst_id,#PST_ID})]" target="_blank"><:clevermail:apercu:> TXT</a>
 	            | <a href="[(#URL_PAGE{#GET{preview_html}}|parametre_url{pst_id,#PST_ID})]" target="_blank"><:clevermail:apercu:> HTML</a>
-              [(#BOUTON_ACTION{<:clevermail:supprimer:>,#URL_ACTION_AUTEUR{clevermail_post_remove,#PST_ID,#SELF,ajax}})]
+              [(#BOUTON_ACTION{<:clevermail:supprimer:>,#URL_ACTION_AUTEUR{clevermail_post_remove,#PST_ID,#SELF},ajax})]
             </div>
           </li>
 	      ]
