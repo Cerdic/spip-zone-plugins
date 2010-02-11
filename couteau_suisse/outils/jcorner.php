@@ -28,9 +28,7 @@ cs_log("jcorner_installe()");
 
 
 function jcorner_insert_head($flux) {
-	// le code jQuery est-il dispo ?
-	if (!isset($GLOBALS['meta']['cs_jcorner'])) jcorner_installe();
-	return $flux . "<script type=\"text/javascript\"><!--\nfunction jcorner_init() {\n\tif(typeof jQuery.fn.corner!='function') return;\n\t" . $GLOBALS['meta']['cs_jcorner'] . "\n}\n// --> </script>\n";
+	return $flux . "<script type=\"text/javascript\"><!--\nfunction jcorner_init() {\n\tif(typeof jQuery.fn.corner!='function') return;\n\t" . cs_lire_meta_outil('jcorner', '', false) . "\n}\n// --> </script>\n";
 }
 
 ?>

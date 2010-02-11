@@ -889,6 +889,8 @@ add_outil( array(
 	'contrib'	=> 1563,
 	'pipeline:pre_typo' => 'filets_sep',
 	'pipeline:bt_toolbox' => 'filets_sep_BarreTypo',
+	'pipeline:porte_plume_barre_pre_charger' => 'filets_PP_pre_charger',
+	'pipeline:porte_plume_lien_classe_vers_icone' => 'filets_PP_icones',
 ));
 
 add_outil( array(

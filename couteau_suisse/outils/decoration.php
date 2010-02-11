@@ -108,11 +108,10 @@ function decoration_rempl($texte) {
 // fonction pipeline
 function decoration_pre_typo($texte) {
 	if (strpos($texte, '<')===false || !defined('_decoration_BALISES')) return $texte;
-	if (!isset($GLOBALS['meta']['cs_decoration'])) decoration_installe();
 	// pour les callbacks
 	global $deco_balises;
 	// lecture des balises et des remplacements
-	$deco_balises = unserialize($GLOBALS['meta']['cs_decoration']);
+	$deco_balises = cs_lire_meta_outil('decoration');
 	// on remplace apres echappement
 	$texte = cs_echappe_balises('', 'decoration_rempl', $texte);
 	// menage
@@ -122,11 +121,8 @@ function decoration_pre_typo($texte) {
 
 // cette fonction renvoie une ligne de tableau entre <tr></tr> afin de l'inserer dans la Barre Typo V2, si elle est presente
 function decoration_BarreTypo($tr) {
-	// les raccoucis de couleur sont-il dispo ?
-	if (!isset($GLOBALS['meta']['cs_decoration'])) decoration_installe();
 	// le tableau des decorations est present dans les metas
-	decoration_installe();
-	$balises = unserialize($GLOBALS['meta']['cs_decoration']);
+	$balises = cs_lire_meta_outil('decoration');
 	$res = array(); 
 	foreach($balises[4] as $v) {
 		$tmp = $v[1]?"('<$v[0]>','</$v[0]>'":"_etendu('<$v[0]>','</$v[0]>','<$v[0]/>'";
@@ -138,10 +134,8 @@ function decoration_BarreTypo($tr) {
 
 // les 2 fonctions suivantes inserent les boutons pour le plugin Porte Plume, s'il est present (SPIP>=2.0)
 function decoration_PP_pre_charger($flux) {
-	// les raccoucis sont-il dispo ?
-	if (!isset($GLOBALS['meta']['cs_decoration'])) decoration_installe();
 	// le tableau des decorations est present dans les metas
-	$balises = unserialize($GLOBALS['meta']['cs_decoration']);
+	$balises = cs_lire_meta_outil('decoration');
 	$max = count($balises[4]);
 	$r = array();
 	foreach($balises[4] as $b) {
@@ -177,10 +171,8 @@ function decoration_PP_pre_charger($flux) {
 	return $flux;
 }
 function decoration_PP_icones($flux){
-	// les raccoucis sont-il dispo ?
-	if (!isset($GLOBALS['meta']['cs_decoration'])) decoration_installe();
 	// le tableau des decorations est present dans les metas
-	$balises = unserialize($GLOBALS['meta']['cs_decoration']);
+	$balises = cs_lire_meta_outil('decoration');
 	$icones = array();
 	foreach($balises[4] as $b) {
 		$id = 'decoration_'.$b[0];

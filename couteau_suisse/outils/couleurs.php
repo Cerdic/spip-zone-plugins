@@ -80,8 +80,7 @@ cs_log("couleurs_installe()");
 // creation d'icone pour le plugin porte-plume
 function couleurs_creer_icone_barre($texte, $color) {
 	static $icones_barre;
-	if(!isset($icones_barre))
-		$icones_barre = sous_repertoire(sous_repertoire(_DIR_VAR, 'couteau-suisse'), 'icones_barre');
+	rep_icones_barre($icones_barre);
 	$img = image_typo($texte, 'couleur='.$color, 'taille=12', 'police=dustismo_bold.ttf');
 	$nom = basename($src = extraire_attribut($img, 'src'));
 	@copy($src, $icones_barre.$nom);
@@ -159,10 +158,8 @@ function couleurs_pre_typo($texte) {
 
 // cette fonction renvoie une ligne de tableau entre <tr></tr> afin de l'inserer dans la Barre Typo V2, si elle est presente
 function couleurs_BarreTypo($tr) {
-	// les raccoucis de couleur sont-il dispo ?
-	if (!isset($GLOBALS['meta']['cs_couleurs'])) couleurs_installe();
 	// le tableau des couleurs est present dans les metas
-	$couleurs = unserialize($GLOBALS['meta']['cs_couleurs']);
+	$couleurs = cs_lire_meta_outil('couleurs');
 	$r1 = $r2 = array(); 
 	foreach($couleurs[2] as $i=>$v)
 		$r1[] = "<a title=\"$i\" href=\"javascript:barre_raccourci('[$i]','[/$i]',@@champ@@)\"><span class=\"cs_BT cs_BTg\" style=\"color:$v;\">A</span></a>";
@@ -177,10 +174,8 @@ function couleurs_BarreTypo($tr) {
 
 // les 2 fonctions suivantes inserent les boutons pour le plugin Porte Plume, s'il est present (SPIP>=2.0)
 function couleurs_PP_pre_charger($flux) {
-	// les raccoucis de couleur sont-il dispo ?
-	if (!isset($GLOBALS['meta']['cs_couleurs'])) couleurs_installe();
 	// le tableau des couleurs est present dans les metas
-	$couleurs = unserialize($GLOBALS['meta']['cs_couleurs']);
+	$couleurs = cs_lire_meta_outil('couleurs');
 	$r1 = $r2 = array();
 	foreach($couleurs[2] as $i=>$v) {
 		$id = 'couleur_texte_'.str_replace(' ','_',$i);
@@ -229,10 +224,9 @@ function couleurs_PP_pre_charger($flux) {
 		$flux[$b]->ajouterApres('cs_couleur_texte', $a);
 	return $flux;
 }
-function couleurs_PP_icones($flux){
-	// les raccoucis de couleur sont-il dispo ?
-	if (!isset($GLOBALS['meta']['cs_couleurs'])) couleurs_installe();
-	$couleurs = unserialize($GLOBALS['meta']['cs_couleurs']);
+function couleurs_PP_icones($flux) {
+	// le tableau des couleurs est present dans les metas
+	$couleurs = cs_lire_meta_outil('couleurs');
 	// icones utilisees. Attention : mettre les drop-boutons en premier !!
 	$flux = array_merge($flux, array(
 		'cs_couleur_texte' => couleurs_creer_icone_barre(_T('couteau:pp_couleur_icone_texte'), '00BFFF'),
@@ -242,10 +236,8 @@ function couleurs_PP_icones($flux){
 }
 
 function couleurs_nettoyer_raccourcis($texte) {
-	// les raccoucis de couleur sont-il dispo ?
-	if (!isset($GLOBALS['meta']['cs_couleurs'])) couleurs_installe();
-	// le tableau des smileys est present dans les metas
-	$couleurs = unserialize($GLOBALS['meta']['cs_couleurs']);
+	// le tableau des couleurs est present dans les metas
+	$couleurs = cs_lire_meta_outil('couleurs');
 	$couleurs = _COULEURS_SET===0?"$couleurs[0]|$couleurs[1]":$couleurs[0];
 	return preg_replace(",\[/?(bg|fond)?\s*($couleurs|couleur|color)\],i", '', $texte);
 }

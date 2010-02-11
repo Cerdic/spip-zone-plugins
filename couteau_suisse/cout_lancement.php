@@ -238,4 +238,22 @@ function cs_pp_liste_barres($outil=false) {
 	return $sets;
 }
 
+// renvoie la meta d'un outil
+function cs_lire_meta_outil($outil, $meta='', $unserialize=true) {
+	if(!$meta) $meta = 'cs_'.$outil;
+	if (!isset($GLOBALS['meta'][$meta])) { $f=$outil='_installe'; $f(); }
+	return $unserialize?unserialize($GLOBALS['meta'][$meta]):$GLOBALS['meta'][$meta];
+}
+
+function rep_icones_barre(&$icones_barre) {
+	if(!isset($icones_barre))
+		$icones_barre = sous_repertoire(sous_repertoire(_DIR_VAR, 'couteau-suisse'), 'icones_barre');
+}
+
+// au stade mes_options, cette constante n'est pas encore definie...
+function define_IMG_GD_MAX_PIXELS() {
+	if(!defined('_IMG_GD_MAX_PIXELS'))
+		define('_IMG_GD_MAX_PIXELS', (isset($GLOBALS['meta']['max_taille_vignettes'])&&$GLOBALS['meta']['max_taille_vignettes']<5500000)?$GLOBALS['meta']['max_taille_vignettes']:0);
+}
+
 ?>

@@ -88,6 +88,8 @@ Compatibilit&#233; : SPIP v1.92x et v2.0.x',
 	// S
 	'smileys_dispos' => 'Frimousses disponibles :',
 	'pp_smileys_inserer' => 'Ins&eacute;rer une frimousse @smiley@',
+	'pp_filets_inserer' => 'Ins&eacute;rer un filet de style &laquo;&nbsp;@filet@&nbsp;&raquo;',
+	'pp_filets_inserer_drop' => 'Ins&eacute;rer un filet de s&eacute;paration',
 	'pp_chatons_inserer_drop' => 'Ins&eacute;rer un chaton dans votre texte',
 	'pp_chatons_inserer' => 'Ins&eacute;rer le chaton &laquo;&nbsp;@chaton@&nbsp;&raquo;',
 	'pp_couteau_suisse_drop' => 'Utiliser un outil du Couteau Suisse',
