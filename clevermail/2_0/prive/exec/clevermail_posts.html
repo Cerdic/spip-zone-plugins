@@ -34,8 +34,8 @@
 	  #SET{posts,#GET{posts}|push{#PST_ID}}
 	</BOUCLE_posts>
   <B_posts_queued>
-    <h3><:clevermail:messages_attentes:></h3>
-    <p><:clevermail:messages_attentes_text:> :</p>
+    <h3><:clevermail:messages_cours_envoi:></h3>
+    <p><:clevermail:messages_cours_envoi_text:> :</p>
     <ul class="liste_items">
       <BOUCLE_posts_queued(spip_cm_posts_queued){pst_id IN #GET{posts}}{par psq_date}{inverse}{fusion pst_id}>
         <BOUCLE_post_queued(spip_cm_posts){pst_id}>
