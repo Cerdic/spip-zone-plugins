@@ -1,0 +1,66 @@
+<h1><:noizetier:editer_noizetier_titre:></h1>
+<div class="noizetier-explications">
+	<:noizetier:editer_noizetier_explication:>
+</div>
+
+#SET{auth,#AUTORISER{configurer,noizetier}}
+#SET{pages_actives,(#CONFIG{noizetier-pages-actives}|unserialize)}
+<div class="formulaire_spip">
+<ul class="liste_items liste_noizetier_pages">
+	<BOUCLE_pages(POUR){tableau #NOIZETIER_LISTE_PAGES}{par cle}>
+	<li class="item [(#GET{pages_actives}|table_valeur{#CLE}|oui) obligatoire]" [ style="background-image:url((#VALEUR|table_valeur{icone}|image_reduire{24}|extraire_attribut{src}));"]>
+		<div class="ligne">
+			<div class="titre">[(#VALEUR|table_valeur{nom})]</div>
+			[<div class="infos">(#VALEUR|table_valeur{description})</div>]
+			<p class='actions'>[(#GET{auth}|oui)
+				[(#GET{pages_actives}|table_valeur{#CLE}|oui)
+					<span class='lien_modifier'>&#91;<a href='[(#URL_ACTION_AUTEUR{desactiver_page_noizetier,#CLE,#SELF})]'><:noizetier:editer_desactiver:></a>&#93;</span>
+					<span class='lien_modifier'>&#91;<a href='[(#URL_ECRIRE{configurer_page,page=#CLE})]'><:noizetier:editer_configurer_page:></a>&#93;</span> 
+				]
+				[(#GET{pages_actives}|table_valeur{#CLE}|non)
+					<span class='lien_modifier'>&#91;<a href='[(#URL_ACTION_AUTEUR{activer_page_noizetier,#CLE,#SELF})]'><:noizetier:editer_activer:></a>&#93;</span>
+				]
+			]
+				<BOUCLE_noisettes(NOISETTES){type=(#CLE|noizetier_page_type)}{composition=(#CLE|noizetier_page_composition)}{0,1}>[(#GET{auth}|oui)
+					[(#GET{pages_actives}|table_valeur{#CLE}|non)<span class='lien_modifier'>&#91;<a href='[(#URL_ACTION_AUTEUR{supprimer_noisettes_page_noizetier,#CLE,#SELF})]'><:noizetier:editer_supprimer_noisettes:></a>&#93;</span>]
+				]</BOUCLE_noisettes>
+			</p>
+		<div class="ligne">
+	</li>
+	</BOUCLE_pages>
+</ul>
+</div>
+<div class="nettoyeur" />
+
+<!--#navigation-->
+<div class="cadre infos cadre-info">
+	[(#PLUGIN{compositions}|oui)
+	<div>
+		<a href="#URL_ECRIRE{noizetier_compositions}" class="cellule-h">
+			[<img src="(#CHEMIN{img/compositions-24.png})" style="vertical-align:middle;" />]
+			<span style="vertical-align:middle;"><:noizetier:editer_compositions:></span>
+		</a>
+	</div>
+	]
+	[(#PLUGIN{yaml}|oui)
+	<div>
+		<a href="#URL_ACTION_AUTEUR{exporter_config_noizetier}" class="cellule-h">
+			[<img src="(#CHEMIN{img/export.png})" style="vertical-align:middle;" />]
+			<span style="vertical-align:middle;"><:noizetier:editer_exporter_configuration:></span>
+		</a>
+	</div>
+	<div>
+		<a href="#URL_ECRIRE{importer_config_noizetier}" class="cellule-h">
+			[<img src="(#CHEMIN{img/import.png})" style="vertical-align:middle;" />]
+			<span style="vertical-align:middle;"><:noizetier:editer_importer_configuration:></span>
+		</a>
+	</div>
+	]
+</div>
+
+<!--/#navigation-->
+
+<!--#extra-->
+[(#PLUGIN{saisies}|non)<:noizetier:saisies_non_installe:><p />]
+[(#PLUGIN{compositions}|non)<:noizetier:compositions_non_installe:>]
+<!--/#extra-->

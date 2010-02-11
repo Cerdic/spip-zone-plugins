@@ -1,0 +1,9 @@
+[(#SET{afficher_lien_accueil, #ENV{afficher_lien_accueil}|is_null|non|?{#ENV{afficher_lien_accueil},'on'}})]
+[(#SET{ariane_separateur, #ENV{ariane_separateur}|is_null|non|?{#ENV{ariane_separateur},'&gt;'}})]
+[(#SET{afficher_titre_article, #ENV{afficher_titre_article}|is_null|non|?{#ENV{afficher_titre_article},'on'}})]
+
+<BOUCLE_article(ARTICLES){id_article}>
+<p id="hierarchie">
+	[(#GET{afficher_lien_accueil}|oui)<a href="#URL_SITE_SPIP/"><:accueil_site:></a> [(#GET{ariane_separateur})]]<BOUCLE_ariane(HIERARCHIE){id_article}> [(#COMPTEUR_BOUCLE|>{1}|?{#GET{ariane_separateur},''})] <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane> [(#GET{afficher_titre_article}|oui) [(#GET{ariane_separateur})] <strong class="on">[(#TITRE|couper{80})]</strong>]
+</p>
+</BOUCLE_article>

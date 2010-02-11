@@ -1,0 +1,108 @@
+.noizetier-explications{
+	font-size:0.9em;
+	margin-bottom:5px;
+	text-align:justify;
+}
+
+.formulaire_editer_noisette{
+	position:relative;
+}
+.formulaire_editer_noisette .image_loading{
+	position:absolute;
+	top:50%;
+	left:50%;
+}
+
+.formulaire_spip ul.noisettes{
+	clear:both;
+}
+.formulaire_spip ul.noisettes ul.noisettes{
+	border-left:1px solid #ccc;
+	border-top:1px solid #ccc;
+}
+
+.formulaire_spip ul.noisettes li.noisette{
+	clear:both;
+	padding-left : 34px;
+	padding-right:0;
+	padding-bottom:0;
+	background-position:5px 10px;
+	background-repeat:no-repeat;
+	border-bottom:1px solid #ccc;
+}
+
+.formulaire_spip ul.noisettes .ligne{
+	position:relative;
+}
+
+.formulaire_spip ul.noisettes .actions{
+	position:absolute;
+	right:5px;
+	top:5px;
+	text-align:right;
+}
+
+.formulaire_spip ul.noisettes .titre{
+	font-weight:bold;
+	line-height:29px;
+}
+.formulaire_spip ul.noisettes .infos{
+	font-size:0.9em;
+	margin-bottom:5px;
+}
+
+.formulaire_spip ul.noisettes .actions button{
+	border:none;
+	padding:0;
+	margin:0;
+	cursor:pointer;
+
+}
+.formulaire_spip ul.noisettes img{
+	vertical-align:middle;
+}
+
+.formulaire_spip li.saisie_oui_non label{
+	width:300px;
+}
+
+ul.parametres_noisette li div.choix {
+	display:inline;
+}
+ul.noisettes div.infos span.nom_param {
+	font-style:italic;
+}
+ul.noisettes div.notes {
+	font-size:80%;
+}
+
+ul.liste_noizetier_pages {
+	clear:both;
+}
+
+ul.liste_noizetier_pages li.item{
+	clear:both;
+	padding-left : 34px;
+	padding-right:0;
+	padding-bottom:0;
+	background-position:5px 10px;
+	background-repeat:no-repeat;
+	border-bottom:1px solid #ccc;
+}
+
+ul.liste_noizetier_pages .ligne{
+	position:relative;
+}
+
+ul.liste_noizetier_pages .actions{
+	text-align:right;
+}
+
+ul.liste_noizetier_pages .titre{
+	font-weight:bold;
+	line-height:29px;
+}
+ul.liste_noizetier_pages .infos{
+	font-size:0.9em;
+	margin-bottom:5px;
+}

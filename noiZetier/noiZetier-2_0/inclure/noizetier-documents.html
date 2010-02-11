@@ -1,0 +1,20 @@
+[(#REM)
+	Liste des documents joints
+]
+
+[(#SET{exclure_photos, #ENV{exclure_photos}|is_null|oui|?{'on',#ENV{exclure_photos}}})]
+[(#SET{extensions_exclues, [(#GET{exclure_photos}|oui|?{#ARRAY{1,'gif',2,'jpg',3,'png'},''})]})]
+<B_documents_joints>
+	<div class="liste documents documents_joints">
+	<h2 class="h2"><:titre_documents_joints:></h2>
+	<ul class="liste-items">
+		<BOUCLE_documents_joints(DOCUMENTS) {id_article?}{id_rubrique?} {extension !IN #GET{extensions_exclues}} {vu=non}{par num titre, date}>[
+		<li class="item">
+			<strong><a href="(#URL_DOCUMENT)" title="<:bouton_telecharger:>" type="#MIME_TYPE">[(#TITRE|sinon{<:info_document:>})]</a></strong>
+			<span class="small">(<span>#TYPE_DOCUMENT[ &ndash; (#TAILLE|taille_en_octets)]</span>)</span>
+			#DESCRIPTIF
+		]</li>
+		</BOUCLE_documents_joints>
+	</ul>
+	</div>
+</B_documents_joints>

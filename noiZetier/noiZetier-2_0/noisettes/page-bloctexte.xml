@@ -1,0 +1,7 @@
+<noisette>
+	<nom><:noizetier:nom_bloctexte:></nom>
+	<description><:noizetier:description_bloctexte:></description>
+	<icone>img/ic_bloctexte.png</icone>
+	<parametre nom="titre" label="noizetier:label_titre" />
+	<parametre nom="texte" label="noizetier:label_texte" saisie="textarea" obligatoire="oui" />
+</noisette>

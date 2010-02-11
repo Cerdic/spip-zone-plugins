@@ -1,0 +1,36 @@
+
+<ul>
+	<li class="editer_type[(#ENV**{erreurs}|table_valeur{type}|oui)erreur]">
+		<label><:noizetier:choisir_noisette:></label>
+		[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{erreur_noisette})</span>]
+		[(#SET{type,[(#ENV{erreurs}|table_valeur{type})]})]
+		<BOUCLE_test(CONDITION){si #GET{type}|!={'page'}}>
+			<B_type_noisettes>
+			<div class="choix" style="padding:3px;border-bottom:1px solid #eee;"><strong><:noizetier:noisettes_page{page=#GET{type}}:></strong></div>
+			<BOUCLE_type_noisettes(POUR){tableau #ENV{erreurs}|table_valeur{noisettes_type}}{par valeur}>
+			<div class="choix" style="padding:3px;border-bottom:1px solid #eee;">
+				[(#VALEUR|table_valeur{icone}|image_reduire{24})]
+				<input type="radio" class="radio" name="noisette" id="#CLE" value="#CLE" style="vertical-align:top;" />
+				<label for="#CLE">[(#VALEUR|table_valeur{nom})]</label>
+			</div>
+			</BOUCLE_type_noisettes>
+		</BOUCLE_test>
+		
+		<B_page_noisettes>
+		<div class="choix" style="padding:3px;border-bottom:1px solid #eee;"><strong><:noizetier:noisettes_toutes_pages:></strong></div>
+		<BOUCLE_page_noisettes(POUR){tableau #ENV{erreurs}|table_valeur{noisettes_page}}{par valeur}>
+		<div class="choix" style="padding:3px;border-bottom:1px solid #eee;">
+			[(#VALEUR|table_valeur{icone}|image_reduire{24})]
+			<input type="radio" class="radio" name="noisette" id="#CLE" value="#CLE" style="vertical-align:top;" />
+			<label for="#CLE">[(#VALEUR|table_valeur{nom})]</label>
+		</div>
+		</BOUCLE_page_noisettes>
+	</li>
+</ul>
+
+<p class='boutons'>
+	<span class='image_loading'></span>
+	<input type="hidden" name="demander_nouvelle_noisette" value="#ENV{bloc_page}" />
+	<input type="submit" class="submit link" name="demander_nouvelle_noisette" value="<:icone_retour:>" />
+	<input type="submit" class="submit" name="suivant" value="<:bouton_suivant:>" />
+</p>

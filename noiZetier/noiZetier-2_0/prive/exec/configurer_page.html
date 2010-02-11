@@ -1,0 +1,25 @@
+<div class="cadre-formulaire-editer">
+	<div class="entete-formulaire">
+		<a href="#URL_ECRIRE{noizetier}" class="icone36" style="float:left;">
+			<img width="24" height="24" src="#CHEMIN{img/noizetier-24.png}" />
+			<span><:retour:></span>
+		</a>
+		<:noizetier:formulaire_configurer_page:>
+		<h1>[(#NOIZETIER_LISTE_PAGES|table_valeur{#ENV{page}}|table_valeur{nom})]</h1>
+	</div>
+	
+	<div class="ajax">#FORMULAIRE_CONFIGURER_BLOC{'contenu',#ENV{page}}</div><p />
+	<div class="ajax">#FORMULAIRE_CONFIGURER_BLOC{'navigation',#ENV{page}}</div><p />
+	<div class="ajax">#FORMULAIRE_CONFIGURER_BLOC{'extra',#ENV{page}}</div>
+
+</div>
+
+<!--#navigation-->
+<div class="cadre infos cadre-info">
+	<div class="numero">
+		<:noizetier:info_page:>
+		<p style='font-size:1.75em;'>[(#ENV{page})]</p>
+	</div>
+</div>
+<!--/#navigation-->
+

@@ -1,0 +1,5 @@
+<noisette>
+	<nom><:noizetier:nom_logositespip:></nom>
+	<icone>img/ic_logosite.png</icone>
+	<parametre nom="taille_max_image" label="noizetier:label_taille_max_image" defaut="200" />
+</noisette>

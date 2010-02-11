@@ -1,0 +1,52 @@
+[(#SET{afficher_date, #ENV{afficher_date}|is_null|non|?{#ENV{afficher_date},'on'}})]
+[(#SET{afficher_date_modif, #ENV{afficher_date_modif}|is_null|non|?{#ENV{afficher_date_modif},''}})]
+[(#SET{afficher_auteurs, #ENV{afficher_auteurs}|is_null|non|?{#ENV{afficher_auteurs},''}})]
+[(#SET{afficher_traductions, #ENV{afficher_traductions}|is_null|non|?{#ENV{afficher_traductions},'on'}})]
+[(#SET{afficher_lienhypertexte, #ENV{afficher_lienhypertexte}|is_null|non|?{#ENV{afficher_lienhypertexte},'on'}})]
+[(#SET{afficher_logo, #ENV{afficher_logo}|is_null|non|?{#ENV{afficher_logo},'on'}})]
+[(#SET{utiliser_logo_article_rubrique, #ENV{utiliser_logo_article_rubrique}|is_null|non|?{#ENV{utiliser_logo_article_rubrique},''}})]
+
+<BOUCLE_article(ARTICLES){id_article}>
+<div class="contenu-principal">
+	<div class="cartouche">
+		[(#GET{afficher_logo}|oui)
+			[(#GET{utiliser_logo_article_rubrique}|oui)
+				[(#LOGO_ARTICLE_RUBRIQUE||image_reduire{200,200})]
+			]
+			[(#GET{utiliser_logo_article_rubrique}|non)
+				[(#LOGO_ARTICLE||image_reduire{200,200})]
+			]
+		]
+		[<p class="#EDIT{surtitre} surtitre">(#SURTITRE)</p>]
+		<h1 class="h1 #EDIT{titre}">#TITRE</h1>
+		[<p class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</p>]
+
+		<p class="info-publi">
+			[(#GET{afficher_date}|oui)<abbr class="published" title="[(#DATE|date_iso)]">[(#DATE|nom_jour) ][(#DATE|affdate)]</abbr>]
+			[(#GET{afficher_date}|oui)[(#GET{afficher_auteurs}|=={'oui'}|oui), ]]
+			[(#GET{afficher_auteurs}|oui)[<span class="auteurs"><:par_auteur:> (#LESAUTEURS)</span>]]
+			[(#GET{afficher_date_modif}|oui)<br /><:noizetier:derniere_maj:> [(#DATE_MODIF|nom_jour) ][(#DATE_MODIF|affdate)]]
+		</p>
+		[(#GET{afficher_traductions}|oui)
+			#MODELE{article_traductions}
+		]
+	</div>
+
+	<div class="surlignable">
+		[<div class="#EDIT{chapo} chapo">(#CHAPO|image_reduire{500,0})</div>]
+		[<div class="#EDIT{texte} texte">(#TEXTE|image_reduire{500,0})</div>]
+	</div>
+
+	[(#GET{afficher_lienhypertexte}|oui)
+		[<p class="#EDIT{hyperlien} hyperlien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+	]
+
+	[<div class="ps">
+		<h2 class="h2"><:info_ps:></h2>
+		<div class="#EDIT{ps} surlignable">(#PS|image_reduire{500,0})</div>
+	</div>]
+</div>
+
+[<div class="notes surlignable"><h2 class="h2 pas_surlignable"><:info_notes:></h2>(#NOTES)</div>]
+
+</BOUCLE_article>

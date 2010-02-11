@@ -1,0 +1,12 @@
+<noisette>
+	<nom><:noizetier:nom_article-contenuprincipal:></nom>
+	<description><:noizetier:description_article-contenuprincipal:></description>
+	<icone>img/ic_article.png</icone>
+	<parametre nom="afficher_date" label="noizetier:label_afficher_date" saisie="oui_non" defaut="on" />
+	<parametre nom="afficher_date_modif" label="noizetier:label_afficher_date_modif" saisie="oui_non" defaut="" />
+	<parametre nom="afficher_auteurs" label="noizetier:label_afficher_auteurs" saisie="oui_non" defaut="on," />
+	<parametre nom="afficher_traductions" label="noizetier:label_afficher_traductions" saisie="oui_non" defaut="on" />
+	<parametre nom="afficher_lienhypertexte" label="noizetier:label_afficher_lienhypertexte" saisie="oui_non" defaut="on" />
+	<parametre nom="afficher_logo" label="noizetier:label_afficher_logo" saisie="oui_non" defaut="on" />
+	<parametre nom="utiliser_logo_article_rubrique" label="noizetier:label_utiliser_logo_article_rubrique" saisie="oui_non" defaut="" />
+</noisette>

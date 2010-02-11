@@ -1,0 +1,52 @@
+<plugin>
+	<nom>noiZetier</nom>
+	<auteur>Joseph Larmarange</auteur>
+	<licence>GPL v3</licence>
+	<version>0.1</version>
+	<version_base>0.1</version_base>
+	<etat>dev</etat>
+	<description>Le noisetier, version Z<p />
+	<p><b>ATTENTION : plugin en phase de d&eacute;veloppement. Pas encore op&eacute;rationnel. Voir la documentation.</b></p>
+	
+	Les ic&ocirc;nes sont issues du [plugin bandeau->http://zone.spip.org/trac/spip-zone/browser/_plugins_/bandeau]  et de collection {black and white} de [carpelinx->http://www.carpicon.com/index.php?option=com_content&task=view&id=6&Itemid=26].
+	</description>
+	<lien>http://www.spip-contrib.net/noiZetier</lien>
+	<icon>img/noizetier-48.png</icon>
+	<prefix>noizetier</prefix>
+	<fonctions>noizetier_fonctions.php</fonctions>
+	<options>noizetier_fonctions.php</options>
+	<install>base/noizetier_installation.php</install>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/noizetier_tables.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/noizetier_tables.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>noizetier_autoriser.php</inclure>
+	</pipeline>
+		<pipeline>
+		<nom>header_prive</nom>
+		<inclure>noizetier_pipelines.php</inclure>
+	</pipeline>
+	
+	<bouton id='noizetier' parent="naviguer">
+		<url>noizetier</url>
+		<titre>noizetier:editer_noizetier_titre</titre>
+		<icone>img/noizetier-24.png</icone>
+	</bouton>
+	<bouton id='bando_noizetier' parent="bando_configuration">
+		<url>noizetier</url>
+		<titre>noizetier:editer_noizetier_titre</titre>
+		<icone>img/noizetier-16.png</icone>
+	</bouton>
+	
+	<necessite id="SPIP" version="[2.0.10;]" />
+	<necessite id="spip_bonux" version="[1.8.10;]" />
+	<necessite id="Z" />
+	<utilise id="saisies" />
+	<utilise id="compositions" />
+</plugin>

@@ -1,0 +1,86 @@
+
+#SET{rang_suivant,1}
+<ul id="bloc-#ENV{bloc}" class="noisettes">
+	<BOUCLE_noisettes(NOISETTES){type}{composition}{bloc}{par rang}>
+	<li class="noisette"[ style="background-image:url((#ENV{liste_noisettes}|table_valeur{#NOISETTE}|table_valeur{icone}|image_reduire{24}|extraire_attribut{src}))"]>
+		<BOUCLE_test_modifier(CONDITION){si #ENV{erreurs}|table_valeur{id_noisette}|=={#ID_NOISETTE}|non}>
+		<div class="ligne">
+			<div class="description arial2">
+				<div class="titre">[(#ENV{liste_noisettes}|table_valeur{#NOISETTE}|table_valeur{nom})]</div>
+					<div class="infos">
+					#SET{infos, (#ENV{erreurs}|table_valeur{infos_#GET{noisette}})}
+					<BOUCLE_parametres(POUR){tableau #PARAMETRES|unserialize}>
+					[<span class="nom_param">(#ENV{liste_noisettes}|table_valeur{#NOISETTE}|table_valeur{parametres}|table_valeur{#CLE}|table_valeur{label})</span>]
+					[(#ENV{liste_noisettes}|table_valeur{#NOISETTE}|table_valeur{parametres}|table_valeur{#CLE}|table_valeur{saisie}|=={'oui_non'}|oui)
+						[(#VALEUR|oui) <:item_oui:>][(#VALEUR|non) <:item_non:>]
+					]
+					[(#ENV{liste_noisettes}|table_valeur{#NOISETTE}|table_valeur{parametres}|table_valeur{#CLE}|table_valeur{saisie}|=={'textarea'}|oui)
+						[(#VALEUR**|propre)]
+						[<div class="notes">(#NOTES)</div>]
+					]
+					[(#ENV{liste_noisettes}|table_valeur{#NOISETTE}|table_valeur{parametres}|table_valeur{#CLE}|table_valeur{saisie}|=={'oui_non'}|non)
+						[(#ENV{liste_noisettes}|table_valeur{#NOISETTE}|table_valeur{parametres}|table_valeur{#CLE}|table_valeur{saisie}|=={'textarea'}|non)
+							#VALEUR
+						]
+					]
+					
+					<br />
+					</BOUCLE_parametres>
+					</div>
+			</div>
+			<div class="actions">
+				<button name="modifier_noisette" value="#ID_NOISETTE" title="<:noizetier:formulaire_modifier_noisette:>">
+					[<img height="24" width="24" src="(#CHEMIN{img/noizetier_action_modifier.png})" />]
+				</button>
+				<button name="supprimer_noisette" value="#ID_NOISETTE" title="<:noizetier:formulaire_supprimer_noisette:>">
+					[<img height="24" width="24" src="(#CHEMIN{img/noizetier_action_supprimer.png})" />]
+				</button>
+				<button name="deplacer_noisette" value="#ID_NOISETTE-bas" title="<:noizetier:formulaire_deplacer_bas:>">
+					[<img height="24" width="24" src="(#CHEMIN{img/noizetier_action_bas.png})" />]
+				</button>
+				<button name="deplacer_noisette" value="#ID_NOISETTE-haut" title="<:noizetier:formulaire_deplacer_haut:>">
+					[<img height="24" width="24" src="(#CHEMIN{img/noizetier_action_haut.png})" />]
+				</button>
+			</div>
+			<div class="nettoyeur"></div>
+		</div>
+		</BOUCLE_test_modifier>
+		#INCLURE{fond=formulaires/inc-nouvelle_noisette-2, env, id_noisette=#ID_NOISETTE}
+		<//B_test_modifier>
+		
+	</li>
+	#SET{rang_suivant,(#RANG|plus{1})}
+	</BOUCLE_noisettes>
+		[(#REM) Si pas de noisettes ]
+		<li class="noisette">
+		[(#ENV{type}|=={page}|oui)
+			[(#ENV{composition}|oui)<:noizetier:contenu_bloc_page_defaut:>]
+			[(#ENV{composition}|non)<:noizetier:contenu_bloc_vide:>]
+		]
+		[(#ENV{type}|=={page}|non)
+			[(#ENV{composition}|oui)<:noizetier:contenu_bloc_type{type=#ENV{type}}:>]
+			[(#ENV{composition}|non)<:noizetier:contenu_bloc_page_defaut:>]
+		]
+		</li>
+	<//B_noisettes>
+	<li class="editer_noisette fieldset">
+		#SET{bloc_page_nouvelle_noisette, (#ENV{erreurs}|table_valeur{bloc_page_nouvelle_noisette})}
+		#SET{noisette, (#ENV{erreurs}|table_valeur{noisette})}
+
+		<BOUCLE_pas_demande_noisette(CONDITION){si #GET{bloc_page_nouvelle_noisette}|=={#ENV{bloc_page}}|non}>
+			<div class="boutons">
+			<button type="submit" class="submit" name="demander_nouvelle_noisette" value="#ENV{bloc_page}">
+				[<img src="(#CHEMIN{img/noizetier_action_ajouter.png})" />]
+				<:noizetier:formulaire_ajouter_noisette:>
+			</button>
+			</div>
+		</BOUCLE_pas_demande_noisette>
+			[(#GET{noisette}|non)
+				#INCLURE{fond=formulaires/inc-nouvelle_noisette-1, env, bloc_page_nouvelle_noisette=#GET{bloc_page_nouvelle_noisette}}
+			]
+			[(#GET{noisette}|oui)
+				#INCLURE{fond=formulaires/inc-nouvelle_noisette-2, env, bloc_page_nouvelle_noisette=#GET{bloc_page_nouvelle_noisette}, rang_suivant=#GET{rang_suivant}}
+			]
+		<//B_pas_demande_noisette>
+	</li>
+</ul>

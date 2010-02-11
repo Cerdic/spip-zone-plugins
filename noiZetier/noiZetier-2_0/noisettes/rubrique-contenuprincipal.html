@@ -1,0 +1,24 @@
+[(#SET{afficher_date_dernier_ajout, #ENV{afficher_date_dernier_ajout}|is_null|non|?{#ENV{afficher_date_dernier_ajout},'on'}})]
+[(#SET{afficher_descriptif, #ENV{afficher_descriptif}|is_null|non|?{#ENV{afficher_descriptif},''}})]
+[(#SET{afficher_logo, #ENV{afficher_logo}|is_null|non|?{#ENV{afficher_logo},'on'}})]
+<BOUCLE_rubrique(RUBRIQUES){id_rubrique}>
+<div class="contenu-principal">
+	<div class="cartouche">
+		[(#GET{afficher_logo}|oui)
+			[(#LOGO_RUBRIQUE||image_reduire{200,200})]
+		]
+		<h1 class="h1 #EDIT{titre}">#TITRE</h1>
+		[(#GET{afficher_date_dernier_ajout}|oui)
+			[<p class="info-publi"><span class="published"><:dernier_ajout:> : (#DATE|affdate_jourcourt).</span></p>]
+		]
+	</div>
+	[(#GET{afficher_descriptif}|non)
+		[<div class="#EDIT{texte} chapo">(#TEXTE)</div>]
+	]
+	[(#GET{afficher_descriptif}|oui)
+		[<div class="#EDIT{descriptif} chapo">(#DESCRIPTIF)</div>]
+		[<div class="#EDIT{texte} texte">(#TEXTE)</div>]
+	]
+</div>
+[<div class="notes surlignable"><h2 class="h2 pas_surlignable"><:info_notes:></h2>(#NOTES)</div>]
+</BOUCLE_rubrique>
