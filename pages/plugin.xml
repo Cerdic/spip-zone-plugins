@@ -6,7 +6,7 @@
  		RastaPopoulos - Distribu&eacute; sous licence GPL
 	</auteur>
 	<version> <!-- Version du plugin -->
-		0.2.2
+		0.3.0
 	</version>
 	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
 		test
@@ -34,7 +34,8 @@ This allows the creation of pages of legal information, about, contact, etc..
 	<necessite id='SPIP' version='[2.0.0;]' /> 
 	
 	<install>base/pages_installation.php</install>
-	
+	<version_base>1.0</version_base>
+		
 	<bouton id='pages_tous' parent='naviguer'>
 		<icone>images/article-24.gif</icone>
 		<titre>Pages uniques</titre>
