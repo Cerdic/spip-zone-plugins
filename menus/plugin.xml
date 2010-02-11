@@ -2,7 +2,7 @@
 	<nom>Menus</nom>
 	<auteur>RastaPopoulos</auteur>
 	<licence>GPL v3</licence>
-	<version>0.8</version>
+	<version>0.8.1</version>
 	<version_base>0.5</version_base>
 	<etat>test</etat>
 	<description>Cr&eacute;ez enfin vos menus dans la partie priv&eacute;e !</description>
@@ -11,6 +11,7 @@
 	<prefix>menus</prefix>
 	
 	<fonctions>menus_fonctions.php</fonctions>
+	<options>menus_options.php</options>
 	
 	<install>base/menus_installation.php</install>
 	<pipeline>
