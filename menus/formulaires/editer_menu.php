@@ -64,7 +64,6 @@ function formulaires_editer_menu_charger($id_menu, $nouveau){
 
 			// On sait toujours si on est sur un menu déjà créé ou pas
 			$contexte['_hidden'] .= '<input type="hidden" name="id_menu" value="'.$id_menu.'" />';
-			$contexte['_hidden'] .= '<input type="hidden" name="nouveau" value="'.$nouveau.'" />';
 		}
 	}
 	else{
@@ -79,11 +78,10 @@ function formulaires_editer_menu_verifier($id_menu, $nouveau){
 	include_spip('base/abstract_sql');
 	$erreurs = array();
 
-	// On vérifie que tout est rempli
-	if (!_request('titre'))
-		$erreurs['titre'] = _T('info_obligatoire');
-	if (!$identifiant = _request('identifiant'))
-		$erreurs['identifiant'] = _T('info_obligatoire');
+	$oblis = array('titre','identifiant');
+	$erreurs = formulaires_editer_objet_verifier('menu',$id_menu,$oblis);
+
+	$identifiant = _request('identifiant');
 
 	// On vérifie que l'identifiant est bon
 	if (!$erreurs['identifiant'] and !preg_match('/^[\w]+$/', $identifiant))
