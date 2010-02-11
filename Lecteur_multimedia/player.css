@@ -13,7 +13,6 @@ div.movieContainer { top: 0; } /* 1 pixel contenant le player */
 
 .controles {
 	cursor:pointer;
-	cursor:pointer;
 	text-align:right;
 	margin-bottom:5px;
 }
@@ -42,7 +41,6 @@ border: 1px solid #cccccc;
 
 ul.playliste li{
 	cursor:pointer;
-	cursor:pointer;
 }
 
 .radiobox li.play_on{
@@ -52,12 +50,10 @@ ul.playliste li{
 span.play_{
 	/*background:#E6ECFF;*/
 	cursor:pointer;
-	cursor:pointer;
 }
 
 span.play_on{
 	/*background:#FF0000;*/
-	cursor:pointer;
 	cursor:pointer;
 }
 
@@ -68,7 +64,6 @@ span.play_on{
 	border:1px solid white;
 	background-color:white;
 	position:relative;
-	cursor:pointer;
 	cursor:pointer;
 }
 #loading{
