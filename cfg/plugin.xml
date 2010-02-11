@@ -5,7 +5,7 @@
     [de]cfg: Konfigurationsmotor
     </multi>
     </nom>
-    <auteur>bertrand Gugger [->http://toggg.com/], Matthieu Marcillaud</auteur>
+    <auteur>bertrand Gugger, Matthieu Marcillaud</auteur>
     <licence>&#169; 2009 - GNU/LGPL</licence>
     <version>
     1.14.3
@@ -67,7 +67,7 @@ Es wird von vielen Plugins verwendet, kann aber auch anderen Nutzen finden wie d
     <pipeline>
         <nom>editer_contenu_formulaire_cfg</nom>
         <inclure>cfg_pipeline.php</inclure>
-    </pipeline>    
+    </pipeline>
 	<necessite id="SPIP" version="[1.9.0;]" />
 	<categorie>maintenance</categorie>
 </plugin>
