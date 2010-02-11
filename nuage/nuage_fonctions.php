@@ -78,6 +78,8 @@ function nuage_affiche($nuage,$max_mots = -1){
 function nuage_tri($nuage,$tri = 'poids'){
 	if (!is_array($nuage)) $nuage = unserialize($nuage);
 	if (!is_array($nuage)) return array();
+	if ($tri == 'titre')
+		return $nuage;
 	if ($tri == 'hasard') {
 		foreach($nuage as $cle=>$vals){
 			$nuage[$cle]['hasard'] = rand();
