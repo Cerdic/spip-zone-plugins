@@ -2,7 +2,11 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// http://doc.spip.org/@action_editer_article_dist
+/**
+ * Action de création / Modification d'un menu
+ * @param unknown_type $arg
+ * @return unknown_type
+ */
 function action_editer_menu_dist($arg=null) {
 
 	if (is_null($arg)){
@@ -10,8 +14,7 @@ function action_editer_menu_dist($arg=null) {
 		$arg = $securiser_action();
 	}
 
-	// si id_article n'est pas un nombre, c'est une creation
-	// mais on verifie qu'on a toutes les donnees qu'il faut.
+	// si id_menu n'est pas un nombre, c'est une creation
 	if (!$id_menu = intval($arg)) {
 		$id_menu = insert_menu();
 	}
@@ -37,7 +40,7 @@ function action_editer_menu_dist($arg=null) {
 
 	if (_request('redirect')) {
 		$redirect = parametre_url(urldecode(_request('redirect')),
-			'id_article', $id_article, '&') . $err;
+			'id_menu', $id_menu, '&') . $err;
 
 		include_spip('inc/headers');
 		redirige_par_entete($redirect);
