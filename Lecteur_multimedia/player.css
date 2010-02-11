@@ -12,7 +12,7 @@ div.movieContainer { top: 0; } /* 1 pixel contenant le player */
 }
 
 .controles {
-	cursor:hand;
+	cursor:pointer;
 	cursor:pointer;
 	text-align:right;
 	margin-bottom:5px;
@@ -41,7 +41,7 @@ border: 1px solid #cccccc;
 }
 
 ul.playliste li{
-	cursor:hand;
+	cursor:pointer;
 	cursor:pointer;
 }
 
@@ -51,13 +51,13 @@ ul.playliste li{
 
 span.play_{
 	/*background:#E6ECFF;*/
-	cursor:hand;
+	cursor:pointer;
 	cursor:pointer;
 }
 
 span.play_on{
 	/*background:#FF0000;*/
-	cursor:hand;
+	cursor:pointer;
 	cursor:pointer;
 }
 
@@ -68,7 +68,7 @@ span.play_on{
 	border:1px solid white;
 	background-color:white;
 	position:relative;
-	cursor:hand;
+	cursor:pointer;
 	cursor:pointer;
 }
 #loading{
@@ -126,8 +126,8 @@ div#now_playing{
 
 /* At the end of the CSS File */
 
-/* CSS Hack Safari */
-#dummy {;# }
+/* CSS Hack Safari — T'es sur de toi ?? */
+/*#dummy {;# }*/
 
 #scroller_container {
 	overflow: auto;
