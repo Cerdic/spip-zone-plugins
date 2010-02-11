@@ -24,6 +24,9 @@
 	          [(#GET{nbSubs}|>{0}|oui)
   	          | [(#BOUTON_ACTION{<:clevermail:envoyer:>,#URL_ACTION_AUTEUR{clevermail_post_queue,#PST_ID,#SELF,ajax}})]
   	        ]
+	          [(#GET{nbSubs}|>{0}|non)
+	            | <span title="<:clevermail:envoyer_non_aucun_abonne:>"><:clevermail:envoyer:></span>
+	          ]
 			    </div>
 			  </li>
 	  	</BOUCLE_posts_new>
