@@ -23,7 +23,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_download_sur_le_web' => 'internet',
 	'bouton_attacher_document' => 'Attacher',
 	'bouton_enlever_document' => 'Detacher',
-	'bouton_enlever_document_confirmation' => 'Etes-vous sûr de vouloir détacher le document ?',
 	'bouton_enlever_supprimer_document' => 'Supprimer',
 	'bouton_enlever_supprimer_document_confirmation' => 'Etes-vous sûr de vouloir supprimer le document ?',
 	'bouton_modifier_document' => 'Modifier',
