@@ -27,7 +27,7 @@ function abonnements_edit_config($row)
 	return $config;
 }
 
-function formulaires_editer_abonnement_verifier_dist($id_grappes='new',$retour='', $config_fonc='abonnements_edit_config', $row=array(), $hidden=''){
+function formulaires_editer_abonnement_verifier_dist($id_abonnement='new',$retour='', $config_fonc='abonnements_edit_config', $row=array(), $hidden=''){
 
 	$erreurs = formulaires_editer_objet_verifier('abonnement',0,array('libelle','duree','montant','periode'));
 	if (count($erreurs) and !isset($erreurs['message_erreur'])) {
@@ -37,7 +37,7 @@ function formulaires_editer_abonnement_verifier_dist($id_grappes='new',$retour='
 }
 
 // http://doc.spip.org/@inc_editer_groupe_mot_dist
-function formulaires_editer_abonnement_traiter_dist($id_grappes='new',$retour='', $config_fonc='abonnements_edit_config', $row=array(), $hidden=''){
+function formulaires_editer_abonnement_traiter_dist($id_abonnement='new',$retour='', $config_fonc='abonnements_edit_config', $row=array(), $hidden=''){
 	$res = array();
 	$res['editable'] = true;
 	$res['vide'] = ""; // ne pas avoir uniquement 2 arguments dans $res, sinon spip prend ca comme un appel deprecie (editable, message_ok)
