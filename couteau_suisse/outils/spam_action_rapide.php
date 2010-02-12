@@ -31,6 +31,7 @@ function spam_action_rapide() {
 	$fd = recuperer_fond('fonds/test_spam', array(
 		'ar_message' => _request('ar_message'),
 		'test_bd' => _request('test_bd'),
+		'statut' =>_request('statut'),
 	));
 	// au cas ou il y aurait plusieurs actions, on fabrique plusieurs <form>
 	$fd = explode('@@CS_FORM@@', $fd);
@@ -51,7 +52,7 @@ function spam_test_0_action() {
 
 function spam_test_1_action() {
 	// lancer le test sur les messages de la base
-	redirige_vers_exec(array('test_bd'=>1));
+	redirige_vers_exec(array('test_bd'=>1, 'statut' =>_request('statut')));
 }
 
 

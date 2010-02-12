@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'test_base'=>'Test de la base de donn&eacute;es',
 	'base_donnees'=>'Base de donn&eacute;es',
 	'lancer_test' => 'Lancer le test !',
+	'msg_publies' => 'Uniquement les messages publi&eacute;s',
 
 	// A
 	'attente_confirmation' => 'En attente de confirmation',
