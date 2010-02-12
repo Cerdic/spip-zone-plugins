@@ -310,7 +310,7 @@ function init_code_edit(){
 init_code_edit();
 </script>
 <style>
-.codewrap {border:1px solid #333;background:#fff;font-size:11px;}
+.codewrap {border:1px solid #333;background:#fff;font-size:11px;clear:both;}
 .codewrap.readonly {background:#ddd;}
 .CodeMirror-line-numbers {
         width: 2.2em;
