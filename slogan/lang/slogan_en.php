@@ -4,7 +4,9 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	'info_slogan_site' => "Slogan for your site"
+	'info_slogan_site' => "Slogan for your site",
+		'titre_identite_site' => 'Identit&eacute; du site',
+	'config_info_enregistree' => 'The configuration has been saved'
 
 );
 
