@@ -1,0 +1,68 @@
+<!-- descriptif=
+
+<h4>Configuration de my_twitter pour Z</h4>
+
+Ici vous pouvez configurer votre compte twitter et l'affichage de votre page
+
+-->
+
+<!-- titre=plugin my_twitter pour Z -->
+
+
+#CACHE{0}
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+
+	<fieldset>
+		<legend>Vos préférences twitter</legend>
+
+		<label>votre compte twitter</label>
+		<input type="text" name="compte" size="40" value="#CONFIG{mytwitter/compte}">
+	<hr/>
+		
+		<label>abonnés/abonnement</label>
+			<select name="amis">
+			<option value="0">afficher vos abonnés</option>
+			<option value="1">afficher vos abonnement</option>
+			</select>
+	<hr/>
+		<label>nombre de personnes Ã  afficher</label>
+		<input type="text" name="users" size="5" value="#CONFIG{mytwitter/users}">
+		<p>(entre chaque rechargement)</p>
+	<hr/>
+		<label>afficher les derniers twits en boucle</label>
+			<select name="loop">
+			<option value="0">non</option>
+			<option value="1">oui</option>
+			</select>
+	<hr/>
+		<label>liens des amis/followers</label>
+			<select name="link">
+			<option value="0">vers leurs pages twitter</option>
+			<option value="1">vers leurs pages personnelles</option>
+			</select>
+
+		
+	</fieldset>
+	<br/> <br/> <br/>
+	<fieldset>
+		<legend>Vos préférences d'affichage</legend>
+		
+		<label>affichage : largeur du bloc</label>
+		<input type="text" name="largeur" size="5" value="#CONFIG{mytwitter/largeur}">
+		<p>(en pixels, renseigner le nombre seulement)</p>
+	<hr/>
+		<label>taille des miniatures</label>
+		<input type="text" name="miniatures" size="5" value="#CONFIG{mytwitter/miniatures}">
+		<p>(en pixels, renseigner le nombre seulement)</p>
+		<p>si vous ne savez pas quoi mettre, indiquez 48</p>
+	<hr/>
+	</fieldset>
+	
+	<input type="submit" name="_cfg_ok" value="<:OK:>" />
+	<input type="reset" value="<:Reset:>" />
+	<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
+
+</form>
+
+
+

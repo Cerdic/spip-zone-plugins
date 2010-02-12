@@ -1,0 +1,18 @@
+
+<div class="mytwitter" style="width:[(#CONFIG{mytwitter/largeur}|sinon{482})]px; margin:auto;">
+		<!-- Required HTML -->
+		<div class="twitter-friends" options="{
+			debug:1
+			,username:'[(#ENV{compteprio}|sinon{[(#CONFIG{mytwitter/compte}|sinon{spipeau})]})]'
+			,friends:[(#CONFIG{mytwitter/amis}|sinon{0})]
+			,loop:[(#CONFIG{mytwitter/loop}|sinon{1})]
+			,user_link:[(#CONFIG{mytwitter/link}|sinon{0})]
+			,user_image:[(#CONFIG{mytwitter/miniatures}|sinon{48})]
+			,tweet:1
+			,header:'<img src=\'_ti_\'/><h3><a href=\'_tp_\' title=\'follow me\'>_tp_</a></h3>(_fr_ Friends / _fo_ Followers)'
+			
+			,users:[(#CONFIG{mytwitter/users}|sinon{50})]
+			,user_animate:'opacity'
+		}"></div>
+		<!-- Required HTML -->
+</div>
