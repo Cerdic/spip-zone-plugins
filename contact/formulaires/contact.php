@@ -7,9 +7,8 @@ function formulaires_contact_charger_dist($id_auteur='',$tracer=''){
 	$valeurs['choix_destinataires'] = '';
 	
 	// La liste dans laquelle on pourra éventuellement choisir
-	$map = array();
-	$map = lire_config('contact/choix_destinataires');
-	$choix_destinataires = array_map('intval',$map);
+	$choix_destinataires = ($tmp = lire_config('contact/choix_destinataires')) ? $tmp : array();
+	$choix_destinataires = array_map('intval',$choix_destinataires);
 
 	// tableau des type_choix necessitant la prise en compte de $id_auteur
 	$t_c = array('tous_et', 'tous_ou', 'un_et', 'un_ou', 'plusieurs_et', 'plusieurs_ou');
