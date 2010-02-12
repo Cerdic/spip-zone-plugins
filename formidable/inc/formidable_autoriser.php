@@ -7,6 +7,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function formidable_autoriser(){}
 
 // Seuls les admins peuvent éditer les formulaires
+function autoriser_formulaire_editer_dist($faire, $type, $id, $qui, $options){
+	if (isset($qui['statut']) and $qui['statut'] <= '0minirezo') return true;
+	else return false;
+}
+
+// Seuls les admins peuvent éditer les formulaires
 function autoriser_formulaires_bouton_dist($faire, $type, $id, $qui, $options){
 	if (isset($qui['statut']) and $qui['statut'] <= '0minirezo') return true;
 	else return false;

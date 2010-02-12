@@ -1,0 +1,72 @@
+
+<div class="cadre-formulaire-editer">
+	<div class="entete-formulaire">
+		<BOUCLE_formulaire(FORMULAIRES){id_formulaire=#VAL{id_formulaire}|_request}>
+			<a href="[(#URL_ECRIRE{formulaires_voir}|parametre_url{id_formulaire,#ID_FORMULAIRE})]" class="icone36" style="float:left;">
+				<img width="24" height="24" src="#CHEMIN{images/formulaire-24.png}" />
+				<span><:retour:></span>
+			</a>
+			
+			<:formidable:editer_modifier_formulaire:>
+			<h1>
+				#TITRE
+			</h1>
+			
+			#SET{configurer,#ENV{configurer}|in_array{#ARRAY{0,formulaire,1,champs,2,traitements}}|?{#ENV{configurer},champs}}
+		</BOUCLE_formulaire>
+			<a href="#URL_ECRIRE{formulaires_tous}" class="icone36" style="float:left;">
+				<img width="24" height="24" src="#CHEMIN{images/formulaire-24.png}" />
+				<span><:retour:></span>
+			</a>
+			
+			<:formidable:editer_modifier_formulaire:>
+			<h1>
+				[(#ENV{nouveau}|=={oui}|?{<:formidable:editer_nouveau:>,#VAL{id_menu}|_request})]
+			</h1>
+			
+			#SET{configurer,formulaire}
+		<//B_formulaire>
+	</div>
+	
+	[(#GET{configurer}|=={formulaire}|oui)
+		#FORMULAIRE_EDITER_FORMULAIRE{#VAL{id_formulaire}|_request|sinon{0}, #VAL{nouveau}|_request|sinon{''}}
+	]
+	[(#GET{configurer}|=={champs}|oui)
+		#FORMULAIRE_EDITER_FORMULAIRE_CHAMPS{#ENV{id_formulaire}}
+	]
+	[(#GET{configurer}|=={traitements}|oui)
+		#FORMULAIRE_EDITER_FORMULAIRE_TRAITEMENTS{#ENV{id_formulaire}}
+	]
+</div>
+
+<!--#navigation-->
+[(#ENV{id_formulaire,0}|intval|oui)
+<div class="cadre infos cadre-info">
+	<div class="numero">
+		<:formidable:voir_numero:>
+		<p>[(#ENV{id_formulaire})]</p>
+	</div>
+	<div[ (#GET{configurer}|=={formulaire}|oui)class="dater"]>
+		<a href="[(#SELF|parametre_url{configurer,formulaire})]" class="cellule-h">
+			[<img src="(#CHEMIN{images/formulaire-editer-24.png})" style="vertical-align:middle;" alt="" />]
+			<span style="vertical-align:middle;"><:formidable:editer_menu_formulaire:></span>
+		</a>
+	</div>
+	<div[ (#GET{configurer}|=={champs}|oui)class="dater"]>
+		<a href="[(#SELF|parametre_url{configurer,champs})]" class="cellule-h">
+			[<img src="(#CHEMIN{images/formulaire-config-champs-24.png})" style="vertical-align:middle;" alt="" />]
+			<span style="vertical-align:middle;"><:formidable:editer_menu_champs:></span>
+		</a>
+	</div>
+	<div[ (#GET{configurer}|=={traitements}|oui)class="dater"]>
+		<a href="[(#SELF|parametre_url{configurer,traitements})]" class="cellule-h">
+			[<img src="(#CHEMIN{images/formulaire-config-traitements-24.png})" style="vertical-align:middle;" alt="" />]
+			<span style="vertical-align:middle;"><:formidable:editer_menu_traitements:></span>
+		</a>
+	</div>
+</div>
+]
+<!--/#navigation-->
+
+<!--#extra-->
+<!--/#extra-->

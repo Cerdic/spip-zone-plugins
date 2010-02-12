@@ -12,6 +12,7 @@
 	<prefix>formidable</prefix>
 	
 	<install>base/formidable_installation.php</install>
+	<options>formidable_options.php</options>
 	
 	<pipeline>
 		<nom>autoriser</nom>
@@ -35,7 +36,7 @@
 	</pipeline>
 	
 	<bouton id="formulaires" parent="naviguer">
-		<icone>images/formidable-24.png</icone>
+		<icone>images/formulaire-24.png</icone>
 		<titre>formidable:bouton_formulaires</titre>	
 		<url>formulaires_tous</url>	
 	</bouton>

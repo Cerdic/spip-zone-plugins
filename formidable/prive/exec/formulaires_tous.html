@@ -7,7 +7,7 @@
 	<B_tous>
 	<ul>
 	<BOUCLE_tous(FORMULAIRES)>
-		<li><a href="#URL_ECRIRE{formulaires_editer, id_formulaire=#ID_FORMULAIRE}">#TITRE</a></li>
+		<li><a href="#URL_ECRIRE{formulaires_voir, id_formulaire=#ID_FORMULAIRE}">#TITRE</a></li>
 	</BOUCLE_tous>
 	</ul>
 	</B_tous>
@@ -15,10 +15,13 @@
 	<//B_tous>
 </div>
 
+<a href="[(#URL_ECRIRE{formulaires_editer}|parametre_url{nouveau,oui})]" class="icone36" style="display:block; margin:1em auto;">
+	<img width="48" height="48" src="#CHEMIN{images/formulaire-nouveau-48.png}" />
+	<span><:formidable:formulaires_nouveau:></span>
+</a>
+
 <!--#navigation-->
-Du contenu en colonne de navigation.
 <!--/#navigation-->
 
 <!--#extra-->
-Du contenu en colonne extra.
 <!--/#extra-->
