@@ -61,7 +61,9 @@ function formulaires_editer_menu_charger($id_menu, $nouveau){
 				);
 				$contexte = array_merge($contexte, $menu);
 			}
-
+			
+			// Déclarer l'action pour SPIP 2.0
+			$contexte['_action'] = array('editer_menu', $id_menu);
 			// On sait toujours si on est sur un menu déjà créé ou pas
 			$contexte['_hidden'] .= '<input type="hidden" name="id_menu" value="'.$id_menu.'" />';
 		}
