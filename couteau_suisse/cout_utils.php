@@ -189,7 +189,7 @@ function cs_get_defaut($variable) {
 		elseif(@$variable['format']==_format_CHAINE) $defaut = "strval($defaut)";
 //cs_log("cs_get_defaut() - \$defaut[{$variable['nom']}] = $defaut");
 	eval("\$defaut=$defaut;");
-	$defaut2 = cs_php_format($defaut, @$variable['format']!=_format_NOMBRE);
+	$defaut2 = cs_php_format($defaut, @$variable['format']!=_format_NOMBRE, true);
 //cs_log(" -- cs_get_defaut() - \$defaut[{$variable['nom']}] est devenu : $defaut2");
 	return $defaut2;
 }
@@ -576,9 +576,9 @@ function cs_retire_guillemets($valeur) {
 }
 
 // met en forme une valeur dans le style php
-function cs_php_format($valeur, $is_chaine = true) {
+function cs_php_format($valeur, $is_chaine = true, $dblguill=false) {
 	$valeur = trim($valeur);
-	if( (strncmp($valeur,$g="'",1)===0 || strncmp($valeur,$g='"',1)===0)
+	if( (strncmp($valeur,$g="'",1)===0 || ($dblguill && strncmp($valeur,$g='"',1)===0))
 			&& preg_match(",^$g(.*)$g$,s", $valeur, $matches)) {
 		if($is_chaine) return $valeur;
 		$valeur = stripslashes($matches[1]);		
