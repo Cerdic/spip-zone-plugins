@@ -2,7 +2,6 @@
 
 function mytwitter_insert_head($flux){
 	$flux	.= '<link rel="stylesheet" type="text/css" href="'.find_in_path('mytwitter.css').'" media="all" />'."\n"
-		.  "<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js'></script>\n"
 		.  "<script type='text/javascript' src='http://twitter-friends-widget.googlecode.com/files/jquery.twitter-friends-1.0.min.js'></script>\n";
 	return $flux;
 
