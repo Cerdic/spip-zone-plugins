@@ -12,6 +12,7 @@
 	<nom> <!-- Nom du plugin -->
 	Lecteur Multim&eacute;dia en Flash (MP3,flv)
 	</nom>
+	<icon>images/logo-32.png</icon>
 	<auteur>	<!-- Auteur du plugin -->
 	<a href="http://www.spip-contrib.net/BoOz,502">BoOz</a>,C&#233;dric, erational, CP.
 	</auteur>
