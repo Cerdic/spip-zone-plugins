@@ -6,6 +6,7 @@
 		[it]Colorazione del codice in 2.0
 		</multi>
 	</nom>
+	<icon>coloration-32.png</icon>
 	<auteur>	<!-- Auteur du plugin -->
 	  Pierre Andrews (Mortimer) &#38; ARNO*
 	</auteur>
