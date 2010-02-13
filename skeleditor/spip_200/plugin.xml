@@ -1,0 +1,41 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	<multi>
+	[fr]Squelette editeur
+  [en]Template editor 
+	[it]Redattore di scheletro 
+	[es]Redactor esquel&#233;tico
+	[de]Skeleton Herausgeber
+	</multi>
+	</nom>
+	<icon>img_pack/logo_skeleditor.png</icon>
+	<auteur>[erational->http://www.erational.org]</auteur>
+	<licence>GNU/GPL v3</licence>
+	<version>0.11</version>
+	<etat>dev</etat>
+	<description>
+	<multi>
+	[fr]Dans l'espace priv&#233;, permet d'&#233;diter les fichiers squelettes
+  [en]Edit template files in the backoffice
+	[it]Nello spazio riservato, concede a redattore gli scheletri delle lime
+	[es]En espacio privado, no prohibe a redactor los esqueletos de los archivos
+	[de] Im privaten Raum erlaubt Herausgeber die Aktenskelette 
+	</multi>
+	</description>
+	<lien>http://www.spip-contrib.net/Editeur-de-squelettes-Skel-editor</lien>
+	<prefix>skeleditor</prefix>
+	<fonctions>skeleditor_fonctions.php</fonctions>
+	<!-- bouton prive -->
+  <bouton id="skeleditor" parent="naviguer">
+      <icone>img_pack/icon.png</icone>
+      <titre>skeleditor:editer_skel</titre>   
+      <url>skeleditor</url>   
+  </bouton> 
+  <!-- pipeline -->
+  <pipeline>
+      <nom>autoriser</nom>
+      <inclure>inc/skeleditor_autoriser.php</inclure>
+  </pipeline>
+  <!-- necessite -->
+	<necessite id="SPIP" version="[2.0.0;]" />
+</plugin>
