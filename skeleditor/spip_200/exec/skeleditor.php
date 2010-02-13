@@ -161,8 +161,8 @@ function exec_skeleditor(){
          } else { 
              // tools bar
              $out .= "<div id='skel_toolbar' style='width:100%;text-align:right;'>\n";
-             $out .= "<img src='"._DIR_PLUGIN_SKELEDITOR."/img_pack/action_dl.png' alt='download' /><a href=\"?exec=skeleditor&amp;f=".urlencode($file_name)."&amp;operation=download\">"._T("skeleditor:telecharger")."</a>";
-             $out .= "<img src='"._DIR_PLUGIN_SKELEDITOR."/img_pack/action_del.png' alt='delete' /><a href=\"?exec=skeleditor&amp;f=".urlencode($file_name)."&amp;operation=delete\" onclick=\"javascript:return confirm('"._T("skeleditor:effacer_confirme")."');\">"._T("skeleditor:effacer")."</a>";
+             $out .= "<img src='"._DIR_PLUGIN_SKELEDITOR."spip_200/img_pack/action_dl.png' alt='download' /><a href=\"?exec=skeleditor&amp;f=".urlencode($file_name)."&amp;operation=download\">"._T("skeleditor:telecharger")."</a>";
+             $out .= "<img src='"._DIR_PLUGIN_SKELEDITOR."spip_200/img_pack/action_del.png' alt='delete' /><a href=\"?exec=skeleditor&amp;f=".urlencode($file_name)."&amp;operation=delete\" onclick=\"javascript:return confirm('"._T("skeleditor:effacer_confirme")."');\">"._T("skeleditor:effacer")."</a>";
              $out .= "</div>\n";             
              // img or text ?
              $extension =  strtolower(substr($file_name, strrpos($file_name,".")+1)); 

@@ -22,10 +22,10 @@ function skeleditor_tree_open_close_dir(&$current,$target,$current_file){
 	while($open = array_shift($ttarg)){
 		$chemin .= $open . "/";
 		if(!strstr($current_file,$chemin)){
-      $output .= bouton_block_depliable("<img src='"._DIR_PLUGIN_SKELEDITOR."/img_pack/folder.png' alt='directory' style='float:left;' /> $open",false,md5($chemin));			
+      $output .= bouton_block_depliable("<img src='"._DIR_PLUGIN_SKELEDITOR."spip_200/img_pack/folder.png' alt='directory' style='float:left;' /> $open",false,md5($chemin));
 		}
 		else {
-      $output .= bouton_block_depliable("<img src='"._DIR_PLUGIN_SKELEDITOR."/img_pack/folder.png' alt='directory' style='float:left;' /> $open",false,md5($chemin));	
+      $output .= bouton_block_depliable("<img src='"._DIR_PLUGIN_SKELEDITOR."spip_200/img_pack/folder.png' alt='directory' style='float:left;' /> $open",false,md5($chemin));
 		}
 		$output .= "<div style='line-height: 12px;border:1px solid #ededed;padding:4px;margin:4px 0;display:none;' id='".md5($chemin)."'>\n";
 	}
@@ -56,10 +56,10 @@ function skeleditor_afficher_dir_skel($file_list,$current_file,$img_extension) {
 		$base = $path_parts['basename'];
 		
 		if (in_array($extension,$img_extension)) {
-			 $output .= "<img src='"._DIR_PLUGIN_SKELEDITOR."/img_pack/img.png' alt='image' /> ";
+			 $output .= "<img src='"._DIR_PLUGIN_SKELEDITOR."spip_200/img_pack/img.png' alt='image' /> ";
 			 $output .= "<a href='".generer_url_ecrire('skeleditor','f='.urlencode($file))."'$expose>$base</a>";
 		} else {
-		   $output .= "<img src='"._DIR_PLUGIN_SKELEDITOR."/img_pack/file.png' alt='file' /> ";
+		   $output .= "<img src='"._DIR_PLUGIN_SKELEDITOR."spip_200/img_pack/file.png' alt='file' /> ";
 			 $output .= "<a href='".generer_url_ecrire('skeleditor','f='.urlencode($file))."'$expose>$base</a>";
 		}
 		$output .= "</div>\n";
@@ -85,7 +85,7 @@ function editor_form_directory($path,$depth="") {
 // add file form
 function skeleditor_addfile($path_list) {
   //$output = bouton_block_invisible('editor_newfile');
-  $output .= "<img src='"._DIR_PLUGIN_SKELEDITOR."/img_pack/action_add.png' alt='new' />"._T("skeleditor:fichier_nouveau");
+  $output .= "<img src='"._DIR_PLUGIN_SKELEDITOR."spip_200/img_pack/action_add.png' alt='new' />"._T("skeleditor:fichier_nouveau");
   //$output .= debut_block_invisible('editor_newfile');  
   $output .= "<form method='get'>\n"; 
   $output .= "<input type='hidden' name='exec' value='skeleditor' />"; 
@@ -104,7 +104,7 @@ function skeleditor_addfile($path_list) {
 // upload file form
 function skeleditor_uploadfile($path_list) {
   //$output = "<br />".bouton_block_invisible('editor_uploadfile');
-  $output .= "<img src='"._DIR_PLUGIN_SKELEDITOR."/img_pack/action_add.png' alt='new' />"._T("skeleditor:fichier_upload");
+  $output .= "<img src='"._DIR_PLUGIN_SKELEDITOR."spip_200/img_pack/action_add.png' alt='new' />"._T("skeleditor:fichier_upload");
   //$output .= debut_block_invisible('editor_uploadfile');
   
   $output .= "<form method='post' enctype='multipart/form-data' >\n";  
