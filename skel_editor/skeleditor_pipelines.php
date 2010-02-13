@@ -49,7 +49,7 @@ function skeleditor_extraire_css($texte){
 }
 
 function skeleditor_affichage_final($texte){
-	if (isset($_COOKIE['spip_admin'])){
+	if (isset($_COOKIE['spip_admin']) AND $GLOBALS['html']){
 		if ($GLOBALS['var_inclure']){
 			$url = generer_url_ecrire('skeleditor','retour='.parametre_url(self(),'var_mode','inclure').'&f=');
 			$texte .= "<script>jQuery(function(){jQuery('.inclure_blocs h6:first-child').each(function(){
