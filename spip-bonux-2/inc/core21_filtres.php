@@ -187,7 +187,7 @@ function bando_images_background(){
 }
 }
 
-if (!function_exists('bando_style_prive_theme')){
+if (!function_exists('bando_style_prive_theme') AND !defined('_DIR_PLUGIN_BANDO')){
 function bando_style_prive_theme() {
 	return '';
 }
