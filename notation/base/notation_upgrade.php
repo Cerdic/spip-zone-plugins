@@ -53,7 +53,7 @@ function notation_upgrade($nom_meta_base_version,$version_cible){
 		}
 		
 		// mise a jour pour transformer les id_article et id_forum en id_objet
-		if (version_compare($current_version,"0.6","<")){
+		if (version_compare($current_version,"0.6.1","<")){
 			// ajout des champ id_objet
 			sql_alter("TABLE spip_notations ADD COLUMN id_objet BIGINT(21) NOT NULL DEFAULT '0' AFTER objet");
 			sql_alter("TABLE spip_notations_objets ADD COLUMN id_objet BIGINT(21) NOT NULL DEFAULT '0' AFTER objet");
@@ -81,9 +81,8 @@ function notation_upgrade($nom_meta_base_version,$version_cible){
 			sql_updateq("spip_notations", array("objet" => "article"), "objet=".sql_quote($a="articles"));
 			sql_updateq("spip_notations_objets", array("objet" => "article"), "objet=".sql_quote($a="articles"));
 		
-			ecrire_meta($nom_meta_base_version,$current_version="0.6");
+			ecrire_meta($nom_meta_base_version,$current_version="0.6.1");
 		}
-		ecrire_metas();
 	}
 }
 
@@ -91,7 +90,6 @@ function notation_vider_tables($nom_meta_base_version) {
 	sql_drop_table("spip_notations");
 	sql_drop_table("spip_notations_objets");
 	effacer_meta($nom_meta_base_version);
-	ecrire_metas();
 }
 
 ?>
