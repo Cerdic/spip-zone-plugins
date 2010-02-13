@@ -1,0 +1,120 @@
+#HTTP_HEADER{content-type:text/css}
+
+div.mytwitter {clear:both;} 
+
+/* container */
+div.twitter-friends{margin-bottom: 20px;}
+
+/*------- Header -------*/
+div.tf-header{
+	border:silver 1px solid;
+	overflow:hidden;
+	margin:0 0 1px 0;
+	text-align: center;
+}
+div.tf-header img{
+	border:none;
+	margin:1px;
+	float:left;
+	width:48px;
+	height:48px;
+}
+div.tf-header h2{
+	line-height:32px;
+	font-weight:bolder;
+	display:block;
+	margin:3px;
+	padding:0;
+	float:left;
+	font-size:12px;
+}
+/*------- Users -------*/
+div.tf-users{
+	/* fixed height so container will not flicker within transitions */
+	height:[(#CONFIG{mytwitter/hauteur}|sinon{240})]px;
+	border:silver 1px solid;
+	overflow:hidden;
+	background-color:[(#CONFIG{mytwitter/couleurfondcentre}|sinon{#eaeaea})];
+}
+/* user img link*/
+div.tf-users a{ 
+	display:block;
+	float:left;
+}
+/* user img */
+div.tf-users img{ }
+
+/*------- Info Link -------*/
+div.tf-info{
+	text-align:right;
+}
+div.tf-info a{
+	text-decoration:none;
+	font-size:9px;
+	font-weight:bolder;
+	color:gray;
+	font-family:tahoma;
+}
+
+/*------- tweet div -------*/
+div.tf-tweet{
+	/* fixed height so container will not flicker with different length tweets  */
+	height:56px;
+	overflow:hidden;
+}
+/* tweet item */
+div.tf-tweet div{
+	border:silver 1px solid;
+	position:relative;
+	padding:1px;
+	margin:1px 0 0 0;
+	overflow:hidden;
+	height:50px;
+}
+
+/* tweet author avatar */
+div.tf-tweet span.tf-avatar{
+	display:block;
+	width:48px;
+	height:48px;
+	margin:0 2px 0 2px;
+	left:0;
+	position:absolute;
+	overflow:hidden;
+}
+/* tweet author name */
+div.tf-tweet strong a{
+	margin-right:5px;
+}
+/* tweet body */
+div.tf-tweet span.tf-body {
+	display:block;
+	margin-left:55px;
+}
+/* tweet content */
+div.tf-tweet span.tf-content{
+}
+/* tweet date and source */
+div.tf-tweet span.tf-meta {
+	color:#999999;
+	display:block;
+	font-size:0.764em;
+	margin:3px 0 0;
+}
+div.tf-tweet span.tf-meta a{
+	color:#999999;
+	text-decoration:none;
+}
+div.tf-tweet span.tf-meta a:hover{
+	text-decoration:underline;
+}
+/* tweet date link */
+div.tf-tweet a.tf-date { }
+/* tweet source link */
+div.tf-tweet a.tf-source { }
+/* tweet links */
+div.tf-tweet a.tf-link { }
+/* tweet @user links */
+div.tf-tweet a.tf-at { }
+/* tweet #hashtags links */
+div.tf-tweet a.tf-hashtag { }

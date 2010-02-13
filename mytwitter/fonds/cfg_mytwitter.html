@@ -1,68 +1,78 @@
 <!-- descriptif=
 
-<h4>Configuration de my_twitter</h4>
+<img src="[(#CHEMIN{img/twitter-64.png})]"> <h3>Configuration de my_twitter</h3>
 
 Ici vous pouvez configurer votre compte twitter et l'affichage de votre page
 
+
 -->
 
-<!-- titre=plugin my_twitter pour Z -->
+<!-- titre=plugin my_twitter -->
 
 
 #CACHE{0}
 <form method="post">[(#ENV{_cfg_}|form_hidden)]
-
+<p>
 	<fieldset>
 		<legend>Vos préférences twitter</legend>
 
 		<label>votre compte twitter</label>
 		<input type="text" name="compte" size="40" value="#CONFIG{mytwitter/compte}">
-	<hr/>
+	<br/> <br/>
 		
 		<label>abonnés/abonnement</label>
 			<select name="amis">
-			<option value="0">afficher vos abonnés</option>
-			<option value="1">afficher vos abonnement</option>
+			<option value="0"[(#CONFIG{mytwitter/amis}|=={0}|?{selected="selected",''})]>afficher vos abonnés</option>
+			<option value="1"[(#CONFIG{mytwitter/amis}|=={1}|?{selected="selected",''})]>afficher vos abonnement</option>
 			</select>
-	<hr/>
-		<label>nombre de personnes Ã  afficher</label>
+	<br/> <br/>
+		<label>nombre de personnes à afficher</label>
 		<input type="text" name="users" size="5" value="#CONFIG{mytwitter/users}">
-		<p>(entre chaque rechargement)</p>
-	<hr/>
+		(entre chaque rechargement)
+	<br/> <br/>
+		<label>nombre de tweet par personne</label>
+			<input type="text" name="tweet" size="5" value="#CONFIG{mytwitter/tweet}">
+	<br/> <br/>
 		<label>afficher les derniers twits en boucle</label>
 			<select name="loop">
-			<option value="0">non</option>
-			<option value="1">oui</option>
+			<option value="0"[(#CONFIG{mytwitter/loop}|=={0}|?{selected="selected",''})]>non</option>
+			<option value="1"[(#CONFIG{mytwitter/loop}|=={1}|?{selected="selected",''})]>oui</option>
 			</select>
-	<hr/>
+	<br/> <br/>
 		<label>liens des amis/followers</label>
 			<select name="link">
-			<option value="0">vers leurs pages twitter</option>
-			<option value="1">vers leurs pages personnelles</option>
+			<option value="0"[(#CONFIG{mytwitter/link}|=={0}|?{selected="selected",''})]>vers leurs pages twitter</option>
+			<option value="1"[(#CONFIG{mytwitter/link}|=={1}|?{selected="selected",''})]>vers leurs pages personnelles</option>
 			</select>
-
-		
 	</fieldset>
 	<br/> <br/> <br/>
 	<fieldset>
 		<legend>Vos préférences d'affichage</legend>
 		
-		<label>affichage : largeur du bloc</label>
+		<label>largeur du bloc</label>
 		<input type="text" name="largeur" size="5" value="#CONFIG{mytwitter/largeur}">
-		<p>(en pixels, renseigner le nombre seulement)</p>
-		<p>(482px par defaut)</p>
-	<hr/>
+		(en pixels, renseigner le nombre seulement)
+	<br/> <br/>
+		<label>hauteur du bloc central</label>
+		<input type="text" name="hauteur" size="5" value="#CONFIG{mytwitter/hauteur}">
+		(en pixels, renseigner le nombre seulement)<br/>
+		(240px par défaut)
+	<br/> <br/>
 		<label>taille des miniatures</label>
 		<input type="text" name="miniatures" size="5" value="#CONFIG{mytwitter/miniatures}">
-		<p>(en pixels, renseigner le nombre seulement)</p>
-		<p>(48px par defaut)</p>
-	<hr/>
+		(en pixels, renseigner le nombre seulement)<br/>
+		si vous ne savez pas quoi mettre, indiquez 48
+	<br/> <br/>
+		<label>couleur du bloc central</label>
+		<input type="text" name="couleurfondcentre" size="15" value="#CONFIG{mytwitter/couleurfondcentre}">
+		(#ffffff par défaut)
+	<br/> <br/>
 	</fieldset>
 	
 	<input type="submit" name="_cfg_ok" value="<:OK:>" />
 	<input type="reset" value="<:Reset:>" />
 	<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
-
+</p>
 </form>
 
 

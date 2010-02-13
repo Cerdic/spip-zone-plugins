@@ -1,7 +1,8 @@
 <?php
 
 function mytwitter_insert_head($flux){
-	$flux	.= '<link rel="stylesheet" type="text/css" href="'.find_in_path('mytwitter.css').'" media="all" />'."\n"
+	$flux	.= '<link rel="stylesheet" type="text/css" href="'.generer_url_public('mytwitter.css').'" media="all" />'."\n"
+
 		.  "<script type='text/javascript' src='http://twitter-friends-widget.googlecode.com/files/jquery.twitter-friends-1.0.min.js'></script>\n";
 	return $flux;
 
