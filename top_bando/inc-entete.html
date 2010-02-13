@@ -1,0 +1,36 @@
+#CACHE{7200}
+[(#SET{top, [(#CONFIG{top_bando/calage_top_recadrage}|=={centrer}|?{center,top=[(#CONFIG{top_bando/calage_top_recadrage})]})]})]
+[(#SET{couleur, [(#CONFIG{top_bando/couleur_principale}|top_bando_suprime_diese)]})]
+[(#SET{hauteur, [(#CONFIG{top_bando/hauteur_bando})]})]
+<div class="logo_site">
+		<a rel="start home" href="#URL_SITE_SPIP/" title="<:accueil_site:>" class="accueil"
+       style="background: url([(#LOGO_SITE_SPIP_SURVOL||image_recadre{0,#GET{hauteur},left=0 #GET{top},#GET{couleur}}|extraire_attribut{src})]) 
+                          center #[(#GET{couleur})];
+                          [text-align: (#CONFIG{top_bando/alignement_titre});]
+                          [font-size: (#CONFIG{top_bando/taille_police});]
+                          [color: (#CONFIG{top_bando/couleur_principale_texte});]
+                          [height: (#GET{hauteur})px;]
+                          width: 100%;
+                          display: block;">
+                           
+	    <img src="[(#LOGO_SITE_SPIP||image_reduire{0,[(#GET{hauteur})]}|extraire_attribut{src})]"
+      	   [ alt="(#NOM_SITE_SPIP|attribut_html)"]
+           [ title="(#NOM_SITE_SPIP|attribut_html)"]
+           [ style="float: (#CONFIG{top_bando/place_logo});"]/>
+      
+    [(#CONFIG{top_bando/afficher_titre}|=={oui}|oui)
+      	[(#SET{titre,[(#CONFIG{top_bando/titre_bando}|=={titre_spip}|?{[(#NOM_SITE_SPIP)],[(#CONFIG{top_bando/complement_nom_site})]})]})]
+        [(#PLUGIN{choix_police}|?{ 
+        	[(#CONFIG{top_bando/utiliser_image_typo}|=={oui}|?{
+                [(#MODELE{typo}{texte=[(#GET{titre})],
+                                couleur=[(#CONFIG{top_bando/couleur_principale_texte})],
+                                taille=[(#CONFIG{top_bando/taille_police})]})]
+                ,
+                [<strong id="nom_site_spip" >(#GET{titre})</strong>]
+            })]
+            ,
+            [<strong id="nom_site_spip" >(#GET{titre})</strong>]
+        })]
+    ]
+		</a>
+</div>

@@ -1,0 +1,237 @@
+<!-- titre=<:topbando:titre_top_bando:> -->
+<!-- icone=plugin-32.png-->
+<!-- boite=<:topbando:configuration_top_bando:> -->
+
+[(#PLUGIN{autorite}|oui)
+<!-- autoriser=webmestre -->
+<!-- refus=Seuls les webmestres du site sont autoris&#233;s &#224; 
+modifier les param&#232;tres. Pour en savoir plus, 
+voir <a href="http://www.spip-contrib.net/-Autorite-">la documentation</a>. -->
+]
+[(#PLUGIN{autorite}|non)
+<!-- autoriser=0minirezo -->
+<!-- refus=Seuls les administrateurs du site sont autoris&#233;s &#224; 
+modifier ces param&#232;tres.  -->
+]
+
+
+<!-- descriptif=
+<h4><:topbando:descriptif_configuration:></h4>
+-->
+
+<!-- head=
+	
+	<style type="text/css">
+	table.def td{padding-left:1em; padding-right:1em;}
+	</style>
+
+-->
+#CACHE{0}
+<!-- 
+[(#SET{largeur_bando,[(#LOGO_SITE_SPIP_SURVOL||largeur)]})]<br>lb: #GET{largeur_bando}
+[(#SET{hauteur_bando,[(#LOGO_SITE_SPIP_SURVOL||hauteur)]})]<br>hb: #GET{hauteur_bando}
+[(#SET{hauteur_bando_reduite,[(#GET{hauteur_bando}|mult{500}|div{[(#GET{largeur_bando})]})]})]<br>hbr: #GET{hauteur_bando_reduite}
+[(#SET{hauteur_recadre,[(#ENV{hauteur_bando,240}|mult{[(#GET{hauteur_bando_reduite})]}|div{[(#GET{hauteur_bando})]}|round)]})]<br>hrec: #GET{hauteur_recadre}
+[(#SET{topcentrer,[(#GET{hauteur_bando_reduite}|moins{[(#GET{hauteur_recadre})]}|div{2}|round)]})]<br>topcentrer: #GET{topcentrer}
+[(#SET{top,[(#ENV{calage_top_recadrage,centrer}|=={centrer}|?{[(#GET{topcentrer})],[(#ENV{calage_top_recadrage}|mult{500}|div{[(#GET{largeur_bando})]})]})]})]<br>top: #GET{top}
+[(#SET{taille_police_reduite, [(#ENV{taille_police}|mult{500}|div{[(#GET{largeur_bando})]})]})]<br>tpr: #GET{taille_police_reduite}
+[(#SET{titre,[(#ENV{titre_bando}|=={titre_spip}|?{[(#NOM_SITE_SPIP)],[(#ENV{complement_nom_site})]})]})]
+-->
+<script language="JavaScript" type="text/javascript">
+    function initialiser_params(){
+        if (jQuery("#titre_oui").attr("checked") == true)
+        	jQuery("#details_titre").show();
+        else jQuery("#details_titre").hide();
+    }
+    jQuery(document).ready(function(){
+        initialiser_params();
+        jQuery("#titre_oui").focus( function(){ jQuery("#details_titre").show(); });
+        jQuery("#titre_non").focus( function(){ jQuery("#details_titre").hide(); });
+        jQuery("#hauteur_bando").change(function(){
+            var hbando = parseInt(jQuery(this).attr("value") * 500 / [(#GET{largeur_bando})]);
+            jQuery("#recadre").css({height: hbando + "px"});
+            if (jQuery("#calage_top_recadrage").attr("value") == "centrer")
+                jQuery("#recadre").css({top: (([(#GET{hauteur_bando_reduite})] - hbando) / 2) + "px"});
+        });
+        jQuery("#calage_top_recadrage").change(function(){
+            var btop = jQuery(this).attr("value");
+            if (parseInt(btop) != NaN)
+                jQuery("#recadre").css({top: (btop * 500 / [(#GET{largeur_bando})]) + "px"});
+            if (btop == "centrer") {
+                var hbando = parseInt(jQuery("#recadre").css("height"));
+                jQuery("#recadre").css({top: (([(#GET{hauteur_bando_reduite})] - hbando) / 2) + "px"});
+            } 
+        });
+        jQuery("#logo_g").focus( function(){ jQuery("#img_logo").css({'float': 'left'}); });
+        jQuery("#logo_d").focus( function(){ jQuery("#img_logo").css({'float': 'right'}); });
+        jQuery("#logo_oui").focus( function(){ jQuery("#img_logo").css({'display': 'inline'}); });
+        jQuery("#logo_non").focus( function(){ jQuery("#img_logo").css({'display': 'none'}); });
+        jQuery("#bando_oui").focus( function(){ jQuery("#bando, #bando_logo").css({'background-image': 'url([(#LOGO_SITE_SPIP_SURVOL||image_reduire{500,0}|extraire_attribut{src})])'}); });
+        jQuery("#bando_non").focus( function(){ jQuery("#bando, #bando_logo").css({'background-image': 'none'}); });
+
+    });
+</script>
+
+<form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
+
+[(#REM) --------------------------- BANDEAU EN-TETE -------------------------- ]
+<fieldset>
+    <legend><:topbando:bando_entete:></legend>
+    <p>
+        <strong><:topbando:utiliser_bando:> :</strong>
+        <label><:topbando:oui:></label>
+        <input type="radio" name="utiliser_bando" value="oui" [(#ENV{utiliser_bando}|=={oui}|oui) checked="checked"] id="bando_oui"/> 
+        &nbsp;&nbsp;&nbsp;<input type="radio" name="utiliser_bando" value="non" [(#ENV{utiliser_bando}|=={oui}|non) checked="checked"] id="bando_non"/>
+        <label><:topbando:non:></label>
+    </p>
+    <p>
+    <label><:topbando:hauteur_bando:> :</label>
+    <input type="text" name="hauteur_bando" id="hauteur_bando"
+     value="[(#ENV{hauteur_bando,240})]" style="width: 80px" />
+    <br/><label><:topbando:calage_top_recadrage:> :</label>
+    <input type="text" name="calage_top_recadrage" id="calage_top_recadrage"
+     value="[(#ENV{calage_top_recadrage,centrer})]" style="width: 80px" />
+     <br/><small><:topbando:explication_calage_top:></small>
+     <div id="voir_bando">
+        <div id="bando" style="background: url([(#LOGO_SITE_SPIP_SURVOL||image_reduire{500,0}|extraire_attribut{src})]) 
+                              no-repeat center [(#ENV{couleur_principale})]; 
+                              width: 500px; 
+                              height: #GET{hauteur_bando_reduite}px;">
+            <div id="recadre" style="border: solid 2px #F00;
+                                     position: relative;
+                                     width: 496px;
+                                     height: #GET{hauteur_recadre}px;
+                                     top: #GET{top}px;
+                                     ">
+            </div>
+        <div>
+     </div>
+    </p>
+</fieldset>
+
+[(#REM) --------------------------- LOGO EN-TETE ----------------------------- ]
+<fieldset>
+    <legend><:topbando:logo_entete:></legend>
+    <p>
+        <strong><:topbando:utiliser_logo:> :</strong>
+        <label><:topbando:oui:></label>
+        <input type="radio" name="utiliser_logo" value="oui" [(#ENV{utiliser_logo}|=={oui}|oui) checked="checked"] id="logo_oui"/> 
+        &nbsp;&nbsp;&nbsp;<input type="radio" name="utiliser_logo" value="non" [(#ENV{utiliser_logo}|=={oui}|non) checked="checked"] id="logo_non"/>
+        <label><:topbando:non:></label>
+    </p>
+    <p>
+        <strong><:topbando:place_logo:> :</strong>
+        <label><:topbando:gauche:></label>
+        <input type="radio" name="place_logo" value="left" [(#ENV{place_logo}|=={right}|non) checked="checked"] id="logo_g"/> 
+        &nbsp;&nbsp;&nbsp;<input type="radio" name="place_logo" value="right" [(#ENV{place_logo}|=={right}|oui) checked="checked"] id="logo_d"/>
+        <label><:topbando:droite:></label>
+    </p>
+     <div id="voir_bando_logo">
+        <div id="bando_logo" style="background: url([(#LOGO_SITE_SPIP_SURVOL||image_reduire{500,0}|extraire_attribut{src})]) 
+                                    0 -[(#GET{top})]px no-repeat [(#ENV{couleur_principale})]; 
+                                    width: 500px; 
+                                    height: #GET{hauteur_recadre}px;">
+            [<img src="(#LOGO_SITE_SPIP||image_reduire{0,[(#GET{hauteur_recadre})]}|extraire_attribut{src})" alt="logo_site"
+                  style="float: [(#ENV{place_logo,left})];" id="img_logo"/>]
+        <div>
+     </div>
+</fieldset>
+    
+[(#REM) ------------------------ COULEURS ------------------------------------ ]
+<fieldset>
+    <legend><:topbando:choix_teinte_generale:></legend>
+    <p><:topbando:saisir_couleur:>: 
+    	<br/><small><:topbando:explication_palette:></small>
+    </p>
+    <table>
+        <tr><td><:topbando:couleur_principale:></td>
+        <td><input type="text" name="couleur_principale" class="palette" id="couleur_principale" 
+            value="[(#ENV{couleur_principale,#FFFFFF})]" style="width: 80px"/>
+        </td></tr>
+        <tr><td><:topbando:couleur_texte:></td>
+        <td><input type="text" name="couleur_principale_texte" class="palette" id="couleur_principale_texte" 
+            value="[(#ENV{couleur_principale_texte,#000000})]" style="width: 80px" />
+        </td></tr>
+    </table>
+</fieldset>
+
+[(#REM)------------------------ TITRE SITE ----------------------------------- ]
+<fieldset>
+  <legend><:topbando:titre_site:></legend>
+    <p>
+        <strong><:topbando:afficher_titre:> :</strong>
+        <label><:topbando:oui:></label>
+        <input type="radio" name="afficher_titre" value="oui" [(#ENV{afficher_titre}|=={oui}|oui) checked="checked"] id='titre_oui' /> 
+        &nbsp;&nbsp;&nbsp;<input type="radio" name="afficher_titre" value="non" [(#ENV{afficher_titre}|=={oui}|non) checked="checked"] id='titre_non' />
+        <label><:topbando:non:></label>
+    </p>
+	  <div id="details_titre">
+    <p>
+  		<strong><:topbando:titre_bando:>:</strong>
+        <br /><input type="radio" name="titre_bando" value="titre_spip" [(#ENV{titre_bando}|=={titre_spip}|oui) checked="checked"]/> 
+        <label><:topbando:utiliser_titre_spip:></label>
+        <br /><input type="radio" name="titre_bando" value="autre" [(#ENV{titre_bando}|=={titre_spip}|non) checked="checked"]/>
+        <label><:topbando:utiliser_autre_titre:></label>: 
+			<input type="text" name="complement_nom_site" value="#ENV{complement_nom_site}" size="70" class="fondl"  />
+    </p>
+    <p>
+    	<strong><:topbando:taille_police:></strong>: <input type="text" name="taille_police" style="width: 40px;" value="[(#ENV{taille_police,40})]" />px
+    </p>
+    <p>
+    	<strong><:topbando:alignement_titre:></strong>:
+        <label><:topbando:gauche:></label>
+        <input type="radio" name="alignement_titre" value="left" [(#ENV{alignement_titre}|=={left}|oui) checked="checked"]/>
+        &nbsp;&nbsp;&nbsp;<input type="radio" name="alignement_titre" value="center" [(#ENV{alignement_titre}|=={center}|oui) checked="checked"]/>
+        <label><:topbando:centre:></label>
+        &nbsp;&nbsp;&nbsp;<input type="radio" name="alignement_titre" value="right" [(#ENV{alignement_titre}|=={right}|oui) checked="checked"]/>
+        <label><:topbando:droite:></label>
+    </p>
+[(#PLUGIN{choix_police}|oui)
+		<p>
+    	<strong><:topbando:utiliser_image_typo:></strong>:
+        <label><:topbando:oui:></label>
+        <input type="radio" name="utiliser_image_typo" value="oui" [(#ENV{utiliser_image_typo}|=={non}|non) checked="checked"]/> 
+        &nbsp;&nbsp;&nbsp;<input type="radio" name="utiliser_image_typo" value="non" [(#ENV{utiliser_image_typo}|=={non}|oui) checked="checked"]/>
+        <label><:topbando:non:></label>
+    </p>
+]    
+     <div id="voir_bando_titre">
+        <div id="bando_titre" style="background: url([(#LOGO_SITE_SPIP_SURVOL||image_reduire{500,0}|extraire_attribut{src})]) 
+                                    0 -[(#GET{top})]px no-repeat [(#ENV{couleur_principale})]; 
+                                    width: 500px; 
+                                    height: #GET{hauteur_recadre}px;
+                                    font-size: #GET{taille_police_reduite}px;
+                                    text-align: #ENV{alignement_titre};
+                                    color: #ENV{couleur_principale_texte};">
+            [<img src="(#LOGO_SITE_SPIP||image_reduire{0,[(#GET{hauteur_recadre})]}|extraire_attribut{src})" alt="logo_site"
+                  style="float: [(#ENV{place_logo,left})];" id="img_logo"/>]
+            
+                [(#PLUGIN{choix_police}|?{ 
+                	[(#ENV{utiliser_image_typo}|=={oui}|?{
+                        [(#MODELE{typo}{texte=[(#GET{titre})],
+                                        couleur=[(#ENV{couleur_principale_texte})],
+                                        taille=[(#GET{taille_police_reduite})]})]
+                        ,
+                        [<strong id="nom_site_spip" >(#GET{titre})</strong>]
+                    })]
+                    ,
+                    [<strong id="nom_site_spip" >(#GET{titre})</strong>]
+                })]
+        <div>
+     </div>
+
+    </div><!-- fin détails -->
+</fieldset>
+
+
+[(#REM) ------------------------ BOUTON OK ----------------------------------- ]
+<div>
+<input style="float:#LANG_RIGHT;" type="submit" name="_cfg_ok" value="<:OK:>" class="fondo" />
+<input type="reset" value="<:Reset:>" class="fondo" />
+<!--
+<input type="submit" name="_cfg_delete" value="<:Supprimer:>" class="fondo" />
+-->
+</div>
+
+</form>
+
