@@ -32,6 +32,7 @@ function spam_action_rapide() {
 		'ar_message' => _request('ar_message'),
 		'test_bd' => _request('test_bd'),
 		'statut' =>_request('statut'),
+		'debut_msg' => _request('debut_msg'),
 	));
 	// au cas ou il y aurait plusieurs actions, on fabrique plusieurs <form>
 	$fd = explode('@@CS_FORM@@', $fd);
@@ -52,7 +53,7 @@ function spam_test_0_action() {
 
 function spam_test_1_action() {
 	// lancer le test sur les messages de la base
-	redirige_vers_exec(array('test_bd'=>1, 'statut' =>_request('statut')));
+	redirige_vers_exec(array('test_bd'=>1, 'statut' =>_request('statut'), 'debut_msg' =>_request('debut_msg')));
 }
 
 

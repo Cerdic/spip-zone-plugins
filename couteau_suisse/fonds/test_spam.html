@@ -23,6 +23,7 @@
 	<p style='text-align:left;'><:couteauprive:spam_tester_bd:></p>
 	<div style='text-align:left;'><label><input name="statut" class="checkbox" type="checkbox" value="publie" [ checked="(#ENV*{statut}|=={publie}|?{checked})"]/><:couteau:msg_publies:></label></div>
 	<div><input name="submit" class="fondo" type="submit" value="<:couteau:lancer_test:>" /></div>
+	<input id="debut_msg" name="debut_msg" type="hidden" value="0" />
 	</fieldset>
-	[(#ENV{test_bd}|oui)[(#INCLURE{fond=fonds/test_spam_bd}{statut})]]
+	[(#ENV{test_bd}|oui)[(#INCLURE{fond=fonds/test_spam_bd}{statut}{debut_msg})]]
 </div>
