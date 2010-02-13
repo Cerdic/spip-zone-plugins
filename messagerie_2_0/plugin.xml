@@ -4,9 +4,9 @@
  	[yterium.net->http://www.yterium.net]
 _ &#169; 2008 - Licence GPL
 	</auteur>
-	<icon>habillage/messagerie-64.png</icon>
+	<icon>habillage/messagerie-32.png</icon>
 	<version>2.0.1</version>
-	<version_base>1.0</version_base>
+	<version_base>1.0.0</version_base>
 	<etat>stable</etat>
 	<lien></lien> <!-- URI de documentation -->
 	<description>
