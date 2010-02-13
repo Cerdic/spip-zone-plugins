@@ -3,6 +3,7 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_formulaires' => 'Formulaires',
 
+'champs_aucun' => 'Il n\'y a pour l\'instant aucun champ dans ce formulaire.',
 'editer_descriptif' => 'Descriptif',
 'editer_descriptif_explication' => 'Une explication du formulaire destin&eacute;e &agrave; l\'espace priv&eacute;.',
 'editer_identifiant_explication' => 'Cet identifiant unique vous permettra d\'appeler plus facilement votre formulaire.',
