@@ -11,13 +11,6 @@
 $p = explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
 define('_DIR_PLUGIN_SAVEAUTO',(_DIR_PLUGINS.end($p)));
 
-function saveauto_ajouter_boutons($boutons_admin) {
-    		// si on est admin
-    		if ($GLOBALS['connect_statut'] == "0minirezo") {    		
-					$boutons_admin['configuration']->sousmenu['cfg&cfg=saveauto']= new Bouton('../'._DIR_PLUGIN_SAVEAUTO.'/img_pack/saveauto-24.png', _T('saveauto:saveauto') );
-    		} 
-    		return $boutons_admin;				 
-}
 
 function saveauto_body_prive($flux) {
 	global $sauver_base,$saveauto_msg;

@@ -8,7 +8,7 @@
 	 *  
 	 **/
 
-	$GLOBALS[$GLOBALS['idx_lang']] = array(
+	$GLOBALS['i18n_saveauto_fr'] = array(
 			    // inc_saveauto.php
 						 'saveauto' => 'Sauvegarde automatique',
 						 'sauvegarde_ok' => 'Sauvegarde de la base effectu&eacute;e avec succ&egrave;s !',
@@ -47,7 +47,7 @@
 						 'config_saveauto' => 'Sauvegarde automatis&eacute;e de la base de donn&eacute;es',
 						 'plugin_saveauto' => 'Plugin saveauto : configuration',
 						 'erreur_ecrire_conf' => 'Erreur lors de la cr&eacute;ation du fichier de configuration plugins/saveauto/inc/saveauto_conf.php : v&eacute;rifiez que le fichier est accessible en &eacute;criture pour le serveur apache',
-						 'help_titre' => 'Cette page vous permet de configurer les options de sauvegarde de la base.',
+						 'help_titre' => 'Cette page vous permet de configurer les options de sauvegarde automatique de la base.',
 						 'version' => 'Version : ',
 						 'options_config' => 'Options configur&eacute;es : ',
 						 'compression_gz' => 'Compression GZ du fichier de sauvegarde : ',

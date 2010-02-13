@@ -1,72 +1,42 @@
-<?php 
-	/**
-	 * saveauto : plugin de sauvegarde automatique de la base de données de SPIP
-	 *
-	 * Auteur : cy_altern d'après une contrib de Silicium (silicium@japanim.net)
-	 *  
-	 * Ce programme est un logiciel libre distribue sous licence GNU/GPL.
-	 *
-	 * v 0.3 : passage à cfg_saveauto.html
-	 *  
-	 **/
-?>	 
+<!-- titre=<:saveauto:saveauto:> -->
+<!-- icone=img_pack/saveauto-24.png -->
+<!-- boite=<:saveauto:plugin_saveauto:> -->
 
-[(#REM) descriptif=
-<h4>Exp&eacute;rimental</h4>
-Ici vous pouvez configurer le plugin saveauto.<br />
-<br /><a href="http://www.spip-contrib.net/?article1442" class="spip_out">Documentation sur contrib</a>
-
+[(#PLUGIN{autorite}|oui)
+<!-- autoriser=webmestre -->
+<!-- refus=Seuls les webmestres du site sont autoris&#233;s &#224; 
+modifier les param&#232;tres. Pour en savoir plus, 
+voir <a href="http://www.spip-contrib.net/-Autorite-">la documentation</a>. -->
 ]
-[(#REM) titre=Configuration du plugin saveauto]
-#CACHE{0}
+[(#PLUGIN{autorite}|non)
+<!-- autoriser=0minirezo -->
+<!-- refus=Seuls les administrateurs du site sont autoris&#233;s &#224; 
+modifier ces param&#232;tres.  -->
+]
+
+<!-- descriptif=
+<h4><:saveauto:help_titre:></h4>
+-->
+
+<!-- head=
+	
+	<style type="text/css">
+	table.def td{padding-left:1em; padding-right:1em;}
+   fieldset { background-color: #ddd; margin-bottom: 10px;  }
+	 legend { font-weight: bold; }
+	 .help { font-size: 0.8em; }
+	</style>
+
+-->
+#CACHE{0} 
+
 <form method="post">[(#ENV{_cfg_}|form_hidden)]
-
-
-<?php    $p = explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
-         $pp = explode("/", end($p));
-         define('_DIR_PLUGIN_SAVEAUTO',(_DIR_PLUGINS.$pp[0]));
-
-         $page_save_conf = _DIR_PLUGIN_SAVEAUTO."/inc/saveauto_conf.php";
-
-			// trouver la version en cours à partir de plugin.xml
-				 $Tlecture_fich_plugin = file(_DIR_PLUGIN_SAVEAUTO.'/plugin.xml');
-				 $stop_prochain = 0;
-				 foreach ($Tlecture_fich_plugin as $ligne) {
-								 if ($stop_prochain == 1) {
-									  $version_script = $ligne;
-									  break;
-								 }
-								 if (substr_count($ligne, '<version>') > 0) {
-									  $stop_prochain = 1;
-								 }
-				 }
-/*
-					$prefix = 'saveauto';
-					include_spip('inc/meta');
-					lire_metas();
-					global $meta;
-					$meta_prefix = 'meta'.'_'.$prefix;
-					$$meta_prefix = unserialize($meta[$prefix]);
-//					$meta_saveauto = unserialize($meta['saveauto']);
-					foreach ($$meta_prefix as $cle => $valeur) {
-					 			  $$cle = $valeur;
-				 }
-//echo '$$cle = $'.$cle.' $valeur = '.$valeur.'<br>';
-*/
-?>
-
-
-				<style type="text/css">
-				   fieldset { background-color: #ddd; margin-bottom: 10px;  }
-					 legend { font-weight: bold; }
-					 .help { font-size: 0.8em; }
-				</style>
 				
 				<fieldset><legend><:saveauto:nom_base:></legend>
 				   <input type="text" name="base" id="base" value="[(#ENV{base,nom_base_SPIP})]" />
 				</fieldset>
 				<fieldset><legend><:saveauto:repertoire_stockage:></legend>
-				   <input type="text" name="rep_bases" id="rep_bases" value="[(#ENV{rep_bases,tmp/dump/})]" style="width: 300px;" />
+				   <input type="text" name="rep_bases" id="rep_bases" value="[(#ENV{rep_bases,[(#EVAL{_DIR_TMP})]})]" style="width: 300px;" />
 					 <br /><span class="help"><:saveauto:help_rep:></span>
 				</fieldset>
 				<fieldset><legend><:saveauto:prefixe_sauvegardes:></legend>
@@ -77,22 +47,18 @@ Ici vous pouvez configurer le plugin saveauto.<br />
 				   <input type="text" name="frequence_maj" id="frequence_maj" value="[(#ENV{frequence_maj,1})]" style="width: 30px;" />
 					 <:saveauto:jours:>
 				</fieldset>
+[(#REM) TODO à remplacer par l'utilisation de la librairie zip intégrée dans SPIP
 				<fieldset><legend><:saveauto:compression_gz:></legend>
 				   <:saveauto:oui:> 
 					 <input type="radio" name="gz" id="gz_true" value="true" [(#ENV{gz}|=={true}|?{checked="checked",''})] />
 				   <input type="radio" name="gz" id="gz_false" value="false" [(#ENV{gz}|!={true}|?{checked="checked",''})] /> 
 					 <:saveauto:non:>
 				   <br /><span class="help"><:saveauto:help_gz:></span>
-<?php	 // Le support de Zlib est il activé dans PHP ? 
-			 // directive zlib.output_compression à On dans php.ini
-				 if ($gz_capable = zlib_get_coding_type()) {
-				 		$flag_gz = TRUE;
-				 }				 
-         if (!$flag_gz) {  ?>
-				 		<br />
-						<span style="color:red"><strong><:saveauto:attention:></strong><:saveauto:compression_impossible:></span>
-<?php    }  ?>
+				  [(#EVAL{zlib_get_coding_type();}|non)
+                    <br /><span style="color:red"><strong><:saveauto:attention:></strong><:saveauto:compression_impossible:></span>
+              ]
 				</fieldset>
+]            
 				<fieldset><legend><:saveauto:structure_donnees:></legend>
 				   <:saveauto:structure:><:saveauto:oui:> 
 					 <input type="radio" name="structure" id="structure_true" value="true" [(#ENV{structure}|=={true}|?{checked="checked",''})] />
@@ -106,10 +72,11 @@ Ici vous pouvez configurer le plugin saveauto.<br />
 				<fieldset><legend><:saveauto:envoi_mail:><:saveauto:adresse:></legend>
 				   <input type="text" name="destinataire_save" id="destinataire_save" value="[(#ENV{destinataire_save})]" style="width: 200px;" />
 				   <br /><span class="help"><:saveauto:help_envoi:></span>
-<?php // mail() OK ?
-				 if ($destinataire_save != '' AND !@mail('toto@truc.net', 'test envoi mail', 'le message de test')) {  ?>
-	 			 	 <br><span style="color:red"><strong><:saveauto:attention:></strong><:saveauto:mail_absent:><:saveauto:pas_envoi:></span>
-<?php    }  ?>
+[(#REM) on laisse tomber le test de l'envoi de mail: ça énerve les webmestres...
+	 			   [(#EVAL{mail('toto@truc.net', 'test envoi mail', 'le message de test');}|non)
+                 <br><span style="color:red"><strong><:saveauto:attention:></strong><:saveauto:mail_absent:><:saveauto:pas_envoi:></span>
+               ]
+]
 				</fieldset>
 				<fieldset><legend><:saveauto:tables_acceptes:></legend>
 				   <input type="text" name="accepter" id="accepter" value="[(#ENV{accepter})]" style="width: 300px;" />

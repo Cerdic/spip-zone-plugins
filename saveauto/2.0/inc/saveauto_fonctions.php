@@ -96,28 +96,23 @@ function saveauto_mysql_version() {
 function saveauto_sauvegarde() {
 // désérialiser $meta['prefix_plugin'] en un array $prefix_plugin à partir des données de spip_meta
       	$prefix = 'saveauto';
-//      	include_spip('inc/meta');
 // récupérer les $prefix_meta['nom_variable' => 'valeur_variable', ...] 
 // sous la forme : $nom_variable = 'valeur_variable'				
-				foreach (lire_config('saveauto') as $cle => $valeur) {
-								$$cle = $valeur;
-				}
-/*      	lire_metas();
-      	global $meta;
-      	$meta_prefix = 'meta'.'_'.$prefix;
-      	$$meta_prefix = unserialize($meta[$prefix]);
-      	foreach ($$meta_prefix as $cle => $valeur) {
-      	 			  $$cle = $valeur;
-       }
-*/			 
-   // options complexes des sauvegardes déportées depuis saveauto_conf.php :
+        foreach (lire_config('saveauto') as $cle => $valeur) {
+        				$$cle = $valeur;
+        }
+   // options complexes des sauvegardes déportées depuis cfg_saveauto :
          // true = clause INSERT avec nom des champs
          $insertComplet = true;
+         
         
 				global $sauver_base, $fin_sauvegarde_base;
 				global $connect_statut;
         //accès admin ou accès rédacteur (si autorisé)
         if (($connect_statut == "0minirezo") || ($acces_redac && $connect_statut == "1comite")) {
+           
+           $format_sauve = 'sql';
+/* TO DO: à remplacer par l'utilisation de la lib intégrée dans SPIP
 				  // test support Zlib activé
 					 if ($gz_capable = zlib_get_coding_type()) {
 				 		  $flag_gz = TRUE;
@@ -128,7 +123,8 @@ function saveauto_sauvegarde() {
 					 }
 					 else {
 					 			$format_sauve = 'sql';
-					 }					 
+					 }
+*/                 			 
            $temps = time();
            
            //1-FAUT IL SAUVER (le soldat ryan ?)
