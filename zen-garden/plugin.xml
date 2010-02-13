@@ -8,8 +8,35 @@
   <options>zengarden_options.php</options>
   <prefix>zengarden</prefix>
   
+  <necessite id="SPIP" version="[2.0.10;]" />
   <necessite id="spip_bonux" version="[1.8.7;]" />
+	<chemin dir='' />
+	<chemin dir='spip20' />
   
+	<bouton id='theme' parent='configuration'>
+		<titre>zengarden:themes</titre>
+		<icone>img_pack/themes-24.png</icone>
+		<url>zengarden</url>
+	</bouton>
+	<bouton id='theme21' parent='bando_configuration'>
+		<titre>zengarden:themes</titre>
+		<icone>images/themes-16.png</icone>
+		<url>zengarden</url>
+	</bouton>
+
+</plugin>
+<plugin spip="[2.1.0-beta;]">
+  <nom>Zen-Garden</nom>
+  <auteur>Cedric Morin [yterium.com->http://www.yterium.com]</auteur>
+  <version>1.1.0</version>
+  <icon>img_pack/themes-128.png</icon>
+  <etat>test</etat>
+  <description>Un jardin Zen pour Zpip</description>
+  <options>zengarden_options.php</options>
+  <prefix>zengarden</prefix>
+
+  <necessite id="spip_bonux" version="[1.8.7;]" />
+
 	<bouton id='theme' parent='configuration'>
 		<titre>zengarden:themes</titre>
 		<icone>img_pack/themes-24.png</icone>
