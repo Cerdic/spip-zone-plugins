@@ -85,8 +85,9 @@ function saisies_charger_infos($type_saisie){
 	$fichier = find_in_path("saisies/$type_saisie.yaml");
 	$saisie = yaml_decode_file($fichier);
 	if (is_array($saisie)){
-		$saisie['titre'] = _T_ou_typo($saisie['titre']);
-		$saisie['explication'] = _T_ou_typo($saisie['explication']);
+		$saisie['titre'] = $saisie['titre'] ? _T_ou_typo($saisie['titre']) : $type_saisie;
+		$saisie['description'] = $saisie['description'] ? _T_ou_typo($saisie['description']) : '';
+		$saisie['icone'] = $saisie['icone'] ? find_in_path($saisie['icone']) : find_in_path('rien.gif');
 	}
 	return $saisie;
 }

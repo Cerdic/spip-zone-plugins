@@ -47,7 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'saisie_destinataires_titre' => 'Destinataires',
 	'saisie_destinataires_explication' => 'Permet de choisir un ou plusieurs destinataires parmis des auteurs pr&eacute;-s&eacute;lectionn&eacute;e.',
 	'saisie_input_explication' => 'Une simple ligne de texte, pouvant &ecirc;tre visible ou masqu&eacute;e (mot de passe).',
-	'saisie_input_titre' => 'Texte simple',
+	'saisie_input_titre' => 'Ligne de texte',
 	
 	// T
 	'tous_visiteurs' => 'Tous les visiteurs (m&ecirc;me non enregistr&eacute;s)',

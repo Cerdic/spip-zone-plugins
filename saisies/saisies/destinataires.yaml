@@ -1,6 +1,6 @@
 
 titre: '<:saisies:saisie_destinataires_titre:>'
-explication: '<:saisies:saisie_destinataires_explication:>'
+description: '<:saisies:saisie_destinataires_explication:>'
 options:
   -
     groupe: '<:saisies:option_groupe_informations:>'

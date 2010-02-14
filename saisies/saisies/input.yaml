@@ -1,6 +1,7 @@
 
 titre: '<:saisies:saisie_input_titre:>'
-explication: '<:saisies:saisie_input_explication:>'
+description: '<:saisies:saisie_input_explication:>'
+icone: 'images/saisies_input.png'
 options:
   -
     groupe: '<:saisies:option_groupe_informations:>'

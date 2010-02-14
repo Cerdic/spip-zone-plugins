@@ -44,7 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'saisie_destinataires_titre' => 'Recipients',
 	'saisie_destinataires_explication' => 'Allows you to select one or more recipients among the pre-selected authors .',
 	'saisie_input_explication' => 'A simple line of text that can be visible or hidden (password).',
-	'saisie_input_titre' => 'Plain text',
+	'saisie_input_titre' => 'Textfield',
 	
 	// T
 	'tous_visiteurs' => 'All visitors (even if not registered)',
