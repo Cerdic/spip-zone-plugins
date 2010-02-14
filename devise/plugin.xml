@@ -1,0 +1,72 @@
+<plugin>
+	<nom><multi>[fr]Devise [es]Divisa [en]Currency</multi></nom>
+	<auteur>[davux->http://da.weeno.net/]</auteur>
+	<icon>img/pig-64.png</icon>
+	<version>0.1</version>
+        <version_base>0.1</version_base>
+	<etat>dev</etat>
+	<description><multi>
+[fr] Outils de manipulation de devises internationales.
+
+Dans son &eacute;tat actuel, ce plugin fournit:
+-* une balise <code>#DEVISES</code> qui renvoie un tableau contenant les codes &agrave; 3 lettres de toutes les devises existantes.
+-* les noms des devises accessibles, sous 3 formes, via des cha&icirc;nes de langue:
+-** le nom de la monnaie (par exemple <code><:devise:EUR:></code> renvoie "Euro")
+-** le nom &agrave; utiliser pour des quantit&eacute;s au singulier (ex: <code><:devise:s_EUR:></code> renvoie "euro")
+-** le nom &agrave; utiliser pour des quantit&eacute;s au pluriel (ex: <code><:devise:p_EUR:></code> renvoie "euros")
+-* un champ "devise" pour les auteurs, accessible via la balise <code>#DEVISE</code>, permettant aux auteurs de sp&eacute;cifier
+   leur balise pr&eacute;f&eacute;r&eacute;e. La valeur renvoy&eacute; est le code &agrave; 3 lettres.
+-* 3 mod&egrave;les: <code>auteur_nom_devise</code>, <code>auteur_devise_singulier</code>, <code>auteur_devise_pluriel</code>.
+
+Il serait pratique d'int&eacute;grer une fonction de conversion en temps r&eacute;el (par exemple en utilisant un webservice),
+pour s'adapter aux variations de taux de change.
+
+Les noms de devises sont en anglais et en fran&ccedil;ais pour l'instant. Certains noms sont en espagnol, mais il faudrait
+se baser sur une liste officielle.
+[en] Tools for manipulating international currencies.
+
+In its current state, this plugin provides:
+-* a <code>#DEVISES</code> tag that gives an array containing all three-letter codes for existing currencies.
+-* currency names under 3 forms, through language files:
+-** the currency name (e.g. <code><:devise:USD:></code> returns "US Dollar")
+-** the name to use for singular quantities (e.g. <code><:devise:s_USD:></code> returns "US dollar")
+-** the name to use for plural quantities (e.g. <code><:devise:p_USD:></code> returns "US dollars")
+-* a "devise" (currency) field for authors, accessible through the <code>#DEVISE</code> tag, allowing authors to indicate their
+   preferred currency. The value is the three-letter code.
+-* 3 models inside an author context: <code>auteur_nom_devise</code> (currency name), <code>auteur_devise_singulier</code> (singular
+   form), <code>auteur_devise_pluriel</code> (plural form).
+
+It would be useful to include a real-time conversion feature (e.g. through a webservice), in order to use the current exchange rate.
+
+The currency names are in English and French at the moment. A couple of them are in Spanish, but an official list in Spanish should
+be used and adapted for this plugin.
+[es] Herramientas de manipulaci&oacute;n de divisas internacionales.
+
+En su estado actual, este plugin proporciona:
+-* una baliza <code>#DEVISES</code> que devuelve una matriz con todos los c&oacute;digos de 3 letras de las divisas existentes.
+-* nombres de divisas en 3 formas, a trav&eacute;s de archivos de idioma:
+-** el nombre de la divisa (p.e. <code><:devise:MXN:></code> devuelve "Peso Mexicano")
+-** el nombre para usar con cantidades singulares (p.e. <code><:devise:s_MXN:></code> devuelve "peso mexicano")
+-** el nombre para usar con cantidades plurales (p.e. <code><:devise:p_MXN:></code> devuelve "pesos mexicanos")
+-* un campo "devise" (divisa) para l@s autores/as, disponible a trav&eacute;s de la baliza <code>#DEVISE</code>, que les permite
+   indicar sur divisa preferida. El resultado es el c&oacute;digo de tres letras.
+-* 3 modelos en un contexto de autor/a: <code>auteur_nom_devise</code> (nombre de la divisa), <code>auteur_devise_singulier</code>
+   (singular), <code>auteur_devise_pluriel</code> (plural).
+
+Ser&iacute;a &uacute;til incluir tambi&eacute;n una posibilidad de conversi&oacute;n en tiempo real (p.e. a trav&eacute;s de un
+servicio web), para tomar en cuenta las variaciones de tipo de cambio.
+
+Los nombres de divisas est&aacute;n en Ingl&eacute;s y Franc&eacute;s de momento. Algunas est&aacute;n en Espa&ntilde;ol, pero
+hace falta conseguir una lista oficial para incluirla en el plugin.
+	</multi></description>
+	<prefix>devise</prefix>
+	<options>base/devise_options.php</options>
+	<install>base/devise_install.php</install>
+	<pipeline>
+		<nom>declarer_champs_extras</nom>
+                <inclure>base/devise.php</inclure>
+	</pipeline>
+
+	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="cextras" version="[0.8;]" />
+</plugin>
