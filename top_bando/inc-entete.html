@@ -5,9 +5,9 @@
 <div class="logo_site">
 		<a rel="start home" href="#URL_SITE_SPIP/" title="<:accueil_site:>" class="accueil"
        style="background: url([(#LOGO_SITE_SPIP_SURVOL||image_recadre{0,#GET{hauteur},left=0 #GET{top},#GET{couleur}}|extraire_attribut{src})]) 
-                          center #[(#GET{couleur})];
+                          [(#CONFIG{top_bando/calage_horizontal_bando})] #[(#GET{couleur})] no-repeat;
                           [text-align: (#CONFIG{top_bando/alignement_titre});]
-                          [font-size: (#CONFIG{top_bando/taille_police});]
+                          [font-size: (#CONFIG{top_bando/taille_police})px;]
                           [color: (#CONFIG{top_bando/couleur_principale_texte});]
                           [height: (#GET{hauteur})px;]
                           width: 100%;

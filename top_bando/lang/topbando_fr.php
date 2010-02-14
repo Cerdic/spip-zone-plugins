@@ -23,11 +23,12 @@ $GLOBALS['i18n_topbando_fr'] = array(
 'explication_calage_top'=>'(en pixel depuis le sommet, "<strong>centrer</strong>" pour centrage)',
 
 // H
-'hauteur_bando'=>'Hauteur de la d&eacute;coupe du bandeau (en pixels)',
+'hauteur_bando'=>'Hauteur du bandeau (en pixels)',
 
 // I
 
 // L
+'largeur_bando'=>'Largeur du bandeau',
 'logo_entete'=>'Logo du site',
 
 // O
