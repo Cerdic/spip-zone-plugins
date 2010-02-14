@@ -3,7 +3,7 @@
 <!-- nom=<:mesfavoris:mes_favoris:> -->
 
 <style type="text/css">
-div.choix img { vertical-align: top; }
+div.choix img { vertical-align: top; margin: 0 5px 10px; }
 </style>
 
 <div class="formulaire_spip formulaire_cfg formulaire_#FORM">
@@ -24,15 +24,18 @@ div.choix img { vertical-align: top; }
 			[<span class='erreur_message'>(#GET{erreurs})</span>]
 			<div class="choix">
 				<input type="radio" name="style_formulaire" class="radio"  value='32' id='form32'[ (#ENV{style_formulaire,32}|=={32}|oui)checked="checked"] />
-				<label for='form32'><:mesfavoris:label_style_formulaire32:></label>
+				<label for='form32'><:mesfavoris:label_style_formulaire32:>[<img src="(#CHEMIN{images/favoris-grey-add-32.png})" alt="" width="32" height="32" />]</label>
+				
 			</div>
 			<div class="choix">
 				<input type="radio" name="style_formulaire" class="radio"  value='24' id='form24'[ (#ENV{style_formulaire,32}|=={24}|oui)checked="checked"] />
-				<label for='form24'><:mesfavoris:label_style_formulaire24:></label>
+				<label for='form24'><:mesfavoris:label_style_formulaire24:>[<img src="(#CHEMIN{images/bookmark-grey-add-24.png})" alt="" width="24" height="24" />]</label>
+				
 			</div>
 			<div class="choix">
 				<input type="radio" name="style_formulaire" class="radio"  value='16' id='form16'[ (#ENV{style_formulaire,32}|=={16}|oui)checked="checked"] />
-				<label for='form16'><:mesfavoris:label_style_formulaire16:></label>
+				<label for='form16'><:mesfavoris:label_style_formulaire16:>[<img src="(#CHEMIN{images/favoris-grey-add-16.png})" alt="" width="16" height="16" />]</label>
+				
 			</div>
 		</li>
 	</ul>		
