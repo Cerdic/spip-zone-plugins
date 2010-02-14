@@ -30,6 +30,7 @@ function skeleditor_path_editable(){
 		if (strncmp($d,_DIR_PLUGINS,strlen(_DIR_PLUGINS))!==0
 			AND strncmp($d,_DIR_EXTENSIONS,strlen(_DIR_EXTENSIONS))!==0
 			AND strncmp($d,_DIR_RACINE.'prive/',strlen(_DIR_RACINE.'prive/'))!==0
+			AND strncmp($d,_DIR_RACINE.'squelettes-dist',strlen(_DIR_RACINE.'squelettes-dist'))!==0
 			AND $d!==_DIR_RACINE
 			AND sous_repertoire($d,'',false,true)
 			)
