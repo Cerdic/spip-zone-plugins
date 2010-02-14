@@ -26,7 +26,7 @@
     
     <lien></lien>
     <prefix>saisies</prefix>
-    <icon>img_pack/logo_saisie_48.png</icon>
+    <icon>images/logo_saisie_48.png</icon>
     
     <fonctions>balise/saisie.php</fonctions>
     <fonctions>saisies_fonctions.php</fonctions>
