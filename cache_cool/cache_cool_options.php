@@ -125,5 +125,4 @@ function cache_cool_f_jQuery ($texte) {
 	return $texte;
 }
 
-$GLOBALS['spip_pipeline']['insert_head'] = str_replace('|f_jQuery','|f_jQuery_cool',$GLOBALS['spip_pipeline']['insert_head']);
 ?>
