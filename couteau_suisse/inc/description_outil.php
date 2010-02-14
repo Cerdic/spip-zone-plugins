@@ -145,10 +145,18 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 			));
 		}
 	}
-	// reconstitution d'une description eventuellement morcelee
-	// exemple : <:mon_outil:3:> est remplace par _T('couteauprive:mon_outil:description3')
-	$descrip = preg_replace_callback(',<:([a-zA-Z_][a-zA-Z0-9_-]*):([0-9]*):>,', 
-		create_function('$matches','return _T("couteauprive:$matches[1]:description$matches[2]");'), $descrip);
+	if (strpos($descrip, "<:")!==false) {
+		if(!$outil['perso'])
+			// lames natives : reconstitution d'une description eventuellement morcelee
+			// exemple : <:mon_outil:3:> est remplace par _T('couteauprive:mon_outil:description3')
+			$descrip = preg_replace_callback(',<:([a-z_][a-z0-9_-]*):([0-9]*):>,i', 
+				create_function('$m','return _T("couteauprive:$m[1]:description$m[2]");'), $descrip);
+		else {
+			// lames persos : chaines de langue personnalisees
+			$descrip = preg_replace(',<:([:a-z0-9_-]+):>,ie', '_T("$1")', $descrip);
+			$outil['nom'] = preg_replace(',<:([:a-z0-9_-]+):>,ie', '_T("$1")', $outil['nom']);
+		}
+	}
 	// envoi de la description en pipeline
 #	list(,$descrip) = pipeline('init_description_outil', array($outil_, $descrip));
 	// globale pour la callback description_outil_input2_callback
@@ -214,9 +222,7 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 	}
 //cs_log(" FIN : inc_description_outil_dist({$outil['id']}) - {$outil['nb_variables']} variables(s) trouvee(s)");
 	// remplacement en deux passes des labels en doublon
-	if(strpos($res,'<:label:')!==false) 
-		$res = preg_replace_callback(',<:label:([a-zA-Z_][a-zA-Z0-9_-]*):>,', 'description_outil_label_callback', $res);
-	if(strpos($res,'<:label:')!==false) 
+	for($i=0;$i<2;$i++) if(strpos($res,'<:label:')!==false) 
 		$res = preg_replace_callback(',<:label:([a-zA-Z_][a-zA-Z0-9_-]*):>,', 'description_outil_label_callback', $res);
 	// remplacement des blocs avec style. ex : <q2>bla bla</q2>
 	$res = preg_replace(',</q(\d)>,','</div>', preg_replace(',<q(\d)>,','<div class="q$1">', $res));
