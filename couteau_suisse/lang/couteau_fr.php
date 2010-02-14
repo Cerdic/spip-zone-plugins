@@ -34,7 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lutte_spam' => 'Lutte contre le SPAM',
 
 	// M
-	'maj_actu' => 'Forcer l\'actualisation',
+	'maj_actu' => 'Forcer l\'actualisation distante',
 	'maj_liste' => 'Liste des plugins d&eacute;tect&eacute;s :',
 	'maj_maj' => 'Mettre &agrave; jour le plugin s&eacute;lectionn&eacute;',
 	'maj_ok' => 'Ce [plugin->@zip@] semble [&agrave; jour->@url@].',
@@ -44,6 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'maj_svn' => 'Ce plugin SVN semble [&agrave; jour->@url@].',
 	'maj_verif' => 'V&eacute;rifiez pr&eacute;alablement l\'archive qui vous convient :',
 	'maj_verif2' => 'Attention : apr&egrave;s avoir cliqu&eacute; sur le bouton ci-dessus, v&eacute;rifiez bien que l\'archive t&eacute;l&eacute;charg&eacute;e correspond au plugin qu\'il vous faut mettre &agrave; jour.',
+	'maj_zip_ko' => 'Le fichier .zip distant n\'a pu &ecirc;tre identifi&eacute;.',
 
 	// N
 	'nom_email_forum' => 'Merci de sp&eacute;cifier votre nom ou votre email !',

@@ -153,8 +153,8 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 				create_function('$m','return _T("couteauprive:$m[1]:description$m[2]");'), $descrip);
 		else {
 			// lames persos : chaines de langue personnalisees
-			$descrip = preg_replace(',<:([:a-z0-9_-]+):>,ie', '_T("$1")', $descrip);
-			$outil['nom'] = preg_replace(',<:([:a-z0-9_-]+):>,ie', '_T("$1")', $outil['nom']);
+			$descrip = preg_replace($i=',<:([:a-z0-9_-]+):>,ie', '_T("$1")', $descrip);
+			$outil['nom'] = preg_replace($i, '_T("$1")', $outil['nom']);
 		}
 	}
 	// envoi de la description en pipeline

@@ -161,11 +161,11 @@ function outils_toggle() {
 	document.csform.submit();
 }
 
-// clic sur un outil
-function cs_href_click(this_) {
+// clic sur un outil (fonction egalement utilisee par l'outil 'maj_auto')
+function cs_href_click(this_, force) {
 	var this_id = this_.id.replace(/^href_/,'');
 	// on s'en va si l'outil est deja affiche
-	if(cs_descripted==this_id) return false;
+	if(!force && cs_descripted==this_id) return false;
 	cs_descripted=this_id;
 	// on charge la nouvelle description
 	jQuery('#cs_infos')
@@ -224,7 +224,7 @@ if(window.jQuery) jQuery(function(){
 		jQuery(this).toggleClass('outil_on');
 		set_selected();
 		set_categ(this.parentNode.id);
-		return cs_href_click(this);
+		return cs_href_click(this, false);
 	})
 	.dblclick(function(){
 		jQuery('a.outil_on').removeClass('outil_on');
@@ -571,7 +571,9 @@ if(!window.jQuery) document.write('".str_replace('/','\/',addslashes(propre('<p>
 
 	$_GET['source'] = $exec;
 	echo '<div class="conteneur">', $liste_outils,
-		'</div><br class="conteneur" /><div class="conteneur"><div id="cs_infos" class="cs_infos">',
+		'</div><br class="conteneur" /><div class="cs_patience"><br />'.http_img_pack('searching.gif','').' ...</div>';
+	flush();
+	echo '<div class="conteneur"><div id="cs_infos" class="cs_infos">',
 		$cmd=='pack'?cs_description_pack():description_outil2($afficher_outil),
 		'</div><script type="text/javascript"><!--
 var cs_descripted = "', $afficher_outil, '";
@@ -579,8 +581,8 @@ document.write("<style type=\'text/css\'>#csjs{display:none;}<\/style>");
 //--></script><div id="csjs" style="color:red;"><br/>', _T('couteauprive:erreur:js'),'</div>
 <noscript><style type="text/css">#csjs{display:none;}</style><div style="color:red;"><br/>', _T('couteauprive:erreur:nojs'),
 $_GET['modif']=='oui'?'<br/>'._T('couteauprive:vars_modifiees').'.':'','</div></noscript>',
-		'</div>',
-		"</td></tr></table>\n",
+		'</div></td></tr></table>',
+		'<style type="text/css">.cs_patience{display:none;}</style>',
 		fin_cadre_trait_couleur(true),
 
 		pipeline('affiche_milieu',array('args'=>array('exec'=>$exec),'data'=>'')),

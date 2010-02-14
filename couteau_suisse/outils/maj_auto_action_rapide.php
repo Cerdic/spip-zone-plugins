@@ -13,16 +13,22 @@ define('_MAJ_LOG_FIN', '?format=changelog');
 define('_MAJ_ZIP', 'http://files.spip.org/spip-zone/');
 
 function maj_auto_action_rapide() {
+	$time = time();
+	$timeout = ini_get('max_execution_time');
+	$timeout = $timeout?min(30,floor($timeout/3)):10;
 	include_spip('inc/plugin');
-	$plugins = liste_plugin_files();
-	$plugins_actifs = liste_chemin_plugin_actifs();
+	$plugins_actifs = array_values(liste_chemin_plugin_actifs());
+	// tous, mais les actifs d'abord...
+	$plugins = array_unique(array_merge($plugins_actifs, liste_plugin_files()));
 	$html_actifs = $html_inactifs = array();
 	foreach ($plugins as $p) /*if(preg_match(',^auto/,', $p))*/ {
-		$actif = array_search($p, $plugins_actifs, true);
+		$actif = in_array($p, $plugins_actifs, true);
 		$auto = preg_match(',^auto/,', $p);
-		$infos = plugin_get_infos_maj($p);
+		$infos = plugin_get_infos_maj($p, $stop=time()-$time>$timeout);
 		$maj_lib = $checked = '';
-		if($infos['maj_dispo']) { 
+		if($stop)
+			$maj_lib = '<span class="cs_relancer">'.'Temps serveur &eacute;coul&eacute; : [poursuivre->#].'.'</span>';
+		elseif($infos['maj_dispo']) { 
 			$maj_lib = _T('couteau:maj_rev_ok', 
 				array('revision' => $infos['rev_rss'], 'url'=>$infos['url_origine'], 'zip'=>$infos['zip_trac']));
 			$checked = " class='maj_checked'"; }
@@ -43,11 +49,13 @@ function maj_auto_action_rapide() {
 		if(!strlen($rev)) $rev = '&nbsp;';
 		$zip_log = (strlen($infos['zip_log']) && $infos['zip_log']!=$infos['zip_trac'])
 			?"<label><input type='radio' value='$infos[zip_log]'$checked name='url_zip_plugin'/>[->$infos[zip_log]]</label>":'';
-		$bouton = ($auto && strlen($infos['zip_trac']))
+		$bouton = '&nbsp;';
+		if($auto && !$stop) $bouton = strlen($infos['zip_trac'])
 			?"<input type='radio' value='$infos[zip_trac]'$checked name='url_zip_plugin'/>"
-			:'&nbsp;';
+			:'<center style="margin-top:0.6em;font-weight:bold;"><acronym title="'._T('couteau:maj_zip_ko').'">&#63;</acronym></center>';
 		if(strlen($zip_log)) {
-			$nom .= "\n_ "._T('couteau:maj_verif') . "\n_ $zip_log\n_ {$bouton}[->$infos[zip_trac]]<label>";
+			if (!$stop)
+				$nom .= "\n_ "._T('couteau:maj_verif') . "\n_ $zip_log\n_ {$bouton}[->$infos[zip_trac]]<label>";
 			$bouton = '&nbsp;';
 		}
 		${$actif?'html_actifs':'html_inactifs'}[] = "|$bouton|$nom|$rev|";
@@ -65,13 +73,18 @@ function maj_auto_action_rapide() {
 		. http_script("
 jQuery(document).ready(function() {
 	var ch = jQuery('#maj_auto_div .maj_checked');
+	var re = jQuery('.cs_relancer a');
 	if(ch.length) ch[0].checked = true;
-	else {
+	else if(!re.length){
 		jQuery('#maj_auto_div :submit').parent().remove();
 		jQuery('#maj_auto_div :radio').attr('disabled','disabled');
 	}
 	if(!jQuery('#maj_auto_div :radio:checked').length)
 		jQuery('#maj_auto_div :radio:first')[0].checked = true;
+	re.click(function() {
+		cs_href_click(jQuery('#maj_auto')[0], true);
+		return false;
+	});
 });");
 	$html2 = "\n<div class='cs_sobre'><input class='cs_sobre' type='submit' value=\"["
 		. attribut_html(_T('couteau:maj_actu'))	. ']" /></div>';
@@ -84,7 +97,7 @@ jQuery(document).ready(function() {
 
 // renvoie le pattern present dans la page distante
 // si le pattern est NULL, renvoie un simple 'is_file_exists'
-function maj_auto_rev_distante($url, $pattern=NULL, $lastmodified = 0, $force = false) {
+function maj_auto_rev_distante($url, $timeout=false, $pattern=NULL, $lastmodified=0, $force=false) {
 	$force |= in_array(_request('var_mode'), array('calcul', 'recalcul'));
 
 	// pour la version distante, on regarde toutes les 24h00 (meme en cas d'echec)
@@ -92,7 +105,10 @@ function maj_auto_rev_distante($url, $pattern=NULL, $lastmodified = 0, $force = 
 	if(!isset($maj_[$url_=md5($url)])) $maj_[$url_] = array(0, false);
 	$maj = &$maj_[$url_];
 	// prendre le cache si svn.revision n'est pas modifie recemment, si les 24h ne sont pas ecoulee, et si on ne force pas
-	if (!$force && $maj[1]!==false && ($lastmodified<$maj[0]) && (time()-$maj[0] < 24*3600)) $distant = $maj[1];
+	if (!$force && $maj[1]!==false && ($lastmodified<$maj[0]) && (time()-$maj[0] < 24*3600))
+		$distant = $maj[1];
+	elseif($timeout)
+		return -1;
 	else {
 		$distant = $maj[1] = ($pattern!==NULL)
 			?(($distant = recuperer_page($url))
@@ -102,11 +118,11 @@ function maj_auto_rev_distante($url, $pattern=NULL, $lastmodified = 0, $force = 
 		$maj[0] = time();
 		ecrire_meta('tweaks_maj_auto', serialize($maj_));
 		ecrire_metas();
-	}
+	}		
 	return intval($distant);
 }
 
-function plugin_get_infos_maj($p, $force = false) {
+function plugin_get_infos_maj($p, $timeout=false) {
 	$get_infos = defined('_SPIP20100')?charger_fonction('get_infos','plugins'):'plugin_get_infos';
 	$infos = $get_infos($p);
 	// fichier svn.revision
@@ -132,18 +148,18 @@ function plugin_get_infos_maj($p, $force = false) {
 	}
 	$infos['url_origine'] = strlen($url_origine)?$url_origine._MAJ_LOG_FIN:'';
 	$infos['rev_local'] = abs($rev_local);
-	$infos['rev_rss'] = maj_auto_rev_distante($infos['url_origine'], ', \[(\d+)\],', $lastmodified, $force);
+	$infos['rev_rss'] = maj_auto_rev_distante($infos['url_origine'], $timeout, ', \[(\d+)\],', $lastmodified);
 	$infos['maj_dispo'] = $infos['rev_rss']>0 && $infos['rev_local']>0 && $infos['rev_rss']>$infos['rev_local'];
 	// fichiers zip
 	$infos['zip_log'] = $infos['zip_trac'] = '';
 	$p2 = preg_match(',^auto/(.*)$,', $p, $regs)?$regs[1]:'';
 	if(strlen($p2)) {
 		// supposition du nom d'archive sur files.spip.org
-		if(maj_auto_rev_distante($f = _MAJ_ZIP.$p2.'.zip')) $infos['zip_trac'] = $f;
+		if(maj_auto_rev_distante($f = _MAJ_ZIP.$p2.'.zip', $timeout)) $infos['zip_trac'] = $f;
 		// nom de l'archive recemment installee par chargeur
 		if(lire_fichier(sous_repertoire(_DIR_CACHE, 'chargeur').$p2.'/install.log', $log)
 				&& preg_match(',[\n\r]source: *([^\n\r]+),msi', $log, $regs)
-				&& maj_auto_rev_distante($regs[1]))
+				&& maj_auto_rev_distante($regs[1], $timeout))
 			$infos['zip_log'] = $regs[1];
 		// au final on prend le bon
 		if(!$infos['zip_trac']) $infos['zip_trac'] = $infos['zip_log'];
