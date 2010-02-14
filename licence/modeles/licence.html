@@ -21,8 +21,8 @@
 		#SET{icon_licence,''}
 	]
 	[<a href="(#GET{link_licence})">]
-		[(#GET{name_licence}|non)<:licence:sans_licence:>]
 		[#GET{name_licence}(#GET{icon_licence}|non)]
 		[<img (#GET{icon_licence}|oui) src="#CHEMIN{img_pack/#GET{icon_licence}}" [title="(#GET{desc_licence}|attribut_html)"] [alt="(#GET{name_licence}|attribut_html)"]/>]
 	[</a>(#GET{link_licence}|oui)]
 </BOUCLE_selection>
+[(#GET{name_licence}|non)<:licence:sans_licence:>]
