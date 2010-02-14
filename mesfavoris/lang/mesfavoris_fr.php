@@ -22,6 +22,11 @@
 
 		'mes_favoris' => 'Mes favoris',
 
+		'label_style_formulaire16' => 'Petit (16px)',
+		'label_style_formulaire24' => 'Moyen (16px)',
+		'label_style_formulaire32' => 'Grand (32px)',
+		'legend_formulaire_public' => 'Formulaire public',
+		'legend_style_formulaire' => 'Style du formulaire',
 		'login_first' => 'Désolé l\'action requiert d\être enregistré, authentifiez-vous d\'abord'
 	);
 

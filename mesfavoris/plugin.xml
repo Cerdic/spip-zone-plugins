@@ -13,10 +13,13 @@
 		<nom>declarer_tables_principales</nom>
 		<inclure>base/mesfavoris.php</inclure>
 	</pipeline>
-
 	<pipeline>
 		<nom>declarer_tables_interfaces</nom>
 		<inclure>base/mesfavoris.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>mesfavoris_pipelines.php</inclure>
 	</pipeline>
 	<categorie>navigation</categorie>
 </plugin>
