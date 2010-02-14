@@ -15,7 +15,7 @@ define('_MAJ_ZIP', 'http://files.spip.org/spip-zone/');
 function maj_auto_action_rapide() {
 	$time = time();
 	$timeout = ini_get('max_execution_time');
-	$timeout = $timeout?min(30,floor($timeout/3)):10;
+	$timeout = $timeout?min(30,floor($timeout/2)):15;
 	include_spip('inc/plugin');
 	$plugins_actifs = array_values(liste_chemin_plugin_actifs());
 	// tous, mais les actifs d'abord...
