@@ -51,8 +51,10 @@ function formulaires_configurer_bloc_verifier($bloc,$page){
 		// S'il n'y a pas encore de noisette de choisie
 		if (!($noisette = _request('noisette'))){
 			$erreurs['bloc_page_nouvelle_noisette'] = $bloc_page;
-			// On charge les différents noisettes du type et celle pour toutes les pages
+			// On charge les différentes noisettes du type, celles de la compositionet celles pour toutes les pages
 			$erreurs['noisettes_type'] = noizetier_lister_noisettes($type);
+			if ($composition!='')
+				$erreurs['noisettes_composition'] = noizetier_lister_noisettes($type.'-'.$composition);
 			$erreurs['noisettes_page'] = noizetier_lister_noisettes('page');
 			if (_request('suivant'))
 				$erreurs['erreur_noisette'] = _T('noizetier:erreur_doit_choisir_noisette');
@@ -129,6 +131,8 @@ function formulaires_configurer_bloc_traiter($bloc,$page){
 		$noisette = _request('noisette');
 		if ($parametres_envoyes = _request('parametres'))
 			spip_desinfecte($parametres_envoyes);
+		else
+			$parametres_envoyes = array();
 		$noisettes = noizetier_lister_noisettes();
 		$infos = $noisettes[$noisette];
 		

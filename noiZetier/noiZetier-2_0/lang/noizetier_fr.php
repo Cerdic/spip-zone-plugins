@@ -8,14 +8,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'derniere_maj' => 'Derni&egrave;re mise &agrave; jour le',
 	'installation_tables' => 'Tables du plugin noiZetier install&eacute;es.<br />',
 	'choisir_noisette' => 'Choisissez la noisette que vous voulez ajouter&nbsp:',
-	'noisettes_page' => 'Noisettes sp&eacute;cifiques &agrave; la page @page@&nbsp;:',
+	'noisettes_page' => 'Noisettes sp&eacute;cifiques &agrave; la page <i>@type@</i>&nbsp;:',
+	'noisettes_composition' => 'Noisettes sp&eacute;cifiques &agrave; la composition <i>@type@-@composition@</i>&nbsp;:',
 	'noisettes_toutes_pages' => 'Noisettes communes &agrave; toutes les pages&nbsp;:',
-	'contenu_bloc_page_defaut' => 'En l\'absence de noisette, ce bloc affichera le contenu de la page par d&eacute;faut.',
+	'contenu_bloc_page_defaut' => 'En l\'absence de noisette, ce bloc affichera le contenu de la page par d&eacute;faut. Si vous souhaitez ne rien afficher, utilisez la noisette <i>Bloc vide</i>.',
 	'contenu_bloc_vide' => 'En l\'absence de noisette, ce bloc restera vide.',
-	'contenu_bloc_type' => 'En l\'absence de noisette, ce bloc affichera le contenu de la page $type$.',
+	'contenu_bloc_type' => 'En l\'absence de noisette, ce bloc affichera le contenu de la page $type$. Si vous souhaitez ne rien afficher, utilisez la noisette <i>Bloc vide</i>.',
 	'saisies_non_installe' => '<b>Plugin saisies&nbsp;:</b> ce plugin n\'est pas install&eacute; sur votre site. Il n\'est pas n&eacute;cessaire au fonctionnement du noizetier. Son utilisation est cependant recommand&eacute;e afin d\'offrir des formulaires de configuration plus ergonomiques.',
 	'saisies_non_installe' => '<b>Plugin saisies&nbsp;:</b> ce plugin n\'est pas install&eacute; sur votre site. Il n\'est pas n&eacute;cessaire au fonctionnement du noizetier. Son utilisation est cependant recommand&eacute;e afin d\'offrir des formulaires de configuration plus ergonomiques.',
 	'compositions_non_installe' => '<b>Plugin compositions&nbsp;:</b> ce plugin n\'est pas install&eacute;s sur votre site. Il n\'est pas n&eacute;cessaire au fonctionnement du noizetier. Cependant, s\'il est activ&eacute;, vous pourrez d&eacute;clarer des compositions directement dans le noizetier.',
+	'yaml_non_installe' => '<b>Plugin YAML&nbsp;:</b> ce plugin n\'est pas install&eacute;s sur votre site. Il n\'est pas n&eacute;cessaire au fonctionnement du noizetier. Cependant, il permet d\'importer et exporter des configurations de noisettes.',
 	
 	'description_article-contenuprincipal' => 'Affiche logo, surtitre, titre, sous-titre, date, auteur, traduction, chapeau, texte, lien hypertexte, post-scriptum et notes. Utilisez les param&egrave;tres ci-dessous pour personnaliser les &eacute;l&eacute;ments &agrave; afficher.',
 	'description_rubrique-contenuprincipal' => 'Affiche logo, date de dernier ajour et texte. Utilisez les param&egrave;tres ci-dessous pour personnaliser les &eacute;l&eacute;ments &agrave; afficher.',
@@ -34,6 +36,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_page-plan' => 'Cette page est appel&eacute;e pour afficher le plan du site.',
 	'description_page-recherche' => 'Cette page est affich&eacute;e lorsqu\'une recherche est effectuée sur le site.',
 	'description_page_site' => 'Cette page est affich&eacute;e pour chaque site web r&eacute;f&eacute;renc&eacute;.',
+	'description_blocvide' => 'Cette noisette n\'affiche rien. Elle permet de laisser un bloc vide.',
+	'description_squelettebloc' => 'Cette noisette affichera les contenus d&eacute;termin&eacute;s, pour ce bloc sur cette page, par les squelettes install&eacute;s sur votre site.',
 	
 	'editer_noizetier_titre' => 'Configurer noiZetier',
 	'editer_noizetier_explication' => 'Choisissez ici les pages qui seront g&eacute;r&eacute;es par le noiZetier.<p />Pour cela, il vous faut d\'abord activer cette page. Quand une page est active, son contenu est alors d&eacute;termin&eacute; par sa configuration dans le noiZetier. Il vous est possible de d&eacute;sactiver &agrave; tout moment une page. D&egrave;s lors, votre site affichera pour cette page le contenu d&eacute;fini dans le squelette Zpip ou, le cas &eacute;ch&eacute;ant, vos personnalisations effectu&eacute;es dans votre dossier squelettes.',
@@ -60,7 +64,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_noisette_sans_parametre' => 'Cette noisette ne propose pas de param&egrave;tre.',
 	'formulaire_explication_oui_non' => '(saisir <i>on</i> ou laisser vide)',
 	'formulaire_explication_oui_ou_non' => '(saisir <i>oui</i> ou <i>non</i>)',
-	'formulaire_bloc_contenu' => 'Contenus',
+	'formulaire_bloc_contenu' => 'Contenu',
 	'formulaire_bloc_navigation' => 'Navigation',
 	'formulaire_bloc_extra' => 'Extra',
 	
@@ -73,6 +77,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_portfoliosimple' => 'Port-folio simple',
 	'nom_logositespip' => 'Logo du site SPIP',
 	'nom_bloctexte' => 'Bloc de texte libre',
+	'nom_blocvide' => 'Bloc vide',
+	'nom_squelettebloc' => 'Squelette du bloc',
 	
 	'nom_page-sommaire' => 'Page d\'accueil du site',
 	'nom_pagedefaut' => 'Page par d&eacute;faut',
@@ -102,6 +108,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_titre' => 'Titre&nbsp;:',
 	'label_texte' => 'Texte&nbsp;:',
 	'label_afficher_descriptif' => 'Afficher descriptif&nbsp;?',
+	'label_afficher_recherche' => 'Afficher le texte recherch&eacute;&nbsp;?',
 );
 
 ?>

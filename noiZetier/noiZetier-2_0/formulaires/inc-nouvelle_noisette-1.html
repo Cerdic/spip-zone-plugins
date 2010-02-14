@@ -4,9 +4,10 @@
 		<label><:noizetier:choisir_noisette:></label>
 		[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{erreur_noisette})</span>]
 		[(#SET{type,[(#ENV{erreurs}|table_valeur{type})]})]
-		<BOUCLE_test(CONDITION){si #GET{type}|!={'page'}}>
+		[(#SET{composition,[(#ENV{erreurs}|table_valeur{composition})]})]
+		<BOUCLE_test_type(CONDITION){si #GET{type}|!={'page'}}>
 			<B_type_noisettes>
-			<div class="choix" style="padding:3px;border-bottom:1px solid #eee;"><strong><:noizetier:noisettes_page{page=#GET{type}}:></strong></div>
+			<div class="choix" style="padding:3px;border-bottom:1px solid #eee;"><strong><:noizetier:noisettes_page{type=#GET{type}}:></strong></div>
 			<BOUCLE_type_noisettes(POUR){tableau #ENV{erreurs}|table_valeur{noisettes_type}}{par valeur}>
 			<div class="choix" style="padding:3px;border-bottom:1px solid #eee;">
 				[(#VALEUR|table_valeur{icone}|image_reduire{24})]
@@ -14,7 +15,19 @@
 				<label for="#CLE">[(#VALEUR|table_valeur{nom})]</label>
 			</div>
 			</BOUCLE_type_noisettes>
-		</BOUCLE_test>
+		</BOUCLE_test_type>
+		
+		<BOUCLE_test_composition(CONDITION){si #GET{composition}|oui}>
+			<B_composition_noisettes>
+			<div class="choix" style="padding:3px;border-bottom:1px solid #eee;"><strong><:noizetier:noisettes_composition{type=#GET{type},composition=#GET{composition}}:></strong></div>
+			<BOUCLE_composition_noisettes(POUR){tableau #ENV{erreurs}|table_valeur{noisettes_composition}}{par valeur}>
+			<div class="choix" style="padding:3px;border-bottom:1px solid #eee;">
+				[(#VALEUR|table_valeur{icone}|image_reduire{24})]
+				<input type="radio" class="radio" name="noisette" id="#CLE" value="#CLE" style="vertical-align:top;" />
+				<label for="#CLE">[(#VALEUR|table_valeur{nom})]</label>
+			</div>
+			</BOUCLE_composition_noisettes>
+		</BOUCLE_test_composition>
 		
 		<B_page_noisettes>
 		<div class="choix" style="padding:3px;border-bottom:1px solid #eee;"><strong><:noizetier:noisettes_toutes_pages:></strong></div>

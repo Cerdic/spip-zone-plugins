@@ -32,7 +32,10 @@
 		<nom>header_prive</nom>
 		<inclure>noizetier_pipelines.php</inclure>
 	</pipeline>
-	
+	<pipeline>
+		<nom>styliser</nom>
+		<inclure>noizetier_pipelines.php</inclure>
+	</pipeline>
 	<bouton id='noizetier' parent="naviguer">
 		<url>noizetier</url>
 		<titre>noizetier:editer_noizetier_titre</titre>

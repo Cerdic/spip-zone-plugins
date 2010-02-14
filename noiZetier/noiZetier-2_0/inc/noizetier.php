@@ -21,9 +21,9 @@ function noizetier_lister_noisettes($type='tout',$informer=true){
 		if ($type=='tout')
 			$prefix = '';
 		else
-			$prefix = $type;
+			$prefix = $type.'-';
 		
-		$match = ".*[.]html$";
+		$match = "[^-]*[.]html$";
 
 		// lister les noisettes disponibles
 		$liste = find_all_in_path('noisettes/', $prefix.$match);
@@ -216,6 +216,5 @@ function noizetier_page_composition($page) {
 	$type_compo = explode ('-',$page,2);
 	return $type_compo[1];
 }
-
 
 ?>
