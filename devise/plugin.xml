@@ -15,14 +15,13 @@ Dans son &eacute;tat actuel, ce plugin fournit:
 -** le nom &agrave; utiliser pour des quantit&eacute;s au singulier (ex: <code><:devise:s_EUR:></code> renvoie "euro")
 -** le nom &agrave; utiliser pour des quantit&eacute;s au pluriel (ex: <code><:devise:p_EUR:></code> renvoie "euros")
 -* un champ "devise" pour les auteurs, accessible via la balise <code>#DEVISE</code>, permettant aux auteurs de sp&eacute;cifier
-   leur balise pr&eacute;f&eacute;r&eacute;e. La valeur renvoy&eacute; est le code &agrave; 3 lettres.
+   leur balise pr&eacute;f&eacute;r&eacute;e. La valeur renvoy&eacute;e est le code &agrave; 3 lettres.
 -* 3 mod&egrave;les: <code>auteur_nom_devise</code>, <code>auteur_devise_singulier</code>, <code>auteur_devise_pluriel</code>.
 
 Il serait pratique d'int&eacute;grer une fonction de conversion en temps r&eacute;el (par exemple en utilisant un webservice),
 pour s'adapter aux variations de taux de change.
 
-Les noms de devises sont en anglais et en fran&ccedil;ais pour l'instant. Certains noms sont en espagnol, mais il faudrait
-se baser sur une liste officielle.
+Les noms de devises sont en anglais, fran&ccedil;ais et espagnol.
 [en] Tools for manipulating international currencies.
 
 In its current state, this plugin provides:
@@ -38,8 +37,7 @@ In its current state, this plugin provides:
 
 It would be useful to include a real-time conversion feature (e.g. through a webservice), in order to use the current exchange rate.
 
-The currency names are in English and French at the moment. A couple of them are in Spanish, but an official list in Spanish should
-be used and adapted for this plugin.
+The currency names are in English, French and Spanish.
 [es] Herramientas de manipulaci&oacute;n de divisas internacionales.
 
 En su estado actual, este plugin proporciona:
@@ -56,8 +54,7 @@ En su estado actual, este plugin proporciona:
 Ser&iacute;a &uacute;til incluir tambi&eacute;n una posibilidad de conversi&oacute;n en tiempo real (p.e. a trav&eacute;s de un
 servicio web), para tomar en cuenta las variaciones de tipo de cambio.
 
-Los nombres de divisas est&aacute;n en Ingl&eacute;s y Franc&eacute;s de momento. Algunas est&aacute;n en Espa&ntilde;ol, pero
-hace falta conseguir una lista oficial para incluirla en el plugin.
+Los nombres de divisas est&aacute;n en Ingl&eacute;s, Franc&eacute;s y Espa&ntilde;ol.
 	</multi></description>
 	<prefix>devise</prefix>
 	<options>base/devise_options.php</options>
