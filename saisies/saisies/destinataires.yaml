@@ -3,19 +3,57 @@ titre: '<:saisies:saisie_destinataires_titre:>'
 explication: '<:saisies:saisie_destinataires_explication:>'
 options:
   -
-    saisie: 'auteurs'
-    options:
-      nom: 'choix_destinataires'
-      label: '<:saisies:option_choix_destinataires_label:>'
-      explication: '<:saisies:option_choix_destinataires_explication:>'
-      multiple: 'oui'
-      option_statut: 'oui'
+    groupe: '<:saisies:option_groupe_informations:>'
+    contenu:
+      -
+        saisie: 'input'
+        options:
+          nom: 'label'
+          label: '<:saisies:option_label_label:>'
+          explication: '<:saisies:option_label_explication:>'
+      -
+        saisie: 'input'
+        options:
+          nom: 'explication'
+          label: '<:saisies:option_explication_label:>'
+          explication: '<:saisies:option_explication_explication:>'
+      -
+        saisie: 'auteurs'
+        options:
+          nom: 'choix_destinataires'
+          label: '<:saisies:option_choix_destinataires_label:>'
+          explication: '<:saisies:option_choix_destinataires_explication:>'
+          multiple: 'oui'
+          option_statut: 'oui'
+      -
+        saisie: 'radio'
+        options:
+          nom: 'type_choix'
+          datas:
+            tous: '<:saisies:option_type_choix_tous:>'
+            un: '<:saisies:option_type_choix_un:>'
+            plusieurs: '<:saisies:option_type_choix_plusieurs:>'
+          defaut: 'tous'
   -
-    saisie: 'radio'
-    options:
-      nom: 'type_choix'
-      datas:
-        tous: '<:saisies:option_type_choix_tous:>'
-        un: '<:saisies:option_type_choix_un:>'
-        plusieurs: '<:saisies:option_type_choix_plusieurs:>'
-      defaut: 'tous'
+    groupe: '<:saisies:option_groupe_utilisation:>'
+    contenu:
+      -
+        saisie: 'oui_non'
+        options:
+          nom: 'obligatoire'
+          label: '<:saisies:option_obligatoire_label:>'
+  -
+    groupe: '<:saisies:option_groupe_affichage:>'
+    contenu:
+      -
+        saisie: 'input'
+        options:
+          nom: 'attention'
+          label: '<:saisies:option_attention_label:>'
+          explication: '<:saisies:option_attention_explication:>'
+      -
+        saisie: 'input'
+        options:
+          nom: 'info_obligatoire'
+          label: '<:saisies:option_info_obligatoire_label:>'
+          explication: '<:saisies:option_info_obligatoire_explication:>'

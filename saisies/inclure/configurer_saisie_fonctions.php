@@ -5,35 +5,34 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function construire_configuration_saisie($saisie, $avec_nom='non'){
 	include_spip('inc/yaml');
-	$config = array();
-	
-	$configuration_base = yaml_decode_file(find_in_path('saisies/_base.yaml'));
-	$configuration_base_plus = yaml_decode_file(find_in_path('saisies/_base_plus.yaml'));
 	$configuration_saisie = yaml_decode_file(find_in_path('saisies/'.$saisie.'.yaml'));
 	
-	if (is_array($configuration_base) and is_array($configuration_base_plus) and is_array($configuration_saisie)){
-		// On ne garde le premier champ permettant de configurer le "name" seulement si on le demande explicitement
-		if (!$avec_nom or ($avec_nom == 'non'))
-			array_shift($configuration_base['options']);
-		
-		$config = array_merge(
-			array(
+	if (is_array($configuration_saisie)){
+		$configuration_saisie = $configuration_saisie['options'];
+		// On ne met le premier champ permettant de configurer le "name" seulement si on le demande explicitement
+		if ($avec_nom == 'oui')
+			array_unshift($configuration_saisie[0]['contenu'],
 				array(
-					'explication' => $configuration_saisie['explication']
+					'saisie' => 'input',
+					'options' => array(
+						'nom' => 'nom',
+						'label' => '<:saisies:option_nom_label:>',
+						'explication' => '<:saisies:option_nom_explication:>',
+						'obligatoire' => 'oui'
+					),
+					'verifier' => array(
+						'type' => 'regex',
+						'options' => array(
+							'modele' => '/^[\w]+$/'
+						)
+					)
 				)
-			),
-			$configuration_base['options'],
-			$configuration_saisie['options'],
-			array(
-				array(
-					'groupe' => $configuration_base_plus['titre'],
-					'contenu' => $configuration_base_plus['options']
-				)
-			)
-		);
+			);
 	}
+	else
+		$configuration_saisie = array();
 	
-	return $config;
+	return $configuration_saisie;
 }
 
 ?>
