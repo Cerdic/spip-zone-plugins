@@ -87,7 +87,7 @@ function saisies_charger_infos($type_saisie){
 	if (is_array($saisie)){
 		$saisie['titre'] = $saisie['titre'] ? _T_ou_typo($saisie['titre']) : $type_saisie;
 		$saisie['description'] = $saisie['description'] ? _T_ou_typo($saisie['description']) : '';
-		$saisie['icone'] = $saisie['icone'] ? find_in_path($saisie['icone']) : find_in_path('rien.gif');
+		$saisie['icone'] = $saisie['icone'] ? find_in_path($saisie['icone']) : '';
 	}
 	return $saisie;
 }
