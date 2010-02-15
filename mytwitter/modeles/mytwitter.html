@@ -1,5 +1,5 @@
 
-<div class="mytwitter" style="width:[(#CONFIG{mytwitter/largeur}|sinon{482})]px; margin:auto;"><img src="[(#CHEMIN{img/twitter-64.png})]">
+<div class="mytwitter" style="width:[(#CONFIG{mytwitter/largeur}|sinon{482})]px; margin:auto;"><img src="[(#CHEMIN{img/twitter-64.png})]"/>
 		<!-- Required HTML -->
 		<div class="twitter-friends" options="{
 			debug:1
@@ -10,7 +10,8 @@
 			,user_image:[(#CONFIG{mytwitter/miniatures}|sinon{48})]
 			,tweet:[(#CONFIG{mytwitter/tweet}|sinon{1})]
 			,header:'<h3><a href=\'_tp_\' title=\'follow me\'>_tp_</a></h3>(_fr_ Friends / _fo_ Followers)'
-			
+			,tweet_stay:[(#CONFIG{mytwitter/delaiaffichage}|sinon{5000})]
+			,tweet_change:[(#CONFIG{mytwitter/delaiapparition}|sinon{200})]
 			,users:[(#CONFIG{mytwitter/users}|sinon{50})]
 			,user_animate:'opacity'
 		}"></div>

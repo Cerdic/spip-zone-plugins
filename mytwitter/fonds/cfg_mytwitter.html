@@ -30,8 +30,23 @@ Ici vous pouvez configurer votre compte twitter et l'affichage de votre page
 		<input type="text" name="users" size="5" value="#CONFIG{mytwitter/users}">
 		(entre chaque rechargement)
 	<br/> <br/>
-		<label>nombre de tweet par personne</label>
-			<input type="text" name="tweet" size="5" value="#CONFIG{mytwitter/tweet}">
+		<label>liens des amis/followers</label>
+			<select name="link">
+			<option value="0"[(#CONFIG{mytwitter/link}|=={0}|?{selected="selected",''})]>vers leurs pages twitter</option>
+			<option value="1"[(#CONFIG{mytwitter/link}|=={1}|?{selected="selected",''})]>vers leurs pages personnelles</option>
+			</select>
+	<br/><br/>
+		<label>afficher leurs tweets</label>
+			<select name="tweet">
+			<option value="0"[(#CONFIG{mytwitter/tweet}|=={0}|?{selected="selected",''})]>non</option>
+			<option value="1"[(#CONFIG{mytwitter/tweet}|=={1}|?{selected="selected",''})]>oui</option>
+			</select>
+	<br/><br/>	
+		<label>durée d'affichage d'un tweet (en milisecondes)</label>
+			<input type="text" name="delaiaffichage" size="5" value="#CONFIG{mytwitter/delaiaffichage}">
+	<br/> <br/>
+		<label>délai d'apparition des tweet (en milisesondes)</label>
+			<input type="text" name="delaiapparition" size="6" value="#CONFIG{mytwitter/delaiapparition}">
 	<br/> <br/>
 		<label>afficher les derniers twits en boucle</label>
 			<select name="loop">
@@ -39,11 +54,7 @@ Ici vous pouvez configurer votre compte twitter et l'affichage de votre page
 			<option value="1"[(#CONFIG{mytwitter/loop}|=={1}|?{selected="selected",''})]>oui</option>
 			</select>
 	<br/> <br/>
-		<label>liens des amis/followers</label>
-			<select name="link">
-			<option value="0"[(#CONFIG{mytwitter/link}|=={0}|?{selected="selected",''})]>vers leurs pages twitter</option>
-			<option value="1"[(#CONFIG{mytwitter/link}|=={1}|?{selected="selected",''})]>vers leurs pages personnelles</option>
-			</select>
+
 	</fieldset>
 	<br/> <br/> <br/>
 	<fieldset>
