@@ -64,6 +64,6 @@ Los nombres de divisas est&aacute;n en Ingl&eacute;s, Franc&eacute;s y Espa&ntil
                 <inclure>base/devise.php</inclure>
 	</pipeline>
 
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[2.0;]" />
 	<necessite id="cextras" version="[0.8;]" />
 </plugin>
