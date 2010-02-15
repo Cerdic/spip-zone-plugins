@@ -67,6 +67,8 @@ function exec_spiplistes_courrier_previsu () {
 	include_spip('inc/spiplistes_api_abstract_sql');
 	include_spip('public/assembler');
 	
+	$eol = "\n";
+	
 	$int_values = array(
 		'id_rubrique', 'id_mot', 'id_courrier', 'id_liste'
 		, 'annee', 'mois', 'jour', 'heure', 'minute'
@@ -128,7 +130,7 @@ function exec_spiplistes_courrier_previsu () {
 			
 			//if($plein_ecran) {
 			
-				$texte_html = ""
+				$texte_html = ''
 					. $lien_html
 					. $texte
 					. $pied_html
@@ -154,20 +156,21 @@ function exec_spiplistes_courrier_previsu () {
 					exit(0);
 				}
 				// else 
-				$texte_html = ""
-					. "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Strict//EN\">\n"
-					. (($lang) ? "<html lang='$lang' dir='ltr'>\n" : "")
-					. "<head>\n"
-					. "<meta http-equiv='Content-Type' content='text/html; charset=".$charset."'>\n"
-					. "<meta http-equiv='Pragma' content='no-cache'>\n"
-					. "<title>".textebrut($titre)."</title>\n"
-					. "</head>\n"
-					. "<body style='text-align:center;'>\n"
-					. "<div style='margin:0 auto;'>\n"
+				$texte_html = ''
+					. '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Strict//EN">'.$eol
+					. (($lang) ? '<html lang="'.$lang.'" dir="ltr">'.$eol : '')
+					. '<head>'.$eol
+					. '<meta http-equiv="Content-Type" content="text/html; charset='.$charset.'">'.$eol
+					. '<meta http-equiv="Pragma" content="no-cache">'.$eol
+					. '<title>'.textebrut($titre).'</title>'.$eol
+					. '</head>'.$eol
+					. '<body style="text-align:center">'.$eol
+					. '<div style="margin:0 auto">'.$eol
 					. $texte_html
-					. "</div>\n"
-					. "</body>\n"
-					. "</html>\n";
+					. '</div>'.$eol
+					. '</body>'.$eol
+					. '</html>'.$eol
+					;
 				ajax_retour($texte_html);
 				exit(0);
 			//} // end if plein_ecran

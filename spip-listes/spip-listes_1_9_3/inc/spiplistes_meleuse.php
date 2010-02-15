@@ -88,7 +88,7 @@ spiplistes_log('spiplistes_meleuse()', _SPIPLISTES_LOG_DEBUG);
 	$nb_etiquettes = spiplistes_courriers_en_queue_compter('etat='.$sql_vide);
 	
 	
-	$prefix_log = 'MEL: ';
+	$prefix_log = _SPIPLISTES_PREFIX_LOG;
 	
 	// si meleuse suspendue, signale en log 
 	if($opt_suspendre_meleuse == 'oui') {
@@ -663,7 +663,7 @@ function spiplistes_courriers_statut_redac ($id_courrier) {
 			, 'statut' => _SPIPLISTES_COURRIER_STATUT_REDAC
 		)						
 	);
-	spiplistes_log($prefix_log."repasse document en statut redac", _SPIPLISTES_LOG_DEBUG);
+	spiplistes_log(_SPIPLISTES_PREFIX_LOG.'repasse document en statut redac', _SPIPLISTES_LOG_DEBUG);
 	return(true);
 }
 

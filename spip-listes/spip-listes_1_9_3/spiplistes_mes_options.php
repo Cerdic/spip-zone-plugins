@@ -33,6 +33,7 @@ define('_SIGNALER_ECHOS', false); // horrible
 // les messages dans spip.log (par exemple)
 // voir doc php
 define("_SPIPLISTES_LOG_DEBUG", LOG_DEBUG);
+define("_SPIPLISTES_PREFIX_LOG", 'MEL: ');
 
 define("_DIR_PLUGIN_SPIPLISTES_IMG_PACK", _DIR_PLUGIN_SPIPLISTES."img_pack/");
 

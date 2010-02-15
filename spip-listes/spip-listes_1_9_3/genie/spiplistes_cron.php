@@ -105,7 +105,7 @@ function cron_spiplistes_cron ($last_time) {
 	
 	$nb_listes_ok = sql_count($listes_privees_et_publiques);
 	
-spiplistes_log($prefix_log."nb listes depart: ".$nb_listes_ok, _SPIPLISTES_LOG_DEBUG);
+//spiplistes_log($prefix_log."nb listes depart: ".$nb_listes_ok, _SPIPLISTES_LOG_DEBUG);
 
 	if($nb_listes_ok > 0) {
 	
@@ -171,7 +171,7 @@ spiplistes_log($prefix_log."nb listes depart: ".$nb_listes_ok, _SPIPLISTES_LOG_D
 			else {
 				// pas de periode ? c'est un envoyer_maintenant.
 				// applique le tampon date d'envoi et repasse la liste en auto non
-				$sql_set = array('date' => sql_quote(''), 'message_auto' => sql_quote("non"));
+				$sql_set = array('date' => sql_quote(''), 'message_auto' => sql_quote('non'));
 			}
 			if($next_time || count($sql_set)) {
 				if($next_time) {
@@ -182,14 +182,14 @@ spiplistes_log($prefix_log."nb listes depart: ".$nb_listes_ok, _SPIPLISTES_LOG_D
 				sql_update(
 					'spip_listes'
 					, $sql_set
-					, "id_liste=".sql_quote($id_liste)." LIMIT 1"
+					, 'id_liste='.sql_quote($id_liste).' LIMIT 1'
 					);
 			}
 	
 			/////////////////////////////
 			// preparation du courrier a placer dans le panier (spip_courriers)
 			// en cas de periode, la date est dans le passe' pour avoir les elements publies depuis cette date
-			$titre = ($titre_message =="") ? $titre._T('spiplistes:_de_').$GLOBALS['meta']['nom_site'] : $titre_message;
+			$titre = ($titre_message =='') ? $titre._T('spiplistes:_de_').$GLOBALS['meta']['nom_site'] : $titre_message;
 
 			list($courrier_html, $courrier_texte) = spiplistes_courriers_assembler_patron (
 				_SPIPLISTES_PATRONS_DIR . $patron

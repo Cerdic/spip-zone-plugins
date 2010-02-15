@@ -42,6 +42,7 @@ include_spip('inc/spiplistes_api_globales');
 function exec_spiplistes_courrier_gerer () {
 
 	include_spip('inc/barre');
+	include_spip('inc/documents');
 	include_spip('base/spiplistes_tables');
 	include_spip('inc/spiplistes_api');
 	include_spip('inc/spiplistes_api_courrier');
@@ -54,6 +55,8 @@ function exec_spiplistes_courrier_gerer () {
 		, $connect_id_auteur
 		, $spip_ecran
 		;
+	
+	$eol = "\n";
 
 	// initialise les variables postees par le formulaire
 	foreach(array(
@@ -77,7 +80,7 @@ function exec_spiplistes_courrier_gerer () {
 	$texte = $message;
 
 	$page_result = $message_erreur = $str_destinataire =
-		$boite_confirme_envoi = "";
+		$boite_confirme_envoi = '';
 
 	$flag_admin = ($connect_statut == "0minirezo") && $connect_toutes_rubriques;
 	$flag_moderateur = count($listes_moderees = spiplistes_mod_listes_id_auteur($connect_id_auteur));
@@ -321,8 +324,8 @@ function exec_spiplistes_courrier_gerer () {
 	$gros_bouton_modifier = 
 		$gros_bouton_dupliquer = 
 		$gros_bouton_supprimer = 
-		$gros_bouton_arreter_envoi = ""
-		;
+		$gros_bouton_arreter_envoi = '';
+	
 
 	if($flag_autorise) {
 		
@@ -531,8 +534,9 @@ function exec_spiplistes_courrier_gerer () {
 		. debut_gauche($rubrique, true)
 		. spiplistes_boite_info_id(_T('spiplistes:Courrier_numero_'), $id_courrier, true)
 		. spiplistes_naviguer_paniers_courriers(_T('spiplistes:aller_au_panier_'), true)
+		//. $boite_documents
 		. pipeline('affiche_gauche', array('args'=>array('exec'=>$sous_rubrique),'data'=>''))
-		//. creer_colonne_droite($rubrique, true)  // spiplistes_boite_raccourcis() s'en occupe
+			//. creer_colonne_droite($rubrique, true)  // spiplistes_boite_raccourcis() s'en occupe
 		. spiplistes_boite_raccourcis(true)
 		. spiplistes_boite_autocron()
 		. pipeline('affiche_droite', array('args'=>array('exec'=>$sous_rubrique),'data'=>''))
