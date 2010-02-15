@@ -123,6 +123,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'raccourcis_annonce' => 'Nouvelle annonce',
 	'raccourcis_evenement' => 'Nouvel &eacute;v&eacute;nement',
 	'raccourcis_publication' => 'Nouvelle publication',
+	// Pour les flux RSS, on preferera indiquer les caracteres speciaux en code ISO plutot
+	// que HTML. Sinon, ca plante...
+	'rss_apercu_lien_annonce' => '&#192; voir sur&#160;',
+	'rss_apercu_source' => 'source : ',
+	'rss_apercu_peremption' => 'valable jusqu\'au ',
+	'rss_apercu_publie' => 'Publi&#233;',
+	'rss_apercu_lien_evenement' => ' organisation&#160;',
+	'rss_apercu_du' => ' du ',
+	'rss_apercu_informations' => 'Plus d\'informations sur&#160;',
+	'rss_objet_annonce' => 'Annonce',
+	'rss_objet_evenement' => '&#201;v&#233;nement',
+	'rss_objet_publication' => 'Publication',
 
 // S
 	'spiplistes_info_veille' => 'info_veille',

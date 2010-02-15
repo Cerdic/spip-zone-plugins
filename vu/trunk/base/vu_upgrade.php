@@ -48,7 +48,7 @@ function vu_upgrade($vu_base_version,$version_cible){
 			// Note : la version 0.2 de la base correspond à une optimisation et harmonisation 
 			// générale des tables principales ; d'où d'importantes modifications.
 
-			spip_log("[Vu!] -- Mise à jour vers la version 0.2 de la base", "vu!");
+			spip_log("[Vu!] -- Version actuelle de la base : $current_version. Mise à jour vers la version 0.2 de la base", "vu!");
 			// -- Les champs communs
 			// Renommage des champs 'lien_evenement' et 'lien_publication' en 'lien'
 			sql_alter("TABLE vu_evenements CHANGE lien_evenement lien text NOT NULL");

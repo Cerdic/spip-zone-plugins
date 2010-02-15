@@ -1,0 +1,97 @@
+[(#HTTP_HEADER{Content-type: text/xml[; charset=(#CHARSET)]})]<?xml
+version="1.0"[ encoding="(#CHARSET)"]?>
+<rss version="2.0" [(#REM) rss 2.0.9)]
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+>
+
+<channel[ xml:lang="(#LANG)"]>
+
+	<title>[(#NOM_SITE_SPIP|texte_backend)]</title>
+	<link>#URL_SITE_SPIP/</link>
+	<description>[(#DESCRIPTIF_SITE_SPIP|texte_backend)]</description>
+	<language>#LANG</language>
+	<generator>SPIP - www.spip.net</generator>
+
+[	<image>
+		<title>[(#NOM_SITE_SPIP|texte_backend)]</title>
+		<url>(#LOGO_SITE_SPIP||image_reduire{150,150}|extraire_attribut{src}|url_absolue|texte_backend)</url>
+		<link>#URL_SITE_SPIP/</link>
+		[<height>(#LOGO_SITE_SPIP||image_reduire{150,150}|extraire_attribut{height})</height>]
+		[<width>(#LOGO_SITE_SPIP||image_reduire{150,150}|extraire_attribut{width})</width>]
+	</image>
+]
+
+<BOUCLE_annonces(VU_ANNONCES){par date}{inverse}{0,20}>
+	<item[ xml:lang="(#LANG)"]>
+		<title>[(#TITRE|supprimer_tags|texte_backend)]</title>
+		<link>[(#LIEN|url_absolue)]</link>
+		[<guid isPermaLink="true">(#LIEN|url_absolue)</guid>]
+		[<dc:date>(#DATE|date_iso)</dc:date>]
+		<dc:format>text/html</dc:format>
+		[<dc:language>(#LANG)</dc:language>]
+		[(#REM)
+			Le bloc qui suit diffuse diffuse les mots-cles a la mode RSS
+		]<BOUCLE_mots_rss(MOTS){id_breve}>[<dc:subject>(#TITRE|texte_backend)</dc:subject>]</BOUCLE_mots_rss>
+
+		<description>
+    			[(#TYPE)]<br />
+			<b>[(#TITRE)]<b><br />
+			[<:vu:apercu_lien_annonce:><a href='#LIEN' title='#LIEN'>(#ANNONCEUR|choixsivide{#LIEN,#ANNONCEUR})</a>]<br />
+			[<i>(<:vu:apercu_source:><a href='#SOURCE_LIEN' title='#SOURCE_LIEN'>(#SOURCE_NOM)</a>)</i>]
+			[<:vu:apercu_peremption:>(#PEREMPTION|affdate_jourcourt).]
+			[<p>(#DESCRIPTIF)</p>]
+		</description>
+	</item>
+</BOUCLE_annonces>
+
+<BOUCLE_evenements(VU_EVENEMENTS){par date}{inverse}{0,20}>
+	<item[ xml:lang="(#LANG)"]>
+		<title>[(#TITRE|supprimer_tags|texte_backend)]</title>
+		<link>[(#LIEN|url_absolue)]</link>
+		[<guid isPermaLink="true">(#LIEN|url_absolue)</guid>]
+		[<dc:date>(#DATE|date_iso)</dc:date>]
+		<dc:format>text/html</dc:format>
+		[<dc:language>(#LANG)</dc:language>]
+		[(#REM)
+			Le bloc qui suit diffuse diffuse les mots-cles a la mode RSS
+		]<BOUCLE_mots_rss(MOTS){id_breve}>[<dc:subject>(#TITRE|texte_backend)</dc:subject>]</BOUCLE_mots_rss>
+
+		<description>
+    			[(#TYPE)]<br />
+			<b>[(#TITRE)]<b><br />
+			[(#LIEU_EVENEMENT)][(#DATE_EVENEMENT|?{", ","."})][(#LIEU_EVENEMENT|?{" le ","Le "})][(#DATE_EVENEMENT|affdate_jourcourt)][(#ORGANISATEUR|?{", ","."})][<:vu:apercu_lien_evenement:>(#ORGANISATEUR).]
+			[<br /><:vu:apercu_informations:><a href='#LIEN' title='#LIEN'>(#LIEN|couper{50})</a>.]
+			[<i>(<:vu:apercu_source:><a href='#SOURCE_LIEN' title='#SOURCE_LIEN'>(#SOURCE_NOM)</a>)</i>]
+			[<:vu:apercu_peremption:>(#PEREMPTION|affdate_jourcourt).]
+			[<p>(#DESCRIPTIF)</p>]
+		</description>
+	</item>
+</BOUCLE_evenements>
+
+<BOUCLE_publications(VU_PUBLICATIONS){par date}{inverse}{0,20}>
+	<item[ xml:lang="(#LANG)"]>
+		<title>[(#TITRE|supprimer_tags|texte_backend)]</title>
+		<link>[(#LIEN|url_absolue)]</link>
+		[<guid isPermaLink="true">(#LIEN|url_absolue)</guid>]
+		[<dc:date>(#DATE|date_iso)</dc:date>]
+		<dc:format>text/html</dc:format>
+		[<dc:language>(#LANG)</dc:language>]
+		[(#REM)
+			Le bloc qui suit diffuse diffuse les mots-cles a la mode RSS
+		]<BOUCLE_mots_rss(MOTS){id_breve}>[<dc:subject>(#TITRE|texte_backend)</dc:subject>]</BOUCLE_mots_rss>
+
+		<description>
+    			[(#TYPE)]<br />
+			<b>[(#TITRE)]<b><br />
+			[<:vu:apercu_de:>(#AUTEUR). ]<:vu:apercu_publie:>[<:vu:apercu_chez:><a href='#LIEN' title='#LIEN'>(#EDITEUR)</a>, ][<:vu:apercu_le:>(#DATE_PUBLICATION|affdate_jourcourt)].
+			[<i>(<:vu:apercu_source:><a href='#SOURCE_LIEN' title='#SOURCE_LIEN'>(#SOURCE_NOM)</a>)</i>]
+			[<:vu:apercu_peremption:>(#PEREMPTION|affdate_jourcourt).]
+			[<p>(#DESCRIPTIF)</p>]
+		</description>
+	</item>
+</BOUCLE_publications>
+
+</channel>
+
+</rss>
