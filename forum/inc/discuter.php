@@ -21,7 +21,7 @@ function inc_discuter_dist($id, $script, $objet, $statut='prive', $debut=NULL, $
 	// provisoire, en attendant le refactoring des scripts appelants !
 	$contexte = $_GET;
 	
-	return recuperer_fond('',
+	return recuperer_fond('prive/discuter_forum',
 	  array_merge(
 	  $contexte,
 	  array(
