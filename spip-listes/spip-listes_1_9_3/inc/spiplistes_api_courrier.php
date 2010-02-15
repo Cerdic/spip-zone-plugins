@@ -374,7 +374,7 @@ function spiplistes_courrier_modifier ($id_courrier, $sql_set_array, $quote = tr
 			$sql_update(
 				"spip_courriers"
 				, $sql_set_array
-				, "id_courrier=".sql_quote($id_courrier)." LIMIT 1"
+				, 'id_courrier='.sql_quote($id_courrier).' LIMIT 1'
 			)
 		: false
 		;

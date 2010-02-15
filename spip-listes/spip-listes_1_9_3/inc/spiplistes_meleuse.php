@@ -84,7 +84,8 @@ spiplistes_log('spiplistes_meleuse()', _SPIPLISTES_LOG_DEBUG);
 		$$key = spiplistes_pref_lire($key);
 	}
 	
-	$nb_etiquettes = spiplistes_courriers_en_queue_compter('etat='.sql_quote(''));
+	$sql_vide = sql_quote('');
+	$nb_etiquettes = spiplistes_courriers_en_queue_compter('etat='.$sql_vide);
 	
 	
 	$prefix_log = 'MEL: ';
@@ -130,7 +131,7 @@ spiplistes_log('spiplistes_meleuse()', _SPIPLISTES_LOG_DEBUG);
 			, 'id_courrier', 'id_liste', 'email_test', 'total_abonnes', 'date_debut_envoi'
 			);
 		if($id_courrier = 
-			intval(spiplistes_courriers_en_queue_premier('id_courrier', 'etat='.sql_quote('')))
+			intval(spiplistes_courriers_en_queue_premier('id_courrier', 'etat='.$sql_vide))
 		) {
 			$sql_courrier_a_traiter = spiplistes_courriers_casier_premier(
 				  $sql_courrier_select
@@ -321,14 +322,13 @@ spiplistes_log('spiplistes_meleuse()', _SPIPLISTES_LOG_DEBUG);
 					// un id pour ce processus (le tampon est unique par liasse)
 					$id_process = intval(substr(creer_uniqid(),0,5));
 					$prefix_log .= '['.$id_process.'] ';
-					spiplistes_log($prefix_log.'PROCESS #'.$id_process, _SPIPLISTES_LOG_DEBUG);
 			
 					// un coup de tampon sur les etiquettes 
 					// des courriers qui vont partir
 					spiplistes_courriers_en_queue_modifier(
 						array(
 							  'etat' => sql_quote($id_process))
-							, 'etat='.sql_quote('').' AND id_courrier='.sql_quote($id_courrier).' LIMIT '.$limit
+							, 'etat='.$sql_vide.' AND id_courrier='.sql_quote($id_courrier).' LIMIT '.$limit
 					);
 					
 					// prendre la liasse des etiquettes tamponnees
@@ -351,7 +351,9 @@ spiplistes_log('spiplistes_meleuse()', _SPIPLISTES_LOG_DEBUG);
 					spiplistes_log($prefix_log.'total_abos: '.$total_abonnes.', en cours: '.$nb_destinataires.', limit: '.$limit
 						, _SPIPLISTES_LOG_DEBUG);
 
-
+/*
+// CP:20100215: inutile de compter AVANT
+// si process en //, le chiffre est faux
 					// replacer les compteurs
 					if($row = sql_fetch(sql_select(
 						"nb_emails_envoyes,nb_emails_echec,nb_emails_non_envoyes,nb_emails_texte,nb_emails_html"
@@ -366,7 +368,8 @@ spiplistes_log('spiplistes_meleuse()', _SPIPLISTES_LOG_DEBUG);
 						$nb_emails['texte'] = intval($row['nb_emails_texte']);
 						$nb_emails['html'] = intval($row['nb_emails_html']);
 					}
-					
+*/
+
 					//envoyer le lot d'emails selectionne' (la liasse)
 					while($adresse = sql_fetch($sql_adresses_dest)) {
 
@@ -433,17 +436,17 @@ spiplistes_log('spiplistes_meleuse()', _SPIPLISTES_LOG_DEBUG);
 										}
 										// la version alternative texte 
 										$email_a_envoyer[$format_abo]->AltBody = 
-											$ventre_texte ."\n\n"
+											$ventre_texte .$eol2
 											. $pied_texte
-											. str_replace("&amp;", "&", $pied_rappel_texte). ' ' . $_url."\n\n"
+											. str_replace('&amp;', '&', $pied_rappel_texte). ' ' . $_url.$eol2
 											. $tampon_texte
 											;
 										break;
 									case 'texte':
 										$email_a_envoyer[$format_abo]->Body =
-											$ventre_texte ."\n\n"
+											$ventre_texte .$eol2
 											. $pied_texte
-											. str_replace('&amp;', '&', $pied_rappel_texte). ' ' . $_url."\n\n"
+											. str_replace('&amp;', '&', $pied_rappel_texte). ' ' . $_url.$eol2
 											. $tampon_texte
 											;
 										break;
@@ -513,20 +516,27 @@ spiplistes_log('spiplistes_meleuse()', _SPIPLISTES_LOG_DEBUG);
 			if(!$is_a_test) {
 				// faire le bilan apres l'envoi d'un lot
 				$sql_set_array = array(
-					  'nb_emails_envoyes' => $nb_emails_envoyes
-					, 'nb_emails_texte' => $nb_emails['texte']
-					, 'nb_emails_html' => $nb_emails['html']
+					  'nb_emails_envoyes' => sql_quote('nb_emails_envoyes').'+'.$nb_emails_envoyes
+					, 'nb_emails_texte' => sql_quote('nb_emails_texte').'+'.$nb_emails['texte']
+					, 'nb_emails_html' => sql_quote('nb_emails_html').'+'.$nb_emails['html']
 				);
 				if($nb_emails_echec) {
-					$sql_set_array['nb_emails_echec'] = $nb_emails_echec;
+					$sql_set_array['nb_emails_echec'] = sql_quote('nb_emails_echec').'+'.$nb_emails_echec;
 				}
 				if($nb_emails_non_envoyes) {
-					$sql_set_array['nb_emails_non_envoyes'] = $nb_emails_non_envoyes;
+					$sql_set_array['nb_emails_non_envoyes'] = sql_quote('nb_emails_non_envoyes').'+'.$nb_emails_non_envoyes;
 				}
 
-				$str_log .= ' (HTML: '.$nb_emails['html'].') (TEXT: '.$nb_emails['texte'].') (NONE: '.$nb_emails_non_envoyes.')';
+				spiplistes_log($prefix_log.$str_log);
+				
+				$str_log = spiplistes_trace_compteur ($id_courrier
+												   , $nb_emails_envoyes
+												   , $nb_emails['html']
+												   , $nb_emails['texte']
+												   , $nb_emails_non_envoyes
+												   , $nb_emails_echec
+												   , 'SESSION');
 
-				///////////////////////
 				// si courrier pas termine, redemande la main au CRON, sinon nettoyage.
 				if($t = spiplistes_courriers_en_queue_compter('id_courrier='.sql_quote($id_courrier))) {
 					$str_log .= ' LEFT '.$t.' jobs'; 
@@ -539,6 +549,29 @@ spiplistes_log('spiplistes_meleuse()', _SPIPLISTES_LOG_DEBUG);
 					$str_log .= ' END #'.$id_courrier;
 				}
 				spiplistes_courrier_modifier($id_courrier, $sql_set_array, false);
+				
+				// placer en log le suivi des compteurs si mode debug
+				if(_SPIPLISTES_LOG_DEBUG)
+				{					
+					if($row = sql_fetch(sql_select(
+						"nb_emails_envoyes,nb_emails_echec,nb_emails_non_envoyes,nb_emails_texte,nb_emails_html"
+						, 'spip_courriers'
+						, 'id_courrier='.sql_quote($id_courrier)
+						, '', '', 1
+						))
+					) {
+						spiplistes_log($prefix_log.$str_log);
+						
+						$str_log = spiplistes_trace_compteur ($id_courrier
+												   , $row['nb_emails_envoyes']
+												   , $row['nb_emails_html']
+												   , $row['nb_emails_texte']
+												   , $row['nb_emails_non_envoyes']
+												   , $row['nb_emails_echec']
+												   , 'FROM_DB');
+					}
+				}
+				
 			}
 		} // end while()
 	} // end if($nb_etiquettes)
@@ -550,7 +583,7 @@ spiplistes_log('spiplistes_meleuse()', _SPIPLISTES_LOG_DEBUG);
 
 	if(($ii = spiplistes_courriers_total_abonnes()) > 0) {
 		// il en reste apres la meleuse ? Signale au CRON tache non terminee
-		$nb_etiquettes = spiplistes_courriers_en_queue_compter('etat='.sql_quote(''));
+		$nb_etiquettes = spiplistes_courriers_en_queue_compter('etat='.$sql_vide);
 		spiplistes_log($prefix_log.'courriers prets au depart ('.$nb_etiquettes.'/'.$ii.')');
 		$last_time = -$last_time;
 	}
@@ -634,6 +667,24 @@ function spiplistes_courriers_statut_redac ($id_courrier) {
 	return(true);
 }
 
+/*
+ * petite ligne pour trace dans le log
+*/
+function spiplistes_trace_compteur ($id, $sent, $html, $text, $none, $echec, $type='TOTAL')
+{
+	$str = $type.': id_courrier #'.$id
+		// nombre total de courrier transmis
+		.' SENT: '.$sent
+		// dont aux formats
+		.' (HTML: '.$html.', TEXT: '.$text
+		// dont ceux sans format pour le destinataire
+		.', NONE: '.$none
+		// et ceux en echec
+		.', ECHEC: '.$echec
+		.')';
+	return($str);
+}
+
 /******************************************************************************************/
 /* SPIP-Listes est un systeme de gestion de listes d'abonnes et d'envoi d'information     */
 /* par email pour SPIP. http://bloog.net/spip-listes              					      */
@@ -653,4 +704,3 @@ function spiplistes_courriers_statut_redac ($id_courrier) {
 /* Free Software Foundation,                                                              */
 /* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.                   */
 /******************************************************************************************/
-?>
