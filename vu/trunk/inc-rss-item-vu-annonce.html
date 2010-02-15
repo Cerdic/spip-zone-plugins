@@ -1,0 +1,23 @@
+#CACHE{3600}
+<BOUCLE_annonce(VU_ANNONCES){id_annonce}>
+	<item>
+		<title>[(#TITRE|supprimer_numero|texte_backend)]</title>
+		<link>[(#LIEN|?{#LIEN,#SOURCE_LIEN})]</link>
+		[<guid isPermaLink="true">(#LIEN|?{#LIEN,#SOURCE_LIEN})</guid>]
+		[<dc:date>(#DATE|date_iso)</dc:date>]
+		<dc:format>text/html</dc:format>
+		<dc:language></dc:language>
+		<category>Vu !</category>
+
+		<description>
+		[(#TYPE|?{#TYPE,<:vu:rss_objet_annonce:>}) ][<:vu:rss_apercu_peremption:>(#PEREMPTION|affdate_jourcourt|texte_backend).]
+		</description>
+		<content:encoded>
+			[<:vu:rss_apercu_lien_annonce:>&lt;a href=&#147;#LIEN&#147; title=&#147;#LIEN&#147; &gt;(#ANNONCEUR|choixsivide{[(#LIEN|texte_backend)],[(#ANNONCEUR|texte_backend)]})&lt;/a&gt;]
+			[(<:vu:rss_apercu_source:>&lt;a href=&#147;#SOURCE_LIEN&#147; title=&#147;#SOURCE_LIEN&#147; &gt;(#SOURCE_NOM|texte_backend)&lt;/a&gt;)]
+			[<:vu:rss_apercu_peremption:>(#PEREMPTION|affdate_jourcourt|texte_backend).]
+			[&lt;p&gt;(#DESCRIPTIF|texte_backend)&lt;/p&gt;]
+		</content:encoded>
+
+	</item>
+</BOUCLE_annonce>

@@ -1,0 +1,23 @@
+#CACHE{3600}
+<BOUCLE_evenement(VU_EVENEMENTS){id_evenement}>
+	<item>
+		<title>[(#TITRE|supprimer_numero|texte_backend)]</title>
+		<link>[(#LIEN|?{#LIEN,#SOURCE_LIEN})]</link>
+		[<guid isPermaLink="true">(#LIEN|?{#LIEN,#SOURCE_LIEN})</guid>]
+		[<dc:date>(#DATE|date_iso)</dc:date>]
+		<dc:format>text/html</dc:format>
+		<dc:language></dc:language>
+		<category>Vu !</category>
+
+		<description>
+		[(#TYPE|?{[(#TYPE|texte_backend)],<:vu:rss_objet_evenement:>}) ][<:vu:apercu_le:>(#DATE_EVENEMENT|affdate_jourcourt|texte_backend).]
+		</description>
+
+		<content:encoded>
+			[(#LIEU_EVENEMENT|texte_backend)][(#DATE_EVENEMENT|?{", ","."})][(#LIEU_EVENEMENT|?{" le ","Le "})][(#DATE_EVENEMENT|affdate_jourcourt|texte_backend)][(#ORGANISATEUR|?{", ","."})][<:vu:rss_apercu_lien_evenement:>(#ORGANISATEUR|texte_backend).]
+			[&lt;br /&gt;<:vu:rss_apercu_informations:>&lt;a href='#LIEN' title=''&gt;(#LIEN|couper{50}|texte_backend)&lt;/a&gt;.]	
+			[&lt;p&gt;(#DESCRIPTIF|texte_backend)&lt;/p&gt;]
+			[(<:vu:rss_apercu_source:>&lt;a href='#SOURCE_LIEN' title='#SOURCE_LIEN'&gt;(#SOURCE_NOM|texte_backend)&lt;/a&gt;)]
+		</content:encoded>
+	</item>
+</BOUCLE_evenement>
