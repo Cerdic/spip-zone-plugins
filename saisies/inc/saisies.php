@@ -111,4 +111,24 @@ function saisies_generer_nom($formulaire, $type_saisie){
 	return $type_saisie.'_'.$compteur;
 }
 
+/**
+ * Insère du HTML au début ou à la fin d'une saisie
+ *
+ * @param array $saisie La description d'une seule saisie
+ * @param string $insertion Du code HTML à insérer dans la saisie 
+ * @param string $ou L'endroit où insérer le HTML : "debut" ou "fin"
+ * @return array Retourne la description de la saisie modifiée
+ */
+function saisies_inserer_html($saisie, $insertion, $ou='fin'){
+	if (!in_array($ou, array('debut', 'fin')))
+		$ou = 'fin';
+	
+	if ($ou == 'debut')
+		$saisie['options']['inserer_debut'] = $insertion.$saisie['options']['inserer_debut'];
+	elseif ($ou == 'fin')
+		$saisie['options']['inserer_fin'] = $saisie['options']['inserer_fin'].$insertion;
+	
+	return $saisie;
+}
+
 ?>
