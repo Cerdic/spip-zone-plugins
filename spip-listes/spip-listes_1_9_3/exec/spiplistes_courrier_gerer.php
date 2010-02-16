@@ -343,12 +343,14 @@ function exec_spiplistes_courrier_gerer () {
 					, '' // alignement
 					, false // pas echo, demande retour
 					) 
-					. "\n"
+					. $eol
 				;
+			
 		}
 		
 		// Le courrier peut-etre supprime si obsolete
-		if(in_array($statut, array(_SPIPLISTES_COURRIER_STATUT_PUBLIE
+		if(in_array($statut, array(_SPIPLISTES_COURRIER_STATUT_REDAC
+								   , _SPIPLISTES_COURRIER_STATUT_PUBLIE
 								   , _SPIPLISTES_COURRIER_STATUT_AUTO
 								   , _SPIPLISTES_COURRIER_STATUT_VIDE
 								   , _SPIPLISTES_COURRIER_STATUT_IGNORE
@@ -356,16 +358,16 @@ function exec_spiplistes_courrier_gerer () {
 								   , _SPIPLISTES_COURRIER_STATUT_ERREUR))
 					) {
 			$gros_bouton_supprimer = 
-				"<div style='margin-top:1ex;'>"
+				'<div style="margin-top:1ex">'
 				. icone (
 					_T('spiplistes:Supprimer_ce_courrier')
-					, generer_url_ecrire(_SPIPLISTES_EXEC_COURRIERS_LISTE, "btn_supprimer_courrier=$id_courrier")
+					, generer_url_ecrire(_SPIPLISTES_EXEC_COURRIERS_LISTE, 'btn_supprimer_courrier='.$id_courrier)
 					, _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'poubelle_msg.gif'
-					, ""
-					, "right"
+					, ''
+					, 'right'
 					, false
 					)
-				. "</div>\n"
+				. '</div>'.$eol
 				;
 		}
 		// Un courrier publie ou stoppe peut-etre duplique pour edition
