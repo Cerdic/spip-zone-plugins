@@ -34,10 +34,10 @@ function genie_clevermail_queue_process_dist($t, $verbose = 'no') {
 			$template['@@SUJET_LETTRE@@'] = $post['pst_subject'];
 			$template['@@ID_LETTRE@@'] = $message['pst_id'];
 			$template['@@URL_LETTRE@@'] = generer_url_public(_CLEVERMAIL_LETTRE_EN_LIGNE,'id='.$message['pst_id']);
-			$template['@@NOM_LETTRE@@'] = substr($list['lst_name'], strpos($list['lst_name'], "/")+1);
-		    $template['@@NOM_CATEGORIE@@'] = substr($list['lst_name'],0 , strpos($list['lst_name'], "/"));
-		    $template['@@NOM_COMPLET@@'] = $list['lst_name'];
-			$template['@@DESCRIPTION@@'] = propre($list['lst_comment']);
+			$template['@@NOM_LETTRE@@'] = supprimer_numero(substr($list['lst_name'], strpos($list['lst_name'], "/")+1));
+		    $template['@@NOM_CATEGORIE@@'] = supprimer_numero(substr($list['lst_name'],0 , strpos($list['lst_name'], "/")));
+		    $template['@@NOM_COMPLET@@'] = ($template['@@NOM_CATEGORIE@@'] != '' ? $template['@@NOM_CATEGORIE@@'].' / '.$template['@@NOM_LETTRE@@'] : $template['@@NOM_LETTRE@@']);
+		    $template['@@DESCRIPTION@@'] = propre($list['lst_comment']);
 			$template['@@FORMAT_INSCRIPTION@@'] = $mode;
 			$template['@@EMAIL@@'] = $to;
 
