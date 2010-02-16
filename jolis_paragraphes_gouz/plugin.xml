@@ -1,8 +1,0 @@
-<plugin>
-	<nom>Jolis Paragraphes</nom>
-	<version>1.0</version>
-	<prefix>jolis_paragraphes</prefix>
-	<etat>dev</etat>
-	<auteur>Sylvain Gougouzian</auteur>
-	<description>Gestion des "class" pour les paragraphes dans l'éditeur de texte back-office.<br />Permet de garder les "class" des paragraphes.</description>
-</plugin>
