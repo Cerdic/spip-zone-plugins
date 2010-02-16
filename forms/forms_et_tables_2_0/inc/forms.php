@@ -904,67 +904,7 @@ function Forms_obligatoire($row,$forms_obligatoires){
 }
 
 //ajout SPIP 2
-function afficher_liste($largeurs, $table, $styles = '') {
-	global $spip_display;
-
-	if (!is_array($table)) return "";
-
-	if ($spip_display != 4) {
-		$res = '';
-		foreach ($table as $t) {
-			$res .= afficher_liste_display_neq4($largeurs, $t, $styles);
-		}
-	} else {
-		$res = "\n<ul style='text-align: $spip_lang_left; background-color: white;'>";
-		foreach ($table as $t) {
-			$res .= afficher_liste_display_eq4($largeurs, $t, $styles);
-		}
-		$res .= "\n</ul>";
-	}
-
-	return $res;
-}
-
-// http://doc.spip.org/@afficher_liste_display_neq4
-function afficher_liste_display_neq4($largeurs, $t, $styles = '') {
-	global $spip_lang_left,$browser_name;
-	if (!is_array($t) or !count($t)) return "";
-
-	$evt = (preg_match(",msie,i", $browser_name) ? " onmouseover=\"changeclass(this,'tr_liste_over');\" onmouseout=\"changeclass(this,'tr_liste');\"" :'');
-
-	reset($largeurs);
-	if ($styles) reset($styles);
-	$res ='';
-	while (list(, $texte) = each($t)) {
-		$style = $largeur = "";
-		list(, $largeur) = each($largeurs);
-		if ($styles) list(, $style) = each($styles);
-		if (!trim($texte)) $texte .= "&nbsp;";
-		$res .= "\n<td" .
-			($largeur ? (" style='width: $largeur" ."px;'") : '') .
-			($style ? " class=\"$style\"" : '') .
-			">" . lignes_longues($texte) . "\n</td>";
-	}
-
-	return "\n<tr class='tr_liste'$evt>$res</tr>";
-}
-
-// http://doc.spip.org/@afficher_liste_display_eq4
-function afficher_liste_display_eq4($largeurs, $t, $styles = '') {
-	global $spip_lang_left;
-	if (!is_array($t) or !count($t)) return "";
-
-	$res = "\n<li>";
-	reset($largeurs);
-	if ($styles) reset($styles);
-	while (list(, $texte) = each($t)) {
-		$style = $largeur = "";
-		list(, $largeur) = each($largeurs);
-		if (!$largeur) $res .= $texte." ";
-	}
-	$res .= "</li>\n";
-	return $res;
-}
+include_spip('inc/vieilles_defs');
 
 function Forms_afficher_liste_donnees_liees($type_source, $id, $type_lie, $type_table, $script, $bloc_id, $arg_ajax, $retour){
 	// article, donnee
