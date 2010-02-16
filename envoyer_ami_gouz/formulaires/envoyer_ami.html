@@ -1,0 +1,47 @@
+[(#ENV{affiche}|=={'non'}|?{'',' '})
+	<form action="#SELF" method="post" class="text">
+		<input type="hidden" name="url" id="url" value="#ENV{url}" />
+		<input type="hidden" name="lang" id="lang" value="#LANG" />
+		<input type="hidden" name="valider" id="valider" value="ok" />
+			<div class="item">
+		        <label for="emetteur_nom"><:envoyerami:emetteur_nom:> : </label>
+		        <input type="text" id="emetteur_nom" name="emetteur_nom" />
+				<img class="borderDeco" src="images/formulaire-type/visu/item-bottom.gif" alt="" />
+	        </div>
+			<div class="item">
+				<label for="emetteur_mail"><:envoyerami:emetteur_mail:> : </label>
+				<input type="text" id="emetteur_mail" name="emetteur_mail" />
+				<img class="borderDeco" src="images/formulaire-type/visu/item-bottom.gif" alt="" />
+	        </div>
+			<div class="item">
+		        <label for="destinataire_nom"><:envoyerami:destinataire_nom:> : </label>
+		        <input type="text" id="destinataire_nom" name="destinataire_nom" />
+				<img class="borderDeco" src="images/formulaire-type/visu/item-bottom.gif" alt="" />
+	        </div>
+			<div class="item">
+				<label for="destinataire_mail"><:envoyerami:destinataire_mail:> : </label>
+				<input type="text" id="destinataire_mail" name="destinataire_mail" />
+				<img class="borderDeco" src="images/formulaire-type/visu/item-bottom.gif" alt="" />
+	        </div>
+			<div class="item">
+				<label for="message"><:envoyerami:message:> : </label>
+				<textarea id="message" name="message" rows="4" cols="10"></textarea>
+				<img class="borderDeco" src="images/formulaire-type/visu/item-bottom.gif" alt="" />
+	        </div>
+			<div class="item submitContainer">
+            	<button type="submit" name="submitForm" id="submitForm">
+                	<span><:envoyerami:envoyer:></span>
+                    <span class="borderDeco">&nbsp;</span>
+                </button>
+                <img class="borderDeco" src="images/formulaire-type/visu/submit-bottom.gif" alt="" />
+            </div>
+
+	</form>
+]
+[(#ENV{affiche}|=={'non'}|?{' ',''})
+	<p>
+		<span class="ok">
+			Un email a &eacute;t&eacute; envoy&eacute; &agrave; votre ami(e).
+		</span>
+	</p>
+]

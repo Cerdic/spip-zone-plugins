@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<plugin>
+	<nom>
+		Envoyer a un ami
+	</nom>
+	<auteur>
+		Sylvain Gougouzian
+	</auteur>
+	<version>
+		0.1
+	</version>
+	<etat>
+		dev
+	</etat>
+	<description>
+		Permet l'envoi &agrave; un ami d'un article donn&eacute;<br />
+		Utilisation de la balise #ENVOYERAMI :
+		#ENVOYERAMI{url du partage}
+	</description>
+	<prefix> 
+		envoyer_ami
+	</prefix>
+	<necessite id="SPIP" version="[2.0.8;]" />
+</plugin>
