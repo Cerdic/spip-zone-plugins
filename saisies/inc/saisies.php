@@ -92,4 +92,23 @@ function saisies_charger_infos($type_saisie){
 	return $saisie;
 }
 
+/**
+ * Génère un nom unique pour un champ d'un formulaire donné
+ *
+ * @param array $formulaire Le formulaire à analyser 
+ * @param string $type_saisie Le type de champ dont on veut un identifiant 
+ * @return string Un nom unique par rapport aux autres champs du formulaire
+ */
+function saisies_generer_nom($formulaire, $type_saisie){
+	$champs = saisies_recuperer_champs($formulaire);
+	
+	// Tant que type_numero existe, on incrémente le compteur
+	$compteur = 1;
+	while (array_search($type_saisie.'_'.$compteur, $champs) !== false)
+		$compteur++;
+	
+	// On a alors un compteur unique pour ce formulaire
+	return $type_saisie.'_'.$compteur;
+}
+
 ?>
