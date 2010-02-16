@@ -15,7 +15,7 @@
 
 			$ret .= "<script type='text/javascript'><!--\n"
 				. "function fermer_flickr_cc() {\n$('body').css('overflow','auto');\n $('#flickr_cc').fadeOut();\n}\n"
-				. "function resultat_flickr(debut) {\n ordre=$('[@name=flickr_ordre][@checked]').attr('value');rech = $('#recherche_flickr').attr('value');\n champs=$('#licenses').attr('value');\n $('#loading_flickr').fadeIn(); $('#resultat_flickr').hide(); $('#resultat_flickr').load('../?page=flickr_cc_resultat&id_article=$id_article&recherche='+escape(rech)+'&ordre='+ordre+'&debut='+debut+'&champs='+champs, function() {\n$('#resultat_flickr').fadeIn();$('#loading_flickr').hide();\n});  \n}\n"
+				. "function resultat_flickr(debut) {\n var ordre=$('[name=flickr_ordre][checked]').attr('value');\n var rech = $('#recherche_flickr').attr('value');\n var champs=$('#licenses').attr('value');\n $('#loading_flickr').fadeIn();\n $('#resultat_flickr').hide(); $('#resultat_flickr').load('../?page=flickr_cc_resultat&id_article=$id_article&recherche='+escape(rech)+'&ordre='+ordre+'&debut='+debut+'&champs='+champs, function() {\n$('#resultat_flickr').fadeIn();$('#loading_flickr').hide();\n});  \n}\n"
 				. "--></script>\n";
 		
 		
