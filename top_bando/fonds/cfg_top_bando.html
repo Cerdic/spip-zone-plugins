@@ -52,6 +52,9 @@ modifier ces param&#232;tres.  -->
 
 [(#SET{titre,[(#ENV{titre_bando}|=={titre_spip}|?{[(#NOM_SITE_SPIP)],[(#ENV{complement_nom_site})]})]})]
 -->
+<script type='text/javascript' src='#CHEMIN{prive/javascript/async_upload.js}'></script>
+[(#VAL**|affiche_upload)]
+
 <script language="JavaScript" type="text/javascript">
     function initialiser_params(){
         if (jQuery("#titre_oui").attr("checked") == true)
@@ -183,6 +186,7 @@ modifier ces param&#232;tres.  -->
 </script>
 
 <form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
+
 [(#REM) ------------------------- DIMENSIONS EN-TETE --------------------------]
 [(#REM) restons simples pour l'instant...
 <fieldset>
@@ -285,7 +289,7 @@ modifier ces param&#232;tres.  -->
                             height: #GET{hauteur_recadre}px;">
       [(#CONFIG{top_bando/utiliser_logo}|=={oui}|oui)
         [<img src="(#LOGO_SITE_SPIP||image_reduire{0,[(#GET{hauteur_recadre})]}|extraire_attribut{src})" alt="logo_site"
-          style="float: [(#ENV{place_logo,left})];" id="img_logo"/>]
+          style="float: [(#ENV{place_logo,left})];" id="img_logo"/>]hrec= [(#GET{hauteur_recadre})]
       ]
     </div>
     <p>

@@ -33,5 +33,6 @@ selon les param&#232;tres d&#233;finis dans [l'interface de configuration->?exec
   <necessite id="lib:jquery-ui-1.7.2" src="http://jquery-ui.googlecode.com/files/jquery-ui-1.7.2.zip" />
 
 	<utilise id="palette" version="[1.0;]" />
+	<utilise id="choix_police" version="[0.1;]" />
   <chemin dir='' />
 </plugin>

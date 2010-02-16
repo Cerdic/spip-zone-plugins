@@ -3,7 +3,7 @@
 function top_bando_header_prive($flux){
 	// Initialisation des valeurs de config
 	$config = @unserialize($GLOBALS['meta']['top_bando']);
-$fulx .='TOP BANDO';  
+ 
 // si on veut pouvoir manipuler la zone de recadrage en drag/resize dans la page CFG il faut les jQuery UI
   if (_request('exec') == 'cfg' AND _request('cfg') == 'top_bando'){
 
