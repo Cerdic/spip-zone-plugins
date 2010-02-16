@@ -54,6 +54,7 @@ function exec_spiplistes_courrier_edit(){
 		;
 	
 	$eol = "\n";
+	$id_temp = false;
 	
 	$type = _request('type');
 	$id_courrier = intval(_request('id_courrier'));
@@ -76,6 +77,11 @@ function exec_spiplistes_courrier_edit(){
 		else {
 			$id_courrier = false;
 		}
+	}
+	// n'existe pas encore ?
+	// placer un marqueur pour les documents joints
+	else {
+		$id_temp = 0-intval(substr(creer_uniqid(),0,5));
 	}
 
 	// l'edition du courrier est reservee aux super-admins 
@@ -109,7 +115,7 @@ function exec_spiplistes_courrier_edit(){
 			: ""
 			;
 		$boite_documents = afficher_documents_colonne(
-							  ($id_courrier ? $id_courrier : 0-$connect_id_auteur )
+							  ($id_courrier ? $id_courrier : $id_temp )
 							  , 'courrier');
 	}
 	
@@ -347,6 +353,8 @@ function exec_spiplistes_courrier_edit(){
 		. '<p style="text-align:right;">'.$eol
 		. '<input type="submit" onclick="this.value=\'oui\';" id="btn_courrier_edit" '
 			. ' name="btn_courrier_valider" value="'._T('bouton_valider').'" class="fondo" /></p>'.$eol
+		// le marqueur pour les documents joints
+		. (($id_temp!==false) ? '<input type="hidden" name="id_temp" value="' . $id_temp . '" />'.$eol : '')
 		//
 		// fin formulaire
 		. '</form>'.$eol

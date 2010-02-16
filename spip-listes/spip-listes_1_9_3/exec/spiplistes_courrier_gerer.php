@@ -68,6 +68,7 @@ function exec_spiplistes_courrier_gerer () {
 		, 'change_statut' // (formulaire spiplistes_boite_autocron) 'publie' pour annuler envoi par boite autocron
 		, 'btn_dupliquer_courrier' // (formulaire local) dupliquer le courrier
 		, 'supp_dest'
+		, 'id_temp' // pour recuperer les documents joints
 		) as $key) {
 		$$key = _request($key);
 	}
@@ -211,6 +212,7 @@ function exec_spiplistes_courrier_gerer () {
 							, 'message_texte' => $message_texte
 						);
 					spiplistes_courrier_modifier($id_courrier, $sql_set);
+					spiplistes_courrier_attacher_documents($id_courrier, $id_temp);
 				}
 				else {
 					$message_erreur .= spiplistes_boite_alerte (_T('spiplistes:Erreur_courrier_titre_vide'), true);
@@ -218,7 +220,7 @@ function exec_spiplistes_courrier_gerer () {
 			}
 			// FIN DES MODIFICATIONS
 		}
-	
+					
 		// Ok. recharge les donnees pour completer le formulaire
 		$sql_select_array = array('titre', 'texte', 'email_test', 'statut');
 		if($row = spiplistes_courriers_premier($id_courrier, $sql_select_array)) {
@@ -243,6 +245,7 @@ function exec_spiplistes_courrier_gerer () {
 				, "(".sql_quote($titre).",".sql_quote($texte).",".sql_quote($message_texte)
 					.",NOW(),".sql_quote($statut).",".sql_quote($type).",".sql_quote($connect_id_auteur).")"
 			);
+			spiplistes_courrier_attacher_documents($id_courrier, $id_temp);
 		}
 		else {
 			$message_erreur .= spiplistes_boite_alerte (_T('spiplistes:Erreur_courrier_titre_vide'), true);

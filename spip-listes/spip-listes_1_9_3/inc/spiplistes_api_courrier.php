@@ -409,6 +409,18 @@ function spiplistes_courrier_supprimer_queue_envois ($sql_where_key, $sql_where_
 	return($result);
 }
 
+function spiplistes_courrier_attacher_documents($id_courrier, $id_temp) {
+	if(($id_courrier > 0) && ($id_temp < 0)) {
+		return(
+			sql_updateq(
+				'spip_documents_liens'
+				, array('id_objet' => sql_quote($id_courrier))
+				, 'id_objet='.sql_quote($id_temp).' AND objet='.sql_quote('courrier')
+		));
+	}
+	return(false);
+}
+
 // CP-20080329
 function spiplistes_courrier_supprimer ($sql_where_key, $sql_where_value) {
 	return(sql_delete("spip_courriers", $sql_where_key."=".sql_quote($sql_where_value)));
