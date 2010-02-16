@@ -16,7 +16,7 @@
 									<select name="id_fond">
 									<option value="none" selected="selected"><:savecfg:restaurations:></option>
 									<BOUCLE_savecfg(SAVECFG){fond=#GET{fond}}>
-										<option value="#ID_SAVECFG">#TITRE</option>
+										<option value="#ID_SAVECFG">[(#TITRE|supprimer_tags)]</option>
 									</BOUCLE_savecfg>
 									</select>
 									</li>
@@ -31,6 +31,6 @@
 			</div>
 		</form>
 	</div>
-	<hr />
+	<br />
 </div>
 </B_savecfg>

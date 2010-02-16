@@ -1,6 +1,6 @@
 #SET{fond, #SELF|match{(cfg=)(\w+?),2}}
 <B_savecfg_export>
-<hr />
+<br />
 <div class="formulaire_spip formulaire_savecfg">
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
@@ -12,11 +12,13 @@
 					<fieldset>
 						<h3 class="legend"><:savecfg:exporter_savecfg:></h3>						<ul>
 							<li>
+							<div class="choix">
 							<BOUCLE_savecfg_export(SAVECFG){" <br /> "}>
-								<label for="export#ID_SAVECFG">#TITRE</label>
 								<input id="export#ID_SAVECFG" type="checkbox" name="export[#ID_SAVECFG]" />
+								<label for="export#ID_SAVECFG">[(#TITRE|supprimer_tags)]</label>
 							</BOUCLE_savecfg_export>
 								[<p>(#ENV**{erreurs}|table_valeur{nom})</p>]
+							</div>
 							</li>
 						</ul>
 					</fieldset>
