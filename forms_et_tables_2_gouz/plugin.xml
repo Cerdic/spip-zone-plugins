@@ -1,0 +1,90 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	<multi>[ar]&#1575;&#1604;&#1575;&#1587;&#1578;&#1605;&#1575;&#1585;&#1575;&#1578;[en]Forms[fr]Formulaires&amp;Tables[it] Forms[es] Formularios</multi> (SPIP 2.0)
+	</nom>
+	<icon>img_pack/form-24.png</icon>
+	<auteur>	<!-- Auteur du plugin -->
+		<multi>[ar]&#1575;&#1606;&#1591;&#1608;&#1575;&#1606; &#1576;&#1578;&#1585;&#1608;&#1548; &#1587;&#1610;&#1583;&#1585;&#1610;&#1603; &#1605;&#1608;&#1585;&#1575;&#1606;&#1548; &#1585;&#1610;&#1606;&#1575;&#1578;&#1608;
+		[fr]Sylvain Gougouzian d'apres Antoine Pitrou, Cedric Morin, Renato Formato
+		[it]Sylvain Gougouzian d'apres Antoine Pitrou, Cedric Morin, Renato Formato
+	  [es]Sylvain Gougouzian d'apres Antoine Pitrou, Cedric Morin, Renato Formato
+		</multi>
+	</auteur>
+	<version>
+	1.0
+	</version>
+	<etat>
+	dev
+	</etat>
+	<description>
+	<multi>
+	[ar]&#1573;&#1583;&#1575;&#1585;&#1577; &#1575;&#1604;&#1575;&#1587;&#1578;&#1605;&#1575;&#1585;&#1575;&#1578; &#1608;&#1578;&#1581;&#1585;&#1610;&#1585;&#1607;&#1575;.
+&#1610;&#1578;&#1610;&#1581; &#1607;&#1584;&#1575; &#1575;&#1604;&#1605;&#1604;&#1581;&#1602; &#1571;&#1610;&#1590;&#1575;&#1611; &#1606;&#1588;&#1585; &#1575;&#1604;&#1575;&#1587;&#1578;&#1591;&#1604;&#1575;&#1593;&#1575;&#1578; &#1608;&#1575;&#1604;&#1578;&#1581;&#1602;&#1610;&#1602;&#1575;&#1578; &#1608;&#1581;&#1601;&#1592; &#1575;&#1604;&#1585;&#1583;&#1608;&#1583; &#1593;&#1604;&#1610;&#1607;&#1575; &#1601;&#1610; &#1602;&#1575;&#1593;&#1585;&#1583; &#1575;&#1604;&#1576;&#1610;&#1575;&#1606;&#1575;&#1578; &#1608;&#1578;&#1581;&#1605;&#1610;&#1604;&#1607;&#1575; &#1576;&#1578;&#1606;&#1587;&#1610;&#1602; CSV
+	[en]editable forms management an administration.
+	This plugin can also publish polls and surveys, store the replies in the database and upload them in CSV format
+      [fr]Gestion et administration de formulaires &#233;ditables.
+	Ce plugin permet &#233;galement la publication de sondages et enqu&#232;tes, la collecte des reponses dans la base de donn&#233;es et le t&#233;l&#233;chargement au format csv
+	[it]Gestione ed amministrazione di form modificabili.
+	Questo plugin consente anche la publicazione di sondaggi ed inchieste, la raccolta delle risposte all'interno della base dati e le mette a disposizione per lo scaricamento in formato csv
+      [es]Gesti&oacute;n y administraci&oacute;n de formularios editables.
+	Este plugin tambi&#233;n permite la publicaci&oacute;n de sondeos y encuestas, la colecta de las respuestas en la base de datos y su descarga en formato CSV (Comma Sepparated Variables).
+	</multi>
+	</description>
+	<lien>http://zone.spip.org/trac/spip-zone/wiki/SpipForms</lien> <!-- URI de documentation -->
+	<options> <!-- fichier charge a chaque hit -->
+	forms_options.php
+	</options>
+	<fonctions> <!-- fichier charge a chaque recalul de page -->
+	forms_fonctions.php
+	</fonctions>
+	<fonctions> <!-- fichier charge a chaque recalul de page -->
+	public/forms_boucles.php
+	</fonctions>
+	<fonctions> <!-- fichier charge a chaque recalul de page -->
+	public/forms_balises.php
+	</fonctions>
+	<prefix>
+	Forms
+	</prefix>
+	<install>base/forms_upgrade.php</install>
+	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+	<pipeline>
+		<nom>definir_session</nom>
+	</pipeline>
+	<pipeline>
+		<nom>pre_propre</nom>
+		<action>forms_avant_propre</action>
+		<inclure>forms_filtres.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>post_propre</nom>
+		<action>forms_apres_propre</action>
+		<inclure>forms_filtres.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>forms_filtres.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>post_edition</nom>
+		<inclure>forms_filtres.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_droite</nom>
+		<action>affiche_droite</action>
+		<inclure>forms_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>forms_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<inclure>forms_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<inclure>forms_pipeline.php</inclure>
+	</pipeline>
+	<chemin dir='' />
+</plugin>
