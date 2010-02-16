@@ -13,6 +13,7 @@ function formulaires_editer_formulaire_champs_charger($id_formulaire){
 		$contenu = unserialize($formulaire['contenu']);
 		if (!is_array($contenu)) $contenu = array();
 		$contexte['_contenu'] = $contenu;
+		$contexte['id_formulaire'] = $id_formulaire;
 	}
 	
 	return $contexte;

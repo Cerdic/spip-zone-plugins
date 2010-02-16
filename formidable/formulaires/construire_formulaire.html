@@ -2,14 +2,68 @@
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	
-	[(#ENV{editable}|oui)
+	<BOUCLE_editable(CONDITION){si #ENV{editable}|oui}>
 	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
 		[(#REM) declarer les hidden qui declencheront le service du formulaire 
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 		
 		<ul>
-		[(#GENERER_SAISIES{#ENV{_contenu}}|sinon{<li class="aucun"><em class="attention"><:formidable:champs_aucun:></em></li>})]
+			<BOUCLE_contenu(POUR){tableau #ENV{_contenu}}>
+			[(#VAL{explication}|array_key_exists{#VALEUR}|oui)
+			[<li>
+				<div class="explication">
+					(#VALEUR|table_valeur{explication}|saisies_transformer_langue)
+				</div>
+			</li>]
+			]
+
+			[(#VAL{saisie}|array_key_exists{#VALEUR}|oui)
+				[(#SET{actions,
+					<div class="actions">
+						<button type="submit" class="submit" name="configurer_saisie" value="[(#VALEUR|table_valeur{options}|table_valeur{nom})]"><:formidable:construire_action_configurer:></button>
+						<button type="submit" class="submit" name="supprimer_saisie" value="[(#VALEUR|table_valeur{options}|table_valeur{nom})]"><:formidable:construire_action_supprimer:></button>
+					</div>
+				})]
+				#SET{saisie,#VALEUR|saisies_inserer_html{#GET{actions},debut}}
+				[(#ENV{erreurs}|table_valeur{configurer_[(#VALEUR|table_valeur{options}|table_valeur{nom})]}|oui)
+					#SET{saisie,#GET{saisie}|saisies_inserer_html{CONFIGURATION,fin}}
+				]
+				[(#GET{saisie}|generer_saisie{#ENV**|unserialize})]
+			]
+
+			[(#VAL{groupe}|array_key_exists{#VALEUR}|oui)
+			#SET{titre, #VALEUR|table_valeur{groupe}}
+			#SET{css, #VALEUR|table_valeur{css}}
+			#SET{pliable, #VALEUR|table_valeur{pliable}|et{#VALEUR|table_valeur{pliable}|!={non}}|?{'pliable', ''}}
+			#SET{plie, #VALEUR|table_valeur{plie}|et{#VALEUR|table_valeur{plie}|!={non}}|?{'plie', ''}}
+			#SET{contenu, #VALEUR|table_valeur{contenu}}
+			<li class="fieldset[ (#GET{css})]">
+				<fieldset>
+					[<h3 class="legend">(#GET{titre}|saisies_transformer_langue)</h3>]
+		
+					[(#GET{contenu}|is_array|oui)
+					<ul [class="(#GET{pliable})[ (#GET{plie})]"]>
+						#INCLURE{fond=inclure/generer_saisies, env, saisies=#GET{contenu}}
+					</ul>
+					]
+				</fieldset>
+			</li>
+			]
+			</BOUCLE_contenu>
+			<li class="aucun"><em class="attention"><:formidable:construire_aucun_champs:></em></li>
+			<//B_contenu>
+			
+			<B_saisies_disponibles>
+			<li>
+				<label><:formidable:construire_ajouter_champ:></label>
+				<BOUCLE_saisies_disponibles(POUR){tableau #ENV{saisies_disponibles}}>
+				<button type="submit" name="ajouter_saisie" value="#CLE" class="submit ajouter_saisie"[ title="(#VALEUR|table_valeur{description})"] [style="background-image:url((#VALEUR|table_valeur{icone}|sinon{#CHEMIN{images/formulaire-saisie-defaut.png}}))"]>
+					[(#VALEUR|table_valeur{titre})]
+				</button>
+				</BOUCLE_saisies_disponibles>
+			</li>
+			</B_saisies_disponibles>
 		</ul>
 		
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
@@ -17,5 +71,5 @@
 		
 		<span class='image_loading'></span>
 	</div></form>
-	]
+	</BOUCLE_editable>
 </div>

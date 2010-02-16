@@ -34,6 +34,10 @@
 		<nom>rechercher_liste_des_champs</nom>
 		<inclure>base/formidable_tables.php</inclure>
 	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>formidable_pipelines.php</inclure>
+	</pipeline>
 	
 	<bouton id="formulaires" parent="naviguer">
 		<icone>images/formulaire-24.png</icone>

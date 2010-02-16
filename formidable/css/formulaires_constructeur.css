@@ -1,0 +1,14 @@
+
+.formulaire_spip .ajouter_saisie{
+	padding:0.5em 8px 0.5em 36px;
+	font-size:1em;
+	text-align:left;
+	color:black;
+	cursor:pointer;
+	background:white url() 8px center no-repeat;
+	border:1px solid #ccc;
+}
+
+.formulaire_spip .ajouter_saisie img{
+	vertical-align:middle;
+}
