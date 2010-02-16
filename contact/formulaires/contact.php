@@ -53,9 +53,10 @@ function formulaires_contact_charger_dist($id_auteur='',$tracer=''){
 
 	// Les infos supplémentaires
 	$champs_possibles = contact_infos_supplementaires();
-	if (!is_array($champs_choisis = lire_config('contact/champs')))
-		$valeurs['champs'] = false;
-	else{
+	$champs_mini_config = array('mail', 'sujet', 'texte');
+	if (!is_array($champs_choisis = lire_config('contact/champs'))){
+		$champs_choisis = $champs_mini_config;
+	}
 		// On envoie un talbeau contenant tous les champs choisis et leur titre
 		// DANS L'ORDRE de ce qu'on a récupéré de CFG
 		$champs_choisis = array_flip($champs_choisis);
@@ -71,9 +72,9 @@ function formulaires_contact_charger_dist($id_auteur='',$tracer=''){
 				$champs_choisis
 			)
 		);
-	}
+	
 	if (!is_array($champs_obligatoires = lire_config('contact/obligatoires')))
-		$valeurs['obligatoires'] = false;
+		$valeurs['obligatoires'] = $champs_mini_config;
 	else
 		$valeurs['obligatoires'] = $champs_obligatoires;
 	
@@ -115,8 +116,11 @@ function formulaires_contact_verifier_dist($id_auteur='',$tracer=''){
 	elseif(!email_valide($adres))
 		$erreurs['mail'] = _T('form_prop_indiquer_email');
 	
+	$champs_mini_config = array('mail', 'sujet', 'texte');
 	$champs_choisis = lire_config('contact/champs');
+	$champs_choisis = $champs_choisis?$champs_choisis:$champs_mini_config;
 	$champs_obligatoires = lire_config('contact/obligatoires');
+	$champs_obligatoires = $champs_obligatoires?$champs_obligatoires:$champs_mini_config;
 	if (is_array($champs_choisis) and is_array($champs_obligatoires)){
 		foreach($champs_choisis as $champ){
 			if (!_request($champ) and in_array($champ, $champs_obligatoires))
