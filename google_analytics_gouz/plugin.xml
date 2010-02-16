@@ -1,0 +1,26 @@
+<plugin>
+	<nom>Gestion des "Google Analytics".</nom>
+	<version>1.0</version>
+	<prefix>ga</prefix>
+	<etat>dev</etat>
+	<auteur>Sylvain Gougouzian</auteur>
+	<description>Permet la gestion des Tags Google Analytics. Sur des liens, sur des pages spécifiques, ou sur le site globalement.</description>
+	<icon>img_pack/ga.png</icon>
+	<install>base/ga_upgrade.php</install>
+	<bouton id='ga' parent='naviguer'>
+    	<icone>img_pack/ga.gif</icone>
+      	<titre>Google Analytics</titre>
+  	</bouton>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/ga.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/ga.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>ga_filtres.php</inclure>
+	</pipeline>
+</plugin>

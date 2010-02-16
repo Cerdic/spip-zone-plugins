@@ -1,0 +1,8 @@
+<BOUCLE_art_ga(GA) {objet=art} {id_objet=#ENV{id_article}}>
+	<script type="text/javascript">
+		jQuery(window).load(function () {
+			var _html = "try { var pageTracker = _gat._getTracker('#CODE'); pageTracker._trackPageview();} catch(err) {} ";
+			jQuery('body').append(_html);
+		});	
+	</script>
+</BOUCLE_art_ga>

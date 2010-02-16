@@ -1,0 +1,56 @@
+<h2 class='titre'>Google Analytics</h2>
+<h3>Site</h3>
+<BOUCLE_ga_site(GA) {objet=sit}>
+	<p><a href="?exec=ga&id_ga=#ID">#NOM_SITE_SPIP</a> <a href="?exec=ga&delete=ok&id=#ID" style="float: right;">supprimer</a></p>
+</BOUCLE_ga_site>
+	<p>Le site ne dispose pas d'un code Google Analytics</p>
+<//B_ga_site>
+<h3>Articles</h3>
+<B_ga_art>
+	<ul>
+		<BOUCLE_ga_art(GA) {objet=art}>
+			<li>
+				<a href="?exec=ga&id_ga=#ID">
+					<BOUCLE_art_ga(ARTICLES) {id_article=#ID_OBJET}>
+						[(#TITRE|supprimer_numero)]
+					</BOUCLE_art_ga>
+				</a>
+				 <a href="?exec=ga&delete=ok&id=#ID" style="float: right;">supprimer</a>
+			</li>
+		</BOUCLE_ga_art>
+	</ul>
+</B_ga_art>
+	<p>Aucun article ne dispose d'un code Google Analytics</p>
+<//B_ga_art>
+<h3>Documents</h3>
+<B_ga_doc>
+	<ul>
+		<BOUCLE_ga_doc(GA) {objet=doc} {par id_objet}>
+			<li>
+				<a href="?exec=ga&id_ga=#ID">
+					<BOUCLE_doc_ga(DOCUMENTS) {id_document=#ID_OBJET}>
+						[(#TITRE|supprimer_numero)]
+					</BOUCLE_doc_ga>
+				</a>
+				 <a href="?exec=ga&delete=ok&id=#ID" style="float: right;">supprimer</a>
+			</li>
+		</BOUCLE_ga_doc>
+	</ul>
+</B_ga_doc>
+	<p>Aucun document ne dispose d'un code Google Analytics</p>
+<//B_ga_doc>
+<h3>Editeurs</h3>
+<B_ga_edi>
+	<ul>
+		<BOUCLE_ga_edi(GA) {objet=edi} {par id_objet}>
+			<li>
+				<a href="?exec=ga&id_ga=#ID">
+					#LIEN
+				</a>
+				 <a href="?exec=ga&delete=ok&id=#ID" style="float: right;">supprimer</a>
+			</li>
+		</BOUCLE_ga_edi>
+	</ul>
+</B_ga_edi>
+	<p>Aucun lien &eacute;diteur ne dispose d'un code Google Analytics</p>
+<//B_ga_edi>

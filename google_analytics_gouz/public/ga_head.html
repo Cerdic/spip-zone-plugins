@@ -1,0 +1,39 @@
+#CACHE{0}
+<script type="text/javascript">
+	var pageTracker;
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	//	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	jQuery(window).load(function () {
+		<BOUCLE_sit_ga(GA) {objet=sit}>
+			try {
+				pageTracker = _gat._getTracker("#CODE");
+				pageTracker._trackPageview();
+			} catch(err) {} 
+		</BOUCLE_sit_ga>
+		jQuery('a').each(function () {
+			var $this = jQuery(this);
+			if ($this.attr('href') != null) {
+				<BOUCLE_doc_ga(GA) {objet=doc}>
+					<BOUCLE_doc_this(DOCUMENTS) {id_document=#ID_OBJET}>
+						if ($this.attr('href').indexOf('#URL_DOCUMENT') != -1) {
+							$this.bind('click', function () {
+								try { 
+									pageTracker._trackPageview('#_doc_ga:CODE');
+								} catch(err) {}
+							});
+						}
+					</BOUCLE_doc_this>
+				</BOUCLE_doc_ga>
+				<BOUCLE_edi_ga(GA) {objet=edi}>
+					if ($this.attr('href').indexOf('#LIEN') != -1) {
+						$this.bind('click', function () {
+							try { 
+								pageTracker._trackPageview('#CODE');
+							} catch(err) {}
+						});
+					}
+				</BOUCLE_edi_ga>
+			}
+		});
+	});
+</script>

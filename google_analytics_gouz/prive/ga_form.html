@@ -1,0 +1,71 @@
+<script type="text/javascript">
+	jQuery(document).ready(function () {
+		<BOUCLE_ga_info(GA) {id=#ENV{id_ga}}>
+			jQuery('#id_objet').val('#ID_OBJET');
+			jQuery('#code').val('#CODE');
+			jQuery('#objet').val('#OBJET');
+			jQuery('#lien').val('#LIEN');
+			jQuery("#idP, #codeP, #lienP, #submitP").show();
+			if ('#OBJET' == 'sit') {
+				jQuery("#idP").hide();
+			}
+			if ('#OBJET' != 'edi') {
+				jQuery("#lienP").hide();
+			}
+			if ('#OBJET' == 'edi') {
+				jQuery("#idP").hide();
+			}
+		</BOUCLE_ga_info>
+		jQuery('select#objet').bind('change', function () {
+			if (jQuery('#objet').val() != "") {
+				if (jQuery('#objet').val() == 'sit') {
+					jQuery("#id_objet").val('0');
+					jQuery("#idP, #lienP").hide();
+					jQuery("#codeP, #submitP").show();
+				}
+				else if (jQuery('#objet').val() == 'edi') {
+					jQuery("#id_objet").val('');
+					jQuery("#idP").hide();
+					jQuery("#codeP, #lienP, #submitP").show();
+				}
+				else {
+					jQuery("#id_objet").val('');
+					jQuery("#lienP").hide();
+					jQuery("#idP, #codeP, #submitP").show();
+				}
+			}
+			else {
+				jQuery("#idP, #codeP, #lienP, #submitP").hide();
+			}
+		});
+	});
+</script>
+<form method="post" action="?exec=ga">
+	<input type="hidden" name="id" value="#ENV{id_ga}" />
+	<p>
+		<label for="objet">Type</label>
+		<select id="objet" name="objet">
+			<option value=""></option>
+			<option value="sit">Site</option>
+			<option value="art">Article</option>
+			<option value="doc">Document</option>
+			<option value="edi">Editeur</option>
+		</select>
+	</p>
+	<p id="idP" style="display:none;">
+		<label for="id_objet">Identifiant</label><br />
+		<input type="text" id="id_objet" name="id_objet" />
+	</p>
+	<p id="lienP" style="display:none;">
+		<label for="code">Lien</label><br />
+		<input type="text" id="lien" name="lien" />
+	</p>
+	<p id="codeP" style="display:none;">
+		<label for="code">Code</label><br />
+		<input type="text" id="code" name="code" />
+	</p>
+	<p id="submitP" style="display:none; text-align: center;">
+		<input type="submit" name="validation" value="Valider" />
+	</p>
+
+</form>
