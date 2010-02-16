@@ -26,7 +26,8 @@
 	]
 
 	<!--#navigation-->
-	[<a href="(#ENV{retour,''})"><:retour:> [(#ENV{retour}|joli_repertoire)]</a>]
+	[<a class="retour" href="(#ENV{retour,''})"><:retour:> [<span>(#ENV{retour}|replace{#URL_SITE_SPIP,''})</span>]</a>]
+	[<a class="retour" href="(#ENV{retour,''}|parametre_url{var_mode,inclure})"><:retour:> <span>var_mode=inclure</span></a>]	
 	<div class="cadre cadre-info">
 	<:skeleditor:skeleditor_description:>
 	<p><strong>[(#GET{path}|joli_repertoire)]</strong></p>

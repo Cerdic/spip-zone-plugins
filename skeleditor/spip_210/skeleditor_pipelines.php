@@ -51,11 +51,13 @@ function skeleditor_extraire_css($texte){
 function skeleditor_affichage_final($texte){
 	if (isset($_COOKIE['spip_admin']) AND $GLOBALS['html']){
 		if ($GLOBALS['var_inclure']){
-			$url = generer_url_ecrire('skeleditor','retour='.parametre_url(self(),'var_mode','inclure').'&f=');
-			$texte .= "<script>jQuery(function(){jQuery('.inclure_blocs h6:first-child').each(function(){
-				jQuery(this).html(\"<a href='$url\"+jQuery(this).html()+\"'>\"+jQuery(this).html()+'</a>');
-			})});</script>";
-
+			$retour = url_absolue(self());
+			$url = generer_url_ecrire('skeleditor','retour='.$retour.'&f=');			
+			$inserer = "<script>jQuery(function(){jQuery('.inclure_blocs h6:first-child').each(function(){
+				jQuery(this).html(\"<a href='$url\"+jQuery(this).html()+\"'>\"+jQuery(this).html()+'<'+'/a>');
+			})});</script></body>";
+			$texte = preg_replace(",</body>,",$inserer,$texte);
+			
 			$css = skeleditor_extraire_css($texte);
 			$lienplus = array();
 			foreach($css as $src){
@@ -64,7 +66,7 @@ function skeleditor_affichage_final($texte){
 					$src = find_in_path($src."."._EXTENSION_SQUELETTES);
 				if ($src)
 					$lienplus[] = "<a href='$url".urlencode($src)."'"
-			.">".basename($src)."</a>";
+			.">".basename($src)."<\/a>";
 			}
 			if (count($lienplus)){
 				$lienplus = implode('<br />',$lienplus);
@@ -73,10 +75,11 @@ function skeleditor_affichage_final($texte){
 
 		} else {
 			$lienplus = "<a href='".parametre_url(self(),'var_mode','inclure')."' class='spip-admin-boutons' "
-			."id='inclure'>"._T('skeleditor:squelettes')."</a>";
+			."id='inclure'>"._T('skeleditor:squelettes')."<\/a>";
 		}
 		if ($lienplus)
-			$texte .= "<script type='text/javascript'>/*<![CDATA[*/jQuery(function(){jQuery('#spip-admin').append(\"$lienplus\");});/*]]>*/</script>";
+			$inserer = "<script type='text/javascript'>/*<![CDATA[*/jQuery(function(){jQuery('#spip-admin').append(\"$lienplus\");});/*]]>*/</script></body>";
+			$texte = preg_replace(",</body>,",$inserer,$texte);
 	}
 	return $texte;
 }
