@@ -52,7 +52,9 @@ function exec_spiplistes_courrier_edit(){
 		, $spip_ecran
 		, $compteur_block
 		;
-		
+	
+	$eol = "\n";
+	
 	$type = _request('type');
 	$id_courrier = intval(_request('id_courrier'));
 
@@ -223,23 +225,23 @@ function exec_spiplistes_courrier_edit(){
 		
 	$page_result .= ""
 		// texte introduction a placer avant le patron et sommaire 
-		. "<div class='boite-generer-option'>\n"
-		. "<label class='verdana2'>"
-		. "<input type='checkbox' id='avec_intro' name='avec_intro' value='non' />"
+		. '<div class="boite-generer-option">'.$eol
+		. '<label class="verdana2">'
+		. '<input type="checkbox" id="avec_intro" name="avec_intro" value="non" />'
 		. _T('spiplistes:avec_introduction')
-		. "</label>\n"
-		. "<div id='choisir_intro' class='option'>"
-		. "<label class='verdana2' style='display:block;' for='message_intro'>"
-		. _T('spiplistes:introduction_du_courrier_').":</label>\n"
+		. '</label>'.$eol
+		. '<div id="choisir_intro" class="option">'.$eol
+		. '<label class="verdana2" style="display:block;" for="message_intro">'
+		. _T('spiplistes:introduction_du_courrier_').':</label>'.$eol
 		. afficher_barre('document.formulaire_courrier_edit.message_intro')
-		. "<textarea id='message_intro' name='message_intro' ".$GLOBALS['browser_caret']." rows='5' cols='40' wrap='soft' style='width:100%;'>\n"
-		. "</textarea>\n"
-		. "</div>\n"
-		. "</div>\n"
+		. '<textarea id="message_intro" name="message_intro" class="barre_inserer" '.$GLOBALS['browser_caret'].' rows="5" cols="40" wrap="soft" style="width:100%">'.$eol
+		. '</textarea>'
+		. '</div>'.$eol
+		. '</div>'.$eol
 		;
 		
 	// selection du patron
-	$page_result .= ""
+	$page_result .= ''
 		. "<div class='boite-generer-option'>\n"
 		. "<label class='verdana2'>"
 		. "<input type='checkbox' id='avec_patron' name='avec_patron' value='non' />"
@@ -334,20 +336,20 @@ function exec_spiplistes_courrier_edit(){
 		
 	//
 	// bloc du courrier (titre, texte), toujours visible
-	$page_result .= ""
-		. "<label for='texte_courrier'>"._T('spiplistes:texte_courrier')."</label>\n"
+	$page_result .= ''
+		. '<label for="texte_courrier">'._T('spiplistes:texte_courrier').'</label>'
 		. afficher_barre('document.formulaire_courrier_edit.message')
-		. "<textarea id='texte_courrier' name='message' ".$GLOBALS['browser_caret']." class='formo' rows='20' cols='40' wrap=soft>\n"
+		. '<textarea id="texte_courrier" name="message" '.$GLOBALS['browser_caret'].' class="barre_inserer formo" rows="20" cols="40" wrap=soft>'.$eol
 		. $texte
-		. "</textarea>\n"
-		. (!$id_courrier ? "<input type='hidden' name='new' value=\"oui\" />\n" : "")
+		. '</textarea>'.$eol
+		. (!$id_courrier ? '<input type="hidden" name="new" value="oui" />'.$eol : '')
 		//
-		. "<p style='text-align:right;'>\n"
-		. "<input type='submit' onclick='this.value=\"oui\";' id='btn_courrier_edit' "
-			. " name='btn_courrier_valider' value='"._T('bouton_valider')."' class='fondo' /></p>\n"
+		. '<p style="text-align:right;">'.$eol
+		. '<input type="submit" onclick="this.value=\'oui\';" id="btn_courrier_edit" '
+			. ' name="btn_courrier_valider" value="'._T('bouton_valider').'" class="fondo" /></p>'.$eol
 		//
 		// fin formulaire
-		. "</form>\n"
+		. '</form>'.$eol
 		. fin_cadre_formulaire(true)
 		;
 	
