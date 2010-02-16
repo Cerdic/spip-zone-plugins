@@ -39,6 +39,11 @@ function get_liste_administrateurs() {
 		count($admins)?join(', ', $admins):_T('couteauprive:variable_vide'));
 }
 
+// Polices disponibles
+function get_liste_fonts() {
+	return array_keys(find_all_in_path('polices/', '\w+\.ttf$'));
+}
+
 // Montrer le fichier mes_options.php en cours
 function show_file_options() {
 	return cs_canonicalize(str_replace("../", "", _DIR_RESTREINT_ABS).cs_spip_file_options(3));

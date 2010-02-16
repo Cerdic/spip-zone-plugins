@@ -283,6 +283,7 @@ function couteau_suisse_porte_plume_cs_pre_charger($flux){
 // flux['outil'] est l'id de l'outil, $flux['actif'] est l'etat de l'outil, flux['texte'] est le texte de description
 function couteau_suisse_pre_description_outil($flux) {
 	global $cs_metas_pipelines;
+	$id = &$flux['outil']; $texte = &$flux['texte'];
 	if(isset($cs_metas_pipelines['pre_description_outil']))
 		eval($cs_metas_pipelines['pre_description_outil']);
 	return $flux;
