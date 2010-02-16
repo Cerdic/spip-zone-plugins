@@ -29,7 +29,7 @@
                                                    display: block;
                                                    [float: (#CONFIG{top_bando/emplacement_titre});]
                                                    [width: (#CONFIG{top_bando/largeur_titre})px;]
-                                                   [padding-top: (#GET{marge_sup_titre})px;]
+                                                   [padding-top: (#CONFIG{top_bando/marge_sup_titre})px;]
                                                    ">(#MODELE{typo}{texte=[(#GET{titre})],
                                                                     couleur=[(#CONFIG{top_bando/couleur_principale_texte})],
                                                                     taille=[(#CONFIG{top_bando/taille_police})],
@@ -41,7 +41,7 @@
                                                    display: block;
                                                    [float: (#CONFIG{top_bando/emplacement_titre});]
                                                    [width: (#CONFIG{top_bando/largeur_titre})px;]
-                                                   [padding-top: (#GET{marge_sup_titre})px;]
+                                                   [padding-top: (#CONFIG{top_bando/marge_sup_titre})px;]
                                                    ">(#GET{titre})</strong>]
             })]
             ,
@@ -50,7 +50,7 @@
                                                display: block;
                                                [float: (#CONFIG{top_bando/emplacement_titre});]
                                                [width: (#CONFIG{top_bando/largeur_titre})px;]
-                                               [padding-top: (#GET{marge_sup_titre})px;]
+                                               [padding-top: (#CONFIG{top_bando/marge_sup_titre})px;]
                                                ">(#GET{titre})</strong>]
         })]
     ]
