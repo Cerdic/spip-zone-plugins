@@ -240,7 +240,7 @@ function exec_spiplistes_courrier_edit(){
 		. '<label class="verdana2" style="display:block;" for="message_intro">'
 		. _T('spiplistes:introduction_du_courrier_').':</label>'.$eol
 		. afficher_barre('document.formulaire_courrier_edit.message_intro')
-		. '<textarea id="message_intro" name="message_intro" class="barre_inserer" '.$GLOBALS['browser_caret'].' rows="5" cols="40" wrap="soft" style="width:100%">'.$eol
+		. '<textarea id="message_intro" name="message_intro" '.$GLOBALS['browser_caret'].' rows="5" cols="40" wrap="soft" style="width:100%">'.$eol
 		. '</textarea>'
 		. '</div>'.$eol
 		. '</div>'.$eol
