@@ -232,7 +232,8 @@ function formulaires_contact_traiter_dist($id_auteur='',$tracer=''){
 	
 	// Les infos supplémentaires
 	$champs_possibles = contact_infos_supplementaires();
-	$champs_choisis = lire_config('contact/champs');
+	$champs_mini_config = array('mail', 'sujet', 'texte');
+	$champs_choisis = lire_config('contact/champs',$champs_mini_config);
 	if (is_array($champs_choisis)){
 		foreach($champs_choisis as $champ){
 			if ($reponse_champ = _request($champ)){
