@@ -158,7 +158,7 @@ function notation_recalculer_total($objet,$id_objet){
 
 function notation_calculer_total($objet, $id_objet){
 
-	$ponderation = lire_config('notation/ponderation',30);
+	$ponderation = notation_get_ponderation();
 
 	// Calculer les moyennes
 	// cf critere {notation}

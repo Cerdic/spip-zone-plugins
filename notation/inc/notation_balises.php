@@ -113,7 +113,8 @@ function notation_calculer_id($p){
 	$objet = objet_type($boucle->type_requete);
 	$id_table = $boucle->id_table . '.' . $boucle->primary;
 
-	$ponderation = lire_config('notation/ponderation',30);
+	include_spip('inc/notation');
+	$ponderation = notation_get_ponderation();
 	$boucle->select[]= 'COUNT(notations.note) AS nombre_votes';
 	$boucle->select[]= 'ROUND(AVG(notations.note),2) AS moyenne';
 	$boucle->select[]= 'ROUND(AVG(notations.note)*(1-EXP(-5*COUNT(notations.note)/'.$ponderation.')),2) AS moyenne_ponderee';
