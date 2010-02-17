@@ -2,6 +2,12 @@
 [(#SET{top, [(#CONFIG{top_bando/calage_top_recadrage}|=={centrer}|?{center,top=[(#CONFIG{top_bando/calage_top_recadrage})]})]})]
 [(#SET{couleur, [(#CONFIG{top_bando/couleur_principale}|top_bando_suprime_diese)]})]
 [(#SET{hauteur, [(#CONFIG{top_bando/hauteur_bando})]})]
+[(#SET{hauteur_logo,[(#CONFIG{top_bando/redimensionner_logo}|=={oui}|?{[(#CONFIG{top_bando/hauteur_logo})],[(#GET{hauteur})]})]})]
+[(#SET{Tb, #ARRAY{1,top,2,right,3,bottom,4,left}})]
+[(#SET{strB, ''})]
+<BOUCLE_bordures(POUR){tableau #GET{Tb}}>
+	[(#SET{strB, [(#GET{strB}) ]border-#VALEUR: [(#CONFIG{top_bando/style_bordure_#VALEUR}) ][(#CONFIG{top_bando/couleur_bordure_#VALEUR}) ][(#CONFIG{top_bando/epaisseur_bordure_#VALEUR})px]; })]
+</BOUCLE_bordures>
 <div class="logo_site">
 		<a rel="start home" href="#URL_SITE_SPIP/" title="<:accueil_site:>" class="accueil"
        style="background: [(#CONFIG{top_bando/utiliser_bando}|=={oui}|oui) url([(#LOGO_SITE_SPIP_SURVOL||image_recadre{0,#GET{hauteur},left=0 #GET{top},#GET{couleur}}|extraire_attribut{src})]) ] 
@@ -11,10 +17,15 @@
                           [color: (#CONFIG{top_bando/couleur_principale_texte});]
                           [height: (#GET{hauteur})px;]
                           width: 100%;
-                          display: block;">
+                          display: block;
+                          [(#CONFIG{top_bando/toutes_bordures_identiques}|=={oui}|?{
+                          	  border: [(#CONFIG{top_bando/style_bordure_unique})] [(#CONFIG{top_bando/couleur_bordure_unique})] [(#CONFIG{top_bando/epaisseur_bordure_unique})px];
+                              ,
+                              [(#GET{strB})]
+                          })]">
                            
 	  [(#CONFIG{top_bando/utiliser_logo}|=={oui}|oui)
-      [<img src="(#LOGO_SITE_SPIP||image_reduire{0,[(#GET{hauteur})]}|extraire_attribut{src})"
+      [<img src="(#LOGO_SITE_SPIP||image_reduire{0,[(#GET{hauteur_logo})]}|extraire_attribut{src})"
       	   [ alt="(#NOM_SITE_SPIP|attribut_html)"]
            [ title="(#NOM_SITE_SPIP|attribut_html)"]
            [ style="float: (#CONFIG{top_bando/place_logo});"]/>]

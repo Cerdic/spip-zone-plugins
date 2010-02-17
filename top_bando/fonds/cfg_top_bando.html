@@ -14,7 +14,6 @@ voir <a href="http://www.spip-contrib.net/-Autorite-">la documentation</a>. -->
 modifier ces param&#232;tres.  -->
 ]
 
-
 <!-- descriptif=
 <h4><:topbando:descriptif_configuration:></h4>
 -->
@@ -24,33 +23,41 @@ modifier ces param&#232;tres.  -->
 	<style type="text/css">
 	table.def td{padding-left:1em; padding-right:1em;}
   .previsu_titre:hover, .previsu_logo:hover, .oeil_voir:hover { cursor: pointer; }
+  #bando_logo, #bando_titre { border: solid 1px #DDD; }
 	</style>
 
 -->
 #CACHE{0}
-<!-- 
 [(#SET{largeur_entete,[(#ENV{largeur_entete}|=={100%}|?{[(#LOGO_SITE_SPIP_SURVOL||largeur|sinon{2000})],[(#ENV{largeur_entete,[(#LOGO_SITE_SPIP_SURVOL||largeur|sinon{2000})]})]})]})]<br>let: #GET{largeur_entete}
-[(#SET{hauteur_entete,[(#ENV{hauteur_entete,[(#LOGO_SITE_SPIP_SURVOL||hauteur|sinon{200})]})]})]<br>het: #GET{hauteur_entete}
+[(#REM) attention! là y'a une mauvaise bidouille entre hauteur bandeau et hauteur entete tant que les  sont confondus...!!!]
+[(#SET{hauteur_entete,[(#ENV{hauteur_bando,[(#LOGO_SITE_SPIP_SURVOL||hauteur|sinon{200})]})]})]<br>het: #GET{hauteur_entete}
 
 [(#SET{largeur_bando,[(#LOGO_SITE_SPIP_SURVOL||largeur|sinon{[(#GET{largeur_entete})]})]})]<br>lb: #GET{largeur_bando}
 [(#SET{hauteur_bando,[(#LOGO_SITE_SPIP_SURVOL||hauteur|sinon{[(#GET{hauteur_entete})]})]})]<br>hb: #GET{hauteur_bando}
 
+
 [(#SET{fact_reduc, [(#GET{largeur_bando}|>={[(#GET{largeur_entete})]}|?{[(#VAL{500}|div{[(#GET{largeur_bando})]})],[(#VAL{500}|div{[(#GET{largeur_entete})]})]})]})]<br>fact: #GET{fact_reduc}
 
+[(#SET{largeur_entete_reduite,[(#GET{largeur_entete}|mult{[(#GET{fact_reduc})]})]})]<br>ler: #GET{largeur_entete_reduite}
 [(#SET{hauteur_bando_reduite,[(#GET{hauteur_bando}|mult{[(#GET{fact_reduc})]})]})]<br>hbr: #GET{hauteur_bando_reduite}
 [(#SET{hauteur_entete_reduite,[(#GET{hauteur_entete}|mult{[(#GET{fact_reduc})]})]})]<br>her: #GET{hauteur_entete_reduite}
-[(#SET{largeur_entete_reduite,[(#GET{largeur_entete}|mult{[(#GET{fact_reduc})]})]})]<br>ler: #GET{largeur_entete_reduite}
 
 [(#SET{hauteur_recadre,[(#ENV{hauteur_bando,240}|mult{[(#GET{hauteur_bando_reduite})]}|div{[(#GET{hauteur_bando})]}|round)]})]<br>hrec: #GET{hauteur_recadre}
 [(#SET{topcentrer,[(#GET{hauteur_bando_reduite}|moins{[(#GET{hauteur_recadre})]}|div{2}|round)]})]<br>topcentrer: #GET{topcentrer}
 [(#SET{top,[(#ENV{calage_top_recadrage,centrer}|=={centrer}|?{[(#GET{topcentrer})],[(#ENV{calage_top_recadrage}|mult{[(#GET{fact_reduc})]})]})]})]<br>top: #GET{top}
 
+[(#SET{hauteur_logo,[(#ENV{redimensionner_logo}|=={oui}|?{[(#ENV{hauteur_logo,[(#GET{hauteur_entete})]})],[(#GET{hauteur_entete})]})]})]<br>hl: #GET{hauteur_logo}
+[(#SET{proportion_logo,[(#LOGO_SITE_SPIP||largeur|div{[(#LOGO_SITE_SPIP||hauteur)]})]})]<br>pl: #GET{proportion_logo}
+[(#SET{largeur_logo,[(#GET{hauteur_logo}|mult{[(#GET{proportion_logo})]}|round)]})]<br>ll: #GET{largeur_logo}
+[(#SET{hauteur_logo_reduite,[(#GET{hauteur_logo}|mult{[(#GET{fact_reduc})]}|round)]})]<br>hlr: #GET{hauteur_logo_reduite}
+[(#SET{largeur_logo_reduite,[(#GET{largeur_logo}|mult{[(#GET{fact_reduc})]}|round)]})]<br>llr: #GET{largeur_logo_reduite}
+
 [(#SET{taille_police_reduite, [(#ENV{taille_police}|mult{[(#GET{fact_reduc})]})]})]<br>tpr: #GET{taille_police_reduite}
 [(#SET{largeur_titre_reduite, [(#ENV{largeur_titre}|mult{[(#GET{fact_reduc})]})]})]<br>ltr: #GET{largeur_titre_reduite}
 [(#SET{marge_sup_titre_reduite, [(#ENV{marge_sup_titre}|mult{[(#GET{fact_reduc})]})]})]<br>mstr: #GET{marge_sup_titre_reduite}
 
-
 [(#SET{titre,[(#ENV{titre_bando}|=={titre_spip}|?{[(#NOM_SITE_SPIP)],[(#ENV{complement_nom_site})]})]})]
+<!-- 
 -->
 <script type='text/javascript' src='#CHEMIN{prive/javascript/async_upload.js}'></script>
 [(#VAL**|affiche_upload)]
@@ -60,6 +67,9 @@ modifier ces param&#232;tres.  -->
         if (jQuery("#titre_oui").attr("checked") == true)
         	jQuery("#details_titre").show();
         else jQuery("#details_titre").hide();
+        if (jQuery("#redimensionner_logo_non").attr("checked") == true)
+            jQuery("#voir_redimensionner_logo").hide();
+        else jQuery("#voir_redimensionner_logo").show();
     }
     
     function calages(){
@@ -73,17 +83,47 @@ modifier ces param&#232;tres.  -->
         this.hBando = hbando;
     }
     
+    function gerer_bordures(){
+        if (jQuery("input[name='toutes_bordures_identiques']:checked").val() == 'oui') {
+        	jQuery("#voir_bordure_unique").show();
+            jQuery("#voir_bordure_top, #voir_bordure_right, #voir_bordure_bottom, #voir_bordure_left").hide();
+            var bstyle = jQuery("#style_bordure_unique").val();
+            var bcoul = jQuery("#couleur_bordure_unique").val();
+            var bep = jQuery("#epaisseur_bordure_unique").val() + 'px';
+            jQuery("#bando_logo, #bando_titre").css({'border': bstyle + ' ' + bcoul + ' ' + bep});
+        }
+        else {
+        	jQuery("#voir_bordure_unique").hide();
+            jQuery("#voir_bordure_top, #voir_bordure_right, #voir_bordure_bottom, #voir_bordure_left").show();
+            Tb = ['top','right','bottom','left'];
+            for (i in Tb){
+            	var bstyle = jQuery("#style_bordure_" + Tb[i]).val();
+                var bcoul = jQuery("#couleur_bordure_" + Tb[i]).val();
+                var bep = jQuery("#epaisseur_bordure_" + Tb[i]).val() + 'px';
+                jQuery("#bando_logo, #bando_titre").css('border-' + Tb[i], bstyle + ' ' + bcoul + ' ' + bep);
+            }
+        }
+    }
+        
     jQuery(document).ready(function(){
+     // initialisations
         initialiser_params();
+        gerer_bordures();
+        calages();
+        
      // bloc bando   
-        jQuery("input[@name='utiliser_bando']").change(function(){
-            if (jQuery("input[@name='utiliser_bando']:checked").val() == 'oui') 
+        jQuery("input[name='utiliser_bando']").change(function(){
+            if (jQuery("input[name='utiliser_bando']:checked").val() == 'oui') 
             	jQuery("#bando, #bando_logo, #bando_titre").css({'background-image': 'url([(#LOGO_SITE_SPIP_SURVOL||image_reduire{500,0}|extraire_attribut{src})])'});
             else jQuery("#bando, #bando_logo, #bando_titre").css({'background-image': 'none'});
         });
         jQuery("#hauteur_bando").change(function(){
             dims = new calages;
-            jQuery("#recadre, #bando_logo, #bando_titre, #img_logo, #img_logo_titre").css({height: dims.hBando + "px"});
+            jQuery("#recadre, #bando_logo, #bando_titre").css({height: dims.hBando + "px"});
+            if (jQuery("#redimensionner_logo_non").attr("checked") == true){
+                var ll = Math.round(dims.hBando * [(#GET{proportion_logo})]);
+                jQuery("#img_logo, #img_logo_titre").css({'height': dims.hBando + "px", 'width': ll + 'px'});
+            }
             jQuery("#recadre").css({top: dims.V + "px"});
             jQuery("#bando_logo, #bando_titre").css({'background-position' : dims.H + ' -'+ dims.V + "px"});
         });
@@ -92,20 +132,39 @@ modifier ces param&#232;tres.  -->
             jQuery("#recadre").css({top: dims.V + "px"});
             jQuery("#bando_logo, #bando_titre").css({'background-position': dims.H + ' -' + dims.V + 'px'});
         });
-        jQuery("input[@name='calage_horizontal_bando']").change(function(){
+        jQuery("input[name='calage_horizontal_bando']").change(function(){
             dims = new calages;
             jQuery("#bando_logo, #bando_titre").css({'background-position': dims.H + ' -' + dims.V + 'px'});
         });
         
     // bloc logo 
-        jQuery("input[@name='utiliser_logo']").change(function(){
-            if (jQuery("input[@name='utiliser_logo']:checked").val() == 'oui') 
+        jQuery("input[name='utiliser_logo']").change(function(){
+            if (jQuery("input[name='utiliser_logo']:checked").val() == 'oui') 
             	jQuery("#img_logo, #img_logo_titre").css({'display': 'inline'});
             else jQuery("#img_logo, #img_logo_titre").css({'display': 'none'});
         });
-        jQuery("input[@name='place_logo']").change(function(){ 
-        	var cote = jQuery("input[@name='place_logo']:checked").val();
+        jQuery("input[name='place_logo']").change(function(){ 
+        	var cote = jQuery("input[name='place_logo']:checked").val();
             jQuery("#img_logo, #img_logo_titre").css({'float': cote});
+        });
+        jQuery("input[name='redimensionner_logo']").change(function(){
+            if (jQuery("#redimensionner_logo_non").attr("checked") == true){
+                jQuery("#voir_redimensionner_logo").hide();
+                var hl = parseInt(jQuery("#bando_logo").css("height"));
+                var ll = Math.round(hl * [(#GET{proportion_logo})]);
+                jQuery("#img_logo, #img_logo_titre").css({'height': hl + 'px', 'width': ll + 'px'});
+            }
+            else {
+                jQuery("#voir_redimensionner_logo").show();
+                var hl = Math.round(parseInt(jQuery("#hauteur_logo").val()) * [(#GET{fact_reduc})]);
+                var ll = Math.round(hl * [(#GET{proportion_logo})]);
+                jQuery("#img_logo, #img_logo_titre").css({'height': hl + 'px', 'width': ll + 'px'});
+            }
+        });
+        jQuery("#hauteur_logo").change(function(){
+            var hl = Math.round(parseInt(jQuery(this).val()) * [(#GET{fact_reduc})]);
+            var ll = Math.round(hl * [(#GET{proportion_logo})]);
+            jQuery("#img_logo, #img_logo_titre").css({'height': hl + 'px', 'width': ll + 'px'});
         });
         
     // bloc couleurs 
@@ -118,26 +177,29 @@ modifier ces param&#232;tres.  -->
             jQuery("#bando, #bando_logo, #bando_titre").css({'color': coul});
         });
         
+    // les bordures
+        jQuery("input[name='toutes_bordures_identiques'], .change_bordures").change(gerer_bordures);
+        
     // bloc titre
-        jQuery("input[@name='afficher_titre']").change(function(){
-            if (jQuery("input[@name='afficher_titre']:checked").val() == 'oui') 
+        jQuery("input[name='afficher_titre']").change(function(){
+            if (jQuery("input[name='afficher_titre']:checked").val() == 'oui') 
             	jQuery("#details_titre").show();
             else jQuery("#details_titre").hide();
         });
-        jQuery("input[@name='emplacement_titre']").change(function(){
-            var cote = jQuery("input[@name='emplacement_titre']:checked").val();
+        jQuery("input[name='emplacement_titre']").change(function(){
+            var cote = jQuery("input[name='emplacement_titre']:checked").val();
             jQuery("#nom_site_spip").css({'float': cote});
         });
         jQuery("#taille_police").change( function(){ 
         	var taille = Math.round(parseInt(jQuery(this).val()) * [(#GET{fact_reduc})]);
             jQuery("#bando_titre").css({'font-size': taille  +'px'});
         });
-        jQuery("input[@name='alignement_titre']").change(function(){
-            var cote = jQuery("input[@name='alignement_titre']:checked").val();
+        jQuery("input[name='alignement_titre']").change(function(){
+            var cote = jQuery("input[name='alignement_titre']:checked").val();
             jQuery("#bando_titre").css({'text-align': cote});
         });
-        jQuery("input[@name='titre_bando']").change(function(){
-            if (jQuery("input[@name='titre_bando']:checked").val() == 'titre_spip') 
+        jQuery("input[name='titre_bando']").change(function(){
+            if (jQuery("input[name='titre_bando']:checked").val() == 'titre_spip') 
             	jQuery("#nom_site_spip").text("[(#NOM_SITE_SPIP)]");
             else jQuery("#nom_site_spip").text(jQuery("#complement_nom_site").val());
         });
@@ -153,8 +215,8 @@ modifier ces param&#232;tres.  -->
             if (jQuery("#titre_autre").attr("checked") == true) 
                 jQuery("#nom_site_spip").text(jQuery(this).val());
         });
-        jQuery("input[@name='utiliser_image_typo']").change(function(){
-            if (jQuery("input[@name='utiliser_image_typo']:checked").val() == 'oui') 
+        jQuery("input[name='utiliser_image_typo']").change(function(){
+            if (jQuery("input[name='utiliser_image_typo']:checked").val() == 'oui') 
             	jQuery("#voir_justification_titre").hide();
             else jQuery("#voir_justification_titre").show();
         });
@@ -219,6 +281,8 @@ modifier ces param&#232;tres.  -->
         <input type="radio" name="calage_horizontal_bando" value="left" [(#ENV{calage_horizontal_bando}|=={left}|oui) checked="checked"] id="calage_left"/> 
         &nbsp;&nbsp;&nbsp;<input type="radio" name="calage_horizontal_bando" value="center" [(#ENV{calage_horizontal_bando}|=={left}|non) checked="checked"] id="calage_center"/>
         <label><:topbando:centre:></label>
+        &nbsp;&nbsp;&nbsp;<input type="radio" name="calage_horizontal_bando" value="right" [(#ENV{calage_horizontal_bando}|=={right}|non) checked="checked"] id="calage_right"/>
+        <label><:topbando:droite:></label>        
         <br/><small><:topbando:explication_calage_horizontal:></small>      
     </p>
     <p class="details_bando">
@@ -273,6 +337,24 @@ modifier ces param&#232;tres.  -->
         &nbsp;&nbsp;&nbsp;<input type="radio" name="place_logo" value="right" [(#ENV{place_logo}|=={right}|oui) checked="checked"] id="logo_d"/>
         <label><:topbando:droite:></label>
     </p>
+    <p>
+    	<strong><:topbando:taille_logo:> :</strong>
+        <label><:topbando:adaptation_automatique_hauteur_bandeau:></label>
+        <input type="radio" name="redimensionner_logo" value="non" [(#ENV{redimensionner_logo}|=={oui}|non) checked="checked"] id='redimensionner_logo_non'/> 
+        &nbsp;&nbsp;&nbsp;<input type="radio" name="redimensionner_logo" value="oui" [(#ENV{redimensionner_logo}|=={oui}|oui) checked="checked"] id='redimensionner_logo_oui'/>
+        <label><:topbando:taille_logo_imposee:></label>
+    </p>
+    <p id="voir_redimensionner_logo">
+    	<label><:topbando:hauteur_logo:> :</label>
+    	<input type="text" name="hauteur_logo" id="hauteur_logo" value="[(#ENV{hauteur_logo,[(#LOGO_SITE_SPIP||hauteur)]})]" style="width: 80px" class="declenche_oeil" />px 
+        [<img id="hauteur_logo_oeil" src="(#CHEMIN{images/oeil_o.gif})" alt="<:topbando:visualiser:>" class="oeil_voir"/>]
+        <br/><small><:topbando:explication_redimensionnement_proportionnel:></small>
+    	<br/><label><:topbando:marge_superieure_logo:></label>: <input type="text" name="marge_sup_logo" style="width: 40px;" value="[(#ENV{marge_sup_logo,10})]" class="declenche_oeil" id="marge_sup_logo" />px 
+        [<img id="marge_sup_logo_oeil" src="(#CHEMIN{images/oeil_o.gif})" alt="<:topbando:visualiser:>" class="oeil_voir"/>]
+    	&nbsp;&nbsp;&nbsp;<label><:topbando:marge_laterale_logo:></label>: <input type="text" name="marge_laterale_logo" style="width: 40px;" value="[(#ENV{marge_laterale_logo,10})]" class="declenche_oeil" id="marge_laterale_logo" />px 
+        [<img id="marge_laterale_logo_oeil" src="(#CHEMIN{images/oeil_o.gif})" alt="<:topbando:visualiser:>" class="oeil_voir"/>]
+        <br/><small><:topbando:explication_marge_laterale_logo:></small>
+    </p>
 <!--
         <div id="entete_logo" style="border: solid 2px #0F0;
                                  position: relative;
@@ -283,13 +365,23 @@ modifier ces param&#232;tres.  -->
                                  ">
         </div>
 -->        
+    [(#SET{Tb, #ARRAY{1,top,2,right,3,bottom,4,left}})]
+    [(#SET{strB, ''})]
+    <BOUCLE_bordures(POUR){tableau #GET{Tb}}>
+    	[(#SET{strB, [(#GET{strB}) ]border-#VALEUR: [(#ENV{style_bordure_#VALEUR}) ][(#ENV{couleur_bordure_#VALEUR}) ][(#ENV{epaisseur_bordure_#VALEUR})px]; })]
+    </BOUCLE_bordures>
     <div id="bando_logo" style="background: [(#ENV{utiliser_bando}|=={oui}|oui) url([(#LOGO_SITE_SPIP_SURVOL||image_reduire{500,0}|extraire_attribut{src})]) ]
                             [(#ENV{calage_horizontal_bando})] -[(#GET{top})]px [(#ENV{couleur_principale})] no-repeat; 
                             width: 500px; 
-                            height: #GET{hauteur_recadre}px;">
+                            height: #GET{hauteur_recadre}px;
+                            [(#ENV{toutes_bordures_identiques}|=={oui}|?{
+                            	border: [(#ENV{style_bordure_unique})] [(#ENV{couleur_bordure_unique})] [(#ENV{epaisseur_bordure_unique})px];
+                                ,
+                                [(#GET{strB})]
+                            })]">
       [(#CONFIG{top_bando/utiliser_logo}|=={oui}|oui)
-        [<img src="(#LOGO_SITE_SPIP||image_reduire{0,[(#GET{hauteur_recadre})]}|extraire_attribut{src})" alt="logo_site"
-          style="float: [(#ENV{place_logo,left})];" id="img_logo"/>]hrec= [(#GET{hauteur_recadre})]
+        [<img src="(#LOGO_SITE_SPIP||image_reduire{0,[(#GET{hauteur_logo_reduite})]}|extraire_attribut{src})" alt="logo_site"
+          style="float: [(#ENV{place_logo,left})];" id="img_logo"/>]
       ]
     </div>
     <p>
@@ -307,21 +399,51 @@ modifier ces param&#232;tres.  -->
 [(#REM) ------------------------ COULEURS ------------------------------------ ]
 <fieldset>
     <legend><:topbando:choix_teinte_generale:></legend>
-    <p><:topbando:saisir_couleur:>: 
+    <p>
+    	<:topbando:saisir_couleur:>: 
     	<br/><small><:topbando:explication_palette:></small>
-    </p>
-    <table>
-        <tr><td><:topbando:couleur_principale:></td>
-        <td><input type="text" name="couleur_principale" class="palette" id="couleur_principale" 
+    	<br/><strong><:topbando:couleur_principale:></strong>
+        <input type="text" name="couleur_principale" class="palette" id="couleur_principale" 
             value="[(#ENV{couleur_principale,#FFFFFF})]" style="width: 80px" class="declenche_oeil"/>
-            [<img id="couleur_principale_oeil" src="(#CHEMIN{images/oeil_o.gif})" alt="<:topbando:visualiser:>" class="oeil_voir"/>]
-        </td></tr>
-        <tr><td><:topbando:couleur_texte:></td>
-        <td><input type="text" name="couleur_principale_texte" class="palette" id="couleur_principale_texte" 
+        [<img id="couleur_principale_oeil" src="(#CHEMIN{images/oeil_o.gif})" alt="<:topbando:visualiser:>" class="oeil_voir"/>]
+        <br/><strong><:topbando:couleur_texte:></strong>
+        <input type="text" name="couleur_principale_texte" class="palette" id="couleur_principale_texte" 
             value="[(#ENV{couleur_principale_texte,#000000})]" style="width: 80px" class="declenche_oeil" />
-            [<img id="couleur_principale_texte_oeil" src="(#CHEMIN{images/oeil_o.gif})" alt="<:topbando:visualiser:>" class="oeil_voir"/>]
-        </td></tr>
-    </table>
+        [<img id="couleur_principale_texte_oeil" src="(#CHEMIN{images/oeil_o.gif})" alt="<:topbando:visualiser:>" class="oeil_voir"/>]
+    </p>
+</fieldset>
+    
+[(#REM) ------------------------ BORDURES ------------------------------------ ]
+<fieldset>
+    <legend><:topbando:bordures_bandeau:></legend>
+    <p>
+    	<strong><:topbando:toutes_bordures_identiques:>: </strong>
+        <label><:topbando:oui:></label>
+        <input type="radio" name="toutes_bordures_identiques" value="oui" [(#ENV{toutes_bordures_identiques}|=={non}|non) checked="checked"] id='toutes_bordures_identiques_oui' /> 
+        &nbsp;&nbsp;&nbsp;<input type="radio" name="toutes_bordures_identiques" value="non" [(#ENV{toutes_bordures_identiques}|=={non}|oui) checked="checked"] id='toutes_bordures_identiques_non' />
+        <label><:topbando:non:></label>
+        [(#SET{Tbordures, #ARRAY{<:topbando:toutes_bordures:>,unique,<:topbando:haut:>,top,<:topbando:droite:>,right,<:topbando:bas:>,bottom,<:topbando:gauche:>,left}})]
+        [(#SET{Tep, #ARRAY{<:topbando:aucune:>,none,<:topbando:plein:>,solid,<:topbando:tirets:>,dashed,<:topbando:pointilles:>,dotted}})]
+
+        <BOUCLE_b(POUR){tableau #GET{Tbordures}}>
+          <p id="voir_bordure_#VALEUR"><strong>#CLE :</strong> 
+            <br/><:topbando:style:>: <select name="style_bordure_#VALEUR" class="change_bordures declenche_oeil" id="style_bordure_#VALEUR">
+            <BOUCLE_ep(POUR){tableau #GET{Tep}}>
+            	<option value="#VALEUR"[ (#ENV{style_bordure_#_b:VALEUR}|=={#VALEUR}|oui)selected="selected"]>#CLE</option>
+            </BOUCLE_ep>
+            </select>
+        	&nbsp;&nbsp;&nbsp;<:topbando:couleur:>: 
+            <input type="text" name="couleur_bordure_#VALEUR" class="change_bordures palette" id="couleur_bordure_#VALEUR" 
+            value="[(#ENV{couleur_bordure_#VALEUR,#000000})]" style="width: 80px" class="change_bordures"/>[(#ENV{couleur_bordure_#VALEUR})]
+            &nbsp;&nbsp;&nbsp;<:topbando:epaisseur:>: 
+            <input type="text" name="epaisseur_bordure_#VALEUR" class="change_bordures" id="epaisseur_bordure_#VALEUR" 
+            value="[(#ENV{epaisseur_bordure_#VALEUR,1})]" style="width: 40px"/>px
+        	[<img id="style_bordure_#VALEUR_oeil" src="(#CHEMIN{images/oeil_o.gif})" alt="<:topbando:visualiser:>" class="oeil_voir"/>]
+          </p>
+        </BOUCLE_b>
+    </p>
+    
+    
 </fieldset>
 
 [(#REM)------------------------ TITRE SITE ----------------------------------- ]
@@ -367,12 +489,12 @@ modifier ces param&#232;tres.  -->
         <label><:topbando:droite:></label>
     </p>
     <p>
-    	<strong><:topbando:largeur_max_titre:></strong>: <input type="text" name="largeur_titre" style="width: 40px;" value="[(#ENV{largeur_titre,740})]" class="declenche_oeil" id="largeur_titre" />px 
-        [<img id="largeur_titre_oeil" src="(#CHEMIN{images/oeil_o.gif})" alt="<:topbando:visualiser:>" class="oeil_voir"/>]
+    	<strong><:topbando:marge_superieure_titre:></strong>: <input type="text" name="marge_sup_titre" style="width: 40px;" value="[(#ENV{marge_sup_titre,40})]" class="declenche_oeil" id="marge_sup_titre" />px 
+        [<img id="marge_sup_titre_oeil" src="(#CHEMIN{images/oeil_o.gif})" alt="<:topbando:visualiser:>" class="oeil_voir"/>]
     </p>
     <p>
-    	<strong><:topbando:marge_sup_titre:></strong>: <input type="text" name="marge_sup_titre" style="width: 40px;" value="[(#ENV{marge_sup_titre,40})]" class="declenche_oeil" id="marge_sup_titre" />px 
-        [<img id="marge_sup_titre_oeil" src="(#CHEMIN{images/oeil_o.gif})" alt="<:topbando:visualiser:>" class="oeil_voir"/>]
+    	<strong><:topbando:largeur_max_titre:></strong>: <input type="text" name="largeur_titre" style="width: 40px;" value="[(#ENV{largeur_titre,740})]" class="declenche_oeil" id="largeur_titre" />px 
+        [<img id="largeur_titre_oeil" src="(#CHEMIN{images/oeil_o.gif})" alt="<:topbando:visualiser:>" class="oeil_voir"/>]
     </p>
 [(#PLUGIN{choix_police}|oui)
 		<p>
@@ -390,7 +512,12 @@ modifier ces param&#232;tres.  -->
                                      height: #GET{hauteur_recadre}px;
                                      font-size: #GET{taille_police_reduite}px;
                                      text-align: #ENV{alignement_titre};
-                                     color: #ENV{couleur_principale_texte};">
+                                     color: #ENV{couleur_principale_texte};
+                                     [(#ENV{toutes_bordures_identiques}|=={oui}|?{
+                            			border: [(#ENV{style_bordure_unique})] [(#ENV{couleur_bordure_unique})] [(#ENV{epaisseur_bordure_unique})px];
+                                		,
+                                		[(#GET{strB})]
+                            		 })]">
             [<img src="(#LOGO_SITE_SPIP||image_reduire{0,[(#GET{hauteur_recadre})]}|extraire_attribut{src})" alt="logo_site"
                   style="float: [(#ENV{place_logo,left})];" id="img_logo_titre"/>]
             
