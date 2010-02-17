@@ -1,0 +1,24 @@
+<plugin>
+	<nom>Formulaires Uniform</nom>
+	<auteur>ARNO*</auteur>
+	<version>1.0</version>
+	<etat>test</etat>
+	<description>
+		Uniformise certains &eacute;l&eacute;ments de formulaires, en utilisant le [plugin Uniform de PixelMatrix->http://pixelmatrixdesign.com/uniform/].
+		
+		Attention&nbsp;: l&rsquo;affichage est d&eacute;faillant sous MSIE 7 et sous Firefox 2; n'activer ce plugin que si vous &ecirc;tes seul(e) &agrave; utiliser votre site avec un navigateur compatible.
+	</description>
+	<lien></lien> <!-- URI de documentation -->
+	<licence>MIT</licence>
+ 	<necessite id='SPIP' version='[2.0;]' />
+	<prefix>form_uniform</prefix>
+
+	<pipeline>
+		<nom>header_prive</nom>
+		<action>charger_script</action>
+		<inclure>form_uniform.php</inclure>
+	</pipeline>
+
+
+</plugin>
+
