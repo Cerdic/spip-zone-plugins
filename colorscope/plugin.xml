@@ -1,0 +1,24 @@
+<plugin>
+
+	<version>0.1</version>
+	
+	<nom>Colorscope - Colorise les codes hexa</nom>
+	
+	<prefix>colorscope</prefix>
+
+	<auteur>Cyril MARION - &#169; 2010 - [Ateliers CYM->http://www.cym.fr]</auteur>
+	
+    <licence>Licence GNU/GPL</licence>
+
+	<etat>dev</etat>
+
+	<description>Remplace les codes hexa des couleurs dans un texte SPIP, par un bloc de la dite couleur, en rappelant son code &agrave; l'interieur.</description>
+
+	<pipeline>
+		<nom>post_typo</nom>
+		<inclure>colorscope_pipelines.php</inclure>
+	</pipeline>
+	
+	<categorie>divers</categorie>
+	
+</plugin>
