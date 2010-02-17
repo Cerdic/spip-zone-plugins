@@ -86,14 +86,16 @@ function cextras_types_formulaires(){
  */
 function installer_champs_extras($champs, $nom_meta_base_version, $version_cible, $creer_meta=true) {
 	$current_version = 0.0;
+	$ok = true;
 	if ((!isset($GLOBALS['meta'][$nom_meta_base_version]))
 	|| (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){
 		// cas d'une installation
-		creer_champs_extras($champs);
-		if ($creer_meta) {
+		$ok = creer_champs_extras($champs);
+		if ($ok and $creer_meta) {
 			ecrire_meta($nom_meta_base_version,$current_version=$version_cible,'non');
 		}
-	}	
+	}
+	return $ok;
 }
 
 /**
@@ -113,31 +115,54 @@ function creer_champs_extras($champs) {
 	foreach ($champs as $c){ 
 		if ($table = table_objet_sql($c->table)) {
 			$tables[$table] = $table;
+		} else {
+			// ici on est bien ennuye, vu qu'on ne pourra pas creer ce champ.
+			extras_log("Aucune table trouvee pour le champs extras ; il ne pourra etre cree :", true);
+			extras_log($c, true);
 		}
 	}	
 
-	// on met a jour les tables trouvees
-	if ($tables) {
-		// recharger les tables principales et auxiliaires
-		include_spip('base/serial');
-		include_spip('base/auxiliaires');
-		global $tables_principales, $tables_auxiliaires;
-		base_serial($tables_principales);
-		base_auxiliaires($tables_auxiliaires);
-		
-		// inclure les champs extras declares ALORS que le pipeline
-		// n'est pas encore actif : important lorsqu'on active
-		// en meme temps CE2 et un plugin dependant
-		// et non l'un apres l'autre
-		if (!defined('_CHAMPS_EXTRAS_DECLARES')) {
-			include_spip('base/cextras');
-			$tables_principales = cextras_declarer_tables_principales($tables_principales);
-		}
-
-		// executer la mise a jour
-		include_spip('base/create');
-		maj_tables($tables);
+	if (!$tables) {
+		return false;
 	}
+	
+	// on met a jour les tables trouvees
+	// recharger les tables principales et auxiliaires
+	include_spip('base/serial');
+	include_spip('base/auxiliaires');
+	global $tables_principales, $tables_auxiliaires;
+	base_serial($tables_principales);
+	base_auxiliaires($tables_auxiliaires);
+	
+	// inclure les champs extras declares ALORS que le pipeline
+	// n'est pas encore actif : important lorsqu'on active
+	// en meme temps CE2 et un plugin dependant
+	// et non l'un apres l'autre
+	if (!defined('_CHAMPS_EXTRAS_DECLARES')) {
+		include_spip('base/cextras');
+		$tables_principales = cextras_declarer_tables_principales($tables_principales);
+	}
+
+	// executer la mise a jour
+	include_spip('base/create');
+	maj_tables($tables);
+
+	// pour chaque champ a creer, on verifie qu'il existe bien maintenant !
+	$trouver_table = charger_fonction('trouver_table','base');
+	$trouver_table(''); // recreer la description des tables.
+	$retour = true;
+	foreach ($champs as $c){ 
+		if ($table = table_objet_sql($c->table)) {
+			$desc = $trouver_table($table);
+			if (!isset($desc['field'][$c->champ])) {
+				extras_log("Le champ extra '" . $c->champ . "' sur $table n'a pas ete cree :(", true);
+				$retour = false;
+			}
+		} else {
+			$retour = false;
+		}
+	}
+	return $retour;
 }
 
 /**

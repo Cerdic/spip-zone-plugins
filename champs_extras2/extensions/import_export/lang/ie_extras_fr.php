@@ -19,6 +19,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		
 	//I
 	'importation_effectuee' => 'Importation effectu&eacute;e',
+	'importation_erreurs' => "Certains champs extras n'ont pas pu &ecirc;tre import&eacute;s.
+				Voir spip.log pour plus d'informations.",
 	'import_export' => 'Import/Export de Champs Extras',
 	'importer_exporter' => 'Importer / Exporter',
 	'import_export_lien' => 'Importer ou Exporter des descriptions de champs extras',

@@ -36,10 +36,15 @@ function formulaires_importer_champs_extras_traiter_dist(){
 	}	
 	
 	// creer les champs manquants
-	include_spip('inc/cextras_gerer'); 
-	creer_champs_extras($champs);
+	include_spip('inc/cextras_gerer');
+	$retour = array('editable' => true);
+	if (creer_champs_extras($champs)) {
+		$retour['message_ok'] = _T('ie_extras:importation_effectuee');
+	} else {
+		$retour['message_erreur'] = _T('ie_extras:importation_erreurs');
+	}
 	
-	return array('editable' => true, 'message_ok'=>_T('ie_extras:importation_effectuee'));
+	return $retour;
 }
 
 ?>

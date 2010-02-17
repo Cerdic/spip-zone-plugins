@@ -21,6 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_deja_existant' => 'Un champ homonyme existe déjà pour cette table.',
 	//E
 	'erreur_action' => 'Action @action@ inconnue.',
+	'erreur_enregistrement_champ' => 'Probl&egrave;me de cr&eacute;ation du champ extra.',
 	//I
 	'icone_creer_champ_extra' => 'Créer un nouveau champ extra',
 	'info_modifier_champ_extra' => 'Modifier champ extra',

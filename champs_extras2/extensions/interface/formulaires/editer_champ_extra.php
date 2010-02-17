@@ -116,33 +116,48 @@ function formulaires_editer_champ_extra_traiter_dist($extra_id='new', $redirect=
 
 	// ajout du champ ou modification du champ extra de meme id.
 	$extra = new ChampExtra($extra);
+	
+	// creer le champ s'il est nouveau :
 	if ($new) {
-		$extras[] = $extra;
+		$extras_old = $extras;
+		$extras[] = $extra; // ajouter le champ cree
 	} else {
 		foreach($extras as $i=>$e) {
 			if ($e->get_id() == $extra_id) {
 				$extras[$i] = $extra;
 				break;
 			}
-		}		
+		}
 	}
-
-	// l'enregistrer
-	iextras_set_extras($extras);
 	
-	// creer le champ s'il est nouveau :
-	if ($new) {
-		creer_champs_extras($extra);
-		extras_log("Creation d'un nouveau champ par auteur ".$GLOBALS['auteur_session']['id_auteur'],true);
-		extras_log($extra, true);
-
-	}
+	// l'enregistrer les modifs
+	iextras_set_extras($extras);
 	
 	$res = array(
 		'editable' => true,
-		'message_ok' => _T('iextras:champ_sauvegarde'),
 	);
-	if ($redirect) $res['redirect'] = $redirect;
+		
+	// creer le champ s'il est nouveau :
+	if ($new) {
+		extras_log("Creation d'un nouveau champ par auteur ".$GLOBALS['auteur_session']['id_auteur'], true);
+		if (creer_champs_extras($extra)) {
+			$res['message_ok'] = _T('iextras:champ_sauvegarde');
+		} else {
+			extras_log("! Aie ! Erreur de creation du champ", true);
+			$res['message_erreur'] = _T('iextras:erreur_enregistrement_champ');
+			// on remet l'ancienne declaration
+			iextras_set_extras($extras_old);
+		}
+		extras_log($extra, true);
+	} else {
+		// modification
+		$res['message_ok'] = _T('iextras:champ_sauvegarde');
+	}
+		
+
+	if ($redirect and !isset($res['message_erreur'])) {
+		$res['redirect'] = $redirect;
+	}
 
 	return $res;
 }
