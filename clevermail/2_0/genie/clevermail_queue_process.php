@@ -40,6 +40,7 @@ function genie_clevermail_queue_process_dist($t, $verbose = 'no') {
 		    $template['@@DESCRIPTION@@'] = propre($list['lst_comment']);
 			$template['@@FORMAT_INSCRIPTION@@'] = $mode;
 			$template['@@EMAIL@@'] = $to;
+			$template['@@URL_SITE@@'] = $GLOBALS['meta']['adresse_site'];
 
 			// corrige le lien de desinscription
 			$template[dirname($list['lst_url_html']).'/@@URL_DESINSCRIPTION@@'] = '@@URL_DESINSCRIPTION@@';
