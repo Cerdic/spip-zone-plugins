@@ -43,12 +43,23 @@ function generer_saisie($champ, $env){
 	}
 	// Sinon on ne sélectionne que quelques éléments importants
 	else{
-		// On récupère de l'environnement, la valeur actuelle du champ
-		$contexte['valeur'] = $env[$contexte['nom']];
-		
 		// On récupère la liste des erreurs
 		$contexte['erreurs'] = $env['erreurs'];
 	}
+	
+	// Dans tous les cas on récupère de l'environnement la valeur actuelle du champ
+	// Si le nom du champ est un tableau indexé, il faut parser !
+	if (preg_match('/([\w]+)((\[[\w]+\])+)/', $contexte['nom'], $separe)){
+		$contexte['valeur'] = $env[$separe[1]];
+		preg_match_all('/\[([\w]+)\]/', $separe[2], $index);
+		// On va chercher au fond du tableau
+		foreach($index[1] as $cle){
+			$contexte['valeur'] = $contexte['valeur'][$cle];
+		}
+	}
+	// Sinon la valeur est juste celle du nom
+	else
+		$contexte['valeur'] = $env[$contexte['nom']];
 	
 	// On génère la saisie
 	return recuperer_fond(
