@@ -259,6 +259,8 @@ function fixer_fichier_upload($file){
 		$row['fichier'] = copier_document($row['extension'], $file['name'], $file['tmp_name']);
 		return $row;
 	}
+	// creer un zip comme demande
+	// pour encapsuler un fichier dont l'extension n'est pas supportee
 	elseif($row==='zip'){
 		
 		$row = array('extension'=>'zip','inclus'=>false);
@@ -274,11 +276,12 @@ function fixer_fichier_upload($file){
 		$tmp = $tmp_dir.'/'.translitteration($file['name']);
 		
 		$file['name'] .= '.zip'; # conserver l'extension dans le nom de fichier, par exemple toto.js => toto.js.zip
-		
-		deplacer_fichier_upload($file['tmp_name'], $tmp);
+
+		// deplacer le fichier tmp_name dans le dossier tmp
+		deplacer_fichier_upload($file['tmp_name'], $tmp, true);
 		
 		include_spip('inc/pclzip');
-		$source = _DIR_TMP . 'archive.zip';
+		$source = _DIR_TMP . $tmp_dir . '.zip';
 		$archive = new PclZip($source);
 		
 		$v_list = $archive->create($tmp,
@@ -291,8 +294,8 @@ function fixer_fichier_upload($file){
 			return false;
 		}
 		
-		$row['fichier']  = copier_document($row['extension'], $file['name'], $file['tmp_name']);
-		spip_unlink($file['tmp_name']);
+		$row['fichier']  = copier_document($row['extension'], $file['name'], $source);
+		spip_unlink($source);
 		return $row;
 	}
 	

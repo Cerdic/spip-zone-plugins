@@ -165,7 +165,7 @@ function formulaires_joindre_document_traiter_dist($id_document='new',$id_objet=
 		include_spip('inc/joindre_document');
 		$files = joindre_trouver_fichier_envoye();
 
-		$nouveaux_doc = action_ajouter_documents_dist($id_document,$files,$objet,$id_objet,$mode);
+		$nouveaux_doc = $ajouter_documents($id_document,$files,$objet,$id_objet,$mode);
 
 		if (defined('_tmp_dir'))
 			effacer_repertoire_temporaire(_tmp_dir);
