@@ -85,6 +85,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'msg_supprimer_message' => 'Supprimer le message',
 	'msg_messagerie' => 'Messagerie de contact',
 	
+	'preselection' => 'D&eacute;cocher tous les items de la liste de destinataires',
+	
 	'titre' => 'Formulaire de contact'
 );
 
