@@ -4,6 +4,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function formulaires_construire_formulaire_charger($identifiant, $formulaire_initial=array()){
+	include_spip('inc/saisies');
 	$contexte = array();
 	
 	// On ajoute un préfixe devant l'identifiant, pour être sûr
@@ -20,9 +21,10 @@ function formulaires_construire_formulaire_charger($identifiant, $formulaire_ini
 	
 	// On passe ça pour l'affichage
 	$contexte['_contenu'] = $formulaire_actuel;
+	// On passe ça pour la récup plus facile des champs
+	$contexte['_saisies'] = saisies_recuperer_saisies($formulaire_actuel);
 	
 	// La liste des saisies
-	include_spip('inc/saisies');
 	$saisies_disponibles = saisies_lister_disponibles();
 	$contexte['saisies_disponibles'] = $saisies_disponibles;
 	
@@ -30,10 +32,22 @@ function formulaires_construire_formulaire_charger($identifiant, $formulaire_ini
 }
 
 function formulaires_construire_formulaire_verifier($identifiant, $formulaire_initial=array()){
+	include_spip('inc/saisies');
 	$erreurs = array();
+	// On ajoute un préfixe devant l'identifiant
+	$identifiant = 'constructeur_formulaire_'.$identifiant;
+	// On récupère le formulaire à son état actuel
+	$formulaire_actuel = session_get($identifiant);
+	// On récupère les saisies actuelles
+	$saisies_actuelles = saisies_recuperer_saisies($formulaire_actuel);
+	// La liste des saisies
+	$saisies_disponibles = saisies_lister_disponibles();
 	
 	if ($nom = _request('configurer_saisie')){
-		$erreurs['configurer_'.$nom] = true;
+		$saisie = $saisies_actuelles[$nom];
+		$form_config = $saisies_disponibles[$saisie['saisie']]['options'];
+		array_walk_recursive($form_config, 'formidable_transformer_nom', "_saisies[$nom][options][@valeur@]");
+		$erreurs['configurer_'.$nom] = $form_config;
 	}
 	
 	return $erreurs;
@@ -66,9 +80,12 @@ function formulaires_construire_formulaire_traiter($identifiant, $formulaire_ini
 	return $retours;
 }
 
-// Ajouter les boutons d'actions de contrôle de chaque saisie
-function formidable_ajouter_actions_saisie($html_saisie, $ajouts){
-	return preg_replace('/^(<li[^>]*>)/i', '$1'.$ajouts, $html_saisie);
+// À utiliser avec un array_walk_recursive()
+// Applique une transformation à la @valeur@ de tous les champs "nom" d'un formulaire, y compris loin dans l'arbo
+function formidable_transformer_nom(&$valeur, $cle, $transformation){
+	if ($cle == 'nom' and is_string($valeur)){
+		$valeur = str_replace('@valeur@', $valeur, $transformation);
+	}
 }
 
 ?>
