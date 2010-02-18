@@ -8,7 +8,7 @@
  * Antoine Pitrou
  * Cedric Morin
  * Renato
- * ï¿½ 2005,2006 - Distribue sous licence GNU/GPL
+ * © 2005,2006 - Distribue sous licence GNU/GPL
  *
  */
 
@@ -58,7 +58,9 @@
 		  FROM spip_forms_donnees_donnees AS l
 		  JOIN spip_forms_donnees AS d ON d.id_donnee=l.id_donnee_liee
 		  WHERE $in AND l.id_donnee="._q($id_donnee));
-		$cpt = spip_num_rows($res);
+		//adapatation SPIP2
+		//$cpt = spip_num_rows($res);
+		$cpt =  sql_count($res);
 		$out = "";
 		if (!$etoile){
 			if ($cpt==0) $out .= "";//_T("$pre:aucune_reponse");
@@ -200,7 +202,6 @@
 			$row3=spip_fetch_array(spip_query("SELECT COUNT(DISTINCT c.id_donnee) AS num ".
 				"FROM spip_forms_donnees AS r LEFT JOIN spip_forms_donnees_champs AS c USING (id_donnee) ".
 				"WHERE r.id_form="._q($id_form)." AND r.confirmation='valide' AND r.statut='publie' AND c.champ="._q($row2['champ'])));
-
 			if (!$row3 OR !($total_reponses=$row3['num']))
 				continue;
 	

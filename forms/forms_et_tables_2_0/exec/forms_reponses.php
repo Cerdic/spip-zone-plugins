@@ -7,7 +7,7 @@
  * Antoine Pitrou
  * Cedric Morin
  * Renato
- * ï¿½ 2005,2006 - Distribue sous licence GNU/GPL
+ * © 2005,2006 - Distribue sous licence GNU/GPL
  *
  */
 
@@ -21,18 +21,10 @@ function exec_forms_reponses(){
 	global $supp_reponse;
 	$debut = _request('debut');
   _Forms_install();
-
-	if ($id_form == "") {
-		if (isset($_GET['id_form'])) {
-			$id_form = $_GET['id_form'];
-		}
-	}
-	if ($supp_reponse == "") {
-		if (isset($_GET['supp_reponse'])) {
-			$supp_reponse = $_GET['supp_reponse'];
-		}
-	}
-
+	//adaptation SPIP2
+	$id_form = _request('id_form');
+	$supp_reponse = _request('supp_reponse');
+	
 	$id_form = intval($id_form);
 
 	if ($id_form) {
@@ -46,39 +38,47 @@ function exec_forms_reponses(){
 	}
 
 
-	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo $commencer_page("&laquo; ".textebrut(typo($titre))." &raquo;", "redacteurs", "suivi-forms");
+	/*debut_page("&laquo; ".textebrut(typo($titre))." &raquo;", "redacteurs", "suivi-forms");*/
+	$commencer_page = charger_fonction("commencer_page", "inc") ; 
+ 	echo $commencer_page("&laquo; ".textebrut(typo($titre))." &raquo;", "redacteurs", "suivi-forms");
+	/*debut_gauche();*/
 	echo debut_gauche('', true);
 
 	if ($id_form) {
+		/*debut_boite_info();*/
 		echo debut_boite_info(true);
 		if ($retour = urldecode(_request('retour')))
+		{
 			echo icone_horizontale(_T('icone_retour'), $retour, "../"._DIR_PLUGIN_FORMS."img_pack/form-24.png", "rien.gif",false);
-		echo icone_horizontale(_T("forms:formulaire_aller"), "?exec=forms_edit&id_form=$id_form", "../"._DIR_PLUGIN_FORMS. "img_pack/form-24.png", "rien.gif", false);
-
+		}
+		echo icone_horizontale(_T("forms:Formulaire"), "?exec=forms_edit&id_form=$id_form", "../"._DIR_PLUGIN_FORMS. "img_pack/form-24.png", "rien.gif",false);
+		$nretour = urlencode(self());
+		echo icone_horizontale(_T("forms:Tableau_des_reponses"), "?exec=donnees_tous&id_form=$id_form&retour=$nretour", "../"._DIR_PLUGIN_FORMS. "img_pack/donnees-24.png", "rien.gif",false);
+		
 		if (autoriser('administrer','form',$id_form)) {
 			$retour = urlencode(self());
 			echo icone_horizontale(_T("forms:telecharger_reponses"),
-				generer_url_ecrire("forms_telecharger","id_form=$id_form&retour=$retour"), "../"._DIR_PLUGIN_FORMS. "img_pack/donnees-exporter-24.png", "rien.gif", false);
+				generer_url_ecrire("forms_telecharger","id_form=$id_form&retour=$retour"), "../"._DIR_PLUGIN_FORMS. "img_pack/donnees-exporter-24.png", "rien.gif",false);
 		}
 
+		/*fin_boite_info();*/
 		echo fin_boite_info(true);
 	}
 
-	echo debut_droite('', true);
-
+	/*debut_droite();*/
+	echo debut_droite('',true);
 
 	if (!autoriser('administrer','form',$id_form)) {
 		echo "<strong>"._T('avis_acces_interdit')."</strong>";
-		echo fin_page();
+		fin_page();
 		exit;
 	}
 
 	if ($id_form) {
-		echo gros_titre(_T("forms:suivi_formulaire")."&nbsp;: &laquo;&nbsp;".typo($titre)."&nbsp;&raquo;", '', false);
+		echo gros_titre(_T("forms:suivi_formulaire")."&nbsp;: &laquo;&nbsp;".typo($titre)."&nbsp;&raquo;",'',false);
 	}
 	else {
-		echo gros_titre(_T("forms:suivi_formulaires"), '', false);
+		echo gros_titre(_T("forms:suivi_formulaires"),'',false);
 	}
 
 
@@ -100,7 +100,7 @@ function exec_forms_reponses(){
 
 	if ($id_form && ($type_form=='sondage')) {
 		echo "<br />\n";
-		echo debut_cadre_enfonce("statistiques-24.gif", true);
+		debut_cadre_enfonce("statistiques-24.gif");
 		include_spip('forms_fonctions');
 		echo Forms_afficher_reponses_sondage($id_form);
 		echo fin_cadre_enfonce(true);
@@ -137,6 +137,8 @@ function exec_forms_reponses(){
 	$types = array();
 	$form_unique = $id_form;
 
+	//adaptation SPIP2
+	//if (substr(spip_mysql_version(), 0, 1) == 3) {
 	if (substr(sql_version(), 0, 1) == 3) {
 		$query = "SELECT r.*, a.nom, f.titre FROM spip_forms_donnees AS r LEFT JOIN spip_auteurs AS a USING (id_auteur), spip_forms AS f  
 		WHERE r.id_form=f.id_form AND r.confirmation ='valide' AND r.statut <> 'poubelle' AND r.date > DATE_SUB(NOW(), INTERVAL 6 MONTH)
@@ -161,27 +163,23 @@ function exec_forms_reponses(){
 		$titre_form = $row['titre'];
 
 		echo "<br />\n";
-		echo debut_cadre_relief("../"._DIR_PLUGIN_FORMS."img_pack/donnees-24.png", true);
+		echo debut_cadre_relief("../"._DIR_PLUGIN_FORMS."img_pack/donnees-24.png",true,'','');
 
 		$link=parametre_url(self(),'supp_reponse', $id_donnee);
-		echo "<div style='float:right;'>";
-		echo icone(_T("forms:supprimer_reponse"), $link,"../"._DIR_PLUGIN_FORMS."img_pack/donnees-24.png", "supprimer.gif", "right");
-		echo "</div>";
+		echo icone_inline(_T("forms:supprimer_reponse"), $link,"../"._DIR_PLUGIN_FORMS."img_pack/donnees-24.png", "supprimer.gif", "right");
 		
 		if ($id_article_export!=0){
 			$row=spip_fetch_array(spip_query("SELECT statut FROM spip_articles WHERE id_article="._q($id_article_export)));
 			if (!$row OR ($row['statut']=='poubelle'))
 				$id_article_export = 0;
 		}
-		echo "<div style='float:right;'>";
 		if ($id_article_export==0){
-			echo icone(_T("forms:exporter_article"), generer_action_auteur('forms_exporte_reponse_article',"$id_donnee",self()),"article-24.gif", "creer.gif", "right");
+			echo icone_inline(_T("forms:exporter_article"), generer_action_auteur('forms_exporte_reponse_article',"$id_donnee",self()),"article-24.gif", "creer.gif", "right");
 		}
 		else 
-			echo icone(_T("forms:voir_article"), generer_url_ecrire('articles',"id_article=".$id_article_export),"article-24.gif", "", "right");
+			echo icone_inline(_T("forms:voir_article"), generer_url_ecrire('articles',"id_article=".$row['id_article_export']),"article-24.gif", "", "right");
 		
-		echo "</div>";
-		
+
 		echo _T("forms:reponse_envoyee").affdate($date)."<br />\n";
 		if (!$form_unique) {
 			echo _T("forms:reponse_envoyee_a")." ";
@@ -197,6 +195,7 @@ function exec_forms_reponses(){
 		echo _T("forms:reponse_depuis")."<a href='"._DIR_RACINE."$url'>".$url."</a><br />\n";
 		
 		echo "<br />\n";
+
 		list($lib,$values,$urls) = 	Forms_extraire_reponse($id_donnee);
 		
 		foreach ($lib as $champ => $titre) {
@@ -214,6 +213,7 @@ function exec_forms_reponses(){
 			echo " ".$s;
 			echo "<br />\n";
 		}
+
 		echo "<div style='clear: both;'></div>";
 
 		echo fin_cadre_relief(true);

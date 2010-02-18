@@ -47,10 +47,12 @@ function Forms_insere_nouveau_champ($id_form,$type,$titre,$champ=""){
 		$rang = $row['rangmax'];
 	$rang++;
 	include_spip('base/abstract_sql');
-	sql_insert(
+	//adapatation SPIP2
+	/*spip_abstract_insert(
 		'spip_forms_champs',
 		'(id_form,champ,rang,titre,type,obligatoire,extra_info)',
-		'('._q($id_form).','._q($champ).','._q($rang).','._q($titre).','._q($type).",'non','')");
+		'('._q($id_form).','._q($champ).','._q($rang).','._q($titre).','._q($type).",'non','')");*/
+		sql_insert('spip_forms_champs', '(id_form,champ,rang,titre,type,obligatoire,extra_info)', '('._q($id_form).','._q($champ).','._q($rang).','._q($titre).','._q($type).",'non','')");
 	return $champ;
 }
 function Forms_nouveau_choix($id_form,$champ){
@@ -72,6 +74,8 @@ function Forms_insere_nouveau_choix($id_form,$champ,$titre){
 		$rang = $row['rangmax'];
 	$rang++;
 	include_spip('base/abstract_sql');
+	//adapatation SPIP2
+	//spip_abstract_insert("spip_forms_champs_choix","(id_form,champ,choix,titre,rang)","("._q($id_form).","._q($champ).","._q($choix).","._q($titre).","._q($rang).")");
 	sql_insert("spip_forms_champs_choix","(id_form,champ,choix,titre,rang)","("._q($id_form).","._q($champ).","._q($choix).","._q($titre).","._q($rang).")");
 	return $choix;
 }
@@ -196,6 +200,10 @@ function Forms_bloc_edition_champ($row, $action_link, $redirect, $idbloc) {
 		$out .= "<label for='unite_monetaire_$champ'>"._T("forms:unite_monetaire")."</label> :";
 		$out .= " &nbsp;<select name='unite_monetaire' id='unite_monetaire_$champ' class='fondo verdana2'>\n";
 		$out .= "<option value='euro'".($unite=='euro'?"selected='selected'":"").">"._T("forms:monnaie_euro")."</option>\n";
+		// A voir pour ajouter des choix de monnaies
+		//$out .= "<option value='dollar'".($unite=='dollar'?"selected='selected'":"").">"._T("forms:monnaie_dollar")."</option>\n";
+		//$out .= "<option value='livre'".($unite=='livre'?"selected='selected'":"").">"._T("forms:monnaie_livre")."</option>\n";
+		//$out .= "<option value='chf'".($unite=='chf'?"selected='selected'":"").">"._T("forms:monnaie_chf")."</option>\n";
 		$out .= "</select>";
 		$out .= "<br />\n";
 	}
@@ -436,11 +444,11 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 		else {
 			$formulaire =
 				"<div style='padding: 2px; background-color: $couleur_claire; color: black;'>&nbsp;"
-				. ($visible ? bouton_block_visible("champ_$champ") : bouton_block_invisible("champ_$champ"))
+				. ($visible ? bouton_block_depliable(true,"champ_$champ") : bouton_block_depliable(false,"champ_$champ"))
 				. "<strong id='titre_nom_$champ'>".typo($row['titre'])."</strong>"
 				. "<br /></div>"
 				. "(".typo(Forms_nom_type_champ($row['type'])).")\n"
-				. ($visible ? debut_block_visible("champ_$champ") : debut_block_invisible("champ_$champ"))
+				. ($visible ? debut_block_depliable(true,"champ_$champ") : debut_block_depliable(true,"champ_$champ"))
 				. $formulaire
 				. fin_block();
 		}
@@ -480,7 +488,6 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 		form_hidden($action_link_noredir) .
 		"<input type='hidden' name='redirect' value='$redirect' />" . // form_hidden ne desencode par redirect ...
 		"<input type='hidden' name='idtarget' value='champs' />"; // on target toute la boite, pas juste le div parent
-		
 	$out .=	"<strong>"._T("forms:ajouter_champ")."</strong><br />\n";
 	$out .= _T("forms:ajouter_champ_type");
 	$out .= " \n";

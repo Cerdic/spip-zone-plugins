@@ -20,7 +20,9 @@ function balise_FORMS_TEXTE_REPONDU_TITRE_dyn($valeur='',$texte='',$texte_autres
 	"AND forms.titre='".addslashes($valeur)."' " .
 	"AND id_auteur=".$id_auteur;
 	$r=spip_query($q);
-	if (spip_num_rows($r)>0) return $texte;
+	//adaptation SPIP2
+	//if (spip_num_rows($r)>0) return $texte;
+	if (sql_count($r)>0) return $texte;
 	else return $texte_autres;
 }
 ?>
