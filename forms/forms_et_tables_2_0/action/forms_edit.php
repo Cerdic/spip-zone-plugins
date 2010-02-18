@@ -129,8 +129,9 @@ function Forms_update($id_form){
 	$nouveau_champ = $champ_visible = $ajout_choix = NULL;
 	// creation
 	if ($id_form == 'new' && $titre) {
-		spip_query("INSERT INTO spip_forms (titre) VALUES ("._q($titre).")");
-		$id_form = mysql_insert_id();
+		//spip_query("INSERT INTO spip_forms (titre) VALUES ("._q($titre).")");
+		//$id_form = mysql_insert_id();
+		$id_form = sql_insertq('spip_forms',array('titre'=>$titre)); 
 	}
 	// maj
 	if (intval($id_form) && $titre) {

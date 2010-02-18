@@ -43,8 +43,8 @@ function Forms_duplique_form($duplique){
 		}
 		$names = substr($names,0,strlen($names)-1);
 		$values = substr($values,0,strlen($values)-1);
-		sql_insert('spip_forms',"($names)","($values)");
-		$id_form = mysql_insert_id();
+		//sql_insert('spip_forms',"($names)","($values)");
+		$id_form = sql_insert('spip_forms',"($names)","($values)");
 		if ($id_form){
 			$res = spip_query("SELECT * FROM spip_forms_champs WHERE id_form="._q($duplique));
 			while($row = spip_fetch_array($res)) {
