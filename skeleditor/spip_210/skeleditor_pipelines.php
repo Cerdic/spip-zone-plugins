@@ -53,7 +53,7 @@ function skeleditor_affichage_final($texte){
 		if ($GLOBALS['var_inclure']){
 			$retour = self();
 			$url = generer_url_ecrire('skeleditor','retour='.$retour.'&f=');			
-			$inserer = "<script>jQuery(function(){jQuery('.inclure_blocs h6:first-child').each(function(){
+			$inserer = "<script type='text/javascript'>jQuery(function(){jQuery('.inclure_blocs h6:first-child').each(function(){
 				jQuery(this).html(\"<a href='$url\"+jQuery(this).html()+\"'>\"+jQuery(this).html()+'<'+'/a>');
 			})});</script></body>";
 			$texte = preg_replace(",</body>,",$inserer,$texte);
@@ -70,7 +70,7 @@ function skeleditor_affichage_final($texte){
 			}
 			if (count($lienplus)){
 				$lienplus = implode('<br />',$lienplus);
-				$lienplus = "<span class='spip-admin-boutons' id='inclure'>$lienplus</span>";
+				$lienplus = "<span class='spip-admin-boutons' id='inclure'>$lienplus<\/span>";
 			};
 
 		} else {
