@@ -9,11 +9,11 @@
 			<ul>
 				<li class="fieldset">
 					<fieldset>
-						<h3 class="legend"><:savecfg:gerer_restauration{fond=#GET{fond}}:></h3>
+						<h3 class="legend"><:savecfg:gerer_restauration:></h3>
 						<ul>
 								<li>
 								<select name="id_fond">
-								<option value="none" selected="selected"><:savecfg:restaurations:></option>
+								<option value="none" selected="selected">&nbsp;</option>
 								<BOUCLE_savecfg(SAVECFG){fond=#GET{fond}}>
 									<option value="#ID_SAVECFG">[(#TITRE|supprimer_tags)]</option>
 								</BOUCLE_savecfg>

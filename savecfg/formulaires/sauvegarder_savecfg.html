@@ -8,7 +8,8 @@
 			<ul>
 				<li class="fieldset">
 					<fieldset>
-						<h3 class="legend"><:savecfg:sauvegarder_savecfg{fond=#GET{fond}}:></h3>						<ul>
+						<h3 class="legend"><:savecfg:sauvegarder_savecfg:></h3>
+						<ul>
 							<li>
 								<input type="hidden" name="fond" value="[(#ENV{nom})]" />
 								<label for="nom"><:savecfg:titre_sauvegarde:>[ (#ENV**{erreurs}|table_valeur{nom}|sinon{ <em><:ecrire:info_obligatoire_02:></em>})]</label>
