@@ -28,7 +28,11 @@
       [<img src="(#LOGO_SITE_SPIP||image_reduire{0,[(#GET{hauteur_logo})]}|extraire_attribut{src})"
       	   [ alt="(#NOM_SITE_SPIP|attribut_html)"]
            [ title="(#NOM_SITE_SPIP|attribut_html)"]
-           [ style="float: (#CONFIG{top_bando/place_logo});"]/>]
+            style="float: [(#CONFIG{top_bando/place_logo,left});]
+                  [margin-[(#CONFIG{top_bando/place_logo}|=={right}|?{'left','right'})]: (#CONFIG{top_bando/marge_laterale_logo})px;]
+                  [margin-[(#CONFIG{top_bando/place_logo})]: (#CONFIG{top_bando/marge_laterale_logo_bord})px;]
+                  [(#CONFIG{top_bando/redimensionner_logo}|=={oui}|oui) [margin-top: (#CONFIG{top_bando/marge_sup_logo})px;]]" 
+                  "/>]
     ]
       
     [(#CONFIG{top_bando/afficher_titre}|=={oui}|oui)

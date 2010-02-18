@@ -28,6 +28,7 @@ modifier ces param&#232;tres.  -->
 
 -->
 #CACHE{0}
+<!-- 
 [(#SET{largeur_entete,[(#ENV{largeur_entete}|=={100%}|?{[(#LOGO_SITE_SPIP_SURVOL||largeur|sinon{2000})],[(#ENV{largeur_entete,[(#LOGO_SITE_SPIP_SURVOL||largeur|sinon{2000})]})]})]})]<br>let: #GET{largeur_entete}
 [(#REM) attention! là y'a une mauvaise bidouille entre hauteur bandeau et hauteur entete tant que les  sont confondus...!!!]
 [(#SET{hauteur_entete,[(#ENV{hauteur_bando,[(#LOGO_SITE_SPIP_SURVOL||hauteur|sinon{200})]})]})]<br>het: #GET{hauteur_entete}
@@ -57,7 +58,6 @@ modifier ces param&#232;tres.  -->
 [(#SET{marge_sup_titre_reduite, [(#ENV{marge_sup_titre}|mult{[(#GET{fact_reduc})]})]})]<br>mstr: #GET{marge_sup_titre_reduite}
 
 [(#SET{titre,[(#ENV{titre_bando}|=={titre_spip}|?{[(#NOM_SITE_SPIP)],[(#ENV{complement_nom_site})]})]})]
-<!-- 
 -->
 <script type='text/javascript' src='#CHEMIN{prive/javascript/async_upload.js}'></script>
 [(#VAL**|affiche_upload)]
@@ -72,6 +72,10 @@ modifier ces param&#232;tres.  -->
         else jQuery("#voir_redimensionner_logo").show();
     }
     
+  // retourne 3 objets donnant paramètres du bando (les dimensions sont *reduites à l'échelle*) 
+  // this.hBando = hauteur en px  
+  // this.H = calage horizontal pour background-image (left/center/right) 
+  // this.V = valeur de top en px pour background-image 
     function calages(){
     	var hbando = parseInt(jQuery("#hauteur_bando").val() * [(#GET{fact_reduc})]);
         var btop = jQuery("#calage_top_recadrage").val();
@@ -79,10 +83,11 @@ modifier ces param&#232;tres.  -->
         	this.V = btop * [(#GET{fact_reduc})];
         if (btop == "centrer") 
         	this.V = ([(#GET{hauteur_bando_reduite})] - hbando) / 2;
-        this.H = (jQuery("#calage_left").attr("checked") == true ? 'left' : 'center');
+        this.H = jQuery("input[name='calage_horizontal_bando']:checked").val();
         this.hBando = hbando;
     }
     
+  // gère l'affichage des bordures selon la config
     function gerer_bordures(){
         if (jQuery("input[name='toutes_bordures_identiques']:checked").val() == 'oui') {
         	jQuery("#voir_bordure_unique").show();
@@ -146,19 +151,27 @@ modifier ces param&#232;tres.  -->
         jQuery("input[name='place_logo']").change(function(){ 
         	var cote = jQuery("input[name='place_logo']:checked").val();
             jQuery("#img_logo, #img_logo_titre").css({'float': cote});
+            var dh = Math.round(parseInt(jQuery("#marge_laterale_logo").val()) * [(#GET{fact_reduc})]);
+            var db = Math.round(parseInt(jQuery("#marge_laterale_logo_bord").val()) * [(#GET{fact_reduc})]);
+            var cote_txt = (cote == 'right' ? 'left' : 'right'); 
+            jQuery("#img_logo, #img_logo_titre").css('margin-' + cote_txt, dh + 'px');
+            jQuery("#img_logo, #img_logo_titre").css('margin-' + cote, db + 'px');
         });
         jQuery("input[name='redimensionner_logo']").change(function(){
             if (jQuery("#redimensionner_logo_non").attr("checked") == true){
                 jQuery("#voir_redimensionner_logo").hide();
                 var hl = parseInt(jQuery("#bando_logo").css("height"));
                 var ll = Math.round(hl * [(#GET{proportion_logo})]);
-                jQuery("#img_logo, #img_logo_titre").css({'height': hl + 'px', 'width': ll + 'px'});
+                jQuery("#img_logo, #img_logo_titre").css({'height': hl + 'px', 'width': ll + 'px', 'margin-top': 0});
+//                jQuery("#img_logo").css({ 'border': 'none' });
             }
             else {
                 jQuery("#voir_redimensionner_logo").show();
                 var hl = Math.round(parseInt(jQuery("#hauteur_logo").val()) * [(#GET{fact_reduc})]);
                 var ll = Math.round(hl * [(#GET{proportion_logo})]);
-                jQuery("#img_logo, #img_logo_titre").css({'height': hl + 'px', 'width': ll + 'px'});
+                var dv = Math.round(parseInt(jQuery("#marge_sup_logo").val()) * [(#GET{fact_reduc})]);
+                jQuery("#img_logo, #img_logo_titre").css({'height': hl + 'px', 'width': ll + 'px', 'margin-top': dv + 'px'});
+//                jQuery("#img_logo").css({ 'border': 'dashed #ff0 2px;' });
             }
         });
         jQuery("#hauteur_logo").change(function(){
@@ -166,10 +179,24 @@ modifier ces param&#232;tres.  -->
             var ll = Math.round(hl * [(#GET{proportion_logo})]);
             jQuery("#img_logo, #img_logo_titre").css({'height': hl + 'px', 'width': ll + 'px'});
         });
+        jQuery("#marge_sup_logo").change(function(){
+            var dv = Math.round(parseInt(jQuery(this).val()) * [(#GET{fact_reduc})]);
+            jQuery("#img_logo, #img_logo_titre").css({'margin-top': dv + 'px'});
+        });
+        jQuery("#marge_laterale_logo").change(function(){
+            var dh = Math.round(parseInt(jQuery(this).val()) * [(#GET{fact_reduc})]);
+            var cote_marge = (jQuery("input[name='place_logo']:checked").val() == 'right' ? 'left' : 'right'); 
+            jQuery("#img_logo, #img_logo_titre").css('margin-' + cote_marge, dh + 'px');
+        });       
+        jQuery("#marge_laterale_logo_bord").change(function(){
+            var db = Math.round(parseInt(jQuery(this).val()) * [(#GET{fact_reduc})]);
+            var cote_marge = jQuery("input[name='place_logo']:checked").val(); 
+            jQuery("#img_logo, #img_logo_titre").css('margin-' + cote_marge, db + 'px');
+        });       
         
     // bloc couleurs 
         jQuery("#couleur_principale").blur( function(){
-        	var coul = jQuery(this).val();
+        	var cote = jQuery("input[name='place_logo']:checked").val();
             jQuery("#bando, #bando_logo, #bando_titre").css({'background-color': coul});
         });
         jQuery("#couleur_principale_texte").blur( function(){ 
@@ -243,7 +270,34 @@ modifier ces param&#232;tres.  -->
         	var id_ec = jQuery(this).attr("id") + "_oeil";
             jQuery("#" + id_ec).attr("src", "[(#CHEMIN{images/oeil_o.gif})]");
         });
-
+        
+    // les redims bando et logo en WYSIWYG avec UI
+        function go_recadre(){
+            var hbando = jQuery("#recadre").css("height");
+            hbando = Math.round(parseInt(hbando.substring(0,(hbando.length - 2))) / [(#GET{fact_reduc})]);
+            var topbando = jQuery("#recadre").css("top");
+            topbando = Math.round(parseInt(topbando.substring(0,(topbando.length - 2))) / [(#GET{fact_reduc})]);
+            jQuery("#hauteur_bando").val(hbando);
+            jQuery("#calage_top_recadrage").val(topbando);
+            jQuery("#hauteur_bando").trigger('change');
+        }
+        function go_recadre_logo(){
+            var hlogo = jQuery("#img_logo").css("height");
+            hlogo = Math.round(parseInt(hlogo.substring(0,(hlogo.length - 2))) / [(#GET{fact_reduc})]);
+            jQuery("#hauteur_logo").val(hlogo);
+            jQuery("#hauteur_logo").trigger('change');
+        }
+        jQuery("#recadre").resizable({ containment: 'parent', 
+                                       handles: 'n, s',
+                                       stop: function(){ go_recadre(); }
+                                  });
+/* vraiment pas convaincant le resizable sur le logo...                                 
+        jQuery("#img_logo").resizable({ containment: 'parent', 
+                                        aspectRatio: true,
+                                        stop: function(){ go_recadre_logo(); }
+                                     });
+//        jQuery("#img_logo").draggable({ containment: 'parent'}); // draggable semble bogué en jQuery 1.2.6...
+*/
     });
 </script>
 
@@ -279,9 +333,9 @@ modifier ces param&#232;tres.  -->
         <strong><:topbando:calage_horizontal_image_bando:> :</strong>
         <label><:topbando:gauche:></label>
         <input type="radio" name="calage_horizontal_bando" value="left" [(#ENV{calage_horizontal_bando}|=={left}|oui) checked="checked"] id="calage_left"/> 
-        &nbsp;&nbsp;&nbsp;<input type="radio" name="calage_horizontal_bando" value="center" [(#ENV{calage_horizontal_bando}|=={left}|non) checked="checked"] id="calage_center"/>
+        &nbsp;&nbsp;&nbsp;<input type="radio" name="calage_horizontal_bando" value="center" [(#ENV{calage_horizontal_bando}|=={center}|oui) checked="checked"] id="calage_center"/>
         <label><:topbando:centre:></label>
-        &nbsp;&nbsp;&nbsp;<input type="radio" name="calage_horizontal_bando" value="right" [(#ENV{calage_horizontal_bando}|=={right}|non) checked="checked"] id="calage_right"/>
+        &nbsp;&nbsp;&nbsp;<input type="radio" name="calage_horizontal_bando" value="right" [(#ENV{calage_horizontal_bando}|=={right}|oui) checked="checked"] id="calage_right"/>
         <label><:topbando:droite:></label>        
         <br/><small><:topbando:explication_calage_horizontal:></small>      
     </p>
@@ -295,6 +349,7 @@ modifier ces param&#232;tres.  -->
     	<label><strong><:topbando:hauteur_bando:></strong> :</label>
     	<input type="text" name="hauteur_bando" id="hauteur_bando" value="[(#ENV{hauteur_bando,200})]" style="width: 80px" class="declenche_oeil" /> 
         [<img id="hauteur_bando_oeil" src="(#CHEMIN{images/oeil_o.gif})" alt="<:topbando:visualiser:>" class="oeil_voir"/>]
+        <br/><small><:topbando:utilisez_le_cadre_rouge_pour_redimensionner:></small>
     </p>
     <div id="bando" style="background: [(#ENV{utiliser_bando}|=={oui}|oui) url([(#LOGO_SITE_SPIP_SURVOL||image_reduire{500,0}|extraire_attribut{src})]) ]
                           no-repeat center [(#ENV{couleur_principale})]; 
@@ -336,6 +391,11 @@ modifier ces param&#232;tres.  -->
         <input type="radio" name="place_logo" value="left" [(#ENV{place_logo}|=={right}|non) checked="checked"] id="logo_g"/> 
         &nbsp;&nbsp;&nbsp;<input type="radio" name="place_logo" value="right" [(#ENV{place_logo}|=={right}|oui) checked="checked"] id="logo_d"/>
         <label><:topbando:droite:></label>
+    	<br/><label><:topbando:marge_laterale_logo_cote_texte:></label>: <input type="text" name="marge_laterale_logo" style="width: 40px;" value="[(#ENV{marge_laterale_logo,10})]" class="declenche_oeil" id="marge_laterale_logo" />px 
+        [<img id="marge_laterale_logo_oeil" src="(#CHEMIN{images/oeil_o.gif})" alt="<:topbando:visualiser:>" class="oeil_voir"/>]
+    	<br/><label><:topbando:marge_laterale_logo_cote_bord:></label>: <input type="text" name="marge_laterale_logo_bord" style="width: 40px;" value="[(#ENV{marge_laterale_logo_bord,0})]" class="declenche_oeil" id="marge_laterale_logo_bord" />px 
+        [<img id="marge_laterale_logo_bord_oeil" src="(#CHEMIN{images/oeil_o.gif})" alt="<:topbando:visualiser:>" class="oeil_voir"/>]
+        <br/><small><:topbando:explication_2_marges_laterales_logo:></small>
     </p>
     <p>
     	<strong><:topbando:taille_logo:> :</strong>
@@ -348,12 +408,9 @@ modifier ces param&#232;tres.  -->
     	<label><:topbando:hauteur_logo:> :</label>
     	<input type="text" name="hauteur_logo" id="hauteur_logo" value="[(#ENV{hauteur_logo,[(#LOGO_SITE_SPIP||hauteur)]})]" style="width: 80px" class="declenche_oeil" />px 
         [<img id="hauteur_logo_oeil" src="(#CHEMIN{images/oeil_o.gif})" alt="<:topbando:visualiser:>" class="oeil_voir"/>]
-        <br/><small><:topbando:explication_redimensionnement_proportionnel:></small>
-    	<br/><label><:topbando:marge_superieure_logo:></label>: <input type="text" name="marge_sup_logo" style="width: 40px;" value="[(#ENV{marge_sup_logo,10})]" class="declenche_oeil" id="marge_sup_logo" />px 
+    	&nbsp;&nbsp;&nbsp;<label><:topbando:marge_superieure_logo:></label>: <input type="text" name="marge_sup_logo" style="width: 40px;" value="[(#ENV{marge_sup_logo,10})]" class="declenche_oeil" id="marge_sup_logo" />px 
         [<img id="marge_sup_logo_oeil" src="(#CHEMIN{images/oeil_o.gif})" alt="<:topbando:visualiser:>" class="oeil_voir"/>]
-    	&nbsp;&nbsp;&nbsp;<label><:topbando:marge_laterale_logo:></label>: <input type="text" name="marge_laterale_logo" style="width: 40px;" value="[(#ENV{marge_laterale_logo,10})]" class="declenche_oeil" id="marge_laterale_logo" />px 
-        [<img id="marge_laterale_logo_oeil" src="(#CHEMIN{images/oeil_o.gif})" alt="<:topbando:visualiser:>" class="oeil_voir"/>]
-        <br/><small><:topbando:explication_marge_laterale_logo:></small>
+        <br/><small><:topbando:explication_redimensionnement_proportionnel:></small>
     </p>
 <!--
         <div id="entete_logo" style="border: solid 2px #0F0;
@@ -381,7 +438,12 @@ modifier ces param&#232;tres.  -->
                             })]">
       [(#CONFIG{top_bando/utiliser_logo}|=={oui}|oui)
         [<img src="(#LOGO_SITE_SPIP||image_reduire{0,[(#GET{hauteur_logo_reduite})]}|extraire_attribut{src})" alt="logo_site"
-          style="float: [(#ENV{place_logo,left})];" id="img_logo"/>]
+          style="float: [(#ENV{place_logo,left})];
+          		 [margin-[(#ENV{place_logo}|=={right}|?{'left','right'})]: (#ENV{marge_laterale_logo}|mult{[(#GET{fact_reduc})]})px;]
+                 [margin-[(#ENV{place_logo})]: (#ENV{marge_laterale_logo_bord}|mult{[(#GET{fact_reduc})]})px;]
+                 [(#ENV{redimensionner_logo}|=={oui}|oui) [margin-top: (#ENV{marge_sup_logo}|mult{[(#GET{fact_reduc})]})px;]]
+                 [(#ENV{redimensionner_logo}|=={oui}|oui) border: dashed #ff0 2px;]" 
+          id="img_logo"/>]
       ]
     </div>
     <p>
@@ -518,30 +580,28 @@ modifier ces param&#232;tres.  -->
                                 		,
                                 		[(#GET{strB})]
                             		 })]">
-            [<img src="(#LOGO_SITE_SPIP||image_reduire{0,[(#GET{hauteur_recadre})]}|extraire_attribut{src})" alt="logo_site"
-                  style="float: [(#ENV{place_logo,left})];" id="img_logo_titre"/>]
-            
-                [(#PLUGIN{choix_police}|?{ 
-                	[(#ENV{utiliser_image_typo}|=={oui}|?{
-                        [<strong id="nom_site_spip" style="margin-right: auto;
-                                                           margin-left:auto;
-                                                           display: block;
-                                                           [float: (#ENV{emplacement_titre});]
-                                                           [width: (#GET{largeur_titre_reduite})px;]
-                                                           [padding-top: (#GET{marge_sup_titre_reduite})px;]
-                                                           ">(#MODELE{typo}{texte=[(#GET{titre})],
-                                                                            couleur=[(#ENV{couleur_principale_texte})],
-                                                                            taille=[(#GET{taille_police_reduite})],
-                                                                            largeur=[(#GET{largeur_titre_reduite})]})</strong>]
-                        ,
-                        [<strong id="nom_site_spip" style="margin-right: auto;
-                                                           margin-left:auto;
-                                                           display: block;
-                                                           [float: (#ENV{emplacement_titre});]
-                                                           [width: (#GET{largeur_titre_reduite})px;]
-                                                           [padding-top: (#GET{marge_sup_titre_reduite})px;]
-                                                           ">(#GET{titre})</strong>]
-                    })]
+
+            [(#CONFIG{top_bando/utiliser_logo}|=={oui}|oui)
+                [<img src="(#LOGO_SITE_SPIP||image_reduire{0,[(#GET{hauteur_logo_reduite})]}|extraire_attribut{src})" alt="logo_site"
+                      style="float: [(#ENV{place_logo,left})];
+              		         [margin-[(#ENV{place_logo}|=={right}|?{'left','right'})]: (#ENV{marge_laterale_logo}|mult{[(#GET{fact_reduc})]})px;]
+                             [margin-[(#ENV{place_logo})]: (#ENV{marge_laterale_logo_bord}|mult{[(#GET{fact_reduc})]})px;]
+                             [(#ENV{redimensionner_logo}|=={oui}|oui) [margin-top: (#ENV{marge_sup_logo}|mult{[(#GET{fact_reduc})]})px;]]" 
+                      id="img_logo_titre"/>]
+            ]
+          
+            [(#PLUGIN{choix_police}|?{ 
+            	[(#ENV{utiliser_image_typo}|=={oui}|?{
+                    [<strong id="nom_site_spip" style="margin-right: auto;
+                                                       margin-left:auto;
+                                                       display: block;
+                                                       [float: (#ENV{emplacement_titre});]
+                                                       [width: (#GET{largeur_titre_reduite})px;]
+                                                       [padding-top: (#GET{marge_sup_titre_reduite})px;]
+                                                       ">(#MODELE{typo}{texte=[(#GET{titre})],
+                                                                        couleur=[(#ENV{couleur_principale_texte})],
+                                                                        taille=[(#GET{taille_police_reduite})],
+                                                                        largeur=[(#GET{largeur_titre_reduite})]})</strong>]
                     ,
                     [<strong id="nom_site_spip" style="margin-right: auto;
                                                        margin-left:auto;
@@ -551,6 +611,15 @@ modifier ces param&#232;tres.  -->
                                                        [padding-top: (#GET{marge_sup_titre_reduite})px;]
                                                        ">(#GET{titre})</strong>]
                 })]
+                ,
+                [<strong id="nom_site_spip" style="margin-right: auto;
+                                                   margin-left:auto;
+                                                   display: block;
+                                                   [float: (#ENV{emplacement_titre});]
+                                                   [width: (#GET{largeur_titre_reduite})px;]
+                                                   [padding-top: (#GET{marge_sup_titre_reduite})px;]
+                                                   ">(#GET{titre})</strong>]
+            })]
         </div>
         <p>
             <strong><:topbando:previsualisation_largeur_ecran:></strong>:
