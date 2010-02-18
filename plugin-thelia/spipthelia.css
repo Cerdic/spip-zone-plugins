@@ -4,44 +4,6 @@
 
 /* styles thelia */
 
-.titrePage {
-	text-align: left;
-	margin-bottom: .5em;
-	margin-top: .5em;
-}
-.titrePage h1 {
-	color: #f60;
-	text-transform: uppercase;
-	font-family: 'Helvetica-Bold','Helvetica','Arial',sans-serif;
-	font-size: 1.4em;
-	font-weight: normal;
-	line-height: 1.2em;
-		
-}
-.sousTitrePage {
-	color:  #7a6d2c;
-	text-align: left;
-	font-weight: bold;
-	padding: 0;
-}
-
-.textePage {
-	color: #141414;
-	text-align: left;
-	font-weight: normal;
-	margin-top: 5px;
-	margin-bottom: 5px;
-}
-
-.separation {
-	height: 1px;
-	background-color: #7a6d2c;
-	margin-top: 1em;
-	margin-bottom: 1em;
-	overflow:hidden;
-	zoom:1;
-}
-
 
 /* Produit petit & grand
 -------------------------------------------------------- */
@@ -72,31 +34,7 @@
 	float: left;
 }
 
-.titreProduit {
-	color: #12335B;
-	text-align: left;
-	font-weight: bold;
-	margin-top: 5px;
-	margin-bottom: 5px;
-	width: 100%;
-}
 
-.chapoProduit {
-	color: #12335B;
-	text-align: left;
-	font-style: italic;
-	font-size: 0.9em;
-	line-height: 1.2em;
-	margin-bottom: 5px;
-	width: 100%;
-}
-
-.descriptionProduit {
-	color: #12335B;
-	text-align: left;
-	margin-top: 5px;
-	margin-bottom: 10px;
-}
 
 .prixProduit {
 	color: #EC8000;
@@ -180,14 +118,15 @@ a.LIEN_pages:hover {
 	text-align: center; 
 	font-size: .8em;
 }
-.sousTableau { float: right; background: #b8dd9a; margin-top: .5em; margin-bottom: 1em; font-size: .9em; padding: .5em;}
+.sousTableau { float: right;  margin-top: .5em; margin-bottom: 1em; font-size: .9em; padding: .5em;}
 .sousTableau ul { padding: 0; margin: 0; }
 .sousTableau ul li { list-style: none; text-align: right; }
 
 #panier, #commande { width: 100%; background: #e9e9e9; text-align: center; }
-#panier thead tr, #commande thead tr { background: #666; color: white; } 
+#commande thead tr { background: #666; color: white; } 
+#panier select { padding-right: 1em; }
 
-.bouton-actualiser { border: none; background: none; text-decoration: underline; color: #7A6D2C; float: right; }
+.bouton-actualiser { border: none; background: none; text-decoration: underline; color: #7A6D2C; vertical-align:text-bottom; }
 .ligneTableau {
 	font-size: 0.9em;
 	padding-left: 3px;
@@ -237,7 +176,10 @@ a.lien-retour-thelia {
 	border: none;
 	padding: 0;
 }
-
+.formulaire-produit { float: left; }
+.formulaire-produit .boutons { margin-top: .5em; }
+.formulaire-produit .declinaisonProduit select { width: auto; display: inline; padding-right:1em; }
+.formulaire-produit .prixProduit small { display: block; } 
 /* style propre aux modeles <produit>*/
 
 .produits_thelia {

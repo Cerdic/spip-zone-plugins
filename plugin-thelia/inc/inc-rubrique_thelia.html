@@ -1,100 +1,106 @@
 
-	
+	<THELIA_RUBRIQUE type="RUBRIQUE" id="#ENV{id_rubrique_thelia}">
+			
 			
 				[(#REM) Titre de la rubrique ]
 
-				<div class="titrePage">
-				<h1>THELIA-RUBRIQUE_NOM</h1>
+				<div class="cartouche">
+				    <h1 class="h1">THELIA-TITRE</h1>
 				</div>
-
 			
 				[(#REM) Liste des produits de la rubrique ]
-
-				<ul class = "ListeProduitsPetits">
-				<THELIA_PROD type="PRODUIT" rubrique="#ENV{id_rubrique_thelia}" classement="inverse" num="12">
-					<li class="produitPetit">
-					<form action="#URL_PAGE{panier,lang=#LANG}" method="post" id="formAjouterTHELIA-ID" class="formulaire-produit">
-					<fieldset>
-						<input type="hidden" name="thelia_action" value="ajouter" />
-                				<input type="hidden" name="ref" value="THELIA-REF" />
-                			<a href="#URL_PAGE{produit,ref=THELIA-REF&amp;id_rubrique_thelia=#ENV{id_rubrique_thelia}}">
-					<THELIA_IMAGE type="IMAGE" num="1" produit="THELIA-ID" largeur="159">
- 						<img src="THELIA-IMAGE"  alt="THELIA-PRODTITRE  " title="THELIA-PRODTITRE" class="contourImage" />
-					</THELIA_IMAGE>
-                   			</a>
-						<div class="titreProduit">					
-							<h3><a href="#URL_PAGE{produit,ref=THELIA-REF&amp;id_rubrique_thelia=#ENV{id_rubrique_thelia}}">THELIA-TITRE</a></h3>
-						</div>
-						<input type="image" class="LIEN_commander" value="<:spipthelia:ajouter_panier:>" src="#CHEMIN{img_pack/cart_add.png}" />
-						
-						<div class="chapoProduit">
-							THELIA-CHAPO
-						</div>
-				    		<div class="prixProduit">
-						<THELIA_produitpromo type="PRODUIT" ref="THELIA-REF" promo="1">
-							<span class="thelia_promo">THELIA-PRIX2 &euro;</span> <:spipthelia:au_lieu_de:> THELIA-PRIX &euro;
-						</THELIA_produitpromo>
-						<THELIA_produitpaspromo type="PRODUIT" ref="THELIA-REF" promo="0">
-							THELIA-PRIX &euro;
-						</THELIA_produitpaspromo>
-						</div>
-						
-						<div class="declinaisonProduit">
-								<THELIA_declinaisons type="DECLINAISON" rubrique="THELIA-RUBRIQUE" produit="THELIA-ID">
-									<T_decldisp1>
-									<THELIA_decldisp1 type="DECLIDISP" declinaison="THELIA-ID" produit="THELIA-PRODUIT">
-									</THELIA_decldisp1> 
-									THELIA-TITRE : 
-									<select name="declinaisonTHELIA-ID">
-									</T_decldisp1>
-									<//T_decldisp1>
-									
-										<THELIA_decldisp type="DECLIDISP" declinaison="THELIA-ID" produit="THELIA-PRODUIT">
-										 	<option value="THELIA-ID">THELIA-TITRE</option>
-										</THELIA_decldisp> 
- 									
-									<T_decldisp2>
-									<THELIA_decldisp2 type="DECLIDISP" declinaison="THELIA-ID" produit="THELIA-PRODUIT">
-									</THELIA_decldisp2> 
-									</select>
-									</T_decldisp2>
-									<//T_decldisp2>
-									
-										 		
-								</THELIA_declinaisons>
+				<div class="liste articles produits">
+				      <h2 class="h2"><:spipthelia:produits_rubrique:></h2>
+				      <ul class="liste-items">
+				      <THELIA_PROD type="PRODUIT" rubrique="#ENV{id_rubrique_thelia}" classement="inverse" num="5">
+					      <li class="item hentry">
+						      <h3 class="h3 entry-title"><a rel="bookmark" href="#URL_PAGE{produit,ref=THELIA-REF&amp;id_rubrique_thelia=#ENV{id_rubrique_thelia}}">
+							  <THELIA_IMAGE type="IMAGE" num="1" produit="THELIA-ID" largeur="100">
+								  <img src="THELIA-IMAGE" alt="THELIA-PRODTITRE" class="spip_logos" />
+							  </THELIA_IMAGE>
+							  THELIA-TITRE
+						      </a></h3>
+						      
+						      <div class="introduction entry-content">
+							      THELIA-CHAPO
+						      </div>
+						      <form action="#URL_PAGE{panier,lang=#LANG}" method="post" id="formAjouterTHELIA-ID" class="formulaire_spip formulaire-produit">
+						      <fieldset>
+							      <input type="hidden" name="thelia_action" value="ajouter" />
+							      <input type="hidden" name="ref" value="THELIA-REF" />
+							      
 								
-							
-						</div>
-						
-					</fieldset>
-					</form>
-					</li>
-				</THELIA_PROD>
-				</ul>
-				
+								<div class="declinaisonProduit">
+									      <THELIA_declinaisons type="DECLINAISON" rubrique="THELIA-RUBRIQUE" produit="THELIA-ID">
+										      <T_decldisp1>
+										      <THELIA_decldisp1 type="DECLIDISP" declinaison="THELIA-ID" produit="THELIA-PRODUIT">
+										      </THELIA_decldisp1> 
+										      <div class="choix">
+											  <strong>THELIA-TITRE : </strong>
+											  <select name="declinaisonTHELIA-ID">
+											  </T_decldisp1>
+											  <//T_decldisp1>
+											  
+												  <THELIA_decldisp type="DECLIDISP" declinaison="THELIA-ID" produit="THELIA-PRODUIT">
+													  <option value="THELIA-ID">THELIA-TITRE</option>
+												  </THELIA_decldisp> 
+											  
+											  <T_decldisp2>
+											  <THELIA_decldisp2 type="DECLIDISP" declinaison="THELIA-ID" produit="THELIA-PRODUIT">
+											  </THELIA_decldisp2> 
+											  </select>
+											</div>
+										      </T_decldisp2>
+										      <//T_decldisp2>
+										      
+													      
+									      </THELIA_declinaisons>
+									      
+								      
+							      </div>
+							      <div class="prixProduit">
+								    <strong><:spipthelia:prix:> : </strong>
+							      <THELIA_produitpromo type="PRODUIT" ref="THELIA-REF" promo="1">
+								      <span class="thelia_promo">THELIA-PRIX2 &euro;</span> <small><:spipthelia:au_lieu_de:> THELIA-PRIX &euro;</small>
+							      </THELIA_produitpromo>
+							      <THELIA_produitpaspromo type="PRODUIT" ref="THELIA-REF" promo="0">
+								      THELIA-PRIX &euro;
+							      </THELIA_produitpaspromo>
+							      </div>
+							      <div class="boutons">
+								  <input type="image" class="submit" value="<:spipthelia:ajouter_panier:>" />
+							      </div>
+						      </fieldset>
+						      </form>
+						      
+					      
+					      </li>
+				      </THELIA_PROD>
+				      </ul>
+				</div>
 				
 				[(#REM) Page suivante / Nombre de page / Page pr�cd�dente ]
 	
-			<THELIA_RUBRIQUE type="RUBRIQUE" id="#ENV{id_rubrique_thelia}">
-				<div id="pages">
-					<THELIA_PAGEPREC type="PAGE" rubrique="#ENV{id_rubrique_thelia}" num="12" typeaff="0" avance="precedente">
+				<div class="pagination">
+					<THELIA_PAGEPREC type="PAGE" rubrique="#ENV{id_rubrique_thelia}" num="5" typeaff="0" avance="precedente">
 					<a href="#URL_PAGE{rubrique_thelia,page_thelia=THELIA-PAGE_PREC&amp;id_rubrique_thelia=#ENV{id_rubrique_thelia}}" class="LIEN_pages"><:spipthelia:page_precedente:></a>
 					</THELIA_PAGEPREC>
 					
-					<THELIA_CPAGE type="PAGE" rubrique="#ENV{id_rubrique_thelia}"  num="12" max="10" typeaff="1">
+					<THELIA_CPAGE type="PAGE" rubrique="#ENV{id_rubrique_thelia}"  num="5" max="10" typeaff="1">
 					|
-                			<THELIA_PAGECONT_PASCOUR type="PAGE" rubrique="#ENV{id_rubrique_thelia}"  num="12" courante="0" pagecourante="THELIA-PAGE_NUM" max="10" typeaff="1"> 
+                			<THELIA_PAGECONT_PASCOUR type="PAGE" rubrique="#ENV{id_rubrique_thelia}"  num="5" courante="0" pagecourante="THELIA-PAGE_NUM" max="10" typeaff="1"> 
 					 <a href="#URL_PAGE{rubrique_thelia,page_thelia=THELIA-PAGE_NUM}&amp;id_rubrique_thelia=#ENV{id_rubrique_thelia}" class="LIEN_pages">THELIA-PAGE_NUM</a>
 					</THELIA_PAGECONT_PASCOUR> 
-				    	<THELIA_PAGECONT_COUR type="PAGE" rubrique="#ENV{id_rubrique_thelia}" num="12" courante="1" pagecourante="THELIA-PAGE_NUM" max="10" typeaff="1"> 
+				    	<THELIA_PAGECONT_COUR type="PAGE" rubrique="#ENV{id_rubrique_thelia}" num="5" courante="1" pagecourante="THELIA-PAGE_NUM" max="10" typeaff="1"> 
 					THELIA-PAGE_NUM
 					</THELIA_PAGECONT_COUR>  
 					</THELIA_CPAGE>	
 					
 					 
-					<THELIA_PAGE_SUIVANTE type="PAGE" rubrique="#ENV{id_rubrique_thelia}" num="12" max="10" typeaff="0" avance="suivante"> 
+					<THELIA_PAGE_SUIVANTE type="PAGE" rubrique="#ENV{id_rubrique_thelia}" num="5" max="10" typeaff="0" avance="suivante"> 
 					| <a href="#URL_PAGE{rubrique_thelia,page_thelia=THELIA-PAGE_SUIV&amp;id_rubrique_thelia=#ENV{id_rubrique_thelia}}" class="LIEN_pages"><:spipthelia:page_suivante:></a>
 					</THELIA_PAGE_SUIVANTE>
 				</div>	
-			</THELIA_RUBRIQUE>
+			
+	</THELIA_RUBRIQUE>
 		

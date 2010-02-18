@@ -11,41 +11,38 @@
 			</ul>
 
 			[(#REM) Titre de la page ]
-			<div class="titrePage">
-				<h1><:spipthelia:mon_panier:></h1>
-			</div>
+			<h1 class="h1"><:spipthelia:mon_panier:></h1>
 				
 			<T_CONTENU_PANIER>
 			
 
 			[(#REM) Contenu du panier ]
 
-			<table id="panier">
+			<table class="spip" id="panier">
   			<thead> 
-				<tr>
-    					<th class="enteteTableau"><:spipthelia:photo_produit:></th>
-    					<th class="enteteTableau"><:spipthelia:references_produits:></th>
-    					<th class="enteteTableau"><:spipthelia:prix_unitaire:></th>
-    					<th class="enteteTableau"><:spipthelia:quantite:></th>
-    					<th class="enteteTableau"><:spipthelia:actualiser:></th>
-    					<th class="enteteTableau"><:spipthelia:total_ttc:></th>
-    					<th class="enteteTableau"><:spipthelia:Vider:></th>
+				<tr class="row_first">
+    					<th><span class="invisible"><:spipthelia:photo_produit:></span></th>
+    					<th><:spipthelia:references_produits:></th>
+    					<th><:spipthelia:prix_unitaire:></th>
+    					<th><abbr title="<:spipthelia:quantite:>"><:spipthelia:qte:></abbr></th>
+    					<th><:spipthelia:total_ttc:></th>
+    					<th><abbr title="<:spipthelia:supprimer:>"><:spipthelia:suppr:></abbr></th>
 				</tr>
 			</thead>
 
 			<tbody> 
 				<THELIA_CONTENU_PANIER type="PANIER">
 				<tr>
-					<td class="ligneTableau"><THELIA_image type="IMAGE" produit="THELIA-ID" largeur="100" num="1"><img src="THELIA-IMAGE" /></THELIA_image></td>
-					<td class="ligneTableau"><a href="#URL_PAGE{produit,ref=THELIA-REF}">THELIA-TITRE
+					<td><THELIA_image type="IMAGE" produit="THELIA-ID" largeur="70" num="1"><img src="THELIA-IMAGE" /></THELIA_image></td>
+					<td><a href="#URL_PAGE{produit,ref=THELIA-REF}">THELIA-TITRE
 						<THELIA_decval type="DECVAL" article="THELIA-ARTICLE">
 							<br />THELIA-DECLITITRE : THELIA-VALEUR
 						</THELIA_decval>
 						<br />(Ref&nbsp;:&nbsp;THELIA-REF)</a>
 					</td>
-					<td class="ligneTableau">THELIA-PRIXU&nbsp;&euro; </td>
-    					<form action="#URL_PAGE{panier,lang=#LANG}" method="post" id="formpanierTHELIA-ARTICLE">
-                			<td class="ligneTableau">
+					<td>THELIA-PRIXU&nbsp;&euro; </td>
+    					<form action="[(#URL_PAGE{panier,lang=#LANG}|ancre_url{panier})]" method="post" id="formpanierTHELIA-ARTICLE">
+                			<td>
 						<input type="hidden" name="article" value="THELIA-ARTICLE" />
                 				<input type="hidden" name="thelia_action" value="modifier" />
                 				<input type="hidden" name="article" value="THELIA-ARTICLE" />
@@ -55,31 +52,29 @@
 						</THELIA_quantite>
 						</select>
 						
-					</td>
-					<td class="ligneTableau">
-						<input type="submit" class="bouton-actualiser" value="[<:spipthelia:actualiser:>]" />
+						<noscript><input type="image" src="#CHEMIN{img_pack/recur.png}" class="bouton-actualiser" value="[<:spipthelia:actualiser:>]" /></noscript>
 					</td>
 					</form>
-					<td class="ligneTableau">THELIA-TOTAL&nbsp;&euro;</td>
-					<td class="ligneTableau"><a href="#URL_PAGE{panier,thelia_action=supprimer&thelia_article=THELIA-ARTICLE}"><img src="#CHEMIN{img_pack/spipthelia-cancel.png}" width="16" height="16" alt="<:spipthelia:supprimer:>" /></a></td>
+					<td>THELIA-TOTAL&nbsp;&euro;</td>
+					<td><a href="[(#URL_PAGE{panier,thelia_action=supprimer&thelia_article=THELIA-ARTICLE}|ancre_url{panier})]" title="<:spipthelia:supprimer:>"><img src="#CHEMIN{img_pack/trash.png}" width="16" height="16" alt="<:spipthelia:supprimer:>" /></a></td>
 				</tr>
   	  			</THELIA_CONTENU_PANIER>
 			
 			</tbody>
 			</table>
 			
-			<div class="sousTableau"><:spipthelia:total_panier:> : THELIA-PANIER_TOTAL&nbsp;&euro;
+			<div class="sousTableau"><strong><:spipthelia:total_panier:> :</strong> THELIA-PANIER_TOTAL&nbsp;&euro;
 			</div>
 
 			<br class="nettoyeur" />
 				<div class="boutonMonCompteContenu">
-				<a href="#URL_PAGE{adresse}"><:spipthelia:valider_panier:></a>
+				<a href="#URL_PAGE{adresse}" class="spip_in"><:spipthelia:valider_panier:></a>
 				</div>
 			</T_CONTENU_PANIER>
 				<p><:spipthelia:panier_vide:></p>
 			<//T_CONTENU_PANIER>
 				<div class="boutonMonCompteContenu">
-				<a href="#URL_SITE_SPIP"><:spipthelia:retour_boutique:></a>
+				<a href="#URL_SITE_SPIP" class="spip_in"><:spipthelia:retour_boutique:></a>
 				</div>
 		
 
