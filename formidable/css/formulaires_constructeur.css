@@ -3,7 +3,7 @@
 	padding:1em;
 }
 
-.formulaire_construire_formulaire li{
+.formulaire_construire_formulaire li, .formulaire_construire_formulaire li.fieldset li{
 	padding:1em;
 	border:1px dashed transparent;
 	border-radius:5px;
@@ -12,6 +12,9 @@
 }
 .formulaire_construire_formulaire li:hover{
 	border-color:#999;
+}
+.formulaire_construire_formulaire ul.formulaire_configurer li{
+	border:0;
 }
 
 .formulaire_construire_formulaire .actions{

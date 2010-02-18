@@ -19,18 +19,7 @@
 			]
 
 			[(#VAL{saisie}|array_key_exists{#VALEUR}|oui)
-				[(#SET{actions,
-					<div class="actions">
-						<button type="submit" class="submit configurer_saisie" name="configurer_saisie" value="[(#VALEUR|table_valeur{options}|table_valeur{nom})]" title="<:formidable:construire_action_configurer:>"><img src="[(#CHEMIN{images/formulaire-configurer-16.png})]" alt="<:formidable:construire_action_configurer:>"/></button>
-						<button type="submit" class="submit supprimer_saisie" name="supprimer_saisie" value="[(#VALEUR|table_valeur{options}|table_valeur{nom})]" title="<:formidable:construire_action_supprimer:>"><img src="[(#CHEMIN{images/formulaire-supprimer-16.png})]" alt="<:formidable:construire_action_supprimer:>"/></button>
-					</div>
-				})]
-				#SET{saisie,#VALEUR|saisies_inserer_html{#GET{actions},debut}}
-				[(#SET{form_conf,[(#ENV{erreurs}|table_valeur{configurer_[(#VALEUR|table_valeur{options}|table_valeur{nom})]})]})]
-				[(#GET{form_conf}|is_array|oui)
-					#SET{saisie,#GET{saisie}|saisies_inserer_html{#GENERER_SAISIES{#GET{form_conf}},fin}}
-				]
-				[(#GET{saisie}|generer_saisie{#ENV**|unserialize})]
+				[(#VALEUR|formidable_preparer_saisie_configurable{#ENV**|unserialize}|generer_saisie{#ENV**|unserialize})]
 			]
 
 			[(#VAL{groupe}|array_key_exists{#VALEUR}|oui)

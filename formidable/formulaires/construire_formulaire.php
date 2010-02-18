@@ -19,6 +19,12 @@ function formulaires_construire_formulaire_charger($identifiant, $formulaire_ini
 		$formulaire_actuel = $formulaire_initial;
 	}
 	
+	// Test
+#	foreach ($formulaire_actuel as $rang=>$saisie){
+#		if (!$saisie['options']['label'])
+#			$formulaire_actuel[$rang]['options']['label'] = 'MOULOUDJI : '.$saisie['options']['nom'];
+#	}
+	
 	// On passe ça pour l'affichage
 	$contexte['_contenu'] = $formulaire_actuel;
 	// On passe ça pour la récup plus facile des champs
@@ -86,6 +92,39 @@ function formidable_transformer_nom(&$valeur, $cle, $transformation){
 	if ($cle == 'nom' and is_string($valeur)){
 		$valeur = str_replace('@valeur@', $valeur, $transformation);
 	}
+}
+
+// Préparer une saisie pour la transformer en truc configurable
+function formidable_preparer_saisie_configurable($saisie, $env){
+	// On récupère le nom
+	$nom = $saisie['options']['nom'];
+	// On ajoute les boutons d'actions
+	$saisie = saisies_inserer_html(
+		$saisie,
+		recuperer_fond(
+			'formulaires/inc-construire_formulaire-actions',
+			array('nom' => $nom)
+		),
+		'debut'
+	);
+	// On cherche si ya un formulaire de config
+	$formulaire_config = $env['erreurs']['configurer_'.$nom];
+	// Si oui on l'ajoute à la fin
+	if (is_array($formulaire_config)){
+		$env['saisies'] = $formulaire_config;
+		$saisie = saisies_inserer_html(
+			$saisie,
+			'<ul class="formulaire_configurer">'
+			.recuperer_fond(
+				'inclure/generer_saisies',
+				$env
+			)
+			.'</ul>',
+			'fin'
+		);
+	}
+	
+	return $saisie;
 }
 
 ?>
