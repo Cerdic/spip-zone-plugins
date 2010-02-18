@@ -79,10 +79,11 @@ function verifier_jeton($jeton, $form, $qui=NULL) {
  */
 function compter_caracteres_utiles($texte, $propre=true) {
 	if ($propre) $texte = propre($texte);
+	$u = $GLOBALS['meta']['pcre_u'];
 	// regarder si il y a du contenu en dehors des liens !
 	$texte = PtoBR($texte);
-	$texte = preg_replace(',<a.*</a>,Uims','',$texte);
-	$texte = trim(preg_replace(',[\W]+,uims',' ',$texte));
+	$texte = preg_replace(",<a.*</a>,{$u}Uims",'',$texte);
+	$texte = trim(preg_replace(",[\W]+,{$u}ims",' ',$texte));
 	return strlen($texte);
 }
 
