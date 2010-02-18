@@ -29,9 +29,8 @@ function auth_rubrique_compat($id_auteur, $statut)
 	if ($statut != '0minirezo') return $statut;
 
 	$result = spip_query("SELECT id_rubrique FROM spip_auteurs_rubriques WHERE id_auteur=$id_auteur AND id_rubrique!='0'");
-	//adapation SPIP2
-	//if (!spip_num_rows($result)) {
-	if (!sql_count($result)) {
+
+	if (!spip_num_rows($result)) {
 		$GLOBALS['connect_toutes_rubriques'] = true;
 		return 0;
 	}
@@ -182,9 +181,7 @@ function autoriser_article_modifier_dist($faire, $type, $id, $qui, $opt) {
 		OR (
 			in_array($qui['statut'], array('0minirezo', '1comite'))
 			AND in_array($r['statut'], array('prop','prepa', 'poubelle'))
-			//adapation SPIP2
-			//AND spip_num_rows(auteurs_article($id, "id_auteur=".$qui['id_auteur']))
-			AND sql_count(auteurs_article($id, "id_auteur=".$qui['id_auteur']))
+			AND spip_num_rows(auteurs_article($id, "id_auteur=".$qui['id_auteur']))
 		);
 }
 
@@ -212,9 +209,7 @@ function autoriser_voir_dist($faire, $type, $id, $qui, $opt) {
 	$r = spip_fetch_array($s);
 	return
 		in_array($r['statut'], array('prop', 'publie'))
-		//adapation SPIP2
-		//OR spip_num_rows(auteurs_article($id, "id_auteur=".$qui['id_auteur']));
-		OR sql_count(auteurs_article($id, "id_auteur=".$qui['id_auteur']));
+		OR spip_num_rows(auteurs_article($id, "id_auteur=".$qui['id_auteur']));
 }
 
 // Voir les revisions ?

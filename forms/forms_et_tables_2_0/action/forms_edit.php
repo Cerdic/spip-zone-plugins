@@ -129,11 +129,8 @@ function Forms_update($id_form){
 	$nouveau_champ = $champ_visible = $ajout_choix = NULL;
 	// creation
 	if ($id_form == 'new' && $titre) {
-		//adapatation SPIP2
-		//spip_query("INSERT INTO spip_forms (titre) VALUES ("._q($titre).")");
-		//$id_form = spip_insert_id();
-		
-		$id_form = sql_insertq('spip_forms',array('titre'=>_q($titre)));
+		spip_query("INSERT INTO spip_forms (titre) VALUES ("._q($titre).")");
+		$id_form = mysql_insert_id();
 	}
 	// maj
 	if (intval($id_form) && $titre) {
@@ -257,12 +254,13 @@ function action_forms_edit(){
 			if ($redirect && $nouveau_champ) $redirect = parametre_url($redirect,"nouveau_champ",$nouveau_champ);
 			if ($redirect && $ajout_choix) $redirect = parametre_url($redirect,"ajout_choix",$ajout_choix);
 		}
-	}	
-	
-	// JES adaptation du plugin à SPIP2, suppression de la fonction urldecode sur le parametre 'redirect'
-	
-	if ($redirect)
-		redirige_par_entete(str_replace("&amp;","&",$redirect));
+	}
+	if ($redirect) {
+		if ((strpos($redirect, "champ_visible") === false) && (strpos($redirect, "nouveau_champ") === false) && (strpos($redirect, "ajout_choix") === false))
+			echo file_get_contents(str_replace("&amp;","&",urldecode($redirect)));
+		//redirige_par_entete(str_replace("&amp;","&",urldecode($redirect)));
+	}
+		
 }
 
 ?>

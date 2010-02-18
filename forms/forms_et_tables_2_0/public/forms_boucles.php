@@ -191,11 +191,12 @@
 			$boucle->from["L$k"]= 'spip_forms_donnees_champs';
 			
 			$reqfiltre = calculer_requete_sql($filtre);
+			
 			$boucle->hash .= <<<code
 	$reqfiltre
 	\$filtre = "";
 	\$res = 0;
-	while (\$row = @sql_fetch(\$result,"")){
+	while (\$row = @spip_abstract_fetch(\$result,"")){
 		if ((\$r = _request(\$row['champ']))!==NULL){
 			if (is_array(\$r)){
 				\$r = array_diff(\$r,array('')); // enlever les valeurs vides

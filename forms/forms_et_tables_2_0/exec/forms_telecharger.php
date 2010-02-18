@@ -7,7 +7,7 @@
  * Antoine Pitrou
  * Cedric Morin
  * Renato
- * © 2005,2006 - Distribue sous licence GNU/GPL
+ * ï¿½ 2005,2006 - Distribue sous licence GNU/GPL
  *
  */
 
@@ -18,15 +18,12 @@ if (!include_spip('inc/autoriser'))
 	include_spip('inc/autoriser_compat');
 
 function acces_interdit() {
-	/*debut_page(_T('avis_acces_interdit'), "documents", "forms");*/
-	$commencer_page = charger_fonction("commencer_page", "inc") ; 
- 	echo $commencer_page(_T('avis_acces_interdit'), "documents", "forms");
-	/*debut_gauche();*/
-	echo debut_gauche('', true);
-	/*debut_droite();*/
-	echo debut_droite('',true);
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo $commencer_page(_T('avis_acces_interdit'), "documents", "forms");
+	echo debut_gauche('',false);
+	echo debut_droite('', false);
 	echo "<strong>"._T('avis_acces_interdit')."</strong>";
-	fin_page();
+	echo fin_page();
 	exit;
 }
 
@@ -88,19 +85,15 @@ function exec_forms_telecharger(){
 
 	$icone = "../"._DIR_PLUGIN_FORMS."img_pack/donnees-24.png";
 	
-	/*debut_page($titre, "documents", "forms");*/
-	$commencer_page = charger_fonction("commencer_page", "inc") ; 
- 	echo $commencer_page($titre, "documents", "forms") ;
-	/*debut_gauche();*/
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo $commencer_page($titre, "documents", "forms");
 	echo debut_gauche('', true);
 
 	echo "<br /><br />\n";
-	/*debut_droite();*/
-	echo debut_droite('',true);
+	echo debut_droite('', true);
 
-	debut_cadre_relief($icone);
-	//gros_titre($titre);
-	echo gros_titre($titre,'',false);
+	echo debut_cadre_relief($icone, true);
+	echo gros_titre($titre, '', false);
 	echo "<br />\n";
 	echo _T("forms:format_fichier");
 	echo "<br />\n";

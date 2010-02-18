@@ -10,14 +10,9 @@
  * 2005,2006 - Distribue sous licence GNU/GPL
  *
  */
-	
-	
+
 	if ($GLOBALS['spip_version_code']<1.92)
 		include_spip('inc/forms_compat_191');
-	/* adaptation SPIP2 */
-	elseif ($GLOBALS['spip_version_code']>2)	
-		include_spip("inc/xml");
-  /* fin adaptation SPIP2 */
 
 	function _Forms_install(){
 		if ($GLOBALS['spip_version_code']<1.9204){
@@ -25,7 +20,7 @@
 			Forms_upgrade();
 		}
 	}
-	
+
 	function Forms_structure($id_form, $complete = true){
 		include_spip('inc/texte'); # typo et textebrut
 		// Preparer la table de traduction code->valeur & mise en table de la structure pour eviter des requettes
@@ -183,17 +178,11 @@
 						$url = _DIR_RESTREINT_ABS;
 						if ($cle AND $cle_libre){
 							if (intval($id_donnee))
-								//adapatation SPIP2
-								//spip_abstract_insert("spip_forms_donnees","(id_donnee,id_form,date,ip,id_auteur,url,confirmation,statut,maj)","("._q($id_donnee).","._q($id_form).", NOW(),"._q($ip).","._q($id_auteur).","._q($url).", 'valide', 'publie', NOW() )");
-								$id_donnee = sql_insert("spip_forms_donnees","(id_donnee,id_form,date,ip,id_auteur,url,confirmation,statut,maj)","("._q($id_donnee).","._q($id_form).", NOW(),"._q($ip).","._q($id_auteur).","._q($url).", 'valide', 'publie', NOW() )");
+								spip_abstract_insert("spip_forms_donnees","(id_donnee,id_form,date,ip,id_auteur,url,confirmation,statut,maj)","("._q($id_donnee).","._q($id_form).", NOW(),"._q($ip).","._q($id_auteur).","._q($url).", 'valide', 'publie', NOW() )");
 						}
 						else
-						{
-							//adaptation SPIP2
-							//spip_abstract_insert("spip_forms_donnees","(id_form,date,ip,id_auteur,url,confirmation,statut,maj)","("._q($id_form).", NOW(),"._q($ip).","._q($id_auteur).","._q($url).", 'valide', 'publie', NOW() )");
-							$id_donnee = sql_insert("spip_forms_donnees","(id_form,date,ip,id_auteur,url,confirmation,statut,maj)","("._q($id_form).", NOW(),"._q($ip).","._q($id_auteur).","._q($url).", 'valide', 'publie', NOW() )");
-						}
-						//$id_donnee = spip_insert_id();
+							spip_abstract_insert("spip_forms_donnees","(id_form,date,ip,id_auteur,url,confirmation,statut,maj)","("._q($id_form).", NOW(),"._q($ip).","._q($id_auteur).","._q($url).", 'valide', 'publie', NOW() )");
+						$id_donnee = spip_insert_id();
 					}
 					if ($id_donnee){
 						foreach($c as $champ=>$values){
@@ -268,8 +257,7 @@
 			}
 			$query = "SELECT * FROM spip_types_documents WHERE extension='$ext' AND upload='oui'";
 			$result = spip_query($query);
-			/*return (spip_num_rows($result) > 0);*/
-			return (sql_count($result) > 0);
+			return (spip_num_rows($result) > 0);
 		}
 		return false;
 	}
@@ -296,8 +284,6 @@
 		$q .= ')';
 		//On retourne le tableau des id_donnee de l'auteur ou false
 		$res = spip_query($q);
-		//adapation SPIP2
-		//if ($res && spip_num_rows($res)>0) {
 		if ($res && sql_count($res)>0) {
 			while ($row=spip_fetch_array($res))
 				$tab[]=$row['id_donnee'];
@@ -308,8 +294,6 @@
 
 	function Forms_extraire_reponse($id_donnee){
 		// Lire les valeurs entrees
-		//adaptation SPIP2
-		//if (substr(spip_mysql_version(), 0, 1) == 3) {
 		if (substr(sql_version(), 0, 1) == 3) {
 			$result = spip_query("SELECT * FROM spip_forms_donnees_champs  AS r, spip_forms_champs AS ch, spip_forms_donnees AS d
 			WHERE ch.champ=r.champ AND d.id_donnee = r.id_donnee AND d.id_form = ch.id_form AND r.id_donnee="._q($id_donnee)." ORDER BY ch.rang");
@@ -380,8 +364,6 @@
 
 		$query = "SELECT id_form, titre FROM spip_forms ORDER BY titre";
 		$result = spip_query($query);
-		//ADAPATATION SPIP 2
-		//if (spip_num_rows($result)) {
 		if (sql_count($result)) {
 			$out .= "<br />\n";
 			$out .= "<div class='bandeau_rubriques' style='z-index: 1;'>";
@@ -419,12 +401,12 @@
 			$s .= debut_cadre_relief("../"._DIR_PLUGIN_FORMS."img_pack/form-24.png", true);
 
 			$s .= "<div style='padding: 2px; background-color: $couleur_claire; text-align: center; color: black;'>";
-			$s .= bouton_block_depliable(false,"ajouter_form");
+			$s .= bouton_block_invisible("ajouter_form");
 			$s .= "<strong class='verdana3' style='text-transform: uppercase;'>"
 				._T("forms:article_inserer_un_formulaire")."</strong>";
 			$s .= "</div>\n";
 
-			$s .= debut_block_depliable(false,"ajouter_form");
+			$s .= debut_block_invisible("ajouter_form");
 			$s .= $out;
 			$s .= fin_block();
 
@@ -605,17 +587,11 @@
 		$r = '';
 		if (!include_spip('inc/autoriser'))
 			include_spip('inc/autoriser_compat');
-	
-		//adaptation SPIP2
-		/*$result = spip_query("SELECT * FROM spip_forms WHERE id_form="._q($id_form));
+
+		$result = spip_query("SELECT * FROM spip_forms WHERE id_form="._q($id_form));
 		if (!$row = spip_fetch_array($result)) {
 			$erreur['@'] = _T("forms:probleme_technique");
-		}*/
-		
-		if (!$row = sql_fetsel("*","spip_forms","id_form=".intval($id_form))) {
-			$erreur['@'] = _T("forms:probleme_technique");
 		}
-		
 		$moderation = $row['moderation'];
 		// Extraction des donnees pour l'envoi des mails eventuels
 		//   accuse de reception et forward webmaster
@@ -651,14 +627,10 @@
 				include_spip("inc/acces");
 				$cookie = creer_uniqid();
 			}
-			
-			//SPIP2 probleme plus bas dans validation de la réponse du sondage qui se passe ds un deuxième temps
 			if ($row['type_form']=='sondage')
-				$confirmation = 'valide';
-				//$confirmation = 'attente';
+				$confirmation = 'attente';
 			else
 				$confirmation = 'valide';
-				
 			if ($moderation == 'posteriori')
 				$statut='publie';
 			else {
@@ -672,7 +644,6 @@
 						break;
 					}
 			}
-			
 			// D'abord creer la reponse dans la base de donnees
 			if ($ok) {
 				if ($id_donnee>0 AND autoriser('modifier', 'donnee', $id_donnee, NULL, array('id_form'=>$id_form))){
@@ -681,15 +652,12 @@
 				} elseif (autoriser('creer', 'donnee', 0, NULL, array('id_form'=>$id_form))){
 					if ($rang==NULL) $rang = array('rang'=>Forms_rang_prochain($id_form));
 					elseif(!is_array($rang)) $rang=array('rang'=>$rang);
-					
-					// adaptation SPIP 2
-					/*spip_query("INSERT INTO spip_forms_donnees (id_form, id_auteur, date, ip, url, confirmation,statut, cookie, "
+					spip_query("INSERT INTO spip_forms_donnees (id_form, id_auteur, date, ip, url, confirmation,statut, cookie, "
 					  . implode(',',array_keys($rang)).") "
 					  .	"VALUES ("._q($id_form).","._q($id_auteur).", NOW(),"._q($GLOBALS['ip']).","
 					  . _q($url).", '$confirmation', '$statut',"._q($cookie).","
-					  . implode(',',array_map('_q',$rang)) .")");*/
-					//$id_donnee = spip_insert_id();
-					$id_donnee = sql_insertq( 'spip_forms_donnees',array('id_form'=>_q($id_form),'id_auteur'=>_q($id_auteur),'date'=>'NOW()','ip'=>_q($GLOBALS['ip']),'url'=>_q($url),'confirmation'=>$confirmation,'statut'=>$statut,'cookie'=>_q($cookie),implode(',',array_keys($rang))=>implode(',',array_map('_q',$rang))));
+					  . implode(',',array_map('_q',$rang)) .")");
+					$id_donnee = mysql_insert_id();
 					# cf. GROS HACK inc/forms_tables_affichage
 					# rattrapper les documents associes a cette nouvelle donnee
 					# ils ont un id = 0-id_auteur
@@ -732,16 +700,14 @@
 						$mailconfirm = $row['valeur'];
 				if (($email) || ($mailconfirm)) {
 					include_spip("inc/session");
-					$hash = md5("forms confirme reponse $id_donnee".hash_env());
+					$hash = md5("forms confirme reponse $id_donnee $cookie ".hash_env());
 					$url = generer_url_public($script_validation,"mel_confirm=oui&id_donnee=$id_donnee&hash=$hash".($script_args?"&$script_args":""));
 					$r = $url;
 					if ($mailconfirm) $reponse = $mailconfirm;
 				}
-				
 				if ($row['type_form']=='sondage') {
 					include_spip("inc/session");
 					$hash = md5("forms valide reponse sondage $id_donnee $cookie ".hash_env());
-					// SPIP2 probleme avec cet url de confirmation de la réponse du sondage.
 					$url = generer_url_public($script_validation,"verif_cookie=oui&id_donnee=$id_donnee&hash=$hash".($script_args?"&$script_args":""));
 					$r = $url;
 				}
@@ -758,11 +724,8 @@
 			$modele_mail_confirm = $env['modele'];
 		if (isset($env['modele_admin']))
 			$modele_mail_admin = $env['modele_admin'];
-		
-		//adapatation SPIP2
-		//$result = spip_query("SELECT * FROM spip_forms WHERE id_form="._q($id_form));
-		//if ($row = spip_fetch_array($result)) {
-		if ($row = sql_fetsel("*","spip_forms","id_form=".intval($id_form))) {
+		$result = spip_query("SELECT * FROM spip_forms WHERE id_form="._q($id_form));
+		if ($row = spip_fetch_array($result)) {
 			$modele_admin = "modeles/$modele_mail_admin";
 			$modele_confirm = "modeles/$modele_mail_confirm";
 			if ($f = find_in_path(($m_admin = "$modele_admin-$id_form").".html"))
@@ -779,16 +742,12 @@
 			// recuperer documents
 			$documents_mail = false;
 			if ($row['documents_mail']=='oui'){
-				//$result2 = spip_query("SELECT champ FROM spip_forms_champs WHERE id_form="._q($id_form)." AND type='fichier'");
-				//spip_log("SELECT champ FROM spip_forms_champs WHERE id_form="._q($id_form)." AND type='fichier'");
-				//adaptation SPIP2
-				//if ($row2 = spip_fetch_array($result2)) {
-				if ($row2 = sql_fetsel("champ","spip_forms_champs","id_form=".intval($id_form)." AND type='fichier'")) {
-					//$result3 = spip_query("SELECT valeur FROM spip_forms_donnees_champs WHERE id_donnee="._q($id_donnee)." AND champ="._q($row2['champ']));
-					//spip_log("SELECT valeur FROM spip_forms_donnees_champs WHERE id_donnee="._q($id_donnee)." AND champ="._q($row2['champ']));
-					//adaptation SPIP2
-					//if ($row3 = spip_fetch_array($result3)) {
-					if ($row3 = sql_fetsel("valeur","spip_forms_champs","id_donnee=".intval($id_donnee)." AND champ="._q($row2['champ']))) {
+				$result2 = spip_query("SELECT champ FROM spip_forms_champs WHERE id_form="._q($id_form)." AND type='fichier'");
+				spip_log("SELECT champ FROM spip_forms_champs WHERE id_form="._q($id_form)." AND type='fichier'");
+				if ($row2 = spip_fetch_array($result2)) {
+					$result3 = spip_query("SELECT valeur FROM spip_forms_donnees_champs WHERE id_donnee="._q($id_donnee)." AND champ="._q($row2['champ']));
+					spip_log("SELECT valeur FROM spip_forms_donnees_champs WHERE id_donnee="._q($id_donnee)." AND champ="._q($row2['champ']));
+					if ($row3 = spip_fetch_array($result3)) {
 						$documents[] = $row3['valeur'];
 						$documents_mail = true;
 					}
@@ -796,15 +755,13 @@
 			}
 			// recuperer l'email de confirmation
 			$result2 = spip_query("SELECT * FROM spip_forms_donnees_champs WHERE id_donnee="._q($id_donnee)." AND champ="._q($champconfirm));
-			//if ($row2 = spip_fetch_array($result2)) {
-			if ($row2 = sql_fetsel("*","spip_forms_donnees_champs","id_donnee="._q($id_donnee)." AND champ="._q($champconfirm))) {
+			if ($row2 = spip_fetch_array($result2)) {
 				$mailconfirm = $row2['valeur'];
 			}
 
 			// recuperer l'email d'admin
 			$result2 = spip_query("SELECT * FROM spip_forms_donnees_champs WHERE id_donnee="._q($id_donnee)." AND champ="._q($email['route']));
-			//if ($row2 = spip_fetch_array($result2)) {
-			if ($row2 = sql_fetsel("*","spip_forms_donnees_champs","id_donnee="._q($id_donnee)." AND champ="._q($email['route']))){
+			if ($row2 = spip_fetch_array($result2)) {
 				if (isset($email[$row2['valeur']]))
 					$email_dest = $email[$row2['valeur']];
 			}
@@ -903,9 +860,6 @@ function Forms_obligatoire($row,$forms_obligatoires){
 	return $returned;
 }
 
-//ajout SPIP 2
-include_spip('inc/vieilles_defs');
-
 function Forms_afficher_liste_donnees_liees($type_source, $id, $type_lie, $type_table, $script, $bloc_id, $arg_ajax, $retour){
 	// article, donnee
 	// donnee, donnee_liee
@@ -937,9 +891,7 @@ function Forms_afficher_liste_donnees_liees($type_source, $id, $type_lie, $type_
 	  FROM $table_liens AS dl
 	  JOIN spip_forms_donnees AS d ON d.id_donnee=dl.$champ_donnee_liee
 	  WHERE $in_type_table dl.$champ_donnee_source="._q($iid));
-	// ADAPTATION SPIP 2
-	/*$nombre_donnees = $cpt = spip_num_rows($res);*/
-	$nombre_donnees = $cpt =sql_count($res);
+	$nombre_donnees = $cpt = sql_count($res);
 	while ($row = spip_fetch_array($res,SPIP_NUM))	$les_donnees.=",".$row[0];
 
 	$tranches = ($cpt>1000)?2*_TRANCHES:_TRANCHES;

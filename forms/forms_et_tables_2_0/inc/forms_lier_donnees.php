@@ -33,18 +33,12 @@ function inc_forms_lier_donnees($type, $id, $script, $deplie=false, $type_table 
 	$out = "";
 	$out .= "<a name='tables'></a>";
 	if (_request('cherche_donnee') || _request('ajouter') || $deplie){
-		//adaptation SPIP 2
-		//$bouton = bouton_block_visible("tables_$type_$id");
-		$bouton = bouton_block_depliable(true,"tables_$type_$id");
-		//$debut_block = 'debut_block_visible';
-		$debut_block = 'debut_block_depliable';
+		$bouton = bouton_block_visible("tables_$type_$id");
+		$debut_block = 'debut_block_visible';
 	}
 	else{
-		//adpatation SPIP2
-		//$bouton = bouton_block_invisible("tables_$type_$id");
-		$bouton = bouton_block_depliable(false,"tables_$type_$id");
-		//$debut_block = 'debut_block_invisible';
-		$debut_block = 'bouton_block_depliable';
+		$bouton = bouton_block_invisible("tables_$type_$id");
+		$debut_block = 'debut_block_invisible';
 	}
 
 	$icone = find_in_path("img_pack/$type_table-24.gif");
@@ -56,8 +50,7 @@ function inc_forms_lier_donnees($type, $id, $script, $deplie=false, $type_table 
 
 	$out .= $s;
 	
-	$out .= $debut_block(false,"tables_$type_$id");
-	
+	$out .= $debut_block("tables_$type_$id",true);
 	//
 	// Afficher le formulaire de recherche des donnees des tables
 	//
@@ -187,9 +180,7 @@ function Forms_liste_recherche_donnees($recherche,$les_donnees,$type,$type_table
 			WHERE d.statut!='poubelle' AND f.type_form="._q($type_table)
 			. ($linkable?" AND f.linkable='oui'":"")
 			." AND $in AND valeur LIKE "._q("$recherche%")." GROUP BY c.id_donnee ORDER BY f.id_form,d.id_donnee $limit");
-			//adapation SPIP2
-			//if (spip_num_rows($res)<10){
-			if (sql_count($res)<10){
+			if (spip_num_rows($res)<10){
 				$res = spip_query($s = "SELECT c.id_donnee FROM spip_forms_donnees_champs AS c
 				JOIN spip_forms_donnees AS d ON d.id_donnee = c.id_donnee
 				JOIN spip_forms AS f ON d.id_form = f.id_form
