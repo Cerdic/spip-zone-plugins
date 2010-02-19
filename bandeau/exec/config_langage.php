@@ -13,11 +13,10 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function exec_config_langage(){
-	include_spip('inc/onglet_pref');
 	$commencer_page = charger_fonction('commencer_page','inc');
 	echo $commencer_page(_T('bando:titre_config_langage'));
 	
-	echo bando_barre_onglets('infos_perso', 'config_langage');
+	echo barre_onglets('infos_perso', 'config_langage');
 
 	echo debut_gauche("configurer_langage",true);
 	echo debut_droite("configurer_langage",true);

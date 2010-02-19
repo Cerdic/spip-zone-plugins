@@ -36,6 +36,9 @@ function find_in_theme($file, $dirname='', $include=false){
 		if ($f = find_in_path($file,"prive/themes/$theme/$dirname",$include))
 			return $f;
 	}
+	// fall back transitoire sur prive/images/
+	if ($f = find_in_path($file,"",$include))
+		return $f;
 	spip_log("$dirname/$file introuvable dans le theme ".reset($themes),'theme');
 	return "";
 }

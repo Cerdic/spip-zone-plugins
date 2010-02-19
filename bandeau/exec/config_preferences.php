@@ -13,11 +13,10 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function exec_config_preferences(){
-	include_spip('inc/onglet_pref');
 	$commencer_page = charger_fonction('commencer_page','inc');
 	echo $commencer_page(_T('bando:titre_configurer_preferences'));
 
-	echo bando_barre_onglets('infos_perso', 'config_preferences');
+	echo barre_onglets('infos_perso', 'config_preferences');
 
 	echo debut_gauche("configurer_preferences",true);
 

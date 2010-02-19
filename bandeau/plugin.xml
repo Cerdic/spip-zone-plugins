@@ -233,15 +233,15 @@
 	</bouton>
 
 	<onglet id='infos_perso' parent="infos_perso">
-		<icone>images/auteur-24.png</icone>
+		<icone>images/identite-24.png</icone>
 		<titre>bando:icone_mes_infos</titre>
 	</onglet>
 	<onglet id='config_langage' parent="infos_perso">
-		<icone>images/traduction-24.png</icone>
+		<icone>images/langue-24.png</icone>
 		<titre>bando:icone_langage</titre>
 	</onglet>
 	<onglet id='config_preferences' parent="infos_perso">
-		<icone>images/maconfig-24.png</icone>
+		<icone>images/configuration-24.png</icone>
 		<titre>bando:icone_preferences</titre>
 	</onglet>
 
