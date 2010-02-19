@@ -27,12 +27,11 @@ function exec_infos_perso_dist(){
 			'data'=>''
 		)
 	);
-
 	include_spip('inc/onglet_pref');
 	$commencer_page = charger_fonction('commencer_page','inc');
 	echo $commencer_page(_T('info_informations_personnelles'));
 
-	echo barre_onglets('infos_perso', 'infos_perso');
+	echo bando_barre_onglets('infos_perso', 'infos_perso');
 	echo debut_gauche('', true);
 
 	charger_fonction('auteur_infos','exec');
