@@ -1,7 +1,7 @@
 <plugin>
 	<nom>SaveCFG</nom>
-	<auteur>Yohann Prigent (potter64) - 2009</auteur>
-	<version>2.0</version>
+	<auteur>Yohann Prigent (potter64) et [Jacques->http://www.spip-contrib.net/_Jacques-PYRAT_] - 2009</auteur>
+	<version>2.5</version>
 	<version_base>0.2</version_base>
 	<etat>stable</etat>
 	<description>SaveCFG vous permet de sauvegarder des configurations de CFG puis de les restaurer à votre guise.</description>
@@ -21,7 +21,7 @@
 		<inclure>savecfg_fonctions.php</inclure>
 		<action>afficher_tout</action>
 	</pipeline>
-	<necessite id="SPIP" version='[2.0.9;]' />
-	<necessite id='cfg' version='[1.14.0;]' />
+	<necessite id="SPIP" version='[2.0.10;]' />
+	<necessite id='cfg' version='[1.14.3;]' />
 	<categorie>maintenance</categorie>
 </plugin>
