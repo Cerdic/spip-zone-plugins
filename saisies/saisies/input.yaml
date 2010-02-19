@@ -4,7 +4,7 @@ description: '<:saisies:saisie_input_explication:>'
 icone: 'images/saisies_input.png'
 options:
   -
-    groupe: '<:saisies:option_groupe_informations:>'
+    groupe: '<:saisies:option_groupe_description:>'
     contenu:
       -
         saisie: 'input'
