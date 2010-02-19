@@ -13,7 +13,7 @@
 						<h3 class="legend"><:savecfg:exporter_savecfg:></h3>						<ul>
 							<li>
 							<div class="choix">
-							<BOUCLE_savecfg_export(SAVECFG){" <br /> "}>
+							<BOUCLE_savecfg_export(SAVECFG){fond=#GET{fond}}{par titre}{" <br /> "}>
 								<input id="export#ID_SAVECFG" type="checkbox" name="export[#ID_SAVECFG]" />
 								<label for="export#ID_SAVECFG">[(#TITRE|supprimer_tags)]</label>
 							</BOUCLE_savecfg_export>

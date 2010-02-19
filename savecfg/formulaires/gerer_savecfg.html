@@ -14,7 +14,7 @@
 								<li>
 								<select name="id_fond">
 								<option value="none" selected="selected">&nbsp;</option>
-								<BOUCLE_savecfg(SAVECFG){fond=#GET{fond}}>
+								<BOUCLE_savecfg(SAVECFG){fond=#GET{fond}}{par titre}>
 									<option value="#ID_SAVECFG">[(#TITRE|supprimer_tags)]</option>
 								</BOUCLE_savecfg>
 								</select>
