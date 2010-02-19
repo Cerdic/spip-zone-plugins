@@ -87,6 +87,7 @@ function formulaires_construire_formulaire_traiter($identifiant, $formulaire_ini
 		$options = _request('_saisies');
 		$options = $options[$nom]['options'];
 		$options = array_filter($options);
+		spip_desinfecte($options);
 		array_walk($formulaire_actuel, 'formidable_ajouter_options', array('nom'=>$nom, 'options'=>$options));
 	}
 	
