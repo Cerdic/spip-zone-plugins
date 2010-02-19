@@ -223,6 +223,7 @@ function vignette_automatique($img, $doc, $lien, $x=0, $y=0, $align='', $class='
 	$titre = " - " .taille_en_octets($doc['taille'])
 	  . ($titre ? " - $titre" : "");
 
+	include_spip('base/abstract_sql');
 	$type = sql_fetsel('titre, mime_type','spip_types_documents', "extension = " . sql_quote($e));
 
 	$mime = $type['mime_type'];
