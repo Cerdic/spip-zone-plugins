@@ -1,0 +1,9 @@
+[(#REM) Affiche les listes:
+	- Tickets en cours de redaction, pour l'auteur connecte
+	- Tickets asignes a l'auteur connecte
+	- Tickets ouverts quelqu'ils soient
+]
+#CACHE{0}
+<INCLURE{fond=prive/contenu/inc_liste_detaillee}{ajax}{env}{titre=<:tickets:vos_tickets_en_cours:>}{id_auteur=#SESSION{id_auteur}}{statut=redac}{bloc=_bloc1}>
+<INCLURE{fond=prive/contenu/inc_liste_detaillee}{ajax}{env}{titre=<:tickets:vos_tickets_assignes:>}{id_assigne=#SESSION{id_auteur}}{statut=ouvert}{bloc=_bloc2}>
+<INCLURE{fond=prive/contenu/inc_liste_detaillee}{ajax}{env}{titre=<:tickets:tous_tickets_ouverts:>}{statut=ouvert}{bloc=_bloc3}>
