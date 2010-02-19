@@ -5,6 +5,7 @@
 
 .formulaire_construire_formulaire li, .formulaire_construire_formulaire li.fieldset li{
 	padding:1em;
+	margin:0.5em 0;
 	border:1px dashed transparent;
 	border-radius:5px;
 	-moz-border-radius:5px;
@@ -13,15 +14,25 @@
 .formulaire_construire_formulaire li:hover{
 	border-color:#999;
 }
+.formulaire_construire_formulaire li.en_configuration{
+	border:1px solid #999;
+}
 .formulaire_construire_formulaire li.obligatoire{
 	background:transparent;
 }
 .formulaire_construire_formulaire ul.formulaire_configurer li{
 	border:0;
+	margin:0;
 }
 
 .formulaire_construire_formulaire .actions{
 	float:right;
+}
+.formulaire_construire_formulaire .hidden{
+	visibility:hidden;
+}
+.formulaire_construire_formulaire li.en_configuration .actions{
+	visibility:visible;
 }
 
 .formulaire_construire_formulaire .actions button{

@@ -61,5 +61,20 @@
 		
 		<span class='image_loading'></span>
 	</div></form>
+	
+	<script type="text/javascript">
+		$(function(){
+			$('.formulaire_construire_formulaire li .actions').addClass('hidden');
+			$('.formulaire_construire_formulaire li:has(.actions)')
+				.hover(
+					function(){
+						$(this).find('> .actions').removeClass('hidden');
+					},
+					function(){
+						$(this).find('> .actions').addClass('hidden');
+					}
+				);
+		});
+	</script>
 	</BOUCLE_editable>
 </div>

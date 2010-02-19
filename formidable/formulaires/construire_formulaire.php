@@ -22,7 +22,7 @@ function formulaires_construire_formulaire_charger($identifiant, $formulaire_ini
 	// On passe ça pour l'affichage
 	$contexte['_contenu'] = $formulaire_actuel;
 	// On passe ça pour la récup plus facile des champs
-	$contexte['_saisies'] = saisies_recuperer_saisies($formulaire_actuel);
+	$contexte['_saisies_par_nom'] = $contexte['saisies_modifiees'] = saisies_recuperer_saisies($formulaire_actuel);
 	
 	// La liste des saisies
 	$saisies_disponibles = saisies_lister_disponibles();
@@ -46,14 +46,15 @@ function formulaires_construire_formulaire_verifier($identifiant, $formulaire_in
 	if ($nom = $configurer_saisie =  _request('configurer_saisie') or $nom = $enregistrer_saisie = _request('enregistrer_saisie')){
 		$saisie = $saisies_actuelles[$nom];
 		$form_config = $saisies_disponibles[$saisie['saisie']]['options'];
-		array_walk_recursive($form_config, 'formidable_transformer_nom', "_saisies[$nom][options][@valeur@]");
+		array_walk_recursive($form_config, 'formidable_transformer_nom', "saisies_modifiees[$nom][options][@valeur@]");
 		$erreurs['configurer_'.$nom] = $form_config;
 		
 		if ($enregistrer_saisie){
 			include_spip('inc/verifier');
 			$vraies_erreurs = verifier_saisies($form_config);
-			if ($vraies_erreurs)
+			if ($vraies_erreurs){
 				$erreurs = array_merge($erreurs, $vraies_erreurs);
+			}
 			else
 				$erreurs = array();
 		}
@@ -84,7 +85,7 @@ function formulaires_construire_formulaire_traiter($identifiant, $formulaire_ini
 	// Si on enregistre la conf d'une saisie
 	if ($nom = _request('enregistrer_saisie')){
 		// On récupère les options postées en vidant les chaines vides
-		$options = _request('_saisies');
+		$options = _request('saisies_modifiees');
 		$options = $options[$nom]['options'];
 		$options = array_filter($options);
 		spip_desinfecte($options);
@@ -138,12 +139,23 @@ function formidable_preparer_saisie_configurable($saisie, $env){
 	
 	// Si ya un form de config on l'ajoute à la fin
 	if (is_array($formulaire_config)){
+		// On ajoute une classe
+		$saisie['options']['li_class'] .= ' en_configuration';
+		
+		// Si possible on met en readonly
+		$saisie['options']['readonly'] = 'oui';
+		
 		$env['saisies'] = $formulaire_config;
 		
-		// Un test pour résoudre un bug
+		// Un test pour savoir si on prend le _request ou bien
 		$erreurs_test = $env['erreurs'];
 		unset($erreurs_test['configurer_'.$nom]);
-		if ($erreurs_test) $env['_saisies'] = _request('_saisies');
+		if ($erreurs_test){
+			// Là aussi on désinfecte à la main
+			spip_desinfecte($env['saisies_modifiees'][$nom]['options']);
+		}
+		else
+			$env['saisies_modifiees'] = $env['_saisies_par_nom'];
 		
 		$saisie = saisies_inserer_html(
 			$saisie,
