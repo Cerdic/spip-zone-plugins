@@ -1,6 +1,6 @@
 #SET{fond, #SELF|match{(cfg=)(\w+?),2}}
-<BOUCLE_present2(meta){nom=#GET{fond}}{0,1}>
+[(#CONFIG{#GET{fond}}|oui)
 #FORMULAIRE_SAUVEGARDER_SAVECFG
 <br />
-</BOUCLE_present2>
+]
 #FORMULAIRE_GERER_SAVECFG
