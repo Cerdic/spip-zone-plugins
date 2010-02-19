@@ -232,15 +232,4 @@
 		<args>new=oui&amp;id_rubrique=@id_rubrique@</args>
 	</bouton>
 
-
-	<onglet id='infos_perso' parent="infos_perso">
-		<titre>bando:icone_mes_infos</titre>
-	</onglet>
-	<onglet id='config_langage' parent="infos_perso">
-		<titre>bando:icone_langage</titre>
-	</onglet>
-	<onglet id='config_preferences' parent="infos_perso">
-		<titre>bando:icone_preferences</titre>
-	</onglet>
-
 </plugin>
