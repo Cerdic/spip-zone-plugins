@@ -67,7 +67,7 @@
 				include_spip('base/create');
 				include_spip('base/auxiliaires');
 				maj_tables('spip_evenements_participants');
-				#ecrire_meta('agenda_base_version',$current_version=0.22,'non');
+				ecrire_meta('agenda_base_version',$current_version=0.22,'non');
 			}
 		}
 	}
