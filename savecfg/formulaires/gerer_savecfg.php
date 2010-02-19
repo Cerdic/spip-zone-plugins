@@ -3,22 +3,22 @@ function formulaires_gerer_savecfg_charger_dist() {
 	$valeurs = array(
 		'nom' => '',
 		'fondcfg' => _request('cfg'),
-		'id_fond' => ''
+		'fond_id' => ''
 	);
 	return $valeurs;
 }
 function formulaires_gerer_savecfg_verifier_dist(){
 	$erreurs = array();
-	if (_request('id_fond') == 'none')
+	if (_request('fond_id') == 'none')
 		$erreurs['message_erreur'] = _T('spip:info_obligatoire');
 	return $erreurs;
 }
 function formulaires_gerer_savecfg_traiter_dist() {
 	if (_request('_restaurer_')) {
-		$message = restaurer_savecfg(_request('id_fond'));
+		$message = restaurer_savecfg(_request('fond_id'));
 	}
 	if (_request('_supprimer_')) {
-		$message = supprimer_savecfg(_request('id_fond'));
+		$message = supprimer_savecfg(_request('fond_id'));
 	}
 	return $message;
 }

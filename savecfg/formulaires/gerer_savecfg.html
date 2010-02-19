@@ -12,7 +12,7 @@
 						<h3 class="legend"><:savecfg:gerer_restauration:></h3>
 						<ul>
 								<li>
-								<select name="id_fond">
+								<select name="fond_id">
 								<option value="none" selected="selected">&nbsp;</option>
 								<BOUCLE_savecfg(SAVECFG){fond=#GET{fond}}{par titre}>
 									<option value="#ID_SAVECFG">[(#TITRE|supprimer_tags)]</option>
