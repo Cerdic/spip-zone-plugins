@@ -28,6 +28,7 @@ function exec_infos_perso_dist(){
 		)
 	);
 
+	include_spip('inc/onglet_pref');
 	$commencer_page = charger_fonction('commencer_page','inc');
 	echo $commencer_page(_T('info_informations_personnelles'));
 

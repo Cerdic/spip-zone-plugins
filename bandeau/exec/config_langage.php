@@ -13,7 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function exec_config_langage(){
-	
+	include_spip('inc/onglet_pref');
 	$commencer_page = charger_fonction('commencer_page','inc');
 	echo $commencer_page(_T('bando:titre_config_langage'));
 	

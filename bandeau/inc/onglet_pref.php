@@ -12,19 +12,20 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function exec_config_preferences(){
-	include_spip('inc/onglet_pref');
-	$commencer_page = charger_fonction('commencer_page','inc');
-	echo $commencer_page(_T('bando:titre_configurer_preferences'));
-
-	echo barre_onglets('infos_perso', 'config_preferences');
-
-	echo debut_gauche("configurer_preferences",true);
-
-	echo debut_droite("configurer_preferences",true);
-
-	echo recuperer_fond('prive/configurer/preferences',$_GET);
-	echo fin_gauche(),fin_page();
+function barre_onglets_infos_perso(){
+	$onglets=array();
+	$avatar=find_in_theme('images/auteur-24.png');
+	$onglets['infos_perso']=
+		  new Bouton($avatar, 'bando:icone_mes_infos',
+			generer_url_ecrire("infos_perso",'infos_perso'));
+	$lang=find_in_theme('images/traduction-24.png');
+	$onglets['config_langage']=
+		  new Bouton($lang, 'bando:icone_langage',
+			generer_url_ecrire("config_langage"));
+	$pref=find_in_theme('images/maconfig-24.png');
+	$onglets['config_preferences']=
+		  new Bouton($pref, 'bando:icone_preferences',
+			generer_url_ecrire("config_preferences"));
+	return $onglets;
 }
-
 ?>

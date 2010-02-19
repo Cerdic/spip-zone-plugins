@@ -166,21 +166,4 @@ function lien_change_var($lien, $set, $couleur, $coords, $titre, $mouseOver="") 
 	return "\n<area shape='rect' href='$lien' coords='$coords' title=\"$titre\" alt=\"$titre\" $mouseOver />";
 }
 
-function barre_onglets_infos_perso(){
-	$onglets=array();
-	$avatar=find_in_theme('images/auteur-24.png');
-	$onglets['infos_perso']=
-		  new Bouton($avatar, 'bando:icone_mes_infos',
-			generer_url_ecrire("infos_perso",'infos_perso'));
-	$lang=find_in_theme('images/traduction-24.png');
-	$onglets['config_langage']=
-		  new Bouton($lang, 'bando:icone_langage',
-			generer_url_ecrire("config_langage"));
-	$pref=find_in_theme('images/maconfig-24.png');
-	$onglets['config_preferences']=
-		  new Bouton($pref, 'bando:icone_preferences',
-			generer_url_ecrire("config_preferences"));
-	return $onglets;
-}
-
 ?>
