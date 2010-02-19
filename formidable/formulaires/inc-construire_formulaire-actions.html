@@ -1,7 +1,14 @@
 <div class="actions">
+	[(#ENV{formulaire_config}|is_array|non)
 	<button type="submit" class="submit configurer_saisie" name="configurer_saisie" value="#ENV{nom}" title="<:formidable:construire_action_configurer:>">
 		<img src="[(#CHEMIN{images/formulaire-configurer-16.png})]" alt="<:formidable:construire_action_configurer:>"/>
 	</button>
+	]
+	[(#ENV{formulaire_config}|is_array|oui)
+	<button type="submit" class="submit enregistrer_saisie" name="enregistrer_saisie" value="#ENV{nom}" title="<:bouton_enregistrer:>">
+		<img src="[(#CHEMIN{images/formulaire-enregistrer-16.png})]" alt="<:bouton_enregistrer:>"/>
+	</button>
+	]
 	<button type="submit" class="submit supprimer_saisie" name="supprimer_saisie" value="#ENV{nom}" title="<:formidable:construire_action_supprimer:>">
 		<img src="[(#CHEMIN{images/formulaire-supprimer-16.png})]" alt="<:formidable:construire_action_supprimer:>"/>
 	</button>

@@ -19,12 +19,6 @@ function formulaires_construire_formulaire_charger($identifiant, $formulaire_ini
 		$formulaire_actuel = $formulaire_initial;
 	}
 	
-	// Test
-#	foreach ($formulaire_actuel as $rang=>$saisie){
-#		if (!$saisie['options']['label'])
-#			$formulaire_actuel[$rang]['options']['label'] = 'MOULOUDJI : '.$saisie['options']['nom'];
-#	}
-	
 	// On passe ça pour l'affichage
 	$contexte['_contenu'] = $formulaire_actuel;
 	// On passe ça pour la récup plus facile des champs
@@ -49,11 +43,20 @@ function formulaires_construire_formulaire_verifier($identifiant, $formulaire_in
 	// La liste des saisies
 	$saisies_disponibles = saisies_lister_disponibles();
 	
-	if ($nom = _request('configurer_saisie')){
+	if ($nom = $configurer_saisie =  _request('configurer_saisie') or $nom = $enregistrer_saisie = _request('enregistrer_saisie')){
 		$saisie = $saisies_actuelles[$nom];
 		$form_config = $saisies_disponibles[$saisie['saisie']]['options'];
 		array_walk_recursive($form_config, 'formidable_transformer_nom', "_saisies[$nom][options][@valeur@]");
 		$erreurs['configurer_'.$nom] = $form_config;
+		
+		if ($enregistrer_saisie){
+			include_spip('inc/verifier');
+			$vraies_erreurs = verifier_saisies($form_config);
+			if ($vraies_erreurs)
+				$erreurs = array_merge($erreurs, $vraies_erreurs);
+			else
+				$erreurs = array();
+		}
 	}
 	
 	return $erreurs;
@@ -68,6 +71,7 @@ function formulaires_construire_formulaire_traiter($identifiant, $formulaire_ini
 	// On récupère le formulaire à son état actuel
 	$formulaire_actuel = session_get($identifiant);
 	
+	// Si on demande à ajouter une saisie
 	if ($ajouter_saisie = _request('ajouter_saisie')){
 		$formulaire_actuel[] = array(
 			'saisie' => $ajouter_saisie,
@@ -75,6 +79,15 @@ function formulaires_construire_formulaire_traiter($identifiant, $formulaire_ini
 				'nom' => saisies_generer_nom($formulaire_actuel, $ajouter_saisie)
 			)
 		);
+	}
+	
+	// Si on enregistre la conf d'une saisie
+	if ($nom = _request('enregistrer_saisie')){
+		// On récupère les options postées en vidant les chaines vides
+		$options = _request('_saisies');
+		$options = $options[$nom]['options'];
+		$options = array_filter($options);
+		array_walk($formulaire_actuel, 'formidable_ajouter_options', array('nom'=>$nom, 'options'=>$options));
 	}
 	
 	// On enregistre en session la nouvelle version du formulaire
@@ -94,24 +107,43 @@ function formidable_transformer_nom(&$valeur, $cle, $transformation){
 	}
 }
 
+// À utiliser avec un array_walk()
+// Modifie les options d'une saisie
+function formidable_ajouter_options(&$valeur, $cle, $nouvelle){
+	if (is_array($valeur) and $valeur['saisie'] and $valeur['options']['nom'] == $nouvelle['nom']){
+		$nouvelle['options']['nom'] = $valeur['options']['nom'];
+		$valeur['options'] = $nouvelle['options'];
+	}
+	elseif ($cle == 'contenu')
+		array_walk($valeur, 'formidable_ajouter_options', array('nom'=>$nom, 'options'=>$options));
+}
+
 // Préparer une saisie pour la transformer en truc configurable
 function formidable_preparer_saisie_configurable($saisie, $env){
 	// On récupère le nom
 	$nom = $saisie['options']['nom'];
+	// On cherche si ya un formulaire de config
+	$formulaire_config = $env['erreurs']['configurer_'.$nom];
+	
 	// On ajoute les boutons d'actions
 	$saisie = saisies_inserer_html(
 		$saisie,
 		recuperer_fond(
 			'formulaires/inc-construire_formulaire-actions',
-			array('nom' => $nom)
+			array('nom' => $nom, 'formulaire_config' => $formulaire_config)
 		),
 		'debut'
 	);
-	// On cherche si ya un formulaire de config
-	$formulaire_config = $env['erreurs']['configurer_'.$nom];
-	// Si oui on l'ajoute à la fin
+	
+	// Si ya un form de config on l'ajoute à la fin
 	if (is_array($formulaire_config)){
 		$env['saisies'] = $formulaire_config;
+		
+		// Un test pour résoudre un bug
+		$erreurs_test = $env['erreurs'];
+		unset($erreurs_test['configurer_'.$nom]);
+		if ($erreurs_test) $env['_saisies'] = _request('_saisies');
+		
 		$saisie = saisies_inserer_html(
 			$saisie,
 			'<ul class="formulaire_configurer">'

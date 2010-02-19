@@ -13,6 +13,9 @@
 .formulaire_construire_formulaire li:hover{
 	border-color:#999;
 }
+.formulaire_construire_formulaire li.obligatoire{
+	background:transparent;
+}
 .formulaire_construire_formulaire ul.formulaire_configurer li{
 	border:0;
 }
