@@ -2,7 +2,7 @@
 function formulaires_gerer_savecfg_charger_dist() {
 	$valeurs = array(
 		'nom' => '',
-		'fond' => _request('cfg'),
+		'fondcfg' => _request('cfg'),
 		'id_fond' => ''
 	);
 	return $valeurs;
