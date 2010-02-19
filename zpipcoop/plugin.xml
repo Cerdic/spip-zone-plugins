@@ -1,0 +1,13 @@
+<plugin>
+	<nom>Zpipcoop</nom>
+	<auteur>Pierre KUHN, Val&ecute;ry</auteur>
+	<icon></icon>
+	<licence>GPL</licence>
+	<version>0.1</version>
+	<etat>dev</etat>
+	<description>
+	Un plugin compatible avec le comcepte Z.
+	</description>
+	<prefix>zpipcoop</prefix>
+	<necessite id="SPIP" version="[2.0.10;]" />
+</plugin>

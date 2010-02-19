@@ -1,0 +1,47 @@
+[(#REM) Lords du passage en plugins passer au format de date du cs afin d'éviter l'année 1970
+(cf:http://zone.spip.org/trac/spip-zone/browser/_plugins_/couteau_suisse/cout_options.php)]
+
+#MENU_LANG
+[(#LOGO_SITE_SPIP||image_reduire{226,226})]
+[(#LOGO_RUBRIQUE||image_reduire{226,226})]
+
+<p>
+	[(#AUTORISER{ecrire})<a href="[(#URL_ECRIRE{articles_edit,id_rubrique=#ID_RUBRIQUE}|parametre_url{new,oui})]" class="add"><:zpipcoop:nouveau_message:></a><br />]
+	[(#AUTORISER{activer_sites})<a href="[(#URL_ECRIRE{sites_edit,id_rubrique=#ID_RUBRIQUE}|parametre_url{new,oui})]" class="add"><:zpipcoop:nouveau_site:></a>]
+</p>
+
+	[(#PLUGIN{spiplistes}|oui)<h2 class="h2"><:zpipcoop:abonnement:></h2>]
+		[(#PLUGIN{spiplistes}|oui)<li class="item"><a href="#URL_PAGE{abonnement}"><:zpipcoop:abonnement:></a></li>]
+
+	<B_groupes>
+	<div class="liste groupes">
+	<h2 class="h2"><:zpipcoop:groupes_travail:></h2>
+	<ul class="liste-items">
+		<BOUCLE_groupes(RUBRIQUES){racine}>
+			<li class="item"><a href="#URL_RUBRIQUE">#TITRE</a></li>
+		</BOUCLE_groupes>
+	</ul>
+	</div>
+	</B_groupes>
+
+	<B_categories>
+	<div class="liste categories">
+	<h2 class="h2"><:zpipcoop:categories:></h2>
+	<ul class="liste-items">
+		<BOUCLE_categories(MOTS)>
+		<li class="item"><a href="#URL_MOT">#TITRE</a></li>
+		</BOUCLE_categories>
+	</ul>
+	</div>
+	</B_categories>
+
+	<B_connexions>
+	<div class="liste visiteurs">
+	<h2 class="h2"><:zpipcoop:derniers_visiteurs:></h2>
+	<ul class="liste-items">
+		<BOUCLE_connexions(AUTEURS){tous}{!par en_ligne}{0,10}>
+			<li class="item"><a href="#URL_AUTEUR">#NOM</a>[ (#EN_LIGNE|affdate{d/m/Y H:i:s})]</li>
+		</BOUCLE_connexions>
+	</ul>
+	</div>
+	</B_connexions>

@@ -1,0 +1,7 @@
+#SET{perso,#CHEMIN{head/page-#ENV{composition}|concat{'.html'}}}
+[(#GET{perso}|oui)
+#INCLURE{fond=head/page-#ENV{composition},env}
+][(#GET{perso}|non)
+<title>[(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)" />]
+]
