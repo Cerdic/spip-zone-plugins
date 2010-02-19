@@ -11,14 +11,14 @@
 function savecfg_install($action){
 	switch ($action){
 		case 'test':
-			savecfg_upgrade('savecfg_base_version',0.2);
-		break;
+			return (isset($GLOBALS['meta']['savecfg_base_version']) AND ($GLOBALS['meta']['savecfg_base_version']>=$version_base));
+			break;
 		case 'install':
 			savecfg_upgrade('savecfg_base_version',0.2);
-		break;
+			break;
 		case 'uninstall':
 			savecfg_vider_tables('savecfg_base_version');
-		break;
+			break;
 	}
 }
 function savecfg_upgrade($nom_meta_base_version,$version_cible){
