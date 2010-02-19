@@ -281,7 +281,7 @@ function fixer_fichier_upload($file){
 		deplacer_fichier_upload($file['tmp_name'], $tmp, true);
 		
 		include_spip('inc/pclzip');
-		$source = _DIR_TMP . $tmp_dir . '.zip';
+		$source = _DIR_TMP . basename($tmp_dir) . '.zip';
 		$archive = new PclZip($source);
 		
 		$v_list = $archive->create($tmp,
