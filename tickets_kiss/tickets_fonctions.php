@@ -106,21 +106,21 @@ function tickets_bouton_block_depliable($texte,$deplie,$ids=""){
 
 // Interpretation des valeurs de certains champs de la table ticket
 function tickets_texte_severite ($niveau) {
-	if ($niveau == 1) return "bloquant";
-	else if ($niveau == 2) return "important";
-	else if ($niveau == 3) return "normal";
-	else if ($niveau == 4) return "peu important";
+	if ($niveau == 1) return _T("tickets:severite_bloquant");
+	else if ($niveau == 2) return _T("tickets:severite_important");
+	else if ($niveau == 3) return _T("tickets:severite_normal");
+	else if ($niveau == 4) return _T("tickets:severite_peu_important");
 }
 function tickets_texte_type ($niveau) {
-	if ($niveau == 1) return "probl&egrave;me";
-	else if ($niveau == 2) return "am&eacute;lioration";
-	else if ($niveau == 3) return "t&acirc;che";
+	if ($niveau == 1) return _T("tickets:type_probleme");
+	else if ($niveau == 2) return _T("tickets:type_amelioration");
+	else if ($niveau == 3) return _T("tickets:type_tache");
 }
 function tickets_texte_statut ($niveau) {
-	if ($niveau == "redac") return "en cours de r&eacute;daction";
-	else if ($niveau == "ouvert") return "ouvert et discut&eacute;";
-	else if ($niveau == "resolu") return "r&eacute;solu";
-	else if ($niveau == "ferme") return "ferm&eacute;";
+	if ($niveau == "redac") return _T("tickets:statut_redac");
+	else if ($niveau == "ouvert") return _T("tickets:statut_ouvert");
+	else if ($niveau == "resolu")  return _T("tickets:statut_resolu");
+	else if ($niveau == "ferme")  return _T("tickets:statut_ferme");
 }
 function tickets_icone_statut ($niveau) {
 	if ($niveau == "redac") $img = "puce-blanche.gif";

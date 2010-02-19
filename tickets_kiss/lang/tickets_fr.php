@@ -74,6 +74,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'revenir_gestion' => 'Revenir &agrave; la gestion des tickets',
 	
 	// S
+	'severite_bloquant' => 'bloquant',
+	'severite_important' => 'important',
+	'severite_normal' => 'normal',
+	'severite_peu_important' => 'peu important',
 	'statut_mis_a_jour' => 'Statut mis &agrave; jour',
 	'statut_ferme' => 'Ferm&eacute;',
 	'statut_ferme_long' => 'Tous les tickets ferm&eacute;s',
@@ -89,11 +93,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre' => 'Tickets, suivi de bugs',
 	'titre_liste' => 'Liste des tickets',
 	'tous_tickets_ouverts' => 'Tous les tickets ouverts',
-	'type_amelioration' => 'Am&eacute;lioration',
+	'type_amelioration' => 'am&eacute;lioration',
 	'type_amelioration_long' => 'Les tickets demandant une am&eacute;lioration',
-	'type_probleme' => 'Probl&egrave;me',
+	'type_probleme' => 'probl&egrave;me',
 	'type_probleme_long' => 'Les probl&egrave;mes &agrave; r&eacute;soudre',
-	'type_tache' => 'Probl&egrave;me',
+	'type_tache' => '&agrave; faire',
 	'type_tache_long' => 'Les t&acirc;ches &agrave; accomplir',
 	
 	// V
