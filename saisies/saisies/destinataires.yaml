@@ -3,7 +3,7 @@ titre: '<:saisies:saisie_destinataires_titre:>'
 description: '<:saisies:saisie_destinataires_explication:>'
 options:
   -
-    groupe: '<:saisies:option_groupe_informations:>'
+    groupe: '<:saisies:option_groupe_description:>'
     contenu:
       -
         saisie: 'input'
