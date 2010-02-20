@@ -10,12 +10,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'editer_menus_editer' => 'Modifier ce menu',
 'editer_menus_exporter' => 'Exporter ce menu',
 
+'erreur_aucun_type' => 'Aucun type d\'entr&eacute;e n\'a &eacute;t&eacute; trouv&eacute;.',
 'erreur_autorisation' => 'Vous n\'&ecirc;tes pas autoris&eacute; &agrave; modifier les menus.',
 'erreur_identifiant_deja' => 'Cet identifiant est d&eacute;j&agrave; utilis&eacute; par un menu.',
 'erreur_identifiant_forme' => 'L\'identifiant ne doit contenir que des lettres, des chiffres ou le caract&egrave;re soulign&eacute;.',
 'erreur_menu_inexistant' => 'Le menu demand&eacute; num&eacute;ro @id@ n\'existe pas.',
 'erreur_mise_a_jour' => 'Une erreur s\'est produite pendant la mise &agrave; jour de la base de donn&eacute;e.',
-'erreur_aucun_type' => 'Aucun type d\'entr&eacute;e n\'a &eacute;t&eacute; trouv&eacute;.',
+'erreur_type_menu' => 'Vous devez choisir un type de menu',
 
 'formulaire_nouveau' => 'Nouveau menu',
 'formulaire_modifier_menu' => 'Modifier le menu :',
