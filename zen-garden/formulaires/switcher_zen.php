@@ -10,6 +10,6 @@ function formulaires_switcher_zen_verifier_dist(){
 function formulaires_switcher_zen_traiter_dist(){
     include_spip('inc/cookie');
     spip_setcookie('spip_zengarden_switch_theme', _request('theme'),-24*3600);
-    return array();
+    return array('message_ok'=>'ok','redirect'=>self());
 }
 ?>

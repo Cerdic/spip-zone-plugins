@@ -6,7 +6,7 @@
  */
 
 include_spip('inc/zengarden');
-
+include_spip('inc/headers');
 /**
  * Lister les thèmes
  * 

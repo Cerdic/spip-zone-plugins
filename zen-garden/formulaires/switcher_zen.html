@@ -1,6 +1,7 @@
 #SET{themes,#ENV{tous,''}|zengarden_liste_themes}
 <form action='#ENV{action}' method='post' class='formulaire_spip formulaire_switcher_zen'>
 #ACTION_FORMULAIRE{#ENV{action}}
+[(#ENV{message_ok}|oui)[(#SELF|redirige_par_entete)]]
 <B_themes>
 <select name="theme">
     <option selected="selected"><:zengarden:themes:></option>
