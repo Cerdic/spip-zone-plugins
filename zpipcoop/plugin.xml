@@ -9,5 +9,18 @@
 	Un plugin compatible avec le comcepte Z.
 	</description>
 	<prefix>zpipcoop</prefix>
+	<fonctions>zpipcoop_pipelines.php</fonctions>
+	<pipeline>
+		<nom>styliser</nom>
+		<inclure>zpipcoop_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>zpipcoop_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>pre_propre</nom>
+		<inclure>zpipcoop_pipelines.php</inclure>
+	</pipeline>
 	<necessite id="SPIP" version="[2.0.10;]" />
 </plugin>
