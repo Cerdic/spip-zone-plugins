@@ -15,9 +15,12 @@ float:left;
 #switcher_zen input {
 float:right;
 }
-#switcher_zen form.spip_formulaire {
+#switcher_zen form.formulaire_spip{
 background:none;
 width:20em;
+border:none;
+margin:none;
+padding:none
 }
 #switcher_zen {
 background-color:transparent;
