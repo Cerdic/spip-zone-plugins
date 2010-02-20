@@ -30,6 +30,7 @@ function exec_infos_perso_dist(){
 	$commencer_page = charger_fonction('commencer_page','inc');
 	echo $commencer_page(_T('info_informations_personnelles'));
 
+	echo gros_titre(_T('info_informations_personnelles'),'', false);
 	echo barre_onglets('infos_perso', 'infos_perso');
 	echo debut_gauche('', true);
 

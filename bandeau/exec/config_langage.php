@@ -16,6 +16,7 @@ function exec_config_langage(){
 	$commencer_page = charger_fonction('commencer_page','inc');
 	echo $commencer_page(_T('bando:titre_config_langage'));
 	
+	echo gros_titre(_T('info_informations_personnelles'),'', false);
 	echo barre_onglets('infos_perso', 'config_langage');
 
 	echo debut_gauche("configurer_langage",true);

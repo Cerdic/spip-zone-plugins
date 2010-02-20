@@ -21,6 +21,7 @@ function exec_config_identite(){
 	$commencer_page = charger_fonction('commencer_page','inc');
 	echo $commencer_page(_T('bando:titre_identite_site'));
 
+	echo gros_titre(_T('info_informations_personnelles'),'', false);
 	echo debut_gauche("configurer_identite",true);
 
 	//
