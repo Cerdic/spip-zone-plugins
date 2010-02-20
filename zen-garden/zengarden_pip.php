@@ -5,7 +5,7 @@ function zengarden_affichage_final($texte){
         include_spip('inc/utils');
         $code = recuperer_fond('inc/switcher_zen');
         // On rajoute le code du selecteur de squelettes avant la balise </body>
-		$texte=preg_replace("</body>","$code</body>",$texte);
+		$texte=str_replace("</body>",$code."</body>",$texte);
     
     }
     return $texte;
