@@ -1,3 +1,11 @@
 <ul class="menu-liste">
-	<li class="menu-entree"><a href="http://www.spip-contrib.net/?article3344" target="_blank"><:zpip:personaliser_nav:></a></li>
+	<li class="page_item[(#ENV{page}|=={sommaire}|?{' current_page_item',' '})]"><a href="#URL_SITE_SPIP"><:accueil_site:></a></li>
+	<li class="page_item[(#ENV{page}|=={messages}|?{' current_page_item',' '})]"><a href="#URL_PAGE{messages}"><:zpipcoop:messages:></a></li>
+	<li class="page_item[(#ENV{page}|=={calendrier}|?{' current_page_item',' '})]"><a href="#URL_PAGE{calendrier}" ><:zpipcoop:agenda:></a></li>
+	<li class="page_item[(#ENV{page}|=={documents}|?{' current_page_item',' '})]"><a href="#URL_PAGE{documents}" ><:zpipcoop:documents:></a></li>
+	<li class="page_item[(#ENV{page}|=={annuaire}|?{' current_page_item',' '})]"><a href="#URL_PAGE{annuaire}" ><:zpipcoop:annuaire:></a></li>
 </ul>
+<div id="login">
+	[(#SESSION{id_auteur}|?{' '})<p>[<:bonjour:> <a href="(#URL_PAGE{auteur}|parametre_url{id_auteur,[(#SESSION{id_auteur})]})">][(#SESSION{nom})]</a>.
+	<br /><a href="#URL_LOGOUT{#URL_PAGE{login_public}|parametre_url{url,#URL_SITE_SPIP}}" rel="nofollow"><:icone_deconnecter:></a></p>]
+</div><!--#login-->

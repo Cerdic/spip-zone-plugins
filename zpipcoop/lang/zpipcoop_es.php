@@ -18,8 +18,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 //C
 'categories' => 'Categor&iacute;as',
 'conception_graphique_par' => 'Dise&ntilde;o gr&aacute;fico (c)',
-'commentaire' => 'comentario',
-'commentaires' => 'comentarios',
+'commentaire' => 'Comentario',
+'commentaires' => 'Comentarios',
 'connecter_comme' => 'Conectada como',
 
 //D

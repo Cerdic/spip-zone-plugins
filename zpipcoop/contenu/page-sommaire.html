@@ -15,26 +15,26 @@
 					<BOUCLE_forums(FORUMS) {par date} {inverse}{0,5} {plat}>
 					<BOUCLE_articles(ARTICLES) {par date} {inverse} {doublons} {date>#DATE} {lang}{0,5}>
 					<BOUCLE_documents(DOCUMENTS) {par date} {inverse} {doublons} {date>#DATE}{0,5}>
-						<li class="file[ (#EXTENSION)]"><em><:documents></em>&nbsp;[<a href="(#URL_DOCUMENT)" title="<:bouton_telecharger:>" type="#MIME_TYPE">[(#TITRE|sinon{[(#FICHIER|basename)]})]</a> <small>(<span>#TYPE_DOCUMENT[ &ndash; (#TAILLE|taille_en_octets)]</span>)</small>][<small>  | (#DATE|affdate_court)</small>]</li>
+						<li class="file[ (#EXTENSION)]"><em><:zpipcoop:documents></em>&nbsp;[<a href="(#URL_DOCUMENT)" title="<:bouton_telecharger:>" type="#MIME_TYPE">[(#TITRE|sinon{[(#FICHIER|basename)]})]</a> <small>(<span>#TYPE_DOCUMENT[ &ndash; (#TAILLE|taille_en_octets)]</span>)</small>][<small>  | (#DATE|affdate_court)</small>]</li>
 					</BOUCLE_documents>
-						<li class="mes"><em><:messages:></em>&nbsp;[<a href="#URL_ARTICLE">(#TITRE)</a>][, <:par_auteur:> (#LESAUTEURS)][<small> | (#DATE|affdate_court)</small>]</li>
+						<li class="mes"><em><:zpipcoop:messages:></em>&nbsp;[<a href="#URL_ARTICLE">(#TITRE)</a>][<small>, <:par_auteur:></small> (#LESAUTEURS)][<small> | (#DATE|affdate_court)</small>]</li>
 					</BOUCLE_articles>
 
 					<BOUCLE_documents2(DOCUMENTS) {par date} {inverse} {doublons} {date>#DATE}{0,5}>
-						<li class="file[ (#EXTENSION)]"><em><:documents:></em>&nbsp;[<a href="(#URL_DOCUMENT)" title="<:bouton_telecharger:>" type="#MIME_TYPE">[(#TITRE|sinon{[(#FICHIER|basename)]})]</a> <small>(<span>#TYPE_DOCUMENT[ &ndash; (#TAILLE|taille_en_octets)]</span>)</small>][<small>  | (#DATE|affdate_court)</small>]</li>
+						<li class="file[ (#EXTENSION)]"><em><:zpipcoop:documents:></em>&nbsp;[<a href="(#URL_DOCUMENT)" title="<:bouton_telecharger:>" type="#MIME_TYPE">[(#TITRE|sinon{[(#FICHIER|basename)]})]</a> <small>(<span>#TYPE_DOCUMENT[ &ndash; (#TAILLE|taille_en_octets)]</span>)</small>][<small>  | (#DATE|affdate_court)</small>]</li>
 					</BOUCLE_documents2>
-						<li class="com"><em><:commentaires:></em>&nbsp;[<a href="#URL_FORUM">(#TITRE)</a>][, <:par_auteur:> <a href="#URL_AUTEUR">(#NOM)</a>][<small> | (#DATE|affdate_court)</small>]</li>
+						<li class="com"><em><:zpipcoop:commentaires:></em>&nbsp;[<a href="#URL_FORUM">(#TITRE)</a>][<small>, <:par_auteur:></small> <a href="#URL_AUTEUR">(#NOM)</a>][<small> | (#DATE|affdate_court)</small>]</li>
 					</BOUCLE_forums>
 
 					<BOUCLE_article_fin(ARTICLES) {par date} {inverse} {doublons} {lang}{0,5}>
 					<BOUCLE_documents_fin1(DOCUMENTS) {par date} {inverse} {doublons} {date>#DATE}{0,5}>
-						<li class="file[ (#EXTENSION)]"><em><:documents:></em>&nbsp;[<a href="(#URL_DOCUMENT)" title="<:bouton_telecharger:>" type="#MIME_TYPE">[(#TITRE|sinon{[(#FICHIER|basename)]})]</a> <small>(<span>#TYPE_DOCUMENT[ &ndash; (#TAILLE|taille_en_octets)]</span>)</small>][<small>  | (#DATE|affdate_court)</small>]</li>
+						<li class="file[ (#EXTENSION)]"><em><:zpipcoop:documents:></em>&nbsp;[<a href="(#URL_DOCUMENT)" title="<:bouton_telecharger:>" type="#MIME_TYPE">[(#TITRE|sinon{[(#FICHIER|basename)]})]</a> <small>(<span>#TYPE_DOCUMENT[ &ndash; (#TAILLE|taille_en_octets)]</span>)</small>][<small>  | (#DATE|affdate_court)</small>]</li>
 					</BOUCLE_documents_fin1>
-						<li class="mes"><em><:messages:></em>&nbsp;[<a href="#URL_ARTICLE">(#TITRE)</a>][, <:par_auteur:> (#LESAUTEURS)][<small> | (#DATE|affdate_court)</small>]</li>
+						<li class="mes"><em><:zpipcoop:messages:></em>&nbsp;[<a href="#URL_ARTICLE">(#TITRE)</a>][<small>, <:par_auteur:></small> (#LESAUTEURS)][<small> | (#DATE|affdate_court)</small>]</li>
 					</BOUCLE_article_fin>
 
 					<BOUCLE_documents_fin2(DOCUMENTS) {par date} {inverse} {doublons} {date>#DATE}{0,5}>
-						<li class="file[ (#EXTENSION)]"><em><:documents:></em>&nbsp;[<a href="(#URL_DOCUMENT)" title="<:bouton_telecharger:>" type="#MIME_TYPE">[(#TITRE|sinon{[(#FICHIER|basename)]})]</a> <small>(<span>#TYPE_DOCUMENT[ &ndash; (#TAILLE|taille_en_octets)]</span>)</small>][<small>  | (#DATE|affdate_court)</small>]</li>
+						<li class="file[ (#EXTENSION)]"><em><:zpipcoop:documents:></em>&nbsp;[<a href="(#URL_DOCUMENT)" title="<:bouton_telecharger:>" type="#MIME_TYPE">[(#TITRE|sinon{[(#FICHIER|basename)]})]</a> <small>(<span>#TYPE_DOCUMENT[ &ndash; (#TAILLE|taille_en_octets)]</span>)</small>][<small>  | (#DATE|affdate_court)</small>]</li>
 					</BOUCLE_documents_fin2>
 				</ul><!--#feed-->
 			</div><!--.post-->

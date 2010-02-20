@@ -23,8 +23,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 //C
 'categories' => 'Cat&ecute;gories',
-'commentaire' => 'commentaire',
-'commentaires' => 'commentaires',
+'commentaire' => 'Commentaire',
+'commentaires' => 'Commentaires',
 'connecter_comme' => 'Connect&ecute; comme',
 'conception_graphique_par' => 'Habillage visuel (c)',
 
