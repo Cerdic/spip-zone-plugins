@@ -1,1 +1,5 @@
+<?php if ($auteur_session) { ?>
 <INCLURE{fond=structure}{env}{type=page}{composition=#ENV{composition,#ENV{page}}}>
+<?php } else { ?>
+<INCLURE{fond=structure}{env}{type=page}{composition=login} />
+<?php } ?>

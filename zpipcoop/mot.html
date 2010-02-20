@@ -1,3 +1,7 @@
+<?php if ($auteur_session) { ?>
 <BOUCLE_principale(MOTS) {id_mot} >
 <INCLURE{fond=structure}{env}{type=mot}{composition} />
 </BOUCLE_principale>
+<?php } else { ?>
+<INCLURE{fond=structure}{env}{type=page}{composition=login} />
+<?php } ?>

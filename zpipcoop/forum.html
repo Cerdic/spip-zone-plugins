@@ -20,6 +20,10 @@
 	Allez découvrir ce fameux fichier structure.html.
 	
 ]
+<?php if ($auteur_session) { ?>
 <INCLURE{fond=structure}{env}{type=page}{composition=forum} />
+<?php } else { ?>
+<INCLURE{fond=structure}{env}{type=page}{composition=login} />
+<?php } ?>
 
 

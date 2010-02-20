@@ -1,3 +1,7 @@
+<?php if ($auteur_session) { ?>
 <BOUCLE_principale_auteur(AUTEURS){id_auteur}>
 <INCLURE{fond=structure}{env}{type=auteur}{composition} />
 </BOUCLE_principale_auteur>
+<?php } else { ?>
+<INCLURE{fond=structure}{env}{type=page}{composition=login} />
+<?php } ?>
