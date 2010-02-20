@@ -1,6 +1,6 @@
 <?php
-function formulaires_switcher_zen_charger_dist(){
-    return array();
+function formulaires_switcher_zen_charger_dist($auto){
+    return array('auto'=>$auto);
 }
 
 function formulaires_switcher_zen_verifier_dist(){
