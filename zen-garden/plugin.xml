@@ -6,7 +6,6 @@
   <etat>test</etat>
   <description>Un jardin Zen pour Zpip</description>
   <options>zengarden_options.php</options>
-  <fonctions>zengarden_fonctions.php</fonctions>
   <pipeline>
     <nom>insert_head</nom>
     <inclure>zengarden_pip.php</inclure>
