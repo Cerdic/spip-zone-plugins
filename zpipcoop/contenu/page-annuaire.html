@@ -10,16 +10,17 @@
 			<div id="caption">
 				<h2><:zpipcoop:annuaire:></h2>
 			</div><!--#caption-->
-			<table border="1" width="100%;">
+			<table border="1" width="100%">
 				<B_auteurs>
 					<BOUCLE_auteurs(AUTEURS) {tous} {par nom}>
 					[(#COMPTEUR_BOUCLE|moins{1}|modulo{4}|=={0}|oui)<tr>]
 						<td align="center">
-							[<div class="logo_document">(#LOGO_AUTEUR||sinon{#CHEMIN{img/nophoto.png}}|image_passe_partout{80})</div>]
+							[<div class="logo_document">(#LOGO_AUTEUR||sinon{#CHEMIN{img/nophoto.png}}|image_passe_partout{80}|inserer_attribut{alt, #NOM|attribut_html})</div>]
 							<strong><a href="#URL_AUTEUR">#NOM</a></strong>
 						</td>
 					[(#COMPTEUR_BOUCLE|modulo{4}|=={0}|oui)</tr>]
 					</BOUCLE_auteurs>
+					</tr>
 				</B_auteurs>
 			</table>
 		</div><!--#content-->
