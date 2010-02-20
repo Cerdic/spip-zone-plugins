@@ -48,7 +48,7 @@ function array_get_var($table){
 }
 
 function array_where_sql2php($where){
-	$where = preg_replace(",(^|\()([\w.]+)\s*REGEXP\s*(.+)($|\)),Uims","\\1preg_match('/'.preg_quote(\\3).'/Uims',\\2)\\4",$where); // == -> preg_match
+	$where = preg_replace(",(^|\()([\w.]+)\s*REGEXP\s*(.+)($|\)),Uims","\\1preg_match('/'.str_replace('/','\/',\\3).'/Uims',\\2)\\4",$where); // == -> preg_match
 	$where = preg_replace(",([\w.]+)\s*=,Uims","\\1==",$where); // = -> ==
 	$where = preg_replace(";^FIELD\(([^,]+),(.*)$;Uims","in_array(\\1,array(\\2)",$where); // IN -> FIELD -> in_array()
 	$where = preg_replace(";(^|\(|\(\()([\w.]+)\s*IN\s*(.+)($|\)|\)\));Uims","in_array(\\2,array\\3",$where); // IN  -> in_array()
@@ -72,6 +72,7 @@ function array_where_teste($cle,$valeur,$table,$where){
 	"'".addslashes($valeur)."'",
 	"!("
 	),$where);
+
 	return eval("if ($where) return true; else return false;");
 }
 
