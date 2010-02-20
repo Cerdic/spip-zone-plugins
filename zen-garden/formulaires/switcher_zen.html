@@ -1,0 +1,14 @@
+#SET{themes,#ENV{tous,''}|zengarden_liste_themes}
+<form action='#ENV{action}' method='post' class='formulaire_spip formulaire_switcher_zen'>
+#ACTION_FORMULAIRE{#ENV{action}}
+<B_themes>
+<select name="theme">
+    <option selected="selected"><:zengarden:themes:></option>
+    <BOUCLE_themes(POUR){tableau #GET{themes}}>
+    <option value="#CLE">[(#VALEUR|table_valeur{nom}|typo|extraire_multi)]</option>
+    </BOUCLE_themes>
+    
+    <input type="submit" value="<:ok:>" />
+</select>
+</B_thems>
+</form>

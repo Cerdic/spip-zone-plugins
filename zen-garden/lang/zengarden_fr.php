@@ -40,6 +40,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// V
 
 	// Z
+	
+	//CFG
+	'cfg'  =>'Zen-Garden',
+	'cfg_activer_switcher' => 'Activer le switcher de th&egrave;mes ?',
+	'cfg_configurer_switcher'  =>'Configurer le switcher de th&egrave;mes',
 );
 
 ?>

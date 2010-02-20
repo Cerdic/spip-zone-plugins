@@ -28,6 +28,9 @@ if (!defined('_DIR_PLUGIN_THEME')){
 	(
 		// on est en mode apercu
 		(isset($_COOKIE['spip_zengarden_theme']) AND $t = $_COOKIE['spip_zengarden_theme'])
+        // ou avec le cookie du switcher
+        OR
+		(isset($_COOKIE['spip_zengarden_switch_theme']) AND $t = $_COOKIE['spip_zengarden_switch_theme'] and lire_config('zengarden/switcher'))
 		OR
 		// ou un theme est vraiment selectionne
 		(isset($GLOBALS['meta']['zengarden_theme']) AND $t = $GLOBALS['meta']['zengarden_theme'])
