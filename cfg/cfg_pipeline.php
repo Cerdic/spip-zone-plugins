@@ -29,7 +29,7 @@ function cfg_ajouter_boutons($flux) {
 
 function cfg_affiche_gauche($flux){
 	if ($flux['args']['exec']=='admin_plugin'){
-		$flux['data'] = 
+		$flux['data'] =
 			debut_cadre_enfonce('',true)
 			. icone_horizontale('CFG &ndash; '._T('configuration'), generer_url_ecrire('cfg'), _DIR_PLUGIN_CFG.'cfg-22.png', '', false)
 			. fin_cadre_enfonce(true)
@@ -43,7 +43,7 @@ function cfg_affiche_gauche($flux){
  * uniquement dans le prive
  */
 function cfg_header_prive($flux){
-	
+
 	if (!_request('cfg') || (!_request('exec') == 'cfg')) {
 		return $flux;
 	}
@@ -56,10 +56,10 @@ function cfg_header_prive($flux){
 	$config = new cfg_formulaire(
 				sinon(_request('cfg'), ''),
 				sinon(_request('cfg_id'),''));
-	
-	if ($config->param['head']) 
+
+	if ($config->param['head'])
 		$flux .= "\n".$config->param['head'];
-	
+
 	return $flux;
 }
 
@@ -80,7 +80,7 @@ function est_cvt($form){
 		OR function_exists($f . '_verifier_dist')
 		OR function_exists($f . '_verifier')
 		OR function_exists($f . '_traiter_dist')
-		OR function_exists($f . '_traiter')	
+		OR function_exists($f . '_traiter')
 		);
 }
 
@@ -90,8 +90,8 @@ function cfg_formulaire_charger($flux){
 	$form = $flux['args']['form'];
 	if (!est_cvt($form)){
 
-		// ici, on a le nom du fond cfg... 
-		// on recupere donc les parametres du formulaire.	
+		// ici, on a le nom du fond cfg...
+		// on recupere donc les parametres du formulaire.
 		include_spip('inc/cfg_formulaire');
 		#$config = &new cfg_formulaire($cfg, $cfg_id);
 		$cfg_id = isset($flux['args']['args'][0]) ? $flux['args']['args'][0] : '';
@@ -109,7 +109,7 @@ function cfg_formulaire_charger($flux){
 		// pour pouvoir faire #ENV{nom_du_champ}
 		if (is_array($config->val)){
 			foreach($config->val as $nom=>$val){
-				$valeurs[$nom] = $val;	
+				$valeurs[$nom] = $val;
 			}
 		}
 
@@ -118,7 +118,7 @@ function cfg_formulaire_charger($flux){
 		} else {
 			$valeurs['editable'] = true;
 		}
-		
+
 		$valeurs['_pipeline'] = array('editer_contenu_formulaire_cfg',
 			'args'=>array(
 				'nom'=>$form,
@@ -141,7 +141,7 @@ function cfg_formulaire_verifier($flux){
 		#$config = &new cfg_formulaire($cfg, $cfg_id);
 		$cfg_id = isset($flux['args']['args'][0]) ? $flux['args']['args'][0] : '';
 		$config = new cfg_formulaire($form, $cfg_id);
-		
+
 		$err = array();
 
 		if (!$config->verifier() && $e = $config->messages){
@@ -151,13 +151,13 @@ function cfg_formulaire_verifier($flux){
 				if (count($e['erreurs']))  $err = $e['erreurs'];
 				if (count($e['message_erreur']))  $err['message_erreur'] = join('<br />',$e['message_erreur']);
 				if (count($e['message_ok']))  $err['message_ok'] = join('<br />',$e['message_ok']);
-			}		
+			}
 		}
 
 		$flux['data'] = $err;
-		
+
 		// si c'est vide, modifier sera appele, sinon le formulaire sera resoumis
-		// a ce moment la, on transmet $config pour eviter de le recreer 
+		// a ce moment la, on transmet $config pour eviter de le recreer
 		// juste ensuite (et de refaire les analyse et la validation)
 		if (!$err) cfg_instancier($config);
 	}
@@ -168,7 +168,7 @@ function cfg_formulaire_verifier($flux){
 // sert a transmettre $config entre verifier() et traiter()
 // car $flux le perd en cours de route si on lui donne...
 function cfg_instancier($config=false){
-	static $cfg=false; 
+	static $cfg=false;
 	if (!$config) return $cfg;
 	return $cfg = $config;
 }
@@ -176,18 +176,19 @@ function cfg_instancier($config=false){
 // traitement du formulaire
 function cfg_formulaire_traiter($flux){
 	$form = $flux['args']['form'];
+	spip_log($flux);
 	if (!est_cvt($form)){
 		$config = cfg_instancier();
 
-		$config->traiter();	
-		$message = join('<br />',$config->messages['message_ok']);	
-
-		$flux['data'] = array(true,$message); // forcer l'etat editable du formulaire et retourner le message
+		$config->traiter();
+		$message = join('<br />',$config->messages['message_ok']);
+		$redirect = $config->messages['redirect'];
+		$flux['data'] = array('editable'=>true,'message_ok' => $message,'redirect' => $redirect); // forcer l'etat editable du formulaire et retourner le message
 	}
 	return $flux;
 }
 
-// pipeline sur l'affichage du contenu 
+// pipeline sur l'affichage du contenu
 // pour supprimer les parametres CFG du formulaire
 function cfg_editer_contenu_formulaire_cfg($flux){
 	$flux['data'] = preg_replace('/(<!-- ([a-z0-9_]\w+)(\*)?=)(.*?)-->/sim', '', $flux['data']);
