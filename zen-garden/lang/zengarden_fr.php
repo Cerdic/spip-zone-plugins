@@ -33,6 +33,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// S
 	'theme_actif' => 'Ce th&egrave;me est actuellement utilis&eacute;',
 	'sous_licence' => 'sous Licence',
+	'switcher_activer' => 'Activer le switcher de th&egrave;mes sur le site public',
+	'switcher_desactiver' => 'Desactiver le switcher de th&egrave;mes',
 
 	// T
 	'themes' => 'Th&egrave;mes',
@@ -41,10 +43,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// Z
 	
-	//CFG
-	'cfg'  =>'Zen-Garden',
-	'cfg_activer_switcher' => 'Activer le switcher de th&egrave;mes ?',
-	'cfg_configurer_switcher'  =>'Configurer le switcher de th&egrave;mes',
 );
 
 ?>

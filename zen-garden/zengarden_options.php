@@ -16,10 +16,13 @@ if (!defined('_DIR_PLUGIN_THEME')){
 			spip_setcookie('spip_zengarden_theme',$_COOKIE['spip_zengarden_theme']=='',-1);
 		}
 	}
-	elseif(defined('_ZEN_VAR_THEME')){
+	elseif(isset($GLOBALS['meta']['zengarden_switcher']) OR defined('_ZEN_VAR_THEME')){
 		if (!is_null($arg = _request('var_theme'))){
 			include_spip('inc/cookie');
-			spip_setcookie('spip_zengarden_theme',$_COOKIE['spip_zengarden_theme'] = $arg);
+			if ($arg)
+				spip_setcookie('spip_zengarden_theme',$_COOKIE['spip_zengarden_theme'] = $arg);
+			else
+				spip_setcookie('spip_zengarden_theme',$_COOKIE['spip_zengarden_theme']=='',-1);
 		}
 	}
 	
@@ -29,8 +32,6 @@ if (!defined('_DIR_PLUGIN_THEME')){
 		// on est en mode apercu
 		(isset($_COOKIE['spip_zengarden_theme']) AND $t = $_COOKIE['spip_zengarden_theme'])
         // ou avec le cookie du switcher
-        OR
-		(isset($_COOKIE['spip_zengarden_switch_theme']) AND $t = $_COOKIE['spip_zengarden_switch_theme'] and lire_config('zengarden/switcher'))
 		OR
 		// ou un theme est vraiment selectionne
 		(isset($GLOBALS['meta']['zengarden_theme']) AND $t = $GLOBALS['meta']['zengarden_theme'])

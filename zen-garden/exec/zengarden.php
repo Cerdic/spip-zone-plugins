@@ -23,8 +23,12 @@ function exec_zengarden(){
 	echo "<img src='"._DIR_PLUGIN_ZENGARDEN."img_pack/themes-128.png' width='128' height='128' alt='Zen Garden' />";
 	echo propre(_T('zengarden:info_page'));	
 	echo fin_boite_info(true);
-	#echo recuperer_fond('prive/zengarden_theme_actif',array('themes'=>$themes,'selection'=>$GLOBALS['meta']['zengarden_theme']?$GLOBALS['meta']['zengarden_theme']:''));
-	
+
+	if (isset($GLOBALS['meta']['zengarden_switcher']))
+		echo bouton_action(_T('zengarden:switcher_desactiver'), generer_action_auteur("zengarden_activer_switcher", "off",self()));
+	else
+		echo bouton_action(_T('zengarden:switcher_activer'), generer_action_auteur("zengarden_activer_switcher", "on",self()));
+
 	echo debut_droite("choix_theme",true);
 
 

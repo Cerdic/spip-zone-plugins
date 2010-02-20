@@ -6,8 +6,7 @@
  */
 
 function zengarden_affichage_final($texte){
-	global $html;
-	if ($html and lire_config('zengarden/switcher')){
+	if ($GLOBALS['html'] and isset($GLOBALS['meta']['zengarden_switcher'])){
 		include_spip('prive/zengarden_theme_fonctions');
 		$code = recuperer_fond('inc/switcher_zen');
 		// On rajoute le code du selecteur de squelettes avant la balise </body>
@@ -17,7 +16,7 @@ function zengarden_affichage_final($texte){
 }
 
 function zengarden_insert_head($flux){
-	if(lire_config('zengarden/switcher')){
+	if(isset($GLOBALS['meta']['zengarden_switcher'])){
 		//$flux .= "<script src='".find_in_path('switcher_zen.js')."' type='text/javascript'></script>\n";
 		$flux .= "<link type='text/css' href='".find_in_path('switcher_zen.css')."' rel='stylesheet' />";
 	}
