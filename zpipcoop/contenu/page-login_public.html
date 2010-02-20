@@ -1,0 +1,11 @@
+	<div id="content_wrap">
+		<div id="content">
+			[(#PLUGIN{noie}|?{<div id="noie"></div>,''})]
+			<div id="caption">
+				<h2><:login:></h2>
+			</div><!--#caption-->
+			<div class="post">
+				[(#LOGIN_PUBLIC|#ENV{url})]
+			</div><!--.post-->
+		</div><!--#content-->
+	</div><!--#content_wrap-->
