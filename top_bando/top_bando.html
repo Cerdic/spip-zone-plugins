@@ -1,0 +1,72 @@
+#CACHE{7200}
+[(#SET{top, [(#CONFIG{top_bando/calage_top_recadrage}|=={centrer}|?{center,top=[(#CONFIG{top_bando/calage_top_recadrage})]})]})]
+[(#SET{couleur, [(#CONFIG{top_bando/couleur_principale}|top_bando_suprime_diese)]})]
+[(#SET{hauteur, [(#CONFIG{top_bando/hauteur_bando})]})]
+[(#SET{hauteur_logo,[(#CONFIG{top_bando/redimensionner_logo}|=={oui}|?{[(#CONFIG{top_bando/hauteur_logo})],[(#GET{hauteur})]})]})]
+[(#SET{Tb, #ARRAY{1,top,2,right,3,bottom,4,left}})]
+[(#SET{strB, ''})]
+<BOUCLE_bordure_unique(CONDITION){si #CONFIG{top_bando/toutes_bordures_identiques}|=={non}}>
+    <BOUCLE_bordures(POUR){tableau #GET{Tb}}>
+    	[(#SET{strB, [(#GET{strB}) ]border-#VALEUR: [(#CONFIG{top_bando/style_bordure_#VALEUR}) ][(#CONFIG{top_bando/couleur_bordure_#VALEUR}) ][(#CONFIG{top_bando/epaisseur_bordure_#VALEUR})px]; })]
+    </BOUCLE_bordures>
+</BOUCLE_bordure_unique>
+	[(#SET{strB, border: [(#CONFIG{top_bando/style_bordure_unique})] [(#CONFIG{top_bando/couleur_bordure_unique})] [(#CONFIG{top_bando/epaisseur_bordure_unique})px;]})]
+<//B_bordure_unique>
+
+		<a rel="start home" href="#URL_SITE_SPIP/" title="<:accueil_site:>" class="accueil"
+       style="background: [(#CONFIG{top_bando/utiliser_bando}|=={oui}|oui) url([(#LOGO_SITE_SPIP_SURVOL||image_recadre{0,#GET{hauteur},left=0 #GET{top},#GET{couleur}}|extraire_attribut{src})]) ] 
+                          [(#CONFIG{top_bando/calage_horizontal_bando})] [(#CONFIG{top_bando/fond_transparent}|=={oui}|?{'transparent',#[(#GET{couleur})]})] no-repeat;
+                          [text-align: (#CONFIG{top_bando/alignement_titre});]
+                          [font-size: (#CONFIG{top_bando/taille_police})px;]
+                          [color: (#CONFIG{top_bando/couleur_principale_texte});]
+                          [height: (#GET{hauteur})px;]
+                          [(#GET{strB})]
+                          width: 100%;
+                          display: block;">
+                           
+	  [(#CONFIG{top_bando/utiliser_logo}|=={oui}|oui)
+      [<img src="(#LOGO_SITE_SPIP||image_reduire{0,[(#GET{hauteur_logo})]}|extraire_attribut{src})"
+      	   [ alt="(#NOM_SITE_SPIP|attribut_html)"]
+           [ title="(#NOM_SITE_SPIP|attribut_html)"]
+            style="float: [(#CONFIG{top_bando/place_logo,left});]
+                  [margin-[(#CONFIG{top_bando/place_logo}|=={right}|?{'left','right'})]: (#CONFIG{top_bando/marge_laterale_logo})px;]
+                  [margin-[(#CONFIG{top_bando/place_logo})]: (#CONFIG{top_bando/marge_laterale_logo_bord})px;]
+                  [(#CONFIG{top_bando/redimensionner_logo}|=={oui}|oui) [margin-top: (#CONFIG{top_bando/marge_sup_logo})px;]]" 
+                  "/>]
+    ]
+      
+    [(#CONFIG{top_bando/afficher_titre}|=={oui}|oui)
+      	[(#SET{titre,[(#CONFIG{top_bando/titre_bando}|=={titre_spip}|?{[(#NOM_SITE_SPIP)],[(#CONFIG{top_bando/complement_nom_site})]})]})]
+        [(#PLUGIN{choix_police}|?{ 
+        	[(#CONFIG{top_bando/utiliser_image_typo}|=={oui}|?{
+                [<strong id="nom_site_spip" style="margin-right: auto;
+                                                   margin-left:auto;
+                                                   display: block;
+                                                   [float: (#CONFIG{top_bando/emplacement_titre});]
+                                                   [width: (#CONFIG{top_bando/largeur_titre})px;]
+                                                   [padding-top: (#CONFIG{top_bando/marge_sup_titre})px;]
+                                                   ">(#MODELE{typo}{texte=[(#GET{titre})],
+                                                                    couleur=[(#CONFIG{top_bando/couleur_principale_texte})],
+                                                                    taille=[(#CONFIG{top_bando/taille_police})],
+                                                                    largeur=[(#CONFIG{top_bando/largeur_titre})]})
+                 </strong>]
+                ,
+                [<strong id="nom_site_spip" style="margin-right: auto;
+                                                   margin-left:auto;
+                                                   display: block;
+                                                   [float: (#CONFIG{top_bando/emplacement_titre});]
+                                                   [width: (#CONFIG{top_bando/largeur_titre})px;]
+                                                   [padding-top: (#CONFIG{top_bando/marge_sup_titre})px;]
+                                                   ">(#GET{titre})</strong>]
+            })]
+            ,
+            [<strong id="nom_site_spip" style="margin-right: auto;
+                                               margin-left:auto;
+                                               display: block;
+                                               [float: (#CONFIG{top_bando/emplacement_titre});]
+                                               [width: (#CONFIG{top_bando/largeur_titre})px;]
+                                               [padding-top: (#CONFIG{top_bando/marge_sup_titre})px;]
+                                               ">(#GET{titre})</strong>]
+        })]
+    ]
+		</a>

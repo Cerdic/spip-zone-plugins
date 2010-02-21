@@ -64,12 +64,19 @@ modifier ces param&#232;tres.  -->
 
 <script language="JavaScript" type="text/javascript">
     function initialiser_params(){
-        if (jQuery("#titre_oui").attr("checked") == true)
-        	jQuery("#details_titre").show();
-        else jQuery("#details_titre").hide();
+        if (jQuery("#bando_non").attr("checked") == true)
+        	jQuery(".details_bando").hide();
+        if (jQuery("#logo_non").attr("checked") == true)
+        	jQuery(".details_logo").hide();
         if (jQuery("#redimensionner_logo_non").attr("checked") == true)
             jQuery("#voir_redimensionner_logo").hide();
-        else jQuery("#voir_redimensionner_logo").show();
+        if (jQuery("#titre_non").attr("checked") == true)
+        	jQuery(".details_titre").hide();
+        if (jQuery("#toutes_bordures_identiques_non").attr("checked") == true)
+        	jQuery(".details_bordures").hide();
+        if (jQuery("#fond_transparent_oui").attr("checked") == true) 
+        	jQuery(".details_couleur_fond").hide();
+        
     }
     
   // retourne 3 objets donnant paramètres du bando (les dimensions sont *reduites à l'échelle*) 
@@ -91,7 +98,7 @@ modifier ces param&#232;tres.  -->
     function gerer_bordures(){
         if (jQuery("input[name='toutes_bordures_identiques']:checked").val() == 'oui') {
         	jQuery("#voir_bordure_unique").show();
-            jQuery("#voir_bordure_top, #voir_bordure_right, #voir_bordure_bottom, #voir_bordure_left").hide();
+            jQuery(".details_bordures").hide();
             var bstyle = jQuery("#style_bordure_unique").val();
             var bcoul = jQuery("#couleur_bordure_unique").val();
             var bep = jQuery("#epaisseur_bordure_unique").val() + 'px';
@@ -99,7 +106,7 @@ modifier ces param&#232;tres.  -->
         }
         else {
         	jQuery("#voir_bordure_unique").hide();
-            jQuery("#voir_bordure_top, #voir_bordure_right, #voir_bordure_bottom, #voir_bordure_left").show();
+            jQuery(".details_bordures").show();
             Tb = ['top','right','bottom','left'];
             for (i in Tb){
             	var bstyle = jQuery("#style_bordure_" + Tb[i]).val();
@@ -118,9 +125,14 @@ modifier ces param&#232;tres.  -->
         
      // bloc bando   
         jQuery("input[name='utiliser_bando']").change(function(){
-            if (jQuery("input[name='utiliser_bando']:checked").val() == 'oui') 
+            if (jQuery("input[name='utiliser_bando']:checked").val() == 'oui') {
             	jQuery("#bando, #bando_logo, #bando_titre").css({'background-image': 'url([(#LOGO_SITE_SPIP_SURVOL||image_reduire{500,0}|extraire_attribut{src})])'});
-            else jQuery("#bando, #bando_logo, #bando_titre").css({'background-image': 'none'});
+                jQuery(".details_bando").show();
+            }
+            else {
+            	jQuery("#bando, #bando_logo, #bando_titre").css({'background-image': 'none'});
+                jQuery(".details_bando").hide();
+            }
         });
         jQuery("#hauteur_bando").change(function(){
             dims = new calages;
@@ -144,9 +156,14 @@ modifier ces param&#232;tres.  -->
         
     // bloc logo 
         jQuery("input[name='utiliser_logo']").change(function(){
-            if (jQuery("input[name='utiliser_logo']:checked").val() == 'oui') 
+            if (jQuery("input[name='utiliser_logo']:checked").val() == 'oui') {
             	jQuery("#img_logo, #img_logo_titre").css({'display': 'inline'});
-            else jQuery("#img_logo, #img_logo_titre").css({'display': 'none'});
+                jQuery(".details_logo").show();
+            }
+            else {
+            	jQuery("#img_logo, #img_logo_titre").css({'display': 'none'});
+                jQuery(".details_logo").hide();
+            }
         });
         jQuery("input[name='place_logo']").change(function(){ 
         	var cote = jQuery("input[name='place_logo']:checked").val();
@@ -195,8 +212,19 @@ modifier ces param&#232;tres.  -->
         });       
         
     // bloc couleurs 
+        jQuery("input[name='fond_transparent']").change(function(){
+            if (jQuery("input[name='fond_transparent']:checked").val() == 'oui') {
+            	jQuery(".details_couleur_fond").hide();
+                jQuery("#bando, #bando_logo, #bando_titre").css('background-color', 'transparent');
+            }
+            else {
+            	jQuery(".details_couleur_fond").show();
+                var coul = jQuery("#couleur_principale").val();
+                jQuery("#bando, #bando_logo, #bando_titre").css('background-color', coul);
+            }
+        });
         jQuery("#couleur_principale").blur( function(){
-        	var cote = jQuery("input[name='place_logo']:checked").val();
+        	var coul = jQuery(this).val();
             jQuery("#bando, #bando_logo, #bando_titre").css({'background-color': coul});
         });
         jQuery("#couleur_principale_texte").blur( function(){ 
@@ -210,8 +238,8 @@ modifier ces param&#232;tres.  -->
     // bloc titre
         jQuery("input[name='afficher_titre']").change(function(){
             if (jQuery("input[name='afficher_titre']:checked").val() == 'oui') 
-            	jQuery("#details_titre").show();
-            else jQuery("#details_titre").hide();
+            	jQuery(".details_titre").show();
+            else jQuery(".details_titre").hide();
         });
         jQuery("input[name='emplacement_titre']").change(function(){
             var cote = jQuery("input[name='emplacement_titre']:checked").val();
@@ -352,7 +380,7 @@ modifier ces param&#232;tres.  -->
         <br/><small><:topbando:utilisez_le_cadre_rouge_pour_redimensionner:></small>
     </p>
     <div id="bando" style="background: [(#ENV{utiliser_bando}|=={oui}|oui) url([(#LOGO_SITE_SPIP_SURVOL||image_reduire{500,0}|extraire_attribut{src})]) ]
-                          no-repeat center [(#ENV{couleur_principale})]; 
+                          no-repeat center [(#ENV{fond_transparent}|=={oui}|?{'transparent',[(#ENV{couleur_principale,#FFFFFF})]})]; 
                           width: 500px; 
                           height: #GET{hauteur_bando_reduite}px;">
 <!--
@@ -385,7 +413,7 @@ modifier ces param&#232;tres.  -->
         &nbsp;&nbsp;&nbsp;<input type="radio" name="utiliser_logo" value="non" [(#ENV{utiliser_logo}|=={oui}|non) checked="checked"] id="logo_non"/>
         <label><:topbando:non:></label>
     </p>
-    <p>
+    <p class="details_logo">
         <strong><:topbando:place_logo:> :</strong>
         <label><:topbando:gauche:></label>
         <input type="radio" name="place_logo" value="left" [(#ENV{place_logo}|=={right}|non) checked="checked"] id="logo_g"/> 
@@ -397,14 +425,14 @@ modifier ces param&#232;tres.  -->
         [<img id="marge_laterale_logo_bord_oeil" src="(#CHEMIN{images/oeil_o.gif})" alt="<:topbando:visualiser:>" class="oeil_voir"/>]
         <br/><small><:topbando:explication_2_marges_laterales_logo:></small>
     </p>
-    <p>
+    <p class="details_logo">
     	<strong><:topbando:taille_logo:> :</strong>
         <label><:topbando:adaptation_automatique_hauteur_bandeau:></label>
         <input type="radio" name="redimensionner_logo" value="non" [(#ENV{redimensionner_logo}|=={oui}|non) checked="checked"] id='redimensionner_logo_non'/> 
         &nbsp;&nbsp;&nbsp;<input type="radio" name="redimensionner_logo" value="oui" [(#ENV{redimensionner_logo}|=={oui}|oui) checked="checked"] id='redimensionner_logo_oui'/>
         <label><:topbando:taille_logo_imposee:></label>
     </p>
-    <p id="voir_redimensionner_logo">
+    <p class="details_logo" id="voir_redimensionner_logo">
     	<label><:topbando:hauteur_logo:> :</label>
     	<input type="text" name="hauteur_logo" id="hauteur_logo" value="[(#ENV{hauteur_logo,[(#LOGO_SITE_SPIP||hauteur)]})]" style="width: 80px" class="declenche_oeil" />px 
         [<img id="hauteur_logo_oeil" src="(#CHEMIN{images/oeil_o.gif})" alt="<:topbando:visualiser:>" class="oeil_voir"/>]
@@ -427,8 +455,8 @@ modifier ces param&#232;tres.  -->
     <BOUCLE_bordures(POUR){tableau #GET{Tb}}>
     	[(#SET{strB, [(#GET{strB}) ]border-#VALEUR: [(#ENV{style_bordure_#VALEUR}) ][(#ENV{couleur_bordure_#VALEUR}) ][(#ENV{epaisseur_bordure_#VALEUR})px]; })]
     </BOUCLE_bordures>
-    <div id="bando_logo" style="background: [(#ENV{utiliser_bando}|=={oui}|oui) url([(#LOGO_SITE_SPIP_SURVOL||image_reduire{500,0}|extraire_attribut{src})]) ]
-                            [(#ENV{calage_horizontal_bando})] -[(#GET{top})]px [(#ENV{couleur_principale})] no-repeat; 
+    <div class="details_logo" id="bando_logo" style="background: [(#ENV{utiliser_bando}|=={oui}|oui) url([(#LOGO_SITE_SPIP_SURVOL||image_reduire{500,0}|extraire_attribut{src})]) ]
+                            [(#ENV{calage_horizontal_bando})] -[(#GET{top})]px [(#ENV{fond_transparent}|=={oui}|?{'transparent',[(#ENV{couleur_principale,#FFFFFF})]})] no-repeat; 
                             width: 500px; 
                             height: #GET{hauteur_recadre}px;
                             [(#ENV{toutes_bordures_identiques}|=={oui}|?{
@@ -436,17 +464,18 @@ modifier ces param&#232;tres.  -->
                                 ,
                                 [(#GET{strB})]
                             })]">
-      [(#CONFIG{top_bando/utiliser_logo}|=={oui}|oui)
+      
         [<img src="(#LOGO_SITE_SPIP||image_reduire{0,[(#GET{hauteur_logo_reduite})]}|extraire_attribut{src})" alt="logo_site"
           style="float: [(#ENV{place_logo,left})];
           		 [margin-[(#ENV{place_logo}|=={right}|?{'left','right'})]: (#ENV{marge_laterale_logo}|mult{[(#GET{fact_reduc})]})px;]
                  [margin-[(#ENV{place_logo})]: (#ENV{marge_laterale_logo_bord}|mult{[(#GET{fact_reduc})]})px;]
                  [(#ENV{redimensionner_logo}|=={oui}|oui) [margin-top: (#ENV{marge_sup_logo}|mult{[(#GET{fact_reduc})]})px;]]
-                 [(#ENV{redimensionner_logo}|=={oui}|oui) border: dashed #ff0 2px;]" 
+                 [(#REM) ENV{redimensionner_logo}|=={oui}|oui) border: dashed #ff0 2px;]
+                 [(#ENV{utiliser_logo}|=={non}|oui)display: none;]" 
           id="img_logo"/>]
-      ]
+      
     </div>
-    <p>
+    <p class="details_logo">
         <strong><:topbando:previsualisation_largeur_ecran:></strong>:
         <span class="previsu_logo" title="500px">[[(#GET{largeur_bando})] pixels]</span>
         <span class="previsu_logo" title="[(#VAL{800}|mult{[(#GET{fact_reduc})]})]px">[800 pixels]</span>
@@ -462,16 +491,25 @@ modifier ces param&#232;tres.  -->
 <fieldset>
     <legend><:topbando:choix_teinte_generale:></legend>
     <p>
-    	<:topbando:saisir_couleur:>: 
-    	<br/><small><:topbando:explication_palette:></small>
-    	<br/><strong><:topbando:couleur_principale:></strong>
+			<strong><:topbando:fond_bandeau:> :</strong>
+        <label><:topbando:fond_transparent:></label>
+        <input type="radio" name="fond_transparent" value="oui" [(#ENV{fond_transparent}|=={oui}|oui) checked="checked"] id='fond_transparent_oui'/> 
+        &nbsp;&nbsp;&nbsp;<input type="radio" name="fond_transparent" value="non" [(#ENV{fond_transparent}|=={oui}|non) checked="checked"] id='fond_transparent_non'/>
+        <label><:topbando:fond_colore:></label>
+        
+    </p>
+    <p class="details_couleur_fond">
+        <strong><:topbando:couleur_principale:></strong>
         <input type="text" name="couleur_principale" class="palette" id="couleur_principale" 
             value="[(#ENV{couleur_principale,#FFFFFF})]" style="width: 80px" class="declenche_oeil"/>
         [<img id="couleur_principale_oeil" src="(#CHEMIN{images/oeil_o.gif})" alt="<:topbando:visualiser:>" class="oeil_voir"/>]
-        <br/><strong><:topbando:couleur_texte:></strong>
+    </p>
+    <p>
+        <strong><:topbando:couleur_texte:></strong>
         <input type="text" name="couleur_principale_texte" class="palette" id="couleur_principale_texte" 
             value="[(#ENV{couleur_principale_texte,#000000})]" style="width: 80px" class="declenche_oeil" />
         [<img id="couleur_principale_texte_oeil" src="(#CHEMIN{images/oeil_o.gif})" alt="<:topbando:visualiser:>" class="oeil_voir"/>]
+    	<br/><small><:topbando:explication_palette:></small>
     </p>
 </fieldset>
     
@@ -488,7 +526,7 @@ modifier ces param&#232;tres.  -->
         [(#SET{Tep, #ARRAY{<:topbando:aucune:>,none,<:topbando:plein:>,solid,<:topbando:tirets:>,dashed,<:topbando:pointilles:>,dotted}})]
 
         <BOUCLE_b(POUR){tableau #GET{Tbordures}}>
-          <p id="voir_bordure_#VALEUR"><strong>#CLE :</strong> 
+          <p id="voir_bordure_#VALEUR"[(#VALEUR|!={unique}|oui) class="details_bordures"]><strong>#CLE :</strong> 
             <br/><:topbando:style:>: <select name="style_bordure_#VALEUR" class="change_bordures declenche_oeil" id="style_bordure_#VALEUR">
             <BOUCLE_ep(POUR){tableau #GET{Tep}}>
             	<option value="#VALEUR"[ (#ENV{style_bordure_#_b:VALEUR}|=={#VALEUR}|oui)selected="selected"]>#CLE</option>
@@ -518,7 +556,7 @@ modifier ces param&#232;tres.  -->
         &nbsp;&nbsp;&nbsp;<input type="radio" name="afficher_titre" value="non" [(#ENV{afficher_titre}|=={oui}|non) checked="checked"] id='titre_non' />
         <label><:topbando:non:></label>
     </p>
-	  <div id="details_titre">
+	  <div class="details_titre">
     <p>
     	<strong><:topbando:emplacement_titre:></strong>:
         <label><:topbando:gauche:></label>
@@ -569,7 +607,7 @@ modifier ces param&#232;tres.  -->
     </p>
 ]    
         <div id="bando_titre" style="background: [(#ENV{utiliser_bando}|=={oui}|oui) url([(#LOGO_SITE_SPIP_SURVOL||image_reduire{500,0}|extraire_attribut{src})]) ]
-                                     [(#ENV{calage_horizontal_bando})] -[(#GET{top})]px [(#ENV{couleur_principale})] no-repeat; 
+                                     [(#ENV{calage_horizontal_bando})] -[(#GET{top})]px [(#ENV{fond_transparent}|=={oui}|?{'transparent',[(#ENV{couleur_principale,#FFFFFF})]})] no-repeat; 
                                      width: 500px; 
                                      height: #GET{hauteur_recadre}px;
                                      font-size: #GET{taille_police_reduite}px;
@@ -581,14 +619,13 @@ modifier ces param&#232;tres.  -->
                                 		[(#GET{strB})]
                             		 })]">
 
-            [(#CONFIG{top_bando/utiliser_logo}|=={oui}|oui)
-                [<img src="(#LOGO_SITE_SPIP||image_reduire{0,[(#GET{hauteur_logo_reduite})]}|extraire_attribut{src})" alt="logo_site"
-                      style="float: [(#ENV{place_logo,left})];
-              		         [margin-[(#ENV{place_logo}|=={right}|?{'left','right'})]: (#ENV{marge_laterale_logo}|mult{[(#GET{fact_reduc})]})px;]
-                             [margin-[(#ENV{place_logo})]: (#ENV{marge_laterale_logo_bord}|mult{[(#GET{fact_reduc})]})px;]
-                             [(#ENV{redimensionner_logo}|=={oui}|oui) [margin-top: (#ENV{marge_sup_logo}|mult{[(#GET{fact_reduc})]})px;]]" 
-                      id="img_logo_titre"/>]
-            ]
+            [<img src="(#LOGO_SITE_SPIP||image_reduire{0,[(#GET{hauteur_logo_reduite})]}|extraire_attribut{src})" alt="logo_site"
+                  style="float: [(#ENV{place_logo,left})];
+          		         [margin-[(#ENV{place_logo}|=={right}|?{'left','right'})]: (#ENV{marge_laterale_logo}|mult{[(#GET{fact_reduc})]})px;]
+                         [margin-[(#ENV{place_logo})]: (#ENV{marge_laterale_logo_bord}|mult{[(#GET{fact_reduc})]})px;]
+                         [(#ENV{redimensionner_logo}|=={oui}|oui) [margin-top: (#ENV{marge_sup_logo}|mult{[(#GET{fact_reduc})]})px;]]
+                         [(#ENV{utiliser_logo}|=={non}|oui)display: none;]" 
+                  id="img_logo_titre"/>]
           
             [(#PLUGIN{choix_police}|?{ 
             	[(#ENV{utiliser_image_typo}|=={oui}|?{
@@ -599,7 +636,7 @@ modifier ces param&#232;tres.  -->
                                                        [width: (#GET{largeur_titre_reduite})px;]
                                                        [padding-top: (#GET{marge_sup_titre_reduite})px;]
                                                        ">(#MODELE{typo}{texte=[(#GET{titre})],
-                                                                        couleur=[(#ENV{couleur_principale_texte})],
+                                                                        [(#ENV{fond_transparent}|=={oui}|non)[couleur=(#ENV{couleur_principale}),]})]
                                                                         taille=[(#GET{taille_police_reduite})],
                                                                         largeur=[(#GET{largeur_titre_reduite})]})</strong>]
                     ,
@@ -635,6 +672,19 @@ modifier ces param&#232;tres.  -->
     </div><!-- fin détails -->
     
 </fieldset>
+
+[(#REM)------------------------ MENU DES LANGUES ----------------------------- ]
+<fieldset>
+  <legend><:topbando:menu_langues:></legend>
+    <p>
+        <strong><:topbando:afficher_menu_langues:> :</strong>
+        <label><:topbando:oui:></label>
+        <input type="radio" name="afficher_langues" value="oui" [(#ENV{afficher_langues}|=={oui}|oui) checked="checked"] id='afficher_langues_oui' /> 
+        &nbsp;&nbsp;&nbsp;<input type="radio" name="afficher_langues" value="non" [(#ENV{afficher_langues}|=={oui}|non) checked="checked"] id='afficher_langues_non' />
+        <label><:topbando:non:></label>
+    </p>
+</fieldset>
+
 
 
 [(#REM) ------------------------ BOUTON OK ----------------------------------- ]

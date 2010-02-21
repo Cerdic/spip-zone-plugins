@@ -27,6 +27,7 @@ selon les param&#232;tres d&#233;finis dans [l'interface de configuration->?exec
   <fonctions>top_bando_fonctions.php</fonctions>
 	<necessite id="SPIP" version="[2.0.1;]" />
 	<necessite id="cfg" version="[1.10.2;]" />
+	<necessite id='spip_bonux' version='[1.8;]' />
 <!-- pour utiliser ce plugin en SPIP version 2.0.*   -->    
   <necessite id="lib:jquery.ui-1.6" src="http://jquery-ui.googlecode.com/files/jquery.ui-1.6.zip" />
 <!-- pour utiliser ce plugin en SPIP version 2.1 -->  

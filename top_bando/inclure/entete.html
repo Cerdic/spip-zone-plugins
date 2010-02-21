@@ -1,0 +1,6 @@
+[(#REM) l'inclure top_bando pour les squelettes Z ]
+<div class="accueil">
+	#INCLURE{fond=top_bando}
+	[<div id='slogan_site_spip'>(#SLOGAN_SITE_SPIP|PtoBR)</div>]
+</div>
+[(#CONFIG{top_bando/afficher_langues}|!={non}|oui) #MENU_LANG]
