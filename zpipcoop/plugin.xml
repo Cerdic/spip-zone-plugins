@@ -1,12 +1,13 @@
 <plugin>
 	<nom>Zpipcoop</nom>
-	<auteur>Pierre KUHN, Val&ecute;ry</auteur>
+	<auteur>Pierre KUHN, Val&ecute;ry-Xavier Lentz
+	&copy; 2010</auteur>
 	<icon></icon>
 	<licence>GPL</licence>
-	<version>0.1</version>
+	<version>0.2</version>
 	<etat>dev</etat>
 	<description>
-	Un plugin compatible avec le comcepte Z.
+	Un plugin compatible avec le concepte Z. Une squelette sur accés restraint compl&eacute;tement.
 	</description>
 	<prefix>zpipcoop</prefix>
 	<fonctions>zpipcoop_pipelines.php</fonctions>
@@ -23,4 +24,6 @@
 		<inclure>zpipcoop_pipelines.php</inclure>
 	</pipeline>
 	<necessite id="SPIP" version="[2.0.10;]" />
+	<utilise id="spiplistes" version="[2.0135;]" />
+	<utilise id="zengarden" version="[1.0.1;]" />
 </plugin>
