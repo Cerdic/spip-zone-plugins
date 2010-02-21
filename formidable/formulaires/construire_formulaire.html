@@ -1,3 +1,6 @@
+[(#ENV{erreurs}|table_valeur{positionner}|oui)
+	<a name="ajax_ancre" href="[(#ENV{erreurs}|table_valeur{positionner})]"></a>
+]
 <div class="formulaire_spip formulaire_editer formulaire_#ENV{form}">
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]

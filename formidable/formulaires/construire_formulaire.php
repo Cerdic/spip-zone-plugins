@@ -48,6 +48,7 @@ function formulaires_construire_formulaire_verifier($identifiant, $formulaire_in
 		$form_config = $saisies_disponibles[$saisie['saisie']]['options'];
 		array_walk_recursive($form_config, 'formidable_transformer_nom', "saisies_modifiees[$nom][options][@valeur@]");
 		$erreurs['configurer_'.$nom] = $form_config;
+		$erreurs['positionner'] = '#configurer_'.$nom;
 		
 		if ($enregistrer_saisie){
 			include_spip('inc/verifier');
@@ -159,7 +160,7 @@ function formidable_preparer_saisie_configurable($saisie, $env){
 		
 		$saisie = saisies_inserer_html(
 			$saisie,
-			'<ul class="formulaire_configurer">'
+			'<ul class="formulaire_configurer"'.' id="configurer_'.$nom.'"'.'>'
 			.recuperer_fond(
 				'inclure/generer_saisies',
 				$env
