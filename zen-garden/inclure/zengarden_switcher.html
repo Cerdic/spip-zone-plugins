@@ -1,0 +1,15 @@
+<div id="switcher_zen">
+<form action='' method='post' class='formulaire_switcher_zen'>
+<B_themes>
+	<select name="var_theme">
+		<option selected="selected"><:zengarden:themes:></option>
+		<BOUCLE_themes(POUR){tableau #ENV{tous,''}|zengarden_liste_themes}{par chemin_tri}>
+			<option value="#CLE">[(#VALEUR|table_valeur{nom}|typo|extraire_multi)]</option>
+		</BOUCLE_themes>
+	</select>
+	<input type="submit" value="<:ok:>" />
+</B_themes>
+</form>
+</div>
+[<style type="text/css">(#INCLURE{inclure/zengarden_switcher.css}|compacte_css)</style>]
+[<script type="text/javascript">(#INCLURE{inclure/zengarden_switcher.js}|compacte_js)</script>]

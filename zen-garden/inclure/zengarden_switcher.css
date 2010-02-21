@@ -1,0 +1,25 @@
+#switcher_zen input, #switcher_zen select {
+	background-color:#FFFFFF;
+	border-color:#CECECE #CECECE #4A4A4A;
+	border-style:solid;
+	border-width:1px 1px 2px;
+	color:#0C479D;
+	font-size:10px;
+	margin:2px 0.5em;
+}
+#switcher_zen select {
+	margin:2px 0.5em;
+	width:20em;
+	float:left;
+}
+#switcher_zen input {
+	float:right;
+}
+
+#switcher_zen {
+	background-color:transparent;
+	left:20px;
+	position:absolute;
+	top:0;
+	z-index:100;
+}
