@@ -38,7 +38,8 @@ if (!function_exists("pas_de_plugin")) {
 
 // filtre qui retire le code source des jeux du texte original
 function pas_de_balise_jeux($texte) {
-	return preg_replace(",<jeux>.*?</jeux>,UimsS", '', $texte);
+	if(strpos($texte, _JEUX_DEBUT)===false) return $texte;
+	return preg_replace(','.preg_quote(_JEUX_DEBUT).'.*?'.preg_quote(_JEUX_FIN).',UimsS', '', $texte);
 }
 
 // aide le Couteau Suisse a calculer la balise #INTRODUCTION
@@ -47,7 +48,7 @@ $GLOBALS['cs_introduire'][] = 'pas_de_balise_jeux';
 // ajoute l'id_jeu du jeu a sa config interne et traite le jeu grace a propre()
 // ce filtre doit agir sur #CONTENU*
 function traite_contenu_jeu($texte, $id_jeu) {
-	return propre(str_replace('</jeux>', "[config]id_jeu=$id_jeu</jeux>", $texte));
+	return propre(str_replace(_JEUX_FIN, "[config]id_jeu=$id_jeu"._JEUX_FIN, $texte));
 }
 
 // renvoie le titre public du jeu que l'on peut trouver grace au separateur [titre]

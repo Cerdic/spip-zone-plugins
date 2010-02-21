@@ -4,6 +4,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 include_spip('exec/inc_boites_infos');
+include_spip('jeux_utils');
 
 function exec_jeux_edit(){
 	include_spip('inc/utils');
@@ -47,9 +48,8 @@ function jeux_ajouter_jeu($id_jeu=false, $contenu='', $titre_prive='', $type_res
 	$type_jeu = jeux_trouver_nom($contenu);
 	$type_jeu = strlen($type_jeu)?$type_jeu:_T('jeux:jeu_vide');
 	$titre_prive = strlen($titre_prive)?$titre_prive:_T('jeux:sans_titre_prive');
-	$contenu = "<jeux>$contenu</jeux>";
+	$contenu = _JEUX_DEBUT.jeux_sans_balise($contenu)._JEUX_FIN;
 	if (!$id_jeu) {
-
         $id_jeu = sql_insertq('spip_jeux', array('date' => 'NOW()', 'statut'=>'publie', 'type_jeu'=>$type_jeu, 'titre_prive'=>$titre_prive, 'contenu'=>$contenu, 'type_resultat'=>$type_resultat));
 		
 	} else {

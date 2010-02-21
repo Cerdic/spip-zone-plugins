@@ -115,7 +115,7 @@ function jeux_in_liste($texte, $liste=array()) {
 	$texte_m = jeux_minuscules($texte);
 	foreach($liste as $expr) {
 		// interpretation des expressions regulieres grace aux virgules : ,un +mot,i
-		if(strpos($expr, ',')===0) {
+		if(strncmp($expr,',',1)===0) {
 			if(preg_match($expr, $texte)) return true;
 		} elseif(strpos($expr, '/M')===($len=strlen($expr)-2)) {
 			if(substr($expr,0,$len)===$texte) return true;
@@ -220,9 +220,13 @@ function jeux_trouver_nom($texte) {
 	return join(', ', $liste);
 }
 
+function jeux_sans_balise($texte) {
+  return str_replace(array(_JEUX_DEBUT,_JEUX_FIN), '', $texte);
+}
+
 // retourne le titre public, si le separateur [titre] est present
 function jeux_trouver_titre_public($texte) {
-  $texte = str_replace(array('<jeux>','</jeux>'), '', $texte);
+  $texte = jeux_sans_balise($texte);
   $titre_public = false;
   // cas particulier des multi-jeux
   if($p=strpos($texte,'['._JEUX_MULTI_JEUX.']')) $texte = substr($texte,0,$p);
@@ -236,7 +240,7 @@ function jeux_trouver_titre_public($texte) {
 
 // retourne la configuration interne, si le separateur [config] est present
 function jeux_trouver_configuration_interne($texte) {
-  $texte = str_replace(array('<jeux>','</jeux>'), '', $texte);
+  $texte = jeux_sans_balise($texte);
   $configuration_interne = array();
   // cas particulier des multi-jeux
   if($p=strpos($texte,'['._JEUX_MULTI_JEUX.']')) $texte = substr($texte,0,$p);

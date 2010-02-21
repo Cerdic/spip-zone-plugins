@@ -80,7 +80,7 @@ $jeux_caracteristiques = array(
 // exemple :
 // array(_JEUX_SEPAR_3, _JEUX_SEPAR_4) doit s'interpreter :
 // " le jeu est charge si on trouve _JEUX_SEPAR_3 ou _JEUX_SEPAR_4
-//   a l'interieur de <jeu> et </jeu> "
+//   a l'interieur de <jeux> et </jeux> "
   'SIGNATURES' => array(
 	'multi_jeux' => array(_JEUX_MULTI_JEUX),
 	'sudoku' => array(_JEUX_SUDOKU),
