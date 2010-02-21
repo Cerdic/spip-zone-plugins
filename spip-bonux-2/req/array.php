@@ -58,21 +58,20 @@ function array_where_sql2php($where){
 function array_where_teste($cle,$valeur,$table,$where){
 	if (is_array($valeur))
 		$valeur = serialize($valeur);
-	$where = str_replace(array(
-	"$table.cle",
-	'cle',
-	"$table.valeur",
-	'valeur',
-	'NOT('
+	$where = preg_replace(array(
+	",(\W)$table\.cle(\W),i",
+	",(\W)cle(\W),i",
+	",(\W)$table\.valeur(\W),i",
+	",(\W)valeur(\W),i",
+	',NOT\(,i'
 	),
 	array(
-	"'".addslashes($cle)."'",
-	"'".addslashes($cle)."'",
-	"'".addslashes($valeur)."'",
-	"'".addslashes($valeur)."'",
-	"!("
+	"\\1'".addslashes($cle)."'\\2",
+	"\\1'".addslashes($cle)."'\\2",
+	"\\1'".addslashes($valeur)."'\\2",
+	"\\1'".addslashes($valeur)."'\\2",
+	"\\1!("
 	),$where);
-
 	return eval("if ($where) return true; else return false;");
 }
 
