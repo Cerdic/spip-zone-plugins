@@ -19,7 +19,7 @@
 	<tbody>
 	<BOUCLE_liste_bre(BREVES){id_secteur?}{id_rubrique?}{where?}{statut?}{tri #ENV{order,date},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
-			<td class='statut'>[(#ID_ARTICLE|puce_statut{#STATUT,#ID_RUBRIQUE,article})]</td>
+			<td class='statut'>[(#ID_ARTICLE|puce_changement_statut{#STATUT,#ID_RUBRIQUE,article})]</td>
 			<td class='titre'>[(#LOGO_BREVE||image_reduire{20,26})]<a href="[(#ID_BREVE|generer_url_entite{breve})]" class="qTip">#TITRE</a>
 				[<div class="qTipContent">(#INTRODUCTION)</div>]
 			</td>

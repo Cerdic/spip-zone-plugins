@@ -19,7 +19,7 @@
 	<tbody>
 	<BOUCLE_liste_art(SYNDIC_ARTICLES){id_syndic?}{where?}{statut?}{tri #ENV{order,date},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
-			<td class='statut'>[(#ID_SYNDIC_ARTICLE|puce_statut{#STATUT,#ID_SYNDIC,syndic_article})]</td>
+			<td class='statut'>[(#ID_SYNDIC_ARTICLE|puce_changement_statut{#STATUT,#ID_SYNDIC,syndic_article})]</td>
 			<td class='titre'>[<a
 					href="(#URL_ARTICLE)" class="qTip">#SET{a,'</a>'}]#TITRE[(#GET{a})]
 				<span class="auteurs">([(#LESAUTEURS), ][(#DATE|affdate_court)])</span>

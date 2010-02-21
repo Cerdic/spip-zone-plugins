@@ -20,7 +20,7 @@
 	<tbody>
 	<BOUCLE_liste_sites(SYNDIC){id_rubrique?}{where?}{statut?}{tri #ENV{order,date},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
-			<td class='statut'>[(#ID_SYNDIC|puce_statut{#STATUT,#ID_RUBRIQUE,site})]</td>
+			<td class='statut'>[(#ID_SYNDIC|puce_changement_statut{#STATUT,#ID_RUBRIQUE,site})]</td>
 			<td class='titre'>[(#LOGO_SITE||image_reduire{26,20})]<a href="[(#ID_SYNDIC|generer_url_entite{site})]" class="qTip">#NOM_SITE</a>
 				[<div class="qTipContent">(#DESCRIPTIF)</div>]
 				[<span class='visiter'>&#91;<a href='(#URL_SITE)'><:lien_visite_site:></a>&#93;</span>]
