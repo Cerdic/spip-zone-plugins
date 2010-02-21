@@ -4,8 +4,8 @@
 [(#REM) afficher la selection dans un ul class item_picked ----------------------------------------
 select=1 => le selecteur se comporte comme un select, avec un seul choix possible
 ]<ul class='item_picked[ (#ENV{select,''}|?{select})]'>
-[(#ENV{rubriques,0}|oui)<INCLURE{fond=formulaires/selecteur/inc-sel-rubriques}{name}{selected}{select}{img_unpick=#CHEMIN{img_pack/item-remove.png}}>]
-<INCLURE{fond=formulaires/selecteur/inc-sel-articles}{name}{selected}{select}{img_unpick=#CHEMIN{img_pack/item-remove.png}}>
+[(#ENV{rubriques,0}|oui)<INCLURE{fond=formulaires/selecteur/inc-sel-rubriques}{name}{selected}{select}{img_unpick=#CHEMIN{img_pack/item-remove.png}}{afficher_langue}>]
+<INCLURE{fond=formulaires/selecteur/inc-sel-articles}{name}{selected}{select}{img_unpick=#CHEMIN{img_pack/item-remove.png}}{afficher_langue}>
 </ul>
 
 #SET{id_rubrique,#ENV{id_rubrique}}
