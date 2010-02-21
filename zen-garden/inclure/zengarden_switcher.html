@@ -2,7 +2,7 @@
 <form action='' method='post' class='formulaire_switcher_zen'>
 <B_themes>
 	<select name="var_theme">
-		<option selected="selected"><:zengarden:themes:></option>
+		<option value=""><:zengarden:themes:></option>
 		<BOUCLE_themes(POUR){tableau #ENV{tous,''}|zengarden_liste_themes}{par chemin_tri}>
 			<option value="#CLE">[(#VALEUR|table_valeur{nom}|typo|extraire_multi)]</option>
 		</BOUCLE_themes>

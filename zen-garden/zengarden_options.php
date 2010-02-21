@@ -13,7 +13,7 @@ if (!defined('_DIR_PLUGIN_THEME')){
 	if (test_espace_prive()){
 		if (isset($_COOKIE['spip_zengarden_theme'])){
 			include_spip('inc/cookie');
-			spip_setcookie('spip_zengarden_theme',$_COOKIE['spip_zengarden_theme']=='',-1);
+			spip_setcookie('spip_zengarden_theme',$_COOKIE['spip_zengarden_theme']='',-1);
 		}
 	}
 	elseif(isset($GLOBALS['meta']['zengarden_switcher']) OR defined('_ZEN_VAR_THEME')){
@@ -22,7 +22,7 @@ if (!defined('_DIR_PLUGIN_THEME')){
 			if ($arg)
 				spip_setcookie('spip_zengarden_theme',$_COOKIE['spip_zengarden_theme'] = $arg);
 			else
-				spip_setcookie('spip_zengarden_theme',$_COOKIE['spip_zengarden_theme']=='',-1);
+				spip_setcookie('spip_zengarden_theme',$_COOKIE['spip_zengarden_theme']='',-1);
 		}
 	}
 	
