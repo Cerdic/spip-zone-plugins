@@ -1,0 +1,4 @@
+Logo
+	Jakub 'jimmac' Steiner
+	http://people.freedesktop.org/~jimmac/icons/#oxygen
+	apps/preferences-desktop-locale

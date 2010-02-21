@@ -1,0 +1,16 @@
+
+[(#SET{identifiant,[(#VAL{trad_#ID_RUBRIQUE})]})]
+[(#SET{icone,[(#CHEMIN{images/tradrub-22.png}|url_absolue)]})]
+[(#SET{plie,0})]
+[(#VAL{e}|debut_cadre{#GET{icone},'',[(#VAL{<:tradrub:traduction_rubrique:>}|bouton_block_depliable{[(#GET{plie}?{#EVAL{true},#EVAL{false}})],#GET{identifiant}})]})]
+[(#GET{plie}|debut_block_depliable{#GET{identifiant}})]
+
+	<div class='ajax'>
+	[(#FORMULAIRE_DEFINIR_TRADUCTION{rubrique, #ID_RUBRIQUE})]
+	</div>
+
+[(#GET{plie}|fin_block)]
+
+	[(#INCLURE{fond=prive/liste/traductions_rubrique, id_rubrique=#ID_RUBRIQUE, ajax})]
+
+[(#VAL{e}|fin_cadre)]
