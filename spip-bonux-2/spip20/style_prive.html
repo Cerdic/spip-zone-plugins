@@ -29,9 +29,6 @@ body { background-color: #f8f7f3; margin: 0; border: 0; color: #000; scrollbar-f
 body, body * { font-family: Verdana, Geneva, Sans, sans-serif; }
 body { font-size:0.625em; }
 
-/*-- spip-admin pour le debug --*/
-#INCLURE{prive/spip_admin.css}
-
 
 /* Espaceur de blocs */
 .nettoyeur { clear: both; height: 0; margin: 0; padding: 0; border: 0; line-height: 1px; font-size: 1px; }
@@ -479,7 +476,7 @@ td.icone a img { border: 0; }
 .cadre_padding.padding_x { padding: 0 6px; }
 .padding_x .bloc_depliable { padding: 6px 0; }
 /* .cadre-titre { font-family: Verdana, Geneva, helvetica, sans; font-weight: bold; font-size: 12px; padding: 3px; }*/
-.cadre { margin: 20px 0 10px 0; font-family: Verdana, Geneva, helvetica, sans; font-size: 11px; position: relative; background-color: #fff;border: 1px solid #666;}
+.cadre { margin: 0px 0 10px 0; font-family: Verdana, Geneva, helvetica, sans; font-size: 11px; position: relative; background-color: #fff;border: 1px solid #666;}
 
 .cadre-fonce { background-color: #GET{foncee}; }
 .cadre-gris-fonce { background: #666; }
@@ -695,50 +692,7 @@ td.message, a.message { background: url(#GET{chemin_img_pack}m_envoi[(#GET{rtl})
 /* exec=admin_tech */
 #sauvegarder,#restaurer,#reparer { margin: 0 0 2em 0; }
 
-
-/* exec=admin_plugin  2.1 */
-.liste-plugins.formulaire_spip {border:0;background:none;padding:0;}
-.liste-plugins .liens {padding:5px;background:#ddd;}
-.liste-plugins .liste-items .item {position:relative;padding-left:70px;border-top:0;}
-.liste-plugins .liste-items .item.actif {background:#eee;}
-.liste-plugins .liste-items .item.actif:hover {background:#e8e8e8;}
-.liste-plugins .liste-items .item.on {background:[#(#GET{claire}|couleur_eclaircir)];}
-.liste-plugins .liste-items .item.erreur {background:#fdd;}
-.liste-plugins .liste-items .item.erreur .erreur {color:red;font-weight:bold;}
-.liste-plugins .liste-items .item .short {color:#666;font-size:0.95em;}
-.liste-plugins .liste-items .item.on .short {display:none;}
-.liste-plugins .liste-items .item .check {float:#GET{left};margin-#GET{left}:-70px;position:relative;display:inline;}
-.liste-plugins .liste-items .item .check input {margin:0;}
-.liste-plugins .liste-items .item .check label {display:none;}
-
-.liste-plugins .liste-items .item .download {float:#GET{left};margin-#GET{left}:-70px;position:relative;display:inline;}
-
-.liste-plugins .liste-items .item .nom {font-size:1.2em;display:inline;}
-.liste-plugins .liste-items .item .nom a {color:#444;text-decoration:none;}
-.liste-plugins .liste-items .item.actif .nom a {color:#[(#GET{foncee}|couleur_foncer)];}
-
-.liste-plugins .liste-items .item .icon {position:absolute;top:3px;left:28px;width:32px;height:32px;overflow:hidden;}
-.liste-plugins .liste-items .item .actions {float:#GET{right};visibility:hidden;}
-.liste-plugins .liste-items .item:hover .actions {visibility:visible;}
-
-.liste-plugins .liste-items .item .version,
-.liste-plugins .liste-items .item .etat {font-weight: normal;}
-.liste-plugins .liste-items .item .cfg_link {position:absolute;top:4px;#GET{right}:4px;}
-.liste-plugins .liste-items .item .details .desc {padding:5px 0 2px;font-weight:normal;}
-.liste-plugins .liste-items .item .details .auteurs {display:inline;font-style:italic;padding-bottom:5px;font-weight:normal;}
-.liste-plugins .liste-items .item .details .licence {display:inline;font-weight:normal;}
-.liste-plugins .liste-items .item .details .site {font-weight:bold;margin-top:0.5em;}
-.liste-plugins .liste-items .item .details .tech {font-size:0.9em;float:#GET{right};text-align:#GET{right};}
-
-.install-plugins {background:#ddd;border:1px solid black;color:#555;font-size:0.85em;padding:10px;}
-.install-plugins .ok {color:green;font-weight:bold;}
-.install-plugins .erreur {color:red;font-weight:bold;}
-
-.erreur_message-plugins {border:1px solid red;background:#f0d0d0;font-weight:bold;padding:10px;font-size:0.9em;}
-
-#liste_plugins ul.plugins {padding-left:0;}
-
-/* exec=admin_plugin 2.0 */
+/* exec=admin_plugin */
 .liste_plugins ul li { list-style: none; border-bottom: 1px solid #fff; }
 .liste_plugins ul { padding-#GET{left}: 1em; margin:.5em 0 .5em 0; }
 .liste_plugins ul ul { border-#GET{left}:5px solid #dfdfdf; }
