@@ -1,7 +1,6 @@
 #SET{themes,#ENV{tous,''}|zengarden_liste_themes}
 <INCLURE{fond=prive/zengarden_theme_actif}{env}{themes=#GET{themes}}>
 <B_themes>
-<h2><:zengarden:choix_theme:></h2>
 [<p class='pagination'>(#PAGINATION)</p>]
 <ul class='liste_themes'>
 <BOUCLE_themes(POUR){tableau #GET{themes}}{cle!=#ENV{selection}}{par chemin_tri}{pagination 20}>
