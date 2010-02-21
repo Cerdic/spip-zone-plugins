@@ -6,7 +6,7 @@
     <etat>stable</etat>
     <icon>images/a2a-64.png</icon>
     <description>Petit plugin qui permet de lier un article &agrave; un ou plusieurs autre(s)</description>
-    <lien>http://www.spip-contrib.net/</lien>
+    <lien>http://www.spip-contrib.net/a2a</lien>
     <prefix>a2a</prefix>
     <fonctions>a2a_fonctions.php</fonctions>
     <options>a2a_options.php</options>
