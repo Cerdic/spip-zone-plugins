@@ -9,6 +9,7 @@
 	  
   Parametres :
   - multiple : si oui, on peut selectionner plusieurs rubliques
+  - afficher_langue : si oui, on affiche la langue de l'objet selectionne
 	 
   Exemple d'appel :
 	[(#SAISIE{selecteur_rubrique_article,menu,
@@ -21,5 +22,6 @@
 <INCLURE{fond=formulaires/selecteur/articles}
 	{selected=#GET{val}}
 	{name=#ENV{nom}}
+	{afficher_langue=#ENV{afficher_langue,''}}
 	{select=(#ENV{multiple}|?{0,1})}
 	{rubriques=1} />
