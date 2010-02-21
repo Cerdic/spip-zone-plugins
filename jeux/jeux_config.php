@@ -28,6 +28,7 @@ define('_JEUX_HEAD2', "<!-- CSS/JS JEUX (AUTO) -->");
 define('_JEUX_TITRE', 'titre');		// separateur indiquant le titre du jeu
 define('_JEUX_TEXTE', 'texte');		// separateur indiquant un contenu a garder telquel
 define('_JEUX_CONFIG', 'config');	// separateur permettant de passer des parametres au jeu
+define('_JEUX_CONFIG', 'input');	// separateur permettant d'inserer un <input/> non evalue
 define('_JEUX_REPONSE', 'reponse');
 define('_JEUX_SOLUTION', 'solution');
 define('_JEUX_SCORE', 'score');

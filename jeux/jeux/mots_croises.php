@@ -51,7 +51,7 @@ function lettre_grille($chiffre) {
 }
 
 // affiche la grille de mot croises, avec la solution au cas ou
-function affichage_grille_mc($tableau_grille, $indexJeux, $solution=false){
+function affichage_grille_mc($tableau_grille, $indexJeux, $form, $solution=false){
 	$jeux_couleurs = _request('jeux_couleurs');
 	
 	// les variables de la grille
@@ -64,7 +64,7 @@ function affichage_grille_mc($tableau_grille, $indexJeux, $solution=false){
 		? ($form?jeux_form_debut('motscroises', $indexJeux, 'jeux_grille jeux_left', 'post', self()):'')
 		: '<p class="jeux_solution">'._T('jeux:solution').' : </p>' ;
     $grille .= '<table class="jeux_grille" cellspacing="0" border="0" summary="'
-		. _T('motscroises:table_summary',Array('hauteur'=>$hauteur,'largeur'=>$largeur))
+		. _T('motscroises:table_summary', array('hauteur'=>$hauteur,'largeur'=>$largeur))
 		. "\">\n\t<tr>\n\t\t<td class=\"jeux_coin\"></td>\n";
 	
 	
@@ -93,8 +93,8 @@ function affichage_grille_mc($tableau_grille, $indexJeux, $solution=false){
 					$name = 'GR'.$indexJeux.'x'.$colonne.'x'.$ligne;
 					$valeur = _request($name);
 					$grille .= "\t\t<td$class><label for=\"$name\">"
-						. _T('jeux:ligne_n',Array('n'=>lettre_grille($ligne))).';'
-						. _T('jeux:colonne_n',Array('n'=>$colonne)).'</label>'
+						. _T('jeux:ligne_n', array('n'=>lettre_grille($ligne))).';'
+						. _T('jeux:colonne_n', array('n'=>$colonne)).'</label>'
 						. '<input type="text" maxlength="1" '
 						. ((isset($valeur) and $valeur!='')? 'value="'.$valeur:'')
 						.'" name="'.$name.'" id="'.$name.'" />'
@@ -155,10 +155,10 @@ function calcul_erreurs_grille($solution, $indexJeux) {
 	  // on retourne ce qu'on affiche
 	  return '<p class="jeux_erreur">'
 		. (($nbr_erreurs==0)?_T('jeux:aucune_erreur'):(
-		 ($nbr_erreurs==1)?_T('jeux:une_erreur'):_T("jeux:n_erreurs", Array('n'=>$nbr_erreurs))
+		 ($nbr_erreurs==1)?_T('jeux:une_erreur'):_T("jeux:n_erreurs", array('n'=>$nbr_erreurs))
 		))
 		. (($nbr_vides==0)?(($nbr_erreurs==0)?'. '._T('jeux:bravo'):''):(
-		 ($nbr_vides==1)?' - '._T('jeux:une_vide'):' - '._T("jeux:n_vides", Array('n'=>$nbr_vides))
+		 ($nbr_vides==1)?' - '._T('jeux:une_vide'):' - '._T("jeux:n_vides", array('n'=>$nbr_vides))
 		))
 		. '</p><br />';
 	}
@@ -216,10 +216,10 @@ function jeux_mots_croises($texte, $indexJeux, $form=true) {
 	$affiche_solution = _request('affiche_solution_'.$indexJeux);
 	return 	'<div class="mots_croises">'
 			. calcul_erreurs_grille($solution, $indexJeux)
-			. affichage_grille_mc($solution, $indexJeux)
+			. affichage_grille_mc($solution, $indexJeux, $form)
 			. affichage_definitions($horizontal, $vertical)
 	// solution
-			. (($affiche_solution[0] == 1)? affichage_grille_mc($solution, $indexJeux, true) : '')
+			. (($affiche_solution[0] == 1)? affichage_grille_mc($solution, $indexJeux, $form, true) : '')
 			. '</div><br class="jeux_nettoyeur"/>';
 }
 ?>
