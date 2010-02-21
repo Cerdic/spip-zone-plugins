@@ -214,7 +214,7 @@ function jeux_diag_echecs($texte, $indexJeux, $form=true) {
 	$tableau = jeux_split_texte('diag_echecs', $texte);
 	diag_echecs_config_supplementaire();
 	foreach($tableau as $i => $valeur) if ($i & 1) {
-	 if ($valeur==_JEUX_TITRE) $html .= "<p class=\"jeux_titre diag_echecs_titre\">{$tableau[$i+1]}</p>";
+	 if ($valeur==_JEUX_TITRE) $html .= "<div class=\"jeux_titre diag_echecs_titre\">{$tableau[$i+1]}</div>";
 	  elseif ($valeur==_JEUX_DIAG_ECHECS) $html .= calcul_diagramme_echecs($tableau[$i+1], $indexJeux);
 	  elseif ($valeur==_JEUX_TEXTE) $html .= $tableau[$i+1];
 	}

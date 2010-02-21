@@ -40,7 +40,7 @@ Exemple de syntaxe dans l'article :
 */
 // fonctions d'affichage
 function pendu_titre($texte) {
- return $texte?"<p class=\"jeux_titre pendu_titre\">$texte</p>":'';
+ return $texte?"<div class=\"jeux_titre pendu_titre\">$texte</div>":'';
 }
 function pendu_pendu($js, $indexJeux) {
  $nb_images = jeux_config('nb_images');
@@ -54,7 +54,7 @@ function pendu_pendu($js, $indexJeux) {
  $images_init = preg_split('/\s*,\s*/', jeux_config(1));
  for($i=0; $i<=$nb_images-1; $i++)
  	$images .= "<img class=\"no_image_filtrer pendu_image\" name=\"pict{$indexJeux}_$i\" src=\"$path".$images_init[$i]."\" />";
- $regles = jeux_config('regle')?'<p class="jeux_regle">'.definir_puce()._T('pendu:regle').'</p>' : '';
+ $regles = jeux_config('regle')?'<div class="jeux_regle">'.definir_puce()._T('pendu:regle').'</div>' : '';
  $js = echappe_html("$js
  	pendu_init($indexJeux);
 // --></script>", 'JEUX', true);
@@ -62,7 +62,7 @@ function pendu_pendu($js, $indexJeux) {
  if ((!_DIR_RESTREINT && $GLOBALS["filtrer_javascript"]!=1) || ($GLOBALS["filtrer_javascript"]==-1)) $js = _T('jeux:erreur_scripts');
 
  return '<table class="pendu" border=0><tr><td align="center">'
- 	. "<p align=\"center\"><div class=\"pendu_images\" align=center>$images</div><br/>\n$proposition</p></td>"
+ 	. "<div align=\"center\"><div class=\"pendu_images\" align=center>$images</div><br/>\n$proposition</div></td>"
 	. "<td width=\"20\">&nbsp;</td><td valign=\"bottom\">\n" . affiche_un_clavier($indexJeux) . '<br/></td></tr>'
 	. "<tr><td colspan=\"3\" align=\"right\">$reset</td></tr></table>\n"
  	. $regles . $js;

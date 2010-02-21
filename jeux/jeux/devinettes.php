@@ -51,14 +51,14 @@ Exemple de syntaxe dans l'article :
 
 // fonctions d'affichage
 function devinettes_titre($texte) {
- return $texte?"<p class=\"jeux_titre devinettes_titre\">$texte</p>":'';
+ return $texte?"<div class=\"jeux_titre devinettes_titre\">$texte</div>":'';
 }
 function devinettes_devinette($texte) {
- return $texte?"<p class=\"jeux_question devinettes_devinette\">$texte</p>":'';
+ return $texte?"<div class=\"jeux_question devinettes_devinette\">$texte</div>":'';
 }
 function devinettes_charade($texte) {
  $texte = "<poesie>$texte</poesie>";
- return $texte?"<p class=\"jeux_question devinettes_charade\">$texte</p>":'';
+ return $texte?"<div class=\"jeux_question devinettes_charade\">$texte</div>":'';
 }
 function devinettes_reponse($texte, $id) {
  if (!jeux_config('reponse')) return '';

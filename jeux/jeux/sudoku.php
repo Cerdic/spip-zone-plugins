@@ -50,14 +50,14 @@ function affichage_sudoku($tableau_sudoku, $indexJeux, $form=true, $solution=fal
 	 case 4 : $interh = $interv = '24'; $li = $lj = 2; break;
 	 case 6 : $interh = '36'; $interv = '246'; $lj = 3; $li = 2; break;
 	 case 9 : $interh = $interv = '369'; $li = $lj = 3; break;
-	 default : return '<p class="jeux_erreur">'._T('jeux:erreur_taille_grille').' : </p>' ;
+	 default : return '<div class="jeux_erreur">'._T('jeux:erreur_taille_grille').' : </div>' ;
 	}
     $grille='';
 
     // entetes : formulaire + grille
     $grille .= (!$solution)
 		? ($form?jeux_form_debut('sudoku', $indexJeux, 'jeux_grille', 'post', self()):'')
-		: '<p class="jeux_solution">'._T('jeux:solution').' : </p>' ;
+		: '<div class="jeux_solution">'._T('jeux:solution').' : </div>' ;
     $grille .= '<table class="jeux_grille  sudoku" cellspacing="0" border="0" summary="'
 		. _T('sudoku:table_summary',Array('hauteur'=>$hauteur,'largeur'=>$largeur)) . "\">\n";
     
@@ -94,7 +94,7 @@ function affichage_sudoku($tableau_sudoku, $indexJeux, $form=true, $solution=fal
 	$grille.="</table>\n";
 	
 	if (!$solution) $grille .= 
-		(jeux_config('regle')?'<p class="jeux_regle">'.definir_puce()._T('sudoku:regle',Array('hauteur'=>$li,'largeur'=>$lj, 'max'=>$largeur)).'</p>' : '')
+		(jeux_config('regle')?'<div class="jeux_regle">'.definir_puce()._T('sudoku:regle',Array('hauteur'=>$li,'largeur'=>$lj, 'max'=>$largeur)).'</div>' : '')
 		.(jeux_config('solution')?"<p><input id=\"affiche_solution_$indexJeux\" name=\"affiche_solution_{$indexJeux}[]\" type=\"checkbox\" class=\"jeux_cocher\" value=\"1\" /><label for=\"affiche_solution_$indexJeux\" >"._T('jeux:afficher_solution')."</label></p>\n":'')
 		.'<p><input type="submit" value="'._T('jeux:verifier_validite')."\" name=\"bouton_envoi_$indexJeux\" /></p>"
 		.($form?jeux_form_fin():'');
@@ -167,12 +167,12 @@ function calcul_erreurs_sudoku($tableau_sudoku, $solution, $indexJeux) {
 	if (_request("bouton_envoi_$indexJeux") == '') return '';
 	else {
 	  list($valide, $nbr_vides) = sudoku_validite($tableau_sudoku, $solution, $indexJeux); 
-	  return '<p class="jeux_erreur">'
+	  return '<div class="jeux_erreur">'
 		. _T('jeux:grille_'.($valide?'':'in').'valide')
 		. (($nbr_vides==0)?(($nbr_erreurs==0)?'. '._T('jeux:bravo'):''):(
 		 ($nbr_vides==1)?' - '._T('jeux:une_vide'):' - '._T("jeux:n_vides", Array('n'=>$nbr_vides))
 		))
-		. '</p><br />';
+		. '</div><br />';
 	}
 }
 
@@ -196,7 +196,7 @@ function jeux_sudoku($texte, $indexJeux, $form=true) {
 	  elseif ($valeur==_JEUX_TEXTE) $html .= $tableau[$i+1];
 	}
 	
-	return  ($titre?"<p class=\"jeux_titre sudoku_titre\">$titre</p>":'')
+	return  ($titre?"<div class=\"jeux_titre sudoku_titre\">$titre</div>":'')
 			. calcul_erreurs_sudoku($sudoku, $solution, $indexJeux)
 			. affichage_sudoku($sudoku, $indexJeux, $form)
 	// solution

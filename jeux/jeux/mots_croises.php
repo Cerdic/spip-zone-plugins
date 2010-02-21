@@ -62,7 +62,7 @@ function affichage_grille_mc($tableau_grille, $indexJeux, $form, $solution=false
     // entetes : formulaire + grille
     $grille .= (!$solution)
 		? ($form?jeux_form_debut('motscroises', $indexJeux, 'jeux_grille jeux_left', 'post', self()):'')
-		: '<p class="jeux_solution">'._T('jeux:solution').' : </p>' ;
+		: '<div class="jeux_solution">'._T('jeux:solution').' : </div>' ;
     $grille .= '<table class="jeux_grille" cellspacing="0" border="0" summary="'
 		. _T('motscroises:table_summary', array('hauteur'=>$hauteur,'largeur'=>$largeur))
 		. "\">\n\t<tr>\n\t\t<td class=\"jeux_coin\"></td>\n";
@@ -153,14 +153,14 @@ function calcul_erreurs_grille($solution, $indexJeux) {
 	  }
 
 	  // on retourne ce qu'on affiche
-	  return '<p class="jeux_erreur">'
+	  return '<div class="jeux_erreur">'
 		. (($nbr_erreurs==0)?_T('jeux:aucune_erreur'):(
 		 ($nbr_erreurs==1)?_T('jeux:une_erreur'):_T("jeux:n_erreurs", array('n'=>$nbr_erreurs))
 		))
 		. (($nbr_vides==0)?(($nbr_erreurs==0)?'. '._T('jeux:bravo'):''):(
 		 ($nbr_vides==1)?' - '._T('jeux:une_vide'):' - '._T("jeux:n_vides", array('n'=>$nbr_vides))
 		))
-		. '</p><br />';
+		. '</div><br />';
 	}
 }
 

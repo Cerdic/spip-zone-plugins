@@ -64,25 +64,25 @@ define('_GUILLEMET_FERMANT', '&raquo;');
 
 // fonctions d'affichage
 function textes_titre($texte) {
- return $texte?"<p class=\"jeux_titre textes_titre\">$texte</p>":'';
+ return $texte?"<div class=\"jeux_titre textes_titre\">$texte</div>":'';
 }
 function textes_blague($texte) {
  $texte = _GUILLEMET_OUVRANT.$texte._GUILLEMET_FERMANT;
- return $texte?"<p class=\"jeux_question textes_blague\">$texte</p>":'';
+ return $texte?"<div class=\"jeux_question textes_blague\">$texte</div>":'';
 }
 function textes_citation($texte) {
  $texte = _GUILLEMET_OUVRANT.$texte._GUILLEMET_FERMANT;
- return $texte?"<p class=\"jeux_question textes_citation\">$texte</p>":'';
+ return $texte?"<div class=\"jeux_question textes_citation\">$texte</div>":'';
 }
 function textes_poesie($texte) {
  $texte = "<poesie>$texte</poesie>";
- return $texte?"<p class=\"jeux_question textes_poesie\">$texte</p>":'';
+ return $texte?"<div class=\"jeux_question textes_poesie\">$texte</div>":'';
 }
 function textes_auteur($texte) {
- return $texte?"<p class=\"textes_auteur\">$texte</p>":'';
+ return $texte?"<div class=\"textes_auteur\">$texte</div>":'';
 }
 function textes_recueil($texte) {
- return $texte?"<p class=\"textes_recueil\">$texte</p>":'';
+ return $texte?"<div class=\"textes_recueil\">$texte</div>":'';
 }
 
 // fonction principale, pas de formulaire
