@@ -57,4 +57,4 @@
 	WET : Western Europe Time (GMT + 00:00)
 
 
-][(#EVAL{defined('_CS_horloge')}|oui)[(#HORLOGE{[format=(#ENV{format})],[utc=(#ENV{utc})],[id=(#ENV{id})]})]]
+][(#VAL{_CS_horloge|defined|oui)[(#HORLOGE{[format=(#ENV{format})],[utc=(#ENV{utc})],[id=(#ENV{id})]})]]
