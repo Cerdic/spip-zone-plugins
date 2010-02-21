@@ -131,11 +131,13 @@
             $.fn.qtip.interfaces[id] = obj;
 
             // Check if element already has qTip data assigned
-            if(typeof $(this).data('qtip') == 'object')
+            if ((typeof $(this).data('qtip') == 'object')
+            && ($(this).data('qtip') !== null))
             {
                // Set new current interface id
                if(typeof $(this).attr('qtip') === 'undefined')
-                  $(this).data('qtip').current = $(this).data('qtip').interfaces.length;
+                  $(this).data('qtip').current =
+					$(this).data('qtip').interfaces.length;
 
                // Push new API interface onto interfaces array
                $(this).data('qtip').interfaces.push(obj);

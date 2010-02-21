@@ -4,10 +4,13 @@
 #SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
 #SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
 
+
 .liste-elements{
 	margin:1em 0;
 	font-size:.85em;
 }
+.cadre .liste-elements{font-size:1em;}
+
 .liste-elements .pagination{margin-top:0; padding-top:0;}
 .liste-elements table.spip {width:100%;}
 .liste-elements table.spip caption {margin:0;text-align:left;}
@@ -19,6 +22,7 @@
 
 .liste-elements thead th.statut {text-indent:-3000px;}
 
+.liste-elements table.spip a {color:[#(#GET{foncee}|substr{1}|couleur_foncer)];}
 .liste-elements table.spip td,
 .liste-elements table.spip th {border:0; border-bottom:1px solid #ccc;}
 .liste-elements tr th.statut,.liste-elements tr td.statut {width: 11px;}
