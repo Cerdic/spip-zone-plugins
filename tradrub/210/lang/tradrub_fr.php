@@ -11,3 +11,5 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'enregistrement_de_la_traduction_ok' => "La traduction est prise en compte.",
 	'trad_rubrique_traduction' => "Toutes les versions de cette rubrique&nbsp;:",
 );
+
+?>
