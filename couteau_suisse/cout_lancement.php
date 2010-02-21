@@ -246,6 +246,7 @@ function cs_lire_meta_outil($outil, $meta='', $unserialize=true) {
 }
 
 function rep_icones_barre(&$icones_barre) {
+	if(defined('_SPIP20100')) include_spip('images_fonctions');
 	if(!isset($icones_barre))
 		$icones_barre = sous_repertoire(sous_repertoire(_DIR_VAR, 'couteau-suisse'), 'icones_barre');
 }
