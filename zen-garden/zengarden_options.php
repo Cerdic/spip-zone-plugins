@@ -50,7 +50,10 @@ $GLOBALS['spip_pipeline']['zengarden_effacer_theme'] = '';
 function zengarden_affichage_final($texte){
 	if ($GLOBALS['html'] and isset($GLOBALS['meta']['zengarden_switcher'])){
 		include_spip('prive/zengarden_theme_fonctions');
-		$code = recuperer_fond('inclure/zengarden_switcher');
+		// on passe le theme selectionne en js pour ne pas polluer le cache du switcher
+		$code = 
+			"<script type='text/javascript'>var theme_selected='".$_COOKIE['spip_zengarden_theme']."'</script>"
+			. recuperer_fond('inclure/zengarden_switcher');
 		// On rajoute le code du selecteur de squelettes avant la balise </body>
 		$texte=str_replace("</body>",$code."</body>",$texte);
 	}
