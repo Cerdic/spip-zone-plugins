@@ -699,7 +699,7 @@ add_outil( array(
 	'id' => 'visiteurs_connectes',
 	'auteur' => "Phil d'apr&egrave;s spip-contrib",
 	'categorie' => 'public',
-	'code:options' => "define('_VISITEURS_CONNECTES',1);
+	'code:options' => "
 function cs_compter_visiteurs(){ return count(preg_files(_DIR_TMP.'visites/','.')); }
 function action_visiteurs_connectes(){ echo cs_compter_visiteurs(); return true; }",
 	'version-min' => '1.9200', // pour la balise #ARRAY

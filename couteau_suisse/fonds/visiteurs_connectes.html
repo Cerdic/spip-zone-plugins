@@ -1,5 +1,5 @@
 #CACHE{60}
-[(#EVAL{defined('_VISITEURS_CONNECTES')}|oui)
+[(#EVAL{defined('_CS_visiteurs_connectes')}|oui)
 #SET{nb,#REM|cs_compter_visiteurs|cs_span{class='cs_nb_visiteurs'}}
 [<p class='cs_visiteurs'>(#VAL{'couteau:visiteurs_connectes'}|_T{#ARRAY{nb,#GET{nb}}})</p>]
 ]
