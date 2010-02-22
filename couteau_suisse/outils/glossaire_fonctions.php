@@ -184,7 +184,7 @@ function cs_rempl_glossaire($texte) {
 			$mot_present = true;
 		}
 		if($les_mots) {
-			if(preg_match(",\W(?:$les_mots)\W,i", $texte)) {
+			if(preg_match(",\W(?:$les_mots)\W,i", " $texte ")) {
 				$texte = glossaire_gogogo($texte, $les_mots, $limit, $unicode);
 				$mot_present = true;
 			}

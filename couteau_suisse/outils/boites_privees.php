@@ -112,18 +112,18 @@ function cs_formatspip($id_article){
 	$q = sql_select('descriptif,chapo,texte,ps', 'spip_articles', "id_article=$id_article");
 	$row = sql_fetch($q);
 	$txt = ''; $i = 0;
-	if (strlen($row['descriptif'])>0)
+	if (strlen($row['descriptif'])) {
 		$txt .= '===== '._T('texte_descriptif_rapide')." =====\n\n"
-			. $row['descriptif']."\n\n"; $i++;
-	if (strlen($row['chapo'])>0)
+			. $row['descriptif']."\n\n"; $i++; }
+	if (strlen($row['chapo'])) {
 		$txt .= '===== '._T('info_chapeau')." =====\n\n"
-			. $row['chapo']."\n\n"; $i++;
-	if (strlen($row['texte'])>0)
+			. $row['chapo']."\n\n"; $i++; }
+	if (strlen($row['texte'])) {
 		$txt .= '===== '._T('info_texte')." =====\n\n"
-			. $row['texte']."\n\n"; $i++;
-	if (strlen($row['ps'])>0)
+			. $row['texte']."\n\n"; $i++; }
+	if (strlen($row['ps'])) {
 		$txt .= '===== '._T('info_post_scriptum')." =====\n\n"
-			. $row['ps']."\n\n"; $i++;
+			. $row['ps']."\n\n"; $i++; }
 	$titre =  _T('couteau:texte'.($i>1?'s':'').'_formatspip');
 	// compatibilite SPIP < 2.0
 	$compat = function_exists('bouton_block_depliable');
