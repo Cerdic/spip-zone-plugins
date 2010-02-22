@@ -20,6 +20,9 @@
 #SET{foncee,##ENV{couleur_foncee,3874b0}}
 #SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
 #SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+#SET{rtl,#ENV{ltr}|choixsiegal{left,'',_rtl}}
+#SET{rtl_inv,#ENV{ltr}|choixsiegal{right,'',_rtl}}
+#SET{chemin_img_pack,#EVAL{_DIR_IMG_PACK}}
 
 
 body {
@@ -125,11 +128,29 @@ h1, h2, h3, .bandeau_couleur, .bandeau_couleur_sous, a.icone26, a.cellule-h-text
 		
 	}
 	.deplie, .deplie, .depliant, .replie {
-		.titremancre {
-			border-#GET{right}: 1px solid #ddd;
-			margin-#GET{right}: 4px;
-			padding-#GET{right}: 3px;
+		a.titremancre {
+			border-#GET{left}: 1px solid #ddd;
+			margin-#GET{left}: 10px;
+			margin-#GET{right}: 0px;
+			padding-#GET{left}: 16px;
+			background-position: top #GET{right};
+			
+			filter:alpha(opacity=50); 
+			-moz-opacity:0.5; 
+			opacity: 0.5;
+			
+			float: #GET{right};
+			
+			. :hover {
+				filter:alpha(opacity=100); 
+				-moz-opacity: 1; 
+				opacity: 1;
+			}
+
 		}
+	}
+	.replie a.titremancre { 
+		background-image: url(#GET{chemin_img_pack}deplierhaut[(#GET{rtl_inv})].gif); 
 	}
 }
 
@@ -172,8 +193,8 @@ div.liste, div.cadre-liste {
 	}
 
 	.tranches {
-		padding: 4px 0px 4px 0px;	
-		background-color: white;
+		padding: 4px 0px 4px 10px;	
+		background-color: #dfdfdf;
 		border-color: #f0f0f0;
 		border-top: 0;
 	}
