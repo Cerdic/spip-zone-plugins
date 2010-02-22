@@ -1,0 +1,247 @@
+[(#REM)
+
+	Ce squelette definit les styles de l'espace prive
+
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
+]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+
+
+#SET{claire,##ENV{couleur_claire,edf3fe}}
+#SET{foncee,##ENV{couleur_foncee,3874b0}}
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+
+
+body {
+	background-color: [#(#ENV{couleur_claire}|couleur_saturation{0.03})]
+}
+
+/* elements du formulaire */
+.formulaire_spip input.text,
+.formulaire_spip input.password,
+.formulaire_spip textarea,
+.formulaire_spip select {
+	/*display: block;*/
+	font-size:1.1em;
+	margin:0;
+	width: 96%;
+	border: 1px solid #GET{claire};
+	padding: 3px;
+}
+
+
+
+.formulaire_spip li label,
+.formulaire_spip li.gauche label {
+	width: 114px;
+	float:#GET{left};
+	margin-#GET{left}:-130px; 
+	text-align: #GET{left};
+	/*vertical-align: top;*/
+	/* for IE 6*/
+	position:relative;
+	display:inline;
+
+	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-gauche-,#ENV{ltr},.gif}|background_image{eeeeee, center [(#GET{right})] no-repeat })]
+
+	color: #4444;
+	line-height: 11px;
+	font-family: verdana, arial, helvetica, sans;
+
+	padding-top: 4px;
+	padding-bottom: 6px;
+	padding-#GET{left}: 5px;
+	padding-#GET{right}: 10px;
+}
+
+.formulaire_spip li.obligatoire label,
+.formulaire_spip li.obligatoire.gauche label {
+	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-gauche-,#ENV{ltr},.gif}|background_image{[(#ENV{couleur_claire})], center [(#GET{right})] no-repeat })]
+}
+
+
+.formulaire_spip li.editer_parent label,
+.formulaire_spip li.editer_groupe_mot label,
+.formulaire_spip li.editer_descriptif label,
+.formulaire_spip li.editer_chapo label,
+.formulaire_spip li.editer_texte label,
+.formulaire_spip li.editer_ps label,
+.formulaire_spip li.editer_url_zip_plugin2 label,
+.formulaire_spip li.haut label {
+	display: block;
+	float: #GET{left};
+	width:auto;
+	margin: 0px;
+	padding-top: 5px;
+	padding-bottom: 10px;
+	padding-#GET{left}: 5px;
+	padding-#GET{right}: 5px;
+	font-family: verdana, arial, helvetica, sans;
+	color: #444444;
+	font-size: 95%;
+	line-height: 11px;
+	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|background_image{eeeeee, bottom [(#GET{left})] no-repeat })]
+}
+
+.formulaire_spip li.editer_parent.obligatoire label,
+.formulaire_spip li.editer_groupe_mot.obligatoire label,
+.formulaire_spip li.editer_descriptif.obligatoire label,
+.formulaire_spip li.editer_chapo.obligatoire label,
+.formulaire_spip li.editer_texte.obligatoire label,
+.formulaire_spip li.editer_ps.obligatoire label,
+.formulaire_spip li.editer_url_zip_plugin2.obligatoire label,
+.formulaire_spip li.haut.obligatoire label {
+	color: black;
+	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|background_image{[(#GET{claire})], bottom [(#GET{left})] no-repeat })]
+}
+
+.formulaire_spip li.editer_parent label, 
+.formulaire_spip li.editer_groupe_mot label {
+	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|background_image{[(#GET{claire})], bottom [(#GET{left})] no-repeat })]
+	color: black;
+	font-weight: bold;
+}
+
+
+.formulaire_spip h3.legend,
+.formulaire_spip legend
+ {
+	display: block;
+	margin: 0px;
+	padding-top: 7px;
+	padding-bottom: 13px;
+	padding-#GET{left}: 10px;
+	padding-#GET{right}: 5px;
+	font-family: verdana, arial, helvetica, sans;
+	color: black;
+	font-weight: normal;
+	font-size: 95%;
+	line-height: 11px;
+	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|background_image{eeeeee, bottom [(#GET{left})] no-repeat })]
+}
+
+
+.formulaire_spip fieldset li label {
+	color: #444444;
+	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-gauche-,#ENV{ltr},.gif}|background_image{eeeeee, center [(#GET{right})] no-repeat })]
+}
+
+.formulaire_spip fieldset li input.text, .formulaire_spip fieldset li textarea.textarea {
+	border: 1px solid #aaaaaa;
+}
+
+
+.formulaire_spip_compact li label,
+.formulaire_spip_compact li.editer_descriptif label
+ {
+	text-transform: none;
+	color: #444444;
+	
+	-moz-display: inline-box;
+	display: inline-block;
+	font-weight: normal;
+	
+	padding: 0;
+	padding-top: 3px;
+	padding-bottom: 7px;
+	margin-#GET{left}:0;
+
+	background: url([(#EVAL{_DIR_IMG_PACK}|concat{label-fond-compact-,#ENV{ltr},.gif})]) bottom [(#GET{left})] no-repeat;
+}
+
+
+
+
+/* Bouton de validation */
+input[type="submit"] {
+	[(#EVAL{_DIR_IMG_PACK}|concat{fond-fondo.gif}|background_image{[(#ENV{couleur_claire})], center center })]
+	border: 1px solid [(#GET{claire})];
+	padding: 3px 6px;
+	font-weight: bold;
+	color: [#(#GET{foncee}|couleur_foncer)];
+}
+input[type="submit"]:hover {
+	border: 1px solid [(#GET{foncee})];
+	color: black;
+}
+
+
+
+#chemin { 
+	font-size: 0.85em; 
+	overflow: hidden; 
+	margin: 0; 
+	padding: 0; 
+}
+#chemin li em { display: none; }
+#chemin li a { color: black;  }
+#chemin li a:hover { text-decoration: none;  }
+
+#chemin ul, #chemin li, #chemin li .bloc {  
+	margin: 0; 
+	padding: 0; 
+	margin-top: 0; 
+	padding-top: 0; 
+	list-style-type: none;
+	display: inline; 
+}
+#chemin li .bloc {	
+	[(#EVAL{_DIR_IMG_PACK}|concat{chemin-fond-,#ENV{ltr},.gif}|background_image{[(#ENV{couleur_claire})], center [(#GET{left})] no-repeat })]
+	padding: 2px;	
+	padding-bottom: 4px;
+	padding-#GET{left}: 10px;	
+	padding-#GET{right}: 12px;	
+	margin-#GET{left}: -5px;
+	display: -moz-inline-box; 
+	display: inline-block; 
+}
+#chemin li .bloc:hover {
+	[(#EVAL{_DIR_IMG_PACK}|concat{chemin-fond-,#ENV{ltr},.gif}|background_image{aaaaaa, center [(#GET{left})] no-repeat })]
+}
+
+#chemin li li .bloc { 
+	margin-top: 2px; 
+	[(#EVAL{_DIR_IMG_PACK}|concat{chemin-fond-,#ENV{ltr},.gif}|background_image{eeeeee, center [(#GET{left})] no-repeat })]
+}
+#chemin li li .bloc a  {
+	color: #444;
+}
+#chemin .aide {padding-top: 0px; }
+
+
+.accueil #navigation .cadre-r .titrem {
+	background-color: white;
+	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|background_image{#GET{claire}, bottom [(#GET{left})] no-repeat })]
+	padding-top: 6px;
+	padding-bottom: 10px;
+}
+
+.configuration #contenu .cadre-couleur .cadre_padding .titrem,
+.configuration #contenu .cadre-trait-couleur .cadre_padding .titrem { 
+	text-transform: none;
+	background-color: white;
+	padding-bottom: 11px;
+	color: #444444;
+	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|background_image{eeeeee, bottom [(#GET{left})] no-repeat })]
+}
+.configuration #contenu .cadre-couleur .titrem { background-color: #GET{claire}; }
+
+.configuration #contenu .cadre-trait-couleur .cadre-r {
+	margin-left: -6px;
+	margin-right: -6px;
+	margin-top: 0px;
+	border-right: 0px;
+	border-bottom: 0px;
+	border-left: 0px;
+}
+

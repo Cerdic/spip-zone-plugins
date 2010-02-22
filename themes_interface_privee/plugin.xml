@@ -1,0 +1,21 @@
+<plugin>
+	<nom>Thèmes pour l'interface privée</nom>
+	<auteur>ARNO*</auteur>
+	<version>0.1</version>
+	<etat>dev</etat>
+	<description>
+		Des interfaces alternatives pour SPIP 2.1.
+	</description>
+	<lien></lien> <!-- URI de documentation -->
+	<licence>GPL 3</licence>
+	<prefix>themes_interface_privee</prefix>
+
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>themes_interface_privee_pipelines.php</inclure>
+	</pipeline>
+	<necessite id="SPIP" version="[2.1;]" />
+	<necessite id="css_imbriques" version="[0.9;]" />
+
+</plugin>
+

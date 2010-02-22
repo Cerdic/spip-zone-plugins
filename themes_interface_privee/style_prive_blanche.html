@@ -1,0 +1,377 @@
+[(#REM)
+
+	Ce squelette definit les styles de l'espace prive
+
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
+]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+
+
+#SET{claire,##ENV{couleur_claire,edf3fe}}
+#SET{foncee,##ENV{couleur_foncee,3874b0}}
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+
+
+body {
+	background-color: white;
+}
+
+.large {
+	#contenu {
+		width: 500px;
+		padding-left: 35px;
+		padding-right: 35px;
+	}
+	#navigation {
+		width: 170px;
+	}
+}
+.etroit {
+	#contenu {
+		width: 500px;
+		margin-left: 65px;
+	}
+	#navigation {
+		width: 170px;
+	}
+}
+
+.ajax-action {
+	padding: 0px;
+}
+
+#bandeau-principal {
+	border-bottom: 1px solid #GET{claire};
+	
+
+	li.cellule48 {
+		font-weight: normal;
+	}
+	.boutons_admin a.boutons_admin {
+		padding-bottom: 5px;
+	}
+
+	.bandeau_sec {
+		border-color: #GET{claire};
+		border-width: 1px;
+		
+		
+		li.cellule36 {
+			font-weight: normal;
+
+			a:hover {
+				img {
+					border: 1px solid #eee;
+					background-color: #fff;
+				}
+			}
+		}
+	}
+
+	a span.icon_fond {
+		background-color: #eee;
+	}
+		
+	a:hover span.icon_fond {
+		background-color: [#(#ENV{couleur_claire})];
+	}
+}
+
+#bandeau_couleur {
+	background-color: white;
+	border-bottom: 1px solid #eee;
+	
+	a.icone26 img {
+		background-color: #ddd;
+	}
+	a.icone26:hover img {
+		background-color: #GET{claire};
+	}
+	
+	.bandeau_couleur_sous {
+		background-color: white;
+		border-color: #eee;
+		border-top: 1px solid white;
+		top: 2px;
+	}
+}
+
+ul#chemin {
+	margin-bottom: -30px;
+	
+	li {
+	
+		.bloc {
+			background: none;
+			margin: 0px;
+			padding: 5px 5px 5px 0px;
+			
+			. :hover {
+				background: none;	
+			}
+			a:hover {
+				text-decoration: underline;			
+			}
+			em {
+				display: inline;
+			}
+		}
+	}
+}
+
+.cadre {
+	background-color: inherit;
+	margin-top: 30px;
+	
+	.titrem {
+		font-size: 90%;
+		text-transform: uppercase;
+		padding-left: 0px;
+		padding-right: 0px;
+	}
+	.deplie, .depliant, .replie {
+		padding-#GET{left}: 16px;
+	}
+	
+	.cadre-icone {
+		top: -18px;
+	}
+}
+
+.cadre-r, .cadre-e, .cadre-meme-rubriques, .cadre-sous_rub {
+	border-left: 0px;
+	border-right: 0px;
+	border-bottom: 0px;
+	padding-top: 0px;
+	color: #666;
+	background-color: inherit;
+	
+	.cadre_padding {
+		padding-left: 0px;
+		padding-right: 0px;
+	}
+	
+	.titrem {
+		background-color: inherit;
+		. :hover {
+			background-color: #f0f0f0;
+		}
+	}
+}
+
+.cadre-info {
+	border-left: 0px;
+	border-right: 0px;
+	border-bottom: 0px;
+	border-top: 1px solid #ccc;
+	padding: 0px;
+	
+	.cadre_padding {
+		padding-left: 0px;
+		padding-right: 0px;
+	}
+}
+
+.cadre-couleur-foncee, .cadre-couleur {
+	border: 2px solid #GET{claire};
+
+
+	.cadre_padding {
+		padding-left: 0px;
+		padding-right: 0px;
+	}
+	.titrem {
+		background-color: inherit;
+		color: #GET{foncee};
+		padding-left: 5px;
+		padding-right: 5px;
+	}
+	
+	.cadre {
+		.deplie, .depliant, .replie {
+			padding-#GET{left}: 16px;
+		}
+	}
+}
+
+#navigation .titrem, #extra.titrem {
+	text-align: #GET{left};
+}
+
+.dater {
+	background-color: inherit;
+	border: 0px;
+	border-top: 1px solid #ccc;
+	
+	.titrem {
+		background-color: inherit;
+		color: #555;
+		
+		. :hover {
+			background-color: #f0f0f0;
+		}
+	}
+}
+
+div.liste, div.cadre-liste {
+	border-left: 0px;
+	border-right: 0px;
+	border-bottom: 0px;
+	border-color: #f0f0f0;
+
+	table {
+		border-bottom: 1px solid #f0f0f0;
+	
+		.tr_liste {
+			background-color: white;
+			
+			td {
+				border-bottom: 0;
+			}
+		}
+		.tr_liste_over, .tr_liste:hover {
+			background-color: #f8f8f8;
+			
+		}
+	}
+	
+	.titrem.hover {
+		background-color: #eee;
+	}
+
+	.tranches {
+		padding: 4px 0px 4px 0px;	
+		background-color: white;
+		border-color: #f0f0f0;
+		border-top: 0;
+	}
+}
+
+#navigation .hover, #extra .hover, .joindre .hover, #liste_images .hover, #liste_documents .hover {
+	background-color: #f0f0f0;
+}
+
+
+.no_onglets {
+	.fiche_objet {
+		border: 0px;
+		padding: 0px;
+		background-color: inherit;
+	}
+	.tabs-container, #voir.tabs-container {
+		background-color: inherit;
+	}
+	
+	#contenu {
+		#wysiwyg {
+			color: black;
+			padding: 0px;
+			padding-top: 20px;
+			font-family: "palatino linotype", palatino, georgia, serif;
+			font-size: 1.25em;
+			line-height: 1.45em;
+			
+			div.contenu_texte, div.contenu_chapo {
+				p, blockquote.spip, blockquote.spip_poesie {
+					margin-bottom: 0.5em;
+					margin-top: 0;
+				}
+			
+				p + p {
+					text-indent: 2em;
+				}
+			}
+			
+			div.contenu_descriptif, div.contenu_nom_site {
+				background-color: white; 
+				border: 0px;
+				border-top: 1px solid #ccc;
+				border-bottom: 1px solid #ccc;
+				padding: 1em 0px 0px 0px;
+				font-size: 0.9em;
+			}
+			div.contenu_ps {
+				font-size: 0.85em;
+				padding: 5px 0px 0px 0px;
+				border: 0;
+				border-top: 1px solid black;
+				background-color: white;
+				
+				.label {
+					font-size: 0.85em;
+				}
+
+			}
+		}
+
+		h1 {
+			font-size: 2.2em;		
+		}
+		
+	}
+	
+}	
+
+ul.instituer {
+	ul {
+		a {
+			color: #aaa;
+		}
+	}
+}
+
+
+
+.cadre-formulaire-editer {
+	.entete-formulaire {
+		border: 0px;
+		padding: 0px;
+		padding-bottom: 1em;
+	}
+	
+	.formulaire_spip {
+		background-color: white;
+		border: 1px solid #eee;
+		
+		li.editer_parent {
+			background-color: #f0f0f0;
+		}
+		
+		li {
+			input.text, input.password, textarea {
+				border: 1px solid #ccc;
+			}
+		}
+		
+		p.boutons {
+			background-color: #f0f0f0;
+			border-top: #eee;
+		}
+	}
+}
+
+/* Bouton de validation */
+input[type="submit"] {
+	[(#EVAL{_DIR_IMG_PACK}|concat{fond-fondo.gif}|background_image{eeeeee, center center })]
+	border: 1px solid #ccc;
+	padding: 3px;
+	font-weight: bold;
+	color: #333;
+}
+input[type="submit"]:hover {
+	border: 1px solid black;
+	color: black;
+}
+
+
+#FILTRE{css_imbriques_decouper}

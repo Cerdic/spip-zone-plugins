@@ -1,0 +1,274 @@
+[(#REM)
+
+	Ce squelette definit les styles de l'espace prive
+
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
+]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+
+
+#SET{claire,##ENV{couleur_claire,edf3fe}}
+#SET{foncee,##ENV{couleur_foncee,3874b0}}
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+
+
+body {
+	font-family: 'Lucida Grande', Verdana, Arial, 'Bitstream Vera Sans', sans-serif;
+	background-color: #f9f9f9;
+}
+
+h1, h2, h3, .bandeau_couleur, .bandeau_couleur_sous, a.icone26, a.cellule-h-texte, div.onglet, div.onglet_on, div.onglet_off, .arial0, .arial1, .arial11, .arial2, .cadre, .cadre-formulaire, .cadre-formulaire-editer, a.foncee, a.foncee:hover, a.claire, a.claire:hover, span.creer, span.lang_base   {
+	font-family: 'Lucida Grande', Verdana, Arial, 'Bitstream Vera Sans', sans-serif;
+}
+
+#bandeau-principal {
+	border-bottom: 1px solid #464646;
+	
+
+	li.cellule48 {
+		font-weight: normal;
+	}
+	.boutons_admin a.boutons_admin {
+		padding-bottom: 5px;
+	}
+
+	.bandeau_sec {
+		border-color: #464646;
+		border-width: 1px;
+		
+		
+		li.cellule36 {
+			font-weight: normal;
+
+			a:hover {
+				img {
+					border: 1px solid #eee;
+					background-color: #fff;
+				}
+			}
+		}
+	}
+
+	a span.icon_fond {
+		background-color: #aaa;
+	}
+		
+	a:hover span.icon_fond {
+		background-color: [#(#ENV{couleur_claire})];
+	}
+}
+
+#bandeau_couleur {
+	background-color: #464646;
+	border: 0px;
+	color: white;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	
+	a, a.icone26 {
+		color: white;
+	}
+
+	a.icone26 img {
+		background-color: #aaa;
+	}
+	a.icone26:hover img {
+		background-color: #GET{claire};
+	}
+	
+	.bandeau_couleur_sous {
+		top: 5px;
+		border: 1px solid #dfdfdf;
+		background-color: #f1f1f1;
+		border-top: 0px;
+		color: #464646;
+		-webkit-border-bottom-left-radius: 6px;
+		-webkit-border-bottom-right-radius: 6px;
+		border-bottom-left-radius: 6px;
+		border-bottom-right-radius: 6px;
+		-moz-border-radius: 0px 0px 6px 6px;
+		
+		a {
+			color: #464646;
+		}
+	}
+	
+}
+
+
+.cadre {
+	border-color: #dfdfdf;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	border-radius: 6px;
+
+	.titrem {
+		background: url(#CHEMIN{images/gray-grad.png});
+		padding-top: 6px;
+		padding-bottom: 6px;
+		text-shadow: white 0px 1px 0px;
+		
+	}
+	.deplie, .deplie, .depliant, .replie {
+		.titremancre {
+			border-#GET{right}: 1px solid #ddd;
+			margin-#GET{right}: 4px;
+			padding-#GET{right}: 3px;
+		}
+	}
+}
+
+.cadre-sous_rub {
+	background-color: #ededed;
+}
+
+.fiche_objet, .no_onglets .fiche_objet {
+	border-color: #dfdfdf;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	border-radius: 6px;
+}
+
+div.liste, div.cadre-liste {
+	border-color: #dfdfdf;
+	-webkit-border-bottom-left-radius: 0px;
+	-webkit-border-bottom-right-radius: 0px;
+	-moz-border-radius: 6px 6px 0px 0px;
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 0px;
+
+	table {
+	
+		.tr_liste {
+			background-color: white;
+			
+			td {
+				border-color:#dfdfdf;
+			}
+		}
+		.tr_liste_over, .tr_liste:hover {
+			background-color: #f8f8f8;
+			
+		}
+	}
+	
+	.titrem.hover {
+		background-color: #eee;
+	}
+
+	.tranches {
+		padding: 4px 0px 4px 0px;	
+		background-color: white;
+		border-color: #f0f0f0;
+		border-top: 0;
+	}
+}
+
+
+.entete-formulaire {
+	margin-bottom: 20px;
+	padding: 10px;
+	border: 1px solid #dfdfdf;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	border-radius: 6px;
+}
+
+
+.formulaire_spip {
+	border: 0px;
+	padding: 0px;
+	
+	li {
+		padding: right: 0px;
+		
+		label {
+			color: #444;
+			text-shadow: white 0px 1px 0px;
+			
+		}
+	}
+	
+	.editer_titre.obligatoire {
+		input {
+			font-size: 200%;
+			font-weight: normal;
+		}
+	}
+	
+	p.boutons {
+		background-color: inherit;
+		border: 0px;
+	}
+	
+	
+}
+
+.formulaire_spip li.editer_parent {
+	border: 1px solid #dfdfdf;	
+	background-color: white;
+	margin-left: 10px;
+	margin-right: 10px;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	border-radius: 6px;
+}
+.formulaire_spip li.editer_groupe_mot,
+.formulaire_editer_auteur li.editer_statut {
+	background-color: inherit;
+}
+
+
+.formulaire_spip fieldset {
+	border: 1px solid #dfdfdf;	
+	margin-left: 10px;
+	margin-right: 10px;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	border-radius: 6px;
+	
+	legend, h3.legend {
+		background: url(#CHEMIN{images/gray-grad.png});
+		padding: 6px;
+	}
+	
+}
+.formulaire_editer_article li.editer_liens_sites {
+	border: 0px;
+}
+
+input[type=text], textarea {
+	border: 1px solid #dfdfdf;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	border-radius: 6px;	
+}
+
+input[type="submit"] {
+	[(#EVAL{_DIR_IMG_PACK}|concat{fond-fondo.gif}|background_image{[(#ENV{couleur_foncee})], center center })]
+	border: 1px solid [(#GET{claire})];
+	padding: 3px 10px;
+	font-weight: bold;
+	color: white;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+
+}
+input[type="submit"]:hover {
+	border: 1px solid [(#GET{foncee})];
+}
+
+
+
+#FILTRE{css_imbriques_decouper}
