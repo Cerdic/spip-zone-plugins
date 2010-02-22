@@ -101,7 +101,7 @@ modifier ces param&#232;tres.  -->
             jQuery(".details_bordures").hide();
             var bstyle = jQuery("#style_bordure_unique").val();
             var bcoul = jQuery("#couleur_bordure_unique").val();
-            var bep = jQuery("#epaisseur_bordure_unique").val() + 'px';
+            var bep = (parseInt(jQuery("#epaisseur_bordure_unique").val()) * [(#GET{fact_reduc})]) + 'px';
             jQuery("#bando_logo, #bando_titre").css({'border': bstyle + ' ' + bcoul + ' ' + bep});
         }
         else {
@@ -111,7 +111,7 @@ modifier ces param&#232;tres.  -->
             for (i in Tb){
             	var bstyle = jQuery("#style_bordure_" + Tb[i]).val();
                 var bcoul = jQuery("#couleur_bordure_" + Tb[i]).val();
-                var bep = jQuery("#epaisseur_bordure_" + Tb[i]).val() + 'px';
+                var bep = (parseInt(jQuery("#epaisseur_bordure_" + Tb[i]).val()) * [(#GET{fact_reduc})]) + 'px';
                 jQuery("#bando_logo, #bando_titre").css('border-' + Tb[i], bstyle + ' ' + bcoul + ' ' + bep);
             }
         }
