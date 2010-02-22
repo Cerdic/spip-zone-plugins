@@ -46,7 +46,7 @@ function formulaires_construire_formulaire_verifier($identifiant, $formulaire_in
 	if ($nom = $configurer_saisie =  _request('configurer_saisie') or $nom = $enregistrer_saisie = _request('enregistrer_saisie')){
 		$saisie = $saisies_actuelles[$nom];
 		$form_config = $saisies_disponibles[$saisie['saisie']]['options'];
-		array_walk_recursive($form_config, 'formidable_transformer_nom', "saisies_modifiees[$nom][options][@valeur@]");
+		array_walk_recursive($form_config, 'formidable_transformer_nom', "saisie_modifiee_${nom}[options][@valeur@]");
 		$erreurs['configurer_'.$nom] = $form_config;
 		$erreurs['positionner'] = '#configurer_'.$nom;
 		
@@ -86,10 +86,11 @@ function formulaires_construire_formulaire_traiter($identifiant, $formulaire_ini
 	// Si on enregistre la conf d'une saisie
 	if ($nom = _request('enregistrer_saisie')){
 		// On récupère les options postées en vidant les chaines vides
-		$options = _request('saisies_modifiees');
-		$options = $options[$nom]['options'];
+		$options = _request("saisie_modifiee_$nom");
+		$options = $options['options'];
 		$options = array_filter($options);
-		spip_desinfecte($options);
+		if (is_array($options))
+			spip_desinfecte($options);
 		array_walk($formulaire_actuel, 'formidable_ajouter_options', array('nom'=>$nom, 'options'=>$options));
 	}
 	
@@ -138,6 +139,13 @@ function formidable_preparer_saisie_configurable($saisie, $env){
 		'debut'
 	);
 	
+	// On ajoute une ancre pour s'y déplacer
+	$saisie = saisies_inserer_html(
+		$saisie,
+		"\n<a id=\"configurer_$nom\"></a>\n",
+		'debut'
+	);
+	
 	// Si ya un form de config on l'ajoute à la fin
 	if (is_array($formulaire_config)){
 		// On ajoute une classe
@@ -151,16 +159,18 @@ function formidable_preparer_saisie_configurable($saisie, $env){
 		// Un test pour savoir si on prend le _request ou bien
 		$erreurs_test = $env['erreurs'];
 		unset($erreurs_test['configurer_'.$nom]);
+		unset($erreurs_test['positionner']);
 		if ($erreurs_test){
 			// Là aussi on désinfecte à la main
-			spip_desinfecte($env['saisies_modifiees'][$nom]['options']);
+			if (is_array($env["saisie_modifiee_$nom"]['options']))
+				spip_desinfecte($env["saisie_modifiee_$nom"]['options']);
 		}
 		else
-			$env['saisies_modifiees'] = $env['_saisies_par_nom'];
+			$env["saisie_modifiee_$nom"] = $env['_saisies_par_nom'][$nom];
 		
 		$saisie = saisies_inserer_html(
 			$saisie,
-			'<ul class="formulaire_configurer"'.' id="configurer_'.$nom.'"'.'>'
+			'<ul class="formulaire_configurer">'
 			.recuperer_fond(
 				'inclure/generer_saisies',
 				$env
