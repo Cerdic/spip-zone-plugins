@@ -125,7 +125,7 @@ function dupliquer_rubrique($rubrique,$cible=null,$titre=' (copie)'){
 	// On lui remet ses sous-rubrique (+ mots clefs + articles + sous rubriques)
 	foreach($rubriques_de_la_rubrique as $champ => $valeur){
 		$rubrique = $valeur['id_rubrique'];
-		$nouvelle_sous_rubrique = dupliquer_rubrique($rubrique,$id_nouvelle_rubrique,' sousRub ');
+		$nouvelle_sous_rubrique = dupliquer_rubrique($rubrique,$id_nouvelle_rubrique,'');
 	}
 	
 	return $id_nouvelle_rubrique;
