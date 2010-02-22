@@ -27,7 +27,7 @@ function auth_thelia_dist ($login, $pass, $md5pass="", $md5next="") {
 		      spip_log("fichier thelia trouve");
 			return array();
 		  }
-		  //récupérer le nom de la base spip
+		 spip_log("thelia1"); //récupérer le nom de la base spip
 		  if ($result = mysql_query("SELECT DATABASE()")) {
 		    $row = mysql_fetch_row($result);
 		    $spip_db = $row[0];
@@ -52,8 +52,8 @@ function auth_thelia_dist ($login, $pass, $md5pass="", $md5next="") {
 			  $rec = $client->charger($login, $pass);
 
 			  //revenir sur la base spip
-			  mysql_select_db($spip_db);
-
+			  $resultconnect = mysql_select_db($spip_db);
+			   spip_log("spipdb=".$spip_db." - ".$resultconnect);
 			  if($rec) {
 				  spip_log("thelia $login utilisateur connu");
 				  $_SESSION['navig']->client = $client;
@@ -64,20 +64,21 @@ function auth_thelia_dist ($login, $pass, $md5pass="", $md5next="") {
 				// avec le statut par defaut a l'install
 				// refuser d'importer n'importe qui 
 				if (!$statut = $GLOBALS['thelia_statut_nouvel_auteur']) return array();
-				
-				
-				
+			
 				if ($result = sql_fetsel("*", "spip_auteurs", "login=" . sql_quote($login) . " AND source='thelia'")) {
 				  
 				      return $result;
 				}
 				
+				spip_log("thelia2");
 				// Recuperer les donnees de l'auteur
 				// Convertir depuis UTF-8 (jeu de caracteres par defaut)
 				include_spip('inc/charsets');
 				$nom = $client->nom.' '.$client->prenom;
 				$email = $login;
 				$bio = '';
+				$resultconnect = mysql_select_db($spip_db);
+				spip_log("thelia2bis-connect=".$resultconnect);
 				$n = sql_insertq('spip_auteurs', array(
 						'source' => 'thelia',
 						'nom' => $nom,
@@ -86,8 +87,10 @@ function auth_thelia_dist ($login, $pass, $md5pass="", $md5next="") {
 						'bio' => $bio,
 						'statut' => $statut,
 						'pass' => ''),0);
+				spip_log("thelia3");
 				spip_log("Creation de l'auteur '$nom' depuis thelia dans spip_auteurs id->".$n);
 			      
+				spip_log("thelia4");
 				if($_SESSION['navig']->urlpageret) redirige($_SESSION['navig']->urlpageret);
 					  else redirige("index.php");
 				spip_log("test6");
@@ -106,7 +109,8 @@ function auth_thelia_dist ($login, $pass, $md5pass="", $md5next="") {
 			      redirige("connexion.php?errconnex=1");
 			      return array();  
 			}
-	}
+	} 
+spip_log("thelia0");
 	
 	return array();
       

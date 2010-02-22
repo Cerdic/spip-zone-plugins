@@ -14,15 +14,14 @@
 
 				[(#REM) Titre de la page]
 
-				<div class="titrePage">
-					<h1><:spipthelia:identifiez_vous:></h1>
+				<div class="cartouche">
+				    <h1 class="h1"><:spipthelia:identifiez_vous:></h1>
 				</div>
 				
 				[(#REM) Contenu de la page]
 
-				<div class="sousTitrePage">
-					<h3><:spipthelia:deja_compte:></h3>
-				</div>
+				<h2 class="h2"><:spipthelia:deja_compte:></h2>
+				
 				[(#CONFIG{spip_thelia/auth_unique_spip_thelia}|=={"oui"}|oui)
 					[(#SESSION{id_auteur}|oui)
 					Vous &ecirc;tes connect&eacute; actuellement sans compte client associ&eacute;. Veuillez vous identifier sur la boutique ou cr&eacute;er un nouveau compte pour continuer. 
@@ -69,11 +68,10 @@
 						</fieldset>
 					</form>
 				]
-				<div class="separation"></div>
+				<br class="separation" />
 			
-				<div class="sousTitrePage">
-					<h3><:spipthelia:nouveau_client:></h3>
-				</div>
+				<h2 class="h2"><:spipthelia:nouveau_client:></h2>
+				
 				
 				<form action="#URL_PAGE{nouveau,lang=#LANG}" method="post" name="nouveau" id="nouveau" class="formulaire_spip" >
 					<input type="hidden" name="thelia_action" value="creercompte" /> 
