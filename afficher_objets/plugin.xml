@@ -1,6 +1,6 @@
 <plugin>
 	<nom>Afficher Objets</nom>
-	<version>1.0.1</version>
+	<version>1.0.2</version>
 	<prefix>afficher_objets</prefix>
 
 	<etat>dev</etat>
