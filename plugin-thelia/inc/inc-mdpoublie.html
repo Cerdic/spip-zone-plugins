@@ -1,29 +1,27 @@
 
 			[(#REM) Titre de la page ]
 
-				<div class="titrePage">
-				<h1><:spipthelia:mdp_oublie:></h1>
+				<div class="cartouche">
+				  <h1 class="h1"><:spipthelia:mdp_oublie:></h1>
 				</div>
 
 			
 				[(#REM) Contenu de la page ]
 
-				<div class="sousTitrePage">
-				<h3><:spipthelia:mdp_oublie_message:></h3>
-				</div>
+				<h2 class="h2"><:spipthelia:mdp_oublie_message:></h2>
 				
-			<form action="#URL_PAGE{mdpoublie,lang=#LANG}" method="post" id="formmdp" class="formulaire-thelia">
-			<fieldset>
-			<input type="hidden" name="thelia_action" value="chmdp" />
-			<table>
-  				<tr>
-   					<td class="ligneTableau"><:spipthelia:votre_email:></td>
-   					<td class="ligneTableau"><input name="email" type="text" class="zoneDeSaisie"/></td>
-  				</tr>
-			</table>
-				<div class="boutonMonCompteContenu">
-				<input type="submit" value="<:spipthelia:valider:>" />
-				</div>
-			</fieldset>
-			</form>
+				<form action="#URL_PAGE{mdpoublie,lang=#LANG}" method="post" id="formmdp" class="formulaire_spip formulaire_mdp">
+				<fieldset>
+				  <input type="hidden" name="thelia_action" value="chmdp" />
+				  <table>
+					  <tr>
+						  <td class="ligneTableau"><:spipthelia:votre_email:></td>
+						  <td class="ligneTableau"><input name="email" type="text" class="zoneDeSaisie"/></td>
+					  </tr>
+				  </table>
+					  <div class="boutons">
+					      <input type="submit" class="submit lien-thelia-suite" value="<:spipthelia:valider:>" />
+					  </div>
+				</fieldset>
+				</form>
 

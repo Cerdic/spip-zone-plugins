@@ -15,13 +15,11 @@
 
 				<h2 class="h2"><:spipthelia:adresse_facturation:></h2>
 				
-				<span class="textePage">
 				THELIA-CLIENT_RAISON THELIA-CLIENT_PRENOM THELIA-CLIENT_NOM
 				<br />
 				THELIA-CLIENT_ADRESSE1 THELIA-CLIENT_ADRESSE2 THELIA-CLIENT_ADRESSE3<br />
 				THELIA-CLIENT_CPOSTAL THELIA-CLIENT_VILLE THELIA-CLIENT_PAYS<br />
-				</span>
-				<a href="#URL_PAGE{compte_modifier}"><:spipthelia:modifier_adresse:></a>
+				<a href="#URL_PAGE{compte_modifier}" class="lien-thelia"><:spipthelia:modifier_adresse:></a>
 				
 				<br class="separation" />
 				
@@ -31,8 +29,7 @@
 				<h2 class="h2"><:spipthelia:adresse_livraison:></h2>
 				
 				
-			  <span class="textePage">
-				<THELIA_adrcours type="ADRESSE" adresse="THELIA-ADRESSE_ACTIVE">
+			  	<THELIA_adrcours type="ADRESSE" adresse="THELIA-ADRESSE_ACTIVE">
 				THELIA-RAISON THELIA-PRENOM THELIA-NOM	
 				<br />
 				THELIA-ADRESSE1 THELIA-ADRESSE2 THELIA-ADRESSE3
@@ -42,49 +39,43 @@
 			  THELIA-TITRE	
 			  </THELIA_pays>
 			  
-			  </span>
+			  
 			  <br />
 			<THELIA_adrmodcours type="ADRESSE" adresse="THELIA-ADRESSE_ACTIVE" defaut="0">
-					  <a href="#URL_PAGE{livraison_modifier,adresse=THELIA-ID}"><:spipthelia:modifier_adresse:></a>
+					  <a href="#URL_PAGE{livraison_modifier,adresse=THELIA-ID}" class="lien-thelia"><:spipthelia:modifier_adresse:></a>
 			</THELIA_adrmodcours>
 			
 			 </THELIA_adrcours>
 			
 				<br /><br />
 				<span class="commentaires"><:spipthelia:selectionner_autre_adresse:> : </span><br />
-				<a href="#URL_PAGE{adresse,thelia_action=modadresse&amp;adresse=0}"><:spipthelia:adresse_facturation_defaut:> </a>
+				<a href="#URL_PAGE{adresse,thelia_action=modadresse&amp;adresse=0}" class="lien-thelia"><:spipthelia:adresse_facturation_defaut:> </a>
 				<THELIA_adr type="ADRESSE" client="THELIA-CLIENT_ID">
 				<br />
-				<a href="#URL_PAGE{adresse,thelia_action=modadresse&amp;adresse=THELIA-ID}">THELIA-LIBELLE</a>
+				<a href="#URL_PAGE{adresse,thelia_action=modadresse&amp;adresse=THELIA-ID}" class="lien-thelia">THELIA-LIBELLE</a>
 				</THELIA_adr>
 				<br />
 				<br />
-				<a href="#URL_PAGE{livraison_adresse}"><:spipthelia:ajouter_adresse_livraison:></a><br />
+				<a href="#URL_PAGE{livraison_adresse}" class="lien-thelia"><:spipthelia:ajouter_adresse_livraison:></a><br />
 				<br />
 				<div class="separation">
 				</div>
 
-				<div class="titrePage">
 				<h2><:spipthelia:choix_mode_livraison:></h2>
-				</div>
-
-				
-				<div class="textePage">
-					<form  class="formulaire_spip formulaire_livraison" method="get" action="commande.php" class="formulaire-thelia"> 
+				<form  class="formulaire_spip formulaire_livraison" method="get" action="commande.php" class="formulaire-thelia"> 
 					<fieldset>
 						<input type="hidden" name="thelia_action" value="transport">
 						<ul>
 						<THELIA_transport type="TRANSPORT">
-							<li><label for="idTHELIA-ID">THELIA-TITRE THELIA-PORT &euro;</label> <input class="radio" type="radio" id="idTHELIA-ID" name="id" value="THELIA-ID" checked="checked" /></li>
+							<li> <input class="radio" type="radio" id="idTHELIA-ID" name="id" value="THELIA-ID" checked="checked" /> <label for="idTHELIA-ID">THELIA-TITRE THELIA-PORT &euro;</label></li>
 						</THELIA_transport>
 						</ul>
 						<div class="boutons">
-						  <input class="submit" type="submit" value="<:spipthelia:continuer:>" class="bouton-etapes-thelia" /><br/>
+						  <input class="lien-thelia lien-thelia-suite" type="submit" value="<:spipthelia:continuer:>" class="bouton-etapes-thelia" /><br/>
 						</div>
 					</fieldset>
-					</form>
-				</div>
-				<a href="THELIA-URLPREC" class="lien-retour-thelia"><:spipthelia:page_precedente:></a>
+				</form>
+				<a href="THELIA-URLPREC" class="lien-thelia"><:spipthelia:page_precedente:></a>
 				
 				
 		  	

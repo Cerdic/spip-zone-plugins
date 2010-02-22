@@ -122,9 +122,8 @@ a.LIEN_pages:hover {
 .sousTableau ul { padding: 0; margin: 0; }
 .sousTableau ul li { list-style: none; text-align: right; }
 
-#panier, #commande { width: 100%; background: #e9e9e9; text-align: center; }
-#commande thead tr { background: #666; color: white; } 
-#panier select { padding-right: 1em; }
+
+.formulaire_livraison label, .formulaire_paiement label, .formulaire_reduction label { display: inline; }
 
 .bouton-actualiser { border: none; background: none; text-decoration: underline; color: #7A6D2C; vertical-align:text-bottom; }
 .ligneTableau {
@@ -156,22 +155,19 @@ a.lien-retour-thelia {
 	font-size: .9em;
 }
 
-.zoneDeSaisie {
-	color: #7a6d2c;
-	font-weight: bold;
-	font-size: 0.9em;
-}
+.lien-thelia { display: block; color: #2666C3; text-decoration: underline; background: none; padding: .5em 0; margin: .5em 0; }
+.lien-thelia:hover { background: none; }
+.lien-thelia-precedent { float: left; clear: left; }
+.lien-thelia-suite { float: right; clear: right; background-color: #2666C3; border: 1px solid #2666C3; color: white; padding: .5em .5em; text-decoration: none; }
+.lien-thelia-suite:hover { background-color: #2690c3; color: white; text-decoration: none; }
+
+
 
 .obligatoire {
 	color: #FF0000;
 }
 
-.commentaires {
-	font-size: 0.9em;
-	font-style: italic;
-	font-weight: bold;
-	color: #7a6d2c;
-}
+
 .formulaire-thelia fieldset, .formulaire-produit fieldset {
 	border: none;
 	padding: 0;
@@ -183,19 +179,9 @@ a.lien-retour-thelia {
 /* style propre aux modeles <produit>*/
 
 .produits_thelia { float: left; clear: left; margin-right: 1em; }
-
-.thelia_promo {
-	font-size: 1.1em;
-	color: #F60;
-	font-weight: bold;
-}
-.thelia_reappro {
-	font-style: italic;
-	font-size: .9em;
-}
-.autres-images-produit {
-	clear: both;
-}
+.thelia_promo {	font-size: 1.1em; color: #F60; font-weight: bold; }
+.thelia_reappro { font-style: italic; font-size: .9em; }
+.autres-images-produit { clear: both; }
 
 #etapes-achat ul  {
 	margin: 0;

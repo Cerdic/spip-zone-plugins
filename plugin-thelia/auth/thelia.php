@@ -91,8 +91,14 @@ function auth_thelia_dist ($login, $pass, $md5pass="", $md5next="") {
 				spip_log("Creation de l'auteur '$nom' depuis thelia dans spip_auteurs id->".$n);
 			      
 				spip_log("thelia4");
-				if($_SESSION['navig']->urlpageret) redirige($_SESSION['navig']->urlpageret);
-					  else redirige("index.php");
+	      
+				if($_SESSION['navig']->urlpageret) {
+				      spip_log("redirige vers ".$_SESSION['navig']->urlpageret);
+					  redirige($_SESSION['navig']->urlpageret);
+				} else {
+				      spip_log("redirige vers index.php");
+				      redirige("index.php");
+				}
 				spip_log("test6");
 				if ($n)	return sql_fetsel("*", "spip_auteurs", "id_auteur=$n");
 

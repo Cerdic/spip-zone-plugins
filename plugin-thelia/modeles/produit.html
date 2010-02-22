@@ -32,7 +32,9 @@
 	<input type="hidden" name="thelia_action" value="ajouter" />
         <input type="hidden" name="ref" value="THELIA-REF" />
                 							
-	[(#ENV{photo}|=={non}|?{'',' '})<THELIA_images type="IMAGE" produit="THELIA-ID"[ hauteur="(#ENV{hauteur}|?{#ENV{hauteur},''})"][ largeur="(#ENV{largeur}|?{#ENV{largeur},'100'})"] num="1"><img src="THELIA-IMAGE" class="spip_logos" /></THELIA_images> ]<p class="thelia_titre">THELIA-TITRE</p>
+	[(#ENV{photo}|=={non}|?{'',' '})<THELIA_images type="IMAGE" produit="THELIA-ID"[ hauteur="(#ENV{hauteur}|?{#ENV{hauteur},''})"][ largeur="(#ENV{largeur}|?{#ENV{largeur},'100'})"] num="1"><img src="THELIA-IMAGE" class="spip_logos" /></THELIA_images> ]
+
+	<h3 class="h3">THELIA-TITRE</h3>
 	<div class="thelia_description">THELIA-DESCRIPTION</div>
 	<T_produitpromo>
 	<THELIA_produitpromo type="PRODUIT" ref="THELIA-REF" promo="1">

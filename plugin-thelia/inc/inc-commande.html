@@ -11,37 +11,34 @@
 				
 
 
-				<div class="titrePage">
-				<h1><:spipthelia:recapitulatif_commande:></h1>
+				<div class="cartouche">
+				  <h1 class="h1"><:spipthelia:recapitulatif_commande:></h1>
 				</div>
 
 			[(#REM) Contenu de la page ]
 	
-			<form action="#URL_PAGE{commande,lang=#LANG}" id="formulaire" method="post" class="formulaire-thelia">
-			<fieldset>
-			<input type="hidden" name="thelia_action" value="codepromo" />
-			<table id="commande">
+			<table id="commande" class="spip">
             		<thead> 
-				<tr>
-    					<th class="enteteTableau"><:spipthelia:photo_produit:></th>
-    					<th class="enteteTableau"><:spipthelia:references_produits:></th>
-    					<th class="enteteTableau"><:spipthelia:prix_unitaire:></th>
-    					<th class="enteteTableau"><:spipthelia:quantite:></th>
-    					<th class="enteteTableau"><:spipthelia:total:></th>
+				<tr class="row_first">
+    					<th><:spipthelia:photo_produit:></th>
+    					<th><:spipthelia:references_produits:></th>
+    					<th><:spipthelia:prix_unitaire:></th>
+    					<th><:spipthelia:quantite:></th>
+    					<th><:spipthelia:total:></th>
     				</tr>
 			</thead> 
 			<tbody>
 				<THELIA_panier type="PANIER">
 				<tr>
-					<td class="ligneTableau"><THELIA_image type="IMAGE" produit="THELIA-ID" largeur="100" num="1"><img src="THELIA-IMAGE" /></THELIA_image></td>
+					<td><THELIA_image type="IMAGE" produit="THELIA-ID" largeur="100" num="1"><img src="THELIA-IMAGE" /></THELIA_image></td>
 					<td class="ligneTableau"><a href="#URL_PAGE{produit,ref=THELIA-REF}">THELIA-TITRE
 						<THELIA_decval type="DECVAL" article="THELIA-ARTICLE">
 							<br />THELIA-DECLITITRE : THELIA-VALEUR
 						</THELIA_decval>
 						<br />(Ref&nbsp;:&nbsp;THELIA-REF)</a></td>
-                			<td class="ligneTableau">THELIA-PRIXU&nbsp;&euro;</td>
-                    			<td class="ligneTableau">THELIA-QUANTITE</td>
-                    			<td class="ligneTableau">THELIA-TOTAL&nbsp;&euro;</td>
+                			<td>THELIA-PRIXU&nbsp;&euro;</td>
+                    			<td>THELIA-QUANTITE</td>
+                    			<td>THELIA-TOTAL&nbsp;&euro;</td>
 				</tr>
 				</THELIA_panier>
 			</tbody>
@@ -59,10 +56,14 @@
 			<br class="nettoyeur" />
 			
 
-			<div class="codeReduction">
-				<label for="code"><:spipthelia:code_reduction:> :</label>
-				<input id="code" name="code" type="text" class="zoneDeSaisie"/><input type="submit" value="<:spipthelia:valider:>" />
-			</div>
+			<form action="#URL_PAGE{commande,lang=#LANG}" id="formulaire" method="post" class="formulaire_spip formulaire_reduction">
+			<fieldset>
+			    <input type="hidden" name="thelia_action" value="codepromo" />
+			    <label for="code"><:spipthelia:code_reduction:> :</label>
+			    <input id="code" name="code" type="text" />
+			    <div class="boutons">
+				<input type="submit" class="lien-thelia-suite" value="<:spipthelia:valider:>" />
+			    </div>
 			</fieldset>
 			</form>
 
@@ -73,13 +74,17 @@
 			</div>
 
 			<T_PAIEMENT>
-			<form  method="get" action="commande.php" class="formulaire-thelia"> 
+			<form  method="get" action="commande.php" class="formulaire_spip formulaire_paiement"> 
 			<fieldset>
 			   	<input type="hidden" name="thelia_action" value="paiement">
+				<ul>
 				<THELIA_PAIEMENT type="PAIEMENT">
-			 		<input type="radio" name="type_paiement" id='type_paiementTHELIA-ID' value="THELIA-ID" checked="checked"><label for="type_paiementTHELIA-ID">THELIA-TITRE</label><br/>
+			 		<li><input type="radio" class="radio" name="type_paiement" id='type_paiementTHELIA-ID' value="THELIA-ID" checked="checked"> <label for="type_paiementTHELIA-ID">THELIA-TITRE</label></li>
 				</THELIA_PAIEMENT>
-				<input type="submit" value="<:spipthelia:continuer:>" class="bouton-etapes-thelia" /><br />
+				</ul>
+				<div class="boutons">
+				    <input type="submit" value="<:spipthelia:continuer:>" class="submit lien-thelia-suite" />
+				</div>
 			</fieldset>
 			</form>
 			</T_PAIEMENT>

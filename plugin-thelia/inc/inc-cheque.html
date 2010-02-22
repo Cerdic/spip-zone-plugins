@@ -11,19 +11,21 @@
 
 			[(#REM) Titre de la page ]
 
-			<div class="titrePage">
-				<h1><:spipthelia:reglement_cheque:></h1>
+			<div class="cartouche">
+				<h1 class="h1"><:spipthelia:reglement_cheque:></h1>
 			</div>
 				
 			[(#REM) contenu de la page ]
 	
-			<:spipthelia:texte_paiement_cheque:>
-			<br />
-			<br />
-				
-			<THELIA_cmd type="COMMANDE" ref="THELIA-COMMANDE_REF">	
-			N&deg; DE COMMANDE : THELIA-REF <br />
-			DATE : THELIA-DATE<br />
-			TOTAL : THELIA-TOTCMDPORT &euro;<br />	
-			</THELIA_cmd>
+			<div class="texte">
+			    <p class="spip"><:spipthelia:texte_paiement_cheque:></p>
+			
+			    <p class="spip">	
+			      <THELIA_cmd type="COMMANDE" ref="THELIA-COMMANDE_REF">	
+			      N&deg; DE COMMANDE : THELIA-REF <br />
+			      DATE : THELIA-DATE<br />
+			      TOTAL : THELIA-TOTCMDPORT &euro;<br />	
+			      </THELIA_cmd>
+			    </p>
+			</div>
 		
