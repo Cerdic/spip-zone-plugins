@@ -19,6 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_supprimer' => "Supprimer",
 
 'creer_evenement' => "Cr&eacute;er un &eacute;v&eacute;nement",
+'confirm_suppression_inscription' => "Voulez-vous vraiment supprimer cette inscription ?",
 
 'erreur_article_manquant' => 'Vous devez indiquer un article',
 'erreur_article_interdit' => 'Vous n\'avez pas le droit d\'associer cet &eacute;v&eacute;nement &agrave; cet article',
@@ -53,14 +54,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_nombre_evenements' => '@nb@ &eacute;v&eacute;nements',
 'info_aucun_evenement' => 'Aucun &eacute;v&eacute;nement',
 'info_evenements' => '&Eacute;v&eacute;nements',
+'inscrits' => 'Inscriptions',
 
 'lien_retirer_evenement' => 'Supprimer',
+'lien_desinscrire' => 'Supprimer',
 'label_inscription' => 'Inscription en ligne',
 'label_places' => 'Limiter le nombre de places',
 'label_reponse_jyparticipe' => 'J\'y serai',
 'label_reponse_jyparticipe_peutetre' => 'J\'y serai peut-&ecirc;tre',
 'label_reponse_jyparticipe_pas' => 'Je n\'y vais pas',
 'label_vous_inscrire' => 'Votre participation',
+'liste_inscrits' => 'Liste des inscriptions',
 
 'mois_precedent' => 'mois pr&eacute;c&eacute;dent',
 'mois_suivant' => 'mois suivant',
@@ -82,6 +86,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'sans_titre' => "(sans titre)",
 
 'toutes_rubriques' => 'Toutes',
+'telecharger' => 'T&eacute;l&eacute;charger',
 'texte_agenda' => 'AGENDA',
 'titre_sur_l_agenda' => "Sur l'agenda",
 'titre_cadre_ajouter_evenement' => 'Ajouter un &eacute;v&eacute;nement',

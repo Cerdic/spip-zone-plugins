@@ -1,4 +1,4 @@
-<?php
+4<?php
 /**
  * Plugin Agenda pour Spip 2.0
  * Licence GPL
@@ -85,14 +85,16 @@ function agenda_action_update_repetitions($id_evenement,$repetitions,$liste_mots
 		$duree = $date_fin - $date_debut;
 		$id_evenement_source = $row['id_evenement_source'];
 		$id_article = $row['id_article'];
+		$inscription = $row['inscription'];
+		$places = $row['places'];
 		if ($id_evenement_source!=0)
 			return; // pas un evenement source donc rien a faire ici
 
 		$repetitions_updated = array();
 		// mettre a jour toutes les repetitions deja existantes ou les supprimer si plus lieu
-		$res = sql_select("id_evenement","spip_evenements","id_evenement_source=".sql_quote($id_evenement));
+		$res = sql_select("id_evenement,date_debut","spip_evenements","id_evenement_source=".sql_quote($id_evenement));
 		while ($row = sql_fetch($res)){
-			$date = strtotime(date('Y-m-d',$row['date_debut']));
+			$date = strtotime(date('Y-m-d',strtotime($row['date_debut'])));
 			if (in_array($date,$repetitions)){
 				// il est maintenu, on l'update
 				$repetitions_updated[] = $date;
@@ -104,6 +106,8 @@ function agenda_action_update_repetitions($id_evenement,$repetitions,$liste_mots
 				$update_descriptif = $descriptif;
 				$update_lieu = $lieu;
 				$update_adresse = $adresse;
+				$update_inscription = $inscription;
+				$update_places = $places;
 
 				// mettre a jour l'evenement					
 				sql_updateq('spip_evenements',
@@ -115,6 +119,8 @@ function agenda_action_update_repetitions($id_evenement,$repetitions,$liste_mots
 						"horaire" => $horaire,
 						"date_debut" => $update_date_debut,
 						"date_fin" => $update_date_fin,
+						"inscription" => $update_inscription,
+						"places" => $update_places,
 						"id_article" => $id_article),"id_evenement=".intval($row['id_evenement']));
 						
 				agenda_action_revision_evenement_mots($row['id_evenement'], $liste_mots);
@@ -135,6 +141,8 @@ function agenda_action_update_repetitions($id_evenement,$repetitions,$liste_mots
 				$update_descriptif = $descriptif;
 				$update_lieu = $lieu;
 				$update_adresse = $adresse;
+				$update_inscription = $inscription;
+				$update_places = $places;
 
 				if ($id_evenement_new = agenda_action_insert_evenement($id_article,$id_evenement)) {
 					// mettre a jour l'evenement					
@@ -147,6 +155,8 @@ function agenda_action_update_repetitions($id_evenement,$repetitions,$liste_mots
 							"horaire" => $horaire,
 							"date_debut" => $update_date_debut,
 							"date_fin" => $update_date_fin,
+							"inscription" => $update_inscription,
+							"places" => $update_places,
 							"id_article" => $id_article),"id_evenement=".intval($id_evenement_new));
 					agenda_action_revision_evenement_mots($id_evenement_new, $liste_mots);
 				}

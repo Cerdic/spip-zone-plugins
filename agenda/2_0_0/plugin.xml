@@ -2,10 +2,10 @@
 	<nom>Agenda 2.0</nom>
 	<icon>img_pack/agenda-48.png</icon>
 	<auteur>	<!-- Auteur du plugin -->
-	[C&eacute;dric MORIN->http://www.yterium.net], [b_b->http://www.spip-contrib.net/b_b], [romy.tetue.net->http://romy.tetue.net]
+	[C&eacute;dric MORIN->http://www.yterium.net], [b_b->http://www.spip-contrib.net/b_b], [romy.tetue.net->http://romy.tetue.net], [Julien Tessier->http://www.cahri.com]
 	</auteur>
-	<licence>GPL 3 - &#169; 2006-2008</licence>
-	<version>2.0.4</version>
+	<licence>GPL 3 - &#169; 2006-2010</licence>
+	<version>2.0.5</version>
 	<version_base>0.22</version_base>
 	<etat>stable</etat>
 	<description>Agenda Ev&#233;nementiel</description>

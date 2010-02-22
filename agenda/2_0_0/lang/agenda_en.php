@@ -26,6 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'evenement_date_debut' => 'Starting date',
 'evenement_date_fin' => 'Ending date',
 'lien_retirer_evenement' => 'Deleted ',
+'lien_desinscrire' => 'Remove',
 'evenement_horaire' => 'Schedule',
 'titre_sur_l_agenda' => "On diary",
 'icone_creer_evenement' => 'Generate a new event',
@@ -38,6 +39,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'sans_titre' => "(without title)",
 'evenement_autres_occurences' => "Other occurences :",
 'bouton_supprimer' => "Delete",
+'telecharger' => 'Download',
+'inscrits' => 'Registrations',
+'liste_inscrits' => 'Registrations',
+'confirm_suppression_inscription' => "Are you sure you want to delete this registration?",
+
 );
 
 

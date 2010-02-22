@@ -122,4 +122,11 @@ function http_calendrier_mini($annee, $mois, $jour, $echelle, $partie_cal, $scri
 	return $total . ($ligne ? "\n<tr>$ligne\n</tr>" : '');
 }
 
+function balise_NB_INSCRITS_dist($p) {
+        $id_evenement = champ_sql('id_evenement', $p);
+        $p->code = "sql_countsel('spip_evenements_participants','id_evenement='.intval($id_evenement).' AND reponse=\'oui\'')";
+        return $p;
+}
+
+
 ?>
