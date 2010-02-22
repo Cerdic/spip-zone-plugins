@@ -104,13 +104,8 @@ function cs_infos_webmasters() {
 function cs_infos_connection() {
 	include_spip('inc/autoriser');
 	if (!defined('boites_privees_AUTEURS') || !autoriser('configurer','csinfosconnection')) return '';
-	// pour cs_lien()
-	include_spip('cout_fonctions');
-	$res = "<p><b>"._T('couteau:derniers_connectes')."</b></p>"
-		. cs_derniers_connectes()
-		. "<p><b>"._T('couteau:non_confirmes')."</b></p>"
-		. cs_non_confirmes();
-	return cs_cadre_depliable(_T('couteau:connections'), 'bp_infos_connection', $res);
+	return cs_cadre_depliable(_T('couteau:connections'), 'bp_infos_connection',
+		recuperer_fond('fonds/derniers_connectes'));
 }
 
 function cs_formatspip($id_article){
@@ -142,34 +137,6 @@ function cs_formatspip($id_article){
 			. fin_block()
 			. fin_cadre_enfonce(true);
 }
-
-function cs_listeulli($res) {
-	if(!count($res)) $res[] = _T('couteau:variable_vide');
-	$li = '<li style="margin:0.2em 0.4em;">';
-	return "<p><ul style='list-style-type:none; padding:0;margin:0;'>$li".join("</li>$li", $res).'</li></ul></p>';
-}
-
-function cs_derniers_connectes(){ 
-	$query = sql_select('id_auteur,nom,statut,en_ligne', 'spip_auteurs', '', '', array('en_ligne DESC'), '10'); 
-	$res = array(); 
-    while ($row = sql_fetch($query)) $res[]=_T('couteau:stats_auteur', array(
-		'icon' => '<a href="'.generer_url_ecrire("auteurs","statut=" . $row['statut']).'">' . bonhomme_statut($row) . '</a>',
-		'nom' => cs_lien(generer_url_ecrire("auteur_infos","id_auteur=$row[id_auteur]"), $row['nom']),
-		'date' => cs_date_long($row['en_ligne'])
-	));
-	return cs_listeulli($res);
-} 
-
-function cs_non_confirmes(){ 
-	$query = sql_select('id_auteur,nom,maj', 'spip_auteurs', "statut='nouveau'", '', array('maj DESC')); 
-	$res = array(); 
-    while ($row = sql_fetch($query)) $res[]=_T('couteau:stats_auteur', array(
-		'icon' => http_img_pack("aide.gif", '', '', _T('couteau:attente_confirmation')),
-		'nom' => cs_lien(generer_url_ecrire("auteur_infos","id_auteur=$row[id_auteur]"), $row['nom']),
-		'date' => cs_date_long($row['maj'])
-	)); 
-	return cs_listeulli($res);
-} 
 
 function cs_urls_propres($type, $id) {
 	global $type_urls;
