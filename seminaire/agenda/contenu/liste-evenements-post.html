@@ -17,6 +17,7 @@
 				<li class='item[ (#EXPOSE)][ (#ID_EVENEMENT_SOURCE|oui)repetition]'>
 					[(#MODELE{seminaire_acm}|trim|sinon{'?'})]
 				</li>
+				<INCLURE{fond=formulaires/participation_evenement}>
 			</BOUCLE_agenda>
 			[<p class='pagination'>(#PAGINATION{page})</p>]
 			</B_agenda>

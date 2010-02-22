@@ -1,6 +1,16 @@
-	  	[(#REM) mini calendrier : 
-		1er arg la date, 
-		2eme le nom de la variable date (optionel : 'date' par defaut)
-		3eme l'url sur laquelle boucler (optionel : url courante par defaut)
-		]
-		#CALENDRIER_MINI{#ENV{date},'date',#SELF}
+[(#REM) mini calendrier : 
+1er arg la date, 
+2eme le nom de la variable date (optionel : 'date' par defaut)
+3eme l'url sur laquelle boucler (optionel : url courante par defaut)
+]
+#CALENDRIER_MINI{#ENV{date},'date',#SELF}
+<!--connexion-->
+<div align="center">
+[(#SESSION{id_auteur}|?{' '})
+	<div class='espace'></div>
+	<span class="bouton"><a href="#URL_LOGOUT" rel="nofollow"><:icone_deconnecter:></a></span>]
+[(#SESSION{id_auteur}|?{'',' '})
+	<div class='espace'></div>
+	<span class="bouton"><a href="[(#URL_PAGE{login}|parametre_url{url,#SELF})]" rel="nofollow" class='login_modal'><:lien_connecter:></a></span>]
+[(#AUTORISER{ecrire})<p><a href="#EVAL{_DIR_RESTREINT_ABS}"><:espace_prive:></a></p>]
+</div>
