@@ -8,10 +8,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @return unknown_type
  */
 function action_editer_menus_entree_dist($arg=null) {
-	if (is_null($arg)){
-		$securiser_action = charger_fonction('securiser_action', 'inc');
-		$arg = $securiser_action();
-	}
+
+	$securiser_action = charger_fonction('securiser_action', 'inc');
+	$arg = $securiser_action();
 
 	// si id_menus_entree n'est pas un nombre, c'est une creation
 	if (!$id_menus_entree = intval($arg)) {
