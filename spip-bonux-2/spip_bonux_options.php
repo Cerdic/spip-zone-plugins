@@ -25,5 +25,7 @@ function _T_ou_typo($texte, $args=array()) {
 	return $text;
 
 }
+if (defined('_BONUX_STYLE'))
+	_chemin(_DIR_PLUGIN_SPIP_BONUX."spip21/");
 
 ?>

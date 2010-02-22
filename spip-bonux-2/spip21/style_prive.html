@@ -502,7 +502,7 @@ td.icone a img { border: 0; }
 .cadre-thread-forum div.cadre-titre { background-color: #ccc; color: #000; }
 .cadre-info{ background-color: #fff; border: 2px solid #GET{foncee}; padding: 5px;}
 .cadre-formulaire { border: 1px solid #GET{foncee}; background-color: #ddd; padding: 5px; color: #444; font-family: Verdana, Geneva, helvetica, sans; font-size: 11px; }
-.cadre-formulaire-editer {color: #444; font-family: Verdana, Geneva, helvetica, sans; font-size: 11px; }
+.cadre-formulaire-editer {color: #444; font-family: Verdana, Geneva, helvetica, sans; font-size: 11px;margin-top:20px;}
 .cadre-alerte { border: 6px solid red; }
 
 
@@ -956,6 +956,8 @@ table.info td { vertical-align: top; }
 /******** Formulaires **************/
 [(#INCLURE{fond=style_prive_formulaires}{env}{couleur_claire}{couleur_foncee}{lang}{ltr})]
 /******** Formulaires fin  **************/
+.formulaire_spip textarea {padding:3px;}
+.formulaire_spip input,.formulaire_spip input.text,.formulaire_spip input.password,.formulaire_spip select {padding:1px 0;}
 
 /*** Plugins ***/
 [(#INCLURE{fond=style_prive_plugins}{env}{couleur_claire}{couleur_foncee}{lang}{ltr})]

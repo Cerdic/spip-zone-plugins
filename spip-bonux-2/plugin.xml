@@ -30,6 +30,4 @@
   <fonctions>spip_bonux_fonctions.php</fonctions>
   <options>spip_bonux_options.php</options>
   <prefix>spip_bonux</prefix>
-	<chemin dir='' />
-	<chemin dir='spip21/' />
 </plugin>
