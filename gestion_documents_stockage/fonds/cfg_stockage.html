@@ -1,0 +1,87 @@
+[(#REM) titre=Gestion Documents Stockage]
+
+[(#REM) autor iser=webmestre ]
+
+
+<!-- descriptif=
+Cette page de configuration est r&#233;serv&#233;e au webmestre du site
+-->
+
+#CACHE{0}
+
+
+<form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
+
+[(#REM) ------------------------ Stockage sur Amazon S3 --------------------- ]
+<fieldset>
+<legend>
+	Stockage Amazon S3
+</legend>
+<p><:gestdoc:envoyer_explication:>:</p>
+
+
+<p><label><:gestdoc:cle_publique:>: <small><i>Cf.</i> <a href="http://aws-portal.amazon.com/gp/aws/developer/account/index.html?action=access-key">http://aws-portal.amazon.com/gp/...</a></small>
+<br /><input type="text" name="s3publickey" value="[(#ENV**{s3publickey}|entites_html)]" class="forml" /></label>
+</p>
+
+<p><label><:gestdoc:cle_secrete:>:
+<br /><input type="text" name="s3secretkey" value="[(#ENV**{s3secretkey}|entites_html)]" class="forml" /></label>
+</p>
+
+<p><label><:gestdoc:bucket_nom:>:
+<br /><input type="text" name="s3bucket" value="[(#ENV**{s3bucket}|entites_html)]" class="forml" /></label>
+</p>
+
+
+<p><label><:gestdoc:chemin_base_bucket:>[ (#ENV{s3bucket})] :
+
+<br /><input type="text" name="s3path" value="[(#ENV**{s3path}|entites_html)]" /></label>
+
+<br /><small>Cette valeur est utile si vous voulez h&#233;berger les fichiers de plusieurs sites sous le m&#234;me bucket.</small>
+</label>
+</p>
+
+
+
+
+<div>
+<label><:gestdoc:url_s3:>:
+<br />
+<select name="s3baseurl">
+	<option value="">http://s3.amazonaws.com/[(#ENV{s3bucket}|sinon{$bucket$})][/(#ENV{s3path})]/</option>
+[
+	<option value="http://(#ENV{s3bucket})/"[
+		(#ENV{s3baseurl}|=={http://[(#ENV{s3bucket})]/}|?{selected="selected"})
+		]>http://[(#ENV{s3bucket})][/(#ENV{s3path})]/</option>
+
+]</select>
+
+<blockquote>
+<small>
+Test DNS :
+<br />
+[(#ENV{s3bucket}|checkdnsrr{CNAME}|?{
+	<tt>[(#ENV{s3bucket})] CNAME [(#ENV{s3bucket}|dns_get_record{#EVAL{DNS_CNAME}}|var_export{1})]</tt>
+,
+	[(#ENV{s3bucket}|sinon{$bucket$})] <:gestdoc:registrement_cname_erreur:> <tt>CNAME</tt>
+})]
+</small></blockquote>
+
+</label>
+</div>
+
+
+</fieldset>
+
+
+
+[(#REM) ------------------------ BOUTON OK ------------------------ ]
+<div>
+<input style="float:#LANG_RIGHT;" type="submit" name="_cfg_ok" value="<:OK:>" class="fondo" />
+<!--
+<input type="reset" value="<:Reset:>" class="fondo" />
+<input type="submit" name="_cfg_delete" value="<:Supprimer:>" class="fondo" />
+-->
+</div>
+
+</form>
