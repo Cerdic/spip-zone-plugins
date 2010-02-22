@@ -1,4 +1,4 @@
-4<?php
+<?php
 /**
  * Plugin Agenda pour Spip 2.0
  * Licence GPL
