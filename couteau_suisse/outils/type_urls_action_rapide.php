@@ -57,8 +57,8 @@ function type_urls_URL_objet_exec() {
 		?sql_fetsel("url", "spip_urls", "id_objet=$id_objet AND type='$type'", '', 'date DESC', 1)
 		:array('url'=>$url2);
 	include_spip('inc/charsets');
-	// url propre en base || titre || url complete || type d'URLs || URL recalculee
-	echo $url2.'||'.charset2unicode($row[trim($champ_titre)]).'||'.$url.'||'.$type_urls.'||'.$row2['url'];
+	//  titre || url complete || type d'URLs || URL recalculee || url propre en base
+	echo charset2unicode($row[trim($champ_titre)]).'||'.$url.'||'.$type_urls.'||'.$row2['url'].'||'.$url2;
 }
 
 // Fonction {$outil}_{$arg}_exec() appelee par exec/action_rapide : ?exec=action_rapide&arg=type_urls|URL_objet_191 (pipe obligatoire)
