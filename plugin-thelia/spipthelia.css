@@ -182,12 +182,8 @@ a.lien-retour-thelia {
 .formulaire-produit .prixProduit small { display: block; } 
 /* style propre aux modeles <produit>*/
 
-.produits_thelia {
-	width: 200px;
-	text-align: left;
-	border: 1px dashed #cccccc;
-	padding: 1em;
-}
+.produits_thelia { float: left; clear: left; margin-right: 1em; }
+
 .thelia_promo {
 	font-size: 1.1em;
 	color: #F60;

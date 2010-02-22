@@ -7,15 +7,13 @@
 				    <li class='prochains'><div class='fond'><em>&Eacute;tape </em><span class='numero_etape'>5</span><em>&nbsp;: </em><:spipthelia:etape_terminer:></div></li>
 				</ul>
 
-				<div class="titrePage">
-				<h1><:spipthelia:mes_coordonnees:></h1>
+				<div class="cartouche">
+				  <h1 class="h1"><:spipthelia:mes_coordonnees:></h1>
 				</div>
 				
 				[(#REM) Mon adresse de facturation ]
 
-				<div class="sousTitrePage">
-				<h3><:spipthelia:adresse_facturation:></h3>
-				</div>
+				<h2 class="h2"><:spipthelia:adresse_facturation:></h2>
 				
 				<span class="textePage">
 				THELIA-CLIENT_RAISON THELIA-CLIENT_PRENOM THELIA-CLIENT_NOM
@@ -25,14 +23,13 @@
 				</span>
 				<a href="#URL_PAGE{compte_modifier}"><:spipthelia:modifier_adresse:></a>
 				
-				<div class="separation">
-				</div>
+				<br class="separation" />
+				
 				
 				[(#REM) Mon adresse de livraison ]
 					
-				<div class="sousTitrePage">
-				<h3><:spipthelia:adresse_livraison:></h3>
-				</div>
+				<h2 class="h2"><:spipthelia:adresse_livraison:></h2>
+				
 				
 			  <span class="textePage">
 				<THELIA_adrcours type="ADRESSE" adresse="THELIA-ADRESSE_ACTIVE">
@@ -73,13 +70,17 @@
 
 				
 				<div class="textePage">
-					<form  method="get" action="commande.php" class="formulaire-thelia"> 
+					<form  class="formulaire_spip formulaire_livraison" method="get" action="commande.php" class="formulaire-thelia"> 
 					<fieldset>
 						<input type="hidden" name="thelia_action" value="transport">
+						<ul>
 						<THELIA_transport type="TRANSPORT">
-							<input type="radio" id="idTHELIA-ID" name="id" value="THELIA-ID" checked="checked"><label for="idTHELIA-ID">THELIA-TITRE THELIA-PORT &euro;</label><br />
+							<li><label for="idTHELIA-ID">THELIA-TITRE THELIA-PORT &euro;</label> <input class="radio" type="radio" id="idTHELIA-ID" name="id" value="THELIA-ID" checked="checked" /></li>
 						</THELIA_transport>
-						<input type="submit" value="<:spipthelia:continuer:>" class="bouton-etapes-thelia" /><br/>
+						</ul>
+						<div class="boutons">
+						  <input class="submit" type="submit" value="<:spipthelia:continuer:>" class="bouton-etapes-thelia" /><br/>
+						</div>
 					</fieldset>
 					</form>
 				</div>

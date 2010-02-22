@@ -27,11 +27,12 @@
 	[ rubrique="(#ENV{rubrique}|?{#ENV{rubrique},''})"]
 	[ id="(#ENV{id}|?{#ENV{id},''})"]>
 <div class="produits_thelia" [style='[(#ENV{align}|match{^(left|right)$}|?{' '})float:#ENV{align};] (#ENV{align,center}|=={center}|?{'',' '})']>	
-<form action="#URL_PAGE{panier,lang=#LANG}" method="post" id="formAjouterTHELIA-ID">
+<form class="formulaire_spip formulaire_produit" action="#URL_PAGE{panier,lang=#LANG}" method="post" id="formAjouterTHELIA-ID">
+    <fieldset>
 	<input type="hidden" name="thelia_action" value="ajouter" />
         <input type="hidden" name="ref" value="THELIA-REF" />
                 							
-	[(#ENV{photo}|=={non}|?{'',' '})<THELIA_images type="IMAGE" produit="THELIA-ID"[ hauteur="(#ENV{hauteur}|?{#ENV{hauteur},''})"][ largeur="(#ENV{largeur}|?{#ENV{largeur},'100'})"] num="1"><div style="float: left;"><img src="THELIA-IMAGE" /></div></THELIA_images> ]<p class="thelia_titre">THELIA-TITRE</p>
+	[(#ENV{photo}|=={non}|?{'',' '})<THELIA_images type="IMAGE" produit="THELIA-ID"[ hauteur="(#ENV{hauteur}|?{#ENV{hauteur},''})"][ largeur="(#ENV{largeur}|?{#ENV{largeur},'100'})"] num="1"><img src="THELIA-IMAGE" class="spip_logos" /></THELIA_images> ]<p class="thelia_titre">THELIA-TITRE</p>
 	<div class="thelia_description">THELIA-DESCRIPTION</div>
 	<T_produitpromo>
 	<THELIA_produitpromo type="PRODUIT" ref="THELIA-REF" promo="1">
@@ -67,9 +68,10 @@
 	</div>
 	
 
-	<p class="thelia_panier">
-		<input type="submit" class="LIEN_commander" value="<:spipthelia:ajouter_panier:>" />
-	</p>
+	<div class="boutons">
+		<input type="submit" class="submit" value="<:spipthelia:ajouter_panier:>" />
+	</div>
+    </fieldset>
 </form>
 </div>
 </THELIA_produit>
