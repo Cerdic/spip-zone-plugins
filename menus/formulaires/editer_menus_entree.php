@@ -8,6 +8,12 @@ include_spip('inc/editer');
 include_spip('inc/actions');
 
 function formulaires_editer_menus_entree_charger($id_menu,$id_menus_entree='new'){
+	/**
+	 * On vérifie si nous ne sommes pas dans une modification
+	 * Sinon c'est une création
+	 */
+	$id_menus_entree = intval(_request('modifier_entree')) ? _request('modifier_entree') : $id_menus_entree;
+
 	$valeurs = formulaires_editer_objet_charger('menus_entree',$id_menus_entree,0,0,'', '', '', '');
 
 	$valeurs['id_menu'] = $id_menu;
