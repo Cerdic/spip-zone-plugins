@@ -86,7 +86,8 @@ function ar_load() {
         <option value='auteur' [selected="(#ENV{ar_type_objet,article}|=={auteur}|?{selected})"] ><:couteau:objet_auteur:></option>
         <option value='mot' [selected="(#ENV{ar_type_objet,article}|=={mot}|?{selected})"] ><:couteau:objet_mot:></option>
         <option value='site' [selected="(#ENV{ar_type_objet,article}|=={site}|?{selected})"] ><:couteau:objet_syndic:></option>
-<BOUCLE_tu(URLS){fusion type}{' - '}{!type IN article,rubrique,breve,auteur,mot,site}>
+		[<option value='#ENV{ar_type_objet}' selected="selected">(#ENV{ar_type_objet,article}|match{'^(article|rubrique|breve|auteur|mot|site)$'}|non)[(#ENV{ar_type_objet}|ucfirst)]</option>]
+<BOUCLE_tu(URLS){fusion type}{' - '}{!type IN article,rubrique,breve,auteur,mot,site,#ENV{ar_type_objet,article}}>
         [<option value='#TYPE' [selected="(#ENV{ar_type_objet,article}|=={#TYPE}|?{selected})"] >(#TYPE|ucfirst)</option>]
 </BOUCLE_tu>
      </select></label>
