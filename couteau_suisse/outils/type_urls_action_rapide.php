@@ -39,7 +39,7 @@ function type_urls_URL_objet_exec() {
 	$trouver_table = charger_fonction('trouver_table', 'base');
 	$desc = $trouver_table(table_objet($type));
 	$table = $desc['table'];
-	$champ_titre = $desc['titre'];
+	$champ_titre = $desc['titre']?$desc['titre']:'titre';
 	$col_id =  @$desc['key']["PRIMARY KEY"];
 	if (!$col_id) return false; // Quand $type ne reference pas une table
 	$id_objet = intval(_request('id_objet'));
@@ -49,7 +49,6 @@ function type_urls_URL_objet_exec() {
 	//  Recuperer une URL propre correspondant a l'objet.
 	$row = sql_fetsel("U.url, O.$champ_titre", "$table AS O LEFT JOIN spip_urls AS U ON (U.type='$type' AND U.id_objet=O.$col_id)", "O.$col_id=$id_objet", '', 'U.date DESC', 1);
 	if (!$row) return false; # Quand $id_objet n'est pas un numero connu
-	list($champ_titre,) = explode(',', $champ_titre, 2);
 	// Calcul de l'URL complete
 	$url = str_replace('.././','../',generer_url_entite($id_objet, $type, '', '', true));
 	$row2 = !strlen($url2 = $row['url'])
@@ -58,7 +57,7 @@ function type_urls_URL_objet_exec() {
 		:array('url'=>$url2);
 	include_spip('inc/charsets');
 	//  titre || url complete || type d'URLs || URL recalculee || url propre en base
-	echo charset2unicode($row[trim($champ_titre)]).'||'.$url.'||'.$type_urls.'||'.$row2['url'].'||'.$url2;
+	echo charset2unicode($row['titre']).'||'.$url.'||'.$type_urls.'||'.$row2['url'].'||'.$url2;
 }
 
 // Fonction {$outil}_{$arg}_exec() appelee par exec/action_rapide : ?exec=action_rapide&arg=type_urls|URL_objet_191 (pipe obligatoire)
@@ -82,6 +81,7 @@ function type_urls_URL_objet_191_exec() {
 	include_spip('inc/charsets');
 	echo _request('format')=='iframe'
 		?"<span style='font-family:Verdana,Arial,Sans,sans-serif; font-size:10px;'>[<a href='../$url' title='$url' target='_blank'>"._T('couteau:urls_propres_lien').'</a>]</span>'
+
 		:$url_1.'||'.charset2unicode($titre).'||'.$url.'||'.$type_urls.'||'.$url_2;
 }
 

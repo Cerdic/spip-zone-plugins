@@ -85,7 +85,10 @@ function ar_load() {
         <option value='breve' [selected="(#ENV{ar_type_objet,article}|=={breve}|?{selected})"] ><:couteau:objet_breve:></option>
         <option value='auteur' [selected="(#ENV{ar_type_objet,article}|=={auteur}|?{selected})"] ><:couteau:objet_auteur:></option>
         <option value='mot' [selected="(#ENV{ar_type_objet,article}|=={mot}|?{selected})"] ><:couteau:objet_mot:></option>
-        <option value='syndic' [selected="(#ENV{ar_type_objet,article}|=={syndic}|?{selected})"] ><:couteau:objet_syndic:></option>
+        <option value='site' [selected="(#ENV{ar_type_objet,article}|=={site}|?{selected})"] ><:couteau:objet_syndic:></option>
+<BOUCLE_tu(URLS){fusion type}{' - '}{!type IN article,rubrique,breve,auteur,mot,site}>
+        <option value='#TYPE' [selected="(#ENV{ar_type_objet,article}|=={#TYPE}|?{selected})"] >#TYPE</option>
+</BOUCLE_tu>
      </select></label>
 	 &nbsp;
 	 <label for="ar_num_objet"><b><:couteauprive:urls_num_objet:></b>&nbsp;<input class="ar_num_objet" id="ar_num_objet" name="ar_num_objet" size="5" value="#ENV*{ar_num_objet}"/></label><img id="ar_chercher" style="vertical-align:bottom; cursor:pointer; margin-left:1em;" title="<:couteauprive:urls_rechercher:>" src="#EVAL{_DIR_IMG_PACK}loupe.png" alt="<:bouton_chercher:>"/>
