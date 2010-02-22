@@ -96,7 +96,7 @@ div.brt { background: url(#GET{chemin_img_pack}triangle-droite[(#GET{rtl})].gif)
 div.pos_r { position: relative; }
 
 /* selecteur de rubriques */
-.selecteur_parent{font-size: 90%; width: 99%; max-height: 24px;} /* appliquee sur le <select> */
+.selecteur_parent{font-size: 90%; width: 99%; max-height: 24px;} 
 option.selec_rub { background-position: [(#GET{left})] center; background-image: url(#GET{chemin_img_pack}rubrique-12.gif); background-repeat: no-repeat; padding-#GET{left}: 16px; }
 option.niveau_1 { font-weight: bold; background: #GET{claire}; background-image: url(#GET{chemin_img_pack}secteur-12.gif); background-repeat:  no-repeat; }
 option.niveau_2 { color: #202020; border-bottom: 1px solid #GET{claire}; }
@@ -662,9 +662,6 @@ td.vu { background: #ccc; }
 .langues_bloquees {color: #GET{foncee};font-weight: bold; }
 
 
-[(#REM)
-	pour les puces de changement rapide de statut ; NB: ca buggue car ca s'affiche en-dessous du cadre
-]
 li .puce_statut { float: #GET{left}; padding-top: 5px; }
 li .puce_article_popup, li.puce_breve_popup,li.puce_site_popup { padding: 0; }
 .puce_article, .puce_breve, .puce_site { position: relative; }
