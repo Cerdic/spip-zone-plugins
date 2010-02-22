@@ -9,7 +9,7 @@ ul.derniers_connectes li {margin:0.2em 0.4em;}
 <p><b><:couteau:derniers_connectes:></b></p>
 <B_aut>
 <ul class="derniers_connectes"><li>
-<BOUCLE_aut(AUTEURS){tous}{par en_ligne}{inverse}{'</li><li>'}>
+<BOUCLE_aut(AUTEURS){tous}{par en_ligne}{inverse}{'</li><li>'}{0,10}>
 	#SET{icon,#URL_ECRIRE{auteurs,statut=#STATUT}|cs_lien{#ARRAY{statut,#STATUT}|bonhomme_statut}}
 	#SET{nom,#URL_ECRIRE{auteur_infos,id_auteur=#ID_AUTEUR}|cs_lien{#NOM}}
 	[(#STATUT|=={nouveau}|oui) #SET{icon,#GET{aide}}]
@@ -23,7 +23,7 @@ ul.derniers_connectes li {margin:0.2em 0.4em;}
 <p><b><:couteau:non_confirmes:></b></p>
 <B_aut2>
 <ul class="derniers_connectes"><li>
-<BOUCLE_aut2(AUTEURS){tous}{statut=nouveau}{par maj}{inverse}{'</li><li>'}>
+<BOUCLE_aut2(AUTEURS){tous}{statut=nouveau}{par maj}{inverse}{'</li><li>'}{0,10}>
 	#SET{nom,#URL_ECRIRE{auteur_infos,id_auteur=#ID_AUTEUR}|cs_lien{#NOM}}
 	[(#VAL{'couteau:stats_auteur'}|_T{#ARRAY{icon,#GET{aide},nom,#GET{nom},date,#MAJ|cs_date_long}})]
 </BOUCLE_aut2>
