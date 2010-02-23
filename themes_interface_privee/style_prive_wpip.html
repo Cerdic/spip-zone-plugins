@@ -10,7 +10,7 @@
 	ATTENTION: il faut absolument le charset sinon Firefox croit que
 	c'est du text/html !
 ]
-#CACHE{3600*100,cache-client}
+#CACHE{3600*100*0,cache-client}
 #HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
 #HTTP_HEADER{Vary: Accept-Encoding}
 
@@ -48,6 +48,11 @@ h1, h2, h3, .bandeau_couleur, .bandeau_couleur_sous, a.icone26, a.cellule-h-text
 	.bandeau_sec {
 		border-color: #464646;
 		border-width: 1px;
+		-webkit-border-bottom-left-radius: 6px;
+		-webkit-border-bottom-right-radius: 6px;
+		border-bottom-left-radius: 6px;
+		border-bottom-right-radius: 6px;
+		-moz-border-radius: 0px 0px 6px 6px;
 		
 		
 		li.cellule36 {
@@ -108,10 +113,12 @@ h1, h2, h3, .bandeau_couleur, .bandeau_couleur_sous, a.icone26, a.cellule-h-text
 	
 }
 
-.icone36 a img, a.icone36 img {
-	-moz-border-radius: 6px;
-	-webkit-border-radius: 6px;
-	border-radius: 6px;
+.icone36 {
+	a img, img {
+		-moz-border-radius: 6px;
+		-webkit-border-radius: 6px;
+		border-radius: 6px;	
+	}
 }
 
 .cadre {
@@ -211,12 +218,40 @@ div.liste, div.cadre-liste {
 }
 
 
+div.onglet_off {
+	background-color: #464646;
+	border-color: #464646;
+}
+div.onglet {
+	background-color: inherit;
+	background: url(#CHEMIN{images/gray-grad.png});		
+	border-color: #dfdfdf;
+	
+	a {
+		color: #aaa;
+	}
+}
+div.onglet_on {
+	background-color: #[(#ENV{couleur_claire}|couleur_eclaircir)];
+}
+
+.dater { 
+	border: 1px solid #dfdfdf; 
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	border-radius: 6px;
+	color: #666;
+}
+.dater .hover, .editer_mot .hover, .editer_auteurs .hover { background-color: #eee; }
+
+
 .formulaire_spip {
 	border: 0px;
 	padding: 0px;
 	
 	li {
-		padding: right: 0px;
+		padding-right: 0px;
+		padding-left: 0px;
 		
 		label {
 			color: #444;
@@ -225,6 +260,62 @@ div.liste, div.cadre-liste {
 		}
 	}
 	
+	li, li.gauche {
+		padding-left: 140px;
+	}
+
+
+
+	li .erreur_message {
+		border-color: #dfdfdf;
+		-webkit-border-top-left-radius: 6px;
+		-webkit-border-top-right-radius: 6px;
+		border-top-left-radius: 6px;
+		border-top-right-radius: 6px;
+		-moz-border-radius: 6px 6px 0px 0px;
+	}
+	
+	.erreur_message + .explication {
+		-webkit-border-top-left-radius: 0px;
+		-webkit-border-top-right-radius: 0px;
+		border-top-left-radius: 0px;
+		border-top-right-radius: 0px;
+		-moz-border-radius: 0px 0px 0px 0px;
+		
+	}
+	
+	.explication {
+		border-color: #dfdfdf;
+		background: url(#CHEMIN{images/gray-grad.png});
+		-webkit-border-top-left-radius: 6px;
+		-webkit-border-top-right-radius: 6px;
+		border-top-left-radius: 6px;
+		border-top-right-radius: 6px;
+		-moz-border-radius: 6px 6px 0px 0px;
+	}
+	
+	.erreur_message + input[type=text], .erreur_message + input[type=password], .erreur_message + textarea,
+	.explication + input[type=text], .explication + input[type=password], .explication + textarea
+	{
+		-webkit-border-top-left-radius: 0px;
+		-webkit-border-top-right-radius: 0px;
+		border-bottom-left-radius: 6px;
+		border-bottom-right-radius: 6px;
+		-moz-border-radius: 0px 0px 6px 6px;
+		
+	}
+
+	li.editer_parent,
+	li.editer_groupe_mot,
+	li.editer_descriptif,
+	li.editer_chapo,
+	li.editer_texte,
+	li.editer_ps,
+	li.editer_url_zip_plugin2,
+	li.haut {
+		padding-#GET{left}:0px;
+		padding-top:10px;
+	}	
 	.editer_titre.obligatoire {
 		input {
 			font-size: 200%;
@@ -235,6 +326,7 @@ div.liste, div.cadre-liste {
 	p.boutons {
 		background-color: inherit;
 		border: 0px;
+		padding-#GET{right}: 0px;
 	}
 		
 }
@@ -242,8 +334,8 @@ div.liste, div.cadre-liste {
 .formulaire_spip li.editer_parent {
 	border: 1px solid #dfdfdf;	
 	background-color: white;
-	margin-left: 10px;
-	margin-right: 10px;
+	margin-#GET{left}: 10px;
+	padding-#GET{right}: 10px;
 	-moz-border-radius: 6px;
 	-webkit-border-radius: 6px;
 	border-radius: 6px;
@@ -256,8 +348,8 @@ div.liste, div.cadre-liste {
 
 .formulaire_spip fieldset {
 	border: 1px solid #dfdfdf;	
-	margin-left: 10px;
-	margin-right: 10px;
+	margin-#GET{left}: 10px;
+	margin-bottom: 10px;
 	-moz-border-radius: 6px;
 	-webkit-border-radius: 6px;
 	border-radius: 6px;
@@ -267,12 +359,22 @@ div.liste, div.cadre-liste {
 		padding: 6px;
 	}
 	
+	li {
+		padding-#GET{right}: 10px;
+		
+		input.text, input.password, textarea.textarea {
+			border: 1px solid #dfdfdf;		
+		}
+	}
+
+
+	
 }
 .formulaire_editer_article li.editer_liens_sites {
 	border: 0px;
 }
 
-input[type=text], textarea {
+input[type=text], input[type=password], textarea {
 	border: 1px solid #dfdfdf;
 	-moz-border-radius: 6px;
 	-webkit-border-radius: 6px;
