@@ -128,7 +128,7 @@ function bando_lister_sous_menu($sousmenu,$contexte=null,$class="",$image=false)
 			$url = bandeau_creer_url($sousdetail->url?$sousdetail->url:$souspage, $sousdetail->urlArg, $contexte);
 			if (!$image){
 					$sous .= "<li$class>"
-			 . "<a href='$url' id='bando2_$souspage'>"
+			 . "<a href='$url' class='bando2_$souspage'>"
 			 . _T($sousdetail->libelle)
 			 . "</a>"
 			 . "</li>";
@@ -136,7 +136,7 @@ function bando_lister_sous_menu($sousmenu,$contexte=null,$class="",$image=false)
 			else {
 					//$image = "<img src='".$sousdetail->icone."' width='".largeur($sousdetail->icone)."' height='".hauteur($sousdetail->icone)."' alt='".attribut_html(_T($sousdetail->libelle))."' />";
 					$sous .= "<li$class>"
-			 . "<a href='$url' id='bando2_$souspage' title='".attribut_html(_T($sousdetail->libelle))."'>"
+			 . "<a href='$url' class='bando2_$souspage' title='".attribut_html(_T($sousdetail->libelle))."'>"
 			 . "<span>"._T($sousdetail->libelle)."</span>"
 			 . "</a>"
 			 . "</li>";
