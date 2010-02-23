@@ -1417,7 +1417,7 @@ function traiter_raccourcis($letexte) {
 	//
 
 	$letexte = "\n".trim($letexte);
-
+/*
 	// les listes
 	if (ereg("\n-[*#]", $letexte))
 		$letexte = traiter_listes($letexte);
@@ -1426,7 +1426,7 @@ function traiter_raccourcis($letexte) {
 	if (strpos($letexte, "\n- ") !== false)
 		$puce = definir_puce();
 	else $puce = '';
-
+*/
 	// Proteger les caracteres actifs a l'interieur des tags html
 	$protege = "{}_-";
 	$illegal = "\x1\x2\x3\x4";

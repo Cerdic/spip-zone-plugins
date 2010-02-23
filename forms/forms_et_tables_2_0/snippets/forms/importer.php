@@ -27,32 +27,22 @@ function snippets_forms_importer($id_form_target,$formtree,$contexte=array()){
 					foreach (array_keys($GLOBALS['tables_principales']['spip_forms']['field']) as $key)
 						if (!in_array($key,array('id_form','maj')) AND isset($form[$key])){
 							$names[] = $key;
-							//adatpation SPIP2
-							//$values[] = _q(trim(applatit_arbre($form[$key])));
-							$values[] = _q(trim(spip_xml_aplatit($form[$key])));
+							$values[] = _q(trim(applatit_arbre($form[$key])));
 						}
-					//adapatation SPIP2
-					/*spip_abstract_insert('spip_forms',"(".implode(",",$names).")","(".implode(",",$values).")");
-					$id_form = spip_insert_id();*/
-					$id_form = sql_insert('spip_forms',"(".implode(",",$names).")","(".implode(",",$values).")");
+					spip_abstract_insert('spip_forms',"(".implode(",",$names).")","(".implode(",",$values).")");
+					$id_form = spip_insert_id();
 				}
 				if ($id_form AND isset($form['fields'])){
 					foreach($form['fields'] as $fields)
 							foreach($fields['field'] as $field){
-								//adapatation SPIP2
-								//$champ = trim(applatit_arbre($field['champ']));
-								$champ = trim(spip_xml_aplatit($field['champ']));
-								//$type = trim(applatit_arbre($field['type']));
-								$type = trim(spip_xml_aplatit($field['type']));
-								//$titre = trim(applatit_arbre($field['titre']));
-								$titre = trim(spip_xml_aplatit($field['titre']));
+								$champ = trim(applatit_arbre($field['champ']));
+								$type = trim(applatit_arbre($field['type']));
+								$titre = trim(applatit_arbre($field['titre']));
 								$champ = Forms_insere_nouveau_champ($id_form,$type,$titre,($id_form==$id_form_target)?"":$champ);
 								$set = "";
 								foreach (array_keys($GLOBALS['tables_principales']['spip_forms_champs']['field']) as $key)
 									if (!in_array($key,array('id_form','champ','rang','titre','type')) AND isset($field[$key])){
-										//adapation SPIP2
-										//$set .= "$key="._q(trim(applatit_arbre($field[$key]))).", ";
-										$set .= "$key="._q(trim(spip_xml_aplatit($field[$key]))).", ";
+										$set .= "$key="._q(trim(applatit_arbre($field[$key]))).", ";
 									}
 								if (strlen($set)){
 									$set = substr($set,0,strlen($set)-2);
@@ -61,14 +51,10 @@ function snippets_forms_importer($id_form_target,$formtree,$contexte=array()){
 								if(isset($field['les_choix'])&&is_array($field['les_choix']))
 									foreach($field['les_choix'] as $les_choix)
 										foreach($les_choix['un_choix'] as $un_choix){
-											//adapation SPIP2
-											//$titre = trim(applatit_arbre($un_choix['titre']));
-											$titre = trim(spip_xml_aplatit($un_choix['titre']));
+											$titre = trim(applatit_arbre($un_choix['titre']));
 											$choix = Forms_insere_nouveau_choix($id_form,$champ,$titre);
 											if (isset($un_choix['rang'])){
-												//adapatation SPIP2
-												//$rang = trim(applatit_arbre($un_choix['rang']));
-												$rang = trim(spip_xml_aplatit($un_choix['rang']));
+												$rang = trim(applatit_arbre($un_choix['rang']));
 												spip_query("UPDATE spip_forms_champs_choix SET rang="._q($rang)." WHERE id_form="._q($id_form)." AND champ="._q($champ)." AND choix="._q($choix));
 											}
 										}

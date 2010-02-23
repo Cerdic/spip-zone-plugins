@@ -7,7 +7,7 @@
  * Antoine Pitrou
  * Cedric Morin
  * Renato Formato
- * ï¿½ 2005,2006 - Distribue sous licence GNU/GPL
+ * © 2005,2006 - Distribue sous licence GNU/GPL
  *
  */
 
@@ -17,27 +17,9 @@
 	}
 
 	function Forms_ajouter_boutons($boutons_admin) {
-		if ($GLOBALS['spip_version_code']<1.92){
+		if ($GLOBALS['spip_version_code']<1.92)
 			include_spip('inc/autoriser_compat');
-        }
-        
-       
 		if (autoriser('administrer','form',0)) {
-		   $liste_plugin = unserialize($GLOBALS['meta']['plugin']);
-        if (array_key_exists('BANDO',$liste_plugin)==true){
-	       // on voit le bouton dans la barre "naviguer"
-			$boutons_admin['bando_edition']->sousmenu["forms_tous"]= new Bouton(
-			"../"._DIR_PLUGIN_FORMS."img_pack/form-24.gif",  // icone
-			_T("forms:formulaires_sondages") //titre
-			);
-			
-		  // on voit le bouton dans la barre "naviguer"
-			$boutons_admin['bando_edition']->sousmenu["tables_tous"]= new Bouton(
-			"../"._DIR_PLUGIN_FORMS."img_pack/table-24.gif",  // icone
-			_T("forms:tables") //titre
-			);
-	       }
-	   else{	
 		  // on voit le bouton dans la barre "naviguer"
 			$boutons_admin['naviguer']->sousmenu["forms_tous"]= new Bouton(
 			"../"._DIR_PLUGIN_FORMS."img_pack/form-24.gif",  // icone
@@ -49,7 +31,6 @@
 			"../"._DIR_PLUGIN_FORMS."img_pack/table-24.gif",  // icone
 			_T("forms:tables") //titre
 			);
-		}
 		}
 		return $boutons_admin;
 	}
@@ -134,7 +115,6 @@
 			if (!_request('var_noajax'))
 				$flux .= "<script src='"._DIR_PLUGIN_FORMS."javascript/forms_lier_donnees.js' type='text/javascript'></script>\n";
 		}
-
 		if (_request('exec')=='forms_edit'){
 			$flux .= "<script src='"._DIR_PLUGIN_FORMS."javascript/interface.js' type='text/javascript'></script>";
 			if (!_request('var_noajax'))

@@ -10,9 +10,7 @@
  *  2005,2006 - Distribue sous licence GNU/GPL
  *
  */
-	
-	
-	
+
 	$GLOBALS['forms_types_champs_etendus']=array();
 	Forms_importe_types_etendus();
 
@@ -36,18 +34,14 @@
 					$contenu = "";
 					lire_fichier ($f, $contenu);
 					$GLOBALS['forms_types_champs_etendus']=array();
-					/* adaptation SPIP2 */
-					/*$data = parse_plugin_xml($contenu);*/
+					include_spip('inc/xml');
 					$data = spip_xml_parse($contenu);
-					/* fin adaptation SPIP2 */
 					if (isset($data['types']))
 						foreach($data['types'] as $types)
 							if (isset($types['type'])) 
 								foreach($types['type'] as $type){
 									if (isset($type['field'])){
 										$champ = end($type['field']);
-										// adapation SPIP2
-										/*$libelle = isset($type['label'])?trim(applatit_arbre($type['label'])):$champ;*/
 										$libelle = isset($type['label'])?trim(spip_xml_aplatit($type['label'])):$champ;
 										$match = isset($type['match'])?trim(end($type['match'])):"";
 										$format = array();
@@ -100,7 +94,9 @@
 				'mot' => _T("forms:champ_type_mot"),
 				'joint' => _T("forms:champ_type_joint"),
 				'separateur' => _T("forms:champ_type_separateur"),
-				'textestatique' => _T("forms:champ_type_textestatique")
+				'textestatique' => _T("forms:champ_type_textestatique"),
+				'hidden' => _T("forms:champ_type_hidden")
+				
 			);
 			foreach($GLOBALS['forms_types_champs_etendus'] as $t=>$champ)
 				$noms[$t] = $champ['label'];

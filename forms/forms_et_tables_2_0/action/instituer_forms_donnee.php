@@ -32,7 +32,6 @@ function action_instituer_forms_donnee_dist() {
 		if ($GLOBALS['spip_version_code']<1.92)
 			include_spip('inc/forms_compat_191');
 		$id_donnee = intval($id_donnee);
-		
 		spip_query("UPDATE spip_forms_donnees SET statut="._q($statut)." WHERE id_donnee="._q($id_donnee));
 		
 		if ($rang_nouv = intval(_request('rang_nouv'))){

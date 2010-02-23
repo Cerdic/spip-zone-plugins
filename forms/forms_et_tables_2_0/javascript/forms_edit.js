@@ -49,12 +49,12 @@ jQuery.fn.ajaxAction = function() {
 		if ($(this).is('.confirmer') && (action_confirmee==false)) return false;
 		var action = $(this).attr("href");
 		var idtarget = action.split('#')[1];
-		if (!idtarget) idtarget = id;	
+		if (!idtarget) idtarget = id;		
 		var url = (($(this).attr("rel")).split('#'))[0];
 		var redir = url + "&var_ajaxcharset="+ajaxcharset+"&bloc="+idtarget;
 		action = (action.split('#')[0]).replace(/&?redirect=[^&#]*/,''); // l'ancre perturbe IE ...
 		$('#'+idtarget+',#apercu_gauche').ajaxWait();
-		$.get(action,{redirect: redir}, function(data){
+		$.get(action,{redirect: redir}, function(data){ 
 			$('#'+idtarget).html(data).ajaxAction();
 			if($('#'+idtarget).is('.forms_champs')) forms_init_multi($('#'+idtarget).parent());
 			if($('#'+idtarget).is('#champs')) forms_init_lang();
@@ -78,9 +78,7 @@ jQuery.fn.ajaxAction = function() {
 			function(){
 				$.get(url+"&var_ajaxcharset="+ajaxcharset+"&bloc=apercu",function(data){refresh_apercu(data);});
 				if (idtarget!='proprietes')
-				{
 					$.get(url+"&var_ajaxcharset="+ajaxcharset+"&bloc=proprietes",function(data){ $('#proprietes').html(data).ajaxAction(); });
-				}
 				$('#'+idtarget).ajaxAction();
 				if($('#'+idtarget).is('.forms_champs')) forms_init_multi($('#'+idtarget).parent());
 				if($('#'+idtarget).is('#champs')) forms_init_lang();
@@ -102,7 +100,7 @@ jQuery.fn.ajaxAction = function() {
 				if($('#'+idtarget).is('#champs')) forms_init_lang();
 			},
 			"before":
-			function(param,form){	
+			function(param,form){
 				forms_multi_submit.apply(form[0],[param]);
 				$('#'+idtarget+',#apercu_gauche').ajaxWait();
 			}
