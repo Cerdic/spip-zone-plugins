@@ -1,5 +1,4 @@
 [(#REM) titre=Gestion Documents Stockage]
-
 [(#REM) autor iser=webmestre ]
 
 
@@ -56,16 +55,18 @@ Cette page de configuration est r&#233;serv&#233;e au webmestre du site
 
 ]</select>
 
-<blockquote>
-<small>
-Test DNS :
-<br />
-[(#ENV{s3bucket}|checkdnsrr{CNAME}|?{
-	<tt>[(#ENV{s3bucket})] CNAME [(#ENV{s3bucket}|dns_get_record{#EVAL{DNS_CNAME}}|var_export{1})]</tt>
-,
-	[(#ENV{s3bucket}|sinon{$bucket$})] <:gestdoc:registrement_cname_erreur:> <tt>CNAME</tt>
-})]
-</small></blockquote>
+[(#ENV{s3bucket,''}|oui)
+	<blockquote>
+	<small>
+	Test DNS :
+	<br />
+	[(#ENV{s3bucket}|checkdnsrr{CNAME}|?{
+		<tt>[(#ENV{s3bucket})] CNAME [(#ENV{s3bucket}|filtrer{dns_get_record,#EVAL{DNS_CNAME}}|var_export{1})]</tt>
+	,
+		[(#ENV{s3bucket}|sinon{$bucket$})] <:gestdoc:registrement_cname_erreur:> <tt>CNAME</tt>
+	})]
+	</small></blockquote>
+]
 
 </label>
 </div>
