@@ -34,8 +34,8 @@ function exec_config_lang_dist()
 
 	echo debut_droite('', true);
 
-	echo gros_titre(_T('info_langues'), '', false),
-	  barre_onglets("config_lang", "langues");
+	echo "<h1 class='bando2_config_lang bando2'>"._T('info_langues')."</h1>";
+	echo barre_onglets("config_lang", "langues");
  
 	$langue = charger_fonction('langue', 'configuration');
 	echo $langue();

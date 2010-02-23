@@ -29,16 +29,21 @@ function exec_config_contenu_dist()
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('titre_page_config_contenu'), "configuration", "configuration");
 
-	echo gros_titre(_T('titre_page_config_contenu'),'', false);
-	echo barre_onglets("configuration", "interactivite");
+	//echo gros_titre(_T('titre_page_config_contenu'),'', false);
+	//echo barre_onglets("configuration", "interactivite");
 
 	echo debut_gauche('', true);
-
+	echo "<div class='fixed'>";
+	echo avertissement_config();
+	echo "</div>";
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'config_contenu'),'data'=>''));
 	echo creer_colonne_droite('', true);
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'config_contenu'),'data'=>''));
 	echo debut_droite('', true);
 
+	echo "<h1 class='bando2_config_interactivite bando2'>"._T('titre_configuration')."</h1>";
+	echo barre_onglets("configuration", "interactivite");
+	
 	$participants = charger_fonction('participants', 'configuration');
 	$contenu_forums = charger_fonction('contenu_forums', 'configuration');
 
