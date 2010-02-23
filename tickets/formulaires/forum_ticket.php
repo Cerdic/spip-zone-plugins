@@ -87,7 +87,7 @@ function formulaires_forum_ticket_traiter($id_ticket=''){
 	if($id_forum_ticket > 0){
 		include_spip('inc/headers');
 		$message['message_ok'] = _T('tickets:message_publie');
-		$message['redirect'] = self();
+		$message['redirect'] = parametre_url(self(),'id_forum',$id_forum_ticket,'&');
 		
 		if ($notifications = charger_fonction('notifications', 'inc')) {
 			$notifications('commenterticket', $id_ticket,
