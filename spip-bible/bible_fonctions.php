@@ -290,7 +290,7 @@ function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$re
 			$texte .= afficher_references($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$traduction,$separateur,$lang);
 			}
 		}
-	$texte = str_replace('&nbsp;&nbsp;  <sup>','<sup>',$texte);
+	$texte = bible_supprimer_retour(str_replace('&nbsp;&nbsp;  <sup>','<sup>',$texte));
 	if ($spip_lang == $lang_original) {
 		return $texte.'</quote>';
 		}
