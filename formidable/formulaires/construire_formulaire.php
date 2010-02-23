@@ -123,7 +123,7 @@ function formidable_ajouter_options(&$valeur, $cle, $nouvelle){
 }
 
 // Préparer une saisie pour la transformer en truc configurable
-function formidable_preparer_saisie_configurable($saisie, $env){
+function formidable_generer_saisie_configurable($saisie, $env){
 	// On récupère le nom
 	$nom = $saisie['options']['nom'];
 	// On cherche si ya un formulaire de config
@@ -148,13 +148,15 @@ function formidable_preparer_saisie_configurable($saisie, $env){
 	
 	// Si ya un form de config on l'ajoute à la fin
 	if (is_array($formulaire_config)){
+		// On double l'environnement
+		$env2 = $env;
 		// On ajoute une classe
 		$saisie['options']['li_class'] .= ' en_configuration';
 		
 		// Si possible on met en readonly
 		$saisie['options']['readonly'] = 'oui';
 		
-		$env['saisies'] = $formulaire_config;
+		$env2['saisies'] = $formulaire_config;
 		
 		// Un test pour savoir si on prend le _request ou bien
 		$erreurs_test = $env['erreurs'];
@@ -163,24 +165,33 @@ function formidable_preparer_saisie_configurable($saisie, $env){
 		if ($erreurs_test){
 			// Là aussi on désinfecte à la main
 			if (is_array($env["saisie_modifiee_$nom"]['options']))
-				spip_desinfecte($env["saisie_modifiee_$nom"]['options']);
+				spip_desinfecte($env2["saisie_modifiee_$nom"]['options']);
 		}
 		else
-			$env["saisie_modifiee_$nom"] = $env['_saisies_par_nom'][$nom];
+			$env2["saisie_modifiee_$nom"] = $env2['_saisies_par_nom'][$nom];
 		
 		$saisie = saisies_inserer_html(
 			$saisie,
 			'<ul class="formulaire_configurer">'
 			.recuperer_fond(
 				'inclure/generer_saisies',
-				$env
+				$env2
 			)
 			.'</ul>',
 			'fin'
 		);
 	}
 	
-	return $saisie;
+	// On génère le HTML de la saisie
+	$html = generer_saisie($saisie, $env);
+	
+	// Si le <li> est en display:none on l'enlève
+	$html = preg_replace('/display[\s]*:[\s]*none;?/i',' ',$html);
+	
+	// Les input hidden sont transformés en text readonly
+	$html = preg_replace('/type=(\'|")hidden\\1/i','type="text" class="text" readonly="readonly"',$html);
+	
+	return $html;
 }
 
 ?>

@@ -22,7 +22,7 @@
 			]
 
 			[(#VAL{saisie}|array_key_exists{#VALEUR}|oui)
-				[(#VALEUR|formidable_preparer_saisie_configurable{#ENV**|unserialize}|generer_saisie{#ENV**|unserialize})]
+				[(#VALEUR|formidable_generer_saisie_configurable{#ENV**|unserialize})]
 			]
 
 			[(#VAL{groupe}|array_key_exists{#VALEUR}|oui)
