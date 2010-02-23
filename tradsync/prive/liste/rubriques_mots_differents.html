@@ -1,0 +1,69 @@
+#SET{id_differents,#ARRAY}
+<BOUCLE_rub_trad(RUBRIQUES){traductions #ENV{langue,#LANG}}{compteur mots}>
+	<BOUCLE_compte(mots_rubriques){id_rubrique}> </BOUCLE_compte>#SET{cpt,#TOTAL_BOUCLE}</B_compte>#SET{cpt,0}<//B_compte>
+	<BOUCLE_rub_origine(RUBRIQUES){id_rubrique=#ID_TRAD}{compteur mots}>
+		<BOUCLE_meme_nombre(CONDITION){si #GET{cpt}|=={#COMPTEUR{mots}}}>
+		[(#REM) si meme nombre, on les verifie un par un ... ]
+			<BOUCLE_mots_rub_trad(mots_rubriques){id_rubrique=#_rub_trad:ID_RUBRIQUE}>
+				<BOUCLE_verifier_mot(RUBRIQUES){id_rubrique=#_rub_trad:ID_TRAD}{id_mot}> </BOUCLE_verifier_mot>
+					[(#SET_PUSH{id_differents,#_rub_trad:ID_RUBRIQUE})]
+				<//B_verifier_mot>
+			</BOUCLE_mots_rub_trad>
+		</BOUCLE_meme_nombre>
+			[(#SET_PUSH{id_differents,#_rub_trad:ID_RUBRIQUE})]
+		<//B_meme_nombre>
+	</BOUCLE_rub_origine>
+	[(#GET{cpt}|oui)
+		[(#SET_PUSH{id_differents,#_art_trad:ID_RUBRIQUE})]
+	]
+	<//B_rub_origine>
+</BOUCLE_rub_trad>[(#SET{defaut_tri,#ARRAY{
+	date,-1,
+	titre,1,
+	lang,1,
+	id_rubrique,1
+}})
+]<B_liste_rub>
+#ANCRE_PAGINATION
+<div class="liste-elements rubriques">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,<:tradsync:rubriques_mots_differents:>})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='langue'>[(#TRI{lang,<span title='<:tradsync:langue|attribut_html:>'><:tradsync:langue_court:></span>,ajax})]</th>
+			<th class='titre'>[(#TRI{titre,<:info_titre:>,ajax})]</th>
+			<th class='date'>[(#TRI{date,<:date:>,ajax})]</th>
+			<th class='id'>[(#TRI{id_rubrique,<:info_numero_abbreviation:>,ajax})]</th>
+			[(#GET{sync}|oui)
+			<th class='actions'><:tradsync:info_actions:></th>]
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_rub(RUBRIQUES){id_rubrique IN #GET{id_differents}}{where?}{statut?}{tri #ENV{order,date},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='langue'>[(#LANG)]</td>
+			<td class='titre'>[(#LOGO_RUBRIQUE|image_reduire{20,26})]<a href="[(#ID_RUBRIQUE|generer_url_entite{rubrique})]">#TITRE</a></td>
+			<td class='date'>[(#DATE|affdate_court)]</td>
+			<td class='id'>[(#AUTORISER{modifier,rubrique,#ID_RUBRIQUE}|?{
+				<a href="[(#URL_ECRIRE{rubriques_edit,id_rubrique=#ID_RUBRIQUE})]">#ID_RUBRIQUE</a>,
+				#ID_RUBRIQUE
+			})]</td>
+
+			<td class='actions'>
+			[(#AUTORISER{synchronisermots, rubrique, #ID_RUBRIQUE})
+				[(#BOUTON_ACTION{<:tradsync:synchroniser:>,
+					[(#URL_ACTION_AUTEUR{synchroniser_mots_traductions,rubriques/#ID_RUBRIQUE,#SELF})],ajax})]
+			]</td>
+		</tr>
+	</BOUCLE_liste_rub>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+[(#AUTORISER{synchronisermots, article})
+	[(#BOUTON_ACTION{<:tradsync:synchroniser_tout:>,
+		[(#URL_ACTION_AUTEUR{synchroniser_mots_traductions,[rubriques/(#GET**{id_differents}|implode{-})],#SELF})],ajax})]
+]
+</div>
+</B_liste_rub>[
+<div class="liste-elements rubriques"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_rub>

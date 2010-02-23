@@ -1,0 +1,47 @@
+
+[(#REM) Hierarchie : on affiche le fil d'ariane
+	Huhu, vivement un fil plus simple !!!
+
+	Exemple d'appel :
+	[(#SET_PUSH{ariane,#ARRAY{0,<:tradsync:espace_traducteurs:>,1,#URL_ECRIRE{traductions}}})]
+	[(#SET_PUSH{ariane,#ARRAY{0,<:tradsync:comparer_arborescence:>}})]
+	[(#INCLURE{fond=prive/exec/inc-hierarchie, ariane=#GET{ariane}})]
+	
+]
+<B_chemin>
+<div class='table_page'>
+[(#ENV{ecrire,1}|oui)
+<ul id='chemin'>
+	<li>
+		<span class='block'>
+			<a href="[(#URL_ECRIRE)]"><:espace_prive:></a>
+		</span>
+]
+<BOUCLE_chemin(POUR){tableau #ENV{ariane}}>
+		<ul[(#ENV{ecrire,1}|non|et{[(#COMPTEUR_BOUCLE|=={1})]}) id='chemin']>
+			<li>
+				<span class='block'>
+					[(#ENV{ecrire,1}|non|et{[(#COMPTEUR_BOUCLE|=={1}|non)]})<em> &gt; </em>]
+					[<a href="(#VALEUR|table_valeur{1})">][(#VALEUR|table_valeur{0}|sinon{#VALEUR})][</a>(#VALEUR|table_valeur{1}|oui)]
+				</span>
+</BOUCLE_chemin>
+<BOUCLE_fermerure_chemin(POUR){tableau #ENV{ariane}}>
+			</li>
+		</ul>
+</BOUCLE_fermerure_chemin>
+[(#ENV{ecrire,1}|oui)
+	</li>
+</ul>
+]
+</div>
+</B_chemin>
+
+
+[(#REM) on remet le chemin a son veritable emplacement. ]
+<script type='text/javascript'>
+jQuery(window).load(function(){
+	if (!jQuery('#page>.table_page>#chemin').size()) {
+		jQuery('#chemin').parent().prependTo('#page');
+	}
+});
+</script>

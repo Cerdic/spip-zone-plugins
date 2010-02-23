@@ -1,0 +1,72 @@
+#SET{id_differents,#ARRAY}
+<BOUCLE_art_trad(ARTICLES){traductions #ENV{langue,#LANG}}>
+	<BOUCLE_compte(mots_articles){id_article}> </BOUCLE_compte>#SET{cpt,#TOTAL_BOUCLE}</B_compte>#SET{cpt,0}<//B_compte>
+	<BOUCLE_art_origine(ARTICLES){id_article=#ID_TRAD}{compteur mots}>
+		<BOUCLE_meme_nombre(CONDITION){si #GET{cpt}|=={#COMPTEUR{mots}}}>
+		[(#REM) si meme nombre, on les verifie un par un ... ]
+			<BOUCLE_mots_art_trad(mots_articles){id_article=#_art_trad:ID_ARTICLE}>
+				<BOUCLE_verifier_mot(ARTICLES){id_article=#_art_trad:ID_TRAD}{id_mot}> </BOUCLE_verifier_mot>
+					[(#SET_PUSH{id_differents,#_art_trad:ID_ARTICLE})]
+				<//B_verifier_mot>
+			</BOUCLE_mots_art_trad>
+		</BOUCLE_meme_nombre>
+			[(#SET_PUSH{id_differents,#_art_trad:ID_ARTICLE})]
+		<//B_meme_nombre>
+	</BOUCLE_art_origine>
+	[(#GET{cpt}|oui)
+		[(#SET_PUSH{id_differents,#_art_trad:ID_ARTICLE})]
+	]
+	<//B_art_origine>
+</BOUCLE_art_trad>
+[(#SET{defaut_tri,#ARRAY{
+	date,-1,
+	titre,1,
+	lang,1,
+	id_article,1
+}})
+]<B_liste_art>
+#ANCRE_PAGINATION
+<div class="liste-elements articles">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,<:tradsync:articles_mots_differents:>})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='statut'>[(#TRI{statut,<:statut:>,ajax})]</th>
+			<th class='langue'>[(#TRI{lang,<span title='<:tradsync:langue|attribut_html:>'><:tradsync:langue_court:></span>, ajax})]</th>
+			<th class='titre'>[(#TRI{titre,<:info_titre:>,ajax})]</th>
+			<th class='auteur'><:auteur:></th>
+			<th class='date'>[(#TRI{date,<:date:>,ajax})]</th>
+			<th class='id'>[(#TRI{id_article,<:info_numero_abbreviation:>,ajax})]</th>
+			<th class='actions'><:tradsync:info_actions:></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_art(ARTICLES){id_article IN #GET{id_differents}}{id_rubrique?}{id_auteur?}{where?}{statut?}{tri #ENV{order,date},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='statut'>[(#ID_ARTICLE|puce_changement_statut{#STATUT,#ID_RUBRIQUE,article})]</td>
+			<td class='langue'>[(#LANG)]</td>
+			<td class='titre'>[(#LOGO_ARTICLE|image_reduire{20,26})]<a href="[(#ID_ARTICLE|generer_url_entite{article})]">#TITRE</a></td>
+			<td class='auteur'><BOUCLE_auteurs(AUTEURS){id_article}{', '}><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#NOM</a></BOUCLE_auteurs></td>
+			<td class='date'>[(#DATE|affdate_court)]</td>
+			<td class='id'>[(#AUTORISER{modifier,article,#ID_ARTICLE}|?{
+				<a href="[(#URL_ECRIRE{article_edit,id_article=#ID_ARTICLE})]">#ID_ARTICLE</a>,
+				#ID_ARTICLE
+			})]</td>
+			<td class='actions'>
+			[(#AUTORISER{synchronisermots, article, #ID_ARTICLE})
+				[(#BOUTON_ACTION{<:tradsync:synchroniser:>,
+					[(#URL_ACTION_AUTEUR{synchroniser_mots_traductions,articles/#ID_ARTICLE,#SELF})],ajax})]
+			]</td>
+		</tr>
+	</BOUCLE_liste_art>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+[(#AUTORISER{synchronisermots, article})
+	[(#BOUTON_ACTION{<:tradsync:synchroniser_tout:>,
+		[(#URL_ACTION_AUTEUR{synchroniser_mots_traductions,[articles/(#GET**{id_differents}|implode{-})],#SELF})],ajax})]
+]
+</div>
+</B_liste_art>[
+<div class="liste-elements articles"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_art>

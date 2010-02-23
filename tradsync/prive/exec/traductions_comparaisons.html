@@ -1,0 +1,37 @@
+
+<h1><:tradsync:comparer_arborescence:></h1>
+
+[(#SET_PUSH{ariane,[(#ARRAY{0,<:tradsync:espace_traducteurs:>,1,[(#URL_ECRIRE{traductions}|parametre_url{langue,#ENV{langue}})]})]})]
+[(#SET_PUSH{ariane,#ARRAY{0,<:tradsync:comparer_arborescence:>}})]
+[(#INCLURE{fond=prive/exec/inc-ariane, ariane=#GET{ariane}, ecrire=0})]
+
+[(#SET{langue,[(#ENV{langue,#LANG}|traduire_nom_langue)]})]
+
+
+
+<style type='text/css'>
+#navigation {display:none;}
+#contenu {display:block; clear:both; float:none; width:auto; margin-left:0;}
+.comparateur {overflow:auto;}
+.comparateur .item_picker .frame {width:240px; height:240px;}
+.comparateur .item_picker .frame.total_3.frame_0 {margin-left:0px;} /* bug */
+.comparateur .item_picker .frame.total_3 {margin-left:-100px;}
+.comparateur h2 {clear:both;}
+</style>
+
+<div class='cadre cadre_padding comparateur'>
+	<h2><:tradsync:navigateurs:></h2>
+
+	<div class='item_picker'>
+	[(#INCLURE{fond=formulaires/selecteur/navigateur, ajax, env, articles=1, picker_article=0})]
+	</div>
+
+
+
+	<div class='item_picker'>
+	[(#INCLURE{fond=formulaires/selecteur/navigateur, ajax, env, articles=1, picker_article=0})]
+	</div>
+
+</div>
+
+

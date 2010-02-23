@@ -1,0 +1,66 @@
+
+<h1><:tradsync:espace_traducteurs:></h1>
+
+[(#SET_PUSH{ariane,#ARRAY{0,<:tradsync:espace_traducteurs:>}})]
+[(#INCLURE{fond=prive/exec/inc-ariane, ariane=#GET{ariane}, ecrire=0})]
+
+
+
+[(#SET{langue,[(#ENV{langue,#LANG}|traduire_nom_langue)]})]
+
+<!--#navigation-->
+
+<div class="cadre cadre-info">
+<p><:tradsync:explication_espace_traducteurs:></p>
+</div>
+
+<!--/#navigation-->
+
+
+<div class='cadre cadre_padding' id="traductions_sommaire">
+<h2><:tradsync:liste_des_lieux:></h2>
+<ul>
+	<li>
+		<h3>
+			<a href="[(#URL_ECRIRE{traductions_a_realiser}|parametre_url{langue,#ENV{langue}})]">
+			<:tradsync:traductions_a_realiser:>
+			</a>
+		</h3>
+		<p><:tradsync:explication_traductions_a_realiser:></p>
+	</li>
+
+	<li>
+		<h3>
+			<a href="[(#URL_ECRIRE{traductions_a_verifier}|parametre_url{langue,#ENV{langue}})]">
+			<:tradsync:traductions_a_verifier:>
+			</a>
+		</h3>
+		<p><:tradsync:explication_traductions_a_verifier:></p>
+	</li>
+
+
+	<li>
+		<h3>
+			<a href="[(#URL_ECRIRE{traductions_mots_differents}|parametre_url{langue,#ENV{langue}})]">
+			<:tradsync:traductions_mots_differents:>
+			</a>
+		</h3>
+		<p><:tradsync:explication_traductions_mots_differents:></p>
+	</li>
+
+		
+	<li>
+		<h3>
+			<a href="[(#URL_ECRIRE{traductions_comparaisons}|parametre_url{langue,#ENV{langue}})]">
+			<:tradsync:comparer_arborescence:>
+			</a>
+		</h3>
+		<p><:tradsync:explication_comparer_arborescence:></p>
+	</li>
+	
+</ul>
+</div>
+<style type='text/css'>
+#traductions_sommaire ul li h3+p {margin-top:0;}
+#traductions_sommaire ul li h3 {margin-top:.5em; margin-bottom:0;}
+</style>

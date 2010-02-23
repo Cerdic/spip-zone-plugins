@@ -1,0 +1,26 @@
+<!-- autoriser=webmestre -->
+<!-- refus=<:cfg:refus_configuration_webmestre:> -->
+<!-- nom=tradsync -->
+
+<div class="formulaire_spip formulaire_config formulaire_#FORM">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+		<div>
+			#ACTION_FORMULAIRE{#ENV{action}}
+			<ul>
+
+				[(#SAISIE{groupe_mots, groupe_mots_multi,
+						label=<:tradsync:label_groupe_mots_multi:>,
+						explication=<:tradsync:explication_groupe_mots_multi:>,
+						multiple=oui,
+				})]
+
+			</ul>
+			<p class="boutons">
+				<input type="submit" name="_cfg_ok" value="<:bouton_enregistrer:>" class="submit" />
+			</p>
+		</div>
+	</form>
+<div>

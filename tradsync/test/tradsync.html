@@ -1,0 +1,267 @@
+<style type='text/css'>
+.test {font-size:80%; padding:1em; margin:1em; border:1px solid #888; background:#fafafa; width:40%; float:left;}
+.test h3 {padding:0; margin:0;}
+.test.articles {clear:both;}
+.test.rubriques {}
+</style>
+<h1>Trad Sync Tests de critères</h1>
+
+<div><a href="[(#SELF|parametre_url{var_mode,debug})]">-- Mode Debug --</a></div>
+
+
+
+<div class='test articles'>
+<h3>Articles</h3>
+<B_articles_tous>
+<strong>#GRAND_TOTAL éléments</strong>
+<ul>
+<BOUCLE_articles_tous(ARTICLES){pagination 5}>
+<li>#LANG - #ID_ARTICLE - #ID_TRAD - #TITRE</li>
+</BOUCLE_articles_tous>
+</ul>
+#PAGINATION
+</B_articles_tous>
+</div>
+
+<div class='test rubriques'>
+<h3>Rubriques</h3>
+<B_rubrique_tous>
+<strong>#GRAND_TOTAL éléments</strong>
+<ul>
+<BOUCLE_rubrique_tous(RUBRIQUES){pagination 5}>
+<li>#LANG - #ID_RUBRIQUE - #ID_TRAD - #TITRE</li>
+</BOUCLE_rubrique_tous>
+</ul>
+#PAGINATION
+</B_rubrique_tous>
+</div>
+
+
+[(#REM) -------------------------------------------------------------- ]
+
+
+
+
+
+<div class='test articles'>
+<h3>Articles {lang=fr}</h3>
+<B_articles_lang_fr>
+<strong>#GRAND_TOTAL éléments</strong>
+<ul>
+<BOUCLE_articles_lang_fr(ARTICLES){lang=fr}{pagination 5}>
+<li>#LANG - #ID_ARTICLE - #ID_TRAD - #TITRE</li>
+</BOUCLE_articles_lang_fr>
+</ul>
+#PAGINATION
+</B_articles_lang_fr>
+</div>
+
+<div class='test rubriques'>
+<h3>Rubriques {lang=fr}</h3>
+<B_rubrique_lang_fr>
+<strong>#GRAND_TOTAL éléments</strong>
+<ul>
+<BOUCLE_rubrique_lang_fr(RUBRIQUES){lang=fr}{pagination 5}>
+<li>#LANG - #ID_RUBRIQUE - #ID_TRAD - #TITRE</li>
+</BOUCLE_rubrique_lang_fr>
+</ul>
+#PAGINATION
+</B_rubrique_lang_fr>
+</div>
+
+
+[(#REM) -------------------------------------------------------------- ]
+
+
+<div class='test articles'>
+<h3>Articles {origine_traduction}</h3>
+<B_articles_origine>
+<strong>#GRAND_TOTAL éléments</strong>
+<ul>
+<BOUCLE_articles_origine(ARTICLES){origine_traduction}{pagination 5}>
+<li>#LANG - #ID_ARTICLE - #ID_TRAD - #TITRE</li>
+</BOUCLE_articles_origine>
+</ul>
+#PAGINATION
+</B_articles_origine>
+</div>
+
+<div class='test rubriques'>
+<h3>Rubriques {origine_traduction}</h3>
+<B_rubrique_origine>
+<strong>#GRAND_TOTAL éléments</strong>
+<ul>
+<BOUCLE_rubrique_origine(RUBRIQUES){origine_traduction}{pagination 5}>
+<li>#LANG - #ID_RUBRIQUE - #ID_TRAD - #TITRE</li>
+</BOUCLE_rubrique_origine>
+</ul>
+#PAGINATION
+</B_rubrique_origine>
+</div>
+
+
+
+
+[(#REM) -------------------------------------------------------------- ]
+
+
+<div class='test articles'>
+<h3>Articles {!origine_traduction}</h3>
+<B_articles_origine_not>
+<strong>#GRAND_TOTAL éléments</strong>
+<ul>
+<BOUCLE_articles_origine_not(ARTICLES){!origine_traduction}{pagination 5}>
+<li>#LANG - #ID_ARTICLE - #ID_TRAD - #TITRE</li>
+</BOUCLE_articles_origine_not>
+</ul>
+#PAGINATION
+</B_articles_origine_not>
+</div>
+
+<div class='test rubriques'>
+<h3>Rubriques {!origine_traduction}</h3>
+<B_rubrique_origine_not>
+<strong>#GRAND_TOTAL éléments</strong>
+<ul>
+<BOUCLE_rubrique_origine_not(RUBRIQUES){!origine_traduction}{pagination 5}>
+<li>#LANG - #ID_RUBRIQUE - #ID_TRAD - #TITRE</li>
+</BOUCLE_rubrique_origine_not>
+</ul>
+#PAGINATION
+</B_rubrique_origine_not>
+</div>
+
+
+
+
+
+
+[(#REM) -------------------------------------------------------------- ]
+
+<div class='test articles'>
+<h3>Articles {traductions en}</h3>
+<B_articles_traductions_en>
+<strong>#GRAND_TOTAL éléments</strong>
+<ul>
+<BOUCLE_articles_traductions_en(ARTICLES){traductions en}{pagination 5}>
+<li>#LANG - #ID_ARTICLE - #ID_TRAD - #TITRE</li>
+</BOUCLE_articles_traductions_en>
+</ul>
+#PAGINATION
+</B_articles_traductions_en>
+</div>
+
+
+<div class='test rubriques'>
+<h3>Rubriques {traductions en}</h3>
+<B_rubrique_traductions_en>
+<strong>#GRAND_TOTAL éléments</strong>
+<ul>
+<BOUCLE_rubrique_traductions_en(RUBRIQUES){traductions en}{pagination 5}>
+<li>#LANG - #ID_RUBRIQUE - #ID_TRAD - #TITRE</li>
+</BOUCLE_rubrique_traductions_en>
+</ul>
+#PAGINATION
+</B_rubrique_traductions_en>
+</div>
+
+
+
+
+[(#REM) -------------------------------------------------------------- ]
+
+<div class='test articles'>
+<h3>Articles {!traductions en}</h3>
+<B_articles_traductions_en_not>
+<strong>#GRAND_TOTAL éléments</strong>
+<ul>
+<BOUCLE_articles_traductions_en_not(ARTICLES){!traductions en}{pagination 5}>
+<li>#LANG - #ID_ARTICLE - #ID_TRAD - #TITRE</li>
+</BOUCLE_articles_traductions_en_not>
+</ul>
+#PAGINATION
+</B_articles_traductions_en_not>
+</div>
+
+
+<div class='test rubriques'>
+<h3>Rubriques {!traductions en}</h3>
+<B_rubrique_traductions_en_not>
+<strong>#GRAND_TOTAL éléments</strong>
+<ul>
+<BOUCLE_rubrique_traductions_en_not(RUBRIQUES){!traductions en}{pagination 5}>
+<li>#LANG - #ID_RUBRIQUE - #ID_TRAD - #TITRE</li>
+</BOUCLE_rubrique_traductions_en_not>
+</ul>
+#PAGINATION
+</B_rubrique_traductions_en_not>
+</div>
+
+
+
+
+
+[(#REM) -------------------------------------------------------------- ]
+
+<div class='test articles'>
+<h3>Articles {origine_modifiee}</h3>
+<B_articles_origine_modifiee>
+<strong>#GRAND_TOTAL éléments</strong>
+<ul>
+<BOUCLE_articles_origine_modifiee(ARTICLES){origine_modifiee}{pagination 5}>
+<li>#LANG - #ID_ARTICLE - #ID_TRAD - #TITRE</li>
+</BOUCLE_articles_origine_modifiee>
+</ul>
+#PAGINATION
+</B_articles_origine_modifiee>
+</div>
+
+
+<div class='test rubriques'>
+<h3>Rubriques {origine_modifiee}</h3>
+<B_rubrique_origine_modifiee>
+<strong>#GRAND_TOTAL éléments</strong>
+<ul>
+<BOUCLE_rubrique_origine_modifiee(RUBRIQUES){origine_modifiee}{pagination 5}>
+<li>#LANG - #ID_RUBRIQUE - #ID_TRAD - #TITRE</li>
+</BOUCLE_rubrique_origine_modifiee>
+</ul>
+#PAGINATION
+</B_rubrique_origine_modifiee>
+</div>
+
+
+
+
+
+
+[(#REM) -------------------------------------------------------------- ]
+
+
+<div class='test articles'>
+<h3>Articles {origine_modifiee}{lang=en}</h3>
+<B_articles_origine_modifiee_lang>
+<strong>#GRAND_TOTAL éléments</strong>
+<ul>
+<BOUCLE_articles_origine_modifiee_lang(ARTICLES){origine_modifiee}{lang=en}{pagination 5}>
+<li>#LANG - #ID_ARTICLE - #ID_TRAD - #TITRE</li>
+</BOUCLE_articles_origine_modifiee_lang>
+</ul>
+#PAGINATION
+</B_articles_origine_modifiee_lang>
+</div>
+
+
+<div class='test rubriques'>
+<h3>Rubriques {origine_modifiee}{lang=en}</h3>
+<B_rubrique_origine_modifiee_lang>
+<strong>#GRAND_TOTAL éléments</strong>
+<ul>
+<BOUCLE_rubrique_origine_modifiee_lang(RUBRIQUES){origine_modifiee}{lang=en}{pagination 5}>
+<li>#LANG - #ID_RUBRIQUE - #ID_TRAD - #TITRE</li>
+</BOUCLE_rubrique_origine_modifiee_lang>
+</ul>
+#PAGINATION
+</B_rubrique_origine_modifiee_lang>
+</div>
+

@@ -1,0 +1,33 @@
+
+<h1><:tradsync:espace_traducteurs:></h1>
+
+[(#SET_PUSH{ariane,[(#ARRAY{0,<:tradsync:espace_traducteurs:>,1,[(#URL_ECRIRE{traductions}|parametre_url{langue,#ENV{langue}})]})]})]
+[(#SET_PUSH{ariane,#ARRAY{0,<:tradsync:traductions_a_realiser:>}})]
+[(#INCLURE{fond=prive/exec/inc-ariane, ariane=#GET{ariane}, ecrire=0})]
+
+
+
+[(#SET{langue,[(#ENV{langue,#LANG}|traduire_nom_langue)]})]
+
+<!--#navigation-->
+
+<div class="cadre cadre-info">
+<p><:tradsync:explication_traductions_a_realiser:></p>
+</div>
+
+#FORMULAIRE_SELECTION_LANGUE_CIBLE
+<!--/#navigation-->
+
+
+<div class='cadre cadre_padding'>
+<h2><:tradsync:non_traduit:></h2>
+
+
+[(#INCLURE{fond=prive/liste/articles_non_traduits, langue=#ENV{langue}, ajax})]
+[(#INCLURE{fond=prive/liste/rubriques_non_traduites, langue=#ENV{langue}, ajax})]
+
+[(#CONFIG{tradsync}|table_valeur{groupe_mots_multi}|oui)
+	[(#INCLURE{fond=prive/liste/mots_non_traduits, langue=#ENV{langue}, ajax,
+		id_groupe=[(#CONFIG{tradsync}|table_valeur{groupe_mots_multi})]})]
+]
+</div>

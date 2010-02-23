@@ -1,0 +1,38 @@
+[(#SET{defaut_tri,#ARRAY{
+	maj,-1,
+	titre,1,
+	type,1,
+	id_mot,1
+}})
+]<B_liste_mot>
+#ANCRE_PAGINATION
+<div class="liste-elements mots">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,<:tradsync:mots_cles_non_traduits:>})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='titre'>[(#TRI{titre,<:info_titre:>,ajax})]</th>
+			<th class='type'>[(#TRI{type,<:tradsync:info_type:>,ajax})]</th>
+			<th class='date'>[(#TRI{maj,<:date:>,ajax})]</th>
+			<th class='id'>[(#TRI{id_mot,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_mot(MOTS){!polyglotte titre,#ENV{langue,#LANG}}{id_rubrique?}{id_article?}{id_groupe ?IN #ENV{id_groupe}}{where?}{tri #ENV{order,maj},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='titre'>[(#LOGO_MOT|image_reduire{20,26})]<a href="[(#ID_MOT|generer_url_entite{mot})]">#TITRE</a></td>
+			<td class='type'><a href="[(#ID_GROUPE|generer_url_entite{groupe_mot})]">#TYPE</a></td>
+			<td class='date'>[(#MAJ|affdate_court)]</td>
+			<td class='id'>[(#AUTORISER{modifier,mot,#ID_MOT}|?{
+				<a href="[(#URL_ECRIRE{mots_edit,id_mot=#ID_MOT}|parametre_url{edit,oui})]">#ID_MOT</a>,
+				#ID_MOT
+			})]</td>
+		</tr>
+	</BOUCLE_liste_mot>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_mot>[
+<div class="liste-elements mots"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_mot>

@@ -1,0 +1,100 @@
+<style type='text/css'>
+.test {font-size:80%; padding:1em; margin:1em; border:1px solid #888; background:#fafafa; width:40%; float:left;}
+.test h3 {padding:0; margin:0;}
+.test.mots_un {clear:both;}
+.test.articles {clear:both;}
+.test.rubriques {}
+</style>
+<h1>Trad Sync Tests de critères mots</h1>
+
+<div><a href="[(#SELF|parametre_url{var_mode,debug})]">-- Mode Debug --</a></div>
+
+
+
+<div class='test mots mots_un'>
+<h3>Mots</h3>
+<B_mots>
+<strong>#GRAND_TOTAL éléments</strong>
+<ul>
+<BOUCLE_mots(MOTS){pagination 5}>
+<li>#ID_MOT - #TITRE - #TITRE**</li>
+</BOUCLE_mots>
+</ul>
+#PAGINATION
+</B_mots>
+</div>
+
+<div class='test mots mots_un'>
+<h3>Mots {polyglotte titre}</h3>
+<B_mots_multi_titre>
+<strong>#GRAND_TOTAL éléments</strong>
+<ul>
+<BOUCLE_mots_multi_titre(MOTS){polyglotte titre}{pagination 5}>
+<li>#ID_MOT - #TITRE - #TITRE**</li>
+</BOUCLE_mots_multi_titre>
+</ul>
+#PAGINATION
+</B_mots_multi_titre>
+</div>
+
+<div class='test mots'>
+<h3>Mots {polyglotte titre,en}</h3>
+<B_mots_multi_titre_en>
+<strong>#GRAND_TOTAL éléments</strong>
+<ul>
+<BOUCLE_mots_multi_titre_en(MOTS){polyglotte titre,en}{pagination 5}>
+<li>#ID_MOT - #TITRE - #TITRE**</li>
+</BOUCLE_mots_multi_titre_en>
+</ul>
+#PAGINATION
+</B_mots_multi_titre_en>
+</div>
+
+
+
+
+<div class='test mots mots_un'>
+<h3>Mots {!polyglotte titre}</h3>
+<B_mots_multi_titre_not>
+<strong>#GRAND_TOTAL éléments</strong>
+<ul>
+<BOUCLE_mots_multi_titre_not(MOTS){!polyglotte titre}{pagination 5}>
+<li>#ID_MOT - #TITRE - #TITRE**</li>
+</BOUCLE_mots_multi_titre_not>
+</ul>
+#PAGINATION
+</B_mots_multi_titre_not>
+</div>
+
+<div class='test mots'>
+<h3>Mots {!polyglotte titre,en}</h3>
+<B_mots_multi_titre_en_not>
+<strong>#GRAND_TOTAL éléments</strong>
+<ul>
+<BOUCLE_mots_multi_titre_en_not(MOTS){!polyglotte titre,en}{pagination 5}>
+<li>#ID_MOT - #TITRE - #TITRE**</li>
+</BOUCLE_mots_multi_titre_en_not>
+</ul>
+#PAGINATION
+</B_mots_multi_titre_en_not>
+</div>
+
+
+#SET{id_differents,#ARRAY}
+<BOUCLE_art_trad(ARTICLES){traductions en}{compteur mots}>
+	#SET{cpt,#COMPTEUR{mots}}<br />
+	<BOUCLE_art_origine(ARTICLES){id_article=#ID_TRAD}{compteur mots}>
+		<BOUCLE_meme_nombre(CONDITION){si #GET{cpt}|=={#COMPTEUR{mots}}}>
+		[(#REM) si meme nombre, on les verifie un par un ... ]
+			<BOUCLE_mots_art_trad(mots_articles){id_article=#_art_trad:ID_ARTICLE}>
+				<BOUCLE_verifier_mot(ARTICLES){id_article=#_art_trad:ID_TRAD}{id_mot}> </BOUCLE_verifier_mot>
+					[(#SET_PUSH{id_differents,#_art_trad:ID_ARTICLE})]
+				<//B_verifier_mot>
+			</BOUCLE_mots_art_trad>
+		</BOUCLE_meme_nombre>
+		[(#SET_PUSH{id_differents,#_art_trad:ID_ARTICLE})]
+		<//B_meme_nombre>
+	</BOUCLE_art_origine>
+</BOUCLE_art_trad>
+
+
