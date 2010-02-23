@@ -1,6 +1,7 @@
 <plugin>
-	<nom>Document Cloud</nom>
+	<nom>Stockage S3</nom>
 	<auteur>Natxo</auteur>
+	<icon>stockageS3.png</icon>
 	<version>0.1.0</version>
 	<etat>test</etat>
 	<description>Stockage des documents sur S3</description>
