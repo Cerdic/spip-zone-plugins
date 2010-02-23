@@ -1,16 +1,19 @@
 <plugin>
-	<nom>Grappes</nom>
+	<nom><multi>[fr]Grappes [es]Racimos</multi></nom>
 	<auteur>Matthieu Marcillaud</auteur>
 	<version>0.2.4</version>
 	<version_base>0.1</version_base>
 	<etat>test</etat>
 	<prefix>grappes</prefix>
 	<icon>images/grappe-24.gif</icon>
-	<description>
-	Permet de regrouper des &eacute;l&eacute;ments de SPIP
+	<description><multi>
+	[fr]Permet de regrouper des &eacute;l&eacute;ments de SPIP
 	comme des auteurs, rubriques, articles (lorsque l'interface existe pour)...
 	dans un m&ecirc;me univers (une grappe)
-	</description>
+	[es]Permite agrupar elementos de SPIP
+        como autores/as, secciones, art&iacute;culos (cuando hay una interfaz que lo permite)...
+        en un mismo universo (un racimo)
+	</multi></description>
 	<options>grappes_options.php</options>
 	<fonctions>grappes_autorisations.php</fonctions>
 	<install>base/grappes_install.php</install>
