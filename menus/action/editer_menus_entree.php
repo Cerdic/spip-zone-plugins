@@ -74,8 +74,9 @@ function menus_entree_set($id_menus_entree, $set=null) {
 		'type_entree',
 		'parametres'
 	) as $champ)
-		$c[$champ] = _request($champ,$set);
+		$c[$champ] = _request($champ, $set);
 
+	$c['parametres'] = is_array($c['parametres']) ? $c['parametres'] : array();
 	$c['parametres'] = serialize($c['parametres']);
 
 	include_spip('inc/menus');
