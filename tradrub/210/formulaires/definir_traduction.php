@@ -24,7 +24,7 @@ function formulaires_definir_traduction_charger_dist($objet, $id_objet=0) {
 	);
 	
 	if ($id_trad and ($id_trad != $id_objet)) {
-		$env['id_trad_selecteur'] = "$objet|$id_trad";
+		$env['ids_trad_selecteur'] = "$objet|$id_trad";
 	}
 	
 	return $env;
@@ -43,14 +43,7 @@ function formulaires_definir_traduction_traiter_dist($objet, $id_objet=0) {
 	$table = table_objet_sql($objet);
 	$_id_objet = id_table_objet($objet);
 	include_spip('spip_bonux_fonctions');
-	$id_trad = array_shift(picker_selected(_request('id_trad_selecteur'), $objet));
-	if (!$id_trad = intval($id_trad)) {
-		spip_log("Incomprehensible : definir_traduction_traiter n'a pas de id_trad : $id_trad !");
-		return array(
-			'message_erreur'=>"Identifiant selectionne non transmis dans le traitement !!",
-			'editable'=>true
-		);
-	}
+	$id_trad = array_shift(picker_selected(_request('ids_trad_selecteur'), $objet));
 	include_spip('inc/modifier');
 	modifier_contenu($objet, $id_objet, array('invalideur' => "id='$objet/$id_objet'"), array(
 		'id_trad' => $id_trad
