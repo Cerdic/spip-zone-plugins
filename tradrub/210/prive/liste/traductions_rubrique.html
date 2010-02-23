@@ -1,7 +1,6 @@
 [(#SET{defaut_tri,#ARRAY{
 	lang,1,
 	titre,1,
-	date,-1,
 	id_rubrique,1
 }})
 ]
@@ -14,31 +13,27 @@
 	<thead>
 		<tr class='first_row'>
 			<th class='titre'>[(#TRI{titre,<:info_titre:>,ajax})]</th>
-			<th class='date'>[(#TRI{date,<:date:>,ajax})]</th>
 			<th class='lang'>[(#TRI{lang,<:tradrub:langue:>,ajax})]</th>
-			<th class='id'>[(#TRI{id_rubrique,<:info_numero_abbreviation:>,ajax})]</th>
 		</tr>
 	</thead>
 	<tbody>
 	<BOUCLE_liste_trad_rub(RUBRIQUES){tout}{traduction}{statut?}{tri #ENV{order,lang},#GET{defaut_tri}}{pagination #ENV{nb,10}}>[(#TOTAL_BOUCLE|>{1}|oui)
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class='titre'>
+				[(#ID_TRAD|=={#ID_RUBRIQUE}|ou{[(#ID_TRAD|non)]}|?{
+					[<img src="(#CHEMIN{images/langues-12.gif})" alt="" />],
+					[<img src="(#CHEMIN{images/langues-off-12.gif})" alt="" />]
+				})]
 				[(#LOGO_RUBRIQUE||image_reduire{20,26})]
 				[(#EXPOSE|?{
 					#TITRE,
 					<a href="[(#ID_RUBRIQUE|generer_url_entite{rubrique})]" hreflang="#LANG">#TITRE</a>
 				})]
+				[(#ID_TRAD|=={#ID_RUBRIQUE}|ou{[(#ID_TRAD|non)]}|oui)
+					(<:tradrub:rubrique_de_reference:>)
+				]
 			</td>
-			<td class='date'>[(#DATE|affdate_court)]</td>
-			<td class='lang'>
-				[(#ID_TRAD|=={#ID_RUBRIQUE}|ou{[(#ID_TRAD|non)]}|?{
-					[<strong>(#LANG|traduire_nom_langue)</strong>],
-					[(#LANG|traduire_nom_langue)],
-				})]
-			<td class='id'>[(#AUTORISER{modifier,rubrique,#ID_RUBRIQUE}|?{
-				<a href="[(#URL_ECRIRE{rubriques_edit,id_rubrique=#ID_RUBRIQUE})]">#ID_RUBRIQUE</a>,
-				#ID_RUBRIQUE
-			})]</td>
+			<td class='lang'>[(#LANG|traduire_nom_langue)]
 		</tr>
 	]</BOUCLE_liste_trad_rub>
 	</tbody>

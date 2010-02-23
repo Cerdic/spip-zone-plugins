@@ -10,6 +10,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_id_trad_rubrique' => "Modifier ou d&eacute;finir l'origine de cette traduction",
 	'enregistrement_de_la_traduction_ok' => "La traduction est prise en compte.",
 	'trad_rubrique_traduction' => "Toutes les versions de cette rubrique&nbsp;:",
+	
+	'rubrique_de_reference' => "rubrique de r&eacute;f&eacute;rence",
 );
 
 ?>
