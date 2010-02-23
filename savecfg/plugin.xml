@@ -6,6 +6,7 @@
 	<etat>stable</etat>
 	<description>SaveCFG vous permet de sauvegarder des configurations de CFG puis de les restaurer à votre guise.</description>
 	<prefix>savecfg</prefix>
+	<icon>images/savecfg-32.png</icon>
 	<install>base/savecfg.php</install>
 	<fonctions>savecfg_fonctions.php</fonctions>
 	<pipeline>
