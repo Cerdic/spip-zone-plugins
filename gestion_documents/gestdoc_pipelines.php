@@ -56,3 +56,11 @@ function gestdoc_affiche_gauche($flux){
 function gestdoc_objets_extensibles($objets){
 	return array_merge($objets, array('document' => _T('gestdoc:objet_documents')));
 }
+
+function gestdoc_document_desc_actions($flux){
+	return $flux;
+}
+
+function gestdoc_editer_document_actions($flux){
+	return $flux;
+}

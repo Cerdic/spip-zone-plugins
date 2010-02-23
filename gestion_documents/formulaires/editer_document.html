@@ -29,6 +29,7 @@
 				(#ENV{fichier})
 				<p class='actions'>
 				[(#ENV{distant}|=={oui}|oui)  <input type='submit' class='submit' name='copier_local' value='<:gestdoc:bouton_copier_local|attribut_html:>' />]
+				[(#PIPELINE{editer_document_actions,#ARRAY{args,#ARRAY{id_document,#ENV{id_document,nouveau}},data,''}})]
 				&#91;<a href='#' onclick='jQuery("#changer_fichier_document").toggle("fast");return false;'><:bouton_changer:></a>&#93;
 				</p>
 				<div id='changer_fichier_document' style='display:none;'>
