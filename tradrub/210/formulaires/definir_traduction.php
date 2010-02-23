@@ -7,7 +7,7 @@
 
 function formulaires_definir_traduction_charger_dist($objet, $id_objet=0) {
 	// pas d'element, pas de traduction
-	if (!$objet or !$id_objet = intval($id_objet)) {
+	if (!$objet or !($id_objet = intval($id_objet))) {
 		return false;
 	}
 
@@ -33,7 +33,13 @@ function formulaires_definir_traduction_charger_dist($objet, $id_objet=0) {
 
 function formulaires_definir_traduction_traiter_dist($objet, $id_objet=0) {
 
-	$id_objet = intval($id_objet);
+	if (!$id_objet = intval($id_objet)) {
+		spip_log("Incomprehensible : definir_traduction_traiter n'a pas de id_objet : $id_objet !");
+		return array(
+			'message_erreur'=>"Identifiant non transmis dans le traitement !!",
+			'editable'=>true
+		);
+	}
 	$table = table_objet_sql($objet);
 	$_id_objet = id_table_objet($objet);
 	include_spip('spip_bonux_fonctions');
