@@ -1,0 +1,18 @@
+<plugin>
+	<nom>Liste d'articles complètes</nom>
+	<auteur>ARNO*</auteur>
+	<licence>GPL v3</licence>
+	<description>
+		Dans l'espace priv&eacute;, les listes d'articles affich&eacute;es sont compl&eacute;t&eacute;es: surtitre et titre, nombre de visites et popularit&eacute;, logos plus gros.
+	</description>
+	<lien></lien> <!-- URI de documentation -->
+
+	<version>0.1</version>
+	<etat>stable</etat>
+
+	<prefix>liste_articles_completes</prefix>
+
+	<options>listes_articles_completes.php</options>
+
+	<necessite id="SPIP" version="[2.0.0;]" />
+</plugin>
