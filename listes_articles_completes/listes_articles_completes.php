@@ -36,6 +36,7 @@ function inc_formater_article($row, $own='')
 	global $spip_lang_right, $spip_display;
 	static $pret = false;
 	static $chercher_logo, $img_admin, $formater_auteur, $nb, $langue_defaut, $afficher_langue, $puce_statut;
+	global $connect_statut, $connect_id_auteur;
 
 	$id_article = $row['id_article'];
 
@@ -112,7 +113,7 @@ function inc_formater_article($row, $own='')
 	$date = affdate_jourcourt($date);
 	if (!$date) $date = '&nbsp;';
 	
-	if ($visites > 0) $date = "$date "._T("info_popularite", array('popularite'=>$popularite, 'visites'=>$visites));
+	if ($visites > 0 && $connect_statut == "0minirezo") $date = "$date "._T("info_popularite", array('popularite'=>$popularite, 'visites'=>$visites));
 
 	$num = afficher_numero_edit($id_article, 'id_article', 'article');
 
