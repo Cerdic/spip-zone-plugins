@@ -172,12 +172,12 @@ function formidable_generer_saisie_configurable($saisie, $env){
 		
 		$saisie = saisies_inserer_html(
 			$saisie,
-			'<ul class="formulaire_configurer">'
+			'<div class="formulaire_configurer"><ul>'
 			.recuperer_fond(
 				'inclure/generer_saisies',
 				$env2
 			)
-			.'</ul>',
+			.'</ul></div>',
 			'fin'
 		);
 	}

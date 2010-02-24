@@ -77,7 +77,47 @@
 						$(this).find('> .actions').addClass('hidden');
 					}
 				);
+			
+			// On lance la création des onglets
+			formulaire_configurer_onglets();
 		});
+		
+		function formulaire_configurer_onglets(){
+			var formulaire_configurer = $('.formulaire_configurer');
+			var onglets = $('<ul class="formulaire_configurer-onglets"></ul>');
+			var contenus = formulaire_configurer.find('> ul > li.fieldset');
+			
+			// On ajoute le conteneur des onglets
+			formulaire_configurer
+				.prepend(onglets);
+			
+			// On parcourt les contenus pour générer les onglets
+			contenus
+				.each(function(i){
+					// On ajoute un identifiant
+					$(this).attr('id', 'formulaire_configurer-contenu-'+i);
+					// On récupère le titre
+					var titre = $(this).find('h3').text();
+					// On crée un onglet
+					var onglet = $('<li><a href="#formulaire_configurer-contenu-'+i+'">'+titre+'</a></li>');
+					onglet
+						.find('a').click(function(){
+							contenus.hide();
+							$($(this).attr('href')).show();
+							return false;
+						});
+					// On fait des trucs au clic
+					
+					// On ajoute l'onglet
+					onglets
+						.append(onglet);
+					// On ajoute affiche le bon contenu au clic
+					
+				})
+				.hide()
+				.eq(0)
+					.show();
+		}
 	</script>
 	</BOUCLE_editable>
 </div>

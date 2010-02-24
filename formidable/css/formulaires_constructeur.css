@@ -20,7 +20,11 @@
 .formulaire_construire_formulaire li.obligatoire{
 	background:transparent;
 }
-.formulaire_construire_formulaire ul.formulaire_configurer li{
+.formulaire_construire_formulaire .formulaire_configurer{
+	margin:1em -1em;
+	border-top:1px dashed #999;
+}
+.formulaire_construire_formulaire .formulaire_configurer li, .formulaire_construire_formulaire li.choix{
 	border:0;
 	margin:0;
 }
