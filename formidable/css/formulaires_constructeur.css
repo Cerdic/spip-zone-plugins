@@ -28,6 +28,16 @@
 	border:0;
 	margin:0;
 }
+.formulaire_construire_formulaire .formulaire_configurer .formulaire_configurer-onglets li{
+	float:left;
+	width:auto;
+	clear:none;
+	padding:0;
+}
+.formulaire_construire_formulaire .formulaire_configurer .formulaire_configurer-onglets li a{
+	display:block;
+	padding:1em;
+}
 
 .formulaire_construire_formulaire .actions{
 	float:right;
