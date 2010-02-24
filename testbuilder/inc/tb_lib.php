@@ -165,6 +165,13 @@ function tb_url_test($testfun, $lien=false){
 	return "<a href='$url'>".basename($testfun)."</a>";
 }
 
+/**
+ * Extraire une fonction php d'un script
+ *
+ * @param string $filename
+ * @param strinf $funcname
+ * @return string
+ */
 function tb_function_extract($filename,$funcname){
 	$liste = tb_liste_fonctions($filename);
 	$func = $liste[$funcname];
@@ -175,4 +182,59 @@ function tb_function_extract($filename,$funcname){
 	$content = array_slice($content, $start,$length);
 	return trim(implode("\n",$content));
 }
+
+
+/**
+ * Generer un nouveau test vierge
+ * pour la fonction $funcname, du fichier $filename
+ * 
+ * @param <type> $filename
+ * @param <type> $funcname
+ * @param <type> $essais 
+ */
+function tb_generate_new_blank_test($filename,$funcname){
+	lire_fichier(find_in_path("templates/function.php"),$template);
+
+	$template = str_replace(
+					array('@funcname@','@essais_funcname@','@filename@','@date@'),
+					array($funcname,"essais_$funcname",$filename,strtotime('Y-m-d H:i')),
+					$template
+					);
+	$d = sous_repertoire(_DIR_RACINE."tests/",basename($filename,'.php'));
+	ecrire_fichier($f="$d/$funcname.php",$template);
+	return $f;
+}
+
+/**
+ * Lit un fichier de test existant et recupere le jeu d'essai qu'il contient
+ * si un nouveau jeu d'essai est fourni, il remplace l'ancien
+ * et le fichier est mis a jour
+ *
+ * @param string $filetest
+ * @param array $essais_new
+ */
+function tb_test_essais($funcname,$filetest,$essais_new=null){
+	$function = tb_function_extract($filetest,"essais_$funcname");
+
+	if (is_array($essais_new)){
+		lire_fichier($filetest, $contenu);
+		$new_func = "\t function essais_$funcname(){
+		\$essais = ".var_export($essais_new,true).";
+		return $essais;
+	}
+";
+		$contenu = str_replace($function, $new_func, $contenu);
+		ecrire_fichier($filetest, $contenu);
+		return $essais_new;
+		$function = $new_func;
+	}
+	$tst = "essais"; $i=0;
+
+	while (function_exists("$tst$i")) $i++;
+
+	$function = str_replace("function essais_$funcname"."(","function $tst$i"."(",$function);
+	$function .= " return $tst$i()";
+	return eval($function);
+}
+
 ?>
