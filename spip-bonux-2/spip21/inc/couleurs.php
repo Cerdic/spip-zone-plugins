@@ -36,6 +36,7 @@ array(
 		"couleur_lien_off" => "#BE6B97"
 		),
 // Orange
+	/*
 3 => array (
 		"couleur_foncee" => "#fa9a00",
 		"couleur_claire" => "#ffc000",
@@ -48,7 +49,7 @@ array(
 		"couleur_claire" => "#97d2e1",
 		"couleur_lien" => "#116587",
 		"couleur_lien_off" => "#81B7CD"
-		),
+		),*/
 // Violet
 5 => array (
 		"couleur_foncee" => "#8F8FBD",
