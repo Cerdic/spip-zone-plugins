@@ -16,8 +16,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_trad_rub(RUBRIQUES){tout}{traduction}{statut==#ENV{statut,.*}}{tri #ENV{order,lang},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
-	[(#TOTAL_BOUCLE|>{1}|oui)
+	<BOUCLE_liste_trad_rub(RUBRIQUES){tout}{traduction}{statut==#ENV{statut,.*}}{tri #ENV{order,lang},#GET{defaut_tri}}{pagination #ENV{nb,10}}>[(#TOTAL_BOUCLE|>{1}|oui)
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class='titre'>
 				[(#ID_TRAD|=={#ID_RUBRIQUE}|ou{[(#ID_TRAD|non)]}|?{
