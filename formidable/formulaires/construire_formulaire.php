@@ -22,7 +22,11 @@ function formulaires_construire_formulaire_charger($identifiant, $formulaire_ini
 	// On passe ça pour l'affichage
 	$contexte['_contenu'] = $formulaire_actuel;
 	// On passe ça pour la récup plus facile des champs
-	$contexte['_saisies_par_nom'] = $contexte['saisies_modifiees'] = saisies_recuperer_saisies($formulaire_actuel);
+	$contexte['_saisies_par_nom'] = saisies_recuperer_saisies($formulaire_actuel);
+	// Pour déclarer les champs modifiables à CVT
+	foreach(array_keys($contexte['_saisies_par_nom']) as $nom){
+		$contexte["saisie_modifiee_$nom"] = array();
+	}
 	
 	// La liste des saisies
 	$saisies_disponibles = saisies_lister_disponibles();
@@ -164,7 +168,7 @@ function formidable_generer_saisie_configurable($saisie, $env){
 		unset($erreurs_test['positionner']);
 		if ($erreurs_test){
 			// Là aussi on désinfecte à la main
-			if (is_array($env["saisie_modifiee_$nom"]['options']))
+			if (is_array($env2["saisie_modifiee_$nom"]['options']))
 				spip_desinfecte($env2["saisie_modifiee_$nom"]['options']);
 		}
 		else
