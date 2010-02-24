@@ -4,9 +4,9 @@
 	Champs disponibles : id_jeu (si existe), score, total, resultat_long, commentaire
 
 ]<div class="jeux_score">
-	<:jeux:score:>&nbsp;#ENV{score}&nbsp;/&nbsp;#ENV{total}
-	[<br /><:jeux:bravo:>(#ENV{score}|=={#ENV{total}}|oui)]
+	<:jeux:score:>&nbsp;#ENV*{score}&nbsp;/&nbsp;#ENV*{total}
+	[<br /><:jeux:bravo:>(#ENV*{score}|=={#ENV*{total}}|oui)]
 </div>
 [<div class="jeux_commentaire_score">
-	(#ENV{commentaire})
+	(#ENV*{commentaire})
 </div>]
