@@ -132,6 +132,48 @@ h1, h2, h3, .bandeau_couleur, .bandeau_couleur_sous, a.icone26, a.cellule-h-text
 	}
 }
 
+.icone36 a img, a.icone36 img, .icone36 a:hover img, a.icone36:hover img {
+	border: 0px;
+	margin-bottom: -12px;
+	background-color: transparent;
+	display: none;
+}
+
+.icone36 a img:only-child, a.icone36 img:only-child, .icone36 a:hover img:only-child, a.icone36:hover img:only-child {
+	display: inline;
+}
+
+.danger, a.cellule-h-texte {
+	background: none;
+}
+
+.icone36 {
+	width: auto;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.icone36 a span, a.icone36 span {
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;	
+	border: 1px solid #bbb;
+	padding: 3px 10px;
+	width: auto;
+	font-weight: normal;
+	font-size: 11px;
+	text-shadow: white 0px 1px 0px;
+	color: #464646;
+	background-color: transparent;
+	background: url([(#CHEMIN{images/white-grad-active.gif})]) center center;
+	height: auto;
+	
+	. :hover {
+		color: black;
+		border-color: #666;
+	}
+}
+
 .cadre {
 	border-color: #dfdfdf;
 	-moz-border-radius: 6px;
