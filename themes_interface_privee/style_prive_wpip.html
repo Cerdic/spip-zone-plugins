@@ -278,7 +278,7 @@ div.onglet_on {
 	}
 	
 	li, li.gauche {
-		padding-left: 140px;
+		padding-left: 130px;
 	}
 
 
@@ -311,8 +311,7 @@ div.onglet_on {
 		-moz-border-radius: 6px 6px 0px 0px;
 	}
 	
-	.erreur_message + input[type=text], .erreur_message + input[type=password], .erreur_message + textarea,
-	.explication + input[type=text], .explication + input[type=password], .explication + textarea
+	.erreur_message + input[type=text], .erreur_message + input[type=password], .erreur_message + textarea, .explication + input[type=text], .explication + input[type=password], .explication + textarea
 	{
 		-webkit-border-top-left-radius: 0px;
 		-webkit-border-top-right-radius: 0px;
@@ -322,14 +321,8 @@ div.onglet_on {
 		
 	}
 
-	li.editer_parent,
-	li.editer_groupe_mot,
-	li.editer_descriptif,
-	li.editer_chapo,
-	li.editer_texte,
-	li.editer_ps,
-	li.editer_url_zip_plugin2,
-	li.haut {
+	li.editer_parent, li.editer_groupe_mot, li.editer_descriptif, li.editer_chapo, li.editer_texte, li.editer_ps, li.editer_url_zip_plugin2, li.haut 
+	{
 		padding-#GET{left}:0px;
 		padding-top:10px;
 	}	
@@ -350,22 +343,21 @@ div.onglet_on {
 
 .formulaire_spip li.editer_parent {
 	border: 1px solid #dfdfdf;	
-	background-color: white;
-	margin-#GET{left}: 10px;
+	background-color: #ededed;
+	padding-#GET{left}: 10px;
 	padding-#GET{right}: 10px;
 	-moz-border-radius: 6px;
 	-webkit-border-radius: 6px;
 	border-radius: 6px;
 }
-.formulaire_spip li.editer_groupe_mot,
-.formulaire_editer_auteur li.editer_statut {
+.formulaire_spip li.editer_groupe_mot, .formulaire_editer_auteur li.editer_statut {
 	background-color: inherit;
 }
 
 
 .formulaire_spip fieldset {
 	border: 1px solid #dfdfdf;	
-	margin-#GET{left}: 10px;
+	margin-#GET{left}: 0px;
 	margin-bottom: 10px;
 	-moz-border-radius: 6px;
 	-webkit-border-radius: 6px;
@@ -378,6 +370,7 @@ div.onglet_on {
 	
 	li {
 		padding-#GET{right}: 10px;
+		margin-#GET{left}: 10px;
 		
 		input.text, input.password, textarea.textarea {
 			border: 1px solid #dfdfdf;		
