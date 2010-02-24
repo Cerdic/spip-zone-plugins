@@ -36,7 +36,6 @@ function inc_formater_article($row, $own='')
 	global $spip_lang_right, $spip_display;
 	static $pret = false;
 	static $chercher_logo, $img_admin, $formater_auteur, $nb, $langue_defaut, $afficher_langue, $puce_statut;
-	global $connect_statut, $connect_id_auteur;
 
 	$id_article = $row['id_article'];
 
@@ -63,7 +62,7 @@ function inc_formater_article($row, $own='')
 		if ($logo = $chercher_logo($id_article, 'id_article', 'on')) {
 			list($fid, $dir, $nom, $format) = $logo;
 			include_spip('inc/filtres_images_mini');
-			$logo = image_reduire("<img src='$fid' alt='' />", 40, 35);
+			$logo = image_reduire("<img src='$fid' alt='' />", 70, 50);
 		}
 	} else $logo ='';
 
@@ -71,7 +70,10 @@ function inc_formater_article($row, $own='')
 	$soustitre = typo(supprime_img($row['soustitre']));
 	$titre = sinon($row['titre'], _T('ecrire:info_sans_titre'));
 	
-	$titre = "$surtitre<div><strong>$titre</strong></div>$soustitre";
+	$titre = "$titre";
+	
+	if (strlen(trim($surtitre)) > 0) $titre = "<i>$surtitre</i><br />$titre";
+	if (strlen(trim($soustitre)) > 0) $titre = "$titre<br /><i>$soustitre</i>";
 	
 	$visites = $row['visites'];
 	$popularite = round($row['popularite']);
@@ -82,7 +84,8 @@ function inc_formater_article($row, $own='')
 	$descriptif = $row['descriptif'];
 	$lang_dir = lang_dir(($lang = $row['lang']) ? changer_typo($lang):'');
 
-	$lien  = "<div>"
+	$lien  = "<div onmouseover=\"$(this).children('.liens').show();\" onmouseout=\"$(this).children('.liens').hide();\">"
+	."<div>"
 	. "<a href='"
 	. generer_url_ecrire("articles","id_article=$id_article")
 	. "'"
@@ -98,7 +101,12 @@ function inc_formater_article($row, $own='')
 	  . (!$row['petition'] ? '' :
 	     ("</a> <a href='" . generer_url_ecrire('controle_petition', "id_article=$id_article") . "' class='spip_xx-small' style='color: red'>"._T('lien_petitions')))
 	. "</a>"
-	. "</div>";
+	. "</div>"
+	."<div style='display: none; padding-top: 3px;'  class='liens spip_xx-small'>"
+	.( (autoriser('modifier','article', $id_article)) ? " <a href='?exec=articles_edit&amp;id_article=$id_article'>"._T('admin_modifier_article')."</a> &nbsp; " : "")
+	.(($statut == "publie") ? " <a href='?exec=articles&amp;action=redirect&amp;type=article&amp;id=$id_article' class='spip_out'>"._T('icone_voir_en_ligne')."</a>" : "")
+	."</div>"
+	."</div>";
 	
 	if ($spip_display == 4) return array($lien);
 
@@ -113,7 +121,7 @@ function inc_formater_article($row, $own='')
 	$date = affdate_jourcourt($date);
 	if (!$date) $date = '&nbsp;';
 	
-	if ($visites > 0 && $connect_statut == "0minirezo") $date = "$date "._T("info_popularite", array('popularite'=>$popularite, 'visites'=>$visites));
+	if ($visites > 0) $date = "$date <br /><a href='?exec=statistiques_visites&amp;id_article=$id_article'>"._T("info_popularite", array('popularite'=>$popularite, 'visites'=>$visites))."</a>";
 
 	$num = afficher_numero_edit($id_article, 'id_article', 'article');
 
