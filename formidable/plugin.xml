@@ -44,7 +44,11 @@
 		<titre>formidable:bouton_formulaires</titre>	
 		<url>formulaires_tous</url>	
 	</bouton>
-	
+	<bouton id='formulaires21' parent='bando_edition'>
+		<titre>formidable:bouton_formulaires</titre>
+		<icone>images/formulaire-16.png</icone>
+		<url>formulaires_tous</url>
+	</bouton>
 	<necessite id="SPIP" version="[2.0.10;]" />
 	<necessite id="cfg" version="[1.14.1;]" />
 	<necessite id="spip_bonux" version="[1.8.8;]" />
