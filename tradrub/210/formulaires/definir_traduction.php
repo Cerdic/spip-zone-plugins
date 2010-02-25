@@ -45,14 +45,37 @@ function formulaires_definir_traduction_traiter_dist($objet, $id_objet=0) {
 	include_spip('spip_bonux_fonctions');
 	$id_trad = array_shift(picker_selected(_request('ids_trad_selecteur'), $objet));
 	include_spip('inc/modifier');
-	modifier_contenu($objet, $id_objet, array('invalideur' => "id='$objet/$id_objet'"), array(
-		'id_trad' => $id_trad
-	));
-	// indiquer que l'element d'origine possede des traductions...
-	modifier_contenu($objet, $id_trad, array('invalideur' => "id='$objet/$id_trad'"), array(
-		'id_trad' => $id_trad
-	));
+	// deux cas deja ici :
+	// id_trad > 0, on lie une rubrique
+	// id_trad = 0 : on delie
 	
+	$id_trad_old = sql_getfetsel('id_trad', $table, "$_id_objet = " . sql_quote($id_objet));
+	if ($id_trad_old != $id_trad) {
+		include_spip('inc/modifier');
+		modifier_contenu($objet, $id_objet, array('invalideur' => "id='$objet/$id_objet'"), array(
+			'id_trad' => $id_trad
+		));
+
+		if ($id_trad) {
+			// indiquer que l'element d'origine possede des traductions...
+			if (!$id_trad_source = sql_getfetsel('id_trad', $table, 'id_rubrique=' . sql_quote('id_trad') )) {	
+				modifier_contenu($objet, $id_trad, array('invalideur' => "id='$objet/$id_trad'"), array(
+					'id_trad' => $id_trad
+				));
+			}
+		}
+		
+		// si la deliaison ou reliaison fait qu'il ne reste plus que la source
+		// dans le groupe de traduction on lui remet l'id_trad a 0
+		if ($id_trad_old) {
+			if (1 == $nb_dans_groupe = sql_countsel($table, array('id_trad = ' . sql_quote($id_trad_old)))) {
+				modifier_contenu($objet, $id_trad_old, array('invalideur' => "id='$objet/$id_trad_old'"), array(
+					'id_trad' => 0
+				));				
+			}
+		}
+		
+	}
 	return array(
 		'message_ok' => _T('tradrub:enregistrement_de_la_traduction_ok'),
 		'editable' => true,

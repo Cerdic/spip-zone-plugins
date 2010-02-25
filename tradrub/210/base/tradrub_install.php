@@ -38,7 +38,14 @@ function tradrub_upgrade($nom_meta_base_version,$version_cible){
  * @param string $nom_meta_base_version
  */
 function tradrub_vider_tables($nom_meta_base_version) {
-	sql_alter("TABLE spip_rubriques DROP id_trad");
+	// supprimer la colonne seulement s'il ne reste pas de traductions
+	$il_en_reste = sql_countsel('spip_rubriques', array(
+		'id_trad <> ' . sql_quote(0),
+		'id_trad <> id_rubrique')
+	);
+	if (!$il_en_reste) {
+		sql_alter("TABLE spip_rubriques DROP id_trad");
+	}
 	effacer_meta($nom_meta_base_version);
 }
 	

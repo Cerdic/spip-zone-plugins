@@ -16,7 +16,7 @@ function tradrub_affiche_milieu($flux) {
 		$id = $flux['args']['id_rubrique'];
 		// on affiche uniquement si la rubrique est une traduction
 		// OU si on a le droit de la modifier (pour en declarer une)
-		$trad = recuperer_fond('prive/traduire/rubrique', array('id_rubrique' => $id));
+		$trad = recuperer_fond('prive/traduire/rubrique', array('id_rubrique' => $id), array('ajax'=>true));
 		$flux['data'] .= $trad;
 	}
 	return $flux;
@@ -34,7 +34,11 @@ function tradrub_post_edition($flux) {
 	and ($id_objet = $flux['args']['id_objet'])
 	and ($flux['args']['action'] == "modifier")
 	and ($id_trad = _request('lier_trad'))) {
-		rubrique_referente($id_objet, array('lier_trad' => $id_trad));
+		// seulement si id_trad n'est pas deja defini (nouvelle rubrique donc absolument)
+		$existant = sql_getfetsel('id_trad', 'spip_rubriques', 'id_rubrique='. sql_quote($id_objet));
+		if (!$existant) {
+			rubrique_referente($id_objet, array('lier_trad' => $id_trad));
+		}
 	}
 	return $flux;	
 }
