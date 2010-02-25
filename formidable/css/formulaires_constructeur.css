@@ -1,6 +1,7 @@
 
 .formulaire_construire_formulaire{
 	padding:1em;
+	background:white;
 }
 
 .formulaire_construire_formulaire li, .formulaire_construire_formulaire li.fieldset li{
@@ -24,15 +25,32 @@
 	margin:1em -1em;
 	border-top:1px dashed #999;
 }
+.formulaire_construire_formulaire .formulaire_configurer fieldset{
+	border:0;
+}
 .formulaire_construire_formulaire .formulaire_configurer li, .formulaire_construire_formulaire li.choix{
 	border:0;
 	margin:0;
+}
+.formulaire_construire_formulaire .formulaire_configurer li.formulaire_configurer-contenu{
+	border-top:1px solid #ddd;
 }
 .formulaire_construire_formulaire .formulaire_configurer .formulaire_configurer-onglets li{
 	float:left;
 	width:auto;
 	clear:none;
+	margin-bottom:-1px;
 	padding:0;
+	background:#eee;
+	border-bottom:1px solid #ddd;
+	border-right:1px solid #999;
+	border-radius:0;
+	-moz-border-radius:0;
+	-webkit-border-radius:0;
+}
+.formulaire_construire_formulaire .formulaire_configurer .formulaire_configurer-onglets li.actif{
+	background:white;
+	border-bottom:1px solid white;
 }
 .formulaire_construire_formulaire .formulaire_configurer .formulaire_configurer-onglets li a{
 	display:block;
