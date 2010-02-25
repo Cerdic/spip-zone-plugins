@@ -12,11 +12,14 @@
 	<pre>[(#ENV{file}|tb_function_extract{#ENV{func}})]</pre>
 	</div>
 
+	<div class="ajax">
+	[(#FORMULAIRE_EDITER_TEST_UNIT{#ENV{file},#ENV{func}})]
+	</div>
+
 	<!--#navigation-->
 	<h1>Test Builder</h1>
 	<a href="#URL_ECRIRE{testbuilder,file=#ENV{file}}">#ENV{file}</a>
 	<!--/#navigation-->
-
 
 </BOUCLE_func>
 	<B_funcs>
@@ -33,7 +36,10 @@
 			<tbody>
 			<BOUCLE_funcs(POUR){tableau #ENV{file}|tb_liste_fonctions}>
 				<tr>
-					<td>#CLE([(#VALEUR|reset|implode{', '})])</td><td>[(#CLE|tb_hastest|tb_url_test{lien}|sinon{#BOUTON_ACTION{<:tb:creer_test:>,#SELF|parametre_url{func,#CLE}}})]</td>
+					<td>#CLE([(#VALEUR|reset|implode{', '})])</td><td>#SET{test,#CLE|tb_hastest}[
+						(#GET{test}|tb_url_test{lien}|sinon{#BOUTON_ACTION{<:tb:creer_test:>,#SELF|parametre_url{func,#CLE}}})
+					][(#GET{test}|oui)[(#BOUTON_ACTION{<:tb:modifier:>,#SELF|parametre_url{func,#CLE}})]]
+					</td>
 				</tr>
 			</BOUCLE_funcs>
 			</tbody>

@@ -14,9 +14,15 @@
  * @param string $filename
  * @return array
  */
-function tb_liste_fonctions($filename){
+function tb_liste_fonctions($filename, $clear = false){
 	static $funcs=array();
+	$filename = find_in_path($filename);
 	if (!$filename) return array();
+
+	if ($clear){
+		unset($funcs[$filename]);
+		return array();
+	}
 
 	if (isset($funcs[$filename]))
 		return $funcs[$filename];
@@ -43,7 +49,7 @@ function tb_liste_fonctions($filename){
 			$previous_token_line=0;
 		if (!is_string($t) AND $previous_token_line==0)
 			$previous_token_line = $t[2];
-		if (!is_string($t) AND in_array($t[0],array(T_INCLUDE,T_INCLUDE_ONCE,T_STRING)))
+		if (!is_string($t) AND in_array($t[0],array(T_INCLUDE,T_INCLUDE_ONCE,T_STRING,T_ECHO)))
 			$previous_token_line=0;
 
 		#if (!is_string($t)) echo token_name($t[0]).":".$t[1].":".$t[2]."<br />";
@@ -157,9 +163,9 @@ function tb_hastest($funcname){
 function tb_url_test($testfun, $lien=false){
 	if (!$testfun) return "";
 	if (preg_match(',\.php$,', $testfun))
-		$url = _DIR_RACINE . $testfun .'?mode=test_general';
+		$url = $testfun .'?mode=test_general';
 	else
-		$url = _DIR_RACINE . "tests/squel.php?test=$test&amp;var_mode=recalcul";
+		$url = "tests/squel.php?test=$test&amp;var_mode=recalcul";
 	if (!$lien)
 		return $url;
 	return "<a href='$url'>".basename($testfun)."</a>";
@@ -177,7 +183,8 @@ function tb_function_extract($filename,$funcname){
 	$func = $liste[$funcname];
 	$start = $func[2];
 	$length = $func[3]-$start+1;
-	lire_fichier($filename,$content);
+
+	lire_fichier(find_in_path($filename),$content);
 	$content = explode("\n",$content);
 	$content = array_slice($content, $start,$length);
 	return trim(implode("\n",$content));
@@ -215,16 +222,18 @@ function tb_generate_new_blank_test($filename,$funcname){
  */
 function tb_test_essais($funcname,$filetest,$essais_new=null){
 	$function = tb_function_extract($filetest,"essais_$funcname");
-
+	#var_dump($function);
 	if (is_array($essais_new)){
 		lire_fichier($filetest, $contenu);
-		$new_func = "\t function essais_$funcname(){
+		$new_func = "\tfunction essais_$funcname(){
 		\$essais = ".var_export($essais_new,true).";
-		return $essais;
+		return \$essais;
 	}
 ";
 		$contenu = str_replace($function, $new_func, $contenu);
 		ecrire_fichier($filetest, $contenu);
+		// purger la liste de fonctions de ce fichier
+		tb_liste_fonctions($filetest, true);
 		return $essais_new;
 		$function = $new_func;
 	}
@@ -233,8 +242,33 @@ function tb_test_essais($funcname,$filetest,$essais_new=null){
 	while (function_exists("$tst$i")) $i++;
 
 	$function = str_replace("function essais_$funcname"."(","function $tst$i"."(",$function);
-	$function .= " return $tst$i()";
+	$function .= " return $tst$i();";
 	return eval($function);
 }
 
+function tb_error_handler($output)
+{
+    $error = error_get_last();
+    $output = "";
+    foreach ($error as $info => $string)
+        $output .= "{$info}: {$string}<br />";
+    return $output;
+}
+
+function tb_try_essai($filename,$funcname,$essai,&$output_test){
+	ob_start('tb_error_handler');
+	try {
+		find_in_path($filename,'',true);
+		$appel = "$funcname(".implode(", ",$essai).")";
+		#var_dump($appel);
+		$res = eval("return $appel;");
+	}
+	catch (Exception $e) {
+		$res = "Erreur : ".$e->getMessage();
+	}
+	$output_test = ob_get_contents();
+	ob_end_clean();
+	$output_test .= ($output_test?"<br />":"")."<tt>$appel = ".var_export($res,true)."</tt>";
+	return $res;
+}
 ?>

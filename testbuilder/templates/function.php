@@ -9,7 +9,7 @@
 
 	$test = '@funcname@';
 	require '../test.inc';
-	include_spip("@filename@");
+	find_in_path("@filename@",'',true);
 
 	//
 	// hop ! on y va
