@@ -62,7 +62,7 @@
 <:autorite:auteur_modifie_petition:>
 </label>
 </small>
-<p>
+</p>
 </fieldset>
 [(#REM) Code jQuery de l'espace auteurs ; activer/desactiver le choix secondaire ]
 <script type="text/javascript"><!--
@@ -142,7 +142,7 @@
 	<option value="3"[ selected="(#ENV{editer_forums}|=={3}|?{selected})"]><:autorite:auteur_message_heure:></option>
 	<option value="4"[ selected="(#ENV{editer_forums}|=={4}|?{selected})"]><:autorite:auteur_message_advitam:></option>
 	</select>
-
+	</label>
     <:autorite:details_option_auteur:>
 	</p>
 
@@ -333,6 +333,7 @@
 	<option value="webmestre"[ selected="(#ENV{sauvegarder}|=={webmestre}|?{selected})"]><:autorite:webmestre:></option>
 	<option value="non"[ selected="(#ENV{sauvegarder}|=={non}|?{selected})"]><:autorite:personne:></option>
 </select>
+</label>
 </p>
 
 <p>
@@ -344,6 +345,7 @@
 	<option value="non"[ selected="(#ENV{detruire}|=={non}|?{selected})"]><:autorite:personne:></option>
 </select>
 <:autorite:effacer_base_option:>
+</label>
 </p>
 
 
