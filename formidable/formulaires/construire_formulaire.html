@@ -116,16 +116,17 @@
 							).show();
 							return false;
 						});
-						
+					
+					// On active le premier onglet au démarrage
 					if (i == 0) onglet.addClass('actif');
 					
-					// On fait des trucs au clic
+					// S'il y a des erreurs dans cette partie du contenu, on met une classe "erreurs" à l'onglet aussi
+					if ($(this).find('li.erreur').length > 0)
+						onglet.addClass('erreur');
 					
 					// On ajoute l'onglet
 					onglets
 						.append(onglet);
-					// On ajoute affiche le bon contenu au clic
-					
 				})
 				.hide()
 				.eq(0)

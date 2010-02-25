@@ -52,6 +52,9 @@
 	background:white;
 	border-bottom:1px solid white;
 }
+.formulaire_construire_formulaire .formulaire_configurer .formulaire_configurer-onglets li.erreur a{
+	color:#CC3300;
+}
 .formulaire_construire_formulaire .formulaire_configurer .formulaire_configurer-onglets li a{
 	display:block;
 	padding:1em;
