@@ -35,7 +35,7 @@ h1, h2, h3, .bandeau_couleur, .bandeau_couleur_sous, a.icone26, a.cellule-h-text
 }
 
 #bandeau-principal {
-	border-bottom: 1px solid #464646;
+	border-bottom: 1px solid #666;
 	
 
 	li.cellule48 {
@@ -46,7 +46,7 @@ h1, h2, h3, .bandeau_couleur, .bandeau_couleur_sous, a.icone26, a.cellule-h-text
 	}
 
 	.bandeau_sec {
-		border-color: #464646;
+		border-color: #666;
 		border-width: 1px;
 		-webkit-border-bottom-left-radius: 6px;
 		-webkit-border-bottom-right-radius: 6px;
@@ -77,6 +77,7 @@ h1, h2, h3, .bandeau_couleur, .bandeau_couleur_sous, a.icone26, a.cellule-h-text
 
 #bandeau_couleur {
 	background-color: #464646;
+	background: url([(#CHEMIN{images/dark-grad.gif})]) top repeat-x;
 	border: 0px;
 	color: white;
 	padding-top: 5px;
@@ -118,10 +119,31 @@ h1, h2, h3, .bandeau_couleur, .bandeau_couleur_sous, a.icone26, a.cellule-h-text
 	
 }
 
-.bandeau_rub:hover {
-			box-shadow:  0px 0px 2px #999;
-			-webkit-box-shadow:  0px 0px 2px #999;
-			-moz-box-shadow:  0px 0px 2px #999;
+
+.plan-articles, .plan-articles-bloques {
+	border-color: #dfdfdf;
+}
+.plan-articles a, .plan-articles-bloques .publie, .plan-articles-bloques .prepa, .plan-articles-bloques .prop, .plan-articles-bloques .refuse, .plan-articles-bloques .poubelle { 
+	background-color: white;
+}
+.plan-articles a:hover { 
+	background-color: #f8f8f8; 
+}
+
+div.bandeau_rubriques {
+	background-color: white;
+}
+a.bandeau_rub  {
+	border-color: #dfdfdf;
+	background-image: url(#GET{chemin_img_pack}rubrique-12.gif);
+}
+div.petit-secteur, a.petit-secteur { 
+	background-image: url(#GET{chemin_img_pack}secteur-12.gif); 
+}
+div.brt { background: url(#GET{chemin_img_pack}triangle-droite[(#GET{rtl})].gif) [(#GET{right})] center no-repeat; }
+
+a.bandeau_rub:hover {
+	background-color: #f8f8f8;	
 }
 
 .icone36 {
@@ -174,7 +196,7 @@ h1, h2, h3, .bandeau_couleur, .bandeau_couleur_sous, a.icone26, a.cellule-h-text
 	}
 }
 
-.cadre {
+.cadre, .dater {
 	border-color: #dfdfdf;
 	-moz-border-radius: 6px;
 	-webkit-border-radius: 6px;
@@ -222,6 +244,10 @@ h1, h2, h3, .bandeau_couleur, .bandeau_couleur_sous, a.icone26, a.cellule-h-text
 
 .cadre-sous_rub {
 	background-color: #ededed;
+}
+
+.cadre-couleur-foncee {
+	border: 1px solid [(#GET{claire})];
 }
 
 .fiche_objet, .no_onglets .fiche_objet {
@@ -300,6 +326,7 @@ div.onglet_on {
 	-webkit-border-radius: 6px;
 	border-radius: 6px;
 	color: #666;
+	margin-top: 20px;
 }
 .dater .hover, .editer_mot .hover, .editer_auteurs .hover { background-color: #eee; }
 
