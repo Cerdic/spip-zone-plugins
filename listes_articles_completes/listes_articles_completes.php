@@ -84,8 +84,7 @@ function inc_formater_article($row, $own='')
 	$descriptif = $row['descriptif'];
 	$lang_dir = lang_dir(($lang = $row['lang']) ? changer_typo($lang):'');
 
-	$lien  = "<div onmouseover=\"$(this).children('.liens').show();\" onmouseout=\"$(this).children('.liens').hide();\">"
-	."<div>"
+	$lien  = "<div>"
 	. "<a href='"
 	. generer_url_ecrire("articles","id_article=$id_article")
 	. "'"
@@ -102,10 +101,9 @@ function inc_formater_article($row, $own='')
 	     ("</a> <a href='" . generer_url_ecrire('controle_petition', "id_article=$id_article") . "' class='spip_xx-small' style='color: red'>"._T('lien_petitions')))
 	. "</a>"
 	. "</div>"
-	."<div style='display: none; padding-top: 3px;'  class='liens spip_xx-small'>"
+	."<div class='liens'>"
 	.( (autoriser('modifier','article', $id_article)) ? " <a href='?exec=articles_edit&amp;id_article=$id_article'>"._T('admin_modifier_article')."</a> &nbsp; " : "")
 	.(($statut == "publie") ? " <a href='?exec=articles&amp;action=redirect&amp;type=article&amp;id=$id_article' class='spip_out'>"._T('icone_voir_en_ligne')."</a>" : "")
-	."</div>"
 	."</div>";
 	
 	if ($spip_display == 4) return array($lien);
@@ -129,6 +127,28 @@ function inc_formater_article($row, $own='')
 
 	return array($puce, $lien, join('<br />', $auteurs), $date, $num);
 }
+
+
+
+function listes_articles_completes_header_prive($flux) {
+	
+	$flux .= "
+		<style type='text/css'><!--
+			.tr_liste .liens {
+				visibility: hidden;
+				font-size: 85%;
+				padding-top: 3px;
+			}
+			.tr_liste_over .liens, .tr_liste:hover .liens {
+				visibility: visible;
+			}
+		--></style>
+	";
+	
+	
+	return $flux;
+}
+
 
 
 ?>

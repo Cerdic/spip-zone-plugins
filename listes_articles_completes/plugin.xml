@@ -7,12 +7,17 @@
 	</description>
 	<lien></lien> <!-- URI de documentation -->
 
-	<version>0.1</version>
+	<version>0.2</version>
 	<etat>stable</etat>
 
-	<prefix>liste_articles_completes</prefix>
+	<prefix>listes_articles_completes</prefix>
 
 	<options>listes_articles_completes.php</options>
+
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>listes_articles_completes.php</inclure>
+	</pipeline>
 
 	<necessite id="SPIP" version="[2.0.0;]" />
 </plugin>
