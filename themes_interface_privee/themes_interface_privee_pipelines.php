@@ -26,8 +26,8 @@ function themes_interface_privee_header_prive($flux) {
 	// Ajouter les liens pour changer d'interface
 	$bouton["$interface"] = "<img src='".chemin("images/puce-verte-breve.gif")."' alt='selectionnee' />";
 	
-	$liens = "<div class='titrem' style='text-align: center;'>Choix de l’interface<\/div>";
-	$liens .= "<tr class='tr_liste'><td>".$bouton["standard"]."<\/td><td class='arial2'><a href='?action=preferer_interface&amp;arg=standard&amp;redirect=".urlencode($url)."' class='lien_sous'>Standard<\/a><\/td><\/tr>";
+	$entete = "<div class='titrem' style='text-align: center;'>Choix de l’interface<\/div>";
+	$liens = "<tr class='tr_liste'><td>".$bouton["standard"]."<\/td><td class='arial2'><a href='?action=preferer_interface&amp;arg=standard&amp;redirect=".urlencode($url)."' class='lien_sous'>Standard<\/a><\/td><\/tr>";
 	$liens .= "<tr class='tr_liste'><td>".$bouton["degrades"]."<\/td><td class='arial2'><a href='?action=preferer_interface&amp;arg=degrades&amp;redirect=".urlencode($url)."' class='lien_sous'>Standard avec effets<\/a><\/td><\/tr>";
 	$liens .= "<tr class='tr_liste'><td>".$bouton["bonux"]."<\/td><td class='arial2'><a href='?action=preferer_interface&amp;arg=bonux&amp;redirect=".urlencode($url)."' class='lien_sous'>Contrast&eacute;e<\/a><\/td><\/tr>";
 	$liens .= "<tr class='tr_liste'><td>".$bouton["wpip"]."<\/td><td class='arial2'><a href='?action=preferer_interface&amp;arg=wpip&amp;redirect=".urlencode($url)."' class='lien_sous'>&Agrave; la fa&ccedil;on de Wordpress<\/a><\/td><\/tr>";
@@ -36,7 +36,7 @@ function themes_interface_privee_header_prive($flux) {
 	$flux .= "
 		<script type='text/javascript'><!--
 			$(document).ready(function() {
-				$('#bandeauinterface').append(\"<div id='bandeauprefinterface' class='cadre cadre-liste'><table width='100%' cellpadding='2' cellspacing='0' border='0'>$liens<\/table><\/div>\");
+				$('#bandeauinterface').append(\"<div id='bandeauprefinterface' class='cadre cadre-liste'>$entete<table width='100%' cellpadding='2' cellspacing='0' border='0'>$liens<\/table><\/div>\");
 			});
 		--></script>
 	";
