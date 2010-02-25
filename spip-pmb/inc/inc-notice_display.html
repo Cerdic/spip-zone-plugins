@@ -1,7 +1,14 @@
 
 	[(#ENV{afficher_logo}|=={oui}|oui)
 	    [(#ENV{notice}|pmb_notice_champ{'logo_src'}|oui)
-	      [(#REM|?{'','<img />'}|inserer_attribut{class,spip_logos}|inserer_attribut{src,[(#ENV{notice}|pmb_notice_champ{'logo_src'}|copie_locale{'force'})]}|image_reduire{130,0}|inserer_attribut{alt,''})]
+										[(#ENV{'copieimage','non'}|=={'non'}|non)
+											      [(#REM|?{'','<img />'}|inserer_attribut{class,spip_logos}|inserer_attribut{src,[(#ENV{notice}|pmb_notice_champ{'logo_src'}|copie_locale{'force'})]}|image_reduire{130,0}|inserer_attribut{alt,''})]
+										]
+										[(#ENV{'copieimage','non'}|=={'non'}|oui)
+											    [(#REM|?{'','<img />'}|inserer_attribut{style,'max-width:130px;'}|inserer_attribut{class,spip_logos}|inserer_attribut{alt,''}|inserer_attribut{src,[(#ENV{notice}|pmb_notice_champ{'logo_src'})]})]
+										]
+
+					  
 	    ]
 	]
 	      <div class="corps-conteneur surlignable">
@@ -32,21 +39,29 @@
 		      ]
 	      </div>
 	      <br class="nettoyeur" />
-	
-	
+	<div id="docnum-ajax" class="ajax-content"></div>
+	<div id="disponibilite-ajax" class="ajax-content"><img src="#CHEMIN{img/ajaxLoader.gif}" class="ajax-loader" alt="<:pmb:chargement:>" width="43" height="43" /></div>
+	<div id="autreslecteurs-ajax" class="ajax-content"></div>
+	  <script type="text/javascript">
+$(document).ready(function() {
+
+  
 	[(#ENV{afficher_docnum}|=={non}|non)
-	      <INCLURE{fond=inc/inc-docnum}{env}>
+	      $('#docnum-ajax').load("[(#URL_PAGE{ajax-docnum})]", { 'id': '#ENV{id}' });
 	]
 
 	[(#ENV{afficher_dispo}|=={non}|non)
-	      <INCLURE{fond=inc/inc-notice-dispo}{env}>
+	      $('#disponibilite-ajax').load("[(#URL_PAGE{ajax-notice-dispo})]", { 'id': '#ENV{id}' });
 	]
 	
 	[(#ENV{afficher_autres}|=={non}|non)
-	      <INCLURE{fond=inc/inc-autreslecteurs}{env}>
+	      $('#autreslecteurs-ajax').load("[(#URL_PAGE{ajax-autreslecteurs})]", { 'id': '#ENV{id}' });
 	]
-	
-		<div class="pmb-toolbox" id="compte-lecteur">
+});
+	</script>
+
+	  
+		 <div class="pmb-toolbox" id="compte-lecteur">
 			<h2><:pmb:compte_lecteur:></h2>
 			<B_auteurpmb>
 			<BOUCLE_auteurpmb(AUTEURS_PMB){id_auteur=#SESSION{id_auteur}}>
