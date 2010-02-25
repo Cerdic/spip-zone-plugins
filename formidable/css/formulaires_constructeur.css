@@ -16,6 +16,7 @@
 	border-color:#999;
 }
 .formulaire_construire_formulaire li.en_configuration{
+	padding-bottom:0;
 	border:1px solid #999;
 }
 .formulaire_construire_formulaire li.obligatoire{
@@ -31,9 +32,14 @@
 .formulaire_construire_formulaire .formulaire_configurer li, .formulaire_construire_formulaire li.choix{
 	border:0;
 	margin:0;
+	padding:0;
 }
 .formulaire_construire_formulaire .formulaire_configurer li.formulaire_configurer-contenu{
+	background:white;
 	border-top:1px solid #ddd;
+	border-radius:0 0 5px 5px;
+	-moz-border-radius:0 0 5px 5px;
+	-webkit-border-radius:0 0 5px 5px;
 }
 .formulaire_construire_formulaire .formulaire_configurer .formulaire_configurer-onglets li{
 	float:left;
