@@ -1,5 +1,7 @@
-#CACHE{60}
+#CACHE{#ENV*{cache,60}}
 [(#VAL{_CS_visiteurs_connectes}|defined|oui)
 #SET{nb,#REM|cs_compter_visiteurs|cs_span{class='cs_nb_visiteurs'}}
-[[(#ENV*{p,1}|oui)<p class='cs_visiteurs'>](#VAL{'couteau:visiteurs_connectes'}|_T{#ARRAY{nb,#GET{nb}}})[(#ENV*{p,1}|oui)</p>]]
+#SET{ch,couteau:visiteurs_connectes}
+[(#VAL{visiteurs_connectes}|_T|=={visiteurs connectes}|non)#SET{ch,visiteurs_connectes}]
+[[(#ENV*{p,1}|oui)<p class='cs_visiteurs'>](#GET{ch}|_T{#ARRAY{nb,#GET{nb}}})[(#ENV*{p,1}|oui)</p>]]
 ]
