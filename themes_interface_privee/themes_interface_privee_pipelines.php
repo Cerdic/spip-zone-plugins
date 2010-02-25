@@ -16,9 +16,8 @@ function themes_interface_privee_header_prive($flux) {
 	if ($interface == "blanche") $flux .= '<link rel="stylesheet" type="text/css" href="'.generer_url_public('style_prive_blanche', parametres_css_prive()).'" id="css_blanche" />';
 	else if ($interface == "wpip") $flux .= '<link rel="stylesheet" type="text/css" href="'.generer_url_public('style_prive_wpip', parametres_css_prive()).'" id="css_wpip" />';
 	else if ($interface == "degrades") $flux .= '<link rel="stylesheet" type="text/css" href="'.generer_url_public('style_prive_degrades', parametres_css_prive()).'" id="css_degrades" />';
-	else if ($interface == "bonux") {
-		$flux .= '<link rel="stylesheet" type="text/css" href="'.generer_url_public('style_prive_bonux', parametres_css_prive()).'" id="css_degrades" />';
-	}
+	else if ($interface == "bonux") $flux .= '<link rel="stylesheet" type="text/css" href="'.generer_url_public('style_prive_bonux', parametres_css_prive()).'" id="css_bonux" />';
+	else if ($interface == "chocolat") $flux .= '<link rel="stylesheet" type="text/css" href="'.generer_url_public('style_prive_chocolat', parametres_css_prive()).'" id="css_chocolat" />';
 
 	
 	$url = url_absolue($REQUEST_URI);
@@ -31,6 +30,7 @@ function themes_interface_privee_header_prive($flux) {
 	$liens .= "<tr class='tr_liste'><td>".$bouton["degrades"]."<\/td><td class='arial2'><a href='".generer_url_action('preferer_interface',"arg=degrades&redirect=".urlencode($url))."' class='lien_sous'>Standard avec effets<\/a><\/td><\/tr>";
 	$liens .= "<tr class='tr_liste'><td>".$bouton["bonux"]."<\/td><td class='arial2'><a href='".generer_url_action('preferer_interface',"arg=bonux&redirect=".urlencode($url))."' class='lien_sous'>Contrast&eacute;e<\/a><\/td><\/tr>";
 	$liens .= "<tr class='tr_liste'><td>".$bouton["wpip"]."<\/td><td class='arial2'><a href='".generer_url_action('preferer_interface',"arg=wpip&redirect=".rawurlencode($url))."' class='lien_sous'>&Agrave; la fa&ccedil;on de Wordpress<\/a><\/td><\/tr>";
+	$liens .= "<tr class='tr_liste'><td>".$bouton["chocolat"]."<\/td><td class='arial2'><a href='".generer_url_action('preferer_interface',"arg=chocolat&redirect=".rawurlencode($url))."' class='lien_sous'>Menthe et chocolat<\/a><\/td><\/tr>";
 	$liens .= "<tr class='tr_liste'><td>".$bouton["blanche"]."<\/td><td class='arial2'><a href='".generer_url_action('preferer_interface',"arg=blanche&redirect=".urlencode($url))."' class='lien_sous'>Blanche<\/a><\/td><\/tr>";
 	
 	$flux .= "
