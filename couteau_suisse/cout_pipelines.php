@@ -66,6 +66,11 @@ function couteau_suisse_ajouter_onglets($flux){
 	return $flux;
 }
 
+function eval_metas_pipelines(&$flux, $pipe){
+	global $cs_metas_pipelines;
+	if(isset($cs_metas_pipelines[$pipe])) eval($cs_metas_pipelines[$pipe]);
+	return $flux;
+}
 // ajout d'une icone sur la page de configuration des plugins
 // ce code ne sert a rien puisque le pipeline 'affiche_gauche' n'est pas pris en compte dans 'admin_plugin'...
 function couteau_suisse_affiche_gauche($flux){
@@ -74,34 +79,19 @@ function couteau_suisse_affiche_gauche($flux){
 		$flux['data'] .= 
 			icone_horizontale(_T('couteau:titre'), generer_url_ecrire('admin_couteau_suisse'), find_in_path('img/couteau-24.gif'), '', false);
 */
-	global $cs_metas_pipelines;
-	if(isset($cs_metas_pipelines['affiche_gauche']))
-		eval($cs_metas_pipelines['affiche_gauche']);
-	return $flux;
+	return eval_metas_pipelines($flux, 'affiche_gauche');
 }
 function couteau_suisse_affiche_droite($flux){
-	global $cs_metas_pipelines;
-	if(isset($cs_metas_pipelines['affiche_droite']))
-		eval($cs_metas_pipelines['affiche_droite']);
-	return $flux;
+	return eval_metas_pipelines($flux, 'affiche_droite');
 }
 function couteau_suisse_affiche_milieu($flux){
-	global $cs_metas_pipelines;
-	if(isset($cs_metas_pipelines['affiche_milieu']))
-		eval($cs_metas_pipelines['affiche_milieu']);
-	return $flux;
+	return eval_metas_pipelines($flux, 'affiche_milieu');
 }
 function couteau_suisse_boite_infos($flux){
-	global $cs_metas_pipelines;
-	if(isset($cs_metas_pipelines['boite_infos']))
-		eval($cs_metas_pipelines['boite_infos']);
-	return $flux;
+	return eval_metas_pipelines($flux, 'boite_infos');
 }
 function couteau_suisse_pre_boucle($flux){
-	global $cs_metas_pipelines;
-	if(isset($cs_metas_pipelines['pre_boucle']))
-		eval($cs_metas_pipelines['pre_boucle']);
-	return $flux;
+	return eval_metas_pipelines($flux, 'pre_boucle');
 }
 
 function couteau_suisse_header_prive($flux_){
@@ -126,9 +116,7 @@ function couteau_suisse_header_prive($flux_){
  **********/
 
 function couteau_suisse_affichage_final($flux){
-	global $cs_metas_pipelines;
-	if(isset($cs_metas_pipelines['affichage_final']))
-		eval($cs_metas_pipelines['affichage_final']);
+	eval_metas_pipelines($flux, 'affichage_final');
 	// nettoyage des separateurs et differentes sentinelles
 	return preg_replace(',<span class=\'csfoo \w+\'></span>,', '', $flux);
 }
@@ -154,40 +142,23 @@ function couteau_suisse_insert_head($flux_){
  ********/
 
 function couteau_suisse_nettoyer_raccourcis_typo($flux){
-	global $cs_metas_pipelines;
-	if(isset($cs_metas_pipelines['nettoyer_raccourcis_typo']))
-		eval($cs_metas_pipelines['nettoyer_raccourcis_typo']);
-	return $flux;
+	return eval_metas_pipelines($flux, 'nettoyer_raccourcis_typo');
 }
-
 function couteau_suisse_pre_propre($flux){
-	global $cs_metas_pipelines;
-	if(isset($cs_metas_pipelines['pre_propre']))
-		eval($cs_metas_pipelines['pre_propre']);
-	return $flux;
+	return eval_metas_pipelines($flux, 'pre_propre');
 }
-
 function couteau_suisse_pre_typo($flux){
-	global $cs_metas_pipelines;
-	if(isset($cs_metas_pipelines['pre_typo']))
-		eval($cs_metas_pipelines['pre_typo']);
-	return $flux;
+	return eval_metas_pipelines($flux, 'pre_typo');
 }
-
 function couteau_suisse_post_propre($flux){
-	global $cs_metas_pipelines;
-	if(isset($cs_metas_pipelines['post_propre']))
-		eval($cs_metas_pipelines['post_propre']);
+	eval_metas_pipelines($flux, 'post_propre');
 	include_spip('cout_lancement');
 	cs_trace_balises_html($flux);
 	return $flux;
 }
 
 function couteau_suisse_post_typo($flux){
-	global $cs_metas_pipelines;
-	if(isset($cs_metas_pipelines['post_typo']))
-		eval($cs_metas_pipelines['post_typo']);
-	return $flux;
+	return eval_metas_pipelines($flux, 'post_typo');
 }
 
 /********
@@ -195,28 +166,26 @@ function couteau_suisse_post_typo($flux){
  *******/
 
 function couteau_suisse_pre_edition($flux){
-	global $cs_metas_pipelines;
-	if(isset($cs_metas_pipelines['pre_edition']))
-		eval($cs_metas_pipelines['pre_edition']);
-	return $flux;
+	return eval_metas_pipelines($flux, 'pre_edition');
 }
-
 function couteau_suisse_post_edition($flux){
-	global $cs_metas_pipelines;
-	if(isset($cs_metas_pipelines['post_edition']))
-		eval($cs_metas_pipelines['post_edition']);
-	return $flux;
+	return eval_metas_pipelines($flux, 'post_edition');
 }
 
 /**********
  * DIVERS *
  *********/
 
+// pipeline SPIP<2.1
 function couteau_suisse_creer_chaine_url($flux){
-	global $cs_metas_pipelines;
-	if(isset($cs_metas_pipelines['creer_chaine_url']))
-		eval($cs_metas_pipelines['creer_chaine_url']);
-	return $flux;
+	return eval_metas_pipelines($flux, 'creer_chaine_url');
+}
+// pipelines SPIP>=2.1
+function couteau_suisse_arbo_creer_chaine_url($flux){
+	return eval_metas_pipelines($flux, 'arbo_creer_chaine_url');
+}
+function couteau_suisse_propres_creer_chaine_url($flux){
+	return eval_metas_pipelines($flux, 'propres_creer_chaine_url');
 }
 
 // le contenu du sous-menu est gere par les lames elles-memes
@@ -242,9 +211,7 @@ function couteau_suisse_bt_gadgets($params) {
 }
 
 function couteau_suisse_porte_plume_barre_pre_charger($flux){
-	global $cs_metas_pipelines;
-	if (isset($cs_metas_pipelines['porte_plume_barre_pre_charger']))
-		eval($cs_metas_pipelines['porte_plume_barre_pre_charger']);
+	eval_metas_pipelines($flux, 'porte_plume_barre_pre_charger');
 	$barres = pipeline('porte_plume_cs_pre_charger', array());
 	$r = array(
 		"id" => 'couteau_suisse_drop',
@@ -273,10 +240,7 @@ function couteau_suisse_porte_plume_lien_classe_vers_icone($flux){
 
 // pipeline maison : bouton sous un drop Couteau Suisse
 function couteau_suisse_porte_plume_cs_pre_charger($flux){
-	global $cs_metas_pipelines;
-	if (isset($cs_metas_pipelines['porte_plume_cs_pre_charger']))
-		eval($cs_metas_pipelines['porte_plume_cs_pre_charger']);
-	return $flux;
+	return eval_metas_pipelines($flux, 'porte_plume_cs_pre_charger');
 }
 
 // pipeline maison : pre-affichage de la description d'un outil

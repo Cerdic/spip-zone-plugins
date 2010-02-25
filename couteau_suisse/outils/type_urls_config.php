@@ -31,7 +31,10 @@ switch(\$GLOBALS['type_urls']) {
 	'description' => '<:type_urls::>'
 		// Tronc commun sous SPIP 2.0
 		.(defined('_SPIP19300')?'<radio_type_urls3 valeur="propres/propres2/libres/arbo/propres_qs"><:type_urls:1:>[[%urls_avec_id%]][[->%urls_avec_id2%]][[->%urls_id_3_chiffres%]][[->%urls_id_sauf_rubriques%]][[->%urls_id_sauf_liste%]]</radio_type_urls3>':''),
-	'pipelinecode:creer_chaine_url' => "\$id = \$flux['objet']['id_objet']; \$ok = true;
+	defined('_SPIP20100')
+		?'pipelinecode:arbo_creer_chaine_url, pipelinecode:propres_creer_chaine_url'
+		:'pipelinecode:creer_chaine_url'
+		 => "\$id = \$flux['objet']['id_objet']; \$ok = true;
 if(%%urls_id_sauf_rubriques%%)  {\$ok = strpos(':%%urls_id_sauf_liste%%:',':'.\$flux['objet']['type'].':')===false;}
 if(%%urls_id_3_chiffres%%) {\$id = sprintf('%03d', \$id);}
 if(%%urls_avec_id2%%) {@define('_CS_URL_SEP','-'); if(\$ok) \$flux['data']=\$id._CS_URL_SEP.\$flux['data'];}
