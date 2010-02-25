@@ -51,7 +51,7 @@ $(document).ready(function() {
 	]
 
 	[(#ENV{afficher_dispo}|=={non}|non)
-	      $('#disponibilite-ajax').load("[(#URL_PAGE{ajax-notice-dispo})]", { 'id': '#ENV{id}' });
+	      $('#disponibilite-ajax').load("[(#URL_PAGE{ajax-notice-dispo})]", { 'id': '#ENV{id}', 'titre_notice' : "[(#ENV{notice}|pmb_notice_champ{'titre'}|urlencode)]" }, function (responseText, textStatus, XMLHttpRequest) { $(this).find('.ajax-loader').remove();});
 	]
 	
 	[(#ENV{afficher_autres}|=={non}|non)

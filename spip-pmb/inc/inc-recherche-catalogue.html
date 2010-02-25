@@ -1,4 +1,4 @@
-[(#SET{tab_resultat, [(#ENV**{recherche}|pmb_prepare_recherche|sinon{*}|pmb_recherche_extraire{[(#CONFIG{spip_pmb/url})], [(#ENV{look_ALL}|sinon{0})], [(#ENV{look_AUTHOR}|sinon{0})], [(#ENV{look_PUBLISHER}|sinon{0})], [(#ENV{look_COLLECTION}|sinon{0})], [(#ENV{look_SUBCOLLECTION}|sinon{0})], [(#ENV{look_CATEGORY}|sinon{0})], [(#ENV{look_INDEXINT})], [(#ENV{look_KEYWORDS}|sinon{0})], [(#ENV{look_TITLE}|sinon{0})], [(#ENV{look_ABSTRACT}|sinon{0})], [(#ENV{id_section}|sinon{0})], [(#ENV{debut}|sinon{0})], [(#ENV{fin}|sinon{5})], [(#ENV{typdoc}|sinon{''})], [(#ENV{id_location_memo}|sinon{''})]})]})]
+[(#SET{tab_resultat, [(#ENV**{recherche}|urldecode|pmb_prepare_recherche|sinon{*}|pmb_recherche_extraire{[(#CONFIG{spip_pmb/url})], [(#ENV{look_ALL}|sinon{0})], [(#ENV{look_AUTHOR}|sinon{0})], [(#ENV{look_PUBLISHER}|sinon{0})], [(#ENV{look_COLLECTION}|sinon{0})], [(#ENV{look_SUBCOLLECTION}|sinon{0})], [(#ENV{look_CATEGORY}|sinon{0})], [(#ENV{look_INDEXINT})], [(#ENV{look_KEYWORDS}|sinon{0})], [(#ENV{look_TITLE}|sinon{0})], [(#ENV{look_ABSTRACT}|sinon{0})], [(#ENV{id_section}|sinon{0})], [(#ENV{debut}|sinon{0})], [(#ENV{fin}|sinon{5})], [(#ENV{typdoc}|sinon{''})], [(#ENV{id_location_memo}|sinon{''})]})]})]
 
 
 <a id="resultats_recherche"></a>
@@ -18,11 +18,11 @@
 				[(#ENV{debut}|moins{5}|>={0}|oui)<a style="float: left;"  class="pmb_pagination_prec" href="[(#ENV{id_section}|oui)[(#URL_PAGE{catalogue}|parametre_url{recherche,#ENV{recherche}}|parametre_url{look_PMB,1}|parametre_url{look_ALL,#ENV{look_ALL}}|parametre_url{look_AUTHOR,#ENV{look_AUTHOR}}|parametre_url{look_PUBLISHER,#ENV{look_PUBLISHER}}|parametre_url{look_COLLECTION,#ENV{look_COLLECTION}}|parametre_url{look_SUBCOLLECTION,#ENV{look_SUBCOLLECTION}}|parametre_url{look_CATEGORY,#ENV{look_CATEGORY}}|parametre_url{look_INDEXINT,#ENV{look_INDEXINT}}|parametre_url{look_KEYWORDS,#ENV{look_KEYWORDS}}|parametre_url{look_TITLE,#ENV{look_TITLE}}|parametre_url{look_ABSTRACT,#ENV{look_ABSTRACT}}|parametre_url{typdoc,#ENV{typdoc}}|parametre_url{id_location_memo,#ENV{id_location_memo}}|parametre_url{id_section,#ENV{id_section}}|parametre_url{debut,[(#ENV{debut}|moins{5})]})]][(#ENV{id_section}|non)[(#URL_PAGE{recherche}|parametre_url{look_PMB,1}||parametre_url{recherche,#ENV{recherche}}|parametre_url{look_ALL,#ENV{look_ALL}}|parametre_url{look_AUTHOR,#ENV{look_AUTHOR}}|parametre_url{look_PUBLISHER,#ENV{look_PUBLISHER}}|parametre_url{look_COLLECTION,#ENV{look_COLLECTION}}|parametre_url{look_SUBCOLLECTION,#ENV{look_SUBCOLLECTION}}|parametre_url{look_CATEGORY,#ENV{look_CATEGORY}}|parametre_url{look_INDEXINT,#ENV{look_INDEXINT}}|parametre_url{look_KEYWORDS,#ENV{look_KEYWORDS}}|parametre_url{look_TITLE,#ENV{look_TITLE}}|parametre_url{look_ABSTRACT,#ENV{look_ABSTRACT}}|parametre_url{typdoc,#ENV{typdoc}}|parametre_url{id_location_memo,#ENV{id_location_memo}}|parametre_url{id_section,#ENV{id_section}}|parametre_url{debut,[(#ENV{debut}|moins{5})]})]]#ajax-recherche-catalogue"><< <:pmb:resultats_precedents:></a>]
 				<br class="nettoyeur" />
 			
-				<ul class="liste-items surlignable">
+				<ul class="liste-items">
 			]
 			[(#COMPTEUR_BOUCLE|>{1}|oui)
 			 	
-				<INCLURE{fond=inc/inc-notice-resume}{notice=#VALEUR}{surlignable=1}{compteur=#COMPTEUR_BOUCLE|moins{1}}>
+				<INCLURE{fond=inc/inc-notice-resume}{notice=#VALEUR}{surlignable=0}{compteur=#COMPTEUR_BOUCLE|moins{1}}>
 				
 			]
 			</BOUCLE_tab_resultat>

@@ -1,6 +1,6 @@
 #CACHE{0}
 
-[(#SESSION_SET{tab_noticesconsultees, [(#SESSION{tab_noticesconsultees,#ARRAY{}}|array_reverse|push{<a href='[(#URL_PAGE{notice_display}|parametre_url{id,[(#ENV{id})]})]'>[(#ENV{notice}|pmb_notice_champ{'titre'})]</a>}|array_unique|array_reverse|array_slice{0,3})]})]
+[(#SESSION_SET{tab_noticesconsultees, [(#SESSION{tab_noticesconsultees,#ARRAY{}}|array_reverse|push{<a href='[(#URL_PAGE{notice_display}|parametre_url{id,[(#ENV{id})]})]'>[(#ENV{'titre_notice'}|urldecode)]</a>}|array_unique|array_reverse|array_slice{0,3})]})]
 
 [(#SET{tab_exemplaires, [(#ENV{id}|pmb_ws_dispo_exemplaire)]})]
 
