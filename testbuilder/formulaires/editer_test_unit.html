@@ -8,23 +8,22 @@
 <div class='formulaire_spip formulaire_editer formulaire_#FORM'>
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
-	[ (#ENV{editable}|oui)
 	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
 		[(#REM) declarer les hidden qui declencheront le service du formulaire
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 	  <ul>
-	    <li class="editer_essai [ (#ENV**{erreurs}|table_valeur{essai}|oui)erreur]">
-				<label for="text_area"><:tb:label_essai:></label>[
-				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{essai})</span>]
-				<textarea name='code' class='no_barre' id='code' cols='80' rows='50'>[(#ENV**{code})]</textarea>
+			<BOUCLE_args(POUR){tableau #ENV{_args}}>
+	    <li class="editer_arg editer_arg_#CLE [ (#ENV**{erreurs}|table_valeur{args_#CLE}|oui)erreur]">
+				<label for="text_area"><tt>#VALEUR</tt></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{args_#CLE})</span>]
+				<input type="text" name='args[]' class='text' id='arg_#CLE' value='[(#ENV**{args}|table_valeur{#CLE})]' />
 	    </li>
+			</BOUCLE_args>
 	  </ul>
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 	  <!--extra-->
-		[(#ENV{type}|=={txt}|et{#ENV{fichier}}|oui)
-	  <p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
-		]
+	  <p class="boutons"><input type='submit' class='submit' name="tester" value='<:tb:bouton_tester:>' /> <input type='submit' class='submit' name="enregistrer" value='<:bouton_ajouter:>' /></p>
+		[<div class="essais" style="padding:10px;border-bottom:1px solid #eee;">(#ENV{_essais}|tb_affiche_essais{#ENV{_funcname}})</div>]
 	</div></form>
-	]
 </div>
