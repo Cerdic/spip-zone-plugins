@@ -168,6 +168,46 @@ h1, h2, h3, .bandeau_couleur, .bandeau_couleur_sous, a.icone26, a.cellule-h-text
 .cadre-sous_rub, .cadre-e {
 	background-color: #eddbbf;
 }
+.cadre-couleur-foncee {
+	border: 1px solid #c9b89c;
+}
+
+.entete-formulaire, .formulaire_spip {
+	border-color: #c9b89c;
+}
+.entete-formulaire {
+	-webkit-border-top-left-radius: 4px;
+	-webkit-border-top-right-radius: 4px;
+	-moz-border-radius: 4px 4px 0px 0px;
+	border-top-left-radius: 0px;
+	border-top-right-radius: 0px;
+}
+
+.icone36 a img, a.icone36 img, .icone36 a:hover img, a.icone36:hover img {
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+}
+
+.formulaire_spip {
+	background-color: #fbf7f0;
+	
+	p.boutons {
+		background-color: #eddbbf;
+		border-color: #c9b89c;
+	}
+	
+	input.text, input.password, textarea {
+		border: 1px solid #c9b89c;
+	}
+	
+	fieldset {
+		border-color: #c9b89c;
+		h3.legend, legend {
+			background-color: #eddbbf;		
+		}
+	}
+}
 
 
 div.liste, div.cadre-liste {
@@ -209,7 +249,7 @@ div.liste, div.cadre-liste {
 .cadre-forum {
 	-webkit-border-bottom-left-radius: 0px;
 	-webkit-border-bottom-right-radius: 0px;
-	-moz-border-radius: 6px 6px 0px 0px;
+	-moz-border-radius: 4px 4px 0px 0px;
 	border-bottom-left-radius: 0px;
 	border-bottom-right-radius: 0px;
 }
@@ -219,6 +259,31 @@ div.liste, div.cadre-liste {
 	border-radius: 0px;
 }
 
+
+.no_onglets {
+	.fiche_objet {
+		border-color: #927340;	
+		-moz-border-radius: 4px;
+		-webkit-border-radius: 4px;
+		border-radius: 4px;
+		box-shadow:  0px 0px 2px #73531f;
+		-webkit-box-shadow:  0px 0px 2px #73531f;
+		-moz-box-shadow:  0px 0px 2px #73531f;
+	}
+
+	#contenu {
+		h1 {
+			color: #73531f;		
+		}
+	}
+}
+.no_onglets #contenu #wysiwyg div.contenu_descriptif,
+.no_onglets #contenu #wysiwyg div.contenu_nom_site,
+.no_onglets #contenu #wysiwyg div.contenu_ps
+{ 
+	background-color: #fbf7f0;
+	border-color: #eddbbf;
+}
 
 /* Bouton de validation */
 input[type="submit"] {
