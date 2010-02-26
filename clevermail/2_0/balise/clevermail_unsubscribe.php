@@ -1,4 +1,5 @@
 <?php
+include_spip('inc/filtres');
 function balise_CLEVERMAIL_UNSUBSCRIBE($p) {
 	return calculer_balise_dynamique($p, 'CLEVERMAIL_UNSUBSCRIBE', array());
 }
@@ -19,16 +20,16 @@ function balise_CLEVERMAIL_UNSUBSCRIBE_dyn() {
 	      $list = sql_fetsel("*", "spip_cm_lists", "lst_id=".intval($abonnement['lst_id']));
 
 	      $template = array();
-	      $template['@@NOM_LETTRE@@'] = substr($list['lst_name'], strpos($list['lst_name'], "/")+1);
-		  $template['@@NOM_CATEGORIE@@'] = substr($list['lst_name'],0 , strpos($list['lst_name'], "/"));
-		  $template['@@NOM_COMPLET@@'] = $list['lst_name'];
+	      $template['@@NOM_LETTRE@@'] = supprimer_numero(substr($list['lst_name'], strpos($list['lst_name'], "/")+1));
+		  $template['@@NOM_CATEGORIE@@'] = supprimer_numero(substr($list['lst_name'],0 , strpos($list['lst_name'], "/")));
+		  $template['@@NOM_COMPLET@@'] = ($template['@@NOM_CATEGORIE@@'] != '' ? $template['@@NOM_CATEGORIE@@'].' / '.$template['@@NOM_LETTRE@@'] : $template['@@NOM_LETTRE@@']);
 	      $template['@@EMAIL@@'] = $sub['sub_email'];
 	      $template['@@FORMAT_INSCRIPTION@@']  = ($data['lsr_mode'] == 1 ? 'HTML' : 'texte');
 	      //$template['@@URL_CONFIRMATION@@'] = $GLOBALS['meta']['adresse_site'].'/spip.php?page=clevermail_do&id='.$actionId;
 	      $template['@@URL_CONFIRMATION@@'] = generer_url_public(_CLEVERMAIL_VALIDATION,'id='.$actionId);
 
 	      $to = $sub['sub_email'];
-	      $subject = (intval($list['lst_subject_tag']) == 1 ? '['.$list['lst_name'].'] ' : '').$list['lst_unsubscribe_subject'];
+	      $subject = (intval($list['lst_subject_tag']) == 1 ? '['.$template['@@NOM_COMPLET@@'].'] ' : '').html_entity_decode($list['lst_unsubscribe_subject'], ENT_QUOTES,'UTF-8');
 	      $body = $list['lst_unsubscribe_text'];
 	      while (list($translateFrom, $translateTo) = each($template)) {
 	        $body = str_replace($translateFrom, $translateTo, $body);
@@ -41,7 +42,7 @@ function balise_CLEVERMAIL_UNSUBSCRIBE_dyn() {
 	      $envoyer_mail = charger_fonction('envoyer_mail', 'inc');
 	      $envoyer_mail($to, $subject, $body, $from);
 
-				$return = '<p>'._T('clevermail:desinscription_confirmation_debut').' '.$list['lst_name'].' '._T('clevermail:desinscription_confirmation_fin').'</p>';
+				$return = '<p>'._T('clevermail:desinscription_confirmation_debut').' '.$template['@@NOM_COMPLET@@'].' '._T('clevermail:desinscription_confirmation_fin').'</p>';
 		} else {
 		    $return = '<p>'._T('clevermail:aucune_inscription').'</p>';
 	    }

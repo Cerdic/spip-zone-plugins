@@ -48,7 +48,7 @@ function balise_CLEVERMAIL_VALIDATION_dyn() {
 			            sql_delete("spip_cm_posts_queued", "sub_id = ".intval($action['sub_id'])." AND pst_id IN (".implode(',', sql_fetsel("lst_id", "spip_cm_posts", "lst_id=".intval($action['lst_id']), "lst_id")).")");
 
 			            $lst_name = sql_getfetsel("lst_name", "spip_cm_lists", "lst_id = ".intval($action['lst_id']));
-			            $return = $return.'<p>'._T('clevermail:desinscription_validee',array('lst_name' => supprimer_numero($lst_name))).'</p>';
+			            $return = $return.'<p>'._T('clevermail:desinscription_validee',array('lst_name' => $lists_name_complet)).'</p>';
 			            // E-mail d'alerte envoye au moderateur de la liste
 			            $sub = sql_fetsel("*", "spip_cm_subscribers", "sub_id = ".intval($action['sub_id']));
 			            $list = sql_fetsel("*", "spip_cm_lists", "lst_id = ".intval($action['lst_id']));
