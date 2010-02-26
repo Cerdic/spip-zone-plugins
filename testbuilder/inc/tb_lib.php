@@ -340,6 +340,9 @@ function tb_jeu_test_argument($type){
 				"2001-00-00 12:33:44",
 				"2001-03-00 09:12:57",
 				"2001-02-29 14:12:33",
+				"0000-00-00",
+				"0001-01-01",
+				"1970-01-01"
 			);
 			$t = tb_jeu_test_argument('time');
 			foreach($t as $d)
