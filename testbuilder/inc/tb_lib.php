@@ -401,6 +401,15 @@ function tb_jeu_test_argument($type){
 			);
 			$jeu[] = $jeu; // et un array d'array
 			break;
+		case 'image':
+			$jeu = array(
+				'http://www.spip.net/squelettes/img/spip.png',
+				'prive/images/logo_spip.jpg',
+				'prive/images/logo-spip.gif',
+				'prive/aide_body.css',
+				'prive/images/searching.gif',
+			);
+			break;
 	}
 	return $jeu;
 }
