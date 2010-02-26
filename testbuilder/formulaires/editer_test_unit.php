@@ -40,10 +40,13 @@ function formulaires_editer_test_unit_verifier_dist($filename,$funcname){
 	// verifier qu'un args n'est pas vide au milieu
 	foreach($args as $k=>$v)
 		if (!strlen($v))
-			$erreurs["args_$k"]=_L("Cet argument ne peut &ecirc;tre vide car il est suivi par d'autres");
+			$erreurs["args_$k"]=_T("tb:erreur_argument_vide");
 	set_request('args',$args);
 	#var_dump($args);
 
+	if (_request('combi') AND !count($args)){
+		$erreurs['message_erreur'] = _T("tb:erreur_test_combinatoire_types_requis");
+	}
 	// demande de test sur un jeu d'essai
 	if (!count($erreurs) AND _request('tester')){
 		tb_try_essai($filename,$funcname,$args,$output_test);
@@ -68,7 +71,26 @@ function formulaires_editer_test_unit_traiter_dist($filename,$funcname){
 		$essais[] = $essai;
 		tb_test_essais($funcname,$filetest,$essais);
 		set_request('args',array());
-		$message_ok = _L("Test ajout&eacute; : ").$output_test;
+		$message_ok = _T('tb:ok_test_ajoute').$output_test;
+	}
+	elseif(_request('combi')){
+		$args = _request('args');
+		$argss = tb_essai_combinatoire($args);
+		$essais = array();
+		foreach($argss as $args){
+			$args = array_map('tb_export',$args);
+			$res = tb_try_essai($filename,$funcname,$args,$output_test);
+			$essai = eval("return array(".var_export($res,true).", ".implode(', ',$args).");");
+			$essais[] = $essai;
+		}
+		tb_test_essais($funcname,$filetest,$essais);
+		set_request('args',array());
+		$message_ok = _T("tb:ok_n_tests_combi_crees",array('nb'=>count($essais)));
+	}
+	elseif(_request('supprimer_tous')){
+		tb_test_essais($funcname,$filetest,array());
+		set_request('args',array());
+		$message_ok = _T('tb:ok_tests_supprimes');
 	}
 	else {
 		$save = false;
@@ -79,7 +101,7 @@ function formulaires_editer_test_unit_traiter_dist($filename,$funcname){
 			}
 		if ($save){
 			tb_test_essais($funcname,$filetest,$essais);
-			$message_ok = _L("Test supprim&eacute;");
+			$message_ok = _T("tb:ok_test_supprime");
 		}
 	}
 	return array('message_ok'=>$message_ok,'fichier_test'=>$filetest,'editable'=>true);
@@ -94,7 +116,9 @@ function tb_affiche_essais($essais,$funcname){
 	if (is_array($essais) AND count($essais)){
 		foreach($essais as $k=>$essai){
 			$res = array_shift($essai);
-			$output .= "<li class='item'><input type='submit' class='submit' name='del_$k' value='X' /> <code>$funcname(".implode(',',array_map('tb_export',$essai)).")=".tb_export($res)."</code></li>";
+			$affiche = "$funcname(".implode(',',array_map('tb_export',$essai)).")=".tb_export($res);
+			$affiche = str_replace(array('&','<','>'),array('&amp;','&lt;','&gt;'),$affiche);
+			$output .= "<li class='item'><input type='submit' class='submit' name='del_$k' value='X' /> <code>$affiche</code></li>";
 		}
 		$output = "<ul class='liste_items'>$output</ul>";
 	}

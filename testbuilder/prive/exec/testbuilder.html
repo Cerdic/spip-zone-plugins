@@ -36,7 +36,7 @@
 			<tbody>
 			<BOUCLE_funcs(POUR){tableau #ENV{file}|tb_liste_fonctions}>
 				<tr>
-					<td>#CLE([(#VALEUR|reset|implode{', '})])</td><td>#SET{test,#CLE|tb_hastest}[
+					<td><tt>#CLE([(#VALEUR|reset|implode{', '})])</tt></td><td>#SET{test,#CLE|tb_hastest}[
 						(#GET{test}|tb_url_test{lien}|sinon{#BOUTON_ACTION{<:tb:creer_test:>,#SELF|parametre_url{func,#CLE}}})
 					][(#GET{test}|oui)[(#BOUTON_ACTION{<:tb:modifier:>,#SELF|parametre_url{func,#CLE}})]]
 					</td>

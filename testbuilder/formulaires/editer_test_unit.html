@@ -23,7 +23,12 @@
 	  </ul>
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 	  <!--extra-->
-	  <p class="boutons"><input type='submit' class='submit' name="tester" value='<:tb:bouton_tester:>' /> <input type='submit' class='submit' name="enregistrer" value='<:bouton_ajouter:>' /></p>
-		[<div class="essais" style="padding:10px;border-bottom:1px solid #eee;">(#ENV{_essais}|tb_affiche_essais{#ENV{_funcname}})</div>]
+	  <p class="boutons">
+			<input type='submit' class='submit' name="tester" value='<:tb:bouton_tester:>' />
+			<input type='submit' class='submit' name="combi" value='<:tb:bouton_combinatoire:>' />
+			<input type='submit' class='submit' name="enregistrer" value='<:bouton_ajouter:>' /></p>
+		[<div class="essais" style="padding:10px;border-bottom:1px solid #eee;">
+		<input type='submit' class='submit' name="supprimer_tous" value='<:tb:bouton_supprimer_tous:>' />
+			(#ENV{_essais}|tb_affiche_essais{#ENV{_funcname}})</div>]
 	</div></form>
 </div>

@@ -271,4 +271,88 @@ function tb_try_essai($filename,$funcname,$essai,&$output_test){
 	$output_test .= ($output_test?"<br />":"")."<tt>$appel = ".var_export($res,true)."</tt>";
 	return $res;
 }
+
+
+/**
+ * Definir des jeu de valeurs test par type d'argument
+ * @param string $type
+ * @return array
+ */
+function tb_jeu_test_argument($type){
+	$jeu = array();
+	switch ($type){
+		case 'bool':
+			$jeu = array(true,false);
+			break;
+		case 'string':
+			$jeu = array(
+				'',
+				'0',
+				'Un texte avec des <a href="http://spip.net">liens</a> [Article 1->art1] [spip->http://www.spip.net] http://www.spip.net',
+				'Un texte avec des entit&eacute;s &amp;&lt;&gt;&quot;',
+				'Un texte sans entites &<>"\'',
+				'{{{Des raccourcis}}} {italique} {{gras}} <code>du code</code>',
+				'Un modele <modeleinexistant|lien=[->http://www.spip.net]>',
+			);
+			break;
+		case 'int':
+			$jeu = array(
+				0,
+				-1,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				10,
+				20,
+				30,
+				50,
+				100,
+				1000,
+				10000
+			);
+			break;
+		case 'array':
+			$jeu = array(
+				array(),
+				tb_jeu_test_argument('string'),
+				tb_jeu_test_argument('int'),
+				tb_jeu_test_argument('bool'),
+			);
+			$jeu[] = $jeu; // et un array d'array
+			break;
+	}
+	return $jeu;
+}
+
+/**
+ * Construire un jeu d'essai complet combinatoire
+ * Pour chaque entree, on teste chaque valeur unitaire candidate
+ * combinatoirement avec les autres entrees
+ *
+ * @param array $types
+ */
+function tb_essai_combinatoire($types){
+	$essais = array();
+	if (!count($types))
+		return $essais;
+
+	$type = array_shift($types);
+	$es = tb_essai_combinatoire($types);
+	$samples = tb_jeu_test_argument($type);
+	foreach($samples as $s){
+		if (count($es)){
+			foreach($es as $e) {
+				array_unshift($e,$s);
+				$essais[] = $e;
+			}
+		}
+		else
+			$essais[] = array($s);
+	}
+	return $essais;
+}
 ?>
