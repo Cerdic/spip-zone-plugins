@@ -67,14 +67,14 @@
 	
 	<script type="text/javascript">
 		$(function(){
-			$('.formulaire_construire_formulaire li .actions').addClass('hidden');
-			$('.formulaire_construire_formulaire li:has(.actions)')
+			$('.formulaire_construire_formulaire li.configurable > .actions').addClass('hidden');
+			$('.formulaire_construire_formulaire li.configurable')
 				.hover(
 					function(){
-						$(this).find('> .actions').removeClass('hidden');
+						$(this).addClass('hover').find('> .actions').removeClass('hidden');
 					},
 					function(){
-						$(this).find('> .actions').addClass('hidden');
+						$(this).removeClass('hover').find('> .actions').addClass('hidden');
 					}
 				);
 			

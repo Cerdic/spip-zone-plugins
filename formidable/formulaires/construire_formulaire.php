@@ -132,6 +132,8 @@ function formidable_generer_saisie_configurable($saisie, $env){
 	$nom = $saisie['options']['nom'];
 	// On cherche si ya un formulaire de config
 	$formulaire_config = $env['erreurs']['configurer_'.$nom];
+	// On ajoute une classe
+	$saisie['options']['li_class'] .= ' configurable';
 	
 	// On ajoute les boutons d'actions
 	$saisie = saisies_inserer_html(
@@ -176,7 +178,7 @@ function formidable_generer_saisie_configurable($saisie, $env){
 		
 		$saisie = saisies_inserer_html(
 			$saisie,
-			'<div class="formulaire_configurer"><ul>'
+			'<div class="formulaire_configurer"><ul class="formulaire_configurer-contenus">'
 			.recuperer_fond(
 				'inclure/generer_saisies',
 				$env2

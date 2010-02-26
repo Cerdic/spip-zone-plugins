@@ -1,38 +1,47 @@
 
 .formulaire_construire_formulaire{
-	padding:1em;
+	padding:2em;
 	background:white;
 }
+.formulaire_construire_formulaire ul li label{
+	display:block;
+	margin:0;
+	width:auto;
+	float:none;
+	clear:all;
+	line-height:1.7em;
+}
+.formulaire_construire_formulaire input.text, .formulaire_construire_formulaire input.password, .formulaire_construire_formulaire textarea, .formulaire_construire_formulaire select{
+	width:auto;
+}
 
-.formulaire_construire_formulaire li, .formulaire_construire_formulaire li.fieldset li{
+.formulaire_construire_formulaire li.configurable{
 	padding:1em;
 	margin:0.5em 0;
+	background:transparent;
 	border:1px dashed transparent;
 	border-radius:5px;
 	-moz-border-radius:5px;
 	-webkit-border-radius:5px;
 }
-.formulaire_construire_formulaire li:hover{
+.formulaire_construire_formulaire li.configurable:hover{
 	border-color:#999;
 }
 .formulaire_construire_formulaire li.en_configuration{
 	padding-bottom:0;
-	border:1px solid #999;
-}
-.formulaire_construire_formulaire li.obligatoire{
-	background:transparent;
+	border:5px solid #999;
 }
 .formulaire_construire_formulaire .formulaire_configurer{
-	margin:1em -1em;
+	margin:1em -1em 0 -1em;
 	border-top:1px dashed #999;
 }
 .formulaire_construire_formulaire .formulaire_configurer fieldset{
 	border:0;
 }
-.formulaire_construire_formulaire .formulaire_configurer li, .formulaire_construire_formulaire li.choix{
+.formulaire_construire_formulaire .formulaire_configurer-contenus li.editer{
 	border:0;
-	margin:0;
-	padding:0;
+	margin:0.5em 0;
+	padding:0.5em 1em;
 }
 .formulaire_construire_formulaire .formulaire_configurer li.formulaire_configurer-contenu{
 	background:white;
@@ -48,6 +57,7 @@
 	margin-bottom:-1px;
 	padding:0;
 	background:#eee;
+	border:0;
 	border-bottom:1px solid #ddd;
 	border-right:1px solid #999;
 	border-radius:0;
@@ -86,14 +96,9 @@
 	opacity:1;
 }
 
-.formulaire_construire_formulaire ul li label{
-	display:block;
-	margin:0;
-	width:auto;
-	float:none;
-	clear:all;
+.formulaire_construire_formulaire li.saisies_disponibles{
+	padding:1em;
 }
-
 .formulaire_construire_formulaire .ajouter_saisie{
 	padding:0.5em 8px 0.5em 36px;
 	font-size:1em;
