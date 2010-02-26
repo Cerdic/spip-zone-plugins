@@ -17,7 +17,15 @@ function themes_interface_privee_header_prive($flux) {
 	else if ($interface == "wpip") $flux .= '<link rel="stylesheet" type="text/css" href="'.generer_url_public('style_prive_wpip', parametres_css_prive()).'" id="css_wpip" />';
 	else if ($interface == "degrades") $flux .= '<link rel="stylesheet" type="text/css" href="'.generer_url_public('style_prive_degrades', parametres_css_prive()).'" id="css_degrades" />';
 	else if ($interface == "bonux") $flux .= '<link rel="stylesheet" type="text/css" href="'.generer_url_public('style_prive_bonux', parametres_css_prive()).'" id="css_bonux" />';
-	else if ($interface == "chocolat") $flux .= '<link rel="stylesheet" type="text/css" href="'.generer_url_public('style_prive_chocolat', parametres_css_prive()).'" id="css_chocolat" />';
+	else if ($interface == "chocolat") {
+		$flux .= '<link rel="stylesheet" type="text/css" href="'.generer_url_public('style_prive_chocolat', parametres_css_prive()).'" id="css_chocolat" />';
+		$flux .= "\n<script type='text/javascript'><!--
+				$(document).ready(function() {
+					$('.bandeau_sec').css({'width': '150px'});
+					$('.bandeau_sec .cellule36').css({'width': 'auto'});
+				});
+		--></script>";
+	}
 
 	
 	$url = url_absolue($REQUEST_URI);
