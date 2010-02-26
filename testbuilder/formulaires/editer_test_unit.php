@@ -82,9 +82,10 @@ function formulaires_editer_test_unit_traiter_dist($filename,$funcname){
 	if (_request('enregistrer')){
 		$args = _request('args');
 		$essai = eval("return array('??TBD??', ".implode(', ',$args).");");
-		if (!is_null($m=_request('modif_essai')))
+		if (!is_null($m=_request('modif_essai'))){
 			$essais[$m] = $essai;
-		else
+			set_request('modif_essai');
+		} else
 			$essais[] = $essai;
 		tb_test_essais($funcname,$filetest,$essais);
 		tb_refresh_test($filename,$funcname,$filetest);

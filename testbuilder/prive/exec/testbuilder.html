@@ -9,7 +9,7 @@
 <BOUCLE_func(CONDITION){si #ENV{func,''}}>
 	<h2>#ENV{func}</h2>
 	<div style="height:200px;overflow:auto;border:1px solid;padding:5px;">
-	<pre>[(#ENV{file}|tb_function_extract{#ENV{func}})]</pre>
+	<pre>[(#ENV{file}|tb_function_extract{#ENV{func}}|entites_html)]</pre>
 	</div>
 
 	<div class="ajax">
