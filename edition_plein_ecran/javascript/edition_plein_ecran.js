@@ -30,24 +30,53 @@ function hauteurWindowPourTextarea() {
 /* Afficher en mode plein ecran et forcer le ScrollTop */
 /* Est appele quand double clic, et quand redimensionnement de l'ecran */
 function changerDimensions(el) {
-	/* l'appel de window.innerHeight pour jquery 1.1.1 */
-	el.css({
-		position: "fixed", 
-		fontSize: "14px",
-		lineHeight: "135%",
-		top: 0, 
-		left: 0, 
-		padding:"0", 
-		width: "550px", 
-		paddingLeft: Math.floor(($("body").width() - 550) / 2),
-		paddingRight: Math.ceil(($("body").width() - 550) / 2),
-		height: hauteurWindowPourTextarea() - (60 + 30),
-		paddingTop: "30px",
-		paddingBottom: "30px",
-		border: "0", 
-		backgroundColor : "white",
-		zIndex: 1000
-	});
+
+	/* si le box-sizing a ete fixe a "border-box", 
+	   il faut indiquer les dimensions externes */
+	var boxSizing = false;
+	if (el.css("-webkit-box-sizing") == "border-box") boxSizing = true;
+	if (el.css("-moz-box-sizing") == "border-box") boxSizing = true;
+	if (el.css("-ms-box-sizing") == "border-box") boxSizing = true;
+	if (el.css("box-sizing") == "border-box") boxSizing = true;
+	
+	if (boxSizing) {
+		el.css({
+			position: "fixed", 
+			fontSize: "14px",
+			lineHeight: "135%",
+			top: 0, 
+			left: 0, 
+			padding:"0", 
+			width: $("body").width(), 
+			paddingLeft: Math.floor(($("body").width() - 550) / 2),
+			paddingRight: Math.ceil(($("body").width() - 550) / 2),
+			height: hauteurWindowPourTextarea() - (30),
+			paddingTop: "30px",
+			paddingBottom: "30px",
+			border: "0", 
+			backgroundColor : "white",
+			zIndex: 1000
+		});
+	
+	} else {
+		el.css({
+			position: "fixed", 
+			fontSize: "14px",
+			lineHeight: "135%",
+			top: 0, 
+			left: 0, 
+			padding:"0", 
+			width: "550px", 
+			paddingLeft: Math.floor(($("body").width() - 550) / 2),
+			paddingRight: Math.ceil(($("body").width() - 550) / 2),
+			height: hauteurWindowPourTextarea() - (60 + 30),
+			paddingTop: "30px",
+			paddingBottom: "30px",
+			border: "0", 
+			backgroundColor : "white",
+			zIndex: 1000
+		});
+	}
 	
 	if (jQuery().scrollTop) {
 		el.scrollTop(textAreaActif.scrollTop * 2);

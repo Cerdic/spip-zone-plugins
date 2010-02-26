@@ -6,10 +6,10 @@
 	[ARNO*->arnaud@paris-beyrouth.net] © GPL 2009.
 	</auteur>
 	<version>
-	0.4
+	1.0
 	</version>
 	<etat>
-	test
+	stable
 	</etat>
 	<description>
 	Tous les champs multilignes (textarea) peuvent d&eacute;sormais &ecirc;tre &eacute;dit&eacute;s en mode plein &eacute;cran. Pour cela: double-cliquer dans un champ: la page dispara&icirc;t et seul le champ d'&eacute;dition occupe tout l'&eacute;cran. Pour sortir de ce mode d'&eacute;dition, utiliser la touche &laquo;Esc&raquo; (escape).
