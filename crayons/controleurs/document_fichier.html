@@ -14,7 +14,7 @@
 
 <fieldset[ style="(#ENV{style});"]>
 <legend>
-	[(#SET{logo,[(#GET{image}|reduire_image{0,40})]})]
+	[(#SET{logo,[(#GET{image}|image_reduire{0,40})]})]
 
 	[(#REM) hacke l'url pour eviter le cache du navigateur ]
 	[(#SET{url,[(#GET{logo}|extraire_attribut{src}

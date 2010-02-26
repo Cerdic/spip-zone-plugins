@@ -11,7 +11,7 @@
 <BOUCLE_document(DOCUMENTS){id_document}{tous}>
 [(#SET{image,[(#ID_VIGNETTE|>{0}|?{#LOGO_DOCUMENT})]})]
 [(#GET{image}|?{
-	[(#SET{vignette,[(#GET{image}|reduire_image{64})]})]
+	[(#SET{vignette,[(#GET{image}|image_reduire{64})]})]
 	[(#REM) hacke l'url pour eviter le cache du navigateur ]
 	[(#SET{url,[(#GET{vignette}|extraire_attribut{src}
 		|parametre_url{s,#EVAL{time()}})]})]
