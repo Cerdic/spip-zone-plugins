@@ -20,9 +20,15 @@ function balise_CLEVERMAIL_UNSUBSCRIBE_dyn() {
 	      $list = sql_fetsel("*", "spip_cm_lists", "lst_id=".intval($abonnement['lst_id']));
 
 	      $template = array();
-	      $template['@@NOM_LETTRE@@'] = supprimer_numero(substr($list['lst_name'], strpos($list['lst_name'], "/")+1));
-		  $template['@@NOM_CATEGORIE@@'] = supprimer_numero(substr($list['lst_name'],0 , strpos($list['lst_name'], "/")));
-		  $template['@@NOM_COMPLET@@'] = ($template['@@NOM_CATEGORIE@@'] != '' ? $template['@@NOM_CATEGORIE@@'].' / '.$template['@@NOM_LETTRE@@'] : $template['@@NOM_LETTRE@@']);
+        if (strpos($listData['lst_name'], '/') === false) {
+        	$template['@@NOM_LETTRE@@'] = supprimer_numero($listData['lst_name']);
+        	$template['@@NOM_CATEGORIE@@'] = '';
+        	$template['@@NOM_COMPLET@@'] = $template['@@NOM_LETTRE@@'];
+        } else {
+          $template['@@NOM_LETTRE@@'] = supprimer_numero(substr($listData['lst_name'], strpos($listData['lst_name'], '/') + 1));
+          $template['@@NOM_CATEGORIE@@'] = supprimer_numero(substr($listData['lst_name'], 0, strpos($listData['lst_name'], '/')));
+        	$template['@@NOM_COMPLET@@'] = $template['@@NOM_CATEGORIE@@'].' / '.$template['@@NOM_LETTRE@@'];
+        }
 	      $template['@@EMAIL@@'] = $sub['sub_email'];
 	      $template['@@FORMAT_INSCRIPTION@@']  = ($data['lsr_mode'] == 1 ? 'HTML' : 'texte');
 	      //$template['@@URL_CONFIRMATION@@'] = $GLOBALS['meta']['adresse_site'].'/spip.php?page=clevermail_do&id='.$actionId;
