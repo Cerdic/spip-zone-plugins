@@ -13,12 +13,12 @@ function balise_CLEVERMAIL_VALIDATION_dyn() {
 				$list = sql_fetsel("*", "spip_cm_lists", "lst_id = ".intval($action['lst_id']));
 	            $pos = strpos($list['lst_name'], "/");
         if (strpos($listData['lst_name'], '/') === false) {
-        	$lettre = $listData['lst_name'];
+        	$lettre = supprimer_numero($listData['lst_name']);
         	$categorie = '';
 					$lists_name_complet = $lettre;
         } else {
-        	$lettre = substr($listData['lst_name'], strpos($listData['lst_name'], '/') + 1);
-        	$categorie = substr($listData['lst_name'], 0, strpos($listData['lst_name'], '/'));
+        	$lettre = supprimer_numero(substr($list['lst_name'], strpos($list['lst_name'], '/') + 1));
+        	$categorie = supprimer_numero(substr($list['lst_name'], 0, strpos($list['lst_name'], '/')));
 					$lists_name_complet = $categorie." / ".$lettre;
         }
 				switch ($action['pnd_action']) {

@@ -102,16 +102,16 @@ function formulaires_clevermail_multiple_traiter_dist($lst_id = 0, $lsr_mode_for
           			sql_updateq("spip_cm_pending", array('pnd_action' => 'subscribe', 'pnd_mode' => intval($lsr_mode), 'pnd_action_date' => time(), 'pnd_action_id' => $actionId), "sub_id=".intval($sub_id)." AND lst_id=".intval($lst_id));
           		}
               if (strpos($listData['lst_name'], '/') === false) {
-              	$lettre = $listData['lst_name'];
+              	$lettre = supprimer_numero($listData['lst_name']);
               	$categorie = '';
               } else {
-              	$lettre = substr($listData['lst_name'], strpos($listData['lst_name'], '/') + 1);
-              	$categorie = substr($listData['lst_name'], 0, strpos($listData['lst_name'], '/'));
+              	$lettre = supprimer_numero(substr($listData['lst_name'], strpos($listData['lst_name'], '/') + 1));
+              	$categorie = supprimer_numero(substr($listData['lst_name'], 0, strpos($listData['lst_name'], '/')));
               }
-          		$lists_name = $lists_name."- ".supprimer_numero($lettre)."\n\n";
-          		$lists_name_categorie = $lists_name_categorie."- ".supprimer_numero($categorie)."\n\n";
-          		$lists_name_complet = $lists_name_complet."- ".supprimer_numero($categorie)." / ".supprimer_numero($lettre)."\n\n";
-          		$msgInscription = "";
+          		$lists_name = $lists_name.'- '.$lettre."\n\n";
+          		$lists_name_categorie = $lists_name_categorie.'- '.$categorie."\n\n";
+          		$lists_name_complet = $lists_name_complet.'- '.$categorie.' / '.$lettre."\n\n";
+          		$msgInscription = '';
 				if($nbLettre <= count($lists)){
           			if(count($lists) > 1){
           				//Si inscription a plusieurs lettres, on envoie un seul mail avec la liste des lettres
