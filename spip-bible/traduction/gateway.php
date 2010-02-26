@@ -1,5 +1,5 @@
 <?php
-function recuperer_passage($livre='',$chapitre_debut='',$verset_debut='',$chapitre_fin='',$verset_fin='',$gateway,$lang){
+function recuperer_passage_gateway($livre='',$chapitre_debut='',$verset_debut='',$chapitre_fin='',$verset_fin='',$gateway,$lang){
 	
 	$id_trad = $gateway[0];
 	$nom_trad = $gateway[1];

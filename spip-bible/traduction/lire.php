@@ -1,6 +1,6 @@
 <?php
 
-function recuperer_passage($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$lire,$lang){
+function recuperer_passage_lire($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$lire,$lang){
 	
 	$url_base="http://lire.la-bible.net/texte.php?versions[]=".$lire;
 	

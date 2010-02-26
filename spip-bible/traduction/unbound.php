@@ -1,6 +1,6 @@
 <?php
 
-function recuperer_passage($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$unbound,$lang){
+function recuperer_passage_unbound($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$unbound,$lang){
 	
 	if ($verset_debut=='' ){
 		$verset_debut=1;

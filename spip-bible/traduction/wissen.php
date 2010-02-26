@@ -1,7 +1,7 @@
 <?php
 
 
-function recuperer_passage($livre,$ref,$wissen,$lang){
+function recuperer_passage_wissen($livre,$ref,$wissen,$lang){
 	
 	include_spip('inc/bible_tableau');
 	$livre_gateways = bible_tableau('gateway');

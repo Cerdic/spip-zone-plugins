@@ -169,26 +169,26 @@ function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$re
 	
 	if ($lire){
 		include_spip('traduction/lire');
-		$texte = '<quote>'.recuperer_passage($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$lire,$lang);
+		$texte = '<quote>'.recuperer_passage_lire($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$lire,$lang);
 	}
 	
 	else if ($unbound){
 		include_spip('traduction/unbound');
-		$texte = '<quote>'.recuperer_passage($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$unbound,$lang);
+		$texte = '<quote>'.recuperer_passage_unbound($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$unbound,$lang);
 	}
 		
 		
 	else if ($wissen){
 		$isaie == true ? $passage = eregi_replace('Es','Is',$passage) : $passage = $passage;
 		include_spip('traduction/wissen');
-		$texte = '<quote>'.recuperer_passage($livre,$passage,$wissen,$lang);
+		$texte = '<quote>'.recuperer_passage_wissen($livre,$passage,$wissen,$lang);
 		
 		}
 	
 	else if ($gateway){
 		
 		include_spip('traduction/gateway');
-		$texte = '<quote>'.recuperer_passage($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$gateway,$lang);
+		$texte = '<quote>'.recuperer_passage_gateway($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$gateway,$lang);
 		
 	}
 	
