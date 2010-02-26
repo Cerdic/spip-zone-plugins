@@ -94,113 +94,131 @@ function formulaires_clevermail_traiter_dist($lst_id = 0, $lsr_mode_force = fals
     	switch ($listData['lst_moderation']) {
     		case 'open':
     			$actionId = md5('subscribe#'.$lst_id.'#'.$sub_id.'#'.time());
-          		sql_insertq("spip_cm_lists_subscribers", array('lst_id' => intval($lst_id), 'sub_id' => intval($sub_id), 'lsr_mode' => intval($lsr_mode), 'lsr_id' => $actionId));
-          		$message .= (strlen($message) > 0 ? '<br />' : '')._T('clevermail:inscription_validee', array('lst_name' => $listData['lst_name']));
+      		sql_insertq("spip_cm_lists_subscribers", array('lst_id' => intval($lst_id), 'sub_id' => intval($sub_id), 'lsr_mode' => intval($lsr_mode), 'lsr_id' => $actionId));
+      		$message .= (strlen($message) > 0 ? '<br />' : '')._T('clevermail:inscription_validee', array('lst_name' => $listData['lst_name']));
     			break;
     		case 'email':
     			// TODO : à finir
-          		if (sql_countsel("spip_cm_pending", "lst_id=".intval($lst_id)." AND sub_id=".intval($sub_id)) == 0) {
-          			sql_insertq("spip_cm_pending", array('lst_id' => intval($lst_id), 'sub_id' => intval($sub_id), 'pnd_action' => 'subscribe', 'pnd_mode' => intval($lsr_mode), 'pnd_action_date' => time(), 'pnd_action_id' => $actionId));
+      		if (sql_countsel("spip_cm_pending", "lst_id=".intval($lst_id)." AND sub_id=".intval($sub_id)) == 0) {
+      			sql_insertq("spip_cm_pending", array('lst_id' => intval($lst_id), 'sub_id' => intval($sub_id), 'pnd_action' => 'subscribe', 'pnd_mode' => intval($lsr_mode), 'pnd_action_date' => time(), 'pnd_action_id' => $actionId));
+      		}
+      		if (strpos($listData['lst_name'], '/') === false) {
+        		$lettre = $listData['lst_name'];
+      			$categorie = '';
+        	} else {
+        		$lettre = substr($listData['lst_name'], strpos($listData['lst_name'], '/') + 1);
+      			$categorie = substr($listData['lst_name'], 0, strpos($listData['lst_name'], '/'));
+        	}
+      		$lists_name = $lists_name.'- '.$lettre."\n\n";
+      		$lists_name_categorie = $lists_name_categorie."- ".$categorie."\n\n";
+      		$lists_name_complet = $lists_name_complet."- ".$listData['lst_name']."\n\n";
+  				if ($nbLettre <= count($lists)) {
+      			if (count($lists) > 1) {
+      				//Si inscription a plusieurs lettres, on envoie un seul mail avec la liste des lettres
+  						// Composition du message de demande de confirmation
+          		$template = array();
+          		$template['@@NOM_LETTRE@@'] = $lists_name;
+          		$template['@@NOM_CATEGORIE@@'] = $lists_name_categorie;
+          		$template['@@NOM_COMPLET@@'] = $lists_name_complet;
+          		$template['@@DESCRIPTION@@'] = $listData['lst_comment'];
+          		$template['@@FORMAT_INSCRIPTION@@']  = (intval($lsr_mode) == 1 ? _T('choix_version_html') : _T('choix_version_texte'));
+          		$template['@@EMAIL@@'] = _request('sub_email');
+          		$template['@@URL_CONFIRMATION@@'] = generer_url_public(_CLEVERMAIL_VALIDATION,'id='.$actionId);
+          		$body = _T('clevermail:mail_inscription_multiple');
+      			} else {
+      				// Composition du message de demande de confirmation
+          		$template = array();
+          		if (strpos($listData['lst_name'], '/') === false) {
+            		$template['@@NOM_LETTRE@@'] = supprimer_numero($listData['lst_name']);
+            		$template['@@NOM_CATEGORIE@@'] = '';
+            		$template['@@NOM_COMPLET@@'] = $template['@@NOM_LETTRE@@'];
+            	} else {
+                $template['@@NOM_LETTRE@@'] = supprimer_numero(substr($listData['lst_name'], strpos($listData['lst_name'], '/') + 1));
+                $template['@@NOM_CATEGORIE@@'] = supprimer_numero(substr($listData['lst_name'], 0, strpos($listData['lst_name'], '/')));
+            		$template['@@NOM_COMPLET@@'] = $template['@@NOM_CATEGORIE@@'].' / '.$template['@@NOM_LETTRE@@'];
+            	}
+          		$template['@@DESCRIPTION@@'] = $listData['lst_comment'];
+          		$template['@@FORMAT_INSCRIPTION@@']  = (intval($lsr_mode) == 1 ? _T('choix_version_html') : _T('choix_version_texte'));
+          		$template['@@EMAIL@@'] = _request('sub_email');
+          		$template['@@URL_CONFIRMATION@@'] = generer_url_public(_CLEVERMAIL_VALIDATION,'id='.$actionId);
+          		$body = $listData['lst_subscribe_text'];
+      			}
+  					if($nbLettre == count($lists)) {
+	  					while (list($translateFrom, $translateTo) = each($template)) {
+            		$body = str_replace($translateFrom, $translateTo, $body);
           		}
-          		$lettre = substr($listData['lst_name'], strpos($listData['lst_name'], "/")+1);
-          		$lists_name = $lists_name."- ".$lettre."\n\n";
-      			$categorie = substr($listData['lst_name'],0 , strpos($listData['lst_name'], "/"));
-          		$lists_name_categorie = $lists_name_categorie."- ".$categorie."\n\n";
-          		$lists_name_complet = $lists_name_complet."- ".$listData['lst_name']."\n\n";
-				if($nbLettre <= count($lists)){
-          			if(count($lists) > 1){
-          				//Si inscription a plusieurs lettres, on envoie un seul mail avec la liste des lettres
-						// Composition du message de demande de confirmation
-		          		$template = array();
-		          		$template['@@NOM_LETTRE@@'] = $lists_name;
-		          		$template['@@NOM_CATEGORIE@@'] = $lists_name_categorie;
-		          		$template['@@NOM_COMPLET@@'] = $lists_name_complet;
-		          		$template['@@DESCRIPTION@@'] = $listData['lst_comment'];
-		          		$template['@@FORMAT_INSCRIPTION@@']  = (intval($lsr_mode) == 1 ? _T('choix_version_html') : _T('choix_version_texte'));
-		          		$template['@@EMAIL@@'] = _request('sub_email');
-		          		$template['@@URL_CONFIRMATION@@'] = generer_url_public(_CLEVERMAIL_VALIDATION,'id='.$actionId);
-		          		$body = _T('clevermail:mail_inscription_multiple');
-          			} else {
-          				// Composition du message de demande de confirmation
-		          		$template = array();
-		          		$template['@@NOM_LETTRE@@'] = substr($listData['lst_name'], strpos($listData['lst_name'], "/")+1);
-		          		$template['@@NOM_CATEGORIE@@'] = substr($listData['lst_name'],0 , strpos($listData['lst_name'], "/"));
-		          		$template['@@NOM_COMPLET@@'] = $listData['lst_name'];
-		          		$template['@@DESCRIPTION@@'] = $listData['lst_comment'];
-		          		$template['@@FORMAT_INSCRIPTION@@']  = (intval($lsr_mode) == 1 ? _T('choix_version_html') : _T('choix_version_texte'));
-		          		$template['@@EMAIL@@'] = _request('sub_email');
-		          		$template['@@URL_CONFIRMATION@@'] = generer_url_public(_CLEVERMAIL_VALIDATION,'id='.$actionId);
-		          		$body = $listData['lst_subscribe_text'];
-          			}
-					if($nbLettre == count($lists)){
-						while (list($translateFrom, $translateTo) = each($template)) {
-		            		$body = str_replace($translateFrom, $translateTo, $body);
-		          		}
-		          		$to = _request('sub_email');
-		          		$subject = (intval($listData['lst_subject_tag']) == 1 ? '['.$listData['lst_name'].'] ' : '').$listData['lst_subscribe_subject'];
-		          		$from = sql_getfetsel("set_value", "spip_cm_settings", "set_name='CM_MAIL_FROM'");
-		          		$return = sql_getfetsel("set_value", "spip_cm_settings", "set_name='CM_MAIL_RETURN'");
-						// message removed from queue, we can try to send it
-		          		// TODO : Et le charset ?
-		          		// TODO : Et le return-path ?
-		          		$envoyer_mail = charger_fonction('envoyer_mail', 'inc');
-		          		if ($envoyer_mail($to, $subject, $body, $from)) {
-		            		$message .= (strlen($message) > 0 ? '<br />' : '')._T('clevermail:inscription_ok', array('lst_name' => $listData['lst_name']));
-		          		} else {
-		            		$message .= (strlen($message) > 0 ? '<br />' : '')._T('clevermail:send_error', array('lst_name' => $listData['lst_name']));
-		          		}
-					}
-					$nbLettre++;
+          		$to = _request('sub_email');
+          		$subject = (intval($listData['lst_subject_tag']) == 1 ? '['.$listData['lst_name'].'] ' : '').$listData['lst_subscribe_subject'];
+          		$from = sql_getfetsel("set_value", "spip_cm_settings", "set_name='CM_MAIL_FROM'");
+          		$return = sql_getfetsel("set_value", "spip_cm_settings", "set_name='CM_MAIL_RETURN'");
+  						// message removed from queue, we can try to send it
+          		// TODO : Et le charset ?
+          		// TODO : Et le return-path ?
+          		$envoyer_mail = charger_fonction('envoyer_mail', 'inc');
+          		if ($envoyer_mail($to, $subject, $body, $from)) {
+            		$message .= (strlen($message) > 0 ? '<br />' : '')._T('clevermail:inscription_ok', array('lst_name' => $listData['lst_name']));
+          		} else {
+            		$message .= (strlen($message) > 0 ? '<br />' : '')._T('clevermail:send_error', array('lst_name' => $listData['lst_name']));
           		}
+  					}
+	  				$nbLettre++;
+      		}
     			break;
     		case 'mod':
-          		// TODO : à faire
-          		$inscription_encours = 0;
-          		$actionId = md5('subscribe#'.$lst_id.'#'.$sub_id.'#'.time());
-          		if (sql_countsel("spip_cm_pending", "lst_id=".intval($lst_id)." AND sub_id=".intval($sub_id)) == 0) {
-          			sql_insertq("spip_cm_pending", array('lst_id' => intval($lst_id), 'sub_id' => intval($sub_id), 'pnd_action' => 'subscribe', 'pnd_mode' => intval($lsr_mode), 'pnd_action_date' => time(), 'pnd_action_id' => $actionId));
-          			$inscription_encours = 1;
-          		}
-          		if ($inscription_encours==1){
-          			// Composition du message de demande de confirmation
-          			$template = array();
-          			$template['@@NOM_LETTRE@@'] = substr($listData['lst_name'], strpos($listData['lst_name'], "/")+1);
-		          	$template['@@NOM_CATEGORIE@@'] = substr($listData['lst_name'],0 , strpos($listData['lst_name'], "/"));
-		          	$template['@@NOM_COMPLET@@'] = $listData['lst_name'];
-          			$template['@@DESCRIPTION@@'] = $listData['lst_comment'];
-          			$template['@@FORMAT_INSCRIPTION@@']  = (intval($lsr_mode) == 1 ? _T('choix_version_html') : _T('choix_version_texte'));
-          			$template['@@EMAIL@@'] = _request('sub_email');
-          			$template['@@URL_CONFIRMATION@@'] = generer_url_public(_CLEVERMAIL_VALIDATION,'id='.$actionId);
-          			$body = _T('clevermail:corps_mail_mod',array('mail' => _request('sub_email')));
-          			while (list($translateFrom, $translateTo) = each($template)) {
-            			$body = str_replace($translateFrom, $translateTo, $body);
-          			}
-          			$to = $listData['lst_moderator_email'];
-          			$subject = (intval($listData['lst_subject_tag']) == 1 ? '['.$listData['lst_name'].'] ' : '')._T('clevermail:sujet_mail_mod',array('nom_lettre'=>$listData['lst_name']));
-          			$from = sql_getfetsel("set_value", "spip_cm_settings", "set_name='CM_MAIL_FROM'");
-          			$return = sql_getfetsel("set_value", "spip_cm_settings", "set_name='CM_MAIL_RETURN'");
+      		// TODO : à faire
+      		$inscription_encours = 0;
+      		$actionId = md5('subscribe#'.$lst_id.'#'.$sub_id.'#'.time());
+      		if (sql_countsel("spip_cm_pending", "lst_id=".intval($lst_id)." AND sub_id=".intval($sub_id)) == 0) {
+      			sql_insertq("spip_cm_pending", array('lst_id' => intval($lst_id), 'sub_id' => intval($sub_id), 'pnd_action' => 'subscribe', 'pnd_mode' => intval($lsr_mode), 'pnd_action_date' => time(), 'pnd_action_id' => $actionId));
+      			$inscription_encours = 1;
+      		}
+      		if ($inscription_encours==1) {
+      			// Composition du message de demande de confirmation
+      			$template = array();
+            if (strpos($listData['lst_name'], '/') === false) {
+            	$template['@@NOM_LETTRE@@'] = supprimer_numero($listData['lst_name']);
+            	$template['@@NOM_CATEGORIE@@'] = '';
+            	$template['@@NOM_COMPLET@@'] = $template['@@NOM_LETTRE@@'];
+            } else {
+              $template['@@NOM_LETTRE@@'] = supprimer_numero(substr($listData['lst_name'], strpos($listData['lst_name'], '/') + 1));
+              $template['@@NOM_CATEGORIE@@'] = supprimer_numero(substr($listData['lst_name'], 0, strpos($listData['lst_name'], '/')));
+            	$template['@@NOM_COMPLET@@'] = $template['@@NOM_CATEGORIE@@'].' / '.$template['@@NOM_LETTRE@@'];
+            }
+          	$template['@@NOM_COMPLET@@'] = $listData['lst_name'];
+      			$template['@@DESCRIPTION@@'] = $listData['lst_comment'];
+      			$template['@@FORMAT_INSCRIPTION@@']  = (intval($lsr_mode) == 1 ? _T('choix_version_html') : _T('choix_version_texte'));
+      			$template['@@EMAIL@@'] = _request('sub_email');
+      			$template['@@URL_CONFIRMATION@@'] = generer_url_public(_CLEVERMAIL_VALIDATION,'id='.$actionId);
+      			$body = _T('clevermail:corps_mail_mod',array('mail' => _request('sub_email')));
+      			while (list($translateFrom, $translateTo) = each($template)) {
+        			$body = str_replace($translateFrom, $translateTo, $body);
+      			}
+      			$to = $listData['lst_moderator_email'];
+      			$subject = (intval($listData['lst_subject_tag']) == 1 ? '['.$listData['lst_name'].'] ' : '')._T('clevermail:sujet_mail_mod',array('nom_lettre'=>$listData['lst_name']));
+      			$from = sql_getfetsel("set_value", "spip_cm_settings", "set_name='CM_MAIL_FROM'");
+      			$return = sql_getfetsel("set_value", "spip_cm_settings", "set_name='CM_MAIL_RETURN'");
 
-          			// message removed from queue, we can try to send it
-          			// TODO : Et le charset ?
-          			// TODO : Et le return-path ?
-          			$envoyer_mail = charger_fonction('envoyer_mail', 'inc');
-          			if ($envoyer_mail($to, $subject, $body, $from)) {
-            			$message .= (strlen($message) > 0 ? '<br />' : '')._T('clevermail:demande_transmise', array('lst_name' => $listData['lst_name']));
-            			$template='';$to='';$subject='';$from='';
-          			} else {
-            			$message .= (strlen($message) > 0 ? '<br />' : '')._T('clevermail:send_error', array('lst_name' => $listData['lst_name']));
-          			}
-          		}elseif($inscription_encours==0){
-          			$message .= (strlen($message) > 0 ? '<br />' : '')._T('clevermail:inscription_encours', array('nom_lettre' => $listData['lst_name']));
-          		}
+      			// message removed from queue, we can try to send it
+      			// TODO : Et le charset ?
+      			// TODO : Et le return-path ?
+      			$envoyer_mail = charger_fonction('envoyer_mail', 'inc');
+      			if ($envoyer_mail($to, $subject, $body, $from)) {
+        			$message .= (strlen($message) > 0 ? '<br />' : '')._T('clevermail:demande_transmise', array('lst_name' => $listData['lst_name']));
+        			$template='';$to='';$subject='';$from='';
+      			} else {
+        			$message .= (strlen($message) > 0 ? '<br />' : '')._T('clevermail:send_error', array('lst_name' => $listData['lst_name']));
+      			}
+      		} elseif($inscription_encours==0) {
+      			$message .= (strlen($message) > 0 ? '<br />' : '')._T('clevermail:inscription_encours', array('nom_lettre' => $listData['lst_name']));
+      		}
 
     			break;
-        	case 'closed':
-          		$message .= (strlen($message) > 0 ? '<br />' : '')._T('clevermail:inscription_nok', array('lst_name' => $listData['lst_name']));
-          		$ok = false;
-        		break;
-    		}
-    	}
+      	case 'closed':
+        		$message .= (strlen($message) > 0 ? '<br />' : '')._T('clevermail:inscription_nok', array('lst_name' => $listData['lst_name']));
+        		$ok = false;
+      		break;
+  		}
+  	}
   }
 
 	return array('message_ok' => $message, 'editable' => '');

@@ -101,9 +101,14 @@ function formulaires_clevermail_multiple_traiter_dist($lst_id = 0, $lsr_mode_for
           		} else {
           			sql_updateq("spip_cm_pending", array('pnd_action' => 'subscribe', 'pnd_mode' => intval($lsr_mode), 'pnd_action_date' => time(), 'pnd_action_id' => $actionId), "sub_id=".intval($sub_id)." AND lst_id=".intval($lst_id));
           		}
-          		$lettre = substr($listData['lst_name'], strpos($listData['lst_name'], "/")+1);
+              if (strpos($listData['lst_name'], '/') === false) {
+              	$lettre = $listData['lst_name'];
+              	$categorie = '';
+              } else {
+              	$lettre = substr($listData['lst_name'], strpos($listData['lst_name'], '/') + 1);
+              	$categorie = substr($listData['lst_name'], 0, strpos($listData['lst_name'], '/'));
+              }
           		$lists_name = $lists_name."- ".supprimer_numero($lettre)."\n\n";
-      			$categorie = substr($listData['lst_name'],0 , strpos($listData['lst_name'], "/"));
           		$lists_name_categorie = $lists_name_categorie."- ".supprimer_numero($categorie)."\n\n";
           		$lists_name_complet = $lists_name_complet."- ".supprimer_numero($categorie)." / ".supprimer_numero($lettre)."\n\n";
           		$msgInscription = "";
@@ -125,9 +130,15 @@ function formulaires_clevermail_multiple_traiter_dist($lst_id = 0, $lsr_mode_for
           			} else {
           				// Composition du message de demande de confirmation
 		          		$template = array();
-		          		$template['@@NOM_LETTRE@@'] = supprimer_numero(substr($listData['lst_name'], strpos($listData['lst_name'], "/")+1));
-		          		$template['@@NOM_CATEGORIE@@'] = supprimer_numero(substr($listData['lst_name'],0 , strpos($listData['lst_name'], "/")));
-		          		$template['@@NOM_COMPLET@@'] = ($template['@@NOM_CATEGORIE@@'] != '' ? $template['@@NOM_CATEGORIE@@'].' / '.$template['@@NOM_LETTRE@@'] : $template['@@NOM_LETTRE@@']);
+                  if (strpos($listData['lst_name'], '/') === false) {
+                  	$template['@@NOM_LETTRE@@'] = supprimer_numero($listData['lst_name']);
+                  	$template['@@NOM_CATEGORIE@@'] = '';
+                  	$template['@@NOM_COMPLET@@'] = $template['@@NOM_LETTRE@@'];
+                  } else {
+                    $template['@@NOM_LETTRE@@'] = supprimer_numero(substr($listData['lst_name'], strpos($listData['lst_name'], '/') + 1));
+                    $template['@@NOM_CATEGORIE@@'] = supprimer_numero(substr($listData['lst_name'], 0, strpos($listData['lst_name'], '/')));
+                  	$template['@@NOM_COMPLET@@'] = $template['@@NOM_CATEGORIE@@'].' / '.$template['@@NOM_LETTRE@@'];
+                  }
 		          		$template['@@DESCRIPTION@@'] = $listData['lst_comment'];
 		          		$template['@@FORMAT_INSCRIPTION@@']  = (intval($lsr_mode) == 1 ? _T('choix_version_html') : _T('choix_version_texte'));
 		          		$template['@@EMAIL@@'] = _request('sub_email');
