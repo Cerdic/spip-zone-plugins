@@ -10,6 +10,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_choix_destinataires_label' => 'Destinataires possibles',
 	'option_choix_destinataires_explication' => 'Un ou plusieurs auteurs parmis lesquels l\'utilisateur pourra faire son choix. Si rien n\'est s&eacute;lectionn&eacute;, c\'est l\'auteur qui a install&eacute; le site qui sera choisi.',
 	'option_class_label' => 'Classes CSS suppl&eacute;mentaires',
+	'option_cols_explication' => 'Largeur du bloc en nombre de caractères. Cette option n\'est pas toujours appliqu&eacute;e car les styles CSS de votre site peuvent l\'annuler.',
+	'option_cols_label' => 'Largeur',
 	'option_defaut_label' => 'Valeur par d&eacute;faut',
 	'option_disable_avec_post_explication' => 'Identique &agrave; l\'option pr&eacute;c&eacute;dente mais poste quand m&ecirc;me la valeur dans un champ cach&eacute;.',
 	'option_disable_avec_post_label' => 'D&eacute;sactiver mais poster',
@@ -29,6 +31,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_nom_explication' => 'Un nom informatique qui identifiera le champ. Il ne doit contenir que des caractères alpha-numériques minuscules ou le caractère "_".',
 	'option_nom_label' => 'Nom du champ',
 	'option_obligatoire_label' => 'Champ obligatoire',
+	'option_rows_explication' => 'Hauteur du bloc en nombre de ligne. Cette option n\'est pas toujours appliqu&eacute;e car les styles CSS de votre site peuvent l\'annuler.',
+	'option_rows_label' => 'Nombre de lignes',
 	'option_readonly_explication' => 'Le champ peut &ecirc;tre lu, s&eacute;lectionn&eacute;, mais pas modifi&eacute;.',
 	'option_readonly_label' => 'Lecture seule',
 	'option_size_explication' => 'Largeur du champ en nombre de caract&egrave;res. Cette option n\'est pas toujours appliqu&eacute;e car les styles CSS de votre site peuvent l\'annuler.',
@@ -48,6 +52,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'saisie_destinataires_explication' => 'Permet de choisir un ou plusieurs destinataires parmis des auteurs pr&eacute;-s&eacute;lectionn&eacute;e.',
 	'saisie_input_explication' => 'Une simple ligne de texte, pouvant &ecirc;tre visible ou masqu&eacute;e (mot de passe).',
 	'saisie_input_titre' => 'Ligne de texte',
+	'saisie_textarea_explication' => 'Un champ de texte sur plusieurs lignes.',
+	'saisie_textarea_titre' => 'Bloc de texte',
 	
 	// T
 	'tous_visiteurs' => 'Tous les visiteurs (m&ecirc;me non enregistr&eacute;s)',

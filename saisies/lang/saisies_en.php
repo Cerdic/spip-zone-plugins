@@ -10,6 +10,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_choix_destinataires_label' => 'Possible recipients',
 	'option_choix_destinataires_explication' => 'One or several authors among which the user can make his choice. If nothing selected, it will be the author who installed the site to be chosen.',
 	'option_class_label' => 'Additional CSS Classes',
+	'option_cols_explication' => 'Field width in characters. This option is not always applied/used because the CSS styles of your site can cancel it.',
+	'option_cols_label' => 'Width',
 	'option_defaut_label' => 'Default value',
 	'option_disable_avec_post_explication' => 'Same as previous option position but still post value in a hidden field.',
 	'option_disable_avec_post_label' => 'Disabled but posted.',
@@ -31,6 +33,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_obligatoire_label' => 'Required field',
 	'option_readonly_explication' => 'The field can be viewed, selected, but not modified.',
 	'option_readonly_label' => 'Read only',
+	'option_rows_explication' => 'Field height in lines. This option is not always applied/used because the CSS styles of your site can cancel it.',
+	'option_rows_label' => 'Lines number',
 	'option_size_explication' => 'Field width in characters. This option is not always applied/used because the CSS styles of your site can cancel it.',
 	'option_size_label' => 'Field size',
 	'option_type_explication' => 'Mode "password", the contents of the field will be hidden.',
@@ -48,6 +52,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'saisie_destinataires_explication' => 'Allows you to select one or more recipients among the pre-selected authors .',
 	'saisie_input_explication' => 'A simple line of text that can be visible or hidden (password).',
 	'saisie_input_titre' => 'Textfield',
+	'saisie_textarea_explication' => 'A multilines text field.',
+	'saisie_textarea_titre' => 'Textarea',
 	
 	// T
 	'tous_visiteurs' => 'All visitors (even if not registered)',
