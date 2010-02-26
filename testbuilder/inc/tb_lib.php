@@ -1,7 +1,7 @@
 <?php
 /*
- * Plugin xxx
- * (c) 2009 xxx
+ * Plugin TestBuilder
+ * (c) 2010 Cedric MORIN Yterium
  * Distribue sous licence GPL
  *
  */
@@ -21,7 +21,6 @@ function tb_liste_fonctions($filename, $clear = false){
 
 	if ($clear){
 		unset($funcs[$filename]);
-		return array();
 	}
 
 	if (isset($funcs[$filename]))
@@ -29,6 +28,11 @@ function tb_liste_fonctions($filename, $clear = false){
 
 	// cache file ?
 	$cache_func = sous_repertoire(_DIR_CACHE,"functions")."f".md5($filename).".txt";
+	if ($clear) {
+		spip_unlink($cache_func);
+		return array();
+	}
+
 	if (file_exists($cache_func)
 		AND @filemtime($cache_func)>@filemtime($filename)
 		AND lire_fichier($cache_func, $cache)
@@ -141,9 +145,9 @@ function tb_liste_tests(){
  * @param string $funcname
  * @return tring
  */
-function tb_hastest($funcname){
+function tb_hastest($funcname, $force=false){
 	static $tests = null;
-	if (is_null($tests))
+	if (is_null($tests) OR $force)
 		$tests = tb_liste_tests();
 	if (isset($tests["$funcname.php"]))
 		return $tests["$funcname.php"];
@@ -180,6 +184,8 @@ function tb_url_test($testfun, $lien=false){
  */
 function tb_function_extract($filename,$funcname){
 	$liste = tb_liste_fonctions($filename);
+	if (!isset($liste[$funcname]))
+		return "";
 	$func = $liste[$funcname];
 	$start = $func[2];
 	$length = $func[3]-$start+1;
@@ -222,21 +228,25 @@ function tb_generate_new_blank_test($filename,$funcname){
  */
 function tb_test_essais($funcname,$filetest,$essais_new=null){
 	$function = tb_function_extract($filetest,"essais_$funcname");
-	#var_dump($function);
-	if (is_array($essais_new)){
-		lire_fichier($filetest, $contenu);
-		$new_func = "\tfunction essais_$funcname(){
+
+	if (is_array($essais_new)
+	  AND $l=lire_fichier($filetest, $contenu)){
+		$new_func = "function essais_$funcname(){
 		\$essais = ".var_export($essais_new,true).";
 		return \$essais;
 	}
 ";
-		$contenu = str_replace($function, $new_func, $contenu);
+		if (strlen($function))
+			$contenu = str_replace($function, $new_func, $contenu);
+		else
+			$contenu = str_replace("?>", "$new_func\n?>", $contenu);
 		ecrire_fichier($filetest, $contenu);
 		// purger la liste de fonctions de ce fichier
 		tb_liste_fonctions($filetest, true);
 		return $essais_new;
 		$function = $new_func;
 	}
+	if (!$function) return array();
 	$tst = "essais"; $i=0;
 
 	while (function_exists("$tst$i")) $i++;
@@ -244,6 +254,16 @@ function tb_test_essais($funcname,$filetest,$essais_new=null){
 	$function = str_replace("function essais_$funcname"."(","function $tst$i"."(",$function);
 	$function .= " return $tst$i();";
 	return eval($function);
+}
+
+function tb_refresh_test($filename,$funcname,$filetest){
+	include_spip('inc/securiser_action');
+	$arg = "$filename|$funcname|".substr($filetest,strlen(_DIR_RACINE));
+	$hash = calculer_cle_action($arg);
+	$url = generer_url_action("tb_set_test_output", "arg=$arg&hash=$hash",true,true);
+	#var_dump($url);
+	include_spip("inc/distant");
+	recuperer_page($url);
 }
 
 function tb_error_handler($output)
@@ -255,13 +275,33 @@ function tb_error_handler($output)
     return $output;
 }
 
+function tb_export($var){
+	return var_export($var,true);
+}
+
+/**
+ * Filtrer un jeu d'essais en enlevant les doublons (meme arg, meme resultat)
+ * 
+ * @param array $essais
+ */
+function tb_filter_essais(&$essais){
+	$t = array();
+	foreach($essais as $k=>$v){
+		$s = md5(var_export($v,true));
+		if (isset($t[$s]))
+			unset($essais[$k]);
+		else
+			$t[$s] = true;
+	}
+}
+
 function tb_try_essai($filename,$funcname,$essai,&$output_test){
 	ob_start('tb_error_handler');
 	try {
 		find_in_path($filename,'',true);
-		$appel = "$funcname(".implode(", ",$essai).")";
+		$appel = "$funcname(".implode(", ",array_map('tb_export',$essai)).")";
 		#var_dump($appel);
-		$res = eval("return $appel;");
+		$res = call_user_func_array($funcname, $essai);
 	}
 	catch (Exception $e) {
 		$res = "Erreur : ".$e->getMessage();
@@ -293,6 +333,43 @@ function tb_jeu_test_argument($type){
 				'Un texte sans entites &<>"\'',
 				'{{{Des raccourcis}}} {italique} {{gras}} <code>du code</code>',
 				'Un modele <modeleinexistant|lien=[->http://www.spip.net]>',
+			);
+			break;
+		case 'date':
+			$jeu = array(
+				"2001-00-00 12:33:44",
+				"2001-03-00 09:12:57",
+				"2001-02-29 14:12:33",
+			);
+			$t = tb_jeu_test_argument('time');
+			foreach($t as $d)
+				$jeu[] = date('Y-m-d H:i:s',$d);
+			foreach($t as $d)
+				$jeu[] = date('Y-m-d',$d);
+			foreach($t as $d)
+				$jeu[] = date('Y/m/d',$d);
+			foreach($t as $d)
+				$jeu[] = date('d/m/Y',$d);
+			break;
+		case 'time':
+			$jeu = array_map('strtotime',array(
+				"2001-07-05 18:25:24",
+				"2001-01-01 00:00:00",
+				"2001-12-31 23:59:59",
+				"2001-02-29 14:12:33",
+				"2004-02-29 14:12:33",
+				"2012-03-20 12:00:00",
+				"2012-03-21 12:00:00",
+				"2012-03-22 12:00:00",
+				"2012-06-20 12:00:00",
+				"2012-06-21 12:00:00",
+				"2012-06-22 12:00:00",
+				"2012-09-20 12:00:00",
+				"2012-09-21 12:00:00",
+				"2012-09-22 12:00:00",
+				"2012-12-20 12:00:00",
+				"2012-12-21 12:00:00",
+				"2012-12-22 12:00:00")
 			);
 			break;
 		case 'int':

@@ -3,7 +3,7 @@
  * Test unitaire de la fonction @funcname@
  * du fichier @filename@
  *
- * genere automatiquement par testbuilder
+ * genere automatiquement par TestBuilder
  * le @date@
  */
 

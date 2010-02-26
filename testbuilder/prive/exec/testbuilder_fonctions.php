@@ -1,10 +1,11 @@
 <?php
 /*
- * Plugin xxx
- * (c) 2009 xxx
+ * Plugin TestBuilder
+ * (c) 2010 Cedric MORIN Yterium
  * Distribue sous licence GPL
  *
  */
+
 
 include_spip('inc/tb_lib');
 
