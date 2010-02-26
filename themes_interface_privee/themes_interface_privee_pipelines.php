@@ -44,7 +44,7 @@ function themes_interface_privee_header_prive($flux) {
 	$flux .= "
 		<script type='text/javascript'><!--
 			$(document).ready(function() {
-				$('#bandeauinterface').append(\"<div id='bandeauprefinterface' class='cadre cadre-liste'>$entete<table width='100%' cellpadding='2' cellspacing='0' border='0'>$liens<\/table><\/div>\");
+				$('#bandeauinterface').append(\"<div id='bandeauprefinterface' class='cadre cadre-liste' style='width: 240px;'>$entete<table width='100%' cellpadding='2' cellspacing='0' border='0'>$liens<\/table><\/div>\");
 			});
 		--></script>
 	";
