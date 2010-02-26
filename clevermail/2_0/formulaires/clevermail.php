@@ -110,8 +110,8 @@ function formulaires_clevermail_traiter_dist($lst_id = 0, $lsr_mode_force = fals
       			$categorie = substr($listData['lst_name'], 0, strpos($listData['lst_name'], '/'));
         	}
       		$lists_name = $lists_name.'- '.$lettre."\n\n";
-      		$lists_name_categorie = $lists_name_categorie."- ".$categorie."\n\n";
-      		$lists_name_complet = $lists_name_complet."- ".$listData['lst_name']."\n\n";
+      		$lists_name_categorie = $lists_name_categorie.'- '.$categorie."\n\n";
+      		$lists_name_complet = $lists_name_complet.'- '.$listData['lst_name']."\n\n";
   				if ($nbLettre <= count($lists)) {
       			if (count($lists) > 1) {
       				//Si inscription a plusieurs lettres, on envoie un seul mail avec la liste des lettres
@@ -121,7 +121,7 @@ function formulaires_clevermail_traiter_dist($lst_id = 0, $lsr_mode_force = fals
           		$template['@@NOM_CATEGORIE@@'] = $lists_name_categorie;
           		$template['@@NOM_COMPLET@@'] = $lists_name_complet;
           		$template['@@DESCRIPTION@@'] = $listData['lst_comment'];
-          		$template['@@FORMAT_INSCRIPTION@@']  = (intval($lsr_mode) == 1 ? _T('choix_version_html') : _T('choix_version_texte'));
+          		$template['@@FORMAT_INSCRIPTION@@']  = (intval($lsr_mode) == 1 ? _T('clevermail:choix_version_html') : _T('clevermail:choix_version_texte'));
           		$template['@@EMAIL@@'] = _request('sub_email');
           		$template['@@URL_CONFIRMATION@@'] = generer_url_public(_CLEVERMAIL_VALIDATION,'id='.$actionId);
           		$body = _T('clevermail:mail_inscription_multiple');
@@ -138,7 +138,7 @@ function formulaires_clevermail_traiter_dist($lst_id = 0, $lsr_mode_force = fals
             		$template['@@NOM_COMPLET@@'] = $template['@@NOM_CATEGORIE@@'].' / '.$template['@@NOM_LETTRE@@'];
             	}
           		$template['@@DESCRIPTION@@'] = $listData['lst_comment'];
-          		$template['@@FORMAT_INSCRIPTION@@']  = (intval($lsr_mode) == 1 ? _T('choix_version_html') : _T('choix_version_texte'));
+          		$template['@@FORMAT_INSCRIPTION@@']  = (intval($lsr_mode) == 1 ? _T('clevermail:choix_version_html') : _T('clevermail:choix_version_texte'));
           		$template['@@EMAIL@@'] = _request('sub_email');
           		$template['@@URL_CONFIRMATION@@'] = generer_url_public(_CLEVERMAIL_VALIDATION,'id='.$actionId);
           		$body = $listData['lst_subscribe_text'];

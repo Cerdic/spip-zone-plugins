@@ -19,8 +19,8 @@
 		// Front
 		'label_inscription_email' => 'Votre adresse e-mail :',
 		'label_inscription_version' => 'Type de message :',
-	  	'choix_version_html' => 'HTML',
-	  	'choix_version_texte' => 'Texte brut',
+  	'choix_version_html' => 'HTML',
+  	'choix_version_texte' => 'texte brut',
 		'label_inscription_lettres' => 'Choisissez parmi ces lettres d\'information :',
 		'deja_inscrit' => 'Vous &eacute;tiez d&eacute;j&agrave; inscrit &agrave; la lettre « @lst_name@ ». Votre mode d\'inscription a &eacute;t&eacute; mis &agrave; jour.',
 		'inscription_validee' => 'Votre inscription &agrave; la lettre « @lst_name@ » est valid&eacute;e. Merci.',
