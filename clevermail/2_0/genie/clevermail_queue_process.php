@@ -15,8 +15,7 @@ function genie_clevermail_queue_process_dist($t, $verbose = 'no') {
 			// recipient
 			$to = $subscriber['sub_email'];
 
-			// subject
-			$subject = trim(($list['lst_subject_tag'] == 1 ? '['.$list['lst_name'].'] ' : '').$post['pst_subject']);
+
 
 			$from = sql_getfetsel("set_value", "spip_cm_settings", "set_name='CM_MAIL_FROM'");
 			$return = sql_getfetsel("set_value", "spip_cm_settings", "set_name='CM_MAIL_RETURN'");
@@ -48,6 +47,10 @@ function genie_clevermail_queue_process_dist($t, $verbose = 'no') {
 
 			//$template['@@URL_DESINSCRIPTION@@'] = $GLOBALS['meta']['adresse_site'].'/spip.php?page=clevermail_rm&id='.$subscription['lsr_id'];
 			$template['@@URL_DESINSCRIPTION@@'] = generer_url_public(_CLEVERMAIL_INVALIDATION,'id='.$subscription['lsr_id']);
+
+			// subject
+			$subject = trim(($list['lst_subject_tag'] == 1 ? '['.$template['@@NOM_COMPLET@@'].'] ' : '').html_entity_decode($post['pst_subject'], ENT_QUOTES,'UTF-8'));
+
 			reset($template);
 			while (list($templateFrom, $templateTo) = each($template)) {
 				$text = str_replace($templateFrom, $templateTo, $text);
