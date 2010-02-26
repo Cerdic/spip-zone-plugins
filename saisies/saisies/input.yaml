@@ -12,17 +12,20 @@ options:
           nom: 'label'
           label: '<:saisies:option_label_label:>'
           explication: '<:saisies:option_label_explication:>'
+          size: 50
       -
         saisie: 'input'
         options:
           nom: 'defaut'
           label: '<:saisies:option_defaut_label:>'
+          size: 50
       -
         saisie: 'input'
         options:
           nom: 'explication'
           label: '<:saisies:option_explication_label:>'
           explication: '<:saisies:option_explication_explication:>'
+          size: 50
       -
         saisie: 'selection'
         options:
@@ -77,6 +80,7 @@ options:
           nom: 'attention'
           label: '<:saisies:option_attention_label:>'
           explication: '<:saisies:option_attention_explication:>'
+          size: 50
       -
         saisie: 'input'
         options:
@@ -88,6 +92,7 @@ options:
         options:
           nom: 'class'
           label: '<:saisies:option_class_label:>'
+          size: 50
       -
         saisie: 'input'
         options:
