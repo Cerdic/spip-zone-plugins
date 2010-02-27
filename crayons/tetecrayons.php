@@ -141,7 +141,9 @@ EOH;
 $(document).ready(function(){
 	/* Ajouter une barre porte plume sur les crayons */
 	function barrebouilles_crayons(){
-		$('.formulaire_crayon textarea.crayon-active').barre_outils('edition');
+		if (typeof($.fn.barre_outils) == 'function') {
+			$('.formulaire_crayon textarea.crayon-active').barre_outils('edition');
+		}
 	}
 	barrebouilles_crayons();
 	onAjaxLoad(barrebouilles_crayons);
