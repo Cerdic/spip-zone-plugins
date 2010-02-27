@@ -12,14 +12,10 @@
 		bizarre : #SELF ne prend pas en compte id_jeu en backoffice... d'ou : #REM|nettoyer_uri
 
 ]<div class="jeux_cadre jeux_trous">
-	@@FORM_JEUX_DEBUT@@
-	[<div class="jeux_titre">(#ENV*{titre})<hr /></div>]
+	[(#ENV**{correction}|non) @@FORM_JEUX_DEBUT@@]
+	[<div class="jeux_titre">(#ENV**{titre})<hr /></div>]
 	#ENV*{texte}
-	[(#REM|sinon{'jeux:indices'}|_T|jeux_block_depliable{#ENV*{indices}})]
-	@@FORM_CORRIGER@@
-	[(#ENV**{correction}|?{' ',''})
-		#ENV*{fond_score}
-		@@RECOMMENCER@@
-	]
-	@@FORM_JEUX_FIN@@
+	[(#ENV**{indices}|oui)<:jeux:indices|jeux_block_depliable{#ENV**{indices}}:>]
+	[(#ENV**{correction}|non) @@FORM_CORRIGER@@ @@FORM_JEUX_FIN@@]
+	[(#ENV**{correction}|oui) #ENV*{fond_score} @@RECOMMENCER@@]	
 </div>

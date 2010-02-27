@@ -86,19 +86,20 @@ function jeux_listes($texte) {
 
 // retourne un tableau de mots ou d'expressions a partir d'un texte
 function jeux_liste_mots($texte) {
-	$texte = filtrer_entites(trim($texte));
+	$texte = filtrer_entites(trim(echappe_retour($texte)));
 	$split = explode('"', $texte);
 	$c = count($split);
 	$split2 = array();
-	for($i=0; $i<$c; $i++) if (($s = trim($split[$i])) != ""){
+	for($i=0; $i<$c; $i++) if (strlen($s = trim($split[$i]))){
 		if (($i & 1) && ($i != $c-1)) {
 			// on touche pas au texte entre deux ""
 			$split2[] = $s;
 		} else {
 			// on rassemble tous les separateurs : ,;.\s\t\n
-			$temp = preg_replace("/[,;\.\s\t\n\r]+/", "\t", $s);
-			$temp = str_replace("+"," ", $temp);
-			$split2 = array_merge($split2, explode("\t", $temp));
+			$temp = str_replace(array(' ?', ' !', ' ;'), array('?', '!', ';'), $s);
+			$temp = preg_replace('/[,;\s\t\n\r]+/'.($GLOBALS['meta']['charset']=='utf-8'?'u':''), '@SEP@', $temp);
+			$temp = str_replace('+', ' ', $temp);
+			$split2 = array_merge($split2, explode('@SEP@', $temp));
 		}
 	}
 	return array_unique($split2);

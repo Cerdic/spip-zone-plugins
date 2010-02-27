@@ -81,11 +81,13 @@ function trous_inserer_le_trou($indexJeux, $indexTrou, $size, $corriger) {
 		if($ok) ++$scoreTROUS;
 		if(jeux_config('couleurs')) $color = $ok?' juste':' faux';
 		if(!$ok && jeux_config('solution')) {
-			if(!strlen($prop)) $prop = '&nbsp; &nbsp;';
-			$oups = "<span class='faux barre'>$prop</span>";
+			if(!strlen($prop)) {
+				$prop = '??&nbsp;';
+				$oups = "<span class='faux'>$prop</span>";
+			} else $oups = "<span class='faux barre'>$prop</span>";
 			$prop = trous_liste_reponses($mots);
 			$size = strlen($prop);
-			$color = ' juste';
+			$color = ''; //' faux';
 		}
 //$solution = ' <span class="juste">('.trous_liste_reponses($mots).')</span> ';
 		// on renseigne le resultat detaille
@@ -99,9 +101,9 @@ function trous_inserer_le_trou($indexJeux, $indexTrou, $size, $corriger) {
 
 function trous_inserer_les_trous($chaine, $indexJeux) {
 	global $propositionsTROUS;
-	if (ereg('<ATTENTE_TROU>([0-9]+)</ATTENTE_TROU>', $chaine, $eregResult)) {
-	$indexTROU = intval($eregResult[1]);
-	list($texteAvant, $texteApres) = explode($eregResult[0], $chaine, 2); 
+	if (preg_match(',<ATTENTE_TROU>([0-9]+)</ATTENTE_TROU>,', $chaine, $regs)) {
+	$indexTROU = intval($regs[1]);
+	list($texteAvant, $texteApres) = explode($regs[0], $chaine, 2); 
 	$texteApres = trous_inserer_les_trous($texteApres, $indexJeux);
 	if (($sizeInput = intval(jeux_config('taille')))==0)
 		foreach($propositionsTROUS as $trou) foreach($trou as $mot) $sizeInput = max($sizeInput, strlen($mot));
@@ -118,9 +120,9 @@ function trous_inserer_les_trous($chaine, $indexJeux) {
 function trous_afficher_indices($indexJeux) {
 	global $propositionsTROUS;
 	foreach ($propositionsTROUS as $prop) 
-		$indices[] = strpos($prop[0], '/M')===($len=strlen($prop[0])-2) ?substr($prop[0],0,$len):$prop[0];
+		$indices[] = preg_match(',(.*)/M$,', $prop[0], $reg)?$reg[1]:$prop[0];
 	shuffle($indices);
-	return '<div class="jeux_indices">'.str_replace(array("'",'&#8217;'),"&#039;",charset2unicode(join(' -&nbsp;', $indices))).'</div>';
+	return '<div class="jeux_indices"><html>'.str_replace(array("'",'&#8217;'),"&#039;",charset2unicode(join(' -&nbsp;', $indices))).'</html></div>';
 }
 
 // revoyer une liste de reponses possibles
@@ -181,7 +183,7 @@ function jeux_trous($texte, $indexJeux, $form=true) {
 	// mise en place du formulaire
 	$fond = str_replace(
 		array('@@FORM_JEUX_DEBUT@@', '@@FORM_JEUX_FIN@@', '@@FORM_CORRIGER@@', '@@RECOMMENCER@@'), 
-		($correction || !$form)?'':array(jeux_form_debut('trous', $indexJeux), jeux_form_fin(), jeux_bouton_corriger(), jeux_bouton_recommencer()), 
+		$form?array(jeux_form_debut('trous', $indexJeux), jeux_form_fin(), jeux_bouton_corriger(), jeux_bouton_recommencer()):'', 
 		$fond
 	);
 	// nettoyage
