@@ -37,7 +37,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'jour' => 'd&iacute;a',
 
 	// L
+	'latitude' => 'latitude', # NEW
 	'lever_soleil' => 'salida del sol',
+	'longitude' => 'longitude', # NEW
 
 	// M
 	'meteo' => 'meteorolog&iacute;a',
@@ -90,8 +92,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'meteo_8' => 'llovizna heladiza',
 	'meteo_9' => 'llovizna',
 	'meteo_conditions' => 'condiciones actuales',
+	'meteo_consultation' => 'Consultez la m&eacute;t&eacute;o de @ville@', # NEW
+	'meteo_de' => 'M&eacute;t&eacute;o de @ville@', # NEW
 	'meteo_na' => 'desconocido',
 	'meteo_previsions' => 'pron&oacute;stico',
+	'meteo_previsions_aujourdhui' => 'pr&eacute;visions pour aujourd\'hui', # NEW
+	'meteo_previsions_n_jours' => 'pr&eacute;visions &agrave; @nbj@ jours', # NEW
 
 	// N
 	'nuit' => 'noche',

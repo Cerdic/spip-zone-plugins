@@ -37,7 +37,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'jour' => 'dia',
 
 	// L
+	'latitude' => 'latitud',
 	'lever_soleil' => 'alba',
+	'longitude' => 'longitud',
 
 	// M
 	'meteo' => 'temps',
@@ -90,8 +92,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'meteo_8' => 'plugims gelats',
 	'meteo_9' => 'plugim',
 	'meteo_conditions' => 'condicions actuals',
+	'meteo_consultation' => 'Consulteu el Temps de @ville@',
+	'meteo_de' => 'El Temps dee @ville@',
 	'meteo_na' => 'desconegut',
 	'meteo_previsions' => 'previsions del ',
+	'meteo_previsions_aujourdhui' => 'previsions per avui',
+	'meteo_previsions_n_jours' => 'previsions a @nbj@ dies',
 
 	// N
 	'nuit' => 'nit',

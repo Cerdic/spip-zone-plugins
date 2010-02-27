@@ -37,7 +37,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'jour' => 'tag',
 
 	// L
+	'latitude' => 'Breite',
 	'lever_soleil' => 'sonnenaufgang',
+	'longitude' => 'L&auml;nge',
 
 	// M
 	'meteo' => 'wetter',
@@ -90,8 +92,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'meteo_8' => '&uuml;berfrierender nieselregen',
 	'meteo_9' => 'spr&uuml;hregen',
 	'meteo_conditions' => 'aktuelles wetter',
+	'meteo_consultation' => 'Wetterbericht f&uuml;r @ville@ ansehen',
+	'meteo_de' => 'Wetterbericht von  @ville@',
 	'meteo_na' => 'unbekannt',
 	'meteo_previsions' => 'wettervorhersage',
+	'meteo_previsions_aujourdhui' => 'Vorhersagen f&uuml;r heute',
+	'meteo_previsions_n_jours' => 'Vorhersagen f&uuml;r @nbj@ Tage',
 
 	// N
 	'nuit' => 'nacht',
