@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'deconnexion' => 'Deskonexioa',
-	'derniere_syndication' => '<NEW>Derni&egrave;re syndication de ce site effectu&eacute;e',
+	'derniere_syndication' => 'Derni&egrave;re syndication de ce site effectu&eacute;e', # NEW
 	'deuxjours' => 'Bi egun',
 
 	// L
@@ -32,17 +32,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// P
 	'pas_articles' => 'Garai hunetan ez dago artikulurik&nbsp;!',
-	'pas_synchro' => '<NEW>Ne pas synchroniser',
+	'pas_synchro' => 'Ne pas synchroniser', # NEW
 	'preferences' => 'Hobespenak',
-	'probleme_de_syndication' => '<NEW>probl&egrave;me de syndication',
+	'probleme_de_syndication' => 'probl&egrave;me de syndication', # NEW
 
 	// S
 	'semaine' => 'Astea',
 	'sources' => 'Iturriak',
-	'synchro' => '<NEW>Synchroniser',
-	'synchro_titre' => '<NEW>Enregistrer sur le site la liste des articles lus',
-	'syndication_ajour' => '<NEW>Mettre &agrave; jour maintenant',
-	'syndication_fait' => '<NEW>Syndication effectu&eacute;e',
+	'synchro' => 'Synchroniser', # NEW
+	'synchro_titre' => 'Enregistrer sur le site la liste des articles lus', # NEW
+	'syndication_ajour' => 'Mettre &agrave; jour maintenant', # NEW
+	'syndication_fait' => 'Syndication effectu&eacute;e', # NEW
 
 	// T
 	'toutes' => 'Denak'
