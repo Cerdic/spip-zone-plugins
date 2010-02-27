@@ -13,7 +13,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'attente_confirmation' => 'O c\'hortoz beza&ntilde; gwiriekaet',
 
+	// B
+	'base_donnees' => 'Base de donn&eacute;es', # NEW
+
 	// C
+	'colorer_fond' => 'Colorer le fond', # NEW
+	'colorer_texte' => 'Colorer le texte', # NEW
 	'configurer' => 'Keflunia&ntilde; ar gontell suis',
 	'connections' => 'Kevreadenno&ugrave;',
 
@@ -26,10 +31,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explique_spam' => 'Diwallit : implijet ho peus gerio&ugrave;, arouezio&ugrave;, pe balizenno&ugrave; diaotre.<br /><br />Kit war-gil !',
 
 	// L
+	'lancer_test' => 'Lancer le test !', # NEW
 	'lutte_spam' => 'Stourm a-enep d\'ar SPAM',
 
 	// M
-	'maj_actu' => 'Hizivadenn dre heg',
+	'maj_actu' => 'Hizivadenn dre heg', # MODIF
 	'maj_liste' => 'Roll an advezianto&ugrave; kavet :',
 	'maj_maj' => 'Hizivaat an adveziant diuzet',
 	'maj_ok' => 'Evit doare eo bet [hizivaet->@url@] an [adveziant-se->@zip@]',
@@ -39,6 +45,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'maj_svn' => 'Evit doare eo bet [hizivaet->@url@] an adveziant SVN-ma&ntilde;.',
 	'maj_verif' => 'Gwiriit da genta&ntilde; an diell a zere deoc\'h :',
 	'maj_verif2' => 'Diwallit : goude beza&ntilde; kliket war ar bouton a-us, gwiriit mat e klot an diell pellgarget gant an adveziant zo da hizivaat.',
+	'maj_zip_ko' => 'Le fichier .zip distant n\'a pu &ecirc;tre identifi&eacute;.', # NEW
+	'msg_publies' => 'Uniquement les messages publi&eacute;s', # NEW
 
 	// N
 	'nom_email_forum' => 'Trugarez da verka&ntilde; hoc\'h anv pe ho chomlec\'h postel !',
@@ -80,6 +88,25 @@ Kavit en adveziant-ma&ntilde; un nebeud binvio&ugrave; :  {Diverka&ntilde; an ni
 Gallout a rit teurel ur sell war ar pennado&ugrave; titouri&ntilde; diwar-benn an advezianto&ugrave; war : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
 Kenglotus gant : SPIP v1.92x ha v2.0.x',
+	'pp_blocs_bloc' => 'Ins&eacute;rer un bloc repli&eacute;', # NEW
+	'pp_blocs_visible' => 'Ins&eacute;rer un bloc d&eacute;pli&eacute;', # NEW
+	'pp_chatons_inserer' => 'Ins&eacute;rer le chaton &laquo;&nbsp;@chaton@&nbsp;&raquo;', # NEW
+	'pp_chatons_inserer_drop' => 'Ins&eacute;rer un chaton dans votre texte', # NEW
+	'pp_couleur_fond' => 'Fond @couleur@', # NEW
+	'pp_couleur_icone_fond' => 'F', # NEW
+	'pp_couleur_icone_texte' => 'T', # NEW
+	'pp_couleur_texte' => 'Texte @couleur@', # NEW
+	'pp_couteau_suisse_drop' => 'Utiliser un outil du Couteau Suisse', # NEW
+	'pp_decoration_inserer' => 'D&eacute;coration &laquo;&nbsp;@balise@.@racc@&nbsp;&raquo;', # NEW
+	'pp_decoration_inserer_drop' => 'Appliquer au texte une &laquo;&nbsp;d&eacute;coration&nbsp;&raquo; personnalis&eacute;e', # NEW
+	'pp_decoupe_onglets' => 'Ins&eacute;rer un syst&egrave;me d\'onglet', # NEW
+	'pp_decoupe_separateur' => 'Ins&eacute;rer un s&eacute;parateur de page ou d\'onglet', # NEW
+	'pp_filets_inserer' => 'Ins&eacute;rer un filet de style &laquo;&nbsp;@filet@&nbsp;&raquo;', # NEW
+	'pp_filets_inserer_drop' => 'Ins&eacute;rer un filet de s&eacute;paration', # NEW
+	'pp_smileys_inserer' => 'Ins&eacute;rer une frimousse @smiley@', # NEW
+	'pp_un_titre' => 'Un titre', # NEW
+	'pp_votre_texte' => 'Placez votre texte ici', # NEW
+	'pp_votre_titre' => 'Titre @nb@', # NEW
 
 	// S
 	'smileys_dispos' => 'Skeudennigo&ugrave;-imor da gaout :',
@@ -90,6 +117,8 @@ Kenglotus gant : SPIP v1.92x ha v2.0.x',
 	'stats_date' => '@jour@/@mois@/@annee@&nbsp;da&nbsp;@h@h@m@',
 
 	// T
+	'test_base' => 'Test de la base de donn&eacute;es', # NEW
+	'test_manuel' => 'Test manuel', # NEW
 	'texte_formatspip' => 'TESTENN ORIN ER STUMM SPIP',
 	'textes_formatspip' => 'TESTENNO&Ugrave; ORIN ER STUMM SPIP',
 	'titre' => 'Ar Gontell Suis',

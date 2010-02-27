@@ -13,9 +13,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'attente_confirmation' => 'Auf Best&auml;tigung warten',
 
+	// B
+	'base_donnees' => 'Base de donn&eacute;es', # NEW
+
 	// C
+	'colorer_fond' => 'Hintergrundfarbe',
+	'colorer_texte' => 'Textfarbe',
 	'configurer' => 'Schweizer Taschenmesser konfigurieren',
-	'connections' => '<MODIF>Verbindungen',
+	'connections' => 'Verbindungen',
 
 	// D
 	'date_court' => '@jour@/@mois@/@annee@',
@@ -26,22 +31,25 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explique_spam' => 'Achtung: Sie haben reservierte Tags, Zeichen oder Worte verwendet.<br /><br />Bitte kehren Sie zum letzten Schritt zur&uuml;ck!',
 
 	// L
+	'lancer_test' => 'Lancer le test !', # NEW
 	'lutte_spam' => 'SPAM-Bek&auml;mpfung',
 
 	// M
-	'maj_actu' => '<NEW>Forcer l\'actualisation',
-	'maj_liste' => '<NEW>Liste des plugins d&eacute;tect&eacute;s :',
-	'maj_maj' => '<NEW>Mettre &agrave; jour le plugin s&eacute;lectionn&eacute;',
-	'maj_ok' => '<NEW>Ce [plugin->@zip@] semble [&agrave; jour->@url@].',
-	'maj_rev' => '<NEW>R&eacute;v.&nbsp;@revision@',
-	'maj_rev_ko' => '<NEW>La [r&eacute;vision distante->@url@] n\'a pas pu &ecirc;tre trouv&eacute;e.',
-	'maj_rev_ok' => '<NEW>La r&eacute;vision [@revision@->@url@] est [disponible->@zip@].',
-	'maj_svn' => '<NEW>Ce plugin SVN semble [&agrave; jour->@url@].',
-	'maj_verif' => '<NEW>V&eacute;rifiez pr&eacute;alablement l\'archive qui vous convient :',
-	'maj_verif2' => '<NEW>Attention : apr&egrave;s avoir cliqu&eacute; sur le bouton ci-dessus, v&eacute;rifiez bien que l\'archive t&eacute;l&eacute;charg&eacute;e correspond au plugin qu\'il vous faut mettre &agrave; jour.',
+	'maj_actu' => 'Update erzwingen', # MODIF
+	'maj_liste' => 'Liste der gefundenen Plugins:',
+	'maj_maj' => 'Ausgew&auml;hltes Plugin aktualisieren',
+	'maj_ok' => 'Dieses[Plugin->@zip@] scheint [auf dem neuesten Stand->@url@] zu sein.',
+	'maj_rev' => 'Rev.&nbsp;@revision@',
+	'maj_rev_ko' => 'Die [Revision->@url@] konnte nicht gefunden werden.',
+	'maj_rev_ok' => 'Die Revision [@revision@->@url@] ist [verf&uuml;gbar->@zip@].',
+	'maj_svn' => 'Dieses SVN Plugin scheint [aktuell->@url@] zu sein.',
+	'maj_verif' => 'Pr&uuml;fen sie vorab, welche Archiv sie verwenden m&ouml;chten:',
+	'maj_verif2' => 'Achtng: Nachdem sie auf diese Schaltfl&auml;che geklickt haben, pr&uuml;fen sie bitte genau, ob das Archiv, das geladen werden soll, auch dem Plugin entspricht, das sie updaten wollen.',
+	'maj_zip_ko' => 'Le fichier .zip distant n\'a pu &ecirc;tre identifi&eacute;.', # NEW
+	'msg_publies' => 'Uniquement les messages publi&eacute;s', # NEW
 
 	// N
-	'nom_email_forum' => '<NEW>Merci de sp&eacute;cifier votre nom ou votre email !',
+	'nom_email_forum' => 'Danke f&uuml;r die Angabe ihres Namens oder ihrer Mailadresse!',
 	'nom_forum' => 'Danke, dass Sie Ihren Namen angegeben haben!',
 	'non_confirmes' => 'Nicht best&auml;tigt:',
 
@@ -67,9 +75,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_lien' => 'Seite @page@: @title@',
 	'page_precedente' => 'Vorige Seite',
 	'page_suivante' => 'N&auml;chste Seite',
-	'plug_actifs' => '<NEW>Plugins actifs',
-	'plug_inactifs' => '<NEW>Plugins inactifs',
-	'plugin_xml' => '<MODIF>Zusammenfassung einiger Zusatzfunktionen f&uuml;r eine bessere Verwaltung Ihrer SPIP Website.
+	'plug_actifs' => 'Aktive Plugins',
+	'plug_inactifs' => 'Inaktive Plugins',
+	'plugin_xml' => 'Fasst einige Zusatzfunktionen zusammen, mit der sie ihre SPIP-Website besser steuern k&ouml;nnen.
 
 Jedes dieser Werkzeuge kann vom Administrator auf der |Seite zur Verwaltung des Plugins->./?exec=admin_couteau_suisse] aktiviert oder abgeschaltet und konfiguriert werden: Klicken Sie auf {{Konfiguration}}, und w&auml;hlen Sie dann {{Schweizer Taschenmesser}}.
 
@@ -80,6 +88,25 @@ W&auml;hlen Sie die f&uuml;r Sie wichtigsten Funktionen: {Ziffern entfernen}, {T
 Bitte lesen Sie auch die Artikel auf : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
 Kompatibel mit: SPIP 1.9x und v2.0',
+	'pp_blocs_bloc' => 'Ins&eacute;rer un bloc repli&eacute;', # NEW
+	'pp_blocs_visible' => 'Ins&eacute;rer un bloc d&eacute;pli&eacute;', # NEW
+	'pp_chatons_inserer' => 'Ins&eacute;rer le chaton &laquo;&nbsp;@chaton@&nbsp;&raquo;', # NEW
+	'pp_chatons_inserer_drop' => 'Ins&eacute;rer un chaton dans votre texte', # NEW
+	'pp_couleur_fond' => 'Fond @couleur@', # NEW
+	'pp_couleur_icone_fond' => 'F', # NEW
+	'pp_couleur_icone_texte' => 'T', # NEW
+	'pp_couleur_texte' => 'Texte @couleur@', # NEW
+	'pp_couteau_suisse_drop' => 'Utiliser un outil du Couteau Suisse', # NEW
+	'pp_decoration_inserer' => 'D&eacute;coration &laquo;&nbsp;@balise@.@racc@&nbsp;&raquo;', # NEW
+	'pp_decoration_inserer_drop' => 'Appliquer au texte une &laquo;&nbsp;d&eacute;coration&nbsp;&raquo; personnalis&eacute;e', # NEW
+	'pp_decoupe_onglets' => 'Ins&eacute;rer un syst&egrave;me d\'onglet', # NEW
+	'pp_decoupe_separateur' => 'Ins&eacute;rer un s&eacute;parateur de page ou d\'onglet', # NEW
+	'pp_filets_inserer' => 'Ins&eacute;rer un filet de style &laquo;&nbsp;@filet@&nbsp;&raquo;', # NEW
+	'pp_filets_inserer_drop' => 'Ins&eacute;rer un filet de s&eacute;paration', # NEW
+	'pp_smileys_inserer' => 'Ins&eacute;rer une frimousse @smiley@', # NEW
+	'pp_un_titre' => 'Un titre', # NEW
+	'pp_votre_texte' => 'Placez votre texte ici', # NEW
+	'pp_votre_titre' => 'Titre @nb@', # NEW
 
 	// S
 	'smileys_dispos' => 'Verf&uuml;gbare Smileys:',
@@ -90,6 +117,8 @@ Kompatibel mit: SPIP 1.9x und v2.0',
 	'stats_date' => '@jour@.@mois@.@annee@&nbsp;um&nbsp;@h@h@m@',
 
 	// T
+	'test_base' => 'Test de la base de donn&eacute;es', # NEW
+	'test_manuel' => 'Test manuel', # NEW
 	'texte_formatspip' => 'ORIGINALTEXT IM SPIP-FORMAT',
 	'textes_formatspip' => 'ORIGINALTEXTE IM SPIP-FORMAT',
 	'titre' => 'Schweizer Taschenmesser',

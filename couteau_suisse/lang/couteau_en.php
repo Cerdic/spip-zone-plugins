@@ -13,7 +13,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'attente_confirmation' => 'Waiting for confirmation',
 
+	// B
+	'base_donnees' => 'Base de donn&eacute;es', # NEW
+
 	// C
+	'colorer_fond' => 'Colour the background',
+	'colorer_texte' => 'Colour the text',
 	'configurer' => 'Configure the Penknife',
 	'connections' => 'Connections',
 
@@ -26,19 +31,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explique_spam' => 'Warning : you have used forbidden tags, characters or words. <br /><br />Start again!',
 
 	// L
+	'lancer_test' => 'Lancer le test !', # NEW
 	'lutte_spam' => 'Fight against SPAM',
 
 	// M
-	'maj_actu' => '<NEW>Forcer l\'actualisation',
-	'maj_liste' => '<NEW>Liste des plugins d&eacute;tect&eacute;s :',
-	'maj_maj' => '<NEW>Mettre &agrave; jour le plugin s&eacute;lectionn&eacute;',
-	'maj_ok' => '<NEW>Ce [plugin->@zip@] semble [&agrave; jour->@url@].',
-	'maj_rev' => '<NEW>R&eacute;v.&nbsp;@revision@',
-	'maj_rev_ko' => '<NEW>La [r&eacute;vision distante->@url@] n\'a pas pu &ecirc;tre trouv&eacute;e.',
-	'maj_rev_ok' => '<NEW>La r&eacute;vision [@revision@->@url@] est [disponible->@zip@].',
-	'maj_svn' => '<NEW>Ce plugin SVN semble [&agrave; jour->@url@].',
-	'maj_verif' => '<NEW>V&eacute;rifiez pr&eacute;alablement l\'archive qui vous convient :',
-	'maj_verif2' => '<NEW>Attention : apr&egrave;s avoir cliqu&eacute; sur le bouton ci-dessus, v&eacute;rifiez bien que l\'archive t&eacute;l&eacute;charg&eacute;e correspond au plugin qu\'il vous faut mettre &agrave; jour.',
+	'maj_actu' => 'Force update', # MODIF
+	'maj_liste' => 'List of detected plugins:',
+	'maj_maj' => 'Update the selected plugin',
+	'maj_ok' => 'This [plugin->@zip@] appears to be [up-to-date->@url@].',
+	'maj_rev' => 'Ver.&nbsp;@revision@',
+	'maj_rev_ko' => 'The [remote version->@url@] could not be found.',
+	'maj_rev_ok' => 'Version [@revision@->@url@] is [available->@zip@].',
+	'maj_svn' => 'This SVN plugin appears to be [up-to-date->@url@].',
+	'maj_verif' => 'First check which file is right for you:',
+	'maj_verif2' => 'N.B. After clicking on the button above, make sure that the file you downloaded corresponds to the plugin you wish to update.',
+	'maj_zip_ko' => 'Le fichier .zip distant n\'a pu &ecirc;tre identifi&eacute;.', # NEW
+	'msg_publies' => 'Uniquement les messages publi&eacute;s', # NEW
 
 	// N
 	'nom_email_forum' => 'Please give your name or email address!',
@@ -67,11 +75,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_lien' => 'Page @page@: @title@',
 	'page_precedente' => 'Previous page',
 	'page_suivante' => 'Next page',
-	'plug_actifs' => '<NEW>Plugins actifs',
-	'plug_inactifs' => '<NEW>Plugins inactifs',
-	'plugin_xml' => '<MODIF>Gathers together in one plugin a list of small, useful tools to improve the management of your SPIP site.
+	'plug_actifs' => 'Active plugins',
+	'plug_inactifs' => 'Inactive plugins',
+	'plugin_xml' => 'Gathers together in one plugin a list of small, useful tools to improve the management of your SPIP site.
 
-Each tool can be ativated/deactivated individually by the the user from the [plugin\'s admin page->./?exec=admin_couteau_suisse]. To set some options, click on {{Configuration}}, then choose the {{Swiss Knife}} tab.
+Each tool can be ativated/deactivated individually from the [plugin\'s admin page->./?exec=admin_couteau_suisse]. To set some options, click on {{Configuration}}, then choose the {{Swiss Knife}} tab.
 
 Available categories are: Administration, Typographical improvements, Typographical shortcuts, Display on the public site, Tags, Filters, Criteria.
 
@@ -80,6 +88,25 @@ Find your favourite tools in this plugin: {Delete the number}, {URL formats},{Su
 See the documentation articles at: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
 Compatibility: SPIP 1.92x and v2.0.x',
+	'pp_blocs_bloc' => 'Ins&eacute;rer un bloc repli&eacute;', # NEW
+	'pp_blocs_visible' => 'Ins&eacute;rer un bloc d&eacute;pli&eacute;', # NEW
+	'pp_chatons_inserer' => 'Ins&eacute;rer le chaton &laquo;&nbsp;@chaton@&nbsp;&raquo;', # NEW
+	'pp_chatons_inserer_drop' => 'Ins&eacute;rer un chaton dans votre texte', # NEW
+	'pp_couleur_fond' => 'Fond @couleur@', # NEW
+	'pp_couleur_icone_fond' => 'F', # NEW
+	'pp_couleur_icone_texte' => 'T', # NEW
+	'pp_couleur_texte' => 'Texte @couleur@', # NEW
+	'pp_couteau_suisse_drop' => 'Utiliser un outil du Couteau Suisse', # NEW
+	'pp_decoration_inserer' => 'D&eacute;coration &laquo;&nbsp;@balise@.@racc@&nbsp;&raquo;', # NEW
+	'pp_decoration_inserer_drop' => 'Appliquer au texte une &laquo;&nbsp;d&eacute;coration&nbsp;&raquo; personnalis&eacute;e', # NEW
+	'pp_decoupe_onglets' => 'Ins&eacute;rer un syst&egrave;me d\'onglet', # NEW
+	'pp_decoupe_separateur' => 'Ins&eacute;rer un s&eacute;parateur de page ou d\'onglet', # NEW
+	'pp_filets_inserer' => 'Ins&eacute;rer un filet de style &laquo;&nbsp;@filet@&nbsp;&raquo;', # NEW
+	'pp_filets_inserer_drop' => 'Ins&eacute;rer un filet de s&eacute;paration', # NEW
+	'pp_smileys_inserer' => 'Ins&eacute;rer une frimousse @smiley@', # NEW
+	'pp_un_titre' => 'Un titre', # NEW
+	'pp_votre_texte' => 'Placez votre texte ici', # NEW
+	'pp_votre_titre' => 'Titre @nb@', # NEW
 
 	// S
 	'smileys_dispos' => 'Available smileys:',
@@ -90,6 +117,8 @@ Compatibility: SPIP 1.92x and v2.0.x',
 	'stats_date' => '@jour@/@mois@/@annee@&nbsp;at&nbsp;@h@:@m@',
 
 	// T
+	'test_base' => 'Test de la base de donn&eacute;es', # NEW
+	'test_manuel' => 'Test manuel', # NEW
 	'texte_formatspip' => 'ORIGINAL TEXT IN SPIP FORMAT',
 	'textes_formatspip' => 'ORIGINAL TEXTS IN SPIP FORMAT',
 	'titre' => 'Penknife',

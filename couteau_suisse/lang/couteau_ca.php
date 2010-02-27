@@ -13,7 +13,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'attente_confirmation' => 'Esperant confirmaci&oacute;',
 
+	// B
+	'base_donnees' => 'Base de donn&eacute;es', # NEW
+
 	// C
+	'colorer_fond' => 'Acolorir el fons',
+	'colorer_texte' => 'Acolorir el text',
 	'configurer' => 'Configurar el Ganivet Su&iacute;s',
 	'connections' => 'Connexions',
 
@@ -26,10 +31,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explique_spam' => 'Atenci&oacute;: heu utilitzat etiquestes, car&agrave;cters o paraules prohibides.<br /><br />Torneu enrere!',
 
 	// L
+	'lancer_test' => 'Lancer le test !', # NEW
 	'lutte_spam' => 'Lluita contra l\'SPAM',
 
 	// M
-	'maj_actu' => 'For&ccedil;ar l\'actualitzaci&oacute;',
+	'maj_actu' => 'For&ccedil;ar l\'actualitzaci&oacute;', # MODIF
 	'maj_liste' => 'Llista dels plugins detectats: ',
 	'maj_maj' => 'Actualitzar el plugin seleccionat',
 	'maj_ok' => 'Aquest [plugin->@zip@] sembla [a dia->@url@].',
@@ -39,6 +45,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'maj_svn' => 'Aquest plugin SVN sembla [al dia->@url@].',
 	'maj_verif' => 'Verifiqueu pr&egrave;viament l\'arxiu que us conv&eacute;:',
 	'maj_verif2' => 'Atenci&oacute;: despr&eacute;s de clicar el bot&oacute; que hi ha m&eacute;s amunt, verifiqueu b&eacute; que l\'arxiu descarregat correspongui al plugin que us calia actualitzar. ',
+	'maj_zip_ko' => 'Le fichier .zip distant n\'a pu &ecirc;tre identifi&eacute;.', # NEW
+	'msg_publies' => 'Uniquement les messages publi&eacute;s', # NEW
 
 	// N
 	'nom_email_forum' => 'Gr&agrave;cies per especificar el vostre nom o el vostre correu electr&ograve;nic!',
@@ -80,6 +88,25 @@ Descobriu en aquest plugin les vostres eines favorites: {Suprimir el n&uacute;me
 No dubteu a consultar els articles de la documentaci&oacute; del plugin publicats a: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
 Compatibilitat: SPIP v1.92x i v2.0.x',
+	'pp_blocs_bloc' => 'Ins&eacute;rer un bloc repli&eacute;', # NEW
+	'pp_blocs_visible' => 'Ins&eacute;rer un bloc d&eacute;pli&eacute;', # NEW
+	'pp_chatons_inserer' => 'Ins&eacute;rer le chaton &laquo;&nbsp;@chaton@&nbsp;&raquo;', # NEW
+	'pp_chatons_inserer_drop' => 'Ins&eacute;rer un chaton dans votre texte', # NEW
+	'pp_couleur_fond' => 'Fond @couleur@', # NEW
+	'pp_couleur_icone_fond' => 'F', # NEW
+	'pp_couleur_icone_texte' => 'T', # NEW
+	'pp_couleur_texte' => 'Texte @couleur@', # NEW
+	'pp_couteau_suisse_drop' => 'Utiliser un outil du Couteau Suisse', # NEW
+	'pp_decoration_inserer' => 'D&eacute;coration &laquo;&nbsp;@balise@.@racc@&nbsp;&raquo;', # NEW
+	'pp_decoration_inserer_drop' => 'Appliquer au texte une &laquo;&nbsp;d&eacute;coration&nbsp;&raquo; personnalis&eacute;e', # NEW
+	'pp_decoupe_onglets' => 'Ins&eacute;rer un syst&egrave;me d\'onglet', # NEW
+	'pp_decoupe_separateur' => 'Ins&eacute;rer un s&eacute;parateur de page ou d\'onglet', # NEW
+	'pp_filets_inserer' => 'Ins&eacute;rer un filet de style &laquo;&nbsp;@filet@&nbsp;&raquo;', # NEW
+	'pp_filets_inserer_drop' => 'Ins&eacute;rer un filet de s&eacute;paration', # NEW
+	'pp_smileys_inserer' => 'Ins&eacute;rer une frimousse @smiley@', # NEW
+	'pp_un_titre' => 'Un titre', # NEW
+	'pp_votre_texte' => 'Placez votre texte ici', # NEW
+	'pp_votre_titre' => 'Titre @nb@', # NEW
 
 	// S
 	'smileys_dispos' => 'Cares atractives disponibles:',
@@ -90,6 +117,8 @@ Compatibilitat: SPIP v1.92x i v2.0.x',
 	'stats_date' => '@jour@/@mois@/@annee@&nbsp;a&nbsp;@h@h@m@',
 
 	// T
+	'test_base' => 'Test de la base de donn&eacute;es', # NEW
+	'test_manuel' => 'Test manuel', # NEW
 	'texte_formatspip' => 'TEXT ORIGINAL EN FORMAT SPIP',
 	'textes_formatspip' => 'TEXTOS ORIGINALS EN FORMAT SPIP',
 	'titre' => 'El Ganivet Su&iacute;s',

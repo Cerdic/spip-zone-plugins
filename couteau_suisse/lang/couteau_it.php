@@ -13,7 +13,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'attente_confirmation' => 'In attesa di conferma',
 
+	// B
+	'base_donnees' => 'Base de donn&eacute;es', # NEW
+
 	// C
+	'colorer_fond' => 'Colorer le fond', # NEW
+	'colorer_texte' => 'Colorer le texte', # NEW
 	'configurer' => 'Configura il Coltello Svizzero',
 	'connections' => 'Connessioni',
 
@@ -26,10 +31,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explique_spam' => 'Attenzione: hai utilizzato dei tag, dei catarreti o delle parole vietate.<br /><br />Riprova!',
 
 	// L
+	'lancer_test' => 'Lancer le test !', # NEW
 	'lutte_spam' => 'Lotta contro lo SPAM',
 
 	// M
-	'maj_actu' => 'Forza l\'aggiornamento',
+	'maj_actu' => 'Forza l\'aggiornamento', # MODIF
 	'maj_liste' => 'Elenco dei plugin rilevati:',
 	'maj_maj' => 'Aggiorna il plugin selezionato',
 	'maj_ok' => 'Questo [plugin->@zip@] sembra [aggiornato->@url@].',
@@ -39,6 +45,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'maj_svn' => 'Questo plugin SVN sembra [aggiornato->@url@].',
 	'maj_verif' => 'Verifica prima l\'archivio:',
 	'maj_verif2' => 'Attenzione: dopo aver cliccato sul tasto qui in basso, verifica attentamente che l\'archivio scaricato corrisponda al plugin da aggiornare.',
+	'maj_zip_ko' => 'Le fichier .zip distant n\'a pu &ecirc;tre identifi&eacute;.', # NEW
+	'msg_publies' => 'Uniquement les messages publi&eacute;s', # NEW
 
 	// N
 	'nom_email_forum' => 'Si prega di inserire il nome o l\'indirizzo email!',
@@ -80,6 +88,25 @@ Scopri in questo plugin le tue funzioni preferite: {Sopprimi il numero}, {Format
 Non esitare a leggere gli articoli di documentazione del plugin pubblicati su: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
 Compatibilit&agrave; : SPIP v1.92x e v2.0.x',
+	'pp_blocs_bloc' => 'Ins&eacute;rer un bloc repli&eacute;', # NEW
+	'pp_blocs_visible' => 'Ins&eacute;rer un bloc d&eacute;pli&eacute;', # NEW
+	'pp_chatons_inserer' => 'Ins&eacute;rer le chaton &laquo;&nbsp;@chaton@&nbsp;&raquo;', # NEW
+	'pp_chatons_inserer_drop' => 'Ins&eacute;rer un chaton dans votre texte', # NEW
+	'pp_couleur_fond' => 'Fond @couleur@', # NEW
+	'pp_couleur_icone_fond' => 'F', # NEW
+	'pp_couleur_icone_texte' => 'T', # NEW
+	'pp_couleur_texte' => 'Texte @couleur@', # NEW
+	'pp_couteau_suisse_drop' => 'Utiliser un outil du Couteau Suisse', # NEW
+	'pp_decoration_inserer' => 'D&eacute;coration &laquo;&nbsp;@balise@.@racc@&nbsp;&raquo;', # NEW
+	'pp_decoration_inserer_drop' => 'Appliquer au texte une &laquo;&nbsp;d&eacute;coration&nbsp;&raquo; personnalis&eacute;e', # NEW
+	'pp_decoupe_onglets' => 'Ins&eacute;rer un syst&egrave;me d\'onglet', # NEW
+	'pp_decoupe_separateur' => 'Ins&eacute;rer un s&eacute;parateur de page ou d\'onglet', # NEW
+	'pp_filets_inserer' => 'Ins&eacute;rer un filet de style &laquo;&nbsp;@filet@&nbsp;&raquo;', # NEW
+	'pp_filets_inserer_drop' => 'Ins&eacute;rer un filet de s&eacute;paration', # NEW
+	'pp_smileys_inserer' => 'Ins&eacute;rer une frimousse @smiley@', # NEW
+	'pp_un_titre' => 'Un titre', # NEW
+	'pp_votre_texte' => 'Placez votre texte ici', # NEW
+	'pp_votre_titre' => 'Titre @nb@', # NEW
 
 	// S
 	'smileys_dispos' => 'Smiley disponibili:',
@@ -90,6 +117,8 @@ Compatibilit&agrave; : SPIP v1.92x e v2.0.x',
 	'stats_date' => '@jour@/@mois@/@annee@&nbsp;alle&nbsp;@h@h@m@',
 
 	// T
+	'test_base' => 'Test de la base de donn&eacute;es', # NEW
+	'test_manuel' => 'Test manuel', # NEW
 	'texte_formatspip' => 'TESTO ORIGINALE NEL FORMATO SPIP',
 	'textes_formatspip' => 'TESTI ORIGINALI NEL FORMATO SPIP',
 	'titre' => 'Coltellino svizzero',

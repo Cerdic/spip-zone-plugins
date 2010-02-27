@@ -13,7 +13,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'attente_confirmation' => 'En espera de confirmaci&oacute;n',
 
+	// B
+	'base_donnees' => 'Base de donn&eacute;es', # NEW
+
 	// C
+	'colorer_fond' => 'Colorer le fond', # NEW
+	'colorer_texte' => 'Colorer le texte', # NEW
 	'configurer' => 'Configurar la Navaja Suiza',
 	'connections' => 'Conexiones',
 
@@ -26,19 +31,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explique_spam' => 'Cuidado: has utilizado balizas, caracteres o palabras prohibidas.<br /><br />&iexcl;Vuelve atr&aacute;s!',
 
 	// L
+	'lancer_test' => 'Lancer le test !', # NEW
 	'lutte_spam' => 'Lucha contra el SPAM',
 
 	// M
-	'maj_actu' => '<NEW>Forcer l\'actualisation',
-	'maj_liste' => '<NEW>Liste des plugins d&eacute;tect&eacute;s :',
-	'maj_maj' => '<NEW>Mettre &agrave; jour le plugin s&eacute;lectionn&eacute;',
-	'maj_ok' => '<NEW>Ce [plugin->@zip@] semble [&agrave; jour->@url@].',
-	'maj_rev' => '<NEW>R&eacute;v.&nbsp;@revision@',
-	'maj_rev_ko' => '<NEW>La [r&eacute;vision distante->@url@] n\'a pas pu &ecirc;tre trouv&eacute;e.',
-	'maj_rev_ok' => '<NEW>La r&eacute;vision [@revision@->@url@] est [disponible->@zip@].',
-	'maj_svn' => '<NEW>Ce plugin SVN semble [&agrave; jour->@url@].',
-	'maj_verif' => '<NEW>V&eacute;rifiez pr&eacute;alablement l\'archive qui vous convient :',
-	'maj_verif2' => '<NEW>Attention : apr&egrave;s avoir cliqu&eacute; sur le bouton ci-dessus, v&eacute;rifiez bien que l\'archive t&eacute;l&eacute;charg&eacute;e correspond au plugin qu\'il vous faut mettre &agrave; jour.',
+	'maj_actu' => 'Forcer l\'actualisation', # MODIF
+	'maj_liste' => 'Liste des plugins d&eacute;tect&eacute;s :', # NEW
+	'maj_maj' => 'Mettre &agrave; jour le plugin s&eacute;lectionn&eacute;', # NEW
+	'maj_ok' => 'Ce [plugin->@zip@] semble [&agrave; jour->@url@].', # NEW
+	'maj_rev' => 'R&eacute;v.&nbsp;@revision@', # NEW
+	'maj_rev_ko' => 'La [r&eacute;vision distante->@url@] n\'a pas pu &ecirc;tre trouv&eacute;e.', # NEW
+	'maj_rev_ok' => 'La r&eacute;vision [@revision@->@url@] est [disponible->@zip@].', # NEW
+	'maj_svn' => 'Ce plugin SVN semble [&agrave; jour->@url@].', # NEW
+	'maj_verif' => 'V&eacute;rifiez pr&eacute;alablement l\'archive qui vous convient :', # NEW
+	'maj_verif2' => 'Attention : apr&egrave;s avoir cliqu&eacute; sur le bouton ci-dessus, v&eacute;rifiez bien que l\'archive t&eacute;l&eacute;charg&eacute;e correspond au plugin qu\'il vous faut mettre &agrave; jour.', # NEW
+	'maj_zip_ko' => 'Le fichier .zip distant n\'a pu &ecirc;tre identifi&eacute;.', # NEW
+	'msg_publies' => 'Uniquement les messages publi&eacute;s', # NEW
 
 	// N
 	'nom_email_forum' => 'Por favor, ingresa tu nombre o tu email!',
@@ -67,9 +75,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_lien' => 'P&aacute;gina @page@: @title@',
 	'page_precedente' => 'P&aacute;gina anterior',
 	'page_suivante' => 'P&aacute;gina siguiente',
-	'plug_actifs' => '<NEW>Plugins actifs',
-	'plug_inactifs' => '<NEW>Plugins inactifs',
-	'plugin_xml' => '<MODIF>Re&uacute;ne en un solo plugin una lista de peque&ntilde;as caracter&iacute;sticas nuevas y &uacute;tiles para mejorar la gesti&oacute;n de tu sitio SPIP.
+	'plug_actifs' => 'Plugins actifs', # NEW
+	'plug_inactifs' => 'Plugins inactifs', # NEW
+	'plugin_xml' => 'Re&uacute;ne en un solo plugin una lista de peque&ntilde;as caracter&iacute;sticas nuevas y &uacute;tiles para mejorar la gesti&oacute;n de tu sitio SPIP.
 
 Cada herramienta puede activarse o no por el usuario en [la p&aacute;gina de administraci&oacute;n del plugin->./?exec=admin_couteau_suisse] y manejar cierto n&uacute;mero de variables: pulsa en {{Configuraci&oacute;n}}, y selecciona la pesta&ntilde;a {{La Navaja Suiza}}.
 
@@ -79,7 +87,26 @@ Encuentra en este plugin tus herramientas favoritas: {Suprimir n&uacute;meros}, 
 
 No dudes en consultar los art&iacute;culos de documentaci&oacute;n del plugin publicados en: [spip-contrib.net->http://www.spip-contrib.net/La-navaja-suiza].
 
-Compatibilidad: SPIP v1.9x y v2.0',
+Compatibilidad: SPIP v1.9x y v2.0', # MODIF
+	'pp_blocs_bloc' => 'Ins&eacute;rer un bloc repli&eacute;', # NEW
+	'pp_blocs_visible' => 'Ins&eacute;rer un bloc d&eacute;pli&eacute;', # NEW
+	'pp_chatons_inserer' => 'Ins&eacute;rer le chaton &laquo;&nbsp;@chaton@&nbsp;&raquo;', # NEW
+	'pp_chatons_inserer_drop' => 'Ins&eacute;rer un chaton dans votre texte', # NEW
+	'pp_couleur_fond' => 'Fond @couleur@', # NEW
+	'pp_couleur_icone_fond' => 'F', # NEW
+	'pp_couleur_icone_texte' => 'T', # NEW
+	'pp_couleur_texte' => 'Texte @couleur@', # NEW
+	'pp_couteau_suisse_drop' => 'Utiliser un outil du Couteau Suisse', # NEW
+	'pp_decoration_inserer' => 'D&eacute;coration &laquo;&nbsp;@balise@.@racc@&nbsp;&raquo;', # NEW
+	'pp_decoration_inserer_drop' => 'Appliquer au texte une &laquo;&nbsp;d&eacute;coration&nbsp;&raquo; personnalis&eacute;e', # NEW
+	'pp_decoupe_onglets' => 'Ins&eacute;rer un syst&egrave;me d\'onglet', # NEW
+	'pp_decoupe_separateur' => 'Ins&eacute;rer un s&eacute;parateur de page ou d\'onglet', # NEW
+	'pp_filets_inserer' => 'Ins&eacute;rer un filet de style &laquo;&nbsp;@filet@&nbsp;&raquo;', # NEW
+	'pp_filets_inserer_drop' => 'Ins&eacute;rer un filet de s&eacute;paration', # NEW
+	'pp_smileys_inserer' => 'Ins&eacute;rer une frimousse @smiley@', # NEW
+	'pp_un_titre' => 'Un titre', # NEW
+	'pp_votre_texte' => 'Placez votre texte ici', # NEW
+	'pp_votre_titre' => 'Titre @nb@', # NEW
 
 	// S
 	'smileys_dispos' => 'Caritas disponibles:',
@@ -90,6 +117,8 @@ Compatibilidad: SPIP v1.9x y v2.0',
 	'stats_date' => '@jour@/@mois@/@annee@&nbsp;a&nbsp;las&nbsp;@h@h@m@',
 
 	// T
+	'test_base' => 'Test de la base de donn&eacute;es', # NEW
+	'test_manuel' => 'Test manuel', # NEW
 	'texte_formatspip' => 'TEXTO ORIGINAL EN FORMATO SPIP',
 	'textes_formatspip' => 'TEXTOS ORIGINALES EN FORMATO SPIP',
 	'titre' => 'La Navaja Suiza',

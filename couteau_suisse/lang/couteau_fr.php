@@ -7,14 +7,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// 2
 	'2pts' => '@objet@&nbsp;:',
-	'test_manuel'=>'Test manuel',
-	'test_base'=>'Test de la base de donn&eacute;es',
-	'base_donnees'=>'Base de donn&eacute;es',
-	'lancer_test' => 'Lancer le test !',
-	'msg_publies' => 'Uniquement les messages publi&eacute;s',
 
 	// A
 	'attente_confirmation' => 'En attente de confirmation',
+
+	// B
+	'base_donnees' => 'Base de donn&eacute;es',
 
 	// C
 	'colorer_fond' => 'Colorer le fond',
@@ -31,6 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explique_spam' => 'Attention : vous avez utilis&eacute; des balises, des caract&egrave;res ou des mots interdits.<br /><br />Revenez en arri&egrave;re !',
 
 	// L
+	'lancer_test' => 'Lancer le test !',
 	'lutte_spam' => 'Lutte contre le SPAM',
 
 	// M
@@ -45,6 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'maj_verif' => 'V&eacute;rifiez pr&eacute;alablement l\'archive qui vous convient :',
 	'maj_verif2' => 'Attention : apr&egrave;s avoir cliqu&eacute; sur le bouton ci-dessus, v&eacute;rifiez bien que l\'archive t&eacute;l&eacute;charg&eacute;e correspond au plugin qu\'il vous faut mettre &agrave; jour.',
 	'maj_zip_ko' => 'Le fichier .zip distant n\'a pu &ecirc;tre identifi&eacute;.',
+	'msg_publies' => 'Uniquement les messages publi&eacute;s',
 
 	// N
 	'nom_email_forum' => 'Merci de sp&eacute;cifier votre nom ou votre email !',
@@ -86,28 +86,28 @@ D&#233;couvrez dans ce plugin vos outils favoris : {Supprime le num&#233;ro}, {F
 N\'h&#233;sitez pas &#224; consulter les articles de documentation du plugin publi&#233;s sur : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
 Compatibilit&#233; : SPIP v1.92x et v2.0.x',
-
-	// S
-	'smileys_dispos' => 'Frimousses disponibles :',
-	'pp_smileys_inserer' => 'Ins&eacute;rer une frimousse @smiley@',
-	'pp_filets_inserer' => 'Ins&eacute;rer un filet de style &laquo;&nbsp;@filet@&nbsp;&raquo;',
-	'pp_filets_inserer_drop' => 'Ins&eacute;rer un filet de s&eacute;paration',
-	'pp_chatons_inserer_drop' => 'Ins&eacute;rer un chaton dans votre texte',
+	'pp_blocs_bloc' => 'Ins&eacute;rer un bloc repli&eacute;',
+	'pp_blocs_visible' => 'Ins&eacute;rer un bloc d&eacute;pli&eacute;',
 	'pp_chatons_inserer' => 'Ins&eacute;rer le chaton &laquo;&nbsp;@chaton@&nbsp;&raquo;',
-	'pp_couteau_suisse_drop' => 'Utiliser un outil du Couteau Suisse',
-	'pp_decoupe_separateur' => 'Ins&eacute;rer un s&eacute;parateur de page ou d\'onglet',
-	'pp_decoupe_onglets' => 'Ins&eacute;rer un syst&egrave;me d\'onglet',
-	'pp_decoration_inserer' => 'D&eacute;coration &laquo;&nbsp;@balise@.@racc@&nbsp;&raquo;',
-	'pp_decoration_inserer_drop' => 'Appliquer au texte une &laquo;&nbsp;d&eacute;coration&nbsp;&raquo; personnalis&eacute;e',
-	'pp_votre_texte' => 'Placez votre texte ici',
-	'pp_votre_titre' => 'Titre @nb@',
-	'pp_un_titre' => 'Un titre',
+	'pp_chatons_inserer_drop' => 'Ins&eacute;rer un chaton dans votre texte',
 	'pp_couleur_fond' => 'Fond @couleur@',
 	'pp_couleur_icone_fond' => 'F',
 	'pp_couleur_icone_texte' => 'T',
 	'pp_couleur_texte' => 'Texte @couleur@',
-	'pp_blocs_bloc' => 'Ins&eacute;rer un bloc repli&eacute;',
-	'pp_blocs_visible' => 'Ins&eacute;rer un bloc d&eacute;pli&eacute;',
+	'pp_couteau_suisse_drop' => 'Utiliser un outil du Couteau Suisse',
+	'pp_decoration_inserer' => 'D&eacute;coration &laquo;&nbsp;@balise@.@racc@&nbsp;&raquo;',
+	'pp_decoration_inserer_drop' => 'Appliquer au texte une &laquo;&nbsp;d&eacute;coration&nbsp;&raquo; personnalis&eacute;e',
+	'pp_decoupe_onglets' => 'Ins&eacute;rer un syst&egrave;me d\'onglet',
+	'pp_decoupe_separateur' => 'Ins&eacute;rer un s&eacute;parateur de page ou d\'onglet',
+	'pp_filets_inserer' => 'Ins&eacute;rer un filet de style &laquo;&nbsp;@filet@&nbsp;&raquo;',
+	'pp_filets_inserer_drop' => 'Ins&eacute;rer un filet de s&eacute;paration',
+	'pp_smileys_inserer' => 'Ins&eacute;rer une frimousse @smiley@',
+	'pp_un_titre' => 'Un titre',
+	'pp_votre_texte' => 'Placez votre texte ici',
+	'pp_votre_titre' => 'Titre @nb@',
+
+	// S
+	'smileys_dispos' => 'Frimousses disponibles :',
 	'sommaire_page' => ',&nbsp;p@page@',
 	'sommaire_page_long' => ',&nbsp;page&nbsp;@page@',
 	'sommaire_titre' => 'Sommaire',
@@ -115,6 +115,8 @@ Compatibilit&#233; : SPIP v1.92x et v2.0.x',
 	'stats_date' => '@jour@/@mois@/@annee@&nbsp;&agrave;&nbsp;@h@h@m@',
 
 	// T
+	'test_base' => 'Test de la base de donn&eacute;es',
+	'test_manuel' => 'Test manuel',
 	'texte_formatspip' => 'TEXTE ORIGINAL AU FORMAT SPIP',
 	'textes_formatspip' => 'TEXTES ORIGINAUX AU FORMAT SPIP',
 	'titre' => 'Le Couteau Suisse',
