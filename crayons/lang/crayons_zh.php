@@ -8,34 +8,62 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'annuler' => '<MODIF>&#21462;&#28040;',
+	'annuler' => '&#21462;&#28040;', # MODIF
 
 	// D
-	'deja_modifie' => '<MODIF>&#24050;&#32463;&#20462;&#25913;',
-	'donnees_mal_formatees' => '<MODIF>&#25968;&#25454;&#26684;&#24335;&#21270;&#38169;&#35823;',
+	'deja_modifie' => '&#24050;&#32463;&#20462;&#25913;', # MODIF
+	'donnees_mal_formatees' => '&#25968;&#25454;&#26684;&#24335;&#21270;&#38169;&#35823;', # MODIF
 
 	// E
-	'editer' => '<MODIF>&#32534;&#36753;',
-	'editer_@type@_@id@' => '<MODIF>&#32534;&#36753;@type@@id@&#25152;&#26377;&#20869;&#23481;',
-	'editer_tout' => '<MODIF>&#32534;&#36753;&#25152;&#26377;&#20869;&#23481;',
+	'editer' => '&#32534;&#36753;', # MODIF
+	'editer_@type@_@id@' => '&#32534;&#36753;@type@@id@&#25152;&#26377;&#20869;&#23481;', # MODIF
+	'editer_tout' => '&#32534;&#36753;&#25152;&#26377;&#20869;&#23481;', # MODIF
+	'effets' => 'Effets', # NEW
+	'explication_exec_autorise' => 'Pages autoris&eacute;es &agrave; la modification
+		(?exec=...) : (, pour s&eacute;parer les exec).', # NEW
+	'explication_reduire_logo' => 'R&#233;duire le logo s\'il d&#233;passe
+		la taille maximale indiquee en pixels. Exemple : 100. (0 = jamais)', # NEW
+
+	// L
+	'label_activer_barre_typo' => 'Activer la barre typographique dans les crayons ?', # NEW
+	'label_activer_crayons_prive' => 'Activer crayons pour la partie priv&eacute;e.', # NEW
+	'label_barre_typo' => 'Barre typographique', # NEW
+	'label_clickhide' => 'Un clic en-dehors masque les crayons', # NEW
+	'label_effets' => 'Choix des effets', # NEW
+	'label_espaceprive' => 'Crayons dans le priv&eacute; ?', # NEW
+	'label_exec_autorise' => 'Pages autoris&eacute;es', # NEW
+	'label_filet' => 'Filet', # NEW
+	'label_message' => 'Obtenir un message', # NEW
+	'label_msg_abandon' => 'Sur abandon', # NEW
+	'label_msg_no_change' => 'Si pas de changement', # NEW
+	'label_reduire_logo' => 'R&eacute;duire les logos', # NEW
+	'label_yellow_fade' => 'Fade', # NEW
+	'legend_editer_prive' => '&Eacute;diter l\'espace priv&eacute; (exp&eacute;rimental)', # NEW
 
 	// M
-	'modifie_par_ailleurs' => '<MODIF>&#34987;&#21035;&#20154;&#20462;&#25913;',
+	'messages' => 'Messages', # NEW
+	'modifie_par_ailleurs' => '&#34987;&#21035;&#20154;&#20462;&#25913;', # MODIF
 
 	// N
-	'non_autorise' => '<MODIF>&#27809;&#26377;&#25480;&#26435;',
-	'non_implemente' => '<MODIF>&#20026;&#35843;&#35797;&#20132;&#26426;',
+	'non_autorise' => '&#27809;&#26377;&#25480;&#26435;', # MODIF
+	'non_implemente' => '&#20026;&#35843;&#35797;&#20132;&#26426;', # MODIF
 
 	// P
-	'pas_de_modification' => '<MODIF>&#26080;&#20462;&#25913;&#20869;&#23481;',
-	'pas_de_valeur' => '<MODIF>&#27809;&#26377;&#20540;',
+	'pas_de_modification' => '&#26080;&#20462;&#25913;&#20869;&#23481;', # MODIF
+	'pas_de_valeur' => '&#27809;&#26377;&#20540;', # MODIF
 
 	// S
-	'sauvegarder' => '<MODIF>&#20445;&#23384;&#24050;&#20462;&#25913;&#30340;&#20869;&#23481;&#21527;&#65311;',
-	'svp_copier_coller' => '<MODIF>&#23545;&#19981;&#36215;&#65292;&#22797;&#21046;/&#31896;&#36148;&#24050;&#32463;&#25913;&#21464;&#30340;&#20869;&#23481;&#65292;&#24182;&#37325;&#26032;&#24320;&#22987;',
+	'sauvegarder' => '&#20445;&#23384;&#24050;&#20462;&#25913;&#30340;&#20869;&#23481;&#21527;&#65311;', # MODIF
+	'svp_copier_coller' => '&#23545;&#19981;&#36215;&#65292;&#22797;&#21046;/&#31896;&#36148;&#24050;&#32463;&#25913;&#21464;&#30340;&#20869;&#23481;&#65292;&#24182;&#37325;&#26032;&#24320;&#22987;', # MODIF
+
+	// T
+	'titre_config_crayons' => 'Configurer les crayons', # NEW
+
+	// U
+	'update_impossible' => 'La mise &agrave; jour a &eacute;chou&eacute;.', # NEW
 
 	// V
-	'veuillez_patienter' => '<MODIF>&#35831;&#31245;&#21518;...'
+	'veuillez_patienter' => '&#35831;&#31245;&#21518;...', # MODI
 );
 
 ?>
