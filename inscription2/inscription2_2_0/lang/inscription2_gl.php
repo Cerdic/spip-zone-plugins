@@ -20,6 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'adresse_pro' => 'Enderezo profesional (Pro.)',
 	'afficher_tous' => 'Mostrar todos os usuarios',
 	'ajouter_adherent' => 'Crear un novo usuario',
+	'ans' => 'ans', # NEW
 	'aout' => 'agosto',
 	'aucun_resultat_recherche' => 'Non hai ning&uacute;n resultado da s&uacute;a busca.',
 	'auteur' => 'Autor',
@@ -39,6 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'choisir_categories' => 'Escolla a seguir:',
 	'choisir_nouveau_password' => 'Pode escoller un novo contrasinal premendo a ligaz&oacute;n seguinte',
 	'choisir_zones' => 'Escolla as zonas &aacute;s que os novos adherentes ser&aacute;n afectados',
+	'choisissez' => 'Choisissez', # NEW
 	'choix_affordance_email' => 'Correo',
 	'choix_affordance_login' => 'Login (predefinido en SPIP)',
 	'choix_affordance_login_email' => 'Login e correo',
@@ -75,6 +77,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'effacement_auto_impossible' => 'A conta non se pode borrar automaticamente, contacte con n&oacute;s.',
 	'email' => 'Correo-e',
 	'email_bonjour' => 'Bos d&iacute;as @nom@,',
+	'email_deja_enregistre' => 'Cette adresse email est d&eacute;j&agrave; enregistr&eacute;e. Utilisez le formulaire de connexion pour acc&eacute;der &agrave; votre compte.', # NEW
 	'email_obligatoire' => 'O campo de correo-e &eacute; obrigado',
 	'email_valide' => 'Introduza un enderezo de correo v&aacute;lido',
 	'erreur_reglement_obligatoire' => 'Debe aceptar as condici&oacute;ns',
@@ -130,6 +133,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_perso_desc' => 'Datos persoais que ser&aacute;n solicitados aos novos adherentes do web',
 	'info_pro' => 'Datos profesionais',
 	'infos_adherent' => 'Datos complementarios',
+	'infos_complementaires' => 'Informations compl&eacute;mentaires', # NEW
 	'infos_personnelles' => 'Datos persoais',
 	'inscription2' => 'Inscription 2.0',
 	'inscriptions' => 'Inscrici&oacute;ns',
@@ -170,6 +174,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mobile' => 'M&oacute;bil',
 	'mobile_pro' => 'M&oacute;bil profesional',
 	'modif_pass_titre' => 'Modificar o seu contrasinal',
+	'moins_seconde' => 'moins d\'une seconde', # NEW
 	'mot_passe_reste_identique' => 'O seu contrasinal non foi modificado.',
 
 	// N
@@ -207,12 +212,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'password_obligatoire' => 'O contrasinal &eacute; obrigado.',
 	'password_retaper' => 'Confirme o contrasinal.',
 	'pays' => 'Pa&iacute;s',
+	'pays_defaut' => 'Pays par d&eacute;faut', # NEW
 	'pays_pro' => 'Pa&iacute;s (Prof.)',
 	'pgp' => 'Chave PGP',
 	'prenom' => 'Nome',
 	'probleme_email' => 'Hai un problema co correo&nbsp;: a mensaxe de correo para a activaci&oacute;n non pode ser enviada.',
 	'profession' => 'Profesi&oacute;n',
-	'profil_droits_insuffisants' => 'Desculpe, non ten permisos para modificar este autor<br/>',
+	'profil_droits_insuffisants' => 'Desculpe, non ten permisos para modificar este autor<br/>', # MODIF
 	'profil_modifie_ok' => 'As modificaci&oacute;ns do seu perfil foron recibidas correctamente.',
 	'publication' => 'Publicaci&oacute;n',
 
@@ -228,6 +234,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'saisir_email_valide' => 'Dea un enderezo de correo v&aacute;lido',
+	'secondes' => 'secondes', # NEW
 	'secteur' => 'Sector',
 	'septembre' => 'setembro',
 	'sexe' => 'Estado civil',
@@ -254,7 +261,7 @@ e acaba de escoller o contrasinal.
 
 Agradec&eacute;moslle a s&uacute;a confianza
 
-O equipo de @nom_site@',
+O equipo de @nom_site@', # MODIF
 	'texte_email_inscription' => 'Vai confirmar a s&uacute;a inscrici&oacute;n no noso web @nom_site@. 
 
 Prema a ligaz&oacute;n seguinte par activar a s&uacute;a conta e escoller o seu contrasinal.
@@ -274,6 +281,12 @@ Se vostede non solicitouesta inscrici&oacute;n ou se non quereparticipar no noso
 	'titre_confirmation' => 'Confirmaci&oacute;n',
 
 	// U
+	'un_an' => 'un an', # NEW
+	'un_jour' => 'un jour', # NEW
+	'un_mois' => 'un mois', # NEW
+	'une_heure' => 'une heure', # NEW
+	'une_minute' => 'une minute', # NEW
+	'une_seconde' => 'une seconde', # NEW
 	'url_site' => 'Url do web',
 	'url_societe' => 'Web da sociedade',
 

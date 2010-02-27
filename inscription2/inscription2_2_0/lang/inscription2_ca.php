@@ -218,7 +218,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'prenom' => 'Nom',
 	'probleme_email' => 'Problema de correu: el correu d\'activaci&oacute; no es pot enviar.',
 	'profession' => 'Professi&oacute;',
-	'profil_droits_insuffisants' => 'Ho sentin. No teniu el dret de modificar aquest autor<br/>',
+	'profil_droits_insuffisants' => 'Ho sentin. No teniu el dret de modificar aquest autor<br/>', # MODIF
 	'profil_modifie_ok' => 'Les modificacions del vostre perfil s\'han tingut en compte.',
 	'publication' => 'Publicaci&oacute;',
 
@@ -262,7 +262,7 @@ i acabeu d\'escollir la vostra contrasenya.
 Gr&agrave;cies per la vostra confian&ccedil;a
 
 L\'equip de @nom_site@
-@url_site@',
+@url_site@', # MODIF
 	'texte_email_inscription' => 'esteu a punt de confirmar la vostra inscripci&oacute; al lloc @nom_site@.
 
 Cliqueu l\'enlla&ccedil; que hi ha m&eacute;s avall per activar el vostre compte i escollir la vostra contrasenya.

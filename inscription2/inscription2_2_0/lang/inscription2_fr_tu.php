@@ -20,6 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'adresse_pro' => 'Adresse professionnelle (Pro.)',
 	'afficher_tous' => 'Afficher tous les utilisateurs',
 	'ajouter_adherent' => 'Cr&eacute;er un nouvel utilisateur',
+	'ans' => 'ans',
 	'aout' => 'ao&ucirc;t',
 	'aucun_resultat_recherche' => 'Il n\'y a aucun r&eacute;sultat pour ta recherche.',
 	'auteur' => 'Auteur',
@@ -39,6 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'choisir_categories' => 'Choisis-les ci-dessous&nbsp;:',
 	'choisir_nouveau_password' => 'Tu pourras choisir un nouveau mot de passe en cliquant le lien suivant',
 	'choisir_zones' => 'Choisis les zones auxquelles tu veux que les nouveaux adh&eacute;rents soient affect&eacute;s',
+	'choisissez' => 'Choisis',
 	'choix_affordance_email' => 'Email',
 	'choix_affordance_login' => 'Login (par d&eacute;faut dans SPIP)',
 	'choix_affordance_login_email' => 'Login et email',
@@ -75,6 +77,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'effacement_auto_impossible' => 'Le compte ne peut &ecirc;tre effac&eacute; automatiquement, contacte-nous.',
 	'email' => 'E-Mail',
 	'email_bonjour' => 'Salut @nom@,',
+	'email_deja_enregistre' => 'Cette adresse email est d&eacute;j&agrave; enregistr&eacute;e. Utilise le formulaire de connexion pour acc&eacute;der &agrave; ton compte.',
 	'email_obligatoire' => 'Le champ email est obligatoire',
 	'email_valide' => 'Ins&eacute;re un email valide',
 	'erreur_reglement_obligatoire' => 'Tu dois accepter le r&egrave;glement',
@@ -130,6 +133,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_perso_desc' => 'Informations personnelles qui seront demand&eacute;es aux nouveaux adh&eacute;rents du site',
 	'info_pro' => 'Informations professionnelles',
 	'infos_adherent' => 'Informations suppl&eacute;mentaires',
+	'infos_complementaires' => 'Informations compl&eacute;mentaires',
 	'infos_personnelles' => 'Informations personnelles',
 	'inscription2' => 'Inscription 2.0',
 	'inscriptions' => 'Inscriptions',
@@ -170,6 +174,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mobile' => 'Mobile',
 	'mobile_pro' => 'Mobile professionnel',
 	'modif_pass_titre' => 'Modifier ton mot de passe',
+	'moins_seconde' => 'moins d\'une seconde',
 	'mot_passe_reste_identique' => 'Ton mot de passe n\'a pas &eacute;t&eacute; modifi&eacute;.',
 
 	// N
@@ -207,12 +212,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'password_obligatoire' => 'Le mot de passe est obligatoire.',
 	'password_retaper' => 'Confirme le mot de passe',
 	'pays' => 'Pays',
+	'pays_defaut' => 'Pays par d&eacute;faut',
 	'pays_pro' => 'Pays (Pro.)',
 	'pgp' => 'Cl&eacute; PGP',
 	'prenom' => 'Pr&eacute;nom',
 	'probleme_email' => 'Probl&egrave;me de mail&nbsp;: l\'email d\'activation ne peut pas &ecirc;tre envoy&eacute;.',
 	'profession' => 'Profession',
-	'profil_droits_insuffisants' => 'Desol&eacute; tu n\'as pas le droit de modifier cet auteur<br/>',
+	'profil_droits_insuffisants' => 'Desol&eacute; tu n\'as pas le droit de modifier cet auteur<br/>', # MODIF
 	'profil_modifie_ok' => 'Les modifications de ton profil ont bien &eacute;t&eacute; prises en compte.',
 	'publication' => 'Publication',
 
@@ -228,6 +234,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'saisir_email_valide' => 'Saisi une adresse email valide',
+	'secondes' => 'secondes',
 	'secteur' => 'Secteur',
 	'septembre' => 'septembre',
 	'sexe' => 'Civilit&eacute;',
@@ -255,7 +262,7 @@ et tu viens choisir ton mot de passe.
 Merci de ta confiance
 
 L\'&eacute;quipe de @nom_site@
-@url_site@',
+@url_site@', # MODIF
 	'texte_email_inscription' => 'tu es sur le point de confirmer ton inscription au site @nom_site@.
 
 Cliquer le lien ci-dessous pour activer ton compte et choisir ton mot de passe.
@@ -276,6 +283,12 @@ Si tu n\'as pas demand&eacute; cette inscription ou si tu ne veux plus faire par
 	'titre_confirmation' => 'Confirmation',
 
 	// U
+	'un_an' => 'un an',
+	'un_jour' => 'un jour',
+	'un_mois' => 'un mois',
+	'une_heure' => 'une heure',
+	'une_minute' => 'une minute',
+	'une_seconde' => 'une seconde',
 	'url_site' => 'Url du site',
 	'url_societe' => 'Site soci&eacute;t&eacute;',
 
