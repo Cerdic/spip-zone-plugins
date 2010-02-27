@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'accents_pas_pris' => 'Los acentos nun se tienen en cuenta (&laquo;cu&aacute;nto&raquo; o &laquo;cuanto&raquo;, devuelven el mesmu &laquo;cu&aacute;nto&raquo;, &laquo;cuanto&raquo;, &laquo;cuant&oacute;&raquo;...)',
+	'asie' => 'asie', # NEW
 	'asterisque_terminale' => 'nun devolver&aacute; nada: l\'asteriscu * tien que tar al final',
 	'aussi' => 'tami&eacute;n',
 
@@ -20,10 +21,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'creer_tous' => 'Crear tolos indices FULLTEXT encament&aacute;os',
 
 	// E
+	'enfan' => 'enfan', # NEW
+	'enfance' => 'enfance', # NEW
+	'enfant' => 'enfant', # NEW
+	'enfanter' => 'enfanter', # NEW
+	'enfantillage' => 'enfantillage', # NEW
+	'enfants' => 'enfants', # NEW
 	'et' => 'Y',
+	'etranger' => '&eacute;tranger', # NEW
 	'exemples' => 'Exemplos d\'usu',
 
 	// F
+	'fant' => 'fant', # NEW
 	'fonctionnement_recherche' => 'Funcionamientu del motor de gueta d\'esti sitiu',
 	'fulltext_cree' => 'FULLTEXT cre&aacute;u',
 
@@ -31,6 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'il_faut_myisam' => 'fai falta MyISAM',
 	'incoherence_charset' => 'Una incoherencia ente\'l xuegu de carauteres del to sitiu y el de les tables de la base de datos amenaza con dar fallos nes guetes con carauteres acentuaos:',
 	'index_regenere' => '&iacute;ndices de la tabla rexeneraos',
+	'index_reinitialise' => 'Les documents en erreur ont &#233;t&#233; r&#233;initialis&#233;s', # NEW
 	'index_supprime' => 'indiz desanici&aacute;u',
 
 	// L
@@ -44,9 +54,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// P
 	'pas_index' => 'Ensin indiz FULLTEXT',
+	'premier_soit' => 'SOIT', # NEW
 
 	// R
 	'regenerer_tous' => 'Rexenerar tolos &iacute;ndices FULLTEXT',
+	'reinitialise_index_doc' => 'R&#233;initialiser l\'indexation des documents en erreur', # NEW
 	'reserve_webmestres' => 'P&aacute;xina acutada pa los webmasters',
 	'retourne' => 'Tornar los testos que contengan',
 

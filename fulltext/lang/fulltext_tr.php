@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'accents_pas_pris' => 'Aksanlar dikkate al&#305;nm&#305;yor (&laquo;&nbsp;d&eacute;j&agrave;&nbsp;&raquo; veya &laquo;&nbsp;deja&nbsp;&raquo; &#351;unlara denktir &laquo;&nbsp;d&eacute;j&agrave;&nbsp;&raquo;, &laquo;&nbsp;dej&agrave;&nbsp;&raquo;, &laquo;&nbsp;d&eacute;ja&nbsp;&raquo;...)',
+	'asie' => 'asie', # NEW
 	'asterisque_terminale' => 'hi&ccedil;bir &#351;ey d&ouml;nd&uuml;rmez: asterisk * sonda olmal&#305;d&#305;r',
 	'aussi' => 'de',
 
@@ -20,10 +21,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'creer_tous' => '&Ouml;nerilen t&uuml;m FULLTEXT endekslerini olu&#351;tur',
 
 	// E
+	'enfan' => 'enfan', # NEW
+	'enfance' => 'enfance', # NEW
+	'enfant' => 'enfant', # NEW
+	'enfanter' => 'enfanter', # NEW
+	'enfantillage' => 'enfantillage', # NEW
+	'enfants' => 'enfants', # NEW
 	'et' => 'VE',
+	'etranger' => '&eacute;tranger', # NEW
 	'exemples' => 'Kullan&#305;m &ouml;rnekleri',
 
 	// F
+	'fant' => 'fant', # NEW
 	'fonctionnement_recherche' => 'Bu sitedeki arama motorunun &ccedil;al&#305;&#351;mas&#305;',
 	'fulltext_cree' => 'FULLTEXT olu&#351;turuldu',
 
@@ -31,6 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'il_faut_myisam' => 'MyISAM gerekli',
 	'incoherence_charset' => 'Sitenizin karakter setiyle veritaban&#305; tablolar&#305;n&#305;z&#305;nki aras&#305;ndaki uyu&#351;mazl&#305;k aksanl&#305; karakterlerle yap&#305;lan aramalar&#305; ge&ccedil;ersiz k&#305;labilir :',
 	'index_regenere' => 'yeniden olu&#351;turulan tablolar&#305;n endeksi',
+	'index_reinitialise' => 'Les documents en erreur ont &#233;t&#233; r&#233;initialis&#233;s', # NEW
 	'index_supprime' => 'endeks silindi',
 
 	// L
@@ -44,9 +54,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// P
 	'pas_index' => 'FULLTEXT endeksi yok',
+	'premier_soit' => 'SOIT', # NEW
 
 	// R
 	'regenerer_tous' => 'T&uuml;m FULLTEXT endekslerini yeniden olu&#351;tur',
+	'reinitialise_index_doc' => 'R&#233;initialiser l\'indexation des documents en erreur', # NEW
 	'reserve_webmestres' => 'Site y&ouml;neticilerine ayr&#305;lm&#305;&#351; sayfa',
 	'retourne' => '&#304;&ccedil;eren metinleri getirir',
 
