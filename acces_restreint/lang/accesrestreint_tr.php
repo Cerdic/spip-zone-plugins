@@ -27,6 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'icone_menu_config' => 'K&#305;s&#305;tl&#305; Eri&#351;im',
 	'icone_supprimer_zone' => 'Bu b&ouml;lgeyi sil',
+	'info_acces_restreint' => 'L\'acc&egrave;s &agrave; cette page est restreint. Identifiez vous pour y acc&eacute;der', # NEW
 	'info_ajouter_auteur' => 'Bu yazar&#305; ekle',
 	'info_ajouter_auteurs' => 'T&uuml;m yazarlar&#305; ekle',
 	'info_ajouter_zones' => 'T&uuml;m b&ouml;lgeleri ekle',

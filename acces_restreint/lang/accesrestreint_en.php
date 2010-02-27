@@ -27,6 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'icone_menu_config' => 'restricted access',
 	'icone_supprimer_zone' => 'Delete this area',
+	'info_acces_restreint' => 'L\'acc&egrave;s &agrave; cette page est restreint. Identifiez vous pour y acc&eacute;der', # NEW
 	'info_ajouter_auteur' => 'Add this author',
 	'info_ajouter_auteurs' => 'Add all authors',
 	'info_ajouter_zones' => 'Add all areas',

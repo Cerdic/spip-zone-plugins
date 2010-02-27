@@ -18,6 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'colonne_id' => 'N&amp;ordm;.',
 	'confirmer_retirer_auteur_zone' => 'Voc&ecirc; quer mesmo retirar este autor da zona?',
 	'confirmer_retirer_auteurs' => 'Voc6e quer mesmo retirar todos os autores da zona?',
+	'confirmer_supprimer_zone' => '&Ecirc;tes vous s&ucirc;r de vouloir supprimer cette zone ?', # NEW
 	'creer_zone' => 'Criar uma nova &aacute;rea',
 
 	// D
@@ -26,6 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'icone_menu_config' => 'Acesso Restrito',
 	'icone_supprimer_zone' => 'Excluir est&aacute; &aacute;rea',
+	'info_acces_restreint' => 'L\'acc&egrave;s &agrave; cette page est restreint. Identifiez vous pour y acc&eacute;der', # NEW
 	'info_ajouter_auteur' => 'Incluir este autor',
 	'info_ajouter_auteurs' => 'Incluir todos os autores',
 	'info_ajouter_zones' => 'Incluir todas as &aacute;reas',
