@@ -29,10 +29,11 @@
 
 	function essais_tb_files(){
 		$essais = array (
-  0 => 
+  1 => 
   array (
     0 => 
     array (
+      'tb_essais_type.php' => 'plugins/testbuilder/inc/tb_essais_type.php',
       'tb_lib.php' => 'plugins/testbuilder/inc/tb_lib.php',
     ),
     1 => _DIR_PLUGIN_TB.'inc/',
@@ -40,6 +41,9 @@
 );
 		return $essais;
 	}
+
+
+
 
 
 
