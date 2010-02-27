@@ -15,7 +15,26 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'SPIP_liens:description' => '@puce@ Todos los enlaces del sitio se abren, por omisi&oacute;n, en la ventana actual del navegador. Pero puede ser &uacute;til abrir los enlaces externos en una nueva ventana de navegaci&oacute;n -- esto se reduce a a&ntilde;adir {target="_blank"} en todas las balizas &lt;a&gt; a las que SPIP asigna las clases {spip_out}, {spip_url} o {spip_glossaire}. A veces hace falta a&ntilde;adir una de estas clases a los enlaces del esqueleto del sitio (archivos html) para extender al m&aacute;ximo esta caracter&iacute;stica.[[%radio_target_blank3%]]
 
 @puce@ SPIP permite enlazar palabras con su definici&oacute;n gracias al atajo tipogr&aacute;fico <code>[?palabra]</code>. Por omisi&oacute;n (o si dejas en blanco este cuadro), el glosario externo reenv&iacute;a hacia la enciclopedia libre wikipedia.org. Aqu&iacute; puedes elegir la direcci&oacute;n que se utilizar&aacute;. <br />Enlace de prueba: [?SPIP][[%url_glossaire_externe2%]]',
+	'SPIP_liens:description1' => '@puce@ SPIP a pr&eacute;vu un style CSS pour les liens &laquo;~mailto:~&raquo; : une petite enveloppe devrait appara&icirc;tre devant chaque lien li&eacute; &agrave; un courriel; mais puisque tous les navigateurs ne peuvent pas l\'afficher (notamment IE6, IE7 et SAF3), &agrave; vous de voir s\'il faut conserver cet ajout.
+_ Lien de test : [->test@test.com] (rechargez la page enti&egrave;rement).[[%enveloppe_mails%]]', # NEW
 	'SPIP_liens:nom' => 'SPIP y los enlaces… externos',
+	'SPIP_tailles:description' => '@puce@ Afin d\'all&eacute;ger la m&eacute;moire de votre serveur, SPIP vous permet de limiter les dimensions (hauteur et largeur) et la taille du fichier des images, logos ou documents joints aux divers contenus de votre site. Si un fichier d&eacute;passe la taille indiqu&eacute;e, le formulaire enverra bien les donn&eacute;es mais elles seront d&eacute;truites et SPIP n\'en tiendra pas compte, ni dans le r&eacute;pertoire IMG/, ni en base de donn&eacute;es. Un message d\'avertissement sera alors envoy&eacute; &agrave; l\'utilisateur.
+
+Une valeur nulle ou non renseign&eacute;e correspond &agrave; une valeur illimit&eacute;e.
+[[Hauteur : %img_Hmax% pixels]][[->Largeur : %img_Wmax% pixels]][[->Poids du fichier : %img_Smax% Ko]]
+[[Hauteur : %logo_Hmax% pixels]][[->Largeur : %logo_Wmax% pixels]][[->Poids du fichier : %logo_Smax% Ko]]
+[[Poids du fichier : %doc_Smax% Ko]]
+
+@puce@ D&eacute;finissez ici l\'espace maximal r&eacute;serv&eacute; aux fichiers distants que SPIP pourrait t&eacute;l&eacute;charger (de serveur &agrave; serveur) et stocker sur votre site. La valeur par d&eacute;faut est ici de 16 Mo.[[%copie_Smax% Mo]]
+
+@puce@ Afin d\'&eacute;viter un d&eacute;passement de m&eacute;moire PHP dans le traitement des grandes images par la librairie GD2, SPIP teste les capacit&eacute;s du serveur et peut donc refuser de traiter les trop grandes images. Il est possible de d&eacute;sactiver ce test en d&eacute;finissant manuellement le nombre maximal de pixels support&eacute;s pour les calculs.
+
+La valeur de 1~000~000 pixels semble correcte pour une configuration avec peu de m&eacute;moire. Une valeur nulle ou non renseign&eacute;e entra&icirc;nera le test du serveur.
+[[%img_GDmax% pixels au maximum]]
+
+@puce@ La librairie GD2 permet d\'ajuster la qualit&eacute; de compression des images JPG. Un pourcentage &eacute;lev&eacute; correspond &agrave; une qualit&eacute; &eacute;lev&eacute;e.
+[[%img_GDqual% %]]', # NEW
+	'SPIP_tailles:nom' => 'Limites m&eacute;moire', # NEW
 
 	// A
 	'acces_admin' => 'Acceso de administradores:',
@@ -23,8 +42,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'action_rapide_non' => 'Acci&oacute;n r&aacute;pida, disponible una vez activada esta herramienta:',
 	'admins_seuls' => 'Los administradores solamente',
 	'attente' => 'Espera...',
-	'auteur_forum:description' => '<MODIF>Pide a todos los autores de mensajes p&uacute;blicos que rellenen (&iexcl;al menos con una letra!) el campo &laquo;@_CS_FORUM_NOM@&raquo; para evitar las contribuciones completamente an&oacute;nimas.',
+	'auteur_forum:description' => 'Pide a todos los autores de mensajes p&uacute;blicos que rellenen (&iexcl;al menos con una letra!) el campo &laquo;@_CS_FORUM_NOM@&raquo; para evitar las contribuciones completamente an&oacute;nimas.', # MODIF
 	'auteur_forum:nom' => 'Sin foros an&oacute;nimos',
+	'auteur_forum_deux' => 'Ou, au moins l\'un des deux champs pr&eacute;c&eacute;dents', # NEW
+	'auteur_forum_email' => 'Le champ &laquo;@_CS_FORUM_EMAIL@&raquo;', # NEW
+	'auteur_forum_nom' => 'Le champ &laquo;@_CS_FORUM_NOM@&raquo;', # NEW
 	'auteurs:description' => 'Esta herramienta configura la apariencia de [la p&aacute;gina de los autores->./?exec=auteurs], en el espacio privado.
 
 @puce@ Define aqu&iacute; el n&uacute;mero m&aacute;ximo de autores que se ver&aacute;n en el cuadro central de la p&aacute;gina de autores. A partir de ah&iacute;, se realiza la compaginaci&oacute;n.[[%max_auteurs_page%]]
@@ -34,9 +56,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'auteurs:nom' => 'P&aacute;gina de los autores',
 
 	// B
+	'barres_typo_edition' => 'Edtition des contenus', # NEW
+	'barres_typo_forum' => 'Messages de Forum', # NEW
+	'barres_typo_intro' => 'Le plugin &laquo;Porte-Plume&raquo; a &eacute;t&eacute; d&eacute;tect&eacute;. Veuillez choisir ici les barres typographiques o&ugrave; certains boutons seront ins&eacute;r&eacute;s.', # NEW
 	'basique' => 'B&aacute;sico',
 	'blocs:aide' => '<Bloques Desplegables : <b>&lt;bloc&gt;&lt;/bloc&gt;</b> (alias : <b>&lt;invisible&gt;&lt;/invisible&gt;</b>) et <b>&lt;visible&gt;&lt;/visible&gt;</b>',
-	'blocs:description' => '<MODIF>Permite crear bloques que pueden hacerse visibles o invisibles al pulsar en su t&iacute;tulo.
+	'blocs:description' => 'Permite crear bloques que pueden hacerse visibles o invisibles al pulsar en su t&iacute;tulo.
 
 @puce@ {{En los textos de SPIP}}: los redactores disponen de las  nuevas balizas &lt;bloc&gt; (o &lt;invisible&gt;) y &lt;visible&gt; para utilizarlas en sus textos as&iacute;: 
 
@@ -57,17 +82,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
  Mi bloque desplegable (que contendr&aacute; la URL a la que apunta el t&iacute;tulo si es necesario)
  #BLOC_FIN</code></quote>
  
-@puce@ Marcando &laquo;si&raquo; m&aacute;s abajo, la apertura de un bloque causar&aacute; el cierre de los dem&aacute;s bloques de la p&aacute;gina, para tener solamente uno abierto cada vez.[[%bloc_unique%]]',
+@puce@ Marcando &laquo;si&raquo; m&aacute;s abajo, la apertura de un bloque causar&aacute; el cierre de los dem&aacute;s bloques de la p&aacute;gina, para tener solamente uno abierto cada vez.[[%bloc_unique%]]', # MODIF
 	'blocs:nom' => 'Bloques Desplegables',
-	'boites_privees:description' => '<MODIF>Todas las cajas descritas a continuaci&oacute;n aparecen en varios lugares de la parte privada.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]][[->%bp_urls_propres%]][[->%bp_tri_auteurs%]]
+	'boites_privees:description' => 'Todas las cajas descritas a continuaci&oacute;n aparecen en varios lugares de la parte privada.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]][[->%bp_urls_propres%]][[->%bp_tri_auteurs%]]
 - {{Las revisiones de la Navaja Suiza}}: un cuadro sobre esta p&aacute;gina de configuraci&oacute;n, que indica las &uacute;ltimas modificaciones efectuadas en el c&oacute;digo del plugin ([Fuente->@_CS_RSS_SOURCE@]).
 - {{Los art&iacute;culos en formato SPIP}} : un cuadro desplegable suplementario para tus art&iacute;culos con el fin de ver el c&oacute;digo fuente utilizado por sus autores.
 - {{Los autores en cifras}} : un cuadro suplementario en [la p&aacute;gina de los autores->./?exec=auteurs] que indica los 10 &uacute;ltimos conectados y las inscripciones no confirmadas. S&oacute;lo los administradores ven esta informaci&oacute;n.
 - {{Ver las URLs propias}} : un cuadro desplegable para cada objeto de contenido (art&iacute;culo, secci&oacute;n, autor, ...) que indica la URL propia asociada, as&iacute; como sus alias eventuales. La herramienta &laquo;&nbsp;[.->type_urls]&nbsp;&raquo; te permite ajustar la configuraci&oacute;n de las URLs de tu sitio web.
-- {{La ordenaci&oacute;n de autores}}: un cuadro desplegable para los art&iacute;culos que contengan m&aacute;s de un autor y que permite ajustar facilmente el orden en que se muestran.',
+- {{La ordenaci&oacute;n de autores}}: un cuadro desplegable para los art&iacute;culos que contengan m&aacute;s de un autor y que permite ajustar facilmente el orden en que se muestran.', # MODIF
 	'boites_privees:nom' => 'Cajas privadas',
 	'bp_tri_auteurs' => 'El orden de autores',
 	'bp_urls_propres' => 'Las URLs propias',
+	'brouteur:description' => 'Utiliser le s&eacute;lecteur de rubrique en AJAX &agrave; partir de %rubrique_brouteur% rubrique(s)', # NEW
+	'brouteur:nom' => 'R&eacute;glage du s&eacute;lecteur de rubrique', # NEW
 
 	// C
 	'cache_controle' => 'Control de la cach&eacute;',
@@ -83,9 +110,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'categ:typo-racc' => '30. Atajos tipogr&aacute;ficos',
 	'certaines_couleurs' => 'S&oacute;lo las balizas definidas aqu&iacute;@_CS_ASTER@ :',
 	'chatons:aide' => 'Caritas: @liste@',
-	'chatons:description' => '<MODIF>Inserta im&aacute;genes (o caritas para los {chats}) en todos los textos donde aparezca una cadena de tipo <code>:nombre</code>.
-_ Esta herramienta reemplaza estos atajos con las im&aacute;genes con el mismo nombre que encuentre en la carpeta plugins/couteau_suisse/img/chatons.',
+	'chatons:description' => 'Inserta im&aacute;genes (o caritas para los {chats}) en todos los textos donde aparezca una cadena de tipo <code>:nombre</code>.
+_ Esta herramienta reemplaza estos atajos con las im&aacute;genes con el mismo nombre que encuentre en la carpeta plugins/couteau_suisse/img/chatons.', # MODIF
 	'chatons:nom' => 'Caritas',
+	'citations_bb:description' => 'Afin de respecter les usages en HTML dans les contenus SPIP de votre site (articles, rubriques, etc.), cet outil remplace les balises &lt;quote&gt; par des balises &lt;q&gt; quand il n\'y a pas de retour &agrave; la ligne. En effet, les citations courtes doivent &ecirc;tre entour&eacute;es par &lt;q&gt; et les citations contenant des paragraphes par &lt;blockquote&gt;.', # NEW
+	'citations_bb:nom' => 'Citations bien balis&eacute;es', # NEW
 	'class_spip:description1' => 'Aqu&iacute; puedes definir ciertos atajos de SPIP. Un valor vac&iacute;o equivale a utilizar el valor por omisi&oacute;n.[[%racc_hr%]]',
 	'class_spip:description2' => '@puce@ {{Los atajos de SPIP}}.
 
@@ -95,7 +124,7 @@ Aqu&iacute; puedes definir ciertos atajos de SPIP. Un valor vac&iacute;o equival
 {Atenci&oacute;n: si la herramienta &laquo;&nbsp;[.->pucesli]&nbsp;&raquo; est&aacute; activada, el reemplazo del gui&oacute;n &laquo;&nbsp;-&nbsp;&raquo; ya no se efectuar&aacute;; en su lugar se usar&aacute; una lista &lt;ul>&lt;li>.}
 
 SPIP utiliza habitualmente la baliza &lt;h3&gt; para los intert&iacute;tulos. Elige aqu&iacute; otra alternativa: [[%racc_h1%]][[->%racc_h2%]]',
-	'class_spip:description4' => '<MODIF>
+	'class_spip:description4' => '
 
 SPIP ha elegido usar la baliza &lt;strong> para transcribir las negritas. Pero &lt;b> tambi&eacute;n podr&iacute;a ser conveniente, con o sin estilo. A tu elecci&oacute;n:[[%racc_g1%]][[->%racc_g2%]]
 
@@ -108,7 +137,7 @@ SPIP ha elegido usar la baliza &lt;i> para transcribir las it&aacute;licas. Pero
 _ {{1.}} Balizas &lt;p&gt;, &lt;i&gt;, &lt;strong&gt; :[[%style_p%]]
 _ {{2.}} Balizas &lt;tables&gt;, &lt;hr&gt;, &lt;h3&gt;, &lt;blockquote&gt; y las listas (&lt;ol&gt;, &lt;ul&gt;, etc.) :[[%style_h%]]
 
-Nota: al modificar este segundo estilo, tambi&eacute;n pierdes los estilos est&aacute;ndar de SPIP asociados con estas balizas.</blockquote>',
+Nota: al modificar este segundo estilo, tambi&eacute;n pierdes los estilos est&aacute;ndar de SPIP asociados con estas balizas.</blockquote>', # MODIF
 	'class_spip:nom' => 'SPIP y sus atajos…',
 	'code_css' => 'CSS',
 	'code_fonctions' => 'Funciones',
@@ -121,11 +150,11 @@ Nota: al modificar este segundo estilo, tambi&eacute;n pierdes los estilos est&a
 	'corbeille:nom' => 'La papelera',
 	'corbeille_objets' => '@nb@ objeto(s) en la papelera.',
 	'corbeille_objets_lies' => '@nb_lies@ enlace(s) detectado(s).',
-	'corbeille_objets_vide' => 'No hay objetos en la papelera',
+	'corbeille_objets_vide' => 'No hay objetos en la papelera', # MODIF
 	'corbeille_objets_vider' => 'Suprimir los objetos seleccionados',
 	'corbeille_vider' => 'Vaciar la papelera:',
 	'couleurs:aide' => 'Asignar colores: <b>[coul]texto[/coul]</b>@fond@ en <b>color</b>= @liste@',
-	'couleurs:description' => '<MODIF>Permite aplicar facilmente des colores a todos los textos del sitio (art&iacute;culos, breves, t&iacute;tulos, foro, …) utilizando balizas de atajo.
+	'couleurs:description' => 'Permite aplicar facilmente des colores a todos los textos del sitio (art&iacute;culos, breves, t&iacute;tulos, foro, …) utilizando balizas de atajo.
 
 Dos ejemplos id&eacute;nticos para cambiar el color del texto:@_CS_EXEMPLE_COULEURS2@
 
@@ -133,20 +162,23 @@ Lo mismo para cambiar el fondo, si la opci&oacute;n de abajo lo permite:@_CS_EXE
 
 [[%couleurs_fonds%]]
 [[%set_couleurs%]][[->%couleurs_perso%]]
-@_CS_ASTER@El formato de estas balizas personalizadas debe listar colores existentes o definir parejas &laquo;baliza=color&raquo;, todo ello separado por comas. Ejemplos: &laquo;gris, rouge&raquo;, &laquo;suave=jaune, fuerte=rouge&raquo;, &laquo;bajo=#99CC11, alto=brown&raquo; o incluso &laquo;gris=#DDDDCC, rouge=#EE3300&raquo;. Para el primer y el &uacute;ltimo ejemplo, las balizas autorizadas son: <code>[gris]</code> y <code>[rouge]</code> (<code>[fond gris]</code> y <code>[fond rouge]</code> si se permiten los fondos).',
+@_CS_ASTER@El formato de estas balizas personalizadas debe listar colores existentes o definir parejas &laquo;baliza=color&raquo;, todo ello separado por comas. Ejemplos: &laquo;gris, rouge&raquo;, &laquo;suave=jaune, fuerte=rouge&raquo;, &laquo;bajo=#99CC11, alto=brown&raquo; o incluso &laquo;gris=#DDDDCC, rouge=#EE3300&raquo;. Para el primer y el &uacute;ltimo ejemplo, las balizas autorizadas son: <code>[gris]</code> y <code>[rouge]</code> (<code>[fond gris]</code> y <code>[fond rouge]</code> si se permiten los fondos).', # MODIF
 	'couleurs:nom' => 'Todo en colores',
 	'couleurs_fonds' => ', <b>[fond&nbsp;coul]texto[/coul]</b>, <b>[bg&nbsp;coul]texto[/coul]</b>',
-	'cs_comportement:description' => '<MODIF>@puce@ {{Logs.}} Obtener abundante informaci&oacute;n sobre el funcionamiento de la Navaja Suiza en los archivos {spip.log} que se pueden encontrar en el directorio: {@_CS_DIR_TMP@}[[%log_couteau_suisse%]]
+	'cs_comportement:description' => '@puce@ {{Logs.}} Obtener abundante informaci&oacute;n sobre el funcionamiento de la Navaja Suiza en los archivos {spip.log} que se pueden encontrar en el directorio: {@_CS_DIR_TMP@}[[%log_couteau_suisse%]]
 
 @puce@ {{Opciones de SPIP.}} SPIP ordena los plugins en un orden determinado. Para asegurarse de que la Navaja Suiza sea el primero y gestione desde el principio ciertas opciones de SPIP, marca la opci&oacute;n siguiente. Si los permisos de tu servidor lo permiten, se modificar&aacute; autom&aacute;ticamente el archivo {@_CS_FILE_OPTIONS@} para incluir el archivo {@_CS_DIR_TMP@couteau-suisse/mes_spip_options.php}.
 [[%spip_options_on%]]
 
-@puce@ {{Consultas externas.}} La Navaja Suiza verifica regularmente la existencia de una versi&oacute;n m&aacute;s reciente de su c&oacute;digo e informa en su p&aacute;gina de configuraci&oacute;n de una actualizaci&oacute;n que est&eacute; disponible. Si las consultas externas de tu servidor causan problemas, marca la casilla siguiente.[[%distant_off%]]',
+@puce@ {{Consultas externas.}} La Navaja Suiza verifica regularmente la existencia de una versi&oacute;n m&aacute;s reciente de su c&oacute;digo e informa en su p&aacute;gina de configuraci&oacute;n de una actualizaci&oacute;n que est&eacute; disponible. Si las consultas externas de tu servidor causan problemas, marca la casilla siguiente.[[%distant_off%]]', # MODIF
 	'cs_comportement:nom' => 'Comportamiento de la Navaja Suiza',
 	'cs_distant_off' => 'Las comprobaciones de versiones externas',
+	'cs_distant_outils_off' => 'Les outils du Couteau Suisse ayant des fichiers distants', # NEW
 	'cs_log_couteau_suisse' => 'Los registros detallados de la Navaja Suiza',
 	'cs_reset' => '&iquest;Confirmas que deseas reinicializar totalmente la Navaja Suiza?',
-	'cs_spip_options_on' => '<MODIF>Las opciones de SPIP en &laquo;@_CS_FILE_OPTIONS@&raquo;',
+	'cs_reset2' => 'Tous les outils actuellement actifs seront d&eacute;sactiv&eacute;s et leurs param&egrave;tres r&eacute;initialis&eacute;s.', # NEW
+	'cs_spip_options_erreur' => 'Attention : la modification du ficher &laquo;<html>@_CS_FILE_OPTIONS@</html>&raquo; a &eacute;chou&eacute; !', # NEW
+	'cs_spip_options_on' => 'Las opciones de SPIP en &laquo;@_CS_FILE_OPTIONS@&raquo;', # MODIF
 
 	// D
 	'decoration:aide' => 'Decoraci&oacute;n: <b>&lt;balise&gt;prueba&lt;/balise&gt;</b>, con <b>balise</b> = @liste@',
@@ -164,7 +196,7 @@ El par&aacute;metro {type} puede tomar tres valores:
 
 [[%decoration_styles%]]',
 	'decoration:nom' => 'Decoraci&oacute;n',
-	'decoupe:aide' => 'Bloque de pesta&ntilde;as: <b>&lt;onglets>&lt;/onglets></b><br />Separador de p&aacute;ginas o de pesta&ntilde;as: @sep@',
+	'decoupe:aide' => 'Bloque de pesta&ntilde;as: <b>&lt;onglets>&lt;/onglets></b><br/>Separador de p&aacute;ginas o de pesta&ntilde;as: @sep@', # MODIF
 	'decoupe:aide2' => 'Alias:&nbsp;@sep@',
 	'decoupe:description' => '@puce@ Divide la presentaci&oacute;n p&uacute;blica de un art&iacute;culo en varias p&aacute;ginas mediante una compaginaci&oacute;n autom&aacute;tica. Simplemente sit&uacute;a en tu art&iacute;culo cuatro signos de suma consecutivos (<code>++++</code>) en el lugar donde haya que cortar.
 
@@ -180,19 +212,28 @@ Esta herramienta puede acoplarse con &laquo;&nbsp;[.->sommaire]&nbsp;&raquo;.',
 	'desactiver_flash:description' => 'Suprime los objetos flash de las p&aacute;ginas de tu sitio y las reemplaza por el contenido alternativo asociado.',
 	'desactiver_flash:nom' => 'Desactiva los objetos flash',
 	'detail_balise_etoilee' => '{{Atenci&oacute;n}} : Revisa bien el uso que tus esqueletos hacen de las balizas con asteriscos. El procesado con esta herramienta no se aplicar&aacute; sobre: @bal@.',
+	'detail_disabled' => 'Param&egrave;tres non modifiables :', # NEW
 	'detail_fichiers' => 'Ficheros:',
+	'detail_fichiers_distant' => 'Fichiers distants :', # NEW
 	'detail_inline' => 'C&oacute;digo en l&iacute;nea:',
-	'detail_jquery2' => '<MODIF>Esta herramienta necesita la biblioteca {jQuery}.',
+	'detail_jquery2' => 'Esta herramienta necesita la biblioteca {jQuery}.', # MODIF
 	'detail_jquery3' => '{{Atenci&oacute;n}}: esta herramienta necesita el plugin [jQuery para SPIP 1.92->http://files.spip.org/spip-zone/jquery_192.zip] para funcionar correctamente con esta versi&oacute;n de SPIP.',
 	'detail_pipelines' => 'Pipelines:',
+	'detail_raccourcis' => 'Voici la liste des raccourcis typographiques reconnus par cet outil.', # NEW
 	'detail_traitements' => 'Procesado:',
+	'distant_aide' => 'Cet outil requiert des fichiers distants qui doivent tous &ecirc;tre correctement install&eacute;s en librairie. Avant d\'activer cet outil ou d\'actualiser ce cadre, assurez-vous que les fichiers requis sont bien pr&eacute;sents sur le serveur distant.', # NEW
+	'distant_charge' => 'Fichier correctement t&eacute;l&eacute;charg&eacute; et install&eacute; en librairie.', # NEW
+	'distant_charger' => 'Lancer le t&eacute;l&eacute;chargement', # NEW
+	'distant_echoue' => 'Erreur sur le chargement distant, cet outil risque de ne pas fonctionner !', # NEW
+	'distant_inactif' => 'Fichier introuvable (outil inactif).', # NEW
+	'distant_present' => 'Fichier pr&eacute;sent en librairie depuis le @date@.', # NEW
 	'dossier_squelettes:description' => 'Modifica la carpeta de esqueleto utilizada. Por ejemplo: "esqueletos/miesqueleto". Puedes registrar varias carpetas separ&aacute;ndolas con dos puntos <html>&laquo;&nbsp;:&nbsp;&raquo;</html>. Si se deja vac&iacute;o el siguiente cuadro (o escribiendo "dist"), se usar&aacute; el esqueleto original "dist" proporcionado por SPIP.[[%dossier_squelettes%]]',
 	'dossier_squelettes:nom' => 'Carpeta del esqueleto',
 
 	// E
 	'effaces' => 'Borrados',
-	'en_travaux:description' => '<MODIF>Permite mostrar un mensaje personalizable durante una fase de mantenimiento en todas las p&aacute;ginas p&uacute;blicas y, eventualmente, en el espacio privado.
-[[%message_travaux%]][[%titre_travaux%]][[%admin_travaux%]][[%prive_travaux%]]',
+	'en_travaux:description' => 'Permite mostrar un mensaje personalizable durante una fase de mantenimiento en todas las p&aacute;ginas p&uacute;blicas y, eventualmente, en el espacio privado.
+[[%message_travaux%]][[%titre_travaux%]][[%admin_travaux%]][[%prive_travaux%]]', # MODIF
 	'en_travaux:nom' => 'Sitio en mantenimiento',
 	'erreur:bt' => '<span style=\\"color:red;\\">Atenci&oacute;n:</span> la barra de tipograf&iacute;as (version @version@) parece antigua.<br />La Navaja Suiza es compatible con una versi&oacute;n superior o igual a @mini@.',
 	'erreur:description' => '&iexcl;falta la id en la definici&oacute;n de la herramienta!',
@@ -209,9 +250,9 @@ Esta herramienta puede acoplarse con &laquo;&nbsp;[.->sommaire]&nbsp;&raquo;.',
 	// F
 	'f_jQuery:description' => 'Impide la instalaci&oacute;n de {jQuery} en el espacio p&uacute;blico para economizar un poco de &laquo;tiempo de m&aacute;quina&raquo;. Esta biblioteca ([->http://jquery.com/]) aporta numerosas facilidades en la programaci&oacute;n con JavaScript y puede utilizarse por ciertos plugins. SPIP la utiliza en su espacio privado.
 
-Atenci&oacute;n: algunas herramientas de la Navaja Suiza necesitan las funciones de {jQuery}. ',
+Atenci&oacute;n: algunas herramientas de la Navaja Suiza necesitan las funciones de {jQuery}. ', # MODIF
 	'f_jQuery:nom' => 'Desactivar jQuery',
-	'filets_sep:aide' => 'Filetes de Separaci&oacute;n: <b>__i__</b> o <b>i</b> es un n&uacute;mero.<br />Otros filetes disponibles: @liste@',
+	'filets_sep:aide' => 'Filetes de Separaci&oacute;n: <b>__i__</b> o <b>i</b> es un n&uacute;mero.<br />Otros filetes disponibles: @liste@', # MODIF
 	'filets_sep:description' => 'Inserta filetes de separaci&oacute;n, personalizables con hojas de estilo, en todos los textos de SPIP.
 _ La sintaxis es: "__c&oacute;digo__", donde "c&oacute;digo" representa o bien el n&uacute;mero de identificaci&oacute;n (de 0 a 7) del filete a insertar, relativo al estilo correspondiente, o el nombre de una imagen situada en la carpeta plugins/couteau_suisse/img/filets.',
 	'filets_sep:nom' => 'Filetes de Separaci&oacute;n',
@@ -246,17 +287,22 @@ Los bloques multi se muestran siempre en el idioma solicitado por el visitante.'
 @puce@ Se ofrecer&aacute;n dos soluciones para generar la peque&ntilde;a ventana autom&aacute;tica que aparece al pasar el rat&oacute;n por encima. [[%glossaire_js%]]',
 	'glossaire:nom' => 'Glosario interno',
 	'glossaire_css' => 'Soluci&oacute;n CSS',
+	'glossaire_erreur' => 'Le mot &laquo;@mot1@&raquo; rend ind&#233;tectable le mot &laquo;@mot2@&raquo;', # NEW
+	'glossaire_inverser' => 'Correction propos&#233;e : inverser l\'ordre des mots en base.', # NEW
 	'glossaire_js' => 'Soluci&oacute;n JavaScript',
+	'glossaire_ok' => 'La liste des @nb@ mot(s) &#233;tudi&#233;(s) en base semble correcte.', # NEW
 	'guillemets:description' => 'Reemplaza autom&aacute;ticamente las comillas rectas (") por las comillas tipogr&aacute;ficas en el idioma de composici&oacute;n. El reemplazo, transparente para el usuario, no modifica el texto original sino s&oacute;lo su presentaci&oacute;n final.',
 	'guillemets:nom' => 'Comillas tipogr&aacute;ficas',
 
 	// H
 	'help' => '{{Esta p&aacute;gina s&oacute;lo es accesible para los responsables del sitio.}} Permite la configuraci&oacute;n de las diversas funciones suplementarias aportadas por el plugin &laquo;{{La&nbsp;Navaja&nbsp;Suiza}}&raquo;.',
 	'help2' => 'Version local: @version@',
-	'help3' => '<p>Enlaces a documentaci&oacute;n:<br />• [La&nbsp;Navaja&nbsp;Suisza->http://www.spip-contrib.net/La-navaja-suiza]@contribs@</p><p>Reinicializaciones:
+	'help3' => '<p>Enlaces a documentaci&oacute;n:<br/>• [La&nbsp;Navaja&nbsp;Suisza->http://www.spip-contrib.net/La-navaja-suiza]@contribs@</p><p>Reinicializaciones:
 _ • [De las herramientas ocultas|Volver al aspecto inicial de esta p&aacute;gina->@hide@]
 _ • [De todo el plugin|Volver al estado inicial del plugin->@reset@]@install@
-</p>',
+</p>', # MODIF
+	'horloge:description' => 'Outil en cours de d&eacute;veloppement. Vous offre une horloge JavaScript . Balise : <code>#HORLOGE{format,utc,id}</code>. Mod&egrave;le : <code><horloge></code>', # NEW
+	'horloge:nom' => 'Horloge', # NEW
 
 	// I
 	'icone_visiter:description' => 'Reemplaza la imagen del bot&oacute;n est&aacute;ndar &laquo;Visitar&raquo; (en la esquina superior derecha de esta p&aacute;gina)  por el logo del sitio, si existe.
@@ -292,48 +338,69 @@ Atenci&oacute;n, esta herramienta necesita el plugin {jQuery} : {Round Corners} 
 	'js_defaut' => 'Por omisi&oacute;n',
 	'js_jamais' => 'Nunca',
 	'js_toujours' => 'Siempre',
+	'jslide_aucun' => 'Aucune animation', # NEW
+	'jslide_fast' => 'Glissement rapide', # NEW
+	'jslide_lent' => 'Glissement lent', # NEW
+	'jslide_millisec' => 'Glissement durant&nbsp;:', # NEW
+	'jslide_normal' => 'Glissement normal', # NEW
 
 	// L
 	'label:admin_travaux' => 'Cerrar el sitio p&uacute;blico por:',
 	'label:arret_optimisation' => 'Impedir que SPIP vac&iacute;e la papelera autom&aacute;ticamente:',
-	'label:auteurs_tout_voir' => '@_CS_CHOIX@',
+	'label:auteur_forum_nom' => 'Le visiteur doit sp&eacute;cifier :', # NEW
 	'label:auto_sommaire' => 'Crear un sumario autom&aacute;ticamente:',
 	'label:balise_decoupe' => 'Activar la baliza #CS_DECOUPE :',
 	'label:balise_sommaire' => 'Activar la baliza #CS_SOMMAIRE:',
+	'label:bloc_h4' => 'Balise pour les titres&nbsp;:', # NEW
 	'label:bloc_unique' => 'Un solo bloque abierto en la p&aacute;gina:',
+	'label:blocs_cookie' => 'Utilisation des cookies :', # NEW
+	'label:blocs_slide' => 'Type d\'animation&nbsp;:', # NEW
+	'label:copie_Smax' => 'Espace maximal r&eacute;serv&eacute; aux copies locales :', # NEW
 	'label:couleurs_fonds' => 'Permitir los fondos:',
 	'label:cs_rss' => 'Activar:',
-	'label:debut_urls_libres' => '<:label:debut_urls_propres:>',
 	'label:debut_urls_propres' => 'Comienzo de las URLs:',
-	'label:debut_urls_propres2' => '<:label:debut_urls_propres:>',
 	'label:decoration_styles' => 'Tus balizas de estilo personalizado:',
 	'label:derniere_modif_invalide' => 'Recalcular inmediatamente despu&eacute;s de una modificaci&oacute;n:',
 	'label:distant_off' => 'Desactivar:',
+	'label:doc_Smax' => 'Taille maximale des documents :', # NEW
 	'label:dossier_squelettes' => 'Carpeta(s) a utilizar:',
 	'label:duree_cache' => 'Duraci&oacute;n de la cach&eacute; local:',
 	'label:duree_cache_mutu' => 'Duraci&oacute;n de la cach&eacute; en mutualizaci&oacute;n:',
+	'label:enveloppe_mails' => 'Petite enveloppe devant les mails :', # NEW
 	'label:expo_bofbof' => 'Escritura como exponentes para: <html>St(e)(s), Bx, Bd(s) y Fb(s)</html>',
 	'label:forum_lgrmaxi' => 'Valor (en caracteres):',
 	'label:glossaire_groupes' => 'Grupo(s) utilizado(s):',
 	'label:glossaire_js' => 'T&eacute;cnica utilizada:',
 	'label:glossaire_limite' => 'N&uacute;mero m&aacute;ximo de enlaces creados:',
+	'label:i_align' => 'Alignement du texte&nbsp;:', # NEW
+	'label:i_couleur' => 'Couleur de la police&nbsp;:', # NEW
+	'label:i_hauteur' => 'Hauteur de la ligne de texte (&eacute;q. &agrave; {line-height})&nbsp;:', # NEW
+	'label:i_largeur' => 'Largeur maximale de la ligne de texte&nbsp;:', # NEW
+	'label:i_padding' => 'Espacement autour du texte (&eacute;q. &agrave; {padding})&nbsp;:', # NEW
+	'label:i_police' => 'Nom du fichier de la police (dossiers {polices/})&nbsp;:', # NEW
+	'label:i_taille' => 'Taille de la police&nbsp;:', # NEW
+	'label:img_GDmax' => 'Calculs d\'images avec GD :', # NEW
+	'label:img_Hmax' => 'Taille maximale des images :', # NEW
 	'label:insertions' => 'Correcciones autom&aacute;ticas:',
-	'label:jcorner_classes' => '<MODIF>Mejorar las esquinas de las selecciones siguientes:',
+	'label:jcorner_classes' => 'Mejorar las esquinas de las selecciones siguientes:', # MODIF
 	'label:jcorner_plugin' => 'Instalar el siguiente plugin {jQuery}:',
+	'label:jolies_ancres' => 'Calculer de jolies ancres :', # NEW
 	'label:lgr_introduction' => 'Tama&ntilde;o del resumen:',
 	'label:lgr_sommaire' => 'Tama&ntilde;o del sumario (9 a 99):',
 	'label:lien_introduction' => 'Puntos de seguir pulsables:',
 	'label:liens_interrogation' => 'Proteger las URLs:',
 	'label:liens_orphelins' => 'Enlaces pulsables:',
 	'label:log_couteau_suisse' => 'Activar:',
-	'label:marqueurs_urls_propres' => 'A&ntilde;adir los marcadores que separan los objetos (SPIP>=2.0) :<br />(ej. : &laquo;&nbsp;-&nbsp;&raquo; para -Mi-secci&oacute;n-, &laquo;&nbsp;@&nbsp;&raquo; para @Mi-sitio@) ',
-	'label:marqueurs_urls_propres2' => '<:label:marqueurs_urls_propres:>',
-	'label:marqueurs_urls_propres_qs' => '<:label:marqueurs_urls_propres:>',
+	'label:logo_Hmax' => 'Taille maximale des logos :', # NEW
+	'label:marqueurs_urls_propres' => 'A&ntilde;adir los marcadores que separan los objetos (SPIP>=2.0) :<br/>(ej. : &laquo;&nbsp;-&nbsp;&raquo; para -Mi-secci&oacute;n-, &laquo;&nbsp;@&nbsp;&raquo; para @Mi-sitio@) ', # MODIF
 	'label:max_auteurs_page' => 'Autores por p&aacute;gina:',
 	'label:message_travaux' => 'Tu mensaje de mantenimiento:',
 	'label:moderation_admin' => 'Validar autom&aacute;ticamente los mensajes de los: ',
+	'label:ouvre_note' => 'Ouverture et fermeture des notes de bas de page', # NEW
+	'label:ouvre_ref' => 'Ouverture et fermeture des appels de notes de bas de page', # NEW
 	'label:paragrapher' => 'Siempre hacer p&aacute;rrafos:',
 	'label:prive_travaux' => 'Accesibilidad del espacio privado por:',
+	'label:prof_sommaire' => 'Profondeur retenue (1 &agrave; 4) :', # NEW
 	'label:puce' => 'Vi&ntilde;eta gr&aacute;fica p&uacute;blica &laquo;<html>-</html>&raquo;:',
 	'label:quota_cache' => 'Valor de la cuota de cach&eacute;:',
 	'label:racc_g1' => 'Entrada y salida del cambio a &laquo;<html>{{negrita}}</html>&raquo;:',
@@ -342,37 +409,31 @@ Atenci&oacute;n, esta herramienta necesita el plugin {jQuery} : {Round Corners} 
 	'label:racc_i1' => 'Entrada y salida del cambio a &laquo;<html>{it&aacute;lica}</html>&raquo;:',
 	'label:radio_desactive_cache3' => 'Uso de la cach&eacute;:',
 	'label:radio_desactive_cache4' => 'Uso de la cach&eacute;:',
-	'label:radio_filtrer_javascript3' => '@_CS_CHOIX@',
-	'label:radio_set_options4' => '@_CS_CHOIX@',
-	'label:radio_suivi_forums3' => '@_CS_CHOIX@',
 	'label:radio_target_blank3' => 'Enlaces externos en ventana nueva:',
 	'label:radio_type_urls3' => 'Formato de las URLs:',
 	'label:scrollTo' => 'Instalar los plugins {jQuery} siguientes:',
-	'label:separateur_urls_page' => 'Car&aacute;cter de separaci&oacute;n \'type-id\'<br />(ej.: ?article-123):',
+	'label:separateur_urls_page' => 'Car&aacute;cter de separaci&oacute;n \'type-id\'<br/>(ej.: ?article-123):', # MODIF
 	'label:set_couleurs' => 'Esquema a utilizar:',
+	'label:spam_ips' => 'Adresses IP &agrave; bloquer :', # NEW
 	'label:spam_mots' => 'Secuencias prohibidas:',
 	'label:spip_options_on' => 'Incluir:',
 	'label:spip_script' => 'Script de llamada:',
 	'label:style_h' => 'Tu estilo:',
 	'label:style_p' => 'Tu estilo:',
 	'label:suite_introduction' => 'Puntos de seguir:',
-	'label:terminaison_urls_arbo' => '<:label:terminaison_urls_page:>',
-	'label:terminaison_urls_libres' => '<:label:terminaison_urls_page:>',
 	'label:terminaison_urls_page' => 'Terminaci&oacute;n de las URLs (ej.: &laquo;.html&raquo;):',
-	'label:terminaison_urls_propres' => '<:label:terminaison_urls_page:>',
-	'label:terminaison_urls_propres_qs' => '<:label:terminaison_urls_page:>',
 	'label:titre_travaux' => 'T&iacute;tulo del mensaje:',
 	'label:titres_etendus' => 'Activar el uso extendido de las balizas #TITRE_XXX:',
-	'label:tri_articles' => '<MODIF>Tu elecci&oacute;n:',
 	'label:url_arbo_minuscules' => 'Conservar los espacios de los t&iacute;tulos en las URLs:',
-	'label:url_arbo_sep_id' => 'Car&aacute;cter de separaci&oacute;n \'titre-id\' en caso de duplicidad:<br />(no utilizar \'/\')',
+	'label:url_arbo_sep_id' => 'Car&aacute;cter de separaci&oacute;n \'titre-id\' en caso de duplicidad:<br/>(no utilizar \'/\')', # MODIF
 	'label:url_glossaire_externe2' => 'Enlace al glosario externo:',
+	'label:url_max_propres' => 'Longueur maximale des URLs (caract&egrave;res) :', # NEW
 	'label:urls_arbo_sans_type' => 'Mostrar el tipo de objeto SPIP en las URLs:',
-	'label:urls_minuscules' => '@_CS_CHOIX@',
+	'label:urls_avec_id' => 'Un id syst&eacute;matique, mais...', # NEW
 	'label:webmestres' => 'Lista de los y las webmasters del sitio:',
 	'liens_en_clair:description' => 'Pone a tu disposici&oacute;n el filtro: \'liens_en_clair\'. Probablemente tu texto contiene enlaces de hipertexto que no son visibles al imprimir. Este filtro a&ntilde;ade entre corchetes el destino de cada enlace pulsable (enlaces externos o de correo). Atenci&oacute;n: en el modo de impresi&oacute;n (par&aacute;metro \'cs=print\' o \'page=print\' en la url de la p&aacute;gina), esta caracter&iacute;stica se aplica autom&aacute;ticamente.',
 	'liens_en_clair:nom' => 'Ver enlaces',
-	'liens_orphelins:description' => '<MODIF>Esta herramienta tiene dos aplicaciones:
+	'liens_orphelins:description' => 'Esta herramienta tiene dos aplicaciones:
 
 @puce@ {{Enlaces correctos}}.
 
@@ -385,12 +446,18 @@ Reemplaza autom&aacute;ticamente todas las URLs escritas como texto por los usua
 Puedes elegir el tipo de reemplazo:
 _ • {B&aacute;sico}: se reemplazan los enlaces del tipo {<html>http://spip.net</html>} (todos los protocolos) o {<html>www.spip.net</html>}.
 _ • {Extendido}: se reemplazan adem&aacute;s los enlaces del tipo {<html>yo@spip.net</html>}, {<html>mailto:micorreo</html>} o {<html>news:misnews</html>}.
-[[%liens_orphelins%]]',
+[[%liens_orphelins%]]', # MODIF
 	'liens_orphelins:nom' => 'Buenas URLs',
 
 	// M
 	'mailcrypt:description' => 'Enmascara todos los enlaces de correo presentes en los textos y los reemplaza por un enlace JavaScript que permite activar igual la aplicaci&oacute;n de correo del lector. Esta herramienta antispam intenta impedir que los robots recojan las direcciones electr&oacute;nicas escritas en claro en los foros o en las balizas de tus esqueletos.',
 	'mailcrypt:nom' => 'MailCrypt',
+	'maj_auto:description' => 'Cet outil vous permet de g&eacute;rer facilement la mise &agrave; jour de vos diff&eacute;rents plugins, r&eacute;cup&eacute;rant notamment le num&eacute;ro de r&eacute;vision contenu dans le fichier <code>svn.revision</code> et le comparant avec celui trouv&eacute; sur <code>zone.spip.org</code>.
+
+La liste ci-dessus offre la possibilit&eacute; de lancer le processus de mise &agrave; jour automatique de SPIP sur chacun des plugins pr&eacute;alablement install&eacute;s dans le dossier <code>plugins/auto/</code>. Les autres plugins se trouvant dans le dossier <code>plugins/</code> sont simplement list&eacute;s &agrave; titre d\'information. Si la r&eacute;vision distante n\'a pas pu &ecirc;tre trouv&eacute;e, alors tentez de proc&eacute;der manuellement &agrave; la mise &agrave; jour du plugin.
+
+Note : les paquets <code>.zip</code> n\'&eacute;tant pas reconstruits instantan&eacute;ment, il se peut que vous soyez oblig&eacute; d\'attendre un certain d&eacute;lai avant de pouvoir effectuer la totale mise &agrave; jour d\'un plugin tout r&eacute;cemment modifi&eacute;.', # NEW
+	'maj_auto:nom' => 'Mises &agrave; jour automatiques', # NEW
 	'message_perso' => 'Muchas gracias a los traductores que pasaron por aqu&iacute;. Pat ;-)',
 	'moderation_admins' => 'administradores autentificados',
 	'moderation_message' => 'Este foro est&aacute; moderado a priori: tu contribuci&oacute;n no aparecer&aacute; hasta que haya sido validada por un administrador del sitio, salvo si te has identificado y est&aacute;s autorizado a escribir directamente.',
@@ -418,14 +485,15 @@ _ • {Extendido}: se reemplazan adem&aacute;s los enlaces del tipo {<html>yo@sp
 	'outil_inactif' => 'Herramienta inactiva',
 	'outil_intro' => 'Esta p&aacute;gina lista las funciones que el plugin pone a tu disposici&oacute;n.<br /><br />Pulsando sobre el nombre de los &uacute;tiles de m&aacute;s abajo, los seleccionas y podr&aacute;s cambiar su estado con ayuda del bot&oacute;n central: los &uacute;tiles activados se desactivar&aacute;n y <i>viceversa</i>. Con cada pulsaci&oacute;n, aparece la descripci&oacute;n bajo las listas. Las categor&iacute;as son desplegables y los &uacute;tiles se pueden ocultar. El doble-clic permite cambiar r&aacute;pidamente de herramienta.<br /><br />En la primera utilizaci&oacute;n, se recomienda activar las herramientas una a una, por si acaso apareciese alguna incompatibilidad con tu esqueleto, con SPIP o con otros plugins.<br /><br />Nota: la simple carga de esta p&aacute;gina recompila el conjunto de herramientas de la Navaja Suiza.',
 	'outil_intro_old' => 'Esta interfaz est&aacute; anticuada.<br /><br />Si encuentras problemas para utilizar la <a href=\'./?exec=admin_couteau_suisse\'>nueva interfaz</a>, no dudes en avisarnos en el foro de <a href=\'http://www.spip-contrib.net/?article2166\'>Spip-Contrib</a>.',
-	'outil_nb' => '@pipe@: @nb@&nbsp;&uacute;til',
-	'outil_nbs' => '@pipe@&nbsp;: @nb@&nbsp;&uacute;tiles',
+	'outil_nb' => '@pipe@: @nb@ &uacute;til', # MODIF
+	'outil_nbs' => '@pipe@ : @nb@ &uacute;tiles', # MODIF
 	'outil_permuter' => '&iquest;Cambiar la herramienta: &laquo; @text@ &raquo;?',
 	'outils_actifs' => 'Herramientas activadas:',
 	'outils_caches' => 'Herramientas ocultas:',
 	'outils_cliquez' => 'Pulsa sobre el nombre de los &uacute;tiles de arriba para ver aqu&iacute; su descripci&oacute;n.',
 	'outils_inactifs' => 'Herramientas inactivas:',
 	'outils_liste' => 'Lista de herramientas de La Navaja Suiza',
+	'outils_non_parametrables' => 'Non param&eacute;trables&nbsp;:', # NEW
 	'outils_permuter_gras1' => 'Cambiar los &uacute;tiles en negrita',
 	'outils_permuter_gras2' => '&iquest;Cambiar los @nb@ &uacute;tiles en negrita?',
 	'outils_resetselection' => 'Reinicializar la selecci&oacute;n',
@@ -434,9 +502,10 @@ _ • {Extendido}: se reemplazan adem&aacute;s los enlaces del tipo {<html>yo@sp
 
 	// P
 	'pack_actuel' => 'Paquete @date@',
-	'pack_actuel_avert' => '<MODIF>Atenci&oacute;n, las sobrecargas para los define() o los globales no se especifican aqu&iacute;',
+	'pack_actuel_avert' => 'Atenci&oacute;n, las sobrecargas para los define() o los globales no se especifican aqu&iacute;', # MODIF
 	'pack_actuel_titre' => 'PAQUETE ACTUAL DE CONFIGURACI&Oacute;N DE LA NAVAJA SUIZA',
 	'pack_alt' => 'Ver los par&aacute;metros de configuraci&oacute;n actual',
+	'pack_delete' => 'Supression d\'un pack de configuration', # NEW
 	'pack_descrip' => 'Tu &laquo;Paquete de configuraci&oacute;n actual&raquo; re&uacute;ne el conjunto de par&aacute;metros de configuraci&oacute;n actuales relativos a la Navaja Suiza: la activaci&oacute;n de los &uacute;tiles y el valor de sus eventuales variables.
 
 Si los permisos de escritura lo permiten, este c&oacute;digo PHP puede situarse en el archivo {{/config/mes_options.php}} y a&ntilde;adir un enlace de reinicializaci&oacute;n en esta p&aacute;gina del paquete &laquo;{@pack@}&raquo;. Por supuesto puedes cambiarle el nombre.
@@ -445,20 +514,30 @@ Si reinicializas el plugin pulsando en un paquete, la Navaja Suiza volver&aacute
 	'pack_du' => '• del pack @pack@',
 	'pack_installe' => 'Colocaci&oacute;n de un pack de configuraci&oacute;n',
 	'pack_installer' => '&iquest;Confirmas que deseas reinicializar la Navaja Suiza e instalar el paquete &laquo;&nbsp;@pack@&nbsp;&raquo;?',
-	'pack_nb_plrs' => '<MODIF>Actualmente hay @nb@ &laquo;paquetes de configuraci&oacute;n&raquo; disponibles.',
-	'pack_nb_un' => '<MODIF>Actualmente hay un &laquo;paquete de configuraci&oacute;n&raquo; disponible',
+	'pack_nb_plrs' => 'Actualmente hay @nb@ &laquo;paquetes de configuraci&oacute;n&raquo; disponibles.', # MODIF
+	'pack_nb_un' => 'Actualmente hay un &laquo;paquete de configuraci&oacute;n&raquo; disponible', # MODIF
 	'pack_nb_zero' => 'No hay ning&uacute;n &laquo;paquete de configuraci&oacute;n&raquo; disponible actualmente.',
 	'pack_outils_defaut' => 'Herramientas de instalaci&oacute;n por default ',
 	'pack_sauver' => 'Guardar la configuraci&oacute;n actual',
 	'pack_sauver_descrip' => 'El bot&oacute;n de m&aacute;s abajo permite insertar directamente en el archivo <b>@file@</b> los par&aacute;metros necesarios para a&ntilde;adir un &laquo;paquete de configuraci&oacute;n&nbsp;&raquo; en el men&uacute; de la izquierda. Esto te permitir&aacute; despu&eacute;s devolver con un clic la Navaja Suiza al estado de configuraci&oacute;n en que est&aacute; actualmente.',
+	'pack_supprimer' => '&Ecirc;tes-vous s&ucirc;r de vouloir supprimer le pack &laquo;&nbsp;@pack@&nbsp;&raquo; ?', # NEW
 	'pack_titre' => 'Configuraci&oacute;n Actual',
 	'pack_variables_defaut' => 'Instalaci&oacute;n de variables por defecto',
 	'par_defaut' => 'Por omisi&oacute;n',
 	'paragrapher2:description' => 'La funci&oacute;n SPIP <code>paragrapher()</code> inserta balizas &lt;p&gt; y &lt;/p&gt; en todos los textos desprovistos de p&aacute;rrafo. Para de un ajuste m&aacute;s fino de tus estilos y compaginaciones, tienes la posibilidad de uniformizar el aspecto de los textos de tu sitio.[[%paragrapher%]]',
 	'paragrapher2:nom' => 'P&aacute;rrafos',
 	'pipelines' => 'Pipelines utilizadas:',
-	'pucesli:description' => '<MODIF>Reemplaza las vi&ntilde;etas &laquo;-&raquo; (gui&oacute;n simple) de los art&iacute;culos por listas anotadas &laquo;-*&raquo; (traducidas en HTML como: &lt;ul>&lt;li>…&lt;/li>&lt;/ul>) cuyo estilo puede personalizars mediante css.',
+	'previsualisation:description' => 'Par d&eacute;faut, SPIP permet de pr&eacute;visualiser un article dans sa version publique et styl&eacute;e, mais uniquement lorsque celui-ci a &eacute;t&eacute; &laquo; propos&eacute; &agrave; l&rsquo;&eacute;valuation &raquo;. Hors cet outil permet aux auteurs de pr&eacute;visualiser &eacute;galement les articles pendant leur r&eacute;daction. Chacun peut alors pr&eacute;visualiser et modifier son texte &agrave; sa guise.
+
+@puce@ Attention : cette fonctionnalit&eacute; ne modifie pas les droits de pr&eacute;visualisation. Pour que vos r&eacute;dacteurs aient effectivement le droit de pr&eacute;visualiser leurs articles &laquo; en cours de r&eacute;daction &raquo;, vous devez l&rsquo;autoriser (dans le menu {[Configuration&gt;Fonctions avanc&eacute;es->./?exec=config_fonctions]} de l&rsquo;espace priv&eacute;).', # NEW
+	'previsualisation:nom' => 'Pr&eacute;visualisation des articles', # NEW
+	'puceSPIP' => 'Autoriser le raccourci &laquo;*&raquo;', # NEW
+	'puceSPIP_aide' => 'Une puce SPIP : <b>*</b>', # NEW
+	'pucesli:description' => 'Reemplaza las vi&ntilde;etas &laquo;-&raquo; (gui&oacute;n simple) de los art&iacute;culos por listas anotadas &laquo;-*&raquo; (traducidas en HTML como: &lt;ul>&lt;li>…&lt;/li>&lt;/ul>) cuyo estilo puede personalizars mediante css.', # MODIF
 	'pucesli:nom' => 'Vi&ntilde;etas mejoradas',
+
+	// Q
+	'qui_webmestres' => 'Les webmestres SPIP', # NEW
 
 	// R
 	'raccourcis' => 'Atajos tipogr&aacute;ficos activos de la Navaja Suiza:',
@@ -474,6 +553,8 @@ Si reinicializas el plugin pulsando en un paquete, la Navaja Suiza volver&aacute
 
 	// S
 	'sauf_admin' => 'Todos, salvo los administradores',
+	'sauf_admin_redac' => 'Tous, sauf les administrateurs et r&eacute;dacteurs', # NEW
+	'sauf_identifies' => 'Tous, sauf les auteurs identifi&eacute;s', # NEW
 	'set_options:description' => 'Selecciona autom&aacute;ticamente el tipo de interfaz privada (simplificada o avanzada) para todos los redactores existentes o futuros y suprime el bot&oacute;n correspondiente de la banda de peque&ntilde;os iconos.[[%radio_set_options4%]]',
 	'set_options:nom' => 'Tipo de interfaz privada',
 	'sf_amont' => 'Anterior',
@@ -483,7 +564,7 @@ Si reinicializas el plugin pulsando en un paquete, la Navaja Suiza volver&aacute
 	'smileys:aide' => 'Smileys: @liste@',
 	'smileys:description' => 'Inserta &laquo;smileys&raquo; en todos los textos donde aparezca un atajo de tipo <acronym>:-)</acronym>. Ideal para los foros.
 _ Hay una baliza disponible para mostrar una tabla de smileys en tus esqueletos: #SMILEYS.
-_ Dibujos: [Sylvain Michel->http://www.guaph.net/]',
+_ Dibujos: [Sylvain Michel->http://www.guaph.net/]', # MODIF
 	'smileys:nom' => 'Smileys',
 	'soft_scroller:description' => 'A&ntilde;ade al sitio p&uacute;blico un desplazamiento suave de la p&aacute;gina cuando el visitante hace clic en un enlace que apunta a un ancla: muy &uacute;til para evitar perderse en una p&aacute;gina compleja u en un texto muy largo...
 
@@ -503,15 +584,22 @@ _ • &Uacute;nicamente para los art&iacute;culos que contengan la baliza <code>
 @puce@ Por omisi&oacute;n, la Navaja Suiza inserta el sumario autom&aacute;ticamente en el encabezamiento del art&iacute;culo. Pero tienes la posibilidad situar este sumario en otro lugar de tu esqueleto gracias a una baliza #CS_SOMMAIRE que puedes activar aqu&iacute;:
 [[%balise_sommaire%]]
 
-Este sumario puede combinarse con: &laquo;&nbsp;[.->decoupe]&nbsp;&raquo;.',
-	'sommaire:nom' => 'Un sumario autom&aacute;tico',
+Este sumario puede combinarse con: &laquo;&nbsp;[.->decoupe]&nbsp;&raquo;.', # MODIF
+	'sommaire:nom' => 'Un sumario autom&aacute;tico', # MODIF
+	'sommaire_ancres' => 'Ancres choisies : <b><html>{{{Mon Titre&lt;mon_ancre&gt;}}}</html></b>', # NEW
 	'sommaire_avec' => 'Un texto con sumario: <b>@_CS_AVEC_SOMMAIRE@</b>',
 	'sommaire_sans' => 'Un texto sin sumario: <b>@_CS_SANS_SOMMAIRE@</b>',
-	'spam:description' => '<MODIF>Intenta luchar contra los env&iacute;os de mensajes autom&aacute;ticos y malintencionados en la parte p&uacute;blica. Ciertas palabras y las etiquetas &lt;a>&lt;/a> est&aacute;n prohibidas.
+	'sommaire_titres' => 'Intertitres hi&eacute;rarchis&eacute;s&nbsp;: <b><html>{{{*Titre}}}</html></b>, <b><html>{{{**Sous-titre}}}</html></b>, etc.', # NEW
+	'spam:description' => 'Intenta luchar contra los env&iacute;os de mensajes autom&aacute;ticos y malintencionados en la parte p&uacute;blica. Ciertas palabras y las etiquetas &lt;a>&lt;/a> est&aacute;n prohibidas.
 
 Lista aqu&iacute; las secuencias prohibidas@_CS_ASTER@ separ&aacute;ndolas por espacios. [[%spam_mots%]]
-@_CS_ASTER@Para especificar una palabra completa, ponla entre par&eacute;ntesis. Para una expresi&oacute;n con espacios, ponla entre comillas.',
+@_CS_ASTER@Para especificar una palabra completa, ponla entre par&eacute;ntesis. Para una expresi&oacute;n con espacios, ponla entre comillas.', # MODIF
 	'spam:nom' => 'Lucha contra el SPAM',
+	'spam_ip' => 'Blocage IP de @ip@ :', # NEW
+	'spam_test_ko' => 'Ce message serait bloqu&eacute; par le filtre anti-SPAM !', # NEW
+	'spam_test_ok' => 'Ce message serait accept&eacute; par le filtre anti-SPAM.', # NEW
+	'spam_tester_bd' => 'Testez &eacute;galement votre votre base de donn&eacute;es et listez les messages qui auraient &eacute;t&eacute; bloqu&eacute;s par la configuration actuelle de l\'outil.', # NEW
+	'spam_tester_label' => 'Afin de tester votre liste de s&eacute;quences interdites ou d\'adresses&nbsp;IP, utilisez le cadre suivant :', # NEW
 	'spip_cache:description' => '@puce@ La cach&eacute; ocupa un cierto espacio en disco y SPIP puede limitar su extensi&oacute;n. Un valor vac&iacute;o o igual a 0 significa que no se aplica ninguna cuota.[[%quota_cache% Mo]]
 
 @puce@ Cuando se hace una modificaci&oacute;n del contenido del sitio, SPIP invalida inmediatamente la cach&eacute; sin esperar el siguiente c&aacute;lculo peri&oacute;dico. Si tu sitio tiene problemas de rendimiento debidos a una carga muy alta, puedes marcar &laquo;&nbsp;no&nbsp;&raquo; en esta opci&oacute;n.[[%derniere_modif_invalide%]
@@ -519,13 +607,15 @@ Lista aqu&iacute; las secuencias prohibidas@_CS_ASTER@ separ&aacute;ndolas por e
 @puce@ Si la baliza #CACHE no se encuentra en tus esqueletos locales, SPIP considera por omisi&oacute;n que la cach&eacute; de una p&aacute;gina tiene un tiempo de vida de 24 horas antes de recalcularla. Para gestionar mejor la carga en tu servidor, puedes modificar este valor aqu&iacute;.[[%duree_cache% heures]]
 
 @puce@ Si tienes varios sitios mutualizados, puedes especificar aqu&iacute; el valor por omisi&oacute;n que se toma para todos los sitios locales (SPIP 2.0 mini).[[%duree_cache_mutu% horas]]',
-	'spip_cache:description1' => '@puce@ Por omisi&oacute;n, SPIP calcula todas las p&aacute;ginas p&uacute;blicas y las sit&uacute;a en la cach&eacute; para acelerar la consulta. Desactivar temporalmente la cach&eacute; puede ayudar durante el desarrollo del sitio. @_CS_CACHE_EXTENSION@[[%radio_desactive_cache3%]]',
+	'spip_cache:description1' => '@puce@ Por omisi&oacute;n, SPIP calcula todas las p&aacute;ginas p&uacute;blicas y las sit&uacute;a en la cach&eacute; para acelerar la consulta. Desactivar temporalmente la cach&eacute; puede ayudar durante el desarrollo del sitio. @_CS_CACHE_EXTENSION@[[%radio_desactive_cache3%]]', # MODIF
 	'spip_cache:description2' => '@puce@ Cuatro opciones para orientar el funcionamiento de la cach&eacute; de SPIP: <q1>
 _ • {Uso normal}: SPIP calcula todas las p&aacute;ginas p&uacute;blicas y las pone en la cach&eacute; para acelerar la consulta. Tras un cierto intervalo, la cach&eacute; se recalcula y se guarda.
 _ • {Cach&eacute; permanente}: los intervalos de invalidaci&oacute;n de la cach&eacute; se ignoran.
 _ • {Sin cach&eacute;}: desactivar temporalmente la cach&eacute; puede ayudar mientras se desarrolla el sitio. Aqu&iacute;, no se guarda nada en el disco.
 _ • {Control de la cach&eacute;}: opci&oacute;n id&eacute;ntica a la anterior, con escritura en el disco de todos los resultados para poder controlarlos si hace falta.</q1>[[%radio_desactive_cache4%]]',
 	'spip_cache:nom' => 'SPIP y la cach&eacute;…',
+	'spip_ecran:description' => 'D&eacute;termine la largeur d\'&eacute;cran impos&eacute;e &agrave; tous en partie priv&eacute;e. Un &eacute;cran &eacute;troit pr&eacute;sentera deux colonnes et un &eacute;cran large en pr&eacute;sentera trois. Le r&eacute;glage par d&eacute;faut laisse l\'utilisateur choisir, son choix &eacute;tant stock&eacute; dans un cookie.[[%spip_ecran%]]', # NEW
+	'spip_ecran:nom' => 'Largeur d\'&eacute;cran', # NEW
 	'stat_auteurs' => 'Estado de los autores',
 	'statuts_spip' => '&Uacute;nicamente los siguientes estados SPIP:',
 	'statuts_tous' => 'Todos los estados',
@@ -548,10 +638,16 @@ Por ejemplo, en un bucle sobre (ARTICLES), #TITRE_SECTEUR devolver&aacute; el t&
 Igualmente est&aacute; soportada la sintaxis <html>#TITRE_XXX{yy}</html>. Ejemplo: <html>#TITRE_ARTICLE{10}</html> devolver&aacute; el t&iacute;tulo del art&iacute;culo #10.[[%titres_etendus%]]',
 	'titre_parent:nom' => 'Balizas #TITRE_PARENT/OBJET',
 	'titre_tests' => 'La Navaja Suiza - P&aacute;gina de pruebas…',
+	'titres_typo:description' => 'Transforme tous les intertitres <html>&laquo; {{{Mon intertitre}}} &raquo;</html> en image typographique param&eacute;trable.[[%i_taille% pt]][[%i_couleur%]][[%i_police%
+
+Polices disponibles : @_CS_FONTS@]][[%i_largeur% px]][[%i_hauteur% pt]][[%i_padding% px]][[%i_align%]]
+
+Cet outil est compatible avec : &laquo;&nbsp;[.->sommaire]&nbsp;&raquo;.', # NEW
+	'titres_typo:nom' => 'Intertitres en image', # NEW
 	'tous' => 'Todos',
 	'toutes_couleurs' => 'Los 36 colores de los estilos css: @_CS_EXEMPLE_COULEURS@',
 	'toutmulti:aide' => 'Bloques multiling&uuml;es: <b><:trad:></b>',
-	'toutmulti:description' => '<MODIF>Del mismo modo que puedes hacer en los esqueletos, esta herramienta te permite utilizar libremente las cadenas de idioma (de SPIP o de tus esqueletos) en todos los contenidos del sitio (art&iacute;culos, t&iacute;tulos, mensajes, etc.) con ayuda del atajo <code><:cadena:></code>.
+	'toutmulti:description' => 'Del mismo modo que puedes hacer en los esqueletos, esta herramienta te permite utilizar libremente las cadenas de idioma (de SPIP o de tus esqueletos) en todos los contenidos del sitio (art&iacute;culos, t&iacute;tulos, mensajes, etc.) con ayuda del atajo <code><:cadena:></code>.
 
 Consulta [aqu&iacute; ->http://www.spip.net/es_article2247.html] la documentaci&oacute;n de SPIP sobre el tema.
 
@@ -559,22 +655,35 @@ Esta herramienta tambi&eacute;n acepta argumentos introducidos por SPIP 2.0. Por
 
 La funci&oacute;n de SPIP utilizada en PHP es  <code>_T(\'cadena\')</code> sin argumentos, y <code>_T(\'cadena, array(\'arg1\'=>\'un texto\', \'arg2\'=>\'otro texto\'))</code> con argumentos.
 
-No te olvides de verificar que la clave <code>\'cadena\'</code> est&eacute; bien definida en los ficheros de idiomas. ',
+No te olvides de verificar que la clave <code>\'cadena\'</code> est&eacute; bien definida en los ficheros de idiomas. ', # MODIF
 	'toutmulti:nom' => 'Bloques multiling&uuml;es',
+	'travaux_masquer_avert' => 'Masquer le cadre indiquant sur le site public qu\'une maintenance est en cours', # NEW
 	'travaux_nom_site' => '@_CS_NOM_SITE@',
 	'travaux_prochainement' => 'Este sitio se reactivar&aacute; en breve.
 _ Gracias por la comprensi&oacute;n.',
 	'travaux_titre' => '@_CS_TRAVAUX_TITRE@',
-	'tri_articles:description' => '<MODIF>Elige aqu&iacute; la ordenaci&oacute;n que se usar&aacute; para mostrar tus art&iacute;culos dentro de las secciones cuando navegues por la parte privada del sitio ([->./?exec=auteurs]).
+	'tri_articles:description' => 'Elige aqu&iacute; la ordenaci&oacute;n que se usar&aacute; para mostrar tus art&iacute;culos dentro de las secciones cuando navegues por la parte privada del sitio ([->./?exec=auteurs]).
 
 Las propuestas siguientes se basan en la funci&oacute;n SQL \'ORDER BY\': utiliza la ordenaci&oacute;n personalizada s&oacute;lo si sabes muy bien lo que haces (campos disponibles: {id_article, id_rubrique, titre, soustitre, surtitre, statut, date_redac, date_modif, lang, etc.})
-[[%tri_articles%]][[->%tri_perso%]]',
-	'tri_articles:nom' => '<MODIF>Ordenaci&oacute;n de los art&iacute;culos',
+[[%tri_articles%]][[->%tri_perso%]]', # MODIF
+	'tri_articles:nom' => 'Ordenaci&oacute;n de los art&iacute;culos', # MODIF
+	'tri_groupe' => 'Tri sur l\'id du groupe (ORDER BY id_groupe)', # NEW
 	'tri_modif' => 'Ordenar por fecha de modificaci&oacute;n (ORDER BY date_modif DESC)',
 	'tri_perso' => 'Ordenaci&oacute;n SQL personalizada, ORDER BY seguido por:',
 	'tri_publi' => 'Ordenar por fecha de publicaci&oacute;n (ORDER BY date DESC)',
 	'tri_titre' => 'Ordenar por t&iacute;tulo (ORDER BY 0+titre,titre)',
-	'type_urls:description' => '<MODIF>@puce@ SPIP te permite elegir entre varios tipos de URLs para crear los enlaces de acceso a las p&aacute;ginas de tu sitio:
+	'trousse_balises:description' => 'Outil en cours de d&eacute;veloppement. Vous offre quelques balises tr&egrave;s simples et bien pratiques pour am&eacute;liorer la lisibilit&eacute; de vos squelettes.
+
+@puce@ {{#BOLO}} : g&eacute;n&egrave;re un faux texte d\'environ 3000 caract&egrave;res ("bolo" ou "[?lorem ipsum]") dans les squelettes pendant leur mise au point. L\'argument optionnel de cette fonction sp&eacute;cifie la longueur du texte voulu. Exemple : <code>#BOLO{300}</code>. Cette balise accepte tous les filtres de SPIP. Exemple : <code>[(#BOLO|majuscules)]</code>.
+_ Un mod&egrave;le est &eacute;galement disponible pour vos contenus : placez <code><bolo300></code> dans n\'importe quelle zone de texte (chapo, descriptif, texte, etc.) pour obtenir 300 caract&egrave;res de faux texte.
+
+@puce@ {{#MAINTENANT}} (ou {{#NOW}}) : renvoie simplement la date du moment, tout comme : <code>#EVAL{date(\'Y-m-d H:i:s\')}</code>. L\'argument optionnel de cette fonction sp&eacute;cifie le format. Exemple : <code>#MAINTENANT{Y-m-d}</code>. Tout comme avec #DATE, personnalisez l\'affichage gr&acirc;ce aux filtres de SPIP. Exemple : <code>[(#MAINTENANT|affdate)]</code>.
+
+@puce@ {{#CHR<html>{XX}</html>}} : balise &eacute;quivalente &agrave; <code>#EVAL{"chr(XX)"}</code> et pratique pour coder des caract&egrave;res sp&eacute;ciaux (le retour &agrave; la ligne par exemple) ou des caract&egrave;res r&eacute;serv&eacute;s par le compilateur de SPIP (les crochets ou les accolades).
+
+@puce@ {{#LESMOTS}} : ', # NEW
+	'trousse_balises:nom' => 'Trousse &agrave; balises', # NEW
+	'type_urls:description' => '@puce@ SPIP te permite elegir entre varios tipos de URLs para crear los enlaces de acceso a las p&aacute;ginas de tu sitio:
 
 M&aacute;s informaci&oacute;n: [->http://www.spip.net/es_article2024.html]. La utilidad &laquo;&nbsp;[.->boites_privees]&nbsp;&raquo; te permite ver en la p&aacute;gina de cada objeto SPIP la URL propia asociada.
 [[%radio_type_urls3%]]
@@ -614,11 +723,11 @@ _ Ejemplo: <code>article.php3?id_article=123</code>
 </radio_type_urls3>
 
 @puce@ Si utilizas el formato {page} de m&aacute;s arriba o si no se reconoce el objeto solicitado, te ser&aacute; posible elegir {{el script de llamada}} a SPIP. Por omisi&oacute;n, SPIP usa {spip.php}; pero {index.php} (ejemplo de formato: <code>/index.php?article123</code>) o un valor nulo (formato: <code>/?article123</code>) tambi&eacute;n funcionan. Para cualquier otro valor, te ser&aacute; absolutamente necesario crear el fichero correspondiente en la ra&iacute;z de SPIP, a imagen del que ya existe: {index.php}.
-[[%spip_script%]]',
-	'type_urls:description1' => '<MODIF>@puce@ Si utilizas un formato basado en URLs &laquo;propias&raquo; ({propres}, {propres2}, {libres}, {arborescentes} o {propres_qs}), la Navaja Suiza puede:
+[[%spip_script%]]', # MODIF
+	'type_urls:description1' => '@puce@ Si utilizas un formato basado en URLs &laquo;propias&raquo; ({propres}, {propres2}, {libres}, {arborescentes} o {propres_qs}), la Navaja Suiza puede:
 <q1>• Asegurar que la URL producida est&eacute; totalmente {{en min&uacute;sculas}}.
 _ • Hacer que se a&ntilde;ada sistem&aacute;ticamente {{la id del objeto}} a su URL (como sufijo o prefijo).
-_ (ejemplos: <code>/Mi-titulo-de-articulo,457</code> o <code>/457-Mi-titulo-de-articulo</code>)</q1>[[%urls_minuscules%]][[->%urls_avec_id%]][[->%urls_avec_id2%]]',
+_ (ejemplos: <code>/Mi-titulo-de-articulo,457</code> o <code>/457-Mi-titulo-de-articulo</code>)</q1>[[%urls_minuscules%]][[->%urls_avec_id%]][[->%urls_avec_id2%]]', # MODIF
 	'type_urls:nom' => 'Formato de las URLs',
 	'typo_exposants:description' => '{{Textos en franc&eacute;s}}: mejora la presentaci&oacute;n tipogr&aacute;fica de las abreviaturas corrientes, poniendo como super&iacute;ndices los elementos necesarios (as&iacute;, {<acronym>Mme</acronym>} se transforma en {M<sup>me</sup>}) y corrigiendo los errores comunes ({<acronym>2&egrave;me</acronym>} o  {<acronym>2me</acronym>}, por ejemplo, se transforman en {2<sup>e</sup>}, &uacute;nica abreviatura correcta).
 
@@ -641,13 +750,15 @@ Aqu&iacute; puedes escoger escribir como super&iacute;ndices otras abreviaturas 
 	'url_propres2' => 'propres2@_CS_ASTER@',
 	'url_propres_qs' => 'propres_qs',
 	'url_standard' => 'standard',
-	'urls_avec_id' => '<MODIF>Id sistematicamente como sufijo',
-	'urls_avec_id2' => '<MODIF>Id sistem&aacute;ticamente como prefijo',
+	'urls_3_chiffres' => 'Imposer un minimum de 3 chiffres', # NEW
+	'urls_avec_id' => 'Id sistematicamente como sufijo', # MODIF
+	'urls_avec_id2' => 'Id sistem&aacute;ticamente como prefijo', # MODIF
 	'urls_base_total' => 'Actualmente hay @nb@ URL(s) en la base',
 	'urls_base_vide' => 'La base de datos de URLs est&aacute; vac&iacute;a',
 	'urls_choix_objet' => 'Edici&oacute;n basada en la URL de un objeto espec&iacute;fico:',
 	'urls_edit_erreur' => 'El formato actual de las URLs (&laquo;&nbsp;@type@&nbsp;&raquo;) no permite la edici&oacute;n.',
 	'urls_enregistrer' => 'Grabar esta URL en la base',
+	'urls_id_sauf_rubriques' => 'Exclure les objets suivants (s&eacute;par&eacute;s par &laquo;&nbsp;:&nbsp;&raquo;) :', # NEW
 	'urls_minuscules' => 'Letras min&uacute;sculas',
 	'urls_nouvelle' => 'Editar la URL &laquo;propres&raquo; (propia):',
 	'urls_num_objet' => 'N&uacute;mero:',
@@ -686,12 +797,12 @@ A&ntilde;ade sencillamente <code><INCLURE{fond=fonds/visiteurs_connectes}></code
 	'votre_choix' => 'Tu elecci&oacute;n:',
 
 	// W
-	'webmestres:description' => '<MODIF>Un {{webmaster}} en el sentido de SPIP es un {{administrador}} que tiene acceso al espacio FTP. Por omisi&oacute;n, y a partir de SPIP 2.0, el administrador es el <code>id_auteur=1</code> del sitio. Los webmasters definidos aqu&iacute; tienen el privilegio de no estar obligados a pasar por el FTP para validar las operaciones delicadas del sitio, como la actualizaci&oacute;n de la base de datos o la restauraci&oacute;n de un volcado.
+	'webmestres:description' => 'Un {{webmaster}} en el sentido de SPIP es un {{administrador}} que tiene acceso al espacio FTP. Por omisi&oacute;n, y a partir de SPIP 2.0, el administrador es el <code>id_auteur=1</code> del sitio. Los webmasters definidos aqu&iacute; tienen el privilegio de no estar obligados a pasar por el FTP para validar las operaciones delicadas del sitio, como la actualizaci&oacute;n de la base de datos o la restauraci&oacute;n de un volcado.
 
 Webmaster(s) actual(es): {@_CS_LISTE_WEBMESTRES@}.
 _ Administrador(es) elegible(s): {@_CS_LISTE_ADMINS@}.
 
-Al ser webmaster tu mismo, aqu&iacute; tienes permisos para modificar esta lista de ids -- separadas por dos puntos &laquo;&nbsp;:&nbsp;&raquo; si son varias. Ejemplo: &laquo;1:5:6&raquo;.[[%webmestres%]]',
+Al ser webmaster tu mismo, aqu&iacute; tienes permisos para modificar esta lista de ids -- separadas por dos puntos &laquo;&nbsp;:&nbsp;&raquo; si son varias. Ejemplo: &laquo;1:5:6&raquo;.[[%webmestres%]]', # MODIF
 	'webmestres:nom' => 'Lista de webmasters',
 
 	// X

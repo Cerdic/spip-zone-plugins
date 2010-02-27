@@ -18,6 +18,23 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'SPIP_liens:description1' => '@puce@ SPIP tien previstu un estilu CSS pa los enllaces &laquo;~mailto:&raquo;: un sobre peque&ntilde;u tendr&iacute;a que apaecer delantre de cada enllaz lligau a un corr&eacute;u; pero como hai &ntilde;avegadores que nun puen amosalo (notablemente IE6, IE7 y SAF3), t&uacute; decides si quies mantener esta carauter&iacute;stica.
 _ Enllaz de preba: [->test@test.com] (recarga la p&aacute;xina pa prebar).[[%enveloppe_mails%]]',
 	'SPIP_liens:nom' => 'SPIP y los enllaces… esternos',
+	'SPIP_tailles:description' => '@puce@ Afin d\'all&eacute;ger la m&eacute;moire de votre serveur, SPIP vous permet de limiter les dimensions (hauteur et largeur) et la taille du fichier des images, logos ou documents joints aux divers contenus de votre site. Si un fichier d&eacute;passe la taille indiqu&eacute;e, le formulaire enverra bien les donn&eacute;es mais elles seront d&eacute;truites et SPIP n\'en tiendra pas compte, ni dans le r&eacute;pertoire IMG/, ni en base de donn&eacute;es. Un message d\'avertissement sera alors envoy&eacute; &agrave; l\'utilisateur.
+
+Une valeur nulle ou non renseign&eacute;e correspond &agrave; une valeur illimit&eacute;e.
+[[Hauteur : %img_Hmax% pixels]][[->Largeur : %img_Wmax% pixels]][[->Poids du fichier : %img_Smax% Ko]]
+[[Hauteur : %logo_Hmax% pixels]][[->Largeur : %logo_Wmax% pixels]][[->Poids du fichier : %logo_Smax% Ko]]
+[[Poids du fichier : %doc_Smax% Ko]]
+
+@puce@ D&eacute;finissez ici l\'espace maximal r&eacute;serv&eacute; aux fichiers distants que SPIP pourrait t&eacute;l&eacute;charger (de serveur &agrave; serveur) et stocker sur votre site. La valeur par d&eacute;faut est ici de 16 Mo.[[%copie_Smax% Mo]]
+
+@puce@ Afin d\'&eacute;viter un d&eacute;passement de m&eacute;moire PHP dans le traitement des grandes images par la librairie GD2, SPIP teste les capacit&eacute;s du serveur et peut donc refuser de traiter les trop grandes images. Il est possible de d&eacute;sactiver ce test en d&eacute;finissant manuellement le nombre maximal de pixels support&eacute;s pour les calculs.
+
+La valeur de 1~000~000 pixels semble correcte pour une configuration avec peu de m&eacute;moire. Une valeur nulle ou non renseign&eacute;e entra&icirc;nera le test du serveur.
+[[%img_GDmax% pixels au maximum]]
+
+@puce@ La librairie GD2 permet d\'ajuster la qualit&eacute; de compression des images JPG. Un pourcentage &eacute;lev&eacute; correspond &agrave; une qualit&eacute; &eacute;lev&eacute;e.
+[[%img_GDqual% %]]', # NEW
+	'SPIP_tailles:nom' => 'Limites m&eacute;moire', # NEW
 
 	// A
 	'acces_admin' => 'Accesu alministraores:',
@@ -25,8 +42,11 @@ _ Enllaz de preba: [->test@test.com] (recarga la p&aacute;xina pa prebar).[[%env
 	'action_rapide_non' => 'Aici&oacute;n r&aacute;pida, disponible de magar que actives esta ferramienta:',
 	'admins_seuls' => 'Nam&aacute;i los alministradores',
 	'attente' => 'N\'espera...',
-	'auteur_forum:description' => '<MODIF>Encamienta a tolos autores de mensaxes p&uacute;blicos escribir (&iexcl;polo menos una lletra!) nel campu &laquo;@_CS_FORUM_NOM@&raquo; col fin d\'evitar los mensaxes totalmente an&oacute;nimos.',
+	'auteur_forum:description' => 'Encamienta a tolos autores de mensaxes p&uacute;blicos escribir (&iexcl;polo menos una lletra!) nel campu &laquo;@_CS_FORUM_NOM@&raquo; col fin d\'evitar los mensaxes totalmente an&oacute;nimos.', # MODIF
 	'auteur_forum:nom' => 'Ensin foros an&oacute;nimos',
+	'auteur_forum_deux' => 'Ou, au moins l\'un des deux champs pr&eacute;c&eacute;dents', # NEW
+	'auteur_forum_email' => 'Le champ &laquo;@_CS_FORUM_EMAIL@&raquo;', # NEW
+	'auteur_forum_nom' => 'Le champ &laquo;@_CS_FORUM_NOM@&raquo;', # NEW
 	'auteurs:description' => 'Esta ferramienta configura l\'aspeutu de [la p&aacute;xina de los autores->./?exec=auteurs], na parte privada.
 
 @puce@ Define equ&iacute; el n&uacute;mberu m&aacute;simu d\'autores a amosar nel cuadru central de la p&aacute;xina d\'autores. Darr&eacute;u, af&iacute;tarase una compaxinaci&oacute;n.[[%max_auteurs_page%]]
@@ -36,9 +56,12 @@ _ Enllaz de preba: [->test@test.com] (recarga la p&aacute;xina pa prebar).[[%env
 	'auteurs:nom' => 'P&aacute;xina d\'autores',
 
 	// B
+	'barres_typo_edition' => 'Edtition des contenus', # NEW
+	'barres_typo_forum' => 'Messages de Forum', # NEW
+	'barres_typo_intro' => 'Le plugin &laquo;Porte-Plume&raquo; a &eacute;t&eacute; d&eacute;tect&eacute;. Veuillez choisir ici les barres typographiques o&ugrave; certains boutons seront ins&eacute;r&eacute;s.', # NEW
 	'basique' => 'B&aacute;sica',
 	'blocs:aide' => 'Bloques Desplegables: <b>&lt;bloc&gt;&lt;/bloc&gt;</b> (alias: <b>&lt;invisible&gt;&lt;/invisible&gt;</b>) y <b>&lt;visible&gt;&lt;/visible&gt;</b>',
-	'blocs:description' => '<MODIF>Te permite crear bloques que puen facese visibles o invisibles al calcar nel so t&iacute;tulu.
+	'blocs:description' => 'Te permite crear bloques que puen facese visibles o invisibles al calcar nel so t&iacute;tulu.
 
 @puce@ {{Nos testos SPIP}}: los redactores disponen de les nueves balices &lt;bloc&gt; (o &lt;invisible&gt;) y &lt;visible&gt; pa utilizar nos testos as&iacute;: 
 
@@ -63,7 +86,7 @@ _ Enllaz de preba: [->test@test.com] (recarga la p&aacute;xina pa prebar).[[%env
 
 @puce@ si marques &laquo;s&iacute;&raquo; embaxo, l\'est&aacute;u de los bloques numberaos atroxarase nuna cookie demientres la sesion, pa conservar l\'aspeutu de la p&aacute;xina en casu de volver.[[%blocs_cookie%]]
 
-@puce@ La Navaya Suiza utiliza por omisi&oacute;n la etiqueta HTML &lt;h4&gt; pal t&iacute;tulu de los bloques estenderexables. Equ&iacute; pue escoyese otra etiqueta &lt;hN&gt;:&nbsp;[[%bloc_h4%]]',
+@puce@ La Navaya Suiza utiliza por omisi&oacute;n la etiqueta HTML &lt;h4&gt; pal t&iacute;tulu de los bloques estenderexables. Equ&iacute; pue escoyese otra etiqueta &lt;hN&gt;:&nbsp;[[%bloc_h4%]]', # MODIF
 	'blocs:nom' => 'Bloques Desplegables',
 	'boites_privees:description' => 'Toes les caxes descrites embaxo apaecen per dayuri na parte privada.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]][[->%bp_urls_propres%]][[->%bp_tri_auteurs%]]
 - {{Les revisiones de La Navaya Suiza}}: un cuadru na presente p&aacute;xina de configuraci&oacute;n, que indica les caberes modificaciones amest&aacute;es al c&oacute;digu del plugin ([Source->@_CS_RSS_SOURCE@]).
@@ -75,7 +98,7 @@ _ Enllaz de preba: [->test@test.com] (recarga la p&aacute;xina pa prebar).[[%env
 	'boites_privees:nom' => 'Caxes privaes',
 	'bp_tri_auteurs' => 'Ordenaciones d\'autores',
 	'bp_urls_propres' => 'Les URLs propies',
-	'brouteur:description' => '<MODIF>Utilizar el selector d\'estaya n\'AJAX a partir de %rubrique_brouteur% estaya(es)',
+	'brouteur:description' => 'Utilizar el selector d\'estaya n\'AJAX a partir de %rubrique_brouteur% estaya(es)', # MODIF
 	'brouteur:nom' => 'Axuste del selector d\'estaya',
 
 	// C
@@ -95,6 +118,8 @@ _ Enllaz de preba: [->test@test.com] (recarga la p&aacute;xina pa prebar).[[%env
 	'chatons:description' => 'Inxerta imaxes (o emoticonos pa los {chats}) en tolos testos nos que apaeza una cadena de tipu <code>:nome</code>.
 _ Esta ferramienta camuda esos atayos poles imaxes del mesmu nome qu\'alcuentre nel direutoriu <code>mon_squelette_toto/img/chatons/</code> o, por omisi&oacute;n, nel direutoriu <code>couteau_suisse/img/chatons/</code>.',
 	'chatons:nom' => 'Emoticonos',
+	'citations_bb:description' => 'Afin de respecter les usages en HTML dans les contenus SPIP de votre site (articles, rubriques, etc.), cet outil remplace les balises &lt;quote&gt; par des balises &lt;q&gt; quand il n\'y a pas de retour &agrave; la ligne. En effet, les citations courtes doivent &ecirc;tre entour&eacute;es par &lt;q&gt; et les citations contenant des paragraphes par &lt;blockquote&gt;.', # NEW
+	'citations_bb:nom' => 'Citations bien balis&eacute;es', # NEW
 	'class_spip:description1' => 'Equ&iacute; vas poder definir dellos atayos de SPIP. Un valor vac&iacute;u ye lo mesmo que utilizar el valor por omisi&oacute;n.[[%racc_hr%]]',
 	'class_spip:description2' => '@puce@ {{Los atayos de SPIP}}.
 
@@ -135,11 +160,11 @@ Dec&aacute;tate: al modificar esti segundu estilu, pierdes los estilos est&aacut
 	'corbeille:nom' => 'La papelera',
 	'corbeille_objets' => '@nb@ oxeto(s) na papelera.',
 	'corbeille_objets_lies' => '@nb_lies@ enllaz(es) detectao(s).',
-	'corbeille_objets_vide' => 'Nun hai oxetos na papelera',
+	'corbeille_objets_vide' => 'Nun hai oxetos na papelera', # MODIF
 	'corbeille_objets_vider' => 'Desaniciar los oxetos seleicionaos',
 	'corbeille_vider' => 'Vaciar la papelera:',
 	'couleurs:aide' => 'Poner de colores: <b>[coul]testu[/coul]</b>@fond@ siendo <b>coul</b> = @liste@',
-	'couleurs:description' => '<MODIF>Permite aplica-yos facilmente colores a tolos testos del sitiu (art&iacute;culos, breves, t&iacute;tulos, foru, …) utilizando balices en atayos.
+	'couleurs:description' => 'Permite aplica-yos facilmente colores a tolos testos del sitiu (art&iacute;culos, breves, t&iacute;tulos, foru, …) utilizando balices en atayos.
 
 Dos exemplos id&eacute;nticos pa camudar la color del testu:@_CS_EXEMPLE_COULEURS2@
 
@@ -147,21 +172,23 @@ Idem pa camudar el fondu, si la opci&oacute;n d\'embaxo lo permite:@_CS_EXEMPLE_
 
 [[%couleurs_fonds%]]
 [[%set_couleurs%]][[->%couleurs_perso%]]
-@_CS_ASTER@El formatu d\'estes balices personalizaes tien que llistar les colores esistentes o definir pareyes &laquo;baliza=color&raquo;, too separtao por comes. Exemplos : &laquo;gris, bermeyo&raquo;, &laquo;suave=mariello, fuerte=bermeyo&raquo;, &laquo;baxu=#99CC11, altu=brown&raquo; o tambi&eacute;n &laquo;gris=#DDDDCC, bermeyo=#EE3300&raquo;. Pal primer y l\'&uacute;ltimu exemplu, les balices autorizaes son: <code>[gris]</code> y <code>[bermeyo]</code> (<code>[fond gris]</code> y <code>[fond bermeyo]</code> si los fondos tan permit&iacute;os).',
+@_CS_ASTER@El formatu d\'estes balices personalizaes tien que llistar les colores esistentes o definir pareyes &laquo;baliza=color&raquo;, too separtao por comes. Exemplos : &laquo;gris, bermeyo&raquo;, &laquo;suave=mariello, fuerte=bermeyo&raquo;, &laquo;baxu=#99CC11, altu=brown&raquo; o tambi&eacute;n &laquo;gris=#DDDDCC, bermeyo=#EE3300&raquo;. Pal primer y l\'&uacute;ltimu exemplu, les balices autorizaes son: <code>[gris]</code> y <code>[bermeyo]</code> (<code>[fond gris]</code> y <code>[fond bermeyo]</code> si los fondos tan permit&iacute;os).', # MODIF
 	'couleurs:nom' => 'Too en collores',
 	'couleurs_fonds' => ', <b>[fond&nbsp;coul]testu[/coul]</b>, <b>[bg&nbsp;coul]testu[/coul]</b>',
-	'cs_comportement:description' => '<MODIF>@puce@ {{Logs.}} Atopa bayurosa informaci&oacute;n tocante al funcionamentu de la Navaya Suiza nos archivos {spip.log} que puen alcontrase nel direutoriu: {@_CS_DIR_TMP@}[[%log_couteau_suisse%]]
+	'cs_comportement:description' => '@puce@ {{Logs.}} Atopa bayurosa informaci&oacute;n tocante al funcionamentu de la Navaya Suiza nos archivos {spip.log} que puen alcontrase nel direutoriu: {@_CS_DIR_TMP@}[[%log_couteau_suisse%]]
 
 @puce@ {{Opciones SPIP.}} SPIP ordena los plugins siguiendo un orde espec&iacute;ficu. A la fin de tar seguru que la Navaya Suiza sea el primeru pa remanar dende eh&iacute; delles opciones de SPIP, marca la opci&oacute;n siguiente. Si los permisos del sirvidor lo permiten, l\'archivu {@_CS_FILE_OPTIONS@} camudarase autom&aacute;ticamente pa amesta-y l\'archivu {@_CS_DIR_TMP@couteau-suisse/mes_spip_options.php}.
 [[%spip_options_on%]]
 
-@puce@ {{Peticiones esternes.}} La Navaya Suiza compreba davezu la esistencia d\'una versi&oacute;n m&aacute;s reciente del so c&oacute;digu e informa na p&aacute;xina de configuraci&oacute;n si hubiera una actualizaci&oacute;n disponible. Si les peticiones esternes del to sirvidor dan problemes, marca la caxa siguiente.[[%distant_off%]]',
+@puce@ {{Peticiones esternes.}} La Navaya Suiza compreba davezu la esistencia d\'una versi&oacute;n m&aacute;s reciente del so c&oacute;digu e informa na p&aacute;xina de configuraci&oacute;n si hubiera una actualizaci&oacute;n disponible. Si les peticiones esternes del to sirvidor dan problemes, marca la caxa siguiente.[[%distant_off%]]', # MODIF
 	'cs_comportement:nom' => 'Comportamientu de la Navaya Suiza',
 	'cs_distant_off' => 'Les comprebaciones de versiones distintes',
+	'cs_distant_outils_off' => 'Les outils du Couteau Suisse ayant des fichiers distants', # NEW
 	'cs_log_couteau_suisse' => 'Los rexistros detallaos de la Navaya Suiza',
 	'cs_reset' => '&iquest;Confirmes que qui&eacute;s reaniciar dafechu la Navaya Suiza?',
 	'cs_reset2' => 'Toles ferramientes actualmente actives van desactivase y van reaniciase sos par&aacute;metros.',
-	'cs_spip_options_on' => '<MODIF>Les opciones de SPIP en &laquo;@_CS_FILE_OPTIONS@&raquo;',
+	'cs_spip_options_erreur' => 'Attention : la modification du ficher &laquo;<html>@_CS_FILE_OPTIONS@</html>&raquo; a &eacute;chou&eacute; !', # NEW
+	'cs_spip_options_on' => 'Les opciones de SPIP en &laquo;@_CS_FILE_OPTIONS@&raquo;', # MODIF
 
 	// D
 	'decoration:aide' => 'Decoraci&oacute;n: <b>&lt;baliza&gt;test&lt;/baliza&gt;</b>, con <b>baliza</b> = @liste@',
@@ -179,7 +206,7 @@ El par&aacute;metru {type} d\'enriba pue tener tres valores:
 
 [[%decoration_styles%]]',
 	'decoration:nom' => 'Decoraci&oacute;n',
-	'decoupe:aide' => 'Bloque de lling&uuml;etes : <b>&lt;onglets>&lt;/onglets></b><br />Separtador de p&aacute;xines o de lling&uuml;etes: @sep@',
+	'decoupe:aide' => 'Bloque de lling&uuml;etes : <b>&lt;onglets>&lt;/onglets></b><br/>Separtador de p&aacute;xines o de lling&uuml;etes: @sep@', # MODIF
 	'decoupe:aide2' => 'Alias:&nbsp;@sep@',
 	'decoupe:description' => '@puce@ Divide la presentaci&oacute;n p&uacute;blica d\'un art&iacute;culu en delles p&aacute;xines gracies a una paxinaci&oacute;n autom&aacute;tica. Nam&aacute;i pon nel art&iacute;culu cuatro signos m&aacute;s consecutivos (<code>++++</code>) nel llugar u vaya tar el corte.
 
@@ -195,19 +222,28 @@ Esta ferramienta puede acoplase con &laquo;[.->sommaire]&raquo;.',
 	'desactiver_flash:description' => 'Desanicia los oxetos flash de les p&aacute;xines del sitiu web y les camuda pol conten&iacute;u alternativu asociau.',
 	'desactiver_flash:nom' => 'Desactiva los oxetos flash',
 	'detail_balise_etoilee' => '{{Attention}}: Compreba bien l\'usu que faen les cadarmes de les balices con asteriscu. Los procesos d\'esta ferramienta nun s\'aplicar&aacute;n a: @bal@.',
+	'detail_disabled' => 'Param&egrave;tres non modifiables :', # NEW
 	'detail_fichiers' => 'Archivos:',
+	'detail_fichiers_distant' => 'Fichiers distants :', # NEW
 	'detail_inline' => 'C&oacute;digu en llinia:',
-	'detail_jquery2' => '<MODIF>Esta ferramienta necesita la llibrer&iacute;a {jQuery}.',
+	'detail_jquery2' => 'Esta ferramienta necesita la llibrer&iacute;a {jQuery}.', # MODIF
 	'detail_jquery3' => '{{Atenci&oacute;n}}: esta ferramienta necesita el plugin [jQuery pa SPIP 1.92->http://files.spip.org/spip-zone/jquery_192.zip] pa funcionar correutamente con esta versi&oacute;n de SPIP.',
 	'detail_pipelines' => 'Tuber&iacute;es:',
+	'detail_raccourcis' => 'Voici la liste des raccourcis typographiques reconnus par cet outil.', # NEW
 	'detail_traitements' => 'Tratamientos:',
+	'distant_aide' => 'Cet outil requiert des fichiers distants qui doivent tous &ecirc;tre correctement install&eacute;s en librairie. Avant d\'activer cet outil ou d\'actualiser ce cadre, assurez-vous que les fichiers requis sont bien pr&eacute;sents sur le serveur distant.', # NEW
+	'distant_charge' => 'Fichier correctement t&eacute;l&eacute;charg&eacute; et install&eacute; en librairie.', # NEW
+	'distant_charger' => 'Lancer le t&eacute;l&eacute;chargement', # NEW
+	'distant_echoue' => 'Erreur sur le chargement distant, cet outil risque de ne pas fonctionner !', # NEW
+	'distant_inactif' => 'Fichier introuvable (outil inactif).', # NEW
+	'distant_present' => 'Fichier pr&eacute;sent en librairie depuis le @date@.', # NEW
 	'dossier_squelettes:description' => 'Modifica la carpeta de cadarma utilizada. Por exemplu: "squelettes/miocadarma". Pues escribir dellos direutorios separtaos por dos puntos <html>&laquo;&nbsp;:&nbsp;&raquo;</html>. Si dexes vac&iacute;u el cuadru siguiente (o escribiendo "dist"), sedr&aacute; la cadarma orixinal "dist" que ufre SPIP la que se use.[[%dossier_squelettes%]]',
 	'dossier_squelettes:nom' => 'Direutoriu de la cadarma',
 
 	// E
 	'effaces' => 'Desaniciaos',
-	'en_travaux:description' => '<MODIF>Permite amosar un mensaxe personalizable, demientres una fase de mantenimientu, en tou el sitiu p&uacute;blicu y, eventualmente na parte privada.
-[[%message_travaux%]][[%titre_travaux%]][[%admin_travaux%]][[%prive_travaux%]]',
+	'en_travaux:description' => 'Permite amosar un mensaxe personalizable, demientres una fase de mantenimientu, en tou el sitiu p&uacute;blicu y, eventualmente na parte privada.
+[[%message_travaux%]][[%titre_travaux%]][[%admin_travaux%]][[%prive_travaux%]]', # MODIF
 	'en_travaux:nom' => 'Sitiu n\'obres',
 	'erreur:bt' => '<span style=\\"color:red;\\">Atenci&oacute;n :</span> la barra tipogr&aacute;fica (versi&oacute;n @version@) paez antigua.<br />La Navaya Suiza ye compatible con una versi&oacute;n mayor o igual a @mini@.',
 	'erreur:description' => '&iexcl;falta la id na definici&oacute;n de la ferramienta!',
@@ -224,9 +260,9 @@ Esta ferramienta puede acoplase con &laquo;[.->sommaire]&raquo;.',
 	// F
 	'f_jQuery:description' => 'Torga l\'instalaci&oacute;n de {jQuery} na parte p&uacute;blica col env&iacute;s d\'aforrar un poco de &laquo;tiempu de m&aacute;quina&raquo;. Esta biblioteca ([->http://jquery.com/]) aporta enforma de comodid&aacute; na programaci&oacute;n de JavaScript y pue utilizase por ciertos plugins. SPIP lo utiliza na so parte privada.
 
-Atenci&oacute;n: delles ferramientes de la Navaya Suiza necesiten les funciones de {jQuery}. ',
+Atenci&oacute;n: delles ferramientes de la Navaya Suiza necesiten les funciones de {jQuery}. ', # MODIF
 	'f_jQuery:nom' => 'Desactiva jQuery',
-	'filets_sep:aide' => 'Moldures de Dixebra: <b>__i__</b> onde <b>i</b> ye un n&uacute;mberu.<br />Otres moldures disponibles: @liste@',
+	'filets_sep:aide' => 'Moldures de Dixebra: <b>__i__</b> onde <b>i</b> ye un n&uacute;mberu.<br />Otres moldures disponibles: @liste@', # MODIF
 	'filets_sep:description' => 'Amesta moldures de dixebra, personalizables con les fueyes d\'estilu, en tolos testos de SPIP.
 _ La sintaxis ye: "__code__", onde "code" representa o el n&uacute;mberu d’identificaci&oacute;n (de 0 &agrave; 7) de la moldura a amestar en relaci&oacute;n direuta colos estilos correspondientes, o el nome d\'una imaxe allugada nel direutoriu plugins/couteau_suisse/img/filets.',
 	'filets_sep:nom' => 'Moldures de Dixebra',
@@ -261,17 +297,20 @@ Los bloques multi s\'amuesen siempre na llingua pid&iacute;a pol visitante.',
 @puce@ Ufrense dos soluciones pa xenerar el ventanucu autom&aacute;ticu que apaez cuando pases el mur enriba la pallabra. [[%glossaire_js%]]',
 	'glossaire:nom' => 'Glosariu internu',
 	'glossaire_css' => 'Soluci&oacute;n CSS',
+	'glossaire_erreur' => 'Le mot &laquo;@mot1@&raquo; rend ind&#233;tectable le mot &laquo;@mot2@&raquo;', # NEW
+	'glossaire_inverser' => 'Correction propos&#233;e : inverser l\'ordre des mots en base.', # NEW
 	'glossaire_js' => 'Soluci&oacute;n JavaScript',
+	'glossaire_ok' => 'La liste des @nb@ mot(s) &#233;tudi&#233;(s) en base semble correcte.', # NEW
 	'guillemets:description' => 'Camuda autom&aacute;ticamente les comines dereches (") por les comines tipogr&aacute;fiques de la llingua de composici&oacute;n. El camb&eacute;u, tresparente pa l\'usuariu, nun camuda el testu orixinal sinon s&oacute;lo l\'aspeutu final.',
 	'guillemets:nom' => 'Comines tipogr&aacute;fiques',
 
 	// H
 	'help' => '{{Esta p&aacute;xina &uacute;nicamente ye accesible pa los responsables del sitiu.}}<p>Da accesu a les diferentes funciones suplementaries aport&aacute;es pol plugin &laquo;{{La&nbsp;Navaya&nbsp;Suiza}}&raquo;.',
 	'help2' => 'Versi&oacute;n local: @version@',
-	'help3' => '<p>Enllaces de documentaci&oacute;n :<br />• [La&nbsp;Navaya&nbsp;Suiza->http://www.spip-contrib.net/?article2166]@contribs@</p><p>Reentamos:
+	'help3' => '<p>Enllaces de documentaci&oacute;n :<br/>• [La&nbsp;Navaya&nbsp;Suiza->http://www.spip-contrib.net/?article2166]@contribs@</p><p>Reentamos:
 _ • [De les ferramientes tapec&iacute;es|Tornar a l\'apariencia inicial d\'esta p&aacute;xina->@hide@]
 _ • [De tol plugin|Tornar a l\'est&aacute;u inicial del plugin->@reset@]@install@
-</p>',
+</p>', # MODIF
 	'horloge:description' => 'Ferramienta en cursu de desendolcu. Ufre un rel&oacute; JavaScript . Baliza: <code>#HORLOGE{format,utc,id}</code>. Modelu: <code><horloge></code>',
 	'horloge:nom' => 'Rel&oacute;',
 
@@ -309,25 +348,31 @@ Atenci&oacute;n, esta ferramienta necesita pa funcionar el plugin {jQuery} : {Ro
 	'js_defaut' => 'Por omisi&oacute;n',
 	'js_jamais' => 'Enxam&aacute;s',
 	'js_toujours' => 'Siempre',
+	'jslide_aucun' => 'Aucune animation', # NEW
+	'jslide_fast' => 'Glissement rapide', # NEW
+	'jslide_lent' => 'Glissement lent', # NEW
+	'jslide_millisec' => 'Glissement durant&nbsp;:', # NEW
+	'jslide_normal' => 'Glissement normal', # NEW
 
 	// L
 	'label:admin_travaux' => 'Zarrar el sitiu p&uacute;blicu por:',
 	'label:arret_optimisation' => 'Torgar que SPIP vac&iacute;e la papelera autom&aacute;ticamente:',
-	'label:auteurs_tout_voir' => '@_CS_CHOIX@',
+	'label:auteur_forum_nom' => 'Le visiteur doit sp&eacute;cifier :', # NEW
 	'label:auto_sommaire' => 'Creaci&oacute;n sistem&aacute;tica del sumariu:',
 	'label:balise_decoupe' => 'Activar la baliza #CS_DECOUPE:',
 	'label:balise_sommaire' => 'Activar la baliza #CS_SOMMAIRE:',
 	'label:bloc_h4' => 'Etiqueta HTML pa los t&iacute;tulos:',
 	'label:bloc_unique' => 'Solo un bloque abiertu na p&aacute;xina:',
 	'label:blocs_cookie' => 'Utilizaci&oacute;n de cookies:',
+	'label:blocs_slide' => 'Type d\'animation&nbsp;:', # NEW
+	'label:copie_Smax' => 'Espace maximal r&eacute;serv&eacute; aux copies locales :', # NEW
 	'label:couleurs_fonds' => 'Permitir los fondos:',
 	'label:cs_rss' => 'Activar:',
-	'label:debut_urls_libres' => '<:label:debut_urls_propres:>',
 	'label:debut_urls_propres' => 'Entamu de les URLs:',
-	'label:debut_urls_propres2' => '<:label:debut_urls_propres:>',
 	'label:decoration_styles' => 'Les tos balices d\'estilu personaliz&aacute;u:',
 	'label:derniere_modif_invalide' => 'Recalcular xusto dempu&eacute;s d\'un camb&eacute;u:',
 	'label:distant_off' => 'Desactivar:',
+	'label:doc_Smax' => 'Taille maximale des documents :', # NEW
 	'label:dossier_squelettes' => 'Direutoriu(os) a utilizar:',
 	'label:duree_cache' => 'Duraci&oacute;n de la cach&eacute; local:',
 	'label:duree_cache_mutu' => 'Duraci&oacute;n de la cach&eacute; en mutualizaci&oacute;n:',
@@ -337,18 +382,27 @@ Atenci&oacute;n, esta ferramienta necesita pa funcionar el plugin {jQuery} : {Ro
 	'label:glossaire_groupes' => 'Grupu(os) utilizao(s):',
 	'label:glossaire_js' => 'T&eacute;unica utilizada:',
 	'label:glossaire_limite' => 'N&uacute;mberu m&aacute;simu d\'enllaces creaos:',
+	'label:i_align' => 'Alignement du texte&nbsp;:', # NEW
+	'label:i_couleur' => 'Couleur de la police&nbsp;:', # NEW
+	'label:i_hauteur' => 'Hauteur de la ligne de texte (&eacute;q. &agrave; {line-height})&nbsp;:', # NEW
+	'label:i_largeur' => 'Largeur maximale de la ligne de texte&nbsp;:', # NEW
+	'label:i_padding' => 'Espacement autour du texte (&eacute;q. &agrave; {padding})&nbsp;:', # NEW
+	'label:i_police' => 'Nom du fichier de la police (dossiers {polices/})&nbsp;:', # NEW
+	'label:i_taille' => 'Taille de la police&nbsp;:', # NEW
+	'label:img_GDmax' => 'Calculs d\'images avec GD :', # NEW
+	'label:img_Hmax' => 'Taille maximale des images :', # NEW
 	'label:insertions' => 'Correiciones autom&aacute;tiques:',
 	'label:jcorner_classes' => 'Meyorar los requexos de les seleiciones siguientes:',
 	'label:jcorner_plugin' => 'Instalar el plugin {jQuery} siguiente:',
+	'label:jolies_ancres' => 'Calculer de jolies ancres :', # NEW
 	'label:lgr_introduction' => 'Estensi&oacute;n del resume:',
 	'label:lgr_sommaire' => 'Estensi&oacute;n del sumariu (9 a 99):',
 	'label:lien_introduction' => 'Puntos suspensivos calcables:',
 	'label:liens_interrogation' => 'Protexer les URLs:',
 	'label:liens_orphelins' => 'Enllaces calcables:',
 	'label:log_couteau_suisse' => 'Activar:',
-	'label:marqueurs_urls_propres' => 'Amestar los marcadores que dixebren los oxetos (SPIP>=2.0) :<br />(ex. : &laquo;&nbsp;-&nbsp;&raquo; pa -Mio-estaya-, &laquo;&nbsp;@&nbsp;&raquo; pa @Mio-sitiu@) ',
-	'label:marqueurs_urls_propres2' => '<:label:marqueurs_urls_propres:>',
-	'label:marqueurs_urls_propres_qs' => '<:label:marqueurs_urls_propres:>',
+	'label:logo_Hmax' => 'Taille maximale des logos :', # NEW
+	'label:marqueurs_urls_propres' => 'Amestar los marcadores que dixebren los oxetos (SPIP>=2.0) :<br/>(ex. : &laquo;&nbsp;-&nbsp;&raquo; pa -Mio-estaya-, &laquo;&nbsp;@&nbsp;&raquo; pa @Mio-sitiu@) ', # MODIF
 	'label:max_auteurs_page' => 'Autores por p&aacute;xina:',
 	'label:message_travaux' => 'El mensaxe de mantenimientu:',
 	'label:moderation_admin' => 'Validar autom&aacute;ticamente los mensaxes de los: ',
@@ -356,6 +410,7 @@ Atenci&oacute;n, esta ferramienta necesita pa funcionar el plugin {jQuery} : {Ro
 	'label:ouvre_ref' => 'Apertura y zarre de les llam&aacute;es a notes de pie de p&aacute;xina',
 	'label:paragrapher' => 'Facer p&aacute;rrafos siempre:',
 	'label:prive_travaux' => 'Accesibilid&aacute; de l\'espaciu priv&aacute;u por:',
+	'label:prof_sommaire' => 'Profondeur retenue (1 &agrave; 4) :', # NEW
 	'label:puce' => 'Marca p&uacute;blica &laquo;<html>-</html>&raquo;:',
 	'label:quota_cache' => 'Valor de la cuota:',
 	'label:racc_g1' => 'Entrada y salida pa poner en &laquo;<html>{{negrina}}</html>&raquo;:',
@@ -364,34 +419,27 @@ Atenci&oacute;n, esta ferramienta necesita pa funcionar el plugin {jQuery} : {Ro
 	'label:racc_i1' => 'Entrada y salida pa conse&ntilde;ar escritura en &laquo;<html>{it&aacute;liques}</html>&raquo;:',
 	'label:radio_desactive_cache3' => 'Usu de la cach&eacute;:',
 	'label:radio_desactive_cache4' => 'Usu de la cach&eacute;:',
-	'label:radio_filtrer_javascript3' => '@_CS_CHOIX@',
-	'label:radio_set_options4' => '@_CS_CHOIX@',
-	'label:radio_suivi_forums3' => '@_CS_CHOIX@',
 	'label:radio_target_blank3' => 'Ventanu nuevu pa los enllaces esternos:',
 	'label:radio_type_urls3' => 'Formatu de les URLs:',
 	'label:scrollTo' => 'Instalar los plugins {jQuery} siguientes:',
-	'label:separateur_urls_page' => 'Carauter de separaci&oacute;n \'type-id\'<br />(p.ex.: ?article-123):',
+	'label:separateur_urls_page' => 'Carauter de separaci&oacute;n \'type-id\'<br/>(p.ex.: ?article-123):', # MODIF
 	'label:set_couleurs' => 'Xuegu a utilizar:',
+	'label:spam_ips' => 'Adresses IP &agrave; bloquer :', # NEW
 	'label:spam_mots' => 'Secuencies torg&aacute;es:',
 	'label:spip_options_on' => 'Incluir:',
 	'label:spip_script' => 'Script de llamada:',
 	'label:style_h' => 'El to estilu:',
 	'label:style_p' => 'El to estilu:',
 	'label:suite_introduction' => 'Puntos de siguir:',
-	'label:terminaison_urls_arbo' => '<:label:terminaison_urls_page:>',
-	'label:terminaison_urls_libres' => '<:label:terminaison_urls_page:>',
 	'label:terminaison_urls_page' => 'Terminaci&oacute;n de les URLs (p.ex.: &laquo;.html&raquo;):',
-	'label:terminaison_urls_propres' => '<:label:terminaison_urls_page:>',
-	'label:terminaison_urls_propres_qs' => '<:label:terminaison_urls_page:>',
 	'label:titre_travaux' => 'T&iacute;tulu del mensaxe:',
 	'label:titres_etendus' => 'Activar l\'usu estend&iacute;u de les balices #TITRE_XXX:',
-	'label:tri_articles' => '<MODIF>To seleici&oacute;n:',
 	'label:url_arbo_minuscules' => 'Conservar les may&uacute;scules de los t&iacute;tulos nes URLs:',
-	'label:url_arbo_sep_id' => 'Carauter de separaci&oacute;n \'titre-id\' en casu de duplicaos :<br />(nun uses \'/\')',
+	'label:url_arbo_sep_id' => 'Carauter de separaci&oacute;n \'titre-id\' en casu de duplicaos :<br/>(nun uses \'/\')', # MODIF
 	'label:url_glossaire_externe2' => 'Enllaz al glosariu esternu:',
+	'label:url_max_propres' => 'Longueur maximale des URLs (caract&egrave;res) :', # NEW
 	'label:urls_arbo_sans_type' => 'Amosar el tipu d\'oxetu SPIP nes URLs:',
 	'label:urls_avec_id' => 'Una id sistem&aacute;tica, sicas&iacute;...',
-	'label:urls_minuscules' => '@_CS_CHOIX@',
 	'label:webmestres' => 'Llista de los webmasters del sitiu:',
 	'liens_en_clair:description' => 'Ponte a disposici&oacute;n el filtru: \'liens_en_clair\'. El testu probablemente tien enllaces d\'hipertestu que nun son visibles al imprentar. Esti filtru amesta ente corchetes el dest&iacute;n de cada enllaz calcable (enllaces esternos o mails). Atenci&oacute;n: nel mou impresi&oacute;n (par&aacute;metru \'cs=print\' o \'page=print\' na URL de la p&aacute;xina), esti funcionamientu apl&iacute;case autom&aacute;ticamente.',
 	'liens_en_clair:nom' => 'Enllaces en claro',
@@ -415,6 +463,12 @@ _ • {Predetermin&aacute;u}: reemplazu autom&aacute;ticu d\'orixe (a partir de 
 	// M
 	'mailcrypt:description' => 'Mazcarita toos los enllaces de corr&eacute;u presentes nos testos y los camuda por un enllaz JavaScript que permite lo mesmo activar la mensaxer&iacute;a del llector. Esta ferramienta escontra\'l corr&eacute;u puxarra tenta torgar que los robots collechen les se&ntilde;es electr&oacute;niques escrites en claro nos foros o nes balices de les tos cadarmes.',
 	'mailcrypt:nom' => 'MailCrypt',
+	'maj_auto:description' => 'Cet outil vous permet de g&eacute;rer facilement la mise &agrave; jour de vos diff&eacute;rents plugins, r&eacute;cup&eacute;rant notamment le num&eacute;ro de r&eacute;vision contenu dans le fichier <code>svn.revision</code> et le comparant avec celui trouv&eacute; sur <code>zone.spip.org</code>.
+
+La liste ci-dessus offre la possibilit&eacute; de lancer le processus de mise &agrave; jour automatique de SPIP sur chacun des plugins pr&eacute;alablement install&eacute;s dans le dossier <code>plugins/auto/</code>. Les autres plugins se trouvant dans le dossier <code>plugins/</code> sont simplement list&eacute;s &agrave; titre d\'information. Si la r&eacute;vision distante n\'a pas pu &ecirc;tre trouv&eacute;e, alors tentez de proc&eacute;der manuellement &agrave; la mise &agrave; jour du plugin.
+
+Note : les paquets <code>.zip</code> n\'&eacute;tant pas reconstruits instantan&eacute;ment, il se peut que vous soyez oblig&eacute; d\'attendre un certain d&eacute;lai avant de pouvoir effectuer la totale mise &agrave; jour d\'un plugin tout r&eacute;cemment modifi&eacute;.', # NEW
+	'maj_auto:nom' => 'Mises &agrave; jour automatiques', # NEW
 	'message_perso' => 'Candiales gracies a los traductores que pasaren per equ&iacute;. Pat ;-)',
 	'moderation_admins' => 'alministradores autentificaos',
 	'moderation_message' => 'Esti foru ta llend&aacute;u a priori: lo que vienes de mandar nun apaecer&aacute; hasta que tea valid&aacute;u por un alministrador del sitiu, a menos que teas identific&aacute;u y autoriz&aacute;u a escribir direutamente.',
@@ -442,8 +496,8 @@ _ • {Predetermin&aacute;u}: reemplazu autom&aacute;ticu d\'orixe (a partir de 
 	'outil_inactif' => 'Ferramienta inactiva',
 	'outil_intro' => 'Esta p&aacute;xina llista les carauter&iacute;stiques que ufre\'l plugin.<br /><br />Calcando nel nome de les ferramientes d\'embaxo, seleiciones los que vas poder camuda-yos l\'estau con l\'aida del bot&ograve;n central: les ferramientes actives desact&iacute;vense y <i>viceversa</i>. A cada clic, apaez la descripci&oacute;n embaxo de les llistes. Les categor&iacute;es son desplegables y les ferramientes puen tapecese. El doble-clic permite cambear r&aacute;pidamente de ferramienta.<br /><br />Pal primer usu, encami&eacute;ntase activar les ferramientes una a una, por si acasu apaecen incompatibilidaes cola to cadarma, con SPIP o con otros plugins.<br /><br />Nota: la simple carga d\'esta p&aacute;xina recompila dafechu toes les ferramientes de La Navaya Suiza.',
 	'outil_intro_old' => 'Esta interfaz ye antigua.<br /><br />Si alcuentres problemes cola utilizaci&oacute;n de la <a href=\'./?exec=admin_couteau_suisse\'>interfaz nueva</a>, afal&aacute;moste a coment&aacute;noslo nel foru de <a href=\'http://www.spip-contrib.net/?article2166\'>Spip-Contrib</a>.',
-	'outil_nb' => '@pipe@&nbsp;: @nb@&nbsp;ferramienta',
-	'outil_nbs' => '@pipe@&nbsp;: @nb@&nbsp;ferramientes',
+	'outil_nb' => '@pipe@ : @nb@ ferramienta', # MODIF
+	'outil_nbs' => '@pipe@ : @nb@ ferramientes', # MODIF
 	'outil_permuter' => '&iquest;Camudar la ferramienta: &laquo;@text@&raquo;?',
 	'outils_actifs' => 'Ferramientes actives:',
 	'outils_caches' => 'Ferramientes tapec&iacute;es:',
@@ -459,9 +513,10 @@ _ • {Predetermin&aacute;u}: reemplazu autom&aacute;ticu d\'orixe (a partir de 
 
 	// P
 	'pack_actuel' => 'Paquete @date@',
-	'pack_actuel_avert' => '<MODIF>Atenci&oacute;n, les sobrecargues nos define() o les globales nun se conse&ntilde;en equ&iacute;',
+	'pack_actuel_avert' => 'Atenci&oacute;n, les sobrecargues nos define() o les globales nun se conse&ntilde;en equ&iacute;', # MODIF
 	'pack_actuel_titre' => 'PAQUETE DE CONFIGURACI&Oacute;N ACTUAL DE LA NAVAYA SUIZA',
 	'pack_alt' => 'Ver los par&aacute;metros de configuraci&oacute;n en cursu',
+	'pack_delete' => 'Supression d\'un pack de configuration', # NEW
 	'pack_descrip' => 'El &laquo;Paquete de configuraci&oacute;n actual&raquo; axunta el conxuntu de par&aacute;metros de configuraci&oacute;n en cursu de La Navaya Suiza: l\'activaci&oacute;n de les ferramientes y el valor de les variables, si ye\'l casu.
 
 Si los permisos d\'escritura lo autoricen, el c&oacute;digu PHP d\'embaxo podr&aacute; amestase nel archivu {{/config/mes_options.php}} apaecer&aacute; nesta p&aacute;xina un enllaz pal reaniciu del paquete &laquo;{@pack@}&raquo;. Y ye dafechu posible camuda-y el nome.
@@ -470,19 +525,26 @@ Si reanicies el plugin calcando nun paquete, la Navaya Suiza reconfigurarase aut
 	'pack_du' => '• del paquete @pack@',
 	'pack_installe' => 'Afitamientu d\'un paquete de configuraci&oacute;n',
 	'pack_installer' => '&iquest;Tas seguru de que quies reinicializar la Navaya Suiza e instalar el paquete &laquo;&nbsp;@pack@&nbsp;&raquo;?',
-	'pack_nb_plrs' => '<MODIF>Actualmente hai @nb@ &laquo;&nbsp;paquetes de configuraci&oacute;n&nbsp;&raquo; disponibles.',
-	'pack_nb_un' => '<MODIF>Actualmente hai un &laquo;&nbsp;paquete de configuraci&oacute;n&nbsp;&raquo; disponible',
+	'pack_nb_plrs' => 'Actualmente hai @nb@ &laquo;&nbsp;paquetes de configuraci&oacute;n&nbsp;&raquo; disponibles.', # MODIF
+	'pack_nb_un' => 'Actualmente hai un &laquo;&nbsp;paquete de configuraci&oacute;n&nbsp;&raquo; disponible', # MODIF
 	'pack_nb_zero' => 'Nun hai deng&uacute;n &laquo;&nbsp;paquete de configuraci&oacute;n&nbsp;&raquo; disponible actualmente.',
 	'pack_outils_defaut' => 'Instalaci&oacute;n de les ferramientes por omisi&oacute;n',
 	'pack_sauver' => 'Guardar la configuraci&oacute;n actual',
 	'pack_sauver_descrip' => 'El bot&oacute;n d&eacute;mbaxo te permite enxertar direutamente nel archivu <b>@file@</b> los par&aacute;metros necesarios pa amesta-y un &laquo;&nbsp;paquete de configuraci&oacute;n&nbsp;&raquo; al men&uacute; de la izquierda. Esto va permitite posteriormente tornar nun clic la Navaya Suiza a l\'est&aacute;u nel que ta actualmente.',
+	'pack_supprimer' => '&Ecirc;tes-vous s&ucirc;r de vouloir supprimer le pack &laquo;&nbsp;@pack@&nbsp;&raquo; ?', # NEW
 	'pack_titre' => 'Configuraci&oacute;n Actual',
 	'pack_variables_defaut' => 'Instalaci&oacute;n de les variables por omisi&oacute;n',
 	'par_defaut' => 'Por omisi&oacute;n',
 	'paragrapher2:description' => 'La funci&oacute;n de SPIP <code>paragrapher()</code> amesta-yos balices &lt;p&gt; y &lt;/p&gt; a tolos testos que nun tengan p&aacute;rrafos. A la fin d\'iguar m&aacute;s finamente los estilos y les paxinaciones, tienes la posibilid&aacute; d\'uniformizar l\'aspeutu de los testos del sitiu Web.[[%paragrapher%]]',
 	'paragrapher2:nom' => 'Amestar p&aacute;rrafos',
 	'pipelines' => 'Tuber&iacute;es (pipelines) utiliz&aacute;es:',
-	'pucesli:description' => '<MODIF>Reemplaza les marques &laquo;-&raquo; (gui&oacute;n simple) de los art&iacute;culos por llistes anot&aacute;es &laquo;-*&raquo; (traduc&iacute;es en HTML como: &lt;ul>&lt;li>…&lt;/li>&lt;/ul>) nes que l\'estilu pue personalizase con css.',
+	'previsualisation:description' => 'Par d&eacute;faut, SPIP permet de pr&eacute;visualiser un article dans sa version publique et styl&eacute;e, mais uniquement lorsque celui-ci a &eacute;t&eacute; &laquo; propos&eacute; &agrave; l&rsquo;&eacute;valuation &raquo;. Hors cet outil permet aux auteurs de pr&eacute;visualiser &eacute;galement les articles pendant leur r&eacute;daction. Chacun peut alors pr&eacute;visualiser et modifier son texte &agrave; sa guise.
+
+@puce@ Attention : cette fonctionnalit&eacute; ne modifie pas les droits de pr&eacute;visualisation. Pour que vos r&eacute;dacteurs aient effectivement le droit de pr&eacute;visualiser leurs articles &laquo; en cours de r&eacute;daction &raquo;, vous devez l&rsquo;autoriser (dans le menu {[Configuration&gt;Fonctions avanc&eacute;es->./?exec=config_fonctions]} de l&rsquo;espace priv&eacute;).', # NEW
+	'previsualisation:nom' => 'Pr&eacute;visualisation des articles', # NEW
+	'puceSPIP' => 'Autoriser le raccourci &laquo;*&raquo;', # NEW
+	'puceSPIP_aide' => 'Une puce SPIP : <b>*</b>', # NEW
+	'pucesli:description' => 'Reemplaza les marques &laquo;-&raquo; (gui&oacute;n simple) de los art&iacute;culos por llistes anot&aacute;es &laquo;-*&raquo; (traduc&iacute;es en HTML como: &lt;ul>&lt;li>…&lt;/li>&lt;/ul>) nes que l\'estilu pue personalizase con css.', # MODIF
 	'pucesli:nom' => 'Marques guapes',
 
 	// Q
@@ -502,6 +564,8 @@ Si reanicies el plugin calcando nun paquete, la Navaya Suiza reconfigurarase aut
 
 	// S
 	'sauf_admin' => 'Toos, sacante los alministradores',
+	'sauf_admin_redac' => 'Tous, sauf les administrateurs et r&eacute;dacteurs', # NEW
+	'sauf_identifies' => 'Tous, sauf les auteurs identifi&eacute;s', # NEW
 	'set_options:description' => 'Seleiciona d\'oficiu el tipu d’interfaz privada (simplificada o avanzada) pa tolos redactores esistentes o futuros y desanicia el bot&oacute;n correspondiente na barra d\'iconos amenorgaos.[[%radio_set_options4%]]',
 	'set_options:nom' => 'Tipu d\'interfaz privada',
 	'sf_amont' => 'Enriba',
@@ -511,7 +575,7 @@ Si reanicies el plugin calcando nun paquete, la Navaya Suiza reconfigurarase aut
 	'smileys:aide' => 'Smileys: @liste@',
 	'smileys:description' => 'Enxerta smileys en toos los testos nos que apaeza un atayu de tipu <acronym>:-)</acronym>. Ideal pa los  foros.
 _ Ta disponible una baliza pa amosar una tabla de smileys nes cadarmes : #SMILEYS.
-_ Dise&ntilde;u d\'iconos: [Sylvain Michel->http://www.guaph.net/]',
+_ Dise&ntilde;u d\'iconos: [Sylvain Michel->http://www.guaph.net/]', # MODIF
 	'smileys:nom' => 'Smileys',
 	'soft_scroller:description' => 'Ufre-y al sitiu p&uacute;blicu un desplazamientu sele de la p&aacute;xina cuando un visitante calca nun enllaz que apunta pa un ancla: mui afayadizo pa evitar perdese nuna p&aacute;xina complexa o nun testu mui llargu...
 
@@ -531,21 +595,24 @@ _ • &Uacute;nicamente pa los art&iacute;culos que tengan la baliza <code>@_CS_
 @puce@ Por omisi&oacute;n, la Navaya Suiza enxerta el sumariu en cabeza de l\'art&iacute;culu autom&aacute;ticamente. Pero tienes la posibilida d\'allugar esti sumariu ayuri na cadarma gracies a una baliza #CS_SOMMAIRE que pues activar equ&iacute;:
 [[%balise_sommaire%]]
 
-Esti sumariu pue acoplase con: &laquo;&nbsp;[.->decoupe]&nbsp;&raquo;.',
-	'sommaire:nom' => 'Un sumariu autom&aacute;ticu',
+Esti sumariu pue acoplase con: &laquo;&nbsp;[.->decoupe]&nbsp;&raquo;.', # MODIF
+	'sommaire:nom' => 'Un sumariu autom&aacute;ticu', # MODIF
+	'sommaire_ancres' => 'Ancres choisies : <b><html>{{{Mon Titre&lt;mon_ancre&gt;}}}</html></b>', # NEW
 	'sommaire_avec' => 'Un testu con sumariu: <b>@_CS_AVEC_SOMMAIRE@</b>',
 	'sommaire_sans' => 'Un testu ensin sumariu: <b>@_CS_SANS_SOMMAIRE@</b>',
+	'sommaire_titres' => 'Intertitres hi&eacute;rarchis&eacute;s&nbsp;: <b><html>{{{*Titre}}}</html></b>, <b><html>{{{**Sous-titre}}}</html></b>, etc.', # NEW
 	'spam:description' => 'Tenta lluchar escontra los unv&iacute;os de mensaxes autom&aacute;ticos y gafientos na parte p&uacute;blica. Delles pallabres, igual que les balices en claro &lt;a>&lt;/a>, tan torg&aacute;es: encamienta a los redactores a usar los atayos pa enllaces de SPIP.
 
 Llista equ&iacute; les secuencies torg&aacute;es separtandoles con espacios. [[%spam_mots%]]
 • Pa una espresi&oacute;n con espacios, ponla ente comines.
 _ • Pa especificar una pallabra entera, m&eacute;tela ente par&eacute;ntesis. Exemplu:~{(premiu)}.
-_ • Pa una espresi&oacute;n regular, verifica bien la sintaxis y ponla dientro de barres y comines. Exemplu:~{<html>"/@test\\.(com|org|ast)/"</html>}.',
+_ • Pa una espresi&oacute;n regular, verifica bien la sintaxis y ponla dientro de barres y comines. Exemplu:~{<html>"/@test\\.(com|org|ast)/"</html>}.', # MODIF
 	'spam:nom' => 'Llucha escontra la puxarra',
+	'spam_ip' => 'Blocage IP de @ip@ :', # NEW
 	'spam_test_ko' => '&iexcl;Esti mensaxe bloquiarase pol filtru anti-SPAM!',
 	'spam_test_ok' => 'Esti mensaxe aceutarase pol filtru anti-SPAM.',
-	'spam_tester' => '&iexcl;Entamar la preba!',
-	'spam_tester_label' => 'Preba equ&iacute; la llista de secuencies torg&aacute;es:',
+	'spam_tester_bd' => 'Testez &eacute;galement votre votre base de donn&eacute;es et listez les messages qui auraient &eacute;t&eacute; bloqu&eacute;s par la configuration actuelle de l\'outil.', # NEW
+	'spam_tester_label' => 'Preba equ&iacute; la llista de secuencies torg&aacute;es:', # MODIF
 	'spip_cache:description' => '@puce@ La cach&eacute; ocupa ciertu espaciu en discu y SPIP puede limitar la cantid&aacute;. Un valor vac&iacute;u o igual a 0 significa que nun s\'aplica cuota denguna.[[%quota_cache% Mb]]
 
 @puce@ Cuando se fai una modificaci&oacute;n del conten&iacute;u del sitiu, SPIP invalida inmediatamente la cach&eacute; ensin esperar al siguiente c&aacute;lculu peri&oacute;dicu. Si el sitiu tien problemes de rendimientu por cuenta d\'una gran carga, puedes marcar &laquo;&nbsp;non&nbsp;&raquo; n\'esta opci&oacute;n.[[%derniere_modif_invalide%]]
@@ -553,13 +620,15 @@ _ • Pa una espresi&oacute;n regular, verifica bien la sintaxis y ponla dientro
 @puce@ Si la baliza #CACHE nun s\'alcuentra nes tos cadarmes llocales, SPIP considera por omisi&oacute;n que la cach&eacute; d\'una p&aacute;xina tien una vida m&aacute;sima de 24 hores enantes de volver a calculala. A la fin de xestionar meyor la carga del to sirvidor, puedes cambear equ&iacute; esti valor.[[%duree_cache% hores]]
 
 @puce@ Si tienes dellos sitios en mutualizaci&oacute;n, puedes especificar equ&iacute; el valor por omisi&oacute;n que se toma pa toos los sitios llocales (SPIP 2.0 mini).[[%duree_cache_mutu% hores]]',
-	'spip_cache:description1' => '@puce@ Por omisi&oacute;n, SPIP calcula toles p&aacute;xines p&uacute;bliques y ponles na cach&eacute; a la fin d\'acelerar la consulta. Desactivar temporalmente la cach&eacute; pue aidar mientres se desarrolla el sitiu. @_CS_CACHE_EXTENSION@[[%radio_desactive_cache3%]]',
+	'spip_cache:description1' => '@puce@ Por omisi&oacute;n, SPIP calcula toles p&aacute;xines p&uacute;bliques y ponles na cach&eacute; a la fin d\'acelerar la consulta. Desactivar temporalmente la cach&eacute; pue aidar mientres se desarrolla el sitiu. @_CS_CACHE_EXTENSION@[[%radio_desactive_cache3%]]', # MODIF
 	'spip_cache:description2' => '@puce@ Cuatro opciones pa tresnar el funcionamientu de la cach&eacute; de SPIP: <q1>
 _ • {Usu normal}: SPIP calcula toles p&aacute;xines p&uacute;bliques y les pon na cach&eacute; a la fin d\'acelerar la consulta. Tres d\'un ciertu plazu, la cach&eacute; vuelve a calculase y gu&aacute;rdase.
 _ • {Cach&eacute; permanente}: los plazos d\'anovaci&oacute;n de la cach&eacute; inorense.
 _ • {Ensin cach&eacute;}: desactivar temporalmente la cach&eacute; pue aidar nel desarrollo del sitiu. Equ&iacute;, nada nun se guarda nel discu.
 _ • {Control de cach&eacute;}: opci&oacute;n identica a la precedente, con escritura nel discu de tolos resultaos a la fin de podelos controlar si fai falta.</q1>[[%radio_desactive_cache4%]]',
 	'spip_cache:nom' => 'SPIP y la cach&eacute;…',
+	'spip_ecran:description' => 'D&eacute;termine la largeur d\'&eacute;cran impos&eacute;e &agrave; tous en partie priv&eacute;e. Un &eacute;cran &eacute;troit pr&eacute;sentera deux colonnes et un &eacute;cran large en pr&eacute;sentera trois. Le r&eacute;glage par d&eacute;faut laisse l\'utilisateur choisir, son choix &eacute;tant stock&eacute; dans un cookie.[[%spip_ecran%]]', # NEW
+	'spip_ecran:nom' => 'Largeur d\'&eacute;cran', # NEW
 	'stat_auteurs' => 'Autores por estatutu',
 	'statuts_spip' => '&Uacute;nicamente los estatutos SPIP siguientes:',
 	'statuts_tous' => 'Tolos estatutos',
@@ -582,6 +651,12 @@ Por exemplu, nun bucle pa (ARTICLES), #TITRE_SECTEUR dar&aacute; el t&iacute;tul
 La sintaxis <html>#TITRE_XXX{yy}</html> sop&oacute;rtase igualmente. Exemplu: <html>#TITRE_ARTICLE{10}</html> devolver&aacute; el t&iacute;tulu de l\'art&iacute;culu #10.[[%titres_etendus%]]',
 	'titre_parent:nom' => 'Balices #TITRE_PARENT/OBJET',
 	'titre_tests' => 'La Navaya Suiza - P&aacute;xina de prebes…',
+	'titres_typo:description' => 'Transforme tous les intertitres <html>&laquo; {{{Mon intertitre}}} &raquo;</html> en image typographique param&eacute;trable.[[%i_taille% pt]][[%i_couleur%]][[%i_police%
+
+Polices disponibles : @_CS_FONTS@]][[%i_largeur% px]][[%i_hauteur% pt]][[%i_padding% px]][[%i_align%]]
+
+Cet outil est compatible avec : &laquo;&nbsp;[.->sommaire]&nbsp;&raquo;.', # NEW
+	'titres_typo:nom' => 'Intertitres en image', # NEW
 	'tous' => 'Toos',
 	'toutes_couleurs' => 'Los 36 colores de los estilos css :@_CS_EXEMPLE_COULEURS@',
 	'toutmulti:aide' => 'Bloques multilling&uuml;es: <b><:trad:></b>',
@@ -595,20 +670,22 @@ La funci&oacute;n SPIP usada en PHP ye <code>_T(\'cadena\')</code> ensin argumen
 
  Nun t\'escaezas de verificar que la clave <code>\'cadena\'</code> tea bien definida nos archivos de les lling&uuml;es.',
 	'toutmulti:nom' => 'Bloques multilling&uuml;es',
+	'travaux_masquer_avert' => 'Masquer le cadre indiquant sur le site public qu\'une maintenance est en cours', # NEW
 	'travaux_nom_site' => '@_CS_NOM_SITE@',
 	'travaux_prochainement' => 'Esti sitiu volver&aacute; a tar en llinia pronto.
 _ Agradec&eacute;moste la comprensi&oacute;n.',
 	'travaux_titre' => '@_CS_TRAVAUX_TITRE@',
-	'tri_articles:description' => '<MODIF>Al &ntilde;avegar pola parte privada del sitiu ([->./?exec=auteurs]), equ&iacute; escueyes la ordenaci&oacute;n a utilizar pa amosar los art&iacute;culos dientro de les estayes.
+	'tri_articles:description' => 'Al &ntilde;avegar pola parte privada del sitiu ([->./?exec=auteurs]), equ&iacute; escueyes la ordenaci&oacute;n a utilizar pa amosar los art&iacute;culos dientro de les estayes.
 
 Les propuestes d\'embaxo b&aacute;sense na funci&oacute;n SQL \'ORDER BY\': nun utilices l\'orde personaliz&aacute;u m&aacute;s que si sabes lo que tas faciendo (campos disponibles: {id_article, id_rubrique, titre, soustitre, surtitre, statut, date_redac, date_modif, lang, etc.})
-[[%tri_articles%]][[->%tri_perso%]]',
-	'tri_articles:nom' => '<MODIF>Orde de los art&iacute;culos',
+[[%tri_articles%]][[->%tri_perso%]]', # MODIF
+	'tri_articles:nom' => 'Orde de los art&iacute;culos', # MODIF
+	'tri_groupe' => 'Tri sur l\'id du groupe (ORDER BY id_groupe)', # NEW
 	'tri_modif' => 'Guetar pola fecha d\'igua (ORDER BY date_modif DESC)',
 	'tri_perso' => 'Gueta SQL personalizada, ORDER BY sigu&iacute;o por:',
 	'tri_publi' => 'Guetar pola fecha d\'espublizamientu (ORDER BY date DESC)',
 	'tri_titre' => 'Guetar pol t&iacute;tulu (ORDER BY 0+titre,titre)',
-	'trousse_balises:description' => '<MODIF>Ferramienta en cursu de desendolcu. Ufre delles balices mui cencielles y enforma pr&aacute;ctiques pa les cadarmes.
+	'trousse_balises:description' => 'Ferramienta en cursu de desendolcu. Ufre delles balices mui cencielles y enforma pr&aacute;ctiques pa les cadarmes.
 
 @puce@ {{#BOLO}}: xenera un testu falsu d\'unos 3000 carauteres ("bolo" o "[?lorem ipsum]") nes cadarmes enantes de poneles nel so llugar. L\'argumentu opcional d\'esta funci&oacute;n conse&ntilde;a el llargor que se quier pal testu. Exemplu: <code>#BOLO{300}</code>. Esta baliza acepta toles pe&ntilde;eres de SPIP. Exemplu: <code>[(#BOLO|majuscules)]</code>.
 _ Tami&eacute;n hai disponible un modelu pa los conten&iacute;os: pon <code><bolo300></code> en cualquier zona de testu (cabecera, descripci&oacute;n, testu, etc.) pa tener 300 carauteres de testu falsu.
@@ -617,9 +694,9 @@ _ Tami&eacute;n hai disponible un modelu pa los conten&iacute;os: pon <code><bol
 
 - {{#CHR<html>{XX}</html>}}: baliza equivalente a <code>#EVAL{"chr(XX)"}</code> ye afayadiza pa conse&ntilde;ar carauteres especiales (el saltu de llinia por exemplu) o carauteres reservaoss pol compilador de SPIP (los corchetes o les llaves).
 
-@puce@ {{#LESMOTS}}: ',
+@puce@ {{#LESMOTS}}: ', # MODIF
 	'trousse_balises:nom' => 'Cax&oacute;n de balices',
-	'type_urls:description' => '<MODIF>@puce@ SPIP ufre una esbilla de xuegos d\'URLs pa fabricar los enllaces d\'accesu a les p&aacute;xines del sitiu Web.
+	'type_urls:description' => '@puce@ SPIP ufre una esbilla de xuegos d\'URLs pa fabricar los enllaces d\'accesu a les p&aacute;xines del sitiu Web.
 
 M&aacute;s info: [->http://www.spip.net/fr_article765.html]. La ferramienta &laquo;&nbsp;[.->boites_privees]&nbsp;&raquo; te permite ver na p&aacute;xina de cada oxetu SPIP la URL propia asociada.
 [[%radio_type_urls3%]]
@@ -659,7 +736,7 @@ _ Exemplu: <code>article.php3?id_article=123</code>
 </radio_type_urls3>
 
 @puce@ Si utilizes el formatu {page} d\'embaxo o si l\'oxetu solicit&aacute;u nun se reconocer&aacute;, pero ye posible escoyer {{el script de llamada}} a SPIP. Por omisi&oacute;n, SPIP escueye {spip.php}, pero {index.php} (exemplu de formatu: <code>/index.php?article123</code>) donde un valor vac&iacute;u (formatu: <code>/?article123</code>) funciona tami&eacute;n. Pa cualquier otru valor, necesites crear dafechu l\'archivu correspondiente na raiz de SPIP, a imaxe del que ya esiste: {index.php}.
-[[%spip_script%]]',
+[[%spip_script%]]', # MODIF
 	'type_urls:description1' => '@puce@ Si utilices un formatu bas&aacute;u en URLs &laquo;propies&raquo; ({propres}, {propres2}, {libres}, {arborescentes} o {propres_qs}), la Navaya Suiza pue:
 <q1>• Asegurase que la URL producida tea totalmente {{en min&uacute;scules}}.</q1>[[%urls_minuscules%]]
 <q1>• Provocar l\'amestamientu sistem&aacute;ticu de {{la id de l\'oxetu}} a la URL (como sufixu, prefixu, etc.).
@@ -694,7 +771,7 @@ Escueye equ&iacute; escribir como esponentes dellos atayos suplementarios, magar
 	'urls_choix_objet' => 'Edici&oacute;n de la base de la URL d\'un oxetu espec&iacute;ficu:',
 	'urls_edit_erreur' => 'El formatu actual de les URLs (&laquo;&nbsp;@type@&nbsp;&raquo;) nun permite la edici&oacute;n.',
 	'urls_enregistrer' => 'Grabar esta URL na base',
-	'urls_id_sauf_rubriques' => 'Encaboxar les estayes',
+	'urls_id_sauf_rubriques' => 'Encaboxar les estayes', # MODIF
 	'urls_minuscules' => 'Letres min&uacute;scules',
 	'urls_nouvelle' => 'Editar la URL &laquo;propia&raquo;:',
 	'urls_num_objet' => 'N&uacute;mberu:',
