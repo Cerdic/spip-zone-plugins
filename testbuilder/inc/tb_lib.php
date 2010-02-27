@@ -210,7 +210,7 @@ function tb_generate_new_blank_test($filename,$funcname){
 
 	$template = str_replace(
 					array('@funcname@','@essais_funcname@','@filename@','@date@'),
-					array($funcname,"essais_$funcname",$filename,strtotime('Y-m-d H:i')),
+					array($funcname,"essais_$funcname",$filename,date('Y-m-d H:i')),
 					$template
 					);
 	$d="";
@@ -288,6 +288,12 @@ function tb_error_handler($output)
     return $output;
 }
 
+/**
+ * Mapping de var_export pour utiliser dans array_map()
+ *
+ * @param string $var
+ * @return mixed
+ */
 function tb_export($var){
 	return var_export($var,true);
 }
