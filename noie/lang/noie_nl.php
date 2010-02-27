@@ -7,10 +7,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// I
-	'noie_info' => 'Om deze website (en de rest van Internet) op de best mogelijke manier te ervaren raden we je aan om over te stappen op een nieuwere versie van je browser. Actualiseer gratis je <a href="http://www.microsoft.com/windows/downloads/ie/getitnow.mspx">Internet Explorer</a>.Je mag ook een andere succesvol browser proeven, bijvoorbeeld: <a href="http://www.opera.com">Opera</a>, <a href="http://mozilla.com">FireFox</a> of <a href="http://www.apple.com/safari/download/">Safari</a>.
-<br />Als je deze boodschap op je werk ziet, neem dan contact op met je helpdesk.',
-	'noie_titre' => 'Weet je dat je met een verouderde browser werkt???',
+	// N
+	'noie_info' => 'Pour naviguer de fa&ccedil;on plus satisfaisante sur ce site et le reste du Web, nous vous recommandons d\'<strong>actualiser votre <a href="http://www.microsoft.com/france/windows/internet-explorer/">Internet Explorer</a></strong> ou d\'essayer un autre navigateur populaire comme <a href="http://www.mozilla-europe.org/fr/firefox/">Firefox</a>, <a href="http://www.google.fr/chrome">Chrome</a>, <a href="http://www.opera.com/">Opera</a> ou <a href="http://www.apple.com/fr/safari/">Safari</a>.', # NEW
+	'noie_titre' => 'Attention, votre Internet Explorer n\'est pas &agrave; jour&nbsp;!', # NEW
 
 	// T
 	'toocool_alt' => 'Te Cool voor IE',

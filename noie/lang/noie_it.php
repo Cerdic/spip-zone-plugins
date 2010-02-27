@@ -7,10 +7,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// I
-	'noie_info' => '<MODIF>Per ottenere la migliore esperienza possibile su questo sito web ti consigliamo di aggiornare il browser ad una versione pi&ugrave; recente. La versione corrente &egrave; <a href="http://www.microsoft.com/italy/windows/downloads/">Internet Explorer&nbsp;7</a> e <a href="http://www.microsoft.com/windows/Internet-explorer/beta/default.aspx">Internet Explorer&nbsp;8</a> &egrave; disponibile in versione beta. L\'aggiornamento &egrave; gratuito. Se stai utlizzando il PC al lavoro devi chiedere all\'amministratore di rete.
-<br />Se vuoi puoi provare anche qualche altro popolare browser Internet come <a href="http://www.mozilla-europe.org/it/firefox/">FireFox</a>, <a href="http://www.opera.com">Opera</a> o <a href="http://www.apple.com/it/safari/download/">Safari</a>.',
-	'noie_titre' => 'Lo sai che il tuo browser non &egrave; aggiornato?',
+	// N
+	'noie_info' => 'Pour naviguer de fa&ccedil;on plus satisfaisante sur ce site et le reste du Web, nous vous recommandons d\'<strong>actualiser votre <a href="http://www.microsoft.com/france/windows/internet-explorer/">Internet Explorer</a></strong> ou d\'essayer un autre navigateur populaire comme <a href="http://www.mozilla-europe.org/fr/firefox/">Firefox</a>, <a href="http://www.google.fr/chrome">Chrome</a>, <a href="http://www.opera.com/">Opera</a> ou <a href="http://www.apple.com/fr/safari/">Safari</a>.', # NEW
+	'noie_titre' => 'Attention, votre Internet Explorer n\'est pas &agrave; jour&nbsp;!', # NEW
 
 	// T
 	'toocool_alt' => 'Too Cool for IE',

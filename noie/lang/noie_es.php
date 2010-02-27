@@ -7,11 +7,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// I
-	'noie_info' => '<MODIF>Para obtener la mejor experiencia posible utilizando nuestra p&aacute;gina web te recomendamos que actualices tu navegador a una versi&oacute;n m&aacute;s reciente.
-La&nbsp;versi&oacute;n actual es <a href="http://www.microsoft.com/spain/windows/downloads/">Internet Explorer&nbsp;7</a> y <a href="http://www.microsoft.com/windows/Internet-explorer/beta/">Internet Explorer&nbsp;8</a> est&aacute; disponible como una versi&oacute;n beta. La actualizaci&oacute;n es gratuita. Si est&aacute;s utilizando un equipo en el trabajo solicita la actualizacion a tu Administrador de Sistemas.
-<br />Si deseas, tambi&eacute;n puede probar otros populares navegadores de Internet como <a href="http://www.mozilla-europe.org/es/firefox/">Firefox,</a> <a href="http://www.google.com/chrome/?hl=es">Chrome</a> y <a href="http://www.opera.com">Opera</a>.',
-	'noie_titre' => '&iquest;Sab&iacute;as que tu navegador no est&aacute; actualizado?',
+	// N
+	'noie_info' => 'Pour naviguer de fa&ccedil;on plus satisfaisante sur ce site et le reste du Web, nous vous recommandons d\'<strong>actualiser votre <a href="http://www.microsoft.com/france/windows/internet-explorer/">Internet Explorer</a></strong> ou d\'essayer un autre navigateur populaire comme <a href="http://www.mozilla-europe.org/fr/firefox/">Firefox</a>, <a href="http://www.google.fr/chrome">Chrome</a>, <a href="http://www.opera.com/">Opera</a> ou <a href="http://www.apple.com/fr/safari/">Safari</a>.', # NEW
+	'noie_titre' => 'Attention, votre Internet Explorer n\'est pas &agrave; jour&nbsp;!', # NEW
 
 	// T
 	'toocool_alt' => 'Demasiado Cool para IE',

@@ -7,10 +7,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// I
-	'noie_info' => 'To get the best possible experience using our website we recommend that you upgrade your browser to a newer version. Upgrade <a href="http://www.microsoft.com/windows/internet-explorer/default.aspx">Internet Explorer</a> or try some other popular Internet browsers like <a href="http://mozilla.com/en-US/firefox/firefox.html">FireFox</a>, <a href="http://www.opera.com">Opera</a> or <a href="http://www.apple.com/safari/">Safari</a>.
-<br />If you\'re using a PC at work you should contact your IT-administrator.',
-	'noie_titre' => 'Did you know that your browser is out of date?',
+	// N
+	'noie_info' => 'Pour naviguer de fa&ccedil;on plus satisfaisante sur ce site et le reste du Web, nous vous recommandons d\'<strong>actualiser votre <a href="http://www.microsoft.com/france/windows/internet-explorer/">Internet Explorer</a></strong> ou d\'essayer un autre navigateur populaire comme <a href="http://www.mozilla-europe.org/fr/firefox/">Firefox</a>, <a href="http://www.google.fr/chrome">Chrome</a>, <a href="http://www.opera.com/">Opera</a> ou <a href="http://www.apple.com/fr/safari/">Safari</a>.', # NEW
+	'noie_titre' => 'Attention, votre Internet Explorer n\'est pas &agrave; jour&nbsp;!', # NEW
 
 	// T
 	'toocool_alt' => 'Too Cool for IE',

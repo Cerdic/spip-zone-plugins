@@ -7,10 +7,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// I
-	'noie_info' => '<MODIF>Pentru o navigare satisf&#259;c&#259;toare pe acest site (ca de altfel &#351;i pe restul web-ului) v&#259; recomand&#259;m s&#259; face&#355;i o aducere la zi a navigatorului dumneavoastr&#259;.
-',
-	'noie_titre' => '&#350;tia&#355;i c&#259; navigatorul dumneavoastr&#259; este &icirc;nvechit ?',
+	// N
+	'noie_info' => 'Pour naviguer de fa&ccedil;on plus satisfaisante sur ce site et le reste du Web, nous vous recommandons d\'<strong>actualiser votre <a href="http://www.microsoft.com/france/windows/internet-explorer/">Internet Explorer</a></strong> ou d\'essayer un autre navigateur populaire comme <a href="http://www.mozilla-europe.org/fr/firefox/">Firefox</a>, <a href="http://www.google.fr/chrome">Chrome</a>, <a href="http://www.opera.com/">Opera</a> ou <a href="http://www.apple.com/fr/safari/">Safari</a>.', # NEW
+	'noie_titre' => 'Attention, votre Internet Explorer n\'est pas &agrave; jour&nbsp;!', # NEW
 
 	// T
 	'toocool_alt' => 'Prea cool pentru IE',

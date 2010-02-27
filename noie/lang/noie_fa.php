@@ -7,15 +7,15 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// I
-	'noie_info' => '<MODIF>&#1576;&#1585;&#1575;&#1740; &#1575;&#1740;&#1606;&#1705;&#1607; &#1578;&#1580;&#1585;&#1576;&#1607; &#1576;&#1607;&#1578;&#1585;&#1740; &#1575;&#1586; &#1575;&#1587;&#1578;&#1601;&#1575;&#1583;&#1607; &#1575;&#1586; &#1587;&#1575;&#1740;&#1578; &#1605;&#1575; &#1583;&#1575;&#1588;&#1578;&#1607; &#1576;&#1575;&#1588;&#1740;&#1583; &#1662;&#1740;&#1588;&#1606;&#1607;&#1575;&#1583; &#1605;&#1740; &#1705;&#1606;&#1740;&#1605; &#1575;&#1586; &#1606;&#1587;&#1582;&#1607; &#1580;&#1583;&#1740;&#1583;&#1578;&#1585; &#1575;&#1587;&#1578;&#1601;&#1575;&#1583;&#1607; &#1705;&#1606;&#1740;&#1583;. &#1606;&#1587;&#1582;&#1607; &#1705;&#1606;&#1608;&#1606;&#1740;  <a href="http://www.microsoft.com/windows/downloads/ie/getitnow.mspx">Internet Explorer 7</a> &#1575;&#1587;&#1578;. &#1570;&#1662;&#1711;&#1585;&#1740;&#1583; &#1585;&#1575;&#1740;&#1711;&#1575;&#1606; &#1575;&#1587;&#1578;. &#1575;&#1711;&#1585; &#1575;&#1586; &#1705;&#1575;&#1605;&#1662;&#1740;&#1608;&#1578;&#1585;&#1740; &#1583;&#1585; &#1587;&#1585; &#1705;&#1575;&#1585; &#1575;&#1587;&#1578;&#1601;&#1575;&#1583;&#1607; &#1605;&#1740; &#1705;&#1606;&#1740;&#1583;&#1548; &#1576;&#1575;&#1740;&#1583; &#1576;&#1575; &#1605;&#1583;&#1740;&#1585; &#1570;&#1740; &#1578;&#1740; &#1582;&#1608;&#1583; &#1578;&#1605;&#1575;&#1587; &#1576;&#1711;&#1740;&#1585;&#1740;&#1583;.<br />&#1605;&#1575; &#1662;&#1740;&#1588;&#1606;&#1607;&#1575;&#1583; &#1605;&#1740; &#1705;&#1606;&#1740;&#1605; &#1575;&#1586;   <a href="http://www.mozilla.com/firefox/">&#1601;&#1575;&#1740;&#1585;&#1601;&#1575;&#1705;&#1587;</a> &#1740;&#1575; &#1605;&#1585;&#1608;&#1585;&#1711;&#1585;&#1607;&#1575;&#1740; <a href="http://www.apple.com/safari/">&#1587;&#1575;&#1601;&#1575;&#1585;&#1740;</a> &#1608; <a href="http://www.opera.com">&#1575;&#1662;&#1585;&#1575;</a>  &#1575;&#1587;&#1578;&#1601;&#1575;&#1583;&#1607; &#1705;&#1606;&#1740;&#1583;.',
-	'noie_titre' => '&#1570;&#1740;&#1575; &#1575;&#1586; &#1576;&#1607; &#1585;&#1608;&#1586; &#1606;&#1576;&#1608;&#1583;&#1606; &#1605;&#1585;&#1608;&#1585;&#1711;&#1585;&#1578;&#1575;&#1606; &#1575;&#1591;&#1604;&#1575;&#1593; &#1583;&#1575;&#1585;&#1740;&#1583;&#1567;',
+	// N
+	'noie_info' => 'Pour naviguer de fa&ccedil;on plus satisfaisante sur ce site et le reste du Web, nous vous recommandons d\'<strong>actualiser votre <a href="http://www.microsoft.com/france/windows/internet-explorer/">Internet Explorer</a></strong> ou d\'essayer un autre navigateur populaire comme <a href="http://www.mozilla-europe.org/fr/firefox/">Firefox</a>, <a href="http://www.google.fr/chrome">Chrome</a>, <a href="http://www.opera.com/">Opera</a> ou <a href="http://www.apple.com/fr/safari/">Safari</a>.', # NEW
+	'noie_titre' => 'Attention, votre Internet Explorer n\'est pas &agrave; jour&nbsp;!', # NEW
 
 	// T
-	'toocool_alt' => '<NEW>Trop cool pour IE',
-	'toocool_info' => '<NEW>Le site que vous tentez d\'afficher a &eacute;t&eacute; jug&eacute; &laquo;&nbsp;trop bien pour Internet Explorer&nbsp;&raquo;.
-<br />Prenez, s\'il vous pla&icirc;t, un moment afin d\'essayer l\'un de ces excellents navigateurs : <a href="http://www.w3junkies.com/toocool/index.php?language=fr">http://www.w3junkies.com/toocool/</a>',
-	'toocool_titre' => '<NEW>Trop Cool pour Internet Explorer'
+	'toocool_alt' => 'Trop cool pour IE', # NEW
+	'toocool_info' => 'Le site que vous tentez d\'afficher a &eacute;t&eacute; jug&eacute; &laquo;&nbsp;trop bien pour Internet Explorer&nbsp;&raquo;.
+<br />Prenez, s\'il vous pla&icirc;t, un moment afin d\'essayer l\'un de ces excellents navigateurs : <a href="http://www.w3junkies.com/toocool/index.php?language=fr">http://www.w3junkies.com/toocool/</a>', # NEW
+	'toocool_titre' => 'Trop Cool pour Internet Explorer', # NE
 );
 
 ?>

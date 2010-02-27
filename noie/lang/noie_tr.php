@@ -7,12 +7,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// I
-	'noie_info' => '<MODIF>Bu sitede (ve Web\'in geri kalan&#305;nda) en doyurucu bi&ccedil;imde gezinmek i&ccedil;in size gezgininizi g&uuml;ncellemenizi &ouml;neriyoruz.
-&#350;u anki g&uuml;ncel s&uuml;r&uuml;m<a href="http://www.microsoft.com/france/windows/downloads/ie/getitnow.mspx">Internet Explorer&nbsp;7</a> ve <a href="http://www.microsoft.com/windows/Internet-explorer/beta/">Internet Explorer&nbsp;8</a> beta s&uuml;r&uuml;m olarak mevcut. G&uuml;ncelleme &uuml;cretsizdir. 
-<br />E&#287;er i&#351;yerinde bir pc kullan&#305;yorsan&#305;z bilgisayar sorumlusuna ba&#351;vurun.
-<br />E&#287;er arzu ederseniz ba&#351;ka pop&uuml;ler gezginler de deneyebilirsiniz &ouml;rne&#287;in <a href="http://www.mozilla-europe.org/fr/firefox/">Firefox</a>, <a href="http://www.opera.com">Opera</a> veya <a href="http://www.apple.com/fr/safari/download/">Safari</a>.',
-	'noie_titre' => 'Kulland&#305;&#287;&#305;n&#305;z gezginin nuh-u nebi\'den kald&#305;&#287;&#305;n&#305; biliyor musunuz&nbsp;?',
+	// N
+	'noie_info' => 'Pour naviguer de fa&ccedil;on plus satisfaisante sur ce site et le reste du Web, nous vous recommandons d\'<strong>actualiser votre <a href="http://www.microsoft.com/france/windows/internet-explorer/">Internet Explorer</a></strong> ou d\'essayer un autre navigateur populaire comme <a href="http://www.mozilla-europe.org/fr/firefox/">Firefox</a>, <a href="http://www.google.fr/chrome">Chrome</a>, <a href="http://www.opera.com/">Opera</a> ou <a href="http://www.apple.com/fr/safari/">Safari</a>.', # NEW
+	'noie_titre' => 'Attention, votre Internet Explorer n\'est pas &agrave; jour&nbsp;!', # NEW
 
 	// T
 	'toocool_alt' => 'IE i&ccedil;in a&#351;&#305;r&#305; "cool"',

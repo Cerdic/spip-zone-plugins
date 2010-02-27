@@ -7,10 +7,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// I
-	'noie_info' => 'Pro snadn&eacute; pou&#382;&iacute;v&aacute;n&iacute; tphoto webu v&aacute;m doporu&#269;ujeme aktulizovat v&aacute;&#353; prohl&iacute;&#382;e&#269; na nov&#283;j&#353;&iacute; verzi.Aktualizujte <a href="http://www.microsoft.com/windows/internet-explorer/default.aspx">Internet Explorer</a> nebo zkuste jin&eacute; popul&aacute;rn&iacute; prohl&iacute;&#382;e&#269;e jako nap&#345;&iacute;klad <a href="http://mozilla.com/en-US/firefox/firefox.html">FireFox</a>, <a href="http://www.opera.com">Opera</a> nebo <a href="http://www.apple.com/safari/">Safari</a>.
-<br />Pokud pracujete na PC v zam&#283;stn&aacute;n&iacute;, po&#382;&aacute;dejte sv&eacute;ho spr&aacute;vce IT.',
-	'noie_titre' => 'Je v&aacute;m zn&aacute;mo, &#382;e v&aacute;&#353; prohl&iacute;&#382;e&#269; je zastaral&yacute;?',
+	// N
+	'noie_info' => 'Pour naviguer de fa&ccedil;on plus satisfaisante sur ce site et le reste du Web, nous vous recommandons d\'<strong>actualiser votre <a href="http://www.microsoft.com/france/windows/internet-explorer/">Internet Explorer</a></strong> ou d\'essayer un autre navigateur populaire comme <a href="http://www.mozilla-europe.org/fr/firefox/">Firefox</a>, <a href="http://www.google.fr/chrome">Chrome</a>, <a href="http://www.opera.com/">Opera</a> ou <a href="http://www.apple.com/fr/safari/">Safari</a>.', # NEW
+	'noie_titre' => 'Attention, votre Internet Explorer n\'est pas &agrave; jour&nbsp;!', # NEW
 
 	// T
 	'toocool_alt' => 'P&#345;&iacute;li&#353; cool pro IE',
