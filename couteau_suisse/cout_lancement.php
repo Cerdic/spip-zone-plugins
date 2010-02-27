@@ -44,30 +44,32 @@ function cs_preg_quote(&$item) {
 // cette fonction est appellee par cout_options a chaque hit de la page
 function cs_initialisation($forcer=false, $init_includes=true) {
 	global $cs_metas_pipelines, $metas_outils;
-	$rand = sprintf('[#%04x] ', rand());
-	static $deja_passe_ici;
-	$mysql=function_exists('mysql_get_client_info')?' - MYSQL v'.mysql_get_client_info():'';
-	if (!intval($deja_passe_ici))
-		if(defined('_LOG_CS')) cs_log("#### 1er PASSAGE $rand################################# - \$forcer = ".intval($forcer)
+	static $deja_passe_ici = 0;
+	if($log=defined('_LOG_CS'))	{
+		$rand = sprintf('[#%04x] ', rand());
+		if(!$deja_passe_ici) {
+			$mysql = function_exists('mysql_get_client_info')?' - MYSQL v'.mysql_get_client_info():'';
+			cs_log("#### 1er PASSAGE $rand################################# - \$forcer = ".intval($forcer)
 			. "\n{$rand}PHP v".phpversion()."$mysql - base SPIP v$GLOBALS[spip_version_base] - code SPIP v$GLOBALS[spip_version_code]");
+		}
+	}
 	$deja_passe_ici++;
+if($log) cs_log("{$rand}cs_initialisation($forcer) : Passage #$deja_passe_ici");
 	// si les metas ne sont pas lus, on les lit
-if(defined('_LOG_CS')) cs_log("{$rand}cs_initialisation($forcer) : Passage #$deja_passe_ici");
 	if (isset($GLOBALS['meta']['tweaks_pipelines'])) {
 		$cs_metas_pipelines = unserialize($GLOBALS['meta']['tweaks_pipelines']);
-
-if(defined('_LOG_CS')) cs_log("$rand -- cs_metas_pipelines = ".(is_array($cs_metas_pipelines)?join(', ',array_keys($cs_metas_pipelines)):''));
+if($log) cs_log("$rand -- cs_metas_pipelines = ".(is_array($cs_metas_pipelines)?join(', ',array_keys($cs_metas_pipelines)):''));
 
 		// liste des actifs & definition des constantes attestant qu'un outil est bien actif : define('_CS_monoutil', 'oui');
 		$liste = array();
 		foreach($metas_outils as $nom=>$o) if(isset($o['actif']) && $o['actif']) { $liste[]=$nom; @define('_CS_'.$nom, 'oui'); }
 		$liste2 = join(', ', $liste);
-if(defined('_LOG_CS')) cs_log("$rand -- ".count($liste).' outil(s) actif(s)'.(strlen($liste2)?" = ".$liste2:''));
+if($log) cs_log("$rand -- ".count($liste).' outil(s) actif(s)'.(strlen($liste2)?" = ".$liste2:''));
 		// Vanter notre art de la compilation...
 		// La globale $spip_header_silencieux permet de rendre le header absent pour raisons de securite
-		if (!headers_sent()) if (!isset($GLOBALS['spip_header_silencieux']) OR !$GLOBALS['spip_header_silencieux'])
+		if (!headers_sent() && (!isset($GLOBALS['spip_header_silencieux']) OR !$GLOBALS['spip_header_silencieux']))
 				@header('X-Outils-CS: '.$liste2);
-if(defined('_LOG_CS')) cs_log($rand.($forcer?"\$forcer = true":"cs_initialisation($forcer) : Sortie car les metas sont presents"));
+if($log) cs_log($rand.($forcer?"\$forcer = true":"cs_initialisation($forcer) : Sortie car les metas sont presents"));
 		// Les pipelines sont en meta, tout va bien on peut partir d'ici.
 		if (!$forcer) return;
 	}
@@ -79,8 +81,9 @@ if(defined('_LOG_CS')) cs_log($rand.($forcer?"\$forcer = true":"cs_initialisatio
 	// remplir $outils (et aussi $cs_variables qu'on n'utilise pas ici);
 	include_spip('config_outils');
 	// verifier que tous les outils actives sont bien presents
- 	foreach($metas_outils as $nom=>$o) if(isset($o['actif']) && $o['actif']) 
-		{ if(!isset($outils[$nom])) unset($metas_outils[$nom]); }
+ 	foreach($metas_outils as $nom=>$o) 
+		if(isset($o['actif']) && $o['actif'] && !isset($outils[$nom])) 
+			unset($metas_outils[$nom]);
 	ecrire_meta('tweaks_actifs', serialize($metas_outils));
 	ecrire_metas();
 	// nettoyage des versions anterieures
@@ -92,7 +95,7 @@ if(defined('_LOG_CS')) cs_log($rand.($forcer?"\$forcer = true":"cs_initialisatio
 	// au cas ou un outil manipule des variables
 	$description_outil = charger_fonction('description_outil', 'inc');
 	// completer les variables manquantes et incorporer l'activite lue dans les metas
-if(defined('_LOG_CS')) cs_log("$rand -- foreach(\$outils) : cs_initialisation_d_un_outil()");
+if($log) cs_log("$rand -- foreach(\$outils) : cs_initialisation_d_un_outil()");
 
 	// initialiser chaque outil et construire la liste des contribs
 	$contribs = array();
@@ -104,7 +107,7 @@ if(defined('_LOG_CS')) cs_log("$rand -- foreach(\$outils) : cs_initialisation_d_
 	}
 	// installer $cs_metas_pipelines
 	$cs_metas_pipelines = array();
-if(defined('_LOG_CS')) cs_log("$rand -- cs_initialise_includes()... cout_fonctions.php sera peut-etre inclus.");
+if($log) cs_log("$rand -- cs_initialise_includes()... cout_fonctions.php sera peut-etre inclus.");
 	// creer les includes (config/mes_options, mes_options et mes_fonctions) et le fichier de controle pipelines.php
 	if($init_includes) cs_initialise_includes(count($metas_outils));
 	// verifier le fichier d'options _FILE_OPTIONS (ecrire/mes_options.php ou config/mes_options.php)
@@ -113,7 +116,7 @@ if(defined('_LOG_CS')) cs_log("$rand -- cs_initialise_includes()... cout_fonctio
 	// sauver la configuration
 	cs_sauve_configuration();
 	// en metas : outils actifs
-if(defined('_LOG_CS')) cs_log("$rand -- ecriture metas");
+if($log) cs_log("$rand -- ecriture metas");
 	ecrire_meta('tweaks_actifs', serialize($metas_outils));
 	// en metas : variables d'outils
 	ecrire_meta('tweaks_variables', serialize($metas_vars));
@@ -123,7 +126,7 @@ if(defined('_LOG_CS')) cs_log("$rand -- ecriture metas");
 	ecrire_meta('tweaks_contribs', serialize($contribs));
 	ecrire_metas();
 	$GLOBALS['cs_init'] = 0;
-if(defined('_LOG_CS')) cs_log("{$rand}cs_initialisation($forcer) : Sortie");
+if($log) cs_log("{$rand}cs_initialisation($forcer) : Sortie");
 }
 
 /*
