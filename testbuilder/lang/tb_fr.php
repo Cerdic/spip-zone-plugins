@@ -29,10 +29,14 @@ Pour creer jeu de tests combinatoire, entrez simplement un pseudo-type correspon
 Les pseudo-types disponibles sont :
 -* <tt>bool</tt>
 -* <tt>int</tt>
+-* <tt>int8</tt> de 0 a 255
+-* <tt>float01</tt> flottant de 0 a 1
 -* <tt>string</tt>
 -* <tt>date</tt> pour une date textuelle
 -* <tt>time</tt> pour une date au format unix
+-* <tt>email</tt> pour des chaine au format adresse email
 -* <tt>array</tt>
+-* <tt>image</tt> chemin vers un fichier image
 '
 );
 
