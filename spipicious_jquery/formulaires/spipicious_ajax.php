@@ -14,7 +14,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
-function formulaires_spipicious_ajax_charger($id_objet,$type='article') {
+function formulaires_spipicious_ajax_charger($id_objet,$type='article',$retour='') {
 	global $visiteur_session;
 
 	include_spip('inc/autoriser');
@@ -28,7 +28,7 @@ function formulaires_spipicious_ajax_charger($id_objet,$type='article') {
 	return $valeurs;
 }
 
-function formulaires_spipicious_ajax_traiter($id_objet,$type) {
+function formulaires_spipicious_ajax_traiter($id_objet,$type,$retour='') {
 	$add_tags = _request('add_tags');
 	$remove_tag = _request('remove_tags');
 
@@ -47,6 +47,12 @@ function formulaires_spipicious_ajax_traiter($id_objet,$type) {
 		include_spip ("inc/invalideur");
 		suivre_invalideur("0",true);
 	}
+
+	if ($retour) {
+		include_spip('inc/headers');
+		$message .= redirige_formulaire($retour);
+	}
+	
 	return array('editable'=>true,'message'=>$message);
 }
 ?>
