@@ -2,10 +2,21 @@
 	<nom>Test Builder</nom>
 	<auteur>Cedric [->http://www.yterium.com]</auteur>
 	<version>0.1.0</version>
+	<icon>images/tb-32.png</icon>
 	<etat>test</etat>
 	<description>Construite des tests systematiques</description>
 	<lien></lien> <!-- URI de documentation -->
 	<prefix>tb</prefix>
 	<necessite id="SPIP" version="[2.0.10;]" />
 	<categorie>outils</categorie>
+	<bouton id="tb" parent="configuration">
+		<icone>images/tb-24.png</icone>
+		<titre>tb:testbuilder</titre>
+		<url>testbuilder</url>
+	</bouton>
+	<bouton id="tb2" parent="bando_administration">
+		<icone>images/tb-16.png</icone>
+		<titre>tb:testbuilder</titre>
+		<url>testbuilder</url>
+	</bouton>
 </plugin>

@@ -6,7 +6,8 @@
 
 ]
 
-<BOUCLE_func(CONDITION){si #ENV{func,''}}>
+<BOUCLE_func(CONDITION){si #ENV{func,''}|et{#ENV{file,''}}}>
+	[(#REM) Une fonction et un fichier sont indiques]
 	<h2>#ENV{func}</h2>
 	<div style="height:200px;overflow:auto;border:1px solid;padding:5px;">
 	<pre>[(#ENV{file}|tb_function_extract{#ENV{func}}|proteger_amp|entites_html)]</pre>
@@ -18,15 +19,20 @@
 
 	<!--#navigation-->
 	<h1>Test Builder</h1>
-	<a href="#URL_ECRIRE{testbuilder,file=#ENV{file}}">#ENV{file}</a>
+	<a href="#URL_ECRIRE{testbuilder,file=#ENV{file}}">[(#ENV{file}|basename)]</a>
 	<div class="cadre cadre-info"><div class="cadre_padding">
 	<:tb:texte_explication|propre:></div></div>
 	<!--/#navigation-->
 
 </BOUCLE_func>
 	<B_funcs>
+	[(#REM) Un fichier est indique]
 	<!--#navigation-->
-	<h1>Test Builder</h1>
+	<h1><:tb:testbuilder:></h1>
+	<a href="#URL_ECRIRE{testbuilder,dir=#ENV{file}|dirname}">[(#ENV{file}|dirname)]</a>
+	<div class="cadre cadre-info"><div class="cadre_padding">
+	<:tb:texte_choisir_fonction|propre:>
+	</div></div>
 	<!--/#navigation-->
 		<h2>#ENV{file}</h2>
 		<table class="spip">
@@ -39,7 +45,7 @@
 			<BOUCLE_funcs(POUR){tableau #ENV{file}|tb_liste_fonctions}>
 				<tr>
 					<td><tt>#CLE([(#VALEUR|reset|implode{', '})])</tt></td><td>#SET{test,#CLE|tb_hastest}[
-						(#GET{test}|tb_url_test{lien}|sinon{#BOUTON_ACTION{<:tb:creer_test:>,#SELF|parametre_url{func,#CLE}}})
+						(#GET{test}|tb_url_test{#GET{test}|basename}|sinon{#BOUTON_ACTION{<:tb:bouton_creer_test:>,#SELF|parametre_url{func,#CLE}}})
 					][(#GET{test}|oui)[(#BOUTON_ACTION{<:tb:modifier:>,#SELF|parametre_url{func,#CLE}})]]
 					</td>
 				</tr>
@@ -47,4 +53,28 @@
 			</tbody>
 		</table>
 	</B_funcs>
+	[(#REM) Accueil sans fichier ni fonctions]
+	<B_dirs>
+		<ul class="liste-items dirs">
+		<BOUCLE_dirs(POUR){tableau #ENV{dir,''}|tb_dirs}{par cle}>
+			<li class="item"><a href="#URL_ECRIRE{testbuilder,dir=#VALEUR}">#CLE</a></li>
+		</BOUCLE_dirs>
+		</ul>
+	</B_dirs>
+
+	<B_files>
+		<ul class="liste-items filesphp">
+		<BOUCLE_files(POUR){tableau #ENV{dir,''}|tb_files}{par cle}>
+			<li class="item"><a href="#URL_ECRIRE{testbuilder,file=#VALEUR}">#CLE</a></li>
+		</BOUCLE_files>
+		</ul>
+	</B_files>
+	<!--#navigation-->
+	<h1><:tb:testbuilder:></h1>
+	<div class="cadre cadre-info"><div class="cadre_padding">
+	[(#CHEMIN{images/tb-128.png}|balise_img)]
+	<:tb:texte_presentation|propre:>
+	</div></div>
+	<!--/#navigation-->
+	<//B_funcs>
 <//B_func>

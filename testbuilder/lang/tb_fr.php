@@ -5,9 +5,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	'testbuilder' => 'TestBuilder',
 	'bouton_tester' => 'Tester !',
 	'bouton_combinatoire' => 'Jeu de tests combinatoires',
 	'bouton_supprimer_tous' => 'Supprimer tous les tests',
+	'bouton_creer_test' => 'Cr&eacute;er un test !',
 
 	'ok_test_ajoute' => "Test ajout&eacute; : ",
 	'ok_tests_supprimes' => "Tests supprim&eacute;s.",
@@ -20,10 +22,24 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'un_essai' => '1 jeu de test',
 	'nb_essais' => '@nb@ jeux de tests',
 
-	'texte_explication' =>'Pour creer un test saisissez une valeur pour chaque argument. Attention, la saisie sera interpretée directement par PHP.
-Une chaine doit donc être entre guillemets, <tt>true</tt> est un booleen, <tt>array(...)</tt> un tableau etc ...
+	'texte_presentation' => 'Selectionner le script PHP pour lequel vous souhaitez construire des jeux de tests.
 
-Si vous laissez des arguments vides, ceux-ci seront ignorés dans l\'appel php, permettant de tester les valeurs par defaut.
+Les fichiers tests seront cr&eacute;&eacute;s dans le repertoire <tt>tests/</tt> si le script fait partie de SPIP.
+Si le script appartient a un plugin ou une extension, le test sera cr&eacute;&eacute; dans un sous r&eacute;pertoire <tt>tests/</tt> du plugin.
+
+Les droits doivent &ecirc;tre suffisants pour permettre l\'&eacute;criture de fichier et la cr&eacute;ation de r&eacute;pertoires.
+
+{{Ne laissez pas ce plugin install&eacute; sur un site en ligne}}
+',
+	'texte_choisir_fonction' => 'Les fonctions ci-contre ont &eacute;t&eacute; d&eacute;tect&eacute;es dans le script PHP.
+		Si un test homonyme a la fonction existe, il est indiqu&eacute; et il est propos&eacute; de le modifier.
+
+		Seuls les tests cr&eacute;&eacute;s par TestBuilder sont effectivement modifiables.
+		Pour les tests cr&eacute;&eacute;s manuellement, le jeu de test ne pourra pas être retrouv&eacute;.',
+	'texte_explication' =>'Pour creer un test saisissez une valeur pour chaque argument. Attention, la saisie sera interpret&eacute;e directement par PHP.
+Une chaine doit donc &ecirc;tre entre guillemets, <tt>true</tt> est un booleen, <tt>array(...)</tt> un tableau etc ...
+
+Si vous laissez des arguments vides, ceux-ci seront ignor&eacute;s dans l\'appel php, permettant de tester les valeurs par defaut.
 
 Pour creer jeu de tests combinatoire, entrez simplement un pseudo-type correspondant a un jeu de test pour chaque argument et cliquez sur le bouton <tt>Jeu de tests combinatoires</tt>.
 Les pseudo-types disponibles sont :

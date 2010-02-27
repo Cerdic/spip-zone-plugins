@@ -13,7 +13,8 @@ function formulaires_editer_test_unit_charger_dist($filename,$funcname){
 		'_args'=>array(),
 		'args'=>array(),
 		'_filename'=>$filename,
-		'_funcname'=>$funcname
+		'_funcname'=>$funcname,
+		'_filetest'=>'',
 	);
 
 	$funcs = tb_liste_fonctions($filename);
@@ -25,6 +26,7 @@ function formulaires_editer_test_unit_charger_dist($filename,$funcname){
 	if ($filetest=tb_hastest($funcname,true)){
 		$valeurs['_essais'] = tb_test_essais($funcname,$filetest);
 		$valeurs['_hidden'] = "<input type='hidden' name='ctrl_essais' value='".md5(serialize($valeurs['essais']))."' />";
+		$valeurs['_filetest'] = $filetest;
 	}
 	// regarder si un demande a modifier un jeu d'essai
 	$modif = -1;

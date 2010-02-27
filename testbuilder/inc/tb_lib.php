@@ -172,7 +172,7 @@ function tb_url_test($testfun, $lien=false){
 		$url = "tests/squel.php?test=$test&amp;var_mode=recalcul";
 	if (!$lien)
 		return $url;
-	return "<a href='$url'>".basename($testfun)."</a>";
+	return "<a href='$url'>$lien</a>";
 }
 
 /**
@@ -213,7 +213,20 @@ function tb_generate_new_blank_test($filename,$funcname){
 					array($funcname,"essais_$funcname",$filename,strtotime('Y-m-d H:i')),
 					$template
 					);
-	$d = sous_repertoire(_DIR_RACINE."tests/",basename($filename,'.php'));
+	$d="";
+	if (strncmp($filename,_DIR_PLUGINS,strlen(_DIR_PLUGINS))==0
+		OR strncmp($filename,_DIR_EXTENSIONS,strlen(_DIR_EXTENSIONS))==0){
+		// trouver le repertoire du plugin en remontant jusqu'a retrouver plugin.xml
+		$d = dirname($filename);
+		while(!file_exists("$d/plugin.xml") AND strlen($d)>strlen(_DIR_PLUGINS))
+			$d = dirname($d);
+		if (strlen($d)>strlen(_DIR_PLUGINS))
+			$d = sous_repertoire("$d/","tests");
+		else
+			$d="";
+	}
+	if (!$d)
+		$d = sous_repertoire(_DIR_RACINE."tests/",basename($filename,'.php'));
 	ecrire_fichier($f="$d/$funcname.php",$template);
 	return $f;
 }
