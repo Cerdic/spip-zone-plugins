@@ -226,7 +226,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forum_ouvrir' => 'Abrir este F&oacute;rum',
 	'forums_categories' => 'Diversos',
 	'forums_spipbb' => 'F&oacute;runs SpipBB',
-	'forums_titre' => '<MODIF>Meu primeiro f&oacute;rum criado',
+	'forums_titre' => 'Meu primeiro f&oacute;rum criado', # MODIF
 	'fromphpbb_erreur_db_phpbb_config' => 'Imposs&iacute;vel ler a configura&ccedil;&atilde;o na base phpBB',
 	'fromphpbb_migre_categories' => 'Importe das categorias',
 	'fromphpbb_migre_categories_dans_rub_dpt' => 'Importe das categorias',
@@ -325,7 +325,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mot_annonce' => 'An&uacute;ncio_ Um an&uacute;ncio &eacute; situado em cabe&ccedil;a de f&oacute;rum sobre todas as p&aacute;ginas.',
 	'mot_ferme' => 'Fechado;- * Quando um artigo-f&oacute;rum &agrave; esta palavra-chave, s&oacute; os reguladores afixam mensagens.- * Quando um assunto de f&oacute;rum &eacute; fechado s&oacute; os reguladores afixam respostas',
 	'mot_groupe_moderation' => 'Goupo de palavras-chave utilizadas para a modera&ccedil;&atilde;o de SpipBB',
-	'mot_postit' => '<MODIF>Postit_ Um postit &eacute; situado debaixo dos an&uacute;ncios, antes das mensagens comuns. Aparece apenas s&oacute; uma vez na lista.',
+	'mot_postit' => 'Postit_ Um postit &eacute; situado debaixo dos an&uacute;ncios, antes das mensagens comuns. Aparece apenas s&oacute; uma vez na lista.', # MODIF
 
 	// N
 	'no_message' => 'Nenhum assunto ou mensagem corresponde aos vossos crit&eacute;rios de Pesquisa',

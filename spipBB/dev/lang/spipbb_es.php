@@ -227,7 +227,7 @@ Consulta la [documentaci&oacute;n en Spip-Contrib->http://www.spip-contrib.net/S
 	'forum_ouvrir' => 'Abrir este Foro',
 	'forums_categories' => 'Varios',
 	'forums_spipbb' => 'Foros SpipBB',
-	'forums_titre' => '<MODIF>Mi primer foro creado',
+	'forums_titre' => 'Mi primer foro creado', # MODIF
 	'fromphpbb_erreur_db_phpbb_config' => 'No es posible leer la configuraci&oacute;n en la base phpBB',
 	'fromphpbb_migre_categories' => 'Importaci&oacute;n de las categor&iacute;as',
 	'fromphpbb_migre_categories_dans_rub_dpt' => 'Implantaci&oacute;n de los foros en la secci&oacute;n:',
@@ -329,8 +329,8 @@ _ Un anuncio se sit&uacute;a a la cabeza del foro en todas las p&aacute;ginas.',
 -* Cuando un art&iacute;culo-foro tiene esta palabra-clave, s&oacute;lo los moderadores pueden a&ntilde;adir mensajes.
 -* Cuando un asunto de foro est&aacute; cerrado, s&oacute;lo los moderadores pueden a&ntilde;adir respuestas.',
 	'mot_groupe_moderation' => 'Grupo de palabras-clave utilizado en la moderaci&oacute;n de SpipBB',
-	'mot_postit' => '<MODIF>Postit
-_ Un postit est&aacute; situado bajo los anuncios, antes de los mensajes ordinarios. S&oacute;lo aparece una sola vez en la lista.',
+	'mot_postit' => 'Postit
+_ Un postit est&aacute; situado bajo los anuncios, antes de los mensajes ordinarios. S&oacute;lo aparece una sola vez en la lista.', # MODIF
 
 	// N
 	'no_message' => 'No hay ning&uacute;n asunto o mensaje que corresponda con tus criterios de b&uacute;squeda',
