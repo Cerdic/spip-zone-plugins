@@ -8,7 +8,10 @@
  */
 
 	$test = '@funcname@';
-	require '../test.inc';
+	$remonte = "../";
+	while (!is_dir($remonte."ecrire"))
+		$remonte = "../$remonte";
+	require $remonte.'tests/test.inc';
 	find_in_path("@filename@",'',true);
 
 	//
