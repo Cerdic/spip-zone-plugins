@@ -571,7 +571,7 @@ if(!window.jQuery) document.write('".str_replace('/','\/',addslashes(propre('<p>
 
 	$_GET['source'] = $exec;
 	echo '<div class="conteneur">', $liste_outils,
-		'</div><br class="conteneur" /><div class="cs_patience"><br />'.http_img_pack('searching.gif','').' ...</div>';
+		'</div><br class="conteneur" /><div class="cs_patience"><br />'.http_img_pack('searching.gif','*','').' ...</div>';
 	flush();
 	echo '<div class="conteneur"><div id="cs_infos" class="cs_infos">',
 		$cmd=='pack'?cs_description_pack():description_outil2($afficher_outil),
