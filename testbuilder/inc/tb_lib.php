@@ -335,6 +335,15 @@ function tb_jeu_test_argument($type){
 				'Un modele <modeleinexistant|lien=[->http://www.spip.net]>',
 			);
 			break;
+		case 'email':
+			$jeu = array(
+				'jean',
+				'jean@mapetiteentreprise.org',
+				'jean.dujardin@mapetiteentreprise.org',
+				'jean-dujardin@mapetiteentreprise.org',
+				'jean@dujardin.name',
+			);
+			break;
 		case 'date':
 			$jeu = array(
 				"2001-00-00 12:33:44",
@@ -393,6 +402,26 @@ function tb_jeu_test_argument($type){
 				100,
 				1000,
 				10000
+			);
+			break;
+		case 'int8':
+			$jeu = array(
+				0,
+				7,
+				15,
+				63,
+				127,
+				191,
+				255,
+			);
+			break;
+		case 'float01':
+			$jeu = array(
+				0.0,
+				0.25,
+				0.5,
+				0.75,
+				1.0,
 			);
 			break;
 		case 'array':
