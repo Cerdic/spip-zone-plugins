@@ -12,7 +12,7 @@
     <etat>
     stable
     </etat>
-    <install>base/install.php</install>
+    <install>base/bible_install.php</install>
 	<necessite id="SPIP" version="[1.9.0;]" />
     <necessite id='CFG' version="[1.0;]" />
     <icon>

@@ -59,6 +59,7 @@
 			break;
 			
 	}
+	return true;
 }
 function bible_initialise_pp(){
     $tableau = array_keys(bible_tableau('traduction'));
