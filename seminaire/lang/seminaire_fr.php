@@ -4,7 +4,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	//pour le formulaire de séminaires
 	'name'						 => 	'Nom de l&rsquo;intervenant (Name)',
 	'origin'					 => 	'Institut d&rsquo;origine de l&rsquo;intervenant',
-	'abstract'					 => 	'Résumé de l&rsquo;intervention (abstract)',
+	'abstract'					 => 	'Résumé',
 	'notes'						 =>		'Notes de dernières minutes',
 	'lieu'						 =>		'Lieu',
 	'precisions_name'			 =>		'le nom sera affiché dans le calendrier et dans le mini calendrier',
@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'apreciser'					 =>		'A pr&eacute;ciser',
 	'plus'						 =>		'En savoir plus',
 	'a_venir'					 =>		'Les prochains s&eacute;minaires',
-	'attention_type'			 =>		'Le choix du type d&rsquo;&eacute;&eacute;nement d&eacute;termine le tri qui lui sera appliqu&eacute;.',
+	'attention_type'			 =>		'Le choix du type d&rsquo;&eacute;v&eacute;nement d&eacute;termine le tri qui lui sera appliqu&eacute;.',
 	'oubli_titre'				 =>		'Ne pas oublier de mettre le titre de l&rsquo;&eacute;v&eacute;nement',
 	
 	//pour les groupes de mots clés
