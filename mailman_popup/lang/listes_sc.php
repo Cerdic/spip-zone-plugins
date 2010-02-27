@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'confirm' => 'Sa dimanda de cunfirma est istada imbiada a &lt;@var_email@&gt;.',
 
 	// D
-	'deja' => '<MODIF>&lt;@var_email@&gt;&nbsp;: ses zai marcadu in sa lista &lt;@liste@&gt;.',
+	'deja' => '&lt;@var_email@&gt;&nbsp;: ses zai marcadu in sa lista &lt;@liste@&gt;.', # MODIF
 	'desabo' => 'Sa cantzellatzione dae sa lista est istada fata.',
 
 	// F
@@ -37,7 +37,7 @@ Grazie.
 
 	// P
 	'pasabo' => 'S\'indiritzu &lt;@var_email@&gt; non resurtat abonadu a sa lista &lt;@liste@&gt;.',
-	'patientez' => '<MODIF>Iseta pro praghere...',
+	'patientez' => 'Iseta pro praghere...', # MODIF
 
 	// Q
 	'quitter' => 'Cantzellatzione dae sa lista',
@@ -46,7 +46,7 @@ Grazie.
 	'subject_removed' => 'S\'indiritzu tuo nch\'est istadu cantzelladu dae sa lista @liste@.',
 
 	// T
-	'titrefenetre' => '<MODIF>Iscritzione',
+	'titrefenetre' => 'Iscritzione', # MODIF
 
 	// V
 	'veuillez' => 'Pone s\'indiritzu tuo de posta eletr&ograve;nica.',

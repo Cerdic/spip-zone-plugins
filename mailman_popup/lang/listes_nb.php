@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'confirm' => 'En bekreftselsesforesp&oslash;rsel er sendt til &lt;@var_email@&gt;.',
 
 	// D
-	'deja' => '<MODIF> &lt;@var_email@&gt;: Du har allerede meldt deg p&aring; epostlisten &lt;@liste@&gt;.',
+	'deja' => ' &lt;@var_email@&gt;: Du har allerede meldt deg p&aring; epostlisten &lt;@liste@&gt;.', # MODIF
 	'desabo' => 'P&aring;melding avbrutt.',
 
 	// F
@@ -37,6 +37,7 @@ Takk, ha en fin dag.
 
 	// P
 	'pasabo' => 'Adressen &lt;@var_email@&gt; er ikke p&aring;meldt epostlisten &lt;@liste@&gt;.',
+	'patientez' => 'Veuillez patienter...', # NEW
 
 	// Q
 	'quitter' => 'Avmelding',
@@ -45,7 +46,7 @@ Takk, ha en fin dag.
 	'subject_removed' => 'Adressen din er meldt av epostlisten @liste@.',
 
 	// T
-	'titrefenetre' => '<NEW> Inscription',
+	'titrefenetre' => ' Inscription', # NEW
 
 	// V
 	'veuillez' => 'Oppgi din adresse.',
