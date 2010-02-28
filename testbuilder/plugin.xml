@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Test Builder</nom>
 	<auteur>Cedric [->http://www.yterium.com]</auteur>
-	<version>0.2.0</version>
+	<version>0.3.0</version>
 	<icon>images/tb-32.png</icon>
 	<etat>test</etat>
 	<description>Construite des tests systematiques</description>

@@ -12,6 +12,7 @@ function formulaires_editer_test_unit_charger_dist($filename,$funcname){
 		'essais'=>array(),
 		'_args'=>array(),
 		'args'=>array(),
+		'resultat'=>'',
 		'_filename'=>$filename,
 		'_funcname'=>$funcname,
 		'_filetest'=>'',
@@ -62,14 +63,29 @@ function formulaires_editer_test_unit_verifier_dist($filename,$funcname){
 	set_request('args',$args);
 	#var_dump($args);
 
-	if (_request('combi') AND !count($args)){
-		$erreurs['message_erreur'] = _T("tb:erreur_test_combinatoire_types_requis");
+	if (_request('combi')){
+		if (!count($args))
+			$erreurs['message_erreur'] = _T("tb:erreur_test_combinatoire_types_requis");
+		else {
+			$tb_essais_type = charger_fonction('tb_essais_type','inc');
+			foreach($args as $k=>$type)
+				if (!count($tb_essais_type($type)))
+					$erreurs["args_$k"]=_T("tb:erreur_pseudo_type_inconnu");
+		}
+		if (_request('resultat')){
+			$erreurs['resultat'] = _T("tb:erreur_test_combinatoire_resultat_ignore");
+		}
 	}
 	// demande de test sur un jeu d'essai
 	if (!count($erreurs) AND _request('tester')){
 		$args = eval("return array(".implode(', ',$args).");");
-		tb_try_essai($filename,$funcname,$args,$output_test);
-		$erreurs['message_erreur'] = $output_test;
+		$test = tb_try_essai($filename,$funcname,$args,$output_test);
+		if ($res=_request('resultat') AND $test===eval("return $res;"))
+			$erreurs['message_ok'] = $output_test;
+		else
+			$erreurs['message_erreur'] = $output_test;
+		if (!$res)
+			set_request('resultat',var_export($test,true));
 	}
 
 	return $erreurs;
@@ -83,15 +99,19 @@ function formulaires_editer_test_unit_traiter_dist($filename,$funcname){
 	$essais = tb_test_essais($funcname,$filetest);
 	if (_request('enregistrer')){
 		$args = _request('args');
-		$essai = eval("return array('??TBD??', ".implode(', ',$args).");");
+		$res = _request('resultat');
+		array_unshift($args,$res?$res:'??TBD??');
+		$essai = eval("return array(".implode(', ',$args).");");
 		if (!is_null($m=_request('modif_essai'))){
 			$essais[$m] = $essai;
 			set_request('modif_essai');
 		} else
 			$essais[] = $essai;
 		tb_test_essais($funcname,$filetest,$essais);
-		tb_refresh_test($filename,$funcname,$filetest);
-		set_request('args',array());
+		if (!$res)
+			tb_refresh_test($filename,$funcname,$filetest);
+		set_request('args');
+		set_request('resultat');
 		$message_ok = _T('tb:ok_test_ajoute');
 	}
 	elseif(_request('combi')){
