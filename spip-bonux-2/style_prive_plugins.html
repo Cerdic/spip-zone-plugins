@@ -22,7 +22,8 @@
 #SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
 
 
-h2.titrem { display: block; padding-top: 6px; padding-bottom: 4px; background-repeat: no-repeat;padding-[(#GET{left})]:16px;background-color: #GET{claire};font-size:14px;}
+h2.titrem,h3.titrem { display: block; position:relative; padding-top: 6px; padding-bottom: 4px; background-repeat: no-repeat;padding-[(#GET{left})]:16px;background-color: #GET{claire};color: [#(#GET{foncee}|couleur_foncer)];font-size:14px;margin-top:0;}
+.formulaire_spip h3.titrem,#navigation .formulaire_spip h3.titrem,#extra .formulaire_spip h3.titrem {background-color: #GET{claire};color: [#(#GET{foncee}|couleur_foncer)];}
 
 /* listes */
 .liste_items,.liste-items {list-style:none;margin:1em 0;padding:0;border-top:1px solid #ddd;clear:both;}
@@ -68,6 +69,24 @@ form.bouton_action_post button.submit, .formulaire_spip .boutons input.link,.for
 .formulaire_spip .boutons button {cursor:pointer;}
 form.bouton_action_post button.submit, .formulaire_spip .boutons input.link,.formulaire_spip .boutons button.link {background:none;border:0;cursor:pointer;padding:0 0 1px;}
 form.bouton_action_post button.submit:hover, .formulaire_spip .boutons input.link:hover,.formulaire_spip .boutons button.link:hover {border-bottom:1px solid;padding:0;}
+
+/* message reussite ? */
+.formulaire_spip .reponse_formulaire {
+	border:2px solid;
+	color:#333;
+	font-weight: normal;
+	padding:5px;
+	padding-left:40px;
+	min-height:24px;
+}
+.formulaire_spip .reponse_formulaire_ok{
+	border-color: #53AD20;
+	background:#E0FFCF url(#CHEMIN{img_pack/message_ok-24.png}) no-repeat 5px 5px;
+}
+.formulaire_spip .reponse_formulaire_erreur{
+	border-color: #C30;
+	background:#FFD0BF url(#CHEMIN{img_pack/message_erreur-24.png}) no-repeat 5px 5px;
+}
 
 /* tips */
 .qTipContent {display:none;}
