@@ -1,0 +1,12 @@
+<plugin>
+
+ <nom>API spip2</nom>
+ <version>0.1</version>
+ <prefix>apispip2</prefix>
+ <etat>dev</etat>
+ <auteur>Cédric Mouleyre / Axome</auteur>
+ <description>API PHP pour SPIP 2.x</description>
+ 
+ <options>apispip2_options.php</options>
+ 
+</plugin>
