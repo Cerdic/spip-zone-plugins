@@ -18,7 +18,7 @@
 		<inclure>lm2_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
-		<nom>post_propre</nom>
+		<nom>pre_liens</nom>
 		<inclure>lm2_pipelines.php</inclure>
 	</pipeline>
 	<necessite id="lib:soundmanagerv295a-20090717" src="http://www.schillmania.com/projects/soundmanager2/download/soundmanagerv295a-20090717.zip" />
