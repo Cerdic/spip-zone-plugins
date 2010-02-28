@@ -8,17 +8,18 @@ function lm2_insert_head($flux){
 
 	return $flux;
 }
-
-/**
- * enclosures
- * ajout d'un rel="enclosure" sur les liens mp3 absolus
- * appele en pipeline apres propre pour traiter les [mon son->http://monsite/mon_son.mp3]
- * peut etre appele dans un squelette apres |liens_absolus
- * pète cependant avec les cas (tordus) suivants :
+ 
+ /**
+ * Ajout d'un rel="enclosure" sur les liens mp3.
+ * Permet de traiter les [mon son->http://monsite/mon_son.mp3] dans un texte.
+ * Le filtre peut etre appele dans un squelette apres |liens_absolus
+ *
+ * Pète cependant dans les cas (tordus) suivants :
  * [{{Une histoire d'amour}}->documents/sons/PIRATAGE/01 UNE HISTOIRE D'AMOUR.mp3]
  * [{{Une histoire d'amour à trois}}->documents/sons/PIRATAGE/02 UNE HISTOIRE D'AMOUR A TROIS[2].mp3]
+ *
  */
- 
+
 function lm2_pre_liens($texte) {
 	define('_RACCOURCI_LIEN_MP3', "/\[([^][]*?([[]\w*[]][^][]*)*)->(>?)([^]\.mp3]*)\]/msS");
 
