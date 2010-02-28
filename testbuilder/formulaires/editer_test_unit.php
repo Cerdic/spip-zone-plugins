@@ -35,8 +35,9 @@ function formulaires_editer_test_unit_charger_dist($filename,$funcname){
 		foreach($valeurs['_essais'] as $k=>$t)
 			if (_request("modif_$k")){
 				set_request('args'); // effacer la saisie
+				set_request('resultat'); // effacer la saisie
 				$valeurs['args'] = $t;
-				array_shift($valeurs['args']); // enlever la premiere valeur
+				$valeurs['resultat'] = var_export(array_shift($valeurs['args']),'true');
 				$valeurs['args'] = array_map('tb_export',$valeurs['args']);
 				$modif = $k;
 				continue;
