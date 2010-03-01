@@ -1,0 +1,48 @@
+<plugin>
+	<nom>Liste des IMCs</nom>
+	<auteur>Collectif Indym&#233;dia lille
+		- [contact->mailto:imc.lille@no-log.org]
+		- [site->http://lille.indymedia.org]
+		- &#169; 2009-2010 - Distribu&#233; sous licence GNU/GPL
+	</auteur>
+	<version>0.2</version>
+	<etat>test</etat>
+	<icon></icon>
+	<description>Ce plugin permet de r&#233;cuperer p&#233;riodiquement la liste des IMCs
+	(Ind&#233;pendant m&#233;dia center) au format XML afin de garder une liste à jour. Ce
+	plugin s'adresse principalement aux sites Indym&#233;dia</description>
+	<lien></lien>
+	
+	<install>listeimc_installation.php</install>
+	
+	<prefix>listeimc</prefix>
+	
+	<pipeline>
+        	<nom>declarer_tables_principales</nom>
+        	<inclure>base/listeimc_base.php</inclure>
+	</pipeline>
+	
+	<pipeline>
+        	<nom>declarer_tables_auxiliaires</nom>
+        	<inclure>base/listeimc_base.php</inclure>
+	</pipeline>
+	
+	<pipeline>
+        	<nom>declarer_tables_interfaces</nom>
+        	<inclure>base/listeimc_base.php</inclure>
+	</pipeline>
+	
+	<pipeline>
+		<nom>insert_head</nom>
+		<action>css</action>
+		<inclure>listeimc_pipelines.php</inclure>
+	</pipeline>
+	
+	<pipeline>
+		<nom>taches_generales_cron</nom>
+		<action>frequence</action>
+		<inclure>listeimc_pipelines.php</inclure>
+	</pipeline>
+	
+	<necessite id='cfg' version='[1.14.1;]' />
+</plugin>

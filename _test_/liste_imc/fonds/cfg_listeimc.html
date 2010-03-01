@@ -1,0 +1,35 @@
+<!-- descriptif=
+<a name="haut"></a>
+&nbsp;&nbsp;<b>Navigation</b>
+<br />
+- <a href="#frequence"><:listeimc:frequence:></a>
+-->
+<!-- titre=Liste des IMCs-->
+
+<!-- boite=Configuration de la liste des IMCs-->
+<!-- nom=listeimc-->
+
+#CFG_ARBO{listeimc}
+
+#CACHE{0}
+
+<form method="post" action="#SELF">
+[(#ENV{_cfg_}|form_hidden)]
+
+<p><:listeimc:description_plugin:></p>
+
+
+<a name="frequence"></a>
+
+<fieldset style="background:#F5EDED;"><legend><b><:listeimc:titre_frequence:></b></legend>
+
+<label><:listeimc:modifier_frequence:></label><br />
+<input type="text" name="frequence_fichier" value="#ENV{frequence_fichier}" size="10" />
+
+<br /><br />
+
+
+<input type="submit" name="_cfg_ok" value="<:OK:>" />
+</fieldset>
+
+</form>

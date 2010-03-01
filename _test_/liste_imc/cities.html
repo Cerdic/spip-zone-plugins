@@ -1,0 +1,12 @@
+<!-- CITIES.HTML squelette pour SPIP
+ généré a partir de http://www.indymedia.org/cities.xml
+ version du fichier : 1.0-->
+
+<a class="listeimc" href="http://www.indymedia.org">www.indymedia.org</a>
+
+<BOUCLE_groupeImc(LISTEIMC_GROUPE)>
+	<div class="listeimc">#LIBELLE</div>
+	<BOUCLE_imc(LISTEIMC_IMC){id_groupe=#ID_GROUPE}>
+		<a class="listeimc" href="#URL">#LIBELLE</a>
+	</BOUCLE_imc>
+</BOUCLE_groupeImc>

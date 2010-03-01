@@ -1,0 +1,11 @@
+a.listeimc {
+	display:block;
+	margin-left : 5px;
+	margin-right: 5px;
+}
+
+div.listeimc {
+	margin-left : 5px;
+	margin-right : 5px;
+	float : left;
+}
