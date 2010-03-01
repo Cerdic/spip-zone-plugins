@@ -80,7 +80,6 @@ function thumbshot($url_site) {
 					image_imagejpg($img, $thumb_cache);				
 				} else {
 					/* Depuis SPIP 2.1, les filtres images changent de nom */
-					include_spip('inc/filtres_images_lib_mini');
 					_image_imagejpg($img, $thumb_cache);
 				}
 			}
