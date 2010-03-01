@@ -1,5 +1,5 @@
 [(#REM) Afficher les mots selectionnes
-]<B_mots><ul id='mots_sel'><BOUCLE_mots(MOTS){id_evenement}>
+]<B_mots><ul id='mots_sel'><BOUCLE_mots(MOTS){id_mot IN #ENV{selected,'0'}}>
 <li><input type="hidden" name='#ENV{name}[]' value="#ID_MOT"
 />#TITRE <a href='#'
 onclick='mot_sel_remove(this);return false;'><img src='#CHEMIN{images/croix-rouge.gif}' /></a><em>, </em></li>
