@@ -77,7 +77,7 @@ function agenda_affiche_milieu($flux) {
 		if ($res)
 			$flux['data'] .= "<div class='verdana2'><img src='".find_in_path("img_pack/agenda$statut.png")."' class='agenda-statut' />$res<div class='nettoyeur'></div></div>";
 	}
-	if ($exec=='articles'){
+	elseif ($exec=='articles'){
 		$id_article = $flux['args']['id_article'];
 		$afficher = true;
 		// un article avec des evenements a toujours le bloc
@@ -98,6 +98,13 @@ function agenda_affiche_milieu($flux) {
 			 $evenements = recuperer_fond('prive/contenu/evenements_article',$contexte);
 			 $flux['data'] .= $evenements;
 		}
+	}
+	elseif ($exec=='mots_edit'){
+		$id_mot = $flux['args']['id_mot'];
+		foreach($_GET as $key=>$val)
+			$contexte[$key] = $val;
+	 $evenements = recuperer_fond('prive/contenu/agenda_evenements',$contexte);
+	 $flux['data'] .= $evenements;
 	}
 	return $flux;
 }
@@ -126,6 +133,17 @@ function agenda_libelle_association_mots($libelles){
 
 function agenda_objets_extensibles($objets){
 		return array_merge($objets, array('evenement' => _T('agenda:evenements')));
+}
+
+function agenda_afficher_nombre_objets_associes_a($flux){
+	if ($flux['args']['objet']=='mot'
+	  AND $id_mot=$flux['args']['id_objet']){
+		$aff_articles = sql_in('A.statut',  ($GLOBALS['connect_statut'] =="0minirezo")  ? array('prepa','prop','publie') : array('prop','publie'));
+		$nb = sql_countsel("spip_mots_evenements AS L LEFT JOIN spip_evenements AS E ON E.id_evenement=L.id_evenement LEFT JOIN spip_articles AS A ON E.id_article=A.id_article", "L.id_mot=".intval($id_mot)." AND $aff_articles");
+		if ($nb)
+			$flux['data'][] = singulier_ou_pluriel($nb, "agenda:info_un_evenement", "agenda:info_nombre_evenements");
+	}
+	return $flux;
 }
 
 ?>

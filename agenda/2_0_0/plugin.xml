@@ -48,6 +48,10 @@
 		<inclure>agenda_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
+		<nom>afficher_nombre_objets_associes_a</nom>
+		<inclure>agenda_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
 		<nom>taches_generales_cron</nom>
 		<inclure>agenda_pipelines.php</inclure>
 	</pipeline>
