@@ -10,20 +10,22 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * Génère une saisie à partir d'un tableau la décrivant et de l'environnement
  * Le tableau doit être de la forme suivante :
  * array(
- *		'options' => array(
- *			'type_saisie' => 'input',
- *			'nom' => 'le_name',
- *			'label' => 'Un titre plus joli',
- *			'obligatoire' => 'oui',
- *			'explication' => 'Remplissez ce champ en utilisant votre clavier.'
- *		)
+ *		'type_saisie' => 'input',
+ *		'nom' => 'le_name',
+ *		'label' => 'Un titre plus joli',
+ *		'obligatoire' => 'oui',
+ *		'explication' => 'Remplissez ce champ en utilisant votre clavier.',
+ *		0 => array(une saisie enfant),
+ *		1 => array(une autre saisie enfant),
+ *		2 => array(etc)
  * )
+ * Les options de la saisie ont une clé textuelle, tandis que les éventuelles saisies enfants ont des clés numériques indiquant leur rang.
  * 
  * @param array $saisie La description d'une saisie sous la forme d'un tableau
  * @param arary $env L'environnement dans lequel sera construit la saisie (sert notamment pour récupérer la valeur du champ)
  * @return string Retourne le HTML de la saisie
  */
-function saisies_generer_html($saisie, $env){
+function saisies_generer_html($saisie, $env=array()){
 	
 	// Si le parametre n'est pas bon, on genere du vide
 	if (!is_array($saisie))
