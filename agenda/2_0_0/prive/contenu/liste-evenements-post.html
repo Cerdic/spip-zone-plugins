@@ -15,7 +15,7 @@
 		<div class='repetitions'>
 			<strong>[(#TOTAL_BOUCLE|agenda_affiche_un_ou_plusieurs{agenda:une_repetition,agenda:nb_repetitions})]</strong>
 			<ul>
-				<BOUCLE_repetitions(EVENEMENTS){par date_debut}{id_parent}{" | "}>
+				<BOUCLE_repetitions(EVENEMENTS){par date_debut}{id_evenement_source=#ID_EVENEMENT}{" | "}>
 				<li><a class='ajax' href='[(#SELF|parametre_url{id_evenement,#ID_EVENEMENT}|parametre_url{date_debut,#DATE_DEBUT})]'>[(#DATE_DEBUT|agenda_affdate_debut_fin{#DATE_FIN,#HORAIRE})]</a></li>
 				</BOUCLE_repetitions>
 			</ul>
