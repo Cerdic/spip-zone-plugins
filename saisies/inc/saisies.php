@@ -82,12 +82,12 @@ function saisies_generer_html($saisie, $env=array()){
 	if ($enfants and is_array($enfants)){
 		$contexte['saisies'] = $enfants;
 	}
-	var_dump($contexte);
+	
 	// On génère la saisie
-#	return recuperer_fond(
-#		'saisies/_base',
-#		$contexte
-#	);
+	return recuperer_fond(
+		'saisies/_base',
+		$contexte
+	);
 	
 }
 
