@@ -73,7 +73,7 @@ function generer_cities_html() {
 			array(
 				'id_imc' => $id_imc,
 				'id_groupe' => $imc['id_groupe'],
-				'libelle' => $imc['libelle'],
+				'libelle' => str_replace('&','&amp;',$imc['libelle']),
 				'url' => $imc['url']
 			)
 		);
