@@ -30,7 +30,7 @@ function generer_saisie($champ, $env){
 	// Peut-être des transformations à faire sur les options textuelles
 	$options = $champ['options'];
 	foreach ($options as $option => $valeur){
-		$options[$option] = saisies_transformer_langue($valeur);
+		$options[$option] = _T_ou_typo($valeur, 'multi');
 	}
 	
 	// On ajoute les options propres à la saisie
@@ -67,27 +67,6 @@ function generer_saisie($champ, $env){
 		$contexte
 	);
 	
-}
-
-// Applique eventuellement certaines transformations de langue a une valeur
-function saisies_transformer_langue($valeur){
-	// Si la valeur est bien une chaine (et pas non plus un entier déguisé)
-	if (is_string($valeur) and !intval($valeur)){
-		// Si la chaine est du type <:truc:> on passe à _T()
-		if (preg_match('/^<:([\w:]+):>$/', $valeur, $captures))
-			$valeur = _T($captures[1]);
-		// OU BIEN si la chaine contient du <multi> on appele typo() pour transformer
-		elseif (strpos($valeur, '<multi>') !== false)
-			$valeur = typo($valeur);
-	}
-	// Sinon si c'est un tableau, on fait les memes tests pour chaque valeur
-	elseif (is_array($valeur)){
-		foreach ($valeur as $cle => $valeur2){
-			$valeur[$cle] = saisies_transformer_langue($valeur2);
-		}
-	}
-	
-	return $valeur;
 }
 
 ?>

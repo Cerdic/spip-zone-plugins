@@ -5,6 +5,90 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Une librairie pour manipuler ou obtenir des infos sur un tableau de saisies
 
+
+/*
+ * Génère une saisie à partir d'un tableau la décrivant et de l'environnement
+ * Le tableau doit être de la forme suivante :
+ * array(
+ *		'options' => array(
+ *			'type_saisie' => 'input',
+ *			'nom' => 'le_name',
+ *			'label' => 'Un titre plus joli',
+ *			'obligatoire' => 'oui',
+ *			'explication' => 'Remplissez ce champ en utilisant votre clavier.'
+ *		)
+ * )
+ * 
+ * @param array $saisie La description d'une saisie sous la forme d'un tableau
+ * @param arary $env L'environnement dans lequel sera construit la saisie (sert notamment pour récupérer la valeur du champ)
+ * @return string Retourne le HTML de la saisie
+ */
+function saisies_generer_html($saisie, $env){
+	
+	// Si le parametre n'est pas bon, on genere du vide
+	if (!is_array($saisie))
+		return '';
+	
+	// On sépare les options et les saisies enfants
+	$cles = array_keys($saisie);
+	// Les saisies enfants ce sont les clés numériques
+	$cles_enfants = array_filter($cles, 'is_int');
+	// Les options ce sont les autres
+	$cles_options = array_diff($cles, $cles_enfants);
+	// On remet les clés en tant que clés
+	$cles_enfants = array_flip($cles_enfants);
+	$cles_options = array_flip($cles_options);
+	// On récupère chaque morceaux
+	$options = array_intersect_key($saisie, $cles_options);
+	$enfants = array_intersect_key($saisie, $cles_enfants);
+	
+	// Le contexte c'est d'abord les options de la saisie
+	// Peut-être des transformations à faire sur les options textuelles
+	$contexte = _T_ou_typo($options, 'multi');
+	
+	// Si on ne trouve pas de type de saisie on met input par defaut
+	if (!$contexte['type_saisie'])
+		$contexte['type_saisie'] = 'input';
+	
+	// Si env est définie dans les options, on ajoute tout l'environnement
+	if(isset($contexte['env'])){
+		unset($contexte['env']);
+		// Les options de la saisie sont prioritaires sur l'environnement
+		$contexte = array_merge($env, $contexte);
+	}
+	// Sinon on ne sélectionne que quelques éléments importants
+	else{
+		// On récupère la liste des erreurs
+		$contexte['erreurs'] = $env['erreurs'];
+	}
+	
+	// Dans tous les cas on récupère de l'environnement la valeur actuelle du champ
+	// Si le nom du champ est un tableau indexé, il faut parser !
+	if (preg_match('/([\w]+)((\[[\w]+\])+)/', $contexte['nom'], $separe)){
+		$contexte['valeur'] = $env[$separe[1]];
+		preg_match_all('/\[([\w]+)\]/', $separe[2], $index);
+		// On va chercher au fond du tableau
+		foreach($index[1] as $cle){
+			$contexte['valeur'] = $contexte['valeur'][$cle];
+		}
+	}
+	// Sinon la valeur est juste celle du nom
+	else
+		$contexte['valeur'] = $env[$contexte['nom']];
+	
+	// S'il y a des saisies enfants, on les ajoute au contexte
+	if ($enfants and is_array($enfants)){
+		$contexte['saisies'] = $enfants;
+	}
+	var_dump($contexte);
+	// On génère la saisie
+#	return recuperer_fond(
+#		'saisies/_base',
+#		$contexte
+#	);
+	
+}
+
 /*
  * Prend la description complète du contenu d'un formulaire et retourne
  * uniquement les saisies.
