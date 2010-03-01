@@ -102,7 +102,7 @@ Sinon, utiliser le comportement normal.
 <dt class='spip_doc_titre'>
 <object type="application/x-shockwave-flash" data="#CHEMIN{flash/player_flv_maxi.swf}" width="#GET{largeur}" height="#GET{hauteur}">
 <param name="movie" value="#CHEMIN{flash/player_flv_maxi.swf}" />
-<param name="FlashVars" value="flv=[(#URL_DOCUMENT|url_absolue)]&amp;width=#GET{largeur}&amp;height=#GET{hauteur}&amp;bgcolor1=ffffff&amp;bgcolor2=cccccc&amp;buttoncolor=999999&amp;buttonovercolor=0&amp;slidercolor1=cccccc&amp;slidercolor2=999999&amp;sliderovercolor=666666&amp;textcolor=0&amp;showstop=1&amp;title=[(#TITRE|urlencode)][(#LOGO_DOCUMENT||extraire_attribut{src}|match{flv.png$}|?{'',' '})&amp;startimage=[(#LOGO_DOCUMENT||extraire_attribut{src})]]&amp;ondoubleclick=fullscreen&amp;showfullscreen=1&amp;autoplay=[(#ENV{autoplay}|?{1,0})]" />
+<param name="FlashVars" value="flv=[(#URL_DOCUMENT|url_absolue)]&amp;width=#GET{largeur}&amp;height=#GET{hauteur}&amp;bgcolor1=ffffff&amp;bgcolor2=cccccc&amp;buttoncolor=999999&amp;buttonovercolor=0&amp;slidercolor1=cccccc&amp;slidercolor2=999999&amp;sliderovercolor=666666&amp;textcolor=0&amp;showstop=1&amp;title=[(#TITRE|textebrut|urlencode)][(#LOGO_DOCUMENT||extraire_attribut{src}|match{flv.png$}|?{'',' '})&amp;startimage=[(#LOGO_DOCUMENT||extraire_attribut{src})]]&amp;ondoubleclick=fullscreen&amp;showfullscreen=1&amp;autoplay=[(#ENV{autoplay}|?{1,0})]" />
 <param name="allowFullScreen" value="true" />
 <param name="wmode" value="transparent" />
 [<strong>(#TITRE)</strong>]
