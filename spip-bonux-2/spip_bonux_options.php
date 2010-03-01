@@ -38,7 +38,7 @@ function _T_ou_typo($valeur, $mode_typo='toujours') {
 	// Si c'est un tableau, on reapplique la fonction récursivement
 	elseif (is_array($valeur)){
 		foreach ($valeur as $cle => $valeur2){
-			$valeur[$cle] = _T_ou_typo($valeur2);
+			$valeur[$cle] = _T_ou_typo($valeur2, $mode_typo);
 		}
 	}
 
