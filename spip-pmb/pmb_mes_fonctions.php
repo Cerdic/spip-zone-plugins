@@ -888,12 +888,19 @@ function pmb_ws_recuperer_tab_notices ($listenotices, &$ws, &$tresultat) {
 
 //charger les webservices
 function pmb_ws_charger_wsdl(&$ws, $url_base) {
-	try {
-		$ws=new SoapClient(lire_config("spip_pmb/wsdl","http://tence.bibli.fr/pmbws/PMBWsSOAP_1?wsdl"));
-	  } catch (SoapFault $fault) {
-		//print("Erreur : ".$fault->faultcode." : ".$fault->faultstring);
-	} 
+	//if (lire_config("spip_pmb/wsdl","") != "") {
+	//	    $ws=new jsonRPCClient(lire_config("spip_pmb/wsdl",""));
+	//} else {
+	//require_once 'jsonRPCClient.php';
+	//include('jsonRPCClient');
+		try {
+		      $ws=new SoapClient(lire_config("spip_pmb/wsdl","http://tence.bibli.fr/pmbws/PMBWsSOAP_1?wsdl"));
+		      //$ws=new jsonRPCClient("http://cc-tulle-et-correze.reseaubibli.fr/ws/connector_out.php?source_id=2", true);
 
+		} catch (SoapFault $fault) {
+		      //print("Erreur : ".$fault->faultcode." : ".$fault->faultstring);
+		} 
+	//}
 }
 function pmb_ws_liste_tri_recherche() {
 	//retourne un tableau contenant la liste des tris possibles

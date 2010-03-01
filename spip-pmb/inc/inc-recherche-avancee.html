@@ -9,16 +9,16 @@
 
 			<div class='formulaire_spip formulaire_recherche_avancee'>
 
-			<form name='search_input' action='#resultats_recherche' method='get' onSubmit="if (search_input.user_query.value.length == 0) { search_input.user_query.value='*'; return true; }">
-				<div>
+			<form action='[(#URL_PAGE{recherche}|ancre_url{ajax-recherche-catalogue})]' method='post'>
+				<fieldset>
 				[<input type='hidden' name='id_section' value='(#ENV{id_section})'/>]
 				[<input type='hidden' name='id_location_memo' value='(#ENV{id_location_memo})'/>]
 				[<input type='hidden' name='titre_section' value='(#ENV{titre_section})'/>]
 				<input type='hidden' name='page' value='[(#ENV{page}|sinon{recherche})]'/>
 				<input type='hidden' name='recherche_avancee' value='1'/>
 				<input type='hidden' name='look_PMB' value='1'/>
-				</div>
-				<fieldset>
+				<input type='hidden' name='look_FIRSTACCESS' value='1' />
+				
 				<legend><:pmb:recherche_avancee:></legend>
 				<ul>
 				
@@ -70,18 +70,31 @@
 					  <option  value='r'[(#ENV{typdoc}|=={r}|?{' ',''})selected="selected")]>objet &agrave; 3 dimensions, artefacts, ...</option>
 				    </select>
 				</li>
-				<li class="choix">
-						<span style='width: 30%; float: left;'><input type='checkbox' name='look_TITLE' id='look_TITLE' value='1'[(#ENV{look_TITLE}|=={1}|?{' ',''})checked="checked"]  /><label for='look_TITLE'> Titres </label></span>
-						<span style='width: 30%; float: left;'><input type='checkbox' name='look_AUTHOR' id='look_AUTHOR' value='1'[(#ENV{look_AUTHOR}|=={1}|?{' ',''})checked="checked"]  /><label for='look_AUTHOR'> Auteurs </label></span>
-						<span style='width: 30%; float: left;'><input type='checkbox' name='look_PUBLISHER' id='look_PUBLISHER' value='1'[(#ENV{look_PUBLISHER}|=={1}|?{' ',''})checked="checked"]  /><label for='look_PUBLISHER'> Editeurs </label></span>
-						<span style='width: 30%; float: left;'><input type='checkbox' name='look_COLLECTION' id='look_COLLECTION' value='1'[(#ENV{look_COLLECTION}|=={1}|?{' ',''})checked="checked"]  /><label for='look_COLLECTION'> Collections </label></span>
-						<span style='width: 30%; float: left;'><input type='checkbox' name='look_SUBCOLLECTION' id='look_SUBCOLLECTION' value='1'[(#ENV{look_SUBCOLLECTION}|=={1}|?{' ',''})checked="checked"]  /><label for='look_SUBCOLLECTION'> Sous-collections </label></span>
-						<span style='width: 30%; float: left;'><input type='checkbox' name='look_CATEGORY' id='look_CATEGORY' value='1'[(#ENV{look_CATEGORY}|=={1}|?{' ',''})checked="checked"]  /><label for='look_CATEGORY'> Cat&eacute;gories </label></span>
-						
-						<span style='width: 30%; float: left;'><input type='checkbox' name='look_INDEXINT' id='look_INDEXINT' value='1'[(#ENV{look_INDEXINT}|=={1}|?{' ',''})checked="checked"]  /><label for='look_INDEXINT'> Indexations d&eacute;cimales </label></span>
-						<span style='width: 30%; float: left;'><input type='checkbox' name='look_KEYWORDS' id='look_KEYWORDS' value='1'[(#ENV{look_KEYWORDS}|=={1}|?{' ',''})checked="checked"]  /><label for='look_KEYWORDS'> Tags</label></span>
-						<span style='width: 30%; float: left;'><input type='checkbox' name='look_ABSTRACT' id='look_ABSTRACT' value='1'[(#ENV{look_ABSTRACT}|=={1}|?{' ',''})checked="checked"]  /><label for='look_ABSTRACT'> R&eacute;sum&eacute; et notes </label></span>
-						<span style='width: 30%; float: left;'><input type='checkbox' name='look_ALL' id='look_ALL' value='1'[(#ENV{look_ALL}|=={1}|?{' ',''})checked="checked"] /><label for='look_ALL'> Tous les champs </label></span></div><div style='clear: both;'><input type='hidden' name='look_FIRSTACCESS' value='1' />
+				<li>
+					<table class="spip champ-recherche">
+					<tbody>
+						<tr class="row_even">
+						  <td><input type='checkbox' name='look_TITLE' id='recherche_avancee_look_TITLE' value='1'[(#ENV{look_TITLE}|=={1}|?{' ',''})checked="checked"]  /><label for='recherche_avancee_look_TITLE'> Titres </label></td>
+						  <td><input type='checkbox' name='look_AUTHOR' id='recherche_avancee_look_AUTHOR' value='1'[(#ENV{look_AUTHOR}|=={1}|?{' ',''})checked="checked"]  /><label for='recherche_avancee_look_AUTHOR'> Auteurs </label></td>
+						  <td><input type='checkbox' name='look_PUBLISHER' id='recherche_avancee_look_PUBLISHER' value='1'[(#ENV{look_PUBLISHER}|=={1}|?{' ',''})checked="checked"]  /><label for='recherche_avancee_look_PUBLISHER'> Editeurs </label></td>
+						</tr>
+						<tr class="row_odd">
+						  <td><input type='checkbox' name='look_COLLECTION' id='recherche_avancee_look_COLLECTION' value='1'[(#ENV{look_COLLECTION}|=={1}|?{' ',''})checked="checked"]  /><label for='recherche_avancee_look_COLLECTION'> Collections </label></td>
+						  <td><input type='checkbox' name='look_SUBCOLLECTION' id='recherche_avancee_look_SUBCOLLECTION' value='1'[(#ENV{look_SUBCOLLECTION}|=={1}|?{' ',''})checked="checked"]  /><label for='recherche_avancee_look_SUBCOLLECTION'> Sous-collections </label></td>
+						  <td><input type='checkbox' name='look_CATEGORY' id='recherche_avancee_look_CATEGORY' value='1'[(#ENV{look_CATEGORY}|=={1}|?{' ',''})checked="checked"]  /><label for='recherche_avancee_look_CATEGORY'> Cat&eacute;gories </label></td>
+						</tr>
+						<tr class="row_even">
+						  <td><input type='checkbox' name='look_KEYWORDS' id='recherche_avancee_look_KEYWORDS' value='1'[(#ENV{look_KEYWORDS}|=={1}|?{' ',''})checked="checked"]  /><label for='recherche_avancee_look_KEYWORDS'> Tags</label></td>
+						  <td><input type='checkbox' name='look_ABSTRACT' id='recherche_avancee_look_ABSTRACT' value='1'[(#ENV{look_ABSTRACT}|=={1}|?{' ',''})checked="checked"]  /><label for='recherche_avancee_look_ABSTRACT'> R&eacute;sum&eacute; et notes </label></td>
+						  <td><input type='checkbox' name='look_ALL' id='recherche_avancee_look_ALL' value='1'[(#ENV{look_ALL}|=={1}|?{' ',''})checked="checked"] /><label for='look_ALL'> Tous les champs </label></td>
+						</tr>
+						<tr class="row_odd">
+						  <td><input type='checkbox' name='look_INDEXINT' id='recherche_avancee_look_INDEXINT' value='1'[(#ENV{look_INDEXINT}|=={1}|?{' ',''})checked="checked"]  /><label for='recherche_avancee_look_INDEXINT'> Indexations d&eacute;cimales </label></td>
+						  <td></td>
+						  <td></td>
+						</tr>
+					</tbody>
+					</table>
 				</li>
 				</ul>
 
