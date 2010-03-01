@@ -1,0 +1,16 @@
+<plugin>
+	<nom>Extension MySQLi</nom>
+	<auteur>Gilles Vincent</auteur>
+	<licence>GNU/GPL</licence>
+	<version>0.1</version>
+	<version_base>0.1</version_base>
+	<icon>img/database.png</icon>
+	<license_logo>
+		Logo est sous license GPL, il fait partie de la s&eacute;rie [Crystal Clear->http://commons.wikimedia.org/wiki/Crystal_Clear]
+	</license_logo>
+	<description>
+		Permet d'utiliser MySQLi plut&ocirc;t que l'interface MySQL
+	</description>
+	<etat>dev</etat>
+	<prefix>mysqli</prefix>
+</plugin>
