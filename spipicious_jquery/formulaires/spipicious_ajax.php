@@ -31,13 +31,14 @@ function formulaires_spipicious_ajax_charger($id_objet,$type='article',$retour='
 function formulaires_spipicious_ajax_traiter($id_objet,$type,$retour='') {
 	$add_tags = _request('add_tags');
 	$remove_tag = _request('remove_tags');
+	$spipicious_tags = _request('spipicious_tags');
 
 	if (is_array($remove_tag)) {
 		$supprimer_tags = charger_fonction('spipicious_supprimer_tags','action');
 		list($message,$invalider,$err) = $supprimer_tags();
 	}
 
-	if(!empty($add_tags)){
+	if((!empty($add_tags))AND (!empty($spipicious_tags))){
 		$ajouter_tags = charger_fonction('spipicious_ajouter_tags','action');
 		list($message,$invalider,$err) = $ajouter_tags();
 	}

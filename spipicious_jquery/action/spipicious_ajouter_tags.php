@@ -37,8 +37,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 	}
 
 	function spipicious_ajouter_tags($tableau_tags,$id_auteur,$id_objet,$type,$id_table_objet,$table_mot,$id_groupe){
-		$invalider = false;
-
+		
 		$tag_analysed = array();
 		$position = 0;
 
