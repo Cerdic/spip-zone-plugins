@@ -14,18 +14,24 @@ function lm2_insert_head($flux){
  * Permet de traiter les [mon son->http://monsite/mon_son.mp3] dans un texte.
  * Le filtre peut etre appele dans un squelette apres |liens_absolus
  *
- * Pète cependant dans les cas (tordus) suivants :
+ * Pete cependant dans les cas (tordus) suivants :
  * [{{Une histoire d'amour}}->documents/sons/PIRATAGE/01 UNE HISTOIRE D'AMOUR.mp3]
  * [{{Une histoire d'amour à trois}}->documents/sons/PIRATAGE/02 UNE HISTOIRE D'AMOUR A TROIS[2].mp3]
  *
  */
 
 function lm2_pre_liens($texte) {
-	define('_RACCOURCI_LIEN_MP3', "/\[([^][]*?([[]\w*[]][^][]*)*)->(>?)([^]\.mp3]*)\]/msS");
+	
+	define('_RACCOURCI_LIEN_MP3', "/\[([^][]*?([[]\w*[]][^][]*)*)->(>?)([^]]*\.mp3)\]/msS");
+	
+	if (preg_match_all(_RACCOURCI_LIEN_MP3, $texte, $regs, PREG_SET_ORDER)) {
 
-	if (preg_match_all(_RACCOURCI_LIEN, $texte, $regs, PREG_SET_ORDER)) {
 		foreach ($regs as $k => $reg) {
-		$l = "<a href='$reg[4]' rel='enclosure'>$reg[1]</a>";
+		if($reg[1]){
+			$l = "<a href='$reg[4]' rel='enclosure'>$reg[1]</a>";
+		}else{
+			$l = "<a href='$reg[4]' rel='enclosure'>".couper($reg[4],50)."</a>";
+		} 
 		$p = $reg[0] ;
 		$texte = str_replace($p,$l,$texte);
 		}	
