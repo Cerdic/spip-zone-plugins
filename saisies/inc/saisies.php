@@ -7,6 +7,25 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 /*
+ * Quelles sont les saisies qui se débrouillent toutes seules, sans le _base commun
+ *
+ * @return array Retourne un tableau contenant les types de saisies qui ne doivent pas utiliser le _base.html commun
+ */
+function saisies_autonomes(){
+	$saisies_autonomes = pipeline(
+		'saisies_autonomes',
+		array(
+			'fieldset',
+			'hidden',
+			'destinataires'
+		)
+	);
+	
+	return $saisies_autonomes;
+}
+
+
+/*
  * Génère une saisie à partir d'un tableau la décrivant et de l'environnement
  * Le tableau doit être de la forme suivante :
  * array(

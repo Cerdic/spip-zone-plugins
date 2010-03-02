@@ -39,7 +39,7 @@
 [(#VAL{explication}|array_key_exists{#VALEUR}|oui)
 [<li>
 	<div class="explication">
-		(#VALEUR|table_valeur{explication}|saisies_transformer_langue)
+		(#VALEUR|table_valeur{explication}|_T_ou_typo{multi})
 	</div>
 </li>]
 ]
@@ -56,7 +56,7 @@
 #SET{contenu, #VALEUR|table_valeur{contenu}}
 <li class="fieldset[ (#GET{css})]">
 	<fieldset>
-		[<h3 class="legend">(#GET{titre}|saisies_transformer_langue)</h3>]
+		[<h3 class="legend">(#GET{titre}|_T_ou_typo{multi})</h3>]
 		
 		[(#GET{contenu}|is_array|oui)
 		<ul [class="(#GET{pliable})[ (#GET{plie})]"]>
