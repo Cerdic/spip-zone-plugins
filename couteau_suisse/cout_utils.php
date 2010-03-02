@@ -647,7 +647,7 @@ function cs_parse_code_js($code) {
 			$rempl = $metas_vars[$matches[1]];
 		} else {
 			// tant que le webmestre n'a pas poste, on prend la valeur (dynamique) par defaut
-			$rempl = cs_get_defaut($matches[1]);
+			$rempl = cs_retire_guillemets(cs_get_defaut($matches[1]));
 		}
 		$code = str_replace($matches[0], $rempl, $code);
 	} 
