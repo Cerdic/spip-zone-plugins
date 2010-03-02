@@ -55,7 +55,7 @@ La valeur de 1~000~000 pixels semble correcte pour une configuration avec peu de
 	'auteurs:nom' => 'Page des auteurs',
 
 	// B
-	'barres_typo_edition' => 'Edtition des contenus',
+	'barres_typo_edition' => 'Edition des contenus',
 	'barres_typo_forum' => 'Messages de Forum',
 	'barres_typo_intro' => 'Le plugin &laquo;Porte-Plume&raquo; a &eacute;t&eacute; d&eacute;tect&eacute;. Veuillez choisir ici les barres typographiques o&ugrave; certains boutons seront ins&eacute;r&eacute;s.',
 	'basique' => 'Basique',
