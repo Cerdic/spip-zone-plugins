@@ -1,9 +1,11 @@
 <h2 class="h2"><:spipthelia:mon_compte:></h2>
 	<ul class="menu-liste">
+		[(#SESSION{id_auteur}|non)
 		<THELIA SI NON CONNECTE>
-			<li class="menu-entree"><a href="#URL_LOGOUT{#URL_PAGE{connexion}}"><:spipthelia:se_connecter:></a></li>
+			<li class="menu-entree"><a href="#URL_PAGE{connexion}"><:spipthelia:se_connecter:></a></li>
 			<li class="menu-entree"><a href="#URL_PAGE{mdpoublie}"><:spipthelia:mdp_oublie:></a></li>
 		</THELIA SI NON CONNECTE>
+		]
 		<THELIA SI CONNECTE>
 			<li class="menu-entree"><a href="#URL_PAGE{moncompte}"><:spipthelia:mon_compte:></a></li>
 			[(#CONFIG{spip_thelia/auth_unique_spip_thelia}|=={"oui"}|oui)

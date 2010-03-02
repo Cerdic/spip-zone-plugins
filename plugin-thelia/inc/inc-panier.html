@@ -68,7 +68,17 @@
 			</div>
 
 			<br class="nettoyeur" />
-				<a href="#URL_PAGE{adresse}" class="lien-thelia lien-thelia-suite"><:spipthelia:valider_panier:></a>
+				[(#SESSION{id_auteur}|oui)
+				<THELIA SI NON CONNECTE>
+				      <a href="#URL_LOGOUT{#URL_PAGE{adresse}}" class="lien-thelia lien-thelia-suite"><:spipthelia:valider_panier:></a>
+				</THELIA SI NON CONNECTE>
+				<THELIA SI CONNECTE>
+				      <a href="#URL_PAGE{adresse}" class="lien-thelia lien-thelia-suite"><:spipthelia:valider_panier:></a>
+				</THELIA SI CONNECTE>
+				]
+				[(#SESSION{id_auteur}|non)
+				    <a href="#URL_PAGE{adresse}" class="lien-thelia lien-thelia-suite"><:spipthelia:valider_panier:></a>
+				]
 				
 			</T_CONTENU_PANIER>
 				<p><:spipthelia:panier_vide:></p>

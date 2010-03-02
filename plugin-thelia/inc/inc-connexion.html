@@ -1,5 +1,4 @@
 
-				
 				[(#REM) Afficher les étapes de la commande et visualiser l'étape courante ]
 				<ul id='infos_etapes' class='infos_etape_2'>
 				    <li class='valides'><div class='fond'><a href="[(#URL_PAGE{panier})]"><em>&Eacute;tape </em><span class='numero_etape'>1</span><em>&nbsp;: </em><:spipthelia:etape_panier:></a></div></li>
@@ -8,9 +7,6 @@
 				    <li class='prochains'><div class='fond'><em>&Eacute;tape </em><span class='numero_etape'>4</span><em>&nbsp;: </em><:spipthelia:etape_paiement:></div></li>
 				    <li class='prochains'><div class='fond'><em>&Eacute;tape </em><span class='numero_etape'>5</span><em>&nbsp;: </em><:spipthelia:etape_terminer:></div></li>
 				</ul>
-
-				
-
 
 				[(#REM) Titre de la page]
 
@@ -24,27 +20,28 @@
 				
 				[(#CONFIG{spip_thelia/auth_unique_spip_thelia}|=={"oui"}|oui)
 					[(#SESSION{id_auteur}|oui)
-					Vous &ecirc;tes connect&eacute; actuellement sans compte client associ&eacute;. Veuillez vous identifier sur la boutique ou cr&eacute;er un nouveau compte pour continuer. 
-					<form action="#URL_PAGE{connexion,lang=#LANG}" method="post" id="connexion" class="formulaire_spip">
-			                     <input type="hidden" name="thelia_action" value="connexion" />
-			                  <fieldset>
-				                  <ul>
-				                     <li>
-							<label><:spipthelia:mon_email:> THELIA-ERRCONNEX[(#REM|sinon{&#91;}|html_entity_decode)]<span class="obligatoire">(<:spipthelia:err_emailmdp:>)</span>[(#REM|sinon{&#93;}|html_entity_decode)]</label>
-				                        <input name="email" type="text" class="text"/>
-					            </li>
-				                    <li>
-				                        <label><:spipthelia:mon_mdp:></label>
-							<input name="motdepasse" type="password"  class="text"/>
-				                    </li>
-				                    <li>
-				                        <input type="submit" class="submit" value="<:spipthelia:valider:>" />
-				                    </li>
-				                   </ul>  	
-						</fieldset>
-					</form>
+					      [(#REM)Vous &ecirc;tes connect&eacute; actuellement sans compte client associ&eacute;. Veuillez vous identifier sur la boutique ou cr&eacute;er un nouveau compte pour continuer. 
+					      <form action="#URL_PAGE{connexion,lang=#LANG}" method="post" id="connexion" class="formulaire_spip">
+						  <input type="hidden" name="thelia_action" value="connexion" />
+						<fieldset>
+							<ul>
+							  <li>
+							      <label><:spipthelia:mon_email:> THELIA-ERRCONNEX[(#REM|sinon{&#91;}|html_entity_decode)]<span class="obligatoire">(<:spipthelia:err_emailmdp:>)</span>[(#REM|sinon{&#93;}|html_entity_decode)]</label>
+							      <input name="email" type="text" class="text"/>
+							  </li>
+							  <li>
+							      <label><:spipthelia:mon_mdp:></label>
+							      <input name="motdepasse" type="password"  class="text"/>
+							  </li>
+							  <li>
+							      <input type="submit" class="submit" value="<:spipthelia:valider:>" />
+							  </li>
+							</ul>  	
+						      </fieldset>
+					      </form>]
 					]
-			
+					
+				
 					[(#LOGIN_PUBLIC{#URL_PAGE{adresse}})]		
 				]
 				[(#CONFIG{spip_thelia/auth_unique_spip_thelia}|=={"oui"}|non)
