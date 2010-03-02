@@ -159,7 +159,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'qte' => 'Qt&eacute;',
 'produits_rubrique' => 'Produits de cette rubrique',
 'suppr' => 'Suppr.',
-'portfolio_produits' => 'Photos du produit'
+'portfolio_produits' => 'Photos du produit',
+'adresse_complement' => 'Compl&eacute;ment d\'adresse'
 
 );
 ?>
