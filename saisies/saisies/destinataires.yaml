@@ -3,8 +3,11 @@ titre: '<:saisies:saisie_destinataires_titre:>'
 description: '<:saisies:saisie_destinataires_explication:>'
 options:
   -
-    groupe: '<:saisies:option_groupe_description:>'
-    contenu:
+    saisie: 'fieldset'
+    options:
+      nom: 'description'
+      label: '<:saisies:option_groupe_description:>'
+    saisies:
       -
         saisie: 'input'
         options:
@@ -37,16 +40,22 @@ options:
             plusieurs: '<:saisies:option_type_choix_plusieurs:>'
           defaut: 'tous'
   -
-    groupe: '<:saisies:option_groupe_utilisation:>'
-    contenu:
+    saisie: 'fieldset'
+    options:
+      nom: 'utilisation'
+      label: '<:saisies:option_groupe_utilisation:>'
+    saisies:
       -
         saisie: 'oui_non'
         options:
           nom: 'obligatoire'
           label: '<:saisies:option_obligatoire_label:>'
   -
-    groupe: '<:saisies:option_groupe_affichage:>'
-    contenu:
+    saisie: 'fieldset'
+    options:
+      nom: 'affichage'
+      label: '<:saisies:option_groupe_affichage:>'
+    saisies:
       -
         saisie: 'input'
         options:

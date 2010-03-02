@@ -36,34 +36,7 @@
 
 ]
 <BOUCLE_contenu(POUR){tableau #ENV{saisies}}>
-[(#VAL{explication}|array_key_exists{#VALEUR}|oui)
-[<li>
-	<div class="explication">
-		(#VALEUR|table_valeur{explication}|_T_ou_typo{multi})
-	</div>
-</li>]
-]
-
 [(#VAL{saisie}|array_key_exists{#VALEUR}|oui)
 [(#VALEUR|generer_saisie{#ENV**|unserialize})]
-]
-
-[(#VAL{groupe}|array_key_exists{#VALEUR}|oui)
-#SET{titre, #VALEUR|table_valeur{groupe}}
-#SET{css, #VALEUR|table_valeur{css}}
-#SET{pliable, #VALEUR|table_valeur{pliable}|et{#VALEUR|table_valeur{pliable}|!={non}}|?{'pliable', ''}}
-#SET{plie, #VALEUR|table_valeur{plie}|et{#VALEUR|table_valeur{plie}|!={non}}|?{'plie', ''}}
-#SET{contenu, #VALEUR|table_valeur{contenu}}
-<li class="fieldset[ (#GET{css})]">
-	<fieldset>
-		[<h3 class="legend">(#GET{titre}|_T_ou_typo{multi})</h3>]
-		
-		[(#GET{contenu}|is_array|oui)
-		<ul [class="(#GET{pliable})[ (#GET{plie})]"]>
-			#INCLURE{fond=inclure/generer_saisies, env, saisies=#GET{contenu}}
-		</ul>
-		]
-	</fieldset>
-</li>
 ]
 </BOUCLE_contenu>

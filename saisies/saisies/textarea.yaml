@@ -4,8 +4,11 @@ description: '<:saisies:saisie_textarea_explication:>'
 icone: 'images/saisies_textarea.png'
 options:
   -
-    groupe: '<:saisies:option_groupe_description:>'
-    contenu:
+    saisie: 'fieldset'
+    options:
+      nom: 'description'
+      label: '<:saisies:option_groupe_description:>'
+    saisies:
       -
         saisie: 'input'
         options:
@@ -27,8 +30,11 @@ options:
           explication: '<:saisies:option_explication_explication:>'
           size: 50
   -
-    groupe: '<:saisies:option_groupe_utilisation:>'
-    contenu:
+    saisie: 'fieldset'
+    options:
+      nom: 'utilisation'
+      label: '<:saisies:option_groupe_utilisation:>'
+    saisies:
       -
         saisie: 'oui_non'
         options:
@@ -53,8 +59,11 @@ options:
           label: '<:saisies:option_readonly_label:>'
           explication: '<:saisies:option_readonly_explication:>'
   -
-    groupe: '<:saisies:option_groupe_affichage:>'
-    contenu:
+    saisie: 'fieldset'
+    options:
+      nom: 'affichage'
+      label: '<:saisies:option_groupe_affichage:>'
+    saisies:
       -
         saisie: 'input'
         options:

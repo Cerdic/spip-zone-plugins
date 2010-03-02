@@ -112,7 +112,7 @@ function saisies_generer_html($saisie, $env=array()){
 
 /*
  * Prend la description complète du contenu d'un formulaire et retourne
- * uniquement les saisies.
+ * les saisies "à plat" classées par nom.
  *
  * @param array $contenu Le contenu d'un formulaire
  * @return array Un tableau avec uniquement les saisies
@@ -126,8 +126,8 @@ function saisies_recuperer_saisies($contenu){
 				if (array_key_exists('saisie', $ligne)){
 					$saisies[$ligne['options']['nom']] = $ligne;
 				}
-				elseif (array_key_exists('groupe', $ligne)){
-					$saisies = array_merge($saisies, saisies_recuperer_saisies($ligne['contenu']));
+				if (is_array($ligne['saisies'])){
+					$saisies = array_merge($saisies, saisies_recuperer_saisies($ligne['saisies']));
 				}
 			}
 		}

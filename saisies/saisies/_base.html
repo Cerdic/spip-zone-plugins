@@ -27,16 +27,16 @@
 
 ]
 [(#ENV{nom}|oui)
-	#SET{erreurs,#ENV**{erreurs}|table_valeur{#ENV{nom}}}
 	#SET{obligatoire,#ENV{obligatoire}|et{#ENV{obligatoire}|!={non}}|?{obligatoire,''}}
 	#SET{disable,#ENV{disable,#ENV{disable_avec_post}}|et{#ENV{disable,#ENV{disable_avec_post}}|!={non}}|?{disabled,''}}
 	#SET{readonly,#ENV{readonly}|et{#ENV{readonly}!={non}}|?{readonly,''}}
 	#SET{saisies_autonomes,#VAL|saisies_autonomes}
 	
 	[(#ENV{type_saisie}|in_array{#GET{saisies_autonomes}}|oui)
-		[(#INCLURE{fond=saisies/#ENV{type_saisie},env,erreurs=#GET{erreurs},obligatoire=#GET{obligatoire},disable=#GET{disable},readonly=#GET{readonly}})]
+		[(#INCLURE{fond=saisies/#ENV{type_saisie},env,obligatoire=#GET{obligatoire},disable=#GET{disable},readonly=#GET{readonly}})]
 	]
 	[(#ENV{type_saisie}|in_array{#GET{saisies_autonomes}}|non)
+		#SET{erreurs,#ENV**{erreurs}|table_valeur{#ENV{nom}}}
 		#SET{li_class,#ENV{type_saisie}|substr{0,9}|=={selecteur}|?{selecteur_item,''}}
 		<li class="editer editer_[(#ENV{nom})][ (#GET{obligatoire})][ (#GET{erreurs}|oui)erreur][ (#GET{li_class})][ (#ENV{li_class})][ saisie_(#ENV{type_saisie})]"[ (#GET{masquer_li}|oui)style="display:none;"]>
 			#ENV*{inserer_debut}

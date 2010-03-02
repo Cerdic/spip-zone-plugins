@@ -4,8 +4,11 @@ description: '<:saisies:saisie_input_explication:>'
 icone: 'images/saisies_input.png'
 options:
   -
-    groupe: '<:saisies:option_groupe_description:>'
-    contenu:
+    saisie: 'fieldset'
+    options:
+      nom: 'description'
+      label: '<:saisies:option_groupe_description:>'
+    saisies:
       -
         saisie: 'input'
         options:
@@ -36,8 +39,11 @@ options:
             text: '<:saisies:option_type_text:>'
             password: '<:saisies:option_type_password:>'
   -
-    groupe: '<:saisies:option_groupe_utilisation:>'
-    contenu:
+    saisie: 'fieldset'
+    options:
+      nom: 'utilisation'
+      label: '<:saisies:option_groupe_utilisation:>'
+    saisies:
       -
         saisie: 'oui_non'
         options:
@@ -72,8 +78,11 @@ options:
           label: '<:saisies:option_readonly_label:>'
           explication: '<:saisies:option_readonly_explication:>'
   -
-    groupe: '<:saisies:option_groupe_affichage:>'
-    contenu:
+    saisie: 'fieldset'
+    options:
+      nom: 'affichage'
+      label: '<:saisies:option_groupe_affichage:>'
+    saisies:
       -
         saisie: 'input'
         options:

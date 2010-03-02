@@ -1,0 +1,16 @@
+
+#SET{pliable,#ENV{pliable}|et{#ENV{pliable}|!={non}}|?{'pliable', ''}}
+#SET{plie,#ENV{plie}|et{#ENV{plie}|!={non}}|?{'plie', ''}}
+<li class="fieldset[ (#ENV{li_class})][ saisie_(#ENV{type_saisie})]">
+	#ENV*{inserer_debut}
+	<fieldset>
+		[<h3 class="legend">(#ENV{label})</h3>]
+		
+		[(#ENV{saisies}|is_array|oui)
+		<ul [class="(#GET{pliable})[ (#GET{plie})]"]>
+			#INCLURE{fond=inclure/generer_saisies, env, saisies=#ENV{saisies}}
+		</ul>
+		]
+	</fieldset>
+	#ENV*{inserer_fin}
+</li>

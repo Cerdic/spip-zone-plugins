@@ -36,8 +36,8 @@ function generer_saisie($champ, $env){
 	// On ajoute les options propres à la saisie
 	$contexte = array_merge($contexte, $options);
 	
-	// Si env est définie dans les options, on ajoute tout l'environnement
-	if(isset($contexte['env'])){
+	// Si env est définie dans les options ou qu'il y a des enfants, on ajoute tout l'environnement
+	if(isset($contexte['env']) or is_array($champ['saisies'])){
 		unset($contexte['env']);
 		$contexte = array_merge($env, $contexte);
 	}
@@ -60,6 +60,10 @@ function generer_saisie($champ, $env){
 	// Sinon la valeur est juste celle du nom
 	else
 		$contexte['valeur'] = $env[$contexte['nom']];
+	
+	// Si ya des enfants on les remonte dans le contexte
+	if (is_array($champ['saisies']))
+		$contexte['saisies'] = $champ['saisies'];
 	
 	// On génère la saisie
 	return recuperer_fond(
