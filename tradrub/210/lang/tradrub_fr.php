@@ -12,8 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'trad_rubrique_traduction' => "Toutes les versions de cette rubrique&nbsp;:",
 	'trad_new_rubrique' => "Cr&eacute;er une nouvelle traduction de cette rubrique",
 	'trad_delier_rubrique' => "Ne plus lier cette rubrique &agrave; ces traductions",
-	
-	'rubrique_de_reference' => "rubrique de r&eacute;f&eacute;rence",
+	'rubrique_de_reference' => "rubrique de r&eacute;f&eacute;rence"
 );
 
 ?>
