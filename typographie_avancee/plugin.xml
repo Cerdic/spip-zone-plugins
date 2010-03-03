@@ -24,5 +24,6 @@
 		<inclure>typo_avancee.php</inclure>
 	</pipeline>
 	<necessite id="SPIP" version="[2.0.0;]" />
+	<necessite id="lib:php-typography" src="http://kingdesk.com/wp-content/uploads/php-typography-1.21.zip" />
 </plugin>
 
