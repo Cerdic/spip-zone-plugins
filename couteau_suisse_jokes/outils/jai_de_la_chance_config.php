@@ -15,7 +15,7 @@ function outils_jai_de_la_chance_config_dist() {
 		'id'          => "jai_de_la_chance",
 		'nom'         => _T("blagoulames:jai_de_la_chance_nom"),
 		'description' => _T("blagoulames:jai_de_la_chance_description"),
-		'categorie'   => 'blagoulames',
+		'categorie'   => _T('blagoulames:categorie'),
 		'code:jq'     => "
 			action = \"$action_publique\";
 			if (cs_prive) {

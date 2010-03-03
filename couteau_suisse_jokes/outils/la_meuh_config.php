@@ -12,7 +12,7 @@ function outils_la_meuh_config_dist() {
 		'id'          => "la_meuh",
 		'nom'         => _T("blagoulames:la_meuh_nom"),
 		'description' => _T("blagoulames:la_meuh_description"),
-		'categorie'   => 'blagoulames',
+		'categorie'   => _T('blagoulames:categorie'),
 		'code:js'     => "
 			jQuery.getScript('$chemin_js_transform');
 			jQuery.getScript('$chemin_js_rotate');

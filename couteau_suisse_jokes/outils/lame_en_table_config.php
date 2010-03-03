@@ -6,7 +6,7 @@ function outils_lame_en_table_config_dist() {
 		'id'          => "lame_en_table",
 		'nom'         => _T("blagoulames:en_table_nom"),
 		'description' => _T("blagoulames:en_table_description"),
-		'categorie'   => 'blagoulames',
+		'categorie'   => _T('blagoulames:categorie'),
 		'code:jq'     => "
 			jQuery('table:not(.spip)').remove();
 			",

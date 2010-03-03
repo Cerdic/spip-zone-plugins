@@ -10,7 +10,7 @@ function outils_slam_config_dist() {
 		'id'          => "slam",
 		'nom'         => _T("blagoulames:slam_nom"),
 		'description' => _T("blagoulames:slam_description"),
-		'categorie'   => 'blagoulames',
+		'categorie'   => _T('blagoulames:categorie'),
 		'code:jq'     => "
 			if ('$libsm') {
 				if (typeof(soundManager) == 'undefined') {

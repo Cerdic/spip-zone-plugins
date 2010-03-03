@@ -1,5 +1,7 @@
 <?php
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+	// categorie
+	'categorie' => '80. Les Blagou Lames',
 
 	// jai_de_la_chance
 	'jai_de_la_chance_nom' => "Lame j'ai de la chance",

@@ -6,7 +6,7 @@ function outils_lame_igraine_config_dist() {
 		'id'          => "lame_igraine",
 		'nom'         => _T("blagoulames:igraine_nom"),
 		'description' => _T("blagoulames:igraine_description"),
-		'categorie'   => 'blagoulames',
+		'categorie'   => _T('blagoulames:categorie'),
 		'code:js'     => "
 			speedy = ['slow','normal','fast'];
 			
