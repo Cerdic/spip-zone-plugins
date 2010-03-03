@@ -31,6 +31,7 @@
     <fonctions>balise/saisie.php</fonctions>
     <fonctions>inc/saisies.php</fonctions>
     <fonctions>saisies_fonctions.php</fonctions>
+    <options>saisies_options.php</options>
 	<necessite id="SPIP" version="[2.0;]" />
 	<utilise id="verifier" />
 </plugin>
