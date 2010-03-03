@@ -149,6 +149,48 @@ function saisies_recuperer_champs($contenu){
 }
 
 /*
+ * Vérifier tout un formulaire tel que décrit avec les Saisies
+ * @param array $formulaire Le contenu d'un formulaire décrit dans un tableau de Saisies
+ * @return array Retourne un tableau d'erreurs
+ */
+function saisies_verifier($formulaire){
+	$erreurs = array();
+	
+	$saisies = saisies_recuperer_saisies($formulaire);
+	foreach ($saisies as $saisie){
+		$obligatoire = $saisie['options']['obligatoire'];
+		$champ = $saisie['options']['nom'];
+		$verifier = $saisie['verifier'];
+		
+		// Si le nom du champ est un tableau indexé, il faut parser !
+		if (preg_match('/([\w]+)((\[[\w]+\])+)/', $champ, $separe)){
+			$valeur = _request($separe[1]);
+			preg_match_all('/\[([\w]+)\]/', $separe[2], $index);
+			// On va chercher au fond du tableau
+			foreach($index[1] as $cle){
+				$valeur = $valeur[$cle];
+			}
+		}
+		// Sinon la valeur est juste celle du nom
+		else
+			$valeur = _request($champ);
+		
+		// On regarde d'abord si le champ est obligatoire
+		if ($obligatoire and $obligatoire != 'non' and ($valeur == ''))
+			$erreurs[$champ] = _T('info_obligatoire');
+		
+		// On continue seulement si ya pas d'erreur d'obligation et qu'il y a une demande de verif
+		if (!$erreurs[$champ] and is_array($verifier)){
+			// Si le champ n'est pas valide par rapport au test demandé, on ajoute l'erreur
+			if ($erreur_eventuelle = verifier($valeur, $verifier['type'], $verifier['options']))
+				$erreurs[$champ] = $erreur_eventuelle;
+		}
+	}
+	
+	return $erreurs;
+}
+
+/*
  * Liste toutes les saisies configurables (ayant une description)
  *
  * @return array Un tableau listant des saisies et leurs options
