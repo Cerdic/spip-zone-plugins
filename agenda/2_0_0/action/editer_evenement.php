@@ -23,35 +23,39 @@ function action_editer_evenement_dist(){
 	return array($id_evenement,$err);
 }
 
-function action_evenement_set($id_evenement){
+function action_evenement_set($id_evenement, $set=null){
 	$err = '';
 
-	$c = array();
-	foreach (array(
-		'titre', 'descriptif', 'lieu', 'id_parent',
-		'inscription','places','adresse',
-	) as $champ)
-		$c[$champ] = _request($champ);
+	if (is_null($set)){
+		$c = array();
+		foreach (array(
+			'titre', 'descriptif', 'lieu', 'id_parent',
+			'inscription','places','adresse',
+		) as $champ)
+			$c[$champ] = _request($champ);
 
-	$c['horaire'] = _request('horaire')=='non'?'non':'oui';	
-	include_spip('inc/agenda_gestion');
-	$date_debut = agenda_verifier_corriger_date_saisie('debut',$c['horaire']=='oui',$erreurs);
-	$date_fin = agenda_verifier_corriger_date_saisie('fin',$c['horaire']=='oui',$erreurs);
-	
-	$c['date_debut'] = date('Y-m-d H:i:s',$date_debut);
-	$c['date_fin'] = date('Y-m-d H:i:s',$date_fin);
+		$c['horaire'] = _request('horaire')=='non'?'non':'oui';
+		include_spip('inc/agenda_gestion');
+		$date_debut = agenda_verifier_corriger_date_saisie('debut',$c['horaire']=='oui',$erreurs);
+		$date_fin = agenda_verifier_corriger_date_saisie('fin',$c['horaire']=='oui',$erreurs);
+
+		$c['date_debut'] = date('Y-m-d H:i:s',$date_debut);
+		$c['date_fin'] = date('Y-m-d H:i:s',$date_fin);
+	}
+	else
+		$c = $set;
 
 	include_spip('inc/modifier');
 	agenda_action_revision_evenement($id_evenement, $c);
-	agenda_action_revision_evenement_mots($id_evenement, _request('mots'));
-	agenda_action_revision_evenement_repetitions($id_evenement,_request('repetitions'), _request('mots'));
+	agenda_action_revision_evenement_mots($id_evenement, _request('mots',$set));
+	agenda_action_revision_evenement_repetitions($id_evenement,_request('repetitions',$set), _request('mots',$set));
 
 	// Modification de statut, changement de rubrique ?
 	$c = array();
 	foreach (array(
 		'id_parent'
 	) as $champ)
-		$c[$champ] = _request($champ);
+		$c[$champ] = _request($champ,$set);
 	$err .= agenda_action_instituer_evenement($id_evenement, $c);
 
 	return $err;
