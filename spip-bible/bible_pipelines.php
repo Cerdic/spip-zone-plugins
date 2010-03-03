@@ -10,7 +10,7 @@ function bible_affiche_droite($flux){
     global $spip_version_affichee;
     
     /* on n'affiche le presse-papier bible que si on est sur une page d'édition*/
-    if (ereg('edit',$flux['args']['exec'])==false or ereg('^1',$spip_version_affichee) == true){
+    if (preg_match('/edit/',$flux['args']['exec'])==false or preg_match('/^1/',$spip_version_affichee) == true){
             return $flux;
     }
 
