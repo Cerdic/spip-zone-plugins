@@ -110,9 +110,9 @@
 			function pb_effectuer_cesure($text, $lang="xxx") {
 
 
-				$GLOBALS["pb_leftmin"] = 2;
-				$GLOBALS["pb_rightmin"] = 2;
-				$GLOBALS["pb_charmin"] = 4;
+				$GLOBALS["pb_leftmin"] = 3;
+				$GLOBALS["pb_rightmin"] = 4;
+				$GLOBALS["pb_charmin"] = 7;
 				if (init_mb_string()) mb_internal_encoding("utf-8");
 			
 			
