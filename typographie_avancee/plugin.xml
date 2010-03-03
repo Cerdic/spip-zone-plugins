@@ -1,0 +1,28 @@
+<plugin>
+	<nom>Typographie avanc&eacute;e</nom>
+	<auteur>ARNO*</auteur>
+	<version>0.1</version>
+	<etat>dev</etat>
+	<description>
+		Ce plugin implémente automatiquement l'extension [PHP-Typography de Kingdesk->http://kingdesk.com/projects/php-typography/]. 
+		Il active notamment:
+-* la césure automatique dans plus de 40 langues, de manière intelligente,
+-* la gestion des veuves et orphelines (éviter un mot court isolé en dernière ligne),
+-* le contrôle par CSS de certains éléments (espuerlète, nombres, mots entièrement en majuscules...),
+-* le remplacement de certains caractères (symboles mathématiques, trademark, trois points...).
+
+{{Attention.}} Ce plugin s'active sur tous les éléments passant par <code>|typo</code>, il peut donc se montrer très intrusif. Si vous utilisez ce plugin, n'utilisez plus le plugin «Césure».
+
+{{Attention.}} Nécessite PHP~5.
+	</description>
+	<lien></lien> <!-- URI de documentation -->
+	<prefix>typo_avancee</prefix>
+	<fonctions>typo_avancee.php</fonctions>
+	<pipeline>
+		<nom>pre_typo</nom>
+		<action>typo</action>
+		<inclure>typo_avancee.php</inclure>
+	</pipeline>
+	<necessite id="SPIP" version="[2.1;]" />
+</plugin>
+
