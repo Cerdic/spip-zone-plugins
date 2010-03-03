@@ -2,7 +2,6 @@
 <script type='text/javascript' src='#CHEMIN{javascript/jquery.datePicker.js}'></script>
 <script type='text/javascript' src='#CHEMIN{javascript/jquery.timePicker.js}'></script>
 <script type='text/javascript'>
-
 Date.dayNames = ['<:date_jour_1:>', '<:date_jour_2:>', '<:date_jour_3:>', '<:date_jour_4:>', '<:date_jour_5:>', '<:date_jour_6:>', '<:date_jour_7:>'];
 Date.abbrDayNames = ['<:date_jour_1_abbr:>', '<:date_jour_2_abbr:>', '<:date_jour_3_abbr:>', '<:date_jour_4_abbr:>', '<:date_jour_5_abbr:>', '<:date_jour_6_abbr:>', '<:date_jour_7_abbr:>'];
 Date.monthNames = ['<:date_mois_1:>', '<:date_mois_2:>', '<:date_mois_3:>', '<:date_mois_4:>', '<:date_mois_5:>', '<:date_mois_6:>', '<:date_mois_7:>', '<:date_mois_8:>', '<:date_mois_9:>', '<:date_mois_10:>', '<:date_mois_11:>', '<:date_mois_12:>'];
@@ -43,35 +42,36 @@ $(function()
 			}
 		}
 	);
-	$('#repetitions_picker').datePicker({
-		inline:true,
-		selectMultiple:true,
-		startDate:'01/01/1900'
-	})
-	.bind(
-		'dateSelected',
-		function(e, selectedDate, $td, state)
-		{
-			var dates = $(this).dpGetSelected();
-			var t=$('#repetitions_picker').siblings('textarea').eq(0);
-			t.html("");
-			d = new Date();
-			for (i=0;i<dates.length;i++){
-				if (dates[i]){
-					d.setTime(dates[i]);
-					t.append(d.getDate()+'/'+(d.getMonth()+1)+'/'+d.getFullYear()+' ');
+	if ($('#repetitions_picker').length){
+		$('#repetitions_picker').datePicker({
+			inline:true,
+			selectMultiple:true,
+			startDate:'01/01/1900'
+		})
+		.bind(
+			'dateSelected',
+			function(e, selectedDate, $td, state)
+			{
+				var dates = $(this).dpGetSelected();
+				var t=$('#repetitions_picker').siblings('textarea').eq(0);
+				t.html("");
+				d = new Date();
+				for (i=0;i<dates.length;i++){
+					if (dates[i]){
+						d.setTime(dates[i]);
+						t.append(d.getDate()+'/'+(d.getMonth()+1)+'/'+d.getFullYear()+' ');
+					}
 				}
 			}
-		}
-	)
-	.siblings('textarea');
-	var dates_init = $('#repetitions_picker').siblings('textarea').eq(0).html().split(' ');
-	for (i=0;i<dates_init.length;i++)
-		if (dates_init[i].length)
-			$('#repetitions_picker').dpSetSelected(dates_init[i],true,false);
-	$('#repetitions_picker').dpSetDisplayedMonth(dates_init[0].split('/')[1]-1,dates_init[0].split('/')[2]);
-	$('div.ajouter_repetitions').addClass('cachee');
-
+		)
+		.siblings('textarea');
+		var dates_init = $('#repetitions_picker').siblings('textarea').eq(0).html().split(' ');
+		for (i=0;i<dates_init.length;i++)
+			if (dates_init[i].length)
+				$('#repetitions_picker').dpSetSelected(dates_init[i],true,false);
+		$('#repetitions_picker').dpSetDisplayedMonth(dates_init[0].split('/')[1]-1,dates_init[0].split('/')[2]);
+		$('div.ajouter_repetitions').addClass('cachee');
+	}
 	$("#heure_debut, #heure_fin").timePicker();
 	// Store time used by duration.
 	var oldTime = $.timePicker("#heure_debut").getTime();
