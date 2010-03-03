@@ -210,8 +210,7 @@ function liens_chapitres($livre,$modele,$trad){
 	
 	
 	
-	$livre = $livre = eregi_replace("[0-9|,|-]+$","",$livre);
-	
+	$livre = livre_seul($livre);
 	$tableau_livre_gateway = bible_tableau('gateway');
 	$tableau_chapitre = bible_tableau('nombres_chapitre');
 	$nlivre = $tableau_livre_gateway[$lang][$livre];

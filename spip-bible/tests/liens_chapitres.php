@@ -13,6 +13,7 @@
 		$remonte = "../$remonte";
 	require $remonte.'tests/test.inc';
 	find_in_path("../plugins/spip-bible/bibles_options.php",'',true);
+	find_in_path("../plugins/spip-bible/bible_fonctions.php",'',true);
 
 	//
 	// hop ! on y va
