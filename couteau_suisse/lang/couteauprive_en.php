@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'SPIP_liens:description1' => '@puce@ SPIP includes a CSS style for email links: a little envelope appears before each "mailto" link. However not all browsers can display it (IE6, IE7 and SAF3, in particular, cannot). It is up to you to decide whether to keep this addition.
 _ Test link:[->test@test.com] (Reload the page to test.)[[%enveloppe_mails%]]',
 	'SPIP_liens:nom' => 'SPIP and external links',
-	'SPIP_tailles:description' => '@puce@ Afin d\'all&eacute;ger la m&eacute;moire de votre serveur, SPIP vous permet de limiter les dimensions (hauteur et largeur) et la taille du fichier des images, logos ou documents joints aux divers contenus de votre site. Si un fichier d&eacute;passe la taille indiqu&eacute;e, le formulaire enverra bien les donn&eacute;es mais elles seront d&eacute;truites et SPIP n\'en tiendra pas compte, ni dans le r&eacute;pertoire IMG/, ni en base de donn&eacute;es. Un message d\'avertissement sera alors envoy&eacute; &agrave; l\'utilisateur.
+	'SPIP_tailles:description' => '<MODIF>@puce@ Afin d\'all&eacute;ger la m&eacute;moire de votre serveur, SPIP vous permet de limiter les dimensions (hauteur et largeur) et la taille du fichier des images, logos ou documents joints aux divers contenus de votre site. Si un fichier d&eacute;passe la taille indiqu&eacute;e, le formulaire enverra bien les donn&eacute;es mais elles seront d&eacute;truites et SPIP n\'en tiendra pas compte, ni dans le r&eacute;pertoire IMG/, ni en base de donn&eacute;es. Un message d\'avertissement sera alors envoy&eacute; &agrave; l\'utilisateur.
 
 Une valeur nulle ou non renseign&eacute;e correspond &agrave; une valeur illimit&eacute;e.
 [[Hauteur : %img_Hmax% pixels]][[->Largeur : %img_Wmax% pixels]][[->Poids du fichier : %img_Smax% Ko]]
@@ -30,8 +30,8 @@ Une valeur nulle ou non renseign&eacute;e correspond &agrave; une valeur illimit
 @puce@ Afin d\'&eacute;viter un d&eacute;passement de m&eacute;moire PHP dans le traitement des grandes images par la librairie GD2, SPIP teste les capacit&eacute;s du serveur et peut donc refuser de traiter les trop grandes images. Il est possible de d&eacute;sactiver ce test en d&eacute;finissant manuellement le nombre maximal de pixels support&eacute;s pour les calculs.
 
 La valeur de 1~000~000 pixels semble correcte pour une configuration avec peu de m&eacute;moire. Une valeur nulle ou non renseign&eacute;e entra&icirc;nera le test du serveur.
-[[%img_GDmax% pixels au maximum]]', # MODIF
-	'SPIP_tailles:nom' => 'Limites m&eacute;moire', # NEW
+[[%img_GDmax% pixels au maximum]]',
+	'SPIP_tailles:nom' => 'Memory limits',
 
 	// A
 	'acces_admin' => 'Administrators\' access:',
@@ -54,9 +54,9 @@ La valeur de 1~000~000 pixels semble correcte pour une configuration avec peu de
 	'auteurs:nom' => 'Authors page',
 
 	// B
-	'barres_typo_edition' => 'Edtition des contenus', # NEW
-	'barres_typo_forum' => 'Messages de Forum', # NEW
-	'barres_typo_intro' => 'Le plugin &laquo;Porte-Plume&raquo; a &eacute;t&eacute; d&eacute;tect&eacute;. Veuillez choisir ici les barres typographiques o&ugrave; certains boutons seront ins&eacute;r&eacute;s.', # NEW
+	'barres_typo_edition' => 'Editing contents',
+	'barres_typo_forum' => 'Forum messages',
+	'barres_typo_intro' => 'The &laquo;Porte-Plume&raquo; plugin is installed. Please choose here the typographical bars on which to insert various buttons.',
 	'basique' => 'Basic',
 	'blocs:aide' => 'Folding blocks: <b>&lt;bloc&gt;&lt;/bloc&gt;</b> (alias: <b>&lt;invisible&gt;&lt;/invisible&gt;</b>) and <b>&lt;visible&gt;&lt;/visible&gt;</b>',
 	'blocs:description' => 'Allows you to create blocks which show/hide when you click on the title.
@@ -157,7 +157,7 @@ N.B.: by changing the second parameter you will lose any standard styles associa
 	'corbeille:nom' => 'Wastebin',
 	'corbeille_objets' => '@nb@ object(s) in the wastebin.',
 	'corbeille_objets_lies' => '@nb_lies@ connection(s) detected.',
-	'corbeille_objets_vide' => 'No object in the wastebin', # MODIF
+	'corbeille_objets_vide' => 'No object in the wastebin',
 	'corbeille_objets_vider' => 'Delete the selected objects',
 	'corbeille_vider' => 'Empty the wastebin:',
 	'couleurs:aide' => 'Text colouring: <b>[coul]text[/coul]</b>@fond@ with <b>coul</b> = @liste@',
