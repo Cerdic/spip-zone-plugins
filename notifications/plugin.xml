@@ -2,7 +2,7 @@
 	<nom>Notifications</nom>
 	<auteur>fil@rezo.net</auteur>
 	<version>0.5.0</version>
-	<etat>dev</etat>
+	<etat>test</etat>
 	<icon>notifications.png</icon>
 	<description>
 		<multi>
