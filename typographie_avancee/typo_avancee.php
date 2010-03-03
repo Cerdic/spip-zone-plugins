@@ -10,7 +10,7 @@ function traiter_typo_avancee($texte) {
 	if (!$lang) $lang = "fr";
 
 
-	include_spip('lib/php-typography/php-typography');
+	include_spip("php-typography/php-typography"); 
 	include_spip("inc/charsets");
 	
 	// Ne pas hyphener dans la premiere passe
