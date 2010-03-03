@@ -151,12 +151,11 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 			// exemple : <:mon_outil:3:> est remplace par _T('couteauprive:mon_outil:description3')
 			$descrip = preg_replace_callback(',<:([a-z_][a-z0-9_-]*):([0-9]*):>,i', 
 				create_function('$m','return _T("couteauprive:$m[1]:description$m[2]");'), $descrip);
-		else {
-			// lames persos : chaines de langue personnalisees
-			$descrip = preg_replace($i=',<:([:a-z0-9_-]+):>,ie', '_T("$1")', $descrip);
-			$outil['nom'] = preg_replace($i, '_T("$1")', $outil['nom']);
-		}
+		// chaines de langue personnalisees
+		$descrip = preg_replace(',<:([:a-z0-9_-]+):>,ie', '_T("$1")', $descrip);
 	}
+	if (strpos($outil['nom'], "<:")!==false)
+		$outil['nom'] = preg_replace(',<:([:a-z0-9_-]+):>,ie', '_T("$1")', $outil['nom']);
 	// envoi de la description en pipeline
 #	list(,$descrip) = pipeline('init_description_outil', array($outil_, $descrip));
 	// globale pour la callback description_outil_input2_callback

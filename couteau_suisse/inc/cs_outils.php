@@ -116,10 +116,13 @@ cs_log(" -- appel de charger_fonction('description_outil', 'inc') et de descript
 function liste_outils() {
 	global $outils;
 	$id = $nb_actifs = 0;
+	$categ = array();
 	$metas_caches = isset($GLOBALS['meta']['tweaks_caches'])?unserialize($GLOBALS['meta']['tweaks_caches']):array();
 	foreach($outils as $outil) {
 		// liste des categories
-		$categ[_T('couteauprive:categ:'.$outil['categorie'])] = $outil['categorie'];
+		$cat = &$outil['categorie'];
+		if(!isset($categ[$cat]))
+			$categ[$cat] = strncmp($tmp=_T('couteauprive:categ:'.$cat), 'categ', 5)==0?$cat:$tmp;
 		// ressensement des autorisations
 		if(!autoriser('configurer', 'outil', 0, NULL, $outil))
 			$outils[$outil['id']]['interdit'] = $metas_caches[$outil['id']]['cache'] = 1;
@@ -127,9 +130,9 @@ function liste_outils() {
 	// une constante : facon rapide d'interdire des lames a la manipulation
 	if(defined('_CS_OUTILS_CACHES'))
 		foreach (explode(':',_CS_OUTILS_CACHES) as $o) $outils[$o]['interdit'] = $metas_caches[$o]['cache'] = 1;
-	ksort($categ);
+	asort($categ);
 	$results_actifs = $results_inactifs = '';
-	foreach($categ as $c=>$i) {
+	foreach($categ as $i=>$c) {
 		$s_actifs = $s_inactifs = array();
 		foreach($outils as $outil) if($outil['categorie']==$i) {
 			$test = $outil['actif']?'s_actifs':'s_inactifs';
@@ -142,8 +145,8 @@ function liste_outils() {
 			sort(${$temp});
 			$reset=_request('cmd')=='resetjs'?"\ncs_EffaceCookie('sous_liste_$id');":'';
 			$titre = "<span class='light cs_hidden'> (".count(${$temp}).")</span>";
-			preg_match(',([0-9]+)\.?\s*(.*),', _T('couteauprive:'.$c), $reg);
-			$titre = "<div class='titrem categorie'>$reg[2]$titre</div>";
+			preg_match(',[0-9. ]*(.*)$,', $c, $reg);
+			$titre = "<div class='titrem categorie'>$reg[1]$titre</div>";
 			$href = generer_url_ecrire(_request('exec'),"cmd=descrip&outil=");
 			foreach(${$temp} as $j=>$v)
 				${$temp}[$j] = preg_replace(',^(.*)\|(.*)\|(.*)$,', '<a class="cs_href" id="$3" href="'.$href.'$3">$1</a>', $v);
