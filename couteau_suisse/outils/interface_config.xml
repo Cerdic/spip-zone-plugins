@@ -153,3 +153,29 @@
 		<script_php>icone_visiter_header_prive2</script_php>
 	</pipeline>
 </outil>
+
+
+<!--	--------- Dans la meme rubique ---------	-->
+<variable>
+	<id>meme_rubrique</id>
+	<format>integer</format>
+	<defaut_php>10</defaut_php>
+	<code>
+		<condition_php>%s</condition_php>
+		<script_php>@define('_MAX_ART_AFFICHES', %s);\n</script_php>
+	</code>
+	<label>@_CS_CHOIX@</label>
+</variable>
+<outil>
+	<id>meme_rubrique</id>
+	<nom><:ecrire:info_meme_rubrique:></nom>
+	<description><:info_meme_rubrique:></description>
+	<categorie>interface</categorie>
+	<code>
+		<type>spip_options</type>
+		<script_php>%%meme_rubrique%%</script_php>
+	</code>
+	<version>
+		<spip_min>1.9300</spip_min>
+	</version>
+</outil>

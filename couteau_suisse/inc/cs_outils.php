@@ -120,8 +120,7 @@ function liste_outils() {
 	$metas_caches = isset($GLOBALS['meta']['tweaks_caches'])?unserialize($GLOBALS['meta']['tweaks_caches']):array();
 	foreach($outils as $outil) {
 		// liste des categories
-		$cat = &$outil['categorie'];
-		if(!isset($categ[$cat]))
+		if(!isset($categ[$cat=&$outil['categorie']]))
 			$categ[$cat] = strncmp($tmp=_T('couteauprive:categ:'.$cat), 'categ', 5)==0?$cat:$tmp;
 		// ressensement des autorisations
 		if(!autoriser('configurer', 'outil', 0, NULL, $outil))
