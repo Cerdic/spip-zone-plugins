@@ -11,6 +11,7 @@
 	<description>
 		Permet d'utiliser MySQLi plut&ocirc;t que l'interface MySQL
 	</description>
+	<options>mysqli_options.php</options>
 	<etat>dev</etat>
 	<prefix>mysqli</prefix>
 </plugin>
