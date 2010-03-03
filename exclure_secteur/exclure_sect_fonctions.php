@@ -3,7 +3,7 @@ include_spip('inc/exclure_utils');
 global $spip_version_affichee;
 
 
-if (eregi("^1",$spip_version_affichee)){
+if (preg_match('/^1/',$spip_version_affichee)){
         
             function oui($i){
                 if ($i == true){

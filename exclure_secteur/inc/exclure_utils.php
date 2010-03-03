@@ -54,7 +54,6 @@ function id_explicite($crit,$type){
 
     
     
-    //var_dump($crit);
 }
 
 function exclure_sect_choisir($crit,$type){
