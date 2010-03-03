@@ -25,8 +25,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_article_interdit' => 'Vous n\'avez pas le droit d\'associer cet &eacute;v&eacute;nement &agrave; cet article',
 'erreur_date' => 'Cette date est incorrecte',
 'erreur_heure' => 'Cette heure est incorrecte',
-'erreur_date_corrigee' => 'La date a été corrigée',
-'erreur_heure_corrigee' => 'L\'heure a été corrigée',
+'erreur_date_corrigee' => 'La date a &eacute;t&eacute; corrig&eacute;e',
+'erreur_heure_corrigee' => 'L\'heure a &eacute;t&eacute; corrig&eacute;e',
+'erreur_date_avant_apres' => 'Indiquez une date de fin apr&egrave;s la date de d&eacute;but !',
 
 'evenement_article' => 'Associ&eacute; &agrave; l\'article',
 'evenement_autres_occurences' => "Autres occurences :",
