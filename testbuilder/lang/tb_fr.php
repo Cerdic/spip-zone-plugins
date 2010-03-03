@@ -57,6 +57,7 @@ Les pseudo-types disponibles sont :
 -* <tt>email</tt> pour des chaine au format adresse email
 -* <tt>array</tt>
 -* <tt>image</tt> chemin vers un fichier image
+-* <tt>mimetype</tt> string de nommage des mime-type
 '
 );
 

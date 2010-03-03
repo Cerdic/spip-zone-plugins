@@ -154,7 +154,7 @@ function tb_affiche_essais($essais,$funcname,$expose=null){
 	if (is_array($essais) AND count($essais)){
 		foreach($essais as $k=>$essai){
 			$res = array_shift($essai);
-			$affiche = "$funcname(".implode(',',array_map('tb_export',$essai)).")=".tb_export($res);
+			$affiche = "$funcname(".implode(',',array_map('tb_export',$essai)).") = ".tb_export($res);
 			$affiche = str_replace(array('&','<','>'),array('&amp;','&lt;','&gt;'),$affiche);
 			$on = (!is_null($expose) AND $expose==$k)?' on':'';
 			$output .= "<li class='item$on'>"
