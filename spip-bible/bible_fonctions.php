@@ -26,7 +26,7 @@ function bible_supprimer_retour($texte){
 }
 function traduire_abreviation($abrev,$lang_original,$lang_traduction){
 	$tableau_gateway = bible_tableau("gateway");
-	$livre = eregi_replace('[0-9|,|-]+$','',$abrev);
+	$livre = livre_seul($abrev);
 	
 	$numero = $tableau_gateway[$lang_original][$livre];
 	
@@ -39,12 +39,12 @@ function traduire_abreviation($abrev,$lang_original,$lang_traduction){
 }
 
 function bible_test_livre_seul($i){
-	if (eregi('[0-9|,|-]+$',$i)){ return 'non';}
+	if (preg_match('#[0-9|,|-]+$#',$i)){ return 'non';}
 	else {return 'oui';}
 
 }
 function livre_seul($i){
-	return eregi_replace('[0-9|,|-]+$','',$i);
+	return preg_replace('#[0-9|,|-]+$#','',$i);
 
 }
 

@@ -41,11 +41,11 @@ Au commencement, Dieu créa le ciel et la terre.Or la terre était vide et vague
   array (
     0 => '<quote>
  Vision d\'Abdias. Voici ce que dit le Seigneur DIEU à Edom&nbsp;: Nous avons appris une nouvelle
- de la part du SEIGNEUR, 
- et un émissaire a été envoyé parmi les nations&nbsp;: 
- Levez-vous&nbsp;! 
- Levons-nous contre elle&nbsp;! 
- Au combat&nbsp;! </quote>',
+de la part du SEIGNEUR, 
+et un émissaire a été envoyé parmi les nations&nbsp;: 
+Levez-vous&nbsp;! 
+Levons-nous contre elle&nbsp;! 
+Au combat&nbsp;! </quote>',
     1 => 'Ab1',
     2 => 'NBS',
   ),
