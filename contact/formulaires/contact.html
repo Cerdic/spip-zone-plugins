@@ -1,6 +1,6 @@
 #CACHE{0}
 
-<div class="formulaire_spip formulaire_contact" id="formulaire_contact">
+<div class="formulaire_spip formulaire_contact formulaire_editer_message_contact" id="formulaire_contact">
 
 <br class='bugajaxie' />
 
@@ -13,7 +13,7 @@
 <form method='post' action='#ENV{action}#formulaire_contact' enctype='multipart/form-data'>
 	[(#REM) declarer les hidden qui declencheront le service du formulaire parametre : url d'action ]
 	#ACTION_FORMULAIRE{#ENV{action}}
-	
+
 	[(#REM) Previsualisation... ]
 	<BOUCLE_previsu(CONDITION){si #ENV*{erreurs}|table_valeur{previsu}|oui}>
 	<fieldset class="previsu">
@@ -44,7 +44,7 @@
 		<p class="boutons"><input type="submit" class="submit" name="confirmer" value="<:form_prop_confirmer_envoi:>" /></p>
 	</fieldset>
 	</BOUCLE_previsu>
-	
+
 	[(#REM) Sinon, formulaire normal ]
 	<fieldset>
 		<legend><:envoyer_message:></legend>
@@ -96,7 +96,7 @@
 				BUG
 				<//B_destinataires>
 			<//B_choix>
-			
+
 			<BOUCLE_infos(POUR){tableau #ENV{champs}}>
 			#SET{existe, #CHEMIN{formulaires/contact_champ_#CLE.html}}
 			[(#GET{existe}|oui)
@@ -110,12 +110,12 @@
 			</li>
 			]
 			</BOUCLE_infos>
-			
+
 			<B_pj>
 			<li class ='pieces_jointes'>
 				<label>[(#ENV{nb_max_pj}|>{1}|?{<:contact:form_pj_ajouter_pluriel:>,<:contact:form_pj_ajouter_singulier:>})]</label>
 				<ul>
-					<BOUCLE_pj(POUR){tableau #ENV{pj_fichiers}}> 
+					<BOUCLE_pj(POUR){tableau #ENV{pj_fichiers}}>
 						<li>
 							[(#ENV*{erreurs}|table_valeur{infos_pj}|table_valeur{#CLE}|table_valeur{message}|oui)
 								<:contact:form_pj_fichier_ajoute:>
@@ -127,7 +127,7 @@
 								<input type="hidden" name="pj_enregistrees_vignette&#91;#CLE&#93;" value="[(#ENV*{erreurs}|table_valeur{infos_pj}|table_valeur{#CLE}|table_valeur{vignette})]"/>
 								<input type="submit" name="pj_supprimer_#CLE" value="<:contact:form_pj_supprimer:>"/>
 							]
-							 
+
 							[(#ENV*{erreurs}|table_valeur{infos_pj}|table_valeur{#CLE}|table_valeur{message}|non)
 								<input type="file" name="pj_fichiers&#91;#CLE&#93;" title="<:contact:form_pj_importer:>" size="30" />
 							]
@@ -138,13 +138,13 @@
 			</B_pj>
 		</ul>
 	</fieldset>
-	
+
 	[(#REM) Piege a robots spammeurs ]
 	<p style="display: none;">
 		<label for="nobot"><:antispam_champ_vide:></label>
 		<input type="text" class="text" name="nobot" id="nobot" value="#ENV{nobot}" size="10" />
 	</p>
-	
+
 	<p class="boutons"><input type="submit" class="submit" name="valide" value="<:form_prop_envoyer:>" /></p>
 </form>
 </BOUCLE_editable>
@@ -152,6 +152,6 @@
 
 <script type="text/javascript">
 	$(function(){
-		
+
 	});
 </script>
