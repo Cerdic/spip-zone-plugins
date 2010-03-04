@@ -128,7 +128,7 @@ function recuperer_passage_gateway($livre='',$chapitre_debut='',$verset_debut=''
 function supprimer_note($texte){
    
     //on boucle tant qu'on trouve des value
-    while(preg("#value='#",$texte)){
+    while(preg_match("#value='#",$texte)){
         
         $texte = vider_attribut($texte,'value');
    }
