@@ -116,7 +116,7 @@ function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$re
 		
 	$debut = $tableau[0];
 	
-	$livre = eregi_replace('[0-9|,|-]+$','',$debut);
+	$livre = livre_seul($debut);
 	
 	if (array_key_exists($livre,$livres) == false){
 		return _T('bible:pas_livre');
@@ -127,7 +127,7 @@ function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$re
 	}
 	
 	
-	$debut = eregi_replace($livre,'',$debut);
+	$debut = str_replace($livre,'',$debut);
 	
 	
 	//problème Isaïe / Esaïe => on converti dans la bonne confession
@@ -174,7 +174,7 @@ function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$re
 		
 		
 	else if ($wissen){
-		$isaie == true ? $passage = eregi_replace('Es','Is',$passage) : $passage = $passage;
+		$isaie == true ? $passage = str_replace('Es','Is',$passage) : $passage = $passage;
 		include_spip('traduction/wissen');
 		$texte = '<quote>'.recuperer_passage_wissen($livre,$passage,$wissen,$lang);
 		
@@ -195,13 +195,13 @@ function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$re
 	
 	//les options du modèles
 	if ($numeros=='non'){
-		$texte = eregi_replace('<sup>[0-9]+ </sup>','',$texte);
-		$texte = eregi_replace('<strong>[0-9]+</strong>','',$texte);
+		$texte = preg_replace('#<sup>[0-9]+ </sup>#','',$texte);
+		$texte = preg_replace('#<strong>[0-9]+</strong>#','',$texte);
 	}
 	
 	
 	if ($retour=='non'){
-		$texte = eregi_replace('<br />','',$texte);
+		$texte = str_replace('<br />','',$texte);
 	}
 	
 	if ($ref!='non'){
@@ -226,7 +226,7 @@ function livre_long($i,$lang=''){
 	global $spip_lang;
 	$lang =='' ? $lang = $spip_lang : $lang=$lang;
 	
-	$i = eregi_replace('[0-9|,|-]+$','',$i);
+	$i = livre_seul($i);
 	
 	$tableau_livres = bible_tableau('livres');
 	
@@ -237,10 +237,10 @@ function filtre_ref($i){
 	global $spip_lang;
 	$tableau_livres = bible_tableau('livres');
 	
-	$livre = eregi_replace('[0-9|,|-]+$','',$i);
+	$livre =livre_seul($i);
 	$trad = $tableau_livres[$spip_lang][$livre];
 	
-	$c = eregi_replace($livre,'',$i);
+	$c = str_replace($livre,'',$i);
 	
 	return $trad.' '.$c; 
 	
