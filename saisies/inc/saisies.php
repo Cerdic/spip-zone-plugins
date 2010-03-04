@@ -182,7 +182,7 @@ function saisies_verifier($formulaire){
 			$erreurs[$champ] = _T('info_obligatoire');
 
 		// On continue seulement si ya pas d'erreur d'obligation et qu'il y a une demande de verif
-		if (!$erreurs[$champ] and is_array($verifier)){
+		if (!$erreurs[$champ] and is_array($verifier) and $verif_fonction){
 			// Si le champ n'est pas valide par rapport au test demandé, on ajoute l'erreur
 			if ($erreur_eventuelle = $verif_fonction($valeur, $verifier['type'], $verifier['options']))
 				$erreurs[$champ] = $erreur_eventuelle;
