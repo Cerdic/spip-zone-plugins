@@ -14,26 +14,23 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // fonction pour changer la connexion aux serveurs MySQL en gardant les paramètres existant
 
-function req_mysqli_dist() {
+function req_mysql_dist() {
 	charger_php_extension('mysqli');
-
-	// Il faut fermer les connexions existantes
-	// Et les reconnecter sur MySQLi
-	// Au moment du chargement de ce plugin, seule la base SPIP est chargée
-	// TODO : voir ce qu'il va se passer si on se connecte à plusieures bases
-
-	$connexion = &$GLOBALS['connexions'][0];
-	@mysql_close($connexion['link']);
-
-	// On charge le fichier de configuration pour se reconnecter
-	$f = file(_DIR_RACINE  . _NOM_PERMANENTS_INACCESSIBLES . 'connect.php');
-	foreach ($f as $line) {
-		if (substr($line, 0, 15) == "spip_connect_db") {
-			preg_match("/spip_connect_db\('(\w*)','(\w*)','(\w*)','(\w*)','(\w*)','(\w*)', '(\w*)','(\w*)'\);/", $line, $matches);
-			$connexion['link'] = spip_mysqli_connect_db($matches[1], $matches[2], $matches[3], $matches[4], $matches[5], $matches[7]);
-		}
+	if ($port > 0) $host = "$host:$port";
+	$link = new mysqli($host, $login, $pass, $db);
+	if (!$link) return false;
+	$last = '';
+	if (!$db) {
+		$db = 'spip';
 	}
-	$connexion[1] = &$GLOBALS['spip_mysql_functions_1'];
+
+	return array(
+		'db' => $db,
+		'last' => $last,
+		'prefixe' => $prefixe ? $prefixe : $db,
+		'link' => $link
+	);
+
 }
 
 // On redirige toutes les fonctions mysql vers la version mysqli
@@ -95,14 +92,14 @@ function spip_mysqli_connect_db($host, $port, $login, $pass, $db='') {
 	return $link;
 }
 
-// http://doc.spip.org/@spip_mysql_set_charset
+// portage de http://doc.spip.org/@spip_mysql_set_charset
 function spip_mysqli_set_charset($charset, $serveur='',$requeter=true,$requeter=true){
 	$connexion = &$GLOBALS['connexions'][$serveur ? $serveur : 0];
 	#spip_log("changement de charset sql : "."SET NAMES "._q($charset));
 	return mysqli_set_charset($connexion,_q($charset));
 }
 
-// http://doc.spip.org/@spip_mysql_get_charset
+// portage de http://doc.spip.org/@spip_mysql_get_charset
 function spip_mysqli_get_charset($charset=array(), $serveur='',$requeter=true){
 	$connexion = &$GLOBALS['connexions'][$serveur ? $serveur : 0];
 	$connexion['last'] = $c = "SHOW CHARACTER SET"
@@ -112,7 +109,7 @@ function spip_mysqli_get_charset($charset=array(), $serveur='',$requeter=true){
 
 // Fonction de requete generale, munie d'une trace a la demande
 
-// http://doc.spip.org/@spip_mysql_query
+// portage de http://doc.spip.org/@spip_mysql_query
 function spip_mysqli_query($query, $serveur='',$requeter=true) {
 
 	$connexion = &$GLOBALS['connexions'][$serveur ? $serveur : 0];
@@ -136,18 +133,18 @@ function spip_mysqli_query($query, $serveur='',$requeter=true) {
 	return $t ? trace_query_end($query, $t, $r, $serveur) : $r;
 }
 
-// http://doc.spip.org/@spip_mysql_alter
+// portage de http://doc.spip.org/@spip_mysql_alter
 function spip_mysqli_alter($query, $serveur='',$requeter=true){
 	return spip_mysqli_query("ALTER ".$query, $serveur, $requeter); # i.e. que PG se debrouille
 }
 
-// http://doc.spip.org/@spip_mysql_optimize
+// portage de http://doc.spip.org/@spip_mysql_optimize
 function spip_mysqli_optimize($table, $serveur='',$requeter=true){
 	spip_mysqli_query("OPTIMIZE TABLE ". $table);
 	return true;
 }
 
-// http://doc.spip.org/@spip_mysql_explain
+// portage de http://doc.spip.org/@spip_mysql_explain
 function spip_mysqli_explain($query, $serveur='',$requeter=true){
 	if (strpos(ltrim($query), 'SELECT') !== 0) return array();
 	$connexion = &$GLOBALS['connexions'][$serveur ? $serveur : 0];
@@ -164,7 +161,7 @@ function spip_mysqli_explain($query, $serveur='',$requeter=true){
 // Les \n et \t sont utiles au debusqueur.
 
 
-// http://doc.spip.org/@spip_mysql_select
+// portage de http://doc.spip.org/@spip_mysql_select
 function spip_mysqli_select($select, $from, $where='',
 			   $groupby='', $orderby='', $limit='', $having='',
 			   $serveur='',$requeter=true) {
@@ -190,14 +187,14 @@ function spip_mysqli_select($select, $from, $where='',
 // en le nombre qui commence x.
 // Pas portable malheureusement, on laisse pour le moment.
 
-// http://doc.spip.org/@spip_mysql_order
+// portage de http://doc.spip.org/@spip_mysql_order
 function spip_mysqli_order($orderby)
 {
 	return (is_array($orderby)) ? join(", ", $orderby) :  $orderby;
 }
 
 
-// http://doc.spip.org/@calculer_mysqli_where
+// portage de http://doc.spip.org/@calculer_mysqli_where
 function calculer_mysqli_where($v)
 {
 	if (!is_array($v))
@@ -219,7 +216,7 @@ function calculer_mysqli_where($v)
 	}
 }
 
-// http://doc.spip.org/@calculer_mysql_expression
+// portage de http://doc.spip.org/@calculer_mysql_expression
 function calculer_mysqli_expression($expression, $v, $join = 'AND'){
 	if (empty($v))
 		return '';
@@ -236,7 +233,7 @@ function calculer_mysqli_expression($expression, $v, $join = 'AND'){
 	}
 }
 
-// http://doc.spip.org/@spip_mysql_select_as
+// portage de http://doc.spip.org/@spip_mysql_select_as
 function spip_mysqli_select_as($args)
 {
 	$res = '';
@@ -266,7 +263,7 @@ function spip_mysqli_select_as($args)
 
 define('_SQL_PREFIXE_TABLE', '/([,\s])spip_/S');
 
-// http://doc.spip.org/@traite_mysql_query
+// portage de http://doc.spip.org/@traite_mysql_query
 function traite_mysqli_query($query, $db='', $prefixe='') {
 
 	if ($GLOBALS['mysqli_rappel_nom_base'] AND $db)
@@ -290,7 +287,7 @@ function traite_mysqli_query($query, $db='', $prefixe='') {
 	return $r;
 }
 
-// http://doc.spip.org/@spip_mysql_selectdb
+// portage de http://doc.spip.org/@spip_mysql_selectdb
 function spip_mysqli_selectdb($db) {
 	return mysqli_select_db($db);
 }
@@ -299,7 +296,7 @@ function spip_mysqli_selectdb($db) {
 // Retourne les bases accessibles
 // Attention on n'a pas toujours les droits
 
-// http://doc.spip.org/@spip_mysql_listdbs
+// portage de http://doc.spip.org/@spip_mysql_listdbs
 function spip_mysqli_listdbs($serveur='',$requeter=true) {
 	return spip_mysqli_query("show databases",$serveur,$requeter);
 }
@@ -311,7 +308,7 @@ function spip_mysqli_listdbs($serveur='',$requeter=true) {
 // si $autoinc, c'est une auto-increment (i.e. serial) sur la Primary Key
 // Le nom des caches doit etre inferieur a 64 caracteres
 
-// http://doc.spip.org/@spip_mysql_create
+// portage de http://doc.spip.org/@spip_mysql_create
 function spip_mysqli_create($nom, $champs, $cles, $autoinc=false, $temporary=false, $serveur='',$requeter=true) {
 
 	$query = ''; $keys = ''; $s = ''; $p='';
@@ -361,7 +358,7 @@ function spip_mysqli_create_base($nom, $serveur='',$requeter=true) {
 }
 
 // Fonction de creation d'une vue SQL nommee $nom
-// http://doc.spip.org/@spip_mysql_create_view
+// portage de http://doc.spip.org/@spip_mysql_create_view
 function spip_mysqli_create_view($nom, $query_select, $serveur='',$requeter=true) {
 	if (!$query_select) return false;
 	// vue deja presente
@@ -375,7 +372,7 @@ function spip_mysqli_create_view($nom, $query_select, $serveur='',$requeter=true
 }
 
 
-// http://doc.spip.org/@spip_mysql_drop_table
+// portage de http://doc.spip.org/@spip_mysql_drop_table
 function spip_mysqli_drop_table($table, $exist='', $serveur='',$requeter=true)
 {
 	if ($exist) $exist =" IF EXISTS";
@@ -383,19 +380,19 @@ function spip_mysqli_drop_table($table, $exist='', $serveur='',$requeter=true)
 }
 
 // supprime une vue 
-// http://doc.spip.org/@spip_mysql_drop_view
+// portage de http://doc.spip.org/@spip_mysql_drop_view
 function spip_mysqli_drop_view($view, $exist='', $serveur='',$requeter=true) {
 	if ($exist) $exist =" IF EXISTS";
 	return spip_mysqli_query("DROP VIEW$exist $view", $serveur, $requeter);
 }
 
-// http://doc.spip.org/@spip_mysql_showbase
+// portage de http://doc.spip.org/@spip_mysql_showbase
 function spip_mysqli_showbase($match, $serveur='',$requeter=true)
 {
 	return spip_mysqli_query("SHOW TABLES LIKE '$match'", $serveur, $requeter);
 }
 
-// http://doc.spip.org/@spip_mysql_repair
+// portage de http://doc.spip.org/@spip_mysql_repair
 function spip_mysqli_repair($table, $serveur='',$requeter=true)
 {
 	return spip_mysqli_query("REPAIR TABLE $table", $serveur, $requeter);
@@ -404,7 +401,7 @@ function spip_mysqli_repair($table, $serveur='',$requeter=true)
 // Recupere la definition d'une table ou d'une vue MySQL
 // colonnes, indexes, etc.
 // au meme format que la definition des tables de SPIP
-// http://doc.spip.org/@spip_mysql_showtable
+// portage de http://doc.spip.org/@spip_mysql_showtable
 function spip_mysqli_showtable($nom_table, $serveur='',$requeter=true)
 {
 	$s = spip_mysqli_query("SHOW CREATE TABLE `$nom_table`", $serveur, $requeter);
@@ -475,7 +472,7 @@ function spip_mysqli_showtable($nom_table, $serveur='',$requeter=true)
 // Recuperation des resultats
 //
 
-// http://doc.spip.org/@spip_mysql_fetch
+// portage de http://doc.spip.org/@spip_mysql_fetch
 function spip_mysqli_fetch($r, $t='', $serveur='',$requeter=true) {
 	if (!$t) $t = MYSQLI_ASSOC;
 	if ($r) return mysqli_fetch_array($r, $t);
@@ -486,7 +483,7 @@ function spip_mysqli_seek($r, $row_number, $serveur='',$requeter=true) {
 }
 
 
-// http://doc.spip.org/@spip_mysql_countsel
+// portage de http://doc.spip.org/@spip_mysql_countsel
 function spip_mysqli_countsel($from = array(), $where = array(),
 			     $groupby = '', $having = array(), $serveur='',$requeter=true)
 {
@@ -501,7 +498,7 @@ function spip_mysqli_countsel($from = array(), $where = array(),
 	return $c;
 }
 
-// http://doc.spip.org/@spip_mysql_error
+// portage de http://doc.spip.org/@spip_mysql_error
 function spip_mysqli_error($serveur='') {
 	$connexion = &$GLOBALS['connexions'][$serveur ? $serveur : 0];
 	$link = $connexion['link'];
@@ -509,7 +506,7 @@ function spip_mysqli_error($serveur='') {
 }
 
 // A transposer dans les portages
-// http://doc.spip.org/@spip_mysql_errno
+// portage de http://doc.spip.org/@spip_mysql_errno
 function spip_mysqli_errno($serveur='') {
 	$connexion = &$GLOBALS['connexions'][$serveur ? $serveur : 0];
 	$link = $connexion['link'];
@@ -522,18 +519,18 @@ function spip_mysqli_errno($serveur='') {
 }
 
 // Interface de abstract_sql
-// http://doc.spip.org/@spip_mysql_count
+// portage de http://doc.spip.org/@spip_mysql_count
 function spip_mysqli_count($r, $serveur='',$requeter=true) {
 	if ($r)	return mysqli_num_rows($r);
 }
 
 
-// http://doc.spip.org/@spip_mysql_free
+// portage de http://doc.spip.org/@spip_mysql_free
 function spip_mysqli_free($r, $serveur='',$requeter=true) {
 	return mysqli_free_result($r);
 }
 
-// http://doc.spip.org/@spip_mysql_insert
+// portage de http://doc.spip.org/@spip_mysql_insert
 function spip_mysqli_insert($table, $champs, $valeurs, $desc='', $serveur='',$requeter=true) {
 
 	$connexion = &$GLOBALS['connexions'][$serveur ? $serveur : 0];
@@ -559,7 +556,7 @@ function spip_mysqli_insert($table, $champs, $valeurs, $desc='', $serveur='',$re
 	// return $r ? $r : (($r===0) ? -1 : 0); pb avec le multi-base.
 }
 
-// http://doc.spip.org/@spip_mysql_insertq
+// portage de http://doc.spip.org/@spip_mysql_insertq
 function spip_mysqli_insertq($table, $couples=array(), $desc=array(), $serveur='',$requeter=true) {
 
 	if (!$desc) $desc = description_table($table);
@@ -574,7 +571,7 @@ function spip_mysqli_insertq($table, $couples=array(), $desc=array(), $serveur='
 }
 
 
-// http://doc.spip.org/@spip_mysql_insertq_multi
+// portage de http://doc.spip.org/@spip_mysql_insertq_multi
 function spip_mysqli_insertq_multi($table, $tab_couples=array(), $desc=array(), $serveur='',$requeter=true) {
 
 	if (!$desc) $desc = description_table($table);
@@ -601,7 +598,7 @@ function spip_mysqli_insertq_multi($table, $tab_couples=array(), $desc=array(), 
 	return $r; // dans le cas d'une table auto_increment, le dernier insert_id
 }
 
-// http://doc.spip.org/@spip_mysql_update
+// portage de http://doc.spip.org/@spip_mysql_update
 function spip_mysqli_update($table, $champs, $where='', $desc='', $serveur='',$requeter=true) {
 	$set = array();
 	foreach ($champs as $champ => $val)
@@ -616,7 +613,7 @@ function spip_mysqli_update($table, $champs, $where='', $desc='', $serveur='',$r
 
 // idem, mais les valeurs sont des constantes a mettre entre apostrophes
 // sauf les expressions de date lorsqu'il s'agit de fonctions SQL (NOW etc)
-// http://doc.spip.org/@spip_mysql_updateq
+// portage de http://doc.spip.org/@spip_mysql_updateq
 function spip_mysqli_updateq($table, $champs, $where='', $desc=array(), $serveur='',$requeter=true) {
 
 	if (!$champs) return;
@@ -633,7 +630,7 @@ function spip_mysqli_updateq($table, $champs, $where='', $desc=array(), $serveur
 			$serveur, $requeter);
 }
 
-// http://doc.spip.org/@spip_mysql_delete
+// portage de http://doc.spip.org/@spip_mysql_delete
 function spip_mysqli_delete($table, $where='', $serveur='',$requeter=true) {
 	$res = spip_mysqli_query(
 			  calculer_mysqli_expression('DELETE FROM', $table, ',')
@@ -647,13 +644,13 @@ function spip_mysqli_delete($table, $where='', $serveur='',$requeter=true) {
 		return false;
 }
 
-// http://doc.spip.org/@spip_mysql_replace
+// portage de http://doc.spip.org/@spip_mysql_replace
 function spip_mysqli_replace($table, $couples, $desc=array(), $serveur='',$requeter=true) {
 	return spip_mysqli_query("REPLACE $table (" . join(',',array_keys($couples)) . ') VALUES (' .join(',',array_map('_q', $couples)) . ')', $serveur, $requeter);
 }
 
 
-// http://doc.spip.org/@spip_mysql_replace_multi
+// portage de http://doc.spip.org/@spip_mysql_replace_multi
 function spip_mysqli_replace_multi($table, $tab_couples, $desc=array(), $serveur='',$requeter=true) {
 	$cles = "(" . join(',',array_keys($tab_couples[0])). ')';
 	$valeurs = array();
@@ -665,7 +662,7 @@ function spip_mysqli_replace_multi($table, $tab_couples, $desc=array(), $serveur
 }
 
 
-// http://doc.spip.org/@spip_mysql_multi
+// portage de http://doc.spip.org/@spip_mysql_multi
 function spip_mysqli_multi ($objet, $lang) {
 	$lengthlang = strlen("[$lang]");
 	$posmulti = "INSTR(".$objet.", '<multi>')";
@@ -695,7 +692,7 @@ function spip_mysqli_multi ($objet, $lang) {
 	return $retour;
 }
 
-// http://doc.spip.org/@spip_mysql_hex
+// portage de http://doc.spip.org/@spip_mysql_hex
 function spip_mysqli_hex($v)
 {
 	return "0x" . $v;
@@ -724,7 +721,7 @@ function spip_mysqli_date_proche($champ, $interval, $unite)
 //
 // IN (...) est limite a 255 elements, d'ou cette fonction assistante
 //
-// http://doc.spip.org/@spip_mysql_in
+// portage de http://doc.spip.org/@spip_mysql_in
 function spip_mysqli_in($val, $valeurs, $not='', $serveur='',$requeter=true) {
 	$n = $i = 0;
 	$in_sql ="";
@@ -744,7 +741,7 @@ function spip_mysqli_in($val, $valeurs, $not='', $serveur='',$requeter=true) {
 }
 
 // pour compatibilite. Ne plus utiliser.
-// http://doc.spip.org/@calcul_mysql_in
+// portage de http://doc.spip.org/@calcul_mysql_in
 function calcul_mysqli_in($val, $valeurs, $not='') {
 	if (is_array($valeurs))
 		$valeurs = join(',', array_map('_q', $valeurs));
@@ -753,7 +750,7 @@ function calcul_mysqli_in($val, $valeurs, $not='') {
 	return spip_mysqli_in($val, $valeurs, $not);
 }
 
-// http://doc.spip.org/@spip_mysql_cite
+// portage de http://doc.spip.org/@spip_mysql_cite
 function spip_mysqli_cite($v, $type) {
 	if (sql_test_date($type) AND preg_match('/^\w+\(/', $v)
 	OR (sql_test_int($type)
