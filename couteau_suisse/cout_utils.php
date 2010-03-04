@@ -124,7 +124,6 @@ function add_outils_xml($f) {
 }
 // Attention : conversion incomplete. ajouter les tests au fur et a mesure
 function parse_variable_xml(&$arbre) {
-//echo "<br /><br />\n"; print_r($arbre);
 	$var = array();
 	if(isset($arbre['id'])) $var['nom'] = $arbre['id'][0];
 	if(isset($arbre['format'])) $var['format'] = $arbre['format'][0]=='string'?_format_CHAINE:_format_NOMBRE;
@@ -139,17 +138,13 @@ function parse_variable_xml(&$arbre) {
 		$temp = isset($a['condition_php'])?'code:'.$a['condition_php'][0]:'code';
 		if(isset($a['script_php'])) $var[$temp] = str_replace('\n', "\n", $a['script_php'][0]);
 	}
-//echo "\n<br /><br />\n"; print_r($var);
 	return $var;
 }
 // Attention : conversion incomplete. ajouter les tests au fur et a mesure
 function parse_outil_xml(&$arbre) {
-//echo "<br /><br />\n"; print_r($arbre);
 	$out = array();
-	if(isset($arbre['id'])) $out['id'] = $arbre['id'][0];
-	if(isset($arbre['nom'])) $out['nom'] = $arbre['nom'][0];
-	if(isset($arbre['categorie'])) $out['categorie'] = $arbre['categorie'][0];
-	if(isset($arbre['auteur'])) $out['auteur'] = $arbre['auteur'][0];
+	foreach(array('id','nom','description','categorie','auteur') as $n) 
+		if(isset($arbre[$n])) $out[$n] = $arbre[$n][0];
 	if(isset($arbre['code'])) foreach($arbre['code'] as $a) {
 		$temp = isset($a['type'])?'code:'.$a['type'][0]:'code';
 		if(isset($a['script_php'])) $out[$temp] = str_replace('\n', "\n", $a['script_php'][0]);
@@ -168,7 +163,6 @@ function parse_outil_xml(&$arbre) {
 		if(isset($temp['spip_min'])) $out['version-min'] = $temp['spip_min'][0];
 		if(isset($temp['spip_max'])) $out['version-max'] = $temp['spip_max'][0];
 	}
-//echo "\n<br /><br />\n"; print_r($out);
 	return $out;
 }
 

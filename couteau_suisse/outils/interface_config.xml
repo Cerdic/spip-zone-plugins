@@ -168,8 +168,7 @@
 </variable>
 <outil>
 	<id>meme_rubrique</id>
-	<nom><:ecrire:info_meme_rubrique:></nom>
-	<description><:info_meme_rubrique:></description>
+	<nom><:info_meme_rubrique:></nom>
 	<categorie>interface</categorie>
 	<code>
 		<type>spip_options</type>
