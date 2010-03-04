@@ -2093,7 +2093,7 @@ class phpTypography {
 					array_push($wordPattern, "0");
 				}
 				// we grab all possible segments from $parsedTextToken of length 2 through $this->settings["hyphenationPatternMaxSegment"]
-				for($segmentLength=2; ($segmentLength <= $wordLength) && ($segmentLength <= $this->settings["hyphenationPatternMaxSegment"]); $segmentLength++) {
+				for($segmentLength=1; ($segmentLength <= $wordLength) && ($segmentLength <= $this->settings["hyphenationPatternMaxSegment"]); $segmentLength++) {
 					for($segmentPosition=0; $segmentPosition + $segmentLength <= $wordLength; $segmentPosition++) {
 						if($multibyte)
 							$segment = mb_strtolower(mb_substr($parsedTextToken["value"], $segmentPosition, $segmentLength, "UTF-8"), "UTF-8");

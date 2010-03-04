@@ -3,6 +3,8 @@
 $p = explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
 define('_DIR_PLUGIN_TYPO_AVANCEE',(_DIR_PLUGINS.end($p)));
 
+	include_spip("php-typography/php-typography"); 
+	include_spip("inc/charsets");
 
 function traiter_typo_avancee($texte) {
 	$lang = $GLOBALS["spip_lang"];
@@ -10,8 +12,6 @@ function traiter_typo_avancee($texte) {
 	if (!$lang) $lang = "fr";
 
 
-	include_spip("php-typography/php-typography"); 
-	include_spip("inc/charsets");
 	
 	// Ne pas hyphener dans la premiere passe
 	$typo = new phpTypography();
@@ -83,7 +83,6 @@ function typo_avancee_typo($texte) {
 	// Traiter paragraphe par paragraphe
 	include_spip("inc/texte");
 	$texte_par = traiter_retours_chariots($texte);
-
 
 	$paragraphes = explode("\n\n", $texte_par);
 	$retour = "";
