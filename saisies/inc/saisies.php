@@ -20,7 +20,7 @@ function saisies_autonomes(){
 			'destinataires'
 		)
 	);
-	
+
 	return $saisies_autonomes;
 }
 
@@ -39,17 +39,17 @@ function saisies_autonomes(){
  *		2 => array(etc)
  * )
  * Les options de la saisie ont une clé textuelle, tandis que les éventuelles saisies enfants ont des clés numériques indiquant leur rang.
- * 
+ *
  * @param array $saisie La description d'une saisie sous la forme d'un tableau
  * @param arary $env L'environnement dans lequel sera construit la saisie (sert notamment pour récupérer la valeur du champ)
  * @return string Retourne le HTML de la saisie
  */
 function saisies_generer_html($saisie, $env=array()){
-	
+
 	// Si le parametre n'est pas bon, on genere du vide
 	if (!is_array($saisie))
 		return '';
-	
+
 	// On sépare les options et les saisies enfants
 	$cles = array_keys($saisie);
 	// Les saisies enfants ce sont les clés numériques
@@ -62,15 +62,15 @@ function saisies_generer_html($saisie, $env=array()){
 	// On récupère chaque morceaux
 	$options = array_intersect_key($saisie, $cles_options);
 	$enfants = array_intersect_key($saisie, $cles_enfants);
-	
+
 	// Le contexte c'est d'abord les options de la saisie
 	// Peut-être des transformations à faire sur les options textuelles
 	$contexte = _T_ou_typo($options, 'multi');
-	
+
 	// Si on ne trouve pas de type de saisie on met input par defaut
 	if (!$contexte['type_saisie'])
 		$contexte['type_saisie'] = 'input';
-	
+
 	// Si env est définie dans les options, on ajoute tout l'environnement
 	if(isset($contexte['env'])){
 		unset($contexte['env']);
@@ -82,7 +82,7 @@ function saisies_generer_html($saisie, $env=array()){
 		// On récupère la liste des erreurs
 		$contexte['erreurs'] = $env['erreurs'];
 	}
-	
+
 	// Dans tous les cas on récupère de l'environnement la valeur actuelle du champ
 	// Si le nom du champ est un tableau indexé, il faut parser !
 	if (preg_match('/([\w]+)((\[[\w]+\])+)/', $contexte['nom'], $separe)){
@@ -96,18 +96,18 @@ function saisies_generer_html($saisie, $env=array()){
 	// Sinon la valeur est juste celle du nom
 	else
 		$contexte['valeur'] = $env[$contexte['nom']];
-	
+
 	// S'il y a des saisies enfants, on les ajoute au contexte
 	if ($enfants and is_array($enfants)){
 		$contexte['saisies'] = $enfants;
 	}
-	
+
 	// On génère la saisie
 	return recuperer_fond(
 		'saisies/_base',
 		$contexte
 	);
-	
+
 }
 
 /*
@@ -119,7 +119,7 @@ function saisies_generer_html($saisie, $env=array()){
  */
 function saisies_recuperer_saisies($contenu){
 	$saisies = array();
-	
+
 	if (is_array($contenu)){
 		foreach ($contenu as $ligne){
 			if (is_array($ligne)){
@@ -132,7 +132,7 @@ function saisies_recuperer_saisies($contenu){
 			}
 		}
 	}
-	
+
 	return $saisies;
 }
 
@@ -155,13 +155,15 @@ function saisies_recuperer_champs($contenu){
  */
 function saisies_verifier($formulaire){
 	$erreurs = array();
-	
+
+	$verif_fonction = charger_fonction('verifier','inc',true);
+
 	$saisies = saisies_recuperer_saisies($formulaire);
 	foreach ($saisies as $saisie){
 		$obligatoire = $saisie['options']['obligatoire'];
 		$champ = $saisie['options']['nom'];
 		$verifier = $saisie['verifier'];
-		
+
 		// Si le nom du champ est un tableau indexé, il faut parser !
 		if (preg_match('/([\w]+)((\[[\w]+\])+)/', $champ, $separe)){
 			$valeur = _request($separe[1]);
@@ -174,19 +176,19 @@ function saisies_verifier($formulaire){
 		// Sinon la valeur est juste celle du nom
 		else
 			$valeur = _request($champ);
-		
+
 		// On regarde d'abord si le champ est obligatoire
 		if ($obligatoire and $obligatoire != 'non' and ($valeur == ''))
 			$erreurs[$champ] = _T('info_obligatoire');
-		
+
 		// On continue seulement si ya pas d'erreur d'obligation et qu'il y a une demande de verif
 		if (!$erreurs[$champ] and is_array($verifier)){
 			// Si le champ n'est pas valide par rapport au test demandé, on ajoute l'erreur
-			if ($erreur_eventuelle = verifier($valeur, $verifier['type'], $verifier['options']))
+			if ($erreur_eventuelle = $verif_fonction($valeur, $verifier['type'], $verifier['options']))
 				$erreurs[$champ] = $erreur_eventuelle;
 		}
 	}
-	
+
 	return $erreurs;
 }
 
@@ -197,11 +199,11 @@ function saisies_verifier($formulaire){
  */
 function saisies_lister_disponibles(){
 	static $saisies = null;
-	
+
 	if (is_null($saisies)){
 		$saisies = array();
 		$liste = find_all_in_path('saisies/', '.+[.]yaml$');
-		
+
 		if (count($liste)){
 			foreach ($liste as $fichier=>$chemin){
 				$type_saisie = preg_replace(',[.]yaml$,i', '', $fichier);
@@ -217,7 +219,7 @@ function saisies_lister_disponibles(){
 			}
 		}
 	}
-	
+
 	return $saisies;
 }
 
@@ -242,18 +244,18 @@ function saisies_charger_infos($type_saisie){
 /**
  * Génère un nom unique pour un champ d'un formulaire donné
  *
- * @param array $formulaire Le formulaire à analyser 
- * @param string $type_saisie Le type de champ dont on veut un identifiant 
+ * @param array $formulaire Le formulaire à analyser
+ * @param string $type_saisie Le type de champ dont on veut un identifiant
  * @return string Un nom unique par rapport aux autres champs du formulaire
  */
 function saisies_generer_nom($formulaire, $type_saisie){
 	$champs = saisies_recuperer_champs($formulaire);
-	
+
 	// Tant que type_numero existe, on incrémente le compteur
 	$compteur = 1;
 	while (array_search($type_saisie.'_'.$compteur, $champs) !== false)
 		$compteur++;
-	
+
 	// On a alors un compteur unique pour ce formulaire
 	return $type_saisie.'_'.$compteur;
 }
@@ -262,19 +264,19 @@ function saisies_generer_nom($formulaire, $type_saisie){
  * Insère du HTML au début ou à la fin d'une saisie
  *
  * @param array $saisie La description d'une seule saisie
- * @param string $insertion Du code HTML à insérer dans la saisie 
+ * @param string $insertion Du code HTML à insérer dans la saisie
  * @param string $ou L'endroit où insérer le HTML : "debut" ou "fin"
  * @return array Retourne la description de la saisie modifiée
  */
 function saisies_inserer_html($saisie, $insertion, $ou='fin'){
 	if (!in_array($ou, array('debut', 'fin')))
 		$ou = 'fin';
-	
+
 	if ($ou == 'debut')
 		$saisie['options']['inserer_debut'] = $insertion.$saisie['options']['inserer_debut'];
 	elseif ($ou == 'fin')
 		$saisie['options']['inserer_fin'] = $saisie['options']['inserer_fin'].$insertion;
-	
+
 	return $saisie;
 }
 
