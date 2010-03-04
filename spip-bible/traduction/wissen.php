@@ -37,13 +37,13 @@ function recuperer_passage_wissen($livre,$ref,$wissen,$lang){
 	$tableau = explode('<div class="boxcontent-bible">',$code);
 	$code = $tableau[1];
 	
-	$code = eregi_replace('<h1>[0-Z]*</h1>','',$code);
+	$code = preg_replace('#<h1>[0-Z]*</h1>#','',$code);
 	
 	$tableau = explode('<div id="popupcontent">',$code);
 	$code = $tableau[0];
 	//suppression des intertitres
 	$n = 1;
-	while (eregi('<h[1-7]>',$code)){
+	while (preg_match('#<h[1-7]>#',$code)){
 	   $code = supprimer_intertitre($n,$code);
 	   $n++;
 	}
@@ -56,18 +56,18 @@ function recuperer_passage_wissen($livre,$ref,$wissen,$lang){
 	$code = str_replace('</span>&nbsp;','</sup>',$code);
 	$code = strip_tags($code,'<br><sup><strong>');
 	$code = str_replace('</strong><br />','</strong>',$code);
-	$code = eregi_replace('^<br />','',$code);
-	$code = eregi_replace("</sup>"," </sup>",$code);
+	$code = preg_replace('#^<br />#','',$code);
+	$code = preg_replace("#</sup>#"," </sup>",$code);
 	return $code;
 	}
 function supprimer_intertitre($n, $code){
-    if(eregi('<h'.$n.'>',$code)){
+    if(preg_match('#<h'.$n.'>#',$code)){
 			$tableau = explode('<h'.$n.'>',$code);
 			
 			$d = 0;
 			$tableau2 = array();
 			foreach ($tableau as $j){
-				if (eregi('</h'.$n.'>',$j)){
+				if (preg_match('#</h'.$n.'>#',$j)){
 					
 					$tableau3 = explode('</h'.$n.'>',$j);
 					$tableau2[$d]=$tableau3[1];
