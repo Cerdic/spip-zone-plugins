@@ -6,7 +6,7 @@
 <pre>
 <?php
 
-include_spip('inc/verifier');
+$verifier = charger_fonction('verifier','inc');
 
 $un_mot = "poli4_EFSdq89";
 $un_autre_mot = "aqe  edioj o^";
@@ -14,9 +14,9 @@ $modele = "/^[\w]+$/";
 
 echo "Modèle => $modele\n\n";
 echo "'$un_mot' ?";
-var_dump(verifier($un_mot, 'regex', array('modele'=>$modele)));
+var_dump($verifier($un_mot, 'regex', array('modele'=>$modele)));
 echo "'$un_autre_mot' ?";
-var_dump(verifier($un_autre_mot, 'regex', array('modele'=>$modele)));
+var_dump($verifier($un_autre_mot, 'regex', array('modele'=>$modele)));
 
 ?>
 </pre>
@@ -29,13 +29,13 @@ $un_entier = 568;
 $un_autre_entier = "-89";
 
 echo "$un_entier entre 0 et 1000 ?";
-var_dump(verifier($un_entier, 'entier', array('min'=>0, 'max'=>1000)));
+var_dump($verifier($un_entier, 'entier', array('min'=>0, 'max'=>1000)));
 echo "$un_entier < 100 ?";
-var_dump(verifier($un_entier, 'entier', array('max'=>100)));
+var_dump($verifier($un_entier, 'entier', array('max'=>100)));
 echo "$un_autre_entier est positif ?";
-var_dump(verifier($un_autre_entier, 'entier', array('min'=>0)));
+var_dump($verifier($un_autre_entier, 'entier', array('min'=>0)));
 echo "$un_autre_entier entre -100 et -50 ?";
-var_dump(verifier($un_autre_entier, 'entier', array('min'=>-100, 'max'=>-50)));
+var_dump($verifier($un_autre_entier, 'entier', array('min'=>-100, 'max'=>-50)));
 
 ?>
 </pre>
@@ -48,21 +48,21 @@ $une_chaine = "123456";
 $un_autre_chaine = "abc";
 
 echo "$une_chaine de 1 à 3 caractères ?";
-var_dump(verifier($une_chaine, 'taille', array('min'=>1, 'max'=>3)));
+var_dump($verifier($une_chaine, 'taille', array('min'=>1, 'max'=>3)));
 echo "$une_chaine 5 caractères max ?";
-var_dump(verifier($une_chaine, 'taille', array('max'=>5)));
+var_dump($verifier($une_chaine, 'taille', array('max'=>5)));
 echo "$une_chaine 4 caractères mini ?";
-var_dump(verifier($une_chaine, 'taille', array('min'=>4)));
+var_dump($verifier($une_chaine, 'taille', array('min'=>4)));
 echo "$un_autre_chaine de 1 à 3 caractères ?";
-var_dump(verifier($un_autre_chaine, 'taille', array('min'=>1, 'max'=>3)));
+var_dump($verifier($un_autre_chaine, 'taille', array('min'=>1, 'max'=>3)));
 echo "$un_autre_chaine 5 caractères max ?";
-var_dump(verifier($un_autre_chaine, 'taille', array('max'=>5)));
+var_dump($verifier($un_autre_chaine, 'taille', array('max'=>5)));
 echo "$un_autre_chaine 4 caractères mini ?";
-var_dump(verifier($un_autre_chaine, 'taille', array('min'=>4)));
+var_dump($verifier($un_autre_chaine, 'taille', array('min'=>4)));
 echo "$une_chaine de 3 caractères ?";
-var_dump(verifier($une_chaine, 'taille', array('egal'=>3)));
+var_dump($verifier($une_chaine, 'taille', array('egal'=>3)));
 echo "$un_autre_chaine de 3 caractères ?";
-var_dump(verifier($un_autre_chaine, 'taille', array('egal'=>3)));
+var_dump($verifier($un_autre_chaine, 'taille', array('egal'=>3)));
 
 ?>
 </pre>
@@ -77,18 +77,18 @@ $email2 = "test@b";
 $email3 = "test";
 
 echo "Valide SPIP : $email ?";
-var_dump(verifier($email, 'email'));
+var_dump($verifier($email, 'email'));
 echo "Valide SPIP : $email2 ?";
-var_dump(verifier($email2, 'email'));
+var_dump($verifier($email2, 'email'));
 echo "Valide SPIP : $email3 ?";
-var_dump(verifier($email3, 'email'));
+var_dump($verifier($email3, 'email'));
 
 echo "Valide Strict : $email ?";
-var_dump(verifier($email, 'email_strict'));
+var_dump($verifier($email, 'email_strict'));
 echo "Valide Strict : $email2 ?";
-var_dump(verifier($email2, 'email_strict'));
+var_dump($verifier($email2, 'email_strict'));
 echo "Valide Strict : $email3 ?";
-var_dump(verifier($email3, 'email_strict'));
+var_dump($verifier($email3, 'email_strict'));
 
 
 ?>
@@ -103,11 +103,11 @@ $telephone2 = "090909";
 $telephone3 = "10 01 01 01 01";
 
 echo "Téléphone : $telephone ?";
-var_dump(verifier($telephone, 'telephone_fr'));
+var_dump($verifier($telephone, 'telephone_fr'));
 echo "Téléphone : $telephone2 ?";
-var_dump(verifier($telephone2, 'telephone_fr'));
+var_dump($verifier($telephone2, 'telephone_fr'));
 echo "Téléphone : $telephone3 ?";
-var_dump(verifier($telephone3, 'telephone_fr'));
+var_dump($verifier($telephone3, 'telephone_fr'));
 
 
 ?>
@@ -124,14 +124,14 @@ $siret_valide = "32122785200019";
 $siret_non_valide = "32122785200033";
 
 echo "SIREN : $siren_valide ?";
-var_dump(verifier($siren_valide, 'siren'));
+var_dump($verifier($siren_valide, 'siren'));
 echo "SIREN : $siren_non_valide ?";
-var_dump(verifier($siren_non_valide, 'siren'));
+var_dump($verifier($siren_non_valide, 'siren'));
 
 echo "SIRET : $siret_valide ?";
-var_dump(verifier($siret_valide, 'siret'));
+var_dump($verifier($siret_valide, 'siret'));
 echo "SIRET : $siret_non_valide ?";
-var_dump(verifier($siret_non_valide, 'siret'));
+var_dump($verifier($siret_non_valide, 'siret'));
 ?>
 </pre>
 
@@ -142,9 +142,9 @@ $date_valide = "30-01-2009";
 $date_non_valide = "321227822";
 
 echo "Date JJ/MM/AAAA (avec séparateur /.-) : $date_valide ?";
-var_dump(verifier($date_valide, 'date'));
+var_dump($verifier($date_valide, 'date'));
 echo "Date JJ/MM/AAAA : $date_non_valide ?";
-var_dump(verifier($date_non_valide, 'date'));
+var_dump($verifier($date_non_valide, 'date'));
 ?>
 </pre>
 

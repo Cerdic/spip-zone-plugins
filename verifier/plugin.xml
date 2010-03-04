@@ -5,9 +5,9 @@
 	<version>0.1</version>
 	<etat>dev</etat>
 	<description>Fournit une fonction unique <code>verifier($valeur, $type, $options)</code> permettant de tester la validit&eacute; d'une valeur.</description>
-	
+
 	<prefix>verifier</prefix>
-	
+	<options>verifier_options.php</options>
 	<necessite id="SPIP" version="[2.0.10;]" />
 </plugin>
 
