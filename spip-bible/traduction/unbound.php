@@ -44,6 +44,7 @@ function recuperer_passage_unbound($livre,$chapitre_debut,$verset_debut,$chapitr
 	       
 	       $url = "http://www.unboundbible.org/index.cfm?method=searchResults.doSearch&parallel_1=".$unbound."&book=".$id_livre."&from_chap=".$i."&from_verse=".$vd."&to_chap=".$i."&to_verse=".$vf;
 	       $code = importer_charset(recuperer_page($url,'utf-8'));
+	       
 	       $code = selectionner_passage($code);
 	       
 	       $texte = $texte."<strong>".$i."</strong>".$code;
@@ -60,7 +61,7 @@ function recuperer_passage_unbound($livre,$chapitre_debut,$verset_debut,$chapitr
 }
 
 function selectionner_passage($code){
-   
+    $code = preg_replace('/<bdo dir=\'ltr\'>([0123456789]+):([0123456789]+)<\/bdo>/','',$code);
     /* desormais on se fit au balise bdo pour selectionner le texte : il s'arret au 1er </tr> après le deuxième </bdo>*/
     $tableau = explode("</bdo>",$code);
     $post_bdo = array_pop($tableau);
@@ -84,8 +85,8 @@ function selectionner_passage($code){
     
     $code = strip_tags($code,"<bdo>");
     $code = str_replace("</bdo>.&nbsp;"," </sup>",$code);
+    $code = str_replace("</bdo>&nbsp;"," </sup>",$code);
     $code = str_replace("<bdo dir='ltr'>","<br /><sup>",$code); 
-    
  
     return $code;
 }
