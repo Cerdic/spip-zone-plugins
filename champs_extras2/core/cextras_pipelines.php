@@ -78,6 +78,7 @@ function cextras_creer_contexte($c, $contexte_flux) {
 		$contexte['precisions_extra'] = _T($c->saisie_parametres['explication']);
 	$contexte['obligatoire_extra'] = $c->obligatoire ? 'obligatoire' : '';
 	$contexte['verifier_extra'] = $c->verifier;
+	$contexte['verifier_options_extra'] = $c->verifier_options;
 	$contexte['valeur_extra'] = $contexte_flux[$c->champ];
 	$contexte['enum_extra'] = $c->enum;
 	// ajouter 'erreur_extra' dans le contexte s'il y a une erreur sur le champ
@@ -325,7 +326,7 @@ function cextras_formulaire_verifier($flux){
 						$flux['data'][$c->champ] = _T('info_obligatoire');
 					}
 					else if($c->verifier && $verifier){
-						$erreur[$c->champ] = $verifier(_request($c->champ),$c->verifier);
+						$erreur[$c->champ] = $verifier(_request($c->champ),$c->verifier,$c->verifier_options);
 						if($erreur[$c->champ]){
 							$flux['data'][$c->champ] = $erreur[$c->champ];
 						}

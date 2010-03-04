@@ -8,6 +8,7 @@ class ChampExtra{
 	var $precisions = ''; // (deprecie ; voir $saisie_parametres) precisions pour la saisie du champ (optionnel), code de lanque ('monplug:mon_label')
 	var $obligatoire = false; // ce champ est il obligatoire ? 'oui' ou true : c'est le cas.
 	var $verifier = false; // Fonction de vérification du plugin API verifier
+	var $verifier_options = array(); // Fonction de vérification du plugin API verifier
 	var $rechercher = false; // ce champ entre-t-il dans le moteur de recherche ?
 	var $enum = ''; // liste de valeurs (champ texte : "cle1,val1\ncle2,val2" ou tableau : array("cle1"=>"val1","cle2"=>"val2") )
 	var $type = ''; // type (ligne/bloc/etc)
