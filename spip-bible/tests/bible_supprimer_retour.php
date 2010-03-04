@@ -97,6 +97,8 @@ Du maître de chant. Sur »la biche de l\'aurore.» Psaume. De David. Mon Dieu, 
 
 <accronym title=\'Psaumes\'>Ps</accronym> 22 (<i>Bible de Jérusalem (1973)</i>)
 
+
+
 </quote>',
     1 => '<quote><strong>22</strong><sup>1 </sup>
 							
@@ -373,11 +375,13 @@ Du maître de chant. Sur »la biche de l\'aurore.» Psaume. De David. Mon Dieu, 
 									
 									 à venir, elle racontera aux peuples à naître sa justice il l\'a faite!
 									
-						<p><accronym title=\'Psaumes\'>Ps</accronym> 22 (<i>Bible de Jérusalem (1973)</i>)</quote>',
+						<p><accronym title=\'Psaumes\'>Ps</accronym> 22 (<i>Bible de Jérusalem (1973)</i>)</p></quote>',
   ),
 );
 		return $essais;
 	}
+
+
 
 
 

@@ -6,27 +6,22 @@ Spip-Bible
 include_spip('inc/bible_tableau');
 function bible_supprimer_retour($texte){
    
-    $texte = ereg_replace("\t",'',$texte);
-    $texte = ereg_replace("[\s]*<br />",'<br />',$texte);
-    $texte = ereg_replace("[\s]*<sup>",'<sup>',$texte);
-    $texte = ereg_replace("</sup>[\s]*",'</sup>',$texte);
-    $texte = ereg_replace("[\t]*",'',$texte);
-    $texte = ereg_replace("[\t]*",'',$texte);
+    $texte = preg_replace("#\t#",'',$texte);
+    $texte = preg_replace("#1[\s]*<br />#",'<br />',$texte);
+    $texte = preg_replace("#[\s]*<sup>#",'<sup>',$texte);
     
-  while(eregi('  ',$texte)){
-    $texte = ereg_replace("  ",'',$texte);
-  }
+    $texte = preg_replace("# {2,}#",'',$texte);
+
+
+    $texte = preg_replace("#[\r|\n][\r|\n]#",'',$texte);
   
-  while (eregi("[\r|\n][\r|\n]",$texte)){
-    $texte = eregi_replace("[\r|\n][\r|\n]",'',$texte);
-  
-  }
-    $texte = eregi_replace("\n<br />","<br />",$texte);
-    $texte = eregi_replace("<quote>","<quote>\n",$texte);
-    $texte = eregi_replace("<br />","<br />\n",$texte);
-    $texte = eregi_replace("</quote>","\n\n</quote>",$texte);
-    $texte = eregi_replace("<p>","\n\n",$texte);
-    $texte = eregi_replace("</p>","\n\n",$texte);
+
+    $texte = preg_replace("#\n<br />#i","<br />",$texte);
+    $texte = preg_replace("#<quote>#","<quote>\n",$texte);
+    $texte = preg_replace("#<br />#i","<br />\n",$texte);
+    $texte = preg_replace("#</quote>#","\n\n</quote>",$texte);
+    $texte = preg_replace("#(<p>|</p>)#i","\n\n",$texte);
+    #$texte = preg_replace("#</p>#i","\n\n",$texte);
  return $texte;
 }
 function traduire_abreviation($abrev,$lang_original,$lang_traduction){
