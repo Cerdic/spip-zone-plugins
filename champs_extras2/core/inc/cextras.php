@@ -5,14 +5,15 @@ class ChampExtra{
 	var $table = ''; // type de table ('rubrique')
 	var $champ = ''; // nom du champ ('ps')
 	var $label = ''; // label du champ, code de lanque ('monplug:mon_label')
-		var $precisions = ''; // (deprecie ; voir $saisie_parametres) precisions pour la saisie du champ (optionnel), code de lanque ('monplug:mon_label')
+	var $precisions = ''; // (deprecie ; voir $saisie_parametres) precisions pour la saisie du champ (optionnel), code de lanque ('monplug:mon_label')
 	var $obligatoire = false; // ce champ est il obligatoire ? 'oui' ou true : c'est le cas.
+	var $verifier = false; // Fonction de vérification du plugin API verifier
 	var $rechercher = false; // ce champ entre-t-il dans le moteur de recherche ?
 	var $enum = ''; // liste de valeurs (champ texte : "cle1,val1\ncle2,val2" ou tableau : array("cle1"=>"val1","cle2"=>"val2") )
 	var $type = ''; // type (ligne/bloc/etc)
 	var $sql = ''; // declaration sql (text NOT NULL DEFAULT '')
 	var $traitements = ''; // _TRAITEMENT_RACCOURCIS ,  _TRAITEMENT_TYPO ou autre declaration pour la $table_des_traitements
-	
+
 	var $_id = ''; // identifiant de ce champ extra
 
 	// experimental (avec saisies)
@@ -26,12 +27,12 @@ class ChampExtra{
 			li_class => ""; // classes CSS sur l'element parent LI
 		*/
 
-	
+
 	// constructeur
 	function ChampExtra($params=array()) {
 		$this->definir($params);
 	}
-	
+
 	// definir les champs
 	function definir($params=array()) {
 		foreach ($params as $cle=>$valeur) {
@@ -42,20 +43,20 @@ class ChampExtra{
 		// calculer l'id du champ extra
 		$this->make_id();
 	}
-	
+
 	// creer l'id du champ extra :
 	function make_id(){
 		// creer un hash
 		$hash = $this->champ . $this->table . $this->sql;
 		$this->_id = substr(md5($hash),0,6);
 	}
-	
+
 	// determiner un identifiant
 	function get_id(){
 		if (!$this->_id) $this->make_id();
 		return $this->_id;
 	}
-	
+
 	// transformer en tableau PHP les variable publiques de la classe.
 	function toArray(){
 		$extra = array();
@@ -102,7 +103,7 @@ function declarer_champs_extras_interfaces($champs, $interface){
 
 
 /**
- * Log une information si l'on est en mode debug 
+ * Log une information si l'on est en mode debug
  * ( define('EXTRAS_DEBUG',true); )
  * Ou si le second parametre est true.
  */

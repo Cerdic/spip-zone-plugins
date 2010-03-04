@@ -8,7 +8,7 @@ include_spip('inc/cextras');
 // Creer les item d'un select a partir des enum
 function cextras_enum($enum, $val='', $type='valeur', $name='') {
 	$enums = array();
-	// 2 possibilites : enum deja un tableau (vient certainement d'un plugin), 
+	// 2 possibilites : enum deja un tableau (vient certainement d'un plugin),
 	// sinon texte a decouper (vient certainement de interfaces pour champs extra).
 	if (is_array($enum)) {
 		$enums = $enum;
@@ -24,7 +24,7 @@ function cextras_enum($enum, $val='', $type='valeur', $name='') {
 	foreach($enums as $cle => $desc) {
 		switch($type) {
 			case 'valeur':
-				$enums[$cle] = 
+				$enums[$cle] =
 					($cle == $val
 					OR in_array($cle, $val_t))
 						? sinon(sinon($desc,$cle),_T('cextras:cextra_par_defaut'))
@@ -61,7 +61,7 @@ function cextras_enum($enum, $val='', $type='valeur', $name='') {
 				break;
 		}
 	}
-	
+
 	return trim(join("\n", $enums));
 }
 
@@ -77,22 +77,23 @@ function cextras_creer_contexte($c, $contexte_flux) {
 	if (isset($c->saisie_parametres['explication']) and $c->saisie_parametres['explication'])
 		$contexte['precisions_extra'] = _T($c->saisie_parametres['explication']);
 	$contexte['obligatoire_extra'] = $c->obligatoire ? 'obligatoire' : '';
+	$contexte['verifier_extra'] = $c->verifier;
 	$contexte['valeur_extra'] = $contexte_flux[$c->champ];
 	$contexte['enum_extra'] = $c->enum;
 	// ajouter 'erreur_extra' dans le contexte s'il y a une erreur sur le champ
-	if (isset($contexte_flux['erreurs']) 
+	if (isset($contexte_flux['erreurs'])
 	and is_array($contexte_flux['erreurs'])
 	and array_key_exists($c->champ, $contexte_flux['erreurs'])) {
 		$contexte['erreur_extra'] = $contexte_flux['erreurs'][$c->champ];
 	}
-	
+
 	return array_merge($contexte_flux, $contexte);
 }
 
 
 // recuperation d'une saisie interne
 function ce_calculer_saisie_interne($c, $contexte) {
-	// le contexte possede deja l'entree SQL, 
+	// le contexte possede deja l'entree SQL,
 	// calcule par le pipeline formulaire_charger.
 	$contexte = cextras_creer_contexte($c, $contexte);
 
@@ -118,21 +119,21 @@ function ce_calculer_saisie_externe($c, $contexte) {
 	if (isset($contexte[$c->champ]) and $contexte[$c->champ]) {
 		$contexte['valeur'] = $contexte[$c->champ];
 	}
-		
+
 	$params = $c->saisie_parametres;
-	
+
 	// remapper les precisions
 	if ($c->precisions) {
 		$params['explication'] = $c->precisions;
 	}
-	
+
 	// traductions a faire
 	$contexte['explication'] = _T($params['explication']);
 	$contexte['attention'] = _T($params['attention']);
 
 	unset (	$params['explication'],
 			$params['attention']);
-	
+
 	// tout inserer le reste des champs
 	$contexte = array_merge($contexte, $params);
 
@@ -146,11 +147,11 @@ function ce_calculer_saisie_externe($c, $contexte) {
 // en une seule requete...
 
 function cextra_quete_valeurs_extras($extras, $type, $id){
-	
+
 	// nom de la table et de la cle primaire
 	$table = table_objet_sql($type);
 	$_id = id_table_objet($type);
-	
+
 	// liste des champs a recuperer
 	$champs = array();
 	foreach ($extras as $e) {
@@ -182,7 +183,7 @@ function cextras_get_extras_match($nom) {
 
 
 // ---------- pipelines -----------
-	
+
 
 // ajouter les champs sur les formulaires CVT editer_xx
 function cextras_editer_contenu_objet($flux){
@@ -190,16 +191,16 @@ function cextras_editer_contenu_objet($flux){
 	if ($extras = cextras_get_extras_match($flux['args']['type'])) {
 		// les saisies a ajouter seront mises dedans.
 		$inserer_saisie = '';
-		
+
 		foreach ($extras as $c) {
 
-			// on affiche seulement les champs dont la saisie est autorisee 
+			// on affiche seulement les champs dont la saisie est autorisee
 			$type = objet_type($c->table).'_'.$c->champ;
 			include_spip('inc/autoriser');
 			if (autoriser('modifierextra', $type, $flux['args']['id'], '', array(
-				'type' => $flux['args']['type'], 
-				'id_objet' => $flux['args']['id'], 
-				'contexte' => $flux['args']['contexte']))) 
+				'type' => $flux['args']['type'],
+				'id_objet' => $flux['args']['id'],
+				'contexte' => $flux['args']['contexte'])))
 			{
 
 				if ($c->saisie_externe) {
@@ -213,12 +214,12 @@ function cextras_editer_contenu_objet($flux){
 				// (cas des checkbox multiples quand on renvoie vide
 				//  qui n'envoient rien de rien, meme pas un array vide)
 				$saisie .= '<input type="hidden" name="cextra_'.$c->champ.'" value="1" />';
-				
+
 				// ajouter la saisie.
 				$inserer_saisie .= $saisie;
-			}			
+			}
 		}
-		
+
 		// inserer les differentes saisies entre <ul>
 		if ($inserer_saisie) {
 			$flux['data'] = preg_replace('%(<!--extra-->)%is', '<ul>'.$inserer_saisie.'</ul>'."\n".'$1', $flux['data']);
@@ -231,7 +232,7 @@ function cextras_editer_contenu_objet($flux){
 
 // ajouter les champs extras soumis par les formulaire CVT editer_xx
 function cextras_pre_edition($flux){
-	
+
 	// recuperer les champs crees par les plugins
 	if ($extras = cextras_get_extras_match($flux['args']['table'])) {
 		foreach ($extras as $c) {
@@ -258,18 +259,18 @@ function cextras_afficher_contenu_objet($flux){
 		$contexte = array_merge($flux['args']['contexte'], $contexte);
 
 		foreach($extras as $c) {
-			
-			// on affiche seulement les champs dont la vue est autorisee 
+
+			// on affiche seulement les champs dont la vue est autorisee
 			$type = objet_type($c->table).'_'.$c->champ;
 			include_spip('inc/autoriser');
 			if (autoriser('voirextra', $type, $flux['args']['id_objet'], '', array(
-				'type' => $flux['args']['type'], 
-				'id_objet' => $flux['args']['id_objet'], 
-				'contexte' => $contexte))) 
+				'type' => $flux['args']['type'],
+				'id_objet' => $flux['args']['id_objet'],
+				'contexte' => $contexte)))
 			{
-				
+
 				$contexte = cextras_creer_contexte($c, $contexte);
-			
+
 				// calculer le bon squelette et l'ajouter
 				if (!find_in_path(
 				($f = 'extra-vues/'.$c->type).'.html')) {
@@ -281,7 +282,7 @@ function cextras_afficher_contenu_objet($flux){
 				}
 				$extra = recuperer_fond($f, $contexte);
 				$flux['data'] .= "\n".$extra;
-			}		
+			}
 		}
 	}
 	return $flux;
@@ -296,6 +297,10 @@ function cextras_formulaire_verifier($flux){
 		$type = str_replace('editer_','',$form);
 		// des champs extras correspondent ?
 		if ($extras = cextras_get_extras_match($type)) {
+
+			include_spip('inc/autoriser');
+			$verifier = charger_fonction('verifier','inc',true);
+
 			foreach ($extras as $c) {
 				// si on est autorise a modifier le champ
 				// et que le champ est obligatoire
@@ -311,21 +316,24 @@ function cextras_formulaire_verifier($flux){
 				// comme dans l'autre appel (cextras_afficher_contenu_objet())
 				// du coup, on risque de se retrouver parfois avec des
 				// resultats differents... Il faudra surveiller.
-				include_spip('inc/autoriser');
+
 				if (autoriser('modifierextra', $type, $id_objet, '', array(
-					'type' => $c->table, 
-					'id_objet' => $id_objet))) 
+					'type' => $c->table,
+					'id_objet' => $id_objet)))
 				{
 					if ($c->obligatoire AND !_request($c->champ)) {
 						$flux['data'][$c->champ] = _T('info_obligatoire');
 					}
-				
-					// ajouter une fonction de verification ici
-					// verifier_extra($c, _request($c->champ))
+					else if($c->verifier && $verifier){
+						$erreur[$c->champ] = $verifier(_request($c->champ),$c->verifier);
+						if($erreur[$c->champ]){
+							$flux['data'][$c->champ] = $erreur[$c->champ];
+						}
+					}
 				}
 			}
 		}
-	}	
+	}
 	return $flux;
 }
 
@@ -339,9 +347,9 @@ function cextras_rechercher_liste_des_champs($tables){
 		foreach ($champs as $c) {
 			if ($c->rechercher) {
 				// priorite 2 par defaut, sinon sa valeur.
-				// Plus le chiffre est grand, plus les points de recherche 
+				// Plus le chiffre est grand, plus les points de recherche
 				// attribues pour ce champ seront eleves
-				if ($c->rechercher === true 
+				if ($c->rechercher === true
 				OR  $c->rechercher === 'oui'
 				OR  $c->rechercher === 'on') {
 					$priorite = 2;
