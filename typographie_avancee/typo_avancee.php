@@ -30,8 +30,8 @@ function traiter_typo_avancee($texte) {
 	if (spip_strlen($texte) < 80) $typo->set_hyphenation(false);
 
 	$typo->set_dewidow(true);
-	$typo->set_max_dewidow_length(9);
-	$typo->set_max_dewidow_pull(6);
+	$typo->set_max_dewidow_length(12);
+	$typo->set_max_dewidow_pull(8);
 
 	// Ne pas activer l'accentuation automatique (faut pas deconner non plus)
 	$typo->set_smart_diacritics(false);
