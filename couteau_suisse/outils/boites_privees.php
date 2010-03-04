@@ -110,33 +110,18 @@ function cs_infos_connection() {
 }
 
 function cs_formatspip($id_article){
-	$q = sql_select('descriptif,chapo,texte,ps', 'spip_articles', "id_article=$id_article");
-	$row = sql_fetch($q);
-	$txt = ''; $i = 0;
-	if (strlen($row['descriptif'])) {
-		$txt .= '===== '._T('texte_descriptif_rapide')." =====\n\n"
-			. $row['descriptif']."\n\n"; $i++; }
-	if (strlen($row['chapo'])) {
-		$txt .= '===== '._T('info_chapeau')." =====\n\n"
-			. $row['chapo']."\n\n"; $i++; }
-	if (strlen($row['texte'])) {
-		$txt .= '===== '._T('info_texte')." =====\n\n"
-			. $row['texte']."\n\n"; $i++; }
-	if (strlen($row['ps'])) {
-		$txt .= '===== '._T('info_post_scriptum')." =====\n\n"
-			. $row['ps']."\n\n"; $i++; }
-	$titre =  _T('couteau:texte'.($i>1?'s':'').'_formatspip');
+	include_spip('public/assembler');
+	if(!$txt = recuperer_fond('fonds/format_spip', array('id_article'=>$id_article))) return '';
+	$txt = explode('@TITRE@=', $txt, 2);
 	// compatibilite SPIP < 2.0
 	$compat = function_exists('bouton_block_depliable');
-	$bouton = $compat?bouton_block_depliable(cs_div_configuration().$titre, 'invisible', "formatspip")
-		:bouton_block_invisible("formatspip").cs_div_configuration().$titre;
+	$bouton = $compat?bouton_block_depliable(cs_div_configuration().$txt[1], 'invisible', "formatspip")
+		:bouton_block_invisible("formatspip").cs_div_configuration().$txt[1];
 	$bloc = $compat?debut_block_depliable(false, "formatspip")
 		:debut_block_invisible("formatspip");
 	return debut_cadre_enfonce(find_in_path('/img/formatspip-24.png'), true, '', $bouton)
-			. $bloc
-			. '<textarea readonly cols="55" rows="30" class="formo" style="width:100%; font-size:90%;" name="texte_formatspip">'.$txt.'</textarea>'
-			. fin_block()
-			. fin_cadre_enfonce(true);
+		. $bloc	. $txt[0] . fin_block()
+		. fin_cadre_enfonce(true);
 }
 
 function cs_urls_propres($type, $id) {
