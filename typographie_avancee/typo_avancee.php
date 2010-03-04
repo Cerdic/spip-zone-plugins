@@ -6,12 +6,17 @@ define('_DIR_PLUGIN_TYPO_AVANCEE',(_DIR_PLUGINS.end($p)));
 	include_spip("php-typography/php-typography"); 
 	include_spip("inc/charsets");
 
+// ATTENTION
+// J'ai patché php-typography.php selon remarque de Renato
+// => ligne 2095
+// => il faut commencer la boucle avec $segmentLength=1;
+// sinon les patterns d'un caractere ne fonctionnent pas (et l'italien en a beaucoup)
+
+
 function traiter_typo_avancee($texte) {
 	$lang = $GLOBALS["spip_lang"];
 	if ($lang == "en") $lang = "en-GB";
 	if (!$lang) $lang = "fr";
-
-
 	
 	// Ne pas hyphener dans la premiere passe
 	$typo = new phpTypography();
@@ -77,7 +82,8 @@ function traiter_typo_avancee($texte) {
 
 
 function typo_avancee_typo($texte) {
-
+	// Ne pas appliquer dans l'espace prive
+	if (_DIR_RACINE == "../") return $texte;
 
 //	return $texte;
 	// Traiter paragraphe par paragraphe
