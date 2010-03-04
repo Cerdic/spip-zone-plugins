@@ -44,9 +44,25 @@
     ),
     7 => 'fr',
   ),
+  1 => 
+  array (
+    0 => '<strong>6</strong><sup>1 </sup> Quand les hommes commencèrent à se multiplier sur la terre et qu\'ils eurent des filles,<br />  <sup>2 </sup> les fils de Dieu virent que les filles des hommes étaient belles, et ils prirent pour femmes celles qu\'ils choisirent parmi elles.<br />  <sup>3 </sup> Alors l\'Eternel dit:<br />---Mon Esprit ne va pas lutter indéfiniment avec les hommes, à cause de leurs fautes. Ce sont des êtres dominés par leurs faiblesses. Je leur donne encore cent vingt ans à vivre.<br /><sup>4 </sup> A cette époque-là, il y avait des géants sur la terre, et aussi après que les fils de Dieu se furent unis aux filles des hommes et qu\'elles leur eurent donné des enfants. Ce sont ces héros si fameux d\'autrefois.<br /><sup>5 </sup> L\'Eternel vit que les hommes faisaient de plus en plus de mal sur la terre: à longueur de journée, leur cur ne concevait que le mal.<br />  <sup>6 </sup> Alors l\'Eternel fut peiné d\'avoir créé l\'homme sur la terre, et il en eut le cur très affligé.<br />  <sup>7 </sup> Il dit alors:<br />---Je supprimerai de la surface de la terre les hommes que j\'ai créés. Oui, j\'exterminerai les hommes et les animaux jusqu\'aux bêtes qui se meuvent à ras de terre et aux oiseaux du ciel, car je regrette de les avoir faits.<br />  <sup>8 </sup> Mais Noé obtint la faveur de l\'Eternel.<br /> ',
+    1 => 'Gn',
+    2 => 6,
+    3 => 1,
+    4 => 6,
+    5 => 8,
+    6 => 
+    array (
+      0 => 32,
+      1 => 'BDS',
+    ),
+    7 => 'fr',
+  ),
 );
 		return $essais;
 	}
+
 
 
 ?>
