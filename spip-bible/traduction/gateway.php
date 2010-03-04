@@ -60,7 +60,7 @@ function recuperer_passage_gateway($livre='',$chapitre_debut='',$verset_debut=''
 		
 		$tableau=explode('</h4>',$code);
 		$code=$tableau[1];
-		if(eregi('<strong>Footnotes:</strong>',$code)){
+		if(preg_match('#<strong>Footnotes:</strong>#',$code)){
 			$tableau = explode('<strong>Footnotes:</strong>',$code);
 			$code = $tableau[0];
 		}
@@ -82,9 +82,9 @@ function recuperer_passage_gateway($livre='',$chapitre_debut='',$verset_debut=''
            
             //suprresion des attributs html dans les sup
            
-           $code = eregi_replace('class="versenum"','',$code);
-           $code = eregi_replace("value='[0-9]*'",'',$code);
-           $code = eregi_replace('  id="'.$lang.'-'.$nom_trad.'-[0-9]*"','',$code);
+           $code = preg_replace('#class="versenum"#','',$code);
+           $code = preg_replace("#value='[0-9]*'#",'',$code);
+           $code = preg_replace('#  id="'.$lang.'-'.$nom_trad.'-[0-9]*"#','',$code);
            
             
            
@@ -120,11 +120,7 @@ function recuperer_passage_gateway($livre='',$chapitre_debut='',$verset_debut=''
     $texte = str_replace("  <br />",'',$texte);
     
     $texte = traiter_sup($texte,$nom_trad,$lang);
-    while(ereg("<br /><br />",$texte)){
-        $texte = str_replace("<br /><br />","<br />",$texte);
-    
-        }
-    
+    $texte = preg_replace("#<br /><br />#","<br />",$texte);
     return $texte;
 	
 }
@@ -132,13 +128,13 @@ function recuperer_passage_gateway($livre='',$chapitre_debut='',$verset_debut=''
 function supprimer_note($texte){
    
     //on boucle tant qu'on trouve des value
-    while(eregi("value='",$texte)){
+    while(preg("#value='#",$texte)){
         
         $texte = vider_attribut($texte,'value');
    }
-  
+    
     $texte = str_replace(" class='footnote'",'',$texte);
-    $texte = eregi_replace("\[[a-z]*\]",'',$texte);
+    $texte = preg_replace("#\[[a-z]*\]#i",'',$texte);
   
     $texte = str_replace("<sup></sup>",'',$texte);
     
@@ -176,8 +172,8 @@ function supprimer_intertitre($code){
 }
 function traiter_sup($code,$abreviation,$lang){
     
-    $code = eregi_replace(" class=\"versenum\"","",$code);
-    $code = eregi_replace(' id="'.$lang.'-'.$abreviation.'-[0-9]*"',"",$code);
+    $code = preg_replace(" #class=\"versenum\"#i","",$code);
+    $code = preg_replace('# id="'.$lang.'-'.$abreviation.'-[0-9]*"#',"",$code);
     $code = str_replace("</sup>"," </sup>",$code);
     
     return $code;
