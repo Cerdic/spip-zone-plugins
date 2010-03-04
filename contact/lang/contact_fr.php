@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_texte' => 'Texte',
 	'champ_mail' => 'Mail',
 	'champ_impose' => 'champ impos&eacute;',
-	
+
 	'configuration_barre_oui' => 'Afficher la barre typo compl&egrave;te.',
 	'configuration_no_previsualisation' => 'Afficher la barre typo sans le bouton de pr&eacute;visualisation.',
 	'configuration_no_barre' => 'Ne pas proposer de barre typo.',
@@ -48,8 +48,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'consulter_memoire' => 'Ce message est enregistr&eacute; sur votre site :',
 	'courriel_de' => 'De',
 	'courriel_pour' => 'Pour',
-	
+
 	'deplacement_possible' => 'D&eacute;placement vertical par gliss&eacute;-d&eacute;pos&eacute;',
+	'description_menu_contact' => '&Eacute;l&eacute;ment de menu vers la page du formulaire de contact',
+
 	'form_destinataire' => 'Choisissez un destinataire',
 	'form_destinataires' => 'Choisissez les destinataires',
 	'form_pj_ajouter_pluriel' => 'Ajouter des pi&egrave;ces jointes',
@@ -61,18 +63,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'form_pj_supprimer' => 'Supprimer',
 	'form_pj_titre' => 'Titre du fichier',
 	'forum_attention_nbre_caracteres' => '<b>Attention&nbsp;!</b> votre message doit contenir au moins @nbre_caract@ caract&egrave;res.',
-	
+
 	'horodatage' => 'Formulaire posté le : @horodatage@.',
 	'inforigine' => 'Information transmise par le formulaire : ',
 	'infos_collecte' => 'Informations collect&eacute;es',
 	'infos_supplementaires' => 'Informations suppl&eacute;mentaires',
 	'informez_moi' => 'J\'accepte de recevoir, par courrier &eacute;lectronique, des informations &eacute;manant de votre organisation.',
-	
+
 	'sauv_message' => 'Sauvegarder les messages de contact',
 	'sauv_message_explication' => 'Permet d\'enregistrer les messages de contacts et de les afficher dans une messagerie d&eacute;di&eacute;e.',
 	'sauv_message_ok' => 'Sauvegarder les messages de contacts',
 	'succes' => 'Merci, votre message a bien &#233;t&#233; envoy&#233;.<br />Nous vous r&#233;pondrons d&#232;s que possible.<br />L\'&#233;quipe de @equipe_site@',
-	
+
 	'madame' => 'Madame',
 	'monsieur' => 'Monsieur',
 	'msg_contact' => 'Message de contact',
@@ -84,10 +86,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'msg_revenir_accueil' => 'Revenir &agrave; la liste de messages de contact re&ccedil;us.',
 	'msg_supprimer_message' => 'Supprimer le message',
 	'msg_messagerie' => 'Messagerie de contact',
-	
+
 	'preselection' => 'D&eacute;cocher tous les items de la liste de destinataires',
-	
-	'titre' => 'Formulaire de contact'
+
+	'titre' => 'Formulaire de contact',
+	'titre_court' => 'Contact'
 );
 
 ?>

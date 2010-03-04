@@ -1,0 +1,8 @@
+<entree>
+	<nom><:contact:titre:></nom>
+	<rang>10</rang>
+	<description><:contact:description_menu_contact:></description>
+	<icone>images/contact-24.png</icone>
+	<parametre nom="titre" label="menus:entree_titre" />
+	<parametre nom="css" label="menus:entree_css" />
+</entree>
