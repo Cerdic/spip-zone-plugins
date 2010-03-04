@@ -104,6 +104,7 @@ function cs_infos_webmasters() {
 function cs_infos_connection() {
 	include_spip('inc/autoriser');
 	if (!defined('boites_privees_AUTEURS') || !autoriser('configurer','csinfosconnection')) return '';
+	include_spip('public/assembler');
 	return cs_cadre_depliable(_T('couteau:connections'), 'bp_infos_connection',
 		recuperer_fond('fonds/derniers_connectes'));
 }
