@@ -1,4 +1,6 @@
 <?php
+@define('_MOT_MASQUER', 'masquer');
+
 function masquer_pre_boucle($boucle) {
   static $id_mot;
   static $liste_rubriques;
@@ -32,7 +34,7 @@ function masquer_pre_boucle($boucle) {
  */
 function masquer_rubriques_where($primary, $_publique=''){
 	# hack : on utilise zzz pour eviter que l'optimiseur ne confonde avec un morceau de la requete principale
-	return "array('NOT IN','$primary','('.sql_get_select('zzzr.id_rubrique','spip_mots_rubriques as zzzr, spip_mots as zzzm',' zzzr.id_mot=zzzm.id_mot AND zzzm.titre=\'masquer\'','','','','',\$connect).')')";
+	return "array('NOT IN','$primary','('.sql_get_select('zzzr.id_rubrique','spip_mots_rubriques as zzzr, spip_mots as zzzm',\"zzzr.id_mot=zzzm.id_mot AND zzzm.titre=".sql_quote(_MOT_MASQUER)."\",'','','','',\$connect).')')";
 }
 
 /**
@@ -75,7 +77,7 @@ function masquer_liste_rub_direct(){
 	// liste des rubriques directement masquer
 	$where = array();
 	include_spip('base/abstract_sql');
-	$liste_rubriques = sql_allfetsel('id_rubrique','spip_mots_rubriques AS mr INNER JOIN spip_mots AS m ON mr.id_mot=m.id_mot','m.titre=\'masquer\'');
+	$liste_rubriques = sql_allfetsel('id_rubrique','spip_mots_rubriques AS mr INNER JOIN spip_mots AS m ON mr.id_mot=m.id_mot','m.titre='.sql_quote(_MOT_MASQUER));
 	$liste_rubriques = array_map('reset',$liste_rubriques);
 	$liste_rubriques = array_unique($liste_rubriques);
 	return $liste_rubriques;
