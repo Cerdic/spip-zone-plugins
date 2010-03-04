@@ -5,12 +5,22 @@
 - Générer une liste de champs à partir d'une description de saisies
 - Décrire les saisies elles-mêmes
 - Générer une liste de champs permettant la configuration d'une saisie
-+ Avoir une liste des traitements possibles
-+ Générer un formulaire complet à partir d'une description de saisies + une description de traitements
+- Avoir une liste des traitements possibles
+- Générer un formulaire complet à partir d'une description de saisies + une description de traitements
++ Faire une interface de construction de formulaire
+  - Lister les saisies disponibles
+  - Ajouter une saisie
+  - Configurer les options d'une saisie
+  + Configurer la validation d'une saisie
+  + Ajouter des groupes de champs (fieldset)
+  + Déplacer les saisies sans javascript
+  + Déplacer les saisies en drag-n-drop
+  + Ajouter une saisie directement au bon endroit en drag-n-drop
++ Faire une interface de configuration des traitements
 
 Description d'une liste de saisies :
 ------------------------------------
-array(
+$saisies = array(
 	// Ligne de type "explication"
 	array(
 		'explication' => 'Ceci est un bloc d'explication général.'
@@ -32,46 +42,72 @@ array(
 	),
 	// Ligne contenant un fieldset
 	array(
-		'groupe' => 'Ceci est le titre du groupe de champs (fieldset)',
+		groupe => 'Titre du groupe de champs',
 		'css' => 'autres classes en plus',
 		'pliable' => 'oui',
 		'plie' => 'oui',
 		'contenu' => array(
 			// On recommence ici suivant le même formalisme que le tableau général.
 		)
-	),
-	// Ligne contenant un fieldset
-	array(
-		'saisie' => 'fieldset',
-		'options' => array(
-			'css' => 'autres classes en plus',
-			'pliable' => 'oui',
-			'plie' => 'oui',
-			'saisies' => array(
-				// On recommence ici suivant le même formalisme que le tableau général.
-			)
-		)
-	),
-)
-
-Description d'une liste de traitements :
-----------------------------------------
-
-array(
-	'email' => array(
-		'champ_destinataires' => 'champ13',
-		'champ_courriel' => 'champ15'
-	),
-	'enregistrement' => array(
-		
 	)
 )
 
-Test d'autre chose :
---------------------
 
-array(
+Variante 1 :
+------------
+
+$saisies = array(
 	array(
+		'options' => array(
+			'type_saisie' => 'explication',
+			'explication' => 'Ceci est un bloc d'explication général.'
+		)
+	),
+	array(
+		'options => array(
+			'type_saisie' => 'input',
+			'nom' => 'mon_champ',
+			'label' => 'Un joli titre',
+			'obligatoire' => 'oui'
+		),
+		'verifier' => array(
+			'type' => 'entier',
+			'options' => array(
+				'min' => 1
+			)
+		)
+	),
+	array(
+		'options' => array(
+			'type_saisie' => 'fieldset',
+			'nom' => 'groupe',
+			'label' => 'Titre du groupe de champs',
+			'css' => 'autres classes en plus',
+			'pliable' => 'oui',
+			'plie' => 'oui',
+		)
+		'saisies' => array(
+			array(
+				'options' => array(
+					'type_saisie' => 'input',
+					'nom' => 'dedans',
+					'label' => 'Dans le groupe'
+				)
+			)
+		)
+	)
+	
+)
+
+Atteindre une saisie profonde : $saisies[2]['saisies'][0]
+
+
+Variante 2 :
+------------
+
+$saisies = array(
+	array(
+		'type_saisie' => 'explication',
 		'explication' => 'Une explication possible.',
 	),
 	array(
@@ -87,12 +123,30 @@ array(
 		)
 	),
 	array(
-		'groupe' => 'Titre du fieldset',
+		'type_saisie' => 'fieldset',
+		'label' => 'Titre du fieldset',
 		'css' => 'autres classes css',
 		'pliable' => 'oui',
 		'plie' => 'oui',
-		'contenu' => array(
-			...
-		)
+		0 => array(une saisie enfant),
+		1 => array(une autre saisie enfant),
+		2 => array(etc)
 	)
 )
+
+Atteindre une saisie profonde : $saisies[2][0]
+
+
+Description d'une liste de traitements :
+----------------------------------------
+
+array(
+	'email' => array(
+		'champ_destinataires' => 'champ13',
+		'champ_courriel' => 'champ15'
+	),
+	'enregistrement' => array(
+		
+	)
+)
+

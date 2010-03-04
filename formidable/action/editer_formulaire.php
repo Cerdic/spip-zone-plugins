@@ -64,7 +64,7 @@ function formulaire_set($id_formulaire, $set=null) {
 	$err = '';
 
 	$c = array();
-	$champs = saisies_recuperer_champs($GLOBALS['formulaires']['editer_formulaire']);
+	$champs = saisies_lister_champs($GLOBALS['formulaires']['editer_formulaire']);
 	foreach ($champs as $champ)
 		$c[$champ] = _request($champ,$set);
 

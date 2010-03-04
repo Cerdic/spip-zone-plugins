@@ -8,7 +8,7 @@ include_spip('inc/saisies');
 function formulaires_editer_formulaire_charger($id_formulaire, $nouveau){
 	$contexte = array();
 	$editer_formulaire = $GLOBALS['formulaires']['editer_formulaire'];
-	$champs = saisies_recuperer_champs($editer_formulaire);
+	$champs = saisies_lister_champs($editer_formulaire);
 	$id_formulaire = intval($id_formulaire);
 	
 	$contexte['_contenu'] = $editer_formulaire;
@@ -44,9 +44,8 @@ function formulaires_editer_formulaire_charger($id_formulaire, $nouveau){
 }
 
 function formulaires_editer_formulaire_verifier($id_formulaire, $nouveau){
-	include_spip('inc/verifier');
 	$configurer_formulaire = $GLOBALS['formulaires']['editer_formulaire'];
-	$erreurs = verifier_saisies($configurer_formulaire);
+	$erreurs = saisies_verifier($configurer_formulaire);
 	return $erreurs;
 }
 

@@ -34,9 +34,9 @@ function formulaires_generer_formulaire_verifier($contenu, $traitements){
 		
 		// On continue seulement si ya pas d'erreur d'obligation et qu'il y a une demande de verif
 		if (!$erreurs[$champ] and is_array($verifier)){
-			include_spip('inc/verifier');
+			$verifier = charger_fonction('verifier','inc',true);
 			// Si le champ n'est pas valide par rapport au test demandé, on ajoute l'erreur
-			if ($erreur_eventuelle = verifier($valeur, $verifier['type'], $verifier['options']))
+			if ($verifier and $erreur_eventuelle = $verifier($valeur, $verifier['type'], $verifier['options']))
 				$erreurs[$champ] = $erreur_eventuelle;
 		}
 	}

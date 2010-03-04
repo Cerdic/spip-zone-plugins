@@ -22,7 +22,7 @@ function formulaires_construire_formulaire_charger($identifiant, $formulaire_ini
 	// On passe ça pour l'affichage
 	$contexte['_contenu'] = $formulaire_actuel;
 	// On passe ça pour la récup plus facile des champs
-	$contexte['_saisies_par_nom'] = saisies_recuperer_saisies($formulaire_actuel);
+	$contexte['_saisies_par_nom'] = saisies_lister_par_nom($formulaire_actuel);
 	// Pour déclarer les champs modifiables à CVT
 	foreach(array_keys($contexte['_saisies_par_nom']) as $nom){
 		$contexte["saisie_modifiee_$nom"] = array();
@@ -43,20 +43,21 @@ function formulaires_construire_formulaire_verifier($identifiant, $formulaire_in
 	// On récupère le formulaire à son état actuel
 	$formulaire_actuel = session_get($identifiant);
 	// On récupère les saisies actuelles
-	$saisies_actuelles = saisies_recuperer_saisies($formulaire_actuel);
+	$saisies_actuelles = saisies_lister_par_nom($formulaire_actuel);
 	// La liste des saisies
 	$saisies_disponibles = saisies_lister_disponibles();
 	
 	if ($nom = $configurer_saisie =  _request('configurer_saisie') or $nom = $enregistrer_saisie = _request('enregistrer_saisie')){
 		$saisie = $saisies_actuelles[$nom];
 		$form_config = $saisies_disponibles[$saisie['saisie']]['options'];
+		var_dump(saisies_chercher($form_config, 'explication'));
+		var_dump(saisies_chercher($form_config, 'explication', true));
 		array_walk_recursive($form_config, 'formidable_transformer_nom', "saisie_modifiee_${nom}[options][@valeur@]");
 		$erreurs['configurer_'.$nom] = $form_config;
 		$erreurs['positionner'] = '#configurer_'.$nom;
 		
 		if ($enregistrer_saisie){
-			include_spip('inc/verifier');
-			$vraies_erreurs = verifier_saisies($form_config);
+			$vraies_erreurs = saisies_verifier($form_config);
 			if ($vraies_erreurs){
 				$erreurs = array_merge($erreurs, $vraies_erreurs);
 			}
