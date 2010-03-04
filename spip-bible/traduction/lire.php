@@ -63,7 +63,7 @@ function lire_traiter_code($code){
 	
 	$code = $tableau[0];
 	
-	$code = eregi_replace('<span class="reference">[0-9]*</span>','*spip*',$code);
+	$code = preg_replace('#<span class="reference">[0-9]*</span>#i','*spip*',$code);
 	$code = strip_tags($code);
 	$tableau = explode("*spip*",$code);
 	$total = count($tableau);
@@ -98,8 +98,8 @@ function recuperer_versets($code,$vd,$vf){
 
 function supprimer_interitre($texte){
    
-    $texte = eregi_replace("<p></p>","",$texte); 
-    if (eregi('p class="titre4"',$texte) == false){ // c'est ton jamais, des fois qu'il n'y auarit pas d'intertitre ce serait gentils
+    $texte = preg_replace("#<p></p>#","",$texte); 
+    if (preg_match('#p class="titre4"#',$texte) == false){ // c'est ton jamais, des fois qu'il n'y auarit pas d'intertitre ce serait gentils
         return $texte;
     
     }
