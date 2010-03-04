@@ -957,6 +957,10 @@ add_outil( array(
 	// fonction glossaire_init() codee dans glossaire.js : executee lors du chargement de la page et a chaque hit ajax
 	'code:jq_init' => 'glossaire_init.apply(this);',
 	'pipelinecode:nettoyer_raccourcis_typo' => '$flux=str_replace(_CS_SANS_GLOSSAIRE, "", $flux);',
+	'pipelinecode:pre_description_outil' => 'if($id=="glossaire" && $flux["actif"])
+		foreach(explode(":","%%glossaire_groupes%%") as $g)
+			if(!sql_countsel("spip_groupes_mots", "titre="._q($g)))
+	$texte.="\n\n@puce@ <span style=\"color:red\">"._T("couteauprive:erreur_groupe", array("groupe"=>$g))."</span>";',
 ));
 
 // attention : mailcrypt doit etre place apres liens_orphelins
