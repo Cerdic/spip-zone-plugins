@@ -295,7 +295,7 @@ $.fn.activatecrayon = function(percent) {
 				.iconecrayon();
 				// Declencher le onAjaxLoad normal de SPIP
 				if (typeof triggerAjaxLoad == 'function')
-					triggerAjaxLoad(tous);
+					triggerAjaxLoad(tous.get());
 			}})
 			.one('submit', function(){
 				crayon
@@ -417,7 +417,7 @@ $.fn.activatecrayon = function(percent) {
 		// Declencher le onAjaxLoad normal de SPIP
 		// (apres donc le chargement de la page de saisie (controleur))
 		if (typeof triggerAjaxLoad == 'function')
-			triggerAjaxLoad(crayon);
+			triggerAjaxLoad(crayon.get());
 	});
 };
 
