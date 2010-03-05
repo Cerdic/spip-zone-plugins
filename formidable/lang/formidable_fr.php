@@ -8,6 +8,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'construire_action_supprimer' => 'Supprimer',
 'construire_ajouter_champ' => 'Ajouter un champ',
 'construire_aucun_champs' => 'Il n\'y a pour l\'instant aucun champ dans ce formulaire.',
+'construire_confirmer' => 'Voulez-vous vraiment supprimer ce champ ?',
 
 'editer_descriptif' => 'Descriptif',
 'editer_descriptif_explication' => 'Une explication du formulaire destin&eacute;e &agrave; l\'espace priv&eacute;.',

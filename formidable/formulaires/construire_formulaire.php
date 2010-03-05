@@ -50,8 +50,6 @@ function formulaires_construire_formulaire_verifier($identifiant, $formulaire_in
 	if ($nom = $configurer_saisie =  _request('configurer_saisie') or $nom = $enregistrer_saisie = _request('enregistrer_saisie')){
 		$saisie = $saisies_actuelles[$nom];
 		$form_config = $saisies_disponibles[$saisie['saisie']]['options'];
-		var_dump(saisies_chercher($form_config, 'explication'));
-		var_dump(saisies_chercher($form_config, 'explication', true));
 		array_walk_recursive($form_config, 'formidable_transformer_nom', "saisie_modifiee_${nom}[options][@valeur@]");
 		$erreurs['configurer_'.$nom] = $form_config;
 		$erreurs['positionner'] = '#configurer_'.$nom;
@@ -86,6 +84,11 @@ function formulaires_construire_formulaire_traiter($identifiant, $formulaire_ini
 				'nom' => saisies_generer_nom($formulaire_actuel, $ajouter_saisie)
 			)
 		);
+	}
+	
+	// Si on demande à supprimer une saisie
+	if ($supprimer_saisie = _request('supprimer_saisie')){
+		$formulaire_actuel = saisies_supprimer($formulaire_actuel, $supprimer_saisie);
 	}
 	
 	// Si on enregistre la conf d'une saisie
