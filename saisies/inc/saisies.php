@@ -10,8 +10,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * saisies_lister_champs()
  * saisies_chercher()
  * saisies_chemin()
- * saisies_inserer_apres()
  * saisies_supprimer()
+ * saisies_inserer_apres()
  * saisies_verifier()
  * saisies_generer_html()
  * saisies_generer_nom()
@@ -80,6 +80,33 @@ function saisies_chercher($saisies, $nom, $retourner_chemin=false){
 	}
 	
 	return null;
+}
+
+/*
+ * Supprimer une saisie dont on donne le nom
+ *
+ * @param array $saisies Un tableau décriant les saisies
+ * @param string $saisie Le nom de la saisie à supprimer
+ * @return array Retourne le tableau modifié décrivant les saisies
+ */
+function saisies_supprimer($saisies, $saisie){
+	// Si la saisie n'existe pas, on ne fait rien
+	if ($chemin = saisies_chercher($saisies, $saisie, true)){
+		// La position finale de la saisie
+		$position = array_pop($chemin);
+	
+		// On va chercher le parent par référence pour pouvoir le modifier
+		$parent =& $saisies;
+		foreach($chemin as $cle){
+			$parent =& $parent[$cle];
+		}
+		
+		// On supprime et réordonne
+		unset($parent[$position]);
+		$parent = array_values($parent);
+	}
+	
+	return $saisies;
 }
 
 /*
