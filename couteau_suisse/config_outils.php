@@ -247,7 +247,7 @@ add_outil( array(
 
 add_outil( array(
 	'id' => 'previsualisation',
-	'categorie' => 'admin',
+	'categorie' => 'interface',
 	'auteur' => '[C&eacute;dric Morin->http://www.yterium.net]',
 	'pipeline:pre_boucle' => 'previsu_redac_pre_boucle',
 	'pipeline:boite_infos' => 'previsu_redac_boite_infos',
