@@ -300,7 +300,12 @@ function cextras_formulaire_verifier($flux){
 		if ($extras = cextras_get_extras_match($type)) {
 
 			include_spip('inc/autoriser');
-			$verifier = charger_fonction('verifier','inc',true);
+
+			// si le plugin "verifier" est actif, on tentera dans
+			// la verification de lancer la fonction de verification
+			// demandee par le champ, si definie dans sa description
+			// 'verifier' (et 'verifier_options')
+			$verifier = charger_fonction('verifier', 'inc', true);
 
 			foreach ($extras as $c) {
 				// si on est autorise a modifier le champ
@@ -324,11 +329,9 @@ function cextras_formulaire_verifier($flux){
 				{
 					if ($c->obligatoire AND !_request($c->champ)) {
 						$flux['data'][$c->champ] = _T('info_obligatoire');
-					}
-					else if($c->verifier && $verifier){
-						$erreur[$c->champ] = $verifier(_request($c->champ),$c->verifier,$c->verifier_options);
-						if($erreur[$c->champ]){
-							$flux['data'][$c->champ] = $erreur[$c->champ];
+					} elseif ($c->verifier AND $verifier) {
+						if ($erreur = $verifier(_request($c->champ), $c->verifier, $c->verifier_options)) {
+							$flux['data'][$c->champ] = $erreur;
 						}
 					}
 				}
