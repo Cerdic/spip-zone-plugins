@@ -28,8 +28,7 @@ function description_outil_une_variable($index, &$outil, &$variable, &$label, &$
 	global $cs_variables, $metas_vars;
 	$actif = $outil['actif'];
 	// la valeur de la variable n'est stockee dans les metas qu'au premier post
-	if(isset($metas_vars[$variable])) $valeur = $metas_vars[$variable];
-		else $valeur = cs_get_defaut($variable);
+	$valeur = isset($metas_vars[$variable])?$metas_vars[$variable]:cs_get_defaut($variable);
 	$valeur = cs_retire_guillemets($valeur);
 //cs_log(" -- description_outil_une_variable($index) - Traite %$variable% = $valeur");
 	$cs_variable = &$cs_variables[$variable];
@@ -39,6 +38,12 @@ function description_outil_une_variable($index, &$outil, &$variable, &$label, &$
 		= autoriser('configurer', 'variable', 0, NULL, array('nom'=>$cs_variable['nom'], 'outil'=>$outil))?'':' disabled="disabled"';
 	// si ce n'est qu'une simple initialisation, on sort
 	if(!$modif) return '';
+	$nombre = @$cs_variable['format']==_format_NOMBRE;
+	// calcul du commentaire
+	if($actif && isset($cs_variable['commentaire'])) {
+		eval('$comment = '.str_replace('%s',cs_php_format($valeur, !$nombre),$cs_variable['commentaire']).';');
+		if($comment) $comment = "<p>$comment</p>";
+	} else $comment = '';
 	// si la variable necessite des boutons radio
 	if(is_array($radios = &$cs_variable['radio'])) {
 		if(!$actif) {
@@ -56,7 +61,7 @@ function description_outil_une_variable($index, &$outil, &$variable, &$label, &$
 				.($valeur==$code?'<b>':'')._T($traduc).($valeur==$code?'</b>':'')
 				."</label></li>$br";
 		}
-		return $res.'</ul>'._VAR_OUTIL;
+		return $res.'</ul>'.$comment._VAR_OUTIL;
 	}
 	// ... ou une case a cocher
 	if(isset($cs_variable['check'])) {
@@ -64,14 +69,14 @@ function description_outil_une_variable($index, &$outil, &$variable, &$label, &$
 			return $label._T($cs_variable['check'])._T($valeur?'couteauprive:2pts_oui':'couteauprive:2pts_non');
 		return $label.'<label><input type="checkbox" '.($valeur?' checked="checked"':'')." value=\"1\" name=\"$variable\" $disab/>"
 			.($valeur?'<b>':'')._T($cs_variable['check']).($valeur?'</b>':'').'</label>'
-			. _VAR_OUTIL;
+			. $comment._VAR_OUTIL;
 	}
 	// ... ou un textarea ... ou une case input
 	if(!$actif)
 		return $label.'<html>'.(strlen($valeur)?nl2br(echapper_tags($valeur)):'&nbsp;'._T('couteauprive:variable_vide')).'</html>';
-	$len = $cs_variable['format']==_format_NOMBRE?6:0;
+	$len = $nombre?6:0;
 	$width = $len?'':'style="width:100%;" ';
-	$lignes = !isset($cs_variable['lignes']) || ($cs_variable['format']==_format_NOMBRE)?0:strval($cs_variable['lignes']);
+	$lignes = !isset($cs_variable['lignes']) || $nombre?0:strval($cs_variable['lignes']);
 	return $label .
 		( $lignes < 2
 			// <html></html> empechera SPIP de modifier le contenu des <input> ou <textarea>
@@ -79,7 +84,7 @@ function description_outil_une_variable($index, &$outil, &$variable, &$label, &$
 				. htmlspecialchars($valeur) . "\" type='text' size='$len' $width $disab/></html>"
 			:"<html><textarea rows='$lignes' name='$variable' $width$disab>"
 				. htmlspecialchars($valeur) . '</textarea></html>'
-		) . _VAR_OUTIL;
+		) . $comment._VAR_OUTIL;
 }
 
 // callback sur les labels de zones input ; format : [[label->qq chose]]
