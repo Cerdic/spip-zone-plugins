@@ -12,6 +12,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  */
 function menus_lister_disponibles($informer=true){
 	static $resultats = null;
+	
+	$plugins_actifs = unserialize($GLOBALS['meta']['plugin']);
 
 	if (is_null($resultats[$informer])){
 		$resultats[$informer] = array();
@@ -29,7 +31,18 @@ function menus_lister_disponibles($informer=true){
 					AND (
 						$entree = !$informer OR ($entree = menus_charger_infos($dossier.$type))
 					)){
-					$resultats[$informer][$type] = $entree;
+					    //on ne garde que les menus repondants aux necessites
+				        $necessite = true;
+					    if (! empty($entree['necessites']['plugin'])) {
+					        /* la globale $plugins liste tout en majuscule */
+					        $entree['necessites']['plugin'] = array_map("strtoupper", $entree['necessites']['plugin']);
+					        foreach($entree['necessites']['plugin'] as $plugin) {
+					            if ( ! array_key_exists($plugin,$plugins_actifs) )
+					                $necessite = false;
+					        }
+					    }
+					    if ($necessite)
+                            $resultats[$informer][$type] = $entree;
 				}
 			}
 		}
@@ -84,6 +97,14 @@ function menus_charger_infos($type, $info=""){
 							'label' => $attributs['label'] ? _T($attributs['label']) : $attributs['nom'],
 							'obligatoire' => $attributs['obligatoire'] == 'oui' ? true : false
 						);
+					}
+				}
+				//Décomposition des necessites
+				if (spip_xml_match_nodes(',^necessite,', $xml, $necessites)){
+			        $entree['necessites']['plugin'] = array();
+					foreach (array_keys($necessites) as $necessite){
+						list($balise, $attributs) = spip_xml_decompose_tag($necessite);
+						array_push($entree['necessites'][$attributs['type']] , $attributs['nom']);
 					}
 				}
 				
