@@ -76,8 +76,10 @@ function controleur_dist($regs, $c=null) {
 		$options['controleur'] = $controleur;
 	} else
 	// si la valeur fait plusieurs lignes on doit mettre un textarea
+	// derogation specifique pour descriptif_site de spip_metas
 	if (
 	preg_match(",[\n\r],", $valeur[$champ])
+		OR (($champ == 'valeur') && ($id == 'descriptif_site'))
 		OR
 	// on regarde le type tel que defini dans serial
 	// (attention il y avait des blob dans les vieux spip)
