@@ -34,11 +34,11 @@ function genie_clevermail_queue_process_dist($t, $verbose = 'no') {
       if (strpos($list['lst_name'], '/') === false) {
       	$template['@@NOM_LETTRE@@'] = supprimer_numero($list['lst_name']);
       	$template['@@NOM_CATEGORIE@@'] = '';
-      	$template['@@NOM_COMPLET@@'] = $lettre;
+      	$template['@@NOM_COMPLET@@'] = $template['@@NOM_LETTRE@@'];
       } else {
       	$template['@@NOM_LETTRE@@'] = supprimer_numero(substr($list['lst_name'], strpos($list['lst_name'], '/') + 1));
       	$template['@@NOM_CATEGORIE@@'] = supprimer_numero(substr($list['lst_name'], 0, strpos($list['lst_name'], '/')));
-      	$template['@@NOM_COMPLET@@'] = $categorie." / ".$lettre;
+      	$template['@@NOM_COMPLET@@'] = $template['@@NOM_CATEGORIE@@']." / ".$template['@@NOM_LETTRE@@'];
       }
 	    $template['@@DESCRIPTION@@'] = propre($list['lst_comment']);
 			$template['@@FORMAT_INSCRIPTION@@'] = $mode;
