@@ -27,11 +27,20 @@ $.prototype.cfgCrayons.prototype.iconclick = function(c, type) {
 
 	// le + qui passe en prive pour editer tout si classe type--id
 	var link = c.match(/\b(\w+)--(\d+)\b/);
-	link = link ? 
+	link = link ?
 		'<a href="ecrire/?exec=' + link[1] + 's_edit&id_' + link[1] + '=' + link[2] +
 		'">' + this.mkimg('edit', ' (' + link[1] + ' ' + link[2] + ')') + '</a>' : '';
 
+	// on recherche une class du type type-champ-id
+	// comme article-texte-10 pour le texte de l'article 10
 	var cray = c.match(/\b\w+-(\w+)-\d+\b/);
+
+	// si on ne trouve pas, on est certainement dans le cas d'une meta
+	// et là on cherche : meta-valeur-(meta a modifier)
+	if(!cray){
+		cray = c.match(/\b\meta-valeur-(\w+)\b/);
+	}
+
 	var boite = !cray ? '' : this.mkimg(type, ' (' + cray[1] + ')');
 
 	return "<span class='crayon-icones'><span>" + boite +
@@ -144,7 +153,7 @@ $.fn.opencrayon = function(evt, percent) {
 						return false;
 					}
 					id_crayon++;
-					
+
 					var position = 'absolute';
 					$(me).parents().each(function(){
 						if($(this).css("position") == "fixed")
@@ -227,7 +236,7 @@ $.fn.activatecrayon = function(percent) {
 				me
 				.find("em.crayon-searching")
 					.remove();
-				
+
 				//Remise a zero des warnings invalides (unwrap)
 				crayon
 				.find("span.crayon-invalide p")
@@ -238,7 +247,7 @@ $.fn.activatecrayon = function(percent) {
 					      $(this).replaceWith( this.childNodes );
 						}
 					    );
-				
+
 				if(d.$invalides) {
 					for (invalide in d.$invalides) {
 						//Affichage des warnings invalides
@@ -248,7 +257,7 @@ $.fn.activatecrayon = function(percent) {
 						    .find("*[name='content_"+invalide+"']")
 							.wrap("<span class=\"crayon-invalide\"></span>")
 						    .parent()
-						    .append("<p>" 
+						    .append("<p>"
 								+ retour
 								+ " "
 								+ msg
@@ -257,7 +266,7 @@ $.fn.activatecrayon = function(percent) {
 						}
 
 				}
-				 
+
 				if (d.$erreur > '') {
 					if (d.$annuler) {
 						if (d.$erreur > ' ') {
@@ -269,7 +278,7 @@ $.fn.activatecrayon = function(percent) {
 							uniAlert(d.$erreur+'\n'+configCrayons.txt.error);
 					}
 				}
-				
+
 				if (d.erreur > '' || d.$invalides) {
 					crayon
 					.find('form')
@@ -279,7 +288,7 @@ $.fn.activatecrayon = function(percent) {
 						.end()
 						.find('.crayon-searching')
 							.remove();
-						return false; 
+						return false;
 				}
 				// Desactive celui pour qui on vient de recevoir les nouvelles donnees
 				$(me)
