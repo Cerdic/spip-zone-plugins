@@ -20,7 +20,11 @@
 				<a href="#" onclick="jQuery('#arg_#CLE').attr('id','zzz').after('<textarea name=\'args[]\' id=\'arg_#CLE\'></textarea>');jQuery('#arg_#CLE').val(jQuery('#zzz').attr('value'));jQuery('#zzz').remove();jQuery(this).hide();return false;">textarea</a>
 				</label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{args_#CLE})</span>]
-				<input type="text" name='args[]' class='text' id='arg_#CLE' value='[(#ENV**{args}|table_valeur{#CLE})]' />
+				[(#ENV**{args}|table_valeur{#CLE}|match{\n}|?{
+				<textarea name='args&#91;&#93;' class='text' id='arg_#CLE'>[(#ENV**{args}|table_valeur{#CLE})]</textarea>
+				,
+				<input type="text" name='args&#91;&#93;' class='text' id='arg_#CLE' value='[(#ENV**{args}|table_valeur{#CLE})]' />}
+				)]
 	    </li>
 			</BOUCLE_args>
 	    <li class="editer_resultat [ (#ENV**{erreurs}|table_valeur{resultat}|oui)erreur]">
@@ -29,7 +33,12 @@
 				<a href="#" onclick="jQuery('#resultat').attr('id','zzz').after('<textarea name=\'resultat\' id=\'resultat\'></textarea>');jQuery('#resultat').val(jQuery('#zzz').attr('value'));jQuery('#zzz').remove();jQuery(this).hide();return false;">textarea</a>
 				</label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{resultat})</span>]
-				<input type="text" name='resultat' class='text' id='resultat' value='#ENV**{resultat}' />
+				
+				[(#ENV**{resultat}|match{\n}|?{
+				<textarea name='resultat' class='text' id='resultat'>[(#ENV**{resultat})]</textarea>
+				,
+				<input type="text" name='resultat' class='text' id='resultat' value='[(#ENV**{resultat})]' />
+				})]
 	    </li>
 	  </ul>
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
