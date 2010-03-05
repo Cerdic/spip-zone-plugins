@@ -33,13 +33,8 @@ $.prototype.cfgCrayons.prototype.iconclick = function(c, type) {
 
 	// on recherche une class du type type-champ-id
 	// comme article-texte-10 pour le texte de l'article 10
-	var cray = c.match(/\b\w+-(\w+)-\d+\b/);
-
-	// si on ne trouve pas, on est certainement dans le cas d'une meta
-	// et là on cherche : meta-valeur-(meta a modifier)
-	if(!cray){
-		cray = c.match(/\b\meta-valeur-(\w+)\b/);
-	}
+	// ou meta-valeur-meta
+	var cray = c.match(/\b\w+-(\w+)-\d+\b/) || c.match(/\b\meta-valeur-(\w+)\b/);
 
 	var boite = !cray ? '' : this.mkimg(type, ' (' + cray[1] + ')');
 
