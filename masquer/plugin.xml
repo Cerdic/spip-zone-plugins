@@ -1,6 +1,6 @@
 <plugin>
   <nom>Masquer</nom>
-  <auteur>Nicolas Hoizey de [Clever Age->http://www.clever-age.com/]</auteur>
+  <auteur>Nicolas Hoizey et St&eacute;phanie Caron de [Clever Age->http://www.clever-age.com/]</auteur>
   <licence>GNU/GPL</licence>
   <version>0.4</version>
   <description>Ce plugin permet de masquer sur le site public les contenus qui ont un mot clef dont le titre est « masquer ».
