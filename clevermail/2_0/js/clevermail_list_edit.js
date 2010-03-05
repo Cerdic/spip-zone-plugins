@@ -1,7 +1,6 @@
 $(document).ready(function() {
 	function updateMode() {
 		mode = $('#lst_auto_mode > option:selected').attr('value');
-		alert(mode);
 		if (mode == 'none') {
 			$('#lst_auto_hour').parent('li').hide('slow');
 			$('#lst_auto_week_days').parent('li').hide('slow');
