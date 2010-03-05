@@ -256,6 +256,30 @@ add_outil( array(
 	'version-min' => '1.9300',
 ));
 
+add_variable( array(
+	'nom' => 'mot_masquer',
+	'format' => _format_CHAINE,
+	'defaut' => "'masquer'",
+	'code' => "define('_MOT_MASQUER', %s);",
+	'commentaire' => '!sql_countsel("spip_mots", "titre="._q(%s))?"<span style=\"color:red\">"._T("couteauprive:erreur_mot", array("mot"=>%s))."</span>":""',
+));
+add_outil( array(
+	'id' => 'masquer',
+	'categorie' => 'spip',
+	'auteur' => 'Nicolas Hoizey',
+	'pipeline:pre_boucle' => 'masquer_pre_boucle',
+	// fichier distant pour le pipeline
+	'distant' => 'http://zone.spip.org/trac/spip-zone/export/35809/_plugins_/masquer/masquer_pipelines.php',
+	'code:options' => "%%mot_masquer%%",
+	'code:fonctions' => 'if (!function_exists("critere_tout_voir_dist")){
+  function critere_tout_voir_dist($idb, &$boucles, $crit) {
+    $boucle = &$boucles[$idb];
+    $boucle->modificateur["tout_voir"] = true;
+  }
+}',
+	'version-min' => '1.9300',
+));
+
 add_variables( array(
 	'nom' => 'auteur_forum_nom',
 	'check' => 'couteauprive:auteur_forum_nom',
