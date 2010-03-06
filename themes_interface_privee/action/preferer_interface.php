@@ -8,7 +8,7 @@ function action_preferer_interface() {
 
 	$GLOBALS['visiteur_session']['prefs']['interface_privee'] = $arg;
 	
-	if ($arg == "standard" || $arg == "blanche" || $arg == "degrades" || $arg == "wpip" || $arg == "bonux" || $arg == "chocolat" || $arg == "ispip") $prefs_mod = true;
+	if ($arg == "standard" || $arg == "blanche" || $arg == "degrades" || $arg == "wpip" || $arg == "bonux" || $arg == "chocolat" || $arg == "ispip" || $arg == "geek") $prefs_mod = true;
 	
 	if ($prefs_mod AND intval($GLOBALS['visiteur_session']['id_auteur']))
 		sql_updateq('spip_auteurs', array('prefs' => serialize($GLOBALS['visiteur_session']['prefs'])), "id_auteur=" .intval($GLOBALS['visiteur_session']['id_auteur']));

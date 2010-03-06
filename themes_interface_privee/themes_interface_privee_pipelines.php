@@ -17,6 +17,7 @@ function themes_interface_privee_header_prive($flux) {
 	else if ($interface == "wpip") $flux .= '<link rel="stylesheet" type="text/css" href="'.generer_url_public('style_prive_wpip', parametres_css_prive()).'" id="css_wpip" />';
 	else if ($interface == "degrades") $flux .= '<link rel="stylesheet" type="text/css" href="'.generer_url_public('style_prive_degrades', parametres_css_prive()).'" id="css_degrades" />';
 	else if ($interface == "ispip") $flux .= '<link rel="stylesheet" type="text/css" href="'.generer_url_public('style_prive_ispip', parametres_css_prive()).'" id="css_ispip" />';
+	else if ($interface == "geek") $flux .= '<link rel="stylesheet" type="text/css" href="'.generer_url_public('style_prive_geek', parametres_css_prive()).'" id="css_igeek" />';
 	else if ($interface == "bonux") $flux .= '<link rel="stylesheet" type="text/css" href="'.generer_url_public('style_prive_bonux', parametres_css_prive()).'" id="css_bonux" />';
 	else if ($interface == "chocolat") {
 		$flux .= '<link rel="stylesheet" type="text/css" href="'.generer_url_public('style_prive_chocolat', parametres_css_prive()).'" id="css_chocolat" />';
@@ -41,6 +42,7 @@ function themes_interface_privee_header_prive($flux) {
 	$liens .= "<tr class='tr_liste'><td>".$bouton["wpip"]."<\/td><td class='arial2'><a href='".generer_url_action('preferer_interface',"arg=wpip&redirect=".rawurlencode($url))."' class='lien_sous'>&Agrave; la fa&ccedil;on de Wordpress<\/a><\/td><\/tr>";
 	$liens .= "<tr class='tr_liste'><td>".$bouton["chocolat"]."<\/td><td class='arial2'><a href='".generer_url_action('preferer_interface',"arg=chocolat&redirect=".rawurlencode($url))."' class='lien_sous'>Menthe et chocolat<\/a><\/td><\/tr>";
 	$liens .= "<tr class='tr_liste'><td>".$bouton["ispip"]."<\/td><td class='arial2'><a href='".generer_url_action('preferer_interface',"arg=ispip&redirect=".rawurlencode($url))."' class='lien_sous'>iSpip<\/a><\/td><\/tr>";
+	$liens .= "<tr class='tr_liste'><td>".$bouton["geek"]."<\/td><td class='arial2'><a href='".generer_url_action('preferer_interface',"arg=geek&redirect=".rawurlencode($url))."' class='lien_sous'>Revenge of the dark geek<\/a><\/td><\/tr>";
 	$liens .= "<tr class='tr_liste'><td>".$bouton["blanche"]."<\/td><td class='arial2'><a href='".generer_url_action('preferer_interface',"arg=blanche&redirect=".urlencode($url))."' class='lien_sous'>Blanche<\/a><\/td><\/tr>";
 	
 	$flux .= "
