@@ -12,6 +12,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * saisies_chemin()
  * saisies_supprimer()
  * saisies_inserer()
+ * saisies_modifier()
  * saisies_verifier()
  * saisies_generer_html()
  * saisies_generer_nom()
@@ -160,7 +161,30 @@ function saisies_inserer($saisies, $saisie, $chemin=array()){
 }
 
 /*
+ * Modifie une saisie
+ *
+ * @param array $saisies Un tableau décrivant les saisies
+ * @param unknown_type $nom_ou_chemin Le nom ou le chemin de la saisie à modifier
+ * @param array $modifs Le tableau des modifications à apporter à la saisie
+ * @return Retourne le tableau décrivant les saisies, mais modifié
+ */
+function saisies_modifier($saisies, $nom_ou_chemin, $modifs){
+	$chemin = saisies_chercher($saisies, $nom_ou_chemin, true);
+	
+	$position = array_pop($chemin);
+	$parent =& $saisies;
+	foreach ($chemin as $cle){
+		$parent =& $parent[$cle];
+	}
+	
+	$parent[$position] = array_merge($parent[$position], $modifs);
+	
+	return $saisies;
+}
+
+/*
  * Vérifier tout un formulaire tel que décrit avec les Saisies
+ *
  * @param array $formulaire Le contenu d'un formulaire décrit dans un tableau de Saisies
  * @return array Retourne un tableau d'erreurs
  */
