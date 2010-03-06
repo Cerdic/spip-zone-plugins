@@ -78,12 +78,13 @@ function formulaires_construire_formulaire_traiter($identifiant, $formulaire_ini
 	
 	// Si on demande à ajouter une saisie
 	if ($ajouter_saisie = _request('ajouter_saisie')){
-		$formulaire_actuel[] = array(
+		$saisie = array(
 			'saisie' => $ajouter_saisie,
 			'options' => array(
 				'nom' => saisies_generer_nom($formulaire_actuel, $ajouter_saisie)
 			)
 		);
+		$formulaire_actuel = saisies_inserer($formulaire_actuel, $saisie);
 	}
 	
 	// Si on demande à supprimer une saisie
