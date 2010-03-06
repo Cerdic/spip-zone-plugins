@@ -26,7 +26,7 @@
 	ogv: video prise en charge par Firefox/Chrome/Opera
 	mp4: video prise en charge par Safari
 	flv: Flash video pour IE <= 8 
-	png: pour l'image de présentation (a verifier,
+	png: pour l'image de presentation (a verifier,
 		semble ne pas fonctionne' partout.
 		Preferer si possible: placer la premiere image de la video).
 		
@@ -42,7 +42,6 @@
 
 
 TODO:
-	- bug : la balise PLAYER_AUTOPLAY ne renvoie pas la bonne valeur
 	- ajouter le traitement du mp3 streaming ?
 	- sous-titre ? Voir: 
 		- http://www.b2b-net.com/traduction/Accessibilite-d-une-video-en-HTML5-avec-sous-titres-en-JavaScript-3.html
@@ -60,7 +59,7 @@ TODO:
 ]<dd class='spip_doc_descriptif doc_streaming'>
 	<video width="#LARGEUR" height="#HAUTEUR"
 		[poster="(#GET{chemin_poster}|?{/videos/#GET{chemin_poster}})"
-		][autoplay="false"
+		][autoplay="(#PLAYER_AUTOPLAY|?{true})"
 		]controls="controls">[<!-- (#REM)
 		you must use `</source>` to avoid a closure bug in Firefox 3 / Camino 2! -->]
 	<source src="/videos/[(#GET{chemin_fichier}|basename|replace{flv$,ogv})]" type="video/ogg">[<!--(#REM) Firefox native OGG video -->]</source>

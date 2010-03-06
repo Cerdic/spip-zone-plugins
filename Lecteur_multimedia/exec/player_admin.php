@@ -89,10 +89,13 @@ function exec_player_admin()
 		if(!empty($$key)) {
 			$player_config['player_video_prefs'][$key] = $$key;
 		}
+		else if(isset($player_config['player_video_prefs'][$key])) {
+			unset($player_config['player_video_prefs'][$key]);
+		}
 	}
 	
 	if($player_retour_formulaire) {
-		spip_log("PLAYER: enregistrement config profil $player_key");
+		//spip_log("PLAYER: enregistrement config profil $player_key". serialize($player_config));
 		// enregistrer la config
 		ecrire_meta(_PLAYER_META_PREFERENCES, serialize($player_config));
 		if(version_compare($GLOBALS['spip_version_code'],'1.9300','<')) { 

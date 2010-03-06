@@ -63,7 +63,7 @@ function Player_affichage_final($flux){
  * peut etre appele dans un squelette apres |liens_absolus
  */
  
- function Player_post_propre($texte) {
+function Player_post_propre($texte) {
 
 	$reg_formats="mp3";
 
@@ -93,28 +93,14 @@ function balise_PLAYER_FLV_FLASHVVARS ($p) {
 	
 	static $player_flv_flashvars = null;
 
-/* pour debug. Dump du parametre 
-spip_log("######################################");
-if(!function_exists('dump_me')) {
-	function dump_me($p, $m = "###: ") {
-		foreach($p as $k => $v) {
-			spip_log($m . $k . " = ".$v);
-			if(is_array($v) || is_object($v)) {
-				dump_me($v, $m . $k.": ");
-			}
-		}
-	}
-}
-dump_me($p);
-/**/
-
 	$id_boucle = $p->nom_boucle ? $p->nom_boucle : $p->id_boucle;
 	
 	// #PLAYER_FLV_FLASHVVARS hors boucle ? ne rien faire !
 	if (!$type = $p->boucles[$id_boucle]->type_requete) {
 		$p->code = "''";
-	} else {
-	// sinon, renvoyer les Flashvars sur une seule ligne
+	}
+	else {
+		// sinon, renvoyer les Flashvars sur une seule ligne
 
 		if(!$player_flv_flashvars) {
 		
@@ -173,35 +159,24 @@ function balise_PLAYER_FLV_PLAYER ($p) {
 	return($p);
 }
 
-// CP 20100306
-// TODO: optimiser (code redondant, voir ci-dessus)
-// TODO: balise a corriger. Ne renvoie pas la bonne valeur $-)
-function balise_PLAYER_AUTOPLAY ($p) {
-	static $player_flv_flashvars = null;
-
-	$result = false;
-
-	if(!$player_flv_flashvars) {
-		
-		$player_flv_lecteurs = unserialize(_PLAYER_FLV_LECTEURS);
-
-		$player_config = unserialize($GLOBALS['meta'][_PLAYER_META_PREFERENCES]);
-		
-		include_spip('inc/player_flv_config');
-		// la grosse table commune a tous les profils
-		$player_flv_config = player_flv_config();
-
-		$player_key = $player_config['player_key'];
-		
-		$result =
-			(isset($player_key['autoplay']) && $player_key['autoplay'])
-			? 'true'
-			: 'false'
-			;
+function player_meta_prefs_item ($ii) {
+	
+	static $prefs;
+	
+	if($prefs == null)
+	{
+		lire_metas();
+		$prefs = unserialize($GLOBALS['meta'][_PLAYER_META_PREFERENCES]);
+		$prefs = $prefs['player_video_prefs'];
 	}
-		
-	$p->code = "'$result'";
+	return($ii && isset($prefs[$ii]) ? $prefs[$ii] : null);
+}
 
+// CP 20100306
+function balise_PLAYER_AUTOPLAY ($p) {
+
+	$p->code = "'" . player_meta_prefs_item('autoplay') . "'";
 	$p->interdire_scripts = true;
+
 	return($p);
 }
