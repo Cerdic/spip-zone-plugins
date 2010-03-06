@@ -327,7 +327,9 @@ function tb_try_essai($filename,$funcname,$essai,&$output_test){
 	}
 	$output_test = ob_get_contents();
 	ob_end_clean();
-	$output_test .= ($output_test?"<br />":"")."<tt>$appel = ".var_export($res,true)."</tt>";
+	$call = "$appel = ".var_export($res,true);
+	$call = str_replace(array('&','<','>'),array('&amp;','&lt;','&gt;'),$call);
+	$output_test .= ($output_test?"<br />":"")."<tt>$call</tt>";
 	return $res;
 }
 
@@ -351,6 +353,10 @@ function tb_essai_combinatoire($types){
 	$type = array_shift($types);
 	$es = tb_essai_combinatoire($types);
 	$samples = $tb_essais_type($type);
+	if (!count($samples)){
+		// ce n'est pas un type, c'est un argument fixe
+		$samples = eval("return array($type);");
+	}
 	foreach($samples as $s){
 		if (count($es)){
 			foreach($es as $e) {

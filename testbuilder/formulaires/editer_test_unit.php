@@ -68,10 +68,10 @@ function formulaires_editer_test_unit_verifier_dist($filename,$funcname){
 		if (!count($args))
 			$erreurs['message_erreur'] = _T("tb:erreur_test_combinatoire_types_requis");
 		else {
-			$tb_essais_type = charger_fonction('tb_essais_type','inc');
-			foreach($args as $k=>$type)
-				if (!count($tb_essais_type($type)))
-					$erreurs["args_$k"]=_T("tb:erreur_pseudo_type_inconnu");
+			#$tb_essais_type = charger_fonction('tb_essais_type','inc');
+			#foreach($args as $k=>$type)
+			#	if (!count($tb_essais_type($type)))
+			#		$erreurs["args_$k"]=_T("tb:erreur_pseudo_type_inconnu");
 		}
 		if (_request('resultat')){
 			$erreurs['resultat'] = _T("tb:erreur_test_combinatoire_resultat_ignore");

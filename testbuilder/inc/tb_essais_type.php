@@ -27,6 +27,10 @@ function inc_tb_essais_type_dist($type){
 				'Un texte sans entites &<>"\'',
 				'{{{Des raccourcis}}} {italique} {{gras}} <code>du code</code>',
 				'Un modele <modeleinexistant|lien=[->http://www.spip.net]>',
+				"Un texte avec des retour
+a la ligne et meme des
+
+paragraphes",
 			);
 			break;
 		case 'email':
