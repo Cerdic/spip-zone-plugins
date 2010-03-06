@@ -58,12 +58,12 @@ TODO:
 [<dt class='spip_doc_titre #EDIT{titre}'>(#TITRE)</dt>
 ]<dd class='spip_doc_descriptif doc_streaming'>
 	<video width="#LARGEUR" height="#HAUTEUR"
-		[poster="(#GET{chemin_poster}|?{/videos/#GET{chemin_poster}})"
+		[poster="#PLAYER_VIDEOS_DIR(#GET{chemin_poster}|?{#GET{chemin_poster}})"
 		][autoplay="(#PLAYER_AUTOPLAY|?{true})"
 		]controls="controls">[<!-- (#REM)
 		you must use `</source>` to avoid a closure bug in Firefox 3 / Camino 2! -->]
-	<source src="/videos/[(#GET{chemin_fichier}|basename|replace{flv$,ogv})]" type="video/ogg">[<!--(#REM) Firefox native OGG video -->]</source>
-	<source src="/videos/[(#GET{chemin_fichier}|basename|replace{flv$,mp4})]" type="video/mp4">[<!--(#REM) Safari / iPhone video    -->]</source>
+	<source src="#PLAYER_VIDEOS_DIR[(#GET{chemin_fichier}|basename|replace{flv$,ogv})]" type="video/ogg">[<!--(#REM) Firefox native OGG video -->]</source>
+	<source src="#PLAYER_VIDEOS_DIR[(#GET{chemin_fichier}|basename|replace{flv$,mp4})]" type="video/mp4">[<!--(#REM) Safari / iPhone video    -->]</source>
 	[<!--(#REM)
 		IE only QuickTime embed: IE6 is ignored as it does not support `<object>` in `<object>` so we skip QuickTime
 		and go straight to Flash further down. the line break after the `classid` is required due to a bug in IE -->
@@ -74,28 +74,28 @@ TODO:
 		non-IE QuickTime embed (hidden from IE): the self-closing comment tag allows non-IE browsers to
 		see the HTML whilst being compatible with serving as XML -->
 	]<!--[if !IE]><!-->
-	<object width="#LARGEUR" height="#HAUTEUR" type="video/quicktime" data="/videos/[(#GET{chemin_fichier}|basename|replace{flv$,mp4})]">
+	<object width="#LARGEUR" height="#HAUTEUR" type="video/quicktime" data="#PLAYER_VIDEOS_DIR[(#GET{chemin_fichier}|basename|replace{flv$,mp4})]">
 	<!--<![endif]-->
-	<param name="src" value="/videos/[(#GET{chemin_fichier}|basename|replace{flv$,mp4})]" />
+	<param name="src" value="#PLAYER_VIDEOS_DIR[(#GET{chemin_fichier}|basename|replace{flv$,mp4})]" />
 	<param name="showlogo" value="false" />
 	<param name="autoplay" value="false" />
 	[<!--(#REM) fallback to Flash -->
 	]<object width="#LARGEUR" height="#HAUTEUR" type="application/x-shockwave-flash"
 	[<!--(#REM)
 			Attribut data pour Firefox
-	-->]	data="#CHEMIN{flash/#GET{player}}?image=/videos/[(#GET{chemin_fichier}|basename|replace{flv$,png})]&amp;file=/videos/[(#GET{chemin_fichier}|basename|replace{flv$,mp4})]">
+	-->]	data="#CHEMIN{flash/#GET{player}}?image=#PLAYER_VIDEOS_DIR[(#GET{chemin_fichier}|basename|replace{flv$,png})]&amp;file=#PLAYER_VIDEOS_DIR[(#GET{chemin_fichier}|basename|replace{flv$,mp4})]">
 	[<!--(#REM)
 				param pour IE/Safari
 	-->]
 		<param name="movie"
-			value="#CHEMIN{flash/#PLAYER_FLV_PLAYER}?/videos/[(#GET{chemin_fichier}|basename|replace{flv$,png})]&amp;file=/videos/[(#GET{chemin_fichier}|basename|replace{flv$,mp4})]" />
+			value="#CHEMIN{flash/#PLAYER_FLV_PLAYER}?#PLAYER_VIDEOS_DIR[(#GET{chemin_fichier}|basename|replace{flv$,png})]&amp;file=#PLAYER_VIDEOS_DIR[(#GET{chemin_fichier}|basename|replace{flv$,mp4})]" />
 		<param name="FlashVars"
 			value="flv=[(#URL_DOCUMENT|url_absolue)]&amp;width=[(#LARGEUR|=={0}|?{320,#LARGEUR})]&amp;height=[(#HAUTEUR|=={0}|?{240,#HAUTEUR})]&amp;#PLAYER_FLV_FLASHVVARS[&amp;srturl=(#ENV{srturl})]" />
 		<param name="allowFullScreen" value="true" />
 		<param name="wmode" value="transparent" />
 		[<!--(#REM) fallback image. download links are below the video. warning: putting anything more than
 		     the fallback image in the fallback may trigger an iPhone OS3+ bug where the video will not play -->
-		]<img src="/videos/[(#GET{chemin_fichier}|basename|replace{flv$,png})]" width="#LARGEUR" height="#HAUTEUR" alt="__Title of video__"
+		]<img src="#PLAYER_VIDEOS_DIR[(#GET{chemin_fichier}|basename|replace{flv$,png})]" width="#LARGEUR" height="#HAUTEUR" alt="__Title of video__"
 		     title="No video playback capabilities, please download the video below"
 		/>
 		[<strong>(#TITRE)</strong>

@@ -180,3 +180,12 @@ function balise_PLAYER_AUTOPLAY ($p) {
 
 	return($p);
 }
+
+function balise_PLAYER_VIDEOS_DIR ($p) {
+
+	$p->code = "'/videos/'";
+	$p->interdire_scripts = false;
+
+	return($p);
+	
+}
