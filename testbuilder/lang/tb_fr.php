@@ -11,10 +11,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_tester' => 'Tester !',
 	'bouton_combinatoire' => 'Jeu de tests combinatoires',
 	'bouton_supprimer_tous' => 'Supprimer tous les tests',
+	'bouton_recalculer_tous' => 'Recalculer tous les tests',
 	'bouton_creer_test' => 'Cr&eacute;er un test !',
 
 	'ok_test_ajoute' => "Test ajout&eacute; : ",
 	'ok_tests_supprimes' => "Tests supprim&eacute;s.",
+	'ok_test_recalcules' => "Les tests ont été recalculés",
 	'ok_test_supprime' => "Test supprim&eacute;",
 	'ok_n_tests_combi_crees' => "@nb@ tests combinatoires cr&eacute;es.",
 

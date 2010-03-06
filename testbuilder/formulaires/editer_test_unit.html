@@ -50,6 +50,7 @@
 		<div class="essais" style="padding:10px;border-bottom:1px solid #eee;">
 		[<div style="float:right">(#ENV{_filetest,''}|tb_url_test{<tt>[(#ENV{_filetest,''}|basename)]</tt>})</div>]
 		[<input type='submit' class='submit' name="supprimer_tous" value='<:tb:bouton_supprimer_tous:>' />
+		<input type='submit' class='submit' name="recalculer_tous" value='<:tb:bouton_recalculer_tous:>' />
 			(#ENV{_essais}|tb_affiche_essais{#ENV{_funcname},#ENV{_modif_essai}})]
 		<br class="nettoyeur" />
 		</div>

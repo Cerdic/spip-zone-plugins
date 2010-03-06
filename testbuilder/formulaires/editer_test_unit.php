@@ -127,6 +127,18 @@ function formulaires_editer_test_unit_traiter_dist($filename,$funcname){
 		set_request('args',array());
 		$message_ok = _T("tb:ok_n_tests_combi_crees",array('nb'=>count($argss)));
 	}
+	elseif(_request('recalculer_tous')){
+		foreach($essais as $k=>$e){
+			array_shift($e);
+			array_unshift($e, '??TBD??');
+			$essais[$k] = $e;
+		}
+		tb_test_essais($funcname,$filetest,$essais);
+		tb_refresh_test($filename,$funcname,$filetest);
+		set_request('args');
+		set_request('resultat');
+		$message_ok = _T('tb:ok_test_recalcules');
+	}
 	elseif(_request('supprimer_tous')){
 		tb_test_essais($funcname,$filetest,array());
 		set_request('args',array());
@@ -158,13 +170,14 @@ function tb_affiche_essais($essais,$funcname,$expose=null){
 			$affiche = str_replace(array('&','<','>'),array('&amp;','&lt;','&gt;'),$affiche);
 			$on = (!is_null($expose) AND $expose==$k)?' on':'';
 			$output .= "<li class='item$on'>"
-			  ."<input type='submit' class='submit' name='del_$k' value='X' />"
-			  ." <input type='submit' class='submit' name='modif_$k' value='Modif' />"
-			  ." <code>$affiche</code></li>";
+			  ."<input type='submit' class='submit del' name='del_$k' value='X' />"
+			  ." <code>$affiche</code>"
+			  ." <input type='submit' class='submit modif' name='modif_$k' value='Modif' />"
+			  ."</li>";
 		}
 		$output = "<h3>"
 		  . singulier_ou_pluriel(count($essais), 'tb:un_essai', 'tb:nb_essais')
-			. "</h3><ul class='liste_items'>$output</ul>";
+			. "</h3><ol start='0' class='liste-items essais'>$output</ul>";
 	}
 	//var_dump($output);
 	return $output;
