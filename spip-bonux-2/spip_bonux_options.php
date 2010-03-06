@@ -45,6 +45,35 @@ function _T_ou_typo($valeur, $mode_typo='toujours') {
 	return $valeur;
 
 }
+
+/*
+ * Insère toutes les valeurs du tableau $arr2 après (ou avant) $cle dans le tableau $arr1.
+ * Si $cle n'est pas trouvé, les valeurs de $arr2 seront ajoutés à la fin de $arr1.
+ *
+ * La fonction garde autant que possible les associations entre les clés. Elle fonctionnera donc aussi bien
+ * avec des tableaux à index numérique que des tableaux associatifs.
+ * Attention tout de même, elle utilise array_merge() donc les valeurs de clés étant en conflits seront écrasées.
+ *
+ * @param array $arr1 Tableau dans lequel se fera l'insertion
+ * @param unknown_type $cle Clé de $arr1 après (ou avant) laquelle se fera l'insertion
+ * @param array $arr2 Tableau contenant les valeurs à insérer
+ * @param bool $avant Indique si l'insertion se fait avant la clé (par défaut c'est après)
+ * @return array Retourne le tableau avec l'insertion
+ */
+function array_insert($arr1, $cle, $arr2, $avant=false){
+	$index = array_search($cle, array_keys($arr1));
+	if($index === false){
+		$index = count($arr1); // insert @ end of array if $key not found
+	}
+	else {
+		if(!$avant){
+			$index++;
+		}
+	}
+	$fin = array_splice($arr1, $index);
+	return array_merge($arr1, $arr2, $fin);
+}
+
 if (defined('_BONUX_STYLE'))
 	_chemin(_DIR_PLUGIN_SPIP_BONUX."spip21/");
 
