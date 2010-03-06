@@ -133,6 +133,8 @@ function formidable_ajouter_options(&$valeur, $cle, $nouvelle){
 
 // Préparer une saisie pour la transformer en truc configurable
 function formidable_generer_saisie_configurable($saisie, $env){
+	// On s'assure qu'on a le bon fond pour générer
+	$env['fond_generer'] = 'formulaires/inc-generer_saisies_configurables';
 	// On récupère le nom
 	$nom = $saisie['options']['nom'];
 	// On cherche si ya un formulaire de config

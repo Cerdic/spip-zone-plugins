@@ -13,35 +13,8 @@
 		
 		<ul>
 			<BOUCLE_contenu(POUR){tableau #ENV{_contenu}}>
-			[(#VAL{explication}|array_key_exists{#VALEUR}|oui)
-			[<li>
-				<div class="explication">
-					(#VALEUR|table_valeur{explication}|saisies_transformer_langue)
-				</div>
-			</li>]
-			]
-
 			[(#VAL{saisie}|array_key_exists{#VALEUR}|oui)
 				[(#VALEUR|formidable_generer_saisie_configurable{#ENV**|unserialize})]
-			]
-
-			[(#VAL{groupe}|array_key_exists{#VALEUR}|oui)
-			#SET{titre, #VALEUR|table_valeur{groupe}}
-			#SET{css, #VALEUR|table_valeur{css}}
-			#SET{pliable, #VALEUR|table_valeur{pliable}|et{#VALEUR|table_valeur{pliable}|!={non}}|?{'pliable', ''}}
-			#SET{plie, #VALEUR|table_valeur{plie}|et{#VALEUR|table_valeur{plie}|!={non}}|?{'plie', ''}}
-			#SET{contenu, #VALEUR|table_valeur{contenu}}
-			<li class="fieldset[ (#GET{css})]">
-				<fieldset>
-					[<h3 class="legend">(#GET{titre}|saisies_transformer_langue)</h3>]
-		
-					[(#GET{contenu}|is_array|oui)
-					<ul [class="(#GET{pliable})[ (#GET{plie})]"]>
-						#INCLURE{fond=inclure/generer_saisies, env, saisies=#GET{contenu}}
-					</ul>
-					]
-				</fieldset>
-			</li>
 			]
 			</BOUCLE_contenu>
 			<li class="aucun"><em class="attention"><:formidable:construire_aucun_champs:></em></li>
