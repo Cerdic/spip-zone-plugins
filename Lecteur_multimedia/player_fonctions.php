@@ -85,6 +85,7 @@ $titre = eregi_replace("'"," ",$titre );
 return $titre ;
 }
 
+
 // CP 20080321
 // balise a' placer dans le modele
 // donne la ligne FlashVars
@@ -172,4 +173,35 @@ function balise_PLAYER_FLV_PLAYER ($p) {
 	return($p);
 }
 
-?>
+// CP 20100306
+// TODO: optimiser (code redondant, voir ci-dessus)
+// TODO: balise a corriger. Ne renvoie pas la bonne valeur $-)
+function balise_PLAYER_AUTOPLAY ($p) {
+	static $player_flv_flashvars = null;
+
+	$result = false;
+
+	if(!$player_flv_flashvars) {
+		
+		$player_flv_lecteurs = unserialize(_PLAYER_FLV_LECTEURS);
+
+		$player_config = unserialize($GLOBALS['meta'][_PLAYER_META_PREFERENCES]);
+		
+		include_spip('inc/player_flv_config');
+		// la grosse table commune a tous les profils
+		$player_flv_config = player_flv_config();
+
+		$player_key = $player_config['player_key'];
+		
+		$result =
+			(isset($player_key['autoplay']) && $player_key['autoplay'])
+			? 'true'
+			: 'false'
+			;
+	}
+		
+	$p->code = "'$result'";
+
+	$p->interdire_scripts = true;
+	return($p);
+}
