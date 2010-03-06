@@ -11,7 +11,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * saisies_chercher()
  * saisies_chemin()
  * saisies_supprimer()
- * saisies_inserer_apres()
+ * saisies_inserer()
  * saisies_verifier()
  * saisies_generer_html()
  * saisies_generer_nom()
@@ -60,7 +60,7 @@ function saisies_lister_champs($contenu){
 }
 
 /*
- * Cherche une saisie par son nom et renvoie soit la saisie, soit son chemin
+ * Cherche une saisie par son nom ou son chemin et renvoie soit la saisie, soit son chemin
  *
  * @param array $saisies Un tableau décrivant les saisies
  * @param unknown_type $nom_ou_chemin Le nom de la saisie à chercher ou le chemin sous forme d'une liste de clés
@@ -97,7 +97,7 @@ function saisies_chercher($saisies, $nom_ou_chemin, $retourner_chemin=false){
 }
 
 /*
- * Supprimer une saisie dont on donne le nom
+ * Supprimer une saisie dont on donne le nom ou le chemin
  *
  * @param array $saisies Un tableau décriant les saisies
  * @param unknown_type $nom_ou_chemin Le nom de la saisie à supprimer ou son chemin sous forme d'une liste de clés
@@ -128,11 +128,35 @@ function saisies_supprimer($saisies, $nom_ou_chemin){
  * 
  * @param array $saisies Un tableau décrivant les saisies
  * @param array $saisie La saisie à insérer
- * @param array $position La position où insérer la saisie
+ * @param array $chemin La position complète où insérer la saisie
  * @return array Retourne le tableau modifié des saisies
  */
-function saisies_inserer($saisies, $saisie, $position=array()){
+function saisies_inserer($saisies, $saisie, $chemin=array()){
+	// On vérifie quand même que ce qu'on veut insérer est correct
+	if ($saisie['saisie'] and $saisie['options']['nom']){
+		// Par défaut le parent c'est la racine
+		$parent =& $saisies;
+		// S'il n'y a pas de position, on va insérer à la fin du formulaire
+		if (!$chemin){
+			$position = count($parent);
+		}
+		elseif (is_array($chemin)){
+			$position = array_pop($chemin);
+			foreach ($chemin as $cle){
+				// Si la clé est un conteneur de saisies "saisies" et qu'elle n'existe pas encore, on la crée
+				if ($cle == 'saisies' and !isset($parent[$cle]))
+					$parent[$cle] = array();
+				$parent =& $parent[$cle];
+			}
+			// On vérifie maintenant que la positon est cohérente avec le parent
+			if ($position < 0) $position = 0;
+			elseif ($position > count($parent)) $position = count($parent);
+		}
+		// Et enfin on insère
+		array_splice($parent, $position, 0, array($saisie));
+	}
 	
+	return $saisies;
 }
 
 /*
