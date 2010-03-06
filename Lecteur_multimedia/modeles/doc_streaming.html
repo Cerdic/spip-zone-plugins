@@ -1,0 +1,110 @@
+[<!--(#REM)
+
+	// modeles/doc_streaming.html
+
+	// $LastChangedRevision$
+	// $LastChangedBy$
+	// $LastChangedDate$
+
+	// CP-20100306
+	// version de test pour la balise video (html5)
+	// exemple: <docX|streaming|center>
+
+	Le flv seul est a charger en tant qu'illustration
+	de l'article.
+
+	Le titre et le descriptif de l'illustration sont pris en compte.
+
+	Placer les videos necessaires dans /videos de votre site.
+	ex:
+		videos/
+		|-- musee_benaki.flv
+		|-- musee_benaki.png
+		|-- musee_benaki.mp4
+		`-- musee_benaki.ogv
+
+	ogv: video prise en charge par Firefox/Chrome/Opera
+	mp4: video prise en charge par Safari
+	flv: Flash video pour IE <= 8 
+	png: pour l'image de présentation (a verifier,
+		semble ne pas fonctionne' partout.
+		Preferer si possible: placer la premiere image de la video).
+		
+	Pour preparer les differents formats, voir :
+	- http://www.quesaco.org/Preparer-une-video-pour-le-streaming
+	
+	Pour en savoir plus sur l'utilisation de la balise video, voir :
+	- http://www.w3.org/TR/html5/video.html
+	- Video For Everybody" v0.3.2 (qui a inspire' la creation de ce modele)
+		- http://camendesign.com/code/video_for_everybody
+	- http://code.google.com/p/video4all/
+	- http://www.niallkennedy.com/blog/2010/02/html5-video-markup.html
+
+
+TODO:
+	- bug : la balise PLAYER_AUTOPLAY ne renvoie pas la bonne valeur
+	- ajouter le traitement du mp3 streaming ?
+	- sous-titre ? Voir: 
+		- http://www.b2b-net.com/traduction/Accessibilite-d-une-video-en-HTML5-avec-sous-titres-en-JavaScript-3.html
+
+
+-->]<!-- lecteur multimedia,
+	http://www.spip-contrib.net/Lecteur-Multimedia,308
+	modele doc_streaming -->
+<BOUCLE_doc (DOCUMENTS) {id_document}>
+#SET{player,#ENV{player,#CONFIG{player,'player_flv_maxi'}}}
+#SET{chemin_fichier,#ENV{chemin_fichier,#FICHIER}}
+#SET{chemin_poster,#GET{chemin_fichier}|basename|replace{flv$,png},}
+<dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
+[<dt class='spip_doc_titre #EDIT{titre}'>(#TITRE)</dt>
+]<dd class='spip_doc_descriptif doc_streaming'>
+	<video width="#LARGEUR" height="#HAUTEUR"
+		[poster="(#GET{chemin_poster}|?{/videos/#GET{chemin_poster}})"
+		][autoplay="false"
+		]controls="controls">[<!-- (#REM)
+		you must use `</source>` to avoid a closure bug in Firefox 3 / Camino 2! -->]
+	<source src="/videos/[(#GET{chemin_fichier}|basename|replace{flv$,ogv})]" type="video/ogg">[<!--(#REM) Firefox native OGG video -->]</source>
+	<source src="/videos/[(#GET{chemin_fichier}|basename|replace{flv$,mp4})]" type="video/mp4">[<!--(#REM) Safari / iPhone video    -->]</source>
+	[<!--(#REM)
+		IE only QuickTime embed: IE6 is ignored as it does not support `<object>` in `<object>` so we skip QuickTime
+		and go straight to Flash further down. the line break after the `classid` is required due to a bug in IE -->
+	]<!--[if gt IE 6]>
+	<object width="#LARGEUR" height="#HAUTEUR" classid="clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B"><!
+	[endif]-->
+	[<!--(#REM)
+		non-IE QuickTime embed (hidden from IE): the self-closing comment tag allows non-IE browsers to
+		see the HTML whilst being compatible with serving as XML -->
+	]<!--[if !IE]><!-->
+	<object width="#LARGEUR" height="#HAUTEUR" type="video/quicktime" data="/videos/[(#GET{chemin_fichier}|basename|replace{flv$,mp4})]">
+	<!--<![endif]-->
+	<param name="src" value="/videos/[(#GET{chemin_fichier}|basename|replace{flv$,mp4})]" />
+	<param name="showlogo" value="false" />
+	<param name="autoplay" value="false" />
+	[<!--(#REM) fallback to Flash -->
+	]<object width="#LARGEUR" height="#HAUTEUR" type="application/x-shockwave-flash"
+	[<!--(#REM)
+			Attribut data pour Firefox
+	-->]	data="#CHEMIN{flash/#GET{player}}?image=/videos/[(#GET{chemin_fichier}|basename|replace{flv$,png})]&amp;file=/videos/[(#GET{chemin_fichier}|basename|replace{flv$,mp4})]">
+	[<!--(#REM)
+				param pour IE/Safari
+	-->]
+		<param name="movie"
+			value="#CHEMIN{flash/#PLAYER_FLV_PLAYER}?/videos/[(#GET{chemin_fichier}|basename|replace{flv$,png})]&amp;file=/videos/[(#GET{chemin_fichier}|basename|replace{flv$,mp4})]" />
+		<param name="FlashVars"
+			value="flv=[(#URL_DOCUMENT|url_absolue)]&amp;width=[(#LARGEUR|=={0}|?{320,#LARGEUR})]&amp;height=[(#HAUTEUR|=={0}|?{240,#HAUTEUR})]&amp;#PLAYER_FLV_FLASHVVARS[&amp;srturl=(#ENV{srturl})]" />
+		<param name="allowFullScreen" value="true" />
+		<param name="wmode" value="transparent" />
+		[<!--(#REM) fallback image. download links are below the video. warning: putting anything more than
+		     the fallback image in the fallback may trigger an iPhone OS3+ bug where the video will not play -->
+		]<img src="/videos/[(#GET{chemin_fichier}|basename|replace{flv$,png})]" width="#LARGEUR" height="#HAUTEUR" alt="__Title of video__"
+		     title="No video playback capabilities, please download the video below"
+		/>
+		[<strong>(#TITRE)</strong>
+		][<span><a href="(#URL_DOCUMENT)" rel="enclosure">#URL_DOCUMENT</a></span>]
+	</object><!--[if gt IE 6]><!-->
+	</object><!--<![endif]-->
+	</video>
+</dd>
+[<dd class='spip_doc_descriptif #EDIT{descriptif}'>(#DESCRIPTIF|PtoBR)[(#NOTES|PtoBR)]</dd>
+]</dl>
+</BOUCLE_doc>
