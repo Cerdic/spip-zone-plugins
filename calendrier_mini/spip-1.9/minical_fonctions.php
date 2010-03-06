@@ -47,7 +47,7 @@ function agenda_minical($i) {
     $une_date = array_shift($args); // une date comme balise
     $sinon = array_shift($args);
     if (!$une_date) return $sinon;
-    $type = 'mini';
+    $type = 'minical';
     $agenda = agenda_memo(0);
     $evt = array();
     foreach (($args ? $args : array_keys($agenda)) as $k) {  
