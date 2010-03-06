@@ -105,11 +105,12 @@
 [(#SPIP_VERSION|match{'2.1.0'}|oui)
 	<fieldset>
 		<legend><:contact:configuration_champs_message:></legend>
+		[<p class="attention">(#VAL{'PORTE_PLUME_PUBLIC'}|lire_define|non)<:contact:configuration_barre_impossible:></p>]
 		<ul>
 			<li class="choix baisser">
 				<p class="explication"><:contact:configuration_champs_message_explication:></p>
 				<div>
-					<input type="radio" name="barre" id="no_b" class="radio" value="no_barre"[ checked="checked"(#ENV{barre}|=={no_barre}|oui)] />
+					<input type="radio" name="barre" id="no_b" class="radio" value="no_barre"[ checked="checked"(#ENV{barre}|=={no_barre}|ou{[(#CONFIG{contact/barre}|non)]}|oui)] />
 					<label for="no_b"><:contact:configuration_no_barre:></label>
 				</div>
 				<div>
@@ -117,13 +118,13 @@
 					<label for="no_p"><:contact:configuration_no_previsualisation:></label>
 				</div>
 				<div>
-					<input type="radio" name="barre" id="b" class="radio" value=""[ checked="checked"(#ENV{barre}|non)] />
+					<input type="radio" name="barre" id="b" class="radio" value=""[ checked="checked"(#ENV{barre}|non|et{[(#VAL{mail}|in_array{#CONFIG{contact/obligatoires,#ARRAY}}|oui)]})] />
 					<label for="b"><:contact:configuration_barre_oui:></label>
 				</div>
 			</li>
 		</ul>
 	</fieldset>
-]	
+]
 	<fieldset>
 		<legend><:contact:configuration_pj:></legend>
 		<ul class="decaler baisser10">

@@ -21,6 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_mail' => 'Mail',
 	'champ_impose' => 'champ impos&eacute;',
 
+	'configuration_barre_impossible' => 'Un autre plugin interdit l\'usage du porte-plume dans l\'espace public, les r&eacute;glages ci-dessous seront sans effets.';
 	'configuration_barre_oui' => 'Afficher la barre typo compl&egrave;te.',
 	'configuration_no_previsualisation' => 'Afficher la barre typo sans le bouton de pr&eacute;visualisation.',
 	'configuration_no_barre' => 'Ne pas proposer de barre typo.',
