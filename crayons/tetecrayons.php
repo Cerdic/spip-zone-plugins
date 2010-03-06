@@ -177,14 +177,24 @@ function balise_EDIT($p) {
 	// #EDIT{meta-descriptif_site} #EDIT{nom_site} et #EDIT{email_webmaster}
 	if(preg_match('/meta-(.*)\'/',$label,$meta)){
 		if(in_array($meta[1],array('descriptif_site','nom_site','email_webmaster'))){
-			$is_meta = true;
-			$meta = $meta[1];
+			$type = 'meta';
+			$label= 'valeur';
+			$primary = $meta[1];
+			$p->code = "classe_boucle_crayon('"
+				. $type
+				."',"
+				.sinon($label,"''")
+				.","
+				. $primary
+				.").' '";
+			$p->interdire_scripts = false;
+			return $p;
 		}
 	}
 
 	$i_boucle = $p->nom_boucle ? $p->nom_boucle : $p->id_boucle;
-	// #EDIT hors boucle ou pas sur une meta ? ne rien faire
-	if ((!$type = ($p->boucles[$i_boucle]->type_requete)) && !$is_meta) {
+	// #EDIT hors boucle? ne rien faire
+	if (!$type = ($p->boucles[$i_boucle]->type_requete)) {
 		$p->code = "''";
 		$p->interdire_scripts = false;
 		return $p;
@@ -194,28 +204,21 @@ function balise_EDIT($p) {
 	if ($distant = $p->boucles[$i_boucle]->sql_serveur)
 		$type = $distant.'__'.$type;
 
-	// Comportement derogatoire sur les metas
-	if ($is_meta) {
-		$type = 'meta';
-		$label= 'valeur';
-		$primary = $meta;
-	}
 	// le compilateur 1.9.2 ne calcule pas primary pour les tables secondaires
 	// il peut aussi arriver une table sans primary (par ex: une vue)
-	else if(!($primary = $p->boucles[$i_boucle]->primary)){
+	if(!($primary = $p->boucles[$i_boucle]->primary)){
 		include_spip('inc/vieilles_defs'); # 1.9.2 pour trouver_def_table
 		list($nom, $desc) = trouver_def_table(
 			$p->boucles[$i_boucle]->type_requete, $p->boucles[$i_boucle]);
 		$primary = $desc['key']['PRIMARY KEY'];
 	}
 
-	if(!$is_meta){
-		$primary = explode(',',$primary);
-		$id = array();
-		foreach($primary as $key)
-			$id[] = champ_sql(trim($key),$p);
-		$primary = implode(".'-'.",$id);
-	}
+	$primary = explode(',',$primary);
+	$id = array();
+	foreach($primary as $key)
+		$id[] = champ_sql(trim($key),$p);
+	$primary = implode(".'-'.",$id);
+
 	$p->code = "classe_boucle_crayon('"
 		. $type
 		."',"
