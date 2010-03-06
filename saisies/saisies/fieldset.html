@@ -8,7 +8,7 @@
 		
 		[(#ENV{saisies}|is_array|oui)
 		<ul [class="(#GET{pliable})[ (#GET{plie})]"]>
-			#INCLURE{fond=inclure/generer_saisies, env, saisies=#ENV{saisies}}
+			#INCLURE{fond=#ENV{fond_generer,"inclure/generer_saisies"}, env, saisies=#ENV{saisies}}
 		</ul>
 		]
 	</fieldset>
