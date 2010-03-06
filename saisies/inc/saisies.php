@@ -63,19 +63,33 @@ function saisies_lister_champs($contenu){
  * Cherche une saisie par son nom et renvoie soit la saisie, soit son chemin
  *
  * @param array $saisies Un tableau décrivant les saisies
- * @param string $nom Le nom de la saisie à chercher
+ * @param unknown_type $nom_ou_chemin Le nom de la saisie à chercher ou le chemin sous forme d'une liste de clés
  * @param bool $retourner_chemin Indique si on retourne non pas la saisie mais son chemin
  * @return array Retourne soit la saisie, soit son chemin, soit null
  */
-function saisies_chercher($saisies, $nom, $retourner_chemin=false){
-	if (is_array($saisies) and $nom){
-		foreach($saisies as $cle => $saisie){
-			$chemin = array($cle);
-			if ($saisie['options']['nom'] == $nom)
-				return $retourner_chemin ? $chemin : $saisie;
-			elseif ($saisie['saisies'] and is_array($saisie['saisies']) and ($retour = saisies_chercher($saisie['saisies'], $nom, $retourner_chemin))){
-				return $retourner_chemin ? array_merge($chemin, $retour) : $retour;
+function saisies_chercher($saisies, $nom_ou_chemin, $retourner_chemin=false){
+	if (is_array($saisies) and $nom_ou_chemin){
+		if (is_string($nom_ou_chemin)){
+			$nom = $nom_ou_chemin;
+			foreach($saisies as $cle => $saisie){
+				$chemin = array($cle);
+				if ($saisie['options']['nom'] == $nom)
+					return $retourner_chemin ? $chemin : $saisie;
+				elseif ($saisie['saisies'] and is_array($saisie['saisies']) and ($retour = saisies_chercher($saisie['saisies'], $nom, $retourner_chemin))){
+					return $retourner_chemin ? array_merge($chemin, array('saisies'), $retour) : $retour;
+				}
 			}
+		}
+		elseif (is_array($nom_ou_chemin)){
+			$chemin = $nom_ou_chemin;
+			$saisie = $saisies;
+			// On vérifie l'existence quand même
+			foreach ($chemin as $cle){
+				$saisie = $saisie[$cle];
+			}
+			// Si c'est une vraie saisie
+			if ($saisie['saisie'] and $saisie['options']['nom'])
+				return $retourner_chemin ? $chemin : $saisie;
 		}
 	}
 	
@@ -86,12 +100,12 @@ function saisies_chercher($saisies, $nom, $retourner_chemin=false){
  * Supprimer une saisie dont on donne le nom
  *
  * @param array $saisies Un tableau décriant les saisies
- * @param string $saisie Le nom de la saisie à supprimer
+ * @param unknown_type $nom_ou_chemin Le nom de la saisie à supprimer ou son chemin sous forme d'une liste de clés
  * @return array Retourne le tableau modifié décrivant les saisies
  */
-function saisies_supprimer($saisies, $saisie){
+function saisies_supprimer($saisies, $nom_ou_chemin){
 	// Si la saisie n'existe pas, on ne fait rien
-	if ($chemin = saisies_chercher($saisies, $saisie, true)){
+	if ($chemin = saisies_chercher($saisies, $nom_ou_chemin, true)){
 		// La position finale de la saisie
 		$position = array_pop($chemin);
 	
@@ -107,6 +121,62 @@ function saisies_supprimer($saisies, $saisie){
 	}
 	
 	return $saisies;
+}
+
+/*
+ * Insère une saisie à une position donnée
+ * 
+ * @param array $saisies Un tableau décrivant les saisies
+ * @param array $saisie La saisie à insérer
+ * @param array $position La position où insérer la saisie
+ * @return array Retourne le tableau modifié des saisies
+ */
+function saisies_inserer($saisies, $saisie, $position=array()){
+	
+}
+
+/*
+ * Vérifier tout un formulaire tel que décrit avec les Saisies
+ * @param array $formulaire Le contenu d'un formulaire décrit dans un tableau de Saisies
+ * @return array Retourne un tableau d'erreurs
+ */
+function saisies_verifier($formulaire){
+	include_spip('inc/verifier');
+	$erreurs = array();
+	$verif_fonction = charger_fonction('verifier','inc',true);
+	
+	$saisies = saisies_lister_par_nom($formulaire);
+	foreach ($saisies as $saisie){
+		$obligatoire = $saisie['options']['obligatoire'];
+		$champ = $saisie['options']['nom'];
+		$verifier = $saisie['verifier'];
+		
+		// Si le nom du champ est un tableau indexé, il faut parser !
+		if (preg_match('/([\w]+)((\[[\w]+\])+)/', $champ, $separe)){
+			$valeur = _request($separe[1]);
+			preg_match_all('/\[([\w]+)\]/', $separe[2], $index);
+			// On va chercher au fond du tableau
+			foreach($index[1] as $cle){
+				$valeur = $valeur[$cle];
+			}
+		}
+		// Sinon la valeur est juste celle du nom
+		else
+			$valeur = _request($champ);
+		
+		// On regarde d'abord si le champ est obligatoire
+		if ($obligatoire and $obligatoire != 'non' and ($valeur == ''))
+			$erreurs[$champ] = _T('info_obligatoire');
+		
+		// On continue seulement si ya pas d'erreur d'obligation et qu'il y a une demande de verif
+		if (!$erreurs[$champ] and is_array($verifier) and $verif_fonction){
+			// Si le champ n'est pas valide par rapport au test demandé, on ajoute l'erreur
+			if ($erreur_eventuelle = $verif_fonction($valeur, $verifier['type'], $verifier['options']))
+				$erreurs[$champ] = $erreur_eventuelle;
+		}
+	}
+	
+	return $erreurs;
 }
 
 /*
@@ -192,50 +262,6 @@ function saisies_generer_html($saisie, $env=array()){
 		$contexte
 	);
 	
-}
-
-/*
- * Vérifier tout un formulaire tel que décrit avec les Saisies
- * @param array $formulaire Le contenu d'un formulaire décrit dans un tableau de Saisies
- * @return array Retourne un tableau d'erreurs
- */
-function saisies_verifier($formulaire){
-	include_spip('inc/verifier');
-	$erreurs = array();
-	$verif_fonction = charger_fonction('verifier','inc',true);
-	
-	$saisies = saisies_lister_par_nom($formulaire);
-	foreach ($saisies as $saisie){
-		$obligatoire = $saisie['options']['obligatoire'];
-		$champ = $saisie['options']['nom'];
-		$verifier = $saisie['verifier'];
-		
-		// Si le nom du champ est un tableau indexé, il faut parser !
-		if (preg_match('/([\w]+)((\[[\w]+\])+)/', $champ, $separe)){
-			$valeur = _request($separe[1]);
-			preg_match_all('/\[([\w]+)\]/', $separe[2], $index);
-			// On va chercher au fond du tableau
-			foreach($index[1] as $cle){
-				$valeur = $valeur[$cle];
-			}
-		}
-		// Sinon la valeur est juste celle du nom
-		else
-			$valeur = _request($champ);
-		
-		// On regarde d'abord si le champ est obligatoire
-		if ($obligatoire and $obligatoire != 'non' and ($valeur == ''))
-			$erreurs[$champ] = _T('info_obligatoire');
-		
-		// On continue seulement si ya pas d'erreur d'obligation et qu'il y a une demande de verif
-		if (!$erreurs[$champ] and is_array($verifier) and $verif_fonction){
-			// Si le champ n'est pas valide par rapport au test demandé, on ajoute l'erreur
-			if ($erreur_eventuelle = $verif_fonction($valeur, $verifier['type'], $verifier['options']))
-				$erreurs[$champ] = $erreur_eventuelle;
-		}
-	}
-	
-	return $erreurs;
 }
 
 /**
