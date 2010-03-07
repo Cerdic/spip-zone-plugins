@@ -64,11 +64,6 @@
     0 => '\'Un modele <modeleinexistant|lien=[->http://www.spip.net]>\'',
     1 => 'Un modele <modeleinexistant|lien=[->http://www.spip.net]>',
   ),
-  7 => 
-  array (
-    0 => '\'tito\'',
-    1 => 'titi',
-  ),
 );
 		return $essais;
 	}
