@@ -15,7 +15,7 @@
 	    	]<INCLURE{fond=formulaires/selecteur/articles}{selected=#ENV{parents_id}}{id_article=#ENV{id_parent}}{name=parents_id}{select=1}{rubriques=0}>
 	  	</li>
 	    <li class="editer_titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur]">
-	    	<label for="titre"><:agenda:evenement_titre:></label>
+	    	<label for="titre"><:seminaire:evenement_titre:></label>
 			<!--<em class="attention"><:seminaire:oubli_titre:></em>-->
 			[
 	    	<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>
@@ -54,7 +54,7 @@
 	    </fieldset></li>
 	    <li class="editer_lieu[ (#ENV**{erreurs}|table_valeur{lieu}|oui)erreur]">
 			<label for="lieu"><:agenda:evenement_lieu:></label>
-			<em class="attention">Par exemple : CMI - Salle 125</em>
+			<em class="attention"><:seminaire:exemple:></em>
 			[
 			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{lieu})</span>
 			]<input type='text' class='text' name='lieu' id='lieu' value="[(#ENV{lieu})]" />

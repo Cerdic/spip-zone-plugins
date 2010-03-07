@@ -2,6 +2,7 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	//pour le formulaire de séminaires
+	'evenement_titre'			 =>		'Titre de l&rsquo;expos&eacute;',
 	'name'						 => 	'Nom de l&rsquo;intervenant (Name)',
 	'origin'					 => 	'Institut d&rsquo;origine de l&rsquo;intervenant',
 	'abstract'					 => 	'Résumé',
@@ -9,13 +10,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lieu'						 =>		'Lieu',
 	'precisions_name'			 =>		'le nom sera affiché dans le calendrier et dans le mini calendrier',
 	'precisions_origin'			 =>		'N&rsquo;apparaît que dans les détails de l&rsquo;événement',
-	'precisions_abstract'		 =>		'Ne pas oublier les balises <math></math> si on veut afficher du LaTeX (ex : <math>$\frac{1}{2}$</math>)',
+	'precisions_abstract'		 =>		'pour mettre du code LATEX, ajoutez les balises <math> </math> en d&eacute;but et fin de texte (ex :  <math>La fraction $\frac{1}{2}$</math>)',
 	'precisions_notes'			 =>		'N&rsquo;apparaît que dans les détails de l&rsquo;événement',
 	'apreciser'					 =>		'A pr&eacute;ciser',
 	'plus'						 =>		'En savoir plus',
 	'a_venir'					 =>		'Les prochains s&eacute;minaires',
 	'attention_type'			 =>		'Le choix du type d&rsquo;&eacute;v&eacute;nement d&eacute;termine le tri qui lui sera appliqu&eacute;.',
 	'oubli_titre'				 =>		'Ne pas oublier de mettre le titre de l&rsquo;&eacute;v&eacute;nement',
+	'exemple'					 =>		'Par exemple : CMI - Salle R164'
 	
 	//pour les groupes de mots clés
 	'mots_categorie_kitcnrs'	 => 	'Les mots clés à affecter aux articles pour que les événements soient encore mieux triés',
