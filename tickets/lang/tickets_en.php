@@ -114,6 +114,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ticket' => 'Bug report',
 	'ticket_enregistre' => 'The ticket has been saved.',
 	'tickets' => 'Bug reports',
+	'tickets_sur_inscription' => "
+		Ticket report or comment only available for registered users.
+	",
 	'titre' => 'Tickets, bug tracking',
 	'titre_liste' => 'List of the bug reports',
 	'tous_tickets_ouverts' => 'All opened tickets',
