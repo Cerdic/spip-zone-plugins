@@ -5,7 +5,7 @@ function formulaires_contact_charger_dist($id_auteur='',$tracer=''){
 
 	$valeurs['destinataire'] = array();
 	$valeurs['choix_destinataires'] = '';
-	
+
 	// La liste dans laquelle on pourra éventuellement choisir
 	$choix_destinataires = ($tmp = lire_config('contact/choix_destinataires')) ? $tmp : array();
 	$choix_destinataires = array_map('intval',$choix_destinataires);
@@ -17,9 +17,9 @@ function formulaires_contact_charger_dist($id_auteur='',$tracer=''){
 		if(!is_array($id_auteur)){
 			$id_auteur = explode(',',$id_auteur);
 			if(!is_numeric($id_auteur[0]))$id_auteur=array();
-		}	
+		}
 	}
-	
+
 	$nb_d = count($choix_destinataires);
 	// Rien n'a été défini, on utilise l'auteur 1
 	if ($nb_d == 0){
@@ -27,7 +27,7 @@ function formulaires_contact_charger_dist($id_auteur='',$tracer=''){
 	}else{
 		$valeurs['destinataire'] = $choix_destinataires;
 	}
-	
+
 	if ($type_choix == 'tous_ou' and $id_auteur){
 		$valeurs['destinataire'] = $id_auteur;
 	}else if ($type_choix == 'tous_et' and $id_auteur){
@@ -39,13 +39,13 @@ function formulaires_contact_charger_dist($id_auteur='',$tracer=''){
 		if(count($c_d)>1){
 			$valeurs['choix_destinataires'] = $c_d;
 		}else{
-			$valeurs['destinataire'] = $c_d;			
+			$valeurs['destinataire'] = $c_d;
 		}
 	}else if ($type_choix == 'un_ou' or $type_choix == 'plusieurs_ou'){
 		if(count($id_auteur)>1){
 			$valeurs['choix_destinataires'] = $id_auteur;
 		}elseif(count($id_auteur)==1){
-			$valeurs['destinataire'] = $id_auteur;			
+			$valeurs['destinataire'] = $id_auteur;
 		}elseif(count($valeurs['destinataire'])>1){
 			$valeurs['choix_destinataires'] = $valeurs['destinataire'];
 		}
@@ -54,11 +54,11 @@ function formulaires_contact_charger_dist($id_auteur='',$tracer=''){
 
 	// Les infos supplémentaires
 	$champs_possibles = contact_infos_supplementaires();
-	$champs_mini_config = array('mail', 'sujet', 'texte');
-	
+	$champs_mini_config = array('mail', 'sujet', 'contact_texte');
+
 		$champs_choisis = lire_config('contact/champs',$champs_mini_config);
-	
-		// On envoie un talbeau contenant tous les champs choisis et leur titre
+
+		// On envoie un tableau contenant tous les champs choisis et leur titre
 		// DANS L'ORDRE de ce qu'on a récupéré de CFG
 		$champs_choisis = array_flip($champs_choisis);
 		foreach ($champs_choisis as $cle => $valeur){
@@ -73,14 +73,14 @@ function formulaires_contact_charger_dist($id_auteur='',$tracer=''){
 				$champs_choisis
 			)
 		);
-	
-	
+
+
 		$valeurs['obligatoires'] = $champs_obligatoires = lire_config('contact/obligatoires',$champs_mini_config);
-	
+
 	// Infos sur l'ajout de pièces jointes ou non
 	$autoriser_pj = (lire_config('contact/autoriser_pj') == 'true');
 	$valeurs['autoriser_pj'] = $autoriser_pj;
-	
+
 	// Si on autorise les pièces jointes, on regarde quel est le nombre max de pj.
 	if ($autoriser_pj) {
 		$nb_max_pj = lire_config('contact/nb_max_pj');
@@ -88,7 +88,7 @@ function formulaires_contact_charger_dist($id_auteur='',$tracer=''){
 		// On pré-remplit un tableau pour pouvoir boucler dessus le bon nombre de fois
 		$valeurs['pj_fichiers'] = array_fill(0, $nb_max_pj, '');
 	}
-	
+
 	//Sert à stocker les informations des fichiers plus ou moins bien uploadés lorsqu'il y a des erreurs.
 	$valeurs['pj_nom_enregistrees'] = array();
 	$valeurs['pj_cle_enregistrees'] = array();
@@ -114,8 +114,8 @@ function formulaires_contact_verifier_dist($id_auteur='',$tracer=''){
 		$erreurs['mail'] = _T("info_obligatoire");
 	elseif(!email_valide($adres))
 		$erreurs['mail'] = _T('form_prop_indiquer_email');
-	
-	$champs_mini_config = array('mail', 'sujet', 'texte');
+
+	$champs_mini_config = array('mail', 'sujet', 'contact_texte');
 	$champs_choisis = lire_config('contact/champs',$champs_mini_config );
 	$champs_obligatoires = lire_config('contact/obligatoires',$champs_mini_config);
 	if (is_array($champs_choisis) and is_array($champs_obligatoires)){
@@ -124,24 +124,24 @@ function formulaires_contact_verifier_dist($id_auteur='',$tracer=''){
 				$erreurs[$champ] = _T("info_obligatoire");
 		}
 	}
-	
+
 	if(!(strlen(_request('sujet'))>3))
 		$erreurs['sujet'] = _T('forum_attention_trois_caracteres');
 
 	$texte_min = !defined('_TEXTE_MIN')?10:_TEXTE_MIN;
-	if(!(strlen(_request('texte'))>$texte_min))
-		$erreurs['texte'] = _T('contact:forum_attention_nbre_caracteres',array('nbre_caract'=>$texte_min));
-	
+	if(!(strlen(_request('contact_texte'))>$texte_min))
+		$erreurs['contact_texte'] = _T('contact:forum_attention_nbre_caracteres',array('nbre_caract'=>$texte_min));
+
 	if ($nobot=_request('nobot'))
 		$erreurs['nobot'] = 'Vous êtes un robot. Méchant robot.';
-	
+
 	// On s'occupe des pièces jointes.
 	$pj_fichiers = $_FILES['pj_fichiers'];
 
 	//Si le répertoire temporaire n'existe pas encore, il faut le créer.
 	$repertoire_temp_pj = _DIR_TMP.'/contact_pj/';
 	if (!is_dir($repertoire_temp_pj)) mkdir($repertoire_temp_pj);
-	
+
 	//Pour les nouvelles pj uploadées
 	if ($pj_fichiers != null) {
 		foreach ($pj_fichiers['name'] as $cle => $nom_pj) {
@@ -152,8 +152,8 @@ function formulaires_contact_verifier_dist($id_auteur='',$tracer=''){
 				//On vérifie qu'un fichier ne porte pas déjà le même nom, sinon on lui donne un nom aléatoire + nom original
 				if (file_exists($repertoire_temp_pj.$nom_pj))
 					$nom_pj = $nom_pj.'_'.rand();
-				
-				//déplacement du fichier vers le dossier de réception temporaire	
+
+				//déplacement du fichier vers le dossier de réception temporaire
 				if (move_uploaded_file($pj_fichiers['tmp_name'][$cle], $repertoire_temp_pj.$nom_pj)) {
 					$infos_pj[$cle]['message'] = 'ajout fichier';
 					$infos_pj[$cle]['nom'] = $nom_pj;
@@ -166,13 +166,13 @@ function formulaires_contact_verifier_dist($id_auteur='',$tracer=''){
 			}
 		}
 	}
-	
+
 	//Pour les pj qui ont déjà été récupérées avec succes, on remet le tableau des informations sur les pj à jour
 	$pj_enregistrees_nom = _request('pj_enregistrees_nom');
 	$pj_enregistrees_mime = _request('pj_enregistrees_mime');
 	$pj_enregistrees_extension = _request('pj_enregistrees_extension');
 	$pj_enregistrees_vignette = _request('pj_enregistrees_vignette');
-	
+
 	if (is_array($pj_enregistrees_nom))
 		foreach ($pj_enregistrees_nom as $cle => $nom){
 			$infos_pj[$cle]['message'] = 'ajout fichier';
@@ -181,7 +181,7 @@ function formulaires_contact_verifier_dist($id_auteur='',$tracer=''){
 			$infos_pj[$cle]['extension'] = $pj_enregistrees_extension[$cle];
 			$infos_pj[$cle]['vignette'] = $pj_enregistrees_vignette[$cle];
 		}
-	
+
 	//Maintenant on vérifie s'il n'y a pas eu une suppression de fichiers
 	$nb_max_pj = lire_config('contact/nb_max_pj');
 	for ($cle=0 ; $cle<$nb_max_pj ; $cle++) {
@@ -194,24 +194,25 @@ function formulaires_contact_verifier_dist($id_auteur='',$tracer=''){
 			unset($infos_pj[$cle]);
 		}
 	}
-	
+
 	// Si on est pas dans une confirmation et qu'il n'y pas de vraies erreurs on affiche la prévisu du message
 	if (!_request('confirmer') AND !count($erreurs))
 		$erreurs['previsu']=' ';
-	
+
 	// Si on est pas dans une confirmation, on ajoute au contexte les infos des fichiers déjà téléchargés
 	if (!_request('confirmer'))
 		 $erreurs['infos_pj'] = $infos_pj;
-	
+
 	return $erreurs;
 }
 
 function formulaires_contact_traiter_dist($id_auteur='',$tracer=''){
-	
+
 	include_spip('base/abstract_sql');
-	
+	include_spip('inc/texte');
+
 	$infos = '';
-	
+
 	// On récupère à qui ça va être envoyé
 	$destinataire = _request('destinataire');
 	if (!is_array($destinataire))
@@ -226,15 +227,15 @@ function formulaires_contact_traiter_dist($id_auteur='',$tracer=''){
 	// S'il n'y a pas le plugin facteur, on met l'(es) adresse(s) sous forme de chaine de caractères.
 	if (!defined("_DIR_PLUGIN_FACTEUR"))
 		$mail = join(', ', $mail);
-	
+
 	// Les infos supplémentaires
 	$champs_possibles = contact_infos_supplementaires();
-	$champs_mini_config = array('mail', 'sujet', 'texte');
+	$champs_mini_config = array('mail', 'sujet', 'contact_texte');
 	$champs_choisis = lire_config('contact/champs',$champs_mini_config);
 	if (is_array($champs_choisis)){
 		foreach($champs_choisis as $champ){
 			if ($reponse_champ = _request($champ)){
-				if( ($champ=='mail') OR ($champ=='sujet') OR ($champ=='texte') ){
+				if( ($champ=='mail') OR ($champ=='sujet') OR ($champ=='contact_texte') ){
 					$posteur[$champ] = $reponse_champ;
 				}else{
 					$infos .= "\n".$champs_possibles[$champ]." : ".$reponse_champ;
@@ -255,34 +256,41 @@ function formulaires_contact_traiter_dist($id_auteur='',$tracer=''){
 			$inforigine= 'info trace non comprise';
 		}
 			$inforigine= _T('contact:inforigine')."\n".$inforigine."\n\n";
-		
+
 	}
-		
+
 	// horodatons
-	$horodatage = date("d / m / y à H:i:s");
+	$horodatage = affdate_heure (date ("Y-m-d H:i:s"));
 	$horodatage = "\n\n"._T('contact:horodatage', array('horodatage'=>$horodatage))."\n\n";
-	
-	$texte = $horodatage.$inforigine.$infos."\n\n".$posteur['texte'];
+
+	$texte = $horodatage.$inforigine.$infos."\n\n".$posteur['contact_texte'];
 	$nom_site = supprimer_tags(extraire_multi($GLOBALS['meta']['nom_site']));
 	$texte .= "\n\n-- "._T('envoi_via_le_site')." ".$nom_site." (".$GLOBALS['meta']['adresse_site']."/) --\n";
-	
+
+	// Texte a envoyer par mail, sans raccourcis SPIP
+	$texte_final = propre($texte);
+	// Sauvegarder un soupcon de liste dans le mail
+	$texte_final = preg_replace (array('/<li>/','/<\/li>/','/<\/ul>/'), array("- ","\n","\n"), $texte_final);
+	$texte_final = supprimer_tags($texte_final);
+
 	// On formate pour les accents
+	// Texte a mettre en base
 	$texte = filtrer_entites($texte);
-	
+
 	// On va vérifie s'il y a des pièces jointes
 	$pj_enregistrees_nom = _request('pj_enregistrees_nom');
 	$pj_enregistrees_mime = _request('pj_enregistrees_mime');
 	$pj_enregistrees_extension = _request('pj_enregistrees_extension');
 	$repertoire_temp_pj = _DIR_TMP.'/contact_pj/';
-	
+
 	// Si oui on les ajoute avec le plugin Facteur
 	if ($pj_enregistrees_nom != null) {
 		//On rajoute des sauts de ligne pour différencier du message.
-		$texte = array(
-			'texte' => $texte
+		$texte_final = array(
+			'texte' => $texte_final
 		);
 		foreach ($pj_enregistrees_nom as $cle => $nom_pj) {
-			$texte['pieces_jointes'][$cle] = array(
+			$texte_final['pieces_jointes'][$cle] = array(
 				'chemin' => $repertoire_temp_pj.$nom_pj,
 				'nom' => $nom_pj,
 				'encodage' => 'base64',
@@ -290,16 +298,9 @@ function formulaires_contact_traiter_dist($id_auteur='',$tracer=''){
 			);
 		}
 	}
-	
+
 	// Enregistrement des messages en base de données si on l'a demandé
 	if (lire_config('contact/sauvegarder_contacts')) {
-		//Où se trouve le texte du message ?
-		if ($pj_enregistrees_nom != null) {
-			$message = nl2br($texte['texte']);
-		}
-		else
-			$message = nl2br($texte);
-		
 		// Il s'agit d'un visiteur : on va donc l'enregistrer dans la table auteur pour garder son mail.
 		// Sauf s'il existe déjà.
 		$id_aut = sql_getfetsel(
@@ -315,7 +316,7 @@ function formulaires_contact_traiter_dist($id_auteur='',$tracer=''){
 					'statut' => 'contact'
 				)
 			);
-		
+
 		// Ensuite on ajoute le message dans la base
 		$id_message = sql_insertq(
 			'spip_messages',
@@ -325,11 +326,11 @@ function formulaires_contact_traiter_dist($id_auteur='',$tracer=''){
 				'type' => 'contac',
 				'id_auteur' => $id_aut,
 				'date_heure' => date('Y-m-d H:i:s'),
-				'texte' => $message,
+				'texte' => $texte,
 				'rv' => 'non'
 			)
 		);
-		
+
 		// S'il y a des pièces jointes on les ajoute aux documents de SPIP.
 		if ($pj_enregistrees_nom != null) {
 			//On charge la fonction pour ajouter le document là où il faut
@@ -338,7 +339,7 @@ function formulaires_contact_traiter_dist($id_auteur='',$tracer=''){
 				$id_doc = $ajouter_document($repertoire_temp_pj.$nom_pj, $nom_pj, 'message', $id_message, 'document', $id_document, $titrer=false);
 			}
 		}
-		
+
 		// On lie le message au(x) destinataire(s) concerné(s)
 		foreach ($destinataire as $id_destinataire) {
 			sql_insertq(
@@ -349,21 +350,26 @@ function formulaires_contact_traiter_dist($id_auteur='',$tracer=''){
 					'vu' =>'non')
 			);
 		}
-	
-		$memoire = generer_url_ecrire('contact_un_message', 'id_message='.$id_message);		
-		$texte .= "\n\n"._T('contact:consulter_memoire')."\n".$memoire;
+
+		$memoire = generer_url_ecrire('contact_un_message', 'id_message='.$id_message);
+		if ($pj_enregistrees_nom != null) {
+			$texte_final['texte'] .= "\n\n"._T('contact:consulter_memoire')."\n".$memoire;
+		}
+		else{
+			$texte_final .= "\n\n"._T('contact:consulter_memoire')."\n".$memoire;
+		}
 	}
 	// envoyer le mail maintenant
 	$envoyer_mail = charger_fonction('envoyer_mail','inc');
-	$envoyer_mail($mail, $posteur['sujet'], $texte, $posteur['mail'], "X-Originating-IP: ".$GLOBALS['ip']);
-		
+	$envoyer_mail($mail, $posteur['sujet'], $texte_final, $posteur['mail'], "X-Originating-IP: ".$GLOBALS['ip']);
+
 	// Maintenant que tout a été envoyé ou enregistré, s'il y avait des PJ il faut supprimer les fichiers
 	if ($pj_enregistrees_nom != null) {
 		foreach ($pj_enregistrees_nom as $cle => $nom_pj) {
 			unlink($repertoire_temp_pj.$nom_pj);
 		}
 	}
-	
+
 	$message = _T('contact:succes', array("equipe_site" => $nom_site));
 	return array('message_ok'=>$message);
 }

@@ -3,6 +3,8 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+	'aucun_message' => 'Aucun message &agrave; afficher',
+
 	'champ_obligatoire' => 'Obligatoire ?',
 	'champ_prenom' => 'Pr&eacute;nom',
 	'champ_nom' => 'Nom',

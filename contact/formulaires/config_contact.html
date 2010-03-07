@@ -7,7 +7,7 @@
 <form method="post" action="#ENV{action}">
 <div>
 #ACTION_FORMULAIRE{#ENV{action}}
-	
+
 	<fieldset>
 		<legend><:contact:configuration_destinataires:></legend>
 		<ul class="decaler">
@@ -47,7 +47,7 @@
 				<div class="non">
 					<input type="radio" name="type_choix" id="un_et" class="radio" value="un_et"[ checked="checked"(#ENV{type_choix}|=={un_et}|oui)] />
 					<label for="un_et"><:contact:configuration_destinataires_un_et:></label>
-				</div>				
+				</div>
 				<div class="plus">
 					<input type="radio" name="type_choix" id="plusieurs" class="radio" value="plusieurs"[ checked="checked"(#ENV{type_choix}|=={plusieurs}|oui)] />
 					<label for="plusieurs"><:contact:configuration_destinataires_plusieurs:></label>
@@ -64,11 +64,11 @@
 					<input type="checkbox" name="c" id="c" class="checkbox" value="c"[ (#ENV{c}|=={c}|oui)checked="checked"] />
 					<label for="c"><:contact:preselection:></label>
 				<br class="nettoyeur" />
-				</div>				
+				</div>
 			</li>
 		</ul>
 	</fieldset>
-	
+
 	[(#REM)
 		On récupère les champs possibles
 		Mais on divise en deux :
@@ -83,13 +83,13 @@
 		<ul id="editer_champs" class="decaler baisser10">
 			<BOUCLE_champs(POUR){tableau #GET{champs}}>
 			<li class="choix editer_champ agrondir img#COMPTEUR_BOUCLE" title="<:contact:deplacement_possible:>">
-				[(#CLE|match{mail|sujet|texte}|oui)
-				<input type="text" name="champs[(#VAL{&#91;&#93;}|html_entity_decode)]" id="champ_#CLE" class="text" style="width:29px;" value="#CLE" readonly='readonly' />								
+				[(#CLE|match{mail|sujet|contact_texte}|oui)
+				<input type="text" name="champs[(#VAL{&#91;&#93;}|html_entity_decode)]" id="champ_#CLE" class="text" style="width:29px;" value="#CLE" readonly='readonly' />
 				<input type="text" name="obligatoires[(#VAL{&#91;&#93;}|html_entity_decode)]" id="obli_#CLE" class="text" style="width:29px;" value="#CLE" readonly='readonly' />
 				<label for="champ_#CLE">#VALEUR</label>
 				<label for="obli_#CLE"><em><:contact:champ_impose:></em></label>
-				<br class="nettoyeur" />				
-				][(#CLE|match{mail|sujet|texte}|non)
+				<br class="nettoyeur" />
+				][(#CLE|match{mail|sujet|contact_texte}|non)
 				<input type="checkbox" name="champs[(#VAL{&#91;&#93;}|html_entity_decode)]" id="champ_#CLE" class="checkbox" value="#CLE"[ (#CLE|in_array{#ENV{champs,#ARRAY}}|oui)checked="checked"] />
 				<label for="champ_#CLE">#VALEUR</label>
 				<div class="aerer2">
@@ -97,7 +97,7 @@
 					<label for="obli_#CLE"><:contact:champ_obligatoire:></label>
 				<br class="nettoyeur" />
 				</div>
-				]				
+				]
 			</li>
 			</BOUCLE_champs>
 		</ul>
@@ -133,7 +133,7 @@
 				[(#PLUGIN{facteur}|oui)
 				<input type="checkbox" name="autoriser_pj" id="autoriser_pj" class="checkbox" value="true" [checked="checked"(#ENV{autoriser_pj}|=={true}|oui)] />
 				<label for="autoriser_pj"><:contact:configuration_pj_autoriser:></label>
-			
+
 				<div>
 					<label for="nb_max_pj"><:contact:configuration_pj_nb_max:></label>
 					<select name="nb_max_pj" id="nb_max_pj">
@@ -145,25 +145,25 @@
 					</select>
 				</div>
 				]
-				
+
 				[(#PLUGIN{facteur}|non)
 				<p class="explication"><:contact:configuration_pj_facteur_absent:></p>
 				]
 			</li>
 		</ul>
 	</fieldset>
-	
+
 	<fieldset>
 		<legend><:contact:sauv_message:></legend>
 		<ul class="decaler10 baisser10">
 			<li class="choix editer_champ">
-				<p class="explication"><:contact:sauv_message_explication:></p>				
+				<p class="explication"><:contact:sauv_message_explication:></p>
 				<input type="checkbox" name="sauvegarder_contacts" id="sauvegarder_contacts" class="checkbox" value="true" [checked="checked"(#ENV{sauvegarder_contacts}|=={true}|oui)] />
 				<label for="sauvegarder_contacts"><:contact:sauv_message_ok:></label>
 			</li>
 		</ul>
-	</fieldset>	
-	
+	</fieldset>
+
 	<fieldset>
 		<legend><:contact:configuration_intro:></legend>
 		<ul>
@@ -173,10 +173,10 @@
 			</li>
 		</ul>
 	</fieldset>
-	
+
 	<div class="boutons">
-		<input type="submit" name="_cfg_ok" value="<:valider:>" />		
-		<input type="submit" name="_cfg_delete" value="<:effacer:>" />		
+		<input type="submit" name="_cfg_ok" value="<:valider:>" />
+		<input type="submit" name="_cfg_delete" value="<:effacer:>" />
 	</div>
 </div></form>
 </div>
@@ -187,7 +187,7 @@
 			if ($('div.non input.radio').is(':checked'))
 				$(this).hide();
 		});
-		
+
 		$('div.plus input.radio')
 			.click(function(){
 				if ($(this).is(':checked'))
@@ -200,14 +200,14 @@
 					$('div.selection input.checkbox')
 						.attr('checked','');
 					$('div.selection')
-						.slideUp();						
+						.slideUp();
 			});
-		
+
 		$('li.editer_champ div').each(function(){
 			if (!$(this).siblings(':checkbox').is(':checked'))
 				$(this).hide();
 		});
-				
+
 		$('li.editer_champ input.checkbox')
 			.click(function(){
 				if ($(this).is(':checked'))
