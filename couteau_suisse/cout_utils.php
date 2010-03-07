@@ -200,7 +200,7 @@ function ecrire_fichier_en_tmp(&$infos_fichiers, $type) {
 	$code = str_replace("\n".'if(strlen($foo="")) ',"\n\$foo=''; //", $code);
 	// ... en avant le code !
 	$fichier_dest = _DIR_CS_TMP . "mes_$type.php";
-cs_log("ecrire_fichier_en_tmp($type) : lgr=".strlen($code))." pour $fichier_dest";
+if(defined('_LOG_CS')) cs_log("ecrire_fichier_en_tmp($type) : lgr=".strlen($code))." pour $fichier_dest";
 	if(!ecrire_fichier($fichier_dest, '<'."?php\n// Code d'inclusion pour le plugin 'Couteau Suisse'\n++\$GLOBALS['cs_$type'];\n$code?".'>', true))
 		cs_log("ERREUR ECRITURE : $fichier_dest");
 }
@@ -220,7 +220,7 @@ function set_cs_metas_pipelines(&$infos_pipelines) {
 		$controle .= $cs_metas_pipelines[$pipe] = $code;
 	}
 	$nb = count($infos_pipelines);
-cs_log("$nb pipeline(s) actif(s) : strlen=".strlen($controle));
+if(defined('_LOG_CS')) cs_log("$nb pipeline(s) actif(s) : strlen=".strlen($controle));
 	ecrire_fichier(_DIR_CS_TMP . "pipelines.php", 
 		'<'."?php\n// Code de controle pour le plugin 'Couteau Suisse' : $nb pipeline(s) actif(s)\n{$controle}?".'>');
 }
@@ -518,9 +518,10 @@ $temp_js\n// --></script>\n");
 	ecrire_fichier_en_tmp($infos_fichiers, 'fonctions');
 	// installation de cs_metas_pipelines[] et ecriture du fichier de controle
 	set_cs_metas_pipelines($infos_pipelines);
+	ecrire_fichier(_DIR_CS_TMP.'header.html', "<!-- Configuration de controle pour le plugin 'Couteau Suisse' -->\n\n$cs_metas_pipelines[header]");
 }
 
-function cs_fermer_parentheses($expr) { 
+function cs_fermer_parentheses($expr) {
 	return $expr . str_repeat(')', substr_count($expr, '(') - substr_count($expr, ')'));
 }
 

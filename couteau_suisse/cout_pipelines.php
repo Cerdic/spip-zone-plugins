@@ -97,17 +97,9 @@ function couteau_suisse_pre_boucle($flux){
 function couteau_suisse_header_prive($flux_){
 	global $cs_metas_pipelines;
 	$flux = '';
-	if(isset($cs_metas_pipelines['header_prive']))
-		eval($cs_metas_pipelines['header_prive']);
-	if(isset($cs_metas_pipelines['header'])) {
-		// si une compilation est necessaire...
-		if(strpos($cs_metas_pipelines['header'], '<cs_html>')!==false) cs_compile_header();
-		$flux .= $cs_metas_pipelines['header'];
-	}
-	$flux = strlen(trim($flux))
-		?"\n<!-- Debut header du Couteau Suisse -->\n$flux<!-- Fin header du Couteau Suisse -->\n\n"
-		:$flux =  "\n<!-- Rien dans les metas du Couteau Suisse -->\n\n";
-	return $flux_.$flux;
+	if(isset($cs_metas_pipelines['header_prive'])) eval($cs_metas_pipelines['header_prive']);
+	cs_compile_header($flux);
+	return $flux_ . $flux;
 }
 
 
@@ -115,26 +107,18 @@ function couteau_suisse_header_prive($flux_){
  * PUBLIC *
  **********/
 
+function couteau_suisse_insert_head($flux_){
+	global $cs_metas_pipelines;
+	$flux = '';
+	if(isset($cs_metas_pipelines['insert_head'])) eval($cs_metas_pipelines['insert_head']);
+	cs_compile_header($flux);
+	return $flux_ . $flux;
+}
+
 function couteau_suisse_affichage_final($flux){
 	eval_metas_pipelines($flux, 'affichage_final');
 	// nettoyage des separateurs et differentes sentinelles
 	return preg_replace(',<span class=\'csfoo \w+\'></span>,', '', $flux);
-}
-
-function couteau_suisse_insert_head($flux_){
-	global $cs_metas_pipelines;
-	$flux = '';
-	if(isset($cs_metas_pipelines['insert_head']))
-		eval($cs_metas_pipelines['insert_head']);
-	if(isset($cs_metas_pipelines['header'])) {
-		// si une compilation est necessaire...
-		if(strpos($cs_metas_pipelines['header'], '<cs_html>')!==false) cs_compile_header();
- 		$flux .= $cs_metas_pipelines['header'];
-	}
-	$flux = strlen(trim($flux))
-		?"\n<!-- Debut header du Couteau Suisse -->\n$flux<!-- Fin header du Couteau Suisse -->\n\n"
-		:$flux =  "\n<!-- Rien dans les metas du Couteau Suisse -->\n\n";
-	return $flux_.$flux;
 }
 
 /********
@@ -260,13 +244,24 @@ if(defined('_LOG_CS')) cs_log(" -- compilation d'un header. Code CSS : $matches[
 }
 
 // recherche et compilation par SPIP du contenu d'un fichier .html : <cs_html>contenu</cs_html>
-function cs_compile_header() {
+function cs_compile_header(&$flux) {
+//if(defined('_LOG_CS')) cs_log(" -- recherche de compilations necessaires du header.");
 	global $cs_metas_pipelines;
-//if(defined('_LOG_CS')) cs_log(" -- recherche de compilations CSS necessaires.");
-	$cs_metas_pipelines['header'] = preg_replace_callback(',<cs_html>(.*)</cs_html>,Ums', 'cs_compile_header_callback', $cs_metas_pipelines['header']);
-	// sauvegarde en metas !
-	ecrire_meta('tweaks_pipelines', serialize($cs_metas_pipelines));
-	ecrire_metas();
+	if(isset($cs_metas_pipelines['header'])) {
+		$header = &$cs_metas_pipelines['header'];
+		if(strpos($header, '<cs_html>')!==false) {
+			$header = preg_replace_callback(',<cs_html>(.*)</cs_html>,Ums', 'cs_compile_header_callback', $header);
+			// sauvegarde en metas
+			ecrire_meta('tweaks_pipelines', serialize($cs_metas_pipelines));
+			ecrire_metas();
+			ecrire_fichier(_DIR_CS_TMP.'header.html', "<!-- Configuration de controle pour le plugin 'Couteau Suisse' -->\n\n$header");
+		}
+		$flux .= $header;
+	}
+	$flux = strlen(trim($flux))
+		?"\n<!-- Debut header du Couteau Suisse -->\n$flux<!-- Fin header du Couteau Suisse -->\n\n"
+		:"\n<!-- Rien dans les metas du Couteau Suisse -->\n\n";
+
 }
 
 /**

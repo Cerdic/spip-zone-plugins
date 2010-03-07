@@ -151,7 +151,7 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 		}
 	}
 	if (strpos($descrip, "<:")!==false) {
-		if(!$outil['perso'])
+		if(!isset($outil['perso']))
 			// lames natives : reconstitution d'une description eventuellement morcelee
 			// exemple : <:mon_outil:3:> est remplace par _T('couteauprive:mon_outil:description3')
 			$descrip = preg_replace_callback(',<:([a-z_][a-z0-9_-]*):([0-9]*):>,i', 

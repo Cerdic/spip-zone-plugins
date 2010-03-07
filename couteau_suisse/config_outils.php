@@ -266,7 +266,7 @@ add_variable( array(
 add_outil( array(
 	'id' => 'masquer',
 	'categorie' => 'spip',
-	'auteur' => 'Nicolas Hoizey',
+	'auteur' => 'Nicolas Hoizey, St&eacute;phanie Caron',
 	'pipeline:pre_boucle' => 'masquer_pre_boucle',
 	// fichier distant pour le pipeline
 	'distant' => 'http://zone.spip.org/trac/spip-zone/export/35809/_plugins_/masquer/masquer_pipelines.php',
@@ -375,6 +375,14 @@ add_variables( array(
 	'check' => 'couteauprive:cs_distant_outils_off',
 	'defaut' => 0,
 	'code:%s' => "define('_CS_PAS_D_OUTIL_DISTANT','oui');",
+	'commentaire' => 'fct_distant_outils_off();
+function fct_distant_outils_off(){
+	global $outils; $s="";
+	foreach($outils as $o) if(isset($o["fichiers_distants"])) $s.=($s?" - ":"")."[.->$o[id]]";
+	if(!$s) return "";
+	$s=_T("couteauprive:outils_".(%s?"desactives":"concernes")).$s;
+	return "<q1><q3>$s</q3></q1>";
+}',
 ));
 add_outil( array(
 	'id' => 'cs_comportement',

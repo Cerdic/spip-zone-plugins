@@ -514,6 +514,8 @@ Note : les paquets <code>.zip</code> n\'&eacute;tant pas reconstruits instantan&
 	'outils_caches' => 'Outils cach&eacute;s :',
 	'outils_cliquez' => 'Cliquez sur le nom des outils ci-dessus pour afficher ici leur description.',
 	'outils_inactifs' => 'Outil inactifs :',
+	'outils_concernes' => 'Sont concern&eacute;s : ',
+	'outils_desactives' => 'Sont d&eacute;sactiv&eacute;s : ',
 	'outils_liste' => 'Liste des outils du Couteau Suisse',
 	'outils_non_parametrables' => 'Non param&eacute;trables&nbsp;:',
 	'outils_permuter_gras1' => 'Permuter les outils en gras',
