@@ -61,7 +61,8 @@ TODO:
 		[poster="#PLAYER_VIDEOS_DIR(#GET{chemin_poster}|?{#GET{chemin_poster}})"
 		][autoplay="(#PLAYER_META_GET{autoplay}|?{true})"
 		][loop="(#PLAYER_META_GET{loop}|?{loop})"
-		]controls="controls">[<!-- (#REM)
+		][controls="(#PLAYER_META_GET{showplayer}|?{controls})"
+		][<!-- (#REM)
 		you must use `</source>` to avoid a closure bug in Firefox 3 / Camino 2! -->]
 	<source src="#PLAYER_VIDEOS_DIR[(#GET{chemin_fichier}|basename|replace{flv$,ogv})]" type="video/ogg">[<!--(#REM) Firefox native OGG video -->]</source>
 	<source src="#PLAYER_VIDEOS_DIR[(#GET{chemin_fichier}|basename|replace{flv$,mp4})]" type="video/mp4">[<!--(#REM) Safari / iPhone video    -->]</source>
@@ -73,13 +74,18 @@ TODO:
 	[endif]-->
 	[<!--(#REM)
 		non-IE QuickTime embed (hidden from IE): the self-closing comment tag allows non-IE browsers to
-		see the HTML whilst being compatible with serving as XML -->
-	]<!--[if !IE]><!-->
+		see the HTML whilst being compatible with serving as XML
+	-->]<!--[if !IE]><!-->
 	<object width="#LARGEUR" height="#HAUTEUR" type="video/quicktime" data="#PLAYER_VIDEOS_DIR[(#GET{chemin_fichier}|basename|replace{flv$,mp4})]">
 	<!--<![endif]-->
 	<param name="src" value="#PLAYER_VIDEOS_DIR[(#GET{chemin_fichier}|basename|replace{flv$,mp4})]" />
-	<param name="showlogo" value="false" />
-	[<param name="autoplay" value="(#PLAYER_META_GET{autoplay}|?{true,false})" />
+	[<!--
+		QT : Afficher le logo 'Q' ? (true || false)
+	-->]<param name="showlogo" value="false" />
+	[<!--
+		QT : Afficher les boutons de controle ? (true || false)
+	-->][<param name="controller" value="(#PLAYER_META_GET{showplayer}|?{true,false})" />
+	][<param name="autoplay" value="(#PLAYER_META_GET{autoplay}|?{true,false})" />
 	][<!--(#REM) fallback to Flash -->
 	]<object width="#LARGEUR" height="#HAUTEUR" type="application/x-shockwave-flash"
 	[<!--(#REM)
@@ -94,7 +100,8 @@ TODO:
 			value="flv=[(#URL_DOCUMENT|url_absolue)]&amp;width=[(#LARGEUR|=={0}|?{320,#LARGEUR})]&amp;height=[(#HAUTEUR|=={0}|?{240,#HAUTEUR})]&amp;#PLAYER_FLV_FLASHVVARS[&amp;srturl=(#ENV{srturl})]" />
 		<param name="allowFullScreen" value="true" />
 		<param name="wmode" value="transparent" />
-		[<!--(#REM) fallback image. download links are below the video. warning: putting anything more than
+		[<param name="showplayer" value="(#PLAYER_META_GET{showplayer})" />
+		][<!--(#REM) fallback image. download links are below the video. warning: putting anything more than
 		     the fallback image in the fallback may trigger an iPhone OS3+ bug where the video will not play -->
 		]<img src="#PLAYER_VIDEOS_DIR[(#GET{chemin_fichier}|basename|replace{flv$,png})]" width="#LARGEUR" height="#HAUTEUR" alt="[(#TITRE)]"
 		     title="<:player:pas_de_lecteur_video:>"
