@@ -97,6 +97,7 @@ $GLOBALS['i18n_'._PLAYER_PREFIX.'_en'] = array(
 , '_blank' => "New window" 
 , '_self' => "Current window" 
 
-); //
+, 'pas_de_lecteur_video' => 'No video playback capabilities.'
 
-?>
+); 
+

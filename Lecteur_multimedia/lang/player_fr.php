@@ -95,6 +95,7 @@ $GLOBALS['i18n_'._PLAYER_PREFIX.'_fr'] = array(
 , '_blank' => "Nouvelle fen&ecirc;tre"
 , '_self' => "Fen&ecirc;tre courante"
 
+, 'pas_de_lecteur_video' => 'Pas de lecteur vid&eacute;o disponible.'
+
 ); //
 
-?>

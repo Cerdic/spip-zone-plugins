@@ -2,7 +2,7 @@
 
 	// player_fonctions.php
 
-	// $LastChangedRevision:$
+	// $LastChangedRevision$
 	// $LastChangedBy:$
 	// $LastChangedDate:$
 

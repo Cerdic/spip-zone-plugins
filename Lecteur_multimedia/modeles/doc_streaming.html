@@ -18,10 +18,10 @@
 	Placer les videos necessaires dans /videos de votre site.
 	ex:
 		videos/
-		|-- musee_benaki.flv
-		|-- musee_benaki.png
-		|-- musee_benaki.mp4
-		`-- musee_benaki.ogv
+		|-- ma_video_1.flv
+		|-- ma_video_1.png
+		|-- ma_video_1.mp4
+		`-- ma_video_1.ogv
 
 	ogv: video prise en charge par Firefox/Chrome/Opera
 	mp4: video prise en charge par Safari
@@ -79,8 +79,8 @@ TODO:
 	<!--<![endif]-->
 	<param name="src" value="#PLAYER_VIDEOS_DIR[(#GET{chemin_fichier}|basename|replace{flv$,mp4})]" />
 	<param name="showlogo" value="false" />
-	<param name="autoplay" value="false" />
-	[<!--(#REM) fallback to Flash -->
+	[<param name="autoplay" value="(#PLAYER_AUTOPLAY|?{true})" />
+	][<!--(#REM) fallback to Flash -->
 	]<object width="#LARGEUR" height="#HAUTEUR" type="application/x-shockwave-flash"
 	[<!--(#REM)
 			Attribut data pour Firefox
@@ -96,8 +96,8 @@ TODO:
 		<param name="wmode" value="transparent" />
 		[<!--(#REM) fallback image. download links are below the video. warning: putting anything more than
 		     the fallback image in the fallback may trigger an iPhone OS3+ bug where the video will not play -->
-		]<img src="#PLAYER_VIDEOS_DIR[(#GET{chemin_fichier}|basename|replace{flv$,png})]" width="#LARGEUR" height="#HAUTEUR" alt="__Title of video__"
-		     title="No video playback capabilities, please download the video below"
+		]<img src="#PLAYER_VIDEOS_DIR[(#GET{chemin_fichier}|basename|replace{flv$,png})]" width="#LARGEUR" height="#HAUTEUR" alt="[(#TITRE)]"
+		     title="<:player:pas_de_lecteur_video:>"
 		/>
 		[<strong>(#TITRE)</strong>
 		][<span><a href="(#URL_DOCUMENT)" rel="enclosure">#URL_DOCUMENT</a></span>]
