@@ -8,7 +8,7 @@
 <B_msg>
 <div style="color:red; font-weight:bold;">
 <BOUCLE_msg(FORUMS){statut?=#ENV*{statut}}{plat}{par date}{inverse}{id_forum IN #GET{tab}}{pagination 10}>
-	<a href="#URL_FORUM" style="color:red;">#ID_FORUM. #TITRE</a>[ (#STATUT|!={publie}|oui)&#40;#STATUT&#41;]<br />
+	<a href="[(#URL_FORUM|replace{=articles&,=articles_forum&})]" style="color:red;">#ID_FORUM. #TITRE</a>[ (#STATUT|!={publie}|oui)&#40;#STATUT&#41;]<br />
 </BOUCLE_msg>
 #PAGINATION
 <script language="JavaScript" type="text/javascript">
