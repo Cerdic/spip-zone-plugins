@@ -10,7 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aucun_image'=>'Kein Bild',
 	'aucun_audio'=>'Kein Ton',
 	'aucun_video'=>'Keine Videos',
-	'aucune_utilisation'=>'Dieses Dokument kann nicht verwendet werden.',
+	'aucune_utilisation'=>'Dieses Dokument wird nicht verwendet.',
 	'aucune_vignette' => 'Kein Miniaturbild',
 
 	
