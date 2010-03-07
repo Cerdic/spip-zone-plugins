@@ -25,7 +25,7 @@ fieldset ul{list-style-type:none}
 <ul>
 	<li>
 	<label>
-	<input type="radio" name="lecteur_audio" value="neolao" [(#ENV{lecteur_audio}|=={neolao}|oui)checked="checked"]>
+	<input type="radio" name="lecteur_audio" value="neolao_audio" [(#ENV{lecteur_audio}|=={neolao_audio}|oui)checked="checked"]>
 	Neolao
 	</label>
 	</li><li>
@@ -45,6 +45,12 @@ fieldset ul{list-style-type:none}
 	<label>
 	<input type="radio" name="lecteur_video" value="neolao_video" [(#ENV{lecteur_video}|=={neolao_video}|oui)checked="checked"]>
 	Néolao maxi
+	</label>
+	</li>
+	<li>
+	<label>
+	<input type="radio" name="lecteur_video" value="video" [(#ENV{lecteur_video}|=={video}|oui)checked="checked"]>
+	Lecteur vidéo
 	</label>
 	</li>
 </ul>
