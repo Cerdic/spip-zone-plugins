@@ -9,6 +9,11 @@
 
 @define('_BLOC_TITRE_H', 'h4');
 
+// depliage/repliage - fonction de personnalisation des title a placer dans mes_fonctions.php
+// function blocs_title($titre='', $corps='', $num='') {
+//	return array(_T('couteau:bloc_deplier'), _T('couteau:bloc_replier'));
+// }
+
 // liste des nouveaux raccourcis ajoutes par l'outil
 // si cette fonction n'existe pas, le plugin cherche alors  _T('couteauprive:un_outil:aide');
 function blocs_raccourcis() {
@@ -40,9 +45,13 @@ function blocs_callback($matches) {
 
 	// blocs numerotes
 	$b = strlen($matches[2])?" cs_bloc$matches[2]":''; 
+	// title
+	$title = function_exists('blocs_title')
+		?"<div class='blocs_title blocs_invisible'>".join(_BLOC_TITLE_SEP, blocs_title($titre, $corps, $matches[2], $h<>'')).'</div>'
+		:''; // valeur par defaut geree en JS
 	return "<div class='cs_blocs$b'><"._BLOC_TITRE_H." class='blocs_titre$h blocs_click'><a href='javascript:;'>$titre</a></"._BLOC_TITRE_H.">"
 		.(strlen($res)?"<div class='blocs_resume$r'>\n$res\n</div>":"")
-		."<div class='blocs_destination$d'>\n".blocs_rempl($corps)."\n</div></div>";
+		."<div class='blocs_destination$d'>\n".blocs_rempl($corps)."\n</div>$title</div>";
 }
 
 // cette fonction n'est pas appelee dans les balises html : html|code|cadre|frame|script

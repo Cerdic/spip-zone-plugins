@@ -12,13 +12,21 @@ jQuery.fn.blocs_toggle_slide_dist = function( selector ) {
 		:(this.is(".blocs_slide")?this.slideUp(blocs_slide):this.slideDown(blocs_slide));
 };
 
+jQuery.fn.blocs_set_title = function( selector ) {
+	var title = this.parent().find('.blocs_title:last').text();
+	if(!title) title = blocs_title_def;
+	title = title.split(blocs_title_sep);
+	this.children('a').attr('title', title[jQuery(this).hasClass('blocs_replie')?0:1]);
+	return this;
+};
+
 // fonction de de/re-pliement
 jQuery.fn.blocs_toggle = function() {
 	if (!this.length) return this;
 	// applique-t-on la fonction sur cs_blocs ou sur blocs_titre ?
 	var cible = this.hasClass('cs_blocs')? this.children('.blocs_titre').eq(0) : this;
 	// on replie/deplie la cible...
-	cible.toggleClass('blocs_replie');
+	cible.toggleClass('blocs_replie').blocs_set_title();
 	var dest = this[0].id.match('^cs_bloc_id_')?jQuery('div.'+this[0].id):cible.next();
 	if(blocs_slide==='aucun') {
 		dest.toggleClass('blocs_invisible');
@@ -30,10 +38,11 @@ jQuery.fn.blocs_toggle = function() {
 		if (dest.is('div.blocs_resume')) dest.next().blocs_toggle_slide_dist();
 	}
 	// est-on sur un bloc ajax ?
-	var url = cible.children().attr("href");
+	var lien = cible.children();
+	var url = lien.attr("href");
 	if(url != 'javascript:;') {
 		// une fois le bloc ajax en place, plus besoin de le recharger ensuite
-		cible.children().attr("href", 'javascript:;');
+		lien.attr("href", 'javascript:;');
 		// ici, on charge !
 		cible.parent().children(".blocs_destination")
 		//.animeajax()
@@ -66,7 +75,10 @@ function blocs_init() {
 		jQuery(this).blocs_replie_tout().blocs_toggle();
 		// annulation du clic
 		return false;
-	   });
+	   })
+	  .each( function(){
+		jQuery(this).blocs_set_title();
+	  });
 	// pour un lien 'replier_bloc' present dans le bloc
 	jQuery('.blocs_destination a.replier_bloc', this).cs_todo()
 	 .click( function(){
