@@ -54,7 +54,7 @@ function formulaires_contact_charger_dist($id_auteur='',$tracer=''){
 
 	// Les infos supplémentaires
 	$champs_possibles = contact_infos_supplementaires();
-	$champs_mini_config = array('mail', 'sujet', 'contact_texte');
+	$champs_mini_config = array('mail', 'sujet', 'texte');
 
 		$champs_choisis = lire_config('contact/champs',$champs_mini_config);
 
@@ -115,7 +115,7 @@ function formulaires_contact_verifier_dist($id_auteur='',$tracer=''){
 	elseif(!email_valide($adres))
 		$erreurs['mail'] = _T('form_prop_indiquer_email');
 
-	$champs_mini_config = array('mail', 'sujet', 'contact_texte');
+	$champs_mini_config = array('mail', 'sujet', 'texte');
 	$champs_choisis = lire_config('contact/champs',$champs_mini_config );
 	$champs_obligatoires = lire_config('contact/obligatoires',$champs_mini_config);
 	if (is_array($champs_choisis) and is_array($champs_obligatoires)){
@@ -129,8 +129,8 @@ function formulaires_contact_verifier_dist($id_auteur='',$tracer=''){
 		$erreurs['sujet'] = _T('forum_attention_trois_caracteres');
 
 	$texte_min = !defined('_TEXTE_MIN')?10:_TEXTE_MIN;
-	if(!(strlen(_request('contact_texte'))>$texte_min))
-		$erreurs['contact_texte'] = _T('contact:forum_attention_nbre_caracteres',array('nbre_caract'=>$texte_min));
+	if(!(strlen(_request('texte'))>$texte_min))
+		$erreurs['texte'] = _T('contact:forum_attention_nbre_caracteres',array('nbre_caract'=>$texte_min));
 
 	if ($nobot=_request('nobot'))
 		$erreurs['nobot'] = 'Vous êtes un robot. Méchant robot.';
@@ -230,12 +230,12 @@ function formulaires_contact_traiter_dist($id_auteur='',$tracer=''){
 
 	// Les infos supplémentaires
 	$champs_possibles = contact_infos_supplementaires();
-	$champs_mini_config = array('mail', 'sujet', 'contact_texte');
+	$champs_mini_config = array('mail', 'sujet', 'texte');
 	$champs_choisis = lire_config('contact/champs',$champs_mini_config);
 	if (is_array($champs_choisis)){
 		foreach($champs_choisis as $champ){
 			if ($reponse_champ = _request($champ)){
-				if( ($champ=='mail') OR ($champ=='sujet') OR ($champ=='contact_texte') ){
+				if( ($champ=='mail') OR ($champ=='sujet') OR ($champ=='texte') ){
 					$posteur[$champ] = $reponse_champ;
 				}else{
 					$infos .= "\n".$champs_possibles[$champ]." : ".$reponse_champ;
@@ -263,7 +263,7 @@ function formulaires_contact_traiter_dist($id_auteur='',$tracer=''){
 	$horodatage = affdate_heure (date ("Y-m-d H:i:s"));
 	$horodatage = "\n\n"._T('contact:horodatage', array('horodatage'=>$horodatage))."\n\n";
 
-	$texte = $horodatage.$inforigine.$infos."\n\n".$posteur['contact_texte'];
+	$texte = $horodatage.$inforigine.$infos."\n\n".$posteur['texte'];
 	$nom_site = supprimer_tags(extraire_multi($GLOBALS['meta']['nom_site']));
 	$texte .= "\n\n-- "._T('envoi_via_le_site')." ".$nom_site." (".$GLOBALS['meta']['adresse_site']."/) --\n";
 

@@ -83,13 +83,13 @@
 		<ul id="editer_champs" class="decaler baisser10">
 			<BOUCLE_champs(POUR){tableau #GET{champs}}>
 			<li class="choix editer_champ agrondir img#COMPTEUR_BOUCLE" title="<:contact:deplacement_possible:>">
-				[(#CLE|match{mail|sujet|contact_texte}|oui)
-				<input type="text" name="champs[(#VAL{&#91;&#93;}|html_entity_decode)]" id="champ_#CLE" class="text" style="width:29px;" value="#CLE" readonly='readonly' />
-				<input type="text" name="obligatoires[(#VAL{&#91;&#93;}|html_entity_decode)]" id="obli_#CLE" class="text" style="width:29px;" value="#CLE" readonly='readonly' />
+				[(#CLE|match{mail|sujet|texte}|oui)
+				<input type="text" name="champs[(#VAL{&#91;&#93;}|html_entity_decode)]" id="champ_#CLE" class="text" style="display:none;" value="#CLE" readonly='readonly' />
+				<input type="text" name="obligatoires[(#VAL{&#91;&#93;}|html_entity_decode)]" id="obli_#CLE" class="text" style="display:none;" value="#CLE" readonly='readonly' />
 				<label for="champ_#CLE">#VALEUR</label>
 				<label for="obli_#CLE"><em><:contact:champ_impose:></em></label>
 				<br class="nettoyeur" />
-				][(#CLE|match{mail|sujet|contact_texte}|non)
+				][(#CLE|match{mail|sujet|texte}|non)
 				<input type="checkbox" name="champs[(#VAL{&#91;&#93;}|html_entity_decode)]" id="champ_#CLE" class="checkbox" value="#CLE"[ (#CLE|in_array{#ENV{champs,#ARRAY}}|oui)checked="checked"] />
 				<label for="champ_#CLE">#VALEUR</label>
 				<div class="aerer2">
@@ -102,7 +102,7 @@
 			</BOUCLE_champs>
 		</ul>
 	</fieldset>
-[(#SPIP_VERSION|match{'2.1.0'}|oui)
+[(#PLUGIN{porte_plume,version}|>={1.5}|oui)
 	<fieldset>
 		<legend><:contact:configuration_champs_message:></legend>
 		[<p class="attention">(#EVAL{PORTE_PLUME_PUBLIC}|non)<:contact:configuration_barre_impossible:></p>]

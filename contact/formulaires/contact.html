@@ -21,12 +21,12 @@
 		<ul>
 			[<li><strong><:contact:courriel_de:></strong> : (#ENV{mail})</li>]
 			<BOUCLE_previsu_infos(POUR){tableau #ENV{champs}}>
-			[(#CLE|match{mail|sujet|contact_texte}|non)
+			[(#CLE|match{mail|sujet|texte}|non)
 			[<li><strong>#VALEUR</strong> : (#ENV{#CLE})</li>]
 			]
 			</BOUCLE_previsu_infos>
 			[<li><strong><:form_prop_sujet:></strong> : (#ENV{sujet})</li>]
-			[<li><div><strong><:info_texte_message:></strong></div>(#ENV{contact_texte}|propre)</li>]
+			[<li><div><strong><:info_texte_message:></strong></div>(#ENV{texte}|propre)</li>]
 			<B_previsu_pj>
 			<li>
 				[<strong>(#ENV{erreurs}|table_valeur{infos_pj}|count|>{1}|?{<:contact:form_pj_previsu_pluriel:>,<:contact:form_pj_previsu_singulier:>})</strong>]

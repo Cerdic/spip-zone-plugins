@@ -21,7 +21,7 @@ function contact_infos_supplementaires(){
 		'portable' => _T('contact:champ_portable'),
 		'mail' => _T('contact:champ_mail'),
 		'sujet' => _T('contact:champ_sujet'),
-		'contact_texte' => _T('contact:champ_texte'),
+		'texte' => _T('contact:champ_texte'),
 		'infolettre' => _T('contact:champ_infolettre')
 	);
 
