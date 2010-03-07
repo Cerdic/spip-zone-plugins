@@ -16,10 +16,11 @@ add_outil(array(
 	// fonction blocs_init() codee dans blocs.js : executee lors du chargement de la page et a chaque hit ajax
 	'code:js' => "var blocs_replier_tout = %%bloc_unique%%;
 var blocs_millisec = %%blocs_millisec%%;
-var blocs_slide = [[%blocs_slide%]];
-var blocs_title_sep = /%%blocs_title_sep%%/g;
-var blocs_title_def = '%%blocs_title_def%%';
-",
+var blocs_slide = [[%blocs_slide%]];<cs_html>
+var blocs_title_sep = /[(#EVAL{_BLOC_TITLE_SEP}|preg_quote)]/g;
+#SET{x,#VAL{couteau:bloc_replier}|_T}
+var blocs_title_def = '<:couteau:bloc_deplier|concat{#EVAL{_BLOC_TITLE_SEP},#GET{x}}|html2unicode|addslashes|unicode_to_javascript:>';
+</cs_html>",
 	'code:jq_init' => 'blocs_init.apply(this);',
 	// utilisation des cookies pour conserver l'etat des blocs numerotes si on quitte la page
 	'code:jq' => 'if(%%blocs_cookie%%) { if(jQuery("div.cs_blocs").length)
@@ -28,17 +29,6 @@ var blocs_title_def = '%%blocs_title_def%%';
 	'pipeline:pre_typo' => 'blocs_pre_typo',
 	'pipeline:porte_plume_cs_pre_charger' => 'blocs_CS_pre_charger',
 	'pipeline:porte_plume_lien_classe_vers_icone' => 'blocs_PP_icones',
-));
-
-// Ajout des variables muettes
-add_variables(array(
-	'nom' => 'blocs_title_sep',
-	'format' => _format_CHAINE,
-	'defaut' => 'preg_quote(_BLOC_TITLE_SEP)',
-), array(
-	'nom' => 'blocs_title_def',
-	'format' => _format_CHAINE,
-	'defaut' => "unicode_to_javascript(addslashes(html2unicode(join(_BLOC_TITLE_SEP,array(_T('couteau:bloc_deplier'), _T('couteau:bloc_replier'))))))"
 ));
 
 // Ajout des variables utilisees ci-dessus

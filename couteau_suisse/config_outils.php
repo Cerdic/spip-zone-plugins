@@ -39,20 +39,6 @@ add_outil( array(
 	'categorie' => 'admin',
 ));
 
-/*
-add_variable( array(
-	'nom' => 'cookie_prefix',
-	'format' => _format_CHAINE,
-	'defaut' => "'spip'",
-	'code' => "\$GLOBALS['cookie_prefix']=%s;",
-));
-add_outil( array(
-	'id' => 'cookie_prefix',
-	'code:options' => "%%cookie_prefix%%",
-	'categorie' => 'admin',
-));
-*/
-
 add_outil( array(
 	'id' => 'supprimer_numero',
 	/* inserer :
@@ -1043,8 +1029,8 @@ add_outil( array(
 	'id' => 'soft_scroller',
 	'categorie'	=> 'public',
 	'jquery'	=> 'oui',
-	'pipelinecode:insert_head' => 'if(%%scrollTo%%) {$flux.=\'<script src="'.url_absolue(find_in_path("outils/jquery.scrollto.js")).'" type="text/javascript"></script>\'."\n";}
-if(%%LocalScroll%%) {$flux.=\'<script src="'.url_absolue(find_in_path("outils/jquery.localscroll.js")).'" type="text/javascript"></script>\'."\n";}',
+	'pipelinecode:insert_head' => 'if(%%scrollTo%%) {$flux.=\'<script src="\'.find_in_path("outils/jquery.scrollto.js").\'" type="text/javascript"></script>\'."\n";}
+if(%%LocalScroll%%) {$flux.=\'<script src="\'.find_in_path("outils/jquery.localscroll.js").\'" type="text/javascript"></script>\'."\n";}',
 	'code:js' => 'function soft_scroller_init() { if(typeof jQuery.localScroll=="function") jQuery.localScroll({hash: true}); }',
 	'code:jq_init' => 'soft_scroller_init.apply(this);',
 ));
@@ -1087,7 +1073,7 @@ add_outil( array(
 	'jquery'	=> 'oui',
 	'contrib'	=> 2987,
 	'code:options' => "%%jcorner_classes%%",
-	'pipelinecode:insert_head' => 'if(%%jcorner_plugin%%) {$flux.=\'<script src="'.url_absolue(find_in_path("outils/jquery.corner.js")).'" type="text/javascript"></script>\'."\n";}',
+	'pipelinecode:insert_head' => 'if(%%jcorner_plugin%%) {$flux.=\'<script src="\'.find_in_path("outils/jquery.corner.js").\'" type="text/javascript"></script>\'."\n";}',
 	'pipeline:insert_head' => 'jcorner_insert_head',
 	// jcorner_init() n'est disponible qu'en partie publique
 	'code:jq_init' => 'if(typeof jcorner_init=="function") jcorner_init.apply(this);',
@@ -1192,7 +1178,7 @@ add_outil( array(
 	'contrib' => 2998,
 	'pipelinecode:insert_head,
 	 pipelinecode:header_prive' => '$flux.=\'<script type="text/javascript" src="\'.generer_url_public(\'cout_dates.js\',\'lang=\'.$GLOBALS[\'spip_lang\']).\'"></script>
-<script type="text/javascript" src="'.url_absolue(find_in_path("outils/jquery.jclock.js")).'"></script>\'."\n";',
+<script type="text/javascript" src="\'.find_in_path("outils/jquery.jclock.js").\'"></script>\'."\n";',
 	'code:jq_init' => 'jclock_init.apply(this);',
 ));
 
