@@ -2,9 +2,9 @@
 
 	// player_fonctions.php
 
-	// $LastChangedRevision$
-	// $LastChangedBy:$
-	// $LastChangedDate:$
+	// $LastChangedRevision: 35894 $
+	// $LastChangedBy$
+	// $LastChangedDate$
 
 if (!defined('_DIR_PLUGIN_PLAYER')){ // defini automatiquement par SPIP 1.9.2
 	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
@@ -130,7 +130,7 @@ function balise_PLAYER_FLV_FLASHVVARS ($p) {
 		
 		$p->code = "'$player_flv_flashvars'";
 	}
-	$p->interdire_scripts = true;
+	$p->interdire_scripts = false;
 	return($p);
 }
 
@@ -155,8 +155,17 @@ function balise_PLAYER_FLV_PLAYER ($p) {
 		}
 		$p->code = "'$result'";
 	}
-	$p->interdire_scripts = true;
+	$p->interdire_scripts = false;
 	return($p);
+}
+
+function balise_PLAYER_VIDEOS_DIR ($p) {
+
+	$p->code = "'/videos/'";
+	$p->interdire_scripts = false;
+
+	return($p);
+	
 }
 
 function player_meta_prefs_item ($ii) {
@@ -172,30 +181,12 @@ function player_meta_prefs_item ($ii) {
 	return($ii && isset($prefs[$ii]) ? $prefs[$ii] : null);
 }
 
-// CP 20100306
-function balise_PLAYER_AUTOPLAY ($p) {
+function balise_PLAYER_META_GET ($p) {
 
-	$p->code = "'" . player_meta_prefs_item('autoplay') . "'";
-	$p->interdire_scripts = true;
-
+	if($key = trim(interprete_argument_balise(1, $p))) {
+		$p->code = "player_meta_prefs_item($key)";
+	}
+		
 	return($p);
-}
-
-function balise_PLAYER_LOOP ($p) {
-
-	$p->code = "'" . player_meta_prefs_item('loop') . "'";
-	$p->interdire_scripts = false;
-
-	return($p);
-	
-}
-
-function balise_PLAYER_VIDEOS_DIR ($p) {
-
-	$p->code = "'/videos/'";
-	$p->interdire_scripts = false;
-
-	return($p);
-	
 }
 

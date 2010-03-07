@@ -59,8 +59,8 @@ TODO:
 ]<dd class='spip_doc_descriptif doc_streaming'>
 	<video width="#LARGEUR" height="#HAUTEUR"
 		[poster="#PLAYER_VIDEOS_DIR(#GET{chemin_poster}|?{#GET{chemin_poster}})"
-		][autoplay="(#PLAYER_AUTOPLAY|?{true})"
-		][loop="(#PLAYER_LOOP|?{loop})"
+		][autoplay="(#PLAYER_META_GET{autoplay}|?{true})"
+		][loop="(#PLAYER_META_GET{loop}|?{loop})"
 		]controls="controls">[<!-- (#REM)
 		you must use `</source>` to avoid a closure bug in Firefox 3 / Camino 2! -->]
 	<source src="#PLAYER_VIDEOS_DIR[(#GET{chemin_fichier}|basename|replace{flv$,ogv})]" type="video/ogg">[<!--(#REM) Firefox native OGG video -->]</source>
@@ -79,7 +79,7 @@ TODO:
 	<!--<![endif]-->
 	<param name="src" value="#PLAYER_VIDEOS_DIR[(#GET{chemin_fichier}|basename|replace{flv$,mp4})]" />
 	<param name="showlogo" value="false" />
-	[<param name="autoplay" value="(#PLAYER_AUTOPLAY|?{true})" />
+	[<param name="autoplay" value="(#PLAYER_META_GET{autoplay}|?{true,false})" />
 	][<!--(#REM) fallback to Flash -->
 	]<object width="#LARGEUR" height="#HAUTEUR" type="application/x-shockwave-flash"
 	[<!--(#REM)
