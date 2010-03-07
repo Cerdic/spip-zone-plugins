@@ -9,7 +9,16 @@ function balise_LOGO_SITE($p) {
 
 	$p = $balise_logo_($p);
 
-	$p->code = str_replace('calcule_logo(', 'calcule_logo_ou_thumbshot('.$_url.', ', $p->code);
+	# spip 2.0
+	if (preg_match(',calcule_logo,', $p->code)) {
+		$p->code = str_replace('calcule_logo(', 'calcule_logo_ou_thumbshot('.$_url.', ', $p->code);
+	}
+	# spip 2.1
+	else {
+		$p->code = '(($a = '
+		. $p->code
+		.') ? $a : thumbshot_img('.$_url.'))';
+	}
 	return $p;
 }
 

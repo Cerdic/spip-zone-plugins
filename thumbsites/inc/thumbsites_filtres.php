@@ -24,6 +24,7 @@ if (!function_exists('url_thumbsite')) {
 }
 
 // fonction de recherche de logo
+// SPIP 2.0
 function calcule_logo_ou_thumbshot($url) {
 	$a = func_get_args();
 	$url = array_shift($a);
@@ -36,6 +37,17 @@ function calcule_logo_ou_thumbshot($url) {
 		$c[0] = thumbshot($url);
 
 	return $c;
+}
+
+
+// fonction de recherche de logo
+// SPIP 2.1 : on se contente de produire un tag IMG
+function thumbshot_img($url) {
+	if (!$url OR !$g = thumbshot($url))
+		return '';
+
+	return '<img src="'.$g.'" alt="" class="spip_logos" />';
+
 }
 
 // fonction de creation d'un index des vignettes
