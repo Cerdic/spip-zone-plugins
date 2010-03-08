@@ -39,9 +39,18 @@ function generer_saisie($champ, $env){
 	// Si env est définie dans les options ou qu'il y a des enfants, on ajoute tout l'environnement
 	if(isset($contexte['env']) or is_array($champ['saisies'])){
 		unset($contexte['env']);
+		
 		// À partir du moment où on passe tout l'environnement, il faut enlever certains éléments qui ne doivent absolument provenir que des options
 		unset($env['inserer_debut']);
 		unset($env['inserer_fin']);
+		$saisies_disponibles = saisies_lister_disponibles();
+		if (is_array($saisies_disponibles[$contexte['type_saisie']]['options'])){
+			$options_a_supprimer = saisies_lister_champs($saisies_disponibles[$contexte['type_saisie']]['options']);
+			foreach ($options_a_supprimer as $option_a_supprimer){
+				unset($env[$option_a_supprimer]);
+			}
+		}
+		
 		$contexte = array_merge($env, $contexte);
 	}
 	// Sinon on ne sélectionne que quelques éléments importants
