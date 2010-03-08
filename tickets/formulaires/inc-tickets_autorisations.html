@@ -19,7 +19,7 @@
 					defaut=par_statut})]
 			</ul>
 			[(#REM) <!-- Methode par statut d'auteurs (choix multiple) --> ]
-			<ul id="[(#GET{prefixe})]bloc_par_statut" class="[(#GET{prefixe})]bloc[(#ENV{#GET{prefixe}type}|non) visible]">
+			<ul id="[(#GET{prefixe})]bloc_par_statut" class="[(#GET{prefixe})]bloc[(#ENV{[(#GET{prefixe})type]}|non) visible]">
 				[(#CONFIG{[(#GET{prefixe})type]}|non)
 					[(#GET{prefixe}|in_array{#ARRAY{0,ecrire_,1,assigner_,2,modifier_}}|oui)
 						#SET{defaut,#ARRAY{0,0minirezo}}]
