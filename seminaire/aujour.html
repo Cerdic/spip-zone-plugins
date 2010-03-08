@@ -1,8 +1,8 @@
 <INCLURE{fond=entete}{type_page=agenda}{lang}>
 
-<h2>Les événements de la journée</h2>
+<h2><seminaire:aujour:></h2>
 <div id="seminaire">
-<BOUCLE_evenements(EVENEMENTS) {agenda date_debut, mois, (#ENV{date}|annee), (#ENV{date}|mois)}{jour_relatif=0}{statut=publie}{par titre_mot}><!-- {agenda date_debut, mois, (#ENV{date}|annee), (#ENV{date}|mois)} -->
+<BOUCLE_evenements(EVENEMENTS) {agenda date_debut, mois, (#ENV{date}|annee), (#ENV{date}|mois)}{jour_relatif=0}{statut=publie}{par date}><!-- {agenda date_debut, mois, (#ENV{date}|annee), (#ENV{date}|mois)} -->
   				<ul class='liste_items evenements'>
 					<li class='item[(#EXPOSE)][ (#ID_EVENEMENT_SOURCE|oui)repetition]'>
 						<BOUCLE_categorie(MOTS){id_article}>

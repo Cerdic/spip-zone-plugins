@@ -18,6 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'attention_type'			 =>		'Le choix du type d&rsquo;&eacute;v&eacute;nement d&eacute;termine le tri qui lui sera appliqu&eacute;.',
 	'oubli_titre'				 =>		'Ne pas oublier de mettre le titre de l&rsquo;&eacute;v&eacute;nement',
 	'exemple'					 =>		'Par exemple : CMI - Salle R164',
+	'aujour'					 =>		'Les &eacute;v&eacute;nements de la journ&eacute;e',
 	
 	//pour les groupes de mots cl&eacute;s
 	'mots_categorie_kitcnrs'	 => 	'Les mots cl&eacute;s à affecter aux articles pour que les &eacute;v&eacute;nements soient encore mieux tri&eacute;s',
