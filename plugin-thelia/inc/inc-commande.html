@@ -15,45 +15,39 @@
 				  <h1 class="h1"><:spipthelia:recapitulatif_commande:></h1>
 				</div>
 
-			[(#REM) Contenu de la page ]
-	
-			<table id="commande" class="spip">
-            		<thead> 
-				<tr class="row_first">
-    					<th><:spipthelia:photo_produit:></th>
-    					<th><:spipthelia:references_produits:></th>
-    					<th><:spipthelia:prix_unitaire:></th>
-    					<th><:spipthelia:quantite:></th>
-    					<th><:spipthelia:total:></th>
-    				</tr>
-			</thead> 
-			<tbody>
-				<THELIA_panier type="PANIER">
-				<tr>
-					<td><THELIA_image type="IMAGE" produit="THELIA-ID" largeur="100" num="1"><img src="THELIA-IMAGE" /></THELIA_image></td>
-					<td class="ligneTableau"><a href="#URL_PAGE{produit,ref=THELIA-REF}">THELIA-TITRE
-						<THELIA_decval type="DECVAL" article="THELIA-ARTICLE">
-							<br />THELIA-DECLITITRE : THELIA-VALEUR
-						</THELIA_decval>
-						<br />(Ref&nbsp;:&nbsp;THELIA-REF)</a></td>
-                			<td>THELIA-PRIXU&nbsp;&euro;</td>
-                    			<td>THELIA-QUANTITE</td>
-                    			<td>THELIA-TOTAL&nbsp;&euro;</td>
-				</tr>
-				</THELIA_panier>
-			</tbody>
-			</table>
+				[(#REM) Contenu de la page ]
+		
+				<table id="commande" class="spip">
+				<thead> 
+					<tr class="row_first">
+						<th><:spipthelia:references_produits:></th>
+						<th><:spipthelia:prix_unitaire:></th>
+						<th><:spipthelia:quantite:></th>
+						<th><:spipthelia:total:></th>
+					</tr>
+				</thead> 
+				<tbody>
+					<THELIA_panier type="PANIER">
+					<tr>
+						<td><a href="#URL_PAGE{produit,ref=THELIA-REF}">
+							<THELIA_image type="IMAGE" produit="THELIA-ID" largeur="100" num="1"><img src="THELIA-IMAGE" class="spip_logos" /></THELIA_image>
+							THELIA-TITRE
+							<THELIA_decval type="DECVAL" article="THELIA-ARTICLE">
+								<br />THELIA-DECLITITRE : THELIA-VALEUR
+							</THELIA_decval>
+							<br />(Ref&nbsp;:&nbsp;THELIA-REF)</a></td>
+						<td>THELIA-PRIXU&nbsp;&euro;</td>
+						<td>THELIA-QUANTITE</td>
+						<td>THELIA-TOTAL&nbsp;&euro;</td>
+					</tr>
+					</THELIA_panier>
 
-			<div class="sousTableau">
+					<tr><td></td><td></td><td><strong><:spipthelia:frais_livraison:></strong></td><td>THELIA-PANIER_PORT&nbsp;&euro;</td></tr>
+					<tr><td></td><td></td><td><strong><:spipthelia:remise:></strong></td><td>THELIA-PANIER_REMISE&nbsp;&euro;</td></tr>
+					<tr><td></td><td></td><td><strong><:spipthelia:total:></strong></td><td>THELIA-PANIER_TOTPORT&nbsp;&euro;</td></tr>
+				</tbody>
+				</table>
 
-				<ul>
-					<li><:spipthelia:frais_livraison:> : THELIA-PANIER_PORT&nbsp;&euro;</li>
-					<li><:spipthelia:remise:> : THELIA-PANIER_REMISE&nbsp;&euro;</li>
-					<li><:spipthelia:total:> : THELIA-PANIER_TOTPORT&nbsp;&euro;</li>
-				</ul>
-			</div>
-
-			<br class="nettoyeur" />
 			
 
 			<form action="#URL_PAGE{commande,lang=#LANG}" id="formulaire" method="post" class="formulaire_spip formulaire_reduction">
