@@ -168,6 +168,38 @@ function formidable_generer_saisie_configurable($saisie, $env){
 		// Si possible on met en readonly
 		$saisie['options']['readonly'] = 'oui';
 		
+		// On va ajouter le champ pour la position
+		if (!($chemin_affichage = saisies_chercher($formulaire_config, "saisie_modifiee_${nom}[options][affichage]", true))){
+			$chemin_affichage = array(count($formulaire_config));
+			$formulaire_config = saisies_inserer(
+				$formulaire_config,
+				array(
+					'saisie' => 'fieldset',
+					'options' => array(
+						'nom' => "saisie_modifiee_${nom}[options][affichage]",
+						'label' => _T('saisies:option_groupe_affichage')
+					),
+					'saisies' => array()
+				)
+			);
+		}
+		$chemin_affichage[] = 'saisies';
+		$chemin_affichage[] = '10000000'; // tout à la fin
+		$formulaire_config = saisies_inserer(
+			$formulaire_config,
+			array(
+				'saisie' => 'position_construire_formulaire',
+				'options' => array(
+					'nom' => 'position',
+					'label' => 'Position',
+					'formulaire' => $env['_contenu'],
+					'saisie_a_positionner' => $nom
+				)
+			),
+			$chemin_affichage
+		);
+		
+		
 		$env2['saisies'] = $formulaire_config;
 		
 		// Un test pour savoir si on prend le _request ou bien
