@@ -5,21 +5,20 @@
 	 * Author : Thomas Beaumanoir
 	 * Clever Age <http://www.clever-age.com>
 	 * Copyright (c) 2006 - Distribue sous licence GNU/GPL
+	 * Revisee 2010 C.Morin pour passage en balise statique qui permet l'application de filtrer
+	 * et la mise en cache
 	 *
 	 **/
 
+
 function balise_GRAVATAR($p) {
-	return calculer_balise_dynamique($p, 'GRAVATAR', array());
-}
+	$_email = interprete_argument_balise(1,$p);
+	$_size = interprete_argument_balise(2,$p);
+	$_default = interprete_argument_balise(3,$p);
 
-function balise_GRAVATAR_stat($args, $filtres) {
-	return array($args[0], $args[1], $args[2]);
-}
+	$p->code = "inserer_attribut(filtrer('image_reduire',sinon(gravatar($_email),$_default), (\$s=$_size) ?\$s: 80), 'alt', '')";
+	return $p;
 
-function balise_GRAVATAR_dyn($email, $size, $gravatar_default) {
-	include_spip('inc/filtres_images');
-	include_spip('inc/gravatar');
-	return inserer_attribut(image_reduire(sinon(gravatar($email),$gravatar_default), $size ? $size : 80), "alt", "");
 }
-
+	
 ?>
