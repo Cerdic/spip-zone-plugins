@@ -39,6 +39,9 @@ function generer_saisie($champ, $env){
 	// Si env est définie dans les options ou qu'il y a des enfants, on ajoute tout l'environnement
 	if(isset($contexte['env']) or is_array($champ['saisies'])){
 		unset($contexte['env']);
+		// À partir du moment où on passe tout l'environnement, il faut enlever certains éléments qui ne doivent absolument provenir que des options
+		unset($env['inserer_debut']);
+		unset($env['inserer_fin']);
 		$contexte = array_merge($env, $contexte);
 	}
 	// Sinon on ne sélectionne que quelques éléments importants
