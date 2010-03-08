@@ -47,7 +47,7 @@ function public_produire_page($fond, $contexte, $use_cache, $chemin_cache, $cont
 	// - c'est une visite anonyme (cache mutualise)
 	// - on est pas deja en train de traiter un calcul en background
 	if ($use_cache==1 AND $chemin_cache
-		AND is_array($page) AND count($page)
+		AND is_array($page) AND isset($page['texte'])
 		AND !$GLOBALS['visiteur_session']['id_auteur']
 		AND !$processing
 		AND $is_main_url
@@ -59,7 +59,7 @@ function public_produire_page($fond, $contexte, $use_cache, $chemin_cache, $cont
 			// on differe la maj du cache et on affiche le contenu du cache ce coup ci encore
 			$where = is_null($contexte_cache)?"principal":"inclure_page";
 			// on reprogramme avec un $use_cache=2 qui permettra de reconnaitre ces calculs
-			job_queue_add('public_produire_page',$c="Calcul du cache $fond [$where]",array($fond, $contexte, 2, $chemin_cache, $contexte_cache, NULL, $lastinclude, $connect),"",TRUE);
+			job_queue_add('public_produire_page',$c="Calcul du cache $fond [$where]",array($fond, $contexte, 2, $chemin_cache, $contexte_cache, array('contexte_implicite'=>$page['contexte_implicite']), $lastinclude, $connect),"",TRUE);
 		}
 		gunzip_page($page); // decomprimer la page si besoin
 		#spip_log($c,'cachedelai');
