@@ -170,14 +170,15 @@ function saisies_inserer($saisies, $saisie, $chemin=array()){
  */
 function saisies_modifier($saisies, $nom_ou_chemin, $modifs){
 	$chemin = saisies_chercher($saisies, $nom_ou_chemin, true);
-	
+	var_dump($chemin);
 	$position = array_pop($chemin);
 	$parent =& $saisies;
 	foreach ($chemin as $cle){
 		$parent =& $parent[$cle];
 	}
 	
-	$parent[$position] = array_merge($parent[$position], $modifs);
+	var_dump($parent[$position]);
+	$parent[$position] = array_replace_recursive($parent[$position], $modifs);
 	
 	return $saisies;
 }
