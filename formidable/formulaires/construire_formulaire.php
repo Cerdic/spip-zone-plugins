@@ -32,6 +32,8 @@ function formulaires_construire_formulaire_charger($identifiant, $formulaire_ini
 	$saisies_disponibles = saisies_lister_disponibles();
 	$contexte['saisies_disponibles'] = $saisies_disponibles;
 	
+	$contexte['fond_generer'] = 'formulaires/inc-generer_saisies_configurables';
+	
 	return $contexte;
 }
 
@@ -95,12 +97,11 @@ function formulaires_construire_formulaire_traiter($identifiant, $formulaire_ini
 	// Si on enregistre la conf d'une saisie
 	if ($nom = _request('enregistrer_saisie')){
 		// On récupère les options postées en vidant les chaines vides
-		$options = _request("saisie_modifiee_$nom");
-		$options = $options['options'];
-		$options = array_filter($options);
-		if (is_array($options))
-			spip_desinfecte($options);
-		array_walk($formulaire_actuel, 'formidable_ajouter_options', array('nom'=>$nom, 'options'=>$options));
+		$saisie_modifiee = _request("saisie_modifiee_$nom");
+		$saisie_modifiee['options'] = array_filter($saisie_modifiee['options']);
+		if (is_array($saisie_modifiee['options']))
+			spip_desinfecte($saisie_modifiee['options']);
+		$formulaire_actuel = saisies_modifier($formulaire_actuel, $nom, $saisie_modifiee);
 	}
 	
 	// On enregistre en session la nouvelle version du formulaire
@@ -133,8 +134,6 @@ function formidable_ajouter_options(&$valeur, $cle, $nouvelle){
 
 // Préparer une saisie pour la transformer en truc configurable
 function formidable_generer_saisie_configurable($saisie, $env){
-	// On s'assure qu'on a le bon fond pour générer
-	$env['fond_generer'] = 'formulaires/inc-generer_saisies_configurables';
 	// On récupère le nom
 	$nom = $saisie['options']['nom'];
 	// On cherche si ya un formulaire de config
@@ -183,6 +182,7 @@ function formidable_generer_saisie_configurable($saisie, $env){
 		else
 			$env2["saisie_modifiee_$nom"] = $env2['_saisies_par_nom'][$nom];
 		
+		$env2['fond_generer'] = 'inclure/generer_saisies';
 		$saisie = saisies_inserer_html(
 			$saisie,
 			'<div class="formulaire_configurer"><ul class="formulaire_configurer-contenus">'

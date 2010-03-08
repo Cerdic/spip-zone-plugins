@@ -1,6 +1,6 @@
 
 .formulaire_construire_formulaire{
-	padding:2em;
+	padding:1em;
 	background:white;
 }
 .formulaire_construire_formulaire ul li label{
@@ -16,6 +16,7 @@
 }
 
 .formulaire_construire_formulaire li.configurable{
+	position:relative;
 	padding:1em;
 	margin:0.5em 0;
 	background:transparent;
@@ -24,19 +25,36 @@
 	-moz-border-radius:5px;
 	-webkit-border-radius:5px;
 }
-.formulaire_construire_formulaire li.configurable:hover{
+.formulaire_construire_formulaire li.configurable.hover{
 	border-color:#999;
 }
 .formulaire_construire_formulaire li.en_configuration{
 	padding-bottom:0;
 	border:5px solid #999;
 }
+.formulaire_construire_formulaire li.fieldset.configurable{
+	padding:0;
+}
+.formulaire_construire_formulaire li.fieldset h3.legend{
+	margin:0;
+}
+.formulaire_construire_formulaire li.fieldset.configurable > fieldset{
+	border:1px solid #ddd;
+	padding:0;
+}
+.formulaire_construire_formulaire li.fieldset.configurable > fieldset > ul{
+	padding:0 1em;
+}
 .formulaire_construire_formulaire .formulaire_configurer{
 	margin:1em -1em 0 -1em;
 	border-top:1px dashed #999;
 }
+.formulaire_construire_formulaire li.fieldset.configurable > .formulaire_configurer{
+	margin:1em 0 0 0;
+}
 .formulaire_construire_formulaire .formulaire_configurer fieldset{
 	border:0;
+	padding:0;
 }
 .formulaire_construire_formulaire .formulaire_configurer-contenus li.editer{
 	border:0;
@@ -77,13 +95,9 @@
 }
 
 .formulaire_construire_formulaire .actions{
-	float:right;
-}
-.formulaire_construire_formulaire .hidden{
-	visibility:hidden;
-}
-.formulaire_construire_formulaire li.en_configuration .actions{
-	visibility:visible;
+	position:absolute;
+	right:5px;
+	top:5px;
 }
 
 .formulaire_construire_formulaire .actions button{
