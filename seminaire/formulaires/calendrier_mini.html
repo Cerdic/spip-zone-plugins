@@ -30,7 +30,7 @@
 
 					<tbody>
 						<BOUCLE_calendrier(EVENEMENTS){agenda date_debut, mois, (#ENV{date}|annee), (#ENV{date}|mois)}>
-							[(#DATE_DEBUT|Agenda_memo_full{#DATE_FIN,[(#TITRE|addslashes)][-(#NAME|attribut_html)]<!--[-(#ABSTRACT| attribut_html)]-->,#DESCRIPTIF,#LIEU,spip.php?page=aujour&date=[(#DATE_DEBUT|affdate{'Y-m-d'})]})]
+							[(#DATE_DEBUT|Agenda_memo_full{#DATE_FIN,[(#TITRE|addslashes)][-(#NAME|attribut_html)],#DESCRIPTIF,#LIEU,spip.php?page=aujour&date=[(#DATE_DEBUT|affdate{'Y-m-d'})]})]
 						</BOUCLE_calendrier>
 						[(#ENV{date}|agenda_mini)]
 					</tbody>
