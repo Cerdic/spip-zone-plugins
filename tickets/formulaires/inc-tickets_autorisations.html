@@ -16,14 +16,21 @@
 						webmestre,<:tickets:cfg_lbl_autorisation_webmestre:>,
 						par_statut,<:tickets:cfg_lbl_autorisation_statuts:>,
 						par_auteur,<:tickets:cfg_lbl_autorisation_auteurs:>},
-					defaut=webmestre})]
+					defaut=par_statut})]
 			</ul>
 			[(#REM) <!-- Methode par statut d'auteurs (choix multiple) --> ]
-			<ul id="[(#GET{prefixe})]bloc_par_statut" class="[(#GET{prefixe})]bloc">
-	
+			<ul id="[(#GET{prefixe})]bloc_par_statut" class="[(#GET{prefixe})]bloc[(#ENV{#GET{prefixe}type}|non) visible]">
+				[(#CONFIG{[(#GET{prefixe})type]}|non)
+					[(#GET{prefixe}|in_array{#ARRAY{0,ecrire_,1,assigner_,2,modifier_}}|oui)
+						#SET{defaut,#ARRAY{0,0minirezo}}]
+					[(#GET{prefixe}|in_array{#ARRAY{0,commenter_}}|oui)
+						#SET{defaut,#ARRAY{0,0minirezo,1,1comite}}]
+				]
+
 				[(#SAISIE{statuts_auteurs,[(#GET{prefixe})]statuts,
 					label=<:tickets:cfg_lbl_statuts_auteurs:>,
 					afficher_tous=oui,
+					defaut=#GET{defaut},
 					multiple=oui})]
 			</ul>
 			[(#REM) <!-- Methode par id d'auteurs (choix multiple) --> ]
@@ -38,7 +45,7 @@
 		//<![CDATA[
 			jQuery(document).ready(function() {
 				// on cache tous les blocs du meme prefixe
-				jQuery(".[(#GET{prefixe})]bloc").hide();
+				jQuery(".[(#GET{prefixe})]bloc").not('.visible').hide();
 				//on recupere la valeur de celui qui est deja selectionne
 				var checked = jQuery("input[name='[(#GET{prefixe})]type']:checked").val();
 				// pour l'afficher
