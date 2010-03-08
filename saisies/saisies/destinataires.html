@@ -33,10 +33,10 @@
 				<div class="choix">
 					<input
 						type="checkbox" class="checkbox"
-						name="#ENV{nom}&#91;&#93;" id="destinataire#ID_AUTEUR"
+						name="#ENV{nom}&#91;&#93;" id="champ_#ENV{nom}_destinataire#ID_AUTEUR"
 						value="#ID_AUTEUR"[ (#ID_AUTEUR|in_array{#ENV*{valeur,#ENV*{defaut,#ARRAY}}}|oui)checked="checked"]
 					/>
-					<label for="destinataire#ID_AUTEUR">#NOM</label>
+					<label for="champ_#ENV{nom}_destinataire#ID_AUTEUR">#NOM</label>
 				</div>
 			]
 			[(#GET{type_choix}|=={un}|oui)
