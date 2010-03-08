@@ -3,6 +3,8 @@
 
 <div class="ticket contenu-principal">
 	<div class="cartouche">
+		[(#ENV{id_ticket}|oui)
+			<a class="i_edit" href="[(#URL_PAGE{ticket}|parametre_url{id_ticket,#ID_TICKET})]"><:tickets:icone_retour_ticket:></a>]
 		<h1 class="titre">#GET{texte}</h1>
 	</div>
 	[(#AUTORISER{ecrire,ticket,#ENV{id_ticket,oui}})
@@ -12,8 +14,8 @@
 		<p><:tickets:tickets_sur_inscription:>
 			[(#CONFIG{accepter_inscriptions}|=={oui}|oui) <a href="#URL_PAGE{inscription}"><:tickets:sinscrire:></a> ]
 		</p>
-		
+
 		<h2 class='titre'><:tickets:titre_identification:></h2>
 		[(#FORMULAIRE_LOGIN{#SELF})]
-	]	
+	]
 </div>
