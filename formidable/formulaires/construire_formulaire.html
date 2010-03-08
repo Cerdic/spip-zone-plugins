@@ -40,7 +40,7 @@
 	
 	<script type="text/javascript">
 		$(function(){
-			$('.formulaire_construire_formulaire li.configurable > .actions').hide();
+			$('.formulaire_construire_formulaire li.configurable:not(.en_configuration) > .actions').hide();
 			$('.formulaire_construire_formulaire li.configurable')
 				.hover(
 					function(){
@@ -49,17 +49,18 @@
 							.find('> .actions')
 								.show()
 							.end()
-							.parents('li.configurable')
+							.parents('li.configurable:not(.en_configuration)')
 								.mouseout();
 					},
 					function(){
-						$(this)
-							.removeClass('hover')
-							.find('> .actions')
-								.hide()
-							.end()
-							.parents('li.configurable').eq('0')
-								.mouseover();
+						if (!$(this).is('.en_configuration'))
+							$(this)
+								.removeClass('hover')
+								.find('> .actions')
+									.hide()
+								.end()
+								.parents('li.configurable').eq('0')
+									.mouseover();
 					}
 				);
 			
