@@ -32,6 +32,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_statuts_auteurs' => 'Statuts possibles',
 	'cfg_lbl_liste_auteurs' => 'Auteurs du site',
 	'cfg_titre_tickets' => 'Tickets',
+	'commentaire' => 'commentaire',
+	'commentaires' => 'commentaires',
+	'commentaire_aucun' => 'Aucun commentaire',
 
 	'champ_assigner' => 'Assigner &agrave;',
 	'champ_composant' => 'Composant',

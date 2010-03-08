@@ -199,4 +199,9 @@ function tickets_affiche_milieu($flux){
 	return $flux;
 }
 
+
+function tickets_forum_objet_accepte($array){
+	$array[] = 'id_ticket';
+	return $array;
+}
 ?>
