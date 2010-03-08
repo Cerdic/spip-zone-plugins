@@ -1,153 +1,17 @@
 /*  ----------------------------------------------------------- */
 /*  Feuilles de styles des squelettes spip-thelia		*/
 /*  ----------------------------------------------------------- */
-
-/* styles thelia */
-
-
-/* Produit petit & grand
--------------------------------------------------------- */
-
-.ListeProduitsPetits {
-	margin: 0;
-	padding: 0;
-}
-
-.produitPetit {
-	float: left;
-	width: 145px;
-	margin-top: 20px;
-	margin-right: 20px;
-	margin-bottom: 0;
-	margin-left: 0;
-	padding: 0;
-	list-style: none;
-	_height: 300px;
-	min-height: 300px;
-	font-size: .9em;
-}
-
-.contourImage {
-	border-top: 1px solid #cccccc;
-	border-left: 1px solid #cccccc;
-	margin-bottom: 5px;
-	float: left;
-}
-
-
-
-.prixProduit {
-	color: #EC8000;
-	text-align: left;
-	font-weight: normal;
-	margin-top: 5px;
-}
-
-.ficheProduit {
-	float:left;
-	width: 470px;
-	margin-left: 10px;
-}
-
-
-a.LIEN_commander {
-	color: #acac90;
-	text-decoration: none;
-	font-weight: bold;
-}
-input.LIEN_commander {
-	float: right;
-}
-.page_produit input.LIEN_commander {
-	float: none;
-	margin-top: .5em;
-	margin-bottom: 1em;
-}
-.caracteristiqueProduit ul {
-	padding-left: 0;
-}
-.caracteristiqueProduit ul li {
-	list-style: none;
-}
-
-/* Nombre de pages
--------------------------------------------------------- */
-
-#pages {
-	float: left;
-	text-align: right;
-	font-size: 0.9em;
-	padding-top: 10px;
-	margin: 0;
-	padding-bottom: 10px;
-	color: #12335B;
-}
-.page_produit #pages {
-	clear: left;
-}
-
-a.LIEN_pages:link {
-	color: #12335B;
-	text-decoration: none;
-	font-weight: bold;
-}
-
-a.LIEN_pages:visited {
-	color: #12335B;
-	text-decoration: none;
-	font-weight: bold;
-}
-
-a.LIEN_pages:hover {
-	color: #12335B;
-	text-decoration: underline;
-	font-weight: bold;
-}
-
-
-
-
-/* Divers �l�ments de formulaires & tableaux
--------------------------------------------------------- */
-
-.codeReduction { text-align: right; padding-bottom: 1em; margin-bottom: 1em; border-bottom: 1px solid #7a6d2c; }
-.codeReduction #code { width: 6em; margin-left: .5em; margin-right: .5em; }
-
-.enteteTableau {
-	font-weight: bold;
-	text-align: center; 
-	font-size: .8em;
-}
-.sousTableau { float: right;  margin-top: .5em; margin-bottom: 1em; font-size: .9em; padding: .5em;}
-.sousTableau ul { padding: 0; margin: 0; }
-.sousTableau ul li { list-style: none; text-align: right; }
-
+.ficheProduit { float: left; width: 470px; margin-left: 10px; }
+.caracteristiqueProduit ul { padding-left: 0; }
+.caracteristiqueProduit ul li { list-style: none; }
 
 .formulaire_livraison label, .formulaire_paiement label, .formulaire_reduction label { display: inline; }
 
 .bouton-actualiser { border: none; background: none; text-decoration: underline; color: #7A6D2C; vertical-align:text-bottom; }
-.ligneTableau {
-	font-size: 0.9em;
-	padding-left: 3px;
-	padding-right: 3px;
-}
 
-.footerTableau {
-	color: #666;
-	font-weight: bold;
-}
-
-.boutonMonCompteContenu, .lien-etapes-thelia {
-	text-align: right;
-	margin: 10px;
-}
-.boutonMonCompteContenu a, .lien-etapes-thelia {
-	color: #7A6D2C;
-	text-decoration: underline;
-}
-.bouton-etapes-thelia {
-	float: right;
-}
+.boutonMonCompteContenu, .lien-etapes-thelia { text-align: right; margin: 10px; }
+.boutonMonCompteContenu a, .lien-etapes-thelia { color: #7A6D2C; text-decoration: underline; }
+.bouton-etapes-thelia { float: right; }
 
 a.lien-retour-thelia {
 	color: #666;
@@ -158,20 +22,14 @@ a.lien-retour-thelia {
 .lien-thelia { display: block; color: #2666C3; text-decoration: underline; background: none; padding: .5em 0; margin: .5em 0; }
 .lien-thelia:hover { background: none; }
 .lien-thelia-precedent { float: left; clear: left; }
-.lien-thelia-suite { float: right; clear: right; background-color: #2666C3; border: 1px solid #2666C3; color: white; padding: .5em .5em; text-decoration: none; }
-.lien-thelia-suite:hover { background-color: #2690c3; color: white; text-decoration: none; }
+.lien-thelia-suite { float: right; clear: right; background-color: #8EB50C; border: 1px solid #8EB50C; color: white; padding: .5em .5em; text-decoration: none; font-weight: bold; }
+.lien-thelia-suite:hover { background-color: #8EB50C; color: white; text-decoration: none; }
 
 
 
-.obligatoire {
-	color: #FF0000;
-}
+.obligatoire { color: #FF0000; }
 
-
-.formulaire-thelia fieldset, .formulaire-produit fieldset {
-	border: none;
-	padding: 0;
-}
+.formulaire-thelia fieldset, .formulaire-produit fieldset { border: none; padding: 0; }
 .formulaire-produit { float: left; }
 .formulaire-produit .boutons { margin-top: .5em; }
 .formulaire-produit .declinaisonProduit select { width: auto; display: inline; padding-right:1em; }
@@ -182,59 +40,6 @@ a.lien-retour-thelia {
 .thelia_promo {	font-size: 1.1em; color: #F60; font-weight: bold; }
 .thelia_reappro { font-style: italic; font-size: .9em; }
 .autres-images-produit { clear: both; }
-
-#etapes-achat ul  {
-	margin: 0;
-	padding: 0;
-	list-style: none;
-}
-#etapes-achat ul li {
-	float: left;
-	color: #939393;
-	height: 70px;
-	padding: 0;
-	margin: 0;
-	margin-bottom: 25px;
-	padding-right: 18px;
-	background-image: url(img_pack/fleche.jpg);
-	background-position: right 11px;
-	background-repeat: no-repeat;
-	font-size: .8em;
-	
-}
-#etapes-achat ul li.derniere-etape {
-	background-image: none;
-	padding-right: 0;
-}
-	
-#etapes-achat ul li div {
-	width: 75px;
-	padding: 5px;
-	padding-left: 0;
-}
-#etapes-achat ul li.etape-courante {
-	color: #F60;
-	font-weight: bold;
-}
-#etapes-achat ul li.etape-courante div {
-}
-
-#etapes-achat ul li a{
-	color: #808080;
-	}
-
-#etapes-achat ul li a:hover{
-	color: #F60;
-}
-	
-	
-#etapes { display: block; position: absolute; top: 10px; left: 10px; }
-#etapes span { display: block; margin-top: -0.50em; padding: 12px 14px; margin-bottom: 5px; }
-#etapes span em { font-size: 2em; font-weight: bold; }
-#etapes span span { position: absolute; top: -100px; left: -100px; }
-#etapes span.ok { background: url(../../prive/images/etape-ok.gif) center no-repeat; }
-#etapes span.encours { background: url(../../prive/images/etape-encours.gif) center no-repeat; }
-#etapes span.todo { background: url(../../prive/images/etape-todo.gif) center no-repeat; }
 
 #infos_etapes { height: 63px; overflow: hidden; margin: 0; padding: 0; padding-left: 10px; background: #8c8c8c url(../../prive/images/degrade-etapes-clair-left.gif) no-repeat right top; text-align: left; font-family: helvetica, arial, sans; list-style: none; }
 #infos_etapes.infos_etape_4 { background-image: url(../../prive/images/degrade-etapes-vert-left.gif); background-color: green; }

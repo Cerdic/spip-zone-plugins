@@ -2,8 +2,8 @@
 			
 				
 				
-				<div class="titrePage">
-				<h1><:spipthelia:detail_commande:> N&deg;THELIA-REF </h1>
+				<div class="cartouche">
+				  <h1 class="h1"><:spipthelia:detail_commande:> N&deg;THELIA-REF </h1>
 				</div>
 			
 				[(#REM) Détail de la commande ]
@@ -14,47 +14,39 @@
 				</div>
 				</THELIA_verifpay>
 				
-				<table id="commande">
+				<table id="commande" class="spip">
             			<thead> 
-				<tr>
-    					<th class="enteteTableau"><:spipthelia:produit_et_reference:>  </th>
-    					<th class="enteteTableau"><:spipthelia:prix_unitaire:> </th>
-    					<th class="enteteTableau"><:spipthelia:quantite:></th>
-   					<th class="enteteTableau"><:spipthelia:total:></th>
-				</tr>
+				    <tr class="row_first">
+					    <th><:spipthelia:produit_et_reference:>  </th>
+					    <th><:spipthelia:prix_unitaire:> </th>
+					    <th><:spipthelia:quantite:></th>
+					    <th><:spipthelia:total:></th>
+				    </tr>
 				</thead> 
 				<tbody>
 		
 				<THELIA_venteprod type="VENTEPROD" commande="THELIA-ID">
 				<tr>
-					<td class="ligneTableau">THELIA-TITRE - Ref&nbsp;:&nbsp;THELIA-REF </td>
-    					<td class="ligneTableau">THELIA-PRIXU&nbsp;&euro;</td>
-    					<td class="ligneTableau">THELIA-QUANTITE</td>
-   					<td class="ligneTableau">THELIA-TOTALPROD&nbsp;&euro;</td>
+					<td>THELIA-TITRE - Ref&nbsp;:&nbsp;THELIA-REF </td>
+    					<td>THELIA-PRIXU&nbsp;&euro;</td>
+    					<td>THELIA-QUANTITE</td>
+   					<td>THELIA-TOTALPROD&nbsp;&euro;</td>
 				</tr>
 				</THELIA_venteprod>
 			
+				
+
+				    <tr><td></td><td></td><td><strong><:spipthelia:total:></strong></td><td>THELIA-TOTALCMD&nbsp;&euro;</td></tr>
+				    <tr><td></td><td></td><td><strong><:spipthelia:remise:></strong></td><td>THELIA-REMISE&nbsp;&euro;</td></tr>
+				    <tr><td></td><td></td><td><strong><:spipthelia:frais_livraison:></strong></td><td>THELIA-PORT&nbsp;&euro;</td></tr>
+				    <tr><td></td><td></td><td><strong><:spipthelia:total:></strong></td><td>THELIA-TOTCMDPORT&nbsp;&euro;</td></tr>
+				    <tr><td></td><td></td><td><strong><:spipthelia:statut:></strong></td><td>THELIA-STATUT</td></tr>
+			  	
 				</tbody>
 		    		</table>
-
-				<div class="sousTableau">
-				<ul>
-					<li><:spipthelia:total:> : THELIA-TOTALCMD&nbsp;&euro;</li>
-			  		<li><:spipthelia:remise:> : THELIA-REMISE&nbsp;&euro;</li>
-					<li><:spipthelia:frais_livraison:> : THELIA-PORT&nbsp;&euro;</li>
-			  		<li><:spipthelia:total:> : THELIA-TOTCMDPORT&nbsp;&euro;</li>
-			  	</ul>
-				</div>
-				<br class="nettoyeur" />
-
-				<div class="sousTitrePage">
-				  	<h3><:spipthelia:statut:> : THELIA-STATUT</h3>
-				</div>
-
+				
 				<THELIA_verifpay type="COMMANDE" ref="THELIA-COMMANDE_REF" statut="paye">			 
-				<div class="boutonMonCompteContenu">
-				<a href="client/pdf/facture.php?ref=THELIA-REF"><:spipthelia:visualiser_pdf:> </a>
-				</div>
+				<a href="client/pdf/facture.php?ref=THELIA-REF" class="lien-thelia-suite"><:spipthelia:visualiser_pdf:></a>
 				</THELIA_verifpay>				
 				
 
