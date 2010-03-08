@@ -18,8 +18,8 @@ function action_clevermail_list_subscriber_remove_dist() {
     		sql_updateq("spip_cm_subscribers", array('sub_email' => md5($abonne).'@example.com'), "sub_id = ".intval($abonnement['sub_id']));
 	    }
 	    $destinataire = $liste['lst_moderator_email'];
-	    $sujet = '['.addslashes($liste['lst_name']).'] Désinscription de '.addslashes($abonne);
-	    $corps = _T('clevermail:mail_info_desinscription_corps', array('nom_site' => $GLOBALS['meta']['nom_site'], 'url_site' => $GLOBALS['meta']['adresse_site'], 'sub_email' => addslashes($abonne), 'lst_name' => addslashes($liste['lst_name'])));
+	    $sujet = '['.$liste['lst_name'].'] Désinscription de '.addslashes($abonne);
+	    $corps = _T('clevermail:mail_info_desinscription_corps', array('nom_site' => $GLOBALS['meta']['nom_site'], 'url_site' => $GLOBALS['meta']['adresse_site'], 'sub_email' => addslashes($abonne), 'lst_name' => $liste['lst_name']));
 	    $expediteur = sql_getfetsel("set_value", "spip_cm_settings", "set_name='CM_MAIL_FROM'");
 	    $envoyer_mail = charger_fonction('envoyer_mail', 'inc');
 	    if ($envoyer_mail($destinataire, $sujet, $corps, $expediteur)) {
@@ -27,7 +27,7 @@ function action_clevermail_list_subscriber_remove_dist() {
 		  } else {
 		       spip_log('Envoie du mail KO','clevermail');
 		  }
-      spip_log('Suppression du l\'abonnement de « '.$abonne.' » à la liste « '.$liste['lst_name'].' » (id='.$abonnement['lst_id'].')', 'clevermail');
+      spip_log('Suppression de l\'abonnement de « '.$abonne.' » à la liste « '.$liste['lst_name'].' » (id='.$abonnement['lst_id'].')', 'clevermail');
 	  }
   }
 }

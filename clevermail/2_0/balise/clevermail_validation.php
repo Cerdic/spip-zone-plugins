@@ -33,8 +33,8 @@ function balise_CLEVERMAIL_VALIDATION_dyn() {
 
 	            // E-mail d'alerte envoye au moderateur de la liste
 	            $destinataire = $list['lst_moderator_email'];
-	            $sujet = '['.addslashes($list['lst_name']).'] '._T('clevermail:mail_info_inscription_sujet', array('sub_email' => addslashes($sub['sub_email'])));
-	            $corps = _T('clevermail:mail_info_inscription_corps', array('nom_site' => $GLOBALS['meta']['nom_site'], 'url_site' => $GLOBALS['meta']['adresse_site'], 'sub_email' => addslashes($sub['sub_email']), 'lst_name' => addslashes($list['lst_name'])));
+	            $sujet = '['.$list['lst_name'].'] '._T('clevermail:mail_info_inscription_sujet', array('sub_email' => addslashes($sub['sub_email'])));
+	            $corps = _T('clevermail:mail_info_inscription_corps', array('nom_site' => $GLOBALS['meta']['nom_site'], 'url_site' => $GLOBALS['meta']['adresse_site'], 'sub_email' => addslashes($sub['sub_email']), 'lst_name' => $list['lst_name']));
 	            $expediteur = sql_getfetsel("set_value", "spip_cm_settings", "set_name='CM_MAIL_FROM'");
 	            $envoyer_mail = charger_fonction('envoyer_mail', 'inc');
 	            $envoyer_mail($destinataire, $sujet, $corps, $expediteur);
@@ -55,8 +55,8 @@ function balise_CLEVERMAIL_VALIDATION_dyn() {
 	            $sub = sql_fetsel("*", "spip_cm_subscribers", "sub_id = ".intval($action['sub_id']));
 	            $list = sql_fetsel("*", "spip_cm_lists", "lst_id = ".intval($action['lst_id']));
 	            $destinataire = $list['lst_moderator_email'];
-	            $sujet = '['.addslashes($list['lst_name']).'] Désinscription de '.addslashes($sub['sub_email']);
-	            $corps = _T('clevermail:mail_info_desinscription_corps', array('nom_site' => $GLOBALS['meta']['nom_site'], 'url_site' => $GLOBALS['meta']['adresse_site'], 'sub_email' => addslashes($sub['sub_email']), 'lst_name' => addslashes($list['lst_name'])));
+	            $sujet = '['.$list['lst_name'].'] Désinscription de '.addslashes($sub['sub_email']);
+	            $corps = _T('clevermail:mail_info_desinscription_corps', array('nom_site' => $GLOBALS['meta']['nom_site'], 'url_site' => $GLOBALS['meta']['adresse_site'], 'sub_email' => addslashes($sub['sub_email']), 'lst_name' => $list['lst_name']));
 	            $expediteur = sql_getfetsel("set_value", "spip_cm_settings", "set_name='CM_MAIL_FROM'");
 	            $envoyer_mail = charger_fonction('envoyer_mail', 'inc');
 	            $envoyer_mail($destinataire, $sujet, $corps, $expediteur);
