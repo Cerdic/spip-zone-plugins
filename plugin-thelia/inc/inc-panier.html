@@ -48,7 +48,7 @@
                 				<input type="hidden" name="thelia_action" value="modifier" />
                 				<input type="hidden" name="article" value="THELIA-ARTICLE" />
                 				<select name="quantite" size="1" class="zoneDeSaisie" onchange="$('#formpanierTHELIA-ARTICLE').submit()">
-                				<THELIA_quantite type="QUANTITE" article="THELIA-ARTICLE" max="50">
+                				<THELIA_quantite type="QUANTITE" article="THELIA-ARTICLE">
 							<option value="THELIA-NUM" THELIA-SELECTED>THELIA-NUM</option>
 						</THELIA_quantite>
 						</select>
@@ -77,7 +77,7 @@
 				</THELIA SI CONNECTE>
 				]
 				[(#SESSION{id_auteur}|non)
-				    <a href="#URL_PAGE{adresse}" class="lien-thelia lien-thelia-suite"><:spipthelia:valider_panier:></a>
+				    <a href="[(#URL_PAGE{adresse}|parametre_url{commande,1})]" class="lien-thelia lien-thelia-suite"><:spipthelia:valider_panier:></a>
 				]
 				
 			</T_CONTENU_PANIER>
