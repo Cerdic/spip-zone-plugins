@@ -25,8 +25,8 @@ function formulaires_editer_evenement_charger_dist($id_evenement='new', $id_arti
 	// fixer la date par defaut en cas de creation d'evenement
 	if (!intval($id_evenement)){
 		$t=time();
-		$valeurs["date_debut"] = date('Y-m-d H:i:00',$t);
-		$valeurs["date_fin"] = date('Y-m-d H:i:00',$t+3600);
+		$valeurs["date_debut"] = date('Y-m-d H:00:00',$t);
+		$valeurs["date_fin"] = date('Y-m-d H:00:00',$t+3600);
 		$valeurs['horaire'] = 'oui';
 	}
 
