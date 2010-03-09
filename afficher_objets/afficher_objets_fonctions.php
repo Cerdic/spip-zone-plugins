@@ -25,18 +25,11 @@ function critere_where_dist($idb, &$boucles, $crit) {
 
 	if ($crit->cond)
 		$_where = "(($_where) ? ($_where) : '')";
-	
+
 	if ($crit->not)
 		$_where = "array('NOT',$_where)";
 
 	$boucle->where[]= $_where;
-}
-
-
-function afficher_objets_header_prive($texte){
-	$texte .= "<script type='text/javascript' src='".find_in_path('prive/javascript/jquery.qtip-1.0.0-rc3.js')."'></script>";
-	$texte .= "<script type='text/javascript' src='".find_in_path('prive/javascript/jquery.qtip.activate.js')."'></script>";
-	return $texte;
 }
 
 ?>

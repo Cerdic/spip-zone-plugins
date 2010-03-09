@@ -21,10 +21,9 @@
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class='statut'>[(#ID_SYNDIC_ARTICLE|puce_changement_statut{#STATUT,#ID_SYNDIC,syndic_article})]</td>
 			<td class='titre'>[<a
-					href="(#URL_ARTICLE)" class="qTip">#SET{a,'</a>'}]#TITRE[(#GET{a})]
+					href="(#URL_ARTICLE)">#SET{a,'</a>'}]#TITRE[(#GET{a})]
 				<span class="auteurs">([(#LESAUTEURS), ][(#DATE|affdate_court)])</span>
 				[(#TAGS|afficher_enclosures)]
-				[<div class="desctiptif qTipContent">(#DESCRIPTIF|couper{600}|image_reduire{385,550})</div>]
 				[<div style='float:#LANG_RIGHT;'>&nbsp;<em>(#TAGS|afficher_tags)</em></div>]
 				[<div style='float:#LANG_RIGHT;'>[<a href="(#URL_SOURCE)">#SET{b,'</a>'}](#SOURCE|sinon{#URL_SOURCE})#GET{b}</div>]
 			</td>
