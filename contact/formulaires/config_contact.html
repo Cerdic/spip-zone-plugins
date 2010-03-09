@@ -24,39 +24,46 @@
 				</B_auteurs>
 			</li>
 			<li class="choix baisser"><p class="explication"><:contact:configuration_regle_liste_explication:></p>
-				<div class="non">
+				<div class="bord bottom">
+				<div class="non par">
 					<input type="radio" name="type_choix" id="tous" class="radio" value="tous"[ checked="checked"(#ENV{type_choix}|=={tous}|ou{#ENV{type_choix}|non}|oui)] />
 					<label for="tous"><:contact:configuration_destinataires_tous:></label>
 				</div>
-				<div class="non">
+				<div class="non enf">
 					<input type="radio" name="type_choix" id="tous_ou" class="radio" value="tous_ou"[ checked="checked"(#ENV{type_choix}|=={tous_ou}|oui)] />
 					<label for="tous_ou"><:contact:configuration_destinataires_tous_ou:></label>
 				</div>
-				<div class="non">
+				<div class="non enf">
 					<input type="radio" name="type_choix" id="tous_et" class="radio" value="tous_et"[ checked="checked"(#ENV{type_choix}|=={tous_et}|oui)] />
 					<label for="tous_et"><:contact:configuration_destinataires_tous_et:></label>
 				</div>
-				<div class="non">
+				</div>
+				
+				<div class="bord">
+				<div class="non par">
 					<input type="radio" name="type_choix" id="un" class="radio" value="un"[ checked="checked"(#ENV{type_choix}|=={un}|oui)] />
 					<label for="un"><:contact:configuration_destinataires_un:></label>
 				</div>
-				<div class="non">
+				<div class="non enf">
 					<input type="radio" name="type_choix" id="un_ou" class="radio" value="un_ou"[ checked="checked"(#ENV{type_choix}|=={un_ou}|oui)] />
 					<label for="un_ou"><:contact:configuration_destinataires_un_ou:></label>
 				</div>
-				<div class="non">
+				<div class="non enf">
 					<input type="radio" name="type_choix" id="un_et" class="radio" value="un_et"[ checked="checked"(#ENV{type_choix}|=={un_et}|oui)] />
 					<label for="un_et"><:contact:configuration_destinataires_un_et:></label>
 				</div>
-				<div class="plus">
+				</div>
+				
+				<div class="bord top">
+				<div class="plus par">
 					<input type="radio" name="type_choix" id="plusieurs" class="radio" value="plusieurs"[ checked="checked"(#ENV{type_choix}|=={plusieurs}|oui)] />
 					<label for="plusieurs"><:contact:configuration_destinataires_plusieurs:></label>
 				</div>
-				<div class="plus">
+				<div class="plus enf">
 					<input type="radio" name="type_choix" id="plusieurs_ou" class="radio" value="plusieurs_ou"[ checked="checked"(#ENV{type_choix}|=={plusieurs_ou}|oui)] />
 					<label for="plusieurs_ou"><:contact:configuration_destinataires_plusieurs_ou:></label>
 				</div>
-				<div class="plus">
+				<div class="plus enf">
 					<input type="radio" name="type_choix" id="plusieurs_et" class="radio" value="plusieurs_et"[ checked="checked"(#ENV{type_choix}|=={plusieurs_et}|oui)] />
 					<label for="plusieurs_et"><:contact:configuration_destinataires_plusieurs_et:></label>
 				</div>
@@ -64,6 +71,7 @@
 					<input type="checkbox" name="c" id="c" class="checkbox" value="c"[ (#ENV{c}|=={c}|oui)checked="checked"] />
 					<label for="c"><:contact:preselection:></label>
 				<br class="nettoyeur" />
+				</div>
 				</div>
 			</li>
 		</ul>
@@ -186,14 +194,34 @@
 		$('div.selection').each(function(){
 			if ($('div.non input.radio').is(':checked'))
 				$(this).hide();
+		});		
+		$('div.enf').hide();
+		
+		$('div.enf input.radio:checked').each(function(){
+		 		$(this).parent('div').show();
+		 		$(this).parent('div').siblings('div.enf').show();		 		
+		 });
+		
+		$('div.par input.radio:checked').each(function(){
+		 		$(this).parent('div').siblings('div.enf').show();		 		
+		 });
+		 
+		$('div div.par input.radio')
+			.click(function(){
+				if ($(this).is(':checked'))
+					$(this).parent('.par').siblings('div.enf')
+						.slideDown();
+					$('div div.par input.radio').not(':checked').parent('.par').siblings('div.enf')
+						.slideUp();
 		});
-
+										
 		$('div.plus input.radio')
 			.click(function(){
 				if ($(this).is(':checked'))
 					$('div.selection')
 						.slideDown();
 						});
+						
 		$('div.non input.radio')
 			.click(function(){
 				if ($(this).is(':checked'))
