@@ -155,16 +155,19 @@ function formidable_generer_saisie_configurable($saisie, $env){
 	$formulaire_config = $env['erreurs']['configurer_'.$nom];
 	// On ajoute une classe
 	$saisie['options']['li_class'] .= ' configurable';
+	// On ajoute l'option "tout_afficher"
+	$saisie['options']['tout_afficher'] = 'oui';
 	
-	// On ajoute les boutons d'actions
-	$saisie = saisies_inserer_html(
-		$saisie,
-		recuperer_fond(
-			'formulaires/inc-construire_formulaire-actions',
-			array('nom' => $nom, 'formulaire_config' => $formulaire_config)
-		),
-		'debut'
-	);
+	// On ajoute les boutons d'actions, mais seulement s'il n'y a pas de configuration de lancée
+	if (!$env['erreurs'])
+		$saisie = saisies_inserer_html(
+			$saisie,
+			recuperer_fond(
+				'formulaires/inc-construire_formulaire-actions',
+				array('nom' => $nom, 'formulaire_config' => $formulaire_config)
+			),
+			'debut'
+		);
 	
 	// On ajoute une ancre pour s'y déplacer
 	$saisie = saisies_inserer_html(
@@ -239,6 +242,11 @@ function formidable_generer_saisie_configurable($saisie, $env){
 				'inclure/generer_saisies',
 				$env2
 			)
+			.'<li class="boutons">
+				<input type="hidden" name="enregistrer_saisie" value="'.$nom.'" />
+				<button type="submit" class="submit link" name="enregistrer_saisie" value="">'._T('bouton_annuler').'</button>
+				<input type="submit" class="submit" name="enregistrer" value="'._T('bouton_enregistrer').'" />
+			</li>'
 			.'</ul></div>',
 			'fin'
 		);
@@ -246,12 +254,6 @@ function formidable_generer_saisie_configurable($saisie, $env){
 	
 	// On génère le HTML de la saisie
 	$html = generer_saisie($saisie, $env);
-	
-	// Si le <li> est en display:none on l'enlève
-	$html = preg_replace('/display[\s]*:[\s]*none;?/i',' ',$html);
-	
-	// Les input hidden sont transformés en text readonly
-	$html = preg_replace('/type=(\'|")hidden\\1/i','type="text" class="text" readonly="readonly"',$html);
 	
 	return $html;
 }

@@ -10,7 +10,7 @@
 		[(#REM) declarer les hidden qui declencheront le service du formulaire 
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
-		
+		<input style="display:none;" type="submit" class="submit" name="enregistrer" value="<:bouton_enregistrer:>" />
 		<ul>
 			<BOUCLE_contenu(POUR){tableau #ENV{_contenu}}>
 			[(#VAL{saisie}|array_key_exists{#VALEUR}|oui)
