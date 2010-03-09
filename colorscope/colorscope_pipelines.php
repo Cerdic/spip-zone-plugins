@@ -15,11 +15,23 @@ function colorscope_post_typo($texte) {
 	return $texte;
 }
 
-function bloc_colorscope($couleur) {
-	$fond = '#'.couleur_inverser(couleur_extreme($couleur[0]));
-	$bloc = '<span style="display:inline-block;text-align:center;width:90px;height:20px;background-color:'.$couleur[0].';color:'.$fond.'">'.$couleur[0].'</span>';
+function bloc_colorscope($couleurs) {
+	$coul = $couleurs[0];
+	if ( luminance($coul) < 127 ) {
+		$fond = "white";
+	} else {
+		$fond = "black";
+	}
+	// $fond = '#'.couleur_inverser(couleur_extreme($coul));
+
+	$bloc = '<span style="display:inline-block;text-align:center;width:90px;height:20px;background-color:'.$coul.';color:'.$fond.'">'.$coul.'</span>';
 	return $bloc;
 }
 
+function luminance($couleur) {
+	$couleurs = couleur_hex_to_dec($couleur);
+	$valeur = 0.2126*$couleurs["red"] + 0.7152*$couleurs["green"] + 0.0722*$couleurs["blue"];
+	return $valeur;
+}
 
 ?>
