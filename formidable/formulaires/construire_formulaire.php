@@ -96,8 +96,17 @@ function formulaires_construire_formulaire_traiter($identifiant, $formulaire_ini
 	
 	// Si on enregistre la conf d'une saisie
 	if ($nom = _request('enregistrer_saisie')){
-		// On récupère les options postées en vidant les chaines vides
+		// On récupère ce qui a été modifié
 		$saisie_modifiee = _request("saisie_modifiee_$nom");
+		// On regarde s'il y a une position à modifier
+		if (isset($saisie_modifiee['position'])){
+			$position = $saisie_modifiee['position'];
+			unset($saisie_modifiee['position']);
+			// On ne déplace que si ce n'est pas la même chose
+			if ($position != $nom)
+				$formulaire_actuel = saisies_deplacer($formulaire_actuel, $nom, $position);
+		}
+		// On récupère les options postées en vidant les chaines vides
 		$saisie_modifiee['options'] = array_filter($saisie_modifiee['options']);
 		if (is_array($saisie_modifiee['options']))
 			spip_desinfecte($saisie_modifiee['options']);
@@ -169,34 +178,36 @@ function formidable_generer_saisie_configurable($saisie, $env){
 		$saisie['options']['readonly'] = 'oui';
 		
 		// On va ajouter le champ pour la position
-		if (!($chemin_affichage = saisies_chercher($formulaire_config, "saisie_modifiee_${nom}[options][affichage]", true))){
-			$chemin_affichage = array(count($formulaire_config));
+		if (!($chemin_description = saisies_chercher($formulaire_config, "saisie_modifiee_${nom}[options][description]", true))){
+			$chemin_description = array(0);
 			$formulaire_config = saisies_inserer(
 				$formulaire_config,
 				array(
 					'saisie' => 'fieldset',
 					'options' => array(
-						'nom' => "saisie_modifiee_${nom}[options][affichage]",
-						'label' => _T('saisies:option_groupe_affichage')
+						'nom' => "saisie_modifiee_${nom}[options][description]",
+						'label' => _T('saisies:option_groupe_description')
 					),
 					'saisies' => array()
-				)
+				),
+				0
 			);
 		}
-		$chemin_affichage[] = 'saisies';
-		$chemin_affichage[] = '10000000'; // tout à la fin
+		$chemin_description[] = 'saisies';
+		$chemin_description[] = '0'; // tout au début
 		$formulaire_config = saisies_inserer(
 			$formulaire_config,
 			array(
 				'saisie' => 'position_construire_formulaire',
 				'options' => array(
-					'nom' => 'position',
-					'label' => 'Position',
+					'nom' => "saisie_modifiee_${nom}[position]",
+					'label' => _T('formidable:construire_position_label'),
+					'explication' => _T('formidable:construire_position_explication'),
 					'formulaire' => $env['_contenu'],
 					'saisie_a_positionner' => $nom
 				)
 			),
-			$chemin_affichage
+			$chemin_description
 		);
 		
 		

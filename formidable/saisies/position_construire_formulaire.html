@@ -1,11 +1,11 @@
 
-<select>
+<select name="#ENV{nom}">
 	#SET{tab,#ENV{formulaire}}
 	#SET{padding,0}
 	#SET{parent,''}
 	<BOUCLE_parcours(POUR){tableau #GET{tab}}>
 	#SET{saisie,#VALEUR}
-	<option value="[(#GET{saisie}|table_valeur{options}|table_valeur{nom})]" style="padding-left:#GET{padding}px" [(#ENV{saisie_a_positionner}|=={#GET{saisie}|table_valeur{options}|table_valeur{nom}}|oui)selected="selected"]>
+	<option value="[(#GET{saisie}|table_valeur{options}|table_valeur{nom})]" style="padding-left:#GET{padding}px" [(#ENV{valeur,#ENV{saisie_a_positionner}}|=={#GET{saisie}|table_valeur{options}|table_valeur{nom}}|oui)selected="selected"]>
 		[(#GET{saisie}|table_valeur{options}|table_valeur{label}|sinon{#GET{saisie}|table_valeur{options}|table_valeur{nom}})]
 	</option>
 		<BOUCLE_test_enfants(CONDITION){si #GET{saisie}|table_valeur{saisies}|et{#GET{saisie}|table_valeur{saisies}|is_array}}>
@@ -18,6 +18,6 @@
 		#SET{parent,#GET{ancien_parent}}
 		</BOUCLE_test_enfants>
 	</BOUCLE_parcours>
-	<option value="[(#GET{parent})-]fin" style="padding-left:#GET{padding}px">À la fin</option>
+	<option value="[#GET{parent}]" style="padding-left:#GET{padding}px; font-style:italic;"><:formidable:construire_position_fin:></option>
 	</B_parcours>
 </select>
