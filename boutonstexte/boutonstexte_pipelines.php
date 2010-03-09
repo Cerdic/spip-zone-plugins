@@ -28,7 +28,7 @@ function boutonstexte_insert_head($flux)
 <link rel="stylesheet" href="spip.php?page={$cssFile}.css" type="text/css" media="all" />
 <link rel="stylesheet" href="spip.php?page={$cssFile}-print.css" type="text/css" media="print" />
 <script src="{$jsFile}" type="text/javascript"></script>
-<script type="text/javascript">
+<script type="text/javascript"><!--
 	var boutonstexte = new boutonsTexte({
 		'selector':'{$selector}',
 		'imgPath':'{$imgPath}',
@@ -37,6 +37,7 @@ function boutonstexte_insert_head($flux)
 		'txtSizeUp':'{$txtSizeUp}',
 		'txtSizeDown':'{$txtSizeDown}'
 	});
+//-->
 </script >
 EOH;
 
