@@ -1,11 +1,11 @@
 <plugin>
 	<nom>css_petits_ecrans</nom>
 	<auteur>[Nicolas Krebs->http://www.spip-contrib.net/Nicolas-Krebs], [ARNO*->http://www.spip-contrib.net/ARNO]</auteur>
-	<version>0.1</version>
+	<version>0.2</version>
 	<etat>dev</etat>
 	<description>
-	Ce plugin ajoute &agrave; aux squelettes des commandes CSS d'[affichage pour les petits ecrans->http://trac.rezo.net/trac/spip/ticket/1101] (type 400 &#xD7; 300). 
-	&Agrave; condition de bien utiliser <code>#INSERT_HEAD</code> dans ses squelettes.
+	Ce plugin ajoute aux squelettes des commandes CSS d'[affichage pour les petits ecrans->http://trac.rezo.net/trac/spip/ticket/1101] (type 400 &#xD7; 300). 
+	Il fonctionne avec les squelletes livrés avec SPIP.
 	
 	Bas&eacute; sur le plugin [supprimer_enveloppe_mailto->http://trac.rezo.net/trac/spip-zone/browser/_plugins_/_stable_/supprimer_enveloppe_mailto/] de ARNO*. 
 	</description>

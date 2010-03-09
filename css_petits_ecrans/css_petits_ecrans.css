@@ -2,3 +2,7 @@
 @media handheld, only screen and (max-device-width: 481px), only and (max-device-width: 400px), only and (max-width: 400px) {
 div#page, div#conteneur, div#navigation, div#extra, #entete { width: auto; }
 }
+/* Firefox 3.5 */
+@media all and (max-width: 400px) {
+div#page, div#conteneur, div#navigation, div#extra, #entete { width: auto; }
+}
