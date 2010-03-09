@@ -9,11 +9,11 @@ function balise_BANNIERE ($p) {
 	return calculer_balise_dynamique($p, 'BANNIERE', array());
 }
  
-// Balise de traitement des données
+// Balise de traitement des donnÃ©es
 function balise_BANNIERE_dyn($position='1',$contexte='',$pays='') {
 
 /*
- * geolocalisation limitée à la France -> voir plugin geographie
+ * geolocalisation limitÃ©e Ã  la France -> voir plugin geographie
  * ToDO : tester le numero du pays
  * $contexte doit etre au format code postal France
  */
@@ -36,7 +36,7 @@ if ($geo=='oui' and $pays=='70' and $contexte !=''){
 	//	Si pas de resultats avec le code postal, on cherche ailleurs
 	if ($data ==''){
 		
-		// On recupere le numero du departement à partir du début du code postal
+		// On recupere le numero du departement Ã  partir du dÃ©but du code postal
 		$departement = substr($contexte,0,2);
 		
 		// Cas des DOM TOM
@@ -44,25 +44,25 @@ if ($geo=='oui' and $pays=='70' and $contexte !=''){
 		$departement = substr($contexte,0,3);
 		}
 		
-		//on recupere l'id_departement et l'id_region à partir de la table spip_geo_departements
+		//on recupere l'id_departement et l'id_region Ã  partir de la table spip_geo_departements
 		$champs_geo = array('id_departement', 'id_region');
 		$where_geo = 'abbr='.sql_quote($departement);
 		$ids=sql_fetsel($champs_geo, "spip_geo_departements", $where_geo,'','', $limit = '1');
 			
-		// Le departement n'a pas été trouvé
+		// Le departement n'a pas Ã©tÃ© trouvÃ©
 		if ($ids == '') {
 		
-		// Que fais-ton si on n'a pas de résultats ?
+		// Que fais-ton si on n'a pas de rÃ©sultats ?
 		
 		} else {
 		
-			// On cherche si il y a quelque chose à afficher avec ce departement
+			// On cherche si il y a quelque chose Ã  afficher avec ce departement
 			$rayon = 'departement';
 			$diffusion = $ids['id_departement'];
 			
 			$data = chercher_banniere($position , $rayon , $diffusion);
 			
-			// Si rien dans le departement on s'attaque à la region
+			// Si rien dans le departement on s'attaque Ã  la region
 			if ($data ==''){
 			
 				$rayon ='region';
@@ -77,7 +77,7 @@ if ($geo=='oui' and $pays=='70' and $contexte !=''){
 				
 					$data = chercher_banniere($position , $rayon , $diffusion);
 					
-						// rien de configuré alons on affiche la banniere par defaut
+						// rien de configurÃ© alons on affiche la banniere par defaut
 						if ($data ==''){
 							$rayon = 'int';
 							$diffusion = '';
@@ -94,7 +94,7 @@ if ($geo=='oui' and $pays=='70' and $contexte !=''){
 
 
 	// On est PAS en 'France' ou on n'a pas d'autre infos
-	// On affiche alors une bannière générique ou 'internationale'
+	// On affiche alors une banniÃ¨re gÃ©nÃ©rique ou 'internationale'
 	$rayon ='int';
 	$diffusion = '';
 	
@@ -103,7 +103,7 @@ if ($geo=='oui' and $pays=='70' and $contexte !=''){
 }
 
 if ($data) {
-	// on recupere les données trouvées pour afficher la bonne bannière
+	// on recupere les donnÃ©es trouvÃ©es pour afficher la bonne banniÃ¨re
 	$id_objet		= 'id_banniere';
 	$id				= $data['id_banniere'];
 	$alt			= $data['alt'];
@@ -119,11 +119,11 @@ if ($data) {
 // chercher la bonne banniere
 function chercher_banniere($position='', $rayon ='', $diffusion ='') {
 
-	// Champs à récupérer
+	// Champs Ã  rÃ©cupÃ©rer
 	// $champs = array('id_banniere', 'alt');
 	
 	
-	// dans le cas du local il peut y avoir plusieurs codes postaux séparés par des virgules
+	// dans le cas du local il peut y avoir plusieurs codes postaux sÃ©parÃ©s par des virgules
 	// dans les autres cas il n'y a qu'une valeur
 	if ($rayon =='local'){
 		$ou = 'diffusion LIKE "%'.$diffusion.'%"';
@@ -140,7 +140,7 @@ function chercher_banniere($position='', $rayon ='', $diffusion ='') {
 		$ou,
 	);
 	
-	// On récupère les données dans la base 
+	// On rÃ©cupÃ¨re les donnÃ©es dans la base 
 	// $data=sql_fetsel($champs, "spip_bannieres", $where,'','RAND()', $limit = '1');
 	$data=sql_fetsel("*", "spip_bannieres", $where,'','RAND()', $limit = '1');
 
@@ -152,7 +152,7 @@ return $data;
 // afficher le document associe a la banniere
 function afficher_banniere($id_objet='',$id='',$alt='') {
 
-	// Chercher dans la base le document associe à la banniere
+	// Chercher dans la base le document associe Ã  la banniere
 	$type = "banniere";
 
 	$select = "D.id_document, D.extension, D.titre,  D.descriptif,  D.fichier, D.largeur, D.hauteur";
@@ -186,7 +186,7 @@ if ($document){
 
 	// c'est une image
 	$logo_banniere = '<a href="'.generer_url_action('visit_url','banniere='.$id).'" >
-		<img src="'._DIR_IMG.$document['fichier'].'" alt="'.$alt.'">
+		<img src="'._DIR_IMG.$document['fichier'].'" alt="'.$alt.'" width="'.$document['largeur'].'" height="'.$document['hauteur'].'" border="0">
 		</a>
 		';
 
@@ -205,7 +205,7 @@ if ($document){
 
 	// si on a trouve on l'affiche
 	$logo_banniere = '<a href="'.generer_url_action('visit_url','banniere='.$id).'" >
-		<img src="'.$logo['0'].'" alt="'.$alt.'">
+		<img src="'.$logo['0'].'" alt="'.$alt.'" width="'.$document['largeur'].'" height="'.$document['hauteur'].'" border="0">
 		</a>
 		';
 }
