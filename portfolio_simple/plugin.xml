@@ -1,0 +1,16 @@
+<plugin>
+	<nom>Porfolio_Simple</nom>
+	<auteur>ydikoi[->http://ydikoi.net/]</auteur>
+	<licence>GPL v3</licence>
+	<version>0.1</version>
+	<etat>stable</etat>
+	<description>Un portfolio simple : une rubrique avec des images, une page contact</description>
+	<lien>http://www.spip-contrib.net/spip.php?article3389</lien>
+	<icon>portfolio_simple.png</icon>
+	
+	<categorie>theme</categorie>
+	<necessite id="SPIP" version="[2.0.0;]" />
+	<necessite id="menus" version="[0.8;]" />
+	<necessite id="fancybox" />
+	<prefix>Porfolio_Simple</prefix>
+</plugin>
