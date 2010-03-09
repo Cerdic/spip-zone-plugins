@@ -1,0 +1,15 @@
+<plugin>
+	<nom>Diapos</nom>
+	<auteur>[speciale->http://luis-speciale.net]</auteur>
+	<version>0.1</version>
+	<etat>stable</etat>
+	<icon>diapos.png</icon>
+	<description>
+		Le plus simple des projecteurs de diapositives
+	</description>
+	<prefix>diapos</prefix>
+	<pipeline>
+  		<nom>insert_head</nom>
+  		<inclure>diapos_pipelines.php</inclure>
+  	</pipeline>
+</plugin>

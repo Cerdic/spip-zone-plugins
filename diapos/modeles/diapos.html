@@ -1,0 +1,18 @@
+<BOUCLE_DIAPOS(ARTICLES){id_article=#ENV{id}}>
+	<B_IMAGE>
+		<div class="cadre">
+    			<div class="fenetre">
+				<div class="cadre_image">
+					<BOUCLE_IMAGE(DOCUMENTS){id_article}{extension IN png,jpg,gif}{mode=image}{par num titre}>
+						<a href="#"  rel="#TITRE"><img src="#URL_DOCUMENT" alt="" /></a>
+					</BOUCLE_IMAGE>      
+				</div>
+    			</div>
+    			<div class="choix_image">
+		    		<BOUCLE_NUMERO_IMAGE(DOCUMENTS){id_article}{extension IN png,jpg,gif}{mode=image}{par num titre}>
+					<a href="#" rel="#TITRE">#TITRE</a>
+				</BOUCLE_NUMERO_IMAGE>       
+			</div>
+		</div>
+	</B_IMAGE>
+</BOUCLE_DIAPOS>
