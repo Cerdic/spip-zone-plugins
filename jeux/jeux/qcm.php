@@ -82,18 +82,17 @@ function qcm_analyse_le_qcm($qcm, $indexQCM, $isQRM) {
         break;
       case 'P' : 	  	// On extrait une proposition
 	  	// Pour les precisions de la proposition...
-	 	list($reponse, $precision)=explode("|", $li);
+	 	list($reponse, $precision)=explode("|", $li, 2);
 		// On extrait le numero de la proposition et son contenu
-		ereg("^P([0-9]*)(.*)", $reponse, $eregResult);	
-		$indexProposition = intval($eregResult[1]);
-		$suiteProposition = trim($eregResult[2]);
+		preg_match(',^P(\d*)(.*)$,', $reponse, $regs);	
+		$indexProposition = intval($regs[1]);
+		$suiteProposition = trim($regs[2]);
 		$qcms[$indexQCM]['nbpropositions']++;
         // On extrait les points eventuellement associes a chaque reponse
-        if(ereg("^\.(-?[0-9]+)(.*)", $suiteProposition, $eregResult)){
-          $qcms[$indexQCM]['points'][$indexProposition] = intval($eregResult[1]);
-          $qcms[$indexQCM]['propositions'][$indexProposition] = trim($eregResult[2]);
-        }
-		else {
+        if(preg_match(',^\.(-?\d+)(.*)$,', $suiteProposition, $regs)){
+          $qcms[$indexQCM]['points'][$indexProposition] = intval($regs[1]);
+          $qcms[$indexQCM]['propositions'][$indexProposition] = trim($regs[2]);
+        } else {
           $qcms[$indexQCM]['points'][$indexProposition] = 0;
           $qcms[$indexQCM]['propositions'][$indexProposition] = $suiteProposition;
         }
@@ -111,8 +110,8 @@ function qcm_analyse_le_qcm($qcm, $indexQCM, $isQRM) {
 		$qcms[$indexQCM]['maxscore'] = 0;
 		// parcours des bonnes reponses
 		$t = preg_split(',\s+R,', ' '.$li);
-		for ($i=1;$i<count($t);$i++) if (preg_match(",^([0-9]+),", $t[$i], $eregResult)) {
-			$indexBonneReponse = intval($eregResult[1]);
+		for ($i=1;$i<count($t);$i++) if (preg_match(',^(\d+),', $t[$i], $regs)) {
+			$indexBonneReponse = intval($regs[1]);
 			$qcms[$indexQCM]['bonnesreponses'][$indexBonneReponse]=1;
 			// au cas ou les points ne sont pas specifies pour la bonne reponse
 			if ($qcms[$indexQCM]['points'][$indexBonneReponse]==0) $qcms[$indexQCM]['points'][$indexBonneReponse] = 1;
@@ -134,7 +133,7 @@ function qcm_analyse_le_qcm($qcm, $indexQCM, $isQRM) {
 function qcm_les_points($phrase, $points) {
 	if (!jeux_config('points')) return $phrase;
     $pointsHTML = '<span class="jeux_points"> ('.$points. _T('jeux:point'.(abs($points)>1?'s':'')).')</span>';
-  	if (ereg('^(.*)( ?:)( *)$', $phrase, $eregResult)) $phrase = $eregResult[1].$pointsHTML.$eregResult[2].$eregResult[3];
+  	if (preg_match(',^(.*)( ?: *)$,', $phrase, $regs)) $phrase = $regs[1].$pointsHTML.$regs[2];
 	  else $phrase .= $pointsHTML;
 	return $phrase;  
 }
@@ -303,9 +302,9 @@ function qcm_affiche_la_question($indexJeux, $indexQCM, $corriger, $gestionPoint
 
 function qcm_inserer_les_qcm(&$chaine, $indexJeux, $gestionPoints) {
   global $qcms;
-  if (ereg('<ATTENTE_QCM>([0-9]+)</ATTENTE_QCM>', $chaine, $eregResult)) {
-	$indexQCM = intval($eregResult[1]);
-	list($texteAvant, $texteApres) = explode($eregResult[0], $chaine, 2); 
+  if (preg_match(',<ATTENTE_QCM>(\d+)</ATTENTE_QCM>,', $chaine, $regs)) {
+	$indexQCM = intval($regs[1]);
+	list($texteAvant, $texteApres) = explode($regs[0], $chaine, 2); 
 	$chaine = $texteAvant.jeux_rem('QCM-DEBUT', $indexQCM)
 		. qcm_affiche_la_question($indexJeux, $indexQCM, isset($_POST["var_correction_".$indexJeux]), $gestionPoints)
 		. jeux_rem('QCM-FIN', $indexQCM)
