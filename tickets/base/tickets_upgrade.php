@@ -33,7 +33,15 @@ function tickets_upgrade($nom_meta_base_version,$version_cible){
 		// ajout des champs ip
 		maj_tables(array('spip_tickets', 'spip_tickets_forum'));
 		ecrire_meta($nom_meta_base_version,$current_version="0.7");
-	}	
+	}
+
+	// au dessus de 1.0, c'est specifique SPIP >= 2.1
+	if (version_compare($current_version,"1.0","<")) {
+		// migrer sur la table forums pour la version 2.1...
+		migrer_commentaires_tickets_vers_forums();
+		sql_drop_table("spip_tickets_forum");
+		ecrire_meta($nom_meta_base_version,$current_version="1.0");
+	}
 		
 }
 
@@ -49,6 +57,36 @@ function tickets_existe() {
 		return false;
 	else
 		return true;
+}
+
+
+function migrer_commentaires_tickets_vers_forums() {
+	$res = sql_select('*', 'spip_tickets_forum');
+	if ($res) {
+		$correspondances = array();
+		while ($r = sql_fetch($res)) {
+			$titre = sql_getfetsel('titre', 'spip_tickets', 'id_ticket='. sql_quote($r['id_ticket']));
+			$auteur = sql_fetsel(array('nom','email'), 'spip_auteurs', 'id_auteur='. sql_quote($r['id_auteur']));
+			$correspondances[] = array(
+				"id_objet"	=> $r['id_ticket'],
+				"objet"		=> "ticket",
+				"id_parent"	=> 0,
+				"id_thread"	=> 0, // prendra id_forum cree
+				"date_heure"	=> $r['date'],
+				"titre"	=> $titre,
+				"texte"	=> $r['texte'],
+				"auteur"	=> ($auteur ? $auteur['nom'] : ''),
+				"email_auteur"	=> ($auteur ? $auteur['email'] : ''),
+				"statut"	=> "publie", // publie = public, prive = prive... dilemme ?
+				"ip"	=> $r['ip'],
+				"id_auteur"	=> $r['id_auteur'],
+			);
+		}
+		sql_insertq_multi('spip_forum', $correspondances);
+		sql_update('spip_forum',
+			array('id_thread'=>'id_forum'),
+			array('id_thread=0', 'objet='.sql_quote('ticket')));
+	}
 }
 
 ?>

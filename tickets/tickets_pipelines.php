@@ -98,17 +98,17 @@ function tickets_objets_extensibles($objets){
  */
 function tickets_gouverneur_infos_tables($array){
 	$array['spip_tickets'] = array(
-								'table_objet' => 'tickets',
-								'type' => 'ticket',
-								'url_voir' => 'ticket_afficher',
-								'texte_retour' => 'tickets:icone_retour_ticket',
-								'url_edit' => 'ticket_editer',
-								'texte_modifier' => 'tickets:icone_modifier_ticket',
-								'icone_objet' => 'ticket',
-								'texte_unique' => 'tickets:ticket',
-								'texte_multiple' => 'tickets:tickets',
-								'champs_versionnes' => array('titre','exemple', 'texte')
-							);
+		'table_objet' => 'tickets',
+		'type' => 'ticket',
+		'url_voir' => 'ticket_afficher',
+		'texte_retour' => 'tickets:icone_retour_ticket',
+		'url_edit' => 'ticket_editer',
+		'texte_modifier' => 'tickets:icone_modifier_ticket',
+		'icone_objet' => 'ticket',
+		'texte_unique' => 'tickets:ticket',
+		'texte_multiple' => 'tickets:tickets',
+		'champs_versionnes' => array('titre','exemple', 'texte')
+	);
 	return $array;
 }
 
