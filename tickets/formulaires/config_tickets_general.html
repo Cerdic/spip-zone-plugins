@@ -14,9 +14,20 @@
 			label=<:tickets:cfg_lbl_notification_publique:>,
 			label_case=<:tickets:cfg_lbl_case_notification_publique:>})]
 
+		[(#REM) uniquement avec le plugin forums ]
+		[(#SPIP_VERSION|version_compare{'2.1','>'}|oui)
+			[(#SAISIE{radio, forums_publics,
+				label=<:tickets:cfg_lbl_forums_publics:>,
+				defaut=posteriori,
+				datas=[(#ARRAY{
+					non,<:tickets:cfg_bouton_radio_desactiver_forum_public:>,
+					posteriori,<:bouton_radio_publication_immediate:>,
+					priori,<:bouton_radio_moderation_priori:>,
+					abo,<:bouton_radio_enregistrement_obligatoire:>,
+				})]})]
+		]
 		<p class="boutons">
-			<input type="submit" name="_cfg_ok" class="submit" value="<:valider:>" />
-			<input type="submit" name="_cfg_delete" class="submit" value="<:effacer:>" />
+			<input type="submit" name="_cfg_ok" class="submit" value="<:bouton_valider:>" />
 		</p>
 	</div></form>
 </div>
