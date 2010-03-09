@@ -72,6 +72,7 @@ function formulaires_construire_formulaire_verifier($identifiant, $formulaire_in
 function formulaires_construire_formulaire_traiter($identifiant, $formulaire_initial=array()){
 	include_spip('inc/saisies');
 	$retours = array();
+	$saisies_disponibles = saisies_lister_disponibles();
 	
 	// On ajoute un préfixe devant l'identifiant
 	$identifiant = 'constructeur_formulaire_'.$identifiant;
@@ -86,6 +87,11 @@ function formulaires_construire_formulaire_traiter($identifiant, $formulaire_ini
 				'nom' => saisies_generer_nom($formulaire_actuel, $ajouter_saisie)
 			)
 		);
+		// S'il y a des valeurs par défaut pour ce type de saisie, on les ajoute
+		if (($defaut = $saisies_disponibles[$ajouter_saisie]['defaut']) and is_array($defaut)){
+			$defaut = _T_ou_typo($defaut, 'multi');
+			$saisie = array_replace_recursive($saisie, $defaut);
+		}
 		$formulaire_actuel = saisies_inserer($formulaire_actuel, $saisie);
 	}
 	
