@@ -200,8 +200,8 @@ function tickets_affiche_milieu($flux){
 }
 
 
-function tickets_forum_objet_accepte($array){
-	$array[] = 'id_ticket';
-	return $array;
+function tickets_forum_objets_depuis_env($objets){
+	$objets['ticket'] = id_table_objet('ticket');
+	return $objets;
 }
 ?>

@@ -162,7 +162,7 @@ Es wurde insbesondere entwickelt, um die Zusammenarbeit bei der Gestaltung des &
 	</pipeline>
 
 	<pipeline>
-		<nom>forum_objet_accepte</nom>
+		<nom>forum_objets_depuis_env</nom>
 		<inclure>tickets_pipelines.php</inclure>
 	</pipeline>
 
