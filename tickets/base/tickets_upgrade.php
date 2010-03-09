@@ -82,10 +82,13 @@ function migrer_commentaires_tickets_vers_forums() {
 				"id_auteur"	=> $r['id_auteur'],
 			);
 		}
-		sql_insertq_multi('spip_forum', $correspondances);
-		sql_update('spip_forum',
-			array('id_thread'=>'id_forum'),
-			array('id_thread=0', 'objet='.sql_quote('ticket')));
+		
+		if (count($correspondances)) {
+			sql_insertq_multi('spip_forum', $correspondances);
+			sql_update('spip_forum',
+				array('id_thread'=>'id_forum'),
+				array('id_thread=0', 'objet='.sql_quote('ticket')));
+		}
 	}
 }
 
