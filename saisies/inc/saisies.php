@@ -177,36 +177,42 @@ function saisies_deplacer($saisies, $nom_ou_chemin, $ou){
 		// On cherche l'endroit où la déplacer
 		// Si $ou est vide, c'est à la fin de la racine
 		if (!$ou){
+			$saisies = saisies_supprimer($saisies, $nom_ou_chemin);
 			$chemin = array(count($saisies));
 		}
 		// Si l'endroit est entre crochet, c'est un conteneur
 		elseif (preg_match('/^\[([\w]*)\]$/', $ou, $match)){
 			$parent = $match[1];
 			// Si dans les crochets il n'y a rien, on met à la fin du formulaire
-			if (!$parent)
+			if (!$parent){
+				$saisies = saisies_supprimer($saisies, $nom_ou_chemin);
 				$chemin = array(count($saisies));
+			}
 			// Sinon on vérifie que ce conteneur existe
-			elseif ($parent = saisies_chercher($saisies, $parent, true))
+			elseif (saisies_chercher($saisies, $parent, true)){
+				// S'il existe on supprime la saisie et on recherche la nouvelle position
+				$saisies = saisies_supprimer($saisies, $nom_ou_chemin);
+				$parent = saisies_chercher($saisies, $parent, true);
 				$chemin = array_merge($parent, array('saisies', 1000000));
+			}
 			else
 				$chemin = false;
 		}
 		// Sinon ça sera devant un champ
 		else{
 			// On vérifie que le champ existe
-			if ($ou = saisies_chercher($saisies, $ou, true))
-				$chemin = $ou;
+			if (saisies_chercher($saisies, $ou, true)){
+				// S'il existe on supprime la saisie et on recherche la nouvelle position
+				$saisies = saisies_supprimer($saisies, $nom_ou_chemin);
+				$chemin = saisies_chercher($saisies, $ou, true);
+			}
 			else
 				$chemin = false;
 		}
 		
 		// Si seulement on a bien trouvé un nouvel endroit où la placer, alors on déplace
-		if ($chemin){
-			// On supprime la saisie
-			$saisies = saisies_supprimer($saisies, $nom_ou_chemin);
-			// On insère autre part
+		if ($chemin)
 			$saisies = saisies_inserer($saisies, $saisie, $chemin);
-		}
 	}
 	
 	return $saisies;
