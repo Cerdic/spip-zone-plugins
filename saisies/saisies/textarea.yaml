@@ -103,3 +103,8 @@ options:
           type: 'entier'
           options:
             min: 1
+defaut:
+  options:
+    label: '<:saisies:saisie_textarea_titre:>'
+    cols: 40
+    rows: 5

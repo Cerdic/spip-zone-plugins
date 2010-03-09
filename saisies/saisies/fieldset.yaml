@@ -38,3 +38,7 @@ options:
           nom: 'li_class'
           label: '<:saisies:option_class_label:>'
           size: 50
+defaut:
+  options:
+    label: '<:saisies:saisie_fieldset_titre:>'
+  saisies: []

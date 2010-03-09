@@ -9,8 +9,8 @@
 	[<p class='explication'>(#ENV*{explication})</p>]
 	[<em class='attention'>(#ENV*{attention})</em>]
 	[(#REM) Si 0 ou 1 destinataire possible ou si c'est tous, le destinataire est défini automatiquement ]
-	<BOUCLE_tous(POUR){tableau #GET*{choix_destinataires}}>
-	<input type="hidden" name="#ENV{nom}[]" value="#VALEUR" />
+	<BOUCLE_tous(AUTEURS){tous}{id_auteur IN #GET*{choix_destinataires}}{par num nom,nom}>
+	<input type="hidden" name="#ENV{nom}[]" value="#ID_AUTEUR" />
 	</BOUCLE_tous>
 	<input type="hidden" name="#ENV{nom}[]" value="1" />
 	<//B_tous>

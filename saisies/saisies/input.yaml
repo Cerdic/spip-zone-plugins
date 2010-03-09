@@ -112,3 +112,7 @@ options:
           type: 'entier'
           options:
             min: 1
+defaut:
+  options:
+    label: '<:saisies:saisie_input_titre:>'
+    size: 40

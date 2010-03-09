@@ -69,3 +69,7 @@ options:
           nom: 'info_obligatoire'
           label: '<:saisies:option_info_obligatoire_label:>'
           explication: '<:saisies:option_info_obligatoire_explication:>'
+defaut:
+  options:
+    label: '<:saisies:saisie_destinataires_titre:>'
+    choix_destinataires: [1,2,3,4]
