@@ -21,7 +21,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
  */
 function balise_FORMULAIRE_NOTATION ($p) {
 	// on prend nom de la cle primaire de l'objet pour calculer sa valeur
-    $_id_objet = $p->boucles[$p->id_boucle]->primary;
+    $i_boucle = $p->nom_boucle ? $p->nom_boucle : $p->id_boucle;
+    $_id_objet = $p->boucles[$i_boucle]->primary;
 	return calculer_balise_dynamique(
 		$p,
 		'FORMULAIRE_NOTATION',
