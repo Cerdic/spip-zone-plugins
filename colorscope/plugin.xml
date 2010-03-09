@@ -10,7 +10,7 @@
 	
     <licence>Licence GNU/GPL</licence>
 
-	<etat>dev</etat>
+	<etat>test</etat>
 
 	<description>Remplace les codes hexa des couleurs dans un texte SPIP, par un bloc de la dite couleur, en rappelant son code &agrave; l'interieur.</description>
 
