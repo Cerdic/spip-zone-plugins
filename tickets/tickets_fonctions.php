@@ -1,20 +1,6 @@
 <?php
 
 // Creation de la liste des options du select des champ jalon, version, projet ou composant
-function tickets_select_champ_optionnel($champ='', $en_cours){
-	if (!$liste = tickets_champ_optionnel_actif($champ)) {
-		return null;
-	}
-
-	$options = '';
-	foreach ($liste as $_item) {
-		if ($_item != '') {
-			$selected = ($_item == $en_cours) ? ' selected="selected"' : '';
-			$options .= '<option value="' . $_item . '"' . $selected . '>' . $_item . '</option>';
-		}
-	}
-	return $options;
-}
 
 // retourne false si pas de champ defini
 // sinon retourne un tableau des elements du champ
@@ -98,20 +84,23 @@ foreach (array('severite', 'type', 'statut') as $nom){
 }
 
 function tickets_icone_statut ($niveau) {
-	if ($niveau == "redac") $img = "puce-blanche.gif";
-	else if ($niveau == "ouvert") $img = "puce-orange.gif";
-	else if ($niveau == "resolu") $img = "puce-verte.gif";
-	else if ($niveau == "ferme")  $img = "puce-poubelle.gif";
-
-	return $img;
+	$img = array(
+		"redac" => "puce-blanche.gif",
+		"ouvert" => "puce-orange.gif",
+		"resolu" => "puce-verte.gif",
+		"ferme" => "puce-poubelle.gif"
+		);
+	return $img[$niveau];
 }
-function tickets_icone_severite ($niveau) {
-	if ($niveau == 1) $img = "puce-rouge-breve.gif";
-	else if ($niveau == 2) $img = "puce-orange-breve.gif";
-	else if ($niveau == 3) $img = "puce-verte-breve.gif";
-	else if ($niveau == 4) $img = "puce-poubelle-breve.gif";
 
-	return $img;
+function tickets_icone_severite ($niveau) {
+	$img = array(
+		1 => "puce-rouge-breve.gif",
+		2 => "puce-orange-breve.gif",
+		3 => "puce-verte-breve.gif",
+		4 => "puce-poubelle-breve.gif"
+		);
+	return $img[$niveau];
 }
 
 function tickets_liste_statut($connecte = true){
