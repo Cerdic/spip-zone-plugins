@@ -2,7 +2,7 @@
     <nom>
     <multi>
     [fr]cfg: moteur de configuration
-    [de]cfg: Konfigurationsmotor
+    [de]CFG: Konfigurationsmodul
     </multi>
     </nom>
     <auteur>bertrand Gugger, Matthieu Marcillaud</auteur>
@@ -19,9 +19,8 @@
 
 Il est utilis&#233; par de nombreux plugins, mais il peut aussi avoir d'autres usages comme le param&#233;trage de squelettes.
 [en]This plugin manage some configuration graphic user interfaces for some modules.
-[de]Dieses Plugin erm&#246;glicht es, in sehr einfacher Weise die Konfigurationsschnittstellen verschiedener Module zu verwalten.
-
-Es wird von vielen Plugins verwendet, kann aber auch anderen Nutzen finden wie die Parametereinstellung von Skeletten.
+[de]Dieses Plugin stellt die Konfigurationsschnittstelle f&uuml;r zahlreiche Plugins bereit.
+Es kann auch f&uuml; die Konfiguration von Skeletten verwendet werden.
     </multi>
     </description>
     <lien>http://www.spip-contrib.net/?rubrique575</lien>

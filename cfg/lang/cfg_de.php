@@ -52,7 +52,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// R
 	'refus_configuration_administrateur' => 'Nur die Administratoren der Site d&uuml;rfen diese Einstellungen &auml;ndern.',
-	'refus_configuration_webmestre' => 'Nur ein Webmaster darf diese EInstellungen bearbeiten.',
+	'refus_configuration_webmestre' => 'Nur ein Webmaster darf diese Einstellungen bearbeiten.',
 	'reset' => 'Reset',
 
 	// S
