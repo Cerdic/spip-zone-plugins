@@ -1,6 +1,6 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	<multi>[fr]Acces Restreint[es]Acceso restringido[en]Restricted Access</multi>
+	<multi>[fr]Acces Restreint[es]Acceso restringido[en]Restricted Access[de]Zugangskontrolle</multi>
 	</nom>
 	<icon>img_pack/zones-acces-48.png</icon>
 	<auteur>[cedric.morin@yterium.com->http://www.yterium.net]</auteur>
@@ -22,6 +22,10 @@ _ Todos los bucles nativos de SPIP quedan modificados para filtrar los resultado
 _ Each area contains sections.
 _ Authors can be associated with these areas to gain access to them.
 _ All SPIP's loops are loaded with the necessary tools to filter the results according to the visitors' access priviliges.
+	[de] Verwaltung von Bereichen mit Zugangskontrolle
+_ Jeder Bereich enth&auml;lt Rubriken.
+_ Einzelnen Autoren k&ouml;nnen Zugangsrechte für Bereiche zugeordnet werden.
+_ ALle Standardschleifen (Abfragen) von SPIP werden überladen, und um die Überpr&uuml;fung der Rechte des jeweiligen Sitebesuchers erg&auml;nzt.
 	</multi>
 	</description>
 	<lien>http://www.spip-contrib.net/Acces-restreint-V1</lien> <!-- URI de documentation -->
