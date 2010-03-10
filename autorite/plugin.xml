@@ -4,6 +4,7 @@
       [fr]Autorit&#233;
       [it]Autorit&#224;
 	  [en]Authority
+	  [de]Autorit&auml;t
 	  [ar]&#1575;&#1604;&#1587;&#1604;&#1591;&#1577;
     </multi>
 	</nom>
@@ -12,6 +13,7 @@
     [fr]&#169; Fil &#38; James &#38; Superyms - Distribu&#233; sous licence GNU/LGPL
     [it]&#169; Fil &#38; James &#38; Superyms - Distribuito sotto licenza GNU/LGPL
 	[en]&#169; Fil &#38; James &#38; Superyms - Distributed under GNU/LGPL licence
+	[de]&#169;  Fil &#38; James &#38; Superyms - Ver&ouml;ffentlicht unter der GNU/LGPL Lizenz
 	[ar]&#169; Fil &#1608; James &#1608; Superyms - &#1608;&#1586;&#1593;&#1578;&#32;&#1576;&#1605;&#1608;&#1580;&#1576;&#32;&#1578;&#1585;&#1582;&#1610;&#1589; GNU/LGPL 
     </multi>
 	</auteur>
@@ -32,6 +34,9 @@
     [en]
 	Some tweaks permissions (add yours!)
 	<h4><a href="?exec=cfg&amp;cfg=autorite">Configuration</a></h4>
+	[de]
+	Feineinstellungen der Benutzerrechte (f&uuml;ge eigene hinzu!)
+	<h4><a href="?exec=cfg&amp;cfg=autorite">Konfiguration</a></h4>
     [ar]
 	&#1576;&#1593;&#1590; &#1573;&#1593;&#1583;&#1575;&#1583;&#1575;&#1578; &#1575;&#1604;&#1571;&#1584;&#1608;&#1606;&#1575;&#1578;
 	<h4><a href="?exec=cfg&amp;cfg=autorite">&#1575;&#1604;&#1573;&#1593;&#1583;&#1575;&#1583;</a></h4>
