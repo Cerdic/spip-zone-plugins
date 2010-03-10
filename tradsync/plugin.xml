@@ -6,7 +6,7 @@
 	<icon>images/tradsync-32.png</icon>
 	<licence>GNU/GPL</licence>
 	
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 
 	<etat>test</etat>
 	<description>
@@ -42,7 +42,8 @@
 	<necessite id="saisies" version="[1.6.6;]" />
 	<necessite id="spip_bonux" version="[1.8.6;]" />
 	<necessite id="afficher_objets" version="[1.0.1;]" />
-	
+	<necessite id="tradrub" version="[1.0.1;]" />
+		
 	<bouton id='traductions' parent='naviguer'>
 		<icone>images/tradsync-22.png</icone>
 		<titre>tradsync:espace_traducteurs</titre>

@@ -12,21 +12,27 @@
 	<thead>
 		<tr class='first_row'>
 			<th class='langue'>[(#TRI{lang,<span title='<:tradsync:langue|attribut_html:>'><:tradsync:langue_court:></span>,ajax})]</th>
-			<th class='titre'>[(#TRI{titre,<:info_titre:>,ajax})]</th>
+			<th class='titre'>[(#TRI{titre,<:tradsync:info_titre:>,ajax})]</th>
 			<th class='date'>[(#TRI{date,<:date:>,ajax})]</th>
 			<th class='id'>[(#TRI{id_rubrique,<:info_numero_abbreviation:>,ajax})]</th>
+			<th class='action'><:tradsync:info_actions:></th>
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_rub(RUBRIQUES){id_rubrique?}{origine_modifiee}{lang=#ENV{langue,#LANG}}{where?}{statut?}{tri #ENV{order,date},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
+	<BOUCLE_liste_rub(RUBRIQUES){!lang_select}{id_rubrique?}{origine_modifiee}{lang=#ENV{langue,#LANG}}{where?}{statut?}{tri #ENV{order,date},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class='langue'>[(#LANG)]</td>
 			<td class='titre'>[(#LOGO_RUBRIQUE|image_reduire{20,26})]<a href="[(#ID_RUBRIQUE|generer_url_entite{rubrique})]">#TITRE</a></td>
 			<td class='date'>[(#DATE|affdate_court)]</td>
 			<td class='id'>[(#AUTORISER{modifier,rubrique,#ID_RUBRIQUE}|?{
-				<a href="[(#URL_ECRIRE{rubriques_edit,id_rubrique=#ID_RUBRIQUE})]">#ID_RUBRIQUE</a>,
+				<a href="[(#URL_ECRIRE{rubriques_edit,id_rubrique=#ID_RUBRIQUE})]" title="<:tradsync:editer_cette_rubrique|attribut_html:>">#ID_RUBRIQUE</a>,
 				#ID_RUBRIQUE
 			})]</td>
+			<td class='action'>
+			<BOUCLE_rub_origine(RUBRIQUES){!lang_select}{origine_traduction}{traduction}>
+				<a href="[(#URL_ECRIRE{naviguer,id_rubrique=#ID_RUBRIQUE})]" title="<:tradsync:voir_rubrique_source|attribut_html:>"><:tradsync:info_source:></a>	
+			</BOUCLE_rub_origine>
+			</td>
 		</tr>
 	</BOUCLE_liste_rub>
 	</tbody>

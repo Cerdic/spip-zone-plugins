@@ -11,16 +11,16 @@
 [<caption><strong class="caption">(#ENV*{titre,<:tradsync:articles_non_traduits:>})</strong></caption>]
 	<thead>
 		<tr class='first_row'>
-			<th class='statut'>[(#TRI{statut,<:statut:>,ajax})]</th>
+			<th class='statut'>[(#TRI{statut,<span title='<:tradsync:info_statut|attribut_html:>'><:tradsync:info_statut_court:></span>,ajax})]</th>
 			<th class='langue'>[(#TRI{lang,<span title='<:tradsync:langue|attribut_html:>'><:tradsync:langue_court:></span>, ajax})]</th>
-			<th class='titre'>[(#TRI{titre,<:info_titre:>,ajax})]</th>
+			<th class='titre'>[(#TRI{titre,<:tradsync:info_titre:>,ajax})]</th>
 			<th class='auteur'><:auteur:></th>
 			<th class='date'>[(#TRI{date,<:date:>,ajax})]</th>
 			<th class='id'>[(#TRI{id_article,<:info_numero_abbreviation:>,ajax})]</th>
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_art(ARTICLES){id_rubrique?}{!traductions #ENV{langue,#LANG}}{id_auteur?}{where?}{statut?}{tri #ENV{order,date},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
+	<BOUCLE_liste_art(ARTICLES){!lang_select}{id_rubrique?}{!traductions #ENV{langue,#LANG}}{id_auteur?}{where?}{statut?}{tri #ENV{order,date},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class='statut'>[(#ID_ARTICLE|puce_changement_statut{#STATUT,#ID_RUBRIQUE,article})]</td>
 			<td class='langue'>[(#LANG)]</td>
@@ -28,7 +28,7 @@
 			<td class='auteur'><BOUCLE_auteurs(AUTEURS){id_article}{', '}><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#NOM</a></BOUCLE_auteurs></td>
 			<td class='date'>[(#DATE|affdate_court)]</td>
 			<td class='id'>[(#AUTORISER{modifier,article,#ID_ARTICLE}|?{
-				<a href="[(#URL_ECRIRE{article_edit,id_article=#ID_ARTICLE})]">#ID_ARTICLE</a>,
+				<a href="[(#URL_ECRIRE{article_edit,id_article=#ID_ARTICLE})]" title="<:tradsync:editer_cet_article|attribut_html:>">#ID_ARTICLE</a>,
 				#ID_ARTICLE
 			})]</td>
 		</tr>

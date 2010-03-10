@@ -11,7 +11,7 @@
 [<caption><strong class="caption">(#ENV*{titre,<:tradsync:mots_cles_non_traduits:>})</strong></caption>]
 	<thead>
 		<tr class='first_row'>
-			<th class='titre'>[(#TRI{titre,<:info_titre:>,ajax})]</th>
+			<th class='titre'>[(#TRI{titre,<:tradsync:info_titre:>,ajax})]</th>
 			<th class='type'>[(#TRI{type,<:tradsync:info_type:>,ajax})]</th>
 			<th class='date'>[(#TRI{maj,<:date:>,ajax})]</th>
 			<th class='id'>[(#TRI{id_mot,<:info_numero_abbreviation:>,ajax})]</th>
@@ -24,7 +24,7 @@
 			<td class='type'><a href="[(#ID_GROUPE|generer_url_entite{groupe_mot})]">#TYPE</a></td>
 			<td class='date'>[(#MAJ|affdate_court)]</td>
 			<td class='id'>[(#AUTORISER{modifier,mot,#ID_MOT}|?{
-				<a href="[(#URL_ECRIRE{mots_edit,id_mot=#ID_MOT}|parametre_url{edit,oui})]">#ID_MOT</a>,
+				<a href="[(#URL_ECRIRE{mots_edit,id_mot=#ID_MOT}|parametre_url{edit,oui})]" title="<:tradsync:editer_ce_mot|attribut_html:>">#ID_MOT</a>,
 				#ID_MOT
 			})]</td>
 		</tr>

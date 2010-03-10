@@ -51,9 +51,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		des balises &lt;multi&gt; sur les titres. De la sorte, il sera possible de
 		verifier qu'une traduction est r&eacute;alis&eacute;e pour les mots de ces groupes.
 	",
-	
-	'info_type' => "Groupe",
+	'editer_ce_mot' => "&Eacute;diter ce mot-cl&eacute;",
+	'editer_cet_article' => "&Eacute;diter cet article",
+	'editer_cette_rubrique' => "&Eacute;diter cette rubrique",
+
+	// I
 	'info_actions' => "Actions",
+	'info_revisions' => "R&eacute;visions",
+	'info_source' => "Source",
+	'info_statut' => "Statut",
+	'info_statut_court' => "S",
+	'info_titre' => "Titre",
+	'info_type' => "Groupe",
 	
 	'label_langue' => "Langue cible",
 	'label_groupe_mots_multi' => "Groupes de mots multis",
@@ -74,18 +83,24 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'rubriques_non_traduites' => "Rubriques",
 	'rubriques_originales_modifiees' => "Rubriques",
 	'rubriques_mots_differents' => "Rubriques",
-	
+
+	// S
 	'selection_de_la_langue_cible' => "S&eacute;lection de la langue cible",
 	'second_navigateur' => "Second navigateur",
 	'synchroniser' => "Synchroniser",
 	'synchroniser_tout' => "Synchroniser tout",
-	
+
+	// T
 	'traductions_a_realiser' => "Traductions &agrave; r&eacute;aliser",
 	'traductions_a_verifier' => "Traductions &agrave; v&eacute;rifier",
 	'traductions_de_mots' => "Traductions de mots-cl&eacute;s",
 	'traductions_mots_differents' => "Synchroniser les mots cl&eacute;s",
-	
-	
+
+	// V
+	'voir_article_source' => "Voir l'article source",
+	'voir_rubrique_source' => "Voir la rubrique source",
+	'voir_les_revisions_de_la_source' => "Voir les r&eacute;visions de la source",
+		
 	'zbug_critere_necessite_parametre' => "Le critere {@critere@} necessite un parametre",
 
 );
