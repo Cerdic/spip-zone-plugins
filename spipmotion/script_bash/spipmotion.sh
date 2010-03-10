@@ -41,8 +41,8 @@ Pour visualiser le manuel de spipmotion, faîtes : \"./spipmotion --help\""
 Pour visualiser le manuel de spipmotion, faîtes : \"./spipmotion --help\""
 		assemblage="Conversion en .flv"
 		titredejala="Fichier de sortie existant"
-		textedejala="Attention, le fichier de sortie que vous avez spécifié existe déjà. 
-Voulez-vous l'écraser ? 
+		textedejala="Attention, le fichier de sortie que vous avez spécifié existe déjà.
+Voulez-vous l'écraser ?
 Si non, le fichier déjà présent sera renommé."
 		oui="oui"
 		non="non"
@@ -69,7 +69,7 @@ while test -n "${1}"; do
 		shift;;
 		--size) size="${2}"
 		shift;;
-		--bitrate) bitrate="${2}"
+		--bitrate) bitrate="-vb ${2}.kb"
 		shift;;
 		--acodec) acodec="${2}"
 		shift;;
@@ -102,7 +102,7 @@ esac
 
 ########### Arguments pour audio
 case "$audiobitrate" in
-  "") 
+  "")
   case "$sortie" in
   	*".mp3") audiobitrate="-ab 128.kb" ;;
   	*".flv") audiobitrate="-ab 64.kb" ;;
@@ -111,10 +111,10 @@ case "$audiobitrate" in
 esac
 
 case "$audiofreq" in
-  "") 
+  "")
   case "$sortie" in
   	*".flv") audiofreq="-ar 22050" ;;
-  esac 
+  esac
 esac
 
 case "$acodec" in
@@ -133,7 +133,7 @@ case "$size" in
 esac
 
 case "$bitrate" in
-  "") bitrate="-b 448.kb"
+  "") bitrate="-vb 448k"
 esac
 
 case "$fps" in
@@ -174,10 +174,10 @@ fi
 echo "$chemin"
 
 case "$sortie" in
-  *".mp3"|*".flac"|*".ogg"|*".oga" ) 
-  echo "On est dans un son" 
+  *".mp3"|*".flac"|*".ogg"|*".oga" )
+  echo "On est dans un son"
   nice -19 "$chemin" -i $entree $acodec $audiobitrate $audiofreq -y $sortie ;;
-  *".flv"|*".mp4"|*".ogv" ) 
+  *".flv"|*".mp4"|*".ogv" )
   echo "on est dans une video"
   nice -19 "$chemin" -i $entree $acodec $vcodec -s $size $bitrate $audiobitrate $audiofreq -r $fps -y $sortie ;;
 esac

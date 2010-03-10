@@ -41,7 +41,7 @@ function inc_encoder_videos_dist($v) {
 				$dir_ftp = '';
 		}
 	}
-  
+
   // Add the redirect url when uploading via iframe
 
   $iframe = "";
@@ -59,7 +59,7 @@ function inc_encoder_videos_dist($v) {
 		(!test_espace_prive())?$v['script']:generer_url_ecrire($v['script'], $v['args'], true),
 		"$iframe$debut$res$dir_ftp$distant$fin",
 		" method='post' enctype='multipart/form-data' class='form_encode'");
-		
+
 	if ($v['cadre']) {
 		$debut_cadre = 'debut_cadre_'.$v['cadre'];
 		$fin_cadre = 'fin_cadre_'.$v['cadre'];
@@ -70,9 +70,9 @@ function inc_encoder_videos_dist($v) {
 		else{
 		$res = _T('spipmotion:info_installer_encoder_ftp');
 		}
-			$res1 .= $res . $fin_cadre(true);
+		$res1 .= $res . $fin_cadre(true);
 	}
-	
+
 	return "\n<div class='joindre'>".$res1."</div>\n";
 }
 
@@ -83,7 +83,7 @@ function inc_encoder_videos_dist($v) {
 function texte_encoder_manuel_videos($dir, $inclus = '') {
 	$fichiers = preg_files($dir);
 	$exts = array();
-	$dirs = array(); 
+	$dirs = array();
 	$texte_upload = array();
 	foreach ($fichiers as $f) {
 		$f = preg_replace(",^$dir,",'',$f);
@@ -94,7 +94,7 @@ function texte_encoder_manuel_videos($dir, $inclus = '') {
 					$exts[$ext] = 'oui';
 				else $exts[$ext] = 'non';
 			}
-			
+
 			$k = 2*substr_count($f,'/');
 			$n = strrpos($f, "/");
 			if ($n === false)
@@ -104,7 +104,7 @@ function texte_encoder_manuel_videos($dir, $inclus = '') {
 			  $ledossier = substr($f, 0, $n);
 			  if (!in_array($ledossier, $dirs)) {
 				$texte_upload[] = "\n<option value=\"$ledossier\">"
-				. str_repeat("&nbsp;",$k) 
+				. str_repeat("&nbsp;",$k)
 				._T('tout_dossier_upload', array('upload' => $ledossier))
 				."</option>";
 				$dirs[]= $ledossier;
@@ -117,14 +117,14 @@ function texte_encoder_manuel_videos($dir, $inclus = '') {
 			    str_repeat("&nbsp;",$k+2) .
 			    $lefichier .
 			    "</option>";
-				
+
 			}
 		}
-	} 
+	}
 
 	$texte = join('', $texte_upload);
 	if (!$texte) {
-		
+
 	}
 	return $texte;
 }
@@ -139,7 +139,7 @@ function afficher_transferer_encoder_videos($texte_upload, $dir)
 			_T('spipmotion:info_installer_encoder_ftp', $doc).
 			"</div>";
 		}
-	else {  
+	else {
 	$jsfunction = '$("#encodage").css("opacity",0.5).html("'._T("spipmotion:encodage_en_cours").'");';
 	return
 		"<div style='color: #505050;' id='encodage'><div id='encodage_txt'>"

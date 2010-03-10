@@ -2,7 +2,7 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
-	'choix_encodage_auto' => 'Les fichiers seront ajout&eacute;s automatiquement dans la file d\'attente d\'encodage d&egrave; leur insertion dans la base de donn&eacute;e',
+	'choix_encodage_auto' => 'Les fichiers seront ajout&eacute;s automatiquement dans la file d\'attente d\'encodage d&egrave;s leur insertion dans la base de donn&eacute;e',
 	// D
 	'document_dans_file_attente' => 'Ce document est dans la file d\'attente pour l\'encodage',
 
