@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // fonction pour changer la connexion aux serveurs MySQL en gardant les paramètres existant
 
-function req_mysql_dist() {
+function req_mysql_dist($host, $port, $login, $pass, $db='', $prefixe='') {
 	charger_php_extension('mysqli');
 	if ($port > 0) $host = "$host:$port";
 	$link = new mysqli($host, $login, $pass, $db);
