@@ -20,9 +20,11 @@
 	<li class="[(#ENV{classement}|=={assigne}|?{fondgrison,fondgris})]">
 		<a href="[(#SELF|parametre_url{classement,assigne})]" class="cellule-h">[(#CHEMIN{imgs/bugs.png}|image_reduire{24}|vider_attribut{style}|inserer_attribut{style,vertical-align:middle;}|inserer_attribut{alt,<:tickets:classement_assigne:>})] <:tickets:classement_assigne:></a>
 	</li>
+	<BOUCLE_sr(TICKETS){statut==resolu}{0,1}> </BOUCLE_sr>
 	<li class="[(#ENV{classement}|=={termine}|?{fondgrison,fondgris})]">
 		<a href="[(#SELF|parametre_url{classement,termine})]" class="cellule-h">[(#CHEMIN{imgs/bugs.png}|image_reduire{24}|vider_attribut{style}|inserer_attribut{style,vertical-align:middle;}|inserer_attribut{alt,<:tickets:classement_termine:>})] <:tickets:classement_termine:></a>
 	</li>
+	</B_sr>
 [(#EVAL{_TICKETS_LISTE_JALONS}|!={_TICKETS_LISTE_JALONS}|oui)
 	<li class="[(#ENV{classement}|=={jalon}|?{fondgrison,fondgris})]">
 		<a href="[(#SELF|parametre_url{classement,jalon})]" class="cellule-h">[(#CHEMIN{imgs/bugs.png}|image_reduire{24}|vider_attribut{style}|inserer_attribut{style,vertical-align:middle;}|inserer_attribut{alt,<:tickets:classement_jalon:>})] <:tickets:classement_jalon:></a>

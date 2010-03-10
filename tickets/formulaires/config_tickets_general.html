@@ -9,7 +9,7 @@
 
 	<form method="post" action="#ENV{action}"><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
-
+	<ul>
 		[(#SAISIE{case, notification_publique,
 			label=<:tickets:cfg_lbl_notification_publique:>,
 			label_case=<:tickets:cfg_lbl_case_notification_publique:>})]
@@ -26,6 +26,7 @@
 					abo,<:bouton_radio_enregistrement_obligatoire:>,
 				})]})]
 		]
+		</ul>
 		<p class="boutons">
 			<input type="submit" name="_cfg_ok" class="submit" value="<:bouton_valider:>" />
 		</p>
