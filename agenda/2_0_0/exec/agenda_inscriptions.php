@@ -74,22 +74,22 @@ function exec_agenda_inscriptions_dist()
 		} else {
 			$inscrits = sql_allfetsel(array('nom', 'reponse', 'id_auteur', 'date'), 'spip_evenements_participants INNER JOIN spip_auteurs USING (id_auteur)', array("id_evenement=$id_evenement"), "date ASC");
 			
-			pipeline('exec_init',array('args'=>array('exec'=>'agenda_inscriptions'),'data'=>''));
+			pipeline('exec_init',array('args'=>array('exec'=>'agenda_inscriptions', 'id_evenement'=>$id_evenement),'data'=>''));
 	
 			$titre = $evenement['titre'].' ('.affdate($evenement['date_debut']).') - '._T('agenda:liste_inscrits');
 			$commencer_page = charger_fonction('commencer_page', 'inc');
 			echo $commencer_page($titre, "auteurs","redacteurs");
 	
-			echo pipeline('affiche_milieu',array('args'=>array('exec'=>'agenda_inscriptions'),'data'=>''));
+			echo pipeline('affiche_milieu',array('args'=>array('exec'=>'agenda_inscriptions', 'id_evenement'=>$id_evenement),'data'=>''));
 			
 		  	echo debut_gauche('', true);
-			echo pipeline('affiche_gauche',array('args'=>array('exec'=>'agenda_inscriptions'),'data'=>''));
+			echo pipeline('affiche_gauche',array('args'=>array('exec'=>'agenda_inscriptions', 'id_evenement'=>$id_evenement),'data'=>''));
 			echo bloc_des_raccourcis(
 				icone_horizontale (_T('agenda:telecharger').' (CSV)', generer_url_ecrire("agenda_inscriptions", "id_evenement=$id_evenement&format=csv"), "synchro-24.gif", "", false)
 			);
 	
 			echo creer_colonne_droite('', true);
-			echo pipeline('affiche_droite',array('args'=>array('exec'=>'agenda_inscriptions'),'data'=>''));
+			echo pipeline('affiche_droite',array('args'=>array('exec'=>'agenda_inscriptions', 'id_evenement'=>$id_evenement),'data'=>''));
 		
 			echo debut_droite('', true), gros_titre($titre,'',false);
 	
