@@ -22,7 +22,9 @@
 .ticket_commentaires ul.forum li {margin: 0; padding: 10px; list-style: none; border-bottom: 1px solid #F0F0F0; background:#fafafa;}
 .ticket_commentaires .forum-chapo {	background:#fff; padding:3px .5em; margin-top:.5em; border:1px solid #ccc;
 	border-radius:5px; -moz-border-radius:5px; -webkit-border-radius:5px;}
+.ticket_commentaires .formulaire_forum,
 .ticket_commentaires .formulaire_commenter_ticket {margin:2em;}
+.ticket_commentaires .formulaire_forum legend { background: transparent; }
 .formulaire_editer_ticket input.text {width:98%;}
 .formulaire_editer_statut_ticket li.editer_statut .explication {color:#D06C07;}
 li.editer_forum_ticket .explication {display:none;}
