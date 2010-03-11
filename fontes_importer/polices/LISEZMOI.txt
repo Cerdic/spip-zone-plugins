@@ -1,0 +1,8 @@
+
+Si vous desirez participer au developpement de ce plugin et placer des fontes dans la distribution,
+svp, prenez le temps de verifier que cette fonte est libre de droits de distribution et de publication,
+etc. Si un fichier texte est attache' a sa distribution, renommez ce fichier pour qu'il soit
+clairement identifie' comme appartenant a l'original. En clair : respectez les droits d'auteur.
+
+Merci.
+
