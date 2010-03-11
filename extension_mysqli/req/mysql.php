@@ -18,6 +18,12 @@ if (!extension_loaded('mysqli')) {
 
 define('_DEFAULT_DB', 'spip');
 
+/**
+ * undocumented function
+ *
+ * @return void
+ * @author Gilles Vincent
+ **/
 // fonction pour changer la connexion aux serveurs MySQL en gardant les paramètres existant
 // Cette fonction sert de constructeur de l'instance de connexion MySQLi
 function req_mysql_dist($host, $port, $login, $pass, $db='', $prefixe='', $reconnect=FALSE) {
@@ -127,25 +133,16 @@ $GLOBALS['spip_mysql_functions_1'] = array(
 
 
 // portage de http://doc.spip.org/@spip_mysql_set_charset
-// on met un tampon pour ne pas préciser le charset à chaque requete
+// Appelee a chaque connexion, cette requete fixe le charset utilise pour les futures requetes
 function spip_mysqli_set_charset($charset, $serveur='',$requeter=true,$requeter=true){
-	static $charsets = array();
-
-	$serveur = $serveur ? $serveur : 0;
-	$ok = TRUE;
-
-	if (!isset($charsets[$serveur]) || $charsets[$serveur]!=$charset) {
-		$connexion = &$GLOBALS['connexions'][$serveur ? $serveur : 0]['link'];
-		$ok = FALSE;
-		if (version_compare(PHP_VERSION , '5.1.5', '>=')) {
-			$ok = $connexion->set_charset($charset);
-			$charsets[$serveur] == $charset;
-		}
-		if (!$ok) {
-		    $ok = $connexion->query("SET NAMES '"._q($charset)."'");
-		}
+	$connexion = &$GLOBALS['connexions'][$serveur ? $serveur : 0]['link'];
+	$ok = FALSE;
+	if (version_compare(PHP_VERSION , '5.1.5', '>=')) {
+		$ok = $connexion->set_charset($charset);
 	}
-
+	if (!$ok) {
+	    $ok = $connexion->query("SET NAMES '"._q($charset)."'");
+	}
 	return $ok;
 }
 
