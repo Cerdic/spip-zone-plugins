@@ -1,18 +1,23 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
+	<nom> <!-- Nom du plugin --><multi>[fr]
 	Abonnement &#224; des listes de diff. mailman et sympa
-	</nom>
+	[de]Mailinglisten
+	</multi></nom>
 	<icon>img_pack/mailman.jpg</icon>
 	<auteur>	<!-- Auteur du plugin -->
 	MaZiaR [NetAktiv->http://www.netaktiv.com]
 	</auteur>
 	<version>0.4</version>
 	<etat>dev</etat>
-	<description>
+	<description><multi>
+	[fr]
 	Ce plugin permet via une balise #FORMULAIRE_ABOMAILMAN d&rsquo;afficher un formulaire d&rsquo;abonnement &agrave; l&rsquo;ensemble des listes renseign&eacute;es Mailman.
 	Cette inscription se fait via l&rsquo;interface priv&eacute;e de SPIP par le menu &laquo; Edition &gt; Abomailmans &gt; les listes de diffusions mailman &raquo;
 	Ensuite il vous est possible de s&eacute;lectionner des articles de votre SPIP, par des crit&egrave;res de date, de rubrique et/ou de mot cl&eacute; et envoyer leurs contenus &agrave; ces listes, en utilisant des squelettes de mise en page du contenu.
     Le lien avec les listes Mailman et Sympa se fait par des envois d&rsquo;e-mail.
+	[de]Dieses Plugin ermöglich mit dem TAG  #FORMULAIRE_ABOMAILMAN das Abnonnieren von Mailinglisten.
+	Dem Adminstrator steht ein Interface zur Verwaltung dieser Listen zur Verf&uuml;gung.
+		</multi>
 	</description>
 	<lien>[Spip-Contrib->http://www.spip-contrib.net/Abomailmans-pour-s-abonner-a-des]</lien> <!-- URI de documentation -->
 	<options> <!-- fichier charge a chaque hit -->
