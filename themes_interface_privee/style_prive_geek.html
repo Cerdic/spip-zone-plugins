@@ -1,0 +1,451 @@
+[(#REM)
+
+	Ce squelette definit les styles de l'espace prive
+
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
+]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+
+
+#SET{claire,##ENV{couleur_claire,edf3fe}}
+#SET{foncee,##ENV{couleur_foncee,3874b0}}
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+#SET{rtl,#ENV{ltr}|choixsiegal{left,'',_rtl}}
+#SET{rtl_inv,#ENV{ltr}|choixsiegal{right,'',_rtl}}
+#SET{chemin_img_pack,#EVAL{_DIR_IMG_PACK}}
+
+
+body {
+	font-family: arial, helvetica, sans-serif;
+	background-color: #444;
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#333), to(#5e5e65));
+    background: -moz-linear-gradient(-90deg, #333, #5e5e65);
+	filter: progid:DXImageTransform.Microsoft.gradient(enabled='true', startColorstr=#333333, endColorstr=#5e5e65);
+}
+
+h1, h2, h3, .bandeau_couleur, .bandeau_couleur_sous, a.icone26, a.cellule-h-texte, div.onglet, div.onglet_on, div.onglet_off, .arial0, .arial1, .arial11, .arial2, .cadre, .cadre-formulaire, .cadre-formulaire-editer, a.foncee, a.foncee:hover, a.claire, a.claire:hover, span.creer, span.lang_base   {
+	font-family: verdana, arial, helvetica, sans-serif;
+}
+
+.formulaire_spip input.text,
+.formulaire_spip input.password,
+.formulaire_spip textarea,
+.formulaire_spip select
+{
+	font-family: verdana, arial, helvetica, sans-serif;
+}
+
+.large {
+	#contenu {
+		width: 520px;
+		padding-left: 25px;
+		padding-right: 25px;
+	}
+	#navigation {
+		width: 170px;
+	}
+}
+.etroit {
+	#contenu {
+		width: 520px;
+		margin-left: 45px;
+	}
+	#navigation {
+		width: 170px;
+	}
+}
+
+
+#chemin {
+	color: white;
+	li {
+		a {
+			color: #aaa;
+		}
+		li .bloc a {
+			color: #aaa;
+		}
+	}
+}
+
+#bandeau-principal {
+	.bandeau_sec {
+		-webkit-border-bottom-left-radius: 8px;
+		-webkit-border-bottom-right-radius: 8px;
+		border-bottom-left-radius: 8px;
+		border-bottom-right-radius: 8px;
+		-moz-border-radius: 0px 0px 8px 8px;
+	}
+}
+#bandeau_couleur {
+	height: 33px;
+	padding-top: 8px;
+	padding-bottom: 0px;
+	border-bottom: 1px solid black;
+	background-color: #333;
+	background: url(#CHEMIN{images/geek/toolbar.png}) center center;
+
+	a, a.icone26 {
+		color: white;
+		font-size: 16px;
+	    text-shadow: #666 -1px -1px 1px;
+
+	}
+
+	.bandeau_couleur_sous {
+		top: 11px;
+		border-color: black;
+		background-color: #000;
+		border-top: 0px;
+		color: #aaa;
+		-webkit-border-bottom-left-radius: 8px;
+		-webkit-border-bottom-right-radius: 8px;
+		border-bottom-left-radius: 8px;
+		border-bottom-right-radius: 8px;
+		-moz-border-radius: 0px 0px 8px 8px;
+		
+		a {
+			font-size: 1em;
+			color: white;
+		    text-shadow: black 1px 1px 1px;
+		}
+		
+		table a, .plan-articles a {
+			color: #333;
+		    text-shadow: black 0px 0px 0px;
+		}
+		table .tr_liste a {
+			color: #GET{claire};
+		}
+		a.cellule-h {
+			color: white;
+		}
+	}
+
+
+}
+
+.cadre, .dater {
+    color: black;
+    background: #eee;
+    border-color: #333;
+    border: 0px;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	border-radius: 8px;
+	
+
+	.cadre-icone {
+		position: relative;
+		float: left;
+		top: 0px;
+		left: 0px;
+		padding-left: 5px;
+		padding-right: 5px;
+		padding-top: 3px;
+	}
+	
+	.cadre-icone + .titrem {
+		padding-left: 50px;
+	}
+
+	
+	.titrem {
+		background-color: #444;
+	    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#4c4d4e), to(#404142));
+	    background: -moz-linear-gradient(-90deg, #4c4d4e, #404142);
+		filter: progid:DXImageTransform.Microsoft.gradient(enabled='true', startColorstr='#4c4d4e', endColorstr='#404142');
+		padding-top: 8px;
+		padding-bottom: 8px;
+		text-shadow: black 1px 1px 1px;
+		color: white;
+		-webkit-border-top-left-radius: 8px;
+		-webkit-border-top-right-radius: 8px;
+		-moz-border-radius: 8px 8px 0px 0px;
+		border-top-left-radius: 8px;
+		border-top-right-radius: 8px;
+		
+		
+	}
+}
+
+.fiche_objet, .no_onglets .fiche_objet {
+	border-color: #dfdfdf;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	border-radius: 8px;
+}
+
+
+.cadre-sous_rub {
+	background-color: #404142;
+}
+
+.cadre-couleur-foncee {
+	border: 1px solid [(#GET{claire})];
+	
+	.cadre_padding .titrem {
+		color: white;
+	}
+}
+
+.replie a.titremancre { background-image: url([(#CHEMIN{images/geek/deplierhaut[(#GET{rtl})].png})]); }
+.deplie a.titremancre { background-image: url(#CHEMIN{images/geek/deplierbas.png}); }
+
+div.cadre-info {
+	background-color: black;
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#222), to(#000));
+    background: -moz-linear-gradient(-90deg, #222, #000);
+	filter: progid:DXImageTransform.Microsoft.gradient(enabled='true', startColorstr=#222222, endColorstr=#000000);
+	
+	color: #aaa;
+	
+	a {
+		color: #GET{claire};
+	}
+}
+#navigation .infos .numero p {
+	color: white;
+}
+
+
+div.liste, div.cadre-liste {
+	border-color: #333;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	border-radius: 8px;
+
+	box-shadow:  0px 0px 2px black;
+	-webkit-box-shadow:  0px 0px 2px black;
+	-moz-box-shadow:  0px 0px 2px black;
+
+	table {
+	
+		.tr_liste {
+			background-color: #111;
+			
+			color: #ccc;
+			
+			
+			b {
+				color: #aaa;
+			}
+			a {
+				color: #GET{claire};
+			}
+			
+			td {
+				border-color: #333;
+				padding-top: 5px;
+				padding-bottom: 5px;
+			}
+			
+			. :last-child {
+			
+				td:first-child {
+					-webkit-border-bottom-left-radius: 8px;
+					-moz-border-radius: 0px 0px 8px 0px;
+					border-bottom-left-radius: 8px;
+				}
+				td:last-child {
+					-webkit-border-bottom-right-radius: 8px;
+					-moz-border-radius: 0px 0px 0px 8px;
+					border-bottom-right-radius: 8px;
+				}
+			}
+			. :nth-child(2n) {
+				background-color: #222;
+			}
+		}
+		.tr_liste_over, .tr_liste:hover {
+			background-color: #333;
+			
+		}
+	}
+	
+	.titrem {
+	    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#[(#ENV{couleur_foncee}|couleur_saturation{0.7})]), to(#[(#ENV{couleur_foncee}|couleur_saturation{0.9})]));
+	    background: -moz-linear-gradient(-90deg, #[(#ENV{couleur_foncee}|couleur_saturation{0.7})], #[(#ENV{couleur_foncee}|couleur_saturation{0.9})]);
+		filter: progid:DXImageTransform.Microsoft.gradient(enabled='true', startColorstr='#[(#ENV{couleur_foncee}|couleur_saturation{0.7})]', endColorstr='#[(#ENV{couleur_foncee}|couleur_saturation{0.9})]');
+		color: white;
+		
+		border-bottom: 1px solid #b4b4b4;
+		-webkit-border-top-left-radius: 8px;
+		-webkit-border-top-right-radius: 8px;
+		-moz-border-radius: 8px 8px 0px 0px;
+		border-top-left-radius: 5px;
+		border-top-right-radius: 5px;
+		
+		a {
+			color: white;
+		}
+	}
+	
+	.titrem.hover {
+		background-color: #eee;
+	}
+
+	.tranches {
+		padding: 4px 0px 4px 10px;	
+		background-color: #dfdfdf;
+		border-color: #f0f0f0;
+		border-top: 0;
+	}
+}
+
+#contenu div.liste .titrem, #contenu div.cadre-liste .titrem {
+		padding-top: 10px;
+		padding-bottom: 10px;
+		font-size: 14px;
+}
+#contenu div.liste .cadre-icone, #contenu div.cadre-liste .cadre-icone {
+	padding-top: 7px;
+	padding-left: 7px;
+}
+.icone36 {
+	a img, img {
+		-moz-border-radius: 6px;
+		-webkit-border-radius: 6px;
+		border-radius: 6px;	
+	}
+}
+
+.icone36 a img, a.icone36 img, .icone36 a:hover img, a.icone36:hover img {
+	border: 0px;
+	margin-bottom: -12px;
+	background-color: transparent;
+	display: none;
+}
+
+.icone36 a img:only-child, a.icone36 img:only-child, .icone36 a:hover img:only-child, a.icone36:hover img:only-child {
+	display: inline;
+}
+
+.danger, a.cellule-h-texte {
+	background: none;
+}
+
+.icone36 {
+	width: auto;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.icone36 a span, a.icone36 span {
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	border-radius: 8px;	
+	border: 0px solid #666;
+	padding: 8px 10px;
+	width: auto;
+	font-weight: normal;
+	font-size: 11px;
+	text-shadow: black 1px 1px 1px;
+	color: #ccc;
+	[(#CHEMIN{images/geek/bouton-ok.png}|background_image{aaaaaa, center center })]
+	height: auto;
+	
+	. :hover {
+		text-shadow: #666 -1px -1px 1px;
+		[(#CHEMIN{images/geek/bouton-ok.png}|background_image{666666, center center })]
+		color: #GET{claire};
+		border-color: #666;
+	}
+}
+
+.cadre-formulaire-editer {
+	.entete-formulaire {
+		border: 0px;
+		padding: 0px;
+		padding-bottom: 1em;
+		background: none;
+		color: #aaa;
+	}
+	
+	.formulaire_spip {
+		background-color: white;
+		border: 1px solid #eee;
+		-moz-border-radius: 8px;
+		-webkit-border-radius: 8px;
+		border-radius: 8px;	
+		
+		li.editer_parent {
+			background-color: #f0f0f0;
+		}
+		
+		li {
+			input.text, input.password, textarea {
+				border: 1px solid #ccc;
+			}
+		}
+		
+		.markItUpPreview {
+			font-family: serif;
+		}
+		
+		p.boutons {
+			background-color: [(#ENV{couleur_foncee}|couleur_saturation{0.4})];
+			border-top: #eee;
+		}
+		li .erreur_message {
+			border-color: #ccc;
+		}
+		
+		
+		.explication {
+			border-color: #ccc;
+		}
+	}
+}
+
+.cadre-forum {
+	-webkit-border-bottom-left-radius: 0px;
+	-webkit-border-bottom-right-radius: 0px;
+	-moz-border-radius: 6px 6px 0px 0px;
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 0px;
+}
+.cadre-thread-forum {
+	-webkit-border-radius: 0px;
+	-moz-border-radius: 0px;
+	border-radius: 0px;
+	
+	.titrem {
+		-webkit-border-radius: 0px;
+		-moz-border-radius: 0px;
+		border-radius: 0px;
+	}
+}
+
+
+input[type="submit"] {
+	[(#CHEMIN{images/geek/bouton-ok.png}|background_image{[(#ENV{couleur_foncee}|couleur_saturation{0.6})], center center })]
+	border: 2px solid [#(#ENV{couleur_foncee}|couleur_foncer)];
+	padding: 6px 10px;
+	font-weight: bold;
+    text-shadow: #[(#ENV{couleur_foncee}|couleur_foncer)] 1px 1px 1px;
+	color: white;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	border-radius: 8px;
+
+}
+input[type="submit"]:hover {
+	[(#CHEMIN{images/geek/bouton-ok.png}|background_image{666666, center center })]
+    text-shadow: #666 -1px -1px 1px;
+	border: 2px solid black;
+}
+
+
+
+#FILTRE{css_imbriques_decouper}
