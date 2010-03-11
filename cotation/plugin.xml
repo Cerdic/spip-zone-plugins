@@ -1,0 +1,23 @@
+<plugin>
+	<nom>Demande de cotation</nom>
+	<categorie>performance</categorie>
+	<auteur>Mohamed DRIA</auteur>
+	<icon>images/cotation-96.png</icon>
+	<licence>GPL v3</licence>
+	<version>0.1</version>
+	<etat>stable</etat>
+	<description>Cette extension propose un formulaire de demande de cotation pour les entreprises issu du secteur du transit.</description>
+	<lien>http://www.spip-contrib.net/cotation</lien>
+	<options>cotation_options.php</options>
+	<prefix>cotation</prefix>
+
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>cotation_pipelines.php</inclure>
+	</pipeline>
+
+	<necessite id='SPIP' version="[2.0.0;]" />
+	<necessite id="cfg" version="[1.10.5;]" />
+	<necessite id="spip_bonux" version="[1.2;]" />
+	<utilise id="facteur" />
+</plugin>
