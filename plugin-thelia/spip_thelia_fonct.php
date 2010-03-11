@@ -139,8 +139,8 @@ function spip_thelia_appeler_moteur_thelia($texte) {
 	$res = str_replace("THELIA-", "#", $res);
 
 	//avant d'envoyer � th�lia, on convertie en iso pour th�lia
-	// (plus nécessaire) 
-	//$res = unicode2charset(charset2unicode($res, 'utf-8'),'iso-8859-1');
+	if(lire_config("spip_thelia/encodage_spip_thelia", "non") == "oui")
+		$res = unicode2charset(charset2unicode($res, 'utf-8'),'iso-8859-1');
 
 	//on bloque la sortie vers le navigateur le temps d'y faire quelques substitutions	
 	ob_start();
@@ -153,8 +153,8 @@ function spip_thelia_appeler_moteur_thelia($texte) {
 	$texte = remplacement_sortie_thelia($texte);
 
 	//au retour de th�lia, on convertie en utf8 pour SPIP
-	// (plus nécessaire) 
-	//$texte = unicode2charset(charset2unicode($texte, 'iso-8859-1'),'utf-8');
+	if(lire_config("spip_thelia/encodage_spip_thelia", "non") == "oui")
+		$texte = unicode2charset(charset2unicode($texte, 'iso-8859-1'),'utf-8');
 	
 	//on restaure les variables session et request modifi�es pour les plugins suivants sur affichage final
 	$page = $sav_page;
