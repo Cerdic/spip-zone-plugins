@@ -41,6 +41,9 @@ function mutualiser_creer($e, $options) {
 	if (!defined('_INSTALL_SERVER_DB'))
 		define('_INSTALL_SERVER_DB','mysql');
 
+	header("Cache-Control: no-store, no-cache, must-revalidate");
+	header("Pragma: no-cache");
+
 	mutu_etape_code_activation($e, $options);
 	mutu_etape_creer_repertoires($e, $options);
 	mutu_etape_creer_base($e, $options);
