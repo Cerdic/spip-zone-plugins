@@ -4,14 +4,14 @@
 	  [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	  <form action="#ENV{action}" method="post" enctype="multipart/form-data"><div>
 	    #ACTION_FORMULAIRE{#ENV{action}}
-	        [(#ENV{lst_id}|oui)
-	          <input type="hidden" name="lst_id" value="[(#ENV{lst_id}|table_valeur{0})]" />
+	        [(#ENV{lst_id_force}|oui)
+	          <input type="hidden" name="lst_id" value="#ENV{lst_id_force}" />
 	        ]
           [(#ENV{lsr_mode_force}|oui)
             <input type="hidden" name="lsr_mode" value="[(#ENV{lsr_mode_force}|=={texte}|?{0,1})]" />
           ]
 	      <ul>
-	        [(#ENV{lst_id}|non)	    
+	        [(#ENV{lst_id_force}|non)
             [(#ENV{cbox}|non)<INCLURE{fond=public/clevermail_abonnement_plusieurs_listes}{env}>]
             [(#ENV{cbox}|oui)<INCLURE{fond=public/clevermail_abonnement_plusieurs_listes_checkbox,env} />]
           ]

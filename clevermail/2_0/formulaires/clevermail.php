@@ -1,18 +1,18 @@
 <?php
 include_spip('base/abstract_sql');
-function formulaires_clevermail_charger_dist($lst_id = 0, $lsr_mode_force = false, $cbox='') {
-	$default = array('editable' => ' ', 'lsr_mode' => 0, 'sub_email' => '', 'lst_ids' => array());
-	if ($cbox=='box'){$default['cbox'] = $cbox; }
-	if ($GLOBALS['visiteur_session']['email']){
-		$default['sub_email'] = $GLOBALS['visiteur_session']['email'];
-		}
-	if ($lsr_mode !== false && in_array($lsr_mode_force, array('texte', 'html'))) {
-		$default['lsr_mode_force'] = $lsr_mode_force;
+function formulaires_clevermail_charger_dist($lst_id_force = 0, $lsr_mode_force = false, $cbox='') {
+	$default = array('editable' => ' ', 'lsr_mode' => 0, 'sub_email' => '', 'lst_id_force' => 0, 'lst_ids' => array());
+	if ($cbox == 'box') {
+	  $default['cbox'] = $cbox;
 	}
-	if (intval($lst_id) != 0) {
-		if ($lst_id = sql_getfetsel("lst_id", "spip_cm_lists", "lst_id = ".intval($lst_id)." AND lst_moderation != 'closed'")) {
+	if ($GLOBALS['visiteur_session']['email']) {
+		$default['sub_email'] = $GLOBALS['visiteur_session']['email'];
+	}
+	if (intval($lst_id_force) != 0) {
+		if ($lst_id = sql_getfetsel("lst_id", "spip_cm_lists", "lst_id = ".$lst_id_force." AND lst_moderation != 'closed'")) {
 			$valeurs = $default;
-			$valeurs['lst_id'] = array($lst_id);
+			$valeurs['lst_id_force'] = $lst_id_force;
+			$valeurs['lst_ids'] = array($lst_id);
   		return $valeurs;
 		} else {
       return array('editable' => '');
@@ -24,7 +24,8 @@ function formulaires_clevermail_charger_dist($lst_id = 0, $lsr_mode_force = fals
 	  } elseif ($nbLists == 1) {
 	  	$lst_id = sql_getfetsel("lst_id", "spip_cm_lists", "lst_moderation != 'closed'");
       $valeurs = $default;
-      $valeurs['lst_id'] = array($lst_id);
+			$valeurs['lst_id_force'] = $lst_id;
+      $valeurs['lst_ids'] = array($lst_id);
       return $valeurs;
 	  } else {
 	  	// editable, mais le squelette trouvera tout seul la liste de valeurs
@@ -33,7 +34,7 @@ function formulaires_clevermail_charger_dist($lst_id = 0, $lsr_mode_force = fals
 	}
 }
 
-function formulaires_clevermail_verifier_dist($lst_id = 0, $lsr_mode_force = false) {
+function formulaires_clevermail_verifier_dist($lst_id = 0, $lsr_mode_force = false, $cbox='') {
   $erreurs = array();
   if (!_request('lst_id') && !_request('lst_ids')) {
     $erreurs['lst_ids'] = _T('clevermail:ce_champ_est_obligatoire');
@@ -51,7 +52,7 @@ function formulaires_clevermail_verifier_dist($lst_id = 0, $lsr_mode_force = fal
   return $erreurs;
 }
 
-function formulaires_clevermail_traiter_dist($lst_id = 0, $lsr_mode_force = false) {
+function formulaires_clevermail_traiter_dist($lst_id = 0, $lsr_mode_force = false, $cbox='') {
 	$ok = true;
 	$message = '';
   if ($sub_id = sql_getfetsel("sub_id", "spip_cm_subscribers", "sub_email=".sql_quote(_request('sub_email')))) {
