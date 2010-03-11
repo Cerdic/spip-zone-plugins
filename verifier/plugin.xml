@@ -9,5 +9,6 @@
 	<prefix>verifier</prefix>
 	<options>verifier_options.php</options>
 	<necessite id="SPIP" version="[2.0.10;]" />
+	<utilise id="yaml" />
 </plugin>
 
