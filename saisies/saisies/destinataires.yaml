@@ -42,17 +42,6 @@ options:
   -
     saisie: 'fieldset'
     options:
-      nom: 'utilisation'
-      label: '<:saisies:option_groupe_utilisation:>'
-    saisies:
-      -
-        saisie: 'oui_non'
-        options:
-          nom: 'obligatoire'
-          label: '<:saisies:option_obligatoire_label:>'
-  -
-    saisie: 'fieldset'
-    options:
       nom: 'affichage'
       label: '<:saisies:option_groupe_affichage:>'
     saisies:
@@ -69,6 +58,17 @@ options:
           nom: 'info_obligatoire'
           label: '<:saisies:option_info_obligatoire_label:>'
           explication: '<:saisies:option_info_obligatoire_explication:>'
+  -
+    saisie: 'fieldset'
+    options:
+      nom: 'validation'
+      label: '<:saisies:option_groupe_validation:>'
+    saisies:
+      -
+        saisie: 'oui_non'
+        options:
+          nom: 'obligatoire'
+          label: '<:saisies:option_obligatoire_label:>'
 defaut:
   options:
     label: '<:saisies:saisie_destinataires_titre:>'

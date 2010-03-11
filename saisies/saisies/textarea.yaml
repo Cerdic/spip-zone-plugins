@@ -38,11 +38,6 @@ options:
       -
         saisie: 'oui_non'
         options:
-          nom: 'obligatoire'
-          label: '<:saisies:option_obligatoire_label:>'
-      -
-        saisie: 'oui_non'
-        options:
           nom: 'disable'
           label: '<:saisies:option_disable_label:>'
           explication: '<:saisies:option_disable_explication:>'
@@ -103,6 +98,17 @@ options:
           type: 'entier'
           options:
             min: 1
+  -
+    saisie: 'fieldset'
+    options:
+      nom: 'validation'
+      label: '<:saisies:option_groupe_validation:>'
+    saisies:
+      -
+        saisie: 'oui_non'
+        options:
+          nom: 'obligatoire'
+          label: '<:saisies:option_obligatoire_label:>'
 defaut:
   options:
     label: '<:saisies:saisie_textarea_titre:>'

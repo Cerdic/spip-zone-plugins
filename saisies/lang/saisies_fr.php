@@ -22,6 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_groupe_affichage' => 'Affichage',
 	'option_groupe_description' => 'Description',
 	'option_groupe_utilisation' => 'Utilisation',
+	'option_groupe_validation' => 'Validation',
 	'option_info_obligatoire_explication' => 'Vous pouvez modifier l\'indication d\'obligation par d&eacute;faut : <i>'._T('info_obligatoire_02').'</i>.',
 	'option_info_obligatoire_label' => 'Indication d\'obligation',
 	'option_label_explication' => 'Le titre qui sera affich&eacute;.',
