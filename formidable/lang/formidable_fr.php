@@ -14,6 +14,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'construire_position_label' => 'Position du champ',
 'construire_reinitialiser' => 'R&eacute;initialiser le formulaire',
 'construire_reinitialiser_confirmer' => 'Vous allez perdre toutes vos modifications. &Ecirc;tes-vous s&ucirc;r de vouloir revenir au formulaire initial ?',
+'construire_verifications_aucune' => 'Aucune',
+'construire_verifications_label' => 'Type de vérification à effectuer',
 
 'editer_descriptif' => 'Descriptif',
 'editer_descriptif_explication' => 'Une explication du formulaire destin&eacute;e &agrave; l\'espace priv&eacute;.',

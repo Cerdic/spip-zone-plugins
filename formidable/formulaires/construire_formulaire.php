@@ -224,6 +224,46 @@ function formidable_generer_saisie_configurable($saisie, $env){
 			$chemin_description
 		);
 		
+		// On va ajouter la config des vérifications lorsqu'il y a un fieldset "validation"
+		if ($chemin_validation = saisies_chercher($formulaire_config, "saisie_modifiee_${nom}[options][validation]", true)){
+			include_spip('inc/verifier');
+			$liste_verifications = verifier_lister_disponibles();
+			$chemin_validation[] = 'saisies';
+			$chemin_validation[] = 1000000; // à la fin
+			
+			// On construit la saisie à insérer et les fieldset des options
+			$saisie_liste_verif = array(
+				'saisie' => 'selection',
+				'options' => array(
+					'nom' => "saisie_modifiee_${nom}[verifier][type]",
+					'label' => _T('formidable:construire_verifications_label'),
+					'option_intro' => _T('formidable:construire_verifications_aucune'),
+					'li_class' => 'liste_verifications',
+					'datas' => array()
+				)
+			);
+			$verif_options = array();
+			foreach ($liste_verifications as $type_verif => $verif){
+				$saisie_liste_verif['options']['datas'][$type_verif] = $verif['titre'];
+				if ($verif['options'] and is_array($verif['options']))
+					$verif_options[] = array(
+						'saisie' => 'fieldset',
+						'options' => array(
+							'nom' => $type_verif,
+							'label' => $verif['titre'],
+							'li_class' => "$type_verif options_verifier"
+						),
+						'saisies' => $verif['options']
+					);
+			}
+			
+			// On insère la liste
+			$formulaire_config = saisies_inserer($formulaire_config, $saisie_liste_verif, $chemin_validation);
+			// On insère chaque fieldset
+			foreach ($verif_options as $fieldset){
+				$formulaire_config = saisies_inserer($formulaire_config, $fieldset, $chemin_validation);
+			}
+		}
 		
 		$env2['saisies'] = $formulaire_config;
 		
