@@ -22,6 +22,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_telephone' => "Le numéro n'est pas valide.",
 'erreur_url' => "L'adresse n\'est pas valide.",
 
+'option_entier_max_label' => 'Valeur maximum',
+'option_entier_min_label' => 'Valeur minimum',
+'option_regex_modele_label' => 'La valeur doit correspondre au masque suivant',
+'option_taille_max_label' => 'Taille maximum',
+'option_taille_min_label' => 'Taille minimum',
+
 'type_date' => 'Date',
 'type_date_description' => 'V&eacute;rifie que la valeur est une date au format JJ/MM/AAAA. Le s&eacute;parateur est libre (&quot;.&quot;, &quot;/&quot;, etc).',
 'type_email' => 'Adresse de courriel',
