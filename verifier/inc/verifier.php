@@ -77,14 +77,14 @@ function verifier_lister_disponibles(){
  * @param string $type_verif Le type de la vérification
  * @return array Un tableau contenant le YAML décodé
  */
-function saisies_charger_infos($type_verif){
+function verifier_charger_infos($type_verif){
 	include_spip('inc/yaml');
-	$fichier = find_in_path("saisies/$type_verif.yaml");
+	$fichier = find_in_path("verifier/$type_verif.yaml");
 	$verif = yaml_decode_file($fichier);
 	if (is_array($verif)){
 		$verif['titre'] = $verif['titre'] ? _T_ou_typo($verif['titre']) : $type_verif;
 		$verif['description'] = $verif['description'] ? _T_ou_typo($verif['description']) : '';
-		$verif['icone'] = $verif['icone'] ? find_in_path($saisie['verif']) : '';
+		$verif['icone'] = $verif['icone'] ? find_in_path($verif['verif']) : '';
 	}
 	return $verif;
 }
