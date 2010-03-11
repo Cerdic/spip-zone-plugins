@@ -1,0 +1,67 @@
+/*
+ $LastChangedRevision$
+ $LastChangedBy$
+ $LastChangedDate$
+*/
+
+#foni_form_font { /* form */
+	margin:0;
+	padding:0;
+	border:0;
+}
+#foni_form_font fieldset {
+	margin:0;
+	padding:1ex;
+	border:1px solid #ccc;
+}
+#foni_form_font legend.help span {
+	padding:0 0.75ex;
+	font-weight:900;
+	color: #099;
+	cursor:pointer;
+}
+
+
+#foni_fontes_sel, #foni_fontes_sel * {
+	margin:0;
+	padding:0;
+	text-align:left;
+}
+
+
+#foni_fontes_sel { /* table */
+	border:0;
+	border-spacing:0;
+	border-collapse:collapse;
+	width:100%;
+	overflow:hidden;
+}
+#foni_fontes_sel tr {
+	height:2em;
+	line-height:1.8em;
+	padding:0.1em 0;
+}
+#foni_fontes_sel th {
+	text-align:center;
+}
+#foni_fontes_sel td.face {
+	white-space:nowrap;
+	cursor:pointer;
+}
+#foni_fontes_sel th.face, #foni_fontes_sel td.face {
+	width:18ex;
+	overflow:hidden;
+}
+#foni_fontes_sel label.face {
+	margin-left:0.75ex;
+	cursor:pointer;
+}
+#foni_fontes_sel label.family {
+	display:none;
+}
+#foni_fontes_sel input.forml {
+	font-size:90%;
+}
+
+#foni_font_preview {
+}

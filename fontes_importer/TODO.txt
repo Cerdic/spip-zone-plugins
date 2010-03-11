@@ -1,0 +1,7 @@
+
+// $LastChangedRevision$
+// $LastChangedBy$
+// $LastChangedDate$
+
+- revoir les icones, un peu trop vite faites ;-)
+- completer le desinstalleur (base/) pour supprimer les prefs
