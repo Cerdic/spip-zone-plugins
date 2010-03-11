@@ -16,7 +16,10 @@ _ Tout pour construire des commentaires&nbsp;:
 <prefix>comments</prefix>
 <chemin dir="" />
 <chemin dir="feed/" />
-<fonctions>comments_fonctions.php</fonctions>
+<pipeline>
+	<nom>pre_boucle</nom>
+	<inclure>comments_pipelines.php</inclure>
+</pipeline>
 <necessite id="SPIP" version="[2.0.9;]" />
 <utilise id='Z' version="[;]" />
 <categorie>communication</categorie>
