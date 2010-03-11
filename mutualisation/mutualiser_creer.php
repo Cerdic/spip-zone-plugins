@@ -35,9 +35,9 @@ function mutualiser_creer($e, $options) {
 	include_once(dirname(__FILE__).'/base/abstract_mutu.php');
 
 	$GLOBALS['meta']["charset"] = 'utf-8'; // pour que le mail fonctionne
-	
+
 	//$GLOBALS['spip_connect_version'] = 0.7;
-	
+
 	if (!defined('_INSTALL_SERVER_DB'))
 		define('_INSTALL_SERVER_DB','mysql');
 
@@ -50,10 +50,10 @@ function mutualiser_creer($e, $options) {
 
 /*
  * Code d'activation du site
- * 
+ *
  * Demander le code pour autoriser cette creation de site
  * Si le code est valide, poser un cookie
- * 
+ *
  */
 function mutu_etape_code_activation($e, $options){
 	if ($options['code']) {
@@ -65,7 +65,7 @@ function mutu_etape_code_activation($e, $options){
 				_T('mutu:install_site'),
 				"<div>" .$menu_langues ."<br /></div>\n" .
 				"<div><img alt='SPIP' src='" . _DIR_IMG_PACK . "logo-spip.gif' /></div>\n".
-			
+
 				(isset($_REQUEST['code_activation'])
 					? _T('mutu:install_err')
 					: ''
@@ -86,16 +86,16 @@ function mutu_etape_code_activation($e, $options){
 		} else {
 			setcookie('mutu_code_activation', $secret);
 		}
-	}	
+	}
 }
 
 
 /*
  * Creation de la base
- * 
+ *
  * Cree la base de donnee
  * Cree eventuellement un utilisateur pour cette base
- * 
+ *
  */
 function mutu_etape_creer_base($e, $options){
 
@@ -143,45 +143,45 @@ function mutu_etape_creer_base($e, $options){
 					AND sql_selectdb(_INSTALL_NAME_DB, _INSTALL_SERVER_DB)) {
 							$GLOBALS['connexions'][_INSTALL_SERVER_DB]['prefixe'] = $GLOBALS['table_prefix'];
 							$GLOBALS['connexions'][_INSTALL_SERVER_DB]['db'] = _INSTALL_NAME_DB;
-						
+
 						/*
 						 * Creation d'un utilisateur pour la base nouvellement cree
-						 *		
+						 *
 						 * Pour chaque base creee on cree aussi un user
 						 * MYSQL specifique qui aura les droits sur la base
 						 */
 						if ($options['creer_user_base']) {
-	
-							// le nom de la machine MySQL peut etre different 
+
+							// le nom de la machine MySQL peut etre different
 							// du nom de la connexion via DNS
-							define ('_INSTALL_HOST_DB_LOCALNAME', _INSTALL_HOST_DB); 
-							
+							define ('_INSTALL_HOST_DB_LOCALNAME', _INSTALL_HOST_DB);
+
 							// requete differente entre pg et mysql...
 							$req = $err = array();
 							switch (strtolower(_INSTALL_SERVER_DB)){
-									
+
 								case 'pg':
 									// d'abord creer l'utilisateur
 									$req[] = "CREATE USER " . _INSTALL_USER_DB . " WITH PASSWORD '" . _INSTALL_PASS_DB . "'";
 									$err[] = "CREATE USER " . _INSTALL_USER_DB . " WITH PASSWORD 'xxx'";
 									// l'affecter a sa base de donnee
-									$req[] = $r = "GRANT ALL PRIVILEGES ON DATABASE " 
+									$req[] = $r = "GRANT ALL PRIVILEGES ON DATABASE "
 										. _INSTALL_NAME_DB . " TO ". _INSTALL_USER_DB;
 									$err[] = $r;
 									break;
-									
+
 								case 'mysql':
 								default:
 									$req[] = "GRANT " . _PRIVILEGES_MYSQL_USER_BASE . " ON "
-										. _INSTALL_NAME_DB.".* TO '" 
+										. _INSTALL_NAME_DB.".* TO '"
 										. _INSTALL_USER_DB."'@'"._INSTALL_HOST_DB_LOCALNAME
 										. "' IDENTIFIED BY '" . _INSTALL_PASS_DB . "'";
 									$err[] = "GRANT " . _PRIVILEGES_MYSQL_USER_BASE . " ON "
-										. _INSTALL_NAME_DB.".* TO '" 
+										. _INSTALL_NAME_DB.".* TO '"
 										. _INSTALL_USER_DB."'@'"._INSTALL_HOST_DB_LOCALNAME
 										. "' IDENTIFIED BY 'xxx'";
-									break;	
-								
+									break;
+
 							}
 							foreach ($req as $n=>$sql){
 								if (!sql_query($sql, _INSTALL_SERVER_DB)) {
@@ -191,12 +191,12 @@ function mutu_etape_creer_base($e, $options){
 							mutu_close();
 							$link = mutu_connect_db(_INSTALL_HOST_DB,'',  _INSTALL_USER_DB, _INSTALL_PASS_DB, '', _INSTALL_SERVER_DB);
 						}
-						
+
 						// creation ok
 						// supprimer le fichier d'installation
 						include_spip('inc/flock');
 						@supprimer_fichier($e . _NOM_TEMPORAIRES_INACCESSIBLES . _MUTU_INSTALLATION_FILE);
-						
+
 						echo mutu_minipres(
 							_T('mutu:install_bd_cree', array( 'nombase' => '<tt>'._INSTALL_NAME_DB.'</tt>')),
 							"<div><img alt='SPIP' src='" . _DIR_IMG_PACK . "logo-spip.gif' /></div>\n".
@@ -244,7 +244,7 @@ function mutu_etape_creer_base($e, $options){
 
 			// ici la base existe, on passe aux repertoires
 		}
-		
+
 		else {
 			echo mutu_minipres(
 				_T('mutu:install_creation_bd_site'). '(<tt>'.joli_repertoire($e).'</tt>)',
@@ -254,7 +254,7 @@ function mutu_etape_creer_base($e, $options){
 			);
 			exit;
 		}
-	}	
+	}
 }
 
 
@@ -289,17 +289,17 @@ function mutu_etape_creer_repertoires($e, $options){
 			AND chmod($e._NOM_PERMANENTS_ACCESSIBLES, _SPIP_CHMOD)
 			AND chmod($e._NOM_TEMPORAIRES_INACCESSIBLES, _SPIP_CHMOD)
 			AND chmod($e._NOM_TEMPORAIRES_ACCESSIBLES, _SPIP_CHMOD);
-			
-			// pour signaler qu'il reste des etapes a realises, 
+
+			// pour signaler qu'il reste des etapes a realises,
 			// malgre la presence des repertoires
 			if ($ok){
 				include_spip('inc/flock');
 				ecrire_fichier($e . _NOM_TEMPORAIRES_INACCESSIBLES . _MUTU_INSTALLATION_FILE, 'ok');
 			}
-			
+
 			echo mutu_minipres(
-				_T('mutu:install_creation_repertoire', array ('repertoire' => '<tt>'.joli_repertoire($e).'</tt>'))
-				."<div><img alt='SPIP' src='" . _DIR_IMG_PACK . "logo-spip.gif' /></div>\n"
+				_T('mutu:install_creation_repertoire', array ('repertoire' => '<tt>'.joli_repertoire($e).'</tt>')),
+				"<div><img alt='SPIP' src='" . _DIR_IMG_PACK . "logo-spip.gif' /></div>\n"
 				.'<h3>'
 				. ($ok
 					? _T('mutu:install_creation_rep_ok_1').'<a href="'.parametre_url(self(), 'creerrepertoire', '').'">'._T('mutu:install_creation_rep_ok_2').'</a>.'
@@ -339,7 +339,7 @@ function mutu_etape_creer_repertoires($e, $options){
 
 		} else {
 			echo mutu_minipres(
-			_T('mutu:install_repertoire_noexist', array('repertoire' => '<tt>'.joli_repertoire($e).'</tt>')), 
+			_T('mutu:install_repertoire_noexist', array('repertoire' => '<tt>'.joli_repertoire($e).'</tt>')),
 			"<div><img alt='SPIP' src='" . _DIR_IMG_PACK . "logo-spip.gif' /></div>\n".
 			'<h3>'
 			._T('mutu:install_repertoire_noexist', array( 'repertoire' => joli_repertoire($e)))
@@ -353,7 +353,7 @@ function mutu_etape_creer_repertoires($e, $options){
 		);
 		exit;
 
-	}	
+	}
 }
 
 
@@ -364,7 +364,7 @@ function mutu_etape_fin($e, $options){
 	// supprimer le fichier d'installation
 	include_spip('inc/flock');
 	@supprimer_fichier($e . _NOM_TEMPORAIRES_INACCESSIBLES . _MUTU_INSTALLATION_FILE);
-	
+
 	echo mutu_minipres(
 		_T('mutu:install_rep_bd_ok'),
 
@@ -373,6 +373,6 @@ function mutu_etape_fin($e, $options){
 			_L('Vous pouvez <a href="'.generer_url_ecrire('install').'">poursuivre l\'installation de SPIP</a>.')
 		.'</h3>'
 	);
-	exit;		
+	exit;
 }
 ?>
