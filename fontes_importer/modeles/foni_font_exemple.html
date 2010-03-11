@@ -1,0 +1,115 @@
+[<!--(#REM)
+
+	// modeles/foni_font_exemple.html
+
+// $LastChangedRevision$
+// $LastChangedBy$
+// $LastChangedDate$
+
+	/**********************************************
+	* Copyright (c) 2010 Christian Paulus - http://www.quesaco.org
+	* Dual licensed under the MIT and GPL licenses.
+	**********************************************/
+ 
+	Exemple de boite de preview pour visualiser
+	la fonte de caracteres choisie dans divers corps.
+	
+	Pour adapter ce squelette a vos besoins,
+	recopiez-le dans votre rep de squelettes.
+
+	// $LastChangedRevision$
+	// $LastChangedBy$
+	// $LastChangedDate$
+
+	// placer url complet pour firefox, sinon prise en charge alleatoire
+	// ou inclure les fontes, sinon firefox ne prend pas en compte
+	// (ou qq chose du genre, a trouver un jour)
+
+	// les 'style', ''weight' ne sont pas utilisés
+	
+-->]
+<!-- debut preview -->
+
+<style type="text/css">
+@font-face { 
+    font-family: "preview";
+	src: url("[(#ENV{foni_include}|=={oui}|?{' ',''})#FONI_FONT_ENCODE{#ENV{font_path},#ENV{font_ttf}}
+][(#ENV{foni_include}|=={oui}|?{'',' '})#URL_SITE_SPIP/#ENV{font_path}/#ENV{font_ttf}]");
+}
+</style>
+
+<!--[if IE]>
+    <style>
+    @font-face { 
+        font-family: "preview";
+        src: url("#URL_SITE_SPIP/#ENV{font_path}/#ENV{font_eot}");
+    }
+    </style>
+<![endif]-->
+
+<style type="text/css"><!--
+h2, h3 {
+	font-family: sans-serif;
+	font-size:1.2em;
+	font-weight:400;
+	margin:0;
+	padding:0;
+}
+h3 {
+	background-color:#000;
+	color:#fff;
+	height:1.4em;
+	line-height:1.4em;
+	padding:0 1ex;
+}
+#fontname {
+	padding:0;
+	margin:0;
+	line-height:1.2em;
+	height:1.2em;
+	border-bottom:4px solid black;
+	color:#000 !important;
+}
+p {
+	font-family: sans-serif;
+}
+p.caption {
+	line-height:1.2em;
+	height:1.2em;
+	margin:0 0 1em;
+	padding:0;
+}
+p.preview {
+	font-family: preview !important;
+	margin:10px 0;
+	padding:0;
+}
+--></style>
+
+
+<h2 id="fontname">#ENV{fontname}</h2>
+<p class="caption">#ENV{font_path}&nbsp;<strong>#ENV{font_ttf}</strong>&nbsp;<strong>#ENV{font_eot}</strong></p>
+
+<h3>font-size: 400%</h3>
+<p style="font-size:400%" class="preview">Portez ce vieux whisky au juge blond qui fume.</p>
+
+<h3>font-size: 200%</h3>
+<p style="font-size:200%" class="preview">Portez ce vieux whisky au juge blond qui fume.</p>
+
+<h3>font-size: 100%</h3>
+<p style="font-size:100%" class="preview">
+Portez ce vieux whisky au juge blond qui fume sur son &#238;le int&#233;rieure, &#224;
+c&#244;t&#233; de l&#39;alc&#244;ve ovo&#239;de, o&#249; les b&#251;ches se consument dans l&#39;&#226;tre, ce qui lui
+permet de penser &#224; la c&#339;nogen&#232;se de l&#39;&#234;tre dont il est question dans la
+cause ambigu&#235; entendue &#224; Mo&#255;, dans un capharna&#252;m qui, pense-t-il,
+diminue &#231;&#224; et l&#224; la qualit&#233; de son &#339;uvre.</p>
+
+<h3>font-size: 90%</h3>
+<p style="font-size:90%" class="preview">
+Portez ce vieux whisky au juge blond qui fume sur son &#238;le int&#233;rieure, &#224;
+c&#244;t&#233; de l&#39;alc&#244;ve ovo&#239;de, o&#249; les b&#251;ches se consument dans l&#39;&#226;tre, ce qui lui
+permet de penser &#224; la c&#339;nogen&#232;se de l&#39;&#234;tre dont il est question dans la
+cause ambigu&#235; entendue &#224; Mo&#255;, dans un capharna&#252;m qui, pense-t-il,
+diminue &#231;&#224; et l&#224; la qualit&#233; de son &#339;uvre.</p>
+
+<!-- fin preview -->
