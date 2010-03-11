@@ -12,23 +12,63 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// fonction pour changer la connexion aux serveurs MySQL en gardant les paramètres existant
-
-function req_mysql_dist($host, $port, $login, $pass, $db='', $prefixe='') {
+if (!extension_loaded('mysqli')) {
 	charger_php_extension('mysqli');
-	if ($port > 0) $host = "$host:$port";
-	$link = new mysqli($host, $login, $pass, $db);
-	if (!$link) return false;
-	$last = '';
-	if (!$db) {
-		$db = 'spip';
+}
+
+define('_DEFAULT_DB', 'spip');
+
+// fonction pour changer la connexion aux serveurs MySQL en gardant les paramètres existant
+// Cette fonction sert de constructeur de l'instance de connexion MySQLi
+function req_mysql_dist($host, $port, $login, $pass, $db='', $prefixe='', $reconnect=FALSE) {
+	static $last_connect = array(); // Pour se reconnecter si neccessaire
+
+	// Il faut initialiser le connexion
+	$connexion = mysqli_init();
+
+	if (!$reconnect) {
+		// On ne vient pas d'un select_db
+		// Possibilite de stocker en php.ini les parametre de connexion
+		if (!$host) $host = ini_get('mysqli.default_host');
+		if (!$host) $host = 'localhost';
+		if (!$port) $port = ini_get('mysqli.default_port');
+		if (!$login) $login = ini_get('mysqli.default_user');
+		if (!$pass) $pass = ini_get('mysqli.default_pw');
+		if (!$db) $db = _DEFAULT_DB;
+	} else {
+		if (empty($host) && empty($port) && empty($login) && empty($pass)){
+			foreach (array('host','port','login','pass','prefixe') as $a){
+				$$a = $last_connect[$a];
+			}
+		}
+	}
+	
+	// Connexion proprement dite
+	// On pourrait encore jouer sur des options et sur le socket a utiliser
+	if (@$connexion->real_connect($host, $login, $pass, $db, $port)) {
+		$last_connect = array (
+			'host' => $host,
+			'port' => $port,
+			'login' => $login,
+			'pass' => $pass,
+			'db' => $db,
+			'prefixe' => $prefixe
+		);
+	} else {
+		return FALSE;
+	}
+
+	// Afin d'eviter les bugs, il peut etre utile d'etre en 'STRICT_ALL_TABLES' par ex.
+	// voir 'STRICT_ALL_TABLES,ANSI_QUOTES,NO_AUTO_VALUE_ON_ZERO,NO_ZERO_DATE,NO_ZERO_IN_DATE'
+	if (defined('_MYSQL_SET_SQL_MODE')) {
+		@$connexion->query("set sql_mode='"._q(_MYSQL_SET_SQL_MODE)."'");
 	}
 
 	return array(
 		'db' => $db,
-		'last' => $last,
-		'prefixe' => $prefixe ? $prefixe : $db,
-		'link' => $link
+		'last' => '',
+		'prefixe' => $prefixe,
+		'link' => $connexion
 	);
 
 }
@@ -85,18 +125,28 @@ $GLOBALS['spip_mysql_functions_1'] = array(
 		)
 	);
 
-// Reconnecte SPIP sur MySQL via un connecteur MySQLi
-function spip_mysqli_connect_db($host, $port, $login, $pass, $db='') {
-	if ($port > 0) $host = "$host:$port";
-	$link = new mysqli($host, $login, $pass, $db);
-	return $link;
-}
 
 // portage de http://doc.spip.org/@spip_mysql_set_charset
+// on met un tampon pour ne pas préciser le charset à chaque requete
 function spip_mysqli_set_charset($charset, $serveur='',$requeter=true,$requeter=true){
-	$connexion = &$GLOBALS['connexions'][$serveur ? $serveur : 0];
-	#spip_log("changement de charset sql : "."SET NAMES "._q($charset));
-	return mysqli_set_charset($connexion,_q($charset));
+	static $charsets = array();
+
+	$serveur = $serveur ? $serveur : 0;
+	$ok = TRUE;
+
+	if (!isset($charsets[$serveur]) || $charsets[$serveur]!=$charset) {
+		$connexion = &$GLOBALS['connexions'][$serveur ? $serveur : 0]['link'];
+		$ok = FALSE;
+		if (version_compare(PHP_VERSION , '5.1.5', '>=')) {
+			$ok = $connexion->set_charset($charset);
+			$charsets[$serveur] == $charset;
+		}
+		if (!$ok) {
+		    $ok = $connexion->query("SET NAMES '"._q($charset)."'");
+		}
+	}
+
+	return $ok;
 }
 
 // portage de http://doc.spip.org/@spip_mysql_get_charset
@@ -104,7 +154,8 @@ function spip_mysqli_get_charset($charset=array(), $serveur='',$requeter=true){
 	$connexion = &$GLOBALS['connexions'][$serveur ? $serveur : 0];
 	$connexion['last'] = $c = "SHOW CHARACTER SET"
 	. (!$charset ? '' : (" LIKE "._q($charset['charset'])));
-	return mysqli_get_charset($connexion);
+	return spip_mysql_fetch(mysql_query($c), NULL, $serveur);
+	//mysqli_get_charset($connexion);
 }
 
 // Fonction de requete generale, munie d'une trace a la demande
