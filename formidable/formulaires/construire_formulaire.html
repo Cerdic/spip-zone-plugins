@@ -13,9 +13,9 @@
 		<input style="display:none;" type="submit" class="submit" name="enregistrer" value="<:bouton_enregistrer:>" />
 		<ul>
 			<li class="actions_formulaire">
-				<button type="submit" class="submit" name="reinitialiser" value="oui" onclick="return confirm('Vous allez perdre toutes vos modifications. Êtes-vous sûr de vouloir revenir au formulaire initial ?')">
+				<button type="submit" class="submit" name="reinitialiser" value="oui" onclick="return confirm('<:formidable:construire_reinitialiser_confirmer:>')">
 					<img src="#CHEMIN{images/formulaire-reinitialiser-24.png}" alt="" />
-					Réinitialiser le formulaire
+					<:formidable:construire_reinitialiser:>
 				</button>
 			</li>
 			<BOUCLE_contenu(POUR){tableau #ENV{_contenu}}>

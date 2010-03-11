@@ -12,6 +12,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'construire_position_explication' => 'Indiquez devant quel autre champ sera placé celui-ci.',
 'construire_position_fin' => '&Agrave; la fin',
 'construire_position_label' => 'Position du champ',
+'construire_reinitialiser' => 'R&eacute;initialiser le formulaire',
+'construire_reinitialiser_confirmer' => 'Vous allez perdre toutes vos modifications. &Ecirc;tes-vous s&ucirc;r de vouloir revenir au formulaire initial ?',
 
 'editer_descriptif' => 'Descriptif',
 'editer_descriptif_explication' => 'Une explication du formulaire destin&eacute;e &agrave; l\'espace priv&eacute;.',
