@@ -12,6 +12,12 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input style="display:none;" type="submit" class="submit" name="enregistrer" value="<:bouton_enregistrer:>" />
 		<ul>
+			<li class="actions_formulaire">
+				<button type="submit" class="submit" name="reinitialiser" value="oui" onclick="return confirm('Vous allez perdre toutes vos modifications. Êtes-vous sûr de vouloir revenir au formulaire initial ?')">
+					<img src="#CHEMIN{images/formulaire-reinitialiser-24.png}" alt="" />
+					Réinitialiser le formulaire
+				</button>
+			</li>
 			<BOUCLE_contenu(POUR){tableau #ENV{_contenu}}>
 			[(#VAL{saisie}|array_key_exists{#VALEUR}|oui)
 				[(#VALEUR|formidable_generer_saisie_configurable{#ENV**|unserialize})]

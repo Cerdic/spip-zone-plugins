@@ -15,6 +15,16 @@
 	width:auto;
 }
 
+.formulaire_construire_formulaire li.actions_formulaire{
+	margin:0;
+	padding:1em;
+	text-align:center;
+	border:0;
+}
+.formulaire_construire_formulaire li.actions_formulaire img{
+	vertical-align:middle;
+}
+
 .formulaire_construire_formulaire li.configurable{
 	position:relative;
 	padding:1em;

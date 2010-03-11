@@ -119,6 +119,11 @@ function formulaires_construire_formulaire_traiter($identifiant, $formulaire_ini
 		$formulaire_actuel = saisies_modifier($formulaire_actuel, $nom, $saisie_modifiee);
 	}
 	
+	// Si on demande à réinitialiser
+	if (_request('reinitialiser') == 'oui'){
+		$formulaire_actuel = $formulaire_initial;
+	}
+	
 	// On enregistre en session la nouvelle version du formulaire
 	session_set($identifiant, $formulaire_actuel);
 	
