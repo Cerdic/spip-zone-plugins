@@ -1,10 +1,11 @@
 
 #SET{type_choix, #ENV{type_choix,tous}}
 #SET{choix_destinataires, #ENV*{choix_destinataires,#ARRAY}}
+#SET{erreurs,#ENV**{erreurs}|table_valeur{#ENV{nom}}}
 <BOUCLE_choix(CONDITION){si #GET{choix_destinataires}|count|<{2}|ou{#GET{type_choix}|=={tous}}}>
-<li class="editer editer_[(#ENV{nom})][ (#GET{obligatoire})][ (#GET{erreurs}|oui)erreur][ (#ENV{li_class})][ saisie_(#ENV{type_saisie})]" [(#ENV{tout_afficher}|!={oui}|?{style="display:none;"})]>
+<li class="editer editer_[(#ENV{nom})][ (#ENV{obligatoire})][ (#GET{erreurs}|oui)erreur][ (#ENV{li_class})][ saisie_(#ENV{type_saisie})]" [(#ENV{tout_afficher}|!={oui}|?{style="display:none;"})]>
 	#ENV*{inserer_debut}
-	[<label for="champ_#ENV{nom}">(#ENV*{label})[<span class='obligatoire'>(#GET{obligatoire}|oui)[(#ENV*{info_obligatoire}|is_null|?{<:info_obligatoire_02:>,#ENV*{info_obligatoire}})]</span>]</label>]
+	[<label for="champ_#ENV{nom}">(#ENV*{label})[<span class='obligatoire'>(#ENV{obligatoire}|oui)[(#ENV*{info_obligatoire}|is_null|?{<:info_obligatoire_02:>,#ENV*{info_obligatoire}})]</span>]</label>]
 	[<span class='erreur_message'>(#GET{erreurs})</span>]
 	[<p class='explication'>(#ENV*{explication})</p>]
 	[<em class='attention'>(#ENV*{attention})</em>]
@@ -17,9 +18,9 @@
 	#ENV*{inserer_fin}
 </li>
 </BOUCLE_choix>
-<li class="editer editer_[(#ENV{nom})][ (#GET{obligatoire})][ (#GET{erreurs}|oui)erreur][ (#ENV{li_class})][ saisie_(#ENV{type_saisie})]">
+<li class="editer editer_[(#ENV{nom})][ (#ENV{obligatoire})][ (#GET{erreurs}|oui)erreur][ (#ENV{li_class})][ saisie_(#ENV{type_saisie})]">
 	#ENV*{inserer_debut}
-	[<label for="champ_#ENV{nom}">(#ENV*{label})[<span class='obligatoire'>(#GET{obligatoire}|oui)[(#ENV*{info_obligatoire}|is_null|?{<:info_obligatoire_02:>,#ENV*{info_obligatoire}})]</span>]</label>]
+	[<label for="champ_#ENV{nom}">(#ENV*{label})[<span class='obligatoire'>(#ENV{obligatoire}|oui)[(#ENV*{info_obligatoire}|is_null|?{<:info_obligatoire_02:>,#ENV*{info_obligatoire}})]</span>]</label>]
 	[<span class='erreur_message'>(#GET{erreurs})</span>]
 	[<p class='explication'>(#ENV*{explication})</p>]
 	[<em class='attention'>(#ENV*{attention})</em>]
