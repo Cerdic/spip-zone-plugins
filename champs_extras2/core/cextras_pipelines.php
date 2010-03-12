@@ -294,11 +294,12 @@ function cextras_formulaire_verifier($flux){
 	// recuperer les champs crees par les plugins
 	$form = $flux['args']['form'];
 	// formulaire d'edition ?
-	if (strpos($form, 'editer_') !== false) {
-		$type = str_replace('editer_','',$form);
+	if (strncmp($form, 'editer_', 7) === 0) {
+		$type = substr($form, 7);
+		
 		// des champs extras correspondent ?
 		if ($extras = cextras_get_extras_match($type)) {
-
+		
 			include_spip('inc/autoriser');
 
 			// si le plugin "verifier" est actif, on tentera dans
@@ -306,7 +307,7 @@ function cextras_formulaire_verifier($flux){
 			// demandee par le champ, si definie dans sa description
 			// 'verifier' (et 'verifier_options')
 			$verifier = charger_fonction('verifier', 'inc', true);
-
+			
 			foreach ($extras as $c) {
 				// si on est autorise a modifier le champ
 				// et que le champ est obligatoire
@@ -322,11 +323,10 @@ function cextras_formulaire_verifier($flux){
 				// comme dans l'autre appel (cextras_afficher_contenu_objet())
 				// du coup, on risque de se retrouver parfois avec des
 				// resultats differents... Il faudra surveiller.
-
 				if (autoriser('modifierextra', $type, $id_objet, '', array(
 					'type' => $c->table,
 					'id_objet' => $id_objet)))
-				{
+				{	
 					if ($c->obligatoire AND !_request($c->champ)) {
 						$flux['data'][$c->champ] = _T('info_obligatoire');
 					} elseif ($c->verifier AND $verifier) {

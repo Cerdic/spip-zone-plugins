@@ -3,9 +3,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // mes_fonctions peut aussi declarer des autorisations, donc il faut donc le charger
 // en 2.1, c'est deja fait dans inc/autoriser.
-// en 2.0, c'est include ($f) au lieu de include_once dans inc/parametrer...
+// en 2.0, c'est include ($f) au lieu de include_once dans public/parametrer...
 // du coup, on appelle directement ce fichier pour eviter des plantages.
-include_spip('inc/parametrer'); 
+include_spip('public/parametrer'); 
 
 
 // fonction pour le pipeline autoriser
