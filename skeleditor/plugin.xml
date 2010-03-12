@@ -40,7 +40,7 @@
 	<chemin dir="spip_200" />
 	<necessite id="SPIP" version="[2.0.0;]" />
 </plugin>
-<plugin version="[2.1.0-rc;]" >
+<plugin version="[2.1.0-beta;]" >
 	<nom>SkelEditor</nom>
 	<icon>spip_210/img_pack/skeleditor-32.png</icon>
 	<auteur>[erational->http://www.erational.org], [C&eacute;dric Morin->http://www.yterium.net]</auteur>
@@ -75,5 +75,5 @@
   </pipeline>
 
 	<chemin dir="spip_210/" />
-	<necessite id="SPIP" version="[2.1.0-rc;)" />
+	<necessite id="SPIP" version="[2.1.0-beta;)" />
 </plugin>
