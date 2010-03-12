@@ -249,6 +249,26 @@ function saisies_modifier($saisies, $nom_ou_chemin, $modifs){
 }
 
 /*
+ * Transforme tous les noms du formulaire avec un preg_replace
+ *
+ * @param array $saisies Un tableau décrivant les saisies
+ * @param string $masque Ce que l'on doit chercher dans le nom
+ * @param string $remplacement Ce par quoi on doit remplacer
+ * @return array Retourne le tableau modifié des saisies
+ */
+function saisies_transformer_noms($saisies, $masque, $remplacement){
+	if (is_array($saisies)){
+		foreach ($saisies as $cle => $saisie){
+			$saisies[$cle]['options']['nom'] = preg_replace($masque, $remplacement, $saisie['options']['nom']);
+			if (is_array($saisie['saisies']))
+				$saisies[$cle]['saisies'] = saisies_transformer_noms($saisie['saisies'], $masque, $remplacement);
+		}
+	}
+	
+	return $saisies;
+}
+
+/*
  * Vérifier tout un formulaire tel que décrit avec les Saisies
  *
  * @param array $formulaire Le contenu d'un formulaire décrit dans un tableau de Saisies
