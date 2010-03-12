@@ -1,10 +1,11 @@
 <plugin>
 	<nom>Numerotation Rapide</nom>
+	<icon>icon.gif</icon>
 	<auteur>cedric.morin@yterium.com</auteur>
 	<version>0.1</version>
 	<etat>stable</etat>
 	<description>Une boite pour gerer facilement la numerotation des articles et rubriques</description>
-	<lien></lien> <!-- URI de documentation -->
+	<lien>http://www.spip-contrib.net/Numerotation-Rapide</lien> <!-- URI de documentation -->
 	<prefix>numero</prefix>
 	<pipeline>
 		<nom>affiche_droite</nom>
