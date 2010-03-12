@@ -14,7 +14,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'attente_confirmation' => 'Auf Best&auml;tigung warten',
 
 	// B
-	'base_donnees' => 'Base de donn&eacute;es', # NEW
+	'base_donnees' => 'Datenbank',
+	'bloc_deplier' => 'D&eacute;plier', # NEW
+	'bloc_replier' => 'Replier', # NEW
 
 	// C
 	'colorer_fond' => 'Hintergrundfarbe',
@@ -31,11 +33,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explique_spam' => 'Achtung: Sie haben reservierte Tags, Zeichen oder Worte verwendet.<br /><br />Bitte kehren Sie zum letzten Schritt zur&uuml;ck!',
 
 	// L
-	'lancer_test' => 'Lancer le test !', # NEW
+	'lancer_test' => 'Test starten!',
 	'lutte_spam' => 'SPAM-Bek&auml;mpfung',
 
 	// M
-	'maj_actu' => 'Update erzwingen', # MODIF
+	'maj_actu' => 'Update erzwingen',
 	'maj_liste' => 'Liste der gefundenen Plugins:',
 	'maj_maj' => 'Ausgew&auml;hltes Plugin aktualisieren',
 	'maj_ok' => 'Dieses[Plugin->@zip@] scheint [auf dem neuesten Stand->@url@] zu sein.',
@@ -45,8 +47,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'maj_svn' => 'Dieses SVN Plugin scheint [aktuell->@url@] zu sein.',
 	'maj_verif' => 'Pr&uuml;fen sie vorab, welche Archiv sie verwenden m&ouml;chten:',
 	'maj_verif2' => 'Achtng: Nachdem sie auf diese Schaltfl&auml;che geklickt haben, pr&uuml;fen sie bitte genau, ob das Archiv, das geladen werden soll, auch dem Plugin entspricht, das sie updaten wollen.',
-	'maj_zip_ko' => 'Le fichier .zip distant n\'a pu &ecirc;tre identifi&eacute;.', # NEW
-	'msg_publies' => 'Uniquement les messages publi&eacute;s', # NEW
+	'maj_zip_ko' => 'Die externe ZIP-Datei konnte nicht identifiziert werden.',
+	'msg_publies' => 'Nur ver&ouml;ffentlichte Nachrichten.',
 
 	// N
 	'nom_email_forum' => 'Danke f&uuml;r die Angabe ihres Namens oder ihrer Mailadresse!',
@@ -88,25 +90,25 @@ W&auml;hlen Sie die f&uuml;r Sie wichtigsten Funktionen: {Ziffern entfernen}, {T
 Bitte lesen Sie auch die Artikel auf : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
 Kompatibel mit: SPIP 1.9x und v2.0',
-	'pp_blocs_bloc' => 'Ins&eacute;rer un bloc repli&eacute;', # NEW
-	'pp_blocs_visible' => 'Ins&eacute;rer un bloc d&eacute;pli&eacute;', # NEW
-	'pp_chatons_inserer' => 'Ins&eacute;rer le chaton &laquo;&nbsp;@chaton@&nbsp;&raquo;', # NEW
-	'pp_chatons_inserer_drop' => 'Ins&eacute;rer un chaton dans votre texte', # NEW
-	'pp_couleur_fond' => 'Fond @couleur@', # NEW
-	'pp_couleur_icone_fond' => 'F', # NEW
-	'pp_couleur_icone_texte' => 'T', # NEW
-	'pp_couleur_texte' => 'Texte @couleur@', # NEW
-	'pp_couteau_suisse_drop' => 'Utiliser un outil du Couteau Suisse', # NEW
-	'pp_decoration_inserer' => 'D&eacute;coration &laquo;&nbsp;@balise@.@racc@&nbsp;&raquo;', # NEW
-	'pp_decoration_inserer_drop' => 'Appliquer au texte une &laquo;&nbsp;d&eacute;coration&nbsp;&raquo; personnalis&eacute;e', # NEW
-	'pp_decoupe_onglets' => 'Ins&eacute;rer un syst&egrave;me d\'onglet', # NEW
-	'pp_decoupe_separateur' => 'Ins&eacute;rer un s&eacute;parateur de page ou d\'onglet', # NEW
-	'pp_filets_inserer' => 'Ins&eacute;rer un filet de style &laquo;&nbsp;@filet@&nbsp;&raquo;', # NEW
-	'pp_filets_inserer_drop' => 'Ins&eacute;rer un filet de s&eacute;paration', # NEW
-	'pp_smileys_inserer' => 'Ins&eacute;rer une frimousse @smiley@', # NEW
-	'pp_un_titre' => 'Un titre', # NEW
-	'pp_votre_texte' => 'Placez votre texte ici', # NEW
-	'pp_votre_titre' => 'Titre @nb@', # NEW
+	'pp_blocs_bloc' => 'Eingeklappten Block einf&uuml;gen',
+	'pp_blocs_visible' => 'Ge&ouml;ffneten Block einf&uuml;gen',
+	'pp_chatons_inserer' => 'Smiley &laquo;&nbsp;@chaton@&nbsp;&raquo; einf&uuml;gen',
+	'pp_chatons_inserer_drop' => 'Smiley in ihren Text einf&uuml;gen',
+	'pp_couleur_fond' => 'Hintergrund  @couleur@',
+	'pp_couleur_icone_fond' => 'F',
+	'pp_couleur_icone_texte' => 'T',
+	'pp_couleur_texte' => 'Text @couleur@',
+	'pp_couteau_suisse_drop' => 'Ein Werkzeug des Schweizer Taschenmessers verwenden',
+	'pp_decoration_inserer' => 'Dekoration &laquo;&nbsp;@balise@.@racc@&nbsp;&raquo;',
+	'pp_decoration_inserer_drop' => 'Den Text mit individueller Dekoration &laquo;&nbsp;d&eacute;coration&nbsp;&raquo;  anzeigen',
+	'pp_decoupe_onglets' => 'Ein System mit Reitern einf&uuml;gen',
+	'pp_decoupe_separateur' => 'Einen Trenner f&uuml;r Seiten oder Reiter einf&uuml;gen',
+	'pp_filets_inserer' => 'Ein Netz im Stil &laquo;&nbsp;@filet@&nbsp;&raquo; einf&uuml;gen',
+	'pp_filets_inserer_drop' => 'Ein Ternn-Netz einf&uuml;gen',
+	'pp_smileys_inserer' => 'Einen Smiley  @smiley@ einf&uuml;gen',
+	'pp_un_titre' => 'Ein Titel',
+	'pp_votre_texte' => 'F&uuml;gen sie ihren Text hier ein',
+	'pp_votre_titre' => 'Titel @nb@',
 
 	// S
 	'smileys_dispos' => 'Verf&uuml;gbare Smileys:',
@@ -117,8 +119,8 @@ Kompatibel mit: SPIP 1.9x und v2.0',
 	'stats_date' => '@jour@.@mois@.@annee@&nbsp;um&nbsp;@h@h@m@',
 
 	// T
-	'test_base' => 'Test de la base de donn&eacute;es', # NEW
-	'test_manuel' => 'Test manuel', # NEW
+	'test_base' => 'Datenbanktest',
+	'test_manuel' => 'Manueller Test',
 	'texte_formatspip' => 'ORIGINALTEXT IM SPIP-FORMAT',
 	'textes_formatspip' => 'ORIGINALTEXTE IM SPIP-FORMAT',
 	'titre' => 'Schweizer Taschenmesser',

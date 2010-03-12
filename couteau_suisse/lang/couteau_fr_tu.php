@@ -14,7 +14,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'attente_confirmation' => 'En attente de confirmation',
 
 	// B
-	'base_donnees' => 'Base de donn&eacute;es', # NEW
+	'base_donnees' => 'Base de donn&eacute;es',
+	'bloc_deplier' => 'D&eacute;plier', # NEW
+	'bloc_replier' => 'Replier', # NEW
 
 	// C
 	'colorer_fond' => 'Colorer le fond',
@@ -31,11 +33,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explique_spam' => 'Attention : tu as utilis&eacute; des balises, des caract&egrave;res ou des mots interdits.<br /><br />Reviens en arri&egrave;re !',
 
 	// L
-	'lancer_test' => 'Lancer le test !', # NEW
+	'lancer_test' => 'Lancer le test !',
 	'lutte_spam' => 'Lutte contre le SPAM',
 
 	// M
-	'maj_actu' => 'Forcer l\'actualisation', # MODIF
+	'maj_actu' => 'Forcer l\'actualisation distante',
 	'maj_liste' => 'Liste des plugins d&eacute;tect&eacute;s :',
 	'maj_maj' => 'Mettre &agrave; jour le plugin s&eacute;lectionn&eacute;',
 	'maj_ok' => 'Ce [plugin->@zip@] semble [&agrave; jour->@url@].',
@@ -45,8 +47,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'maj_svn' => 'Ce plugin SVN semble [&agrave; jour->@url@].',
 	'maj_verif' => 'V&eacute;rifie pr&eacute;alablement l\'archive qui te convient :',
 	'maj_verif2' => 'Attention : apr&egrave;s avoir cliqu&eacute; sur le bouton ci-dessus, v&eacute;rifie bien que l\'archive t&eacute;l&eacute;charg&eacute;e correspond au plugin qu\'il te faut mettre &agrave; jour.',
-	'maj_zip_ko' => 'Le fichier .zip distant n\'a pu &ecirc;tre identifi&eacute;.', # NEW
-	'msg_publies' => 'Uniquement les messages publi&eacute;s', # NEW
+	'maj_zip_ko' => 'Le fichier .zip distant n\'a pu &ecirc;tre identifi&eacute;.',
+	'msg_publies' => 'Uniquement les messages publi&eacute;s',
 
 	// N
 	'nom_email_forum' => 'Merci de sp&eacute;cifier ton nom ou ton email !',
@@ -88,25 +90,25 @@ D&eacute;couvre dans ce plugin tes outils favoris : {Supprime le num&eacute;ro},
 N\'h&eacute;site pas &agrave; consulter les articles de documentation du plugin publi&eacute;s sur : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
 Compatibilit&eacute; : SPIP v1.92x et v2.0.x',
-	'pp_blocs_bloc' => 'Ins&eacute;rer un bloc repli&eacute;', # NEW
-	'pp_blocs_visible' => 'Ins&eacute;rer un bloc d&eacute;pli&eacute;', # NEW
-	'pp_chatons_inserer' => 'Ins&eacute;rer le chaton &laquo;&nbsp;@chaton@&nbsp;&raquo;', # NEW
-	'pp_chatons_inserer_drop' => 'Ins&eacute;rer un chaton dans votre texte', # NEW
-	'pp_couleur_fond' => 'Fond @couleur@', # NEW
-	'pp_couleur_icone_fond' => 'F', # NEW
-	'pp_couleur_icone_texte' => 'T', # NEW
-	'pp_couleur_texte' => 'Texte @couleur@', # NEW
-	'pp_couteau_suisse_drop' => 'Utiliser un outil du Couteau Suisse', # NEW
-	'pp_decoration_inserer' => 'D&eacute;coration &laquo;&nbsp;@balise@.@racc@&nbsp;&raquo;', # NEW
-	'pp_decoration_inserer_drop' => 'Appliquer au texte une &laquo;&nbsp;d&eacute;coration&nbsp;&raquo; personnalis&eacute;e', # NEW
-	'pp_decoupe_onglets' => 'Ins&eacute;rer un syst&egrave;me d\'onglet', # NEW
-	'pp_decoupe_separateur' => 'Ins&eacute;rer un s&eacute;parateur de page ou d\'onglet', # NEW
-	'pp_filets_inserer' => 'Ins&eacute;rer un filet de style &laquo;&nbsp;@filet@&nbsp;&raquo;', # NEW
-	'pp_filets_inserer_drop' => 'Ins&eacute;rer un filet de s&eacute;paration', # NEW
-	'pp_smileys_inserer' => 'Ins&eacute;rer une frimousse @smiley@', # NEW
-	'pp_un_titre' => 'Un titre', # NEW
-	'pp_votre_texte' => 'Placez votre texte ici', # NEW
-	'pp_votre_titre' => 'Titre @nb@', # NEW
+	'pp_blocs_bloc' => 'Ins&eacute;rer un bloc repli&eacute;',
+	'pp_blocs_visible' => 'Ins&eacute;rer un bloc d&eacute;pli&eacute;',
+	'pp_chatons_inserer' => 'Ins&eacute;rer le chaton &laquo;&nbsp;@chaton@&nbsp;&raquo;',
+	'pp_chatons_inserer_drop' => 'Ins&eacute;rer un chaton dans votre texte',
+	'pp_couleur_fond' => 'Fond @couleur@',
+	'pp_couleur_icone_fond' => 'F',
+	'pp_couleur_icone_texte' => 'T',
+	'pp_couleur_texte' => 'Texte @couleur@',
+	'pp_couteau_suisse_drop' => 'Utiliser un outil du Couteau Suisse',
+	'pp_decoration_inserer' => 'D&eacute;coration &laquo;&nbsp;@balise@.@racc@&nbsp;&raquo;',
+	'pp_decoration_inserer_drop' => 'Appliquer au texte une &laquo;&nbsp;d&eacute;coration&nbsp;&raquo; personnalis&eacute;e',
+	'pp_decoupe_onglets' => 'Ins&eacute;rer un syst&egrave;me d\'onglet',
+	'pp_decoupe_separateur' => 'Ins&eacute;rer un s&eacute;parateur de page ou d\'onglet',
+	'pp_filets_inserer' => 'Ins&eacute;rer un filet de style &laquo;&nbsp;@filet@&nbsp;&raquo;',
+	'pp_filets_inserer_drop' => 'Ins&eacute;rer un filet de s&eacute;paration',
+	'pp_smileys_inserer' => 'Ins&eacute;rer une frimousse @smiley@',
+	'pp_un_titre' => 'Un titre',
+	'pp_votre_texte' => 'Place ton texte ici',
+	'pp_votre_titre' => 'Titre @nb@',
 
 	// S
 	'smileys_dispos' => 'Frimousses disponibles :',
@@ -117,8 +119,8 @@ Compatibilit&eacute; : SPIP v1.92x et v2.0.x',
 	'stats_date' => '@jour@/@mois@/@annee@&nbsp;&agrave;&nbsp;@h@h@m@',
 
 	// T
-	'test_base' => 'Test de la base de donn&eacute;es', # NEW
-	'test_manuel' => 'Test manuel', # NEW
+	'test_base' => 'Test de la base de donn&eacute;es',
+	'test_manuel' => 'Test manuel',
 	'texte_formatspip' => 'TEXTE ORIGINAL AU FORMAT SPIP',
 	'textes_formatspip' => 'TEXTES ORIGINAUX AU FORMAT SPIP',
 	'titre' => 'Le Couteau Suisse',

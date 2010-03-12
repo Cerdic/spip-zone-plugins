@@ -15,6 +15,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
 	'base_donnees' => 'Base de donn&eacute;es', # NEW
+	'bloc_deplier' => 'D&eacute;plier', # NEW
+	'bloc_replier' => 'Replier', # NEW
 
 	// C
 	'colorer_fond' => 'Colour the background',
