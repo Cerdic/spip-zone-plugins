@@ -9,7 +9,10 @@ function formulaires_editer_formulaire_champs_charger($id_formulaire){
 	$id_formulaire = intval($id_formulaire);
 	
 	// On teste si le formulaire existe
-	if ($id_formulaire and $formulaire = sql_fetsel('*', 'spip_formulaires', 'id_formulaire = '.$id_formulaire)){
+	if ($id_formulaire
+		and $formulaire = sql_fetsel('*', 'spip_formulaires', 'id_formulaire = '.$id_formulaire)
+		and autoriser('editer', 'formulaire', $id_formulaire)
+	){
 		$contenu = unserialize($formulaire['contenu']);
 		if (!is_array($contenu)) $contenu = array();
 		$contexte['_contenu'] = $contenu;
