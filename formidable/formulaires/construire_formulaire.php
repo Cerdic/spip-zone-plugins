@@ -51,19 +51,74 @@ function formulaires_construire_formulaire_verifier($identifiant, $formulaire_in
 	
 	if ($nom = $configurer_saisie =  _request('configurer_saisie') or $nom = $enregistrer_saisie = _request('enregistrer_saisie')){
 		$saisie = $saisies_actuelles[$nom];
-		$form_config = $saisies_disponibles[$saisie['saisie']]['options'];
-		array_walk_recursive($form_config, 'formidable_transformer_nom', "saisie_modifiee_${nom}[options][@valeur@]");
-		$erreurs['configurer_'.$nom] = $form_config;
-		$erreurs['positionner'] = '#configurer_'.$nom;
+		$formulaire_config = $saisies_disponibles[$saisie['saisie']]['options'];
+		array_walk_recursive($formulaire_config, 'formidable_transformer_nom', "saisie_modifiee_${nom}[options][@valeur@]");
+		
+		// S'il y a un groupe "validation" alors on va construire le formulaire des vérifications
+		if ($chemin_validation = saisies_chercher($formulaire_config, "saisie_modifiee_${nom}[options][validation]", true)){
+			include_spip('inc/verifier');
+			$liste_verifications = verifier_lister_disponibles();
+			$chemin_validation[] = 'saisies';
+			$chemin_validation[] = 1000000; // à la fin
+			
+			// On construit la saisie à insérer et les fieldset des options
+			$saisie_liste_verif = array(
+				'saisie' => 'selection',
+				'options' => array(
+					'nom' => "saisie_modifiee_${nom}[verifier][type]",
+					'label' => _T('formidable:construire_verifications_label'),
+					'option_intro' => _T('formidable:construire_verifications_aucune'),
+					'li_class' => 'liste_verifications',
+					'datas' => array()
+				)
+			);
+			$verif_options = array();
+			foreach ($liste_verifications as $type_verif => $verif){
+				$saisie_liste_verif['options']['datas'][$type_verif] = $verif['titre'];
+				// Si le type de vérif a des options, on ajoute un fieldset
+				if ($verif['options'] and is_array($verif['options'])){
+					$groupe = array(
+						'saisie' => 'fieldset',
+						'options' => array(
+							'nom' => 'options',
+							'label' => $verif['titre'],
+							'li_class' => "$type_verif options_verifier"
+						),
+						'saisies' => $verif['options']
+					);
+					array_walk_recursive($groupe, 'formidable_transformer_nom', "saisie_modifiee_${nom}[verifier][$type_verif][@valeur@]");
+					$verif_options[$type_verif] = $groupe;
+				}
+			}
+			$verif_options = array_merge(array($saisie_liste_verif), $verif_options);
+		}
+		
 		
 		if ($enregistrer_saisie){
-			$vraies_erreurs = saisies_verifier($form_config);
-			if ($vraies_erreurs){
-				$erreurs = array_merge($erreurs, $vraies_erreurs);
+			// On cherche les erreurs de la configuration
+			$vraies_erreurs = saisies_verifier($formulaire_config);
+			// On regarde s'il a été demandé un type de vérif
+			$saisie_modifiee = _request("saisie_modifiee_${nom}");
+			if (($type_verif = $saisie_modifiee['verifier']['type']) != '' and $verif_options[$type_verif]){
+				// On ne vérifie que les options du type demandé
+				$vraies_erreurs = array_merge($vraies_erreurs, saisies_verifier($verif_options[$type_verif]['saisies']));
 			}
+		}
+		
+		// On insère chaque saisie des options de verification
+		if ($verif_options){
+			foreach ($verif_options as $saisie_verif){
+				$formulaire_config = saisies_inserer($formulaire_config, $saisie_verif, $chemin_validation);
+			}
+		}
+		$erreurs['configurer_'.$nom] = $formulaire_config;
+		$erreurs['positionner'] = '#configurer_'.$nom;
+		
+		if ($enregistrer_saisie)
+			if ($vraies_erreurs)
+				$erreurs = array_merge($erreurs, $vraies_erreurs);
 			else
 				$erreurs = array();
-		}
 	}
 	
 	return $erreurs;
@@ -104,6 +159,7 @@ function formulaires_construire_formulaire_traiter($identifiant, $formulaire_ini
 	if ($nom = _request('enregistrer_saisie')){
 		// On récupère ce qui a été modifié
 		$saisie_modifiee = _request("saisie_modifiee_$nom");
+		
 		// On regarde s'il y a une position à modifier
 		if (isset($saisie_modifiee['position'])){
 			$position = $saisie_modifiee['position'];
@@ -112,10 +168,26 @@ function formulaires_construire_formulaire_traiter($identifiant, $formulaire_ini
 			if ($position != $nom)
 				$formulaire_actuel = saisies_deplacer($formulaire_actuel, $nom, $position);
 		}
-		// On récupère les options postées en vidant les chaines vides
+		
+		// On regarde s'il y a des options de vérification à modifier
+		if (($type_verif = $saisie_modifiee['verifier']['type']) != ''){
+			$saisie_modifiee['verifier'] = array(
+				'type' => $type_verif,
+				'options' => $saisie_modifiee['verifier'][$type_verif]
+			);
+		}
+		else
+			unset($saisie_modifiee['verifier']);
+		
+		// On récupère les options postées en enlevant les chaines vides
 		$saisie_modifiee['options'] = array_filter($saisie_modifiee['options']);
+		if ($saisie_modifiee['verifier']['options']) $saisie_modifiee['verifier']['options'] = array_filter($saisie_modifiee['verifier']['options']);
+		
+		// On désinfecte à la main
 		if (is_array($saisie_modifiee['options']))
 			spip_desinfecte($saisie_modifiee['options']);
+		
+		// On modifie enfin
 		$formulaire_actuel = saisies_modifier($formulaire_actuel, $nom, $saisie_modifiee);
 	}
 	
@@ -139,17 +211,6 @@ function formidable_transformer_nom(&$valeur, $cle, $transformation){
 	if ($cle == 'nom' and is_string($valeur)){
 		$valeur = str_replace('@valeur@', $valeur, $transformation);
 	}
-}
-
-// À utiliser avec un array_walk()
-// Modifie les options d'une saisie
-function formidable_ajouter_options(&$valeur, $cle, $nouvelle){
-	if (is_array($valeur) and $valeur['saisie'] and $valeur['options']['nom'] == $nouvelle['nom']){
-		$nouvelle['options']['nom'] = $valeur['options']['nom'];
-		$valeur['options'] = $nouvelle['options'];
-	}
-	elseif ($cle == 'contenu')
-		array_walk($valeur, 'formidable_ajouter_options', array('nom'=>$nom, 'options'=>$options));
 }
 
 // Préparer une saisie pour la transformer en truc configurable
@@ -224,47 +285,6 @@ function formidable_generer_saisie_configurable($saisie, $env){
 			$chemin_description
 		);
 		
-		// On va ajouter la config des vérifications lorsqu'il y a un fieldset "validation"
-		if ($chemin_validation = saisies_chercher($formulaire_config, "saisie_modifiee_${nom}[options][validation]", true)){
-			include_spip('inc/verifier');
-			$liste_verifications = verifier_lister_disponibles();
-			$chemin_validation[] = 'saisies';
-			$chemin_validation[] = 1000000; // à la fin
-			
-			// On construit la saisie à insérer et les fieldset des options
-			$saisie_liste_verif = array(
-				'saisie' => 'selection',
-				'options' => array(
-					'nom' => "saisie_modifiee_${nom}[verifier][type]",
-					'label' => _T('formidable:construire_verifications_label'),
-					'option_intro' => _T('formidable:construire_verifications_aucune'),
-					'li_class' => 'liste_verifications',
-					'datas' => array()
-				)
-			);
-			$verif_options = array();
-			foreach ($liste_verifications as $type_verif => $verif){
-				$saisie_liste_verif['options']['datas'][$type_verif] = $verif['titre'];
-				if ($verif['options'] and is_array($verif['options']))
-					$verif_options[] = array(
-						'saisie' => 'fieldset',
-						'options' => array(
-							'nom' => $type_verif,
-							'label' => $verif['titre'],
-							'li_class' => "$type_verif options_verifier"
-						),
-						'saisies' => $verif['options']
-					);
-			}
-			
-			// On insère la liste
-			$formulaire_config = saisies_inserer($formulaire_config, $saisie_liste_verif, $chemin_validation);
-			// On insère chaque fieldset
-			foreach ($verif_options as $fieldset){
-				$formulaire_config = saisies_inserer($formulaire_config, $fieldset, $chemin_validation);
-			}
-		}
-		
 		$env2['saisies'] = $formulaire_config;
 		
 		// Un test pour savoir si on prend le _request ou bien
@@ -276,8 +296,10 @@ function formidable_generer_saisie_configurable($saisie, $env){
 			if (is_array($env2["saisie_modifiee_$nom"]['options']))
 				spip_desinfecte($env2["saisie_modifiee_$nom"]['options']);
 		}
-		else
+		else{
 			$env2["saisie_modifiee_$nom"] = $env2['_saisies_par_nom'][$nom];
+			$env2["saisie_modifiee_$nom"]['verifier'][$env2["saisie_modifiee_$nom"]['verifier']['type']] = $env2["saisie_modifiee_$nom"]['verifier']['options'];
+		}
 		
 		$env2['fond_generer'] = 'inclure/generer_saisies';
 		$saisie = saisies_inserer_html(
