@@ -9,7 +9,7 @@
 	<description>
 Permet d'utiliser un cache pour stocker les gravatars
 _ A utiliser dans une boucle de cette mani&egrave;re : <code>#GRAVATAR{email, taille, url image par
-d&eacute;faut}</code>
+defaut}</code>
 _ Exemple : <code>#GRAVATAR{#EMAIL,80,#URL_SITE_SPIP/defaut-gravatar.gif}</code>
 
 &Eacute;tend la balise #LOGO_AUTEUR de mani&egrave;re &agrave; prendre en compte le gravatar d'un auteur s'il existe, y compris dans les forums et p&#233;titions.
