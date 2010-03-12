@@ -28,7 +28,7 @@
 	</bouton>
 
 </plugin>
-<plugin spip="[2.1.0-rc;]">
+<plugin spip="[2.1.0-beta;]">
   <nom>Zen-Garden</nom>
   <auteur>Cedric Morin [yterium.com->http://www.yterium.com]</auteur>
   <version>1.1.0</version>
