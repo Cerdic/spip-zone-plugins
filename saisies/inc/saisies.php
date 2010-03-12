@@ -149,7 +149,7 @@ function saisies_inserer($saisies, $saisie, $chemin=array()){
 					$parent[$cle] = array();
 				$parent =& $parent[$cle];
 			}
-			// On vérifie maintenant que la positon est cohérente avec le parent
+			// On vérifie maintenant que la position est cohérente avec le parent
 			if ($position < 0) $position = 0;
 			elseif ($position > count($parent)) $position = count($parent);
 		}
@@ -234,7 +234,16 @@ function saisies_modifier($saisies, $nom_ou_chemin, $modifs){
 		$parent =& $parent[$cle];
 	}
 	
-	$parent[$position] = array_replace_recursive($parent[$position], $modifs);
+	// On récupère le type, le nom et les enfants tels quels
+	$modifs['saisie'] = $parent[$position]['saisie'];
+	$modifs['options']['nom'] = $parent[$position]['options']['nom'];
+	if (is_array($parent[$position]['saisies'])) $modifs['saisies'] = $parent[$position]['saisies'];
+	
+	// On remplace tout
+	$parent[$position] = $modifs;
+	
+	// Cette méthode ne marche pas trop
+	//$parent[$position] = array_replace_recursive($parent[$position], $modifs);
 	
 	return $saisies;
 }
