@@ -16,7 +16,7 @@
 	<chemin dir='' />
 	<chemin dir='spip20/' />
 </plugin>
-<plugin spip='[2.1.0-rc;]' >
+<plugin spip='[2.1.0-beta;]' >
   <nom>SPIP Bonux</nom>
   <auteur>Cedric Morin, Matthieu Marcillaud, romy.tetue.net</auteur>
   <icon>img_pack/spip-bonux.png</icon>
