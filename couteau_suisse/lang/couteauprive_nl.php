@@ -53,7 +53,7 @@ De waarde van 1~000~000 pixels lijkt juist voor een configuratie met weinig gehe
 	'auteurs:nom' => 'Bladzijde van de auteurs',
 
 	// B
-	'barres_typo_edition' => 'Edtition des contenus', # NEW
+	'barres_typo_edition' => 'Edition des contenus', # NEW
 	'barres_typo_forum' => 'Messages de Forum', # NEW
 	'barres_typo_intro' => 'Le plugin &laquo;Porte-Plume&raquo; a &eacute;t&eacute; d&eacute;tect&eacute;. Veuillez choisir ici les barres typographiques o&ugrave; certains boutons seront ins&eacute;r&eacute;s.', # NEW
 	'basique' => 'Fundamenteel',
@@ -253,6 +253,8 @@ Cet outil peut &ecirc;tre coupl&eacute; avec &laquo;&nbsp;[.->sommaire]&nbsp;&ra
 	'erreur:probleme' => 'Zurig probleem : @pb@',
 	'erreur:traitements' => 'Het Mes Zwitserland - De compilatie fout van de behandelingen: verboden \'typo\' en \'eigen\' mengeling !',
 	'erreur:version' => 'Dit werktuig is niet beschikbaar in deze versie van SPIP.',
+	'erreur_groupe' => 'Attention : le groupe &laquo;@groupe@&raquo; n\'est pas d&#233;fini !', # NEW
+	'erreur_mot' => 'Attention : le mot-cl&#233; &laquo;@mot@&raquo; n\'est pas d&#233;fini !', # NEW
 	'etendu' => 'Uitgestrekt',
 
 	// F
@@ -305,8 +307,8 @@ _ • [Van hele plugin|Aan de eerste stand van plugin terugkomen->@reset@]@insta
 	// I
 	'icone_visiter:description' => 'Remplace l\'image du bouton standard &laquo;&nbsp;Visiter&nbsp;&raquo; (en haut &agrave; droite sur cette page)  par le logo du site, s\'il existe.
 
-Pour d&eacute;finir ce logo, rendez-vous sur la page &laquo;&nbsp;Configuration du site&nbsp;&raquo; en cliquant sur le bouton &laquo;&nbsp;Configuration&nbsp;&raquo;.', # NEW
-	'icone_visiter:nom' => 'Knoop &laquo;&nbsp;Bezoeken&nbsp;&raquo;',
+Pour d&eacute;finir ce logo, rendez-vous sur la page &laquo;&nbsp;Configuration du site&nbsp;&raquo; en cliquant sur le bouton &laquo;&nbsp;Configuration&nbsp;&raquo;.', # MODIF
+	'icone_visiter:nom' => 'Knoop &laquo;&nbsp;Bezoeken&nbsp;&raquo;', # MODIF
 	'insert_head:description' => 'Actief automatisch het baken [#INSERT_HEAD-> http://www.spip.net/fr_article1902.html] op alle skeletten, dat zij of niet dit baken tussen &lt;head&gt; en &lt;/head&gt;. Dank zij deze keuze, zullen plugins van javascript (.js) of de bladen van stijl (.css) kunnen opnemen.', # MODIF
 	'insert_head:nom' => 'Baken #INSERT_HEAD',
 	'insertions:description' => 'OPGELET: werktuig in ontwikkeling!! [[%insertions%]]',
@@ -394,6 +396,7 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:max_auteurs_page' => 'Auteurs per bladzijde :',
 	'label:message_travaux' => 'Uw bericht van onderhoud :',
 	'label:moderation_admin' => 'Valider automatiquement les messages des : ', # NEW
+	'label:mot_masquer' => 'Mot-cl&#233; masquant les contenus :', # NEW
 	'label:ouvre_note' => 'Ouverture et fermeture des notes de bas de page', # NEW
 	'label:ouvre_ref' => 'Ouverture et fermeture des appels de notes de bas de page', # NEW
 	'label:paragrapher' => 'Nog steeds paragraaf :',
@@ -456,6 +459,11 @@ La liste ci-dessus offre la possibilit&eacute; de lancer le processus de mise &a
 
 Note : les paquets <code>.zip</code> n\'&eacute;tant pas reconstruits instantan&eacute;ment, il se peut que vous soyez oblig&eacute; d\'attendre un certain d&eacute;lai avant de pouvoir effectuer la totale mise &agrave; jour d\'un plugin tout r&eacute;cemment modifi&eacute;.', # NEW
 	'maj_auto:nom' => 'Mises &agrave; jour automatiques', # NEW
+	'masquer:description' => 'Cet outil permet de masquer sur le site public et sans modification particuli&egrave;re de vos squelettes, les contenus (rubriques ou articles) qui ont le mot-cl&#233; d&eacute;fini ci-dessous. Si une rubrique est masqu&eacute;e, toute sa branche l\'est aussi.[[%mot_masquer%]]
+
+Pour forcer l\'affichage des contenus masqu&eacute;s, il suffit d\'ajouter le crit&egrave;re <code>{tout_voir}</code> aux boucles de votre squelette.', # NEW
+	'masquer:nom' => 'Masquer du contenu', # NEW
+	'meme_rubrique:description' => 'D&eacute;finissez ici le nombre d\'objets list&eacute;s dans le cadre nomm&eacute; &laquo;<:info_meme_rubrique:>&raquo; et pr&eacute;sent sur certaines pages de l\'espace priv&eacute;.[[%meme_rubrique%]]', # NEW
 	'message_perso' => 'Groot dank aan de vertalers die hierdoor komen lopen. Pat ;-)',
 	'moderation_admins' => 'administrateurs authentifi&eacute;s', # NEW
 	'moderation_message' => 'Ce forum est mod&eacute;r&eacute; &agrave; priori&nbsp;: votre contribution n\'appara&icirc;tra qu\'apr&egrave;s avoir &eacute;t&eacute; valid&eacute;e par un administrateur du site, sauf si vous &ecirc;tes identifi&eacute; et autoris&eacute; &agrave; poster directement.', # NEW
@@ -489,6 +497,8 @@ Note : les paquets <code>.zip</code> n\'&eacute;tant pas reconstruits instantan&
 	'outils_actifs' => 'Actieve werktuigen :',
 	'outils_caches' => 'Verborgen werktuigen :',
 	'outils_cliquez' => 'Klikt op de naam van de werktuigen hierboven om hun beschrijving hier te kennen te geven.',
+	'outils_concernes' => 'Sont concern&eacute;s : ', # NEW
+	'outils_desactives' => 'Sont d&eacute;sactiv&eacute;s : ', # NEW
 	'outils_inactifs' => 'Inactief werktuig :',
 	'outils_liste' => 'Lijst van de werktuigen van het Mes Zwitserland',
 	'outils_non_parametrables' => 'Non param&eacute;trables&nbsp;:', # NEW

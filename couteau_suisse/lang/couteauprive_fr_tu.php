@@ -18,19 +18,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'SPIP_liens:description1' => '@puce@ SPIP a pr&eacute;vu un style CSS pour les liens &laquo;~mailto:~&raquo; : une petite enveloppe devrait appara&icirc;tre devant chaque lien li&eacute; &agrave; un courriel; mais puisque tous les navigateurs ne peuvent pas l\'afficher (notamment IE6, IE7 et SAF3), &agrave; toi de voir s\'il faut conserver cet ajout.
 _ Lien de test : [->test@test.com] (rechargez la page enti&egrave;rement).[[%enveloppe_mails%]]',
 	'SPIP_liens:nom' => 'SPIP et les liens… externes',
-	'SPIP_tailles:description' => '@puce@ Afin d\'all&eacute;ger la m&eacute;moire de votre serveur, SPIP te permet de limiter les dimensions (hauteur et largeur) et la taille du fichier des images, logos ou documents joints aux divers contenus de ton site. Si un fichier d&eacute;passe la taille indiqu&eacute;e, le formulaire enverra bien les donn&eacute;es mais elles seront d&eacute;truites et SPIP n\'en tiendra pas compte, ni dans le r&eacute;pertoire IMG/, ni en base de donn&eacute;es. Un message d\'avertissement sera alors envoy&eacute; &agrave; l\'utilisateur.
+	'SPIP_tailles:description' => '@puce@ Afin d\'all&eacute;ger la m&eacute;moire de ton serveur, SPIP te permet de limiter les dimensions (hauteur et largeur) et la taille du fichier des images, logos ou documents joints aux divers contenus de ton site. Si un fichier d&eacute;passe la taille indiqu&eacute;e, le formulaire enverra bien les donn&eacute;es mais elles seront d&eacute;truites et SPIP n\'en tiendra pas compte, ni dans le r&eacute;pertoire IMG/, ni en base de donn&eacute;es. Un message d\'avertissement sera alors envoy&eacute; &agrave; l\'utilisateur.
 
 Une valeur nulle ou non renseign&eacute;e correspond &agrave; une valeur illimit&eacute;e.
 [[Hauteur : %img_Hmax% pixels]][[->Largeur : %img_Wmax% pixels]][[->Poids du fichier : %img_Smax% Ko]]
 [[Hauteur : %logo_Hmax% pixels]][[->Largeur : %logo_Wmax% pixels]][[->Poids du fichier : %logo_Smax% Ko]]
 [[Poids du fichier : %doc_Smax% Ko]]
 
-@puce@ D&eacute;finis ici l\'espace maximal r&eacute;serv&eacute; aux fichiers distants que SPIP pourrait t&eacute;l&eacute;charger (de serveur &agrave; serveur) et stocker sur votre site. La valeur par d&eacute;faut est ici de 16 Mo.[[%copie_Smax% Mo]]
+@puce@ D&eacute;finissez ici l\'espace maximal r&eacute;serv&eacute; aux fichiers distants que SPIP pourrait t&eacute;l&eacute;charger (de serveur &agrave; serveur) et stocker sur votre site. La valeur par d&eacute;faut est ici de 16 Mo.[[%copie_Smax% Mo]]
 
 @puce@ Afin d\'&eacute;viter un d&eacute;passement de m&eacute;moire PHP dans le traitement des grandes images par la librairie GD2, SPIP teste les capacit&eacute;s du serveur et peut donc refuser de traiter les trop grandes images. Il est possible de d&eacute;sactiver ce test en d&eacute;finissant manuellement le nombre maximal de pixels support&eacute;s pour les calculs.
 
 La valeur de 1~000~000 pixels semble correcte pour une configuration avec peu de m&eacute;moire. Une valeur nulle ou non renseign&eacute;e entra&icirc;nera le test du serveur.
-[[%img_GDmax% pixels au maximum]]', # MODIF
+[[%img_GDmax% pixels au maximum]]
+
+@puce@ La librairie GD2 permet d\'ajuster la qualit&eacute; de compression des images JPG. Un pourcentage &eacute;lev&eacute; correspond &agrave; une qualit&eacute; &eacute;lev&eacute;e.
+[[%img_GDqual% %]]',
 	'SPIP_tailles:nom' => 'Limites m&eacute;moire',
 
 	// A
@@ -54,9 +57,9 @@ La valeur de 1~000~000 pixels semble correcte pour une configuration avec peu de
 	'auteurs:nom' => 'Page des auteurs',
 
 	// B
-	'barres_typo_edition' => 'Edtition des contenus', # NEW
-	'barres_typo_forum' => 'Messages de Forum', # NEW
-	'barres_typo_intro' => 'Le plugin &laquo;Porte-Plume&raquo; a &eacute;t&eacute; d&eacute;tect&eacute;. Veuillez choisir ici les barres typographiques o&ugrave; certains boutons seront ins&eacute;r&eacute;s.', # NEW
+	'barres_typo_edition' => 'Edtition des contenus', # MODIF
+	'barres_typo_forum' => 'Messages de Forum',
+	'barres_typo_intro' => 'Le plugin &laquo;Porte-Plume&raquo; a &eacute;t&eacute; d&eacute;tect&eacute;. Choisi ici les barres typographiques o&ugrave; certains boutons seront ins&eacute;r&eacute;s.',
 	'basique' => 'Basique',
 	'blocs:aide' => 'Blocs D&eacute;pliables : <b>&lt;bloc&gt;&lt;/bloc&gt;</b> (alias : <b>&lt;invisible&gt;&lt;/invisible&gt;</b>) et <b>&lt;visible&gt;&lt;/visible&gt;</b>',
 	'blocs:description' => 'Te permet  de cr&eacute;er des blocs dont le titre cliquable peut les rendre visibles ou invisibles.
@@ -160,11 +163,11 @@ Note bien : en modifiant ce deuxi&egrave;me style, tu perds alors les styles sta
 	'corbeille:nom' => 'La corbeille',
 	'corbeille_objets' => '@nb@ objet(s) dans la corbeille.',
 	'corbeille_objets_lies' => '@nb_lies@ liaison(s) detect&eacute;e(s).',
-	'corbeille_objets_vide' => 'Aucun objet dans la corbeille', # MODIF
+	'corbeille_objets_vide' => 'Aucun objet dans la corbeille.',
 	'corbeille_objets_vider' => 'Supprimer les objets s&eacute;lectionn&eacute;s',
 	'corbeille_vider' => 'Vider la corbeille&nbsp;:',
 	'couleurs:aide' => 'Mise en couleurs : <b>[coul]texte[/coul]</b>@fond@ avec <b>coul</b> = @liste@',
-	'couleurs:description' => 'Permet d\'appliquer facilement des couleurs &agrave; tous les textes du site (articles, br&egrave;ves, titres, forum, …) en utilisant des balises en raccourcis.
+	'couleurs:description' => 'Permet d\'appliquer facilement des couleurs &agrave; tous les textes du site (articles, br&egrave;ves, titres, forum, …) en utilisant des balises &agrave; crochets en raccourcis : <code>[couleur]texte[/couleur]</code>.
 
 Deux exemples identiques pour changer la couleur du texte :@_CS_EXEMPLE_COULEURS2@
 
@@ -172,24 +175,25 @@ Idem pour changer le fond, si l\'option ci-dessous le permet :@_CS_EXEMPLE_COULE
 
 [[%couleurs_fonds%]]
 [[%set_couleurs%]][[-><set_couleurs valeur="1">%couleurs_perso%</set_couleurs>]]
-@_CS_ASTER@Le format de ces balises personnalis&eacute;es doit lister des couleurs existantes ou d&eacute;finir des couples &laquo;balise=couleur&raquo;, le tout s&eacute;par&eacute; par des virgules. Exemples : &laquo;gris, rouge&raquo;, &laquo;faible=jaune, fort=rouge&raquo;, &laquo;bas=#99CC11, haut=brown&raquo; ou encore &laquo;gris=#DDDDCC, rouge=#EE3300&raquo;. Pour le premier et le dernier exemple, les balises autoris&eacute;es sont : <code>[gris]</code> et <code>[rouge]</code> (<code>[fond gris]</code> et <code>[fond rouge]</code> si les fonds sont permis).', # MODIF
+@_CS_ASTER@Le format de ces balises personnalis&eacute;es doit lister des couleurs existantes ou d&eacute;finir des couples &laquo;balise=couleur&raquo;, le tout s&eacute;par&eacute; par des virgules. Exemples : &laquo;gris, rouge&raquo;, &laquo;faible=jaune, fort=rouge&raquo;, &laquo;bas=#99CC11, haut=brown&raquo; ou encore &laquo;gris=#DDDDCC, rouge=#EE3300&raquo;. Pour le premier et le dernier exemple, les balises autoris&eacute;es sont : <code>[gris]</code> et <code>[rouge]</code> (<code>[fond gris]</code> et <code>[fond rouge]</code> si les fonds sont permis).',
 	'couleurs:nom' => 'Tout en couleurs',
 	'couleurs_fonds' => ', <b>[fond&nbsp;coul]texte[/coul]</b>, <b>[bg&nbsp;coul]texte[/coul]</b>',
 	'cs_comportement:description' => '@puce@ {{Logs.}} Obtiens de nombreux renseignements &agrave; propos du fonctionnement du Couteau Suisse dans les fichiers {spip.log} que l\'on peut trouver dans le r&eacute;pertoire : {<html>@_CS_DIR_TMP@</html>}[[%log_couteau_suisse%]]
 
 @puce@ {{Options SPIP.}} SPIP ordonne les plugins dans un ordre sp&eacute;cifique. Afin d\'&ecirc;tre s&ucirc;r que le Couteau Suisse soit en t&ecirc;te et g&egrave;re en amont certaines options de SPIP, alors coche l\'option suivante. Si les droits de ton serveur le permettent, le fichier {<html>@_CS_FILE_OPTIONS@</html>} sera automatiquement modifi&eacute; pour inclure le fichier {<html>@_CS_DIR_TMP@couteau-suisse/mes_spip_options.php</html>}.
 [[%spip_options_on%]]
+@_CS_FILE_OPTIONS_ERR@
 
 @puce@ {{Requ&ecirc;tes externes.}} D\'une part, le Couteau Suisse v&eacute;rifie r&eacute;guli&egrave;rement l\'existence d\'une version plus r&eacute;cente de son code et informe sur sa page de configuration d\'une mise &agrave; jour &eacute;ventuellement disponible. D\'autre part, ce plugin comporte certains outils qui peuvent n&eacute;cessiter d\'importer des librairies distantes.
 
-Si les requ&ecirc;tes externes de ton serveur posent des probl&egrave;mes ou par souci d\'une meilleure s&eacute;curit&eacute;, coche les cases suivantes.[[%distant_off%]][[->%distant_outils_off%]]', # MODIF
+Si les requ&ecirc;tes externes de ton serveur posent des probl&egrave;mes ou par souci d\'une meilleure s&eacute;curit&eacute;, coche les cases suivantes.[[%distant_off%]][[->%distant_outils_off%]]',
 	'cs_comportement:nom' => 'Comportements du Couteau Suisse',
 	'cs_distant_off' => 'Les v&eacute;rifications de versions distantes',
 	'cs_distant_outils_off' => 'Les outils du Couteau Suisse ayant des fichiers distants',
 	'cs_log_couteau_suisse' => 'Les logs d&eacute;taill&eacute;s du Couteau Suisse',
 	'cs_reset' => 'Es-tu s&ucirc;r de vouloir r&eacute;initialiser totalement le Couteau Suisse ?',
 	'cs_reset2' => 'Tous les outils actuellement actifs seront d&eacute;sactiv&eacute;s et leurs param&egrave;tres r&eacute;initialis&eacute;s.',
-	'cs_spip_options_erreur' => 'Attention : la modification du ficher &laquo;<html>@_CS_FILE_OPTIONS@</html>&raquo; a &eacute;chou&eacute; !', # NEW
+	'cs_spip_options_erreur' => 'Attention : la modification du ficher &laquo;<html>@_CS_FILE_OPTIONS@</html>&raquo; a &eacute;chou&eacute; !',
 	'cs_spip_options_on' => 'Les options SPIP dans &laquo;<html>@_CS_FILE_OPTIONS@</html>@&raquo;',
 
 	// D
@@ -208,7 +212,7 @@ Le param&egrave;tre {type} ci-dessus peut prendre trois valeurs :
 
 [[%decoration_styles%]]',
 	'decoration:nom' => 'D&eacute;coration',
-	'decoupe:aide' => 'Bloc d\'onglets : <b>&lt;onglets>&lt;/onglets></b><br/>S&eacute;parateur de pages ou d\'onglets&nbsp;: @sep@', # MODIF
+	'decoupe:aide' => 'Bloc d\'onglets : <b>&lt;onglets>&lt;/onglets></b><br />S&eacute;parateur de pages ou d\'onglets&nbsp;: @sep@',
 	'decoupe:aide2' => 'Alias&nbsp;:&nbsp;@sep@',
 	'decoupe:description' => '@puce@ D&eacute;coupe l\'affichage public d\'un article en plusieurs pages gr&acirc;ce &agrave; une pagination automatique. Place simplement dans ton article quatre signes plus cons&eacute;cutifs (<code>++++</code>) &agrave; l\'endroit qui doit recevoir la coupure.
 
@@ -231,7 +235,7 @@ Cet outil peut &ecirc;tre coupl&eacute; avec  &laquo;&nbsp;[.->sommaire]&nbsp;&r
 	'detail_jquery2' => 'Cet outil n&eacute;cessite la librairie {jQuery}.',
 	'detail_jquery3' => '{{Attention}} : cet outil n&eacute;cessite le plugin [jQuery pour SPIP 1.92->http://files.spip.org/spip-zone/jquery_192.zip] pour fonctionner correctement avec cette version de SPIP.',
 	'detail_pipelines' => 'Pipelines :',
-	'detail_raccourcis' => 'Voici la liste des raccourcis typographiques reconnus par cet outil.', # NEW
+	'detail_raccourcis' => 'Voici la liste des raccourcis typographiques reconnus par cet outil.',
 	'detail_traitements' => 'Traitements :',
 	'distant_aide' => 'Cet outil requiert des fichiers distants qui doivent tous &ecirc;tre correctement install&eacute;s en librairie. Avant d\'activer cet outil ou d\'actualiser ce cadre, assure-toi que les fichiers requis sont bien pr&eacute;sents sur le serveur distant.',
 	'distant_charge' => 'Fichier correctement t&eacute;l&eacute;charg&eacute; et install&eacute; en librairie.',
@@ -257,14 +261,16 @@ Cet outil peut &ecirc;tre coupl&eacute; avec  &laquo;&nbsp;[.->sommaire]&nbsp;&r
 	'erreur:probleme' => 'Probl&egrave;me sur : @pb@',
 	'erreur:traitements' => 'Le Couteau Suisse - Erreur de compilation des traitements : m&eacute;lange \'typo\' et \'propre\' interdit !',
 	'erreur:version' => 'Cet outil est indisponible dans cette version de SPIP.',
+	'erreur_groupe' => 'Attention : le groupe &laquo;@groupe@&raquo; n\'est pas d&#233;fini !', # NEW
+	'erreur_mot' => 'Attention : le mot-cl&#233; &laquo;@mot@&raquo; n\'est pas d&#233;fini !', # NEW
 	'etendu' => '&Eacute;tendu',
 
 	// F
 	'f_jQuery:description' => 'Emp&ecirc;che l\'installation de {jQuery} dans la partie publique afin d\'&eacute;conomiser un peu de &laquo;temps machine&raquo;. Cette librairie ([->http://jquery.com/]) apporte de nombreuses commodit&eacute;s dans la programmation de JavaScript et peut &ecirc;tre utilis&eacute;e par certains plugins. SPIP l\'utilise dans sa partie priv&eacute;e.
 
-Attention : certains outils du Couteau Suisse n&eacute;cessitent les fonctions de {jQuery}. ', # MODIF
+Attention : certains outils du Couteau Suisse n&eacute;cessitent les fonctions de {jQuery}. ',
 	'f_jQuery:nom' => 'D&eacute;sactive jQuery',
-	'filets_sep:aide' => 'Filets de S&eacute;paration&nbsp;: <b>__i__</b> o&ugrave; <b>i</b> est un nombre.<br />Autres filets disponibles : @liste@', # MODIF
+	'filets_sep:aide' => 'Filets de S&eacute;paration&nbsp;: <b>__i__</b> o&ugrave; <b>i</b> est un nombre de <b>0</b> &agrave; <b>@max@</b>.<br />Autres filets disponibles : @liste@',
 	'filets_sep:description' => 'Ins&egrave;re des filets de s&eacute;paration, personnalisables par des feuilles de style, dans tous les textes de SPIP.
 _ La syntaxe est : "__code__", o&ugrave; "code" repr&eacute;sente soit le num&eacute;ro d’identification (de 0 &agrave; 7) du filet &agrave; ins&eacute;rer en relation directe avec les styles correspondants, soit le nom d\'une image plac&eacute;e dans le dossier plugins/couteau_suisse/img/filets.',
 	'filets_sep:nom' => 'Filets de S&eacute;paration',
@@ -299,28 +305,28 @@ Les blocs multi s\'affichent alors toujours dans la langue demand&eacute;e par l
 @puce@ Deux solutions te sont offertes pour g&eacute;n&eacute;rer la petite fen&ecirc;tre automatique qui appara&icirc;t lors du survol de la souris. [[%glossaire_js%]]',
 	'glossaire:nom' => 'Glossaire interne',
 	'glossaire_css' => 'Solution CSS',
-	'glossaire_erreur' => 'Le mot &laquo;@mot1@&raquo; rend ind&#233;tectable le mot &laquo;@mot2@&raquo;', # NEW
-	'glossaire_inverser' => 'Correction propos&#233;e : inverser l\'ordre des mots en base.', # NEW
+	'glossaire_erreur' => 'Le mot &laquo;@mot1@&raquo; rend ind&eacute;tectable le mot &laquo;@mot2@&raquo;',
+	'glossaire_inverser' => 'Correction propos&eacute;e : inverser l\'ordre des mots en base.',
 	'glossaire_js' => 'Solution JavaScript',
-	'glossaire_ok' => 'La liste des @nb@ mot(s) &#233;tudi&#233;(s) en base semble correcte.', # NEW
+	'glossaire_ok' => 'La liste des @nb@ mot(s) &eacute;tudi&eacute;(s) en base semble correcte.',
 	'guillemets:description' => 'Remplace automatiquement les guillemets droits (") par les guillemets typographiques de la langue de composition. Le remplacement, transparent pour l\'utilisateur, ne modifie pas le texte original mais seulement l\'affichage final.',
 	'guillemets:nom' => 'Guillemets typographiques',
 
 	// H
 	'help' => '{{Cette page est uniquement accessible aux responsables du site.}} Elle permet la configuration des diff&eacute;rentes fonctions suppl&eacute;mentaires apport&eacute;es par le plugin &laquo;{{Le&nbsp;Couteau&nbsp;Suisse}}&raquo;.',
 	'help2' => 'Version locale : @version@',
-	'help3' => '<p>Liens de documentation :<br/>• [Le&nbsp;Couteau&nbsp;Suisse->http://www.spip-contrib.net/?article2166]@contribs@</p><p>R&eacute;initialisations :
+	'help3' => '<p>Liens de documentation :<br />• [{{Le&nbsp;Couteau&nbsp;Suisse}}->http://www.spip-contrib.net/?article2166]@contribs@</p><p>R&eacute;initialisations :
 _ • [Des outils cach&eacute;s|Revenir &agrave; l\'apparence initiale de cette page->@hide@]
 _ • [De tout le plugin|Revenir &agrave; l\'&eacute;tat initial du plugin->@reset@]@install@
-</p>', # MODIF
+</p>',
 	'horloge:description' => 'Outil en cours de d&eacute;veloppement. T\'offre une horloge JavaScript . Balise : <code>#HORLOGE{format,utc,id}</code>. Mod&egrave;le : <code><horloge></code>',
 	'horloge:nom' => 'Horloge',
 
 	// I
 	'icone_visiter:description' => 'Remplace l\'image du bouton standard &laquo;&nbsp;Visiter&nbsp;&raquo; (en haut &agrave; droite sur cette page)  par le logo du site, s\'il existe.
 
-Pour d&eacute;finir ce logo, vas sur la page &laquo;&nbsp;Configuration du site&nbsp;&raquo; en cliquant sur le bouton &laquo;&nbsp;Configuration&nbsp;&raquo;.',
-	'icone_visiter:nom' => 'Bouton &laquo;&nbsp;Visiter&nbsp;&raquo;',
+Pour d&eacute;finir ce logo, vas sur la page &laquo;&nbsp;Configuration du site&nbsp;&raquo; en cliquant sur le bouton &laquo;&nbsp;Configuration&nbsp;&raquo;.', # MODIF
+	'icone_visiter:nom' => 'Bouton &laquo;&nbsp;Visiter&nbsp;&raquo;', # MODIF
 	'insert_head:description' => 'Active automatiquement la balise [#INSERT_HEAD->http://www.spip.net/fr_article1902.html] sur tous les squelettes, qu\'ils aient ou non cette balise entre &lt;head&gt; et &lt;/head&gt;. Gr&acirc;ce &agrave; cette option, les plugins pourront ins&eacute;rer du JavaScript (.js) ou des feuilles de style (.css).',
 	'insert_head:nom' => 'Balise #INSERT_HEAD',
 	'insertions:description' => 'ATTENTION : outil en cours de d&eacute;veloppement !! [[%insertions%]]',
@@ -384,19 +390,19 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:glossaire_groupes' => 'Groupe(s) utilis&eacute;(s) :',
 	'label:glossaire_js' => 'Technique utilis&eacute;e :',
 	'label:glossaire_limite' => 'Nombre maximal de liens cr&eacute;&eacute;s :',
-	'label:i_align' => 'Alignement du texte&nbsp;:', # NEW
-	'label:i_couleur' => 'Couleur de la police&nbsp;:', # NEW
-	'label:i_hauteur' => 'Hauteur de la ligne de texte (&eacute;q. &agrave; {line-height})&nbsp;:', # NEW
-	'label:i_largeur' => 'Largeur maximale de la ligne de texte&nbsp;:', # NEW
-	'label:i_padding' => 'Espacement autour du texte (&eacute;q. &agrave; {padding})&nbsp;:', # NEW
-	'label:i_police' => 'Nom du fichier de la police (dossiers {polices/})&nbsp;:', # NEW
-	'label:i_taille' => 'Taille de la police&nbsp;:', # NEW
+	'label:i_align' => 'Alignement du texte&nbsp;:',
+	'label:i_couleur' => 'Couleur de la police&nbsp;:',
+	'label:i_hauteur' => 'Hauteur de la ligne de texte (&eacute;q. &agrave; {line-height})&nbsp;:',
+	'label:i_largeur' => 'Largeur maximale de la ligne de texte&nbsp;:',
+	'label:i_padding' => 'Espacement autour du texte (&eacute;q. &agrave; {padding})&nbsp;:',
+	'label:i_police' => 'Nom du fichier de la police (dossiers {polices/})&nbsp;:',
+	'label:i_taille' => 'Taille de la police&nbsp;:',
 	'label:img_GDmax' => 'Calculs d\'images avec GD :',
 	'label:img_Hmax' => 'Taille maximale des images :',
 	'label:insertions' => 'Corrections automatiques :',
 	'label:jcorner_classes' => 'Am&eacute;liorer les coins des s&eacute;lecteurs suivantes :',
 	'label:jcorner_plugin' => 'Installer le plugin {jQuery} suivant :',
-	'label:jolies_ancres' => 'Calculer de jolies ancres :', # NEW
+	'label:jolies_ancres' => 'Calculer de jolies ancres :',
 	'label:lgr_introduction' => 'Longueur du r&eacute;sum&eacute; :',
 	'label:lgr_sommaire' => 'Largeur du sommaire (9 &agrave; 99) :',
 	'label:lien_introduction' => 'Points de suite cliquables :',
@@ -404,15 +410,16 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:liens_orphelins' => 'Liens cliquables :',
 	'label:log_couteau_suisse' => 'Activer :',
 	'label:logo_Hmax' => 'Taille maximale des logos :',
-	'label:marqueurs_urls_propres' => 'Ajouter les marqueurs dissociant les objets (SPIP>=2.0) :<br/>(ex. : &laquo;&nbsp;-&nbsp;&raquo; pour -Ma-rubrique-, &laquo;&nbsp;@&nbsp;&raquo; pour @Mon-site@) ', # MODIF
+	'label:marqueurs_urls_propres' => 'Ajouter les marqueurs dissociant les objets (SPIP>=2.0) :<br />(ex. : &laquo;&nbsp;-&nbsp;&raquo; pour -Ma-rubrique-, &laquo;&nbsp;@&nbsp;&raquo; pour @Mon-site@) ',
 	'label:max_auteurs_page' => 'Auteurs par page :',
 	'label:message_travaux' => 'Ton message de maintenance :',
 	'label:moderation_admin' => 'Valider automatiquement les messages des : ',
+	'label:mot_masquer' => 'Mot-cl&#233; masquant les contenus :', # NEW
 	'label:ouvre_note' => 'Ouverture et fermeture des notes de bas de page',
 	'label:ouvre_ref' => 'Ouverture et fermeture des appels de notes de bas de page',
 	'label:paragrapher' => 'Toujours paragrapher :',
 	'label:prive_travaux' => 'Accessibilit&eacute; de l\'espace priv&eacute; pour :',
-	'label:prof_sommaire' => 'Profondeur retenue (1 &agrave; 4) :', # NEW
+	'label:prof_sommaire' => 'Profondeur retenue (1 &agrave; 4) :',
 	'label:puce' => 'Puce publique &laquo;<html>-</html>&raquo; :',
 	'label:quota_cache' => 'Valeur du quota :',
 	'label:racc_g1' => 'Entr&eacute;e et sortie de la mise en &laquo;<html>{{gras}}</html>&raquo; :',
@@ -424,9 +431,9 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:radio_target_blank3' => 'Nouvelle fen&ecirc;tre pour les liens externes :',
 	'label:radio_type_urls3' => 'Format des URLs :',
 	'label:scrollTo' => 'Installer les plugins {jQuery} suivants :',
-	'label:separateur_urls_page' => 'Caract&egrave;re de s&eacute;paration \'type-id\'<br/>(ex. : ?article-123) :', # MODIF
+	'label:separateur_urls_page' => 'Caract&egrave;re de s&eacute;paration \'type-id\'<br />(ex. : ?article-123) :',
 	'label:set_couleurs' => 'Set &agrave; utiliser :',
-	'label:spam_ips' => 'Adresses IP &agrave; bloquer :', # NEW
+	'label:spam_ips' => 'Adresses IP &agrave; bloquer :',
 	'label:spam_mots' => 'S&eacute;quences interdites :',
 	'label:spip_options_on' => 'Inclure :',
 	'label:spip_script' => 'Script d\'appel :',
@@ -437,7 +444,7 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:titre_travaux' => 'Titre du message :',
 	'label:titres_etendus' => 'Activer l\'utilisation &eacute;tendue des balises #TITRE_XXX&nbsp;:',
 	'label:url_arbo_minuscules' => 'Conserver la casse des titres dans les URLs :',
-	'label:url_arbo_sep_id' => 'Caract&egrave;re de s&eacute;paration \'titre-id\' en cas de doublon :<br/>(ne pas utiliser \'/\')', # MODIF
+	'label:url_arbo_sep_id' => 'Caract&egrave;re de s&eacute;paration \'titre-id\' en cas de doublon :<br />(ne pas utiliser \'/\')',
 	'label:url_glossaire_externe2' => 'Lien vers le glossaire externe :',
 	'label:url_max_propres' => 'Longueur maximale des URLs (caract&egrave;res) :',
 	'label:urls_arbo_sans_type' => 'Afficher le type d\'objet SPIP dans les URLs :',
@@ -471,6 +478,11 @@ La liste ci-dessus offre la possibilit&eacute; de lancer le processus de mise &a
 
 Note : les paquets <code>.zip</code> n\'&eacute;tant pas reconstruits instantan&eacute;ment, il se peut que tu soies oblig&eacute; d\'attendre un certain d&eacute;lai avant de pouvoir effectuer la totale mise &agrave; jour d\'un plugin tout r&eacute;cemment modifi&eacute;.',
 	'maj_auto:nom' => 'Mises &agrave; jour automatiques',
+	'masquer:description' => 'Cet outil permet de masquer sur le site public et sans modification particuli&egrave;re de vos squelettes, les contenus (rubriques ou articles) qui ont le mot-cl&#233; d&eacute;fini ci-dessous. Si une rubrique est masqu&eacute;e, toute sa branche l\'est aussi.[[%mot_masquer%]]
+
+Pour forcer l\'affichage des contenus masqu&eacute;s, il suffit d\'ajouter le crit&egrave;re <code>{tout_voir}</code> aux boucles de votre squelette.', # NEW
+	'masquer:nom' => 'Masquer du contenu', # NEW
+	'meme_rubrique:description' => 'D&eacute;finissez ici le nombre d\'objets list&eacute;s dans le cadre nomm&eacute; &laquo;<:info_meme_rubrique:>&raquo; et pr&eacute;sent sur certaines pages de l\'espace priv&eacute;.[[%meme_rubrique%]]', # NEW
 	'message_perso' => 'Un grand merci aux traducteurs qui passeraient par ici. Pat ;-)',
 	'moderation_admins' => 'administrateurs authentifi&eacute;s',
 	'moderation_message' => 'Ce forum est mod&eacute;r&eacute; &agrave; priori&nbsp;: ta contribution n\'appara&icirc;tra qu\'apr&egrave;s avoir &eacute;t&eacute; valid&eacute;e par un administrateur du site, sauf si tu es identifi&eacute; et autoris&eacute; &agrave; poster directement.',
@@ -498,12 +510,14 @@ Note : les paquets <code>.zip</code> n\'&eacute;tant pas reconstruits instantan&
 	'outil_inactif' => 'Outil inactif',
 	'outil_intro' => 'Cette page liste les fonctionnalit&eacute;s du plugin mises &agrave; ta disposition.<br /><br />En cliquant sur le nom des outils ci-dessous, tu s&eacute;lectionnes ceux dont tu pourras permuter l\'&eacute;tat &agrave; l\'aide du bouton central : les outils activ&eacute;s seront d&eacute;sactiv&eacute;s et <i>vice versa</i>. &Agrave; chaque clic, la description appara&icirc;t au-dessous des listes. Les cat&eacute;gories sont repliables et les outils peuvent &ecirc;tre cach&eacute;s. Le double-clic permet de permuter rapidement un outil.<br /><br />Pour une premi&egrave;re utilisation, il est recommand&eacute; d\'activer les outils un par un, au cas o&ugrave; appara&icirc;traient certaines incompatibilit&eacute;s avec ton squelette, avec SPIP ou avec d\'autres plugins.<br /><br />Note : le simple chargement de cette page recompile l\'ensemble des outils du Couteau Suisse.',
 	'outil_intro_old' => 'Cette interface est ancienne.<br /><br />Si tu rencontres des probl&egrave;mes dans l\'utilisation de la <a href=\'./?exec=admin_couteau_suisse\'>nouvelle interface</a>, n\'h&eacute;site pas &agrave; nous en faire part sur le forum de <a href=\'http://www.spip-contrib.net/?article2166\'>Spip-Contrib</a>.',
-	'outil_nb' => '@pipe@ : @nb@ outil', # MODIF
-	'outil_nbs' => '@pipe@ : @nb@ outils', # MODIF
+	'outil_nb' => '@pipe@&nbsp;: @nb@&nbsp;outil',
+	'outil_nbs' => '@pipe@&nbsp;: @nb@&nbsp;outils',
 	'outil_permuter' => 'Permuter l\'outil : &laquo; @text@ &raquo; ?',
 	'outils_actifs' => 'Outils actifs :',
 	'outils_caches' => 'Outils cach&eacute;s :',
 	'outils_cliquez' => 'Clique sur le nom des outils ci-dessus pour afficher ici leur description.',
+	'outils_concernes' => 'Sont concern&eacute;s : ', # NEW
+	'outils_desactives' => 'Sont d&eacute;sactiv&eacute;s : ', # NEW
 	'outils_inactifs' => 'Outil inactifs :',
 	'outils_liste' => 'Liste des outils du Couteau Suisse',
 	'outils_non_parametrables' => 'Non param&eacute;trables&nbsp;:',
@@ -577,46 +591,58 @@ Afin de conserver l\'acc&egrave;s &agrave; la puce image originale de SPIP (le p
 	'simpl_interface:description' => 'D&eacute;sactive le menu de changement rapide de statut d\'un article au survol de sa puce color&eacute;e. Cela est utile si tu cherches &agrave; obtenir une interface priv&eacute;e la plus d&eacute;pouill&eacute;e possible afin d\'optimiser les performances client.',
 	'simpl_interface:nom' => 'All&egrave;gement de l\'interface priv&eacute;e',
 	'smileys:aide' => 'Smileys : @liste@',
-	'smileys:description' => 'Ins&egrave;re des smileys dans tous les textes o&ugrave; appara&icirc;t un raccourci du genre <acronym>:-)</acronym>. Id&eacute;al pour les  forums.
+	'smileys:description' => 'Ins&egrave;re des smileys dans tous les textes o&ugrave; appara&icirc;t un raccourci du genre <code>:-)</code>. Id&eacute;al pour les  forums.
 _ Une balise est disponible pour afficher un tableau de smileys dans tes squelettes : #SMILEYS.
-_ Dessins : [Sylvain Michel->http://www.guaph.net/]', # MODIF
+_ Dessins : [Sylvain Michel->http://www.guaph.net/]',
 	'smileys:nom' => 'Smileys',
 	'soft_scroller:description' => 'Offre &agrave; ton site public un d&eacute;filement  adouci de la page lorsque le visiteur clique sur un lien pointant vers une ancre : tr&egrave;s utile pour &eacute;viter de se perdre dans une page complexe ou un texte tr&egrave;s long...
 
 Attention, cet outil a besoin pour fonctionner de pages au &laquo;DOCTYPE XHTML&raquo; (non HTML !) et de deux plugins {jQuery} : {ScrollTo} et {LocalScroll}. Le Couteau Suisse peut les installer directement si tu coches les cases suivantes. [[%scrollTo%]][[-->%LocalScroll%]]
 @_CS_PLUGIN_JQUERY192@',
 	'soft_scroller:nom' => 'Ancres douces',
-	'sommaire:description' => 'Construit un sommaire pour le texte de tes articles et de tes rubriques afin d’acc&eacute;der rapidement aux gros titres (balises HTML &lt;h3>Un intertitre&lt;/h3> ou raccourcis SPIP : intertitres de la forme :<code>{{{Un gros titre}}}</code>).
+	'sommaire:description' => 'Construit un sommaire pour le texte de tes articles et de tes rubriques afin d’acc&eacute;der rapidement aux gros titres (balises HTML &lt;@h3@>Un gros titre&lt;/@h3@>) ou aux intertitres SPIP (de syntaxe <code>{{{Un intertitre}}}</code>).
 
-@puce@ Tu peux d&eacute;finir ici le nombre maximal de caract&egrave;res retenus des intertitres pour construire le sommaire&nbsp;:[[%lgr_sommaire% caract&egrave;res]]
+Pour information, l\'outil &laquo;&nbsp;[.->class_spip]&nbsp;&raquo; permet de choisir la balise &lt;hN> utilis&eacute;e pour les intertitres de SPIP.
 
-@puce@ Tu peux aussi fixer le comportement du plugin concernant la cr&eacute;ation du sommaire&nbsp;: 
+@puce@ D&eacute;finis ici la profondeur retenue sur les intertitres pour construire le sommaire (1 = &lt;@h3@>, 2 = &lt;@h3@> et &lt;@h4@>, etc.) :[[%prof_sommaire%]]
+
+@puce@ D&eacute;finis ici le nombre maximal de caract&egrave;res retenus par intertitre :[[%lgr_sommaire% caract&egrave;res]]
+
+@puce@ Les ancres du sommaire peuvent &ecirc;tre calcul&eacute;es &agrave; partir du titre et non ressembler &agrave; : {outil_sommaire_NN}. Cette option donne &eacute;galement acc&egrave;s &agrave; la syntaxe <code>{{{Mon titre<mon_ancre>}}}</code> qui permet de choisir l\'ancre utilis&eacute;e.[[%jolies_ancres%]]
+
+@puce@ Fixe ici le comportement du plugin concernant la cr&eacute;ation du sommaire: 
 _ • Syst&eacute;matique pour chaque article (une balise <code>@_CS_SANS_SOMMAIRE@</code> plac&eacute;e n’importe o&ugrave; &agrave; l’int&eacute;rieur du texte de l’article cr&eacute;era une exception).
 _ • Uniquement pour les articles contenant la balise <code>@_CS_AVEC_SOMMAIRE@</code>.
 
 [[%auto_sommaire%]]
 
-@puce@ Par d&eacute;faut, le Couteau Suisse ins&egrave;re le sommaire en t&ecirc;te d\'article automatiquement. Mais tu as la possibilit&eacute; de placer ce sommaire ailleurs dans ton squelette gr&acirc;ce &agrave; une balise #CS_SOMMAIRE que tu peux activer ici&nbsp;:
+@puce@ Par d&eacute;faut, le Couteau Suisse ins&egrave;re automatiquement le sommaire en t&ecirc;te d\'article. Mais tu as la possibilit&eacute; de placer ce sommaire ailleurs dans votre squelette gr&acirc;ce &agrave; une balise #CS_SOMMAIRE.
 [[%balise_sommaire%]]
 
-Ce sommaire peut &ecirc;tre coupl&eacute; avec&nbsp;: &laquo;&nbsp;[.->decoupe]&nbsp;&raquo;.', # MODIF
-	'sommaire:nom' => 'Un sommaire pour vos articles', # MODIF
-	'sommaire_ancres' => 'Ancres choisies : <b><html>{{{Mon Titre&lt;mon_ancre&gt;}}}</html></b>', # NEW
+Ce sommaire est compatible avec &laquo;&nbsp;[.->decoupe]&nbsp;&raquo; et &laquo;&nbsp;[.->titres_typo]&nbsp;&raquo;.',
+	'sommaire:nom' => 'Sommaire automatique',
+	'sommaire_ancres' => 'Ancres choisies : <b><html>{{{Mon Titre&lt;mon_ancre&gt;}}}</html></b>',
 	'sommaire_avec' => 'Un texte avec sommaire&nbsp;: <b>@_CS_AVEC_SOMMAIRE@</b>',
 	'sommaire_sans' => 'Un texte sans sommaire&nbsp;: <b>@_CS_SANS_SOMMAIRE@</b>',
-	'sommaire_titres' => 'Intertitres hi&eacute;rarchis&eacute;s&nbsp;: <b><html>{{{*Titre}}}</html></b>, <b><html>{{{**Sous-titre}}}</html></b>, etc.', # NEW
-	'spam:description' => 'Tente de lutter contre les envois de messages automatiques et malveillants en partie publique. Certains mots tout comme les balises &lt;a>&lt;/a> sont interdits :  incite tes r&eacute;dacteurs &agrave; utiliser les raccourcis de liens SPIP.
+	'sommaire_titres' => 'Intertitres hi&eacute;rarchis&eacute;s&nbsp;: <b><html>{{{*Titre}}}</html></b>, <b><html>{{{**Sous-titre}}}</html></b>, etc.',
+	'spam:description' => 'Tente de lutter contre les envois de messages automatiques et malveillants en partie publique. Certains mots tout comme les balises en clair &lt;a>&lt;/a> sont interdits :  incite tes r&eacute;dacteurs &agrave; utiliser les raccourcis de liens au format SPIP.
 
-Liste ici les s&eacute;quences interdites en les s&eacute;parant par des espaces. [[%spam_mots%]]
-• Pour une expression avec des espaces, place-la entre guillemets.
+@puce@ Liste ici les s&eacute;quences interdites en les s&eacute;parant par des espaces. [[%spam_mots%]]
+<ql>• Pour une expression avec des espaces, place-la entre guillemets.
 _ • Pour sp&eacute;cifier un mot entier, mets-le entre parenth&egrave;ses. Exemple~:~{(asses)}.
-_ • Pour une expression r&eacute;guli&egrave;re, v&eacute;rifie bien la syntaxe et place-la entre slashes et entre guillemets. Exemple~:~{<html>"/@test\\.(com|fr)/"</html>}.', # MODIF
+_ • Pour une expression r&eacute;guli&egrave;re, v&eacute;rifie bien la syntaxe et place-la entre slashes et entre guillemets.
+_Exemple~:~{<html>"/@test.(com|fr)/"</html>}.
+_ • Pour une expression r&eacute;guli&egrave;re devant agir sur des caract&egrave;res HTML, place le test entre &laquo;&amp;#&raquo; et &laquo;;&raquo;.
+_ Exemple~:~{<html>"/&amp;#(?:1[4-9][0-9]{3}|[23][0-9]{4});/"</html>}.</q1>
+
+@puce@ Certaines adresses IP peuvent &eacute;galement &ecirc;tre bloqu&eacute;es &agrave; la source. Sache toutefois que derri&egrave;re ces adresses (souvent variables), il peut y avoir plusieurs utilisateurs, voire un r&eacute;seau entier.[[%spam_ips%]]
+<q1>• Utilise le caract&egrave;re &laquo;*&raquo; pour plusieurs chiffres, &laquo;?&raquo; pour un seul et les crochets pour des classes de chiffres.</q1>',
 	'spam:nom' => 'Lutte contre le SPAM',
-	'spam_ip' => 'Blocage IP de @ip@ :', # NEW
+	'spam_ip' => 'Blocage IP de @ip@ :',
 	'spam_test_ko' => 'Ce message serait bloqu&eacute; par le filtre anti-SPAM !',
 	'spam_test_ok' => 'Ce message serait accept&eacute; par le filtre anti-SPAM.',
-	'spam_tester_bd' => 'Testez &eacute;galement votre votre base de donn&eacute;es et listez les messages qui auraient &eacute;t&eacute; bloqu&eacute;s par la configuration actuelle de l\'outil.', # NEW
-	'spam_tester_label' => 'Teste ici ta liste de s&eacute;quences interdites :', # MODIF
+	'spam_tester_bd' => 'Teste &eacute;galement ta base de donn&eacute;es et liste les messages qui auraient &eacute;t&eacute; bloqu&eacute;es par la configuration actuelle de l\'outil.',
+	'spam_tester_label' => 'Teste ici ta liste de s&eacute;quences interdites ou d\'adresses&nbsp;IP, utilise le cadre suivant :',
 	'spip_cache:description' => '@puce@ Le cache occupe un certain espace disque et SPIP peut en limiter l\'importance. Une valeur vide ou &eacute;gale &agrave; 0 signifie qu\'aucun quota ne s\'applique.[[%quota_cache% Mo]]
 
 @puce@ Lorsqu\'une modification du contenu du site est faite, SPIP invalide imm&eacute;diatement le cache sans attendre le calcul p&eacute;riodique suivant. Si ton site a des probl&egrave;mes de performance face &agrave; une charge tr&egrave;s &eacute;lev&eacute;e, tu peux cocher &laquo;&nbsp;non&nbsp;&raquo; &agrave; cette option.[[%derniere_modif_invalide%]]
@@ -624,7 +650,7 @@ _ • Pour une expression r&eacute;guli&egrave;re, v&eacute;rifie bien la syntax
 @puce@ Si la balise #CACHE n\'est pas trouv&eacute;e dans tes squelettes locaux, SPIP consid&egrave;re par d&eacute;faut que le cache d\'une page a une dur&eacute;e de vie de 24 heures avant de la recalculer. Afin de mieux g&eacute;rer la charge de ton serveur, vous pouvez ici modifier cette valeur.[[%duree_cache% heures]]
 
 @puce@ Si tu as plusieurs sites en mutualisation, tu peux sp&eacute;cifier ici la valeur par d&eacute;faut prise en compte par tous les sites locaux (SPIP 2.0 mini).[[%duree_cache_mutu% heures]]',
-	'spip_cache:description1' => '@puce@ Par d&eacute;faut, SPIP calcule toutes les pages publiques et les place dans le cache afin d\'en acc&eacute;l&eacute;rer la consultation. D&eacute;sactiver temporairement le cache peut aider au d&eacute;veloppement du site. @_CS_CACHE_EXTENSION@[[%radio_desactive_cache3%]]', # MODIF
+	'spip_cache:description1' => '@puce@ Par d&eacute;faut, SPIP calcule toutes les pages publiques et les place dans le cache afin d\'en acc&eacute;l&eacute;rer la consultation. D&eacute;sactiver temporairement le cache peut aider au d&eacute;veloppement du site.[[%radio_desactive_cache3%]]',
 	'spip_cache:description2' => '@puce@ Quatre options pour orienter le fonctionnement du cache de SPIP : <q1>
 _ • {Usage normal} : SPIP calcule toutes les pages publiques et les place dans le cache afin d\'en acc&eacute;l&eacute;rer la consultation. Apr&egrave;s un certain d&eacute;lai, le cache est recalcul&eacute; et stock&eacute;.
 _ • {Cache permanent} : les d&eacute;lais d\'invalidation du cache sont ignor&eacute;s.
@@ -659,8 +685,8 @@ La syntaxe <html>#TITRE_XXX{yy}</html> est &eacute;galement support&eacute;e. Ex
 
 Polices disponibles : @_CS_FONTS@]][[%i_largeur% px]][[%i_hauteur% pt]][[%i_padding% px]][[%i_align%]]
 
-Cet outil est compatible avec : &laquo;&nbsp;[.->sommaire]&nbsp;&raquo;.', # NEW
-	'titres_typo:nom' => 'Intertitres en image', # NEW
+Cet outil est compatible avec : &laquo;&nbsp;[.->sommaire]&nbsp;&raquo;.',
+	'titres_typo:nom' => 'Intertitres en image',
 	'tous' => 'Tous',
 	'toutes_couleurs' => 'Les 36 couleurs des styles css :@_CS_EXEMPLE_COULEURS@',
 	'toutmulti:aide' => 'Blocs multilingues&nbsp;: <b><:trad:></b>',
@@ -778,7 +804,7 @@ Choisis ici de mettre en exposant certains raccourcis suppl&eacute;mentaires, ma
 	'urls_choix_objet' => '&Eacute;dition en base de l\'URL d\'un objet sp&eacute;cifique&nbsp;:',
 	'urls_edit_erreur' => 'Le format actuel des URLs (&laquo;&nbsp;@type@&nbsp;&raquo;) ne permet pas d\'&eacute;dition.',
 	'urls_enregistrer' => 'Enregistrer cette URL en base',
-	'urls_id_sauf_rubriques' => 'Exclure les rubriques', # MODIF
+	'urls_id_sauf_rubriques' => 'Exclure les objets suivants (s&eacute;par&eacute;s par &laquo;&nbsp;:&nbsp;&raquo;) :',
 	'urls_minuscules' => 'Lettres minuscules',
 	'urls_nouvelle' => '&Eacute;diter l\'URL &laquo;&nbsp;propres&nbsp;&raquo;&nbsp;:',
 	'urls_num_objet' => 'Num&eacute;ro&nbsp;:',

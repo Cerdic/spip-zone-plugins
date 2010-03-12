@@ -54,7 +54,7 @@ El valor de 1~000~000 p&iacute;xels sembla correcte per una configuraci&oacute; 
 	'auteurs:nom' => 'P&agrave;gina d\'autors',
 
 	// B
-	'barres_typo_edition' => 'Edtition des contenus', # NEW
+	'barres_typo_edition' => 'Edition des contenus', # NEW
 	'barres_typo_forum' => 'Messages de Forum', # NEW
 	'barres_typo_intro' => 'Le plugin &laquo;Porte-Plume&raquo; a &eacute;t&eacute; d&eacute;tect&eacute;. Veuillez choisir ici les barres typographiques o&ugrave; certains boutons seront ins&eacute;r&eacute;s.', # NEW
 	'basique' => 'B&agrave;sic',
@@ -256,6 +256,8 @@ Aquesta eina es pot acompanyar amb &laquo;&nbsp;[.->sommaire]&nbsp;&raquo;.',
 	'erreur:probleme' => 'Problema a: @pb@',
 	'erreur:traitements' => 'El Ganivet Su&iacute;s - Error de compilaci&oacute; dels tractaments: barreja \'typo\' i \'propre\' prohibit!',
 	'erreur:version' => 'Aquesta eina &eacute;s indispensable en aquesta versi&oacute; d\'SPIP.',
+	'erreur_groupe' => 'Attention : le groupe &laquo;@groupe@&raquo; n\'est pas d&#233;fini !', # NEW
+	'erreur_mot' => 'Attention : le mot-cl&#233; &laquo;@mot@&raquo; n\'est pas d&#233;fini !', # NEW
 	'etendu' => 'Est&egrave;s',
 
 	// F
@@ -318,8 +320,8 @@ _ • [De tot el plugin|Tornar a l\'estat inicial del plugin->@reset@]@install@
 	// I
 	'icone_visiter:description' => 'Substitueix la imatge del bot&oacute; est&agrave;ndard &laquo;&nbsp;Visitar&nbsp;&raquo; (a dalt a la dreta d\'aquesta p&agrave;gina) pel logotip del lloc, si existeix.
 
-Per definir aquest logotip, dirigiu-vos a la p&agrave;gina &laquo;&nbsp;Configuraci&oacute; del lloc&nbsp;&raquo; fent un clic damunt del bot&oacute; &laquo;&nbsp;Configuraci&oacute;&nbsp;&raquo;.',
-	'icone_visiter:nom' => 'Bot&oacute; &laquo;&nbsp;Visitar&nbsp;&raquo;',
+Per definir aquest logotip, dirigiu-vos a la p&agrave;gina &laquo;&nbsp;Configuraci&oacute; del lloc&nbsp;&raquo; fent un clic damunt del bot&oacute; &laquo;&nbsp;Configuraci&oacute;&nbsp;&raquo;.', # MODIF
+	'icone_visiter:nom' => 'Bot&oacute; &laquo;&nbsp;Visitar&nbsp;&raquo;', # MODIF
 	'insert_head:description' => 'Activa autom&agrave;ticament l\'etiqueta [#INSERT_HEAD->http://www.spip.net/fr_article1902.html] a tots els esquelets, tinguin o no aquesta etiqueta entre &lt;head&gt; i &lt;/head&gt;. Gr&agrave;cies a aquesta opci&oacute;, els plugins podran inserir JavaScript (.js) o fulls d\'estil (.css).',
 	'insert_head:nom' => 'Etiqueta #INSERT_HEAD',
 	'insertions:description' => 'ATENCI&Oacute;: eina en curs de desenvolupament!! [[%insertions%]]',
@@ -407,6 +409,7 @@ Atenci&oacute;, aquesta eina necessita per funcionar el plugin {jQuery}: {Round 
 	'label:max_auteurs_page' => 'Autors per p&agrave;gina:',
 	'label:message_travaux' => 'El vostre missatge de manteniment:',
 	'label:moderation_admin' => 'Validar autom&agrave;ticament els missatges de: ',
+	'label:mot_masquer' => 'Mot-cl&#233; masquant les contenus :', # NEW
 	'label:ouvre_note' => 'Obertura i tancament de les notes a peu de p&agrave;gina',
 	'label:ouvre_ref' => 'Obertura i tancament de les crides de les notes a peu de p&agrave;gina',
 	'label:paragrapher' => 'Sempre par&agrave;grafs:',
@@ -470,6 +473,11 @@ La llista de m&eacute;s amunt ofereix la possibilitat de llan&ccedil;ar el proc&
 
 Nota: com que els paquets <code>.zip</code> no es poden reconstruir instant&agrave;niament, es probable que estigueu obligat a esperar un cert temps abans de poder efectuar l\'actualitzaci&oacute; total d\'un plugin recentment modificat.',
 	'maj_auto:nom' => 'Actualitzacions autom&agrave;tiques',
+	'masquer:description' => 'Cet outil permet de masquer sur le site public et sans modification particuli&egrave;re de vos squelettes, les contenus (rubriques ou articles) qui ont le mot-cl&#233; d&eacute;fini ci-dessous. Si une rubrique est masqu&eacute;e, toute sa branche l\'est aussi.[[%mot_masquer%]]
+
+Pour forcer l\'affichage des contenus masqu&eacute;s, il suffit d\'ajouter le crit&egrave;re <code>{tout_voir}</code> aux boucles de votre squelette.', # NEW
+	'masquer:nom' => 'Masquer du contenu', # NEW
+	'meme_rubrique:description' => 'D&eacute;finissez ici le nombre d\'objets list&eacute;s dans le cadre nomm&eacute; &laquo;<:info_meme_rubrique:>&raquo; et pr&eacute;sent sur certaines pages de l\'espace priv&eacute;.[[%meme_rubrique%]]', # NEW
 	'message_perso' => 'Moltes gr&agrave;cies als traductors que passaran per aqu&iacute;. Pat ;-)',
 	'moderation_admins' => 'administradors autenticats',
 	'moderation_message' => 'Aquest f&ograve;rum est&agrave; moderat a priori: la vostra contribuci&oacute; no apareixer&agrave; fins que hagi estat validada per un administrador del lloc, excepte si esteu identificats i autoritzats per publicar-hi directament.',
@@ -503,6 +511,8 @@ Nota: com que els paquets <code>.zip</code> no es poden reconstruir instant&agra
 	'outils_actifs' => 'Eines actives:',
 	'outils_caches' => 'Eines amagades:',
 	'outils_cliquez' => 'Feu un clic sobre el nom de les eines que hi ha m&eacute;s amunt per mostrar aqu&iacute; la seva descripci&oacute;. ',
+	'outils_concernes' => 'Sont concern&eacute;s : ', # NEW
+	'outils_desactives' => 'Sont d&eacute;sactiv&eacute;s : ', # NEW
 	'outils_inactifs' => 'Eines inactives:',
 	'outils_liste' => 'Llista d\'eines del Ganivet Su&iacute;s',
 	'outils_non_parametrables' => 'No paarametrable:',

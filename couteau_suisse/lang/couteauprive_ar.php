@@ -56,7 +56,7 @@ La valeur de 1~000~000 pixels semble correcte pour une configuration avec peu de
 	'auteurs:nom' => '&#1589;&#1601;&#1581;&#1577; &#1575;&#1604;&#1605;&#1572;&#1604;&#1601;&#1610;&#1606;',
 
 	// B
-	'barres_typo_edition' => 'Edtition des contenus', # NEW
+	'barres_typo_edition' => 'Edition des contenus', # NEW
 	'barres_typo_forum' => 'Messages de Forum', # NEW
 	'barres_typo_intro' => 'Le plugin &laquo;Porte-Plume&raquo; a &eacute;t&eacute; d&eacute;tect&eacute;. Veuillez choisir ici les barres typographiques o&ugrave; certains boutons seront ins&eacute;r&eacute;s.', # NEW
 	'basique' => '&#1571;&#1587;&#1575;&#1587;&#1610;',
@@ -248,6 +248,8 @@ _ {{&#1634;.}} &#1575;&#1604;&#1593;&#1604;&#1575;&#1605;&#1575;&#1578; &lt;tabl
 	'erreur:probleme' => '&#1605;&#1588;&#1603;&#1604;&#1577; &#1601;&#1610;: @pb@',
 	'erreur:traitements' => '&#1587;&#1603;&#1610;&#1606; &#1575;&#1604;&#1580;&#1610;&#1576; - &#1582;&#1591;&#1571; &#1601;&#1610; &#1578;&#1589;&#1606;&#1610;&#1601; &#1575;&#1604;&#1605;&#1593;&#1575;&#1604;&#1580;&#1575;&#1578;: &#1601;&#1575;&#1604;&#1582;&#1604;&#1591; &#1576;&#1610;&#1606; \'typo\' &#1608;\'propre\' &#1594;&#1610;&#1585; &#1605;&#1587;&#1605;&#1608;&#1581; &#1576;&#1607;!',
 	'erreur:version' => '&#1607;&#1584;&#1607; &#1575;&#1604;&#1575;&#1583;&#1575;&#1577; &#1590;&#1585;&#1608;&#1585;&#1610;&#1577; &#1601;&#1610; &#1575;&#1589;&#1583;&#1575;&#1585; SPIP &#1575;&#1604;&#1581;&#1575;&#1604;&#1610;.',
+	'erreur_groupe' => 'Attention : le groupe &laquo;@groupe@&raquo; n\'est pas d&#233;fini !', # NEW
+	'erreur_mot' => 'Attention : le mot-cl&#233; &laquo;@mot@&raquo; n\'est pas d&#233;fini !', # NEW
 	'etendu' => '&#1605;&#1605;&#1583;&#1583;',
 
 	// F
@@ -307,10 +309,10 @@ _ &bull; [De tout le plugin|Revenir &agrave; l\'&eacute;tat initial du plugin->@
 	'horloge:nom' => 'Horloge', # NEW
 
 	// I
-	'icone_visiter:description' => 'Remplace l\'image du bouton standard &laquo;&nbsp;Visiter&nbsp;&raquo; (en haut &agrave; droite sur cette page)  par le logo du site, s\'il existe.
+	'icone_visiter:description' => 'Remplace l\'image du bouton standard &laquo;<:icone_visiter_site:>&raquo; (en haut &agrave; droite sur cette page)  par le logo du site, s\'il existe.
 
-Pour d&eacute;finir ce logo, rendez-vous sur la page &laquo;&nbsp;Configuration du site&nbsp;&raquo; en cliquant sur le bouton &laquo;&nbsp;Configuration&nbsp;&raquo;.', # NEW
-	'icone_visiter:nom' => 'Bouton &laquo;&nbsp;Visiter&nbsp;&raquo;', # NEW
+Pour d&eacute;finir ce logo, rendez-vous sur la page &laquo;<:titre_configuration:>&raquo; en cliquant sur le bouton &laquo;<:icone_configuration_site:>&raquo;.', # NEW
+	'icone_visiter:nom' => 'Bouton &laquo;&nbsp;<:icone_visiter_site:>&nbsp;&raquo;', # NEW
 	'insert_head:description' => 'Active automatiquement la balise [#INSERT_HEAD->http://www.spip.net/fr_article1902.html] sur tous les squelettes, qu\'ils aient ou non cette balise entre &lt;head&gt; et &lt;/head&gt;. Gr&acirc;ce &agrave; cette option, les plugins pourront ins&eacute;rer du javascript (.js) ou des feuilles de style (.css).', # MODIF
 	'insert_head:nom' => '&#1593;&#1604;&#1575;&#1605;&#1577; #INSERT_HEAD',
 	'insertions:description' => 'ATTENTION : outil en cours de d&eacute;veloppement !! [[%insertions%]]', # NEW
@@ -398,6 +400,7 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:max_auteurs_page' => '&#1593;&#1583;&#1583; &#1575;&#1604;&#1605;&#1572;&#1604;&#1601;&#1610;&#1606; &#1601;&#1610; &#1575;&#1604;&#1589;&#1601;&#1581;&#1577;:',
 	'label:message_travaux' => '&#1585;&#1587;&#1575;&#1604;&#1577; &#1575;&#1604;&#1589;&#1610;&#1575;&#1606;&#1577; &#1575;&#1604;&#1588;&#1582;&#1589;&#1610;&#1577;:',
 	'label:moderation_admin' => 'Valider automatiquement les messages des : ', # NEW
+	'label:mot_masquer' => 'Mot-cl&#233; masquant les contenus :', # NEW
 	'label:ouvre_note' => 'Ouverture et fermeture des notes de bas de page', # NEW
 	'label:ouvre_ref' => 'Ouverture et fermeture des appels de notes de bas de page', # NEW
 	'label:paragrapher' => '&#1575;&#1606;&#1588;&#1575;&#1569; &#1575;&#1604;&#1601;&#1602;&#1585;&#1575;&#1578; &#1583;&#1575;&#1574;&#1605;&#1575;&#1611;:',
@@ -460,6 +463,11 @@ La liste ci-dessus offre la possibilit&eacute; de lancer le processus de mise &a
 
 Note : les paquets <code>.zip</code> n\'&eacute;tant pas reconstruits instantan&eacute;ment, il se peut que vous soyez oblig&eacute; d\'attendre un certain d&eacute;lai avant de pouvoir effectuer la totale mise &agrave; jour d\'un plugin tout r&eacute;cemment modifi&eacute;.', # NEW
 	'maj_auto:nom' => 'Mises &agrave; jour automatiques', # NEW
+	'masquer:description' => 'Cet outil permet de masquer sur le site public et sans modification particuli&egrave;re de vos squelettes, les contenus (rubriques ou articles) qui ont le mot-cl&#233; d&eacute;fini ci-dessous. Si une rubrique est masqu&eacute;e, toute sa branche l\'est aussi.[[%mot_masquer%]]
+
+Pour forcer l\'affichage des contenus masqu&eacute;s, il suffit d\'ajouter le crit&egrave;re <code>{tout_voir}</code> aux boucles de votre squelette.', # NEW
+	'masquer:nom' => 'Masquer du contenu', # NEW
+	'meme_rubrique:description' => 'D&eacute;finissez ici le nombre d\'objets list&eacute;s dans le cadre nomm&eacute; &laquo;<:info_meme_rubrique:>&raquo; et pr&eacute;sent sur certaines pages de l\'espace priv&eacute;.[[%meme_rubrique%]]', # NEW
 	'message_perso' => 'Un grand merci aux traducteurs qui passeraient par ici. Pat ;-)', # NEW
 	'moderation_admins' => 'administrateurs authentifi&eacute;s', # NEW
 	'moderation_message' => 'Ce forum est mod&eacute;r&eacute; &agrave; priori&nbsp;: votre contribution n\'appara&icirc;tra qu\'apr&egrave;s avoir &eacute;t&eacute; valid&eacute;e par un administrateur du site, sauf si vous &ecirc;tes identifi&eacute; et autoris&eacute; &agrave; poster directement.', # NEW
@@ -493,6 +501,8 @@ Note : les paquets <code>.zip</code> n\'&eacute;tant pas reconstruits instantan&
 	'outils_actifs' => 'Outils actifs :', # NEW
 	'outils_caches' => 'Outils cach&eacute;s :', # NEW
 	'outils_cliquez' => 'Cliquez sur le nom des outils ci-dessus pour afficher ici leur description.', # NEW
+	'outils_concernes' => 'Sont concern&eacute;s : ', # NEW
+	'outils_desactives' => 'Sont d&eacute;sactiv&eacute;s : ', # NEW
 	'outils_inactifs' => 'Outil inactifs :', # NEW
 	'outils_liste' => 'Liste des outils du Couteau Suisse', # NEW
 	'outils_non_parametrables' => 'Non param&eacute;trables&nbsp;:', # NEW

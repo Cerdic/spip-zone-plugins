@@ -56,7 +56,7 @@ La valeur de 1~000~000 pixels semble correcte pour une configuration avec peu de
 	'auteurs:nom' => 'Yazarlar sayfas&#305;',
 
 	// B
-	'barres_typo_edition' => 'Edtition des contenus', # NEW
+	'barres_typo_edition' => 'Edition des contenus', # NEW
 	'barres_typo_forum' => 'Messages de Forum', # NEW
 	'barres_typo_intro' => 'Le plugin &laquo;Porte-Plume&raquo; a &eacute;t&eacute; d&eacute;tect&eacute;. Veuillez choisir ici les barres typographiques o&ugrave; certains boutons seront ins&eacute;r&eacute;s.', # NEW
 	'basique' => 'Temel',
@@ -236,6 +236,8 @@ _ Bu gere&ccedil; {makaleleriniz i&ccedil;in bir &ouml;zet} ile birlikte kullan&
 	'erreur:probleme' => 'Sorun var : @pb@',
 	'erreur:traitements' => '&#304;svi&ccedil;re &Ccedil;ak&#305;s&#305; - Derleme hatas&#305; : \'typo\' ve \'propre\' kar&#305;&#351;&#305;m&#305; yasakt&#305;r !',
 	'erreur:version' => 'Bu gere&ccedil; SPIP\'in bu s&uuml;r&uuml;m&uuml;nde mevcut de&#287;il.',
+	'erreur_groupe' => 'Attention : le groupe &laquo;@groupe@&raquo; n\'est pas d&#233;fini !', # NEW
+	'erreur_mot' => 'Attention : le mot-cl&#233; &laquo;@mot@&raquo; n\'est pas d&#233;fini !', # NEW
 	'etendu' => 'Kapsam',
 
 	// F
@@ -292,8 +294,8 @@ _ • [T&uuml;m eklentinin|Eklentini ilk durumuna d&ouml;n&uuml;lmesi->@reset@]@
 	// I
 	'icone_visiter:description' => 'Standart &laquo;&nbsp;Ziyaret Et&nbsp;&raquo; d&uuml;&#287;mesini (bu sayfan&#305;n sa&#287; &uuml;st&uuml;ndeki) e&#287;er varsa site logosu ile de&#287;i&#351;tirir.
 
-Bu logoyu tan&#305;mlamak i&ccedil;in &laquo;&nbsp;Konfig&uuml;rasyon&nbsp;&raquo; d&uuml;&#287;mesine t&#305;klayarak &laquo;&nbsp;Site konfig&uuml;rasyonu&nbsp;&raquo; sayfas&#305;na gidiniz.',
-	'icone_visiter:nom' => '&laquo;&nbsp;Ziyaret Et&nbsp;&raquo; d&uuml;&#287;mesi',
+Bu logoyu tan&#305;mlamak i&ccedil;in &laquo;&nbsp;Konfig&uuml;rasyon&nbsp;&raquo; d&uuml;&#287;mesine t&#305;klayarak &laquo;&nbsp;Site konfig&uuml;rasyonu&nbsp;&raquo; sayfas&#305;na gidiniz.', # MODIF
+	'icone_visiter:nom' => '&laquo;&nbsp;Ziyaret Et&nbsp;&raquo; d&uuml;&#287;mesi', # MODIF
 	'insert_head:description' => '[#INSERT_HEAD->http://www.spip.net/fr_article1902.html] komutunu (bu komutu &lt;head&gt; ve &lt;/head&gt; aras&#305;nda i&ccedil;erseler de i&ccedil;ermeseler de) t&uuml;m iskeletlerde etkinle&#351;tirir . Bu se&ccedil;enek sayesinde eklentiler javascript (.js) veya stil sayfas&#305; (.css) ekleyebilirler.',
 	'insert_head:nom' => '#INSERT_HEAD komutu',
 	'insertions:description' => 'DiKKAT : geli&#351;tirilmekte olan gere&ccedil; !! [[%insertions%]]',
@@ -381,6 +383,7 @@ Dikkat, bu gere&ccedil; &ccedil;al&#305;&#351;mak i&ccedil;in {Round Corners} {j
 	'label:max_auteurs_page' => 'Bir sayfadaki yazar adedi :',
 	'label:message_travaux' => 'Bak&#305;m mesaj&#305;n&#305;z :',
 	'label:moderation_admin' => 'Mesajlar&#305; otomatik olarak onaylanacaklar : ',
+	'label:mot_masquer' => 'Mot-cl&#233; masquant les contenus :', # NEW
 	'label:ouvre_note' => 'Dipnotlar&#305;n a&ccedil;&#305;l&#305;p kapat&#305;lmas&#305;',
 	'label:ouvre_ref' => 'Dipnot &ccedil;a&#287;r&#305;lar&#305;n&#305;n a&ccedil;&#305;l&#305;p kapat&#305;lmas&#305;',
 	'label:paragrapher' => 'Daima paragraflanmal&#305; :',
@@ -443,6 +446,11 @@ La liste ci-dessus offre la possibilit&eacute; de lancer le processus de mise &a
 
 Note : les paquets <code>.zip</code> n\'&eacute;tant pas reconstruits instantan&eacute;ment, il se peut que vous soyez oblig&eacute; d\'attendre un certain d&eacute;lai avant de pouvoir effectuer la totale mise &agrave; jour d\'un plugin tout r&eacute;cemment modifi&eacute;.', # NEW
 	'maj_auto:nom' => 'Mises &agrave; jour automatiques', # NEW
+	'masquer:description' => 'Cet outil permet de masquer sur le site public et sans modification particuli&egrave;re de vos squelettes, les contenus (rubriques ou articles) qui ont le mot-cl&#233; d&eacute;fini ci-dessous. Si une rubrique est masqu&eacute;e, toute sa branche l\'est aussi.[[%mot_masquer%]]
+
+Pour forcer l\'affichage des contenus masqu&eacute;s, il suffit d\'ajouter le crit&egrave;re <code>{tout_voir}</code> aux boucles de votre squelette.', # NEW
+	'masquer:nom' => 'Masquer du contenu', # NEW
+	'meme_rubrique:description' => 'D&eacute;finissez ici le nombre d\'objets list&eacute;s dans le cadre nomm&eacute; &laquo;<:info_meme_rubrique:>&raquo; et pr&eacute;sent sur certaines pages de l\'espace priv&eacute;.[[%meme_rubrique%]]', # NEW
 	'message_perso' => 'Buraya u&#287;rayacak &ccedil;evirmenlere &ccedil;ok &ccedil;ok te&#351;ekk&uuml;rler. Pat ;-)',
 	'moderation_admins' => 'onayl&#305; y&ouml;neticiler',
 	'moderation_message' => 'Bu forum &ouml;n tan&#305;ml&#305; olarak y&ouml;netilmektedir &nbsp;: katk&#305;n&#305;z, e&#287;er direkt yay&#305;nlama hakk&#305;n&#305;z yoksa, bir site y&ouml;neticisi taraf&#305;ndan onayland&#305;ktan sonra g&ouml;r&uuml;necektir.',
@@ -476,6 +484,8 @@ Note : les paquets <code>.zip</code> n\'&eacute;tant pas reconstruits instantan&
 	'outils_actifs' => 'Aktif aletler :',
 	'outils_caches' => 'Sakl&#305; aletler :',
 	'outils_cliquez' => 'Yukar&#305;daki gere&ccedil;lerin a&ccedil;&#305;klamalar&#305;n&#305; g&ouml;rmek i&ccedil;in isimlerine t&#305;klay&#305;n&#305;z.',
+	'outils_concernes' => 'Sont concern&eacute;s : ', # NEW
+	'outils_desactives' => 'Sont d&eacute;sactiv&eacute;s : ', # NEW
 	'outils_inactifs' => '&#304;naktif aletler :',
 	'outils_liste' => '&#304;svi&ccedil;re &Ccedil;ak&#305;s&#305; aletleri listesi ',
 	'outils_non_parametrables' => 'Ayarlanamaz&nbsp;:',

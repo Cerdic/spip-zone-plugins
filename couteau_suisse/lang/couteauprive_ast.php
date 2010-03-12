@@ -56,7 +56,7 @@ La valeur de 1~000~000 pixels semble correcte pour une configuration avec peu de
 	'auteurs:nom' => 'P&aacute;xina d\'autores',
 
 	// B
-	'barres_typo_edition' => 'Edtition des contenus', # NEW
+	'barres_typo_edition' => 'Edition des contenus', # NEW
 	'barres_typo_forum' => 'Messages de Forum', # NEW
 	'barres_typo_intro' => 'Le plugin &laquo;Porte-Plume&raquo; a &eacute;t&eacute; d&eacute;tect&eacute;. Veuillez choisir ici les barres typographiques o&ugrave; certains boutons seront ins&eacute;r&eacute;s.', # NEW
 	'basique' => 'B&aacute;sica',
@@ -255,6 +255,8 @@ Esta ferramienta puede acoplase con &laquo;[.->sommaire]&raquo;.',
 	'erreur:probleme' => 'Problema en: @pb@',
 	'erreur:traitements' => 'La Navaya Suiza - Error de compilaci&oacute;n de los tratamientos: &iexcl;la mestura de \'typo\' y \'propre\' ta torgada!',
 	'erreur:version' => 'Esta ferramienta nun ta disponible pa esta versi&oacute;n de SPIP.',
+	'erreur_groupe' => 'Attention : le groupe &laquo;@groupe@&raquo; n\'est pas d&#233;fini !', # NEW
+	'erreur_mot' => 'Attention : le mot-cl&#233; &laquo;@mot@&raquo; n\'est pas d&#233;fini !', # NEW
 	'etendu' => 'Estend&iacute;u',
 
 	// F
@@ -317,8 +319,8 @@ _ • [De tol plugin|Tornar a l\'est&aacute;u inicial del plugin->@reset@]@insta
 	// I
 	'icone_visiter:description' => 'Camb&eacute;a la imaxe del bot&oacute;n est&aacute;ndar &laquo;Visitar&raquo; (enriba a la derecha d\'esta p&aacute;xina) pol logo del sitiu, si esiste.
 
-Pa definir esti logo, vete a la p&aacute;xina de &laquo;Configuraci&oacute;n del sitiu&raquo; calcando nel bot&oacute;n &laquo;Configuraci&oacute;n&raquo;.',
-	'icone_visiter:nom' => 'Bot&oacute;n &laquo;Visitar&raquo;',
+Pa definir esti logo, vete a la p&aacute;xina de &laquo;Configuraci&oacute;n del sitiu&raquo; calcando nel bot&oacute;n &laquo;Configuraci&oacute;n&raquo;.', # MODIF
+	'icone_visiter:nom' => 'Bot&oacute;n &laquo;Visitar&raquo;', # MODIF
 	'insert_head:description' => 'Activa autom&aacute;ticamente la baliza [#INSERT_HEAD->http://www.spip.net/fr_article1902.html] en toes les cadarmes, da igual que tengan o non esta baliza ente &lt;head&gt; y &lt;/head&gt;. Gracies a esta opci&oacute;n, los plugins podr&aacute;n enxertar JavaScript (.js) o fueyes d\'estilu (.css).',
 	'insert_head:nom' => 'Baliza #INSERT_HEAD',
 	'insertions:description' => 'ATENCI&Oacute;N: &iexcl;&iexcl;ferramienta en cursu de desendolcu!! [[%insertions%]]',
@@ -406,6 +408,7 @@ Atenci&oacute;n, esta ferramienta necesita pa funcionar el plugin {jQuery} : {Ro
 	'label:max_auteurs_page' => 'Autores por p&aacute;xina:',
 	'label:message_travaux' => 'El mensaxe de mantenimientu:',
 	'label:moderation_admin' => 'Validar autom&aacute;ticamente los mensaxes de los: ',
+	'label:mot_masquer' => 'Mot-cl&#233; masquant les contenus :', # NEW
 	'label:ouvre_note' => 'Apertura y zarre de les notes de pie de p&aacute;xina',
 	'label:ouvre_ref' => 'Apertura y zarre de les llam&aacute;es a notes de pie de p&aacute;xina',
 	'label:paragrapher' => 'Facer p&aacute;rrafos siempre:',
@@ -469,6 +472,11 @@ La liste ci-dessus offre la possibilit&eacute; de lancer le processus de mise &a
 
 Note : les paquets <code>.zip</code> n\'&eacute;tant pas reconstruits instantan&eacute;ment, il se peut que vous soyez oblig&eacute; d\'attendre un certain d&eacute;lai avant de pouvoir effectuer la totale mise &agrave; jour d\'un plugin tout r&eacute;cemment modifi&eacute;.', # NEW
 	'maj_auto:nom' => 'Mises &agrave; jour automatiques', # NEW
+	'masquer:description' => 'Cet outil permet de masquer sur le site public et sans modification particuli&egrave;re de vos squelettes, les contenus (rubriques ou articles) qui ont le mot-cl&#233; d&eacute;fini ci-dessous. Si une rubrique est masqu&eacute;e, toute sa branche l\'est aussi.[[%mot_masquer%]]
+
+Pour forcer l\'affichage des contenus masqu&eacute;s, il suffit d\'ajouter le crit&egrave;re <code>{tout_voir}</code> aux boucles de votre squelette.', # NEW
+	'masquer:nom' => 'Masquer du contenu', # NEW
+	'meme_rubrique:description' => 'D&eacute;finissez ici le nombre d\'objets list&eacute;s dans le cadre nomm&eacute; &laquo;<:info_meme_rubrique:>&raquo; et pr&eacute;sent sur certaines pages de l\'espace priv&eacute;.[[%meme_rubrique%]]', # NEW
 	'message_perso' => 'Candiales gracies a los traductores que pasaren per equ&iacute;. Pat ;-)',
 	'moderation_admins' => 'alministradores autentificaos',
 	'moderation_message' => 'Esti foru ta llend&aacute;u a priori: lo que vienes de mandar nun apaecer&aacute; hasta que tea valid&aacute;u por un alministrador del sitiu, a menos que teas identific&aacute;u y autoriz&aacute;u a escribir direutamente.',
@@ -502,6 +510,8 @@ Note : les paquets <code>.zip</code> n\'&eacute;tant pas reconstruits instantan&
 	'outils_actifs' => 'Ferramientes actives:',
 	'outils_caches' => 'Ferramientes tapec&iacute;es:',
 	'outils_cliquez' => 'Calca nel nome de les ferramientes d\'embaxo pa amosar equ&iacute; la descripci&oacute;n.',
+	'outils_concernes' => 'Sont concern&eacute;s : ', # NEW
+	'outils_desactives' => 'Sont d&eacute;sactiv&eacute;s : ', # NEW
 	'outils_inactifs' => 'Ferramientes inactives:',
 	'outils_liste' => 'Llista de ferramientes de la Navaya Suiza',
 	'outils_non_parametrables' => 'Ensin variables:',

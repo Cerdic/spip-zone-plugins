@@ -54,7 +54,7 @@ La valeur de 1~000~000 pixels semble correcte pour une configuration avec peu de
 	'auteurs:nom' => 'Authors page',
 
 	// B
-	'barres_typo_edition' => 'Editing contents',
+	'barres_typo_edition' => 'Editing contents', # MODIF
 	'barres_typo_forum' => 'Forum messages',
 	'barres_typo_intro' => 'The &laquo;Porte-Plume&raquo; plugin is installed. Please choose here the typographical bars on which to insert various buttons.',
 	'basique' => 'Basic',
@@ -252,6 +252,8 @@ This tool may be combined with "[.->sommaire]".',
 	'erreur:probleme' => 'Problem with: @pb@',
 	'erreur:traitements' => 'The Penknife - Compilation error: forbidden mixing of \'typo\' and \'propre\'!',
 	'erreur:version' => 'This tool is unavailable in this version of SPIP.',
+	'erreur_groupe' => 'Attention : le groupe &laquo;@groupe@&raquo; n\'est pas d&#233;fini !', # NEW
+	'erreur_mot' => 'Attention : le mot-cl&#233; &laquo;@mot@&raquo; n\'est pas d&#233;fini !', # NEW
 	'etendu' => 'Expanded',
 
 	// F
@@ -314,8 +316,8 @@ _ • [Whole plugin|Reset to the original state of the plugin->@reset@]@install@
 	// I
 	'icone_visiter:description' => 'Replaces the standard "Visit" button (top right on this page) by the site logo, if it exists.
 
-To set this logo, go to the page "Site configuration" by clicking the "Configuration" button.',
-	'icone_visiter:nom' => '"Visit" button',
+To set this logo, go to the page "Site configuration" by clicking the "Configuration" button.', # MODIF
+	'icone_visiter:nom' => '"Visit" button', # MODIF
 	'insert_head:description' => 'Activate the tag [#INSERT_HEAD->http://www.spip.net/en_article2421.html] in all templates, whether or not this tag is present between &lt;head&gt; et &lt;/head&gt;. This option can be used to allow plugins to insert javascript code (.js) or stylesheets (.css).',
 	'insert_head:nom' => '#INSERT_HEAD tag',
 	'insertions:description' => 'N.B.: tool in development!! [[%insertions%]]',
@@ -403,6 +405,7 @@ N.B. This tool requires the {Round Corners} jQuery plugin in order to function. 
 	'label:max_auteurs_page' => 'Authors per page:',
 	'label:message_travaux' => 'Your maintenance message:',
 	'label:moderation_admin' => 'Automatically validate messages from:',
+	'label:mot_masquer' => 'Mot-cl&#233; masquant les contenus :', # NEW
 	'label:ouvre_note' => 'Opening and closing markers of footnotes',
 	'label:ouvre_ref' => 'Opening and closing markers of footnote links',
 	'label:paragrapher' => 'Always insert paragraphs:',
@@ -466,6 +469,11 @@ La liste ci-dessus offre la possibilit&eacute; de lancer le processus de mise &a
 
 Note : les paquets <code>.zip</code> n\'&eacute;tant pas reconstruits instantan&eacute;ment, il se peut que vous soyez oblig&eacute; d\'attendre un certain d&eacute;lai avant de pouvoir effectuer la totale mise &agrave; jour d\'un plugin tout r&eacute;cemment modifi&eacute;.', # NEW
 	'maj_auto:nom' => 'Mises &agrave; jour automatiques', # NEW
+	'masquer:description' => 'Cet outil permet de masquer sur le site public et sans modification particuli&egrave;re de vos squelettes, les contenus (rubriques ou articles) qui ont le mot-cl&#233; d&eacute;fini ci-dessous. Si une rubrique est masqu&eacute;e, toute sa branche l\'est aussi.[[%mot_masquer%]]
+
+Pour forcer l\'affichage des contenus masqu&eacute;s, il suffit d\'ajouter le crit&egrave;re <code>{tout_voir}</code> aux boucles de votre squelette.', # NEW
+	'masquer:nom' => 'Masquer du contenu', # NEW
+	'meme_rubrique:description' => 'D&eacute;finissez ici le nombre d\'objets list&eacute;s dans le cadre nomm&eacute; &laquo;<:info_meme_rubrique:>&raquo; et pr&eacute;sent sur certaines pages de l\'espace priv&eacute;.[[%meme_rubrique%]]', # NEW
 	'message_perso' => 'oh!',
 	'moderation_admins' => 'authenticated administrators',
 	'moderation_message' => 'This forum is pre-moderated: your contribution will only appear once it has been validated by one of the site administrators (unless you are logged in and authorised to post directly).',
@@ -499,6 +507,8 @@ Note : les paquets <code>.zip</code> n\'&eacute;tant pas reconstruits instantan&
 	'outils_actifs' => 'Activated tools:',
 	'outils_caches' => 'Hidden tools:',
 	'outils_cliquez' => 'Click the names of the tools above to show their description.',
+	'outils_concernes' => 'Sont concern&eacute;s : ', # NEW
+	'outils_desactives' => 'Sont d&eacute;sactiv&eacute;s : ', # NEW
 	'outils_inactifs' => 'Inactive tools:',
 	'outils_liste' => 'List of tools of the Penknife',
 	'outils_non_parametrables' => 'Cannot be configured:',

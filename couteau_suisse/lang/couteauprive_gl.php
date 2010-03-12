@@ -57,7 +57,7 @@ La valeur de 1~000~000 pixels semble correcte pour une configuration avec peu de
 	'auteurs:nom' => 'P&aacute;xina de autores',
 
 	// B
-	'barres_typo_edition' => 'Edtition des contenus', # NEW
+	'barres_typo_edition' => 'Edition des contenus', # NEW
 	'barres_typo_forum' => 'Messages de Forum', # NEW
 	'barres_typo_intro' => 'Le plugin &laquo;Porte-Plume&raquo; a &eacute;t&eacute; d&eacute;tect&eacute;. Veuillez choisir ici les barres typographiques o&ugrave; certains boutons seront ins&eacute;r&eacute;s.', # NEW
 	'basique' => 'B&aacute;sica',
@@ -258,6 +258,8 @@ _ Esta utilidade pode ser emparellada con &laquo;&nbsp;[.->sommaire]&nbsp;&raquo
 	'erreur:probleme' => 'Problema en : @pb@',
 	'erreur:traitements' => 'A Navalla Su&iacute;za - Erro de compilation dos tratamentos : mestura \'typo\' e \'propre\' prohibida !',
 	'erreur:version' => 'Esta ferramenta non est&aacute; dispo&ntilde;&iacute;bel nesta versi&oacute;n de SPIP.',
+	'erreur_groupe' => 'Attention : le groupe &laquo;@groupe@&raquo; n\'est pas d&#233;fini !', # NEW
+	'erreur_mot' => 'Attention : le mot-cl&#233; &laquo;@mot@&raquo; n\'est pas d&#233;fini !', # NEW
 	'etendu' => 'Estendido',
 
 	// F
@@ -319,8 +321,8 @@ _ • [De todo o m&oacute;dulo|Volver ao estado inicial do m&oacute;dulo->@reset
 	// I
 	'icone_visiter:description' => 'Substit&uacute;a a imaxe do bot&oacute;n est&aacute;ndar &laquo;&nbsp;Visitar&nbsp;&raquo; (arriba &aacute; dereita desta p&aacute;xina) polo logo do web, se existe.
 
-Para definir o logo, vaia &aacute; p&aacute;xina &laquo;&nbsp;Configuraci&oacute;n do web&nbsp;&raquo; premendo sobre o bot&oacute;n &laquo;&nbsp;Configuraci&oacute;n&nbsp;&raquo;.',
-	'icone_visiter:nom' => 'Bot&oacute;n &laquo;&nbsp;Visitar&nbsp;&raquo;',
+Para definir o logo, vaia &aacute; p&aacute;xina &laquo;&nbsp;Configuraci&oacute;n do web&nbsp;&raquo; premendo sobre o bot&oacute;n &laquo;&nbsp;Configuraci&oacute;n&nbsp;&raquo;.', # MODIF
+	'icone_visiter:nom' => 'Bot&oacute;n &laquo;&nbsp;Visitar&nbsp;&raquo;', # MODIF
 	'insert_head:description' => 'Activa automaticamente a baliza [#INSERT_HEAD->http://www.spip.net/fr_article1902.html] en todos os esqueletos, que te&ntilde;an ou non esta baliza entre &lt;head&gt; e &lt;/head&gt;. Merc&eacute; a esta opci&oacute;n, os plugins poder&aacute;n inserir javascript (.js) ou follas de estilo (.css).',
 	'insert_head:nom' => 'Baliza #INSERT_HEAD',
 	'insertions:description' => 'AVISO : ferramenta en proceso de desenvolvemento !! [[%insertions%]]',
@@ -408,6 +410,7 @@ Atenci&oacute;n, esta ferramenta, precisa para funcionar do m&oacute;dulo {jQuer
 	'label:max_auteurs_page' => 'Autors por p&aacute;xina :',
 	'label:message_travaux' => 'A s&uacute;a mensaxe de mantemento :',
 	'label:moderation_admin' => 'Validar automaticamente as mensaxes desde: ',
+	'label:mot_masquer' => 'Mot-cl&#233; masquant les contenus :', # NEW
 	'label:ouvre_note' => 'Abrir e cerrar as notas a rodap&eacute;',
 	'label:ouvre_ref' => 'Abrir e cerrar as chamadas de notas a rodap&eacute;',
 	'label:paragrapher' => 'Paragrafar sempre :',
@@ -471,6 +474,11 @@ A lista seguinte ofrece a posibilidade de lanzar o proceso de actualizaci&oacute
 
 Nota : os paquetes <code>.zip</code> non son reconstru&iacute;dos instantaneamente, pode ser que te&ntilde;a que esperar un certo atraso antes de poder efectuar a total actualizaci&oacute;n dun complemento que fose recentemente modificado.',
 	'maj_auto:nom' => 'Actualizaci&oacute;ns autom&aacute;ticas',
+	'masquer:description' => 'Cet outil permet de masquer sur le site public et sans modification particuli&egrave;re de vos squelettes, les contenus (rubriques ou articles) qui ont le mot-cl&#233; d&eacute;fini ci-dessous. Si une rubrique est masqu&eacute;e, toute sa branche l\'est aussi.[[%mot_masquer%]]
+
+Pour forcer l\'affichage des contenus masqu&eacute;s, il suffit d\'ajouter le crit&egrave;re <code>{tout_voir}</code> aux boucles de votre squelette.', # NEW
+	'masquer:nom' => 'Masquer du contenu', # NEW
+	'meme_rubrique:description' => 'D&eacute;finissez ici le nombre d\'objets list&eacute;s dans le cadre nomm&eacute; &laquo;<:info_meme_rubrique:>&raquo; et pr&eacute;sent sur certaines pages de l\'espace priv&eacute;.[[%meme_rubrique%]]', # NEW
 	'message_perso' => 'Un profundo reco&ntilde;ecemento para os tradutores que pasaran por aqu&iacute;. Pat ;-)',
 	'moderation_admins' => 'administradores autenticados',
 	'moderation_message' => 'Este foro est&aacute; moderado a priori&nbsp;: o seu comentario non aparecer&aacute; ata que sexa validada por un administrador do web, salvante o caso de que vostede xa estea identificado e autorizado para publicar comentarios directamente.',
@@ -504,6 +512,8 @@ Nota : os paquetes <code>.zip</code> non son reconstru&iacute;dos instantaneamen
 	'outils_actifs' => 'Ferramentas activas :',
 	'outils_caches' => 'Ferramentas ocultas :',
 	'outils_cliquez' => 'Prema sobre o nome das ferramentas seguintes para mostrar aqu&iacute; a s&uacute;a descrici&oacute;n.',
+	'outils_concernes' => 'Sont concern&eacute;s : ', # NEW
+	'outils_desactives' => 'Sont d&eacute;sactiv&eacute;s : ', # NEW
 	'outils_inactifs' => 'Ferramentas inactivas :',
 	'outils_liste' => 'Lista de ferramentas da Navalla Su&iacute;za',
 	'outils_non_parametrables' => 'Non parametrables:',
