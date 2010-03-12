@@ -94,6 +94,7 @@ function formulaires_configurer_ck_traiter_dist(){
 
 	if (_request('supprimer_numero')){
 		$code .= "\$GLOBALS['table_des_traitements']['TITRE'][]= 'typo(supprimer_numero(%s), \"TYPO\", \$connect)';\n";
+		$code .= "\$GLOBALS['table_des_traitements']['NOM'][]= 'typo(supprimer_numero(%s), \"TYPO\", \$connect)';\n";
 	}
 
 	$code .= ck_code_globale('toujours_paragrapher',_request('toujours_paragrapher')?'true':'false');
