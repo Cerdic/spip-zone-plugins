@@ -45,12 +45,12 @@ function autoriser_modifierextra_dist($faire, $type, $id, $qui, $opt){
  * @param string $objet      objet possedant les extras
  * @param mixed  $noms       nom des extras a restreindre
  * @param mixed  $ids        identifiant (des rubriques par defaut) sur lesquelles s'appliquent les champs
+ * @param string $cible      type de la fonction de test qui sera appelee, par defaut "rubrique". Peut aussi etre "secteur", "groupe" ou des fonctions definies
  * @param bool   $recursif   application recursive sur les sous rubriques ? ATTENTION, c'est gourmand en requetes SQL :)
- * @param string $cible      type de la fonction de test qui sera appelee, par defaut "rubrique". Peut aussi etre "groupe" ou des fonctions definies
  *
  * @return bool : true si on a fait quelque chose
  */
-function restreindre_extras($objet, $noms=array(), $ids=array(), $recursif=false, $cible='rubrique') {
+function restreindre_extras($objet, $noms=array(), $ids=array(), $cible='rubrique', $recursif=false) {
 	if (!$objet or !$noms or !$ids) {
 		return false;
 	}
@@ -69,7 +69,7 @@ function restreindre_extras($objet, $noms=array(), $ids=array(), $recursif=false
 		$code = "
 			if (!function_exists('$f$m')) {
 				function $f$m(\$faire, \$type, \$id, \$qui, \$opt) {
-					return _restreindre_extras_objet('$objet', \$id, \$opt, $ids, $recursif, '$cible');
+					return _restreindre_extras_objet('$objet', \$id, \$opt, $ids, '$cible', $recursif);
 				}
 			}
 			if (!function_exists('$f$v')) {
@@ -84,6 +84,8 @@ function restreindre_extras($objet, $noms=array(), $ids=array(), $recursif=false
 
 	return true;
 }
+
+
 
 /**
  *
@@ -100,11 +102,12 @@ function restreindre_extras($objet, $noms=array(), $ids=array(), $recursif=false
  * @param int    $id_objet   nom des extras a restreindre
  * @param array  $opt        options des autorisations
  * @param mixed  $ids        identifiant(s) (en rapport avec la cible) sur lesquelles s'appliquent les champs
+ * @param string $cible      type de la fonction de test qui sera appelee, par defaut "rubrique". Peut aussi etre "secteur", "groupe" ou des fonctions definies
  * @param bool   $recursif   application recursive sur les sous rubriques ? ATTENTION, c'est gourmand en requetes SQL :)
  *
  * @return bool : autorise ou non .
  */
-function _restreindre_extras_objet($objet, $id_objet, $opt, $ids, $recursif=false, $cible='rubrique') {
+function _restreindre_extras_objet($objet, $id_objet, $opt, $ids, $cible='rubrique', $recursif=false) {
 	static $autorise = null;
 
 	if ( $autorise === null )        { $autorise = array(); }
@@ -129,6 +132,56 @@ function _restreindre_extras_objet($objet, $id_objet, $opt, $ids, $recursif=fals
 /**
  *
  * Fonction d'autorisation interne a la fonction restreindre_extras()
+ * Teste si un objet a le droit d'afficher des champs extras
+ * en fonction de la rubrique (ou autre defini dans la cible)
+ * dans laquelle il se trouve et des rubriques autorisees
+ * Le dernier argument donne la colonne a chercher dans l'objet correspondant
+ *
+ * @param string $objet      objet possedant les extras
+ * @param int    $id_objet   nom des extras a restreindre
+ * @param array  $opt        options des autorisations
+ * @param mixed  $ids        identifiant(s) (en rapport avec la cible) sur lesquelles s'appliquent les champs
+ * @param bool   $_id_cible  nom de la colonne SQL cible (id_rubrique, id_secteur, id_groupe...)
+ *
+ * @return mixed : true : autorise, false : non autorise, 0 : incertain.
+ * 
+ */
+function _restreindre_extras_objet_sur_cible($objet, $id_objet, $opt, $ids, $_id_cible) {
+
+    $id_cible = $opt['contexte'][$_id_cible];
+
+    if (!$id_cible) {
+		// on tente de le trouver dans la table de l'objet
+		$table = table_objet_sql($objet);
+		$id_table = id_table_objet($table);
+		$trouver_table = charger_fonction('trouver_table', 'base');
+		$desc = $trouver_table($table);
+		if (isset($desc['field'][$_id_cible])) {
+			$id_cible = sql_getfetsel($_id_cible, $table, "$id_table=".sql_quote($id_objet));
+		}
+    }
+
+	if (!$id_cible) {
+		// on essaie aussi dans le contexte d'appel de la page
+		$id_cible = _request($_id_cible);
+	}
+
+	if (!$id_cible) {
+		return array($id_cible, false);
+	}
+
+    if (in_array($id_cible, $ids)) {
+		return array($id_cible, true);
+    }
+
+    return array($id_cible, false);
+}
+
+
+
+/**
+ *
+ * Fonction d'autorisation interne a la fonction restreindre_extras()
  * specifique au test d'appartenance a une rubrique
  *
  * @param string $objet      objet possedant les extras
@@ -141,32 +194,11 @@ function _restreindre_extras_objet($objet, $id_objet, $opt, $ids, $recursif=fals
  */
 function inc_restreindre_extras_objet_sur_rubrique_dist($objet, $id_objet, $opt, $ids, $recursif) {
 
-    $id_rubrique = $opt['contexte']['id_rubrique'];
-
-    if (!$id_rubrique) {
-		// on tente de le trouver dans la table de l'objet
-		$table = table_objet_sql($objet);
-		$id_table = id_table_objet($table);
-		$trouver_table = charger_fonction('trouver_table', 'base');
-		$desc = $trouver_table($table);
-		if (isset($desc['field']['id_rubrique'])) {
-			$id_rubrique = sql_getfetsel("id_rubrique", $table, "$id_table=".sql_quote($id_objet));
-		}
-    }
-
-	if (!$id_rubrique) {
-		// on essaie aussi dans le contexte d'appel de la page
-		$id_rubrique = _request('id_rubrique');
+	list($id_rubrique, $ok) = _restreindre_extras_objet_sur_cible($objet, $id_objet, $opt, $ids, 'id_rubrique');
+	if ($ok) {
+		return true;
 	}
-
-	if (!$id_rubrique) {
-		return false;
-	}
-
-    if (in_array($id_rubrique, $ids)) {
-        return true;
-    }
-
+	
 	// on teste si l'objet est dans une sous rubrique de celles mentionnee...
 	if ($id_rubrique and $recursif) {
 		$id_parent = $id_rubrique;
@@ -192,37 +224,36 @@ function inc_restreindre_extras_objet_sur_rubrique_dist($objet, $id_objet, $opt,
  * @param int    $id_objet   nom des extras a restreindre
  * @param array  $opt        options des autorisations
  * @param mixed  $ids        identifiant(s) des rubriques sur lesquelles s'appliquent les champs
+ * @param bool   $recursif   (non utilise)
+ *
+ * @return bool : autorise ou non .
+ */
+function inc_restreindre_extras_objet_sur_secteur_dist($objet, $id_objet, $opt, $ids, $recursif=false) {
+	list($id_secteur, $ok) = _restreindre_extras_objet_sur_cible($objet, $id_objet, $opt, $ids, 'id_secteur');
+	return $ok;
+}
+
+
+
+
+/**
+ *
+ * Fonction d'autorisation interne a la fonction restreindre_extras()
+ * specifique au test d'appartenance a une rubrique
+ *
+ * @param string $objet      objet possedant les extras
+ * @param int    $id_objet   nom des extras a restreindre
+ * @param array  $opt        options des autorisations
+ * @param mixed  $ids        identifiant(s) des rubriques sur lesquelles s'appliquent les champs
  * @param bool   $recursif   application recursive sur les sous rubriques ? ATTENTION, c'est gourmand en requetes SQL :)
  *
  * @return bool : autorise ou non .
  */
 function inc_restreindre_extras_objet_sur_groupemot_dist($objet, $id_objet, $opt, $ids, $recursif) {
-
-    $id_groupe = $opt['contexte']['id_groupe'];
-
-    if (!$id_groupe) {
-		// on tente de le trouver dans la table de l'objet
-		$table = table_objet_sql($objet);
-		$id_table = id_table_objet($table);
-		$trouver_table = charger_fonction('trouver_table', 'base');
-		$desc = $trouver_table($table);
-		if (isset($desc['field']['id_groupe'])) {
-			$id_groupe = sql_getfetsel("id_groupe", $table, "$id_table=".sql_quote($id_objet));
-		}
-    }
-
-	if (!$id_groupe) {
-		// on essaie aussi dans le contexte d'appel de la page
-		$id_groupe = _request('id_groupe');
+	list($id_groupe, $ok) = _restreindre_extras_objet_sur_cible($objet, $id_objet, $opt, $ids, 'id_groupe');
+	if ($ok) {
+		return true;
 	}
-
-	if (!$id_groupe) {
-		return false;
-	}
-
-    if (in_array($id_groupe, $ids)) {
-        return true;
-    }
 
 	// on teste si l'objet est dans un sous groupe de celui mentionne...
 	// sauf qu'il n'existe pas encore de groupe avec id_parent :) - sauf avec plugin
@@ -242,4 +273,5 @@ function inc_restreindre_extras_objet_sur_groupemot_dist($objet, $id_objet, $opt
 		  
     return false;
 }
+
 ?>
