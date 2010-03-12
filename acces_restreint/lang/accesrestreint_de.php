@@ -25,9 +25,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'descriptif' => 'Beschreibung',
 
 	// I
-	'icone_menu_config' => 'Zugangskontrolle',
+	'icone_menu_config' => 'Beschr&auml;nkter Zugang',
 	'icone_supprimer_zone' => 'Bereich l&ouml;schen',
-	'info_acces_restreint' => 'Zugangskontrolle: Diese Seite ist passwortgesch&uuml;tzt. Bitte geben sie ihren Benutzernamen und Ihr Passwort ein.',
+	'info_acces_restreint' => 'L\'acc&egrave;s &agrave; cette page est restreint. Identifiez vous pour y acc&eacute;der', # NEW
 	'info_ajouter_auteur' => 'Autor hinzuf&uuml;gen',
 	'info_ajouter_auteurs' => 'Alle Autoren hinzuf&uuml;gen',
 	'info_ajouter_zones' => 'Alle Bereichen hinzuf&uuml;gen',
@@ -35,7 +35,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucun_auteur' => 'Kein Autor f&uuml;r diesen Bereich',
 	'info_aucune_zone' => 'Kein Bereich',
 	'info_auteurs_lies_zone' => 'Autoren mit Zugang zu diesem Bereich',
-	'info_page' => 'Hier k&ouml;nnen Sie die Bereiche mit Zugangskontrolle verwalten.',
+	'info_page' => 'Hier k&ouml;nnen Sie die zugangsbeschr&auml;nkten Bereiche Ihrer Webseite verwalten.',
 	'info_retirer_auteurs' => 'ALle Autoren entfernen',
 	'info_retirer_zone' => 'Bereich l&ouml;schen',
 	'info_retirer_zones' => 'Alle Bereiche l&ouml;schen',
@@ -60,8 +60,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre' => 'Titel',
 	'titre_ajouter_zone' => 'zum Bereich zuf&uuml;gen',
 	'titre_cadre_modifier_zone' => 'Bereich &auml;ndern',
-	'titre_table' => 'Alle Bereiche mit Zugangskontrolle',
-	'titre_zones_acces' => 'Bereiche mit Zugangskontrolle',
+	'titre_table' => 'Alle zugangsbeschr&auml;nkten Bereiche',
+	'titre_zones_acces' => 'Bereiche mit Zugangsbeschr&auml;nkung',
 	'toutes' => 'Alle',
 
 	// V
@@ -69,8 +69,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// Z
 	'zone_numero' => 'BEREICH NUMMER:',
-	'zone_restreinte_espace_prive' => 'Zugang im Redaktionsbereich kontrollieren',
-	'zone_restreinte_publique' => 'Zugang auf der &ouml;ffentlichen Webseite kontrollieren'
+	'zone_restreinte_espace_prive' => 'Zugang im Redaktionsbereich beschr&auml;nken',
+	'zone_restreinte_publique' => 'Zugang auf der &ouml;ffentlichen Webseite beschr&auml;nken'
 );
 
 ?>
