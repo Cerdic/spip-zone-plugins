@@ -40,7 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'il_faut_myisam' => 'MyISAM is required',
 	'incoherence_charset' => 'There is an inconsistency between the character set of your site and that of the database. This may lead to bad results being given for searches which contain accented letters:',
 	'index_regenere' => 'table index regenerated',
-	'index_reinitialise' => 'Les documents en erreur ont &#233;t&#233; r&#233;initialis&#233;s', # NEW
+	'index_reinitialise' => 'The documents showing an error have been reinitialised',
 	'index_supprime' => 'index deleted',
 
 	// L
@@ -58,7 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// R
 	'regenerer_tous' => 'Regenerate all FULLTEXT indexes',
-	'reinitialise_index_doc' => 'R&#233;initialiser l\'indexation des documents en erreur', # NEW
+	'reinitialise_index_doc' => 'Reinitialise the indexation of documents showing an error',
 	'reserve_webmestres' => 'Only webmasters can use this page',
 	'retourne' => 'Returns texts containing',
 
@@ -71,7 +71,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'table_convertie' => 'table converted to MyISAM',
 	'table_format' => 'This table\'s format is',
 	'table_non_reconnue' => 'unrecognised table',
-	'textes_premier' => 'but presents first the texts which contain',
+	'textes_premier' => 'but shows first the texts which contain',
 
 	// U
 	'utiliser_operateurs_logiques' => 'The search uses standard logical operators.'
