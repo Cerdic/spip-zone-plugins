@@ -38,6 +38,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'retour_aucun_traitement' => 'Votre r&eacute;ponse a bien &eacute;t&eacute; envoy&eacute;e, mais aucun traitement n\'a &eacute;t&eacute; d&eacute;fini pour ce formulaire. Il ne fait donc rien. :)',
 
+'traitements_champ_aucun' => 'Aucun',
+
 'voir_numero' => 'Formulaire num&eacute;ro :'
 );
 

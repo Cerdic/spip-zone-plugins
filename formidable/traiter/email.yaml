@@ -6,28 +6,29 @@ options:
     saisie: 'champ'
     options:
       nom: 'champ_destinataires'
-      label: 'Champ des destinataires'
-      explication: "L'envoi par courriel nécessite un champ \"destinataire\" qui indiquera à qui sera envoyé le résultat du formulaire."
+      label: 'Destinataires'
+      explication: "Choisissez le champ qui correspondra aux destinataires du message."
       obligatoire: 'oui'
       env: true
   -
     saisie: 'champ'
     options:
       nom: 'champ_courriel'
-      label: "Champ qui contiendra le courriel de l'envoyeur"
+      label: "Courriel de l'envoyeur"
+      explication: "Choisissez le champ qui contiendra le courriel de l'envoyeur."
       obligatoire: 'oui'
       env: true
   -
     saisie: 'champ'
     options:
       nom: 'champ_nom'
-      label: "Champ qui contiendra le nom de l'envoyeur"
+      label: "Nom de l'envoyeur"
       explication: "Ce champ n'est pas obligatoire. S'il n'est pas présent, c'est le courriel qui sera utilisé."
       env: true
   -
     saisie: 'champ'
     options:
       nom: 'champ_sujet'
-      label: 'Champ qui contiendra le sujet du message'
+      label: 'Sujet du message'
       explication: "Ce champ n'est pas obligatoire. Le sujet sera construit automatiquement le cas échéant."
       env: true

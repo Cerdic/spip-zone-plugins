@@ -18,18 +18,21 @@ function formulaires_editer_formulaire_traitements_charger($id_formulaire){
 		if (!is_array($traitements)) $traitements = array();
 		if (!is_array($contenu)) $contenu = array();
 		$contexte['traitements'] = $traitements;
+		$contexte['traitements_choisis'] = array_keys($traitements);
 		$contexte['formulaire'] = _T_ou_typo($contenu, 'multi');
 		$contexte['id'] = $id_formulaire;
 		
 		$traitements_disponibles = traitements_lister_disponibles();
 		$configurer_traitements = array();
-		foreach ($traitements_disponibles as $type_traitements => $traitement){
+		foreach ($traitements_disponibles as $type_traitement => $traitement){
 			$configurer_traitements[] = array(
-				'saisie' => 'case',
+				'saisie' => 'checkbox',
 				'options' => array(
-					'nom' => 'traitements_choisis[]',
+					'nom' => 'traitements_choisis',
 					'label' => $traitement['titre'],
-					'label_case' => $traitement['description']
+					'datas' => array(
+						$type_traitement => $traitement['description']
+					)
 				)
 			);
 			$configurer_traitements[] = array(
@@ -39,7 +42,7 @@ function formulaires_editer_formulaire_traitements_charger($id_formulaire){
 					'label' => $traitement['titre'],
 					'li_class' => "$type_traitement options_traiter"
 				),
-				'saisies' => $traitement['options']
+				'saisies' => saisies_transformer_noms($traitement['options'], '/^.*$/', "traitements[$type_traitement][\\0]")
 			);
 		}
 		$contexte['_configurer_traitements'] = $configurer_traitements;
@@ -49,13 +52,27 @@ function formulaires_editer_formulaire_traitements_charger($id_formulaire){
 }
 
 function formulaires_editer_formulaire_traitements_verifier($id_formulaire){
+	include_spip('inc/saisies');
 	$erreurs = array();
+	$traitements_disponibles = traitements_lister_disponibles();
+	
+	// On regarde quels traitements sont demandés
+	$traitements_choisis = _request('traitements_choisis');
+	
+	if (is_array($traitements_choisis))
+		foreach ($traitements_choisis as $type_traitement){
+			var_dump($type_traitement);
+			$erreurs = array_merge($erreurs, saisies_verifier(saisies_transformer_noms($traitements_disponibles[$type_traitement]['options'], '/^.*$/', "traitements[$type_traitement][\\0]")));
+		}
 	
 	return $erreurs;
 }
 
 function formulaires_editer_formulaire_traitements_traiter($id_formulaire){
 	$retours = array();
+	
+	// On reste ici quand c'est fini
+	$retours['editable'] = true;
 	
 	return $retours;
 }
