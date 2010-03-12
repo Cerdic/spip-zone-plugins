@@ -218,7 +218,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'prenom' => 'Pr&eacute;nom',
 	'probleme_email' => 'Probl&egrave;me de mail&nbsp;: l\'email d\'activation ne peut pas &ecirc;tre envoy&eacute;.',
 	'profession' => 'Profession',
-	'profil_droits_insuffisants' => 'Desol&eacute; tu n\'as pas le droit de modifier cet auteur<br/>', # MODIF
+	'profil_droits_insuffisants' => 'D&eacute;sol&eacute; tu n\'as pas le droit de modifier cet auteur<br />',
 	'profil_modifie_ok' => 'Les modifications de ton profil ont bien &eacute;t&eacute; prises en compte.',
 	'publication' => 'Publication',
 
@@ -262,7 +262,7 @@ et tu viens choisir ton mot de passe.
 Merci de ta confiance
 
 L\'&eacute;quipe de @nom_site@
-@url_site@', # MODIF
+@url_site@',
 	'texte_email_inscription' => 'tu es sur le point de confirmer ton inscription au site @nom_site@.
 
 Cliquer le lien ci-dessous pour activer ton compte et choisir ton mot de passe.
