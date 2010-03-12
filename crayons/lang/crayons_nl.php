@@ -8,6 +8,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
+	'activation_barre_impossible' => 'Un autre plugin interdit l\'usage du porte-plume dans l\'espace public.', # NEW
 	'annuler' => 'Annuleren',
 
 	// D

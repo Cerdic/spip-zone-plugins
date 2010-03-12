@@ -8,6 +8,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
+	'activation_barre_impossible' => 'Un autre plugin interdit l\'usage du porte-plume dans l\'espace public.', # NEW
 	'annuler' => '&#21462;&#28040;', # MODIF
 
 	// D
@@ -20,9 +21,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_tout' => '&#32534;&#36753;&#25152;&#26377;&#20869;&#23481;', # MODIF
 	'effets' => 'Effets', # NEW
 	'explication_exec_autorise' => 'Pages autoris&eacute;es &agrave; la modification
-		(?exec=...) : (, pour s&eacute;parer les exec).', # NEW
+		(?exec=...) : (, pour s&eacute;parer les exec).',
 	'explication_reduire_logo' => 'R&#233;duire le logo s\'il d&#233;passe
-		la taille maximale indiquee en pixels. Exemple : 100. (0 = jamais)', # NEW
+		la taille maximale indiquee en pixels. Exemple : 100. (0 = jamais)',
 
 	// L
 	'label_activer_barre_typo' => 'Activer la barre typographique dans les crayons ?', # NEW
@@ -38,7 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_msg_no_change' => 'Si pas de changement', # NEW
 	'label_reduire_logo' => 'R&eacute;duire les logos', # NEW
 	'label_yellow_fade' => 'Fade', # NEW
-	'legend_editer_prive' => '&Eacute;diter l\'espace priv&eacute; (exp&eacute;rimental)', # NEW
+	'legend_editer_prive' => '&Eacute;diter l\'espace priv&eacute; (exp&eacute;rimental)',
 
 	// M
 	'messages' => 'Messages', # NEW
