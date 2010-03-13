@@ -168,8 +168,10 @@ function tb_url_test($testfun, $lien=false){
 	if (!$testfun) return "";
 	if (preg_match(',\.php$,', $testfun))
 		$url = $testfun .'?mode=test_general';
-	else
-		$url = "tests/squel.php?test=$test&amp;var_mode=recalcul";
+	else{
+		$testfun = substr($testfun,strlen(_DIR_RACINE."tests/"));
+		$url = _DIR_RACINE."tests/squel.php?test=$testfun&amp;var_mode=recalcul";
+	}
 	if (!$lien)
 		return $url;
 	return "<a href='$url'>$lien</a>";
