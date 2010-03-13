@@ -171,6 +171,16 @@ function autoriser_variable_configurer_dist($faire, $type, $id, $qui, $opt) {
 		&& autoriser('configurer', 'variable_'.$opt['nom'], $id, $qui, $opt['outil']);
 }
 
+if(!defined('_SPIP20100')) {
+	// Bug SPIP 2.0.x
+	function autoriser_cs_configurer($faire, $type, $id, $qui, $opt) {
+		return autoriser_cs_configurer_dist($faire, $type, $id, $qui, $opt); }
+	function autoriser_outil_configurer($faire, $type, $id, $qui, $opt) {
+		return autoriser_outil_configurer_dist($faire, $type, $id, $qui, $opt); }
+	function autoriser_variable_configurer($faire, $type, $id, $qui, $opt) {
+		return autoriser_variable_configurer_dist($faire, $type, $id, $qui, $opt); }
+}
+
 // TODO : revoir eventuellement tout ca avec la syntaxe de <necessite>
 function cs_version_erreur(&$outil) {
 	return (isset($outil['version-min']) && version_compare($GLOBALS['spip_version_code'], $outil['version-min'], '<'))
