@@ -12,4 +12,6 @@
   		<nom>insert_head</nom>
   		<inclure>diapos_pipelines.php</inclure>
   	</pipeline>
+  	<necessite id="saisies" version="[1.6.1;]" />
+	<necessite id="cfg" version="[1.10.4;]" />
 </plugin>
