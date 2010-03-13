@@ -3,8 +3,8 @@
 // Sécurité
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function traiter_email_dist($contenu, $options, $retours){
-	$saisies = formidable_chercher_saisies($contenu);
+function traiter_email_dist($saisies, $options, $retours){
+	$saisies = saisies_lister_par_nom($saisies);
 	
 	// On récupère les destinataires
 	$destinataires = _request($options['champ_destinataires']);
@@ -39,14 +39,14 @@ function traiter_email_dist($contenu, $options, $retours){
 			
 			// On ne prend pas en compte le champ du destinataire
 			if ($options_saisie['nom'] != $options['champ_destinataires']){
-				$label = $options_saisie['label'] ? saisies_transformer_langue($options_saisie['label'])." :\n" : '';
+				$label = $options_saisie['label'] ? _T_ou_typo($options_saisie['label'])." :\n" : '';
 				$texte .= $label;
 				$texte .= _request($options_saisie['nom'])."\n\n";
 			}
 		}
 		
 		// horodatons
-		$horodatage = date("d / m / y à H:i:s");
+		$horodatage = date("d/m/y à H:i:s");
 		$horodatage = "\n\n"._T('contact:horodatage', array('horodatage'=>$horodatage))."\n\n";
 		$texte = $horodatage.$texte;
 		
