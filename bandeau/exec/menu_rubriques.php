@@ -31,6 +31,7 @@ function exec_menu_rubriques_dist() {
 		http_status(304);
 	} else {
 		$ret = menu_rubriques();
+		include_spip('inc/actions');
 		ajax_retour($ret);
 	}
 }
