@@ -1,10 +1,12 @@
 <BOUCLE_DIAPOS(ARTICLES){id_article=#ENV{id}}>
 	<B_IMAGE>
-		<div class="cadre">
-    			<div class="fenetre">
-				<div class="cadre_image">
+		<div class="cadrepa">
+    			<div class="fenetrepa">
+				<div class="cadre_imagepa">
 					<BOUCLE_IMAGE(DOCUMENTS){id_article}{extension IN png,jpg,gif}{mode=image}{par num titre}>
-						<a href="#"  rel="#TITRE"><img src="#URL_DOCUMENT" alt="" /></a>
+						<a href="#"  rel="#TITRE">
+						[(#FICHIER|image_reduire{[(#CONFIG{diapos/largeur_imagespa}|sinon{600px})],[(#CONFIG{diapos/hauteur_imagespa}|sinon{480px})]})]
+						</a>
 					</BOUCLE_IMAGE>      
 				</div>
     			</div>

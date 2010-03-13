@@ -1,0 +1,20 @@
+<BOUCLE_DIAPOS(ARTICLES){id_article=#ENV{id}}>
+	<B_IMAGE>
+		<div class="cadrepo">
+    			<div class="fenetrepo">
+				<div class="cadre_imagepo">
+					<BOUCLE_IMAGE(DOCUMENTS){id_article}{titre==^[0-9]}{extension IN png,jpg,gif}{mode=image}{par num titre}>
+						<a href="#"  rel="#TITRE">
+						[(#FICHIER|image_reduire{[(#CONFIG{diapos/largeur_imagespo}|sinon{600px})],[(#CONFIG{diapos/hauteur_imagespo}|sinon{480px})]})]
+						</a>
+					</BOUCLE_IMAGE>      
+				</div>
+    			</div>
+    			<div class="choix_image">
+		    		<BOUCLE_NUMERO_IMAGE(DOCUMENTS){id_article}{titre==^[0-9]}{extension IN png,jpg,gif}{mode=image}{par num titre}>
+					<a href="#" rel="#TITRE">#TITRE</a>
+				</BOUCLE_NUMERO_IMAGE>       
+			</div>
+		</div>
+	</B_IMAGE>
+</BOUCLE_DIAPOS>

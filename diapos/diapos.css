@@ -1,7 +1,0 @@
-.cadre {float:left; clear:both; position:relative; z-index:1900; border-bottom: 0.5em solid #FB5; margin: 0 0 1em;}
-.fenetre {height:425px; width:660px; overflow:hidden; position:relative;}
-.cadre_image {position:absolute; top:0; left:0;}
-.cadre_image img {float:left;}
-.choix_image {position:absolute; bottom:0; right:0; height:20px; z-index:2000; text-align:center; line-height:20px; background:#666; display:none;}  .choix_image a {display:inline-block; float:left; width:20px; height:20px; text-decoration:none; color:#fff;}
-.choix_image a.active{width:20px; height:20px; font-weight:bold; background:#FB5; border:1pxsolid #222; color:#222;}
-.choix_image a:hover{font-weight:bold;}
