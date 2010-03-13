@@ -13,9 +13,9 @@ function formulaires_editer_formulaire_champs_charger($id_formulaire){
 		and $formulaire = sql_fetsel('*', 'spip_formulaires', 'id_formulaire = '.$id_formulaire)
 		and autoriser('editer', 'formulaire', $id_formulaire)
 	){
-		$contenu = unserialize($formulaire['contenu']);
-		if (!is_array($contenu)) $contenu = array();
-		$contexte['_contenu'] = $contenu;
+		$saisies = unserialize($formulaire['saisies']);
+		if (!is_array($saisies)) $saisies = array();
+		$contexte['_saisies'] = $saisies;
 		$contexte['id'] = $id_formulaire;
 	}
 	
@@ -33,14 +33,14 @@ function formulaires_editer_formulaire_champs_traiter($id_formulaire){
 	$id_formulaire = intval($id_formulaire);
 	
 	// On récupère le formulaire dans la session
-	$contenu = session_get("constructeur_formulaire_formidable_$id_formulaire");
-	$contenu = serialize($contenu);
+	$saisies = session_get("constructeur_formulaire_formidable_$id_formulaire");
+	$saisies = serialize($saisies);
 	
 	// On l'envoie dans la table
 	$ok = sql_updateq(
 		'spip_formulaires',
 		array(
-			'contenu' => $contenu
+			'saisies' => $saisies
 		),
 		'id_formulaire = '.$id_formulaire
 	);

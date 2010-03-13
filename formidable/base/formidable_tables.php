@@ -27,7 +27,7 @@ function formidable_declarer_tables_principales($tables_principales){
 		"titre" => "text NOT NULL",
 		"descriptif" => "text",
 		"message_ok" => "varchar(255) NOT NULL",
-		"contenu" => "text NOT NULL",
+		"saisies" => "text NOT NULL",
 		"traitements" => "text NOT NULL",
 		"public" => "enum('non', 'oui') DEFAULT 'non' NOT NULL",
 		"statut" => "varchar(10) NOT NULL",

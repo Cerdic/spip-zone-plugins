@@ -14,12 +14,12 @@ function formulaires_editer_formulaire_traitements_charger($id_formulaire){
 		and autoriser('editer', 'formulaire', $id_formulaire)
 	){
 		$traitements = unserialize($formulaire['traitements']);
-		$contenu = unserialize($formulaire['contenu']);
+		$saisies = unserialize($formulaire['saisies']);
 		if (!is_array($traitements)) $traitements = array();
-		if (!is_array($contenu)) $contenu = array();
+		if (!is_array($saisies)) $saisies = array();
 		$contexte['traitements'] = $traitements;
 		$contexte['traitements_choisis'] = array_keys($traitements);
-		$contexte['formulaire'] = _T_ou_typo($contenu, 'multi');
+		$contexte['formulaire'] = _T_ou_typo($saisies, 'multi');
 		$contexte['id'] = $id_formulaire;
 		
 		$traitements_disponibles = traitements_lister_disponibles();
