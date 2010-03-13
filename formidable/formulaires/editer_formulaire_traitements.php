@@ -70,6 +70,24 @@ function formulaires_editer_formulaire_traitements_verifier($id_formulaire){
 
 function formulaires_editer_formulaire_traitements_traiter($id_formulaire){
 	$retours = array();
+	$id_formulaire = intval($id_formulaire);
+	
+	// On récupère tout le tableau des traitements
+	$traitements = _request('traitements');
+	// On ne garde que les morceaux qui correspondent aux traitements choisis
+	$traitements_choisis = _request('traitements_choisis');
+	if (!$traitements_choisis) $traitements_choisis = array();
+	$traitements_choisis = array_flip($traitements_choisis);
+	$traitements = array_intersect_key($traitements, $traitements_choisis);
+	
+	// Et on l'enregistre tel quel
+	$ok = sql_updateq(
+		'spip_formulaires',
+		array(
+			'traitements' => serialize($traitements)
+		),
+		'id_formulaire = '.$id_formulaire
+	);
 	
 	// On reste ici quand c'est fini
 	$retours['editable'] = true;
