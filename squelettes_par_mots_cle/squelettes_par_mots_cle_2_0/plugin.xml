@@ -65,7 +65,7 @@ http://listes.rezo.net/archives/spip-core/2005-10/msg00002.html -->
 		<nom>styliser</nom>
 		<inclure>public/SquelettesMots_styliser.php</inclure>
 	</pipeline>
-	<onglet id='config_squelettesmots' parent='configuration'>
+	<onglet id='config_chercher_squelettes_mots' parent='configuration'>
 		<icone>spip_death.png</icone>
 		<titre>squelettesmots:titre_onglet</titre>
 	</onglet>
