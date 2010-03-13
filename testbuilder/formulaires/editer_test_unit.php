@@ -101,16 +101,19 @@ function formulaires_editer_test_unit_traiter_dist($filename,$funcname){
 	if (_request('enregistrer')){
 		$args = _request('args');
 		$res = _request('resultat');
-		array_unshift($args,$res?$res:'??TBD??');
+		array_unshift($args,$res?$res:"'??TBD??'");
 		$essai = eval("return array(".implode(', ',$args).");");
-		if (!is_null($m=_request('modif_essai'))){
-			$essais[$m] = $essai;
-			set_request('modif_essai');
-		} else
-			$essais[] = $essai;
-		tb_test_essais($funcname,$filetest,$essais);
-		if (!$res)
-			tb_refresh_test($filename,$funcname,$filetest);
+
+		if ($essai){
+			if (!is_null($m=_request('modif_essai'))){
+				$essais[$m] = $essai;
+				set_request('modif_essai');
+			} else
+				$essais[] = $essai;
+			tb_test_essais($funcname,$filetest,$essais);
+			if (!$res)
+				tb_refresh_test($filename,$funcname,$filetest);
+		}
 		set_request('args');
 		set_request('resultat');
 		$message_ok = _T('tb:ok_test_ajoute');

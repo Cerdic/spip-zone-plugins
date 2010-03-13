@@ -151,8 +151,8 @@ function tb_hastest($funcname, $force=false){
 		$tests = tb_liste_tests();
 	if (isset($tests["$funcname.php"]))
 		return $tests["$funcname.php"];
-	if (isset($tests["$funcname.html"]))
-		return $tests["$funcname.html"];
+	/*if (isset($tests["$funcname.html"]))
+		return $tests["$funcname.html"];*/
 
 	return '';
 }
