@@ -118,8 +118,8 @@ function couteau_suisse_insert_head($flux_){
 function couteau_suisse_affichage_final($flux){
 	eval_metas_pipelines($flux, 'affichage_final');
 	// nettoyage des separateurs et differentes sentinelles
-	return strpos($texte, 'csfoo ')===false)?$flux
-		:preg_replace(',<span class=["\']csfoo \w+["\']></span>,', '', $flux);
+	return strpos($texte, '"csfoo ')===false?$flux
+		:preg_replace(',<span class="csfoo \w+"></span>,', '', $flux);
 }
 
 /********

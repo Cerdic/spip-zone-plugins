@@ -144,9 +144,9 @@ function cs_block($texte) {
 }
 
 // balises de tracage, directement compatibles regexpr
-// le separateur <span class='csfoo xxxx'></span> est supprime en fin de calcul de page
-@define('_CS_HTMLA', '<span class=\'csfoo htmla\'></span>');
-@define('_CS_HTMLB', '<span class=\'csfoo htmlb\'></span>');
+// le separateur <span class="csfoo xxxx"></span> est supprime en fin de calcul de page
+@define('_CS_HTMLA', '<span class="csfoo htmla"></span>');
+@define('_CS_HTMLB', '<span class="csfoo htmlb"></span>');
 
 // fonction de tracage des balises <html></html>
 // SPIP echappe ces balises dans les pipelines. Les traitements de balises ne les voient donc jamais...
