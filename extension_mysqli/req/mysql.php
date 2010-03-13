@@ -19,13 +19,19 @@ if (!extension_loaded('mysqli')) {
 define('_DEFAULT_DB', 'spip');
 
 /**
- * undocumented function
- *
- * @return void
- * @author Gilles Vincent
- **/
-// fonction pour changer la connexion aux serveurs MySQL en gardant les paramètres existant
-// Cette fonction sert de constructeur de l'instance de connexion MySQLi
+ * fonction pour changer la connexion aux serveurs MySQL en gardant les paramètres existant
+ * Cette fonction sert de constructeur de l'instance de connexion MySQLi
+ * 
+ * @staticvar array $last_connect mémorise les paramètres de connexion
+ * @param string $host serveur MySQL
+ * @param string $port port
+ * @param string $login login MySQL
+ * @param string $pass mot de passe
+ * @param string $db base utilisée
+ * @param string $prefixe préfixe utilisé
+ * @param bool $reconnect indique si on utilise $last_connect pour se connecter
+ * @return array 
+ */
 function req_mysql_dist($host, $port, $login, $pass, $db='', $prefixe='', $reconnect=FALSE) {
 	static $last_connect = array(); // Pour se reconnecter si neccessaire
 
@@ -79,7 +85,12 @@ function req_mysql_dist($host, $port, $login, $pass, $db='', $prefixe='', $recon
 
 }
 
-// On redirige toutes les fonctions mysql vers la version mysqli
+/**
+ * Tableau de correspondance des appels sql / API mysqli
+ *
+ * @global array $GLOBALS['spip_mysql_functions_1']
+ * @name $spip_mysql_functions_1
+ */
 $GLOBALS['spip_mysql_functions_1'] = array(
 	'alter' => 'spip_mysqli_alter',
 	'count' => 'spip_mysqli_count',
@@ -132,8 +143,16 @@ $GLOBALS['spip_mysql_functions_1'] = array(
 	);
 
 
-// portage de http://doc.spip.org/@spip_mysql_set_charset
-// Appelee a chaque connexion, cette requete fixe le charset utilise pour les futures requetes
+/**
+ * Appelee a chaque connexion, cette requete fixe le charset utilise pour les futures requetes
+ *
+ * @link http://doc.spip.org/@spip_mysql_set_charset
+ * @param string $charset Le charset à utiliser
+ * @param string $serveur Identifiant du serveur concerné
+ * @param bool $requeter Inutilisé
+ * @param bool $requeter Inutilisé
+ * @return bool TRUE si l'affectation a réussi
+ */
 function spip_mysqli_set_charset($charset, $serveur='',$requeter=true,$requeter=true){
 	$connexion = &$GLOBALS['connexions'][$serveur ? $serveur : 0]['link'];
 	$ok = FALSE;
@@ -146,18 +165,31 @@ function spip_mysqli_set_charset($charset, $serveur='',$requeter=true,$requeter=
 	return $ok;
 }
 
-// portage de http://doc.spip.org/@spip_mysql_get_charset
+/**
+ * Récupère les charsets disponibles
+ *
+ * @link http://doc.spip.org/@spip_mysql_get_charset
+ * @param array $charset Pattern pour restreindre les résultats
+ * @param string $serveur Identifiant du serveur
+ * @param bool $requeter inutilisé
+ * @return object mysqli
+ */
 function spip_mysqli_get_charset($charset=array(), $serveur='',$requeter=true){
 	$connexion = &$GLOBALS['connexions'][$serveur ? $serveur : 0];
 	$connexion['last'] = $c = "SHOW CHARACTER SET"
 	. (!$charset ? '' : (" LIKE "._q($charset['charset'])));
-	return spip_mysql_fetch(mysql_query($c), NULL, $serveur);
-	//mysqli_get_charset($connexion);
+	return spip_mysqli_fetch(mysql_query($c), NULL, $serveur);
 }
 
-// Fonction de requete generale, munie d'une trace a la demande
-
-// portage de http://doc.spip.org/@spip_mysql_query
+/**
+ * Fonction de requete generale, munie d'une trace a la demande
+ *
+ * @link http://doc.spip.org/@spip_mysql_query
+ * @param string $query La requette MySQL
+ * @param string $serveur Identifiant du connecteur à utiliser
+ * @param bool $requeter Inutilisé
+ * @return mysqli_result
+ */
 function spip_mysqli_query($query, $serveur='',$requeter=true) {
 
 	$connexion = &$GLOBALS['connexions'][$serveur ? $serveur : 0];
@@ -181,18 +213,42 @@ function spip_mysqli_query($query, $serveur='',$requeter=true) {
 	return $t ? trace_query_end($query, $t, $r, $serveur) : $r;
 }
 
-// portage de http://doc.spip.org/@spip_mysql_alter
+/**
+ * Modifie la structure d'une table ou base
+ *
+ * @link http://doc.spip.org/@spip_mysql_alter
+ * @param string $query La requette MySQL
+ * @param string $serveur Identifiant du connecteur à utiliser
+ * @param bool $requeter Inutilisé
+ * @return mysqli_result
+ */
 function spip_mysqli_alter($query, $serveur='',$requeter=true){
 	return spip_mysqli_query("ALTER ".$query, $serveur, $requeter); # i.e. que PG se debrouille
 }
 
-// portage de http://doc.spip.org/@spip_mysql_optimize
+/**
+ * Lance la défragmentation d'une table
+ *
+ * @link http://doc.spip.org/@spip_mysql_optimize
+ * @param string $table La table à défragmenter
+ * @param string $serveur Identifiant du connecteur à utiliser
+ * @param bool $requeter Inutilisé
+ * @return bool
+ */
 function spip_mysqli_optimize($table, $serveur='',$requeter=true){
 	spip_mysqli_query("OPTIMIZE TABLE ". $table);
 	return true;
 }
 
-// portage de http://doc.spip.org/@spip_mysql_explain
+/**
+ * Obtenir des informations sur les SELECT
+ *
+ * @link http://doc.spip.org/@spip_mysql_explain
+ * @param string $query La requette MySQL
+ * @param string $serveur Identifiant du connecteur à utiliser
+ * @param bool $requeter Inutilisé
+ * @return array
+ */
 function spip_mysqli_explain($query, $serveur='',$requeter=true){
 	if (strpos(ltrim($query), 'SELECT') !== 0) return array();
 	$connexion = &$GLOBALS['connexions'][$serveur ? $serveur : 0];
@@ -204,12 +260,24 @@ function spip_mysqli_explain($query, $serveur='',$requeter=true){
 	$r = $link->query($query);
 	return spip_mysqli_fetch($r, NULL, $serveur);
 }
-// fonction  instance de sql_select, voir ses specs dans abstract.php
-// traite_mysqli_query pourrait y etre fait d'avance ce serait moins cher
-// Les \n et \t sont utiles au debusqueur.
 
-
-// portage de http://doc.spip.org/@spip_mysql_select
+/**
+ * fonction  instance de sql_select, voir ses specs dans abstract.php
+ * traite_mysqli_query pourrait y etre fait d'avance ce serait moins cher
+ * Les \n et \t sont utiles au debusqueur.
+ *
+ * @link http://doc.spip.org/@spip_mysql_select
+ * @param string|array $select liste des champs à récupérer
+ * @param string|array $from Liste des tables
+ * @param string|array $where Conditions que les lignes sélectionnées doivent satisfaire
+ * @param string|array $groupby Colonnes qui déterminent le tri des lignes
+ * @param string|array $orderby Ordre des résultats
+ * @param string|array $limit Nombre de résultats + Offset
+ * @param string $having Peut servir de fonction d'aggrégation
+ * @param string $serveur Identifiant du connecteur à utiliser
+ * @param bool $requeter Inutilisé
+ * @return mysqli_result
+ */
 function spip_mysqli_select($select, $from, $where='',
 			   $groupby='', $orderby='', $limit='', $having='',
 			   $serveur='',$requeter=true) {
@@ -231,18 +299,29 @@ function spip_mysqli_select($select, $from, $where='',
 	return $r ? $r : $query;
 }
 
-// 0+x avec un champ x commencant par des chiffres est converti par MySQL
-// en le nombre qui commence x.
-// Pas portable malheureusement, on laisse pour le moment.
-
-// portage de http://doc.spip.org/@spip_mysql_order
+/**
+ * Définir l'ordre des résultats
+ * 0+x avec un champ x commencant par des chiffres est converti par MySQL
+ * en le nombre qui commence x.
+ * Pas portable malheureusement, on laisse pour le moment.
+ *
+ * @link http://doc.spip.org/@spip_mysql_order
+ * @param string|array $orderby Le ou les colonnes
+ * @return string
+ */
 function spip_mysqli_order($orderby)
 {
 	return (is_array($orderby)) ? join(", ", $orderby) :  $orderby;
 }
 
 
-// portage de http://doc.spip.org/@calculer_mysqli_where
+/**
+ * Construction d'une expression_where
+ *
+ * @link http://doc.spip.org/@calculer_mysqli_where
+ * @param array|string $v arbre abstrait des conditions
+ * @return string
+ */
 function calculer_mysqli_where($v)
 {
 	if (!is_array($v))
@@ -264,7 +343,15 @@ function calculer_mysqli_where($v)
 	}
 }
 
-// portage de http://doc.spip.org/@calculer_mysql_expression
+/**
+ * Calcule un bloc d'expression MySQL
+ *
+ * @link http://doc.spip.org/@calculer_mysql_expression
+ * @param string $expression Expression déjà évaluée
+ * @param array|string $v tableau des éléments à rassembler
+ * @param string $join séparateur servant à rassembler les éléments de $v
+ * @return string
+ */
 function calculer_mysqli_expression($expression, $v, $join = 'AND'){
 	if (empty($v))
 		return '';
@@ -281,7 +368,13 @@ function calculer_mysqli_expression($expression, $v, $join = 'AND'){
 	}
 }
 
-// portage de http://doc.spip.org/@spip_mysql_select_as
+/**
+ * Création de la liste des éléments à sélectionner dans la requette SQL
+ *
+ * @link http://doc.spip.org/@spip_mysql_select_as
+ * @param array $args Liste des éléments
+ * @return string
+ */
 function spip_mysqli_select_as($args)
 {
 	$res = '';
@@ -305,13 +398,21 @@ function spip_mysqli_select_as($args)
 	return substr($res,2);
 }
 
-//
-// Changer les noms des tables ($table_prefix)
-// Quand tous les appels SQL seront abstraits on pourra l'ameliorer
-
+/**
+ * Changer les noms des tables ($table_prefix)
+ * Quand tous les appels SQL seront abstraits on pourra l'ameliorer
+ */
 define('_SQL_PREFIXE_TABLE', '/([,\s])spip_/S');
 
-// portage de http://doc.spip.org/@traite_mysql_query
+/**
+ * Prépare une requette incomplète
+ *
+ * @link http://doc.spip.org/@traite_mysql_query
+ * @param string $query La requette partielle
+ * @param string $db Le nom de la base
+ * @param string $prefixe prefixe des tables SPIP
+ * @return string
+ */
 function traite_mysqli_query($query, $db='', $prefixe='') {
 
 	if ($GLOBALS['mysqli_rappel_nom_base'] AND $db)
@@ -335,28 +436,51 @@ function traite_mysqli_query($query, $db='', $prefixe='') {
 	return $r;
 }
 
-// portage de http://doc.spip.org/@spip_mysql_selectdb
-function spip_mysqli_selectdb($db) {
-	return mysqli_select_db($db);
+/**
+ * Sélectionne une base de données par défaut pour les requêtes
+ *
+ * @link http://doc.spip.org/@spip_mysql_selectdb
+ * @param string $db Nom de la base
+ * @param string $serveur Identifiant du connecteur SPIP
+ * @param bool $requeter Inutilisé
+ * @return bool TRUE en cas de succès
+ */
+function spip_mysqli_selectdb($db, $serveur='',$requeter=true) {
+	$connexion = &$GLOBALS['connexions'][$serveur ? $serveur : 0]['link'];
+	return $connexion->select_db($db);
 }
 
-
-// Retourne les bases accessibles
-// Attention on n'a pas toujours les droits
-
-// portage de http://doc.spip.org/@spip_mysql_listdbs
+/**
+ * Retourne les bases accessibles
+ * Attention on n'a pas toujours les droits
+ *
+ * @link http://doc.spip.org/@spip_mysql_listdbs
+ * @param string $serveur Identifiant du connecteur SPIP
+ * @param bool $requeter Inutilisé
+ * @return <type>
+ */
 function spip_mysqli_listdbs($serveur='',$requeter=true) {
 	return spip_mysqli_query("show databases",$serveur,$requeter);
 }
 
-// Fonction de creation d'une table SQL nommee $nom
-// a partir de 2 tableaux PHP :
-// champs: champ => type
-// cles: type-de-cle => champ(s)
-// si $autoinc, c'est une auto-increment (i.e. serial) sur la Primary Key
-// Le nom des caches doit etre inferieur a 64 caracteres
-
-// portage de http://doc.spip.org/@spip_mysql_create
+/**
+ * Fonction de creation d'une table SQL nommee $nom
+ * a partir de 2 tableaux PHP :
+ * champs: champ => type
+ * cles: type-de-cle => champ(s)
+ * si $autoinc, c'est une auto-increment (i.e. serial) sur la Primary Key
+ * Le nom des caches doit etre inferieur a 64 caracteres
+ *
+ * @link http://doc.spip.org/@spip_mysql_create
+ * @param string $nom Table à créer
+ * @param array $champs Liste des champs
+ * @param array $cles Liste des clés
+ * @param bool $autoinc TRUE si auto-increment sur la clé primaire
+ * @param bool $temporary TRUE si Table temporaire
+ * @param string $serveur Identifiant du connecteur concernée
+ * @param bool $requeter Inutilisé
+ * @return <type>
+ */
 function spip_mysqli_create($nom, $champs, $cles, $autoinc=false, $temporary=false, $serveur='',$requeter=true) {
 
 	$query = ''; $keys = ''; $s = ''; $p='';
@@ -401,12 +525,28 @@ function spip_mysqli_create($nom, $champs, $cles, $autoinc=false, $temporary=fal
 	return spip_mysqli_query($q, $serveur);
 }
 
+/**
+ * Créer une base de données sur un connecteur SPIP
+ *
+ * @param string $nom Nom de la base
+ * @param string $serveur Identifiant du connecteur à utiliser
+ * @param bool $requeter Inutilisé
+ * @return bool TRUE si succès
+ */
 function spip_mysqli_create_base($nom, $serveur='',$requeter=true) {
   return spip_mysqli_query("CREATE DATABASE `$nom`", $serveur, $requeter);
 }
 
-// Fonction de creation d'une vue SQL nommee $nom
-// portage de http://doc.spip.org/@spip_mysql_create_view
+/**
+ * Fonction de creation d'une vue SQL nommee $nom
+ *
+ * @link http://doc.spip.org/@spip_mysql_create_view
+ * @param string $nom
+ * @param string $query_select
+ * @param string $serveur Identifiant du connecteur à utiliser
+ * @param bool $requeter Inutilisé
+ * @return bool
+ */
 function spip_mysqli_create_view($nom, $query_select, $serveur='',$requeter=true) {
 	if (!$query_select) return false;
 	// vue deja presente
@@ -420,36 +560,76 @@ function spip_mysqli_create_view($nom, $query_select, $serveur='',$requeter=true
 }
 
 
-// portage de http://doc.spip.org/@spip_mysql_drop_table
+/**
+ * Supprime une table MySQL
+ *
+ * @link http://doc.spip.org/@spip_mysql_drop_table
+ * @param string $table La table
+ * @param <type> $exist
+ * @param string $serveur Identifiant du connecteur à utiliser
+ * @param bool $requeter Inutilisé
+ * @return <type>
+ */
 function spip_mysqli_drop_table($table, $exist='', $serveur='',$requeter=true)
 {
 	if ($exist) $exist =" IF EXISTS";
 	return spip_mysqli_query("DROP TABLE$exist $table", $serveur, $requeter);
 }
 
-// supprime une vue 
-// portage de http://doc.spip.org/@spip_mysql_drop_view
+/**
+ * Supprime une vue
+ *
+ * @link http://doc.spip.org/@spip_mysql_drop_view
+ * @param <type> $view
+ * @param <type> $exist
+ * @param string $serveur Identifiant du connecteur à utiliser
+ * @param bool $requeter Inutilisé
+ * @return <type>
+ */
 function spip_mysqli_drop_view($view, $exist='', $serveur='',$requeter=true) {
 	if ($exist) $exist =" IF EXISTS";
 	return spip_mysqli_query("DROP VIEW$exist $view", $serveur, $requeter);
 }
 
-// portage de http://doc.spip.org/@spip_mysql_showbase
+/**
+ * Liste des tables selon un certain critère
+ *
+ * @link http://doc.spip.org/@spip_mysql_showbase
+ * @param string $match
+ * @param string $serveur Identifiant du connecteur à utiliser
+ * @param bool $requeter Inutilisé
+ * @return mixed
+ */
 function spip_mysqli_showbase($match, $serveur='',$requeter=true)
 {
 	return spip_mysqli_query("SHOW TABLES LIKE '$match'", $serveur, $requeter);
 }
 
-// portage de http://doc.spip.org/@spip_mysql_repair
+/**
+ * Tente la réparation d'une table
+ *
+ * @link http://doc.spip.org/@spip_mysql_repair
+ * @param string $table La table
+ * @param string $serveur Identifiant du connecteur à utiliser
+ * @param bool $requeter Inutilisé
+ * @return mixed
+ */
 function spip_mysqli_repair($table, $serveur='',$requeter=true)
 {
 	return spip_mysqli_query("REPAIR TABLE $table", $serveur, $requeter);
 }
 
-// Recupere la definition d'une table ou d'une vue MySQL
-// colonnes, indexes, etc.
-// au meme format que la definition des tables de SPIP
-// portage de http://doc.spip.org/@spip_mysql_showtable
+/**
+ * Recupere la definition d'une table ou d'une vue MySQL
+ * colonnes, indexes, etc.
+ * au meme format que la definition des tables de SPIP
+ *
+ * @link http://doc.spip.org/@spip_mysql_showtable
+ * @param <type> $nom_table
+ * @param string $serveur Identifiant du connecteur à utiliser
+ * @param bool $requeter Inutilisé
+ * @return <type>
+ */
 function spip_mysqli_showtable($nom_table, $serveur='',$requeter=true)
 {
 	$s = spip_mysqli_query("SHOW CREATE TABLE `$nom_table`", $serveur, $requeter);
@@ -520,18 +700,49 @@ function spip_mysqli_showtable($nom_table, $serveur='',$requeter=true)
 // Recuperation des resultats
 //
 
-// portage de http://doc.spip.org/@spip_mysql_fetch
+/**
+ * Retourne un tableau qui correspond à la ligne lue ou NULL s'il n'y a plus
+ * de lignes dans le jeu de résultats $r
+ *
+ * @param mysqli_result $r Le jeu de résultats
+ * @param int $t Type de résultat : MYSQLI_ASSOC, MYSQLI_NUM ou MYSQLI_BOTH
+ * @param string $serveur Inutilisé
+ * @param bool $requeter Inutilisé
+ * @return mixed le résultat sous forme de tableau ou NULL si pas de résultat
+ * @link http://doc.spip.org/@spip_mysql_fetch
+ */
 function spip_mysqli_fetch($r, $t='', $serveur='',$requeter=true) {
 	if (!$t) $t = MYSQLI_ASSOC;
 	if ($r) return mysqli_fetch_array($r, $t);
 }
 
+/**
+ * Déplace le pointeur interne de résultat associé au jeu de résultat
+ * représenté par result , en le faisant pointer sur la ligne spécifiée
+ * par row_number
+ *
+ * @param mysqli_result $r
+ * @param int $row_number
+ * @param string $serveur Inutilisé
+ * @param bool $requeter Inutilisé
+ * @return bool
+ */
 function spip_mysqli_seek($r, $row_number, $serveur='',$requeter=true) {
-	if ($r) return mysqli_data_seek($r,$row_number);
+	if ($r) return $r->data_seek($row_number);
 }
 
 
-// portage de http://doc.spip.org/@spip_mysql_countsel
+/**
+ *
+ * @link http://doc.spip.org/@spip_mysql_countsel
+ * @param <type> $from
+ * @param <type> $where
+ * @param <type> $groupby
+ * @param <type> $having
+ * @param string $serveur Identifiant du connecteur à utiliser
+ * @param bool $requeter Inutilisé
+ * @return <type>
+ */
 function spip_mysqli_countsel($from = array(), $where = array(),
 			     $groupby = '', $having = array(), $serveur='',$requeter=true)
 {
@@ -546,15 +757,25 @@ function spip_mysqli_countsel($from = array(), $where = array(),
 	return $c;
 }
 
-// portage de http://doc.spip.org/@spip_mysql_error
+/**
+ *
+ * @link http://doc.spip.org/@spip_mysql_error
+ * @param string $serveur Identifiant du connecteur à utiliser
+ * @return <type>
+ */
 function spip_mysqli_error($serveur='') {
 	$connexion = &$GLOBALS['connexions'][$serveur ? $serveur : 0];
 	$link = $connexion['link'];
 	return ($link ? mysqli_error($link) : mysqli_error()) . $connexion['last'];
 }
 
-// A transposer dans les portages
-// portage de http://doc.spip.org/@spip_mysql_errno
+/**
+ * A transposer dans les portages
+ *
+ * @link http://doc.spip.org/@spip_mysql_errno
+ * @param string $serveur Identifiant du connecteur à utiliser
+ * @return <type>
+ */
 function spip_mysqli_errno($serveur='') {
 	$connexion = &$GLOBALS['connexions'][$serveur ? $serveur : 0];
 	$link = $connexion['link'];
@@ -566,19 +787,43 @@ function spip_mysqli_errno($serveur='') {
 	return $s;
 }
 
-// Interface de abstract_sql
-// portage de http://doc.spip.org/@spip_mysql_count
+/**
+ * Interface de abstract_sql
+ *
+ * @link http://doc.spip.org/@spip_mysql_count
+ * @param <type> $r
+ * @param string $serveur Identifiant du connecteur à utiliser
+ * @param bool $requeter Inutilisé
+ * @return <type>
+ */
 function spip_mysqli_count($r, $serveur='',$requeter=true) {
 	if ($r)	return mysqli_num_rows($r);
 }
 
 
-// portage de http://doc.spip.org/@spip_mysql_free
+/**
+ *
+ * @link http://doc.spip.org/@spip_mysql_free
+ * @param <type> $r
+ * @param string $serveur Identifiant du connecteur à utiliser
+ * @param bool $requeter Inutilisé
+ * @return <type>
+ */
 function spip_mysqli_free($r, $serveur='',$requeter=true) {
 	return mysqli_free_result($r);
 }
 
-// portage de http://doc.spip.org/@spip_mysql_insert
+/**
+ *
+ * @link http://doc.spip.org/@spip_mysql_insert
+ * @param string $table La table
+ * @param <type> $champs
+ * @param <type> $valeurs
+ * @param <type> $desc
+ * @param string $serveur Identifiant du connecteur à utiliser
+ * @param bool $requeter Inutilisé
+ * @return <type>
+ */
 function spip_mysqli_insert($table, $champs, $valeurs, $desc='', $serveur='',$requeter=true) {
 
 	$connexion = &$GLOBALS['connexions'][$serveur ? $serveur : 0];
@@ -604,7 +849,16 @@ function spip_mysqli_insert($table, $champs, $valeurs, $desc='', $serveur='',$re
 	// return $r ? $r : (($r===0) ? -1 : 0); pb avec le multi-base.
 }
 
-// portage de http://doc.spip.org/@spip_mysql_insertq
+/**
+ *
+ * @link http://doc.spip.org/@spip_mysql_insertq
+ * @param string $table La table
+ * @param <type> $couples
+ * @param <type> $desc
+ * @param string $serveur Identifiant du connecteur à utiliser
+ * @param bool $requeter Inutilisé
+ * @return <type>
+ */
 function spip_mysqli_insertq($table, $couples=array(), $desc=array(), $serveur='',$requeter=true) {
 
 	if (!$desc) $desc = description_table($table);
@@ -619,7 +873,16 @@ function spip_mysqli_insertq($table, $couples=array(), $desc=array(), $serveur='
 }
 
 
-// portage de http://doc.spip.org/@spip_mysql_insertq_multi
+/**
+ *
+ * @link http://doc.spip.org/@spip_mysql_insertq_multi
+ * @param string $table La table
+ * @param <type> $tab_couples
+ * @param <type> $desc
+ * @param string $serveur Identifiant du connecteur à utiliser
+ * @param bool $requeter Inutilisé
+ * @return <type>
+ */
 function spip_mysqli_insertq_multi($table, $tab_couples=array(), $desc=array(), $serveur='',$requeter=true) {
 
 	if (!$desc) $desc = description_table($table);
@@ -646,7 +909,17 @@ function spip_mysqli_insertq_multi($table, $tab_couples=array(), $desc=array(), 
 	return $r; // dans le cas d'une table auto_increment, le dernier insert_id
 }
 
-// portage de http://doc.spip.org/@spip_mysql_update
+/**
+ *
+ * @link http://doc.spip.org/@spip_mysql_update
+ * @param string $table La table
+ * @param <type> $champs
+ * @param <type> $where
+ * @param <type> $desc
+ * @param string $serveur Identifiant du connecteur à utiliser
+ * @param bool $requeter Inutilisé
+ * @return <type>
+ */
 function spip_mysqli_update($table, $champs, $where='', $desc='', $serveur='',$requeter=true) {
 	$set = array();
 	foreach ($champs as $champ => $val)
@@ -659,9 +932,19 @@ function spip_mysqli_update($table, $champs, $where='', $desc='', $serveur='',$r
 			$serveur, $requeter);
 }
 
-// idem, mais les valeurs sont des constantes a mettre entre apostrophes
-// sauf les expressions de date lorsqu'il s'agit de fonctions SQL (NOW etc)
-// portage de http://doc.spip.org/@spip_mysql_updateq
+/**
+ * idem, mais les valeurs sont des constantes a mettre entre apostrophes
+ * sauf les expressions de date lorsqu'il s'agit de fonctions SQL (NOW etc)
+ *
+ * @link http://doc.spip.org/@spip_mysql_updateq
+ * @param string $table La table
+ * @param <type> $champs
+ * @param <type> $where
+ * @param <type> $desc
+ * @param string $serveur Identifiant du connecteur à utiliser
+ * @param bool $requeter Inutilisé
+ * @return <type>
+ */
 function spip_mysqli_updateq($table, $champs, $where='', $desc=array(), $serveur='',$requeter=true) {
 
 	if (!$champs) return;
@@ -678,7 +961,15 @@ function spip_mysqli_updateq($table, $champs, $where='', $desc=array(), $serveur
 			$serveur, $requeter);
 }
 
-// portage de http://doc.spip.org/@spip_mysql_delete
+/**
+ *
+ * @link http://doc.spip.org/@spip_mysql_delete
+ * @param string $table La table
+ * @param <type> $where
+ * @param string $serveur Identifiant du connecteur à utiliser
+ * @param bool $requeter Inutilisé
+ * @return <type>
+ */
 function spip_mysqli_delete($table, $where='', $serveur='',$requeter=true) {
 	$res = spip_mysqli_query(
 			  calculer_mysqli_expression('DELETE FROM', $table, ',')
@@ -692,13 +983,31 @@ function spip_mysqli_delete($table, $where='', $serveur='',$requeter=true) {
 		return false;
 }
 
-// portage de http://doc.spip.org/@spip_mysql_replace
+/**
+ *
+ * @link http://doc.spip.org/@spip_mysql_replace
+ * @param string $table La table
+ * @param <type> $couples
+ * @param <type> $desc
+ * @param string $serveur Identifiant du connecteur à utiliser
+ * @param bool $requeter Inutilisé
+ * @return <type>
+ */
 function spip_mysqli_replace($table, $couples, $desc=array(), $serveur='',$requeter=true) {
 	return spip_mysqli_query("REPLACE $table (" . join(',',array_keys($couples)) . ') VALUES (' .join(',',array_map('_q', $couples)) . ')', $serveur, $requeter);
 }
 
 
-// portage de http://doc.spip.org/@spip_mysql_replace_multi
+/**
+ *
+ * @link http://doc.spip.org/@spip_mysql_replace_multi
+ * @param string $table La table
+ * @param <type> $tab_couples
+ * @param <type> $desc
+ * @param string $serveur Identifiant du connecteur à utiliser
+ * @param bool $requeter Inutilisé
+ * @return <type>
+ */
 function spip_mysqli_replace_multi($table, $tab_couples, $desc=array(), $serveur='',$requeter=true) {
 	$cles = "(" . join(',',array_keys($tab_couples[0])). ')';
 	$valeurs = array();
@@ -710,7 +1019,13 @@ function spip_mysqli_replace_multi($table, $tab_couples, $desc=array(), $serveur
 }
 
 
-// portage de http://doc.spip.org/@spip_mysql_multi
+/**
+ *
+ * @link http://doc.spip.org/@spip_mysql_multi
+ * @param <type> $objet
+ * @param <type> $lang
+ * @return <type>
+ */
 function spip_mysqli_multi ($objet, $lang) {
 	$lengthlang = strlen("[$lang]");
 	$posmulti = "INSTR(".$objet.", '<multi>')";
@@ -740,17 +1055,35 @@ function spip_mysqli_multi ($objet, $lang) {
 	return $retour;
 }
 
-// portage de http://doc.spip.org/@spip_mysql_hex
+/**
+ *
+ * @link http://doc.spip.org/@spip_mysql_hex
+ * @param <type> $v
+ * @return <type>
+ */
 function spip_mysqli_hex($v)
 {
 	return "0x" . $v;
 }
 
+/**
+ *
+ * @param <type> $v
+ * @param <type> $type
+ * @return <type>
+ */
 function spip_mysqli_quote($v, $type='')
 {
 	return ($type === 'int' AND !$v) ? '0' :  _q($v);
 }
 
+/**
+ *
+ * @param <type> $champ
+ * @param <type> $interval
+ * @param <type> $unite
+ * @return <type>
+ */
 function spip_mysqli_date_proche($champ, $interval, $unite)
 {
 	return '('
@@ -766,10 +1099,17 @@ function spip_mysqli_date_proche($champ, $interval, $unite)
 	. '))';
 }
 
-//
-// IN (...) est limite a 255 elements, d'ou cette fonction assistante
-//
-// portage de http://doc.spip.org/@spip_mysql_in
+/**
+ * IN (...) est limite a 255 elements, d'ou cette fonction assistante
+ *
+ * @link http://doc.spip.org/@spip_mysql_in
+ * @param <type> $val
+ * @param <type> $valeurs
+ * @param <type> $not
+ * @param string $serveur Identifiant du connecteur à utiliser
+ * @param bool $requeter Inutilisé
+ * @return <type>
+ */
 function spip_mysqli_in($val, $valeurs, $not='', $serveur='',$requeter=true) {
 	$n = $i = 0;
 	$in_sql ="";
@@ -789,7 +1129,14 @@ function spip_mysqli_in($val, $valeurs, $not='', $serveur='',$requeter=true) {
 }
 
 // pour compatibilite. Ne plus utiliser.
-// portage de http://doc.spip.org/@calcul_mysql_in
+/**
+ *
+ * @link http://doc.spip.org/@calcul_mysql_in
+ * @param <type> $val
+ * @param <type> $valeurs
+ * @param <type> $not
+ * @return <type>
+ */
 function calcul_mysqli_in($val, $valeurs, $not='') {
 	if (is_array($valeurs))
 		$valeurs = join(',', array_map('_q', $valeurs));
@@ -800,10 +1147,11 @@ function calcul_mysqli_in($val, $valeurs, $not='') {
 
 /**
  * Echappe une chaine pour l'utiliser dans une requette MySQL
+ *
+ * @link http://doc.spip.org/@spip_mysql_cite
  * @param string $v la valeur à traiter
  * @param string $type son type
  * @return string la chaine préparée
- * @link http://doc.spip.org/@spip_mysql_cite
  */
 function spip_mysqli_cite($v, $type) {
 	if (sql_test_date($type) AND preg_match('/^\w+\(/', $v)
