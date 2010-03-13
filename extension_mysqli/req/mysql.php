@@ -798,7 +798,13 @@ function calcul_mysqli_in($val, $valeurs, $not='') {
 	return spip_mysqli_in($val, $valeurs, $not);
 }
 
-// portage de http://doc.spip.org/@spip_mysql_cite
+/**
+ * Echappe une chaine pour l'utiliser dans une requette MySQL
+ * @param string $v la valeur à traiter
+ * @param string $type son type
+ * @return string la chaine préparée
+ * @link http://doc.spip.org/@spip_mysql_cite
+ */
 function spip_mysqli_cite($v, $type) {
 	if (sql_test_date($type) AND preg_match('/^\w+\(/', $v)
 	OR (sql_test_int($type)
@@ -806,7 +812,7 @@ function spip_mysqli_cite($v, $type) {
 		      OR (ctype_xdigit(substr($v,2))
 			  AND $v[0]=='0' AND $v[1]=='x'))))
 		return $v;
-	else return  ("'" . addslashes($v) . "'");
+	else return  ("'" . mysqli_real_escape_string($v) . "'");
 }
 
 
