@@ -54,14 +54,16 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function inc_genie_dist($taches = array()) {
 	include_spip('inc/queue');
 
+	$force_jobs = array();
 	// l'ancienne facon de lancer une tache cron immediatement
 	// etait de la passer en parametre a ing_genie_dist
 	// on reroute en ajoutant simplement le job a la queue, ASAP
 	foreach($taches as $function=>$period)
-		queue_add_job($function, _L("Tache CRON $function (ASAP)"), array(time()-abs($period)), "genie/");
+		$force_jobs[] = queue_add_job($function, _L("Tache CRON $function (ASAP)"), array(time()-abs($period)), "genie/");
 	
 	// et on passe la main a la gestion de la queue !
-	queue_schedule();
+	// en forcant eventuellement les jobs ajoute a l'instant
+	queue_schedule(count($force_jobs)?$force_jobs:null);
 }
 
 //

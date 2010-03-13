@@ -177,11 +177,11 @@ function queue_start_job($row){
  * Evite les requetes sql a chaque appel
  * en memorisant en meta la date du prochain job
  */
-function queue_schedule(){
+function queue_schedule($force_jobs = null){
 	$time = time();
 
 	// rien a faire si le prochain job est encore dans le futur
-	if ($GLOBALS['meta']['queue_next_job_time']>$time)
+	if ($GLOBALS['meta']['queue_next_job_time']>$time AND (!$force_jobs OR !count($force_jobs)))
 		return;
 
 	include_spip('base/abstract_sql');
@@ -206,8 +206,13 @@ function queue_schedule(){
 	//	- de date
 	// lorsqu'un job cron n'a pas fini, sa priorite est descendue
 	// pour qu'il ne bloque pas les autres jobs en attente
-	$now = date('Y-m-d H:i:s',$time);
-	$res = sql_select('*','spip_jobs','date<'.sql_quote($now),'','priorite DESC,date','0,'.(_JQ_MAX_JOBS_EXECUTE+1));
+	if (is_array($force_jobs) AND count($force_jobs))
+		$cond = sql_in("id_job", $force_jobs);
+	else {
+		$now = date('Y-m-d H:i:s',$time);
+		$cond = 'date<'.sql_quote($now);
+	}
+	$res = sql_select('*','spip_jobs',$cond,'','priorite DESC,date','0,'.(_JQ_MAX_JOBS_EXECUTE+1));
 	do {
 		if ($row = sql_fetch($res)){
 			$nbj++;
