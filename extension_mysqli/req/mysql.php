@@ -178,7 +178,8 @@ function spip_mysqli_get_charset($charset=array(), $serveur='',$requeter=true){
 	$connexion = &$GLOBALS['connexions'][$serveur ? $serveur : 0];
 	$connexion['last'] = $c = "SHOW CHARACTER SET"
 	. (!$charset ? '' : (" LIKE "._q($charset['charset'])));
-	return spip_mysqli_fetch(mysql_query($c), NULL, $serveur);
+	$link = $connexion['link'];
+	return spip_mysqli_fetch($link->query($c), NULL, $serveur);
 }
 
 /**
@@ -276,7 +277,7 @@ function spip_mysqli_explain($query, $serveur='',$requeter=true){
  * @param   string	    $having	Peut servir de fonction d'aggrégation
  * @param   string	    $serveur	Identifiant du connecteur à utiliser
  * @param   bool	    $requeter	Inutilisé
- * @return  mysqli_result
+ * @return  mixed
  */
 function spip_mysqli_select($select, $from, $where='',
 			   $groupby='', $orderby='', $limit='', $having='',
@@ -446,8 +447,8 @@ function traite_mysqli_query($query, $db='', $prefixe='') {
  * @return  bool    TRUE en cas de succès
  */
 function spip_mysqli_selectdb($db, $serveur='',$requeter=true) {
-	$connexion = &$GLOBALS['connexions'][$serveur ? $serveur : 0]['link'];
-	return $connexion->select_db($db);
+	$link = &$GLOBALS['connexions'][$serveur ? $serveur : 0]['link'];
+	return $link->select_db($db);
 }
 
 /**
@@ -660,7 +661,7 @@ function spip_mysqli_showtable($nom_table, $serveur='',$requeter=true)
 			if ($k && !isset($keys[$k])) $keys[$k] = $t; else $keys[] = $t;
 		  }
 		}
-		spip_mysqli_free($s);
+		$s->free();
 		return array('field' => $fields, 'key' => $keys);
 	}
 
@@ -690,7 +691,7 @@ function spip_mysqli_showtable($nom_table, $serveur='',$requeter=true)
 		  $nkeys['UNIQUE KEY '.$val["Field"]] = $val["Field"];
 		}
 	  }
-	  spip_mysqli_free($res);
+	  $res->free();
 	  return array('field' => $nfields, 'key' => $nkeys);
 	}
 	return "";
@@ -713,7 +714,11 @@ function spip_mysqli_showtable($nom_table, $serveur='',$requeter=true)
  */
 function spip_mysqli_fetch($r, $t='', $serveur='',$requeter=true) {
 	if (!$t) $t = MYSQLI_ASSOC;
-	if ($r) return mysqli_fetch_array($r, $t);
+	if ($r instanceof MySQLi_Result) {
+	    $res = $r->fetch_array($r, $t);
+	    $r->free();
+	    return $res;
+	}
 }
 
 /**
@@ -728,7 +733,11 @@ function spip_mysqli_fetch($r, $t='', $serveur='',$requeter=true) {
  * @return  bool    TRUE en cas de succès
  */
 function spip_mysqli_seek($r, $row_number, $serveur='',$requeter=true) {
-	if ($r) return $r->data_seek($row_number);
+	if ($r instanceof MySQLi_Result) {
+	    $res = $r->data_seek($row_number);
+	    $r->free();
+	    return $res;
+	}
 }
 
 
@@ -751,9 +760,9 @@ function spip_mysqli_countsel($from = array(), $where = array(),
 	$r = spip_mysqli_select("COUNT($c)", $from, $where,'', '', '', $having, $serveur, $requeter);
 
 	if (!$requeter) return $r;
-	if (!is_resource($r)) return 0;
-	list($c) = mysqli_fetch_array($r, MYSQLI_NUM);
-	mysqli_free_result($r);
+	if (!($r instanceof MySQLi_Result)) return 0;
+	list($c) = $r->fetch_array($r, MYSQLI_NUM);
+	$r->free();
 	return $c;
 }
 
@@ -799,7 +808,8 @@ function spip_mysqli_errno($serveur='') {
  * @return  int
  */
 function spip_mysqli_count($r, $serveur='',$requeter=true) {
-	if ($r)	return $r->num_rows;
+	if ($r instanceof MySQLi_Result)
+	    return $r->num_rows;
 }
 
 
@@ -813,7 +823,8 @@ function spip_mysqli_count($r, $serveur='',$requeter=true) {
  * @return  void
  */
 function spip_mysqli_free($r, $serveur='',$requeter=true) {
-	return mysqli_free_result($r);
+	if ($r instanceof MySQLi_Result)
+	    return $r->free();
 }
 
 /**
@@ -845,7 +856,7 @@ function spip_mysqli_insert($table, $champs, $valeurs, $desc='', $serveur='',$re
 	$connexion['last'] = $query ="INSERT INTO $table $champs VALUES $valeurs";
 #	spip_log($query);
 	if ($link->query($query))
-		$r = mysqli_insert_id($link);
+		$r = $link->insert_id;
 	else $r = false;
 
 	return $t ? trace_query_end($query, $t, $r, $serveur) : $r;
@@ -986,7 +997,7 @@ function spip_mysqli_delete($table, $where='', $serveur='',$requeter=true) {
 			$serveur, $requeter);
 	if ($res){
 		$link = $GLOBALS['connexions'][$serveur ? $serveur : 0]['link'];
-		return $link ? mysqli_affected_rows($link) : mysqli_affected_rows();
+		return $link->affected_rows;
 	}
 	else
 		return false;
