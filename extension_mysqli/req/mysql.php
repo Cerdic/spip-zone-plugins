@@ -179,7 +179,7 @@ function spip_mysqli_get_charset($charset=array(), $serveur='',$requeter=true){
 	$connexion['last'] = $c = "SHOW CHARACTER SET"
 	. (!$charset ? '' : (" LIKE "._q($charset['charset'])));
 	$link = $connexion['link'];
-	return spip_mysqli_fetch($link->query($c), NULL, $serveur);
+	return $link->query($c);
 }
 
 /**
@@ -209,9 +209,11 @@ function spip_mysqli_query($query, $serveur='',$requeter=true) {
 	} else $t = 0 ;
  
 	$connexion['last'] = $query;
-	$r = $link->query($query);
+	$r = $link->real_query($query);
+	if ($r) $result = $link->use_result();
+	if ($result) $r = $result;
 
-	return $t ? trace_query_end($query, $t, $r, $serveur) : $r;
+	return $t ? trace_query_end($query, $t, $r , $serveur) : $r;
 }
 
 /**
@@ -259,7 +261,7 @@ function spip_mysqli_explain($query, $serveur='',$requeter=true){
 
 	$query = 'EXPLAIN ' . traite_mysqli_query($query, $db, $prefixe);
 	$r = $link->query($query);
-	return spip_mysqli_fetch($r, NULL, $serveur);
+	return $r;
 }
 
 /**
@@ -715,7 +717,7 @@ function spip_mysqli_showtable($nom_table, $serveur='',$requeter=true)
 function spip_mysqli_fetch($r, $t='', $serveur='',$requeter=true) {
 	if (!$t) $t = MYSQLI_ASSOC;
 	if ($r instanceof MySQLi_Result) {
-	    $res = $r->fetch_array($r, $t);
+	    $res = $r->fetch_array($t);
 	    $r->free();
 	    return $res;
 	}
@@ -824,7 +826,7 @@ function spip_mysqli_count($r, $serveur='',$requeter=true) {
  */
 function spip_mysqli_free($r, $serveur='',$requeter=true) {
 	if ($r instanceof MySQLi_Result)
-	    return $r->free();
+	    $r->free();
 }
 
 /**
@@ -855,8 +857,7 @@ function spip_mysqli_insert($table, $champs, $valeurs, $desc='', $serveur='',$re
  
 	$connexion['last'] = $query ="INSERT INTO $table $champs VALUES $valeurs";
 #	spip_log($query);
-	$res = $link->query($query);
-	if ($res)
+	if ($link->query($query))
 		$r = $link->insert_id;
 	else $r = false;
 
@@ -1115,8 +1116,9 @@ function spip_mysqli_quote($v, $type='')
  * @return  mixed
  */
 function spip_mysqli_q($a) {
+	$link = &$GLOBALS['connexions'][0]['link'];
 	return (is_numeric($a)) ? strval($a) :
-		(!is_array($a) ? ("'" . mysqli_real_escape_string($a) . "'")
+		(!is_array($a) ? ("'" . $link->real_escape_string($a) . "'")
 		 : join(",", array_map('spip_mysqli_q', $a)));
 }
 
