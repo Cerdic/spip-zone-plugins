@@ -16,7 +16,7 @@ function sommaire_d_une_page(&$texte, &$nbh3, $page=0, $num_pages=0) {
 		$self = str_replace('&', '&amp;', nettoyer_uri());//self();//$GLOBALS['REQUEST_URI'];
 	if($page===false) return;
 	// trouver quel <hx> est utilise
-	$niveau = $match = preg_match(',<h(\d),',$GLOBALS['debut_intertitre'],$regs)?$regs[1]:'3';
+	$root = $niveau = $match = preg_match(',<h(\d),',$GLOBALS['debut_intertitre'],$regs)?$regs[1]:'3';
 	@define('_sommaire_NB_CARACTERES', 30);
 	@define('_sommaire_PROFONDEUR', 1);
 	if(_sommaire_PROFONDEUR>1)
@@ -30,7 +30,8 @@ function sommaire_d_une_page(&$texte, &$nbh3, $page=0, $num_pages=0) {
 	$fct_lien_retour = function_exists('sommaire_lien_retour')?'sommaire_lien_retour':'sommaire_lien_retour_dist';
 	$fct_id_ancre = defined('_sommaire_JOLIES_ANCRES')?'sommaire_id_ancre_ex'
 		:(function_exists('sommaire_id_ancre')?'sommaire_id_ancre':'sommaire_id_ancre_dist');
-	for($i=0;$i<count($regs[0]);$i++,$index++){
+	$nb = count($regs[0]);
+	for($i=0;$i<$nb;$i++,$index++){
 		$w = &$regs[0][$i]; $h = &$regs[1][$i]; $n = &$regs[2][$i];
 		if (($pos2 = strpos($texte, $w, $pos))!==false) {
 			$t = $regs[3][$i];
@@ -55,13 +56,14 @@ function sommaire_d_une_page(&$texte, &$nbh3, $page=0, $num_pages=0) {
 			// si la decoupe en page est active...
 			$artpage = (function_exists('decoupe_url') && (strlen(_request('artpage')) || $page>1) )
 				?decoupe_url($self, $page, $num_pages):$self;
-			$artpage = "<li><a $st title=\"$titre\" href=\"{$artpage}#$ancre\">$lien</a>$suffixe</li>";
-			$sommaire .= $niveau<$n?'<ul>'.$artpage
-				:($niveau>$n?'</ul>'.$artpage:$artpage);
+			$artpage = "\n<li><a $st title=\"$titre\" href=\"{$artpage}#$ancre\">$lien</a>$suffixe";
+			if($niveau==$n) $sommaire .= ($sommaire?'</li>':'').$artpage;
+			elseif($niveau<$n) $sommaire .= "\n<ul>".$artpage;
+			else $sommaire .= '</li></ul></li>'.$artpage;
 			$niveau = $n;
 		}
 	}
-	return $sommaire;
+	return $sommaire?$sommaire.'</li>'.($niveau!=$root?'</ul>':''):'';
 }
 
 function sommaire_nettoyer_titre($t) {

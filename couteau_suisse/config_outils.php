@@ -1044,8 +1044,8 @@ add_variables( array(
 .formulaire_inscription, .formulaire_forum, .formulaire_ecrire_auteur
 
 // colorisation de la dist de SPIP 2.0 en ajoutant un parent
-\".chapo, .texte\" = wrap(\'<div class=\"jc_parent\" style=\"padding:4px; background-color:#ffe0c0; margin:4px 0;\"></div>\')
-\".menu\" = wrap(\'<div class=\"jc_parent\" style=\"padding:4px; background-color:lightBlue; margin:4px 0;\"></div>\')
+\".chapo, .texte\" = wrap(\'<div class=\"jc_parent\" style=\"padding:4px; background-color:#ffe0c0; margin:4px 0;\"><\/div>\')
+\".menu\" = wrap(\'<div class=\"jc_parent\" style=\"padding:4px; background-color:lightBlue; margin:4px 0;\"><\/div>\')
 
 // coins ronds aux parents !
 .jc_parent"'
@@ -1056,7 +1056,7 @@ add_variables( array(
 .liste-articles li .texte = css(\'background-color\', \'#E0F0F0\') .corner()
 
 // colorisation de la dist de SPIP 1.92 en ajoutant un parent
-\"#contenu .texte\" = wrap(\'<div class=\"jc_parent\" style=\"padding:4px; background-color:#E0F0F0; margin:4px 0;\"></div>\')
+\"#contenu .texte\" = wrap(\'<div class=\"jc_parent\" style=\"padding:4px; background-color:#E0F0F0; margin:4px 0;\"><\/div>\')
 
 // coins ronds aux parents !
 .jc_parent"',
