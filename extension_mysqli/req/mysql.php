@@ -1091,8 +1091,23 @@ function spip_mysqli_hex($v)
  */
 function spip_mysqli_quote($v, $type='')
 {
-	return ($type === 'int' AND !$v) ? '0' :  _q($v);
+	return ($type === 'int' AND !$v) ? '0' :  spip_mysqli_q($v);
 }
+
+/**
+ * Préparer un élément pour qu'il puisse être utilisé dans les requêtes plus tard
+ * Le traitement se fait de manière récursive sur les tableaux
+ *
+ * @link http://doc.spip.org/@_q
+ * @param   mixed   $a
+ * @return  mixed
+ */
+function spip_mysqli_q($a) {
+	return (is_numeric($a)) ? strval($a) :
+		(!is_array($a) ? ("'" . mysqli_real_escape_string($a) . "'")
+		 : join(",", array_map('spip_mysqli_q', $a)));
+}
+
 
 /**
  *
