@@ -1,0 +1,17 @@
+table.spip{margin-bottom:1.5em;margin-top:0.7em;margin-bottom:0.3em;border-collapse:collapse;border-spacing:0;line-height:1.45em;border:1px solid #CCC;color: #FFF;}
+table.spip caption{font-style:italic;font-size:1.3em;caption-side:top;text-align:left;font-weight:400;color:#333;margin:0;display:table-caption;position:relative;border-collapse:collapse;border-spacing:0; line-height:normal;}
+table.spip caption:first-child{}
+table.spip tr.row_first{width:auto;background:#333;color:white;}
+table.spip tr.row_odd{background:#EFEFEF !important;}
+table.spip tr.row_even {background:#DFDFDF !important;}
+table.spip th, table.spip td{padding:0.20em 0.40em;border:0;}
+table.spip th{vertical-align:bottom font-weight:bold;width:auto;}
+table.spip th scope{vertical-align: bottom;font-weight:bold;width:auto;}
+table.spip td {vertical-align:middle;width:auto;text-align:center;border-left:1px solid #CCC;border-top:1px solid #CCC;color:#000;font-weight:bold;}
+table.spip tr>td:first-child{width:50%;text-align:left !important;font-weight:bold;border-left:1px solid #CCC;color:#900;}
+table.spip tr>th:first-child{vertical-align:top;text-align:left !important;font-weight:bold;border-left:1px solid #CCC;border-top:1px solid #CCC;}
+table.spip tr>th {vertical-align:middle;text-align:center !important;font-weight:bold;border-left:1px solid #CCC;}
+thead {font-weight:bold;margin:0;display:table-header-group;}
+table.spip td.col_fussionee {}
+table.spip td.col_fussionee:first-child{font-weight:normal !important;font-style:italic;color:#000 !important;border-top:1px solid #CCC;}
+table.spip td.col_normal:first-child{background-color:#999;color:#FFF;}
