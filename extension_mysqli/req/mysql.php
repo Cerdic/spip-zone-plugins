@@ -715,12 +715,12 @@ function spip_mysqli_showtable($nom_table, $serveur='',$requeter=true)
  * @return  mixed           le résultat sous forme de tableau ou NULL si pas de résultat
  */
 function spip_mysqli_fetch($r, $t='', $serveur='',$requeter=true) {
+	$res = NULL;
 	if (!$t) $t = MYSQLI_ASSOC;
-	if ($r instanceof MySQLi_Result) {
+	if ($r) {
 	    $res = $r->fetch_array($t);
-	    $r->free();
-	    return $res;
 	}
+	return $res;
 }
 
 /**
@@ -762,8 +762,8 @@ function spip_mysqli_countsel($from = array(), $where = array(),
 	$r = spip_mysqli_select("COUNT($c)", $from, $where,'', '', '', $having, $serveur, $requeter);
 
 	if (!$requeter) return $r;
-	if (!($r instanceof MySQLi_Result)) return 0;
-	list($c) = $r->fetch_array($r, MYSQLI_NUM);
+	if (!($r)) return 0;
+	list($c) = $r->fetch_array(MYSQLI_NUM);
 	$r->free();
 	return $c;
 }
