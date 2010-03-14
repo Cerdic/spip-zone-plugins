@@ -275,6 +275,30 @@ paragraphes",
 			);
 			return $jeu;
 			break;
+		case 'version':
+			$jeu = array(
+				"2",
+				"2.0",
+				"2.0.0",
+				"2.0.0dev",
+				"2.0.0alpha",
+				"2.0.0beta",
+				"2.0.0rc",
+				"2.0.0#",
+				"2.0.0pl",
+				"2.0.1"
+			);
+			return $jeu;
+		case 'operateur':
+			$jeu = array(
+				"<",
+				">",
+				"=",
+				"<=",
+				">="
+			);
+			return $jeu;
+			break;
 	}
 	return $jeu;
 }
