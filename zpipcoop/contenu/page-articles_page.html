@@ -1,0 +1,53 @@
+<BOUCLE_auteur(AUTEURS) {id_auteur=#SESSION{id_auteur}}>
+<B_prepa>
+<div class="liste articles auteur">
+	#ANCRE_PAGINATION
+	<h2 class="h2"><:zpipcoop:info_cours_edition:></h2>
+	[<p class="pagination">(#PAGINATION{precedent_suivant})</p>]
+	<ul class="liste-items">
+<BOUCLE_prepa(ARTICLES) {id_auteur}{statut=prepa}{!par date}{pagination}>
+		#INCLURE{fond=inclure/article-prepa-resume,id_article}
+</BOUCLE_prepa>
+	</ul>
+	[<p class="pagination">(#PAGINATION{precedent_suivant})</p>]
+	[<p class="pagination">(#PAGINATION)</p>]
+</div>
+</B_prepa>
+<//B_prepa>
+
+<B_propo>
+<div class="liste articles auteur">
+	#ANCRE_PAGINATION
+	<h2 class="h2"><:zpipcoop:info_cours_prop:></h2>
+	[<p class="pagination">(#PAGINATION{precedent_suivant})</p>]
+	<ul class="liste-items">
+<BOUCLE_propo(ARTICLES) {id_auteur}{statut=prop}{!par date}{pagination}>
+		#INCLURE{fond=inclure/article-prop-resume,id_article}
+</BOUCLE_propo>
+	</ul>
+	[<p class="pagination">(#PAGINATION{precedent_suivant})</p>]
+	[<p class="pagination">(#PAGINATION)</p>]
+</div>
+</B_propo>
+<//B_propo>
+
+<B_publies>
+<div class="liste articles auteur">
+	#ANCRE_PAGINATION
+	<h2 class="h2"><:zpipcoop:info_messages_publies:></h2>
+	[<p class="pagination">(#PAGINATION{precedent_suivant})</p>]
+	<ul class="liste-items">
+<BOUCLE_publies(ARTICLES) {id_auteur}{statut=publie}{!par date}{pagination}>
+		#INCLURE{fond=inclure/article-resume,id_article}
+</BOUCLE_publies>
+	</ul>
+	[<p class="pagination">(#PAGINATION{precedent_suivant})</p>]
+	[<p class="pagination">(#PAGINATION)</p>]
+</div>
+</B_publies>
+<div class="liste articles auteur">
+	<h2 class="h2"><:zpipcoop:info_messages_publies:></h2>
+	<p><:zpipcoop:aucun_message:></p>
+</div>
+<//B_publies>
+</BOUCLE_auteur>

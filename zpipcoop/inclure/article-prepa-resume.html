@@ -1,0 +1,19 @@
+[(#REM)
+
+  Squelette Presentation d'un article en cours de rédaction dans une liste
+  (c) 2009 Zpip
+  Distribue sous licence GPL
+
+]
+<BOUCLE_articles(ARTICLES) {id_article} {statut?}>
+<li class="item hentry">
+	<h3 class="h3 entry-title"><a href="[(#URL_PAGE{articles_edit,id_article=#ID_ARTICLE,id_rubrique=[(#ID_RUBRIQUE|sinon{'0'})]}|parametre_url{retour,#URL_PAGE{articles_page}})]" rel="bookmark" title="<:zpipcoop:editer_message|attribut_html:>">[(#LOGO_ARTICLE_RUBRIQUE||image_reduire{150,100}) ]#TITRE</a></h3>
+	[(#PLUGIN{notation}|oui)#FORMULAIRE_NOTATION]
+	<div class="info-publi">[<abbr class="published" title="[(#DATE|date_iso)]">(#DATE|affdate_jourcourt)</abbr>][<span class="sep">, </span><span class="auteurs"><:par_auteur:> (#LESAUTEURS)</span>].
+</div>
+	[<div class="#EDIT{intro} introduction entry-content">(#INTRODUCTION)</div>]
+	<div class="meta-publi">
+	<a class="lire-la-suite" href="[(#URL_PAGE{articles_edit,id_article=#ID_ARTICLE,id_rubrique=[(#ID_RUBRIQUE|sinon{'0'})]}|parametre_url{retour,#URL_PAGE{articles_page}})]" title="<:zpipcoop:editer_message|attribut_html:>"><:zpipcoop:editer_message:> :<span class="lire-la-suite-titre"> <em>&quot;#TITRE&quot;</em></span></a>
+	</div>
+</li>
+</BOUCLE_articles>

@@ -78,6 +78,7 @@ ul#feed li small {font-size:.82em;}
 .ppt em, .pps em {background:url(img/page_white_powerpoint.png) no-repeat;}
 .jpg em, .jpeg em, .gif em, .png em {background:url(img/picture.png) no-repeat;}
 .zip em {background:url(img/package.png) no-repeat;}
+.sites em {background:url(img/site-16.png) no-repeat;}
 
 /* Login (menu) */
 #login {font-size: 11px;color: #8F8F8F;}
