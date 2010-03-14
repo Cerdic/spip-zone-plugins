@@ -1,0 +1,16 @@
+
+<form action="[(#ENV{action})]" method="get" id="searchform"><div>
+	[(#ENV{action}|form_hidden)]
+	[<input type="hidden" name="lang" value="(#ENV{lang})" />]
+	<input type="text" class="sfield" name="recherche" id="recherche"[ value="(#ENV{recherche})"] accesskey="4" />
+	<input type="submit" class="submit" value="ok" title="<:info_rechercher:>" />
+</div></form>
+
+<!--
+<form method="get" id="searchform" action="#">
+<div>
+<input type="text" value="#" name="s" id="s" class="sfield" />
+<input type="image" src="#CHEMIN{img/search_button.gif}" class="sbutton" id="searchsubmit" />
+</div>
+</form>
+-->

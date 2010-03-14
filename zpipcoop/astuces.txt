@@ -1,0 +1,73 @@
+denisb: TeddyP: nouvel article ou édition d'article existant ?
+[01:11] TeddyP: Ben... euh les deux
+[01:11] denisb: ah
+[01:12] TeddyP: d'abord on va procéder par étape
+[01:12] denisb: nouvel article :
+[01:12] denisb: #URL_ECRIRE{articles_edit, id_rubrique=#ID_RUBRIQUE}|parametre_url{new, oui}
+[01:12] denisb: existant :
+[01:12] denisb: #URL_ECRIRE{articles_edit, id_article=#ID_ARTICLE}
+[01:12] TeddyP: Ouais, mais ça, ça amène à l'espace privée...
+[01:12] TeddyP: moi je voudrais créer un squelette en partie public...
+[01:13] TeddyP: donc, est-ce qu'avec ton code, je dois créer un article_edit.html dans mon répertoire squelettes?...
+[01:13] denisb: [(#SESSION{id_auteur}|oui) #FORMULAIRE_EDITER_ARTICLE{ [(#ID_ARTICLE|sinon{oui})],#ID_RUBRIQUE,0, #SELF })]
+[01:14] denisb: essaie ça
+[01:15] TeddyP: ouais, donc, ça c'est pour la création
+[01:15] TeddyP: ok
+[01:18] denisb: [(#SESSION{id_auteur}|oui) #FORMULAIRE_EDITER_ARTICLE{#ID_ARTICLE,#ID_RUBRIQUE,0,#SELF}]
+[01:18] denisb: pour éditer l'existant
+[01:18] TeddyP: ok
+[01:18] TeddyP: Ben en fait, là je n'ai pas besoin de #SESSION
+[01:19] TeddyP: car mon squelette entier est en accès restreint
+[01:19] TeddyP: il faut absolument qu'on soit connecté pour voir le tout...
+[01:19] TeddyP: mais je vois le principe...
+[01:21] TeddyP: et si je fais [(#URL_PAGE{article_edit,id_rubrique=#ID_RUBRIQUE|parametre_url{new,oui})]
+[01:21] TeddyP: et dans ma page article_edit.html, je prend comment l'aspect de la création?
+[01:22] denisb: euh...
+[01:22] TeddyP: eh eh
+[01:22] TeddyP: je t'embrouille...
+[01:25] denisb: je m'ai trompé...
+[01:25] denisb: c'est :
+[01:25] denisb: #FORMULAIRE_EDITER_ARTICLE{#ID_ARTICLE, #ID_RUBRIQUE, #SELF, 0}
+[01:25] denisb: self d'abord et après id_trad
+[01:25] TeddyP: #FORMULAIRE_EDITER_ARTICLE{#ENV{new},#ENV{id_rubrique},#ENV{redirect},#ENV{lier_trad},#ENV{config_fonc},#ENV{row}}
+[01:26] denisb: euh... oui ?
+[01:26] TeddyP: c'est ce que j'ai trouvé dans prive/editer/article.html
+[01:26] denisb: oui
+[01:26] TeddyP: et là je bloque
+[01:27] TeddyP: je réfléchi, je réfléchi
+[01:27] denisb: dans ta page article_edit tu mets juste le formulaire
+[01:28] azerttyu a quitté le canal.
+[01:28] azerttyu a rejoint le canal.
+[01:29] TeddyP: ok
+[01:29] denisb: #FORMULAIRE_EDITER_ARTICLE{oui, #ENV{id_rubrique}, #URL_PAGE{page d'appel}, 0}
+[01:32] Nat33_ a quitté le canal. (Ping timeout: 256 seconds)
+[01:33] Haricophile a rejoint le canal.
+[01:34] TeddyP: bon ben, je n'arrive pas encore à créer une page=article_edit avec Z...
+[01:34] TeddyP: j'ai une page blanche...
+[01:34] denisb: avec Z ? arghlll
+[01:35] TeddyP: ah non c'est bon
+[01:35] TeddyP: j'ai trouvé
+[01:35] denisb: 'sous' Z (il faut dire maintenant)
+[01:35] TeddyP: fallait pas créer d'article_edit.html à la racine
+[01:35] denisb: si j'ai bien suivi
+[01:35] TeddyP: oui, aussi
+[01:35] TeddyP: Z est le concept
+[01:36] TeddyP: Zpip est une mise en application de ce concept
+[01:37] denisb: attention : le nouvel article est en 'prop' hein
+[01:37] denisb: euh... pardon 'en cours de rédaction'
+[01:37] TeddyP: vi
+[01:38] TeddyP: justement, c'est ce que j'allais dire
+[01:38] TeddyP: lol
+[01:38] denisb: pour voir le résultat il faut {statut = redac} dans la boucle
+[01:38] TeddyP: parce qu'en plus je n'ai pas d'url de retour
+[01:38] denisb: avec les crayons par dessus et ... roulez !
+[01:38] TeddyP: yep
+[01:39] denisb: mets ta boucle sous le formulaire dans article_edit.html
+[01:39] denisb: bref : à partir de là, tu peux jouer
+[01:40] BoOz a quitté le canal. (Quit: BoOz)
+[01:41] TeddyP: ouais
+[01:41] TeddyP: et je vais jouer dès demain!
+[01:41] TeddyP: nyark!
+[01:41] TeddyP: c'est trop bon
+[01:42] JLuc: tiens #URL_AUTEUR{#ID_AUTEUR,peut_ecrire=oui}  ne passe pas peut_ecrire=oui en param suppl (pas grave)
+[01:42] TeddyP: merci encore de ton aide denisb !!

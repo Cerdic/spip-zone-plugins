@@ -34,6 +34,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'design' => 'Charte graphique par',
 'documents' => 'Documents',
 
+//E
+'editer_message' => '&Eacute;diter le message',
+
 //F
 'flux_forum_article' => 'Flux rss du forum de cet article',
 
@@ -47,6 +50,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icons' => 'Images par',
 'identifiant' => 'Identifiant',
 'identifiant_compte' => 'Identifiant de ce compte',
+'info_cours_edition' => 'Vos messages en cours de r&eacute;daction',
+'info_cours_prop' => 'Vos messages propos&eacute; &agrave la publication',
+'info_messages_publies' => 'Vos messages publi&eacute;s',
 
 //L
 'laissez_commentaire' => 'Laissez un commentaire',
@@ -55,6 +61,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 //M
 'messages' => 'Messages',
+'mon_profil' => 'Mon profil',
 
 //N
 'nouveau_message' => 'Nouveau message',
@@ -68,11 +75,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'redaction' => 'R&eacute;daction',
 
 //S
+'sites' => 'Sites',
 'sous_licence' => 'sous Licence',
 'surnom' => 'Surnom',
 
 //T
 'tableau_de_bord' => 'Tableau de bord',
+'tous_les_sites' => 'Tous les sites',
+'tous_vos_messages' => 'Tous vos messages',
+
+//V
+'voir' => 'Voir',
+'voir_mon_profil' => 'Voir mon profil',
+'voir_votre_profil' => 'Voir voir profil',
+'votre_profil' => 'Votre profil',
 
 );
 

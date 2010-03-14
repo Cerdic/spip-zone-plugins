@@ -1,12 +1,5 @@
 #FORMULAIRE_RECHERCHE
 
 	[(#SESSION{id_auteur}|?{' '})
-	<div id="login" class="menu">
-	<h2 class="h2"><:zpipcoop:tableau_de_bord:></h2>
-		<ul class="menu-liste">
-			<li class="menu-entree"><:bonjour:> <a[ href="(#URL_PAGE{auteur}|parametre_url{id_auteur,[(#SESSION{id_auteur})]})"] title="[(#SESSION{nom}|attribut_html)]">[(#SESSION{nom})]</a>.</li>
-			[(#PLUGIN{spiplistes}|oui)<li class="menu-entree"><a href="#URL_PAGE{abonnement}"><:zpipcoop:abonnement:></a></li>]
-			<li class="menu-entree"><a href="#URL_LOGOUT{#URL_PAGE{login_public}|parametre_url{url,#URL_SITE_SPIP}}" rel="nofollow"><:icone_deconnecter:></a></li>
-		</ul>
-	</div><!--#login-->
+<INCLURE{fond=inclure/login_bloc,env}>
 ]
