@@ -115,7 +115,7 @@ if (!function_exists('revision_auteurs_elargi')) {
 	function revision_auteurs_elargi_dist($id, $c=false) {
 		return modifier_contenu('auteurs_elargi', $id,
 			array(
-				'champs' => array('nom_famille', 'prenom', 'adresse','ville','code_postal','pays','telephone','fax','mobile','adresse_pro','code_postal_pro','pays_pro','ville_pro','telephone_pro','fax_pro','mobile_pro'),
+				'champs' => array('sexe', 'nom_famille', 'prenom', 'adresse', 'ville', 'code_postal', 'pays', 'telephone', 'fax', 'mobile', 'adresse_pro', 'code_postal_pro', 'pays_pro', 'ville_pro', 'telephone_pro', 'fax_pro', 'mobile_pro'),
 				'nonvide' => array('nom_email' => _T('info_sans_titre'))
 			),
 			$c);

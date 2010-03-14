@@ -14,7 +14,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // La partie affichage du formulaire...
 function legender_auteur_supp_saisir($id_auteur){
-	$exceptions_des_champs_auteurs_elargis = pipeline('i2_exceptions_des_champs_auteurs_elargis',array());
+	
+	$exceptions = array('id_auteur', 'bio', 'nom', 'pass', 'login', 'email' ,'statut', 'pgp', 'url_site', 'nom_site', 'logo_auteur', 'username', 'statut_nouveau', 'statut_int', 'statut_interne', 'accesrestreint' ,'password', 'affordance_form', 'reglement', 'reglement_article', 'validation_numero_international', 'pays_defaut');	
+	$exceptions_des_champs_auteurs_elargis = pipeline('i2_exceptions_des_champs_auteurs_elargis',$exceptions);
 	
 	$corps_supp = '<li class="editer_inscription2 fieldset">';
 	$corps_supp .= '<fieldset><h3 class="legend">Inscription 2</h3>';
