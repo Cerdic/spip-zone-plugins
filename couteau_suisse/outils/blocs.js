@@ -90,6 +90,13 @@ function blocs_init() {
 		// annulation du clic
 		return false;
 	   });
+	// clic vers une note dans un bloc
+	jQuery('.spip_note['+cs_sel_jQuery+'rev=footnote]').each(function(i) {
+		jQuery(this).click(function(e){
+			var nh = this.id.replace(/^nb/,'nh');
+			jQuery('#'+nh).parents('.cs_blocs').eq(0).blocs_replie_tout().blocs_toggle();
+		});
+	});
 
 /*
 // LA SUITE DE CE CODE NE FONCTIONNE POUR L'INSTANT QUE SUR LE PREMIER CLIC, JE NE SAIS PAS ENCORE PKOI...
