@@ -4,7 +4,7 @@
 			<BOUCLE_forums(FORUMS) {par date} {inverse}{0,5} {plat}>
 			<BOUCLE_articles(ARTICLES) {par date} {inverse} {doublons} {date>#DATE} {lang}{0,5}>
 			<BOUCLE_documents(DOCUMENTS) {par date} {inverse} {doublons} {date>#DATE}{0,5}>
-			<li class="item file[ (#EXTENSION)]"><em><:zpipcoop:documents></em>&nbsp;[<a href="(#URL_DOCUMENT)" title="<:bouton_telecharger:>" type="#MIME_TYPE">[(#TITRE|sinon{[(#FICHIER|basename)]})]</a> <small>(<span>#TYPE_DOCUMENT[ &ndash; (#TAILLE|taille_en_octets)]</span>)</small>][<small> | (#DATE|affdate_court)</small>]</li>
+			<li class="item file[ (#EXTENSION)]"><em><:zpipcoop:documents:></em>&nbsp;[<a href="(#URL_DOCUMENT)" title="<:bouton_telecharger:>" type="#MIME_TYPE">[(#TITRE|sinon{[(#FICHIER|basename)]})]</a> <small>(<span>#TYPE_DOCUMENT[ &ndash; (#TAILLE|taille_en_octets)]</span>)</small>][<small> | (#DATE|affdate_court)</small>]</li>
 			</BOUCLE_documents>
 			<li class="item mes"><em><:zpipcoop:messages:></em>&nbsp;[<a href="#URL_ARTICLE">(#TITRE)</a>][<small>, <:par_auteur:></small> (#LESAUTEURS)][<small> | (#DATE|affdate_court)</small>]</li>
 			</BOUCLE_articles>
