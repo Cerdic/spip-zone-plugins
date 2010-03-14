@@ -61,23 +61,23 @@ On teste la présence d'au moins un des champs de coordonnées professionnelles 
         </li>]
 
         [(#CONFIG{inscription2/pays_pro}|=={on}|oui)
-			[(#SAISIE{pays,pays_pro}{label=<:inscription2:pays:>}
-				{obligatoire=[(#CONFIG{inscription2/pays_obligatoire}|=={on}|?{oui,non})]})]
+			[(#SAISIE{pays,pays_pro,label=<:inscription2:pays:>,
+				obligatoire=[(#CONFIG{inscription2/pays_obligatoire}|=={on}|?{oui,non})]})]
 		]
 		
         [(#CONFIG{inscription2/telephone_pro}|=={on}|oui)
-			[(#SAISIE{input,telephone_pro}{label=<:inscription2:telephone_pro:>}
-				{obligatoire=[(#CONFIG{inscription2/telephone_pro_obligatoire}|=={on}|?{oui,non})]})]		
+			[(#SAISIE{input,telephone_pro,label=<:inscription2:telephone_pro:>,
+				obligatoire=[(#CONFIG{inscription2/telephone_pro_obligatoire}|=={on}|?{oui,non})]})]		
 		]
 		
         [(#CONFIG{inscription2/mobile_pro}|=={on}|oui)
-			[(#SAISIE{input,mobile_pro}{label=<:inscription2:mobile_pro:>}
-				{obligatoire=[(#CONFIG{inscription2/mobile_pro_obligatoire}|=={on}|?{oui,non})]})]		
+			[(#SAISIE{input,mobile_pro,label=<:inscription2:mobile_pro:>,
+				obligatoire=[(#CONFIG{inscription2/mobile_pro_obligatoire}|=={on}|?{oui,non})]})]		
 		]
 				
         [(#CONFIG{inscription2/fax_pro}|=={on}|oui)
-			[(#SAISIE{input,fax_pro}{label=<:inscription2:fax_pro:>}
-				{obligatoire=[(#CONFIG{inscription2/fax_pro_obligatoire}|=={on}|?{oui,non})]})]		
+			[(#SAISIE{input,fax_pro,label=<:inscription2:fax_pro:>,
+				obligatoire=[(#CONFIG{inscription2/fax_pro_obligatoire}|=={on}|?{oui,non})]})]		
 		]
 	</ul>
 </fieldset>]
