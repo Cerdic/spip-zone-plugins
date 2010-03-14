@@ -1,22 +1,16 @@
-// compatibilité SPIP 1.9.2 : fonction $.hasClass indisponible sous jQuery 1.1.1
-if(typeof jQuery.fn.hasClass=="undefined")
-	jQuery.fn.hasClass = function( selector ) {
-		return this.is( "." + selector );
-	};
-
 // fonction surchargeable : gestion du slide jQuery
 jQuery.fn.blocs_toggle_slide_dist = function( selector ) {
 	this.toggleClass('blocs_slide');
-	return typeof jQuery.fn.blocs_toggle_slide=='function'
-		?this.blocs_toggle_slide()
-		:(this.is(".blocs_slide")?this.slideUp(blocs_slide):this.slideDown(blocs_slide));
+	if(typeof jQuery.fn.blocs_toggle_slide=='function')
+		return this.blocs_toggle_slide();
+	return this.is(".blocs_slide")?this.slideUp(blocs_slide):this.slideDown(blocs_slide);
 };
 
 jQuery.fn.blocs_set_title = function( selector ) {
 	var title = this.parent().find('.blocs_title:last').text();
 	if(!title) title = blocs_title_def;
 	title = title.split(blocs_title_sep);
-	this.children('a').attr('title', title[jQuery(this).hasClass('blocs_replie')?0:1]);
+	this.children('a').attr('title', title[jQuery(this).is('.blocs_replie')?0:1]);
 	return this;
 };
 
@@ -24,7 +18,7 @@ jQuery.fn.blocs_set_title = function( selector ) {
 jQuery.fn.blocs_toggle = function() {
 	if (!this.length) return this;
 	// applique-t-on la fonction sur cs_blocs ou sur blocs_titre ?
-	var cible = this.hasClass('cs_blocs')? this.children('.blocs_titre').eq(0) : this;
+	var cible = this.is('.cs_blocs')? this.children('.blocs_titre').eq(0) : this;
 	// on replie/deplie la cible...
 	cible.toggleClass('blocs_replie').blocs_set_title();
 	var dest = this[0].id.match('^cs_bloc_id_')?jQuery('div.'+this[0].id):cible.next();
@@ -55,7 +49,7 @@ jQuery.fn.blocs_toggle = function() {
 jQuery.fn.blocs_replie_tout = function() {
 	if(blocs_replier_tout) {
 		// applique-t-on la fonction sur cs_blocs ou sur blocs_titre ?
-		var cible = this.hasClass('cs_blocs')? this : this.parents('div.cs_blocs');
+		var cible = this.is('.cs_blocs')? this : this.parents('div.cs_blocs');
 		// lignee du bloc
 		var lignee = cible.children('.blocs_titre');
 		jQuery('.blocs_titre').not('.blocs_replie').not(lignee).blocs_toggle();
@@ -91,10 +85,15 @@ function blocs_init() {
 		return false;
 	   });
 	// clic vers une note dans un bloc
-	jQuery('.spip_note['+cs_sel_jQuery+'name^=nb]').each(function(i) {
+	jQuery('.spip_note['+cs_sel_jQuery+'name^=nb], .spip_note['+cs_sel_jQuery+'id^=nb]').each(function(i) {
 		jQuery(this).click(function(e){
 			var href = this.href.substring(this.href.lastIndexOf("#"));
-			jQuery(href).parents('.cs_blocs').eq(0).blocs_replie_tout().blocs_toggle();
+			href = jQuery(href).parents('.cs_blocs').eq(0).children('.blocs_titre').eq(0);
+			// on neutralise une eventuelle animation
+			old_blocs_slide = blocs_slide;
+			if(blocs_slide!='aucun') blocs_slide = -1;
+			if(href.is('.blocs_replie')) href.click();
+			blocs_slide = old_blocs_slide;
 			return true;
 		});
 	});
@@ -142,7 +141,7 @@ function blocs_deplies() {
 	jQuery('.cs_blocs').each(function() {
 		var numero = /cs_bloc\d+/.exec(this.className);
 		if(numero==null) return;
-		replie = jQuery(this).children('.blocs_titre').eq(0).hasClass('blocs_replie');
+		replie = jQuery(this).children('.blocs_titre').eq(0).is('.blocs_replie');
 		if(!replie) deplies += (deplies.length?', ':'') + 'div.' + numero[0];
 	});
 	return deplies.length?deplies:null;

@@ -62,7 +62,7 @@ function onglets_init() {
 		sel.click();
 	}
 	// clic vers une note dans un onglet
-	jQuery('.spip_note['+cs_sel_jQuery+'name^=nb]').each(function(i) {
+	jQuery('.spip_note['+cs_sel_jQuery+'name^=nb], .spip_note['+cs_sel_jQuery+'id^=nb]').each(function(i) {
 		jQuery(this).click(function(e){
 			var href = this.href.substring(this.href.lastIndexOf("#"));
 			jQuery(href).parents('.onglets_contenu').eq(0).montre_onglet();

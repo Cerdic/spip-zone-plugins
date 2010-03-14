@@ -24,7 +24,7 @@ function cs_sommaire_cookie() {
 			.next().toggleClass('cs_sommaire_invisible');
 	jQuery(window).bind('unload', function() {
 		jQuery.cookie('cs_sommaire',
-			Number(jQuery(sommaire_sel).eq(0).hasClass('cs_sommaire_replie'))
+			Number(jQuery(sommaire_sel).eq(0).is('.cs_sommaire_replie'))
 		);
 	});
 }
