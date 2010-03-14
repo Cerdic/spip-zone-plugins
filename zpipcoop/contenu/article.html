@@ -2,31 +2,34 @@
 [(#REM) Fil d'Ariane ]
 <p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_article}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; <strong class="on">(#TITRE|couper{80})</strong>]</p>
 
-<div class="cartouche">
-	[(#LOGO_ARTICLE||image_reduire{200,200})]
-	[<p class="#EDIT{surtitre} surtitre">(#SURTITRE)</p>]
-	<h1 class="h1 #EDIT{titre}">#TITRE</h1>
-	[<p class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</p>]
+<div class="contenu-principal">
+	<div class="cartouche">
+		[(#LOGO_ARTICLE||image_reduire{200,200})]
+		[<p class="#EDIT{surtitre} surtitre">(#SURTITRE)</p>]
+		<h1 class="h1 #EDIT{titre}">#TITRE</h1>
+		[<p class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</p>]
 
-	<p class="info-publi"><abbr class="published" title="[(#DATE|date_iso)]">[(#DATE|nom_jour) ][(#DATE|affdate)]</abbr>[, <span class="auteurs"><:par_auteur:> (#LESAUTEURS)</span>]</p>
-	[(#REM) Inclure le modele des liens de traductions ]
-	#MODELE{article_traductions}
-</div>
+		<p class="info-publi"><abbr class="published" title="[(#DATE|date_iso)]">[(#DATE|nom_jour) ][(#DATE|affdate)]</abbr>[, <span class="auteurs"><:par_auteur:> (#LESAUTEURS)</span>]</p>
+		[(#REM) Inclure le modele des liens de traductions ]
+		#MODELE{article_traductions}
+	</div>
 
-<div class="surlignable">
-	[<div class="#EDIT{chapo} chapo">(#CHAPO|image_reduire{500,0})</div>]
-	[<div class="#EDIT{texte} texte">(#TEXTE|image_reduire{500,0})</div>]
-</div>
+	<div class="surlignable">
+		[<div class="#EDIT{chapo} chapo">(#CHAPO|image_reduire{500,0})</div>]
+		[<div class="#EDIT{texte} texte">(#TEXTE|image_reduire{500,0})</div>]
+	</div>
 
-[<p class="#EDIT{hyperlien} hyperlien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+	[<p class="#EDIT{hyperlien} hyperlien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
 
-[<div class="ps">
-	<h2 class="h2"><:info_ps:></h2>
-	<div class="#EDIT{ps} surlignable">(#PS|image_reduire{500,0})</div>
-</div>]
+	[<div class="ps">
+		<h2 class="h2"><:info_ps:></h2>
+		<div class="#EDIT{ps} surlignable">(#PS|image_reduire{500,0})</div>
+	</div>]
 
 [(#REM) Gestion du portfolio et des documents ]
 [(#INCLURE{fond=inclure/documents}{id_article})]
+
+</div>
 
 [(#REM) Petition :
 La petition ayant une PAGINATION il faut absolument {env}
@@ -38,6 +41,9 @@ et pourquoi pas ajax
 [(#REM) Forum de l'article ]
 <a href="#forum" name="forum" id="forum"></a>
 <INCLURE{fond=inclure/forum}{id_article} />
-[<p class="repondre"><a href="(#PARAMETRES_FORUM|url_reponse_forum)" rel="noindex nofollow"><:repondre_article:></a></p>]
+[(#FORMULAIRE_FORUM)]
+	<div class="trackback_rss">
+	<p><a href="[(#URL_PAGE{rss_forum_article}|parametre_url{'id_article',#ID_ARTICLE})]" title="<:zpipcoop:flux_forum_article|attribut_html:>"><:zpipcoop:flux_forum_article:>.</a></p>
+	</div>
 
 </BOUCLE_contenu_article>

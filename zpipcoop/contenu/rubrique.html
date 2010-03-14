@@ -1,6 +1,6 @@
 <BOUCLE_contenu_rubrique(RUBRIQUES){id_rubrique}>
 	[(#REM) Fil d'Ariane ]
-	<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_rubrique}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; <strong class="on">(#TITRE|couper{80})</strong>]</p>
+	<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_rubrique}> &gt; <a href="#URL_RUBRIQUE" title="[(#TITRE|supprimer_numero)]">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; <strong class="on">(#TITRE|couper{80})</strong>]</p>
 
 	<div class="cartouche">
 		[(#LOGO_RUBRIQUE||image_reduire{200,200})]
@@ -30,14 +30,14 @@
 			<ul class="menu-liste">
 				<BOUCLE_sous_rubriques(RUBRIQUES) {id_parent} {par num titre, titre}>
 				<li class="menu-entree">
-					<a href="#URL_RUBRIQUE">[(#TITRE)]</a>
+					<a href="#URL_RUBRIQUE" title="[(#TITRE|supprimer_numero)]">[(#TITRE)]</a>
 
 					[(#REM) Une boucle recursive pour le mini plan]
 					<B_miniplan>
 					<ul class="menu-liste">
 						<BOUCLE_miniplan(RUBRIQUES) {id_parent} {par num titre, titre}>
 						<li class="menu-entree">
-							<a href="#URL_RUBRIQUE">[(#TITRE)]</a>
+							<a href="#URL_RUBRIQUE" title="[(#TITRE|supprimer_numero)]">[(#TITRE)]</a>
 							<BOUCLE_m2(BOUCLE_miniplan)></BOUCLE_m2>
 						</li>
 						</BOUCLE_miniplan>

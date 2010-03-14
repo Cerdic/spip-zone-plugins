@@ -1,5 +1,5 @@
 <BOUCLE_extra_article(ARTICLES){id_article}>
-[(#REM) Lords du passage en plugins passer au format de date du cs afin d'éviter l'année 1970
+[(#REM) Lors du passage en plugin passer au format de date du cs afin d'éviter l'année 1970
 (cf:http://zone.spip.org/trac/spip-zone/browser/_plugins_/couteau_suisse/cout_options.php)]
 
 [(#LOGO_SITE_SPIP||image_reduire{226,226})]
@@ -7,23 +7,19 @@
 
 	[(#AUTORISER{ecrire}|ou{#AUTORISER{activer_sites}})
 	<div class="liste">
+	<h2 class="h2"><:zpipcoop:redaction:></h2>
 	<ul class="liste-items">
 	[(#AUTORISER{ecrire})<li class="item"><a href="[(#URL_ECRIRE{articles_edit,id_rubrique=#ID_RUBRIQUE}|parametre_url{new,oui})]" class="add"><:zpipcoop:nouveau_message:></a></li>]
 	[(#AUTORISER{activer_sites})<li class="item"><a href="[(#URL_ECRIRE{sites_edit,id_rubrique=#ID_RUBRIQUE}|parametre_url{new,oui})]" class="add"><:zpipcoop:nouveau_site:></a></li>]
 	</ul>
 	</div>]
 
-	[(#PLUGIN{spiplistes}|oui)<h2 class="h2"><:zpipcoop:abonnement:></h2>
-	<ul class="liste-items">
-		[(#PLUGIN{spiplistes}|oui)<li class="item"><a href="#URL_PAGE{abonnement}"><:zpipcoop:abonnement:></a></li>]
-	</ul>]
-
 	<B_groupes>
 	<div class="liste groupes">
 	<h2 class="h2"><:zpipcoop:groupes_travail:></h2>
 	<ul class="liste-items">
 		<BOUCLE_groupes(RUBRIQUES){racine}>
-			<li class="item"><a href="#URL_RUBRIQUE">#TITRE</a></li>
+			<li class="item"><a href="#URL_RUBRIQUE" title="[(#TITRE|supprimer_numero)]">#TITRE</a></li>
 		</BOUCLE_groupes>
 	</ul>
 	</div>

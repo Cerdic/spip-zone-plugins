@@ -3,7 +3,7 @@
 	 <ul class="menu-liste">
 	 <BOUCLE_rubriques(RUBRIQUES) {racine} {par num titre, titre}>
 		<li class="menu-entree[ (#EXPOSE)]">
-			<a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a>
+			<a href="#URL_RUBRIQUE" title="[(#TITRE|supprimer_numero)]">[(#TITRE|couper{80})]</a>
 		</li>
 	 </BOUCLE_rubriques>
 	 </ul>

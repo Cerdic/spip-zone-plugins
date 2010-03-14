@@ -3,7 +3,7 @@
 
     <BOUCLE_contexte_article(ARTICLES) {id_article}>
     <BOUCLE_ariane_article(HIERARCHIE) {id_article}>
-    &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a>
+    &gt; <a href="#URL_RUBRIQUE" title="[(#TITRE|supprimer_numero)]">[(#TITRE|couper{80})]</a>
     </BOUCLE_ariane_article>
     &gt; <a href="#URL_ARTICLE">[(#TITRE|couper{80})]</a>
     </BOUCLE_contexte_article>
@@ -11,21 +11,21 @@
 
     <BOUCLE_contexte_breve(BREVES) {id_breve}>
     <BOUCLE_ariane_breve(RUBRIQUES) {id_rubrique}>
-    &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a>
+    &gt; <a href="#URL_RUBRIQUE" title="[(#TITRE|supprimer_numero)]">[(#TITRE|couper{80})]</a>
     </BOUCLE_ariane_breve>
     &gt; <a href="#URL_BREVE">[(#TITRE|couper{80})]</a>
     </BOUCLE_contexte_breve>
 
     <BOUCLE_contexte_rubrique(RUBRIQUES) {id_rubrique}>
     <BOUCLE_ariane_rubrique(HIERARCHIE) {id_rubrique}>
-    &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a>
+    &gt; <a href="#URL_RUBRIQUE" title="[(#TITRE|supprimer_numero)]">[(#TITRE|couper{80})]</a>
     </BOUCLE_ariane_rubrique>
-    &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a>
+    &gt; <a href="#URL_RUBRIQUE" title="[(#TITRE|supprimer_numero)]">[(#TITRE|couper{80})]</a>
     </BOUCLE_contexte_rubrique>
 
     <BOUCLE_contexte_site(SITES) {id_syndic}>
     <BOUCLE_ariane_site(HIERARCHIE) {id_rubrique}>
-    &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a>
+    &gt; <a href="#URL_RUBRIQUE" title="[(#TITRE|supprimer_numero)]">[(#TITRE|couper{80})]</a>
     </BOUCLE_ariane_site>
     &gt; <a href="[(#ID_SYNDIC|generer_url_entite{'site'})]">[(#TITRE|couper{80})]</a>
     </BOUCLE_contexte_site>
@@ -70,7 +70,7 @@
     </BOUCLE_breve>
     
     <BOUCLE_rubrique(RUBRIQUES) {id_rubrique}>
-    <h3 class="h3"><a href="#URL_RUBRIQUE">#TITRE</a></h3>
+    <h3 class="h3"><a href="#URL_RUBRIQUE" title="[(#TITRE|supprimer_numero)]">#TITRE</a></h3>
     [<div class="texte">(#TEXTE)</div>]
     </BOUCLE_rubrique>
     

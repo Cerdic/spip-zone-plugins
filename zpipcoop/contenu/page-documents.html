@@ -1,31 +1,26 @@
-
-	<div id="content_wrap">
-		<div id="content">
-			<div id="caption">
-			<h2><:zpipcoop:documents:></h2>
-			</div><!--#caption-->
-			<B_documents_joints>
-			#ANCRE_PAGINATION
-			#PAGINATION{precedent_suivant}
-				<BOUCLE_documents_joints(DOCUMENTS) {tous} {vu=non}{!par date}{pagination 20}>
-				<div class="document">
-					<div class="logo_document">
-					[(#EXTENSION|match{'^(gif|jpg|png)$'}|?{
-						[<a href="(#URL_DOCUMENT)" title="<:bouton_telecharger:>" type="#MIME_TYPE">(#MODELE{emb}|image_reduire{52})</a>]
-					,
-						[(#LOGO_DOCUMENT|#URL_DOCUMENT)]
-					})]
-					</div><!--.logo_document-->
-					[<strong><a href="(#URL_DOCUMENT)" title="<:bouton_telecharger:>" type="#MIME_TYPE">[(#TITRE|sinon{[(#FICHIER|basename)]})]</a></strong>
-					<small>(<span>#TYPE_DOCUMENT[ &ndash; (#TAILLE|taille_en_octets)]</span>)</small>
-					#DESCRIPTIF]
-				<br class="nettoyeur" />
-				</div><!--.document-->
-				</BOUCLE_documents_joints>
-			#PAGINATION{precedent_suivant}
-			[<div id="more_posts">(#PAGINATION)</div>]
-			</B_documents_joints>
-			<div class="post"><p><:zpipcoop:aucun_document:></p></div>
-			<//B_documents_joints>
-		</div><!--#content-->
-	</div><!--#content_wrap-->
+<B_documents_joints>
+<div class="liste documents documents_joints">
+<h2><:zpipcoop:documents:></h2>
+#ANCRE_PAGINATION
+#PAGINATION{precedent_suivant}
+	<ul class="liste-items">
+	<BOUCLE_documents_joints(DOCUMENTS) {tous} {vu=non}{!par date}{pagination 20}>
+	<li class="item">
+		[(#EXTENSION|match{'^(gif|jpg|png)$'}|?{
+[<a href="[(#URL_DOCUMENT)]" title="<:bouton_telecharger:>" type="#MIME_TYPE">(#MODELE{emb}|image_reduire{52})</a>]
+,
+[(#LOGO_DOCUMENT|#URL_DOCUMENT)]
+})]
+		[<strong><a href="(#URL_DOCUMENT)" title="<:bouton_telecharger:>" type="#MIME_TYPE">[(#TITRE|sinon{[(#FICHIER|basename)]})]</a></strong>
+		<small><span>([(#TYPE_DOCUMENT)][ &ndash; (#TAILLE|taille_en_octets)])</span></small>
+		#DESCRIPTIF]
+	<br class="nettoyeur" />
+	</li><!--.document-->
+	</BOUCLE_documents_joints>
+	[<p class="pagination">(#PAGINATION{precedent_suivant})</p>]
+	[<p class="pagination">(#PAGINATION)</p>]
+	</ul>
+</div>
+</B_documents_joints>
+<div class="post"><p><:zpipcoop:aucun_document:></p></div>
+<//B_documents_joints>

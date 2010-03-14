@@ -8,7 +8,7 @@
 
 <BOUCLE_secteurs(RUBRIQUES) {racine} {par titre}>
 
-	<h2 class="h2"><a href="#URL_RUBRIQUE">#TITRE</a></h2>
+	<h2 class="h2"><a href="#URL_RUBRIQUE" title="[(#TITRE|supprimer_numero)]">#TITRE</a></h2>
 
 	[(#REM) Articles et sous-rubriques ]
 	<B_articles_racine>
@@ -24,7 +24,7 @@
 	<ul class="plan">
 		<BOUCLE_rubriques(RUBRIQUES) {id_parent} {par titre}>
 		<li>
-			<strong><a href="#URL_RUBRIQUE">#TITRE</a></strong>
+			<strong><a href="#URL_RUBRIQUE" title="[(#TITRE|supprimer_numero)]">#TITRE</a></strong>
 			
 			<B_articles>
 			<ul>

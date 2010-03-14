@@ -1,13 +1,13 @@
 <plugin>
 	<nom>Zpipcoop</nom>
-	<auteur>Pierre KUHN, Val&ecute;ry-Xavier Lentz
+	<auteur>Pierre KUHN, Val&ecute;ry-Xavier Lentz, Teddy Payet
 	&copy; 2010</auteur>
 	<icon></icon>
 	<licence>GPL</licence>
-	<version>0.2</version>
+	<version>0.3</version>
 	<etat>dev</etat>
 	<description>
-	Un plugin compatible avec le concepte Z. Une squelette sur accés restraint compl&eacute;tement.
+	Un plugin compatible avec le concept Z. Un squelette avec un acc&eacute;s enti&egrave;rement restreint.
 	</description>
 	<prefix>zpipcoop</prefix>
 	<fonctions>zpipcoop_pipelines.php</fonctions>

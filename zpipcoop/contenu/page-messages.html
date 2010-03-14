@@ -1,33 +1,14 @@
-
-	<div id="content_wrap">
-		<div id="content">
-			[(#REM) Derniers articles ]
-			<B_articles_recents>
-			#ANCRE_PAGINATION
-			<div id="caption">
-				<h2><:derniers_articles:></h2>
-				#PAGINATION{precedent_suivant}
-			</div><!--#caption-->
-			<BOUCLE_articles_recents(ARTICLES){id_rubrique ?}{par date}{inverse} {pagination 5}>
-			<div class="post">
-				<h2><a href="#URL_ARTICLE" rel="bookmark">#TITRE</a></h2>
-				[(#PLUGIN{notation}|oui)#FORMULAIRE_NOTATION]<br />
-				#TEXTE
-			</div>
-			<div class="post_details">
-				<p><:publier:> [(#DATE|affdate_jourcourt)][, <:par_auteur:> (#LESAUTEURS)][, <:dans:> "(#TITRE_PARENT)"] 
-					[(#REM) Nombre total de messages ]
-					<a href="#URL_ARTICLE#forum" title="<:ajouter_commentaire:>">
-					<BOUCLE_decompte1(FORUMS) {id_article ?} {plat} />
-					[, (#TOTAL_BOUCLE|>{0}|?{#TOTAL_BOUCLE,''})
-					[(#TOTAL_BOUCLE|=={1}|?{<:message:>,<:messages_forum:>})]]
-					<//B_decompte1>
-					</a>.
-				</p>
-			</div><!--.post_details-->
-			</BOUCLE_articles_recents>
-			#PAGINATION{precedent_suivant}
-			[<div id="more_posts">(#PAGINATION)</div>]
-			</B_articles_recents>
-		</div><!--#content-->
-	</div><!--content_wrap-->
+<B_articles>
+<div class="liste articles sommaire">
+	#ANCRE_PAGINATION
+	<h2 class="h2"><:derniers_articles:></h2>
+	[<p class="pagination">(#PAGINATION{precedent_suivant})</p>]
+	<ul class="liste-items">
+		<BOUCLE_articles(ARTICLES) {!par date} {pagination 5}>
+		#INCLURE{fond=inclure/article-resume,id_article}
+		</BOUCLE_articles>
+	</ul>
+	[<p class="pagination">(#PAGINATION{precedent_suivant})</p>]
+	[<p class="pagination">(#PAGINATION)</p>]
+</div>
+</B_articles>

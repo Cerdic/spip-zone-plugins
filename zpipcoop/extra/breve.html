@@ -7,23 +7,19 @@
 
 	[(#AUTORISER{ecrire}|ou{#AUTORISER{activer_sites}})
 	<div class="liste">
+	<h2 class="h2"><:zpipcoop:redaction:></h2>
 	<ul class="liste-items">
 	[(#AUTORISER{ecrire})<li class="item"><a href="[(#URL_ECRIRE{articles_edit,id_rubrique=#ID_RUBRIQUE}|parametre_url{new,oui})]" class="add"><:zpipcoop:nouveau_message:></a></li>]
 	[(#AUTORISER{activer_sites})<li class="item"><a href="[(#URL_ECRIRE{sites_edit,id_rubrique=#ID_RUBRIQUE}|parametre_url{new,oui})]" class="add"><:zpipcoop:nouveau_site:></a></li>]
 	</ul>
 	</div>]
 
-	[(#PLUGIN{spiplistes}|oui)<h2 class="h2"><:zpipcoop:abonnement:></h2>
-	<ul class="liste-items">
-		[(#PLUGIN{spiplistes}|oui)<li class="item"><a href="#URL_PAGE{abonnement}"><:zpipcoop:abonnement:></a></li>]
-	</ul>]
-
 	<B_groupes>
 	<div class="liste groupes">
 	<h2 class="h2"><:zpipcoop:groupes_travail:></h2>
 	<ul class="liste-items">
 		<BOUCLE_groupes(RUBRIQUES){racine}>
-			<li class="item"><a href="#URL_RUBRIQUE">#TITRE</a></li>
+			<li class="item"><a href="#URL_RUBRIQUE" title="[(#TITRE|supprimer_numero)]">#TITRE</a></li>
 		</BOUCLE_groupes>
 	</ul>
 	</div>
@@ -45,7 +41,7 @@
 	<h2 class="h2"><:zpipcoop:derniers_visiteurs:></h2>
 	<ul class="liste-items">
 		<BOUCLE_connexions(AUTEURS){tous}{!par en_ligne}{0,10}>
-			<li class="item"><a href="#URL_AUTEUR">#NOM</a>[ (#EN_LIGNE|affdate{d/m/Y H:i:s})]</li>
+			<li class="item"><a href="#URL_AUTEUR" title="[(#NOM|supprimer_numero)]">#NOM</a>[ (#EN_LIGNE|affdate{d/m/Y H:i:s})]</li>
 		</BOUCLE_connexions>
 	</ul>
 	</div>

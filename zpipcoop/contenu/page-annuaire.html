@@ -1,21 +1,16 @@
-
-	<div id="content_wrap">
-		<div id="content">
-			<div id="caption">
-				<h2><:zpipcoop:annuaire:></h2>
-			</div><!--#caption-->
-			<table border="1" width="100%">
-				<B_auteurs>
-					<BOUCLE_auteurs(AUTEURS) {tous} {par nom}>
-					[(#COMPTEUR_BOUCLE|moins{1}|modulo{4}|=={0}|oui)<tr>]
-						<td align="center">
-							[<div class="logo_document">(#LOGO_AUTEUR||sinon{#CHEMIN{img/nophoto.png}}|image_passe_partout{80}|inserer_attribut{alt, #NOM|attribut_html})</div>]
-							<strong><a href="#URL_AUTEUR">#NOM</a></strong>
-						</td>
-					[(#COMPTEUR_BOUCLE|modulo{4}|=={0}|oui)</tr>]
-					</BOUCLE_auteurs>
-					</tr>
-				</B_auteurs>
-			</table>
-		</div><!--#content-->
-	</div><!--#content_wrap-->
+<B_auteurs>
+<div class="liste auteurs annuaire">
+<h2 class="h2"><:zpipcoop:annuaire:></h2>
+<table border="0" width="100%">
+		<BOUCLE_auteurs(AUTEURS) {tous} {par nom}>
+		[(#COMPTEUR_BOUCLE|moins{1}|modulo{4}|=={0}|oui)<tr>]
+		<td align="center" style="width:25%; vertical-align:top;">
+			<a href="#URL_AUTEUR" title="[(#NOM|supprimer_numero)]">[(#LOGO_AUTEUR||sinon{#CHEMIN{img/nophoto.png}}|image_passe_partout{80}|inserer_attribut{alt, #NOM|attribut_html}|inserer_attribut{'border','0'})<br />]
+		<strong>#NOM</strong></a>
+		</td>
+		[(#COMPTEUR_BOUCLE|modulo{4}|=={0}|oui)</tr>]
+		</BOUCLE_auteurs>
+		</tr>[(#REM) Il faudra qu'on trouve mieux que ça car lorsque c'est un multiple de 4, on a un double </tr> à la fin...]
+</table>
+</div>
+</B_auteurs>

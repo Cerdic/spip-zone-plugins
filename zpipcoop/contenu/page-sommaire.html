@@ -1,62 +1,32 @@
-	<div id="content_wrap">
-		<div id="content">
-			<div id="caption">
-				<h2><:nouveautes:></h2>
-			</div><!--caption-->
-			<div class="post">
-				<ul id="feed">
-					<BOUCLE_forums(FORUMS) {par date} {inverse}{0,5} {plat}>
-					<BOUCLE_articles(ARTICLES) {par date} {inverse} {doublons} {date>#DATE} {lang}{0,5}>
-					<BOUCLE_documents(DOCUMENTS) {par date} {inverse} {doublons} {date>#DATE}{0,5}>
-						<li class="file[ (#EXTENSION)]"><em><:zpipcoop:documents></em>&nbsp;[<a href="(#URL_DOCUMENT)" title="<:bouton_telecharger:>" type="#MIME_TYPE">[(#TITRE|sinon{[(#FICHIER|basename)]})]</a> <small>(<span>#TYPE_DOCUMENT[ &ndash; (#TAILLE|taille_en_octets)]</span>)</small>][<small>  | (#DATE|affdate_court)</small>]</li>
-					</BOUCLE_documents>
-						<li class="mes"><em><:zpipcoop:messages:></em>&nbsp;[<a href="#URL_ARTICLE">(#TITRE)</a>][<small>, <:par_auteur:></small> (#LESAUTEURS)][<small> | (#DATE|affdate_court)</small>]</li>
-					</BOUCLE_articles>
+<div class="liste nouveautes sommaire">
+	<h2><:nouveautes:></h2>
+		<ul id="feed" class="liste-items">
+			<BOUCLE_forums(FORUMS) {par date} {inverse}{0,5} {plat}>
+			<BOUCLE_articles(ARTICLES) {par date} {inverse} {doublons} {date>#DATE} {lang}{0,5}>
+			<BOUCLE_documents(DOCUMENTS) {par date} {inverse} {doublons} {date>#DATE}{0,5}>
+			<li class="item file[ (#EXTENSION)]"><em><:zpipcoop:documents></em>&nbsp;[<a href="(#URL_DOCUMENT)" title="<:bouton_telecharger:>" type="#MIME_TYPE">[(#TITRE|sinon{[(#FICHIER|basename)]})]</a> <small>(<span>#TYPE_DOCUMENT[ &ndash; (#TAILLE|taille_en_octets)]</span>)</small>][<small> | (#DATE|affdate_court)</small>]</li>
+			</BOUCLE_documents>
+			<li class="item mes"><em><:zpipcoop:messages:></em>&nbsp;[<a href="#URL_ARTICLE">(#TITRE)</a>][<small>, <:par_auteur:></small> (#LESAUTEURS)][<small> | (#DATE|affdate_court)</small>]</li>
+			</BOUCLE_articles>
 
-					<BOUCLE_documents2(DOCUMENTS) {par date} {inverse} {doublons} {date>#DATE}{0,5}>
-						<li class="file[ (#EXTENSION)]"><em><:zpipcoop:documents:></em>&nbsp;[<a href="(#URL_DOCUMENT)" title="<:bouton_telecharger:>" type="#MIME_TYPE">[(#TITRE|sinon{[(#FICHIER|basename)]})]</a> <small>(<span>#TYPE_DOCUMENT[ &ndash; (#TAILLE|taille_en_octets)]</span>)</small>][<small>  | (#DATE|affdate_court)</small>]</li>
-					</BOUCLE_documents2>
-						<li class="com"><em><:zpipcoop:commentaires:></em>&nbsp;[<a href="#URL_FORUM">(#TITRE)</a>][<small>, <:par_auteur:></small> <a href="#URL_AUTEUR">(#NOM)</a>][<small> | (#DATE|affdate_court)</small>]</li>
-					</BOUCLE_forums>
+			<BOUCLE_documents2(DOCUMENTS) {par date} {inverse} {doublons} {date>#DATE}{0,5}>
+			<li class="item file[ (#EXTENSION)]"><em><:zpipcoop:documents:></em>&nbsp;[<a href="(#URL_DOCUMENT)" title="<:bouton_telecharger:>" type="#MIME_TYPE">[(#TITRE|sinon{[(#FICHIER|basename)]})]</a> <small>(<span>#TYPE_DOCUMENT[ &ndash; (#TAILLE|taille_en_octets)]</span>)</small>][<small> | (#DATE|affdate_court)</small>]</li>
+			</BOUCLE_documents2>
+			<li class="item com"><em><:zpipcoop:commentaires:></em>&nbsp;[<a href="#URL_FORUM">(#TITRE)</a>][<small>, <:par_auteur:></small> <a href="#URL_AUTEUR" title="[(#NOM|supprimer_numero)]">(#NOM)</a>][<small> | (#DATE|affdate_court)</small>]</li>
+			</BOUCLE_forums>
 
-					<BOUCLE_article_fin(ARTICLES) {par date} {inverse} {doublons} {lang}{0,5}>
-					<BOUCLE_documents_fin1(DOCUMENTS) {par date} {inverse} {doublons} {date>#DATE}{0,5}>
-						<li class="file[ (#EXTENSION)]"><em><:zpipcoop:documents:></em>&nbsp;[<a href="(#URL_DOCUMENT)" title="<:bouton_telecharger:>" type="#MIME_TYPE">[(#TITRE|sinon{[(#FICHIER|basename)]})]</a> <small>(<span>#TYPE_DOCUMENT[ &ndash; (#TAILLE|taille_en_octets)]</span>)</small>][<small>  | (#DATE|affdate_court)</small>]</li>
-					</BOUCLE_documents_fin1>
-						<li class="mes"><em><:zpipcoop:messages:></em>&nbsp;[<a href="#URL_ARTICLE">(#TITRE)</a>][<small>, <:par_auteur:></small> (#LESAUTEURS)][<small> | (#DATE|affdate_court)</small>]</li>
-					</BOUCLE_article_fin>
+			<BOUCLE_article_fin(ARTICLES) {par date} {inverse} {doublons} {lang}{0,5}>
+			<BOUCLE_documents_fin1(DOCUMENTS) {par date} {inverse} {doublons} {date>#DATE}{0,5}>
+			<li class="item file[ (#EXTENSION)]"><em><:zpipcoop:documents:></em>&nbsp;[<a href="(#URL_DOCUMENT)" title="<:bouton_telecharger:>" type="#MIME_TYPE">[(#TITRE|sinon{[(#FICHIER|basename)]})]</a> <small>(<span>#TYPE_DOCUMENT[ &ndash; (#TAILLE|taille_en_octets)]</span>)</small>][<small> | (#DATE|affdate_court)</small>]</li>
+			</BOUCLE_documents_fin1>
+			<li class="item mes"><em><:zpipcoop:messages:></em>&nbsp;[<a href="#URL_ARTICLE">(#TITRE)</a>][<small>, <:par_auteur:></small> (#LESAUTEURS)][<small> | (#DATE|affdate_court)</small>]</li>
+			</BOUCLE_article_fin>
 
-					<BOUCLE_documents_fin2(DOCUMENTS) {par date} {inverse} {doublons} {date>#DATE}{0,5}>
-						<li class="file[ (#EXTENSION)]"><em><:zpipcoop:documents:></em>&nbsp;[<a href="(#URL_DOCUMENT)" title="<:bouton_telecharger:>" type="#MIME_TYPE">[(#TITRE|sinon{[(#FICHIER|basename)]})]</a> <small>(<span>#TYPE_DOCUMENT[ &ndash; (#TAILLE|taille_en_octets)]</span>)</small>][<small>  | (#DATE|affdate_court)</small>]</li>
-					</BOUCLE_documents_fin2>
-				</ul><!--#feed-->
-			</div><!--.post-->
+			<BOUCLE_documents_fin2(DOCUMENTS) {par date} {inverse} {doublons} {date>#DATE}{0,5}>
+			<li class="item file[ (#EXTENSION)]"><em><:zpipcoop:documents:></em>&nbsp;[<a href="(#URL_DOCUMENT)" title="<:bouton_telecharger:>" type="#MIME_TYPE">[(#TITRE|sinon{[(#FICHIER|basename)]})]</a> <small>(<span>#TYPE_DOCUMENT[ &ndash; (#TAILLE|taille_en_octets)]</span>)</small>][<small> | (#DATE|affdate_court)</small>]</li>
+			</BOUCLE_documents_fin2>
+		</ul><!--#feed-->
+</div>
 
-			<!--
-			[(#REM) Derniers articles ]
-			<B_articles_recents>
-				[(#ANCRE_PAGINATION)]
-				<div id="caption">
-				<h2><:derniers_articles:></h2>
-					<div id="m_post">
-						<div class="o_entries"><span>Older Entries</span></div>
-						<div class="r_entries"><span>Recent Entries</span></div>
-					</div>
-				</div>
-			<BOUCLE_articles_recents(ARTICLES) {par date}{inverse} {pagination 5}>
-				<div class="post">
-				<h2><a href="#URL_ARTICLE" rel="bookmark">#TITRE</a></h2>
-				#TEXTE
-				</div>
-				<div class="post_details">
-					<p>Posted on [(#DATE|affdate_jourcourt)][, <:par_auteur:> (#LESAUTEURS)], under RUBRIQUE. <a href="#">xx commentaires</a>.</p>
-				</div>
-			</BOUCLE_articles_recents>
-			[<div id="more_posts">(#PAGINATION)</div>]
-			</B_articles_recents>
-			-->
+[<div class="list shoutbox post">(#SHOUTBOX{normal,10})</div>]
 
-			[<div class="post">(#SHOUTBOX{normal,10})</div>]
-
-		</div><!--#content-->
-	</div><!--#content_wrap-->

@@ -66,9 +66,9 @@ a.spip_glossaire:hover { text-decoration: underline overline; }
 
 /* News feed */
 #content .post ul#feed {list-style: none;}
-ul#feed li {margin-bottom:.5em;background:none;padding:2px 0;border-bottom:1px solid #e9e9e9;color:#777;}
-ul#feed li em {color:#000000;font-size:.82em;font-style:normal;padding:3px 0 3px 25px;margin-right:1em;}
-ul#feed li small {color:#000000;font-size:.82em;}
+ul#feed li {margin-bottom:.5em;background:none;padding:2px 0;color:#777;}
+ul#feed li em {font-size:.82em;font-style:normal;padding:3px 0 3px 25px;margin-right:1em;}
+ul#feed li small {font-size:.82em;}
 .file em {background:url(img/page.png) no-repeat;}
 .com em {background:url(img/comment.png) no-repeat;}
 .mes em {background:url(img/page_white_text.png) no-repeat;}
@@ -80,7 +80,7 @@ ul#feed li small {color:#000000;font-size:.82em;}
 .zip em {background:url(img/package.png) no-repeat;}
 
 /* Login (menu) */
-#login {float: right;right: 0px;top: 0px;font-size: 11px;color: #8F8F8F;}
+#login {font-size: 11px;color: #8F8F8F;}
 
 /* Edit */
 .add {background: url(img/add.png) no-repeat;padding:1px 0 0 20px;}
@@ -92,7 +92,7 @@ ul#feed li small {color:#000000;font-size:.82em;}
 /* Shoutbox (avec plugin) */
 #contenu_shoutbox_normal, #formulaire_shoutbox_normal {font-size:13px;}
 #formulaire_shoutbox_normal legend {font-size: 15px;}
-#formulaire_shoutbox_normal form {font-size:13px;background:#fff;margin:.5em 0;border:0;}
+#formulaire_shoutbox_normal form {font-size:13px;margin:.5em 0;border:0;}
 #formulaire_shoutbox_normal form .spip_bouton input {margin-top: 3px;background:#bce681;
 	border: solid 1px #81c227;color:#4f4f4f;}
 #formulaire_shoutbox_normal form .spip_bouton input:hover {cursor:pointer;color:#4f4a4a;

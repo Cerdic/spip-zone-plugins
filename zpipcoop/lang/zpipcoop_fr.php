@@ -64,9 +64,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'personaliser_nav' => 'Personnaliser ce menu',
 'publier' => 'Publi&eacute; le',
 
+//R
+'redaction' => 'R&eacute;daction',
+
 //S
 'sous_licence' => 'sous Licence',
 'surnom' => 'Surnom',
+
+//T
+'tableau_de_bord' => 'Tableau de bord',
 
 );
 

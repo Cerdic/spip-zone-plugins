@@ -1,12 +1,10 @@
+<div class="menu-conteneur">
 <ul class="menu-liste">
-	<li class="page_item[(#ENV{page}|=={sommaire}|?{' current_page_item',' '})]"><a href="#URL_SITE_SPIP"><:accueil_site:></a></li>
-	<li class="page_item[(#ENV{page}|=={messages}|?{' current_page_item',' '})]"><a href="#URL_PAGE{messages}"><:zpipcoop:messages:></a></li>
-	<li class="page_item[(#ENV{page}|=={calendrier}|?{' current_page_item',' '})]"><a href="#URL_PAGE{calendrier}" ><:zpipcoop:agenda:></a></li>
-	<li class="page_item[(#ENV{page}|=={documents}|?{' current_page_item',' '})]"><a href="#URL_PAGE{documents}" ><:zpipcoop:documents:></a></li>
-	<li class="page_item[(#ENV{page}|=={annuaire}|?{' current_page_item',' '})]"><a href="#URL_PAGE{annuaire}" ><:zpipcoop:annuaire:></a></li>
-	[(#PLUGIN{SPIPLISTES}|ou{#PLUGINS{CLEVERMAIL}}|oui) <li class="page_item[(#ENV{page}|=={abonnement}|?{' current_page_item',' '})]"><a href="#URL_PAGE{abonnement}" ><:zpipcoop:abonnement:></a></li>]
+	<li class="menu-entree[(#ENV{page}|=={sommaire}|?{' on',' '})]"><a href="#URL_SITE_SPIP" title="<:accueil_site|attribut_html:>"><:accueil_site:></a></li>
+	<li class="menu-entree[(#ENV{page}|=={messages}|?{' on',' '})]"><a href="#URL_PAGE{messages}" title="<:zpipcoop:messages|attribut_html:>"><:zpipcoop:messages:></a></li>
+	<li class="menu-entree[(#ENV{page}|=={calendrier}|?{' on',' '})]"><a href="#URL_PAGE{calendrier}" title="<:zpipcoop:agenda|attribut_html:>"><:zpipcoop:agenda:></a></li>
+	<li class="menu-entree[(#ENV{page}|=={documents}|?{' on',' '})]"><a href="#URL_PAGE{documents}" title="<:zpipcoop:documents|attribut_html:>"><:zpipcoop:documents:></a></li>
+	<li class="menu-entree[(#ENV{page}|=={annuaire}|?{' on',' '})]"><a href="#URL_PAGE{annuaire}" title="<:zpipcoop:annuaire|attribut_html:>"><:zpipcoop:annuaire:></a></li>
+	[(#PLUGIN{spiplistes}|ou{#PLUGIN{clevermail}}|oui) <li class="menu-entree[(#ENV{page}|=={abonnement}|?{' on',' '})]"><a href="#URL_PAGE{abonnement}" title="<:zpipcoop:abonnement|attribut_html:>"><:zpipcoop:abonnement:></a></li>]
 </ul>
-<div id="login">
-	[(#SESSION{id_auteur}|?{' '})<p>[<:bonjour:> <a href="(#URL_PAGE{auteur}|parametre_url{id_auteur,[(#SESSION{id_auteur})]})">][(#SESSION{nom})]</a>.
-	<br /><a href="#URL_LOGOUT{#URL_PAGE{login_public}|parametre_url{url,#URL_SITE_SPIP}}" rel="nofollow"><:icone_deconnecter:></a></p>]
-</div><!--#login-->
+</div>
