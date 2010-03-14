@@ -1,7 +1,11 @@
 
+.formulaire_spip .formulaire_spip{
+	border:none;
+	background:transparent;
+}
+
 .formulaire_construire_formulaire{
 	padding:1em;
-	background:white;
 }
 .formulaire_construire_formulaire ul li label{
 	display:block;

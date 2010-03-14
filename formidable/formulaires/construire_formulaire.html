@@ -3,6 +3,7 @@
 ]
 <div class="formulaire_spip formulaire_editer formulaire_#ENV{form}">
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{_message_attention})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	
 	<BOUCLE_editable(CONDITION){si #ENV{editable}|oui}>

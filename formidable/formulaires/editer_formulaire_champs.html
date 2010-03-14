@@ -1,22 +1,26 @@
 
-<div class="ajax">
-	#FORMULAIRE_CONSTRUIRE_FORMULAIRE{formidable_#ENV{id}, #ENV{_saisies}}
-</div>
-
 <div class="formulaire_spip formulaire_editer formulaire_#ENV{form}[ formulaire_#ENV{form}-(#ENV{id,nouveau})]">
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	
+	<div class="ajax">
+		#FORMULAIRE_CONSTRUIRE_FORMULAIRE{formidable_#ENV{id}, #ENV{_saisies}}
+	</div>
+
 	[(#ENV{editable}|oui)
 	<form method="post" action="#ENV{action}" enctype="multipart/form-data"><div>
 		[(#REM) declarer les hidden qui declencheront le service du formulaire 
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 		
-		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
-		<!--extra-->
-		
-		<p class="boutons"><span class="image_loading"></span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+		<p class="boutons">
+			<span class="image_loading"></span>
+			<em class="attention"><:formidable:construire_attention_enregistrer:></em>
+			<button type="submit" class="submit">
+				<img src="#CHEMIN{images/formulaire-enregistrer-16.png}" alt="" />
+				<:bouton_enregistrer:>
+			</button>
+		</p>
 	</div></form>
 	]
 </div>
