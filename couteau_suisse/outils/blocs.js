@@ -91,10 +91,11 @@ function blocs_init() {
 		return false;
 	   });
 	// clic vers une note dans un bloc
-	jQuery('.spip_note['+cs_sel_jQuery+'rev=footnote]').each(function(i) {
+	jQuery('.spip_note['+cs_sel_jQuery+'name^=nb]').each(function(i) {
 		jQuery(this).click(function(e){
-			var nh = this.id.replace(/^nb/,'nh');
-			jQuery('#'+nh).parents('.cs_blocs').eq(0).blocs_replie_tout().blocs_toggle();
+			var href = this.href.substring(this.href.lastIndexOf("#"));
+			jQuery(href).parents('.cs_blocs').eq(0).blocs_replie_tout().blocs_toggle();
+			return true;
 		});
 	});
 

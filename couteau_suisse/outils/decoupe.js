@@ -4,8 +4,7 @@ var onglet_actif = 0;
 jQuery.fn.montre_onglet = function( selector ) {
 	// click sur un titre
 	if(this.is('.onglets_titre')) {
-		var contenu = '#' + this[0].id;
-		contenu = contenu.replace(/titre/,'contenu');
+		var contenu = '#' + this[0].id.replace(/titre/,'contenu');
 		var bloc = this.parent().parent();
 		bloc.children('.selected').removeClass('selected').end()
 			.children('.onglets_liste').children('.selected').removeClass('selected');
@@ -63,10 +62,11 @@ function onglets_init() {
 		sel.click();
 	}
 	// clic vers une note dans un onglet
-	jQuery('.spip_note['+cs_sel_jQuery+'rev=footnote]').each(function(i) {
+	jQuery('.spip_note['+cs_sel_jQuery+'name^=nb]').each(function(i) {
 		jQuery(this).click(function(e){
-			var nh = this.id.replace(/^nb/,'nh');
-			jQuery('#'+nh).parents('.onglets_contenu').eq(0).montre_onglet();
+			var href = this.href.substring(this.href.lastIndexOf("#"));
+			jQuery(href).parents('.onglets_contenu').eq(0).montre_onglet();
+			return true;
 		});
 	});
   }

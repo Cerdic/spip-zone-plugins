@@ -612,7 +612,7 @@ add_outil( array(
 		// s\'il y a un sommaire, on cache la navigation haute sur les pages
 		jQuery("div.decoupe_haut").css("display", "none");
 		// utilisation des cookies pour conserver l\'etat du sommaire si on quitte la page
-		jQuery.getScript(cs_CookiePlugin, cs_sommaire_cookie);
+		if(cs_CookiePlugin) jQuery.getScript(cs_CookiePlugin, cs_sommaire_cookie);
 	}',
 	'code:jq_init' => 'cs_sommaire_init.apply(this);',
 	// inserer : $table_des_traitements['TEXTE']['articles']= 'sommaire_d_article(propre(%s))';
