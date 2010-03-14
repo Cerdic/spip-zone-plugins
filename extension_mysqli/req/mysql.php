@@ -154,13 +154,13 @@ $GLOBALS['spip_mysql_functions_1'] = array(
  * @return  bool    TRUE si l'affectation a réussi
  */
 function spip_mysqli_set_charset($charset, $serveur='',$requeter=true,$requeter=true){
-	$connexion = &$GLOBALS['connexions'][$serveur ? $serveur : 0]['link'];
+	$link = &$GLOBALS['connexions'][$serveur ? $serveur : 0]['link'];
 	$ok = FALSE;
 	if (version_compare(PHP_VERSION , '5.1.5', '>=')) {
-		$ok = $connexion->set_charset($charset);
+		$ok = $link->set_charset($charset);
 	}
 	if (!$ok) {
-	    $ok = $connexion->query("SET NAMES '"._q($charset)."'");
+	    $ok = $link->query("SET NAMES '"._q($charset)."'");
 	}
 	return $ok;
 }
@@ -776,7 +776,7 @@ function spip_mysqli_countsel($from = array(), $where = array(),
 function spip_mysqli_error($serveur='') {
 	$connexion = &$GLOBALS['connexions'][$serveur ? $serveur : 0];
 	$link = $connexion['link'];
-	return $link->error() . $connexion['last'];
+	return $link->error . $connexion['last'];
 }
 
 /**
@@ -790,7 +790,7 @@ function spip_mysqli_error($serveur='') {
 function spip_mysqli_errno($serveur='') {
 	$connexion = &$GLOBALS['connexions'][$serveur ? $serveur : 0];
 	$link = $connexion['link'];
-	$s = $link->errno();
+	$s = $link->errno;
 	// 2006 MySQL server has gone away
 	// 2013 Lost connection to MySQL server during query
 	if (in_array($s, array(2006,2013)))
@@ -855,7 +855,8 @@ function spip_mysqli_insert($table, $champs, $valeurs, $desc='', $serveur='',$re
  
 	$connexion['last'] = $query ="INSERT INTO $table $champs VALUES $valeurs";
 #	spip_log($query);
-	if ($link->query($query))
+	$res = $link->query($query);
+	if ($res)
 		$r = $link->insert_id;
 	else $r = false;
 
@@ -1180,13 +1181,14 @@ function spip_mysqli_in($val, $valeurs, $not='', $serveur='',$requeter=true) {
  * @return  string  la chaine préparée
  */
 function spip_mysqli_cite($v, $type) {
+	$link = &$GLOBALS['connexions'][0]['link'];
 	if (sql_test_date($type) AND preg_match('/^\w+\(/', $v)
 	OR (sql_test_int($type)
 		 AND (is_numeric($v)
 		      OR (ctype_xdigit(substr($v,2))
 			  AND $v[0]=='0' AND $v[1]=='x'))))
 		return $v;
-	else return  ("'" . mysqli_real_escape_string($v) . "'");
+	else return  ("'" . $link->real_escape_string($v) . "'");
 }
 
 
