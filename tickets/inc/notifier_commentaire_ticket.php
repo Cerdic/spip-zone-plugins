@@ -3,8 +3,16 @@
  * Notification d'un nouveau mesage de forum
  */
     function inc_notifier_commentaire_ticket($id_ticket,$statut_nouveau='',$statut_ancien=''){
-
-		$row = sql_select("a.titre, b.*","spip_tickets AS a, spip_tickets_forum AS b","a.id_ticket = b.id_ticket AND a.id_ticket=$id_ticket","","date DESC","1");
+		
+		// spip 2.0.x ou spip 2.1 ?
+		$test = sql_showtable("spip_tickets_forum",true);
+		
+		if ($test['field']) {
+			$row = sql_select("a.titre, b.*","spip_tickets AS a, spip_tickets_forum AS b","a.id_ticket = b.id_ticket AND a.id_ticket=$id_ticket","","date DESC","1");
+		} else {
+			$row = sql_select("a.titre, b.*","spip_tickets AS a, spip_forum AS b","a.id_ticket = b.id_objet AND a.id_ticket=$id_ticket AND b.objet='ticket'","","date_heure DESC","1");
+		}
+			
 		$datas = sql_fetch($row);
 
 		include_spip('tickets_fonctions');

@@ -199,6 +199,24 @@ function tickets_affiche_milieu($flux){
 	return $flux;
 }
 
+/**
+ * Insertion dans le pipeline formulaire_traiter pour les notifications de forums des tickets en 2.1
+ * @param string $flux
+ * @return string $flux
+ */
+function tickets_formulaire_traiter($flux){
+	if (($flux['args']['form']=='forum') AND ($flux['args']['args'][3]=='ticket')) {
+		if ($notifications = charger_fonction('notifications', 'inc')) {
+			$notifications('commenterticket', $flux['args']['args'][6],
+				array(
+					'id_auteur' => id_assigne, 
+					'texte' => texte
+				)
+			);
+		}
+	}
+	return $flux;
+}
 
 function tickets_forum_objets_depuis_env($objets){
 	$objets['ticket'] = id_table_objet('ticket');

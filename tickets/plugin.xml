@@ -160,7 +160,10 @@ Es wurde insbesondere entwickelt, um die Zusammenarbeit bei der Gestaltung des &
 		<nom>affiche_milieu</nom>
 		<inclure>tickets_pipelines.php</inclure>
 	</pipeline>
-
+	<pipeline>
+		<nom>formulaire_traiter</nom>
+		<inclure>tickets_pipelines.php</inclure>
+	</pipeline>
 	<pipeline>
 		<nom>forum_objets_depuis_env</nom>
 		<inclure>tickets_pipelines.php</inclure>
