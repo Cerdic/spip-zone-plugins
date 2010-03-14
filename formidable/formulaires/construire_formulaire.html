@@ -12,12 +12,15 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input style="display:none;" type="submit" class="submit" name="enregistrer" value="<:bouton_enregistrer:>" />
 		<ul>
+			[(#ENV{formulaire_modifie}|oui)
 			<li class="actions_formulaire">
+				<em class="attention"><:formidable:construire_attention_modifie:></em>
 				<button type="submit" class="submit" name="reinitialiser" value="oui" onclick="return confirm('<:formidable:construire_reinitialiser_confirmer:>')">
 					<img src="#CHEMIN{images/formulaire-reinitialiser-24.png}" alt="" />
 					<:formidable:construire_reinitialiser:>
 				</button>
 			</li>
+			]
 			<BOUCLE_contenu(POUR){tableau #ENV{_contenu}}>
 			[(#VAL{saisie}|array_key_exists{#VALEUR}|oui)
 				[(#VALEUR|formidable_generer_saisie_configurable{#ENV**|unserialize})]

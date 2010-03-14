@@ -19,6 +19,11 @@ function formulaires_construire_formulaire_charger($identifiant, $formulaire_ini
 		$formulaire_actuel = $formulaire_initial;
 	}
 	
+	// Si le formulaire actuel est différent du formulaire initial on agite un drapeau pour le dire
+	if ($formulaire_actuel != $formulaire_initial){
+		$contexte['formulaire_modifie'] = true;
+	}
+	
 	// On passe ça pour l'affichage
 	$contexte['_contenu'] = $formulaire_actuel;
 	// On passe ça pour la récup plus facile des champs

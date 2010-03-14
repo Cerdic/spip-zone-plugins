@@ -7,6 +7,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'construire_action_configurer' => 'Configurer',
 'construire_action_supprimer' => 'Supprimer',
 'construire_ajouter_champ' => 'Ajouter un champ',
+'construire_attention_modifie' => 'Attention, vous avez modifié le formulaire. Vous avez la possibilité de le réinitialiser à son état avant vos modifications.',
 'construire_aucun_champs' => 'Il n\'y a pour l\'instant aucun champ dans ce formulaire.',
 'construire_confirmer' => 'Voulez-vous vraiment supprimer ce champ ?',
 'construire_position_explication' => 'Indiquez devant quel autre champ sera placé celui-ci.',
