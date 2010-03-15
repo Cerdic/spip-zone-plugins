@@ -21,7 +21,7 @@
 		<nom>pre_liens</nom>
 		<inclure>lm2_pipelines.php</inclure>
 	</pipeline>
-	<necessite id="lib:soundmanagerv295a-20090717" src="http://www.schillmania.com/projects/soundmanager2/download/soundmanagerv295a-20090717.zip" />
+	<necessite id="lib:soundmanagerv295b-20100101" src="http://www.schillmania.com/projects/soundmanager2/download/soundmanagerv295b-20100101.zip" />
 	<necessite id="lib:jquery-ui-1.7.2.custom" src="http://jqueryui.com/download/jquery-ui-1.7.2.custom.zip" />
 	<necessite id="cfg" version="[1.14.1;]" />
 	<categorie>multimedia</categorie>

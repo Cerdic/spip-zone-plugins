@@ -19,10 +19,10 @@
 	var options = {};
 	var sm2_events = {};
 	var isMuted = false;
-	
+
 	$.fn.playlist = function(options) {
 		var defaults = {
-			sources : $('a[type=application/mp4],a[type=audio/mpeg],a[type=video/x-flv]'),
+			sources : $('a[type=application/mp4],a[type=audio/mpeg],a[type=video/x-flv],object[type=video/x-flv]'),
 			smUrl : "soundmanager/swf/",
 			smnullUrl : "soundmanager/null.mp3",
 			logo : false,
@@ -43,7 +43,7 @@
 			debug: false,
 			sm2_container : $('#sm2_container')
 		};
-		
+
 		sm2_events = {
 			play:function(){
 				isPlaying = true;
@@ -71,7 +71,7 @@
 				sm2_update_button();
 			},
 			id3:function(){
-				
+
 			},
 			metadata:function(){
 				if(this.width && this.height){
@@ -106,7 +106,7 @@
 				if(this.readyState == 3){
 					$("#sm2_loading").css({width:"100%"});
 				}
-			},              
+			},
 			whileloading:function(){
 				var timer = this.bytesLoaded / this.bytesTotal * 100 ;
 				$(".sm2_duration").html(sm2_getHMSTime(this.durationEstimate,true));
@@ -117,17 +117,17 @@
 				$("#sm2_position").css({width:Math.round(timer2) +"%"});
 				$(".sm2_position").html(sm2_getHMSTime(this.position,true));
 				sm2_update_button();
-			}	
+			}
 		}
 		options = $.extend(defaults, options);
-		
+
 		soundManager.bgColor = options.bgcolor;
 		soundManager.wmode = options.wmode;
 		soundManager.url = options.smUrl;
 		soundManager.nullURL = options.smnullUrl;
 		soundManager.allowFullScreen = options.fullscreen;
 		soundManager.useHighPerformance = true;
-		
+
 		if(options.movie){
 			isvideo = /\.(flv|mov|mp4|m4v|f4v|m4a|mp4v|3gp|3g2)(\?.*)?$/i;
 			soundManager.useMovieStar = true;
@@ -136,32 +136,41 @@
 				useVideo: true
 			}
 		}
-		
+
 		if(options.debug){
 			soundManager.consoleOnly = true;
-			soundManager.debugMode = true;	
+			soundManager.debugMode = true;
 		}else{
 			soundManager.consoleOnly = false;
 			soundManager.debugMode = false;
 		}
-		
+
 		$this = $(this);
 		var playliste_text = '';
 		var nb = 0;
 		options.sources.each(function() {
 			$source = $(this);
-			var sURL = $source.attr('href');
-			if($.inArray(sURL,liens)<0) {
-				playliste_text += '<li class="sm2_play"><a href='+sURL+'>'+sm2_joli_titre($source.html())+'</a></li>';
-				liens.push(sURL);
-				nb++;
+			if($source.is('a')){
+				var sURL = $source.attr('href');
+				if($.inArray(sURL,liens)<0) {
+					playliste_text += '<li class="sm2_play"><a href='+sURL+'>'+sm2_joli_titre($source.html())+'</a></li>';
+					liens.push(sURL);
+					nb++;
+				}
+			}else if ($source.is('object')){
+				var sURL = $source.find('param[name=src]').attr('value');
+				if($.inArray(sURL,liens)<0) {
+					playliste_text += '<li class="sm2_play"><a href='+sURL+'>'+sm2_joli_titre(sURL)+'</a></li>';
+					liens.push(sURL);
+					nb++;
+				}
 			}
 		});
 		if(nb>0){
 			/**
-			 * 
+			 *
 			 * Création de la playliste
-			 * 
+			 *
 			 */
 			var lecteur = '<div id="sm2_player">'
 				+ '<div id="sm2-container"><div id="sm2_cover">&nbsp;</div></div>'
@@ -180,14 +189,16 @@
 				+ '<div class="sm2_timer"><span class="sm2_position"></span> / <span class="sm2_duration"></span></div>'
 				+ '<div id="sm2_scrollbar"><div id="sm2_loading"></div><div id="sm2_position"></div></div>'
 				+ '</div>';
-			playliste_text = $('<ul class="playliste"></ul>').append(playliste_text);
 			$this.html(lecteur);
-			$('#sm2_player').append(playliste_text);
-			
+			if(nb>1){
+				playliste_text = $('<ul class="playliste"></ul>').append(playliste_text);
+				$('#sm2_player').append(playliste_text);
+			}
+
 			if(options.logo){
 				$('#sm2-container').css({'background-image' : 'url('+options.logo+')', 'background-position' : options.logo_top+' '+options.logo_left, 'background-repeat': options.logo_repeat});
 			}
-			
+
 			$this.find('li.sm2_play a').click(function(e){
 				e.preventDefault();
 				if($(this).parent().hasClass('sm2_play_on')){
@@ -196,11 +207,11 @@
 					sm2_player_play($.inArray($(this).attr('href'),liens));
 				}
 			});
-			
+
 			/**
-			 * 
+			 *
 			 * Les actions des boutons de la playliste
-			 * 
+			 *
 			 */
 			$('#sm2_player_play').click(function(e){
 				e.preventDefault();
@@ -252,11 +263,11 @@
 						$(".sm2_position").html(sm2_getHMSTime(son.position,true));
 						sm2_update_button();
 					}else{
-						son.setPosition(temps);	
+						son.setPosition(temps);
 					}
 				}
 			});
-			
+
 			if(options.scrollPositionInfo){
 				$('#sm2_scrollbar').prepend('<div class="sm2_jump_position"></div>');
 				$('#sm2_scrollbar').hover(function(e){
@@ -300,7 +311,7 @@
 			playliste_text = 'no media elements found';
 		}
 	};
-	
+
 	function sm2_player_play(i){
 		$(".sm2_position").html(sm2_getHMSTime(0,true));
 		$("#sm2_position").css({width:"0%"});
@@ -313,9 +324,9 @@
 				soundManager.play('media_'+i);
 			}else{
 				sm2_player_stop();
-				
+
 				sm2_player_creer_media(i);
-				
+
 				if($.inArray('media_'+i,soundManager.soundIDs)!= '-1'){
 				    soundManager.play('media_'+i,{volume:options.volume});
 				}
@@ -325,7 +336,7 @@
 			$(".playliste .sm2_play:eq("+i+")").addClass("sm2_play_on");
 		}
 	}
-	
+
 	function sm2_player_creer_media(i){
 		var video = liens[i].match(isvideo) ? true : false;
 		if(soundManager.canPlayURL(liens[i])){
@@ -359,13 +370,13 @@
 					onbufferchange:sm2_events.bufferchange,
 					whileloading:sm2_events.whileloading,
 					whileplaying:sm2_events.whileplaying,
-					'volume': options.volume    	
+					'volume': options.volume
 				});
 				typePlaying = 'sound';
 			};
 		}
 	}
-	
+
 	function sm2_player_stop(){
 		sm2_update_button();
 		$("span.play_on").removeClass("play_on");
@@ -386,19 +397,19 @@
 		}
 		live_track = null;
 	}
-	
+
 	/**
 	 * Pause / resume
 	 */
 	function sm2_player_togglePause(){
 		soundManager.togglePause('media_'+live_track);
 		if(isPaused){
-			$('#sm2_cover').css('opacity','.5').addClass('sm2_cover_paused').fadeIn('normal');	
+			$('#sm2_cover').css('opacity','.5').addClass('sm2_cover_paused').fadeIn('normal');
 		}else{
 			$('#sm2_cover').removeClass('sm2_cover_paused').fadeOut();
 		}
 	}
-	
+
 	/**
 	 * Affichage du bouton de lecture ou du bouton pause
 	 */
@@ -420,7 +431,7 @@
 		var sec = nbSec-(min*60);
 		return (bAsString?(min+':'+(sec<10?'0'+sec:sec)):{'min':min,'sec':sec});
 	}
-	
+
 	/**
 	 * Rendre les titres des documents un peu plus joli
 	 * - On supprime leurs extensions
@@ -435,7 +446,7 @@
 		titre = titre.replace(/(_|-)/g,' ');
 		return titre;
 	}
-	
+
 	function sm2_player_toggleVolume(){
 		if(isMuted){
 			isMuted = false;
