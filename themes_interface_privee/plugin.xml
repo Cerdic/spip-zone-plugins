@@ -14,7 +14,7 @@
 		<nom>header_prive</nom>
 		<inclure>themes_interface_privee_pipelines.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[2.1-beta;]" />
+	<necessite id="SPIP" version="[2.1.0-beta;]" />
 	<necessite id="css_imbriques" version="[0.9;]" />
 
 </plugin>
