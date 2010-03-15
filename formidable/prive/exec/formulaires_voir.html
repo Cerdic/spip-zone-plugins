@@ -1,6 +1,19 @@
+<BOUCLE_formulaire(FORMULAIRES){id_formulaire}>
+<!--#hierarchie-->
+<ul id="chemin">
+	<li>
+		<a href="#URL_ECRIRE{formulaires_tous}" class="racine"><:formidable:formulaires_tous:></a>
+	</li>
+	<li>
+		<span class="bloc">
+			<em>&gt;</em>
+			#TITRE
+		</span>
+	</li>
+</ul>
+<!--/#hierarchie-->
 
 <div class="fiche_objet">
-<BOUCLE_formulaire(FORMULAIRES){id_formulaire}>
 	<a href="[(#URL_ECRIRE{formulaires_editer}|parametre_url{id_formulaire,#ID_FORMULAIRE})]" class="icone36" style="float:right;">
 		<img width="24" height="24" src="#CHEMIN{images/formulaire-editer-24.png}" />
 		<span><:formidable:editer_modifier_formulaire:></span>
@@ -14,9 +27,6 @@
 	</div>
 	
 	#FORMULAIRE_FORMIDABLE{#ID_FORMULAIRE}
-</BOUCLE_formulaire>
-<p><:formidable:erreur_inexistant:></p>
-<//B_formulaire>
 </div>
 
 <!--#navigation-->
@@ -32,3 +42,4 @@
 
 <!--#extra-->
 <!--/#extra-->
+</BOUCLE_formulaire>
