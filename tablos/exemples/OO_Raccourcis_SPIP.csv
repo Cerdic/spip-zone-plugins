@@ -1,0 +1,11 @@
+﻿Première case considérée comme le titre étant donné que les autres cellules de cette ligne sont vides;;;;
+Cette ligne définit <br />les classes et cette <br />cellule a un alignement vers le haut;La première classe;La deuxième classe;La troisième classe avec un titre long;La troisième
+Cellules fusionées (cas sous-classe);;;;
+Le premier élément;3 cellules fusionnées;<;<;Cellule
+Le deuxième élément;Cellule;Cellule;Cellule;3 cellules fusionnées en hauteur
+Le troisième élément;3 cellules fusionnées;<;<;^
+Le quatrième élément;Cellule;Cellule;Cellule;^
+Cellules fusionées (cas sous-classe bis);;;;
+Le premier élément;Cellule;2 en hauteur;Cellule;Cellule
+Le deuxième élément;Cellule;^;2 Cellules;<
+Le troisième élément;2 Cellules;<;Cellule;Cellule
