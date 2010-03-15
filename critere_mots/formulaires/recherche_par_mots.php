@@ -3,8 +3,8 @@
 function formulaires_recherche_par_mots_charger_dist($filtre_groupes = NULL){
 	return 
 		array(
-			'filtre_groupes' => $filtre_groupes,
-			'id_groupe'=>_request('id_groupe'),
+			'id_groupe' => $filtre_groupes,
+			'le_groupe'=>_request('le_groupe'),
 			'mots'=>_request('mots')
 		);
 }
