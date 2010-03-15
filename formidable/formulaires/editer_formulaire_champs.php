@@ -45,8 +45,18 @@ function formulaires_editer_formulaire_champs_traiter($id_formulaire){
 		'id_formulaire = '.$id_formulaire
 	);
 	
+	// Si c'est bon on renvoie vers la config des traitements
 	if ($ok){
-		$retours['editable'] = true;
+		$retours['redirect'] = parametre_url(
+			parametre_url(
+				parametre_url(
+					generer_url_ecrire('formulaires_editer')
+					, 'id_formulaire', $id_formulaire
+				)
+				, 'configurer', 'traitements'
+			)
+			, 'avertissement', 'oui'
+		);
 	}
 	
 	return $retours;

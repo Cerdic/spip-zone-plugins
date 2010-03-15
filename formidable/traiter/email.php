@@ -61,9 +61,6 @@ function traiter_email_dist($saisies, $options, $retours){
 		// On finit par le nom du site
 		$nom_site = supprimer_tags(extraire_multi($GLOBALS['meta']['nom_site']));
 		$texte .= "\n\n-- "._T('envoi_via_le_site')." ".$nom_site." (".$GLOBALS['meta']['adresse_site']."/) --\n";
-	
-		// On formate pour les accents
-		$texte = filtrer_entites($texte);
 		
 		// On envoie enfin le message
 		$envoyer_mail = charger_fonction('envoyer_mail','inc');

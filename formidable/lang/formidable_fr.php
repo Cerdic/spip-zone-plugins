@@ -41,6 +41,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'retour_aucun_traitement' => 'Votre r&eacute;ponse a bien &eacute;t&eacute; envoy&eacute;e, mais aucun traitement n\'a &eacute;t&eacute; d&eacute;fini pour ce formulaire. Il ne fait donc rien. :)',
 
+'traitements_avertissement_creation' => 'Les modifications sur les champs du formulaire ont &eacute;t&eacute; enregistr&eacute;es avec succ&egrave;s. Vous pouvez maintenant d&eacute;finir quels traitements seront effectu&eacute;s lors de l\'utilisation du formulaire.',
+'traitements_avertissement_modification' => 'Les modifications sur les champs du formulaire ont &eacute;t&eacute; enregistr&eacute;es avec succ&egrave;s. <strong>Certains traitements doivent peut-&ecirc;tre &ecirc;tre reconfigur&eacute;s en cons&eacute;quence.</strong>',
 'traitements_champ_aucun' => 'Aucun',
 'traiter_email_horodatage' => 'Formulaire posté le @date@ à @heure@.',
 'traiter_email_message_erreur' => 'Une erreur est survenue lors de l\'envoi du courriel.',
