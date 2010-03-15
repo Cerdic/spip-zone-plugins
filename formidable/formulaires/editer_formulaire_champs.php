@@ -46,7 +46,6 @@ function formulaires_editer_formulaire_champs_traiter($id_formulaire){
 	);
 	
 	if ($ok){
-		$retours['message_ok'] = 'Le formulaire a bien été enregistré.';
 		$retours['editable'] = true;
 	}
 	

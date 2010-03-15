@@ -41,6 +41,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'retour_aucun_traitement' => 'Votre r&eacute;ponse a bien &eacute;t&eacute; envoy&eacute;e, mais aucun traitement n\'a &eacute;t&eacute; d&eacute;fini pour ce formulaire. Il ne fait donc rien. :)',
 
 'traitements_champ_aucun' => 'Aucun',
+'traiter_email_horodatage' => 'Formulaire posté le @date@ à @heure@.',
+'traiter_email_message_erreur' => 'Une erreur est survenue lors de l\'envoi du courriel.',
+'traiter_email_message_ok' => 'Votre message a bien &eacute;t&eacute; envoy&eacute; par courriel.',
+'traiter_email_page' => 'Depuis la page : @url@',
+'traiter_email_sujet' => '@nom@ vous a &eacute;crit.',
 
 'voir_numero' => 'Formulaire num&eacute;ro :'
 );

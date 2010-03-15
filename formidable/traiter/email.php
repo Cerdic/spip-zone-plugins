@@ -9,7 +9,8 @@ function traiter_email_dist($saisies, $options, $retours){
 	// On récupère les destinataires
 	$destinataires = _request($options['champ_destinataires']);
 	if (is_array($destinataires)){
-		include_spip('saisies_fonctions');
+		include_spip('inc/saisies');
+		include_spip('inc/filtres');
 		
 		// On récupère les mails des destinataires
 		$destinataires = array_map('intval', $destinataires);
@@ -30,7 +31,8 @@ function traiter_email_dist($saisies, $options, $retours){
 		$nom_envoyeur = $options['champ_nom'] ? _request($options['champ_nom']) : $courriel_envoyeur;
 		
 		// On récupère le sujet s'il existe sinon on le construit
-		$sujet = $options['champ_sujet'] ? _request($options['champ_sujet']) : "$nom_envoyeur vous a écrit.";
+		$sujet = $options['champ_sujet'] ? _request($options['champ_sujet']) : _T('formidable:traiter_email_sujet', array('nom'=>$nom_envoyeur));
+		$sujet = filtrer_entites($sujet);
 		
 		// Maintenant on parcourt les champs pour générer le texte du message
 		$texte = '';
@@ -39,16 +41,22 @@ function traiter_email_dist($saisies, $options, $retours){
 			
 			// On ne prend pas en compte le champ du destinataire
 			if ($options_saisie['nom'] != $options['champ_destinataires']){
-				$label = $options_saisie['label'] ? _T_ou_typo($options_saisie['label'])." :\n" : '';
+				$label = $options_saisie['label'] ? '[ '.trim(_T_ou_typo($options_saisie['label']))." ]\n" : '';
+				$label = filtrer_entites($label);
 				$texte .= $label;
 				$texte .= _request($options_saisie['nom'])."\n\n";
 			}
 		}
 		
 		// horodatons
-		$horodatage = date("d/m/y à H:i:s");
-		$horodatage = "\n\n"._T('contact:horodatage', array('horodatage'=>$horodatage))."\n\n";
-		$texte = $horodatage.$texte;
+		$date = date("d/m/y");
+		$heure = date("H:i:s");
+		$contexte = "\n\n"
+			._T('formidable:traiter_email_horodatage', array('date'=>$date, 'heure'=>$heure))
+			."\n"
+			._T('formidable:traiter_email_page', array('url'=>self()))
+			."\n\n";
+		$texte = $contexte.$texte;
 		
 		// On finit par le nom du site
 		$nom_site = supprimer_tags(extraire_multi($GLOBALS['meta']['nom_site']));
@@ -62,10 +70,10 @@ function traiter_email_dist($saisies, $options, $retours){
 		$ok = $envoyer_mail($destinataires, $sujet, $texte, $courriel_envoyeur, "X-Originating-IP: ".$GLOBALS['ip']);
 		
 		if ($ok){
-			$retours['message_ok'] .= "\nSuper, ton message a été envoyé correctement.\n";
+			$retours['message_ok'] .= "\n<br/>"._T('formidable:traiter_email_message_ok');
 		}
 		else{
-			$retours['message_erreur'] .= "\nEt mince, une erreur. Essayes encore !\n";
+			$retours['message_erreur'] .= "\n<br/>"._T('formidable:traiter_email_message_erreur');
 		}
 	}
 	
