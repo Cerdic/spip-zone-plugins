@@ -3,7 +3,7 @@
   <auteur>Fil - Ma&iuml;eul Rouquette</auteur>
   <icon></icon>
   <licence>(c) 2009 GPL</licence>
-  <version>1.0</version>
+  <version>1.1</version>
   <etat>test</etat>
   <description>Permet d'afficher les &#233;l&#233;ments qui ont plusieurs mots cl&#233;s en communs, via la variable $mots[] pass&#233;e dans l'environnement</description>
   <lien></lien>

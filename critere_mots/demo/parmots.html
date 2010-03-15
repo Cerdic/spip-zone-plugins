@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+<title>PMC</title>
+#INSERT_HEAD
+</head>
+<body>
+<h1>Recherche par mots</h1>
+#SET{FiltreGroupes,#ARRAY}
+<BOUCLE_FiltreGroupes(GROUPES_MOTS){titre==^[^_]}>
+#SET{FiltreGroupes,
+       #GET{FiltreGroupes}|push{#ID_GROUPE}}
+</BOUCLE_FiltreGroupes>
+<div>
+[(#FORMULAIRE_RECHERCHE_PAR_MOTS{#GET{FiltreGroupes},#SELF})]
+
+	<B_recherche_par>
+	<div>
+		<h1 class="postDetailTitle"><:resultats_recherche:></h1>
+		
+		<ul>
+		<BOUCLE_recherche_par(ARTICLES){mots_selon_id}{!par date}{pagination 5}>
+			<li>
+				#TITRE
+			</li>
+		</BOUCLE_recherche_par>
+		</ul>
+	</div>
+	<p id="pagination" class="clearfix">
+		#PAGINATION
+	</p><!-- #pagination -->
+	</B_recherche_par>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<form action='[(#ENV{action})]' method="post" id="formulaire_recherche_par_mot" class="formulaire_spip formulaire_recherche_par_mot">
+<div>
+	[(#ENV{action}|form_hidden)]
+	[<input type="hidden" name="lang" value="(#ENV{lang})" />]
+	<BOUCLE_Tagshidden(MOTS){id_mot IN #ENV{mots}}>
+	<input type="hidden" name="mots[]" value="#ID_MOT" />
+	</BOUCLE_Tagshidden>
+	
+	<label for="recherchegroupe"><:ecrire:titre_mots_tous:></label>
+	<select id="recherchegroupe" name="id_groupe" class="searchfield" onchange="if ((this.value != '') [&& (this.value != (#ENV{id_groupe}))]) return submit(this);">
+		[(#ENV{id_groupe}|non)<option value=""><:ecrire:info_dans_groupe:></option>]
+		<BOUCLE_RechercheMot(GROUPES_MOTS){par num titre, titre}{id_groupe ?IN #ENV{filtre_groupes}}>
+		<option value="#ID_GROUPE"[ (#ID_GROUPE|=={#ENV{id_groupe}}|?{'selected="selected"'})]>[(#TITRE|supprimer_tags)]</option>
+		</BOUCLE_RechercheMot>
+	</select>
+	<B_MotsDuGroupe>
+	<select id="recherchemot" name="mots[]" class="searchfield" onchange="if ((this.value != '') [&& (this.value != (#ENV{id_mot}))]) return submit(this);">
+		<option value=""><:mots_clefs_meme_groupe:></option>
+		<BOUCLE_MotsDuGroupe(MOTS){id_groupe}{par titre}{id_mot !IN #ENV{mots}}>
+		[<option value="(#ID_MOT)">[&nbsp;(#TITRE|supprimer_tags)]</option>]
+		</BOUCLE_MotsDuGroupe>
+	</select>
+	</B_MotsDuGroupe>
+	<noscript><div style="display:inline;"><input type="submit" id="sendsearchmc" class="okfield form_submit" value="<:pass_ok:>" /></div></noscript>
+</div>
+</form>
+<div id="postDetailInfos" class="clearfix">
+<B_Tags><p class="postDetailTags"><BOUCLE_Tags(MOTS){id_mot IN #ENV{mots}}{par titre}{" et "}>[(#SET{lesautresmots,[(#ENV{mots}|critere_mots_enleve_mot_de_liste{#ID_MOT})]})]<a href="[(#ENV{action}|parametre_url{mots,#GET{lesautresmots}})]" class="ajax">[(#TITRE|ucfirst)]</a></BOUCLE_Tags></p></B_Tags>
+</div><!-- #postDetailInfos -->
