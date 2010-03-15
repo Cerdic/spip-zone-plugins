@@ -1,7 +1,6 @@
 <form action='[(#ENV{action})]' method="post" id="formulaire_recherche_par_mot" class="formulaire_spip formulaire_recherche_par_mot">
 <div>
-	[(#ENV{action}|form_hidden)]
-	[<input type="hidden" name="lang" value="(#ENV{lang})" />]
+	#ACTION_FORMULAIRE{#ENV{action}}
 	<BOUCLE_Tagshidden(MOTS){id_mot IN #ENV{mots}}>
 	<input type="hidden" name="mots[]" value="#ID_MOT" />
 	</BOUCLE_Tagshidden>
