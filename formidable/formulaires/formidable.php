@@ -22,6 +22,7 @@ function formulaires_formidable_charger($id_formulaire){
 		$saisies = unserialize($formulaire['saisies']);
 		// On déclare les champs
 		$contexte = array_fill_keys(saisies_lister_champs($saisies), '');
+		$contexte['mechantrobot'] = '';
 		// On ajoute le formulaire complet
 		$contexte['_saisies'] = $saisies;
 		
@@ -38,6 +39,12 @@ function formulaires_formidable_charger($id_formulaire){
 
 function formulaires_formidable_verifier($id_formulaire){
 	$erreurs = array();
+	
+	// Sale bête !
+	if (_request('mechantrobot') != ''){
+		$erreurs['hahahaha'] = 'hahahaha';
+		return $erreurs;
+	}
 	
 	$id_formulaire = intval(_request('id_formulaire'));
 	$formulaire = sql_fetsel('*', 'spip_formulaires', 'id_formulaire = '.$id_formulaire);
