@@ -34,6 +34,7 @@ function formidable_declarer_tables_principales($tables_principales){
 		"modifiable" => "ENUM('non', 'oui') DEFAULT 'non'",
 		"multiple" => "ENUM('non', 'oui') DEFAULT 'non'",
 		"moderation" => "VARCHAR(10) DEFAULT 'posteriori'",
+		"maj" => "timestamp"
 	);
 	$formulaires_cles = array(
 		"PRIMARY KEY" => "id_formulaire"
@@ -53,13 +54,15 @@ function formidable_declarer_tables_principales($tables_principales){
 		"date" => "datetime NOT NULL",
 		"ip" => "varchar(255) NOT NULL",
 		"id_auteur" => "bigint(21) NOT NULL",
+		"cookie" => "varchar(255) NOT NULL",
 		"statut" => "varchar(10) NOT NULL",
 		"maj" => "timestamp"
 	);
 	$formulaires_reponses_cles = array(
 		"PRIMARY KEY" => "id_formulaires_reponse",
 		"KEY id_formulaire" => "id_formulaire",
-		"KEY id_auteur" => "id_auteur"
+		"KEY id_auteur" => "id_auteur",
+		"KEY cookie" => "cookie"
 	);
 	$tables_principales['spip_formulaires_reponses'] = array(
 		'field' => &$formulaires_reponses,
