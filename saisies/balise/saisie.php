@@ -113,11 +113,13 @@ class Pile {
 
 	// creer une balise
 	function creer_balise($nom, $opt) {
-		include_spip('inc/interfaces');
+		include_spip('public/interfaces');
 		$b = new Champ;
 		$b->nom_champ = strtoupper($nom);
+		$vars = get_class_vars('Champ'); // property_exists($b, $o); est en php 5
 		foreach ($opt as $o=>$val) {
-			if (isset($b->$o)) {
+			#if (property_exists($b,$o)) {
+			if (array_key_exists($o, $vars)) {
 				if ($o == 'param') {
 					array_unshift($val, '');
 					$b->$o = array($val);
@@ -150,8 +152,8 @@ function balise_SAISIE_dist ($p) {
 	$type_saisie = Pile::recuperer_et_supprimer_argument_balise(1, $p); // $type
 	$titre       = Pile::recuperer_et_supprimer_argument_balise(1, $p); // $titre
 
-	// creer #ENV{$titre}
-	$env_titre   = Pile::creer_balise('ENV', array('param' => array($titre))); // #ENV{titre}
+	// creer #ENV*{$titre} (* pour les cas de tableau serialises par exemple, que l'on veut reutiliser)
+	$env_titre   = Pile::creer_balise('ENV', array('param' => array($titre), 'etoile' => '*')); // #ENV*{titre}
 
 	// on modifie $p pour ajouter des arguments
 	// {nom=$titre, valeur=#ENV{$titre}, erreurs, type_saisie=$type, fond=saisies/_base}
