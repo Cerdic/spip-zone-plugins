@@ -27,7 +27,8 @@ function formulaires_recherche_par_mots_traiter_dist($filtre_groupes = NULL, $ur
 
 
 function critere_mots_enleve_mot_de_liste($listemots, $id_mot) {
-	unset($listemots[array_search($id_mot,$listemots)]);
+	while (array_search($id_mot,$listemots)!==FALSE)
+		unset($listemots[array_search($id_mot,$listemots)]);
 	return $listemots;
 }
 
