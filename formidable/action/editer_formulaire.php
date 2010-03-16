@@ -67,7 +67,7 @@ function formulaire_set($id_formulaire, $set=null) {
 	$champs = saisies_lister_champs($GLOBALS['formulaires']['editer_formulaire']);
 	foreach ($champs as $champ)
 		$c[$champ] = _request($champ,$set);
-
+	
 	include_spip('inc/modifier');
 	revision_formulaire($id_formulaire, $c);
 

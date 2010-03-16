@@ -44,6 +44,16 @@ $GLOBALS['formulaires']['editer_formulaire'] = array(
 	array(
 		'saisie' => 'textarea',
 		'options' => array(
+			'nom' => 'message_retour',
+			'label' => '<:formidable:editer_message_ok:>',
+			'explication' => '<:formidable:editer_message_ok_explication:>',
+			'rows' => 5,
+			'li_class' => 'editer_texte'
+		)
+	),
+	array(
+		'saisie' => 'textarea',
+		'options' => array(
 			'nom' => 'descriptif',
 			'label' => '<:formidable:editer_descriptif:>',
 			'explication' => '<:formidable:editer_descriptif_explication:>',

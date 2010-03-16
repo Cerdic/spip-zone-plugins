@@ -55,7 +55,7 @@ function formulaires_formidable_traiter($id_formulaire){
 	$formulaire = sql_fetsel('*', 'spip_formulaires', 'id_formulaire = '.$id_formulaire);
 	$traitements = unserialize($formulaire['traitements']);
 	
-	if (is_array($traitements) and !empty($traitements))
+	if (is_array($traitements) and !empty($traitements)){
 		foreach($traitements as $type_traitement=>$options){
 			if ($appliquer_traitement = charger_fonction($type_traitement, 'traiter/', true))
 				$retours = $appliquer_traitement(
@@ -66,6 +66,11 @@ function formulaires_formidable_traiter($id_formulaire){
 					$retours
 				);
 		}
+		
+		// Si on a personnalisé le message de retour, c'est lui qui est affiché uniquement
+		if ($formulaire['message_retour'])
+			$retours['message_ok'] = _T_ou_typo($formulaire['message_retour']);
+	}
 	else{
 		$retours['message_ok'] = _T('formidable:retour_aucun_traitement');
 	}
