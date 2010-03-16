@@ -35,9 +35,20 @@ if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 		$ajouter_tags = spipicious_ajouter_tags($tableau_tags,$id_auteur,$id_objet,$type,$id_table_objet,$table_mot,$id_groupe);
 		return $ajouter_tags;
 	}
+	/**
+	 * Ajout de mots à un objet
+	 *
+	 * @param array() $tableau_tags
+	 * @param int $id_auteur
+	 * @param int $id_objet
+	 * @param string $type
+	 * @param int $id_table_objet
+	 * @param string $table_mot la table de liaison mot / objet
+	 * @param int $id_groupe
+	 * @param string $manuel doit on le faire manuellement ou par inc/modifier
+	 */
+	function spipicious_ajouter_tags($tableau_tags=array(),$id_auteur,$id_objet,$type,$id_table_objet,$table_mot,$id_groupe,$manuel=false){
 
-	function spipicious_ajouter_tags($tableau_tags,$id_auteur,$id_objet,$type,$id_table_objet,$table_mot,$id_groupe){
-		
 		$tag_analysed = array();
 		$position = 0;
 
@@ -51,9 +62,14 @@ if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 						// doit on creer un nouveau tag ?
 						$id_tag = sql_getfetsel("id_mot","spip_mots","titre=".sql_quote($tag)." AND id_groupe=".intval($id_groupe));
 						if (!$id_tag) { // creation tag
-							$id_tag = sql_insertq("spip_mots", array('id_groupe' => intval($id_groupe)));
-							$c = array('titre' => $tag, 'id_groupe' => intval($id_groupe));
-							revision_mot($id_tag, $c);
+							if($manuel){
+								$id_tag = sql_insertq("spip_mots", array('id_groupe' => intval($id_groupe)));
+								$c = array('titre' => $tag, 'id_groupe' => intval($id_groupe));
+								revision_mot($id_tag, $c);
+							}else{
+								$row = sql_fetsel("titre", "spip_groupes_mots", "id_groupe=".intval($id_groupe));
+								$id_tag = sql_insertq("spip_mots", array('id_groupe' => intval($id_groupe),'titre' => $tag,'type'=> $row['titre']));
+							}
 						}
 					}
 					// on lie le mot au couple type (uniquement si pas deja fait)
