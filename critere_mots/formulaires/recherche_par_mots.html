@@ -4,6 +4,7 @@
 	<BOUCLE_Tagshidden(MOTS){id_mot IN #ENV{mots}}>
 	<input type="hidden" name="mots[]" value="#ID_MOT" />
 	</BOUCLE_Tagshidden>
+	[(#ENV{le_groupe}|non)<input type="hidden" name="choixmot" value="1" />]
 	
 	<label for="recherchegroupe"><:ecrire:titre_mots_tous:></label>
 	<select id="recherchegroupe" name="le_groupe" class="searchfield" onchange="if ((this.value != '')[ && (this.value != (#ENV{le_groupe}))]) { $('#formulaire_recherche_par_mot').submit();}">
