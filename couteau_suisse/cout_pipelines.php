@@ -117,9 +117,7 @@ function couteau_suisse_insert_head($flux_){
 
 function couteau_suisse_affichage_final($flux){
 	eval_metas_pipelines($flux, 'affichage_final');
-	// nettoyage des separateurs et differentes sentinelles
-	return str_replace('<p></p>','', 
-		strpos($flux, '"csfoo ')===false?$flux:preg_replace(',<span class="csfoo \w+"></span>,', '', $flux));
+	return cs_nettoie($flux);
 }
 
 /********
@@ -137,8 +135,14 @@ function couteau_suisse_pre_typo($flux){
 }
 function couteau_suisse_post_propre($flux){
 	eval_metas_pipelines($flux, 'post_propre');
-	include_spip('cout_lancement');
-	cs_trace_balises_html($flux);
+	// tracage des echappements SPIP (<html/><code/><cadre/> etc.) pour les traitements (s'il y en a) venant apres propre()
+	// Note : SPIP echappe egalement les modeles
+	if($GLOBALS['cs_post_propre']) {
+		if(strpos($flux, '<span class="base64"')!==false)
+			$flux = preg_replace(',<span class="base64"[^>]+></span>,', _CS_HTMLA.'$0'._CS_HTMLB, $flux);
+		if(strpos($flux, '<div class="base64"')!==false)
+			$flux = preg_replace(',<div class="base64"[^>]+></div>,', _CS_HTMLA.'$0'._CS_HTMLB, $flux);
+	}
 	return $flux;
 }
 

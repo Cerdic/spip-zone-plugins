@@ -243,4 +243,17 @@ function cs_spip_file_options($code) {
 		case 3: return $fo?$fo:$nfo;
 	}
 }
+
+// balises de tracage, directement compatibles regexpr
+// le separateur _CS_HTMLX est supprime en fin de calcul
+@define('_CS_HTMLA', '<span class="csfoo htmla"></span>');
+@define('_CS_HTMLB', '<span class="csfoo htmlb"></span>');
+@define('_CS_HTMLX', '<span class="csfoo \w+"></span>');
+
+// nettoyage des separateurs
+function cs_nettoie(&$flux) {
+	if(strpos($flux, '"csfoo ')===false) return $flux;
+	return preg_replace(',<pp>\s*</p>,', '', preg_replace(','._CS_HTMLX.',', '', $flux));
+}
+
 ?>

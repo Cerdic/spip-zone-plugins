@@ -473,6 +473,7 @@ $temp_js\n// --></script>\n");
 			'propre' => 'propre(%s)',
 		);
 	// mise en code des traitements trouves
+	$traitements_post_propre = 0;
 	foreach($traitements_utilises as $bal=>$balise) {
 		foreach($balise as $obj=>$type_objet) {
 			// ici, on fait attention de ne pas melanger propre et typo
@@ -499,6 +500,10 @@ $temp_js\n// --></script>\n");
 				foreach($traitements_type_objet as $t)	
 					$temp = str_replace('%s', $t, $temp);
 			}
+			if(strpos($temp, '(propre')) {
+				$traitements_post_propre = 1;
+				$temp = 'cs_nettoie('.$temp.')';
+			}
 			$traitements_type_objet = "\$GLOBALS['table_des_traitements']['$bal'][" . ($obj=='0'?'':"'$obj'") . "]='" . $temp . "';";
 		}
 		$traitements_utilises[$bal] = join("\n", $traitements_utilises[$bal]);		
@@ -506,6 +511,7 @@ $temp_js\n// --></script>\n");
 	// mes_options.php : ajout des traitements
 	if(count($traitements_utilises))
 		$infos_fichiers['code_options'][] = "\n// Table des traitements\n" . join("\n", $traitements_utilises);
+	$infos_fichiers['code_options'][] = "\$GLOBALS['cs_post_propre']=$traitements_post_propre;";
 	// effacement du repertoire temporaire de controle
 	if(@file_exists(_DIR_CS_TMP) && ($handle = @opendir(_DIR_CS_TMP))) {
 		while (($fichier = @readdir($handle)) !== false)

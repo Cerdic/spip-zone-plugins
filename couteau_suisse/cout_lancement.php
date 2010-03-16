@@ -32,7 +32,7 @@ if (!function_exists('stripos')) {
 function cs_code_echappement($rempl, $source='') {
 	// Convertir en base64
 	$base64 = base64_encode($rempl);
-	// guillemets simple dans la balise pour simplifier l'outil 'guillemets'
+	// guillemets simples dans la balise pour simplifier l'outil 'guillemets'
 	return "<span class='base64$source' title='$base64'></span>";
 }
 
@@ -143,20 +143,6 @@ function cs_block($texte) {
 		|| preg_match(',</?(p|'._BALISES_BLOCS.')[>[:space:]],iS', $texte);
 }
 
-// balises de tracage, directement compatibles regexpr
-// le separateur <span class="csfoo xxxx"></span> est supprime en fin de calcul de page
-@define('_CS_HTMLA', '<span class="csfoo htmla"></span>');
-@define('_CS_HTMLB', '<span class="csfoo htmlb"></span>');
-
-// fonction de tracage des balises <html></html>
-// SPIP echappe ces balises dans les pipelines. Les traitements de balises ne les voient donc jamais...
-// Note : les modeles sont egalement echappes
-function cs_trace_balises_html(&$flux) {
-	if(strpos($flux, '<span class="base64"')!==false)
-		$flux = preg_replace(',<span class="base64"[^>]+></span>,', _CS_HTMLA.'$0'._CS_HTMLB, $flux);
-	if(strpos($flux, '<div class="base64"')!==false)
-		$flux = preg_replace(',<div class="base64"[^>]+></div>,', _CS_HTMLA.'$0'._CS_HTMLB, $flux);
-}
 // fonction callback pour cs_echappe_balises
 function cs_echappe_html_callback($matches) {
  return _CS_HTMLA.cs_code_echappement($matches[1], 'CS');
@@ -179,9 +165,11 @@ function cs_echappe_balises($balises, $fonction, $texte, $arg=NULL){
 			return $texte;
 		}
 	}
-	// trace d'anciennes balises <html></html> ?
-	if(strpos($texte, _CS_HTMLA)!==false)
+	// trace d'anciennes balises <html></html> ou autre echappement SPIP ?
+	if(strpos($texte, _CS_HTMLA)!==false) {
+		$texte = preg_replace(',<p[^>]*>(\s*'._CS_HTMLX.')</p>,', '$1', $texte);
 		$texte = preg_replace_callback(','._CS_HTMLA.'(.*?)(?='._CS_HTMLB.'),s', 'cs_echappe_html_callback', $texte);
+	}
 	// protection du texte
 	if($balises!==false) {
 		if(!strlen($balises)) $balises = 'html|code|cadre|frame|script';
