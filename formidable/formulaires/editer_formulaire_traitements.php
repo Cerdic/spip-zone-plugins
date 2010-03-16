@@ -71,7 +71,6 @@ function formulaires_editer_formulaire_traitements_verifier($id_formulaire){
 	
 	if (is_array($traitements_choisis))
 		foreach ($traitements_choisis as $type_traitement){
-			var_dump($type_traitement);
 			$erreurs = array_merge($erreurs, saisies_verifier(saisies_transformer_noms($traitements_disponibles[$type_traitement]['options'], '/^.*$/', "traitements[$type_traitement][\\0]")));
 		}
 	
