@@ -12,25 +12,25 @@
        #GET{FiltreGroupes}|push{#ID_GROUPE}}
 </BOUCLE_FiltreGroupes>
 <div class="ajax">
-[(#FORMULAIRE_RECHERCHE_PAR_MOTS{#GET{FiltreGroupes}})]
-
-	<B_recherche_par>
-	<div>
-		<h1 class="postDetailTitle"><:resultats_recherche:></h1>
-		
-		<ul>
-		<BOUCLE_recherche_par(ARTICLES){mots_selon_id}{!par date}{pagination 5}>
-			<li>
-				#TITRE
-			</li>
-		</BOUCLE_recherche_par>
-		</ul>
-	</div>
-	<p id="pagination" class="clearfix">
-		#PAGINATION
-	</p><!-- #pagination -->
-	</B_recherche_par>
-
+[(#FORMULAIRE_RECHERCHE_PAR_MOTS{#GET{FiltreGroupes},#SELF})]
 </div>
+
+<B_recherche_par>
+<div>
+	<h1 class="postDetailTitle"><:resultats_recherche:></h1>
+	
+	<ul>
+	<BOUCLE_recherche_par(ARTICLES){mots_selon_id}{!par date}{pagination 5}>
+		<li>
+			#TITRE
+		</li>
+	</BOUCLE_recherche_par>
+	</ul>
+</div>
+<p id="pagination" class="clearfix">
+	#PAGINATION
+</p><!-- #pagination -->
+</B_recherche_par>
+
 </body>
 </html>
