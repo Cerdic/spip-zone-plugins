@@ -46,11 +46,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'traitements_avertissement_creation' => 'Les modifications sur les champs du formulaire ont &eacute;t&eacute; enregistr&eacute;es avec succ&egrave;s. Vous pouvez maintenant d&eacute;finir quels traitements seront effectu&eacute;s lors de l\'utilisation du formulaire.',
 'traitements_avertissement_modification' => 'Les modifications sur les champs du formulaire ont &eacute;t&eacute; enregistr&eacute;es avec succ&egrave;s. <strong>Certains traitements doivent peut-&ecirc;tre &ecirc;tre reconfigur&eacute;s en cons&eacute;quence.</strong>',
 'traitements_champ_aucun' => 'Aucun',
+'traiter_email_description' => 'Poste le r&eacute;sultat du formulaire par courriel &agrave; une liste de destinataires.',
 'traiter_email_horodatage' => 'Formulaire "@formulaire@" posté le @date@ à @heure@.',
 'traiter_email_message_erreur' => 'Une erreur est survenue lors de l\'envoi du courriel.',
 'traiter_email_message_ok' => 'Votre message a bien &eacute;t&eacute; envoy&eacute; par courriel.',
+'traiter_email_option_destinataires_label' => 'Destinataires',
+'traiter_email_option_destinataires_explication' => 'Choisissez le champ qui correspondra aux destinataires du message.',
+'traiter_email_option_envoyeur_courriel_label' => 'Courriel de l\'envoyeur',
+'traiter_email_option_envoyeur_courriel_explication' => 'Choisissez le champ qui contiendra le courriel de l\'envoyeur.',
+'traiter_email_option_envoyeur_nom_label' => 'Nom de l\'envoyeur',
+'traiter_email_option_envoyeur_nom_explication' => 'Ce champ n\'est pas obligatoire. S\'il n\'est pas pr&eacute;sent, c\'est le courriel qui sera utilis&eacute;.',
+'traiter_email_option_sujet_label' => 'Sujet du message',
+'traiter_email_option_sujet_explication' => 'Ce champ n\'est pas obligatoire. Le sujet sera construit automatiquement le cas &eacute;ch&eacute;ant.',
 'traiter_email_page' => 'Depuis la page : @url@',
 'traiter_email_sujet' => '@nom@ vous a &eacute;crit.',
+'traiter_email_titre' => 'Envoyer par courriel',
 
 'voir_numero' => 'Formulaire num&eacute;ro :'
 );

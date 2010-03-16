@@ -1,34 +1,34 @@
 
-titre: 'Envoyer par courriel'
-description: 'Poste le résultat du formulaire par courriel à une liste de destinataires.'
+titre: '<:formidable:traiter_email_titre:>'
+description: '<:formidable:traiter_email_description:>'
 options:
   -
     saisie: 'champ'
     options:
       nom: 'champ_destinataires'
-      label: 'Destinataires'
-      explication: "Choisissez le champ qui correspondra aux destinataires du message."
+      label: '<:formidable:traiter_email_option_destinataires_label:>'
+      explication: '<:formidable:traiter_email_option_destinataires_explication:>'
       obligatoire: 'oui'
       env: true
   -
     saisie: 'champ'
     options:
       nom: 'champ_courriel'
-      label: "Courriel de l'envoyeur"
-      explication: "Choisissez le champ qui contiendra le courriel de l'envoyeur."
+      label: '<:formidable:traiter_email_option_envoyeur_courriel_label:>'
+      explication: '<:formidable:traiter_email_option_envoyeur_courriel_explication:>'
       obligatoire: 'oui'
       env: true
   -
     saisie: 'champ'
     options:
       nom: 'champ_nom'
-      label: "Nom de l'envoyeur"
-      explication: "Ce champ n'est pas obligatoire. S'il n'est pas présent, c'est le courriel qui sera utilisé."
+      label: '<:formidable:traiter_email_option_envoyeur_nom_label:>'
+      explication: '<:formidable:traiter_email_option_envoyeur_nom_explication:>'
       env: true
   -
     saisie: 'champ'
     options:
       nom: 'champ_sujet'
-      label: 'Sujet du message'
-      explication: "Ce champ n'est pas obligatoire. Le sujet sera construit automatiquement le cas échéant."
+      label: '<:formidable:traiter_email_option_sujet_label:>'
+      explication: '<:formidable:traiter_email_option_sujet_explication:>'
       env: true
