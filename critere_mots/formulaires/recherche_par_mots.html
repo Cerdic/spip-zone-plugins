@@ -6,14 +6,14 @@
 	</BOUCLE_Tagshidden>
 	
 	<label for="recherchegroupe"><:ecrire:titre_mots_tous:></label>
-	<select id="recherchegroupe" name="le_groupe" class="searchfield" onchange="if ((this.value != '') [&& (this.value != (#ENV{le_groupe}))]) return submit(this);">
+	<select id="recherchegroupe" name="le_groupe" class="searchfield" onchange="if ((this.value != '')[ && (this.value != (#ENV{le_groupe}))]) { $('#formulaire_recherche_par_mot').submit();}">
 		[(#ENV{le_groupe}|non)<option value=""><:ecrire:info_dans_groupe:></option>]
 		<BOUCLE_RechercheMot(GROUPES_MOTS){par num titre, titre}{id_groupe ?IN #ENV**{id_groupe}}>
 		<option value="#ID_GROUPE"[ (#ID_GROUPE|=={#ENV{le_groupe}}|?{'selected="selected"'})]>[(#TITRE|supprimer_tags)]</option>
 		</BOUCLE_RechercheMot>
 	</select>
 	<B_MotsDuGroupe>
-	<select id="recherchemot" name="mots[]" class="searchfield" onchange="if ((this.value != '') [&& (this.value != (#ENV{id_mot}))]) return submit(this);">
+	<select id="recherchemot" name="mots[]" class="searchfield" onchange="if ((this.value != '')[ && (this.value != (#ENV{id_mot}))]) {$('#formulaire_recherche_par_mot').submit();}">
 		<option value=""><:mots_clefs_meme_groupe:></option>
 		<BOUCLE_MotsDuGroupe(MOTS){id_groupe=#ENV{le_groupe}}{par titre}{id_mot !IN #ENV{mots}}>
 		[<option value="(#ID_MOT)">[&nbsp;(#TITRE|supprimer_tags)]</option>]
