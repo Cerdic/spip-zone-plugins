@@ -10,7 +10,6 @@
 
 <BOUCLE_mot_evenements(MOTS){type=Type}>
 <h3 class="agenda">#DESCRIPTIF</h3>
-#ANCRE_PAGINATION			
 	<BOUCLE_mot_articles(MOTS){type=Catégorie}>
 		<BOUCLE_article_evenement(ARTICLES){titre_mot=#TITRE}{par num titre}{inverse}>
 			<B_agenda_evenement>
@@ -29,9 +28,10 @@
 				</ul>
 			</BOUCLE_agenda_evenement>
 			</ul>
+			#PAGINATION
+			</B_agenda_evenement>
 		</BOUCLE_article_evenement>
 	</BOUCLE_mot_articles>
-#PAGINATION
 </BOUCLE_mot_evenements>
 
 
