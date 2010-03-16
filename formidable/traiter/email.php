@@ -3,7 +3,10 @@
 // Sécurité
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function traiter_email_dist($saisies, $options, $retours){
+function traiter_email_dist($args, $retours){
+	$formulaire = $args['formulaire'];
+	$options = $args['options'];
+	$saisies = unserialize($formulaire['saisies']);
 	$saisies = saisies_lister_par_nom($saisies);
 	
 	// On récupère les destinataires
@@ -52,7 +55,7 @@ function traiter_email_dist($saisies, $options, $retours){
 		$date = date("d/m/y");
 		$heure = date("H:i:s");
 		$contexte = "\n\n"
-			._T('formidable:traiter_email_horodatage', array('date'=>$date, 'heure'=>$heure))
+			._T('formidable:traiter_email_horodatage', array('formulaire'=>_T_ou_typo($formulaire['titre']), 'date'=>$date, 'heure'=>$heure))
 			."\n"
 			._T('formidable:traiter_email_page', array('url'=>self()))
 			."\n\n";

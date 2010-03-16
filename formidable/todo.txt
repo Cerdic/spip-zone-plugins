@@ -11,12 +11,15 @@
   - Lister les saisies disponibles
   - Ajouter une saisie
   - Configurer les options d'une saisie
-  + Configurer la validation d'une saisie
-  + Ajouter des groupes de champs (fieldset)
-  + Déplacer les saisies sans javascript
+  - Configurer la validation d'une saisie
+  - Ajouter des groupes de champs (fieldset)
+  - Déplacer les saisies sans javascript
   + Déplacer les saisies en drag-n-drop
   + Ajouter une saisie directement au bon endroit en drag-n-drop
 + Faire une interface de configuration des traitements
+  - Lister les traitements et leurs options
+  + Ne montrer les options que si le traitement est choisi
++ Ajouter un traiement "Enregistrer les réponses"
 
 Description d'une liste de saisies :
 ------------------------------------

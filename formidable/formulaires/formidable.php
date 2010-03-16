@@ -27,7 +27,11 @@ function formulaires_formidable_charger($id_formulaire){
 		
 		$contexte['id'] = $formulaire['id_formulaire'];
 		$contexte['_hidden'] = '<input type="hidden" name="id_formulaire" value="'.$contexte['id'].'"/>';
-	}	
+	}
+	else{
+		$contexte['editable'] = false;
+		$contexte['message_erreur'] = _T('formidable:erreur_inexistant');
+	}
 	
 	return $contexte;
 }
@@ -49,13 +53,18 @@ function formulaires_formidable_traiter($id_formulaire){
 	
 	$id_formulaire = intval(_request('id_formulaire'));
 	$formulaire = sql_fetsel('*', 'spip_formulaires', 'id_formulaire = '.$id_formulaire);
-	$saisies = unserialize($formulaire['saisies']);
 	$traitements = unserialize($formulaire['traitements']);
 	
 	if (is_array($traitements) and !empty($traitements))
 		foreach($traitements as $type_traitement=>$options){
 			if ($appliquer_traitement = charger_fonction($type_traitement, 'traiter/', true))
-				$retours = array_merge($retours, $appliquer_traitement($saisies, $options, $retours));
+				$retours = $appliquer_traitement(
+					array(
+						'formulaire' => $formulaire,
+						'options' => $options
+					),
+					$retours
+				);
 		}
 	else{
 		$retours['message_ok'] = _T('formidable:retour_aucun_traitement');

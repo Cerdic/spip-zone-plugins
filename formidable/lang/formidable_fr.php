@@ -33,7 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'editer_titre' => 'Titre',
 'erreur_autorisation' => 'Vous n\'avez pas le droit d\'éditer les formulaires du site.',
 'erreur_generique' => 'Il y a des erreurs dans les champs ci-dessous, veuillez v&eacute;rifier votre envoi.',
-'erreur_inexistant' => 'Il n\'y a aucun formulaire ici.',
+'erreur_inexistant' => 'Le formulaire n\'exsite pas.',
 
 'formulaires_aucun' => 'Il n\'y a pour l\'instant aucun formulaire.',
 'formulaires_nouveau' => 'Cr&eacute;er un nouveau formulaire',
@@ -44,7 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'traitements_avertissement_creation' => 'Les modifications sur les champs du formulaire ont &eacute;t&eacute; enregistr&eacute;es avec succ&egrave;s. Vous pouvez maintenant d&eacute;finir quels traitements seront effectu&eacute;s lors de l\'utilisation du formulaire.',
 'traitements_avertissement_modification' => 'Les modifications sur les champs du formulaire ont &eacute;t&eacute; enregistr&eacute;es avec succ&egrave;s. <strong>Certains traitements doivent peut-&ecirc;tre &ecirc;tre reconfigur&eacute;s en cons&eacute;quence.</strong>',
 'traitements_champ_aucun' => 'Aucun',
-'traiter_email_horodatage' => 'Formulaire posté le @date@ à @heure@.',
+'traiter_email_horodatage' => 'Formulaire "@formulaire@" posté le @date@ à @heure@.',
 'traiter_email_message_erreur' => 'Une erreur est survenue lors de l\'envoi du courriel.',
 'traiter_email_message_ok' => 'Votre message a bien &eacute;t&eacute; envoy&eacute; par courriel.',
 'traiter_email_page' => 'Depuis la page : @url@',
