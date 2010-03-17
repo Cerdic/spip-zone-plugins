@@ -11,7 +11,7 @@
 	
 	[(#SET{blocs,[(#NOIZETIER_LISTE_PAGES|table_valeur{#ENV{page}}|table_valeur{blocs})]})]
 	<BOUCLE_blocs(POUR){tableau #GET{blocs}}>
-	<div class="ajax">#FORMULAIRE_CONFIGURER_BLOC{#CLE,#ENV{page}}</div>
+	<div class="ajax">#FORMULAIRE_CONFIGURER_BLOC{#CLE,#ENV{page},#VALEUR}</div>
 	</BOUCLE_blocs>
 </div>
 

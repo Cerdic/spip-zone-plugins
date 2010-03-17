@@ -5,7 +5,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/noizetier');
 
-function formulaires_configurer_bloc_charger($bloc,$page){
+function formulaires_configurer_bloc_charger($bloc,$page,$infos_bloc){
 	$contexte = array();
 	
 	$contexte['bloc'] = $bloc;
@@ -14,6 +14,7 @@ function formulaires_configurer_bloc_charger($bloc,$page){
 	$contexte['type'] = $type_compo[0];
 	$contexte['composition'] = $type_compo[1];
 	$contexte['bloc_page'] = $bloc.'-'.$page;
+	$contexte['_infos_bloc'] = $infos_bloc;
 	
 	// Les champs pour les noisettes
 	$contexte['id_noisette'] = 0;
