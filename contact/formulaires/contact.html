@@ -20,9 +20,9 @@
 		<legend><:previsualisation:></legend>
 		<ul>
 			[<li><strong><:contact:courriel_de:></strong> : (#ENV{mail})</li>]
-			<BOUCLE_previsu_infos(POUR){tableau #ENV{champs}}>
+			<BOUCLE_previsu_infos(POUR){tableau #ENV{_champs}}>
 			[(#CLE|match{mail|sujet|texte}|non)
-			[<li><strong>[(#VALEUR|attribut_html)]</strong> : (#ENV{#CLE})</li>]
+			[<li><strong>[(#VALEUR)]</strong> : (#ENV{#CLE})</li>]
 			]
 			</BOUCLE_previsu_infos>
 			[<li><strong><:form_prop_sujet:></strong> : (#ENV{sujet})</li>]
@@ -97,14 +97,14 @@
 				<//B_destinataires>
 			<//B_choix>
 
-			<BOUCLE_infos(POUR){tableau #ENV{champs}}>
+			<BOUCLE_infos(POUR){tableau #ENV{_champs}}>
 			#SET{existe, #CHEMIN{formulaires/contact_champ_#CLE.html}}
 			[(#GET{existe}|oui)
 			[(#INCLURE{fond=formulaires/contact_champ_#CLE,env,name=#CLE,titre=#VALEUR})]
 			]
 			[(#GET{existe}|non)
-			<li class="saisie_#CLE[ (#CLE|in_array{#ENV{obligatoires,#ARRAY}}|oui)obligatoire][ (#ENV*{erreurs}|table_valeur{#CLE}|oui)erreur]">
-				<label for="info_#CLE">[(#VALEUR|attribut_html)][ (#CLE|in_array{#ENV{obligatoires,#ARRAY}}|oui)<strong><:info_obligatoire_02:></strong>]</label>
+			<li class="saisie_#CLE[ (#CLE|in_array{#ENV{_obligatoires,#ARRAY}}|oui)obligatoire][ (#ENV*{erreurs}|table_valeur{#CLE}|oui)erreur]">
+				<label for="info_#CLE">#VALEUR[ (#CLE|in_array{#ENV{_obligatoires,#ARRAY}}|oui)<strong><:info_obligatoire_02:></strong>]</label>
 				[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{#CLE})</span>]
 				<input type="text" class="text" name="#CLE" id="info_#CLE" value="#ENV{#CLE}" size="30" />
 			</li>

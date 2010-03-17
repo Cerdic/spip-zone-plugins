@@ -64,7 +64,7 @@ function formulaires_contact_charger_dist($id_auteur='',$tracer=''){
 		foreach ($champs_choisis as $cle => $valeur){
 			$champs_choisis[$cle] = $champs_possibles[$cle];
 		}
-		$valeurs['champs'] = $champs_choisis;
+		$valeurs['_champs'] = $champs_choisis;
 		// Mais aussi tous les champs un par un
 		$valeurs = array_merge(
 			$valeurs,
@@ -75,7 +75,7 @@ function formulaires_contact_charger_dist($id_auteur='',$tracer=''){
 		);
 
 
-		$valeurs['obligatoires'] = $champs_obligatoires = lire_config('contact/obligatoires',$champs_mini_config);
+		$valeurs['_obligatoires'] = $champs_obligatoires = lire_config('contact/obligatoires',$champs_mini_config);
 
 	// Infos sur l'ajout de pièces jointes ou non
 	$autoriser_pj = (lire_config('contact/autoriser_pj') == 'true');
