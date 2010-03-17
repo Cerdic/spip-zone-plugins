@@ -37,7 +37,7 @@
  * Dans ce dernier cas on declenche traiter()
  *
  * Traiter
- * formulaires_truc_verifier_dist() : ne sera appele que lorsque *toutes*
+ * formulaires_truc_traiter_dist() : ne sera appele que lorsque *toutes*
  * les etapes auront ete saisies sans erreur.
  * Traite donc l'ensemble des saisies comme si il s'agissait d'un formulaire unique
  *
