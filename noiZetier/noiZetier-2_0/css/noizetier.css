@@ -1,7 +1,13 @@
 .noizetier-explications{
 	font-size:0.9em;
-	margin-bottom:5px;
+	margin-bottom:20px;
 	text-align:justify;
+}
+
+.description_bloc{
+	padding:5px;
+	font-size:1em;
+	border-bottom:1px solid #ccc;
 }
 
 .formulaire_editer_noisette{

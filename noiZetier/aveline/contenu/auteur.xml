@@ -1,0 +1,5 @@
+<page>
+	<nom><:aveline:nom_page_auteur:></nom>
+	<description><:aveline:description_page_auteur:></description>
+	<icon>img/ic_auteur.png</icon>
+</page>

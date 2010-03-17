@@ -1,8 +1,0 @@
-<noisette>
-	<nom><:noizetier:nom_filariane:></nom>
-	<description><:noizetier:description_article-filariane:></description>
-	<icone>img/ic_ariane.png</icone>
-	<parametre nom="afficher_lien_accueil" label="noizetier:label_afficher_lien_accueil" saisie="oui_non" defaut="on" />
-	<parametre nom="ariane_separateur" label="noizetier:label_ariane_separateur" defaut="&gt;" obligatoire="oui" />
-	<parametre nom="afficher_titre_article" label="noizetier:label_afficher_titre_article" saisie="oui_non" defaut="on" />
-</noisette>

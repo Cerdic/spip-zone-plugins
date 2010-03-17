@@ -1,13 +1,3 @@
-[(#REM) On reteste que la page est active au cas où on a appelé bloc/type au lieu de bloc/type-composition mais en passant un paramètre composition]
-[(#SET{page,[(#ENV{type})[-(#ENV{composition})]]})]
-
-<BOUCLE_test(CONDITION){si (#CONFIG{noizetier-pages-actives}|unserialize|table_valeur{#GET{page}}|oui)}>
-	<BOUCLE_noisettes(NOISETTES){bloc=#ENV{bloc}}{type=#ENV{type}}{composition=#ENV{composition}}{par rang}>
-		#NOIZETIER_AFFICHER_NOISETTE
-	</BOUCLE_noisettes>
-		[(#ENV{composition}|oui) [(#SET{fond,[(#ENV{bloc})/#ENV{type}]})] <INCLURE{fond=#GET{fond}}{composition=''}{env}> ]
-		[(#ENV{composition}|non) [(#ENV{type}|=={page}|non) [(#SET{fond,[(#ENV{bloc})/page]})] <INCLURE{fond=#GET{fond}}{type=page}{env}> ]]
-	<//B_noisettes>
-</BOUCLE_test>
-	[(#SET{fond,[(#ENV{bloc})/#GET{page}]})] <INCLURE{fond=#GET{fond}}{env}>
-<//B_test>
+<BOUCLE_noisettes(NOISETTES){bloc=#ENV{bloc}}{type=#ENV{type}}{composition=#ENV{composition}}{par rang}>
+	#NOIZETIER_AFFICHER_NOISETTE
+</BOUCLE_noisettes>

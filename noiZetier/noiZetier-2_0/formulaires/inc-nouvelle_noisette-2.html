@@ -1,10 +1,9 @@
-
 #SET{noisette, (#ENV{erreurs}|table_valeur{noisette})}
 #SET{infos, (#ENV{erreurs}|table_valeur{infos_#GET{noisette}})}
 <fieldset>
 <legend>
 	[(#ENV{id_noisette}|non)
-		[(#GET{infos}|table_valeur{icone}|image_reduire{24})]
+		[(#GET{infos}|table_valeur{icon}|image_reduire{24})]
 	]
 	[<span style="vertical-align:middle;">(#GET{infos}|table_valeur{nom})</span>]
 </legend>

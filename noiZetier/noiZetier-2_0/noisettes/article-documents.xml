@@ -1,6 +1,0 @@
-<noisette>
-	<nom><:noizetier:nom_documents:></nom>
-	<description><:noizetier:description_documents:></description>
-	<icone>img/ic_documents.png</icone>
-	<parametre nom="exclure_photos" label="noizetier:label_exclure_photos" saisie="oui_non" defaut="on" />
-</noisette>

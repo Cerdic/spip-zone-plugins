@@ -6,16 +6,16 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 /**
  * Lister les noisettes disponibles dans les dossiers noisettes/
  *
- * @staticvar array $resultats
+ * @staticvar array $liste_noisettes
  * @param text $type
  * @param bool $informer
  * @return array
  */
 function noizetier_lister_noisettes($type='tout',$informer=true){
-	static $resultats = null;
+	static $liste_noisettes = null;
 
-	if (is_null($resultats[$type][$informer])){
-		$resultats[$type][$informer] = array();
+	if (is_null($liste_noisettes[$type][$informer])){
+		$liste_noisettes[$type][$informer] = array();
 		
 		// Si $type='tout' on recherche toutes les noisettes sinon seules celles qui commencent par $type
 		if ($type=='tout')
@@ -36,12 +36,12 @@ function noizetier_lister_noisettes($type='tout',$informer=true){
 					AND (
 						$infos_noisette = !$informer OR ($infos_noisette = noizetier_charger_infos_noisette($dossier.$noisette))
 					)){
-					$resultats[$type][$informer][$noisette] = $infos_noisette;
+					$liste_noisettes[$type][$informer][$noisette] = $infos_noisette;
 				}
 			}
 		}
 	}
-	return $resultats[$type][$informer];
+	return $liste_noisettes[$type][$informer];
 }
 
 /**
@@ -78,7 +78,7 @@ function noizetier_charger_infos_noisette($noisette, $info=""){
 				$xml = reset($xml['noisette']);
 				$infos_noisette['nom'] = _T_ou_typo(spip_xml_aplatit($xml['nom']));
 				$infos_noisette['description'] = isset($xml['description']) ? _T_ou_typo(spip_xml_aplatit($xml['description'])) : '';
-				$infos_noisette['icone'] = isset($xml['icone']) ? find_in_path(reset($xml['icone'])) : '';
+				$infos_noisette['icon'] = isset($xml['icon']) ? find_in_path(reset($xml['icon'])) : '';
 				// Décomposition des paramètres
 				$infos_noisette['parametres'] = array();
 				if (spip_xml_match_nodes(',^parametre,', $xml, $parametres)){
@@ -101,80 +101,127 @@ function noizetier_charger_infos_noisette($noisette, $info=""){
 }
 
 /**
- * Lister les pages utilisables par le noizetier définies dans noizetier/plugin-pages.xml
+ * Lister les pages pouvant recevoir des noisettes
+ * Par défaut, cette liste est basée sur le contenu du répertoire contenu/
+ * Le tableau de résultats peut-être modifié via le pipeline noizetier_lister_pages.
  *
- * @staticvar array $resultats
- * @param bool $informer
+ * @staticvar array $liste_pages
  * @return array
  */
 function noizetier_lister_pages(){
-	static $resultats = null;
+	static $liste_pages = null;
 
-	if (is_null($resultats)){
-		$resultats = array();
+	if (is_null($liste_pages)){
+		$liste_pages = array();
+		$match = ".+[.]html$";
 
-		// lister les déclarations de pages
-		$liste = find_all_in_path('noizetier/','pages.xml');
+		// lister les fonds disponibles dans le répertoire contenu
+		$liste = find_all_in_path('contenu/', $match);
 		if (count($liste)){
-			foreach($liste as $chemin) {
-				include_spip('inc/xml');
-				include_spip('inc/texte');
-				if ($xml = spip_xml_load($chemin, false)){
-					foreach($xml[pages][0] as $tagpage => $xmlpage){
-						// On récupère l'id de la page
-						list($balise, $attributs) = spip_xml_decompose_tag($tagpage);
-						$id_page = $attributs['id'];
-						// On récupère ses infos
-						$infos_page = array();
-						$infos_page['nom'] = _T_ou_typo(spip_xml_aplatit($xmlpage[0]['nom']));
-						$infos_page['description'] = isset($xmlpage[0]['description']) ? _T_ou_typo(spip_xml_aplatit($xmlpage[0]['description'])) : '';
-						$infos_page['icone'] = isset($xmlpage[0]['icone']) ? find_in_path(reset($xmlpage[0]['icone'])) : '';
-						// On ajoute les infos à $resultats
-						if($id_page!='')
-							$resultats[$id_page] = $infos_page;
-					}
+			foreach($liste as $squelette=>$chemin) {
+				$page = preg_replace(',[.]html$,i', '', $squelette);
+				$dossier = str_replace($squelette, '', $chemin);
+				// Les éléments situés dans prive/contenu sont écartés
+				if (substr($dossier,-14)!='prive/contenu/')
+					$liste_pages[$page] = noizetier_charger_infos_page($dossier,$page);
+			}
+		}
+		$liste_pages = pipeline('noizetier_lister_pages',$liste_pages);
+	}
+	return $liste_pages;
+}
+
+/**
+ * Charger les informations d'une page, contenues dans un xml de config s'il existe
+ *
+ * @param string $dossier
+ * @param string $page
+ * @param string $info
+ * @return array
+ */
+function noizetier_charger_infos_page($dossier,$page, $info=""){
+		// on peut appeler avec le nom du squelette
+		$page = preg_replace(',[.]html$,i','',$page);
+		
+		// On autorise le fait que le fichier xml ne soit pas dans le même plugin que le fichier .html
+		// Au cas où le fichier .html soit surchargé sans que le fichier .xml ne le soit
+		$fichier = find_in_path("contenu/$page.xml");
+		
+		include_spip('inc/xml');
+		include_spip('inc/texte');
+		$infos_page = array();
+		// S'il existe un fichier xml de configuration (s'il s'agit d'une composition on utilise l'info de la composition)
+		if (file_exists($fichier) AND $xml = spip_xml_load($fichier, false) AND count($xml['page']))
+			$xml = reset($xml['page']);
+		elseif (file_exists($fichier) AND $xml = spip_xml_load($fichier, false) AND count($xml['composition']))
+			$xml = reset($xml['composition']);
+		else
+			$xml = '';
+		if ($xml != '') {
+			$infos_page['nom'] = _T_ou_typo(spip_xml_aplatit($xml['nom']));
+			$infos_page['description'] = isset($xml['description']) ? _T_ou_typo(spip_xml_aplatit($xml['description'])) : '';
+			$infos_page['icon'] = isset($xml['icon']) ? find_in_path(reset($xml['icon'])) : '';
+			// Décomposition des blocs
+			if (spip_xml_match_nodes(',^bloc,', $xml, $blocs)){
+				$infos_page['blocs'] = array();
+				foreach (array_keys($bloc) as $bloc){
+					list($balise, $attributs) = spip_xml_decompose_tag($bloc);
+					$infos_page['blocs'][$attributs['id']] = array(
+						'nom' => $attributs['nom'] ? _T($attributs['nom']) : $attributs['id'],
+						'icon' => isset($attributs['icon']) ? find_in_path(reset($attributs['icon'])) : '',
+						'description' => $attributs['description']
+					);
 				}
 			}
 		}
-	}
-	return $resultats;
+		// S'il n'y a pas de fichier XML de configuration
+		else {
+			$infos_page['nom'] = $page;
+			$infos_page['icon'] = find_in_path('img/ic_page.png');
+		}
+		
+		// Si les blocs n'ont pas été définis, on applique les blocs par défaut
+		if (!isset($infos_page['blocs']))
+			$infos_page['blocs'] = noizetier_blocs_defaut();
+		
+		// On renvoie les infos
+		if (!$info)
+			return $infos_page;
+		else 
+			return isset($infos_page[$info]) ? $infos_page[$info] : "";
 }
 
 /**
- * Active une page pour le noizetier
+ * Charger les informations d'une page, contenues dans un xml de config s'il existe
+ * La liste des blocs par défaut d'une page peut être modifiée via le pipeline noizetier_blocs_defaut.
  *
- * @param text $page
- * 
+ * @staticvar array $blocs_defaut
+ * @return array
  */
-function activer_page_noizetier($page) {
-	if(!isset($GLOBALS['meta']['noizetier-pages-actives']))
-		$pages_actives=array();
-	else
-		$pages_actives=unserialize($GLOBALS['meta']['noizetier-pages-actives']);
-	$pages_actives[$page]='on';
-	ecrire_meta('noizetier-pages-actives',serialize($pages_actives),'oui');
-	
-	// On invalide le cache
-	include_spip('inc/invalideur');
-	suivre_invalideur($page);
-}
+function noizetier_blocs_defaut(){
+	static $blocs_defaut = null;
 
-/**
- * Active une page pour le noizetier
- *
- * @param text $page
- * 
- */
-function desactiver_page_noizetier($page) {
-	if(isset($GLOBALS['meta']['noizetier-pages-actives'])) {
-		$pages_actives=unserialize($GLOBALS['meta']['noizetier-pages-actives']);
-		unset($pages_actives[$page]);
-		ecrire_meta('noizetier-pages-actives',serialize($pages_actives),'oui');
+	if (is_null($blocs_defaut)){
+	$blocs_defaut = array (
+		'contenu' => array(
+			'nom' => _T('noizetier:nom_bloc_contenu'),
+			'description' => _T('noizetier:description_bloc_contenu'),
+			'icon' => find_in_path('img/ic_bloc_contenu.png')
+			),
+		'navigation' => array(
+			'nom' => _T('noizetier:nom_bloc_navigation'),
+			'description' => _T('noizetier:description_bloc_navigation'),
+			'icon' => find_in_path('img/ic_bloc_navigation.png')
+			),
+		'extra' => array(
+			'nom' => _T('noizetier:nom_bloc_extra'),
+			'description' => _T('noizetier:description_bloc_extra'),
+			'icon' => find_in_path('img/ic_bloc_extra.png')
+			),
+	);
+	$blocs_defaut = pipeline('noizetier_blocs_defaut',$blocs_defaut);
 	}
-	// On invalide le cache
-	include_spip('inc/invalideur');
-	suivre_invalideur($page);
-
+	return $blocs_defaut;
 }
 
 /**
@@ -216,5 +263,36 @@ function noizetier_page_composition($page) {
 	$type_compo = explode ('-',$page,2);
 	return $type_compo[1];
 }
+
+/**
+ * Liste les blocs pour lesquels il y a des noisettes à insérer.
+ *
+ * @staticvar array $liste_blocs
+ * @return array
+ */
+function noizetier_lister_blocs_avec_noisettes(){
+	static $liste_blocs = null;
+	
+	if (is_null($liste_blocs)){
+		$liste_blocs = array();
+		$resultats = sql_allfetsel (
+			"CONCAT(`bloc`,'/',`type`,'-',`composition`)",
+			'spip_noisettes',
+			'1',
+			'`bloc`,`type`,`composition`'
+		);
+		foreach ($resultats as $res) {
+			$res = array_values($res);
+			if (substr($res[0],-1)=='-')
+				$liste_blocs[] = substr($res[0],0,-1);
+			else
+				$liste_blocs[] = $res[0];
+		}
+	}
+	
+	return $liste_blocs;
+}
+
+
 
 ?>

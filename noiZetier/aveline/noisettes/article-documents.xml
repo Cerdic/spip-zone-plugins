@@ -1,0 +1,6 @@
+<noisette>
+	<nom><:aveline:nom_documents:></nom>
+	<description><:aveline:description_documents:></description>
+	<icon>img/ic_documents.png</icon>
+	<parametre nom="exclure_photos" label="aveline:label_exclure_photos" saisie="oui_non" defaut="on" />
+</noisette>

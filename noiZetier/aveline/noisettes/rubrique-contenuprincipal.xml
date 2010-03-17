@@ -1,0 +1,8 @@
+<noisette>
+	<nom><:aveline:nom_rubrique-contenuprincipal:></nom>
+	<description><:aveline:description_rubrique-contenuprincipal:></description>
+	<icon>img/ic_rubrique.png</icon>
+	<parametre nom="afficher_date_dernier_ajout" label="aveline:label_afficher_date_dernier_ajout" saisie="oui_non" defaut="on" />
+	<parametre nom="afficher_descriptif" label="aveline:label_afficher_descriptif" saisie="oui_non" defaut="" />
+	<parametre nom="afficher_logo" label="aveline:label_afficher_logo" saisie="oui_non" defaut="on" />
+</noisette>

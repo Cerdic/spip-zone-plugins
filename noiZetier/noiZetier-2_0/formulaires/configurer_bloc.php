@@ -9,6 +9,7 @@ function formulaires_configurer_bloc_charger($bloc,$page){
 	$contexte = array();
 	
 	$contexte['bloc'] = $bloc;
+	$contexte['page'] = $page;
 	$type_compo = explode ('-',$page,2);
 	$contexte['type'] = $type_compo[0];
 	$contexte['composition'] = $type_compo[1];
@@ -23,9 +24,6 @@ function formulaires_configurer_bloc_charger($bloc,$page){
 	$contexte['demander_nouvelle_entree'] = '';
 	$contexte['id_menu_nouvelle_entree'] = '';
 	$contexte['enregistrer'] = '';
-	
-	// On a en permanence accès aux infos des noisettes
-	$contexte['liste_noisettes'] = noizetier_lister_noisettes();
 	
 	// On sait toujours où va la noisette
 	$contexte['_hidden'] .= '<input type="hidden" name="type" value="'.$contexte['type'].'" />';
@@ -51,7 +49,7 @@ function formulaires_configurer_bloc_verifier($bloc,$page){
 		// S'il n'y a pas encore de noisette de choisie
 		if (!($noisette = _request('noisette'))){
 			$erreurs['bloc_page_nouvelle_noisette'] = $bloc_page;
-			// On charge les différentes noisettes du type, celles de la compositionet celles pour toutes les pages
+			// On charge les différentes noisettes du type, celles de la composition et celles pour toutes les pages
 			$erreurs['noisettes_type'] = noizetier_lister_noisettes($type);
 			if ($composition!='')
 				$erreurs['noisettes_composition'] = noizetier_lister_noisettes($type.'-'.$composition);

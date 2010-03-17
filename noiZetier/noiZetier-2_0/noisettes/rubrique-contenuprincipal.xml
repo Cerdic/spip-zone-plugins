@@ -1,8 +1,0 @@
-<noisette>
-	<nom><:noizetier:nom_rubrique-contenuprincipal:></nom>
-	<description><:noizetier:description_rubrique-contenuprincipal:></description>
-	<icone>img/ic_rubrique.png</icone>
-	<parametre nom="afficher_date_dernier_ajout" label="noizetier:label_afficher_date_dernier_ajout" saisie="oui_non" defaut="on" />
-	<parametre nom="afficher_descriptif" label="noizetier:label_afficher_descriptif" saisie="oui_non" defaut="" />
-	<parametre nom="afficher_logo" label="noizetier:label_afficher_logo" saisie="oui_non" defaut="on" />
-</noisette>

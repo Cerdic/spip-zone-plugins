@@ -1,0 +1,5 @@
+<page>
+	<nom><:aveline:nom_page-recherche:></nom>
+	<description><:aveline:description_page-recherche:></description>
+	<icon>img/ic_recherche.png</icon>
+</page>

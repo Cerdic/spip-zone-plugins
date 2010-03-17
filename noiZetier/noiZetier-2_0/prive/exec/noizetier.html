@@ -4,28 +4,18 @@
 </div>
 
 #SET{auth,#AUTORISER{configurer,noizetier}}
-#SET{pages_actives,(#CONFIG{noizetier-pages-actives}|unserialize)}
 <div class="formulaire_spip">
 <ul class="liste_items liste_noizetier_pages">
 	<BOUCLE_pages(POUR){tableau #NOIZETIER_LISTE_PAGES}{par cle}>
-	<li class="item [(#GET{pages_actives}|table_valeur{#CLE}|oui) obligatoire]" [ style="background-image:url((#VALEUR|table_valeur{icone}|image_reduire{24}|extraire_attribut{src}));"]>
+	<li class="item" [ style="background-image:url((#VALEUR|table_valeur{icon}|image_reduire{24}|extraire_attribut{src}));"]>
 		<div class="ligne">
 			<div class="titre">[(#VALEUR|table_valeur{nom})]</div>
 			[<div class="infos">(#VALEUR|table_valeur{description})</div>]
 			<p class='actions'>[(#GET{auth}|oui)
-				[(#GET{pages_actives}|table_valeur{#CLE}|oui)
-					<span class='lien_modifier'>&#91;<a href='[(#URL_ACTION_AUTEUR{desactiver_page_noizetier,#CLE,#SELF})]'><:noizetier:editer_desactiver:></a>&#93;</span>
-					<span class='lien_modifier'>&#91;<a href='[(#URL_ECRIRE{configurer_page,page=#CLE})]'><:noizetier:editer_configurer_page:></a>&#93;</span> 
-				]
-				[(#GET{pages_actives}|table_valeur{#CLE}|non)
-					<span class='lien_modifier'>&#91;<a href='[(#URL_ACTION_AUTEUR{activer_page_noizetier,#CLE,#SELF})]'><:noizetier:editer_activer:></a>&#93;</span>
-				]
+				<span class='lien_modifier'>&#91;<a href='[(#URL_ECRIRE{configurer_page,page=#CLE})]'><:noizetier:editer_configurer_page:></a>&#93;</span> 
 			]
-				<BOUCLE_noisettes(NOISETTES){type=(#CLE|noizetier_page_type)}{composition=(#CLE|noizetier_page_composition)}{0,1}>[(#GET{auth}|oui)
-					[(#GET{pages_actives}|table_valeur{#CLE}|non)<span class='lien_modifier'>&#91;<a href='[(#URL_ACTION_AUTEUR{supprimer_noisettes_page_noizetier,#CLE,#SELF})]'><:noizetier:editer_supprimer_noisettes:></a>&#93;</span>]
-				]</BOUCLE_noisettes>
 			</p>
-		<div class="ligne">
+		</div>
 	</li>
 	</BOUCLE_pages>
 </ul>

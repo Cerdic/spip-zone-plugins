@@ -1,0 +1,5 @@
+<page>
+	<nom><:aveline:nom_page_mot:></nom>
+	<description><:aveline:description_page_mot:></description>
+	<icon>img/ic_mot.png</icon>
+</page>

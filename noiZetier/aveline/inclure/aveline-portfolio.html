@@ -1,0 +1,12 @@
+[(#REM) Portfolio : album d'images ]
+<B_documents_portfolio>
+<div class="documents documents_portfolio">
+	<h2 class="h2"><:info_portfolio:></h2>
+	<BOUCLE_documents_portfolio(DOCUMENTS) {id_article?}{id_rubrique?} {mode=document}{extension IN png,jpg,gif} {par num titre, date}{vu?}>[
+	<a href="(#URL_DOCUMENT)" type="#MIME_TYPE"[ title="(#TITRE|attribut_html|couper{80})"]>[(#FICHIER
+		|image_reduire{0,100}
+		|inserer_attribut{class,spip_logos}
+		|inserer_attribut{alt,[(#TITRE|attribut_html|couper{80})]})]</a>
+	]</BOUCLE_documents_portfolio>
+</div>
+</B_documents_portfolio>

@@ -1,0 +1,5 @@
+<page>
+	<nom><:aveline:nom_page_rubrique:></nom>
+	<description><:aveline:description_page_rubrique:></description>
+	<icon>img/ic_rubrique.png</icon>
+</page>

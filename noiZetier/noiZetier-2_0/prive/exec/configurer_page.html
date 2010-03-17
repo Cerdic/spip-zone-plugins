@@ -6,13 +6,20 @@
 		</a>
 		<:noizetier:formulaire_configurer_page:>
 		<h1>[(#NOIZETIER_LISTE_PAGES|table_valeur{#ENV{page}}|table_valeur{nom})]</h1>
+		[(#NOIZETIER_LISTE_PAGES|table_valeur{#ENV{page}}|table_valeur{description})]
 	</div>
 	
-	<div class="ajax">#FORMULAIRE_CONFIGURER_BLOC{'contenu',#ENV{page}}</div><p />
-	<div class="ajax">#FORMULAIRE_CONFIGURER_BLOC{'navigation',#ENV{page}}</div><p />
-	<div class="ajax">#FORMULAIRE_CONFIGURER_BLOC{'extra',#ENV{page}}</div>
-
+	[(#SET{blocs,[(#NOIZETIER_LISTE_PAGES|table_valeur{#ENV{page}}|table_valeur{blocs})]})]
+	<BOUCLE_blocs(POUR){tableau #GET{blocs}}>
+	<div class="ajax">#FORMULAIRE_CONFIGURER_BLOC{#CLE,#ENV{page}}</div>
+	</BOUCLE_blocs>
 </div>
+
+[(#AUTORISER{configurer,noizetier}|oui)
+[<div class="actions">
+(#URL_ACTION_AUTEUR{supprimer_noisettes_page,#ENV{page},#URL_ECRIRE{noizetier}}|icone{<:noizetier:formulaire_supprimer_noisettes_page:>,#CHEMIN{img/noizetier-24.png},center,supprimer.gif})
+</div>]
+]
 
 <!--#navigation-->
 <div class="cadre infos cadre-info">

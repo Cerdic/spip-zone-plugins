@@ -1,7 +1,0 @@
-<pages>
-	<page id="evenement" >
-		<nom><:noizetier-agenda:nom_page_evenement:></nom>
-		<description><:noizetier-agenda:description_page_evenement:></description>
-		<icone>img_pack/agenda-24.png</icone>
-	</page>
-</pages>

@@ -1,0 +1,5 @@
+<noisette>
+	<nom><:aveline:nom_logositespip:></nom>
+	<icon>img/ic_logosite.png</icon>
+	<parametre nom="taille_max_image" label="aveline:label_taille_max_image" defaut="200" />
+</noisette>

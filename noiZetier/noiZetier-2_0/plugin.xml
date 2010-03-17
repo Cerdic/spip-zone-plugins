@@ -1,17 +1,17 @@
 <plugin>
 	<nom>noiZetier</nom>
-	<auteur>Joseph Larmarange</auteur>
+	<auteur>Joseph</auteur>
 	<licence>GPL v3</licence>
-	<version>0.1</version>
+	<version>0.2</version>
 	<version_base>0.1</version_base>
 	<etat>dev</etat>
-	<description>Le noisetier, version Z<p />
-	<p><b>ATTENTION : plugin en phase de d&eacute;veloppement. Pas encore op&eacute;rationnel. Voir la documentation.</b></p>
+	<description>Prototype de gestionnaire de noisettes pour squelette Z. Il s'agit d'une simple contribution à la discussion.<p />
+	<p><b>ATTENTION : ne pas utiliser &agrave; d'autre fin que des tests. Voir la documentation.</b></p>
 	
 	Les ic&ocirc;nes sont issues du [plugin bandeau->http://zone.spip.org/trac/spip-zone/browser/_plugins_/bandeau]  et de collection {black and white} de [carpelinx->http://www.carpicon.com/index.php?option=com_content&task=view&id=6&Itemid=26].
 	</description>
 	<lien>http://www.spip-contrib.net/noiZetier</lien>
-	<icon>img/noizetier-48.png</icon>
+	<icon>img/noizetier-128.png</icon>
 	<prefix>noizetier</prefix>
 	<fonctions>noizetier_fonctions.php</fonctions>
 	<options>noizetier_fonctions.php</options>
@@ -28,15 +28,15 @@
 		<nom>autoriser</nom>
 		<inclure>noizetier_autoriser.php</inclure>
 	</pipeline>
-		<pipeline>
+	<pipeline>
 		<nom>header_prive</nom>
 		<inclure>noizetier_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
-		<nom>styliser</nom>
+		<nom>recuperer_fond</nom>
 		<inclure>noizetier_pipelines.php</inclure>
 	</pipeline>
-	<bouton id='noizetier' parent="naviguer">
+	<bouton id='noizetier' parent="configuration">
 		<url>noizetier</url>
 		<titre>noizetier:editer_noizetier_titre</titre>
 		<icone>img/noizetier-24.png</icone>

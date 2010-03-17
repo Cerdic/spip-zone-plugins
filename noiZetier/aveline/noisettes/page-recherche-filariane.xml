@@ -1,0 +1,7 @@
+<noisette>
+	<nom><:aveline:nom_filariane:></nom>
+	<icon>img/ic_ariane.png</icon>
+	<parametre nom="afficher_lien_accueil" label="aveline:label_afficher_lien_accueil" saisie="oui_non" defaut="on" />
+	<parametre nom="ariane_separateur" label="aveline:label_ariane_separateur" defaut="&gt;" />
+	<parametre nom="afficher_recherche" label="aveline:label_afficher_recherche" saisie="oui_non" defaut="on" />
+</noisette>

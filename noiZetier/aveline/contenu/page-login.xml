@@ -1,0 +1,5 @@
+<page>
+	<nom><:aveline:nom_page-login:></nom>
+	<description><:aveline:description_page-login:></description>
+	<icon>img/ic_motdepasse.png</icon>
+</page>

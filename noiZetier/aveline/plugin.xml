@@ -1,0 +1,21 @@
+<plugin>
+	<nom>Aveline - squelettes Z sous forme de noisettes</nom>
+	<auteur>Joseph</auteur>
+	<icon>img/aveline-128.png</icon>
+	<licence>GNU/GPL</licence>
+	<version>0.1</version>
+	<etat>dev</etat>
+	<description>Un squelette Z dont l'ensemble des contenus sont g&eacute;r&eacute;s sous forme de noisettes configurables avec le noiZetier.
+	<p><b>ATTENTION : il s'agit d'un prototype &agrave; des fins de tests. Ne pas utiliser sur un site en production. Seules quelques noisettes sont pour le moment disponibles.</b></p>
+	</description>
+	<lien>http://www.spip-contrib.net/noiZetier</lien>
+	<prefix>aveline</prefix>
+	<pipeline>
+		<nom>noizetier_lister_pages</nom>
+		<inclure>aveline_pipelines.php</inclure>
+	</pipeline>
+	<categorie>squelette</categorie>
+	<necessite id="SPIP" version="[2.0.10;]" />
+	<necessite id="Z" version="[1.5.1;]" />
+	<necessite id="noizetier" version="[0.2;]" />
+</plugin>
