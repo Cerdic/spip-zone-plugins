@@ -60,6 +60,8 @@ Les pseudo-types disponibles sont :
 -* <tt>array</tt>
 -* <tt>image</tt> chemin vers un fichier image
 -* <tt>mimetype</tt> string de nommage des mime-type
+-* <tt>version</tt> Numeros de version a 1,2 ou 3 digits, avec variantes dev, alpha, beta, RC, pl
+-* <tt>operateur</tt> pour des operateurs de comparaison
 '
 );
 
