@@ -143,7 +143,12 @@ function nospam_pre_edition($flux){
 			// a partir d'un moment on refuse carrement le spam massif
 			if ($spammeur_connu){
 				// plus de 10 spams dans les dernieres 2h, faut se calmer ...
-				if (($nb=sql_countsel('spip_forum','statut=\'spam\' AND (ip='.sql_quote($GLOBALS['ip']).$email.') AND maj>DATE_SUB(NOW(),INTERVAL 120 minute)'))>10){
+				// ou plus de 30 spams dans la dernieres 1h, faut se calmer ...
+				if (
+					($nb=sql_countsel('spip_forum','statut=\'spam\' AND (ip='.sql_quote($GLOBALS['ip']).$email.') AND maj>DATE_SUB(NOW(),INTERVAL 120 minute)'))>10
+					OR
+					($nb=sql_countsel('spip_forum','statut=\'spam\' AND (ip='.sql_quote($GLOBALS['ip']).$email.') AND maj>DATE_SUB(NOW(),INTERVAL 60 minute)'))>30
+					){
 					$flux['data']['statut']=''; // on n'en veut pas !
 					spip_log("[Refuse] $nb spam pour (ip=".$GLOBALS['ip']."$email) dans les 2 dernieres heures",'nospam');
 					return $flux;
