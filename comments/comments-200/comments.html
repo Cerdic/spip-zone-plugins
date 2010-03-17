@@ -6,5 +6,5 @@
 		<h2 class="h2"><:repondre_article:></h2>
 		(#FORMULAIRE_FORUM)
 	</div>]
-	<INCLURE{fond=comments-feed}{env}>
+	[(#PARAMETRES_FORUM|oui)<INCLURE{fond=comments-feed}{env}>]
 </div>
