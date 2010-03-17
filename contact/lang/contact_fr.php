@@ -3,8 +3,11 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+	'alerte_effacement' => 'Confirmez l\'effacement des donn&eacute;es de configuration de contact.',
 	'aucun_message' => 'Aucun message &agrave; afficher',
 
+	'bouton_effacer' => 'Gommer',
+	
 	'champ_obligatoire' => 'Obligatoire ?',
 	'champ_prenom' => 'Pr&eacute;nom',
 	'champ_nom' => 'Nom',
