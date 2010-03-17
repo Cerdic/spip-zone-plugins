@@ -1,8 +1,6 @@
 <?php
 	/**
 	 * saveauto : plugin de sauvegarde automatique de la base de données de SPIP
-	 *
-	 * Auteur : cy_altern d'après une contrib de Silicium (silicium@japanim.net)
 	 *  
 	 * Ce programme est un logiciel libre distribue sous licence GNU/GPL.
 	 *  
@@ -101,6 +99,7 @@ function saveauto_sauvegarde() {
         foreach (lire_config('saveauto') as $cle => $valeur) {
         				$$cle = $valeur;
         }
+
    // options complexes des sauvegardes déportées depuis cfg_saveauto :
          // true = clause INSERT avec nom des champs
          $insertComplet = true;

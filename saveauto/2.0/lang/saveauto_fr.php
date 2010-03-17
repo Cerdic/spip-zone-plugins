@@ -1,17 +1,14 @@
 <?php
-	/**
-	 * saveauto : plugin de sauvegarde automatique de la base de données de SPIP
-	 *
-	 * Auteur : cy_altern d'après une contrib de Silicium (silicium@japanim.net)
-	 *  
-	 * Ce programme est un logiciel libre distribue sous licence GNU/GPL.
-	 *  
-	 **/
-
+/**
+* saveauto : plugin de sauvegarde automatique de la base de données de SPIP
+*  
+* Ce programme est un logiciel libre distribue sous licence GNU/GPL.
+*  
+**/
 	$GLOBALS['i18n_saveauto_fr'] = array(
-			    // inc_saveauto.php
+			    // saveauto_pipeline.php
 						 'saveauto' => 'Sauvegarde automatique',
-						 'sauvegarde_ok' => 'Sauvegarde de la base effectu&eacute;e avec succ&egrave;s !',
+						 'sauvegarde_ok' => 'Sauvegarde de la base effectuée avec succès !',
                      'sauvegarde_ok_mail' => 'Sauvegarde de la base effectuee avec succes !',
 						 'maintenance' => 'Maintenance',
 						 'probleme_sauve_base' => 'Probl&egrave;me de sauvegarde de la base ',
@@ -43,7 +40,7 @@
 						 'config_inadaptee' => 'Plugin saveauto : configuration non-adapt&eacute;e,',
 						 'mail_absent' => ' votre serveur n\'assure pas les fonctions d\'envoi de mail !',
 						 
-					// saveauto_admin.php
+					// cfg_saveauto.php
 						 'config_saveauto' => 'Sauvegarde automatis&eacute;e de la base de donn&eacute;es',
 						 'plugin_saveauto' => 'Plugin saveauto : configuration',
 						 'erreur_ecrire_conf' => 'Erreur lors de la cr&eacute;ation du fichier de configuration plugins/saveauto/inc/saveauto_conf.php : v&eacute;rifiez que le fichier est accessible en &eacute;criture pour le serveur apache',
