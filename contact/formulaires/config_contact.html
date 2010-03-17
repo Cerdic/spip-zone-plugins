@@ -184,9 +184,9 @@
 
 	<div class="boutons">
 		<input type="submit" name="_cfg_ok" value="<:bouton_enregistrer:>" />
-		[(#REM)<input type="submit" name="_cfg_delete" value="<:bouton_effacer:>" />]
 	</div>
 </div></form>
+[ (#BOUTON_ACTION{<:bouton_effacer:>,#URL_ACTION_AUTEUR{effacer_configuration,'contact',#SELF},ajax,"Confirmez l'effacement des données de configuration de contact."})]
 </div>
 
 <script type="text/javascript">
