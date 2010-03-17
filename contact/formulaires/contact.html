@@ -103,8 +103,8 @@
 			[(#INCLURE{fond=formulaires/contact_champ_#CLE,env,name=#CLE,titre=#VALEUR})]
 			]
 			[(#GET{existe}|non)
-			<li class="saisie_#CLE[ (#CLE|in_array{#ENV{_obligatoires,#ARRAY}}|oui)obligatoire][ (#ENV*{erreurs}|table_valeur{#CLE}|oui)erreur]">
-				<label for="info_#CLE">#VALEUR[ (#CLE|in_array{#ENV{_obligatoires,#ARRAY}}|oui)<strong><:info_obligatoire_02:></strong>]</label>
+			<li class="editer_#CLE saisie_#CLE[ (#CLE|in_array{#ENV{obligatoires,#ARRAY}}|oui)obligatoire][ (#ENV*{erreurs}|table_valeur{#CLE}|oui)erreur]">
+				<label for="info_#CLE">#VALEUR[ (#CLE|in_array{#ENV{obligatoires,#ARRAY}}|oui)<strong><:info_obligatoire_02:></strong>]</label>
 				[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{#CLE})</span>]
 				<input type="text" class="text" name="#CLE" id="info_#CLE" value="#ENV{#CLE}" size="30" />
 			</li>
