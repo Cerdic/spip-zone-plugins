@@ -24,6 +24,8 @@
 	<noscript><div style="display:inline;"><input type="submit" id="sendsearchmc" class="okfield form_submit" value="<:pass_ok:>" /></div></noscript>
 </div>
 </form>
+<B_Tags>
 <div id="postDetailInfos" class="clearfix">
-<B_Tags><p class="postDetailTags"><BOUCLE_Tags(MOTS){id_mot IN #ENV{mots}}{par titre}{" et "}>[(#SET{lesautresmots,[(#ENV{mots}|critere_mots_enleve_mot_de_liste{#ID_MOT})]})]<a href="[(#ENV{action}|parametre_url{mots,#GET{lesautresmots}})]" class="ajax">[(#TITRE|ucfirst)]</a></BOUCLE_Tags></p></B_Tags>
+<BOUCLE_Tags(MOTS){id_mot IN #ENV{mots}}{par titre}{" "}>[(#SET{lesautresmots,[(#ENV{mots}|critere_mots_enleve_mot_de_liste{#ID_MOT})]})]<a href="[(#ENV{action}|parametre_url{mots,#GET{lesautresmots}})]"title="<:ecrire:info_supprimer_mot|ucfirst|attribut_html:> ([(#TITRE|ucfirst|textebrut|attribut_html)])">[(#TITRE|ucfirst)]</a></BOUCLE_Tags>
 </div><!-- #postDetailInfos -->
+</B_Tags>
