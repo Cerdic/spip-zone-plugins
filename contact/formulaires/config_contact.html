@@ -14,10 +14,10 @@
 			<li class="editer_texte">
 				<p class="explication"><:contact:configuration_destinataires_explication:></p>
 					<B_auteurs>
-					<select name="choix_destinataires[]" id="choix_destinataires" multiple="multiple" size="5">
+					<select name="choix_destinataires[]" id="choix_destinataires" multiple="multiple" size="[(#GRAND_TOTAL|<{26}|?{#GRAND_TOTAL,25})]">
 					<BOUCLE_auteurs(AUTEURS){tous}{email!=''}{par nom}>
 						<option value="#ID_AUTEUR" [(#ID_AUTEUR|in_array{#ENV{choix_destinataires,#ARRAY}}|oui)selected="selected"]>
-							#NOM (##ID_AUTEUR - [(#ARRAY{0minirezo,info_administrateurs,1comite,info_redacteurs,6forum,info_visiteurs,5poubelle,texte_statut_poubelle}|table_valeur{#STATUT}|_T)])
+							[(#NOM)] (##ID_AUTEUR - [(#ARRAY{0minirezo,info_administrateurs,1comite,info_redacteurs,6forum,info_visiteurs,5poubelle,texte_statut_poubelle,contact,contact:titre}|table_valeur{#STATUT}|_T)[ (#NOM|non)#EMAIL]])
 						</option>
 					</BOUCLE_auteurs>
 				</select>
