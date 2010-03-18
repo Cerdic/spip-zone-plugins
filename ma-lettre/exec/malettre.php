@@ -170,7 +170,7 @@ function exec_malettre(){
 							
 					  // affichage ?
 					  if (!$errorFlag) {
-						  echo "<form method='post' agir='?exec=malettre'><fieldset>\n"; 
+						  echo "<form method='post' action='?exec=malettre'><fieldset>\n"; 
               echo "<input type='hidden' name='lang_select' value='$lang' />"; 
 						  echo "<input type='hidden' name='agir' value='letter_send' />\n";
               echo "<h4>"._T('malettre:expediteur')."</h4>\n";

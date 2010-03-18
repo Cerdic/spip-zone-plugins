@@ -4,7 +4,7 @@
   parametre:
   - date
   - id_edito:  id de l'article edito
-  - selection: id des articles selectionnes (separer par une virgule)
+  - selection: id des articles selectionnes (separe par une virgule)
 
 ]#CACHE{0}
 #HTTP_HEADER{Content-Type: text/plain;}[(#REM)pour supprimer les boutons admin ]
@@ -21,7 +21,7 @@ EDITO
 <BOUCLE_edito(ARTICLES){id_article=#ENV{id_edito}}> 
 [(#TITRE|textebrut|supprimer_numero)] 
 -------------------------------------------------
-[(#INTRODUCTION|liens_absolus|couper{300}|PtoBR|textebrut)]
+[(#TEXTE|liens_absolus|couper{300}|PtoBR|textebrut)]
 #URL_SITE_SPIP/[(#URL_ARTICLE|substr{3})]
 </BOUCLE_edito>
 
