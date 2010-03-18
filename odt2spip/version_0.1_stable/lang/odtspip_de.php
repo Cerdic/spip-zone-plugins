@@ -8,31 +8,38 @@
 *  
 **/
 
-	$GLOBALS[$GLOBALS['idx_lang']] = array(
-    // A
-        'attacher_fichier_odt' => 'Die Datei ODT dem Artikel anhängen?',
-  
-    // C
-			'choix_fichier' => 'Folgende ODT Datei benutzen : ',
-
-    // E
-        'err_enregistrement_fichier_sortie' => 'Fehler beim Speichern der Datei des pluggin snippet',
-        'err_extension_xslt'=> 'Xslt Funktionen arbeiten nicht in PHP: Frage nach der Aktivierung der XSL Erweiterungen bei deinem Server Administrator',
-        'err_import_snippet' => 'Fehler bei der Herstellung des Artikels mit Zusatzdateien. Kontrolliere auf richtige Installierung und Aktivierung.',
-        'err_repertoire_tmp' => 'Fehler: tmp/odt2spip Ordner oder zugehöriger Unterordner  /id auteur wurde nicht hergestellt',
-        'err_telechargement_fichier' => 'Fehler: die Datei konnte nicht wieder hergestellt werden',
-        'err_transformation_xslt' => 'Fehler Verarbeitung XSLT Datei ODT',
-
-    // I
-        'importer_fichier' => 'Erstelle einen Artikel aus einer OOo Schreiber Datei',
+$GLOBALS[$GLOBALS['idx_lang']] = array(
+// A
+	'attacher_fichier_odt' => 'ODT-Datei an Artikel anh&auml;ngen?',
+// C
+	'choix_fichier' => 'Diese ODT-Datei benutzen: ',
         
-    // N
-        'non' => 'nein',
+    // D
+        'mode_document' => 'Dokumente',
+
+// E
+	'err_enregistrement_fichier_sortie' => 'Fehler beim Speichern der Datei mit dem Plugins Snippets',
+	'err_extension_xslt'=> 'XSLT f&uuml;r PHP nicht verf&uuml;gbar: Bitten sie ihren Administrator, die XSL Erweiterungen zu installieren.',
+	'err_import_snippet' => 'Fehler beim Anlegen des Artikels mit Zusatzdateien. Bitte Installation und Aktivierung von odt2spip pr&uuml;fen.',
+	'err_repertoire_tmp' => 'Fehler: tmp/odt2spip Ordner oder zugehöriger Unterordner  /id auteur wurde nicht hergestellt',
+	'err_telechargement_fichier' => 'Fehler: die Datei konnte nicht wieder hergestellt werden',
+	'err_transformation_xslt' => 'Fehler beider der XSLT-Verarbeitung  der ODT-Datei',
+       'err_transformation_xslt_mathml' => 'XSLT-Fehler bei der Umwandlung von MathML',
+
+
+// I
+       'images_mode_document' => 'Bilder f&uuml;r Artikel speichern als:',
+       'mode_image' => 'Bilder',
+	'importer_fichier' => 'ODT-Datei in Artikel umwandeln',
         
-    // O
-        'oui' => 'ja',
-    
-	// T
-        'cet_article_version_odt' => 'OOo Schreiber Version dieses Artikels' 
-	);
+    // L
+        'langue_publication' => 'Sprache des Artikels', 
+
+// N
+	'non' => 'nein',
+// O
+	'oui' => 'ja',
+// T
+	'cet_article_version_odt' => 'OOo-Writer-Version dieses Artikels' 
+);
 ?>
