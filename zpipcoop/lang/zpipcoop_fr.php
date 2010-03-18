@@ -68,6 +68,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'nouveau_site' => 'Nouveau site',
 
 //P
+'pas_le_droit_ecrire' => 'Vous n\'avez pas d\'autorisation en &eacute;criture',
 'personaliser_nav' => 'Personnaliser ce menu',
 'publier' => 'Publi&eacute; le',
 

@@ -11,8 +11,8 @@
 	<h1>#TITRE</h1></BOUCLE_titre></B_titre>
 	<h1><:zpipcoop:nouveau_message:></h1><//B_titre>
 </div>
-[(#AUTORISER{modifier, article, #ID_ARTICLE})
+[(#AUTORISER{ecrire})
 #FORMULAIRE_EDITER_ARTICLE{#ID_ARTICLE, #ID_RUBRIQUE, #ENV{retour}}
 ]
-
+[(#AUTORISER{ecrire}|non)<:zpipcoop:pas_le_droit_ecrire:>]
 </div>
