@@ -108,25 +108,28 @@
 </div>
 </form>
 
+</div>
 [(#REM)
 	Sauver les donnees du formulaire dans un cookie, si on quitte la page,
 	et les remettre quand on revient (dans les limites de 4ko etc)
 ]
 <script type="text/javascript">/*<!#EVAL{chr(91)}CDATA#EVAL{chr(91)}*/
+var saveauto = true;
+function cookie_formulaire_forum(){
+	var a = $.cookie('spip_contenu_formulaire_#ENV{_sign}');
+	if (a) {
+		$('#formulaire_forum textarea#EVAL{chr(91)}name=texte#EVAL{chr(93)}')
+		.val(a);
+		$.cookie('spip_contenu_formulaire_#ENV{_sign}', null);
+	}
+	$('#formulaire_forum form').not('.nocookiesave')
+	.bind('submit', function() {
+		saveauto = false;
+	}).addClass('nocookiesave');
+}
 if (window.jQuery)(function($){
-	$.getScript('[(#CHEMIN{javascript/jquery.cookie.js}|url_absolue)]',
-	function(){
-		var a = $.cookie('spip_contenu_formulaire_#ENV{_sign}');
-		var saveauto = true;
-		if (a) {
-			$('#formulaire_forum textarea#EVAL{chr(91)}name=texte#EVAL{chr(93)}')
-			.val(a);
-			$.cookie('spip_contenu_formulaire_#ENV{_sign}', null);
-		}
-		$('#formulaire_forum form')
-		.bind('submit', function() {
-			saveauto = false;
-		});
+	$.getScript('[(#CHEMIN{javascript/jquery.cookie.js}|url_absolue)]',function(){
+		cookie_formulaire_forum();
 		$(window)
 		.bind('unload', function(){
 			if (saveauto){
@@ -138,7 +141,7 @@ if (window.jQuery)(function($){
 			}
 		});
 	});
+	onAjaxLoad(cookie_formulaire_forum);
 }(jQuery));
 /*#EVAL{chr(93)}[(#EVAL{chr(93)})]>*/</script>
 ]
-</div>
