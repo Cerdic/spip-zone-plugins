@@ -49,7 +49,6 @@
 	
 	<necessite id="SPIP" version="[2.0.10;]" />
 	<necessite id="spip_bonux" version="[1.8.10;]" />
-	<necessite id="Z" />
 	<utilise id="saisies" />
 	<utilise id="compositions" />
 </plugin>
