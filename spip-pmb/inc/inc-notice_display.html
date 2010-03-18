@@ -80,11 +80,10 @@ $(document).ready(function() {
 						      <strong>
 
 
-						    [(#PMB_SESSION|pmb_reserver_ouvrage{[(#ENV{notice}|pmb_notice_champ{'id'})],'','',''}|?{<:pmb:reservation_ok:>,		<:pmb:reservation_ko:>})]
+						    [(#PMB_SESSION|pmb_reserver_ouvrage{[(#ENV{notice}|pmb_notice_champ{'id'})],'',#ENV{location_reserver}}|?{<:pmb:reservation_ok:>,		<:pmb:reservation_ko:>})]
 						      </strong>
 					]
 					<ul class="spip">
-						<li><a href="[(#SELF|parametre_url{reserver,1})]#compte-lecteur"><:pmb:reserver_ouvrage:></a></li>
 						<li><a href="#CONFIG{spip_pmb/url}addtags.php?noticeid=#ENV{id}" class="lien-modal"><:pmb:ajouter_tag:></a></li>
 						<li><a href="#CONFIG{spip_pmb/url}avis.php?todo=liste&noticeid=#ENV{id}" class="lien-modal"><:pmb:donner_avis:></a></li>
 					</ul>

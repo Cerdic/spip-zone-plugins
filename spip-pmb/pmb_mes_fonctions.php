@@ -30,68 +30,79 @@ include_spip('base/pmb_tables');
 function pmb_section_extraire($id_section, $url_base='') {
 	$tableau_sections = Array();
 	pmb_ws_charger_wsdl($ws, $url_base);
-	//récupérer les infos sur la section parent
-	$section_parent = $ws->pmbesOPACGeneric_get_section_information($id_section);
-	$tableau_sections[0] = Array();
-	$tableau_sections[0]['section_id'] = $section_parent->section_id;
-	$tableau_sections[0]['section_location'] = $section_parent->section_location;
-	$tableau_sections[0]['section_caption'] = $section_parent->section_caption;
-	$tableau_sections[0]['section_image'] = lire_config("spip_pmb/url","http://tence.bibli.fr/opac").'/'.$section_parent->section_image;
+	try {
+	      //récupérer les infos sur la section parent
+	      $section_parent = $ws->pmbesOPACGeneric_get_section_information($id_section);
+	      $tableau_sections[0] = Array();
+	      $tableau_sections[0]['section_id'] = $section_parent->section_id;
+	      $tableau_sections[0]['section_location'] = $section_parent->section_location;
+	      $tableau_sections[0]['section_caption'] = $section_parent->section_caption;
+	      $tableau_sections[0]['section_image'] = lire_config("spip_pmb/url","http://tence.bibli.fr/opac").'/'.$section_parent->section_image;
 
-	$tab_sections = $ws->pmbesOPACGeneric_list_sections($id_section);
-	$cpt = 1;
-	if (is_array($tab_sections)) {
-		    foreach ($tab_sections as $section) {
-			  $tableau_sections[$cpt] = Array();
-			  $tableau_sections[$cpt]['section_id'] = $section->section_id;
-			  $tableau_sections[$cpt]['section_location'] = $section->section_location;
-			  $tableau_sections[$cpt]['section_caption'] = $section->section_caption;
-			  $tableau_sections[$cpt]['section_image'] = lire_config("spip_pmb/url","http://tence.bibli.fr/opac").'/'.$section->section_image;
+	      $tab_sections = $ws->pmbesOPACGeneric_list_sections($id_section);
+	      $cpt = 1;
+	      if (is_array($tab_sections)) {
+			  foreach ($tab_sections as $section) {
+				$tableau_sections[$cpt] = Array();
+				$tableau_sections[$cpt]['section_id'] = $section->section_id;
+				$tableau_sections[$cpt]['section_location'] = $section->section_location;
+				$tableau_sections[$cpt]['section_caption'] = $section->section_caption;
+				$tableau_sections[$cpt]['section_image'] = lire_config("spip_pmb/url","http://tence.bibli.fr/opac").'/'.$section->section_image;
 
-			  
-			  $cpt++;
-		    }
-	}
-	
+				
+				$cpt++;
+			  }
+	      }
+	} catch (Exception $e) {
+		 echo 'Exception reçue (1): ',  $e->getMessage(), "\n";
+	} 
 	return $tableau_sections;
 }
 function pmb_location_extraire($id_location, $url_base='') {
 	$tableau_locationsections = Array();
 	pmb_ws_charger_wsdl($ws, $url_base);
-	$tab_locations = $ws->pmbesOPACGeneric_get_location_information_and_sections($id_location);
-	//récupérer les infos sur la localisation parent
-	$tableau_locationsections[0] = Array();
-	$tableau_locationsections[0]['location_id'] = $tab_locations['location']->location_id;
-	$tableau_locationsections[0]['location_caption'] = $tab_locations['location']->location_caption;
+	try {
+	      $tab_locations = $ws->pmbesOPACGeneric_get_location_information_and_sections($id_location);
+	      //récupérer les infos sur la localisation parent
+	      $tableau_locationsections[0] = Array();
+	      $tableau_locationsections[0]['location_id'] = $tab_locations['location']->location_id;
+	      $tableau_locationsections[0]['location_caption'] = $tab_locations['location']->location_caption;
 
-	$cpt = 1;
-	if (is_array($tab_locations['sections'])) {
-		foreach ($tab_locations['sections'] as $section) {
-		      $tableau_locationsections[$cpt] = Array();
-		      $tableau_locationsections[$cpt]['section_id'] = $section->section_id;
-		      $tableau_locationsections[$cpt]['section_location'] = $section->section_location;
-		      $tableau_locationsections[$cpt]['section_caption'] = $section->section_caption;
-		      $tableau_locationsections[$cpt]['section_image'] = lire_config("spip_pmb/url","http://tence.bibli.fr/opac").'/'.$section->section_image;
+	      $cpt = 1;
+	      if (is_array($tab_locations['sections'])) {
+		      foreach ($tab_locations['sections'] as $section) {
+			    $tableau_locationsections[$cpt] = Array();
+			    $tableau_locationsections[$cpt]['section_id'] = $section->section_id;
+			    $tableau_locationsections[$cpt]['section_location'] = $section->section_location;
+			    $tableau_locationsections[$cpt]['section_caption'] = $section->section_caption;
+			    $tableau_locationsections[$cpt]['section_image'] = lire_config("spip_pmb/url","http://tence.bibli.fr/opac").'/'.$section->section_image;
 
-		      
-		      $cpt++;
-		}
-	}
+			    
+			    $cpt++;
+		      }
+	      }
+	} catch (Exception $e) {
+		 echo 'Exception reçue (2) : ',  $e->getMessage(), "\n";
+	} 
 	return $tableau_locationsections;
 }
 function pmb_liste_afficher_locations($url_base) {
 	$tableau_sections = Array();
 	pmb_ws_charger_wsdl($ws, $url_base);
-	$tab_locations = $ws->pmbesOPACGeneric_list_locations();
-	$cpt = 0;
-	if (is_array($tab_locations)) {
-		foreach ($tab_locations as $location) {
-		      $tableau_locations[$cpt] = Array();
-		      $tableau_locations[$cpt]['location_id'] = $location->location_id;
-		      $tableau_locations[$cpt]['location_caption'] = $location->location_caption;
-		      $cpt++;
-		}
-	}
+	try {
+	      $tab_locations = $ws->pmbesOPACGeneric_list_locations();
+	      $cpt = 0;
+	      if (is_array($tab_locations)) {
+		      foreach ($tab_locations as $location) {
+			    $tableau_locations[$cpt] = Array();
+			    $tableau_locations[$cpt]['location_id'] = $location->location_id;
+			    $tableau_locations[$cpt]['location_caption'] = $location->location_caption;
+			    $cpt++;
+		      }
+	      }
+	} catch (Exception $e) {
+		 echo 'Exception reçue (3) : ',  $e->getMessage(), "\n";
+	} 
 	return $tableau_locations;
 }
 
@@ -117,15 +128,14 @@ function pmb_notices_section_extraire($id_section, $url_base, $debut=0, $fin=5) 
 			      foreach($r as $value) {
 					$tableau_resultat[$i] = Array();				
 				    
-					//pmb_ws_parser_notice_serialisee($value['noticeId'], $value['noticeContent'], $tableau_resultat[$i]);
 					pmb_ws_parser_notice_array($value, $tableau_resultat[$i]);
 					$i++;
 			      }
 			  }
 		
 
-	} catch (SoapFault $fault) {
-		//print("Erreur : ".$fault->faultcode." : ".$fault->faultstring);
+	} catch (Exception $e) {
+		 echo 'Exception reçue (4) : ',  $e->getMessage(), "\n";
 	} 
 
 	return $tableau_resultat;
@@ -168,8 +178,8 @@ function pmb_collection_extraire($id_collection, $debut=0, $nbresult=5, $id_sess
 		}
 	      
 
-	} catch (SoapFault $fault) {
-		//print("Erreur : ".$fault->faultcode." : ".$fault->faultstring);
+	} catch (Exception $e) {
+		 echo 'Exception reçue (5) : ',  $e->getMessage(), "\n";
 	} 
 	return $tableau_resultat;
 }
@@ -211,8 +221,8 @@ function pmb_editeur_extraire($id_editeur, $debut=0, $nbresult=5, $id_session=0)
 			}
 		  }
 		}
-	} catch (SoapFault $fault) {
-		//print("Erreur : ".$fault->faultcode." : ".$fault->faultstring);
+	} catch (Exception $e) {
+		 echo 'Exception reçue (6) : ',  $e->getMessage(), "\n";
 	} 
 	return $tableau_resultat;
 
@@ -264,8 +274,8 @@ function pmb_auteur_extraire($id_auteur, $debut=0, $nbresult=5, $id_session=0) {
 			}
 		   }
 		}
-	} catch (SoapFault $fault) {
-		//print("Erreur : ".$fault->faultcode." : ".$fault->faultstring);
+	} catch (Exception $e) {
+		 echo 'Exception reçue (7) : ',  $e->getMessage(), "\n";
 	} 
 	return $tableau_resultat;
 
@@ -276,6 +286,7 @@ function pmb_recherche_extraire($recherche='', $url_base, $look_ALL='', $look_AU
 	//$recherche = strtolower($recherche);
 	$search = array();
 	$searchType = 0;	
+	$type_recherche=0;
 
 	if ($recherche=='*') $recherche='';
 	
@@ -358,7 +369,9 @@ function pmb_recherche_extraire($recherche='', $url_base, $look_ALL='', $look_AU
 			//cas d'une recherche simple 
 			if (($look_ALL)&&(!$id_section)&&(!$typdoc)){
 			  $r=$ws->pmbesOPACAnonymous_simpleSearch($searchType,$recherche);
-			} else {
+			/*} else if (($look_ALL)&&($id_section)&&(!$typdoc)){
+			  $r=$ws->pmbesSearch_simpleSearchLocalise($searchType,$recherche,$id_location,$id_section);
+			*/} else {
 			  $r=$ws->pmbesOPACAnonymous_advancedSearch($search);
 			}
 			$searchId=$r["searchId"];
@@ -374,167 +387,23 @@ function pmb_recherche_extraire($recherche='', $url_base, $look_ALL='', $look_AU
 				convert:truc pour un passage pas admin/convert dans le format truc.
 				autre: renvoi l'id de la notice.
 			*/ 
-			  //$r=$ws->pmbesOPACAnonymous_fetchSearchRecords($searchId,$debut,$fin,"serialized_unimarc","utf8");
 			  $r=$ws->pmbesOPACAnonymous_fetchSearchRecordsArray($searchId,$debut,$fin,"utf8");
 			  $i = 1;
 			  if (is_array($r)) {
 			      foreach($r as $value) {
 				    $tableau_resultat[$i] = Array();				
 				
-				    //pmb_ws_parser_notice_serialisee($value['noticeId'], $value['noticeContent'], $tableau_resultat[$i]);
 				    pmb_ws_parser_notice_array($value, $tableau_resultat[$i]);
 				    $i++;
 			      }
 			  }
 		
 
-	} catch (SoapFault $fault) {
-		//print("Erreur : ".$fault->faultcode." : ".$fault->faultstring);
+	} catch (Exception $e) {
+		 echo 'Exception reçue (8) : ',  $e->getMessage(), "\n";
 	} 
 
 	return $tableau_resultat;
-}
-
-
-
-    // Traitement des balises ouvrantes
-    function fonctionBaliseOuvrante($parseur, $nomBalise, $tableauAttributs)
-    {
-        // En fait... nous nous conteterons de mémoriser le nom de la balise
-        // afin d'en tenir compte dans la fonction "fonctionTexte"
-
-        global $derniereBaliseRencontree;
-         global $dernierAttributRencontre;
-       global $dernierTypeTrouve;
-       global $dernierIdTrouve;
-
-        $derniereBaliseRencontree = $nomBalise;
-  
-        $dernierAttributRencontre = $tableauAttributs;
-	
-    }
-   
-    // Rraitement des balises fermantes
-    function fonctionBaliseFermante($parseur, $nomBalise)
-    {
-        // On oublie la dernière balise rencontrée
-        global $derniereBaliseRencontree;
-         global $dernierAttributRencontre;
-       global $dernierTypeTrouve;
-       global $dernierIdTrouve;
-
-        $derniereBaliseRencontree = "";
-    }
-
-    // Traitement du texte
-    // qui est appelé par le "parseur"
-    function fonctionTexte($parseur, $texte)
-    {
-        global $derniereBaliseRencontree;
-         global $dernierAttributRencontre;
-       global $dernierTypeTrouve;
-       global $dernierIdTrouve;
-    global $gtresultat;
-
-        // Selon les cas, nous affichons le texte
-        // ou nous proposons un lien
-        // ATTENTION: Par défaut les noms des balises sont
-        //            mises en majuscules
-       //echo("<br />fonctionTexte=".$derniereBaliseRencontree);
-        switch ($derniereBaliseRencontree) {
-            case "F": 
-		   foreach($dernierAttributRencontre as $cle=>$attr) {
-			if ($cle=="C") $dernierTypeTrouve = $attr;
-			if ($cle=="ID") $dernierIdTrouve = $attr;
-		  }
-              break;
-
-            case "S":
-               foreach($dernierAttributRencontre as $cle=>$attr) {
-			if ($cle=="C") $dernierSousTypeTrouve = $attr;
-		}
-
-		if (($dernierTypeTrouve == "010") && ($dernierSousTypeTrouve == "a")) $gtresultat['isbn'] .= $texte;
-		if (($dernierTypeTrouve == "010") && ($dernierSousTypeTrouve == "b")) $gtresultat['reliure'] .= $texte;
-		if (($dernierTypeTrouve == "010") && ($dernierSousTypeTrouve == "d")) $gtresultat['prix'] .= $texte;
-		
-		if (($dernierTypeTrouve == "101") && ($dernierSousTypeTrouve == "a")) $gtresultat['langues'] .= $texte;
-		
-		if (($dernierTypeTrouve == "102") && ($dernierSousTypeTrouve == "a")) $gtresultat['pays'] .= $texte;
-		
-		if (($dernierTypeTrouve == "200") && ($dernierSousTypeTrouve == "a")) $gtresultat['titre'] .= $texte;
-		if (($dernierTypeTrouve == "200") && ($dernierSousTypeTrouve == "f")) $gtresultat['auteur'] .= $texte;
-		
-		if (($dernierTypeTrouve == "210") && ($dernierSousTypeTrouve == "c")) $gtresultat['editeur'] .= $texte;
-		if (($dernierTypeTrouve == "210") && ($dernierSousTypeTrouve == "a")) $gtresultat['editeur'] .= ' ('.$texte.')';
-		if (($dernierTypeTrouve == "210") && ($dernierSousTypeTrouve == "d")) $gtresultat['annee_publication'] .= $texte;
-		if (($dernierTypeTrouve == "210") && ($dernierSousTypeTrouve == "c")) $gtresultat['id_editeur'] = $dernierIdTrouve;
-		
-		if (($dernierTypeTrouve == "215") && ($dernierSousTypeTrouve == "a")) $gtresultat['importance'] .= $texte;
-		if (($dernierTypeTrouve == "215") && ($dernierSousTypeTrouve == "c")) $gtresultat['presentation'] .= $texte;
-		if (($dernierTypeTrouve == "215") && ($dernierSousTypeTrouve == "d")) $gtresultat['format'] .= $texte;
-		
-		if (($dernierTypeTrouve == "225") && ($dernierSousTypeTrouve == "a")) $gtresultat['collection'] .= $texte;
-		if (($dernierTypeTrouve == "225") && ($dernierSousTypeTrouve == "a")) $gtresultat['id_collection'] = $dernierIdTrouve;
-		
-		if (($dernierTypeTrouve == "330") && ($dernierSousTypeTrouve == "a")) $gtresultat['resume'] .= str_replace("","\"",str_replace("","\"",str_replace("","&oelig;", str_replace("\n","<br />", $texte))));
-		
-		if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "a")) $gtresultat['lesauteurs'] .= $texte;
-		if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "b")) $gtresultat['lesauteurs'] = $texte." ".$gtresultat['lesauteurs'];
-		if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "a")) $gtresultat['id_auteur'] = $dernierIdTrouve;
-		
-		
-
-		
-                break;
-        }         
-    }
-
-//parsing xml d'une notice
-function pmb_ws_parser_notice_xml($id_notice, $value, &$tresultat) {
-
-	    include_spip("/inc/filtres_images");
-	    global $gtresultat;
-	    global $indice_exemplaire;
-	   $gtresultat = array();
-	
-	    // Création du parseur XML
-	    $parseurXML = xml_parser_create();
-
-	    // Je précise le nom des fonctions à appeler
-	    // lorsque des balises ouvrantes ou fermantes sont rencontrées
-	    xml_set_element_handler($parseurXML, "fonctionBaliseOuvrante"
-					      , "fonctionBaliseFermante");
-
-	    // Je précise le nom de la fonction à appeler
-	    // lorsque du texte est rencontré
-	    xml_set_character_data_handler($parseurXML, "fonctionTexte");
-
-	   $gtresultat['tab_exemplaires'] = Array();
-	  
-	   $gtresultat['exemplaires'] = "<table cellpadding='2' class='exemplaires' width='100%'>
-		    <tr><th class='expl_header_expl_cb'>Code barre</th><th class='expl_header_expl_cote'>Cote</th><th class='expl_header_location_libelle'>Localisation</th><th class='expl_header_tdoc_libelle'>Support</th><th class='expl_header_section_libelle'>Section</th><th>Disponibilité</th></tr>";
-
-	    // Ouverture du fichier
-	    xml_parse($parseurXML, $value, true);
-	  
-	    $gtresultat['exemplaires'] .= "</table>";
-	    // echo("<br/><br />version brute : <br/><br />".$value);
-	    xml_parser_free($parseurXML);
-
-	    if ($gtresultat['lesauteurs'] == "")
-		  $gtresultat['lesauteurs'] = $gtresultat['auteur'];
-	     $gtresultat['logo_src'] = lire_config("spip_pmb/url","http://tence.bibli.fr/opac")."/getimage.php?url_image=http%3A%2F%2Fimages-eu.amazon.com%2Fimages%2FP%2F!!isbn!!.08.MZZZZZZZ.jpg&noticecode=".str_replace("-","",$gtresultat['isbn']);
-
-
-	    //cas où il n'y a pas d'image pmb renvoie un carré de 1 par 1 transparent.
-	    $tmp_img = image_reduire("<img src=\"".copie_locale($gtresultat['logo_src'])."\" />", 130, 0);
-	    if (strpos($tmp_img, "L1xH1") !== false)  $gtresultat['logo_src'] = "";
-	    
-	    $gtresultat['id'] = $id_notice;
-	    
-
-	    $tresultat = $gtresultat;
 }
 
 function pmb_recuperer_champs_recherche($langue=0) {
@@ -565,80 +434,13 @@ function pmb_recuperer_champs_recherche($langue=0) {
 	      }
 	    
 
-	} catch (SoapFault $fault) {
-		//print("Erreur : ".$fault->faultcode." : ".$fault->faultstring);
+	} catch (Exception $e) {
+		 echo 'Exception reçue (9) : ',  $e->getMessage(), "\n";
 	} 
 	return $tresultat;
 }
-//parsing d'une notice sérialisée
-function pmb_ws_parser_notice_serialisee($id_notice, $value, &$tresultat) {
-	    include_spip("/inc/filtres_images");
-	    $indice_exemplaire = 0;
-	    $tresultat = Array();
-	
-	    $noticecontent = Array();
-	    $unserialized = $value; 
-	    $unserialized = preg_replace('!s:(\d+):"(.*?)";!se', "'s:'.strlen('$2').':\"$2\";'", $unserialized );
-	    
-	    $noticecontent = unserialize($unserialized);
-	    foreach ( $noticecontent as $c1=>$v1) {
-	      //echo("<br />C1 -> ".$c1."=".$v1);
-	      foreach ( $v1 as $c2=>$v2) {
-		    //echo("<br />C2 -> ".$c2."=".$v2);
-		    foreach ( $v2 as $c3=>$v3) {
-			   if ($c3=="c") $dernierTypeTrouve = $v3;
-			   if ($c3=="id") $dernierIdTrouve = $v3;
-			    foreach ( $v3 as $c4=>$v4) {
-				//echo("<br />attr=".$dernierTypeTrouve.",".$v4['c'].",".$v4['value']);
-				$dernierSousTypeTrouve = $v4['c'];
-				$texte = $v4['value'];
-				if (($dernierTypeTrouve == "010") && ($dernierSousTypeTrouve == "a")) $tresultat['isbn'] .= $texte;
-				if (($dernierTypeTrouve == "010") && ($dernierSousTypeTrouve == "b")) $tresultat['reliure'] .= $texte;
-				if (($dernierTypeTrouve == "010") && ($dernierSousTypeTrouve == "d")) $tresultat['prix'] .= $texte;
-				
-				if (($dernierTypeTrouve == "101") && ($dernierSousTypeTrouve == "a")) $tresultat['langues'] .= $texte;
-				
-				if (($dernierTypeTrouve == "102") && ($dernierSousTypeTrouve == "a")) $tresultat['pays'] .= $texte;
-				
-				if (($dernierTypeTrouve == "200") && ($dernierSousTypeTrouve == "a")) $tresultat['titre'] .= $texte;
-				if (($dernierTypeTrouve == "200") && ($dernierSousTypeTrouve == "f")) $tresultat['auteur'] .= $texte;
-				
-				if (($dernierTypeTrouve == "210") && ($dernierSousTypeTrouve == "c")) $tresultat['editeur'] .= $texte;
-				if (($dernierTypeTrouve == "210") && ($dernierSousTypeTrouve == "a")) $tresultat['editeur'] .= ' ('.$texte.')';
-				if (($dernierTypeTrouve == "210") && ($dernierSousTypeTrouve == "c")) $tresultat['id_editeur'] = $dernierIdTrouve;
-				if (($dernierTypeTrouve == "210") && ($dernierSousTypeTrouve == "d")) $tresultat['annee_publication'] .= $texte;
-				
-				if (($dernierTypeTrouve == "215") && ($dernierSousTypeTrouve == "a")) $tresultat['importance'] .= $texte;
-				if (($dernierTypeTrouve == "215") && ($dernierSousTypeTrouve == "c")) $tresultat['presentation'] .= $texte;
-				if (($dernierTypeTrouve == "215") && ($dernierSousTypeTrouve == "d")) $tresultat['format'] .= $texte;
-				
-				if (($dernierTypeTrouve == "225") && ($dernierSousTypeTrouve == "a")) $tresultat['collection'] .= $texte;
-				if (($dernierTypeTrouve == "225") && ($dernierSousTypeTrouve == "a")) $tresultat['id_collection'] = $dernierIdTrouve;
-				
-				if (($dernierTypeTrouve == "330") && ($dernierSousTypeTrouve == "a")) $tresultat['resume'] .= str_replace("","\"",str_replace("","\"",str_replace("","&oelig;", stripslashes(str_replace("\n","<br />", $texte)))));
-				
-				if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "a")) $tresultat['lesauteurs'] .= $texte;
-				if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "b")) $tresultat['lesauteurs'] = $texte." ".$tresultat['lesauteurs'];
-				if (($dernierTypeTrouve == "700") && ($dernierSousTypeTrouve == "a")) $tresultat['id_auteur'] = $dernierIdTrouve;
-				
-				
-				
-			    }
-		    }
-	      }
-	    }
 
-	    if ($tresultat['lesauteurs'] == "")
-		  $tresultat['lesauteurs'] = $tresultat['auteur'];
-	     $tresultat['logo_src'] = lire_config("spip_pmb/url","http://tence.bibli.fr/opac")."/getimage.php?url_image=http%3A%2F%2Fimages-eu.amazon.com%2Fimages%2FP%2F!!isbn!!.08.MZZZZZZZ.jpg&noticecode=".str_replace("-","",$tresultat['isbn']);
 
-	     //cas où il n'y a pas d'image pmb renvoie un carré de 1 par 1 transparent.
-	    $tmp_img = image_reduire("<img src=\"".copie_locale($tresultat['logo_src'])."\" />", 130, 0);
-	    if (strpos($tmp_img, "L1xH1") !== false)  $gtresultat['logo_src'] = "";
-
-	    $tresultat['id'] = $id_notice;
-}
-//parsing d'une notice sérialisée
 function pmb_ws_parser_notice_array($value, &$tresultat) {
 	    include_spip("/inc/filtres_images");
 	    
@@ -770,8 +572,8 @@ function pmb_ws_autres_lecteurs($id_notice) {
 		      pmb_ws_recuperer_tab_notices ($listenotices, $ws, $tresultat);
 		}
 	    }
-	} catch (SoapFault $fault) {
-		//print("Erreur : ".$fault->faultcode." : ".$fault->faultstring);
+	} catch (Exception $e) {
+		 echo 'Exception reçue (10) : ',  $e->getMessage(), "\n";
 	} 
 	return $tresultat;
 }
@@ -795,8 +597,8 @@ function pmb_ws_documents_numeriques ($id_notice, $id_session=0) {
 		      }
 		}
 
-	} catch (SoapFault $fault) {
-		print("Erreur : ".$fault->faultcode." : ".$fault->faultstring);
+	} catch (Exception $e) {
+		 echo 'Exception reçue (11) : ',  $e->getMessage(), "\n";
 	} 
 	return $tresultat;
 
@@ -829,8 +631,8 @@ function pmb_ws_dispo_exemplaire($id_notice, $id_session=0) {
 		}
 		
 
-	} catch (SoapFault $fault) {
-		//print("Erreur : ".$fault->faultcode." : ".$fault->faultstring);
+	} catch (Exception $e) {
+		 echo 'Exception reçue (12) : ',  $e->getMessage(), "\n";
 	} 
 	return $tresultat;
 }
@@ -841,18 +643,16 @@ function pmb_ws_recuperer_notice ($id_notice, &$ws, &$tresultat) {
 	try {	
 	$listenotices = array(''.$id_notice);
 	$tresultat['id'] = $id_notice;
-		  //$r=$ws->pmbesNotices_fetchNoticeList($listenotices,"serialized_unimarc","utf8",true,false);
 		  $r=$ws->pmbesNotices_fetchNoticeListArray($listenotices,"utf8",true,false);
 		  if (is_array($r)) {
 		      foreach($r as $value) {
-			      //pmb_ws_parser_notice_serialisee($id_notice, $value, $tresultat);
 			      pmb_ws_parser_notice_array($value, $tresultat);
 			}
 		  }
 		
 
-	} catch (SoapFault $fault) {
-		//print("Erreur : ".$fault->faultcode." : ".$fault->faultstring);
+	} catch (Exception $e) {
+		 echo 'Exception reçue (13) : ',  $e->getMessage(), "\n";
 	} 
 
 	
@@ -865,21 +665,19 @@ function pmb_ws_recuperer_tab_notices ($listenotices, &$ws, &$tresultat) {
 	try {	
 	
 	$tresultat['id'] = $id_notice;
-		  //$r=$ws->pmbesNotices_fetchNoticeList($listenotices,"serialized_unimarc","utf8",true,false);
 		  $r=$ws->pmbesNotices_fetchNoticeListArray($listenotices,"utf8",true,false);
 		  $cpt=0;
 		  if (is_array($r)) {
 		      foreach($r as $value) {
 			    $tresultat[$cpt] = Array();
-			    //pmb_ws_parser_notice_serialisee($id_notice, $value, $tresultat[$cpt]);
 			    pmb_ws_parser_notice_array($value, $tresultat[$cpt]);
 			    $cpt++;
 			}
 		  }
 		
 
-	} catch (SoapFault $fault) {
-		//print("Erreur : ".$fault->faultcode." : ".$fault->faultstring);
+	} catch (Exception $e) {
+		 echo 'Exception reçue (14) : ',  $e->getMessage(), "\n";
 	} 
 
 	
@@ -892,13 +690,13 @@ function pmb_ws_charger_wsdl(&$ws, $url_base) {
 	//	    $ws=new jsonRPCClient(lire_config("spip_pmb/wsdl",""));
 	//} else {
 	//require_once 'jsonRPCClient.php';
-	//include('jsonRPCClient');
+	//include_spip('jsonRPCClient');
 		try {
 		      $ws=new SoapClient(lire_config("spip_pmb/wsdl","http://tence.bibli.fr/pmbws/PMBWsSOAP_1?wsdl"));
 		      //$ws=new jsonRPCClient("http://cc-tulle-et-correze.reseaubibli.fr/ws/connector_out.php?source_id=2", true);
-
-		} catch (SoapFault $fault) {
-		      //print("Erreur : ".$fault->faultcode." : ".$fault->faultstring);
+		      
+		} catch (Exception $e) {
+		    echo 'Exception reçue (15) : ',  $e->getMessage(), "\n";
 		} 
 	//}
 }
@@ -932,8 +730,8 @@ function pmb_ws_liste_tri_recherche() {
 	try {	
 	     $tresultat=$ws->pmbesSearch_get_sort_types();
 	 
-	} catch (SoapFault $fault) {
-		print("Erreur : ".$fault->faultcode." : ".$fault->faultstring);
+	} catch (Exception $e) {
+		 echo 'Exception reçue (16) : ',  $e->getMessage(), "\n";
 	} 
 	return $tresultat;
 }
@@ -1005,8 +803,8 @@ function pmb_prets_extraire ($session_id, $url_base, $type_pret=0) {
 		      $cpt++;
 		  }
 	      }
-	} catch (SoapFault $fault) {
-		//print("Erreur : ".$fault->faultcode." : ".$fault->faultstring);
+	} catch (Exception $e) {
+		 echo 'Exception reçue (17) : ',  $e->getMessage(), "\n";
 	} 
 	return $tableau_resultat;
 			
@@ -1065,7 +863,7 @@ function pmb_tester_session($pmb_session, $id_auteur, $url_base) {
 		return 0;
 	      }
 
-	} catch (SoapFault $fault) {
+	} catch (Exception $e) {
 		$m = sql_updateq('spip_auteurs_pmb', array(
 				      'pmb_session' => ''),
 				      "id_auteur=".$id_auteur);
