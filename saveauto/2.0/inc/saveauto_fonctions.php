@@ -23,10 +23,12 @@ function saveauto_trouve_table($table, $tableau_tables) {
 //Url : http://www.nexen.net
 //modifiée pour plus de souplesse sur les entêtes
 function saveauto_mail_attachement($to , $sujet , $message , $fichier, $nom, $reply="", $from="") {
-   if (! @mail('toto@truc.net', 'test envoi mail', 'le message de test')) {
+   if (!function_exists('mail')) {
 	 		echo _T('saveauto:config_inadaptee').' '._T('saveauto:mail_absent').'<br>';
 			return false;
 	 }
+   $from = $reply = lire_config('email_webmaster');
+
 	 $limite = "_parties_".md5(uniqid (rand()));
    
    $mail_mime = "Date: ".date("l j F Y, G:i")."\n";
@@ -277,7 +279,7 @@ function saveauto_sauvegarde() {
                              }
                              
                           }
-        									$i++;
+        				  $i++;
                        }
                        saveauto_ecrire("# -------"._T('saveauto:fin_fichier')."------------", $fp, $_fputs);
                        
@@ -285,14 +287,32 @@ function saveauto_sauvegarde() {
                        if ($format_sauve == 'gz') gzclose($fp);
                        else fclose($fp);
                        
-                       //envoi par mail
-                       if (! empty($destinataire_save)) {
-                          $msg_mail = _T('saveauto:sauvegarde_ok_mail')."\n\r"._T('saveauto:base').$base."\n\r"._T('saveauto:serveur').$SERVER_NAME."\n\r"._T('saveauto:date').$jour."/".$mois."/".$annee." : ".$heure."h".$minutes;
-                          $sujet_mail = _T('saveauto:saveauto')." "._T('saveauto:base').$base." "._T('saveauto:date').$jour."/".$mois."/".$annee;
-                          //msg d'erreur que pour les admins
-                          if ($connect_statut == "0minirezo" && (! saveauto_mail_attachement($destinataire_save, $sujet_mail, $msg_mail, $chemin_fichier, $nom_fichier))) {
-														 echo _T('saveauto:probleme_envoi').$nom_fichier._T('saveauto:adresse').$destinataire_save."<br />";
-													}
+                       // zipper si necessaire (si ok on efface le fichier sql + pour l'envoi par mail on utilise le zip)
+                       if ($gz = TRUE){
+                           include_spip("inc/pclzip");
+                           $fichier_zip = $chemin_fichier.'.zip';
+                           $zip = new PclZip($fichier_zip);
+                           $ok = $zip->create($chemin_fichier);
+                           if ($zip->error_code < 0) {
+                                spip_log('saveauto erreur zip ' . $zip->error_code .' pour fichier ' . $fichier_zip);
+                        		die($zip->errorName(true));  //$zip->error_code
+                           }
+                           else {
+                               unlink($chemin_fichier);
+                               $chemin_fichier = $fichier_zip;
+                               $nom_fichier .= '.zip';
+                           }
+                       }
+                       
+                       //envoi par mail si necessaire
+                       if (!empty($destinataire_save)) {
+                           $msg_mail = _T('saveauto:sauvegarde_ok_mail')."\n\r"._T('saveauto:base').$base."\n\r"._T('saveauto:serveur').$SERVER_NAME."\n\r"._T('saveauto:date').$jour."/".$mois."/".$annee." : ".$heure."h".$minutes;
+                           $sujet_mail = _T('saveauto:saveauto')." "._T('saveauto:base').$base." "._T('saveauto:date').$jour."/".$mois."/".$annee;
+                           if (!saveauto_mail_attachement($destinataire_save, $sujet_mail, $msg_mail, $chemin_fichier, $nom_fichier)) {
+                             //msg d'erreur que pour les admins
+							       if ($connect_statut == "0minirezo") 
+                                   echo "<script language=\"javascript\">alert(\""._T('saveauto:probleme_envoi').$nom_fichier._T('saveauto:adresse').$destinataire_save.")\";</script>";
+							   }
                        }
                        
                        //marqueur de bon déroulement du processus
