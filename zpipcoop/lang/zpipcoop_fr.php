@@ -36,6 +36,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 //E
 'editer_message' => '&Eacute;diter le message',
+'editer_site' => '&Eacute;diter le site',
 
 //F
 'flux_forum_article' => 'Flux rss du forum de cet article',
