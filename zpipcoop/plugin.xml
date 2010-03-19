@@ -24,6 +24,13 @@
 		<inclure>zpipcoop_pipelines.php</inclure>
 	</pipeline>
 	<necessite id="SPIP" version="[2.0.10;]" />
+	<utilise id="autorite" version='[0.9.6;]' />
+	<utilise id="clevermail" version='[2.3.5;]' />
+	<utilise id="contact" version='[0.61;]' />
+	<utilise id="noie" version='[1.1;]' />
+	<utilise id="palette" version='[1.2.2;]' />
+	<utilise id="slogan" version='[2.0.2;]' />
 	<utilise id="spiplistes" version="[2.0135;]" />
+	<utilise id="thumbsites" version='[0.3;]' />
 	<utilise id="zengarden" version="[1.0.1;]" />
 </plugin>

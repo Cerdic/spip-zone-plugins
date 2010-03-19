@@ -3,7 +3,7 @@
   <p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_syndic}> &gt; <a href="#URL_RUBRIQUE" title="[(#TITRE|supprimer_numero)]">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; <strong class="on">(#NOM_SITE|couper{80})</strong>]</p>
 
   <div class="cartouche">
-      <a href="#URL_SITE">[(#LOGO_SITE||image_reduire{150,100})]</a>
+      [<a href="#URL_SITE" class="spip_out">(#LOGO_SITE||image_reduire{150,100})</a>]
       <h1 class="h1 #EDIT{nom_site}">#NOM_SITE</h1>
   </div>
 
