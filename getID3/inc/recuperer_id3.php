@@ -10,13 +10,13 @@
  */
 function inc_recuperer_id3_dist($fichier,$info=null,$mime=null){
 	include_spip('getid3/getid3');
-	$getID3 = new getID3;	
+	$getID3 = new getID3;
 	$getID3->setOption(array('tempdir' => find_in_path('tmp/')));
 
 	// Scan file - should parse correctly if file is not corrupted
 	$ThisFileInfo = $getID3->analyze($fichier);
 	getid3_lib::CopyTagsToComments($ThisFileInfo);
-	
+
 	//return $ThisFileInfo;
 	if(sizeof($ThisFileInfo)>0){
 		// Cover art?

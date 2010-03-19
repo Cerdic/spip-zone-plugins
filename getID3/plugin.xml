@@ -31,7 +31,7 @@ _ [->http://getid3.sourceforge.net/]
 	</prefix>
 	<pipeline>
 		<nom>declarer_tables_principales</nom>
-		<inclure>base/getid3.php</inclure>
+		<inclure>base/getid3_base.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>editer_contenu_objet</nom>
