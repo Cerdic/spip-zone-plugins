@@ -1,0 +1,8 @@
+Excel exporte en CSV mais pas en utf-8.
+
+Je voudrais trouver une manière pour ne pas surcharger le code.
+
+Si quelqu'un a une piste ou une orientation, je suis prenneur.
+
+
+lspeciale@gmail.com
