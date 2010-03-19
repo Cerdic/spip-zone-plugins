@@ -11,7 +11,8 @@
 		<ul>
 			#GENERER_SAISIES{#ENV{_saisies}}
 			<li style="display:none;">
-				<input type="text" name="mechantrobot" value="#ENV{mechantrobot}" />
+				<label for="mechantrobot-#ENV{id}"><:antispam_champ_vide:></label>
+				<input type="text" id="mechantrobot-#ENV{id}" name="mechantrobot" value="#ENV{mechantrobot}" />
 			</li>
 		</ul>
 		

@@ -29,19 +29,6 @@ $GLOBALS['formulaires']['editer_formulaire'] = array(
 		)
 	),
 	array(
-		'saisie' => 'radio',
-		'options' => array(
-			'nom' => 'multiple',
-			'label' => '<:formidable:editer_multiple:>',
-			'explication' => '<:formidable:editer_multiple_explication:>',
-			'datas' => array(
-				'oui' => '<:item_oui:>',
-				'non' => '<:item_non:>'
-			),
-			'defaut' => 'non'
-		)
-	),
-	array(
 		'saisie' => 'textarea',
 		'options' => array(
 			'nom' => 'message_retour',

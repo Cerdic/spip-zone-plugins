@@ -39,7 +39,9 @@ function formidable_verifier_reponse_formulaire($id_formulaire){
 			array('=', 'id_formulaire', intval($id_formulaire)),
 			array('=', 'statut', sql_quote('publie')),
 			$where
-		)
+		),
+		'',
+		'date'
 	);
 	
 	if (is_array($reponses))

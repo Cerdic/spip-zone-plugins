@@ -31,9 +31,6 @@ function formidable_declarer_tables_principales($tables_principales){
 		"traitements" => "text NOT NULL",
 		"public" => "enum('non', 'oui') DEFAULT 'non' NOT NULL",
 		"statut" => "varchar(10) NOT NULL",
-		"modifiable" => "ENUM('non', 'oui') DEFAULT 'non'",
-		"multiple" => "ENUM('non', 'oui') DEFAULT 'non'",
-		"moderation" => "VARCHAR(10) DEFAULT 'posteriori'",
 		"maj" => "timestamp"
 	);
 	$formulaires_cles = array(

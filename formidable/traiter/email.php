@@ -12,7 +12,6 @@ function traiter_email_dist($args, $retours){
 	// On récupère les destinataires
 	$destinataires = _request($options['champ_destinataires']);
 	if (is_array($destinataires)){
-		include_spip('inc/saisies');
 		include_spip('inc/filtres');
 		
 		// On récupère les mails des destinataires
