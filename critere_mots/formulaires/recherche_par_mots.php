@@ -14,7 +14,7 @@ function formulaires_recherche_par_mots_verifier_dist($filtre_groupes = null, $u
 	if (_request('le_groupe') && _request('choixmot'))
 		$erreurs['message_erreur'] = 'Choisissez un mot';
 	$mots = _request('mots');
-	if (is_array($mots) && array_search('',$mots))
+	if (is_array($mots) && (array_search('',$mots) !== false))
 		$erreurs['message_erreur'] = 'Changement de groupe';
 	return $erreurs;
 }
