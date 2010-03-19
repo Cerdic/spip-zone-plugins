@@ -1,5 +1,5 @@
 <B_pour>
-<BOUCLE_pour(POUR){tableau #ENV{compositions}}>
+<BOUCLE_pour(POUR){tableau #ENV{_compositions}}>
 <div class='choix'>[(#VALEUR|table_valeur{icon}|image_reduire{24,24}|inserer_attribut{class,logo})]
 <input type='radio' class='radio' name='#ENV{name}' id='[(#ENV{name})]-#CLE' value='#CLE'[(#CLE|=={#ENV{selected}}|oui)checked='checked'] /><label for='[(#ENV{name})]-#CLE'>[(#VALEUR|table_valeur{nom})]</label>
 [<p class='descriptif'>(#VALEUR|table_valeur{description})</p>]

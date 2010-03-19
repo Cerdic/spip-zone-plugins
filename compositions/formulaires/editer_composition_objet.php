@@ -42,16 +42,16 @@ function formulaires_editer_composition_objet_charger($type,$id){
 		$valeurs['composition_lock'] = $row['composition_lock'];
 
 		$valeurs['compositions'] = compositions_lister_disponibles($type);
-		$valeurs['compositions'] = reset($valeurs['compositions']); // on ne regarde qu'un seul type
-		if (is_array($valeurs['compositions']) AND !isset($valeurs['compositions'][''])){
-			$valeurs['compositions'] = array_merge(
+		$valeurs['_compositions'] = reset($valeurs['compositions']); // on ne regarde qu'un seul type
+		if (is_array($valeurs['_compositions']) AND !isset($valeurs['_compositions'][''])){
+			$valeurs['_compositions'] = array_merge(
 				array(''=>array('nom'=>_T('compositions:label_pas_de_composition'),'description'=>'','icon'=>'','configuration'=>'')),
-				$valeurs['compositions']
+				$valeurs['_compositions']
 			);
 		}
 		$valeurs['_hidden'] = "<input type='hidden' name='$id_table_objet' value='$id' />";
 
-		if (!is_array($valeurs['compositions']) AND !isset($valeurs['id_article_accueil']))
+		if (!is_array($valeurs['_compositions']) AND !isset($valeurs['id_article_accueil']))
 			$valeurs['editable'] = false;
 	}
 
