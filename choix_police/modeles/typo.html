@@ -14,7 +14,7 @@
 [(#SET{pt,[(#POLICE|?{[(#CHEMIN{polices/#POLICE}|choixsivide{[(#CONFIG{choix_police/police_typo})],#POLICE})],[(#CONFIG{choix_police/police_typo})]})]})]
 [(#SET{sa,[(#ACCENTS|=={non}|?{on,[(#CONFIG{choix_police/supprimer_accents})]})]})]
 [(#TEXTE|choix_police_remplacer_accents{#GET{sa}}
-        |image_typo{police=#GET{pt},
+        |image_typo{police=[(#GET{pt})],
          		  	taille=[(#TAILLE|sinon{[(#CONFIG{choix_police/taille_typo})]})],
                   	couleur=[(#COULEUR|sinon{[(#CONFIG{choix_police/couleur_typo})]}|choix_police_suprime_diese)],
                   	padding=[(#PADDING|sinon{[(#CONFIG{choix_police/padding_typo})]})],

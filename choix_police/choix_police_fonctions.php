@@ -5,8 +5,9 @@ function choix_police_polices_disponibles($chemin) {
     if (is_dir($chemin) AND $pointeur = opendir($chemin)) {
         while (false !== ($fich = readdir($pointeur))) {
             if ($fich != "." AND $fich != ".." ) { 
-                $Tnom = explode('.',$fich); 
-                $Tpolices[$Tnom[0]] = $fich;
+                $Tnom = explode('.',$fich);
+                if (in_array($Tnom[1], array('ttf','ott')))
+                	$Tpolices[$Tnom[0]] = trim($fich);
             }
         }
         closedir($pointeur);
