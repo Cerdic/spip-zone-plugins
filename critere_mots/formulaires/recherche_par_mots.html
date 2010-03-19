@@ -26,6 +26,6 @@
 </form>
 <B_Tags>
 <div id="postDetailInfos" class="clearfix">
-<BOUCLE_Tags(MOTS){id_mot IN #ENV{mots}}{par titre}{" "}>[(#SET{lesautresmots,[(#ENV{mots}|critere_mots_enleve_mot_de_liste{#ID_MOT})]})]<a href="[(#ENV{action}|parametre_url{mots,#GET{lesautresmots}})]"title="<:ecrire:info_supprimer_mot|ucfirst|attribut_html:> ([(#TITRE|ucfirst|textebrut|attribut_html)])">[(#TITRE|ucfirst)]</a></BOUCLE_Tags>
+<BOUCLE_Tags(MOTS){id_mot IN #ENV{mots}}{par titre}{" "}>[(#SET{lesautresmots,[(#ENV{mots}|critere_mots_enleve_mot_de_liste{#ID_MOT})]})]<a href="[(#ENV{action}|parametre_url{mots,#GET{lesautresmots}})]"title="<:ecrire:info_supprimer_mot|ucfirst|attribut_html:> ([(#TITRE|ucfirst|textebrut|attribut_html)])" class="tags">[(#TITRE|ucfirst)]</a></BOUCLE_Tags>
 </div><!-- #postDetailInfos -->
 </B_Tags>
