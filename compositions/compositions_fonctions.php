@@ -84,6 +84,14 @@ function compositions_lister_disponibles($type, $informer=true){
 			// retenir les skels qui ont un xml associe
 		}
 	}
+	// Pipeline compositions_lister_disponibles
+	if ($type=="[a-z0-9]+")
+		$type = '';
+	$res = pipeline('compositions_lister_disponibles',array(
+		'args'=>array('type' => $type,'informer' => $informer), 
+		'data'=> $res
+		)
+	);
 	return $res;
 }
 
