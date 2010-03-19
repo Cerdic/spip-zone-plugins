@@ -7,7 +7,7 @@
 <div class="entete-formulaire">
 	#ENV**{icone_retour}
 	<B_titre><:icone_modifier_site:>
-	<BOUCLE_titre(SITES) {id_syndic}>
+	<BOUCLE_titre(SITES) {id_syndic}{statut IN prepa,prop,publies}>
 	<h1>#NOM_SITE</h1></BOUCLE_titre></B_titre>
 	<h1><:zpipcoop:nouveau_site:></h1><//B_titre>
 </div>
