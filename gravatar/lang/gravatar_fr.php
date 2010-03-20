@@ -16,9 +16,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'label_image_defaut_404' => 'aucune image',
 'label_image_defaut_png' => '<tt>images/gravatar.png</tt>',
 'label_image_defaut_gravatar' => 'logo Gravatar',
-'label_image_defaut_identicon' => '<i>Identicon</i> (généré d\'après l\'adresse email)',
-'label_image_defaut_monsterid' => '<i>MonsterID</i> (généré d\'après l\'adresse email)',
-'label_image_defaut_wavatar' => '<i>Wavatar</i> (généré d\'après l\'adresse email)',
+'label_image_defaut_identicon' => '<i>Identicon</i> (g&eacute;n&eacute;r&eacute; d\'apr&egrave;s l\'adresse email)',
+'label_image_defaut_monsterid' => '<i>MonsterID</i> (g&eacute;n&eacute;r&eacute; d\'apr&egrave;s l\'adresse email)',
+'label_image_defaut_wavatar' => '<i>Wavatar</i> (g&eacute;n&eacute;r&eacute; d\'apr&egrave;s l\'adresse email)',
 'label_taille' => 'Taille des gravatars',
 );
 

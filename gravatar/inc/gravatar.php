@@ -1,7 +1,7 @@
 <?php
 
 // notre fonction de recherche de logo
-// SPIP 2.0
+// obsolete, on la garde pour ne pas planter les squelettes non recalcules
 function calcule_logo_ou_gravatar($email) {
 	$a = func_get_args();
 	$email = array_shift($a);
