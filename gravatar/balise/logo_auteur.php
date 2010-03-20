@@ -21,9 +21,7 @@ function balise_LOGO_AUTEUR($p) {
 
 	# spip 2.1
 	else
-		$p->code = '(($a = '
-		. $p->code
-		.') ? $a : gravatar_img( sinon((is_null('.$_email1.')?'.$_emailsql.':'.$_email1.'),sinon('.$_email2.', sinon('.$_email3.', '.$_email4.')))))';
+		$p->code = 'gravatar_img('. $p->code. ', sinon((is_null('.$_email1.')?'.$_emailsql.':'.$_email1.'),sinon('.$_email2.', sinon('.$_email3.', '.$_email4.'))))';
 
 	return $p;
 }

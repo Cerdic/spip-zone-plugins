@@ -16,13 +16,66 @@ function calcule_logo_ou_gravatar($email) {
 	return $c;
 }
 
+function gravatar_balise_img($img,$alt="",$class=""){
+	$taille = taille_image($img);
+	list($hauteur,$largeur) = $taille;
+	if (!$hauteur OR !$largeur)
+		return "";
+	return
+	"<img src='$img' width='$largeur' height='$hauteur'"
+	  ." alt='".attribut_html($alt)."'"
+	  .($class?" class='".attribut_html($class)."'":'')
+	  .' />';
+}
+
+
 // pour 2.1 on se contente de produire un tag IMG
-function gravatar_img($email) {
-	if (!$email OR !$g = gravatar($email))
+function gravatar_img($logo_auteur, $email) {
+	$hasconfig = function_exists('lire_config');
+	$default = '404'; // par defaut rien si ni logo ni gravatar (consigne a passer a gravatar)
+	$image_default = ''; // image
+
+	if ($hasconfig
+	  AND strlen($image_default=lire_config('gravatar/image_defaut'))
+		AND strpos($image_default,".")===FALSE){
+		$default = $image_default; // c'est une consigne pour l'api gravatar
+		$image_default = '';
+	}
+
+	// retrouver l'image du mieux qu'on peut :
+	// logo_auteur si il existe
+	// ou gravatar si on a un email et si on trouve le gravatar
+	if (!$img = $logo_auteur){
+		if (!$g = gravatar($email,$default)) // chercher le gravatar etendu pour cet email
+			$img = '';
+		else
+			$img = gravatar_balise_img($g, "", "spip_logos photo avatar");
+	}
+	else {
+		// changer la class du logo auteur
+		$img = inserer_attribut($img, 'class', 'spip_logos photo avatar');
+	}
+
+	// si pas de config, retourner ce qu'on a
+	if (!$hasconfig)
+		return $img;
+	
+	// ensuite le mettre en forme si les options ont ete activees
+	if (!$img
+		AND $image_default
+		AND $img = find_in_path($image_default))
+		$img = gravatar_balise_img($img, "", "spip_logos photo avatar");
+
+	if (!$img)
 		return '';
 
-	return '<img src="'.$g.'" alt="" class="spip_logos" />';
+	// mises en formes optionnelles du gravatar
+	if ($t=lire_config('gravatar/taille')){
+		$img = filtrer('image_passe_partout',$img,$t);
+		$img = filtrer('image_recadre',$img,$t,$t,'center');
+	}
 
+	return $img;
 }
 
 function gravatar_verifier_index($tmp) {
@@ -37,18 +90,20 @@ function gravatar_verifier_index($tmp) {
 		);
 }
 
-function gravatar($email) {
+function gravatar($email, $default='404') {
 	static $nb=5; // ne pas en charger plus de 5 anciens par tour
 	static $max=10; // et en tout etat de cause pas plus de 10 nouveaux
 
-	if (!strlen($email)
-	OR !email_valide($email))
+	// eviter une requete quand on peut
+	if ($default=='404'
+	  AND (!strlen($email) OR !email_valide($email)))
 		return '';
 
 	$tmp = sous_repertoire(_DIR_VAR, 'cache-gravatar');
 
 	$md5_email = md5(strtolower($email));
-	$gravatar_cache = $tmp.$md5_email.'.jpg';
+	$gravatar_id = $md5_email.($default?"-$default":"");
+	$gravatar_cache = $tmp.$gravatar_id.'.jpg';
 
 	if ((!file_exists($gravatar_cache)
 	OR (
@@ -58,14 +113,14 @@ function gravatar($email) {
 	) {
 		lire_fichier($tmp.'vides.txt', $vides);
 		$vides = @unserialize($vides);
-		if ((!isset($vides[$md5_email])
-		OR time()-$vides[$md5_email] > 3600*8
+		if ((!isset($vides[$gravatar_id])
+		OR time()-$vides[$gravatar_id] > 3600*8
 		) AND $max-- > 0) {
 
 			$nb--;
 			include_spip("inc/distant");
 			if ($gravatar
-			= recuperer_page('http://www.gravatar.com/avatar/'.$md5_email.'?d=404')
+			= recuperer_page('http://www.gravatar.com/avatar/'.$md5_email.($default?"?d=$default":""))
 			) {
 				spip_log('gravatar ok pour '.$email);
 				ecrire_fichier($gravatar_cache, $gravatar);
@@ -84,7 +139,7 @@ function gravatar($email) {
 						image_imagejpg($img, $gravatar_cache);
 				}
 			} else {
-				$vides[$md5_email] = time();
+				$vides[$gravatar_id] = time();
 				ecrire_fichier($tmp.'vides.txt', serialize($vides));
 			}
 

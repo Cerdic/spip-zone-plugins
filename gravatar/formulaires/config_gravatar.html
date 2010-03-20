@@ -1,0 +1,59 @@
+<!-- presentation=non -->
+<!-- nom=gravatar -->
+<div class="formulaire_spip formulaire_cfg formulaire_configurer formulaire_#FORM">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+	    <li class="editer_image_defaut [ (#ENV**{erreurs}|table_valeur{image_defaut}|oui)erreur]">
+				<label><:gravatar:label_image_defaut:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{image_defaut})</span>]
+				<p class="explication"><:gravatar:explication_image_defaut:></p>
+				<div class="choix">
+					<input type="radio" name="image_defaut" class="radio" value="404" id="image_defaut_404"[ (#ENV{image_defaut,'404'}|=={404}|oui)checked="checked"]/>
+					<span class="demo">[(#CHEMIN{rien.gif}|gravatar_balise_img)]</span>
+					<label for="image_defaut_404"><:gravatar:label_image_defaut_404:></label>
+				</div>
+				<div class="choix">
+					<input type="radio" name="image_defaut" class="radio" value="images/gravatar.png" id="image_defaut_png"[ (#ENV{image_defaut,'404'}|=={images/gravatar.png}|oui)checked="checked"]/>
+					<span class="demo">[(#CHEMIN{images/gravatar.png}|gravatar_balise_img)]</span>
+					<label for="image_defaut_png"><:gravatar:label_image_defaut_png:></label>
+				</div>
+				<div class="choix">
+					<input type="radio" name="image_defaut" class="radio" value="0" id="image_defaut_gravatar"[ (#ENV{image_defaut,'404'}|=={0}|oui)checked="checked"]/>
+					<span class="demo">[(#REM|gravatar{'0'}|gravatar_balise_img)]</span>
+					<label for="image_defaut_gravatar"><:gravatar:label_image_defaut_gravatar:></label>
+				</div>
+				<div class="choix">
+					<input type="radio" name="image_defaut" class="radio" value="identicon" id="image_defaut_identicon"[ (#ENV{image_defaut,'404'}|=={identicon}|oui)checked="checked"]/>
+					<span class="demo">[(#REM|gravatar{identicon}|gravatar_balise_img)]</span>
+					<label for="image_defaut_identicon"><:gravatar:label_image_defaut_identicon:></label>
+				</div>
+				<div class="choix">
+					<input type="radio" name="image_defaut" class="radio" value="monsterid" id="image_defaut_monsterid"[ (#ENV{image_defaut,'404'}|=={monsterid}|oui)checked="checked"]/>
+					<span class="demo">[(#REM|gravatar{monsterid}|gravatar_balise_img)]</span>
+					<label for="image_defaut_monsterid"><:gravatar:label_image_defaut_monsterid:></label>
+				</div>
+				<div class="choix">
+					<input type="radio" name="image_defaut" class="radio" value="wavatar" id="image_defaut_wavatar"[ (#ENV{image_defaut,'404'}|=={wavatar}|oui)checked="checked"]/>
+					<span class="demo">[(#REM|gravatar{wavatar}|gravatar_balise_img)]</span>
+					<label for="image_defaut_wavatar"><:gravatar:label_image_defaut_wavatar:></label>
+				</div>
+	    </li>
+	    <li class="editer_taille [ (#ENV**{erreurs}|table_valeur{taille}|oui)erreur]">
+				<label for="taille"><:gravatar:label_taille:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{taille})</span>]
+				<input type="text" name="taille" class="text" value="#ENV**{taille}" id="taille" />
+	    </li>
+		</ul>
+		<p class="boutons">
+			<input type="submit" name="_cfg_ok" class="submit" value="<:valider:>" />
+		</p>
+	</div></form>
+</div>
+<style type="text/css">
+.formulaire_#FORM .editer_image_defaut .choix {margin:5px 0;}
+.formulaire_#FORM .editer_image_defaut .choix span img {width:32px;height:32px;}
+</style>
