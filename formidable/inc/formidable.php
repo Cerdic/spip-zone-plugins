@@ -4,6 +4,55 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /*
+ * Liste tous les traitements configurables (ayant une description)
+ *
+ * @return array Un tableau listant des saisies et leurs options
+ */
+function traitements_lister_disponibles(){
+	static $traitements = null;
+	
+	if (is_null($traitements)){
+		$traitements = array();
+		$liste = find_all_in_path('traiter/', '.+[.]yaml$');
+		
+		if (count($liste)){
+			foreach ($liste as $fichier=>$chemin){
+				$type_traitement = preg_replace(',[.]yaml$,i', '', $fichier);
+				$dossier = str_replace($fichier, '', $chemin);
+				// On ne garde que les traitements qui ont bien la fonction
+				if (charger_fonction($type_traitement, 'traiter', true)
+					and (
+						is_array($traitement = traitements_charger_infos($type_traitement))
+					)
+				){
+					$traitements[$type_traitement] = $traitement;
+				}
+			}
+		}
+	}
+	
+	return $traitements;
+}
+
+/**
+ * Charger les informations contenues dans le yaml d'un traitement
+ *
+ * @param string $type_saisie Le type de la saisie
+ * @return array Un tableau contenant le YAML décodé
+ */
+function traitements_charger_infos($type_traitement){
+	include_spip('inc/yaml');
+	$fichier = find_in_path("traiter/$type_traitement.yaml");
+	$traitement = yaml_decode_file($fichier);
+	if (is_array($traitement)){
+		$traitement['titre'] = $traitement['titre'] ? _T_ou_typo($traitement['titre']) : $type_traitement;
+		$traitement['description'] = $traitement['description'] ? _T_ou_typo($traitement['description']) : '';
+		$traitement['icone'] = $traitement['icone'] ? find_in_path($traitement['icone']) : '';
+	}
+	return $traitement;
+}
+
+/*
  * Génère le nom du cookie qui sera utilisé par le plugin lors d'une réponse
  * par un visiteur non-identifié.
  *

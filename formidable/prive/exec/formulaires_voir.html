@@ -26,6 +26,21 @@
 		#DESCRIPTIF
 	</div>
 	
+	#SET{traitements_disponibles, #VAL|traitements_lister_disponibles}
+	<B_traitements>
+	<div class="cadre cadre-e">
+		<img class="cadre-icone" src="#CHEMIN{images/formulaire-config-traitements-24.png}" alt="" />
+		<div class="titrem">
+			<:formidable:voir_traitements:>
+		</div>
+		<div class="cadre_padding">
+			<BOUCLE_traitements(POUR){tableau #TRAITEMENTS|unserialize|sinon{#ARRAY}}>
+			[(#GET{traitements_disponibles}|table_valeur{#CLE}|table_valeur{titre})]<br/>
+			</BOUCLE_traitements>
+		</div>
+	</div>
+	</B_traitements>
+	
 	#FORMULAIRE_FORMIDABLE{#ID_FORMULAIRE}
 </div>
 

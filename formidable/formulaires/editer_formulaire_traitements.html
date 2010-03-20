@@ -17,5 +17,22 @@
 		
 		<p class="boutons"><span class="image_loading"></span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
 	</div></form>
+	<script type="text/javascript">
+		$(function(){
+			// On commence par cacher toutes les options
+			$('.options_traiter').hide();
+			
+			// Ensuite on parcourt les traitements choisis
+			$('.editer_traitements_choisis input')
+				.each(function(){
+					// Si c'est coché on affiche le fieldset d'options
+					if ($(this).is(':checked'))
+						$('.options_traiter.'+$(this).val()).show();
+				})
+				.click(function(){
+					$('.options_traiter.'+$(this).val()).slideToggle('fast');
+				});
+		});
+	</script>
 	]
 </div>

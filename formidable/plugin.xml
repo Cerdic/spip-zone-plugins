@@ -13,6 +13,7 @@
 	
 	<install>base/formidable_installation.php</install>
 	<options>formidable_options.php</options>
+	<fonctions>inc/formidable.php</fonctions>
 	
 	<pipeline>
 		<nom>autoriser</nom>

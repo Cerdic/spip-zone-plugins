@@ -72,7 +72,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'traiter_enregistrement_option_multiple_label' => 'R&eacute;ponses multiples',
 'traiter_enregistrement_titre' => 'Enregistrer les r&eacute;sultats',
 
-'voir_numero' => 'Formulaire num&eacute;ro :'
+'voir_numero' => 'Formulaire num&eacute;ro :',
+'voir_traitements' => 'Traitements'
 );
 
 ?>
