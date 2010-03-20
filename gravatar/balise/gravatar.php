@@ -13,8 +13,11 @@
 
 function balise_GRAVATAR($p) {
 	$_email = interprete_argument_balise(1,$p);
+	if (!$_email) $_email = "''";
 	$_size = interprete_argument_balise(2,$p);
+	if (!$_size) $_size = "''";
 	$_default = interprete_argument_balise(3,$p);
+	if (!$_default) $_default = "''";
 
 	$p->code = "inserer_attribut(filtrer('image_reduire',sinon(gravatar($_email),$_default), (\$s=$_size) ?\$s: 80), 'alt', '')";
 	return $p;
