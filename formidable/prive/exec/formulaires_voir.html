@@ -36,6 +36,12 @@
 		<:formidable:voir_numero:>
 		<p>[(#ENV{id_formulaire})]</p>
 	</div>
+	<div>
+		<a href="#URL_ACTION_AUTEUR{supprimer_formulaire, #ENV{id_formulaire}}" class="cellule-h" onclick="return confirm('<:formidable:formulaires_supprimer_confirmation:>');">
+			[<img src="(#CHEMIN{images/formulaire-supprimer-24.png})" style="vertical-align:middle;" alt="" />]
+			<span style="vertical-align:middle;"><:formidable:formulaires_supprimer:></span>
+		</a>
+	</div>
 </div>
 ]
 <!--/#navigation-->
