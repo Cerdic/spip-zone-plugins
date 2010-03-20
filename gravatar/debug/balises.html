@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Page de test</title>
+</head>
+
+<body>
+<table>
+<thead>
+	<th>ID_AUTEUR</th>
+    <th>EMAIL</th>
+    <th>Balise LOGO_AUTEUR</th>
+    <th>Balise GRAVATAR</th>
+    <th>Modele MODELE{gravatar}</th>
+</thead>
+<BOUCLE_auteurs(AUTEURS){tout}{par id_auteur}>
+[<tr>
+	<td>#ID_AUTEUR</td>
+    <th>(#EMAIL|unique)</th>
+    <td>#LOGO_AUTEUR</td>
+    <td>[(#GRAVATAR{#EMAIL})]</td>
+    <td>[(#MODELE{gravatar})]</td>
+</tr>]
+</BOUCLE_auteurs>
+<BOUCLE_commentaires(FORUMS){id_auteur=0}>
+[<tr>
+	<td>#ID_AUTEUR</td>
+    <th>(#EMAIL|unique)</th>
+    <td>#LOGO_AUTEUR</td>
+    <td>[(#GRAVATAR{#EMAIL})]</td>
+    <td>[(#MODELE{gravatar}{email=#EMAIL})]</td>
+</tr>]
+</BOUCLE_commentaires>
+</table>
+</body>
+</html>

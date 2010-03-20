@@ -1,0 +1,22 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Trombinoscope</title>
+</head>
+<body>
+<hr />
+<h2>Avatars de tous les auteurs du site&nbsp;</h2>
+<BOUCLE_auteurs(AUTEURS){tout}{par id_auteur}>
+[(#EMAIL|unique|oui)[(#MODELE{gravatar}|inserer_attribut{alt,[(#NOM|attribut_html)]}|inserer_attribut{title,[(#NOM|attribut_html)]})]]
+</BOUCLE_auteurs>
+<hr />
+<h2>Et des commentateurs du site&nbsp;</h2>
+<BOUCLE_commentaires(FORUMS){id_auteur=0}>
+[(#EMAIL|unique|oui)[(#MODELE{gravatar}{email=#EMAIL}|inserer_attribut{alt,[(#NOM|sinon{#EMAIL}|attribut_html)]}|inserer_attribut{title,[(#NOM|sinon{#EMAIL}|attribut_html)]})]]
+</BOUCLE_commentaires>
+<hr />
+<p><:gravatar:gravatar_info_forum:></p>
+<hr />
+</body>
+</html>
