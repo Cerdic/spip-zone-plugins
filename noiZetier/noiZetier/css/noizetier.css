@@ -82,11 +82,11 @@ ul.noisettes div.notes {
 	font-size:80%;
 }
 
-ul.liste_noizetier_pages {
+ul.liste_noizetier_pages , ul.liste_noizetier_compositions{
 	clear:both;
 }
 
-ul.liste_noizetier_pages li.item{
+ul.liste_noizetier_pages li.item, ul.liste_noizetier_compositions li.item{
 	clear:both;
 	padding-left : 34px;
 	padding-right:0;
@@ -96,19 +96,19 @@ ul.liste_noizetier_pages li.item{
 	border-bottom:1px solid #ccc;
 }
 
-ul.liste_noizetier_pages .ligne{
+ul.liste_noizetier_pages .ligne, ul.liste_noizetier_compositions .ligne{
 	position:relative;
 }
 
-ul.liste_noizetier_pages .actions{
+ul.liste_noizetier_pages .actions, ul.liste_noizetier_compositions .actions{
 	text-align:right;
 }
 
-ul.liste_noizetier_pages .titre{
+ul.liste_noizetier_pages .titre, ul.liste_noizetier_compositions .titre{
 	font-weight:bold;
 	line-height:29px;
 }
-ul.liste_noizetier_pages .infos{
+ul.liste_noizetier_pages .infos, ul.liste_noizetier_compositions .infos{
 	font-size:0.9em;
 	margin-bottom:5px;
 }

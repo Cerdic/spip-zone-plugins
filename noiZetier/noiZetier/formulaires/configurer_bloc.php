@@ -297,7 +297,6 @@ function formulaires_configurer_bloc_traiter($bloc,$page){
 		if (!$ok) $retours['message_erreur'] = _T('noizetier:erreur_mise_a_jour');
 	}
 	
-	
 	$retours['editable'] = true;
 	
 	return $retours;

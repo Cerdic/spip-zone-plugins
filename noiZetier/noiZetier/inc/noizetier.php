@@ -127,6 +127,24 @@ function noizetier_lister_pages(){
 			}
 		}
 		$liste_pages = pipeline('noizetier_lister_pages',$liste_pages);
+		
+		// On ajoute les compositions du noizetier
+		if(defined('_DIR_PLUGIN_COMPOSITIONS')){
+			$noizetier_compositions = unserialize($GLOBALS['meta']['noizetier_compositions']);
+			// On doit transformer le tableau de [type][compo] en [type-compo]
+			$liste_compos = array();
+			if (is_array($noizetier_compositions)) {
+				foreach($noizetier_compositions as $type => $compos_type)
+					foreach($compos_type as $compo => $infos_compo) {
+						$infos_compo['nom'] = typo($infos_compo['nom']);
+						$infos_compo['description'] = propre($infos_compo['description']);
+						$infos_compo['icon'] = $infos_compo['icon']!='' ? find_in_path($infos_compo['icon']) : '';
+						$infos_compo['blocs'] = $liste_pages[$type]['blocs'];
+						$liste_compos[$type.'-'.$compo] = $infos_compo;
+						}
+			}
+			$liste_pages = array_merge($liste_pages,$liste_compos);
+		}
 	}
 	return $liste_pages;
 }
@@ -293,6 +311,52 @@ function noizetier_lister_blocs_avec_noisettes(){
 	return $liste_blocs;
 }
 
+/**
+ * Liste d'icônes obtenues en fouillant les répertoires img/ images/ image/ et /img-pack.
+ *
+ * @staticvar array $liste_icones
+ * @return array
+ */
+function noizetier_lister_icones(){
+	static $liste_icones = null;
+	
+	if (is_null($liste_icones)){
+		$match = ".+[.](jpg|jpeg|png|gif)$";
+		$liste_icones = array(
+			'img' => find_all_in_path('img/', $match),
+			'img-pack' => find_all_in_path('img-pack/', $match),
+			'image' => find_all_in_path('image/', $match),
+			'images' => find_all_in_path('images/', $match)
+		);
+	}
+	
+	return $liste_icones;
+}
 
+/**
+ * Liste des configurations du noizetier disponibles
+ * Fichiers YAML situés dans un sous-répertoire config_noizetier
+ *
+ * @staticvar array $liste_config
+ * @return array
+ */
+function noizetier_lister_config(){
+	static $liste_config = null;
+	include_spip('inc/yaml');
+	
+	if (is_null($liste_config)){
+		$liste_config = array();
+		$match = ".+[.]yaml$";
+		foreach (find_all_in_path('config_noizetier/', $match) as $fichier => $chemin) {
+			// On lit le fichier et on vérifie s'il y a un champs nom
+			$config = yaml_decode_file($chemin);
+			if (isset($config['nom']))
+				$liste_config[$chemin] = _T_ou_typo($config['nom']);
+			else
+				$liste_config[$chemin] = $fichier;
+		}
+	}
+	return $liste_config;
+}
 
 ?>

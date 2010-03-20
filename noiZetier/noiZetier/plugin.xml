@@ -5,7 +5,7 @@
 	<version>0.2</version>
 	<version_base>0.1</version_base>
 	<etat>dev</etat>
-	<description>Prototype de gestionnaire de noisettes pour squelette Z. Il s'agit d'une simple contribution à la discussion.<p />
+	<description>Prototype de gestionnaire de noisettes, nativement fonctionnel avec les squelettes Z.<p />
 	<p><b>ATTENTION : ne pas utiliser &agrave; d'autre fin que des tests. Voir la documentation.</b></p>
 	
 	Les ic&ocirc;nes sont issues du [plugin bandeau->http://zone.spip.org/trac/spip-zone/browser/_plugins_/bandeau]  et de collection {black and white} de [carpelinx->http://www.carpicon.com/index.php?option=com_content&task=view&id=6&Itemid=26].
@@ -36,6 +36,10 @@
 		<nom>recuperer_fond</nom>
 		<inclure>noizetier_pipelines.php</inclure>
 	</pipeline>
+	<pipeline>
+		<nom>compositions_lister_disponibles</nom>
+		<inclure>noizetier_pipelines.php</inclure>
+	</pipeline>
 	<bouton id='noizetier' parent="configuration">
 		<url>noizetier</url>
 		<titre>noizetier:editer_noizetier_titre</titre>
@@ -50,5 +54,5 @@
 	<necessite id="SPIP" version="[2.0.10;]" />
 	<necessite id="spip_bonux" version="[1.8.10;]" />
 	<utilise id="saisies" />
-	<utilise id="compositions" />
+	<utilise id="compositions" version="[1.0.1;]" />
 </plugin>

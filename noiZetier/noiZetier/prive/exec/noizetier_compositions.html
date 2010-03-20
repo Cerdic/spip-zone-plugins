@@ -1,0 +1,49 @@
+<h1><:noizetier:editer_noizetier_compositions_titre:></h1>
+<div class="noizetier-explications">
+	<:noizetier:editer_noizetier_compositions_explication:>
+</div>
+
+#SET{auth,#AUTORISER{configurer,noizetier}}
+[(#SET{liste_types_compos,[(#CONFIG{noizetier_compositions}|unserialize)]})]
+
+<BOUCLE_types(POUR){tableau #GET{liste_types_compos}}{par cle}>
+<B_compos>
+<h2>[(#NOIZETIER_LISTE_PAGES|table_valeur{#CLE}|table_valeur{nom}|sinon{#CLE})]</h2>
+<div class="formulaire_spip">
+<ul class="liste_items liste_noizetier_compositions">
+	<BOUCLE_compos(POUR){tableau #VALEUR}{par cle}>
+	<li class="item" [ style="background-image:url((#VALEUR|table_valeur{icon}|chemin|image_reduire{24}|extraire_attribut{src}));"]>
+		<div class="ligne">
+			<div class="titre">[(#VALEUR|table_valeur{nom}|typo) ](#CLE)</div>
+			[<div class="infos">(#VALEUR|table_valeur{description}|propre)</div>]
+			<p class='actions'>[(#GET{auth}|oui)
+				<span class='lien_modifier'>&#91;<a href='[(#URL_ECRIRE{noizetier_composition_editer,id=#_types:CLE-#CLE})]'><:noizetier:editer_composition:></a>&#93;</span> 
+			]
+			</p>
+		</div>
+	</li>
+	</BOUCLE_compos>
+</ul>
+</div>
+</B_compos>
+</BOUCLE_types>
+
+
+[(#URL_ECRIRE{noizetier_composition_editer}|parametre_url{nouveau,oui}|icone{<:noizetier:editer_nouvelle_composition:>,#CHEMIN{img/compositions-24.png},#LANG_RIGHT,creer.gif})]
+
+<div class="nettoyeur" />
+
+<!--#navigation-->
+<div class="cadre infos cadre-info">
+	<div>
+		<a href="#URL_ECRIRE{noizetier}" class="cellule-h">
+			[<img src="(#CHEMIN{img/noizetier-24.png})" style="vertical-align:middle;" />]
+			<span style="vertical-align:middle;"><:retour:></span>
+		</a>
+	</div>
+</div>
+
+<!--/#navigation-->
+
+<!--#extra-->
+<!--/#extra-->

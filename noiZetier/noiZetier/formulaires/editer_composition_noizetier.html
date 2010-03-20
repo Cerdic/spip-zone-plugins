@@ -1,0 +1,105 @@
+<div class="formulaire_spip formulaire_editer [formulaire_(#ENV{form})][ formulaire_(#ENV{form})-#ENV{id_menu,nouveau}]">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<BOUCLE_editable(CONDITION){si #ENV{editable}}>
+		<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+			[(#REM) declarer les hidden qui declencheront le service du formulaire
+			parametre : url d'action ]
+			#ACTION_FORMULAIRE{#ENV{action}}
+
+			<ul>
+				<li class="fieldset">
+					<fieldset>
+						<ul>
+							[(#REM) type et compo ne sont modifiable que si nouvelle composition]
+							
+							<BOUCLE_nouveau(CONDITION){si (#ENV{nouveau}|=={oui})}>
+							#SET{name,type}
+							#SET{obli,'obligatoire'}
+							#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+							<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+								<label for="#GET{name}"><:noizetier:formulaire_type:></label>
+								<div class="explication"><:noizetier:formulaire_type_explication:></div>
+								[<span class='erreur_message'>(#GET{erreurs})</span>]
+								<select class="select" name="#GET{name}" id="#GET{name}">
+								<BOUCLE_types(POUR){tableau #NOIZETIER_LISTE_PAGES}{par cle}>
+									[(#CLE|noizetier_page_type|=={page}|non)
+									[(#CLE|noizetier_page_composition|non)
+									<option value="#CLE">[(#VALEUR|table_valeur{nom})]</option>
+									]]
+								</BOUCLE_types>
+								</select>
+							</li>
+							
+							#SET{name,compo}
+							#SET{obli,'obligatoire'}
+							#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+							<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+								<label for="#GET{name}"><:noizetier:formulaire_composition:></label>
+								<div class="explication"><:noizetier:formulaire_composition_explication:></div>
+								[<span class='erreur_message'>(#GET{erreurs})</span>]
+								<input type="text" class="text" name="#GET{name}" id="#GET{name}" size="40" value="#ENV{#GET{name}}" />
+							</li>
+							</BOUCLE_nouveau>
+							
+							#SET{name,type}
+							#SET{obli,'obligatoire'}
+							#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+							<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+								<label for="#GET{name}"><:noizetier:formulaire_type:></label>
+								[<span class='erreur_message'>(#GET{erreurs})</span>]
+								<div class="explication">[(#NOIZETIER_LISTE_PAGES|table_valeur{#ENV{type}}|table_valeur{nom})]</div>
+								<input type="hidden" name="#GET{name}" id="#GET{name}" size="40" value="#ENV{#GET{name}}" />
+							</li>
+							#SET{name,compo}
+							#SET{obli,'obligatoire'}
+							#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+							<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+								<label for="#GET{name}"><:noizetier:formulaire_composition:></label>
+								[<span class='erreur_message'>(#GET{erreurs})</span>]
+								<div class="explication">#ENV{#GET{name}}</div>
+								<input type="hidden" name="#GET{name}" id="#GET{name}" size="40" value="#ENV{#GET{name}}" />
+							</li>
+							<//B_nouveau>
+
+							#SET{name,nom}
+							#SET{obli,'obligatoire'}
+							#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+							<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+								<label for="#GET{name}"><:noizetier:formulaire_nom:></label>
+								<div class="explication"><:noizetier:formulaire_nom_explication:></div>
+								[<span class='erreur_message'>(#GET{erreurs})</span>]
+								<input type="text" class="text" name="#GET{name}" id="#GET{name}" size="40" value="#ENV{#GET{name}}" />
+							</li>
+
+							#SET{name,description}
+							#SET{obli,''}
+							#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+							<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+								<label for="#GET{name}"><:noizetier:formulaire_description:></label>
+								<div class="explication"><:noizetier:formulaire_description_explication:></div>
+								[<span class='erreur_message'>(#GET{erreurs})</span>]
+								<textarea class="textarea" name="#GET{name}" id="#GET{name}">#ENV{#GET{name}}</textarea>
+							</li>
+
+							#SET{name,icon}
+							#SET{obli,''}
+							#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+							<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+								<label for="#GET{name}"><:noizetier:formulaire_icon:></label>
+								<div class="explication"><:noizetier:formulaire_icon_explication:></div>
+								[<span class='erreur_message'>(#GET{erreurs})</span>]
+								<input type="text" class="text" name="#GET{name}" id="#GET{name}" size="40" value="#ENV{#GET{name}}" />
+							</li>
+							</ul>
+
+						<p class='boutons'>
+							<input type='submit' class='submit' value='<:bouton_enregistrer:>' />
+						</p>
+					</fieldset>
+				</li>
+			</ul>
+		</div></form>
+	</BOUCLE_editable>
+</div>

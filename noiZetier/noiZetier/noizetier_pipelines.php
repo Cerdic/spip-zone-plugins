@@ -35,7 +35,42 @@ function noizetier_recuperer_fond($flux){
 	return $flux;
 }
 
+/**
+ * Pipeline compositions_lister_disponibles pour ajouter les compositions du noizetier
+ *
+ * @param array $flux
+ * @return array
+ */
 
-
-
+function noizetier_compositions_lister_disponibles($flux){
+	$noizetier_compositions = unserialize($GLOBALS['meta']['noizetier_compositions']);
+	if (!is_array($noizetier_compositions))
+		$noizetier_compositions = array();
+	$type = $flux['args']['type'];
+	$informer = $flux['args']['informer'];
+	
+	include_spip('inc/texte');
+	foreach($noizetier_compositions as $t => $compos_type)
+		foreach($compos_type as $c => $info_compo) {
+			if($informer) {
+				$noizetier_compositions[$t][$c]['nom'] = typo($info_compo['nom']);
+				$noizetier_compositions[$t][$c]['description'] = propre($info_compo['description']);
+				$noizetier_compositions[$t][$c]['icon'] = $info_compo['icon']!='' ? find_in_path($info_compo['icon']) : '';
+			}
+			else
+				$noizetier_compositions[$t][$c] = 1;
+			}
+	
+	if ($type=='') {
+		if (!is_array($flux['data']))
+			$flux['data'] = array();
+		$flux['data'] = array_merge($flux['data'],$noizetier_compositions);
+	}
+	else {
+		if (!is_array($flux['data'][$type]))
+			$flux['data'][$type] = array();
+		$flux['data'][$type] = array_merge($flux['data'][$type],$noizetier_compositions[$type]);
+	}
+	return $flux['data'];
+}
 ?>

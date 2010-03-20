@@ -43,8 +43,9 @@ function noizetier_vider_tables($nom_meta_version_base){
 	// On efface la version enregistrée
 	effacer_meta($nom_meta_version_base);
 	
-	// On efface la version enregistrée
-	effacer_meta('noiZetier');
+	// On efface les compositions enregistrées
+	effacer_meta('noizetier_compositions');
+	
 
 }
 
