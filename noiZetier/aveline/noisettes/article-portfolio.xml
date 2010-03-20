@@ -1,6 +1,0 @@
-<noisette>
-	<nom><:aveline:nom_portfolio:></nom>
-	<description><:aveline:description_portfolio:></description>
-	<parametre nom="inclure_photos_vues" label="aveline:label_inclure_photos_vues" saisie="oui_non" defaut="" />
-	<icon>img/ic_portfolio.png</icon>
-</noisette>
