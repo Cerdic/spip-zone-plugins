@@ -36,6 +36,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 //E
 'editer_message' => '&Eacute;diter le message',
+'editer_rubrique' => '&Eacute;diter la rubrique',
 'editer_site' => '&Eacute;diter le site',
 
 //F
@@ -67,6 +68,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 //N
 'nouveau_message' => 'Nouveau message',
 'nouveau_site' => 'Nouveau site',
+'nouvelle_rubrique' => 'Nouvelle rubrique',
 
 //P
 'pas_le_droit_ecrire' => 'Vous n\'avez pas d\'autorisation en &eacute;criture',

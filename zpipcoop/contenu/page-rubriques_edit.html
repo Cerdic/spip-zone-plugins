@@ -1,0 +1,18 @@
+[(#REM)
+
+	Un petit descriptif ne serait pas superflu
+
+]
+<div class='cadre-formulaire-editer'>
+<div class="entete-formulaire">
+	#ENV**{icone_retour}
+	<B_titre><:icone_modifier_rubrique:>
+	<BOUCLE_titre(RUBRIQUES) {id_rubrique}>
+	<h1>#TITRE</h1></BOUCLE_titre></B_titre>
+	<h1><:zpipcoop:nouvelle_rubrique:></h1><//B_titre>
+</div>
+[(#AUTORISER{modifier, rubrique, #ID_RUBRIQUE})
+#FORMULAIRE_EDITER_RUBRIQUE{#ENV{new},#ENV{id_rubrique},#ENV{redirect},#ENV{lier_trad},#ENV{config_fonc}}
+]
+[(#AUTORISER{ecrire}|non)<:zpipcoop:pas_le_droit_ecrire:>]
+</div>

@@ -2,11 +2,21 @@
 	<div class="liste">
 	<h2 class="h2"><:zpipcoop:redaction:></h2>
 	<ul class="liste-items">
+	[(#REM) Concernant les articles]
 	[(#ENV{id_article}|oui)[(#ENV{id_article}|=={oui}|non)[(#AUTORISER{modifier, article, #ID_ARTICLE})
 	<li class="item"><a href="[(#URL_PAGE{articles_edit,id_article=#ID_ARTICLE,id_rubrique=[(#ID_RUBRIQUE|sinon{'0'})]}|parametre_url{retour,#URL_ARTICLE})]" class="edit" title="<:zpipcoop:editer_message|attribut_html:>"><:zpipcoop:editer_message:></a></li>]]]
 	[(#AUTORISER{ecrire})<li class="item"><a href="[(#URL_PAGE{articles_edit,id_article=oui,id_rubrique=[(#ID_RUBRIQUE|sinon{'0'})]}|parametre_url{retour,[(#URL_PAGE{articles_page})]})]" class="add" title="<:zpipcoop:nouveau_message|attribut_html:>"><:zpipcoop:nouveau_message:></a></li>]
+	
+	[(#REM) Consernant les sites]
 	[(#ENV{id_syndic}|oui)[(#ENV{id_syndic}|=={oui}|non)[(#AUTORISER{modifier, site, #ID_SYNDIC})
 	<li class="item"><a href="[(#URL_PAGE{sites_edit,id_syndic=#ID_SYNDIC,id_rubrique=[(#ID_RUBRIQUE|sinon{'0'})]}|parametre_url{retour,#URL_SYNDIC})]" class="edit" title="<:zpipcoop:editer_site|attribut_html:>"><:zpipcoop:editer_site:></a></li>]]]
 	[(#AUTORISER{activer_sites})<li class="item"><a href="[(#URL_PAGE{sites_edit,id_syndic=oui,id_rubrique=[(#ID_RUBRIQUE|sinon{'0'})]}|parametre_url{retour,#SELF})]" class="add" title="<:zpipcoop:nouveau_site|attribut_html:>"><:zpipcoop:nouveau_site:></a></li>]
+	
+	[(#REM) Consernant les rubriques]
+	[(#ENV{id_rubrique}|oui)[(#ENV{id_rubrique}|=={oui}|non)[(#AUTORISER{modifier, rubrique, #ID_RUBRIQUE})
+	<li class="item"><a href="[(#URL_PAGE{rubriques_edit,id_rubrique=#ID_RUBRIQUE,id_rubrique=[(#ID_RUBRIQUE|sinon{'0'})]}|parametre_url{retour,#URL_RUBRIQUE})]" class="edit" title="<:zpipcoop:editer_rubrique|attribut_html:>"><:zpipcoop:editer_rubrique:></a></li>]]]
+	<li class="item"><a href="[(#URL_PAGE{rubriques_edit,id_rubrique=oui,id_rubrique=[(#ID_RUBRIQUE|sinon{'0'})]}|parametre_url{retour,[(#URL_PAGE{rubriques_page})]})]" class="add" title="<:zpipcoop:nouvelle_rubrique|attribut_html:>"><:zpipcoop:nouvelle_rubrique:></a></li>
+	
+	
 	</ul>
 	</div>]
