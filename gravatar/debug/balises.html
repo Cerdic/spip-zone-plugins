@@ -3,9 +3,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Page de test</title>
+<style type="text/css">
+table { width: 100%; max-width: 100%; }
+table td { border: 1px solid #CCC; }
+table img { max-width: 300px; height: auto; max-height: 300px; }
+</style>
 </head>
-
 <body>
+<p>Page de test des balises, au naturel</p>
 <table>
 <thead>
 	<th>ID_AUTEUR</th>
@@ -17,16 +22,16 @@
 <BOUCLE_auteurs(AUTEURS){tout}{par id_auteur}>
 [<tr>
 	<td>#ID_AUTEUR</td>
-    <th>(#EMAIL|unique)</th>
+    <td>(#EMAIL|unique)</td>
     <td>#LOGO_AUTEUR</td>
     <td>[(#GRAVATAR{#EMAIL})]</td>
     <td>[(#MODELE{gravatar})]</td>
 </tr>]
 </BOUCLE_auteurs>
-<BOUCLE_commentaires(FORUMS){id_auteur=0}>
+<BOUCLE_commentaires(FORUMS){id_auteur=0}{par date}>
 [<tr>
 	<td>#ID_AUTEUR</td>
-    <th>(#EMAIL|unique)</th>
+    <td>(#EMAIL|unique)</td>
     <td>#LOGO_AUTEUR</td>
     <td>[(#GRAVATAR{#EMAIL})]</td>
     <td>[(#MODELE{gravatar}{email=#EMAIL})]</td>
