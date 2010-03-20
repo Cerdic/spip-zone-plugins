@@ -12,7 +12,7 @@
 [(#LOGO_DOCUMENT|#URL_DOCUMENT)]
 })]
 		[<strong><a href="(#URL_DOCUMENT)" title="<:bouton_telecharger:>" type="#MIME_TYPE">[(#TITRE|sinon{[(#FICHIER|basename)]})]</a></strong>
-		<small><span>([(#TYPE_DOCUMENT)][ &ndash; (#TAILLE|taille_en_octets)])</span></small>
+		<small><span>([(#TYPE_DOCUMENT)][ &ndash; (#TAILLE|taille_en_octets)])[<small> | (#DATE|affdate_court)</small>]</span></small>
 		#DESCRIPTIF]
 	<br class="nettoyeur" />
 	</li><!--.document-->
