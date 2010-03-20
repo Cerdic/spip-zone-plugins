@@ -57,7 +57,7 @@ function formulaires_editer_formulaire_traiter($id_formulaire, $nouveau){
 	// S'il n'y a pas d'erreur et que le formulaire est bien là
 	if (!$retours['message_erreur'] and $retours['id_formulaire'] > 0){
 		// Si c'était un nouveau on reste sur l'édition
-		if (!$id_formulaire and $nouveau == 'oui'){
+		if (!intval($id_formulaire) and $nouveau == 'oui'){
 			$retours['redirect'] = parametre_url(generer_url_ecrire('formulaires_editer'), 'id_formulaire', $retours['id_formulaire'], '&');
 		}
 		// Sinon on redirige vers la page de visualisation
