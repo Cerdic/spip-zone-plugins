@@ -131,6 +131,9 @@ body { background: #f9f9f9; margin: 0; padding: 0; text-align: center; }
 .menu { clear: both; margin-bottom: 2em; text-align: left; }
 .menu p { margin: 0.20em 0; padding: 0.20em 0.10em; }
 .menu-liste { margin: 0; padding: 0; list-style: none; border-bottom: 1px solid #ddd; }
+.menu-liste li {display: inline;}
+.menu-liste li:before {content: "| "}
+.menu-liste li:first-child:before {content: ""}
 .menu-liste .menu-entree { margin: 0.20em 0; padding: 0.20em;}
 .menu-liste .menu-entree .menu-liste { margin-left: 1em; border: 0; }
 .menu-liste .menu-entree .menu-entree { padding: 0; border: 0; }
