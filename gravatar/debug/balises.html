@@ -4,9 +4,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Page de test</title>
 <style type="text/css">
-table { width: 100%; max-width: 100%; }
-table td { border: 1px solid #CCC; }
-table img { max-width: 300px; height: auto; max-height: 300px; }
+body { margin: 0; padding: 0; font-size: 80%; }
+table { width: 100%; border-collapse: collapse; border-spacing: 0; }
+table th, table td { padding: 4px; border: 1px solid #CCC; }
+table tr.odd { background: #f9f9f9; }
+table img { max-width: 300px; height: auto; max-height: 300px;  border: 1px solid; }
 </style>
 </head>
 <body>
@@ -20,7 +22,7 @@ table img { max-width: 300px; height: auto; max-height: 300px; }
     <th>Modele MODELE{gravatar}</th>
 </thead>
 <BOUCLE_auteurs(AUTEURS){tout}{par id_auteur}>
-[<tr>
+[<tr class="[(#COMPTEUR_BOUCLE|alterner{'odd','even'})][ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#EXPOSE)]">
 	<td>#ID_AUTEUR</td>
     <td>(#EMAIL|unique)</td>
     <td>#LOGO_AUTEUR</td>
@@ -29,7 +31,7 @@ table img { max-width: 300px; height: auto; max-height: 300px; }
 </tr>]
 </BOUCLE_auteurs>
 <BOUCLE_commentaires(FORUMS){id_auteur=0}{par date}>
-[<tr>
+[<tr class="[(#COMPTEUR_BOUCLE|alterner{'odd','even'})][ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#EXPOSE)]">
 	<td>#ID_AUTEUR</td>
     <td>(#EMAIL|unique)</td>
     <td>#LOGO_AUTEUR</td>
