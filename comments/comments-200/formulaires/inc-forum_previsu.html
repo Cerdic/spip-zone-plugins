@@ -2,7 +2,7 @@
 	<legend><:previsualisation:></legend>
 	<div class="comment">
     	<p class="comment-meta">
-        	<span class="poster">[<:par_auteur:> [<a href="(#ENV{url_site}|attribut_html)" class="url spip_out">]<strong class="fn n">(#SESSION{session_nom}|safehtml|sinon{[(#SESSION{nom}|typo|sinon{<span class="reponse_formulaire" style="text-decoration: blink;">???</span>})]})</strong>[</a>(#ENV{url_site}|oui)]][(#PLUGIN{gravatar}|oui)[ (#MODELE{gravatar,id_auteur=#SESSION{id_auteur},email=#SESSION{session_email}}|image_reduire{32})]]</span>
+        	<span class="poster">[<:par_auteur:> [<a href="(#ENV{url_site}|attribut_html)" class="url spip_out">]<strong class="fn n">(#SESSION{session_nom}|safehtml|sinon{[(#SESSION{nom}|typo|sinon{<span class="reponse_formulaire" style="text-decoration: blink;">???</span>})]})</strong>[</a>(#ENV{url_site}|oui)]][(#PLUGIN{gravatar}|oui)[ (#MODELE{gravatar,id_auteur=#SESSION{id_auteur},email=#SESSION{session_email}})]]</span>
         </p>
         <div class="comment-content">
         	[<div class="forum-texte">(#ENV*{texte}|lignes_longues)</div>]
