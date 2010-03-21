@@ -39,7 +39,7 @@ function gravatar_img($email, $logo_auteur='') {
 	  AND strlen($image_default=lire_config('gravatar/image_defaut'))
 		AND strpos($image_default,".")===FALSE){
 		$default = $image_default; // c'est une consigne pour l'api gravatar
-		$image_default = '';
+		$image_default = 'images/gravatar.png'; // si pas d'email, fournir quand meme une image
 	}
 
 	// retrouver l'image du mieux qu'on peut :
@@ -95,9 +95,16 @@ function gravatar($email, $default='404') {
 	static $max=10; // et en tout etat de cause pas plus de 10 nouveaux
 
 	// eviter une requete quand on peut
-	if ($default=='404'
-	  AND (!strlen($email) OR !email_valide($email)))
+	if (!strlen($email) OR !email_valide($email))
 		return '';
+
+	// si on demande un defaut identicon/monsterid/wavatar
+	// faire d'abord une requete avec 404, cela permet de partager le cache
+	// pour ceux qui ont vraiment un gravatar
+	if ($default!=='404'){
+		if ($gravatar_cache = gravatar($email))
+			return $gravatar_cache;
+	}
 
 	$tmp = sous_repertoire(_DIR_VAR, 'cache-gravatar');
 
@@ -105,16 +112,18 @@ function gravatar($email, $default='404') {
 	$gravatar_id = $md5_email.($default=='404'?"":"-$default");
 	$gravatar_cache = $tmp.$gravatar_id.'.jpg';
 
+	// inutile de rafraichir souvent les identicon etc qui ne changent en principe pas
+	$coeff_delai = ($default=='404' ? 1:10);
 	if ((!file_exists($gravatar_cache)
 	OR (
-		(time()-3600*24 > filemtime($gravatar_cache))
+		(time()-3600*24*$coeff_delai > filemtime($gravatar_cache))
 		AND $nb > 0
 	  ))
 	) {
 		lire_fichier($tmp.'vides.txt', $vides);
 		$vides = @unserialize($vides);
 		if ((!isset($vides[$gravatar_id])
-		OR time()-$vides[$gravatar_id] > 3600*8
+		OR time()-$vides[$gravatar_id] > 3600*8*$coeff_delai
 		) AND $max-- > 0) {
 
 			$nb--;
