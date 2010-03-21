@@ -14,7 +14,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'choix_theme' => 'Seleccionar un tema',
 	'choisir_ce_theme' => 'Seleccionar',
-	'conception_graphique_par' => 'Dise&ntilde;o gr&aacute;fico (c)',
 
 	// D
 	'desactiver_ce_theme' => 'Desactivar el tema y volver al estilo inicial del sitio',
@@ -31,10 +30,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// R
 
 	// S
-	'theme_actif' => 'Este tema se utiliza actualmente',
-	'sous_licence' => 'con Licencia',
+	'switcher_activer' => 'Activar el switcher de temas en el sitio p&uacute;blico',
+	'switcher_desactiver' => 'Desactivar el switcher de temas',
 
 	// T
+	'theme_actif' => 'Este tema se utiliza actualmente',
 	'themes' => 'Temas',
 
 	// V

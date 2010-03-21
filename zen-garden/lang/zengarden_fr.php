@@ -6,7 +6,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'adapte_de' => 'adapt&eacute; de',
 	'apercevoir_ce_theme' => 'Apercevoir',
 
 	// B
@@ -15,7 +14,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'choix_theme' => 'Choisissez votre th&egrave;me',
 	'choisir_ce_theme' => 'Choisir',
-	'conception_graphique_par' => 'Habillage visuel (c)',
 
 	// D
 	'desactiver_ce_theme' => 'D&eacute;sactiver et revenir au style par d&eacute;faut',
@@ -32,12 +30,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// R
 
 	// S
-	'theme_actif' => 'Ce th&egrave;me est actuellement utilis&eacute;',
-	'sous_licence' => 'sous Licence',
 	'switcher_activer' => 'Activer le switcher de th&egrave;mes sur le site public',
 	'switcher_desactiver' => 'Desactiver le switcher de th&egrave;mes',
 
 	// T
+	'theme_actif' => 'Ce th&egrave;me est actuellement utilis&eacute;',
 	'themes' => 'Th&egrave;mes',
 
 	// V
