@@ -69,6 +69,8 @@ function noizetier_compositions_lister_disponibles($flux){
 	else {
 		if (!is_array($flux['data'][$type]))
 			$flux['data'][$type] = array();
+		if (!is_array($noizetier_compositions[$type]))
+			$noizetier_compositions[$type] = array();
 		$flux['data'][$type] = array_merge($flux['data'][$type],$noizetier_compositions[$type]);
 	}
 	return $flux['data'];
