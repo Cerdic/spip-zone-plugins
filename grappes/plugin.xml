@@ -1,5 +1,5 @@
 <plugin>
-	<nom><multi>[fr]Grappes [en]Bunches of grapes [es]Racimos</multi></nom>
+	<nom><multi>[fr]Grappes [en]Bunches of grapes [es]Racimos[de]Trauben</multi></nom>
 	<auteur>Matthieu Marcillaud</auteur>
 	<version>0.2.4</version>
 	<version_base>0.1</version_base>
@@ -16,6 +16,8 @@
 	[es]Permite agrupar elementos de SPIP
         como autores/as, secciones, art&iacute;culos (cuando hay una interfaz que lo permite)...
         en un mismo universo (un racimo)
+	[de]Neue Objekte (Trauben) k&ouml;nnen aus SPIP-Objekten zusammengestellt werden,
+		wenn diese ein Interface haben.
 	</multi></description>
 	<options>grappes_options.php</options>
 	<fonctions>grappes_autorisations.php</fonctions>
