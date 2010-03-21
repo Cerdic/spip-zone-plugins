@@ -30,7 +30,7 @@ function gravatar_balise_img($img,$alt="",$class=""){
 
 
 // pour 2.1 on se contente de produire un tag IMG
-function gravatar_img($logo_auteur, $email) {
+function gravatar_img($email, $logo_auteur='') {
 	$hasconfig = function_exists('lire_config');
 	$default = '404'; // par defaut rien si ni logo ni gravatar (consigne a passer a gravatar)
 	$image_default = ''; // image

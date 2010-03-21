@@ -15,7 +15,7 @@ function balise_LOGO_AUTEUR($p) {
 
 	$p = $balise_logo_($p);
 
-	$p->code = 'gravatar_img('. $p->code. ', sinon((is_null('.$_email1.')?'.$_emailsql.':'.$_email1.'),sinon('.$_email2.', sinon('.$_email3.', '.$_email4.'))))';
+	$p->code = 'gravatar_img(sinon((is_null('.$_email1.')?'.$_emailsql.':'.$_email1.'),sinon('.$_email2.', sinon('.$_email3.', '.$_email4.'))), '. $p->code. ')';
 
 	return $p;
 }
