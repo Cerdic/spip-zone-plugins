@@ -45,12 +45,20 @@
 </div>
 
 <!--#navigation-->
-[(#ENV{id_formulaire,0}|intval|oui)
 <div class="cadre infos cadre-info">
 	<div class="numero">
 		<:formidable:voir_numero:>
-		<p>[(#ENV{id_formulaire})]</p>
+		<p>#ID_FORMULAIRE</p>
 	</div>
+	<BOUCLE_resultats(FORMULAIRES_REPONSES){id_formulaire}>
+	</BOUCLE_resultats>
+	<div>
+		<a href="[(#URL_ECRIRE{formulaires_reponses}|parametre_url{id_formulaire, #ID_FORMULAIRE})]" class="cellule-h">
+			[<img src="(#CHEMIN{images/formulaire-reponses-24.png})" style="vertical-align:middle;" alt="" />]
+			<span style="vertical-align:middle;"><:formidable:voir_reponses:> (#TOTAL_BOUCLE)</span>
+		</a>
+	</div>
+	</B_resultats>
 	<div>
 		<a href="#URL_ACTION_AUTEUR{supprimer_formulaire, #ENV{id_formulaire}}" class="cellule-h" onclick="return confirm('<:formidable:formulaires_supprimer_confirmation:>');">
 			[<img src="(#CHEMIN{images/formulaire-supprimer-24.png})" style="vertical-align:middle;" alt="" />]
@@ -58,7 +66,6 @@
 		</a>
 	</div>
 </div>
-]
 <!--/#navigation-->
 
 <!--#extra-->

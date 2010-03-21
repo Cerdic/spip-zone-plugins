@@ -42,6 +42,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'formulaires_supprimer_confirmation' => 'Attention, cela supprimera aussi tous les r&eacute;sultats. &Ecirc;tes-vous s&ucirc;r de vouloir supprimer ce formulaire ?',
 'formulaires_tous' => 'Tous les formulaires',
 
+'reponses_analyse' => 'Statistiques',
+'reponses_liste' => 'Liste des r&eacute;ponses',
 'retour_aucun_traitement' => 'Votre r&eacute;ponse a bien &eacute;t&eacute; envoy&eacute;e, mais aucun traitement n\'a &eacute;t&eacute; d&eacute;fini pour ce formulaire. Il ne fait donc rien. :)',
 
 'traitements_avertissement_creation' => 'Les modifications sur les champs du formulaire ont &eacute;t&eacute; enregistr&eacute;es avec succ&egrave;s. Vous pouvez maintenant d&eacute;finir quels traitements seront effectu&eacute;s lors de l\'utilisation du formulaire.',
@@ -73,6 +75,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'traiter_enregistrement_titre' => 'Enregistrer les r&eacute;sultats',
 
 'voir_numero' => 'Formulaire num&eacute;ro :',
+'voir_reponses' => 'Voir les r&eacute;ponses',
+'voir_reponses_pluriel' => '@total@ r&eacute;ponses',
+'voir_reponses_singulier' => '@total@ r&eacute;ponse',
 'voir_traitements' => 'Traitements'
 );
 
