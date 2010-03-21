@@ -102,7 +102,7 @@ function gravatar($email, $default='404') {
 	$tmp = sous_repertoire(_DIR_VAR, 'cache-gravatar');
 
 	$md5_email = md5(strtolower($email));
-	$gravatar_id = $md5_email.($default?"-$default":"");
+	$gravatar_id = $md5_email.($default=='404'?"":"-$default");
 	$gravatar_cache = $tmp.$gravatar_id.'.jpg';
 
 	if ((!file_exists($gravatar_cache)
