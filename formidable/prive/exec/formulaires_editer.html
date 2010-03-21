@@ -4,12 +4,21 @@
 	<li>
 		<a href="#URL_ECRIRE{formulaires_tous}" class="racine"><:formidable:formulaires_tous:></a>
 	</li>
+	<BOUCLE_formulaire_chemin(FORMULAIRES){id_formulaire=#VAL{id_formulaire}|_request}>
+	<li>
+		<span class="bloc">
+			<em>&gt;</em>
+			<a href="[(#URL_ECRIRE{formulaires_voir}|parametre_url{id_formulaire,#ID_FORMULAIRE})]">#TITRE</a>
+		</span>
+	</li>
+	</BOUCLE_formulaire_chemin>
 	<li>
 		<span class="bloc">
 			<em>&gt;</em>
 			<:formidable:editer_modifier_formulaire:>
 		</span>
 	</li>
+	</B_formulaire_chemin>
 </ul>
 <!--/#hierarchie-->
 

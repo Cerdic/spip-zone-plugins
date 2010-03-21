@@ -20,17 +20,20 @@
 	<script type="text/javascript">
 		$(function(){
 			// On commence par cacher toutes les options
-			$('.options_traiter').hide();
+			$('.options_traiter').hide().find('h3').hide();
 			
 			// Ensuite on parcourt les traitements choisis
 			$('.editer_traitements_choisis input')
 				.each(function(){
 					// Si c'est coché on affiche le fieldset d'options
-					if ($(this).is(':checked'))
+					if ($(this).is(':checked')){
 						$('.options_traiter.'+$(this).val()).show();
+						$(this).parents('.editer_traitements_choisis').toggleClass('hover');
+					}
 				})
 				.click(function(){
 					$('.options_traiter.'+$(this).val()).slideToggle('fast');
+					$(this).parents('.editer_traitements_choisis').toggleClass('hover');
 				});
 		});
 	</script>
