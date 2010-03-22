@@ -4,6 +4,8 @@
 	<BOUCLE_Tagshidden(MOTS){id_mot IN #ENV{mots}}>
 	<input type="hidden" name="mots[]" value="#ID_MOT" />
 	</BOUCLE_Tagshidden>
+	[(#REM) N'afficher le choix du groupe que s'il y en a plusieurs ]
+	<BOUCLE_PlusieursGroupes(GROUPES_MOTS){id_groupe ?IN #ENV**{id_groupe}}{1,1}>
 	[(#ENV{le_groupe}|non)<input type="hidden" name="choixmot" value="1" />]
 	
 	<label for="recherchegroupe"><:ecrire:titre_mots_tous:></label>
@@ -13,11 +15,20 @@
 		<option value="#ID_GROUPE"[ (#ID_GROUPE|=={#ENV{le_groupe}}|?{'selected="selected"'})]>[(#TITRE|supprimer_tags)]</option>
 		</BOUCLE_RechercheMot>
 	</select>
+	</BOUCLE_PlusieursGroupes>
+	<BOUCLE_LeGroupe(GROUPES_MOTS){id_groupe ?IN #ENV**{id_groupe}}>
+	<input type="hidden" name="legroupe" value="#ID_GROUPE" />
+	#SET{legroupe,#ID_GROUPE}
+	</BOUCLE_LeGroupe>
+	<input type="hidden" name="choixmot" value="1" />
+	<//B_PlusieursGroupes>
 	<B_MotsDuGroupe>
 	<select id="recherchemot" name="mots[]" class="searchfield" onchange="if ((this.value != '')[ && (this.value != (#ENV{id_mot}))]) {$('#formulaire_recherche_par_mot').submit();}">
-		<option value=""><:mots_clefs_meme_groupe:></option>
-		<BOUCLE_MotsDuGroupe(MOTS){id_groupe=#ENV{le_groupe}}{par titre}{id_mot !IN #ENV{mots}}>
-		[<option value="(#ID_MOT)">[&nbsp;(#TITRE|supprimer_tags)]</option>]
+		<option value="">[(#GET{legroupe}|?{<:ecrire:titre_mots_tous:>,<:mots_clefs_meme_groupe:>})]</option>
+		<BOUCLE_MotsDuGroupe(MOTS){id_groupe=#ENV{le_groupe,#GET{legroupe}}}{par titre}{id_mot !IN #ENV{mots}}>
+		#SET{avecunmotdeplus, #ARRAY{}}
+		[(#SET{avecunmotdeplus,[(#ENV{mots}|push{#ID_MOT})]})]
+		[(#INCLURE{fond=formulaires/recherche_par_mots_compteur,mots=#GET{avecunmotdeplus},id_mot=#_MotsDuGroupe:ID_MOT,titre=#_MotsDuGroupe:TITRE})]
 		</BOUCLE_MotsDuGroupe>
 	</select>
 	</B_MotsDuGroupe>
