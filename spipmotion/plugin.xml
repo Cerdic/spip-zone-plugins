@@ -7,9 +7,9 @@
 	Quentin Drouet (kent1)
 	</auteur>
 	<version>
-	0.3
+	0.4
 	</version>
-	<version_base>0.6</version_base>
+	<version_base>0.7</version_base>
 	<etat>
 	experimental
 	</etat>
@@ -19,11 +19,6 @@
 	</multi>
 	</description>
 	<lien>http://kent1.sklunk.net/spip.php?article93</lien>
-	<necessite id="SPIP" version="[2.0.8;]" />
-	<necessite id='cfg' version='[1.13;]' />
-	<necessite id='saisies' version='[1.0;]' />
-	<necessite id='spip_bonux' version='[1.8;]' />
-	<necessite id='getid3' version='[0.2;]' />
 	<options>
 	spipmotion_options.php
 	</options>
@@ -40,7 +35,6 @@
 		<action>post_edition</action>
 		<inclure>spipmotion_pipelines.php</inclure>
 	</pipeline>
-
 	<pipeline>
 		<nom>declarer_tables_interfaces</nom>
 		<inclure>base/spipmotion.php</inclure>
@@ -49,10 +43,14 @@
 		<nom>declarer_tables_principales</nom>
 		<inclure>base/spipmotion.php</inclure>
 	</pipeline>
-		
 	<pipeline>
 		<nom>taches_generales_cron</nom>
 		<inclure>spipmotion_pipelines.php</inclure>
 	</pipeline>
 	<install>base/spipmotion_upgrade.php</install>
+	<necessite id="SPIP" version="[2.0.8;]" />
+	<necessite id='cfg' version='[1.13;]' />
+	<necessite id='saisies' version='[1.0;]' />
+	<necessite id='spip_bonux' version='[1.8;]' />
+	<necessite id='getid3' version='[0.2;]' />
 </plugin>

@@ -19,11 +19,11 @@ function spipmotion_upgrade($nom_meta_base_version,$version_cible){
 	if (   (!isset($GLOBALS['meta'][$nom_meta_base_version]) )
 			|| (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){
 		include_spip('base/spipmotion');
+		include_spip('base/create');
+		include_spip('base/abstract_sql');
 		if (version_compare($current_version,'0.0','<=')){
-			include_spip('base/create');
-			include_spip('base/abstract_sql');
 			creer_base();
-			maj_tables('spip_documents');
+
 			echo '<p>'._T('spipmotion:install_creation_base').'</p>';
 			echo '<p>'._T('spipmotion:install_ajout_champs_documents').'</p>';
 			ecrire_meta($nom_meta_base_version,$current_version=$version_cible,'non');
@@ -35,17 +35,7 @@ function spipmotion_upgrade($nom_meta_base_version,$version_cible){
 			echo '<p>'._T('spipmotion:install_maj_base',array('version'=>0.2)).'</p>';
 		}
 		if (version_compare($current_version,'0.3','<')){
-			sql_alter("TABLE spip_documents ADD `duree` VARCHAR(255) DEFAULT '' NOT NULL AFTER `hauteur`");
-			sql_alter("TABLE spip_documents ADD `framecount` INTEGER AFTER `duree`");
-			sql_alter("TABLE spip_documents ADD `framerate` INTEGER AFTER `framecount`");
-			sql_alter("TABLE spip_documents ADD `pixelformat` VARCHAR(255) DEFAULT '' NOT NULL AFTER `framerate`");
-			sql_alter("TABLE spip_documents ADD `bitrate` INTEGER AFTER `pixelformat`");
-			sql_alter("TABLE spip_documents ADD `videobitrate` INTEGER AFTER `bitrate`");
-			sql_alter("TABLE spip_documents ADD `audiobitrate` INTEGER AFTER `videobitrate`");
-			sql_alter("TABLE spip_documents ADD `audiosamplerate` INTEGER AFTER `audiobitrate`");
-			sql_alter("TABLE spip_documents ADD `videocodec` VARCHAR(255) DEFAULT '' NOT NULL AFTER `audiosamplerate`");
-			sql_alter("TABLE spip_documents ADD `audiocodec` VARCHAR(255) DEFAULT '' NOT NULL AFTER `videocodec`");
-			sql_alter("TABLE spip_documents ADD `audiochannels` INTEGER AFTER `audiocodec`");
+			maj_tables('spip_documents');
 			ecrire_meta($nom_meta_base_version,$current_version=0.3);
 			echo '<p>'._T('spipmotion:install_maj_base',array('version'=>0.3)).'</p>';
 		}
@@ -56,14 +46,18 @@ function spipmotion_upgrade($nom_meta_base_version,$version_cible){
 			echo '<p>'._T('spipmotion:install_maj_base',array('version'=>0.4)).'</p>';
 		}
 		if (version_compare($current_version,'0.5','<')){
-			sql_alter("TABLE spip_documents ADD `id_orig` BIGINT(21) NOT NULL AFTER `audiochannels`");
+			maj_tables('spip_documents');
 			ecrire_meta($nom_meta_base_version,$current_version=0.5);
 			echo '<p>'._T('spipmotion:install_maj_base',array('version'=>0.5)).'</p>';
 		}
 		if (version_compare($current_version,'0.6','<')){
-			sql_alter("TABLE spip_spipmotion_attentes ADD `extension` VARCHAR(10) DEFAULT '' NOT NULL AFTER `id_auteur`");
+			maj_tables('spip_spipmotion_attentes');
 			ecrire_meta($nom_meta_base_version,$current_version=0.6);
 			echo '<p>'._T('spipmotion:install_maj_base',array('version'=>0.6)).'</p>';
+		}
+		if (version_compare($current_version,'0.7','<')){
+			maj_tables('spip_documents');
+			ecrire_meta($nom_meta_base_version,$current_version=0.7);
 		}
 		/**
 		 * TODO : générer un htaccess dans le répertoire script_bash/

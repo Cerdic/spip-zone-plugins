@@ -2,12 +2,12 @@
 /**
 * Plugin SPIPmotion
 * par kent1 (http://kent1.sklunk.net)
-* 
+*
 * Copyright (c) 2007-2009
 * Logiciel libre distribué sous licence GNU/GPL.
-*  
+*
 * Définition des tables
-*  
+*
 **/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
@@ -34,20 +34,22 @@ function spipmotion_declarer_tables_principales($tables_principales){
 		'field' => &$spip_spipmotion_attentes,
 		'key' => &$spip_spipmotion_attentes_key
 	);
-	
+
 	$tables_principales['spip_documents']['field']['duree'] = "VARCHAR(255) DEFAULT '' NOT NULL";
+	$tables_principales['spip_documents']['field']['hasvideo'] = "VARCHAR(3) DEFAULT '' NOT NULL";
 	$tables_principales['spip_documents']['field']['framecount'] = "INTEGER";
 	$tables_principales['spip_documents']['field']['framerate'] = "INTEGER";
 	$tables_principales['spip_documents']['field']['pixelformat'] = "INTEGER";
 	$tables_principales['spip_documents']['field']['bitrate'] = "INTEGER";
 	$tables_principales['spip_documents']['field']['videobitrate'] = "INTEGER";
+	$tables_principales['spip_documents']['field']['videocodec'] = "VARCHAR(255) DEFAULT '' NOT NULL";
+	$tables_principales['spip_documents']['field']['hasaudio'] = "VARCHAR(3) DEFAULT '' NOT NULL";
 	$tables_principales['spip_documents']['field']['audiobitrate'] = "INTEGER";
 	$tables_principales['spip_documents']['field']['audiosamplerate'] = "INTEGER";
-	$tables_principales['spip_documents']['field']['videocodec'] = "VARCHAR(255) DEFAULT '' NOT NULL";
 	$tables_principales['spip_documents']['field']['audiocodec'] = "VARCHAR(255) DEFAULT '' NOT NULL";
 	$tables_principales['spip_documents']['field']['audiochannels'] = "INTEGER";
 	$tables_principales['spip_documents']['field']['id_orig'] = "BIGINT(21) NOT NULL";
-	
+
 	return $tables_principales;
 }
 

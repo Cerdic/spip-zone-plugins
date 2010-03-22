@@ -2,7 +2,10 @@
 /**
  * Plugin SpipMotion
  * © kent1 2008-2010
- *
+ */
+
+
+/**
  * Fonction de récupération de vignette depuis un document video
  * @param int $id_document
  */
