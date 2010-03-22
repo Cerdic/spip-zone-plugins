@@ -11,25 +11,26 @@
 include_spip('base/abstract_sql');
 include_spip('inc/vieilles_defs');
 include_spip('inc/autoriser');
- 
- 
+
+
 function gis_cambiar_coord($id,$table,$exec) {
 	global $spip_lang_left, $spip_lang_right;
-	
+
 	$pkey = id_table_objet($table);
-	
+
 	// on recupere l'id de l'auteur en cours
 	if ($GLOBALS["auteur_session"])
 		$id_auteur_session = $GLOBALS['auteur_session']['id_auteur'];
 	// et on verifie qu'il est autorisé à modifier l'élément en cours
 	$autoriser = autoriser("modifier",$table,$id);
-	
+
 	$glat = NULL;
 	$glonx = NULL;
 	$gzoom = NULL;
 	$gicon = NULL;
 	$mapa = "";
-	$api_carte = lire_config('gis/api_carte');
+	$defaut = _DIR_PLUGIN_GEOMAP ? 'geomap' : '';
+	$api_carte = lire_config('gis/api_carte',$defaut);
 	$result= spip_query("SELECT * FROM spip_gis WHERE $pkey = " . intval($id));
 	if ($row = spip_fetch_array($result)){
 		$glat = $row['lat'];
@@ -67,11 +68,11 @@ function gis_cambiar_coord($id,$table,$exec) {
 		} else {
 			$mapa = '<div>' . _T('gis:falta_plugin') . '</div>';
 		}
-		
+
 	}
-	
+
 	$s .= '';
-	
+
 	// Ajouter un formulaire de modification si l'auteur est autorisé
 	if ($autoriser){
 		// On teste la version de SPIP utilisee 2 ou 1.9
@@ -82,7 +83,7 @@ function gis_cambiar_coord($id,$table,$exec) {
 			$s .= bouton_block_invisible("ajouter_form");
 			$s .= '&nbsp;&nbsp;&nbsp;<strong class="verdana3" style="text-transform: uppercase;">' . _T('gis:cambiar') . ' <a onclick="$(\'#cadroFormulario\').slideToggle(\'slow\')">(' . _T('gis:clic_desplegar') . ')</a></strong>';
 		}
-		
+
 		$s .= debut_block_visible("ajouter_form");
 		$s .= '<div id="cadroFormulario" class="formulaire_spip formulaire_editer formulaire_cfg" style="margin-bottom:5px;">
 		<span class="verdana2">' . _T("gis:clic_mapa") . '</span>';
@@ -93,7 +94,7 @@ function gis_cambiar_coord($id,$table,$exec) {
 		} else {
 			$s .= '<div>' . _T('gis:falta_plugin') . '</div>';
 		}
-	
+
 		// Formulario para actualizar as coordenadas do mapa______________________.
 		$s .= '
 			<form id="formulaire_address" action="#">
@@ -146,7 +147,7 @@ function gis_mots($id_mot) {
 		else
 			spip_query("UPDATE spip_gis_mots SET lat="._q($glat).", lonx="._q($glonx).", zoom="._q($gzoom)."  WHERE id_mot = "._q($id_mot));
 	}
-	
+
 	$s .= debut_cadre('r', _DIR_PLUGIN_GIS."img_pack/correxir.png");
 	$s .= bouton_block_invisible("ajouter_form");
 	$s .= '&nbsp;&nbsp;&nbsp;<strong class="verdana3" style="text-transform: uppercase;">'. _T("gis:cambiar") .' '. $id_mot .' <a onclick="$(\'#cadroFormulario\').slideToggle(\'slow\')">('. _T('gis:clic_desplegar') .')</a></strong>';
@@ -154,7 +155,7 @@ function gis_mots($id_mot) {
 	$s .= '<div class="verdana2">'. _T("gis:clic_mapa") .'</div>';
 	$s .= debut_block_visible("ajouter_form");
 	$s .= '<div id="cadroFormulario" style="border:1px solid #000">';
-	
+
 	if ($api_carte = lire_config('gis/api_carte')) {
 		$gis_append_mini_map = charger_fonction($api_carte.'_append_mini_map','inc');
 		$s .= '<div id="formMap" name="formMap" style="width: 180px; height: 180px;overflow:hidden;"></div>';
@@ -162,7 +163,7 @@ function gis_mots($id_mot) {
 	} else {
 		$s .= '<div>'. _T('gis:falta_plugin') .'</div>';
 	}
-	
+
 	// Formulario para actualizar as coordenadas do mapa
 	$s .= '<form id="formulaire_coordenadas" name="formulaire_coordenadas" action="'.generer_url_ecrire("mots_edit","&id_mot=".$id_mot).'" method="post">
 		<div style="height:20px; padding:4px;"><input type="text" name="lat" id="form_lat" value="'.$glat.'" size="12" style="float:right"/><label>'._T('gis:lat').': </label></div>
@@ -171,13 +172,13 @@ function gis_mots($id_mot) {
 		<div style="height:20px; padding:4px;"><input type="submit" name="actualizar" value="'._T("gis:boton_actualizar").'" /></div>
 		</form>
 		</div>';
-		
+
 	$s .= fin_block();
 	$s .= fin_block();
 	$s .= fin_cadre(true);
 	return $s;
 }
- 
 
-	
+
+
 ?>
