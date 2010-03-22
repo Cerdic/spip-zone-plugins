@@ -69,19 +69,19 @@
 		<:formidable:voir_numero:>
 		<p>[(#ENV{id_formulaire})]</p>
 	</div>
-	<div[ (#GET{configurer}|=={formulaire}|oui)class="dater"]>
+	<div[ (#GET{configurer}|=={formulaire}|oui)class="hover"]>
 		<a href="[(#SELF|parametre_url{configurer,formulaire}|parametre_url{avertissement,''})]" class="cellule-h">
 			[<img src="(#CHEMIN{images/formulaire-editer-24.png})" style="vertical-align:middle;" alt="" />]
 			<span style="vertical-align:middle;"><:formidable:editer_menu_formulaire:></span>
 		</a>
 	</div>
-	<div[ (#GET{configurer}|=={champs}|oui)class="dater"]>
+	<div[ (#GET{configurer}|=={champs}|oui)class="hover"]>
 		<a href="[(#SELF|parametre_url{configurer,champs}|parametre_url{avertissement,''})]" class="cellule-h">
 			[<img src="(#CHEMIN{images/formulaire-config-champs-24.png})" style="vertical-align:middle;" alt="" />]
 			<span style="vertical-align:middle;"><:formidable:editer_menu_champs:></span>
 		</a>
 	</div>
-	<div[ (#GET{configurer}|=={traitements}|oui)class="dater"]>
+	<div[ (#GET{configurer}|=={traitements}|oui)class="hover"]>
 		<a href="[(#SELF|parametre_url{configurer,traitements}|parametre_url{avertissement,''})]" class="cellule-h">
 			[<img src="(#CHEMIN{images/formulaire-config-traitements-24.png})" style="vertical-align:middle;" alt="" />]
 			<span style="vertical-align:middle;"><:formidable:editer_menu_traitements:></span>

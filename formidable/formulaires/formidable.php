@@ -6,6 +6,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/formidable');
 include_spip('inc/saisies');
 include_spip('base/abstract_sql');
+include_spip('inc/autoriser');
 
 function formulaires_formidable_charger($id_formulaire){
 	$contexte = array();

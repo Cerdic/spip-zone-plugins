@@ -21,13 +21,28 @@
 </ul>
 <!--/#hierarchie-->
 
+<div class="fiche_objet">
+	<a href="[(#URL_ECRIRE{formulaires_voir}|parametre_url{id_formulaire,#ID_FORMULAIRE})]" class="icone36" style="float:left;">
+		<img width="24" height="24" src="#CHEMIN{images/formulaire-24.png}" />
+		<span><:retour:></span>
+	</a>
+	
+	<:formidable:voir_reponses:>
+	<h1>
+		#TITRE
+	</h1>
+	<div class="nettoyeur"></div>
+</div>
+
+<INCLURE{fond=prive/liste/formulaires_reponses}{id_formulaire}{titre=<:formidable:reponses_liste_publie:>}{ajax}>
+
 <!--#navigation-->
 <div class="cadre infos cadre-info">
 	<div class="numero">
 		<:formidable:voir_numero:>
 		<p>[(#ENV{id_formulaire})]</p>
 	</div>
-	<div class="dater">
+	<div class="hover">
 		<a href="#SELF" class="cellule-h">
 			[<img src="(#CHEMIN{images/formulaire-reponses-24.png})" style="vertical-align:middle;" alt="" />]
 			<span style="vertical-align:middle;"><:formidable:reponses_liste:></span>

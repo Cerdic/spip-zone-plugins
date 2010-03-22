@@ -43,7 +43,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'formulaires_tous' => 'Tous les formulaires',
 
 'reponses_analyse' => 'Statistiques',
+'reponses_anonyme' => 'Anonyme',
+'reponses_auteur' => 'Utilisateur',
+'reponses_ip' => 'Adresse IP',
 'reponses_liste' => 'Liste des r&eacute;ponses',
+'reponses_liste_propose' => 'R&eacute;ponses en attente de validation',
+'reponses_liste_publie' => 'Toutes les r&eacute;ponses valid&eacute;es',
+'reponses_voir_detail' => 'Voir la r&eacute;ponse',
 'retour_aucun_traitement' => 'Votre r&eacute;ponse a bien &eacute;t&eacute; envoy&eacute;e, mais aucun traitement n\'a &eacute;t&eacute; d&eacute;fini pour ce formulaire. Il ne fait donc rien. :)',
 
 'traitements_avertissement_creation' => 'Les modifications sur les champs du formulaire ont &eacute;t&eacute; enregistr&eacute;es avec succ&egrave;s. Vous pouvez maintenant d&eacute;finir quels traitements seront effectu&eacute;s lors de l\'utilisation du formulaire.',
@@ -76,8 +82,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'voir_numero' => 'Formulaire num&eacute;ro :',
 'voir_reponses' => 'Voir les r&eacute;ponses',
-'voir_reponses_pluriel' => '@total@ r&eacute;ponses',
-'voir_reponses_singulier' => '@total@ r&eacute;ponse',
 'voir_traitements' => 'Traitements'
 );
 
