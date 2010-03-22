@@ -2,7 +2,7 @@
 /**
  * Plugin Agenda pour Spip 2.0
  * Licence GPL
- * 
+ *
  *
  */
 
@@ -11,14 +11,14 @@ function action_editer_evenement_dist(){
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 
-	// si id_article n'est pas un nombre, c'est une creation 
+	// si id_article n'est pas un nombre, c'est une creation
 	// mais on verifie qu'on a toutes les donnees qu'il faut.
 	if (!$id_evenement = intval($arg)) {
 		$id_parent = _request('id_parent');
 		if (!$id_evenement = agenda_action_insert_evenement($id_parent))
 			return array(false,_L('echec'));
 	}
-	
+
 	$err = action_evenement_set($id_evenement);
 	return array($id_evenement,$err);
 }
@@ -35,9 +35,9 @@ function action_evenement_set($id_evenement, $set=null){
 			$c[$champ] = _request($champ);
 
 		$c['horaire'] = _request('horaire')=='non'?'non':'oui';
-		include_spip('inc/agenda_gestion');
-		$date_debut = agenda_verifier_corriger_date_saisie('debut',$c['horaire']=='oui',$erreurs);
-		$date_fin = agenda_verifier_corriger_date_saisie('fin',$c['horaire']=='oui',$erreurs);
+		include_spip('inc/date_gestion');
+		$date_debut = verifier_corriger_date_saisie('debut',$c['horaire']=='oui',$erreurs);
+		$date_fin = verifier_corriger_date_saisie('fin',$c['horaire']=='oui',$erreurs);
 
 		$c['date_debut'] = date('Y-m-d H:i:s',$date_debut);
 		$c['date_fin'] = date('Y-m-d H:i:s',$date_fin);
@@ -113,7 +113,7 @@ function agenda_action_update_repetitions($id_evenement,$repetitions,$liste_mots
 				$update_inscription = $inscription;
 				$update_places = $places;
 
-				// mettre a jour l'evenement					
+				// mettre a jour l'evenement
 				sql_updateq('spip_evenements',
 					array(
 						"titre" => $update_titre,
@@ -126,7 +126,7 @@ function agenda_action_update_repetitions($id_evenement,$repetitions,$liste_mots
 						"inscription" => $update_inscription,
 						"places" => $update_places,
 						"id_article" => $id_article),"id_evenement=".intval($row['id_evenement']));
-						
+
 				agenda_action_revision_evenement_mots($row['id_evenement'], $liste_mots);
 			}
 			else {
@@ -149,7 +149,7 @@ function agenda_action_update_repetitions($id_evenement,$repetitions,$liste_mots
 				$update_places = $places;
 
 				if ($id_evenement_new = agenda_action_insert_evenement($id_article,$id_evenement)) {
-					// mettre a jour l'evenement					
+					// mettre a jour l'evenement
 					sql_updateq('spip_evenements',
 						array(
 							"titre" => $update_titre,
@@ -178,7 +178,7 @@ function agenda_action_revision_evenement_mots($id_evenement,$liste_mots){
 		$cond_in = sql_in('id_mot', join(',',$liste_mots));
 	}
 	sql_delete("spip_mots_evenements", "id_evenement=".intval($id_evenement) . ($cond_in?" AND ".$cond_not_in:""));
-	
+
 	$liste_deja = array();
 	if ($cond_in)
 		$liste_deja = sql_allfetsel("id_mot", "spip_mots_evenements", "id_evenement=".intval($id_evenement) . " AND $cond_in");
@@ -206,8 +206,8 @@ function agenda_action_insert_evenement($id_article,$id_evenement_source = 0){
 	if (!$id_evenement){
 		spip_log("agenda action formulaire article : impossible d'ajouter un evenement");
 		return false;
-	} 
-	return $id_evenement;	
+	}
+	return $id_evenement;
 }
 
 // Enregistre une revision d'evenement

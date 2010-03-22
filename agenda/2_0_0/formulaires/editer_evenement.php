@@ -67,8 +67,8 @@ function formulaires_editer_evenement_verifier_dist($id_evenement='new', $id_art
 	include_spip('inc/agenda_gestion');
 	
 	$horaire = _request('horaire')=='non'?false:true;	
-	$date_debut = agenda_verifier_corriger_date_saisie('debut',$horaire,$erreurs);
-	$date_fin = agenda_verifier_corriger_date_saisie('fin',$horaire,$erreurs);
+	$date_debut = verifier_corriger_date_saisie('debut',$horaire,$erreurs);
+	$date_fin = verifier_corriger_date_saisie('fin',$horaire,$erreurs);
 	
 	if ($date_debut AND $date_fin AND $date_fin<$date_debut)
 		$erreurs['date_fin'] = _T('agenda:erreur_date_avant_apres');

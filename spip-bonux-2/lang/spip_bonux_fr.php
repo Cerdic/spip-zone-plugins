@@ -11,6 +11,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'bouton_fermer' => "Fermer",
 
+'erreur_date' => 'Cette date est incorrecte',
+'erreur_date_corrigee' => 'La date a &eacute;t&eacute; corrig&eacute;e',
+'erreur_heure' => 'Cette heure est incorrecte',
+'erreur_heure_corrigee' => 'L\'heure a &eacute;t&eacute; corrig&eacute;e',
+
 'mois_precedent' => 'Mois pr&eacute;c&eacute;dent',
 'mois_suivant' => 'Mois suivant',
 'id_rapide' => 'Ajout rapide',
