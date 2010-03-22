@@ -3,7 +3,7 @@
 <ul>
 <BOUCLE_articles(ARTICLES){id_rubrique}{statut?}{pagination 10 #GET{p}}>
 <li class='article[ (#EXPOSE)]'>[(#ENV{picker_article,1}|oui)<a href='#' onclick="jQuery(this).item_pick('article|#ID_ARTICLE','#ENV{name,id_item}','[(#TITRE*|texte_script|attribut_html)]','article');return false;"
-><img class='add' src='#CHEMIN{img_pack/item-add.png}' />][(#ENV{picker_article,1}|non)<a href='[(#ID_ARTICLE|generer_url_entite{article})]'>]#TITRE</a></li>
+><img class='add' src='#CHEMIN{img_pack/item-add.png}' alt='' />][(#ENV{picker_article,1}|non)<a href='[(#ID_ARTICLE|generer_url_entite{article})]'>]#TITRE</a></li>
 </BOUCLE_articles>
 </ul>
 </B_articles>
