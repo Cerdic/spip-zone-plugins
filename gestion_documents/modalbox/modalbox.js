@@ -20,6 +20,7 @@
 	$.modalboxload = function (url, options) {
 		$.ajax({
 			url: url,
+			dataType: "html",
 			success: function(c){
 				$.modalbox(c,options);
 			}
