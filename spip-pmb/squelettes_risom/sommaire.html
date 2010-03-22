@@ -61,8 +61,8 @@
 					<h3 class="entry-title"><a href="#URL_ARTICLE" rel="bookmark">[(#TITRE|couper{30,'...'})]</a></h3>
 					<small class="invisible"><abbr class="published"[ title="(#DATE|date_iso)"]>[(#DATE|affdate_jourcourt)]</abbr></small>
 					<small>[(#SOUSTITRE)]</small>
-					[<div class="#EDIT{intro} introduction entry-content">(#INTRODUCTION|couper{[(#REM|?{'','80'}|moins{[(#SOUSTITRE|strlen)]})],'...'})</div>]
-					<a class="lire-la-suite" title="[(#TITRE|texte_backend)]" href="#URL_ARTICLE"><:lire_la_suite:> +</a>
+					[<div class="#EDIT{intro} introduction entry-content">(#INTRODUCTION**|supprimer_tags|couper{[(#REM|?{'','80'}|moins{[(#SOUSTITRE|strlen)]})],'...'})</div>]
+					<a class="lire-la-suite" href="#URL_ARTICLE"><:zpip:lire_la_suite:><span class="lire-la-suite-titre"><:zpip:lire_la_suite_de:> <em>#TITRE</em></span></a>
 				</li>
 				</BOUCLE_articles_recents>
 			</ul>
@@ -101,8 +101,8 @@
 					<h3 class="entry-title"><a href="#URL_ARTICLE" rel="bookmark">[(#TITRE|couper{30,'...'})]</a></h3>
 					<small class="invisible"><abbr class="published"[ title="(#DATE|date_iso)"]>[(#DATE|affdate_jourcourt)]</abbr></small>
 					<small>[(#SOUSTITRE)]</small>
-					[<div class="#EDIT{intro} introduction entry-content">(#INTRODUCTION|couper{[(#REM|?{'','100'}|moins{[(#SOUSTITRE|strlen)]})],'...'})</div>]
-					<a class="lire-la-suite" title="[(#TITRE|texte_backend)]" href="#URL_ARTICLE"><:lire_la_suite:> +</a>
+					[<div class="#EDIT{intro} introduction entry-content">(#INTRODUCTION**|supprimer_tags|couper{[(#REM|?{'','100'}|moins{[(#SOUSTITRE|strlen)]})],'...'})</div>]
+					<a class="lire-la-suite" href="#URL_ARTICLE"><:zpip:lire_la_suite:><span class="lire-la-suite-titre"><:zpip:lire_la_suite_de:> <em>#TITRE</em></span></a>
 				</li>
 				</BOUCLE_articles_coupsdecoeur>
 			</ul>

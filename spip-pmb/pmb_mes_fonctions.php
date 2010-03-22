@@ -717,11 +717,9 @@ function pmb_ws_liste_tri_recherche() {
 // retourne un tableau associatif contenant tous les champs d'une notice 
 function pmb_notice_extraire ($id_notice, $url_base, $mode='auto') {
 	$tableau_resultat = Array();
-	
 	pmb_ws_charger_wsdl($ws, $url_base);
 	pmb_ws_recuperer_notice($id_notice, $ws, $tableau_resultat);
 	return $tableau_resultat;
-			
 }
 
 
