@@ -21,7 +21,7 @@
 
 										      
 									    </span>]
-								[<div class="introduction entry-content[ (#ENV{surlignable}|oui)surlignable]">(#ENV{notice}|pmb_notice_champ{'resume'}|couper{250,'...'})</div>]
+								[<div class="introduction entry-content[ (#ENV{surlignable}|oui)surlignable]">(#ENV{notice}|pmb_notice_champ{'resume'}|couper{[(#ENV{longueur_resume,250})],'...'})</div>]
 								<div class="meta-publi">
 								    <a class="lire-la-suite" href="[(#URL_PAGE{notice_display,id=[(#ENV{notice}|pmb_notice_champ{'id'})]})]"><:zpip:lire_la_suite:><span class="lire-la-suite-titre"><:zpip:lire_la_suite_de:> <em>[(#ENV{notice}|pmb_notice_champ{'titre'})]</em></span></a>
 								    

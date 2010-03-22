@@ -353,15 +353,6 @@ function pmb_recherche_extraire($recherche='', $url_base, $look_ALL='', $look_AU
 			  if ($id_section) $search[] = array("inter"=>"and","field"=>17,"operator"=>"EQ", "value"=>$id_section);							if ($id_location) $search[] = array("inter"=>"and","field"=>16,"operator"=>"EQ", "value"=>$id_location);
 		}
 	}
-	
-		 
-	//récupérer le résultat d'une recherchevia les webservices
-	
-	global $gtresultat;
-	$gtresultat = array();
-	
-	
-	
 	pmb_ws_charger_wsdl($ws, $url_base);
 	try {	
 			$tableau_resultat[0] = Array();
@@ -377,18 +368,8 @@ function pmb_recherche_extraire($recherche='', $url_base, $look_ALL='', $look_AU
 			$searchId=$r["searchId"];
 			$tableau_resultat[0]['nb_resultats'] = $r["nbResults"];
 	    
-			//R�cup�ration des 10 premiers r�sultats
-			/*Les formats peuvent-�tre :
-				pmb_xml_unimarc pour du xml.
-				json_unimarc pour du javascript.
-				serialized_unimarc pour du php.
-				header, isbd, isbd_suite pour du texte.
-				dc, oai_dc pour du dublin core.
-				convert:truc pour un passage pas admin/convert dans le format truc.
-				autre: renvoi l'id de la notice.
-			*/ 
-			  $r=$ws->pmbesOPACAnonymous_fetchSearchRecordsArray($searchId,$debut,$fin,"utf8");
-			  $i = 1;
+			$r=$ws->pmbesOPACAnonymous_fetchSearchRecordsArray($searchId,$debut,$fin,"utf8");
+			$i = 1;
 			  if (is_array($r)) {
 			      foreach($r as $value) {
 				    $tableau_resultat[$i] = Array();				
@@ -542,10 +523,7 @@ function pmb_ws_parser_notice_array($value, &$tresultat) {
 
 	    //si pas de numéro isbn (exemple jouets ludothèque) il n'y aura pas de logo
 	     if ($tresultat['isbn'] == '') $tresultat['logo_src'] = '';
-	     //cas où il n'y a pas d'image pmb renvoie un carré de 1 par 1 transparent.
-	   /* $tmp_img = image_reduire("<img src=\"".copie_locale($tresultat['logo_src'])."\" />", 130, 0);
-	    if (strpos($tmp_img, "L1xH1") !== false)  $gtresultat['logo_src'] = "";
-	    */
+	     
 	    $tresultat['id'] = $id_notice;
 	    
 
