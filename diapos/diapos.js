@@ -1,7 +1,7 @@
 $(document).ready(function() {
 	//Met la premiere image en active
 	$(".choix_image").show();
-	$(".choix_image a:first").addClass("active");
+	$(".choix_image a:first-child").addClass("active");
 	//Cherche la largeur et la quantite des images 
 	var imageWidthPa = $(".fenetrepa").width();
 	var imageWidthPo = $(".fenetrepo").width();
@@ -32,7 +32,7 @@ $(document).ready(function() {
 		play = setInterval(function(){ //Temps de vision
 			$active = $('.choix_image a.active').next();
 			if ( $active.length === 0) { //Et a la fin...
-				$active = $('.choix_image a:first'); //On prend les memes et on recommence ;)
+				$active = $('.choix_image a:first-child'); //On prend les memes et on recommence ;)
 			}
 			rotate();
 		}, 7000); //On peut ajuster le tems en milisecondes
