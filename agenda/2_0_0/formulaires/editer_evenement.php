@@ -2,7 +2,7 @@
 /**
  * Plugin Agenda pour Spip 2.0
  * Licence GPL
- * 
+ *
  *
  */
 include_spip('inc/actions');
@@ -10,7 +10,7 @@ include_spip('inc/editer');
 include_spip('inc/autoriser');
 
 function formulaires_editer_evenement_charger_dist($id_evenement='new', $id_article=0, $retour='', $lier_trad = 0, $config_fonc='evenements_edit_config', $row=array(), $hidden=''){
-	
+
 	$valeurs = formulaires_editer_objet_charger('evenement',$id_evenement,$id_article,0,$retour,$config_fonc,$row,$hidden);
 
 	if (!$valeurs['id_article'])
@@ -46,11 +46,11 @@ function formulaires_editer_evenement_charger_dist($id_evenement='new', $id_arti
 	// dispatcher date et heure
 	list($valeurs["date_debut"],$valeurs["heure_debut"]) = explode(' ',date('d/m/Y H:i',strtotime($valeurs["date_debut"])));
 	list($valeurs["date_fin"],$valeurs["heure_fin"]) = explode(' ',date('d/m/Y H:i',strtotime($valeurs["date_fin"])));
-	
+
 	// traiter specifiquement l'horaire qui est une checkbox
 	if (_request('date_debut') AND !_request('horaire'))
 		$valeurs['horaire'] = 'oui';
-		
+
 	// Pouvoir interdire l'affichage de l'inscription (puisque ce n'est pas traite' par le plugin)
 	$valeurs['affiche_inscription'] = $GLOBALS['agenda_affiche_inscription'];
 
@@ -64,15 +64,15 @@ function evenements_edit_config(){
 function formulaires_editer_evenement_verifier_dist($id_evenement='new', $id_article=0, $retour='', $lier_trad = 0, $config_fonc='evenements_edit_config', $row=array(), $hidden=''){
 	$erreurs = formulaires_editer_objet_verifier('evenement',$id_evenement,array('titre','date_debut','date_fin'));
 
-	include_spip('inc/agenda_gestion');
-	
-	$horaire = _request('horaire')=='non'?false:true;	
+	include_spip('inc/date_gestion');
+
+	$horaire = _request('horaire')=='non'?false:true;
 	$date_debut = verifier_corriger_date_saisie('debut',$horaire,$erreurs);
 	$date_fin = verifier_corriger_date_saisie('fin',$horaire,$erreurs);
-	
+
 	if ($date_debut AND $date_fin AND $date_fin<$date_debut)
 		$erreurs['date_fin'] = _T('agenda:erreur_date_avant_apres');
-	
+
 	include_spip('spip_bonux_fonctions');
 	if (count($id = picker_selected(_request('parents_id'),'article'))
 	  AND $id = reset($id)
