@@ -7,7 +7,7 @@ function fancybox_insert_head($flux){
 	if (!is_array($config))
 		$config = array();
 	$config = array_merge(array(
-		'selecteur_galerie' => '#documents_portfolio .fancybox',
+		'selecteur_galerie' => '#documents_portfolio .fancybox, .documents_portfolio .fancybox',
 		'selecteur_commun' => '.fancybox',
 		'padding' => '10',
 		'imagescale' => 'true',
