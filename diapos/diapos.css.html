@@ -1,7 +1,9 @@
-[(#REM) <style> ]
-#CACHE{0*3600*100,cache-client}
-#HTTP_HEADER{Content-type: text/css; charset=iso-8859-15}
+
+
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
 #HTTP_HEADER{Vary: Accept-Encoding}
+
 #SET{largeur_imagespa,#CONFIG{diapos/largeur_imagespa,400px}}
 #SET{hauteur_imagespa,#CONFIG{diapos/hauteur_imagespa,258px}}
 #SET{largeur_imagespo,#CONFIG{diapos/largeur_imagespo,200px}}
@@ -20,4 +22,3 @@
 .choix_image a.active:focus {border:none;}
 .choix_image a.active{width:20px; height:20px; font-weight:bold; background:#FB5; color:#222;}
 .choix_image a:hover{font-weight:bold;}
-[(#REM) </style> ]
