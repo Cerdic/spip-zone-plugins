@@ -4,7 +4,7 @@
 	<select name="var_theme">
 		<option value=""><:zengarden:themes:></option>
 		<BOUCLE_themes(POUR){tableau #ENV{tous,''}|zengarden_liste_themes}{par chemin_tri}>
-			<option value="#CLE">[(#VALEUR|table_valeur{nom}|typo|extraire_multi)]</option>
+			<option value="#CLE">[(#VALEUR|table_valeur{nom}|typo|extraire_multi|textebrut)]</option>
 		</BOUCLE_themes>
 	</select>
 	<input type="submit" value="<:ok:>" />
