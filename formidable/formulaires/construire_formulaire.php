@@ -326,7 +326,7 @@ function formidable_generer_saisie_configurable($saisie, $env){
 	}
 	
 	// On génère le HTML de la saisie
-	$html = generer_saisie($saisie, $env);
+	$html = saisies_generer_html($saisie, $env);
 	
 	return $html;
 }
