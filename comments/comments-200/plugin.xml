@@ -2,7 +2,7 @@
 <nom>Commentaires</nom>
 <icon>icon.png</icon>
 <auteur>[romy.tetue.net->http://romy.tetue.net] - 2009 - Licence GPL</auteur>
-<version>0.3</version>
+<version>0.4.0</version>
 <etat>dev</etat>
 <description>PLUGIN INSTABLE, encore en d&eacute;veloppement&nbsp;!
 _ Tout pour construire des commentaires&nbsp;:
@@ -16,6 +16,7 @@ _ Tout pour construire des commentaires&nbsp;:
 <prefix>comments</prefix>
 <chemin dir="" />
 <chemin dir="feed/" />
+<fonctions>comments_pipelines.php</fonctions>
 <pipeline>
 	<nom>pre_boucle</nom>
 	<inclure>comments_pipelines.php</inclure>
