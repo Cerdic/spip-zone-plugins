@@ -317,52 +317,50 @@ function saisies_verifier($formulaire){
  * Génère une saisie à partir d'un tableau la décrivant et de l'environnement
  * Le tableau doit être de la forme suivante :
  * array(
- *		'type_saisie' => 'input',
- *		'nom' => 'le_name',
- *		'label' => 'Un titre plus joli',
- *		'obligatoire' => 'oui',
- *		'explication' => 'Remplissez ce champ en utilisant votre clavier.',
- *		0 => array(une saisie enfant),
- *		1 => array(une autre saisie enfant),
- *		2 => array(etc)
+ *		'saisie' => 'input',
+ *		'options' => array(
+ *			'nom' => 'le_name',
+ *			'label' => 'Un titre plus joli',
+ *			'obligatoire' => 'oui',
+ *			'explication' => 'Remplissez ce champ en utilisant votre clavier.'
+ *		)
  * )
- * Les options de la saisie ont une clé textuelle, tandis que les éventuelles saisies enfants ont des clés numériques indiquant leur rang.
- * 
- * @param array $saisie La description d'une saisie sous la forme d'un tableau
- * @param arary $env L'environnement dans lequel sera construit la saisie (sert notamment pour récupérer la valeur du champ)
- * @return string Retourne le HTML de la saisie
  */
-function saisies_generer_html($saisie, $env=array()){
+function saisies_generer_html($champ, $env=array()){
 	
 	// Si le parametre n'est pas bon, on genere du vide
-	if (!is_array($saisie))
+	if (!is_array($champ))
 		return '';
 	
-	// On sépare les options et les saisies enfants
-	$cles = array_keys($saisie);
-	// Les saisies enfants ce sont les clés numériques
-	$cles_enfants = array_filter($cles, 'is_int');
-	// Les options ce sont les autres
-	$cles_options = array_diff($cles, $cles_enfants);
-	// On remet les clés en tant que clés
-	$cles_enfants = array_flip($cles_enfants);
-	$cles_options = array_flip($cles_options);
-	// On récupère chaque morceaux
-	$options = array_intersect_key($saisie, $cles_options);
-	$enfants = array_intersect_key($saisie, $cles_enfants);
+	$contexte = array();
 	
-	// Le contexte c'est d'abord les options de la saisie
+	// On sélectionne le type de saisie
+	$contexte['type_saisie'] = $champ['saisie'];
+	
 	// Peut-être des transformations à faire sur les options textuelles
-	$contexte = _T_ou_typo($options, 'multi');
+	$options = $champ['options'];
+	foreach ($options as $option => $valeur){
+		$options[$option] = _T_ou_typo($valeur, 'multi');
+	}
 	
-	// Si on ne trouve pas de type de saisie on met input par defaut
-	if (!$contexte['type_saisie'])
-		$contexte['type_saisie'] = 'input';
+	// On ajoute les options propres à la saisie
+	$contexte = array_merge($contexte, $options);
 	
-	// Si env est définie dans les options, on ajoute tout l'environnement
-	if(isset($contexte['env'])){
+	// Si env est définie dans les options ou qu'il y a des enfants, on ajoute tout l'environnement
+	if(isset($contexte['env']) or is_array($champ['saisies'])){
 		unset($contexte['env']);
-		// Les options de la saisie sont prioritaires sur l'environnement
+		
+		// À partir du moment où on passe tout l'environnement, il faut enlever certains éléments qui ne doivent absolument provenir que des options
+		unset($env['inserer_debut']);
+		unset($env['inserer_fin']);
+		$saisies_disponibles = saisies_lister_disponibles();
+		if (is_array($saisies_disponibles[$contexte['type_saisie']]['options'])){
+			$options_a_supprimer = saisies_lister_champs($saisies_disponibles[$contexte['type_saisie']]['options']);
+			foreach ($options_a_supprimer as $option_a_supprimer){
+				unset($env[$option_a_supprimer]);
+			}
+		}
+		
 		$contexte = array_merge($env, $contexte);
 	}
 	// Sinon on ne sélectionne que quelques éléments importants
@@ -385,10 +383,9 @@ function saisies_generer_html($saisie, $env=array()){
 	else
 		$contexte['valeur'] = $env[$contexte['nom']];
 	
-	// S'il y a des saisies enfants, on les ajoute au contexte
-	if ($enfants and is_array($enfants)){
-		$contexte['saisies'] = $enfants;
-	}
+	// Si ya des enfants on les remonte dans le contexte
+	if (is_array($champ['saisies']))
+		$contexte['saisies'] = $champ['saisies'];
 	
 	// On génère la saisie
 	return recuperer_fond(

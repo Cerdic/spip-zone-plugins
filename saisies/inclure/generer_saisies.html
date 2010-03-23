@@ -37,6 +37,6 @@
 ]
 <BOUCLE_contenu(POUR){tableau #ENV{saisies}}>
 [(#VAL{saisie}|array_key_exists{#VALEUR}|oui)
-[(#VALEUR|generer_saisie{#ENV**|unserialize})]
+[(#VALEUR|saisies_generer_html{#ENV**|unserialize})]
 ]
 </BOUCLE_contenu>
