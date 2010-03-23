@@ -5,16 +5,18 @@
 				<div class="cadre_imagepa">
 					<BOUCLE_IMAGE(DOCUMENTS){id_article}{titre==^[0-9]}{extension IN png,jpg,gif}{mode=image}{par num titre}>
 						<a href="#"  rel="#TITRE">
-						[(#FICHIER|image_reduire{[(#CONFIG{diapos/largeur_imagespa}|sinon{600px})],[(#CONFIG{diapos/hauteur_imagespa}|sinon{480px})]})]
+						<img src="[(#FICHIER)]" alt="#TITRE" />
 						</a>
 					</BOUCLE_IMAGE>      
 				</div>
     			</div>
+    			
     			<div class="choix_image">
 		    		<BOUCLE_NUMERO_IMAGE(DOCUMENTS){id_article}{titre==^[0-9]}{extension IN png,jpg,gif}{mode=image}{par num titre}>
 					<a href="#" rel="#TITRE">#TITRE</a>
 				</BOUCLE_NUMERO_IMAGE>       
 			</div>
+			
 		</div>
 	</B_IMAGE>
 </BOUCLE_DIAPOS>

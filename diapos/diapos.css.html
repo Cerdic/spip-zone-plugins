@@ -2,17 +2,19 @@
 #HTTP_HEADER{Content-Type: text/css; #CHARSET=iso-8859-15}
 #HTTP_HEADER{Vary: Accept-Encoding}
 
-.cadrepa {margin:[(#CONFIG{diapos/marges_imagespa}|sinon{1em 1em 1em 1em})];float:left; clear:both; position:relative; z-index:1900; border-bottom: 0.5em solid #FB5;}
-.cadrepo {margin:[(#CONFIG{diapos/marges_imagespo}|sinon{1em 1em 1em 1em})];float:left; clear:both; position:relative; z-index:1900; border-bottom: 0.5em solid #FB5;}
-.fenetrepa {width:[(#CONFIG{diapos/largeur_imagespa}|sinon{400px})]; height:[(#CONFIG{diapos/hauteur_imagespa}|sinon{258px})];overflow:hidden; position:relative;}
-.fenetrepo {width:[(#CONFIG{diapos/largeur_imagespo}|sinon{200px})]; height:[(#CONFIG{diapos/hauteur_imagespo}|sinon{258px})];overflow:hidden; position:relative;}
+.cadrepa {margin:[(#CONFIG{diapos/marges_imagespa})];float:left; clear:both; position:relative; z-index:1900; border-bottom: 0.5em solid #FB5;}
+.cadrepo {margin:[(#CONFIG{diapos/marges_imagespo})];float:left; clear:both; position:relative; z-index:1900; border-bottom: 0.5em solid #FB5;}
+.fenetrepa {width:[(#CONFIG{diapos/largeur_imagespa})]; height:[(#CONFIG{diapos/hauteur_imagespa})];overflow:hidden; position:relative;}
+.fenetrepo {width:[(#CONFIG{diapos/largeur_imagespo})]; height:[(#CONFIG{diapos/hauteur_imagespo})];overflow:hidden; position:relative;}
 .cadre_imagepa {position:absolute; top:0; left:0;}
 .cadre_imagepo {position:absolute; top:0; left:0;}
 .cadre_imagepa img {float:left;}
 .cadre_imagepo img {float:left;}
-.choix_image {position:absolute; bottom:0; right:0; height:20px; z-index:2000; text-align:center; line-height:20px; background:#666; display:none;}  
+
+.relativer {position:absolute;}
+
+.choix_image {position:absolute; bottom:0; right:0; height:20px; z-index:2000; text-align:center; line-height:20px; background:#666; display:inline-block;}  
+
 .choix_image a {display:inline-block; float:left; width:20px; height:20px; text-decoration:none; color:#fff;}
-.choix_image a:focus {border:none;}
-.choix_image a.active:focus {border:none;}
+
 .choix_image a.active{width:20px; height:20px; font-weight:bold; background:#FB5; color:#222;}
-.choix_image a:hover{font-weight:bold;}
