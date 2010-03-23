@@ -40,6 +40,28 @@ function balise_BOUTONS_ADMIN_FORUM_dist($p) {
 }
 
 
+// Moderer le forum ?
+// = modifier l'objet correspondant (si forum attache a un objet)
+// = droits par defaut sinon (admin complet pour moderation complete)
+// http://doc.spip.org/@autoriser_modererforum_dist
+function autoriser_forum_moderer_dist($faire, $type, $id, $qui, $opt) {
+	$row = sql_fetsel("*", "spip_forum", "id_forum=".intval($id));
+	if (isset($row['objet']))
+		return autoriser('modererforum', $row['objet'], $row['id_objet'], $qui, $opt);
+	elseif($row['id_article'])
+		return autoriser('modererforum', 'article', $row['id_article'], $qui, $opt);
+	elseif($row['id_breve'])
+		return autoriser('modererforum', 'breve', $row['id_breve'], $qui, $opt);
+	elseif($row['id_rubrique'])
+		return autoriser('modererforum', 'rubrique', $row['id_rubrique'], $qui, $opt);
+	elseif($row['id_message'])
+		return autoriser('modererforum', 'message', $row['id_message'], $qui, $opt);
+	elseif($row['id_syndic'])
+		return autoriser('modererforum', 'site', $row['id_syndic'], $qui, $opt);
+	return false;
+}
+
+
 // surcharger les boucles FORUMS
 // pour afficher uniquement les forums public meme en preview
 function comments_pre_boucle($boucle){
