@@ -1,0 +1,9 @@
+<li>
+	<label><:societe:societe:></label>
+	<select id='id_societe' class='text' style='width:auto'[(#CONFIG{i2_societes/forme}|=={multiple}|oui) name='id_societe&#91;&#93' multiple][(#CONFIG{i2_societes/forme}|=={multiple}|non) name='id_societe']>
+		<option value=''><:societe:societe_choisir:></option>
+		<BOUCLE_societe(SOCIETES){par nom}>
+			<option value='#ID_SOCIETE'[(#ID_SOCIETE|=={#ENV{val}}|oui) selected='selected']>#NOM</option>
+		</BOUCLE_societe>
+	</select>
+</li>

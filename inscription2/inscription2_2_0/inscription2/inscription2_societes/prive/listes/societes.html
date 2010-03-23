@@ -1,0 +1,37 @@
+<B_listes>
+<div class='liste'>
+	#ANCRE_PAGINATION
+	<:societe:liste_societes|bandeau_titre_boite2{"","#D3D3D3","black"}:>
+	<table width='100%' cellpadding='4' cellspacing='0' border='0'>
+		<BOUCLE_listes(SOCIETES){par nom}{pagination 10}>
+		<tr class="tr_liste">
+			<td class="arial11">
+				[<img src="(#CHEMIN{images/puce-verte-breve.gif'})" width="7" height="7" style="border:none" alt="" />]
+			</td>
+			<td class="arial11">
+				[(#NOM|icone_horizontale{[(#URL_ECRIRE{editer_societe}|parametre_url{id_societe,#ID_SOCIETE}|parametre_url{retour,#SELF})],#CHEMIN{images/article-24.gif},"",""})]
+			</td>
+			<td>
+			</td>
+			<td>
+			</td>
+			<td class="arial1">
+			<p class='actions'>
+				[(#AUTORISER{administrer,societe,#ID_SOCIETE})
+					<span class='lien_supprimer'><a href='#URL_ACTION_AUTEUR{supprimer_societe,#ID_SOCIETE,#SELF}' onclick="return confirm('<:societe:confirmer_supprimer_societe:>');"><:societe:icone_supprimer_societe:></a</span>
+				]
+			</p>
+			</td>
+		</tr>
+		</BOUCLE_listes>
+	</table>
+	[<div class="pagination">
+		(#PAGINATION)
+	</div>]
+</div>
+</B_listes>
+[(#AUTORISER{administrer,societe})
+	<div style="text-align:right">
+		#ENV*{icone}
+	</div>
+]

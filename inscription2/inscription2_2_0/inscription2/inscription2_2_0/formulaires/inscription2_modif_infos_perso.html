@@ -1,0 +1,167 @@
+[(#REM) information générales
+On teste la présence d'au moins un des champs pour l'afficher]
+
+[(#CONFIG{inscription2/sexe_fiche_mod}|=={on}|ou{
+[(#CONFIG{inscription2/nom_famille_fiche_mod}|=={on})]}|ou{
+[(#CONFIG{inscription2/prenom_fiche_mod}|=={on})]}|ou{
+[(#CONFIG{inscription2/logo_auteur_fiche_mod}|=={on})]}|ou{
+[(#CONFIG{inscription2/surnom_fiche_mod}|=={on})]}|ou{
+[(#CONFIG{inscription2/naissance_fiche_mod}|=={on})]}|ou{
+[(#CONFIG{inscription2/bio_fiche_mod}|=={on})]}|ou{
+[(#CONFIG{inscription2/nom_site_fiche_mod}|=={on})]}|ou{
+[(#CONFIG{inscription2/url_site_fiche_mod}|=={on})]}|ou{
+[(#CONFIG{inscription2/pgp_fiche_mod}|=={on})]}|ou{
+[(#CONFIG{inscription2/commentaire_fiche_mod}|=={on})]}|ou{
+[(#CONFIG{inscription2/adresse_fiche_mod}|=={on})]}|ou{
+[(#CONFIG{inscription2/code_postal_fiche_mod}|=={on})]}|ou{
+[(#CONFIG{inscription2/ville_fiche_mod}|=={on})]}|ou{
+[(#CONFIG{inscription2/pays_fiche_mod}|=={on})]}|ou{
+[(#CONFIG{inscription2/telephone_fiche_mod}|=={on})]}|ou{
+[(#CONFIG{inscription2/mobile_fiche_mod}|=={on})]}|ou{
+[(#CONFIG{inscription2/fax_fiche_mod}|=={on})]}|oui)
+<fieldset class="info_perso">
+    <legend>
+        <:inscription2:info_perso:>
+    </legend>
+
+    <ul>
+        [(#CONFIG{inscription2/sexe_fiche_mod}|=={on}|oui)
+        <li class="editer_sexe[ (#CONFIG{inscription2/sexe_obligatoire}|=={on}|oui)obligatoire][ (#ENV**{erreurs}|table_valeur{sexe}|oui)erreur]">
+		    <fieldset>
+			    <legend><:inscription2:civilite:></legend>
+			    <ul>
+				    <li>
+                        <input class="radio" name="sexe" id="monsieur" type="radio" [(#ENV{sexe}|=={M}|?{'checked="checked"'})] value="M" />
+    	                <label for="monsieur"> <:inscription2:masculin:></label>
+				    </li>
+				    <li>
+    	                <input class="radio" name="sexe" id="madame" type="radio" [(#ENV{sexe}|=={F}|?{'checked="checked"'})] value="F" />
+					    <label for="madame"> <:inscription2:feminin:></label>
+				    </li>
+			    </ul>
+		    </fieldset>
+		    [<p class='erreur_message'>(#ENV**{erreurs}|table_valeur{sexe})</p>]
+        </li>]
+
+        [(#CONFIG{inscription2/nom_famille_fiche_mod}|=={on}|oui)
+        <li class="editer_nom_famille[(#CONFIG{inscription2/nom_famille_obligatoire}|=={on}|oui) obligatoire][ (#ENV**{erreurs}|table_valeur{nom_famille}|oui)erreur]">
+            <label for="nom_famille"><:inscription2:nom_famille:></label>
+            <input type="text" class="text" name="nom_famille" id="nom_famille" value="#ENV{nom_famille}" />
+            [<p class='erreur_message'>(#ENV**{erreurs}|table_valeur{nom_famille})</p>]
+        </li>]
+
+        [(#CONFIG{inscription2/prenom_fiche_mod}|=={on}|oui)
+        <li class="editer_prenom[ (#CONFIG{inscription2/prenom_obligatoire}|=={on}|oui)obligatoire][ (#ENV**{erreurs}|table_valeur{prenom}|oui)erreur]">
+            <label for="prenom"><:inscription2:prenom:></label>
+            <input type="text" class="text" name="prenom" id="prenom" value="#ENV{prenom}" />
+            [<p class='erreur_message'>(#ENV**{erreurs}|table_valeur{prenom})</p>]
+        </li>
+        ]
+
+		[(#CONFIG{inscription2/logo_auteur_fiche_mod}|=={on}|oui)	
+	    <li class="editer_logo_auteur[ (#CONFIG{inscription2/logo_auteur_obligatoire}|=={on}|?{obligatoire})][ (#ENV**{erreurs}|table_valeur{logo_auteur}|oui)erreur]">
+	        <label for="logo_auteur"><:inscription2:logo_auteur:></label>
+	        <input type="file" class="text" name="logo_auteur" id="logo_auteur" value="#ENV{logo_auteur}" />
+	        [<p class='erreur_message'>(#ENV**{erreurs}|table_valeur{logo_auteur})</p>]
+	    </li>]
+        
+		[(#CONFIG{inscription2/surnom_fiche_mod}|=={on}|oui)
+        <li class="editer_surnom[ (#CONFIG{inscription2/surnom_obligatoire}|=={on}|oui)obligatoire][ (#ENV**{erreurs}|table_valeur{surnom}|oui)erreur]">
+            <label for="surnom"><:inscription2:surnom:></label>
+            <input type="text" class="text" name="surnom" id="surnom" value="#ENV{surnom}" />
+            [<p class='erreur_message'>(#ENV**{erreurs}|table_valeur{surnom})</p>]
+        </li>
+        ]
+
+        [(#CONFIG{inscription2/naissance_fiche_mod}|=={on}|oui)
+        <li class="editer_naissance[ (#CONFIG{inscription2/naissance_obligatoire}|=={on}|oui)obligatoire][ (#ENV**{erreurs}|table_valeur{naissance}|oui)erreur]">
+            <label><:inscription2:naissance:></label>
+            <INCLURE{fond=formulaires/inscription2_form_date_naissance}{annee}{mois}{jour}>
+            [<p class='erreur_message'>(#ENV**{erreurs}|table_valeur{naissance})</p>]
+        </li>]
+
+        [(#CONFIG{inscription2/bio_fiche_mod}|=={on}|oui)
+        <li class="editer_bio[ (#CONFIG{inscription2/bio_obligatoire}|=={on}|oui)obligatoire][ (#ENV**{erreurs}|table_valeur{bio}|oui)erreur]">
+            <label for="bio"><:inscription2:bio:></label>
+            <textarea name="bio" class="textarea" id="bio" rows="2" cols="20">#ENV{bio}</textarea>
+            [<p class='erreur_message'>(#ENV**{erreurs}|table_valeur{bio})</p>]
+        </li>]
+
+		[(#CONFIG{inscription2/nom_site_fiche_mod}|=={on}|oui)
+        <li class="editer_nom_site[ (#CONFIG{inscription2/nom_site_obligatoire}|=={on}|oui)obligatoire][ (#ENV**{erreurs}|table_valeur{nom_site}|oui)erreur]">
+            <label for="nom_site"><:inscription2:nom_site:></label>
+            <input type="text" class="text" name="nom_site" id="nom_site" value="#ENV{nom_site}" />
+            [<p class='erreur_message'>(#ENV**{erreurs}|table_valeur{nom_site})</p>]
+        </li>]
+
+        [(#CONFIG{inscription2/url_site_fiche_mod}|=={on}|oui)
+        <li class="editer_url_site[ (#CONFIG{inscription2/url_site_obligatoire}|=={on}|oui)obligatoire][ (#ENV**{erreurs}|table_valeur{url_site}|oui)erreur]">
+            <label for="url_site"><:inscription2:url_site:></label>
+            <input type="text" class="text" name="url_site" id="url_site" value="#ENV{url_site}" />
+            [<p class='erreur_message'>(#ENV**{erreurs}|table_valeur{url_site})</p>]
+        </li>]
+
+		[(#CONFIG{inscription2/pgp_fiche_mod}|=={on}|oui)
+        <li class="editer_pgp[ (#CONFIG{inscription2/pgp_obligatoire}|=={on}|oui)obligatoire][ (#ENV**{erreurs}|table_valeur{pgp}|oui)erreur]">
+            <label for="pgp"><:inscription2:pgp:></label>
+            <textarea name="pgp" class="textarea" id="pgp" rows="2" cols="20">#ENV{pgp}</textarea>
+            [<p class='erreur_message'>(#ENV**{erreurs}|table_valeur{pgp})</p>]
+        </li>]
+
+        [(#CONFIG{inscription2/adresse_fiche_mod}|=={on}|oui)
+        <li class="editer_adresse[ (#CONFIG{inscription2/adresse_obligatoire}|=={on}|oui)obligatoire][ (#ENV**{erreurs}|table_valeur{adresse}|oui)erreur]">
+            <label for="adresse"><:inscription2:adresse:></label>
+            <textarea name="adresse" class="textarea" id="adresse" rows="2" cols="20">#ENV{adresse}</textarea>
+            [<p class='erreur_message'>(#ENV**{erreurs}|table_valeur{adresse})</p>]
+        </li>]
+
+        [(#CONFIG{inscription2/code_postal_fiche_mod}|=={on}|oui)
+        <li class="editer_code_postal[ (#CONFIG{inscription2/code_postal_obligatoire}|=={on}|oui)obligatoire][ (#ENV**{erreurs}|table_valeur{code_postal}|oui)erreur]">
+            <label for="code_postal"><:inscription2:code_postal:></label>
+            <input type="text" class="text" name="code_postal" id="code_postal" value="#ENV{code_postal}" />
+            [<p class='erreur_message'>(#ENV**{erreurs}|table_valeur{code_postal})</p>]
+        </li>]
+
+        [(#CONFIG{inscription2/ville_fiche_mod}|=={on}|oui)
+        <li class="editer_ville[ (#CONFIG{inscription2/ville_obligatoire}|=={on}|oui)obligatoire][ (#ENV**{erreurs}|table_valeur{ville}|oui)erreur]">
+            <label for="ville"><:inscription2:ville:></label>
+            <input type="text" class="text"name="ville" id="ville" value="#ENV{ville}" />
+            [<p class='erreur_message'>(#ENV**{erreurs}|table_valeur{ville})</p>]
+        </li>]
+
+        [(#CONFIG{inscription2/pays_fiche_mod}|=={on}|oui)
+			[(#SAISIE{pays,pays,label=<:inscription2:pays:>,
+				option_intro=-,
+				obligatoire=[(#CONFIG{inscription2/pays_obligatoire}|=={on}|?{oui,non})]})]
+		]
+
+        [(#CONFIG{inscription2/telephone_fiche_mod}|=={on}|oui)
+        <li class="editer_telephone[ (#CONFIG{inscription2/telephone_obligatoire}|=={on}|oui)obligatoire][ (#ENV**{erreurs}|table_valeur{telephone}|oui)erreur]">
+            <label for="telephone"><:inscription2:telephone:></label>
+            <input type="text" class="text" name="telephone" id="telephone" value="#ENV{telephone}" />
+            [<p class='erreur_message'>(#ENV**{erreurs}|table_valeur{telephone})</p>]
+        </li>]
+
+        [(#CONFIG{inscription2/fax_fiche_mod}|=={on}|oui)
+        <li class="editer_fax[ (#CONFIG{inscription2/fax_obligatoire}|=={on}|oui)obligatoire][ (#ENV**{erreurs}|table_valeur{fax}|oui)erreur]">
+            <label for="fax"><:inscription2:fax:></label>
+            <input type="text" class="text" name="fax" id="fax" value="#ENV{fax}" />
+            [<p class='erreur_message'>(#ENV**{erreurs}|table_valeur{fax})</p>]
+        </li>]
+
+        [(#CONFIG{inscription2/mobile_fiche_mod}|=={on}|oui)
+        <li class="editer_mobile[ (#CONFIG{inscription2/mobile_obligatoire}|=={on}|oui)obligatoire][ (#ENV**{erreurs}|table_valeur{mobile}|oui)erreur]">
+            <label for="mobile"><:inscription2:mobile:></label>
+            <input type="text" class="text" name="mobile" id="mobile" value="#ENV{mobile}" />
+            [<p class='erreur_message'>(#ENV**{erreurs}|table_valeur{mobile})</p>]
+        </li>]
+
+        [(#CONFIG{inscription2/commentaire_fiche_mod}|=={on}|oui)
+        <li class="editer_commentaire[ (#CONFIG{inscription2/commentaire_obligatoire}|=={on}|oui)obligatoire][ (#ENV**{erreurs}|table_valeur{commentaire}|oui)erreur]">
+            <label><:inscription2:commentaire:></label>
+            <textarea name="commentaire" class="textarea" id="commentaire" rows="5" cols="20">#ENV{commentaire}</textarea>
+            [<p class='erreur_message'>(#ENV**{erreurs}|table_valeur{commentaire})</p>]
+        </li>]
+    </ul>
+	<br class="nettoyeur" />
+</fieldset>]

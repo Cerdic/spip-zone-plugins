@@ -1,0 +1,15 @@
+#CACHE{0}
+
+[<div>(#ENV*{message})</div>]
+[<div style="color:red; font-style:bold;">(#ENV*{commentaires}|=={1}|?{'',' '}) #ENV*{commentaires} </div>]
+
+<div>
+[(#ENV*{commentaires}|=={1}|?{' ',''})
+<?php
+$envoyer_inscription2 = charger_fonction('envoyer_inscription2','inc');
+$commentaire = $envoyer_inscription2('#ENV{id_auteur}');
+$message = ($commentaire != "ok") ? $commentaire : _T('inscription2:lisez_mail');
+echo $message ;
+?>
+]
+</div>

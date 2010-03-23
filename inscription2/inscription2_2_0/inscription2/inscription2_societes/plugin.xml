@@ -1,0 +1,46 @@
+<plugin>
+	<nom>
+		Inscription2 Soci&eacute;t&eacute;s
+	</nom>
+	<auteur>
+		&copy; Azerttyu et kent1 - 2009 - Distribu&eacute; sous licence GNU/LGPL
+	</auteur>
+	<version>
+		0.02
+	</version>
+	<etat>
+		dev
+	</etat>
+	<description>
+		Une liste de soci&eacute;t&eacute;s pour le plugin inscription2
+	</description>
+	<prefix>
+		  i2_societes
+	</prefix>
+	<install>base/i2_societes_installer.php</install>
+	<fonctions>i2_societes_fonctions.php</fonctions>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/i2_societes.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/i2_societes.php</inclure>
+	</pipeline>
+	 <pipeline>
+		<nom>i2_cfg_form</nom>
+		<inclure>i2_societes_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_droite</nom>
+		<inclure>i2_societes_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>inc/i2_societes_autoriser.php</inclure>
+	</pipeline>
+	<necessite id="cfg" version="[1.10.1;]" />
+	<necessite id="SPIP" version='[2.0.0;]' />
+	<necessite id='inscription2' version='[0.6;]' />
+	<categorie>auteur</categorie>
+</plugin>

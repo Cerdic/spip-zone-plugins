@@ -1,0 +1,62 @@
+<li class="fieldset" id="geo">
+	<fieldset>
+		<h3 class="legend"><:inscription2:geoloc:></h3>
+		<ul>
+			<li>
+				<table>
+					<thead>
+						<tr>
+							<th class="label"> </th>
+							<th style='width:140px'><:inscription2:form:> </th>
+							<th style='width:70px'> <:inscription2:fiche_mod:> </th>
+							<th style='width:70px'> <:inscription2:fiche:> </th>
+							<th style='width:70px'> <:inscription2:table:> </th>
+						</tr>
+					</thead>
+					<tr>
+						<td class="label">
+							<label for="latitude"><:inscription2:latitude:></label>
+						</td>
+						<td>
+							<input type="checkbox" name="latitude" [checked="(#CONFIG{inscription2/latitude}?{checked})"] onclick="showoblig(this)" id="latitude" />
+							<div style="[(#CONFIG{inscription2/latitude}|=={on}|?{display: block;, display:none;})]">
+								<input type="checkbox" name="latitude_obligatoire" [checked="(#CONFIG{inscription2/latitude_obligatoire}?{checked})"] id="latitude_obligatoire" />
+								<span style="color:red">*</span>
+							</div>
+						</td>
+						<td>
+							<input type="checkbox" name="latitude_fiche_mod" onclick = "enadis(this,latitude_fiche)" [checked="(#CONFIG{inscription2/latitude_fiche_mod}?{checked})"] id="latitude_fiche_mod" />
+						</td>
+						<td>
+							<input type="checkbox" name="latitude_fiche" [checked="(#CONFIG{inscription2/latitude_fiche}?{checked})"] id="latitude_fiche" [disabled ="(#CONFIG{inscription2/latitude_fiche_mod}?{disabled})"]/>
+						</td>
+						<td>
+							<input type="checkbox" name="latitude_table" [checked="(#CONFIG{inscription2/latitude_table}?{checked})"] id="latitude_table" />
+						</td>
+					</tr>
+					<tr>
+						<td class="label">
+							<label for="longitude"><:inscription2:longitude:></label>
+						</td>
+						<td>
+							<input type="checkbox" name="longitude" [checked="(#CONFIG{inscription2/longitude}?{checked})"] onclick="showoblig(this)" id="longitude" />
+							<div style="[(#CONFIG{inscription2/longitude}|=={on}|?{display: block;, display:none;})]">
+								<input type="checkbox" name="longitude_obligatoire" [checked="(#CONFIG{inscription2/longitude_obligatoire}?{checked})"] id="longitude_obligatoire" />
+								<span style="color:red">*</span>
+							</div>
+						</td>
+						<td>
+							<input type="checkbox" name="longitude_fiche_mod" onclick = "enadis(this,longitude_fiche)" [checked="(#CONFIG{inscription2/longitude_fiche_mod}?{checked})"] id="longitude_fiche_mod" />
+						</td>
+						<td>
+							<input type="checkbox" name="longitude_fiche" [checked="(#CONFIG{inscription2/longitude_fiche}?{checked})"] id="longitude_fiche" [disabled ="(#CONFIG{inscription2/longitude_fiche_mod}?{disabled})"]/>
+						</td>
+						<td>
+							<input type="checkbox" name="longitude_table" [checked="(#CONFIG{inscription2/longitude_table}?{checked})"] id="longitude_table" />
+						</td>
+					</tr>
+				</table>			
+			</li>
+		</ul>
+	</fieldset>
+</li>

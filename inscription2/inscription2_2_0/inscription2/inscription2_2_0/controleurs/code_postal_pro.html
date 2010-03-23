@@ -1,0 +1,51 @@
+[(#REM)
+
+	Controleur pour le crayon 'telfax', uniquement html
+	Validation JS pour les champs spécifiés obligatoires
+	Si les champs ne sont pas activés dans le CFG, ils n'apparaissent pas...
+]
+#CACHE{0}
+<BOUCLE_a(AUTEURS_ELARGIS){id_auteur=#ENV{id_auteurs_elargi}}{tout}>
+[<script type="text/javascript" src="(#URL_PAGE{crayons_validation.js}|parametre_url{lang,#ENV{lang}})"></script>]
+
+<script type="text/javascript">
+	if (typeof cQuery.fn.validate == "function") {
+		var me = cQuery(".auteurs_elargi-code_postal_pro-#ID_AUTEUR");
+		var id = me.crayon().find('form');
+
+		function validation(){
+			var validator = cQuery(id).validate({
+				onkeyup: function(){
+					validation();
+				},
+				showErrors: function(errors, errorList){
+					crayon_affiche_submit(me, id);
+					validator.defaultShowErrors();
+				},
+				success: function(label){
+					label.parents('li.erreur').removeClass('erreur');
+					label.remove();
+					crayon_affiche_submit(me, id)
+				}
+			});
+			//On test le formulaire pour chercher les potentielles erreurs
+			validator.form();
+			crayon_affiche_submit(me, id);
+		}
+		//On ajoute l'asterisque qui signale qu'un champ est obligatoire
+		id.find('.obligatoire label').append('*');
+		setTimeout('validation()', 500);
+	}
+</script>
+<fieldset[ style="(#ENV{style})"]>
+	<ul>
+		[(#CONFIG{inscription2/code_postal_pro_fiche_mod}|=={on}|oui)
+		[(#CONFIG{inscription2/code_postal_pro_obligatoire}|=={on}|oui)#SET{code_postal_pro_obl,true}]
+		[(#GET{code_postal_pro_obl}|?{<li class="obligatoire">,<li>})]
+		<label><:inscription2:code_postal:> : </label>
+		<input class="crayon-active text cp[(#GET{code_postal_pro_obl}|oui) obligatoire]" name="#ENV{name_code_postal_pro}" style="width:#ENV{largeur}px;" value="[(#CODE_POSTAL_PRO**|entites_html)]" />
+		</li>]
+	</ul>
+</fieldset>
+</BOUCLE_a>
+<//B_a>

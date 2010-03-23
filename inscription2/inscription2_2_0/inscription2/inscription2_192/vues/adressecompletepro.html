@@ -1,0 +1,19 @@
+[(#REM)
+
+	Vue pour le crayon 'adressecompletepro'
+
+]
+#CACHE{0}
+<span class="#EDIT{adressecompletepro} org adr">
+	
+	[(#CONFIG{inscription2/adresse_pro_fiche_mod}|?{' ',''})[<span class="street-address">(#ENV*{adresse_pro}|?{[(#ENV*{adresse_pro}|typo|n_to_br)],<:inscription2:adresse_pro:> <:inscription2:non_renseignee:>})</span><br />]]
+	
+	[(#CONFIG{inscription2/code_postal_pro_fiche_mod}|?{' ',''})[<span class="postal-code">(#ENV*{code_postal_pro}|?{[(#ENV*{code_postal_pro}|typo)],<:inscription2:code_postal_pro:> <:inscription2:non_renseigne:><br />})</span>]]
+	
+	[(#CONFIG{inscription2/ville_pro_fiche_mod}|?{' ',''})[<span class="locality">(#ENV*{ville_pro}|?{[(#ENV*{ville_pro}|typo)],<:inscription2:ville_pro:> <:inscription2:non_renseignee:>})</span><br />]]
+	
+	[(#CONFIG{inscription2/pays_pro}|?{' ',''})
+		[(#ENV*{pays_pro}|?{'',' '})<span class="country-name"><:inscription2:pays:> <:inscription2:non_renseigne:></span>]
+		[(#ENV*{pays_pro}|?{' ',''})<span class="country-name">[(#INCLURE{fond=vues/pays}{id=#ENV*{pays_pro}})]</span>]
+	]
+</span>

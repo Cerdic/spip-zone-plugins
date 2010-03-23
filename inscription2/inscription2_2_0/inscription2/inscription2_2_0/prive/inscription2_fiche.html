@@ -1,0 +1,19 @@
+<BOUCLE_auteurs(AUTEURS_ELARGIS){id_auteur}{tout}>
+	<h2 class='titrem'><:inscription2:infos_complementaires:></h2>
+	<div class='nettoyeur'></div>
+	<div id='auteur_infos_voir_supp'>
+	<BOUCLE_champscorps(POUR){tableau #CONFIG{inscription2}}{valeur = 'on'}>
+		[(#CLE|match{_table|_fiche|_obligatoire|_fiche_mod}|non)
+			[(#CLE|in_array{#ENV{exceptions}}|non)
+				[(#CHEMIN{prive/inscription2_vue_#CLE.html}|oui)
+					[(#SET{val,[(#CLE|inscription2_recuperer_champs{[(#_auteurs:ID_AUTEUR)]})]})]
+					<INCLURE{fond=prive/inscription2_vue_#CLE}{cle=#CLE}{id_auteur}{val=#GET{val}}>
+				]
+				[(#CHEMIN{prive/inscription2_vue_#CLE.html}|non)
+					[<p[ class="(#_auteurs:EDIT{#CLE})"]><strong>[(#VAL{inscription2:}|concat{#CLE}|_T)]</strong> : (#CLE|inscription2_recuperer_champs{#_auteurs:ID_AUTEUR})</p>]
+				]
+			]
+		]
+	</BOUCLE_champscorps>
+	</div>
+</BOUCLE_auteurs>

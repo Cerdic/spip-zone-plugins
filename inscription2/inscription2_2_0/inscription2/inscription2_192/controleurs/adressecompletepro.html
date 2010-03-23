@@ -1,0 +1,49 @@
+[(#REM)
+
+]
+#CACHE{0}
+<BOUCLE_a(AUTEURS_ELARGIS){id_auteur=(#ENV{id_auteurs_elargi})}>
+	<fieldset style="background-color:#fff;">
+		<legend><:inscription2:votre_adresse_pro:></legend>
+
+		[(#CONFIG{inscription2/adresse_pro}|?{' ',''})	
+		#SET{adresse_pro_obl, false}
+		[(#CONFIG{inscription2/adresse_pro_obligatoire}|=={on}|?{' ',''})#SET{adresse_pro_obl, true}]
+		[(#GET{adresse_pro_obl}|=={true}|?{<div class="obligatoire">,<div>})]		
+		<label><:inscription2:adresse_pro:></label> 
+		<textarea class="crayon-active" name="#ENV{name_adresse_pro}" style="width:#ENV{largeur}px;">
+		[(#ADRESSE_PRO**|entites_html)]
+		</textarea>
+		</div>]
+
+		[(#CONFIG{inscription2/code_postal_pro}|?{' ',''})
+		#SET{code_postal_pro_obl, false}
+		[(#CONFIG{inscription2/code_postal_pro_obligatoire}|=={on}|?{' ',''})#SET{code_postal_pro_obl, true}]
+		[(#GET{code_postal_pro_obl}|=={true}|?{<div class="obligatoire">,<div>})]
+		<label><:inscription2:code_postal_pro:></label>
+		<input class="crayon-active" name="#ENV{name_code_postal_pro}" style="width:#ENV{largeur}px;" value="[(#CODE_POSTAL_PRO**|entites_html)]" />
+		</div>]
+
+		[(#CONFIG{inscription2/ville_pro}|?{' ',''})
+		#SET{ville_pro_obligatoire, false}
+		[(#CONFIG{inscription2/ville_pro_obligatoire}|=={on}|?{' ',''}) #SET{ville_pro_obligatoire, true}]
+		[(#GET{ville_pro_obligatoire}|=={true}|?{<div class="obligatoire">,<div>})]
+		<label><:inscription2:ville_pro:></label>
+		<input class="crayon-active" name="#ENV{name_ville_pro}" style="width:#ENV{largeur}px;" value="[(#VILLE_PRO**|entites_html)]" />
+		</div>]
+
+		[(#CONFIG{inscription2/pays_pro}|?{' ',''})
+		#SET{pays_pro_obligatoire, false}
+		[(#CONFIG{inscription2/pays_pro_obligatoire}|=={on}|?{' ',''}) #SET{pays_pro_obligatoire, true}]
+		[(#GET{pays_pro_obligatoire}|=={true}|?{<div class="obligatoire">,<div>})]
+		<label><:inscription2:pays_pro:></label>
+		#SET{id,#PAYS_PRO}
+		<select class="crayon-active" name="#ENV{name_pays_pro}" onchange="testform()" style="width:#ENV{largeur}px;#ENV{style}">
+			[(#INCLURE{fond=controleurs/pays}{id=#GET{id}})]
+		</select>
+		</div>]
+
+	</fieldset>
+	
+</BOUCLE_a>
+<//B_a>
