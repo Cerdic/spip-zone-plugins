@@ -53,7 +53,7 @@
 	<necessite id="SPIP" version="[2.0.10;]" />
 	<necessite id="cfg" version="[1.14.1;]" />
 	<necessite id="spip_bonux" version="[1.8.8;]" />
-	<necessite id="saisies" version="[1.6.8;]" />
+	<necessite id="saisies" version="[1.6.10;]" />
 	<necessite id="verifier" version="[0.1;]" />
 	<necessite id="yaml" version="[1.1;]" />
 	<categorie>communication</categorie>
