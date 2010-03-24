@@ -258,7 +258,7 @@
   <description>Revisitons la barre de nav de SPIP</description>
   <prefix>bando</prefix>
  
- 	<necessite id="SPIP" version="[2.1.0-beta;2.2.0 dev)" />
+ 	<necessite id="SPIP" version="[2.1.0-beta;2.2.0 dev]" />
 
  	<fonctions>bando_fonctions.php</fonctions>
  	<options>bando_options.php</options>
@@ -494,6 +494,7 @@
 		<icone>images/configuration-24.png</icone>
 		<titre>bando:icone_preferences</titre>
 	</onglet>
+	<necessite id="SPIP" version="[2.1.0 dev;2.2.0 dev]" />
 	<chemin dir='' />
 	<chemin dir='spip21/' />
 </plugin>
