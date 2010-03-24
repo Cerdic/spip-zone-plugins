@@ -18,7 +18,6 @@ include_spip('inc/presentation');
 function exec_admin_tech_dist()
 {
 	if (!autoriser('detruire')){
-		var_dump($GLOBALS['visiteur_session']);
 		include_spip('inc/minipres');
 		echo minipres();
 	}
