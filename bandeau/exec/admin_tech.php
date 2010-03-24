@@ -18,6 +18,7 @@ include_spip('inc/presentation');
 function exec_admin_tech_dist()
 {
 	if (!autoriser('detruire')){
+		var_dump($GLOBALS['visiteur_session']);
 		include_spip('inc/minipres');
 		echo minipres();
 	}
@@ -42,14 +43,14 @@ function exec_admin_tech_dist()
 			$res = "\n<p style='text-align: justify;'>".
 				_T('texte_crash_base') .
 				"\n</p>";
-	
-			echo 
+
+			echo
 				debut_cadre_trait_couleur('',true,'',_T('texte_recuperer_base'),'reparer'),
 				generer_form_ecrire('admin_repair', $res, '', _T('bouton_tenter_recuperation')),
 				fin_cadre_trait_couleur(true);
 		}
-		
-		echo pipeline('affiche_milieu',array('args'=>array('exec'=>'admin_recuperer'),'data'=>''));	  
+
+		echo pipeline('affiche_milieu',array('args'=>array('exec'=>'admin_recuperer'),'data'=>''));
 		echo "<br />";
 
 		echo autres_bases();
