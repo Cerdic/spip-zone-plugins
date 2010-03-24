@@ -37,7 +37,7 @@ function exec_admin_restore_dist()
 
 	
 		echo debut_cadre_trait_couleur('',true,'', "",'restaurer');
-		echo admin_sauvegardes($dir_dump, _request('tri'));
+		echo admin_sauvegardes($dir_dump=_DIR_DUMP, _request('tri'));
 		echo fin_cadre_trait_couleur(true);
 
 		echo fin_gauche(), fin_page();
@@ -81,7 +81,7 @@ function admin_sauvegardes($dir_dump, $tri)
 		. parametre_url($self, 'tri', 'taille')
 		. '#sauvegardes">'
 		. _T('taille_octets', array('taille' => ''))
-	 	. '</th><th><a href="'
+	 	. '</a></th><th><a href="'
 		. parametre_url($self, 'tri', 'date')
 		. '#sauvegardes">'
 		. _T('public:date')

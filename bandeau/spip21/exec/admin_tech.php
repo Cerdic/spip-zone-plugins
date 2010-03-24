@@ -13,6 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
+include_spip('base/dump');
 
 // http://doc.spip.org/@exec_admin_tech_dist
 function exec_admin_tech_dist()
@@ -20,8 +21,7 @@ function exec_admin_tech_dist()
 	if (!autoriser('detruire')){
 		include_spip('inc/minipres');
 		echo minipres();
-	}
-	else {
+	} else {
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('titre_admin_tech'), "configuration", "base");
 
