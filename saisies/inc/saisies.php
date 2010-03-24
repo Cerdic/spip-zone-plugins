@@ -394,7 +394,7 @@ function saisies_generer_html($champ, $env=array()){
 }
 
 /*
- * Génère la suite des vues de toutes les saisies
+ * Génère une vue d'une saisie
  *
  * @param array $saisie Un tableau décrivant une saisie
  * @param array $env L'environnement, contenant normalement la réponse à la saisie
