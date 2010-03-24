@@ -192,20 +192,26 @@ function inscription2_nouveau($declaration){
 	$elargis['id_auteur'] = $n;
 	$date = date('Y-m-d');
 	//insertion des données dans la table spip_auteurs_elargis
-	if(isset($declaration['newsletters'])){
+	if (isset($declaration['newsletters'])
+	and is_array($declaration['newsletters'])) {
 		foreach($declaration['newsletters'] as $value){
 			if($value != '0')
 				spip_query("INSERT INTO `spip_auteurs_listes` 
 				(`id_auteur`, `id_liste`, `statut`, `date_inscription`) 
 				VALUES ('$n', '$value', 'valide','$date')");
 	}}
-	if(isset($declaration['zones']) && !$declaration['article']){
+	if (isset($declaration['zones'])
+	and is_array($declaration['zones'])
+	and !$declaration['article']) {
 		foreach($declaration['zones'] as $value)
-			spip_query("INSERT INTO `spip_zones_auteurs` (`id_auteur`, `id_zone`)VALUES ('$n', '$value')");
+			spip_query("INSERT INTO `spip_zones_auteurs` (`id_auteur`, `id_zone`) VALUES ('$n', '$value')");
 	}
-	if(isset($declaration['domaines']) and $declaration['zone'] and lire_config('plugin/ACCESRESTREINT')){
+	if (isset($declaration['domaines'])
+	and is_array($declaration['domaines'])
+	and $declaration['zone']
+	and lire_config('plugin/ACCESRESTREINT')){
 		foreach($declaration['zone'] as $value)
-			spip_query("INSERT INTO `spip_zones_auteurs` (`id_auteur`, `id_zone`)VALUES ('$n', '$value')");
+			spip_query("INSERT INTO `spip_zones_auteurs` (`id_auteur`, `id_zone`) VALUES ('$n', '$value')");
 	}
 	
 	$n = spip_abstract_insert('`spip_auteurs_elargis`', ('(' .join(',',array_keys($elargis)).')'), ("(" .join(", ",array_map('_q', $elargis)) .")"));
