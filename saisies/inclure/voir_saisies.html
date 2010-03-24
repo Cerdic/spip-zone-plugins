@@ -1,0 +1,5 @@
+<BOUCLE_saisies(POUR){tableau #ENV{saisies}}>
+[(#VAL{saisie}|array_key_exists{#VALEUR}|oui)
+	[(#VALEUR|saisies_generer_vue{#ENV**|unserialize})]
+]
+</BOUCLE_saisies>

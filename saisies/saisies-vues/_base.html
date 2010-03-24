@@ -1,0 +1,18 @@
+<div class="saisie_vue saisie_vue_#ENV{type_saisie} saisie_vue_#ENV{nom}[ (#ENV{li_class})]">
+	[(#REM) S'il y a des enfants on inclut que la vue ]
+	#SET{enfants,#ENV*{saisies}|et{#ENV*{saisies}|is_array}}
+	[(#GET{enfants}|oui)
+		#INCLURE{fond=saisies-vues/#ENV{type_saisie},env}
+	]
+	[(#GET{enfants}|non)
+		[<strong>(#ENV{label,#ENV{nom}})</strong>]
+		<div class="valeur">
+		[(#CHEMIN{saisies-vues/#ENV{type_saisie}.html}|oui)
+			#INCLURE{fond=saisies-vues/#ENV{type_saisie},env}
+		]
+		[(#CHEMIN{saisies-vues/#ENV{type_saisie}.html}|non)
+			[(#ENV*{valeur}|propre)]
+		]
+	]
+	</div>
+</div>

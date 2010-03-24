@@ -327,7 +327,6 @@ function saisies_verifier($formulaire){
  * )
  */
 function saisies_generer_html($champ, $env=array()){
-	
 	// Si le parametre n'est pas bon, on genere du vide
 	if (!is_array($champ))
 		return '';
@@ -392,10 +391,81 @@ function saisies_generer_html($champ, $env=array()){
 		'saisies/_base',
 		$contexte
 	);
-	
 }
 
-/**
+/*
+ * Génère la suite des vues de toutes les saisies
+ *
+ * @param array $saisie Un tableau décrivant une saisie
+ * @param array $env L'environnement, contenant normalement la réponse à la saisie
+ * @return string Retour le HTML des vues
+ */
+function saisies_generer_vue($saisie, $env=array()){
+	// Si le paramètre n'est pas bon, on génère du vide
+	if (!is_array($saisie))
+		return '';
+	
+	$contexte = array();
+	
+	// On sélectionne le type de saisie
+	$contexte['type_saisie'] = $saisie['saisie'];
+	
+	// Peut-être des transformations à faire sur les options textuelles
+	$options = $saisie['options'];
+	foreach ($options as $option => $valeur){
+		$options[$option] = _T_ou_typo($valeur, 'multi');
+	}
+	
+	// On ajoute les options propres à la saisie
+	$contexte = array_merge($contexte, $options);
+	
+	// Si env est définie dans les options ou qu'il y a des enfants, on ajoute tout l'environnement
+	if(isset($contexte['env']) or is_array($saisie['saisies'])){
+		unset($contexte['env']);
+		
+		// À partir du moment où on passe tout l'environnement, il faut enlever certains éléments qui ne doivent absolument provenir que des options
+		$saisies_disponibles = saisies_lister_disponibles();
+		if (is_array($saisies_disponibles[$contexte['type_saisie']]['options'])){
+			$options_a_supprimer = saisies_lister_champs($saisies_disponibles[$contexte['type_saisie']]['options']);
+			foreach ($options_a_supprimer as $option_a_supprimer){
+				unset($env[$option_a_supprimer]);
+			}
+		}
+		
+		$contexte = array_merge($env, $contexte);
+	}
+	
+	// Dans tous les cas on récupère de l'environnement la valeur actuelle du champ
+	
+	// On regarde en priorité s'il y a un tableau listant toutes les valeurs
+	if ($env['valeurs'] and is_array($env['valeurs']) and $env['valeurs'][$contexte['nom']]){
+		$contexte['valeur'] = $env['valeurs'][$contexte['nom']];
+	}
+	// Si le nom du champ est un tableau indexé, il faut parser !
+	elseif (preg_match('/([\w]+)((\[[\w]+\])+)/', $contexte['nom'], $separe)){
+		$contexte['valeur'] = $env[$separe[1]];
+		preg_match_all('/\[([\w]+)\]/', $separe[2], $index);
+		// On va chercher au fond du tableau
+		foreach($index[1] as $cle){
+			$contexte['valeur'] = $contexte['valeur'][$cle];
+		}
+	}
+	// Sinon la valeur est juste celle du nom
+	else
+		$contexte['valeur'] = $env[$contexte['nom']];
+	
+	// Si ya des enfants on les remonte dans le contexte
+	if (is_array($saisie['saisies']))
+		$contexte['saisies'] = $saisie['saisies'];
+	
+	// On génère la saisie
+	return recuperer_fond(
+		'saisies-vues/_base',
+		$contexte
+	);
+}
+
+/*
  * Génère un nom unique pour un champ d'un formulaire donné
  *
  * @param array $formulaire Le formulaire à analyser 
