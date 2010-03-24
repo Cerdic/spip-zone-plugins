@@ -1,4 +1,4 @@
-<div class="saisie_vue saisie_vue_#ENV{type_saisie} saisie_vue_#ENV{nom}[ (#ENV{li_class})]">
+<div class="saisie_vue saisie_#ENV{type_saisie} afficher_#ENV{nom}[ (#ENV{li_class})]">
 	[(#REM) S'il y a des enfants on inclut que la vue ]
 	#SET{enfants,#ENV*{saisies}|et{#ENV*{saisies}|is_array}}
 	[(#GET{enfants}|oui)
