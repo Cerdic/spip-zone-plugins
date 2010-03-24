@@ -58,6 +58,7 @@ function exec_traiter_office () {
 	if ($flag_editable) {
 			
 		$pdf = _request("pdf");	
+		$original = _request("original");	
 		
 		$nom = $_FILES['fichier']['name'];
 		preg_match(",\.([a-zA-Z]*)$,", $nom, $reg);
@@ -81,6 +82,7 @@ function exec_traiter_office () {
 		$nom_dest = sous_repertoire(_DIR_TMP, 'upload_office').$nom.".".$terminaison;
 		$nom_html = sous_repertoire(_DIR_TMP, 'upload_office').$nom.".html";
 		$nom_pdf = sous_repertoire(_DIR_TMP, 'upload_office').$nom.".pdf";
+		$nom_original = $nom.".$terminaison";
 		
 		$i = 0;
 		while (file_exists($nom_dest)) {
@@ -88,6 +90,7 @@ function exec_traiter_office () {
 			$nom_dest = sous_repertoire(_DIR_TMP, 'upload_office').$nom."-$i.".$terminaison;
 			$nom_html = sous_repertoire(_DIR_TMP, 'upload_office').$nom."-$i.html";
 			$nom_pdf = sous_repertoire(_DIR_TMP, 'upload_office').$nom."-$i.pdf";
+			$nom_original = $nom."-i.$terminaison";
 		}
 		
 		@move_uploaded_file($_FILES['fichier']['tmp_name'], $nom_dest);	
@@ -139,6 +142,7 @@ function exec_traiter_office () {
 							copy($nom_pdf, $dest_pdf);
 							$taille = filesize($dest_pdf);
 							$id_document = sql_insertq("spip_documents", array(
+								"titre" => "Le document au format PDF",
 								"extension" => "pdf",
 								"date" => "NOW()",
 								"fichier" => "pdf/$nom-$i.pdf",
@@ -158,7 +162,35 @@ function exec_traiter_office () {
 						}
 
 					}
-					
+					if ($original) {
+						// Verifier que c'est un format accepte
+						include_spip("base/typedoc");
+						if ($GLOBALS["tables_mime"]["$terminaison"]) {
+							copy($nom_dest, sous_repertoire(_DIR_IMG, $terminaison).$nom_original);
+							$taille = filesize($nom_original);
+							
+							
+							$id_document = sql_insertq("spip_documents", array(
+								"titre" => "Le document ".$GLOBALS["tables_documents"]["$terminaison"],
+								"extension" => "$terminaison",
+								"date" => "NOW()",
+								"fichier" => "$terminaison/$nom_original",
+								"mode" => "document",
+								"distant" => "non",
+								"maj" => "NOW()",
+								"taille" => $taille
+							));
+							if ($id_document > 0) {
+								sql_insertq("spip_documents_liens", array(
+									"id_document" => $id_document,
+									"id_objet" => $id_article,
+									"objet" => "article",
+									"vu" => "non"
+								));
+							}
+						}
+					}
+										
 					
 					header("location:index.php?exec=articles&id_article=$id_article");
 				} else {
