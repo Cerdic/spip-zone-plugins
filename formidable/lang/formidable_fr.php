@@ -1,6 +1,10 @@
 <?php
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+'analyse_avec_reponse' => 'Réponses non-vide',
+'analyse_sans_reponse' => 'Laissés blanc',
+'analyse_longueur_moyenne' => 'Longueur moyenne en nombre de mots',
+
 'bouton_formulaires' => 'Formulaires',
 
 'construire_action_annuler' => 'Annuler',
