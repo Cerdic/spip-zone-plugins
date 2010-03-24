@@ -18,7 +18,9 @@ function office2spip_affiche_enfants($args) {
 		$ret .= "<form action='index.php' method='post' enctype='multipart/form-data'>";
 		$ret .= "<input type='hidden' name='exec' value='traiter_office' />";
 		$ret .= "<input type='hidden' name='id_rubrique' value='$id_rubrique' />";
-		$ret .= "<input type='file' name='fichier' />";
+		$ret .= "<div><input type='file' name='fichier' /></div>";
+//		$ret .= "<div><input type='checkbox' value='oui' name='original' />Joindre le document d’origine à l'article</div>";
+		$ret .= "<div><input type='checkbox' value='oui' name='pdf' />Créer et joindre un fichier PDF du document</div>";
 		$ret .= "<div style='text-align: right;'><input type='submit' value='Installer' /></div>";
 		$ret .= "</form>";
 		$ret .= "</div>";

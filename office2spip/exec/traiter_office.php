@@ -57,6 +57,8 @@ function exec_traiter_office () {
 	$flag_editable = autoriser('publierdans','rubrique',$id_rubrique);
 	if ($flag_editable) {
 			
+		$pdf = _request("pdf");	
+		
 		$nom = $_FILES['fichier']['name'];
 		preg_match(",\.([a-zA-Z]*)$,", $nom, $reg);
 		$terminaison = $reg[1];
@@ -78,12 +80,14 @@ function exec_traiter_office () {
 		
 		$nom_dest = sous_repertoire(_DIR_TMP, 'upload_office').$nom.".".$terminaison;
 		$nom_html = sous_repertoire(_DIR_TMP, 'upload_office').$nom.".html";
+		$nom_pdf = sous_repertoire(_DIR_TMP, 'upload_office').$nom.".pdf";
 		
 		$i = 0;
 		while (file_exists($nom_dest)) {
 			$i++;
 			$nom_dest = sous_repertoire(_DIR_TMP, 'upload_office').$nom."-$i.".$terminaison;
 			$nom_html = sous_repertoire(_DIR_TMP, 'upload_office').$nom."-$i.html";
+			$nom_pdf = sous_repertoire(_DIR_TMP, 'upload_office').$nom."-$i.pdf";
 		}
 		
 		@move_uploaded_file($_FILES['fichier']['tmp_name'], $nom_dest);	
@@ -125,6 +129,34 @@ function exec_traiter_office () {
 						sql_updateq("spip_articles", array(
 							"texte" => $texte
 						), "id_article=$id_article");
+					}
+					
+					if ($pdf) {
+						$erreur = @exec("unoconv --format=pdf $nom_dest");
+						
+						if (file_exists($nom_pdf)) {
+							$dest_pdf = sous_repertoire(_DIR_IMG, 'pdf').$nom."-$i.pdf";
+							copy($nom_pdf, $dest_pdf);
+							$taille = filesize($dest_pdf);
+							$id_document = sql_insertq("spip_documents", array(
+								"extension" => "pdf",
+								"date" => "NOW()",
+								"fichier" => "pdf/$nom-$i.pdf",
+								"mode" => "document",
+								"distant" => "non",
+								"maj" => "NOW()",
+								"taille" => $taille
+							));
+							if ($id_document > 0) {
+								sql_insertq("spip_documents_liens", array(
+									"id_document" => $id_document,
+									"id_objet" => $id_article,
+									"objet" => "article",
+									"vu" => "non"
+								));
+							}
+						}
+
 					}
 					
 					
