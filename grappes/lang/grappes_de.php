@@ -58,7 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // T
 'texte_descriptif' => 'Beschreibung',
 
-'titre_grappe' => 'Traube',
+'titre_grappe' => 'Trauben',
 'titre_nouvelle_grappe' => 'Neue Traube',
 'titre_page_grappes' => 'Trauben',
 
