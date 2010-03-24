@@ -42,6 +42,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'formulaires_supprimer_confirmation' => 'Attention, cela supprimera aussi tous les r&eacute;sultats. &Ecirc;tes-vous s&ucirc;r de vouloir supprimer ce formulaire ?',
 'formulaires_tous' => 'Tous les formulaires',
 
+'reponse_intro' => '@auteur@ a r&eacute;pondu au formulaire @formulaire@',
+'reponse_numero' => 'R&eacute;ponse num&eacute;ro :',
+'reponse_supprimer' => 'Supprimer cette r&eacute;ponse',
+'reponse_supprimer_confirmation' => '&Ecirc;tes-vous s&ucirc;r de vouloir supprimer cette r&eacute;ponse ?',
 'reponses_analyse' => 'Statistiques',
 'reponses_anonyme' => 'Anonyme',
 'reponses_auteur' => 'Utilisateur',

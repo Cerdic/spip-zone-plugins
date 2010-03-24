@@ -10,7 +10,7 @@ function formidable_declarer_tables_interfaces($interface){
 	$interface['table_des_tables']['formulaires_reponses_champs'] = 'formulaires_reponses_champs';
 	
 	
-	$interface['table_titre']['formulaires'] = 'titre, lang';
+	$interface['table_titre']['formulaires'] = 'titre';
 	
 	$interface['tables_jointures']['spip_formulaires'][] = 'formulaires_liens';
 	$interface['tables_jointures']['spip_articles'][] = 'formulaires_liens';

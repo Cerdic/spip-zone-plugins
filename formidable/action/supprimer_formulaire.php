@@ -5,7 +5,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
  * Action de suppression d'un formulaire
- * @param unknown_type $arg
+ * @param int $arg
  * @return unknown_type
  */
 function action_supprimer_formulaire_dist($arg=null) {
@@ -14,7 +14,7 @@ function action_supprimer_formulaire_dist($arg=null) {
 		$arg = $securiser_action();
 	}
 
-	// si id_formulaire n'est pas un nombre, c'est une creation
+	// si id_formulaire n'est pas un nombre, on ne fait rien
 	if ($id_formulaire = intval($arg)) {
 		// On supprime le formulaire lui-même
 		$ok = sql_delete(
