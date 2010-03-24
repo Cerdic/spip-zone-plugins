@@ -2,7 +2,7 @@
 <nom>Commentaires</nom>
 <icon>icon.png</icon>
 <auteur>[romy.tetue.net->http://romy.tetue.net] - 2009 - Licence GPL</auteur>
-<version>0.4.1</version>
+<version>0.5.0</version>
 <etat>dev</etat>
 <description>PLUGIN INSTABLE, encore en d&eacute;veloppement&nbsp;!
 _ Tout pour construire des commentaires&nbsp;:
@@ -23,6 +23,10 @@ _ Tout pour construire des commentaires&nbsp;:
 </pipeline>
 <pipeline>
 	<nom>autoriser</nom>
+	<inclure>comments_pipelines.php</inclure>
+</pipeline>
+<pipeline>
+	<nom>formulaire_traiter</nom>
 	<inclure>comments_pipelines.php</inclure>
 </pipeline>
 <necessite id="SPIP" version="[2.0.9;]" />

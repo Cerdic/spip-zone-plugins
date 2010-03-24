@@ -1,7 +1,7 @@
 <?php
 /*
  * Plugin Comments
- * (c) 2010 xxx
+ * (c) 2010 Collectif
  * Distribue sous licence GPL
  *
  */
@@ -40,10 +40,18 @@ function balise_BOUTONS_ADMIN_FORUM_dist($p) {
 }
 
 
-// Moderer le forum ?
-// = modifier l'objet correspondant (si forum attache a un objet)
-// = droits par defaut sinon (admin complet pour moderation complete)
-// http://doc.spip.org/@autoriser_modererforum_dist
+/**
+ * Moderer le forum ?
+ * = modifier l'objet correspondant (si forum attache a un objet)
+ * = droits par defaut sinon (admin complet pour moderation complete)
+ *
+ * @param <type> $faire
+ * @param <type> $type
+ * @param <type> $id
+ * @param <type> $qui
+ * @param <type> $opt
+ * @return <type>
+ */
 function autoriser_forum_moderer_dist($faire, $type, $id, $qui, $opt) {
 	$row = sql_fetsel("*", "spip_forum", "id_forum=".intval($id));
 	if (isset($row['objet']))
@@ -62,8 +70,13 @@ function autoriser_forum_moderer_dist($faire, $type, $id, $qui, $opt) {
 }
 
 
-// surcharger les boucles FORUMS
-// pour afficher uniquement les forums public meme en preview
+/**
+ * surcharger les boucles FORUMS
+ * pour afficher uniquement les forums public meme en preview
+ *
+ * @param <type> $boucle
+ * @return <type>
+ */
 function comments_pre_boucle($boucle){
 	if ($boucle->type_requete == 'forums') {
 		$id_table = $boucle->id_table;
@@ -81,4 +94,64 @@ function comments_pre_boucle($boucle){
 	return $boucle;
 }
 
+
+/**
+ * Traiter le formulaire de forum :
+ *
+ * - ne pas rediriger en fin de traitement si pas d'url demandee explicitement
+ *   et si on est pas sur la ?page=forum
+ *
+ * - preparer un message en cas de moderation
+ *
+ * @param <type> $flux
+ * @return <type>
+ */
+function comments_formulaire_traiter($flux){
+	if ($flux['args']['form']=='forum'
+		){
+		// args :
+		// $titre, $table, $type, $script,
+		// $id_rubrique, $id_forum, $id_article, $id_breve, $id_syndic,
+		// $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour
+		// si pas d'url de retour explicite
+		$redirect = $flux['data']['redirect'];
+		if (!isset($flux['args']['args'][12]) OR !$flux['args']['args'][12]){
+			// si on est pas sur la page forum, on ne redirige pas
+			// mais il faudra traiter l'ancre
+			if (!($p=_request('page')) OR $p!=='forum'){
+				unset($flux['data']['redirect']);
+				// mais on le remet editable !
+				$flux['data']['editable']=true;
+				// vider la saisie :
+				set_request('texte');
+				set_request('titre');
+				set_request('url_site');
+				set_request('ajouter_groupe');
+				set_request('ajouter_mot');
+				set_request('id_forum');
+			}
+		}
+
+		$id_forum = $flux['data']['id_forum'];
+		include_spip('base/abstract_sql');
+		$statut = sql_getfetsel('statut','spip_forum','id_forum='.intval($id_forum));
+		if ($statut=='publie'){
+			// le message est OK, il suffit de mettre une ancre !
+			$flux['data']['message_ok'] = 
+			  _T('comments:forum_confirmation_enregistre')
+				. "<script type='text/javascript'>jQuery(function(){window.location.hash='forum$id_forum';});</script>";
+			;
+		}
+		else {
+			// dire que le message a ete modere
+			$flux['data']['message_ok'] = _T('comments:forum_confirmation_modere');
+		}
+		
+		$res = $flux['data'];
+	#var_dump($flux);
+	}
+	#die('paf');
+	return $flux;
+
+}
 ?>

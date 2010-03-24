@@ -18,6 +18,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // Formulaire de commentaires
 'form_pet_message_commentaire' => 'Ajoutez votre commentaire ici',
 'forum_info_modere' => 'Attention, votre message n\'appara&icirc;tra qu\'apr&egrave;s avoir &eacute;t&eacute; relu et approuv&eacute;.',
+'forum_confirmation_enregistre' => 'Votre commentaire a bien &eacute;t&eacute; enregistr&eacute;',
+'forum_confirmation_modere' => 'Votre commentaire a bien &eacute;t&eacute; enregistr&eacute; et est en attente de relecture avant publication',
 
 'forum_votre_nom' => 'Nom',
 'forum_votre_email' => 'Courriel (non&nbsp;publi&eacute;)',
