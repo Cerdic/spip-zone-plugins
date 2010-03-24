@@ -37,7 +37,14 @@ function insert_banniere() {
 	$champs['creation'] = date('Y-m-d H:i:s');
 	
 	$id_banniere = sql_insertq("spip_bannieres", $champs);
-	
+	// on fait comme dans le core
+		# cf. bannieres_pipelines.php
+		# rattrapper les documents associes à cette nouvelle bannière
+		# ils ont un id = 0-$id_auteur
+
+		$id_auteur = $GLOBALS['visiteur_session']['id_auteur'];
+		sql_updateq("spip_documents_liens", array("id_objet" => $id_banniere), array("id_objet = ".(0-$id_auteur),"objet='banniere'"));
+
 	return $id_banniere;
 }
 

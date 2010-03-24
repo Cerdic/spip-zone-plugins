@@ -7,9 +7,18 @@ function bannieres_objets_extensibles($objets){
 function bannieres_encart($flux){
 
 	$id_banniere = $flux;
-	
-	// bloc charger document
-	$bloc_doc = afficher_documents_colonne($id_banniere, 'banniere');
+
+	// pour charger une banniere au moment de la création, on fait comme dans de core
+	// inspiré de articles_edit.php
+	if ($id_banniere!='oui'){
+
+		$bloc_doc = afficher_documents_colonne($id_banniere, 'banniere');
+
+	} else {
+
+		$bloc_doc = afficher_documents_colonne(
+			0-$GLOBALS['visiteur_session']['id_auteur'], 'banniere');
+	}
 
 	// affiche le resultat obtenu
 	$navigation =
