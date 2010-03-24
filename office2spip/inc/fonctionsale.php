@@ -138,19 +138,13 @@
 		// c est pas du html mais je le met ici quand meme
 		",\t,Uims" => " ",
 		
-		// trucs super-sales du vieux html
-		",<(font|span).*>,Uims" => "",
-		",<\/(font|span).*>,Uims" => "",
-		",<u.*>,Uims" => "",
-		",<\/u.*>,Uims" => "",
+		// trucs super-sales qui restent
+		",<(font|span|p|dl|dd|sup|sdfield|u)( [^>]*)?>,Uims" => "",
+		",<\/(font|span|p|dl|dd|sup|sdfield|u)( [^>]*)?>,Uims" => "",
 		",<center.*>,Uims" => "\n\n",
 		",<\/center.*>,Uims" => "\n\n",
 		",<col.*>,Uims" => "\n\n",
 		",<\/col.*>,Uims" => "\n\n",
-		",<sup.*>,Uims" => "",
-		",<\/sup.*>,Uims" => "",
-		",<(dl|dd).*>,Uims" => "\n\n",
-		",<\/(dl|dd).*>,Uims" => "\n\n",
 		
 	
 			);
@@ -393,7 +387,6 @@
 
 		// POST TRAITEMENT
 		$contenu = str_replace("\r", "\n", $contenu);
-
 		$contenu = preg_replace(",\n_ }}},", "}}}\n", $contenu); // Corriger les fin de groupes apres le retour chariot
 		$contenu = preg_replace(",\n_ }},", "}}\n", $contenu);
 		$contenu = preg_replace(",\n_ },", "}\n", $contenu);
@@ -410,6 +403,7 @@
 		$contenu = preg_replace(",(\n[[:blank:]]?)+\n_[[:blank:]]," , "\n\n", $contenu);
 
 		$contenu = preg_replace(",\n(?=\n\n),","",$contenu);
+		
 
 		// virer les entites a la fin seulement
 		// &nbsp; est utilise pour reperer des trucs genre "- " en debut de ligne ...
