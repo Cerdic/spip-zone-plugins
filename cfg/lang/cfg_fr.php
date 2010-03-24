@@ -54,7 +54,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reset' => 'Effacer',
 
 	// S
-	'supprimer' => 'Supprimer'
+	'supprimer' => 'Remettre les valeurs par d&eacute;faut'
 );
 
 ?>
