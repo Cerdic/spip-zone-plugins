@@ -64,23 +64,19 @@ function id_pays_to_pays($id_pays){
 }
 
 function form_hidden_env($env){
-	$hidden = '';
-	foreach(unserialize($env) as $c => $v) {
-		if(!is_array($v)){
-			if($c !="fond")
-				$hidden .= "\n<input name='" .
-					entites_html($c) .
-					"' value='" . entites_html($v) .
-					"' type='hidden' />\n";
-		}else{
-			foreach($v as $cc => $vv)
-				$hidden .= "\n<input name='" .
-					entites_html($c) .
-					"[]' value='" . entites_html($vv) .
-					"' type='hidden' />\n";
+	$hidden = array();
+	foreach (unserialize($env) as $c => $v) {
+		if (!is_array($v)) {
+			if ($c !="fond") {
+				$hidden[] = '<input name="' . entites_html($c) . '" value="' . entites_html($v) . '" type="hidden" />';
+			}
+		} else {
+			foreach ($v as $cc => $vv) {
+				$hidden[] = '<input name="' . entites_html($c) . '" value="' . entites_html($vv) . '" type="hidden" />';
+			}
 		}
 	}
-	return $hidden;
+	return implode("\n", $hidden);
 }
 
 ?>
