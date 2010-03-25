@@ -4,7 +4,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
+	
 	// O
 	'option_attention_explication' => 'Un message plus important que l\'explication.',
 	'option_attention_label' => 'Avertissement',
@@ -13,6 +13,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_class_label' => 'Classes CSS suppl&eacute;mentaires',
 	'option_cols_explication' => 'Largeur du bloc en nombre de caractères. Cette option n\'est pas toujours appliqu&eacute;e car les styles CSS de votre site peuvent l\'annuler.',
 	'option_cols_label' => 'Largeur',
+	'option_datas_label' => 'Liste des choix possibles',
+	'option_datas_explication' => 'Vous devez indiquez un choix par ligne sous la forme "cle|Label du choix"',
 	'option_defaut_label' => 'Valeur par d&eacute;faut',
 	'option_disable_avec_post_explication' => 'Identique &agrave; l\'option pr&eacute;c&eacute;dente mais poste quand m&ecirc;me la valeur dans un champ cach&eacute;.',
 	'option_disable_avec_post_label' => 'D&eacute;sactiver mais poster',
@@ -58,6 +60,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'saisie_fieldset_titre' => 'Groupe de champs',
 	'saisie_input_explication' => 'Une simple ligne de texte, pouvant &ecirc;tre visible ou masqu&eacute;e (mot de passe).',
 	'saisie_input_titre' => 'Ligne de texte',
+	'saisie_radio_defaut_choix1' => 'Un',
+	'saisie_radio_defaut_choix2' => 'Deux',
+	'saisie_radio_defaut_choix3' => 'Trois',
+	'saisie_radio_explication' => 'Permet de choisir une option parmis plusieurs disponibles.',
+	'saisie_radio_titre' => 'Boutons radios',
 	'saisie_textarea_explication' => 'Un champ de texte sur plusieurs lignes.',
 	'saisie_textarea_titre' => 'Bloc de texte',
 

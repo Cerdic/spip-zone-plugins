@@ -571,4 +571,69 @@ function saisies_autonomes(){
 	return $saisies_autonomes;
 }
 
+/*
+ * Transforme une chaine en tableau avec comme principe :
+ * - une ligne devient une case
+ * - si la ligne est de la forme truc|bidule alors truc est la clé et bidule la valeur
+ *
+ * @param string $chaine Une chaine à transformer
+ * @return array Retourne un tableau PHP
+ */
+function saisies_chaine2tableau($chaine, $separateur="\n"){
+	if ($chaine and is_string($chaine)){
+		$tableau = array();
+		// On découpe d'abord en lignes
+		$lignes = explode($separateur, $chaine);
+		foreach ($lignes as $i=>$ligne){
+			$ligne = trim(trim($ligne), '|');
+			// Si ce n'est pas une ligne sans rien
+			if ($ligne !== ''){
+				// Si on trouve un découpage dans la ligne on fait cle|valeur
+				if (strpos($ligne, '|') !== false){
+					list($cle,$valeur) = explode('|', $ligne, 2);
+					$tableau[$cle] = $valeur;
+				}
+				// Sinon on génère la clé
+				else{
+					$tableau[$i] = $ligne;
+				}
+			}
+		}
+		return $tableau;
+	}
+	// Si c'est déjà un tableau on le renvoie tel quel
+	elseif (is_array($chaine)){
+		return $chaine;
+	}
+	else{
+		return array();
+	}
+}
+
+/*
+ * Transforme un tableau en chaine de caractères avec comme principe :
+ * - une case de vient une ligne de la chaine
+ * - chaque ligne est générée avec la forme cle|valeur
+ */
+function saisies_tableau2chaine($tableau){
+	if ($tableau and is_array($tableau)){
+		$chaine = '';
+	
+		foreach($tableau as $cle=>$valeur){
+			$ligne = trim("$cle|$valeur");
+			$chaine .= "$ligne\n";
+		}
+		$chaine = trim($chaine);
+	
+		return $chaine;
+	}
+	// Si c'est déjà une chaine on la renvoie telle quelle
+	elseif (is_string($tableau)){
+		return $tableau;
+	}
+	else{
+		return '';
+	}
+}
+
 ?>
