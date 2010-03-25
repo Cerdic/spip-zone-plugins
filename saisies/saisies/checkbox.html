@@ -22,11 +22,11 @@
 
 [(#REM) defaut peut être une chaine (plusieurs valeurs ou pas) qu'on sait décomposer ]
 #SET{defaut, #ENV{defaut}}
-#SET{defaut, #GET{defaut}|is_string|?{(#GET{defaut}|saisies_chaine2tableau), #GET{defaut}}}
+#SET{defaut, #GET{defaut}|is_string|?{(#GET{defaut}|saisies_chaine2tableau), (#GET{defaut}|sinon{#ARRAY})}}
 
-<BOUCLE_radio(POUR){tableau #GET{datas}}>
+<BOUCLE_checkbox(POUR){tableau #GET{datas}}>
 <div class="#ENV{choix,choix}">
 	<input type="checkbox" name="#ENV{nom}[]" class="checkbox" id="champ_#ENV{nom}_#COMPTEUR_BOUCLE"[ (#CLE|in_array{#ENV{valeur,#GET{defaut}}}|oui)checked="checked"] value="#CLE" [ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"] />
 	<label for="champ_#ENV{nom}_#COMPTEUR_BOUCLE">#VALEUR</label>
 </div>
-</BOUCLE_radio>
+</BOUCLE_checkbox>
