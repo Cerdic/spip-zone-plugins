@@ -11,6 +11,10 @@
 </BOUCLE_champs>
 </BOUCLE_reponses>
 
-#INCLURE{fond=inclure/analyser_saisies, env, saisies=(#SAISIES|unserialize|saisies_lister_par_nom), valeurs=#GET{valeurs}}
+<BOUCLE_saisies(POUR){tableau #SAISIES|unserialize|saisies_lister_par_nom}>
+[(#VAL{saisie}|array_key_exists{#VALEUR}|oui)
+	[(#VALEUR|formidable_analyser_saisie{#GET{valeurs}})]
+]
+</BOUCLE_saisies>
 
 </BOUCLE_formulaire>

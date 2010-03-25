@@ -1,28 +1,32 @@
-<div class="analyser analyser_#ENV{nom} saisie_#ENV{type_saisie}">
-	[(#REM) S'il y a des enfants on inclut que la vue ]
-	#SET{enfants,#ENV*{saisies}|et{#ENV*{saisies}|is_array}}
-	[(#GET{enfants}|oui)
+<div class="cadre cadre-liste analyser analyser_#ENV{nom} saisie_#ENV{type_saisie}">
+<table class="liste" cellspacing="0" cellpadding="2" border="0" style="width:100%;">
+[<caption class="titrem"><strong class="caption">(#ENV{label,#ENV{nom}})</strong></caption>]
+	<tbody>
+	[(#CHEMIN{saisies-analyses/#ENV{type_saisie}.html}|oui)
 		#INCLURE{fond=saisies-analyses/#ENV{type_saisie},env}
 	]
-	[(#GET{enfants}|non)
-		[<strong>(#ENV{label,#ENV{nom}})</strong>]
-		<div class="valeur">
-		[(#CHEMIN{saisies-analyses/#ENV{type_saisie}.html}|oui)
-			#INCLURE{fond=saisies-analyses/#ENV{type_saisie},env}
+	[(#CHEMIN{saisies-analyses/#ENV{type_saisie}.html}|non)
+		#SET{plein,#ENV{valeurs}|array_filter}
+		#SET{vide,#ENV{valeurs}|array_diff_key{#GET{plein}}}
+		[(#GET{plein}|count|>{0}|oui)
+			#SET{moyenne,#VAL{str_word_count}|array_map{#GET{plein}}|array_sum|div{#GET{plein}|count}}
 		]
-		[(#CHEMIN{saisies-analyses/#ENV{type_saisie}.html}|non)
-			#SET{plein,#ENV{liste_valeurs}|array_filter}
-			#SET{vide,#ENV{liste_valeurs}|array_diff_key{#GET{plein}}}
-			[(#GET{plein}|count|>{0}|oui)
-				#SET{moyenne,#VAL{str_word_count}|array_map{#GET{plein}}|array_sum|div{#GET{plein}|count}}
-			]
-			[(#GET{plein}|count|>{0}|non)
-				#SET{moyenne,0}
-			]
-			<div class="vide"><:formidable:analyse_sans_reponse:> : [(#GET{vide}|count)]</div>
-			<div class="plein"><:formidable:analyse_avec_reponse:> : [(#GET{plein}|count)]</div>
-			<div class="moyenne"><:formidable:analyse_longueur_moyenne:> : #GET{moyenne}</div>
+		[(#GET{plein}|count|>{0}|non)
+			#SET{moyenne,0}
 		]
-		</div>
+		<tr class="tr_liste row_odd vide">
+			<td class="choix"><:formidable:analyse_sans_reponse:></td>
+			<td class="stat">[(#GET{vide}|count)]</td>
+		</tr>
+		<tr class="tr_liste row_even plein">
+			<td class="choix"><:formidable:analyse_avec_reponse:></td>
+			<td class="stat">[(#GET{plein}|count)]</td>
+		</tr>
+		<tr class="tr_liste row_odd moyenne">
+			<td class="choix"><:formidable:analyse_longueur_moyenne:></td>
+			<td class="stat">#GET{moyenne}</td>
+		</tr>
 	]
+	</tbody>
+</table>
 </div>

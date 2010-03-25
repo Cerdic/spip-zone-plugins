@@ -106,9 +106,9 @@ function formidable_verifier_reponse_formulaire($id_formulaire){
  * @param array $env L'environnement, contenant normalement la réponse à la saisie
  * @return string Retour le HTML des vues
  */
-function formidable_analyser_saisie($saisie, $env=array()){
-	// Si le paramètre n'est pas bon, on génère du vide
-	if (!is_array($saisie))
+function formidable_analyser_saisie($saisie, $valeurs=array()){
+	// Si le paramètre n'est pas bon ou que c'est un conteneur, on génère du vide
+	if (!is_array($saisie) or $saisie['saisies'])
 		return '';
 	
 	$contexte = array();
@@ -125,33 +125,13 @@ function formidable_analyser_saisie($saisie, $env=array()){
 	// On ajoute les options propres à la saisie
 	$contexte = array_merge($contexte, $options);
 	
-	// Si env est définie dans les options ou qu'il y a des enfants, on ajoute tout l'environnement
-	if(isset($contexte['env']) or is_array($saisie['saisies'])){
-		unset($contexte['env']);
-		
-		// À partir du moment où on passe tout l'environnement, il faut enlever certains éléments qui ne doivent absolument provenir que des options
-		$saisies_disponibles = saisies_lister_disponibles();
-		if (is_array($saisies_disponibles[$contexte['type_saisie']]['options'])){
-			$options_a_supprimer = saisies_lister_champs($saisies_disponibles[$contexte['type_saisie']]['options']);
-			foreach ($options_a_supprimer as $option_a_supprimer){
-				unset($env[$option_a_supprimer]);
-			}
-		}
-		
-		$contexte = array_merge($env, $contexte);
+	// On récupère toutes les valeurs du champ
+	if ($valeurs[$contexte['nom']] and is_array($valeurs[$contexte['nom']])){
+		$contexte['valeurs'] = $valeurs[$contexte['nom']];
 	}
-	
-	// On récupère de l'environnement la valeur actuelle du champ
-	
-	// On regarde en priorité s'il y a un tableau listant toutes les valeurs
-	if ($env['valeurs'] and is_array($env['valeurs']) and $env['valeurs'][$contexte['nom']]){
-		$contexte['liste_valeurs'] = $env['valeurs'][$contexte['nom']];
+	else{
+		$contexte['valeurs'] = array();
 	}
-	
-	
-	// Si ya des enfants on les remonte dans le contexte
-	if (is_array($saisie['saisies']))
-		$contexte['saisies'] = $saisie['saisies'];
 	
 	// On génère la saisie
 	return recuperer_fond(
