@@ -68,17 +68,27 @@ function exec_traiter_office () {
 			$fichier = copie_locale($distant);
 			$fichier = _DIR_IMG.preg_replace(",^IMG/,","", $fichier);
 
-			$texte_source = join(file($fichier), "");
-			
-			// Detecter le charset de la page et convertir si necessaire
-			if (preg_match(",<meta [^>]*charset=([a-zA-Z0-9\-]*),", $texte_source, $preg )) {
-				$charset = strtolower($preg[1]);
-				
-				if ($charset != "utf-8") {
-					$texte_source = unicode_to_utf_8(charset2unicode($texte_source, $charset));
-					$texte_source = preg_replace(",<meta [^>]*charset=([a-zA-Z0-9\-]*)[^>]*>,", "<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />", $texte_source);
-					ecrire_fichier($fichier, $texte_source);
+			// Si fichier HTML, detecter le charset de la page et convertir si necessaire
+			if (preg_match(",\.html$,",$fichier)) {
+
+				// Trouver le chemin de la page et passer les URL en URL absolues.
+				$path_parts = pathinfo($distant);
+				$racine = $path_parts["dirname"];
+				$texte_source = join(file($fichier), "");
+				if (preg_match(",<base href=[\'\"]([^\'\"]*)[\'\"],", $texte_source, $preg)) {
+					$racine = $preg[1];
 				}
+				$texte_source = liens_absolus($texte_source, $racine);
+				
+				if (preg_match(",<meta [^>]*charset=([a-zA-Z0-9\-]*),", $texte_source, $preg )) {
+					$charset = strtolower($preg[1]);
+					
+					if ($charset != "utf-8") {
+						$texte_source = unicode_to_utf_8(charset2unicode($texte_source, $charset));
+						$texte_source = preg_replace(",<meta [^>]*charset=([a-zA-Z0-9\-]*)[^>]*>,", "<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />", $texte_source);
+					}
+				}
+				ecrire_fichier($fichier, $texte_source);
 			}
 
 
