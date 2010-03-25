@@ -3,8 +3,9 @@
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+
 // A
-absence_prise_en_compte' => 'Ihre Abwesenheit wurde gespeichert',
+'absence_prise_en_compte' => 'Ihre Abwesenheit wurde gespeichert',
 'activite_editoriale' => 'Redaktionelle Aktivit&auml;t',
 'afficher_calendrier' => 'Kalender anzeigen',
 'agenda' => 'Kalender',
@@ -100,7 +101,7 @@ absence_prise_en_compte' => 'Ihre Abwesenheit wurde gespeichert',
 'texte_agenda' => 'KALENDER',
 'titre_cadre_ajouter_evenement' => 'Event hinzuf&uuml;gen',
 'titre_cadre_modifier_evenement' => 'Event um&auml;ndern',
-'titre_sur_l_agenda' => 'Im Kalender'
+'titre_sur_l_agenda' => 'Im Kalender',
 // U
 'une_repetition' => '1&nbsp;Wiederholung',
 'un_mot_clef' => '1&nbsp;Schlagwort',
@@ -109,5 +110,7 @@ absence_prise_en_compte' => 'Ihre Abwesenheit wurde gespeichert',
 // X
 // Y
 // Z
+
 );
+
 ?>
