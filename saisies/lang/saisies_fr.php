@@ -8,6 +8,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// O
 	'option_attention_explication' => 'Un message plus important que l\'explication.',
 	'option_attention_label' => 'Avertissement',
+	'option_cacher_option_intro_label' => 'Cacher le premier choix vide',
 	'option_choix_destinataires_explication' => 'Un ou plusieurs auteurs parmis lesquels l\'utilisateur pourra faire son choix. Si rien n\'est s&eacute;lectionn&eacute;, c\'est l\'auteur qui a install&eacute; le site qui sera choisi.',
 	'option_choix_destinataires_label' => 'Destinataires possibles',
 	'option_class_label' => 'Classes CSS suppl&eacute;mentaires',
@@ -35,6 +36,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_nom_explication' => 'Un nom informatique qui identifiera le champ. Il ne doit contenir que des caractères alpha-numériques minuscules ou le caractère "_".',
 	'option_nom_label' => 'Nom du champ',
 	'option_obligatoire_label' => 'Champ obligatoire',
+	'option_option_intro_label' => 'Label du premier choix vide',
 	'option_pliable_label' => 'Le groupe de champs pourra &ecirc;tre repli&eacute;.',
 	'option_plie_label' => 'Si le groupe de champs est pliable, il sera d&eacute;j&agrave; pli&eacute; &agrave; l\'affichage du formulaire.',
 	'option_readonly_explication' => 'Le champ peut &ecirc;tre lu, s&eacute;lectionn&eacute;, mais pas modifi&eacute;.',
@@ -65,6 +67,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'saisie_radio_defaut_choix3' => 'Trois',
 	'saisie_radio_explication' => 'Permet de choisir une option parmis plusieurs disponibles.',
 	'saisie_radio_titre' => 'Boutons radios',
+	'saisie_selection_explication' => 'Choisir une option dans une liste déroulante.',
+	'saisie_selection_titre' => 'Liste déroulante',
 	'saisie_textarea_explication' => 'Un champ de texte sur plusieurs lignes.',
 	'saisie_textarea_titre' => 'Bloc de texte',
 
