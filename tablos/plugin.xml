@@ -11,6 +11,7 @@
 	<pipeline>
 		<nom>insert_head</nom>
 		<inclure>tablos_pipelines.php</inclure>
-	</pipeline>	
+	</pipeline>
+	<fonctions>tablos_fonctions.php</fonctions>	
 	<necessite id='SPIP' version='[2.0;]' />
 </plugin>
