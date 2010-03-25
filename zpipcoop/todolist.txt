@@ -1,14 +1,14 @@
-Réalisé :
+Realise :
 12/03/10
-- Le passage de spipcoop en Z est fini. Il ne reste plus qu'à le tester sur le serveur de test.
-- page auteur, on passe le critère {tout} pour pouvoir afficher les auteurs même sans articles publiés. Plus dans la logique de collaboration.
+- Le passage de spipcoop en Z est fini. Il ne reste plus qu'a le tester sur le serveur de test.
+- page auteur, on passe le critere {tout} pour pouvoir afficher les auteurs meme sans articles publies. Plus dans la logique de collaboration.
 - ajout de Teddy Payet en auteur du plugin
 13/03/2010
-- ajout de la page d'édition et de création d'un article en partie public avec retour en espace public aussi.
+- ajout de la page d'edition et de creation d'un article en partie public avec retour en espace public aussi.
 - ajout de la page articles_page pour visualiser tous nos articles.
 - ajout de la page sites_page pour visualiser tous les sites.
-- remodelage de certains points d'entrée du tableau de bord et de la rédaction.
+- remodelage de certains points d'entree du tableau de bord et de la redaction.
 
 Todo :
-- améliorer page=annuaire : l'affichage en tableau peut passer mais l'astuce du </tr> (cf. contenu/page-annuaire.html) n'est pas top dans le cas d'un nombre d'auteurs multiple de 4. </tr> est en doublon.
-- créer les pages de création et d'édition des brèves/sites et cie pour la partie public pour ne plus passer par l'espace privé de SPIP. => garder une unité graphique de l'outil.
+- ameliorer page=annuaire : l'affichage en tableau peut passer mais l'astuce du </tr> (cf. contenu/page-annuaire.html) n'est pas top dans le cas d'un nombre d'auteurs multiple de 4. </tr> est en doublon.
+- creer les pages de creation et d'edition des breves/sites et cie pour la partie public pour ne plus passer par l'espace prive de SPIP. => garder une unite graphique de l'outil.
