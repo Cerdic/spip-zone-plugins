@@ -371,7 +371,8 @@
 		$contenu = str_replace("\n\r", "\r", $contenu); // echapper au greedyness de preg_replace
 		$contenu = str_replace("\r\n", "\r", $contenu); // dojo produit du \r\n
 		$contenu = str_replace("\n", "\r", $contenu);
-
+		$contenu = str_replace("&mdash;", "--", $contenu);
+	
 		// virer les commentaires html (qui cachent souvent css et jajascript)
 		$contenu = preg_replace("/<!--.*-->/Uims", "", $contenu);
 
@@ -387,6 +388,7 @@
 
 		// POST TRAITEMENT
 		$contenu = str_replace("\r", "\n", $contenu);
+		$contenu = preg_replace(",\n_ --,", "\n--", $contenu);
 		$contenu = preg_replace(",\n_ }}},", "}}}\n", $contenu); // Corriger les fin de groupes apres le retour chariot
 		$contenu = preg_replace(",\n_ }},", "}}\n", $contenu);
 		$contenu = preg_replace(",\n_ },", "}\n", $contenu);

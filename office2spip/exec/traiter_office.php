@@ -1,6 +1,8 @@
 <?php
 function _remplacer_images_texte($matches) {
 	$id_article = $GLOBALS["new_article"];
+	$distant = $GLOBALS["distant"];
+	if ($distant) return "";
 
 	// Recuperer l'alignement	
 	$complet = $matches[1];
@@ -59,41 +61,65 @@ function exec_traiter_office () {
 			
 		$pdf = _request("pdf");	
 		$original = _request("original");	
+		$distant = _request("distant");
+		$GLOBALS["distant"] = $distant; 
+		if (strlen($distant) > 0) {
+			include_spip("inc/distant");
+			$fichier = copie_locale($distant);
+			$fichier = _DIR_IMG.preg_replace(",^IMG/,","", $fichier);
+			if (preg_match(",\/([^\/]+)$,", $fichier, $preg)) {
+				include_spip("inc/filtres");
 		
-		$nom = $_FILES['fichier']['name'];
-		preg_match(",\.([a-zA-Z]*)$,", $nom, $reg);
-		$terminaison = $reg[1];
-		$nom = preg_replace(",\.[a-zA-Z]*$,", "", $nom);
-		$nom_titre = $nom;
+				$nom = $preg[1];
+				$nom_dest = sous_repertoire(_DIR_TMP, 'upload_office').$nom;
+				copy($fichier, $nom_dest);		
+				preg_match(",\.([a-zA-Z]*)$,", $nom, $reg);
+				$terminaison = $reg[1];
+				$nom = preg_replace(",\.[a-zA-Z]*$,", "", $nom);
+				$nom_titre = $nom;
+				$nom_html = sous_repertoire(_DIR_TMP, 'upload_office').$nom.".html";
+				$nom_pdf = sous_repertoire(_DIR_TMP, 'upload_office').$nom.".pdf";
+				$nom_original = $nom.".$terminaison";
+			}
+		} else {
+			$GLOBALS["distant"] = false;
 		
-		include_spip("inc/filtres");
+			$nom = $_FILES['fichier']['name'];
+			preg_match(",\.([a-zA-Z]*)$,", $nom, $reg);
+			$terminaison = $reg[1];
+			$nom = preg_replace(",\.[a-zA-Z]*$,", "", $nom);
+			$nom_titre = $nom;
+			
+			include_spip("inc/filtres");
+			
+			
+			$nom = str_replace("'", "", $nom);
+			$nom = str_replace("\\", "", $nom);
+			$nom = str_replace("&", "", $nom);
+			$nom = supprimer_tags(supprimer_numero(extraire_multi($nom)));
+			$nom = corriger_caracteres($nom);
 		
 		
-		$nom = str_replace("'", "", $nom);
-		$nom = str_replace("\\", "", $nom);
-		$nom = str_replace("&", "", $nom);
-		$nom = supprimer_tags(supprimer_numero(extraire_multi($nom)));
-		$nom = corriger_caracteres($nom);
-	
-	
-		$nom = translitteration($nom);
-		$nom = preg_replace(",[[:blank:]]+,","_", $nom);
-		
-		$nom_dest = sous_repertoire(_DIR_TMP, 'upload_office').$nom.".".$terminaison;
-		$nom_html = sous_repertoire(_DIR_TMP, 'upload_office').$nom.".html";
-		$nom_pdf = sous_repertoire(_DIR_TMP, 'upload_office').$nom.".pdf";
-		$nom_original = $nom.".$terminaison";
-		
-		$i = 0;
-		while (file_exists($nom_dest)) {
-			$i++;
-			$nom_dest = sous_repertoire(_DIR_TMP, 'upload_office').$nom."-$i.".$terminaison;
-			$nom_html = sous_repertoire(_DIR_TMP, 'upload_office').$nom."-$i.html";
-			$nom_pdf = sous_repertoire(_DIR_TMP, 'upload_office').$nom."-$i.pdf";
-			$nom_original = $nom."-i.$terminaison";
+			$nom = translitteration($nom);
+			$nom = preg_replace(",[[:blank:]]+,","_", $nom);
+			$nom_dest = sous_repertoire(_DIR_TMP, 'upload_office').$nom.".".$terminaison;
+			$nom_html = sous_repertoire(_DIR_TMP, 'upload_office').$nom.".html";
+			$nom_pdf = sous_repertoire(_DIR_TMP, 'upload_office').$nom.".pdf";
+			$nom_original = $nom.".$terminaison";
+			
+			$i = 0;
+			while (file_exists($nom_dest)) {
+				$i++;
+				$nom_dest = sous_repertoire(_DIR_TMP, 'upload_office').$nom."-$i.".$terminaison;
+				$nom_html = sous_repertoire(_DIR_TMP, 'upload_office').$nom."-$i.html";
+				$nom_pdf = sous_repertoire(_DIR_TMP, 'upload_office').$nom."-$i.pdf";
+				$nom_original = $nom."-i.$terminaison";
+			}
+			
+			@move_uploaded_file($_FILES['fichier']['tmp_name'], $nom_dest);	
+
 		}
 		
-		@move_uploaded_file($_FILES['fichier']['tmp_name'], $nom_dest);	
 		$erreur = @exec("unoconv --format=html $nom_dest");
 		
 		

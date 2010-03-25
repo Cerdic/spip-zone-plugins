@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Office2SPIP</nom>
 	<auteur>ARNO*</auteur>
-	<version>0.3</version>
+	<version>0.4</version>
 	<etat>dev</etat>
 	<description>
 		Office2SPIP fabrique des articles SPIP directement à partir de fichiers Office (Word, OpenOffice...). 
