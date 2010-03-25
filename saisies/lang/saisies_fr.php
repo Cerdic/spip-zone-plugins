@@ -29,6 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_groupe_validation' => 'Validation',
 	'option_info_obligatoire_explication' => 'Vous pouvez modifier l\'indication d\'obligation par d&eacute;faut : <i>[Obligatoire]</i>.',
 	'option_info_obligatoire_label' => 'Indication d\'obligation',
+	'option_label_case_label' => 'Label plac&eacute; &agrave; c&ocirc;t&eacute; de la case',
 	'option_label_explication' => 'Le titre qui sera affich&eacute;.',
 	'option_label_label' => 'Label',
 	'option_maxlength_explication' => 'L\'utilisateur ne pourra pas taper plus de caract&egrave;res que ce nombre.',
@@ -54,6 +55,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_type_text' => 'Normal',
 
 	// S
+	'saisie_case_explication' => 'Permet d\'activer ou de d&eacute;sactiver quelque chose.',
+	'saisie_case_titre' => 'Case unique',
 	'saisie_checkbox_explication' => 'Permet de choisir plusieurs options avec des cases.',
 	'saisie_checkbox_titre' => 'Cases à cocher',
 	'saisie_destinataires_explication' => 'Permet de choisir un ou plusieurs destinataires parmis des auteurs pr&eacute;-s&eacute;lectionn&eacute;e.',
