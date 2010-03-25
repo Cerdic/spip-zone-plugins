@@ -1,6 +1,6 @@
 <div class="cadre cadre-liste analyser analyser_#ENV{nom} saisie_#ENV{type_saisie}">
 <table class="liste" cellspacing="0" cellpadding="2" border="0" style="width:100%;">
-[<caption class="titrem"><strong class="caption">(#ENV{label,#ENV{nom}})</strong></caption>]
+[<caption class="titrem"><strong class="caption">(#ENV{label_case,#ENV{label,#ENV{nom}}})</strong></caption>]
 	<tbody>
 	[(#CHEMIN{saisies-analyses/#ENV{type_saisie}.html}|oui)
 		#INCLURE{fond=saisies-analyses/#ENV{type_saisie},env}
