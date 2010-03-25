@@ -54,7 +54,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_type_text' => 'Normal',
 
 	// S
-	'saisie_checkbox_explication' => 'Permet de choisir plusieurs options parmis une liste.',
+	'saisie_checkbox_explication' => 'Permet de choisir plusieurs options avec des cases.',
 	'saisie_checkbox_titre' => 'Cases à cocher',
 	'saisie_destinataires_explication' => 'Permet de choisir un ou plusieurs destinataires parmis des auteurs pr&eacute;-s&eacute;lectionn&eacute;e.',
 	'saisie_destinataires_titre' => 'Destinataires',
@@ -68,7 +68,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'saisie_radio_explication' => 'Permet de choisir une option parmis plusieurs disponibles.',
 	'saisie_radio_titre' => 'Boutons radios',
 	'saisie_selection_explication' => 'Choisir une option dans une liste déroulante.',
-	'saisie_selection_titre' => 'Liste déroulante',
+	'saisie_selection_multiple_explication' => 'Permet de choisir plusieurs options avec une liste.',
+	'saisie_selection_multiple_titre' => 'S&eacute;lection multiple',
+	'saisie_selection_titre' => 'Liste d&eacute;roulante',
 	'saisie_textarea_explication' => 'Un champ de texte sur plusieurs lignes.',
 	'saisie_textarea_titre' => 'Bloc de texte',
 
