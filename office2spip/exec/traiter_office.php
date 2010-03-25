@@ -67,6 +67,22 @@ function exec_traiter_office () {
 			include_spip("inc/distant");
 			$fichier = copie_locale($distant);
 			$fichier = _DIR_IMG.preg_replace(",^IMG/,","", $fichier);
+
+			$texte_source = join(file($fichier), "");
+			
+			// Detecter le charset de la page et convertir si necessaire
+			if (preg_match(",<meta [^>]*charset=([a-zA-Z0-9\-]*),", $texte_source, $preg )) {
+				$charset = strtolower($preg[1]);
+				
+				if ($charset != "utf-8") {
+					$texte_source = unicode_to_utf_8(charset2unicode($texte_source, $charset));
+					$texte_source = preg_replace(",<meta [^>]*charset=([a-zA-Z0-9\-]*)[^>]*>,", "<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />", $texte_source);
+					ecrire_fichier($fichier, $texte_source);
+				}
+			}
+
+
+
 			if (preg_match(",\/([^\/]+)$,", $fichier, $preg)) {
 				include_spip("inc/filtres");
 		
