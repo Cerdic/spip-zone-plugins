@@ -10,10 +10,12 @@
 #SET_MERGE{valeurs, #ARRAY{#NOM,#GET{liste_valeurs}}}
 </BOUCLE_champs>
 </BOUCLE_reponses>
+#SET{reponses_total,#TOTAL_BOUCLE}
+</B_reponses>
 
 <BOUCLE_saisies(POUR){tableau #SAISIES|unserialize|saisies_lister_par_nom}>
 [(#VAL{saisie}|array_key_exists{#VALEUR}|oui)
-	[(#VALEUR|formidable_analyser_saisie{#GET{valeurs}})]
+	[(#VALEUR|formidable_analyser_saisie{#GET{valeurs}, #GET{reponses_total}})]
 ]
 </BOUCLE_saisies>
 

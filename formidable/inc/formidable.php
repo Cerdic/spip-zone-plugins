@@ -106,12 +106,12 @@ function formidable_verifier_reponse_formulaire($id_formulaire){
  * @param array $env L'environnement, contenant normalement la réponse à la saisie
  * @return string Retour le HTML des vues
  */
-function formidable_analyser_saisie($saisie, $valeurs=array()){
+function formidable_analyser_saisie($saisie, $valeurs=array(), $reponses_total=0){
 	// Si le paramètre n'est pas bon ou que c'est un conteneur, on génère du vide
 	if (!is_array($saisie) or $saisie['saisies'])
 		return '';
 	
-	$contexte = array();
+	$contexte = array('reponses_total'=>$reponses_total);
 	
 	// On sélectionne le type de saisie
 	$contexte['type_saisie'] = $saisie['saisie'];

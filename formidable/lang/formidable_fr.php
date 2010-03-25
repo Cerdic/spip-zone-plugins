@@ -4,6 +4,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'analyse_avec_reponse' => 'Réponses non-vide',
 'analyse_sans_reponse' => 'Laissés blanc',
 'analyse_longueur_moyenne' => 'Longueur moyenne en nombre de mots',
+'analyse_reponses_total' => '@nb@ personnes ont r&eacute;pondu &agrave; ce formulaire.',
 
 'bouton_formulaires' => 'Formulaires',
 
