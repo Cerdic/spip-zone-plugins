@@ -24,10 +24,9 @@
 #SET{defaut, #ENV{defaut}}
 #SET{defaut, #GET{defaut}|is_string|?{(#GET{defaut}|saisies_chaine2tableau), #GET{defaut}}}
 
-[(#SET{defaut,[(#ENV{defaut}|is_array|?{#ENV{defaut},#ARRAY{0,#ENV{defaut}}})]})]
 <BOUCLE_radio(POUR){tableau #GET{datas}}>
 <div class="#ENV{choix,choix}">
-	<input type="checkbox" name="#ENV{nom}[]" class="checkbox" id='champ_#ENV{nom}_#COMPTEUR_BOUCLE'[ (#CLE|in_any{[(#ENV{valeur,#GET{defaut}})]}|oui)checked='checked'] value='#CLE' [ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"] />
-	<label for="champ_#ENV{nom}_#COMPTEUR_BOUCLE">#VALEUR</label>
+	<input type="checkbox" name="#ENV{nom}[]" class="checkbox" id="champ_#ENV{nom}_#COMPTEUR_BOUCLE"[ (#CLE|in_array{#ENV{valeur,#GET{defaut}}}|oui)checked="checked"] value="#CLE" [ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"] />
+	<label for="champ_#ENV{nom}_#COMPTEUR_BOUCLE">#CLE=>#VALEUR</label>
 </div>
 </BOUCLE_radio>

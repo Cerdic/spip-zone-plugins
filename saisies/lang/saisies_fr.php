@@ -52,8 +52,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_type_text' => 'Normal',
 
 	// S
-	'saisie_base_plus_titre' => 'Param&egrave;tres suppl&eacute;mentaires',
-	'saisie_base_titre' => 'Param&egrave;tres g&eacute;n&eacute;raux',
+	'saisie_checkbox_explication' => 'Permet de choisir plusieurs options parmis une liste.',
+	'saisie_checkbox_titre' => 'Cases à cocher',
 	'saisie_destinataires_explication' => 'Permet de choisir un ou plusieurs destinataires parmis des auteurs pr&eacute;-s&eacute;lectionn&eacute;e.',
 	'saisie_destinataires_titre' => 'Destinataires',
 	'saisie_fieldset_explication' => 'Un cadre qui pourra englober plusieurs champs.',
