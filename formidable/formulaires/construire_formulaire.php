@@ -36,7 +36,7 @@ function formulaires_construire_formulaire_charger($identifiant, $formulaire_ini
 	
 	// La liste des saisies
 	$saisies_disponibles = saisies_lister_disponibles();
-	$contexte['saisies_disponibles'] = $saisies_disponibles;
+	$contexte['_saisies_disponibles'] = $saisies_disponibles;
 	
 	$contexte['fond_generer'] = 'formulaires/inc-generer_saisies_configurables';
 	
