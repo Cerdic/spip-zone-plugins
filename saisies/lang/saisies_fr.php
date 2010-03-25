@@ -74,7 +74,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'tous_visiteurs' => 'Tous les visiteurs (m&ecirc;me non enregistr&eacute;s)',
-
+	
+	// V
+	'vue_sans_reponse' => 'Sans réponse',
+	
 	// Z
 	'z' => 'zzz'
 );
