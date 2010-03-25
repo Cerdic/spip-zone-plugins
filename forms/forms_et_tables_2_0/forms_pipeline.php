@@ -27,26 +27,26 @@
         if (array_key_exists('BANDO',$liste_plugin)==true){
 	       // on voit le bouton dans la barre "naviguer"
 			$boutons_admin['bando_edition']->sousmenu["forms_tous"]= new Bouton(
-			"../"._DIR_PLUGIN_FORMS."img_pack/form-24.gif",  // icone
+			_DIR_PLUGIN_FORMS."img_pack/form-24.gif",  // icone
 			_T("forms:formulaires_sondages") //titre
 			);
 			
 		  // on voit le bouton dans la barre "naviguer"
 			$boutons_admin['bando_edition']->sousmenu["tables_tous"]= new Bouton(
-			"../"._DIR_PLUGIN_FORMS."img_pack/table-24.gif",  // icone
+			_DIR_PLUGIN_FORMS."img_pack/table-24.gif",  // icone
 			_T("forms:tables") //titre
 			);
 	       }
 	   else{	
 		  // on voit le bouton dans la barre "naviguer"
 			$boutons_admin['naviguer']->sousmenu["forms_tous"]= new Bouton(
-			"../"._DIR_PLUGIN_FORMS."img_pack/form-24.gif",  // icone
+			_DIR_PLUGIN_FORMS."img_pack/form-24.gif",  // icone
 			_T("forms:formulaires_sondages") //titre
 			);
 			
 		  // on voit le bouton dans la barre "naviguer"
 			$boutons_admin['naviguer']->sousmenu["tables_tous"]= new Bouton(
-			"../"._DIR_PLUGIN_FORMS."img_pack/table-24.gif",  // icone
+			_DIR_PLUGIN_FORMS."img_pack/table-24.gif",  // icone
 			_T("forms:tables") //titre
 			);
 		}

@@ -125,7 +125,7 @@ function afficher_tables_tous_corps($type_form, $link=NULL, $fond='fonds/tables_
 	if (autoriser('creer','form') && ($link!==false)) {
 	  $icone = find_in_path("img_pack/".($type_form?$type_form:'form')."-24.png");
 	  if (!$icone)
-	  	$icone = "../"._DIR_PLUGIN_FORMS."img_pack/table-24.png";
+	  	$icone = _DIR_PLUGIN_FORMS."img_pack/table-24.png";
 		$out .=  "<div align='$spip_lang_right'>";
 		if ($link===NULL)
 			$link=generer_url_ecrire('forms_edit', "new=oui&type_form=$type_form");
@@ -220,7 +220,7 @@ function affichage_donnees_tous_corps($type_form,$id_form,$retour=false, $titre_
 	
   $icone = find_in_path("img_pack/$type_form-24.png");
   if (!$icone)
-  	$icone = "../"._DIR_PLUGIN_FORMS."img_pack/donnees-24.png";
+  	$icone = _DIR_PLUGIN_FORMS."img_pack/donnees-24.png";
 	$out .=  "<table style='margin:0 auto;'><tr><td>";
 	if ($retour){
 		$out .=  "<div style='float:$spip_lang_left;'>";
@@ -237,10 +237,10 @@ function affichage_donnees_tous_corps($type_form,$id_form,$retour=false, $titre_
 		$out .=  "</div>";
 		
 		//$url_suivi = icone_horizontale(_T("forms:suivi_reponses")."<br />".(($nb_reponses==0)?_T("forms:aucune_reponse"):(($nb_reponses==1)?_T("forms:une_reponse"):_T("forms:nombre_reponses",array('nombre'=>$nb_reponses)))),
-		//, "../"._DIR_PLUGIN_FORMS."img_pack/donnees-24.png", "rien.gif",false);
+		//, _DIR_PLUGIN_FORMS."img_pack/donnees-24.png", "rien.gif",false);
 		$url_suivi = generer_url_ecrire(in_array($row['type_form'],array('','sondage'))?'forms_reponses':'donnees_tous',"id_form=$id_form");
 		$out .=  "<div style='float:$spip_lang_left;'>";
-		$out .=  icone(_T("$prefix:suivi_reponses"), $url_suivi, "../"._DIR_PLUGIN_FORMS."img_pack/donnees-24.png", "rien.gif","",false);
+		$out .=  icone(_T("$prefix:suivi_reponses"), $url_suivi, _DIR_PLUGIN_FORMS."img_pack/donnees-24.png", "rien.gif","",false);
 		$out .=  "</div>";
 		
 		// verifier si il y a des donnees
@@ -329,7 +329,7 @@ function affichage_donnee_edit($type_form){
 	$prefix = forms_prefixi18n($type_form);
   $icone = find_in_path("img_pack/$type_form-24.png");
   if (!$icone)
-  	$icone = "../"._DIR_PLUGIN_FORMS."img_pack/donnees-24.png";
+  	$icone = _DIR_PLUGIN_FORMS."img_pack/donnees-24.png";
   $titre_page = _T("$prefix:type_des_tables");
   
   $id_form = intval(_request('id_form'));
@@ -359,7 +359,7 @@ function affichage_donnee_edit($type_form){
 	if (autoriser('administrer','form',$id_form)) {
 		$prefix = forms_prefixi18n($type_form);
 		echo icone_horizontale(_T("$prefix:suivi_reponses")."<br />".(($nb_reponses==0)?_T("$prefix:aucune_reponse"):(($nb_reponses==1)?_T("$prefix:une_reponse"):_T("$prefix:nombre_reponses",array('nombre'=>$nb_reponses)))),
-			generer_url_ecrire('donnees_tous',"id_form=$id_form".(strpos($retour,"exec=donnees_tous")===FALSE?"&retour=$retour":"")), "../"._DIR_PLUGIN_FORMS."img_pack/donnees-24.png", "rien.gif",false);
+			generer_url_ecrire('donnees_tous',"id_form=$id_form".(strpos($retour,"exec=donnees_tous")===FALSE?"&retour=$retour":"")), _DIR_PLUGIN_FORMS."img_pack/donnees-24.png", "rien.gif",false);
 			
 		$retour = urlencode(self());
 		echo icone_horizontale(_T("$prefix:telecharger_reponses"),

@@ -86,7 +86,7 @@ function exec_forms_telecharger(){
 	$prefix = forms_prefixi18n($row['type_form']);
 	$titre = _T("$prefix:telecharger_reponses");
 
-	$icone = "../"._DIR_PLUGIN_FORMS."img_pack/donnees-24.png";
+	$icone = _DIR_PLUGIN_FORMS."img_pack/donnees-24.png";
 	
 	/*debut_page($titre, "documents", "forms");*/
 	$commencer_page = charger_fonction("commencer_page", "inc") ; 

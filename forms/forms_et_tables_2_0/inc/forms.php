@@ -408,7 +408,7 @@
 			$out .= "\n<br />";
 			$link = generer_url_ecrire('forms_edit',"new=oui&retour=".urlencode(self()));
 			$out .= icone_horizontale(_T("forms:icone_creer_formulaire"),
-				$link, "../"._DIR_PLUGIN_FORMS."img_pack/form-24.png", "creer.gif", false);
+				$link, _DIR_PLUGIN_FORMS."img_pack/form-24.png", "creer.gif", false);
 		}
 
 		if (version_compare($GLOBALS['spip_version_code'],'1.9250','>')){
@@ -416,7 +416,7 @@
 		}
 		else {
 			$s .= "\n";
-			$s .= debut_cadre_relief("../"._DIR_PLUGIN_FORMS."img_pack/form-24.png", true);
+			$s .= debut_cadre_relief(_DIR_PLUGIN_FORMS."img_pack/form-24.png", true);
 
 			$s .= "<div style='padding: 2px; background-color: $couleur_claire; text-align: center; color: black;'>";
 			$s .= bouton_block_depliable(false,"ajouter_form");

@@ -575,7 +575,7 @@ function boite_proprietes($id_form, $row, $focus, $action_link, $redirect) {
 	$out .= "</div>";
 
 	if ($is_form){
-		$out .= debut_cadre_enfonce("../"._DIR_PLUGIN_FORMS."img_pack/sondage-24.png",true);
+		$out .= debut_cadre_enfonce(_DIR_PLUGIN_FORMS."img_pack/sondage-24.png",true);
 		$out .= "<strong>"._T("forms:type_form")."</strong> : ";
 		$out .= _T("forms:info_sondage");
 		$out .= "<br /><br />";

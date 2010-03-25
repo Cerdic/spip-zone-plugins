@@ -49,7 +49,7 @@ function exec_forms_reponses(){
 		echo debut_boite_info(true);
 		if ($retour = urldecode(_request('retour')))
 		{
-			echo icone_horizontale(_T('icone_retour'), $retour, "../"._DIR_PLUGIN_FORMS."img_pack/form-24.png", "rien.gif",false);
+			echo icone_horizontale(_T('icone_retour'), $retour, _DIR_PLUGIN_FORMS."img_pack/form-24.png", "rien.gif",false);
 		}
 		echo icone_horizontale(_T("forms:Formulaire"), "?exec=forms_edit&id_form=$id_form", "../"._DIR_PLUGIN_FORMS. "img_pack/form-24.png", "rien.gif",false);
 		$nretour = urlencode(self());
@@ -163,10 +163,10 @@ function exec_forms_reponses(){
 		$titre_form = $row['titre'];
 
 		echo "<br />\n";
-		echo debut_cadre_relief("../"._DIR_PLUGIN_FORMS."img_pack/donnees-24.png",true,'','');
+		echo debut_cadre_relief(_DIR_PLUGIN_FORMS."img_pack/donnees-24.png",true,'','');
 
 		$link=parametre_url(self(),'supp_reponse', $id_donnee);
-		echo icone_inline(_T("forms:supprimer_reponse"), $link,"../"._DIR_PLUGIN_FORMS."img_pack/donnees-24.png", "supprimer.gif", "right");
+		echo icone_inline(_T("forms:supprimer_reponse"), $link,_DIR_PLUGIN_FORMS."img_pack/donnees-24.png", "supprimer.gif", "right");
 		
 		if ($id_article_export!=0){
 			$row=spip_fetch_array(spip_query("SELECT statut FROM spip_articles WHERE id_article="._q($id_article_export)));

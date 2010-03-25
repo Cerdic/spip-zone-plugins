@@ -56,7 +56,7 @@ function contenu_boite_resume($id_form, $row, &$apercu){
 	$out = "";
 
 	// centre resume ---------------------------------------------------------------
-	$out .= debut_cadre_relief("../"._DIR_PLUGIN_FORMS."img_pack/form-24.png",true);
+	$out .= debut_cadre_relief(_DIR_PLUGIN_FORMS."img_pack/form-24.png",true);
 
 	//$out .= gros_titre($row['titre'],'',false);
 
@@ -262,15 +262,15 @@ function exec_forms_edit(){
 	if ($id_form>0)
 		echo "<div align='center' style='font-size:3em;font-weight:bold;'>$id_form</div>\n";
 	if ($retour) {
-		echo icone_horizontale(_T('icone_retour'), $retour, "../"._DIR_PLUGIN_FORMS."img_pack/form-24.png", "rien.gif",false);
+		echo icone_horizontale(_T('icone_retour'), $retour, _DIR_PLUGIN_FORMS."img_pack/form-24.png", "rien.gif",false);
 	}
 	if (autoriser('administrer','form',$id_form)) {
 		$nretour = urlencode(self());
 		echo icone_horizontale(_T("forms:suivi_reponses")."<br />".(($nb_reponses==0)?_T("forms:aucune_reponse"):(($nb_reponses==1)?_T("forms:une_reponse"):_T("forms:nombre_reponses",array('nombre'=>$nb_reponses)))),
-		generer_url_ecrire('forms_reponses',"id_form=$id_form"), "../"._DIR_PLUGIN_FORMS."img_pack/donnees-24.png", "rien.gif",false);
+		generer_url_ecrire('forms_reponses',"id_form=$id_form"), _DIR_PLUGIN_FORMS."img_pack/donnees-24.png", "rien.gif",false);
 			
 		echo icone_horizontale(_T("forms:Tableau_des_reponses"),
-		generer_url_ecrire('donnees_tous',"id_form=$id_form&retour=$nretour"), "../"._DIR_PLUGIN_FORMS."img_pack/donnees-24.png", "rien.gif",false);
+		generer_url_ecrire('donnees_tous',"id_form=$id_form&retour=$nretour"), _DIR_PLUGIN_FORMS."img_pack/donnees-24.png", "rien.gif",false);
 		
 		if ($nb_reponses){
 			echo icone_horizontale(_T("forms:telecharger_reponses"),
@@ -286,7 +286,7 @@ function exec_forms_edit(){
 			$link=parametre_url($link,'retour', urlencode(generer_url_ecrire('form_tous')));
 		}
 		/*echo "<p>";*/
-		echo icone_horizontale(_T("$prefixei18n:supprimer_formulaire"), $link, "../"._DIR_PLUGIN_FORMS."img_pack/supprimer-24.png", "rien.gif",false);
+		echo icone_horizontale(_T("$prefixei18n:supprimer_formulaire"), $link, _DIR_PLUGIN_FORMS."img_pack/supprimer-24.png", "rien.gif",false);
 		/*echo "</p>";*/
 	}
 	/*fin_boite_info();*/
