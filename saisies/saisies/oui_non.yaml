@@ -1,7 +1,6 @@
 
-titre: '<:saisies:saisie_case_titre:>'
-description: '<:saisies:saisie_case_explication:>'
-icone: 'images/saisies_case.png'
+titre: '<:saisies:saisie_oui_non_titre:>'
+description: '<:saisies:saisie_oui_non_explication:>'
 options:
   -
     saisie: 'fieldset'
@@ -15,12 +14,6 @@ options:
           nom: 'label'
           label: '<:saisies:option_label_label:>'
           explication: '<:saisies:option_label_explication:>'
-          size: 50
-      -
-        saisie: 'input'
-        options:
-          nom: 'label_case'
-          label: '<:saisies:option_label_case_label:>'
           size: 50
       -
         saisie: 'input'
@@ -90,5 +83,4 @@ options:
           label: '<:saisies:option_obligatoire_label:>'
 defaut:
   options:
-    label: '<:saisies:saisie_case_titre:>'
-    label_case: '<:saisies:saisie_case_titre:>'
+    label: '<:saisies:saisie_oui_non_titre:>'
