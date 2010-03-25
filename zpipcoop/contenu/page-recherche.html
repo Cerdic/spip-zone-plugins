@@ -35,3 +35,16 @@
 </div>
 </B_rubriques>
 
+[(#REM) Sites trouvees ]
+<B_sites>
+<div class="liste resultats sites">
+	#ANCRE_PAGINATION
+	<h2 class="h2"><:sites_web:> (#GRAND_TOTAL)</h2>
+	<ul class="liste-items">
+		<BOUCLE_sites(SITES) {recherche} {par points}{inverse} {pagination 5}>
+		<li class="item"><a href="[(#ID_SYNDIC|generer_url_entite{site})]" title="#NOM_SITE">#NOM_SITE</a></li>
+		</BOUCLE_sites>
+	</ul>
+	[<p class="pagination">(#PAGINATION)</p>]
+</div>
+</B_sites>

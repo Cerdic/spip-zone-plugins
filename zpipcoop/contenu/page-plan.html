@@ -25,7 +25,7 @@
 	<h3 class="h3"><:sites_web:></h3>
 	<ul class="plan">
 		<BOUCLE_sites_racine(SITES) {id_rubrique} {par nom_site}>
-		<li><a href="#URL_SITE">#NOM_SITE</a></li>
+		<li><a href="[(#ID_SYNDIC|generer_url_entite{site})]">#NOM_SITE</a></li>
 		</BOUCLE_sites_racine>
 	</ul>
 	</B_sites_racine>
@@ -47,7 +47,7 @@
 			<B_sites>
 			<ul>
 				<BOUCLE_sites(SITES) {id_rubrique} {par nom_site}>
-				<li><a href="#URL_SITE">#NOM_SITE</a></li>
+				<li><a href="[(#ID_SYNDIC|generer_url_entite{site})]">#NOM_SITE</a></li>
 				</BOUCLE_sites>
 			</ul>
 			</B_articles>
