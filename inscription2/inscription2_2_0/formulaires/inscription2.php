@@ -52,8 +52,8 @@ function formulaires_inscription2_charger_dist($id_auteur = NULL,$redirect = nul
 		 */
 		$auteur = sql_fetsel(
 			'*',
-			'spip_auteurs LEFT JOIN spip_auteurs_elargis USING(id_auteur)',
-			'spip_auteurs_elargis.id_auteur ='.$id_auteur
+                        'spip_auteurs a LEFT JOIN spip_auteurs_elargis b ON a.id_auteur=b.id_auteur',
+			'a.id_auteur ='.$id_auteur
 		);
 		$auteur['id_auteur'] = $id_auteur;
 		if(in_array('naissance',$champs)){

@@ -37,7 +37,7 @@ function id_pays_to_pays($id_pays){
  */
 function inscription2_recuperer_champs($champs,$id_auteur){
 	if($champs == 'login'){
-		$champs = 'spip_auteurs.login';
+		$champs = 'b.login';
 	}
 	if($champs == 'pays'){
 		$resultat = sql_getfetsel("b.nom","spip_auteurs_elargis a LEFT JOIN spip_geo_pays b on a.pays = b.id_pays","a.id_auteur=$id_auteur");
@@ -47,7 +47,7 @@ function inscription2_recuperer_champs($champs,$id_auteur){
 		$resultat = sql_getfetsel("b.nom","spip_auteurs_elargis a LEFT JOIN spip_geo_pays b on a.pays_pro = b.id_pays","a.id_auteur=$id_auteur");
 		return typo($resultat);
 	}
-	$resultat = sql_getfetsel($champs,"spip_auteurs_elargis LEFT JOIN spip_auteurs USING(id_auteur)","spip_auteurs_elargis.id_auteur=$id_auteur");
+	$resultat = sql_getfetsel($champs,"spip_auteurs_elargis a LEFT JOIN spip_auteurs b ON a.id_auteur=b.id_auteur","a.id_auteur=$id_auteur");
 	return typo($resultat);
 }
 
