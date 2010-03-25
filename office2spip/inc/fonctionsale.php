@@ -139,8 +139,8 @@
 		",\t,Uims" => " ",
 		
 		// ramasse-miettes: trucs qui restent
-		",<(font|large|small|iframe|a|span|script|p|dl|dd|dt|sup|sdfield|u|form|fieldset|button|input|textarea|select|option|label|noscript)( [^>]*)?>,Uims" => "",
-		",<\/(font|large|small|iframe|a|span|script|p|dl|dd|dt|sup|sdfield|u|form|fieldset|button|input|textarea|select|option|label|noscript)( [^>]*)?>,Uims" => "",
+		",<(font|large|small|iframe|a|span|script|p|dl|dd|dt|sup|sdfield|u|form|fieldset|button|input|textarea|select|option|label|noscript|link|abbr|acronym|address)( [^>]*)?>,Uims" => "",
+		",<\/(font|large|small|iframe|a|span|script|p|dl|dd|dt|sup|sdfield|u|form|fieldset|button|input|textarea|select|option|label|noscript|link|abbr|acronym|address)( [^>]*)?>,Uims" => "",
 		",<center.*>,Uims" => "\n\n",
 		",<\/center.*>,Uims" => "\n\n",
 		",<col.*>,Uims" => "\n\n",
