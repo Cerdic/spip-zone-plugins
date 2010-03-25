@@ -75,8 +75,8 @@
 			",<(p)( [^>]*)?".">(.+)</\\1>,Uims" => "\r\r\\3\r\r", //Paragr. (ajouter \r avant aussi)
 			",(<no p[^>]*>)(\s*)(<\/no>),Uims" => "", // spiperie
 			",(<\/no p>)(.*)(<no p[^>]*>),Uims" => "\\2", // spiperie
-			",\s*?<br( [^>]*)?".">\r-(&nbsp;|\s),Ui" => "\r- ", 
-			",\s*?<br( [^>]*)?".">\r?,Ui" => "\r_ ", //Saut de ligne style suivi par du texte
+			",\s*?<w?br(\/)?( [^>]*)?".">\r-(&nbsp;|\s),Ui" => "\r- ", 
+			",\s*?<w?br(\/)?( [^>]*)?".">\r?,Ui" => "\r_ ", //Saut de ligne style suivi par du texte
 //			",(\s*(<br( [^>]*)?".">)?)*\\z,i" => "", //Saut de ligne en fin de texte (ca deconne severe, texte qui disparait completement)
 			",<hr( [^>]*)?".">,Uims" => "\r----\r", //Saut de page
 			
@@ -138,9 +138,9 @@
 		// c est pas du html mais je le met ici quand meme
 		",\t,Uims" => " ",
 		
-		// trucs super-sales qui restent
-		",<(font|span|p|dl|dd|sup|sdfield|u)( [^>]*)?>,Uims" => "",
-		",<\/(font|span|p|dl|dd|sup|sdfield|u)( [^>]*)?>,Uims" => "",
+		// ramasse-miettes: trucs qui restent
+		",<(font|large|iframe|a|span|script|p|dl|dd|dt|sup|sdfield|u|form|input|textarea|select|option|label|noscript)( [^>]*)?>,Uims" => "",
+		",<\/(font|large|iframe|a|span|script|p|dl|dd|dt|sup|sdfield|u|form|input|textarea|select|option|label|noscript)( [^>]*)?>,Uims" => "",
 		",<center.*>,Uims" => "\n\n",
 		",<\/center.*>,Uims" => "\n\n",
 		",<col.*>,Uims" => "\n\n",
