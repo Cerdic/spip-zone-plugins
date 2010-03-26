@@ -16,7 +16,7 @@ function saveauto_body_prive($flux) {
 function saveauto_go() {
     global $fin_sauvegarde_base, $sauver_base, $saveauto_msg, $connect_statut;
     $saveauto_msg = '';
-    if (($connect_statut == "0minirezo") OR ($connect_statut == "1comite" AND lire_config('saveauto/acces_redac'))) {
+    if (($connect_statut == "0minirezo") OR ($connect_statut == "1comite" AND (lire_config('saveauto/acces_redac') == 'true'))) {
         if (!isset($_COOKIE["spip_saveauto"]) OR empty($_COOKIE["spip_saveauto"]))	{
           //sauver la base
             include_spip('inc/saveauto_fonctions');
@@ -29,7 +29,7 @@ function saveauto_go() {
                 if (!$fin_sauvegarde_base) {
                     $saveauto_msg = _T('saveauto:probleme_sauve_base').$base."<br />";
                 }
-                if (lire_config('saveauto/ecrire_succes') && $fin_sauvegarde_base) {
+                if ((lire_config('saveauto/ecrire_succes') == 'true') && $fin_sauvegarde_base) {
                     $saveauto_msg = "<script language=\"javascript\">alert(\""._T('saveauto:sauvegarde_ok')."\", \""._T('saveauto:maintenance')."\");</script>";
                 }
             }
