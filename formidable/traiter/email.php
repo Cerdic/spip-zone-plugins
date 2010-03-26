@@ -19,7 +19,7 @@ function traiter_email_dist($args, $retours){
 		$destinataires = sql_allfetsel(
 			'email',
 			'spip_auteurs',
-			'id_auteur IN ('.join(', ', $destinataires).')'
+			sql_in('id_auteur', $destinataires)
 		);
 		$destinataires = array_map('reset', $destinataires);
 		
