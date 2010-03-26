@@ -3,7 +3,7 @@
 	/*
 		La Fonction Sale()
 		(c)2005 James <klike@free.fr>
-		d'après le bouton memo et le script spip_unparse
+		d'aprÃ‹s le bouton memo et le script spip_unparse
 	*/
 	
 	/*
@@ -33,20 +33,20 @@
 		if (!isset($trans)) {
 			$trans = get_html_translation_table(HTML_ENTITIES, $quote_style);
 			$trans = array_flip($trans);
-			$trans["&euro;"]='€';
-			$trans["&oelig;"]='œ';
-			$trans["&OElig;"]='Œ';
+			$trans["&euro;"]='â‚¬';
+			$trans["&oelig;"]='Å“';
+			$trans["&OElig;"]='Å’';
 			foreach ($trans as $key => $value){
 			   $trans['&#'.ord($value).';'] = $value;
 			}
-			// ajout du caractere apostrophe SPIP : ’
-			$trans['&#8217;'] = "’";
-			$trans['&#039;'] = "'";
-			$trans['&#171;'] = "«";
-			$trans['&#187;'] = "»";
-			$trans['&#176;'] = "°";
+			// ajout du caractere apostrophe SPIP : Ã­
+//			$trans['&#8217;'] = "'";
+//			$trans['&#039;'] = "'";
+//			$trans['&#171;'] = "Â«";
+//			$trans['&#187;'] = "Â»";
+//			$trans['&#176;'] = "Â°";
 			// des caracteres non supportes
-			$trans["&nbsp;&euro;"]=' €';
+			$trans["&nbsp;&euro;"]=' â‚¬';
 	  	if ($GLOBALS['meta']['charset'] == 'utf-8'){
 				foreach ($trans as $key=>$value)
 					$transutf[$key]=utf8_encode($value);
@@ -121,7 +121,7 @@
 		",<div.*>,Uims" => "",
 		",<\/div.*>,Uims" => "",
 		
-		// divers et variés 
+		// divers et variÃˆs 
 		",<csobj.*>,Uims" => "",
 		",<\/csobj>,Uims" => "",
 		",<csscriptdict.*>,Uims" => "",
@@ -190,7 +190,7 @@
 	
 	// les tableaux standards ou personalises -----------------------------------------------------
 	function _recompose_tableau($innerTag,$texte){
-		$table_class=array('spip'=>"|",'ville'=>"£");
+		$table_class=array('spip'=>"|",'ville'=>"Â£");
 		$sep = $table_class['spip'];
 
 		$attributs = _tag2attributs($innerTag);
@@ -382,6 +382,14 @@
 		return $contenu;
 	}
 
+	function _sucrer_cesures ($contenu) {
+		$contenu = preg_replace("/(&#8203;|&#173;|Â­|â€‹â€‹)/", "", $contenu); // Cesures discretes
+		$contenu = str_replace("â€™", "'", $contenu); // Corriger les apostrophes de Word
+		$contenu = str_replace("&rsquo;", "'", $contenu); // Corriger les apostrophes de Word
+		$contenu = str_replace("&lsquo;", "â€˜", $contenu); // 
+		return $contenu;
+	}
+
 	function _spip_apres_sale($contenu) {
 		if(function_exists('apres_sale'))
 			return apres_sale($contenu);
@@ -393,7 +401,6 @@
 		$contenu = preg_replace(",\n_ }},", "}}\n", $contenu);
 		$contenu = preg_replace(",\n_ },", "}\n", $contenu);
 		$contenu = preg_replace(",(\n_[[:blank:]]?)?\n-,", "\n-", $contenu);
-		$contenu = str_replace("&rsquo;", "'", $contenu); // Corriger les apostrophes de Word
 		$contenu = preg_replace(",[[:blank:]]+,", " ", $contenu); // Regrouper les espaces multiples
 		$contenu = preg_replace(",{{{[[:blank:]]?}}},", "", $contenu); // Sucrer les h3 vides
 		$contenu = preg_replace(",{{[[:blank:]]?}},", "", $contenu); // Sucrer les bolds vides
@@ -406,6 +413,8 @@
 
 		$contenu = preg_replace(",\n(?=\n\n),","",$contenu);
 		
+		// Virer les caracteres speciaux (notamment cesures discretes)
+		$contenu = _sucrer_cesures($contenu);
 
 		// virer les entites a la fin seulement
 		// &nbsp; est utilise pour reperer des trucs genre "- " en debut de ligne ...
@@ -418,7 +427,7 @@
 		$contenu_propre = $contenu_sale;
 		
 		
-		//Pré  Traitement
+		//PrÃˆ  Traitement
 		$contenu_propre = _spip_avant_sale($contenu_propre);
 		
 		//Traitement
@@ -427,6 +436,7 @@
 			
 
 		$contenu_propre = _extraire_images($contenu_propre);
+		
 		
 		foreach($correspondances as $motif => $remplacement) {
 			$contenu_propre = preg_replace($motif, $remplacement, $contenu_propre);
@@ -442,7 +452,7 @@
 		//		$url_look = url_de_base()."spip.php";
 		//		$contenu_propre = preg_replace(",\[(.*)->\s*$url_look"."[^\]]*id_((art)icle|(rub)rique)=([0-9]*?)[^\]]*],Uims","[\\1->\\4\\5]",$contenu_propre);
 
-		// a priori on garde ce qui est pas analysé
+		// a priori on garde ce qui est pas analysÃˆ
 		foreach(_correspondances_a_bas_le_html() as $motif => $remplacement)
 			$contenu_propre = preg_replace($motif, $remplacement, $contenu_propre);
 
