@@ -4,6 +4,7 @@
 _ &#169; 2006 - Licence GNU/GPL</auteur>
 	<version>0.3</version>
 	<etat>stable</etat>
+	<icon>minical-32.png</icon>
 	<description>Permet l'utilisation d'une balise #CALENDRIER_MINI.
 _ Cette balise affiche un calendrier au design issu de dotclear et donc compatible avec les styles issus de ce syst&#232;me de blog.
 _ Lui sont adjoints d'autre &#233;l&#233;ments, tels que balises, crit&#232;res, mod&#232;les...
