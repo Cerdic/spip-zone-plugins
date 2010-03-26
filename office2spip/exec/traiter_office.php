@@ -1,4 +1,69 @@
 <?php
+
+function _remplacer_images_texte_liees($matches) {
+	$id_article = $GLOBALS["new_article"];
+	// Recuperer l'alignement	
+	$complet = $matches[0];
+
+	
+	preg_match(",align=[\'\"]?([A-Z]*)[\'\"]?,", $complet, $preg);
+	$align = strtolower($preg[1]);
+	if ($align == "bottom") $align= "center";
+	if (!$align) $align = "center";
+
+	// Recuperer le nom du fichier
+	$fichier = $matches[3];
+	
+	if (preg_match(",^https?\:\/\/,", $fichier)) {
+		$fichier = copie_locale($fichier);
+		// Recuperer la terminaison
+		preg_match(",\.([a-z]+)$,", $fichier, $preg);
+		$terminaison = $preg[1];
+		$url_fichier = preg_replace(",^IMG/,","", $fichier);
+		
+		$dest = _DIR_IMG.$url_fichier;
+		
+		
+	} else {
+		// Recuperer la terminaison
+		preg_match(",\.([a-z]+)$,", $fichier, $preg);
+		$terminaison = $preg[1];
+		
+		$source = sous_repertoire(_DIR_TMP, 'upload_office').$fichier;
+		$dest = sous_repertoire(_DIR_IMG, $terminaison).$fichier;
+		$url_fichier = "$terminaison/$fichier";
+		
+		@copy($source, $dest);
+	}
+	
+	include_spip("inc/filtres");
+	$largeur = largeur($dest);
+	$hauteur = hauteur($dest);
+	$taille = filesize($dest);
+	
+	$id_document = sql_insertq("spip_documents", array(
+		"extension" => $terminaison,
+		"date" => "NOW()",
+		"fichier" => $url_fichier,
+		"mode" => "document",
+		"distant" => "non",
+		"maj" => "NOW()",
+		"largeur" => $largeur,
+		"hauteur" => $hauteur,
+		"taille" => $taille
+	));
+	if ($id_document > 0) {
+		sql_insertq("spip_documents_liens", array(
+			"id_document" => $id_document,
+			"id_objet" => $id_article,
+			"objet" => "article",
+			"vu" => "non"
+		));
+		
+		return "<doc$id_document|$align>";
+	}
+}
+
 function _remplacer_images_texte($matches) {
 	$id_article = $GLOBALS["new_article"];
 
@@ -159,7 +224,8 @@ function exec_traiter_office () {
 
 		}
 		
-		$erreur = @exec("unoconv --format=html $nom_dest");
+		if ($terminaison == "html") $nom_html = $nom_dest;
+		else @exec("unoconv --format=html $nom_dest");
 		
 		
 		if (file_exists($nom_html)) {
@@ -193,6 +259,15 @@ function exec_traiter_office () {
 					
 					$GLOBALS["new_article"] = $id_article;
 					
+					
+					// Traiter les vignettes clicables menant à des images
+					if ($texte = preg_replace_callback(",\[(<img [^>]*src=[\"\']([^\"\']+)[\"\'][^>]*>)\-\>([^\]]*\.(jpg|gif|png))\],i", "_remplacer_images_texte_liees", $texte) ) {
+						sql_updateq("spip_articles", array(
+							"texte" => $texte
+						), "id_article=$id_article");
+					}
+					
+					// Traiter les images insérées dans le texte
 					if ($texte = preg_replace_callback(",(<img [^>]*src=[\"\']([^\"\']+)[\"\'][^>]*>),i", "_remplacer_images_texte", $texte) ) {
 						sql_updateq("spip_articles", array(
 							"texte" => $texte
