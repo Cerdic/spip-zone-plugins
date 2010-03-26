@@ -1,0 +1,21 @@
+<plugin>
+	<nom>
+		pclTar
+	</nom>
+	<auteur>
+		Quentin Drouet (kent1)
+	</auteur>
+	<version>
+		0.1
+	</version>
+	<etat>
+		experimental
+	</etat>
+	<description>
+		pclTar pour SPIP
+_ Ajoute la possibilit&eacute; d'avoir des libs .tgz ou .tar ou .tar.gz en plus du zip par d&eacute;faut de SPIP
+_ Vocation &agrave; int&eacute;grer le core ?
+	</description>
+	<prefix>pcltar</prefix>
+	<necessite id="SPIP" version="[2.1.0-rc;]" />
+</plugin>
