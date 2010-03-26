@@ -12,7 +12,7 @@ function action_getid3_infos_dist(){
 	$arg = $securiser_action();
 
 	if (!preg_match(",^(-?)(\d+)\W(\w+)\W?(\d*)\W?(\d*)$,", $arg, $r)){
-		spip_log("action_infos_video_dist incompris: " . $arg);
+		spip_log("action_getid3_infos_dist incompris: " . $arg);
 		$redirect = urldecode(_request('redirect'));
 		return;
 	}
