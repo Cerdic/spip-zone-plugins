@@ -1,66 +1,10 @@
 <!-- descriptif=
-<h4>
-Configuration du plugin Lecteur multimedia.
-</h4>
-<a href="http://multimedia.spip-zone.info" class="spip_out">Documentation</a>
+<h4><:lm2:cfg_descriptif_titre:></h4>
+<p><:lm2:cfg_lien_doc:></p>
 -->
-
 <!-- titre=Lecteur multimedia-->
 <!-- icone=images/lecteur_multimedia-24.png-->
-<!-- logo=images/lecteur_multimedia-128.png-->
 
-#CACHE{0}
-
-<style>
-fieldset ul{list-style-type:none}
-</style>
-
-<form method="post" action="#SELF">[<div>(#ENV{_cfg_}|form_hidden)</div>]
-
-<h2>Lecteur pour les documents dans les textes</h2>
-
-
-<fieldset><legend>Lecteur audio</legend>
-<p>Choisir parmi les lecteurs proposés pour remplacer &lt;docX|audio&gt;.</p>
-<ul>
-	<li>
-	<label>
-	<input type="radio" name="lecteur_audio" value="neolao_audio" [(#ENV{lecteur_audio}|=={neolao_audio}|oui)checked="checked"]>
-	Neolao
-	</label>
-	</li><li>
-	<label>
-	<input type="radio" name="lecteur_audio" value="pixplayer_audio" [(#ENV{lecteur_audio}|=={pixplayer_audio}|oui)checked="checked"]>
-	Pixplayer
-	</label>
-	</li>
-</ul>
-</fieldset>
-
-
-<fieldset><legend>Lecteur vidéo</legend>
-<p>Choisir parmi les lecteurs proposés pour remplacer &lt;docX|video&gt;.</p>
-<ul>
-	<li>
-	<label>
-	<input type="radio" name="lecteur_video" value="neolao_video" [(#ENV{lecteur_video}|=={neolao_video}|oui)checked="checked"]>
-	Néolao maxi
-	</label>
-	</li>
-	<li>
-	<label>
-	<input type="radio" name="lecteur_video" value="video" [(#ENV{lecteur_video}|=={video}|oui)checked="checked"]>
-	Lecteur vidéo
-	</label>
-	</li>
-</ul>
-</fieldset>
-
-
-<div>
-	<input type="submit" name="_cfg_ok" value="<:oK:>" class="fondo" />
-	<input type="reset" value="<:reset:>" class="fondo" />
-	<input type="submit" name="_cfg_delete" value="<:supprimer:>" class="fondo" />
+<div class="ajax">
+	#FORMULAIRE_CONFIG_LM2
 </div>
-</form>
-

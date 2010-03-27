@@ -1,0 +1,49 @@
+<!-- autoriser=webmestre -->
+<!-- refus=<:cfg:refus_configuration_webmestre:> -->
+<!-- nom=lecteur_multimedia -->
+
+<div class="formulaire_spip formulaire_config formulaire_config_inscription2">
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			<li class="fieldset">
+				<fieldset>
+				<h3 class="legend"><:lm2:cfg_legende_documents_textes:></h3>
+				<ul>
+					<li class="editer_lecteur_audio">
+						<label><:lm2:cfg_label_lecteur_audio:></label>
+						<div class="choix">
+							<input type="radio" name="lecteur_audio" id="neolao_audio" value="neolao_audio" [(#ENV{lecteur_audio}|=={neolao_audio}|oui)checked="checked"] />
+							<label for="neolao_audio">Neolao</label>
+						</div>
+						<div class="choix">
+							<input type="radio" name="lecteur_audio" id="pixplayer_audio" value="pixplayer_audio" [(#ENV{lecteur_audio}|=={pixplayer_audio}|oui)checked="checked"] />
+							<label for="pixplayer_audio">Pixplayer</label>
+						</div>
+					</li>
+					<li>
+						<label><:lm2:cfg_label_lecteur_video:></label>
+						<p class="explication"><:lm2:cfg_explications_lecteur_video:></p>
+						<div class="choix">
+							<input type="radio" name="lecteur_video" id="neolao_video" value="neolao_video" [(#ENV{lecteur_video}|=={neolao_video}|oui)checked="checked"] />
+							<label for="neolao_video">Neolao maxi</label>
+						</div>
+						<div class="choix">
+							<input type="radio" name="lecteur_video" id="video" value="video" [(#ENV{lecteur_video}|=={video}|oui)checked="checked"] />
+							<label for="video"><:lm2:cfg_label_lecteur_video_lecteur:></label>
+						</div>
+					</li>
+				</ul>
+				</fieldset>
+			</li>
+		</ul>
+		<p class="boutons">
+			<input type="submit" name="_cfg_ok" class="submit" value="<:bouton_valider:>" />
+		</p>
+	</div>
+</form>
+</div>
