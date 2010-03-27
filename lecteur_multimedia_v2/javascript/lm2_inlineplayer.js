@@ -99,7 +99,7 @@ function InlinePlayer() {
     resume: function() {
       pl.removeClass(this._data.oLink,this._data.className);
       this._data.className = pl.css.sPlaying;
-      pl.addClass(this._data.oLink,this._data.className);      
+      pl.addClass(this._data.oLink,this._data.className);
     },
 
     finish: function() {
@@ -239,4 +239,3 @@ soundManager.onready(function() {
     inlinePlayer = new InlinePlayer();
   }
 });
-

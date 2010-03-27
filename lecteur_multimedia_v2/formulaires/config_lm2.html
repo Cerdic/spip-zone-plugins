@@ -37,6 +37,22 @@
 							<label for="video"><:lm2:cfg_label_lecteur_video_lecteur:></label>
 						</div>
 					</li>
+					<li>
+						<label><:lm2:cfg_label_lecteur_son_inline:></label>
+						<p class="explication"><:lm2:cfg_explications_lecteur_son_inline:></p>
+						<div class="choix">
+							<input type="radio" name="inlineplayer" id="aucun" value=""[(#ENV{inlineplayer}|non)checked="checked"] />
+							<label for="aucun"><:lm2:cfg_label_aucun:></label>
+						</div>
+						<div class="choix">
+							<input type="radio" name="inlineplayer" id="inlineplayer" value="inlineplayer" [(#ENV{inlineplayer}|=={inlineplayer}|oui)checked="checked"] />
+							<label for="inlineplayer">Inline player</label>
+						</div>
+						<div class="choix">
+							<input type="radio" name="inlineplayer" id="360player" value="360player" [(#ENV{inlineplayer}|=={360player}|oui)checked="checked"] />
+							<label for="360player">360 player</label>
+						</div>
+					</li>
 				</ul>
 				</fieldset>
 			</li>
