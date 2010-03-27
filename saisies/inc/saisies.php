@@ -636,4 +636,38 @@ function saisies_tableau2chaine($tableau){
 	}
 }
 
+/*
+ * Génère une page d'aide listant toutes les saisies et leurs options
+ */
+function saisies_generer_aide(){
+	// On a déjà la liste par saisie
+	$saisies = saisies_lister_disponibles();
+	
+	// On construit une liste par options
+	$options = array();
+	foreach ($saisies as $type_saisie=>$saisie){
+		$options_saisie = saisies_lister_par_nom($saisie['options']);
+		foreach ($options_saisie as $nom=>$option){
+			// Seulement les vrais options, pas les conteneurs
+			if (!isset($option['saisies'])){
+				// Si l'option n'existe pas encore
+				if (!isset($options[$nom])){
+					$options[$nom] = _T_ou_typo($option['options']);
+				}
+				// On ajoute toujours par qui c'est utilisé
+				$options[$nom]['utilisee_par'][] = $type_saisie;
+			}
+		}
+	}
+	ksort($options);
+	
+	return recuperer_fond(
+		'inclure/saisies_aide',
+		array(
+			'saisies' => $saisies,
+			'options' => $options
+		)
+	);
+}
+
 ?>

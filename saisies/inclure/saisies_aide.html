@@ -1,0 +1,23 @@
+
+<B_options_tableau>
+<table>
+<thead>
+	<tr class="first_row">
+		<th></th>
+		<BOUCLE_saisies_tableau_th(POUR){tableau #ENV{saisies}}>
+		<th><a href="#saisie_#CLE">#CLE</a></th>
+		</BOUCLE_saisies_tableau_th>
+	</tr>
+</thead>
+<tbody>
+	<BOUCLE_options_tableau(POUR){tableau #ENV{options}}>
+	<tr class="tr_liste [(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+		<th><a href="#option_#CLE">#CLE</a></th>
+		<BOUCLE_saisies_tableau(POUR){tableau #ENV{saisies}}>
+		<td>[(#CLE|in_array{[(#_options_tableau:VALEUR|table_valeur{utilisee_par})]}|?{'X','-'})]</td>
+		</BOUCLE_saisies_tableau>
+	</tr>
+	</BOUCLE_options_tableau>
+</tbody>
+</table>
+</B_options_tableau>
