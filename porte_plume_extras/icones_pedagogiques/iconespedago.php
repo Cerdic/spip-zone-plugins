@@ -1,9 +1,7 @@
 <?php
-$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
-define('_DIR_PLUGIN_EVA_ICONESPEDAGO',(_DIR_PLUGINS.end($p)));
 
 function iconespedago_pre_typo($chaine) {
-	$chemin = '<img alt="icones_peda" src="'._DIR_PLUGIN_EVA_ICONESPEDAGO.'/img_pack/';
+	$chemin = '<img alt="icones_peda" src="'._DIR_PLUGIN_ICONESPEDAGO.'/img_pack/';
 
 //consignes de travail
 
