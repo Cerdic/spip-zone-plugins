@@ -19,12 +19,13 @@
  * interprétable par SPIP (cf. {@link http://www.spip.net/fr_article3016.html})
  *
  * @param string $chemin_fichier Chemin provisoire dans lequel a été téléchargé le fichier
- * @return mixed
+ * @return string Message d'erreur ou résultat de la transformation XSLT
  */
 function odt2spip_traiter_mathml($chemin_fichier) {
 	// recuperer le contenu du fichier
-	if (!$mathml = file_get_contents($chemin_fichier))
+	if (!$mathml = file_get_contents($chemin_fichier)) {
 		return(_T('odtspip:err_transformation_xslt_mathml'));
+	}
 
 	// virer le DOCTYPE qui plante le parseur vu que la dtd n'est pas disponible
 	$mathml = preg_replace('/<!DOCTYPE.*?>/i', '', $mathml);
@@ -40,13 +41,16 @@ function odt2spip_traiter_mathml($chemin_fichier) {
 		// Crée le processeur XSLT
 		$xh = xslt_create();
 		// si on est sur un serveur Windows utiliser xslt_set_base avec le préfixe file://
-		if (strpos($_SERVER['SERVER_SOFTWARE'], 'Win') !== false)
+		if (strpos($_SERVER['SERVER_SOFTWARE'], 'Win') !== false) {
 			xslt_set_base($xh, 'file://' . getcwd () . '/');
+		}
 	  
 		// lancer le parseur
 		$arguments = array('/_xml' => $mathml);
 		$latex_sortie = xslt_process($xh, 'arg:/_xml', $xslt_texte, NULL, $arguments);
-		if (!$latex_sortie) return(_T('odtspip:err_transformation_xslt_mathml'));
+		if (!$latex_sortie) {
+			return(_T('odtspip:err_transformation_xslt_mathml'));
+		}
 	  
 		// Détruit le processeur XSLT
 		xslt_free($xh);
@@ -61,8 +65,9 @@ function odt2spip_traiter_mathml($chemin_fichier) {
 		$proc->importStylesheet($xsl); // attachement des règles xsl
 		
 		// lancer le parseur
-		if (!$latex_sortie = $proc->transformToXml($xml))
+		if (!$latex_sortie = $proc->transformToXml($xml)) {
 			return(_T('odtspip:err_transformation_xslt_mathml'));
+		}
 	}
 
 	return $latex_sortie;  

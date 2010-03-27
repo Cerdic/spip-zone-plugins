@@ -11,8 +11,9 @@
  */
 
 /**
- * Pipeline ajoutant un lien d'import à la barre de navigation de l'interface privée
- * 
+ * Ajout d'un lien d'import à la barre de navigation de l'interface privée
+ *
+ * @internal à l'aide du pipeline {@link affiche_droite}
  * @param Array $flux Le code de la barre
  * @return Array Le code modifié
  */

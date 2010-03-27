@@ -43,31 +43,34 @@ function action_odt2spip_importe() {
 	$hash = _request('hash');
 
 	$redirect = _request('redirect');
-	if ($redirect == NULL)
+	if ($redirect == NULL) {
 		$redirect = "";
+	}
 
 	include_spip("inc/securiser_action");
 
-	if (!autoriser('creerarticledans', 'rubrique', $id_rubrique))
+	if (!autoriser('creerarticledans', 'rubrique', $id_rubrique)) {
 		die(_T('avis_non_acces_page'));
+	}
 
 	// ss-rep temporaire specifique de l'auteur en cours: tmp/odt2spip/id_auteur/
 	// => le créer s'il n'existe pas
 	$base_dezip = _DIR_TMP . "odt2spip/";	  // avec / final
-	if (!is_dir($base_dezip))
-		if (!sous_repertoire(_DIR_TMP, 'odt2spip'))
-			die (_T('odtspip:err_repertoire_tmp'));
+	if (!is_dir($base_dezip) AND !sous_repertoire(_DIR_TMP, 'odt2spip')) {
+		die (_T('odtspip:err_repertoire_tmp'));
+	}
 	$rep_dezip = $base_dezip . $id_auteur . '/';
-	if (!is_dir($rep_dezip))
-		if (!sous_repertoire($base_dezip, $id_auteur))
-			die (_T('odtspip:err_repertoire_tmp'));
+	if (!is_dir($rep_dezip) AND !sous_repertoire($base_dezip, $id_auteur)) {
+		die (_T('odtspip:err_repertoire_tmp'));
+	}
 
 	// traitement d'un fichier odt envoye par $_POST
 	$fichier_zip = addslashes($_FILES['fichier_odt']['name']);
 	if ($_FILES['fichier_odt']['name'] == '' 
-			OR $_FILES['fichier_odt']['error'] != 0
-			OR !move_uploaded_file($_FILES['fichier_odt']['tmp_name'], $rep_dezip . $fichier_zip))
+	    OR $_FILES['fichier_odt']['error'] != 0
+	    OR !move_uploaded_file($_FILES['fichier_odt']['tmp_name'], $rep_dezip . $fichier_zip)) {
 		die(_T('odtspip:err_telechargement_fichier'));
+	}
 
 	// dezipper le fichier odt a la mode SPIP
 	include_spip("inc/pclzip");
@@ -93,8 +96,9 @@ function action_odt2spip_importe() {
 	$table = $id = 'articles';
 	$contexte = $args[0];
 	$source = $fichier_sortie;
-	if (!$f = snippets_fonction_importer($table)) 
+	if (!$f = snippets_fonction_importer($table)) {
 		die(_T('odtspip:err_import_snippet'));
+	}
 	include_spip('inc/xml');
 	$arbre = spip_xml_load($source, false);
 	$translations = $f($id, $arbre, $contexte);
@@ -110,13 +114,15 @@ function action_odt2spip_importe() {
 		// recuperer le titre
 		preg_match('/<titre>(.*?)<\/titre>/', $xml_sortie, $match);
 		$titre = $match[1];
-		if (!isset($ajouter_documents)) 
+		if (!isset($ajouter_documents)) {
 			$ajouter_documents = charger_fonction('ajouter_documents','inc');
+		}
 		
 		// la y'a un bogue super-bizarre avec la fonction spip_abstract_insert()
 		// qui est donnée comme absente lors de l'appel de ajouter_document()
-		if (!function_exists('spip_abstract_insert'))
+		if (!function_exists('spip_abstract_insert')) {
 			include_spip('base/abstract_sql');
+		}
 		$id_doc_odt = $ajouter_documents($rep_dezip . $fichier_zip, $fichier_zip,
 					"article", $id_article, 'document', 0, $toto='');
 
@@ -129,8 +135,9 @@ function action_odt2spip_importe() {
 	}
 
 	// vider le contenu du rep de dezippage
-	if (!function_exists('effacer_repertoire_temporaire')) 
+	if (!function_exists('effacer_repertoire_temporaire')) {
 		include_spip('inc/getdocument');
+	}
 	effacer_repertoire_temporaire($rep_dezip);
 	
 	// aller sur la page de l'article qui vient d'être créée

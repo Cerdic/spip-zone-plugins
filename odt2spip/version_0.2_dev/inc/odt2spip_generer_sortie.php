@@ -46,8 +46,9 @@ function inc_odt2spip_generer_sortie($id_auteur, $rep_dezip){
 	// daterminer si on est en php 4 ou php 5 pour choisir les fonctions xslt a utiliser
 	// on est php5: utiliser les fonctions de la classe XSLTProcessor
 	// verifier que l'extension xslt est active
-	if (!class_exists('XSLTProcessor'))
+	if (!class_exists('XSLTProcessor')) {
 		die(_T('odtspip:err_extension_xslt'));
+	}
 
 	$proc = new XSLTProcessor();
 
@@ -62,8 +63,9 @@ function inc_odt2spip_generer_sortie($id_auteur, $rep_dezip){
 	$proc->importStylesheet($xsl); // attachement des regles xsl
 
 	// lancer le parseur
-	if (!$xml_sortie = $proc->transformToXml($xml))
+	if (!$xml_sortie = $proc->transformToXml($xml)) {
 		die(_T('odtspip:err_transformation_xslt'));
+	}
 
 	// traitements complementaires du flux de sortie
 	// remplacer les &gt; et &lt;
@@ -99,10 +101,12 @@ function inc_odt2spip_generer_sortie($id_auteur, $rep_dezip){
 	preg_match_all('/<img([;a-zA-Z0-9\.]*)/', $xml_sortie, $match, PREG_PATTERN_ORDER);
 
 	if (@count($match) > 0) {
-		if(!isset($odt2spip_retailler_img))
+		if (!isset($odt2spip_retailler_img {
 			$odt2spip_retailler_img = charger_fonction('odt2spip_retailler_img', 'inc');
-		if(!isset($ajouter_documents))
+		}
+		if (!isset($ajouter_documents)) {
 			$ajouter_documents = charger_fonction('ajouter_documents', 'inc');
+		}
 		$T_images = array();
 		foreach($match[1] as $ch) {
 			$Tdims = explode(';;;', $ch);
@@ -113,7 +117,7 @@ function inc_odt2spip_generer_sortie($id_auteur, $rep_dezip){
 				$hauteur = round($Tdims[2] * $conversion_image);
 				$odt2spip_retailler_img($rep_pictures . $img, $largeur, $hauteur);
 				$type = 'image';
-				if ($id_document = $ajouter_documents($rep_pictures . $img, $img, "article", '', $type, 0,$toto = '')) { 
+				if ($id_document = $ajouter_documents($rep_pictures . $img, $img, "article", '', $type, 0, '')) {
 					$xml_sortie = str_replace($ch, $id_document, $xml_sortie);
 					$T_images[] = $id_document;
 				}
@@ -122,9 +126,10 @@ function inc_odt2spip_generer_sortie($id_auteur, $rep_dezip){
 	}
 
 	//finalement enregistrer le contenu dans /tmp/odt2spip/id_auteur/snippet_odt2spip.xml
-	if (!ecrire_fichier($fichier_sortie,$xml_sortie))
+	if (!ecrire_fichier($fichier_sortie,$xml_sortie)) {
 		die(_T('odtspip:err_enregistrement_fichier_sortie') . $fichier_sortie);
-
+	}
+	
 	return array($fichier_sortie, $xml_sortie);
 }
 
