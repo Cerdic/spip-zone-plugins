@@ -3,7 +3,6 @@
 /* Ces styles sont indispensables et doivent necessairement etre        */
 /* definis pour le bon fonctionnement de vos squelettes.                */
 
-
 /* News feed */
 #content .post ul#feed {list-style: none;}
 ul#feed li {margin-bottom:.5em;background:none;padding:2px 0;color:#777;}
