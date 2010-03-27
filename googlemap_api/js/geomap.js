@@ -121,3 +121,9 @@ function abrirVentana(identificador, idmap) {
 	});
 	marcadores["id_"+identificador].openInfoWindowHtml(contidosHTML["id_"+identificador]);
 }
+
+function zoomIci(latit, lonxit, zoom, idmap) {
+    var map = eval('map'+ idmap);
+    map.panTo(new GLatLng(latit, lonxit));
+    map.setZoom(zoom)
+}
