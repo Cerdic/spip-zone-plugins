@@ -39,6 +39,15 @@ if (!defined('_DIR_PLUGIN_THEME')){
 	AND is_dir(_DIR_THEMES . $t)){
 		_chemin(_DIR_THEMES.$t);
 		$GLOBALS['marqueur'] = (isset($GLOBALS['marqueur'])?$GLOBALS['marqueur']:"").":$t";
+		// @experimental : sauver le nom du repertoire theme utilise
+		// a defaut de connaitre le vrai prefixe
+		if (!defined('NOM_THEME')) { define('NOM_THEME', basename($t));}
+	}
+	
+	// @experimental : balise #THEME qui retourne le nom du theme selectionne
+	function balise_THEME_dist($p){
+		$p->code = "(defined('NOM_THEME') ? NOM_THEME : '')";
+		return $p;
 	}
 }
 
