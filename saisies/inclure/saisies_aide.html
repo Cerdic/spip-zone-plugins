@@ -31,12 +31,34 @@
 <p class="options">
 	<strong>Options :</strong>
 	<BOUCLE_options_saisie(POUR){tableau #VALEUR|table_valeur{options}}{", "}>
-	<a href="#option_#VALEUR">#VALEUR</a>
+	<a href="#option_#CLE">#CLE</a>
 	</BOUCLE_options_saisie>
 </p>
 </BOUCLE_saisies>
 
 <h2 class="h2 spip" id="liste_options_saisies">Toutes les options</h2>
 <BOUCLE_options(POUR){tableau #ENV{options}}>
-<h3 class="h3 spip" id="option_#CLE">#CLE</h3>
+[(#SET{label, [(#VALEUR|table_valeur{label}|sinon{[(#VALEUR|table_valeur{label_case})]})]})]
+<h3 class="h3 spip" id="option_#CLE">[(#GET{label}|?{#GET{label} [ ((#CLE))], #CLE})]</h3>
+[<p class="description">
+	<strong>Description :</strong> (#VALEUR|table_valeur{explication}|sinon{[(#VALEUR|table_valeur{label}|?{[(#VALEUR|table_valeur{label_case})]})]})
+</p>]
+<B_utilisee_par>
+<p class="utilisee_par">
+	<strong>Utilisée par :</strong>
+	<BOUCLE_utilisee_par(POUR){tableau #VALEUR|table_valeur{utilisee_par}}{", "}>
+	<a href="#option_#VALEUR">#VALEUR</a>
+	</BOUCLE_utilisee_par>
+</p>
+</B_utilisee_par>
+<B_choix>
+<p class="choix_possibles">
+	<strong>Choix possibles :</strong>
+	<ul>
+		<BOUCLE_choix(POUR){tableau #VALEUR|table_valeur{datas}}>
+		<li>"#CLE" : #VALEUR</li>
+		</BOUCLE_choix>
+	</ul>
+</p>
+</B_choix>
 </BOUCLE_options>

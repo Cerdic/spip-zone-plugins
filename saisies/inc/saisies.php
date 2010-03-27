@@ -656,8 +656,8 @@ function saisies_generer_aide(){
 			// On ajoute toujours par qui c'est utilisé
 			$options[$nom]['utilisee_par'][] = $type_saisie;
 		}
-		// Plus besoin de la liste détaillée
-		$saisies[$type_saisie]['options'] = array_keys($options_saisie);
+		ksort($options_saisie);
+		$saisies[$type_saisie]['options'] = $options_saisie;
 	}
 	ksort($options);
 	

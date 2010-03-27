@@ -26,12 +26,14 @@ options:
         saisie: 'case'
         options:
           nom: 'pliable'
-          label_case: '<:saisies:option_pliable_label:>'
+          label: '<:saisies:option_pliable_label:>'
+          label_case: '<:saisies:option_pliable_label_case:>'
       -
         saisie: 'case'
         options:
           nom: 'plie'
-          label_case: '<:saisies:option_plie_label:>'
+          label: '<:saisies:option_plie_label:>'
+          label_case: '<:saisies:option_plie_label_case:>'
       -
         saisie: 'input'
         options:
