@@ -1,5 +1,35 @@
 <?php
 
+/**
+ * Créer un article à partir d'un fichier au format odt
+ *
+ * @author cy_altern
+ * @license GNU/LGPL
+ *
+ * @package odt2spip
+ * @version $Id$
+ *
+ */
+
+/**
+ * Création de l'article et redirection vers celui-ci
+ *
+ * Le fichier .odt est envoyé par un formulaire, ainsi que des informations sur
+ * la rubrique dans laquelle créer l'article, un flag qui indique s'il faut joindre
+ * le document à l'article créé, etc..
+ * Cette fonction s'assure avant tout que l'utilisateur peut y ajouter un article.
+ * Le fichier .odt est traité et transformé en article.
+ * En fin de traitement, on est redirigé vers l'article qui vient d'être créé.
+ *
+ * {@internal
+ * Un répertoire temporaire, spécifique à l'utilisateur en cours, est utilisé et
+ * créé si nécessaire. Il est supprimé en fin de traitement.
+ * Le format odt correspond à une archive .zip, et regroupe le contenu dans un fichier
+ * content.xml : ce fichier est transformé par XSLT afin de générer un texte
+ * utilisant les balises SPIP pour sa mise en forme. }
+ * 
+ * @global Array $visiteur_session La session de l'utilisateur courant
+ */
 function action_odt2spip_importe() {
 	global $visiteur_session;
 
@@ -7,21 +37,22 @@ function action_odt2spip_importe() {
 	$arg = _request('arg');
 	$args = explode(":", $arg);
 
-	// le 1er element de _request('arg') est id_rubrique=XXX
+	// le 1er élément de _request('arg') est id_rubrique=XXX
 	$Targs = explode("=", $args[0]);
 	$id_rubrique = $Targs[1];
 	$hash = _request('hash');
 
 	$redirect = _request('redirect');
-	if ($redirect == NULL) $redirect = "";
+	if ($redirect == NULL)
+		$redirect = "";
 
 	include_spip("inc/securiser_action");
 
 	if (!autoriser('creerarticledans', 'rubrique', $id_rubrique))
 		die(_T('avis_non_acces_page'));
 
-	// ss-rep temporaire specifique de l'auteur en cours: tmp/odt2spip/id_auteur/ 
-	// => le creer si il n'existe pas
+	// ss-rep temporaire specifique de l'auteur en cours: tmp/odt2spip/id_auteur/
+	// => le créer s'il n'existe pas
 	$base_dezip = _DIR_TMP . "odt2spip/";	  // avec / final
 	if (!is_dir($base_dezip))
 		if (!sous_repertoire(_DIR_TMP, 'odt2spip'))
@@ -31,7 +62,7 @@ function action_odt2spip_importe() {
 		if (!sous_repertoire($base_dezip, $id_auteur))
 			die (_T('odtspip:err_repertoire_tmp'));
 
-	// traitement d'un fichier odt envoye par $_POST 
+	// traitement d'un fichier odt envoye par $_POST
 	$fichier_zip = addslashes($_FILES['fichier_odt']['name']);
 	if ($_FILES['fichier_odt']['name'] == '' 
 			OR $_FILES['fichier_odt']['error'] != 0
@@ -52,12 +83,12 @@ function action_odt2spip_importe() {
 		die($zip->errorName(true));	 //$zip->error_code
 	}
 
-	// Creation du fichier necessaire a snippets
+	// Création du fichier nécessaire à snippets
 	$odt2spip_generer_sortie = charger_fonction('odt2spip_generer_sortie', 'inc');
 	list($fichier_sortie, $xml_sortie) = $odt2spip_generer_sortie($id_auteur, $rep_dezip);
 
-	// generer l'article a partir du fichier xml de sortie 
-	// (code pompe sur plugins/snippets/action/snippet_importe.php)
+	// générer l'article à partir du fichier xml de sortie
+	// (code pompé sur plugins/snippets/action/snippet_importe.php)
 	include_spip('inc/snippets');
 	$table = $id = 'articles';
 	$contexte = $args[0];
@@ -73,7 +104,7 @@ function action_odt2spip_importe() {
 	// si on est en 2.0 passer le statut de l'article en prepa
 	sql_updateq('spip_articles', array('statut' => 'prop'), 'id_article=' . $id_article);
 
-	// si necessaire attacher le fichier odt original a l'article 
+	// si nécessaire attacher le fichier odt original à l'article
 	// et lui mettre un titre signifiant
 	if (_request('attacher_odt') == '1') {
 		// recuperer le titre
@@ -82,7 +113,8 @@ function action_odt2spip_importe() {
 		if (!isset($ajouter_documents)) 
 			$ajouter_documents = charger_fonction('ajouter_documents','inc');
 		
-		// la y'a un bogue super-bizarre avec la fonction spip_abstract_insert() qui est donnee comme absente lors de l'appel de ajouter_document()
+		// la y'a un bogue super-bizarre avec la fonction spip_abstract_insert()
+		// qui est donnée comme absente lors de l'appel de ajouter_document()
 		if (!function_exists('spip_abstract_insert'))
 			include_spip('base/abstract_sql');
 		$id_doc_odt = $ajouter_documents($rep_dezip . $fichier_zip, $fichier_zip,
@@ -96,12 +128,12 @@ function action_odt2spip_importe() {
 		revision_document($id_doc_odt,$c);
 	}
 
+	// vider le contenu du rep de dezippage
 	if (!function_exists('effacer_repertoire_temporaire')) 
 		include_spip('inc/getdocument');
-	// vider le contenu du rep de dezippage
 	effacer_repertoire_temporaire($rep_dezip);
 	
-	// aller sur la page de l'article qui vient d'etre cree
+	// aller sur la page de l'article qui vient d'être créée
 	redirige_par_entete(
 			parametre_url(
 					str_replace("&amp;", "&", urldecode($redirect)),

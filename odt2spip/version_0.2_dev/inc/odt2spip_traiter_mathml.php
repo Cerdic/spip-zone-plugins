@@ -1,5 +1,26 @@
 <?php
 
+/**
+ * Créer un article à partir d'un fichier au format odt
+ *
+ * @author cy_altern
+ * @license GNU/LGPL
+ *
+ * @package odt2spip
+ * @version $Id$
+ *
+ */
+
+/**
+ * Traiter les éléments au format {@link http://fr.wikipedia.org/wiki/MathML MathML}
+ *
+ * Le format {@link http://fr.wikipedia.org/wiki/MathML MathML} est transformé par
+ * XSLT pour générer du code {@link http://fr.wikipedia.org/wiki/Aide%3AFormules_TeX LaTEX}
+ * interprétable par SPIP (cf. {@link http://www.spip.net/fr_article3016.html})
+ *
+ * @param string $chemin_fichier Chemin provisoire dans lequel a été téléchargé le fichier
+ * @return mixed
+ */
 function odt2spip_traiter_mathml($chemin_fichier) {
 	// recuperer le contenu du fichier
 	if (!$mathml = file_get_contents($chemin_fichier))

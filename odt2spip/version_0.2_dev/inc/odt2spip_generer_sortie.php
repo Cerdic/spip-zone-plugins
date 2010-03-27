@@ -1,4 +1,29 @@
 <?php
+/**
+ * Créer un article à partir d'un fichier au format odt
+ *
+ * @author cy_altern
+ * @license GNU/LGPL
+ *
+ * @package odt2spip
+ * @version $Id$
+ *
+ */
+
+/**
+ * Création du fichier nécessaire à snippets
+ *
+ * Le fichier content.xml a été extrait de l'archive .odt, et placé dans le dossier
+ * temporaire propre à l'utilisateur courant. Un premier traitement est effectué
+ * par cette fonction pour qu'il soit finalement transformé en texte utilisant les
+ * balises SPIP. On tient compte de la présence des plugins enluminure_typo et
+ * intertitre_enrichis. Les images sont extraites du document .odt et sont prêtes
+ * à être insérées dans le futur article SPIP.
+ * 
+ * @param int $id_auteur Utilisateur courant
+ * @param string $rep_dezip Répertoire où placer le fichier snippet_odt2spip.xml
+ * @return mixed
+ */
 function inc_odt2spip_generer_sortie($id_auteur, $rep_dezip){
 	// variables en dur pour xml en entree et xslt utilisee
 	// $xml_entre = $rep_dezip . 'content.xml';  // chemin du fichier xml a lire	

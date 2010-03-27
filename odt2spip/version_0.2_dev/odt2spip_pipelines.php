@@ -1,5 +1,21 @@
 <?php
+/**
+ * Créer un article à partir d'un fichier au format odt
+ *
+ * @author cy_altern
+ * @license GNU/LGPL
+ *
+ * @package odt2spip
+ * @version $Id$
+ *
+ */
 
+/**
+ * Pipeline ajoutant un lien d'import à la barre de navigation de l'interface privée
+ * 
+ * @param Array $flux Le code de la barre
+ * @return Array Le code modifié
+ */
 function odt2spip_affiche_droite($flux){
 	$id_rubrique = $flux['args']['id_rubrique'];
 	if ($flux['args']['exec'] == 'naviguer' AND $id_rubrique > 0) {

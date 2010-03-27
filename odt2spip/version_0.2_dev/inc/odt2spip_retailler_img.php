@@ -1,9 +1,24 @@
 <?php
+/**
+ * Créer un article à partir d'un fichier au format odt
+ *
+ * @author cy_altern
+ * @license GNU/LGPL
+ *
+ * @package odt2spip
+ * @version $Id$
+ *
+ */
 
-// retailler une image : (ne gere que les images GIF, JPG et PNG)
-// $img_ini = CHEMIN+NOM_FICHIER de l'img initiale, $l et $h = largeur et hauteur max de l'image finale
-// gestion de la transparence des PNG : code de matt1walsh@gmail.com sur http://fr2.php.net/manual/fr/function.imagecopyresampled.php
-
+/**
+ * retailler une image : (ne gère que les images GIF, JPG et PNG)
+ *
+ * @internal Gestion de la transparence des PNG : code de matt1walsh@gmail.com sur {@link http://fr2.php.net/manual/fr/function.imagecopyresampled.php}
+ * @param string $img_ini Le fichier à retailler
+ * @param string $l Largeur max de l'image finale
+ * @param int $h Hauteur max
+ * @return string Le message d'erreur en cas de problème
+ */
 function inc_odt2spip_retailler_img($img_ini, $l = '', $h = 400){
 	if (!file_exists($img_ini))
 		return 'Le fichier ' . $img_ini . ' n\'existe pas';
