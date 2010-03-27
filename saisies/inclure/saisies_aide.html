@@ -3,10 +3,11 @@ Sauter à : <a href="#liste_saisies">Toutes les saisies</a>, <a href="#liste_opt
 
 <h2 class="h2 spip">Utilisation des options</h2>
 <B_options_tableau>
+<div style="overflow:auto;">
 <table class="spip">
 <thead>
 	<tr class="first_row">
-		<th></th>
+		<th>Options \ Saisies</th>
 		<BOUCLE_saisies_tableau_th(POUR){tableau #ENV{saisies}}>
 		<th><a href="#saisie_#CLE">#CLE</a></th>
 		</BOUCLE_saisies_tableau_th>
@@ -23,6 +24,7 @@ Sauter à : <a href="#liste_saisies">Toutes les saisies</a>, <a href="#liste_opt
 	</BOUCLE_options_tableau>
 </tbody>
 </table>
+</div>
 </B_options_tableau>
 
 <h2 class="h2 spip" id="liste_saisies">Toutes les saisies</h2>
@@ -33,9 +35,7 @@ Sauter à : <a href="#liste_saisies">Toutes les saisies</a>, <a href="#liste_opt
 </p>
 <p class="options">
 	<strong>Options :</strong>
-	<BOUCLE_options_saisie(POUR){tableau #VALEUR|table_valeur{options}}{", "}>
-	<a href="#option_#CLE">#CLE</a>
-	</BOUCLE_options_saisie>
+	<BOUCLE_options_saisie(POUR){tableau #VALEUR|table_valeur{options}}{", "}><a href="#option_#CLE">#CLE</a></BOUCLE_options_saisie>
 </p>
 </BOUCLE_saisies>
 
@@ -49,15 +49,13 @@ Sauter à : <a href="#liste_saisies">Toutes les saisies</a>, <a href="#liste_opt
 <B_utilisee_par>
 <p class="utilisee_par">
 	<strong>Utilisée par :</strong>
-	<BOUCLE_utilisee_par(POUR){tableau #VALEUR|table_valeur{utilisee_par}}{", "}>
-	<a href="#option_#VALEUR">#VALEUR</a>
-	</BOUCLE_utilisee_par>
+	<BOUCLE_utilisee_par(POUR){tableau #VALEUR|table_valeur{utilisee_par}}{", "}><a href="#option_#VALEUR">#VALEUR</a></BOUCLE_utilisee_par>
 </p>
 </B_utilisee_par>
 <B_choix>
 <p class="choix_possibles">
 	<strong>Choix possibles :</strong>
-	<ul>
+	<ul class="spip">
 		<BOUCLE_choix(POUR){tableau #VALEUR|table_valeur{datas}}>
 		<li>"#CLE" : #VALEUR</li>
 		</BOUCLE_choix>
