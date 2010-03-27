@@ -26,7 +26,8 @@
  * créé si nécessaire. Il est supprimé en fin de traitement.
  * Le format odt correspond à une archive .zip, et regroupe le contenu dans un fichier
  * content.xml : ce fichier est transformé par XSLT afin de générer un texte
- * utilisant les balises SPIP pour sa mise en forme. }
+ * utilisant les balises SPIP pour sa mise en forme.
+ * }}
  * 
  * @global Array $visiteur_session La session de l'utilisateur courant
  */

@@ -1,12 +1,14 @@
 <?php
-/* 
-* odt2spip est un plugin pour créer des articles SPIP à partir de fichiers OOo Writer (format .odt)
-*
-* Auteur : cy_altern (cy_altern@yahoo.fr)
-*  
-* Ce programme est un logiciel libre distribue sous licence GNU/GPL.
-*  
-**/
+/**
+ * Fichier de langue : Allemand
+ *
+ * @author cy_altern
+ * @license GNU/LGPL
+ *
+ * @package odt2spip
+ * @version $Id$
+ *
+ */
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
@@ -22,7 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'err_enregistrement_fichier_sortie' => 'Fehler beim Speichern der Datei mit dem Plugins Snippets',
 	'err_extension_xslt'=> 'XSLT f&uuml;r PHP nicht verf&uuml;gbar: Bitten sie ihren Administrator, die XSL Erweiterungen zu installieren.',
 	'err_import_snippet' => 'Fehler beim Anlegen des Artikels mit Zusatzdateien. Bitte Installation und Aktivierung von odt2spip pr&uuml;fen.',
-	'err_repertoire_tmp' => 'Fehler: tmp/odt2spip Ordner oder zugehöriger Unterordner  /id auteur wurde nicht hergestellt',
+	'err_repertoire_tmp' => 'Fehler: tmp/odt2spip Ordner oder zugeh&ouml;riger Unterordner  /id auteur wurde nicht hergestellt',
 	'err_telechargement_fichier' => 'Fehler: die Datei konnte nicht wieder hergestellt werden',
 	'err_transformation_xslt' => 'Fehler beider der XSLT-Verarbeitung  der ODT-Datei',
 	'err_transformation_xslt_mathml' => 'XSLT-Fehler bei der Umwandlung von MathML',

@@ -1,12 +1,14 @@
 <?php
-/* 
-* odt2spip est un plugin pour créer des articles SPIP à partir de fichiers OOo Writer (format .odt)
-*
-* Auteur : cy_altern (cy_altern@yahoo.fr)
-*  
-* Ce programme est un logiciel libre distribue sous licence GNU/GPL.
-*  
-**/
+/**
+ * Fichier de langue : Anglais
+ *
+ * @author cy_altern
+ * @license GNU/LGPL
+ *
+ * @package odt2spip
+ * @version $Id$
+ *
+ */
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
