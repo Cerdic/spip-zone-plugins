@@ -3,6 +3,9 @@
 /* Ces styles sont indispensables et doivent necessairement etre        */
 /* definis pour le bon fonctionnement de vos squelettes.                */
 
+/* Couleurs des liens de SPIP */
+a.spip_out {color: #009; background:url(img/out.gif) no-repeat right; padding-right:16px} /* liens sortants */
+
 /* News feed */
 #content .post ul#feed {list-style: none;}
 ul#feed li {margin-bottom:.5em;background:none;padding:2px 0;color:#777;}
