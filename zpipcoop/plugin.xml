@@ -1,6 +1,6 @@
 <plugin>
 	<nom>Zpipcoop</nom>
-	<auteur>Pierre KUHN, Val&ecute;ry-Xavier Lentz, Teddy Payet
+	<auteur>Pierre KUHN, Valéry-Xavier Lentz, Teddy Payet
 	&copy; 2010</auteur>
 	<icon></icon>
 	<licence>GPL</licence>
@@ -10,20 +10,8 @@
 	Un plugin compatible avec le concept Z. Un squelette avec un acc&eacute;s enti&egrave;rement restreint.
 	</description>
 	<prefix>zpipcoop</prefix>
-	<fonctions>zpipcoop_pipelines.php</fonctions>
-	<pipeline>
-		<nom>styliser</nom>
-		<inclure>zpipcoop_pipelines.php</inclure>
-	</pipeline>
-	<pipeline>
-		<nom>insert_head</nom>
-		<inclure>zpipcoop_pipelines.php</inclure>
-	</pipeline>
-	<pipeline>
-		<nom>pre_propre</nom>
-		<inclure>zpipcoop_pipelines.php</inclure>
-	</pipeline>
 	<necessite id="SPIP" version="[2.0.10;]" />
+	<necessite id="Z" version="[1.5.1;]" />
 	<utilise id="autorite" version='[0.9.6;]' />
 	<utilise id="clevermail" version='[2.3.5;]' />
 	<utilise id="contact" version='[0.61;]' />
