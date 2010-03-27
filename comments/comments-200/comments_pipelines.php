@@ -17,9 +17,7 @@ function balise_BOUTONS_ADMIN_FORUM_dist($p) {
 	if (($_id = interprete_argument_balise(1,$p))===NULL)
 		$_id = champ_sql('id_forum', $p);
 
-	include_spip('inc/plugin');
-	if (function_exists('spip_version_compare')
-		AND spip_version_compare($GLOBALS['spip_version_code'],"2.1.0-rc",">="))
+	if (function_exists('bouton_action'))
 		$p->code = "
 '<'.'?php
 	if (\$GLOBALS[\'visiteur_session\'][\'statut\']==\'0minirezo\'
@@ -33,10 +31,12 @@ function balise_BOUTONS_ADMIN_FORUM_dist($p) {
 			. \"</div>\";
 		}
 ?'.'>'";
-		$p->interdire_scripts = false;
+	else
+		$p->code = "''";
+
+	$p->interdire_scripts = false;
 
 	return $p;
-
 }
 
 
