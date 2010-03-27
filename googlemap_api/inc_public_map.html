@@ -123,7 +123,7 @@
     //xml almacena en un objeto xml los datos recogidos del documento leido
     				jQuery("item", xml[(#GET{id_carte_gis})]).each(function(item[(#GET{id_carte_gis})]){
     					var xmlItem[(#GET{id_carte_gis})] = xml[(#GET{id_carte_gis})].documentElement.getElementsByTagName("item")[item[(#GET{id_carte_gis})]];
-    					agregarMarcador(xmlItem[(#GET{id_carte_gis})],'[(#GET{id_carte_gis})]',0,17,markerManager[(#GET{id_carte_gis})][(#ENV{ombre}|=={0}|non),'ombre']);
+    					agregarMarcador(xmlItem[(#GET{id_carte_gis})],'[(#GET{id_carte_gis})]',0,17,markerManager[(#GET{id_carte_gis})],[(#ENV{ombre,1}|=={0}|?{"''","'ombre'"})],[(#ENV{swfobject,oui}|=={non}|?{"'noplayer'","''"})]);//
     	});
     	markerManager[(#GET{id_carte_gis})].refresh();
         [(#ENV{id_a_ouvrir}|=={''}|non) abrirVentana([(#ENV{id_a_ouvrir})],[(#GET{id_carte_gis})]);]

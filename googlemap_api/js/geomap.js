@@ -58,7 +58,7 @@ function creaMarcador(point, html, icon, son, idmap) {
 	return marcador;
 }
 
-function agregarMarcador (xmlItem, idmap, minZoom, maxZoom, markerMngerXD, ombre) {
+function agregarMarcador (xmlItem, idmap, minZoom, maxZoom, markerMngerXD, ombre, noplayer) {
 	//almacenamos en distintas variables la informacion contenida nen los chilNodes de cada item-marcador do xml
 	var xmlLat = $("geo_lat",xmlItem);
 	var xmlLng = $("geo_long",xmlItem);
@@ -70,7 +70,9 @@ function agregarMarcador (xmlItem, idmap, minZoom, maxZoom, markerMngerXD, ombre
 		var lat = parseFloat(xmlLat.text());
 		var lng = parseFloat(xmlLng.text());
 		var id = parseInt(id.text());
-		var html = "<div id='window_" + id +"' class='window_content'><div id='player'></div><h3><a href='" + $("link",xmlItem).text() + "'>" + $("title",xmlItem).text() + "</a></h3>" + $("description",xmlItem).text() + "</div>";
+		var html = "<div id='window_" + id +"' class='window_content'>";
+    if (noplayer == '') html += "<div id='player'></div>";
+    html += "<h3><a href='" + $("link",xmlItem).text() + "'>" + $("title",xmlItem).text() + "</a></h3>" + $("description",xmlItem).text() + "</div>";
 		var icon = $("geo_icon",xmlItem).text();
 		var son;
 		if (xmlSon.length != 0) son = xmlSon.attr("url");
@@ -81,7 +83,7 @@ function agregarMarcador (xmlItem, idmap, minZoom, maxZoom, markerMngerXD, ombre
 		//creamos un icono para o marcador
 		var icono_categoria = new GIcon();
 		icono_categoria.image = (icon != "" ? icon : MarkerImgBase);
-		if(ombre){
+		if(ombre != ''){
 			icono_categoria.shadow = URLbase + "img_pack/shadow.png";
 		}
 		icono_categoria.iconSize = new GSize(MarkerBaseWidth, MarkerBaseHeight);
