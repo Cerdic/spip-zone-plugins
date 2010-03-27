@@ -1,6 +1,6 @@
 
 <B_options_tableau>
-<table>
+<table class="spip">
 <thead>
 	<tr class="first_row">
 		<th></th>
@@ -21,3 +21,22 @@
 </tbody>
 </table>
 </B_options_tableau>
+
+<h2 class="h2 spip" id="liste_saisies">Toutes les saisies</h2>
+<BOUCLE_saisies(POUR){tableau #ENV{saisies}}>
+<h3 class="h3 spip" id="saisie_#CLE">[(#VALEUR|table_valeur{titre})] (#CLE)</h3>
+<p class="description">
+	<strong>Description :</strong> [(#VALEUR|table_valeur{description})]
+</p>
+<p class="options">
+	<strong>Options :</strong>
+	<BOUCLE_options_saisie(POUR){tableau #VALEUR|table_valeur{options}}{", "}>
+	<a href="#option_#VALEUR">#VALEUR</a>
+	</BOUCLE_options_saisie>
+</p>
+</BOUCLE_saisies>
+
+<h2 class="h2 spip" id="liste_options_saisies">Toutes les options</h2>
+<BOUCLE_options(POUR){tableau #ENV{options}}>
+<h3 class="h3 spip" id="option_#CLE">#CLE</h3>
+</BOUCLE_options>

@@ -27,15 +27,16 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * les saisies "à plat" classées par nom.
  *
  * @param array $contenu Le contenu d'un formulaire
+ * @param bool $avec_conteneur Indique si on renvoie aussi les saisies ayant des enfants, comme les fieldset
  * @return array Un tableau avec uniquement les saisies
  */
-function saisies_lister_par_nom($contenu){
+function saisies_lister_par_nom($contenu, $avec_conteneur=true){
 	$saisies = array();
 	
 	if (is_array($contenu)){
 		foreach ($contenu as $ligne){
 			if (is_array($ligne)){
-				if (array_key_exists('saisie', $ligne)){
+				if (array_key_exists('saisie', $ligne) and (!is_array($ligne['saisies']) or $avec_conteneur)){
 					$saisies[$ligne['options']['nom']] = $ligne;
 				}
 				if (is_array($ligne['saisies'])){
@@ -646,18 +647,17 @@ function saisies_generer_aide(){
 	// On construit une liste par options
 	$options = array();
 	foreach ($saisies as $type_saisie=>$saisie){
-		$options_saisie = saisies_lister_par_nom($saisie['options']);
+		$options_saisie = saisies_lister_par_nom($saisie['options'], false);
 		foreach ($options_saisie as $nom=>$option){
-			// Seulement les vrais options, pas les conteneurs
-			if (!isset($option['saisies'])){
-				// Si l'option n'existe pas encore
-				if (!isset($options[$nom])){
-					$options[$nom] = _T_ou_typo($option['options']);
-				}
-				// On ajoute toujours par qui c'est utilisé
-				$options[$nom]['utilisee_par'][] = $type_saisie;
+			// Si l'option n'existe pas encore
+			if (!isset($options[$nom])){
+				$options[$nom] = _T_ou_typo($option['options']);
 			}
+			// On ajoute toujours par qui c'est utilisé
+			$options[$nom]['utilisee_par'][] = $type_saisie;
 		}
+		// Plus besoin de la liste détaillée
+		$saisies[$type_saisie]['options'] = array_keys($options_saisie);
 	}
 	ksort($options);
 	
