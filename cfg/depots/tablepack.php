@@ -25,13 +25,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  *
  *
  * pour #CONFIG{xxx} ou lire_config('xxx') si xxx demarre par
- * - on utilise la colonne 'cfg' de spip_auteurs
- *   - tout court veut dire l'auteur connecte,
- *   -123 celui de l'auteur 123
+ * - ~ on utilise la colonne 'cfg' de spip_auteurs
+ *   - ~ tout court veut dire l'auteur connecte,
+ *   - ~123 celui de l'auteur 123
  *
  * Pour utiliser une autre colonne, il faut renseigner @colonne
- * - @extra/champ ou
- * - id_auteur@prefs/champ
+ * - ~@extra/champ ou
+ * - ~id_auteur@prefs/champ
  *
  * Pour recuperer des valeurs d'une table particuliere,
  * il faut utiliser 'table:id/champ' ou 'table@colonne:id/champ'
