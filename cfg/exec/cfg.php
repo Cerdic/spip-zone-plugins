@@ -17,7 +17,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 /**
  * la fonction appelee par le core, une simple "factory" de la classe cfg
  *
- * @param <type> $class 
+ * @param mixed $class # inutilisé
  */
 function exec_cfg_dist($class = null)
 {

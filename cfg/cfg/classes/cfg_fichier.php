@@ -20,10 +20,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 define ('_COMPAT_CFG_192',false);
 
 /**
+ * Vérification du fichier $nom
  *
- * @param <type> $nom
- * @param <type> $cfg
- * @return <type> 
+ * @param string $nom
+ * @param Object $cfg
+ * @return Object
  */
 function cfg_pre_verifier_cfg_fichier($nom, &$cfg){	
 	$f = cfg_get_info_fichier_upload($nom);
@@ -39,10 +40,11 @@ function cfg_pre_verifier_cfg_fichier($nom, &$cfg){
 }
 
 /**
+ * Pré-traitement du fichier $nom
  *
- * @param <type> $nom
- * @param <type> $cfg
- * @return <type> 
+ * @param string $nom
+ * @param Object $cfg
+ * @return Object
  */
 function cfg_pre_traiter_cfg_fichier($nom, &$cfg){
 	include_spip('inc/flock');
@@ -79,8 +81,8 @@ function cfg_pre_traiter_cfg_fichier($nom, &$cfg){
 
 /**
  *
- * @param <type> $nom
- * @return <type> 
+ * @param string $nom
+ * @return string
  */
 function cfg_get_info_fichier_upload($nom){
 	return $_FILES ? $_FILES[$nom] : $GLOBALS['HTTP_POST_FILES'][$nom];
@@ -90,11 +92,11 @@ function cfg_get_info_fichier_upload($nom){
  * Ajouter un document (au format $_FILES)<br>
  * (n'ajoute pas le contenu en base dans spip_documents...)
  * 
- * @param <type> $source le fichier sur le serveur (/var/tmp/xyz34)
- * @param <type> $nom_envoye son nom chez le client (portequoi.pdf)
- * @param <type> $nom_dest
- * @param <type> $dans
- * @return <type> 
+ * @param string $source # le fichier sur le serveur (/var/tmp/xyz34)
+ * @param string $nom_envoye # son nom chez le client (portequoi.pdf)
+ * @param string $nom_dest # le nom sous lequel le sauvegarder
+ * @param string $dans # Où l'enregistrer
+ * @return string
  */
 function cfg_ajoute_un_document($source, $nom_envoye, $nom_dest, $dans='config') {
 
@@ -211,19 +213,19 @@ function cfg_ajoute_un_document($source, $nom_envoye, $nom_dest, $dans='config')
 /**
  * Copier un document
  * 
- * @param <type> $ext
- * @param <type> $orig
- * @param <type> $source
- * @param <type> $dans
- * @return <type> 
+ * @param string $ext # L'extension du fichier
+ * @param string $dest # le nom sous lequel le sauvegarder
+ * @param string $source # le fichier sur le serveur (/var/tmp/xyz34)
+ * @param string $dans # Où le copier
+ * @return string
  */
-function cfg_copier_document($ext, $orig, $source, $dans='_cfg') {
+function cfg_copier_document($ext, $dest, $source, $dans='_cfg') {
 
-	$orig = preg_replace(',\.\.+,', '.', $orig); // pas de .. dans le nom du doc
+	$dest = preg_replace(',\.\.+,', '.', $dest); // pas de .. dans le nom du doc
 	$dir = cfg_creer_repertoire_cfg($dans);
 	$dest = preg_replace("/[^._=-\w\d]+/", "_", 
 			translitteration(preg_replace("/\.([^.]+)$/", "", 
-						      preg_replace("/<[^>]*>/", '', basename($orig)))));
+						      preg_replace("/<[^>]*>/", '', basename($dest)))));
 
 	// ne pas accepter de noms de la forme -r90.jpg qui sont reserves
 	// pour les images transformees par rotation (action/documenter)
@@ -238,8 +240,8 @@ function cfg_copier_document($ext, $orig, $source, $dans='_cfg') {
  * Creer IMG/config/vue
  * comme "creer_repertoire_documents" mais avec 2 profondeurs
  *
- * @param <type> $ext
- * @return <type> 
+ * @param string $ext
+ * @return string
  */
 function cfg_creer_repertoire_cfg($ext) {
 	list($racine, $vue) = explode('/',$ext,2);
@@ -272,9 +274,9 @@ if (_COMPAT_CFG_192) {
 	 * pas de securite tuante sur .. comme en 1.9.3<br>
 	 *
 	 * @deprecated depuis SPIP 2.0
-	 * @param <type> $source
-	 * @param <type> $dest
-	 * @param <type> $move
+	 * @param string $source
+	 * @param string $dest
+	 * @param boolean $move
 	 * @return boolean|string # la destination comme 1.9.3
 	 */
 	function cfg_deplacer_fichier_upload($source, $dest, $move=false) {
@@ -307,7 +309,7 @@ if (_COMPAT_CFG_192) {
 	 * Supprimer le fichier de maniere sympa (flock)
 	 * 
 	 * @deprecated depuis SPIP 2.0
-	 * @param <type> $fichier
+	 * @param string $fichier
 	 * @return boolean 
 	 */
 	function cfg_supprimer_fichier($fichier) {
@@ -333,9 +335,10 @@ if (_COMPAT_CFG_192) {
 		/**
 		 * donne le chemin du fichier relatif a _DIR_IMG<br>
 		 * pour stockage 'tel quel' dans la base de donnees
+		 *
 		 * @deprecated depuis SPIP 2.0
-		 * @param <type> $fichier
-		 * @return <type> 
+		 * @param string $fichier
+		 * @return string
 		 */
 		function set_spip_doc($fichier) {
 			if (strpos($fichier, _DIR_IMG) === 0)
@@ -351,8 +354,8 @@ if (_COMPAT_CFG_192) {
 		 * donne le chemin complet du fichier
 		 *
 		 * @deprecated depuis SPIP 2.0
-		 * @param <type> $fichier
-		 * @return <type> 
+		 * @param string $fichier
+		 * @return string
 		 */
 		function get_spip_doc($fichier) {
 			// fichier distant

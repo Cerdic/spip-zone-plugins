@@ -19,15 +19,47 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  */
 class cfg_depot_php
 {
+	/**
+	 * Les champs manipulés
+	 * @var Array
+	 */
 	var $champs = array();
+
+	/**
+	 * Si on passe par cfg_id, ça fait..
+	 * Heu.. Quelque chose d'utile ?
+	 * @var Array
+	 */
 	var $champs_id = array();
+
+	/**
+	 * Les valeurs en dépôt
+	 * @var Array
+	 */
 	var $val = array();
+
+	/**
+	 * Les différents paramètres : Tables, Colonnes, cfg_id, et Casier
+	 * @var Array
+	 */
 	var $param = array();
+
+	/**
+	 * Pour gestion de l'affichage en succès ou échec
+	 * @var Array
+	 */
 	var $messages = array('message_ok'=>array(), 'message_erreur'=>array(), 'erreurs'=>array());
 	
+	/**
+	 * Arbre
+	 * @var Array
+	 */
 	var $_arbre = array();
 	
-	// version du depot
+	/**
+	 * version du depot
+	 * @var int
+	 */
 	var $version = 2;
 	
 	/**
@@ -74,20 +106,20 @@ class cfg_depot_php
 		$fichier = $this->get_fichier();
 
 		// inclut une variable $cfg
-    	if (!@include $fichier) {
-    		if ($lire) return false;
-    		$this->_base = array();
-    	} elseif (!$cfg OR !is_array($cfg)) {
-    		$this->_base = array();
-    	} else {
-    		$this->_base = $cfg;	
-    	}
+		if (!@include $fichier) {
+			if ($lire) return false;
+			$this->_base = array();
+		} elseif (!$cfg OR !is_array($cfg)) {
+			$this->_base = array();
+		} else {
+			$this->_base = $cfg;
+		}
 
-    	$this->_ici = &$this->_base;
-    	$this->_ici = &$this->monte_arbre($this->_ici, $this->param['nom']);
-    	$this->_ici = &$this->monte_arbre($this->_ici, $this->param['casier']);
-    	$this->_ici = &$this->monte_arbre($this->_ici, $this->param['cfg_id']);	
-    	return true;
+		$this->_ici = &$this->_base;
+		$this->_ici = &$this->monte_arbre($this->_ici, $this->param['nom']);
+		$this->_ici = &$this->monte_arbre($this->_ici, $this->param['casier']);
+		$this->_ici = &$this->monte_arbre($this->_ici, $this->param['cfg_id']);
+		return true;
 	}
 	
 	/**
@@ -100,14 +132,14 @@ class cfg_depot_php
 			return array(true, null); // pas de chargement = pas de valeur encore enregistrees
 		}
 		
-    	// utile ??
-    	if ($this->param['cfg_id']) {
-    		$cles = explode('/', $this->param['cfg_id']);
+		// utile ??
+		if ($this->param['cfg_id']) {
+			$cles = explode('/', $this->param['cfg_id']);
 			foreach ($this->champs_id as $i => $name) {
 				$this->_ici[$name] = $cles[$i];
-		    }
-    	}
-	    return array(true, $this->_ici);
+			}
+		}
+		return array(true, $this->_ici);
 	}
 
 
@@ -148,8 +180,8 @@ class cfg_depot_php
 		if (!$this->champs)
 			return array($this->ecrire_fichier(), array());
 			
-    	// effacer les champs
-    	foreach ($this->champs as $name => $def) {
+		// effacer les champs
+		foreach ($this->champs as $name => $def) {
 			if (isset($def['id'])) continue;
 			unset($this->_ici[$name]);
 		}

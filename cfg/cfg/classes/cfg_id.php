@@ -17,9 +17,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 /**
  * apres que le parseur a trouve les champs
  *
- * @param <type> $nom
- * @param <type> $cfg
- * @return <type>
+ * @param string $nom
+ * @param Object $cfg
+ * @return string
  */
 function cfg_pre_charger_cfg_id($nom, &$cfg){
 
@@ -42,9 +42,9 @@ function cfg_pre_charger_cfg_id($nom, &$cfg){
 
 /**
  *
- * @param <type> $nom
- * @param <type> $cfg
- * @return <type>
+ * @param string $nom
+ * @param Object $cfg
+ * @return string
  */
 function cfg_pre_traiter_cfg_id($nom, &$cfg){
 	

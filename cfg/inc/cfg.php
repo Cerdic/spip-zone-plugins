@@ -148,7 +148,7 @@ class cfg
 	}
 
 	/**
-	 * Controller l'autorisation
+	 * Controller les droits pour traiter le formulaire de config
 	 *
 	 * @return int # 0 ou 1
 	 */

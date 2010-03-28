@@ -11,6 +11,14 @@
  * @version    $Id$
  */
 
+/**
+ *
+ * @param mixed $type # inutilisé
+ * @param mixed $modele # inutilisé
+ * @param mixed $id # inutilisé
+ * @param Array $content 
+ * @return string 
+ */
 function vues_config_dist($type, $modele, $id, $content) {
 	return propre($content['config']);
 }

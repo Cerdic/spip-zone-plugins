@@ -45,18 +45,65 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  */
 class cfg_depot_tablepack
 {
+	/**
+	 * Les champs manipulés
+	 * @var Array
+	 */
 	var $champs = array();
+
+	/**
+	 * Si on passe par cfg_id, ça fait..
+	 * Heu.. Quelque chose d'utile ?
+	 * @var Array
+	 */
 	var $champs_id = array();
+
+	/**
+	 * Les valeurs en dépôt
+	 * @var Array
+	 */
 	var $val = array();
+
+	/**
+	 * Les différents paramètres : Tables, Colonnes, cfg_id, et Casier
+	 * @var Array
+	 */
 	var $param = array();
+
+	/**
+	 * Pour gestion de l'affichage en succès ou échec
+	 * @var Array
+	 */
 	var $messages = array('message_ok'=>array(), 'message_erreur'=>array(), 'erreurs'=>array());
-	
+
+	/**
+	 * Arbre
+	 * @var Array
+	 */
 	var $_arbre = array();
+
+	/**
+	 * Le WHERE permettant de retrouver l'Arbre
+	 * @var Array
+	 */
 	var $_id = array();
+
+	/**
+	 * Base de l'arbre
+	 * @var Array
+	 */
 	var $_base = null;
+
+	/**
+	 * Où on est dans l'arbre $this->_arbre
+	 * @var &Array
+	 */
 	var $_ici = null;
 	
-	// version du depot
+	/**
+	 * version du depot
+	 * @var int
+	 */
 	var $version = 2;
 	
 	/**
@@ -112,15 +159,15 @@ class cfg_depot_tablepack
 		}	
 		$this->_arbre = array();
 		$this->_ici = &$this->_base;
-    	$this->_ici = &$this->monte_arbre($this->_ici, $this->param['nom']);
-    	$this->_ici = &$this->monte_arbre($this->_ici, $this->param['casier']);
-    	return true;	
+		$this->_ici = &$this->monte_arbre($this->_ici, $this->param['nom']);
+		$this->_ici = &$this->monte_arbre($this->_ici, $this->param['casier']);
+		return true;
 	}
 	
 	/**
 	 * recuperer les valeurs.
 	 *
-	 * @return <type>
+	 * @return Array
 	 */
 	function lire()
 	{
@@ -130,30 +177,30 @@ class cfg_depot_tablepack
 		}
 		$ici = &$this->_ici;
 
-        // utile ??
-    	if ($this->param['cfg_id']) {
-    		$cles = explode('/', $this->param['cfg_id']);
+		// utile ??
+		if ($this->param['cfg_id']) {
+			$cles = explode('/', $this->param['cfg_id']);
 			foreach ($this->champs_id as $i => $name) {
 				$ici[$name] = $cles[$i];
-		    }
-    	}
+			}
+		}
 	
-    	// s'il y a des champs demandes, ne retourner que ceux-ci
-    	if (count($this->champs)){
-    		$val = array();
+		// s'il y a des champs demandes, ne retourner que ceux-ci
+		if (count($this->champs)){
+			$val = array();
 			foreach ($this->champs as $name => $def) {
 				$val[$name] = $ici[$name];
 			}
 			$ici = $val;
-    	}
-	    return array(true, $ici);
+		}
+		return array(true, $ici);
 	}
 
 
 	/**
 	 * ecrit chaque enregistrement pour chaque champ.
 	 *
-	 * @return <type>
+	 * @return Array
 	 */
 	function ecrire()
 	{
@@ -180,7 +227,7 @@ class cfg_depot_tablepack
 	/**
 	 * supprime chaque enregistrement pour chaque champ.
 	 *
-	 * @return <type>
+	 * @return Array
 	 */
 	function effacer(){
 		// charger

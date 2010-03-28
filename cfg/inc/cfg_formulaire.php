@@ -316,7 +316,7 @@ class cfg_formulaire{
 	 * Si le chargement ou le controle n'ont pas ete fait,
 	 * la fonction s'en occupe.
 	 *
-	 * @return <type> 
+	 * @return boolean
 	 */
 	function traiter()
 	{
@@ -363,7 +363,7 @@ class cfg_formulaire{
 	 * si nom=toto, casier=chose/truc, cfg_id=2, 
 	 * cfg cherchera dans #CONFIG{toto/chose/truc/2}
 	 *
-	 * @return <type> 
+	 * @return string
 	 */
 	function nom_config()
 	{
@@ -443,7 +443,7 @@ class cfg_formulaire{
 	 * stockes dans le tableau $this->champs
 	 * a l'exception des noms par _cfg_, reserves a ce plugin
 	 *
-	 * @return <type> 
+	 * @return string
 	 */
 	function recuperer_noms_champs(){	
 		if (!$this->vue) return;
@@ -506,8 +506,8 @@ class cfg_formulaire{
 	 * si elles existent : ex: cfg_traiter_cfg_xx()
 	 * lors de l'appel de 'actionner_extensions($faire)'
 	 *
-	 * @param <type> $ext
-	 * @param <type> $nom 
+	 * @param string $ext
+	 * @param string $nom
 	 */
 	function ajouter_extension($ext, $nom){
 		if (!is_array($this->extensions[$ext])) $this->extensions[$ext] = array();
@@ -518,8 +518,8 @@ class cfg_formulaire{
 	 * ajoute une extension sur un parametre
 	 * seulement si un fichier sur ce parametre existe
 	 *
-	 * @param <type> $param
-	 * @return <type> 
+	 * @param string $param
+	 * @return boolean
 	 */
 	function ajouter_extension_parametre($param){
 		if (in_array($param, $this->extensions_parametres))
@@ -535,9 +535,9 @@ class cfg_formulaire{
 	/**
 	 * Compiler le fond CFG si ce n'est pas fait
 	 * 
-	 * @param <type> $contexte
-	 * @param <type> $forcer
-	 * @return <type> 
+	 * @param Array $contexte
+	 * @param boolean $forcer
+	 * @return string
 	 */
 	function recuperer_fond($contexte = array(), $forcer = false){
 
@@ -586,8 +586,8 @@ class cfg_formulaire{
 	 * d'affichage du formulaire
 	 * (parametre autoriser=faire)
 	 *
-	 * @staticvar <type> $autoriser
-	 * @return <type> 
+	 * @staticvar int $autoriser
+	 * @return int
 	 */
 	function autoriser()
 	{
@@ -615,7 +615,7 @@ class cfg_formulaire{
 	 * Log le message passe en parametre
 	 * $this->log('message');
 	 *
-	 * @param <type> $message 
+	 * @param string $message
 	 */
 	function log($message)
 	{
@@ -627,7 +627,7 @@ class cfg_formulaire{
 	/**
 	 * lit les donnees depuis le depot
 	 * 
-	 * @return <type> 
+	 * @return boolean
 	 */
 	function lire(){
 		list ($ok, $val, $messages) = $this->depot->lire($this->params);
@@ -644,7 +644,7 @@ class cfg_formulaire{
 	/**
 	 * Ecrit les donnees dans le depot
 	 *
-	 * @return <type> 
+	 * @return string
 	 */
 	function ecrire() {
 		list ($ok, $val, $messages) = $this->depot->ecrire($this->params);
@@ -667,7 +667,7 @@ class cfg_formulaire{
 	 * passees dans le fond et le formulaire garde les informations
 	 * d'avant la suppression
 	 *
-	 * @return <type>
+	 * @return string
 	 */
 	function effacer(){
 		list ($ok, $val, $messages) = $this->depot->effacer($this->params);
@@ -687,8 +687,8 @@ class cfg_formulaire{
 	 * $contexte est un tableau (nom=>valeur)
 	 * qui sera enrichi puis passe a recuperer_fond
 	 *
-	 * @param <type> $contexte
-	 * @return <type>
+	 * @param Array $contexte
+	 * @return string
 	 */
 	function formulaire($contexte = array())
 	{
@@ -709,8 +709,8 @@ class cfg_formulaire{
 	
 	/**
 	 *
-	 * @param <type> $action
-	 * @return <type>
+	 * @param string $action
+	 * @return string
 	 */
 	function creer_hash_cfg($action=''){
 		include_spip('inc/securiser_action');
@@ -742,6 +742,7 @@ class cfg_formulaire{
 	 * - pre_verifier, verifier,
 	 * - pre_traiter, post_traiter
 	 *
+	 * @param string $action
 	 */
 	function actionner_extensions($action){
 		// 1 - general : on transmet l'instance de cfg_formulaire

@@ -27,8 +27,8 @@
  * - : present avant un / : tablepack
  * - sinon metapack
  *
- * @param <type> $args
- * @return <type> 
+ * @param string $args
+ * @return Object
  */
 function cfg_charger_depot($args){
 	list($depot,$args) = explode('::',$args,2);
@@ -99,8 +99,8 @@ class cfg_depot{
 	 *	);
 	 * </code>
 	 *
-	 * @param <type> $depot
-	 * @param <type> $params 
+	 * @param string $depot
+	 * @param Array $params
 	 */
 	function cfg_depot($depot='metapack', $params=array()){
 		if (!isset($params['param'])) {
@@ -119,7 +119,7 @@ class cfg_depot{
 	/**
 	 * ajoute les parametres transmis dans l'objet du depot
 	 *
-	 * @param <type> $params 
+	 * @param Array $params
 	 */
 	function add_params($params){
 		foreach ($params as $o=>$v) {
@@ -128,9 +128,9 @@ class cfg_depot{
 	}
 
 	/**
-	 *
-	 * @param <type> $params
-	 * @return <type>
+	 * récupérer les enregistrements des différents champs.
+	 * @param Array $params
+	 * @return Array
 	 */
 	function lire($params = array()){
 		$this->add_params($params);
@@ -138,9 +138,9 @@ class cfg_depot{
 	}
 		
 	/**
-	 *
-	 * @param <type> $params
-	 * @return <type> 
+	 * ecrit chaque enregistrement pour chaque champ.
+	 * @param Array $params
+	 * @return Array
 	 */
 	function ecrire($params = array()){
 		$this->add_params($params);
@@ -148,9 +148,9 @@ class cfg_depot{
 	}
 
 	/**
-	 *
-	 * @param <type> $params
-	 * @return <type>
+	 * supprime chaque enregistrement pour chaque champ.
+	 * @param Array $params
+	 * @return Array
 	 */
 	function effacer($params = array()){
 		$this->add_params($params);
@@ -158,9 +158,10 @@ class cfg_depot{
 	}	
 
 	/**
+	 * Lecture de la configuration
 	 *
-	 * @param <type> $unserialize
-	 * @return <type>
+	 * @param boolean $unserialize
+	 * @return string
 	 */
 	function lire_config($unserialize=true){
 		list($ok, $s) = $this->depot->lire($unserialize);
@@ -172,9 +173,10 @@ class cfg_depot{
 	}
 
 	/**
+	 * enregistrer une configuration
 	 *
-	 * @param <type> $valeur
-	 * @return <type>
+	 * @param mixed $valeur
+	 * @return boolean
 	 */
 	function ecrire_config($valeur){
 		if ($nom = $this->nom_champ()) {
@@ -187,8 +189,9 @@ class cfg_depot{
 	}
 
 	/**
-	 *
-	 * @return <type>
+	 * supprimer une config
+	 * 
+	 * @return boolean
 	 */
 	function effacer_config(){
 		if ($nom = $this->nom_champ()){
@@ -202,8 +205,8 @@ class cfg_depot{
 	}	
 
 	/**
-	 *
-	 * @return <type>
+	 * le nom d'un champ s'il est dans le dépôt
+	 * @return boolean|string
 	 */
 	function nom_champ(){
 		if (count($this->depot->champs)==1){
@@ -218,8 +221,8 @@ class cfg_depot{
 	 * charge les arguments d'un lire/ecrire/effacer_config
 	 * dans le depot : lire_config($args = 'metapack::prefixe/casier/champ');
 	 *
-	 * @param <type> $args
-	 * @return <type>
+	 * @param Array $args
+	 * @return boolean
 	 */
 	function charger_args($args){
 		if (method_exists($this->depot, 'charger_args')){
@@ -239,14 +242,13 @@ class cfg_depot{
  * $cfg: la config, lire_config('montruc') est un tableau<br>
  * lire_config('montruc/sub') est l'element "sub" de cette config
  * comme la balise pour ~, ~id_auteur ou table:id<br>
- * $def: un defaut optionnel
  *
  * $unserialize est mis par l'histoire, et affecte le depot 'meta'
  *
- * @param <type> $cfg
- * @param <type> $def
- * @param <type> $unserialize
- * @return <type>
+ * @param string $cfg # la config
+ * @param mixed $def # un défaut optionnel
+ * @param boolean $unserialize # n'affecte que le dépôt 'meta'
+ * @return string
  */
 function lire_config($cfg='', $def=null, $unserialize=true) {
 	$depot = cfg_charger_depot($cfg);
@@ -259,9 +261,9 @@ function lire_config($cfg='', $def=null, $unserialize=true) {
 /**
  * enregistrer une configuration
  *
- * @param <type> $cfg
- * @param <type> $valeur
- * @return <type>
+ * @param string $cfg
+ * @param mixed $valeur
+ * @return boolean
  */
 function ecrire_config($cfg='', $valeur=null){
 	$depot = cfg_charger_depot($cfg);
@@ -272,8 +274,8 @@ function ecrire_config($cfg='', $valeur=null){
 /**
  * supprimer une config
  *
- * @param <type> $cfg
- * @return <type>
+ * @param string $cfg
+ * @return boolean
  */
 function effacer_config($cfg=''){
 	$depot = cfg_charger_depot($cfg);

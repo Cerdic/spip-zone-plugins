@@ -46,7 +46,7 @@ if (version_compare($GLOBALS['spip_version_code'], '1.9300', '<')
  * la version commune a tous est developpee sur
  * {@link http://zone.spip.org/spip-zone/browser/_dev_/compat/ svn://zone.spip.org/spip-zone/_dev_/compat/}
  *
- * @param <type> $quoi
+ * @param Array $quoi
  */
 function inc_compat_cfg_dist($quoi = NULL) {
 	if (!function_exists($f = 'compat_cfg_defs')) $f .= '_dist';
@@ -68,8 +68,8 @@ function inc_compat_cfg_dist($quoi = NULL) {
 }
 
 /**
- * Calcule le tableau de compatibilité des fonctions
- * (fournit le code généré par le compilo pour les fonctions qui ne sont plus fournies dans SPIP2.0)
+ * Calcule le tableau de compatibilité des fonctions non définies sous SPIP2.0
+ * (fournit leur arbre syntaxique manipulé par le compilo)
  * 
  * @return Array
  */

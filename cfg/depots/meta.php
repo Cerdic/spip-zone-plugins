@@ -19,13 +19,41 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  */
 class cfg_depot_meta
 {
+	/**
+	 * Les champs manipulés
+	 * @var Array
+	 */
 	var $champs = array();
+
+	/**
+	 * Si on passe par cfg_id, ça fait..
+	 * Heu.. Quelque chose d'utile ?
+	 * @var Array
+	 */
 	var $champs_id = array();
+
+	/**
+	 * Les valeurs en dépôt
+	 * @var Array
+	 */
 	var $val = array();
+
+	/**
+	 * Les différents paramètres : Tables, Colonnes, cfg_id, et Casier
+	 * @var Array
+	 */
 	var $param = array();
+
+	/**
+	 * Pour gestion de l'affichage en succès ou échec
+	 * @var Array
+	 */
 	var $messages = array('message_ok'=>array(), 'message_erreur'=>array(), 'erreurs'=>array());
 	
-	// version du depot
+	/**
+	 * version du depot
+	 * @var int
+	 */
 	var $version = 2;
 
 	/**
@@ -51,8 +79,8 @@ class cfg_depot_meta
 	 */
 	function lire($unserialize=true)
 	{
-    	$val = array();
-    	if ($this->champs) {
+		$val = array();
+		if ($this->champs) {
 			foreach ($this->champs as $name => $def) {
 				// pour compat cfg, si la meta est deserialisable, la retourner deserialisee
 				if ($unserialize && ($a = @unserialize($GLOBALS['meta'][$name])))
@@ -65,7 +93,7 @@ class cfg_depot_meta
 		} else {
 			$val = serialize($GLOBALS['meta']);
 		}
-	    return array(true, $val);
+		return array(true, $val);
 	}
 
 
@@ -78,9 +106,9 @@ class cfg_depot_meta
 	{
 		foreach ($this->champs as $name => $def) {
 			ecrire_meta($name, $this->val[$name]);
-	    }
-	    if (defined('_COMPAT_CFG_192')) ecrire_metas();
-	    return array(true, $this->val);
+		}
+		if (defined('_COMPAT_CFG_192')) ecrire_metas();
+		return array(true, $this->val);
 	}
 	
 	
@@ -92,11 +120,11 @@ class cfg_depot_meta
 	function effacer(){
 		foreach ($this->champs as $name => $def) {
 			if (!$this->val[$name]) {
-			    effacer_meta($name);
+				effacer_meta($name);
 			}
-	    }
-	    if (defined('_COMPAT_CFG_192')) ecrire_metas();
-	    return array(true, $this->val);			
+		}
+		if (defined('_COMPAT_CFG_192')) ecrire_metas();
+		return array(true, $this->val);
 	}
 	
 	

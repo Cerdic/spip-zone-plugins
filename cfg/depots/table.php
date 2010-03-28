@@ -20,15 +20,59 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  */
 class cfg_depot_table
 {
+	/**
+	 * Les champs manipulés
+	 * @var Array
+	 */
 	var $champs = array();
+
+	/**
+	 * Si on passe par cfg_id, ça fait..
+	 * Heu.. Quelque chose d'utile ?
+	 * @var Array
+	 */
 	var $champs_id = array();
+
+	/**
+	 * Les valeurs en dépôt
+	 * @var Array
+	 */
 	var $val = array();
+
+	/**
+	 * Les différents paramètres : Tables, Colonnes, cfg_id, et Casier
+	 * @var Array
+	 */
 	var $param = array();
+
+	/**
+	 * Pour gestion de l'affichage en succès ou échec
+	 * @var Array
+	 */
 	var $messages = array('message_ok'=>array(), 'message_erreur'=>array(), 'erreurs'=>array());
 	
+	/**
+	 * Arbre
+	 * @var Array
+	 */
 	var $_arbre = array();
+
+	/**
+	 * Le WHERE permettant de retrouver l'Arbre
+	 * @var Array
+	 */
 	var $_id = array();
+
+	/**
+	 * Base de l'arbre
+	 * @var Array
+	 */
 	var $_base = null;
+
+	/**
+	 * Où on est dans l'arbre $this->_arbre
+	 * @var &Array
+	 */
 	var $_ici = null;
 	
 	/**

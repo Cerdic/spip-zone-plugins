@@ -19,9 +19,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * ajouter automatiquement le parametre 'selecteur_couleur'
  * (ajoute les js du plugin Palette et la librairie farbtastic d'une façon mutualisable entre plugins)
  * 
- * @param <type> $nom
- * @param <type> $cfg
- * @return <type> 
+ * @param mixed $nom # inutilisé
+ * @param Object $cfg
+ * @return Object
  */
 function cfg_charger_cfg_couleur($nom, &$cfg){
 

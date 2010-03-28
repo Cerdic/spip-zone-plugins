@@ -15,9 +15,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
  *
- * @param <type> $champ
- * @param <type> $cfg
- * @return <type> 
+ * @param string $champ
+ * @param Object $cfg
+ * @return string
  */
 function cfg_verifier_type_id($champ, &$cfg){
 	if (!preg_match('#^[a-z_]\w*$#', $cfg->val[$champ])){
