@@ -4,10 +4,10 @@
 	</li>
 	<BOUCLE_menus_bab(RUBRIQUES) {lang}{par num titre, titre} {titre_mot=menu_der}>
 		<li><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero|couper{80})]</a>
-			<BOUCLE_exclus_babbi(RUBRIQUES) {titre_mot=exclu_menu_der}{doublons A}></BOUCLE_exclus_babbi>
+			<BOUCLE_exclus_babbi(RUBRIQUES) {titre_mot=exclu_menu_der}{doublons exclueA}></BOUCLE_exclus_babbi>
 				<B_sous_menus_bab>
 				<ul>
-					<BOUCLE_sous_menus_bab(RUBRIQUES) {id_parent}  {lang}{par num titre, titre}{doublons A}>
+					<BOUCLE_sous_menus_bab(RUBRIQUES) {id_parent}  {lang}{par num titre, titre}{doublons exclueA}>
 						<li><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero|couper{80})]</a><BOUCLE_rec(BOUCLE_sous_menus_bab)></BOUCLE_rec></li>
 					</BOUCLE_sous_menus_bab>
 				</ul>									
