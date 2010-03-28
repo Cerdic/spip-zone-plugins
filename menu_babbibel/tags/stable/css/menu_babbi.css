@@ -42,8 +42,8 @@ display:none;
 width:19em; 			/*Largeur du sous menu; pensez a modifier le #nav li ul a {width: } et #nav li ul ul {left: } */
 top:1.5em; 				/*Position du sous menu par rapport au menu*/
 z-index:10;				/*Si le menu se cache sous un autre element de la page, augmenter cette valeur*/
-border-left: 1px solid #fff;
-border-top: 1px solid #fff;
+border-left: 0px solid #fff;
+border-top: 0px solid #fff;
 line-height:1.85em; 	/*hauteur des lignes du sous menu*/
 }
 
