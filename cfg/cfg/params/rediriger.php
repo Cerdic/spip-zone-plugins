@@ -1,19 +1,33 @@
 <?php
 
-
-/*
- * Plugin CFG pour SPIP
- * (c) toggg 2007, distribue sous licence GNU/GPL
- * Documentation et contact: http://www.spip-contrib.net/
+/**
+ * Plugin générique de configuration pour SPIP
  *
+ * @license    GNU/GPL
+ * @package    plugins
+ * @subpackage cfg
+ * @category   outils
+ * @copyright  (c) toggg, marcimat 2007-2008
+ * @link       http://www.spip-contrib.net/
+ * @version    $Id$
  */
 
 
-// restaure des messages serialises dans une meta 'cfg_message_{id_auteur}'
 //
-// si le formulaire cfg avait demande une redirection... 
-// (et provient de cette redirection), il est possible
-// qu'il y ait un message a afficher
+//
+// 
+//
+// 
+/**
+ * restaure des messages serialises dans une meta 'cfg_message_{id_auteur}'
+ * 
+ * Si le formulaire cfg avait demande une redirection...
+ * (et provient de cette redirection), il est possible
+ * qu'il y ait un message a afficher
+ * 
+ * @param <type> $valeur
+ * @param <type> $cfg 
+ */
 function cfg_pre_charger_param_rediriger($valeur, &$cfg){
 	if ($messages = $GLOBALS['meta']['cfg_message_'.$GLOBALS['auteur_session']['id_auteur']]){
 			include_spip('inc/meta');
@@ -23,12 +37,18 @@ function cfg_pre_charger_param_rediriger($valeur, &$cfg){
 	}	
 }
 
-
-// Si le fond du formulaire demande expressement une redirection
-// par <!-- rediriger=1 -->, on stocke le message dans une meta
-// et on redirige le client, de maniere a charger la page
-// avec la nouvelle config (ce qui permet par exemple a Autorite
-// de controler d'eventuels conflits generes par les nouvelles autorisations)
+/**
+ * Traite une demande de redirection
+ * 
+ * Si le fond du formulaire demande expressement une redirection
+ * par <!-- rediriger=1 -->, on stocke le message dans une meta
+ * et on redirige le client, de maniere a charger la page
+ * avec la nouvelle config (ce qui permet par exemple a Autorite
+ * de controler d'eventuels conflits generes par les nouvelles autorisations)
+ * 
+ * @param <type> $valeur
+ * @param <type> $cfg 
+ */
 function cfg_post_traiter_param_rediriger($valeur, &$cfg){
 	if ($cfg->messages) {
 		include_spip('inc/meta');

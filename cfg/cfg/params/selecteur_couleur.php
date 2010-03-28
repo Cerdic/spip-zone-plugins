@@ -1,14 +1,25 @@
 <?php
 
-/*
- * Plugin CFG pour SPIP
- * (c) toggg, marcimat, dF 2008, distribue sous licence GNU/GPL
- * Documentation et contact: http://www.spip-contrib.net/
- * 
- * Patch de compatibilité avec classe cfg_couleur, OBSOLETE (utilisez la classe palette) 
+/**
+ * Plugin générique de configuration pour SPIP
+ *
+ * @license    GNU/GPL
+ * @package    plugins
+ * @subpackage cfg
+ * @category   outils
+ * @copyright  (c) toggg, marcimat 2007-2008
+ * @link       http://www.spip-contrib.net/
+ * @version    $Id$
+ *
  */
 
-
+/**
+ * Patch de compatibilité avec classe cfg_couleur,
+ *
+ * @deprecated OBSOLETE (utilisez la classe {see palette})
+ * @param <type> $valeur
+ * @param <type> $cfg
+ */
 function cfg_charger_param_selecteur_couleur($valeur, &$cfg){
 	// si provient d'un CVT, on met inline, sinon dans head
 	$ou = ($cfg->depuis_cvt) ? 'inline':'head';

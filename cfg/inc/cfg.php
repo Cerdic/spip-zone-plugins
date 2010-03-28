@@ -1,18 +1,28 @@
 <?php
 
-/*
- * Plugin CFG pour SPIP
- * (c) toggg 2007, distribue sous licence GNU/GPL
- * Documentation et contact: http://www.spip-contrib.net/
+/**
+ * Plugin générique de configuration pour SPIP
  *
+ * @license    GNU/GPL
+ * @package    plugins
+ * @subpackage cfg
+ * @category   outils
+ * @copyright  (c) toggg, marcimat 2007-2008
+ * @link       http://www.spip-contrib.net/
+ * @version    $Id$
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 
-// Renvoie la liste des configurations disponibles dans le path
-// ou dans le dossier donne en argument
+/**
+ * Renvoie la liste des configurations disponibles dans le path
+ * ou dans le dossier donne en argument
+ * 
+ * @param <type> $dir
+ * @return <type> 
+ */
 function liste_cfg($dir='') {
 	// Faire la liste des elements qui ont un cfg ; ca peut etre des plugins
 	// mais aussi des squelettes ou n'importe quoi
@@ -39,8 +49,12 @@ function liste_cfg($dir='') {
 	}
 }
 
-// Renvoie une icone avec un lien vers la page de configuration d'un repertoire
-// donne
+/**
+ * Renvoie une icone avec un lien vers la page de configuration d'un repertoire donné
+ * 
+ * @param <type> $dir
+ * @return <type> 
+ */
 function icone_lien_cfg($dir) {
 	$ret = '';
 	if ($onglets = lister_onglets_cfg($dir)){
@@ -60,9 +74,14 @@ function icone_lien_cfg($dir) {
 
 
 
-// retourne un tableau contenant une liste de fonds cfg et leurs parametres
-// d'onglet (oui/non/titre_parent), plus quelques autres parametres (url, titre, icone),
-// pour un repertoire donne (sinon tout le path)
+/**
+ * retourne un tableau contenant une liste de fonds cfg et leurs parametres
+ * d'onglet (oui/non/titre_parent), plus quelques autres parametres (url, titre, icone),
+ * pour un repertoire donne (sinon tout le path)
+ * 
+ * @param <type> $dir
+ * @return <type> 
+ */
 function lister_onglets_cfg($dir=''){
 	$onglets = array();
 	
@@ -110,44 +129,80 @@ function lister_onglets_cfg($dir=''){
 	
 
 
-
-// la classe cfg represente une page de configuration
+/**
+ * la classe cfg represente une page de configuration
+ */
 class cfg
 {
 	var $form; // la classe cfg_formulaire
 	
+	/**
+	 *
+	 * @param <type> $nom
+	 * @param <type> $cfg_id
+	 * @param <type> $opt 
+	 */
 	function cfg($nom, $cfg_id = '', $opt = array()) {
 		include_spip('inc/cfg_formulaire');
 		$this->form = new cfg_formulaire($nom, $cfg_id, $opt);
 	}
 
+	/**
+	 *
+	 * @return <type> 
+	 */
 	function autoriser()  {return $this->form->autoriser(); }
+	
+	/**
+	 *
+	 * @return <type> 
+	 */
 	function traiter()  {return $this->form->traiter();}
 	
+	/**
+	 *
+	 * @return <type> 
+	 */
 	function get_titre(){ return $this->form->param['titre'];}
+	
+	/**
+	 *
+	 * @return <type> 
+	 */
 	function get_nom()  { return $this->form->param['nom'];}
+	
+	/**
+	 *
+	 * @return <type> 
+	 */
 	function get_boite(){ 
 		if (!(($titre = $this->form->param['titre']) && ($boite = $this->form->param['boite']))){
 			$boite=($titre)?$titre: _T('icone_configuration_site') . ' ' . $this->form->param['nom'];
 		}
 		return $boite;
 	}
-	// pour pouvoir tester si la presentation des formulaires doit etre appliquee ou non
-	// m'est avis que ca devrait virer cette 'presentation=auto'...
-	// c'est comme 'rediriger', il n'y a que le plugin 'autorite' qui l'utilise
+
+	/**
+	 * pour pouvoir tester si la presentation des formulaires doit etre appliquee ou non
+	 * m'est avis que ca devrait virer cette 'presentation=auto'...
+	 * c'est comme 'rediriger', il n'y a que le plugin 'autorite' qui l'utilise
+	 * 
+	 * @return <type> 
+	 */
 	function get_presentation() { return $this->form->param['presentation'];	}
 	
-	//
-	// Affiche la boite d'info
-	// des liens vers les autres fonds CFG
-	// definis par la variable liens
-	// <!-- liens*=moncfg -->
-	// s'il y a une chaine de langue 'moncfg', le texte sera traduit
-	// 
-	// Ou
-	// <!-- liens*=prefixe_plugin:moncfg -->
-	// pour utiliser la chaine de langue de prefixe_plugin
-	// 
+	/**
+	 * Affiche la boite d'info des liens vers les autres fonds CFG
+	 *
+	 * Les liens sont definis par la variable liens
+	 * <code><!-- liens*=moncfg --></code>
+	 * s'il y a une chaine de langue 'moncfg', le texte sera traduit
+	 * ou
+	 * <code><!-- liens*=prefixe_plugin:moncfg --></code>
+	 * pour utiliser la chaine de langue de prefixe_plugin
+	 *
+	 * @return <type>
+	 */
 	function liens()
 	{
 		$return = '';
@@ -161,11 +216,15 @@ class cfg
 	}
 
 
-	//
-	// Affiche un lien vers le fond dont le nom ($lien)
-	// est passe en parametre
-	// a condition que le fichier fonds/cfg_$lien.html existe
-	//
+	/**
+	 * Affiche un lien vers le fond dont le nom ($lien)
+	 * est passe en parametre
+	 * a condition que le fichier fonds/cfg_$lien.html existe
+	 *
+	 * @param <type> $lien
+	 * @param <type> $nom
+	 * @return <type>
+	 */
 	function generer_lien($lien, $nom='')
 	{
 		// nom est une chaine, pas une cle de tableau.
@@ -180,11 +239,12 @@ class cfg
 	}
 	
 	
-	//
-	// Les liens multi sont appelles par 
-	// liens_multi*=nom_du_fond
-	// a condition que le fichier fonds/cfg_$lien.html existe
-	// 
+	/**
+	 * Les liens multi sont appelles par liens_multi*=nom_du_fond
+	 * a condition que le fichier fonds/cfg_$lien.html existe
+	 *
+	 * @return <type>
+	 */
 	function liens_multi(){
 		// liens multiples
 		foreach ($this->form->param['liens_multi'] as $lien) {
@@ -194,7 +254,13 @@ class cfg
 		}
 		return ($return)?"<ul>$return</ul>":'';
 	}
-	
+
+	/**
+	 *
+	 * @param <type> $lien
+	 * @param <type> $nom
+	 * @return <type>
+	 */
 	function generer_lien_multi($lien, $nom=''){
 		// nom est une chaine, pas une cle de tableau.
 		if (empty($nom) OR !is_string($nom)) $nom = $lien;
@@ -222,16 +288,18 @@ class cfg
 	
 	}
 	
-	//
-	// Affiche la liste des onglets de CFG
-	// 
-	// Recupere les fonds CFG et analyse ceux-ci
-	// - si onglet=oui : affiche l'onglet (valeur par defaut)
-	// - si onglet=non : n'affiche pas l'onglet
-	// - si onglet=fond_cfg_parent : n'affiche pas l'onglet, mais 'exposera' 
-	// l'element parent indique (sous entendu que
-	// le parent n'a pas 'onglet=non' sinon rien ne sera expose...
-	// 
+	/**
+	 * Affiche la liste des onglets de CFG
+	 *
+	 * Recupere les fonds CFG et analyse ceux-ci
+	 * - si onglet=oui : affiche l'onglet (valeur par defaut)
+	 * - si onglet=non : n'affiche pas l'onglet
+	 * - si onglet=fond_cfg_parent : n'affiche pas l'onglet, mais 'exposera'
+	 * l'element parent indique (sous entendu que
+	 * le parent n'a pas 'onglet=non' sinon rien ne sera expose...
+	 *
+	 * @return <type>
+	 */
 	function barre_onglets(){
 		
 		// determiner les onglets a cacher et a mettre en surbrillance
@@ -283,19 +351,31 @@ class cfg
 	}
 	
 
-	// affiche le descriptif du formulaire
+	/**
+	 * affiche le descriptif du formulaire
+	 *
+	 * @return <type>
+	 */
 	function descriptif(){
 		if ($d = $this->form->param['descriptif'])
 			return propre($d);	
 	}
 	
-	// affiche une colonne à gauche
+	/**
+	 * affiche une colonne à gauche
+	 *
+	 * @return <type>
+	 */
 	function gauche(){
 		if ($d = $this->form->param['gauche'])
 			return propre($d);	
 	}
 	
-	// affiche le message en cas d'acces interdit
+	/**
+	 * affiche le message en cas d'acces interdit
+	 *
+	 * @return <type>
+	 */
 	function acces_refuse(){
 		include_spip('inc/minipres');
 		return minipres(_T('info_acces_refuse'), 
@@ -304,7 +384,11 @@ class cfg
 				: " (cfg {$this->form->param[nom]} - {$this->form->vue} - {$this->form->param[cfg_id]})");
 	}
 	
-	// afficher les messages de cfg
+	/**
+	 * afficher les messages de cfg
+	 *
+	 * @return <type>
+	 */
 	function messages(){
 		$m = $this->form->messages; $messages = array();
 		if (count($m['message_ok'])) 		$messages[] = join('<br />', $m['message_ok']);
@@ -317,7 +401,11 @@ class cfg
 		return '';
 	}
 	
-	// affichage du formulaire (ou a defaut du texte 'choisir le module a configurer')
+	/**
+	 * affichage du formulaire (ou a defaut du texte 'choisir le module a configurer')
+	 * 
+	 * @return <type> 
+	 */
 	function formulaire() {
 		$retour = "";	
 		if (!$formulaire = $this->form->formulaire()) {

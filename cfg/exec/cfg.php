@@ -1,15 +1,24 @@
 <?php
 
-/*
- * Plugin CFG pour SPIP
- * (c) toggg 2007, distribue sous licence GNU/GPL
- * Documentation et contact: http://www.spip-contrib.net/
+/**
+ * Plugin générique de configuration pour SPIP
  *
- * la fonction appelee par le core, une simple "factory" de la classe cfg
+ * @license    GNU/GPL
+ * @package    plugins
+ * @subpackage cfg
+ * @category   outils
+ * @copyright  (c) toggg, marcimat 2007-2008
+ * @link       http://www.spip-contrib.net/
+ * @version    $Id$
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+/**
+ * la fonction appelee par le core, une simple "factory" de la classe cfg
+ *
+ * @param <type> $class 
+ */
 function exec_cfg_dist($class = null)
 {
 	include_spip('inc/filtres');

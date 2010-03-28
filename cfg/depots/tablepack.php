@@ -1,42 +1,48 @@
 <?php
 
-/*
- * Plugin CFG pour SPIP
- * (c) toggg 2007, distribue sous licence GNU/GPL
- * Documentation et contact: http://www.spip-contrib.net/
+/**
+ * Plugin générique de configuration pour SPIP
  *
- * classe cfg_extrapack: storage serialise dans extra de spip_auteurs ou autre
+ * @license    GNU/GPL
+ * @package    plugins
+ * @subpackage cfg
+ * @category   outils
+ * @copyright  (c) toggg, marcimat 2007-2008
+ * @link       http://www.spip-contrib.net/
+ * @version    $Id$
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
-
-// cfg_tablepack retrouve et met a jour les donnees serialisees dans une colonne d'une table
-// par défaut : colonne 'cfg' et table 'spip_auteurs'
-// ici, cfg_id est obligatoire ... peut-être mappé sur l'auteur courant (a voir)
-//
-//
-// pour #CONFIG{xxx} ou lire_config('xxx') si xxx demarre par
-// ~ on utilise la colonne 'cfg' de spip_auteurs 
-//   ~ tout court veut dire l'auteur connecte,
-//   ~123 celui de l'auteur 123
-
-// Pour utiliser une autre colonne, il faut renseigner @colonne
-//   ~@extra/champ ou 
-//   ~id_auteur@prefs/champ
-//
-// Pour recuperer des valeurs d'une table particuliere,
-// il faut utiliser 'table:id/champ' ou 'table@colonne:id/champ'
-//   table:123 contenu de la colonne 'cfg' de l'enregistrement id 123 de "table"
-//   rubriques@extra:3/qqc  rubrique 3, colonne extra, champ 'qqc'
-//
-// "table" est un nom de table ou un raccourci comme "article"
-// on peut croiser plusieurs id comme spip_auteurs_articles:6:123
-// (mais il n'y a pas d'extra dans spip_auteurs_articles ...)
-// Le 2eme argument de la balise est la valeur defaut comme pour la dist
-//
-
+/**
+ * Storage serialise dans extra de spip_auteurs ou autre
+ *
+ *
+ * Cette classe retrouve et met a jour les donnees serialisees dans une colonne d'une table
+ * par défaut : colonne 'cfg' et table 'spip_auteurs'
+ * ici, cfg_id est obligatoire ... peut-être mappé sur l'auteur courant (a voir)
+ *
+ *
+ * pour #CONFIG{xxx} ou lire_config('xxx') si xxx demarre par
+ * ~ on utilise la colonne 'cfg' de spip_auteurs
+ *   ~ tout court veut dire l'auteur connecte,
+ *   ~123 celui de l'auteur 123
+ *
+ * Pour utiliser une autre colonne, il faut renseigner @colonne
+ *   ~@extra/champ ou
+ *   ~id_auteur@prefs/champ
+ *
+ * Pour recuperer des valeurs d'une table particuliere,
+ * il faut utiliser 'table:id/champ' ou 'table@colonne:id/champ'
+ *   table:123 contenu de la colonne 'cfg' de l'enregistrement id 123 de "table"
+ *   rubriques@extra:3/qqc  rubrique 3, colonne extra, champ 'qqc'
+ *
+ * "table" est un nom de table ou un raccourci comme "article"
+ * on peut croiser plusieurs id comme spip_auteurs_articles:6:123
+ * (mais il n'y a pas d'extra dans spip_auteurs_articles ...)
+ * Le 2eme argument de la balise est la valeur defaut comme pour la dist
+ */
 class cfg_depot_tablepack
 {
 	var $champs = array();
@@ -53,6 +59,11 @@ class cfg_depot_tablepack
 	// version du depot
 	var $version = 2;
 	
+	/**
+	 * Dépôt dans les attributs de la classe
+	 *
+	 * @param <type> $params
+	 */
 	function cfg_depot_tablepack($params=array())
 	{
 		foreach ($params as $o=>$v) {
@@ -60,7 +71,12 @@ class cfg_depot_tablepack
 		}	
 	}
 	
-	// charge la base (racine) et le point de l'arbre sur lequel on se trouve (ici)
+	/**
+	 * charge la base (racine) et le point de l'arbre sur lequel on se trouve (ici)
+	 *
+	 * @param boolean $lire # inutilisé
+	 * @return <type>
+	 */
 	function charger($lire = false){
 		if (!$this->param['colonne'])	$this->param['colonne'] = 'cfg';
 
@@ -101,7 +117,11 @@ class cfg_depot_tablepack
     	return true;	
 	}
 	
-	// recuperer les valeurs.
+	/**
+	 * recuperer les valeurs.
+	 *
+	 * @return <type>
+	 */
 	function lire()
 	{
 		// charger
@@ -130,7 +150,11 @@ class cfg_depot_tablepack
 	}
 
 
-	// ecrit une entree pour tous les champs
+	/**
+	 * ecrit chaque enregistrement pour chaque champ.
+	 *
+	 * @return <type>
+	 */
 	function ecrire()
 	{
 		// charger
@@ -153,7 +177,11 @@ class cfg_depot_tablepack
 	}
 	
 	
-	// supprime chaque enregistrement de meta pour chaque champ
+	/**
+	 * supprime chaque enregistrement pour chaque champ.
+	 *
+	 * @return <type>
+	 */
 	function effacer(){
 		// charger
 		if (!$this->charger()){
@@ -179,10 +207,15 @@ class cfg_depot_tablepack
 	}
 	
 	
-	// charger les arguments
-	// lire_config(tablepack::table@colonne:id/nom/casier/champ
-	// lire_config(tablepack::~id_auteur@colonne/chemin/champ
-	// lire_config(tablepack::~@colonne/chemin/champ
+	/**
+	 * charger les arguments de
+	 * - lire_config(tablepack::table@colonne:id/nom/casier/champ)
+	 * - lire_config(tablepack::~id_auteur@colonne/chemin/champ)
+	 * - lire_config(tablepack::~@colonne/chemin/champ
+	 *
+	 * @param <type> $args
+	 * @return <type>
+	 */
 	function charger_args($args){
 		$args = explode('/',$args);
 		// cas ~id_auteur/
@@ -222,7 +255,14 @@ class cfg_depot_tablepack
 	}
 	
 	
-	// se positionner dans le tableau arborescent
+	/**
+	 * se positionner dans le tableau arborescent
+	 *
+	 * @param <type> $base
+	 * @param <type> $chemin
+	 * @return <type>
+	 */
+
 	function & monte_arbre(&$base, $chemin){
 		if (!$chemin) {
 			return $base;
@@ -245,7 +285,12 @@ class cfg_depot_tablepack
 		return $base;
 	}
 	
-	
+
+	/**
+	 *
+	 * @param <type> $creer
+	 * @return <type>
+	 */
 	function verifier_colonne($creer = false) {
 		if (!$this->param['table'])
 			return false;
@@ -261,11 +306,13 @@ class cfg_depot_tablepack
 		return true;
 	}
 
-	
-	//
-	// Cherche le vrai nom d'une table
-	// ainsi que ses cles primaires
-	//
+
+	/**
+	 * Cherche le vrai nom d'une table ainsi que ses cles primaires
+	 *
+	 * @param <type> $table
+	 * @return <type>
+	 */
 	function get_table_id($table) {	
 		static $catab = array(
 			'tables_principales' => 'base/serial',

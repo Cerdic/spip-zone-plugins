@@ -1,11 +1,14 @@
 <?php
-/*
- * Plugin CFG pour SPIP
- * (c) toggg, marcimat 2007-2008, distribue sous licence GNU/GPL
- * Documentation et contact: http://www.spip-contrib.net/
+/**
+ * Plugin générique de configuration pour SPIP
  *
- * Definitions des fonctions lire_config, ecrire_config et effacer_config.
- * 
+ * @license    GNU/GPL
+ * @package    plugins
+ * @subpackage cfg
+ * @category   outils
+ * @copyright  (c) toggg, marcimat 2007-2008
+ * @link       http://www.spip-contrib.net/
+ * @version    $Id$
  */
 
 

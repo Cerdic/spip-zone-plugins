@@ -1,18 +1,22 @@
 <?php
 
-/*
- * Plugin CFG pour SPIP
- * (c) toggg 2007, distribue sous licence GNU/GPL
- * Documentation et contact: http://www.spip-contrib.net/
+/**
+ * Plugin générique de configuration pour SPIP
  *
- * classe cfg_metapack: storage serialise dans spip_meta
+ * @license    GNU/GPL
+ * @package    plugins
+ * @subpackage cfg
+ * @category   outils
+ * @copyright  (c) toggg, marcimat 2007-2008
+ * @link       http://www.spip-contrib.net/
+ * @version    $Id$
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-
-
-// cfg_metapack retrouve et met a jour les donnees dans spip_meta
+/**
+ * Retrouve et met a jour les donnees dans spip_meta (mode serialise)
+ */
 class cfg_depot_metapack
 {
 	var $champs = array();
@@ -26,6 +30,11 @@ class cfg_depot_metapack
 	// version du depot
 	var $version = 2;
 	
+	/**
+	 * Stockage interne dans les attributs de la classe
+	 * 
+	 * @param Array $params 
+	 */
 	function cfg_depot_metapack($params=array())
 	{
 		foreach ($params as $o=>$v) {
@@ -34,7 +43,12 @@ class cfg_depot_metapack
 	}
 	
 
-	// charge la base (racine) et le point de l'arbre sur lequel on se trouve (ici)
+	/**
+	 * charge la base (racine) et le point de l'arbre sur lequel on se trouve (ici)
+	 * 
+	 * @param <type> $lire
+	 * @return <type> 
+	 */
 	function charger($lire = false){
 		if ($lire && !isset($GLOBALS['meta'][$this->param['nom']])) 
 			return false;
@@ -46,7 +60,11 @@ class cfg_depot_metapack
     	return true;	
 	}
 	
-	// recuperer les valeurs.
+	/**
+	 * recuperer les valeurs.
+	 * 
+	 * @return <type> 
+	 */
 	function lire()
 	{
 		if (!$this->charger(true)){
@@ -76,7 +94,11 @@ class cfg_depot_metapack
 	}
 
 
-	// ecrit une meta pour tous les champs
+	/**
+	 * ecrit une meta pour tous les champs
+	 * 
+	 * @return <type> 
+	 */
 	function ecrire()
 	{
   		// si pas de champs : on ecrit directement (ecrire_meta(metapack::nom,$val))...
@@ -102,7 +124,11 @@ class cfg_depot_metapack
 	}
 	
 	
-	// supprime chaque enregistrement de meta pour chaque champ
+	/**
+	 * supprime chaque enregistrement de meta pour chaque champ
+	 * 
+	 * @return <type> 
+	 */
 	function effacer(){
   		// si pas de champs : on supprime directement (effacer_meta(metapack::nom))...
   		if (!$this->champs){
@@ -141,9 +167,13 @@ class cfg_depot_metapack
 	}
 	
 	
-	// charger les arguments de lire_config(metapack::nom/casier/champ)
-	// $args = 'nom'; ici
-	// il se peut qu'il n'y ait pas de champs si : lire_config(metapack::nom);
+	/**
+	 * charger les arguments de lire_config(metapack::nom/casier/champ)
+	 * il se peut qu'il n'y ait pas de champs si : lire_config(metapack::nom);
+	 * 
+	 * @param string $args # $args = 'nom'; ici
+	 * @return <type> 
+	 */
 	function charger_args($args){
 		$args = explode('/',$args);
 		$this->param['nom'] = array_shift($args);
@@ -155,7 +185,13 @@ class cfg_depot_metapack
 	}
 	
 	
-	// se positionner dans le tableau arborescent
+	/**
+	 * se positionner dans le tableau arborescent
+	 *
+	 * @param &Array $base
+	 * @param string $chemin
+	 * @return &Array
+	 */
 	function & monte_arbre(&$base, $chemin){
 		if (!$chemin) {
 			return $base;

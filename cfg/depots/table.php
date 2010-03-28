@@ -1,19 +1,23 @@
 <?php
 
-/*
- * Plugin CFG pour SPIP
- * (c) toggg 2007, distribue sous licence GNU/GPL
- * Documentation et contact: http://www.spip-contrib.net/
+/**
+ * Plugin générique de configuration pour SPIP
  *
- * classe cfg_table: storage naturel dans une table
+ * @license    GNU/GPL
+ * @package    plugins
+ * @subpackage cfg
+ * @category   outils
+ * @copyright  (c) toggg, marcimat 2007-2008
+ * @link       http://www.spip-contrib.net/
+ * @version    $Id$
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-
-
-// cfg_table retrouve et met a jour les colonnes d'une table
-// ici, cfg_id est obligatoire ... 
+/**
+ * Retrouve et met a jour les colonnes d'une table
+ * ici, cfg_id est obligatoire ...
+ */
 class cfg_depot_table
 {
 	var $champs = array();
@@ -30,14 +34,22 @@ class cfg_depot_table
 	// version du depot
 	var $version = 2;
 	
-	function cfg_depot_table($params=array())
-	{
+	/**
+	 * Dépôt dans les attributs de la classe
+	 *
+	 * @param Array $params
+	 */
+	function cfg_depot_table($params=array()){
 		foreach ($params as $o=>$v) {
 			$this->$o = $v;
 		}
 	}
 	
-	// charge la base (racine) et le point de l'arbre sur lequel on se trouve (ici)
+	/**
+	 * charge la base (racine) et le point de l'arbre sur lequel on se trouve (ici)
+	 *
+	 * @param boolean $creer # inutilisé
+	 */
 	function charger($creer = false){
 		
 		if (!$this->param['table']) {
@@ -91,9 +103,12 @@ class cfg_depot_table
     	return true;	
 	}
 	
-	// recuperer les valeurs.
-	function lire()
-	{
+	/**
+	 * recuperer les valeurs.
+	 *
+	 * @return <type>
+	 */
+	function lire() {
 		// charger
 		if (!$this->charger()){
 			return array(false, $this->val, $this->messages);	
@@ -119,7 +134,11 @@ class cfg_depot_table
 	}
 
 
-	// ecrit une entree pour tous les champs
+	/**
+	 * ecrit chaque enregistrement pour chaque champ.
+	 *
+	 * @return <type>
+	 */
 	function ecrire()
 	{
 		// charger
@@ -152,7 +171,11 @@ class cfg_depot_table
 	}
 	
 	
-	// supprime chaque enregistrement de meta pour chaque champ
+	/**
+	 * supprime chaque enregistrement pour chaque champ.
+	 *
+	 * @return <type>
+	 */
 	function effacer(){
 		// charger
 		if (!$this->charger()){
@@ -164,9 +187,14 @@ class cfg_depot_table
 	}
 	
 	
-	// charger les arguments
-	// lire_config(table::table@colonne:id
-	// lire_config(table::table:id
+	/**
+	 * charger les arguments
+	 * - lire_config(table::table@colonne:id
+	 * - lire_config(table::table:id
+	 *
+	 * @param <type> $args
+	 * @return <type>
+	 */
 	function charger_args($args){
 
 		list($table, $id) = explode(':',$args,2);
@@ -189,7 +217,13 @@ class cfg_depot_table
 	}
 	
 	
-	// se positionner dans le tableau arborescent
+	/**
+	 * se positionner dans le tableau arborescent
+	 *
+	 * @param <type> $base
+	 * @param <type> $chemin
+	 * @return <type>
+	 */
 	function & monte_arbre(&$base, $chemin){
 		if (!$chemin) {
 			return $base;
@@ -213,10 +247,13 @@ class cfg_depot_table
 	}
 	
 
-	//
-	// Cherche le vrai nom d'une table
-	// ainsi que ses cles primaires
-	//
+	/**
+	 * Cherche le vrai nom d'une table
+	 * ainsi que ses cles primaires
+	 *
+	 * @param <type> $table
+	 * @return <type>
+	 */
 	function get_table_id($table) {	
 		static $catab = array(
 			'tables_principales' => 'base/serial',

@@ -1,17 +1,30 @@
 <?php
 
-/*
- * Plugin CFG pour SPIP
- * (c) toggg, marcimat 2007-2008, distribue sous licence GNU/GPL
- * Documentation et contact: http://www.spip-contrib.net/
+/**
+ * Plugin générique de configuration pour SPIP
+ *
+ * @license    GNU/GPL
+ * @package    plugins
+ * @subpackage cfg
+ * @category   outils
+ * @copyright  (c) toggg, marcimat 2007-2008
+ * @link       http://www.spip-contrib.net/
+ * @version    $Id$
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// si non definie, _COMPAT_CFG_192 vaut "_COMPAT_CFG_192" :(
+/**
+ * si non definie, _COMPAT_CFG_192 vaut "_COMPAT_CFG_192" :(
+ */
 define ('_COMPAT_CFG_192',false);
 
-
+/**
+ *
+ * @param <type> $nom
+ * @param <type> $cfg
+ * @return <type> 
+ */
 function cfg_pre_verifier_cfg_fichier($nom, &$cfg){	
 	$f = cfg_get_info_fichier_upload($nom);
 	// si pas de fichier envoye, on ne traite pas le champ
@@ -25,7 +38,12 @@ function cfg_pre_verifier_cfg_fichier($nom, &$cfg){
 	return $cfg;
 }
 
-
+/**
+ *
+ * @param <type> $nom
+ * @param <type> $cfg
+ * @return <type> 
+ */
 function cfg_pre_traiter_cfg_fichier($nom, &$cfg){
 	include_spip('inc/flock');
 	
@@ -59,20 +77,25 @@ function cfg_pre_traiter_cfg_fichier($nom, &$cfg){
 	return $cfg;
 }
 
-
+/**
+ *
+ * @param <type> $nom
+ * @return <type> 
+ */
 function cfg_get_info_fichier_upload($nom){
 	return $_FILES ? $_FILES[$nom] : $GLOBALS['HTTP_POST_FILES'][$nom];
 }
 
-
-
-
-//
-// Ajouter un document (au format $_FILES)
-//
-# $source,	# le fichier sur le serveur (/var/tmp/xyz34)
-# $nom_envoye,	# son nom chez le client (portequoi.pdf)
-// (n'ajoute pas le contenu en base dans spip_documents...)
+/**
+ * Ajouter un document (au format $_FILES)<br>
+ * (n'ajoute pas le contenu en base dans spip_documents...)
+ * 
+ * @param <type> $source le fichier sur le serveur (/var/tmp/xyz34)
+ * @param <type> $nom_envoye son nom chez le client (portequoi.pdf)
+ * @param <type> $nom_dest
+ * @param <type> $dans
+ * @return <type> 
+ */
 function cfg_ajoute_un_document($source, $nom_envoye, $nom_dest, $dans='config') {
 
 	include_spip('inc/modifier');
@@ -185,7 +208,15 @@ function cfg_ajoute_un_document($source, $nom_envoye, $nom_dest, $dans='config')
 }
 
 
-
+/**
+ * Copier un document
+ * 
+ * @param <type> $ext
+ * @param <type> $orig
+ * @param <type> $source
+ * @param <type> $dans
+ * @return <type> 
+ */
 function cfg_copier_document($ext, $orig, $source, $dans='_cfg') {
 
 	$orig = preg_replace(',\.\.+,', '.', $orig); // pas de .. dans le nom du doc
@@ -203,9 +234,13 @@ function cfg_copier_document($ext, $orig, $source, $dans='_cfg') {
 	return _COMPAT_CFG_192 ? cfg_deplacer_fichier_upload($source, $newFile) : deplacer_fichier_upload($source, $newFile);
 }
 
-
-// Creer IMG/config/vue
-// comme "creer_repertoire_documents" mais avec 2 profondeurs
+/**
+ * Creer IMG/config/vue
+ * comme "creer_repertoire_documents" mais avec 2 profondeurs
+ *
+ * @param <type> $ext
+ * @return <type> 
+ */
 function cfg_creer_repertoire_cfg($ext) {
 	list($racine, $vue) = explode('/',$ext,2);
 	if ($rep = sous_repertoire(_DIR_IMG, $racine)){
@@ -227,14 +262,21 @@ function cfg_creer_repertoire_cfg($ext) {
 	return $rep;
 }
 
-
-
-// compat 1.9.2 :
-// il y a plein de fonctions qui ont change !!
+/**
+ * compat 1.9.2 :
+ * il y a plein de fonctions qui ont change !!
+ */
 if (_COMPAT_CFG_192) {
 	
-	// pas de securite tuante sur .. comme en 1.9.3
-	// retourner la destination comme 1.9.3
+	/**
+	 * pas de securite tuante sur .. comme en 1.9.3<br>
+	 *
+	 * @deprecated depuis SPIP 2.0
+	 * @param <type> $source
+	 * @param <type> $dest
+	 * @param <type> $move
+	 * @return boolean|string # la destination comme 1.9.3
+	 */
 	function cfg_deplacer_fichier_upload($source, $dest, $move=false) {
 		// Securite
 		if (substr($dest,0,strlen(_DIR_RACINE))==_DIR_RACINE)
@@ -261,9 +303,13 @@ if (_COMPAT_CFG_192) {
 	}
 	
 	
-	//
-	// Supprimer le fichier de maniere sympa (flock)
-	// renvoyer true comme 1.9.3 !!!
+	/**
+	 * Supprimer le fichier de maniere sympa (flock)
+	 * 
+	 * @deprecated depuis SPIP 2.0
+	 * @param <type> $fichier
+	 * @return boolean 
+	 */
 	function cfg_supprimer_fichier($fichier) {
 		if (!@file_exists($fichier))
 			return true;
@@ -283,10 +329,14 @@ if (_COMPAT_CFG_192) {
 	}
 	
 	
-	// compat 1.9.2
-	// donne le chemin du fichier relatif a _DIR_IMG
-	// pour stockage 'tel quel' dans la base de donnees
 	if (!function_exists('set_spip_doc')){
+		/**
+		 * donne le chemin du fichier relatif a _DIR_IMG<br>
+		 * pour stockage 'tel quel' dans la base de donnees
+		 * @deprecated depuis SPIP 2.0
+		 * @param <type> $fichier
+		 * @return <type> 
+		 */
 		function set_spip_doc($fichier) {
 			if (strpos($fichier, _DIR_IMG) === 0)
 				return substr($fichier, strlen(_DIR_IMG));
@@ -296,9 +346,14 @@ if (_COMPAT_CFG_192) {
 	}
 
 
-	// compat 1.9.2
-	// donne le chemin complet du fichier
 	if (!function_exists('get_spip_doc')){
+		/**
+		 * donne le chemin complet du fichier
+		 *
+		 * @deprecated depuis SPIP 2.0
+		 * @param <type> $fichier
+		 * @return <type> 
+		 */
 		function get_spip_doc($fichier) {
 			// fichier distant
 			if (preg_match(',^\w+://,', $fichier))

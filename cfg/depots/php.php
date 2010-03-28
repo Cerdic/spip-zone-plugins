@@ -1,16 +1,22 @@
 <?php
 
-/*
- * Plugin CFG pour SPIP
- * (c) toggg 2007, distribue sous licence GNU/GPL
- * Documentation et contact: http://www.spip-contrib.net/
+/**
+ * Plugin générique de configuration pour SPIP
  *
- * classe cfg_php: storage dans un fichier php
+ * @license    GNU/GPL
+ * @package    plugins
+ * @subpackage cfg
+ * @category   outils
+ * @copyright  (c) toggg, marcimat 2007-2008
+ * @link       http://www.spip-contrib.net/
+ * @version    $Id$
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// cfg_php retrouve et met a jour les donnees d'un fichier php
+/**
+ * Retrouve et met a jour les donnees d'un fichier php.
+ */
 class cfg_depot_php
 {
 	var $champs = array();
@@ -24,14 +30,24 @@ class cfg_depot_php
 	// version du depot
 	var $version = 2;
 	
-	
+	/**
+	 * Dépôt dans les attributs de la classe
+	 *
+	 * @param <type> $params
+	 */
 	function cfg_depot_php($params=array()) {
 		foreach ($params as $o=>$v) {
 			$this->$o = $v;
 		}
 	}
 	
-	// calcule l'emplacement du fichier
+
+	/**
+	 * calcule l'emplacement du fichier
+	 *
+	 * @staticvar <type> $fichier
+	 * @return <type>
+	 */
 	function get_fichier(){
 		static $fichier = array();
 		$cle = $this->param['nom'] . ' - ' . $this->param['fichier'];
@@ -48,7 +64,12 @@ class cfg_depot_php
 	}
 	
 	
-	// charge la base (racine) et le point de l'arbre sur lequel on se trouve (ici)
+	/**
+	 * charge la base (racine) et le point de l'arbre sur lequel on se trouve (ici)
+	 *
+	 * @param <type> $lire
+	 * @return <type>
+	 */
 	function charger($lire=false){
 		$fichier = $this->get_fichier();
 
@@ -69,7 +90,11 @@ class cfg_depot_php
     	return true;
 	}
 	
-	// recuperer les valeurs.
+	/**
+	 * recuperer les valeurs.
+	 *
+	 * @return <type>
+	 */
 	function lire() {
 		if (!$this->charger(true)){
 			return array(true, null); // pas de chargement = pas de valeur encore enregistrees
@@ -86,7 +111,11 @@ class cfg_depot_php
 	}
 
 
-	// ecrit chaque enregistrement pour chaque champ
+	/**
+	 * ecrit chaque enregistrement pour chaque champ.
+	 *
+	 * @return <type>
+	 */
 	function ecrire() {
 		if (!$this->charger()){
 			return array(false, $this->val);	
@@ -103,9 +132,13 @@ class cfg_depot_php
 		
 		return array(true, $this->_ici);	
 	}
-	
-	
-	// supprime chaque enregistrement pour chaque champ
+
+
+	/**
+	 * supprime chaque enregistrement pour chaque champ.
+	 *
+	 * @return <type>
+	 */
 	function effacer(){
 		if (!$this->charger()){
 			return array(false, $this->val);	
@@ -132,7 +165,13 @@ class cfg_depot_php
 		return array($this->ecrire_fichier($this->_base), $this->_ici);
 	}
 	
-	
+
+	/**
+	 * Ecrire un fichier
+	 *
+	 * @param <type> $contenu
+	 * @return <type>
+	 */
 	function ecrire_fichier($contenu=array()){
 		$fichier = $this->get_fichier();
 
@@ -153,9 +192,14 @@ $cfg = ' . var_export($contenu, true) . ';
 		return ecrire_fichier($fichier, $contenu);
 	}
 	
-	// charger les arguments de 
-	// - lire_config(php::nom/casier/champ)
-	// - lire_config(php::adresse/fichier.php:nom/casier/champ)
+	/**
+	 * charger les arguments de
+	 * - lire_config(php::nom/casier/champ)
+	 * - lire_config(php::adresse/fichier.php:nom/casier/champ)
+	 *
+	 * @param <type> $args
+	 * @return <type>
+	 */
 	function charger_args($args){
 		list($fichier, $args) = explode(':',$args);
 		if (!$args) {
@@ -170,9 +214,15 @@ $cfg = ' . var_export($contenu, true) . ';
 		$this->param['casier'] = implode('/',$arbre);
 		return true;	
 	}
-	
-	
-	// se positionner dans le tableau arborescent
+
+
+	/**
+	 * se positionner dans le tableau arborescent
+	 *
+	 * @param <type> $base
+	 * @param <type> $chemin
+	 * @return <type>
+	 */
 	function & monte_arbre(&$base, $chemin){
 		if (!$chemin) {
 			return $base;
