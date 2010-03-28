@@ -30,7 +30,7 @@ modifier ces param&#232;tres.  -->
 #CACHE{0}
 <!-- 
 [(#SET{largeur_entete,[(#ENV{largeur_entete}|=={100%}|?{[(#LOGO_SITE_SPIP_SURVOL||largeur|sinon{2000})],[(#ENV{largeur_entete,[(#LOGO_SITE_SPIP_SURVOL||largeur|sinon{2000})]})]})]})]<br>let: #GET{largeur_entete}
-[(#REM) attention! là y'a une mauvaise bidouille entre hauteur bandeau et hauteur entete tant que les  sont confondus...!!!]
+[(#REM) attention! la y'a une mauvaise bidouille entre hauteur bandeau et hauteur entete tant que les  sont confondus...!!!]
 [(#SET{hauteur_entete,[(#ENV{hauteur_bando,[(#LOGO_SITE_SPIP_SURVOL||hauteur|sinon{200})]})]})]<br>het: #GET{hauteur_entete}
 
 [(#SET{largeur_bando,[(#LOGO_SITE_SPIP_SURVOL||largeur|sinon{[(#GET{largeur_entete})]})]})]<br>lb: #GET{largeur_bando}
@@ -79,7 +79,7 @@ modifier ces param&#232;tres.  -->
         
     }
     
-  // retourne 3 objets donnant paramètres du bando (les dimensions sont *reduites à l'échelle*) 
+  // retourne 3 objets donnant paramï¿½tres du bando (les dimensions sont *reduites ï¿½ l'ï¿½chelle*) 
   // this.hBando = hauteur en px  
   // this.H = calage horizontal pour background-image (left/center/right) 
   // this.V = valeur de top en px pour background-image 
@@ -94,7 +94,7 @@ modifier ces param&#232;tres.  -->
         this.hBando = hbando;
     }
     
-  // gère l'affichage des bordures selon la config
+  // gï¿½re l'affichage des bordures selon la config
     function gerer_bordures(){
         if (jQuery("input[name='toutes_bordures_identiques']:checked").val() == 'oui') {
         	jQuery("#voir_bordure_unique").show();
@@ -277,7 +277,7 @@ modifier ces param&#232;tres.  -->
         });
         
         
-    // les prévisu avec largeur écran
+    // les previsu avec largeur ecran
         jQuery(".previsu_logo").click(function(){ 
             jQuery("#bando_logo").css({'width': jQuery(this).attr('title')}); 
             jQuery(".previsu_logo").css({'background-color': '#FFFFFF'});
@@ -324,7 +324,7 @@ modifier ces param&#232;tres.  -->
                                         aspectRatio: true,
                                         stop: function(){ go_recadre_logo(); }
                                      });
-//        jQuery("#img_logo").draggable({ containment: 'parent'}); // draggable semble bogué en jQuery 1.2.6...
+//        jQuery("#img_logo").draggable({ containment: 'parent'}); // draggable semble bogue en jQuery 1.2.6...
 */
     });
 </script>
@@ -669,7 +669,7 @@ modifier ces param&#232;tres.  -->
             <span class="previsu_titre" title="[(#VAL{2048}|mult{[(#GET{fact_reduc})]})]px">[2048 pixels]</span>
         </p>     
 
-    </div><!-- fin détails -->
+    </div><!-- fin details -->
     
 </fieldset>
 

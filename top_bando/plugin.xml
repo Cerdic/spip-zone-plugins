@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <plugin>
-	<nom>Top bandeau</nom>
-	<auteur>cy_altern 
+    <nom>Top bandeau</nom>
+    <auteur>cy_altern
 _ &#169; 2010 - Distribu&#233; sous licence GPL
-	</auteur>
-	<lien></lien>
-	<icon></icon>
-	<version>0.1</version>
-	<etat>dev</etat>
-  <description>
+    </auteur>
+    <lien></lien>
+    <icon></icon>
+    <version>0.1</version>
+    <etat>dev</etat>
+    <description>
 Ce plugin permet de g&#233;rer le bandeau de sommet des pages: hauteur et images.
 
 Les 2 images utilis&#233;es sont &#224; t&#233;l&#233;charger comme {{logo du site}} et {{logo de survol}}:
 (cf [la page de configuration du site->?exec=configuration])
--* l'image charg&#232;e comme {{logo de ce site}} (= {{logo}} pour la suite) sera utilisé comme image clicable pour revenir &#224; l'accueil du site. 
+-* l'image charg&#232;e comme {{logo de ce site}} (= {{logo}} pour la suite) sera utilis&#232; comme image clicable pour revenir &#224; l'accueil du site.
 Par d&#233;faut elle est align&#233;e &#224; gauche. Elle sera redimensionn&#233;e pour que sa {{hauteur}} soit &#233;gale &#224; celle du bandeau.
 -* l'image charg&#232;e comme {{logo pour survol}} (= {{bandeau}} pour la suite) sera utilis&#233; comme image de fond du bandeau. Elle sera {{recadr&#233;e}} 
 selon les param&#232;tres d&#233;finis dans [l'interface de configuration->?exec=cfg&amp;cfg=top_bando] de ce plugin.
-	</description>
-	<prefix>top_bando</prefix>
-  <pipeline>
+    </description>
+    <prefix>top_bando</prefix>
+    <pipeline>
    	<nom>header_prive</nom>
-    <action>header_prive</action>
-    <inclure>top_bando_pipelines.php</inclure>
-  </pipeline>
-  <fonctions>top_bando_fonctions.php</fonctions>
-	<necessite id="SPIP" version="[2.0.1;]" />
-	<necessite id="cfg" version="[1.10.2;]" />
-	<necessite id='spip_bonux' version='[1.8;]' />
-<!-- pour utiliser ce plugin en SPIP version 2.0.*   -->    
-  <necessite id="lib:jquery.ui-1.6" src="http://jquery-ui.googlecode.com/files/jquery.ui-1.6.zip" />
-<!-- pour utiliser ce plugin en SPIP version 2.1 -->  
-  <necessite id="lib:jquery-ui-1.7.2" src="http://jquery-ui.googlecode.com/files/jquery-ui-1.7.2.zip" />
+        <action>header_prive</action>
+        <inclure>top_bando_pipelines.php</inclure>
+    </pipeline>
+    <fonctions>top_bando_fonctions.php</fonctions>
+    <necessite id="SPIP" version="[2.0.1;]" />
+    <necessite id="cfg" version="[1.10.2;]" />
+    <necessite id='spip_bonux' version='[1.8;]' />
+    <!-- pour utiliser ce plugin en SPIP version 2.0.*   -->
+    <necessite id="lib:jquery.ui-1.6" src="http://jquery-ui.googlecode.com/files/jquery.ui-1.6.zip" />
+    <!-- pour utiliser ce plugin en SPIP version 2.1 -->
+    <necessite id="lib:jquery-ui-1.7.2" src="http://jquery-ui.googlecode.com/files/jquery-ui-1.7.2.zip" />
 
-	<utilise id="palette" version="[1.0;]" />
-	<utilise id="choix_police" version="[0.1;]" />
-  <chemin dir='' />
+    <utilise id="palette" version="[1.0;]" />
+    <utilise id="choix_police" version="[0.1;]" />
+    <chemin dir='' />
 </plugin>
