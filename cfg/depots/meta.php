@@ -30,7 +30,7 @@ class cfg_depot_meta
 
 	/**
 	 *
-	 * @param <type> $params 
+	 * @param Array $params
 	 */
 	function cfg_depot_meta($params=array())
 	{
@@ -46,8 +46,8 @@ class cfg_depot_meta
 	 * unserialize : si la valeur est deserialisable, elle est retournee deserialisee
 	 * permet a #CONFIG d'obtenir une valeur non deserialisee...
 	 * 
-	 * @param <type> $unserialize
-	 * @return <type> 
+	 * @param boolean $unserialize
+	 * @return Array
 	 */
 	function lire($unserialize=true)
 	{
@@ -71,7 +71,8 @@ class cfg_depot_meta
 
 	/**
 	 * ecrit chaque enregistrement de meta pour chaque champ
-	 * @return <type> 
+	 *
+	 * @return Array
 	 */
 	function ecrire()
 	{
@@ -86,7 +87,7 @@ class cfg_depot_meta
 	/**
 	 * supprime chaque enregistrement de meta pour chaque champ
 	 * 
-	 * @return <type> 
+	 * @return Array
 	 */
 	function effacer(){
 		foreach ($this->champs as $name => $def) {

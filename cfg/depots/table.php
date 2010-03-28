@@ -31,7 +31,10 @@ class cfg_depot_table
 	var $_base = null;
 	var $_ici = null;
 	
-	// version du depot
+	/**
+	 * version du depot
+	 * @var int
+	 */
 	var $version = 2;
 	
 	/**
@@ -100,13 +103,13 @@ class cfg_depot_table
 		$this->_existe = count($this->_base);
 			
 		$this->_ici = &$this->_base;
-    	return true;	
+		return true;
 	}
 	
 	/**
 	 * recuperer les valeurs.
 	 *
-	 * @return <type>
+	 * @return Array
 	 */
 	function lire() {
 		// charger
@@ -114,30 +117,30 @@ class cfg_depot_table
 			return array(false, $this->val, $this->messages);	
 		}
 
-        // utile ??
-    	if ($this->param['cfg_id']) {
-    		$cles = explode('/', $this->param['cfg_id']);
+		// utile ??
+		if ($this->param['cfg_id']) {
+			$cles = explode('/', $this->param['cfg_id']);
 			foreach ($this->champs_id as $i => $name) {
 				$this->_ici[$name] = $cles[$i];
-		    }
-    	}
+			}
+		}
 	
-    	// s'il y a des champs demandes, ne retourner que ceux-ci
-    	if (count($this->champs)){
-    		$val = array();
+		// s'il y a des champs demandes, ne retourner que ceux-ci
+		if (count($this->champs)){
+			$val = array();
 			foreach ($this->champs as $name => $def) {
 				$val[$name] = $this->_ici[$name];
 			}
 			$this->_ici = $val;
-    	}
-	    return array(true, $this->_ici);
+		}
+		return array(true, $this->_ici);
 	}
 
 
 	/**
 	 * ecrit chaque enregistrement pour chaque champ.
 	 *
-	 * @return <type>
+	 * @return Array
 	 */
 	function ecrire()
 	{
@@ -174,7 +177,7 @@ class cfg_depot_table
 	/**
 	 * supprime chaque enregistrement pour chaque champ.
 	 *
-	 * @return <type>
+	 * @return Array
 	 */
 	function effacer(){
 		// charger
@@ -192,8 +195,8 @@ class cfg_depot_table
 	 * - lire_config(table::table@colonne:id
 	 * - lire_config(table::table:id
 	 *
-	 * @param <type> $args
-	 * @return <type>
+	 * @param string $args
+	 * @return boolean
 	 */
 	function charger_args($args){
 
@@ -220,9 +223,9 @@ class cfg_depot_table
 	/**
 	 * se positionner dans le tableau arborescent
 	 *
-	 * @param <type> $base
-	 * @param <type> $chemin
-	 * @return <type>
+	 * @param &Array $base
+	 * @param string $chemin
+	 * @return &Array
 	 */
 	function & monte_arbre(&$base, $chemin){
 		if (!$chemin) {
@@ -251,8 +254,8 @@ class cfg_depot_table
 	 * Cherche le vrai nom d'une table
 	 * ainsi que ses cles primaires
 	 *
-	 * @param <type> $table
-	 * @return <type>
+	 * @param string $table
+	 * @return Array
 	 */
 	function get_table_id($table) {	
 		static $catab = array(

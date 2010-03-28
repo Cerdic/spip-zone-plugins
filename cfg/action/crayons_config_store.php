@@ -13,9 +13,9 @@
 
 
 /**
- * on reprend la fonction de crayons...
+ * on reprend la fonction de {@link http://zone.spip.org/trac/spip-zone/browser/_plugins_/crayons/action/crayons_store.php crayons}...
  * 
- * @return <type> 
+ * @return Array
  */
 function action_crayons_config_store_dist() {
 	include_spip('cfg_fonctions');
@@ -25,11 +25,11 @@ function action_crayons_config_store_dist() {
 }
 
 /**
- * pour le traitement, on appelle crayons_store avec 2 fonctions
+ * pour le traitement, on appelle {@link http://zone.spip.org/trac/spip-zone/browser/_plugins_/crayons/action/crayons_store.php crayons_store} avec 2 fonctions
  * - la premiere pour recuperer la valeur avant modification
  * - la seconde pour realiser les modifications 
  * 
- * @return <type> 
+ * @return Array
  */
 function crayons_config_store() {
 	$options = array(
@@ -41,9 +41,9 @@ function crayons_config_store() {
 /**
  * recuperer la valeur de la config demandee
  * 
- * @param <type> $content
- * @param <type> $regs
- * @return <type> 
+ * @param mixed $content # inutilisé
+ * @param Array $regs
+ * @return Array
  */
 function crayons_config_store_get_valeur($content, $regs) {
 	list(,$crayon,$type,$modele,$id) = $regs;
@@ -55,9 +55,9 @@ function crayons_config_store_get_valeur($content, $regs) {
 /**
  * sauver les modifications de configs
  *
- * @param <type> $modifs
- * @param <type> $return
- * @return <type>
+ * @param Array $modifs
+ * @param Array $return
+ * @return Array
  */
 function crayons_config_store_set_modifs($modifs, $return) {
 	foreach ($modifs as $modif) {

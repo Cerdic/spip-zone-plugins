@@ -20,8 +20,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * Renvoie la liste des configurations disponibles dans le path
  * ou dans le dossier donne en argument
  * 
- * @param <type> $dir
- * @return <type> 
+ * @param string $dir
+ * @return Array
  */
 function liste_cfg($dir='') {
 	// Faire la liste des elements qui ont un cfg ; ca peut etre des plugins
@@ -52,8 +52,8 @@ function liste_cfg($dir='') {
 /**
  * Renvoie une icone avec un lien vers la page de configuration d'un repertoire donné
  * 
- * @param <type> $dir
- * @return <type> 
+ * @param string $dir
+ * @return string
  */
 function icone_lien_cfg($dir) {
 	$ret = '';
@@ -79,8 +79,8 @@ function icone_lien_cfg($dir) {
  * d'onglet (oui/non/titre_parent), plus quelques autres parametres (url, titre, icone),
  * pour un repertoire donne (sinon tout le path)
  * 
- * @param <type> $dir
- * @return <type> 
+ * @param string $dir
+ * @return string
  */
 function lister_onglets_cfg($dir=''){
 	$onglets = array();
@@ -138,9 +138,9 @@ class cfg
 	
 	/**
 	 *
-	 * @param <type> $nom
-	 * @param <type> $cfg_id
-	 * @param <type> $opt 
+	 * @param string $nom
+	 * @param string $cfg_id
+	 * @param Array $opt
 	 */
 	function cfg($nom, $cfg_id = '', $opt = array()) {
 		include_spip('inc/cfg_formulaire');
@@ -148,32 +148,33 @@ class cfg
 	}
 
 	/**
+	 * Controller l'autorisation
 	 *
-	 * @return <type> 
+	 * @return int # 0 ou 1
 	 */
 	function autoriser()  {return $this->form->autoriser(); }
 	
 	/**
 	 *
-	 * @return <type> 
+	 * @return boolean
 	 */
 	function traiter()  {return $this->form->traiter();}
 	
 	/**
 	 *
-	 * @return <type> 
+	 * @return string
 	 */
 	function get_titre(){ return $this->form->param['titre'];}
 	
 	/**
 	 *
-	 * @return <type> 
+	 * @return string
 	 */
 	function get_nom()  { return $this->form->param['nom'];}
 	
 	/**
 	 *
-	 * @return <type> 
+	 * @return string
 	 */
 	function get_boite(){ 
 		if (!(($titre = $this->form->param['titre']) && ($boite = $this->form->param['boite']))){
@@ -183,11 +184,11 @@ class cfg
 	}
 
 	/**
-	 * pour pouvoir tester si la presentation des formulaires doit etre appliquee ou non
+	 * pour pouvoir testé si la presentation des formulaires doit etre appliquee ou non
 	 * m'est avis que ca devrait virer cette 'presentation=auto'...
 	 * c'est comme 'rediriger', il n'y a que le plugin 'autorite' qui l'utilise
 	 * 
-	 * @return <type> 
+	 * @return string
 	 */
 	function get_presentation() { return $this->form->param['presentation'];	}
 	
@@ -201,7 +202,7 @@ class cfg
 	 * <code><!-- liens*=prefixe_plugin:moncfg --></code>
 	 * pour utiliser la chaine de langue de prefixe_plugin
 	 *
-	 * @return <type>
+	 * @return string
 	 */
 	function liens()
 	{
@@ -221,9 +222,9 @@ class cfg
 	 * est passe en parametre
 	 * a condition que le fichier fonds/cfg_$lien.html existe
 	 *
-	 * @param <type> $lien
-	 * @param <type> $nom
-	 * @return <type>
+	 * @param string $lien
+	 * @param string $nom
+	 * @return string
 	 */
 	function generer_lien($lien, $nom='')
 	{
@@ -243,7 +244,7 @@ class cfg
 	 * Les liens multi sont appelles par liens_multi*=nom_du_fond
 	 * a condition que le fichier fonds/cfg_$lien.html existe
 	 *
-	 * @return <type>
+	 * @return string
 	 */
 	function liens_multi(){
 		// liens multiples
@@ -257,9 +258,9 @@ class cfg
 
 	/**
 	 *
-	 * @param <type> $lien
-	 * @param <type> $nom
-	 * @return <type>
+	 * @param string $lien
+	 * @param string $nom
+	 * @return string
 	 */
 	function generer_lien_multi($lien, $nom=''){
 		// nom est une chaine, pas une cle de tableau.
@@ -298,7 +299,7 @@ class cfg
 	 * l'element parent indique (sous entendu que
 	 * le parent n'a pas 'onglet=non' sinon rien ne sera expose...
 	 *
-	 * @return <type>
+	 * @return string # Le code HTML
 	 */
 	function barre_onglets(){
 		
@@ -354,7 +355,7 @@ class cfg
 	/**
 	 * affiche le descriptif du formulaire
 	 *
-	 * @return <type>
+	 * @return string
 	 */
 	function descriptif(){
 		if ($d = $this->form->param['descriptif'])
@@ -364,7 +365,7 @@ class cfg
 	/**
 	 * affiche une colonne à gauche
 	 *
-	 * @return <type>
+	 * @return string
 	 */
 	function gauche(){
 		if ($d = $this->form->param['gauche'])
@@ -374,7 +375,7 @@ class cfg
 	/**
 	 * affiche le message en cas d'acces interdit
 	 *
-	 * @return <type>
+	 * @return string
 	 */
 	function acces_refuse(){
 		include_spip('inc/minipres');
@@ -387,7 +388,7 @@ class cfg
 	/**
 	 * afficher les messages de cfg
 	 *
-	 * @return <type>
+	 * @return string
 	 */
 	function messages(){
 		$m = $this->form->messages; $messages = array();
@@ -404,7 +405,7 @@ class cfg
 	/**
 	 * affichage du formulaire (ou a defaut du texte 'choisir le module a configurer')
 	 * 
-	 * @return <type> 
+	 * @return string
 	 */
 	function formulaire() {
 		$retour = "";	

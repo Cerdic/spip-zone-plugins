@@ -25,18 +25,18 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  *
  *
  * pour #CONFIG{xxx} ou lire_config('xxx') si xxx demarre par
- * ~ on utilise la colonne 'cfg' de spip_auteurs
- *   ~ tout court veut dire l'auteur connecte,
- *   ~123 celui de l'auteur 123
+ * - on utilise la colonne 'cfg' de spip_auteurs
+ *   - tout court veut dire l'auteur connecte,
+ *   -123 celui de l'auteur 123
  *
  * Pour utiliser une autre colonne, il faut renseigner @colonne
- *   ~@extra/champ ou
- *   ~id_auteur@prefs/champ
+ * - @extra/champ ou
+ * - id_auteur@prefs/champ
  *
  * Pour recuperer des valeurs d'une table particuliere,
  * il faut utiliser 'table:id/champ' ou 'table@colonne:id/champ'
- *   table:123 contenu de la colonne 'cfg' de l'enregistrement id 123 de "table"
- *   rubriques@extra:3/qqc  rubrique 3, colonne extra, champ 'qqc'
+ * - table:123 contenu de la colonne 'cfg' de l'enregistrement id 123 de "table"
+ * - rubriques@extra:3/qqc  rubrique 3, colonne extra, champ 'qqc'
  *
  * "table" est un nom de table ou un raccourci comme "article"
  * on peut croiser plusieurs id comme spip_auteurs_articles:6:123
@@ -62,7 +62,7 @@ class cfg_depot_tablepack
 	/**
 	 * Dépôt dans les attributs de la classe
 	 *
-	 * @param <type> $params
+	 * @param Array $params
 	 */
 	function cfg_depot_tablepack($params=array())
 	{

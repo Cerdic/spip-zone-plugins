@@ -16,42 +16,102 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 
-// la classe cfg represente une page de configuration
+/**
+ * la classe cfg represente une page de configuration
+ */
 class cfg_formulaire{
 
-// les parametres des formulaires cfg sont stockes dans cet objet
+	/**
+	 * les parametres des formulaires cfg sont stockes dans cet objet
+	 * @var Array 
+	 */
 	var $param;
-// l'objet de classe cfg_depot qui assure lecture/ecriture/effacement des config
+	
+	/**
+	 * l'objet de classe cfg_depot qui assure lecture/ecriture/effacement des config
+	 * @var <type> 
+	 */
 	var $depot = null;
-// le fond html utilise , en general pour config simple idem $nom
+
+	/**
+	 * le fond html utilise , en general pour config simple idem $nom
+	 * @var string 
+	 */
 	var $vue = '';
-// l'adresse du fond html (sans l'extension .html)
+
+	/**
+	 * l'adresse du fond html (sans l'extension .html)
+	 * @var string 
+	 */
 	var $path_vue = '';
-// provient-on d'un formulaire de type CVT (charger/verifier/traiter) dans formulaires/ ?
+
+	/**
+	 * provient-on d'un formulaire de type CVT (charger/verifier/traiter) dans formulaires/ ?
+	 * @var boolean
+	 */
 	var $depuis_cvt = false;
-// compte-rendu des mises a jour
+
+	/**
+	 * compte-rendu des mises a jour
+	 * @var Array
+	 */
 	var $messages = array('message_ok'=>array(), 'message_erreur'=>array(), 'erreurs'=>array());
-// les champs trouve dans le fond
+
+	/**
+	 * les champs trouve dans le fond
+	 * @var Array
+	 */
 	var $champs = array();
-// les champs index
+
+	/**
+	 * les champs index
+	 * @var Array
+	 */
 	var $champs_id = array();
-// leurs valeurs
+
+	/**
+	 * leurs valeurs
+	 * @var Array
+	 */
 	var $val = array();
-// pour tracer les valeurs modifiees
+
+	/**
+	 * pour tracer les valeurs modifiees
+	 * @var string
+	 */
 	var $log_modif = '';
-// contenu du fichier de formulaire
+
+	/**
+	 * contenu du fichier de formulaire
+	 * @var string
+	 */
 	var $controldata ='';
-// stockage du fond compile par recuperer_fond()
+
+	/**
+	 * stockage du fond compile par recuperer_fond()
+	 * @var <type>
+	 */
 	var $fond_compile = '';
-// y a t-il des extensions (classes css 'type_{nom}' ou 'cfg_{nom}' sur champs) a traiter ?
+
+	/**
+	 * y a t-il des extensions (classes css 'type_{nom}' ou 'cfg_{nom}' sur champs) a traiter ?
+	 * @var Array
+	 */
 	var $extensions = array();
 
-// Alias pour passer facilement les parametres aux classes appelees
+	/**
+	 * Alias pour passer facilement les parametres aux classes appelees
+	 * @var Array
+	 */
 	var $params = array();
 
-	//
-	// Constructeur de la classe
-	//
+	/**
+	 * Constructeur de la classe
+	 * 
+	 * @param string $nom
+	 * @param string $cfg_id
+	 * @param Array $opt 
+	 */
 	function cfg_formulaire($nom, $cfg_id = '', $opt = array())
 	{
 		$this->param = array(
@@ -94,22 +154,35 @@ class cfg_formulaire{
 		// charger les donnees du fond demande
 		$this->charger();
 	}
-
-		
-	// retourne true en cas d'erreur...
+	
+	/**
+	 * retourne true en cas d'erreur...
+	 * 
+	 * @return boolean 
+	 */
 	function erreurs(){
 		return $this->messages['erreurs'] || $this->messages['message_erreur'];
 	}
-	
-	// ajoute une erreur sur un champ donne
+
+	/**
+	 * ajoute une erreur sur un champ donne
+	 * 
+	 * @param string $champ
+	 * @param string $message 
+	 */
 	function ajouter_erreur($champ, $message) {
 		$this->messages['erreurs'][$champs] = isset($this->messages['erreurs'][$champs]) 
 			? $this->messages['erreurs'][$champs] .= '<br />' . $message
 			: $message;
 	}
 	
-	// ajoute des erreurs sur les champs indiques dans le tableau
-	// (comme verifier de cvt)
+	/**
+	 * ajoute des erreurs sur les champs indiques dans le tableau
+	 * (comme verifier de cvt)
+	 * 
+	 * @param Array $err
+	 * @return boolean 
+	 */
 	function ajouter_erreurs($err) {
 		if (!is_array($err)) return false;
 		if (isset($err['message_erreur']) && $err['message_erreur']) 
@@ -122,9 +195,13 @@ class cfg_formulaire{
 	}
 	
 	
-	// pre-analyser le formulaire
-	// c'est a dire recuperer les parametres CFG 
-	// et les noms des champs du formulaire	
+	/**
+	 * pre-analyser le formulaire,
+	 * c'est a dire recuperer les parametres CFG 
+	 * et les noms des champs du formulaire	
+	 * 
+	 * @return boolean 
+	 */
 	function charger(){
 		$ok = true;
 		
@@ -179,16 +256,16 @@ class cfg_formulaire{
 		return $ok;
 	}
 
-
-	//
-	// Doit controler la validite des valeurs transmises
-	// 
-	// Verifie les valeurs postees.
-	// - stocke les valeurs qui ont changees dans $this->val[$nom_champ] = 'nouvelle_valeur'
-	// - verifie que les types de valeurs attendus sont corrects ($this->verifier_champs_types)
-	// 
-	// retourne les messages d'erreur
-	//
+	/**
+	 * Doit controler la validite des valeurs transmises
+	 * 
+	 * Verifie les valeurs postees.
+	 * - stocke les valeurs qui ont changees dans $this->val[$nom_champ] = 'nouvelle_valeur'
+	 * - verifie que les types de valeurs attendus sont corrects ($this->verifier_champs_types)
+	 * 
+	 * retourne les messages d'erreur
+	 * @return boolean|string 
+	 */
 	function verifier() {
 
 		if ($this->erreurs() || !$this->autoriser()) 
@@ -233,15 +310,14 @@ class cfg_formulaire{
 	    return !$this->erreurs();
 	}
 	
-
-	
-	//
-	// Gere le traitement du formulaire.
-	// 
-	// Si le chargement ou le controle n'ont pas ete fait,
-	// la fonction s'en occupe.
-	// 
-	//
+	/**
+	 * Gere le traitement du formulaire.
+	 * 
+	 * Si le chargement ou le controle n'ont pas ete fait,
+	 * la fonction s'en occupe.
+	 *
+	 * @return <type> 
+	 */
 	function traiter()
 	{
 		if (!$this->verifier) $this->verifier();
@@ -281,14 +357,14 @@ class cfg_formulaire{
 			($this->param['cfg_id'] ? '/' . $this->param['cfg_id'] : ''));		
 	}
 
-
-
-
-	//
-	// Determine l'arborescence ou CFG doit chercher les valeurs deja enregistrees
-	// si nom=toto, casier=chose/truc, cfg_id=2, 
-	// cfg cherchera dans #CONFIG{toto/chose/truc/2}
-	// 
+	/**
+	 * Determine l'arborescence ou CFG doit chercher les valeurs deja enregistrees
+	 * 
+	 * si nom=toto, casier=chose/truc, cfg_id=2, 
+	 * cfg cherchera dans #CONFIG{toto/chose/truc/2}
+	 *
+	 * @return <type> 
+	 */
 	function nom_config()
 	{
 	    return $this->param['nom'] . 
@@ -296,26 +372,26 @@ class cfg_formulaire{
 	    		($this->param['cfg_id'] ? '/' . $this->param['cfg_id'] : '');
 	}
 
-
-
-	//
-	// Recherche et stockage
-	// des parametres #REM passes a CFG
-	// (DEPRECIE)
-	//
+	/**
+	 * Recherche et stockage
+	 * des parametres #REM passes a CFG
+	 * 
+	 * @deprecated (DEPRECIE)
+	 */
 	function recuperer_parametres_rem(){
 		// cas de #REM (deprecie)
 		preg_replace_callback('/(\[\(#REM\) ([a-z0-9_]\w+)(\*)?=)(.*?)\]/sim',
 					array(&$this, 'post_params'), $this->controldata);
 	}
-	
-	
-	// cette fonction recherche et stocke les parametres passes a cfg par <!-- param=valeur -->
-	// ces lignes sont alors effacees du code html. Ces proprietes sont lues apres recuperer_fond(),
-	// et interpretent donc les balises spip et les chaines de langues
-	//
-	// si la fonction est appelee 2 fois, les parametres identiques ne seront pas copies
-	// sauf si le parametre est un tableau (<!-- param*=valeur -->), les valeurs seront dupliquees
+
+	/**
+	 * cette fonction recherche et stocke les parametres passes a cfg par <!-- param=valeur -->
+	 * ces lignes sont alors effacees du code html. Ces proprietes sont lues apres recuperer_fond(),
+	 * et interpretent donc les balises spip et les chaines de langues
+	 *
+	 * si la fonction est appelee 2 fois, les parametres identiques ne seront pas copies
+	 * sauf si le parametre est un tableau (<!-- param*=valeur -->), les valeurs seront dupliquees
+	 */
 	function recuperer_parametres(){
 
 		// pour compatibilite, recuperer l'ancien code #REM
@@ -352,23 +428,23 @@ class cfg_formulaire{
 			if ($val) $this->ajouter_extension_parametre($nom);		
 		}
 	}
-	
-	
-	// une fonction pour effacer les parametres du code html
-	// ce qui evite de dupliquer les tableaux 
-	// (si on utilisait recuperer_parametres() a la place)
+
+	/**
+	 * une fonction pour effacer les parametres du code html
+	 * ce qui evite de dupliquer les tableaux 
+	 * (si on utilisait recuperer_parametres() a la place)
+	 */
 	function effacer_parametres(){
 		$this->fond_compile = preg_replace('/(<!-- ([a-z0-9_]\w+)(\*)?=)(.*?)-->/sim', '', $this->fond_compile);		
 	}
 	
-	
-	
-	// 
-	// Recherche  des noms des champs (y) du formulaire
-	// <input type="x" name="y"... />
-	// stockes dans le tableau $this->champs
-	// a l'exception des noms par _cfg_, reserves a ce plugin
-	// 
+	/**
+	 * Recherche  des noms des champs (y) du formulaire <input type="x" name="y"... />
+	 * stockes dans le tableau $this->champs
+	 * a l'exception des noms par _cfg_, reserves a ce plugin
+	 *
+	 * @return <type> 
+	 */
 	function recuperer_noms_champs(){	
 		if (!$this->vue) return;
 
@@ -423,17 +499,28 @@ class cfg_formulaire{
 	    return '';
 	}	 
 	
-	// ajoute une extension (classe cfg_xx ou type_xx) 
-	// ce qui dit a cfg d'executer des fonctions particulieres
-	// si elles existent : ex: cfg_traiter_cfg_xx()
-	// lors de l'appel de 'actionner_extensions($faire)'
+	/**
+	 * ajoute une extension (classe cfg_xx ou type_xx) 
+	 * 
+	 * ce qui dit a cfg d'executer des fonctions particulieres
+	 * si elles existent : ex: cfg_traiter_cfg_xx()
+	 * lors de l'appel de 'actionner_extensions($faire)'
+	 *
+	 * @param <type> $ext
+	 * @param <type> $nom 
+	 */
 	function ajouter_extension($ext, $nom){
 		if (!is_array($this->extensions[$ext])) $this->extensions[$ext] = array();
 		$this->extensions[$ext][] = $nom;	
 	}
-	
-	// ajoute une extension sur un parametre
-	// seulement si un fichier sur ce parametre existe
+
+	/**
+	 * ajoute une extension sur un parametre
+	 * seulement si un fichier sur ce parametre existe
+	 *
+	 * @param <type> $param
+	 * @return <type> 
+	 */
 	function ajouter_extension_parametre($param){
 		if (in_array($param, $this->extensions_parametres))
 			return true;
@@ -445,10 +532,13 @@ class cfg_formulaire{
 		return false;
 	}
 	
-	
-	// 
-	// Compiler le fond CFG si ce n'est pas fait
-	// 
+	/**
+	 * Compiler le fond CFG si ce n'est pas fait
+	 * 
+	 * @param <type> $contexte
+	 * @param <type> $forcer
+	 * @return <type> 
+	 */
 	function recuperer_fond($contexte = array(), $forcer = false){
 
 		if (!$this->fond_compile OR $forcer){
@@ -490,13 +580,15 @@ class cfg_formulaire{
 		}
 		return $this->fond_compile;
 	}
-	
-	
-	//
-	// Verifie les autorisations 
-	// d'affichage du formulaire
-	// (parametre autoriser=faire)
-	//
+
+	/**
+	 * Verifie les autorisations 
+	 * d'affichage du formulaire
+	 * (parametre autoriser=faire)
+	 *
+	 * @staticvar <type> $autoriser
+	 * @return <type> 
+	 */
 	function autoriser()
 	{
 		static $autoriser=-1;
@@ -519,20 +611,24 @@ class cfg_formulaire{
 		return $autoriser;
 	}
 
-
-	//
-	// Log le message passe en parametre
-	// $this->log('message');
-	//
+	/**
+	 * Log le message passe en parametre
+	 * $this->log('message');
+	 *
+	 * @param <type> $message 
+	 */
 	function log($message)
 	{
 		($GLOBALS['auteur_session'] && ($qui = $GLOBALS['auteur_session']['login']))
 		|| ($qui = $GLOBALS['ip']);
 		spip_log('cfg (' . $this->nom_config() . ') par ' . $qui . ': ' . $message);
 	}
-	
-	
-	// lit les donnees depuis le depot
+
+	/**
+	 * lit les donnees depuis le depot
+	 * 
+	 * @return <type> 
+	 */
 	function lire(){
 		list ($ok, $val, $messages) = $this->depot->lire($this->params);
 		if ($messages) $this->messages = $messages;
@@ -545,7 +641,11 @@ class cfg_formulaire{
 	}
 	
 	
-	// Ecrit les donnees dans le depot
+	/**
+	 * Ecrit les donnees dans le depot
+	 *
+	 * @return <type> 
+	 */
 	function ecrire() {
 		list ($ok, $val, $messages) = $this->depot->ecrire($this->params);
 		if ($messages) $this->messages = $messages;
@@ -559,13 +659,16 @@ class cfg_formulaire{
 		return $msg;
 	}
 
-
-	// Efface les donnees dans le depot
-	//
-	// dans le cas d'une suppression, il faut vider $this->val qui
-	// contient encore les valeurs du formulaire, sinon elles sont 
-	// passees dans le fond et le formulaire garde les informations
-	// d'avant la suppression	
+	/**
+	 * Efface les donnees dans le depot
+	 *
+	 * dans le cas d'une suppression, il faut vider $this->val qui
+	 * contient encore les valeurs du formulaire, sinon elles sont
+	 * passees dans le fond et le formulaire garde les informations
+	 * d'avant la suppression
+	 *
+	 * @return <type>
+	 */
 	function effacer(){
 		list ($ok, $val, $messages) = $this->depot->effacer($this->params);
 		if ($messages) $this->messages = $messages;
@@ -578,13 +681,15 @@ class cfg_formulaire{
 		$this->log($msg);	
 		return $msg;	
 	}
-	
 
-	//
-	// Fabriquer les balises des champs d'apres un modele fonds/cfg_<driver>.html
-	// $contexte est un tableau (nom=>valeur)
-	// qui sera enrichi puis passe a recuperer_fond
-	//
+	/**
+	 * Fabriquer les balises des champs d'apres un modele fonds/cfg_<driver>.html
+	 * $contexte est un tableau (nom=>valeur)
+	 * qui sera enrichi puis passe a recuperer_fond
+	 *
+	 * @param <type> $contexte
+	 * @return <type>
+	 */
 	function formulaire($contexte = array())
 	{
 		if (!$this->path_vue)
@@ -602,7 +707,11 @@ class cfg_formulaire{
 	}
 	
 	
-	//
+	/**
+	 *
+	 * @param <type> $action
+	 * @return <type>
+	 */
 	function creer_hash_cfg($action=''){
 		include_spip('inc/securiser_action');
 	    $arg = 'cfg0.0.0-' . $this->param['nom'] . '-' . $this->vue;
@@ -614,22 +723,26 @@ class cfg_formulaire{
 	}
 	
 	
-	//
-	// teste et charge les points d'entrees de CFG a travers certaines actions
-	// 1 : fonctions generales cfg_{nom}_{action}
-	// 2 : actions sur les types de champs particuliers
-	//     notifies par 'type_XX' ou 'cfg_YY' sur les classes css
-	//     s'ils existent dans /cfg/classes/ par des fonctions
-	//     cfg_{action}_{classe}
-	// 3 : actions en fonctions des parametres du formulaire
-	//     s'ils existent dans /cfg/params/ par des fonctions
-	//     cfg_{action}_{parametre}
-	//
-	// les actions possibles sont :
-	// - pre_charger, charger, 
-	// - pre_verifier, verifier, 
-	// - pre_traiter, post_traiter
-	//
+	/**
+	 * teste et charge les points d'entrees de CFG a travers certaines actions
+	 *
+	 * <ol>
+	 * <li> : fonctions generales cfg_{nom}_{action}</li>
+	 * <li> : actions sur les types de champs particuliers
+	 *     notifies par 'type_XX' ou 'cfg_YY' sur les classes css
+	 *     s'ils existent dans /cfg/classes/ par des fonctions
+	 *     cfg_{action}_{classe}</li>
+	 * <li> : actions en fonctions des parametres du formulaire
+	 *     s'ils existent dans /cfg/params/ par des fonctions
+	 *     cfg_{action}_{parametre}</li>
+	 * </ol>
+	 *
+	 * les actions possibles sont :
+	 * - pre_charger, charger,
+	 * - pre_verifier, verifier,
+	 * - pre_traiter, post_traiter
+	 *
+	 */
 	function actionner_extensions($action){
 		// 1 - general : on transmet l'instance de cfg_formulaire
 		if (function_exists($f = 'cfg_' . $this->vue . '_' . $action)) {
@@ -667,25 +780,25 @@ class cfg_formulaire{
 		}
 	}
 	
-
-	
-	// 
-	//callback pour interpreter les parametres objets du formulaire
-	// commun avec celui de set_vue()
-	// 
-	// Parametres : 
-	// - $regs[2] = 'parametre'
-	// - $regs[3] = '*' ou ''
-	// - $regs[4] = 'valeur'
-	// 
-	// Lorsque des parametres sont passes dans le formulaire 
-	// par <!-- param=valeur -->
-	// stocker $this->param['parametre']=valeur
-	// 
-	// Si <!-- param*=valeur -->
-	// Stocker $this->param['parametre'][]=valeur
-	// 
-	//
+	/**
+	 *callback pour interpreter les parametres objets du formulaire
+	 * commun avec celui de set_vue()
+	 *
+	 * Parametres :
+	 * - $regs[2] = 'parametre'
+	 * - $regs[3] = '*' ou ''
+	 * - $regs[4] = 'valeur'
+	 *
+	 * Lorsque des parametres sont passes dans le formulaire
+	 * par <!-- param=valeur --><br>
+	 * stocker $this->param['parametre']=valeur
+	 *
+	 * Si <!-- param*=valeur --><br>
+	 * Stocker $this->param['parametre'][]=valeur
+	 *
+	 * @param Array $regs
+	 * @return string
+	 */
 	function post_params($regs) {
 
 		// $regs[3] peut valoir '*' pour signaler un tableau

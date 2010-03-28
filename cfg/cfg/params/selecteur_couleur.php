@@ -17,8 +17,8 @@
  * Patch de compatibilité avec classe cfg_couleur,
  *
  * @deprecated OBSOLETE (utilisez la classe {see palette})
- * @param <type> $valeur
- * @param <type> $cfg
+ * @param mixed $valeur # inutilisé
+ * @param Object $cfg
  */
 function cfg_charger_param_selecteur_couleur($valeur, &$cfg){
 	// si provient d'un CVT, on met inline, sinon dans head

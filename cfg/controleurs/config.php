@@ -15,8 +15,8 @@
 /**
  * Le controlleur de CFG
  *
- * @param <type> $regs
- * @return <type>
+ * @param Array $regs
+ * @return Array
  */
 function controleurs_config_dist($regs) {
     list(,$crayon,$type,$champ,$id) = $regs;

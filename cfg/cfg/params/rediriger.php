@@ -13,11 +13,6 @@
  */
 
 
-//
-//
-// 
-//
-// 
 /**
  * restaure des messages serialises dans une meta 'cfg_message_{id_auteur}'
  * 
@@ -25,8 +20,8 @@
  * (et provient de cette redirection), il est possible
  * qu'il y ait un message a afficher
  * 
- * @param <type> $valeur
- * @param <type> $cfg 
+ * @param mixed $valeur # inutilisé
+ * @param Object $cfg
  */
 function cfg_pre_charger_param_rediriger($valeur, &$cfg){
 	if ($messages = $GLOBALS['meta']['cfg_message_'.$GLOBALS['auteur_session']['id_auteur']]){
@@ -46,8 +41,8 @@ function cfg_pre_charger_param_rediriger($valeur, &$cfg){
  * avec la nouvelle config (ce qui permet par exemple a Autorite
  * de controler d'eventuels conflits generes par les nouvelles autorisations)
  * 
- * @param <type> $valeur
- * @param <type> $cfg 
+ * @param mixed $valeur # inutilisé
+ * @param Object $cfg
  */
 function cfg_post_traiter_param_rediriger($valeur, &$cfg){
 	if ($cfg->messages) {

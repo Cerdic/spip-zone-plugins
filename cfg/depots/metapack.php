@@ -46,8 +46,8 @@ class cfg_depot_metapack
 	/**
 	 * charge la base (racine) et le point de l'arbre sur lequel on se trouve (ici)
 	 * 
-	 * @param <type> $lire
-	 * @return <type> 
+	 * @param boolean $lire
+	 * @return boolean
 	 */
 	function charger($lire = false){
 		if ($lire && !isset($GLOBALS['meta'][$this->param['nom']])) 
@@ -63,7 +63,7 @@ class cfg_depot_metapack
 	/**
 	 * recuperer les valeurs.
 	 * 
-	 * @return <type> 
+	 * @return Array
 	 */
 	function lire()
 	{
@@ -97,7 +97,7 @@ class cfg_depot_metapack
 	/**
 	 * ecrit une meta pour tous les champs
 	 * 
-	 * @return <type> 
+	 * @return Array
 	 */
 	function ecrire()
 	{
@@ -127,7 +127,7 @@ class cfg_depot_metapack
 	/**
 	 * supprime chaque enregistrement de meta pour chaque champ
 	 * 
-	 * @return <type> 
+	 * @return Array
 	 */
 	function effacer(){
   		// si pas de champs : on supprime directement (effacer_meta(metapack::nom))...
@@ -172,7 +172,7 @@ class cfg_depot_metapack
 	 * il se peut qu'il n'y ait pas de champs si : lire_config(metapack::nom);
 	 * 
 	 * @param string $args # $args = 'nom'; ici
-	 * @return <type> 
+	 * @return boolean
 	 */
 	function charger_args($args){
 		$args = explode('/',$args);

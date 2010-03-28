@@ -33,7 +33,7 @@ class cfg_depot_php
 	/**
 	 * Dépôt dans les attributs de la classe
 	 *
-	 * @param <type> $params
+	 * @param Array $params
 	 */
 	function cfg_depot_php($params=array()) {
 		foreach ($params as $o=>$v) {
@@ -45,8 +45,8 @@ class cfg_depot_php
 	/**
 	 * calcule l'emplacement du fichier
 	 *
-	 * @staticvar <type> $fichier
-	 * @return <type>
+	 * @staticvar Array $fichier
+	 * @return string # L'emplacement du fichier
 	 */
 	function get_fichier(){
 		static $fichier = array();
@@ -67,8 +67,8 @@ class cfg_depot_php
 	/**
 	 * charge la base (racine) et le point de l'arbre sur lequel on se trouve (ici)
 	 *
-	 * @param <type> $lire
-	 * @return <type>
+	 * @param boolean $lire
+	 * @return boolean
 	 */
 	function charger($lire=false){
 		$fichier = $this->get_fichier();
@@ -93,7 +93,7 @@ class cfg_depot_php
 	/**
 	 * recuperer les valeurs.
 	 *
-	 * @return <type>
+	 * @return Array
 	 */
 	function lire() {
 		if (!$this->charger(true)){
@@ -114,7 +114,7 @@ class cfg_depot_php
 	/**
 	 * ecrit chaque enregistrement pour chaque champ.
 	 *
-	 * @return <type>
+	 * @return Array
 	 */
 	function ecrire() {
 		if (!$this->charger()){
@@ -137,7 +137,7 @@ class cfg_depot_php
 	/**
 	 * supprime chaque enregistrement pour chaque champ.
 	 *
-	 * @return <type>
+	 * @return Array
 	 */
 	function effacer(){
 		if (!$this->charger()){
@@ -169,8 +169,8 @@ class cfg_depot_php
 	/**
 	 * Ecrire un fichier
 	 *
-	 * @param <type> $contenu
-	 * @return <type>
+	 * @param Array $contenu
+	 * @return boolean
 	 */
 	function ecrire_fichier($contenu=array()){
 		$fichier = $this->get_fichier();
@@ -197,8 +197,8 @@ $cfg = ' . var_export($contenu, true) . ';
 	 * - lire_config(php::nom/casier/champ)
 	 * - lire_config(php::adresse/fichier.php:nom/casier/champ)
 	 *
-	 * @param <type> $args
-	 * @return <type>
+	 * @param string $args
+	 * @return boolean
 	 */
 	function charger_args($args){
 		list($fichier, $args) = explode(':',$args);
@@ -219,9 +219,9 @@ $cfg = ' . var_export($contenu, true) . ';
 	/**
 	 * se positionner dans le tableau arborescent
 	 *
-	 * @param <type> $base
-	 * @param <type> $chemin
-	 * @return <type>
+	 * @param &Array $base
+	 * @param Array $chemin
+	 * @return &Array
 	 */
 	function & monte_arbre(&$base, $chemin){
 		if (!$chemin) {
