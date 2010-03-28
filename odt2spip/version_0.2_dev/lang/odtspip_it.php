@@ -5,7 +5,10 @@
  * @author cy_altern
  * @license GNU/LGPL
  *
- * @package odt2spip
+ * @package plugins
+ * @subpackage odt2spip
+ * @category import
+ *
  * @version $Id$
  *
  */
@@ -22,7 +25,7 @@
         'err_extension_xslt'=> 'Le funzioni xslt non sono operative in PHP: chiedere l\'attivazione delle estensioni XSL all\'amministratore del web server',
         'err_import_snippet' => 'Errore  nella creazione dell\'articolo da parte del plugin Snippets. Verificare che esso sia correttamente istallato e attivato.',
         'err_repertoire_tmp' => 'Errore : non &egrave; stato possibile creare la cartella tmp/odt2spip o la sua sottocartella /id_auteur ',
-        'err_telechargement_fichier' => 'Errore : non è stato possibile recuperare il file in upload',
+        'err_telechargement_fichier' => 'Errore : non &egrave; stato possibile recuperare il file in upload',
         'err_transformation_xslt' => 'Errore  nella transformazione XSLT del file ODT',
         'err_transformation_xslt_mathml' => 'Errore XSLT nella conversione di MathML',
 

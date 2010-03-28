@@ -1,11 +1,14 @@
 <?php
 /**
- * Fichier de langue : Français
+ * Fichier de langue : FranÃ§ais
  *
  * @author cy_altern
  * @license GNU/LGPL
  *
- * @package odt2spip
+ * @package plugins
+ * @subpackage odt2spip
+ * @category import
+ *
  * @version $Id$
  *
  */

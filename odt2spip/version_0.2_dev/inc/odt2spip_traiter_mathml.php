@@ -6,7 +6,10 @@
  * @author cy_altern
  * @license GNU/LGPL
  *
- * @package odt2spip
+ * @package plugins
+ * @subpackage odt2spip
+ * @category import
+ *
  * @version $Id$
  *
  */
