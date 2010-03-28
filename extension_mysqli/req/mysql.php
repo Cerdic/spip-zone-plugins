@@ -4,7 +4,7 @@
  * Utilisation du connecteur MySQLi pour SPIP
  *
  * @license    GNU/GPL
- * @package    plugin
+ * @package    plugins
  * @subpackage mysqli
  * @category   BDD
  * @version    $Id$
@@ -21,6 +21,7 @@ define('_DEFAULT_DB', 'spip');
 
 /**
  * fonction pour changer la connexion aux serveurs MySQL en gardant les paramètres existants
+ *
  * Cette fonction sert de constructeur de l'instance de connexion MySQLi
  * 
  * @staticvar  array    $last_connect  mémorise les paramètres de connexion
@@ -220,6 +221,19 @@ function spip_mysqli_query($query, $serveur='',$requeter=true) {
 /**
  * Modifie la structure d'une table ou base
  *
+ * S'utilisera comme ceci :
+ * <code>
+ * sql_alter("TABLE table ADD COLUMN colonne INT");
+ * sql_alter("TABLE table ADD colonne INT"); // COLUMN est optionnel
+ * sql_alter("TABLE table CHANGE colonne colonne INT DEFAUT '0'");
+ * sql_alter("TABLE table ADD INDEX colonne (colonne)");
+ * sql_alter("TABLE table DROP INDEX colonne");
+ * sql_alter("TABLE table DROP COLUMN colonne");
+ * sql_alter("TABLE table DROP colonne"); // COLUMN est optionnel
+ * // possibilité de passer plusieurs actions :
+ * sql_alter("TABLE table DROP colonneA, DROP colonneB");
+ * </code>
+ *
  * @link    http://doc.spip.org/@spip_mysql_alter
  * @param   string  $query     La requête MySQL
  * @param   string  $serveur   Identifiant du connecteur à utiliser
@@ -268,9 +282,22 @@ function spip_mysqli_explain($query, $serveur='',$requeter=true){
 /**
  * fonction instance de sql_select
  *
- * voir ses specs dans {@link http://doc.spip.org/@abstract.php abstract.php}
- * traite_mysqli_query pourrait y etre fait d'avance ce serait moins cher
+ * voir ses specs dans {@link http://doc.spip.org/abstract_sql-php abstract_sql.php}<br>
+ * Traite_mysqli_query pourrait y etre fait d'avance ce serait moins cher<br>
  * Les \n et \t sont utiles au debusqueur.
+ *
+ * La fonction {@link http://doc.spip.org/@sql_select sql_select()} est souvent couplée à
+ * {@link http://doc.spip.org/@sql_select sql_fetch()} comme ceci :
+ * <code>
+ * // sélection
+ * if ($resultats = sql_select('colonne', 'table')) {
+ *     // boucler sur les résultats
+ *     while ($res = sql_fetch($resultats)) {
+ *         // utiliser les résultats
+ *         // $res['colonne']
+ *     }
+ * }
+ * </code>
  *
  * @link    http://doc.spip.org/@spip_mysql_select
  * @param   string|array    $select     liste des champs à récupérer
@@ -310,6 +337,7 @@ function spip_mysqli_select($select, $from, $where='',
  *
  * 0+x avec un champ x commencant par des chiffres est converti par MySQL
  * en le nombre qui commence x.
+ *
  * Pas portable malheureusement, on laisse pour le moment.
  *
  * @link    http://doc.spip.org/@spip_mysql_order
@@ -407,6 +435,7 @@ function spip_mysqli_select_as($args)
 
 /**
  * Changer les noms des tables ($table_prefix)
+ *
  * Quand tous les appels SQL seront abstraits on pourra l'améliorer
  */
 define('_SQL_PREFIXE_TABLE', '/([,\s])spip_/S');
@@ -459,6 +488,7 @@ function spip_mysqli_selectdb($db, $serveur='',$requeter=true) {
 
 /**
  * Retourne les bases accessibles
+ *
  * Attention on n'a pas toujours les droits
  *
  * @link    http://doc.spip.org/@spip_mysql_listdbs
@@ -474,9 +504,10 @@ function spip_mysqli_listdbs($serveur='',$requeter=true) {
  * Fonction de création d'une table SQL nommée $nom
  *
  * Cette fonction utilise 2 tableaux PHP :
- * champs: champ => type
- * cles: type-de-cle => champ(s)
- * si $autoinc, c'est une auto-increment (i.e. serial) sur la Primary Key
+ * - champs: champ => type
+ * - cles: type-de-cle => champ(s)
+ *
+ * si $autoinc, c'est une auto-increment (i.e. serial) sur la Primary Key.<br>
  * Le nom des caches doit être inférieur à 64 caractères
  *
  * @link    http://doc.spip.org/@spip_mysql_create
@@ -548,6 +579,21 @@ function spip_mysqli_create_base($nom, $serveur='',$requeter=true) {
 /**
  * Fonction de création d'une vue SQL nommée $nom
  *
+ * <b>Application :</b><br>
+ * Ce petit exemple montre le fonctionnement, en créant une table
+ * (bien inutile) à partir de 2 colonnes d’une rubrique :
+ * <code>
+ * $select = sql_get_select(array(
+ *         'r.titre AS t',
+ *         'r.id_rubrique AS id'
+ *     ), array(
+ *         'spip_rubriques AS r'
+ *     ));
+ * // creer la vue
+ * sql_create_view('spip_short_rub', $select);
+ * // utiliser :
+ * $titre = sql_getfetsel('t', 'spip_short_rub', 'id=8');
+ * </code>
  * @link    http://doc.spip.org/@spip_mysql_create_view
  * @param   string  $nom
  * @param   string  $query_select
@@ -629,7 +675,8 @@ function spip_mysqli_repair($table, $serveur='',$requeter=true)
 
 /**
  * Récupère la definition d'une table ou d'une vue MySQL
- * colonnes, indexes, etc.
+ *
+ * Les éléments obtenus sont les colonnes, indexes, etc.. <br>
  * au même format que la définition des tables de SPIP
  *
  * @link    http://doc.spip.org/@spip_mysql_showtable
@@ -705,12 +752,22 @@ function spip_mysqli_showtable($nom_table, $serveur='',$requeter=true)
 }
 
 //
-// Récuperation des résultats
+// Récupération des résultats
 //
 
 /**
  * Retourne un tableau qui correspond à la ligne lue ou NULL s'il n'y a plus
- * de lignes dans le jeu de résultats $r
+ * de lignes dans le jeu de résultats $r.
+ *
+ * Cette fonction s’utilise en partenariat étroit avec sql_select(),
+ * souvent employé dans cette association :
+ * <code>
+ * if ($res = sql_select('colonne', 'table')) {
+ *     while ($r = sql_fetch($res)) {
+ *         // utilisation des resultats avec $r['colonne']
+ *     }
+ * }
+ * </code>
  *
  * @link http://doc.spip.org/@spip_mysql_fetch
  * @param   mysqli_result   $r         Le jeu de résultats
@@ -731,7 +788,7 @@ function spip_mysqli_fetch($r, $t='', $serveur='',$requeter=true) {
 /**
  * Déplace le pointeur interne de résultat associé au jeu de résultats
  * représenté par result, en le faisant pointer sur la ligne spécifiée
- * par row_number
+ * par row_number.
  *
  * @param   mysqli_result  $r
  * @param   int            $row_number
@@ -749,7 +806,18 @@ function spip_mysqli_seek($r, $row_number, $serveur='',$requeter=true) {
 
 
 /**
- * Retourne le nombre de résultats d'un SELECT
+ * Retourne le nombre de résultats d'un SELECT.
+ *
+ * <b>Application</b> :<br>
+ * Retourner <i>false</i> s’il y a des articles dans une rubrique :
+ * <code>
+ * if (sql_countsel('spip_articles', array(
+ *    "id_rubrique=$id_rubrique",
+ *    "statut <> 'poubelle'"
+ *    ))) {
+ *    return false;
+ * }
+ * </code>
  *
  * @link    http://doc.spip.org/@spip_mysql_countsel
  * @param   array|string   $from
@@ -788,8 +856,9 @@ function spip_mysqli_error($serveur='') {
 }
 
 /**
- * Retourne le dernier code d'erreur produit
- * En cas de perte de connexion avec le serveur, il ne faut pas recalculer le cache
+ * Retourne le dernier code d'erreur produit.
+ *
+ * En cas de perte de connexion avec le serveur, il ne faut pas recalculer le cache.
  *
  * @link    http://doc.spip.org/@spip_mysql_errno
  * @param   string  $serveur   Identifiant du connecteur à utiliser
@@ -822,8 +891,13 @@ function spip_mysqli_count($r, $serveur='',$requeter=true) {
 
 
 /**
- * Libère la mémoire associée à un résultat
+ * Libère la mémoire associée à un résultat.
  *
+ * À noter que des fonctions de l’API appellent cette fonction automatiquement. C’est le cas de :
+ * - {@link http://doc.spip.org/@sql_fetsel sql_fetsel} (et {@link http://doc.spip.org/@sql_getfetsel sql_getfetsel}),
+ * - {@link http://doc.spip.org/@sql_fetch_all sql_fetch_all} (et {@link http://doc.spip.org/@sql_allfetsel sql_allfetsel}),
+ * - {@link http://doc.spip.org/@sql_in_select sql_in_select}.
+
  * @link    http://doc.spip.org/@spip_mysql_free
  * @param   mysqli_result   $r
  * @param   string          $serveur    Identifiant du connecteur à utiliser
@@ -873,7 +947,7 @@ function spip_mysqli_insert($table, $champs, $valeurs, $desc='', $serveur='',$re
 }
 
 /**
- * insère une nouvelle ligne dans une table existante.
+ * Insère une nouvelle ligne dans une table existante.
  *
  * @link    http://doc.spip.org/@spip_mysql_insertq
  * @param   string  $table     La table
@@ -898,7 +972,7 @@ function spip_mysqli_insertq($table, $couples=array(), $desc=array(), $serveur='
 
 
 /**
- * insère plusieures lignes dans une table existante.
+ * Insère plusieures lignes dans une table existante.
  *
  * @link    http://doc.spip.org/@spip_mysql_insertq_multi
  * @param   string  $table         La table
@@ -990,8 +1064,13 @@ function spip_mysqli_updateq($table, $champs, $where='', $desc=array(), $serveur
 }
 
 /**
- * Suppression d'une ligne d'une table existente.
+ * Supprime une ligne d'une table existente.
  *
+ * <b>Exemple</b> :<br>
+ * Supprimer la liaison entre des rubriques et un mot donné :
+ * <code>
+ * sql_delete("spip_mots_rubriques", "id_mot=$id_mot");
+ * </code>
  * @link    http://doc.spip.org/@spip_mysql_delete
  * @param   string         $table      La table
  * @param   array|string   $where      Condition que doivent respecter les lignes supprimées
@@ -1055,7 +1134,7 @@ function spip_mysqli_replace_multi($table, $tab_couples, $desc=array(), $serveur
 
 
 /**
- * Construit une expression pour extraire un champ multi dans une requête
+ * Construit une expression pour extraire un champ multi dans une requête.
  *
  * @link    http://doc.spip.org/@spip_mysql_multi
  * @param   string  $objet  champ MySQL contenant éventuellement un champ multi
@@ -1092,7 +1171,7 @@ function spip_mysqli_multi ($objet, $lang) {
 }
 
 /**
- * Contruire une chaîne permettant d'utiliser un code hexadécimal dans une requête
+ * Contruire une chaîne permettant d'utiliser un code hexadécimal dans une requête.
  *
  * @link    http://doc.spip.org/@spip_mysql_hex
  * @param   int    $v
@@ -1104,7 +1183,7 @@ function spip_mysqli_hex($v)
 }
 
 /**
- * Echappe une chaine pour la rendre utilisable par MySQL
+ * Echappe une chaine pour la rendre utilisable par MySQL.
  *
  * @param   mixed   $v      valeur à traiter
  * @param   string  $type   type
@@ -1116,7 +1195,7 @@ function spip_mysqli_quote($v, $type='')
 }
 
 /**
- * Préparer un élément pour qu'il puisse être utilisé dans les requêtes plus tard
+ * Préparer un élément pour qu'il puisse être utilisé dans les requêtes plus tard.
  *
  * @link http://doc.spip.org/@_q
  * @internal Le traitement se fait de manière récursive sur les tableaux
@@ -1132,7 +1211,7 @@ function spip_mysqli_q($a) {
 
 
 /**
- * Calcul de date
+ * Calcul de date.
  *
  * @param   string   $champ
  * @param   int      $interval
@@ -1155,7 +1234,7 @@ function spip_mysqli_date_proche($champ, $interval, $unite)
 }
 
 /**
- * IN (...) est limité à 255 elements, d'où cette fonction assistante
+ * IN (...) est limité à 255 elements, d'où cette fonction assistante.
  *
  * @link    http://doc.spip.org/@spip_mysql_in
  * @param   string  $val
@@ -1184,7 +1263,7 @@ function spip_mysqli_in($val, $valeurs, $not='', $serveur='',$requeter=true) {
 }
 
 /**
- * Echappe une chaine pour l'utiliser dans une requête MySQL
+ * Echappe une chaine pour l'utiliser dans une requête MySQL.
  *
  * @link    http://doc.spip.org/@spip_mysql_cite
  * @param   string  $v	    la valeur à traiter
