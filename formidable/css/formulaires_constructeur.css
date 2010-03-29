@@ -12,7 +12,7 @@
 	margin:0;
 	width:auto;
 	float:none;
-	clear:all;
+	clear:both;
 	line-height:1.7em;
 }
 .formulaire_construire_formulaire input.text, .formulaire_construire_formulaire input.password, .formulaire_construire_formulaire textarea, .formulaire_construire_formulaire select{
