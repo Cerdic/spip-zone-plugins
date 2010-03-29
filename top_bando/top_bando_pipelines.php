@@ -14,7 +14,7 @@
 /**
  * ajouter js et css necessaires pour utiliser jQuery UI dans l'interface de config CFG
  *
- * @param string $flux # le code HTML a modifier
+ * @param string $flux le code HTML a modifier
  * @return string
  */
 function top_bando_header_prive($flux){
