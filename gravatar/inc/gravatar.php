@@ -17,8 +17,8 @@
  * notre fonction de recherche de logo
  *
  * @deprecated obsolete, on la garde pour ne pas planter les squelettes non recalcules
- * @param  string $email  # Le mail qui sert a recuperer l'image sur gravatar.com
- * @return Array          # Le logo de l'utilisateur
+ * @param  string $email  Le mail qui sert a recuperer l'image sur gravatar.com
+ * @return Array          Le logo de l'utilisateur
  */
 function calcule_logo_ou_gravatar($email) {
 	$a = func_get_args();
@@ -35,12 +35,12 @@ function calcule_logo_ou_gravatar($email) {
 }
 
 /**
- * Conctruit la balise HTML <img> affichant le gravatar
+ * Construit la balise HTML <img> affichant le gravatar
  *
- * @param  string $img    # Chemin de l'image
- * @param  string $alt    # Texte alternatif
- * @param  string $class  # Classe facultativ
- * @return string         # Le code HTML
+ * @param  string $img    Chemin de l'image
+ * @param  string $alt    Texte alternatif
+ * @param  string $class  Classe facultativ
+ * @return string         Le code HTML
  */
 function gravatar_balise_img($img,$alt="",$class=""){
 	$taille = taille_image($img);
@@ -58,9 +58,9 @@ function gravatar_balise_img($img,$alt="",$class=""){
 /**
  * pour 2.1 on se contente de produire une balise IMG
  *
- * @param  string $email        # le mail qui sert a recuperer l'image sur gravatar.com
- * @param  string $logo_auteur  # Le logo de l'auteur s'il existe
- * @return string               # La balise IMG
+ * @param  string $email        le mail qui sert a recuperer l'image sur gravatar.com
+ * @param  string $logo_auteur  Le logo de l'auteur s'il existe
+ * @return string               La balise IMG
  */
 function gravatar_img($email, $logo_auteur='') {
 	$hasconfig = function_exists('lire_config');
@@ -113,8 +113,8 @@ function gravatar_img($email, $logo_auteur='') {
 /**
  * Verifie (une fois) qu'un index index.php existe dans $tmp
  *
- * @staticvar boolean $done  # True si la verif a deja ete faite
- * @param     string  $tmp   # Le repertoire dans lequel on posera le gravatar
+ * @staticvar boolean $done  True si la verif a deja ete faite
+ * @param     string  $tmp   Le repertoire dans lequel on posera le gravatar
  * @return    null
  */
 function gravatar_verifier_index($tmp) {
@@ -132,11 +132,11 @@ function gravatar_verifier_index($tmp) {
 /**
  * Recupere l'image sur www.gravatar.com et la met en cache
  * 
- * @staticvar int         $nb       # le nombre max d'anciens
- * @staticvar int         $max      # le nombre max de nouveaux
- * @param     string      $email    # le mail qui va servir pour calculer le gravatar
- * @param     int         $default  # code de la page
- * @return    null|string           # le chemin du fichier gravatar, s'il existe
+ * @staticvar int         $nb       le nombre max d'anciens
+ * @staticvar int         $max      le nombre max de nouveaux
+ * @param     string      $email    le mail qui va servir pour calculer le gravatar
+ * @param     int         $default  code de la page
+ * @return    null|string           le chemin du fichier gravatar, s'il existe
  */
 function gravatar($email, $default='404') {
 	static $nb=5; // ne pas en charger plus de 5 anciens par tour

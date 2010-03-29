@@ -17,8 +17,8 @@
  * Utilisation du pipeline "affiche_gauche" :
  * on affiche un bloc identique a celui du logo de l'auteur avec son gravatar
  *
- * @param  Array $flux # structure permettant de generer la page
- * @return Array       # retournee apres traitement
+ * @param  Array $flux  Structure permettant de generer la page
+ * @return Array        La structure retournee apres traitement
  */
 function gravatar_affiche_gauche($flux) {
 	if ((_request('exec') == 'auteur_infos')) {

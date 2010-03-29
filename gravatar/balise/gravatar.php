@@ -19,8 +19,8 @@
 /**
  * balise #GRAVATAR
  *
- * @param  Object $p # Arbre syntaxique utilise par le compilo
- * @return Object    # retourne apres traitement
+ * @param  Object $p  Arbre syntaxique utilise par le compilo
+ * @return Object     Arbre retourne apres traitement
  */
 function balise_GRAVATAR($p) {
 	$_email = interprete_argument_balise(1,$p);

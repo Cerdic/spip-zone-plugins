@@ -19,8 +19,8 @@
  * Pour ca il faut modifier un peu le code produit par #LOGO_*, pour introduire
  * notre fonction de recherche de logo.
  *
- * @param  Object $p # Arbre syntaxique utilise par le compilo
- * @return Object    # retourne apres traitement
+ * @param  Object $p   Arbre syntaxique utilise par le compilo
+ * @return Object      Arbre retourne apres traitement
  */
 function balise_LOGO_AUTEUR($p) {
 	$balise_logo_ = charger_fonction('logo_', 'balise');
