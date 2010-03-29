@@ -32,7 +32,6 @@
  * utilisant les balises SPIP pour sa mise en forme.
  * }}
  * 
- * @global Array $visiteur_session La session de l'utilisateur courant
  */
 function action_odt2spip_importe() {
 	global $visiteur_session;
