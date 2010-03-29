@@ -10,13 +10,13 @@ Si les fichiers ne sont pas MP3 ou FLV, utiliser le comportement normal.
 
 [(#REM) Definir les lecteurs utilisés par ENV ou par CONFIG ]
 
-#SET{player,players/#ENV{player,#CONFIG{lecteur_audio,'neolao_audio'}}}
-#SET{player_video,players/#ENV{player,#CONFIG{lecteur_video,'neolao_video'}}}
+#SET{player,players/#ENV{player,#CONFIG{lecteur_multimedia/lecteur_audio,'neolao_audio'}}}
+#SET{player_video,players/#ENV{player,#CONFIG{lecteur_multimedia/lecteur_video,'neolao_video'}}}
 
 <BOUCLE_doc(DOCUMENTS) {id_document}>
 [(#REM) Document MP3 ? ]
 [(#TYPE_DOCUMENT|=={MP3}|oui)
-	<INCLURE{fond=#GET{player}}{id_document}>
+	<INCLURE{fond=#GET{player}}{id_document}{download}>
 ]
 
 [(#REM) Document FLV ? ]
