@@ -17,15 +17,20 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 # CONFIG
 
-
-// #CONFIG retourne lire_config()
-//
-// Le 3eme argument permet de controler la serialisation du resultat
-// (mais ne sert que pour le depot 'meta') qui doit parfois deserialiser
-// ex: |in_array{#CONFIG{toto,#ARRAY,1}}.
-// Ceci n'affecte pas d'autres depots et |in_array{#CONFIG{toto/,#ARRAY}} sera equivalent
-// car du moment qu'il y a un /, c'est le depot 'metapack' qui est appelle.
-//
+/**
+ * #CONFIG retourne lire_config()
+ *
+ * Le 3eme argument permet de controler la serialisation du resultat
+ * (mais ne sert que pour le depot 'meta') qui doit parfois deserialiser
+ * 
+ * ex: |in_array{#CONFIG{toto,#ARRAY,1}}.
+ * 
+ * Ceci n'affecte pas d'autres depots et |in_array{#CONFIG{toto/,#ARRAY}} sera equivalent
+ * car du moment qu'il y a un /, c'est le depot 'metapack' qui est appelle.
+ *
+ * @param  Object $p   # Arbre syntaxique du compilo
+ * @return Object
+ */
 function balise_CONFIG($p) {
 	if (!$arg = interprete_argument_balise(1,$p)) {
 		$arg = "''";
@@ -41,13 +46,16 @@ function balise_CONFIG($p) {
 
 # CFG_CHEMIN
 
-//
-// La balise CFG_CHEMIN retourne le chemin d'une image stockee
-// par cfg.
-//
-// cfg stocke : 'config/vue/champ.ext' (ce qu'affiche #CONFIG)
-// #cfg_chemin retourne l'adresse complete : 'IMG/config/vue/champ.ext'
-//
+/**
+ * La balise CFG_CHEMIN retourne le chemin d'une image stockee
+ * par cfg.
+ *
+ * cfg stocke : 'config/vue/champ.ext' (ce qu'affiche #CONFIG)<br>
+ * #cfg_chemin retourne l'adresse complete : 'IMG/config/vue/champ.ext'
+ *
+ * @param  Object $p   # Arbre syntaxique du compilo
+ * @return Object
+ */
 function balise_CFG_CHEMIN_dist($p) {
 	if (!$arg = interprete_argument_balise(1,$p)) {
 		$arg = "''";
@@ -61,11 +69,17 @@ function balise_CFG_CHEMIN_dist($p) {
 }
 
 
-/*
- * Pour jouer avec les Crayons et les configurations
+/**
+ * #EDIT_CONFIG : Pour jouer avec les Crayons et les configurations
+ * 
+ * <code>
  * <div class="#EDIT_CONFIG{plugin/casier/cle}">
  * 		#CONFIG{plugin/casier/cle}
  * </div>
+ * </code>
+ *
+ * @param <type> $p
+ * @return <type> 
  */
 function balise_EDIT_CONFIG_dist($p) {
 	$config = interprete_argument_balise(1,$p);
@@ -77,6 +91,13 @@ function balise_EDIT_CONFIG_dist($p) {
 	return $p;
 }
 
+/**
+ * Classe qui sera utilisé pour CFG dans le bloc éditable par Crayon
+ * 
+ * @param string $config
+ * @param string $instance
+ * @return string 
+ */
 function classe_config_crayon($config, $instance) {
 	// pour n'avoir que des caracteres alphanumeriques,
 	// on transforme "depot::plugin/casier/cle" en "depot___plugin__casier__cle"
@@ -85,28 +106,64 @@ function classe_config_crayon($config, $instance) {
    return  'crayon config-'.$config.'-'.$instance . ' type_config';
 }
 
+/**
+ * Outil de manipulation des classes
+ *
+ * @param  string $config  # classe pour CFG
+ * @return string          # classe pour Crayon
+ */
 function cfg_config2crayon($config) {return str_replace(array('::','/'), array('___','__'), $config);}
+
+/**
+ * Outil de manipulation des classes
+ *
+ * @param  string $crayon  # classe pour Crayon
+ * @return string          # classe pour CFG
+ */
 function cfg_crayon2config($crayon) {return str_replace(array('___','__'), array('::','/'), $crayon);}
 
-// autorisation de crayonner
+/**
+ * autorisation de configurer
+ *
+ * @param string $faire
+ * @param string $type
+ * @param string $id
+ * @param string $qui
+ * @param string $opt
+ * @return boolean
+ */
 function autoriser_config_crayonner_dist($faire, $type, $id, $qui, $opt) {
 	return autoriser('configurer', $type, $id, $qui, $opt);
 }
+
+/**
+ * autorisation de crayonner
+ *
+ * @param string $faire
+ * @param string $type
+ * @param string $id
+ * @param string $qui
+ * @param string $opt
+ * @return boolean
+ */
 function autoriser_config_modifier_dist($faire, $type, $id, $qui, $opt) {
 	return autoriser('crayonner', $type, $id, $qui, $opt);
 }
+
+
 # CFG_ARBO
 
-
-/*
+/**
  * Affiche une arborescence du contenu d'un #CONFIG
  *
- * #CFG_ARBO,
- * #CFG_ARBO{ma_meta},
- * #CFG_ARBO{~toto},
- * #CFG_ARBO{ma_meta/mon_casier},
- * #CFG_ARBO{ma_table:mon_id/mon_champ}
+ * - #CFG_ARBO,
+ * - #CFG_ARBO{ma_meta},
+ * - #CFG_ARBO{~toto},
+ * - #CFG_ARBO{ma_meta/mon_casier},
+ * - #CFG_ARBO{ma_table:mon_id/mon_champ}
  *
+ * @param  Object $p
+ * @return Object
  */
 function balise_CFG_ARBO_dist($p) {
 	if (!$arg = interprete_argument_balise(1,$p)) {
@@ -117,6 +174,13 @@ function balise_CFG_ARBO_dist($p) {
 	return $p;
 }
 
+/**
+ * Fonction utilisée par le compilo pour {@see balise_CFG_ARBO_dist} :
+ * affiche l'arborescence qui est calculée par {@see cfg_affiche_sous_arborescence}
+ *
+ * @param  string $cfg  # nom de la table meta
+ * @return string       # code html en sortie
+ */
 function cfg_affiche_arborescence($cfg='') {
 
 	$sortie = '';
@@ -167,6 +231,13 @@ function cfg_affiche_arborescence($cfg='') {
 	return $sortie;
 }
 
+/**
+ * Calcul récursif de l'arborescence des configurations
+ *
+ * @param  string $nom       # nom de la table meta
+ * @param  Array  $tableau   # configuration
+ * @return string            # code html en sortie
+ */
 function cfg_affiche_sous_arborescence($nom, $tableau){
 	$sortie = "\n<h5>$nom</h5>\n";
 	$sortie .= "\n<ul>";
