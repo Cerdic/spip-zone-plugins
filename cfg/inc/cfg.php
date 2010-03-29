@@ -131,6 +131,9 @@ function lister_onglets_cfg($dir=''){
 
 /**
  * la classe cfg represente une page de configuration
+ *
+ * @package    plugins
+ * @subpackage cfg
  */
 class cfg
 {

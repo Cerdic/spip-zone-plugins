@@ -14,7 +14,12 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// Ajoute le bouton d'amin aux webmestres
+/**
+ * Ajoute le bouton d'amin aux webmestres
+ *
+ * @param  Array $flux
+ * @return Array 
+ */
 function cfg_ajouter_boutons($flux) {
 	// si on est admin
 	if (autoriser('configurer','cfg')) {
@@ -32,6 +37,13 @@ function cfg_ajouter_boutons($flux) {
 	return $flux;
 }
 
+/**
+ * Rajoute à gauche de la page d'admin des plugins un lien vers 
+ * la page de CFG
+ * 
+ * @param  Array $flux
+ * @return Array 
+ */
 function cfg_affiche_gauche($flux){
 	if ($flux['args']['exec']=='admin_plugin'){
 		$flux['data'] =
@@ -43,9 +55,12 @@ function cfg_affiche_gauche($flux){
 	return $flux;
 }
 
-/*
+/**
  * Gerer l'option <!-- head= xxx --> des fonds CFG
  * uniquement dans le prive
+ *
+ * @param  Array $flux
+ * @return Array 
  */
 function cfg_header_prive($flux){
 
@@ -68,15 +83,27 @@ function cfg_header_prive($flux){
 	return $flux;
 }
 
+/**
+ * CSS à ajouter lors du #INSERT_HEAD
+ * 
+ * @param  Array $flux
+ * @return Array 
+ */
 function cfg_insert_head($flux){
 	// Ajout des css de cfg
 	$flux .= '<link rel="stylesheet" href="' . generer_url_public('cfg.css'). '" type="text/css" media="all" />';
 	return $flux;
 }
 
-// teste si $form n'est pas un formulaire CVT deja existant
-// (et non un formulaire CFG nomme $form en CVT)
-// #FORMULAIRE_TOTO <> #FORMULAIRE_CFG{toto}
+/**
+ * teste si $form n'est pas un formulaire CVT deja existant
+ * (et non un formulaire CFG nomme $form en CVT)
+ * 
+ * #FORMULAIRE_TOTO <> #FORMULAIRE_CFG{toto}
+ *
+ * @param  string $form  Nom du formulaire
+ * @return boolean       TRUE si formulaire_$form est un CVT deja existant 
+ */
 function est_cvt($form){
 	$f = 'formulaires_' . $form;
 	return (function_exists($f . '_stat')
@@ -89,7 +116,12 @@ function est_cvt($form){
 		);
 }
 
-# Formulaires CFG CVT
+/**
+ * Formulaires CFG CVT : Charger
+ *
+ * @param  Array $flux
+ * @return Array
+ */
 function cfg_formulaire_charger($flux){
 	// s'il n'y a pas de fonction charger, on utilise le parseur de CFG
 	$form = $flux['args']['form'];
@@ -138,6 +170,12 @@ function cfg_formulaire_charger($flux){
 	return $flux;
 }
 
+/**
+ *  Formulaires CFG CVT : Vérifier
+ *
+ * @param  Array $flux
+ * @return Array
+ */
 function cfg_formulaire_verifier($flux){
 
 	$form = $flux['args']['form'];
@@ -169,16 +207,27 @@ function cfg_formulaire_verifier($flux){
 	return $flux;
 }
 
-// sauve ou redonne une instance de la classe cfg.
-// sert a transmettre $config entre verifier() et traiter()
-// car $flux le perd en cours de route si on lui donne...
+/**
+ * sauve ou redonne une instance de la classe cfg.
+ * sert a transmettre $config entre verifier() et traiter()
+ * car $flux le perd en cours de route si on lui donne...
+ *
+ * @staticvar boolean|Object $cfg
+ * @param     boolean|Object $config   $config est de type cfg_formulaire
+ * @return    boolean|Object
+ */
 function cfg_instancier($config=false){
 	static $cfg=false;
 	if (!$config) return $cfg;
 	return $cfg = $config;
 }
 
-// traitement du formulaire
+/**
+ * Formulaires CFG CVT : Traiter
+ *
+ * @param <type> $flux
+ * @return <type>
+ */
 function cfg_formulaire_traiter($flux){
 	$form = $flux['args']['form'];
 	spip_log($flux);
@@ -193,8 +242,13 @@ function cfg_formulaire_traiter($flux){
 	return $flux;
 }
 
-// pipeline sur l'affichage du contenu
-// pour supprimer les parametres CFG du formulaire
+/**
+ * pipeline sur l'affichage du contenu
+ * pour supprimer les parametres CFG du formulaire
+ *
+ * @param  Array $flux
+ * @return Array
+ */
 function cfg_editer_contenu_formulaire_cfg($flux){
 	$flux['data'] = preg_replace('/(<!-- ([a-z0-9_]\w+)(\*)?=)(.*?)-->/sim', '', $flux['data']);
 	$flux['data'] .= $flux['args']['ajouter'];

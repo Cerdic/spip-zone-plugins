@@ -16,6 +16,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
  * CFG doit-il être compatible SPIP 1.9.2 ?
+ * @ignore
  */
 define('_COMPAT_CFG_192', true);
 

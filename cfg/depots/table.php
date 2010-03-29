@@ -15,8 +15,11 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
- * Retrouve et met a jour les colonnes d'une table
+ * Retrouve et met a jour les colonnes d'une table.
  * ici, cfg_id est obligatoire ...
+ * 
+ * @package    plugins
+ * @subpackage cfg
  */
 class cfg_depot_table
 {

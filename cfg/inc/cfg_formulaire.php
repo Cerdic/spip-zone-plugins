@@ -18,6 +18,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
  * la classe cfg represente une page de configuration
+ *
+ * @package    plugins
+ * @subpackage cfg
  */
 class cfg_formulaire{
 

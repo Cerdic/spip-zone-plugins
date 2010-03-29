@@ -64,6 +64,9 @@ function cfg_charger_depot($args){
  * version 2 (fonctions)
  * - charger_args
  * - lire, ecrire, effacer
+ * 
+ * @package    plugins
+ * @subpackage cfg
  */
 class cfg_depot{
 	

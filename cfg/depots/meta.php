@@ -16,6 +16,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
  * Retrouve et met a jour les donnees a plat dans spip_meta
+ * @package    plugins
+ * @subpackage cfg
  */
 class cfg_depot_meta
 {

@@ -42,6 +42,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * on peut croiser plusieurs id comme spip_auteurs_articles:6:123
  * (mais il n'y a pas d'extra dans spip_auteurs_articles ...)
  * Le 2eme argument de la balise est la valeur defaut comme pour la dist
+ *
+ * @package    plugins
+ * @subpackage cfg
  */
 class cfg_depot_tablepack
 {

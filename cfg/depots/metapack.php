@@ -16,6 +16,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
  * Retrouve et met a jour les donnees dans spip_meta (mode serialise)
+ * @package    plugins
+ * @subpackage cfg
  */
 class cfg_depot_metapack
 {

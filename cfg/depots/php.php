@@ -16,6 +16,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
  * Retrouve et met a jour les donnees d'un fichier php.
+ * @package    plugins
+ * @subpackage cfg
  */
 class cfg_depot_php
 {
