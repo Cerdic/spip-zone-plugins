@@ -27,7 +27,7 @@
  * - : present avant un / : tablepack
  * - sinon metapack
  *
- * @param string $args
+ * @param  string $args
  * @return Object
  */
 function cfg_charger_depot($args){
@@ -67,10 +67,19 @@ function cfg_charger_depot($args){
  */
 class cfg_depot{
 	
+	/**
+	 * Le nom de la classe du dépôt
+	 * @var string 
+	 */
 	var $nom;
-	var $depot;
 	
 	/**
+	 * Le dépôt
+	 * @var Object 
+	 */
+	var $depot;
+	
+	/*
 	 *
 	 * Constructeur de la classe
 	 *
@@ -245,9 +254,9 @@ class cfg_depot{
  *
  * $unserialize est mis par l'histoire, et affecte le depot 'meta'
  *
- * @param string $cfg # la config
- * @param mixed $def # un défaut optionnel
- * @param boolean $unserialize # n'affecte que le dépôt 'meta'
+ * @param  string  $cfg          la config
+ * @param  mixed   $def          un défaut optionnel
+ * @param  boolean $unserialize  n'affecte que le dépôt 'meta'
  * @return string
  */
 function lire_config($cfg='', $def=null, $unserialize=true) {
@@ -261,8 +270,8 @@ function lire_config($cfg='', $def=null, $unserialize=true) {
 /**
  * enregistrer une configuration
  *
- * @param string $cfg
- * @param mixed $valeur
+ * @param  string $cfg
+ * @param  mixed  $valeur
  * @return boolean
  */
 function ecrire_config($cfg='', $valeur=null){
@@ -274,7 +283,7 @@ function ecrire_config($cfg='', $valeur=null){
 /**
  * supprimer une config
  *
- * @param string $cfg
+ * @param  string $cfg
  * @return boolean
  */
 function effacer_config($cfg=''){

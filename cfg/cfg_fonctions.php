@@ -28,7 +28,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * Ceci n'affecte pas d'autres depots et |in_array{#CONFIG{toto/,#ARRAY}} sera equivalent
  * car du moment qu'il y a un /, c'est le depot 'metapack' qui est appelle.
  *
- * @param  Object $p   # Arbre syntaxique du compilo
+ * @param  Object $p  Arbre syntaxique du compilo
  * @return Object
  */
 function balise_CONFIG($p) {
@@ -53,7 +53,7 @@ function balise_CONFIG($p) {
  * cfg stocke : 'config/vue/champ.ext' (ce qu'affiche #CONFIG)<br>
  * #cfg_chemin retourne l'adresse complete : 'IMG/config/vue/champ.ext'
  *
- * @param  Object $p   # Arbre syntaxique du compilo
+ * @param  Object $p  Arbre syntaxique du compilo
  * @return Object
  */
 function balise_CFG_CHEMIN_dist($p) {
@@ -109,16 +109,16 @@ function classe_config_crayon($config, $instance) {
 /**
  * Outil de manipulation des classes
  *
- * @param  string $config  # classe pour CFG
- * @return string          # classe pour Crayon
+ * @param  string $config  classe pour CFG
+ * @return string          classe pour Crayon
  */
 function cfg_config2crayon($config) {return str_replace(array('::','/'), array('___','__'), $config);}
 
 /**
  * Outil de manipulation des classes
  *
- * @param  string $crayon  # classe pour Crayon
- * @return string          # classe pour CFG
+ * @param  string $crayon  classe pour Crayon
+ * @return string          classe pour CFG
  */
 function cfg_crayon2config($crayon) {return str_replace(array('___','__'), array('::','/'), $crayon);}
 
@@ -178,8 +178,8 @@ function balise_CFG_ARBO_dist($p) {
  * Fonction utilisée par le compilo pour {@see balise_CFG_ARBO_dist} :
  * affiche l'arborescence qui est calculée par {@see cfg_affiche_sous_arborescence}
  *
- * @param  string $cfg  # nom de la table meta
- * @return string       # code html en sortie
+ * @param  string $cfg  nom de la table meta
+ * @return string       code html en sortie
  */
 function cfg_affiche_arborescence($cfg='') {
 
@@ -234,9 +234,9 @@ function cfg_affiche_arborescence($cfg='') {
 /**
  * Calcul récursif de l'arborescence des configurations
  *
- * @param  string $nom       # nom de la table meta
- * @param  Array  $tableau   # configuration
- * @return string            # code html en sortie
+ * @param  string $nom       nom de la table meta
+ * @param  Array  $tableau   configuration
+ * @return string            code html en sortie
  */
 function cfg_affiche_sous_arborescence($nom, $tableau){
 	$sortie = "\n<h5>$nom</h5>\n";

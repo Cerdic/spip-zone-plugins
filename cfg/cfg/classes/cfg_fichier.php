@@ -22,8 +22,8 @@ define ('_COMPAT_CFG_192',false);
 /**
  * Vérification du fichier $nom
  *
- * @param string $nom
- * @param Object $cfg
+ * @param  string $nom
+ * @param  Object $cfg
  * @return Object
  */
 function cfg_pre_verifier_cfg_fichier($nom, &$cfg){	
@@ -42,8 +42,8 @@ function cfg_pre_verifier_cfg_fichier($nom, &$cfg){
 /**
  * Pré-traitement du fichier $nom
  *
- * @param string $nom
- * @param Object $cfg
+ * @param  string $nom
+ * @param  Object $cfg
  * @return Object
  */
 function cfg_pre_traiter_cfg_fichier($nom, &$cfg){
@@ -81,7 +81,7 @@ function cfg_pre_traiter_cfg_fichier($nom, &$cfg){
 
 /**
  *
- * @param string $nom
+ * @param  string $nom
  * @return string
  */
 function cfg_get_info_fichier_upload($nom){
@@ -92,10 +92,10 @@ function cfg_get_info_fichier_upload($nom){
  * Ajouter un document (au format $_FILES)<br>
  * (n'ajoute pas le contenu en base dans spip_documents...)
  * 
- * @param string $source # le fichier sur le serveur (/var/tmp/xyz34)
- * @param string $nom_envoye # son nom chez le client (portequoi.pdf)
- * @param string $nom_dest # le nom sous lequel le sauvegarder
- * @param string $dans # Où l'enregistrer
+ * @param  string $source      Le fichier sur le serveur (/var/tmp/xyz34)
+ * @param  string $nom_envoye  Son nom chez le client (portequoi.pdf)
+ * @param  string $nom_dest    Le nom sous lequel le sauvegarder
+ * @param  string $dans        Où l'enregistrer
  * @return string
  */
 function cfg_ajoute_un_document($source, $nom_envoye, $nom_dest, $dans='config') {
@@ -213,10 +213,10 @@ function cfg_ajoute_un_document($source, $nom_envoye, $nom_dest, $dans='config')
 /**
  * Copier un document
  * 
- * @param string $ext # L'extension du fichier
- * @param string $dest # le nom sous lequel le sauvegarder
- * @param string $source # le fichier sur le serveur (/var/tmp/xyz34)
- * @param string $dans # Où le copier
+ * @param string $ext    L'extension du fichier
+ * @param string $dest   le nom sous lequel le sauvegarder
+ * @param string $source le fichier sur le serveur (/var/tmp/xyz34)
+ * @param string $dans   Où le copier
  * @return string
  */
 function cfg_copier_document($ext, $dest, $source, $dans='_cfg') {
@@ -240,7 +240,7 @@ function cfg_copier_document($ext, $dest, $source, $dans='_cfg') {
  * Creer IMG/config/vue
  * comme "creer_repertoire_documents" mais avec 2 profondeurs
  *
- * @param string $ext
+ * @param  string $ext
  * @return string
  */
 function cfg_creer_repertoire_cfg($ext) {
@@ -264,7 +264,7 @@ function cfg_creer_repertoire_cfg($ext) {
 	return $rep;
 }
 
-/**
+/*
  * compat 1.9.2 :
  * il y a plein de fonctions qui ont change !!
  */
@@ -274,10 +274,10 @@ if (_COMPAT_CFG_192) {
 	 * pas de securite tuante sur .. comme en 1.9.3<br>
 	 *
 	 * @deprecated depuis SPIP 2.0
-	 * @param string $source
-	 * @param string $dest
-	 * @param boolean $move
-	 * @return boolean|string # la destination comme 1.9.3
+	 * @param  string  $source  Le nom du fichier source
+	 * @param  string  $dest    Le nom du fichier de destination
+	 * @param  boolean $move    TRUE si on le déplace
+	 * @return boolean|string   La destination comme 1.9.3
 	 */
 	function cfg_deplacer_fichier_upload($source, $dest, $move=false) {
 		// Securite
@@ -309,7 +309,7 @@ if (_COMPAT_CFG_192) {
 	 * Supprimer le fichier de maniere sympa (flock)
 	 * 
 	 * @deprecated depuis SPIP 2.0
-	 * @param string $fichier
+	 * @param  string  $fichier Le nom du fichier à supprimer
 	 * @return boolean 
 	 */
 	function cfg_supprimer_fichier($fichier) {
@@ -337,7 +337,7 @@ if (_COMPAT_CFG_192) {
 		 * pour stockage 'tel quel' dans la base de donnees
 		 *
 		 * @deprecated depuis SPIP 2.0
-		 * @param string $fichier
+		 * @param  string $fichier
 		 * @return string
 		 */
 		function set_spip_doc($fichier) {
@@ -354,7 +354,7 @@ if (_COMPAT_CFG_192) {
 		 * donne le chemin complet du fichier
 		 *
 		 * @deprecated depuis SPIP 2.0
-		 * @param string $fichier
+		 * @param  string $fichier
 		 * @return string
 		 */
 		function get_spip_doc($fichier) {
