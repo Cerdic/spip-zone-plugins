@@ -3,7 +3,7 @@
 #          (Plugin Spip)
 #     http://acs.geomaticien.org
 #
-# Copyright Daniel FAIVRE, 2007-2009
+# Copyright Daniel FAIVRE, 2007-2010
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
 /**
@@ -18,9 +18,7 @@
  */
 function cache($fonction, $file, $args=null, $force_recalcul=false) {
 
-  $tmpDir =  _DIR_RACINE._NOM_TEMPORAIRES_INACCESSIBLES;
-  $cacheDir = $tmpDir.'cache/acs/';
-  $cachefile = $cacheDir.$file;
+  $cachefile = _ACS_TMP_DIR.$file;
   $date = $GLOBALS['meta']['acsDerniereModif'];
 
   if (is_readable($cachefile && !$force_recalcul)) {
@@ -43,11 +41,11 @@ function cache($fonction, $file, $args=null, $force_recalcul=false) {
     'date' => $date,
     'content' => $r
   ));
-  if (@file_put_contents($cachefile, $cachestring))
+  if (file_put_contents($cachefile, $cachestring))
     return array($r, 'write', $date);
-  // Si $cacheDir n'est pas accessible en écriture, on crée acs et on ré-éssaie
-  if (is_writable($tmpDir.'cache/')) {
-    @mkdir($tmpDir.'cache/acs');
+  // Si <site>/tmp/cache/acs n'est pas accessible en écriture, on le crée et on ré-éssaie
+  if (is_writable(substr(_ACS_TMP_DIR,0,-4))) {
+    @mkdir(_ACS_TMP_DIR);
     if (@file_put_contents($cachefile, $cachestring))
       return array($r, 'writedir', $date);
   }

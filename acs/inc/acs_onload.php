@@ -3,7 +3,7 @@
 #          (Plugin Spip)
 #     http://acs.geomaticien.org
 #
-# Copyright Daniel FAIVRE, 2007-2009
+# Copyright Daniel FAIVRE, 2007-2010
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
 /**
@@ -15,16 +15,22 @@
 // Dossier des paramètres et images utilisateur
 // User images and parameters
 // compatible mutualisation (_DIR_SITE defini)
-if (_DIR_SITE == '_DIR_SITE') {
-	$dir_site = '';
+if (_DIR_SITE != '_DIR_SITE') {
+	$dir_site = _DIR_SITE;
+	$dir_site_absolu = _DIR_RACINE ? substr(_DIR_SITE, 3) : _DIR_SITE;
 }
 else {
-	$dir_site = _DIR_RACINE ? substr(_DIR_SITE, 3) : _DIR_SITE ;
+	$dir_site = _DIR_RACINE;
+	$dir_site_absolu = '';
 }
-$GLOBALS['ACS_CHEMIN'] = $dir_site._NOM_PERMANENTS_ACCESSIBLES.'_acs';
+// Dossier du cache ACS (par defaut: tmp/cache/acs)
+define('_ACS_TMP_DIR', $dir_site._NOM_TEMPORAIRES_INACCESSIBLES.'cache/acs/');
 
-$GLOBALS['meta']['acsModel'] = (isset($GLOBALS['meta']['acsModel']) ? $GLOBALS['meta']['acsModel'] : 'cat');
-$GLOBALS['ACS_CHEMIN'] = $GLOBALS['ACS_CHEMIN'].'/'.$GLOBALS['meta']['acsModel'];
+// Modèle ACS par defaut - Default ACS model
+$GLOBALS['meta']['acsModel'] = isset($GLOBALS['meta']['acsModel']) ? $GLOBALS['meta']['acsModel'] : 'cat';
+
+// Dossier des images du modèle ACS actif - Active ACS model images directory
+$GLOBALS['ACS_CHEMIN'] = $dir_site_absolu._NOM_PERMANENTS_ACCESSIBLES.'_acs/'.$GLOBALS['meta']['acsModel'];
 
 define('_DIR_ACS', _DIR_PLUGINS.acs_get_from_active_plugin('ACS', 'dir').'/'); // Chemin valable espace public aussi, pas comme _DIR_PLUGIN_ACS, qui est à proscrire
 
