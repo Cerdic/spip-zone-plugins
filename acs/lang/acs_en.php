@@ -95,6 +95,7 @@ To setup your website, customize components.<br/>A new instance of a component i
   'structure_page' => 'page structure',
   'err_fichier_absent' => 'File @file@ not found',
   'err_fichier_ecrire' => 'Unable to write file &quot;@file@&quot;',
+  'err_cache' => 'Unable to read or write ACS cache',
 
   'onglet_adm_description' => 'Configuration',
   'onglet_adm_info' => 'ACS model choice and administration.',

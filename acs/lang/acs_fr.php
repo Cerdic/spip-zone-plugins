@@ -97,6 +97,7 @@ Pour personnaliser votre site, configurez ses composants.<br />Une nouvelle inst
   'structure_page' => 'Structure de la page',
   'err_fichier_absent' => 'Fichier @file@ introuvable',
   'err_fichier_ecrire' => 'Impossible d\'&eacute;crire le fichier &quot;@file@&quot;',
+  'err_cache' => 'Impossible de lire ou d\'&eacute;crire dans le cache ACS',
 
   'onglet_adm_description' => 'Configuration d\'ACS',
   'onglet_adm_info' => 'Choix du mod&egrave;le, gestion des droits, ..',
