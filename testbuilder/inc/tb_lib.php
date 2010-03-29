@@ -246,8 +246,12 @@ function tb_test_essais($funcname,$filetest,$essais_new=null){
 
 	if (is_array($essais_new)
 	  AND $l=lire_fichier($filetest, $contenu)){
+		// renumeroter
+		$re = array();
+		while(count($essais_new))
+			$re[] = array_shift($essais_new);
 		$new_func = "function essais_$funcname(){
-		\$essais = ".var_export($essais_new,true).";
+		\$essais = ".var_export($re,true).";
 		return \$essais;
 	}
 ";
