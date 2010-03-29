@@ -1,8 +1,27 @@
 <?php
 
-// on regarde s'il y a un logo, sinon un gravatar, et on renvoie le tout
-// pour ca il faut modifier un peu le code produit par #LOGO_*, pour introduire
-// notre fonction de recherche de logo
+/**
+ *
+ * Gravatar : Globally Recognized AVATAR
+ *
+ * @package     plugins
+ * @subpackage  gravatar
+ *
+ * @author      Fil
+ * @license     GNU/GPL
+ *
+ * @version     $Id$
+ **/
+
+/**
+ * On regarde s'il y a un logo, sinon un gravatar, et on renvoie le tout.
+ *
+ * Pour ca il faut modifier un peu le code produit par #LOGO_*, pour introduire
+ * notre fonction de recherche de logo.
+ *
+ * @param  Object $p # Arbre syntaxique utilise par le compilo
+ * @return Object    # retourne apres traitement
+ */
 function balise_LOGO_AUTEUR($p) {
 	$balise_logo_ = charger_fonction('logo_', 'balise');
 	$_email1 = champ_sql('email', $p);

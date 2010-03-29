@@ -1,5 +1,25 @@
 <?php
 
+/**
+ *
+ * Gravatar : Globally Recognized AVATAR
+ *
+ * @package     plugins
+ * @subpackage  gravatar
+ *
+ * @author      Fil, Cedric, Thomas Beaumanoir
+ * @license     GNU/GPL
+ *
+ * @version     $Id$
+ **/
+
+/**
+ * Utilisation du pipeline "affiche_gauche" :
+ * on affiche un bloc identique a celui du logo de l'auteur avec son gravatar
+ *
+ * @param  Array $flux # structure permettant de generer la page
+ * @return Array       # retournee apres traitement
+ */
 function gravatar_affiche_gauche($flux) {
 	if ((_request('exec') == 'auteur_infos')) {
 		if ($id_auteur = intval(_request('id_auteur'))
