@@ -2,12 +2,14 @@
 <!--#hierarchie-->
 <ul id="chemin">
 	<li>
-		<a href="#URL_ECRIRE{formulaires_tous}" class="racine"><:formidable:formulaires_tous:></a>
+		<span class="bloc">
+			<a href="#URL_ECRIRE{formulaires_tous}" class="racine"><:formidable:formulaires_tous:></a>
+		</span>
 	</li>
 	<BOUCLE_formulaire_chemin(FORMULAIRES){id_formulaire=#VAL{id_formulaire}|_request}>
 	<li>
 		<span class="bloc">
-			<em>&gt;</em>
+			<em> &gt; </em>
 			<a class="on" href="[(#URL_ECRIRE{formulaires_voir}|parametre_url{id_formulaire,#ID_FORMULAIRE})]">#TITRE</a>
 		</span>
 	</li>
