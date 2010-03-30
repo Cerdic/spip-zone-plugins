@@ -60,12 +60,12 @@ function saveauto_mail_attachement($to , $sujet , $message , $fichier, $nom, $re
 
 	    $attachement .= "\n\n\n------=$limite\n";
 	}else{
+		$fichier = str_replace(_DIR_RACINE,'',$fichier);
 		$texte .= _T('saveauto:mail_fichier_lourd',array('fichier'=>$fichier));
 	}
 
 	$texte = nettoyer_caracteres_mail($texte);
 	$sujet = nettoyer_caracteres_mail($sujet);
-	spip_log('envoi de mail '.$texte,'test');
 
 	//formatage des entetes
     if (! empty($reply)) $entete = "Reply-to: $reply\n";

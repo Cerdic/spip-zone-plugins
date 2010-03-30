@@ -79,6 +79,11 @@
 					]
 					<input type="text" name="destinataire_save" class="text" id="destinataire_save" value="[(#ENV{destinataire_save})]" />
 				</li>
+				<li class="editer_mail_max_size">
+					<label for="mail_max_size"><:saveauto:mail_max_size:></label>
+					<p class="explication"><:saveauto:help_mail_max_size:></p>
+					<input type="text" name="mail_max_size" class="text" id="mail_max_size" value="[(#ENV{mail_max_size}|sinon{2})]" size="2" style="width:30px" /> Mo
+				</li>
 				<li class="editer_accepter">
 					<label for="accepter"><:saveauto:tables_acceptes:></label>
 					<p class="explication"><:saveauto:help_accepter:></p>
