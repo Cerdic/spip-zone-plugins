@@ -23,8 +23,9 @@ function saveauto_trouve_table($table, $tableau_tables) {
 //Url : http://www.nexen.net
 //modifiee pour plus de souplesse sur les entetes
 function saveauto_mail_attachement($to , $sujet , $message , $fichier, $nom, $reply="", $from="") {
+	include_spip('inc/envoyer_mail');
     if (!function_exists('mail')) {
-        echo _T('saveauto:config_inadaptee').' '._T('saveauto:mail_absent').'<br>';
+        echo _T('saveauto:config_inadaptee').' '._T('saveauto:mail_absent').'<br />';
         return false;
     }
     $from = $reply = lire_config('email_webmaster');
@@ -44,21 +45,29 @@ function saveauto_mail_attachement($to , $sujet , $message , $fichier, $nom, $re
     $texte .= $message;
     $texte .= "\n\n";
 
-    //le fichier
-    $attachement = "------=$limite\n";
-    $attachement .= "Content-Type: application/octet-stream; name=\"$nom\"\n";
-    $attachement .= "Content-Transfer-Encoding: base64\n";
-    $attachement .= "Content-Disposition: attachment; filename=\"$nom\"\n\n";
+	if((filesize($fichier) / 1000000) < lire_config('saveauto/mail_max_size','2')){
+	    //le fichier
+	    $attachement = "------=$limite\n";
+	    $attachement .= "Content-Type: application/octet-stream; name=\"$nom\"\n";
+	    $attachement .= "Content-Transfer-Encoding: base64\n";
+	    $attachement .= "Content-Disposition: attachment; filename=\"$nom\"\n\n";
 
-    $fp = fopen($fichier, "rb");
-    $buff = fread($fp, filesize($fichier));
+	    $fp = fopen($fichier, "rb");
+	    $buff = fread($fp, filesize($fichier));
 
-    fclose($fp);
-    $attachement .= chunk_split(base64_encode($buff));
+	    fclose($fp);
+	    $attachement .= chunk_split(base64_encode($buff));
 
-    $attachement .= "\n\n\n------=$limite\n";
+	    $attachement .= "\n\n\n------=$limite\n";
+	}else{
+		$texte .= _T('saveauto:mail_fichier_lourd',array('fichier'=>$fichier));
+	}
 
-    //formatage des entetes
+	$texte = nettoyer_caracteres_mail($texte);
+	$sujet = nettoyer_caracteres_mail($sujet);
+	spip_log('envoi de mail '.$texte,'test');
+
+	//formatage des entetes
     if (! empty($reply)) $entete = "Reply-to: $reply\n";
     if (! empty($from)) $entete .= "From: $from\n";
 
@@ -73,14 +82,14 @@ function saveauto_ecrire ($texte, $fp, $_fputs) {
 
 
 function saveauto_mysql_version() {
-   $result = mysql_query('SELECT VERSION() AS version');
-   if ($result != FALSE && @mysql_num_rows($result) > 0) {
+   $result = sql_query('SELECT VERSION() AS version');
+   if ($result != FALSE && sql_count($result) > 0) {
       $row = mysql_fetch_array($result);
       $match = explode('.', $row['version']);
    }
    else {
-      $result = @mysql_query('SHOW VARIABLES LIKE \'version\'');
-      if ($result != FALSE && @mysql_num_rows($result) > 0) {
+      $result = sql_query('SHOW VARIABLES LIKE \'version\'');
+      if ($result != FALSE && sql_count($result) > 0) {
          $row = mysql_fetch_row($result);
          $match = explode('.', $row[1]);
       }

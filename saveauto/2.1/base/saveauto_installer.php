@@ -29,7 +29,8 @@ function saveauto_upgrade($nom_meta_base_version,$version_cible){
 				'prefixe_save' => 'saveauto_',
 				'frequence_maj' => 1,
 				'destinataire_save' => $GLOBALS['meta']['email_webmaster'],
-				'eviter' => '_index;_temp;_cache'
+				'eviter' => '_index;_temp;_cache',
+				'mail_max_size' => 2
 			);
 			ecrire_meta('saveauto',serialize($config));
 		}

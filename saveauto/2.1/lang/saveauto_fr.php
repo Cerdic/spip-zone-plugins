@@ -9,7 +9,7 @@ $GLOBALS['i18n_saveauto_fr'] = array(
 	// saveauto_pipeline.php
 	'saveauto' => 'Sauvegarde automatique',
 	'sauvegarde_ok' => 'Sauvegarde de la base effectuee avec succes !',
-                     'sauvegarde_ok_mail' => 'Sauvegarde de la base et envoi par mail effectues avec succes !',
+	'sauvegarde_ok_mail' => 'Sauvegarde de la base et envoi par mail effectu&eacute;s avec succ&egrave;s !',
 	'maintenance' => 'Maintenance',
 	'probleme_sauve_base' => 'Probleme de sauvegarde de la base ',
 
@@ -39,6 +39,7 @@ $GLOBALS['i18n_saveauto_fr'] = array(
 	'adresse' => ' a l\'adresse : ',
 	'config_inadaptee' => 'Plugin saveauto : configuration non-adaptee,',
 	'mail_absent' => ' votre serveur n\'assure pas les fonctions d\'envoi de mail !',
+	'mail_fichier_lourd' => 'Le fichier de sauvegarde est trop lourd pour &ecirc;tre envoy&eacute; par mail. Vous pouvez le r&eacute;cup&eacute;rer par FTP en suivant le chemin : @fichier@',
 
 	// cfg_saveauto.php
 	'config_saveauto' => 'Sauvegarde automatis&eacute;e de la base de donn&eacute;es',
@@ -71,6 +72,8 @@ $GLOBALS['i18n_saveauto_fr'] = array(
 	'donnees' => ' donn&eacute;es des tables : ',
 	'prefixe_sauvegardes' => 'Pr&eacute;fixe pour les sauvegardes : ',
 	'acces_redac' => 'Sauvegarde d&eacute;clench&eacute;e lors de la connexion d\'un auteur : ',
+	'mail_max_size' => 'Taille maximale des fichiers &agrave; attacher aux mails (en Mo) :',
+	'help_mail_max_size' => 'Certaines bases de donn&eacute;es peuvent d&eacute;passer la taille maximale des fichiers joints pour un mail. V&eacute;rifiez aupr&egrave;s de votre fournisseur de mail pour conna&icirc;tre la taille maximale qu\'il autorise. La limite par d&eacute;faut est de 2Mo.',
 
 	'valider' => 'Valider',
 	'sauvegardes_faites' => 'Sauvegardes existantes : ',
