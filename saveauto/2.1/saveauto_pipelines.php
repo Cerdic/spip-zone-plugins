@@ -1,10 +1,10 @@
 <?php
 /**
-* saveauto : plugin de sauvegarde automatique de la base de donnees de SPIP
-*
-* Ce programme est un logiciel libre distribue sous licence GNU/GPL.
-*
-**/
+ * saveauto : plugin de sauvegarde automatique de la base de donnees de SPIP
+ *
+ * Ce programme est un logiciel libre distribue sous licence GNU/GPL.
+ *
+ */
 $sauver_base = false;
 $fin_sauvegarde_base = false;
 
@@ -19,8 +19,8 @@ function saveauto_go() {
     if (($connect_statut == "0minirezo") OR ($connect_statut == "1comite" AND (lire_config('saveauto/acces_redac',false) == 'true'))) {
         if (!isset($_COOKIE["spip_saveauto"]) OR empty($_COOKIE["spip_saveauto"]))	{
           //sauver la base
-            include_spip('inc/saveauto_fonctions');
-            saveauto_sauvegarde();
+            $sauver = charger_fonction('saveauto','inc');
+            $sauver();
             if ($fin_sauvegarde_base) {
                 include_spip('inc/cookie');
                 spip_setcookie("spip_saveauto","ok");

@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
 <plugin>
 	<nom> <!-- Nom du plugin -->
 		<multi>
@@ -12,8 +11,8 @@
 [it]cy_altern, _Eric_ - basato su un contrib di Silicium (silicium@japanim.net)
 		</multi>
 	</auteur>
-	<version>0.5.3</version>
-	<etat>stable</etat>
+	<version>0.6.0</version>
+	<etat>dev</etat>
 	<prefix>saveauto</prefix>
 	<description>
 		<multi>
@@ -40,7 +39,7 @@ vengono automaticamente cancellati.
 	</description>
 	<lien>[->http://www.spip-contrib.net/Le-plugin-saveauto-sauvegarde]</lien>
 	<icon>img_pack/saveauto-24.png</icon>
-	
+
 	<pipeline>
 		<nom>mes_fichiers_a_sauver</nom>
 		<inclure>saveauto_pipelines.php</inclure>
@@ -49,9 +48,9 @@ vengono automaticamente cancellati.
 		<nom>body_prive</nom>
 		<inclure>saveauto_pipelines.php</inclure>
 	</pipeline>
-	
-	<necessite id="SPIP" version="[2.0.0;]" />
-	<necessite id="cfg" version="[1.0.0;]" />
+
+	<necessite id="SPIP" version="[2.1.0-rc;]" />
+	<necessite id="cfg" version="[1.14.4;]" />
 	<chemin dir='' type='prive' />
 	<categorie>maintenance</categorie>
 </plugin>
