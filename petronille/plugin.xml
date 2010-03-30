@@ -6,6 +6,10 @@
 <etat>dev</etat>
 <auteur>[romy.tetue.net->http://romy.tetue.net] - 2010</auteur>
 <prefix>petronille</prefix>
+<pipeline>
+	<nom>insert_head</nom>
+	<inclure>petronille_pipelines.php</inclure>
+</pipeline>
 <necessite id='SPIP' version='[2.0.0;]' />
 <utilise id="Z" version="[;]" />
 </plugin>
