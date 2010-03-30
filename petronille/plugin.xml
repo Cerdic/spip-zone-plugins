@@ -1,0 +1,11 @@
+<plugin>
+<nom>P&eacute;tronille</nom>
+<icon>icon.png</icon>
+<description>Un framework CSS pour SPIP</description>
+<version>0.1</version>
+<etat>dev</etat>
+<auteur>[romy.tetue.net->http://romy.tetue.net] - 2010</auteur>
+<prefix>petronille</prefix>
+<necessite id='SPIP' version='[2.0.0;]' />
+<utilise id="Z" version="[;]" />
+</plugin>
