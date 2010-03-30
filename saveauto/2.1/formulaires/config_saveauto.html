@@ -13,12 +13,12 @@
 			<ul>
 				<li class="editer_base">
 					<label for="base"><:saveauto:nom_base:></label>
-					<input type="text" name="base" class="text" id="base" value="[(#ENV*{base}|sinon{nom_base_SPIP})]" />
+					<input type="text" name="base" class="text" id="base" value="[(#ENV{base}|sinon{nom_base_SPIP})]" />
 				</li>
 				<li class="editer_rep_bases">
 					<label for="rep_bases"><:saveauto:repertoire_stockage:></label>
 					<p class="explication"><:saveauto:help_rep:></p>
-					<input type="text" name="rep_bases" class="text" id="rep_bases" value="[(#ENV*{rep_bases}|sinon{tmp/})]" />
+					<input type="text" name="rep_bases" class="text" id="rep_bases" value="[(#ENV{rep_bases}|sinon{tmp/})]" />
 				</li>
 				<li class="editer_prefixe_save">
 					<label for="prefixe_save"><:saveauto:prefixe_sauvegardes:></label>

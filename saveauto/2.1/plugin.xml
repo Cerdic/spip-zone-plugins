@@ -49,6 +49,10 @@ vengono automaticamente cancellati.
 		<nom>body_prive</nom>
 		<inclure>saveauto_pipelines.php</inclure>
 	</pipeline>
+	<pipeline>
+		<nom>taches_generales_cron</nom>
+		<inclure>genie/saveauto.php</inclure>
+	</pipeline>
 	<install>base/saveauto_installer.php</install>
 	<necessite id="SPIP" version="[2.1.0-rc;]" />
 	<necessite id="cfg" version="[1.14.4;]" />
