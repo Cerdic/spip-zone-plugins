@@ -1,0 +1,115 @@
+<!-- titre=<:saveauto:saveauto:> -->
+<!-- icone=img_pack/saveauto-24.png -->
+<!-- boite=<:saveauto:plugin_saveauto:> -->
+
+[(#PLUGIN{autorite}|oui)
+<!-- autoriser=webmestre -->
+<!-- refus=Seuls les webmestres du site sont autoris&#233;s &#224; 
+modifier les param&#232;tres. Pour en savoir plus, 
+voir <a href="http://www.spip-contrib.net/-Autorite-">la documentation</a>. -->
+]
+[(#PLUGIN{autorite}|non)
+<!-- autoriser=0minirezo -->
+<!-- refus=Seuls les administrateurs du site sont autoris&#233;s &#224; 
+modifier ces param&#232;tres.  -->
+]
+
+<!-- descriptif=
+<h4><:saveauto:help_titre:></h4>
+-->
+
+<!-- head=
+	
+	<style type="text/css">
+	table.def td{padding-left:1em; padding-right:1em;}
+   fieldset { background-color: #ddd; margin-bottom: 10px;  }
+	 legend { font-weight: bold; }
+	 .help { font-size: 0.8em; }
+	</style>
+
+-->
+#CACHE{0} 
+
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+				
+				<fieldset><legend><:saveauto:nom_base:></legend>
+				   <input type="text" name="base" id="base" value="[(#ENV{base,nom_base_SPIP})]" />
+				</fieldset>
+				<fieldset><legend><:saveauto:repertoire_stockage:></legend>
+				   <input type="text" name="rep_bases" id="rep_bases" value="[(#ENV{rep_bases,[(#EVAL{_DIR_TMP})]})]" style="width: 300px;" />
+					 <br /><span class="help"><:saveauto:help_rep:></span>
+				</fieldset>
+            
+				<fieldset><legend><:saveauto:prefixe_sauvegardes:></legend>
+				   <input type="text" name="prefixe_save" id="prefixe_save" value="[(#ENV{prefixe_save,saveauto_})]" style="width: 200px;" />
+				   <br /><span class="help"><:saveauto:help_prefixe:></span>
+				</fieldset>
+				<fieldset><legend><:saveauto:frequence:></legend>
+				   <input type="text" name="frequence_maj" id="frequence_maj" value="[(#ENV{frequence_maj,1})]" style="width: 30px;" />
+					 <:saveauto:jours:>
+				</fieldset>
+
+				<fieldset><legend><:saveauto:compression_gz:></legend>
+				   <:saveauto:oui:> 
+					 <input type="radio" name="gz" id="gz_true" value="true" [(#ENV{gz}|=={true}|?{checked="checked",''})] />
+				     <input type="radio" name="gz" id="gz_false" value="false" [(#ENV{gz}|!={true}|?{checked="checked",''})] /> 
+					 <:saveauto:non:>
+				   <br /><span class="help"><:saveauto:help_gz:></span>
+				</fieldset>
+            
+				<fieldset><legend><:saveauto:structure_donnees:></legend>
+				   <:saveauto:structure:><:saveauto:oui:> 
+					 <input type="radio" name="structure" id="structure_true" value="true" [(#ENV{structure}|=={true}|?{checked="checked",''})] />
+    		   <input type="radio" name="structure" id="structure_false" value="false" [(#ENV{structure}|!={true}|?{checked="checked",''})] /> 
+					 <:saveauto:non:>
+				   <br /><:saveauto:donnees:> <:saveauto:oui:> 
+				   <input type="radio" name="donnees" id="donnees_true" value="true" [(#ENV{donnees}|=={true}|?{checked="checked",''})] />
+    		   <input type="radio" name="donnees" id="donnees_false" value="false" [(#ENV{donnees}|!={true}|?{checked="checked",''})] />
+				   <:saveauto:non:>
+				</fieldset>
+            
+				<fieldset><legend><:saveauto:envoi_mail:><:saveauto:adresse:></legend>
+				   <input type="text" name="destinataire_save" id="destinataire_save" value="[(#ENV{destinataire_save})]" style="width: 200px;" />
+				   <br /><span class="help"><:saveauto:help_envoi:></span>
+	 			   [(#EVAL{function_exists('mail');}|sinon{
+                 <br><span style="color:red"><strong><:saveauto:attention:></strong><:saveauto:mail_absent:><:saveauto:pas_envoi:></span>
+               })]
+				</fieldset>
+            
+				<fieldset><legend><:saveauto:tables_acceptes:></legend>
+				   <input type="text" name="accepter" id="accepter" value="[(#ENV{accepter})]" style="width: 300px;" />
+				   <br /><span style='font-size: 11px;'><:saveauto:help_accepter:></span>
+				</fieldset>
+				<fieldset><legend><:saveauto:donnees_ignorees:></legend>
+				   <input type="text" name="eviter" id="eviter" value="[(#ENV{eviter,_index;_temp;_cache})]" style="width: 300px;" />
+				   <br /><span class="help"><:saveauto:help_eviter:></span>
+				</fieldset>
+            
+				<fieldset><legend><:saveauto:message_succes:></legend>
+				   <:saveauto:oui:>
+				   <input type="radio" name="ecrire_succes" id="ecrire_succes_true" value="true" [(#ENV{ecrire_succes}|=={true}|?{checked="checked",''})] />
+    		   <input type="radio" name="ecrire_succes" id="ecrire_succes_false" value="false" [(#ENV{ecrire_succes}|!={true}|?{checked="checked",''})] />
+				   <:saveauto:non:>
+				   <br /><span class="help"><:saveauto:help_msg:></span>
+				</fieldset>
+            
+				<fieldset><legend><:saveauto:obsolete_jours:></legend>
+				   <input type="text" name="jours_obso" id="jours_obso" value="[(#ENV{jours_obso,15})]" style="width: 30px;"><:saveauto:jours:>
+		 		   <br /><span class="help"><:saveauto:help_obsolete:></span>
+				</fieldset>
+            
+				<fieldset><legend><:saveauto:acces_redac:></legend>
+				   <:saveauto:oui:> <input type="radio" name="acces_redac" id="acces_redac_true" value="true" [(#ENV{acces_redac}|=={true}|?{checked="checked",''})] />
+    		   <input type="radio" name="acces_redac" id="acces_redac_false" value="false" [(#ENV{acces_redac}|!={true}|?{checked="checked",''})] />
+				   <:saveauto:non:>
+				   <br /><span class="help"><:saveauto:help_acces_redac:></span>
+				</fieldset>
+            
+				<fieldset><legend><:saveauto:restauration:></legend>
+				   <:saveauto:help_restauration:>
+				</fieldset>
+
+				<input type="reset" value="<:Reset:>" style="float: right;" />
+				<input type="submit" name="_cfg_ok" value="<:OK:>" />
+</form>
+
