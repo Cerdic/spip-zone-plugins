@@ -49,7 +49,7 @@ if (isset($GLOBALS['meta']['acsSqueletteOverACS']) && $GLOBALS['meta']['acsSquel
     if ($GLOBALS['dossier_squelettes'] != $gbs) {
       $GLOBALS['dossier_squelettes'] .= ':';
     }
-    $GLOBALS['dossier_squelettes'] .= $dir.':';
+    $GLOBALS['dossier_squelettes'] .= $dir_site_absolu.$dir.':';
   }
 }
 $GLOBALS['dossier_squelettes'] .= 'plugins/'.acs_get_from_active_plugin('ACS', 'dir').'/'.'models/'.$GLOBALS['meta']['acsModel'];
