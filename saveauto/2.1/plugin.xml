@@ -12,6 +12,7 @@
 		</multi>
 	</auteur>
 	<version>0.6.0</version>
+	<version_base>0.1.0</version_base>
 	<etat>dev</etat>
 	<prefix>saveauto</prefix>
 	<description>
@@ -48,7 +49,7 @@ vengono automaticamente cancellati.
 		<nom>body_prive</nom>
 		<inclure>saveauto_pipelines.php</inclure>
 	</pipeline>
-
+	<install>base/saveauto_installer.php</install>
 	<necessite id="SPIP" version="[2.1.0-rc;]" />
 	<necessite id="cfg" version="[1.14.4;]" />
 	<chemin dir='' type='prive' />
