@@ -1,5 +1,5 @@
 <BOUCLE_formulaires_reponse(FORMULAIRES_REPONSES){id_formulaires_reponse}>
-<BOUCLE_autoriser(CONDITION){si #AUTORISER{voir, formulaires_reponse}}>
+<BOUCLE_autoriser(CONDITION){si #AUTORISER{voir, formulaires_reponse, #ID_FORMULAIRES_REPONSE}}>
 
 <!--#hierarchie-->
 <ul id="chemin">
@@ -53,12 +53,14 @@
 			<span style="vertical-align:middle;"><:formidable:reponses_analyse:></span>
 		</a>
 	</div>
+	[(#AUTORISER{supprimer, formulaires_reponse, #ID_FORMULAIRES_REPONSE}|oui)
 	<div>
 		<a href="#URL_ACTION_AUTEUR{supprimer_formulaires_reponse,#ID_FORMULAIRES_REPONSE}" class="cellule-h" onclick="return confirm('<:formidable:reponse_supprimer_confirmation:>');">
 			[<img src="(#CHEMIN{images/formulaire-reponse-supprimer-24.png})" style="vertical-align:middle;" alt="" />]
 			<span style="vertical-align:middle;"><:formidable:reponse_supprimer:></span>
 		</a>
 	</div>
+	]
 </div>
 <!--/#navigation-->
 </BOUCLE_autoriser>

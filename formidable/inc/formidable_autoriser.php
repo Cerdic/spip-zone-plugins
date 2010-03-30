@@ -70,4 +70,13 @@ function autoriser_formulaires_reponse_voir_dist($faire, $type, $id, $qui, $opti
 	else return false;
 }
 
+// Il faut pouvoir éditer un formulaire pour pouvoir en supprimer des réponses
+function autoriser_formulaires_reponse_supprimer_dist($faire, $type, $id, $qui, $options){
+	// On récupère l'id du formulaire
+	if ($id_formulaire = intval(sql_getfetsel('id_formulaire', 'spip_formulaires_reponses', $id)))
+		return autoriser('editer', 'formulaire', $id_formulaire);
+	else
+		return false;
+}
+
 ?>
