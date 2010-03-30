@@ -1,16 +1,16 @@
 <?php
-	/**
-	 * saveauto : plugin de sauvegarde automatique de la base de données de SPIP
-	 *  
-	 * Ce programme est un logiciel libre distribue sous licence GNU/GPL.
-	 *  
-	 **/
+/**
+ * saveauto : plugin de sauvegarde automatique de la base de donnees de SPIP
+ *
+ * Ce programme est un logiciel libre distribue sous licence GNU/GPL.
+ *
+ **/
 
 function saveauto_trouve_table($table, $tableau_tables) {
     $trouve = false;
     foreach ($tableau_tables as $t)	{
         if (strstr($table, $t)) {
-            $trouve = true; 
+            $trouve = true;
             break;
         }
     }
@@ -21,21 +21,21 @@ function saveauto_trouve_table($table, $tableau_tables) {
 //fonction originale mail_attachement en utilisation libre
 //Auteur : Damien Seguy
 //Url : http://www.nexen.net
-//modifiée pour plus de souplesse sur les entêtes
+//modifiee pour plus de souplesse sur les entetes
 function saveauto_mail_attachement($to , $sujet , $message , $fichier, $nom, $reply="", $from="") {
     if (!function_exists('mail')) {
         echo _T('saveauto:config_inadaptee').' '._T('saveauto:mail_absent').'<br>';
         return false;
     }
     $from = $reply = lire_config('email_webmaster');
-    
+
     $limite = "_parties_".md5(uniqid (rand()));
-    
+
     $mail_mime = "Date: ".date("l j F Y, G:i")."\n";
     $mail_mime .= "MIME-Version: 1.0\n";
     $mail_mime .= "Content-Type: multipart/mixed;\n";
     $mail_mime .= " boundary=\"----=$limite\"\n\n";
-    
+
     //Le message en texte simple pour les navigateurs qui n'acceptent pas le HTML
     $texte = _T('saveauto:message_MIME')."\n";
     $texte .= "------=$limite\n";
@@ -43,30 +43,30 @@ function saveauto_mail_attachement($to , $sujet , $message , $fichier, $nom, $re
     $texte .= "Content-Transfer-Encoding: 32bit\n\n";
     $texte .= $message;
     $texte .= "\n\n";
-    
+
     //le fichier
     $attachement = "------=$limite\n";
     $attachement .= "Content-Type: application/octet-stream; name=\"$nom\"\n";
     $attachement .= "Content-Transfer-Encoding: base64\n";
     $attachement .= "Content-Disposition: attachment; filename=\"$nom\"\n\n";
-    
+
     $fp = fopen($fichier, "rb");
     $buff = fread($fp, filesize($fichier));
-    
+
     fclose($fp);
     $attachement .= chunk_split(base64_encode($buff));
-    
+
     $attachement .= "\n\n\n------=$limite\n";
-    
-    //formatage des entêtes
+
+    //formatage des entetes
     if (! empty($reply)) $entete = "Reply-to: $reply\n";
     if (! empty($from)) $entete .= "From: $from\n";
-    
+
     return mail($to, $sujet, $texte.$attachement, $entete.$mail_mime);
 }
 
 
-//écrit dans un fichier
+//ecrit dans un fichier
 function saveauto_ecrire ($texte, $fp, $_fputs) {
     $_fputs($fp, "$texte\n");
 }
@@ -85,7 +85,7 @@ function saveauto_mysql_version() {
          $match = explode('.', $row[1]);
       }
    }
-   
+
    if (!isset($match) || !isset($match[0])) $match[0] = 3;
    if (!isset($match[1])) $match[1] = 21;
    if (!isset($match[2])) $match[2] = 0;
@@ -97,24 +97,24 @@ function saveauto_sauvegarde() {
     global $sauver_base, $fin_sauvegarde_base;
     global $connect_statut;
     $temps = time();
-    
-    // récupérer les $prefix_meta['nom_variable' => 'valeur_variable', ...] 
-    // sous la forme : $nom_variable = 'valeur_variable'				
-    foreach (lire_config('saveauto') as $cle => $valeur) {
+
+    // recuperer les $prefix_meta['nom_variable' => 'valeur_variable', ...]
+    // sous la forme : $nom_variable = 'valeur_variable'
+    foreach (lire_config('saveauto',array()) as $cle => $valeur) {
         if ($valeur == 'true') $$cle = true;
         elseif ($valeur == 'false') $$cle = false;
         else $$cle = $valeur;
     }
- 
-    // options complexes des sauvegardes déportées depuis cfg_saveauto :
+
+    // options complexes des sauvegardes deportees depuis cfg_saveauto :
     // true = clause INSERT avec nom des champs
     $insertComplet = true;
-     
-    // vérifier le statut pour lancement: admin ou rédacteur si config
-    if (($connect_statut != "0minirezo") AND (!$acces_redac OR $connect_statut != "1comite")) return; 
-           
+
+    // verifier le statut pour lancement: admin ou redacteur si config
+    if (($connect_statut != "0minirezo") AND (!$acces_redac OR $connect_statut != "1comite")) return;
+
   //1-FAUT IL SAUVER (le soldat ryan ?)
-    // Lister des fichiers contenus dans le répertoire de sauvegardes
+    // Lister des fichiers contenus dans le repertoire de sauvegardes
     $entree = array();
     $nbr_entree = 0;
     $rep_bases = _DIR_RACINE.$rep_bases;
@@ -137,17 +137,17 @@ function saveauto_sauvegarde() {
         }
     }
     closedir($myDirectory);
-    //trie dans l'ordre décroissant les sauvegardes pour mettre la plus récente en index 0
+    //trie dans l'ordre decroissant les sauvegardes pour mettre la plus recente en index 0
     rsort($entree);
 
     if ($nbr_entree > 0) {
-        //récupèrer la date de la sauvegarde la plus récente
+        //recuperer la date de la sauvegarde la plus recente
         $derniere_maj = filemtime($rep_bases . $entree[0]);
         if ($temps > ($frequence_maj*24*3600+$derniere_maj)) $sauver_base = true;
     }
-    else $sauver_base = true;   //aucune sauvegarde trouvée !!!
+    else $sauver_base = true;   //aucune sauvegarde trouvee !!!
     if (!$sauver_base) return;
-                 
+
   //2-ON SAUVE (willy)
     //calcul de la date
     $jour = date("d", $temps); //format numerique : 01->31
@@ -155,33 +155,33 @@ function saveauto_sauvegarde() {
     $mois = date("m", $temps);
     $heure = date("H", $temps);
     $minutes = date("i", $temps);
-    
+
     //choix du nom
     $suffixe = '.sql';
     $nom_fichier = $prefixe_save . $base . "_" . $annee. "_" . $mois. "_" . $jour . $suffixe;
     $chemin_fichier = $rep_bases . $nom_fichier;
-    //récupère et sépare tous les noms de tables dont on doit éviter de récupérer les données
+    //recupere et separe tous les noms de tables dont on doit eviter de recuperer les donnees
     if (!empty($eviter)) $tab_eviter = explode(";", $eviter);
     if (!empty($accepter)) $tab_accepter = explode(";", $accepter);
-    
+
     // listing des tables
     $sql1 = "SHOW TABLES";
-    $res = spip_query($sql1);								 
+    $res = spip_query($sql1);
     if (! $res) {
         echo _T('saveauto:impossible_liste_tables')."<br>";
         return;
     }
     $num_rows = sql_count($res);
     $i = 0;
-    
-    //création du fichier
+
+    //crï¿½ation du fichier
     $fp = @fopen($chemin_fichier, "wb");
     if ($connect_statut == "0minirezo" && (!$fp)) {
         echo _T('saveauto:impossible_creer').$nom_fichier._T('saveauto:verifier_ecriture').$rep_bases."<br>";
         return;
     }
     $_fputs = fwrite;
-    
+
     //ecriture entete du fichier : infos serveurs php/sql/http
     saveauto_ecrire("# "._T('saveauto:fichier_genere'), $fp, $_fputs);
     if ($base) {
@@ -189,7 +189,7 @@ function saveauto_sauvegarde() {
     }
     saveauto_ecrire("# "._T('saveauto:serveur').$SERVER_NAME, $fp, $_fputs);
     saveauto_ecrire("# "._T('saveauto:date').$jour."/".$mois."/".$annee." : ".$heure."h".$minutes, $fp, $_fputs);
-    if (defined('PHP_OS') && eregi('win', PHP_OS)) $os_serveur = "Windows"; 
+    if (defined('PHP_OS') && eregi('win', PHP_OS)) $os_serveur = "Windows";
     else $os_serveur = "Linux/Unix";
     saveauto_ecrire("# "._T('saveauto:os').$os_serveur, $fp, $_fputs);
     saveauto_ecrire("# "._T('saveauto:phpversion').phpversion(), $fp, $_fputs);
@@ -197,14 +197,14 @@ function saveauto_sauvegarde() {
     saveauto_ecrire("# "._T('saveauto:ipclient').$REMOTE_ADDR, $fp, $_fputs);
     saveauto_ecrire("# "._T('saveauto:compatible_phpmyadmin')."\n", $fp, $_fputs);
     saveauto_ecrire("# -------"._T('saveauto:debut_fichier')."----------", $fp, $_fputs);
-                       
+
     while ($i < $num_rows) {
         $tablename = mysql_tablename($res, $i);
-        
-        //sélectionne la table avec nom qui correspond à $accepter (ou toutes si $accepter vide)
-        //sélectionne la table avec nom qui ne correspond pas à $eviter (ou toutes si $eviter vide)
-        // saveauto_trouve_table($tablename, $tab_accepter) retourne TRUE si un des éléments de $tab_accepter correspond à une partie de $tablename 
-        if ((empty($accepter) OR saveauto_trouve_table($tablename, $tab_accepter)) 
+
+        //selectionne la table avec nom qui correspond a $accepter (ou toutes si $accepter vide)
+        //selectionne la table avec nom qui ne correspond pas a $eviter (ou toutes si $eviter vide)
+        // saveauto_trouve_table($tablename, $tab_accepter) retourne TRUE si un des elements de $tab_accepter correspond a une partie de $tablename
+        if ((empty($accepter) OR saveauto_trouve_table($tablename, $tab_accepter))
             AND (empty($eviter) OR !(saveauto_trouve_table($tablename, $tab_eviter)))) {
             //sauve la structure
             if ($structure) {
@@ -217,12 +217,12 @@ function saveauto_sauvegarde() {
                 $schema = $row[1].";";
                 saveauto_ecrire("$schema\n", $fp, $_fputs);
             }
-            // sauve les données
+            // sauve les donnees
             if ($donnees) {
                 saveauto_ecrire("# "._T('saveauto:donnees_table').$tablename, $fp, $_fputs);
                 $query = "SELECT * FROM $tablename";
                 $resData = @mysql_query($query);
-                //peut survenir avec la corruption d'une table, on prévient
+                //peut survenir avec la corruption d'une table, on prï¿½vient
                 if ($connect_statut == "0minirezo" && (!$resData)) {
                     echo _T('probleme_donnees').$tablename._T('saveauto:corruption')."<br />";
                 }
@@ -233,18 +233,18 @@ function saveauto_sauvegarde() {
                             $num_fields = mysql_num_fields($resData);
                             for($j=0; $j < $num_fields; $j++) {
                                 $sFieldnames .= "`".mysql_field_name($resData, $j) ."`";
-                                //on ajoute à la fin une virgule si nécessaire
+                                //on ajoute a la fin une virgule si necessaire
                                 if ($j<$num_fields-1) $sFieldnames .= ", ";
                             }
                             $sFieldnames = "($sFieldnames)";
                         }
                         $sInsert = "INSERT INTO `$tablename` $sFieldnames values ";
-                        
+
                         while($rowdata = mysql_fetch_row($resData)) {
                             $lesDonnees = "";
                             for ($mp = 0; $mp < $num_fields; $mp++) {
                                 $lesDonnees .= "'" . addslashes($rowdata[$mp]) . "'";
-                                //on ajoute à la fin une virgule si nécessaire
+                                //on ajoute a la fin une virgule si necessaire
                                 if ($mp<$num_fields-1) $lesDonnees .= ", ";
                             }
                             $lesDonnees = "$sInsert($lesDonnees);";
@@ -257,7 +257,7 @@ function saveauto_sauvegarde() {
         $i++;
     }
     saveauto_ecrire("# -------"._T('saveauto:fin_fichier')."------------", $fp, $_fputs);
-    
+
     //on ferme !
     fclose($fp);
     // zipper si necessaire (si ok on efface le fichier sql + pour l'envoi par mail on utilise le zip)
@@ -276,19 +276,19 @@ function saveauto_sauvegarde() {
             $nom_fichier .= '.zip';
         }
     }
-    
+
     //envoi par mail si necessaire
     if (!empty($destinataire_save)) {
         $msg_mail = _T('saveauto:sauvegarde_ok_mail')."\n\r"._T('saveauto:base').$base."\n\r"._T('saveauto:serveur').$SERVER_NAME."\n\r"._T('saveauto:date').$jour."/".$mois."/".$annee." : ".$heure."h".$minutes;
         $sujet_mail = _T('saveauto:saveauto')." "._T('saveauto:base').$base." "._T('saveauto:date').$jour."/".$mois."/".$annee;
         if (!saveauto_mail_attachement($destinataire_save, $sujet_mail, $msg_mail, $chemin_fichier, $nom_fichier)) {
             //msg d'erreur que pour les admins
-            if ($connect_statut == "0minirezo") 
+            if ($connect_statut == "0minirezo")
                echo "<script language=\"javascript\">alert(\""._T('saveauto:probleme_envoi').$nom_fichier._T('saveauto:adresse').$destinataire_save.")\";</script>";
         }
     }
-    
-    //marqueur de bon déroulement du processus
+
+    //marqueur de bon deroulement du processus
     $fin_sauvegarde_base = true;
 }
 ?>
