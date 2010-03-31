@@ -89,7 +89,7 @@ if (!function_exists('filtre_icone_dist')){
  * @param string $fonction
  * @return string
  */
-function filtre_icone_dist($lien, $texte, $fond, $align="", $fonction="", $class=""){
+function filtre_icone_dist($lien, $texte, $fond, $align="", $fonction="", $class="",$javascript=""){
 	$align = $align?$align:$GLOBALS['spip_lang_left'];
 	global $spip_display;
 
