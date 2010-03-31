@@ -230,7 +230,6 @@ function cfg_instancier($config=false){
  */
 function cfg_formulaire_traiter($flux){
 	$form = $flux['args']['form'];
-	spip_log($flux);
 	if (!est_cvt($form)){
 		$config = cfg_instancier();
 
