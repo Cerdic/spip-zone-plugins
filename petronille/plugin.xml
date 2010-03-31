@@ -7,7 +7,7 @@
 <auteur>[romy.tetue.net->http://romy.tetue.net] - 2010</auteur>
 <prefix>petronille</prefix>
 <pipeline>
-	<nom>insert_head</nom>
+	<nom>insert_head_css</nom>
 	<inclure>petronille_pipelines.php</inclure>
 </pipeline>
 <necessite id="SPIP" version="[;]" />
