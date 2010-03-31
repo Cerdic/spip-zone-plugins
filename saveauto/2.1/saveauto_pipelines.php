@@ -8,44 +8,26 @@
 $sauver_base = false;
 $fin_sauvegarde_base = false;
 
-function saveauto_body_prive($flux) {
-    $flux .= saveauto_go();
-    return $flux;
-}
-
-function saveauto_go() {
-    global $fin_sauvegarde_base, $sauver_base, $saveauto_msg, $connect_statut;
-    $saveauto_msg = '';
-    if (($connect_statut == "0minirezo") OR ($connect_statut == "1comite" AND (lire_config('saveauto/acces_redac',false) == 'true'))) {
-        if (!isset($_COOKIE["spip_saveauto"]) OR empty($_COOKIE["spip_saveauto"]))	{
-          //sauver la base
-            $sauver = charger_fonction('saveauto','inc');
-            $sauver();
-            if ($fin_sauvegarde_base) {
-                include_spip('inc/cookie');
-                spip_setcookie("spip_saveauto","ok");
-            }
-            if ($sauver_base) {
-                if (!$fin_sauvegarde_base) {
-                    $saveauto_msg = _T('saveauto:probleme_sauve_base').$base."<br />";
-                }
-                if ((lire_config('saveauto/ecrire_succes','') == 'true') && $fin_sauvegarde_base) {
-                    $saveauto_msg = "<script language=\"javascript\">alert(\""._T('saveauto:sauvegarde_ok')."\", \""._T('saveauto:maintenance')."\");</script>";
-                }
-            }
-        }
-    }
-    return $saveauto_msg;
-}
-
-// Pipeline "mes_fichiers_a_sauver" permettant de rajouter des fichiers a sauvegarder dans le plugin Mes Fichiers 2
+/**
+ * Insertion dans le pipeline "mes_fichiers_a_sauver"
+ * Permettre de rajouter des fichiers a sauvegarder dans le plugin Mes Fichiers 2
+ */
 function saveauto_mes_fichiers_a_sauver($flux){
-    // Determination du repertoire de sauvegarde
+    /**
+     * Determination du repertoire de sauvegarde et du prefixe
+     */
     $tmp_dump = defined('_DIR_DUMP') ? _DIR_DUMP: _DIR_TMP.'dump/';
     $rep_save = lire_config('saveauto/rep_bases','');
+    $prefixe = lire_config('saveauto/prefixe_save','');
     $rep_save = $rep_save ? _DIR_RACINE.$rep_save : $tmp_dump;
-    // le dernier fichier de dump de la base cree par saveauto
-    $dump = preg_files($rep_save);
+
+    /**
+     * le dernier fichier de dump de la base cree par saveauto
+     * - commence par le prefixe de la configuration
+     * - a pour extension zip ou sql
+     * - on ne conserve que le dernier en date
+     */
+    $dump = preg_files($rep_save,"$prefixe.+[.](zip|sql)$");
     $fichier_dump = '';
     $mtime = 0;
     foreach ($dump as $_fichier_dump) {
@@ -57,8 +39,6 @@ function saveauto_mes_fichiers_a_sauver($flux){
     if ($fichier_dump)
         $flux[] = $fichier_dump;
 
-    spip_log('*** saveauto_mes_fichiers_a_sauver ***');
-    spip_log($flux);
     return $flux;
 }
 

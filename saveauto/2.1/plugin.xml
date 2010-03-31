@@ -40,13 +40,8 @@ vengono automaticamente cancellati.
 	</description>
 	<lien>[->http://www.spip-contrib.net/Le-plugin-saveauto-sauvegarde]</lien>
 	<icon>img_pack/saveauto-24.png</icon>
-
 	<pipeline>
 		<nom>mes_fichiers_a_sauver</nom>
-		<inclure>saveauto_pipelines.php</inclure>
-	</pipeline>
-	<pipeline>
-		<nom>body_prive</nom>
 		<inclure>saveauto_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
