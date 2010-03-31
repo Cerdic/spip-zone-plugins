@@ -13,6 +13,12 @@
 <!-- titre=<multi>[fr]Menu d&eacute;roulant Babbibel [en]Babbibel dropdown menu</multi>-->
 
 <form method="post">[(#ENV{_cfg_}|form_hidden)]
+<fieldset><legend>Afficher l&rsquo;item &quot;Accueil&quot;</legend>
+   <br />
+   <input type="radio" name="accueil" value="sans"[ checked="(#ENV{accueil}|=={sans}|?{checked})"]/><label>Supprimer l&rsquo;item &quot;<b>Accueil</b>&quot;</label>
+   <br /><br />
+   <input type="radio" name="accueil" value="avec"[ checked="(#ENV{accueil}|=={avec}|?{checked})"]/><label>Afficher l&rsquo;item &quot;<b>Accueil</b>&quot;</label>
+</fieldset><br />
 <fieldset><legend>Type de menu</legend>
 <p>
 <label>S&eacute;lectionner le type de menu d&eacute;roulant</label>
