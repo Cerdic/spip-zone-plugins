@@ -11,7 +11,7 @@
 
 
 function gis_gismot($flux){
-	if (_request('exec')=='mots_edit'){
+	if ((_request('exec')=='mots_edit') AND (_request('new')!=oui)){
 		include_spip('inc/parte_privada');
 		$flux['data'] .= gis_mots($flux['args']['id_mot']);
 	}
