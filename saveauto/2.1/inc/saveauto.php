@@ -1,7 +1,7 @@
 <?php
 
 /**
- * La fonction de sauvegarde complete
+ * La fonction de sauvegarde complete de la base de donnee
  */
 function inc_saveauto_dist(){
     global $fin_sauvegarde_base, $spip_version_affichee;
@@ -27,37 +27,28 @@ function inc_saveauto_dist(){
 
     /**
      * Faut-il sauver?
-     * Lister des fichiers contenus dans le repertoire de sauvegardes
+     * Vérifier l'existence du répertoire de destination
      */
-    $entree = array();
-    $nbr_entree = 0;
     $rep_bases = _DIR_RACINE.$rep_bases;
-    $myDirectory = @opendir($rep_bases);
-    if (!$myDirectory) {
-        $err .= _T('saveauto:repertoire').$rep_bases._T('saveauto:corriger_config')."<br>";
+    if (!is_dir($rep_bases)) {
+        $err .= _T('saveauto:repertoire').$rep_bases._T('saveauto:corriger_config')."<br />";
         return $err;
     }
-    while($entryName = readdir($myDirectory)) {
-        /**
-         * filtre uniquement les fichiers dont le nom commence par prefixe_save
-         */
-        if (substr($entryName, 0, strlen($prefixe_save . $base)) == $prefixe_save . $base) {
-            $date_fichier = filemtime($rep_bases . $entryName);
-            if ($jours_obso > 0 && $temps > ($date_fichier + $jours_obso*3600*24)) {
-                supprimer_fichier($rep_bases . $entryName);
-            }
-            else {
-                $entree[] = $entryName;
-                $nbr_entree++;
-            }
-        }
-    }
-    closedir($myDirectory);
 
     /**
-     * trie dans l'ordre decroissant les sauvegardes pour mettre la plus recente en index 0
+     * Faut il supprimer des sauvegardes existantes
+     * si leur date de création sont supérieures à la date maximale
+     * de sauvegarde des archives
      */
-    rsort($entree);
+    if($jours_obso > 0){
+	    $sauvegardes = preg_files($rep_bases,"$prefixe.+[.](zip|sql)$");
+	    foreach($sauvegardes as $sauvegarde){
+			$date_fichier = filemtime($sauvegarde);
+			if ($temps > ($date_fichier + $jours_obso*3600*24)) {
+				supprimer_fichier($sauvegarde);
+			}
+		}
+    }
 
     /**
      * On sauvegarde
