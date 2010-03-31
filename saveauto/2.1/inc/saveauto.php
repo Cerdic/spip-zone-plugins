@@ -81,12 +81,7 @@ function inc_saveauto_dist(){
     /**
      * creation du fichier
      */
-    $fp = @fopen($chemin_fichier, "wb");
-    if ($connect_statut == "0minirezo" && (!$fp)) {
-        $err .= _T('saveauto:impossible_creer').$nom_fichier._T('saveauto:verifier_ecriture').$rep_bases."<br>";
-        return $err;
-    }
-    $_fputs = fwrite;
+    $contenu = '';
 
     /**
      * Ecriture des entêtes du fichier de sauvegarde
@@ -101,19 +96,19 @@ function inc_saveauto_dist(){
      * - La liste des plugins SPIP installés
      * - Un commentaire
      */
-    saveauto_ecrire("# "._T('saveauto:fichier_genere'), $fp, $_fputs);
+    $contenu .= "# "._T('saveauto:fichier_genere');
     if ($base) {
-        saveauto_ecrire("# "._T('saveauto:base').$base, $fp, $_fputs);
+        $contenu .= "# "._T('saveauto:base').$base."\n";
     }
-    saveauto_ecrire("# "._T('saveauto:serveur').$_SERVER['SERVER_NAME'], $fp, $_fputs);
-    saveauto_ecrire("# "._T('saveauto:date').$jour."/".$mois."/".$annee." ".$heure."h".$minutes, $fp, $_fputs);
+    $contenu .= "# "._T('saveauto:serveur').$_SERVER['SERVER_NAME']."\n";
+    $contenu .= "# "._T('saveauto:date').$jour."/".$mois."/".$annee." ".$heure."h".$minutes."\n";
     if (defined('PHP_OS') && preg_match('/win/i', PHP_OS)) $os_serveur = "Windows";
     else $os_serveur = "Linux/Unix";
-    saveauto_ecrire("# "._T('saveauto:os').$os_serveur, $fp, $_fputs);
-    saveauto_ecrire("# "._T('saveauto:phpversion').phpversion(), $fp, $_fputs);
-    saveauto_ecrire("# "._T('saveauto:mysqlversion').saveauto_mysql_version(), $fp, $_fputs);
-    saveauto_ecrire("# "._T('saveauto:ipclient').$GLOBALS['ip'], $fp, $_fputs);
-    saveauto_ecrire("# "._T('saveauto:spip_version').$spip_version_affichee, $fp, $_fputs);
+    $contenu .= "# "._T('saveauto:os').$os_serveur."\n";
+    $contenu .= "# "._T('saveauto:phpversion').phpversion()."\n";
+    $contenu .= "# "._T('saveauto:mysqlversion').saveauto_mysql_version()."\n";
+    $contenu .= "# "._T('saveauto:ipclient').$GLOBALS['ip']."\n";
+    $contenu .= "# "._T('saveauto:spip_version').$spip_version_affichee."\n";
 
     /**
      * Lister les plugins activés
@@ -132,9 +127,9 @@ function inc_saveauto_dist(){
 		foreach ($lsplugs as $plugin => $c)
 			$message_plugin .= "# - $plugin (".$versionplug[$plugin].")"."\n";
 	}
-	saveauto_ecrire($message_plugin, $fp, $_fputs);
-    saveauto_ecrire("# "._T('saveauto:compatible_phpmyadmin')."\n", $fp, $_fputs);
-    saveauto_ecrire("# -------"._T('saveauto:debut_fichier')."----------", $fp, $_fputs);
+	$contenu .= $message_plugin."\n";
+    $contenu .= "# "._T('saveauto:compatible_phpmyadmin')."\n"."\n";
+    $contenu .= "# -------"._T('saveauto:debut_fichier')."----------"."\n";
 
     while ($i < $num_rows) {
         $tablename = mysql_tablename($res, $i);
@@ -146,18 +141,18 @@ function inc_saveauto_dist(){
             AND (empty($eviter) OR !(saveauto_trouve_table($tablename, $tab_eviter)))) {
             //sauve la structure
             if ($structure) {
-                saveauto_ecrire("\n# "._T('saveauto:structure_table').$tablename, $fp, $_fputs);
-                saveauto_ecrire("DROP TABLE IF EXISTS `$tablename`;\n", $fp, $_fputs);
+                $contenu .= "\n# "._T('saveauto:structure_table').$tablename."\n";
+                $contenu .= "DROP TABLE IF EXISTS `$tablename`;\n"."\n";
                 // requete de creation de la table
                 $query = "SHOW CREATE TABLE $tablename";
                 $resCreate = mysql_query($query);
                 $row = mysql_fetch_array($resCreate);
                 $schema = $row[1].";";
-                saveauto_ecrire("$schema\n", $fp, $_fputs);
+                $contenu .= "$schema\n"."\n";
             }
             // sauve les donnees
             if ($donnees) {
-                saveauto_ecrire("# "._T('saveauto:donnees_table').$tablename, $fp, $_fputs);
+                $contenu .= "# "._T('saveauto:donnees_table').$tablename."\n";
                 $resData = sql_select('*',$tablename);
                 //peut survenir avec la corruption d'une table, on previent
                 if ($connect_statut == "0minirezo" && (!$resData)) {
@@ -185,7 +180,7 @@ function inc_saveauto_dist(){
                                 if ($mp<$num_fields-1) $lesDonnees .= ", ";
                             }
                             $lesDonnees = "$sInsert($lesDonnees);";
-                            saveauto_ecrire("$lesDonnees", $fp, $_fputs);
+                            $contenu .= "$lesDonnees"."\n";
                         }
                     }
                 }
@@ -193,12 +188,14 @@ function inc_saveauto_dist(){
         }
         $i++;
     }
-    saveauto_ecrire("# -------"._T('saveauto:fin_fichier')."------------", $fp, $_fputs);
+    $contenu .= "# -------"._T('saveauto:fin_fichier')."------------"."\n";
 
-    /**
-     * on ferme !
-     */
-    fclose($fp);
+	$ok = ecrire_fichier($chemin_fichier, $contenu);
+
+	if(!$ok){
+    	$err .= _T('saveauto:impossible_creer').$nom_fichier._T('saveauto:verifier_ecriture').$rep_bases."<br>";
+        	return $err;
+	}
 
     /**
      * zipper si necessaire

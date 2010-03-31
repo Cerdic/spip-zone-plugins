@@ -74,13 +74,6 @@ function saveauto_mail_attachement($to , $sujet , $message , $fichier, $nom, $re
     return mail($to, $sujet, $texte.$attachement, $entete.$mail_mime);
 }
 
-
-//ecrit dans un fichier
-function saveauto_ecrire ($texte, $fp, $_fputs) {
-    $_fputs($fp, "$texte\n");
-}
-
-
 function saveauto_mysql_version() {
    $result = sql_query('SELECT VERSION() AS version');
    if ($result != FALSE && sql_count($result) > 0) {
