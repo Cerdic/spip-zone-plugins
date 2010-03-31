@@ -32,8 +32,9 @@ function pages_du_site() {
   // Ordre d'override : over 1 > ...> over n > modèle ACS actif > plugins actifs > spip (dist)
 
   $tas = explode(':', $GLOBALS['meta']['acsSqueletteOverACS']);
+  $dir_site = (_DIR_SITE != '_DIR_SITE') ? _DIR_SITE : _DIR_RACINE;
   foreach($tas as $dir) {
-    $squelettes['over'.$numover] = _DIR_RACINE.$dir;
+    $squelettes['over'.$numover] = $dir_site.$dir;
     $numover += 1;
   }
   // Squelettes du modele ACS actif:

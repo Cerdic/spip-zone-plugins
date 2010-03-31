@@ -33,7 +33,7 @@ function cache($fonction, $file, $args=null, $force_recalcul=false) {
     return array(_T('err_not_callable').' : '.$fonction, 'err', $date);
   if (isset($args) && (!is_array($args)))
     return array(_T('err_args_not_in_array').' : '.$fonction, 'err', $date);
-	
+
   if ($args==null)
    $args = array(); // un array vide si pas d'arguments
   $r = call_user_func_array($fonction, $args);
@@ -41,7 +41,7 @@ function cache($fonction, $file, $args=null, $force_recalcul=false) {
     'date' => $date,
     'content' => $r
   ));
-  if (file_put_contents($cachefile, $cachestring))
+  if (@file_put_contents($cachefile, $cachestring))
     return array($r, 'write', $date);
   // Si <site>/tmp/cache/acs n'est pas accessible en écriture, on le crée et on ré-éssaie
   if (is_writable(substr(_ACS_TMP_DIR,0,-4))) {

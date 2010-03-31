@@ -38,21 +38,30 @@ define('_DIR_ACS', _DIR_PLUGINS.acs_get_from_active_plugin('ACS', 'dir').'/'); /
 define('ACS_VERSION', preg_replace('/([^\s]+).*/', '\1', acs_get_from_active_plugin('ACS', 'version')));
 define('ACS_RELEASE', preg_replace('/.*\s\((.*)\)/', '\1', acs_get_from_active_plugin('ACS', 'version')));
 
+
+
+echo "<br>1*".$GLOBALS['dossier_squelettes']."*";
+
 // Définition du dossier global des squelettes actifs d'ACS (avec override)
 // Global active ACS skeletons directory definition (with override)
+$dossiers_squelettes_avant_override = explode(':', $GLOBALS['dossier_squelettes']);
 if (isset($GLOBALS['meta']['acsSqueletteOverACS']) && $GLOBALS['meta']['acsSqueletteOverACS']) {
   $tas = explode(':', $GLOBALS['meta']['acsSqueletteOverACS']);
   foreach($tas as $dir) {
-    $gbs = $GLOBALS['dossier_squelettes'];
     @include(_DIR_RACINE.$dir.'/mes_options.php');
     @include(_DIR_RACINE.$dir.'/mes_fonctions.php');
-    if ($GLOBALS['dossier_squelettes'] != $gbs) {
+    if (in_array($dir_site_absolu.$dir, $dossiers_squelettes_avant_override))
+      continue;
+    if (isset($GLOBALS['dossier_squelettes']) && $GLOBALS['dossier_squelettes'])
       $GLOBALS['dossier_squelettes'] .= ':';
-    }
-    $GLOBALS['dossier_squelettes'] .= $dir_site_absolu.$dir.':';
+    $GLOBALS['dossier_squelettes'] .= $dir_site_absolu.$dir;
   }
 }
+if (isset($GLOBALS['dossier_squelettes']) && $GLOBALS['dossier_squelettes'])
+  $GLOBALS['dossier_squelettes'] .= ':';
+// On ajoute le chemin du modèle cat actif
 $GLOBALS['dossier_squelettes'] .= 'plugins/'.acs_get_from_active_plugin('ACS', 'dir').'/'.'models/'.$GLOBALS['meta']['acsModel'];
+echo "<br>2*".$GLOBALS['dossier_squelettes']."*";
 
 // dossier des composants :
 define('_DIR_COMPOSANTS', find_in_path('composants'));
@@ -79,7 +88,7 @@ function acs_get_from_active_plugin($plugin, $variable = false) {
   return false;
 }
 
-// Vérifie que l'utilisateur connecté est un admin ACS autorisé, ou le(s) webmestre(s) si ACS n'est pas encore configuré 
+// Vérifie que l'utilisateur connecté est un admin ACS autorisé, ou le(s) webmestre(s) si ACS n'est pas encore configuré
 function acs_autorise() {
 	// Si l'utilisateur n'est pas admin, pas la peine d'aller plus loin
 	if ($GLOBALS['auteur_session']['statut'] != "0minirezo")
