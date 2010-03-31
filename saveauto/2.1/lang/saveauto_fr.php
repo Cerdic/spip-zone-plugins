@@ -5,7 +5,7 @@
 * Ce programme est un logiciel libre distribue sous licence GNU/GPL.
 *
 **/
-$GLOBALS['i18n_saveauto_fr'] = array(
+$GLOBALS[$GLOBALS['idx_lang']] = array(
 	// saveauto_pipeline.php
 	'saveauto' => 'Sauvegarde automatique',
 	'sauvegarde_ok' => 'Sauvegarde de la base effectuee avec succes !',
@@ -15,7 +15,7 @@ $GLOBALS['i18n_saveauto_fr'] = array(
 
 	// saveauto_fonctions.php
 	'message_MIME' => 'Ceci est un message au format MIME.',
-	'repertoire' => 'le r&eacute;pertoire ',
+	'repertoire' => 'Le r&eacute;pertoire ',
 	'corriger_config' => ' n\'existe pas, corrigez la configuration !',
 	'impossible_liste_tables' => 'impossible de lister les tables de la base ',
 	'impossible_creer' => 'impossible de cr&eacute;er ',
@@ -104,7 +104,18 @@ $GLOBALS['i18n_saveauto_fr'] = array(
 	'help_eviter' => 'Optionnel : si la table contient dans son nom la cha&icirc;ne sp&eacute;cifi&eacute;e : les donn&eacute;es sont ignor&eacute;es (pas la structure). S&eacute;parez les diff&eacute;rents noms par le symbole point-virgule (;)',
 	'help_rep' => 'R&eacute;pertoire o&ugrave; stocker les fichiers (chemin &agrave; partir de la <strong>racine</strong> du SPIP, tmp/data/ par ex). <strong>DOIT</strong> se terminer par un /.',
 	'help_prefixe' => 'Optionnel : mettre un pr&eacute;fixe au nom du fichier de sauvegarde',
-	'help_acces_redac' => 'Sinon, les sauvegardes ne sont d&eacute;clench&eacute;es que lors de la connexion des administrateurs'
+	'help_acces_redac' => 'Sinon, les sauvegardes ne sont d&eacute;clench&eacute;es que lors de la connexion des administrateurs',
 
+	// exec=saveauto
+	'colonne_date' => 'Date',
+	'colonne_nom' => 'Nom',
+	'colonne_taille_octets' => 'Taille',
+	'erreur_repertoire_inaccessible' => 'Le r&eacute;pertoire @rep@ est inaccessible en &eacute;criture.',
+	'erreur_repertoire_inexistant' => 'Le r&eacute;pertoire @rep@ est inexistant. Veuillez v&eacute;rifier votre configuration.',
+	'message_aucune_sauvegarde' => 'Il n\'y a aucune sauvegarde.',
+	'saveauto_titre' => 'Sauvegarde SQL',
+	'titre_boite_historique' => 'Historique des sauvegardes',
+	'titre_boite_sauver' => 'Sauvegarder la base de donn&eacute;e',
+	'titre_page_saveauto' => 'Sauvegarde de base de donn&eacute;e'
 );
 ?>

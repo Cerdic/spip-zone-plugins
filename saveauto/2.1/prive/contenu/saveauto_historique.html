@@ -1,0 +1,28 @@
+[(#CHEMIN{img_pack/saveauto-24.png}|debut_cadre_trait_couleur{1, "", <:saveauto:titre_boite_historique:>})]
+<B_historique>
+<table id="saveauto_telecharger" class="spip" summary="<:saveauto:resume_table_telecharger:>">
+	<thead>
+		<tr>
+			<th><:saveauto:colonne_nom:></th>
+			<th><:saveauto:colonne_taille_octets:></th>
+			<th><:saveauto:colonne_date:></th>
+		</tr>
+	</thead>
+	<tbody>
+<BOUCLE_historique(POUR){tableau #ENV**{sauvegardes}}>
+		<tr id="#zip_#COMPTEUR_BOUCLE"[ class="(#COMPTEUR_BOUCLE|alterner{row_even, row_odd})"]>
+			<td>[<label[ for="zip_(#CLE)"]>(#VALEUR|basename)</label>]</td>
+			<td style="text-align: right">[(#VALEUR|filesize|taille_en_octets)]</td>
+			<td>[(#VAL{Y-m-d H:i:s}|date{[(#VALEUR|filemtime)]}|affdate_heure{'Y-m-d H:i:s'})]</td>
+		</tr>
+</BOUCLE_historique>
+	</tbody>
+</table>
+</B_historique>
+<div class="cadre cadre-e" style="margin: 10px 0;">
+	<div class="cadre_padding">
+		<:saveauto:message_aucune_sauvegarde:>
+	</div>
+</div>
+<//B_historique>
+[(#VAL{1}|fin_cadre_trait_couleur)]

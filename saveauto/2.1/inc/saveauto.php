@@ -31,7 +31,12 @@ function inc_saveauto_dist(){
      */
     $rep_bases = _DIR_RACINE.$rep_bases;
     if (!is_dir($rep_bases)) {
-        $err .= _T('saveauto:repertoire').$rep_bases._T('saveauto:corriger_config')."<br />";
+        $err .= _T('saveauto:erreur_repertoire_inexistant',array('rep' => $rep_bases));
+        return $err;
+    }
+
+    if(spip_fopen_lock($rep_bases.'.ok', 'a',LOCK_EX) === false){
+    	$err .= _T('saveauto:erreur_repertoire_inaccessible',array('rep' => $rep_bases));
         return $err;
     }
 
@@ -41,7 +46,7 @@ function inc_saveauto_dist(){
      * de sauvegarde des archives
      */
     if($jours_obso > 0){
-	    $sauvegardes = preg_files($rep_bases,"$prefixe.+[.](zip|sql)$");
+	    $sauvegardes = preg_files($rep_bases,"$prefixe_save.+[.](zip|sql)$");
 	    foreach($sauvegardes as $sauvegarde){
 			$date_fichier = filemtime($sauvegarde);
 			if ($temps > ($date_fichier + $jours_obso*3600*24)) {

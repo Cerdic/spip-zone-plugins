@@ -45,12 +45,21 @@ vengono automaticamente cancellati.
 		<inclure>saveauto_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>saveauto_autoriser.php</inclure>
+	</pipeline>
+	<pipeline>
 		<nom>taches_generales_cron</nom>
 		<inclure>genie/saveauto.php</inclure>
 	</pipeline>
+	<onglet id='saveauto' parent='administration'>
+		<icone>img_pack/saveauto-24.png</icone>
+		<titre>saveauto:saveauto_titre</titre>
+	</onglet>
 	<install>base/saveauto_installer.php</install>
 	<necessite id="SPIP" version="[2.1.0-rc;]" />
 	<necessite id="cfg" version="[1.14.4;]" />
+	<necessite id="spip_bonux" version="[1.9.1;]" />
 	<chemin dir='' type='prive' />
 	<categorie>maintenance</categorie>
 </plugin>
