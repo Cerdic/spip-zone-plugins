@@ -4,7 +4,7 @@
  * La fonction de sauvegarde complete
  */
 function inc_saveauto_dist(){
-    global $sauver_base, $fin_sauvegarde_base;
+    global $sauver_base, $fin_sauvegarde_base, $spip_version_affichee;
     include_spip('inc/saveauto_fonctions');
     $temps = time();
 	$err = '';
@@ -81,7 +81,7 @@ function inc_saveauto_dist(){
 
     //choix du nom
     $suffixe = '.sql';
-    $nom_fichier = $prefixe_save . $base . "_" . $annee. "_" . $mois. "_" . $jour . $suffixe;
+    $nom_fichier = $prefixe_save . $base . "_" . $annee. "_" . $mois. "_" . $jour . "-".$heure."_".$minutes. $suffixe;
     $chemin_fichier = $rep_bases . $nom_fichier;
     //recupere et separe tous les noms de tables dont on doit eviter de recuperer les donnees
     if (!empty($eviter)) $tab_eviter = explode(";", $eviter);
@@ -89,7 +89,7 @@ function inc_saveauto_dist(){
 
     // listing des tables
     $sql1 = "SHOW TABLES";
-    $res = spip_query($sql1);
+    $res = sql_query($sql1);
     if (!$res) {
         $err .= _T('saveauto:impossible_liste_tables')."<br>";
         return $err;
@@ -107,19 +107,52 @@ function inc_saveauto_dist(){
     }
     $_fputs = fwrite;
 
-    //ecriture entete du fichier : infos serveurs php/sql/http
+    /**
+     * Ecriture des entêtes du fichier de sauvegarde
+     * - Le nom de la base
+     * - Le nom du serveur
+     * - La date de génération
+     * - Le type de système d'exploitation
+     * - La version de PHP du serveur
+     * - La version de MySQL du serveur
+     * - L'adresse IP du client qui a généré la sauvegarde
+     * - La version de SPIP installée
+     * - La liste des plugins SPIP installés
+     * - Un commentaire
+     */
     saveauto_ecrire("# "._T('saveauto:fichier_genere'), $fp, $_fputs);
     if ($base) {
         saveauto_ecrire("# "._T('saveauto:base').$base, $fp, $_fputs);
     }
     saveauto_ecrire("# "._T('saveauto:serveur').$_SERVER['SERVER_NAME'], $fp, $_fputs);
-    saveauto_ecrire("# "._T('saveauto:date').$jour."/".$mois."/".$annee." : ".$heure."h".$minutes, $fp, $_fputs);
+    saveauto_ecrire("# "._T('saveauto:date').$jour."/".$mois."/".$annee." ".$heure."h".$minutes, $fp, $_fputs);
     if (defined('PHP_OS') && preg_match('/win/i', PHP_OS)) $os_serveur = "Windows";
     else $os_serveur = "Linux/Unix";
     saveauto_ecrire("# "._T('saveauto:os').$os_serveur, $fp, $_fputs);
     saveauto_ecrire("# "._T('saveauto:phpversion').phpversion(), $fp, $_fputs);
     saveauto_ecrire("# "._T('saveauto:mysqlversion').saveauto_mysql_version(), $fp, $_fputs);
     saveauto_ecrire("# "._T('saveauto:ipclient').$GLOBALS['ip'], $fp, $_fputs);
+    saveauto_ecrire("# "._T('saveauto:spip_version').$spip_version_affichee, $fp, $_fputs);
+
+    /**
+     * Lister les plugins activés
+     */
+	if ($cfg = @unserialize($GLOBALS['meta']['plugin'])) {
+		spip_log($cfg,'test');
+		$plugins = array_keys($cfg);
+		ksort($plugins);
+		foreach ($plugins as $plugin) {
+			$lsplugs[strtolower($plugin)][] = $alias[$v];
+			$versionplug[strtolower($plugin)] = $cfg[$plugin]['version'];
+		}
+	}
+	if ($lsplugs) {
+		$cntplugins = count($lsplugs);
+		$message_plugin = "# "._T('saveauto:plugins_utilises',array('nb'=>$cntplugins))."\n";
+		foreach ($lsplugs as $plugin => $c)
+			$message_plugin .= "# - $plugin (".$versionplug[$plugin].")"."\n";
+	}
+	saveauto_ecrire($message_plugin, $fp, $_fputs);
     saveauto_ecrire("# "._T('saveauto:compatible_phpmyadmin')."\n", $fp, $_fputs);
     saveauto_ecrire("# -------"._T('saveauto:debut_fichier')."----------", $fp, $_fputs);
 
@@ -137,8 +170,8 @@ function inc_saveauto_dist(){
                 saveauto_ecrire("DROP TABLE IF EXISTS `$tablename`;\n", $fp, $_fputs);
                 // requete de creation de la table
                 $query = "SHOW CREATE TABLE $tablename";
-                $resCreate = sql_query($query);
-                $row = sql_fetch($resCreate);
+                $resCreate = mysql_query($query);
+                $row = mysql_fetch_array($resCreate);
                 $schema = $row[1].";";
                 saveauto_ecrire("$schema\n", $fp, $_fputs);
             }
