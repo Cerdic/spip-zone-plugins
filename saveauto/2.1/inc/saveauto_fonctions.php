@@ -64,14 +64,12 @@ function saveauto_mail_attachement($to , $sujet , $message , $fichier, $nom, $re
 		$texte .= _T('saveauto:mail_fichier_lourd',array('fichier'=>$fichier));
 	}
 
-	$texte = nettoyer_caracteres_mail($texte);
-	$sujet = nettoyer_caracteres_mail($sujet);
+	if (! empty($reply)) $entete = "Reply-to: $reply\n";
 
-	//formatage des entetes
-    if (! empty($reply)) $entete = "Reply-to: $reply\n";
-    if (! empty($from)) $entete .= "From: $from\n";
+	$envoyer_mail = charger_fonction('envoyer_mail','inc');
 
-    return mail($to, $sujet, $texte.$attachement, $entete.$mail_mime);
+	$mail = $envoyer_mail($to, $sujet, $texte.$attachement, $from, $entete.$mail_mime);
+    return $mail;
 }
 
 function saveauto_mysql_version() {
