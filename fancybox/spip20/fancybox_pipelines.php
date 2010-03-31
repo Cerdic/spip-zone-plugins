@@ -25,9 +25,7 @@ function fancybox_insert_head($flux){
 		'frameheight' => '700'	
 	), $config);
 	// Insertion des librairies js
-	$flux .='<script src="'._DIR_LIB_FANCYBOX.'fancybox/jquery.fancybox-1.3.1.js" type="text/javascript"></script>';
-	if ($GLOBALS['meta']['fancybox']['molette']=='oui')
-		$flux .='<script src="'._DIR_LIB_FANCYBOX.'fancybox/jquery.mousewheel-3.0.2.pack.js" type="text/javascript"></script>';
+	$flux .='<script src="'.url_absolue(find_in_path('javascript/jquery.fancybox-1.2.6.js')).'" type="text/javascript"></script>';
 	$flux .='<script src="'.url_absolue(find_in_path('javascript/fancybox.js')).'" type="text/javascript"></script>';
 	// Init de la fancybox suivant la configuration
 	$flux .='
@@ -75,7 +73,7 @@ if (window.jQuery)
  })(jQuery);
 /* ]]> */</script>';
 	// Inclusion des styles propres a fancybox
-	$flux .='<link rel="stylesheet" href="'._DIR_LIB_FANCYBOX.'fancybox/jquery.fancybox-1.3.1.css" type="text/css" media="all" />';
+	$flux .='<link rel="stylesheet" href="'.url_absolue(find_in_path('styles/jquery.fancybox.css')).'" type="text/css" media="all" />';
 
 	return $flux;
 }
