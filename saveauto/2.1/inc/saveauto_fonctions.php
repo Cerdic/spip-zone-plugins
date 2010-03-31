@@ -23,7 +23,6 @@ function saveauto_trouve_table($table, $tableau_tables) {
 //Url : http://www.nexen.net
 //modifiee pour plus de souplesse sur les entetes
 function saveauto_mail_attachement($to , $sujet , $message , $fichier, $nom, $reply="", $from="") {
-	include_spip('inc/envoyer_mail');
     if (!function_exists('mail')) {
         echo _T('saveauto:config_inadaptee').' '._T('saveauto:mail_absent').'<br />';
         return false;
