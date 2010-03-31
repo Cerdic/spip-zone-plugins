@@ -1,1 +1,70 @@
-/* * */
+/* --------------------------------------------------------------
+
+   typo.css
+   Base typographique
+   Petronille - 2010
+
+-------------------------------------------------------------- */
+
+html { font-size: 100%; } /* Cf.: http://www.pompage.net/pompe/definir-des-tailles-de-polices-en-CSS/ */
+body { background: #fff; font: 1em/1.5em sans-serif; color: #666; }
+/*body * { font-size: 100%; font-weight: inherit; font-style: inherit; font-family: inherit; vertical-align: baseline; }*/
+
+/* Titraille / Intertitres */
+h1,h2,h3,h4,h5,h6,
+.h1,.h2,.h3,.h4,.h5,.h6 { margin: 0; padding: 0; font-size: 100%; font-weight: normal; }
+hr { height: 1px; margin: 1.5em 0; border: 0; background: #666; color: #666; }
+
+h1,.h1 { font-size: 3em; line-height: 1; margin-bottom: .5em; }
+h2,.h2 { font-size: 2em; margin-bottom: .75em; }
+h3,.h3 { font-size: 1.5em; line-height: 1; margin-bottom: 1em; }
+h4,.h4 { font-size: 1.2em; line-height: 1.25; margin-bottom: 1.25em; }
+h5,.h5 { font-size: 1em; font-weight: bold; margin-bottom: 1.5em; }
+h6,.h6 { font-size: 1em; font-weight: bold; }
+
+/* Enrichissements typographiques */
+strong { font-weight: bold; }
+em { font-style: italic; }
+small,.small { font-size: .9em; }
+abbr,acronym { border-bottom: 1px dotted; font-variant: small-caps; cursor: help; }
+dfn { font-weight: bold; font-style: italic; }
+del { text-decoration: line-through; }
+ins, ins * { color: red !important; text-decoration: none; }
+sup, sub { font-size: .8em; font-variant: normal; line-height: 0; }
+sup { vertical-align: super; }
+sub { vertical-align: sub;}
+
+/* Citations */
+q, blockquote { font-style: italic; }
+blockquote  { margin: 1.5em 3.333em; color: #666; }
+cite { background-color: #FFFCDF; font-style: italic; }
+
+address { font-style: italic; }
+
+pre,code,kbd,samp,tt { font: 1em 'andale mono','lucida console',monospace; }
+pre { margin: 1.5em 0; white-space: pre; }
+kbd { padding: .01em .3em; background-color: #666; color: #fff; }
+samp { font-weight: bold; }
+var { font-style: italic; }
+
+/* Listes */
+ul, ol, li, dl, dt, dd {}
+ul, ol, dt, dd { padding-left: 3.333em; }
+ol { list-style-type: decimal; }
+dl dt { font-weight: bold; }
+
+/* Tables */
+table { border-collapse: collapse; border-spacing: 0; }
+table,caption,th,td { vertical-align: middle; }
+caption,th,td { padding: 4px 5px; text-align: left; font-weight: normal; }
+caption { background: #FFC; caption-side: top; /* bottom pas pris en compte par IE */ }
+th { font-weight: bold; }
+thead th { background: #CCC; }
+tr.odd td { background: #DDD; }
+tr.even td { background: #EEE; }
+tfoot { font-style: italic; }
+
+/* Paragraphes */
+p, ul, ol, dl, dd, blockquote, address, pre, table, fieldset { margin-bottom: 1.5em; }
+
+/* end */
