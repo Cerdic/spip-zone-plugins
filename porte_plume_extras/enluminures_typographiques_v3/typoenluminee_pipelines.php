@@ -2,7 +2,7 @@
 
 // insert le css pour les styles supplementaires de la BTE dans le <head> du document (#INSERT_HEAD)
 function TypoEnluminee_insert_head($flux) {
-	if (!function_exists('lire_config'))
+	if (isset($GLOBALS['BarreTypoEnrichie_Preserve_Header']) OR !function_exists('lire_config'))
 		global $BarreTypoEnrichie_Preserve_Header;
 	else
 		$BarreTypoEnrichie_Preserve_Header = lire_config('bte/insertcss','Oui');
