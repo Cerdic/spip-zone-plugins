@@ -4,7 +4,7 @@
  * La fonction de sauvegarde complete
  */
 function inc_saveauto_dist(){
-    global $sauver_base, $fin_sauvegarde_base, $spip_version_affichee;
+    global $fin_sauvegarde_base, $spip_version_affichee;
     include_spip('inc/saveauto_fonctions');
     $temps = time();
 	$err = '';
@@ -44,7 +44,7 @@ function inc_saveauto_dist(){
         if (substr($entryName, 0, strlen($prefixe_save . $base)) == $prefixe_save . $base) {
             $date_fichier = filemtime($rep_bases . $entryName);
             if ($jours_obso > 0 && $temps > ($date_fichier + $jours_obso*3600*24)) {
-                @unlink($rep_bases . $entryName);
+                supprimer_fichier($rep_bases . $entryName);
             }
             else {
                 $entree[] = $entryName;
@@ -58,16 +58,6 @@ function inc_saveauto_dist(){
      * trie dans l'ordre decroissant les sauvegardes pour mettre la plus recente en index 0
      */
     rsort($entree);
-
-    if ($nbr_entree > 0) {
-        /**
-         * recuperer la date de la sauvegarde la plus recente
-         */
-        $derniere_maj = filemtime($rep_bases . $entree[0]);
-        if ($temps > ($frequence_maj*24*3600+$derniere_maj)) $sauver_base = true;
-    }
-    else $sauver_base = true;   //aucune sauvegarde trouvee !!!
-    if (!$sauver_base) return;
 
     /**
      * On sauvegarde
@@ -138,7 +128,6 @@ function inc_saveauto_dist(){
      * Lister les plugins activés
      */
 	if ($cfg = @unserialize($GLOBALS['meta']['plugin'])) {
-		spip_log($cfg,'test');
 		$plugins = array_keys($cfg);
 		ksort($plugins);
 		foreach ($plugins as $plugin) {
@@ -263,7 +252,7 @@ function saveauto_sauvegarde_zip($chemin_source,$fichier_final,$rep_bases){
 		return false;
 	}
 	else {
-		unlink($chemin_source);
+		supprimer_fichier($chemin_source);
 		return true;
 	}
 }
