@@ -11,5 +11,9 @@
 	<lien>http://www.spip-contrib.net/Un-slogan-pour-votre-site-SPIP-2-0</lien>
 	<prefix>slogan</prefix>
 	<fonctions>slogan_fonctions.php</fonctions>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>slogan_pipelines.php</inclure>
+	</pipeline>
 	<necessite id="SPIP" version="[2.0.10;]" />
 </plugin>
