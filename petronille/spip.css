@@ -1,0 +1,78 @@
+/* --------------------------------------------------------------
+
+   spip.css
+   Styles associes au code genere par SPIP
+   Petronille - 2010
+
+-------------------------------------------------------------- */
+
+/* Raccourcis typographiques de SPIP */
+i.spip {}
+strong.spip {}
+.spip_serif {}
+
+/* Intertitre */
+h3.spip { text-align: center; font-weight: bold; }
+hr.spip {}
+.puce, .spip_puce { /*vertical-align: middle; list-style-position: outside;*/ }
+
+/* Listes SPIP */
+ul.spip { list-style: square url(img/puce-li.gif) inside; }
+ol.spip { list-style: decimal inside; }
+ol.spip li { margin-bottom: 1.5em; }
+ul.spip ul { margin-bottom: 0; list-style-type: circle; list-style-image: url(img/puce-li-li.gif); }
+ul.spip li { margin-bottom: 0; }
+dl {}
+dt { clear: both; background: url(img/puce-dt.gif) no-repeat 1.5em; }
+dd {}
+
+/* Citations, code et poesie */
+p.spip {}
+p.spip_note {}
+blockquote.spip {}
+.spip_poesie {}
+.spip_poesie div { text-indent: -3.333em; margin-left: 3.333em; }
+.spip_code {}
+.spip_cadre {}
+
+/* Tableaux SPIP */
+table.spip {}
+table.spip caption { background: #FFC; }
+table.spip tr.row_first { background: #CCC; }
+table.spip tr.row_odd { background: #DDD; }
+table.spip tr.row_even { background: #EEE; }
+
+/* Logos, documents et images */
+img, .spip_logos { margin: 0; padding: 0; border: none; }
+dl.spip_documents,
+.spip_documents dt,
+.spip_documents dd { padding: 0; background: none; }
+.spip_documents { text-align: center; }
+.spip_documents_center,
+.spip_doc_titre,
+.spip_doc_descriptif { margin-right: auto; margin-left: auto; }
+.spip_documents_center { clear: both; display: block; width: 100%; margin: 1.5em auto; }
+.spip_documents_left { float: left; margin: .3em 1.5em 1.5em 0; }
+.spip_documents_right { float: right; margin: .3em 0 1.5em 1.5em; }
+.spip_doc_titre {}
+.spip_doc_descriptif { clear: both; }
+
+/* Images typographiques (via image_typo), URL a revoir... */
+.format_png { behavior: url(win_png.htc); }
+
+/* Modeles par defaut */
+.spip_modele { float: right; display: block; border: 1px dotted #666; width: 25%; }
+
+/* Paragraphes */
+div.spip, .spip_poesie, .spip_cadre, div.spip_code, .spip_documents_center { margin-bottom: 1.5em; }
+
+/* Liens de SPIP */
+a.spip_note { font-weight: bold; } /* liens vers notes de bas de page */
+a.spip_in {} /* liens internes */
+a.spip_mail {}
+a.spip_out {} /* liens sortants */
+a.spip_url {} /* liens url sortants */
+a.spip_glossaire {} /* liens vers encyclopedie */
+.on { font-weight: bold; } /* liens exposes */
+
+/* end */
