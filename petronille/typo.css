@@ -36,7 +36,7 @@ sub { vertical-align: sub;}
 
 /* Citations */
 q, blockquote { font-style: italic; }
-blockquote  { margin: 1.5em 3.333em; color: #666; }
+blockquote { margin: 1.5em 3.333em; }
 cite { background-color: #FFFCDF; font-style: italic; }
 
 address { font-style: italic; }
