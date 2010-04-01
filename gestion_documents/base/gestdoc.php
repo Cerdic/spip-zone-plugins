@@ -101,6 +101,11 @@ function gestdoc_check_type_media(){
 	sql_updateq('spip_types_documents',array('media'=>'video'),"mime_type='application/mp4'");
 }
 function gestdoc_check_statuts(){
+	$trouver_table = charger_fonction('trouver_table','base');
+	$desc = $trouver_table('documents');
+	if (!isset($desc['field']['statut']))
+		return;
+
 	$docs = array_map('reset',sql_allfetsel('id_document','spip_documents',"statut='0'"));
 	if (count($docs)){
 		include_spip('action/editer_document');
