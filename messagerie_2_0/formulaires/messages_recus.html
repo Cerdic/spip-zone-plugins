@@ -26,9 +26,9 @@ parametre : url d'action ]
 <option value='unread'><:ecrire_message:selection_non_lus:></option>
 <option value='all'><:ecrire_message:selection_tous:></option>
 </select>
-<input type="submit" name='effacer' value="<:ecrire_message:label_effacer:>" />
-<input type="submit" name='marquer_lus' value="<:ecrire_message:label_marquer_lus:>" />
-<input type="submit" name='marquer_non_lus' value="<:ecrire_message:label_marquer_non_lus:>" />
+<input type="submit" name='effacer' class="submit" value="<:ecrire_message:label_effacer:>" />
+<input type="submit" name='marquer_lus' class="submit" value="<:ecrire_message:label_marquer_lus:>" />
+<input type="submit" name='marquer_non_lus' class="submit" value="<:ecrire_message:label_marquer_non_lus:>" />
 </li></ul>
 </fieldset>
 [(#INCLURE{fond=liste/messages_recus}{ajax}{id_auteur=#SESSION{id_auteur}}{id_message=#EVAL{_request('id_message')}}{date_last=#DATE_HEURE}{nombre=#GRAND_TOTAL}{env})]
