@@ -7,7 +7,7 @@
 [(#GET{self}|parametre_url{date_debut,1900-01-01}|aoustrong{<:agenda:evenements_depuis_debut:>,#ENV{date_debut}|=={1900-01-01},noajax}) |]
 [(#GET{self}|aoustrong{<:agenda:evenements_a_venir:>,#ENV{date_debut}|=={#ENV{date}|affdate{Y-m-d}},noajax}) ]
 </div>
-<ul class='liste_items evenements'>
+<ul class='liste_items liste-items evenements'>
 	<BOUCLE_agenda(EVENEMENTS){par date_debut}{pagination #ENV{pagine,20}}{age_relatif_debut<=0}{id_evenement?}{id_article?}{id_rubrique?}{id_mot?}{id_evenement_source?}>
 	<li class='item[ (#EXPOSE)][ (#ID_EVENEMENT_SOURCE|oui)repetition]'><div class='jour'>[(#DATE_DEBUT|affdate_jourcourt|unique)]</div>
 		[(#MODELE{evenement_vevent}|trim|sinon{'?'})]

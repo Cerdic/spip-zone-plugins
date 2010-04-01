@@ -146,4 +146,15 @@ function agenda_afficher_nombre_objets_associes_a($flux){
 	return $flux;
 }
 
+/**
+ * Declarer evenement comme un objet interpretable dans les url
+ * ?evenement12
+ * 
+ * @param array $objets
+ * @return array
+ */
+function agenda_declarer_url_objets($objets){
+	$objets[] = 'evenement';
+	return $objets;
+}
 ?>
