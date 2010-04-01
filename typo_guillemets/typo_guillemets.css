@@ -1,4 +1,4 @@
-/* Spécifie des paires de guillemets sur plusieurs niveaux pour chaque langue */
+/* Specifie des paires de guillemets sur plusieurs niveaux pour chaque langue */
 /* Cf.: http://www.yoyodesign.org/doc/w3c/css2/generate.html#quotes-specify */
 q { quotes: '"' '"' "'" "'" }
 q:lang(fr) { quotes: "\00AB\A0" "\A0\00BB" "\201C" "\201D" "\2018" "\2019"; }
@@ -8,7 +8,7 @@ q:lang(it) { quotes: "\00AB\A0" "\A0\00BB" "\201C" "\201D"; }
 q:lang(de) { quotes: "\00BB" "\00AB" ">" "<" }
 q:lang(no) { quotes: "\00AB\A0" "\A0\00BB" "<" ">" }
 
-/* Insère des guillemets avant et après le contenu d'un élément Q */
+/* Insere des guillemets avant et apres le contenu d'un element Q */
 q:before { content: open-quote; } 
 q:after { content: close-quote; }
 
