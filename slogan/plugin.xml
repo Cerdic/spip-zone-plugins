@@ -1,12 +1,13 @@
 <plugin>
 	<nom>SLOGAN</nom>
-	<auteur>Cedric MORIN (ancienne version du plugin par Mehdi Cherifi)</auteur>
+	<auteur><multi>[fr]Cedric MORIN (ancienne version du plugin par Mehdi Cherifi)[de]Cedric MORIN (die erste Version des Plugins stammte von Mehdi Cherifi)</multi></auteur>
 	<licence>GPL</licence>
 	<version>2.0.2</version>
 	<etat>stable</etat>
 	<description>
-	{{Ajouter balise #SLOGAN_SITE_SPIP}}<br /><br />
-	Ce plugin vous permet d'ajouter une balise ind&#233;pendante propre au site spip : #SLOGAN_SITE_SPIP.
+	<multi>[fr]{{Ajouter balise #SLOGAN_SITE_SPIP}}<br /><br />
+	Ce plugin vous permet d'ajouter une balise ind&#233;pendante propre au site spip : #SLOGAN_SITE_SPIP.[de]{{Erg&auml;nzt den Tag #SLOGAN_SITE_SPIP}}<br /><br />
+	Dieses Plugin erm&ouml;glicht ihnen, den SPIP-Tag  #SLOGAN_SITE_SPIP in ihren Skeletten zu verwenden.</multi>
 	</description>
 	<lien>http://www.spip-contrib.net/Un-slogan-pour-votre-site-SPIP-2-0</lien>
 	<prefix>slogan</prefix>
