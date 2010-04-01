@@ -14,7 +14,7 @@ function notifications_saveauto_save_dist($quoi, $id, $options){
 				,
 					'data'=>$tous)
 			);
-			$sujet_mail = "[".typo($GLOBALS['meta']['nom_site'])."] "._T('saveauto:erreur_mail_sujet_')." "._T('saveauto:base').$cfg['base'];
+			$sujet_mail = "[".typo($GLOBALS['meta']['nom_site'])."] "._T('saveauto:erreur_mail_sujet')." "._T('saveauto:base').$cfg['base'];
 			$msg_mail = _T('saveauto:sauvegarde_erreur_mail')."\n\r"._T('saveauto:base').$cfg['base']."\n\r"._T('saveauto:serveur').$_SERVER['SERVER_NAME']."\n\r"._T('saveauto:date').date('d/m/Y H:i')
 						."\n\r"._T('saveauto:erreur_sauvegarde_intro')."\n\r".$options['err'];
 			notifications_envoyer_mails($destinataires, $msg_mail,$sujet_mail);
