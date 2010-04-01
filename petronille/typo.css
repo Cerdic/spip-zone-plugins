@@ -29,7 +29,7 @@ small,.small { font-size: .9em; }
 abbr,acronym { border-bottom: 1px dotted; font-variant: small-caps; cursor: help; }
 dfn { font-weight: bold; font-style: italic; }
 del { text-decoration: line-through; }
-ins, ins * { color: red !important; text-decoration: none; }
+ins, ins * { color: red; text-decoration: none; }
 sup, sub { font-size: .8em; font-variant: normal; line-height: 0; }
 sup { vertical-align: super; }
 sub { vertical-align: sub;}
@@ -41,7 +41,7 @@ cite { background-color: #FFFCDF; font-style: italic; }
 
 address { font-style: italic; }
 
-pre,code,kbd,samp,tt { font: 1em 'andale mono','lucida console',monospace; }
+pre,code,kbd,samp,var,tt { font: 1em 'andale mono','lucida console',monospace; }
 pre { margin: 1.5em 0; white-space: pre; }
 kbd { padding: .01em .3em; background-color: #666; color: #fff; }
 samp { font-weight: bold; }
@@ -49,17 +49,17 @@ var { font-style: italic; }
 
 /* Listes */
 ul, ol, li, dl, dt, dd {}
-ul, ol, dt, dd { padding-left: 3.333em; }
+ul, ol, dt, dd { /*padding-left: 3.333em;*/ }
 ol { list-style-type: decimal; }
 dl dt { font-weight: bold; }
 
-/* Tables */
+/* Tableaux */
 table { border-collapse: collapse; border-spacing: 0; }
 table,caption,th,td { vertical-align: middle; }
-caption,th,td { padding: 4px 5px; text-align: left; font-weight: normal; }
-caption { background: #FFC; caption-side: top; /* bottom pas pris en compte par IE */ }
+caption,th,td { padding: 4px 5px; text-align: left; font-weight: normal; border: 1px solid; }
+caption { background: #CCC; border-bottom: 0; caption-side: top; /* bottom pas pris en compte par IE */ }
 th { font-weight: bold; }
-thead th { background: #CCC; }
+thead th { background: #FFC; }
 tr.odd td { background: #DDD; }
 tr.even td { background: #EEE; }
 tfoot { font-style: italic; }

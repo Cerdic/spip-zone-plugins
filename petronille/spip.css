@@ -12,7 +12,7 @@ strong.spip {}
 .spip_serif {}
 
 /* Intertitre */
-h3.spip { text-align: center; font-weight: bold; }
+h3.spip { /*text-align: center; font-weight: bold;*/ }
 hr.spip {}
 .puce, .spip_puce { /*vertical-align: middle; list-style-position: outside;*/ }
 
@@ -37,10 +37,10 @@ blockquote.spip {}
 
 /* Tableaux SPIP */
 table.spip {}
-table.spip caption { background: #FFC; }
-table.spip tr.row_first { background: #CCC; }
-table.spip tr.row_odd { background: #DDD; }
-table.spip tr.row_even { background: #EEE; }
+table.spip caption {}
+table.spip tr.row_first {}
+table.spip tr.row_odd {}
+table.spip tr.row_even {}
 
 /* Logos, documents et images */
 img, .spip_logos { margin: 0; padding: 0; border: none; }
@@ -61,7 +61,7 @@ dl.spip_documents,
 .format_png { behavior: url(win_png.htc); }
 
 /* Modeles par defaut */
-.spip_modele { float: right; display: block; border: 1px dotted #666; width: 25%; }
+.spip_modele { float: right; display: block; width: 25%; border: 1px dotted #666; }
 
 /* Paragraphes */
 div.spip, .spip_poesie, .spip_cadre, div.spip_code, .spip_documents_center { margin-bottom: 1.5em; }
