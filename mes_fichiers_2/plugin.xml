@@ -1,12 +1,12 @@
 <plugin>
 	<nom>Mes fichiers 2</nom>
 	<auteur>SarkASmeL, d'apr&egrave;s la version initiale de James</auteur>
-	<version>0.2</version>
+	<version>0.3</version>
 	<etat>dev</etat>
 	<licence>GPL 3</licence>
 	<icon>images/mes_fichiers-64.png</icon>
 	<description>
-Ce plugin fabrique un fichier d'archives contenant les donn&eacute;es de personnalisation du site comme le dernier dump de sauvegarde de la base, le(s) dossier(s) des squelettes nomm&eacute;s, le dossier images... 
+Ce plugin fabrique un fichier d'archives contenant les donn&eacute;es de personnalisation du site comme le dernier dump de sauvegarde de la base, le(s) dossier(s) des squelettes nomm&eacute;s, le dossier images...
 Le fichier d'archives est cr&eacute;&eacute; dans <code>tmp/mes_fichiers/</code> et se nomme <code>mf2_aaaammjj_hhmmss.zip</code>.
 
 Le plugin rajoute un onglet dans la page de maintenance du site.
@@ -15,11 +15,16 @@ Le plugin rajoute un onglet dans la page de maintenance du site.
 
 	<prefix>mes_fichiers</prefix>
 	<options>mes_fichiers_options.php</options>
+	<pipeline>
+		<nom>taches_generales_cron</nom>
+		<inclure>genie/mes_fichiers.php</inclure>
+	</pipeline>
 	<onglet id='mes_fichiers' parent='administration'>
 		<icone>images/mes_fichiers-24.png</icone>
 		<titre>mes_fichiers:titre_onglet</titre>
 	</onglet>
-	<necessite id="SPIP" version='[2.0.0;]' />
-	<necessite id='spip_bonux' version='[1.0;]' />
+	<necessite id="SPIP" version='[2.1.0-rc;]' />
+	<necessite id='spip_bonux' version='[1.8.1;]' />
+	<necessite id='cfg' version='[1.14.4;]' />
 	<categorie>maintenance</categorie>
 </plugin>

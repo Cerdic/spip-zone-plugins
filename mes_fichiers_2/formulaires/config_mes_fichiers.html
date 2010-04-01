@@ -1,0 +1,55 @@
+<!-- autoriser=webmestre -->
+<!-- refus=<:cfg:refus_configuration_webmestre:> -->
+<!-- nom=mes_fichiers -->
+#CACHE{0}
+<div class="formulaire_spip formulaire_config formulaire_config_saveauto">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#SELF">
+		<div>
+			#ACTION_FORMULAIRE{SELF}
+			<ul>
+				<li class="editer_prefixe">
+					<label for="prefixe"><:mes_fichiers:label_cfg_prefixe:></label>
+					<input type="text" name="prefixe" class="text" id="prefixe" value="[(#ENV{prefixe}|sinon{mf2})]" />
+				</li>
+				<li class="fieldset">
+					<fieldset>
+						<h3 class="legend"><:mes_fichiers:legende_cfg_sauvegarde_reguliere:></h3>
+						<ul>
+							<li class="editer_sauvegarde_reguliere">
+								<label><:mes_fichiers:label_cfg_sauvegarde_reguliere:></label>
+								<div class="choix">
+									 <input type="radio" name="sauvegarde_reguliere" id="sauvegarde_reguliere_true" value="true"[(#ENV{sauvegarde_reguliere}|=={true}|oui)checked="checked"] />
+									 <label for="sauvegarde_reguliere_true"><:mes_fichiers:oui:></label>
+								</div>
+								<div class="choix">
+									 <input type="radio" name="sauvegarde_reguliere" id="sauvegarde_reguliere_false" value="false"[(#ENV{sauvegarde_reguliere}|!={true}|oui)checked="checked"] />
+									 <label for="sauvegarde_reguliere_false"><:mes_fichiers:non:></label>
+								</div>
+							</li>
+							[(#CONFIG{mes_fichiers/sauvegarde_reguliere}|=={true}|oui)
+							<li class="editer_frequence">
+								<label for="frequence"><:mes_fichiers:label_cfg_frequence:></label>
+								<input type="text" name="frequence" class="text" id="frequence" value="[(#ENV{frequence,1})]" style="width: 30px;"> <:mes_fichiers:jours:>
+							</li>
+							<li class="editer_duree_sauvegarde">
+								<label for="duree_sauvegarde"><:mes_fichiers:label_cfg_duree_sauvegarde:></label>
+								<input type="text" name="duree_sauvegarde" class="text" id="duree_sauvegarde" value="[(#ENV{duree_sauvegarde,15})]" style="width: 30px;"> <:mes_fichiers:jours:>
+							</li>]
+						</ul>
+					</fieldset>
+				</li>
+			</ul>
+			<p class="boutons">
+				<input type="submit" name="_cfg_ok" class="submit" value="<:bouton_valider:>" />
+				<input type="submit" name="_cfg_delete" class="reset" value="<:effacer:>" />
+			</p>
+		</div>
+	</form>
+</div>
+<div>
+	<h3>Debug</h3>
+	#CFG_ARBO{saveauto}
+</div>

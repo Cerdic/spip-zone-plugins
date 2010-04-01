@@ -1,11 +1,11 @@
 <script type="text/javascript">
-//<![CDATA[ 
+//<![CDATA[
 	jQuery(document).ready(function() {
 		jQuery("a#cocher_tout").click(function () {
-			jQuery((jQuery.fn.jquery < '1.2.6') ? '#liste_a_sauver input[@type=checkbox]' : '#liste_a_sauver input[type=checkbox]').attr('checked', 'checked');
+			jQuery('#liste_a_sauver input[type=checkbox]').attr('checked', 'checked');
 	    });
 		jQuery("a#decocher_tout").click(function () {
-			jQuery((jQuery.fn.jquery < '1.2.6') ? '#liste_a_sauver input[@type=checkbox]' : '#liste_a_sauver input[type=checkbox]').attr('checked', false);
+			jQuery('#liste_a_sauver input[type=checkbox]').attr('checked', false);
 	    });
 	});
 //]]>

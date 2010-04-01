@@ -19,10 +19,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'colonne_actions' => '&nbsp;',
 
 // I
-'info_sauver' => 'Cette option fabrique un fichier d\'archives contenant les donn&eacute;es de personnalisation du site comme le dernier dump de sauvegarde de la base, le(s) dossier(s) des squelettes nomm&eacute;s, le dossier images... 
+'info_sauver' => 'Cette option fabrique un fichier d\'archives contenant les donn&eacute;es de personnalisation du site comme le dernier dump de sauvegarde de la base, le(s) dossier(s) des squelettes nomm&eacute;s, le dossier images...
 	Le fichier d\'archives est cr&eacute;&eacute; dans <i>tmp/mes_fichiers/</i> et se nomme <i>mf2_aaaammjj_hhmmss.zip</i>.
 	La liste exhaustive des fichiers et dossiers pouvant &ecirc;tre sauvegard&eacute;s est affich&eacute;e ci-dessous:',
 'info_telecharger' => 'Cette option permet de t&eacute;l&eacute;charger un des fichiers d\'archives disponibles parmi la liste affich&eacute;e ci-dessous:',
+
+// J
+'jours' => 'jours',
+
+// L
+'label_cfg_duree_sauvegarde' => 'Dur&eacute;e de conservation des sauvegardes',
+'label_cfg_frequence' => 'Fr&eacute;quence de sauvegarde',
+'label_cfg_prefixe' => 'Pr&eacute;fixe utilis&eacute; pour le nom de fichier',
+'label_cfg_sauvegarde_reguliere' => 'Faire une sauvegarde r&eacute;guli&egrave;re',
+'legende_cfg_sauvegarde_reguliere' => 'Sauvegarder r&eacute;guli&egrave;rement',
+
 
 // M
 'message_rien_a_sauver' => 'Aucun fichier ni dossier &agrave; sauvegarder.',
@@ -36,6 +47,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'message_zip_sans_contenu' => 'Aucune information n\'est disponible sur le contenu de cette archive.',
 'message_zip_auteur_indetermine' => 'Non d&eacute;termin&eacute;',
 'message_zip_auteur_cron' => 'Tache automatique',
+
+// N
+'non' => 'non',
+
+// O
+'oui' => 'oui',
 
 // R
 'resume_table_telecharger' => 'Liste des archives disponibles au t&eacute;l&eacute;chargement',

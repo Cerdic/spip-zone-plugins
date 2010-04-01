@@ -3,7 +3,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function action_mes_fichiers_telecharger() {
 
-	// SŽcurisation: aucun argument attendu
+	// Securisation: aucun argument attendu
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 	if (!@is_readable($arg)) {

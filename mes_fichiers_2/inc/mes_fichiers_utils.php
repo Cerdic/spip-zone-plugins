@@ -8,7 +8,7 @@ function mes_fichiers_a_sauver() {
 	$htaccess = defined('_ACCESS_FILE_NAME') ? _DIR_RACINE._ACCESS_FILE_NAME : _DIR_RACINE.'.htaccess';
 	$IMG = defined('_DIR_IMG') ? _DIR_IMG: _DIR_RACINE.'IMG/';
 	$tmp_dump = defined('_DIR_DUMP') ? _DIR_DUMP: _DIR_RACINE.'tmp/dump/';
-		
+
 	$liste = array();
 
 	// le fichier d'options si il existe
@@ -52,7 +52,8 @@ function mes_fichiers_a_sauver() {
 
 // Renvoie la liste des fichiers et repertoires a sauver classee par date inverse (max 20)
 function mes_fichiers_a_telecharger() {
-	$liste = preg_files(_DIR_MES_FICHIERS . 'mf2_', 20);
+	$prefixe = lire_config('mes_fichiers/prefixe','mf2');
+	$liste = preg_files(_DIR_MES_FICHIERS . $prefixe.'_', 20);
 	return array_reverse($liste);
 }
 
@@ -66,7 +67,6 @@ function mes_fichiers_resumer_zip($zip) {
 	include_spip('inc/pclzip');
 	$fichier_zip = new PclZip($zip);
 	$proprietes = $fichier_zip->properties();
-	
 	$resume = NULL;
 	if ($proprietes == 0) {
 		$resume .= _T('mes_fichiers:message_zip_propriete_nok');
@@ -75,20 +75,22 @@ function mes_fichiers_resumer_zip($zip) {
 	else {
 		$comment = unserialize($proprietes['comment']);
 		$liste = $comment['contenu'];
-		$id_auteur = $comment['auteur']; 
+		$id_auteur = $comment['auteur'];
 
 		// On gere la compatibilite avec la structure des commentaires des versions < 0.2
 		$auteur = _T('mes_fichiers:message_zip_auteur_indetermine');
 		if ((!id_auteur) && (!$liste))
 			$liste = $comment;
 		else
-			if ($id_auteur) {
+			if (intval($id_auteur)) {
 				$select = array('nom');
 				$from = array('spip_auteurs AS t1');
 				$where = array('t1.id_auteur='.sql_quote($id_auteur));
 				$query_auteur = sql_select($select, $from, $where);
 				if ($row = sql_fetch($query_auteur))
 					$auteur = $row['nom'];
+			}else{
+				$auteur = $id_auteur;
 			}
 		$resume .= _T('mes_fichiers:resume_zip_statut').' : '.$proprietes['status'].'<br />';
 		$resume .= _T('mes_fichiers:resume_zip_auteur').' : '.$auteur.'<br />';
@@ -103,14 +105,14 @@ function mes_fichiers_resumer_zip($zip) {
 			$resume .= '<li>' . _T('mes_fichiers:message_zip_sans_contenu') . '</li>';
 		$resume .= '</ul>';
 	}
-	return $resume;	
+	return $resume;
 }
 
 // Renvoie la liste des fichiers et repertoires a sauver
 function mes_fichiers_voir_zip($zip) {
 	include_spip('inc/pclzip');
 	$fichier_zip = new PclZip($zip);
-  
+
 	if (($list = $fichier_zip->listContent()) == 0) {
 		spip_log('*** MES_FICHIERS (mes_fichiers_voir_zip) ERREUR '.$fichier_zip->errorInfo(true));
 	}
