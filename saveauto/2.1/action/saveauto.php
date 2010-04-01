@@ -17,8 +17,11 @@ function action_saveauto_dist(){
 	$sauver = charger_fonction('saveauto','inc');
 	$err = $sauver();
 
-	$redirect= _request('redirect');
+	$redirect = _request('redirect') ? _request('redirect') : self();
 	if($redirect){
+		if(!$err)
+			$err = '';
+
 		$redirect = parametre_url($redirect,'err',$err,'&');
 		redirige_par_entete($redirect);
 	}

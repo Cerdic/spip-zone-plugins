@@ -4,10 +4,9 @@
  * La fonction de sauvegarde complete de la base de donnee
  */
 function inc_saveauto_dist(){
-    global $fin_sauvegarde_base, $spip_version_affichee;
+    global $spip_version_affichee;
     include_spip('inc/saveauto_fonctions');
     $temps = time();
-	$err = '';
 
     /**
      * recuperer les $prefix_meta['nom_variable' => 'valeur_variable', ...]
@@ -32,12 +31,10 @@ function inc_saveauto_dist(){
     $rep_bases = _DIR_RACINE.$rep_bases;
     if (!is_dir($rep_bases)) {
         $err .= _T('saveauto:erreur_repertoire_inexistant',array('rep' => $rep_bases));
-        return $err;
     }
 
-    if(spip_fopen_lock($rep_bases.'.ok', 'a',LOCK_EX) === false){
+    if(!$err && spip_fopen_lock($rep_bases.'.ok', 'a',LOCK_EX) === false){
     	$err .= _T('saveauto:erreur_repertoire_inaccessible',array('rep' => $rep_bases));
-        return $err;
     }
 
     /**
@@ -55,177 +52,190 @@ function inc_saveauto_dist(){
 		}
     }
 
-    /**
-     * On sauvegarde
-     * calcul de la date
-     */
-    $jour = date("d", $temps); //format numerique : 01->31
-    $annee = date("Y", $temps); //format numerique : 4 chiffres
-    $mois = date("m", $temps);
-    $heure = date("H", $temps);
-    $minutes = date("i", $temps);
+    if(!$err){
+	    /**
+	     * On sauvegarde
+	     * calcul de la date
+	     */
+	    $jour = date("d", $temps); //format numerique : 01->31
+	    $annee = date("Y", $temps); //format numerique : 4 chiffres
+	    $mois = date("m", $temps);
+	    $heure = date("H", $temps);
+	    $minutes = date("i", $temps);
 
-    //choix du nom
-    $suffixe = '.sql';
-    $nom_fichier = $prefixe_save . $base . "_" . $annee. "_" . $mois. "_" . $jour . "-".$heure."_".$minutes. $suffixe;
-    $chemin_fichier = $rep_bases . $nom_fichier;
-    //recupere et separe tous les noms de tables dont on doit eviter de recuperer les donnees
-    if (!empty($eviter)) $tab_eviter = explode(";", $eviter);
-    if (!empty($accepter)) $tab_accepter = explode(";", $accepter);
+	    //choix du nom
+	    $suffixe = '.sql';
+	    $nom_fichier = $prefixe_save . $base . "_" . $annee. "_" . $mois. "_" . $jour . "-".$heure."_".$minutes. $suffixe;
+	    $chemin_fichier = $rep_bases . $nom_fichier;
+	    //recupere et separe tous les noms de tables dont on doit eviter de recuperer les donnees
+	    if (!empty($eviter)) $tab_eviter = explode(";", $eviter);
+	    if (!empty($accepter)) $tab_accepter = explode(";", $accepter);
 
-    // listing des tables
-    $sql1 = "SHOW TABLES";
-    $res = sql_query($sql1);
-    if (!$res) {
-        $err .= _T('saveauto:impossible_liste_tables')."<br>";
-        return $err;
-    }
-    $num_rows = sql_count($res);
-    $i = 0;
+	    // listing des tables
+	    $sql1 = "SHOW TABLES";
+	    $res = sql_query($sql1);
+	    if (!$res) {
+	        $err .= _T('saveauto:impossible_liste_tables')."<br>";
+	        return $err;
+	    }
+	    $num_rows = sql_count($res);
+	    $i = 0;
 
-    /**
-     * creation du fichier
-     */
-    $contenu = '';
+	    /**
+	     * creation du fichier
+	     */
+	    $contenu = '';
 
-    /**
-     * Ecriture des entêtes du fichier de sauvegarde
-     * - Le nom de la base
-     * - Le nom du serveur
-     * - La date de génération
-     * - Le type de système d'exploitation
-     * - La version de PHP du serveur
-     * - La version de MySQL du serveur
-     * - L'adresse IP du client qui a généré la sauvegarde
-     * - La version de SPIP installée
-     * - La liste des plugins SPIP installés
-     * - Un commentaire
-     */
-    $contenu .= "# "._T('saveauto:fichier_genere');
-    if ($base) {
-        $contenu .= "# "._T('saveauto:base').$base."\n";
-    }
-    $contenu .= "# "._T('saveauto:serveur').$_SERVER['SERVER_NAME']."\n";
-    $contenu .= "# "._T('saveauto:date').$jour."/".$mois."/".$annee." ".$heure."h".$minutes."\n";
-    if (defined('PHP_OS') && preg_match('/win/i', PHP_OS)) $os_serveur = "Windows";
-    else $os_serveur = "Linux/Unix";
-    $contenu .= "# "._T('saveauto:os').$os_serveur."\n";
-    $contenu .= "# "._T('saveauto:phpversion').phpversion()."\n";
-    $contenu .= "# "._T('saveauto:mysqlversion').saveauto_mysql_version()."\n";
-    $contenu .= "# "._T('saveauto:ipclient').$GLOBALS['ip']."\n";
-    $contenu .= "# "._T('saveauto:spip_version').$spip_version_affichee."\n";
+	    /**
+	     * Ecriture des entêtes du fichier de sauvegarde
+	     * - Le nom de la base
+	     * - Le nom du serveur
+	     * - La date de génération
+	     * - Le type de système d'exploitation
+	     * - La version de PHP du serveur
+	     * - La version de MySQL du serveur
+	     * - L'adresse IP du client qui a généré la sauvegarde
+	     * - La version de SPIP installée
+	     * - La liste des plugins SPIP installés
+	     * - Un commentaire
+	     */
+	    $contenu .= "# "._T('saveauto:fichier_genere');
+	    if ($base) {
+	        $contenu .= "# "._T('saveauto:base').$base."\n";
+	    }
+	    $contenu .= "# "._T('saveauto:serveur').$_SERVER['SERVER_NAME']."\n";
+	    $contenu .= "# "._T('saveauto:date').$jour."/".$mois."/".$annee." ".$heure."h".$minutes."\n";
+	    if (defined('PHP_OS') && preg_match('/win/i', PHP_OS)) $os_serveur = "Windows";
+	    else $os_serveur = "Linux/Unix";
+	    $contenu .= "# "._T('saveauto:os').$os_serveur."\n";
+	    $contenu .= "# "._T('saveauto:phpversion').phpversion()."\n";
+	    $contenu .= "# "._T('saveauto:mysqlversion').saveauto_mysql_version()."\n";
+	    $contenu .= "# "._T('saveauto:ipclient').$GLOBALS['ip']."\n";
+	    $contenu .= "# "._T('saveauto:spip_version').$spip_version_affichee."\n";
 
-    /**
-     * Lister les plugins activés
-     */
-	if ($cfg = @unserialize($GLOBALS['meta']['plugin'])) {
-		$plugins = array_keys($cfg);
-		ksort($plugins);
-		foreach ($plugins as $plugin) {
-			$lsplugs[strtolower($plugin)][] = $alias[$v];
-			$versionplug[strtolower($plugin)] = $cfg[$plugin]['version'];
+	    /**
+	     * Lister les plugins activés
+	     */
+		if ($cfg = @unserialize($GLOBALS['meta']['plugin'])) {
+			$plugins = array_keys($cfg);
+			ksort($plugins);
+			foreach ($plugins as $plugin) {
+				$lsplugs[strtolower($plugin)][] = $alias[$v];
+				$versionplug[strtolower($plugin)] = $cfg[$plugin]['version'];
+			}
 		}
-	}
-	if ($lsplugs) {
-		$cntplugins = count($lsplugs);
-		$message_plugin = "# "._T('saveauto:plugins_utilises',array('nb'=>$cntplugins))."\n";
-		foreach ($lsplugs as $plugin => $c)
-			$message_plugin .= "# - $plugin (".$versionplug[$plugin].")"."\n";
-	}
-	$contenu .= $message_plugin."\n";
-    $contenu .= "# "._T('saveauto:compatible_phpmyadmin')."\n"."\n";
-    $contenu .= "# -------"._T('saveauto:debut_fichier')."----------"."\n";
+		if ($lsplugs) {
+			$cntplugins = count($lsplugs);
+			$message_plugin = "# "._T('saveauto:plugins_utilises',array('nb'=>$cntplugins))."\n";
+			foreach ($lsplugs as $plugin => $c)
+				$message_plugin .= "# - $plugin (".$versionplug[$plugin].")"."\n";
+		}
+		$contenu .= $message_plugin."\n";
+	    $contenu .= "# "._T('saveauto:compatible_phpmyadmin')."\n"."\n";
+	    $contenu .= "# -------"._T('saveauto:debut_fichier')."----------"."\n";
 
-    while ($i < $num_rows) {
-        $tablename = mysql_tablename($res, $i);
+	    while ($i < $num_rows) {
+	        $tablename = mysql_tablename($res, $i);
 
-        //selectionne la table avec nom qui correspond a $accepter (ou toutes si $accepter vide)
-        //selectionne la table avec nom qui ne correspond pas a $eviter (ou toutes si $eviter vide)
-        // saveauto_trouve_table($tablename, $tab_accepter) retourne TRUE si un des elements de $tab_accepter correspond a une partie de $tablename
-        if ((empty($accepter) OR saveauto_trouve_table($tablename, $tab_accepter))
-            AND (empty($eviter) OR !(saveauto_trouve_table($tablename, $tab_eviter)))) {
-            //sauve la structure
-            if ($structure) {
-                $contenu .= "\n# "._T('saveauto:structure_table').$tablename."\n";
-                $contenu .= "DROP TABLE IF EXISTS `$tablename`;\n"."\n";
-                // requete de creation de la table
-                $query = "SHOW CREATE TABLE $tablename";
-                $resCreate = mysql_query($query);
-                $row = mysql_fetch_array($resCreate);
-                $schema = $row[1].";";
-                $contenu .= "$schema\n"."\n";
-            }
-            // sauve les donnees
-            if ($donnees) {
-                $contenu .= "# "._T('saveauto:donnees_table').$tablename."\n";
-                $resData = sql_select('*',$tablename);
-                //peut survenir avec la corruption d'une table, on previent
-                if ($connect_statut == "0minirezo" && (!$resData)) {
-                    $err .= _T('probleme_donnees').$tablename._T('saveauto:corruption')."<br />";
-                }
-                else {
-                    if (sql_count($resData) > 0) {
-                        $sFieldnames = "";
-                        if ($insertComplet) {
-                            $num_fields = mysql_num_fields($resData);
-                            for($j=0; $j < $num_fields; $j++) {
-                                $sFieldnames .= "`".mysql_field_name($resData, $j) ."`";
-                                //on ajoute a la fin une virgule si necessaire
-                                if ($j<$num_fields-1) $sFieldnames .= ", ";
-                            }
-                            $sFieldnames = "($sFieldnames)";
-                        }
-                        $sInsert = "INSERT INTO `$tablename` $sFieldnames values ";
+	        //selectionne la table avec nom qui correspond a $accepter (ou toutes si $accepter vide)
+	        //selectionne la table avec nom qui ne correspond pas a $eviter (ou toutes si $eviter vide)
+	        // saveauto_trouve_table($tablename, $tab_accepter) retourne TRUE si un des elements de $tab_accepter correspond a une partie de $tablename
+	        if ((empty($accepter) OR saveauto_trouve_table($tablename, $tab_accepter))
+	            AND (empty($eviter) OR !(saveauto_trouve_table($tablename, $tab_eviter)))) {
+	            //sauve la structure
+	            if ($structure) {
+	                $contenu .= "\n# "._T('saveauto:structure_table').$tablename."\n";
+	                $contenu .= "DROP TABLE IF EXISTS `$tablename`;\n"."\n";
+	                // requete de creation de la table
+	                $query = "SHOW CREATE TABLE $tablename";
+	                $resCreate = mysql_query($query);
+	                $row = mysql_fetch_array($resCreate);
+	                $schema = $row[1].";";
+	                $contenu .= "$schema\n"."\n";
+	            }
+	            // sauve les donnees
+	            if ($donnees) {
+	                $contenu .= "# "._T('saveauto:donnees_table').$tablename."\n";
+	                $resData = sql_select('*',$tablename);
+	                //peut survenir avec la corruption d'une table, on previent
+	                if ($connect_statut == "0minirezo" && (!$resData)) {
+	                    $err .= _T('probleme_donnees').$tablename._T('saveauto:corruption')."<br />";
+	                }
+	                else {
+	                    if (sql_count($resData) > 0) {
+	                        $sFieldnames = "";
+	                        if ($insertComplet) {
+	                            $num_fields = mysql_num_fields($resData);
+	                            for($j=0; $j < $num_fields; $j++) {
+	                                $sFieldnames .= "`".mysql_field_name($resData, $j) ."`";
+	                                //on ajoute a la fin une virgule si necessaire
+	                                if ($j<$num_fields-1) $sFieldnames .= ", ";
+	                            }
+	                            $sFieldnames = "($sFieldnames)";
+	                        }
+	                        $sInsert = "INSERT INTO `$tablename` $sFieldnames values ";
 
-                        while($rowdata = mysql_fetch_row($resData)) {
-                            $lesDonnees = "";
-                            for ($mp = 0; $mp < $num_fields; $mp++) {
-                                $lesDonnees .= "'" . addslashes($rowdata[$mp]) . "'";
-                                //on ajoute a la fin une virgule si necessaire
-                                if ($mp<$num_fields-1) $lesDonnees .= ", ";
-                            }
-                            $lesDonnees = "$sInsert($lesDonnees);";
-                            $contenu .= "$lesDonnees"."\n";
-                        }
-                    }
-                }
-            }
-        }
-        $i++;
+	                        while($rowdata = mysql_fetch_row($resData)) {
+	                            $lesDonnees = "";
+	                            for ($mp = 0; $mp < $num_fields; $mp++) {
+	                                $lesDonnees .= "'" . addslashes($rowdata[$mp]) . "'";
+	                                //on ajoute a la fin une virgule si necessaire
+	                                if ($mp<$num_fields-1) $lesDonnees .= ", ";
+	                            }
+	                            $lesDonnees = "$sInsert($lesDonnees);";
+	                            $contenu .= "$lesDonnees"."\n";
+	                        }
+	                    }
+	                }
+	            }
+	        }
+	        $i++;
+	    }
+	    $contenu .= "# -------"._T('saveauto:fin_fichier')."------------"."\n";
+
+		$ok = ecrire_fichier($chemin_fichier, $contenu);
+
+		if(!$ok){
+	    	$err .= _T('saveauto:impossible_creer').$nom_fichier._T('saveauto:verifier_ecriture').$rep_bases."<br />";
+		}
+
+	    /**
+	     * zipper si necessaire
+	     * si ok on efface le fichier sql + pour l'envoi par mail on utilise le zip
+	     */
+	    if (!$err && $gz){
+	    	$fichier_zip = $chemin_fichier.'.zip';
+	    	if($ok = saveauto_sauvegarde_zip($chemin_fichier,$fichier_zip,$rep_bases)){
+	    		$chemin_fichier = $fichier_zip;
+	    		$nom_fichier .= '.zip';
+	    	}
+	    }
+
+		ecrire_meta("saveauto_creation", $temps);
     }
-    $contenu .= "# -------"._T('saveauto:fin_fichier')."------------"."\n";
 
-	$ok = ecrire_fichier($chemin_fichier, $contenu);
-
-	if(!$ok){
-    	$err .= _T('saveauto:impossible_creer').$nom_fichier._T('saveauto:verifier_ecriture').$rep_bases."<br>";
-        	return $err;
-	}
+    // Pipeline
+	pipeline('post_sauvegarde',
+		array(
+			'args' => array(
+				'err' => $err,
+				'chemin_fichier' => $chemin_fichier,
+				'nom_fichier'=>$nom_fichier,
+				'type' => 'saveauto'
+			),
+			'data' => $champs
+		)
+	);
 
     /**
-     * zipper si necessaire
-     * si ok on efface le fichier sql + pour l'envoi par mail on utilise le zip
+     * notifications si necessaire
      */
-    if ($gz){
-    	$fichier_zip = $chemin_fichier.'.zip';
-    	if($ok = saveauto_sauvegarde_zip($chemin_fichier,$fichier_zip,$rep_bases)){
-    		$chemin_fichier = $fichier_zip;
-    		$nom_fichier .= '.zip';
-    	}
-    }
+	if ($notifications = charger_fonction('notifications', 'inc')) {
+		$notifications('saveauto_save', '',
+			array('err' => $err, 'chemin_fichier' => $chemin_fichier, 'nom_fichier'=>$nom_fichier)
+		);
+	}
 
-    /**
-     * envoi par mail si necessaire
-     */
-    if (!empty($destinataire_save)) {
-        $msg_mail = _T('saveauto:sauvegarde_ok_mail')."\n\r"._T('saveauto:base').$base."\n\r"._T('saveauto:serveur').$_SERVER['SERVER_NAME']."\n\r"._T('saveauto:date').$jour."/".$mois."/".$annee." : ".$heure."h".$minutes;
-        $sujet_mail = _T('saveauto:saveauto')." "._T('saveauto:base').$base." "._T('saveauto:date').$jour."/".$mois."/".$annee;
-	    saveauto_mail_attachement($destinataire_save, $sujet_mail, $msg_mail, $chemin_fichier, $nom_fichier);
-    }
-
-    //marqueur de bon deroulement du processus
-    $fin_sauvegarde_base = true;
-    ecrire_meta("saveauto_creation", $temps);
     return $err;
 }
 
