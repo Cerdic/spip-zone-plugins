@@ -126,7 +126,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'ticket' => 'Ticket',
-	'ticket_enregistre' => 'Ticket enregirtr&eacute;',
+	'ticket_enregistre' => 'Ticket enregistr&eacute;',
 	'tickets' => 'Tickets',
 	'tickets_autorisations' => 'Configuration des autorisations',
 	'tickets_general' => 'Configuration g&eacute;n&eacute;rale',
