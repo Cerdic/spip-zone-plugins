@@ -48,7 +48,7 @@ function messagerie_notifications($flux){
 		$profil_decrire = charger_fonction('profil_decrire','inc');
 		$qui = $profil_decrire($qui,true);
 		$qui['url_site']=$GLOBALS['meta']['adresse_site'];
-		$qui['nom_site']=$GLOBALS['meta']['nom_site'];
+		$qui['nom_site']= typo($GLOBALS['meta']['nom_site']);
 		$envoyer_mail = charger_fonction('envoyer_mail','inc');
 		foreach($destinataires as $dest) {
 			$to = $profil_decrire($dest,true);
