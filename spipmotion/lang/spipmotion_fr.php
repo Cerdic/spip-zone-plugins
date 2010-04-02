@@ -87,7 +87,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'video_audiochannels' => 'Nombre de canaux audios : ',
 
 	// R
-	'recuperer_logo' => 'R&eacute;cup&eacute;rer un logo depuis la vid&eacute;o',
+	'recuperer_logo' => 'R&eacute;cup&eacute;rer une vignette depuis la vid&eacute;o',
 	'recuperer_infos' => 'R&eacute;cup&eacute;rer des informations techniques sur la vid&eacute;o',
 	'zzzz' => 'zzzz'
 );

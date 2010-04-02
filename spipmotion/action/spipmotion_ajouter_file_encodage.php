@@ -21,28 +21,28 @@ function action_spipmotion_ajouter_file_encodage_dist(){
 function action_spipmotion_ajouter_file_encodage_post($r){
 	global $visiteur_session;
 	list(, $sign, $id, $type, $id_document) = $r;
-	spip_log($id.' - '.$id_document.'  - '.$type);
-	
+	spip_log($id.' - '.$id_document.'  - '.$type,'spipmotion');
+
 	spipmotion_supprimer_versions($id_document);
 	spipmotion_genere_file($id_document,$type,$id);
-	
+
 	$redirect = urldecode(_request('redirect'));
 
 	return $redirect;
 }
 
 function spipmotion_supprimer_versions($id_document){
-	
+
 	$v = sql_select("id_document","spip_documents","id_orig=".intval($id_document));
-		
+
 	include_spip('inc/documents');
-	
+
 	while($version = sql_fetch($v)){
 		$liste[] = $version['id_document'];
-		spip_log('on supprime le document '.$version['id_document'],'emballes_medias');
+		spip_log('on supprime le document '.$version['id_document'],'spipmotion');
 		supprimer_documents($liste);
 	}
-	
+
 	sql_delete("spip_spipmotion_attentes", "id_document=".intval($args['id_document']));
 }
 
@@ -75,11 +75,11 @@ function spipmotion_genere_file($id_document,$type,$id){
 				}
 			}
 			else{
-				spip_log("Cette video existe deja dans la file d'attente","spipmotion");							
+				spip_log("Cette video existe deja dans la file d'attente","spipmotion");
 			}
 		}
 	}
-	
+
 	/**
 	 * Ajout du son dans la file d'attente d'encodage si besoin
 	 */
@@ -98,12 +98,12 @@ function spipmotion_genere_file($id_document,$type,$id){
 							spip_log("On est dans le mode encodage auto, on encode $id_doc_attente","spipmotion");
 							$document = sql_fetsel('*','spip_documents','id_document='.intval($id_document));
 							$encoder($document,$id_doc_attente);
-						}							
+						}
 					}
 				}
 			}
 			else{
-				spip_log("Ce son existe deja dans la file d'attente","spipmotion");							
+				spip_log("Ce son existe deja dans la file d'attente","spipmotion");
 			}
 		}
 	}else if ($id_orig > 0){

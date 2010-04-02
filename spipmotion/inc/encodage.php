@@ -7,7 +7,7 @@
  *
  * Auteurs :
  * Quentin Drouet
- * 2006-2009 - Distribué sous licence GNU/GPL
+ * 2006-2010 - Distribué sous licence GNU/GPL
  *
  */
 
@@ -54,6 +54,9 @@ function encodage($source,$doc_attente){
 		$lancement_encodage = exec($encodage,$retour);
 		spip_log($retour,'spipmotion');
 		spip_log("l'encodage est terminé",'spipmotion');
+		if(count($retour) > 0){
+			$encodage_ok = true;
+		}
 	}
 
 	/**
@@ -72,7 +75,7 @@ function encodage($source,$doc_attente){
 			$height_finale = $height;
 		}
 		else{
-			$height_finale = $source['hauteur']/($source['largeur']/$width_finale);
+			$height_finale = round($source['hauteur']/($source['largeur']/$width_finale));
 		}
 
 		spip_log("document original ($chemin) = $width/$height - document final = $width_finale/$height_finale",'spipmotion');
@@ -102,14 +105,32 @@ function encodage($source,$doc_attente){
 		}
 
 		if(intval($source['audiobitrate']) && (intval($source['audiobitrate']) < lire_config("spipmotion/bitrate_audio_$extension_attente","64"))){
-			$audiobitrate = $source['audiobitrate'];
+			$audiobitrates = array('32','64','96','128','192','256');
+			if(!in_array($source['audiobitrate'],$audiobitrates)){
+				$bitrate_final = '32';
+				foreach($audiobitrates as $bitrate){
+					if($source['audiobitrate'] > $bitrate){
+						$bitrate_final = $bitrate;
+					}
+				}
+				$audiobitrate = $bitrate_final;
+			}else{
+				$audiobitrate = $source['audiobitrate'];
+			}
 		}else{
 			$audiobitrate = lire_config("spipmotion/bitrate_audio_$extension_attente","64");
 		}
 
 		if(intval($source['audiosamplerate']) && (intval($source['audiosamplerate']) < lire_config("spipmotion/frequence_audio_$extension_attente","22050"))){
-			if (intval($source['audiobitrate']) < 11025){
-				$audiosamplerate = 11025;
+			$audiosamplerates = array('11025','22050','44100','48000');
+			if(!in_array($source['audiosamplerate'],$audiosamplerates)){
+				$audiosamplerate_final = '11025';
+				foreach($audiosamplerates as $samplerate){
+					if($source['audiosamplerate'] > $samplerate){
+						$audiosamplerate_final = $samplerate;
+					}
+				}
+				$audiosamplerate = $audiosamplerate_final;
 			}else{
 				$audiosamplerate = $source['audiosamplerate'];
 			}
@@ -124,10 +145,12 @@ function encodage($source,$doc_attente){
 		$lancement_encodage = exec($encodage,$retour);
 
 		spip_log($retour,'spipmotion');
-		spip_log("l'encodage est terminé",'spipmotion');
 
 		if(count($retour) > 0){
+			spip_log("l'encodage est terminé",'spipmotion');
 			$encodage_ok = true;
+		}else{
+			spip_log("l'encodage est en erreur",'spipmotion');
 		}
 		if(($extension_attente == 'flv') && $encodage_ok){
 			/**
@@ -135,9 +158,8 @@ function encodage($source,$doc_attente){
 			 */
 			$metadatas_flv = 'flvtool2 -Ux '.$fichier_temp;
 			exec($metadatas_flv,$retour);
-			spip_log($metadatas_flv);
+			spip_log($retour,'spipmotion');
 		}
-
 	}
 
 	if($encodage_ok){
@@ -158,11 +180,16 @@ function encodage($source,$doc_attente){
 
 		sql_updateq("spip_documents",array('id_orig'=>$attente['id_document']),'id_document='.intval($x));
 
+		/**
+		 * Invalidation du cache
+		 */
 		if ($invalider) {
 			include_spip('inc/invalideur');
 			suivre_invalideur("0",true);
 			spip_log('invalider', 'spipmotion');
 		}
+	}else{
+		sql_updateq("spip_spipmotion_attentes",array('encode'=>'non'),"id_spipmotion_attente=".intval($doc_attente));
 	}
 
 	return $x;

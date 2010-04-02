@@ -18,7 +18,7 @@ function inc_spipmotion_infos_videos_dist($id, $id_document,$type,$script='',$ig
 		include_spip('inc/presentation');
 	}
 	$corps = recuperer_fond('prive/prive_infos_video', $contexte=array('id_document'=>$id_document));
-	
+
 	// Si on a le droit de modifier les documents, on affiche les icones pour récupérer les infos et le logo
 	if(autoriser('joindredocument',$type, $id)){
 		$texte = _T('spipmotion:recuperer_logo');
@@ -26,7 +26,7 @@ function inc_spipmotion_infos_videos_dist($id, $id_document,$type,$script='',$ig
 		$texte3 = _T('spipmotion:encoder_video');
 		$script = $type.'s';
 		$redirect =  generer_url_ecrire($script,"id_$type=$id#portfolio_documents");
-		$extension = sql_getfetsel("extension", "spip_documents","id_document=".sql_quote($id_document));
+		$infos_doc = sql_fetsel("extension,id_orig", "spip_documents","id_document=".sql_quote($id_document));
 
 		// Inspire de inc/legender
 		if (test_espace_prive()){
@@ -34,16 +34,16 @@ function inc_spipmotion_infos_videos_dist($id, $id_document,$type,$script='',$ig
 			$action = generer_action_auteur('spipmotion_logo', "$id/$type/$id_document", $redirect);
 			$action = "<a href='$action'>$texte</a>";
 			$action2 = ajax_action_auteur('spipmotion_infos', "$id/$type/$id_document", $script, "type=$type&id_$type=$id&show_infos_docs=$id_document#infosdoc-$id_document", array($texte2));
-			
+
 			/**
 			 * On vérifie si le document est tout d'abord transcodable (les flvs et mp3 ne sont pas forcément nécessaires)
-			 * - S'il l'est et qu'il n'est pas dans la file d'attente, on propose à l'utilisateur de l'encoder ou réencoder 
+			 * - S'il l'est et qu'il n'est pas dans la file d'attente, on propose à l'utilisateur de l'encoder ou réencoder
 			 * TODO : Proposer peut être un formulaire dans le futur pour modifier certains réglages de base
 			 * - S'il l'est et qu'il est dans la file d'attente :
 			 * -** On indique qu'il est en train d'être encodé si sont statut = en_cours
-			 * -** Sinon on indique qu'il est dans la file d'attente 
+			 * -** Sinon on indique qu'il est dans la file d'attente
 			 */
-			if(in_array($extension,lire_config('spipmotion/fichiers_videos_encodage',array()))){
+			if(in_array($infos_doc['extension'],lire_config('spipmotion/fichiers_videos_encodage',array()))){
 				$statut_encodage = sql_getfetsel('encode','spip_spipmotion_attentes','id_document='.intval($id_document).' AND encode IN ("en_cours","non")');
 				if($statut_encodage == 'en_cours'){
 					$action3 = '';
@@ -69,8 +69,11 @@ function inc_spipmotion_infos_videos_dist($id, $id_document,$type,$script='',$ig
 		if(!_AJAX){
 			$corps .= icone_horizontale($texte, $action, $supp, "creer.gif", false);
 			$corps .= icone_horizontale($texte2, $action2, $supp, "creer.gif", false);
-			if(in_array($extension,lire_config('spipmotion/fichiers_videos_encodage',array()))){
-				$corps .= icone_horizontale($texte3, $action3, $supp, "creer.gif", false);
+			if(($infos_doc['id_orig'] == 0) && in_array($infos_doc['extension'],lire_config('spipmotion/fichiers_videos_encodage',array()))){
+				if($action3)
+					$corps .= icone_horizontale($texte3, $action3, $supp, "creer.gif", false);
+				else
+					$corps .= $texte3;
 			}
 		}
 	}

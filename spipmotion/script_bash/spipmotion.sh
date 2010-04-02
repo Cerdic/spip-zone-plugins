@@ -144,7 +144,7 @@ case "$vcodec" in
 	"")
 	case "$sortie" in
   		*".flv") vcodec="-vcodec flv" ;;
-  		*".ogg"|*".ogv") vcodec="-vcodec theora" ;;
+  		*".ogg"|*".ogv") vcodec="-vcodec libtheora" ;;
   	esac
 esac
 ########### SI LA SORTIE EXISTE DÉJÀ #############
