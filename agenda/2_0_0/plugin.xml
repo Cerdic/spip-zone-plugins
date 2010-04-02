@@ -11,6 +11,7 @@
 	<description>Agenda Ev&#233;nementiel</description>
 	<lien>http://www.spip-contrib.net/article2858</lien> <!-- URI de documentation -->
 	<options>agenda_options.php</options>
+	<fonctions>public/agenda.php</fonctions>
 	<fonctions>agenda_fonctions.php</fonctions>
 	<prefix>agenda</prefix>
 	<install>base/agenda_upgrade.php</install>

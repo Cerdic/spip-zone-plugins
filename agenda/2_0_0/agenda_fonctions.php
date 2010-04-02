@@ -6,35 +6,8 @@
  *
  */
 
-include_spip('public/criteres_agenda');
-include_spip('public/agenda_boucles');
 include_spip('inc/agenda_filtres');
 
-function agenda_critere_fusion_par_xx($format, $as, $idb, &$boucles, $crit){
-	$boucle = &$boucles[$idb];
-	$type = $boucle->type_requete;
-	$_date = isset($crit->param[0]) ? calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent)
-	  : "'".(isset($GLOBALS['table_date'][$type])?$GLOBALS['table_date'][$type]:"date")."'";
-
-	$date = $boucle->id_table. '.' .substr($_date,1,-1);
-
-	// annuler une eventuelle fusion sur cle primaire !
-	foreach($boucles[$idb]->group as $k=>$g)
-		if ($g==$boucle->id_table.'.'.$boucle->primary)
-			unset($boucles[$idb]->group[$k]);
-	$boucles[$idb]->group[]  = 'DATE_FORMAT('.$boucle->id_table.'.".'.$_date.'.", ' . "'$format')"; 
-	$boucles[$idb]->select[] = 'DATE_FORMAT('.$boucle->id_table.'.".'.$_date.'.", ' . "'$format') AS $as";	
-}
-
-function critere_fusion_par_jour($idb, &$boucles, $crit) {
-	agenda_critere_fusion_par_xx('%Y-%m-%d','jour',$idb, $boucles, $crit);
-}
-function critere_fusion_par_mois($idb, &$boucles, $crit) {
-	agenda_critere_fusion_par_xx('%Y-%m','mois',$idb, $boucles, $crit);
-}
-function critere_fusion_par_annee($idb, &$boucles, $crit) {
-	agenda_critere_fusion_par_xx('%Y','annee',$idb, $boucles, $crit);
-}
 
 function agenda_mini($i) {
   $args = func_get_args();
@@ -98,7 +71,7 @@ function http_calendrier_mini($annee, $mois, $jour, $echelle, $partie_cal, $scri
 		if ($evts) {
 			$nb_elmts= @count($evts);
 			if ($nb_elmts>1){
-				$evts = "<a href='".$evts[0]['URL']."' title='".$nb_elmts." ".utf8_encode("événements")."'>".intval($jour)."</a>";
+				$evts = "<a href='".$evts[0]['URL']."' title='".$nb_elmts." ".utf8_encode("ï¿½vï¿½nements")."'>".intval($jour)."</a>";
 			}
 			else{
 				$evts = "<a href='".$evts[0]['URL']."' title='".$evts[0]['SUMMARY'].
@@ -122,6 +95,14 @@ function http_calendrier_mini($annee, $mois, $jour, $echelle, $partie_cal, $scri
 	return $total . ($ligne ? "\n<tr>$ligne\n</tr>" : '');
 }
 
+
+/**
+ * #NB_INSCRITS
+ * pour afficher le nombre d'inscrits (qui ont repondu oui) a un evenement
+ * 
+ * @param <type> $p
+ * @return <type>
+ */
 function balise_NB_INSCRITS_dist($p) {
         $id_evenement = champ_sql('id_evenement', $p);
         $p->code = "sql_countsel('spip_evenements_participants','id_evenement='.intval($id_evenement).' AND reponse=\'oui\'')";
