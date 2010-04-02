@@ -9,13 +9,13 @@
 
 function eval_declarer_tables_interfaces($interface){
 	// definir les jointures possibles
-	$interface['table_des_tables']['eval'] = 'eval';
+	$interface['table_des_tables']['campagnes'] = 'campagnes';
 	
-	$interface['tables_jointures']['spip_eval'][] = 'rubriques';
-	$interface['tables_jointures']['spip_rubriques'][] = 'eval';
+	$interface['tables_jointures']['spip_campagnes'][] = 'rubriques';
+	$interface['tables_jointures']['spip_rubriques'][] = 'campagnes';
 
-	$interface['tables_jointures']['spip_mots'][] = 'eval';
-	$interface['tables_jointures']['spip_eval'][] = 'mots';
+	$interface['tables_jointures']['spip_mots'][] = 'campagnes';
+	$interface['tables_jointures']['spip_campagnes'][] = 'mots';
 	return $interface;
 }
 

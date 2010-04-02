@@ -44,8 +44,8 @@ function eval_upgrade($nom_meta_base_version,$version_cible){
 
 
 function eval_vider_tables($nom_meta_base_version) {
-	// effacement de la nouvelle table spip_eval_campagnes
-	sql_drop_table("spip_eval_campagnes");
+	// effacement de la nouvelle table spip_campagnes
+	sql_drop_table("spip_campagnes");
 	// effacement de la nouvelle table spip_mots_notations
 	sql_drop_table("spip_mots_notations");
 	// suppression du nouvel index de spip_notations
