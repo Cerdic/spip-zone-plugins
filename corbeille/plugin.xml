@@ -44,7 +44,7 @@ _ <multi>
 	ce parametre est obligatoire et doit etre non vide
 	-->
 	<prefix>corbeille</prefix>	
-  <icon>img_pack/trash-full-24.png</icon>
+  <icon>img_pack/trash-full-32.png</icon>
   <options>corbeille_options.php</options>
   <options>corbeille_fonctions.php</options>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
