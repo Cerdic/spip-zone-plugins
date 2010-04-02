@@ -83,12 +83,7 @@ function mes_fichiers_resumer_zip($zip) {
 			$liste = $comment;
 		else
 			if (intval($id_auteur)) {
-				$select = array('nom');
-				$from = array('spip_auteurs AS t1');
-				$where = array('t1.id_auteur='.sql_quote($id_auteur));
-				$query_auteur = sql_select($select, $from, $where);
-				if ($row = sql_fetch($query_auteur))
-					$auteur = $row['nom'];
+				$auteur = sql_getfetsel('nom', 'spip_auteurs', 'id_auteur='.intval($id_auteur));
 			}else{
 				$auteur = $id_auteur;
 			}

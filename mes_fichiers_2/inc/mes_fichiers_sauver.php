@@ -9,15 +9,12 @@ function inc_mes_fichiers_sauver_dist($liste=null,$options=array()){
 	 * il peut être un array vide dans le cas d'un problème de config
 	 */
 	if(is_null($liste)){
-		spip_log('liste est null','test');
 		include_spip('inc/mes_fichiers_utils');
 		$liste = mes_fichiers_a_sauver();
 	}
 
 	if(count($liste)>0){
 		include_spip('inc/pclzip');
-		spip_log('*** MES_FICHIERS (action_mes_fichiers_sauver) INFORMATION:');
-		spip_log($liste);
 
 		// Archivage du contenu
 		if (!@is_dir(_DIR_MES_FICHIERS))
@@ -39,6 +36,7 @@ function inc_mes_fichiers_sauver_dist($liste=null,$options=array()){
 		array(
 			'args' => array(
 				'err' => $erreur_texte,
+				'auteur' => $auteur,
 				'type' => 'mes_fichiers'
 			),
 			'data' => ''
@@ -50,7 +48,9 @@ function inc_mes_fichiers_sauver_dist($liste=null,$options=array()){
      */
 	if ($notifications = charger_fonction('notifications', 'inc')) {
 		$notifications('mes_fichiers_sauver', '',
-			array('erreur' => $erreur_texte)
+			array(
+				'auteur' => $auteur,
+				'err' => $erreur_texte)
 		);
 	}
 

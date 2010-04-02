@@ -21,15 +21,15 @@
 							<li class="editer_sauvegarde_reguliere">
 								<label><:mes_fichiers:label_cfg_sauvegarde_reguliere:></label>
 								<div class="choix">
-									 <input type="radio" name="sauvegarde_reguliere" id="sauvegarde_reguliere_true" value="true"[(#ENV{sauvegarde_reguliere}|=={true}|oui)checked="checked"] />
+									 <input type="radio" name="sauvegarde_reguliere" id="sauvegarde_reguliere_true" value="oui"[(#CONFIG{mes_fichiers/sauvegarde_reguliere}|=={oui}|oui)checked="checked"] />
 									 <label for="sauvegarde_reguliere_true"><:mes_fichiers:oui:></label>
 								</div>
 								<div class="choix">
-									 <input type="radio" name="sauvegarde_reguliere" id="sauvegarde_reguliere_false" value="false"[(#ENV{sauvegarde_reguliere}|!={true}|oui)checked="checked"] />
+									 <input type="radio" name="sauvegarde_reguliere" id="sauvegarde_reguliere_false" value="non"[(#CONFIG{mes_fichiers/sauvegarde_reguliere}|=={oui}|non)checked="checked"] />
 									 <label for="sauvegarde_reguliere_false"><:mes_fichiers:non:></label>
 								</div>
 							</li>
-							[(#CONFIG{mes_fichiers/sauvegarde_reguliere}|=={true}|oui)
+							[(#CONFIG{mes_fichiers/sauvegarde_reguliere}|=={oui}|oui)
 							<li class="editer_frequence">
 								<label for="frequence"><:mes_fichiers:label_cfg_frequence:></label>
 								<input type="text" name="frequence" class="text" id="frequence" value="[(#ENV{frequence,1})]" style="width: 30px;"> <:mes_fichiers:jours:>
@@ -37,6 +37,30 @@
 							<li class="editer_duree_sauvegarde">
 								<label for="duree_sauvegarde"><:mes_fichiers:label_cfg_duree_sauvegarde:></label>
 								<input type="text" name="duree_sauvegarde" class="text" id="duree_sauvegarde" value="[(#ENV{duree_sauvegarde,15})]" style="width: 30px;"> <:mes_fichiers:jours:>
+							</li>]
+						</ul>
+					</fieldset>
+				</li>
+				<li class="fieldset">
+					<fieldset>
+						<h3 class="legend"><:mes_fichiers:legende_cfg_notification:></h3>
+						<ul>
+							<li class="editer_notif_active">
+								<label><:mes_fichiers:label_cfg_notif_active:></label>
+								<div class="choix">
+									 <input type="radio" name="notif_active" id="notif_active_true" value="oui"[(#CONFIG{mes_fichiers/notif_active}|=={oui}|oui)checked="checked"] />
+									 <label for="notif_active_true"><:mes_fichiers:oui:></label>
+								</div>
+								<div class="choix">
+									 <input type="radio" name="notif_active" id="notif_active_false" value="non"[(#CONFIG{mes_fichiers/notif_active}|=={oui}|non)checked="checked"] />
+									 <label for="notif_active_false"><:mes_fichiers:non:></label>
+								</div>
+							</li>
+							[(#CONFIG{mes_fichiers/notif_active}|=={oui}|oui)
+							<li class="editer_notif_mail">
+								<label for="notif_mail"><:mes_fichiers:label_cfg_notif_mail:></label>
+								<p class="explication"><:mes_fichiers:explication_cfg_notif_mail:></p>
+								<input type="text" name="notif_mail" class="text" id="notif_mail" value="[(#ENV{notif_mail})]" />
 							</li>]
 						</ul>
 					</fieldset>
@@ -51,5 +75,5 @@
 </div>
 <div>
 	<h3>Debug</h3>
-	#CFG_ARBO{saveauto}
+	#CFG_ARBO{mes_fichiers}
 </div>
