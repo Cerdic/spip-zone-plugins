@@ -9,6 +9,8 @@
 #define('_JQ_MAX_JOBS_EXECUTE',200); // pour personaliser le nombre de jobs traitables a chaque hit
 #define('_JQ_MAX_JOBS_TIME_TO_EXECUTE',15); // pour personaliser le temps d'excution dispo a chaque hit
 
+@define('_CRON_DELAI_GOURMAND',0);
+@define('_CRON_DELAI',0);
 @define('_JQ_NB_JOBS_OVERFLOW',10000); // nombre de jobs a partir duquel on force le traitement en fin de hit pour purger
 
 // on inhibe la balise #SPIP_CRON qui ne servira plus a rien
