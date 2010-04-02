@@ -18,7 +18,7 @@ function genie_mes_fichiers_dist($last) {
  *
  * @param timestamp $last
  */
-function genie_mes_fichiers_dist($last) {
+function genie_mes_fichiers_supprimer_dist($last) {
 	$supprimer_obsoletes = charger_fonction('mes_fichiers_cleaner','inc');
 	$erreur = $supprimer_obsoletes(array('auteur' => 'cron'));
 
@@ -36,7 +36,7 @@ function mes_fichiers_taches_generales_cron($taches_generales){
 	if (isset($cfg['sauvegarde_reguliere']) && ($cfg['sauvegarde_reguliere'] === 'oui')){
 		$jour = $cfg['frequence'] ? $cfg['frequence'] : 1;
 		$taches_generales['mes_fichiers'] = $jour*24*3600;
-	}else if(isset(intval($cfg['duree_sauvegarde']))){
+	}else if(intval($cfg['duree_sauvegarde'])){
 		$taches_generales['mes_fichiers_supprimer'] = 24*3600;
 	}
 	return $taches_generales;
