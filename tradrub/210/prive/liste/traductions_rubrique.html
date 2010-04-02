@@ -25,8 +25,8 @@
 				})]
 				[(#LOGO_RUBRIQUE||image_reduire{20,26})]
 				[(#EXPOSE|?{
-					#TITRE,
-					<a href="[(#ID_RUBRIQUE|generer_url_entite{rubrique})]" hreflang="#LANG">#TITRE</a>
+					[(#RANG). ]#TITRE,
+					<a href="[(#ID_RUBRIQUE|generer_url_entite{rubrique})]" hreflang="#LANG">[(#RANG). ]#TITRE</a>
 				})]
 				[(#ID_TRAD|=={#ID_RUBRIQUE}|ou{[(#ID_TRAD|non)]}|oui)
 					(<:tradrub:rubrique_de_reference:>)
