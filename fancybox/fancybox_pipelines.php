@@ -14,6 +14,7 @@ function fancybox_insert_head($flux){
 		'opacity' => 'false',
 		'modal' => 'false',
 		'cyclic' => 'false',
+		'molette' => '',
 		'scrolling' => 'auto',
 		'width' => '560',
 		'height' => '340',
@@ -43,10 +44,10 @@ function fancybox_insert_head($flux){
 		'communheight' => '355'
 	), $config);
 	// Insertion des librairies js
-	$flux .='<script src="'._DIR_LIB_FANCYBOX.'fancybox/jquery.fancybox-1.3.1.js" type="text/javascript"></script>';
-	if ($GLOBALS['meta']['fancybox']['molette']=='oui')
-		$flux .='<script src="'._DIR_LIB_FANCYBOX.'fancybox/jquery.mousewheel-3.0.2.pack.js" type="text/javascript"></script>';
-	$flux .='<script src="'.url_absolue(find_in_path('javascript/fancybox.js')).'" type="text/javascript"></script>';
+	$flux .="\n".'<script src="'._DIR_LIB_FANCYBOX.'fancybox/jquery.fancybox-1.3.1.js" type="text/javascript"></script>'."\n";
+	if ($config['molette'])
+		$flux .='<script src="'._DIR_LIB_FANCYBOX.'fancybox/jquery.mousewheel-3.0.2.pack.js" type="text/javascript"></script>'."\n";
+	$flux .='<script src="'.url_absolue(find_in_path('javascript/fancybox.js')).'" type="text/javascript"></script>'."\n";
 	// Init de la fancybox suivant la configuration
 	$flux .='
 <script type="text/javascript">/* <![CDATA[ */
@@ -103,7 +104,7 @@ if (window.jQuery)
  })(jQuery);
 /* ]]> */</script>';
 	// Inclusion des styles propres a fancybox
-	$flux .='<link rel="stylesheet" href="'._DIR_LIB_FANCYBOX.'fancybox/jquery.fancybox-1.3.1.css" type="text/css" media="all" />';
+	$flux .="\n".'<link rel="stylesheet" href="'._DIR_LIB_FANCYBOX.'fancybox/jquery.fancybox-1.3.1.css" type="text/css" media="all" />'."\n";
 
 	return $flux;
 }
