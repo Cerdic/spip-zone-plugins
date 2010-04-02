@@ -162,7 +162,7 @@ function agenda_critere_fusion_par_xx($format, $as, $idb, &$boucles, $crit){
  * @param <type> $boucles
  * @param <type> $crit
  */
-function critere_fusion_par_jour($idb, &$boucles, $crit) {
+function critere_fusion_par_jour_dist($idb, &$boucles, $crit) {
 	agenda_critere_fusion_par_xx('%Y-%m-%d','jour',$idb, $boucles, $crit);
 }
 
@@ -174,7 +174,7 @@ function critere_fusion_par_jour($idb, &$boucles, $crit) {
  * @param <type> $boucles
  * @param <type> $crit
  */
-function critere_fusion_par_mois($idb, &$boucles, $crit) {
+function critere_fusion_par_mois_dist($idb, &$boucles, $crit) {
 	agenda_critere_fusion_par_xx('%Y-%m','mois',$idb, $boucles, $crit);
 }
 
@@ -186,7 +186,78 @@ function critere_fusion_par_mois($idb, &$boucles, $crit) {
  * @param <type> $boucles
  * @param <type> $crit
  */
-function critere_fusion_par_annee($idb, &$boucles, $crit) {
+function critere_fusion_par_annee_dist($idb, &$boucles, $crit) {
 	agenda_critere_fusion_par_xx('%Y','annee',$idb, $boucles, $crit);
 }
+
+/**
+ * {evenement_a_venir}
+ * {evenement_a_venir #ENV{date}}
+ * 
+ * @param <type> $idb
+ * @param <type> $boucles
+ * @param <type> $crit
+ */
+function critere_evenement_a_venir_dist($idb, &$boucles, $crit) {
+	$boucle = &$boucles[$idb];
+	$id_table = $boucle->id_table;
+
+	if (isset($crit->param[0]))
+		$_dateref = calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
+	else
+		$_dateref = "date('Y-m-d H:i:00')";
+
+	$_date = "$id_table.date_debut";
+	$op = $crit->not ? "<=":">";
+	$boucle->where[] = array("'$op'","'$_date'","sql_quote($_dateref)");
+}
+
+
+/**
+ * {evenement_passe}
+ * {evenement_passe #ENV{date}}
+ *
+ * @param <type> $idb
+ * @param <type> $boucles
+ * @param <type> $crit
+ */
+function critere_evenement_passe_dist($idb, &$boucles, $crit) {
+	$boucle = &$boucles[$idb];
+	$id_table = $boucle->id_table;
+
+	if (isset($crit->param[0]))
+		$_dateref = calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
+	else
+		$_dateref = "date('Y-m-d H:i:00')";
+
+	$_date = "$id_table.date_fin";
+	$op = $crit->not ? ">=":"<";
+	$boucle->where[] = array("'$op'","'$_date'","sql_quote($_dateref)");
+}
+
+/**
+ * {evenement_en_cours}
+ * {evenement_en_cours #ENV{date}}
+ *
+ * @param <type> $idb
+ * @param <type> $boucles
+ * @param <type> $crit
+ */
+function critere_evenement_en_cours_dist($idb, &$boucles, $crit) {
+	$boucle = &$boucles[$idb];
+	$id_table = $boucle->id_table;
+
+	if (isset($crit->param[0]))
+		$_dateref = calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
+	else
+		$_dateref = "date('Y-m-d H:i:00')";
+
+	$where = array("'<='","'date_debut'","sql_quote($_dateref)");
+	$where = array("'AND'",$where,array("'>='","'date_fin'","sql_quote($_dateref)"));
+	if ($crit->not)
+		$where = array("'NOT'",$where);
+	$boucle->where[] = $where;
+}
+
+
 ?>
