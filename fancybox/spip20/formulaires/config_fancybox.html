@@ -1,0 +1,180 @@
+
+<!-- autoriser=webmestre -->
+<!-- refus=<:cfg:refus_configuration_webmestre:> -->
+<!-- nom=fancybox -->
+
+<div class="formulaire_spip formulaire_configurer formulaire_configurer_fancy">
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	
+<form method="post" action="#ENV{action}"><div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+
+	<ul>
+		<li class="editer_fancybox_selecteur_commun[ (#ENV**{erreurs}|table_valeur{selecteur_commun}|oui)erreur]">
+			<label for="fancy_selecteur_commun"><:fancybox:cfg_lbl_selecteur_commun:></label>
+			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{selecteur_commun})</span>]
+			<p class="explication"><:fancybox:cfg_inf_selecteur_commun:></p>
+			<input type="text" name="selecteur_commun" class="text" id="fancy_selecteur_commun" size="60"
+				value="#ENV{selecteur_commun, .fancybox}" />
+		</li>
+		
+		<li class="editer_fancybox_selecteur_galerie[ (#ENV**{erreurs}|table_valeur{selecteur_galerie}|oui)erreur]">
+			<label for="fancy_selecteur_galerie"><:fancybox:cfg_lbl_selecteur_galerie:></label>
+			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{selecteur_galerie})</span>]
+			<p class="explication"><:fancybox:cfg_inf_selecteur_galerie:></p>
+			<input type="text" name="selecteur_galerie" class="text" id="fancy_selecteur_galerie" size="60"
+				value="#ENV{selecteur_galerie, #documents_portfolio .fancybox}" />	
+		</li>
+
+		<li class="editer_fancybox_padding[ (#ENV**{erreurs}|table_valeur{padding}|oui)erreur]">
+			<label for="fancy_padding"><:fancybox:cfg_lbl_padding:></label>
+			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{padding})</span>]
+			<p class="explication"><:fancybox:cfg_inf_padding:></p>
+			<input type="text" name="padding" class="text" id="fancy_padding" size="8" value="#ENV{padding, 10}" />	
+		</li>
+
+		<li class="editer_fancybox_imagescale[ (#ENV**{erreurs}|table_valeur{imagescale}|oui)erreur]">
+			<label><:fancybox:cfg_lbl_imagescale:></label>
+			<p class="explication"><:fancybox:cfg_inf_imagescale:></p>
+			<div class="choix">
+				<input type="radio" name="imagescale" class="radio" id="fancy_imagescale_on" value="true" [(#ENV{imagescale,true}|=={true}|oui) checked="checked"] />
+				<label for='fancy_imagescale_on'><:item_oui:></label>
+			</div>
+			<div class="choix">
+				<input type="radio" name="imagescale" class="radio" id="fancy_imagescale_off" value="false" [(#ENV{imagescale,true}|=={false}|oui) checked="checked"] />
+				<label for='fancy_imagescale_off'><:item_non:></label>
+			</div>
+		</li>
+		
+		<li class="editer_fancybox_overlayshow[ (#ENV**{erreurs}|table_valeur{overlayshow}|oui)erreur]">
+			<label><:fancybox:cfg_lbl_overlayshow:></label>
+			<p class="explication"><:fancybox:cfg_inf_overlayshow:></p>
+			<div class="choix">
+				<input type="radio" name="overlayshow" class="radio" id="fancy_overlayshow_on" value="true" [(#ENV{overlayshow,true}|=={true}|oui) checked="checked"] />
+				<label for='fancy_overlayshow_on'><:item_oui:></label>
+			</div>
+			<div class="choix">
+				<input type="radio" name="overlayshow" class="radio" id="fancy_overlayshow_off" value="false" [(#ENV{overlayshow,true}|=={false}|oui) checked="checked"] />
+				<label for='fancy_overlayshow_off'><:item_non:></label>
+			</div>
+		</li>
+		
+		<li class="editer_fancybox_overlayopacity[ (#ENV**{erreurs}|table_valeur{overlayopacity}|oui)erreur]">
+			<label for="fancy_overlayopacity"><:fancybox:cfg_lbl_overlayopacity:></label>
+			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{overlayopacity})</span>]
+			<p class="explication"><:fancybox:cfg_inf_overlayopacity:></p>
+			<input type="text" name="overlayopacity" class="text" id="fancy_overlayopacity" size="8" value="#ENV{overlayopacity, 0.3}" />	
+		</li>
+
+		<li class="editer_fancybox_enableescapebutton[ (#ENV**{erreurs}|table_valeur{enableescapebutton}|oui)erreur]">
+			<label><:fancybox:cfg_lbl_enableescapebutton:></label>
+			<p class="explication"><:fancybox:cfg_inf_enableescapebutton:></p>
+			<div class="choix">
+				<input type="radio" name="enableescapebutton" class="radio" id="fancy_enableescapebutton_on" value="true" [(#ENV{enableescapebutton,true}|=={true}|oui) checked="checked"] />
+				<label for='fancy_enableescapebutton_on'><:item_oui:></label>
+			</div>
+			<div class="choix">
+				<input type="radio" name="enableescapebutton" class="radio" id="fancy_enableescapebutton_off" value="false" [(#ENV{enableescapebutton,true}|=={false}|oui) checked="checked"] />
+				<label for='fancy_enableescapebutton_off'><:item_non:></label>
+			</div>
+		</li>
+		
+		<li class="editer_fancybox_showclosebutton[ (#ENV**{erreurs}|table_valeur{showclosebutton}|oui)erreur]">
+			<label><:fancybox:cfg_lbl_showclosebutton:></label>
+			<p class="explication"><:fancybox:cfg_inf_showclosebutton:></p>
+			<div class="choix">
+				<input type="radio" name="showclosebutton" class="radio" id="fancy_showclosebutton_on" value="true" [(#ENV{showclosebutton,true}|=={true}|oui) checked="checked"] />
+				<label for='fancy_showclosebutton_on'><:item_oui:></label>
+			</div>
+			<div class="choix">
+				<input type="radio" name="showclosebutton" class="radio" id="fancy_showclosebutton_off" value="false" [(#ENV{showclosebutton,true}|=={false}|oui) checked="checked"] />
+				<label for='fancy_showclosebutton_off'><:item_non:></label>
+			</div>
+		</li>
+		
+		<li class="editer_fancybox_hideonoverlayclick[ (#ENV**{erreurs}|table_valeur{hideonoverlayclick}|oui)erreur]">
+			<label><:fancybox:cfg_lbl_hideonoverlayclick:></label>
+			<p class="explication"><:fancybox:cfg_inf_hideonoverlayclick:></p>
+			<div class="choix">
+				<input type="radio" name="hideonoverlayclick" class="radio" id="fancy_hideonoverlayclick_on" value="true" [(#ENV{hideonoverlayclick,true}|=={true}|oui) checked="checked"] />
+				<label for='fancy_hideonoverlayclick_on'><:item_oui:></label>
+			</div>
+			<div class="choix">
+				<input type="radio" name="hideonoverlayclick" class="radio" id="fancy_hideonoverlayclick_off" value="false" [(#ENV{hideonoverlayclick,true}|=={false}|oui) checked="checked"] />
+				<label for='fancy_hideonoverlayclick_off'><:item_non:></label>
+			</div>
+		</li>
+		
+		<li class="editer_fancybox_hideoncontentclick[ (#ENV**{erreurs}|table_valeur{hideoncontentclick}|oui)erreur]">
+			<label><:fancybox:cfg_lbl_hideoncontentclick:></label>
+			<p class="explication"><:fancybox:cfg_inf_hideoncontentclick:></p>
+			<div class="choix">
+				<input type="radio" name="hideoncontentclick" class="radio" id="fancy_hideoncontentclick_on" value="true" [(#ENV{hideoncontentclick,true}|=={true}|oui) checked="checked"] />
+				<label for='fancy_hideoncontentclick_on'><:item_oui:></label>
+			</div>
+			<div class="choix">
+				<input type="radio" name="hideoncontentclick" class="radio" id="fancy_hideoncontentclick_off" value="false" [(#ENV{hideoncontentclick,true}|=={false}|oui) checked="checked"] />
+				<label for='fancy_hideoncontentclick_off'><:item_non:></label>
+			</div>
+		</li>
+		
+		<li class="editer_fancybox_centeronscroll[ (#ENV**{erreurs}|table_valeur{centeronscroll}|oui)erreur]">
+			<label><:fancybox:cfg_lbl_centeronscroll:></label>
+			<p class="explication"><:fancybox:cfg_inf_centeronscroll:></p>
+			<div class="choix">
+				<input type="radio" name="centeronscroll" class="radio" id="fancy_centeronscroll_on" value="true" [(#ENV{centeronscroll,true}|=={true}|oui) checked="checked"] />
+				<label for='fancy_centeronscroll_on'><:item_oui:></label>
+			</div>
+			<div class="choix">
+				<input type="radio" name="centeronscroll" class="radio" id="fancy_centeronscroll_off" value="false" [(#ENV{centeronscroll,true}|=={false}|oui) checked="checked"] />
+				<label for='fancy_centeronscroll_off'><:item_non:></label>
+			</div>
+		</li>
+
+		<li class="editer_fancybox_communwidth[ (#ENV**{erreurs}|table_valeur{communwidth}|oui)erreur]">
+			<label for="fancy_communwidth"><:fancybox:cfg_lbl_communwidth:></label>
+			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{communwidth})</span>]
+			<p class="explication"><:fancybox:cfg_inf_communwidth:></p>
+			<input type="text" name="communwidth" class="text" id="fancy_communwidth" size="8" value="#ENV{communwidth, 425}" />	
+		</li>
+		
+		<li class="editer_fancybox_communheight[ (#ENV**{erreurs}|table_valeur{communheight}|oui)erreur]">
+			<label for="fancy_communheight"><:fancybox:cfg_lbl_communheight:></label>
+			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{communheight})</span>]
+			<p class="explication"><:fancybox:cfg_inf_communheight:></p>
+			<input type="text" name="communheight" class="text" id="fancy_communheight" size="8" value="#ENV{communheight, 355}" />	
+		</li>
+				
+		<li class="editer_fancybox_selecteur_frame[ (#ENV**{erreurs}|table_valeur{selecteur_frame}|oui)erreur]">
+			<label for="fancy_selecteur_frame"><:fancybox:cfg_lbl_selecteur_frame:></label>
+			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{selecteur_frame})</span>]
+			<p class="explication"><:fancybox:cfg_inf_selecteur_frame:></p>
+			<input type="text" name="selecteur_frame" class="text" id="fancy_selecteur_frame" size="60"
+				value="#ENV{selecteur_frame, .iframe}" />
+		</li>
+		
+		<li class="editer_fancybox_framewidth[ (#ENV**{erreurs}|table_valeur{framewidth}|oui)erreur]">
+			<label for="fancy_framewidth"><:fancybox:cfg_lbl_framewidth:></label>
+			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{framewidth})</span>]
+			<p class="explication"><:fancybox:cfg_inf_framewidth:></p>
+			<input type="text" name="framewidth" class="text" id="fancy_framewidth" size="8" value="#ENV{framewidth, 600}" />	
+		</li>
+		
+		<li class="editer_fancybox_frameheight[ (#ENV**{erreurs}|table_valeur{frameheight}|oui)erreur]">
+			<label for="fancy_frameheight"><:fancybox:cfg_lbl_frameheight:></label>
+			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{frameheight})</span>]
+			<p class="explication"><:fancybox:cfg_inf_frameheight:></p>
+			<input type="text" name="frameheight" class="text" id="fancy_frameheight" size="8" value="#ENV{frameheight, 700}" />	
+		</li>
+		
+	</ul>
+
+
+	<p class="boutons">
+		<input type="submit" name="_cfg_ok" class="submit" value="<:bouton_enregistrer:>" />
+		<input type="submit" name="_cfg_delete" class="submit" value="<:fancybox:cfg_effacer:>" />
+	</p>
+</div></form>
+</div>
