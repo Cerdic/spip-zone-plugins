@@ -28,7 +28,7 @@
 		<BOUCLE_MotsDuGroupe(MOTS){id_groupe=#ENV{le_groupe,#GET{legroupe}}}{par titre}{id_mot !IN #ENV{mots}}>
 		#SET{avecunmotdeplus, #ARRAY{}}
 		[(#SET{avecunmotdeplus,[(#ENV{mots}|push{#ID_MOT})]})]
-		[(#INCLURE{fond=formulaires/recherche_par_mots_compteur,mots=#GET{avecunmotdeplus},id_mot=#_MotsDuGroupe:ID_MOT,titre=#_MotsDuGroupe:TITRE})]
+		[(#INCLURE{fond=formulaires/recherche_par_mots_compteur,mots=#GET{avecunmotdeplus},id_mot=#_MotsDuGroupe:ID_MOT,titre=[(#_MotsDuGroupe:TITRE|supprimer_tags)]})]
 		</BOUCLE_MotsDuGroupe>
 	</select>
 	</B_MotsDuGroupe>
