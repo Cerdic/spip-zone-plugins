@@ -2,7 +2,7 @@
 <h2><:agenda:agenda:></h2>
 <B_mots>
 <div class='pagination'>
-<div class='plier_deplier'><a href='#' onclick='jQuery("li.item.court").removeClass("court");return false;' class='noajax'><:lien_tout_deplier:></a> | <a href='#' onclick='set_vevent();return false;' class='noajax'><:lien_tout_replier:></a></div>
+<div class='plier_deplier'><a href='#' onclick='jQuery("li.item.court").removeClass("court");return false;' class='noajax'><:seminaire:lien_tout_deplier:></a> | <a href='#' onclick='set_vevent();return false;' class='noajax'><:seminaire:lien_tout_replier:></a></div>
 [(#GET{self}|parametre_url{date_debut,1900-01-01}|aoustrong{<:seminaire:evenements_depuis_debut:>,#ENV{date_debut}|=={1900-01-01},noajax}) |]
 [(#GET{self}|aoustrong{<:agenda:evenements_a_venir:>,#ENV{date_debut}|=={#ENV{date}|affdate{Y-m-d}},noajax}) ]
 </div>
