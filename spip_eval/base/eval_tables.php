@@ -8,7 +8,7 @@
 
 function eval_declarer_tables_principales($tables_principales){
 
-	// Les campagnes d'évaluations
+	// Les campagnes d'evaluations
 	$spip_eval_campagnes = array(
 		"id_evaluation" => "BIGINT(21) NOT NULL auto_increment",
 		"id_rubrique" => "BIGINT(21) NOT NULL",
@@ -27,9 +27,29 @@ function eval_declarer_tables_principales($tables_principales){
 		'key' => &$spip_eval_campagnes_key
 	);
 
-	// création de la table spip_mots_notations
-	// en attendant que spip gère la table spip_mots_objets
-
+	// modification de la table spip_notations
+	$table['spip_notations']['champ'] = 'id_mot';
+	$table['spip_notations']['champ'] = 'commentaire';
+	
+	// modification de la table spip_notations_objets
+	$table['spip_notations_objets']['champ'] = 'id_mot';
+		
+	// creation de la table spip_mots_notations
+	// en attendant que SPIP gere la table spip_mots_objets
+	$spip_mots_notations = array(
+		"id_mot" => "BIGINT(21) NOT NULL",
+		"id_notation" => "BIGINT(21) NOT NULL"
+	);
+	$spip_mots_notations_key = array(
+		"PRIMARY KEY" => "id_mot, id_notation",
+		"KEY id_mot" => "id_mot",
+		"KEY id_notation" => "id_notation"
+	);
+	$tables_principales['spip_mots_notations'] = array(
+		'field' => &$spip_mots_notations,
+		'key' => &$spip_mots_notations_key
+	);
+	
 	return $tables_principales;
 }
 

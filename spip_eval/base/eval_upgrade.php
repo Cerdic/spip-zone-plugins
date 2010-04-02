@@ -20,8 +20,8 @@ function eval_upgrade($nom_meta_base_version,$version_cible){
 			creer_base();
 			ecrire_meta($nom_meta_base_version,$current_version=$version_cible);
 			
-			// pour la gestion des evolutions, prendre modele sur le fichier "notation_upgrade.php" 
-			
+			// pour la gestion des evolutions, prendre modele sur le fichier "notation_upgrade.php"
+
 			// ajout des champs commentaire et id_mot a la table spip_notations
 			sql_alter("TABLE spip_notations ADD COLUMN id_mot BIGINT(21) NOT NULL DEFAULT '0' AFTER id_objet");
 			sql_alter("TABLE spip_notations ADD COLUMN commentaire TEXT NOT NULL DEFAULT '' AFTER note");
@@ -34,6 +34,10 @@ function eval_upgrade($nom_meta_base_version,$version_cible){
 			sql_alter("TABLE spip_notations_objets DROP INDEX objet");
 			sql_alter("TABLE spip_notations_objets DROP INDEX id_objet");
 			sql_alter("TABLE spip_notations_objets ADD PRIMARY KEY (objet, id_objet, id_mot)");
+			
+			// mise a jour des tables modifiees
+			maj_tables("spip_notations");
+			maj_tables("spip_notations_objets");
 		}
 	}
 }
@@ -42,6 +46,8 @@ function eval_upgrade($nom_meta_base_version,$version_cible){
 function eval_vider_tables($nom_meta_base_version) {
 	// effacement de la nouvelle table spip_eval_campagnes
 	sql_drop_table("spip_eval_campagnes");
+	// effacement de la nouvelle table spip_mots_notations
+	sql_drop_table("spip_mots_notations");
 	// suppression du nouvel index de spip_notations
 	sql_alter("TABLE spip_notations DROP INDEX (id_mot)");
 	// suppression des 2 nouveaux champs sur spip_notations
