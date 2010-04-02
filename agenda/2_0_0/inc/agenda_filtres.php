@@ -7,7 +7,7 @@
  */
 
 /**
- * Afficher une de facon textuelle les dates de debut et fin en fonction des cas
+ * Afficher une date de facon textuelle les dates de debut et fin en fonction des cas
  * - Le lundi 20 fevrier a 18h
  * - Le 20 fevrier de 18h a 20h
  * - Du 20 au 23 fevrier
@@ -94,18 +94,6 @@ function agenda_affdate_debut_fin($date_debut, $date_fin, $horaire = 'oui', $for
 function agenda_dateplus($date,$secondes,$format){
 	$date = strtotime($date)+eval("return $secondes;"); // permet de passer une expression
 	return date($format,$date);
-}
-
-/**
- * Afficher un message "une truc"/"N trucs"
- *
- * @param int $nb
- * @return string
- */
-function agenda_affiche_un_ou_plusieurs($nb,$chaine_un,$chaine_plusieurs,$var='nb'){
-	if (!$nb=intval($nb)) return "";
-	if ($nb>1) return _T($chaine_plusieurs, array($var => $nb));
-	else return _T($chaine_un);
 }
 
 function agenda_memo_full($date_deb=0, $date_fin=0 , $titre='', $descriptif='', $lieu='', $url='', $cal='')

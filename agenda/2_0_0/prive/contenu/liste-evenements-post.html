@@ -1,6 +1,6 @@
 #SET{self,#SELF|parametre_url{date_debut|id_evenement|debut_agenda,''}}#SET{yena,''}
 <h2 class='titre'><:agenda:agenda:> : 
-<BOUCLE_compte(EVENEMENTS){id_rubrique?}{id_article?}{id_mot?}{id_evenement_source?} />[(#TOTAL_BOUCLE|agenda_affiche_un_ou_plusieurs{agenda:info_un_evenement,agenda:info_nombre_evenements}|sinon{<:agenda:aucun_evenement:>})]#SET{yena,#TOTAL_BOUCLE|oui}<//B_compte></h2>
+<BOUCLE_compte(EVENEMENTS){id_rubrique?}{id_article?}{id_mot?}{id_evenement_source?} />[(#TOTAL_BOUCLE|singulier_ou_pluriel{agenda:info_un_evenement,agenda:info_nombre_evenements}|sinon{<:agenda:aucun_evenement:>})]#SET{yena,#TOTAL_BOUCLE|oui}<//B_compte></h2>
 <B_agenda>
 <div class='pagination'>
 <div class='plier_deplier'><a href='#' onclick='jQuery("li.item.court").removeClass("court");return false;' class='noajax'><:lien_tout_deplier:></a> | <a href='#' onclick='set_vevent();return false;' class='noajax'><:lien_tout_replier:></a></div>
@@ -13,7 +13,7 @@
 		[(#MODELE{evenement_vevent}|trim|sinon{'?'})]
 		<B_repetitions>
 		<div class='repetitions'>
-			<strong>[(#TOTAL_BOUCLE|agenda_affiche_un_ou_plusieurs{agenda:une_repetition,agenda:nb_repetitions})]</strong>
+			<strong>[(#TOTAL_BOUCLE|singulier_ou_pluriel{agenda:une_repetition,agenda:nb_repetitions})]</strong>
 			<ul>
 				<BOUCLE_repetitions(EVENEMENTS){par date_debut}{id_evenement_source=#ID_EVENEMENT}{" | "}>
 				<li><a class='ajax' href='[(#SELF|parametre_url{id_evenement,#ID_EVENEMENT}|parametre_url{date_debut,#DATE_DEBUT})]'>[(#DATE_DEBUT|agenda_affdate_debut_fin{#DATE_FIN,#HORAIRE})]</a></li>
