@@ -2,7 +2,7 @@
 	<nom>
 		SPIPmotion
 	</nom>
-	<icon>images/flv.png</icon>
+	<icon>images/spipmotion.png</icon>
 	<auteur>
 	Quentin Drouet (kent1)
 	</auteur>
@@ -15,7 +15,7 @@
 	</etat>
 	<description>
 	<multi>
-	[fr] Faire un dailymotion sous spip &iquest; Premi&#232;res infos [par ici->http://kent1.sklunk.net/spip.php?article93].
+	[fr] Faire un dailymotion sous spip ?
 	</multi>
 	</description>
 	<lien>http://kent1.sklunk.net/spip.php?article93</lien>
