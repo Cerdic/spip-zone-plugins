@@ -8,7 +8,6 @@
 **/
 include_spip('inc/meta');
 include_spip('base/create');
-include_spip('inc/vieilles_defs');
 
 function notation_upgrade($nom_meta_base_version,$version_cible){
 	$current_version = 0.0;
