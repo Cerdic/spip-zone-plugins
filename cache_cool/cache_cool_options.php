@@ -78,6 +78,8 @@ function public_produire_page($fond, $contexte, $use_cache, $chemin_cache, $cont
 			#spip_log($c,'cachedelai');
 			return;
 		}
+		if (!$processing)
+			$processing = $background = true;
 	}
 
 	// positionner le contexte des globales si necessaire
@@ -88,6 +90,8 @@ function public_produire_page($fond, $contexte, $use_cache, $chemin_cache, $cont
 	// restaurer le contexte des globales si necessaire
 	if (!is_null($global_context))
 		cache_cool_global_context(false);
+
+	if ($background) $processing = false;
 
 	return $page;
 }
