@@ -34,7 +34,7 @@
  * @param string $connect
  * @return array 
  */
-function public_produire_page($fond, $contexte, $use_cache, $chemin_cache, $contexte_cache, $page, &$lastinclude, $connect=''){
+function public_produire_page($fond, $contexte, $use_cache, $chemin_cache, $contexte_cache, $page, &$lastinclude, $connect='', $global_context=null){
 	static $processing = false;
 	$background = false;
 
@@ -59,7 +59,7 @@ function public_produire_page($fond, $contexte, $use_cache, $chemin_cache, $cont
 			// on differe la maj du cache et on affiche le contenu du cache ce coup ci encore
 			$where = is_null($contexte_cache)?"principal":"inclure_page";
 			// on reprogramme avec un $use_cache=2 qui permettra de reconnaitre ces calculs
-			job_queue_add('public_produire_page',$c="Calcul du cache $fond [$where]",array($fond, $contexte, 2, $chemin_cache, $contexte_cache, array('contexte_implicite'=>$page['contexte_implicite']), $lastinclude, $connect),"",TRUE);
+			job_queue_add('public_produire_page',$c="Calcul du cache $fond [$where]",array($fond, $contexte, 2, $chemin_cache, $contexte_cache, array('contexte_implicite'=>$page['contexte_implicite']), $lastinclude, $connect, cache_cool_get_global_context()),"",TRUE);
 		}
 		gunzip_page($page); // decomprimer la page si besoin
 		#spip_log($c,'cachedelai');
@@ -78,30 +78,17 @@ function public_produire_page($fond, $contexte, $use_cache, $chemin_cache, $cont
 			#spip_log($c,'cachedelai');
 			return;
 		}
-		if (!$processing){
-			$background = true;
-			// vider la session pour calculer dans le bon contexte
-			$sessionv = $GLOBALS['visiteur_session'];
-			$sessiona = $GLOBALS['auteur_session'];
-			unset($GLOBALS['visiteur_session']);
-			unset($GLOBALS['auteur_session']);
-			$processing = true; // indiquer qu'on est deja en differe en cas de reentrance
-		}
 	}
 
+	// positionner le contexte des globales si necessaire
+	if (!is_null($global_context))
+		cache_cool_global_context($global_context);
 	include_spip('public/assembler');
 	$page = public_produire_page_dist($fond, $contexte, $use_cache, $chemin_cache, $contexte_cache, $page, $lastinclude, $connect);
+	// restaurer le contexte des globales si necessaire
+	if (!is_null($global_context))
+		cache_cool_global_context(false);
 
-	if ($background){
-		// baisser le flag processing si c'est nous qui l'avons leve
-		$processing = false;
-		// baisser le flag qui sert a faire remonter une dependance de la session
-		// pour ne pas polluer les calculs suivants eventuels qui n'ont rien a voir
-		unset($GLOBALS['cache_utilise_session']);
-		// restaurer la session
-		$GLOBALS['visiteur_session'] = $sessionv;
-		$GLOBALS['auteur_session'] = $sessiona;
-	}
 	return $page;
 }
 
@@ -125,4 +112,72 @@ function cache_cool_f_jQuery ($texte) {
 	return $texte;
 }
 
+/**
+ * Definir un nouveau contexte de globales (en sauvegardant l'ancien),
+ * ou restaurer l'ancien contexte avec la valeur false
+ * @staticvar array $pile
+ * @param array/bool $push
+ */
+function cache_cool_global_context($push){
+	static $pile = array();
+	// restaurer le contexte
+	if ($push===false AND count($pile)) {
+		cache_cool_set_global_contexte(array_shift($pile));
+	}
+	// definir un nouveau contexte
+	else {
+		// on empile le contexte actuel
+		array_unshift($pile, cache_cool_get_global_context());
+		// et on le modifie
+		cache_cool_set_global_contexte($push);
+	}
+}
+
+/**
+ * Lire les globales utilisees implicitement dans le calcul des
+ * squelettes, et retourner un tableau les contenant
+ *
+ * @return array
+ */
+function cache_cool_get_global_context(){
+	$contexte = array();
+	foreach(array(
+		'spip_lang',
+		'visiteur_session',
+		'auteur_session',
+		'marqueur',
+		'dossier_squelettes',
+		'_COOKIE',
+		'_SERVER',
+		'_GET',
+		'_REQUEST',
+		'profondeur_url',
+		'REQUEST_URI'
+	) as $v)
+		$contexte[$v] = $GLOBALS[$v];
+	$contexte['url_de_base'] = url_de_base(false);
+	$contexte['nettoyer_uri'] = nettoyer_uri();
+	return $contexte;
+}
+
+/**
+ * Assigner les globales fournies par $c
+ * @param array $c
+ * @return void
+ */
+function cache_cool_set_global_contexte($c){
+	if (!is_array($c)) return; // ne rien faire
+	url_de_base($c['url_de_base']); unset($c['url_de_base']);
+	nettoyer_uri($c['nettoyer_uri']); unset($c['nettoyer_uri']);
+	foreach($c as $k=>$v){
+		$GLOBALS[$k] = $v;
+	}
+	foreach(array(
+		'HTTP_SERVER_VARS'=>'_SERVER',
+		'HTTP_GET_VARS'=>'_GET',
+		'HTTP_COOKIE_VARS'=>'_COOKIE',
+		) as $k1=>$k2){
+		$GLOBALS[$k1] = $GLOBALS[$k2];
+	}
+}
 ?>
