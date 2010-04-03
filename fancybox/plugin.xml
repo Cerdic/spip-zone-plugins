@@ -47,7 +47,7 @@ _ Ce plugin fonctionne sur les squelettes disposant de la balise <code>#INSERT_H
 	<icon>images/fancybox-32.png</icon>
 	<options>fancybox_options.php</options>
 	<utilise id="cfg" version="[1.12;]" />
-	<necessite id="saisies" version="[1.7.0;]" />
+	<necessite id="saisies" version="[1.7.1;]" />
 	<necessite id="lib:jquery.fancybox-1.3.1" src="http://fancybox.googlecode.com/files/jquery.fancybox-1.3.1.zip" />
 	<pipeline>
 		<nom>insert_head</nom>
