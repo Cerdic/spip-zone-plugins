@@ -34,11 +34,9 @@
  * @param string $connect
  * @return array 
  */
-function public_produire_page($fond, $contexte, $use_cache, $chemin_cache, $contexte_cache, $page, &$lastinclude, $connect='', $global_context=null){
+function public_produire_page($fond, $contexte, $use_cache, $chemin_cache, $contexte_cache, $page, &$lastinclude, $connect='', $global_context=null, $init_time = null){
 	static $processing = false;
 	$background = false;
-
-	$is_main_url = (strncmp(url_de_base(),$GLOBALS['meta']['adresse_site'],strlen($GLOBALS['meta']['adresse_site']))==0);
 
 	// calcul differe du cache ?
 	// prend la main si
@@ -50,7 +48,6 @@ function public_produire_page($fond, $contexte, $use_cache, $chemin_cache, $cont
 		AND is_array($page) AND isset($page['texte'])
 		AND !$GLOBALS['visiteur_session']['id_auteur']
 		AND !$processing
-		AND $is_main_url
 		) {
 		// si c'est un bot, on ne lance pas un calcul differe
 		// ca ne sert qu'a remplir la queue qui ne sera pas videe par le bot (pas de cron)
@@ -59,7 +56,7 @@ function public_produire_page($fond, $contexte, $use_cache, $chemin_cache, $cont
 			// on differe la maj du cache et on affiche le contenu du cache ce coup ci encore
 			$where = is_null($contexte_cache)?"principal":"inclure_page";
 			// on reprogramme avec un $use_cache=2 qui permettra de reconnaitre ces calculs
-			job_queue_add('public_produire_page',$c="Calcul du cache $fond [$where]",array($fond, $contexte, 2, $chemin_cache, $contexte_cache, array('contexte_implicite'=>$page['contexte_implicite']), $lastinclude, $connect, cache_cool_get_global_context()),"",TRUE);
+			job_queue_add('public_produire_page',$c="Calcul du cache $fond [$where]",array($fond, $contexte, 2, $chemin_cache, $contexte_cache, array('contexte_implicite'=>$page['contexte_implicite']), $lastinclude, $connect, cache_cool_get_global_context(), $_SERVER['REQUEST_TIME']),"",TRUE);
 		}
 		gunzip_page($page); // decomprimer la page si besoin
 		#spip_log($c,'cachedelai');
@@ -70,12 +67,15 @@ function public_produire_page($fond, $contexte, $use_cache, $chemin_cache, $cont
 	if ($use_cache==2){
 		$cacher = charger_fonction('cacher','public');
 		$cacher($contexte_cache, $use_cache, $chemin2, $page, $lastmodified);
-		if (intval($use_cache)!==1 OR !$chemin2 OR !$is_main_url){
-			// on n'est pas dans le bon contexte, il faut se reprogrammer !
-			$where = is_null($contexte_cache)?"principal":"inclure_page";
-			$args = func_get_args();
-			job_queue_add('public_produire_page',$c="[Re] Calcul du cache $fond [$where]",$args,"",TRUE);
-			#spip_log($c,'cachedelai');
+		if (intval($use_cache)!==1 OR !$chemin2){
+			@define('_CACHE_COOL_ABORT_DELAI',600);
+			if ($elapsed = time()-$init_time<_CACHE_COOL_ABORT_DELAI){
+				// on n'est pas dans le bon contexte, il faut se reprogrammer !
+				$where = is_null($contexte_cache)?"principal":"inclure_page";
+				$args = func_get_args();
+				job_queue_add('public_produire_page',$c="[Re$elapsed] Calcul du cache $fond [$where]",$args,"",TRUE);
+				#spip_log($c,'cachedelai');
+			}
 			return;
 		}
 		if (!$processing)
