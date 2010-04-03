@@ -69,7 +69,7 @@ function public_produire_page($fond, $contexte, $use_cache, $chemin_cache, $cont
 		$cacher($contexte_cache, $use_cache, $chemin2, $page, $lastmodified);
 		if (intval($use_cache)!==1 OR !$chemin2){
 			@define('_CACHE_COOL_ABORT_DELAI',600);
-			if ($elapsed = time()-$init_time<_CACHE_COOL_ABORT_DELAI){
+			if (($elapsed = time()-$init_time)<_CACHE_COOL_ABORT_DELAI){
 				// on n'est pas dans le bon contexte, il faut se reprogrammer !
 				$where = is_null($contexte_cache)?"principal":"inclure_page";
 				$args = func_get_args();
