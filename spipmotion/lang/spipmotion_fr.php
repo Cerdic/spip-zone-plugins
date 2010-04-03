@@ -2,6 +2,7 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
+	'caption_avfilter_geres' => 'Filtres vid&eacute;os (avfilters) g&eacute;r&eacute;s',
 	'caption_codecs_geres' => 'Codecs pris en charge',
 	'caption_formats_geres' => 'Formats pris en charge',
 	'codec_type_audio' => 'Audio',
@@ -26,6 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'gestion_format_sortie' => 'Gestion des formats de sortie',
 
 	// I
+	'info_compiler_avfilter-support' => 'Compil&eacute; avec le support des filtres vid&eacute;os (anciennement vhook)',
 	'info_compiler_build_date_timestamp' => 'Date de compilation',
 	'info_compiler_configuration' => 'Variables de compilation',
 	'info_compiler_ffmpeg_version' => 'Version de FFMpeg',
@@ -62,6 +64,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'titre_page_ffmpeg_infos' => 'Informations sur FFMpeg',
+	'th_avfilter_description' => 'Description',
+	'th_avfilter_nom' => 'Nom',
 	'th_format_decode' => 'D&eacute;code',
 	'th_format_encode' => 'Encode',
 	'th_format_nom_complet' => 'Nom complet',

@@ -15,7 +15,7 @@
 	</B_array>
 	[(#CLE|!={build_date}|oui)
 		[(#CLE|!={build_date_timestamp}|oui)
-			<p>[(#VAL{spipmotion:info_compiler_#CLE}|_T)] : [(#VALEUR|?{#VALEUR,<:spipmotion:non:>})]</p>
+			<p>[(#VAL{spipmotion:info_compiler_#CLE}|_T)] : [(#VALEUR|?{[(#VALEUR|=={1}|?{<:spipmotion:oui:>,#VALEUR})],<:spipmotion:non:>})]</p>
 		]
 		[(#CLE|=={build_date_timestamp}|oui)
 			<p>[(#VAL{spipmotion:info_compiler_#CLE}|_T)] : [(#VALEUR|normaliser_date|affdate)]</p>
@@ -88,3 +88,30 @@
 </div>
 </B_codecs>
 <//B_codecs>
+
+<B_avfilter>
+<div class="cadre-trait-couleur cadre">
+<div class="cadre_padding">
+<div class="liste-elements spipmotion ffmpeg_avfilter" id="ffmpeg_avfilter">
+<table class="spip liste">
+	<caption><strong class="caption"><:spipmotion:caption_avfilter_geres:></strong></caption>
+	<thead>
+		<tr class="first_row">
+			<th class="shortname"><:spipmotion:th_avfilter_nom:></th>
+			<th class="description"><:spipmotion:th_avfilter_description:></th>
+		</tr>
+	</thead>
+	<tbody>
+<BOUCLE_avfilter(POUR){tableau #ENV{avfilters}}>
+	<tr[ class="(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})"]>
+		<td class="shortname">#CLE</td>
+		<td class="description">[(#VALEUR|table_valeur{description})]</td>
+	</tr>
+</BOUCLE_avfilter>
+	</tbody>
+</table>
+</div>
+</div>
+</div>
+</B_avfilter>
+<//B_avfilter>

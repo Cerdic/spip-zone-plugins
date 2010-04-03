@@ -24,57 +24,74 @@ function ffmpeg_recuperer_infos_codecs(){
 	/**
 	 * On crée un fichier contenant l'ensemble de la conf de ffmpeg
 	 */
+	//exec('echo "==debut==" &> '.$chemin_fichier,$retour,$bool);
 	exec($chemin.' -formats &> '.$chemin_fichier,$retour,$bool);
+	exec('echo "==CODECS==" >> '.$chemin_fichier,$retour,$bool);
 	exec($chemin.' -codecs >> '.$chemin_fichier,$retour,$bool);
+	exec('echo "==BSFS==" >> '.$chemin_fichier,$retour,$bool);
 	exec($chemin.' -bsfs >> '.$chemin_fichier,$retour,$bool);
+	exec('echo "==PROTOCOLS==" >> '.$chemin_fichier,$retour,$bool);
 	exec($chemin.' -protocols >> '.$chemin_fichier,$retour,$bool);
+	exec('echo "==FILTERS==" >> '.$chemin_fichier,$retour,$bool);
 	exec($chemin.' -filters >> '.$chemin_fichier,$retour,$bool);
+	exec('echo "==PIX_FMTS==" >> '.$chemin_fichier,$retour,$bool);
 	exec($chemin.' -pix_fmts >> '.$chemin_fichier,$retour,$bool);
+	exec('echo "==fin==" >> '.$chemin_fichier,$retour,$bool);
 
 	if (lire_fichier($chemin_fichier, $contenu)){
 		$data = array();
-		$buffer = $contenu;
-		$data['compiler'] = array();
-		$look_ups = array('version' => 'FFmpeg version', 'built' => 'built', 'configuration'=>'configuration: ', 'formats'=>'File formats:', 'codecs'=>'Codecs:', 'filters'=>'Bitstream filters:', 'protocols'=>'Supported file protocols:','pix_formats' => 'Pixel formats:', 'abbreviations'=>'Frame size, frame rate abbreviations:', 'Note:');
+		$look_ups = array(
+			'version' => 'FFmpeg version',
+			'configuration'=>' configuration: ',
+			'formats'=>'File formats:',
+			'codecs'=>'Codecs:',
+			'bitstream_filters'=>'Bitstream filters:',
+			'protocols'=>'Supported file protocols:',
+			'avfilters' => 'Filters',
+			'pix_formats' => 'Pixel formats:',
+			'abbreviations'=>'Frame size, frame rate abbreviations:',
+			'fin' => '==fin==');
 		$total_lookups = count($look_ups);
 		$pregs = array();
 		$indexs = array();
 		foreach($look_ups as $key=>$reg){
-			if(strpos($buffer, $reg) !== false){
+			if(strpos($contenu, $reg) !== false){
 				$index = array_push($pregs, $reg);
 				$indexs[$key] = $index;
 			}
 		}
-		preg_match('/'.implode('(.*)', $pregs).'/s', $buffer, $matches);
+
+		preg_match('/'.implode('(.*)', $pregs).'/s', $contenu, $matches);
 
 		/**
 		 * Récupération des informations de version
 		 */
+		$data['compiler'] = array();
 		$data['compiler']['versions'] = array();
 		$version = trim($matches[$indexs['version']]);
-		preg_match_all('/([a-zA-Z0-9\-]+[0-9\.]+)/', $version, $versions);
-		$data['compiler']['ffmpeg_version'] = $versions[0][0];
+		preg_match('/([a-zA-Z0-9\-]+[0-9\.]+).* on (.*) with gcc (.*)/s', $version, $versions);
+		$data['compiler']['ffmpeg_version'] = $versions[1];
+		$data['compiler']['gcc'] = $versions[3];
+		$data['compiler']['build_date'] = $versions[2];
+		$data['compiler']['build_date_timestamp'] = strtotime($versions[2]);
 
 		/**
 		 * Récupération des éléments de configuration
 		 */
 		$configuration = trim($matches[$indexs['configuration']]);
-		// grab the ffmpeg configuration flags
 		preg_match_all('/--[a-zA-Z0-9\-]+/', $configuration, $config_flags);
 		$data['compiler']['configuration'] = $config_flags[0];
-		$data['compiler']['vhook-support'] = in_array('--enable-vhook', $config_flags[0]) && !in_array('--disable-vhook', $config_flags[0]);
+		// Replace old vhook support
+		$data['compiler']['avfilter-support'] = in_array('--enable-avfilter', $config_flags[0]) && !in_array('--disable-avfilter', $config_flags[0]);
+		//$data['compiler']['vhook-support'] = in_array('--enable-vhook', $config_flags[0]) && !in_array('--disable-vhook', $config_flags[0]);
 
 		/**
 		 * On récupère le numéro de version de gcc,
 		 * la date de compilation et la version de gcc utilisée
 		 */
 		$build = trim($matches[$indexs['built']]);
-		preg_match('/on (.*) with gcc (.*)/', $build, $conf);
-		if(count($conf) > 0){
-			$data['compiler']['gcc'] = $conf[2];
-			$data['compiler']['build_date'] = $conf[1];
-			$data['compiler']['build_date_timestamp'] = strtotime($conf[1]);
-		}
+		preg_match('//', $build, $conf);
+
 
 		/**
 		 * Récupération des formats disponibles
@@ -107,12 +124,33 @@ function ffmpeg_recuperer_infos_codecs(){
 			);
 		}
 
-		// grab the bitstream filters available to ffmpeg
-		$filters = trim($matches[$indexs['filters']]);
-		$data['filters'] = empty($filters) ? array() : explode(' ', $filters);
-		// grab the file prototcols available to ffmpeg
+		/**
+		 * On récupère les filtres bitstream disponibles
+		 */
+		$bitstream_filters = trim($matches[$indexs['bitstream_filters']]);
+		$data['bitstream_filters'] = empty($bitstream_filters) ? array() : preg_split('/\n/', $bitstream_filters);
+
+		/**
+		 * On récupère les protocoles disponibles
+		 */
 		$protocols = trim($matches[$indexs['protocols']]);
-		$data['protocols'] = empty($protocols) ? array() : explode(' ', str_replace(':', '', $protocols));
+		$data['protocols'] = empty($protocols) ? array() : preg_split('/\n/', str_replace(':', '', $protocols));
+
+		/**
+		 * On récupère la liste des filtres avfilter
+		 */
+		preg_match_all('/(.*) {1,} (.*)/', trim($matches[$indexs['avfilters']]), $filters);
+		$data['avfilters'] = array();
+		for($i=0, $a=count($filters[0]); $i<$a; $i++){
+			$data['avfilters'][strtolower(trim($filters[1][$i]))] = array(
+				'nom' 	=> trim($filters[1][$i]),
+				'description' 	=> trim($filters[2][$i]) == '(null)' ? false : trim($filters[2][$i]),
+			);
+		}
+		if(empty($data['avfilters']))
+			$data['compiler']['avfilter-support'] = false;
+		ksort($data['avfilters']);
+
 		// grab the abbreviations available to ffmpeg
 		$abbreviations = trim($matches[$indexs['abbreviations']]);
 		$data['abbreviations'] = empty($abbreviations) ? array() : explode(' ', $abbreviations);
