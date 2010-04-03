@@ -3,19 +3,16 @@
 <!-- refus=<:cfg:refus_configuration_configurer:> -->
 
 <div class="formulaire_spip formulaire_configurer_spipmotion">
-	
+
 [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
 [(#REM) un mot pour dire que le script doit etre executable ... ]
-<?php
-	$f = substr(sprintf('%o', fileperms(_DIR_PLUGIN_SPIPMOTION.'script_bash/spipmotion.sh')), -4);
-	if ($f == 777) {}
-	else{
-		?><p class="reponse_formulaire reponse_formulaire_erreur"><:spipmotion:verifier_droits:></p><?php
-	}
-?>
+[(#SET{script,[(#VAL{#EVAL{_DIR_PLUGIN_SPIPMOTION}script_bash/spipmotion.sh})]})]
+[(#SET{scriptperms,[(#VAL{%o}|sprintf{[(#GET{script}|fileperms)]})]})]
 
+<BOUCLE_script_perms(CONDITION){si #GET{scriptperms}|substr{-4}|>={700}|oui}>
+<BOUCLE_script_lisible(CONDITION){si #GET{script}|is_readable|oui}>
 <form method="post" action="#ENV{action}">
 <div>
 	#ACTION_FORMULAIRE{#ENV{action}}
@@ -49,7 +46,7 @@
 							</BOUCLE_sons>
 						</select>
 						<p><a href="#" class="select_all"><:spipmotion:select_all:></a> <a href="#" class="unselect_all"><:spipmotion:unselect_all:></a></p>
-						
+
 						#SET{videos,#ARRAY|push{mp4}|push{m4v}}
 						<BOUCLE_videos(TYPES_DOCUMENTS){mime_type LIKE video/%}{extension !IN #GET{extensions}}>
 						#SET{videos,#GET{videos}|push{#EXTENSION}}
@@ -75,7 +72,7 @@
 						</select>
 						<p><a href="#" class="select_all"><:spipmotion:select_all:></a> <a href="#" class="unselect_all"><:spipmotion:unselect_all:></a></p>
 						</B_sons_encodage>
-						
+
 						<p class="explications"><:spipmotion:extensions_video:></p>
 						<B_videos1_encodage>
 						<select name="fichiers_videos_encodage[]" multiple="multiple">
@@ -132,3 +129,9 @@ jQuery(document).ready(function(){
 	});
 });
 // --></script>
+</BOUCLE_script_lisible>
+<p class="reponse_formulaire reponse_formulaire_erreur"><:spipmotion:verifier_droits:></p>
+<//B_script_lisible>
+</BOUCLE_script_perms>
+<p class="reponse_formulaire reponse_formulaire_erreur"><:spipmotion:verifier_droits:></p>
+<//B_script_perms>

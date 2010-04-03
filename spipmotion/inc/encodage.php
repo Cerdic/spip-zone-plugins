@@ -36,9 +36,12 @@ function encodage($source,$doc_attente){
 	$fichier = basename($source['fichier']);
 	$string = "$fichier-$width-$height";
 	$query = md5($string);
-	$dossier = _DIR_VAR;
+	$dossier = _DIR_TMP.'/spipmotion/';
 	$fichier_final = substr($fichier,0,-(strlen($source['extension'])+1)).'-encoded.'.$extension_attente;
 
+	if(!is_dir($dossier)){
+		sous_repertoire(_DIR_TMP,'spipmotion');
+	}
 	$fichier_temp = "$dossier$query.$extension_attente";
 	spip_log("le nom temporaire durant l'encodage est $fichier_temp","spipmotion");
 
@@ -78,6 +81,8 @@ function encodage($source,$doc_attente){
 			$height_finale = round($source['hauteur']/($source['largeur']/$width_finale));
 		}
 
+		$texte .= "s=".$width_finale."x".$height_finale."\n";
+
 		spip_log("document original ($chemin) = $width/$height - document final = $width_finale/$height_finale",'spipmotion');
 
 		/**
@@ -93,6 +98,8 @@ function encodage($source,$doc_attente){
 			$fps = lire_config("spipmotion/fps_$extension_attente","15");
 		}
 
+		$texte .= "r=$fps\n";
+
 		/**
 		 * Définition des bitrates
 		 * On vérifie ceux de la source et on compare à ceux souhaités dans la conf
@@ -103,6 +110,8 @@ function encodage($source,$doc_attente){
 		}else{
 			$bitrate = lire_config("spipmotion/bitrate_$extension_attente","448");
 		}
+
+		$texte .= "vb=$bitrate\n";
 
 		if(intval($source['audiobitrate']) && (intval($source['audiobitrate']) < lire_config("spipmotion/bitrate_audio_$extension_attente","64"))){
 			$audiobitrates = array('32','64','96','128','192','256');
@@ -121,6 +130,8 @@ function encodage($source,$doc_attente){
 			$audiobitrate = lire_config("spipmotion/bitrate_audio_$extension_attente","64");
 		}
 
+		$texte .= "ab=$audiobitrate\n";
+
 		if(intval($source['audiosamplerate']) && (intval($source['audiosamplerate']) < lire_config("spipmotion/frequence_audio_$extension_attente","22050"))){
 			$audiosamplerates = array('11025','22050','44100','48000');
 			if(!in_array($source['audiosamplerate'],$audiosamplerates)){
@@ -137,10 +148,25 @@ function encodage($source,$doc_attente){
 		}else{
 			$audiosamplerate = lire_config("spipmotion/frequence_audio_$extension_attente","22050");
 		}
+
+		$texte .= "ar=$audiosamplerate\n";
+
+		if($source['audiochannels'] > 2){
+			$audiochannels = 2;
+		}else{
+			$audiochannels = $source['audiochannels'];
+		}
+
+		$texte .= "ac=$audiochannels\n";
+
+		$fichier_texte = "$dossier$query.txt";
+
+		ecrire_fichier($fichier_texte,$texte);
+
 		/**
 		 * Encodage de la video
 		 */
-		$encodage = find_in_path('script_bash/spipmotion.sh').' --e '.$chemin.' --s '.$fichier_temp.' --size '.$width_finale.'x'.$height_finale.' --bitrate '.$bitrate.' --audiobitrate '.$audiobitrate.' --audiofreq '.$audiosamplerate.' --fps '.$fps.' --p '.lire_config("spipmotion/chemin","/usr/local/bin/ffmpeg");
+		$encodage = find_in_path('script_bash/spipmotion.sh').' --e '.$chemin.' --s '.$fichier_temp.' --fpre='.$fichier_texte.' --p '.lire_config("spipmotion/chemin","/usr/local/bin/ffmpeg");
 		spip_log("$encodage",'spipmotion');
 		$lancement_encodage = exec($encodage,$retour);
 

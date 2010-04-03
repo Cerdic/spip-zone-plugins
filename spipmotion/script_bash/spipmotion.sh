@@ -1,12 +1,13 @@
 #!/bin/bash
-## SPIPmotion : A shell program to convert multimedia files
-## Version 0.2
-##
-## Dependancies :
-##   * ffmpeg with libmp3lame support
-## Credits prealables : aozeo - http://www.aozeo.com/blog/40-linux-convertir-videos-flv-ffmpeg-telephone-portable
+# SPIPmotion : A shell program to convert multimedia files
+# Version 0.2
+#
+# Dependancies :
+#   * ffmpeg with libmp3lame support
+#
+# Credits prealables : aozeo - http://www.aozeo.com/blog/40-linux-convertir-videos-flv-ffmpeg-telephone-portable
 
-VERSION="0.2"
+VERSION="0.3"
 
 ################ LOCALISATION #####################
 messageaide="
@@ -67,7 +68,7 @@ while test -n "${1}"; do
 			exit 1;;
 			esac
 		shift;;
-		--size) size="${2}"
+		--size) size="-s ${2}"
 		shift;;
 		--bitrate) bitrate="-vb ${2}.kb"
 		shift;;
@@ -77,11 +78,15 @@ while test -n "${1}"; do
 		shift;;
 		--audiofreq) audiofreq="-ar ${2}"
 		shift;;
-		--fps) fps="${2}"
+		--fps) fps="-r ${2}"
+		shift;;
+		--ac) ac="-ac ${2}"
 		shift;;
 		--p) chemin="${2}"
 		shift;;
-		*) echo "$mauvaisarg"; exit 1;;
+		--fpre) fpre="-fpre ${2}"
+		shift;;
+		*) echo "$mauvaisarg"; exit 0;;
 	esac
 	shift
 done
@@ -89,7 +94,7 @@ done
 ########## TRAITEMENT DES ARGUMENTS ###############
 
 case "$entree" in
-  "") echo "$pasfichierentree"; exit 1;;
+  "") echo "$pasfichierentree"; exit 0;;
 esac
 
 case "$sortie" in
@@ -122,14 +127,14 @@ case "$acodec" in
 	case "$sortie" in
   		*".mp3"|*".flv") acodec="-acodec libmp3lame" ;;
   		*".flac") acodec="-acodec flac" ;;
-  		*".ogg"|*".oga"|*".ogv") acodec="-acodec vorbis" ;;
+  		*".ogg"|*".oga"|*".ogv") acodec="-acodec libvorbis" ;;
   	esac
 esac
 
 ########### Arguments spécifiques aux videos
 
 case "$size" in
-  "") size="320x240"
+  "") size="-s 320x240"
 esac
 
 case "$bitrate" in
@@ -137,7 +142,7 @@ case "$bitrate" in
 esac
 
 case "$fps" in
-  "") fps="15"
+  "") fps="-r 15"
 esac
 
 case "$vcodec" in
@@ -179,7 +184,7 @@ case "$sortie" in
   nice -19 "$chemin" -i $entree $acodec $audiobitrate $audiofreq -y $sortie ;;
   *".flv"|*".mp4"|*".ogv" )
   echo "on est dans une video"
-  nice -19 "$chemin" -i $entree $acodec $vcodec -s $size $bitrate $audiobitrate $audiofreq -r $fps -y $sortie ;;
+  nice -19 "$chemin" -i $entree $acodec $vcodec $fpre -y $sortie ;;
 esac
 
 echo "$succes"

@@ -2,7 +2,9 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
+	'caption_formats_geres' => 'Formats pris en charge',
 	'choix_encodage_auto' => 'Les fichiers seront ajout&eacute;s automatiquement dans la file d\'attente d\'encodage d&egrave;s leur insertion dans la base de donn&eacute;e',
+
 	// D
 	'document_dans_file_attente' => 'Ce document est dans la file d\'attente pour l\'encodage',
 
@@ -20,6 +22,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'gestion_format_sortie' => 'Gestion des formats de sortie',
 
 	// I
+	'info_compiler_build_date_timestamp' => 'Date de compilation',
+	'info_compiler_configuration' => 'Variables de compilation',
+	'info_compiler_ffmpeg_version' => 'Version de FFMpeg',
+	'info_compiler_gcc' => 'Version du compilateur gcc',
+	'info_compiler_vhook-support' => 'Compil&eacute; avec le support des vhooks',
+	'info_page_ffmpeg_infos' => 'Cette page n\'est qu\'informative. Elle indique la configuration compl&egrave;te de l\'installation de FFMPEG sur votre syst&egrave;me.',
 	'install_ajout_champs_documents' => 'Ajout des champs sur spip_documents',
 	'install_creation_base' => 'Cr&eacute;ation de la base de spipmotion',
 	'install_maj_base' => 'Mise &agrave; jour de la base de spipmotion &agrave la version @version@',
@@ -30,13 +38,30 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_extensions_prises_en_charge' => 'Formats pris en charge de base',
 	'label_extensions_sortie' => 'Formats d\'encodage',
 
+	// N
+	'non' => 'non',
+
+	// O
+	'oui' => 'oui',
+
 	// P
 	'profil_encodage' => 'Profil d\'encodage pour le format : @format@',
 	'profils_encodage_son' => 'Profil(s) d\'encodage (Son)',
 	'profils_encodage_video' => 'Profil(s) d\'encodage (Vid&eacute;o)',
 
+	// R
+	'recuperer_infos' => 'R&eacute;cup&eacute;rer des informations techniques sur la vid&eacute;o',
+	'recuperer_logo' => 'R&eacute;cup&eacute;rer une vignette depuis la vid&eacute;o',
+
 	// S
 	'select_all' => 'Tout s&eacute;lectionner',
+
+	// T
+	'titre_page_ffmpeg_infos' => 'Informations sur FFMpeg',
+	'th_format_decode' => 'D&eacute;code',
+	'th_format_encode' => 'Encode',
+	'th_format_nom_complet' => 'Nom complet',
+	'th_format_nom_court' => 'Nom court',
 
 	// U
 	'unselect_all' => 'Tout d&eacute;s&eacute;lectionner',
@@ -66,10 +91,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_selectionner_video' => 'Vous pouvez insérer une des vid&eacute;os suivantes :',
 	'bouton_encoder' => 'Encoder',
 	'bouton_encoder_videos' => 'VID&Eacute;OS &Agrave; ENCODER',
-	'verifier_droits' => 'V&eacute;rifiez les droits du fichier "script_bash/spipmotion.sh". Les droits sur ce fichier doivent &ecirc;tre en 777.',
 	'encodage_en_cours' => 'ENCODAGE EN COURS...',
 
 	// V
+	'verifier_droits' => 'V&eacute;rifiez les droits du script "script_bash/spipmotion.sh". Les droits sur ce fichier doivent &ecirc;tre en 755.',
 	'version_encodee_de' => 'Ce document est une version encod&eacute;e du document @id_orig@',
 	'video_infos_techniques' => 'Informations techniques...',
 	'video_nom_fichier' => 'Nom du fichier : ',
@@ -86,9 +111,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'video_audiocodec' => 'Codec audio : ',
 	'video_audiochannels' => 'Nombre de canaux audios : ',
 
-	// R
-	'recuperer_logo' => 'R&eacute;cup&eacute;rer une vignette depuis la vid&eacute;o',
-	'recuperer_infos' => 'R&eacute;cup&eacute;rer des informations techniques sur la vid&eacute;o',
 	'zzzz' => 'zzzz'
 );
 ?>
