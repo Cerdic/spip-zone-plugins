@@ -2,7 +2,7 @@
 <ul id="bloc-#ENV{bloc}" class="noisettes">
 	<BOUCLE_noisettes(NOISETTES){type}{composition}{bloc}{par rang}>
 	<li class="noisette"[ style="background-image:url((#NOIZETIER_LISTE_NOISETTES|table_valeur{#NOISETTE}|table_valeur{icon}|image_reduire{24}|extraire_attribut{src}))"]>
-		<BOUCLE_test_modifier(CONDITION){si #ENV{erreurs}|table_valeur{id_noisette}|=={#ID_NOISETTE}|non}>
+		<BOUCLE_test_modifier(CONDITION){si #ENV{id_noisette}|=={#ID_NOISETTE}|non}>
 		<div class="ligne">
 			<div class="description arial2">
 				[(#REM) On teste que la noisette est toujours accessible]
@@ -13,9 +13,8 @@
 				]
 				<div class="titre">[(#NOIZETIER_LISTE_NOISETTES|table_valeur{#NOISETTE}|table_valeur{nom}|sinon{#NOISETTE})]</div>
 					<div class="infos">
-					#SET{infos, (#ENV{erreurs}|table_valeur{infos_#GET{noisette}})}
 					<BOUCLE_parametres(POUR){tableau #PARAMETRES|unserialize}>
-					[<span class="nom_param">(#NOIZETIER_LISTE_NOISETTES|table_valeur{#NOISETTE}|table_valeur{parametres}|table_valeur{#CLE}|table_valeur{label}|sinon{#CLE})</span>]
+					[<span class="nom_param">(#NOIZETIER_LISTE_NOISETTES|table_valeur{#NOISETTE}|table_valeur{parametres}|table_valeur{#CLE}|table_valeur{options}|table_valeur{label}|sinon{#CLE})</span>]
 					[(#NOIZETIER_LISTE_NOISETTES|table_valeur{#NOISETTE}|table_valeur{parametres}|table_valeur{#CLE}|table_valeur{saisie}|=={'oui_non'}|oui)
 						[(#VALEUR|oui) <:item_oui:>][(#VALEUR|non) <:item_non:>]
 					]
@@ -61,10 +60,7 @@
 	#SET{rang_suivant,(#RANG|plus{1})}
 	</BOUCLE_noisettes>
 	<li class="editer_noisette fieldset">
-		#SET{bloc_page_nouvelle_noisette, (#ENV{erreurs}|table_valeur{bloc_page_nouvelle_noisette})}
-		#SET{noisette, (#ENV{erreurs}|table_valeur{noisette})}
-
-		<BOUCLE_pas_demande_noisette(CONDITION){si #GET{bloc_page_nouvelle_noisette}|=={#ENV{bloc_page}}|non}>
+		<BOUCLE_pas_demande_noisette(CONDITION){si #ENV{bloc_page_nouvelle_noisette}|=={#ENV{bloc_page}}|non}>
 			[(#AUTORISER{configurer,noizetier}|oui)
 			<div class="boutons">
 			<button type="submit" class="submit" name="demander_nouvelle_noisette" value="#ENV{bloc_page}">
@@ -74,11 +70,11 @@
 			</div>
 			]
 		</BOUCLE_pas_demande_noisette>
-			[(#GET{noisette}|non)
-				#INCLURE{fond=formulaires/inc-nouvelle_noisette-1, env, bloc_page_nouvelle_noisette=#GET{bloc_page_nouvelle_noisette}}
+			[(#ENV{noisette}|non)
+				#INCLURE{fond=formulaires/inc-nouvelle_noisette-1, env, bloc_page_nouvelle_noisette=#ENV{bloc_page_nouvelle_noisette}}
 			]
-			[(#GET{noisette}|oui)
-				#INCLURE{fond=formulaires/inc-nouvelle_noisette-2, env, bloc_page_nouvelle_noisette=#GET{bloc_page_nouvelle_noisette}, rang_suivant=#GET{rang_suivant}}
+			[(#ENV{noisette}|oui)
+				#INCLURE{fond=formulaires/inc-nouvelle_noisette-2, env, bloc_page_nouvelle_noisette=#ENV{bloc_page_nouvelle_noisette}, rang_suivant=#GET{rang_suivant}}
 			]
 		<//B_pas_demande_noisette>
 	</li>

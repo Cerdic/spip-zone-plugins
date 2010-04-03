@@ -79,16 +79,19 @@ function noizetier_charger_infos_noisette($noisette, $info=""){
 				$infos_noisette['nom'] = _T_ou_typo(spip_xml_aplatit($xml['nom']));
 				$infos_noisette['description'] = isset($xml['description']) ? _T_ou_typo(spip_xml_aplatit($xml['description'])) : '';
 				$infos_noisette['icon'] = isset($xml['icon']) ? find_in_path(reset($xml['icon'])) : '';
-				// Décomposition des paramètres
+				// Décomposition des paramètres (enregistrer sous la forme d'un tableau respectant la norme de saisies
 				$infos_noisette['parametres'] = array();
 				if (spip_xml_match_nodes(',^parametre,', $xml, $parametres)){
 					foreach (array_keys($parametres) as $parametre){
 						list($balise, $attributs) = spip_xml_decompose_tag($parametre);
 						$infos_noisette['parametres'][$attributs['nom']] = array(
-							'label' => $attributs['label'] ? _T($attributs['label']) : $attributs['nom'],
-							'obligatoire' => $attributs['obligatoire'] == 'oui' ? true : false,
-							'saisie' => $attributs['saisie'],
-							'defaut' => $attributs['defaut']
+							'saisie' => $attributs['saisie'] ? $attributs['saisie'] : 'input',
+							'options' => array(
+								'nom' => $attributs['nom'],
+								'label' => $attributs['label'] ? _T($attributs['label']) : $attributs['nom'],
+								'defaut' => $attributs['defaut'],
+								'obligatoire' => $attributs['obligatoire'] == 'oui' ? 'oui' : 'non'
+							)
 						);
 					}
 				}

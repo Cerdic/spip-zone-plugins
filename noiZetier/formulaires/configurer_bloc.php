@@ -16,65 +16,33 @@ function formulaires_configurer_bloc_charger($bloc,$page,$infos_bloc){
 	$contexte['bloc_page'] = $bloc.'-'.$page;
 	$contexte['_infos_bloc'] = $infos_bloc;
 	
-	// Les champs pour les noisettes
-	$contexte['id_noisette'] = 0;
-	$contexte['rang'] = 0;
-	$contexte['parametres'] = array();
-	
-	// Des champs pour controler le formulaire
-	$contexte['demander_nouvelle_entree'] = '';
-	$contexte['id_menu_nouvelle_entree'] = '';
-	$contexte['enregistrer'] = '';
-	
 	// On sait toujours où va la noisette
 	$contexte['_hidden'] .= '<input type="hidden" name="type" value="'.$contexte['type'].'" />';
-	$contexte['_hidden'] .= '<input type="hidden" name="composition" value="'.$composition.'" />';
+	$contexte['_hidden'] .= '<input type="hidden" name="composition" value="'.$contexte['composition'].'" />';
 	$contexte['_hidden'] .= '<input type="hidden" name="bloc" value="'.$contexte['bloc'].'" />';
 	
-	return $contexte;
-}
-
-function formulaires_configurer_bloc_verifier($bloc,$page){
-	$erreurs = array();
-	
 	// Si on demande une nouvelle noisette pour un bloc --------------------------
-	
 	if ($bloc_page = _request('demander_nouvelle_noisette')){
-		$t_bloc_page = explode ('-',$bloc_page,3);
-		$bloc = $t_bloc_page[0];
-		$type = $t_bloc_page[1];
-		$composition = $t_bloc_page[2];
-		$erreurs['bloc'] = $bloc;
-		$erreurs['type'] = $type;
-		$erreurs['composition'] = $composition;
 		// S'il n'y a pas encore de noisette de choisie
 		if (!($noisette = _request('noisette'))){
-			$erreurs['bloc_page_nouvelle_noisette'] = $bloc_page;
+			$contexte['bloc_page_nouvelle_noisette'] = $bloc_page;
 			// On charge les différentes noisettes du type, celles de la composition et celles pour toutes les pages
-			$erreurs['noisettes_type'] = noizetier_lister_noisettes($type);
-			if ($composition!='')
-				$erreurs['noisettes_composition'] = noizetier_lister_noisettes($type.'-'.$composition);
-			$erreurs['noisettes_page'] = noizetier_lister_noisettes('page');
-			if (_request('suivant'))
-				$erreurs['erreur_noisette'] = _T('noizetier:erreur_doit_choisir_noisette');
+			$contexte['_noisettes_type'] = noizetier_lister_noisettes($contexte['type']);
+			if ($contexte['composition']!='')
+				$contexte['_noisettes_composition'] = noizetier_lister_noisettes($contexte['type'].'-'.$contexte['composition']);
+			$contexte['_noisettes_page'] = noizetier_lister_noisettes('page');
 		}
 		// Si on a choisi une noisette
 		else{
-			$erreurs['bloc_page_nouvelle_noisette'] = $bloc_page;
-			$erreurs['noisette'] = $noisette;
+			$contexte['bloc_page_nouvelle_noisette'] = $bloc_page;
+			$contexte['noisette'] = $noisette;
 			// On charge les infos de la noisette choisie
 			$noisettes = noizetier_lister_noisettes();
-			$erreurs['infos_'.$noisette] = $noisettes[$noisette];
-			// On charge les valeurs par défaut des paramètres
-			$valeurs_defaut = array();
-			foreach ($noisettes[$noisette]['parametres'] as $cle => $valeur)
-				$valeurs_defaut[$cle] = $valeur['defaut'];
-			$erreurs = array_merge($erreurs, $valeurs_defaut);
+			$contexte['_infos_'.$noisette] = $noisettes[$noisette];
 		}
 	}
 	
 	// Si on veut modifier une noisette ------------------------------------------
-	
 	if ($id_noisette = intval(_request('modifier_noisette'))){
 		// On va chercher l'existant de cette noisette
 		$entree = sql_fetsel(
@@ -86,37 +54,71 @@ function formulaires_configurer_bloc_verifier($bloc,$page){
 		$parametres = unserialize($entree['parametres']);
 		
 		if (is_array($parametres))
-			$erreurs = array_merge($erreurs, $parametres);
-		$erreurs['id_noisette'] = $id_noisette;
-		$erreurs['noisette'] = $noisette;
+			$contexte = array_merge($contexte, $parametres);
+		$contexte['id_noisette'] = $id_noisette;
+		$contexte['noisette'] = $noisette;
 		// On charge les infos de la noisette choisie
 		$noisettes = noizetier_lister_noisettes();
-		$erreurs['infos_'.$noisette] = $noisettes[$noisette];
+		$contexte['_infos_'.$noisette] = $noisettes[$noisette];
+	}
+	
+	// Si on a validé une noisette et qu'il y a une erreur -------------------------------
+	if (($bloc_page = _request('bloc_page_nouvelle_noisette') or $id_noisette = intval(_request('id_noisette'))) and _request('enregistrer')){
+		$noisette = _request('noisette');
+		$noisettes = noizetier_lister_noisettes();
+		$infos = $noisettes[$noisette];
+		// On teste que chaque paramètre obligatoire est bien renseigné
+		$erreurs = array();
+		foreach ($infos['parametres'] as $nom=>$parametre){
+			if ($parametre['options']['obligatoire']=='oui'){
+				if (_request($nom)=='')
+					$erreurs[$nom] = _T('info_obligatoire');
+			}
+		}
+		// S'il y a des erreurs
+		if(count($erreurs)>0){
+			// On récupère les paramètres transmis
+			foreach ($infos['parametres'] as $nom=>$parametre)
+				$contexte[$nom] = _request($nom);
+			// On transmets les autres éléments du contexte
+			$contexte['_infos_'.$noisette] = $infos;
+			$contexte['noisette'] = $noisette;
+			if ($id_noisette>0)
+				$contexte['id_noisette'] = $id_noisette;
+			if ($bloc_page)
+				$contexte['bloc_page_nouvelle_noisette'] = $bloc_page;
+		}
+	}
+
+	return $contexte;
+}
+
+function formulaires_configurer_bloc_verifier($bloc,$page){
+	$erreurs = array();
+	
+	// Si on demande une nouvelle noisette pour un bloc --------------------------
+	
+	if ($bloc_page = _request('demander_nouvelle_noisette')){
+		// S'il n'y a pas encore de noisette de choisie alors qu'on a demandé la suite
+		if (!($noisette = _request('noisette')))
+			if (_request('suivant'))
+				$erreurs['erreur_noisette'] = _T('noizetier:erreur_doit_choisir_noisette');
 	}
 	
 	// Si on valide une noisette pour un bloc ------------------------------------
 	
 	if (($bloc_page = _request('bloc_page_nouvelle_noisette') or $id_noisette = intval(_request('id_noisette'))) and _request('enregistrer')){
 		$noisette = _request('noisette');
-		$parametres_envoyes = _request('parametres');
 		$noisettes = noizetier_lister_noisettes();
 		$infos = $noisettes[$noisette];
 		// On teste que chaque paramètre obligatoire est bien renseigné
 		foreach ($infos['parametres'] as $nom=>$parametre){
-			if ($parametre['obligatoire']){
-				if (!$parametres_envoyes[$nom]){
-					if ($bloc_page)
-						$erreurs['bloc_page'] = $bloc_page;
-					if ($id_noisette)
-						$erreurs['id_noisette'] = $id_noisette;
-					$erreurs['noisette'] = $noisette;
-					$erreurs['infos_'.$noisette] = $infos;
-					$erreurs['parametres'][$nom] = _T('info_obligatoire');
-				}
+			if ($parametre['options']['obligatoire']=='oui'){
+				if (_request($nom)=='')
+					$erreurs[$nom] = _T('info_obligatoire');
 			}
 		}
 	}
-	
 	return $erreurs;
 }
 
@@ -128,12 +130,13 @@ function formulaires_configurer_bloc_traiter($bloc,$page){
 	if (($bloc_page = _request('bloc_page_nouvelle_noisette') or $id_noisette = intval(_request('id_noisette'))) and _request('enregistrer')){
 		$rang = intval(_request('rang'));
 		$noisette = _request('noisette');
-		if ($parametres_envoyes = _request('parametres'))
-			spip_desinfecte($parametres_envoyes);
-		else
-			$parametres_envoyes = array();
 		$noisettes = noizetier_lister_noisettes();
 		$infos = $noisettes[$noisette];
+		$parametres_envoyes = array();
+		foreach ($infos['parametres'] as $nom=>$parametre)
+			$parametres_envoyes[$nom] = _request($nom);
+		spip_desinfecte($parametres_envoyes);
+
 		
 		// Enregistrement de la noisette
 		if ($bloc_page) {
