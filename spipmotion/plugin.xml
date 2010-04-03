@@ -22,6 +22,9 @@
 	<options>
 	spipmotion_options.php
 	</options>
+	<fonctions>
+	spipmotion_fonctions.php
+	</fonctions>
 	<prefix>
 	spipmotion
 	</prefix>

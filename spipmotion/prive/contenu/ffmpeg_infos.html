@@ -28,7 +28,7 @@
 <B_formats>
 <div class="cadre-trait-couleur cadre">
 <div class="cadre_padding">
-<div class="liste-elements spipmotion ffmpeg_formats">
+<div class="liste-elements spipmotion ffmpeg_formats" id="ffmpeg_formats">
 <table class="spip liste">
 	<caption><strong class="caption"><:spipmotion:caption_formats_geres:></strong></caption>
 	<thead>
@@ -55,3 +55,36 @@
 </div>
 </B_formats>
 <//B_formats>
+
+<B_codecs>
+<div class="cadre-trait-couleur cadre">
+<div class="cadre_padding">
+<div class="liste-elements spipmotion ffmpeg_codecs" id="ffmpeg_codecs">
+<table class="spip liste">
+	<caption><strong class="caption"><:spipmotion:caption_codecs_geres:></strong></caption>
+	<thead>
+		<tr class="first_row">
+			<th class="shortname"><:spipmotion:th_format_nom_court:></th>
+			<th class="fullname"><:spipmotion:th_format_nom_complet:></th>
+			<th class="type"><:spipmotion:th_format_type:></th>
+			<th class="encode"><:spipmotion:th_format_encode:></th>
+			<th class="decode"><:spipmotion:th_format_decode:></th>
+		</tr>
+	</thead>
+	<tbody>
+<BOUCLE_codecs(POUR){tableau #ENV{codecs}}>
+	<tr[ class="(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})"]>
+		<td class="shortname">#CLE</td>
+		<td class="fullname">[(#VALEUR|table_valeur{fullname})]</td>
+		<td class="type">[(#VALEUR|table_valeur{type}|codec_type_to_type)]</td>
+		<td class="encode [(#VALEUR|table_valeur{encode}|?{enabled,disabled})]">[(#VALEUR|table_valeur{encode}|?{<:spipmotion:oui:>,<:spipmotion:non:>})]</td>
+		<td class="decode [(#VALEUR|table_valeur{decode}|?{enabled,disabled})]">[(#VALEUR|table_valeur{decode}|?{<:spipmotion:oui:>,<:spipmotion:non:>})]</td>
+	</tr>
+</BOUCLE_codecs>
+	</tbody>
+</table>
+</div>
+</div>
+</div>
+</B_codecs>
+<//B_codecs>

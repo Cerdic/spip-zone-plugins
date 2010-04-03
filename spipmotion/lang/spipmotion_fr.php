@@ -2,7 +2,11 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
+	'caption_codecs_geres' => 'Codecs pris en charge',
 	'caption_formats_geres' => 'Formats pris en charge',
+	'codec_type_audio' => 'Audio',
+	'codec_type_soustitre' => 'Sous-titre',
+	'codec_type_video' => 'Vid&eacute;o',
 	'choix_encodage_auto' => 'Les fichiers seront ajout&eacute;s automatiquement dans la file d\'attente d\'encodage d&egrave;s leur insertion dans la base de donn&eacute;e',
 
 	// D
@@ -62,6 +66,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'th_format_encode' => 'Encode',
 	'th_format_nom_complet' => 'Nom complet',
 	'th_format_nom_court' => 'Nom court',
+	'th_format_type' => 'Type',
 
 	// U
 	'unselect_all' => 'Tout d&eacute;s&eacute;lectionner',
