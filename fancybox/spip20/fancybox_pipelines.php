@@ -25,7 +25,7 @@ function fancybox_insert_head($flux){
 		'frameheight' => '700'	
 	), $config);
 	// Insertion des librairies js
-	$flux .='<script src="'.url_absolue(find_in_path('javascript/jquery.fancybox-1.2.6.js')).'" type="text/javascript"></script>';
+	$flux .='<script src="'.url_absolue(find_in_path('spip20/javascript/jquery.fancybox-1.2.6.js')).'" type="text/javascript"></script>';
 	$flux .='<script src="'.url_absolue(find_in_path('javascript/fancybox.js')).'" type="text/javascript"></script>';
 	// Init de la fancybox suivant la configuration
 	$flux .='
