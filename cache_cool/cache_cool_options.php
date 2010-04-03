@@ -69,7 +69,10 @@ function public_produire_page($fond, $contexte, $use_cache, $chemin_cache, $cont
 		$cacher($contexte_cache, $use_cache, $chemin2, $page, $lastmodified);
 		if (intval($use_cache)!==1 OR !$chemin2){
 			@define('_CACHE_COOL_ABORT_DELAI',600);
-			if (($elapsed = time()-$init_time)<_CACHE_COOL_ABORT_DELAI){
+			if (
+				($use_cache!=0) // le cache a deja ete mis a jour !
+				AND ($elapsed = time()-$init_time)<_CACHE_COOL_ABORT_DELAI // cette demande est moisie
+				){
 				// on n'est pas dans le bon contexte, il faut se reprogrammer !
 				$where = is_null($contexte_cache)?"principal":"inclure_page";
 				$args = func_get_args();
@@ -156,7 +159,8 @@ function cache_cool_get_global_context(){
 		'_GET',
 		'_REQUEST',
 		'profondeur_url',
-		'REQUEST_URI'
+		'REQUEST_URI',
+		'REQUEST_METHOD',
 	) as $v)
 		$contexte[$v] = $GLOBALS[$v];
 	$contexte['url_de_base'] = url_de_base(false);
