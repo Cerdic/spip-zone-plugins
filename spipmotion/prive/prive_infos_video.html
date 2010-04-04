@@ -20,7 +20,7 @@
 					<strong>(#FICHIER|basename)</strong>
 					</td>
 				</tr>]
-				
+
 				<tr>
 					<td class="video_left">
 						<:spipmotion:video_format:>
@@ -29,7 +29,7 @@
 					<strong>#LARGEUR/#HAUTEUR px</strong>
 					</td>
 				</tr>
-			
+
 				[<tr>
 					<td class="video_left">
 						<:spipmotion:video_duree:>
@@ -38,7 +38,7 @@
 					<strong>(#DUREE) sec.</strong>
 					</td>
 				</tr>]
-				
+
 				[<tr>
 					<td class="video_left">
 						<:spipmotion:video_framecount:>
@@ -47,7 +47,7 @@
 					<strong>(#FRAMECOUNT)</strong>
 					</td>
 				</tr>]
-				
+
 				[<tr>
 					<td class="video_left">
 						<:spipmotion:video_framerate:>
@@ -56,7 +56,7 @@
 					<strong>(#FRAMERATE) img/sec</strong>
 					</td>
 				</tr>]
-				
+
 				[<tr>
 					<td class="video_left">
 						<:spipmotion:video_pixelformat:>
@@ -65,7 +65,7 @@
 					<strong>(#PIXELFORMAT)</strong>
 					</td>
 				</tr>]
-			
+
 				[<tr>
 					<td class="video_left">
 						<:spipmotion:video_bitrate:>
@@ -74,7 +74,7 @@
 					<strong>(#BITRATE)</strong>
 					</td>
 				</tr>]
-				
+
 				[<tr>
 					<td class="video_left">
 						<:spipmotion:video_videobitrate:>
@@ -83,7 +83,7 @@
 					<strong>(#VIDEOBITRATE)</strong>
 					</td>
 				</tr>]
-			
+
 				[<tr>
 					<td class="video_left">
 						<:spipmotion:video_audiobitrate:>
@@ -92,7 +92,7 @@
 					<strong>(#AUDIOBITRATE)</strong>
 					</td>
 				</tr>]
-			
+
 				[<tr>
 					<td class="video_left">
 						<:spipmotion:video_audiosamplerate:>
@@ -101,25 +101,25 @@
 					<strong>(#AUDIOSAMPLERATE)</strong>
 					</td>
 				</tr>]
-				
+
 				[<tr>
 					<td class="video_left">
 						<:spipmotion:video_videocodec:>
 					</td>
 					<td >
-					<strong>(#VIDEOCODEC)</strong>
+					<strong>(#VIDEOCODEC|intval|?{[(#VIDEOCODEC|flv_video_codec_type_to_type)],#VIDEOCODEC})</strong>
 					</td>
 				</tr>]
-			
+
 				[<tr>
 					<td class="video_left">
 						<:spipmotion:video_audiocodec:>
 					</td>
 					<td >
-					<strong>(#AUDIOCODEC)</strong>
+					<strong>(#AUDIOCODEC|intval|?{[(#AUDIOCODEC|flv_audio_codec_type_to_type)],#AUDIOCODEC})</strong>
 					</td>
 				</tr>]
-				
+
 				[<tr>
 					<td class="video_left">
 						<:spipmotion:video_audiochannels:>

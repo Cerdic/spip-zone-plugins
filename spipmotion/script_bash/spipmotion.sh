@@ -183,7 +183,7 @@ case "$sortie" in
   nice -19 "$chemin" -i $entree $acodec $audiobitrate $audiofreq -y $sortie ;;
   *".flv"|*".mp4"|*".ogv" )
   echo "on est dans une video"
-  nice -19 "$chemin" -i $entree $acodec $vcodec $fpre -y $sortie ;;
+  nice -19 "$chemin" -i $entree $acodec $size $vcodec $audiofreq $fpre -y $sortie ;;
 esac
 
 echo "$succes"

@@ -76,6 +76,7 @@ function ffmpeg_recuperer_infos_codecs($forcer){
 			 */
 			$data['spipmotion_compiler'] = array();
 			$data['spipmotion_compiler']['versions'] = array();
+
 			$version = trim($matches[$indexs['version']]);
 			preg_match('/([a-zA-Z0-9\-]+[0-9\.]+).* on (.*) with gcc (.*)/s', $version, $versions);
 			$data['spipmotion_compiler']['ffmpeg_version'] = $versions[1];
@@ -94,6 +95,20 @@ function ffmpeg_recuperer_infos_codecs($forcer){
 			// Replace old vhook support
 			$data['spipmotion_compiler']['avfilter-support'] = in_array('--enable-avfilter', $config_flags[0]) && !in_array('--disable-avfilter', $config_flags[0]);
 			//$data['compiler']['vhook-support'] = in_array('--enable-vhook', $config_flags[0]) && !in_array('--disable-vhook', $config_flags[0]);
+
+			if(extension_loaded('ffmpeg')){
+				$data['spipmotion_compiler']['ffmpeg-php'] = true;
+				$data['spipmotion_compiler']['ffmpeg-php-infos']['ffmpeg-php-version'] = FFMPEG_PHP_VERSION_STRING;
+				$data['spipmotion_compiler']['ffmpeg-php-infos']['ffmpeg-php-builddate'] = FFMPEG_PHP_BUILD_DATE_STRING;
+				$data['spipmotion_compiler']['ffmpeg-php-infos']['libavcodec_build_number'] = LIBAVCODEC_BUILD_NUMBER;
+				$data['spipmotion_compiler']['ffmpeg-php-infos']['libavcodec_version_number'] = LIBAVCODEC_VERSION_NUMBER;
+				$data['spipmotion_compiler']['ffmpeg-php-infos']['ffmpeg-php-gdenabled'] = FFMPEG_PHP_GD_ENABLED;
+
+
+
+			}else{
+				$data['spipmotion_compiler']['ffmpeg-php'] = false;
+			}
 
 			/**
 			 * Récupération des formats disponibles

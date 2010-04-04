@@ -1,15 +1,18 @@
 <div class="cadre-trait-couleur cadre">
+[<img src="(#CHEMIN{images/ffmpeg.png})" alt="" style="float:right;margin:10px" />]
 <div class="cadre_padding">
 	<BOUCLE_version(POUR){tableau #ENV{spipmotion_compiler}}>
 	<B_array>
 	<BOUCLE_array(CONDITION){si #VALEUR|is_array|oui}>
 		<B_compiler>
-		<p>[(#VAL{spipmotion:info_compiler_#CLE}|_T)] :</p>
-		<ul>
+		<div class="cadre cadre-liste">
+		<div class="titrem">[(#VAL{spipmotion:info_compiler_#CLE}|_T)] :</div>
+		<div class="cadre-padding">
 		<BOUCLE_compiler(POUR){tableau #_version:VALEUR}>
-			<li>#VALEUR</li>
+			<div class="tr_liste" style="padding:5px;border-top:1px solid #AAAAAA;">[(#CLE|is_numeric|non)[(#VAL{spipmotion:info_compiler_#CLE}|_T)] : ][(#VALEUR|?{[(#VALEUR|=={1}|?{<:spipmotion:oui:>,#VALEUR})],<:spipmotion:non:>})]</div>
 		</BOUCLE_compiler>
-		</ul>
+		</div>
+		</div>
 		</B_compiler>
 	</BOUCLE_array>
 	</B_array>
@@ -76,7 +79,7 @@
 	<tr[ class="(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})"]>
 		<td class="shortname">#CLE</td>
 		<td class="fullname">[(#VALEUR|table_valeur{fullname})]</td>
-		<td class="type">[(#VALEUR|table_valeur{type}|codec_type_to_type)]</td>
+		<td class="type">[(#VALEUR|table_valeur{type}|ffmpeg_codec_type_to_type)]</td>
 		<td class="encode [(#VALEUR|table_valeur{encode}|?{enabled,disabled})]">[(#VALEUR|table_valeur{encode}|?{<:spipmotion:oui:>,<:spipmotion:non:>})]</td>
 		<td class="decode [(#VALEUR|table_valeur{decode}|?{enabled,disabled})]">[(#VALEUR|table_valeur{decode}|?{<:spipmotion:oui:>,<:spipmotion:non:>})]</td>
 	</tr>

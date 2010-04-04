@@ -60,51 +60,16 @@ function inc_spipmotion_recuperer_infos($id_document){
 		include_spip('inc/xml');
 		$arbre = spip_xml_parse($metadatas);
 		if(($infos['videobitrate'] == 0)||($infos['videocodec'] == 'flv')){
-			/**
-			 * videocodecid (Number): Video codec ID used in the FLV
-			 * (Captionate uses the first video tag for this value).
-			 * Possible values are
-			 * 2: Sorenson H.263
-			 * 3: Screen Video
-			 * 4: On2 VP6
-			 * 5: On2 VP6 with Transparency.
-			 */
-			$videocodecids = array(
-								'2'=>'Sorenson H.263',
-								'3'=>'Screen Video',
-								'4'=>'On2 VP6',
-								'5'=>'On2 VP6 Transparency');
-
 			spip_xml_match_nodes(",^videocodecid,",$arbre, $videocodec_array);
-			spip_log($videocodec_array['videocodecid'][0],'spipmotion');
-			if(array_key_exists($videocodec_array['videocodecid'][0],$videocodecids)){
-				$infos['videocodec'] = $videocodecids[$videocodec_array['videocodecid'][0]];
-			}
+			$infos['videocodec'] = $videocodecids[$videocodec_array['videocodecid'][0]];
+
 			spip_xml_match_nodes(",^videodatarate,",$arbre, $videobitrate_array);
 			$infos['videobitrate'] = $videobitrate_array['videodatarate'][0];
 		}
 		if($movie->hasAudio()){
-			/**
-			 * audiocodecid (Number): Audio codec ID used in the FLV.
-			 * (Captionate uses the first audio tag with non-zero data size for this value).
-			 * Possible values are :
-			 * 0: Uncompressed
-			 * 1: ADPCM
-			 * 2: MP3
-			 * 5: Nellymoser 8kHz Mono
-			 * 6: Nellymoser.
-			 */
-			$audiocodecids = array(
-								'0'=>'Uncompressed',
-								'1'=>'ADPCM',
-								'2'=>'mp3',
-								'5'=>'Nellymoser 8kHz Mono',
-								'6'=>'Nellymoser');
 			spip_xml_match_nodes(",^audiocodecid,",$arbre, $audiocodec_array);
-			spip_log($audiocodec_array[0],'spipmotion');
-			if(array_key_exists($audiocodec_array['audiocodecid'][0],$audiocodecids)){
-				$infos['audiocodec'] = $audiocodecids[$audiocodec_array['audiocodecid'][0]];
-			}
+			$infos['audiocodec'] = $audiocodecids[$audiocodec_array['audiocodecid'][0]];
+
 			spip_xml_match_nodes(",^audiodatarate,",$arbre, $audiobitrate_array);
 			$infos['audiobitrate'] = $audiobitrate_array['audiodatarate'][0];
 		}

@@ -1,20 +1,25 @@
 <h4><:spipmotion:profil_encodage{format=#ENV{valeur}}:></h4>
 <ul>
-	[(#SAISIE{input,width_#ENV{valeur}}
-		{label=<:spipmotion:width_video:>}
-		{defaut=480}{size=4})]
-		
-	[(#SAISIE{input,height_#ENV{valeur}}
-		{label=<:spipmotion:height_video:>}
-		{defaut=320}{size=4})]
-		
-	[(#SAISIE{input,bitrate_#ENV{valeur}}
-		{label=<:spipmotion:bitrate:>}
-		{defaut=418}{size=4})]
-		
-	[(#SAISIE{input,fps_#ENV{valeur}}
-		{label=<:spipmotion:framerate:>}
-		{defaut=15}{size=4})]
+	[(#SAISIE{input,width_#ENV{valeur},
+		label=<:spipmotion:width_video:>,
+		defaut=480,
+		size=4})]
+
+	[(#SAISIE{input,height_#ENV{valeur},
+		label=<:spipmotion:height_video:>,
+		defaut=320,
+		size=4})]
+
+	[(#SAISIE{input,bitrate_#ENV{valeur},
+		label=<:spipmotion:bitrate:>,
+		defaut=418,
+		size=4})]
+
+	[(#SAISIE{input,fps_#ENV{valeur},
+		label=<:spipmotion:framerate:>,
+		defaut=15,
+		size=4})]
+
 	[(#SAISIE{selection,acodev_#ENV{valeur},
 		label=<:spipmotion:codec_son:>,
 		datas=#ARRAY{
@@ -22,11 +27,26 @@
 			cle2,valeur2,
 			cle3,valeur3,
 		}})]
-	[(#SAISIE{input,frequence_audio_#ENV{valeur}}
-		{label=<:spipmotion:frequence_audio:>}
-		{defaut=22050}{size=6})]
-		
-	[(#SAISIE{input,bitrate_audio_#ENV{valeur}}
-		{label=<:spipmotion:bitrate_audio:>}
-		{defaut=64}{size=4})]
+
+	[(#SAISIE{selection,frequence_audio_#ENV{valeur},
+		label=<:spipmotion:frequence_audio:>,
+		defaut=22050,
+		datas=#ARRAY{
+			11025,11025 Hz,
+			22050,22050 Hz,
+			44100,44100 Hz,
+			48000,48000 Hz
+		}})]
+
+	[(#SAISIE{selection,bitrate_audio_#ENV{valeur},
+		label=<:spipmotion:bitrate_audio:>,
+		defaut=64,
+		datas=#ARRAY{
+			32,32 kbps,
+			64,64 kbps,
+			96,96 kbps,
+			128,128 kbps,
+			192,192 kbps,
+			256,256 kbps
+		}})]
 </ul>

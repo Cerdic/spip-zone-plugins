@@ -34,7 +34,7 @@ function encodage($source,$doc_attente){
 	$fichier = basename($source['fichier']);
 	$string = "$fichier-$width-$height";
 	$query = md5($string);
-	$dossier = _DIR_TMP.'/spipmotion/';
+	$dossier = _DIR_TMP.'spipmotion/';
 	$fichier_final = substr($fichier,0,-(strlen($source['extension'])+1)).'-encoded.'.$extension_attente;
 
 	if(!is_dir($dossier)){
@@ -78,7 +78,7 @@ function encodage($source,$doc_attente){
 		else{
 			$height_finale = round($source['hauteur']/($source['largeur']/$width_finale));
 		}
-
+		$video_size = "--size ".$width_finale."x".$height_finale;
 		$texte .= "s=".$width_finale."x".$height_finale."\n";
 
 		spip_log("document original ($chemin) = $width/$height - document final = $width_finale/$height_finale",'spipmotion');
@@ -146,7 +146,7 @@ function encodage($source,$doc_attente){
 		}else{
 			$audiosamplerate = lire_config("spipmotion/frequence_audio_$extension_attente","22050");
 		}
-
+		$video_audiofreq = "--audiofreq ".$audiosamplerate;
 		$texte .= "ar=$audiosamplerate\n";
 
 		if($source['audiochannels'] > 2){
@@ -164,7 +164,7 @@ function encodage($source,$doc_attente){
 		/**
 		 * Encodage de la video
 		 */
-		$encodage = find_in_path('script_bash/spipmotion.sh').' --e '.$chemin.' --s '.$fichier_temp.' --fpre='.$fichier_texte.' --p '.lire_config("spipmotion/chemin","/usr/local/bin/ffmpeg");
+		$encodage = find_in_path('script_bash/spipmotion.sh').' '.$video_audiofreq.' '.$video_size.' --e '.$chemin.' --s '.$fichier_temp.' --fpre='.$fichier_texte.' --p '.lire_config("spipmotion/chemin","/usr/local/bin/ffmpeg");
 		spip_log("$encodage",'spipmotion');
 		$lancement_encodage = exec($encodage,$retour);
 
@@ -176,7 +176,7 @@ function encodage($source,$doc_attente){
 		}else{
 			spip_log("l'encodage est en erreur",'spipmotion');
 		}
-		if(($extension_attente == 'flv') && $encodage_ok){
+		if(is_readable($fichier_temp) && ($extension_attente == 'flv') && $encodage_ok){
 			/**
 			 * Inscrire les metadatas dans la video finale
 			 */

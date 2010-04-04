@@ -15,13 +15,46 @@
  * @param string $type
  * @return string La chaine de caractère lisible
  */
-function codec_type_to_type($type=null){
+function ffmpeg_codec_type_to_type($type=null){
 	$trans = array(
 		'A' => _T('spipmotion:codec_type_audio'),
 		'V' => _T('spipmotion:codec_type_video'),
 		'S' => _T('spipmotion:codec_type_soustitre')
 	);
 
+	return $trans[$type] ? $trans[$type] : $type;
+}
+
+/**
+ * Transforme l'id d'un codec audio d'un fichier flv
+ * en chaine de caractère lisible
+ * @param string $type
+ * @return string La chaine de caractère lisible
+ */
+function flv_audio_codec_type_to_type($type=null){
+	$trans = array(
+		'0'=>'Uncompressed',
+		'1'=>'ADPCM',
+		'2'=>'mp3',
+		'5'=>'Nellymoser 8kHz Mono',
+		'6'=>'Nellymoser'
+	);
+	return $trans[$type] ? $trans[$type] : $type;
+}
+
+/**
+ * Transforme l'id d'un codec video d'un fichier flv
+ * en chaine de caractère lisible
+ * @param string $type
+ * @return string La chaine de caractère lisible
+ */
+function flv_video_codec_type_to_type($type=null){
+	$trans = array(
+		'2'=>'Sorenson H.263',
+		'3'=>'Screen Video',
+		'4'=>'On2 VP6',
+		'5'=>'On2 VP6 Transparency'
+	);
 	return $trans[$type] ? $trans[$type] : $type;
 }
 ?>
