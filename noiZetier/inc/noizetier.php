@@ -34,7 +34,14 @@ function noizetier_lister_noisettes($type='tout',$informer=true){
 				// On ne garde que les squelettes ayant un XML de config
 				if (file_exists("$dossier$noisette.xml")
 					AND (
-						$infos_noisette = !$informer OR ($infos_noisette = noizetier_charger_infos_noisette($dossier.$noisette))
+						$infos_noisette = !$informer OR ($infos_noisette = noizetier_charger_infos_noisette_xml($dossier.$noisette))
+					)){
+					$liste_noisettes[$type][$informer][$noisette] = $infos_noisette;
+				}
+				// Ou les squelettes ayant un fichier YAML de config
+				elseif (file_exists("$dossier$noisette.yaml")
+					AND (
+						$infos_noisette = !$informer OR ($infos_noisette = noizetier_charger_infos_noisette_yaml($dossier.$noisette))
 					)){
 					$liste_noisettes[$type][$informer][$noisette] = $infos_noisette;
 				}
@@ -45,29 +52,13 @@ function noizetier_lister_noisettes($type='tout',$informer=true){
 }
 
 /**
- * Decrire une noisette
- *
- * @staticvar array $infos
- * @param string $noisette
- * @return array
- */
-function noizetier_informer_noisette($noisette){
-	static $infos = array();
-	if (!isset($infos[$noisette])){
-		$fichier = find_in_path("noisettes/$noisette.html");
-		$infos[$noisette] = noizetier_charger_infos_noisette($fichier);
-	}
-	return $infos[$noisette];
-}
-
-/**
  * Charger les informations contenues dans le xml d'une noisette
  *
  * @param string $noisette
  * @param string $info
  * @return array
  */
-function noizetier_charger_infos_noisette($noisette, $info=""){
+function noizetier_charger_infos_noisette_xml($noisette, $info=""){
 		// on peut appeler avec le nom du squelette
 		$fichier = preg_replace(',[.]html$,i','',$noisette).".xml";
 		include_spip('inc/xml');
@@ -84,7 +75,7 @@ function noizetier_charger_infos_noisette($noisette, $info=""){
 				if (spip_xml_match_nodes(',^parametre,', $xml, $parametres)){
 					foreach (array_keys($parametres) as $parametre){
 						list($balise, $attributs) = spip_xml_decompose_tag($parametre);
-						$infos_noisette['parametres'][$attributs['nom']] = array(
+						$infos_noisette['parametres'][] = array(
 							'saisie' => $attributs['saisie'] ? $attributs['saisie'] : 'input',
 							'options' => array(
 								'nom' => $attributs['nom'],
@@ -101,6 +92,81 @@ function noizetier_charger_infos_noisette($noisette, $info=""){
 			return $infos_noisette;
 		else 
 			return isset($infos_noisette[$info]) ? $infos_noisette[$info] : "";
+}
+
+
+/**
+ * Charger les informations contenues dans le YAML d'une noisette
+ *
+ * @param string $noisette
+ * @param string $info
+ * @return array
+ */
+function noizetier_charger_infos_noisette_yaml($noisette, $info=""){
+		// on peut appeler avec le nom du squelette
+		$fichier = preg_replace(',[.]html$,i','',$noisette).".yaml";
+		include_spip('inc/yaml');
+		include_spip('inc/texte');
+		$infos_noisette = array();
+		if ($infos_noisette = yaml_decode_file($fichier)) {
+			if (isset($infos_noisette['nom']))
+				$infos_noisette['nom'] = _T_ou_typo($infos_noisette['nom']);
+			if (isset($infos_noisette['description']))
+				$infos_noisette['description'] = _T_ou_typo($infos_noisette['description']);
+			if (isset($infos_noisette['icon']))
+				$infos_noisette['icon'] = find_in_path($infos_noisette['icon']);
+				
+		}
+
+		if (!$info)
+			return $infos_noisette;
+		else 
+			return isset($infos_noisette[$info]) ? $infos_noisette[$info] : "";
+}
+
+/**
+ * Charger les informations des paramètres d'une noisette
+ *
+ * @param string $noisette
+ * @staticvar array $params_noisettes
+ * @return array
+ */
+function noizetier_charger_parametres_noisette($noisette){
+	static $params_noisettes = null;
+
+	if (is_null($params_noisettes[$noisette])){
+		$noisettes = noizetier_lister_noisettes();
+		$infos = $noisettes[$noisette];
+		$params_noisettes[$noisette] = extrait_parametres_noisette($infos['parametres']);
+	}
+	return $params_noisettes[$noisette];
+}
+
+/**
+ * Transforme un tableau au format du plugin saisies en un tableau de parametres dont les clés sont les noms des paramètres
+ * S'il y a de fieldset, les paramètres sont extraits de son entrée saisie
+ *
+ * @param string $parametres
+ * @return array
+ */
+function extrait_parametres_noisette($parametres){
+	$res = array();
+	foreach($parametres as $parametre) {
+		if ($parametre['saisie']!='fieldset') {
+			$nom = $parametre['options']['nom'];
+			$res[$nom] = $parametre['options'];
+			$res[$nom]['saisie'] = $parametre['saisie'];
+			if(isset($res[$nom]['label']))
+				$res[$nom]['label'] = _T_ou_typo($res[$nom]['label']);
+			if(isset($res[$nom]['datas']))
+				foreach($res[$nom]['datas'] as $cle => $valeur)
+					$res[$nom]['datas'][$cle] = _T_ou_typo($res[$nom]['datas'][$cle]);
+		}
+		else {
+			$res = array_merge($res,extrait_parametres_noisette($parametre['saisies']));
+		}
+	}
+	return $res;
 }
 
 /**

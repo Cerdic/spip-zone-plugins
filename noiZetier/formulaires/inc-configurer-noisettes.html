@@ -14,17 +14,17 @@
 				<div class="titre">[(#NOIZETIER_LISTE_NOISETTES|table_valeur{#NOISETTE}|table_valeur{nom}|sinon{#NOISETTE})]</div>
 					<div class="infos">
 					<BOUCLE_parametres(POUR){tableau #PARAMETRES|unserialize}>
-					[<span class="nom_param">(#NOIZETIER_LISTE_NOISETTES|table_valeur{#NOISETTE}|table_valeur{parametres}|table_valeur{#CLE}|table_valeur{options}|table_valeur{label}|sinon{#CLE})</span>]
-					[(#NOIZETIER_LISTE_NOISETTES|table_valeur{#NOISETTE}|table_valeur{parametres}|table_valeur{#CLE}|table_valeur{saisie}|=={'oui_non'}|oui)
+					[<span class="nom_param">(#NOIZETIER_PARAMS_NOISETTE{#NOISETTE}|table_valeur{#CLE}|table_valeur{label}|sinon{#CLE})</span>]
+					[(#NOIZETIER_PARAMS_NOISETTE{#NOISETTE}|table_valeur{#CLE}|table_valeur{saisie}|=={'oui_non'}|oui)
 						[(#VALEUR|oui) <:item_oui:>][(#VALEUR|non) <:item_non:>]
 					]
-					[(#NOIZETIER_LISTE_NOISETTES|table_valeur{#NOISETTE}|table_valeur{parametres}|table_valeur{#CLE}|table_valeur{saisie}|=={'textarea'}|oui)
+					[(#NOIZETIER_PARAMS_NOISETTE{#NOISETTE}|table_valeur{#CLE}|table_valeur{saisie}|=={'textarea'}|oui)
 						[(#VALEUR**|propre)]
 						[<div class="notes">(#NOTES)</div>]
 					]
-					[(#NOIZETIER_LISTE_NOISETTES|table_valeur{#NOISETTE}|table_valeur{parametres}|table_valeur{#CLE}|table_valeur{saisie}|=={'oui_non'}|non)
-						[(#NOIZETIER_LISTE_NOISETTES|table_valeur{#NOISETTE}|table_valeur{parametres}|table_valeur{#CLE}|table_valeur{saisie}|=={'textarea'}|non)
-							#VALEUR
+					[(#NOIZETIER_PARAMS_NOISETTE{#NOISETTE}|table_valeur{#CLE}|table_valeur{saisie}|=={'oui_non'}|non)
+						[(#NOIZETIER_PARAMS_NOISETTE{#NOISETTE}|table_valeur{#CLE}|table_valeur{saisie}|=={'textarea'}|non)
+							[(#NOIZETIER_PARAMS_NOISETTE{#NOISETTE}|table_valeur{#CLE}|table_valeur{datas}|table_valeur{#VALEUR}|sinon{#VALEUR})]
 						]
 					]
 					

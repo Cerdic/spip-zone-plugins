@@ -112,3 +112,8 @@ ul.liste_noizetier_pages .infos, ul.liste_noizetier_compositions .infos{
 	font-size:0.9em;
 	margin-bottom:5px;
 }
+
+li.saisie_fieldset fieldset{
+	margin:10px;
+	border: solid 1px #AAA;
+}
