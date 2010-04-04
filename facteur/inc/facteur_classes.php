@@ -22,17 +22,21 @@ class Facteur extends PHPMailer {
 
 	function Facteur($email, $objet, $message_html, $message_texte) {
 
-		if ($GLOBALS['meta']['facteur_adresse_envoi'] == 'oui') {
-			$this->From		= $GLOBALS['meta']['facteur_adresse_envoi_email'];
-			$this->FromName	= $GLOBALS['meta']['facteur_adresse_envoi_nom'];
-		} else {
-			$this->From		= $GLOBALS['meta']['email_webmaster'];
-			$this->FromName	= extraire_multi($GLOBALS['meta']['nom_site']);
-		}
+		if ($GLOBALS['meta']['facteur_adresse_envoi'] == 'oui'
+		  AND $GLOBALS['meta']['facteur_adresse_envoi_email'])
+			$this->From = $GLOBALS['meta']['facteur_adresse_envoi_email'];
+		else
+			$this->From = $GLOBALS['meta']['email_webmaster'];
 
-		$this->CharSet	= "utf-8";
-			$this->Mailer	= 'mail';
-		$this->Subject	= unicode_to_utf_8(charset2unicode($objet,$GLOBALS['meta']['charset']));
+		if ($GLOBALS['meta']['facteur_adresse_envoi'] == 'oui'
+		  AND $GLOBALS['meta']['facteur_adresse_envoi_nom'])
+			$this->FromName = $GLOBALS['meta']['facteur_adresse_envoi_nom'];
+		else
+			$this->FromName = strip_tags(extraire_multi($GLOBALS['meta']['nom_site']));
+
+		$this->CharSet = "utf-8";
+		$this->Mailer = 'mail';
+		$this->Subject = unicode_to_utf_8(charset2unicode($objet,$GLOBALS['meta']['charset']));
 
 		//Pour un envoi multiple de mail, $email doit être un tableau avec les adresses.
 		if (is_array($email)) {
@@ -41,36 +45,37 @@ class Facteur extends PHPMailer {
 			}
 		}
 		else
-		$this->AddAddress($email);
+			$this->AddAddress($email);
 
 		if (isset($GLOBALS['meta']['facteur_smtp_sender'])) {
-					$this->Sender = $GLOBALS['meta']['facteur_smtp_sender'];
-					$this->AddCustomHeader("Errors-To: ".$this->Sender);
+			$this->Sender = $GLOBALS['meta']['facteur_smtp_sender'];
+			$this->AddCustomHeader("Errors-To: ".$this->Sender);
 		}
 
 		if (isset($GLOBALS['meta']['facteur_smtp']) AND $GLOBALS['meta']['facteur_smtp'] == 'oui') {
-				$this->Mailer	= 'smtp';
-				$this->Host 	= $GLOBALS['meta']['facteur_smtp_host'];
-				$this->Port 	= $GLOBALS['meta']['facteur_smtp_port'];
+			$this->Mailer	= 'smtp';
+			$this->Host 	= $GLOBALS['meta']['facteur_smtp_host'];
+			$this->Port 	= $GLOBALS['meta']['facteur_smtp_port'];
 			if ($GLOBALS['meta']['facteur_smtp_auth'] == 'oui') {
-					$this->SMTPAuth = true;
-					$this->Username = $GLOBALS['meta']['facteur_smtp_username'];
-					$this->Password = $GLOBALS['meta']['facteur_smtp_password'];
-			} else {
-					$this->SMTPAuth = false;
+				$this->SMTPAuth = true;
+				$this->Username = $GLOBALS['meta']['facteur_smtp_username'];
+				$this->Password = $GLOBALS['meta']['facteur_smtp_password'];
+			}
+			else {
+				$this->SMTPAuth = false;
 			}
 			if (intval(phpversion()) == 5) {
-				if ($GLOBALS['meta']['facteur_smtp_secure'] == 'ssl')
-						$this->SMTPSecure = 'ssl';
-				if ($GLOBALS['meta']['facteur_smtp_secure'] == 'tls')
-						$this->SMTPSecure = 'tls';
+			if ($GLOBALS['meta']['facteur_smtp_secure'] == 'ssl')
+				$this->SMTPSecure = 'ssl';
+			if ($GLOBALS['meta']['facteur_smtp_secure'] == 'tls')
+				$this->SMTPSecure = 'tls';
 			}
 		}
 
 		if (!empty($message_html)) {
 			$message_html = unicode_to_utf_8(charset2unicode($message_html,$GLOBALS['meta']['charset']));
-				$this->Body = $message_html;
-				$this->IsHTML(true);
+			$this->Body = $message_html;
+			$this->IsHTML(true);
 			if ($GLOBALS['meta']['facteur_filtre_css'])
 				$this->ConvertirStylesEnligne();
 			if ($GLOBALS['meta']['facteur_filtre_images'])
@@ -81,7 +86,8 @@ class Facteur extends PHPMailer {
 			if (!$this->Body) {
 				$this->IsHTML(false);
 				$this->Body = $message_texte;
-			} else {
+			}
+			else {
 				$this->AltBody = $message_texte;
 			}
 		}
@@ -139,10 +145,10 @@ class Facteur extends PHPMailer {
 			sort($html_images);
 			for ($i=0; $i<count($html_images); $i++) {
 
-				// Bug Fix: dans thunderbird, il faut etre strict avec le header envoy� avec l'image
+				// Bug Fix: dans thunderbird, il faut etre strict avec le header envoye avec l'image
 				$bouts = explode(".", basename($html_images[$i]));
-					$extension = strtolower(array_pop($bouts));
-					$header_extension = $image_types[$extension];
+				$extension = strtolower(array_pop($bouts));
+				$header_extension = $image_types[$extension];
 
 				$cid = md5(uniqid(time()));
 				$this->AddEmbeddedImage($html_images[$i], $cid, basename($html_images[$i]),'base64',$header_extension);
@@ -276,7 +282,8 @@ class Facteur extends PHPMailer {
 				$this->Body = preg_replace_callback ($pattern, 'facteur_addstyle' , $this->Body);
 				$styles[6][$i]=1; // mark as injected inline
 
-			} elseif ($type=="." && $styles[3][$i]=="" ) {	// general class definition for any tag
+			}
+			elseif ($type=="." && $styles[3][$i]=="" ) {	// general class definition for any tag
 				$styledefinition = trim($styles[5][$i]);
 				$styletag = "";
 				$styleclass = trim($styles[2][$i]);
@@ -322,7 +329,8 @@ class Facteur extends PHPMailer {
 
 		if (function_exists('iconv') && $mode == 'texte_brut') {
 			return iconv("UTF-8", "ISO-8859-1//TRANSLIT", $text);
-		} else {
+		}
+		else {
 			if ($mode == 'texte_brut')
 				$text = str_replace('’',"'",$text);
 			return unicode2charset(utf_8_to_unicode($text),'iso-8859-1');

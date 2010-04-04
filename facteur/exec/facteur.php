@@ -210,18 +210,21 @@ function exec_facteur() {
 
 	echo debut_cadre_trait_couleur("", true, "", _T('facteur:tester_la_configuration'));
 	if (!is_null(_request('tester'))) {
-		if ($GLOBALS['meta']['facteur_adresse_envoi'] == 'oui')
+		if ($GLOBALS['meta']['facteur_adresse_envoi'] == 'oui'
+		  AND $GLOBALS['meta']['facteur_adresse_envoi_email'])
 			$destinataire = $GLOBALS['meta']['facteur_adresse_envoi_email'];
 		else
 			$destinataire = $GLOBALS['meta']['email_webmaster'];
 		$message_html	= recuperer_fond('test_email/test_email_html', array());
 		$message_texte	= recuperer_fond('test_email/test_email_texte', array());
 
-		$test = new Facteur($destinataire, _T('facteur:corps_email_de_test'), $message_html, $message_texte);
-		if (!$test->Send()) {
-				echo '<p>'._T('facteur:erreur').' : '.$test->ErrorInfo.'</p>';
-		} else {
+		$facteur = new Facteur($destinataire, _T('facteur:corps_email_de_test'), $message_html, $message_texte);
+		if (!$facteur->Send()) {
+			echo '<p>'._T('facteur:erreur').' : '.$test->ErrorInfo.'</p>';
+		}
+		else {
 			echo '<p>'._T('facteur:email_test_envoye').'</p>';
+			echo "<iframe style='width:100%;height:500px;' src='".generer_url_public("test_email/test_email_html")."'></iframe>";
 		}
 	} else {
 		echo '<p>'._T('facteur:note_test_configuration').'</p>';

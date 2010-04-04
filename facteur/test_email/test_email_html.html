@@ -4,4 +4,12 @@
 
 <p><:facteur:version_html:></p>
 
+<BOUCLE_image(DOCUMENTS){extension IN jpg,png,gif}{0,1}>
+	#MODELE{img}
+</BOUCLE_image>
+
+<BOUCLE_pdf(DOCUMENTS){extension=pdf}{0,1}>
+	#MODELE{doc}
+</BOUCLE_pdf>
+
 #INCLURE{fond=test_email/inc_bas_email}
