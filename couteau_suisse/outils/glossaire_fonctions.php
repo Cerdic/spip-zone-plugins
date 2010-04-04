@@ -118,7 +118,13 @@ function glossaire_parse($titre) {
 			$titres[] = $m;
 		}
 	}
-	$titres = count($titres)?join(_GLOSSAIRE_TITRE_SEP, $titres):'??';
+	if(count($titres))
+		$titres = join(_GLOSSAIRE_TITRE_SEP, $titres);
+	elseif(count($regs)) {
+		preg_match('/^,(.*),\w*$/', $regs[0], $rr);
+		$titres = preg_replace('@[\\\\]([\.\\\+\*\?\[\^\]\$\(\)\{\}\=\!\<\>\|:,-])@', '$1', $rr[1]);
+	} else
+		$titres = '??';
 	if(count($mots)) {
 		$mots = array_unique($mots);
 		array_walk($mots, 'cs_preg_quote');
