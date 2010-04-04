@@ -1,0 +1,173 @@
+IMPORTANT : Copier-coller le contenu de ce fichier dans les différents champs d'un article SPIP (habituellement le 11), afin d'équiper votre site d'une page de test de la typo générée par SPIP.
+
+Exemple : http://romy.tetue.net/charte-typo
+
+
+
+
+
+Sur-titre :
+
+Sur-titre de l'article
+
+
+
+Titre :
+
+Charte~Typo de ce site
+
+
+
+Sous-titre :
+
+Sous-titre de l'article
+
+
+
+Descriptif rapide :
+
+Cette page présente un échantillon de chacun des enrichissements typographiques disponibles sur ce site. Ce paragraphe constitue le « descriptif rapide » de l'article.
+
+
+
+Chapo :
+
+Cette page présente un échantillon de chacun des enrichissements typographiques disponibles sur ce site. Leur habillage est réalisé par le webmestre, en~CSS, via des feuilles de style externes. Ce~paragraphe constitue donc le chapeau.
+
+
+
+Lien hypertexte :
+Titre :
+
+Exemple de « Lien hypertexte »
+
+URL :
+
+http://www.spip.net
+
+
+
+Texte :
+
+{{{Paragraphes}}}
+
+Premier paragraphe. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam.
+_ Ici, retour à la ligne, généré par le raccourci SPIP «<code>_ </code>». Espace~insécable.
+
+Second paragraphe. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat. Duis semper. Duis arcu massa, scelerisque vitae, consequat in, pretium a, enim. Pellentesque congue.
+
+----
+
+Troisième paragraphe, précédé d'une ligne horizontale de séparation, générée par le raccourci SPIP «<code>----</code>». Praesent egestas leo in pede. Praesent blandit odio eu enim. Pellentesque sed dui ut augue blandit sodales.
+
+{{{Un intertitre normal}}}
+
+Voici du {texte en italique} et du {{texte en gras}}.
+_ Voici un <del>texte supprimé</del> et le <ins>texte inséré en correction</ins>.
+_ Une <dfn>définition</dfn> de terme avec la balise <code><dfn></code>.
+_ Un sigle, par exemple <abbr title="World Wide Web Consortium" lang="en">W3C</abbr>, est lu lettre par lettre, tandis que <acronym title="Système de Publication pour Internet">SPIP</acronym> est un acronyme puisqu'il forme un mot qui est lu normalement.
+
+<bdo dir="ltr">Texte de gauche à droite</bdo> et <bdo dir="rtl">Texte de droite à gauche</bdo> avec <code><bdo></code>.
+_ Mise en exposant <sup>2</sup> et mise en indice : <abbr>H<sub>2</sub>O</abbr>.
+_ Et voici une note de bas de page [[Une note de bas de page est, habituellement, signalée par un numéro placé à l’intérieur du texte, numéro repris en bas de page et proposant un complément d’information. Cette fonctionnalité est automatisée dans SPIP.]].
+
+- Ici, exemple de puce générée par le raccourci SPIP «<code>- </code>». Attention, leur succession ne constitue pas une liste !
+
+-- Un tiret long, généré par le raccourci SPIP «<code>--</code>», utile pour les dialogues.
+
+{{{Hyperliens}}}
+
+SPIP distingue [lien interne->10] et [liens externes|Bonne pratique Opquast N°50->http://fr.opquast.com/bonnes-pratiques/fiche/50] dont URLs directes : [->http://www.spip.net], et lien généré par le raccourci <code>[->site2]</code> : [->site2].
+_ Mieux vaut spécifier la langue de destination, par exemple : [SPIP|Système de Publication pour Internet{ja}->http://www.spip.net/ja].
+_ Lien vers une définition du glossaire prédéfini : [?Wikipédia]
+_ Courriel : [->moi@moi.org]
+_ Une ancre vers les citations : [->#citations]
+
+{{{Listes}}}
+
+Liste non ordonnée (<code>ul</code>), générée avec le raccourci SPIP «<code>-* </code>» :
+-* Élément de liste non numérotée
+-* Élément de liste non numérotée
+-* Élément de liste non numérotée
+-** Plantes
+-*** Ficus
+-*** Olivier
+-** Animaux de compagnie
+-*** Chat
+-*** Chien
+
+Et une liste numérotée (<code>ol</code>), générée avec le raccourci SPIP «<code>-# </code>» :
+-# Voici ma main : elle a cinq doigts. En voici deux, en voici trois.
+_ Le premier, ce gros bonhomme, C’est le pouce qu’il se nomme.
+-# L’index qui montre le chemin, Est le second doigt de la main.
+-# Entre l’index et l’annulaire, Le majeur paraît un grand frère.
+-# L’annulaire porte l’anneau, Avec sa bague, il fait le beau.
+-# Le tout petit auriculaire Marche à côté de l’annulaire.
+
+Regardez mes doigts travailler. Chacun fait son petit métier.
+
+N'oublions pas les listes de définition, générées avec les balises HTML <code><dl></code>, <code><dd></code>, <code><dt></code> :
+<dl>
+<dt>Le kiwi</dt>
+<dd>C'est un fruit mais aussi un petit animal</dd>
+<dt>Le litchi</dt>
+<dd>Un excellent fruit exotique</dd>
+</dl>
+
+{{{Tableaux}}}
+
+||Titre du tableau (caption)|summary||
+|{{entête}}|{{entête}}|{{entête}}|
+| valeur | valeur | valeur |
+| valeur | valeur | valeur |
+| valeur | valeur | valeur |
+
+[citations<-]
+{{{Citations}}}
+
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit. <q>Ceci est une citation au fil du texte (avec la balise HTML <code><q></code>)</q>.
+
+<blockquote>Ceci est une citation ordinaire, avec la balise HTML <code><blockquote></code>. Cras eleifend tristique quam. Fusce gravida lectus vel enim convallis tempor.
+
+Second paragraphe. Maecenas laoreet interdum elit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Phasellus tristique wisi ut lacus.</blockquote>
+
+<quote>Ceci est une citation générée avec le raccourci SPIP <code><quote></code>. Cras eleifend tristique quam. Fusce gravida lectus vel enim convallis tempor.
+
+Second paragraphe. Maecenas laoreet interdum elit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Phasellus tristique wisi ut lacus.</quote>
+
+<poesie>Je le vis, je rougis, je pâlis à sa vue
+Un trouble s’éleva dans mon âme éperdue
+Mes yeux ne voyaient plus, je ne pouvais parler
+Je sentis tout mon corps et transir et brûler.
+
+Ceci est une citation du <cite>Phédre</cite> de Racine, générée avec le raccourci~SPIP <code><poesie></code>, idéal pour les vers des poèmes et chansons.</poesie>
+
+Maecenas mollis. Et voici du code, généré avec le raccourci SPIP <code><code></code> :
+
+<code><?php
+     // ceci est du langage php
+     echo "bonjour";
+?></code>
+
+<cadre>Le raccourci SPIP <cadre> permet publier des extraits de code que l'on peut facilement copier-coller.
+
+<?php
+     // ceci est du langage php
+     echo "au revoir";
+?></cadre>
+
+Sans oublier un <kbd>raccourci-clavier</kbd> (<code><kbd></code>), un <samp>extrait de script</samp> (<code><samp></code>) et une <var>variable</var> (<code><var></code>).
+
+
+Et pour finir en beauté, voici une formule mathématique, générée avec <code><math></code> :
+<math>$a = \sqrt{b^{2} + c^{2}}$</math>
+
+{{{À éviter}}}
+Ces balises ne doivent plus être utilisées car elles sont dépréciées en XHTML~1.0 Strict : <basefont>exemple de basefont</basefont>, <font>exemple de font</font>, <u>exemple de u</u>, <s>exemple de s</s>, <strike>exemple de strike</strike>, etc. Celles-ci sont déconseillées : <b>exemple de b</b>, <i>exemple de i</i>, <big>exemple de big</big>, <small>exemple de small</small>, <tt>exemple de tt</tt>.
+
+
+Post-Scriptum :
+
+Ceci est le texte du Post-Scriptum, où je place habituellement des liens pour en savoir plus, par exemple, vous aurez certainement besoin de : [->12].
+_ Si~cela vous aide, vous pouvez comparer cette page avec [une autre charte typo|Charte typo du site romy.tetue.net->http://romy.tetue.net/charte-typo].
+_ Pour l'insertion des documents, consultez : [->15]
