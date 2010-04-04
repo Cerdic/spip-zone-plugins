@@ -7,9 +7,12 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('inc/plugin');
 define ('_DEBUG_AUTORISER', false);
-define ('_ID_WEBMESTRES', '1'); // '1:5:90' a regler dans mes_options
-
+if (!function_exists('spip_version_compare') OR 
+	spip_version_compare($GLOBALS['spip_version_branche'],"2.1.0-rc","<")) {
+	define ('_ID_WEBMESTRES', '1'); // '1:5:90' a regler dans mes_options
+}
 $GLOBALS['autorite'] = @unserialize($GLOBALS['meta']['autorite']);
 $autorite_erreurs = array();
 

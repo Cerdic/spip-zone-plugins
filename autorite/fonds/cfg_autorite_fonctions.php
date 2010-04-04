@@ -33,7 +33,19 @@ function liste_webmestres($void)
 {
 	$webmestres = array();
 	include_spip('inc/texte');
-	$s = spip_query("SELECT * FROM spip_auteurs WHERE id_auteur IN (". join (',', array_filter(explode(':', _ID_WEBMESTRES), is_numeric)).")");
+	include_spip('inc/plugin');
+
+	// Version SPIP < 2.1 ou alors >= 2.1 mais utilisant toujours le define pour etablir la liste
+	if (!function_exists('spip_version_compare') OR 
+	spip_version_compare($GLOBALS['spip_version_branche'],"2.1.0-rc","<") OR
+	defined('_ID_WEBMESTRES')) {
+		$s = spip_query("SELECT * FROM spip_auteurs WHERE id_auteur IN (". join (',', array_filter(explode(':', _ID_WEBMESTRES), is_numeric)).")");
+	}
+	// Version SPIP >= 2.1 et utilisation du flag webmestre en base de donnees
+	else {
+		$s = spip_query("SELECT * FROM spip_auteurs WHERE webmestre='oui'");
+	}
+
 	while ($qui = sql_fetch($s)) {
 		if (autoriser('webmestre','','',$qui))
 			$webmestres[$qui['id_auteur']] = typo($qui['nom']);

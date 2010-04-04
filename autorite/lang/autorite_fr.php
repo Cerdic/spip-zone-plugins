@@ -36,13 +36,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'config_plugin_qui' => 'Qui peut <strong>modifier la configuration</strong> des plugins (activation...) ?',
 
 //D
-'descriptif_1' => 'Cette page de configuration est r&#233;serv&#233;e au webmestre du site :',
+'descriptif_1' => 'Cette page de configuration est r&#233;serv&#233;e aux webmestres du site :',
 'descriptif_2' => "<hr />
 <p><small>Si vous souhaitez modifier cette liste, veuillez &#233;diter le fichier <tt>config/mes_options.php</tt> (le cr&#233;er le cas &#233;ch&#233;ant) et y indiquer la liste des identifiants des auteurs webmestres, sous la forme suivante :</small></p>
 <html><pre>&lt;?php
   define ('_ID_WEBMESTRES',
   '1:5:8');
 ?&gt;</pre></html>
+<p><small>A partir de SPIP 2.1, il est aussi possible de donner les droits de webmestre &agrave; un administrateur via la page d'&eacute;dition de l'auteur.</small></p>
 <p><small>A noter : les webmestres d&#233;finis de cette mani&#232;re n&#39;ont plus besoin de proc&#233;der &#224; l&#39;authentification par FTP pour les op&#233;rations d&#233;licates (mise &#224; niveau de la base de donn&#233;es, par exemple).</small></p>
 
 <a href='http://www.spip-contrib.net/-Autorite-' class='spip_out'>Cf. documentation</a>
