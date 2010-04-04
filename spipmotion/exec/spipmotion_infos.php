@@ -1,13 +1,14 @@
 <?php
 /**
  * SPIPmotion
- * Gestion de l'encodage des videos et sons directement dans spip
+ * Gestion de l'encodage et des métadonnées de vidéos directement dans spip
  *
  * Auteurs :
- * Quentin Drouet
- * 2006-2009 - Distribue sous licence GNU/GPL
+ * Quentin Drouet (kent1)
+ * 2008-2010 - Distribué sous licence GNU/GPL
  *
  */
+
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/actions'); // *action_auteur
@@ -26,7 +27,7 @@ function exec_spipmotion_infos_dist()
 function exec_spipmotion_infos_args($id_article, $type,$id_document,$script) {
 		include_spip('inc/actions');
 		$infos_videos = charger_fonction('spipmotion_infos_videos', 'inc');
-		if(_request("iframe")=="iframe") { 
+		if(_request("iframe")=="iframe") {
 			$res = $infos_videos($id, $id_document,$type,$script, 'ajax').
 			  $infos_videos($id, $id_document,$type,$script, 'ajax');
 			ajax_retour("<div class='upload_answer upload_document_added'>".$res."</div>",false);

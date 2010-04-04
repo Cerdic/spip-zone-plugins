@@ -1,14 +1,13 @@
 <?php
 /**
-* Plugin SPIPmotion
-* par kent1 (http://kent1.sklunk.net)
-*
-* Copyright (c) 2007-2009
-* Logiciel libre distribué sous licence GNU/GPL.
-*
-* Installation / Désinstallation des tables
-*
-**/
+ * SPIPmotion
+ * Gestion de l'encodage et des métadonnées de vidéos directement dans spip
+ *
+ * Auteurs :
+ * Quentin Drouet (kent1)
+ * 2008-2010 - Distribué sous licence GNU/GPL
+ *
+ */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
@@ -23,7 +22,8 @@ function spipmotion_upgrade($nom_meta_base_version,$version_cible){
 		include_spip('base/abstract_sql');
 		if (version_compare($current_version,'0.0','<=')){
 			creer_base();
-
+			$ffmpeg_infos = charger_fonction('ffmpeg_infos','inc');
+			$ffmpeg_infos(true);
 			echo '<p>'._T('spipmotion:install_creation_base').'</p>';
 			echo '<p>'._T('spipmotion:install_ajout_champs_documents').'</p>';
 			ecrire_meta($nom_meta_base_version,$current_version=$version_cible,'non');
@@ -58,6 +58,13 @@ function spipmotion_upgrade($nom_meta_base_version,$version_cible){
 		if (version_compare($current_version,'0.7','<')){
 			maj_tables('spip_documents');
 			ecrire_meta($nom_meta_base_version,$current_version=0.7);
+		}
+		if (version_compare($current_version,'0.7.1','<')){
+			/**
+			 * Récupérer la configuration de FFMPEG sur le système et la mettre dans les métas
+			 */
+			$ffmpeg_infos = charger_fonction('ffmpeg_infos','inc');
+			$ffmpeg_infos(true);
 		}
 		/**
 		 * TODO : générer un htaccess dans le répertoire script_bash/

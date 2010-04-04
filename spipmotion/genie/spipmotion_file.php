@@ -1,12 +1,13 @@
 <?php
 /**
-* Plugin SPIPmotion
-* par kent1 (http://kent1.sklunk.net)
-*
-* Copyright (c) 2007-2010
-* Logiciel libre distribué sous licence GNU/GPL.
-*
-**/
+ * SPIPmotion
+ * Gestion de l'encodage et des métadonnées de vidéos directement dans spip
+ *
+ * Auteurs :
+ * Quentin Drouet (kent1)
+ * 2008-2010 - Distribué sous licence GNU/GPL
+ *
+ */
 
 /**
  * Fonction appelée par le génie de SPIP à intervalle régulier

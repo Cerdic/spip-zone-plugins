@@ -1,6 +1,6 @@
 #!/bin/bash
 # SPIPmotion : A shell program to convert multimedia files
-# Version 0.2
+# Version 0.3
 #
 # Dependancies :
 #   * ffmpeg with libmp3lame support
@@ -27,11 +27,11 @@ Exemples :
 ./spipmotion.sh --e fichier-entree.avi --s fichier-sortie.flv --size 320x240 --bitrate 448 --fps 15 --audiobitrate 64kbs --audiofreq 22050 --p /usr/local/bin/ffmpeg
 ./spipmotion.sh --e fichier-entree.wav --s fichier-sortie.mp3 --audiobitrate 64 --audiofreq 22050
 
-#####################################################
-##  Ce programme recquiert une version de ffmpeg   ##
-##        compilée avec le support libmp3lame        ##
+#########################################################################################
+##  Ce programme recquiert une version de ffmpeg                                       ##
+##        compilée avec le support libmp3lame                                          ##
 ## Voir http://technique.arscenic.org/compilation-de-logiciel/article/compiler-ffmpeg1 ##
-#####################################################
+#########################################################################################
 "
 		formatsortie="SPIPmotion : le fichier de sortie doit se terminer par une extension reconnue : flv flac ogg ogv oga mp3 mp4"
 		mauvaisarg="SPIPmotion : argument ${1} non reconnu
@@ -86,7 +86,6 @@ while test -n "${1}"; do
 		shift;;
 		--fpre) fpre="-fpre ${2}"
 		shift;;
-		*) echo "$mauvaisarg"; exit 0;;
 	esac
 	shift
 done

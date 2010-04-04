@@ -1,12 +1,11 @@
 <?php
-
-/*
+/**
  * SPIPmotion
- * Gestion de l'encodage des videos directement dans spip
+ * Gestion de l'encodage et des métadonnées de vidéos directement dans spip
  *
  * Auteurs :
- * Quentin Drouet
- * 2008 - Distribue sous licence GNU/GPL
+ * Quentin Drouet (kent1)
+ * 2008-2010 - Distribué sous licence GNU/GPL
  *
  */
 
@@ -16,7 +15,7 @@ include_spip('inc/actions');
 
 function action_spipmotion_logo_dist(){
 	global $redirect;
-	
+
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 
@@ -37,15 +36,15 @@ function action_infos_video_post($r){
 	$document = sql_fetsel("docs.id_document,docs.fichier", "spip_documents AS docs INNER JOIN spip_documents_liens AS L ON L.id_document=docs.id_document","L.id_document=".sql_quote($id_document));
 	$chemin_court = $document['fichier'];
 	$chemin = get_spip_doc($chemin_court);
-	spip_log("on travail sur $chemin","spipmotion");	
-	
+	spip_log("on travail sur $chemin","spipmotion");
+
 	$movie = new ffmpeg_movie($chemin,0);
 	$string_temp = "$id-$type-$id_document";
 	$query = md5($string_temp);
 	$dossier_temp = _DIR_VAR;
 	$fichier_temp = "$dossier_temp$query.jpg";
-	spip_log("fichier temporaire = $fichier_temp","spipmotion");	
-	
+	spip_log("fichier temporaire = $fichier_temp","spipmotion");
+
 	$frame1 = $movie->getFrame(100);
 	if($frame1){
 		spip_log('frame1 existe');
@@ -53,19 +52,19 @@ function action_infos_video_post($r){
 		imagejpeg($img_temp, $fichier_temp);
 		$img_finale = $fichier_temp;
 		$mode = 'vignette';
-		
+
 		$ajouter_documents = charger_fonction('ajouter_documents', 'inc');
-	
-		spip_log("on ajoute $img","spipmotion");	
+
+		spip_log("on ajoute $img","spipmotion");
 		// verifier l'extension du fichier en fonction de son type mime
 		list($extension,$arg) = fixer_extension_document($arg);
-		$x = $ajouter_documents($img_finale, $img_finale, 
+		$x = $ajouter_documents($img_finale, $img_finale,
 				    $type, $id, $mode, $id_document, $actifs);
-		
+
 		imagedestroy($img_temp);
 		unlink($img_finale);
 	}
-	
+
 	// un invalideur a la hussarde qui doit marcher au moins pour article, breve, rubrique
 	include_spip('inc/invalideur');
 	suivre_invalideur("id='id_$type/$id'");

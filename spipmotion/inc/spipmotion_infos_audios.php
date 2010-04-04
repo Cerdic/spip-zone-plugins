@@ -1,13 +1,14 @@
 <?php
 /**
  * SPIPmotion
- * Gestion de l'encodage et des métadonnées de vidéos et sons directement dans spip
+ * Gestion de l'encodage et des métadonnées de vidéos directement dans spip
  *
  * Auteurs :
- * Quentin Drouet
- * 2006-2009 - Distribué sous licence GNU/GPL
+ * Quentin Drouet (kent1)
+ * 2008-2010 - Distribué sous licence GNU/GPL
  *
  */
+
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function inc_spipmotion_infos_audios_dist($id, $id_document,$type,$script='',$ignore_flag = false) {

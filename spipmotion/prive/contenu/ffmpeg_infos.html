@@ -1,6 +1,6 @@
 <div class="cadre-trait-couleur cadre">
 <div class="cadre_padding">
-	<BOUCLE_version(POUR){tableau #ENV{compiler}}>
+	<BOUCLE_version(POUR){tableau #ENV{spipmotion_compiler}}>
 	<B_array>
 	<BOUCLE_array(CONDITION){si #VALEUR|is_array|oui}>
 		<B_compiler>
@@ -40,7 +40,7 @@
 		</tr>
 	</thead>
 	<tbody>
-<BOUCLE_formats(POUR){tableau #ENV{formats}}>
+<BOUCLE_formats(POUR){tableau #ENV{spipmotion_formats}}>
 	<tr[ class="(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})"]>
 		<td class="shortname">#CLE</td>
 		<td class="fullname">[(#VALEUR|table_valeur{fullname})]</td>
@@ -72,7 +72,7 @@
 		</tr>
 	</thead>
 	<tbody>
-<BOUCLE_codecs(POUR){tableau #ENV{codecs}}>
+<BOUCLE_codecs(POUR){tableau #ENV{spipmotion_codecs}}>
 	<tr[ class="(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})"]>
 		<td class="shortname">#CLE</td>
 		<td class="fullname">[(#VALEUR|table_valeur{fullname})]</td>
@@ -102,7 +102,7 @@
 		</tr>
 	</thead>
 	<tbody>
-<BOUCLE_avfilter(POUR){tableau #ENV{avfilters}}>
+<BOUCLE_avfilter(POUR){tableau #ENV{spipmotion_avfilters}}>
 	<tr[ class="(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})"]>
 		<td class="shortname">#CLE</td>
 		<td class="description">[(#VALEUR|table_valeur{description})]</td>

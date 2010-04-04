@@ -1,161 +1,174 @@
 <?php
+/**
+ * SPIPmotion
+ * Gestion de l'encodage et des métadonnées de vidéos directement dans spip
+ *
+ * Auteurs :
+ * Quentin Drouet (kent1)
+ * 2008-2010 - Distribué sous licence GNU/GPL
+ *
+ */
 
-function inc_ffmpeg_infos_dist(){
-
-	if(!is_dir(_DIR_CACHE.'spipmotion')){
-		sous_repertoire(_DIR_CACHE,'spipmotion');
-	}
-
-	$infos_codecs = ffmpeg_recuperer_infos_codecs();
+function inc_ffmpeg_infos_dist($forcer=false){
+	$infos_codecs = ffmpeg_recuperer_infos_codecs($forcer);
 	return $infos_codecs;
 }
 
 /**
  * Récupération des informations sur les codecs disponibles
  */
-function ffmpeg_recuperer_infos_codecs(){
-	$chemin = lire_config('spipmotion/chemin','');
-	$chemin_fichier = _DIR_CACHE.'spipmotion/ffmpeg_codecs';
+function ffmpeg_recuperer_infos_codecs($forcer){
 
-	if(!$chemin){
-		return false;
-	}
+	if($forcer){
+		if(!is_dir(_DIR_CACHE.'spipmotion')){
+			sous_repertoire(_DIR_CACHE,'spipmotion');
+		}
+		$chemin = lire_config('spipmotion/chemin','');
+		$chemin_fichier = _DIR_CACHE.'spipmotion/ffmpeg_codecs';
 
-	/**
-	 * On crée un fichier contenant l'ensemble de la conf de ffmpeg
-	 */
-	//exec('echo "==debut==" &> '.$chemin_fichier,$retour,$bool);
-	exec($chemin.' -formats &> '.$chemin_fichier,$retour,$bool);
-	exec('echo "==CODECS==" >> '.$chemin_fichier,$retour,$bool);
-	exec($chemin.' -codecs >> '.$chemin_fichier,$retour,$bool);
-	exec('echo "==BSFS==" >> '.$chemin_fichier,$retour,$bool);
-	exec($chemin.' -bsfs >> '.$chemin_fichier,$retour,$bool);
-	exec('echo "==PROTOCOLS==" >> '.$chemin_fichier,$retour,$bool);
-	exec($chemin.' -protocols >> '.$chemin_fichier,$retour,$bool);
-	exec('echo "==FILTERS==" >> '.$chemin_fichier,$retour,$bool);
-	exec($chemin.' -filters >> '.$chemin_fichier,$retour,$bool);
-	exec('echo "==PIX_FMTS==" >> '.$chemin_fichier,$retour,$bool);
-	exec($chemin.' -pix_fmts >> '.$chemin_fichier,$retour,$bool);
-	exec('echo "==fin==" >> '.$chemin_fichier,$retour,$bool);
+		if(!$chemin){
+			return false;
+		}
 
-	if (lire_fichier($chemin_fichier, $contenu)){
-		$data = array();
-		$look_ups = array(
-			'version' => 'FFmpeg version',
-			'configuration'=>' configuration: ',
-			'formats'=>'File formats:',
-			'codecs'=>'Codecs:',
-			'bitstream_filters'=>'Bitstream filters:',
-			'protocols'=>'Supported file protocols:',
-			'avfilters' => 'Filters',
-			'pix_formats' => 'Pixel formats:',
-			'abbreviations'=>'Frame size, frame rate abbreviations:',
-			'fin' => '==fin==');
-		$total_lookups = count($look_ups);
-		$pregs = array();
-		$indexs = array();
-		foreach($look_ups as $key=>$reg){
-			if(strpos($contenu, $reg) !== false){
-				$index = array_push($pregs, $reg);
-				$indexs[$key] = $index;
+		/**
+		 * On crée un fichier contenant l'ensemble de la conf de ffmpeg
+		 */
+		exec($chemin.' -formats &> '.$chemin_fichier,$retour,$bool);
+		exec('echo "==CODECS==" >> '.$chemin_fichier,$retour,$bool);
+		exec($chemin.' -codecs >> '.$chemin_fichier,$retour,$bool);
+		exec('echo "==BSFS==" >> '.$chemin_fichier,$retour,$bool);
+		exec($chemin.' -bsfs >> '.$chemin_fichier,$retour,$bool);
+		exec('echo "==PROTOCOLS==" >> '.$chemin_fichier,$retour,$bool);
+		exec($chemin.' -protocols >> '.$chemin_fichier,$retour,$bool);
+		exec('echo "==FILTERS==" >> '.$chemin_fichier,$retour,$bool);
+		exec($chemin.' -filters >> '.$chemin_fichier,$retour,$bool);
+		exec('echo "==PIX_FMTS==" >> '.$chemin_fichier,$retour,$bool);
+		exec($chemin.' -pix_fmts >> '.$chemin_fichier,$retour,$bool);
+		exec('echo "==fin==" >> '.$chemin_fichier,$retour,$bool);
+
+		if (lire_fichier($chemin_fichier, $contenu)){
+			$data = array();
+			$look_ups = array(
+				'version' => 'FFmpeg version',
+				'configuration'=>' configuration: ',
+				'formats'=>'File formats:',
+				'codecs'=>'Codecs:',
+				'bitstream_filters'=>'Bitstream filters:',
+				'protocols'=>'Supported file protocols:',
+				'avfilters' => 'Filters',
+				'pix_formats' => 'Pixel formats:',
+				'abbreviations'=>'Frame size, frame rate abbreviations:',
+				'fin' => '==fin==');
+			$total_lookups = count($look_ups);
+			$pregs = array();
+			$indexs = array();
+			foreach($look_ups as $key=>$reg){
+				if(strpos($contenu, $reg) !== false){
+					$index = array_push($pregs, $reg);
+					$indexs[$key] = $index;
+				}
 			}
+
+			preg_match('/'.implode('(.*)', $pregs).'/s', $contenu, $matches);
+
+			/**
+			 * Récupération des informations de version
+			 */
+			$data['spipmotion_compiler'] = array();
+			$data['spipmotion_compiler']['versions'] = array();
+			$version = trim($matches[$indexs['version']]);
+			preg_match('/([a-zA-Z0-9\-]+[0-9\.]+).* on (.*) with gcc (.*)/s', $version, $versions);
+			$data['spipmotion_compiler']['ffmpeg_version'] = $versions[1];
+			$data['spipmotion_compiler']['gcc'] = $versions[3];
+			$data['spipmotion_compiler']['build_date'] = $versions[2];
+			$data['spipmotion_compiler']['build_date_timestamp'] = strtotime($versions[2]);
+
+			/**
+			 * Récupération des éléments de configuration
+			 */
+			$configuration = trim($matches[$indexs['configuration']]);
+			preg_match_all('/--[a-zA-Z0-9\-]+/', $configuration, $config_flags);
+			ksort($config_flags[0]);
+			$data['spipmotion_compiler']['configuration'] = $config_flags[0];
+
+			// Replace old vhook support
+			$data['spipmotion_compiler']['avfilter-support'] = in_array('--enable-avfilter', $config_flags[0]) && !in_array('--disable-avfilter', $config_flags[0]);
+			//$data['compiler']['vhook-support'] = in_array('--enable-vhook', $config_flags[0]) && !in_array('--disable-vhook', $config_flags[0]);
+
+			/**
+			 * Récupération des formats disponibles
+			 * Pour chaque format reconnu on retourne un array avec
+			 */
+			preg_match_all('/ (DE|D|E) (.*) {1,} (.*)/', trim($matches[$indexs['formats']]), $formats);
+			$data['spipmotion_formats'] = array();
+			for($i=0, $a=count($formats[0]); $i<$a; $i++){
+				$data['spipmotion_formats'][strtolower(trim($formats[2][$i]))] = array(
+					'encode' 	=> $formats[1][$i] == 'DE' || $formats[1][$i] == 'E',
+					'decode' 	=> $formats[1][$i] == 'DE' || $formats[1][$i] == 'D',
+					'fullname'	=> $formats[3][$i]
+				);
+			}
+			ecrire_meta('spipmotion_formats',serialize($data['spipmotion_formats']));
+
+			/**
+			 * Récupération des codecs disponibles
+			 */
+			preg_match_all('/ (D| )(E| )(V|A|S)(S| )(D| )(T| ) (.*) {1,} (.*)/', trim($matches[$indexs['codecs']]), $codecs);
+			$data['spipmotion_codecs'] = array();
+			for($i=0, $a=count($codecs[0]); $i<$a; $i++){
+				$data['spipmotion_codecs'][strtolower(trim($codecs[7][$i]))] = array(
+					'decode' 	=> $codecs[1][$i] == 'D',
+					'encode' 	=> $codecs[2][$i] == 'E',
+					'type'	=> $codecs[3][$i],
+					'draw_horiz_band'	=> $codecs[4][$i] == 'S',
+					'direct_rendering'	=> $codecs[5][$i] == 'D',
+					'weird_frame_truncation' => $codecs[6][$i] == 'T',
+					'fullname' => $codecs[8][$i]
+				);
+			}
+			ecrire_meta('spipmotion_codecs',serialize($data['spipmotion_codecs']));
+
+			/**
+			 * On récupère les filtres bitstream disponibles
+			 */
+			$bitstream_filters = trim($matches[$indexs['bitstream_filters']]);
+			$data['spipmotion_bitstream_filters'] = empty($bitstream_filters) ? array() : preg_split('/\n/', $bitstream_filters);
+			ecrire_meta('spipmotion_bitstream_filters',serialize($data['spipmotion_bitstream_filters']));
+
+			/**
+			 * On récupère les protocoles disponibles
+			 */
+			$protocols = trim($matches[$indexs['protocols']]);
+			$data['spipmotion_protocols'] = empty($protocols) ? array() : preg_split('/\n/', str_replace(':', '', $protocols));
+			ecrire_meta('spipmotion_protocols',serialize($data['spipmotion_protocols']));
+
+			/**
+			 * On récupère la liste des filtres avfilter
+			 */
+			preg_match_all('/(.*) {1,} (.*)/', trim($matches[$indexs['avfilters']]), $filters);
+			$data['spipmotion_avfilters'] = array();
+			for($i=0, $a=count($filters[0]); $i<$a; $i++){
+				$data['spipmotion_avfilters'][strtolower(trim($filters[1][$i]))] = array(
+					'nom' 	=> trim($filters[1][$i]),
+					'description' 	=> trim($filters[2][$i]) == '(null)' ? false : trim($filters[2][$i]),
+				);
+			}
+			if(empty($data['spipmotion_avfilters']))
+				$data['spipmotion_compiler']['avfilter-support'] = false;
+			ksort($data['spipmotion_avfilters']);
+
+			ecrire_meta('spipmotion_avfilters',serialize($data['spipmotion_avfilters']));
+
+			ecrire_meta('spipmotion_compiler',serialize($data['spipmotion_compiler']));
 		}
-
-		preg_match('/'.implode('(.*)', $pregs).'/s', $contenu, $matches);
-
-		/**
-		 * Récupération des informations de version
-		 */
-		$data['compiler'] = array();
-		$data['compiler']['versions'] = array();
-		$version = trim($matches[$indexs['version']]);
-		preg_match('/([a-zA-Z0-9\-]+[0-9\.]+).* on (.*) with gcc (.*)/s', $version, $versions);
-		$data['compiler']['ffmpeg_version'] = $versions[1];
-		$data['compiler']['gcc'] = $versions[3];
-		$data['compiler']['build_date'] = $versions[2];
-		$data['compiler']['build_date_timestamp'] = strtotime($versions[2]);
-
-		/**
-		 * Récupération des éléments de configuration
-		 */
-		$configuration = trim($matches[$indexs['configuration']]);
-		preg_match_all('/--[a-zA-Z0-9\-]+/', $configuration, $config_flags);
-		$data['compiler']['configuration'] = $config_flags[0];
-		// Replace old vhook support
-		$data['compiler']['avfilter-support'] = in_array('--enable-avfilter', $config_flags[0]) && !in_array('--disable-avfilter', $config_flags[0]);
-		//$data['compiler']['vhook-support'] = in_array('--enable-vhook', $config_flags[0]) && !in_array('--disable-vhook', $config_flags[0]);
-
-		/**
-		 * On récupère le numéro de version de gcc,
-		 * la date de compilation et la version de gcc utilisée
-		 */
-		$build = trim($matches[$indexs['built']]);
-		preg_match('//', $build, $conf);
-
-
-		/**
-		 * Récupération des formats disponibles
-		 * Pour chaque format reconnu on retourne un array avec
-		 */
-		preg_match_all('/ (DE|D|E) (.*) {1,} (.*)/', trim($matches[$indexs['formats']]), $formats);
-		$data['formats'] = array();
-		for($i=0, $a=count($formats[0]); $i<$a; $i++){
-			$data['formats'][strtolower(trim($formats[2][$i]))] = array(
-				'encode' 	=> $formats[1][$i] == 'DE' || $formats[1][$i] == 'E',
-				'decode' 	=> $formats[1][$i] == 'DE' || $formats[1][$i] == 'D',
-				'fullname'	=> $formats[3][$i]
-			);
-		}
-
-		/**
-		 * Récupération des codecs disponibles
-		 */
-		preg_match_all('/ (D| )(E| )(V|A|S)(S| )(D| )(T| ) (.*) {1,} (.*)/', trim($matches[$indexs['codecs']]), $codecs);
-		$data['codecs'] = array();
-		for($i=0, $a=count($codecs[0]); $i<$a; $i++){
-			$data['codecs'][strtolower(trim($codecs[7][$i]))] = array(
-				'decode' 	=> $codecs[1][$i] == 'D',
-				'encode' 	=> $codecs[2][$i] == 'E',
-				'type'	=> $codecs[3][$i],
-				'draw_horiz_band'	=> $codecs[4][$i] == 'S',
-				'direct_rendering'	=> $codecs[5][$i] == 'D',
-				'weird_frame_truncation' => $codecs[6][$i] == 'T',
-				'fullname' => $codecs[8][$i]
-			);
-		}
-
-		/**
-		 * On récupère les filtres bitstream disponibles
-		 */
-		$bitstream_filters = trim($matches[$indexs['bitstream_filters']]);
-		$data['bitstream_filters'] = empty($bitstream_filters) ? array() : preg_split('/\n/', $bitstream_filters);
-
-		/**
-		 * On récupère les protocoles disponibles
-		 */
-		$protocols = trim($matches[$indexs['protocols']]);
-		$data['protocols'] = empty($protocols) ? array() : preg_split('/\n/', str_replace(':', '', $protocols));
-
-		/**
-		 * On récupère la liste des filtres avfilter
-		 */
-		preg_match_all('/(.*) {1,} (.*)/', trim($matches[$indexs['avfilters']]), $filters);
-		$data['avfilters'] = array();
-		for($i=0, $a=count($filters[0]); $i<$a; $i++){
-			$data['avfilters'][strtolower(trim($filters[1][$i]))] = array(
-				'nom' 	=> trim($filters[1][$i]),
-				'description' 	=> trim($filters[2][$i]) == '(null)' ? false : trim($filters[2][$i]),
-			);
-		}
-		if(empty($data['avfilters']))
-			$data['compiler']['avfilter-support'] = false;
-		ksort($data['avfilters']);
-
-		// grab the abbreviations available to ffmpeg
-		$abbreviations = trim($matches[$indexs['abbreviations']]);
-		$data['abbreviations'] = empty($abbreviations) ? array() : explode(' ', $abbreviations);
+	}else{
+		$data['spipmotion_compiler'] = unserialize($GLOBALS['meta']['spipmotion_compiler']);
+		$data['spipmotion_formats'] = unserialize($GLOBALS['meta']['spipmotion_formats']);
+		$data['spipmotion_codecs'] = unserialize($GLOBALS['meta']['spipmotion_codecs']);
+		$data['spipmotion_bitstream_filters'] = unserialize($GLOBALS['meta']['spipmotion_bitstream_filters']);
+		$data['spipmotion_protocols'] = unserialize($GLOBALS['meta']['spipmotion_protocols']);
+		$data['spipmotion_avfilters'] = unserialize($GLOBALS['meta']['spipmotion_avfilters']);
 	}
-
 	return $data;
 }
 ?>

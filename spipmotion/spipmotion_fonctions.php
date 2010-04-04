@@ -1,4 +1,13 @@
 <?php
+/**
+ * SPIPmotion
+ * Gestion de l'encodage et des métadonnées de vidéos directement dans spip
+ *
+ * Auteurs :
+ * Quentin Drouet (kent1)
+ * 2008-2010 - Distribué sous licence GNU/GPL
+ *
+ */
 
 /**
  * Transforme un type de codec donné par la config de ffmpeg

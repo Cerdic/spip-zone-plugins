@@ -1,14 +1,13 @@
 <?php
 /**
-* Plugin SPIPmotion
-* par kent1 (http://kent1.sklunk.net)
-*
-* Copyright (c) 2007-2009
-* Logiciel libre distribué sous licence GNU/GPL.
-*
-* Définition des tables
-*
-**/
+ * SPIPmotion
+ * Gestion de l'encodage et des métadonnées de vidéos directement dans spip
+ *
+ * Auteurs :
+ * Quentin Drouet (kent1)
+ * 2008-2010 - Distribué sous licence GNU/GPL
+ *
+ */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 

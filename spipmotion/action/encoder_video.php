@@ -2,10 +2,10 @@
 /**
  * SPIPmotion
  * Gestion de l'encodage et des métadonnées de vidéos directement dans spip
- * 
+ *
  * Auteurs :
- * Quentin Drouet
- * 2006-2009 - Distribué sous licence GNU/GPL
+ * Quentin Drouet (kent1)
+ * 2008-2010 - Distribué sous licence GNU/GPL
  *
  */
 if (!defined("_ECRIRE_INC_VERSION")) return;
@@ -17,7 +17,7 @@ include_spip('inc/actions');
 function action_encoder_video_dist()
 {
 	global $redirect;
-	
+
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 
@@ -45,13 +45,13 @@ function action_encoder_video_sous_action($id, $id_document, $mode, $type, &$doc
 	$sousaction5 = _request('sousaction5');
 	$redirect = _request('redirect');
 	$iframe_redirect = _request('iframe_redirect');
-	
+
 	// pas terrible, mais c'est le pb du bouton Submit qui retourne son texte,
 // et son transcodage est couteux et perilleux
-	$sousaction = 
+	$sousaction =
        ($sousaction1 ? 1 :
 	($sousaction2 ? 2 :
-	 ($sousaction3 ? 3 : 
+	 ($sousaction3 ? 3 :
 	  ($sousaction4 ? 4 :
 	   $sousaction5 ))));
 	   	spip_log("$chemin");
@@ -59,14 +59,14 @@ function action_encoder_video_sous_action($id, $id_document, $mode, $type, &$doc
 	     ($sousaction2 ? $url : $chemin));
 
      $sousaction = charger_fonction('encoder_video' . $sousaction, 'inc');
-     $type_video = $sousaction($path, $mode, $type, $id, $id_document, 
+     $type_video = $sousaction($path, $mode, $type, $id, $id_document,
 		 $hash, $redirect, $documents_actifs, $iframe_redirect);
 
      $redirect = urldecode($redirect);
      if ($documents_actifs) {
 	$redirect = parametre_url($redirect,'show_docs',join(',',$documents_actifs),'&');
      }
-     
+
     if (!$ancre) {
 
 		if ($mode=='vignette')
@@ -93,7 +93,7 @@ function action_encoder_video_sous_action($id, $id_document, $mode, $type, &$doc
 function inc_encoder_video3_dist($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs, $iframe_redirect)
 {
 	if (!$path || strstr($path, '..')) return;
-	    
+
 	$upload = determine_upload();
 		spip_log($upload);
 	if ($path != '/' AND $path != './') $upload .= $path;
