@@ -17,8 +17,8 @@
 			<li class="comments_fil">
 				<label for="comments_fil">Présentation du&nbsp;fil (de discussion)</label>
                 <select name="comments_fil" id="comments_fil">
-                    <option value="list"[(#env{comments_fil,list}|=={list}|oui) selected="selected"]>Liste de commentaires (&agrave; plat)</option>
-                    <option value="thread"[(#env{comments_fil,list}|=={thread}|oui) selected="selected"]>Enfilade de commentaires (en thread)</option>
+                    <option value="list"[(#ENV{comments_fil,list}|=={list}|oui) selected="selected"]>Liste de commentaires (&agrave; plat)</option>
+                    <option value="thread"[(#ENV{comments_fil,list}|=={thread}|oui) selected="selected"]>Enfilade de commentaires (en thread)</option>
                 </select>
 			</li>
 		</ul>
@@ -42,10 +42,10 @@
 			<li class="comments_permalink">
 				<label for="permalink">Apparence du lien permanent vers le commentaire</label>
                 <select name="permalink" id="permalink" style="width: 12em;">
-                    <option value="picto"[(#env{permalink,diese}|=={picto}|oui) selected="selected"]>Picto</option>
-                    <option value="compteur"[(#env{permalink,diese}|=={compteur}|oui) selected="selected"]>Compteur (1.)</option>
-                    <option value="diese"[(#env{permalink,diese}|=={diese}|oui) selected="selected"]>Di&egrave;se (#)</option>
-                    <option value="aucun"[(#env{permalink,diese}|=={aucun}|oui) selected="selected"]>Aucun</option>
+                    <option value="picto"[(#ENV{permalink,diese}|=={picto}|oui) selected="selected"]>Picto</option>
+                    <option value="compteur"[(#ENV{permalink,diese}|=={compteur}|oui) selected="selected"]>Compteur (1.)</option>
+                    <option value="diese"[(#ENV{permalink,diese}|=={diese}|oui) selected="selected"]>Di&egrave;se (#)</option>
+                    <option value="aucun"[(#ENV{permalink,diese}|=={aucun}|oui) selected="selected"]>Aucun</option>
                 </select>
 			</li>
 		</ul>
