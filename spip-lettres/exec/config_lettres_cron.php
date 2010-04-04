@@ -62,7 +62,7 @@
 
 		echo '<br /><br /><br />';
 		echo gros_titre(_T('titre_configuration'),'',false);
-		echo barre_onglets("configuration", "config_lettres_formulaire");
+		echo barre_onglets("configuration", "config_lettres_formulaire_top");
 		echo "<br>";
 		echo barre_onglets("lettres", "config_lettres_cron");
 

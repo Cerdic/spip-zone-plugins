@@ -74,9 +74,9 @@
 		echo '<div class="cadre-formulaire-editer">';
 		echo '<div class="entete-formulaire">';
 		if ($abonne->existe)
-			echo icone_inline(_T('icone_retour'), generer_url_ecrire('abonnes', 'id_abonne='.$abonne->id_abonne), _DIR_PLUGIN_LETTRE_INFORMATION.'/prive/images/abonne.png', "rien.gif", $GLOBALS['spip_lang_left']);
+			echo icone_inline(_T('icone_retour'), generer_url_ecrire('abonnes', 'id_abonne='.$abonne->id_abonne), _DIR_PLUGIN_LETTRES.'prive/images/abonne.png', "rien.gif", $GLOBALS['spip_lang_left']);
 		else
-			echo icone_inline(_T('icone_retour'), generer_url_ecrire('abonnes_tous'), _DIR_PLUGIN_LETTRE_INFORMATION.'/prive/images/abonne.png', "rien.gif", $GLOBALS['spip_lang_left']);
+			echo icone_inline(_T('icone_retour'), generer_url_ecrire('abonnes_tous'), _DIR_PLUGIN_LETTRES.'prive/images/abonne.png', "rien.gif", $GLOBALS['spip_lang_left']);
 		echo _T('lettresprive:modifier_abonne');
 		echo '<h1>'.sinon($abonne->email, _T('lettresprive:nouvel_abonne')).'</h1>';
 		echo '</div>';

@@ -34,9 +34,9 @@
 		echo debut_gauche('', true);
 		echo afficher_objets('nb_envoi', _T('lettresprive:evolution_nb_envois'), array('FROM' => 'spip_lettres_statistiques', 'ORDER BY' => 'periode DESC'));
 		echo bloc_des_raccourcis(
-				icone_horizontale(_T('lettresprive:creer_nouvelle_lettre'), generer_url_ecrire("lettres_edit"), _DIR_PLUGIN_LETTRE_INFORMATION."/prive/images/lettre-24.png", 'creer.gif', false).
-				icone_horizontale(_T('lettresprive:aller_liste_abonnes'), generer_url_ecrire("abonnes_tous"), _DIR_PLUGIN_LETTRE_INFORMATION."/prive/images/abonne.png", 'rien.gif', false).
-				icone_horizontale(_T('lettresprive:configurer_formulaire_abonnement'), generer_url_ecrire("config_lettres_formulaire"), _DIR_PLUGIN_LETTRE_INFORMATION."/prive/images/config_formulaire.png", 'rien.gif', false)
+				icone_horizontale(_T('lettresprive:creer_nouvelle_lettre'), generer_url_ecrire("lettres_edit"), _DIR_PLUGIN_LETTRES."prive/images/lettre-24.png", 'creer.gif', false).
+				icone_horizontale(_T('lettresprive:aller_liste_abonnes'), generer_url_ecrire("abonnes_tous"), _DIR_PLUGIN_LETTRES."prive/images/abonne.png", 'rien.gif', false).
+				icone_horizontale(_T('lettresprive:configurer_formulaire_abonnement'), generer_url_ecrire("config_lettres_formulaire"), _DIR_PLUGIN_LETTRES."prive/images/config_formulaire.png", 'rien.gif', false)
 			);
   		echo pipeline('affiche_gauche',array('args'=>array('exec'=>'lettres_tous'),'data'=>''));
 

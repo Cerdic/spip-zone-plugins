@@ -195,9 +195,9 @@
 		echo afficher_objets('lettres_mini', _T('info_meme_rubrique'), array('FROM' => 'spip_lettres', 'WHERE' => 'id_rubrique='.intval($lettre->id_rubrique).' AND id_lettre!='.intval($lettre->id_lettre), 'ORDER BY' => 'maj DESC'));
 
 		echo bloc_des_raccourcis(
-				icone_horizontale(_T('lettresprive:creer_nouvelle_lettre'), generer_url_ecrire("lettres_edit"), _DIR_PLUGIN_LETTRE_INFORMATION."/prive/images/lettre-24.png", 'creer.gif', false).
-				icone_horizontale(_T('lettresprive:aller_liste_lettres'), generer_url_ecrire("lettres_tous"), _DIR_PLUGIN_LETTRE_INFORMATION.'/prive/images/lettre-24.png', 'rien.gif', false).
-				icone_horizontale(_T('lettresprive:ajouter_abonne'), generer_url_ecrire('abonnes_edit'), _DIR_PLUGIN_LETTRE_INFORMATION.'/prive/images/abonne.png', 'creer.gif', false)
+				icone_horizontale(_T('lettresprive:creer_nouvelle_lettre'), generer_url_ecrire("lettres_edit"), _DIR_PLUGIN_LETTRES."prive/images/lettre-24.png", 'creer.gif', false).
+				icone_horizontale(_T('lettresprive:aller_liste_lettres'), generer_url_ecrire("lettres_tous"), _DIR_PLUGIN_LETTRES.'prive/images/lettre-24.png', 'rien.gif', false).
+				icone_horizontale(_T('lettresprive:ajouter_abonne'), generer_url_ecrire('abonnes_edit'), _DIR_PLUGIN_LETTRES.'prive/images/abonne.png', 'creer.gif', false)
 			);
 
 		echo pipeline('affiche_gauche',array('args'=>array('exec'=>'lettres','id_lettre'=>$lettre->id_lettre),'data'=>''));
@@ -211,7 +211,7 @@
 		if ($GLOBALS['meta']['spip_lettres_utiliser_articles'] == 'oui') {
 			if ($lettre->statut == 'brouillon') {
 				$articles.= '<form method="post" action="'.generer_url_ecrire('lettres', 'id_lettre='.$lettre->id_lettre).'">';
-				$articles.= debut_cadre_enfonce(_DIR_PLUGIN_LETTRE_INFORMATION.'/prive/images/articles.gif', true, "", _T('lettresprive:articles'));
+				$articles.= debut_cadre_enfonce(_DIR_PLUGIN_LETTRES.'prive/images/articles.gif', true, "", _T('lettresprive:articles'));
 				$affiche = true;
 			} else {
 				if (sql_countsel('spip_articles_lettres', 'id_lettre='.intval($lettre->id_lettre)))
@@ -220,7 +220,7 @@
 					$affiche = false;
 				if ($affiche) {
 					$articles.= '<form method="post" action="'.generer_url_ecrire('lettres', 'id_lettre='.$lettre->id_lettre).'">';
-					$articles.= debut_cadre_enfonce(_DIR_PLUGIN_LETTRE_INFORMATION.'/prive/images/articles.gif', true, "", _T('lettresprive:articles'));
+					$articles.= debut_cadre_enfonce(_DIR_PLUGIN_LETTRES.'prive/images/articles.gif', true, "", _T('lettresprive:articles'));
 				}
 			}
 			if ($affiche) {
@@ -269,7 +269,7 @@
 
 		if ($lettre->statut == 'envoyee') {
 			$renvoi = '<form method="post" action="'.generer_url_ecrire('lettres', 'id_lettre='.$lettre->id_lettre).'">';
-			$renvoi.= debut_cadre_enfonce(_DIR_PLUGIN_LETTRE_INFORMATION.'/prive/images/renvoi.png', true, "", _T('lettresprive:renvoyer_lettre'));
+			$renvoi.= debut_cadre_enfonce(_DIR_PLUGIN_LETTRES.'prive/images/renvoi.png', true, "", _T('lettresprive:renvoyer_lettre'));
 			$renvoi.= '<p><label><input type="checkbox" name="tous" value="1" /> '._T('lettresprive:renvoyer_a_tous').'</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <label>'._T('lettresprive:ou_abonne').' <input type="text" name="email_abonne" value="" /></label></p>';
 			$renvoi.= '<div align="right">';
 			$renvoi.= '<input type="submit" name="renvoyer_lettre" class="fondo" value="'._T('lettresprive:renvoyer').'" />';
@@ -324,7 +324,7 @@
 		if ($lettre->statut == 'brouillon') {
 			echo '<div class="bandeau_actions">';
 			echo '<div style="float: right;">';
-			echo icone_inline(_T('lettresprive:modifier_lettre'), generer_url_ecrire("lettres_edit", "id_lettre=".$lettre->id_lettre), _DIR_PLUGIN_LETTRE_INFORMATION.'/prive/images/lettre-24.png', "edit.gif", $GLOBALS['spip_lang_left']);
+			echo icone_inline(_T('lettresprive:modifier_lettre'), generer_url_ecrire("lettres_edit", "id_lettre=".$lettre->id_lettre), _DIR_PLUGIN_LETTRES.'prive/images/lettre-24.png', "edit.gif", $GLOBALS['spip_lang_left']);
 			echo '</div>';
 			echo '</div>';
 		}

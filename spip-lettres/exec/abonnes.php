@@ -84,8 +84,8 @@
 		echo '</div>';
 
 		echo bloc_des_raccourcis(
-				icone_horizontale(_T('lettresprive:aller_liste_abonnes'), generer_url_ecrire("abonnes_tous"), _DIR_PLUGIN_LETTRE_INFORMATION."/prive/images/abonne.png", 'rien.gif', false).
-				icone_horizontale(_T('lettresprive:ajouter_abonne'), generer_url_ecrire('abonnes_edit'), _DIR_PLUGIN_LETTRE_INFORMATION.'/prive/images/abonne.png', 'creer.gif', false)
+				icone_horizontale(_T('lettresprive:aller_liste_abonnes'), generer_url_ecrire("abonnes_tous"), _DIR_PLUGIN_LETTRES."prive/images/abonne.png", 'rien.gif', false).
+				icone_horizontale(_T('lettresprive:ajouter_abonne'), generer_url_ecrire('abonnes_edit'), _DIR_PLUGIN_LETTRES.'prive/images/abonne.png', 'creer.gif', false)
 			);
 
   		echo pipeline('affiche_gauche',array('args'=>array('exec'=>'abonnes', 'id_abonne' => $abonne->id_abonne), 'data'=>''));
@@ -100,7 +100,7 @@
 		global $table_des_abonnes;
 		echo '<div class="bandeau_actions">';
 		echo '<div style="float: right;">';
-		echo icone_inline($table_des_abonnes[$abonne->objet]['url_prive_titre'], generer_url_ecrire($table_des_abonnes[$abonne->objet]['url_prive'], $table_des_abonnes[$abonne->objet]['champ_id'].'='.$abonne->id_objet), _DIR_PLUGIN_LETTRE_INFORMATION.'/prive/images/abonne.png', "edit.gif", $GLOBALS['spip_lang_left']);
+		echo icone_inline($table_des_abonnes[$abonne->objet]['url_prive_titre'], generer_url_ecrire($table_des_abonnes[$abonne->objet]['url_prive'], $table_des_abonnes[$abonne->objet]['champ_id'].'='.$abonne->id_objet), _DIR_PLUGIN_LETTRES.'prive/images/abonne.png', "edit.gif", $GLOBALS['spip_lang_left']);
 		echo '</div>';
 		echo '</div>';
 
@@ -110,7 +110,7 @@
 
 		$abonnements = sql_select('*', 'spip_abonnes_rubriques', 'id_abonne='.intval($abonne->id_abonne), '', 'date_abonnement DESC');
 		if (sql_count($abonnements) > 0) {
-			echo debut_cadre_enfonce(_DIR_PLUGIN_LETTRE_INFORMATION.'/prive/images/rubrique-24.png', true, "", _T('lettresprive:boite_abonnements'));
+			echo debut_cadre_enfonce(_DIR_PLUGIN_LETTRES.'prive/images/rubrique-24.png', true, "", _T('lettresprive:boite_abonnements'));
 			echo '<table cellpadding="2" cellspacing="0" width="100%" class="arial2" style="border: 1px solid #aaaaaa;">';
 			while ($abo = sql_fetch($abonnements)) {	
 				$id_rubrique = $abo['id_rubrique'];
@@ -120,7 +120,7 @@
 				else
 					$titre = sql_getfetsel('titre', 'spip_rubriques', 'id_rubrique='.intval($id_rubrique));
 				echo "<tr style='background-color: #eeeeee;'>";
-				echo '<td width="12">'.http_img_pack(_DIR_PLUGIN_LETTRE_INFORMATION.'/prive/images/rubrique-12.png', "rub", '').'</td>';
+				echo '<td width="12">'.http_img_pack(_DIR_PLUGIN_LETTRES.'prive/images/rubrique-12.png', "rub", '').'</td>';
 				echo '<td><a href="'.generer_url_ecrire("naviguer","id_rubrique=".$id_rubrique).'">'.typo($titre).'</a></td>';
 				echo '<td width="60" class="arial1">'._T('lettresprive:'.$statut).'</td>';
 				echo '<td width="100" class="arial1">'.affdate($abo['date_abonnement']).'</td>';
@@ -134,7 +134,7 @@
 		$test_racine = sql_countsel('spip_abonnes_rubriques', 'id_abonne='.intval($abonne->id_abonne).' AND id_rubrique=0');
 		if (!$test_racine) {
 			echo '<form method="post" action="'.generer_url_ecrire('abonnes', 'id_abonne='.$abonne->id_abonne).'">';
-			echo debut_cadre_enfonce(_DIR_PLUGIN_LETTRE_INFORMATION.'/prive/images/rubrique-24.png', true, "", _T('lettresprive:nouvel_abonnement'));
+			echo debut_cadre_enfonce(_DIR_PLUGIN_LETTRES.'prive/images/rubrique-24.png', true, "", _T('lettresprive:nouvel_abonnement'));
 			$selecteur_rubrique = charger_fonction('chercher_rubrique', 'inc');
 			echo $selecteur_rubrique(0, 'rubrique', false);
 			echo "<table width='100%'><tr>";

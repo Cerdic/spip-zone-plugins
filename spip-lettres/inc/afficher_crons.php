@@ -21,18 +21,18 @@
 		$tableau = array();
 		$args = array();
 		$presenter_liste = charger_fonction('presenter_liste', 'inc');
-		return $presenter_liste($requete, 'afficher_cron_boucle', $tableau, $args, $force, $styles, $tmp_var, $titre, _DIR_PLUGIN_LETTRE_INFORMATION.'/prive/images/cron-24.png');
+		return $presenter_liste($requete, 'afficher_cron_boucle', $tableau, $args, $force, $styles, $tmp_var, $titre, _DIR_PLUGIN_LETTRES.'prive/images/cron-24.png');
 	}
 
 
 	function afficher_cron_boucle($row, $own) {
 		$vals = '';
 
-		$vals[] = http_img_pack('../'._DIR_PLUGIN_LETTRE_INFORMATION.'/prive/images/cron-16.png', "case", '');
+		$vals[] = http_img_pack('../'._DIR_PLUGIN_LETTRES.'prive/images/cron-16.png', "case", '');
 
 		$vals[] = typo($row['titre']);
 
-		$vals[] = http_img_pack('../'._DIR_PLUGIN_LETTRE_INFORMATION.'/prive/images/rubrique-12.png', "rub", '');
+		$vals[] = http_img_pack('../'._DIR_PLUGIN_LETTRES.'prive/images/rubrique-12.png', "rub", '');
 
 		$vals[] = '<a href="'.generer_url_ecrire('naviguer', 'id_rubrique='.$row['id_rubrique']).'">'.typo($row['titre_rub']).'</a>';
 

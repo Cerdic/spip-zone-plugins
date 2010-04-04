@@ -32,7 +32,8 @@
 
 		if (!empty($_POST['titre'])) {
 			sql_replace('spip_themes', array('id_rubrique' => intval($_POST['id_parent']), 'titre' => $_POST['titre']));
-			lettres_calculer_langues_rubriques($dummy);
+			include_spip('inc/rubriques');
+			calculer_langues_rubriques();
 			$url = generer_url_ecrire('config_lettres_formulaire');
 			header('Location: '.$url);
 			exit();
@@ -52,7 +53,7 @@
 
 		echo '<br /><br /><br />';
 		echo gros_titre(_T('titre_configuration'),'',false);
-		echo barre_onglets("configuration", "config_lettres_formulaire");
+		echo barre_onglets("configuration", "config_lettres_formulaire_top");
 		echo "<br>";
 		echo barre_onglets("lettres", "config_lettres_formulaire");
 

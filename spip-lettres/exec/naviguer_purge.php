@@ -54,9 +54,9 @@
 		echo _T('lettresprive:aide_naviguer_purge');
 		echo fin_boite_info(true);
 
-		$raccourcis = icone_horizontale(_T('lettresprive:aller_liste_abonnes'), generer_url_ecrire('abonnes_tous'), _DIR_PLUGIN_LETTRE_INFORMATION.'/prive/images/abonne.png', 'rien.gif', false);
+		$raccourcis = icone_horizontale(_T('lettresprive:aller_liste_abonnes'), generer_url_ecrire('abonnes_tous'), _DIR_PLUGIN_LETTRES.'prive/images/abonne.png', 'rien.gif', false);
 		if ($id_rubrique)
-			$raccourcis.= icone_horizontale(_T('lettresprive:retour_rubrique'), generer_url_ecrire('naviguer', 'id_rubrique='.$id_rubrique), _DIR_PLUGIN_LETTRE_INFORMATION.'/prive/images/rubrique-24.png', 'rien.gif', false);
+			$raccourcis.= icone_horizontale(_T('lettresprive:retour_rubrique'), generer_url_ecrire('naviguer', 'id_rubrique='.$id_rubrique), _DIR_PLUGIN_LETTRES.'prive/images/rubrique-24.png', 'rien.gif', false);
 		echo bloc_des_raccourcis($raccourcis);
   		echo pipeline('affiche_gauche',array('args'=>array('exec'=>'naviguer_purge'),'data'=>''));
 
@@ -68,14 +68,14 @@
 		echo "<form method='post' action='".generer_url_ecrire('naviguer_purge')."' method='get'>";
 
 		if (!empty($purger)) {
-			echo debut_cadre_enfonce(_DIR_PLUGIN_LETTRE_INFORMATION.'/prive/images/purge.png', true, "", _T('lettresprive:resultat'));
+			echo debut_cadre_enfonce(_DIR_PLUGIN_LETTRES.'prive/images/purge.png', true, "", _T('lettresprive:resultat'));
 			echo "<p><strong>"._T('lettresprive:nb_abonnements_supprimes')."</strong> ".$nb_abonnements_supprimes."</p>";
 			echo '<div align="right">';
 			echo '<input type="submit" name="retour" class="fondo" value="'._T('lettresprive:retour').'" />';
 			echo '</div>';
 			echo fin_cadre_enfonce(true);
 		} else {
-			echo debut_cadre_enfonce(_DIR_PLUGIN_LETTRE_INFORMATION.'/prive/images/purge.png', true, "", _T('lettresprive:selectionnez_rubrique'));
+			echo debut_cadre_enfonce(_DIR_PLUGIN_LETTRES.'prive/images/purge.png', true, "", _T('lettresprive:selectionnez_rubrique'));
 			$selecteur_rubrique = charger_fonction('chercher_rubrique', 'inc');
 			echo $selecteur_rubrique($id_rubrique, 'rubrique', false);
 			echo '<input type="hidden" name="id_rubrique" value="'.$id_rubrique.'" />';

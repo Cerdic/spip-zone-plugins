@@ -19,7 +19,7 @@
 		$tableau = array();
 		$args = array();
 		$presenter_liste = charger_fonction('presenter_liste', 'inc');
-		return $presenter_liste($requete, 'afficher_abonnement_boucle', $tableau, $args, $force, $styles, $tmp_var, $titre, _DIR_PLUGIN_LETTRE_INFORMATION.'/prive/images/rubrique-24.png');
+		return $presenter_liste($requete, 'afficher_abonnement_boucle', $tableau, $args, $force, $styles, $tmp_var, $titre, _DIR_PLUGIN_LETTRES.'prive/images/rubrique-24.png');
 	}
 
 
@@ -29,7 +29,7 @@
 		$id_rubrique = $row['id_rubrique'];
 		$total = $row['total'];
 
-		$vals[] = http_img_pack(_DIR_PLUGIN_LETTRE_INFORMATION.'/prive/images/rubrique-12.png', "rub", '');
+		$vals[] = http_img_pack(_DIR_PLUGIN_LETTRES.'prive/images/rubrique-12.png', "rub", '');
 
 		$s = "<a href='".generer_url_ecrire('naviguer', 'id_rubrique='.$id_rubrique)."'$dir_lang style=\"display:block;\">";
 		if ($id_rubrique == 0) {

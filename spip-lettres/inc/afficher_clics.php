@@ -22,7 +22,7 @@
 		$tableau = array();
 		$args = array();
 		$presenter_liste = charger_fonction('presenter_liste', 'inc');
-		return $presenter_liste($requete, 'afficher_clic_boucle', $tableau, $args, $force, $styles, $tmp_var, $titre, _DIR_PLUGIN_LETTRE_INFORMATION.'/prive/images/clic.png');
+		return $presenter_liste($requete, 'afficher_clic_boucle', $tableau, $args, $force, $styles, $tmp_var, $titre, _DIR_PLUGIN_LETTRES.'prive/images/clic.png');
 	}
 
 

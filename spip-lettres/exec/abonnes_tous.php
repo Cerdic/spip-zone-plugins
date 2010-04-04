@@ -34,12 +34,12 @@
 		echo debut_gauche('', true);
 		echo afficher_objets('nb_abonne', _T('lettresprive:evolution_nb_abonnes'), array('FROM' => 'spip_abonnes_statistiques', 'ORDER BY' => 'periode DESC'));
 		echo bloc_des_raccourcis(
-				icone_horizontale(_T('lettresprive:ajouter_abonne'), generer_url_ecrire('abonnes_edit'), _DIR_PLUGIN_LETTRE_INFORMATION.'/prive/images/abonne.png', 'creer.gif', false).
-				icone_horizontale(_T('lettresprive:aller_liste_lettres'), generer_url_ecrire("lettres_tous"), _DIR_PLUGIN_LETTRE_INFORMATION.'/prive/images/lettre-24.png', 'rien.gif', false).
-				icone_horizontale(_T('lettresprive:import_abonnes'), generer_url_ecrire("naviguer_import"), _DIR_PLUGIN_LETTRE_INFORMATION.'/prive/images/import.png', 'rien.gif', false).
-				icone_horizontale(_T('lettresprive:export_abonnes'), generer_url_ecrire("naviguer_export"), _DIR_PLUGIN_LETTRE_INFORMATION.'/prive/images/export.png', 'rien.gif', false).
-				icone_horizontale(_T('lettresprive:purge_abonnes'), generer_url_ecrire("naviguer_purge"), _DIR_PLUGIN_LETTRE_INFORMATION.'/prive/images/purge.png', 'rien.gif', false).
-				icone_horizontale(_T('lettresprive:configurer_formulaire_abonnement'), generer_url_ecrire('config_lettres_formulaire'), _DIR_PLUGIN_LETTRE_INFORMATION.'/prive/images/config_formulaire.png', 'rien.gif', false)
+				icone_horizontale(_T('lettresprive:ajouter_abonne'), generer_url_ecrire('abonnes_edit'), _DIR_PLUGIN_LETTRES.'prive/images/abonne.png', 'creer.gif', false).
+				icone_horizontale(_T('lettresprive:aller_liste_lettres'), generer_url_ecrire("lettres_tous"), _DIR_PLUGIN_LETTRES.'prive/images/lettre-24.png', 'rien.gif', false).
+				icone_horizontale(_T('lettresprive:import_abonnes'), generer_url_ecrire("naviguer_import"), _DIR_PLUGIN_LETTRES.'prive/images/import.png', 'rien.gif', false).
+				icone_horizontale(_T('lettresprive:export_abonnes'), generer_url_ecrire("naviguer_export"), _DIR_PLUGIN_LETTRES.'prive/images/export.png', 'rien.gif', false).
+				icone_horizontale(_T('lettresprive:purge_abonnes'), generer_url_ecrire("naviguer_purge"), _DIR_PLUGIN_LETTRES.'prive/images/purge.png', 'rien.gif', false).
+				icone_horizontale(_T('lettresprive:configurer_formulaire_abonnement'), generer_url_ecrire('config_lettres_formulaire'), _DIR_PLUGIN_LETTRES.'prive/images/config_formulaire.png', 'rien.gif', false)
 			);
   		echo pipeline('affiche_gauche',array('args'=>array('exec'=>'abonnes_tous'),'data'=>''));
 

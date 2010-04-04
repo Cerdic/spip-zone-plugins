@@ -571,8 +571,8 @@
 				$this->existe = true;
 				sql_updateq("spip_documents_liens", array("id_objet" => $this->id_lettre), 'id_objet='.(0 - $GLOBALS['visiteur_session']['id_auteur']).' AND objet="lettre"');
 				calculer_rubriques();
-				lettres_trig_propager_les_secteurs($dummy);
-				lettres_calculer_langues_rubriques($dummy);
+				propager_les_secteurs();
+				calculer_langues_rubriques();
 			} else if ($this->statut == 'brouillon') {
 				$champs = array(
 								'id_rubrique' => intval($this->id_rubrique),
@@ -588,8 +588,8 @@
 					$champs['extra'] = $this->extra;
 				sql_updateq('spip_lettres', $champs, 'id_lettre='.intval($this->id_lettre));
 				calculer_rubriques();
-				lettres_trig_propager_les_secteurs($dummy);
-				lettres_calculer_langues_rubriques($dummy);
+				propager_les_secteurs();
+				calculer_langues_rubriques();
 			}
 		}
 
@@ -622,8 +622,8 @@
 						sql_updateq('spip_lettres', array('statut' => $this->statut, 'date_debut_envoi' => 'NOW()', 'maj' => 'NOW()'), 'id_lettre='.intval($this->id_lettre));
 						$this->enregistrer_squelettes();
 						calculer_rubriques();
-						lettres_trig_propager_les_secteurs($dummy);
-						lettres_calculer_langues_rubriques($dummy);
+						propager_les_secteurs();
+						calculer_langues_rubriques();
 						$rubriques = lettres_recuperer_toutes_les_rubriques_parentes($this->id_rubrique);
 						$rubriques_virgules = implode(',', $rubriques);
 						$resultat_abonnes = sql_select('A.id_abonne, A.format', 'spip_abonnes_rubriques AS AR INNER JOIN spip_abonnes AS A ON A.id_abonne=AR.id_abonne', 'AR.id_rubrique IN ('.$rubriques_virgules.') AND AR.statut="valide"', 'A.id_abonne');
@@ -883,8 +883,8 @@
 			// articles associés
 			sql_delete('spip_articles_lettres', 'id_lettre='.intval($this->id_lettre));
 			calculer_rubriques();
-			lettres_trig_propager_les_secteurs($dummy);
-			lettres_calculer_langues_rubriques($dummy);
+			propager_les_secteurs();
+			calculer_langues_rubriques();
 		}
 
 

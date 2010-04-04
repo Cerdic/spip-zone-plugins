@@ -92,7 +92,7 @@ TODO
 /*
 TODO
 		$s = "";
-		$s.= debut_cadre_relief("../"._DIR_PLUGIN_LETTRE_INFORMATION."/img_pack/preferences.png", true);
+		$s.= debut_cadre_relief("../"._DIR_PLUGIN_LETTRES."img_pack/preferences.png", true);
 		$s.= "<div style='padding: 2px; background-color: $couleur_claire; text-align: center; color: black;'>";
 		$s.= "<strong class='verdana3' style='text-transform: uppercase;'>"._T("lettresprive:personnaliser_lettre")."</strong>";
 		$s.= "</div>\n";
@@ -141,12 +141,12 @@ TODO
 		echo '<div class="cadre-formulaire-editer">';
 		echo '<div class="entete-formulaire">';
 		if ($lettre->existe) {
-			echo icone_inline(_T('icone_retour'), generer_url_ecrire('lettres', 'id_lettre='.$lettre->id_lettre), _DIR_PLUGIN_LETTRE_INFORMATION.'/prive/images/lettre-24.png', "rien.gif", $GLOBALS['spip_lang_left']);
+			echo icone_inline(_T('icone_retour'), generer_url_ecrire('lettres', 'id_lettre='.$lettre->id_lettre), _DIR_PLUGIN_LETTRES.'prive/images/lettre-24.png', "rien.gif", $GLOBALS['spip_lang_left']);
 		} else {
 			if ($lettre->id_rubrique)
-				echo icone_inline(_T('icone_retour'), generer_url_ecrire('naviguer', 'id_rubrique='.$lettre->id_rubrique), _DIR_PLUGIN_LETTRE_INFORMATION.'/prive/images/rubrique-24.png', "rien.gif", $GLOBALS['spip_lang_left']);
+				echo icone_inline(_T('icone_retour'), generer_url_ecrire('naviguer', 'id_rubrique='.$lettre->id_rubrique), _DIR_PLUGIN_LETTRES.'prive/images/rubrique-24.png', "rien.gif", $GLOBALS['spip_lang_left']);
 			else
-				echo icone_inline(_T('icone_retour'), generer_url_ecrire('lettres_tous'), _DIR_PLUGIN_LETTRE_INFORMATION.'/prive/images/lettre-24.png', "rien.gif", $GLOBALS['spip_lang_left']);
+				echo icone_inline(_T('icone_retour'), generer_url_ecrire('lettres_tous'), _DIR_PLUGIN_LETTRES.'prive/images/lettre-24.png', "rien.gif", $GLOBALS['spip_lang_left']);
 		}
 		echo _T('lettresprive:modifier_lettre');
 		echo '<h1>'.$lettre->titre.'</h1>';

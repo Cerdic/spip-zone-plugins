@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <plugin>
 	<nom>SPIP-Lettres</nom>
-	<auteur>[Art&#233;go->http://www.artego.fr]</auteur>
-	<version>3.8</version>
+	<auteur>[Art&#233;go->http://www.artego.fr], Cedric Morin [->www.yterium.net]</auteur>
+	<version>4.0.0</version>
+	<version_base>3.8</version_base>
 	<etat>stable</etat>
 	<licence>[GPLv3->http://www.gnu.org/licenses/gpl-3.0.html]</licence>
 	<description>Gestion de lettres d'information</description>
-	<necessite id="SPIP" version="[2.0.3;]" />
+	<necessite id="SPIP" version="[2.0.10;]" />
 	<necessite id="facteur" version="[1.0;]" />
-	<necessite id="surcharges" version="[2.0;]" />
 	<install>base/lettres.php</install>
-	<lien>[Site officiel du plugin->http://www.artego.fr/-Lettre-d-information-]</lien>
+	<lien>http://www.artego.fr/-Lettre-d-information-</lien>
 	<icon>prive/images/lettre-48.png</icon>
 	<options>lettres_options.php</options>
 	<fonctions>lettres_fonctions.php</fonctions>
+	<chemin dir='' />
+	<chemin dir='spip20/' type='prive' />
 	<prefix>lettres</prefix>
 	<pipeline>
 		<nom>declarer_tables_interfaces</nom>
@@ -40,7 +42,7 @@
 		<inclure>inc/lettres_autorisations.php</inclure>
 	</pipeline>
 	<pipeline>
-		<nom>tester_rubrique_vide</nom>
+		<nom>objet_compte_enfants</nom>
 		<inclure>inc/lettres_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
@@ -52,11 +54,11 @@
 		<inclure>inc/lettres_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
-		<nom>calculer_langues_rubriques</nom>
+		<nom>trig_calculer_langues_rubriques</nom>
 		<inclure>inc/lettres_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
-		<nom>contenu_naviguer</nom>
+		<nom>affiche_enfants</nom>
 		<inclure>inc/lettres_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
@@ -67,19 +69,38 @@
 		<nom>libelle_association_mots</nom>
 		<inclure>inc/lettres_pipelines.php</inclure>
 	</pipeline>
+
 	<bouton id="lettres_tous" parent="naviguer">
 		<icone>prive/images/lettre-24.png</icone>
 		<titre>lettresprive:lettres_information</titre>       
 	</bouton>
-	<bouton id="abonnes_tous" parent="naviguer">
+	<bouton id="abonnes_tous" parent="auteurs">
 		<icone>prive/images/abonne.png</icone>
 		<titre>lettresprive:abonnes</titre>       
 	</bouton>
+
+	<bouton id="lettres_tous2" parent="bando_edition">
+		<icone>images/lettre-16.png</icone>
+		<titre>lettresprive:lettres_information</titre>       
+		<url>lettres_tous</url>
+	</bouton>
+	<bouton id='abonnes_tous2' parent="bando_reactions">
+		<icone>images/lettre-abonne-16.png</icone>
+		<titre>lettresprive:abonnes</titre>
+		<url>abonnes_tous</url>
+	</bouton>
+	<bouton id='config_lettres' parent="bando_configuration">
+		<icone>images/lettre-16.png</icone>
+		<titre>lettresprive:lettres_information</titre>
+		<url>config_lettres_formulaire</url>
+	</bouton>
+
 	<onglet id="config_lettres_formulaire_top" parent="configuration">
 		<icone>prive/images/lettre-24.png</icone>
 		<titre>lettresprive:lettres_information</titre>
 		<url>config_lettres_formulaire</url>
 	</onglet>
+
 	<onglet id="config_lettres_formulaire" parent="lettres">
 		<icone>prive/images/config_formulaire.png</icone>
 		<titre>lettresprive:config_formulaire</titre>

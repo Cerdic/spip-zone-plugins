@@ -12,6 +12,25 @@
 	 *  
 	 **/
 
+	global $table_des_abonnes;
+	$table_des_abonnes['abonnes'] = array(
+										'table'				=> 'abonnes',
+										'url_prive'			=> 'abonnes_edit',
+										'url_prive_titre'	=> _T('lettresprive:modifier_abonne'),
+										'champ_id'			=> 'id_abonne',
+										'champ_email'		=> 'email',
+										'champ_nom'			=> 'nom'
+										);
+	$table_des_abonnes['auteurs'] = array(
+										'table'				=> 'auteurs',
+										'url_prive'			=> 'auteur_infos',
+										'url_prive_titre'	=> _T('lettresprive:voir_fiche_auteur'),
+										'champ_id'			=> 'id_auteur',
+										'champ_email'		=> 'email',
+										'champ_nom'			=> 'nom'
+										);
+
+
 
 	function lettres_declarer_tables_interfaces($interface) {
 		$interface['table_des_tables']['abonnes'] = 'abonnes';
@@ -224,154 +243,130 @@
 		return $tables_auxiliaires;
 	}
 
+	function lettres_upgrade($nom_meta_base_version,$version_cible){
+		include_spip('inc/meta');
+		// migration depuis l'ancien systeme de maj
+		if (isset($GLOBALS['meta']['spip_lettres_version'])
+		  AND !isset($GLOBALS['meta'][$nom_meta_base_version])){
+			ecrire_meta($nom_meta_base_version,$GLOBALS['meta']['spip_lettres_version'],'non');
+			effacer_meta('spip_lettres_version');
+		}
 
-	function lettres_install($action) {
-		include_spip('inc/plugin');
-		$info_plugin_lettres = plugin_get_infos(_NOM_PLUGIN_LETTRE_INFORMATION);
-		$version_plugin = $info_plugin_lettres['version'];
-		switch ($action){
-			case 'test':
-				return (isset($GLOBALS['meta']['spip_lettres_version']) AND ($GLOBALS['meta']['spip_lettres_version'] >= $version_plugin));
-				break;
-			case 'install':
-				include_spip('base/create');
-				include_spip('base/abstract_sql');
-				if (!isset($GLOBALS['meta']['spip_lettres_version'])) {
-					creer_base();
-					ecrire_meta('spip_lettres_version', $version_plugin);
-					ecrire_meta('spip_lettres_fond_formulaire_lettres', 'lettres');
-					ecrire_meta('spip_lettres_fond_lettre_titre', 'lettre_titre');
-					ecrire_meta('spip_lettres_fond_lettre_html', 'lettre_html');
-					ecrire_meta('spip_lettres_fond_lettre_texte', 'lettre_texte');
-					ecrire_meta('spip_lettres_notifier_suppression_abonne', 'non');
-					ecrire_meta('spip_lettres_utiliser_articles', 'non');
-					ecrire_meta('spip_lettres_utiliser_descriptif', 'non');
-					ecrire_meta('spip_lettres_utiliser_chapo', 'non');
-					ecrire_meta('spip_lettres_utiliser_ps', 'non');
-					ecrire_meta('spip_lettres_envois_recurrents', 'non');
-					ecrire_meta('spip_lettres_cron', md5(uniqid(rand())));
-					ecrire_metas();
-					include_spip('inc/getdocument');
-					creer_repertoire_documents('lettres');
-				} else {
-					$version_base = $GLOBALS['meta']['spip_lettres_version'];
-					// seulement à partir de la version 3.0 - migrer les scripts de maj c'est trop long
-					if ($version_base < 3.0) {
-						creer_base();
-						ecrire_meta('spip_lettres_notifier_suppression_abonne', 'non');
-						ecrire_meta('spip_lettres_utiliser_articles', 'non');
-						ecrire_meta('spip_lettres_version', $version_base = 3.0);
-						ecrire_metas();
-					}
-					if ($version_base < 3.1) {
-						maj_tables('spip_lettres');
-						ecrire_meta('spip_lettres_utiliser_ps', 'non');
-						ecrire_meta('spip_lettres_version', $version_base = 3.1);
-						ecrire_metas();
-					}
-					if ($version_base < 3.2) {
-						$INDEX_elements_objet = unserialize($GLOBALS['meta']['INDEX_elements_objet']);
-						unset($INDEX_elements_objet['spip_lettres']); 
-						ecrire_meta('INDEX_elements_objet',serialize($INDEX_elements_objet));
-						ecrire_meta('spip_lettres_version', $version_base = 3.2);
-						ecrire_metas();
-					}
-					if ($version_base < 3.3) {
-						creer_base(); // table spip_desabonnes
-						ecrire_meta('spip_lettres_version', $version_base = 3.3);
-						ecrire_metas();
-					}
-					if ($version_base < 3.4) {
-						include_spip('inc/getdocument');
-						creer_repertoire_documents('lettres');
-						ecrire_meta('spip_lettres_version', $version_base = 3.4);
-						ecrire_metas();
-					}
-					if ($version_base < 3.5) {
-						// localisation allemande et italienne
-						ecrire_meta('spip_lettres_version', $version_base = 3.5);
-						ecrire_metas();
-					}
-					if ($version_base < 3.6) {
-						ecrire_meta('spip_lettres_cron', md5(uniqid(rand())));
-						ecrire_meta('spip_lettres_version', $version_base = 3.6);
-						ecrire_metas();
-					}
-					if ($version_base < 3.7) {
-						creer_base(); // table spip_rubriques_crontabs
-						ecrire_meta('spip_lettres_version', $version_base = 3.7);
-						ecrire_metas();
-					}
-					if ($version_base < 3.8) {
-						maj_tables('spip_lettres');
-						sql_alter("TABLE spip_lettres DROP idx");
-						sql_drop_table('spip_documents_lettres', true);
-						ecrire_meta('spip_lettres_utiliser_descriptif', 'non');
-						ecrire_meta('spip_lettres_utiliser_chapo', 'non');
-						ecrire_meta('spip_lettres_fond_lettre_titre', 'lettre_titre');
-						ecrire_meta('spip_lettres_envois_recurrents', 'non');
-						ecrire_meta('spip_lettres_version', $version_base = 3.8);
-						ecrire_metas();
-					}
-				}
-				break;
-			case 'uninstall':
-				$res = sql_select('id_lettre', 'spip_lettres');
-				while ($arr = sql_fetch($res)) {
-					$lettre = new lettre($arr['id_lettre']);
-					$lettre->supprimer();
-				}
-				include_spip('base/abstract_sql');
-				sql_drop_table('spip_abonnes', true);
-				sql_drop_table('spip_clics', true);
-				sql_drop_table('spip_desabonnes', true);
-				sql_drop_table('spip_lettres', true);
-				sql_drop_table('spip_rubriques_crontabs', true);
-				sql_drop_table('spip_themes', true);
-				sql_drop_table('spip_abonnes_clics', true);
-				sql_drop_table('spip_abonnes_lettres', true);
-				sql_drop_table('spip_abonnes_rubriques', true);
-				sql_drop_table('spip_abonnes_statistiques', true);
-				sql_drop_table('spip_articles_lettres', true);
-				sql_drop_table('spip_auteurs_lettres', true);
-				sql_drop_table('spip_documents_lettres', true);
-				sql_drop_table('spip_lettres_statistiques', true);
-				sql_drop_table('spip_mots_lettres', true);
-				effacer_meta('spip_lettres_version');
-				effacer_meta('spip_lettres_fond_formulaire_lettres');
-				effacer_meta('spip_lettres_fond_lettre_html');
-				effacer_meta('spip_lettres_fond_lettre_texte');
-				effacer_meta('spip_lettres_notifier_suppression_abonne');
-				effacer_meta('spip_lettres_utiliser_articles');
-				effacer_meta('spip_lettres_utiliser_descriptif');
-				effacer_meta('spip_lettres_utiliser_chapo');
-				effacer_meta('spip_lettres_utiliser_ps');
-				effacer_meta('spip_lettres_envois_recurrents');
-				effacer_meta('spip_lettres_cron');
+		$current_version = 0.0;
+		if (   (!isset($GLOBALS['meta'][$nom_meta_base_version]) )
+				|| (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){
+			include_spip('base/create');
+			include_spip('base/abstract_sql');
+			if (version_compare($current_version,'0.1','<')){
+				creer_base();
+				ecrire_meta('spip_lettres_version', $version_plugin);
+				ecrire_meta('spip_lettres_fond_formulaire_lettres', 'lettres');
+				ecrire_meta('spip_lettres_fond_lettre_titre', 'lettre_titre');
+				ecrire_meta('spip_lettres_fond_lettre_html', 'lettre_html');
+				ecrire_meta('spip_lettres_fond_lettre_texte', 'lettre_texte');
+				ecrire_meta('spip_lettres_notifier_suppression_abonne', 'non');
+				ecrire_meta('spip_lettres_utiliser_articles', 'non');
+				ecrire_meta('spip_lettres_utiliser_descriptif', 'non');
+				ecrire_meta('spip_lettres_utiliser_chapo', 'non');
+				ecrire_meta('spip_lettres_utiliser_ps', 'non');
+				ecrire_meta('spip_lettres_envois_recurrents', 'non');
+				ecrire_meta('spip_lettres_cron', md5(uniqid(rand())));
+				ecrire_metas();
 				include_spip('inc/getdocument');
-				effacer_repertoire_temporaire(_DIR_LETTRES);
-				break;
+				creer_repertoire_documents('lettres');
+				ecrire_meta($nom_meta_base_version,$current_version=$version_cible,'non');
+			}
+			if (version_compare($current_version,'3.0','<')){
+				creer_base();
+				ecrire_meta('spip_lettres_notifier_suppression_abonne', 'non');
+				ecrire_meta('spip_lettres_utiliser_articles', 'non');
+				ecrire_meta($nom_meta_base_version,$current_version='3.0','non');
+			}
+			if (version_compare($current_version,'3.1','<')){
+				maj_tables('spip_lettres');
+				ecrire_meta('spip_lettres_utiliser_ps', 'non');
+				ecrire_meta($nom_meta_base_version,$current_version='3.1','non');
+			}
+			if (version_compare($current_version,'3.2','<')){
+				$INDEX_elements_objet = unserialize($GLOBALS['meta']['INDEX_elements_objet']);
+				unset($INDEX_elements_objet['spip_lettres']);
+				ecrire_meta('INDEX_elements_objet',serialize($INDEX_elements_objet));
+				ecrire_meta($nom_meta_base_version,$current_version='3.2','non');
+			}
+			if (version_compare($current_version,'3.3','<')){
+				creer_base(); // table spip_desabonnes
+				ecrire_meta($nom_meta_base_version,$current_version='3.3','non');
+			}
+			if (version_compare($current_version,'3.4','<')){
+				include_spip('inc/getdocument');
+				creer_repertoire_documents('lettres');
+				ecrire_meta($nom_meta_base_version,$current_version='3.4','non');
+			}
+			if (version_compare($current_version,'3.5','<')){
+				ecrire_meta($nom_meta_base_version,$current_version='3.5','non');
+			}
+			if (version_compare($current_version,'3.6','<')){
+				ecrire_meta('spip_lettres_cron', md5(uniqid(rand())));
+				ecrire_meta($nom_meta_base_version,$current_version='3.6','non');
+			}
+			if (version_compare($current_version,'3.7','<')){
+				creer_base(); // table spip_rubriques_crontabs
+				ecrire_meta($nom_meta_base_version,$current_version='3.7','non');
+			}
+			if (version_compare($current_version,'3.8','<')){
+				maj_tables('spip_lettres');
+				sql_alter("TABLE spip_lettres DROP idx");
+				sql_drop_table('spip_documents_lettres', true);
+				ecrire_meta('spip_lettres_utiliser_descriptif', 'non');
+				ecrire_meta('spip_lettres_utiliser_chapo', 'non');
+				ecrire_meta('spip_lettres_fond_lettre_titre', 'lettre_titre');
+				ecrire_meta('spip_lettres_envois_recurrents', 'non');
+				ecrire_meta($nom_meta_base_version,$current_version='3.8','non');
+			}
 		}
 	}
 
 
-	global $table_des_abonnes;
-	$table_des_abonnes['abonnes'] = array(
-										'table'				=> 'abonnes',
-										'url_prive'			=> 'abonnes_edit',
-										'url_prive_titre'	=> _T('lettresprive:modifier_abonne'),
-										'champ_id'			=> 'id_abonne',
-										'champ_email'		=> 'email',
-										'champ_nom'			=> 'nom'
-										);
-	$table_des_abonnes['auteurs'] = array(
-										'table'				=> 'auteurs',
-										'url_prive'			=> 'auteur_infos',
-										'url_prive_titre'	=> _T('lettresprive:voir_fiche_auteur'),
-										'champ_id'			=> 'id_auteur',
-										'champ_email'		=> 'email',
-										'champ_nom'			=> 'nom'
-										);
+	function lettres_vider_tables($nom_meta_base_version) {
+		include_spip('inc/meta');
+		include_spip('base/abstract_sql');
+		include_spip('inc/lettres_classes');
 
+		$res = sql_select('id_lettre', 'spip_lettres');
+		while ($arr = sql_fetch($res)) {
+			$lettre = new lettre($arr['id_lettre']);
+			$lettre->supprimer();
+		}
+		include_spip('base/abstract_sql');
+		sql_drop_table('spip_abonnes', true);
+		sql_drop_table('spip_clics', true);
+		sql_drop_table('spip_desabonnes', true);
+		sql_drop_table('spip_lettres', true);
+		sql_drop_table('spip_rubriques_crontabs', true);
+		sql_drop_table('spip_themes', true);
+		sql_drop_table('spip_abonnes_clics', true);
+		sql_drop_table('spip_abonnes_lettres', true);
+		sql_drop_table('spip_abonnes_rubriques', true);
+		sql_drop_table('spip_abonnes_statistiques', true);
+		sql_drop_table('spip_articles_lettres', true);
+		sql_drop_table('spip_auteurs_lettres', true);
+		sql_drop_table('spip_documents_lettres', true);
+		sql_drop_table('spip_lettres_statistiques', true);
+		sql_drop_table('spip_mots_lettres', true);
+		effacer_meta('spip_lettres_version');
+		effacer_meta('spip_lettres_fond_formulaire_lettres');
+		effacer_meta('spip_lettres_fond_lettre_html');
+		effacer_meta('spip_lettres_fond_lettre_texte');
+		effacer_meta('spip_lettres_notifier_suppression_abonne');
+		effacer_meta('spip_lettres_utiliser_articles');
+		effacer_meta('spip_lettres_utiliser_descriptif');
+		effacer_meta('spip_lettres_utiliser_chapo');
+		effacer_meta('spip_lettres_utiliser_ps');
+		effacer_meta('spip_lettres_envois_recurrents');
+		effacer_meta('spip_lettres_cron');
+		include_spip('inc/getdocument');
+		effacer_repertoire_temporaire(_DIR_LETTRES);
+		effacer_meta($nom_meta_base_version);
+	}
 
 ?>
