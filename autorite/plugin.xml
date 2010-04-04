@@ -1,11 +1,11 @@
 <plugin>
 	<nom>
 		<multi>
-      [fr]Autorit&#233;
-      [it]Autorit&#224;
-	  [en]Authority
-	  [de]Autorit&auml;t
-	  [ar]&#1575;&#1604;&#1587;&#1604;&#1591;&#1577;
+		[fr]Autorit&#233;
+		[it]Autorit&#224;
+		[en]Authority
+		[de]Autorit&auml;t
+		[ar]&#1575;&#1604;&#1587;&#1604;&#1591;&#1577;
     </multi>
 	</nom>
 	<auteur>
