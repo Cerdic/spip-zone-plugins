@@ -18,67 +18,67 @@
 
 		pipeline('exec_init',array('args'=>array('exec'=>'facteur'),'data'=>''));
 
-		if (!empty($_POST['valider']) or !empty($_POST['tester'])) {
-			if (isset($_POST['facteur_adresse_envoi'])) {
-				$facteur_adresse_envoi = $_POST['facteur_adresse_envoi'];
+		if (!is_null(_request('valider')) or !is_null(_request('tester'))) {
+			if (!is_null(_request('facteur_adresse_envoi'))) {
+				$facteur_adresse_envoi = _request('facteur_adresse_envoi');
 				ecrire_meta('facteur_adresse_envoi', $facteur_adresse_envoi);
 			}
 
-			if (isset($_POST['facteur_adresse_envoi_nom'])) {
-				$facteur_adresse_envoi_nom = addslashes($_POST['facteur_adresse_envoi_nom']);
+			if (!is_null(_request('facteur_adresse_envoi_nom'))) {
+				$facteur_adresse_envoi_nom = addslashes(_request('facteur_adresse_envoi_nom'));
 				ecrire_meta('facteur_adresse_envoi_nom', $facteur_adresse_envoi_nom);
 			}
 
-			if (isset($_POST['facteur_adresse_envoi_email'])) {
-				$facteur_adresse_envoi_email = addslashes($_POST['facteur_adresse_envoi_email']);
+			if (!is_null(_request('facteur_adresse_envoi_email'))) {
+				$facteur_adresse_envoi_email = addslashes(_request('facteur_adresse_envoi_email'));
 				ecrire_meta('facteur_adresse_envoi_email', $facteur_adresse_envoi_email);
 			}
 
-			if (isset($_POST['facteur_smtp'])) {
-				$facteur_smtp = $_POST['facteur_smtp'];
+			if (!is_null(_request('facteur_smtp'))) {
+				$facteur_smtp = _request('facteur_smtp');
 				ecrire_meta('facteur_smtp', $facteur_smtp);
 			}
 
-			if (isset($_POST['facteur_smtp_host'])) {
-				$facteur_smtp_host = addslashes($_POST['facteur_smtp_host']);
+			if (!is_null(_request('facteur_smtp_host'))) {
+				$facteur_smtp_host = addslashes(_request('facteur_smtp_host'));
 				ecrire_meta('facteur_smtp_host', $facteur_smtp_host);
 			}
 
-			if (isset($_POST['facteur_smtp_port'])) {
-				$facteur_smtp_port = addslashes($_POST['facteur_smtp_port']);
+			if (!is_null(_request('facteur_smtp_port'))) {
+				$facteur_smtp_port = addslashes(_request('facteur_smtp_port'));
 				ecrire_meta('facteur_smtp_port', $facteur_smtp_port);
 			}
 
-			if (isset($_POST['facteur_smtp_auth'])) {
-				$facteur_smtp_auth = $_POST['facteur_smtp_auth'];
+			if (!is_null(_request('facteur_smtp_auth'))) {
+				$facteur_smtp_auth = _request('facteur_smtp_auth');
 				ecrire_meta('facteur_smtp_auth', $facteur_smtp_auth);
 			}
 
-			if (isset($_POST['facteur_smtp_username'])) {
-				$facteur_smtp_username = addslashes($_POST['facteur_smtp_username']);
+			if (!is_null(_request('facteur_smtp_username'))) {
+				$facteur_smtp_username = addslashes(_request('facteur_smtp_username'));
 				ecrire_meta('facteur_smtp_username', $facteur_smtp_username);
 			}
 
-			if (isset($_POST['facteur_smtp_password'])) {
-				$facteur_smtp_password = addslashes($_POST['facteur_smtp_password']);
+			if (!is_null(_request('facteur_smtp_password'))) {
+				$facteur_smtp_password = addslashes(_request('facteur_smtp_password'));
 				ecrire_meta('facteur_smtp_password', $facteur_smtp_password);
 			}
 
 			if (intval(phpversion()) == 5) {
-				if (isset($_POST['facteur_smtp_secure'])) {
-					$facteur_smtp_secure = $_POST['facteur_smtp_secure'];
+				if (!is_null(_request('facteur_smtp_secure'))) {
+					$facteur_smtp_secure = _request('facteur_smtp_secure');
 					ecrire_meta('facteur_smtp_secure', $facteur_smtp_secure);
 				}
 			}
 
-			if (isset($_POST['facteur_smtp_sender'])) {
-				$facteur_smtp_sender = addslashes($_POST['facteur_smtp_sender']);
+			if (!is_null(_request('facteur_smtp_sender'))) {
+				$facteur_smtp_sender = addslashes(_request('facteur_smtp_sender'));
 				ecrire_meta('facteur_smtp_sender', $facteur_smtp_sender);
 			}
 
-			ecrire_meta('facteur_filtre_images', intval($_POST['facteur_filtre_images']));
-			ecrire_meta('facteur_filtre_css', intval($_POST['facteur_filtre_css']));
-			ecrire_meta('facteur_filtre_iso_8859', intval($_POST['facteur_filtre_iso_8859']));
+			ecrire_meta('facteur_filtre_images', intval(_request('facteur_filtre_images')));
+			ecrire_meta('facteur_filtre_css', intval(_request('facteur_filtre_css')));
+			ecrire_meta('facteur_filtre_iso_8859', intval(_request('facteur_filtre_iso_8859')));
 
 			ecrire_metas();
 		}
@@ -107,9 +107,6 @@
 		echo barre_onglets("configuration", "facteur");
 
 		echo debut_gauche('', true);
-
-		$iconifier = charger_fonction('iconifier', 'inc');
-		echo $iconifier('id_notification', 0, 'notifications');
 
 		echo pipeline('affiche_gauche',array('args'=>array('exec'=>'facteur'),'data'=>''));
 
@@ -207,7 +204,7 @@
 		echo fin_cadre_trait_couleur(true);
 		
 		echo debut_cadre_trait_couleur("", true, "", _T('facteur:tester_la_configuration'));
-		if (!empty($_POST['tester'])) {
+		if (!is_null(_request('tester'))) {
 			if ($GLOBALS['meta']['facteur_adresse_envoi'] == 'oui')
 				$destinataire = $GLOBALS['meta']['facteur_adresse_envoi_email'];
 			else
