@@ -49,7 +49,7 @@
 	<etat>test</etat>
 	<description><multi>
 	[fr]Editeur de squelettes, css, js, dans l'espace priv&#233;
-  [en]Template editor - Edit template files in the backoffice
+	[en]Template editor - Edit template files in the backoffice
 	[it]Redattore di scheletro - Nello spazio riservato, concede a redattore gli scheletri delle lime
 	[es]Redactor esquel&#233;tico - En espacio privado, no prohibe a redactor los esqueletos de los archivos
 	[de]Skeleton Herausgeber - Im privaten Raum erlaubt Herausgeber die Aktenskelette
@@ -65,7 +65,7 @@
       <url>skeleditor</url>
   </bouton>
   <bouton id="skeleditor21" parent="bando_edition">
-      <icone>img_pack/skeleditor-16.png</icone>
+      <icone>images/skeleditor-16.png</icone>
       <titre>skeleditor:editer_skel</titre>
       <url>skeleditor</url>
   </bouton>
