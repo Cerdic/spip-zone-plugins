@@ -1,4 +1,10 @@
 <?php
+/*
+ * Plugin Facteur
+ * (c) 2009-2010 Collectif SPIP
+ * Distribue sous licence GPL
+ *
+ */
 
 function facteur_upgrade($nom_meta_base_version, $version_cible){
 	$current_version = "0.0";
