@@ -111,7 +111,7 @@
 		'choix_abonne' => "Choix de l'abonné",
 		'renvoyer' => "Renvoyer",
 		'renvoyer_a_tous' => "renvoyer aux abonnés",
-		'tester' => "tester",
+		'tester' => "Tester un envoi",
 		'envoyer' => "envoyer",
 		'supprimer' => "Supprimer",
 		'arreter_envoi' => "arrêter l'envoi",
