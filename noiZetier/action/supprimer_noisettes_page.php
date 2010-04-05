@@ -11,6 +11,6 @@ function action_supprimer_noisettes_page_dist(){
 	
 		// Redirection
 	include_spip('inc_headers');
-	redirige_par_entete("./?exec=noizetier");
+	redirige_par_entete("./?exec=configurer_page&page=$page");
 }
 ?>
