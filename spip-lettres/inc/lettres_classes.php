@@ -596,9 +596,7 @@
 		function tester(){
 			$resultat = true;
 			$ancien_statut = $this->statut;
-			sql_updateq('spip_lettres', array('statut' => 'envoi_en_cours', 'maj' => 'NOW()'), 'id_lettre='.intval($this->id_lettre));
 			$this->enregistrer_squelettes();
-			sql_updateq('spip_lettres', array('statut' => $ancien_statut, 'maj' => 'NOW()'), 'id_lettre='.intval($this->id_lettre));
 			$auteurs = sql_select('A.email', 'spip_auteurs AS A INNER JOIN spip_auteurs_lettres AS AL ON AL.id_auteur=A.id_auteur', 'AL.id_lettre='.intval($this->id_lettre));
 			while ($auteur = sql_fetch($auteurs)) {
 				$abonne = new abonne(0, $auteur['email']);
