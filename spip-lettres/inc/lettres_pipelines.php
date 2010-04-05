@@ -85,7 +85,7 @@
 			$id_rubrique = $flux['args']['id_rubrique'];
 			// lettres
 			if ($id_rubrique) {
-				$flux['data'].= afficher_objets('lettre', _T('lettresprive:toutes_lettres_rubrique'), array('FROM' => 'spip_lettres', 'WHERE' => 'id_rubrique='.intval($id_rubrique), 'ORDER BY' => 'maj DESC'));
+				$flux['data'].= afficher_objets('lettre', _T('lettresprive:toutes_lettres_rubrique'), array('FROM' => 'spip_lettres', 'WHERE' => 'id_rubrique='.intval($id_rubrique)." AND statut!='poub'", 'ORDER BY' => 'maj DESC'));
 				$flux['data'].= icone_inline(_T('lettresprive:creer_nouvelle_lettre'), generer_url_ecrire("lettres_edit", "id_rubrique=$id_rubrique"), _DIR_PLUGIN_LETTRES.'prive/images/lettre-24.png',"creer.gif", $spip_lang_right);
 				$flux['data'].= '<br class="nettoyeur" />';
 			}

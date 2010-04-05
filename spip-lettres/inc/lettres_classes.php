@@ -695,9 +695,11 @@
 					$redirection = generer_url_ecrire('lettres', 'id_lettre='.$this->id_lettre.'&message=envoi_termine', true);
 					break;
 				case 'poubelle':
-					$id_rubrique = $this->id_rubrique;
-					$this->supprimer();
-					$redirection = generer_url_ecrire('naviguer', 'id_rubrique='.$id_rubrique, true);
+				case 'poub':
+					sql_updateq('spip_lettres', array('statut' => 'poub'), 'id_lettre='.intval($this->id_lettre));
+					#$id_rubrique = $this->id_rubrique;
+					#$this->supprimer();
+					#$redirection = generer_url_ecrire('naviguer', 'id_rubrique='.$id_rubrique, true);
 					break;
 			}
 			return $redirection;
