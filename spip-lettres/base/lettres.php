@@ -117,7 +117,7 @@
 							"message_texte"			=> "LONGBLOB NOT NULL",
 							"date_debut_envoi"		=> "DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00'",
 							"date_fin_envoi"		=> "DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00'",
-							"statut"				=> "ENUM('brouillon','envoi_en_cours','envoyee') NOT NULL DEFAULT 'brouillon'",
+							"statut"				=> "VARCHAR(15) NOT NULL DEFAULT 'brouillon'",
 							"extra"					=> "LONGBLOB NULL"
 						);
 		$spip_lettres_key = array(
@@ -335,6 +335,11 @@
 				  AND !find_in_path('lettre_html.html'))
 					ecrire_meta('spip_lettres_fond_lettre_html', 'emails/lettre_html');
 				ecrire_meta($nom_meta_base_version,$current_version='4.0.0','non');
+			}
+			if (version_compare($current_version,'4.0.1','<')){
+				echo "SPIP-Lettres MAJ 4.0.1<br />";
+				sql_alter("TABLE spip_lettres CHANGE statut statut VARCHAR(15) NOT NULL DEFAULT 'brouillon'");
+				ecrire_meta($nom_meta_base_version,$current_version='4.0.1','non');
 			}
 		}
 	}
