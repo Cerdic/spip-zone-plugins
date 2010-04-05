@@ -141,46 +141,20 @@ class Facteur extends PHPMailer {
 		while (list($key,) = each($image_types))
 			$extensions[] = $key;
 
-		preg_match_all('/"([^"]+\.('.implode('|', $extensions).'))"/Ui', $this->Body, $images);
+		preg_match_all('/["\'](([^"\']+)\.('.implode('|', $extensions).'))["\']/Ui', $this->Body, $images, PREG_SET_ORDER);
 
-		for ($i=0; $i<count($images[1]); $i++) {
-			if (file_exists('../'.$images[1][$i])) {
-				$html_images[] = '../'.$images[1][$i];
-				$this->Body = str_replace($images[1][$i], basename($images[1][$i]), $this->Body);
-			}
-			if (file_exists($images[1][$i])) {
-				$html_images[] = $images[1][$i];
-				$this->Body = str_replace($images[1][$i], basename($images[1][$i]), $this->Body);
-			}
-		}
+		$html_images = array();
+		foreach($images as $im){
+			if (!preg_match(",^[a-z0-9]+://,i",$im[1])
+			 AND (file_exists($f=$im[1]) OR file_exists($f=_DIR_RACINE.$im[1]))
+			 AND !isset($html_images[$f])){
 
-		$images = array();
-		preg_match_all("/'([^']+\.(".implode('|', $extensions)."))'/Ui", $this->Body, $images);
-
-		for ($i=0; $i<count($images[1]); $i++) {
-			if (file_exists('../'.$images[1][$i])) {
-				$html_images[] = '../'.$images[1][$i];
-				$this->Body = str_replace($images[1][$i], basename($images[1][$i]), $this->Body);
-			}
-			if (file_exists($images[1][$i])) {
-				$html_images[] = $images[1][$i];
-				$this->Body = str_replace($images[1][$i], basename($images[1][$i]), $this->Body);
-			}
-		}
-
-		if (!empty($html_images)) {
-			$html_images = array_unique($html_images);
-			sort($html_images);
-			for ($i=0; $i<count($html_images); $i++) {
-
-				// Bug Fix: dans thunderbird, il faut etre strict avec le header envoye avec l'image
-				$bouts = explode(".", basename($html_images[$i]));
-				$extension = strtolower(array_pop($bouts));
+				$extension = strtolower($im[3]);
 				$header_extension = $image_types[$extension];
-
-				$cid = md5(uniqid(time()));
-				$this->AddEmbeddedImage($html_images[$i], $cid, basename($html_images[$i]),'base64',$header_extension);
-				$this->Body = str_replace(basename($html_images[$i]), "cid:$cid", $this->Body);
+				$cid = md5($f); // un id unique pour un meme fichier
+				$this->AddEmbeddedImage($f, $cid, basename($f),'base64',$header_extension);
+				$this->Body = str_replace($im[1], "cid:$cid", $this->Body);
+				$html_images[$f] = $cid; // marquer l'image comme traitee, inutile d'y revenir
 			}
 		}
 	}
