@@ -11,8 +11,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'configuration_mailer' => 'Mailer\'s configuration',
 'configuration_smtp' => 'Choose your mailer',
 'configuration_smtp_descriptif' => 'If you\'re not sure about the settings, leave them set to "PHP mail".',
+'config_info_enregistree' => 'Postman\'s configuration is now saved',
 'utiliser_mail' => 'Use mail function from PHP',
 'utiliser_smtp' => 'Use SMTP',
+'erreur_invalid_host' => 'This host name is not valid',
+'erreur_invalid_port' => 'This port number is not valid',
 'facteur_smtp_host' => 'Host :',
 'facteur_smtp_port' => 'Port :',
 'facteur_smtp_auth' => 'Requires authentication :',
@@ -40,7 +43,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'version_texte' => "Text version.",
 'tester' => "Test",
 'erreur' => "Error",
-'email_test_envoye' => "Test email sent !",
+'email_test_envoye' => "The test email has been sent without error!",
 
 'Z' => 'ZZzZZzzz'
 

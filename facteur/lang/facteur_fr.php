@@ -11,8 +11,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'configuration_mailer' => 'Configuration du mailer',
 'configuration_smtp' => 'Choix du mailer',
 'configuration_smtp_descriptif' => 'Si vous n\'&ecirc;tes pas s&ucirc;rs, choisissez la fonction mail de PHP.',
+'config_info_enregistree' => 'La configuration du facteur a bien été enregistrée',
 'utiliser_mail' => 'Utiliser la fonction mail de PHP',
 'utiliser_smtp' => 'Utiliser SMTP',
+'erreur_invalid_host' => 'Ce nom d\'h&ocirc;te n\'est pas correct',
+'erreur_invalid_port' => 'Ce num&eacute;ro de port n\'est pas correct',
 'facteur_smtp_host' => 'Hôte :',
 'facteur_smtp_port' => 'Port :',
 'facteur_smtp_auth' => 'Requiert une authentification :',
@@ -40,7 +43,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'version_texte' => "Version texte.",
 'tester' => "Tester",
 'erreur' => "Erreur",
-'email_test_envoye' => "Email de test envoy&eacute;e !",
+'email_test_envoye' => "L'email de test a bien &eacute;t&eacute; envoy&eacute; !",
 
 'Z' => 'ZZzZZzzz'
 
