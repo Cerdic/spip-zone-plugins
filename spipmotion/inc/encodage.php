@@ -115,7 +115,7 @@ function encodage($source,$doc_attente){
 		}
 
 		$texte .= "vb=".$bitrate."000\n";
-		$bitrate = "--bitrate ".$bitrate."000";
+		$bitrate = "--bitrate ".$bitrate;
 
 		if(intval($source['audiobitrate']) && (intval($source['audiobitrate']) < lire_config("spipmotion/bitrate_audio_$extension_attente","64"))){
 			$audiobitrates = array('32','64','96','128','192','256');
@@ -135,7 +135,7 @@ function encodage($source,$doc_attente){
 		}
 
 		$texte .= "ab=".$audiobitrate."000\n";
-		$audiobitrate = "--audiobitrate ".$audiobitrate."000";
+		$audiobitrate = "--audiobitrate ".$audiobitrate;
 
 		if(intval($source['audiosamplerate']) && (intval($source['audiosamplerate']) < lire_config("spipmotion/frequence_audio_$extension_attente","22050"))){
 			$audiosamplerates = array('11025','22050','44100','48000');

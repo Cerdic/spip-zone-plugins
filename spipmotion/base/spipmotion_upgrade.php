@@ -66,6 +66,12 @@ function spipmotion_upgrade($nom_meta_base_version,$version_cible){
 			$ffmpeg_infos = charger_fonction('ffmpeg_infos','inc');
 			$ffmpeg_infos(true);
 		}
+		if (version_compare($current_version,'0.7.2','<')){
+			/**
+			 * On change le champs pixelformat
+			 */
+			sql_alter("TABLE spip_documents CHANGE `pixelformat` `pixelformat` VARCHAR(255) DEFAULT '' NOT NULL");
+		}
 		/**
 		 * TODO : générer un htaccess dans le répertoire script_bash/
 		 * TODO : insérer une préconfiguration par défaut
