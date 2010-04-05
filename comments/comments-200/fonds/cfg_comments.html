@@ -1,7 +1,7 @@
 <!-- descriptif=
-<img src='#CHEMIN{icon-64.png}' alt='' style="float:#LANG_RIGHT;" />
+<img src='#CHEMIN{icon-64.png}' alt='' style="float:#LANG_RIGHT; margin: 0 0 .1em 1em" />
 <strong>Configuration des commentaires</strong>
-<p class="explication" style="display: none;">Pour toute autre personnalisation, modifiez <a href="http://www.spip-contrib.net/?article3447">les fichiers</a>.</p>
+<p>Pour toute autre personnalisation, modifiez <a href="http://www.spip-contrib.net/?article3447">les&nbsp;fichiers</a>.</p>
 -->
 
 [(#REM) titre=Commentaires]
@@ -12,6 +12,20 @@
 <div class="formulaire_spip">
 <form method="post">[(#ENV{_cfg_}|form_hidden)]
 	<fieldset>
+    	<legend><:comments:forum_longueur:></legend>
+		<ul>
+			<li class="comments_forum_longueur_mini">
+				<label for="forum_longueur_mini"><:comments:forum_longueur_mini:></label>
+				<input type="text" class="text" name="forum_longueur_mini"[ value="(#ENV{forum_longueur_mini}|sinon{10})"] id="forum_longueur_mini" style="width: 4em;" disabled="disabled" />
+				<p class="explication">La longueur minimale des messages n'est pas encore paramétrable dans SPIP qui nécessite des messages d'au moins 10&nbsp;caractères.</p>
+			</li>
+			<li class="comments_forum_longueur_maxi">
+				<label for="forum_longueur_maxi"><:comments:forum_longueur_maxi:></label>
+				<input type="text" class="text" name="forum_longueur_maxi"[ value="(#ENV{forum_longueur_maxi}|sinon{1500})"] id="forum_longueur_maxi" style="width: 4em;" />
+			</li>
+		</ul>
+	</fieldset>
+	<fieldset>
     	<legend>Liste ou thread ?</legend>
 		<ul>
 			<li class="comments_fil">
@@ -20,19 +34,6 @@
                     <option value="list"[(#ENV{comments_fil,list}|=={list}|oui) selected="selected"]>Liste de commentaires (&agrave; plat)</option>
                     <option value="thread"[(#ENV{comments_fil,list}|=={thread}|oui) selected="selected"]>Enfilade de commentaires (en thread)</option>
                 </select>
-			</li>
-		</ul>
-	</fieldset>
-	<fieldset style="display: none;">
-    	<legend><:comments:forum_longueur:></legend>
-		<ul>
-			<li class="comments_forum_longueur_mini">
-				<label for="forum_longueur_mini"><:comments:forum_longueur_mini:></label>
-				<input type="text" name="forum_longueur_mini"[ value="(#ENV{forum_longueur_mini}|sinon{10})"] id="forum_longueur_mini" style="width: 4em;" disabled="disabled" />
-			</li>
-			<li class="comments_forum_longueur_maxi">
-				<label for="forum_longueur_maxi"><:comments:forum_longueur_maxi:></label>
-				<input type="text" name="forum_longueur_maxi"[ value="(#ENV{forum_longueur_maxi}|sinon{1500})"] id="forum_longueur_maxi" style="width: 4em;" />
 			</li>
 		</ul>
 	</fieldset>
@@ -51,8 +52,8 @@
 		</ul>
 	</fieldset>
 	<div class="boutons">
-		<input type="submit" name="_cfg_ok" value="<:OK:>" />
-		<input type="submit" name="_cfg_delete" value="<:reset:>" />
+		<input type="submit" class="submit" name="_cfg_ok" value="<:OK:>" />
+		<input type="submit" class="submit" name="_cfg_delete" value="<:reset:>" />
 	</div>
 </form>
 </div>
