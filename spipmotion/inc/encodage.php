@@ -65,34 +65,42 @@ function encodage($source,$doc_attente){
 	 */
 	if(in_array($source['extension'],lire_config('spipmotion/fichiers_videos_encodage',array()))){
 		/**
+		 * $texte est le contenu du fichier de preset que l'on passe à la commande
+		 * Certaines valeurs ne fonctionnent pas (et doivent être passées à la commande directement)
+		 * comme:
+		 * s = la taille
+		 * r = le nombre de frames par secondes
+		 * ac = le nombre de channels audio (ne provoquent pas d'erreurs mais ne passent pas)
+		 */
+		$texte = '';
+		/**
 		 * Calcul de la hauteur en fonction de la largeur souhaitée
 		 * et de la taille de la video originale
 		 */
 		$width = $source['largeur'];
 		$height = $source['hauteur'];
-		$width_finale = lire_config("spipmotion/width_$extension_attente") ? lire_config("spipmotion/width_$extension_attente") : 480;
+		$width_finale = lire_config("spipmotion/width_$extension_attente",480);
 
-		if($width<$width_finale){
+		if($width < $width_finale){
 			$width_finale = $width;
 			$height_finale = $height;
 		}
 		else{
-			$height_finale = round($source['hauteur']/($source['largeur']/$width_finale));
+			$height_finale = intval(round($source['hauteur']/($source['largeur']/$width_finale)));
 		}
 
 		/**
 		 * Pour certains codecs (libx264 notemment), width et height doivent être
 		 * divisibles par 2
 		 */
-		if(!is_int($width_finale / 2)){
+		if(!is_int($width_finale/2)){
 			$width_finale = $width_finale +1;
 		}
-		if(!is_int($height_finale / 2)){
+		if(!is_int($height_finale/2)){
 			$height_finale = $height_finale +1;
 		}
 
 		$video_size = "--size ".$width_finale."x".$height_finale;
-		$texte .= "s=".$width_finale."x".$height_finale."\n";
 
 		spip_log("document original ($chemin) = $width/$height - document final = $width_finale/$height_finale",'spipmotion');
 
@@ -113,9 +121,7 @@ function encodage($source,$doc_attente){
 		}else{
 			$fps = lire_config("spipmotion/fps_$extension_attente","15");
 		}
-
-		$texte .= "r=$fps\n";
-
+		$fps = "--fps $fps";
 		/**
 		 * Définition des bitrates
 		 * On vérifie ceux de la source et on compare à ceux souhaités dans la conf
@@ -173,13 +179,16 @@ function encodage($source,$doc_attente){
 		 * On passe en stereo ce qui a plus de 2 canaux et ce qui a un canal et dont
 		 * le format choisi est vorbis (l'encodeur vorbis ne gère pas le mono apparemment)
 		 */
-		if(($source['audiochannels'] > 2) OR (in_array($extension_attente,array('ogg','ogv')) && ($source['audiochannels'] == 1))){
+		if(($source['audiochannels'] > 2) OR (in_array($extension_attente,array('ogg','ogv')) && ($source['audiochannels'] < 2))){
+			spip_log('on passe en deux canaux','test');
 			$audiochannels = 2;
 		}else{
 			$audiochannels = $source['audiochannels'];
 		}
 
 		$texte .= "ac=$audiochannels\n";
+		$audiochannels = "--ac $audiochannels";
+
 		if($vcodec == '--vcodec libx264'){
 			$vpre = '--vpre default';
 		}
@@ -190,7 +199,7 @@ function encodage($source,$doc_attente){
 		/**
 		 * Encodage de la video
 		 */
-		$encodage = find_in_path('script_bash/spipmotion.sh')." $video_audiofreq $video_size --e $chemin $acodec $vcodec $audiobitrate $bitrate $vpre --s $fichier_temp --fpre=$fichier_texte --p ".lire_config("spipmotion/chemin","/usr/local/bin/ffmpeg")." &> $fichier_log";
+		$encodage = find_in_path('script_bash/spipmotion.sh')." $video_audiofreq $video_size --e $chemin $acodec $vcodec $fps $audiobitrate $audiochannels $bitrate $vpre --s $fichier_temp --fpre $fichier_texte --p ".lire_config("spipmotion/chemin","/usr/local/bin/ffmpeg")." &> $fichier_log";
 		spip_log("$encodage",'spipmotion');
 		$lancement_encodage = exec($encodage,$retour);
 

@@ -183,11 +183,11 @@ echo "$chemin"
 case "$sortie" in
   *".mp3"|*".flac"|*".ogg"|*".oga" )
   echo "On est dans un son"
-  nice -19 "$chemin" -i $entree $acodec $audiobitrate $audiofreq -y $sortie ;;
+  nice -19 "$chemin" -i $entree $acodec $audiobitrate $audiofreq $ac -y $sortie ;;
   *".flv"|*".mp4"|*".ogv" )
   echo "on est dans une video"
-  echo "nice -19 $chemin -i $entree $acodec $size $vcodec $bitrate $audiobitrate $vpre $audiofreq $fpre -y $sortie"
-  nice -19 $chemin -i $entree $acodec $size $vcodec $bitrate $audiobitrate $vpre $audiofreq $fpre -y $sortie ;;
+  echo "nice -19 $chemin -i $entree $acodec $size $vcodec $bitrate $audiobitrate $ac $vpre $audiofreq $fpre -y $sortie"
+  nice -19 $chemin -i $entree $acodec $size $vcodec $fps $bitrate $audiobitrate $ac $vpre $audiofreq $fpre -y $sortie ;;
 esac
 
 echo "$succes"
