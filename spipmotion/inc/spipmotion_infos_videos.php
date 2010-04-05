@@ -68,11 +68,12 @@ function inc_spipmotion_infos_videos_dist($id, $id_document,$type,$script='',$ig
 			$action3 = "<a href='$action3'>$texte3</a>";
 		}
 		if(!_AJAX){
-			$corps .= icone_horizontale($texte, $action, $supp, "creer.gif", false);
-			$corps .= icone_horizontale($texte2, $action2, $supp, "creer.gif", false);
+			$icone = find_in_path('images/spipmotion-24.png');
+			$corps .= icone_horizontale($texte, $action, $icone, "creer.gif", false);
+			$corps .= icone_horizontale($texte2, $action2, $icone, "creer.gif", false);
 			if(($infos_doc['id_orig'] == 0) && in_array($infos_doc['extension'],lire_config('spipmotion/fichiers_videos_encodage',array()))){
 				if($action3)
-					$corps .= icone_horizontale($texte3, $action3, $supp, "creer.gif", false);
+					$corps .= icone_horizontale($texte3, $action3, $icone, "creer.gif", false);
 				else
 					$corps .= $texte3;
 			}

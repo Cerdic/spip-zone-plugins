@@ -65,7 +65,8 @@ function encodage($source,$doc_attente){
 	 */
 	if(in_array($source['extension'],lire_config('spipmotion/fichiers_videos_encodage',array()))){
 		/**
-		 * Calcul de la hauteur en fonction de la largeur souhaitée et de la taille de la video originale
+		 * Calcul de la hauteur en fonction de la largeur souhaitée
+		 * et de la taille de la video originale
 		 */
 		$width = $source['largeur'];
 		$height = $source['hauteur'];
@@ -78,6 +79,18 @@ function encodage($source,$doc_attente){
 		else{
 			$height_finale = round($source['hauteur']/($source['largeur']/$width_finale));
 		}
+
+		/**
+		 * Pour certains codecs (libx264 notemment), width et height doivent être
+		 * divisibles par 2
+		 */
+		if(!is_int($width_finale / 2)){
+			$width_finale = $width_finale +1;
+		}
+		if(!is_int($height_finale / 2)){
+			$height_finale = $height_finale +1;
+		}
+
 		$video_size = "--size ".$width_finale."x".$height_finale;
 		$texte .= "s=".$width_finale."x".$height_finale."\n";
 

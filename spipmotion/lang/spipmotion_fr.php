@@ -75,8 +75,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'profils_encodage_video' => 'Profil(s) d\'encodage (Vid&eacute;o)',
 
 	// R
-	'recuperer_infos' => 'R&eacute;cup&eacute;rer des informations techniques sur la vid&eacute;o',
-	'recuperer_logo' => 'R&eacute;cup&eacute;rer une vignette depuis la vid&eacute;o',
+	'recuperer_infos' => 'R&eacute;cup&eacute;rer les donn&eacute;es techniques',
+	'recuperer_logo' => 'R&eacute;cup&eacute;rer une vignette',
 
 	// S
 	'select_all' => 'Tout s&eacute;lectionner',
