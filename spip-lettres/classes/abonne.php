@@ -28,9 +28,9 @@
 
 	class abonne {
 
-	    var $id_abonne;
+		var $id_abonne;
 		var $objet = 'abonnes';
-	    var $id_objet;
+		var $id_objet;
 		var $email;
 		var $code;
 		var $nom;
@@ -195,17 +195,20 @@
 
 
 		function enregistrer_envoi($id_lettre, $resultat) {
-			if ($resultat)
-				$statut = 'envoye';
-			else
-				$statut = 'echec';
+			static $mois = null;
+			$statut = $resultat?'envoye':'echec';
+			
 			if (sql_countsel('spip_abonnes_lettres', 'id_abonne='.intval($this->id_abonne).' AND id_lettre='.intval($id_lettre)))
 				sql_updateq('spip_abonnes_lettres', array('statut' => $statut, 'format' => $this->format, 'maj' => 'NOW()'), 'id_abonne='.intval($this->id_abonne).' AND id_lettre='.intval($id_lettre));
 			else
 				sql_insertq('spip_abonnes_lettres', array('id_abonne' => intval($this->id_abonne), 'id_lettre' => intval($id_lettre), 'statut' => $statut, 'format' => $this->format, 'maj' => 'NOW()'));
-			if (sql_countsel('spip_lettres_statistiques', 'periode="'.date('Y-m').'"') == 0)
-				sql_insertq('spip_lettres_statistiques', array('periode' => date('Y-m')));
-			sql_update('spip_lettres_statistiques', array('nb_envois' => 'nb_envois+1'), 'periode="'.date('Y-m').'"');
+
+			if (!$mois) {
+				$mois = date('Y-m');
+				if (!sql_countsel('spip_lettres_statistiques', 'periode='.sql_quote($mois)))
+					sql_insertq('spip_lettres_statistiques', array('periode' => $mois,'nb_envois'=>0));
+			}
+			sql_update('spip_lettres_statistiques', array('nb_envois' => 'nb_envois+1'), 'periode='.sql_quote($mois));
 		}
 
 
@@ -293,15 +296,13 @@
 		function envoyer_lettre($id_lettre) {
 			global $champs_extra;
 
-			// verrouillage
-			sql_update('spip_abonnes_lettres', array('verrou' => '1'), 'id_lettre='.intval($id_lettre).' AND id_abonne='.intval($this->id_abonne));
-
+			// le verrouillage est fait en amont, par la gestion des queue
 			$lettre = new lettre($id_lettre);
-			
+
+			$objet = $lettre->titre;
 			if ($lettre->statut == 'brouillon')
-				$objet		= 'TEST - '.$lettre->titre;
-			else
-				$objet		= $lettre->titre;
+				$objet = 'TEST - '.$lettre->titre;
+
 			$message_html	= $lettre->message_html;
 			$message_texte	= $lettre->message_texte;
 

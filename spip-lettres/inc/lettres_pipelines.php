@@ -127,5 +127,9 @@
 		return $libelles;
 	}
 
+	function lettres_taches_generales_cron($taches_generales) {
+		$taches_generales['lettres_surveillance'] = 300; // toutes les 5 minutes
+		return $taches_generales;
+	}
 
 ?>

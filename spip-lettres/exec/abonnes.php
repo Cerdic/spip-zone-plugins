@@ -169,14 +169,9 @@
 		echo _T('lettresprive:aide_abonnes');
 		echo fin_boite_info(true);
 
-		$lettres = array();
-		$res = sql_select('id_lettre', 'spip_abonnes_lettres', 'id_abonne='.intval($abonne->id_abonne));
-		if (sql_count($res)) {
-			while ($arr = sql_fetch($res))
-				$lettres[] = $arr['id_lettre'];
-			$lettres_virgules = implode(',', $lettres);
-			echo afficher_objets('lettre', _T('lettresprive:lettres_recues'), array('FROM' => 'spip_lettres', 'WHERE' => 'id_lettre IN ('.$lettres_virgules.')', 'ORDER BY' => 'maj DESC'));
-		}
+		echo afficher_objets('lettre',
+			_T('lettresprive:lettres_recues'),
+			array('FROM' => 'spip_abonnes_lettres', 'WHERE' => 'id_abonne='.intval($abonne->id_abonne), 'ORDER BY' => 'maj DESC'), array('id_lettre' => $lettre->id_lettre));
 		
 		echo fin_gauche();
 

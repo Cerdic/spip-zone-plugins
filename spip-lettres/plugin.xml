@@ -2,13 +2,14 @@
 <plugin>
 	<nom>SPIP-Lettres</nom>
 	<auteur>[Art&#233;go->http://www.artego.fr], Cedric Morin [->www.yterium.net]</auteur>
-	<version>4.0.5</version>
+	<version>4.1.0</version>
 	<version_base>4.0.1</version_base>
-	<etat>stable</etat>
+	<etat>test</etat>
 	<licence>[GPLv3->http://www.gnu.org/licenses/gpl-3.0.html]</licence>
 	<description>Gestion de lettres d'information</description>
 	<necessite id="SPIP" version="[2.0.10;]" />
-	<necessite id="facteur" version="[1.0;]" />
+	<necessite id="facteur" version="[1.3.5;]" />
+	<necessite id="queue" version="[0.3.0;]" />
 	<utilise id="bando" version="[;]" />
 	<install>base/lettres.php</install>
 	<lien>http://www.artego.fr/-Lettre-d-information-</lien>
@@ -68,6 +69,10 @@
 	</pipeline>
 	<pipeline>
 		<nom>libelle_association_mots</nom>
+		<inclure>inc/lettres_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>taches_generales_cron</nom>
 		<inclure>inc/lettres_pipelines.php</inclure>
 	</pipeline>
 

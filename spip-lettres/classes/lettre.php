@@ -148,71 +148,19 @@
 					$redirection = generer_url_ecrire('lettres', 'id_lettre='.$this->id_lettre, true);
 					break;
 				case 'envoi_en_cours':
-					if ($ancien_statut == 'brouillon') {
+					if (in_array($ancien_statut,array('brouillon','envoyee'))){
 						$this->statut = 'envoi_en_cours';
 						$this->date_debut_envoi = date('Y-m-d h:i:s');
 						sql_updateq('spip_lettres', array('statut' => $this->statut, 'date_debut_envoi' => 'NOW()', 'maj' => 'NOW()'), 'id_lettre='.intval($this->id_lettre));
-						$this->enregistrer_squelettes();
-						calculer_rubriques();
-						propager_les_secteurs();
-						calculer_langues_rubriques();
-						$rubriques = lettres_recuperer_toutes_les_rubriques_parentes($this->id_rubrique);
-						$rubriques_virgules = implode(',', $rubriques);
-						$resultat_abonnes = sql_select('A.id_abonne, A.format', 'spip_abonnes_rubriques AS AR INNER JOIN spip_abonnes AS A ON A.id_abonne=AR.id_abonne', 'AR.id_rubrique IN ('.$rubriques_virgules.') AND AR.statut="valide"', 'A.id_abonne');
-						while ($arr = sql_fetch($resultat_abonnes)) {
-							sql_insertq('spip_abonnes_lettres', array(
-																	'id_abonne' => intval($arr['id_abonne']), 
-																	'id_lettre' => intval($this->id_lettre),
-																	'statut' => 'a_envoyer',
-																	'format' => $arr['format'],
-																	'verrou' => 0,
-																	'maj' => 'NOW()'
-																	));
+						if ($ancien_statut == 'brouillon') {
+							$this->enregistrer_squelettes();
+							calculer_rubriques();
+							propager_les_secteurs();
+							calculer_langues_rubriques();
 						}
-						if ($cron) {
-							$envois = sql_select('*', 'spip_abonnes_lettres', 'id_lettre='.intval($this->id_lettre).' AND verrou=0 AND statut="a_envoyer"');
-							if (sql_count($envois) > 0) {
-								while ($arr = sql_fetch($envois)) {
-									$abonne = new abonne($arr['id_abonne']);
-									$resultat = $abonne->envoyer_lettre($this->id_lettre);
-									$abonne->enregistrer_envoi($this->id_lettre, $resultat);
-								}
-							}
-							$this->statut = 'envoyee';
-							$this->date_fin_envoi = date('Y-m-d h:i:s');
-							sql_updateq('spip_lettres', array('statut' => $this->statut, 'date_fin_envoi' => 'NOW()', 'maj' => 'NOW()'), 'id_lettre='.intval($this->id_lettre));
-							sql_updateq('spip_abonnes_lettres', array('statut' => 'annule'), 'id_lettre='.intval($this->id_lettre).' AND statut="a_envoyer"');
-						}
-						$redirection = generer_url_ecrire('lettres', 'id_lettre='.$this->id_lettre, true);
-					}
-					if ($ancien_statut == 'envoyee') {
-						$this->statut = 'envoi_en_cours';
-						sql_updateq('spip_lettres', array('statut' => $this->statut, 'date_debut_envoi' => 'NOW()', 'maj' => 'NOW()'), 'id_lettre='.intval($this->id_lettre));
-						sql_updateq('spip_abonnes_lettres', array('verrou' => 0, 'statut' => 'a_envoyer'), 'id_lettre='.intval($this->id_lettre));
-						$redirection = generer_url_ecrire('lettres', 'id_lettre='.$this->id_lettre, true);
-					}
-					if ($ancien_statut == 'envoi_en_cours') {
-						$envois = sql_select('*', 'spip_abonnes_lettres', 'id_lettre='.intval($this->id_lettre).' AND verrou=0 AND statut="a_envoyer"', '', '', '10');
-						if (sql_count($envois) > 0) {
-							while ($arr = sql_fetch($envois)) {
-								$abonne = new abonne($arr['id_abonne']);
-								$resultat = $abonne->envoyer_lettre($this->id_lettre);
-								$abonne->enregistrer_envoi($this->id_lettre, $resultat);
-							}
-							if ($xml)
-								$redirection = 0;
-							else
-								$redirection = generer_url_ecrire('lettres', 'id_lettre='.$this->id_lettre, true);
-						} else {
-							$this->statut = 'envoyee';
-							$this->date_fin_envoi = date('Y-m-d h:i:s');
-							sql_updateq('spip_lettres', array('statut' => $this->statut, 'date_fin_envoi' => 'NOW()', 'maj' => 'NOW()'), 'id_lettre='.intval($this->id_lettre));
-							sql_updateq('spip_abonnes_lettres', array('statut' => 'annule'), 'id_lettre='.intval($this->id_lettre).' AND statut="a_envoyer"');
-							if ($xml)
-								$redirection = 1;
-							else
-								$redirection = generer_url_ecrire('lettres', 'id_lettre='.$this->id_lettre.'&message=envoi_termine', true);
-						}
+						// appel a passer en job qeue
+						include_spip('inc/delivrer');
+						lettres_programmer_envois($this->id_lettre);
 					}
 					break;
 				case 'envoyee':
@@ -222,7 +170,6 @@
 						sql_updateq('spip_lettres', array('statut' => $this->statut, 'date_fin_envoi' => 'NOW()', 'maj' => 'NOW()'), 'id_lettre='.intval($this->id_lettre));
 						sql_updateq('spip_abonnes_lettres', array('statut' => 'annule'), 'id_lettre='.intval($this->id_lettre).' AND statut="a_envoyer"');
 					}
-					$redirection = generer_url_ecrire('lettres', 'id_lettre='.$this->id_lettre.'&message=envoi_termine', true);
 					break;
 				case 'poubelle':
 				case 'poub':
@@ -372,7 +319,8 @@
 
 
 		function calculer_pourcentage_format($format) {
-			$total = $this->calculer_nb_envois();
+			include_spip('inc/delivrer');
+			$total = $this->calculer_nb_envois()+lettres_envois_restants($this->id_lettre);
 			if ($total) {
 				$nb = sql_countsel('spip_abonnes_lettres', 'id_lettre='.intval($this->id_lettre).' AND format='.sql_quote($format));
 				return floor($nb / $total * 100);

@@ -38,7 +38,8 @@
 				$lettre->texte			= $arr['texte'];
 				$lettre->statut			= 'brouillon';
 				$lettre->enregistrer();
-				$lettre->enregistrer_statut('envoi_en_cours', true);
+				// programmer un nouvel envoi
+				$lettre->enregistrer_statut('envoi_en_cours');
 			}
 		}
 

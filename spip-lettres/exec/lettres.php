@@ -26,31 +26,11 @@
 			exit;
 		}
 
-		$lettre = new lettre($_GET['id_lettre']);
+		$lettre = new lettre(_request('id_lettre'));
 		
 		pipeline('exec_init',array('args'=>array('exec'=>'lettres','id_lettre'=>$lettre->id_lettre),'data'=>''));
 
 		$url = generer_url_ecrire('lettres', 'id_lettre='.$lettre->id_lettre, true);
-
-		if (!empty($_POST['renvoyer_lettre'])) {
-			if ($_POST['tous'] == 1) {
-				$url = generer_url_action('statut_lettre','id_lettre='.$lettre->id_lettre.'&changer_statut=1&statut=envoi_en_cours', true);
-				header('Location: '.$url);
-				exit();
-			} else {
-				$abonne = new abonne(0, $_POST['email_abonne']);
-				if ($abonne->existe) {
-					$resultat = $abonne->renvoyer_lettre($lettre->id_lettre);
-					$url = generer_url_ecrire('lettres', 'id_lettre='.$lettre->id_lettre.'&message=renvoi_'.($resultat ? 'ok' : 'ko'), true);
-					header('Location: '.$url);
-					exit();
-				} else {
-					$url = generer_url_ecrire('lettres', 'id_lettre='.$lettre->id_lettre.'&message=abonne_inexistant', true);
-					header('Location: '.$url);
-					exit();
-				}
-			}
-		}
 
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page($lettre->titre, "naviguer", "lettres_tous");
@@ -121,7 +101,7 @@
 		echo creer_colonne_droite('', true);
 		echo pipeline('affiche_droite',array('args'=>array('exec'=>'lettres','id_lettre'=>$lettre->id_lettre),'data'=>''));
 
-   		echo debut_droite('', true);
+		echo debut_droite('', true);
 
 		$articles = '';
 		if ($GLOBALS['meta']['spip_lettres_utiliser_articles'] == 'oui') {
@@ -175,7 +155,10 @@
 		$dater = charger_fonction('dater', 'inc');
 
 		if ($lettre->statut == 'envoyee') {
-			$renvoi = '<form method="post" action="'.generer_url_ecrire('lettres', 'id_lettre='.$lettre->id_lettre).'">';
+			$action = generer_action_auteur("renvoyer_lettre",$lettre->id_lettre,self());
+
+			$renvoi = '<form method="post" action="'.$action.'">';
+			$renvoi.= "<div>".form_hidden($action)."</div>";
 			$renvoi.= debut_cadre_enfonce(_DIR_PLUGIN_LETTRES.'prive/images/renvoi.png', true, "", _T('lettresprive:renvoyer_lettre'));
 			$renvoi.= '<p><label><input type="checkbox" name="tous" value="1" /> '._T('lettresprive:renvoyer_a_tous').'</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <label>'._T('lettresprive:ou_abonne').' <input type="text" name="email_abonne" value="" /></label></p>';
 			$renvoi.= '<div align="right">';
@@ -200,23 +183,8 @@
 			$onglet_documents = lettres_documents('lettre', intval($lettre->id_lettre));
 	
 		if ($lettre->statut == 'envoi_en_cours') {
-			echo '<div id="progression_envoi_lettre"></div>';
-
-			echo '<script type="text/javascript">'."\n";
-			echo 'function progression() {'."\n";
-			echo '  $.post("'.generer_url_action('progression_envoi_lettre', 'id_lettre='.$lettre->id_lettre, true, true).'", function(xml) {'."\n";
-			echo '    fin = $("fin", xml).text();';
-			echo '    if (fin == 1) {'."\n";
-			echo '      window.location.href="'.generer_url_ecrire('lettres', 'id_lettre='.$lettre->id_lettre.'&message=envoi_termine', true).'";'."\n";
-			echo '    } else {'."\n";
-			echo '      $("#progression_envoi_lettre").load("'.generer_url_ecrire('progression_envoi_lettre', 'id_lettre='.$lettre->id_lettre, true).'");'."\n";
-			echo '      progression();'."\n";
-			echo '    }'."\n";
-			echo '	});'."\n";
-			echo '}'."\n";
-			echo '$("#progression_envoi_lettre").load("'.generer_url_ecrire('progression_envoi_lettre', 'id_lettre='.$lettre->id_lettre, true).'");'."\n";
-			echo 'progression();'."\n";
-			echo '</script>'."\n";
+			include_spip('inc/delivrer');
+			echo lettres_delivrer_surveille_ajax($lettre->id_lettre,generer_url_ecrire('lettres', 'id_lettre='.$lettre->id_lettre.'&message=envoi_termine', true));
 		}
 
 		if (isset($_GET['message'])) {
@@ -259,22 +227,13 @@
 
 		if ($lettre->statut == 'brouillon') {
 			$rubriques = lettres_recuperer_toutes_les_rubriques_parentes($lettre->id_rubrique);
-			$rubriques_virgules = implode(',', $rubriques);
-			$abonnes = array();
-			$res = sql_select('id_abonne', 'spip_abonnes_rubriques', 'id_rubrique IN ('.$rubriques_virgules.')');
-			while ($arr = sql_fetch($res))
-				$abonnes[] = $arr['id_abonne'];
-			$abonnes_virgules = implode(',', $abonnes);
-			if (count($abonnes))
-				echo afficher_objets('abonne', _T('lettresprive:tous_abonnes_rubrique'), array('FROM' => 'spip_abonnes', 'WHERE' => 'id_abonne IN ('.$abonnes_virgules.')', 'ORDER BY' => 'maj DESC'), array('id_rubrique' => $lettre->id_rubrique));
+			echo afficher_objets('abonne',
+				_T('lettresprive:tous_abonnes_rubrique'),
+				array('FROM' => 'spip_abonnes_rubriques', 'WHERE' => sql_in('id_rubrique',$rubriques), 'ORDER BY' => 'date_abonnement DESC'), array('id_rubrique' => $lettre->id_rubrique));
 		} else {
-			$abonnes = array();
-			$res = sql_select('id_abonne', 'spip_abonnes_lettres', 'id_lettre='.$lettre->id_lettre);
-			while ($arr = sql_fetch($res))
-				$abonnes[] = $arr['id_abonne'];
-			$abonnes_virgules = implode(',', $abonnes);
-			if (count($abonnes))
-				echo afficher_objets('abonne', _T('lettresprive:les_abonnes_suivants_ont_recu_cette_lettre'), array('FROM' => 'spip_abonnes', 'WHERE' => 'id_abonne IN ('.$abonnes_virgules.')', 'ORDER BY' => 'maj DESC'), array('id_lettre' => $lettre->id_lettre));
+			echo afficher_objets('abonne',
+				_T('lettresprive:les_abonnes_suivants_ont_recu_cette_lettre'),
+				array('FROM' => 'spip_abonnes_lettres', 'WHERE' => 'id_lettre='.intval($lettre->id_lettre), 'ORDER BY' => 'maj DESC'), array('id_lettre' => $lettre->id_lettre));
 		}
 
 		echo fin_gauche();
