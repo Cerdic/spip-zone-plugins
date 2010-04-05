@@ -32,8 +32,7 @@ function encodage($source,$doc_attente){
 	spip_log("encodage de $chemin","spipmotion");
 
 	$fichier = basename($source['fichier']);
-	$string = "$fichier-$width-$height";
-	$query = md5($string);
+	$query = "$fichier-$extension_attente-".date('Y_m_d_H-i-s');
 	$dossier = _DIR_TMP.'spipmotion/';
 	$fichier_final = substr($fichier,0,-(strlen($source['extension'])+1)).'-encoded.'.$extension_attente;
 
@@ -41,6 +40,7 @@ function encodage($source,$doc_attente){
 		sous_repertoire(_DIR_TMP,'spipmotion');
 	}
 	$fichier_temp = "$dossier$query.$extension_attente";
+	$fichier_log = "$dossier$query.log";
 	spip_log("le nom temporaire durant l'encodage est $fichier_temp","spipmotion");
 
 	/**
@@ -50,7 +50,7 @@ function encodage($source,$doc_attente){
 		/**
 		 * Encodage du son
 		 */
-		$encodage = find_in_path('script_bash/spipmotion.sh').' --e '.$chemin.' --s '.$fichier_temp.' --audiobitrate '.lire_config("spipmotion/bitrate_audio_$extension_attente","64").' --audiofreq '. lire_config("spipmotion/frequence_audio_$extension_attente","22050").' --p '.lire_config("spipmotion/chemin","/usr/local/bin/ffmpeg");
+		$encodage = find_in_path('script_bash/spipmotion.sh').' --e '.$chemin.' --s '.$fichier_temp.' --audiobitrate '.lire_config("spipmotion/bitrate_audio_$extension_attente","64").' --audiofreq '. lire_config("spipmotion/frequence_audio_$extension_attente","22050").' --p '.lire_config("spipmotion/chemin","/usr/local/bin/ffmpeg").' &> '.$fichier_log;
 		spip_log("$encodage",'spipmotion');
 		$lancement_encodage = exec($encodage,$retour);
 		spip_log($retour,'spipmotion');
@@ -90,6 +90,11 @@ function encodage($source,$doc_attente){
 		 *
 		 * TODO faire de même pour le son
 		 */
+		$texte .= lire_config("spipmotion/acodec_$extension_attente") ? "acodec=".lire_config("spipmotion/acodec_$extension_attente")."\n":'';
+		$acodec = lire_config("spipmotion/acodec_$extension_attente") ? "--acodec ".lire_config("spipmotion/acodec_$extension_attente") :'';
+		$texte .= lire_config("spipmotion/vcodec_$extension_attente") ? "vcodec=".lire_config("spipmotion/vcodec_$extension_attente")."\n":'';
+		$vcodec .= lire_config("spipmotion/vcodec_$extension_attente") ? "--vcodec ".lire_config("spipmotion/vcodec_$extension_attente") :'';
+
 		if(intval($source['framerate']) && (intval($source['framerate']) < lire_config("spipmotion/fps_$extension_attente","15"))){
 			$fps = $source['framerate'];
 		}else{
@@ -109,7 +114,8 @@ function encodage($source,$doc_attente){
 			$bitrate = lire_config("spipmotion/bitrate_$extension_attente","448");
 		}
 
-		$texte .= "vb=$bitrate\n";
+		$texte .= "vb=".$bitrate."000\n";
+		$bitrate = "--bitrate ".$bitrate."000";
 
 		if(intval($source['audiobitrate']) && (intval($source['audiobitrate']) < lire_config("spipmotion/bitrate_audio_$extension_attente","64"))){
 			$audiobitrates = array('32','64','96','128','192','256');
@@ -128,7 +134,8 @@ function encodage($source,$doc_attente){
 			$audiobitrate = lire_config("spipmotion/bitrate_audio_$extension_attente","64");
 		}
 
-		$texte .= "ab=$audiobitrate\n";
+		$texte .= "ab=".$audiobitrate."000\n";
+		$audiobitrate = "--audiobitrate ".$audiobitrate."000";
 
 		if(intval($source['audiosamplerate']) && (intval($source['audiosamplerate']) < lire_config("spipmotion/frequence_audio_$extension_attente","22050"))){
 			$audiosamplerates = array('11025','22050','44100','48000');
@@ -149,14 +156,20 @@ function encodage($source,$doc_attente){
 		$video_audiofreq = "--audiofreq ".$audiosamplerate;
 		$texte .= "ar=$audiosamplerate\n";
 
-		if($source['audiochannels'] > 2){
+		/**
+		 * On passe en stereo ce qui a plus de 2 canaux et ce qui a un canal et dont
+		 * le format choisi est vorbis (l'encodeur vorbis ne gère pas le mono apparemment)
+		 */
+		if(($source['audiochannels'] > 2) OR (in_array($extension_attente,array('ogg','ogv')) && ($source['audiochannels'] == 1))){
 			$audiochannels = 2;
 		}else{
 			$audiochannels = $source['audiochannels'];
 		}
 
 		$texte .= "ac=$audiochannels\n";
-
+		if($vcodec == '--vcodec libx264'){
+			$vpre = '--vpre default';
+		}
 		$fichier_texte = "$dossier$query.txt";
 
 		ecrire_fichier($fichier_texte,$texte);
@@ -164,17 +177,21 @@ function encodage($source,$doc_attente){
 		/**
 		 * Encodage de la video
 		 */
-		$encodage = find_in_path('script_bash/spipmotion.sh').' '.$video_audiofreq.' '.$video_size.' --e '.$chemin.' --s '.$fichier_temp.' --fpre='.$fichier_texte.' --p '.lire_config("spipmotion/chemin","/usr/local/bin/ffmpeg");
+		$encodage = find_in_path('script_bash/spipmotion.sh')." $video_audiofreq $video_size --e $chemin $acodec $vcodec $audiobitrate $bitrate $vpre --s $fichier_temp --fpre=$fichier_texte --p ".lire_config("spipmotion/chemin","/usr/local/bin/ffmpeg")." &> $fichier_log";
 		spip_log("$encodage",'spipmotion');
 		$lancement_encodage = exec($encodage,$retour);
 
 		spip_log($retour,'spipmotion');
 
-		if(count($retour) > 0){
-			spip_log("l'encodage est terminé",'spipmotion');
+		if(filesize($fichier_temp) > 100){
 			$encodage_ok = true;
 		}else{
 			spip_log("l'encodage est en erreur",'spipmotion');
+			/**
+			 * Analyse des erreurs...
+			 * On a créé un fichier de log
+			 * $fichier_log = "$dossier$query.log";
+			 */
 		}
 		if(is_readable($fichier_temp) && ($extension_attente == 'flv') && $encodage_ok){
 			/**
@@ -199,7 +216,6 @@ function encodage($source,$doc_attente){
 
 		$ajouter_documents = charger_fonction('ajouter_documents', 'inc');
 		$x = $ajouter_documents($fichier_temp, $fichier_final, $type_doc, $id_objet, $mode, '', $actif,'','','');
-		spip_log("on ajoute le nouveau fichier qui devient $x","spipmotion");
 		unlink($fichier_temp);
 
 		sql_updateq("spip_documents",array('id_orig'=>$attente['id_document']),'id_document='.intval($x));
@@ -210,7 +226,6 @@ function encodage($source,$doc_attente){
 		if ($invalider) {
 			include_spip('inc/invalideur');
 			suivre_invalideur("0",true);
-			spip_log('invalider', 'spipmotion');
 		}
 	}else{
 		sql_updateq("spip_spipmotion_attentes",array('encode'=>'non'),"id_spipmotion_attente=".intval($doc_attente));

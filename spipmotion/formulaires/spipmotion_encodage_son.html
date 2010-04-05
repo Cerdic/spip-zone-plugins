@@ -1,10 +1,26 @@
 <h4><:spipmotion:profil_encodage{format=#ENV{valeur}}:></h4>
 <ul>
-	[(#SAISIE{input,frequence_audio_#ENV{valeur}}
-		{label=<:spipmotion:frequence_audio:>}
-		{defaut=44100}{size=6})]
-		
-	[(#SAISIE{input,bitrate_audio_#ENV{valeur}}
-		{label=<:spipmotion:bitrate_audio:>}
-		{defaut=128}{size=4})]
+	[(#SAISIE{selection,frequence_audio_#ENV{valeur},
+		label=<:spipmotion:frequence_audio:>,
+		defaut=22050,
+		cacher_option_intro=oui,
+		datas=#ARRAY{
+			11025,11025 Hz,
+			22050,22050 Hz,
+			44100,44100 Hz,
+			48000,48000 Hz
+		}})]
+
+	[(#SAISIE{selection,bitrate_audio_#ENV{valeur},
+		label=<:spipmotion:bitrate_audio:>,
+		defaut=64,
+		cacher_option_intro=oui,
+		datas=#ARRAY{
+			32,32 kbps,
+			64,64 kbps,
+			96,96 kbps,
+			128,128 kbps,
+			192,192 kbps,
+			256,256 kbps
+		}})]
 </ul>

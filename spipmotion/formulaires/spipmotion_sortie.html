@@ -6,20 +6,17 @@
 			<li>
 				<label><:spipmotion:label_extensions_sortie:></label>
 				<div class="explication"><:spipmotion:explications_extensions_sortie:></div>
-				#SET{extensions_sortie,#ARRAY}
+				#SET{audio_extensions_sortie,#ARRAY|push{mp3}|push{ogg}}
 				<p class="explications"><:spipmotion:extensions_audio:></p>
 				<select name="fichiers_audios_sortie[]" multiple="multiple">
-					<BOUCLE_sons_sortie(TYPES_DOCUMENTS){mime_type LIKE audio/%}{extension !IN #GET{extensions_sortie}}>
+					<BOUCLE_sons_sortie(TYPES_DOCUMENTS){extension IN #GET{audio_extensions_sortie}}>
 						<option value="#EXTENSION"[(#EXTENSION|in_any{#ENV{fichiers_audios_sortie}}|oui) selected="selected"]>#EXTENSION - #MIME_TYPE</option>
 						#SET{extensions_sortie,#GET{extensions_sortie}|push{#EXTENSION}}
 					</BOUCLE_sons_sortie>
 				</select>
 				<p><a href="#" class="select_all"><:spipmotion:select_all:></a> <a href="#" class="unselect_all"><:spipmotion:unselect_all:></a></p>
-				
-				#SET{videos_sortie,#ARRAY|push{mp4}|push{m4v}}
-				<BOUCLE_videos_sortie(TYPES_DOCUMENTS){mime_type LIKE video/%}{extension !IN #GET{extensions_sortie}}>
-				#SET{videos_sortie,#GET{videos_sortie}|push{#EXTENSION}}
-				</BOUCLE_videos_sortie>
+
+				#SET{videos_sortie,#ARRAY|push{flv}|push{mov}|push{ogv}|push{mp4}|push{m4v}}
 				<p class="explications"><:spipmotion:extensions_video:></p>
 				<select name="fichiers_videos_sortie[]" multiple="multiple">
 					<BOUCLE_videos1_sortie(TYPES_DOCUMENTS){extension IN #GET{videos_sortie}}>

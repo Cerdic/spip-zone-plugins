@@ -55,6 +55,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'install_maj_base' => 'Mise &agrave; jour de la base de spipmotion &agrave la version @version@',
 
 	// L
+	'label_codec_son' => 'Codec audio &agrave; utiliser',
+	'label_codec_video' => 'Codec vid&eacute;o &agrave; utiliser',
 	'label_encodage_auto' => 'Encoder automatiquement',
 	'label_extensions_prises_en_charge_encodage' => 'Formats pris en charge pour l\'encodage',
 	'label_extensions_prises_en_charge' => 'Formats pris en charge de base',

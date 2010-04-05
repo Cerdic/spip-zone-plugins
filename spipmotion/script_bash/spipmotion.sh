@@ -72,7 +72,11 @@ while test -n "${1}"; do
 		shift;;
 		--bitrate) bitrate="-vb ${2}.kb"
 		shift;;
-		--acodec) acodec="${2}"
+		--acodec) acodec="-acodec ${2}"
+		shift;;
+		--vcodec) vcodec="-vcodec ${2}"
+		shift;;
+		--vpre) vpre="-vpre ${2}"
 		shift;;
 		--audiobitrate) audiobitrate="-ab ${2}.kb"
 		shift;;
@@ -114,19 +118,12 @@ case "$audiobitrate" in
   esac
 esac
 
-case "$audiofreq" in
-  "")
-  case "$sortie" in
-  	*".flv") audiofreq="-ar 22050" ;;
-  esac
-esac
-
 case "$acodec" in
 	"")
 	case "$sortie" in
   		*".mp3"|*".flv") acodec="-acodec libmp3lame" ;;
   		*".flac") acodec="-acodec flac" ;;
-  		*".ogg"|*".oga"|*".ogv") acodec="-acodec libvorbis" ;;
+  		*".ogg"|*".oga"|*".ogv") acodec="-acodec vorbis" ;;
   	esac
 esac
 
@@ -145,11 +142,17 @@ case "$fps" in
 esac
 
 case "$vcodec" in
+	"libx264")
+	case "$vpre" in
+  		"") vpre="-vpre default" ;;
+  	esac
+  	shift;;
 	"")
 	case "$sortie" in
   		*".flv") vcodec="-vcodec flv" ;;
   		*".ogg"|*".ogv") vcodec="-vcodec libtheora" ;;
   	esac
+  	shift;;
 esac
 ########### SI LA SORTIE EXISTE DÉJÀ #############
 
@@ -183,7 +186,8 @@ case "$sortie" in
   nice -19 "$chemin" -i $entree $acodec $audiobitrate $audiofreq -y $sortie ;;
   *".flv"|*".mp4"|*".ogv" )
   echo "on est dans une video"
-  nice -19 "$chemin" -i $entree $acodec $size $vcodec $audiofreq $fpre -y $sortie ;;
+  echo "nice -19 $chemin -i $entree $acodec $size $vcodec $bitrate $audiobitrate $vpre $audiofreq $fpre -y $sortie"
+  nice -19 $chemin -i $entree $acodec $size $vcodec $bitrate $audiobitrate $vpre $audiofreq $fpre -y $sortie ;;
 esac
 
 echo "$succes"

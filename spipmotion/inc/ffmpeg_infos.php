@@ -103,9 +103,6 @@ function ffmpeg_recuperer_infos_codecs($forcer){
 				$data['spipmotion_compiler']['ffmpeg-php-infos']['libavcodec_build_number'] = LIBAVCODEC_BUILD_NUMBER;
 				$data['spipmotion_compiler']['ffmpeg-php-infos']['libavcodec_version_number'] = LIBAVCODEC_VERSION_NUMBER;
 				$data['spipmotion_compiler']['ffmpeg-php-infos']['ffmpeg-php-gdenabled'] = FFMPEG_PHP_GD_ENABLED;
-
-
-
 			}else{
 				$data['spipmotion_compiler']['ffmpeg-php'] = false;
 			}
@@ -130,6 +127,10 @@ function ffmpeg_recuperer_infos_codecs($forcer){
 			 */
 			preg_match_all('/ (D| )(E| )(V|A|S)(S| )(D| )(T| ) (.*) {1,} (.*)/', trim($matches[$indexs['codecs']]), $codecs);
 			$data['spipmotion_codecs'] = array();
+			$data['spipmotion_codecs_audio_decode'] = array();
+			$data['spipmotion_codecs_video_decode'] = array();
+			$data['spipmotion_codecs_audio_encode'] = array();
+			$data['spipmotion_codecs_video_encode'] = array();
 			for($i=0, $a=count($codecs[0]); $i<$a; $i++){
 				$data['spipmotion_codecs'][strtolower(trim($codecs[7][$i]))] = array(
 					'decode' 	=> $codecs[1][$i] == 'D',
@@ -140,8 +141,20 @@ function ffmpeg_recuperer_infos_codecs($forcer){
 					'weird_frame_truncation' => $codecs[6][$i] == 'T',
 					'fullname' => $codecs[8][$i]
 				);
+				if(($codecs[1][$i] == 'D') && ($codecs[3][$i] == 'A'))
+					$data['spipmotion_codecs_audio_decode'][] = trim($codecs[7][$i]);
+				if(($codecs[1][$i] == 'D') && ($codecs[3][$i] == 'V'))
+					$data['spipmotion_codecs_video_decode'][] = trim($codecs[7][$i]);
+				if(($codecs[2][$i] == 'E') && ($codecs[3][$i] == 'A'))
+					$data['spipmotion_codecs_audio_encode'][] = trim($codecs[7][$i]);
+				if(($codecs[2][$i] == 'E') && ($codecs[3][$i] == 'V'))
+					$data['spipmotion_codecs_video_encode'][] = trim($codecs[7][$i]);
 			}
 			ecrire_meta('spipmotion_codecs',serialize($data['spipmotion_codecs']));
+			ecrire_meta('spipmotion_codecs_audio_decode',serialize($data['spipmotion_codecs_audio_decode']));
+			ecrire_meta('spipmotion_codecs_video_decode',serialize($data['spipmotion_codecs_video_decode']));
+			ecrire_meta('spipmotion_codecs_audio_encode',serialize($data['spipmotion_codecs_audio_encode']));
+			ecrire_meta('spipmotion_codecs_video_encode',serialize($data['spipmotion_codecs_video_encode']));
 
 			/**
 			 * On récupère les filtres bitstream disponibles
