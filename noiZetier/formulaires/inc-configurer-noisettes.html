@@ -60,14 +60,16 @@
 	#SET{rang_suivant,(#RANG|plus{1})}
 	</BOUCLE_noisettes>
 	<li class="editer_noisette fieldset">
-		<BOUCLE_pas_demande_noisette(CONDITION){si #ENV{bloc_page_nouvelle_noisette}|=={#ENV{bloc_page}}|non}>
+		<BOUCLE_pas_demande_noisette(CONDITION){si #ENV{bloc_page_nouvelle_noisette}|non}>
 			[(#AUTORISER{configurer,noizetier}|oui)
-			<div class="boutons">
-			<button type="submit" class="submit" name="demander_nouvelle_noisette" value="#ENV{bloc_page}">
-				[<img src="(#CHEMIN{img/noizetier_action_ajouter.png})" />]
-				<:noizetier:formulaire_ajouter_noisette:>
-			</button>
-			</div>
+				[(#ENV{noisette}|non)
+					<div class="boutons">
+					<button type="submit" class="submit" name="demander_nouvelle_noisette" value="#ENV{bloc_page}">
+						[<img src="(#CHEMIN{img/noizetier_action_ajouter.png})" />]
+						<:noizetier:formulaire_ajouter_noisette:>
+					</button>
+					</div>
+				]
 			]
 		</BOUCLE_pas_demande_noisette>
 			[(#ENV{noisette}|non)
