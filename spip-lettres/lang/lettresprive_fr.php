@@ -163,7 +163,7 @@
 		'toutes_lettres_rubrique' => "Toutes les lettres de cette rubrique",
 		'purger' => "Purger",
 		'lettre_en_cours_d_envoi' => "Lettre en cours d'envoi, merci de patienter",
-		'copier' => "copier",
+		'copier' => "Dupliquer cette lettre",
 		'copie' => "Copie",
 		'articles' => "ARTICLES",
 		'ajouter_article' => "Ajouter un article",

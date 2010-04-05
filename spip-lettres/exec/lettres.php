@@ -87,7 +87,6 @@
 		if ($lettre->statut == 'brouillon') {
 			echo '<li class="prepa selected">'.http_img_pack('puce-blanche.gif', 'puce-blanche', '')._T('lettresprive:en_cours_de_redaction').'</li>';
 			echo '<li class="prop"><a href="'.generer_url_action('statut_lettre', 'id_lettre='.$lettre->id_lettre.'&statut=test', false, true).'">'.http_img_pack('puce-orange.gif', 'puce-orange', '')._T('lettresprive:tester').'</a></li>';
-			echo '<li class="prop"><a href="'.generer_url_action('copie_lettre', 'copie_lettre='.$lettre->id_lettre, false, true).'">'.http_img_pack('puce-orange.gif', 'puce-orange', '')._T('lettresprive:copier').'</a></li>';
 			echo '<li class="publie"><a href="'.generer_url_action('statut_lettre', 'id_lettre='.$lettre->id_lettre.'&statut=envoi_en_cours', false, true).'">'.http_img_pack('puce-verte.gif', 'puce-verte', '')._T('lettresprive:envoyer').'</a></li>';
 			echo '<li class="poubelle"><a href="'.generer_url_action('statut_lettre', 'id_lettre='.$lettre->id_lettre.'&statut=poubelle', false, true).'">'.http_img_pack('puce-poubelle.gif', 'puce-poubelle', '')._T('lettresprive:a_la_poubelle').'</a></li>';
 		}
@@ -97,7 +96,6 @@
 		}
 		if ($lettre->statut == 'envoyee') {
 			echo '<li class="publie selected">'.http_img_pack('puce-verte.gif', 'puce-verte', '')._T('lettresprive:envoyee').'</li>';
-			echo '<li class="prop"><a href="'.generer_url_action('copie_lettre', 'copie_lettre='.$lettre->id_lettre, false, true).'">'.http_img_pack('puce-orange.gif', 'puce-orange', '')._T('lettresprive:copier').'</a></li>';
 			echo '<li class="poubelle"><a href="'.generer_url_action('statut_lettre', 'id_lettre='.$lettre->id_lettre.'&statut=poubelle', false, true).'">'.http_img_pack('puce-poubelle.gif', 'puce-poubelle', '')._T('lettresprive:a_la_poubelle').'</a></li>';
 		}
 		echo '</ul>';
@@ -195,9 +193,12 @@
 		echo afficher_objets('lettres_mini', _T('info_meme_rubrique'), array('FROM' => 'spip_lettres', 'WHERE' => 'id_rubrique='.intval($lettre->id_rubrique).' AND id_lettre!='.intval($lettre->id_lettre), 'ORDER BY' => 'maj DESC'));
 
 		echo bloc_des_raccourcis(
-				icone_horizontale(_T('lettresprive:creer_nouvelle_lettre'), generer_url_ecrire("lettres_edit"), _DIR_PLUGIN_LETTRES."prive/images/lettre-24.png", 'creer.gif', false).
-				icone_horizontale(_T('lettresprive:aller_liste_lettres'), generer_url_ecrire("lettres_tous"), _DIR_PLUGIN_LETTRES.'prive/images/lettre-24.png', 'rien.gif', false).
-				icone_horizontale(_T('lettresprive:ajouter_abonne'), generer_url_ecrire('abonnes_edit'), _DIR_PLUGIN_LETTRES.'prive/images/abonne.png', 'creer.gif', false)
+				icone_horizontale(_T('lettresprive:creer_nouvelle_lettre'), generer_url_ecrire("lettres_edit"), _DIR_PLUGIN_LETTRES."prive/images/lettre-24.png", 'creer.gif', false)
+				. ((intval($lettre->id_lettre) AND $lettre->statut !== 'envoi_en_cours')?
+				  icone_horizontale(_T('lettresprive:copier'), generer_action_auteur("dupliquer_lettre", $lettre->id_lettre,self()), _DIR_PLUGIN_LETTRES."prive/images/lettre-24.png", 'creer.gif', false)
+				  :"")
+				. icone_horizontale(_T('lettresprive:aller_liste_lettres'), generer_url_ecrire("lettres_tous"), _DIR_PLUGIN_LETTRES.'prive/images/lettre-24.png', 'rien.gif', false)
+				. icone_horizontale(_T('lettresprive:ajouter_abonne'), generer_url_ecrire('abonnes_edit'), _DIR_PLUGIN_LETTRES.'prive/images/abonne.png', 'creer.gif', false)
 			);
 
 		echo pipeline('affiche_gauche',array('args'=>array('exec'=>'lettres','id_lettre'=>$lettre->id_lettre),'data'=>''));
