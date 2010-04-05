@@ -14,7 +14,7 @@
 
 
 	include_spip('inc/lettres_filtres');
-	include_spip('inc/lettres_classes');
+	include_spip('classes/lettre');
 	include_spip('inc/lettres_pipelines');
 	include_spip('public/lettres_balises');
 	include_spip('public/lettres_boucles');

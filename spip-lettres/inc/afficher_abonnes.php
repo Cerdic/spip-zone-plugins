@@ -13,7 +13,7 @@
 	 **/
 
 
-	include_spip('inc/lettres_classes');
+	include_spip('classes/lettre');
 
 
 	function inc_afficher_abonnes($titre, $requete, $formater) {

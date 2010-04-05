@@ -348,7 +348,7 @@
 	function lettres_vider_tables($nom_meta_base_version) {
 		include_spip('inc/meta');
 		include_spip('base/abstract_sql');
-		include_spip('inc/lettres_classes');
+		include_spip('classes/lettre');
 
 		$res = sql_select('id_lettre', 'spip_lettres');
 		while ($arr = sql_fetch($res)) {
