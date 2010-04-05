@@ -80,6 +80,7 @@ class Facteur extends PHPMailer {
 				$this->ConvertirStylesEnligne();
 			if ($GLOBALS['meta']['facteur_filtre_images'])
 				$this->JoindreImagesHTML();
+			$this->UrlsAbsolues();
 		}
 		if (!empty($message_texte)) {
 			$message_texte = unicode_to_utf_8(charset2unicode($message_texte,$GLOBALS['meta']['charset']));
@@ -97,6 +98,33 @@ class Facteur extends PHPMailer {
 
 	}
 
+	/**
+	 * Transformer les urls des liens et des images en url absolues
+	 * sans toucher aux images embarquees de la forme "cid:..."
+	 */
+	function UrlsAbsolues(){
+		include_spip('inc/filtres_mini');
+		if (preg_match_all(',(<(a|link)[[:space:]]+[^<>]*href=["\']?)([^"\' ><[:space:]]+)([^<>]*>),imsS',
+		$this->Body, $liens, PREG_SET_ORDER)) {
+			foreach ($liens as $lien) {
+				if (strncmp($lien[3],"cid:",4)!==0){
+					$abs = url_absolue($lien[3], $base);
+					if ($abs <> $lien[3] and !preg_match('/^#/',$lien[3]))
+						$this->Body = str_replace($lien[0], $lien[1].$abs.$lien[4], $this->Body);
+				}
+			}
+		}
+		if (preg_match_all(',(<(img|script)[[:space:]]+[^<>]*src=["\']?)([^"\' ><[:space:]]+)([^<>]*>),imsS',
+		$this->Body, $liens, PREG_SET_ORDER)) {
+			foreach ($liens as $lien) {
+				if (strncmp($lien[3],"cid:",4)!==0){
+					$abs = url_absolue($lien[3], $base);
+					if ($abs <> $lien[3])
+						$this->Body = str_replace($lien[0], $lien[1].$abs.$lien[4], $this->Body);
+				}
+			}
+		}
+	}
 
 	function JoindreImagesHTML() {
 		$image_types = array(
