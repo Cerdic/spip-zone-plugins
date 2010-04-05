@@ -47,6 +47,12 @@ function autoriser_lettre_previsualiser($faire, $type, $id, $qui, $opt){
 	return false;
 }
 
+function autoriser_lettre_joindrearticle_dist($faire, $type, $id, $qui, $opt){
+	$statut = sql_getfetsel('statut', 'spip_lettres', 'id_lettre='.intval($id));
+	if ($statut=='brouillon')
+		return autoriser('editer','lettres');
+	return false;
+}
 
 function autoriser_dater_dist($faire, $type, $id, $qui, $opt) {
 	if (!isset($opt['statut'])){
