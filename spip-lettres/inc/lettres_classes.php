@@ -243,27 +243,27 @@
 			switch ($action) {
 
 				case 'abonnements':
-					$objet			= recuperer_fond('notifications/notification_abonnements_titre', $arguments);
-					$message_html	= recuperer_fond('notifications/notification_abonnements_html', $arguments);
-					$message_texte	= recuperer_fond('notifications/notification_abonnements_texte', $arguments);
+					$objet			= recuperer_fond('emails/lettres_abonnements_titre', $arguments);
+					$message_html	= recuperer_fond('emails/lettres_abonnements_html', $arguments);
+					$message_texte	= recuperer_fond('emails/lettres_abonnements_texte', $arguments);
 					$url_action_validation_abonnements = url_absolue(generer_url_action('validation_abonnements', $parametres, true));
 					$message_html	= ereg_replace("%%URL_VALIDATION_ABONNEMENTS%%", $url_action_validation_abonnements, $message_html);
 					$message_texte	= ereg_replace("%%URL_VALIDATION_ABONNEMENTS%%", $url_action_validation_abonnements, $message_texte);
 					break;
 					
 				case 'desabonnements':
-					$objet			= recuperer_fond('notifications/notification_desabonnements_titre', $arguments);
-					$message_html	= recuperer_fond('notifications/notification_desabonnements_html', $arguments);
-					$message_texte	= recuperer_fond('notifications/notification_desabonnements_texte', $arguments);
+					$objet			= recuperer_fond('emails/lettres_desabonnements_titre', $arguments);
+					$message_html	= recuperer_fond('emails/lettres_desabonnements_html', $arguments);
+					$message_texte	= recuperer_fond('emails/lettres_desabonnements_texte', $arguments);
 					$url_action_validation_desabonnements = url_absolue(generer_url_action('validation_desabonnements', $parametres, true));
 					$message_html	= ereg_replace("%%URL_VALIDATION_DESABONNEMENTS%%", $url_action_validation_desabonnements, $message_html);
 					$message_texte	= ereg_replace("%%URL_VALIDATION_DESABONNEMENTS%%", $url_action_validation_desabonnements, $message_texte);
 					break;
 					
 				case 'changement_format':
-					$objet			= recuperer_fond('notifications/notification_changement_format_titre', $arguments);
-					$message_html	= recuperer_fond('notifications/notification_changement_format_html', $arguments);
-					$message_texte	= recuperer_fond('notifications/notification_changement_format_texte', $arguments);
+					$objet			= recuperer_fond('emails/lettres_changement_format_titre', $arguments);
+					$message_html	= recuperer_fond('emails/lettres_changement_format_html', $arguments);
+					$message_texte	= recuperer_fond('emails/lettres_changement_format_texte', $arguments);
 					$url_action_validation_changement_format = url_absolue(generer_url_action('validation_changement_format', $parametres, true));
 					$message_html	= ereg_replace("%%URL_VALIDATION_CHANGEMENT_FORMAT%%", $url_action_validation_changement_format, $message_html);
 					$message_texte	= ereg_replace("%%URL_VALIDATION_CHANGEMENT_FORMAT%%", $url_action_validation_changement_format, $message_texte);
@@ -460,9 +460,9 @@
 		
 		function supprimer() {
 			if ($GLOBALS['meta']['spip_lettres_notifier_suppression_abonne'] == 'oui') {
-				$objet			= recuperer_fond('notifications/notification_suppression_abonne_titre', array('email' => $this->email));
-				$message_html	= recuperer_fond('notifications/notification_suppression_abonne_html', array('email' => $this->email));
-				$message_texte	= recuperer_fond('notifications/notification_suppression_abonne_texte', array('email' => $this->email));
+				$objet			= recuperer_fond('emails/lettres_suppression_abonne_titre', array('email' => $this->email));
+				$message_html	= recuperer_fond('emails/lettres_suppression_abonne_html', array('email' => $this->email));
+				$message_texte	= recuperer_fond('emails/lettres_suppression_abonne_texte', array('email' => $this->email));
 				$corps = array('html' => $message_html, 'texte' => $message_texte);
 				$envoyer_mail = charger_fonction('envoyer_mail', 'inc');
 				$envoyer_mail($GLOBALS['meta']['email_webmaster'], $objet, $corps);
