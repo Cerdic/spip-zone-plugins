@@ -7,22 +7,22 @@
 	[<span style="vertical-align:middle;">(#GET{infos}|table_valeur{nom})</span>]
 </legend>
 [<div class="explication">(#GET{infos}|table_valeur{description})</div>]
-[(#SET{parametres,#GET{infos}|table_valeur{parametres}})]
-
 	<BOUCLE_test_saisies(CONDITION){si #PLUGIN{'saisies'}}>
+		[(#SET{parametres,#GET{infos}|table_valeur{parametres}})]
 		<ul class="parametres_noisette">
 		#GENERER_SAISIES{#GET{parametres}}
 		</ul>
 	</BOUCLE_test_saisies>
 	
+	[(#SET{parametres,[(#NOIZETIER_PARAMS_NOISETTE{#ENV{noisette}})]})]
 	<B_parametres>
 	<ul class="parametres_noisette">
 	<BOUCLE_parametres(POUR){tableau #GET{parametres}}>
 	<li class="editer_texte[ (#GET{erreurs}|oui)erreur]">
 		[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{#CLE})</span>]
-			<label for="#CLE">[(#VALEUR|table_valeur{options}|table_valeur{label})] [(#VALEUR|table_valeur{options}|table_valeur{obligatoire}|oui)&#91;<:noizetier:formulaire_obligatoire:>&#93;]</label>
+			<label for="#CLE">[(#VALEUR|table_valeur{label})] [(#VALEUR|table_valeur{obligatoire}|oui)&#91;<:noizetier:formulaire_obligatoire:>&#93;]</label>
 			[(#VALEUR|table_valeur{saisie}|=={'oui_non'}|oui)<div class="explication"><:noizetier:formulaire_explication_oui_non:></div>]
-			<input type="text" class="text" name="#CLE" value="[(#ENV{#CLE}|sinon{#VALEUR|table_valeur{options}|table_valeur{defaut}})]" />
+			<input type="text" class="text" name="#CLE" value="[(#ENV{#CLE}|sinon{#VALEUR|table_valeur{defaut}})]" />
 	</li>
 	</BOUCLE_parametres>
 	</ul>

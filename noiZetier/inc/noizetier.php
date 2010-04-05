@@ -38,8 +38,8 @@ function noizetier_lister_noisettes($type='tout',$informer=true){
 					)){
 					$liste_noisettes[$type][$informer][$noisette] = $infos_noisette;
 				}
-				// Ou les squelettes ayant un fichier YAML de config
-				elseif (file_exists("$dossier$noisette.yaml")
+				// Ou les squelettes ayant un fichier YAML de config (si yaml est activé)
+				elseif (file_exists("$dossier$noisette.yaml") AND defined('_DIR_PLUGIN_YAML')
 					AND (
 						$infos_noisette = !$informer OR ($infos_noisette = noizetier_charger_infos_noisette_yaml($dossier.$noisette))
 					)){
