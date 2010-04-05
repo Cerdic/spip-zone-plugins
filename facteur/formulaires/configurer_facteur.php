@@ -127,8 +127,8 @@ function formulaires_configurer_facteur_traiter_dist(){
 }
 
 function facteur_envoyer_mail_test($destinataire,$titre){
-	$message_html	= recuperer_fond('test_email/test_email_html', array());
-	$message_texte	= recuperer_fond('test_email/test_email_texte', array());
+	$message_html	= recuperer_fond('emails/test_email_html', array());
+	$message_texte	= recuperer_fond('emails/test_email_texte', array());
 
 	$facteur = new Facteur($destinataire, $titre, $message_html, $message_texte);
 	if (!$facteur->Send())
