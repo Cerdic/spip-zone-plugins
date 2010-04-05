@@ -27,7 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // Mots importants
 'config_mots_importants' => 'Important Keywords Configuration',
 'mots_importants_label' => 'Important Keywords',
-'mots_importants_explication' => 'Define here a serie of important keywords for your website, that will be emphasised with &lt;strong&gt; on the website\'s pages. Use with cautions.',
+'mots_importants_explication' => 'Define here a serie of important keywords for your website, that will be emphasised with &lt;strong&gt; on the website\'s pages. Use sparingly.',
 
 // Divers
 'valider' => 'Save'
