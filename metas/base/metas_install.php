@@ -7,8 +7,9 @@ function metas_install($action){
 	include_spip('inc/plugin');
 
 	//recupère les informations de plugin.xml
-	$infos = plugin_get_infos(_DIR_PLUGIN_METAS);
-	$version_cible = $infos['version'];
+	$infos = charger_fonction('get_infos','plugins');
+	$mes_infos = $infos('metas', false, '_DIR_PLUGIN_METAS');
+	$version_cible = $mes_infos['version'];
 
 	switch ($action){
 		case 'test':
