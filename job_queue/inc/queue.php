@@ -179,6 +179,8 @@ function queue_start_job($row){
  */
 function queue_schedule($force_jobs = null){
 	$time = time();
+	if (defined('_DEBUG_BLOCK_QUEUE'))
+		return;
 
 	// rien a faire si le prochain job est encore dans le futur
 	if ($GLOBALS['meta']['queue_next_job_time']>$time AND (!$force_jobs OR !count($force_jobs)))
