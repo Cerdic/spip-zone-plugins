@@ -38,7 +38,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_inf_shownavarrows' => 'Afficher les fl&egrave;ches pour naviguer entre les &eacute;l&eacute;ments de la galerie.',
 	'cfg_inf_hideonoverlayclick' => 'Fermer la fen&ecirc;tre lors d\'un clic à l\'ext&eacute;rieur de celle-ci.',
 	'cfg_inf_hideoncontentclick' => 'Fermer la fen&ecirc;tre lors d\'un clic sur son contenu.',
-	'cfg_inf_centeronscroll' => 'Centrer la fen&ecirc;tre lors du d&eacute;filement de la page.',
 
 	
 	'cfg_lbl_selecteur_commun' => 'En g&eacute;n&eacute;ral',
@@ -57,7 +56,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_scrolling' => 'Scroll',
 	'cfg_lbl_scrolling_auto' => 'Auto',
 	'cfg_lbl_width' => 'Largeur',
-	'cfg_lbl_height' => 'Largeur',
+	'cfg_lbl_height' => 'Hauteur',
 	'cfg_lbl_imagescale' => '&Eacute;chelle',
 	'cfg_lbl_autodimensions' => 'Dimensions automatiques',
 	'cfg_lbl_centeronscroll' => 'Centrer',
@@ -83,7 +82,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_shownavarrows' => 'Fl&egrave;ches de navigation',
 	'cfg_lbl_hideonoverlayclick' => 'Fermer au clic (ext&eacute;rieur)',
 	'cfg_lbl_hideoncontentclick' => 'Fermer au clic (contenu)',
-	'cfg_lbl_centeronscroll' => 'Centrer',
 
 	'cfg_effacer' => 'Effacer',
 	'cfg_titre_fancybox' => 'FancyBox'
