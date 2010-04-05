@@ -78,9 +78,12 @@
 	</ol>
 </fieldset>
 <fieldset><legend><:enlumtypo:cfg_insertcss:></legend>
-	<?php if (isset($GLOBALS['BarreTypoEnrichie_Preserve_Header'])) { ?>
+	<?php if (isset($GLOBALS['BarreTypoEnrichie_Preserve_Header'])) { 
+?>
 	<p>Configuré dans le mes_options par 'BarreTypoEnrichie_Preserve_Header'</p>
-	<?php } else { ?>
+	<?php 
+	echo ($GLOBALS['BarreTypoEnrichie_Preserve_Header']=='Oui')?"Ne pas faire l'insertion automatique":"Insertion automatique";
+	} else { ?>
 	<label for="sc_insertcss">Insertion automatique des CSS spécifiques à la BTE dans l'espace public (via &#35;INSERT_HEAD dans les squelettes)&nbsp;:</label>
 	<select name="insertcss" id="sc_insertcss" class="forml">
 		<option value="Oui"[ selected="(#ENV{insertcss,Oui}|=={Oui}|?{selected})"]>Insertion automatique</option>
