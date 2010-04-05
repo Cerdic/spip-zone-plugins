@@ -146,7 +146,11 @@ class Facteur extends PHPMailer {
 		$html_images = array();
 		foreach($images as $im){
 			if (!preg_match(",^[a-z0-9]+://,i",$im[1])
-			 AND (file_exists($f=$im[1]) OR file_exists($f=_DIR_RACINE.$im[1]))
+			 AND (
+			      file_exists($f=$im[1]) // l'image a ete generee depuis le meme cote que l'envoi
+			      OR (_DIR_RACINE AND file_exists($f=_DIR_RACINE.$im[1])) // l'image a ete generee dans le public et on est dans le prive
+			      OR (!_DIR_RACINE AND strncmp($im[1],"../",3)==0 AND file_exists($f=substr($im[1],3))) // l'image a ete generee dans le prive et on est dans le public
+			     )
 			 AND !isset($html_images[$f])){
 
 				$extension = strtolower($im[3]);
