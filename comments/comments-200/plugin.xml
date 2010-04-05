@@ -1,18 +1,11 @@
 <plugin>
-<nom>Commentaires</nom>
+<nom>Comments</nom>
 <icon>icon.png</icon>
 <auteur>[romy.tetue.net->http://romy.tetue.net] - 2009 - Licence GPL</auteur>
-<version>1.5.1</version>
-<etat>dev</etat>
-<description>PLUGIN INSTABLE, encore en d&eacute;veloppement&nbsp;!
-_ Tout pour construire des commentaires&nbsp;:
-- Noisette &laquo;&nbsp;<code>comments</code>&nbsp;&raquo; prete a l'emploi, pour afficher la totale : une liste de commentaires et le forum ad hoc, &agrave; la suite d'un article par exemple.
-- noisette &laquo;&nbsp;<code>comments-list</code>&nbsp;&raquo; pour afficher une liste des commentaires seulement ; 
-- noisette &laquo;&nbsp;<code>comments-links</code>&nbsp;&raquo; pour afficher une liste de liens vers les derniers commentaires.
-- Ce plugin remplace le traditionnel <code>#FORMULAIRE_FORUM</code> de SPIP par un formulaire de commentaires (plus succint).
-- Et peut-etre d'autres choses en vrac et en preparation...
-</description>
-<lien>[Notes de d&eacute;veloppement du plugin->http://www.spip-contrib.net/?article3173]</lien>
+<version>2.0</version>
+<etat>stable</etat>
+<description>Aussit&ocirc;t activ&eacute; ce plugin affiche les messages en liste de commentaires de type blog, avec formulaire simplifi&eacute;.</description>
+<lien>[Comments&nbsp;2.0 pour SPIP&nbsp;2.0->http://www.spip-contrib.net/?article3448]</lien>
 <prefix>comments</prefix>
 <chemin dir="" />
 <chemin dir="feed/" />

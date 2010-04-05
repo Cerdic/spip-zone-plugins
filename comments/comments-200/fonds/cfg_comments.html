@@ -1,10 +1,10 @@
 <!-- descriptif=
 <img src='#CHEMIN{icon-64.png}' alt='' style="float:#LANG_RIGHT; margin: 0 0 .1em 1em" />
 <strong>Configuration des commentaires</strong>
-<p>Pour toute autre personnalisation, modifiez <a href="http://www.spip-contrib.net/?article3447">les&nbsp;fichiers</a>.</p>
+<p>Pour toute autre personnalisation, modifiez <a href="http://www.spip-contrib.net/?article3447" class="spip_out">les&nbsp;squelettes</a>.</p>
 -->
 
-[(#REM) titre=Commentaires]
+[(#REM) titre=Comments]
 [(#REM) icone=icon-20.png]
 
 #CACHE{0}
@@ -29,7 +29,7 @@
     	<legend>Liste ou thread ?</legend>
 		<ul>
 			<li class="comments_fil">
-				<label for="comments_fil">Présentation du&nbsp;fil (de discussion)</label>
+				<label for="comments_fil">Pr&eacute;sentation du&nbsp;fil de discussion</label>
                 <select name="comments_fil" id="comments_fil">
                     <option value="list"[(#ENV{comments_fil,list}|=={list}|oui) selected="selected"]>Liste de commentaires (&agrave; plat)</option>
                     <option value="thread"[(#ENV{comments_fil,list}|=={thread}|oui) selected="selected"]>Enfilade de commentaires (en thread)</option>
