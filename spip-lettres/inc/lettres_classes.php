@@ -595,8 +595,17 @@
 
 		function tester(){
 			$resultat = true;
-			$ancien_statut = $this->statut;
+			if ($this->statut=='brouillon'){
+				$GLOBALS['var_preview'] = true;
+				$GLOBALS['var_nocache'] = true;
+				$GLOBALS['var_mode'] = 'recalcul';
+			}
 			$this->enregistrer_squelettes();
+			if ($this->statut=='brouillon'){
+				unset($GLOBALS['var_preview']);
+				unset($GLOBALS['var_nocache']);
+				unset($GLOBALS['var_mode']);
+			}
 			$auteurs = sql_select('A.email', 'spip_auteurs AS A INNER JOIN spip_auteurs_lettres AS AL ON AL.id_auteur=A.id_auteur', 'AL.id_lettre='.intval($this->id_lettre));
 			while ($auteur = sql_fetch($auteurs)) {
 				$abonne = new abonne(0, $auteur['email']);
