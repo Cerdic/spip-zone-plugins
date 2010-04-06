@@ -13,7 +13,7 @@ function exec_cfg_dist()
 	
 	include_spip('inc/filtres');
 	include_spip('inc/cfg');
-	$config = &new cfg(
+	$config = new cfg(
 		($nom = sinon(_request('cfg'), '')),
 		($cfg_id = sinon(_request('cfg_id'),''))
 		);

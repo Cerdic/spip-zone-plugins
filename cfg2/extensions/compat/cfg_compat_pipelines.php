@@ -41,7 +41,7 @@ function cfg_compat_header_prive($flux){
 
 	include_spip('inc/filtres');
 	include_spip('inc/cfg_formulaire');
-	$config = &new cfg_formulaire(
+	$config = new cfg_formulaire(
 				sinon(_request('cfg'), ''),
 				sinon(_request('cfg_id'),''));
 	

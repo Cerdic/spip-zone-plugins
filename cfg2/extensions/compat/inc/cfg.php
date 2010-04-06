@@ -116,7 +116,7 @@ class cfg
 	
 	function cfg($nom, $cfg_id = '', $opt = array()) {
 		include_spip('inc/cfg_formulaire');
-		$this->form = &new cfg_formulaire($nom, $cfg_id, $opt);
+		$this->form = new cfg_formulaire($nom, $cfg_id, $opt);
 	}
 
 	function autoriser()  {return $this->form->autoriser(); }

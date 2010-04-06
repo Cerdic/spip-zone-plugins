@@ -37,7 +37,7 @@ function cfg_formulaire_charger($flux){
 		include_spip('inc/cfg_formulaire');
 
 		$cfg_id = isset($flux['args']['args'][0]) ? $flux['args']['args'][0] : '';
-		$config = &new cfg_formulaire($form, $cfg_id);
+		$config = new cfg_formulaire($form, $cfg_id);
 
 		$contexte = array(
 			'_cfg_fond' => 'formulaires/'.$form,
@@ -75,7 +75,7 @@ function cfg_formulaire_verifier($flux){
 		include_spip('inc/cfg_formulaire');
 
 		$cfg_id = isset($flux['args']['args'][0]) ? $flux['args']['args'][0] : '';
-		$config = &new cfg_formulaire($form, $cfg_id);
+		$config = new cfg_formulaire($form, $cfg_id);
 		
 		$err = array();
 
