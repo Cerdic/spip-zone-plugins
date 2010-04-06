@@ -21,7 +21,7 @@ function exec_config_identite(){
 	$commencer_page = charger_fonction('commencer_page','inc');
 	echo $commencer_page(_T('bando:titre_identite_site'));
 
-	
+	echo gros_titre(_T('bando:titre_identite_site'),'', false);
 	echo debut_gauche("configurer_identite",true);
 
 	//
@@ -33,7 +33,6 @@ function exec_config_identite(){
 	echo debut_droite("configurer_identite",true);
 
 
-	echo "<h1 class='bando2_config_identite bando2'>"._T('bando:titre_identite_site')."</h1>";
 	echo recuperer_fond('prive/configurer/identite',$_GET);
 	echo fin_gauche(),fin_page();
 }

@@ -30,20 +30,20 @@ function exec_configuration_dist(){
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('titre_page_configuration'), "configuration", "configuration");
 	
-	
+	if (version_compare($GLOBALS['spip_version_branche'], "2.0.99","<"))
+		echo "<br /><br /><br />";
+	echo gros_titre(_T('titre_configuration'),'', false);
+	echo barre_onglets("configuration", "contenu");
 	
 	echo debut_gauche('', true);
-	echo "<div class='fixed'>";
 	echo avertissement_config();
-	echo "</div>";
+
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'configuration'),'data'=>''));
 	echo creer_colonne_droite('', true);
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'configuration'),'data'=>''));
 	echo debut_droite('', true);
 
-	echo "<h1 class='bando2_config_contenu bando2'>"._T('titre_configuration')."</h1>";
-	echo barre_onglets("configuration", "contenu");
-	
+
 	echo debut_cadre_trait_couleur("article-24.gif", true, "", _T('titre_les_articles'));
 	$articles = charger_fonction('articles', 'configuration');
 	echo $articles();

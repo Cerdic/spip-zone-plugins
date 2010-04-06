@@ -55,8 +55,8 @@ function exec_lang_raccourcis_dist() {
 
 	echo debut_droite('', true);
 
-	echo "<h1 class='bando2_config_lang bando2'>"._T('module_fichier_langue').": $module</h1>";
-	echo barre_onglets("config_lang", "fichiers");
+	echo gros_titre(_T('module_fichier_langue').": $module",'', false),
+	  barre_onglets("config_lang", "fichiers");
 
 	afficher_raccourcis($module);
 

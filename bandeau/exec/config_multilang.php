@@ -38,8 +38,8 @@ function exec_config_multilang_dist()
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'config_multilang'),'data'=>''));
 	echo debut_droite('', true);
 
-	echo "<h1 class='bando2_config_lang bando2'>"._T('info_langues')."</h1>";
-	echo barre_onglets("config_lang", "multi");
+	echo gros_titre(_T('info_langues'),'', false),
+	  barre_onglets("config_lang", "multi");
 
 	$referenceur = charger_fonction('referenceur', 'configuration');
 	echo $referenceur();
