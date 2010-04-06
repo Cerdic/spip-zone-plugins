@@ -8,7 +8,7 @@ function metas_formulaire_affiche ($ElementGestionMetas, $IdElementGestionMetas)
 	if ($ElementGestionMetas == '') return;
 
 	// On recupere les informations en base des metas.
-	$select = array('m.id_meta','titre','description');
+	$select = array('m.id_meta','titre','description','keywords');
 	$from = array('spip_metas m','spip_metas_liens ml');
 	$where = array('m.id_meta = ml.id_meta','id_objet = '.$IdElementGestionMetas,'objet = "'.$ElementGestionMetas.'"');
 	$result = sql_fetsel($select, $from, $where);
@@ -23,22 +23,25 @@ function metas_formulaire_affiche ($ElementGestionMetas, $IdElementGestionMetas)
 		$where = 'id_'.$ElementGestionMetas.' = '.$IdElementGestionMetas;
 		$result = sql_fetsel($select, $from, $where);
 		$result['id_meta'] = '';
+		$result['keywords'] = '';
 	}
 
 	// Si le formulaire n'a pas ete soumis, on prend les informations de la base. Sinon on prend met a jour icelle.
 	if (!_request('GestionMetasSubmit')) {
 		$metas['titre'] = $result['titre'];
 		$metas['description'] = $result['descriptif'];
+		$metas['keywords'] = $result['keywords'];
 	} else {
 		$metas['titre'] = _request('GestionMetasTitre');
 		$metas['description'] = _request('GestionMetasDescription');
+		$metas['keywords'] = _request('GestionMetasKeywords');
 
 		if ($metas['id_meta']){
 			// On est dans un update des données
-			sql_updateq('spip_metas', array('titre' => $metas['titre'],'description' => $metas['description']),'id_meta = '.$metas['id_meta']);
+			sql_updateq('spip_metas', array('titre' => $metas['titre'],'description' => $metas['description'],'keywords' => $metas['keywords']),'id_meta = '.$metas['id_meta']);
 		} else {
 			// Nouvelle entrée dans la base méta et dans la table lien
-			$metas['id_meta'] = sql_insertq('spip_metas', array('titre' => $metas['titre'],'description' => $metas['description']));
+			$metas['id_meta'] = sql_insertq('spip_metas', array('titre' => $metas['titre'],'description' => $metas['description'],'keywords' => $metas['keywords']));
 			sql_insertq('spip_metas_liens', array('id_meta' => $metas['id_meta'],'id_objet' => $IdElementGestionMetas,'objet' => $ElementGestionMetas));
 		}
 	}
@@ -57,6 +60,10 @@ function metas_formulaire_affiche ($ElementGestionMetas, $IdElementGestionMetas)
 			.(($metas['description']) ? '<tr class="tr_liste">
 				<td><span><strong>'._T('metas:meta_description').'</strong></span></td>
 				<td class="arial2">'.$metas['description'].'</td>
+			</tr>' : '')
+			.(($metas['keywords']) ? '<tr class="tr_liste">
+				<td><span><strong>'._T('metas:meta_keywords').'</strong></span></td>
+				<td class="arial2">'.$metas['keywords'].'</td>
 			</tr>' : '').'
 		</table></div>';
 	}
@@ -73,6 +80,11 @@ function metas_formulaire_affiche ($ElementGestionMetas, $IdElementGestionMetas)
 				<label for="GestionMetas_description"><b>'._T('metas:meta_description').'</b></label>
 				<br /><span class="explication" style="color:#444;">'._T('metas:meta_description_explication').'</span><br />
 				<textarea id="GestionMetas_description" name="GestionMetasDescription" cols=\"40\" rows="4" class="fondl" style="width: 98%">'.htmlspecialchars($metas['description'], ENT_QUOTES).'</textarea>
+			</p>
+			<p>
+				<label for="GestionMetas_keywords"><b>'._T('metas:meta_keywords').'</b></label>
+				<br /><span class="explication" style="color:#444;">'._T('metas:meta_keywords_explication').'</span><br />
+				<textarea id="GestionMetas_keywords" name="GestionMetasKeywords" cols=\"40\" rows="4" class="fondl" style="width: 98%">'.htmlspecialchars($metas['keywords'], ENT_QUOTES).'</textarea>
 			</p>
 			<p style="text-align: right;"><input type="submit" name="valider" value="'._T('metas:valider').'" class="fondl" /></p>
 		</form>
@@ -140,6 +152,10 @@ function balise_METAS_TITLE($p) {
 }
 function balise_METAS_DESCRIPTION($p) {
 	$p->code = "\$GLOBALS['meta']['spip_metas_description']";
+	return $p;
+}
+function balise_METAS_KEYWORDS($p) {
+	$p->code = "\$GLOBALS['meta']['spip_metas_keywords']";
 	return $p;
 }
 ?>

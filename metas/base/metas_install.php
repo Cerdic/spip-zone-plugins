@@ -60,6 +60,6 @@ function metas_vider_tables($nom_meta_base_version) {
 	effacer_meta('spip_metas_title');
 	effacer_meta('spip_metas_description');
 	effacer_meta('spip_metas_mots_importants');
-	effacer_meta('spip_metas_mots_keywords'); // on garde au cas où une table keywords subsisterait encore en DB.
+	effacer_meta('spip_metas_mots_keywords');
 }
 ?>

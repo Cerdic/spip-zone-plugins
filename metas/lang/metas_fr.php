@@ -5,6 +5,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // Termes generiques
 'title' => 'title',
 'meta_description' => 'meta description',
+'meta_keywords' => 'meta keywords',
 
 // Panneau de configuration
 'configuration_metas' => 'M&eacute;tas',
@@ -16,11 +17,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'config_metas_defaut' => 'M&eacute;tadonn&eacute;es par defaut',
 'title_defaut_explication' => 'Si vous ne souhaitez pas utiliser le <a href="?exec=configuration">nom de votre site</a>, indiquez un autre titre&nbsp;:',
 'meta_description_defaut_explication' => 'Si vous ne souhaitez pas utiliser la <a href="?exec=configuration">description du site</a>, r&eacute;digez ici une autre description (en moins de 250 caract&egrave;res)&nbsp;:',
+'meta_keywords_defaut_explication' => 'Ajoutez ici les mots-cl&eacute;s génériques du site, s&eacute;par&eacute;s par des virgules (1&nbsp;000&nbsp;caract&egrave;res maxi). Ils serviront de base pour remplir la balise idoine.',
 
 // Metadonnees par objet
 'config_metas_page' => 'M&eacute;tadonn&eacute;es',
 'title_explication' => 'Si vous ne souhaitez pas utiliser le titre ci-dessus, indiquez-en un autre&nbsp;:',
 'meta_description_explication' => 'Si vous ne souhaitez pas utiliser le descriptif automatique de SPIP, r&eacute;digez ici une courte description de la page (en moins de 250 caract&egrave;res)&nbsp;:',
+'meta_keywords_explication' => 'Ajoutez vos mots-cl&eacute;s, s&eacute;par&eacute;s par des virgules (1&nbsp;000&nbsp;caract&egrave;res maxi)&nbsp;:',
 
 // Mots importants
 'config_mots_importants' => 'Configuration des mots importants',
