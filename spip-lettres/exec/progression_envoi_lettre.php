@@ -25,20 +25,23 @@ function exec_progression_envoi_lettre() {
 
 	$lettre = new lettre(_request('id_lettre'));
 
-	echo '<div style="padding: 10px; border: 1px solid red; margin-bottom: 15px; background: #fff; color: red; font-weight: bold; text-align: center;">';
+	echo '<div class="notice">';
 	echo _T('lettresprive:aide_lettres_envoi_en_cours');
 	$nb_envois = $lettre->calculer_nb_envois();
 	$envois_restants = intval(lettres_envois_restants($lettre->id_lettre));
-	if ($nb_envois) {
-		$pourcentage = intval($lettre->calculer_nb_envois('envoye') / ($nb_envois+$envois_restants) * 100);
-		echo '<br />';
-		echo http_img_pack("jauge-vert.gif", ' ', 'height="10" width="'.($pourcentage * 2).'"');
-		echo http_img_pack("jauge-rouge.gif", ' ', 'height="10" width="'.((100 - $pourcentage) * 2).'"');
-		echo '&nbsp;'.$pourcentage.'%&nbsp;';
-		echo http_img_pack("searching.gif", ' ', '');
+	if ($nb_envois+$envois_restants) {
+		echo "<p>";
+		echo "<div style='float:right'>".http_img_pack("searching.gif", ' ', '')."</div>";
+		echo _L("Envois restants&nbsp;: $envois_restants")." ";
+		echo _L("(Déjà envoyés : $nb_envois )");
+		echo "</p>";
 	}
 	echo "<em style='display:none;'>$envois_restants</em>";
 	echo '</div>';
+	// changer le statut si besoin, puisqu'on le voit !
+	if (!$envois_restants AND $lettre->statut=='envoi_en_cours'){
+		$lettre->enregistrer_statut('envoyee');
+	}
 
 }
 
