@@ -5,12 +5,11 @@
 	<icon>icon.png</icon>
 	<auteur>[Quentin de Serres-Justiniac->http://www.spip-contrib.net/?auteur10451]
 _ (d'apr&egrave;s une id&eacute;e originale d'[Olivier Gendrin->http://www.spip-contrib.net/?auteur1343])</auteur>
-	<description>Gestion des m&eacute;tas <code>title</code>, <code>description</code> et <code>keywords</code> des articles et rubriques de SPIP, et mise en exergue de mots importants.</description>
+	<description>Gestion des m&eacute;tas <code>title</code> , <code>description</code> des articles et rubriques de SPIP, et mise en exergue de mots importants (emphas&eacute;s avec &lt;strong&gt;).</description>
 	<lien>http://www.spip-contrib.net/?rubrique1250</lien>
 	<necessite id="SPIP" version="[2.0.0;]" />
 	<prefix>metas</prefix>
 	<fonctions>metas.php</fonctions>
-	<options>metas_options.php</options>
 	<pipeline>
 		<nom>pre_propre</nom>
 		<action>mots_strong</action>
@@ -38,5 +37,14 @@ _ (d'apr&egrave;s une id&eacute;e originale d'[Olivier Gendrin->http://www.spip-
 		<nom>declarer_tables_auxiliaires</nom>
 		<inclure>base/metas.php</inclure>
 	</pipeline>
+	<bouton id='metas' parent="configuration">
+		<titre>metas:configuration_metas</titre>
+		<icone>icon.png</icone>
+	</bouton>
+	<bouton id='bando_metas' parent="bando_configuration">
+		<url>metas</url>
+		<titre>metas:configuration_metas</titre>
+		<icone>icon.png</icone>
+	</bouton>
 	<categorie>outil</categorie>
 </plugin>

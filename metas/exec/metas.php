@@ -28,10 +28,10 @@ function exec_metas() {
 		}
 
 		// keywords
-		if (isset($_POST['spip_metas_keywords'])) {
-			$spip_metas_keywords = addslashes($_POST['spip_metas_keywords']);
-			ecrire_meta('spip_metas_keywords', $spip_metas_keywords);
-		}
+		// if (isset($_POST['spip_metas_keywords'])) {
+		//	$spip_metas_keywords = addslashes($_POST['spip_metas_keywords']);
+		//	ecrire_meta('spip_metas_keywords', $spip_metas_keywords);
+		// }
 
 		// mots importants
 		if (isset($_POST['spip_metas_mots_importants'])) {
@@ -44,7 +44,7 @@ function exec_metas() {
 
 	$spip_metas_title				= $GLOBALS['meta']['spip_metas_title'];
 	$spip_metas_description			= $GLOBALS['meta']['spip_metas_description'];
-	$spip_metas_keywords			= $GLOBALS['meta']['spip_metas_keywords'];
+	// $spip_metas_keywords			= $GLOBALS['meta']['spip_metas_keywords'];
 	$spip_metas_mots_importants		= $GLOBALS['meta']['spip_metas_mots_importants'];
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
@@ -77,11 +77,11 @@ function exec_metas() {
 				echo '<br /><span class="explication" style="color:#666;">'._T('metas:meta_description_defaut_explication').'</span><br />';
 				echo "<textarea name=\"spip_metas_description\" cols=\"40\" rows=\"4\" class=\"forml\">$spip_metas_description</textarea>";
 			echo '</p>';
-			echo '<p>';
-				echo '<label for="spip_metas_keywords"><b>'._T('metas:meta_keywords').'</b></label>';
-				echo '<br /><span class="explication" style="color:#666;">'._T('metas:meta_keywords_defaut_explication').'</span><br />';
-				echo "<textarea name=\"spip_metas_keywords\" cols=\"40\" rows=\"4\" class=\"forml\">$spip_metas_keywords</textarea>";
-			echo '</p>';
+			//echo '<p>';
+			//	echo '<label for="spip_metas_keywords"><b>'._T('metas:meta_keywords').'</b></label>';
+			//	echo '<br /><span class="explication" style="color:#666;">'._T('metas:meta_keywords_defaut_explication').'</span><br />';
+			//	echo "<textarea name=\"spip_metas_keywords\" cols=\"40\" rows=\"4\" class=\"forml\">$spip_metas_keywords</textarea>";
+			//echo '</p>';
 			echo '<p style="text-align: right;"><input class="fondo" name="valider" type="submit" value="'._T('metas:valider').'" /></p>';
 		echo fin_cadre_trait_couleur(true);
 		echo debut_cadre_trait_couleur("", true, "", _T('metas:config_mots_importants'));
