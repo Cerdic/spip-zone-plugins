@@ -44,43 +44,10 @@
 		echo lettre_boite_info($lettre);
 		echo fin_boite_info(true);
 
-		if ($lettre->statut == 'brouillon') {
-			$iconifier = charger_fonction('iconifier', 'inc');
-			echo $iconifier('id_lettre', $lettre->id_lettre, 'lettres');
-		} else {
-			$chercher_logo = charger_fonction('chercher_logo', 'inc');
-			if ($logo = $chercher_logo($lettre->id_lettre, 'id_lettre', 'on')) {
-				list($fid, $dir, $nom, $format) = $logo;
-				include_spip('inc/filtres_images');
-				$res1 = image_reduire("<img src='$fid' alt='' />", 170, 170);
-				if ($res1)
-				    $res1 = "<div><a href='" .	$fid . "'>$res1</a></div>";
-				else
-				    $res1 = "<img src='$fid' width='$width' height='$height' alt=\"on\" />";
-			}
-			if ($logo = $chercher_logo($lettre->id_lettre, 'id_lettre', 'off')) {
-				list($fid, $dir, $nom, $format) = $logo;
-				include_spip('inc/filtres_images');
-				$res2 = image_reduire("<img src='$fid' alt='' />", 170, 170);
-				if ($res2)
-				    $res2 = "<div><a href='" .	$fid . "'>$res2</a></div>";
-				else
-				    $res2 = "<img src='$fid' width='$width' height='$height' alt=\"off\" />";
-			}
-			if ($res1) {
-				echo debut_cadre_relief("image-24.gif", true);
-		 		echo "<div class='verdana1' style='text-align: center;'>";
-				echo "<b>"._T('lettresprive:logo_lettre')."</b>";
-				echo $res1;
-				echo '<br />';
-				if ($res2) {
-					echo "<b>"._T('logo_survol')."</b>";
-					echo $res2;
-				}
-				echo "</div>";
-				echo fin_cadre_relief(true);
-			}
-		}
+		$flag_editable = autoriser('modifier','lettre',$lettre->id_lettre);
+		$iconifier = charger_fonction('iconifier', 'inc');
+		echo $iconifier('id_lettre', $lettre->id_lettre, 'lettres', false, $flag_editable);
+
 
 		if ($lettre->statut == 'envoyee')
 			echo afficher_objets('clic', _T('lettresprive:clics'), array('SELECT' => 'COUNT(AC.id_clic) AS total, C.url AS url', 'FROM' => 'spip_clics AS C LEFT JOIN spip_abonnes_clics AS AC ON AC.id_clic=C.id_clic', 'WHERE' => 'C.id_lettre='.intval($lettre->id_lettre), 'GROUP BY' => 'C.url', 'ORDER BY' => 'total DESC, C.id_clic ASC'));
@@ -179,18 +146,21 @@
 		$fond = pipeline('afficher_contenu_objet', array('args' => array('type' => 'lettre', 'id_objet' => $lettre->id_lettre, 'contexte' => $contexte), 'data' => $fond));
 		$onglet_contenu = "<div id='wysiwyg'>$fond</div>";
 
-		if ($lettre->statut == 'brouillon')
-			$onglet_documents = lettres_documents('lettre', intval($lettre->id_lettre));
+		$documenter_objet = charger_fonction('documenter_objet','inc');
+		$onglet_documents = $documenter_objet($lettre->id_lettre,'lettre','lettres',$flag_editable);
 	
 		if ($lettre->statut == 'envoi_en_cours') {
 			include_spip('inc/delivrer');
 			echo lettres_delivrer_surveille_ajax($lettre->id_lettre,generer_url_ecrire('lettres', 'id_lettre='.$lettre->id_lettre.'&message=envoi_termine', true));
 		}
 
-		if (isset($_GET['message'])) {
-			echo '<div style="padding: 10px; border: 1px solid red; margin-bottom: 15px; background: #fff; color: red; font-weight: bold; text-align: center;">';
-			echo '<div style="float: right;"><a href="'.generer_url_ecrire('lettres', 'id_lettre='.$lettre->id_lettre).'">'.http_img_pack('croix-rouge.gif', "x", "").'</a></div>';
-			echo _T('lettresprive:'.$_GET['message']);
+		if ($m = _request('message')
+			AND in_array($m,array('test_ok','test_ko','renvoi_ok','renvoi_ko','envoi_termine'))) {
+			$ok = in_array($m,array('test_ok','renvoi_ok','envoi_termine'))?'success':'error';
+			echo "<div class='$ok'>";
+			echo '<div style="float: right;"><a href="'.parametre_url(self(), 'message','')
+			  .'">'.balise_img(find_in_path('img_pack/frame-close.png'),"x").'</a></div>';
+			echo _T('lettresprive:'.$m);
 			echo '</div>';
 		}
 
@@ -240,50 +210,6 @@
 
 		echo fin_page();
 
-	}
-
-
-	function lettres_documents($type, $id) {
-		global $spip_lang_left, $spip_lang_right;
-
-		// Joindre ?
-		if  ($GLOBALS['meta']["documents_$type"]=='non'
-		OR !autoriser('joindre', $type, $id))
-			$res = '';
-		else {
-			$joindre = charger_fonction('joindre', 'inc');
-
-			$res = $joindre(array(
-				'cadre' => 'relief',
-				'icone' => 'image-24.gif',
-				'fonction' => 'creer.gif',
-				'titre' => _T('titre_joindre_document'),
-				'script' => 'lettres',
-				'args' => "id_lettre=$id",
-				'id' => $id,
-				'intitule' => _T('info_telecharger_ordinateur'),
-				'mode' => 'document',
-				'type' => 'lettre',
-				'ancre' => '',
-				'id_document' => 0,
-				'iframe_script' => generer_url_ecrire("documenter","id_lettre=$id&type=$type",true)
-			));
-
-			// eviter le formulaire upload qui se promene sur la page
-			// a cause des position:relative incompris de MSIE
-			if ($GLOBALS['browser_name']!='MSIE') {
-				$res = "\n<table style='float: $spip_lang_right' width='50%' cellpadding='0' cellspacing='0' border='0'>\n<tr><td style='text-align: $spip_lang_left;'>\n$res</td></tr></table>";
-			}
-
-			$res .= http_script('',"async_upload.js")
-			  . http_script('$("form.form_upload").async_upload(async_upload_portfolio_documents);');
-		}
-
-		$documenter = charger_fonction('documenter', 'inc');
-
-		return "<div id='portfolio'>" . $documenter($id, $type, 'portfolio') . "</div><br />"
-		. "<div id='documents'>" . $documenter($id, $type, 'documents') . "</div>"
-		. $res;
 	}
 
 	function lettre_boite_info(&$lettre){
