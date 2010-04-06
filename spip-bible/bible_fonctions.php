@@ -47,53 +47,22 @@ function livre_seul($i){
 	return preg_replace('#[0-9|,|-]+$#','',$i);
 
 }
-
-
-function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$ref='non',$mode_test=false){
-	$verset_debut = '';
-	
-	$tableau_traduction = bible_tableau('traduction');
-	$tableau_separateur = bible_tableau('separateur');
+function bible_analyser_ref($passage,$traduction){
+    $tableau_traduction = bible_tableau('traduction');
+    $tableau_separateur = bible_tableau('separateur');
 	$tableau_livres = bible_tableau('livres');
-	$langues_originales = bible_tableau('original');
 	global $spip_lang;
-	
-	$traduction = strtolower($traduction);
-	
-	$erreur = true;
-	
-	if (array_key_exists($traduction,$tableau_traduction)){$erreur = false;};
-		
-	if ($erreur) { 
-		return _T('bible:traduction_pas_dispo');
-	}
+    $verset_debut = '';
 
-		
-	
-	$gateway = $tableau_traduction[$traduction]['gateway'];
-	$wissen  = $tableau_traduction[$traduction]['wissen'];
-	$unbound = $tableau_traduction[$traduction]['unbound'];
-	$lire = $tableau_traduction[$traduction]['lire'];
 	$lang = $tableau_traduction[$traduction]['lang'];
-	$lang_original = $lang;
-	
-	
-	
-	//si langue originel
-	foreach ($langues_originales as $i=>$dir){
-		if ($i ==$lang){
-		$original = true;
-		$lang	  = $spip_lang;
-		$lang_original = $i;
-		$dir = $dir;
-		include_spip('inc/lang');
-		break;
-		}
-	
-	}
+    $langues_originales = bible_tableau('original');
+    //var_dump($langues_originales);
+    array_key_exists($lang,$langues_originales) ? $lang = $spip_lang : $lang = $lang;
 	
 	$separateur = $tableau_separateur[$lang];
+    
 	$livres=$tableau_livres[$lang];
+	
 	// phase d'anaylse
 	
 	$livre = strtolower($livre);
@@ -107,18 +76,15 @@ function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$re
 				$verset_fin = $tableau2[0];}
 			else{
 				$chapitre_fin   = $tableau2[0];
-				$verset_fin = $tableau2[1];}
-			
+				$verset_fin = $tableau2[1];}			
 		
 		}
 	
-	
-		
 	$debut = $tableau[0];
 	
 	$livre = livre_seul($debut);
 	
-	if (array_key_exists($livre,$livres) == false){
+	if (!array_key_exists($livre,$livres)){
 		return _T('bible:pas_livre');
 	
 	}
@@ -161,6 +127,58 @@ function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$re
 	$verset_fin=='';
 	$chapitre_fin=$chapitre_debut;};
 	if ($verset_fin=='' and (count($tableau)==2)){$verset_fin=$verset_debut;}
+    return  array($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin);
+}
+
+function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$ref='non',$mode_test=false){
+
+	
+	$tableau_traduction = bible_tableau('traduction');
+    global $spip_lang;
+	
+	$traduction = strtolower($traduction);
+	
+	$erreur = true;
+	
+	if (array_key_exists($traduction,$tableau_traduction)){$erreur = false;};
+		
+	if ($erreur) { 
+		return _T('bible:traduction_pas_dispo');
+	}
+    $lang = $tableau_traduction[$traduction]['lang'];
+    $langues_originales = bible_tableau('original');
+    $lang_original = $lang;
+	
+	
+	
+	//si langue originel
+	foreach ($langues_originales as $i=>$dir){
+		if ($i ==$lang){
+		$original = true;
+		$lang	  = $spip_lang;
+		$lang_original = $i;
+		$dir = $dir;
+		include_spip('inc/lang');
+		break;
+		}
+	
+	}
+    $tableau_analyse = bible_analyser_ref($passage,$traduction);
+    if (!is_array($tableau_analyse)){
+        return $tableau_analyse;
+    }
+    //var_dump($tableau_analyse);
+    $livre = $tableau_analyse[0];
+    $chapitre_debut = $tableau_analyse[1];
+    $verset_debut = $tableau_analyse[2];
+    $chapitre_fin = $tableau_analyse[3];
+    $verset_fin = $tableau_analyse[4];
+    
+    
+    $gateway = $tableau_traduction[$traduction]['gateway'];
+	$wissen  = $tableau_traduction[$traduction]['wissen'];
+	$unbound = $tableau_traduction[$traduction]['unbound'];	
+    $lire = $tableau_traduction[$traduction]['lire'];
 	
 	if ($lire){
 		include_spip('traduction/lire');
