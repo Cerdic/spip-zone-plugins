@@ -1,9 +1,11 @@
 /* --------------------------------------------------------------
 
    forms.css
-   Formulaires
+   Base pour formulaires
    Petronille - 2010
 
 -------------------------------------------------------------- */
 
 form * { font-size: 100%; line-height: inherit; font-family: inherit; }
+
+/* end */
