@@ -88,11 +88,7 @@ function bible_analyser_ref($passage,$traduction){
 		return _T('bible:pas_livre');
 	
 	}
-    if ($mode_test){
-	   return;
-	}
-	
-	
+
 	$debut = str_replace($livre,'',$debut);
 	
 	
@@ -167,6 +163,11 @@ function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$re
     if (!is_array($tableau_analyse)){
         return $tableau_analyse;
     }
+    if ($mode_test){
+	   return;
+	}
+	
+	
     //var_dump($tableau_analyse);
     $livre = $tableau_analyse[0];
     $chapitre_debut = $tableau_analyse[1];
