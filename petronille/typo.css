@@ -29,7 +29,8 @@ small,.small { font-size: .9em; }
 abbr,acronym { border-bottom: 1px dotted; font-variant: small-caps; cursor: help; }
 dfn { font-weight: bold; font-style: italic; }
 del { text-decoration: line-through; }
-ins, ins * { color: red; text-decoration: none; }
+ins { text-decoration: none; }
+ins, ins * { color: red; }
 sup, sub { font-size: .8em; font-variant: normal; line-height: 0; }
 sup { vertical-align: super; }
 sub { vertical-align: sub;}

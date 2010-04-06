@@ -2,7 +2,7 @@
 
    reset.css
    Correction des styles par defaut / mise a zero multinavigateurs
-   Petronille - 2010
+   Petronille - romy.tetue.net - 2010
 
 -------------------------------------------------------------- */
 
@@ -25,7 +25,6 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 	background: transparent;
 }
 
-
 /*h1,h2,h3,h4,h5,h6 { font-size: 100%; font-weight: normal; }*/
 address,caption,cite,code,dfn,em,strong,th,var { font-style: normal; font-weight: normal; }
 abbr,acronym { border: 0; }
@@ -36,8 +35,5 @@ caption,th { text-align: left; }
 blockquote, q { quotes: none; }
 blockquote:before, blockquote:after, q:before, q:after { content: ''; content: none; }
 fieldset,img { border: 0; }
-
-del { text-decoration: line-through; }
-ins { text-decoration: none; }
 
 /* end */
