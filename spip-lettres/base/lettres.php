@@ -107,18 +107,18 @@
 							"titre"					=> "TEXT NOT NULL",
 							"descriptif"			=> "TEXT NOT NULL",
 							"chapo"					=> "MEDIUMTEXT NOT NULL",
-							"texte"					=> "LONGBLOB NOT NULL",
+							"texte"					=> "longtext DEFAULT '' NOT NULL",
 							"ps"					=> "TEXT NOT NULL",
 							"date"					=> "DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL",
 							"lang"					=> "VARCHAR(10) NOT NULL",
 							"langue_choisie"		=> "VARCHAR(3) DEFAULT 'non'",
 							"maj"					=> "DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL",
-							"message_html"			=> "LONGBLOB NOT NULL",
-							"message_texte"			=> "LONGBLOB NOT NULL",
+							"message_html"			=> "longtext DEFAULT '' NOT NULL",
+							"message_texte"			=> "longtext DEFAULT '' NOT NULL",
 							"date_debut_envoi"		=> "DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00'",
 							"date_fin_envoi"		=> "DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00'",
 							"statut"				=> "VARCHAR(15) NOT NULL DEFAULT 'brouillon'",
-							"extra"					=> "LONGBLOB NULL"
+							"extra"					=> "longtext NULL"
 						);
 		$spip_lettres_key = array(
 							"PRIMARY KEY"	=> "id_lettre"
@@ -340,6 +340,14 @@
 				echo "SPIP-Lettres MAJ 4.0.1<br />";
 				sql_alter("TABLE spip_lettres CHANGE statut statut VARCHAR(15) NOT NULL DEFAULT 'brouillon'");
 				ecrire_meta($nom_meta_base_version,$current_version='4.0.1','non');
+			}
+			if (version_compare($current_version,'4.0.2','<')){
+				echo "SPIP-Lettres MAJ 4.0.2<br />";
+				sql_alter("TABLE spip_lettres CHANGE texte texte longtext DEFAULT '' NOT NULL");
+				sql_alter("TABLE spip_lettres CHANGE message_html message_html longtext DEFAULT '' NOT NULL");
+				sql_alter("TABLE spip_lettres CHANGE message_texte message_texte longtext DEFAULT '' NOT NULL");
+				sql_alter("TABLE spip_lettres CHANGE extra extra longtext NULL");
+				ecrire_meta($nom_meta_base_version,$current_version='4.0.2','non');
 			}
 		}
 	}
