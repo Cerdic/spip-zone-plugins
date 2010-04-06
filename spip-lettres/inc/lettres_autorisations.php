@@ -33,6 +33,13 @@ function autoriser_lettres_dist($faire, $type, $id, $qui, $opt) {
 	}
 }
 
+function autoriser_lettre_modifier_dist($faire, $type, $id, $qui, $opt){
+	$statut = sql_getfetsel('statut', 'spip_lettres', 'id_lettre='.intval($id));
+	if ($statut=='brouillon')
+		return autoriser('editer','lettres');
+	return false;
+}
+
 function autoriser_lettre_tester_dist($faire, $type, $id, $qui, $opt){
 	$statut = sql_getfetsel('statut', 'spip_lettres', 'id_lettre='.intval($id));
 	if ($statut=='brouillon')
