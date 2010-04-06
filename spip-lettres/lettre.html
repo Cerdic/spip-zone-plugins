@@ -1,7 +1,10 @@
 <BOUCLE_lettre(LETTRES) {id_lettre}>
-[[(#HTTP_HEADER{Content-type: text/plain})]
+[[(#HTTP_HEADER{Content-type: text/plain; charset=#CHARSET})]
 #MESSAGE_TEXTE
-(#ENV{format}|=={'texte'}|?{' '})]
-[#MESSAGE_HTML
-(#ENV{format}|=={'texte'}|?{'',' '})]
+(#ENV{format}|=={'texte'}|oui)]
+[
+[(#ENV{edit}|oui)<div class="#EDIT{message}">]
+#MESSAGE_HTML
+[</div>(#ENV{edit}|oui)]
+(#ENV{format}|=={'texte'}|non)]
 </BOUCLE_lettre>
