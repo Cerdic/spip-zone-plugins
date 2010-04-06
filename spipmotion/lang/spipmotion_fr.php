@@ -31,6 +31,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'extensions_audio' => 'Formats audios',
 	'extensions_video' => 'Formats vid&eacute;os',
 
+	// F
+	'ffmpeg2theora_install' => 'FFMpeg2Theora sur votre serveur :',
+
 	// G
 	'gestion_format_entree' => 'Gestion des formats d\'entr&eacute;e',
 	'gestion_format_sortie' => 'Gestion des formats de sortie',
@@ -49,6 +52,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_compiler_libavcodec_build_number' => 'Num&eacute;ro de version de libavcodec &agrave; la compilation',
 	'info_compiler_libavcodec_version_number' => 'Num&eacute;ro de version de libavcodec utilis&eacute;',
 	'info_compiler_vhook-support' => 'Compil&eacute; avec le support des vhooks',
+	'info_ffmpeg2theora_libtheora_version' => 'Version de libtheora utilis&eacute;e par ffmpeg2theora',
+	'info_ffmpeg2theora_version' => 'Version de ffmpeg2theora',
 	'info_page_ffmpeg_infos' => 'Cette page n\'est qu\'informative. Elle indique la configuration compl&egrave;te de l\'installation de FFMPEG sur votre syst&egrave;me.',
 	'install_ajout_champs_documents' => 'Ajout des champs sur spip_documents',
 	'install_creation_base' => 'Cr&eacute;ation de la base de spipmotion',

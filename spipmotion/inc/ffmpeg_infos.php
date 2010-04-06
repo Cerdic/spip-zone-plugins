@@ -188,6 +188,21 @@ function ffmpeg_recuperer_infos_codecs($forcer){
 			ecrire_meta('spipmotion_avfilters',serialize($data['spipmotion_avfilters']));
 
 			ecrire_meta('spipmotion_compiler',serialize($data['spipmotion_compiler']));
+
+			/**
+			 * On regarde si ffmpeg2theora est installé
+			 * Si oui on ajoute sa version dans les metas aussi
+			 */
+			$ffmpeg2theora = exec('ffmpeg2theora',$retour,$int);
+			if(!empty($retour)){
+				$info = $retour[0];
+				preg_match('/ffmpeg2theora ([0-9a-z].*) - ([A-Z].*)/s',$info,$infos);
+				$data['spipmotion_ffmpeg2theora']['ffmpeg2theora'] = true;
+				$data['spipmotion_ffmpeg2theora']['version'] = $infos[1];
+				$data['spipmotion_ffmpeg2theora']['libtheora_version'] = $infos[2];
+				spip_log($data['spipmotion_ffmpeg2theora'],'test');
+				ecrire_meta('spipmotion_ffmpeg2theora',serialize($data['spipmotion_ffmpeg2theora']));
+			}
 		}
 	}else{
 		$data['spipmotion_compiler'] = unserialize($GLOBALS['meta']['spipmotion_compiler']);
@@ -196,6 +211,7 @@ function ffmpeg_recuperer_infos_codecs($forcer){
 		$data['spipmotion_bitstream_filters'] = unserialize($GLOBALS['meta']['spipmotion_bitstream_filters']);
 		$data['spipmotion_protocols'] = unserialize($GLOBALS['meta']['spipmotion_protocols']);
 		$data['spipmotion_avfilters'] = unserialize($GLOBALS['meta']['spipmotion_avfilters']);
+		$data['spipmotion_ffmpeg2theora'] = unserialize($GLOBALS['meta']['spipmotion_ffmpeg2theora']);
 	}
 	return $data;
 }
