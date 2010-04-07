@@ -364,6 +364,7 @@ function noizetier_lister_blocs_avec_noisettes(){
 	
 	if (is_null($liste_blocs)){
 		$liste_blocs = array();
+		include_spip('base/abstract_sql');
 		$resultats = sql_allfetsel (
 			"CONCAT(`bloc`,'/',`type`,'-',`composition`)",
 			'spip_noisettes',
