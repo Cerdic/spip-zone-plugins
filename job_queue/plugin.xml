@@ -1,7 +1,7 @@
 <plugin>
   <nom>Job Queue</nom>
   <auteur>Cedric&amp;Fil</auteur>
-  <version>0.3.0</version>
+  <version>0.3.1</version>
   <version_base>0.2.0</version_base>
   <etat>test</etat>
   <description>Gestion d'une queue de Jobs</description>
@@ -30,7 +30,7 @@
 		<nom>affichage_final</nom>
 		<inclure>queue_pipelines.php</inclure>
 	</pipeline>
-	
+
 	<categorie>performance</categorie>
 
 </plugin>
