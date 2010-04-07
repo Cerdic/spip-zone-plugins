@@ -225,7 +225,10 @@ function player_form_fin_form () {
 /***********************************************/
 function player_petite_boite_info () {
 	include_spip('inc/plugin');
-	$info = plugin_get_infos(_DIR_PLUGIN_PLAYER);
+	if ($GLOBALS['spip_version_code']>=15133)
+		include_spip('plugins/afficher_plugin');
+	$get_infos = ($GLOBALS['spip_version_code']>=15133)?charger_fonction('get_infos','plugins'):'plugin_get_infos'; // Compatibilite SPIP 2.1
+	$info = $get_infos(_DIR_PLUGIN_PLAYER);
 	$titre = _T(_PLAYER_LANG.'player_nom');
 	$result = ""
 		. debut_cadre_relief('plugin-24.gif', true, '', $titre)
