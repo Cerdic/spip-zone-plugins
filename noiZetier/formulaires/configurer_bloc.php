@@ -64,18 +64,11 @@ function formulaires_configurer_bloc_charger($bloc,$page,$infos_bloc){
 	
 	// Si on a validé une noisette et qu'il y a une erreur -------------------------------
 	if (($bloc_page = _request('bloc_page_nouvelle_noisette') or $id_noisette = intval(_request('id_noisette'))) and _request('enregistrer')){
-		$noisette = _request('noisette');
-		$infos_param = noizetier_charger_parametres_noisette($noisette);
-		// On teste que chaque paramètre obligatoire est bien renseigné
-		$erreurs = array();
-		foreach ($infos_param as $nom=>$parametre){
-			if ($parametre['obligatoire']=='oui'){
-				if (_request($nom)=='')
-					$erreurs[$nom] = _T('info_obligatoire');
-			}
-		}
+		$erreurs = formulaires_configurer_bloc_verifier($bloc,$page);
 		// S'il y a des erreurs
 		if(count($erreurs)>0){
+			$noisette = _request('noisette');
+			$infos_param = noizetier_charger_parametres_noisette($noisette);
 			// On récupère les paramètres transmis
 			foreach ($infos_param as $nom=>$parametre)
 				$contexte[$nom] = _request($nom);
@@ -110,6 +103,18 @@ function formulaires_configurer_bloc_verifier($bloc,$page){
 	if (($bloc_page = _request('bloc_page_nouvelle_noisette') or $id_noisette = intval(_request('id_noisette'))) and _request('enregistrer')){
 		$noisette = _request('noisette');
 		$infos_param = noizetier_charger_parametres_noisette($noisette);
+		// Si le plugin verifier est actif
+		if(true){
+			$verifier = charger_fonction('verifier','inc',true);
+			foreach ($infos_param as $nom=>$parametre){
+				if (isset($parametre['verifier'])){
+					if (!isset($parametre['verifier']['options']))
+						$parametre['verifier']['options']=array();
+					if (($erreur = $verifier(_request($nom),$parametre['verifier']['type'],$parametre['verifier']['options'])) != '')
+						$erreurs[$nom] = $erreur;
+				}
+			}
+		}
 		// On teste que chaque paramètre obligatoire est bien renseigné
 		foreach ($infos_param as $nom=>$parametre){
 			if ($parametre['obligatoire']=='oui'){

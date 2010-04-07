@@ -156,6 +156,8 @@ function extrait_parametres_noisette($parametres){
 			$nom = $parametre['options']['nom'];
 			$res[$nom] = $parametre['options'];
 			$res[$nom]['saisie'] = $parametre['saisie'];
+			if(isset($parametre['verifier']))
+				$res[$nom]['verifier']=$parametre['verifier'];
 			if(isset($res[$nom]['label']))
 				$res[$nom]['label'] = _T_ou_typo($res[$nom]['label']);
 			if(isset($res[$nom]['datas']))
