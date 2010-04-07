@@ -25,6 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'encoder_video' => '(R&eacute;)encoder cette vid&eacute;o',
 	'encoder_son' => '(R&eacute;)encoder ce son',
+	'explication_encodeur' => 'Si vous choisissez l\'encodeur ffmpeg2theora pour vos fichiers Ogg vid&eacute;os, les choix de codecs vid&eacute;o et audios deviennent inutiles.',
 	'explications_extensions_prises_en_charge' => 'Les formats pris en charge sont l\'ensemble des formats de fichiers qui seront trait&eacute;s par SPIPmotion pour r&eacute;cup&eacute;rer diverses informations (longueur, taille, vignette...)',
 	'explications_extensions_prises_en_charge_encodage' => 'Ces formats sont ceux qui seront transcod&eacute;s automatiquement ou &agrave; la demande',
 	'explications_extensions_sortie' => 'Ces extensions sont les formats vers lesquels les fichiers seront encod&eacute;s, vous pouvez en choisir plusieurs par type (attention &agrave; la lourdeur pour le serveur cependant).',
@@ -63,6 +64,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_codec_son' => 'Codec audio &agrave; utiliser',
 	'label_codec_video' => 'Codec vid&eacute;o &agrave; utiliser',
 	'label_encodage_auto' => 'Encoder automatiquement',
+	'label_encodeur' => 'Encodeur',
 	'label_extensions_prises_en_charge_encodage' => 'Formats pris en charge pour l\'encodage',
 	'label_extensions_prises_en_charge' => 'Formats pris en charge de base',
 	'label_extensions_sortie' => 'Formats d\'encodage',
