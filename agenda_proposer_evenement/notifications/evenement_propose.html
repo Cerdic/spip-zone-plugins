@@ -1,0 +1,35 @@
+[(#REM)
+
+  Squelette
+  (c) 2009 SPIP
+  Distribue sous licence GPL
+
+][(#HTTP_HEADER{Content-type: text/plain[; charset=(#CHARSET)]})]
+[[(#NOM_SITE_SPIP|textebrut)]] [<:propevent:evenement_propose:>][ (#TITRE|nettoyer_titre_email)]
+
+<:form_forum_message_auto:>
+[<:propevent:email_voir_en_ligne:>
+(#ENV{url_moderation}) ]
+
+<:propevent:email_confirm_texte_1{url_site=#URL_SITE_SPIP}:>[
+<:propevent:email_confirm_texte_2b:>(#STATUT|=={publie}|oui)][
+<:propevent:email_confirm_texte_2:>(#STATUT|=={publie}|non)]
+
+<:propevent:email_confirm_rappel_saisie:>
+
+** #TITRE **[
+(#ENV{par_auteur})][
+(#DATE_DEBUT|agenda_affdate_debut_fin{#DATE_FIN,#HORAIRE})][
+<:propevent:label_id_categorie:> : (#THEME)
+][
+
+(#DESCRIPTIF|textebrut)
+][
+(#TEXTE|textebrut)
+]
+----
+[(#LIEU)
+]<BOUCLE_mots(MOTS){id_mot IN #ENV{mots}}>[(#TITRE|supprimer_numero)]
+</BOUCLE_mots>
+
+#FILTRE{supprimer_tags|filtrer_entites|trim}

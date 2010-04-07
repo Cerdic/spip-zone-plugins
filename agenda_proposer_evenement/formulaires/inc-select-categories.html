@@ -1,0 +1,8 @@
+<B_rubs>
+	<select name="id_categorie" [id="(#ENV{id})"]>
+			<option value="">&nbsp;</option>
+		<BOUCLE_rubs(RUBRIQUES){id_parent=#ENV{id_rubrique}} {par num titre,titre}>
+			<option value="#ID_RUBRIQUE" [(#ID_RUBRIQUE|=={#ENV{id_categorie}}|oui)selected="selected"]>[(#TITRE|supprimer_numero)]</option>
+		</BOUCLE_rubs>
+	</select>
+</B_rubs>
