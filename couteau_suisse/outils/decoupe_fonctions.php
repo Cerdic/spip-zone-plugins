@@ -10,7 +10,7 @@ $GLOBALS['cs_introduire'][] = 'decoupe_nettoyer_raccourcis';
 
 // filtre ajoutant 'artpage' a l'url 
 function decoupe_url($url, $page, $num_pages) {
-	return parametre_url($url, 'artpage',"{$page}-{$num_pages}");
+	return parametre_url($url, 'artpage',$page>1?"{$page}-{$num_pages}":'');
 }
 
 function onglets_callback($matches) {
@@ -48,19 +48,6 @@ function decouper_en_onglets_rempl(&$texte) {
 	}
 	// il faut un callback pour analyser l'interieur du texte
 	return preg_replace_callback(_onglets_REGEXPR, 'onglets_callback', $texte);
-}
-
-// fonction renvoyant l'image appellee dans img/decoupe
-function decoupe_image($fich, $help, $self, $off, $val, &$images, $double=false) {
-	$alt = _T('couteau:'.$help);
-	$alt = "title=\"$alt\" alt=\"$alt\"";
-	if ($off) {
-		$tmp = $images[$fich.'_off']." $alt />";
-		return $double?$tmp.$tmp:$tmp;
-	} else {
-		$tmp=$images[$fich]." $alt />";
-		return '<a href="'.parametre_url($self,'artpage', $val).'">'.($double?$tmp.$tmp:$tmp).'</a>';
-	}
 }
 
 // fonction appellee sur les parties du textes non comprises entre les balises : html|code|cadre|frame|script|acronym|cite
