@@ -30,7 +30,7 @@ options:
           explication: '<:saisies:option_explication_explication:>'
           size: 50
       -
-        saisie: 'selection'
+        saisie: 'radio'
         options:
           nom: 'type'
           label: '<:saisies:option_type_label:>'
@@ -38,6 +38,7 @@ options:
           datas:
             text: '<:saisies:option_type_text:>'
             password: '<:saisies:option_type_password:>'
+          defaut: 'text'
   -
     saisie: 'fieldset'
     options:

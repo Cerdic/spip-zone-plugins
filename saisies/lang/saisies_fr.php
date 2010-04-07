@@ -51,9 +51,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_type_choix_plusieurs' => 'Permettre à l\'utilisateur de choisir <strong>plusieurs</strong> destinataires.',
 	'option_type_choix_tous' => 'Mettre <strong>tous</strong> ces auteurs en destinataires. L\'utilisateur n\'aura aucun choix.',
 	'option_type_choix_un' => 'Permettre à l\'utilisateur de choisir <strong>un seul</strong> destinataire.',
-	'option_type_explication' => 'En mode "mot de passe", le contenu du champ sera masqu&eacute;.',
+	'option_type_explication' => 'En mode "masqu&eacute;", le contenu du champ ne sera pas visible.',
 	'option_type_label' => 'Type du champ',
-	'option_type_password' => 'Mot de passe',
+	'option_type_password' => 'Masqu&eacute;',
 	'option_type_text' => 'Normal',
 
 	// S
