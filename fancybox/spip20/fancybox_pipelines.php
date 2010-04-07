@@ -1,7 +1,6 @@
 <?php
 
 function fancybox_insert_head($flux){
-	include_spip("inc/filtres");
 	// Initialisation des valeurs de config
 	$config = @unserialize($GLOBALS['meta']['fancybox']);
 	if (!is_array($config))
