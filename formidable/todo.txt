@@ -1,25 +1,14 @@
 
 À faire :
 ---------
-- Avoir une liste des types de champs (saisies)
-- Générer une liste de champs à partir d'une description de saisies
-- Décrire les saisies elles-mêmes
-- Générer une liste de champs permettant la configuration d'une saisie
-- Avoir une liste des traitements possibles
-- Générer un formulaire complet à partir d'une description de saisies + une description de traitements
-+ Faire une interface de construction de formulaire
-  - Lister les saisies disponibles
-  - Ajouter une saisie
-  - Configurer les options d'une saisie
-  - Configurer la validation d'une saisie
-  - Ajouter des groupes de champs (fieldset)
-  - Déplacer les saisies sans javascript
-  + Déplacer les saisies en drag-n-drop
-  + Ajouter une saisie directement au bon endroit en drag-n-drop
-+ Faire une interface de configuration des traitements
-  - Lister les traitements et leurs options
-  + Ne montrer les options que si le traitement est choisi
-+ Ajouter un traiement "Enregistrer les réponses"
++ Pouvoir attacher des fichiers (et donc les envoyer par mail et les enregistrer en base comme document)
++ Générer le mail à partir du HTML des vues
++ Pouvoir ajouter des destinataires autres que venant d'un champ
++ Pouvoir composer soi-même le Sujet du mail avec des @truc@ pour les champs
++ Pouvoir modérer les réponses enregistrées en base
++ Appeler des fonctions de mise à jour des traitements lorsque les champs ont changé
++ Déplacer les saisies en drag-n-drop
++ Ajouter une saisie directement au bon endroit en drag-n-drop
 
 Description d'une liste de saisies :
 ------------------------------------

@@ -128,6 +128,8 @@
 	padding:1em;
 }
 .formulaire_construire_formulaire .ajouter_saisie{
+	width:40%;
+	margin:5px;
 	padding:0.5em 8px 0.5em 36px;
 	font-size:1em;
 	text-align:left;
