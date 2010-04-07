@@ -117,3 +117,27 @@ li.saisie_fieldset fieldset{
 	margin:5px;
 	border: solid 1px #AAA;
 }
+
+li.noisette div.afficher strong{
+	font-weight:normal;
+	font-style:italic;
+}
+li.noisette div.afficher div.valeur {
+	display:inline;
+}
+li.noisette div.saisie_textarea div.valeur {
+	display:block;
+	font-size:0.9em;
+	border: solid 1px #AAA;
+	margin-right:5px;
+	padding: 5px;
+}
+li.noisette div.afficher ul {
+	display:inline;
+}
+li.noisette div.afficher li.choix {
+	display:inline;
+	padding:0;
+	padding-right:5px;
+	border-right:solid 1px #AAA;
+}

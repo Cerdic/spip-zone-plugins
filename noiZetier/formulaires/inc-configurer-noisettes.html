@@ -13,8 +13,14 @@
 				]
 				<div class="titre">[(#NOIZETIER_LISTE_NOISETTES|table_valeur{#NOISETTE}|table_valeur{nom}|sinon{#NOISETTE})]</div>
 					<div class="infos">
+					[(#PLUGIN{saisies}|oui)
+						#VOIR_SAISIES{#NOIZETIER_LISTE_NOISETTES|table_valeur{#NOISETTE}|table_valeur{parametres},#PARAMETRES|unserialize}
+					]
+					
+					<BOUCLE_si_pas_saisies(CONDITION){si #PLUGIN{saisies}|non}>
 					<BOUCLE_parametres(POUR){tableau #PARAMETRES|unserialize}>
 					[<span class="nom_param">(#NOIZETIER_PARAMS_NOISETTE{#NOISETTE}|table_valeur{#CLE}|table_valeur{label}|sinon{#CLE})</span>]
+					
 					[(#NOIZETIER_PARAMS_NOISETTE{#NOISETTE}|table_valeur{#CLE}|table_valeur{saisie}|=={'oui_non'}|oui)
 						[(#VALEUR|oui) <:item_oui:>][(#VALEUR|non) <:item_non:>]
 					]
@@ -24,12 +30,12 @@
 					]
 					[(#NOIZETIER_PARAMS_NOISETTE{#NOISETTE}|table_valeur{#CLE}|table_valeur{saisie}|=={'oui_non'}|non)
 						[(#NOIZETIER_PARAMS_NOISETTE{#NOISETTE}|table_valeur{#CLE}|table_valeur{saisie}|=={'textarea'}|non)
-							[(#NOIZETIER_PARAMS_NOISETTE{#NOISETTE}|table_valeur{#CLE}|table_valeur{datas}|table_valeur{#VALEUR}|sinon{#VALEUR})]
+							#VALEUR
 						]
 					]
-					
 					<br />
 					</BOUCLE_parametres>
+					</BOUCLE_si_pas_saisies>
 					</div>
 			</div>
 			[(#AUTORISER{configurer,noizetier}|oui)
