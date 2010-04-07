@@ -1,0 +1,30 @@
+Les articles et rubriques en cours sont exposés. la personnalisation du lien expose se fait via les classes ***babbin*** et ***babbout*** du menu_babbi.css.
+
+Le fichier css "menu_babbi.css" personnalisé peut être placé à la racine du dossier squelettes pour ne pas être écrasé lors des mises à jour.
+
+Depuis la version "menu_babbibel 2.0.9 test", l'id="nav" est devenu class="nav". 
+
+***Important***
+Dans votre css personnalisé 
+			*************************
+			*			*			
+			*  #nav devient .nav  	*
+			*			*
+			*************************
+
+
+
+
+Les fichiers à modifier se trouve dans le dossier 
+-inc/norm pour les sites SANS gestion du multilinguisme
+-inc/multi pour les sites AVEC gestion du multilinguisme
+
+Dans ces 2 dossiers chaque fichier correspond à 1 type de menu :
+- inc_menu.html <=> Secteur>>>sous-rubriques
+- inc_menu_articles.html <=> Secteur>>>Articles
+- inc_menu_laur.html <=> Secteur>>>sous-rubriques + articles
+
+- inc_menu_mot_cle.html <=> Rubriques par mot-clé>>>sous-rubriques
+- inc_menu_mot_cle2.html <=> Rubriques par mot-clé>>>Articles
+- inc_menu_mot_cle3.html <=> Rubriques par mot-clé>>>sous-rubriques + articles
+
