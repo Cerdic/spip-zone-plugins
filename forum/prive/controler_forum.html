@@ -1,1 +1,5 @@
+[(#ENV{type}|=={cvt}|non)
 [(#INCLURE{fond=prive/listes/controler_forum}{env}{id_forum=#ENV{id_forum,#ENV{debut_id_forum}}})]
+][(#ENV{type}|=={cvt}|oui)
+[(#INCLURE{fond=prive/listes/controler_forum_cvt}{env}{id_forum=#ENV{id_forum,#ENV{debut_id_forum}}})]
+]
