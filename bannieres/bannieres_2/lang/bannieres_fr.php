@@ -17,6 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'action_supprimer' => 'Supprimer',
 	'action_voir' => 'Voir',
 	'active' => 'Campagne active',
+	'actives' => 'Campagnes actives',
 	'alt' => 'Texte alternatif',
 	'alt_ancien' => 'Ancien texte alternatif (utilisez plut&ocirc;t le titre du document - voir doc)',
 	
@@ -36,6 +37,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'echue' => 'Campagne &eacute;chue',
+	'echues' => 'Campagnes &eacute;chues',
 	'email_contact' => 'Email de contact',
 	'explication_alt' => 'Texte de remplacement en cas d\'image absente (utile aussi pour le r&eacute;f&eacute;rencement.',
 	'explication_alt_ancien' => 'Utilisez de pr&eacute;f&eacute;rence le champ "titre de l\'image". Supprimer ce texte pour ne plus le voir appara&icirc;tre (Voir doc).',
@@ -43,6 +45,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_local' => 'Pour une diffusion bas&eacute;e sur une campagne locale, saisir les codes postaux s&eacute;par&eacute;s par une virgule sans mettre d\'espace.',
 	'explication_position' => 'Position de la banniere dans la page(#BANNIERE{1} par exemple).',
 	'explication_rayon' => 'Choisir internationale si aucun param&egrave;tre n\'est transmis avec la balise ou pour cr&eacute;er une banni&egrave;re par d&eacute;faut. Permet d\'analyser correctement le 2eme param&egrave;tre transmis par la balise.',
+	'explications_statistiques' => 'Affiche un tableau recapitulatif des clics pour les campagnes actives et les campagnes &eacute;chues : nombre de clics par campagne, nombre de jours de diffusion et moyenne par jour',
 	
 	// F
 	'future' => 'Campagne programm&eacute;e',
@@ -64,7 +67,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_id' => 'Id',
 	'label_id_banniere' => 'ID',
 	'label_logo' => 'Logo',
+	'label_moyenne_jour' => 'Moy./Jour',
 	'label_nom' => 'Nom',
+	'label_nb_clics' => 'Nb. clics',
+	'label_nb_jours' => 'Nb. jours',
 	'label_position' => 'Pos.',
 	'label_position_campagne' => 'Position',
 	'label_rayon' => 'Rayon',
@@ -86,6 +92,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	// R
 	'regional' => 'R&eacute;gional',
+
+	// S
+	'statistiques_des_campagnes' => 'Statistiques campagnes',
 
 	// T
 	'texte_nouveau_banniere' => 'Sans nom',
