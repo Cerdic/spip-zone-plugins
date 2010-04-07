@@ -61,7 +61,7 @@ function autoriser_lettre_joindrearticle_dist($faire, $type, $id, $qui, $opt){
 	return false;
 }
 
-function autoriser_dater_dist($faire, $type, $id, $qui, $opt) {
+function autoriser_dater($faire, $type, $id, $qui, $opt) {
 	if (!isset($opt['statut'])){
 		$table = table_objet($type);
 		$trouver_table = charger_fonction('trouver_table','base');
