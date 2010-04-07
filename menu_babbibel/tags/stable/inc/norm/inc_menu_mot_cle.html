@@ -1,14 +1,14 @@
-<ul id="nav">
+<ul class="nav">
 	<li class="#CONFIG{babbi/accueil}">
 		<a href="#URL_SITE_SPIP/" title="[(#NOM_SITE_SPIP|textebrut)]"><:accueil_site:></a>
 	</li>
 	<BOUCLE_menus_bab(RUBRIQUES) {lang}{par num titre, titre} {titre_mot=menu_der}>
-		<li><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero|couper{80})]</a>
+		<li><a href="#URL_RUBRIQUE" class="[(#EXPOSE{babbin,babbout})]">[(#TITRE|supprimer_numero|couper{80})]</a>
 			<BOUCLE_exclus_babbi(RUBRIQUES) {titre_mot=exclu_menu_der}{doublons exclueA}></BOUCLE_exclus_babbi>
 				<B_sous_menus_bab>
 				<ul>
 					<BOUCLE_sous_menus_bab(RUBRIQUES) {id_parent}  {lang}{par num titre, titre}{doublons exclueA}>
-						<li><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero|couper{80})]</a><BOUCLE_rec(BOUCLE_sous_menus_bab)></BOUCLE_rec></li>
+						<li><a href="#URL_RUBRIQUE" class="[(#EXPOSE{babbin,babbout})]">[(#TITRE|supprimer_numero|couper{80})]</a><BOUCLE_rec(BOUCLE_sous_menus_bab)></BOUCLE_rec></li>
 					</BOUCLE_sous_menus_bab>
 				</ul>									
 				</B_sous_menus_bab>
