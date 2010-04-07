@@ -51,7 +51,7 @@
 		<icone>img/noizetier-16.png</icone>
 	</bouton>
 	
-	<necessite id="SPIP" version="[2.0.10;]" />
+	<necessite id="SPIP" version="[2.1.0-rc;]" />
 	<necessite id="spip_bonux" version="[1.8.10;]" />
 	<utilise id="saisies" />
 	<utilise id="compositions" version="[1.0.1;]" />
