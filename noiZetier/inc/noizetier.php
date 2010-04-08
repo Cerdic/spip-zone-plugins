@@ -31,17 +31,17 @@ function noizetier_lister_noisettes($type='tout',$informer=true){
 			foreach($liste as $squelette=>$chemin) {
 				$noisette = preg_replace(',[.]html$,i', '', $squelette);
 				$dossier = str_replace($squelette, '', $chemin);
-				// On ne garde que les squelettes ayant un XML de config
-				if (file_exists("$dossier$noisette.xml")
+				// On ne garde que les squelettes ayant un fichier YAML de config (si yaml est activé)
+				if (file_exists("$dossier$noisette.yaml") AND defined('_DIR_PLUGIN_YAML')
 					AND (
-						$infos_noisette = !$informer OR ($infos_noisette = noizetier_charger_infos_noisette_xml($dossier.$noisette))
+						$infos_noisette = !$informer OR ($infos_noisette = noizetier_charger_infos_noisette_yaml($dossier.$noisette))
 					)){
 					$liste_noisettes[$type][$informer][$noisette] = $infos_noisette;
 				}
-				// Ou les squelettes ayant un fichier YAML de config (si yaml est activé)
-				elseif (file_exists("$dossier$noisette.yaml") AND defined('_DIR_PLUGIN_YAML')
+				// ou les squelettes ayant un XML de config
+				elseif (file_exists("$dossier$noisette.xml")
 					AND (
-						$infos_noisette = !$informer OR ($infos_noisette = noizetier_charger_infos_noisette_yaml($dossier.$noisette))
+						$infos_noisette = !$informer OR ($infos_noisette = noizetier_charger_infos_noisette_xml($dossier.$noisette))
 					)){
 					$liste_noisettes[$type][$informer][$noisette] = $infos_noisette;
 				}
