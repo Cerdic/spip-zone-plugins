@@ -7,9 +7,11 @@
 	nom_licence : force l'affichage du nom de la licence dans le lien
 	même si un logo est présent
 ]
+
 #SET{id_licence,#ENV{id_licence}}
-<BOUCLE_article(ARTICLES){id_article}>#SET{id_licence,#ID_LICENCE}</BOUCLE_article>
+<BOUCLE_article(ARTICLES){id_article}>[(#SET{id_licence,[(#ID_LICENCE|=={0}|?{#GET{id_licence},#ID_LICENCE})]})]</BOUCLE_article>
 #SET{licences,#EVAL{$GLOBALS['licence_licences']}}
+
 <BOUCLE_selection(POUR){tableau #GET{licences}}{cle=#GET{id_licence}}>
 	#SET{name_licence,#VALEUR|table_valeur{name}}
 	#SET{link_licence,#VALEUR|table_valeur{link}}
