@@ -141,3 +141,12 @@ li.noisette div.afficher li.choix {
 	padding-right:5px;
 	border-right:solid 1px #AAA;
 }
+li.noisette div.afficher fieldset{
+	margin-right:5px;
+	margin-bottom: 5px;
+	padding-bottom:0;
+	border: solid 1px #AAA;
+}
+li.noisette div.afficher fieldset div.afficher{
+	margin:0 5px;
+}
