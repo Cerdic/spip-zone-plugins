@@ -1,17 +1,14 @@
 <?php
 
-// This is a SPIP-forum module file  --  Ceci est un fichier module de SPIP-forum
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // Liste des commentaires
-'message' => 'commentaire',
-'messages_forum' => 'commentaires',
-'commentaire' => 'commentaire',
-'commentaires' => 'commentaires',
-'commentaires_titre' => 'Vos commentaires',
-'commentaires_tout' => 'Tous vos commentaires',
-'permalink_pour' => 'Lien permanent vers',
+'comment' => 'commentaire',
+'comments' => 'commentaires',
+'comments_h2' => 'Vos commentaires',
+'permalink_to' => 'Lien permanent vers le commentaire',
 'le_date_jour' => 'Le', /* verifier que ca n'existe pas deja dans SPIP */
 'a_date_heure' => '&agrave;', /* verifier que ca n'existe pas deja dans SPIP */
 
@@ -27,14 +24,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'info_creation_paragraphe' => 'Ce formulaire accepte les <a href="http://www.spip.net/fr_article1578.html" rel="external nofollow" class="spip_out">raccourcis&nbsp;SPIP</a> et le code&nbsp;HTML. Pour cr&eacute;er des paragraphes, laissez simplement des lignes vides.',
 
-'forum_voir_avant' => 'Pr&eacute;visualiser',
-'forum_message_definitif' => 'Confirmer l\'envoi',
+'submit1' => 'Pr&eacute;visualiser',
+'submit2' => 'Confirmer l\'envoi',
 
 // Panneau CFG
 'forum_longueur' => 'Longueur des messages',
 'forum_longueur_mini' => 'Longueur minimale',
 'forum_longueur_maxi' => 'Longueur maximale',
-
 
 );
 

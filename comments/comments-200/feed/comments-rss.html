@@ -7,7 +7,7 @@ version="1.0"[ encoding="(#CHARSET)"]?>
 
 <channel[ xml:lang="(#LANG)"]>
 <BOUCLE_article(ARTICLES){id_article}>
-	<title>[(#TITRE|texte_backend)] - <:comments:commentaires:></title>
+	<title>[(#TITRE|texte_backend)] - <:comments:comments:></title>
 	<link>[(#URL_ARTICLE|url_absolue)]</link>
 	[<description>(#INTRODUCTION|supprimer_tags|texte_backend)</description>]
 	<language>#LANG</language>
@@ -22,7 +22,7 @@ version="1.0"[ encoding="(#CHARSET)"]?>
 	</image>
 ]
 </BOUCLE_article>
-	<title>[(#NOM_SITE_SPIP|texte_backend)] - <:comments:commentaires:></title>
+	<title>[(#NOM_SITE_SPIP|texte_backend)] - <:comments:comments:></title>
 	<link>#URL_SITE_SPIP/</link>
 	[<description>(#DESCRIPTIF_SITE_SPIP|supprimer_tags|texte_backend)</description>]
 	<language>#LANG</language>

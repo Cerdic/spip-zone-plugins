@@ -4,7 +4,7 @@
 <a href="#forum#ID_FORUM" name="forum#ID_FORUM" id="forum#ID_FORUM"></a>
 	<p class="comment-meta">
 	[(#CONFIG{comments/permalink}|=={aucun}|non)
-		<a rel="self bookmark" href="#forum#ID_FORUM" title="<:comments:permalink_pour:> <:commentaire:> #ID_FORUM" class="permalink">[(#CONFIG{comments/permalink}|=={picto}|?{
+		<a rel="self bookmark" href="#forum#ID_FORUM" title="<:comments:permalink_to:> #ID_FORUM" class="permalink">[(#CONFIG{comments/permalink}|=={picto}|?{
 		[<img src="(#CHEMIN{../img/permalink.gif})" alt="#" />]
 		,
 			[(#CONFIG{comments/permalink}|=={compteur}|?{

@@ -2,7 +2,7 @@
 [(#PARAMETRES_FORUM|?{''})]
 <B_comments-list>
 <div class="comments-list comments-thread">
-	<h2 class="h2"><:comments:commentaires_titre:></h2>
+	<h2 class="h2"><:comments:comments_h2:></h2>
 	<ul class="comments-ul">
 		<BOUCLE_comments-list(FORUMS) {statut IN publie} {id_rubrique ?}{id_article ?}{id_breve ?}{id_syndic ?} {par date}>
 		<li class="comment-li[ (#COMPTEUR_BOUCLE|alterner{'odd','even'})][ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#EXPOSE)]">
