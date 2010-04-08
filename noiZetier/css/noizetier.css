@@ -132,6 +132,9 @@ li.noisette div.saisie_textarea div.valeur {
 	margin-right:5px;
 	padding: 5px;
 }
+li.noisette div.afficher p {
+	display:inline;
+}
 li.noisette div.afficher ul {
 	display:inline;
 }
