@@ -33,11 +33,14 @@
 			<tbody> 
 				<THELIA_CONTENU_PANIER type="PANIER">
 				<tr>
-					<td><THELIA_image type="IMAGE" produit="THELIA-ID" largeur="70" num="1"><img src="THELIA-IMAGE" class="spip_logos" /></THELIA_image> <a href="#URL_PAGE{produit,ref=THELIA-REF}">THELIA-TITRE
+					<td><THELIA_image type="IMAGE" produit="THELIA-ID" largeur="70" num="1"><img src="THELIA-IMAGE" class="spip_logos" /></THELIA_image> 
+						[(#CONFIG{spip_thelia/liens_produits_panier_spip_thelia}|=={"oui"}|oui)<a href="#URL_PAGE{produit,ref=THELIA-REF}">]
+						THELIA-TITRE
 						<THELIA_decval type="DECVAL" article="THELIA-ARTICLE">
 							<br />THELIA-DECLITITRE : THELIA-VALEUR
 						</THELIA_decval>
-						<br />(Ref&nbsp;:&nbsp;THELIA-REF)</a>
+						<br />(Ref&nbsp;:&nbsp;THELIA-REF)
+						[(#CONFIG{spip_thelia/liens_produits_panier_spip_thelia}|=={"oui"}|oui)</a>]
 					</td>
 					<td>THELIA-PRIXU&nbsp;&euro; </td>
     					<form action="[(#URL_PAGE{panier,lang=#LANG}|ancre_url{panier})]" method="post" id="formpanierTHELIA-ARTICLE">
