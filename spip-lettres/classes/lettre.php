@@ -73,6 +73,8 @@
 				$this->extra					= $lettre['extra'];
 				$this->existe					= true;
 			}
+			else
+				$this->id_lettre =-1;
 		}
 		
 
