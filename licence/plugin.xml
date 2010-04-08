@@ -3,9 +3,9 @@
 	<icon>img_pack/licence_logo.png</icon>
 	<auteur>
 	  fanouch - lesguppies@free.fr - <a href="http://www.spip-contrib.net/spip.php?article2147">Site du plugins</a>
-    <br />Sur une idée originale de :  <a href='http://www.spip-contrib.net/Filtre-Licence'>erational</a> 
+    <br />Sur une idée originale de :  <a href='http://www.spip-contrib.net/Filtre-Licence'>erational</a>
 	</auteur>
-	<version>0.1</version>
+	<version>0.2</version>
 	<version_base>0.1</version_base>
 	<etat>test</etat>
 	<description>Permet de relier une licence d'utilisation à un article</description>

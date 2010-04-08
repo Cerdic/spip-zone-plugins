@@ -9,7 +9,7 @@
 $GLOBALS['licence_licences'] = array (
 			"1" 	=> array(
 				# nom de la licence
-				"name" 	=> "Copyright",
+				"name" 	=> _T('licence:titre_copyright'),
 				# numero d'identifiacation de la licence
 				"id"		=> "1",
 				# nom de l'icone de la licence (optionnel)
@@ -18,49 +18,55 @@ $GLOBALS['licence_licences'] = array (
 				# Lien documentaire vers la licence (optionnel)
 				"link"		=> "",
 				# Description un peu plus détaillée de la licence
-				"description" 	=> "&copy; copyright auteur de l'article"),
+				"description" 	=> _T('licence:description_copyright')),
 			"2" 			=> array(
-				"name" 	=> "Gnu GPL",
+				"name" 		=> 	_T('licence:titre_gpl'),
 				"id"		=> "2",
 				"icon"		=> "gnu-gpl.png",
-				"link"		=> "http://www.gnu.org/copyleft/gpl.html",
-				"description" => "licence GPL"),
+				"link"		=> _T('licence:lien_gpl'),
+				"description" => _T('licence:description_gpl')),
 			"3" 			=> array(
-				"name" 	=> "CC by",
+				"name" 		=> _T('licence:titre_cc_by'),
 				"id"		=> "3",
 				"icon"		=> "cc-by.png",
-				"link"		=> "http://creativecommons.org/licenses/by/2.0/fr/",
-				"description" => "Creative Commons - Paternité"),
-			"4" 		=> array(
-				"name" 	=> "CC by-nd",
+				"link"		=> _T('licence:lien_cc_by'),
+				"description" => _T('licence:description_cc_by')),
+			"4" 			=> array(
+				"name" 		=> _T('licence:titre_cc_by_nd'),
 				"id"		=> "4",
 				"icon"		=> "cc-by-nd.png",
-				"link"		=> "http://creativecommons.org/licenses/by-nd/2.0/fr/",
-				"description" => "Creative Commons - Paternité pas de modification"),
-			"5" 	=> array(
-				"name" 	=> "CC by-nc-nd",
+				"link"		=> _T('licence:lien_cc_by_nd'),
+				"description" => _T('licence:description_cc_by_nd')),
+			"5" 			=> array(
+				"name" 		=> _T('licence:titre_cc_by_nc_nd'),
 				"id"		=> "5",
 				"icon"		=> "cc-by-nc-nd.png",
-				"link"		=> "http://creativecommons.org/licenses/by-nc-nd/2.0/fr/",
-				"description" => "Creative Commons - Paternité Pas d'Utilisation Commerciale Pas de Modification"),
-			"6" 		=> array(
-				"name" 	=> "CC by-nc",
+				"link"		=> _T('licence:lien_cc_by_nc_nd'),
+				"description" => _T('licence:description_cc_by_nc_nd')),
+			"6" 			=> array(
+				"name" 		=> _T('licence:titre_cc_by_nc'),
 				"id"		=> "6",
 				"icon"		=> "cc-by-nc.png",
-				"link"		=> "http://creativecommons.org/licenses/by-nc/2.0/fr/",
-				"description" => "Creative Commons - Paternité Pas d'Utilisation Commerciale"),
-			"7" 	=> array(
-				"name" 	=> "CC by-nc-sa",
+				"link"		=> _T('licence:lien_cc_by_nc'),
+				"description" => _T('licence:description_cc_by_nc')),
+			"7" 			=> array(
+				"name" 		=> _T('licence:titre_cc_by_nc_sa'),
 				"id"		=> "7",
 				"icon"		=> "cc-by-nc-sa.png",
-				"link"		=> "http://creativecommons.org/licenses/by-nc-sa/2.0/fr/",
-				"description" => "Creative Commons - Paternité Pas d'Utilisation Commerciale Partage des Conditions Initiales à l'Identique"),
-			"8" 		=> array(
-				"name" 	=> "CC by-sa",
+				"link"		=> _T('licence:lien_cc_by_nc_sa'),
+				"description" => _T('licence:description_cc_by_nc_sa')),
+			"8" 			=> array(
+				"name" 		=> _T('licence:titre_cc_by_sa'),
 				"id"		=> "8",
 				"icon"		=> "cc-by-sa.png",
-				"link"		=> "http://creativecommons.org/licenses/by-sa/2.0/fr/",
-				"description" => "Creative Commons - Paternité Partage des Conditions Initiales à l'Identique")
+				"link"		=> _T('licence:lien_cc_by_sa'),
+				"description" => _T('licence:description_cc_by_sa')),
+			"9" 			=> array(
+				"name" 		=> _T('licence:titre_art_libre'),
+				"id"		=> "9",
+				"icon"		=> "copyleft-24.png",
+				"link"		=> _T('licence:lien_art_libre'),
+				"description" => _T('licence:description_art_libre')),
 );
 
 ?>
