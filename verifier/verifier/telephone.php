@@ -3,11 +3,10 @@
 // Sécurité
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-/**
- * Un nombre est composé de chiffres
+/*
+ * Vérifie un numéro de téléphone. Pour l'instant seulement avec le schéma français.
  */
-
-function verifier_telephone_fr_dist($valeur, $options=array()){
+function verifier_telephone_dist($valeur, $options=array()){
 	$erreur = _T('verifier:erreur_telephone');
 	$ok = '';
 	// On accepte differentes notations, les points, les tirets, les espaces, les slashes

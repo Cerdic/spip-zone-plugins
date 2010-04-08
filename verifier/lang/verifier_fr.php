@@ -48,8 +48,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type_siret_description' => 'V&eacute;rifie que la valeur est un num&eacute;ro valide du <a href="http://fr.wikipedia.org/wiki/SIRET">Syst&egrave;me d&rsquo;Identification du R&eacute;pertoire des ETablissements</a> fran&ccedil;ais.',
 	'type_taille' => 'Taille',
 	'type_taille_description' => 'V&eacute;rifie que la taille de la valeur correspond au minimum et/ou au maximum demand&eacute;.',
-	'type_telephone_fr' => 'Num&eacute;ro de t&eacute;l&eacute;phone fran&ccedil;ais',
-	'type_telephone_fr_description' => 'V&eacute;rifie que le num&eacute;ro de t&eacute;l&eacute;phone correspond au sh&eacute;ma fran&ccedil;ais.'
+	'type_telephone' => 'Num&eacute;ro de t&eacute;l&eacute;phone',
+	'type_telephone_description' => 'V&eacute;rifie que le num&eacute;ro de t&eacute;l&eacute;phone correspond &agrave; un sch&eacute;ma reconnu.'
 );
 
 ?>
