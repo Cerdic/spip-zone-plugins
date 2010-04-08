@@ -11,7 +11,7 @@
 
  Insere une grille de mots croises dans vos articles !
 ------------------------------------------------------
- Idee originale de Maieul ROUQUETTE
+ Idee originale de Ma•eul ROUQUETTE
 ------------------------------------------------------
 
 separateurs obligatoires : [horizontal], [vertical], [solution]
@@ -21,7 +21,8 @@ parametres de configurations par defaut :
 	fondnoir=noir	// couleur des cases noires
 	compact=non		// Definitions en format compact ?
 	type=0			// types de grilles : 0 ou 1
-
+    vertical=chiffres // on met des chiffres en vertical
+    horizontal=lettres // on met des lettres en horizontal
 Exemple de syntaxe dans l'article :
 -----------------------------------
 
@@ -53,11 +54,13 @@ function lettre_grille($chiffre) {
 // affiche la grille de mot croises, avec la solution au cas ou
 function affichage_grille_mc($tableau_grille, $indexJeux, $form, $solution=false){
 	$jeux_couleurs = _request('jeux_couleurs');
-	
 	// les variables de la grille
 	$hauteur = sizeof($tableau_grille);
     $largeur = sizeof($tableau_grille[0]);
     $grille = '';
+    
+    $type_vertical      =   jeux_config('vertical');
+    $type_horizontal    =   jeux_config('horizontal');
 
     // entetes : formulaire + grille
     $grille .= (!$solution)
@@ -69,16 +72,21 @@ function affichage_grille_mc($tableau_grille, $indexJeux, $form, $solution=false
 	
 	
 	// les cellules d'entetes verticales
-	for($i = 1; $i<=$largeur; $i++) $grille .= "\t\t<th scope=\"col\">$i</th>\n";
+	for($i = 1; $i<=$largeur; $i++){ 
+	   $entete_colonne = $type_vertical == 'lettres' ? lettre_grille($i) :  $i ;
+	   $grille .= "\t\t<th scope=\"col\">$entete_colonne</th>\n";
+	   }
 	$grille .= "\t</tr>\n";		
 	
 	// debut affichage des lignes
 	foreach($tableau_grille as $ligne =>$contenu_ligne){
 		$ligne++;
-		$grille .= "\t<tr>\n\t<th scope=\"row\">".lettre_grille($ligne)."</th>\n";	// numeros de ligne
+		$entete_ligne = $type_horizontal=='chiffres'?$ligne:lettre_grille($ligne);
+		$grille .= "\t<tr>\n\t<th scope=\"row\">".$entete_ligne."</th>\n";	// numeros de ligne
 		
 		foreach ($contenu_ligne as $colonne =>$cellule){
 		    $colonne++;
+		    $entete_colonne = $type_vertical == 'lettres' ? lettre_grille($colonne) :  $colonne;
 			$class = $ligne==$hauteur?($colonne==$largeur?' class="jeux_bas jeux_droite"':' class="jeux_bas"'):($colonne==$largeur?' class="jeux_droite"':'');
 			$classnoir = ' class="jeux_noir' . ($ligne==$hauteur?($colonne==$largeur?' jeux_bas jeux_droite':' jeux_bas'):($colonne==$largeur?' jeux_droite':'')) . '"';
 		    // s'il s'agit d'un noir
@@ -93,8 +101,8 @@ function affichage_grille_mc($tableau_grille, $indexJeux, $form, $solution=false
 					$name = 'GR'.$indexJeux.'x'.$colonne.'x'.$ligne;
 					$valeur = _request($name);
 					$grille .= "\t\t<td$class><label for=\"$name\">"
-						. _T('jeux:ligne_n', array('n'=>lettre_grille($ligne))).';'
-						. _T('jeux:colonne_n', array('n'=>$colonne)).'</label>'
+						. _T('jeux:ligne_n', array('n'=>$entete_ligne)).';'
+						. _T('jeux:colonne_n', array('n'=>$entete_colonne)).'</label>'
 						. '<input type="text" maxlength="1" '
 						. ((isset($valeur) and $valeur!='')? 'value="'.$valeur:'')
 						.'" name="'.$name.'" id="'.$name.'" />'
@@ -180,13 +188,19 @@ function jeux_listes_compacte($texte, $alpha) {
 function affichage_definitions($horizontal, $vertical) {
  if (jeux_config('compact')) return 
  		'<p><strong>'._T('motscroises:horizontalement').'&nbsp;</strong>'
-		.jeux_listes_compacte($horizontal, true) 
+		.jeux_listes_compacte($horizontal, jeux_config('horizontal')=='lettres') 
  		.'<br /><strong>'._T('motscroises:verticalement').'&nbsp;</strong>'
-		.jeux_listes_compacte($vertical, false).'</p>';
- else return '<div class="spip jeux_horizontal"><h4 class="spip jeux_grille">'
-		._T('motscroises:horizontalement')."</h4>\n".jeux_listes($horizontal).'</div>'
-	. '<div class="spip jeux_vertical"><h4 class="spip jeux_grille">'
+		.jeux_listes_compacte($vertical, jeux_config('vertical')=='lettres').'</p>';
+ else
+    $liste_horizontal = jeux_config('horizontal')=='chiffres'?'<div class="spip jeux_horizontal jeux_liste_chiffres">':'<div class="spip jeux_horizontal jeux_liste_lettres">';
+    
+    $liste_horizontal .= '<h4 class="spip jeux_grille">'
+		._T('motscroises:horizontalement')."</h4>\n".jeux_listes($horizontal).'</div>';
+		
+	$liste_vertical = jeux_config('vertical')=='lettres'?'<div class="spip jeux_vertical jeux_liste_lettres">':'<div class="spip jeux_vertical jeux_liste_chiffres">';
+	$liste_vertical .= '<h4 class="spip jeux_grille">'
 		._T('motscroises:verticalement')."</h4>\n".jeux_listes($vertical).'</div>';
+    return $liste_horizontal.$liste_vertical;
 }
 
 // configuration par defaut : jeu_{mon_jeu}_init()
@@ -196,12 +210,15 @@ function jeux_mots_croises_init() {
 		fondnoir=noir	// couleur des cases noires
 		compact=non		// Definitions en format compact ?
 		type=0			// types de grilles : 0 ou 1
+		vertical=chiffres // on met des chiffres en vertical
+		horizontal=lettres // on met des lettres en horizontal
 	";
 }
 	
 // decode une grille de mots croises 
 // traitement du jeu : jeu_{mon_jeu}()
 function jeux_mots_croises($texte, $indexJeux, $form=true) {
+    
 	$horizontal = $vertical = $solution = $html = false;
 	$titre = _T('motscroises:titre');
     // parcourir tous les #SEPARATEURS

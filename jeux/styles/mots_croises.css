@@ -29,11 +29,11 @@ table.motscroises0 {
 	margin-left:3%;
 }
 
-.jeux_horizontal li{
+.jeux_liste_lettres li{
 	list-style-type:upper-alpha; 
 }
 
-.jeux_vertical li{
+.jeux_liste_chiffres li{
 	list-style-type:decimal; 
 }
 
