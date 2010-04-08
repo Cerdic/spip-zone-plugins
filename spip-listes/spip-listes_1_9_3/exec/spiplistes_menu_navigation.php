@@ -12,6 +12,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/spiplistes_api_globales');
+include_spip('inc/actions');
 
 function exec_spiplistes_menu_navigation () {
 

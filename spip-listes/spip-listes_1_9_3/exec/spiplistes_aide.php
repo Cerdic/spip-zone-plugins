@@ -54,7 +54,7 @@ function exec_spiplistes_aide () {
 		changer_langue($var_lang);
 	}
 		
-	$info = plugin_get_infos(spiplistes_get_meta_dir(_SPIPLISTES_PREFIX));
+	$info = spiplistes_plugin_get_infos(spiplistes_get_meta_dir(_SPIPLISTES_PREFIX));
 	$nom = typo($info['nom']);
 	$version = typo($info['version']);
 		

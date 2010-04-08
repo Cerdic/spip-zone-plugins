@@ -861,6 +861,17 @@ function spiplistes_compacter_script ($source, $format) {
 	return($source);
 } // end spiplistes_compacter_script()
 
+function spiplistes_plugin_get_infos($plug) {
+	if(version_compare($GLOBALS['spip_version_code'],'15375','>=')) {
+		$get_infos = charger_fonction('get_infos','plugins');
+		$infos = $get_infos($plug);
+	}
+	else {
+		$infos = plugin_get_infos($plug);
+	}
+	return($infos);
+}
+
 /*
  * @return petite signature de plugin (version plugin, version base, version jquery)
  * @param $prefix string prefix du plugin
@@ -868,7 +879,7 @@ function spiplistes_compacter_script ($source, $format) {
  * @param $verifier_svn si true
  */
 function spiplistes_html_signature ($prefix, $html = true, $verifier_svn = false) {
-	$info = plugin_get_infos(spiplistes_get_meta_dir($prefix));
+	$info = spiplistes_plugin_get_infos(spiplistes_get_meta_dir($prefix));
 	$nom = typo($info['nom']);
 	$version = typo($info['version']);
 	//$base_version = typo($info['version_base']); // cache ?
@@ -997,7 +1008,7 @@ function spiplistes_boite_meta_info ($prefix) {
 	$result = false;
 	if(!empty($prefix)) {
 		$meta_info = spiplistes_get_meta_infos($prefix); // dir et version
-		$info = plugin_get_infos($meta_info['dir']);
+		$info = spiplistes_plugin_get_infos($meta_info['dir']);
 		$icon = 
 			(isset($info['icon']))
 			? "<div "

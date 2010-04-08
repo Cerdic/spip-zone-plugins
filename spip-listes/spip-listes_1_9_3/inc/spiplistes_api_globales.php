@@ -94,6 +94,7 @@ function spiplistes_spip_est_inferieur_193 () {
 	return($is_inf);
 }
 
+
 /*
  * ecrire dans la table 'spip_meta' le champ...
  * en general pour les preferences
