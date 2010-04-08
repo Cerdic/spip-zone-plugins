@@ -137,7 +137,7 @@
 
 		$onglet_proprietes = $dater($lettre->id_lettre, true, $lettre->statut, 'lettre', 'lettres', $lettre->date);
 		$onglet_proprietes.= $renvoi;
-		$onglet_proprietes.= $editer_mots('lettre', $lettre->id_lettre, $cherche_mot, $select_groupe, ($lettre->statut == 'brouillon'), '', 'lettres');
+		$onglet_proprietes.= $editer_mots('lettre', $lettre->id_lettre, $cherche_mot, $select_groupe, $flag_editable, '', 'lettres');
 		$onglet_proprietes.= $editer_auteurs('lettre', $lettre->id_lettre, ($lettre->statut == 'brouillon'), '', 'lettres');
 		$onglet_proprietes.= $articles;
 

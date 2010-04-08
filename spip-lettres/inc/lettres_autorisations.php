@@ -33,6 +33,11 @@ function autoriser_lettres_dist($faire, $type, $id, $qui, $opt) {
 	}
 }
 
+
+function autoriser_lettre_editermots_dist($faire,$quoi,$id,$qui,$opts){
+	return autoriser_rubrique_editermots_dist($faire,'lettre',0,$qui,$opts);
+}
+
 function autoriser_lettre_modifier_dist($faire, $type, $id, $qui, $opt){
 	$statut = sql_getfetsel('statut', 'spip_lettres', 'id_lettre='.intval($id));
 	if ($statut=='brouillon')
