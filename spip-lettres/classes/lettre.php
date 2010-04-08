@@ -222,14 +222,14 @@
 		
 		
 		function callback_images($matches) {
-			global $i;
+			global $image_index;
 			$image = $matches[2];
 			if (file_exists($image)) {
 				$tab = explode('.', basename($image));
-				$copie = _DIR_LETTRES.'lettre-'.$this->id_lettre.'-'.$i.'.'.$tab[1];
-				$i++;
+				$copie = _DIR_LETTRES.'lettre-'.$this->id_lettre.'-'.$image_index.'.'.$tab[1];
+				$image_index++;
 				if (copy($image, $copie))
-					return 'src="'.$copie.'"';
+					$image = $copie;
 			}
 			return 'src="'.$image.'"';
 		}
@@ -245,12 +245,10 @@
 				sql_delete('spip_abonnes_clics', 'id_lettre='.intval($this->id_lettre));
 			}
 
-			$this->message_html = preg_replace_callback('/(href=")(.*?)(")/i', array($this, 'callback_clic_html'), $this->message_html);
-			$this->message_html = preg_replace_callback("/(href=')(.*?)(')/i", array($this, 'callback_clic_html'), $this->message_html);
-			global $i;
-			$i = 1;
-			$this->message_html = preg_replace_callback('/(src=")(.*?)(")/i', array($this, 'callback_images'), $this->message_html);
-			$this->message_html = preg_replace_callback("/(src=')(.*?)(')/i", array($this, 'callback_images'), $this->message_html);
+			$this->message_html = preg_replace_callback('/(href=["\'])([^\'"]*?)(["\'])/i', array($this, 'callback_clic_html'), $this->message_html);
+			global $image_index;
+			$image_index = 1;
+			$this->message_html = preg_replace_callback('/(src=["\'])([^\'"]*?)(["\'])/i', array($this, 'callback_images'), $this->message_html);
 			$this->message_texte = preg_replace_callback('/http:[^\s]*/', array($this, 'callback_clic_texte'), $this->message_texte);
 			
 			sql_updateq('spip_lettres', array('message_html' => $this->message_html, 'message_texte' => $this->message_texte, 'maj' => 'NOW()'), 'id_lettre='.intval($this->id_lettre));
