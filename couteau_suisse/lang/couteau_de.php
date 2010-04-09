@@ -15,8 +15,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
 	'base_donnees' => 'Datenbank',
-	'bloc_deplier' => 'D&eacute;plier', # NEW
-	'bloc_replier' => 'Replier', # NEW
+	'bloc_deplier' => 'Aufklappen',
+	'bloc_replier' => 'Zuklappen',
 
 	// C
 	'colorer_fond' => 'Hintergrundfarbe',
