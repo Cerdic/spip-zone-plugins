@@ -8,7 +8,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'activation_barre_impossible' => 'Un autre plugin interdit l\'usage du porte-plume dans l\'espace public.', # NEW
+	'activation_barre_impossible' => 'Another plugin is preventing the use of  porte-plume on the public site.',
 	'annuler' => 'Cancel',
 
 	// D
@@ -20,26 +20,26 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_@type@_@id@' => 'Edit the whole @type@ @id@',
 	'editer_tout' => 'Edit as a whole',
 	'effets' => 'Effects',
-	'explication_exec_autorise' => 'Pages autoris&eacute;es &agrave; la modification
-		(?exec=...) : (, pour s&eacute;parer les exec).', # NEW
-	'explication_reduire_logo' => 'R&#233;duire le logo s\'il d&#233;passe
-		la taille maximale indiquee en pixels. Exemple : 100. (0 = jamais)', # NEW
+	'explication_exec_autorise' => 'Pages which are open for modification
+  (?exec=...) : (, separate the exec).',
+	'explication_reduire_logo' => 'Reduce the logo if it exceeds
+  the maximum size (in pixels) Example: 100. (0 = never)',
 
 	// L
-	'label_activer_barre_typo' => 'Activer la barre typographique dans les crayons ?', # NEW
-	'label_activer_crayons_prive' => 'Activer crayons pour la partie priv&eacute;e.', # NEW
-	'label_barre_typo' => 'Barre typographique', # NEW
-	'label_clickhide' => 'Un clic en-dehors masque les crayons', # NEW
-	'label_effets' => 'Choix des effets', # NEW
-	'label_espaceprive' => 'Crayons dans le priv&eacute; ?', # NEW
-	'label_exec_autorise' => 'Pages autoris&eacute;es', # NEW
-	'label_filet' => 'Filet', # NEW
-	'label_message' => 'Obtenir un message', # NEW
-	'label_msg_abandon' => 'Sur abandon', # NEW
-	'label_msg_no_change' => 'Si pas de changement', # NEW
-	'label_reduire_logo' => 'R&eacute;duire les logos', # NEW
-	'label_yellow_fade' => 'Fade', # NEW
-	'legend_editer_prive' => '&Eacute;diter l\'espace priv&eacute; (exp&eacute;rimental)', # NEW
+	'label_activer_barre_typo' => 'Activate the typographical bar for &laquo;crayons&raquo;?',
+	'label_activer_crayons_prive' => 'Activate &laquo;crayons&raquo; for the editing area.',
+	'label_barre_typo' => 'Typographical bar',
+	'label_clickhide' => 'A click outside the area closes &laquo;caryons&raquo;',
+	'label_effets' => 'Choice of effects',
+	'label_espaceprive' => 'Use &laquo;crayons&raquo; in the editing area?',
+	'label_exec_autorise' => 'Pages authorised',
+	'label_filet' => 'Line',
+	'label_message' => 'Show a message',
+	'label_msg_abandon' => 'On cancelling',
+	'label_msg_no_change' => 'If no change made',
+	'label_reduire_logo' => 'Reduce logos',
+	'label_yellow_fade' => 'Fade',
+	'legend_editer_prive' => 'Use in editing area (experimental)',
 
 	// M
 	'messages' => 'Messages',
@@ -58,7 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'svp_copier_coller' => 'Sorry, copy/paste your changes and retry',
 
 	// T
-	'titre_config_crayons' => 'Configurer les crayons', # NEW
+	'titre_config_crayons' => 'Configure &laquo;crayons&raquo;',
 
 	// U
 	'update_impossible' => 'The update did not succeed.',
