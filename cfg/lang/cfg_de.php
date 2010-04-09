@@ -56,7 +56,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reset' => 'Reset',
 
 	// S
-	'supprimer' => 'L&ouml;schen'
+	'supprimer' => 'L&ouml;schen', # MODI
 );
 
 ?>
