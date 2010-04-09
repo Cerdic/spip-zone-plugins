@@ -8,11 +8,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'alerte_effacement' => 'Confirmez l\'effacement des donn&eacute;es de configuration de contact.', # NEW
-	'aucun_message' => 'Aucun message &agrave; afficher', # NEW
+	'alerte_effacement' => 'Best&auml;tigen sie das L&ouml;schen der Kontaktinformationen.',
+	'aucun_message' => 'Keine Nachricht',
 
 	// B
-	'bouton_effacer' => 'Gommer', # NEW
+	'bouton_effacer' => 'L&ouml;schen',
 
 	// C
 	'champ_adresse' => 'Postanschrift',
@@ -32,38 +32,38 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_telephone' => 'T&eacute;l&eacute;phone',
 	'champ_texte' => 'Text',
 	'champ_ville' => 'Stadt',
-	'configuration_barre_impossible' => 'Un autre plugin interdit l\'usage du porte-plume dans l\'espace public, les r&eacute;glages ci-dessous seront sans effets.', # NEW
-	'configuration_barre_oui' => 'Afficher la barre typo compl&egrave;te.', # NEW
-	'configuration_champs_message' => 'R&eacute;glage du porte-plume.', # NEW
-	'configuration_champs_message_explication' => 'R&eacute;glage de la barre typographique associ&eacute;e au texte du message.', # NEW
+	'configuration_barre_impossible' => 'Ein anderes Plugin verhindert die Benutzung des Federhalters im &ouml;ffentlichen Bereich. Die unten stehenden Einstellungen haben keine Auswirkungen.',
+	'configuration_barre_oui' => 'Vollst&auml;ndige Funktionsleiste anzeigen.',
+	'configuration_champs_message' => 'Einstellungen des Federhalters.',
+	'configuration_champs_message_explication' => 'Einstellungen f&uuml;r die typografische Funktionsleiste zum Text der Nachricht.',
 	'configuration_description' => 'Setzt das Kontaktformular.',
 	'configuration_destinataires' => 'Adressaten',
 	'configuration_destinataires_explication' => 'W&auml;hlen Sie einen oder mehrere Autoren, dass die Besucher Kontakt aufnehmen k&ouml;nnen. Wenn nichts definiert ist, ist der Autor Nummer 1 (die Installation der Website) verwendet werden.',
 	'configuration_destinataires_plusieurs' => 'Lassen Sie die Besucher an <b>mehrere</b> Empf&auml;nger w&auml;hlen',
-	'configuration_destinataires_plusieurs_et' => '... major&eacute;e par les auteurs &eacute;ventuellement transmis au formulaire.', # NEW
-	'configuration_destinataires_plusieurs_ou' => '... ou parmi le groupe d\'auteurs &eacute;ventuellement transmis au formulaire', # NEW
+	'configuration_destinataires_plusieurs_et' => '... um die Autoren erg&auml;nzen, die eventuell dem Formular &uuml;bergeben werden.',
+	'configuration_destinataires_plusieurs_ou' => '... oder aus der Gruppe Autoren, die eventuell dem Formular &uuml;bergeben werden',
 	'configuration_destinataires_tous' => 'Place <b>all</b> den Autoren der E-Mail-Empf&auml;nger',
-	'configuration_destinataires_tous_et' => '... leur ajouter le groupe d\'auteurs &eacute;ventuellement transmis au formulaire', # NEW
-	'configuration_destinataires_tous_ou' => '... ou seulement ceux &eacute;ventuellement transmis au formulaire', # NEW
+	'configuration_destinataires_tous_et' => '... die Autorengruppe hinzuf&uuml;gen, die eventuell dem Formular &uuml;bergeben werden',
+	'configuration_destinataires_tous_ou' => '... oder nur die, welche eventuell dem Formular &uuml;bergeben werden',
 	'configuration_destinataires_un' => 'Erm&ouml;glichen den Besuchern, w&auml;hlen Sie <b>einen</b> Empf&auml;nger',
-	'configuration_destinataires_un_et' => '... major&eacute;e par les auteurs &eacute;ventuellement transmis au formulaire.', # NEW
-	'configuration_destinataires_un_ou' => '... ou parmi le groupe d\'auteurs &eacute;ventuellement transmis au formulaire', # NEW
+	'configuration_destinataires_un_et' => '... um die Autoren erg&auml;nzt, welche eventuell dem Formular &uuml;bergeben werden',
+	'configuration_destinataires_un_ou' => '... oder aus den Autoren, welche eventuell dem Formular &uuml;bergeben werden',
 	'configuration_intro' => 'Einf&uuml;hrung',
 	'configuration_intro_explication' => 'Geben Sie einen beliebigen Text, der die Form einf&uuml;hren wird.',
-	'configuration_no_barre' => 'Ne pas proposer de barre typo.', # NEW
-	'configuration_no_previsualisation' => 'Afficher la barre typo sans le bouton de pr&eacute;visualisation.', # NEW
+	'configuration_no_barre' => 'Keine Funktionsleiste anzeigen.',
+	'configuration_no_previsualisation' => 'Funktionsleiste ohne Vorschau-Schaltfl&auml;che anzeigen.',
 	'configuration_pj' => 'Anh&auml;nge',
 	'configuration_pj_autoriser' => 'Lassen Sie Senden von Anh&auml;ngen',
 	'configuration_pj_facteur_absent' => 'Um diese Funktion zu nutzen, m&uuml;ssen Sie das Plugin-Faktor.',
 	'configuration_pj_nb_max' => 'Maximale Anzahl an Dateianh&auml;ngen',
-	'configuration_regle_liste_explication' => 'Choisissez une r&egrave;gle de calcul de la liste des destinataires potentiels et de la m&eacute;thode de s&eacute;lection propos&eacute;e &agrave; l\'internaute.', # NEW
+	'configuration_regle_liste_explication' => 'W&auml;hlen sie die Art, wie die Liste der potentiellen Empf&auml;nger zusammengestellt und dem Besucher angezeigt wird.',
 	'consulter_memoire' => 'Diese Meldung wird auf Ihrer Website protokolliert:',
 	'courriel_de' => 'Von',
 	'courriel_pour' => 'F&uuml;r',
 
 	// D
 	'deplacement_possible' => 'Vertikale Verschiebung per Drag and Drop',
-	'description_menu_contact' => '&Eacute;l&eacute;ment de menu vers la page du formulaire de contact', # NEW
+	'description_menu_contact' => 'Eintrag im Men&uuml; zum Kontaktformular',
 
 	// F
 	'form_destinataire' => 'W&auml;hlen Sie ein Reiseziel',
@@ -79,10 +79,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forum_attention_nbre_caracteres' => '<b>Achtung!</b> Ihr Beitrag ist muss mindestens @nbre_caract@ Zeichen lang sein.',
 
 	// H
-	'horodatage' => 'Formular erstellt am: @horodatage@.',
+	'horodatage' => 'Formular abgeschickt am: @horodatage@.',
 
 	// I
-	'inforigine' => 'Information transmise par le formulaire : ', # NEW
+	'inforigine' => 'Mit dem Formular gesendete Information: ',
 	'informez_moi' => 'Ich stimme zu, von E-Mails, Informationen &uuml;ber Ihre Organisation zu erhalten',
 	'infos_collecte' => 'Informationen gesammelt',
 	'infos_supplementaires' => 'Weitere Informationen',
@@ -101,7 +101,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'msg_supprimer_message' => 'L&ouml;schen Sie die Nachricht',
 
 	// P
-	'preselection' => 'D&eacute;cocher tous les items de la liste de destinataires', # NEW
+	'preselection' => 'Alle Eintr&auml;ge in der Empf&auml;ngerliste abw&auml;hlen',
 
 	// S
 	'sauv_message' => 'Nachrichten speichern Kontakt',
@@ -111,7 +111,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'titre' => 'Kontaktformular',
-	'titre_court' => 'Contact', # NE
+	'titre_court' => 'Kontakt'
 );
 
 ?>
