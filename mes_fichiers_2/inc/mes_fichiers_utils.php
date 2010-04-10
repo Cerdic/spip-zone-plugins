@@ -3,17 +3,23 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Renvoie la liste des fichiers et repertoires a sauver
 function mes_fichiers_a_sauver() {
+	if(defined('_DIR_SITE')){
+		$dir_racine = _DIR_SITE;
+	}else{
+		$dir_racine = _DIR_RACINE;
+	}
 
-	$mes_options = defined('_FILE_OPTIONS') ? _FILE_OPTIONS : _DIR_RACINE.'config/mes_options.php';
-	$htaccess = defined('_ACCESS_FILE_NAME') ? _DIR_RACINE._ACCESS_FILE_NAME : _DIR_RACINE.'.htaccess';
-	$IMG = defined('_DIR_IMG') ? _DIR_IMG: _DIR_RACINE.'IMG/';
-	$tmp_dump = defined('_DIR_DUMP') ? _DIR_DUMP: _DIR_RACINE.'tmp/dump/';
+	$htaccess = defined('_ACCESS_FILE_NAME') ? $dir_racine._ACCESS_FILE_NAME : $dir_racine.'.htaccess';
+	$IMG = defined('_DIR_IMG') ? _DIR_IMG: $dir_racine.'IMG/';
+	$tmp_dump = defined('_DIR_DUMP') ? _DIR_DUMP: $dir_racine.'tmp/dump/';
 
 	$liste = array();
 
 	// le fichier d'options si il existe
-	if (@is_readable($mes_options))
-		$liste[] = $mes_options;
+	if (@is_readable($f = $dir_racine . _NOM_PERMANENTS_INACCESSIBLES . _NOM_CONFIG . '.php')
+	OR (!defined('_DIR_SITE') && @is_readable($f = _FILE_OPTIONS))){
+		$liste[] = $f;
+	}
 	// le fichier .htaccess a la racine qui peut contenir des persos
 	if (@is_readable($htaccess))
 		$liste[] = $htaccess;
@@ -23,13 +29,13 @@ function mes_fichiers_a_sauver() {
 	// le(s) dossier(s) des squelettes nommes
 	if (strlen($GLOBALS['dossier_squelettes']))
 		foreach (explode(':', $GLOBALS['dossier_squelettes']) as $_dir) {
-			$dir = ($_dir[0] == '/' ? '' : _DIR_RACINE) . $_dir . '/';
+			$dir = ($_dir[0] == '/' ? '' : $dir_racine) . $_dir . '/';
 			if (@is_dir($dir))
 				$liste[] = $dir;
 		}
 	else
-		if (@is_dir(_DIR_RACINE.'squelettes/'))
-			$liste[] = _DIR_RACINE.'squelettes/';
+		if (@is_dir($dir_racine.'squelettes/'))
+			$liste[] = $dir_racine.'squelettes/';
 	// le dernier fichier de dump de la base
 	$dump = preg_files($tmp_dump);
 	$fichier_dump = '';
@@ -117,6 +123,20 @@ function mes_fichiers_voir_zip($zip) {
 			echo "File $i / [$key] = ".$list[$i][$key]."<br>";
 		}
 		echo "<br>";
+	}
+}
+
+/**
+ * On vérifie si on est dans une mutu, si oui on affiche un chemin plus propre
+ *
+ * @param string $rep
+ */
+function mes_fichiers_joli_repertoire($rep){
+	if(defined('_DIR_SITE') && preg_match(','._DIR_SITE.',',$rep)){
+		$rep = str_replace(_DIR_SITE,'',$rep);
+		return $rep;
+	}else{
+		return joli_repertoire($rep);
 	}
 }
 ?>
