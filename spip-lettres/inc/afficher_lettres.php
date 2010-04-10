@@ -61,7 +61,7 @@
 		}
 		$s.= typo($lettre->titre);
 		if (($GLOBALS['meta']['multi_rubriques'] == 'oui') OR ($GLOBALS['meta']['multi_articles'] == 'oui'))
-			if ($GLOBALS['auteur_session']['lang'] != $lettre->lang)
+			if ($GLOBALS['visiteur_session']['lang'] != $lettre->lang)
 				$s.= " <font size='1' color='#666666'$dir_lang>(".traduire_nom_langue($lettre->lang).")</font>";
 		$s.= "</a>";
 		$s.= "</div>";

@@ -176,8 +176,7 @@
 		
 		
 		function enregistrer_abonnement($id_rubrique=0) {
-			global $connect_statut;
-			if ($connect_statut == '0minirezo' or lettres_rubrique_autorisee($id_rubrique)) {
+			if (autoriser('abonner','rubrique',$id_rubrique) OR lettres_rubrique_autorisee($id_rubrique)) {
 				if (sql_countsel('spip_abonnes_rubriques', 'id_abonne='.intval($this->id_abonne).' AND id_rubrique='.intval($id_rubrique)))
 					sql_updateq('spip_abonnes_rubriques', array('statut' => 'a_valider', 'date_abonnement' => 'NOW()'), 'id_abonne='.intval($this->id_abonne).' AND id_rubrique='.intval($id_rubrique));
 				else
@@ -378,8 +377,7 @@
 		
 		
 		function valider_abonnement($id_rubrique=0, $partie_publique=false) {
-			global $connect_statut;
-			if ($connect_statut == '0minirezo' or lettres_rubrique_autorisee($id_rubrique)) {
+			if (autoriser('validerabonnement','rubrique',$id_rubrique) OR lettres_rubrique_autorisee($id_rubrique)) {
 				sql_updateq('spip_abonnes_rubriques', array('statut' => 'valide', 'date_abonnement' => 'NOW()'), 'id_abonne='.intval($this->id_abonne).' AND id_rubrique='.intval($id_rubrique));
 				$this->enregistrer_maj();
 			}
@@ -397,12 +395,11 @@
 		
 		
 		function valider_desabonnement($id_rubrique=0) {
-			global $connect_statut;
 			if ($id_rubrique == -1) {
 				$this->memoriser_desabonnement();
 				$this->supprimer();
 			} else {
-				if ($connect_statut == '0minirezo' or lettres_rubrique_autorisee($id_rubrique))
+				if (autoriser('validerdesabonnement','rubrique',$id_rubrique) or lettres_rubrique_autorisee($id_rubrique))
 					sql_delete('spip_abonnes_rubriques', 'id_abonne='.intval($this->id_abonne).' AND id_rubrique='.intval($id_rubrique));
 			}
 			$this->enregistrer_maj();

@@ -55,7 +55,7 @@ function formulaires_editer_lettre_traiter_dist($id_lettre,$id_rubrique,$retour)
 
 	$lettre->enregistrer();
 	if (!intval($id_lettre))
-		$lettre->enregistrer_auteur($GLOBALS['auteur_session']['id_auteur']);
+		$lettre->enregistrer_auteur($GLOBALS['visiteur_session']['id_auteur']);
 
 	$retour = parametre_url($retour,'id_lettre',$lettre->id_lettre);
 
