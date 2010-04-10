@@ -7,16 +7,7 @@
 #-----------------------------------------------------#
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// compatibilite spip 1.9
-if(!function_exists(ajax_retour)) { 
-	function ajax_retour($corps) {
-		$c = $GLOBALS['meta']["charset"];
-		header('Content-Type: text/html; charset='. $c);
-		$c = '<' . "?xml version='1.0' encoding='" . $c . "'?" . ">\n";
-		echo $c, $corps;
-		exit;
-	}
-}
+include_spip('inc/actions');
 
 // fonction generique appelee par ?exec=action_rapide&arg=mon_outil|argument (pipe obligatoire)
 // la fonction mon_outil_argument_action_rapide() est apellee apres un include_spip('outils/mon_outil_action_rapide')
