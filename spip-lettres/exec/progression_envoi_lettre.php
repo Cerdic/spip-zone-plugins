@@ -37,11 +37,15 @@ function exec_progression_envoi_lettre() {
 		echo "</p>";
 	}
 	echo "<em style='display:none;'>$envois_restants</em>";
+	echo recuperer_fond('modeles/object_jobs_list',array('id_objet'=>$lettre->id_lettre,'objet'=>'lettre'));
 	echo '</div>';
 	// changer le statut si besoin, puisqu'on le voit !
-	if (!$envois_restants AND $lettre->statut=='envoi_en_cours'){
-		$lettre->enregistrer_statut('envoyee');
+	if (!$envois_restants) {
+		if ($lettre->statut=='envoi_en_cours')
+			$lettre->enregistrer_statut('envoyee');
 	}
+	else
+		cron();
 
 }
 

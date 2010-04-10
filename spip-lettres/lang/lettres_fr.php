@@ -36,6 +36,10 @@
 		'choix_ko' => "Sélection obligatoire",
 		'vous_devez_choisir_un_theme' => "Vous devez choisir un thème",
 		'vous_n_etes_pas_abonnes' => "Vous n'êtes pas abonné",
+
+		// envoi
+		'envoi_lettre_abonne' => 'Envoi Lettre No @id_lettre@ a l\'abonné No @id_abonne@ (Format @format@)',
+		'envoi_lettre_abonne_essai_n' => "[Essai #@n@] ",
 		
 		// formulaire lettres messages
 		'validation_abonnements_succes' => "Vos abonnements ont été validés.",

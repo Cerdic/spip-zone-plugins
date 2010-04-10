@@ -39,6 +39,14 @@
 		echo afficher_hierarchie($lettre->id_rubrique);
 		echo fin_grand_cadre(true);
 
+		if ($lettre->statut == 'envoi_en_cours') {
+			include_spip('inc/delivrer');
+			$delivrer = lettres_delivrer_surveille_ajax($lettre->id_lettre,generer_url_ecrire('lettres', 'id_lettre='.$lettre->id_lettre.'&message=envoi_termine', true));
+			// plus rien a faire : hop on la passe en envoyee
+			if (!$delivrer)
+				$lettre->enregistrer_statut('envoyee');
+		}
+
 		echo debut_gauche('', true);
 		echo debut_boite_info(true);
 		echo lettre_boite_info($lettre);
@@ -149,10 +157,7 @@
 		$documenter_objet = charger_fonction('documenter_objet','inc');
 		$onglet_documents = $documenter_objet($lettre->id_lettre,'lettre','lettres',$flag_editable);
 	
-		if ($lettre->statut == 'envoi_en_cours') {
-			include_spip('inc/delivrer');
-			echo lettres_delivrer_surveille_ajax($lettre->id_lettre,generer_url_ecrire('lettres', 'id_lettre='.$lettre->id_lettre.'&message=envoi_termine', true));
-		}
+		echo $delivrer;
 
 		if ($m = _request('message')
 			AND in_array($m,array('test_ok','test_ko','renvoi_ok','renvoi_ko','envoi_termine'))) {
