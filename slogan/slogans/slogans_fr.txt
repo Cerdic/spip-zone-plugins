@@ -104,4 +104,4 @@ Le meilleur @slogan@ du monde
 @slogan@ - chopez-le !
 @slogan@ est meilleur que le chocolat
 Mon @slogan@ surpasse tout
-yyyy, cr&#233;ateur de sourires
+@slogan@, cr&#233;ateur de sourires
