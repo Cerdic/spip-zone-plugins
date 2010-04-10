@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Mes fichiers 2</nom>
 	<auteur>SarkASmeL, d'apr&egrave;s la version initiale de James</auteur>
-	<version>0.3</version>
+	<version>0.3.1</version>
 	<etat>dev</etat>
 	<licence>GPL 3</licence>
 	<icon>images/mes_fichiers-64.png</icon>
@@ -11,7 +11,7 @@ Le fichier d'archives est cr&eacute;&eacute; dans <code>tmp/mes_fichiers/</code>
 
 Le plugin rajoute un onglet dans la page de maintenance du site.
 	</description>
-	<lien>http://www.spip-contrib.net/</lien>
+	<lien>http://www.spip-contrib.net/Mes-Fichiers-2</lien>
 
 	<prefix>mes_fichiers</prefix>
 	<options>mes_fichiers_options.php</options>
@@ -23,7 +23,7 @@ Le plugin rajoute un onglet dans la page de maintenance du site.
 		<icone>images/mes_fichiers-24.png</icone>
 		<titre>mes_fichiers:titre_onglet</titre>
 	</onglet>
-	<necessite id="SPIP" version='[2.1.0-rc;]' />
+	<necessite id="SPIP" version='[2.1.0;]' />
 	<necessite id='spip_bonux' version='[1.8.1;]' />
 	<necessite id='cfg' version='[1.14.4;]' />
 	<categorie>maintenance</categorie>

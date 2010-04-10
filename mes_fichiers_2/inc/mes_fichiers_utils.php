@@ -59,7 +59,7 @@ function mes_fichiers_a_sauver() {
 // Renvoie la liste des fichiers et repertoires a sauver classee par date inverse (max 20)
 function mes_fichiers_a_telecharger() {
 	$prefixe = lire_config('mes_fichiers/prefixe','mf2');
-	$liste = preg_files(_DIR_MES_FICHIERS . $prefixe.'_', 20);
+	$liste = preg_files(_DIR_MES_FICHIERS . $prefixe.'_*.zip', 20);
 	return array_reverse($liste);
 }
 
@@ -100,7 +100,7 @@ function mes_fichiers_resumer_zip($zip) {
 		$resume .= '<ul>';
 		if ($liste)
 			foreach ($liste as $_fichier) {
-				$resume .= '<li>' . joli_repertoire($_fichier) . '</li>';
+				$resume .= '<li>' . $_fichier . '</li>';
 			}
 		else
 			$resume .= '<li>' . _T('mes_fichiers:message_zip_sans_contenu') . '</li>';

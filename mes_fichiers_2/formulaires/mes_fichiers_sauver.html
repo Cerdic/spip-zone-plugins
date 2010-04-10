@@ -1,0 +1,70 @@
+<div class="formulaire_spip">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<BOUCLE_editable(CONDITION){si #ENV*{editable}|oui}>
+	<form method="post" action="#ENV{action}">
+		<div>
+			#ACTION_FORMULAIRE{#ENV{action}}
+			<B_sauver>
+			<ul>
+			<li id="liste_a_sauver" class="fieldset" style="padding:5px;">
+				#SET{taille_max,#CONFIG{mes_fichiers/taille_max_rep,500}}
+				<BOUCLE_sauver(POUR){tableau #ENV**{_fichiers}}>
+				#SET{taille_max,#CONFIG{mes_fichiers/taille_max_rep,500}}
+				[(#VALEUR|is_dir|oui)
+					[(#SET{taille,[(#VALEUR|mes_fichiers_dirsize)]})]
+					[(#SET{taille_mb,[(#GET{taille}|mes_fichiers_size_readable{'MB', true,'%01.0f'})]})]
+					[(#SET{disabled,[(#GET{taille_mb}|>{#GET{taille_max}}|?{'disabled="disabled"',' '})]})]
+				]
+				[(#VALEUR|is_dir|non)
+					[(#SET{taille,[(#VALEUR|filesize)]})]
+					[(#SET{disabled,''})]
+				]
+				<div class="choix">
+					[(#GET{disabled}|oui)
+						<span class="erreur_message"><:mes_fichiers:erreur_repertoire_trop_grand{taille_max=#GET{taille_max}}:></span>
+					]
+					<input type="checkbox" name="a_sauver[]" class="checkbox" id="champ_#COMPTEUR_BOUCLE" value="#VALEUR"[ (#GET{disabled})] />
+					[<label for="champ_#COMPTEUR_BOUCLE">
+							(#VALEUR|mes_fichiers_joli_repertoire)
+							[(#VALEUR|is_dir|oui)[((#GET{taille}|mes_fichiers_size_readable))]]
+							[(#VALEUR|is_dir|non)[((#GET{taille}|mes_fichiers_size_readable))]]</label>]
+				</div>
+				</BOUCLE_sauver>
+					<p>
+						<small><a id="cocher_tout" href="#liste_a_sauver"><:mes_fichiers:bouton_tout_cocher:></a>
+						&nbsp;|&nbsp;
+						<a id="decocher_tout" href="#liste_a_sauver"><:mes_fichiers:bouton_tout_decocher:></a>
+						</small>
+					</p>
+				</li>
+			</ul>
+		<p class="boutons">
+			<input type="submit" class="submit" value="<:mes_fichiers:bouton_sauver:>" />
+		</p>
+		</B_sauver>
+		<div class="cadre cadre-e" style="margin: 10px 0;">
+			<div class="cadre_padding">
+				<:mes_fichiers:message_rien_a_sauver:>
+			</div>
+		</div>
+		<//B_sauver>
+	</div>
+	</form>
+	</BOUCLE_editable>
+	<p class="reponse_formulaire reponse_formulaire_erreur"><:mes_fichiers:erreur_droits_insuffisants:></p>
+	<//B_editable>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+	jQuery(document).ready(function() {
+		jQuery("a#cocher_tout").click(function () {
+			jQuery('#liste_a_sauver input[type=checkbox]').not(':disabled').attr('checked', 'checked');
+	    });
+		jQuery("a#decocher_tout").click(function () {
+			jQuery('#liste_a_sauver input[type=checkbox]').not(':disabled').attr('checked', false);
+	    });
+	});
+//]]>
+</script>

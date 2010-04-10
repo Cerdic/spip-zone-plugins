@@ -19,11 +19,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'colonne_actions' => '&nbsp;',
 
 // E
+'erreur_droits_insuffisants' => 'Vous ne disposez pas de droits suffisants pour r&eacute;aliser une sauvegarde.',
+'erreur_repertoire_trop_grand' => 'Ce r&eacute;pertoire d&eacute;passe la limite de @taille_max@ MB.',
 'explication_cfg_notif_mail' => 'Ces emails s\'ajoutent &agrave; celui du webmestre du site. Ils doivent &ecirc;tre s&eacute;par&eacute;s par des virgules ",".',
 
 // I
 'info_sauver' => 'Cette option fabrique un fichier d\'archives contenant les donn&eacute;es de personnalisation du site comme le dernier dump de sauvegarde de la base, le(s) dossier(s) des squelettes nomm&eacute;s, le dossier images...
-	Le fichier d\'archives est cr&eacute;&eacute; dans <i>tmp/mes_fichiers/</i> et se nomme <i>mf2_aaaammjj_hhmmss.zip</i>.
+	Le fichier d\'archives est cr&eacute;&eacute; dans <i>tmp/mes_fichiers/</i> et se nomme <i>@prefixe@_aaaammjj_hhmmss.zip</i>.
 	La liste exhaustive des fichiers et dossiers pouvant &ecirc;tre sauvegard&eacute;s est affich&eacute;e ci-dessous:',
 'info_telecharger' => 'Cette option permet de t&eacute;l&eacute;charger un des fichiers d\'archives disponibles parmi la liste affich&eacute;e ci-dessous:',
 
@@ -33,6 +35,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // L
 'label_cfg_duree_sauvegarde' => 'Dur&eacute;e de conservation des sauvegardes',
 'label_cfg_frequence' => 'Fr&eacute;quence de sauvegarde',
+'label_cfg_taille_max_rep' => 'Taille maximale des r&eacute;pertoires que l\'on peut sauvegarder (en MB)',
 'label_cfg_notif_active' => 'Activer les notifications',
 'label_cfg_notif_mail' => 'Adresses email &agrave; notifier',
 'label_cfg_prefixe' => 'Pr&eacute;fixe utilis&eacute; pour le nom de fichier',

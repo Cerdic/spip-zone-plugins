@@ -20,12 +20,19 @@ function action_mes_fichiers_sauver() {
 
 	$erreur = $sauver($liste);
 
-	if ($erreur) {
-		spip_log('*** MES_FICHIERS (action_mes_fichiers_sauver) ERREUR '.$erreur,'test');
-		redirige_par_entete(generer_url_ecrire('mes_fichiers', 'etat=nok_sauve', true));
-	}else{
-		redirige_par_entete(generer_url_ecrire('mes_fichiers', 'etat=ok_sauve', true));
+	if (_request('redirect')) {
+		if($erreur){
+			$redirect = parametre_url(urldecode(_request('redirect')),
+			'etat', 'nok_sauve', '&');
+		}else{
+			$redirect = parametre_url(urldecode(_request('redirect')),
+			'etat', 'ok_sauve', '&');
+		}
+		include_spip('inc/headers');
+		redirige_par_entete($redirect);
 	}
+	else
+		return $erreur;
 
 }
 ?>
