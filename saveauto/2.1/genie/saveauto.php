@@ -6,8 +6,8 @@
  * @param unknown_type $last
  */
 function genie_saveauto_dist($last) {
-	$saveauto_creation = $GLOBALS['meta']['saveauto_creation'] ? $GLOBALS['meta']['saveauto_creation'] : time();
-	if (($GLOBALS['meta']['derniere_modif'] > $saveauto_creation) AND $last){
+	$saveauto_creation = $GLOBALS['meta']['saveauto_creation'] ? $GLOBALS['meta']['saveauto_creation'] : 0;
+	if ($GLOBALS['meta']['derniere_modif'] > $saveauto_creation){
 		$saveauto = charger_fonction('saveauto','inc');
 		$saveauto();
 	}
