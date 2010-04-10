@@ -18,6 +18,11 @@ function balise_SPIP_CRON ($p) { $p->code = '\'\''; $p->interdire_scripts = fals
 return $p; }
 
 
+function queue_afficher_cron(){
+	include_spip('queue_pipelines');
+	return queue_affichage_cron();
+}
+
 /**
  * Add a job to the queue. The function added will be called in the order it
  * was added during cron.
