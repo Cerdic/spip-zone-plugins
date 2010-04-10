@@ -139,4 +139,107 @@ function mes_fichiers_joli_repertoire($rep){
 		return joli_repertoire($rep);
 	}
 }
+
+/**
+ * Calculate the size of a directory by iterating its contents
+ * http://aidanlister.com/2004/04/calculating-a-directories-size-in-php/
+ *
+ * @author      Aidan Lister <aidan@php.net>
+ * @version     1.2.0
+ * @link        http://aidanlister.com/repos/v/function.dirsize.php
+ * @param       string   $directory    Path to directory
+ */
+function mes_fichiers_dirsize($path)
+{
+    // Init
+    $size = 0;
+
+    // Trailing slash
+    if (substr($path, -1, 1) !== DIRECTORY_SEPARATOR) {
+        $path .= DIRECTORY_SEPARATOR;
+    }
+
+    // Sanity check
+    if (is_file($path)) {
+        return filesize($path);
+    } elseif (!is_dir($path)) {
+        return false;
+    }
+
+    // Iterate queue
+    $queue = array($path);
+    for ($i = 0, $j = count($queue); $i < $j; ++$i)
+    {
+        // Open directory
+        $parent = $i;
+        if (is_dir($queue[$i]) && $dir = @dir($queue[$i])) {
+            $subdirs = array();
+            while (false !== ($entry = $dir->read())) {
+                // Skip pointers
+                if ($entry == '.' || $entry == '..') {
+                    continue;
+                }
+
+                // Get list of directories or filesizes
+                $path = $queue[$i] . $entry;
+                if (is_dir($path)) {
+                    $path .= DIRECTORY_SEPARATOR;
+                    $subdirs[] = $path;
+                } elseif (is_file($path)) {
+                    $size += filesize($path);
+                }
+            }
+
+            // Add subdirectories to start of queue
+            unset($queue[0]);
+            $queue = array_merge($subdirs, $queue);
+
+            // Recalculate stack size
+            $i = -1;
+            $j = count($queue);
+
+            // Clean up
+            $dir->close();
+            unset($dir);
+        }
+    }
+    return $size;
+}
+
+/**
+ * Return human readable sizes
+ *
+ * @author      Aidan Lister <aidan@php.net>
+ * @version     1.3.0
+ * @link        http://aidanlister.com/repos/v/function.size_readable.php
+ * @param       int     $size        size in bytes
+ * @param       string  $max         maximum unit
+ * @param       string  $system      'si' for SI, 'bi' for binary prefixes
+ * @param       string  $retstring   return string format
+ */
+function mes_fichiers_size_readable($size, $max = null, $system = 'si', $retstring = '%01.2f %s')
+{
+    // Pick units
+    $systems['si']['prefix'] = array('B', 'K', 'MB', 'GB', 'TB', 'PB');
+    $systems['si']['size']   = 1000;
+    $systems['bi']['prefix'] = array('B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB');
+    $systems['bi']['size']   = 1024;
+    $sys = isset($systems[$system]) ? $systems[$system] : $systems['si'];
+
+    // Max unit to display
+    $depth = count($sys['prefix']) - 1;
+    if ($max && false !== $d = array_search($max, $sys['prefix'])) {
+        $depth = $d;
+    }
+
+    // Loop
+    $i = 0;
+    while ($size >= $sys['size'] && $i < $depth) {
+        $size /= $sys['size'];
+        $i++;
+    }
+
+    return sprintf($retstring, $size, $sys['prefix'][$i]);
+}
+
 ?>
