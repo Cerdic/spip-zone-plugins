@@ -45,7 +45,7 @@ function exec_progression_envoi_lettre() {
 			$lettre->enregistrer_statut('envoyee');
 	}
 	else
-		cron();
+		echo queue_afficher_cron();
 
 }
 
