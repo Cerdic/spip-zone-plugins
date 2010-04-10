@@ -84,7 +84,7 @@ function verifier_charger_infos($type_verif){
 	if (is_array($verif)){
 		$verif['titre'] = $verif['titre'] ? _T_ou_typo($verif['titre']) : $type_verif;
 		$verif['description'] = $verif['description'] ? _T_ou_typo($verif['description']) : '';
-		$verif['icone'] = $verif['icone'] ? find_in_path($verif['verif']) : '';
+		$verif['icone'] = $verif['icone'] ? find_in_path($verif['icone']) : '';
 	}
 	return $verif;
 }
