@@ -10,7 +10,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 include_spip('inc/config');
 include_spip('inc/meta');
-include_spip('inc/facteur_classes');
+include_spip('classes/facteur');
 
 
 function exec_facteur() {

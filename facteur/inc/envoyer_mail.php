@@ -7,7 +7,7 @@
  */
 
 
-include_spip('inc/facteur_classes');
+include_spip('classes/facteur');
 // inclure le fichier natif de SPIP, pour les fonctions annexes
 include_once _DIR_RESTREINT."inc/envoyer_mail.php";
 

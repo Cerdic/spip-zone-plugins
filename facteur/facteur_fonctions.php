@@ -8,7 +8,7 @@
 
 
 include_spip('inc/texte');
-include_spip('inc/facteur_classes');
+include_spip('classes/facteur');
 
 
 /**
