@@ -21,7 +21,7 @@ function genie_saveauto_dist($last) {
  */
 function saveauto_taches_generales_cron($taches_generales){
 	if ($cfg = @unserialize($GLOBALS['meta']['saveauto'])){
-		$taches_generales['saveauto'] = $cfg['frequence_maj']*80;
+		$taches_generales['saveauto'] = $cfg['frequence_maj']*24*3600;
 	}else{
 		$taches_generales['saveauto'] = 24*3600;
 	}
