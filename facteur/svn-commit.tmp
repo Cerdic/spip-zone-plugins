@@ -1,0 +1,64 @@
+Mise a jour de phpMailer en version 5.1 pour PHP 5 et 2.0.4 pour PHP 4
+Increment de la version du plugin
+
+--This line, and those below, will be ignored--
+
+A    phpmailer-php4/language
+AM   phpmailer-php4/language/phpmailer.lang-ja.php
+AM   phpmailer-php4/language/phpmailer.lang-ch.php
+AM   phpmailer-php4/language/phpmailer.lang-dk.php
+AM   phpmailer-php4/language/phpmailer.lang-fi.php
+AM   phpmailer-php4/language/phpmailer.lang-zh_cn.php
+AM   phpmailer-php4/language/phpmailer.lang-ar.php
+AM   phpmailer-php4/language/phpmailer.lang-en.php
+AM   phpmailer-php4/language/phpmailer.lang-br.php
+AM   phpmailer-php4/language/phpmailer.lang-fo.php
+AM   phpmailer-php4/language/phpmailer.lang-se.php
+AM   phpmailer-php4/language/phpmailer.lang-es.php
+AM   phpmailer-php4/language/phpmailer.lang-fr.php
+AM   phpmailer-php4/language/phpmailer.lang-et.php
+AM   phpmailer-php4/language/phpmailer.lang-nl.php
+AM   phpmailer-php4/language/phpmailer.lang-pl.php
+AM   phpmailer-php4/language/phpmailer.lang-it.php
+AM   phpmailer-php4/language/phpmailer.lang-hu.php
+AM   phpmailer-php4/language/phpmailer.lang-cz.php
+AM   phpmailer-php4/language/phpmailer.lang-no.php
+AM   phpmailer-php4/language/phpmailer.lang-ro.php
+AM   phpmailer-php4/language/phpmailer.lang-zh.php
+AM   phpmailer-php4/language/phpmailer.lang-ca.php
+AM   phpmailer-php4/language/phpmailer.lang-tr.php
+AM   phpmailer-php4/language/phpmailer.lang-ru.php
+AM   phpmailer-php4/language/phpmailer.lang-de.php
+M    phpmailer-php4/class.phpmailer.php
+AM   phpmailer-php4/class.pop3.php
+M    phpmailer-php4/README
+M    phpmailer-php4/class.smtp.php
+A    phpmailer-php5/language
+AM   phpmailer-php5/language/phpmailer.lang-ch.php
+AM   phpmailer-php5/language/phpmailer.lang-ja.php
+AM   phpmailer-php5/language/phpmailer.lang-dk.php
+AM   phpmailer-php5/language/phpmailer.lang-fi.php
+AM   phpmailer-php5/language/phpmailer.lang-zh_cn.php
+AM   phpmailer-php5/language/phpmailer.lang-ar.php
+AM   phpmailer-php5/language/phpmailer.lang-br.php
+AM   phpmailer-php5/language/phpmailer.lang-fo.php
+AM   phpmailer-php5/language/phpmailer.lang-se.php
+AM   phpmailer-php5/language/phpmailer.lang-es.php
+AM   phpmailer-php5/language/phpmailer.lang-fr.php
+AM   phpmailer-php5/language/phpmailer.lang-et.php
+AM   phpmailer-php5/language/phpmailer.lang-nl.php
+AM   phpmailer-php5/language/phpmailer.lang-pl.php
+AM   phpmailer-php5/language/phpmailer.lang-it.php
+AM   phpmailer-php5/language/phpmailer.lang-hu.php
+AM   phpmailer-php5/language/phpmailer.lang-cz.php
+AM   phpmailer-php5/language/phpmailer.lang-no.php
+AM   phpmailer-php5/language/phpmailer.lang-ro.php
+AM   phpmailer-php5/language/phpmailer.lang-zh.php
+AM   phpmailer-php5/language/phpmailer.lang-ca.php
+AM   phpmailer-php5/language/phpmailer.lang-tr.php
+AM   phpmailer-php5/language/phpmailer.lang-ru.php
+AM   phpmailer-php5/language/phpmailer.lang-de.php
+M    phpmailer-php5/class.phpmailer.php
+M    phpmailer-php5/class.pop3.php
+M    phpmailer-php5/class.smtp.php
+M    plugin.xml
