@@ -98,7 +98,9 @@
 
 	function sondages_install($action){
 		include_spip('inc/plugin');
-		$info_plugin_sondages = plugin_get_infos(_NOM_PLUGIN_SONDAGES);
+		global $spip_version_branche;
+		
+		preg_match('#^2.0#',$spip_version_branche) ? $info_plugin_sondages = plugin_get_infos(_NOM_PLUGIN_SONDAGES) :  $info_plugin_sondages = plugins_get_infos_dist(_NOM_PLUGIN_SONDAGES) ;
 		$version_plugin = $info_plugin_sondages['version'];
 		switch ($action) {
 			case 'test':
