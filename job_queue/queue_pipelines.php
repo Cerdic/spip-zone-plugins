@@ -43,15 +43,18 @@ function queue_affichage_final(&$texte){
 	// Si fsockopen est possible, on lance le cron via un socket
 	// en asynchrone
 	if(function_exists('fsockopen')){
-		$url = generer_url_action('cron');
+		$url = generer_url_action('cron','',false,true);
 		$parts=parse_url($url);
+
 		$fp = fsockopen($parts['host'],
 	        isset($parts['port'])?$parts['port']:80,
 	        $errno, $errstr, 30);
+
 		if ($fp) {
-	    	$out = "GET ".$url." HTTP/1.1\r\n";
-    		$out.= "Host: ".$parts['host']."\r\n";
-    		$out.= "Connection: Close\r\n\r\n";
+			$query = $parts['path'].($parts['query']?"?".$parts['query']:"");
+			$out = "GET ".$query." HTTP/1.1\r\n";
+			$out.= "Host: ".$parts['host']."\r\n";
+			$out.= "Connection: Close\r\n\r\n";
 			fwrite($fp, $out);
 			fclose($fp);
 			return $texte;
