@@ -10,6 +10,17 @@
 	border-bottom:1px solid #ccc;
 }
 
+.formulaire_configurer_bloc{
+	margin-bottom:10px;
+}
+
+.formulaire_spip h3.titre_bloc{
+	font-size:1.5em;
+	font-weight:bold;
+	color: black;
+	padding-left:5px;
+}
+
 .formulaire_editer_noisette{
 	position:relative;
 }
