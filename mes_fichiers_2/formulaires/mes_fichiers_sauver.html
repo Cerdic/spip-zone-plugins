@@ -9,7 +9,7 @@
 			<ul>
 			<li id="liste_a_sauver" class="fieldset" style="padding:5px;">
 				<BOUCLE_sauver(POUR){tableau #ENV**{_fichiers}}>
-				[(#SET{taille_config,[(#CONFIG{mes_fichiers/taille_max_rep,70})]})]
+				[(#SET{taille_config,[(#CONFIG{mes_fichiers/taille_max_rep,500})]})]
 				[(#SET{taille_max,[(#GET{taille_config}|mult{1000}|mult{1000})]})]
 				[(#VALEUR|is_dir|oui)
 					[(#SET{taille,[(#VALEUR|mes_fichiers_dirsize)]})]
