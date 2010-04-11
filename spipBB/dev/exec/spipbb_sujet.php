@@ -22,6 +22,7 @@
 //    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+include_spip('inc/forum'); // pour fonction boutons_controle_forum()
 include_spip('inc/spipbb_common');
 spipbb_log('included',2,__FILE__);
 
