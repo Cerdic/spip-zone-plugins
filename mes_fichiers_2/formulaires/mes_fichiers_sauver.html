@@ -8,13 +8,12 @@
 			<B_sauver>
 			<ul>
 			<li id="liste_a_sauver" class="fieldset" style="padding:5px;">
-				#SET{taille_max,#CONFIG{mes_fichiers/taille_max_rep,500}}
 				<BOUCLE_sauver(POUR){tableau #ENV**{_fichiers}}>
-				#SET{taille_max,#CONFIG{mes_fichiers/taille_max_rep,500}}
+				[(#SET{taille_config,[(#CONFIG{mes_fichiers/taille_max_rep,70})]})]
+				[(#SET{taille_max,[(#GET{taille_config}|mult{1000}|mult{1000})]})]
 				[(#VALEUR|is_dir|oui)
 					[(#SET{taille,[(#VALEUR|mes_fichiers_dirsize)]})]
-					[(#SET{taille_mb,[(#GET{taille}|mes_fichiers_size_readable{'MB', true,'%01.0f'})]})]
-					[(#SET{disabled,[(#GET{taille_mb}|>{#GET{taille_max}}|?{'disabled="disabled"',' '})]})]
+					[(#SET{disabled,[(#GET{taille}|>{#GET{taille_max}}|?{'disabled="disabled"',''})]})]
 				]
 				[(#VALEUR|is_dir|non)
 					[(#SET{taille,[(#VALEUR|filesize)]})]
@@ -22,13 +21,16 @@
 				]
 				<div class="choix">
 					[(#GET{disabled}|oui)
-						<span class="erreur_message"><:mes_fichiers:erreur_repertoire_trop_grand{taille_max=#GET{taille_max}}:></span>
+						<span class="erreur_message">
 					]
 					<input type="checkbox" name="a_sauver[]" class="checkbox" id="champ_#COMPTEUR_BOUCLE" value="#VALEUR"[ (#GET{disabled})] />
 					[<label for="champ_#COMPTEUR_BOUCLE">
 							(#VALEUR|mes_fichiers_joli_repertoire)
 							[(#VALEUR|is_dir|oui)[((#GET{taille}|mes_fichiers_size_readable))]]
 							[(#VALEUR|is_dir|non)[((#GET{taille}|mes_fichiers_size_readable))]]</label>]
+					[(#GET{disabled}|oui)
+						<br /><:mes_fichiers:erreur_repertoire_trop_grand{taille_max=#GET{taille_config}}:></span>
+					]
 				</div>
 				</BOUCLE_sauver>
 					<p>

@@ -30,9 +30,9 @@ function inc_mes_fichiers_sauver_dist($liste=null,$options=array()){
 		 * On nomme les fichiers et répertoires pour les commentaires sans
 		 * _DIR_RACINE ni _DIR_MUTU
 		 */
-		$taille_max = lire_config('mes_fichiers/taille_max_rep','500');
+		$taille_max = intval(lire_config('mes_fichiers/taille_max_rep','500'))*1000*1000;
 		foreach($liste as $key => $item){
-			if(is_dir($item) && (mes_fichiers_size_readable(mes_fichiers_dirsize($item),'MB',true,'%01.0f') > $taille_max)){
+			if(is_dir($item) && (mes_fichiers_dirsize($item) > $taille_max)){
 				unset($liste[$key]);
 			}else{
 				$liste_finale[] = mes_fichiers_joli_repertoire($item);
