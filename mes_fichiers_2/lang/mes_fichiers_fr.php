@@ -5,6 +5,7 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // B
+'bouton_mes_fichiers' => 'Sauvegarder mes fichiers',
 'bouton_sauver' => 'Sauvegarder',
 'bouton_telecharger' => 'T&eacute;l&eacute;charger',
 'bouton_tout_cocher' => 'Tout cocher',
@@ -77,7 +78,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // T
 'titre_page_navigateur' => 'Mes fichiers',
-'titre_onglet' => 'Mes fichiers',
+'titre_page' => 'Sauvegarder mes fichiers de personnalisation',
 'titre_boite_sauver' => 'Sauvegarder mes fichiers',
 'titre_boite_telecharger' => 'T&eacute;l&eacute;charger une sauvegarde',
 

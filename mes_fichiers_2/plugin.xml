@@ -1,15 +1,15 @@
 <plugin>
 	<nom>Mes fichiers 2</nom>
-	<auteur>SarkASmeL, d'apr&egrave;s la version initiale de James</auteur>
+	<auteur>_Eric_, Quentin, d'apr&egrave;s la version initiale de James</auteur>
 	<version>0.3.1</version>
 	<etat>dev</etat>
 	<licence>GPL 3</licence>
-	<icon>images/mes_fichiers-64.png</icon>
+	<icon>themes/spip/images/mes_fichiers-64.png</icon>
 	<description>
 Ce plugin fabrique un fichier d'archives contenant les donn&eacute;es de personnalisation du site comme le dernier dump de sauvegarde de la base, le(s) dossier(s) des squelettes nomm&eacute;s, le dossier images...
 Le fichier d'archives est cr&eacute;&eacute; dans <code>tmp/mes_fichiers/</code> et se nomme <code>mf2_aaaammjj_hhmmss.zip</code>.
 
-Le plugin rajoute un onglet dans la page de maintenance du site.
+Il est aussi possible de lancer une sauvegarde journali&egrave;re automatique de tous les fichiers de personnalisation.
 	</description>
 	<lien>http://www.spip-contrib.net/Mes-Fichiers-2</lien>
 
@@ -19,10 +19,16 @@ Le plugin rajoute un onglet dans la page de maintenance du site.
 		<nom>taches_generales_cron</nom>
 		<inclure>genie/mes_fichiers.php</inclure>
 	</pipeline>
-	<onglet id='mes_fichiers' parent='administration'>
-		<icone>images/mes_fichiers-24.png</icone>
-		<titre>mes_fichiers:titre_onglet</titre>
-	</onglet>
+	<bouton id='mes_fichiers' parent='configuration'>
+		<icone>themes/spip/images/mes_fichiers-24.png</icone>
+		<titre>mes_fichiers:bouton_mes_fichiers</titre>
+		<url>mes_fichiers</url>
+	</bouton>
+	<bouton id='mes_fichiers21' parent='bando_administration'>
+		<icone>images/mes_fichiers-16.png</icone>
+		<titre>mes_fichiers:bouton_mes_fichiers</titre>
+		<url>mes_fichiers</url>
+	</bouton>
 	<necessite id="SPIP" version='[2.1.0;]' />
 	<necessite id='spip_bonux' version='[1.8.1;]' />
 	<necessite id='cfg' version='[1.14.4;]' />

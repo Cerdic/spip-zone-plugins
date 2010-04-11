@@ -17,14 +17,11 @@ function exec_mes_fichiers_dist(){
 
 	// entetes
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo $commencer_page(_T('mes_fichiers:titre_page_navigateur'), "administration", "administration");
+	echo $commencer_page(_T('mes_fichiers:titre_page_navigateur'), "configuration", "mes_fichiers");
 
 	// titre
 	echo "<br /><br /><br />\n"; // outch que c'est vilain !
-	echo gros_titre(_T('titre_admin_tech'),'', false);
-
-	// barre d'onglets
-	echo barre_onglets("administration", "mes_fichiers");
+	echo gros_titre(_T('mes_fichiers:titre_page'),'', false);
 
 	// colonne gauche
 	echo debut_gauche('', true);
