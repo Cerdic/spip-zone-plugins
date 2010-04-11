@@ -26,7 +26,6 @@ function Forms_formulaire_confirme_suppression($id_form,$nb_reponses,$redirect,$
 		$out .= "<br />";
 		$out .= _T("$prefixei18n:info_supprimer_formulaire")."</p>\n";
 	}
-	// ADAPTATION SPIP 2
 	if ($GLOBALS['spip_version_code']<2)
 		$link = generer_action_auteur('forms_supprime',"$id_form",_DIR_RESTREINT_ABS.($retour?(str_replace('&amp;','&',$retour)):generer_url_ecrire('forms_tous',"",false,true)));
 	else
