@@ -6,6 +6,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
 include_spip('inc/actions');
 include_spip('inc/distant');
 
+define('_MAJ_SVN_FILE', 'file:///home/svn/repository/spip-zone/');
 define('_MAJ_SVN_DEBUT', 'svn://zone.spip.org/spip-zone/');
 define('_MAJ_SVN_TRAC', 'svn://trac.rezo.net/spip-zone/'); // ancienne URL
 define('_MAJ_LOG_DEBUT', 'http://zone.spip.org/trac/spip-zone/log/');
@@ -129,7 +130,7 @@ function plugin_get_infos_maj($p, $timeout=false) {
 	$ok = lire_fichier($svn_rev = _DIR_PLUGINS.$p.'/svn.revision', $svn);
 	$lastmodified = @file_exists($svn_rev)?@filemtime($svn_rev):0;
 	if($ok && preg_match(',<origine>(.+)</origine>,', $svn, $regs)) {
-		$url_origine = str_replace(_MAJ_SVN_DEBUT, _MAJ_LOG_DEBUT, $regs[1]);
+		$url_origine = str_replace(array(_MAJ_SVN_FILE, _MAJ_SVN_DEBUT), _MAJ_LOG_DEBUT, $regs[1]);
 		// prise en compte du recent demenagement de la Zone...
 		$url_origine = preg_replace(',/_plugins_/_(?:stable|dev|test)_/,','/_plugins_/', $url_origine);
 	} else $url_origine = '';
