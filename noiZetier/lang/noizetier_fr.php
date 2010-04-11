@@ -6,7 +6,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_page' => 'PAGE&nbsp;:',
 	'info_composition' => 'COMPOSITION&nbsp;:',
-	'derniere_maj' => 'Derni&egrave;re mise &agrave; jour le',
 	'installation_tables' => 'Tables du plugin noiZetier install&eacute;es.<br />',
 	'choisir_noisette' => 'Choisissez la noisette que vous voulez ajouter&nbsp:',
 	'noisettes_page' => 'Noisettes sp&eacute;cifiques &agrave; la page <i>@type@</i>&nbsp;:',
