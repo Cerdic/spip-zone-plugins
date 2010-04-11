@@ -10,6 +10,6 @@
 [(#ENV{appel_menu}|oui)
 	[(#SESSION{id_auteur}|>{0}|oui)
 		<li class="menu-entree[ (#ENV{css})]">
-			<a href="#URL_LOGOUT">#GET{titre}</a>
+			<a href="#URL_LOGOUT" title="[(#GET{titre}|attribut_html)]">#GET{titre}</a>
 	]
 ]

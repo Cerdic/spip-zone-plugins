@@ -6,5 +6,5 @@
 ]
 [(#ENV{appel_menu}|oui)
 	<li class="menu-entree[ (#ENV{css})][ (#ENV{id_objet}|menus_exposer{#ENV{type_objet},#ENV*{env}})]">
-		<a href="#INFO_URL{#ENV{type_objet}, #ENV{id_objet}}">#GET{titre}</a>
+		<a href="#INFO_URL{#ENV{type_objet}, #ENV{id_objet}}" title="[(#GET{titre}|attribut_html)]">#GET{titre}</a>
 ]
