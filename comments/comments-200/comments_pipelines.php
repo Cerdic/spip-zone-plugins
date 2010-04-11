@@ -138,13 +138,13 @@ function comments_formulaire_traiter($flux){
 		if ($statut=='publie'){
 			// le message est OK, il suffit de mettre une ancre !
 			$flux['data']['message_ok'] = 
-			  _T('comments:comment_reponse_ok')
+			  _T('comments:reponse_comment_ok')
 				. "<script type='text/javascript'>jQuery(function(){window.location.hash='forum$id_forum';});</script>";
 			;
 		}
 		else {
 			// dire que le message a ete modere
-			$flux['data']['message_ok'] = _T('comments:comment_reponse_moderation');
+			$flux['data']['message_ok'] = _T('comments:reponse_comment_modere');
 		}
 		
 		$res = $flux['data'];

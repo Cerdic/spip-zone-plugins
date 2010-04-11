@@ -8,7 +8,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'comments' => 'commentaires',
 
 // Listes des commentaires
-'comments_h2' => 'Vos commentaires',
+'comments_h' => 'Vos commentaires',
 'permalink_to' => 'Lien permanent vers le commentaire',
 'le_date_jour' => 'Le', /* verifier que ca n'existe pas deja dans SPIP */
 'a_date_heure' => '&agrave;', /* verifier que ca n'existe pas deja dans SPIP */
@@ -25,9 +25,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'submit1' => 'Pr&eacute;visualiser',
 'submit2' => 'Confirmer l\'envoi',
 
-'info_moderation' => 'Attention, votre message n\'appara&icirc;tra qu\'apr&egrave;s avoir &eacute;t&eacute; relu et approuv&eacute;.',
-'comment_reponse_ok' => 'Merci pour votre commentaire&nbsp;!',
-'comment_reponse_moderation' => 'Votre commentaire a bien &eacute;t&eacute; enregistr&eacute; et est en attente de relecture avant publication.',
+'moderation_info' => 'Attention, votre message n\'appara&icirc;tra qu\'apr&egrave;s avoir &eacute;t&eacute; relu et approuv&eacute;.',
+'reponse_comment_ok' => 'Merci pour votre commentaire&nbsp;!',
+'reponse_comment_modere' => 'Votre commentaire a bien &eacute;t&eacute; enregistr&eacute; et est en attente de relecture avant publication.',
 
 // Panneau CFG
 'forum_longueur' => 'Longueur des messages',
