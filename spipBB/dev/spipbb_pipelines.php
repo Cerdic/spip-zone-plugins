@@ -48,7 +48,7 @@ function spipbb_ajouter_boutons($boutons_admin) {
 #
 function spipbb_header_prive($flux) {
 	$exec = _request('exec');
-	if(ereg('^(spipbb_).*',$exec)) {
+	if(strpos($exec, '^(spipbb_).*')!==false) { 
 	$flux .= '<link rel="stylesheet" type="text/css" href="'._DIR_PLUGIN_SPIPBB.'img_pack/spipbb_styles.css" />'."\n";
 	$flux .= '<script type="text/javascript" src="'._DIR_PLUGIN_SPIPBB.'javascript/spipbb_vueavatar.js"></script>'."\n";
 	}
