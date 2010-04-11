@@ -22,6 +22,7 @@
 //    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+include_spip('inc/plugin'); // pour version du plugin
 if (defined("_GENERAL_DEBUG")) return; else define("_GENERAL_DEBUG", true);
 include_spip('inc/spipbb_common');
 spipbb_log('included',2,__FILE__);
@@ -35,8 +36,13 @@ function exec_spipbb_admin_debug() {
 //	include_spip('inc/spipbb_init'); // sauf que si bug là -> erreur !!
 	# lire version plugin.xml
 	#
-	if (!function_exists('plugin_get_infos')) include_spip('inc/plugin');
-	$infos=plugin_get_infos(_DIR_PLUGIN_SPIPBB);
+	if(version_compare($GLOBALS['spip_version_code'],'15375','>=')) {
+		$get_infos = charger_fonction('get_infos','plugins');
+		$infos = $get_infos(_DIR_PLUGIN_SPIPBB);
+	}
+	else {
+		$infos = plugin_get_infos(_DIR_PLUGIN_SPIPBB);
+	}
 	$GLOBALS['spipbb_plug_version'] = $infos['version'];
 
 	# recup des metas

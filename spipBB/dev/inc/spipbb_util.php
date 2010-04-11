@@ -25,6 +25,7 @@
 
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+include_spip('inc/plugin'); // pour version du plugin
 if (!defined('_INC_SPIPBB_COMMON')) include_spip('inc/spipbb_common');
 spipbb_log('included',2,__FILE__);
 
@@ -49,8 +50,13 @@ function spipbb_is_configured() {
 	# nouvelle version -> maj
 	if (!isset($GLOBALS['spipbb_plug_version']))
 	{
-		if (!function_exists('plugin_get_infos')) include_spip('inc/plugin');
-		$infos=plugin_get_infos(_DIR_PLUGIN_SPIPBB);
+        if(version_compare($GLOBALS['spip_version_code'],'15375','>=')) {
+            $get_infos = charger_fonction('get_infos','plugins');
+            $infos = $get_infos(_DIR_PLUGIN_SPIPBB);
+        }
+        else {
+            $infos = plugin_get_infos(_DIR_PLUGIN_SPIPBB);
+        }
 		$GLOBALS['spipbb_plug_version'] = $infos['version'];
 	}
 	if(version_compare($GLOBALS['spipbb']['version'],$GLOBALS['spipbb_plug_version'],'<')) return false;
@@ -226,17 +232,6 @@ function tranches_liste_forum($encours, $retour_gaf, $nligne) {
 			echo "<a href='".$retour_gaf."&vl=$liais'>$debaff - $finaff</a> $sep\n";
 		}
 	}
-}
-
-
-//
-// gaf - verifier info plugin en cours
-# au cas ou, ... car plus utiliser sur fonction signature_spipbb()
-function verifier_infos_plugin($item) {
-	if (!function_exists('plugin_get_infos')) include_spip('inc/plugin');
-
-	$info_plugin = plugin_get_infos('spipbb');
-	return $info_plugin[$item];
 }
 
 ?>
