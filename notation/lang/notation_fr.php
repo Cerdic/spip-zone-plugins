@@ -97,7 +97,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'auteur' => 'Auteur',
 	'ip' => 'IP',
 
-	'change_note_label' => "Autoriser les votants &agrave; modifier leur note ?",
+	'change_note_label' => "Autoriser les votants &agrave; modifier leur note",
 	'info_modifications' => "Modifications des notes",
 
 	'jaime' => 'J\'aime',
