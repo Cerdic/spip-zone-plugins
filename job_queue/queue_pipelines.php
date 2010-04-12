@@ -38,7 +38,7 @@ function queue_affichage_cron(){
 		$url = generer_url_action('cron','',false,true);
 		$parts=parse_url($url);
 
-		$fp = fsockopen($parts['host'],
+		$fp = @fsockopen($parts['host'],
 	        isset($parts['port'])?$parts['port']:80,
 	        $errno, $errstr, 30);
 
