@@ -7,7 +7,7 @@ function traiter_email_dist($args, $retours){
 	$formulaire = $args['formulaire'];
 	$options = $args['options'];
 	$saisies = unserialize($formulaire['saisies']);
-	$saisies = saisies_lister_par_nom($saisies);
+	$champs = saisies_lister_champs($saisies);
 	
 	// On récupère les destinataires
 	$destinataires = _request($options['champ_destinataires']);
@@ -23,9 +23,6 @@ function traiter_email_dist($args, $retours){
 		);
 		$destinataires = array_map('reset', $destinataires);
 		
-		// On enlève ce champ du texte à générer
-		unset($saisies[$options['champ_destinataires']]);
-		
 		// On récupère le courriel de l'envoyeur
 		$courriel_envoyeur = _request($options['champ_courriel']);
 		
@@ -36,19 +33,24 @@ function traiter_email_dist($args, $retours){
 		$sujet = $options['champ_sujet'] ? _request($options['champ_sujet']) : _T('formidable:traiter_email_sujet', array('nom'=>$nom_envoyeur));
 		$sujet = filtrer_entites($sujet);
 		
-		// Maintenant on parcourt les champs pour générer le texte du message
-		$texte = '';
-		foreach ($saisies as $saisie){
-			$options_saisie = $saisie['options'];
-			
-			// On ne prend pas en compte le champ du destinataire
-			if ($options_saisie['nom'] != $options['champ_destinataires']){
-				$label = $options_saisie['label'] ? '[ '.trim(_T_ou_typo($options_saisie['label']))." ]\n" : '';
-				$label = filtrer_entites($label);
-				$texte .= $label;
-				$texte .= _request($options_saisie['nom'])."\n\n";
-			}
+		// Maintenant on parcourt les champs pour générer le tableau des valeurs
+		$valeurs = array();
+		foreach ($champs as $champ){
+			$valeurs[$champ] = _request($champ);
 		}
+		
+		// On génère la vue HTML
+		$html = recuperer_fond(
+			'inclure/voir_saisies',
+			array(
+				'saisies' => $saisies,
+				'valeurs' => $valeurs
+			)
+		);
+		
+		// On génère le texte brut
+		include_spip('classes/facteur');
+		$texte = Facteur::html2text($html);
 		
 		// horodatons
 		$date = date("d/m/y");
