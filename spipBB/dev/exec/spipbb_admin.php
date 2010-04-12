@@ -281,7 +281,7 @@ function exec_spipbb_admin() {
 	if($id_salon) {
 		$enum_art = branche_articles($id_salon);
 		$wheres = ""; // si rubrique sans article
-		if (!(enum_art)) {$wheres = "AND id_article IN ($enum_art)";}
+		if (!empty($enum_art)) {$wheres = "AND id_article IN ($enum_art)";}
 	}
 
 	$res = sql_select(array("id_forum","id_thread","date_heure","auteur","titre","statut"), // rows

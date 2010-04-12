@@ -1,4 +1,9 @@
-﻿2008-12-29  chryjs  <chryjs!@!free!.!fr>
+﻿2010-04-12 <damazone72-spip!@!yahoo.fr>
+ * 0.5.4.0 : Compatibilité spip2.1
+ * Correction de bug Erreur SQL de syntaxe 1064 quand une rubrique ne contient pas d'article
+ * Correction Erreur dans l’espace privé : Function ereg() is deprecated cfr http://spipbb.free.fr/spip.php?page=voirsujet&id_forum=839
+
+2008-12-29  chryjs  <chryjs!@!free!.!fr>
 
  * 0.5.3.1 : Correction du bug interface admin + typos : http://spipbb.free.fr/spip.php?page=voirsujet&id_forum=998
  
