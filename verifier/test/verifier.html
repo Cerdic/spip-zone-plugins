@@ -84,11 +84,11 @@ echo "Valide SPIP : $email3 ?";
 var_dump($verifier($email3, 'email'));
 
 echo "Valide Strict : $email ?";
-var_dump($verifier($email, 'email_strict'));
+var_dump($verifier($email, 'email',array('mode'=>'strict')));
 echo "Valide Strict : $email2 ?";
-var_dump($verifier($email2, 'email_strict'));
+var_dump($verifier($email2, 'email',array('mode'=>'strict')));
 echo "Valide Strict : $email3 ?";
-var_dump($verifier($email3, 'email_strict'));
+var_dump($verifier($email3, 'email',array('mode'=>'strict')));
 
 
 ?>
@@ -124,14 +124,14 @@ $siret_valide = "32122785200019";
 $siret_non_valide = "32122785200033";
 
 echo "SIREN : $siren_valide ?";
-var_dump($verifier($siren_valide, 'siren'));
+var_dump($verifier($siren_valide, 'siren_siret'));
 echo "SIREN : $siren_non_valide ?";
-var_dump($verifier($siren_non_valide, 'siren'));
+var_dump($verifier($siren_non_valide, 'siren_siret'));
 
 echo "SIRET : $siret_valide ?";
-var_dump($verifier($siret_valide, 'siret'));
+var_dump($verifier($siret_valide, 'siren_siret',array('mode'=>'siret')));
 echo "SIRET : $siret_non_valide ?";
-var_dump($verifier($siret_non_valide, 'siret'));
+var_dump($verifier($siret_non_valide, 'siren_siret',array('mode'=>'siret')));
 ?>
 </pre>
 
