@@ -1,0 +1,35 @@
+[<!--(#REM)
+
+	// inc-head_font_face.html
+
+// $LastChangedRevision$
+// $LastChangedBy$
+// $LastChangedDate$
+
+	Petit squelette pour le code nécessaire
+	a la declaration font-face, v2
+	
+	Dans cette version du squelette 
+	le fichier au format WOFF doit etre ajoute
+	dans votre dossier de polices.
+	
+	Pour générer ttf + eot + woff, voir par exemple,
+	http://www.fontsquirrel.com/fontface/generator
+	
+	Vous pouvez personnaliser ce squelette en
+	le recopiant dans votre repertoire de squelettes
+	et en l'adaptant a vos besoins.
+	
+-->]<style type="text/css">
+@font-face {
+font-family: '#ENV{family}';
+src: url('polices/hanshand.eot');
+src: local(#ENV{fontname})
+ [,(#ENV{foni_include}|=={oui}|?{' ',''})url("#FONI_FONT_ENCODE{#ENV{font_path},#ENV{font_eot}")}
+  ][,(#ENV{foni_include}|=={oui}|?{'',' '})url("#URL_SITE_SPIP/#ENV{font_path}/#ENV{font_eot}")]
+ [,(#ENV{foni_include}|=={oui}|?{' ',''})url("#FONI_FONT_ENCODE{#ENV{font_path},#ENV{font_woff}")}
+  ][,(#ENV{foni_include}|=={oui}|?{'',' '})url("#URL_SITE_SPIP/#ENV{font_path}/#ENV{font_woff}") format('woff')]
+ [,(#ENV{foni_include}|=={oui}|?{' ',''})url("#FONI_FONT_ENCODE{#ENV{font_path},#ENV{font_ttf}")}
+  ][,(#ENV{foni_include}|=={oui}|?{'',' '})url("#URL_SITE_SPIP/#ENV{font_path}/#ENV{font_ttf}") format('truetype')]
+}
+</style>
