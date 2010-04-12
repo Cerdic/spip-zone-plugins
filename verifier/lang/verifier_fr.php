@@ -25,6 +25,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_url' => 'L\'adresse n\\\'est pas valide.',
 
 	// O
+	'option_email_disponible' => "V&eacute;rifier que l&#x27;adresse n&#x27;est pas d&eacute;j&agrave; utilis&eacute;e par un auteur",
+	'option_email_mode' => 'Mode de v&eacute;rification des courriels',
+	'option_email_mode_normal' => 'V&eacute;rification normale de SPIP (respectueuse de la RFC)',
+	'option_email_mode_strict' => 'V&eacute;rification moins permissive',	
 	'option_entier_max_label' => 'Valeur maximum',
 	'option_entier_min_label' => 'Valeur minimum',
 	'option_regex_modele_label' => 'La valeur doit correspondre au masque suivant',

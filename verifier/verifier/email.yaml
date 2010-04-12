@@ -6,10 +6,11 @@ options:
     saisie: 'radio'
     options:
       nom: 'mode'
-      label: '<:verifier:option_entier_min_label:>'
+      label: '<:verifier:option_email_mode:>'
       datas:
         normal: '<:verifier:option_email_mode_normal:>'
         strict: '<:verifier:option_email_mode_strict:>'
+	defaut: 'normal'
   -
     saisie: 'case'
     options:
