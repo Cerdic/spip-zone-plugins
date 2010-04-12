@@ -1,7 +1,7 @@
 <plugin>
 <nom>P&eacute;tronille</nom>
 <icon>icon.png</icon>
-<description>Un framework CSS pour SPIP, en cours de d&eacute;veloppement. Pour l'utiliser, <strong>commencez par appeler ces feuilles de style EN PREMIER</strong> dans le head de vos pages.
+<description>Framework CSS pour SPIP, en cours de d&eacute;veloppement. Pour l'utiliser, <strong>commencez par appeler ces feuilles de style EN PREMIER</strong> dans le head de vos pages.
 
 -* <code>reset.css</code> : mise &agrave; z&eacute;ro multinavigateurs
 -* <code>typo.css</code> : base typographique
@@ -12,9 +12,9 @@ Pour utiliser toutes ces feuilles d'un coup, appelez seulement <code>petronille.
 
 Il est d&eacute;conseill&eacute; d'activer P&eacute;tronille sur un site d&eacute;j&agrave; styl&eacute;&nbsp;: cela sera soit sans effet, soit contrariant. P&eacute;tronille vous pr&eacute;m&acirc;che le travail&nbsp;: elle n'est donc utile qu'employ&eacute;e d&egrave;s le d&eacute;but.
 
-Vos retours critiques sont bienvenus pour am&eacute;liorer ce P&eacute;tronille&nbsp;: faites-moi part de vos habitudes et pr&eacute;f&eacute;rences !
+Vos retours critiques sont bienvenus pour am&eacute;liorer P&eacute;tronille&nbsp;: faites-moi part de vos habitudes et pr&eacute;f&eacute;rences !
 </description>
-<version>0.4</version>
+<version>0.4.1</version>
 <etat>dev</etat>
 <auteur>[romy.tetue.net->http://romy.tetue.net] - 2010</auteur>
 <prefix>petronille</prefix>

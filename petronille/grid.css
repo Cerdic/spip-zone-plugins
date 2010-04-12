@@ -6,13 +6,26 @@
 
 -------------------------------------------------------------- */
 
+/* Blocs */
+.column { float: left; margin-right: 1.5em; }
+.bloc { display: block; margin-bottom: 1.5em; }
+.box { display: block; margin-bottom: 1.5em; padding: 1.5em; background: #EEE; }
+
+/* Listes, tableaux et mosaiques */
+.first {}
+.last { margin-right: 0; }
+.odd {}
+.even {}
+.sep {}
+
 /* clearfix : http://www.positioniseverything.net/easyclearing.html */
 .clearfix:after {
-    content: "."; 
+    content: "\0020";
     display: block; 
     height: 0; 
     clear: both; 
     visibility: hidden;
+	overflow: hidden;
 }
 .clearfix { display: inline-table; }
 
@@ -22,8 +35,9 @@
 /* End hide from IE-mac */
 
 /* Espaceur de blocs */
-.nettoyeur { clear: both; margin: 0; padding: 0; border: 0; height: 0; line-height: 1px; font-size: 1px; }
 .clear { clear: both; }
+br.clear,.nettoyeur { clear: both; margin: 0; padding: 0; border: 0; height: 0; line-height: 1px; font-size: 1px; }
+hr.clear { visibility: hidden; }
 
 /* Non visible a l'ecran */
 .invisible { position: absolute; top: -3000em; height: 1%; }
