@@ -97,7 +97,95 @@ class Facteur extends PHPMailer {
 			$this->ConvertirUtf8VersIso8859();
 
 	}
-
+	
+	/*
+	 * Transforme du HTML en texte brut, mais proprement, c'est-à-dire en essayant
+	 * de garder les titrages, les listes, etc
+	 *
+	 * @param string $html Le HTML à transformer
+	 * @return string Retourne un texte brut formaté correctement
+	 */
+	function html2text($html){
+		// On remplace tous les sauts de lignes par un espace
+		// str_replace("\n", ' ');
+		
+		// Supprimer tous les liens internes
+		$texte = preg_replace("/\<a href=['\"]#(.*?)['\"][^>]*>(.*?)<\/a>/ims", "\\2", $html);
+	
+		// Supprime feuille style
+		$texte = preg_replace(";<style[^>]*>[^<]*</style>;i", "", $texte);
+	
+		// Remplace tous les liens	
+		$texte = preg_replace("/\<a[^>]*href=['\"](.*?)['\"][^>]*>(.*?)<\/a>/ims", "\\2 (\\1)", $texte);
+	
+		$_traits = str_repeat('-', 40);
+		$_points = str_repeat('.', 20);
+	
+		// Les titres
+		$texte = preg_replace(";<h1[^>]*>;i", "= ", $texte);
+		$texte = str_replace("</h1>", " =\n\n", $texte);
+		$texte = preg_replace(";<h2[^>]*>;i", "== ", $texte);
+		$texte = str_replace("</h2>", " ==\n\n", $texte);
+		$texte = preg_replace(";<h3[^>]*>;i", "=== ", $texte);
+		$texte = str_replace("</h3>", " ===\n\n", $texte);
+	
+		$texte = preg_replace(";<p[^>]*>;i", "\n\n", $texte);
+	
+		//$texte = str_replace('<br /><img class=\'spip_puce\' src=\'puce.gif\' alt=\'-\' border=\'0\'>', "\n".'-', $texte);
+		$texte = preg_replace (';<li[^>]>;i', "\n".'-', $texte);
+		//$texte = str_replace('<li>', "\n".'-', $texte);
+	
+	
+		// accentuation du gras -
+		// <b>texte</b> -> *texte*
+		$texte = preg_replace (';<b[^>]*>;i','*' ,$texte);
+		$texte = str_replace ('</b>','*' ,$texte);
+	
+		// accentuation du gras -
+		// <strong>texte</strong> -> *texte*
+		$texte = preg_replace (';<strong[^>]*>;i','*' ,$texte);
+		$texte = str_replace ('</strong>','*' ,$texte);
+	
+	
+		// accentuation de l'italique
+		// <em>texte</em> -> *texte*
+		$texte = preg_replace (';<em[^>]*>;i','/' ,$texte);
+		$texte = str_replace ('</em>','/' ,$texte);
+		
+		// accentuation de l'italique
+		// <i>texte</i> -> *texte*
+		$texte = preg_replace (';<i[^>]*>;i','/' ,$texte);
+		$texte = str_replace ('</i>','/' ,$texte);
+	
+		$texte = str_replace('&oelig;', 'oe', $texte);
+		$texte = str_replace("&nbsp;", " ", $texte);
+		$texte = filtrer_entites($texte);
+	
+		// On supprime toutes les balises restantes
+		$texte = supprimer_tags($texte);
+	
+		$texte = str_replace("\x0B", "", $texte); 
+		$texte = str_replace("\t", "", $texte) ;
+		$texte = preg_replace(";[ ]{3,};", "", $texte);
+	
+		// espace en debut de ligne
+		$texte = preg_replace("/(\r\n|\n|\r)[ ]+/", "\n", $texte);
+	
+		//marche po
+		// Bring down number of empty lines to 4 max
+		$texte = preg_replace("/(\r\n|\n|\r){3,}/m", "\n\n", $texte);
+	
+		//saut de lignes en debut de texte
+		$texte = preg_replace("/^(\r\n|\n|\r)+/", "\n\n", $texte);
+		//saut de lignes en debut ou fin de texte
+		$texte = preg_replace("/(\r\n|\n|\r)+$/", "\n\n", $texte);
+	
+		// Faire des lignes de 75 caracteres maximum
+		$texte = wordwrap($texte);
+	
+		return $texte;
+	}
+	
 	/**
 	 * Transformer les urls des liens et des images en url absolues
 	 * sans toucher aux images embarquees de la forme "cid:..."
