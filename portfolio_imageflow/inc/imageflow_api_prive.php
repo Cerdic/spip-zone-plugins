@@ -78,6 +78,20 @@ function imageflow_gros_titre ($titre, $ze_logo='', $return = false) {
 	return($r);
 }
 
+/* Renvoie les infos du plugin demande'
+ */
+function imageflow_plugin_get_infos($plug)
+{
+	if(version_compare($GLOBALS['spip_version_code'],'15375','>=')) {
+		$get_infos = charger_fonction('get_infos','plugins');
+		$infos = $get_infos($plug);
+	}
+	else {
+		$infos = plugin_get_infos($plug);
+	}
+	return($infos);
+}
+
 /***********************************************/
 function imageflow_html_signature ($prefix, $html = true) {
 
@@ -86,7 +100,7 @@ function imageflow_html_signature ($prefix, $html = true) {
 		$info = $get_infos($prefix);
 	}
 	else {
-		$info = plugin_get_infos($prefix);
+		$info = imageflow_plugin_get_infos($prefix);
 	}
 	
 	$nom = typo($info['nom']);
@@ -114,7 +128,7 @@ function imageflow_boite_plugin_info ($prefix) {
 	$result = false;
 	if(!empty($prefix)) {
 		$plug_infos = imageflow_get_plugin_meta_infos($prefix); // dir et version
-		$info = plugin_get_infos($plug_infos['dir']);
+		$info = imageflow_plugin_get_infos($plug_infos['dir']);
 		$icon = 
 			(isset($info['icon']))
 			? "<div "
