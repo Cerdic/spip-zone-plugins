@@ -3,9 +3,10 @@
 <icon>icon.png</icon>
 <description>Un framework CSS pour SPIP, en cours de d&eacute;veloppement. Pour l'utiliser, <strong>commencez par appeler ces feuilles de style EN PREMIER</strong> dans le head de vos pages.
 
--* <code>reset.css</code> : mise a zero multinavigateurs
+-* <code>reset.css</code> : mise &agrave; z&eacute;ro multinavigateurs
 -* <code>typo.css</code> : base typographique
 -* <code>forms.css</code> : base pour formulaires
+-* <code>grid.css</code> : &eacute;l&eacute;ments de composition
 
 Pour utiliser toutes ces feuilles d'un coup, appelez seulement <code>petronille.css</code>
 
@@ -13,7 +14,7 @@ Il est d&eacute;conseill&eacute; d'activer P&eacute;tronille sur un site d&eacut
 
 Vos retours critiques sont bienvenus pour am&eacute;liorer ce P&eacute;tronille&nbsp;: faites-moi part de vos habitudes et pr&eacute;f&eacute;rences !
 </description>
-<version>0.3</version>
+<version>0.4</version>
 <etat>dev</etat>
 <auteur>[romy.tetue.net->http://romy.tetue.net] - 2010</auteur>
 <prefix>petronille</prefix>

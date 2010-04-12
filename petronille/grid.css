@@ -1,0 +1,30 @@
+/* --------------------------------------------------------------
+
+   grid.css
+   Faciliter la composition
+   Petronille - romy.tetue.net - 2010
+
+-------------------------------------------------------------- */
+
+/* clearfix : http://www.positioniseverything.net/easyclearing.html */
+.clearfix:after {
+    content: "."; 
+    display: block; 
+    height: 0; 
+    clear: both; 
+    visibility: hidden;
+}
+.clearfix { display: inline-table; }
+
+/* Hides from IE-mac \*/
+.clearfix { height: 1%; }
+.clearfix { display: block; }
+/* End hide from IE-mac */
+
+/* Espaceur de blocs */
+.nettoyeur { clear: both; margin: 0; padding: 0; border: 0; height: 0; line-height: 1px; font-size: 1px; }
+.clear { clear: both; }
+
+/* Non visible a l'ecran */
+.invisible { position: absolute; top: -3000em; height: 1%; }
+.none { display: none; }
