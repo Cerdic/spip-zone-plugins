@@ -17,6 +17,11 @@ define('_FONI_IMAGES_DIR', _DIR_PLUGIN_FONI . 'images/');
 define('_FONI_SEPARATOR', '|');
 define('_FONI_DEBUG', false); //true);
 
+define('_FONI_SKEL_HEAD_STD', 'inc-head_font_face');
+
+// version étandue du skel. Si wof découvert.
+define('_FONI_SKEL_HEAD_XTD', 'inc-head_font_face_v2');
+
 define('_FONI_DEFAULTS_PREFS'
 	, serialize(array(
 		
@@ -161,7 +166,7 @@ function balise_FONI_FONT_ENCODE ($p) {
 
 function foni_header_sig ()
 {
-	return(PHP_EOL . '<!-- ' . _FONI_PREFIX . ' -->' . PHP_EOL . $result . PHP_EOL);
+	return(PHP_EOL . '<!-- ' . _FONI_PREFIX . ' -->' . PHP_EOL);
 }
 
 if(!function_exists('import_script'))

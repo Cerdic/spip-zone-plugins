@@ -98,7 +98,8 @@ function foni_fontes_lister ($dir, $fonts_list) {
 			if(count($font_files['eot'])) {
 				foreach($font_files['eot'] as $ii => $val) {
 					if(isset($font_files['ttf'][$ii])) {
-						$fonts_list[$ii] = $font_files['eot'][$ii] . _FONI_SEPARATOR . $font_files['ttf'][$ii] . _FONI_SEPARATOR . $dir;
+						$fonts_list[$ii] = $font_files['eot'][$ii] . _FONI_SEPARATOR
+							. $font_files['ttf'][$ii] . _FONI_SEPARATOR . $dir;
 						foni_log($dir.'/'.$ii);
 					}
 				}

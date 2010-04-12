@@ -2,30 +2,34 @@
 
 	// inc-head_font_face.html
 
-// $LastChangedRevision$
 // $LastChangedBy$
 // $LastChangedDate$
 
 	Petit squelette pour le code nécessaire
 	a la declaration font-face
 	
-	VOus pouvez personnaliser ce squelette en
+	Une autre version de ce squelette a été ajoutée
+	dans inc-head_font_face_v2.html
+	Pour utiliser ce dernier, ajoutez la fonte au format wof
+	dans le dossier des polices.
+	
+	Vous pouvez personnaliser ce squelette en
 	le recopiant dans votre repertorie de squelettes
 	et en l'adaptant a vos besoins.
 	
 -->]<style type="text/css">
 @font-face { 
  font-family: "#ENV{family}";
- src: url("[(#ENV{foni_include}|=={oui}|?{' ',''})#FONI_FONT_ENCODE{#ENV{font_path},#ENV{font_ttf}}
-][(#ENV{foni_include}|=={oui}|?{'',' '})#URL_SITE_SPIP/#ENV{font_path}/#ENV{font_ttf}]");
+ src:[(#ENV{foni_include}|=={oui}|?{' ',''})url("#FONI_FONT_ENCODE{#ENV{font_path},#ENV{font_ttf}}
+][(#ENV{foni_include}|=={oui}|?{'',' '})url("#URL_SITE_SPIP/#ENV{font_path}/#ENV{font_ttf}]");
 }
 </style>
 <!--[if IE]>
 <style>
-@font-face { 
+@font-face {
  font-family: "#ENV{family}";
- src: url("[(#ENV{foni_include}|=={oui}|?{' ',''})#FONI_FONT_ENCODE{#ENV{font_path},#ENV{font_eot}}
-][(#ENV{foni_include}|=={oui}|?{'',' '})#URL_SITE_SPIP/#ENV{font_path}/#ENV{font_eot}]");
+ src:[(#ENV{foni_include}|=={oui}|?{' ',''})url("#FONI_FONT_ENCODE{#ENV{font_path},#ENV{font_eot}}
+][(#ENV{foni_include}|=={oui}|?{'',' '})url("#URL_SITE_SPIP/#ENV{font_path}/#ENV{font_eot}]");
 }
 </style>
 <![endif]-->

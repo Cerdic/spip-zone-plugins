@@ -59,16 +59,13 @@ function foni_header_prive ($flux) {
  */
 function foni_insert_head ($flux) {
 
-	$result = '';
-	
-
-	$flux .= foni_header_sig();
+	$result = foni_header_sig();
 
 	$prefs = foni_lire_preferences();
 
 	$available_fonts = foni_fonts_collecter();
 	
-	$skel = 'inc-inserer_fontes';
+	$skel = _FONI_SKEL_HEAD_STD;
 
 	foreach($prefs['fontes'] as $fontname => $family)
 	{
@@ -82,19 +79,25 @@ function foni_insert_head ($flux) {
 			, 'font_path' => $font_path
 			, 'foni_include' => $prefs['include']
 		);
-		$skel = 'inc-head_font_face';
+		// recherche le woff
+		$font_woff = $font_path.'/'.substr($font_ttf, 0, strlen($font_ttf)-4).'.woff';
+		
+		if(file_exists($font_woff)) {
+			$contexte['font_woff'] = $font_woff;
+			$skel = _FONI_SKEL_HEAD_XTD;
+		}
 		
 		if($fond = find_in_path($skel.'.html'))
 		{
-			$result = recuperer_fond($skel, $contexte);	
+			$result .= recuperer_fond($skel, $contexte);
 		}
 		else
 		{
-			$result = '<!-- squelette not found! -->' . PHP_EOL;
+			$result .= '<!-- squelette '.$fond.' not found! -->' . PHP_EOL;
 		}
 		$flux .= $result;
 	}
-	return ($flux);
+	return($flux);
 }
 
 /*
