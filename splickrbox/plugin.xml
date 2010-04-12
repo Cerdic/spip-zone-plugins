@@ -12,6 +12,7 @@
 	<etat>
 	stable
 	</etat>
+	<icon>images/splickrbox-64.png</icon>
 	<description>
 	Noisette pour afficher les dernieres photos &#224; la Flickr (le "badge") , tout &#231;a en javascript via <code>#INSERT_HEAD</code> et le plugin JQuery.
 
