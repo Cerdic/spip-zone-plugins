@@ -20,7 +20,7 @@ eval(args);
 -->]
 <style type="text/css">
 	#SET{skin,#ENV{skin,skins/la-bas}|concat{'/skin.css'}}
-	[(#INCLURE{fond=#GET{skin}}|compacte_css)]
+	[(#INCLURE{fond=#GET{skin}}|compacte{css})]
 	[#playliste_video{ width:(#ENV{largeur,''})px;}]
 </style>
 
