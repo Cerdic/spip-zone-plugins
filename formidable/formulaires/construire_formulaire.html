@@ -89,6 +89,14 @@
 						})
 						.change();
 				});
+			
+			// On déplie toujours les fieldsets plés par défaut
+			$('li.fieldset.plie')
+				.each(function(){
+					$(this)
+						.removeClass('plie')
+						.find('> fieldset > ul').show();
+				});
 		});
 		
 		function formulaire_configurer_onglets(){
