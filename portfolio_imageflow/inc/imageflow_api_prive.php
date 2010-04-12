@@ -81,7 +81,14 @@ function imageflow_gros_titre ($titre, $ze_logo='', $return = false) {
 /***********************************************/
 function imageflow_html_signature ($prefix, $html = true) {
 
-	$info = plugin_get_infos(imageflow_get_plugin_meta_dir($prefix));
+	if(version_compare($GLOBALS['spip_version_code'],'15375','>=')) {
+		$get_infos = charger_fonction('get_infos','plugins');
+		$info = $get_infos($prefix);
+	}
+	else {
+		$info = plugin_get_infos($prefix);
+	}
+	
 	$nom = typo($info['nom']);
 	$version = typo($info['version']);
 	$version = 
@@ -243,4 +250,4 @@ function imageflow_sliders_lister ($dir = _DIR_IMAGEFLOW_IMAGES) {
 	return (false);
 }
 
-?>
+
