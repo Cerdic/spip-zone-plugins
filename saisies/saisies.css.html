@@ -1,0 +1,20 @@
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+#SET{left,#LANG_DIR|choixsiegal{ltr,left,right}}
+#SET{right,#LANG_DIR|choixsiegal{ltr,right,left}}
+#SET{fleche,#LANG_DIR|choixsiegal{ltr,#CHEMIN{images/deplierhaut.gif},#CHEMIN{images/deplierhaut_rtl.gif}}}
+
+li.fieldset.pliable h3{
+	cursor:pointer;
+}
+
+li.fieldset.pliable h3 span{
+	padding-#GET{left}:15px;
+	background:transparent url(#CHEMIN{images/deplierbas.gif}) #GET{left} center no-repeat;
+}
+
+li.fieldset.plie h3 span{
+	background-image:url(#GET{fleche});
+}

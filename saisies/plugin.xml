@@ -2,7 +2,7 @@
     <nom><multi>[fr]Saisies pour formulaires[en]Entries for forms</multi></nom>
     <auteur>Matthieu Marcillaud - RastaPopoulos</auteur>
     <licence>&#169; 2009 GNU/GPL</licence>
-    <version>1.7.1</version>
+    <version>1.7.2</version>
     <etat>test</etat>
     
     <description>
@@ -31,6 +31,16 @@
     <fonctions>balise/saisie.php</fonctions>
     <fonctions>inc/saisies.php</fonctions>
     <options>saisies_options.php</options>
+    
+    <pipeline>
+    	<nom>header_prive</nom>
+    	<inclure>saisies_pipelines.php</inclure>
+    </pipeline>
+    <pipeline>
+    	<nom>insert_head</nom>
+    	<inclure>saisies_pipelines.php</inclure>
+    </pipeline>
+    
 	<necessite id="SPIP" version="[2.0;]" />
 	<utilise id="verifier" />
 </plugin>
