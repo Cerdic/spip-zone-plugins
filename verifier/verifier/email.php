@@ -9,6 +9,21 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function verifier_email_dist($valeur, $options=array()){
 	include_spip('inc/filtres');
 	
+	/**
+	 * Vérifier que le courriel utilisé n'est pas
+	 * déjà présent en base SPIP_AUTEURS
+	 */
+	if ($options['disponible'] and $options['disponible']=='oui'){
+		include_spip('base/abstract_sql');
+		$erreur = _T('verifier:erreur_email_nondispo');
+		$ok = '';
+
+		$emailDejaUtilise = sql_getfetsel("id_auteur", "spip_auteurs", "email='".$valeur."'");
+		if($emailDejaUtilise) return $erreur;
+
+		return $ok;
+	}
+	
 	if (!$options['mode'] or !in_array($options['mode'], array('strict'))){
 		$mode = 'normal';
 	}
