@@ -5,7 +5,7 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // A
-'absence_prise_en_compte' => 'Ihre Abwesenheit wurde gespeichert',
+'absence_prise_en_compte' => 'Ihre Abwesenheit wurde erfasst',
 'activite_editoriale' => 'Redaktionelle Aktivit&auml;t',
 'afficher_calendrier' => 'Kalender anzeigen',
 'agenda' => 'Kalender',
@@ -17,7 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'aucune_rubrique_mode_agenda' => 'In der Grundeinstellung k&ouml;nnen Events in alle Rubriken eingetragen werden. Wenn sie den Kalender gezielt f&uuml;r eine oder mehrere Rubriken aktivieren, dann steht ihnen der Kalender nur f&uuml;r diese Rubriken zur Verf&uuml;gung.',
 'aucun_evenement' => 'Kein Event',
 // B
-'bouton_annuler' => 'Stornieren',
+'bouton_annuler' => 'Abbrechen',
 'bouton_supprimer' => 'L&ouml;schen',
 // C
 'confirm_suppression_inscription' => 'Wollen sie diese Anmeldung wirklich l&ouml;schen?',
@@ -47,7 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'evenement_date_du' => 'Vom ',
 'evenement_date_fin' => 'Enddatum',
 'evenement_descriptif' => 'Beschreibung',
-'evenement_horaire' => 'Zeitplan',
+'evenement_horaire' => 'ganzt&auml;gig',
 'evenement_lieu' => 'Ort',
 'evenement_repetitions' => 'Wiederholungen',
 'evenement_titre' => 'Titel',
