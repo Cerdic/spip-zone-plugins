@@ -70,9 +70,9 @@ function traiter_typo_avancee($texte) {
 	// Ajout: apres une esperluete, mettre un blanc insecable
 	$texte = preg_replace("/<span class=\"amp\">&amp;<\/span> +/","<span class=\"amp\">&amp;</span>&nbsp;", $texte); 
 	
-	// Attention aux titres numerotes
-	$texte = preg_replace("/^<span class=\"numbers\">([0-9]+)<\/span>\./", "\\1.", $texte);
 	
+	// Attention aux titres numerotes
+	$texte = preg_replace("/^<span class=\"numbers\">([0-9]+)<\/span>\.([[:space:]]|".chr(194)."|".chr(160).")+/", "\\1. ", $texte);
 	
 	
 	$texte = trim($texte);
@@ -81,11 +81,31 @@ function traiter_typo_avancee($texte) {
 }
 
 
+function uniord($c) {
+    $h = ord($c{0});
+    if ($h <= 0x7F) {
+        return $h;
+    } else if ($h < 0xC2) {
+        return false;
+    } else if ($h <= 0xDF) {
+        return ($h & 0x1F) << 6 | (ord($c{1}) & 0x3F);
+    } else if ($h <= 0xEF) {
+        return ($h & 0x0F) << 12 | (ord($c{1}) & 0x3F) << 6
+                                 | (ord($c{2}) & 0x3F);
+    } else if ($h <= 0xF4) {
+        return ($h & 0x0F) << 18 | (ord($c{1}) & 0x3F) << 12
+                                 | (ord($c{2}) & 0x3F) << 6
+                                 | (ord($c{3}) & 0x3F);
+    } else {
+        return false;
+    }
+}
+
+
 function typo_avancee_typo($texte) {
 	// Ne pas appliquer dans l'espace prive
 	if (_DIR_RACINE == "../") return $texte;
-
-//	return $texte;
+	
 	// Traiter paragraphe par paragraphe
 	include_spip("inc/texte");
 	$texte_par = traiter_retours_chariots($texte);
@@ -98,7 +118,6 @@ function typo_avancee_typo($texte) {
 		$retour[]= traiter_typo_avancee(trim($paragraphe));
 	}
 	$texte = join($retour,"\n\n");
-			
 	
 	return $texte;
 }
