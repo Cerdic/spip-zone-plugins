@@ -1,0 +1,40 @@
+#CACHE{0}
+[(#REM)
+
+	Controleur pour le crayon 'id_juste' , uniquement html
+	Permet de choisir une réponse juste parmi les réponses déja saisies
+	
+	12/04/2010 : création
+
+]
+
+<!-- controleur id_juste -->
+
+<!--pre style="background:orange;width:400px;overflow:hidden;color:black;position:fixed;top:0;left:0;text-align:left;padding:8px">
+[(#ENV**|unserialize|print_r{1})]
+</pre-->
+
+
+[(#REM) 
+	Je suis dans l'environnement d'une correction; le id a deux valeurs séparées par un '-' tiret
+	je détermine si une réponse juste a déja été choisie pour cet article ]
+<BOUCLE_r(CORRECTIONS){id_article=#ENV{id_correction}}>
+#SET{id,#ID_ARTICLE}
+</BOUCLE_r>
+</B_r>
+<!--p>PAS D'ARTICLE </p-->
+<//B_r>
+
+<!-- p>[(#ENV{id_correction}|match{\d*$})]</p -->
+<!-- p>[(#ENV{id_correction}|match{^\d})]</p -->
+
+[(#REM) La liste des réponses  ]
+<select class="crayon-active" name="#ENV{name_id_juste}" >
+	<option value="">---</option>
+	<BOUCLE_reponses(REPONSES){id_article=#GET{id}}{par num texte}>
+	<option value="#ID_REPONSE" [(#GET{id}|=={#ID_REPONSE}|?{'selected="selected"'})]>[(#TEXTE|supprimer_numero)]</option>
+	</BOUCLE_reponses>
+</select>
+
+
+

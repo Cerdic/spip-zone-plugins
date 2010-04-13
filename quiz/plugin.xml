@@ -1,0 +1,41 @@
+<plugin>
+
+    <nom>SPIP Quiz - R&eacute;aliser de vrais quiz sous SPIP</nom>
+	
+	<version>0.1</version>
+	
+	<prefix>quiz</prefix>
+	
+	<auteur>Cyril MARION - Ateliers CYM</auteur>
+	
+	<description>Le plugin &laquo; quiz &raquo; pour SPIP propose de r&eacute;aliser des quiz de type qcm avec SPIP. Il utilise les tables natives de SPIP pour g&eacute;rer les quiz eux m&ecirc;mes (rubriques), les questions (articles) et les th&eacute;matiques (mots cl&eacute;s). Il ajoute simplement une table spip_questions contenant l'id de la question et celle de l'article li&eacute;, et une table spip_reponses, li&eacute;es &agrave; chaque question. Par convention, le commentaire li&eacute; au corrig&eacute; de la questiton est stock&eacute; dans le champ descriptif de l'article de type question. Les r&eacute;ponses peuvent &ecirc;tre de type vrai ou faux.
+
+Dans une future version on sera capable de g&eacute;rer d'autres types de questions, comme par exemple les questions o&ugrave; l'on peut apporter plusieurs r&eacute;ponses ou les questions de type &laquo; valeur &raquo; (curseur).
+
+La pr&eacute;sente version a &eacute;t&eacute; d&eacute;velopp&eacute;e dans le but de faciliter la saisie et le classement des quiz, puis d'automatiser la sortie du fichier texte contenant les donn&eacute;es n&eacute;cessaires &agrave; la compilation d'un quiz traditionnel de FinHarmony sous Flash.</description>
+	
+	<etat>dev</etat>
+
+	<version_base>0.1</version_base>
+	
+	<install>base/quiz_upgrade.php</install>
+		
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/quiz_tables.php</inclure>
+	</pipeline>
+	
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/quiz_tables_interfaces.php</inclure>
+	</pipeline>
+	
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<inclure>quiz_pipelines.php</inclure>
+	</pipeline>
+
+
+</plugin>
+	
+	

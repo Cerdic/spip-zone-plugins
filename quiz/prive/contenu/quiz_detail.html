@@ -1,0 +1,43 @@
+
+<!-- squelette contenu/quiz_detail.html -->
+
+<h2 class="titre"><:quiz:quiz:></h2>
+
+[(#REM) Est-ce que cet article est un quiz ? Si oui, il a des réponses attachées.]
+<B_r>
+
+
+<p><:quiz:reponses_possibles:></p>
+<ul class="liste-items quiz">
+
+	[(#REM) Les réponses attachés à cet article ]
+	<BOUCLE_r(REPONSES){id_article}>
+	<li class="reponse #EDIT{texte}[(#ID_REPONSE|=={[(#GET{juste})]}|?{' juste',' fausse'})]">N&deg;#ID_REPONSE : [(#TEXTE|PtoBR)]</li>
+	</BOUCLE_r>
+	
+</ul>
+
+<p>le bouton :</p>
+[(#BOUTON_ACTION{
+	<:quiz:bouton_ajouter_reponse:>,
+	#URL_ACTION_ARTICLE{ajouter_reponse,#ID_ARTICLE,#SELF},
+	ajax,
+	<:quiz:ajouter_reponse_question:>
+})]
+
+[(#REM) La bonne réponse est : ]
+<BOUCLE_c(CORRECTIONS){id_article}>
+<p class="#EDIT{id_question}"><:quiz:reponse_juste:>#ID_JUSTE.</p>
+[(#SET{juste,#ID_JUSTE})]
+</BOUCLE_c>
+</B_c>
+<p><a href="#" title="<:quiz:indiquer_reponse_juste:>">[+]<:quiz:indiquer_reponse_juste:></a></p>
+<//B_c>
+
+
+</B_r>
+<p><:quiz:article_pas_question:></p>
+[(#BOUTON_ACTION{ <:quiz:bouton_ajouter_reponse:>,#URL_ACTION_ARTICLE{ajouter_reponse,#ID_ARTICLE},ajax,<:quiz:ajouter_reponse:>})]
+
+<//B_r>
+
