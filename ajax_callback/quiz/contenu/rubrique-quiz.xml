@@ -1,0 +1,5 @@
+<composition>
+	<nom>Quiz</nom>
+	<description>Titre, questions, r&eacute;ponses</description>
+	<icon>img/composition_quiz.png</icon>
+</composition>

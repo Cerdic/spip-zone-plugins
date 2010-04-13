@@ -1,0 +1,12 @@
+dd 						{ clear:both; margin:12px auto;}
+dd.reponse 				{ margin-left:48px; }
+.numero 				{ clear:left; font-size:2.4em; float:left; width:48px; border:1px solid #dedede; font-weight:bold; text-align:center; margin-right:8px; }
+dl.corrige 				{ border: 1px solid #dedede; background:#efefef; padding: 8px; }
+dd.reponse .numero 		{ font-size:1.3em; width: 24px; }
+.reponse.juste .numero 	{ background-color:green; color:white; }
+
+@media print
+{
+dl.corrige {display:none; }
+.juste {font-weight:bold}
+}  

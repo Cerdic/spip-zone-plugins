@@ -1,0 +1,18 @@
+Si un article est lié à un enregistrement de la table spip_question c'est qu'il s'agit d'un artilce de type quiz.
+
+
+Todo :
+======
+
+ajouter un formulaire pour ajouter une question à un quiz
+trouver le moyen de sélectionner la réponse juste avec les crayons
+
+
+Faire un squelette qui affiche les questions de quiz sous la même forme que le tableau de Fred,
+puis ensuite, sous la forme d'une joli questionnaire
+
+Enfin faire un squelette qui crée un fichier txt prêt à être intégré à Flash.
+
+Ah oué, faire un truc qui se déplie comme ajouter un mot clé... ou un auteur... trop class
+
+Trouver une icone pour l'interface privée et aussi pour mettre sur la page article, dans le bloc qui doit servir à ajouter une question
