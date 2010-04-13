@@ -1,4 +1,4 @@
-<style type='text/css'>$a
+<style type='text/css'>
 
 [(#EVAL{defined('_SPIP19300')}|non)
 	div.cadre-info a { background:none; padding:0; border:0; }
@@ -144,6 +144,8 @@ function outils_toggle() {
 	}
 	if(!confirm(msg)) return false;
 	jQuery('#cs_selection').attr('value', cs_selected.join(','));
+	jQuery('#cs_infos').html('');
+	jQuery('.cs_patience').css('display','block');
 	document.csform.submit();
 }
 
