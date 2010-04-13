@@ -173,16 +173,13 @@ function decoration_PP_pre_charger($flux) {
 function decoration_PP_icones($flux){
 	// le tableau des decorations est present dans les metas
 	$balises = cs_lire_meta_outil('decoration');
-	$icones = array();
+	// icones utilisees. Attention : mettre les drop-boutons en premier !!
+	$flux['cs_decoration_drop'] = 'decoration_div.png';
 	foreach($balises[4] as $b) {
 		$id = 'decoration_'.$b[0];
-		$icones[$id] = find_in_path("icones_barre/{$id}.png")?$id.'.png'
+		$flux[$id] = find_in_path("icones_barre/{$id}.png")?$id.'.png'
 			:"decoration_{$b[2]}.png";
 	}
-	// icones utilisees. Attention : mettre les drop-boutons en premier !!
-	$flux = array_merge($flux, array(
-		'cs_decoration_drop' => 'decoration_div.png',
-	), $icones);
 	return $flux;
 }
 

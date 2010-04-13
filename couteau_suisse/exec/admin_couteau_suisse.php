@@ -46,6 +46,7 @@ function cout_exec_redirige($p='', $recompiler=true) {
 		ecrire_metas();
 		cs_initialisation(true);
 		include_spip('inc/invalideur');
+		suivre_invalideur("1"); # tout effacer
 		purger_repertoire(_DIR_SKELS);
 		purger_repertoire(_DIR_CACHE);
 	}

@@ -71,10 +71,8 @@ cs_log("smileys_installe() : $path");
 	if(defined('_DIR_PLUGIN_PORTE_PLUME')) {
 		$sm = smileys_uniques($smileys2);
  		$max = count($sm[2]);
-		for ($i=0; $i<$max; $i++) {
-			$id = 'smiley_'.str_replace('.png','',$sm[2][$i]);
-			$smileys2[3][$id] = smileys_creer_icone_barre($path.'/'.$sm[2][$i]);
-		}
+		for ($i=0; $i<$max; $i++)
+			$smileys2[4]['smiley_'.str_replace('.png','',$sm[2][$i])] = $sm[2][$i];
 	}
 	ecrire_meta('cs_smileys_racc', join(', ', $liste));
 	ecrire_meta('cs_smileys', serialize($smileys2));
@@ -171,10 +169,10 @@ function cs_smileys_PP_pre_charger($flux) {
 function cs_smileys_PP_icones($flux) {
 	// le tableau des smileys est present dans les metas
 	$smileys = cs_lire_meta_outil('smileys');
+	$path = find_in_path('img/smileys').'/';
 	// icones utilisees. Attention : mettre les drop-boutons en premier !!
-	$flux = array_merge($flux, array(
-		'cs_smileys_drop' => smileys_creer_icone_barre(find_in_path('img/smileys/mort_de_rire.png'))
-	), $smileys[3]);
+	$flux['cs_smileys_drop'] = smileys_creer_icone_barre(find_in_path('img/smileys/mort_de_rire.png'));
+	foreach($smileys[4] as $i=>$v) $flux[$i] = smileys_creer_icone_barre($path.$v);
 	return $flux;
 }
 // creation d'icone pour le plugin porte-plume

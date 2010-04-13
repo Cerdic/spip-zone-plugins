@@ -65,7 +65,7 @@ cs_log("couleurs_installe()");
 			foreach ($couleurs[2] as $i=>$c) {
 				// icone de la couleur $i
 				$color = isset($html[$c])?$html[$c]:str_replace('#','',$c);
-				$couleurs[3]['couleur_'.$x.'_'.str_replace(' ','_',$i)] = couleurs_creer_icone_barre($texte, $color);
+				$couleurs[4]['couleur_'.$x.'_'.str_replace(' ','_',$i)] = array($texte, $color);
 			}
 		}
 	}
@@ -228,10 +228,9 @@ function couleurs_PP_icones($flux) {
 	// le tableau des couleurs est present dans les metas
 	$couleurs = cs_lire_meta_outil('couleurs');
 	// icones utilisees. Attention : mettre les drop-boutons en premier !!
-	$flux = array_merge($flux, array(
-		'cs_couleur_texte' => couleurs_creer_icone_barre(_T('couteau:pp_couleur_icone_texte'), '00BFFF'),
-		'cs_couleur_fond' => couleurs_creer_icone_barre(_T('couteau:pp_couleur_icone_fond'), '00BFFF'),
-	), $couleurs[3]);
+	$flux['cs_couleur_texte'] = couleurs_creer_icone_barre(_T('couteau:pp_couleur_icone_texte'), '00BFFF');
+	$flux['cs_couleur_fond'] = couleurs_creer_icone_barre(_T('couteau:pp_couleur_icone_fond'), '00BFFF');
+	foreach($couleurs[4] as $i=>$v) $flux[$i] = couleurs_creer_icone_barre($v[0], $v[1]);
 	return $flux;
 }
 

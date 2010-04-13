@@ -29,16 +29,16 @@ function filets_sep_installe() {
 			$liste[] = '<b>__'.$reg[1].'__</b>';
 			$filets[0][] = '__'.$reg[1].'__';
 			$filets[2][] = $reg[2];
-			list(,$haut) = @getimagesize($fi="$path/$reg[1]");
+			list(,$haut) = @getimagesize($path.'/'.$reg[1]);
 			if ($haut) $haut="height:{$haut}px;";
 			$f = url_absolue($path).'/'.$reg[1];
 			$filets[1][] = code_echappement(_FILETS_SEP_BALISE_DEBUT." class=\"filet_sep filet_sep_image\" style=\"$haut background-image: url($f);\""._FILETS_SEP_BALISE_FIN);
 			if($bt)
-				$filets[3]['filet_'.str_replace('.','_',$reg[1])] = filets_creer_icone_barre($fi);
+				$filets[4]['filet_'.str_replace('.','_',$reg[1])] = $reg[1];
 		}
 	}
 	if($bt) for($i=0; $i<=_FILETS_SEP_MAX_CSS; $i++)
-		$filets[3]['filet_'.$i] = filets_creer_icone_barre('', $i);
+		$filets[5]['filet_'.$i] = $i;
 	ecrire_meta('cs_filets_sep_racc', join(', ', $liste));
 	ecrire_meta('cs_filets_sep', serialize($filets));
 	ecrire_metas();
@@ -132,9 +132,10 @@ function filets_PP_icones($flux) {
 	// le tableau des filets est present dans les metas
 	$filets = cs_lire_meta_outil('filets_sep');
 	// icones utilisees. Attention : mettre les drop-boutons en premier !!
-	$flux = array_merge($flux, array(
-		'cs_filets_drop' => filets_creer_icone_barre(find_in_path('img/filets/ornement.png'))
-	), $filets[3]);
+	$flux['cs_filets_drop'] = filets_creer_icone_barre(find_in_path('img/filets/ornement.png'));
+	$path = find_in_path('img/filets').'/';
+	foreach($filets[4] as $i=>$v) $flux[$i] = filets_creer_icone_barre($path.$v);
+	foreach($filets[5] as $i=>$v) $flux[$i] = filets_creer_icone_barre('', $v);
 	return $flux;
 }
 // creation d'icone pour le plugin porte-plume

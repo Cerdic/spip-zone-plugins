@@ -30,8 +30,7 @@ function chatons_installe() {
 			$liste[] = '<b>:'.$reg[1].'</b>';	
 			list(,,,$size) = @getimagesize("$path/$reg[1].$reg[2]");
 			$chatons[1][] = "<img class=\"no_image_filtrer\" alt=\"$reg[1]\" title=\"$reg[1]\" src=\"".url_absolue($path)."/$reg[1].$reg[2]\" $size/>";
-			if($bt)
-				$chatons[3]['chaton_'.$reg[1]] = chatons_creer_icone_barre("$path/$reg[1].$reg[2]");
+			if($bt)	$chatons[4]['chaton_'.$reg[1]] = $reg[1].'.'.$reg[2];
 		}
 	}
 	ecrire_meta('cs_chatons_racc', join(', ', $liste));
@@ -87,9 +86,9 @@ function chatons_PP_pre_charger($flux) {
 function chatons_PP_icones($flux) {
 	// le tableau des chatons est present dans les metas
 	$chatons = cs_lire_meta_outil('chatons');
-	$flux = array_merge($flux, array(
-		'cs_chatons_drop' => chatons_creer_icone_barre(find_in_path('img/chatons/lol.png'))
-	), $chatons[3]);
+	$flux['cs_chatons_drop'] = chatons_creer_icone_barre(find_in_path('img/chatons/lol.png'));
+	$path = find_in_path('img/chatons').'/';
+	foreach($chatons[4] as $i=>$v) $flux[$i] = chatons_creer_icone_barre($path.$v);
 	return $flux;
 }
 // creation d'icone pour le plugin porte-plume
