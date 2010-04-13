@@ -10,7 +10,7 @@ options:
       datas:
         normal: '<:verifier:option_email_mode_normal:>'
         strict: '<:verifier:option_email_mode_strict:>'
-	defaut: 'normal'
+    defaut: 'normal'
   -
     saisie: 'case'
     options:
