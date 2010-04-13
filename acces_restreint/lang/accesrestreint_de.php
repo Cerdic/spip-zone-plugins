@@ -8,7 +8,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'ajouter_droits_auteur' => 'Mir selbst Zugangsberechtigung f&uuml;r diesen Bereich erteilen',
+	'ajouter_droits_auteur' => 'Mir selbst den Zugang zu diesem Bereich erlauben',
 	'auteurs' => 'Autoren',
 
 	// B
@@ -25,7 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'descriptif' => 'Beschreibung',
 
 	// I
-	'icone_menu_config' => 'Beschr&auml;nkter Zugang',
+	'icone_menu_config' => 'Zugangskontrolle',
 	'icone_supprimer_zone' => 'Bereich l&ouml;schen',
 	'info_acces_restreint' => 'Diese Seite ist gesch&uuml;tzt. Bitte melden sie sich an, um auf sie zuzugreifen.',
 	'info_ajouter_auteur' => 'Autor hinzuf&uuml;gen',
@@ -35,7 +35,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucun_auteur' => 'Kein Autor f&uuml;r diesen Bereich',
 	'info_aucune_zone' => 'Kein Bereich',
 	'info_auteurs_lies_zone' => 'Autoren mit Zugang zu diesem Bereich',
-	'info_page' => 'Hier k&ouml;nnen Sie die zugangsbeschr&auml;nkten Bereiche Ihrer Webseite verwalten.',
+	'info_page' => 'Hier k&ouml;nnen Sie die gesch&uuml;tzten Bereiche Ihrer Webseite verwalten.',
 	'info_retirer_auteurs' => 'ALle Autoren entfernen',
 	'info_retirer_zone' => 'Bereich l&ouml;schen',
 	'info_retirer_zones' => 'Alle Bereiche l&ouml;schen',
@@ -44,7 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'modifier_zone' => 'Bereich &auml;ndern',
 
 	// P
-	'page_zones_acces' => 'Eingeschr&auml;nkter Zugang',
+	'page_zones_acces' => 'Zugangskontrolle',
 	'par_titre' => 'Nach Titel',
 	'privee' => 'Privat',
 	'publique' => '&Ouml;ffentlich',
@@ -60,8 +60,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre' => 'Titel',
 	'titre_ajouter_zone' => 'zum Bereich zuf&uuml;gen',
 	'titre_cadre_modifier_zone' => 'Bereich &auml;ndern',
-	'titre_table' => 'Alle zugangsbeschr&auml;nkten Bereiche',
-	'titre_zones_acces' => 'Bereiche mit Zugangsbeschr&auml;nkung',
+	'titre_table' => 'Alle Bereiche mit Zugangskontrolle',
+	'titre_zones_acces' => 'Bereiche mit Zugangskonrolle',
 	'toutes' => 'Alle',
 
 	// V
@@ -69,8 +69,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// Z
 	'zone_numero' => 'BEREICH NUMMER:',
-	'zone_restreinte_espace_prive' => 'Zugang im Redaktionsbereich beschr&auml;nken',
-	'zone_restreinte_publique' => 'Zugang auf der &ouml;ffentlichen Webseite beschr&auml;nken'
+	'zone_restreinte_espace_prive' => 'Zugang im Redaktionsbereich kontrollieren',
+	'zone_restreinte_publique' => 'Zugangskontrolle f&uuml;r den &ouml;ffentlichen Bereich'
 );
 
 ?>
