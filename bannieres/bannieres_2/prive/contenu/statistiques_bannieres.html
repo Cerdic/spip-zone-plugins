@@ -26,7 +26,9 @@
 				#SET{jours#ID_BANNIERE,#DEBUT|duree{#DATE,jour}}
 				#SET{moyenne#ID_BANNIERE,#GET{clics#ID_BANNIERE}|div{#GET{jours#ID_BANNIERE}}|round{2}}
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
-			<td>#ID_BANNIERE</td>
+			<td>
+			<a href='[(#URL_ECRIRE{banniere_voir}|parametre_url{id_banniere,#ID_BANNIERE})]'>#ID_BANNIERE</a>
+			</td>
 			<td>#POSITION</td>
 			<td>#GET{clics#ID_BANNIERE}</td>
 			<td>#GET{jours#ID_BANNIERE}</td>
@@ -63,7 +65,9 @@
 				#SET{jours#ID_BANNIERE,#DEBUT|duree{#FIN,jour}}
 				#SET{moyenne#ID_BANNIERE,#GET{clics#ID_BANNIERE}|div{#GET{jours#ID_BANNIERE}}|round{2}}
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
-			<td>#ID_BANNIERE</td>
+			<td>
+			<a href='[(#URL_ECRIRE{banniere_voir}|parametre_url{id_banniere,#ID_BANNIERE})]'>#ID_BANNIERE</a>
+			</td>
 			<td>#POSITION</td>
 			<td>#GET{clics#ID_BANNIERE}</td>
 			<td>#GET{jours#ID_BANNIERE}</td>

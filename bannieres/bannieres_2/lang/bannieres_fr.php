@@ -51,7 +51,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'future' => 'Campagne programm&eacute;e',
 	
 	// I
-	'info_gauche_numero_banniere' => 'banniere num&eacute;ro :',
+	'info_gauche_numero_banniere' => 'Campagne num&eacute;ro :',
+	'infos_diffusion' => 'Infos diffusion',
 	
 	// L
 	'label_action' => 'Action',
@@ -82,6 +83,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'logo_banniere' => 'LOGO DE LA BANNIERE',
 	'logo_ok' => 'Image pr&eacute;sente',
 
+	// M
+	'moyenne' => 'Clics par jour&nbsp;: <strong>@moyenne@</strong>',
+
+	// N
+	'nombre_clics' => 'Nombre de clics&nbsp;: <strong>@clics@</strong>',
+	'nombre_jours' => 'Nombre de jours&nbsp;: <strong>@jours@</strong>',
+
 	// O
 	'objet_bannieres' => 'banni&egrave;res',
 	
@@ -94,6 +102,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'regional' => 'R&eacute;gional',
 
 	// S
+	'statistiques_campagne' => 'Statistiques des clics sur la banni&egrave;re num&eacute;ro @num@',
+	'statistiques_des_campagnes' => 'Statistiques campagnes',
+	'statistiques_annee' => 'Campagne num&eacute;ro&nbsp;: @ban@ - Ann&eacute;e&nbsp;: @annee@',
 	'statistiques_des_campagnes' => 'Statistiques campagnes',
 
 	// T

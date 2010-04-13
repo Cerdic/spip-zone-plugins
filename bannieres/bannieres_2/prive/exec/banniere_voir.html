@@ -12,7 +12,6 @@
 
 
 	<h1>#NOM</h1>
-	<div dir='#LANG_DIR'><p><:bannieres:periode_diffusion{debut=#DEBUT,fin=#FIN}:></p></div>
 
 	<div id='wysiwyg'>
 		[(#PIPELINE{afficher_contenu_objet,[(#ARRAY{
@@ -22,6 +21,15 @@
 				contexte,[(#ARRAY{
 					id_banniere,#ID_BANNIERE})]})],
 			data,[(#INCLURE{fond=prive/contenu/banniere,id=#ID_BANNIERE})]})]})]
+	</div>
+	<div id='stats_detail'>
+		[(#PIPELINE{afficher_contenu_objet,[(#ARRAY{
+			args,[(#ARRAY{
+				type,banniere,
+				id_objet,#ID_BANNIERE,
+				contexte,[(#ARRAY{
+					id_banniere,#ID_BANNIERE})]})],
+			data,[(#INCLURE{fond=prive/contenu/banniere_stats,id=#ID_BANNIERE})]})]})]
 	</div>
 </div>
 
@@ -34,6 +42,15 @@
 			id,#ID_BANNIERE})],
 		data,''})]})
 </div>]
+	[<div class='cadre cadre-info'>
+		(#PIPELINE{boite_infos,[(#ARRAY{
+			args,[(#ARRAY{
+				type,banniere,
+				id_objet,#ID_BANNIERE,
+				contexte,[(#ARRAY{
+					id_banniere,#ID_BANNIERE})]})],
+			data,[(#INCLURE{fond=prive/contenu/banniere_resume,id=#ID_BANNIERE})]})]})
+	</div>]
 
 <!--/#navigation-->
 </BOUCLE_banniere>

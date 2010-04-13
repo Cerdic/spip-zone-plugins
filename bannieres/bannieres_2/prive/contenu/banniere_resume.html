@@ -1,0 +1,35 @@
+#CACHE{0}
+
+<h1><:bannieres:infos_diffusion:></h1>
+
+<BOUCLE_clics(BANNIERES_SUIVI) {par id_banniere} {id_banniere=#ENV{id}}>
+</BOUCLE_clics>
+	#SET{clics,#GRAND_TOTAL}
+</B_clics>
+	#SET{clics,0}
+<//B_clics>
+
+<BOUCLE_duree(BANNIERES) {id_banniere=#ENV{id}}>
+	[(#DATE|>={#DEBUT}|et{
+	[(#DATE|<={#FIN})]}|oui)
+	<p><:bannieres:active:></p>
+	]
+	[(#DATE| > {#FIN}|oui)
+	<p><:bannieres:echue:></p>
+	 ]
+	[(#DATE| < {#DEBUT}|oui)
+	<p><:bannieres:future:></p>
+	#SET{futur,'oui'}
+	 ]
+	<p><:bannieres:periode_diffusion{debut=#DEBUT,fin=#FIN}:></p>
+	#SET{jours,#DEBUT|duree{#DATE,jour}}
+</BOUCLE_duree>
+
+[(#GET{futur}|=={oui}|non)
+
+#SET{moyenne,#GET{clics}|div{#GET{jours}}|round{2}}
+<p><:bannieres:nombre_clics{clics=#GET{clics}}:></p>
+<p><:bannieres:nombre_jours{jours=#GET{jours}}:></p>
+<p><:bannieres:moyenne{moyenne=#GET{moyenne}}:></p>
+]
+
