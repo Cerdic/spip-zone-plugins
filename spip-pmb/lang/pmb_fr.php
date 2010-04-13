@@ -102,7 +102,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'titre_lien_pmb' => 'PMB, un SIGB enti&egrave;rement libre',
 'resultats_dans_site' => 'R&eacute;sultats dans le site',
 'resultats_dans_catalogue' => 'R&eacute;sultats dans le catalogue',
-'info_recherche_avancee' => 'Vous pouvez lancer une recherche portant sur un ou plusieurs mots<br />(titre, auteur, &eacute;diteur, ...)'
-
+'info_recherche_avancee' => 'Vous pouvez lancer une recherche portant sur un ou plusieurs mots<br />(titre, auteur, &eacute;diteur, ...)',
+'adress_opac' => 'Adresse de l\'OPAC',
+'wsdl' => 'Adresse du WSDL SOAP',
+'jsonrpc' => 'Adresse du service JSON-RPC',
+'rpc_type' => 'Type de serveur'
 );
 ?>
