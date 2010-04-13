@@ -51,9 +51,9 @@ dl.spip_documents,
 .spip_documents_center,
 .spip_doc_titre,
 .spip_doc_descriptif { margin-right: auto; margin-left: auto; }
-.spip_documents_center { clear: both; display: block; width: 100%; margin: 1.5em auto; }
-.spip_documents_left { float: left; margin: .3em 1.5em 1.5em 0; }
-.spip_documents_right { float: right; margin: .3em 0 1.5em 1.5em; }
+.spip_documents.spip_documents_center { clear: both; display: block; width: 100%; margin: 1.5em auto; }
+.spip_documents.spip_documents_left { float: left; margin: .3em 1.5em 1.5em 0; }
+.spip_documents.spip_documents_right { float: right; margin: .3em 0 1.5em 1.5em; }
 .spip_doc_titre {}
 .spip_doc_descriptif { clear: both; }
 
