@@ -26,6 +26,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  * http://json-rpc.org/wiki/specification
  *
  * @author sergio <jsonrpcphp@inservibile.org>
+ * @author emartin <emartin@sigb.net>
  */
 class jsonRPCClient {
 	
@@ -56,6 +57,27 @@ class jsonRPCClient {
 	private $notification = false;
 	
 	/**
+	 * Authentication Type. Valid values: none, json, http
+	 * 
+	 * @var authentication_type string
+	 */
+	private $authentication_type = 'none';
+	
+	/**
+	 * Authentification User. Only used when authentication_type != 'none'
+	 * 
+	 * @var authentication_user string
+	 */
+	private $authentication_user = '';
+	
+	/**
+	 * Authentification Password. Only used when authentication_type != 'none'
+	 * 
+	 * @var authentication_password string
+	 */
+	private $authentication_password = '';
+	
+	/**
 	 * Takes the connection parameters
 	 *
 	 * @param string $url
@@ -70,6 +92,20 @@ class jsonRPCClient {
 		empty($debug) ? $this->debug = false : $this->debug = true;
 		// message id
 		$this->id = 1;
+	}
+	
+	public function setAuthenticationType($new_value='none') {
+		if ($new_value == 'json')
+			$this->authentication_type = 'json';
+		else if ($new_value == 'http')
+			$this->authentication_type = 'http';
+		else
+			$this->authentication_type = 'none';
+	}
+	
+	public function setCredentials($user='', $password='') {
+		$this->authentication_user = $user;
+		$this->authentication_password = $password;
 	}
 	
 	/**
@@ -119,6 +155,11 @@ class jsonRPCClient {
 						'params' => $params,
 						'id' => $currentId
 						);
+						
+		if ($this->authentication_type == 'json') {
+			$request['auth_user'] = $this->authentication_user;
+			$request['auth_pw'] = $this->authentication_password;
+		}
 		$request = json_encode($request);
 		$this->debug && $this->debug.='***** Request *****'."\n".$request."\n".'***** End Of request *****'."\n\n";
 		
@@ -128,6 +169,9 @@ class jsonRPCClient {
 							'header'  => 'Content-type: application/json',
 							'content' => $request
 							));
+		if ($this->authentication_type == 'http') {
+			$opts['http']['header'] .= sprintf("\r\nAuthorization: Basic %s", base64_encode($this->authentication_user.':'.$this->authentication_password));
+		}
 		$context  = stream_context_create($opts);
 		if ($fp = fopen($this->url, 'r', false, $context)) {
 			$response = '';
@@ -135,7 +179,7 @@ class jsonRPCClient {
 				$response.= trim($row)."\n";
 			}
 			$this->debug && $this->debug.='***** Server response *****'."\n".$response.'***** End of server response *****'."\n";
-			$response = json_decode($response,true);
+			$response = json_decode($response,false);
 		} else {
 			throw new Exception('Unable to connect to '.$this->url);
 		}
@@ -148,14 +192,14 @@ class jsonRPCClient {
 		// final checks and return
 		if (!$this->notification) {
 			// check
-			if ($response['id'] != $currentId) {
-				throw new Exception('Incorrect response id (request id: '.$currentId.', response id: '.$response['id'].')');
+			if ($response->id != $currentId) {
+				throw new Exception('Incorrect response id (request id: '.$currentId.', response id: '.$response->id.')');
 			}
-			if (!is_null($response['error'])) {
-				throw new Exception('Request error: '.$response['error']);
+			if (!is_null($response->error)) {
+				throw new Exception('Request error: '.$response->error);
 			}
 			
-			return $response['result'];
+			return $response->result;
 			
 		} else {
 			return true;
