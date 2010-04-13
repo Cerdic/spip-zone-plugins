@@ -6,13 +6,14 @@ options:
     saisie: 'radio'
     options:
       nom: 'mode'
-      label: '<:verifier:option_email_mode:>'
+      label: '<:verifier:option_email_mode_label:>'
       datas:
         normal: '<:verifier:option_email_mode_normal:>'
         strict: '<:verifier:option_email_mode_strict:>'
-    defaut: 'normal'
+      defaut: 'normal'
   -
     saisie: 'case'
     options:
       nom: 'disponible'
-      label: '<:verifier:option_email_disponible:>'
+      label: '<:verifier:option_email_disponible_label:>'
+      label_case: '<:verifier:option_email_disponible_label_case:>'

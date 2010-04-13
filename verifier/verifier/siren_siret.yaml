@@ -6,7 +6,7 @@ options:
     saisie: 'radio'
     options:
       nom: 'mode'
-      label: '<:verifier:option_siren_siret_mode:>'
+      label: '<:verifier:option_siren_siret_mode_label:>'
       datas:
         siren: '<:verifier:option_siren_siret_mode_siren:>'
         siret: '<:verifier:option_siren_siret_mode_siret:>'
