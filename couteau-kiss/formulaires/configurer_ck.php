@@ -36,7 +36,7 @@ function formulaires_configurer_ck_charger_dist(){
 		'toujours_paragrapher' => $GLOBALS['toujours_paragrapher']?1:0,
 		'forcer_lang' => $GLOBALS['forcer_lang']?1:0,
 		'no_set_html_base' => defined('_SET_HTML_BASE')?(_SET_HTML_BASE==false):0,
-		'introduction_suite' => defined('_INTRODUCTION_SUITE')?_INTRODUCTION_SUITE:'&nbsp;(...)',
+		'introduction_suite' => defined('_INTRODUCTION_SUITE')?_INTRODUCTION_SUITE:'',
 
 		'cache_strategie' => (defined('_NO_CACHE') AND strlen(_NO_CACHE))?(_NO_CACHE==0?0:-1):'',
 		'derniere_modif_invalide' => $GLOBALS['derniere_modif_invalide'],
@@ -103,13 +103,14 @@ function formulaires_configurer_ck_traiter_dist(){
 	if ($v = _request('no_set_html_base') OR !_SET_HTML_BASE){
 		$code .= ck_code_constante('_SET_HTML_BASE',$v?'false':'true');
 	}
-	$code .= ck_code_constante('_INTRODUCTION_SUITE','"'._request('introduction_suite').'"');
+	if (_request($s=_request('introduction_suite')))
+		$code .= ck_code_constante('_INTRODUCTION_SUITE',"'".addslashes($s)."'");
 
 
 	// cache
 	if (strlen($c = _request('cache_strategie'))){
 		if ($c==-1) $code .= "if (\$_SERVER['REQUEST_TIME']<".(time()+24*3600).") ";
-		$code .= ck_code_constante('_NO_CACHE',$c);
+		$code .= ck_code_constante('_NO_CACHE',intval($c));
 	}
 	$code .= ck_code_globale('derniere_modif_invalide',_request('derniere_modif_invalide')?'true':'false');
 	$code .= ck_code_constante('_DUREE_CACHE_DEFAUT',intval(_request('cache_duree')));

@@ -45,7 +45,7 @@ Quand vous aurez termin&eacute; la configuration de votre site, vous pourrez, si
 	'label_forcer_lang' => 'Forcer la langue de l\'url ou du visiteur (<tt>$forcer_lang</tt>)',
 	'label_no_set_html_base' => 'Pas d\'ajout automatique de <tt>&lt;base href="..."&gt;</tt>',
 	'label_introduction_suite' => 'Points de suite',
-	'explication_introduction_suite' => 'Les points de suite sont ajout&eacute;s par la balise <tt>#INTRODUCTION</tt> lorsqu\'elle coupe un texte.',
+	'explication_introduction_suite' => 'Les points de suite sont ajout&eacute;s par la balise <tt>#INTRODUCTION</tt> lorsqu\'elle coupe un texte. Par défaut <tt>&amp;nbsp;(...)</tt>',
 
 	'legend_espace_prive' => 'Espace priv&eacute;',
 	'label_longueur_login_mini' => 'Longueur mini des&nbsp;logins',
