@@ -87,7 +87,7 @@ D&#233;couvrez dans ce plugin vos outils favoris : {Supprime le num&#233;ro}, {F
 
 N\'h&#233;sitez pas &#224; consulter les articles de documentation du plugin publi&#233;s sur : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
-Compatibilit&#233; : SPIP v1.92x et v2.0.x',
+Compatibilit&#233; : SPIP v1.92x, v2.0.x et v2.1.x',
 	'pp_blocs_bloc' => 'Ins&eacute;rer un bloc repli&eacute;',
 	'pp_blocs_visible' => 'Ins&eacute;rer un bloc d&eacute;pli&eacute;',
 	'pp_chatons_inserer' => 'Ins&eacute;rer le chaton &laquo;&nbsp;@chaton@&nbsp;&raquo;',

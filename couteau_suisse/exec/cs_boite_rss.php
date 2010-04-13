@@ -62,7 +62,7 @@ function exec_cs_boite_rss_dist() {
 		._T('couteauprive:rss_edition')."</b><br/>$du</p>"
 		.'<p style="text-align:right"><a href="'
 		.generer_url_ecrire('admin_couteau_suisse','var_mode=calcul', true).'" onclick="'
-		."javascipt:jQuery('div.cs_boite_rss').load('".generer_url_ecrire('cs_boite_rss', 'force=oui', true).'\');return false;">'
+		."javascipt:jQuery('div.cs_boite_rss').children().css('opacity', 0.5).parent().load('".generer_url_ecrire('cs_boite_rss', 'force=oui', true).'\');return false;">'
 		._T('couteauprive:rss_actualiser').'</a> | <a href="'
 		._CS_RSS_SOURCE.'">'
 		._T('couteauprive:rss_source').'</a></p>';
